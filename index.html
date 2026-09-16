@@ -628,6 +628,88 @@ header h1{
   .small-module .name{font-size:14px!important}
 }
 
+
+/* Home v3.3 — Wortschatz hero state redesign */
+.vocab-hero{
+  min-height:154px!important;
+  grid-template-columns:178px 1fr 28px!important;
+  padding:0 18px 0 0!important;
+  border:1px solid rgba(255,108,100,.42)!important;
+  background:
+    radial-gradient(ellipse at 18% 52%, rgba(255,78,72,.30) 0%, rgba(255,78,72,.16) 28%, transparent 62%),
+    radial-gradient(ellipse at 86% 22%, rgba(255,91,79,.13) 0%, transparent 48%),
+    rgba(255,255,255,.012)!important;
+  box-shadow:
+    inset 0 0 30px rgba(255,75,70,.08),
+    0 0 28px rgba(255,66,60,.08)!important;
+  overflow:hidden;
+}
+
+/* New transparent 970×885 artwork can be much larger and dissolve into the tile */
+.vocab-art{
+  width:190px!important;
+  height:170px!important;
+  margin-left:-12px;
+  align-self:center;
+  pointer-events:none;
+}
+.vocab-art img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:0!important;
+  filter:drop-shadow(0 0 16px rgba(75,225,185,.22));
+}
+
+.vocab-copy{
+  position:relative;
+  z-index:2;
+}
+.vocab-copy .name{
+  font-size:21px!important;
+}
+.vocab-copy .status{
+  margin-top:7px!important;
+  font-size:14px!important;
+}
+
+.vocab-hero .hero-arrow{
+  position:relative;
+  z-index:2;
+  border-color:rgba(255,125,115,.26)!important;
+  color:rgba(255,225,220,.78)!important;
+}
+
+/* Finished state: JS can add .is-done later when Wortschatz is connected */
+.vocab-hero.is-done{
+  border-color:rgba(87,222,184,.46)!important;
+  background:
+    radial-gradient(ellipse at 18% 52%, rgba(58,215,174,.30) 0%, rgba(58,215,174,.16) 28%, transparent 62%),
+    radial-gradient(ellipse at 86% 22%, rgba(74,225,187,.12) 0%, transparent 48%),
+    rgba(255,255,255,.012)!important;
+  box-shadow:
+    inset 0 0 30px rgba(65,220,180,.08),
+    0 0 28px rgba(65,220,180,.08)!important;
+}
+.vocab-hero.is-done .status{color:var(--mint)!important}
+.vocab-hero.is-done .hero-arrow{
+  border-color:rgba(87,222,184,.28)!important;
+  color:var(--mint)!important;
+}
+
+@media(max-width:430px){
+  .vocab-hero{
+    min-height:142px!important;
+    grid-template-columns:158px 1fr 26px!important;
+    padding-right:13px!important;
+  }
+  .vocab-art{
+    width:170px!important;
+    height:155px!important;
+    margin-left:-15px;
+  }
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -676,7 +758,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.2</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.3</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
