@@ -30,8 +30,23 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 @media(min-width:700px){.keyboard{display:none}.answerbox{cursor:text}}
 .third{justify-content:flex-end;padding-left:0}
 .third .back{margin-left:0;flex:0 0 calc(2.5 * calc((100% - 27px)/10) + 4.5px);width:calc(2.5 * calc((100% - 27px)/10) + 4.5px)}
-.special{justify-content:flex-start}
+.special{justify-content:center}
 .special .ok{margin-left:0!important}
+
+/* v5 — lighter, centered special row */
+.special{justify-content:center}
+.special .ok{
+  margin-left:0!important;
+  width:var(--key)!important;
+  min-width:var(--key)!important;
+  flex:0 0 var(--key)!important;
+  background:var(--key-bg)!important;
+  color:var(--text)!important;
+  border:1px solid var(--key-border)!important;
+  font-size:22px!important;
+  font-weight:500!important;
+}
+
 </style>
 </head>
 <body><main class="app">
@@ -61,7 +76,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v4</div>
+<div class="version">v5</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
@@ -79,7 +94,7 @@ function next(){i++;if(i>=deck.length){finish();return}render()}
 function finish(){$('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;let arr=Object.entries(sessionWeak).sort((a,b)=>b[1]-a[1]).slice(0,3);if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(x=>x[0]).join('<br>')}else $('weak').classList.add('hidden')}
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')}
 document.addEventListener('keydown',e=>{if($('game').classList.contains('hidden'))return;if(!$('feedback').classList.contains('hidden')){if(e.key==='Enter')next();return}if(e.key==='Enter'){submit();return}if(e.key==='Backspace'){answer=answer.slice(0,-1);paintAnswer();return}if(e.key.length===1){answer+=e.key;paintAnswer()}})
-const rows=['QWERTYUIOP','ASDFGHJKL'];let kb='';rows.forEach(r=>{kb+='<div class="row">'+[...r].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'</div>'});kb+='<div class="row third">'+[...'ZXCVBNM'].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'<button class="key back" data-k="⌫">⌫</button></div>';kb+='<div class="row special">'+['ä','ö','ü','ß'].map(c=>`<button class="key" data-k="${c}">${c}</button>`).join('')+'<button class="key ok" data-k="OK">OK</button></div>';$('keyboard').innerHTML=kb;document.querySelectorAll('.key').forEach(b=>b.onclick=()=>{let k=b.dataset.k;if(k==='⌫')answer=answer.slice(0,-1);else if(k==='OK'){submit();return}else answer+=k;paintAnswer()});$('answerbox').onclick=submit;
+const rows=['QWERTYUIOP','ASDFGHJKL'];let kb='';rows.forEach(r=>{kb+='<div class="row">'+[...r].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'</div>'});kb+='<div class="row third">'+[...'ZXCVBNM'].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'<button class="key back" data-k="⌫">⌫</button></div>';kb+='<div class="row special">'+['ä','ö','ü','ß'].map(c=>`<button class="key" data-k="${c}">${c}</button>`).join('')+'<button class="key ok" data-k="OK">✓</button></div>';$('keyboard').innerHTML=kb;document.querySelectorAll('.key').forEach(b=>b.onclick=()=>{let k=b.dataset.k;if(k==='⌫')answer=answer.slice(0,-1);else if(k==='OK'){submit();return}else answer+=k;paintAnswer()});$('answerbox').onclick=submit;
 const personal=`<table class="tbl"><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Gen.</th></tr><tr><td>я</td><td data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-focus="Personal · Genitiv · ich">meiner</td></tr><tr><td>ты</td><td data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-focus="Personal · Genitiv · du">deiner</td></tr><tr><td>он</td><td data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-focus="Personal · Genitiv · er">seiner</td></tr><tr><td>она</td><td data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-focus="Personal · Genitiv · sie">ihrer</td></tr><tr><td>оно</td><td data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-focus="Personal · Genitiv · es">seiner</td></tr><tr><td>мы</td><td data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-focus="Personal · Genitiv · wir">unser</td></tr><tr><td>вы</td><td data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-focus="Personal · Genitiv · ihr">euer</td></tr><tr><td>они</td><td data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-focus="Personal · Genitiv · sie(pl.)">ihrer</td></tr></table><p class="muted">Genitive personal pronouns exist, but are much less common in everyday German.</p>`;
 const possessive=`<table class="tbl"><tr><th>Person</th><th>Base</th></tr><tr><td>ich</td><td data-owner="ich">mein-</td></tr><tr><td>du</td><td data-owner="du">dein-</td></tr><tr><td>er / es</td><td data-owner="er">sein-</td></tr><tr><td>sie</td><td data-owner="sie">ihr-</td></tr><tr><td>wir</td><td data-owner="wir">unser-</td></tr><tr><td>ihr</td><td data-owner="ihr">euer-</td></tr><tr><td>sie / Sie</td><td data-owner="sie(pl.)">ihr- / Ihr-</td></tr></table><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">Combine the base with the ending: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
 function markWeakTable(type){
