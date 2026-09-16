@@ -164,6 +164,14 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  html,body{overscroll-behavior-y:none}
 }
 
+
+/* v24: larger, easier-to-hit Backspace */
+@media(max-width:900px){
+ .key-row-tools .key-backspace{
+   flex:2.5 1 0;
+ }
+}
+
 </style>
 </head>
 <body>
@@ -191,13 +199,13 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    
    <div id="touchKeyboard" class="touch-keyboard" aria-label="German keyboard">
     <div class="key-row key-row-10">
-     <button type="button" class="key" data-key="q">q</button><button type="button" class="key" data-key="w">w</button><button type="button" class="key" data-key="e">e</button><button type="button" class="key" data-key="r">r</button><button type="button" class="key" data-key="t">t</button><button type="button" class="key" data-key="z">z</button><button type="button" class="key" data-key="u">u</button><button type="button" class="key" data-key="i">i</button><button type="button" class="key" data-key="o">o</button><button type="button" class="key" data-key="p">p</button>
+     <button type="button" class="key" data-key="q">q</button><button type="button" class="key" data-key="w">w</button><button type="button" class="key" data-key="e">e</button><button type="button" class="key" data-key="r">r</button><button type="button" class="key" data-key="t">t</button><button type="button" class="key" data-key="y">y</button><button type="button" class="key" data-key="u">u</button><button type="button" class="key" data-key="i">i</button><button type="button" class="key" data-key="o">o</button><button type="button" class="key" data-key="p">p</button>
     </div>
     <div class="key-row key-row-9">
      <button type="button" class="key" data-key="a">a</button><button type="button" class="key" data-key="s">s</button><button type="button" class="key" data-key="d">d</button><button type="button" class="key" data-key="f">f</button><button type="button" class="key" data-key="g">g</button><button type="button" class="key" data-key="h">h</button><button type="button" class="key" data-key="j">j</button><button type="button" class="key" data-key="k">k</button><button type="button" class="key" data-key="l">l</button>
     </div>
     <div class="key-row key-row-7">
-     <button type="button" class="key" data-key="y">y</button><button type="button" class="key" data-key="x">x</button><button type="button" class="key" data-key="c">c</button><button type="button" class="key" data-key="v">v</button><button type="button" class="key" data-key="b">b</button><button type="button" class="key" data-key="n">n</button><button type="button" class="key" data-key="m">m</button>
+     <button type="button" class="key" data-key="z">z</button><button type="button" class="key" data-key="x">x</button><button type="button" class="key" data-key="c">c</button><button type="button" class="key" data-key="v">v</button><button type="button" class="key" data-key="b">b</button><button type="button" class="key" data-key="n">n</button><button type="button" class="key" data-key="m">m</button>
     </div>
     <div class="key-row key-row-tools">
      <button type="button" class="key key-special" data-key="ä">ä</button><button type="button" class="key key-special" data-key="ö">ö</button><button type="button" class="key key-special" data-key="ü">ü</button><button type="button" class="key key-special" data-key="ß">ß</button>
@@ -221,7 +229,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v23</div>
+<div class="version-tag">v25</div>
 
 <script src="verbs.js"></script>
 <script>
