@@ -123,6 +123,65 @@ header{
   .name{font-size:14px}
 }
 
+
+/* Home v2.3 — embedded exercise shell */
+.module{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  padding:0;
+  margin:0;
+  background:none;
+  font:inherit;
+  cursor:pointer;
+}
+
+.app-open,
+.app-open body{
+  overflow:hidden;
+  height:100%;
+}
+
+.app-shell{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:none;
+  background:#1b1b1d;
+}
+
+.app-shell.open{
+  display:block;
+}
+
+.app-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#1b1b1d;
+}
+
+.home-back{
+  position:absolute;
+  z-index:1001;
+  top:calc(env(safe-area-inset-top) + 8px);
+  left:max(10px, env(safe-area-inset-left));
+  width:42px;
+  height:42px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:rgba(27,27,29,.78);
+  color:#f2f0ed;
+  font:300 38px/36px -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  text-align:center;
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+}
+
 </style>
 </head>
 <body>
@@ -130,11 +189,41 @@ header{
     <header><h1>Deutsch.</h1></header>
     <p class="intro">Was möchtest du heute üben?</p>
     <section class="grid" aria-label="Übungen">
-      <a class="module" href="artikel/"><div class="icon-wrap"><img src="artikel/icon.png" alt=""></div><div class="name">Artikel</div><div class="status">&nbsp;</div></a>
-      <a class="module" href="verbformen/"><div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div><div class="name">Verbformen</div><div class="status">&nbsp;</div></a>
-      <a class="module" href="wortschatz/"><div class="icon-wrap"><img src="wortschatz/icon.png" alt=""></div><div class="name">Wortschatz</div><div class="status">&nbsp;</div></a>
-      <a class="module" href="pronomen/"><div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div><div class="name">Pronomen</div><div class="status">&nbsp;</div></a>
+      <button class="module" type="button" data-app="artikel/"><div class="icon-wrap"><img src="artikel/icon.png" alt=""></div><div class="name">Artikel</div><div class="status">&nbsp;</div></button>
+      <button class="module" type="button" data-app="verbformen/"><div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div><div class="name">Verbformen</div><div class="status">&nbsp;</div></button>
+      <button class="module" type="button" data-app="wortschatz/"><div class="icon-wrap"><img src="wortschatz/icon.png" alt=""></div><div class="name">Wortschatz</div><div class="status">&nbsp;</div></button>
+      <button class="module" type="button" data-app="pronomen/"><div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div><div class="name">Pronomen</div><div class="status">&nbsp;</div></button>
     </section>
   </main>
+
+  <section id="appShell" class="app-shell" aria-hidden="true">
+    <button id="homeBack" class="home-back" type="button" aria-label="Back to home">‹</button>
+    <iframe id="appFrame" class="app-frame" title="Deutsch exercise"></iframe>
+  </section>
+
+  <script>
+    const shell = document.getElementById('appShell');
+    const frame = document.getElementById('appFrame');
+    const back = document.getElementById('homeBack');
+
+    document.querySelectorAll('[data-app]').forEach(button => {
+      button.addEventListener('click', () => {
+        frame.src = button.dataset.app;
+        shell.classList.add('open');
+        shell.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('app-open');
+      });
+    });
+
+    function closeApp() {
+      shell.classList.remove('open');
+      shell.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('app-open');
+      frame.src = 'about:blank';
+    }
+
+    back.addEventListener('click', closeApp);
+  </script>
+
 </body>
 </html>
