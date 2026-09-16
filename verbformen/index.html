@@ -1,1 +1,212 @@
-test
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Verbformen.</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#17181a;--cream:#eee7dc;--mint:#5bc8a4;--coral:#ff7770;--line:rgba(255,255,255,.08)}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px}
+.app{width:min(100%,480px)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:#777;font-size:13px}
+.brand{font-family:Georgia,serif;font-size:20px;color:#a5a19a;letter-spacing:-.5px}
+.progress{height:3px;background:#292a2c;border-radius:9px;overflow:hidden;margin-bottom:42px}
+.progress>i{display:block;height:100%;background:#777;border-radius:9px}
+.card{position:relative;text-align:center;padding:30px 20px 26px;isolation:isolate}
+.card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,rgba(91,200,164,.09),transparent 63%);opacity:.35}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:#6f706f;margin-bottom:18px}
+.verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
+.translation{color:#737473;font-size:16px;margin-bottom:44px}
+.label{font-size:13px;color:#777;margin-bottom:10px}
+.answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
+.answer:focus{border-color:rgba(91,200,164,.55);box-shadow:0 0 0 3px rgba(91,200,164,.08)}
+.answer::placeholder{color:#48494a}
+.check,.next,.choice,.again{font:inherit;cursor:pointer}
+.check{margin-top:14px;width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-size:16px;font-weight:650}
+.check:active,.next:active,.choice:active,.again:active{transform:scale(.99)}
+.result{display:none;margin-top:28px;border-top:1px solid var(--line);padding:30px 26px 0;text-align:left}
+.result.show{display:block}
+.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px rgba(91,200,164,.8)}
+.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px rgba(255,119,112,.85)}
+.state{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
+.forms{font-family:Georgia,serif;font-size:26px;line-height:1.35;margin-bottom:10px}
+.meta{color:#92918e;font-size:15px;line-height:1.55}.example{margin-top:15px;color:#b8b3aa;font-size:15px;font-style:italic}
+.next{display:none;margin-top:18px;width:100%;height:56px;border:1px solid #37383a;border-radius:17px;background:#222326;color:var(--cream);font-size:16px;font-weight:600}
+.next.show{display:block}
+.start,.finish{text-align:center;padding:36px 20px}
+.title{font-family:Georgia,serif;font-size:clamp(54px,15vw,78px);font-weight:400;letter-spacing:-3px;margin:0 0 12px}
+.subtitle{color:#777;font-size:16px;margin:0 0 36px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{height:62px;border:1px solid #36383a;border-radius:18px;background:#202124;color:var(--cream);font-size:20px}
+.choice:hover{border-color:#555}
+.finish h2{font-family:Georgia,serif;font-size:48px;font-weight:400;margin:0 0 12px}
+.finish p{color:#888;margin:0 0 28px;line-height:1.5}
+.again{width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-weight:650}
+.hidden{display:none!important}
+@media(max-height:700px){.progress{margin-bottom:20px}.card{padding-top:15px}.verb{font-size:55px}.translation{margin-bottom:25px}}
+</style>
+</head>
+<body>
+<main class="app">
+ <section id="start" class="start">
+  <h1 class="title">Verbformen.</h1>
+  <p class="subtitle">How many verbs?</p>
+  <div class="choices">
+   <button class="choice" data-size="10">10</button>
+   <button class="choice" data-size="20">20</button>
+   <button class="choice" data-size="30">30</button>
+  </div>
+ </section>
+
+ <section id="study" class="hidden">
+  <div class="top"><span class="brand">Verbformen.</span><span id="count"></span></div>
+  <div class="progress"><i id="bar"></i></div>
+  <section class="card">
+   <div class="eyebrow">Partizip II</div>
+   <div class="verb" id="verb"></div>
+   <div class="translation" id="translation"></div>
+   <div class="label">Type the correct form</div>
+   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" spellcheck="false">
+   <button class="check" id="check">Check</button>
+   <div class="result" id="result">
+    <div class="state" id="state"></div>
+    <div class="forms" id="forms"></div>
+    <div class="meta" id="meta"></div>
+    <div class="example" id="example"></div>
+   </div>
+   <button class="next" id="next">Continue</button>
+  </section>
+ </section>
+
+ <section id="finish" class="finish hidden">
+  <h2>Done.</h2>
+  <p id="summary"></p>
+  <button class="again" id="again">Another session</button>
+ </section>
+</main>
+
+<script src="verbs.js"></script>
+<script>
+const STORAGE_KEY="verbformenDifficultyV1";
+let difficulty={};
+try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
+
+let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
+
+const $=id=>document.getElementById(id);
+const key=v=>v.infinitive.toLowerCase();
+
+function saveDifficulty(){
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
+}
+
+function weightFor(v){
+ return Math.max(1,Number(difficulty[key(v)]||1));
+}
+
+/* Weighted sampling WITHOUT replacement:
+   difficult verbs are more likely to enter a session,
+   but no verb can occur twice in that session. */
+function buildDeck(size){
+ const ranked=VERBS.map(v=>{
+   const weight=weightFor(v);
+   const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
+   return {v,randomKey};
+ }).sort((a,b)=>a.randomKey-b.randomKey);
+
+ return ranked.slice(0,Math.min(size,VERBS.length)).map(x=>x.v);
+}
+
+function startSession(size){
+ sessionSize=Math.min(size,VERBS.length);
+ deck=buildDeck(sessionSize);
+ index=0;correctCount=0;
+ $("start").classList.add("hidden");
+ $("finish").classList.add("hidden");
+ $("study").classList.remove("hidden");
+ render();
+}
+
+function render(){
+ const v=deck[index];checked=false;
+ $("verb").textContent=v.infinitive;
+ $("translation").textContent=v.translation;
+ $("answer").value="";
+ $("result").className="result";
+ $("next").className="next";
+ $("check").style.display="";
+ $("count").textContent=(index+1)+" / "+deck.length;
+ $("bar").style.width=((index+1)/deck.length*100)+"%";
+ $("answer").disabled=false;
+ setTimeout(()=>$("answer").focus(),80);
+}
+
+function updateDifficulty(v,correct){
+ const k=key(v);
+ let d=weightFor(v);
+ if(correct){
+   d=Math.max(1,d-0.5);
+ }else{
+   d=Math.min(6,d+1.5);
+ }
+ difficulty[k]=Number(d.toFixed(2));
+ saveDifficulty();
+}
+
+function checkAnswer(){
+ if(checked){next();return}
+ const v=deck[index];
+ const a=$("answer").value.trim().toLowerCase();
+ if(!a)return;
+
+ checked=true;
+ const ok=a===v.participle.toLowerCase();
+ if(ok)correctCount++;
+ updateDifficulty(v,ok);
+
+ $("result").className="result show "+(ok?"good":"bad");
+ $("state").textContent=ok?"Correct":"Not quite";
+ $("forms").textContent=v.infinitive+" → "+v.preterite+" → "+v.participle;
+ $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
+ $("example").textContent=v.example;
+ $("answer").disabled=true;
+ $("check").style.display="none";
+ $("next").className="next show";
+}
+
+function next(){
+ if(index+1>=deck.length){finishSession();return}
+ index++;
+ render();
+}
+
+function finishSession(){
+ $("study").classList.add("hidden");
+ $("finish").classList.remove("hidden");
+ $("summary").textContent=correctCount+" of "+deck.length+" correct. Difficult verbs will have a better chance of returning in a future session.";
+}
+
+document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
+$("check").onclick=checkAnswer;
+$("next").onclick=next;
+$("again").onclick=()=>{
+ $("finish").classList.add("hidden");
+ $("start").classList.remove("hidden");
+};
+document.addEventListener("keydown", e => {
+ if (e.key === "Enter") {
+   e.preventDefault();
+
+   if (checked) {
+     next();
+   } else if (document.activeElement === $("answer")) {
+     checkAnswer();
+   }
+ }
+});
+</script>
+</body>
+</html>
