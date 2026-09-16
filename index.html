@@ -394,6 +394,112 @@ header h1{
   }
 }
 
+
+/* Home v3.1 — compact 2-column icon grid */
+.grid.module-list{
+  display:grid!important;
+  grid-template-columns:repeat(2, minmax(0, 1fr))!important;
+  width:min(100%, 420px);
+  margin:0 auto;
+  gap:25px 24px!important;
+}
+
+.module-list .module{
+  width:100%;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:0;
+  padding:0;
+  text-align:center;
+}
+
+.module-list .icon-wrap{
+  width:96px!important;
+  max-width:96px!important;
+  height:96px!important;
+  margin:0 auto!important;
+  border-radius:24px;
+}
+
+.module-list .module-copy{
+  width:100%;
+  margin-top:9px;
+}
+
+.module-list .name{
+  margin:0;
+  text-align:center;
+  font-size:16px;
+  line-height:1.15;
+  font-weight:650;
+}
+
+.module-list .status{
+  min-height:15px;
+  margin-top:4px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.15;
+}
+
+.daily-score{
+  width:min(100%, 420px);
+  margin:29px auto 0;
+  padding-top:17px;
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
+
+.daily-label{
+  display:inline;
+  color:#d8d6d2;
+  font-size:13px;
+  font-weight:600;
+}
+
+.daily-number{
+  display:inline;
+  margin:0 0 0 7px;
+  color:#8f8f94;
+  font-size:13px;
+}
+
+.daily-progress{
+  width:180px;
+  height:3px;
+  margin:11px auto 0;
+}
+
+@media(max-width:430px){
+  .grid.module-list{
+    width:min(100%, 330px);
+    gap:22px 20px!important;
+  }
+  .module-list .icon-wrap{
+    width:92px!important;
+    max-width:92px!important;
+    height:92px!important;
+    border-radius:23px;
+  }
+  .daily-score{
+    width:min(100%, 330px);
+  }
+}
+
+@media(max-height:700px){
+  .grid.module-list{gap:17px 20px!important}
+  .module-list .icon-wrap{
+    width:82px!important;
+    max-width:82px!important;
+    height:82px!important;
+    border-radius:21px;
+  }
+  .daily-score{margin-top:20px;padding-top:14px}
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -445,7 +551,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.0</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.1</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
