@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Anki</title>
+
+  <link rel="apple-touch-icon" href="anki-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Anki">
+
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #191a1c;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,.72);
+    }
+    .loader {
+      text-align: center;
+      font-size: 15px;
+      letter-spacing: .02em;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">Opening Anki…</div>
+
+  <script>
+    window.location.replace("https://ankiuser.net/study");
+  </script>
+
+  <noscript>
+    <a href="https://ankiuser.net/study">Open Anki</a>
+  </noscript>
+</body>
+</html>
