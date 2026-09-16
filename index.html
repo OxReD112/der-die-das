@@ -1807,6 +1807,55 @@ header h1{
   z-index:4!important;
 }
 
+
+/* Home v4.9 — FIX Wortschatz artwork layering/sizing.
+   The real markup is .tile-art > img (not .tile-image). */
+.mosaic .tile-vocab{
+  position:relative!important;
+  overflow:hidden!important;
+}
+
+/* Artwork fills the full card height and is anchored to the left. */
+.mosaic .tile-vocab .tile-art.vocab-art{
+  position:absolute!important;
+  z-index:1!important;
+  left:0!important;
+  top:0!important;
+  width:auto!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  filter:none!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+.mosaic .tile-vocab .tile-art.vocab-art img{
+  display:block!important;
+  width:auto!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+/* The image itself has NO extra glow. State colour comes only from these
+   existing corner-gradient layers, which sit above the artwork. */
+.mosaic .tile-vocab::before,
+.mosaic .tile-vocab::after{
+  z-index:2!important;
+  pointer-events:none!important;
+}
+
+/* Text remains the top layer. */
+.mosaic .tile-vocab .tile-copy{
+  position:relative!important;
+  z-index:4!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1861,7 +1910,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.8</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.9</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
