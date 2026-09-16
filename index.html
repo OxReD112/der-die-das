@@ -1216,6 +1216,52 @@ header h1{
   }
 }
 
+
+/* Home v3.8 — live Wortschatz status + clipped state glows */
+
+/* Keep every glow strictly inside the rounded tile. */
+.mosaic .tile{
+  overflow:hidden!important;
+  isolation:isolate;
+}
+.mosaic .tile-vocab::after{
+  inset:0!important;
+  border-radius:inherit!important;
+  filter:blur(12px)!important;
+}
+
+/* Very subtle bottom status glow for the three compact exercise tiles. */
+.mosaic .tile-small::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:58%;
+  pointer-events:none;
+  border-radius:inherit;
+  background:radial-gradient(ellipse at 50% 115%,
+    rgba(255,91,88,.16) 0%,
+    rgba(255,91,88,.075) 34%,
+    transparent 70%);
+}
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(ellipse at 50% 115%,
+    rgba(67,210,173,.16) 0%,
+    rgba(67,210,173,.07) 34%,
+    transparent 70%);
+}
+.mosaic .tile-small .tile-art,
+.mosaic .tile-small .tile-copy{
+  z-index:2!important;
+}
+
+/* Wortschatz finished state remains the stronger mint treatment. */
+.mosaic .tile-vocab.is-done{
+  border-color:rgba(255,255,255,.10)!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1229,7 +1275,7 @@ header h1{
         <div class="tile-art vocab-art"><img src="wortschatz/icon.png" alt=""></div>
         <div class="tile-copy">
           <div class="name">Wortschatz</div>
-          <div class="status">noch offen</div>
+          <div class="status" id="wortschatzStatus">noch offen</div>
         </div>
       </button>
 
@@ -1270,7 +1316,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.7</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.8</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -1321,7 +1367,43 @@ header h1{
 
     back.addEventListener('click', closeApp);
     renderDailyStats();
-  </script>
+  
+const HOME_STATS="deutschHomeStatsV1";
+
+function localDay(){
+  const d=new Date();
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),dd=String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${dd}`;
+}
+
+function syncHomeDashboard(){
+  /* Wortschatz publishes this object from its own page. */
+  try{
+    const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
+    const ws=home.wortschatz;
+    const wsTile=document.querySelector(".tile-vocab");
+    const wsStatus=document.getElementById("wortschatzStatus");
+    const done=!!(ws && ws.date===localDay() && ws.done);
+    if(wsTile)wsTile.classList.toggle("is-done",done);
+    if(wsStatus)wsStatus.textContent=done?"✓ fertig":"noch offen";
+  }catch(e){}
+
+  /* Existing compact cards already expose their completion through their
+     visible status; mirror that into the subtle bottom glow. */
+  document.querySelectorAll(".tile-small").forEach(tile=>{
+    const txt=(tile.querySelector(".status")?.textContent||"").toLowerCase();
+    tile.classList.toggle("is-done",txt.includes("fertig")||txt.includes("✓"));
+  });
+}
+
+/* iframe/app navigation can update localStorage while Home stays mounted. */
+window.addEventListener("storage",syncHomeDashboard);
+window.addEventListener("focus",syncHomeDashboard);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncHomeDashboard()});
+setInterval(syncHomeDashboard,1000);
+
+syncHomeDashboard();
+</script>
 
 </body>
 </html>
