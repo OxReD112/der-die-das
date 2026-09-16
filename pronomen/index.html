@@ -11,12 +11,12 @@
 <style>
 :root{--bg:#1c1c1e;--text:#f5f5f7;--muted:#929297;--mint:#4fd7b3;--red:#ff6b73;--line:rgba(255,255,255,.10);--key:#303033}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
-body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 18px) 18px 42px}
+body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
 .screen{min-height:690px;padding:20px 14px;background:transparent}.hidden{display:none!important}.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:rgba(255,255,255,.11);margin:30px 0 70px}
 .center{text-align:center}.muted{color:var(--muted)}h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}p{line-height:1.5}
 .options{display:flex;justify-content:center;gap:10px;margin:28px 0}.btn,.size{border:1px solid var(--line);background:#303033;color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer}.start-table-btn{font-size:14px;font-weight:400;padding:11px 14px;color:#aaa;background:transparent}.size{font-size:22px;min-width:82px}.secondary{background:transparent;color:#c7c7cc}.table-buttons{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:relative;padding-bottom:17px}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}
-.exercise{display:flex;flex-direction:column;min-height:600px}.prompt{text-align:center;margin:68px auto 0;max-width:680px}.context{color:var(--muted);font-size:16px;margin-bottom:17px}.sentence{font-size:clamp(30px,7vw,45px);line-height:1.18;font-weight:600;letter-spacing:-.03em}.translation{font-size:16px;color:var(--muted);margin-top:17px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}
+.exercise{display:flex;flex-direction:column;min-height:600px}.prompt{text-align:center;margin:44px auto 0;max-width:680px}.context{color:var(--muted);font-size:16px;margin-bottom:17px}.sentence{font-size:clamp(30px,7vw,45px);line-height:1.18;font-weight:600;letter-spacing:-.03em}.translation{font-size:16px;color:var(--muted);margin-top:17px}
 .answerbox{margin:34px auto 0;width:min(600px,100%);border:1px solid var(--line);border-radius:18px;background:#202022;min-height:58px;padding:15px 17px;font-size:24px;display:flex;align-items:center;justify-content:center}.placeholder{color:#666}
 .keyboard{margin-top:auto;padding-top:20px}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);border:1px solid var(--line);border-radius:10px;background:var(--key);color:#eee;font-size:20px}.third{justify-content:flex-start;padding-left:calc((100% - 27px)/20)}.third .back{margin-left:auto}.special{justify-content:flex-start}.special .key{color:#b8ddd2}.ok{margin-left:auto!important;flex:0 0 calc(3 * ((100% - 27px)/10) + 6px)!important;width:calc(3 * ((100% - 27px)/10) + 6px)!important;color:#171719!important;background:#eee8df!important;font-size:16px;font-weight:700}
 .feedback{--state:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid rgba(255,255,255,.11);isolation:isolate}.feedback.wrong{--state:var(--red)}
@@ -28,8 +28,10 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 .done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:#c8c8cc}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-card{width:min(680px,100%);max-height:86vh;overflow:auto;background:#252527;border:1px solid var(--line);border-radius:24px;padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:transparent;color:white;font-size:28px}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}.tbl th{color:var(--muted);font-weight:500}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
 @media(min-width:700px){.keyboard{display:none}.answerbox{cursor:text}}
-.third{padding-left:10px}
-.third .back{margin-left:auto;flex:0 0 calc(2.5 * calc((100% - 27px)/10) + 4.5px);width:calc(2.5 * calc((100% - 27px)/10) + 4.5px)}
+.third{justify-content:flex-end;padding-left:0}
+.third .back{margin-left:0;flex:0 0 calc(2.5 * calc((100% - 27px)/10) + 4.5px);width:calc(2.5 * calc((100% - 27px)/10) + 4.5px)}
+.special{justify-content:flex-start}
+.special .ok{margin-left:0!important}
 </style>
 </head>
 <body><main class="app">
@@ -59,7 +61,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v3</div>
+<div class="version">v4</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
