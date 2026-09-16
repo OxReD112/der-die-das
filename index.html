@@ -1511,6 +1511,82 @@ header h1{
   }
 }
 
+
+/* Home v4.2 — final spacing, portrait art, compact glow, 100-point score */
+
+/* Move only the question upward; dashboard keeps exactly the same position. */
+.intro{
+  transform:translateY(-34px)!important;
+}
+
+/* Portrait illustrations: their source width equals the full card width.
+   No inner rounded image box; the outer tile alone does the clipping. */
+.mosaic .tile-small .tile-art{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  transform:none!important;
+  overflow:visible!important;
+}
+.mosaic .tile-small .tile-art img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:unset!important;
+  object-position:initial!important;
+  border-radius:0!important;
+}
+
+/* Text stays over the lower part of the illustration. */
+.mosaic .tile-small .tile-copy{
+  z-index:5!important;
+}
+
+/* Brighter but tighter glow, centered on the bottom edge. */
+.mosaic .tile-small::after{
+  height:40%!important;
+  background:radial-gradient(
+    ellipse 70% 62% at 50% 108%,
+    rgba(255,82,76,.54) 0%,
+    rgba(255,82,76,.34) 18%,
+    rgba(255,82,76,.14) 35%,
+    rgba(255,82,76,.04) 49%,
+    transparent 62%
+  )!important;
+}
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(
+    ellipse 70% 62% at 50% 108%,
+    rgba(69,218,178,.54) 0%,
+    rgba(69,218,178,.34) 18%,
+    rgba(69,218,178,.14) 35%,
+    rgba(69,218,178,.04) 49%,
+    transparent 62%
+  )!important;
+}
+
+/* Finished labels are mint on every compact exercise card. */
+.mosaic .tile-small.is-done .status{
+  color:var(--mint)!important;
+}
+
+/* Today is no longer visually a card — it simply occupies the grid cell. */
+.mosaic .tile-today{
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+.today-number{
+  font-size:28px!important;
+}
+.today-progress{
+  width:72%!important;
+  margin-top:14px!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1554,7 +1630,7 @@ header h1{
 
       <div class="tile tile-today" aria-label="Tagesziel">
         <div class="today-label">Heute</div>
-        <div class="today-number" id="todayTotal">0 / 60</div>
+        <div class="today-number" id="todayTotal">0</div>
         <div class="today-unit">Punkte</div>
         <div class="today-progress"><div class="today-progress-fill" id="todayProgress"></div></div>
       </div>
@@ -1565,7 +1641,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.1</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.2</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -1583,14 +1659,43 @@ header h1{
       let data={};
       try{ data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}'); }catch(e){}
       if(data.date!==localDayKey()) data={};
-      const a=data.artikel||{answers:0,correct:0};
-      const articleCount=Math.min(a.answers,50);
-      const articleEl=document.getElementById('artikelStatus');
-      articleEl.textContent=articleCount>=50?'✓ fertig':`${articleCount} / 50`;
-      if(articleCount>=50) articleEl.style.color='var(--mint)';
-      const points=articleCount;
-      document.getElementById('todayTotal').textContent=`${points} / 60`;
-      document.getElementById('todayProgress').style.width=`${Math.min(points/60*100,100)}%`;
+
+      const configs=[
+        {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:50},
+        {key:'verbformen', selector:'.tile-verbs', status:null, goal:30},
+        {key:'pronomen', selector:'.tile-pronouns', status:null, goal:20}
+      ];
+
+      let exercisePoints=0;
+
+      configs.forEach(cfg=>{
+        const rec=data[cfg.key]||{answers:0,correct:0};
+        const answers=Math.max(0,Number(rec.answers)||0);
+        exercisePoints+=answers;
+
+        const tile=document.querySelector(cfg.selector);
+        const status=cfg.status
+          ? document.getElementById(cfg.status)
+          : tile?.querySelector('.status');
+
+        const done=answers>=cfg.goal;
+        if(status){
+          status.textContent=done?'✓ fertig':`${Math.min(answers,cfg.goal)} / ${cfg.goal}`;
+          status.style.color=done?'var(--mint)':'';
+        }
+        if(tile) tile.classList.toggle('is-done',done);
+      });
+
+      let vocabPoints=0;
+      try{
+        const home=JSON.parse(localStorage.getItem('deutschHomeStatsV1')||'{}');
+        const ws=home.wortschatz;
+        if(ws && ws.date===localDayKey() && ws.done) vocabPoints=60;
+      }catch(e){}
+
+      const points=exercisePoints+vocabPoints;
+      document.getElementById('todayTotal').textContent=String(points);
+      document.getElementById('todayProgress').style.width=`${Math.min(points,100)}%`;
     }
 
     const shell = document.getElementById('appShell');
@@ -1635,6 +1740,8 @@ function syncHomeDashboard(){
     const done=!!(ws && ws.date===localDay() && ws.done);
     if(wsTile)wsTile.classList.toggle("is-done",done);
     if(wsStatus)wsStatus.textContent=done?"✓ fertig":"noch offen";
+    if(done && wsStatus)wsStatus.style.color="var(--mint)";
+    if(!done && wsStatus)wsStatus.style.color="";
   }catch(e){}
 
   /* Existing compact cards already expose their completion through their
@@ -1643,6 +1750,7 @@ function syncHomeDashboard(){
     const txt=(tile.querySelector(".status")?.textContent||"").toLowerCase();
     tile.classList.toggle("is-done",txt.includes("fertig")||txt.includes("✓"));
   });
+  renderDailyStats();
 }
 
 /* iframe/app navigation can update localStorage while Home stays mounted. */
