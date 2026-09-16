@@ -59,51 +59,14 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  .card{padding-top:22px}
 }
 
-/* iPhone keyboard layout v5 */
+/* v6: stable layout — no keyboard-driven resizing */
 @media(max-width:600px){
- body.keyboard-open .app{
-   padding-top:max(10px,calc(env(safe-area-inset-top) + 4px));
- }
- body.keyboard-open .top{
-   margin-bottom:7px;
-   font-size:11px;
- }
- body.keyboard-open .brand{font-size:17px}
- body.keyboard-open .progress{
-   margin-bottom:5px;
-   height:2px;
- }
- body.keyboard-open .card{
-   padding:4px 10px 14px;
- }
- body.keyboard-open .card:before{display:none}
- body.keyboard-open .eyebrow{
-   margin-bottom:5px;
-   font-size:9px;
- }
- body.keyboard-open .verb{
-   font-size:clamp(44px,13vw,60px);
-   line-height:.92;
-   margin-bottom:5px;
- }
- body.keyboard-open .translation{
-   font-size:14px;
-   margin-bottom:12px;
- }
- body.keyboard-open .label{
-   font-size:12px;
-   margin-bottom:6px;
- }
- body.keyboard-open .answer{
-   height:56px;
-   font-size:25px;
-   border-radius:16px;
- }
- body.keyboard-open .check{
-   height:50px;
-   margin-top:9px;
-   border-radius:16px;
- }
+ .result{margin-top:22px;padding:22px 24px 0}
+ .state{font-size:10px;margin-bottom:9px}
+ .forms{font-size:22px;line-height:1.28;margin-bottom:7px}
+ .meta{font-size:13px;line-height:1.4}
+ .example{margin-top:10px;font-size:13px;line-height:1.4}
+ .next{margin-top:13px;height:52px}
 }
 .version-tag{
  position:fixed;
@@ -138,7 +101,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
    <div class="label">Type the correct form</div>
-   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" spellcheck="false">
+   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
    <button class="check" id="check">Check</button>
    <div class="result" id="result">
     <div class="state" id="state"></div>
@@ -156,7 +119,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v5</div>
+<div class="version-tag">v6</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -211,7 +174,12 @@ function render(){
  $("count").textContent=(index+1)+" / "+deck.length;
  $("bar").style.width=((index+1)/deck.length*100)+"%";
  $("answer").disabled=false;
- setTimeout(()=>$("answer").focus(),80);
+ setTimeout(()=>{
+   const isTouchPhone = window.matchMedia("(pointer: coarse)").matches;
+   if(!isTouchPhone){
+     try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
+   }
+  },80);
 }
 
 function updateDifficulty(v,correct){
@@ -243,7 +211,6 @@ function checkAnswer(){
  $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
  $("example").textContent=v.example;
  $("answer").disabled=true;
- setKeyboardMode(false);
  $("check").style.display="none";
  $("next").className="next show";
 }
@@ -267,33 +234,6 @@ $("again").onclick=()=>{
  $("finish").classList.add("hidden");
  $("start").classList.remove("hidden");
 };
-
-// Compact the exercise when iOS shows the software keyboard.
-const appRoot=$("appRoot");
-const baseViewportHeight=window.innerHeight;
-
-function setKeyboardMode(open){
- document.body.classList.toggle("keyboard-open",open);
- if(open){
-   requestAnimationFrame(()=>appRoot.scrollTo({top:0,left:0,behavior:"auto"}));
- }
-}
-
-$("answer").addEventListener("focus",()=>{
- setKeyboardMode(true);
- setTimeout(()=>appRoot.scrollTo(0,0),80);
-});
-$("answer").addEventListener("blur",()=>setKeyboardMode(false));
-
-if(window.visualViewport){
- const updateKeyboardMode=()=>{
-   const keyboardLikelyOpen =
-     document.activeElement === $("answer") &&
-     window.visualViewport.height < window.innerHeight * 0.78;
-   setKeyboardMode(keyboardLikelyOpen);
- };
- window.visualViewport.addEventListener("resize",updateKeyboardMode);
-}
 
 document.addEventListener("keydown", e => {
  if (e.key === "Enter") {
