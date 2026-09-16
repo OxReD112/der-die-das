@@ -202,6 +202,35 @@ header h1{
   pointer-events:none;
 }
 
+
+/* Home v2.5 — subtle floating Home control */
+.home-back{
+  top:auto!important;
+  right:auto!important;
+  bottom:calc(env(safe-area-inset-bottom) + 12px)!important;
+  left:max(12px, env(safe-area-inset-left))!important;
+  width:44px!important;
+  height:44px!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  border-radius:50%!important;
+  background:rgba(27,27,29,.58)!important;
+  color:rgba(242,240,237,.52)!important;
+  font:400 22px/42px -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif!important;
+  text-align:center!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+  box-shadow:none!important;
+}
+
+/* On wider screens, align it with the left edge of the embedded app area
+   rather than the browser window edge. */
+@media(min-width:529px){
+  .home-back{
+    left:calc(50% - 240px + 12px)!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -217,10 +246,10 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v2.4</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v2.5</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
-    <button id="homeBack" class="home-back" type="button" aria-label="Back to home">‹</button>
+    <button id="homeBack" class="home-back" type="button" aria-label="Home">⌂</button>
     <iframe id="appFrame" class="app-frame" title="Deutsch exercise"></iframe>
   </section>
 
