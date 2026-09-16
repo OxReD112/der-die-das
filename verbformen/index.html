@@ -12,8 +12,8 @@
 *{box-sizing:border-box}
 :root{--bg:#17181a;--cream:#eee7dc;--mint:#5bc8a4;--coral:#ff7770;--line:rgba(255,255,255,.08)}
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px;padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden}
-.app{width:min(100%,480px)}
+body{min-height:100vh;min-height:100dvh;padding:24px;padding-top:max(24px,calc(env(safe-area-inset-top) + 12px));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden}
+.app{width:min(100%,480px);margin:0 auto}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:#777;font-size:13px}
 .brand{font-family:Georgia,serif;font-size:20px;color:#a5a19a;letter-spacing:-.5px}
 .progress{height:3px;background:#292a2c;border-radius:9px;overflow:hidden;margin-bottom:42px}
@@ -51,27 +51,13 @@ body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:
 .again{width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-weight:650}
 .hidden{display:none!important}
 
-/* iPhone/iOS keyboard mode: keep the prompt visible instead of re-centering the whole app. */
+/* Stable top-anchored layout: keyboard/result changes never re-center the app. */
 @media(max-width:600px){
- body.keyboard-open{display:block;padding:0 24px max(10px,env(safe-area-inset-bottom));}
- body.keyboard-open .app{width:100%;margin:0 auto;}
- body.keyboard-open #study{padding-top:max(8px,env(safe-area-inset-top));}
- body.keyboard-open .top{margin-bottom:8px;}
- body.keyboard-open .progress{margin-bottom:8px;}
- body.keyboard-open .card{padding:8px 20px 8px;}
- body.keyboard-open .card:before{inset:-45px -30px;}
- body.keyboard-open .eyebrow{margin-bottom:6px;font-size:10px;}
- body.keyboard-open .verb{font-size:clamp(48px,15vw,66px);margin-bottom:5px;line-height:.95;}
- body.keyboard-open .translation{margin-bottom:14px;font-size:15px;}
- body.keyboard-open .label{margin-bottom:7px;}
- body.keyboard-open .answer{height:58px;font-size:27px;}
- body.keyboard-open .check{height:52px;margin-top:10px;}
- body.keyboard-open .result{margin-top:14px;padding:18px 18px 0;}
- body.keyboard-open .forms{font-size:23px;}
- body.keyboard-open .example{margin-top:9px;}
- body.keyboard-open .next{height:52px;margin-top:12px;}
+ body{padding-left:24px;padding-right:24px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px));}
+ .top{margin-bottom:16px}
+ .progress{margin-bottom:28px}
+ .card{padding-top:22px}
 }
-@media(max-height:700px){.progress{margin-bottom:20px}.card{padding-top:15px}.verb{font-size:55px}.translation{margin-bottom:25px}}
 </style>
 </head>
 <body>
@@ -221,34 +207,6 @@ $("again").onclick=()=>{
  $("finish").classList.add("hidden");
  $("start").classList.remove("hidden");
 };
-// iOS Safari changes the visual viewport when the software keyboard opens.
-// Toggle a compact layout only while the answer field is being edited.
-const vv=window.visualViewport;
-let keyboardBaseline=window.innerHeight;
-
-function syncKeyboardLayout(){
- const answerFocused=document.activeElement===$("answer");
- const viewportHeight=vv?vv.height:window.innerHeight;
- const keyboardOpen=answerFocused && viewportHeight < keyboardBaseline*0.78;
- document.body.classList.toggle("keyboard-open",keyboardOpen);
- if(keyboardOpen){
-   requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));
- }
-}
-
-if(vv){
- vv.addEventListener("resize",syncKeyboardLayout);
- vv.addEventListener("scroll",syncKeyboardLayout);
-}
-window.addEventListener("resize",()=>{
- if(document.activeElement!==$("answer")){keyboardBaseline=window.innerHeight}
- syncKeyboardLayout();
-});
-$("answer").addEventListener("focus",()=>setTimeout(syncKeyboardLayout,80));
-$("answer").addEventListener("blur",()=>{
- document.body.classList.remove("keyboard-open");
- keyboardBaseline=window.innerHeight;
-});
 
 document.addEventListener("keydown", e => {
  if (e.key === "Enter") {
