@@ -79,10 +79,9 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 
 /* v11 touch keyboard */
 .touch-keyboard{display:none}
-@media (pointer:coarse){
- .check{display:none!important}
- .answer{caret-color:transparent;user-select:none;-webkit-user-select:none}
- .touch-keyboard{
+.touch-ui .check{display:none!important}
+ .touch-ui .answer{caret-color:transparent;user-select:none;-webkit-user-select:none}
+ .touch-ui .touch-keyboard{
    display:block;
    width:100%;
    margin-top:16px;
@@ -92,10 +91,10 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    background:#191a1c;
    box-shadow:0 18px 50px rgba(0,0,0,.22);
  }
- .key-row{display:flex;gap:5px;justify-content:center;margin-bottom:6px}
- .key-row-mid{padding:0 4%}
- .key-row-bottom{gap:4px}
- .key{
+ .touch-ui .key-row{display:flex;gap:5px;justify-content:center;margin-bottom:6px}
+ .touch-ui .key-row-mid{padding:0 4%}
+ .touch-ui .key-row-bottom{gap:4px}
+ .touch-ui .key{
    min-width:0;
    flex:1 1 0;
    height:42px;
@@ -108,16 +107,16 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    box-shadow:0 1px 0 rgba(255,255,255,.035) inset;
    -webkit-tap-highlight-color:transparent;
  }
- .key:active{transform:translateY(1px);background:#2b2d30}
- .key-special{color:#b7d5ca}
- .key-backspace{flex:1.3 1 0;font-size:19px;color:#b9b9b7}
- .key-submit{
+ .touch-ui .key:active{transform:translateY(1px);background:#2b2d30}
+ .touch-ui .key-special{color:#b7d5ca}
+ .touch-ui .key-backspace{flex:1.3 1 0;font-size:19px;color:#b9b9b7}
+ .touch-ui .key-submit{
    width:100%;height:45px;margin-top:3px;border:0;border-radius:13px;
    background:#e9e3d9;color:#17181a;font:700 15px/1 system-ui,-apple-system,sans-serif;
    -webkit-tap-highlight-color:transparent;
  }
- .key-submit:active{transform:translateY(1px)}
-}
+ .touch-ui .key-submit:active{transform:translateY(1px)}
+
 
 </style>
 </head>
@@ -139,7 +138,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <section class="card">
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
-   <input id="answer" inputmode="none" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
+   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
    <button class="check" id="check">Check</button>
    <div class="result" id="result">
     <div class="state" id="state"></div>
@@ -157,7 +156,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v12</div>
+<div class="version-tag">v13</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -168,6 +167,23 @@ try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){diff
 let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
 
 const $=id=>document.getElementById(id);
+
+// iPhone/iPad detection for the custom on-screen keyboard.
+// iPadOS may identify itself as Mac, hence the maxTouchPoints fallback.
+const isIOS =
+ /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+ (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const isTouchDevice = navigator.maxTouchPoints > 0;
+const useTouchKeyboard = isIOS || (isTouchDevice && window.innerWidth <= 900);
+document.documentElement.classList.toggle("touch-ui", useTouchKeyboard);
+document.addEventListener("DOMContentLoaded",()=>{
+ const a=document.getElementById("answer");
+ if(a && useTouchKeyboard){
+   a.inputMode="none";
+   a.readOnly=true;
+ }
+});
+
 const key=v=>v.infinitive.toLowerCase();
 
 function saveDifficulty(){
@@ -213,7 +229,7 @@ function render(){
  $("bar").style.width=((index+1)/deck.length*100)+"%";
  $("answer").disabled=false;
  setTimeout(()=>{
-   const isTouchPhone = window.matchMedia("(pointer: coarse)").matches;
+   const isTouchPhone = useTouchKeyboard;
    if(!isTouchPhone){
      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
    }
