@@ -1648,6 +1648,70 @@ header h1{
   z-index:6!important;
 }
 
+
+/* Home v4.5 — visible lower text fade + unmistakable compact state light */
+
+/* Stronger dark fade behind labels. It begins softly, then becomes clearly
+   dark only in the lower part of the portrait card. */
+.mosaic .tile-small .tile-copy{
+  background:linear-gradient(
+    to bottom,
+    rgba(23,24,26,0) 0%,
+    rgba(23,24,26,.08) 12%,
+    rgba(23,24,26,.34) 32%,
+    rgba(23,24,26,.72) 58%,
+    rgba(23,24,26,.94) 82%,
+    rgba(23,24,26,.98) 100%
+  )!important;
+  padding-top:40px!important;
+}
+
+/* State glow gets its own layer ABOVE the image/fade, but BELOW the text.
+   Small radius, high brightness, bottom-right only. */
+.mosaic .tile-small::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:5!important;
+  right:-8px!important;
+  bottom:-8px!important;
+  left:auto!important;
+  top:auto!important;
+  width:82px!important;
+  height:82px!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  border-radius:50%!important;
+  background:radial-gradient(
+    circle at 50% 50%,
+    rgba(255,112,102,.95) 0%,
+    rgba(255,91,83,.72) 16%,
+    rgba(255,83,77,.38) 34%,
+    rgba(255,83,77,.13) 50%,
+    transparent 68%
+  )!important;
+  filter:none!important;
+  mix-blend-mode:screen;
+}
+
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(
+    circle at 50% 50%,
+    rgba(104,235,195,.95) 0%,
+    rgba(78,220,181,.72) 16%,
+    rgba(69,211,173,.38) 34%,
+    rgba(69,211,173,.13) 50%,
+    transparent 68%
+  )!important;
+}
+
+/* Text must remain above the glow. */
+.mosaic .tile-small .name,
+.mosaic .tile-small .status{
+  position:relative!important;
+  z-index:7!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1702,7 +1766,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.4</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.5</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
