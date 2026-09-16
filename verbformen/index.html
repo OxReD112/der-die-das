@@ -172,6 +172,24 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  }
 }
 
+
+/* v26: tools row spans full width; Backspace is flush right */
+@media(max-width:900px){
+ .key-row-tools{
+   padding-left:17%;
+   padding-right:0;
+   width:100%;
+   box-sizing:border-box;
+   justify-content:flex-start;
+ }
+ .key-row-tools .key-backspace{
+   flex:0 0 30%;
+   margin-left:auto;
+   border-top-right-radius:12px;
+   border-bottom-right-radius:12px;
+ }
+}
+
 </style>
 </head>
 <body>
@@ -229,7 +247,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v25</div>
+<div class="version-tag">v26</div>
 
 <script src="verbs.js"></script>
 <script>
