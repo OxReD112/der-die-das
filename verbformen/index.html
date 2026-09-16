@@ -23,7 +23,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:#6f706f;margin-bottom:18px}
 .verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
 .translation{color:#737473;font-size:16px;margin-bottom:44px}
-.label{font-size:13px;color:#777;margin-bottom:10px}
 .answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
 .answer:focus{border-color:rgba(91,200,164,.55);box-shadow:0 0 0 3px rgba(91,200,164,.08)}
 .answer::placeholder{color:#48494a}
@@ -100,7 +99,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <div class="eyebrow">Partizip II</div>
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
-   <div class="label">Type the correct form</div>
    <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
    <button class="check" id="check">Check</button>
    <div class="result" id="result">
@@ -119,7 +117,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v6</div>
+<div class="version-tag">v8</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -211,6 +209,7 @@ function checkAnswer(){
  $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
  $("example").textContent=v.example;
  $("answer").disabled=true;
+ $("answer").blur();
  $("check").style.display="none";
  $("next").className="next show";
 }
@@ -219,6 +218,14 @@ function next(){
  if(index+1>=deck.length){finishSession();return}
  index++;
  render();
+
+ // On iPhone/mobile, Continue should take us straight into typing
+ // without requiring another tap on the input.
+ if(window.matchMedia("(pointer: coarse)").matches){
+   setTimeout(()=>{
+     try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
+   },180);
+ }
 }
 
 function finishSession(){
