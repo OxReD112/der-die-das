@@ -68,11 +68,27 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v0.9</div>
+<div class="version">v2.2</div>
 </main>
 <script src="words.js"></script>
 <script>
-const $=id=>document.getElementById(id), STORE="wortsternSRSv03";
+const $=id=>document.getElementById(id), STORE="wortsternSRSv03", HOME_STATS="deutschHomeStatsV1";
+
+function publishWortschatzStatus(done=false){
+  try{
+    const today=day();
+    const allDue=activeCards().filter(c=>rec(c).due<=today);
+    const status={
+      date:today,
+      done:!!done || allDue.length===0,
+      remaining:allDue.length,
+      updatedAt:Date.now()
+    };
+    const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
+    home.wortschatz=status;
+    localStorage.setItem(HOME_STATS,JSON.stringify(home));
+  }catch(e){}
+}
 // Simple SRS: first success -> tomorrow, then +8, +20, +45, +90 days.
 // A mistake resets the card: it stays in today's session until answered correctly, then returns tomorrow.
 const steps=[1,8,20,45,90];
@@ -104,6 +120,7 @@ function build(cards=null){
  ensureDeck();
  queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
  idx=0;sessionTotal=queue.length;completed=0;failedToday=new Set();closedToday=new Set();
+ publishWortschatzStatus(queue.length===0);
  render();
 }
 function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank'>[…]</span>")}
@@ -161,6 +178,7 @@ function check(){
  save();
 }
 function showDone(){
+ publishWortschatzStatus(true);
  $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} complete`:"Nothing due right now.";
  const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
@@ -168,7 +186,7 @@ function showDone(){
 }
 function addFive(){
  const fresh=WORDS.filter(c=>!state.activeIds.includes(c.id)).slice(0,ADD_BATCH);if(!fresh.length)return;
- fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();
+ fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();publishWortschatzStatus(false);
  $("done").className="done";$("study").style.display="flex";build(fresh);
 }
 function next(){idx++;render()}
