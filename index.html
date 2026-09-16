@@ -1890,6 +1890,20 @@ header h1{
   transform:translateY(0)!important;
 }
 
+
+/* Home v4.12 — nudge Wortschatz copy a little farther right only. */
+.mosaic .tile-vocab .tile-copy{
+  right:7px!important;
+  width:42%!important;
+}
+
+@media(max-width:430px){
+  .mosaic .tile-vocab .tile-copy{
+    right:5px!important;
+    width:42%!important;
+  }
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1944,7 +1958,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.11</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.12</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
