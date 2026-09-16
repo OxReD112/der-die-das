@@ -25,11 +25,61 @@
     .status{min-height:16px;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.2;text-align:center}
     @media(min-width:650px){body{padding-top:48px}header{margin-bottom:62px}.grid{gap:34px 28px}.name{font-size:18px}}
     @media(max-width:360px){body{padding-left:20px;padding-right:20px}.grid{gap:22px 16px}.name{font-size:16px}}
-  </style>
+  
+/* Home v2 */
+header{
+  position:fixed;
+  top:calc(env(safe-area-inset-top) + 22px);
+  left:max(24px, env(safe-area-inset-left));
+  right:max(24px, env(safe-area-inset-right));
+  z-index:20;
+  margin:0;
+  padding:0;
+  background:var(--bg);
+}
+.rule{display:none!important}
+
+.page{
+  padding-top:76px;
+}
+
+.grid{
+  grid-template-columns:repeat(2, minmax(0, 150px));
+  justify-content:center;
+  gap:28px 28px;
+}
+
+.icon-wrap{
+  width:100%;
+  max-width:150px;
+  margin:0 auto;
+}
+
+@media(max-width:430px){
+  .grid{
+    grid-template-columns:repeat(2, minmax(0, 118px));
+    gap:26px 24px;
+  }
+  .icon-wrap{max-width:118px}
+}
+
+@media(max-width:360px){
+  .grid{
+    grid-template-columns:repeat(2, minmax(0, 108px));
+    gap:24px 20px;
+  }
+  .icon-wrap{max-width:108px}
+}
+
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
   <main class="page">
-    <header><h1>Deutsch.</h1><div class="rule"></div></header>
+    <header><h1>Deutsch.</h1></header>
     <p class="intro">Was möchtest du heute üben?</p>
     <section class="grid" aria-label="Übungen">
       <a class="module" href="artikel/"><div class="icon-wrap"><img src="artikel/icon.png" alt=""></div><div class="name">Artikel</div><div class="status">&nbsp;</div></a>
