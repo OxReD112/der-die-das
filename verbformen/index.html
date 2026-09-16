@@ -157,7 +157,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v11</div>
+<div class="version-tag">v12</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -258,8 +258,7 @@ function checkAnswer(){
 function next(){
  if(index+1>=deck.length){finishSession();return}
  index++;
- render();,180);
- }
+ render();
 }
 
 function finishSession(){
