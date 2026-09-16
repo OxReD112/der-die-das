@@ -147,6 +147,13 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  html,body{overscroll-behavior-y:none}
 }
 
+
+/* v22: header must sit above the iPhone overscroll mask */
+.top{
+  position:relative;
+  z-index:1001;
+}
+
 </style>
 </head>
 <body>
@@ -204,7 +211,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v21</div>
+<div class="version-tag">v22</div>
 
 <script src="verbs.js"></script>
 <script>
