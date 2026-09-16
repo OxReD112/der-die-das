@@ -832,6 +832,107 @@ header h1{
   .mosaic .name{font-size:15px!important}
 }
 
+
+/* Home v3.5 — closer to reference: one large tile + three vertical tiles */
+.dashboard.mosaic{
+  width:min(100%,430px)!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1.42fr .78fr .78fr!important;
+  grid-template-rows:repeat(2,176px)!important;
+  gap:10px!important;
+}
+
+/* Wortschatz: large near-square tile occupying the full left side */
+.mosaic .tile-vocab{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  border-radius:28px!important;
+  justify-content:flex-end!important;
+}
+.mosaic .tile-vocab .tile-art{
+  top:22px!important;
+  width:205px!important;
+  height:190px!important;
+}
+.mosaic .tile-vocab .tile-copy{
+  padding:0 12px 24px!important;
+}
+.mosaic .tile-vocab .name{
+  font-size:19px!important;
+}
+.mosaic .tile-vocab .status{
+  font-size:13px!important;
+}
+
+/* Three equal portrait tiles on the right, like the user's layout */
+.mosaic .tile-small{
+  border-radius:25px!important;
+}
+.mosaic .tile-verbs{
+  grid-column:2!important;
+  grid-row:1!important;
+}
+.mosaic .tile-pronouns{
+  grid-column:2!important;
+  grid-row:2!important;
+}
+.mosaic .tile-articles{
+  grid-column:3!important;
+  grid-row:2!important;
+}
+
+.mosaic .tile-small .tile-art{
+  top:10px!important;
+  width:86px!important;
+  height:105px!important;
+}
+.mosaic .tile-small .tile-copy{
+  padding:0 5px 14px!important;
+}
+.mosaic .tile-small .name{
+  font-size:13px!important;
+}
+.mosaic .tile-small .status{
+  margin-top:4px!important;
+  font-size:11px!important;
+}
+
+/* leave the upper-right third empty intentionally, matching the loose mosaic */
+.daily-score{
+  margin-top:22px!important;
+}
+
+@media(max-width:430px){
+  .dashboard.mosaic,.daily-score{
+    width:min(100%,350px)!important;
+  }
+  .dashboard.mosaic{
+    grid-template-columns:1.34fr .83fr .83fr!important;
+    grid-template-rows:repeat(2,151px)!important;
+    gap:8px!important;
+  }
+  .mosaic .tile-vocab .tile-art{
+    top:17px!important;
+    width:172px!important;
+    height:160px!important;
+  }
+  .mosaic .tile-vocab .tile-copy{
+    padding-bottom:20px!important;
+  }
+  .mosaic .tile-small .tile-art{
+    top:8px!important;
+    width:72px!important;
+    height:88px!important;
+  }
+  .mosaic .tile-small .name{
+    font-size:12px!important;
+  }
+  .mosaic .tile-small .status{
+    font-size:10px!important;
+  }
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -883,7 +984,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.4</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.5</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
