@@ -47,6 +47,27 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
   font-weight:500!important;
 }
 
+
+/* v6 — keyboard tuning */
+.third{justify-content:flex-end;padding-left:0}
+.third .back{
+  margin-left:0!important;
+  flex:0 0 calc(2 * ((100% - 27px)/10) + 3px)!important;
+  width:calc(2 * ((100% - 27px)/10) + 3px)!important;
+}
+.special{justify-content:center}
+.special .ok{
+  margin-left:0!important;
+  flex:0 0 calc(2 * ((100% - 27px)/10) + 3px)!important;
+  width:calc(2 * ((100% - 27px)/10) + 3px)!important;
+  min-width:calc(2 * ((100% - 27px)/10) + 3px)!important;
+  background:var(--key)!important;
+  color:var(--mint)!important;
+  border:1px solid color-mix(in srgb,var(--mint) 55%,transparent)!important;
+  font-size:22px!important;
+  font-weight:500!important;
+}
+
 </style>
 </head>
 <body><main class="app">
@@ -76,7 +97,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v5</div>
+<div class="version">v6</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
