@@ -1416,6 +1416,101 @@ header h1{
       transparent 39%)!important;
 }
 
+
+/* Home v4.1 — portrait artwork flows behind text + centered lower glow */
+
+/* The illustration is no longer a short cropped image area.
+   It extends down through the tile; only the TILE itself clips it. */
+.mosaic .tile-small{
+  overflow:hidden!important;
+  position:relative!important;
+}
+.mosaic .tile-small .tile-art{
+  position:absolute!important;
+  z-index:1!important;
+  top:0!important;
+  left:0!important;
+  width:100%!important;
+  height:100%!important;
+  transform:none!important;
+  overflow:visible!important;
+  margin:0!important;
+  pointer-events:none!important;
+}
+.mosaic .tile-small .tile-art img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center top!important;
+  border-radius:0!important;
+}
+
+/* Labels sit above the artwork instead of below a cropped image box. */
+.mosaic .tile-small .tile-copy{
+  position:absolute!important;
+  z-index:4!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  width:100%!important;
+  padding:28px 5px 14px!important;
+  text-align:center!important;
+  background:linear-gradient(
+    to bottom,
+    rgba(27,27,29,0) 0%,
+    rgba(27,27,29,.38) 36%,
+    rgba(27,27,29,.76) 72%,
+    rgba(27,27,29,.88) 100%
+  )!important;
+}
+
+/* One centered glow rising from the whole bottom edge. */
+.mosaic .tile-small::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:48%!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+  background:radial-gradient(
+    ellipse 78% 72% at 50% 112%,
+    rgba(255,88,82,.34) 0%,
+    rgba(255,88,82,.22) 22%,
+    rgba(255,88,82,.09) 45%,
+    transparent 72%
+  )!important;
+}
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(
+    ellipse 78% 72% at 50% 112%,
+    rgba(69,218,178,.34) 0%,
+    rgba(69,218,178,.22) 22%,
+    rgba(69,218,178,.09) 45%,
+    transparent 72%
+  )!important;
+}
+
+/* Keep typography above both image and state light. */
+.mosaic .tile-small .name,
+.mosaic .tile-small .status{
+  position:relative!important;
+  z-index:5!important;
+}
+
+@media(max-width:430px){
+  .mosaic .tile-small .tile-art{
+    width:100%!important;
+    height:100%!important;
+  }
+  .mosaic .tile-small .tile-copy{
+    padding:25px 4px 13px!important;
+  }
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1470,7 +1565,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.0</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.1</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
