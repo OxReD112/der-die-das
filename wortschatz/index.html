@@ -6,6 +6,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Wortschatz</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <style>
 :root{--bg:#1c1c1e;--text:#f3f1ed;--muted:#8c8c91;--mint:#43d2ad;--red:#ff6f73;--line:rgba(67,210,173,.45);--key:#242426;--keyline:#3b3b3f}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -15,7 +17,7 @@ button{font:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
-.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:690px}.blank{color:var(--mint);font-weight:600}.translation{margin-top:28px;color:var(--muted);font-size:clamp(18px,4.8vw,25px)}
+.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:690px}.blank{color:var(--mint);font-weight:600}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
@@ -30,11 +32,11 @@ button{font:inherit}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:18px;font-size:14px;color:#737a78}
 .continue{margin-top:26px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .keyboard{display:none;width:calc(100% + 24px);margin:20px -12px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:24px}
-.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:5px;margin-bottom:6px}.key{height:50px;min-width:0;flex:1;max-width:58px;border:1px solid var(--keyline);border-radius:12px;background:var(--key);color:#eee;font-size:23px}.row.special .key{max-width:64px;color:#b8ddd2}.row.special .back{margin-left:auto;max-width:140px;flex:2.4}
+.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:21px}.row.special{width:100%;justify-content:flex-start;gap:3px}.row.special .key{color:#b8ddd2}.row.special .back{margin-left:auto;flex:0 0 calc(3 * ((100% - 27px)/10) + 6px);width:calc(3 * ((100% - 27px)/10) + 6px)}
 .kcheck{width:100%;border:0;border-radius:15px;padding:15px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px;margin-top:4px}
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}.sentence,.answerSentence{font-size:30px}.translation,.answerTranslation{font-size:19px}.inputbox{height:60px;margin-top:28px}.check{display:none}.keyboard{display:none}.keyboard.show{display:block}.key{height:48px;font-size:22px}.targetForm{margin-top:28px}.speak{margin-bottom:27px}.detail{padding-top:24px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}.sentence,.answerSentence{font-size:30px}.translation{font-size:17px}.answerTranslation{font-size:19px}.inputbox{height:60px;margin-top:28px}.check{display:none}.keyboard{display:none}.keyboard.show{display:block}.targetForm{margin-top:28px}.speak{margin-bottom:27px}.detail{padding-top:24px}}
 @media(min-width:700px){.keyboard{display:none!important}}
 </style>
 </head>
@@ -65,7 +67,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v0.6</div>
+<div class="version">v0.9</div>
 </main>
 <script src="words.js"></script>
 <script>
