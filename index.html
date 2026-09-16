@@ -500,6 +500,134 @@ header h1{
   .daily-score{margin-top:20px;padding-top:14px}
 }
 
+
+/* Home v3.2 — dashboard concept */
+.dashboard{
+  width:min(100%, 430px);
+  margin:0 auto;
+}
+.vocab-hero{
+  position:relative;
+  width:100%;
+  min-height:150px;
+  display:grid!important;
+  grid-template-columns:150px 1fr 30px;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px 12px 8px!important;
+  overflow:hidden;
+  border:1px solid rgba(105,225,190,.22)!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 16% 82%, rgba(64,225,192,.16), transparent 38%),
+    radial-gradient(circle at 92% 15%, rgba(255,100,93,.12), transparent 42%),
+    rgba(255,255,255,.018)!important;
+  text-align:left!important;
+}
+.vocab-art{
+  width:145px;
+  height:145px;
+}
+.vocab-art img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:28px;
+}
+.vocab-copy .name{
+  font-size:20px!important;
+  font-weight:650;
+  text-align:left!important;
+}
+.vocab-copy .status{
+  margin-top:7px;
+  font-size:14px!important;
+  color:var(--muted);
+  text-align:left!important;
+}
+.hero-arrow{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  color:#d9d7d2;
+  font-size:25px;
+  font-weight:300;
+  line-height:1;
+}
+.small-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:24px;
+}
+.small-module{
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  padding:0!important;
+  text-align:center!important;
+}
+.small-module .icon-wrap{
+  width:104px!important;
+  max-width:104px!important;
+  height:104px!important;
+  margin:0 auto!important;
+  border-radius:26px!important;
+}
+.small-module .name{
+  margin-top:10px!important;
+  font-size:15px!important;
+  line-height:1.15;
+  font-weight:650;
+  text-align:center!important;
+}
+.small-module .status{
+  min-height:15px;
+  margin-top:5px!important;
+  color:var(--muted);
+  font-size:12px!important;
+  text-align:center!important;
+}
+.daily-score{
+  width:min(100%,430px)!important;
+  margin:28px auto 0!important;
+  padding-top:19px!important;
+  border-top:1px solid rgba(255,255,255,.10)!important;
+}
+.daily-progress{
+  width:76%!important;
+  height:4px!important;
+  margin-top:13px!important;
+}
+@media(max-width:430px){
+  .dashboard,.daily-score{width:min(100%,350px)!important}
+  .vocab-hero{
+    min-height:132px;
+    grid-template-columns:126px 1fr 27px;
+    border-radius:26px!important;
+    padding:8px 14px 8px 5px!important;
+  }
+  .vocab-art{width:124px;height:124px}
+  .small-grid{gap:12px;margin-top:22px}
+  .small-module .icon-wrap{
+    width:92px!important;
+    max-width:92px!important;
+    height:92px!important;
+    border-radius:23px!important;
+  }
+}
+@media(max-width:360px){
+  .dashboard,.daily-score{width:min(100%,320px)!important}
+  .small-module .icon-wrap{
+    width:82px!important;max-width:82px!important;height:82px!important
+  }
+  .small-grid{gap:8px}
+  .small-module .name{font-size:14px!important}
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -508,38 +636,35 @@ header h1{
   <main class="page">
     <header><h1>Deutsch.</h1></header>
     <p class="intro">Was möchtest du heute üben?</p>
-    <section class="grid module-list" aria-label="Übungen">
-      <button class="module" type="button" data-app="artikel/?v=2.2">
-        <div class="icon-wrap"><img src="artikel/icon.png" alt=""></div>
-        <div class="module-copy">
-          <div class="name">Artikel</div>
-          <div class="status" id="artikelStatus">0 / 50</div>
-        </div>
-      </button>
-
-      <button class="module" type="button" data-app="verbformen/?v=2.1">
-        <div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div>
-        <div class="module-copy">
-          <div class="name">Verbformen</div>
-          <div class="status">0 / 30</div>
-        </div>
-      </button>
-
-      <button class="module" type="button" data-app="wortschatz/?v=2.1">
-        <div class="icon-wrap"><img src="wortschatz/icon.png" alt=""></div>
-        <div class="module-copy">
+    <section class="dashboard" aria-label="Übungen">
+      <button class="vocab-hero module" type="button" data-app="wortschatz/?v=2.1">
+        <div class="vocab-art"><img src="wortschatz/icon.png" alt=""></div>
+        <div class="vocab-copy">
           <div class="name">Wortschatz</div>
           <div class="status">noch offen</div>
         </div>
+        <div class="hero-arrow">›</div>
       </button>
 
-      <button class="module" type="button" data-app="pronomen/?v=2.1">
-        <div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div>
-        <div class="module-copy">
+      <div class="small-grid">
+        <button class="small-module module" type="button" data-app="artikel/?v=2.2">
+          <div class="icon-wrap"><img src="artikel/icon.png" alt=""></div>
+          <div class="name">Artikel</div>
+          <div class="status" id="artikelStatus">0 / 50</div>
+        </button>
+
+        <button class="small-module module" type="button" data-app="verbformen/?v=2.1">
+          <div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div>
+          <div class="name">Verbformen</div>
+          <div class="status">0 / 30</div>
+        </button>
+
+        <button class="small-module module" type="button" data-app="pronomen/?v=2.1">
+          <div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div>
           <div class="name">Pronomen</div>
           <div class="status">0 / 20</div>
-        </div>
-      </button>
+        </button>
+      </div>
     </section>
   
     <section class="daily-score" aria-label="Tagesziel">
@@ -551,7 +676,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.1</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.2</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
