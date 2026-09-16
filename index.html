@@ -46,7 +46,8 @@
 .play-again{border:0;border-radius:15px;padding:15px 28px;background:var(--coral);color:white;font-size:17px;font-weight:650;cursor:pointer}
 .hidden{display:none!important}
 
-@media(max-width:520px){.app{padding-top:16px}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}.top{margin-bottom:20px}}
+@media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 12px)}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}.top{margin-bottom:20px}}
+.version-mark{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px;letter-spacing:.04em;pointer-events:none}
 </style>
 </head>
 <body><main class="app">
@@ -83,6 +84,7 @@
 <p id="endSummary">You finished your session.</p>
 <button class="play-again" id="playAgain">Choose another session</button>
 </section>
+<div class="version-mark">v0.2</div>
 </main>
 <script src="words.js"></script>
 <script>
