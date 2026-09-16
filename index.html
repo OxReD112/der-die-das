@@ -933,6 +933,152 @@ header h1{
   }
 }
 
+
+/* Home v3.6 — 3×2 dashboard: wide Wortschatz + compact tiles + Heute */
+.dashboard.mosaic{
+  width:min(100%,430px)!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,176px)!important;
+  gap:10px!important;
+}
+
+/* Wortschatz is the same HEIGHT as every other tile, but spans two columns. */
+.mosaic .tile-vocab{
+  grid-column:1 / span 2!important;
+  grid-row:1!important;
+  border-radius:25px!important;
+  display:grid!important;
+  grid-template-columns:1.22fr .78fr!important;
+  align-items:center!important;
+  justify-content:initial!important;
+  border-color:rgba(255,105,96,.42)!important;
+  background:
+    radial-gradient(ellipse at 28% 48%,rgba(255,76,69,.27),transparent 58%),
+    rgba(255,255,255,.014)!important;
+}
+.mosaic .tile-vocab .tile-art{
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  transform:none!important;
+  width:150px!important;
+  height:145px!important;
+  margin-left:-4px!important;
+  justify-self:center;
+}
+.mosaic .tile-vocab .tile-copy{
+  width:auto!important;
+  padding:0 14px 0 0!important;
+  text-align:left!important;
+}
+.mosaic .tile-vocab .name,
+.mosaic .tile-vocab .status{
+  text-align:left!important;
+}
+.mosaic .tile-vocab .name{font-size:18px!important}
+.mosaic .tile-vocab .status{font-size:12px!important}
+
+/* Preserve the compact portrait-card treatment from v3.5. */
+.mosaic .tile-small{
+  border-radius:25px!important;
+}
+.mosaic .tile-articles{grid-column:3!important;grid-row:1!important}
+.mosaic .tile-verbs{grid-column:1!important;grid-row:2!important}
+.mosaic .tile-pronouns{grid-column:2!important;grid-row:2!important}
+
+.mosaic .tile-small .tile-art{
+  top:10px!important;
+  width:86px!important;
+  height:105px!important;
+}
+.mosaic .tile-small .tile-copy{
+  padding:0 5px 14px!important;
+}
+.mosaic .tile-small .name{font-size:13px!important}
+.mosaic .tile-small .status{font-size:11px!important}
+
+/* Today occupies the final grid cell instead of a separate footer block. */
+.mosaic .tile-today{
+  grid-column:3!important;
+  grid-row:2!important;
+  border-radius:25px!important;
+  padding:18px 10px!important;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.09)!important;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(86,219,183,.055),transparent 62%),
+    rgba(255,255,255,.014)!important;
+}
+.today-label{
+  color:#d8d6d2;
+  font-size:12px;
+  font-weight:650;
+}
+.today-number{
+  margin-top:10px;
+  color:#f0efec;
+  font-size:22px;
+  line-height:1;
+  font-weight:650;
+}
+.today-unit{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
+}
+.today-progress{
+  width:72%;
+  height:3px;
+  margin-top:15px;
+  overflow:hidden;
+  border-radius:99px;
+  background:rgba(255,255,255,.09);
+}
+.today-progress-fill{
+  width:0%;
+  height:100%;
+  border-radius:inherit;
+  background:var(--mint);
+  transition:width .25s ease;
+}
+
+/* old standalone score is no longer used */
+.daily-score{display:none!important}
+
+@media(max-width:430px){
+  .dashboard.mosaic{
+    width:min(100%,350px)!important;
+    grid-template-rows:repeat(2,151px)!important;
+    gap:8px!important;
+  }
+  .mosaic .tile-vocab{
+    grid-template-columns:1.2fr .8fr!important;
+  }
+  .mosaic .tile-vocab .tile-art{
+    width:130px!important;
+    height:125px!important;
+    margin-left:-6px!important;
+  }
+  .mosaic .tile-vocab .tile-copy{
+    padding-right:9px!important;
+  }
+  .mosaic .tile-vocab .name{font-size:16px!important}
+  .mosaic .tile-small .tile-art{
+    top:8px!important;
+    width:72px!important;
+    height:88px!important;
+  }
+  .mosaic .tile-small .name{font-size:12px!important}
+  .mosaic .tile-small .status{font-size:10px!important}
+  .today-number{font-size:19px}
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -947,6 +1093,14 @@ header h1{
         <div class="tile-copy">
           <div class="name">Wortschatz</div>
           <div class="status">noch offen</div>
+        </div>
+      </button>
+
+      <button class="tile tile-small tile-articles module" type="button" data-app="artikel/?v=2.2">
+        <div class="tile-art"><img src="artikel/icon.png" alt=""></div>
+        <div class="tile-copy">
+          <div class="name">Artikel</div>
+          <div class="status" id="artikelStatus">0 / 50</div>
         </div>
       </button>
 
@@ -966,25 +1120,20 @@ header h1{
         </div>
       </button>
 
-      <button class="tile tile-small tile-articles module" type="button" data-app="artikel/?v=2.2">
-        <div class="tile-art"><img src="artikel/icon.png" alt=""></div>
-        <div class="tile-copy">
-          <div class="name">Artikel</div>
-          <div class="status" id="artikelStatus">0 / 50</div>
-        </div>
-      </button>
+      <div class="tile tile-today" aria-label="Tagesziel">
+        <div class="today-label">Heute</div>
+        <div class="today-number" id="todayTotal">0 / 60</div>
+        <div class="today-unit">Punkte</div>
+        <div class="today-progress"><div class="today-progress-fill" id="todayProgress"></div></div>
+      </div>
     </section>
   
-    <section class="daily-score" aria-label="Tagesziel">
-      <div class="daily-label">Heute</div>
-      <div class="daily-number" id="todayTotal">0 / 60 Punkte</div>
-      <div class="daily-progress"><div class="daily-progress-fill" id="todayProgress"></div></div>
-    </section>
+    
 
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.5</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.6</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -1008,7 +1157,7 @@ header h1{
       articleEl.textContent=articleCount>=50?'✓ fertig':`${articleCount} / 50`;
       if(articleCount>=50) articleEl.style.color='var(--mint)';
       const points=articleCount;
-      document.getElementById('todayTotal').textContent=`${points} / 60 Punkte`;
+      document.getElementById('todayTotal').textContent=`${points} / 60`;
       document.getElementById('todayProgress').style.width=`${Math.min(points/60*100,100)}%`;
     }
 
