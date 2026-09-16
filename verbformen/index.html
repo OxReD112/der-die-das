@@ -258,13 +258,33 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v27</div>
+<div class="version-tag">v28 · daily stats</div>
 
 <script src="verbs.js"></script>
 <script>
 const STORAGE_KEY="verbformenDifficultyV1";
 let difficulty={};
 try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
+
+/* v28: daily statistics shared with Deutsch Home */
+const DAILY_STATS_KEY="deutschDailyStatsV1";
+function localDateKey(){
+ const d=new Date();
+ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function recordVerbformenAnswer(){
+ let stats={};
+ try{stats=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}")}catch(e){stats={}}
+ const today=localDateKey();
+ if(stats.date!==today) stats={date:today};
+ if(typeof stats.verbformen==="object"){
+   stats.verbformen.answers=Number(stats.verbformen.answers||0)+1;
+ }else{
+   stats.verbformen=Number(stats.verbformen||0)+1;
+ }
+ localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
+}
+
 
 let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
 
@@ -359,6 +379,7 @@ function checkAnswer(){
  if(!a)return;
 
  checked=true;
+  recordVerbformenAnswer();
  const ok=a===v.participle.toLowerCase();
  if(ok)correctCount++;
  updateDifficulty(v,ok);
