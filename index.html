@@ -1587,6 +1587,67 @@ header h1{
   margin-top:14px!important;
 }
 
+
+/* Home v4.3 — clearer text fade + bright compact status corner */
+
+/* Make the lower readability fade visibly present.
+   It stays transparent higher up and becomes dark only behind the labels. */
+.mosaic .tile-small .tile-copy{
+  background:linear-gradient(
+    to bottom,
+    rgba(23,24,26,0) 0%,
+    rgba(23,24,26,.16) 18%,
+    rgba(23,24,26,.52) 46%,
+    rgba(23,24,26,.84) 72%,
+    rgba(23,24,26,.96) 100%
+  )!important;
+  padding-top:34px!important;
+}
+
+/* Status light: one small, bright pool in the bottom-right corner.
+   Saturated/bright, but deliberately short-range. */
+.mosaic .tile-small::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:3!important;
+  left:auto!important;
+  top:auto!important;
+  right:0!important;
+  bottom:0!important;
+  width:72%!important;
+  height:52%!important;
+  pointer-events:none!important;
+  border-radius:0!important;
+  background:radial-gradient(
+    ellipse 68% 72% at 100% 100%,
+    rgba(255,96,88,.78) 0%,
+    rgba(255,96,88,.55) 11%,
+    rgba(255,96,88,.28) 23%,
+    rgba(255,96,88,.10) 34%,
+    transparent 48%
+  )!important;
+  filter:none!important;
+}
+
+/* Finished = the same concentrated light in mint green. */
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(
+    ellipse 68% 72% at 100% 100%,
+    rgba(83,224,184,.78) 0%,
+    rgba(83,224,184,.55) 11%,
+    rgba(83,224,184,.28) 23%,
+    rgba(83,224,184,.10) 34%,
+    transparent 48%
+  )!important;
+}
+
+/* Keep labels above both the dark fade and the status glow. */
+.mosaic .tile-small .name,
+.mosaic .tile-small .status{
+  position:relative!important;
+  z-index:6!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1641,7 +1702,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.2</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.4</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -1660,6 +1721,11 @@ header h1{
       try{ data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}'); }catch(e){}
       if(data.date!==localDayKey()) data={};
 
+      function answerCount(value){
+        if(value && typeof value==="object") return Math.max(0,Number(value.answers)||0);
+        return Math.max(0,Number(value)||0);
+      }
+
       const configs=[
         {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:50},
         {key:'verbformen', selector:'.tile-verbs', status:null, goal:30},
@@ -1669,8 +1735,7 @@ header h1{
       let exercisePoints=0;
 
       configs.forEach(cfg=>{
-        const rec=data[cfg.key]||{answers:0,correct:0};
-        const answers=Math.max(0,Number(rec.answers)||0);
+        const answers=answerCount(data[cfg.key]);
         exercisePoints+=answers;
 
         const tile=document.querySelector(cfg.selector);
@@ -1679,6 +1744,7 @@ header h1{
           : tile?.querySelector('.status');
 
         const done=answers>=cfg.goal;
+
         if(status){
           status.textContent=done?'✓ fertig':`${Math.min(answers,cfg.goal)} / ${cfg.goal}`;
           status.style.color=done?'var(--mint)':'';
@@ -1754,6 +1820,7 @@ function syncHomeDashboard(){
 }
 
 /* iframe/app navigation can update localStorage while Home stays mounted. */
+window.addEventListener("pageshow",syncHomeDashboard);
 window.addEventListener("storage",syncHomeDashboard);
 window.addEventListener("focus",syncHomeDashboard);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncHomeDashboard()});
