@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b1b1d">
+  <title>Deutsch</title>
+  <style>
+    :root{--bg:#1b1b1d;--text:#f2f0ed;--muted:#8f8f94;--line:#303034;--mint:#55d7b5}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    body{min-height:100dvh;padding:calc(env(safe-area-inset-top) + 28px) max(24px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 32px) max(24px,env(safe-area-inset-left))}
+    .page{width:min(100%,720px);margin:0 auto}
+    header{margin-bottom:52px}
+    h1{margin:0;font-size:32px;line-height:1;letter-spacing:-.7px;font-weight:750}
+    .rule{height:4px;width:100%;margin-top:18px;background:var(--line);border-radius:99px;overflow:hidden}
+    .rule:before{content:"";display:block;width:18%;height:100%;background:var(--mint);border-radius:99px}
+    .intro{margin:0 0 26px;color:var(--muted);font-size:15px;line-height:1.4}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px}
+    .module{display:block;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+    .icon-wrap{width:100%;aspect-ratio:1;border-radius:25%;overflow:hidden;background:#202023;box-shadow:0 15px 38px rgba(0,0,0,.18);transition:transform .12s ease,opacity .12s ease}
+    .module:active .icon-wrap{transform:scale(.975);opacity:.88}
+    .icon-wrap img{display:block;width:100%;height:100%;object-fit:cover}
+    .name{margin-top:11px;font-size:17px;line-height:1.2;font-weight:650;text-align:center;letter-spacing:-.15px}
+    .status{min-height:16px;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.2;text-align:center}
+    @media(min-width:650px){body{padding-top:48px}header{margin-bottom:62px}.grid{gap:34px 28px}.name{font-size:18px}}
+    @media(max-width:360px){body{padding-left:20px;padding-right:20px}.grid{gap:22px 16px}.name{font-size:16px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header><h1>Deutsch.</h1><div class="rule"></div></header>
+    <p class="intro">Was möchtest du heute üben?</p>
+    <section class="grid" aria-label="Übungen">
+      <a class="module" href="artikel/"><div class="icon-wrap"><img src="artikel/icon.png" alt=""></div><div class="name">Artikel</div><div class="status">&nbsp;</div></a>
+      <a class="module" href="verbformen/"><div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div><div class="name">Verbformen</div><div class="status">&nbsp;</div></a>
+      <a class="module" href="wortschatz/"><div class="icon-wrap"><img src="wortschatz/icon.png" alt=""></div><div class="name">Wortschatz</div><div class="status">&nbsp;</div></a>
+      <a class="module" href="pronomen/"><div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div><div class="name">Pronomen</div><div class="status">&nbsp;</div></a>
+    </section>
+  </main>
+</body>
+</html>
