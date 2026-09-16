@@ -90,15 +90,19 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    margin-left:50%;
    transform:translateX(-50%);
    box-sizing:border-box;
-   padding:15px 10px 12px;
+   padding:13px 7px 10px;
    border:1px solid #303235;
    border-radius:24px;
    background:#191a1c
  }
- .key-row{display:flex;width:100%;gap:6px;justify-content:center;margin-bottom:8px}
- .key-row-mid{padding:0 2.5%;box-sizing:border-box}.key-row-bottom{gap:5px}
- .key{min-width:0;flex:1;height:52px;padding:0;border:1px solid #3b3d40;border-radius:10px;background:#222326;color:#e9e3d9;font:500 20px/1 system-ui;touch-action:manipulation}
- .key-special{color:#b7d5ca}.key-backspace{flex:1.35;font-size:22px}
+ .key-row{display:flex;width:100%;gap:4px;justify-content:center;margin-bottom:6px}
+ .key-row-9{padding:0 4.5%;box-sizing:border-box}
+ .key-row-7{padding:0 13%;box-sizing:border-box}
+ .key-row-tools{padding:0 17%;box-sizing:border-box;gap:6px;margin-top:1px}
+ .key-row-tools .key{flex:1 1 0}
+ .key-row-tools .key-backspace{flex:1.45 1 0}
+ .key{min-width:0;flex:1;height:52px;padding:0;border:1px solid #3b3d40;border-radius:10px;background:#222326;color:#e9e3d9;font:500 22px/1 system-ui;touch-action:manipulation}
+ .key-special{color:#b7d5ca}.key-backspace{font-size:24px}
  .key-submit{width:100%;height:54px;margin-top:4px;border:0;border-radius:15px;background:#e9e3d9;color:#17181a;font-size:16px;font-weight:700;touch-action:manipulation}
 }
 
@@ -125,14 +129,24 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
    <button class="check" id="check">Check</button>
 
+   
    <div id="touchKeyboard" class="touch-keyboard" aria-label="German keyboard">
-    <div class="key-row"><button type="button" class="key" data-key="q">q</button><button type="button" class="key" data-key="w">w</button><button type="button" class="key" data-key="e">e</button><button type="button" class="key" data-key="r">r</button><button type="button" class="key" data-key="t">t</button><button type="button" class="key" data-key="z">z</button><button type="button" class="key" data-key="u">u</button><button type="button" class="key" data-key="i">i</button><button type="button" class="key" data-key="o">o</button><button type="button" class="key" data-key="p">p</button></div>
-    <div class="key-row key-row-mid"><button type="button" class="key" data-key="a">a</button><button type="button" class="key" data-key="s">s</button><button type="button" class="key" data-key="d">d</button><button type="button" class="key" data-key="f">f</button><button type="button" class="key" data-key="g">g</button><button type="button" class="key" data-key="h">h</button><button type="button" class="key" data-key="j">j</button><button type="button" class="key" data-key="k">k</button><button type="button" class="key" data-key="l">l</button></div>
-    <div class="key-row key-row-bottom"><button type="button" class="key key-special" data-key="ä">ä</button><button type="button" class="key" data-key="y">y</button><button type="button" class="key" data-key="x">x</button><button type="button" class="key" data-key="c">c</button><button type="button" class="key" data-key="v">v</button><button type="button" class="key" data-key="b">b</button><button type="button" class="key" data-key="n">n</button><button type="button" class="key" data-key="m">m</button><button type="button" class="key key-special" data-key="ö">ö</button><button type="button" class="key key-special" data-key="ü">ü</button><button type="button" class="key key-special" data-key="ß">ß</button><button type="button" class="key key-backspace" data-action="backspace">⌫</button></div>
+    <div class="key-row key-row-10">
+     <button type="button" class="key" data-key="q">q</button><button type="button" class="key" data-key="w">w</button><button type="button" class="key" data-key="e">e</button><button type="button" class="key" data-key="r">r</button><button type="button" class="key" data-key="t">t</button><button type="button" class="key" data-key="z">z</button><button type="button" class="key" data-key="u">u</button><button type="button" class="key" data-key="i">i</button><button type="button" class="key" data-key="o">o</button><button type="button" class="key" data-key="p">p</button>
+    </div>
+    <div class="key-row key-row-9">
+     <button type="button" class="key" data-key="a">a</button><button type="button" class="key" data-key="s">s</button><button type="button" class="key" data-key="d">d</button><button type="button" class="key" data-key="f">f</button><button type="button" class="key" data-key="g">g</button><button type="button" class="key" data-key="h">h</button><button type="button" class="key" data-key="j">j</button><button type="button" class="key" data-key="k">k</button><button type="button" class="key" data-key="l">l</button>
+    </div>
+    <div class="key-row key-row-7">
+     <button type="button" class="key" data-key="y">y</button><button type="button" class="key" data-key="x">x</button><button type="button" class="key" data-key="c">c</button><button type="button" class="key" data-key="v">v</button><button type="button" class="key" data-key="b">b</button><button type="button" class="key" data-key="n">n</button><button type="button" class="key" data-key="m">m</button>
+    </div>
+    <div class="key-row key-row-tools">
+     <button type="button" class="key key-special" data-key="ä">ä</button><button type="button" class="key key-special" data-key="ö">ö</button><button type="button" class="key key-special" data-key="ü">ü</button><button type="button" class="key key-special" data-key="ß">ß</button>
+     <button type="button" class="key key-backspace" data-action="backspace" aria-label="Delete">⌫</button>
+    </div>
     <button type="button" class="key-submit" data-action="submit">Check</button>
    </div>
-
-   <div class="result" id="result">
+<div class="result" id="result">
     <div class="state" id="state"></div>
     <div class="forms" id="forms"></div>
     <div class="meta" id="meta"></div>
@@ -148,7 +162,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v16</div>
+<div class="version-tag">v18</div>
 
 <script src="verbs.js"></script>
 <script>
