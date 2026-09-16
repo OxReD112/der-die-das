@@ -231,6 +231,24 @@ header h1{
   }
 }
 
+
+/* Home v2.6 — wider home glyph */
+.home-back{
+  font-stretch:expanded;
+}
+.home-back::first-letter{
+  /* fallback handled by transform on the button's text rendering */
+}
+.home-back{
+  text-indent:0;
+}
+
+.home-glyph{
+  display:inline-block;
+  transform:scaleX(1.28);
+  transform-origin:center;
+}
+
 </style>
 </head>
 <body>
@@ -246,10 +264,10 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v2.5</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v2.6</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
-    <button id="homeBack" class="home-back" type="button" aria-label="Home">⌂</button>
+    <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
     <iframe id="appFrame" class="app-frame" title="Deutsch exercise"></iframe>
   </section>
 
