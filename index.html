@@ -249,6 +249,40 @@ header h1{
   transform-origin:center;
 }
 
+
+/* Home v2.7 — daily dashboard */
+.today{
+  width:min(100%, 520px);
+  margin:42px auto 0;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.today-title{
+  margin:0 0 15px;
+  font-size:14px;
+  font-weight:600;
+  color:#d8d6d2;
+}
+.today-row{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:6px 0;
+  color:#8f8f94;
+  font-size:13px;
+  line-height:1.35;
+}
+.today-row strong{
+  color:#d8d6d2;
+  font-weight:500;
+}
+.today-total{
+  margin-top:15px;
+  color:#6f6f74;
+  font-size:12px;
+  text-align:center;
+}
+
 </style>
 </head>
 <body>
@@ -261,10 +295,19 @@ header h1{
       <button class="module" type="button" data-app="wortschatz/"><div class="icon-wrap"><img src="wortschatz/icon.png" alt=""></div><div class="name">Wortschatz</div><div class="status">&nbsp;</div></button>
       <button class="module" type="button" data-app="pronomen/"><div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div><div class="name">Pronomen</div><div class="status">&nbsp;</div></button>
     </section>
+
+    <section class="today" aria-label="Heutige Statistik">
+      <h2 class="today-title">Heute</h2>
+      <div class="today-row"><strong>Artikel</strong><span id="todayArtikel">0 Antworten · 0 richtig</span></div>
+      <div class="today-row"><strong>Verbformen</strong><span>—</span></div>
+      <div class="today-row"><strong>Wortschatz</strong><span>noch offen</span></div>
+      <div class="today-row"><strong>Pronomen</strong><span>—</span></div>
+      <div class="today-total" id="todayTotal">0 Übungen heute</div>
+    </section>
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v2.6</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v2.7</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -272,6 +315,21 @@ header h1{
   </section>
 
   <script>
+
+    const DAILY_STATS_KEY='deutschDailyStatsV1';
+    function localDayKey(){
+      const d=new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+    function renderDailyStats(){
+      let data={};
+      try{ data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}'); }catch(e){}
+      if(data.date!==localDayKey()) data={};
+      const a=data.artikel||{answers:0,correct:0};
+      document.getElementById('todayArtikel').textContent=`${a.answers} Antworten · ${a.correct} richtig`;
+      document.getElementById('todayTotal').textContent=`${a.answers} Übungen heute`;
+    }
+
     const shell = document.getElementById('appShell');
     const frame = document.getElementById('appFrame');
     const back = document.getElementById('homeBack');
@@ -286,6 +344,7 @@ header h1{
     });
 
     function closeApp() {
+      renderDailyStats();
       shell.classList.remove('open');
       shell.setAttribute('aria-hidden', 'true');
       document.documentElement.classList.remove('app-open');
@@ -293,6 +352,7 @@ header h1{
     }
 
     back.addEventListener('click', closeApp);
+    renderDailyStats();
   </script>
 
 </body>
