@@ -120,7 +120,27 @@ function newDeck(){
 }
 function current(){return deck[index]}
 function render(){const w=current();$('word').textContent=w.word;$('translation').textContent=w.translation;$('feedback').className='feedback';$('choices').style.display='grid';$('card').style.display='flex';$('question').textContent=`${total+1}/${sessionSize}`}
-function choose(article){const w=current(),ok=article===w.article;total++; updateDifficulty(w,ok); if(ok){correct++;streak++;score+=10+Math.min(streak,5)*2}else{streak=0}
+
+const DAILY_STATS_KEY='deutschDailyStatsV1';
+function localDayKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function recordDailyArtikel(ok){
+  try{
+    const today=localDayKey();
+    let data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}');
+    if(data.date!==today){
+      data={date:today,artikel:{answers:0,correct:0}};
+    }
+    if(!data.artikel) data.artikel={answers:0,correct:0};
+    data.artikel.answers++;
+    if(ok) data.artikel.correct++;
+    localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(data));
+  }catch(e){}
+}
+
+function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(ok){correct++;streak++;score+=10+Math.min(streak,5)*2}else{streak=0}
  $('score').textContent=score;$('correct').textContent=`${correct}/${total}`;$('streak').textContent=streak;$('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>. +${10+Math.min(streak,5)*2} points`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;document.querySelector('.answer-word').className='answer-word article-'+w.article;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleText').textContent='';$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; score=0; total=0; correct=0; streak=0;
