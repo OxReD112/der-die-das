@@ -109,12 +109,42 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 
 .result-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}
 .result-head .state{margin-bottom:0}
-.vowel-pattern{color:#8f908e;font-size:12px;letter-spacing:.12em;text-transform:lowercase;white-space:nowrap}
-.good .vowel-pattern{color:rgba(91,200,164,.72)}
-.bad .vowel-pattern{color:rgba(255,119,112,.72)}
+.vowel-pattern{color:#929391;font-size:13px;letter-spacing:.12em;text-transform:lowercase;white-space:nowrap}
+.good .vowel-pattern{color:#929391}
+.bad .vowel-pattern{color:#929391}
 @media(max-width:600px){
  .result-head{margin-bottom:9px}
- .vowel-pattern{font-size:10px;letter-spacing:.10em}
+ .vowel-pattern{font-size:11px;letter-spacing:.10em}
+}
+
+
+/* v20: iPhone overscroll mask + mode label restored above the verb */
+.mode-top{visibility:hidden}
+.card{position:relative}
+.mode-inline{
+  position:absolute;
+  left:0;right:0;
+  top:-4px;
+  text-align:center;
+  color:#6f706f;
+  font:500 11px/1 system-ui,-apple-system,sans-serif;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+/* During rubber-band overscroll Safari can reveal the card content above
+   the header. This fixed strip paints that exposed area with the page bg. */
+@media(max-width:600px){
+ body::before{
+   content:"";
+   position:fixed;
+   z-index:999;
+   top:0;left:0;right:0;
+   height:54px;
+   background:#17181a;
+   pointer-events:none;
+ }
+ html,body{overscroll-behavior-y:none}
 }
 
 </style>
@@ -132,9 +162,10 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  </section>
 
  <section id="study" class="hidden">
-  <div class="top"><span class="brand">Verbformen.</span><span class="mode">Partizip II</span><span id="count"></span></div>
+  <div class="top"><span class="brand">Verbformen.</span><span class="mode mode-top">Partizip II</span><span id="count"></span></div>
   <div class="progress"><i id="bar"></i></div>
   <section class="card">
+   <div class="mode-inline">Partizip II</div>
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
    <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
@@ -173,7 +204,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v19</div>
+<div class="version-tag">v21</div>
 
 <script src="verbs.js"></script>
 <script>
