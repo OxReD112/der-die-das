@@ -1743,6 +1743,70 @@ header h1{
   )!important;
 }
 
+
+/* Home v4.7 — softer compact state glow in portrait-card bottom-right corner */
+.mosaic .tile-small::after{
+  right:-47px!important;
+  bottom:-47px!important;
+  width:94px!important;
+  height:94px!important;
+  background:radial-gradient(
+    circle at 50% 50%,
+    rgba(255,118,109,.78) 0%,
+    rgba(255,101,93,.55) 18%,
+    rgba(255,91,84,.28) 38%,
+    rgba(255,91,84,.10) 55%,
+    transparent 74%
+  )!important;
+}
+.mosaic .tile-small.is-done::after{
+  background:radial-gradient(
+    circle at 50% 50%,
+    rgba(111,235,199,.78) 0%,
+    rgba(87,224,187,.55) 18%,
+    rgba(74,214,176,.28) 38%,
+    rgba(74,214,176,.10) 55%,
+    transparent 74%
+  )!important;
+}
+
+
+/* Home v4.8 — Wortschatz artwork follows the same card-crop logic:
+   full card height, natural width, left aligned; status glow remains above it. */
+.mosaic .tile-vocab{
+  overflow:hidden!important;
+}
+
+/* The Wortschatz image itself: no baked-in card shape needed. */
+.mosaic .tile-vocab .tile-image{
+  position:absolute!important;
+  z-index:1!important;
+  left:0!important;
+  top:0!important;
+  bottom:auto!important;
+  width:auto!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  display:block!important;
+}
+
+/* Keep the existing Wortschatz glow layers above the artwork. */
+.mosaic .tile-vocab::before,
+.mosaic .tile-vocab::after{
+  z-index:2!important;
+  pointer-events:none!important;
+}
+
+/* Copy stays on top of artwork + glow. */
+.mosaic .tile-vocab .tile-copy,
+.mosaic .tile-vocab .name,
+.mosaic .tile-vocab .status{
+  position:relative!important;
+  z-index:4!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1797,7 +1861,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.6</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.8</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
