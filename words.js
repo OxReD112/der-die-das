@@ -759,57 +759,57 @@ window.WORDS = [
     "word": "Student",
     "article": "der",
     "translation": "студент",
-    "ruleType": "suffix",
-    "ruleLabel": "-ENT ENDING",
-    "explanation": "Many nouns for male persons ending in -ent are masculine.",
+    "ruleType": "category",
+    "ruleLabel": "MALE PERSON",
+    "explanation": "It refers to a male person, so it takes der.",
     "examples": [
       "der Student",
-      "der Patient",
-      "der Präsident"
+      "der Vater",
+      "der Bruder"
     ],
-    "reliability": "A strong pattern for person nouns."
+    "reliability": "For people, grammatical gender normally follows the person's sex."
   },
   {
     "word": "Patient",
     "article": "der",
     "translation": "пациент",
-    "ruleType": "suffix",
-    "ruleLabel": "-ENT ENDING",
-    "explanation": "Many nouns for male persons ending in -ent are masculine.",
+    "ruleType": "category",
+    "ruleLabel": "MALE PERSON",
+    "explanation": "It refers to a male person, so it takes der.",
     "examples": [
-      "der Student",
       "der Patient",
-      "der Präsident"
+      "der Vater",
+      "der Bruder"
     ],
-    "reliability": "A strong pattern for person nouns."
+    "reliability": "For people, grammatical gender normally follows the person's sex."
   },
   {
     "word": "Direktor",
     "article": "der",
     "translation": "директор",
-    "ruleType": "suffix",
-    "ruleLabel": "-OR ENDING",
-    "explanation": "Many nouns ending in -or are masculine.",
+    "ruleType": "category",
+    "ruleLabel": "MALE PERSON",
+    "explanation": "It refers to a male person, so it takes der.",
     "examples": [
-      "der Motor",
       "der Direktor",
-      "der Autor"
+      "der Vater",
+      "der Bruder"
     ],
-    "reliability": "A useful pattern, but not an absolute rule."
+    "reliability": "For people, grammatical gender normally follows the person's sex."
   },
   {
     "word": "Autor",
     "article": "der",
     "translation": "автор",
-    "ruleType": "suffix",
-    "ruleLabel": "-OR ENDING",
-    "explanation": "Many nouns ending in -or are masculine.",
+    "ruleType": "category",
+    "ruleLabel": "MALE PERSON",
+    "explanation": "It refers to a male person, so it takes der.",
     "examples": [
-      "der Motor",
-      "der Direktor",
-      "der Autor"
+      "der Autor",
+      "der Vater",
+      "der Bruder"
     ],
-    "reliability": "A useful pattern, but not an absolute rule."
+    "reliability": "For people, grammatical gender normally follows the person's sex."
   },
   {
     "word": "Motor",
