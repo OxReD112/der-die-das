@@ -190,6 +190,15 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  }
 }
 
+
+/* v27: dedicated final-session score */
+.final-score{
+  margin:18px 0 12px;
+  color:#f1eee8;
+  font:500 34px/1.05 Georgia,serif;
+  letter-spacing:-.03em;
+}
+
 </style>
 </head>
 <body>
@@ -243,11 +252,12 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 
  <section id="finish" class="finish hidden">
   <h2>Done.</h2>
-  <p id="summary"></p>
+  <div id="finalScore" class="final-score"></div>
+   <p id="summary"></p>
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v26</div>
+<div class="version-tag">v27</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -382,7 +392,8 @@ function next(){
 function finishSession(){
  $("study").classList.add("hidden");
  $("finish").classList.remove("hidden");
- $("summary").textContent=correctCount+" of "+deck.length+" correct. Difficult verbs will have a better chance of returning in a future session.";
+ $("finalScore").textContent=correctCount+" / "+deck.length;
+ $("summary").textContent="Difficult verbs will have a better chance of returning in a future session.";
 }
 
 document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
