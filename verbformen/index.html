@@ -132,26 +132,36 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   text-transform:uppercase;
   pointer-events:none;
 }
-/* During rubber-band overscroll Safari can reveal the card content above
-   the header. This fixed strip paints that exposed area with the page bg. */
+
+
+
+
+
+
+/* v23: overscroll mask lives inside the app stacking context */
 @media(max-width:600px){
- body::before{
+ .app::before{
    content:"";
    position:fixed;
-   z-index:999;
-   top:0;left:0;right:0;
-   height:54px;
-   background:#17181a;
+   z-index:40;
+   top:0;
+   left:50%;
+   transform:translateX(-50%);
+   width:min(100%,480px);
+   height:max(58px,calc(env(safe-area-inset-top) + 42px));
+   background:var(--bg);
    pointer-events:none;
  }
+ .top{
+   position:sticky;
+   top:0;
+   z-index:50;
+ }
+ .progress{
+   position:sticky;
+   z-index:50;
+ }
  html,body{overscroll-behavior-y:none}
-}
-
-
-/* v22: header must sit above the iPhone overscroll mask */
-.top{
-  position:relative;
-  z-index:1001;
 }
 
 </style>
@@ -211,7 +221,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v22</div>
+<div class="version-tag">v23</div>
 
 <script src="verbs.js"></script>
 <script>
