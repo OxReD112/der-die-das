@@ -710,6 +710,128 @@ header h1{
   }
 }
 
+
+/* Home v3.4 — asymmetric mosaic */
+.dashboard.mosaic{
+  width:min(100%,430px)!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,188px)!important;
+  gap:12px!important;
+}
+
+.mosaic .tile{
+  position:relative;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+  border-radius:28px!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  background:rgba(255,255,255,.018)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+}
+
+.mosaic .tile-vocab{
+  grid-column:1;
+  grid-row:1;
+  border-color:rgba(255,105,96,.42)!important;
+  background:
+    radial-gradient(circle at 48% 33%,rgba(255,76,69,.27),transparent 52%),
+    rgba(255,255,255,.014)!important;
+  box-shadow:inset 0 0 34px rgba(255,76,69,.07)!important;
+}
+
+.mosaic .tile-verbs{grid-column:2;grid-row:1}
+.mosaic .tile-pronouns{grid-column:1;grid-row:2}
+.mosaic .tile-articles{grid-column:2;grid-row:2}
+
+.mosaic .tile-art{
+  position:absolute;
+  top:9px;
+  left:50%;
+  transform:translateX(-50%);
+  width:118px!important;
+  height:118px!important;
+  margin:0!important;
+  pointer-events:none;
+}
+.mosaic .tile-art img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:0!important;
+}
+
+.mosaic .tile-vocab .tile-art{
+  top:-7px;
+  width:160px!important;
+  height:145px!important;
+  filter:drop-shadow(0 0 15px rgba(65,225,184,.20));
+}
+
+.mosaic .tile-copy{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:0 10px 17px;
+  text-align:center;
+}
+.mosaic .name{
+  margin:0!important;
+  font-size:16px!important;
+  line-height:1.12!important;
+  font-weight:650!important;
+  text-align:center!important;
+}
+.mosaic .status{
+  min-height:14px;
+  margin-top:5px!important;
+  color:var(--muted)!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+  text-align:center!important;
+}
+
+.mosaic .tile-vocab.is-done{
+  border-color:rgba(87,222,184,.46)!important;
+  background:
+    radial-gradient(circle at 48% 33%,rgba(58,215,174,.27),transparent 52%),
+    rgba(255,255,255,.014)!important;
+}
+.mosaic .tile-vocab.is-done .status{color:var(--mint)!important}
+
+.daily-score{
+  width:min(100%,430px)!important;
+  margin:24px auto 0!important;
+  padding-top:17px!important;
+}
+
+@media(max-width:430px){
+  .dashboard.mosaic,.daily-score{width:min(100%,350px)!important}
+  .dashboard.mosaic{
+    grid-template-rows:repeat(2,160px)!important;
+    gap:10px!important;
+  }
+  .mosaic .tile{border-radius:24px!important}
+  .mosaic .tile-art{
+    top:7px;
+    width:98px!important;
+    height:98px!important;
+  }
+  .mosaic .tile-vocab .tile-art{
+    top:-6px;
+    width:142px!important;
+    height:128px!important;
+  }
+  .mosaic .tile-copy{padding-bottom:14px}
+  .mosaic .name{font-size:15px!important}
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -718,35 +840,38 @@ header h1{
   <main class="page">
     <header><h1>Deutsch.</h1></header>
     <p class="intro">Was möchtest du heute üben?</p>
-    <section class="dashboard" aria-label="Übungen">
-      <button class="vocab-hero module" type="button" data-app="wortschatz/?v=2.1">
-        <div class="vocab-art"><img src="wortschatz/icon.png" alt=""></div>
-        <div class="vocab-copy">
+    <section class="dashboard mosaic" aria-label="Übungen">
+      <button class="tile tile-vocab module" type="button" data-app="wortschatz/?v=2.1">
+        <div class="tile-art vocab-art"><img src="wortschatz/icon.png" alt=""></div>
+        <div class="tile-copy">
           <div class="name">Wortschatz</div>
           <div class="status">noch offen</div>
         </div>
-        <div class="hero-arrow">›</div>
       </button>
 
-      <div class="small-grid">
-        <button class="small-module module" type="button" data-app="artikel/?v=2.2">
-          <div class="icon-wrap"><img src="artikel/icon.png" alt=""></div>
-          <div class="name">Artikel</div>
-          <div class="status" id="artikelStatus">0 / 50</div>
-        </button>
-
-        <button class="small-module module" type="button" data-app="verbformen/?v=2.1">
-          <div class="icon-wrap"><img src="verbformen/icon.png" alt=""></div>
+      <button class="tile tile-small tile-verbs module" type="button" data-app="verbformen/?v=2.1">
+        <div class="tile-art"><img src="verbformen/icon.png" alt=""></div>
+        <div class="tile-copy">
           <div class="name">Verbformen</div>
           <div class="status">0 / 30</div>
-        </button>
+        </div>
+      </button>
 
-        <button class="small-module module" type="button" data-app="pronomen/?v=2.1">
-          <div class="icon-wrap"><img src="pronomen/icon.png" alt=""></div>
+      <button class="tile tile-small tile-pronouns module" type="button" data-app="pronomen/?v=2.1">
+        <div class="tile-art"><img src="pronomen/icon.png" alt=""></div>
+        <div class="tile-copy">
           <div class="name">Pronomen</div>
           <div class="status">0 / 20</div>
-        </button>
-      </div>
+        </div>
+      </button>
+
+      <button class="tile tile-small tile-articles module" type="button" data-app="artikel/?v=2.2">
+        <div class="tile-art"><img src="artikel/icon.png" alt=""></div>
+        <div class="tile-copy">
+          <div class="name">Artikel</div>
+          <div class="status" id="artikelStatus">0 / 50</div>
+        </div>
+      </button>
     </section>
   
     <section class="daily-score" aria-label="Tagesziel">
@@ -758,7 +883,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.3</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v3.4</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
