@@ -1326,6 +1326,96 @@ header h1{
   border-color:rgba(255,255,255,.09)!important;
 }
 
+
+/* Home v4.0 — tighter, punchier state glows */
+
+/* Wortschatz: concentrated light in the two state corners.
+   Strong core, then a fast falloff instead of a broad wash. */
+.mosaic .tile-vocab::before{
+  background:
+    radial-gradient(circle at 100% 0%,
+      rgba(255,72,65,.58) 0%,
+      rgba(255,72,65,.38) 10%,
+      rgba(255,72,65,.18) 20%,
+      rgba(255,72,65,.055) 30%,
+      transparent 40%),
+    radial-gradient(circle at 0% 100%,
+      rgba(255,72,65,.62) 0%,
+      rgba(255,72,65,.40) 10%,
+      rgba(255,72,65,.19) 20%,
+      rgba(255,72,65,.055) 30%,
+      transparent 40%)!important;
+}
+.mosaic .tile-vocab::after{
+  background:
+    radial-gradient(circle at 100% 0%,
+      rgba(255,88,78,.26) 0%,
+      rgba(255,88,78,.10) 16%,
+      transparent 31%),
+    radial-gradient(circle at 0% 100%,
+      rgba(255,88,78,.28) 0%,
+      rgba(255,88,78,.11) 16%,
+      transparent 31%)!important;
+}
+
+/* Wortschatz done: same compact shape, mint instead of red. */
+.mosaic .tile-vocab.is-done::before{
+  background:
+    radial-gradient(circle at 100% 0%,
+      rgba(69,218,178,.54) 0%,
+      rgba(69,218,178,.34) 10%,
+      rgba(69,218,178,.16) 20%,
+      rgba(69,218,178,.05) 30%,
+      transparent 40%),
+    radial-gradient(circle at 0% 100%,
+      rgba(69,218,178,.58) 0%,
+      rgba(69,218,178,.36) 10%,
+      rgba(69,218,178,.17) 20%,
+      rgba(69,218,178,.05) 30%,
+      transparent 40%)!important;
+}
+.mosaic .tile-vocab.is-done::after{
+  background:
+    radial-gradient(circle at 100% 0%,
+      rgba(69,218,178,.23) 0%,
+      rgba(69,218,178,.09) 16%,
+      transparent 31%),
+    radial-gradient(circle at 0% 100%,
+      rgba(69,218,178,.25) 0%,
+      rgba(69,218,178,.10) 16%,
+      transparent 31%)!important;
+}
+
+/* Compact cards: two small bright pools in the lower corners,
+   with a much quicker fade than v3.9. */
+.mosaic .tile-small::after{
+  height:46%!important;
+  background:
+    radial-gradient(circle at 0% 100%,
+      rgba(255,88,82,.36) 0%,
+      rgba(255,88,82,.20) 12%,
+      rgba(255,88,82,.075) 24%,
+      transparent 39%),
+    radial-gradient(circle at 100% 100%,
+      rgba(255,88,82,.36) 0%,
+      rgba(255,88,82,.20) 12%,
+      rgba(255,88,82,.075) 24%,
+      transparent 39%)!important;
+}
+.mosaic .tile-small.is-done::after{
+  background:
+    radial-gradient(circle at 0% 100%,
+      rgba(69,218,178,.36) 0%,
+      rgba(69,218,178,.20) 12%,
+      rgba(69,218,178,.075) 24%,
+      transparent 39%),
+    radial-gradient(circle at 100% 100%,
+      rgba(69,218,178,.36) 0%,
+      rgba(69,218,178,.20) 12%,
+      rgba(69,218,178,.075) 24%,
+      transparent 39%)!important;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1380,7 +1470,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v3.9</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.0</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
