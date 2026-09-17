@@ -27,7 +27,7 @@ button{font:inherit}
  .feedback.show{touch-action:pan-y;will-change:transform,opacity}
  .feedback.swiping{transition:none}
  .feedback.snapback{transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .22s ease}
- .feedback.swipeout{transition:transform .24s cubic-bezier(.4,0,.7,.2),opacity .20s ease}
+ .feedback.swipeout{transition:transform .18s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
 }.feedback.show{display:block}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 .answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
@@ -72,7 +72,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.8</div>
+<div class="version">v2.9</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -205,7 +205,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
 // Mobile reveal navigation: swipe left for the next word.
 (()=>{
  const panel=$("feedback");
- let startX=0,startY=0,dx=0,tracking=false,locked=false;
+ let startX=0,startY=0,startT=0,dx=0,tracking=false,locked=false;
  const reset=()=>{
    panel.classList.remove("swiping","swipeout");
    panel.classList.add("snapback");
@@ -215,14 +215,14 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
  };
  panel.addEventListener("pointerdown",e=>{
    if(innerWidth>=700||!panel.classList.contains("show")||e.pointerType==="mouse")return;
-   startX=e.clientX;startY=e.clientY;dx=0;tracking=true;locked=false;
+   startX=e.clientX;startY=e.clientY;startT=performance.now();dx=0;tracking=true;locked=false;
  });
  panel.addEventListener("pointermove",e=>{
    if(!tracking)return;
    const x=e.clientX-startX,y=e.clientY-startY;
    if(!locked){
      if(Math.abs(x)<8&&Math.abs(y)<8)return;
-     if(Math.abs(y)>Math.abs(x)){tracking=false;return}
+     if(Math.abs(y)>Math.abs(x)*1.35){tracking=false;return}
      locked=true;
    }
    dx=Math.min(0,x); // left only
@@ -233,7 +233,8 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
  const finish=()=>{
    if(!tracking)return;
    tracking=false;
-   if(locked&&dx<-72){
+   const elapsed=Math.max(1,performance.now()-startT),velocity=-dx/elapsed;
+   if(locked&&(dx<-35||(dx<-18&&velocity>.45))){
      panel.classList.remove("swiping","snapback");
      panel.classList.add("swipeout");
      panel.style.transform="translateX(-115vw) rotate(-8deg)";
@@ -243,7 +244,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
        panel.style.transform="";
        panel.style.opacity="";
        next();
-     },240);
+     },180);
    }else reset();
  };
  panel.addEventListener("pointerup",finish);
