@@ -32,8 +32,8 @@ button{font:inherit}
 .detail{position:relative;border-top:1px solid #444448;padding-top:30px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:18px;font-size:14px;color:#737a78}
 .continue{margin-top:26px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
-.keyboard{display:none;width:calc(100% + 24px);margin:20px -12px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:24px}
-.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:21px}.row.third{justify-content:flex-end}.row.third .back{flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px);color:var(--mint);border-color:color-mix(in srgb,var(--mint) 55%,transparent);font-size:22px;font-weight:500}
+.keyboard{display:none;width:100%;margin-top:20px;padding-top:12px}
+.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:20px}.row.third{justify-content:flex-end}.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px);color:var(--mint);border-color:color-mix(in srgb,var(--mint) 55%,transparent);font-size:22px;font-weight:500}
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}.sentence,.answerSentence{font-size:30px}.translation{font-size:17px}.answerTranslation{font-size:19px}.inputbox{height:60px;margin-top:28px}.check{display:none}.keyboard{display:none}.keyboard.show{display:block}.targetForm{margin-top:28px}.speak{margin-bottom:27px}.detail{padding-top:24px}}
@@ -49,11 +49,10 @@ button{font:inherit}
   <div class="translation" id="translation"></div>
   <button class="check" id="desktopCheck">Check</button>
   <div class="keyboard" id="keyboard">
-   <div class="row" data-keys="qwertyuiop"></div>
-   <div class="row" data-keys="asdfghjkl"></div>
-   <div class="row" data-keys="zxcvbnm"></div>
-   <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key" data-key="ß">ß</button><button class="key back" data-key="BACK">⌫</button></div>
-   <button class="kcheck" id="mobileCheck">Check</button>
+   <div class="row" data-keys="QWERTYUIOP"></div>
+   <div class="row" data-keys="ASDFGHJKL"></div>
+   <div class="row third" data-keys="ZXCVBNM"><button class="key back" data-key="BACK">⌫</button></div>
+   <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key" data-key="ß">ß</button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
   </div>
  </div>
  <div class="feedback" id="feedback">
@@ -67,7 +66,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.4</div>
+<div class="version">v2.5</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -193,7 +192,7 @@ $("addWords").onclick=addFive;
 $("desktopCheck").onclick=check;$("continue").onclick=next;
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
 $("speak").onclick=()=>{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(current.revealed);u.lang="de-DE";u.rate=.88;speechSynthesis.speak(u)};
-document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch;b.textContent=ch;row.insertBefore(b,back)}});
+document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
 $("keyboard").addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
 build();
 </script></body></html>
