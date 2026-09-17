@@ -73,7 +73,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.12</div>
+<div class="version">v2.13</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -202,7 +202,7 @@ document.addEventListener("keydown",e=>{
  if(!$("feedback").classList.contains("show"))return;
  e.preventDefault();next();
 });
-$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
 // Keyboard press feedback
 (()=>{const kb=$("keyboard");if(!kb)return;const release=()=>kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));kb.addEventListener("touchstart",e=>{const key=e.target.closest(".key");if(key)key.classList.add("is-pressed")},{passive:true});kb.addEventListener("touchend",release,{passive:true});kb.addEventListener("touchcancel",release,{passive:true})})();
 // Mobile reveal navigation: Tinder-like drag left for the next word.
