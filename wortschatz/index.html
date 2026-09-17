@@ -62,13 +62,7 @@ button{font:inherit}
   </div>
   <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Check</button>
-  <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
-   <div class="row" data-keys="QWERTYUIOP"></div>
-   <div class="row" data-keys="ASDFGHJKL"></div>
-   <div class="row third" data-keys="ßZXCVBNM"><button class="key back" data-key="BACK">⌫</button></div>
-   <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
-  </div>
- </div>
+  <div class="keyboard" id="keyboard"></div>
  <div class="feedbackShell" id="feedbackShell">
   <div class="feedback" id="feedback">
    <div class="topZone answerTop" id="answerTop">
@@ -88,7 +82,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.54</div>
+<div class="version">v2.55</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -345,7 +339,12 @@ function speakCurrent(){
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
-document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
-$("keyboard").addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
-build();
+async function initKeyboard(){
+  const keyboard=$("keyboard");
+  const html=await fetch("../components/deutsch-keyboard.html").then(r=>{if(!r.ok)throw new Error("Keyboard component failed to load");return r.text()});
+  keyboard.innerHTML=html;
+  document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
+  keyboard.addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
+}
+initKeyboard().then(()=>build()).catch(e=>{console.error(e);build()});
 </script></body></html>
