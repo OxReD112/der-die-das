@@ -1935,16 +1935,17 @@ header h1{
 }
 
 
-/* Home v4.15 — solid iPhone top overscroll shield.
-   Covers the safe-area + space above the fixed title without moving the layout. */
+/* Home v4.16 — continuous top mask for Safari/Home Screen overscroll.
+   Start well above the visual viewport so iOS cannot expose scrolling tiles
+   above the fixed Deutsch header. The layout itself is untouched. */
 body::before{
   content:"";
   position:fixed;
   z-index:19;
-  top:0;
+  top:-120px;
   left:0;
   right:0;
-  height:calc(env(safe-area-inset-top) + 54px);
+  height:calc(120px + env(safe-area-inset-top) + 62px);
   background:var(--bg);
   pointer-events:none;
 }
@@ -2007,7 +2008,7 @@ body::before{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.15</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.16</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
