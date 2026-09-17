@@ -35,7 +35,7 @@ button{font:inherit}
 .feedbackShell .continue{margin-top:18px}
 @media(max-width:699px){.feedbackShell{touch-action:pan-y;will-change:transform,opacity}}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
-.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;margin-left:7px;padding:0;border:0;background:transparent;color:#aabdb7;line-height:1;vertical-align:baseline;cursor:pointer}.speakTopIcon{display:block;width:100%;height:100%}.audioIcon{display:block;width:100%;height:100%;overflow:visible}.audioIcon .outline{fill:none;stroke:currentColor;stroke-width:1.5px;stroke-miterlimit:10}.audioIcon .round{fill:none;stroke:currentColor;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:round}.audioIcon .cutout{fill:#202023;stroke:currentColor;stroke-width:1.5px;stroke-miterlimit:10}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
+.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:inline-flex;align-items:center;justify-content:center;width:1.3em;height:1.3em;margin-left:7px;padding:0;border:0;background:transparent;line-height:1;vertical-align:middle;cursor:pointer}.speakTopIcon{display:block;width:100%;height:100%;object-fit:contain;vertical-align:middle}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
 .targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
 .diffBlock{display:none;margin-top:26px;padding-bottom:28px;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
@@ -72,15 +72,7 @@ button{font:inherit}
  <div class="feedbackShell" id="feedbackShell">
   <div class="feedback" id="feedback">
    <div class="topZone answerTop" id="answerTop">
-    <div class="answerSentence" id="answerSentence"></div><button class="speakTop" id="speakTop" aria-label="Hear sentence"><span class="speakTopIcon" aria-hidden="true">
-      <svg class="audioIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path class="round" d="M16.2,18.1H7.9l1.2-2.2h5.8l1.3,2.2Z"/>
-        <rect class="outline" x="2.4" y="5.7" width="19.2" height="12.5" rx="2" ry="2"/>
-        <rect class="cutout" x="6.3" y="9.6" width="11.4" height="3.2" rx="1.6" ry="1.6"/>
-        <rect class="cutout" x="6.3" y="9.6" width="3.2" height="3.2" rx="1.6" ry="1.6"/>
-        <rect class="cutout" x="14.6" y="9.6" width="3.2" height="3.2" rx="1.6" ry="1.6"/>
-      </svg>
-    </span></button>
+    <div class="answerSentence" id="answerSentence"></div><button class="speakTop" id="speakTop" aria-label="Hear sentence"><img class="speakTopIcon" src="components/icons/Audio.svg" alt="" aria-hidden="true"></button>
     <div class="answerTranslation" id="answerTranslation"></div>
    </div>
    <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow">↓</div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
@@ -94,7 +86,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.27</div>
+<div class="version">v2.28</div>
 </main>
 <script src="words.js"></script>
 <script>
