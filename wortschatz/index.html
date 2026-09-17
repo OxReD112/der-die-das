@@ -18,7 +18,7 @@ button{font:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
-.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:690px}.blank{color:var(--mint);font-weight:600}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
+.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:690px}.blank{display:inline-block;width:2.8em;height:.82em;border-bottom:2px solid rgba(243,241,237,.72);vertical-align:baseline;margin:0 .08em}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
@@ -67,7 +67,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.3</div>
+<div class="version">v2.4</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -122,7 +122,7 @@ function build(cards=null){
  publishWortschatzStatus(queue.length===0);
  render();
 }
-function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank'>[…]</span>")}
+function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank' aria-label='missing word'></span>")}
 function revealHTML(c){
  let escaped=c.revealed.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
  const ts=targetParts(c); for(const t of ts){let e=t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");escaped=escaped.replace(new RegExp(e),"<span class='target'>"+t+"</span>")}
