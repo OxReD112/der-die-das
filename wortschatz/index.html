@@ -22,12 +22,12 @@ button{font:inherit}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
-.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate}
+.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;border:1px solid rgba(255,255,255,.10);border-radius:28px;background:#202023;padding:30px 24px 24px;overflow:hidden;transform-origin:center center}
 @media(max-width:699px){
  .feedback.show{touch-action:pan-y;will-change:transform,opacity}
  .feedback.swiping{transition:none}
  .feedback.snapback{transition:transform .19s cubic-bezier(.2,.8,.2,1),opacity .19s ease}
- .feedback.swipeout{transition:transform .18s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
+ .feedback.swipeout{transition:transform .19s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
 }.feedback.show{display:block}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 .answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
@@ -40,6 +40,7 @@ button{font:inherit}
 .continue{margin-top:26px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .keyboard{display:none;width:100%;margin-top:20px;padding-top:12px}
 .keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:20px}.row.third{justify-content:flex-end}.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:color-mix(in srgb,var(--mint) 55%,transparent);font-size:22px;font-weight:500}
+@media(max-width:699px){.keyboard .key{transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}.keyboard .key:active,.keyboard .key.is-pressed{transform:scale(1.08);background:#303034;border-color:#56565c;position:relative;z-index:3}.keyboard .key.ok:active,.keyboard .key.ok.is-pressed{border-color:var(--mint)}}
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .sentence{order:1}#question .translation{order:2}#question .inputbox{order:3}#question .check{order:4}#question .keyboard{order:5}.sentence,.answerSentence{font-size:30px}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:19px}.inputbox{height:60px;margin-top:28px}.check{display:none}.keyboard{display:none}.keyboard.show{display:block}.targetForm{margin-top:28px}.speak{margin-bottom:27px}.detail{padding-top:24px}}
@@ -72,7 +73,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.11</div>
+<div class="version">v2.12</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -202,6 +203,8 @@ document.addEventListener("keydown",e=>{
  e.preventDefault();next();
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
+// Keyboard press feedback
+(()=>{const kb=$("keyboard");if(!kb)return;const release=()=>kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));kb.addEventListener("touchstart",e=>{const key=e.target.closest(".key");if(key)key.classList.add("is-pressed")},{passive:true});kb.addEventListener("touchend",release,{passive:true});kb.addEventListener("touchcancel",release,{passive:true})})();
 // Mobile reveal navigation: Tinder-like drag left for the next word.
 (()=>{
  const panel=$("feedback");
@@ -228,7 +231,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    finishing=true; tracking=false;
    panel.classList.remove("swiping","snapback");
    panel.classList.add("swipeout");
-   panel.style.transform="translateX(-115vw) rotate(-8deg)";
+   panel.style.transform="translateX(-115vw) rotate(-8deg) scale(.92)";
    panel.style.opacity="0";
    setTimeout(()=>{
      clean();
@@ -268,7 +271,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    const left=Math.min(0,dx);
    panel.classList.add("swiping");
    // Card follows the finger continuously, Tinder-style.
-   panel.style.transform=`translateX(${left}px) rotate(${left/48}deg)`;
+   const shrink=Math.max(.93,1-Math.abs(left)/1800); panel.style.transform=`translateX(${left}px) rotate(${left/48}deg) scale(${shrink})`;
    panel.style.opacity=String(Math.max(.55,1-Math.abs(left)/520));
  },{passive:false});
 
