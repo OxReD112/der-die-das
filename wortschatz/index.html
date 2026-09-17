@@ -26,7 +26,7 @@ button{font:inherit}
 @media(max-width:699px){
  .feedback.show{touch-action:pan-y;will-change:transform,opacity}
  .feedback.swiping{transition:none}
- .feedback.snapback{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .16s ease}
+ .feedback.snapback{transition:transform .19s cubic-bezier(.2,.8,.2,1),opacity .19s ease}
  .feedback.swipeout{transition:transform .18s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
 }.feedback.show{display:block}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
@@ -72,7 +72,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.10</div>
+<div class="version">v2.11</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -202,7 +202,7 @@ document.addEventListener("keydown",e=>{
  e.preventDefault();next();
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
-// Mobile reveal navigation: very light swipe/flick left for the next word.
+// Mobile reveal navigation: Tinder-like drag left for the next word.
 (()=>{
  const panel=$("feedback");
  let startX=0,startY=0,lastX=0,startT=0,tracking=false,horizontal=false,finishing=false;
@@ -220,7 +220,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    panel.classList.add("snapback");
    panel.style.transform="";
    panel.style.opacity="";
-   setTimeout(()=>panel.classList.remove("snapback"),180);
+   setTimeout(()=>panel.classList.remove("snapback"),190);
  };
 
  const goNext=()=>{
@@ -228,17 +228,19 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    finishing=true; tracking=false;
    panel.classList.remove("swiping","snapback");
    panel.classList.add("swipeout");
-   panel.style.transform="translateX(-115vw) rotate(-7deg)";
+   panel.style.transform="translateX(-115vw) rotate(-8deg)";
    panel.style.opacity="0";
    setTimeout(()=>{
      clean();
      finishing=false;
      next();
-   },180);
+   },190);
  };
 
  panel.addEventListener("touchstart",e=>{
    if(innerWidth>=700||!panel.classList.contains("show")||finishing||e.touches.length!==1)return;
+   // Interactive controls must remain normal taps, never swipe starters.
+   if(e.target.closest("button,a,input,textarea,select"))return;
    const t=e.touches[0];
    startX=lastX=t.clientX;
    startY=t.clientY;
@@ -254,25 +256,20 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    const dy=t.clientY-startY;
    lastX=t.clientX;
 
+   // Do nothing during tiny finger jitter: a tap stays a tap.
    if(!horizontal){
-     // Decide almost immediately. A leftward movement only needs to dominate
-     // vertical movement slightly; normal vertical scrolling still wins.
-     if(dx>-4)return;
-     if(Math.abs(dx)<6 && Math.abs(dy)<6)return;
-     if(Math.abs(dy)>Math.abs(dx)*1.6){tracking=false;return;}
+     if(Math.hypot(dx,dy)<12)return;
+     if(dx>=0){tracking=false;return;}
+     if(Math.abs(dy)>Math.abs(dx)*1.25){tracking=false;return;}
      horizontal=true;
    }
 
-   if(horizontal){
-     e.preventDefault();
-     const left=Math.min(0,dx);
-     panel.classList.add("swiping");
-     panel.style.transform=`translateX(${left}px) rotate(${left/55}deg)`;
-     panel.style.opacity=String(Math.max(.45,1-Math.abs(left)/360));
-
-     // A tiny deliberate left swipe is enough; no hold and no slow drag.
-     if(left<=-24) goNext();
-   }
+   e.preventDefault();
+   const left=Math.min(0,dx);
+   panel.classList.add("swiping");
+   // Card follows the finger continuously, Tinder-style.
+   panel.style.transform=`translateX(${left}px) rotate(${left/48}deg)`;
+   panel.style.opacity=String(Math.max(.55,1-Math.abs(left)/520));
  },{passive:false});
 
  panel.addEventListener("touchend",()=>{
@@ -280,8 +277,9 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
    const dx=lastX-startX;
    const elapsed=Math.max(1,performance.now()-startT);
    const speed=-dx/elapsed;
-   // Also accept a very short, quick flick.
-   if(horizontal && (dx<=-16 || (dx<=-9 && speed>.12))) goNext();
+
+   // Commit only after a real drag, or a clearly intentional fast flick.
+   if(horizontal && (dx<=-78 || (dx<=-42 && speed>.55))) goNext();
    else snapBack();
  },{passive:true});
 
