@@ -63,6 +63,7 @@ button{font:inherit}
   <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Check</button>
   <div class="keyboard" id="keyboard"></div>
+ </div>
  <div class="feedbackShell" id="feedbackShell">
   <div class="feedback" id="feedback">
    <div class="topZone answerTop" id="answerTop">
@@ -82,7 +83,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.55</div>
+<div class="version">v2.56</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -219,7 +220,7 @@ document.addEventListener("keydown",e=>{
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
 // Keyboard press feedback + iPhone-style letter popup
-(()=>{
+function initKeyboardFeedback(){
  const kb=$("keyboard"),popup=$("keyPopup");
  if(!kb||!popup)return;
  let hideTimer=0;
@@ -246,7 +247,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
  },{passive:true});
  kb.addEventListener("touchend",release,{passive:true});
  kb.addEventListener("touchcancel",release,{passive:true});
-})();
+}
 
 // Mobile reveal navigation: Tinder-like drag left for the next word.
 (()=>{
@@ -345,6 +346,7 @@ async function initKeyboard(){
   keyboard.innerHTML=html;
   document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
   keyboard.addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
+  initKeyboardFeedback();
 }
 initKeyboard().then(()=>build()).catch(e=>{console.error(e);build()});
 </script></body></html>
