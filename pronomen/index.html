@@ -26,8 +26,8 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 .given{font-size:30px;font-weight:650}.correctText{font-size:30px;font-weight:650;margin-top:5px}.bad{color:var(--red)}.good{color:var(--mint)}.skill{margin-top:24px;color:var(--muted);font-size:14px}.continue{width:min(600px,100%);margin-top:25px;border:0;border-radius:15px;padding:15px;background:#eee8df;color:#171719;font-size:17px;font-weight:700}
 .in-session-tables{margin-top:auto;padding-top:30px;justify-content:center;opacity:.22}.in-session-tables .btn{font-size:11px;font-weight:400;padding:7px 10px;border-color:rgba(255,255,255,.06);background:transparent;color:#aaa}
 .done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:#c8c8cc}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-card{width:min(680px,100%);max-height:86vh;overflow:hidden;background:#252527;border:1px solid var(--line);border-radius:24px;padding:14px 22px 18px;display:flex;flex-direction:column}.modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}.close{border:0;background:transparent;color:white;font-size:28px}.modal #modalBody{overflow:auto;min-height:0;padding-top:0}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}
-.table-subtitle{margin:24px 0 4px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.nom{font-weight:700}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-card{width:min(680px,100%);max-height:86vh;overflow:hidden;background:#252527;border:1px solid var(--line);border-radius:24px;padding:4px 22px 18px;display:flex;flex-direction:column}.modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}.close{border:0;background:transparent;color:white;font-size:28px}.modal #modalBody{overflow:auto;min-height:0;padding-top:0}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}
+.table-subtitle{margin:34px 0 4px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.nom{font-weight:700}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
 @media(min-width:700px){.keyboard{display:none}.answerbox{cursor:text}}
 .third{justify-content:flex-end;padding-left:0}
 .third .back{margin-left:0;flex:0 0 calc(2.5 * calc((100% - 27px)/10) + 4.5px);width:calc(2.5 * calc((100% - 27px)/10) + 4.5px)}
@@ -69,6 +69,14 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
   font-weight:500!important;
 }
 
+
+.possessive-heading{margin-top:22px;margin-bottom:6px}
+
+/* v7.6 — modal table spacing */
+.modalHead{padding-top:4px!important;padding-bottom:4px!important}
+.modalBody{padding-top:0!important}
+.modalBody .possessive-heading{margin-top:28px!important;margin-bottom:4px!important}
+
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -100,7 +108,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.4 · daily stats</div>
+<div class="version">v7.11 · daily stats</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
