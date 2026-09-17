@@ -86,7 +86,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.44</div>
+<div class="version">v2.45</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -220,15 +220,20 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
 (()=>{
  const kb=$("keyboard"),popup=$("keyPopup");
  if(!kb||!popup)return;
+ let hideTimer=0;
  const release=()=>{
    kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));
-   popup.classList.remove("show");
-   popup.textContent="";
+   clearTimeout(hideTimer);
+   hideTimer=setTimeout(()=>{
+     popup.classList.remove("show");
+     popup.textContent="";
+   },50);
  };
  kb.addEventListener("touchstart",e=>{
    const key=e.target.closest(".key");
    if(!key)return;
    key.classList.add("is-pressed");
+   clearTimeout(hideTimer);
    const k=key.dataset.key||"";
    if(k.length!==1)return;
    popup.textContent=key.textContent;
