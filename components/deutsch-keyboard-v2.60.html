@@ -1,0 +1,57 @@
+<!-- Reusable German keyboard component -->
+<style>
+.keyboard{display:none;width:100%;margin-top:20px;padding-top:12px;position:relative}.keyPopup{position:absolute;z-index:20;display:none;align-items:center;justify-content:center;pointer-events:none;width:48px;height:56px;border:1px solid #56565c;border-radius:11px;background:#303034;color:#eee;font-size:25px;font-weight:500;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.18)}.keyPopup.show{display:flex}
+.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);padding:0;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1;flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:20px}.row.third{justify-content:flex-end}.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:color-mix(in srgb,var(--mint) 55%,transparent);font-size:22px;font-weight:500}
+@media(max-width:699px){.keyboard .key{user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}.keyboard .key:active,.keyboard .key.is-pressed{transform:scale(1.08);background:#303034;border-color:#56565c;position:relative;z-index:3}.keyboard .key.ok:active,.keyboard .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:#1b1d1c}}
+@media(max-width:699px){.keyboard{display:none}.keyboard.show{display:block}}
+@media(min-width:700px){.keyboard{display:none!important}}
+</style>
+<div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
+ <div class="row" data-keys="QWERTYUIOP"></div>
+ <div class="row" data-keys="ASDFGHJKL"></div>
+ <div class="row third" data-keys="ßZXCVBNM"><button class="key back" data-key="BACK">⌫</button></div>
+ <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
+</div>
+<script>
+(()=>{
+ const kb=document.getElementById("keyboard"),popup=document.getElementById("keyPopup");
+ if(!kb||!popup)return;
+ let hideTimer=0;
+ const release=()=>{
+   kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));
+   clearTimeout(hideTimer);
+   hideTimer=setTimeout(()=>{popup.classList.remove("show");popup.textContent=""},50);
+ };
+ kb.addEventListener("touchstart",e=>{
+   const key=e.target.closest(".key");if(!key)return;
+   key.classList.add("is-pressed");clearTimeout(hideTimer);
+   const k=key.dataset.key||"";if(k.length!==1)return;
+   popup.textContent=key.textContent;popup.classList.add("show");
+   const kr=key.getBoundingClientRect(),r=kb.getBoundingClientRect(),pr=popup.getBoundingClientRect();
+   popup.style.left=(kr.left-r.left+kr.width/2-pr.width/2)+"px";
+   popup.style.top=(kr.top-r.top-pr.height+1)+"px";
+ },{passive:true});
+ let touchActivated=false;
+ const emit=(b)=>{
+   if(!b)return;
+   kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:b.dataset.key||""}}));
+ };
+ kb.addEventListener("touchend",e=>{
+   const b=e.target.closest("[data-key]");
+   if(b){touchActivated=true;emit(b);setTimeout(()=>{touchActivated=false},450)}
+   release();
+ },{passive:true});
+ kb.addEventListener("touchcancel",release,{passive:true});
+ kb.addEventListener("click",e=>{
+   const b=e.target.closest("[data-key]");if(!b)return;
+   if(touchActivated){e.preventDefault();return}
+   emit(b);
+ });
+ document.querySelectorAll("#keyboard .row[data-keys]").forEach(row=>{
+   const back=row.querySelector(".back");
+   for(const ch of row.dataset.keys){
+     const b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back);
+   }
+ });
+})();
+</script>
