@@ -1904,6 +1904,31 @@ header h1{
   }
 }
 
+
+/* Home v4.13 — extensible Deutsch backup export. */
+.backup-tools{
+  width:min(100%,620px);
+  margin:18px auto 0;
+  text-align:center;
+}
+.backup-save{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  padding:8px 12px;
+  background:transparent;
+  color:#66666b;
+  font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  cursor:pointer;
+}
+.backup-save:active{color:#929298}
+.backup-note{
+  min-height:14px;
+  margin-top:2px;
+  color:#55555a;
+  font-size:10px;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1952,13 +1977,16 @@ header h1{
         <div class="today-progress"><div class="today-progress-fill" id="todayProgress"></div></div>
       </div>
     </section>
-  
-    
+
+    <div class="backup-tools" aria-label="Datensicherung">
+      <button class="backup-save" id="backupSave" type="button">Fortschritt sichern</button>
+      <div class="backup-note" id="backupNote" aria-live="polite"></div>
+    </div>
 
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.12</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.13</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -2083,6 +2111,64 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncHomeDa
 setInterval(syncHomeDashboard,1000);
 
 syncHomeDashboard();
+
+
+/* Deutsch Backup v1.
+   The envelope is intentionally module-based so future exercises can add
+   their own persistent state without changing the export workflow. */
+const DEUTSCH_BACKUP_VERSION=1;
+const BACKUP_MODULES={
+  wortschatz:{
+    storageKey:"wortsternSRSv03",
+    storageVersion:"wortsternSRSv03"
+  }
+};
+
+function buildDeutschBackup(){
+  const modules={};
+  Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
+    const raw=localStorage.getItem(config.storageKey);
+    if(raw===null)return;
+    let state;
+    try{state=JSON.parse(raw)}catch(e){state=raw}
+    modules[moduleName]={
+      storageVersion:config.storageVersion,
+      state
+    };
+  });
+  return {
+    app:"Deutsch",
+    backupVersion:DEUTSCH_BACKUP_VERSION,
+    createdAt:new Date().toISOString(),
+    modules
+  };
+}
+
+function saveDeutschBackup(){
+  const note=document.getElementById("backupNote");
+  try{
+    const backup=buildDeutschBackup();
+    if(!backup.modules.wortschatz){
+      if(note)note.textContent="Noch kein Wortschatz-Fortschritt gefunden.";
+      return;
+    }
+    const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="Deutsch Backup.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    if(note)note.textContent="Backup erstellt.";
+  }catch(e){
+    if(note)note.textContent="Backup konnte nicht erstellt werden.";
+  }
+}
+
+document.getElementById("backupSave")?.addEventListener("click",saveDeutschBackup);
+
 </script>
 
 </body>
