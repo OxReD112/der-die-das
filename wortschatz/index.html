@@ -43,9 +43,9 @@ button{font:inherit}
 .detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
 .continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:#d5d5d7}.continue:active{transform:scale(1.05)}
-.keyboard{display:none;width:100%;margin-top:20px;padding-top:12px}
+.keyboard{display:none;width:100%;margin-top:20px;padding-top:12px;position:relative}.keyPopup{position:absolute;z-index:20;display:none;align-items:center;justify-content:center;pointer-events:none;width:48px;height:56px;border:1px solid #56565c;border-radius:11px;background:#303034;color:#eee;font-size:25px;font-weight:500;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.18)}.keyPopup.show{display:flex}
 .keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid var(--keyline);border-radius:10px;background:var(--key);color:#eee;font-size:20px}.row.third{justify-content:flex-end}.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:color-mix(in srgb,var(--mint) 55%,transparent);font-size:22px;font-weight:500}
-@media(max-width:699px){.keyboard .key{transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}.keyboard .key:active,.keyboard .key.is-pressed{transform:scale(1.08);background:#303034;border-color:#56565c;position:relative;z-index:3}.keyboard .key.ok:active,.keyboard .key.ok.is-pressed{border-color:var(--mint)}}
+@media(max-width:699px){.keyboard .key{transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}.keyboard .key:active,.keyboard .key.is-pressed{transform:scale(1.08);background:#303034;border-color:#56565c;position:relative;z-index:3}.keyboard .key.ok:active,.keyboard .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:#1b1d1c}}
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question .keyboard{order:5}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:13px}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.speakTop{font-size:28px;margin-left:5px;width:1em;height:1em;vertical-align:middle}.sentence,.answerSentence{font-size:28px}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.keyboard{display:none}.keyboard.show{display:block}.targetForm{margin-top:0}.diffBlock{margin-top:22px;padding-bottom:26px;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
@@ -62,7 +62,7 @@ button{font:inherit}
   </div>
   <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Check</button>
-  <div class="keyboard" id="keyboard">
+  <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
    <div class="row" data-keys="QWERTYUIOP"></div>
    <div class="row" data-keys="ASDFGHJKL"></div>
    <div class="row third" data-keys="ßZXCVBNM"><button class="key back" data-key="BACK">⌫</button></div>
@@ -86,7 +86,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.35</div>
+<div class="version">v2.36</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -216,8 +216,31 @@ document.addEventListener("keydown",e=>{
  e.preventDefault();next();
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
-// Keyboard press feedback
-(()=>{const kb=$("keyboard");if(!kb)return;const release=()=>kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));kb.addEventListener("touchstart",e=>{const key=e.target.closest(".key");if(key)key.classList.add("is-pressed")},{passive:true});kb.addEventListener("touchend",release,{passive:true});kb.addEventListener("touchcancel",release,{passive:true})})();
+// Keyboard press feedback + iPhone-style letter popup
+(()=>{
+ const kb=$("keyboard"),popup=$("keyPopup");
+ if(!kb||!popup)return;
+ const release=()=>{
+   kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));
+   popup.classList.remove("show");
+   popup.textContent="";
+ };
+ kb.addEventListener("touchstart",e=>{
+   const key=e.target.closest(".key");
+   if(!key)return;
+   key.classList.add("is-pressed");
+   const k=key.dataset.key||"";
+   if(k.length!==1)return;
+   popup.textContent=key.textContent;
+   popup.classList.add("show");
+   const kr=key.getBoundingClientRect(),kbR=kb.getBoundingClientRect(),pr=popup.getBoundingClientRect();
+   popup.style.left=(kr.left-kbR.left+kr.width/2-pr.width/2)+"px";
+   popup.style.top=(kr.top-kbR.top-pr.height+1)+"px";
+ },{passive:true});
+ kb.addEventListener("touchend",release,{passive:true});
+ kb.addEventListener("touchcancel",release,{passive:true});
+})();
+
 // Mobile reveal navigation: Tinder-like drag left for the next word.
 (()=>{
  const panel=$("feedback"),shell=$("feedbackShell");
