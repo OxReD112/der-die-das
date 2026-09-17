@@ -29,16 +29,17 @@ button{font:inherit}
  .feedback.snapback{transition:transform .19s cubic-bezier(.2,.8,.2,1),opacity .19s ease}
  .feedback.swipeout{transition:transform .19s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
 } .feedback.show{display:block}
-.feedbackShell{width:min(690px,100%);display:flex;flex-direction:column;align-items:center;transform-origin:center center}
+.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center;transform-origin:center center}
+.feedbackShell.show{display:flex}
 .feedbackShell .feedback{width:100%}
 .feedbackShell .continue{margin-top:18px}
 @media(max-width:699px){.feedbackShell{touch-action:pan-y;will-change:transform,opacity}}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 .answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
-.targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}.feedback.bad .answerTargetRow{margin-top:-2px}
+.targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
 .diffBlock{display:none;margin-top:22px;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow{margin:9px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
-.answerTargetRow{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px}.answerTargetRow .targetForm{margin-top:0}.answerTargetRow .speak{margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
+.answerTargetRow{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px}.answerTargetRow .targetForm{margin-top:0}.answerTargetRow .speak{margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
 .detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:22px;margin-bottom:8px}.meaning{font-size:18px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
 .continue{margin-top:26px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
@@ -70,15 +71,15 @@ button{font:inherit}
   <div class="feedback" id="feedback">
    <div class="answerSentence" id="answerSentence"></div>
    <div class="answerTranslation" id="answerTranslation"></div>
-   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow">↓</div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
    <div class="answerTargetRow"><div class="targetForm" id="targetForm"></div><button class="speak" id="speak" aria-label="Hear sentence">▶</button></div>
+   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow">↓</div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
    <div class="detail"><div class="base" id="base"></div><div class="meaning" id="meaning"></div><div class="grammar" id="grammar"></div></div>
   </div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.15</div>
+<div class="version">v2.16</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -143,7 +144,7 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
- $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("keyboard").className="keyboard"+(innerWidth<700?" show":"");
+ $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";$("keyboard").className="keyboard"+(innerWidth<700?" show":"");
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -170,7 +171,7 @@ function check(){
    const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
- $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
+ $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
  $("answerTranslation").textContent=current.ru;$("targetForm").textContent=opts.join(" / ");
  if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
  $("base").textContent=current.base;$("meaning").textContent=current.translation;$("grammar").textContent=current.grammar||"";
