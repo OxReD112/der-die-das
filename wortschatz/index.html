@@ -83,7 +83,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.59</div>
+<div class="version">v2.60</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -99,7 +99,7 @@ document.addEventListener("deutsch-keyboard-input",e=>{
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
  if(!mount)return false;
- const r=await fetch("../components/deutsch-keyboard.html");
+ const r=await fetch("../components/deutsch-keyboard-v2.60.html");
  if(!r.ok)throw new Error("Keyboard component failed to load");
  const text=await r.text();
  const tpl=document.createElement("template");
