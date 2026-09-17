@@ -35,7 +35,7 @@ button{font:inherit}
 .feedbackShell .continue{margin-top:18px}
 @media(max-width:699px){.feedbackShell{touch-action:pan-y;will-change:transform,opacity}}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
-.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;margin-left:7px;padding:0;border:0;background:transparent;color:#aabdb7;font-size:clamp(20px,4vw,28px);line-height:1;vertical-align:baseline;cursor:pointer}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
+.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;margin-left:7px;padding:0;border:0;background:transparent;color:#aabdb7;line-height:1;vertical-align:baseline;cursor:pointer}.speakTopIcon{display:block;width:100%;height:100%;background:currentColor;-webkit-mask:url("components/icons/Audio.svg") center/contain no-repeat;mask:url("components/icons/Audio.svg") center/contain no-repeat}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
 .targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
 .diffBlock{display:none;margin-top:26px;padding-bottom:28px;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
@@ -72,12 +72,12 @@ button{font:inherit}
  <div class="feedbackShell" id="feedbackShell">
   <div class="feedback" id="feedback">
    <div class="topZone answerTop" id="answerTop">
-    <div class="answerSentence" id="answerSentence"></div><button class="speakTop" id="speak" aria-label="Hear sentence">▶</button>
+    <div class="answerSentence" id="answerSentence"></div><button class="speakTop" id="speakTop" aria-label="Hear sentence"><span class="speakTopIcon" aria-hidden="true"></span></button>
     <div class="answerTranslation" id="answerTranslation"></div>
    </div>
    <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow">↓</div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
    <div class="detail">
-    <div class="answerTargetRow"><div class="base" id="base"></div><button class="speak" id="speak" aria-label="Hear sentence">▶</button></div>
+    <div class="answerTargetRow"><div class="base" id="base"></div></div>
     <div class="meaning" id="meaning"></div>
     <div class="grammar" id="grammar"></div>
    </div>
@@ -307,7 +307,7 @@ function speakCurrent(){
  u.lang="de-DE";u.rate=.88;
  speechSynthesis.speak(u);
 }
-$("speak").onclick=e=>{e.stopPropagation();speakCurrent()};
+$("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
 $("keyboard").addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
