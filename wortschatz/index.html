@@ -22,7 +22,13 @@ button{font:inherit}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
-.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate}.feedback.show{display:block}
+.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate}
+@media(max-width:699px){
+ .feedback.show{touch-action:pan-y;will-change:transform,opacity}
+ .feedback.swiping{transition:none}
+ .feedback.snapback{transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .22s ease}
+ .feedback.swipeout{transition:transform .24s cubic-bezier(.4,0,.7,.2),opacity .20s ease}
+}.feedback.show{display:block}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 .answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:22px;color:var(--muted);font-size:clamp(18px,4.8vw,25px)}
@@ -66,7 +72,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.7</div>
+<div class="version">v2.8</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -190,7 +196,60 @@ function addFive(){
 function next(){idx++;render()}
 $("addWords").onclick=addFive;
 $("desktopCheck").onclick=check;$("continue").onclick=next;
+document.addEventListener("keydown",e=>{
+ if(e.key!=="Enter"||innerWidth<700)return;
+ if(!$("feedback").classList.contains("show"))return;
+ e.preventDefault();next();
+});
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
+// Mobile reveal navigation: swipe left for the next word.
+(()=>{
+ const panel=$("feedback");
+ let startX=0,startY=0,dx=0,tracking=false,locked=false;
+ const reset=()=>{
+   panel.classList.remove("swiping","swipeout");
+   panel.classList.add("snapback");
+   panel.style.transform="";
+   panel.style.opacity="";
+   setTimeout(()=>panel.classList.remove("snapback"),230);
+ };
+ panel.addEventListener("pointerdown",e=>{
+   if(innerWidth>=700||!panel.classList.contains("show")||e.pointerType==="mouse")return;
+   startX=e.clientX;startY=e.clientY;dx=0;tracking=true;locked=false;
+ });
+ panel.addEventListener("pointermove",e=>{
+   if(!tracking)return;
+   const x=e.clientX-startX,y=e.clientY-startY;
+   if(!locked){
+     if(Math.abs(x)<8&&Math.abs(y)<8)return;
+     if(Math.abs(y)>Math.abs(x)){tracking=false;return}
+     locked=true;
+   }
+   dx=Math.min(0,x); // left only
+   panel.classList.add("swiping");
+   panel.style.transform=`translateX(${dx}px) rotate(${dx/45}deg)`;
+   panel.style.opacity=String(Math.max(.35,1-Math.abs(dx)/420));
+ });
+ const finish=()=>{
+   if(!tracking)return;
+   tracking=false;
+   if(locked&&dx<-72){
+     panel.classList.remove("swiping","snapback");
+     panel.classList.add("swipeout");
+     panel.style.transform="translateX(-115vw) rotate(-8deg)";
+     panel.style.opacity="0";
+     setTimeout(()=>{
+       panel.classList.remove("swipeout");
+       panel.style.transform="";
+       panel.style.opacity="";
+       next();
+     },240);
+   }else reset();
+ };
+ panel.addEventListener("pointerup",finish);
+ panel.addEventListener("pointercancel",reset);
+})();
+
 $("speak").onclick=()=>{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(current.revealed);u.lang="de-DE";u.rate=.88;speechSynthesis.speak(u)};
 document.querySelectorAll(".row[data-keys]").forEach(row=>{const back=row.querySelector(".back");for(const ch of row.dataset.keys){let b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back)}});
 $("keyboard").addEventListener("click",e=>{let b=e.target.closest("[data-key]");if(!b)return;let k=b.dataset.key,input=$("answerInput");if(k==="BACK"){input.value=input.value.slice(0,-1);return}if(k==="OK"){check();return}if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}input.value+=k});
