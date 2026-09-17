@@ -1934,6 +1934,21 @@ header h1{
   font-size:10px;
 }
 
+
+/* Home v4.15 — solid iPhone top overscroll shield.
+   Covers the safe-area + space above the fixed title without moving the layout. */
+body::before{
+  content:"";
+  position:fixed;
+  z-index:19;
+  top:0;
+  left:0;
+  right:0;
+  height:calc(env(safe-area-inset-top) + 54px);
+  background:var(--bg);
+  pointer-events:none;
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1992,7 +2007,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.14</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.15</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
