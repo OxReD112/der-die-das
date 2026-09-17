@@ -26,7 +26,8 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 .given{font-size:30px;font-weight:650}.correctText{font-size:30px;font-weight:650;margin-top:5px}.bad{color:var(--red)}.good{color:var(--mint)}.skill{margin-top:24px;color:var(--muted);font-size:14px}.continue{width:min(600px,100%);margin-top:25px;border:0;border-radius:15px;padding:15px;background:#eee8df;color:#171719;font-size:17px;font-weight:700}
 .in-session-tables{margin-top:auto;padding-top:30px;justify-content:center;opacity:.22}.in-session-tables .btn{font-size:11px;font-weight:400;padding:7px 10px;border-color:rgba(255,255,255,.06);background:transparent;color:#aaa}
 .done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:#c8c8cc}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-card{width:min(680px,100%);max-height:86vh;overflow:auto;background:#252527;border:1px solid var(--line);border-radius:24px;padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:transparent;color:white;font-size:28px}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}.tbl th{color:var(--muted);font-weight:500}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-card{width:min(680px,100%);max-height:86vh;overflow:auto;background:#252527;border:1px solid var(--line);border-radius:24px;padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:transparent;color:white;font-size:28px}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}
+.table-subtitle{margin:18px 0 8px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
 @media(min-width:700px){.keyboard{display:none}.answerbox{cursor:text}}
 .third{justify-content:flex-end;padding-left:0}
 .third .back{margin-left:0;flex:0 0 calc(2.5 * calc((100% - 27px)/10) + 4.5px);width:calc(2.5 * calc((100% - 27px)/10) + 4.5px)}
@@ -68,9 +69,6 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
   font-weight:500!important;
 }
 
-
-/* v7.1 — combined Personal + Possessive table */
-.tbl th:last-child,.tbl td:last-child{white-space:nowrap}
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -80,7 +78,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 <div class="brand">Pronomen</div><h1>How many exercises?</h1>
 <p class="muted">Personal and possessive pronouns are mixed together.</p>
 <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="30">30</button><button class="size" data-n="50">50</button></div>
-<div class="table-buttons"><button class="btn secondary start-table-btn" data-table="personal">Pronomen · Table</button><button class="btn secondary start-table-btn" data-table="possessive">Possessiv · Endings</button></div>
+<div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Table</button></div>
 </section>
 
 <section id="game" class="screen hidden">
@@ -91,7 +89,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 <div class="answerbox" id="answerbox"><span class="placeholder">Type the missing form</span></div>
 <div id="feedback" class="feedback hidden"><div class="given" id="given"></div><div class="correctText" id="correctText"></div><div class="skill" id="skill"></div><button class="continue" id="continue">Continue</button></div>
 <div class="keyboard" id="keyboard"></div>
-<div class="table-buttons in-session-tables"><button class="btn secondary" data-table="personal">Pronomen table</button><button class="btn secondary" data-table="possessive">Possessiv endings</button></div>
+<div class="table-buttons in-session-tables"><button class="btn secondary" data-table="reference">Pronomen table</button></div>
 </div></section>
 
 <section id="done" class="screen center hidden">
@@ -102,7 +100,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.1 · daily stats</div>
+<div class="version">v7.2 · daily stats</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
@@ -138,19 +136,29 @@ function finish(){$('game').classList.add('hidden');$('done').classList.remove('
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')}
 document.addEventListener('keydown',e=>{if($('game').classList.contains('hidden'))return;if(!$('feedback').classList.contains('hidden')){if(e.key==='Enter')next();return}if(e.key==='Enter'){submit();return}if(e.key==='Backspace'){answer=answer.slice(0,-1);paintAnswer();return}if(e.key.length===1){answer+=e.key;paintAnswer()}})
 const rows=['QWERTYUIOP','ASDFGHJKL'];let kb='';rows.forEach(r=>{kb+='<div class="row">'+[...r].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'</div>'});kb+='<div class="row third">'+[...'ZXCVBNM'].map(c=>`<button class="key" data-k="${c.toLowerCase()}">${c}</button>`).join('')+'<button class="key back" data-k="⌫">⌫</button></div>';kb+='<div class="row special">'+['ä','ö','ü','ß'].map(c=>`<button class="key" data-k="${c}">${c}</button>`).join('')+'<button class="key ok" data-k="OK">✓</button></div>';$('keyboard').innerHTML=kb;document.querySelectorAll('.key').forEach(b=>b.onclick=()=>{let k=b.dataset.k;if(k==='⌫')answer=answer.slice(0,-1);else if(k==='OK'){submit();return}else answer+=k;paintAnswer()});$('answerbox').onclick=submit;
-const personal=`<table class="tbl"><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessive*</th></tr><tr><td>я</td><td data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-focus="Possessiv · ich → mein-">mein-</td></tr><tr><td>ты</td><td data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-focus="Possessiv · du → dein-">dein-</td></tr><tr><td>он</td><td data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-focus="Possessiv · er → sein-">sein-</td></tr><tr><td>она</td><td data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-focus="Possessiv · sie → ihr-">ihr-</td></tr><tr><td>оно</td><td data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-focus="Possessiv · er → sein-">sein-</td></tr><tr><td>мы</td><td data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-focus="Possessiv · wir → unser-">unser-</td></tr><tr><td>вы</td><td data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-focus="Possessiv · ihr → euer-">euer-</td></tr><tr><td>они</td><td data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-focus="Possessiv · sie(pl.) → ihr- / Ihr-">ihr- / Ihr-</td></tr></table><p class="muted">* Possessive: combine the base with the ending for the gender and case of the noun.</p>`;
-const possessive=`<table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">* Possessive endings depend on the gender and case of the noun: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
-const possessive=`<table class="tbl"><tr><th>Person</th><th>Base</th></tr><tr><td>ich</td><td data-owner="ich">mein-</td></tr><tr><td>du</td><td data-owner="du">dein-</td></tr><tr><td>er / es</td><td data-owner="er">sein-</td></tr><tr><td>sie</td><td data-owner="sie">ihr-</td></tr><tr><td>wir</td><td data-owner="wir">unser-</td></tr><tr><td>ihr</td><td data-owner="ihr">euer-</td></tr><tr><td>sie / Sie</td><td data-owner="sie(pl.)">ihr- / Ihr-</td></tr></table><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">Combine the base with the ending: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
-function markWeakTable(type){
+const reference=`<table class="tbl"><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessive*</th></tr><tr><td>я</td><td data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td>ты</td><td data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td>он</td><td data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td>она</td><td data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td>оно</td><td data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td>мы</td><td data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td>вы</td><td data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer-</td></tr><tr><td>они</td><td data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)">ihr- / Ihr-</td></tr></table><p class="muted">* Possessive: combine the base with the ending for the gender and case of the noun.</p><div class="table-subtitle">Possessive endings</div><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">Combine the base with the ending: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
+
+function markWeakTable(){
   const hard=Object.entries(weak).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   if(!hard.length)return;
-  if(type==='personal'){
-    document.querySelectorAll('#modalBody [data-focus]').forEach(td=>{if(hard.some(([k])=>k.startsWith(td.dataset.focus)))td.classList.add('hot')});
-  }else{
-    document.querySelectorAll('#modalBody [data-owner]').forEach(td=>{if(hard.some(([k])=>k.startsWith('Possessiv')&&k.includes('· '+td.dataset.owner+' →')))td.classList.add('hot')});
-    document.querySelectorAll('#modalBody [data-ending]').forEach(td=>{const [cas,gen]=td.dataset.ending.split('|');if(hard.some(([k])=>k.startsWith('Possessiv')&&k.includes('· '+cas)&&k.includes('· '+gen)))td.classList.add('hot')});
-  }
+  document.querySelectorAll('#modalBody [data-focus]').forEach(td=>{
+    if(hard.some(([k])=>k.startsWith(td.dataset.focus)))td.classList.add('hot');
+  });
+  document.querySelectorAll('#modalBody [data-owner]').forEach(td=>{
+    if(hard.some(([k])=>k.startsWith('Possessiv')&&k.includes('· '+td.dataset.owner+' →')))td.classList.add('hot');
+  });
+  document.querySelectorAll('#modalBody [data-ending]').forEach(td=>{
+    const [cas,gen]=td.dataset.ending.split('|');
+    if(hard.some(([k])=>k.startsWith('Possessiv')&&k.includes('· '+cas)&&k.includes('· '+gen)))td.classList.add('hot');
+  });
   if(document.querySelector('#modalBody .hot'))$('modalBody').insertAdjacentHTML('beforeend','<div class="focus-note">Highlighted forms are the ones your saved practice statistics currently find most difficult.</div>');
 }
-document.querySelectorAll('[data-table]').forEach(b=>b.onclick=()=>{const type=b.dataset.table;$('modalTitle').textContent=type==='personal'?'Pronomen':'Possessive endings';$('modalBody').innerHTML=type==='personal'?personal:possessive;markWeakTable(type);$('modal').classList.remove('hidden')});$('close').onclick=()=>$('modal').classList.add('hidden');$('modal').onclick=e=>{if(e.target===$('modal'))$('modal').classList.add('hidden')}
+document.querySelectorAll('[data-table]').forEach(b=>b.onclick=()=>{
+  $('modalTitle').textContent='Pronomen';
+  $('modalBody').innerHTML=reference;
+  markWeakTable();
+  $('modal').classList.remove('hidden');
+});
+$('close').onclick=()=>$('modal').classList.add('hidden');
+$('modal').onclick=e=>{if(e.target===$('modal'))$('modal').classList.add('hidden')}
 </script></body></html>
