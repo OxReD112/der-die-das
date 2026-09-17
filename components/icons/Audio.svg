@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16.91">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 16.9">
+  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
   <defs>
     <style>
-      .cls-1 {
+      .st0 {
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-2 {
+      .st0, .st1 {
         fill: none;
         stroke: #c1c1c1;
         stroke-width: 1.2px;
       }
 
-      .cls-2 {
+      .st1 {
         stroke-linecap: round;
         stroke-linejoin: round;
       }
     </style>
   </defs>
-  <path class="cls-2" d="M16.31,14.72h-8.3l1.2-2.2h5.8l1.3,2.2Z"/>
-  <rect class="cls-1" x="2.4" y="2.22" width="19.2" height="12.5" rx="2" ry="2"/>
-  <path class="cls-1" d="M7.9,6.12h8.2c.88,0,1.6.72,1.6,1.6h0c0,.88-.72,1.6-1.6,1.6H7.9c-.88,0-1.6-.72-1.6-1.6h0c0-.88.72-1.6,1.6-1.6Z"/>
-  <path class="cls-1" d="M7.9,6.12h0c.88,0,1.6.72,1.6,1.6h0c0,.88-.72,1.6-1.6,1.6h0c-.88,0-1.6-.72-1.6-1.6h0c0-.88.72-1.6,1.6-1.6Z"/>
-  <path class="cls-1" d="M16.1,6.12h0c.88,0,1.6.72,1.6,1.6h0c0,.88-.72,1.6-1.6,1.6h0c-.88,0-1.6-.72-1.6-1.6h0c0-.88.72-1.6,1.6-1.6Z"/>
+  <path class="st1" d="M16.3,13.6h-8.3l1.2-2.2h5.8l1.3,2.2Z"/>
+  <rect class="st0" x="2.4" y="1.1" width="19.2" height="12.5" rx="2" ry="2"/>
+  <path class="st0" d="M7.9,5h8.2c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6H7.9c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/>
+  <path class="st0" d="M7.9,5h0c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6h0c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/>
+  <path class="st0" d="M16.1,5h0c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6h0c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/>
 </svg>
