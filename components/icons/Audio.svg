@@ -9,7 +9,7 @@
 
       .st0, .st1 {
         fill: none;
-        stroke: #ededed;
+        stroke: #c1c1c1;
         stroke-width: 1.2px;
       }
 
