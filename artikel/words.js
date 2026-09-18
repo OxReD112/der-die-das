@@ -1143,7 +1143,7 @@ window.WORDS = [
     "translation": "входная дверь",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DIE TÜR",
-    "explanation": "The important part is die Tür. There is no useful simple gender rule for Tür, so learn it together with die.",
+    "explanation": "The important part is die Tür.",
     "examples": [
       "die Tür",
       "die Haustür"
@@ -1156,7 +1156,7 @@ window.WORDS = [
     "translation": "ванная комната",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
-    "explanation": "The important part is das Zimmer. There is no useful simple gender rule for Zimmer, so learn it together with das.",
+    "explanation": "The important part is das Zimmer.",
     "examples": [
       "das Zimmer",
       "das Badezimmer"
@@ -1169,7 +1169,7 @@ window.WORDS = [
     "translation": "водительские права",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER SCHEIN",
-    "explanation": "The important part is der Schein. There is no useful simple gender rule for Schein, so learn it together with der.",
+    "explanation": "The important part is der Schein.",
     "examples": [
       "der Schein",
       "der Führerschein"
@@ -1182,7 +1182,7 @@ window.WORDS = [
     "translation": "гостиная",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
-    "explanation": "The important part is das Zimmer. There is no useful simple gender rule for Zimmer, so learn it together with das.",
+    "explanation": "The important part is das Zimmer.",
     "examples": [
       "das Zimmer",
       "das Wohnzimmer"
@@ -1195,7 +1195,7 @@ window.WORDS = [
     "translation": "вокзал",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER HOF",
-    "explanation": "The important part is der Hof. There is no useful simple gender rule for Hof, so learn it together with der.",
+    "explanation": "The important part is der Hof.",
     "examples": [
       "der Hof",
       "der Bahnhof"
@@ -1208,7 +1208,7 @@ window.WORDS = [
     "translation": "больница",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS HAUS",
-    "explanation": "The important part is das Haus. There is no useful simple gender rule for Haus, so learn it together with das.",
+    "explanation": "The important part is das Haus.",
     "examples": [
       "das Haus",
       "das Krankenhaus"
@@ -1221,7 +1221,7 @@ window.WORDS = [
     "translation": "стол",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1231,7 +1231,7 @@ window.WORDS = [
     "translation": "стул",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1241,7 +1241,7 @@ window.WORDS = [
     "translation": "ключ",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1251,7 +1251,7 @@ window.WORDS = [
     "translation": "встреча, назначенный срок",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1261,7 +1261,7 @@ window.WORDS = [
     "translation": "профессия",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1271,7 +1271,7 @@ window.WORDS = [
     "translation": "кофе",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with der.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1281,7 +1281,7 @@ window.WORDS = [
     "translation": "работа",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with die.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1291,7 +1291,7 @@ window.WORDS = [
     "translation": "ответ",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with die.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1301,7 +1301,7 @@ window.WORDS = [
     "translation": "город",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with die.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1311,7 +1311,7 @@ window.WORDS = [
     "translation": "время",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with die.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1321,7 +1321,7 @@ window.WORDS = [
     "translation": "рука, кисть",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with die.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1331,7 +1331,7 @@ window.WORDS = [
     "translation": "дом",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with das.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1341,7 +1341,7 @@ window.WORDS = [
     "translation": "ребёнок",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with das.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   },
@@ -1351,7 +1351,7 @@ window.WORDS = [
     "translation": "книга",
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
-    "explanation": "There is no useful simple gender rule for this noun. Learn it together with das.",
+    "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
   }
