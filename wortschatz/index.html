@@ -18,9 +18,9 @@ button{font:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
-.topZone{width:min(620px,100%)}.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px}.blank{display:inline-block;width:1.87em;height:.82em;border-bottom:2px solid rgba(243,241,237,.72);vertical-align:baseline;margin:0 .08em}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
-.inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
-.inputbox:focus{border-color:var(--mint)}
+.topZone{width:min(620px,100%)}#answerFieldMount{margin-top:34px;width:100%;display:flex;justify-content:center}
+#answerFieldMount .answer-field{flex:0 0 auto}
+.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px}.blank{display:inline-block;width:1.87em;height:.82em;border-bottom:2px solid rgba(243,241,237,.72);vertical-align:baseline;margin:0 .08em}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
 .feedback.show{display:block}
@@ -56,7 +56,7 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question #answerFieldMount{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}#answerFieldMount{margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
 
 </style>
 </head>
@@ -68,7 +68,7 @@ button{font:inherit}
    <div class="sentence" id="sentence"></div>
    <div class="translation" id="translation"></div>
   </div>
-  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+  <div id="answerFieldMount"></div>
   <button class="check" id="desktopCheck">Check</button>
   <div id="keyboardMount"></div>
  </div>
@@ -91,13 +91,13 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.63 · answer field placeholder</div>
+<div class="version">v2.64 · shared answer field component</div>
 </main>
 <script src="words.js"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
- const k=e.detail?.key||"",input=document.getElementById("answerInput");
+ const k=e.detail?.key||"",input=document.getElementById("answerField");
  if(!input)return;
  if(k==="BACK"){input.value=input.value.slice(0,-1);return}
  if(k==="OK"){check();return}
@@ -185,9 +185,9 @@ function revealHTML(c){
 function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
- $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
+ $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerField").value="";
  $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
- if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
+ if(innerWidth>=700)setTimeout(()=>$("answerField").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function diffHTML(typed,correct){
@@ -204,7 +204,7 @@ function diffHTML(typed,correct){
  return [top.join(""),bottom.join("")];
 }
 function check(){
- let typed=normalize($("answerInput").value);if(!typed)return;
+ let typed=normalize($("answerField").value);if(!typed)return;
  const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
  let ok=!!matched;
  // For an error, compare against the closest accepted answer so the highlighted difference is useful.
@@ -256,7 +256,7 @@ document.addEventListener("keydown",e=>{
  if(!$("feedback").classList.contains("show"))return;
  e.preventDefault();next();
 });
-$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
+$("answerField").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
 function speakCurrent(){
  speechSynthesis.cancel();
  let u=new SpeechSynthesisUtterance(current.revealed);
