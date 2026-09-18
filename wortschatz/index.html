@@ -19,7 +19,8 @@ button{font:inherit}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
 .topZone{width:min(620px,100%)}.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px}.blank{display:inline-block;width:1.87em;height:.82em;border-bottom:2px solid rgba(243,241,237,.72);vertical-align:baseline;margin:0 .08em}.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
-
+.inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
+.inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
 .feedback.show{display:block}
@@ -49,14 +50,13 @@ button{font:inherit}
 .answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}.answerTargetRow .speak{display:none;margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
 .detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
-#answerFieldMount{margin-top:34px;width:min(620px,100%)}
 .continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:#d5d5d7}.continue:active{transform:scale(1.05)}
 
 
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question #answerFieldMount{order:3;width:min(620px,100%);margin-top:28px}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}#answerFieldMount{width:min(620px,100%)}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
 
 </style>
 </head>
@@ -68,7 +68,7 @@ button{font:inherit}
    <div class="sentence" id="sentence"></div>
    <div class="translation" id="translation"></div>
   </div>
-  <div id="answerFieldMount"></div>
+  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Check</button>
   <div id="keyboardMount"></div>
  </div>
@@ -91,44 +91,19 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · answer field component test</div>
+<div class="version">v2.63 · answer field placeholder</div>
 </main>
 <script src="words.js"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
- const k=e.detail?.key||"",input=document.getElementById("answerField");
+ const k=e.detail?.key||"",input=document.getElementById("answerInput");
  if(!input)return;
  if(k==="BACK"){input.value=input.value.slice(0,-1);return}
  if(k==="OK"){check();return}
  if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
  if(k)input.value+=k;
 });
-async function loadAnswerFieldComponent(){
- const mount=document.getElementById("answerFieldMount");
- if(!mount)return false;
- try{
-   const r=await fetch("../components/deutsch-answer-field-v1.1.html",{cache:"no-store"});
-   if(!r.ok)throw new Error("HTTP "+r.status);
-   const text=await r.text();
-   const tpl=document.createElement("template");
-   tpl.innerHTML=text;
-   mount.appendChild(tpl.content);
-   if(!document.getElementById("answerField"))throw new Error("Missing #answerField");
-   window.deutschAnswerFieldReady=true;
-   return true;
- }catch(e){
-   console.error("Answer field component failed to load:",e);
-   // Keep the module functional if the component file is temporarily missing.
-   mount.innerHTML='<input id="answerField" class="answer-field" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none" aria-label="Answer">';
-   const style=document.createElement("style");
-   style.textContent='.answer-field{width:min(620px,100%);height:60px;border:1px solid rgba(255,255,255,.16);border-radius:18px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;outline:none;background:#222225;color:#f3f1ed;font:inherit;font-size:26px;text-align:center;caret-color:#43d2ad;padding:0 17px}.answer-field:focus{border-color:#43d2ad}.answer-field::placeholder{color:#6f6f74;opacity:1}';
-   document.head.appendChild(style);
-   window.deutschAnswerFieldFallback=true;
-   return false;
- }
-}
-
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
  if(!mount)return false;
@@ -140,6 +115,7 @@ async function loadKeyboardComponent(){
  const scripts=[];
  tpl.content.querySelectorAll("script").forEach(s=>{scripts.push(s.textContent);s.remove()});
  mount.appendChild(tpl.content);
+ const answerField=document.getElementById("answerField"); if(answerField) answerField.placeholder="Type the missing word";
  for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
  const kb=document.getElementById("keyboard");
  window.deutschKeyboardReady=true;
@@ -209,9 +185,9 @@ function revealHTML(c){
 function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
- $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerField").value="";
+ $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
  $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
- if(innerWidth>=700)setTimeout(()=>$("answerField").focus(),30);
+ if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function diffHTML(typed,correct){
@@ -228,7 +204,7 @@ function diffHTML(typed,correct){
  return [top.join(""),bottom.join("")];
 }
 function check(){
- let typed=normalize($("answerField").value);if(!typed)return;
+ let typed=normalize($("answerInput").value);if(!typed)return;
  const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
  let ok=!!matched;
  // For an error, compare against the closest accepted answer so the highlighted difference is useful.
@@ -280,12 +256,7 @@ document.addEventListener("keydown",e=>{
  if(!$("feedback").classList.contains("show"))return;
  e.preventDefault();next();
 });
-document.addEventListener("keydown",e=>{
- if(e.key!=="Enter")return;
- const input=$("answerField");
- if(!input||document.activeElement!==input)return;
- e.preventDefault();e.stopPropagation();check();
-});
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
 function speakCurrent(){
  speechSynthesis.cancel();
  let u=new SpeechSynthesisUtterance(current.revealed);
@@ -294,8 +265,5 @@ function speakCurrent(){
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
-loadAnswerFieldComponent()
- .then(()=>loadKeyboardComponent())
- .catch(e=>console.error(e))
- .finally(()=>build());;
+loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
 </script></body></html>
