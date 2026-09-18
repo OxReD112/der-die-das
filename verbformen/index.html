@@ -60,8 +60,10 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .result.good:before{background:var(--mint);box-shadow:0 0 18px rgba(91,200,164,.7)}
 .result.bad:before{background:var(--coral);box-shadow:0 0 18px rgba(255,119,112,.7)}
 @keyframes spread{to{left:0;width:100%}}
-.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px rgba(91,200,164,.8)}
-.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px rgba(255,119,112,.85)}
+.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px rgba(91,200,164,.8);animation:resultGlowGood .42s ease-out forwards}
+.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px rgba(255,119,112,.85);animation:resultGlowBad .42s ease-out forwards}
+@keyframes resultGlowGood{from{box-shadow:0 -24px 65px -32px rgba(91,200,164,0)}to{box-shadow:0 -24px 65px -32px rgba(91,200,164,.8)}}
+@keyframes resultGlowBad{from{box-shadow:0 -24px 70px -30px rgba(255,119,112,0)}to{box-shadow:0 -24px 70px -30px rgba(255,119,112,.85)}}
 .state{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
 .good .state{color:var(--mint)}.bad .state{color:var(--coral)}
 .forms{font-family:Georgia,serif;font-size:26px;line-height:1.35;margin-bottom:10px}
