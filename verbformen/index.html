@@ -235,7 +235,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
     </div>
  </section>
 </main>
-<div class="version-tag">v34 · home button</div>
+<div class="version-tag">v35 · home button fixed</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -392,9 +392,28 @@ $("again").onclick=()=>{
  $("finish").classList.add("hidden");
  $("start").classList.remove("hidden");
 };
-  $("homeBack").onclick=()=>{
-    window.parent.postMessage({type:"deutsch:home"},"*");
-  };
+  function goBackToHome(){
+  try{
+    if(window.parent && window.parent !== window){
+      if(typeof window.parent.closeApp === 'function'){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById('appShell');
+      const frame=parentDoc.getElementById('appFrame');
+      if(shell && frame){
+        shell.classList.remove('open');
+        shell.setAttribute('aria-hidden','true');
+        parentDoc.documentElement.classList.remove('app-open');
+        frame.src='about:blank';
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:'deutsch:home'}, '*');
+}
+$("homeBack").onclick=goBackToHome;
 
 document.addEventListener("keydown", e => {
  if(e.key === "Enter"){
