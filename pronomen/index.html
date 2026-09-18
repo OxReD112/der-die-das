@@ -64,7 +64,10 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 <div class="brand" style="margin-bottom:45px">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
 <div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
 <div class="weak hidden" id="weak"></div>
-<button class="btn" id="home" style="margin-top:20px">Back to start</button>
+<div style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:20px">
+      <button class="btn" id="home">Start Again</button>
+      <button class="btn" id="homeBack">Back to Home</button>
+    </div>
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
@@ -135,7 +138,8 @@ function paintAnswer(){ $('answerbox').textContent=answer||'' }
 function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();let detailKey=x.type==='possessive'&&x.gender?x.skill+' · '+x.gender:null;if(ok){correct++;weak[x.skill]=Math.max(0,(weak[x.skill]||0)-.25);if(detailKey)weak[detailKey]=Math.max(0,(weak[detailKey]||0)-.25)}else{weak[x.skill]=(weak[x.skill]||0)+1;if(detailKey)weak[detailKey]=(weak[detailKey]||0)+1;sessionWeak[x.skill]=(sessionWeak[x.skill]||0)+1}save();$('feedback').className='feedback '+(ok?'correct':'wrong');$('given').innerHTML=ok?`<span class="good">${answer}</span>`:`<span class="bad">${answer}</span>`;$('correctText').innerHTML=ok?'':`<span class="good">→ ${x.answer}</span>`;$('skill').textContent=x.skill+(x.type==='possessive'&&x.gender?' · '+x.gender:'');$('answerbox').style.display='none';$('check').style.display='none';if(window.deutschKeyboardReady)$('keyboard').classList.remove('show')}
 function next(){i++;if(i>=deck.length){finish();return}render()}
 function finish(){$('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;let arr=Object.entries(sessionWeak).sort((a,b)=>b[1]-a[1]).slice(0,3);if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(x=>x[0]).join('<br>')}else $('weak').classList.add('hidden')}
-document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')}
+document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
+  $('homeBack').onclick=()=>{window.parent.postMessage({type:'deutsch:home'}, '*')}
 document.addEventListener('keydown',e=>{if($('game').classList.contains('hidden'))return;if(!$('feedback').classList.contains('hidden')){if(e.key==='Enter')next();return}if(e.key==='Enter'){submit();return}if(e.key==='Backspace'){answer=answer.slice(0,-1);paintAnswer();return}if(e.key.length===1){answer+=e.key;paintAnswer()}})
 // Reusable German keyboard bridge: the component emits intent; Pronomen owns answer state.
 document.addEventListener('deutsch-keyboard-input',e=>{
