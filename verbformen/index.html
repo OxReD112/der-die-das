@@ -209,7 +209,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v29 · reusable keyboard</div>
+<div class="version-tag">v30 · reusable keyboard</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -217,7 +217,7 @@ const STORAGE_KEY="verbformenDifficultyV1";
 let difficulty={};
 try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
 
-/* v29: daily statistics shared with Deutsch Home */
+/* v30: daily statistics shared with Deutsch Home */
 const DAILY_STATS_KEY="deutschDailyStatsV1";
 function localDateKey(){
  const d=new Date();
@@ -240,10 +240,11 @@ function recordVerbformenAnswer(){
 let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
 
 const $=id=>document.getElementById(id);
-const isMobileKeyboard = window.innerWidth < 700;
+const isMobileKeyboard = window.matchMedia("(max-width: 699px)").matches;
 if(isMobileKeyboard){
   $("answer").readOnly=true;
-  $("answer").inputMode="none";
+  $("answer").setAttribute("inputmode","none");
+  $("answer").setAttribute("readonly","");
   $("check").style.display="none";
 }
 const key=v=>v.infinitive.toLowerCase();
@@ -399,7 +400,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
 async function loadKeyboardComponent(){
  const mount=$("keyboardMount");
  if(!mount) return false;
- const r=await fetch("../components/deutsch-keyboard-v2.62.html");
+ const r=await fetch("../components/deutsch-keyboard-v2.60.html");
  if(!r.ok) throw new Error("Keyboard component failed to load");
  const text=await r.text();
  const tpl=document.createElement("template");
@@ -414,7 +415,7 @@ async function loadKeyboardComponent(){
  }
  const kb=$("keyboard");
  window.deutschKeyboardReady=true;
- if(window.innerWidth<700 && !$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
+ if(isMobileKeyboard && !$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
  return true;
 }
 
