@@ -1905,7 +1905,7 @@ header h1{
 }
 
 
-/* Home v4.14 — extensible Deutsch backup + restore. */
+/* Home v4.13 — extensible Deutsch backup export. */
 .backup-tools{
   width:min(100%,620px);
   margin:18px auto 0;
@@ -1922,32 +1922,11 @@ header h1{
   cursor:pointer;
 }
 .backup-save:active{color:#929298}
-.backup-separator{
-  color:#66666b;
-  font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
-}
-.backup-file{display:none}
 .backup-note{
   min-height:14px;
   margin-top:2px;
   color:#55555a;
   font-size:10px;
-}
-
-
-/* Home v4.16 — continuous top mask for Safari/Home Screen overscroll.
-   Start well above the visual viewport so iOS cannot expose scrolling tiles
-   above the fixed Deutsch header. The layout itself is untouched. */
-body::before{
-  content:"";
-  position:fixed;
-  z-index:19;
-  top:-120px;
-  left:0;
-  right:0;
-  height:calc(120px + env(safe-area-inset-top) + 62px);
-  background:var(--bg);
-  pointer-events:none;
 }
 
 </style>
@@ -1960,7 +1939,7 @@ body::before{
     <p class="intro">Was möchtest du heute üben?</p>
     <section class="dashboard mosaic" aria-label="Übungen">
       <button class="tile tile-vocab module" type="button" data-app="wortschatz/?v=2.1">
-        <div class="tile-art vocab-art"><img src="wortschatz/icon.webp" alt=""></div>
+        <div class="tile-art vocab-art"><img src="wortschatz/icon.png" alt=""></div>
         <div class="tile-copy">
           <div class="name">Wortschatz</div>
           <div class="status" id="wortschatzStatus">noch offen</div>
@@ -1968,7 +1947,7 @@ body::before{
       </button>
 
       <button class="tile tile-small tile-articles module" type="button" data-app="artikel/?v=2.2">
-        <div class="tile-art"><img src="artikel/icon.webp" alt=""></div>
+        <div class="tile-art"><img src="artikel/icon.png" alt=""></div>
         <div class="tile-copy">
           <div class="name">Artikel</div>
           <div class="status" id="artikelStatus">0 / 50</div>
@@ -1976,7 +1955,7 @@ body::before{
       </button>
 
       <button class="tile tile-small tile-verbs module" type="button" data-app="verbformen/?v=2.1">
-        <div class="tile-art"><img src="verbformen/icon.webp" alt=""></div>
+        <div class="tile-art"><img src="verbformen/icon.png" alt=""></div>
         <div class="tile-copy">
           <div class="name">Verbformen</div>
           <div class="status">0 / 30</div>
@@ -1984,7 +1963,7 @@ body::before{
       </button>
 
       <button class="tile tile-small tile-pronouns module" type="button" data-app="pronomen/?v=7">
-        <div class="tile-art"><img src="pronomen/icon.webp" alt=""></div>
+        <div class="tile-art"><img src="pronomen/icon.png" alt=""></div>
         <div class="tile-copy">
           <div class="name">Pronomen</div>
           <div class="status">0 / 20</div>
@@ -1999,16 +1978,15 @@ body::before{
       </div>
     </section>
 
-    <div class="backup-tools" aria-label="Backup and restore">
-      <button class="backup-save" id="backupSave" type="button">Backup</button><span class="backup-separator" aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span><button class="backup-save" id="backupRestore" type="button">Restore</button>
-      <input class="backup-file" id="backupFile" type="file" accept="application/json,.json">
+    <div class="backup-tools" aria-label="Datensicherung">
+      <button class="backup-save" id="backupSave" type="button">Fortschritt sichern</button>
       <div class="backup-note" id="backupNote" aria-live="polite"></div>
     </div>
 
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.16</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.13</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -2092,10 +2070,6 @@ body::before{
     }
 
     back.addEventListener('click', closeApp);
-
-    window.addEventListener('message', (event) => {
-      if (event.data?.type === 'deutsch:home') closeApp();
-    });
     renderDailyStats();
   
 const HOME_STATS="deutschHomeStatsV1";
@@ -2115,7 +2089,7 @@ function syncHomeDashboard(){
     const wsStatus=document.getElementById("wortschatzStatus");
     const done=!!(ws && ws.date===localDay() && ws.done);
     if(wsTile)wsTile.classList.toggle("is-done",done);
-    if(wsStatus)wsStatus.textContent=done?"✓ fertig":"noch offen";
+    if(wsStatus)wsStatus.textContent=done?"✓ fertig":((ws && ws.date===localDay() && Number.isFinite(Number(ws.remaining)) && Number(ws.remaining)>0)?`${Number(ws.remaining)} ${Number(ws.remaining)===1?"Wort":"Wörter"} übrig`:"noch offen");
     if(done && wsStatus)wsStatus.style.color="var(--mint)";
     if(!done && wsStatus)wsStatus.style.color="";
   }catch(e){}
@@ -2174,8 +2148,8 @@ function saveDeutschBackup(){
   const note=document.getElementById("backupNote");
   try{
     const backup=buildDeutschBackup();
-    if(Object.keys(backup.modules).length===0){
-      if(note)note.textContent="Noch kein Fortschritt gefunden.";
+    if(!backup.modules.wortschatz){
+      if(note)note.textContent="Noch kein Wortschatz-Fortschritt gefunden.";
       return;
     }
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
@@ -2193,56 +2167,7 @@ function saveDeutschBackup(){
   }
 }
 
-function validateDeutschBackup(backup){
-  if(!backup||backup.app!=="Deutsch")throw new Error("not-deutsch");
-  if(backup.backupVersion!==DEUTSCH_BACKUP_VERSION)throw new Error("version");
-  if(!backup.modules||typeof backup.modules!=="object")throw new Error("modules");
-
-  const restorable=[];
-  Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
-    const moduleBackup=backup.modules[moduleName];
-    if(!moduleBackup)return;
-    if(moduleBackup.storageVersion!==config.storageVersion)throw new Error("storage-version");
-    if(moduleBackup.state===undefined)throw new Error("state");
-    restorable.push([moduleName,config,moduleBackup.state]);
-  });
-  if(restorable.length===0)throw new Error("nothing");
-  return restorable;
-}
-
-async function restoreDeutschBackup(file){
-  const note=document.getElementById("backupNote");
-  try{
-    const backup=JSON.parse(await file.text());
-    const restorable=validateDeutschBackup(backup);
-    const created=backup.createdAt ? new Date(backup.createdAt) : null;
-    const dateLabel=created&&!Number.isNaN(created.getTime())
-      ? created.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})
-      : "unknown date";
-    const moduleLabel=restorable.map(([name])=>name==="wortschatz"?"Wortschatz":name).join(", ");
-    if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
-      if(note)note.textContent="Restore cancelled.";
-      return;
-    }
-    restorable.forEach(([,config,state])=>{
-      localStorage.setItem(config.storageKey,JSON.stringify(state));
-    });
-    if(note)note.textContent="Restore complete.";
-    syncHomeDashboard();
-  }catch(e){
-    if(note)note.textContent="This backup cannot be restored.";
-  }
-}
-
 document.getElementById("backupSave")?.addEventListener("click",saveDeutschBackup);
-document.getElementById("backupRestore")?.addEventListener("click",()=>{
-  const input=document.getElementById("backupFile");
-  if(input){input.value="";input.click()}
-});
-document.getElementById("backupFile")?.addEventListener("change",event=>{
-  const file=event.target.files?.[0];
-  if(file)restoreDeutschBackup(file);
-});
 
 </script>
 
