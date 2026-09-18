@@ -2208,6 +2208,33 @@ async function restoreDeutschBackup(file){
     restorable.forEach(([,config,state])=>{
       localStorage.setItem(config.storageKey,JSON.stringify(state));
     });
+
+    /* Refresh Home statistics from the restored Wortschatz state.
+       Wortschatz is closed during Restore, so there is no iframe to reload. */
+    const restoredWortschatz=restorable.find(([name])=>name==="wortschatz");
+    if(restoredWortschatz){
+      const state=restoredWortschatz[2];
+      const cards=state&&state.cards&&typeof state.cards==="object" ? state.cards : {};
+      const activeIds=Array.isArray(state?.activeIds) ? state.activeIds : [];
+      const today=localDay();
+      const now=Date.now();
+      const remaining=activeIds.filter(id=>{
+        const card=cards[id];
+        if(!card)return false;
+        if(!card.due)return true;
+        const due=new Date(card.due).getTime();
+        return Number.isNaN(due) || due<=now;
+      }).length;
+      const total=activeIds.length;
+      const done=total>0 && remaining===0;
+      try{
+        localStorage.setItem(HOME_STATS,JSON.stringify({
+          date:today,
+          wortschatz:{date:today,remaining,done,total}
+        }));
+      }catch(e){}
+    }
+
     if(note)note.textContent="Restore complete.";
     syncHomeDashboard();
   }catch(e){
