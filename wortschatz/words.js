@@ -1261,15 +1261,15 @@ window.WORDS = [
   },
   {
     "id": 106,
-    "sentence": "Das ist eine wichtige {{c1::Anforderung}}.",
-    "blank": "Das ist eine wichtige _____.",
-    "revealed": "Das ist eine wichtige Anforderung.",
-    "ru": "Это важное требование.",
-    "grammar": "die Anforderung · die Anforderungen",
-    "translation": "требование",
-    "pos": "Substantiv",
-    "base": "die Anforderung",
-    "target": "Anforderung"
+    "sentence": "Ich {{c1::ziehe}} die Tür zu.",
+    "blank": "Ich _____ die Tür zu.",
+    "revealed": "Ich ziehe die Tür zu.",
+    "ru": "Я закрываю дверь, потянув её на себя.",
+    "grammar": "ziehen · zog · hat gezogen",
+    "translation": "тянуть; тащить",
+    "pos": "Verb",
+    "base": "ziehen",
+    "target": "ziehe"
   },
   {
     "id": 107,
@@ -1429,15 +1429,15 @@ window.WORDS = [
   },
   {
     "id": 120,
-    "sentence": "Ich suche eine neue {{c1::Beschäftigung}}.",
-    "blank": "Ich suche eine neue _____.",
-    "revealed": "Ich suche eine neue Beschäftigung.",
-    "ru": "Я ищу новую работу / занятость.",
-    "grammar": "die Beschäftigung · die Beschäftigungen",
-    "translation": "занятость, занятие",
-    "pos": "Substantiv",
-    "base": "die Beschäftigung",
-    "target": "Beschäftigung"
+    "sentence": "Ich {{c1::schiebe}} den Stuhl nach vorne.",
+    "blank": "Ich _____ den Stuhl nach vorne.",
+    "revealed": "Ich schiebe den Stuhl nach vorne.",
+    "ru": "Я двигаю стул вперёд.",
+    "grammar": "schieben · schob · hat geschoben",
+    "translation": "толкать; двигать",
+    "pos": "Verb",
+    "base": "schieben",
+    "target": "schiebe"
   },
   {
     "id": 121,
@@ -1945,15 +1945,15 @@ window.WORDS = [
   },
   {
     "id": 163,
-    "sentence": "Diese {{c1::Maßnahme}} soll helfen.",
-    "blank": "Diese _____ soll helfen.",
-    "revealed": "Diese Maßnahme soll helfen.",
-    "ru": "Эта мера должна помочь.",
-    "grammar": "die Maßnahme · die Maßnahmen",
-    "translation": "мера, мероприятие",
-    "pos": "Substantiv",
-    "base": "die Maßnahme",
-    "target": "Maßnahme"
+    "sentence": "Ich {{c1::werfe}} den Ball.",
+    "blank": "Ich _____ den Ball.",
+    "revealed": "Ich werfe den Ball.",
+    "ru": "Я бросаю мяч.",
+    "grammar": "werfen · warf · hat geworfen",
+    "translation": "бросать",
+    "pos": "Verb",
+    "base": "werfen",
+    "target": "werfe"
   },
   {
     "id": 164,
@@ -1969,15 +1969,15 @@ window.WORDS = [
   },
   {
     "id": 165,
-    "sentence": "Bitte nimm {{c1::Rücksicht}} auf die Nachbarn.",
-    "blank": "Bitte nimm _____ auf die Nachbarn.",
-    "revealed": "Bitte nimm Rücksicht auf die Nachbarn.",
-    "ru": "Пожалуйста, считайся с соседями.",
-    "grammar": "die Rücksicht · die Rücksichten",
-    "translation": "внимание, учёт интересов",
-    "pos": "Substantiv",
-    "base": "die Rücksicht",
-    "target": "Rücksicht"
+    "sentence": "Das Glas {{c1::fällt}} auf den Boden.",
+    "blank": "Das Glas _____ auf den Boden.",
+    "revealed": "Das Glas fällt auf den Boden.",
+    "ru": "Стакан падает на пол.",
+    "grammar": "fallen · fiel · ist gefallen",
+    "translation": "падать",
+    "pos": "Verb",
+    "base": "fallen",
+    "target": "fällt"
   },
   {
     "id": 166,
@@ -2017,15 +2017,15 @@ window.WORDS = [
   },
   {
     "id": 169,
-    "sentence": "Meine {{c1::Tätigkeit}} ist kreativ.",
-    "blank": "Meine _____ ist kreativ.",
-    "revealed": "Meine Tätigkeit ist kreativ.",
-    "ru": "Моя работа творческая.",
-    "grammar": "die Tätigkeit · die Tätigkeiten",
-    "translation": "деятельность, работа",
-    "pos": "Substantiv",
-    "base": "die Tätigkeit",
-    "target": "Tätigkeit"
+    "sentence": "Ich {{c1::hebe}} das Buch vom Boden {{c1::auf}}.",
+    "blank": "Ich _____ das Buch vom Boden _____.",
+    "revealed": "Ich hebe das Buch vom Boden auf.",
+    "ru": "Я поднимаю книгу с пола.",
+    "grammar": "aufheben · hob auf · hat aufgehoben",
+    "translation": "поднимать (с поверхности)",
+    "pos": "Verb",
+    "base": "aufheben",
+    "target": "hebe / auf"
   },
   {
     "id": 170,
@@ -2242,5 +2242,53 @@ window.WORDS = [
     "pos": "Verb",
     "base": "gießen",
     "target": "gießen"
+  },
+  {
+    "id": 188,
+    "sentence": "Ich {{c1::drehe}} den Schlüssel.",
+    "blank": "Ich _____ den Schlüssel.",
+    "revealed": "Ich drehe den Schlüssel.",
+    "ru": "Я поворачиваю ключ.",
+    "grammar": "drehen · drehte · hat gedreht",
+    "translation": "поворачивать; крутить",
+    "pos": "Verb",
+    "base": "drehen",
+    "target": "drehe"
+  },
+  {
+    "id": 189,
+    "sentence": "Ich {{c1::stecke}} den Schlüssel ins Schloss.",
+    "blank": "Ich _____ den Schlüssel ins Schloss.",
+    "revealed": "Ich stecke den Schlüssel ins Schloss.",
+    "ru": "Я вставляю ключ в замок.",
+    "grammar": "stecken · steckte · hat gesteckt",
+    "translation": "вставлять; находиться внутри",
+    "pos": "Verb",
+    "base": "stecken",
+    "target": "stecke"
+  },
+  {
+    "id": 190,
+    "sentence": "Ich {{c1::nehme}} das Buch aus der Tasche {{c1::heraus}}.",
+    "blank": "Ich _____ das Buch aus der Tasche _____.",
+    "revealed": "Ich nehme das Buch aus der Tasche heraus.",
+    "ru": "Я вынимаю книгу из сумки.",
+    "grammar": "herausnehmen · nahm heraus · hat herausgenommen",
+    "translation": "вынимать",
+    "pos": "Verb",
+    "base": "herausnehmen",
+    "target": "nehme / heraus"
+  },
+  {
+    "id": 191,
+    "sentence": "Ich {{c1::schenke}} meiner Freundin Tee {{c1::ein}}.",
+    "blank": "Ich _____ meiner Freundin Tee _____.",
+    "revealed": "Ich schenke meiner Freundin Tee ein.",
+    "ru": "Я наливаю подруге чай.",
+    "grammar": "einschenken · schenkte ein · hat eingeschenkt",
+    "translation": "наливать напиток кому-либо / себе",
+    "pos": "Verb",
+    "base": "einschenken",
+    "target": "schenke / ein"
   }
 ];
