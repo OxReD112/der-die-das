@@ -14,7 +14,7 @@
 <style>
 :root{--bg:#1c1c1e;--panel:#252527;--text:#f5f5f7;--muted:#929297;--mint:#5ac8a0;--coral:#ff6969;--blue:#72a7ff;--line:rgba(255,255,255,.09)}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
-.app{width:min(720px,100%);padding:22px 18px 40px}.top{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:34px}.stat{text-align:center}.label{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}.value{font-size:24px;font-weight:650;margin-top:5px}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:0 18px 55px rgba(0,0,0,.18);touch-action:pan-y;transition:transform .18s ease,opacity .18s ease}
+.app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:0 18px 55px rgba(0,0,0,.18);touch-action:pan-y;transition:transform .18s ease,opacity .18s ease}
 .eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em}.translation{font-size:18px;color:var(--muted);margin-top:14px}.hint{display:none}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:#252527;color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
 .feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:#242426;border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:radial-gradient(ellipse at 50% 42%,rgba(90,200,160,.42) 0%,rgba(90,200,160,.24) 18%,rgba(90,200,160,.11) 40%,rgba(90,200,160,.04) 60%,transparent 78%)}.feedback.wrong::before{background:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.48) 0%,rgba(255,105,105,.28) 18%,rgba(255,105,105,.13) 40%,rgba(255,105,105,.05) 60%,transparent 78%)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:#c8c8cc;line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(28,28,30,.58)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:#aaa093;font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
 .answer-word.article-der,.answer-word.article-die,.answer-word.article-das{color:var(--text)}
@@ -45,7 +45,7 @@
 .play-again{border:0;border-radius:15px;padding:15px 28px;background:var(--coral);color:white;font-size:17px;font-weight:650;cursor:pointer}
 .hidden{display:none!important}
 
-@media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 12px)}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}.top{margin-bottom:20px}}
+@media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 8px)}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}}
 .version-mark{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px;letter-spacing:.04em;pointer-events:none}
 </style>
 </head>
@@ -62,11 +62,9 @@
 </section>
 
 <div id="game" class="hidden">
-<section class="top" style="grid-template-columns:repeat(4,1fr)">
-<div class="stat"><div class="label">Score</div><div class="value" id="score">0</div></div>
-<div class="stat"><div class="label">Correct</div><div class="value" id="correct">0/0</div></div>
-<div class="stat"><div class="label">Streak</div><div class="value" id="streak">0</div></div>
-<div class="stat"><div class="label">Question</div><div class="value" id="question">1/30</div></div>
+<section class="top">
+<div><div class="top-title">Artikel</div><div class="progress"><i id="bar"></i></div></div>
+<div class="counter" id="counter">1 / 10</div>
 </section>
 <section class="card" id="card">
 <div class="swipe left">DER</div><div class="swipe up">DIE</div><div class="swipe right">DAS</div>
@@ -119,7 +117,7 @@ function newDeck(){
  index=0;
 }
 function current(){return deck[index]}
-function render(){const w=current();$('word').textContent=w.word;$('translation').textContent=w.translation;$('feedback').className='feedback';$('choices').style.display='grid';$('card').style.display='flex';$('question').textContent=`${total+1}/${sessionSize}`}
+function render(){const w=current();$('word').textContent=w.word;$('translation').textContent=w.translation;$('feedback').className='feedback';$('choices').style.display='grid';$('card').style.display='flex';$('counter').textContent=`${index+1} / ${sessionSize}`;$('bar').style.width=`${(index/sessionSize)*100}%`}
 
 const DAILY_STATS_KEY='deutschDailyStatsV1';
 function localDayKey(){
@@ -141,10 +139,10 @@ function recordDailyArtikel(ok){
 }
 
 function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(ok){correct++;streak++;score+=10+Math.min(streak,5)*2}else{streak=0}
- $('score').textContent=score;$('correct').textContent=`${correct}/${total}`;$('streak').textContent=streak;$('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>. +${10+Math.min(streak,5)*2} points`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;document.querySelector('.answer-word').className='answer-word article-'+w.article;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleText').textContent='';$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
+ $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>. +${10+Math.min(streak,5)*2} points`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;document.querySelector('.answer-word').className='answer-word article-'+w.article;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleText').textContent='';$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; score=0; total=0; correct=0; streak=0;
- $('score').textContent='0'; $('correct').textContent='0/0'; $('streak').textContent='0';
+ 
  newDeck();
  $('sessionScreen').classList.add('hidden');
  $('endScreen').classList.add('hidden');
