@@ -42,7 +42,15 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
       color: #222;
       border: 1px solid rgba(0,0,0,.12);
     }
-  
+.done-actions {
+      width: min(100%, 440px);
+      margin: 20px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
     #home, #homeBack {
       width: 100%;
       height: 56px;
@@ -53,18 +61,21 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
       font-weight: 650;
       cursor: pointer;
     }
+
     #home {
-      background: #3a3b3d;
-      color: rgba(238,231,220,.78);
+      background: rgba(255,255,255,.10);
+      color: rgba(238,231,220,.55);
     }
+
     #homeBack {
       background: #ece6dc;
       color: #1b1c1e;
     }
+
     #home:active, #homeBack:active {
       transform: scale(.99);
     }
-  </style>
+</style>
 
 <link rel="manifest" href="../manifest.webmanifest">
 </head>
@@ -92,14 +103,14 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 <div class="brand" style="margin-bottom:45px">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
 <div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
 <div class="weak hidden" id="weak"></div>
-<div style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:20px; width:100%">
+<div class="done-actions">
       <button class="btn" id="home">Start Again</button>
       <button class="btn" id="homeBack">Back to Home</button>
     </div>
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.17 · daily stats</div>
+<div class="version">v7.18 · daily stats</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
