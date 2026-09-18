@@ -2092,6 +2092,10 @@ body::before{
     }
 
     back.addEventListener('click', closeApp);
+
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'deutsch:home') closeApp();
+    });
     renderDailyStats();
   
 const HOME_STATS="deutschHomeStatsV1";
