@@ -53,7 +53,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 
 /* Stable top-anchored layout: keyboard/result changes never re-center the app. */
 @media(max-width:600px){
- .app{padding-left:24px;padding-right:24px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px));}
+ .app{padding-left:18px;padding-right:18px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px));}
  .card{padding-top:14px}
 }
 
@@ -190,9 +190,8 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
    <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
-    <div id="keyboardMount"></div>
    <button class="check" id="check">Check</button>
-    <div class="result" id="result">
+   <div class="result" id="result">
     <div class="result-head"><div class="state" id="state"></div><div class="vowel-pattern" id="vowelPattern"></div></div>
     <div class="forms" id="forms"></div>
     <div class="meta" id="meta"></div>
@@ -200,6 +199,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    </div>
    <button class="next" id="next">Continue</button>
   </section>
+  <div id="keyboardMount"></div>
  </section>
 
  <section id="finish" class="finish hidden">
@@ -209,7 +209,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <button class="again" id="again">Another session</button>
  </section>
 </main>
-<div class="version-tag">v30 · reusable keyboard</div>
+<div class="version-tag">v31 · reusable keyboard</div>
 
 <script src="verbs.js"></script>
 <script>
