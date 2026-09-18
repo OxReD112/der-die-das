@@ -27,7 +27,33 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
 .answer:focus{border-color:rgba(91,200,164,.55);box-shadow:0 0 0 3px rgba(91,200,164,.08)}
 .answer::placeholder{color:#48494a}
-.check,.next,.choice,.again{font:inherit;cursor:pointer}
+.check,.next,.choice,.finish-actions{
+  width:min(100%,440px);
+  margin:20px auto 0;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:10px;
+}
+.finish-actions button{
+  width:100%;
+  height:56px;
+  border:0;
+  border-radius:17px;
+  font:inherit;
+  font-size:16px;
+  font-weight:650;
+  cursor:pointer;
+}
+.again{
+  background:rgba(255,255,255,.035);
+  color:rgba(238,231,220,.28);
+}
+.home-back{
+  background:#ece6dc;
+  color:#1b1c1e;
+}
+.finish-actions button:active{transform:scale(.99)}
 .check{margin-top:14px;width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-size:16px;font-weight:650}
 .check:active,.next:active,.choice:active,.again:active{transform:scale(.99)}
 .result{display:none;margin-top:28px;border-top:1px solid var(--line);padding:30px 26px 0;text-align:left}
@@ -206,10 +232,13 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <h2>Done.</h2>
   <div id="finalScore" class="final-score"></div>
    <p id="summary"></p>
-  <button class="again" id="again">Another session</button>
+  <div class="finish-actions">
+      <button class="again" id="again">Another session</button>
+      <button class="home-back" id="homeBack">Back to Home</button>
+    </div>
  </section>
 </main>
-<div class="version-tag">v31 · reusable keyboard</div>
+<div class="version-tag">v32 · home button</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -366,6 +395,9 @@ $("again").onclick=()=>{
  $("finish").classList.add("hidden");
  $("start").classList.remove("hidden");
 };
+  $("homeBack").onclick=()=>{
+    window.parent.postMessage({type:"deutsch:home"},"*");
+  };
 
 document.addEventListener("keydown", e => {
  if(e.key === "Enter"){
