@@ -22,14 +22,9 @@ button{font:inherit}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
-.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;border:1px solid rgba(255,255,255,.10);border-radius:28px;background:#202023;padding:18px 24px 24px;overflow:hidden;transform-origin:center center}
-@media(max-width:699px){
- .feedback.show{touch-action:manipulation;will-change:transform,opacity}
- .feedback.swiping{transition:none}
- .feedback.snapback{transition:transform .19s cubic-bezier(.2,.8,.2,1),opacity .19s ease}
- .feedback.swipeout{transition:transform .19s cubic-bezier(.4,0,.7,.2),opacity .16s ease}
-} .feedback.show{display:block}
-.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center;transform-origin:center center;margin-top:-30px}
+.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
+.feedback.show{display:block}
+.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center}
 .feedbackShell.show{display:flex}
 .feedbackShell .feedback{width:100%}
 .feedbackShell .continue{margin-top:18px}
@@ -83,7 +78,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.60</div>
+<div class="version">v2.61 · swipe removed</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -248,89 +243,6 @@ document.addEventListener("keydown",e=>{
  e.preventDefault();next();
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
-// Mobile reveal navigation: Tinder-like drag left for the next word.
-(()=>{
- const panel=$("feedback"),shell=$("feedbackShell");
- let startX=0,startY=0,lastX=0,startT=0,tracking=false,horizontal=false,finishing=false;
-
- const clean=()=>{
-   tracking=false; horizontal=false;
-   shell.classList.remove("swiping","snapback","swipeout");
-   shell.style.transform="";
-   shell.style.opacity="";
- };
-
- const snapBack=()=>{
-   tracking=false; horizontal=false;
-   shell.classList.remove("swiping","swipeout");
-   shell.classList.add("snapback");
-   shell.style.transform="";
-   shell.style.opacity="";
-   setTimeout(()=>shell.classList.remove("snapback"),190);
- };
-
- const goNext=()=>{
-   if(finishing)return;
-   finishing=true; tracking=false;
-   shell.classList.remove("swiping","snapback");
-   shell.classList.add("swipeout");
-   shell.style.transform="translateX(-115vw) rotate(-8deg) scale(.92)";
-   shell.style.opacity="0";
-   setTimeout(()=>{
-     clean();
-     finishing=false;
-     next();
-   },190);
- };
-
- shell.addEventListener("touchstart",e=>{
-   if(innerWidth>=700||!shell.classList.contains("show")||finishing||e.touches.length!==1)return;
-   // Interactive controls must remain normal taps, never swipe starters.
-   if(e.target.closest("button,a,input,textarea,select"))return;
-   const t=e.touches[0];
-   startX=lastX=t.clientX;
-   startY=t.clientY;
-   startT=performance.now();
-   tracking=true;
-   horizontal=false;
- },{passive:true});
-
- shell.addEventListener("touchmove",e=>{
-   if(!tracking||e.touches.length!==1)return;
-   const t=e.touches[0];
-   const dx=t.clientX-startX;
-   const dy=t.clientY-startY;
-   lastX=t.clientX;
-
-   // Do nothing during tiny finger jitter: a tap stays a tap.
-   if(!horizontal){
-     if(Math.hypot(dx,dy)<12)return;
-     if(dx>=0){tracking=false;return;}
-     if(Math.abs(dy)>Math.abs(dx)*1.25){tracking=false;return;}
-     horizontal=true;
-   }
-
-   e.preventDefault();
-   const left=Math.min(0,dx);
-   shell.classList.add("swiping");
-   // Card follows the finger continuously, Tinder-style.
-   const shrink=Math.max(.93,1-Math.abs(left)/1800); shell.style.transform=`translateX(${left}px) rotate(${left/48}deg) scale(${shrink})`;
-   shell.style.opacity=String(Math.max(.55,1-Math.abs(left)/520));
- },{passive:false});
-
- shell.addEventListener("touchend",()=>{
-   if(!tracking)return;
-   const dx=lastX-startX;
-   const elapsed=Math.max(1,performance.now()-startT);
-   const speed=-dx/elapsed;
-
-   // Commit only after a real drag, or a clearly intentional fast flick.
-   if(horizontal && (dx<=-78 || (dx<=-42 && speed>.55))) goNext();
-   else snapBack();
- },{passive:true});
-
- shell.addEventListener("touchcancel",snapBack,{passive:true});
-})();
 function speakCurrent(){
  speechSynthesis.cancel();
  let u=new SpeechSynthesisUtterance(current.revealed);
