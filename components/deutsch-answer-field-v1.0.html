@@ -1,0 +1,65 @@
+<!--
+  German Learning App — reusable answer field
+  Version: 1.0
+
+  Usage:
+    1. Fetch this file.
+    2. Insert its contents into a mount element.
+    3. Access the input as #answerField.
+
+  The host module owns all answer state and validation.
+-->
+<style>
+:root{
+  --answer-field-bg:#222225;
+  --answer-field-text:#f3f1ed;
+  --answer-field-border:rgba(255,255,255,.16);
+  --answer-field-focus:#43d2ad;
+}
+
+.answer-field{
+  width:min(620px,100%);
+  height:60px;
+  border:1px solid var(--answer-field-border);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  outline:none;
+  background:var(--answer-field-bg);
+  color:var(--answer-field-text);
+  font:inherit;
+  font-size:26px;
+  text-align:center;
+  caret-color:var(--answer-field-focus);
+  padding:0 17px;
+}
+
+.answer-field:focus{
+  border-color:var(--answer-field-focus);
+}
+
+.answer-field::placeholder{
+  color:#6f6f74;
+  opacity:1;
+}
+
+@media(max-width:699px){
+  .answer-field{
+    height:60px;
+  }
+}
+</style>
+
+<input
+  id="answerField"
+  class="answer-field"
+  type="text"
+  autocomplete="off"
+  autocorrect="off"
+  autocapitalize="none"
+  spellcheck="false"
+  inputmode="none"
+  aria-label="Answer"
+>
