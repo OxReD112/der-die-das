@@ -91,7 +91,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.64 · shared answer field component</div>
+<div class="version">v2.65 · shared answer field component</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -104,6 +104,23 @@ document.addEventListener("deutsch-keyboard-input",e=>{
  if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
  if(k)input.value+=k;
 });
+async function loadAnswerFieldComponent(){
+  const mount=document.getElementById("answerFieldMount");
+  if(!mount)return false;
+  const r=await fetch("../components/deutsch-answer-field-v1.2.html");
+  if(!r.ok)throw new Error("Answer field component failed to load");
+  const text=await r.text();
+  const tpl=document.createElement("template");
+  tpl.innerHTML=text;
+  const scripts=[];
+  tpl.content.querySelectorAll("script").forEach(s=>{scripts.push(s.textContent);s.remove()});
+  mount.appendChild(tpl.content);
+  for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
+  const answerField=document.getElementById("answerField");
+  if(answerField)answerField.placeholder="Type the missing word";
+  return true;
+}
+
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
  if(!mount)return false;
@@ -265,5 +282,5 @@ function speakCurrent(){
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
-loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
+Promise.all([loadAnswerFieldComponent(),loadKeyboardComponent()]).then(()=>build()).catch(e=>{console.error(e);build()});
 </script></body></html>
