@@ -240,6 +240,12 @@ function recordVerbformenAnswer(){
 let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
 
 const $=id=>document.getElementById(id);
+const isMobileKeyboard = window.innerWidth < 700;
+if(isMobileKeyboard){
+  $("answer").readOnly=true;
+  $("answer").inputMode="none";
+  $("check").style.display="none";
+}
 const key=v=>v.infinitive.toLowerCase();
 
 function saveDifficulty(){
@@ -282,13 +288,13 @@ function render(){
  $("result").className="result";
  $("vowelPattern").textContent="";
  $("next").className="next";
- $("check").style.display="";
+ $("check").style.display=isMobileKeyboard?"none":"";
  $("count").textContent=(index+1)+" / "+deck.length;
  $("bar").style.width=((index+1)/deck.length*100)+"%";
  $("answer").disabled=false;
+ if(window.deutschKeyboardReady && isMobileKeyboard && !checked) $("keyboard").classList.add("show");
  setTimeout(()=>{
-   const isTouchPhone = window.matchMedia("(pointer: coarse)").matches;
-   if(!isTouchPhone){
+   if(!isMobileKeyboard){
      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
    }
   },80);
@@ -319,6 +325,7 @@ function checkAnswer(){
  updateDifficulty(v,ok);
 
  $("result").className="result show "+(ok?"good":"bad");
+ if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
  $("state").textContent=ok?"Correct":"Not quite";
  $("vowelPattern").textContent=v.pattern||"";
  $("forms").textContent=v.infinitive+" → "+v.preterite+" → "+v.participle;
@@ -336,12 +343,11 @@ function next(){
  index++;
  render();
 
- // On iPhone/mobile, Continue should take us straight into typing
- // without requiring another tap on the input.
- if(window.matchMedia("(pointer: coarse)").matches){
+ if(window.deutschKeyboardReady && isMobileKeyboard && !checked) $("keyboard").classList.add("show");
+ if(!isMobileKeyboard){
    setTimeout(()=>{
      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
-   },180);
+   },80);
  }
 }
 
