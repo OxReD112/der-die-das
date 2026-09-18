@@ -110,7 +110,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.18 · daily stats</div>
+<div class="version">v7.20 · home navigation</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
@@ -178,7 +178,28 @@ function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden')
 function next(){i++;if(i>=deck.length){finish();return}render()}
 function finish(){$('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;let arr=Object.entries(sessionWeak).sort((a,b)=>b[1]-a[1]).slice(0,3);if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(x=>x[0]).join('<br>')}else $('weak').classList.add('hidden')}
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
-  $('homeBack').onclick=()=>{window.parent.postMessage({type:'deutsch:home'}, '*')}
+  function goBackToHome(){
+  try{
+    if(window.parent && window.parent !== window){
+      if(typeof window.parent.closeApp === 'function'){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById('appShell');
+      const frame=parentDoc.getElementById('appFrame');
+      if(shell && frame){
+        shell.classList.remove('open');
+        shell.setAttribute('aria-hidden','true');
+        parentDoc.documentElement.classList.remove('app-open');
+        frame.src='about:blank';
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:'deutsch:home'}, '*');
+}
+$('homeBack').onclick=goBackToHome;
 document.addEventListener('keydown',e=>{if($('game').classList.contains('hidden'))return;if(!$('feedback').classList.contains('hidden')){if(e.key==='Enter')next();return}if(e.key==='Enter'){submit();return}if(e.key==='Backspace'){answer=answer.slice(0,-1);paintAnswer();return}if(e.key.length===1){answer+=e.key;paintAnswer()}})
 // Reusable German keyboard bridge: the component emits intent; Pronomen owns answer state.
 document.addEventListener('deutsch-keyboard-input',e=>{
