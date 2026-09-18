@@ -49,13 +49,13 @@ button{font:inherit}
 .answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}.answerTargetRow .speak{display:none;margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
 .detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
+#answerFieldMount{margin-top:34px;width:min(620px,100%)}
 .continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:#d5d5d7}.continue:active{transform:scale(1.05)}
 
 
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-#answerFieldMount{margin-top:34px;width:min(620px,100%)}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question #answerFieldMount{order:3;width:min(620px,100%);margin-top:28px}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}#answerFieldMount{width:min(620px,100%)}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
 
 </style>
@@ -91,7 +91,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.61 · swipe removed</div>
+<div class="version">v2.62 · answer field component test</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -107,16 +107,26 @@ document.addEventListener("deutsch-keyboard-input",e=>{
 async function loadAnswerFieldComponent(){
  const mount=document.getElementById("answerFieldMount");
  if(!mount)return false;
- const r=await fetch("../components/deutsch-answer-field-v1.0.html");
- if(!r.ok)throw new Error("Answer field component failed to load");
- const text=await r.text();
- const tpl=document.createElement("template");
- tpl.innerHTML=text;
- mount.appendChild(tpl.content);
- const input=document.getElementById("answerField");
- if(!input)throw new Error("Answer field component did not provide #answerField");
- window.deutschAnswerFieldReady=true;
- return true;
+ try{
+   const r=await fetch("../components/deutsch-answer-field-v1.1.html",{cache:"no-store"});
+   if(!r.ok)throw new Error("HTTP "+r.status);
+   const text=await r.text();
+   const tpl=document.createElement("template");
+   tpl.innerHTML=text;
+   mount.appendChild(tpl.content);
+   if(!document.getElementById("answerField"))throw new Error("Missing #answerField");
+   window.deutschAnswerFieldReady=true;
+   return true;
+ }catch(e){
+   console.error("Answer field component failed to load:",e);
+   // Keep the module functional if the component file is temporarily missing.
+   mount.innerHTML='<input id="answerField" class="answer-field" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none" aria-label="Answer">';
+   const style=document.createElement("style");
+   style.textContent='.answer-field{width:min(620px,100%);height:60px;border:1px solid rgba(255,255,255,.16);border-radius:18px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;outline:none;background:#222225;color:#f3f1ed;font:inherit;font-size:26px;text-align:center;caret-color:#43d2ad;padding:0 17px}.answer-field:focus{border-color:#43d2ad}.answer-field::placeholder{color:#6f6f74;opacity:1}';
+   document.head.appendChild(style);
+   window.deutschAnswerFieldFallback=true;
+   return false;
+ }
 }
 
 async function loadKeyboardComponent(){
@@ -270,7 +280,12 @@ document.addEventListener("keydown",e=>{
  if(!$("feedback").classList.contains("show"))return;
  e.preventDefault();next();
 });
-$("answerField").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
+document.addEventListener("keydown",e=>{
+ if(e.key!=="Enter")return;
+ const input=$("answerField");
+ if(!input||document.activeElement!==input)return;
+ e.preventDefault();e.stopPropagation();check();
+});
 function speakCurrent(){
  speechSynthesis.cancel();
  let u=new SpeechSynthesisUtterance(current.revealed);
@@ -279,5 +294,8 @@ function speakCurrent(){
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
-Promise.all([loadAnswerFieldComponent(),loadKeyboardComponent()]).then(()=>build()).catch(e=>{console.error(e);build()});
+loadAnswerFieldComponent()
+ .then(()=>loadKeyboardComponent())
+ .catch(e=>console.error(e))
+ .finally(()=>build());;
 </script></body></html>
