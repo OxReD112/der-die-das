@@ -27,7 +27,20 @@ button{font:inherit}
 .feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center}
 .feedbackShell.show{display:flex}
 .feedbackShell .feedback{width:100%}
-.feedbackShell .continue{margin-top:18px}
+.feedbackShell .continue{
+  width:auto;
+  margin-top:18px;
+  border:0;
+  border-radius:15px;
+  padding:10px 18px;
+  background:#eee8df;
+  color:#171719;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+}
+.feedbackShell .continue:hover{filter:brightness(1.03)}
+.feedbackShell .continue:active{transform:translateY(1px)}
 @media(max-width:699px){.feedbackShell{touch-action:manipulation;will-change:transform,opacity}}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 @keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
@@ -74,7 +87,7 @@ button{font:inherit}
     <div class="grammar" id="grammar"></div>
    </div>
   </div>
-  <button class="continue" id="continue">Next</button>
+  <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
