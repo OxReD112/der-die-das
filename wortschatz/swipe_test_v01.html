@@ -30,6 +30,9 @@ button{font:inherit}
   transition:padding .28s cubic-bezier(.2,.8,.2,1);
 }
 .feedback.revealed{padding-top:24px}
+.feedbackReveal{width:100%}
+#question{transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
+#question.hidden{opacity:0;transform:translateY(-8px);pointer-events:none}
 .feedback.show{display:block}
 .feedback.show{display:block}
 .feedbackShell{
@@ -83,24 +86,25 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#feedbackQuestion{display:flex!important;flex-direction:column;align-items:center;width:100%}#feedbackQuestion .topZone{order:1}.feedback .topZone{width:100%}#feedbackQuestion .inputbox{order:3}#feedbackQuestion .check{order:4}#feedbackQuestion #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
 
 </style>
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
 <section class="stage" id="study">
- <div id="question">
-  <div class="topZone">
-   <div class="sentence" id="sentence"></div>
-   <div class="translation" id="translation"></div>
-  </div>
-  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
-  <button class="check" id="desktopCheck">Check</button>
-  <div id="keyboardMount"></div>
- </div>
- <div class="feedbackShell" id="feedbackShell">
+ <div class="feedbackShell show" id="feedbackShell">
   <div class="feedback" id="feedback">
+   <div id="question">
+    <div class="topZone">
+     <div class="sentence" id="sentence"></div>
+     <div class="translation" id="translation"></div>
+    </div>
+    <input id="answerInput" class="inputbox cardInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+    <button class="check cardCheck" id="desktopCheck">Check</button>
+    <div id="keyboardMount"></div>
+   </div>
+   <div class="feedbackReveal">
    <div class="topZone answerTop" id="answerTop">
     <div class="answerSentence" id="answerSentence"></div>
     <div class="answerTranslation" id="answerTranslation"></div>
@@ -113,12 +117,13 @@ button{font:inherit}
     <div class="meaning" id="meaning"></div>
     <div class="grammar" id="grammar"></div>
    </div>
+   </div>
   </div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.61 · swipe removed</div>
+<div class="version">v2.62 · persistent card + swipe</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -212,7 +217,7 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
- $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
+ $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -239,7 +244,7 @@ function check(){
    const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
- $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
+ $("question").classList.add("hidden");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show revealed "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
  $("answerTranslation").textContent=current.ru;
  let displayCorrect=normalize(correct);
  if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
