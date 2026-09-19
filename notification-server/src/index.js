@@ -8,7 +8,57 @@ export default {
     if (request.method === "GET" && url.pathname === "/") {
       return new Response("German Learning notification server is alive.");
     }
-// Read notification pool
+
+    // Mark today's learning as done
+if (request.method === "POST" && url.pathname === "/done") {
+  try {
+    const body = await request.json();
+    const { date } = body;
+
+    if (typeof date !== "string" || !date) {
+      return new Response(
+        JSON.stringify({ error: "date is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    await env.GERMAN_NOTIFICATION_STATE.put(
+      `done:${date}`,
+      JSON.stringify({
+        date,
+        done: true,
+        updatedAt: new Date().toISOString(),
+      })
+    );
+
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        date,
+        done: true,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("DONE error:", error);
+
+    return new Response(
+      JSON.stringify({ error: "Invalid request" }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+}
+    
+    // Read notification pool
 if (request.method === "GET" && url.pathname === "/pool") {
   const stored = await env.GERMAN_NOTIFICATION_STATE.get(
     "notification_pool"
