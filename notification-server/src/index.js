@@ -329,3 +329,4 @@ async scheduled(controller, env, ctx) {
     notification.ru
   );
 },
+};
