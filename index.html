@@ -2041,7 +2041,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.15</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.16</div>
 
 
   <button
@@ -2187,7 +2187,7 @@ const NOTIFICATION_ENABLED_KEY="deutschNotificationEnabledV1";
 const notificationToggle=document.getElementById("notificationToggle");
 
 function notificationEnabled(){
-  return localStorage.getItem(NOTIFICATION_ENABLED_KEY)!=="0";
+  return localStorage.getItem(NOTIFICATION_ENABLED_KEY)==="1";
 }
 
 function renderNotificationToggle(){
