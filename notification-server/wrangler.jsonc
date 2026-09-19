@@ -2,5 +2,8 @@
   "$schema": "https://json.schemastore.org/wrangler.json",
   "name": "german-learning-notifications",
   "main": "src/index.js",
-  "compatibility_date": "2026-09-19"
+  "compatibility_date": "2026-09-19",
+  "triggers": {
+    "crons": ["*/15 * * * *"]
+  }
 }
