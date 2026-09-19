@@ -119,7 +119,6 @@ button{font:inherit}
     box-shadow:none;overflow:visible;transform:none!important;opacity:1!important;
   }
   .feedback.show{display:block}
-  .feedback .feedbackQuestion{display:none!important}
   .feedback .feedbackReveal{
     display:block!important;max-height:none!important;opacity:1!important;
     transform:none!important;overflow:visible!important;
@@ -172,7 +171,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · responsive mobile card + classic desktop · fix 9</div>
+<div class="version">v2.62 · responsive mobile card + classic desktop · fix 10</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -269,7 +268,7 @@ function render(){
  $("resultSlot").style.display="none";$("targetForm").style.display="none";$("diffBlock").style.display="none";$("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
  $("answerInput").disabled=false;
  $("answerInput").removeAttribute("aria-disabled");
- $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady)$("keyboard").classList.toggle("show",innerWidth<700);
+ $("question").classList.remove("answer-checked");$("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady)$("keyboard").classList.toggle("show",innerWidth<700);
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -316,7 +315,7 @@ function check(){
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
  $("keyboard").classList.remove("show");
- if(innerWidth>=700){$("question").style.setProperty("display","none","important");}
+ if(innerWidth>=700){$("question").classList.add("answer-checked");}
  // First show the finished card in its collapsed state. This gives the glow
  // the exact starting position of the divider before the reveal animation begins.
  $("feedbackShell").className="feedbackShell show";
