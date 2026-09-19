@@ -2041,7 +2041,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.16</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.17</div>
 
 
   <button
@@ -2180,10 +2180,11 @@ syncHomeDashboard();
 
 
 
-/* Daily notification setting.
-   This step controls the Home switch and persists it locally.
-   Server STOP/GO syncing will be connected separately. */
+/* Notifications v4.17 — persistent Home switch + Worker STOP/GO.
+   The switch is OFF by default. Local state is kept in localStorage.
+   The Worker is updated only when the user explicitly changes the switch. */
 const NOTIFICATION_ENABLED_KEY="deutschNotificationEnabledV1";
+const NOTIFICATION_SERVER_URL="https://german-learning-notifications.d45zgw2cgh.workers.dev";
 const notificationToggle=document.getElementById("notificationToggle");
 
 function notificationEnabled(){
@@ -2197,10 +2198,38 @@ function renderNotificationToggle(){
   notificationToggle.setAttribute("aria-checked",enabled?"true":"false");
 }
 
-notificationToggle?.addEventListener("click",()=>{
+async function setServerNotifications(enabled){
+  const endpoint=enabled ? "/go" : "/stop";
+  try{
+    const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:"{}"
+    });
+    if(!response.ok)throw new Error("server-status-"+response.status);
+    return true;
+  }catch(error){
+    console.error("Notification server update failed:",error);
+    return false;
+  }
+}
+
+notificationToggle?.addEventListener("click",async()=>{
   const next=!notificationEnabled();
+
+  /* Update the visible/local state immediately. */
   localStorage.setItem(NOTIFICATION_ENABLED_KEY,next?"1":"0");
   renderNotificationToggle();
+
+  /* Then tell the Worker to GO or STOP. */
+  const ok=await setServerNotifications(next);
+
+  /* If the Worker could not be reached, revert so Home and server
+     cannot silently disagree. */
+  if(!ok){
+    localStorage.setItem(NOTIFICATION_ENABLED_KEY,next?"0":"1");
+    renderNotificationToggle();
+  }
 });
 
 renderNotificationToggle();
