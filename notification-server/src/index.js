@@ -3,6 +3,7 @@ import webpush from "web-push";
 const MAX_NOTIFICATIONS = 4;
 const NOTIFICATIONS_ENABLED_PREFIX = "enabled:";
 const PUSH_SUBSCRIPTION_PREFIX = "subscription:";
+const TEST_PUSH_TOKEN = "german-test-20260919";
 
 function getIdentity(bodyOrUrl) {
   const explicitUserId =
@@ -168,6 +169,48 @@ export default {
         deviceId: identity.deviceId,
         enabled: stored === "1",
       });
+    }
+
+    // TEMPORARY PUSH DELIVERY TEST — remove after verification.
+    if (request.method === "GET" && url.pathname === "/test-push") {
+      if (url.searchParams.get("token") !== TEST_PUSH_TOKEN) {
+        return jsonResponse({ error: "Not found" }, 404);
+      }
+
+      const storedUsers = await env.GERMAN_NOTIFICATION_STATE.get("users:index");
+      const users = storedUsers ? JSON.parse(storedUsers) : [];
+      let attempted = 0;
+
+      for (const userId of Array.isArray(users) ? users : []) {
+        const enabled = await env.GERMAN_NOTIFICATION_STATE.get(enabledKey(userId));
+        if (enabled !== "1") continue;
+
+        const subscriptionKeys = await env.GERMAN_NOTIFICATION_STATE.list({
+          prefix: `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`,
+        });
+
+        for (const key of subscriptionKeys.keys) {
+          const deviceId = key.name.slice(
+            `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`.length
+          );
+          attempted++;
+          const result = await sendPush(
+            env,
+            {
+              de: "Push-Test: Die Benachrichtigungen funktionieren.",
+              ru: "Тест push: уведомления работают.",
+            },
+            userId,
+            deviceId
+          );
+          console.log(
+            `[TEST PUSH] user ${userId}, device ${deviceId}:`,
+            JSON.stringify(result)
+          );
+        }
+      }
+
+      return jsonResponse({ ok: true, attempted });
     }
 
     // Return the public VAPID key for browser subscription.
