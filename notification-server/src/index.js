@@ -1,8 +1,54 @@
 import webpush from "web-push";
 
 const MAX_NOTIFICATIONS = 4;
-const NOTIFICATIONS_ENABLED_KEY = "notifications_enabled";
-const PUSH_SUBSCRIPTION_KEY = "push_subscription";
+const NOTIFICATIONS_ENABLED_PREFIX = "enabled:";
+const PUSH_SUBSCRIPTION_PREFIX = "subscription:";
+
+function getIdentity(bodyOrUrl) {
+  const explicitUserId =
+    bodyOrUrl?.userId ||
+    bodyOrUrl?.searchParams?.get?.("userId") ||
+    null;
+
+  const deviceId =
+    bodyOrUrl?.deviceId ||
+    bodyOrUrl?.searchParams?.get?.("deviceId") ||
+    null;
+
+  // Until Home is updated to send a separate userId, deviceId acts as
+  // the user's current identity. This keeps the current app compatible.
+  const userId = explicitUserId || deviceId;
+
+  if (
+    typeof userId !== "string" ||
+    !userId ||
+    typeof deviceId !== "string" ||
+    !deviceId
+  ) {
+    return null;
+  }
+
+  return { userId, deviceId };
+}
+
+async function registerUser(env, userId) {
+  const key = "users:index";
+  const stored = await env.GERMAN_NOTIFICATION_STATE.get(key);
+  const users = stored ? JSON.parse(stored) : [];
+
+  if (!users.includes(userId)) {
+    users.push(userId);
+    await env.GERMAN_NOTIFICATION_STATE.put(key, JSON.stringify(users));
+  }
+}
+
+function enabledKey(userId) {
+  return `${NOTIFICATIONS_ENABLED_PREFIX}${userId}`;
+}
+
+function subscriptionKey(userId, deviceId) {
+  return `${PUSH_SUBSCRIPTION_PREFIX}${userId}:${deviceId}`;
+}
 const VAPID_SUBJECT =
   "https://german-learning-notifications.d45zgw2cgh.workers.dev";
 
@@ -30,9 +76,9 @@ function configureVapid(env) {
   );
 }
 
-async function sendPush(env, notification) {
+async function sendPush(env, notification, userId, deviceId) {
   const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-    PUSH_SUBSCRIPTION_KEY
+    subscriptionKey(userId, deviceId)
   );
 
   if (!stored) {
@@ -70,7 +116,7 @@ async function sendPush(env, notification) {
     // 404/410 means the browser subscription is no longer valid.
     if (statusCode === 404 || statusCode === 410) {
       await env.GERMAN_NOTIFICATION_STATE.delete(
-        PUSH_SUBSCRIPTION_KEY
+        subscriptionKey(userId, deviceId)
       );
       console.log("[PUSH] Removed expired subscription.");
     }
@@ -104,11 +150,22 @@ export default {
 
     // Read current notification state
     if (request.method === "GET" && url.pathname === "/status") {
+      const identity = getIdentity(url);
+
+      if (!identity) {
+        return jsonResponse(
+          { error: "userId and deviceId are required" },
+          400
+        );
+      }
+
       const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-        NOTIFICATIONS_ENABLED_KEY
+        enabledKey(identity.userId)
       );
 
       return jsonResponse({
+        userId: identity.userId,
+        deviceId: identity.deviceId,
         enabled: stored === "1",
       });
     }
@@ -130,9 +187,14 @@ export default {
     // Save the iPhone Web Push subscription.
     if (request.method === "POST" && url.pathname === "/subscribe") {
       try {
-        const subscription = await request.json();
+        const body = await request.json();
+        const { userId, deviceId, subscription } = body;
 
         if (
+          typeof userId !== "string" ||
+          !userId ||
+          typeof deviceId !== "string" ||
+          !deviceId ||
           !subscription ||
           typeof subscription.endpoint !== "string" ||
           !subscription.keys ||
@@ -146,11 +208,15 @@ export default {
         }
 
         await env.GERMAN_NOTIFICATION_STATE.put(
-          PUSH_SUBSCRIPTION_KEY,
+          subscriptionKey(userId, deviceId),
           JSON.stringify(subscription)
         );
 
-        console.log("[PUSH] Subscription saved.");
+        await registerUser(env, userId);
+
+        console.log(
+          `[PUSH] Subscription saved for user ${userId}, device ${deviceId}.`
+        );
 
         return jsonResponse({
           ok: true,
@@ -172,7 +238,7 @@ export default {
       url.pathname === "/unsubscribe"
     ) {
       await env.GERMAN_NOTIFICATION_STATE.delete(
-        PUSH_SUBSCRIPTION_KEY
+        subscriptionKey(userId, deviceId)
       );
 
       return jsonResponse({
@@ -184,8 +250,20 @@ export default {
     // STOP: disable scheduled notifications.
     // The notification pool and push subscription are kept.
     if (request.method === "POST" && url.pathname === "/stop") {
+      const body = await request.json();
+      const identity = getIdentity(body);
+
+      if (!identity) {
+        return jsonResponse(
+          { error: "userId and deviceId are required" },
+          400
+        );
+      }
+
+      await registerUser(env, identity.userId);
+
       await env.GERMAN_NOTIFICATION_STATE.put(
-        NOTIFICATIONS_ENABLED_KEY,
+        enabledKey(identity.userId),
         "0"
       );
 
@@ -201,8 +279,20 @@ export default {
 
     // GO: enable scheduled notifications.
     if (request.method === "POST" && url.pathname === "/go") {
+      const body = await request.json();
+      const identity = getIdentity(body);
+
+      if (!identity) {
+        return jsonResponse(
+          { error: "userId and deviceId are required" },
+          400
+        );
+      }
+
+      await registerUser(env, identity.userId);
+
       await env.GERMAN_NOTIFICATION_STATE.put(
-        NOTIFICATIONS_ENABLED_KEY,
+        enabledKey(identity.userId),
         "1"
       );
 
@@ -218,7 +308,15 @@ export default {
 
     // Read DONE status
     if (request.method === "GET" && url.pathname === "/done") {
+      const identity = getIdentity(url);
       const date = url.searchParams.get("date");
+
+      if (!identity) {
+        return jsonResponse(
+          { error: "userId and deviceId are required" },
+          400
+        );
+      }
 
       if (!date) {
         return jsonResponse(
@@ -228,7 +326,7 @@ export default {
       }
 
       const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-        `done:${date}`
+        `done:${identity.userId}:${date}`
       );
 
       if (!stored) {
@@ -249,8 +347,26 @@ export default {
 
     // Read notification pool
     if (request.method === "GET" && url.pathname === "/pool") {
+      const identity = getIdentity(url);
+
+      if (!identity) {
+        return jsonResponse(
+          { error: "userId and deviceId are required" },
+          400
+        );
+      }
+
+      const date = url.searchParams.get("date");
+
+      if (!date) {
+        return jsonResponse(
+          { error: "date is required" },
+          400
+        );
+      }
+
       const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-        "notification_pool"
+        `pool:${identity.userId}:${date}`
       );
 
       if (!stored) {
@@ -273,7 +389,19 @@ export default {
     if (request.method === "POST" && url.pathname === "/pool") {
       try {
         const body = await request.json();
-        const { date, notifications } = body;
+        const { date, notifications, userId, deviceId } = body;
+
+        if (
+          typeof userId !== "string" ||
+          !userId ||
+          typeof deviceId !== "string" ||
+          !deviceId
+        ) {
+          return jsonResponse(
+            { error: "userId and deviceId are required" },
+            400
+          );
+        }
 
         if (typeof date !== "string" || !date) {
           return jsonResponse(
@@ -304,8 +432,10 @@ export default {
           updatedAt: new Date().toISOString(),
         };
 
+        await registerUser(env, userId);
+
         await env.GERMAN_NOTIFICATION_STATE.put(
-          "notification_pool",
+          `pool:${userId}:${date}`,
           JSON.stringify(state)
         );
 
@@ -328,7 +458,19 @@ export default {
     if (request.method === "POST" && url.pathname === "/done") {
       try {
         const body = await request.json();
-        const { date } = body;
+        const { date, userId, deviceId } = body;
+
+        if (
+          typeof userId !== "string" ||
+          !userId ||
+          typeof deviceId !== "string" ||
+          !deviceId
+        ) {
+          return jsonResponse(
+            { error: "userId and deviceId are required" },
+            400
+          );
+        }
 
         if (typeof date !== "string" || !date) {
           return jsonResponse(
@@ -337,8 +479,10 @@ export default {
           );
         }
 
+        await registerUser(env, userId);
+
         await env.GERMAN_NOTIFICATION_STATE.put(
-          `done:${date}`,
+          `done:${userId}:${date}`,
           JSON.stringify({
             date,
             done: true,
@@ -400,64 +544,80 @@ export default {
       `[CRON] Checking notification slot: ${date} ${time}`
     );
 
-    // Notifications are OFF by default.
-    const enabled = await env.GERMAN_NOTIFICATION_STATE.get(
-      NOTIFICATIONS_ENABLED_KEY
-    );
+    // Each user is independent. The index contains only anonymous IDs.
+    const storedUsers = await env.GERMAN_NOTIFICATION_STATE.get("users:index");
+    const users = storedUsers ? JSON.parse(storedUsers) : [];
 
-    if (enabled !== "1") {
-      console.log(
-        `[CRON] ${date} ${time} — notifications are OFF. Nothing to send.`
-      );
-      return;
-    }
-
-    // DONE stops all remaining notifications for the day.
-    const done = await env.GERMAN_NOTIFICATION_STATE.get(
-      `done:${date}`
-    );
-
-    if (done) {
-      console.log(
-        `[CRON] ${date} ${time} — DONE already received. Nothing to send.`
-      );
-      return;
-    }
-
-    const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
-      "notification_pool"
-    );
-
-    if (!storedPool) {
-      console.log(
-        `[CRON] ${date} ${time} — no notification pool found.`
-      );
-      return;
-    }
-
-    const poolState = JSON.parse(storedPool);
-    const pool = Array.isArray(poolState.notifications)
-      ? poolState.notifications
-      : [];
-
-    if (pool.length === 0) {
-      console.log(
-        `[CRON] ${date} ${time} — notification pool is empty.`
-      );
+    if (!Array.isArray(users) || users.length === 0) {
+      console.log(`[CRON] ${date} ${time} — no registered users.`);
       return;
     }
 
     const slotIndex = slots.indexOf(time);
-    const notification = pool[slotIndex % pool.length];
 
-    // Do not block the scheduled handler longer than necessary.
-    ctx.waitUntil(
-      sendPush(env, notification).then(result => {
-        console.log(
-          `[CRON] ${date} ${time} — push result:`,
-          JSON.stringify(result)
+    for (const userId of users) {
+      const enabled = await env.GERMAN_NOTIFICATION_STATE.get(
+        enabledKey(userId)
+      );
+
+      if (enabled !== "1") {
+        continue;
+      }
+
+      const done = await env.GERMAN_NOTIFICATION_STATE.get(
+        `done:${userId}:${date}`
+      );
+
+      if (done) {
+        continue;
+      }
+
+      const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
+        `pool:${userId}:${date}`
+      );
+
+      if (!storedPool) {
+        continue;
+      }
+
+      let poolState;
+      try {
+        poolState = JSON.parse(storedPool);
+      } catch {
+        console.error(`[CRON] Invalid pool for user ${userId}.`);
+        continue;
+      }
+
+      const pool = Array.isArray(poolState.notifications)
+        ? poolState.notifications
+        : [];
+
+      if (pool.length === 0) {
+        continue;
+      }
+
+      const notification = pool[slotIndex % pool.length];
+
+      // A user currently has one active device. Multiple devices are
+      // structurally supported by device-scoped subscription keys.
+      const subscriptionKeys = await env.GERMAN_NOTIFICATION_STATE.list({
+        prefix: `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`,
+      });
+
+      for (const key of subscriptionKeys.keys) {
+        const deviceId = key.name.slice(
+          `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`.length
         );
-      })
-    );
+
+        ctx.waitUntil(
+          sendPush(env, notification, userId, deviceId).then(result => {
+            console.log(
+              `[CRON] ${date} ${time} — user ${userId}, device ${deviceId}:`,
+              JSON.stringify(result)
+            );
+          })
+        );
+      }
+    }
   },
 };
