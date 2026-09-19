@@ -2041,7 +2041,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.17</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.18 DEBUG</div>
 
 
   <button
@@ -2199,22 +2199,31 @@ function renderNotificationToggle(){
 }
 
 async function setServerNotifications(enabled){
-  const endpoint=enabled ? "/go" : "/stop";
-  try{
-    const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:"{}"
-    });
-    if(!response.ok)throw new Error("server-status-"+response.status);
-    return true;
-  }catch(error){
-    console.error("Notification server update failed:",error);
-    return false;
-  }
-}
+      const endpoint=enabled ? "/go" : "/stop";
+      try{
+        const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:"{}"
+        });
 
-notificationToggle?.addEventListener("click",async()=>{
+        const responseText=await response.text();
+
+        console.log("Notification server response:",response.status,responseText);
+
+        if(!response.ok){
+          throw new Error("server-status-"+response.status+" "+responseText);
+        }
+
+        return true;
+      }catch(error){
+        console.error("Notification server update failed:",error);
+        alert("Notification server error:\n\n"+error.message);
+        return false;
+      }
+    }
+
+    notificationToggle?.addEventListener("click",async()=>{
   const next=!notificationEnabled();
 
   /* Update the visible/local state immediately. */
