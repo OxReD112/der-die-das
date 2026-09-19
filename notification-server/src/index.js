@@ -8,7 +8,28 @@ export default {
     if (request.method === "GET" && url.pathname === "/") {
       return new Response("German Learning notification server is alive.");
     }
+// Read notification pool
+if (request.method === "GET" && url.pathname === "/pool") {
+  const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+    "notification_pool"
+  );
 
+  if (!stored) {
+    return new Response(
+      JSON.stringify({ error: "No notification pool found" }),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+
+  return new Response(stored, {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+    
     // Save notification pool
     if (request.method === "POST" && url.pathname === "/pool") {
       try {
