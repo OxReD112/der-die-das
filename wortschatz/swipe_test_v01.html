@@ -107,6 +107,26 @@ button{font:inherit}
     border-radius:0;
     background:transparent;
   }
+
+  /* Desktop: keep Check aligned with the answer field. */
+  #question .cardCheck{
+    align-self:center;
+    width:min(620px,100%);
+  }
+
+  /* Desktop: Check exists only in the question state. */
+  .feedbackShell.revealed .cardCheck{
+    display:none!important;
+  }
+
+  /* Desktop: keep the reveal glow comfortably inside the content area,
+     so its edges fade before the shell/container edges become visible. */
+  .feedback.good::before,
+  .feedback.bad::before{
+    width:105%;
+    height:72%;
+    top:14%;
+  }
 }
 
 </style>
@@ -142,7 +162,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · desktop minimal · fix 11</div>
+<div class="version">v2.62 · persistent card + swipe · desktop minimal · fix 12</div>
 </main>
 <script src="words.js"></script>
 <script>
