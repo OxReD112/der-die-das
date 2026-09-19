@@ -3,7 +3,6 @@ import webpush from "web-push";
 const MAX_NOTIFICATIONS = 4;
 const NOTIFICATIONS_ENABLED_PREFIX = "enabled:";
 const PUSH_SUBSCRIPTION_PREFIX = "subscription:";
-const TEST_PUSH_TOKEN = "german-test-20260919";
 
 function getIdentity(bodyOrUrl) {
   const explicitUserId =
@@ -171,48 +170,6 @@ export default {
       });
     }
 
-    // TEMPORARY PUSH DELIVERY TEST — remove after verification.
-    if (request.method === "GET" && url.pathname === "/test-push") {
-      if (url.searchParams.get("token") !== TEST_PUSH_TOKEN) {
-        return jsonResponse({ error: "Not found" }, 404);
-      }
-
-      const storedUsers = await env.GERMAN_NOTIFICATION_STATE.get("users:index");
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-      let attempted = 0;
-
-      for (const userId of Array.isArray(users) ? users : []) {
-        const enabled = await env.GERMAN_NOTIFICATION_STATE.get(enabledKey(userId));
-        if (enabled !== "1") continue;
-
-        const subscriptionKeys = await env.GERMAN_NOTIFICATION_STATE.list({
-          prefix: `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`,
-        });
-
-        for (const key of subscriptionKeys.keys) {
-          const deviceId = key.name.slice(
-            `${PUSH_SUBSCRIPTION_PREFIX}${userId}:`.length
-          );
-          attempted++;
-          const result = await sendPush(
-            env,
-            {
-              de: "Push-Test: Die Benachrichtigungen funktionieren.",
-              ru: "Тест push: уведомления работают.",
-            },
-            userId,
-            deviceId
-          );
-          console.log(
-            `[TEST PUSH] user ${userId}, device ${deviceId}:`,
-            JSON.stringify(result)
-          );
-        }
-      }
-
-      return jsonResponse({ ok: true, attempted });
-    }
-
     // Return the public VAPID key for browser subscription.
     if (request.method === "GET" && url.pathname === "/push-config") {
       if (!env.VAPID_PUBLIC_KEY) {
@@ -280,14 +237,33 @@ export default {
       request.method === "POST" &&
       url.pathname === "/unsubscribe"
     ) {
-      await env.GERMAN_NOTIFICATION_STATE.delete(
-        subscriptionKey(userId, deviceId)
-      );
+      try {
+        const body = await request.json();
+        const identity = getIdentity(body);
 
-      return jsonResponse({
-        ok: true,
-        subscribed: false,
-      });
+        if (!identity) {
+          return jsonResponse(
+            { error: "userId and deviceId are required" },
+            400
+          );
+        }
+
+        await env.GERMAN_NOTIFICATION_STATE.delete(
+          subscriptionKey(identity.userId, identity.deviceId)
+        );
+
+        return jsonResponse({
+          ok: true,
+          subscribed: false,
+        });
+      } catch (error) {
+        console.error("Unsubscribe error:", error);
+
+        return jsonResponse(
+          { error: "Invalid request" },
+          400
+        );
+      }
     }
 
     // STOP: disable scheduled notifications.
