@@ -30,8 +30,8 @@ button{font:inherit}
   transition:padding .28s cubic-bezier(.2,.8,.2,1);
 }
 .feedback::before{content:"";position:absolute;z-index:0;left:50%;top:0;width:150%;height:100%;transform:translateX(-50%);pointer-events:none;opacity:0}
-.feedback.good::before{background:radial-gradient(ellipse at 50% 42%,rgba(67,210,173,.34) 0%,rgba(67,210,173,.19) 22%,rgba(67,210,173,.08) 48%,rgba(67,210,173,.025) 68%,transparent 82%);opacity:1}
-.feedback.bad::before{background:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.42) 0%,rgba(255,105,105,.23) 22%,rgba(255,105,105,.09) 48%,rgba(255,105,105,.03) 68%,transparent 82%);opacity:1}
+.feedback.good::before{background:radial-gradient(ellipse at 50% var(--glow-y, 72%),rgba(67,210,173,.34) 0%,rgba(67,210,173,.19) 22%,rgba(67,210,173,.08) 48%,rgba(67,210,173,.025) 68%,transparent 82%);opacity:1}
+.feedback.bad::before{background:radial-gradient(ellipse at 50% var(--glow-y, 72%),rgba(255,105,105,.42) 0%,rgba(255,105,105,.23) 22%,rgba(255,105,105,.09) 48%,rgba(255,105,105,.03) 68%,transparent 82%);opacity:1}
 .feedback > *{position:relative;z-index:1}
 .feedback.revealed{padding-top:34px}
 .feedbackReveal{width:100%}
@@ -60,7 +60,8 @@ button{font:inherit}
 .feedbackShell .continue:hover{filter:brightness(1.03)}
 .feedbackShell .continue:active{transform:translateY(1px)}
 .feedbackShell.revealed .continue{display:block}
-#keyboardMount{width:min(690px,100%);display:flex;justify-content:center}
+#keyboardMount{width:min(690px,100%);display:flex;justify-content:center;flex:0 0 auto}
+.feedbackShell > .continue{flex:0 0 auto}
 .feedbackQuestion{display:block}
 .feedbackQuestion.hidden{display:none}
 .feedbackReveal{display:block;max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transform-origin:top center;will-change:max-height,opacity,transform}
@@ -127,12 +128,13 @@ button{font:inherit}
     <div class="grammar" id="grammar"></div>
    </div>
    </div>
+  </div>
   <div id="keyboardMount"></div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · fix 5</div>
+<div class="version">v2.62 · persistent card + swipe · fix 6</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -246,6 +248,16 @@ function diffHTML(typed,correct){
  }
  return [top.join(""),bottom.join("")];
 }
+function syncGlowToDivider(){
+ const card=$("feedback"), line=$("feedback")?.querySelector(".detail");
+ if(!card||!line||!$("feedback").classList.contains("revealed")) return;
+ const cr=card.getBoundingClientRect(), lr=line.getBoundingClientRect();
+ if(!cr.height) return;
+ const y=((lr.top-cr.top)/cr.height)*100;
+ card.style.setProperty("--glow-y",`${Math.max(5,Math.min(95,y))}%`);
+}
+window.addEventListener("resize",()=>{ if($("feedback")?.classList.contains("revealed")) syncGlowToDivider(); });
+
 function check(){
  let typed=normalize($("answerInput").value);if(!typed)return;
  const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
@@ -269,6 +281,7 @@ function check(){
  }
  $("targetForm").textContent=displayCorrect;
  $("resultSlot").style.display="flex";
+ requestAnimationFrame(()=>{syncGlowToDivider(); setTimeout(syncGlowToDivider,420);});
  if(ok){
    $("targetForm").style.display="inline-block";
    $("diffBlock").style.display="none";
