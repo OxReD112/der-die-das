@@ -134,7 +134,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · fix 6</div>
+<div class="version">v2.62 · persistent card + swipe · fix 7</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -250,11 +250,20 @@ function diffHTML(typed,correct){
 }
 function syncGlowToDivider(){
  const card=$("feedback"), line=$("feedback")?.querySelector(".detail");
- if(!card||!line||!$("feedback").classList.contains("revealed")) return;
+ if(!card||!line) return;
  const cr=card.getBoundingClientRect(), lr=line.getBoundingClientRect();
  if(!cr.height) return;
  const y=((lr.top-cr.top)/cr.height)*100;
  card.style.setProperty("--glow-y",`${Math.max(5,Math.min(95,y))}%`);
+}
+function animateGlowWithReveal(duration=420){
+ const start=performance.now();
+ function frame(now){
+   syncGlowToDivider();
+   if(now-start<duration) requestAnimationFrame(frame);
+   else syncGlowToDivider();
+ }
+ requestAnimationFrame(frame);
 }
 window.addEventListener("resize",()=>{ if($("feedback")?.classList.contains("revealed")) syncGlowToDivider(); });
 
@@ -269,8 +278,10 @@ function check(){
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
  $("keyboard").classList.remove("show");
- $("feedbackShell").className="feedbackShell show revealed";
- $("feedback").className="feedback show revealed "+(ok?"good":"bad");
+ // First show the finished card in its collapsed state. This gives the glow
+ // the exact starting position of the divider before the reveal animation begins.
+ $("feedbackShell").className="feedbackShell show";
+ $("feedback").className="feedback show "+(ok?"good":"bad");
  // Keep the original question area fixed and fill its blank in-place.
  $("sentence").innerHTML=revealHTML(current);
  $("answerInput").disabled=true;
@@ -281,7 +292,14 @@ function check(){
  }
  $("targetForm").textContent=displayCorrect;
  $("resultSlot").style.display="flex";
- requestAnimationFrame(()=>{syncGlowToDivider(); setTimeout(syncGlowToDivider,420);});
+ // Anchor the gradient to the divider before opening, then track the divider
+ // frame-by-frame while the lower half expands.
+ syncGlowToDivider();
+ requestAnimationFrame(()=>{
+   $("feedbackShell").classList.add("revealed");
+   $("feedback").classList.add("revealed");
+   animateGlowWithReveal(420);
+ });
  if(ok){
    $("targetForm").style.display="inline-block";
    $("diffBlock").style.display="none";
