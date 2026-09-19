@@ -24,7 +24,7 @@ button{font:inherit}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .feedback{
   display:block;width:min(690px,100%);position:relative;isolation:isolate;
-  padding:24px 24px 24px;overflow:visible;
+  padding:34px 24px 24px;overflow:visible;
   border:1px solid rgba(255,255,255,.10);border-radius:28px;
   background:#202023;transform-origin:center center;
   transition:padding .28s cubic-bezier(.2,.8,.2,1);
@@ -32,7 +32,7 @@ button{font:inherit}
 .feedback.revealed{padding-top:24px}
 .feedbackReveal{width:100%}
 #question{transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
-#question.hidden{opacity:0;transform:translateY(-8px);pointer-events:none}
+#question.hidden{display:none}
 .feedback.show{display:block}
 .feedback.show{display:block}
 .feedbackShell{
@@ -42,7 +42,7 @@ button{font:inherit}
 .feedbackShell.show{display:flex}
 .feedbackShell .feedback{width:100%}
 .feedbackShell .continue{
-  width:auto;
+  display:none;width:auto;
   margin-top:18px;
   border:0;
   border-radius:15px;
@@ -55,6 +55,8 @@ button{font:inherit}
 }
 .feedbackShell .continue:hover{filter:brightness(1.03)}
 .feedbackShell .continue:active{transform:translateY(1px)}
+.feedbackShell.revealed .continue{display:block}
+#keyboardMount{width:min(690px,100%);display:flex;justify-content:center}
 .feedbackQuestion{display:block}
 .feedbackQuestion.hidden{display:none}
 .feedbackReveal{display:none}
@@ -86,7 +88,7 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:24px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
 
 </style>
 </head>
@@ -102,7 +104,6 @@ button{font:inherit}
     </div>
     <input id="answerInput" class="inputbox cardInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
     <button class="check cardCheck" id="desktopCheck">Check</button>
-    <div id="keyboardMount"></div>
    </div>
    <div class="feedbackReveal">
    <div class="topZone answerTop" id="answerTop">
@@ -119,11 +120,12 @@ button{font:inherit}
    </div>
    </div>
   </div>
+  <div id="keyboardMount"></div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe</div>
+<div class="version">v2.62 · persistent card + swipe · fix 2</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -244,7 +246,7 @@ function check(){
    const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
- $("question").classList.add("hidden");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show revealed "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
+ $("question").classList.add("hidden");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show revealed";$("feedback").className="feedback show revealed "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
  $("answerTranslation").textContent=current.ru;
  let displayCorrect=normalize(correct);
  if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
@@ -291,7 +293,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
 
 // Mobile reveal navigation: soft Tinder-like drag left for the persistent card.
 (()=>{
- const shell=$("feedbackShell");
+ const shell=$("feedback");
  let startX=0,startY=0,lastX=0,startT=0,tracking=false,horizontal=false,finishing=false;
 
  const clean=()=>{
@@ -319,7 +321,7 @@ $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDef
  };
 
  shell.addEventListener("touchstart",e=>{
-   if(innerWidth>=700||!shell.classList.contains("show")||finishing||e.touches.length!==1)return;
+   if(innerWidth>=700||!$("feedback").classList.contains("show")||finishing||e.touches.length!==1)return;
    if(e.target.closest("button,a,input,textarea,select"))return;
    const t=e.touches[0];
    startX=lastX=t.clientX; startY=t.clientY; startT=performance.now();
