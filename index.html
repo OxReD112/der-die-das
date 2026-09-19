@@ -1935,6 +1935,54 @@ header h1{
 }
 
 
+
+/* Home v4.15 — notification toggle */
+.notification-toggle{
+  position:fixed;
+  right:max(18px, env(safe-area-inset-right));
+  bottom:calc(env(safe-area-inset-bottom) + 18px);
+  z-index:30;
+  width:52px;
+  height:32px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:#151517;
+  box-shadow:inset 0 0 0 3px #2c2c2f;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .18s ease, box-shadow .18s ease;
+}
+.notification-toggle::before{
+  content:"";
+  position:absolute;
+  top:4px;
+  left:4px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#8d8d91;
+  transition:transform .18s ease, background .18s ease;
+}
+.notification-toggle.is-on{
+  background:#6fa9e9;
+  box-shadow:none;
+}
+.notification-toggle.is-on::before{
+  transform:translateX(20px);
+  background:#f1f1f1;
+}
+.notification-toggle:active{transform:scale(.97)}
+.notification-toggle:focus-visible{
+  outline:2px solid rgba(111,169,233,.8);
+  outline-offset:3px;
+}
+@media(min-width:529px){
+  .notification-toggle{
+    right:calc(50% - 360px + 18px);
+  }
+}
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1993,7 +2041,18 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.13</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.15</div>
+
+
+  <button
+    id="notificationToggle"
+    class="notification-toggle"
+    type="button"
+    role="switch"
+    aria-checked="true"
+    aria-label="Benachrichtigungen"
+    title="Benachrichtigungen"
+  ></button>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -2119,6 +2178,32 @@ setInterval(syncHomeDashboard,1000);
 
 syncHomeDashboard();
 
+
+
+/* Daily notification setting.
+   This step controls the Home switch and persists it locally.
+   Server STOP/GO syncing will be connected separately. */
+const NOTIFICATION_ENABLED_KEY="deutschNotificationEnabledV1";
+const notificationToggle=document.getElementById("notificationToggle");
+
+function notificationEnabled(){
+  return localStorage.getItem(NOTIFICATION_ENABLED_KEY)!=="0";
+}
+
+function renderNotificationToggle(){
+  const enabled=notificationEnabled();
+  if(!notificationToggle)return;
+  notificationToggle.classList.toggle("is-on",enabled);
+  notificationToggle.setAttribute("aria-checked",enabled?"true":"false");
+}
+
+notificationToggle?.addEventListener("click",()=>{
+  const next=!notificationEnabled();
+  localStorage.setItem(NOTIFICATION_ENABLED_KEY,next?"1":"0");
+  renderNotificationToggle();
+});
+
+renderNotificationToggle();
 
 /* Deutsch Backup v1.
    The envelope is intentionally module-based so future exercises can add
