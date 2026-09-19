@@ -29,7 +29,7 @@ button{font:inherit}
   background:#202023;transform-origin:center center;
   transition:padding .28s cubic-bezier(.2,.8,.2,1);
 }
-.feedback.revealed{padding-top:24px}
+.feedback.revealed{padding-top:34px}
 .feedbackReveal{width:100%}
 #question{transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
 #question.hidden{display:none}
@@ -59,17 +59,15 @@ button{font:inherit}
 #keyboardMount{width:min(690px,100%);display:flex;justify-content:center}
 .feedbackQuestion{display:block}
 .feedbackQuestion.hidden{display:none}
-.feedbackReveal{display:none}
-.feedback.revealed .feedbackReveal{display:block}
-.feedback .answerTop,.feedback .targetForm,.feedback .diffBlock,.feedback .speakTop,.feedback .detail{opacity:0;transform:translateY(-5px)}
-.feedback.revealed .answerTop,.feedback.revealed .targetForm,.feedback.revealed .diffBlock,.feedback.revealed .speakTop,.feedback.revealed .detail{
-  opacity:1;transform:none;transition:opacity .22s ease,transform .28s cubic-bezier(.2,.8,.2,1)
-}
+.feedbackReveal{display:block;max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transform-origin:top center;will-change:max-height,opacity,transform}
+.feedback.revealed .feedbackReveal{max-height:1200px;opacity:1;transform:translateY(0);transition:max-height .38s cubic-bezier(.22,.8,.25,1),opacity .22s ease,transform .38s cubic-bezier(.22,.8,.25,1)}
+.feedback .answerTop,.feedback .targetForm,.feedback .diffBlock,.feedback .speakTop,.feedback .detail{opacity:1;transform:none}
+
 .cardInput{margin-top:28px}
 .cardCheck{margin-top:14px}
 @media(max-width:699px){
   .feedback{padding:18px 16px 20px}
-  .feedback.revealed{padding-top:13px}
+  .feedback.revealed{padding-top:50px}
   .cardInput{height:60px;margin-top:28px}
   .cardCheck{display:none}
 }
@@ -88,7 +86,7 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:24px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:50px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
 
 </style>
 </head>
@@ -125,7 +123,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · fix 2</div>
+<div class="version">v2.62 · persistent card + swipe · fix 3</div>
 </main>
 <script src="words.js"></script>
 <script>
