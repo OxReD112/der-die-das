@@ -1935,6 +1935,60 @@ header h1{
 }
 
 
+
+    /* Phrase of the Week */
+    .phrase-week{
+      width:min(100%,430px);
+      margin:28px auto 0;
+      padding:20px 20px 22px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+    .phrase-week-label{
+      margin-bottom:12px;
+      color:#8f8f94;
+      font-size:11px;
+      line-height:1.2;
+      letter-spacing:.45px;
+      text-transform:uppercase;
+    }
+    .phrase-week-title{
+      color:#f2f0ed;
+      font-size:22px;
+      line-height:1.18;
+      font-weight:700;
+      letter-spacing:-.35px;
+    }
+    .phrase-week-literal{
+      margin-top:12px;
+      color:#d8d6d2;
+      font-size:15px;
+      line-height:1.45;
+    }
+    .phrase-week-meaning{
+      margin-top:3px;
+      color:#f2f0ed;
+      font-size:15px;
+      line-height:1.45;
+    }
+    .phrase-week-meaning::first-letter{
+      /* Keep the arrow visually part of the meaning line. */
+    }
+    .phrase-week-example{
+      margin-top:13px;
+      color:#a9a7a3;
+      font-size:14px;
+      line-height:1.5;
+      font-style:italic;
+    }
+    @media(max-width:430px){
+      .phrase-week{
+        width:min(100%,350px);
+        padding:18px 4px 20px;
+        margin-top:24px;
+      }
+      .phrase-week-title{font-size:20px}
+    }
+
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
@@ -1988,6 +2042,14 @@ header h1{
       </div>
     </section>
 
+    <section class="phrase-week" aria-label="Phrase of the Week">
+      <div class="phrase-week-label">Phrase of the Week</div>
+      <div class="phrase-week-title" id="phraseWeekTitle"></div>
+      <div class="phrase-week-literal" id="phraseWeekLiteral"></div>
+      <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
+      <div class="phrase-week-example" id="phraseWeekExample"></div>
+    </section>
+
     <div class="backup-tools" aria-label="Backup and restore">
       <button class="backup-save" id="backupSave" type="button">Backup</button><span class="backup-separator" aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span><button class="backup-save" id="backupRestore" type="button">Restore</button>
       <input class="backup-file" id="backupFile" type="file" accept="application/json,.json">
@@ -2007,14 +2069,57 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v5.3</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v5.4</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
     <iframe id="appFrame" class="app-frame" title="Deutsch exercise"></iframe>
   </section>
 
+  <script src="phrases.js"></script>
   <script>
+    /* Phrase of the Week — data lives in phrases.js.
+       Week 0 starts with phrase 1; after the last phrase, the sequence wraps to 1. */
+    (function initPhraseOfTheWeek(){
+      const phraseTitle=document.getElementById("phraseWeekTitle");
+      const phraseLiteral=document.getElementById("phraseWeekLiteral");
+      const phraseMeaning=document.getElementById("phraseWeekMeaning");
+      const phraseExample=document.getElementById("phraseWeekExample");
+      if(!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample) return;
+
+      function getMonday(date){
+        const d=new Date(date);
+        d.setHours(0,0,0,0);
+        const day=d.getDay();
+        const diff=day===0 ? -6 : 1-day;
+        d.setDate(d.getDate()+diff);
+        return d;
+      }
+
+      function getISOWeekKey(date){
+        const monday=getMonday(date);
+        return monday.getTime();
+      }
+
+      function render(){
+        if(!Array.isArray(window.PHRASES)||window.PHRASES.length===0) return;
+
+        const startMonday=new Date(2026,0,5);
+        const currentWeek=getISOWeekKey(new Date());
+        const firstWeek=getISOWeekKey(startMonday);
+        const weeks=Math.max(0,Math.floor((currentWeek-firstWeek)/604800000));
+        const index=weeks % window.PHRASES.length;
+        const phrase=window.PHRASES[index];
+
+        phraseTitle.textContent=phrase.title;
+        phraseLiteral.textContent=phrase.literal;
+        phraseMeaning.textContent="→ "+phrase.meaning;
+        phraseExample.textContent=phrase.example;
+      }
+
+      if(Array.isArray(window.PHRASES)) render();
+      else window.addEventListener("phrasesready",render,{once:true});
+    })();
 
     const DAILY_STATS_KEY='deutschDailyStatsV1';
     function localDayKey(){
