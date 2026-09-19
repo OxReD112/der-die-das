@@ -1935,57 +1935,13 @@ header h1{
 }
 
 
-
-/* Home v4.15 — notification toggle */
-.notification-toggle{
-  position:fixed;
-  right:max(18px, env(safe-area-inset-right));
-  bottom:calc(env(safe-area-inset-bottom) + 18px);
-  z-index:30;
-  width:52px;
-  height:32px;
-  padding:0;
-  border:0;
-  border-radius:999px;
-  background:#151517;
-  box-shadow:inset 0 0 0 3px #2c2c2f;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .18s ease, box-shadow .18s ease;
-}
-.notification-toggle::before{
-  content:"";
-  position:absolute;
-  top:4px;
-  left:4px;
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  background:#8d8d91;
-  transition:transform .18s ease, background .18s ease;
-}
-.notification-toggle.is-on{
-  background:#6fa9e9;
-  box-shadow:none;
-}
-.notification-toggle.is-on::before{
-  transform:translateX(20px);
-  background:#f1f1f1;
-}
-.notification-toggle:active{transform:scale(.97)}
-.notification-toggle:focus-visible{
-  outline:2px solid rgba(111,169,233,.8);
-  outline-offset:3px;
-}
-@media(min-width:529px){
-  .notification-toggle{
-    right:calc(50% - 360px + 18px);
-  }
-}
-
 </style>
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
   <main class="page">
@@ -2038,21 +1994,20 @@ header h1{
       <div class="backup-note" id="backupNote" aria-live="polite"></div>
     </div>
 
+  
+    <div id="notificationSettings" style="display:none;margin:20px auto 0;width:min(100%,430px);text-align:center;">
+      <button id="notificationToggle" type="button"
+        role="switch" aria-checked="false"
+        style="appearance:none;-webkit-appearance:none;border:0;background:transparent;color:#66666b;font:500 12px/1.2 -apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif;cursor:pointer;padding:8px 12px;">
+        Notifications <span id="notificationState">OFF</span>
+      </button>
+      <div id="notificationNote" style="min-height:14px;margin-top:2px;color:#55555a;font-size:10px;"></div>
+    </div>
+
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.20</div>
-
-
-  <button
-    id="notificationToggle"
-    class="notification-toggle"
-    type="button"
-    role="switch"
-    aria-checked="false"
-    aria-label="Benachrichtigungen"
-    title="Benachrichtigungen"
-  ></button>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v5.0</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -2177,184 +2132,6 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncHomeDa
 setInterval(syncHomeDashboard,1000);
 
 syncHomeDashboard();
-
-
-
-/* Notifications v4.19 — iPhone Home Screen Web Push.
-   The switch is shown only inside an installed iPhone/iPad Home Screen web app.
-   Push permission/subscription is created only after the user explicitly turns
-   Notifications ON. */
-
-const NOTIFICATION_ENABLED_KEY="deutschNotificationEnabledV1";
-const NOTIFICATION_SERVER_URL="https://german-learning-notifications.d45zgw2cgh.workers.dev";
-const notificationToggle=document.getElementById("notificationToggle");
-
-function isIOSDevice(){
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
-}
-
-function isInstalledHomeScreenApp(){
-  return window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone===true;
-}
-
-function notificationsAvailableHere(){
-  return isIOSDevice() &&
-    isInstalledHomeScreenApp() &&
-    "serviceWorker" in navigator &&
-    "PushManager" in window &&
-    "Notification" in window;
-}
-
-function notificationEnabled(){
-  return localStorage.getItem(NOTIFICATION_ENABLED_KEY)==="1";
-}
-
-function renderNotificationToggle(){
-  const enabled=notificationEnabled();
-  if(!notificationToggle)return;
-
-  const show=notificationsAvailableHere();
-  notificationToggle.style.display=show ? "" : "none";
-
-  if(!show)return;
-
-  notificationToggle.classList.toggle("is-on",enabled);
-  notificationToggle.setAttribute("aria-checked",enabled?"true":"false");
-}
-
-function base64urlToUint8Array(base64url){
-  const padding="=".repeat((4-(base64url.length%4))%4);
-  const base64=(base64url+padding).replace(/-/g,"+").replace(/_/g,"/");
-  const raw=atob(base64);
-  const output=new Uint8Array(raw.length);
-  for(let i=0;i<raw.length;i++)output[i]=raw.charCodeAt(i);
-  return output;
-}
-
-async function registerPushSubscription(){
-  if(!notificationsAvailableHere()){
-    throw new Error("push-not-available-in-this-app");
-  }
-
-  const permission=await Notification.requestPermission();
-
-  if(permission!=="granted"){
-    throw new Error("notification-permission-"+permission);
-  }
-
-  const registration=await navigator.serviceWorker.register(
-    new URL("sw.js",window.location.href),
-    {scope:"./"}
-  );
-
-  await navigator.serviceWorker.ready;
-
-  const configResponse=await fetch(
-    NOTIFICATION_SERVER_URL+"/push-config"
-  );
-
-  if(!configResponse.ok){
-    throw new Error("push-config-"+configResponse.status);
-  }
-
-  const config=await configResponse.json();
-
-  if(!config.publicKey){
-    throw new Error("push-config-missing-public-key");
-  }
-
-  let subscription=await registration.pushManager.getSubscription();
-
-  if(!subscription){
-    subscription=await registration.pushManager.subscribe({
-      userVisibleOnly:true,
-      applicationServerKey:base64urlToUint8Array(config.publicKey)
-    });
-  }
-
-  const response=await fetch(
-    NOTIFICATION_SERVER_URL+"/subscribe",
-    {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(subscription.toJSON())
-    }
-  );
-
-  if(!response.ok){
-    const text=await response.text();
-    throw new Error("subscribe-"+response.status+" "+text);
-  }
-
-  return true;
-}
-
-async function setServerNotifications(enabled){
-  const endpoint=enabled ? "/go" : "/stop";
-
-  try{
-    const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:"{}"
-    });
-
-    const responseText=await response.text();
-
-    console.log(
-      "Notification server response:",
-      response.status,
-      responseText
-    );
-
-    if(!response.ok){
-      throw new Error(
-        "server-status-"+response.status+" "+responseText
-      );
-    }
-
-    return true;
-  }catch(error){
-    console.error("Notification server update failed:",error);
-    alert("Notification server error:\n\n"+error.message);
-    return false;
-  }
-}
-
-notificationToggle?.addEventListener("click",async()=>{
-  if(!notificationsAvailableHere())return;
-
-  const next=!notificationEnabled();
-
-  if(next){
-    try{
-      await registerPushSubscription();
-    }catch(error){
-      console.error("Push subscription failed:",error);
-      alert(
-        "Notifications could not be enabled.\n\n"+
-        error.message
-      );
-      renderNotificationToggle();
-      return;
-    }
-  }
-
-  const ok=await setServerNotifications(next);
-
-  if(ok){
-    localStorage.setItem(
-      NOTIFICATION_ENABLED_KEY,
-      next?"1":"0"
-    );
-  }
-
-  renderNotificationToggle();
-});
-
-renderNotificationToggle();
 
 
 /* Deutsch Backup v1.

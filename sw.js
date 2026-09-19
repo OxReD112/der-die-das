@@ -1,51 +1,31 @@
 self.addEventListener("push", event => {
   let data = {};
-
-  try {
-    data = event.data ? event.data.json() : {};
-  } catch {
-    data = {
-      title: "Deutsch",
-      body: event.data ? event.data.text() : ""
-    };
-  }
+  try { data = event.data ? event.data.json() : {}; } catch(e) {}
 
   const title = data.title || "Deutsch";
+  const body = data.body || "";
   const options = {
-    body: data.body || "",
-    icon: data.icon || "/icon.png",
-    badge: data.badge || "/icon.png",
-    tag: data.tag || "german-learning-notification",
-    data: {
-      url: data.url || "/"
-    }
+    body,
+    icon: "./icon.png",
+    badge: "./icon.png",
+    data: data.url || "./"
   };
 
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 self.addEventListener("notificationclick", event => {
   event.notification.close();
-
-  const targetUrl =
-    event.notification?.data?.url || "/";
-
+  const target = event.notification.data || "./";
   event.waitUntil(
-    clients.matchAll({
-      type: "window",
-      includeUncontrolled: true
-    }).then(clientList => {
-      for(const client of clientList){
-        if("focus" in client){
+    self.clients.matchAll({ type:"window", includeUncontrolled:true }).then(clients => {
+      for (const client of clients) {
+        if ("focus" in client) {
+          client.navigate(target);
           return client.focus();
         }
       }
-
-      if(clients.openWindow){
-        return clients.openWindow(targetUrl);
-      }
+      if (self.clients.openWindow) return self.clients.openWindow(target);
     })
   );
 });
