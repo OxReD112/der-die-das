@@ -24,11 +24,15 @@ button{font:inherit}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
 .feedback{
   display:block;width:min(690px,100%);position:relative;isolation:isolate;
-  padding:34px 24px 24px;overflow:visible;
+  padding:34px 24px 24px;overflow:hidden;
   border:1px solid rgba(255,255,255,.10);border-radius:28px;
   background:#202023;transform-origin:center center;
   transition:padding .28s cubic-bezier(.2,.8,.2,1);
 }
+.feedback::before{content:"";position:absolute;z-index:0;left:50%;top:0;width:150%;height:100%;transform:translateX(-50%);pointer-events:none;opacity:0}
+.feedback.good::before{background:radial-gradient(ellipse at 50% 42%,rgba(67,210,173,.34) 0%,rgba(67,210,173,.19) 22%,rgba(67,210,173,.08) 48%,rgba(67,210,173,.025) 68%,transparent 82%);opacity:1}
+.feedback.bad::before{background:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.42) 0%,rgba(255,105,105,.23) 22%,rgba(255,105,105,.09) 48%,rgba(255,105,105,.03) 68%,transparent 82%);opacity:1}
+.feedback > *{position:relative;z-index:1}
 .feedback.revealed{padding-top:34px}
 .feedbackReveal{width:100%}
 #question{transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
@@ -64,10 +68,12 @@ button{font:inherit}
 /* Fix 4: the question half stays in place; the answer opens only below it. */
 #question{position:relative;z-index:2}
 #question .sentence{min-height:2.56em}
-.feedbackReveal .answerTop{display:none}
 .feedback.revealed .feedbackReveal{margin-top:0}
 
-.feedback .answerTop,.feedback .targetForm,.feedback .diffBlock,.feedback .speakTop,.feedback .detail{opacity:1;transform:none}
+.resultSlot{display:none;min-height:60px;margin-top:28px;width:min(620px,100%);align-items:center;justify-content:center;text-align:center}
+.feedback.revealed .resultSlot{display:flex;animation:resultDrop .32s cubic-bezier(.22,.8,.25,1) both}
+.feedback.revealed #answerInput{display:none}
+.feedback .targetForm,.feedback .diffBlock,.feedback .speakTop,.feedback .detail{opacity:1;transform:none}
 
 .cardInput{margin-top:28px}
 .cardCheck{margin-top:14px}
@@ -81,10 +87,10 @@ button{font:inherit}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 @keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
-.targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
-.diffBlock{display:none;margin-top:26px;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow img + *{}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
+.targetForm{display:none;margin:0;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.good .targetForm{display:inline-block}
+.diffBlock{display:none;margin:0;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow img + *{}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
 .answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}.answerTargetRow .speak{display:none;margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
-.detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
+.detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{display:none}@keyframes resultDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
 .continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:#d5d5d7}.continue:active{transform:scale(1.05)}
 
@@ -92,7 +98,7 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:50px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:50px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.resultSlot{min-height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:0}.diffBlock{margin-top:0;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
 
 </style>
 </head>
@@ -107,15 +113,13 @@ button{font:inherit}
      <div class="translation" id="translation"></div>
     </div>
     <input id="answerInput" class="inputbox cardInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+    <div class="resultSlot" id="resultSlot">
+     <div class="targetForm" id="targetForm"></div>
+     <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
+    </div>
     <button class="check cardCheck" id="desktopCheck">Check</button>
    </div>
    <div class="feedbackReveal">
-   <div class="topZone answerTop" id="answerTop">
-    <div class="answerSentence" id="answerSentence"></div>
-    <div class="answerTranslation" id="answerTranslation"></div>
-   </div>
-   <div class="targetForm" id="targetForm"></div>
-   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
    <button class="speakTop" id="speakTop" aria-label="Hear sentence"><img class="speakTopIcon" src="../components/icons/Audio.svg" alt="" aria-hidden="true"></button>
    <div class="detail">
     <div class="answerTargetRow"><div class="base" id="base"></div></div>
@@ -123,13 +127,12 @@ button{font:inherit}
     <div class="grammar" id="grammar"></div>
    </div>
    </div>
-  </div>
   <div id="keyboardMount"></div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · fix 4</div>
+<div class="version">v2.62 · persistent card + swipe · fix 5</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -223,6 +226,7 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
+ $("resultSlot").style.display="none";$("targetForm").style.display="none";$("diffBlock").style.display="none";$("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
  $("answerInput").disabled=false;
  $("answerInput").removeAttribute("aria-disabled");
  $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
@@ -259,14 +263,22 @@ function check(){
  $("sentence").innerHTML=revealHTML(current);
  $("answerInput").disabled=true;
  $("answerInput").setAttribute("aria-disabled","true");
- $("answerTranslation").textContent=current.ru;
  let displayCorrect=normalize(correct);
- if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
+ if(current&&/^(der|die|das)\s/i.test(String(current.base||""))){
    displayCorrect=displayCorrect.charAt(0).toLocaleUpperCase("de-DE")+displayCorrect.slice(1);
  }
  $("targetForm").textContent=displayCorrect;
- $("targetForm").style.display=ok?"inline-block":"none";
- if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
+ $("resultSlot").style.display="flex";
+ if(ok){
+   $("targetForm").style.display="inline-block";
+   $("diffBlock").style.display="none";
+   $("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
+ }else{
+   $("targetForm").style.display="none";
+   const [top,bottom]=diffHTML(typed,normalize(correct));
+   $("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom;
+   $("diffBlock").style.display="block";
+ }
  $("base").textContent=current.base;$("meaning").textContent=current.translation;$("grammar").textContent=current.grammar||"";
  const r=rec(current);
  if(ok){
@@ -373,6 +385,5 @@ function speakCurrent(){
  speechSynthesis.speak(u);
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
-$("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
 </script></body></html>
