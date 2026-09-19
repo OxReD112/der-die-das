@@ -10,7 +10,7 @@
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
     body{min-height:100dvh;padding:calc(env(safe-area-inset-top) + 28px) max(24px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 32px) max(24px,env(safe-area-inset-left))}
-    .page{width:min(100%,720px);margin:0 auto}
+    .page{width:min(100%,720px);margin:0 auto;min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);display:flex;flex-direction:column}
     header{margin-bottom:52px}
     h1{margin:0;font-size:32px;line-height:1;letter-spacing:-.7px;font-weight:750}
     .rule{height:4px;width:100%;margin-top:18px;background:var(--line);border-radius:99px;overflow:hidden}
@@ -1922,6 +1922,10 @@ header h1{
   cursor:pointer;
 }
 .backup-save:active{color:#929298}
+.home-utilities{
+  margin-top:auto;
+  padding-bottom:28px;
+}
 .backup-separator{
   color:#66666b;
   font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
@@ -2119,6 +2123,8 @@ header h1{
       </div>
     </section>
 
+    <div class="home-utilities" aria-label="Home utilities">
+
     <div class="backup-tools" aria-label="Backup and restore">
       <button class="backup-save" id="backupSave" type="button">Backup</button><span class="backup-separator" aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span><button class="backup-save" id="backupRestore" type="button">Restore</button>
       <input class="backup-file" id="backupFile" type="file" accept="application/json,.json">
@@ -2133,6 +2139,8 @@ header h1{
         Notifications <span id="notificationState">OFF</span>
       </button>
       <div id="notificationNote" style="min-height:14px;margin-top:2px;color:#55555a;font-size:10px;"></div>
+    </div>
+
     </div>
 
   </main>
