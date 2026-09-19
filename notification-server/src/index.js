@@ -191,14 +191,72 @@ if (request.method === "GET" && url.pathname === "/pool") {
   },
 
   async scheduled(controller, env, ctx) {
-    const now = new Date();
+  const now = new Date(controller.scheduledTime);
 
-    const berlinTime = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/Berlin",
-      dateStyle: "short",
-      timeStyle: "medium",
-    }).format(now);
+  const berlinParts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Berlin",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(now);
 
-    console.log(`[CRON TEST] Worker ran at Berlin time: ${berlinTime}`);
-  },
-};
+  const parts = Object.fromEntries(
+    berlinParts.map(({ type, value }) => [type, value])
+  );
+
+  const date = `${parts.year}-${parts.month}-${parts.day}`;
+  const time = `${parts.hour}:${parts.minute}`;
+
+  const slots = ["09:30", "12:30", "18:00", "20:00"];
+
+  // This Cron run is not one of our notification slots.
+  if (!slots.includes(time)) {
+    console.log(`[CRON] ${date} ${time} — not a notification slot`);
+    return;
+  }
+
+  console.log(`[CRON] Checking notification slot: ${date} ${time}`);
+
+  // Check whether today's learning is already completed.
+  const done = await env.GERMAN_NOTIFICATION_STATE.get(`done:${date}`);
+
+  if (done) {
+    console.log(`[CRON] ${date} ${time} — DONE already received. Nothing to send.`);
+    return;
+  }
+
+  // Read the current notification pool.
+  const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
+    "notification_pool"
+  );
+
+  if (!storedPool) {
+    console.log(`[CRON] ${date} ${time} — no notification pool found.`);
+    return;
+  }
+
+  const poolState = JSON.parse(storedPool);
+  const pool = Array.isArray(poolState.notifications)
+    ? poolState.notifications
+    : [];
+
+  if (pool.length === 0) {
+    console.log(`[CRON] ${date} ${time} — notification pool is empty.`);
+    return;
+  }
+
+  // For now we only log what would be sent.
+  // Actual push delivery comes later.
+  const slotIndex = slots.indexOf(time);
+  const notification = pool[slotIndex % pool.length];
+
+  console.log(
+    `[CRON TEST] Would send #${(slotIndex % pool.length) + 1}:`,
+    notification.de,
+    "—",
+    notification.ru
+  );
+},
