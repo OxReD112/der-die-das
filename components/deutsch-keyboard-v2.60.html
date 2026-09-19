@@ -32,20 +32,10 @@
    popup.style.left=(kr.left-r.left+kr.width/2-pr.width/2)+"px";
    popup.style.top=(kr.top-r.top-pr.height+1)+"px";
  },{passive:true});
- // Optional haptic feedback. Unsupported browsers simply ignore it.
- const haptic=(pattern)=>{
-   try{
-     if(typeof navigator!=="undefined" && typeof navigator.vibrate==="function") navigator.vibrate(pattern);
-   }catch(e){}
- };
  let touchActivated=false;
  const emit=(b)=>{
    if(!b)return;
-   const k=b.dataset.key||"";
-   if(k==="OK") haptic(8);
-   else if(k==="BACK") haptic(5);
-   else haptic(3);
-   kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:k}}));
+   kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:b.dataset.key||""}}));
  };
  kb.addEventListener("touchend",e=>{
    const b=e.target.closest("[data-key]");
