@@ -101,6 +101,44 @@ button{font:inherit}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:22px}.feedbackShell{margin-top:0}.feedback{padding:38px 16px 20px}.feedback.revealed{padding:38px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.resultSlot{min-height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:0}.diffBlock{margin-top:0;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
 
+
+/* FIX 9 — desktop restores the classic v2.61 presentation; mobile keeps the card/swipe UI. */
+@media (min-width:700px){
+  .stage{padding-top:clamp(38px,8vh,80px)}
+  #question{display:block!important;width:100%}
+  #question .topZone{width:min(620px,100%);margin:0 auto}
+  #question .inputbox{display:flex;width:min(620px,100%);height:64px;margin:34px auto 0}
+  #question .check{display:block;width:min(620px,100%);margin:14px auto 0}
+  #question #keyboardMount{display:none!important}
+
+  .feedbackShell{width:min(690px,100%);margin:0 auto;display:none}
+  .feedbackShell.show{display:flex}
+  .feedback{
+    width:100%;display:none;padding:0 0 24px;
+    border:0;border-radius:0;background:transparent;
+    box-shadow:none;overflow:visible;transform:none!important;opacity:1!important;
+  }
+  .feedback.show{display:block}
+  .feedback .feedbackQuestion{display:none!important}
+  .feedback .feedbackReveal{
+    display:block!important;max-height:none!important;opacity:1!important;
+    transform:none!important;overflow:visible!important;
+  }
+  .answerTop{text-align:center}
+  .answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;max-width:620px;margin:0 auto}
+  .answerTranslation{margin-top:18px;font-size:clamp(17px,4.2vw,22px)}
+  .targetForm{margin-top:22px}
+  .diffBlock{margin-top:26px;font-size:32px}
+  .detail{padding-top:24px}
+  .feedbackShell>.continue{
+    width:auto;margin-top:18px;border:0;border-radius:12px;padding:8px 12px;
+    background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;
+  }
+  .feedbackShell.swiping,.feedbackShell.snapback,.feedbackShell.swipeout{
+    transition:none!important;transform:none!important;opacity:1!important;
+  }
+}
+
 </style>
 </head>
 <body><main class="app">
@@ -134,7 +172,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.62 · persistent card + swipe · fix 8</div>
+<div class="version">v2.62 · responsive mobile card + classic desktop · fix 9</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -231,7 +269,7 @@ function render(){
  $("resultSlot").style.display="none";$("targetForm").style.display="none";$("diffBlock").style.display="none";$("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
  $("answerInput").disabled=false;
  $("answerInput").removeAttribute("aria-disabled");
- $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
+ $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady)$("keyboard").classList.toggle("show",innerWidth<700);
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -278,6 +316,7 @@ function check(){
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
  $("keyboard").classList.remove("show");
+ if(innerWidth>=700){$("question").style.setProperty("display","none","important");}
  // First show the finished card in its collapsed state. This gives the glow
  // the exact starting position of the divider before the reveal animation begins.
  $("feedbackShell").className="feedbackShell show";
