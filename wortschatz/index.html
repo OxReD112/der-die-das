@@ -302,13 +302,22 @@ function speakCurrent(){
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-document.getElementById("testNotificationButton").addEventListener("click",()=>{
+const runNotificationTest=()=>{
   publishNotificationDone();
   const pool=prepareTomorrowNotifications();
   console.log("[German Learning] TEST COMPLETE — DONE:",JSON.parse(localStorage.getItem("deutschNotificationDoneV1")));
   console.log("[German Learning] TEST COMPLETE — POOL:",pool);
   alert("Test completed. DONE + Notification Pool created. Check Console.");
-});
+};
+const testNotificationButton=document.getElementById("testNotificationButton");
+if(testNotificationButton){
+  testNotificationButton.addEventListener("click",runNotificationTest);
+}else{
+  window.addEventListener("DOMContentLoaded",()=>{
+    const button=document.getElementById("testNotificationButton");
+    if(button) button.addEventListener("click",runNotificationTest);
+  });
+}
 </script><button id="testNotificationButton" type="button" style="position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:10000;padding:8px 12px;border:1px solid currentColor;border-radius:8px;background:rgba(0,0,0,.65);color:inherit;font:12px system-ui;cursor:pointer">TEST: Create DONE + Notification Pool</button>
-<div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.64 · Notification Test</div>
+<div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.65 · Notification Test</div>
 </body></html>
