@@ -91,7 +91,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.61 · swipe removed</div>
+<div class="version">v2.66 · notifications</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -168,17 +168,72 @@ function targets(c){
  return parts;
 }
 function activeCards(){const ids=new Set(state.activeIds);return WORDS.filter(c=>ids.has(c.id))}
-function publishNotificationDone(){
-  const event={
-    date:day(),
-    done:true,
-    completedAt:Date.now()
-  };
+const NOTIFICATION_SERVER="https://german-learning-notifications.d45zgw2cgh.workers.dev";
+const NOTIFICATION_USER_KEY="deutschNotificationUserIdV1";
+const NOTIFICATION_DEVICE_KEY="deutschNotificationDeviceIdV1";
+
+function getNotificationUserId(){
+  let id=localStorage.getItem(NOTIFICATION_USER_KEY);
+  if(!id){
+    try{id=crypto.randomUUID?crypto.randomUUID():"user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    catch(e){id="user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    localStorage.setItem(NOTIFICATION_USER_KEY,id);
+  }
+  return id;
+}
+
+function getNotificationDeviceId(){
+  let id=localStorage.getItem(NOTIFICATION_DEVICE_KEY);
+  if(!id){
+    try{id=crypto.randomUUID?crypto.randomUUID():"device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    catch(e){id="device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    localStorage.setItem(NOTIFICATION_DEVICE_KEY,id);
+  }
+  return id;
+}
+
+async function syncNotificationPool(pool){
+  try{
+    const response=await fetch(NOTIFICATION_SERVER+"/pool",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getNotificationUserId(),
+        deviceId:getNotificationDeviceId(),
+        date:pool.date,
+        notifications:pool.notifications.map(item=>({
+          id:item.id,
+          de:item.sentence,
+          ru:item.translation
+        }))
+      })
+    });
+    if(!response.ok)throw new Error("pool-"+response.status);
+    console.log("[German Learning] Notification pool synced:",pool.date);
+    return true;
+  }catch(e){
+    console.warn("[German Learning] Could not sync notification pool:",e);
+    return false;
+  }
+}
+
+async function publishNotificationDone(){
+  const event={date:day(),done:true,completedAt:Date.now()};
   try{
     localStorage.setItem("deutschNotificationDoneV1",JSON.stringify(event));
-    console.log("[German Learning] DONE event:",event);
+    const response=await fetch(NOTIFICATION_SERVER+"/done",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getNotificationUserId(),
+        deviceId:getNotificationDeviceId(),
+        date:event.date
+      })
+    });
+    if(!response.ok)throw new Error("done-"+response.status);
+    console.log("[German Learning] DONE synced:",event);
   }catch(e){
-    console.warn("[German Learning] Could not save DONE event:",e);
+    console.warn("[German Learning] Could not sync DONE event:",e);
   }
   return event;
 }
@@ -199,6 +254,7 @@ function prepareTomorrowNotifications(limit=4){
   }catch(e){
     console.warn("[German Learning] Could not save notification pool:",e);
   }
+  syncNotificationPool(pool);
   return pool;
 }
 function build(cards=null){
@@ -302,22 +358,5 @@ function speakCurrent(){
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-const runNotificationTest=()=>{
-  publishNotificationDone();
-  const pool=prepareTomorrowNotifications();
-  console.log("[German Learning] TEST COMPLETE — DONE:",JSON.parse(localStorage.getItem("deutschNotificationDoneV1")));
-  console.log("[German Learning] TEST COMPLETE — POOL:",pool);
-  alert("Test completed. DONE + Notification Pool created. Check Console.");
-};
-const testNotificationButton=document.getElementById("testNotificationButton");
-if(testNotificationButton){
-  testNotificationButton.addEventListener("click",runNotificationTest);
-}else{
-  window.addEventListener("DOMContentLoaded",()=>{
-    const button=document.getElementById("testNotificationButton");
-    if(button) button.addEventListener("click",runNotificationTest);
-  });
-}
-</script><button id="testNotificationButton" type="button" style="position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:10000;padding:8px 12px;border:1px solid currentColor;border-radius:8px;background:rgba(0,0,0,.65);color:inherit;font:12px system-ui;cursor:pointer">TEST: Create DONE + Notification Pool</button>
-<div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.65 · Notification Test</div>
+</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.66 · Notifications</div>
 </body></html>
