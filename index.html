@@ -2041,7 +2041,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.19</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.20</div>
 
 
   <button
@@ -2049,7 +2049,7 @@ header h1{
     class="notification-toggle"
     type="button"
     role="switch"
-    aria-checked="true"
+    aria-checked="false"
     aria-label="Benachrichtigungen"
     title="Benachrichtigungen"
   ></button>
@@ -2356,18 +2356,6 @@ notificationToggle?.addEventListener("click",async()=>{
 
 renderNotificationToggle();
 
-  /* Then tell the Worker to GO or STOP. */
-  const ok=await setServerNotifications(next);
-
-  /* If the Worker could not be reached, revert so Home and server
-     cannot silently disagree. */
-  if(!ok){
-    localStorage.setItem(NOTIFICATION_ENABLED_KEY,next?"0":"1");
-    renderNotificationToggle();
-  }
-});
-
-renderNotificationToggle();
 
 /* Deutsch Backup v1.
    The envelope is intentionally module-based so future exercises can add
