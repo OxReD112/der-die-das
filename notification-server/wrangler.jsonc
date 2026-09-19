@@ -4,8 +4,17 @@
   "main": "src/index.js",
   "compatibility_date": "2026-09-19",
   "triggers": {
-    "crons": ["*/30 * * * *"]
+    "crons": [
+      "*/30 * * * *"
+    ]
   },
+  "kv_namespaces": [
+    {
+      "binding": "GERMAN_NOTIFICATION_STATE",
+      "id": "2741e97721684d70a7a2cda75a8a9199",
+      "remote": true
+    }
+  ],
   "observability": {
     "enabled": true
   }
