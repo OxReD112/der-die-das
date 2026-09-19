@@ -1,4 +1,5 @@
 const MAX_NOTIFICATIONS = 4;
+const NOTIFICATIONS_ENABLED_KEY = "notifications_enabled";
 
 export default {
   async fetch(request, env) {
@@ -9,119 +10,130 @@ export default {
       return new Response("German Learning notification server is alive.");
     }
 
-// Mark today's learning as done
-if (request.method === "POST" && url.pathname === "/done") {
-  try {
-    const body = await request.json();
-    const { date } = body;
+    // Read current server notification state
+    if (request.method === "GET" && url.pathname === "/status") {
+      const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+        NOTIFICATIONS_ENABLED_KEY
+      );
 
-    if (typeof date !== "string" || !date) {
       return new Response(
-        JSON.stringify({ error: "date is required" }),
+        JSON.stringify({
+          enabled: stored === "1",
+        }),
         {
-          status: 400,
+          status: 200,
           headers: { "Content-Type": "application/json" },
         }
       );
     }
 
-    await env.GERMAN_NOTIFICATION_STATE.put(
-      `done:${date}`,
-      JSON.stringify({
-        date,
-        done: true,
-        updatedAt: new Date().toISOString(),
-      })
-    );
+    // STOP: disable scheduled notifications.
+    // The notification pool is intentionally kept.
+    if (request.method === "POST" && url.pathname === "/stop") {
+      await env.GERMAN_NOTIFICATION_STATE.put(
+        NOTIFICATIONS_ENABLED_KEY,
+        "0"
+      );
 
-    return new Response(
-      JSON.stringify({
-        ok: true,
-        date,
-        done: true,
-      }),
-      {
+      console.log("[NOTIFICATIONS] STOP — scheduled notifications disabled.");
+
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          enabled: false,
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // GO: enable scheduled notifications.
+    // The existing notification pool is intentionally kept.
+    if (request.method === "POST" && url.pathname === "/go") {
+      await env.GERMAN_NOTIFICATION_STATE.put(
+        NOTIFICATIONS_ENABLED_KEY,
+        "1"
+      );
+
+      console.log("[NOTIFICATIONS] GO — scheduled notifications enabled.");
+
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          enabled: true,
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // Read DONE status
+    if (request.method === "GET" && url.pathname === "/done") {
+      const date = url.searchParams.get("date");
+
+      if (!date) {
+        return new Response(
+          JSON.stringify({ error: "date is required" }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+        `done:${date}`
+      );
+
+      if (!stored) {
+        return new Response(
+          JSON.stringify({
+            date,
+            done: false,
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      return new Response(stored, {
         status: 200,
         headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Read notification pool
+    if (request.method === "GET" && url.pathname === "/pool") {
+      const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+        "notification_pool"
+      );
+
+      if (!stored) {
+        return new Response(
+          JSON.stringify({ error: "No notification pool found" }),
+          {
+            status: 404,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
       }
-    );
-  } catch (error) {
-    console.error("DONE error:", error);
 
-    return new Response(
-      JSON.stringify({ error: "Invalid request" }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-}
-
-// Read DONE status
-if (request.method === "GET" && url.pathname === "/done") {
-  const date = url.searchParams.get("date");
-
-  if (!date) {
-    return new Response(
-      JSON.stringify({ error: "date is required" }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
-  const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-    `done:${date}`
-  );
-
-  if (!stored) {
-    return new Response(
-      JSON.stringify({
-        date,
-        done: false,
-      }),
-      {
+      return new Response(stored, {
         status: 200,
         headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
-  return new Response(stored, {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
-// Read notification pool
-if (request.method === "GET" && url.pathname === "/pool") {
-  const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-    "notification_pool"
-  );
-
-  if (!stored) {
-    return new Response(
-      JSON.stringify({ error: "No notification pool found" }),
-      {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
-  return new Response(stored, {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
-}
+      });
+    }
 
     // Save notification pool
     if (request.method === "POST" && url.pathname === "/pool") {
       try {
         const body = await request.json();
-
         const { date, notifications } = body;
 
         if (typeof date !== "string" || !date) {
@@ -146,10 +158,11 @@ if (request.method === "GET" && url.pathname === "/pool") {
 
         const pool = notifications
           .slice(0, MAX_NOTIFICATIONS)
-          .filter(item =>
-            item &&
-            typeof item.de === "string" &&
-            typeof item.ru === "string"
+          .filter(
+            item =>
+              item &&
+              typeof item.de === "string" &&
+              typeof item.ru === "string"
           );
 
         const state = {
@@ -187,146 +200,144 @@ if (request.method === "GET" && url.pathname === "/pool") {
       }
     }
 
+    // Mark today's learning as done
+    if (request.method === "POST" && url.pathname === "/done") {
+      try {
+        const body = await request.json();
+        const { date } = body;
 
-    // Notification ON/OFF state.
-    // Default is OFF until the user explicitly enables notifications.
-    if (request.method === "GET" && url.pathname === "/notifications-status") {
-      const stored = await env.GERMAN_NOTIFICATION_STATE.get(
-        "notifications_enabled"
-      );
-
-      const enabled = stored === "1";
-
-      return new Response(
-        JSON.stringify({ enabled }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
+        if (typeof date !== "string" || !date) {
+          return new Response(
+            JSON.stringify({ error: "date is required" }),
+            {
+              status: 400,
+              headers: { "Content-Type": "application/json" },
+            }
+          );
         }
-      );
-    }
 
-    // STOP notifications.
-    if (request.method === "POST" && url.pathname === "/stop") {
-      await env.GERMAN_NOTIFICATION_STATE.put(
-        "notifications_enabled",
-        "0"
-      );
+        await env.GERMAN_NOTIFICATION_STATE.put(
+          `done:${date}`,
+          JSON.stringify({
+            date,
+            done: true,
+            updatedAt: new Date().toISOString(),
+          })
+        );
 
-      console.log("[NOTIFICATIONS] STOP — notifications disabled.");
+        return new Response(
+          JSON.stringify({
+            ok: true,
+            date,
+            done: true,
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (error) {
+        console.error("DONE error:", error);
 
-      return new Response(
-        JSON.stringify({ ok: true, enabled: false }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-    }
-
-    // GO / enable notifications.
-    if (request.method === "POST" && url.pathname === "/go") {
-      await env.GERMAN_NOTIFICATION_STATE.put(
-        "notifications_enabled",
-        "1"
-      );
-
-      console.log("[NOTIFICATIONS] GO — notifications enabled.");
-
-      return new Response(
-        JSON.stringify({ ok: true, enabled: true }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+        return new Response(
+          JSON.stringify({ error: "Invalid request" }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
     }
 
     return new Response("Not found", { status: 404 });
   },
 
-async scheduled(controller, env, ctx) {
-  const now = new Date(controller.scheduledTime);
+  async scheduled(controller, env, ctx) {
+    const now = new Date(controller.scheduledTime);
 
-  const berlinParts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Berlin",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(now);
+    const berlinParts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Berlin",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(now);
 
-  const parts = Object.fromEntries(
-    berlinParts.map(({ type, value }) => [type, value])
-  );
-
-  const date = `${parts.year}-${parts.month}-${parts.day}`;
-  const time = `${parts.hour}:${parts.minute}`;
-
-  const slots = ["09:30", "12:30", "18:00", "20:00"];
-
-  // This Cron run is not one of our notification slots.
-  if (!slots.includes(time)) {
-    console.log(`[CRON] ${date} ${time} — not a notification slot`);
-    return;
-  }
-
-  console.log(`[CRON] Checking notification slot: ${date} ${time}`);
-
-  const notificationEnabled = await env.GERMAN_NOTIFICATION_STATE.get(
-    "notifications_enabled"
-  );
-
-  // Notifications are OFF by default.
-  if (notificationEnabled !== "1") {
-    console.log(
-      `[CRON] ${date} ${time} — notifications are OFF. Nothing to send.`
+    const parts = Object.fromEntries(
+      berlinParts.map(({ type, value }) => [type, value])
     );
-    return;
-  }
 
+    const date = `${parts.year}-${parts.month}-${parts.day}`;
+    const time = `${parts.hour}:${parts.minute}`;
 
+    const slots = ["09:30", "12:30", "18:00", "20:00"];
 
-  // Check whether today's learning is already completed.
-  const done = await env.GERMAN_NOTIFICATION_STATE.get(`done:${date}`);
+    // This Cron run is not one of our notification slots.
+    if (!slots.includes(time)) {
+      console.log(`[CRON] ${date} ${time} — not a notification slot`);
+      return;
+    }
 
-  if (done) {
-    console.log(`[CRON] ${date} ${time} — DONE already received. Nothing to send.`);
-    return;
-  }
+    console.log(`[CRON] Checking notification slot: ${date} ${time}`);
 
-  // Read the current notification pool.
-  const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
-    "notification_pool"
-  );
+    // Notifications are OFF by default.
+    const enabled = await env.GERMAN_NOTIFICATION_STATE.get(
+      NOTIFICATIONS_ENABLED_KEY
+    );
 
-  if (!storedPool) {
-    console.log(`[CRON] ${date} ${time} — no notification pool found.`);
-    return;
-  }
+    if (enabled !== "1") {
+      console.log(
+        `[CRON] ${date} ${time} — notifications are OFF. Nothing to send.`
+      );
+      return;
+    }
 
-  const poolState = JSON.parse(storedPool);
-  const pool = Array.isArray(poolState.notifications)
-    ? poolState.notifications
-    : [];
+    // Check whether today's learning is already completed.
+    const done = await env.GERMAN_NOTIFICATION_STATE.get(`done:${date}`);
 
-  if (pool.length === 0) {
-    console.log(`[CRON] ${date} ${time} — notification pool is empty.`);
-    return;
-  }
+    if (done) {
+      console.log(
+        `[CRON] ${date} ${time} — DONE already received. Nothing to send.`
+      );
+      return;
+    }
 
-  // For now we only log what would be sent.
-  // Actual push delivery comes later.
-  const slotIndex = slots.indexOf(time);
-  const notification = pool[slotIndex % pool.length];
+    // Read the current notification pool.
+    const storedPool = await env.GERMAN_NOTIFICATION_STATE.get(
+      "notification_pool"
+    );
 
-  console.log(
-    `[CRON TEST] Would send #${(slotIndex % pool.length) + 1}:`,
-    notification.de,
-    "—",
-    notification.ru
-  );
-},
+    if (!storedPool) {
+      console.log(
+        `[CRON] ${date} ${time} — no notification pool found.`
+      );
+      return;
+    }
+
+    const poolState = JSON.parse(storedPool);
+    const pool = Array.isArray(poolState.notifications)
+      ? poolState.notifications
+      : [];
+
+    if (pool.length === 0) {
+      console.log(
+        `[CRON] ${date} ${time} — notification pool is empty.`
+      );
+      return;
+    }
+
+    // For now we only log what would be sent.
+    // Actual push delivery comes later.
+    const slotIndex = slots.indexOf(time);
+    const notification = pool[slotIndex % pool.length];
+
+    console.log(
+      `[CRON TEST] Would send #${(slotIndex % pool.length) + 1}:`,
+      notification.de,
+      "—",
+      notification.ru
+    );
+  },
 };
