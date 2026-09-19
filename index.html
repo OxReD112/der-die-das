@@ -2007,7 +2007,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v5.2</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v5.3</div>
 
   <section id="appShell" class="app-shell" aria-hidden="true">
     <button id="homeBack" class="home-back" type="button" aria-label="Home"><span class="home-glyph">⌂</span></button>
@@ -2282,6 +2282,9 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
 
   if(!box || !toggle || !state) return;
 
+  box.style.width="100%";
+  box.style.textAlign="center";
+
   function isIOSDevice(){
     const ua=navigator.userAgent||"";
     const platform=navigator.platform||"";
@@ -2338,7 +2341,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     const on=enabled();
     state.textContent=on?"ON":"OFF";
     toggle.setAttribute("aria-checked",on?"true":"false");
-    toggle.style.color=on?"#55d7b5":"#66666b";
+    toggle.style.color="#66666b";
   }
 
   function base64ToBytes(value){
