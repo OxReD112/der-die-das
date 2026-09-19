@@ -9,7 +9,7 @@ export default {
       return new Response("German Learning notification server is alive.");
     }
 
-    // Mark today's learning as done
+// Mark today's learning as done
 if (request.method === "POST" && url.pathname === "/done") {
   try {
     const body = await request.json();
@@ -58,7 +58,7 @@ if (request.method === "POST" && url.pathname === "/done") {
   }
 }
 
-    // Read DONE status
+// Read DONE status
 if (request.method === "GET" && url.pathname === "/done") {
   const date = url.searchParams.get("date");
 
@@ -94,8 +94,8 @@ if (request.method === "GET" && url.pathname === "/done") {
     headers: { "Content-Type": "application/json" },
   });
 }
-    
-    // Read notification pool
+
+// Read notification pool
 if (request.method === "GET" && url.pathname === "/pool") {
   const stored = await env.GERMAN_NOTIFICATION_STATE.get(
     "notification_pool"
@@ -116,7 +116,7 @@ if (request.method === "GET" && url.pathname === "/pool") {
     headers: { "Content-Type": "application/json" },
   });
 }
-    
+
     // Save notification pool
     if (request.method === "POST" && url.pathname === "/pool") {
       try {
@@ -187,10 +187,65 @@ if (request.method === "GET" && url.pathname === "/pool") {
       }
     }
 
+
+    // Notification ON/OFF state.
+    // Default is OFF until the user explicitly enables notifications.
+    if (request.method === "GET" && url.pathname === "/notifications-status") {
+      const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+        "notifications_enabled"
+      );
+
+      const enabled = stored === "1";
+
+      return new Response(
+        JSON.stringify({ enabled }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // STOP notifications.
+    if (request.method === "POST" && url.pathname === "/stop") {
+      await env.GERMAN_NOTIFICATION_STATE.put(
+        "notifications_enabled",
+        "0"
+      );
+
+      console.log("[NOTIFICATIONS] STOP — notifications disabled.");
+
+      return new Response(
+        JSON.stringify({ ok: true, enabled: false }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // GO / enable notifications.
+    if (request.method === "POST" && url.pathname === "/go") {
+      await env.GERMAN_NOTIFICATION_STATE.put(
+        "notifications_enabled",
+        "1"
+      );
+
+      console.log("[NOTIFICATIONS] GO — notifications enabled.");
+
+      return new Response(
+        JSON.stringify({ ok: true, enabled: true }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
     return new Response("Not found", { status: 404 });
   },
 
-  async scheduled(controller, env, ctx) {
+async scheduled(controller, env, ctx) {
   const now = new Date(controller.scheduledTime);
 
   const berlinParts = new Intl.DateTimeFormat("en-GB", {
@@ -219,6 +274,20 @@ if (request.method === "GET" && url.pathname === "/pool") {
   }
 
   console.log(`[CRON] Checking notification slot: ${date} ${time}`);
+
+  const notificationEnabled = await env.GERMAN_NOTIFICATION_STATE.get(
+    "notifications_enabled"
+  );
+
+  // Notifications are OFF by default.
+  if (notificationEnabled !== "1") {
+    console.log(
+      `[CRON] ${date} ${time} — notifications are OFF. Nothing to send.`
+    );
+    return;
+  }
+
+
 
   // Check whether today's learning is already completed.
   const done = await env.GERMAN_NOTIFICATION_STATE.get(`done:${date}`);
