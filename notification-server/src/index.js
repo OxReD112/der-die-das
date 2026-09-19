@@ -57,6 +57,43 @@ if (request.method === "POST" && url.pathname === "/done") {
     );
   }
 }
+
+    // Read DONE status
+if (request.method === "GET" && url.pathname === "/done") {
+  const date = url.searchParams.get("date");
+
+  if (!date) {
+    return new Response(
+      JSON.stringify({ error: "date is required" }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+
+  const stored = await env.GERMAN_NOTIFICATION_STATE.get(
+    `done:${date}`
+  );
+
+  if (!stored) {
+    return new Response(
+      JSON.stringify({
+        date,
+        done: false,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+
+  return new Response(stored, {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
     
     // Read notification pool
 if (request.method === "GET" && url.pathname === "/pool") {
