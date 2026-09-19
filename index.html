@@ -2041,7 +2041,7 @@ header h1{
   </main>
 
 
-  <div class="home-version" aria-hidden="true">Deutsch Home · v4.18 DEBUG</div>
+  <div class="home-version" aria-hidden="true">Deutsch Home · v4.19</div>
 
 
   <button
@@ -2180,12 +2180,32 @@ syncHomeDashboard();
 
 
 
-/* Notifications v4.17 — persistent Home switch + Worker STOP/GO.
-   The switch is OFF by default. Local state is kept in localStorage.
-   The Worker is updated only when the user explicitly changes the switch. */
+/* Notifications v4.19 — iPhone Home Screen Web Push.
+   The switch is shown only inside an installed iPhone/iPad Home Screen web app.
+   Push permission/subscription is created only after the user explicitly turns
+   Notifications ON. */
+
 const NOTIFICATION_ENABLED_KEY="deutschNotificationEnabledV1";
 const NOTIFICATION_SERVER_URL="https://german-learning-notifications.d45zgw2cgh.workers.dev";
 const notificationToggle=document.getElementById("notificationToggle");
+
+function isIOSDevice(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+}
+
+function isInstalledHomeScreenApp(){
+  return window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone===true;
+}
+
+function notificationsAvailableHere(){
+  return isIOSDevice() &&
+    isInstalledHomeScreenApp() &&
+    "serviceWorker" in navigator &&
+    "PushManager" in window &&
+    "Notification" in window;
+}
 
 function notificationEnabled(){
   return localStorage.getItem(NOTIFICATION_ENABLED_KEY)==="1";
@@ -2194,41 +2214,147 @@ function notificationEnabled(){
 function renderNotificationToggle(){
   const enabled=notificationEnabled();
   if(!notificationToggle)return;
+
+  const show=notificationsAvailableHere();
+  notificationToggle.style.display=show ? "" : "none";
+
+  if(!show)return;
+
   notificationToggle.classList.toggle("is-on",enabled);
   notificationToggle.setAttribute("aria-checked",enabled?"true":"false");
 }
 
+function base64urlToUint8Array(base64url){
+  const padding="=".repeat((4-(base64url.length%4))%4);
+  const base64=(base64url+padding).replace(/-/g,"+").replace(/_/g,"/");
+  const raw=atob(base64);
+  const output=new Uint8Array(raw.length);
+  for(let i=0;i<raw.length;i++)output[i]=raw.charCodeAt(i);
+  return output;
+}
+
+async function registerPushSubscription(){
+  if(!notificationsAvailableHere()){
+    throw new Error("push-not-available-in-this-app");
+  }
+
+  const permission=await Notification.requestPermission();
+
+  if(permission!=="granted"){
+    throw new Error("notification-permission-"+permission);
+  }
+
+  const registration=await navigator.serviceWorker.register(
+    new URL("sw.js",window.location.href),
+    {scope:"./"}
+  );
+
+  await navigator.serviceWorker.ready;
+
+  const configResponse=await fetch(
+    NOTIFICATION_SERVER_URL+"/push-config"
+  );
+
+  if(!configResponse.ok){
+    throw new Error("push-config-"+configResponse.status);
+  }
+
+  const config=await configResponse.json();
+
+  if(!config.publicKey){
+    throw new Error("push-config-missing-public-key");
+  }
+
+  let subscription=await registration.pushManager.getSubscription();
+
+  if(!subscription){
+    subscription=await registration.pushManager.subscribe({
+      userVisibleOnly:true,
+      applicationServerKey:base64urlToUint8Array(config.publicKey)
+    });
+  }
+
+  const response=await fetch(
+    NOTIFICATION_SERVER_URL+"/subscribe",
+    {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(subscription.toJSON())
+    }
+  );
+
+  if(!response.ok){
+    const text=await response.text();
+    throw new Error("subscribe-"+response.status+" "+text);
+  }
+
+  return true;
+}
+
 async function setServerNotifications(enabled){
-      const endpoint=enabled ? "/go" : "/stop";
-      try{
-        const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body:"{}"
-        });
+  const endpoint=enabled ? "/go" : "/stop";
 
-        const responseText=await response.text();
+  try{
+    const response=await fetch(NOTIFICATION_SERVER_URL+endpoint,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:"{}"
+    });
 
-        console.log("Notification server response:",response.status,responseText);
+    const responseText=await response.text();
 
-        if(!response.ok){
-          throw new Error("server-status-"+response.status+" "+responseText);
-        }
+    console.log(
+      "Notification server response:",
+      response.status,
+      responseText
+    );
 
-        return true;
-      }catch(error){
-        console.error("Notification server update failed:",error);
-        alert("Notification server error:\n\n"+error.message);
-        return false;
-      }
+    if(!response.ok){
+      throw new Error(
+        "server-status-"+response.status+" "+responseText
+      );
     }
 
-    notificationToggle?.addEventListener("click",async()=>{
+    return true;
+  }catch(error){
+    console.error("Notification server update failed:",error);
+    alert("Notification server error:\n\n"+error.message);
+    return false;
+  }
+}
+
+notificationToggle?.addEventListener("click",async()=>{
+  if(!notificationsAvailableHere())return;
+
   const next=!notificationEnabled();
 
-  /* Update the visible/local state immediately. */
-  localStorage.setItem(NOTIFICATION_ENABLED_KEY,next?"1":"0");
+  if(next){
+    try{
+      await registerPushSubscription();
+    }catch(error){
+      console.error("Push subscription failed:",error);
+      alert(
+        "Notifications could not be enabled.\n\n"+
+        error.message
+      );
+      renderNotificationToggle();
+      return;
+    }
+  }
+
+  const ok=await setServerNotifications(next);
+
+  if(ok){
+    localStorage.setItem(
+      NOTIFICATION_ENABLED_KEY,
+      next?"1":"0"
+    );
+  }
+
   renderNotificationToggle();
+});
+
+renderNotificationToggle();
 
   /* Then tell the Worker to GO or STOP. */
   const ok=await setServerNotifications(next);
