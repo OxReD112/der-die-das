@@ -91,7 +91,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.67 · notifications</div>
+<div class="version">v2.68 · notifications</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -119,7 +119,7 @@ async function loadKeyboardComponent(){
  const kb=document.getElementById("keyboard");
  window.deutschKeyboardReady=true;
  const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-  if(isTouchDevice)kb.classList.add("show");
+  if(isTouchDevice){kb.classList.add("show");kb.style.setProperty("display","block","important");}
  return true;
 }
 </script>
@@ -276,7 +276,7 @@ function render(){
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
  $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-  if(window.deutschKeyboardReady&&isTouchDevice)$("keyboard").classList.add("show");
+  if(window.deutschKeyboardReady&&isTouchDevice){$("keyboard").classList.add("show");$("keyboard").style.setProperty("display","block","important");}
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -303,7 +303,7 @@ function check(){
    const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
- $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
+ $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("keyboard").style.removeProperty("display");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
  $("answerTranslation").textContent=current.ru;
  let displayCorrect=normalize(correct);
  if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
@@ -360,5 +360,5 @@ function speakCurrent(){
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.67 · Notifications</div>
+</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.68 · Notifications</div>
 </body></html>
