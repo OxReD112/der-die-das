@@ -168,6 +168,24 @@ function targets(c){
  return parts;
 }
 function activeCards(){const ids=new Set(state.activeIds);return WORDS.filter(c=>ids.has(c.id))}
+function prepareTomorrowNotifications(limit=4){
+  const tomorrow=add(1);
+  const candidates=activeCards().filter(c=>rec(c).due===tomorrow);
+  const shuffled=[...candidates].sort(()=>Math.random()-.5);
+  const notifications=shuffled.slice(0,limit).map(c=>({
+    id:c.id,
+    sentence:c.revealed||c.sentence||"",
+    translation:c.ru||""
+  }));
+  const pool={date:tomorrow,notifications,createdAt:Date.now()};
+  try{
+    localStorage.setItem("deutschNotificationPoolV1",JSON.stringify(pool));
+    console.log("[German Learning] Tomorrow notification pool:",pool);
+  }catch(e){
+    console.warn("[German Learning] Could not save notification pool:",e);
+  }
+  return pool;
+}
 function build(cards=null){
  ensureDeck();
  queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
@@ -237,6 +255,7 @@ function check(){
 }
 function showDone(){
  publishWortschatzStatus(true);
+ if(sessionTotal>0) prepareTomorrowNotifications();
  $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} complete`:"Nothing due right now.";
  const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
