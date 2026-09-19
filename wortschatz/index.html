@@ -91,7 +91,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.66 · notifications</div>
+<div class="version">v2.67 · notifications</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -118,7 +118,8 @@ async function loadKeyboardComponent(){
  for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
  const kb=document.getElementById("keyboard");
  window.deutschKeyboardReady=true;
- if(innerWidth<700)kb.classList.add("show");
+ const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+  if(isTouchDevice)kb.classList.add("show");
  return true;
 }
 </script>
@@ -274,7 +275,8 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
- $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
+ $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+  if(window.deutschKeyboardReady&&isTouchDevice)$("keyboard").classList.add("show");
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -358,5 +360,5 @@ function speakCurrent(){
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.66 · Notifications</div>
+</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.67 · Notifications</div>
 </body></html>
