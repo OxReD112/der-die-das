@@ -1,13 +1,39 @@
 const MAX_NOTIFICATIONS = 4;
 const NOTIFICATIONS_ENABLED_KEY = "notifications_enabled";
 
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function jsonResponse(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+      ...CORS_HEADERS,
+    },
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: CORS_HEADERS,
+      });
+    }
+
     // Health check
     if (request.method === "GET" && url.pathname === "/") {
-      return new Response("German Learning notification server is alive.");
+      return new Response("German Learning notification server is alive.", {
+        headers: CORS_HEADERS,
+      });
     }
 
     // Read current server notification state
@@ -22,7 +48,10 @@ export default {
         }),
         {
           status: 200,
-          headers: { "Content-Type": "application/json" },
+          headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
         }
       );
     }
@@ -44,7 +73,10 @@ export default {
         }),
         {
           status: 200,
-          headers: { "Content-Type": "application/json" },
+          headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
         }
       );
     }
@@ -66,7 +98,10 @@ export default {
         }),
         {
           status: 200,
-          headers: { "Content-Type": "application/json" },
+          headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
         }
       );
     }
@@ -80,7 +115,10 @@ export default {
           JSON.stringify({ error: "date is required" }),
           {
             status: 400,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       }
@@ -97,14 +135,20 @@ export default {
           }),
           {
             status: 200,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       }
 
       return new Response(stored, {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
       });
     }
 
@@ -119,14 +163,20 @@ export default {
           JSON.stringify({ error: "No notification pool found" }),
           {
             status: 404,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       }
 
       return new Response(stored, {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
       });
     }
 
@@ -141,7 +191,10 @@ export default {
             JSON.stringify({ error: "date is required" }),
             {
               status: 400,
-              headers: { "Content-Type": "application/json" },
+              headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
             }
           );
         }
@@ -151,7 +204,10 @@ export default {
             JSON.stringify({ error: "notifications must be an array" }),
             {
               status: 400,
-              headers: { "Content-Type": "application/json" },
+              headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
             }
           );
         }
@@ -184,7 +240,10 @@ export default {
           }),
           {
             status: 200,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       } catch (error) {
@@ -194,7 +253,10 @@ export default {
           JSON.stringify({ error: "Invalid request" }),
           {
             status: 400,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       }
@@ -211,7 +273,10 @@ export default {
             JSON.stringify({ error: "date is required" }),
             {
               status: 400,
-              headers: { "Content-Type": "application/json" },
+              headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
             }
           );
         }
@@ -233,7 +298,10 @@ export default {
           }),
           {
             status: 200,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       } catch (error) {
@@ -243,13 +311,19 @@ export default {
           JSON.stringify({ error: "Invalid request" }),
           {
             status: 400,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...CORS_HEADERS,
+            },
           }
         );
       }
     }
 
-    return new Response("Not found", { status: 404 });
+    return new Response("Not found", {
+      status: 404,
+      headers: CORS_HEADERS,
+    });
   },
 
   async scheduled(controller, env, ctx) {
