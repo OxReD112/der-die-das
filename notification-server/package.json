@@ -1,0 +1,11 @@
+{
+  "name": "german-learning-notifications",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "wrangler": "^4.39.0"
+  }
+}

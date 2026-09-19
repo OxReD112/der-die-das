@@ -3,6 +3,9 @@
   "name": "german-learning-notifications",
   "main": "src/index.js",
   "compatibility_date": "2026-09-19",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "triggers": {
     "crons": [
       "*/30 * * * *"
