@@ -15,6 +15,7 @@
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;touch-action:manipulation}
 button{font:inherit}
 .app{width:min(760px,100%);margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
+#question{width:min(560px,100%)}
 .top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
@@ -91,7 +92,7 @@ button{font:inherit}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.68 · notifications</div>
+<div class="version">v2.71 · notifications</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -104,6 +105,12 @@ document.addEventListener("deutsch-keyboard-input",e=>{
  if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
  if(k)input.value+=k;
 });
+const isTouchDeviceForCheck =
+  navigator.maxTouchPoints > 0 ||
+  window.matchMedia("(pointer: coarse)").matches;
+
+$("desktopCheck").style.display = isTouchDeviceForCheck ? "none" : "";
+
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
  if(!mount)return false;
@@ -360,5 +367,5 @@ function speakCurrent(){
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
 $("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.68 · Notifications</div>
+</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.71 · Notifications</div>
 </body></html>
