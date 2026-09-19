@@ -1941,41 +1941,74 @@ header h1{
       width:min(100%,430px);
       margin:28px auto 0;
       padding:20px 20px 22px;
-      border-top:1px solid rgba(255,255,255,.10);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .phrase-week-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
     }
     .phrase-week-label{
-      margin-bottom:12px;
-      color:#8f8f94;
+      color:#77777d;
       font-size:11px;
       line-height:1.2;
       letter-spacing:.45px;
       text-transform:uppercase;
     }
+    .phrase-week-toggle{
+      appearance:none;
+      -webkit-appearance:none;
+      border:0;
+      background:transparent;
+      color:#77777d;
+      width:28px;
+      height:24px;
+      padding:0;
+      margin:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      font:inherit;
+      flex:0 0 28px;
+    }
+    .phrase-week-arrow{
+      display:block;
+      font-size:17px;
+      line-height:1;
+      transform:translateY(-1px);
+      transition:transform .18s ease;
+    }
+    .phrase-week-toggle[aria-expanded="true"] .phrase-week-arrow{
+      transform:rotate(180deg) translateY(1px);
+    }
     .phrase-week-title{
-      color:rgba(242,240,237,.84);
+      color:rgba(206,204,201,.68);
       font-size:18px;
       line-height:1.18;
       font-weight:700;
       letter-spacing:-.35px;
     }
     .phrase-week-literal{
-      margin-top:12px;
-      color:rgba(216,214,210,.78);
+      margin-top:10px;
+      color:rgba(180,179,177,.58);
       font-size:15px;
       line-height:1.45;
+    }
+    .phrase-week-details[hidden]{
+      display:none;
     }
     .phrase-week-meaning{
-      margin-top:3px;
-      color:rgba(242,240,237,.78);
+      margin-top:13px;
+      color:rgba(190,189,186,.58);
       font-size:15px;
       line-height:1.45;
-    }
-    .phrase-week-meaning::first-letter{
-      /* Keep the arrow visually part of the meaning line. */
     }
     .phrase-week-example{
       margin-top:13px;
-      color:#a9a7a3;
+      color:rgba(169,167,163,.58);
       font-size:14px;
       line-height:1.5;
       font-style:italic;
@@ -2050,11 +2083,18 @@ header h1{
     </section>
 
     <section class="phrase-week" aria-label="Phrase of the Week">
-      <div class="phrase-week-label">Phrase of the Week</div>
+      <div class="phrase-week-head">
+        <div class="phrase-week-label">Phrase of the Week</div>
+        <button class="phrase-week-toggle" id="phraseWeekToggle" type="button" aria-expanded="false" aria-controls="phraseWeekDetails" aria-label="Show phrase details">
+          <span class="phrase-week-arrow" aria-hidden="true">⌄</span>
+        </button>
+      </div>
       <div class="phrase-week-title" id="phraseWeekTitle"></div>
       <div class="phrase-week-literal" id="phraseWeekLiteral"></div>
-      <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
-      <div class="phrase-week-example" id="phraseWeekExample"></div>
+      <div class="phrase-week-details" id="phraseWeekDetails" hidden>
+        <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
+        <div class="phrase-week-example" id="phraseWeekExample"></div>
+      </div>
     </section>
 
     <div class="backup-tools" aria-label="Backup and restore">
@@ -2092,7 +2132,16 @@ header h1{
       const phraseLiteral=document.getElementById("phraseWeekLiteral");
       const phraseMeaning=document.getElementById("phraseWeekMeaning");
       const phraseExample=document.getElementById("phraseWeekExample");
-      if(!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample) return;
+      const phraseToggle=document.getElementById("phraseWeekToggle");
+      const phraseDetails=document.getElementById("phraseWeekDetails");
+      if(!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample||!phraseToggle||!phraseDetails) return;
+
+      phraseToggle.addEventListener("click",()=>{
+        const expanded=phraseToggle.getAttribute("aria-expanded")==="true";
+        phraseToggle.setAttribute("aria-expanded",String(!expanded));
+        phraseToggle.setAttribute("aria-label",expanded?"Show phrase details":"Hide phrase details");
+        phraseDetails.hidden=expanded;
+      });
 
       function getMonday(date){
         const d=new Date(date);
