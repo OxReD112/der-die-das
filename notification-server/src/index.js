@@ -92,7 +92,6 @@ async function sendPush(env, notification, userId, deviceId) {
   configureVapid(env);
 
   const payload = JSON.stringify({
-    title: "Deutsch",
     body: `${notification.de}\n${notification.ru}`,
     icon: "/icon.png",
     badge: "/icon.png",
@@ -197,8 +196,8 @@ export default {
           const result = await sendPush(
             env,
             {
-              de: "Push-Test: Die Benachrichtigungen funktionieren.",
-              ru: "Тест push: уведомления работают.",
+              de: "Ich lerne heute Deutsch.",
+              ru: "Сегодня я учу немецкий.",
             },
             userId,
             deviceId
