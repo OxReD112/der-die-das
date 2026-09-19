@@ -92,7 +92,8 @@ async function sendPush(env, notification, userId, deviceId) {
   configureVapid(env);
 
   const payload = JSON.stringify({
-    body: `${notification.de}\n${notification.ru}`,
+    title: notification.de,
+    body: notification.ru,
     icon: "/icon.png",
     badge: "/icon.png",
     tag: "german-learning-notification",
