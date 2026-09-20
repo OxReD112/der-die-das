@@ -15,7 +15,6 @@
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;touch-action:manipulation}
 button{font:inherit}
 .app{width:min(760px,100%);margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
-#question{width:min(560px,100%)}
 .top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
 .brand{font:26px Georgia,serif;color:#aaa69f}.progress{height:3px;background:#292a2c;border-radius:8px;overflow:hidden}.progress div{height:100%;background:#777;transition:width .2s}
 .stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
@@ -23,13 +22,31 @@ button{font:inherit}
 .inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:#222225;color:var(--text);text-align:center;caret-color:var(--mint)}
 .inputbox:focus{border-color:var(--mint)}
 .check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:#eee8df;color:#18181a;font-weight:750;font-size:17px}
-.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
+.feedback{
+  display:block;width:min(690px,100%);position:relative;isolation:isolate;
+  padding:34px 24px 24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);border-radius:28px;
+  background:#202023;transform-origin:center center;
+  transition:padding .28s cubic-bezier(.2,.8,.2,1);
+}
+.feedback::before{content:"";position:absolute;z-index:0;left:50%;top:0;width:150%;height:100%;transform:translateX(-50%);pointer-events:none;opacity:0}
+.feedback.good::before{background:radial-gradient(ellipse at 50% var(--glow-y, 72%),rgba(67,210,173,.34) 0%,rgba(67,210,173,.19) 22%,rgba(67,210,173,.08) 48%,rgba(67,210,173,.025) 68%,transparent 82%);opacity:1}
+.feedback.bad::before{background:radial-gradient(ellipse at 50% var(--glow-y, 72%),rgba(255,105,105,.42) 0%,rgba(255,105,105,.23) 22%,rgba(255,105,105,.09) 48%,rgba(255,105,105,.03) 68%,transparent 82%);opacity:1}
+.feedback > *{position:relative;z-index:1}
+.feedback.revealed{padding-top:34px}
+.feedbackReveal{width:100%}
+#question{transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)}
+#question.hidden{display:none}
 .feedback.show{display:block}
-.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center}
+.feedback.show{display:block}
+.feedbackShell{
+  display:flex;width:min(690px,100%);flex-direction:column;align-items:center;
+  margin-top:0;
+}
 .feedbackShell.show{display:flex}
 .feedbackShell .feedback{width:100%}
 .feedbackShell .continue{
-  width:auto;
+  display:none;width:auto;
   margin-top:18px;
   border:0;
   border-radius:15px;
@@ -42,14 +59,39 @@ button{font:inherit}
 }
 .feedbackShell .continue:hover{filter:brightness(1.03)}
 .feedbackShell .continue:active{transform:translateY(1px)}
+.feedbackShell.revealed .continue{display:block}
+#keyboardMount{width:min(690px,100%);display:flex;justify-content:center;flex:0 0 auto}
+.feedbackShell > .continue{flex:0 0 auto}
+.feedbackQuestion{display:block}
+.feedbackQuestion.hidden{display:none}
+.feedbackReveal{display:block;max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transform-origin:top center;will-change:max-height,opacity,transform}
+.feedback.revealed .feedbackReveal{max-height:1200px;opacity:1;transform:translateY(0);transition:max-height .38s cubic-bezier(.22,.8,.25,1),opacity .22s ease,transform .38s cubic-bezier(.22,.8,.25,1)}
+/* Fix 4: the question half stays in place; the answer opens only below it. */
+#question{position:relative;z-index:2}
+#question .sentence{min-height:2.56em}
+.feedback.revealed .feedbackReveal{margin-top:0}
+
+.resultSlot{display:none;min-height:60px;margin-top:28px;width:min(620px,100%);align-items:center;justify-content:center;text-align:center}
+.feedback.revealed .resultSlot{display:flex;animation:resultDrop .32s cubic-bezier(.22,.8,.25,1) both}
+.feedback.revealed #answerInput{display:none}
+.feedback .targetForm,.feedback .diffBlock,.feedback .speakTop,.feedback .detail{opacity:1;transform:none}
+
+.cardInput{margin-top:28px}
+.cardCheck{margin-top:14px}
+@media(max-width:699px){
+  .feedback{padding:18px 16px 20px}
+  .feedback.revealed{padding-top:50px}
+  .cardInput{height:60px;margin-top:28px}
+  .cardCheck{display:none}
+}
 @media(max-width:699px){.feedbackShell{touch-action:manipulation;will-change:transform,opacity}}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 @keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--mint)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
-.targetForm{display:inline-block;margin-top:22px;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
-.diffBlock{display:none;margin-top:26px;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow img + *{}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
+.targetForm{display:none;margin:0;color:var(--mint);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.good .targetForm{display:inline-block}
+.diffBlock{display:none;margin:0;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:rgba(255,255,255,.025)}.diffSame{color:var(--mint)}.diffWrong{color:#ff8589;background:rgba(255,91,98,.10)}.diffMissing{color:var(--red);background:rgba(255,91,98,.10)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow img + *{}.diffArrow{margin:1px 0;color:#e8d9d9;font:24px/1 sans-serif}.diffCorrect{color:#ddd}.diffCorrect .diffSame{color:var(--mint)}
 .answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}.answerTargetRow .speak{display:none;margin:0;flex:0 0 auto}.speak{display:block;margin:10px auto 18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:transparent;color:#aabdb7;font-size:21px}
-.detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
+.detail{position:relative;border-top:1px solid #444448;padding-top:24px;color:#aaa;text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--mint);box-shadow:0 0 14px rgba(67,210,173,.3);z-index:2}.feedback.bad .detail::before{background:var(--red);box-shadow:0 0 14px rgba(255,91,98,.34)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{display:none}@keyframes resultDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:#8d9996}.grammar{margin-top:14px;font-size:14px;color:#737a78}
 .continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:#9b9b9f;font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:#d5d5d7}.continue:active{transform:scale(1.05)}
 
@@ -57,42 +99,42 @@ button{font:inherit}
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:#f3f1ed;font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid #444448;border-radius:16px;padding:15px 18px;background:#242426;color:#f3f1ed;font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:#4f4f53;font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:10px}.feedbackShell{margin-top:0}.feedback{padding:50px 16px 20px}.feedback.revealed{padding:50px 16px 20px}.feedback .topZone{width:100%}.topZone{width:min(620px,100%)}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.resultSlot{min-height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:0}.diffBlock{margin-top:0;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.speak{margin:0;width:42px;height:42px}.detail{padding-top:12px}.grammar{margin-top:26px}#keyboardMount{margin-top:18px;width:100%;min-height:0}#keyboardMount #keyboard{width:100%}.feedbackShell.revealed #keyboardMount{display:none}.feedbackShell:not(.revealed) .continue{display:none}}
 
 </style>
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
 <section class="stage" id="study">
- <div id="question">
-  <div class="topZone">
-   <div class="sentence" id="sentence"></div>
-   <div class="translation" id="translation"></div>
-  </div>
-  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
-  <button class="check" id="desktopCheck">Check</button>
-  <div id="keyboardMount"></div>
- </div>
- <div class="feedbackShell" id="feedbackShell">
+ <div class="feedbackShell show" id="feedbackShell">
   <div class="feedback" id="feedback">
-   <div class="topZone answerTop" id="answerTop">
-    <div class="answerSentence" id="answerSentence"></div>
-    <div class="answerTranslation" id="answerTranslation"></div>
+   <div id="question">
+    <div class="topZone">
+     <div class="sentence" id="sentence"></div>
+     <div class="translation" id="translation"></div>
+    </div>
+    <input id="answerInput" class="inputbox cardInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+    <div class="resultSlot" id="resultSlot">
+     <div class="targetForm" id="targetForm"></div>
+     <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
+    </div>
+    <button class="check cardCheck" id="desktopCheck">Check</button>
    </div>
-   <div class="targetForm" id="targetForm"></div>
-   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
+   <div class="feedbackReveal">
    <button class="speakTop" id="speakTop" aria-label="Hear sentence"><img class="speakTopIcon" src="../components/icons/Audio.svg" alt="" aria-hidden="true"></button>
    <div class="detail">
     <div class="answerTargetRow"><div class="base" id="base"></div></div>
     <div class="meaning" id="meaning"></div>
     <div class="grammar" id="grammar"></div>
    </div>
+   </div>
   </div>
+  <div id="keyboardMount"></div>
   <button class="continue" id="continue">Continue</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
-<div class="version">v2.71 · notifications</div>
+<div class="version">v2.62 · persistent card + swipe · fix 7</div>
 </main>
 <script src="words.js"></script>
 <script>
@@ -105,12 +147,6 @@ document.addEventListener("deutsch-keyboard-input",e=>{
  if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
  if(k)input.value+=k;
 });
-const isTouchDeviceForCheck =
-  navigator.maxTouchPoints > 0 ||
-  window.matchMedia("(pointer: coarse)").matches;
-
-$("desktopCheck").style.display = isTouchDeviceForCheck ? "none" : "";
-
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
  if(!mount)return false;
@@ -125,8 +161,7 @@ async function loadKeyboardComponent(){
  for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
  const kb=document.getElementById("keyboard");
  window.deutschKeyboardReady=true;
- const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-  if(isTouchDevice){kb.classList.add("show");kb.style.setProperty("display","block","important");}
+ if(innerWidth<700)kb.classList.add("show");
  return true;
 }
 </script>
@@ -176,95 +211,6 @@ function targets(c){
  return parts;
 }
 function activeCards(){const ids=new Set(state.activeIds);return WORDS.filter(c=>ids.has(c.id))}
-const NOTIFICATION_SERVER="https://german-learning-notifications.d45zgw2cgh.workers.dev";
-const NOTIFICATION_USER_KEY="deutschNotificationUserIdV1";
-const NOTIFICATION_DEVICE_KEY="deutschNotificationDeviceIdV1";
-
-function getNotificationUserId(){
-  let id=localStorage.getItem(NOTIFICATION_USER_KEY);
-  if(!id){
-    try{id=crypto.randomUUID?crypto.randomUUID():"user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    catch(e){id="user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    localStorage.setItem(NOTIFICATION_USER_KEY,id);
-  }
-  return id;
-}
-
-function getNotificationDeviceId(){
-  let id=localStorage.getItem(NOTIFICATION_DEVICE_KEY);
-  if(!id){
-    try{id=crypto.randomUUID?crypto.randomUUID():"device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    catch(e){id="device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    localStorage.setItem(NOTIFICATION_DEVICE_KEY,id);
-  }
-  return id;
-}
-
-async function syncNotificationPool(pool){
-  try{
-    const response=await fetch(NOTIFICATION_SERVER+"/pool",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        userId:getNotificationUserId(),
-        deviceId:getNotificationDeviceId(),
-        date:pool.date,
-        notifications:pool.notifications.map(item=>({
-          id:item.id,
-          de:item.sentence,
-          ru:item.translation
-        }))
-      })
-    });
-    if(!response.ok)throw new Error("pool-"+response.status);
-    console.log("[German Learning] Notification pool synced:",pool.date);
-    return true;
-  }catch(e){
-    console.warn("[German Learning] Could not sync notification pool:",e);
-    return false;
-  }
-}
-
-async function publishNotificationDone(){
-  const event={date:day(),done:true,completedAt:Date.now()};
-  try{
-    localStorage.setItem("deutschNotificationDoneV1",JSON.stringify(event));
-    const response=await fetch(NOTIFICATION_SERVER+"/done",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        userId:getNotificationUserId(),
-        deviceId:getNotificationDeviceId(),
-        date:event.date
-      })
-    });
-    if(!response.ok)throw new Error("done-"+response.status);
-    console.log("[German Learning] DONE synced:",event);
-  }catch(e){
-    console.warn("[German Learning] Could not sync DONE event:",e);
-  }
-  return event;
-}
-
-function prepareTomorrowNotifications(limit=4){
-  const tomorrow=add(1);
-  const candidates=activeCards().filter(c=>rec(c).due===tomorrow);
-  const shuffled=[...candidates].sort(()=>Math.random()-.5);
-  const notifications=shuffled.slice(0,Math.min(4,limit)).map(c=>({
-    id:c.id,
-    sentence:c.revealed||c.sentence||"",
-    translation:c.ru||""
-  }));
-  const pool={date:tomorrow,notifications,createdAt:Date.now()};
-  try{
-    localStorage.setItem("deutschNotificationPoolV1",JSON.stringify(pool));
-    console.log("[German Learning] Tomorrow notification pool:",pool);
-  }catch(e){
-    console.warn("[German Learning] Could not save notification pool:",e);
-  }
-  syncNotificationPool(pool);
-  return pool;
-}
 function build(cards=null){
  ensureDeck();
  queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
@@ -282,8 +228,10 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
- $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-  if(window.deutschKeyboardReady&&isTouchDevice){$("keyboard").classList.add("show");$("keyboard").style.setProperty("display","block","important");}
+ $("resultSlot").style.display="none";$("targetForm").style.display="none";$("diffBlock").style.display="none";$("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
+ $("answerInput").disabled=false;
+ $("answerInput").removeAttribute("aria-disabled");
+ $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";if(window.deutschKeyboardReady&&innerWidth<700)$("keyboard").classList.add("show");
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -300,6 +248,25 @@ function diffHTML(typed,correct){
  }
  return [top.join(""),bottom.join("")];
 }
+function syncGlowToDivider(){
+ const card=$("feedback"), line=$("feedback")?.querySelector(".detail");
+ if(!card||!line) return;
+ const cr=card.getBoundingClientRect(), lr=line.getBoundingClientRect();
+ if(!cr.height) return;
+ const y=((lr.top-cr.top)/cr.height)*100;
+ card.style.setProperty("--glow-y",`${Math.max(5,Math.min(95,y))}%`);
+}
+function animateGlowWithReveal(duration=420){
+ const start=performance.now();
+ function frame(now){
+   syncGlowToDivider();
+   if(now-start<duration) requestAnimationFrame(frame);
+   else syncGlowToDivider();
+ }
+ requestAnimationFrame(frame);
+}
+window.addEventListener("resize",()=>{ if($("feedback")?.classList.contains("revealed")) syncGlowToDivider(); });
+
 function check(){
  let typed=normalize($("answerInput").value);if(!typed)return;
  const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
@@ -310,15 +277,39 @@ function check(){
    const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
- $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("keyboard").style.removeProperty("display");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
- $("answerTranslation").textContent=current.ru;
+ $("keyboard").classList.remove("show");
+ // First show the finished card in its collapsed state. This gives the glow
+ // the exact starting position of the divider before the reveal animation begins.
+ $("feedbackShell").className="feedbackShell show";
+ $("feedback").className="feedback show "+(ok?"good":"bad");
+ // Keep the original question area fixed and fill its blank in-place.
+ $("sentence").innerHTML=revealHTML(current);
+ $("answerInput").disabled=true;
+ $("answerInput").setAttribute("aria-disabled","true");
  let displayCorrect=normalize(correct);
- if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
+ if(current&&/^(der|die|das)\s/i.test(String(current.base||""))){
    displayCorrect=displayCorrect.charAt(0).toLocaleUpperCase("de-DE")+displayCorrect.slice(1);
  }
  $("targetForm").textContent=displayCorrect;
- $("targetForm").style.display=ok?"inline-block":"none";
- if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
+ $("resultSlot").style.display="flex";
+ // Anchor the gradient to the divider before opening, then track the divider
+ // frame-by-frame while the lower half expands.
+ syncGlowToDivider();
+ requestAnimationFrame(()=>{
+   $("feedbackShell").classList.add("revealed");
+   $("feedback").classList.add("revealed");
+   animateGlowWithReveal(420);
+ });
+ if(ok){
+   $("targetForm").style.display="inline-block";
+   $("diffBlock").style.display="none";
+   $("typedDiff").innerHTML="";$("correctDiff").innerHTML="";
+ }else{
+   $("targetForm").style.display="none";
+   const [top,bottom]=diffHTML(typed,normalize(correct));
+   $("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom;
+   $("diffBlock").style.display="block";
+ }
  $("base").textContent=current.base;$("meaning").textContent=current.translation;$("grammar").textContent=current.grammar||"";
  const r=rec(current);
  if(ok){
@@ -335,11 +326,7 @@ function check(){
 }
 function showDone(){
  publishWortschatzStatus(true);
- if(sessionTotal>0){
-   publishNotificationDone();
-   prepareTomorrowNotifications();
- }
- $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
+ $("study").style.display="none";$("feedbackShell").className="feedbackShell";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} complete`:"Nothing due right now.";
  const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
  $("addWords").style.display=remaining?"block":"none";$("allAdded").style.display=remaining?"none":"block";
@@ -358,6 +345,70 @@ document.addEventListener("keydown",e=>{
  e.preventDefault();next();
 });
 $("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
+
+// Mobile reveal navigation: soft Tinder-like drag left for the persistent card.
+(()=>{
+ const shell=$("feedback");
+ let startX=0,startY=0,lastX=0,startT=0,tracking=false,horizontal=false,finishing=false;
+
+ const clean=()=>{
+   tracking=false; horizontal=false;
+   shell.classList.remove("swiping","snapback","swipeout");
+   shell.style.transform=""; shell.style.opacity="";
+ };
+
+ const snapBack=()=>{
+   tracking=false; horizontal=false;
+   shell.classList.remove("swiping","swipeout");
+   shell.classList.add("snapback");
+   shell.style.transform=""; shell.style.opacity="";
+   setTimeout(()=>shell.classList.remove("snapback"),190);
+ };
+
+ const goNext=()=>{
+   if(finishing)return;
+   finishing=true; tracking=false;
+   shell.classList.remove("swiping","snapback");
+   shell.classList.add("swipeout");
+   shell.style.transform="translateX(-115vw) rotate(-8deg) scale(.92)";
+   shell.style.opacity="0";
+   setTimeout(()=>{clean();finishing=false;next()},190);
+ };
+
+ shell.addEventListener("touchstart",e=>{
+   if(innerWidth>=700||!$("feedback").classList.contains("show")||finishing||e.touches.length!==1)return;
+   if(e.target.closest("button,a,input,textarea,select"))return;
+   const t=e.touches[0];
+   startX=lastX=t.clientX; startY=t.clientY; startT=performance.now();
+   tracking=true; horizontal=false;
+ },{passive:true});
+
+ shell.addEventListener("touchmove",e=>{
+   if(!tracking||e.touches.length!==1)return;
+   const t=e.touches[0],dx=t.clientX-startX,dy=t.clientY-startY;
+   lastX=t.clientX;
+   if(!horizontal){
+     if(Math.hypot(dx,dy)<12)return;
+     if(dx>=0){tracking=false;return}
+     if(Math.abs(dy)>Math.abs(dx)*1.25){tracking=false;return}
+     horizontal=true;
+   }
+   e.preventDefault();
+   const left=Math.min(0,dx);
+   shell.classList.add("swiping");
+   const shrink=Math.max(.93,1-Math.abs(left)/1800);
+   shell.style.transform=`translateX(${left}px) rotate(${left/48}deg) scale(${shrink})`;
+   shell.style.opacity=String(Math.max(.55,1-Math.abs(left)/520));
+ },{passive:false});
+
+ shell.addEventListener("touchend",()=>{
+   if(!tracking)return;
+   const dx=lastX-startX,elapsed=Math.max(1,performance.now()-startT),speed=-dx/elapsed;
+   if(horizontal&&(dx<=-78||(dx<=-42&&speed>.55)))goNext(); else snapBack();
+ },{passive:true});
+ shell.addEventListener("touchcancel",snapBack,{passive:true});
+})();
+
 function speakCurrent(){
  speechSynthesis.cancel();
  let u=new SpeechSynthesisUtterance(current.revealed);
@@ -365,7 +416,5 @@ function speakCurrent(){
  speechSynthesis.speak(u);
 }
 $("speakTop").onclick=e=>{e.stopPropagation();speakCurrent()};
-$("answerTop").onclick=()=>speakCurrent();
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
-</script><div id="appVersion" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:10px;opacity:.45;pointer-events:none;z-index:9999">Wortschatz · v2.71 · Notifications</div>
-</body></html>
+</script></body></html>
