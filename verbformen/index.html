@@ -385,7 +385,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   </div>
  </div>
 </main>
-<div class="version-tag">v41-clean · conservative cleanup + pattern table fix</div>
+<div class="version-tag">v42-clean · Partizip II exercise</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -421,6 +421,9 @@ if(isMobileKeyboard){
   $("answer").setAttribute("readonly","");
   $("check").style.display="none";
 }
+// Partizip-II exercise: modal verbs stay in verbs.js for other exercises,
+// but are excluded from this exercise.
+const EXERCISE_VERBS=VERBS.filter(v=>!v.modal);
 const key=v=>v.infinitive.toLowerCase();
 
 function saveDifficulty(){
@@ -435,17 +438,17 @@ function weightFor(v){
    difficult verbs are more likely to enter a session,
    but no verb can occur twice in that session. */
 function buildDeck(size){
- const ranked=VERBS.map(v=>{
+ const ranked=EXERCISE_VERBS.map(v=>{
    const weight=weightFor(v);
    const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
    return {v,randomKey};
  }).sort((a,b)=>a.randomKey-b.randomKey);
 
- return ranked.slice(0,Math.min(size,VERBS.length)).map(x=>x.v);
+ return ranked.slice(0,Math.min(size,EXERCISE_VERBS.length)).map(x=>x.v);
 }
 
 function startSession(size){
- sessionSize=Math.min(size,VERBS.length);
+ sessionSize=Math.min(size,EXERCISE_VERBS.length);
  deck=buildDeck(sessionSize);
  index=0;correctCount=0;
  $("start").classList.add("hidden");
@@ -499,7 +502,7 @@ function partizipPattern(pattern){
 }
 
 function shouldShowPreterite(v){
- return v.infinitive==="sein" || v.infinitive==="haben" || v.modal===true;
+ return v.infinitive==="sein" || v.infinitive==="haben";
 }
 
 function checkAnswer(){
