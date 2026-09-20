@@ -505,19 +505,58 @@ header h1 {
    Phrase of the Week
    -------------------------------------------------------------------------- */
 
-.phrase-week {
+.home-viewport {
   position: relative;
-  width: min(100%, 430px);
-  margin: 28px auto 0;
-  padding: 10px 20px 22px;
+  width: 100%;
+  overflow: hidden;
 }
 
-.phrase-week-head {
+.home-track {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 8px;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform .42s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+.home-screen,
+.phrase-screen {
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+}
+
+.home-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+}
+
+.phrase-screen {
+  position: relative;
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding:
+    calc(env(safe-area-inset-top) + 56px)
+    max(24px, env(safe-area-inset-right))
+    calc(env(safe-area-inset-bottom) + 32px)
+    max(24px, env(safe-area-inset-left));
+  overflow: hidden;
+}
+
+.phrase-screen-content {
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  text-align: center;
+}
+
+.phrase-screen .phrase-week-label {
+  margin-bottom: 24px;
+  font-size: 13px;
 }
 
 .phrase-week-label {
@@ -526,6 +565,66 @@ header h1 {
   line-height: 1.2;
   letter-spacing: .45px;
   text-transform: uppercase;
+}
+
+.phrase-week-title {
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -.35px;
+}
+
+.phrase-week-literal {
+  margin-top: 6px;
+  color: rgba(190,189,186,.58);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.phrase-week-meaning {
+  margin-top: 28px;
+  color: rgba(190,189,186,.68);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.phrase-week-example {
+  margin-top: 18px;
+  color: rgba(169,167,163,.58);
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.phrase-screen-back {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px auto 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  background: rgba(27,27,29,.58);
+  color: rgba(242,240,237,.62);
+  font: 400 28px/42px -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-screen-back:active {
+  opacity: .65;
+}
+
+.phrase-screen-back-arrow {
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 .phrase-week-toggle {
@@ -546,6 +645,11 @@ header h1 {
   cursor: pointer;
   font: inherit;
   flex: 0 0 38px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-week-toggle:active {
+  opacity: .65;
 }
 
 .phrase-week-arrow {
@@ -555,15 +659,23 @@ header h1 {
   transform: translateY(-1px);
 }
 
-.phrase-week-toggle[aria-expanded="true"] .phrase-week-arrow {
-  transform: rotate(180deg) translateY(1px);
+.phrase-week-home-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(100%, 430px);
+  margin: 28px auto 0;
+  padding: 10px 20px 22px;
 }
 
-.phrase-week-toggle:active {
-  opacity: .65;
+.phrase-week-home-copy {
+  min-width: 0;
+  text-align: left;
 }
 
-.phrase-week-title {
+.phrase-week-home-title {
+  margin-top: 5px;
   color: var(--text);
   font-size: 16px;
   line-height: 1.18;
@@ -571,44 +683,47 @@ header h1 {
   letter-spacing: -.35px;
 }
 
-.phrase-week-literal {
-  margin-top: 0;
+.phrase-week-home-literal {
+  margin-top: 1px;
   color: rgba(190,189,186,.58);
   font-size: 13px;
   line-height: 1.45;
 }
 
-.phrase-week-details[hidden] {
-  display: none;
-}
+@media (max-width: 430px) {
+  .phrase-screen-content {
+    width: min(100%, 350px);
+    padding-left: 4px;
+    padding-right: 4px;
+  }
 
-.phrase-week-meaning {
-  margin-top: 10px;
-  color: rgba(190,189,186,.58);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.phrase-week-example {
-  margin-top: 10px;
-  color: rgba(169,167,163,.58);
-  font-size: 12px;
-  line-height: 1.5;
-  font-style: italic;
+  .phrase-week-home-row {
+    width: min(100%, 350px);
+    padding: 10px 4px 20px;
+  }
 }
 
 /* --------------------------------------------------------------------------
    Backup / utilities
    -------------------------------------------------------------------------- */
-
 .home-utilities {
-  margin-top: auto;
-  padding-bottom: 28px;
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  transform: translateX(-50%);
+  width: min(calc(100% - 48px), 720px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.home-utilities .backup-tools,
+.home-utilities #notificationSettings {
+  pointer-events: auto;
 }
 
 .backup-tools {
   width: min(100%, 620px);
-  margin: 18px auto 0;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -836,9 +951,6 @@ header h1 {
     margin-top: 28px;
   }
 
-  .phrase-week-title {
-    font-size: 18px;
-  }
 }
   </style>
   <link href="icon.png" rel="icon" type="image/png"/>
@@ -854,6 +966,9 @@ header h1 {
      Deutsch.
     </h1>
    </header>
+   <div class="home-viewport">
+    <div class="home-track" id="homeTrack">
+     <div class="home-screen">
    <p class="intro">
     Was m&ouml;chtest du heute &uuml;ben?
    </p>
@@ -929,28 +1044,32 @@ header h1 {
      </div>
     </div>
    </section>
-   <section aria-label="Phrase of the Week" class="phrase-week">
-    <div class="phrase-week-head">
-     <div class="phrase-week-label">
-      Phrase of the Week
+       <section aria-label="Phrase of the Week" class="phrase-week-home-row">
+     <div class="phrase-week-home-copy">
+      <div class="phrase-week-label">Phrase of the Week</div>
+      <div class="phrase-week-home-title" id="phraseWeekHomeTitle"></div>
+      <div class="phrase-week-home-literal" id="phraseWeekHomeLiteral"></div>
      </div>
-     <button aria-controls="phraseWeekDetails" aria-expanded="false" aria-label="Show phrase details" class="phrase-week-toggle" id="phraseWeekToggle" type="button">
-      <span aria-hidden="true" class="phrase-week-arrow">
-       &rsaquo;
-      </span>
+     <button aria-label="Show phrase details" class="phrase-week-toggle" id="phraseWeekToggle" type="button">
+      <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
      </button>
-    </div>
-    <div class="phrase-week-title" id="phraseWeekTitle">
-    </div>
-    <div class="phrase-week-literal" id="phraseWeekLiteral">
-    </div>
-    <div class="phrase-week-details" hidden="" id="phraseWeekDetails">
-     <div class="phrase-week-meaning" id="phraseWeekMeaning">
+    </section>
+
      </div>
-     <div class="phrase-week-example" id="phraseWeekExample">
-     </div>
+     <section aria-label="Phrase of the Week details" class="phrase-screen" id="phraseScreen" aria-hidden="true">
+      <div class="phrase-screen-content">
+       <div class="phrase-week-label">Phrase of the Week</div>
+       <div class="phrase-week-title" id="phraseWeekTitle"></div>
+       <div class="phrase-week-literal" id="phraseWeekLiteral"></div>
+       <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
+       <div class="phrase-week-example" id="phraseWeekExample"></div>
+      <button aria-label="Back to home" class="phrase-screen-back" id="phraseScreenBack" type="button">
+       <span aria-hidden="true" class="phrase-screen-back-arrow">&lsaquo;</span>
+      </button>
+      </div>
+     </section>
     </div>
-   </section>
+   </div>
    <div aria-label="Home utilities" class="home-utilities">
     <div aria-label="Backup and restore" class="backup-tools">
      <button class="backup-save" id="backupSave" type="button">
@@ -993,23 +1112,33 @@ header h1 {
   <script src="phrases.js">
   </script>
   <script>
-   /* Phrase of the Week — data lives in phrases.js.
-       Week 0 starts with phrase 1; after the last phrase, the sequence wraps to 1. */
+       /* Phrase of the Week — data lives in phrases.js.
+       The details are a separate full-screen Home panel. */
     (function initPhraseOfTheWeek(){
+      const phraseHomeTitle=document.getElementById("phraseWeekHomeTitle");
+      const phraseHomeLiteral=document.getElementById("phraseWeekHomeLiteral");
       const phraseTitle=document.getElementById("phraseWeekTitle");
       const phraseLiteral=document.getElementById("phraseWeekLiteral");
       const phraseMeaning=document.getElementById("phraseWeekMeaning");
       const phraseExample=document.getElementById("phraseWeekExample");
       const phraseToggle=document.getElementById("phraseWeekToggle");
-      const phraseDetails=document.getElementById("phraseWeekDetails");
-      if(!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample||!phraseToggle||!phraseDetails) return;
+      const phraseBack=document.getElementById("phraseScreenBack");
+      const homeTrack=document.getElementById("homeTrack");
+      const phraseScreen=document.getElementById("phraseScreen");
+      if(!phraseHomeTitle||!phraseHomeLiteral||!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample||!phraseToggle||!phraseBack||!homeTrack||!phraseScreen) return;
 
-      phraseToggle.addEventListener("click",()=>{
-        const expanded=phraseToggle.getAttribute("aria-expanded")==="true";
-        phraseToggle.setAttribute("aria-expanded",String(!expanded));
-        phraseToggle.setAttribute("aria-label",expanded?"Show phrase details":"Hide phrase details");
-        phraseDetails.hidden=expanded;
-      });
+      function showPhrase(){
+        homeTrack.style.transform="translateX(-50%)";
+        phraseScreen.setAttribute("aria-hidden","false");
+      }
+
+      function showHome(){
+        homeTrack.style.transform="translateX(0)";
+        phraseScreen.setAttribute("aria-hidden","true");
+      }
+
+      phraseToggle.addEventListener("click",showPhrase);
+      phraseBack.addEventListener("click",showHome);
 
       function getMonday(date){
         const d=new Date(date);
@@ -1034,6 +1163,11 @@ header h1 {
         const weeks=Math.max(0,Math.floor((currentWeek-firstWeek)/604800000));
         const index=weeks % window.PHRASES.length;
         const phrase=window.PHRASES[index];
+
+        // The same weekly phrase object feeds both the compact Home preview
+        // and the full-screen details. There is only one source of truth.
+        phraseHomeTitle.textContent=phrase.title;
+        phraseHomeLiteral.textContent=phrase.literal;
 
         phraseTitle.textContent=phrase.title;
         phraseLiteral.textContent=phrase.literal;
