@@ -101,7 +101,6 @@ header h1 {
   font-size: 15px;
   line-height: 1.4;
   text-align: center;
-  transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -156,15 +155,14 @@ header h1 {
   display: grid;
   grid-template-columns: 1.08fr .92fr;
   align-items: center;
-  justify-content: initial;
 
   border-color: rgba(255,255,255,.10);
   background: var(--card-bg-soft);
   box-shadow: none;
   isolation: isolate;
   overflow: hidden;
-  clip-path: inset(0 round 25px);
-  -webkit-clip-path: inset(0 round 25px);
+  clip-path: inset(0 round var(--card-radius));
+  -webkit-clip-path: inset(0 round var(--card-radius));
 }
 
 .mosaic .tile-vocab::before,
@@ -777,8 +775,7 @@ header h1 {
     width: calc(100% - 48px);
   }
 
-  .dashboard.mosaic,
-  .daily-score {
+  .dashboard.mosaic {
     width: min(100%, var(--mobile-dashboard-width));
   }
 
@@ -793,13 +790,6 @@ header h1 {
 
   .mosaic .tile-vocab {
     grid-template-columns: 1.06fr .94fr;
-    clip-path: inset(0 round 25px);
-    -webkit-clip-path: inset(0 round 25px);
-  }
-
-  .mosaic .tile-vocab .tile-art {
-    width: auto;
-    height: 100%;
   }
 
   .mosaic .tile-vocab .tile-copy {
