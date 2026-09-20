@@ -627,39 +627,9 @@ header h1 {
   transform: translateY(-1px);
 }
 
-.phrase-week-toggle {
+.phrase-week-home-row {
   appearance: none;
   -webkit-appearance: none;
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  background: transparent;
-  color: rgba(242,240,237,.78);
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  font: inherit;
-  flex: 0 0 38px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.phrase-week-toggle:active {
-  opacity: .65;
-}
-
-.phrase-week-arrow {
-  display: block;
-  font: 300 34px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "Helvetica Neue", Arial, sans-serif;
-  transform: translateY(-1px);
-}
-
-.phrase-week-home-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -667,6 +637,17 @@ header h1 {
   width: min(100%, 430px);
   margin: 28px auto 0;
   padding: 10px 20px 22px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-week-home-row:active {
+  opacity: .65;
 }
 
 .phrase-week-home-copy {
@@ -688,6 +669,13 @@ header h1 {
   color: rgba(190,189,186,.58);
   font-size: 13px;
   line-height: 1.45;
+}
+
+.phrase-week-arrow {
+  display: block;
+  font: 300 34px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", Arial, sans-serif;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 430px) {
@@ -945,12 +933,6 @@ header h1 {
     font-size: 26px;
   }
 
-  .phrase-week {
-    width: min(100%, 350px);
-    padding: 10px 4px 20px;
-    margin-top: 28px;
-  }
-
 }
   </style>
   <link href="icon.png" rel="icon" type="image/png"/>
@@ -1044,16 +1026,14 @@ header h1 {
      </div>
     </div>
    </section>
-       <section aria-label="Phrase of the Week" class="phrase-week-home-row">
+       <button aria-label="Show phrase details" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
      <div class="phrase-week-home-copy">
       <div class="phrase-week-label">Phrase of the Week</div>
       <div class="phrase-week-home-title" id="phraseWeekHomeTitle"></div>
       <div class="phrase-week-home-literal" id="phraseWeekHomeLiteral"></div>
      </div>
-     <button aria-label="Show phrase details" class="phrase-week-toggle" id="phraseWeekToggle" type="button">
-      <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
-     </button>
-    </section>
+     <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
+    </button>
 
      </div>
      <section aria-label="Phrase of the Week details" class="phrase-screen" id="phraseScreen" aria-hidden="true">
