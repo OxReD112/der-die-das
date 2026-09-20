@@ -123,9 +123,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   pointer-events:none;
 }
 
-
-
-
 @media(max-width:600px){
  .app::before{
    content:"";
@@ -180,9 +177,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   letter-spacing:-.03em;
 }
 
-.pattern-modal-card{width:min(560px,100%);max-height:82vh;padding:4px 18px 14px}
-.pattern-modal-head h2{font-size:20px}
-.pattern-intro{margin:6px 0 8px;font-size:11px}
 .pattern-table-btn{
   border:1px solid rgba(255,255,255,.06);
   background:transparent;
@@ -555,7 +549,7 @@ $("again").onclick=()=>{
  $("finish").classList.add("hidden");
  $("start").classList.remove("hidden");
 };
-  function goBackToHome(){
+function goBackToHome(){
   try{
     if(window.parent && window.parent !== window){
       if(typeof window.parent.closeApp === 'function'){
