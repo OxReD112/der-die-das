@@ -21,7 +21,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .progress>i{display:block;height:100%;background:#777;border-radius:9px}
 .card{position:relative;text-align:center;padding:30px 20px 26px;isolation:isolate}
 .card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,rgba(91,200,164,.09),transparent 63%);opacity:.35}
-.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:#6f706f;margin-bottom:18px}
 .verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
 .translation{color:#737473;font-size:16px;margin-bottom:44px}
 .answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
@@ -86,7 +85,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  .card{padding-top:14px}
 }
 
-/* v6: stable layout — no keyboard-driven resizing */
 @media(max-width:600px){
  .result{margin-top:22px;padding:22px 24px 18px}
  .state{font-size:10px;margin-bottom:9px}
@@ -108,17 +106,11 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .result-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}
 .result-head .state{margin-bottom:0}
 .vowel-pattern{color:#929391;font-size:13px;letter-spacing:.12em;text-transform:lowercase;white-space:nowrap}
-.good .vowel-pattern{color:#929391}
-.bad .vowel-pattern{color:#929391}
 @media(max-width:600px){
  .result-head{margin-bottom:9px}
  .vowel-pattern{font-size:11px;letter-spacing:.10em}
 }
 
-
-/* v20: iPhone overscroll mask + mode label restored above the verb */
-.mode-top{visibility:hidden}
-.card{position:relative}
 .mode-inline{
   position:absolute;
   left:0;right:0;
@@ -134,9 +126,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 
 
 
-
-
-/* v23: overscroll mask lives inside the app stacking context */
 @media(max-width:600px){
  .app::before{
    content:"";
@@ -162,16 +151,12 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  html,body{overscroll-behavior-y:none}
 }
 
-
-/* v24: larger, easier-to-hit Backspace */
 @media(max-width:900px){
  .key-row-tools .key-backspace{
    flex:2.5 1 0;
  }
 }
 
-
-/* v26: tools row spans full width; Backspace is flush right */
 @media(max-width:900px){
  .key-row-tools{
    padding-left:17%;
@@ -188,13 +173,167 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
  }
 }
 
-
-/* v27: dedicated final-session score */
 .final-score{
   margin:18px 0 12px;
   color:#f1eee8;
   font:500 34px/1.05 Georgia,serif;
   letter-spacing:-.03em;
+}
+
+.pattern-modal-card{width:min(560px,100%);max-height:82vh;padding:4px 18px 14px}
+.pattern-modal-head h2{font-size:20px}
+.pattern-intro{margin:6px 0 8px;font-size:11px}
+.pattern-table-btn{
+  border:1px solid rgba(255,255,255,.06);
+  background:transparent;
+  color:#aaa;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:400;
+  padding:8px 11px;
+  cursor:pointer;
+}
+.start .pattern-table-btn{
+  margin-top:10px;
+  font-size:14px;
+  padding:11px 14px;
+}
+.pattern-table-btn:active{transform:scale(.99)}
+
+.pattern-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:100;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s;
+}
+.pattern-modal.open{
+  opacity:1;
+  visibility:visible;
+  background:rgba(0,0,0,.28);
+  transition:opacity .18s ease,background-color .18s ease,visibility 0s;
+}
+.pattern-modal-card{
+  width:min(560px,100%);
+  max-height:82vh;
+  overflow:hidden;
+  background:#252527;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  padding:4px 18px 14px;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  transform:scale(.92);
+  filter:blur(8px);
+  transition:opacity .2s ease,transform .2s ease,filter .2s ease;
+}
+.pattern-modal.open .pattern-modal-card{
+  opacity:1;
+  transform:scale(1);
+  filter:blur(0);
+}
+.pattern-modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex:0 0 auto;
+}
+.pattern-modal-head h2{
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:400;
+}
+.pattern-close{
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:28px;
+  line-height:1;
+  padding:8px;
+  cursor:pointer;
+}
+#patternModalBody{
+  overflow:auto;
+  min-height:0;
+  padding-top:0;
+}
+.pattern-intro{
+  color:#92918e;
+  font-size:11px;
+  line-height:1.45;
+  margin:6px 0 8px;
+}
+.pattern-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px 10px;
+  margin-top:8px;
+}
+.pattern-cell{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-height:40px;
+  padding:8px 9px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+}
+.pattern-source{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  font-size:15px;
+  font-weight:650;
+  color:#c7c3bc;
+  line-height:1;
+}
+.pattern-options{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  font-size:15px;
+  color:#c7c3bc;
+  line-height:1;
+}
+.pattern-options .arrow{
+  color:#777;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:12px;
+  margin:0 3px;
+}
+.in-session-pattern{
+  margin:20px auto 4px;
+  display:flex;
+  justify-content:center;
+  position:relative;
+  z-index:60;
+}
+@media(max-width:600px){
+  .pattern-modal{padding:10px}
+  .pattern-modal-card{
+    max-height:84vh;
+    padding:3px 12px 12px;
+  }
+  .pattern-modal-head{padding:2px 2px 3px}
+  .pattern-modal-head h2{font-size:19px}
+  .pattern-intro{font-size:10px;margin:3px 0 7px}
+  .pattern-grid{gap:6px 7px;margin-top:5px}
+  .pattern-cell{gap:4px;min-height:34px;padding:7px 7px;border-radius:9px}
+  .pattern-source{font-size:14px}
+  .pattern-options{font-size:14px}
+  .pattern-options .arrow{font-size:11px;margin:0 2px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pattern-modal,.pattern-modal-card{transition:none!important}
 }
 
 </style>
@@ -209,6 +348,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <button class="choice" data-size="20">20</button>
    <button class="choice" data-size="30">30</button>
   </div>
+  <button class="pattern-table-btn" data-pattern-table>Pattern · Table</button>
  </section>
 
  <section id="study" class="hidden">
@@ -229,19 +369,29 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <button class="next" id="next">Continue</button>
   </section>
   <div id="keyboardMount"></div>
+  <div class="in-session-pattern"><button class="pattern-table-btn" data-pattern-table>Pattern table</button></div>
  </section>
 
  <section id="finish" class="finish hidden">
   <h2>Done.</h2>
   <div id="finalScore" class="final-score"></div>
-   <p id="summary"></p>
+  <p id="summary"></p>
   <div class="finish-actions">
-      <button class="again" id="again">Another session</button>
-      <button class="home-back" id="homeBack">Back to Home</button>
-    </div>
+   <button class="again" id="again">Another session</button>
+   <button class="home-back" id="homeBack">Back to Home</button>
+  </div>
  </section>
+ <div id="patternModal" class="pattern-modal" aria-hidden="true">
+  <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
+   <div class="pattern-modal-head">
+    <h2 id="patternModalTitle">Partizip II · Pattern families</h2>
+    <button class="pattern-close" id="patternClose" aria-label="Close">×</button>
+   </div>
+   <div id="patternModalBody"></div>
+  </div>
+ </div>
 </main>
-<div class="version-tag">v35 · home button fixed</div>
+<div class="version-tag">v41-clean · conservative cleanup + pattern table fix</div>
 
 <script src="verbs.js"></script>
 <script>
@@ -249,7 +399,6 @@ const STORAGE_KEY="verbformenDifficultyV1";
 let difficulty={};
 try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
 
-/* v30: daily statistics shared with Deutsch Home */
 const DAILY_STATS_KEY="deutschDailyStatsV1";
 function localDateKey(){
  const d=new Date();
@@ -267,7 +416,6 @@ function recordVerbformenAnswer(){
  }
  localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
 }
-
 
 let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
 
@@ -312,8 +460,18 @@ function startSession(size){
  render();
 }
 
+function syncKeyboardAndFocus(){
+  if(window.deutschKeyboardReady && isMobileKeyboard && !checked){
+    $("keyboard").classList.add("show");
+  }
+  if(!isMobileKeyboard){
+    setTimeout(()=>{
+      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
+    },80);
+  }
+}
+
 function render(){
- $("appRoot").classList.remove("showing-result");
  const v=deck[index];checked=false;
  $("verb").textContent=v.infinitive;
  $("translation").textContent=v.translation;
@@ -325,12 +483,7 @@ function render(){
  $("count").textContent=(index+1)+" / "+deck.length;
  $("bar").style.width=((index+1)/deck.length*100)+"%";
  $("answer").disabled=false;
- if(window.deutschKeyboardReady && isMobileKeyboard && !checked) $("keyboard").classList.add("show");
- setTimeout(()=>{
-   if(!isMobileKeyboard){
-     try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
-   }
-  },80);
+ syncKeyboardAndFocus();
 }
 
 function updateDifficulty(v,correct){
@@ -343,6 +496,16 @@ function updateDifficulty(v,correct){
  }
  difficulty[k]=Number(d.toFixed(2));
  saveDifficulty();
+}
+
+function partizipPattern(pattern){
+ const parts=String(pattern||"").split(/\s*-\s*/);
+ if(parts.length>=3) return parts[0]+" → "+parts[2];
+ return String(pattern||"");
+}
+
+function shouldShowPreterite(v){
+ return v.infinitive==="sein" || v.infinitive==="haben" || v.modal===true;
 }
 
 function checkAnswer(){
@@ -360,11 +523,12 @@ function checkAnswer(){
  $("result").className="result show "+(ok?"good":"bad");
  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
  $("state").textContent=ok?"Correct":"Not quite";
- $("vowelPattern").textContent=v.pattern||"";
- $("forms").textContent=v.infinitive+" → "+v.preterite+" → "+v.participle;
+ $("vowelPattern").textContent=partizipPattern(v.pattern);
+ $("forms").textContent=shouldShowPreterite(v)
+   ? v.infinitive+" → "+v.preterite+" → "+v.participle
+   : v.infinitive+" → "+v.participle;
  $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
  $("example").textContent=v.example;
- $("appRoot").classList.add("showing-result");
  $("answer").disabled=true;
  $("answer").blur();
  $("check").style.display="none";
@@ -375,13 +539,6 @@ function next(){
  if(index+1>=deck.length){finishSession();return}
  index++;
  render();
-
- if(window.deutschKeyboardReady && isMobileKeyboard && !checked) $("keyboard").classList.add("show");
- if(!isMobileKeyboard){
-   setTimeout(()=>{
-     try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
-   },80);
- }
 }
 
 function finishSession(){
@@ -449,6 +606,37 @@ document.addEventListener("deutsch-keyboard-input", e => {
    return;
  }
  if(k) $("answer").value+=k;
+});
+
+const patternReference=`<p class="pattern-intro">Infinitiv → Partizip II · possible vowel changes in this set</p><div class="pattern-grid">
+<div class="pattern-cell"><div class="pattern-source">a</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">au</div><div class="pattern-options"><span class="arrow">→</span><span>au</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">e</div><div class="pattern-options"><span class="arrow">→</span><span>e</span><span class="arrow">·</span><span>a</span><span class="arrow">·</span><span>o</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">ei</div><div class="pattern-options"><span class="arrow">→</span><span>ei</span><span class="arrow">·</span><span>ie</span><span class="arrow">·</span><span>i</span><span class="arrow">·</span><span>e</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">i</div><div class="pattern-options"><span class="arrow">→</span><span>i</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span><span class="arrow">·</span><span>a</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">ie</div><div class="pattern-options"><span class="arrow">→</span><span>ie</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">o</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">ö</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">u</div><div class="pattern-options"><span class="arrow">→</span><span>u</span><span class="arrow">·</span><span>a</span></div></div>
+<div class="pattern-cell"><div class="pattern-source">ü</div><div class="pattern-options"><span class="arrow">→</span><span>ü</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span></div></div>
+</div>`;
+
+function openPatternTable(){
+  $("patternModalBody").innerHTML=patternReference;
+  const modal=$("patternModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+function closePatternTable(){
+  const modal=$("patternModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+document.querySelectorAll("[data-pattern-table]").forEach(b=>b.addEventListener("click",openPatternTable));
+$("patternClose").onclick=closePatternTable;
+$("patternModal").onclick=e=>{if(e.target===$("patternModal"))closePatternTable()};
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && $("patternModal").classList.contains("open")) closePatternTable();
 });
 
 async function loadKeyboardComponent(){
