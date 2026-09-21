@@ -757,6 +757,46 @@ header h1 {
    Embedded exercise shell
    -------------------------------------------------------------------------- */
 
+.hard-stop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(180px, 18vh, 260px) 32px 32px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.hard-stop-overlay.is-active {
+  display: flex;
+}
+
+.hard-stop-copy {
+  width: min(100%, 380px);
+}
+
+.hard-stop-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.hard-stop-text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.hard-stop-warm {
+  display: block;
+  margin-top: 12px;
+  color: var(--text);
+}
+
 .app-shell {
   position: fixed;
   inset: 0;
@@ -919,6 +959,20 @@ header h1 {
    <div class="home-viewport">
     <div class="home-track" id="homeTrack">
      <div class="home-screen">
+  <div class="hard-stop-overlay" id="hardStopOverlay" aria-hidden="true">
+    <div class="hard-stop-copy">
+      <div class="hard-stop-title">Das hast du heute richtig gut gemacht.</div>
+      <div class="hard-stop-text">
+        Jetzt ist Zeit für eine Pause.<br>
+        Ruh dich aus, mach etwas Schönes<br>
+        und komm morgen wieder.
+        <span class="hard-stop-warm">
+          <strong>Ich freue mich auf dich.</strong><br>
+          ♡
+        </span>
+      </div>
+    </div>
+  </div>
    <p class="intro">
     Was m&ouml;chtest du heute &uuml;ben?
    </p>
@@ -1173,15 +1227,24 @@ header h1 {
       });
 
       let vocabPoints=0;
+      let vocabDone=false;
       try{
         const home=JSON.parse(localStorage.getItem('deutschHomeStatsV1')||'{}');
         const ws=home.wortschatz;
-        if(ws && ws.date===localDayKey() && ws.done) vocabPoints=60;
+        vocabDone=!!(ws && ws.date===localDayKey() && ws.done);
+        if(vocabDone) vocabPoints=60;
       }catch(e){}
 
       const points=exercisePoints+vocabPoints;
       document.getElementById('todayTotal').textContent=String(points);
       document.getElementById('todayProgress').style.width=`${Math.min(points,100)}%`;
+
+      const hardStopOverlay=document.getElementById('hardStopOverlay');
+      const hardStop=vocabDone && points>=150;
+      if(hardStopOverlay){
+        hardStopOverlay.classList.toggle('is-active',hardStop);
+        hardStopOverlay.setAttribute('aria-hidden',hardStop?'false':'true');
+      }
     }
 
     window.addEventListener('message', event => {
