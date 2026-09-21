@@ -1,664 +1,243 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Verbformen.</title>
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Verbformen">
-<style>
-*{box-sizing:border-box}
-:root{--bg:#17181a;--cream:#eee7dc;--mint:#5bc8a4;--coral:#ff7770;--line:rgba(255,255,255,.08)}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-body{height:100vh;height:100dvh;overflow:hidden;padding:0}
-.app{position:fixed;inset:0;width:min(100%,480px);height:100vh;height:100dvh;margin:0 auto;padding:24px;padding-top:max(24px,calc(env(safe-area-inset-top) + 12px));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;color:#777;font-size:13px;position:sticky;top:0;z-index:50;background:var(--bg);padding:4px 0 10px;margin-bottom:0}
-.brand{font-family:Georgia,serif;font-size:20px;color:#a5a19a;letter-spacing:-.5px}.mode{text-transform:uppercase;letter-spacing:.15em;font-size:9px;color:#686967;white-space:nowrap}.top #count{text-align:right}
-.progress{height:3px;background:#292a2c;border-radius:9px;overflow:hidden;margin-bottom:32px;position:sticky;top:36px;z-index:50}
-.progress>i{display:block;height:100%;background:#777;border-radius:9px}
-.card{position:relative;text-align:center;padding:30px 20px 26px;isolation:isolate}
-.card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,rgba(91,200,164,.09),transparent 63%);opacity:.35}
-.verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
-.translation{color:#737473;font-size:16px;margin-bottom:44px}
-.answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
-.answer:focus{border-color:rgba(91,200,164,.55);box-shadow:0 0 0 3px rgba(91,200,164,.08)}
-.answer::placeholder{color:#48494a}
-.check,.next{margin:20px auto 0}
-.finish-actions button{
-  width:100%;
-  height:56px;
-  border:0;
-  border-radius:17px;
-  font:inherit;
-  font-size:16px;
-  font-weight:650;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:0;
-}
-.again{
-  background:rgba(255,255,255,.07);
-  color:rgba(238,231,220,.42);
-}
-.home-back{
-  margin-top:10px;
-  background:#ece6dc;
-  color:#1b1c1e;
-}
-.finish-actions button:active{transform:scale(.99)}
-.check{margin-top:14px;width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-size:16px;font-weight:650}
-.check:active,.next:active,.choice:active,.again:active{transform:scale(.99)}
-.result{display:none;position:relative;margin-top:28px;border-top:1px solid var(--line);padding:30px 26px 20px;text-align:left;isolation:isolate}
-.result.show{display:block}
-.result:before{content:"";position:absolute;z-index:2;top:-1px;left:50%;width:0;height:2px;background:var(--line);animation:spread .42s ease-out forwards}
-.result.good:before{background:var(--mint);box-shadow:0 0 18px rgba(91,200,164,.7)}
-.result.bad:before{background:var(--coral);box-shadow:0 0 18px rgba(255,119,112,.7)}
-@keyframes spread{to{left:0;width:100%}}
-.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px rgba(91,200,164,.8);animation:resultGlowGood .42s ease-out forwards}
-.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px rgba(255,119,112,.85);animation:resultGlowBad .42s ease-out forwards}
-@keyframes resultGlowGood{from{box-shadow:0 -24px 65px -32px rgba(91,200,164,0)}to{box-shadow:0 -24px 65px -32px rgba(91,200,164,.8)}}
-@keyframes resultGlowBad{from{box-shadow:0 -24px 70px -30px rgba(255,119,112,0)}to{box-shadow:0 -24px 70px -30px rgba(255,119,112,.85)}}
-.state{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
-.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
-.forms{font-family:Georgia,serif;font-size:26px;line-height:1.35;margin-bottom:10px}
-.meta{color:#92918e;font-size:15px;line-height:1.55}.example{margin-top:15px;color:#b8b3aa;font-size:15px;font-style:italic}
-.next{display:none;margin-top:18px;width:100%;height:56px;border:1px solid #37383a;border-radius:17px;background:#222326;color:var(--cream);font-size:16px;font-weight:600}
-.next.show{display:block}
-.start,.finish{text-align:center;padding:36px 20px}
-.title{font-family:Georgia,serif;font-size:clamp(54px,15vw,78px);font-weight:400;letter-spacing:-3px;margin:0 0 12px}
-.subtitle{color:#777;font-size:16px;margin:0 0 36px}
-.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.choice{height:62px;border:1px solid #36383a;border-radius:18px;background:#202124;color:var(--cream);font-size:20px}
-.choice:hover{border-color:#555}
-.finish h2{font-family:Georgia,serif;font-size:48px;font-weight:400;margin:0 0 12px}
-.finish p{color:#888;margin:0 0 28px;line-height:1.5}
-.hidden{display:none!important}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17181a">
+  <title>Verbformen.</title>
+  <style>
+    *{box-sizing:border-box}
 
-/* Stable top-anchored layout: keyboard/result changes never re-center the app. */
-@media(max-width:600px){
- .app{padding-left:18px;padding-right:18px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px));}
- .card{padding-top:14px}
-}
+    :root{
+      --bg:#17181a;
+      --cream:#eee7dc;
+      --muted:#777875;
+      --card:rgba(255,255,255,.018);
+      --line:rgba(255,255,255,.08);
+      --width:430px;
+    }
 
-@media(max-width:600px){
- .result{margin-top:22px;padding:22px 24px 18px}
- .state{font-size:10px;margin-bottom:9px}
- .forms{font-size:22px;line-height:1.28;margin-bottom:7px}
- .meta{font-size:13px;line-height:1.4}
- .example{margin-top:10px;font-size:13px;line-height:1.4}
- .next{margin-top:13px;height:52px}
-}
-.version-tag{
- position:fixed;
- right:8px;
- bottom:max(6px,env(safe-area-inset-bottom));
- z-index:9999;
- font-size:9px;
- letter-spacing:.08em;
- color:rgba(255,255,255,.22);
- pointer-events:none;
-}
-.result-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}
-.result-head .state{margin-bottom:0}
-.vowel-pattern{color:#929391;font-size:13px;letter-spacing:.12em;text-transform:lowercase;white-space:nowrap}
-@media(max-width:600px){
- .result-head{margin-bottom:9px}
- .vowel-pattern{font-size:11px;letter-spacing:.10em}
-}
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--cream);
+      font-family:Georgia,"Times New Roman",serif;
+      -webkit-font-smoothing:antialiased;
+    }
 
-.mode-inline{
-  position:absolute;
-  left:0;right:0;
-  top:-4px;
-  text-align:center;
-  color:#6f706f;
-  font:500 11px/1 system-ui,-apple-system,sans-serif;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  pointer-events:none;
-}
+    body{
+      height:100vh;
+      height:100dvh;
+      overflow:hidden;
+    }
 
-@media(max-width:600px){
- .app::before{
-   content:"";
-   position:fixed;
-   z-index:40;
-   top:0;
-   left:50%;
-   transform:translateX(-50%);
-   width:min(100%,480px);
-   height:max(58px,calc(env(safe-area-inset-top) + 42px));
-   background:var(--bg);
-   pointer-events:none;
- }
- .top{
-   position:sticky;
-   top:0;
-   z-index:50;
- }
- .progress{
-   position:sticky;
-   z-index:50;
- }
- html,body{overscroll-behavior-y:none}
-}
+    .page{
+      position:fixed;
+      inset:0;
+      width:min(100%,480px);
+      height:100vh;
+      height:100dvh;
+      margin:0 auto;
+      padding:
+        max(24px,calc(env(safe-area-inset-top) + 12px))
+        24px
+        max(24px,env(safe-area-inset-bottom));
+      overflow-x:hidden;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
 
-@media(max-width:900px){
- .key-row-tools .key-backspace{
-   flex:2.5 1 0;
- }
-}
+    header{
+      text-align:center;
+      padding:36px 20px 0;
+      margin-bottom:0;
+    }
 
-@media(max-width:900px){
- .key-row-tools{
-   padding-left:17%;
-   padding-right:0;
-   width:100%;
-   box-sizing:border-box;
-   justify-content:flex-start;
- }
- .key-row-tools .key-backspace{
-   flex:0 0 30%;
-   margin-left:auto;
-   border-top-right-radius:12px;
-   border-bottom-right-radius:12px;
- }
-}
+    h1{
+      margin:0;
+      color:#a5a19a;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:40px;
+      font-weight:400;
+      line-height:1;
+      letter-spacing:-1px;
+    }
 
-.final-score{
-  margin:18px 0 12px;
-  color:#f1eee8;
-  font:500 34px/1.05 Georgia,serif;
-  letter-spacing:-.03em;
-}
+    .intro{
+      margin:48px 0 14px;
+      color:#777875;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      font-size:14px;
+      line-height:1.4;
+    }
 
-.pattern-table-btn{
-  border:1px solid rgba(255,255,255,.06);
-  background:transparent;
-  color:#aaa;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:400;
-  padding:8px 11px;
-  cursor:pointer;
-}
-.start .pattern-table-btn{
-  margin-top:10px;
-  font-size:14px;
-  padding:11px 14px;
-}
-.pattern-table-btn:active{transform:scale(.99)}
+    .choices{
+      display:grid;
+      gap:16px;
+      margin-top:0;
+    }
 
-.pattern-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:100;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s;
-}
-.pattern-modal.open{
-  opacity:1;
-  visibility:visible;
-  background:rgba(0,0,0,.28);
-  transition:opacity .18s ease,background-color .18s ease,visibility 0s;
-}
-.pattern-modal-card{
-  width:min(560px,100%);
-  max-height:82vh;
-  overflow:hidden;
-  background:#252527;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:24px;
-  padding:4px 18px 14px;
-  display:flex;
-  flex-direction:column;
-  opacity:0;
-  transform:scale(.92);
-  filter:blur(8px);
-  transition:opacity .2s ease,transform .2s ease,filter .2s ease;
-}
-.pattern-modal.open .pattern-modal-card{
-  opacity:1;
-  transform:scale(1);
-  filter:blur(0);
-}
-.pattern-modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex:0 0 auto;
-}
-.pattern-modal-head h2{
-  margin:0;
-  font-family:Georgia,serif;
-  font-size:20px;
-  font-weight:400;
-}
-.pattern-close{
-  border:0;
-  background:transparent;
-  color:white;
-  font-size:28px;
-  line-height:1;
-  padding:8px;
-  cursor:pointer;
-}
-#patternModalBody{
-  overflow:auto;
-  min-height:0;
-  padding-top:0;
-}
-.pattern-intro{
-  color:#92918e;
-  font-size:11px;
-  line-height:1.45;
-  margin:6px 0 8px;
-}
-.pattern-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px 10px;
-  margin-top:8px;
-}
-.pattern-cell{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  min-height:40px;
-  padding:8px 9px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:11px;
-  background:rgba(255,255,255,.025);
-}
-.pattern-source{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  font-size:15px;
-  font-weight:650;
-  color:#c7c3bc;
-  line-height:1;
-}
-.pattern-options{
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  font-size:15px;
-  color:#c7c3bc;
-  line-height:1;
-}
-.pattern-options .arrow{
-  color:#777;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  font-size:12px;
-  margin:0 3px;
-}
-.in-session-pattern{
-  margin:20px auto 4px;
-  display:flex;
-  justify-content:center;
-  position:relative;
-  z-index:60;
-}
-@media(max-width:600px){
-  .pattern-modal{padding:10px}
-  .pattern-modal-card{
-    max-height:84vh;
-    padding:3px 12px 12px;
-  }
-  .pattern-modal-head{padding:2px 2px 3px}
-  .pattern-modal-head h2{font-size:19px}
-  .pattern-intro{font-size:10px;margin:3px 0 7px}
-  .pattern-grid{gap:6px 7px;margin-top:5px}
-  .pattern-cell{gap:4px;min-height:34px;padding:7px 7px;border-radius:9px}
-  .pattern-source{font-size:14px}
-  .pattern-options{font-size:14px}
-  .pattern-options .arrow{font-size:11px;margin:0 2px}
-}
-@media(prefers-reduced-motion:reduce){
-  .pattern-modal,.pattern-modal-card{transition:none!important}
-}
+    .choice{
+      appearance:none;
+      -webkit-appearance:none;
+      position:relative;
+      width:100%;
+      min-height:96px;
+      padding:20px 22px;
+      border:1px solid var(--line);
+      border-radius:21px;
+      background:var(--card);
+      color:inherit;
+      font:inherit;
+      text-align:left;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+      overflow:hidden;
+      transition:background .16s ease,border-color .16s ease,transform .16s ease;
+    }
 
-</style>
+    .choice::after{
+      content:"›";
+      position:absolute;
+      right:18px;
+      top:50%;
+      transform:translateY(-52%);
+      color:#565856;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+      font-size:28px;
+      font-weight:300;
+    }
+
+    .choice:active{
+      transform:scale(.992);
+      background:rgba(255,255,255,.028);
+      border-color:rgba(255,255,255,.12);
+    }
+
+    .choice-title{
+      color:#eee7dc;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:20px;
+      font-weight:400;
+      line-height:1.15;
+      letter-spacing:-.25px;
+    }
+
+    .choice-subtitle{
+      margin-top:6px;
+      color:rgba(190,189,186,.52);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      font-size:13px;
+      line-height:1.4;
+    }
+
+    .version{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:calc(env(safe-area-inset-bottom) + 10px);
+      color:#55565a;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+      font-size:10px;
+      line-height:1;
+      letter-spacing:.35px;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    @media(max-width:430px){
+      .page{
+        padding-left:18px;
+        padding-right:18px;
+      }
+
+      header{
+        padding:36px 20px 0;
+        margin-bottom:0;
+      }
+
+      h1{font-size:37px}
+
+      .intro{
+        margin:42px 0 12px;
+        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      }
+
+      .choice{
+        min-height:92px;
+        padding:19px 20px;
+        border-radius:20px;
+      }
+
+      .choice-title{font-size:19px}
+      .choice-subtitle{font-size:12px; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .choice{transition:none}
+    }
+  </style>
 </head>
 <body>
-<main class="app" id="appRoot">
- <section id="start" class="start">
-  <h1 class="title">Verbformen.</h1>
-  <p class="subtitle">How many verbs?</p>
-  <div class="choices">
-   <button class="choice" data-size="10">10</button>
-   <button class="choice" data-size="20">20</button>
-   <button class="choice" data-size="30">30</button>
-  </div>
-  <button class="pattern-table-btn" data-pattern-table>Pattern · Table</button>
- </section>
+  <main class="page">
+    <header>
+      <h1>Verbformen.</h1>
+      <p class="intro">Was möchtest du üben?</p>
+    </header>
 
- <section id="study" class="hidden">
-  <div class="top"><span class="brand">Verbformen.</span><span class="mode mode-top">Partizip II</span><span id="count"></span></div>
-  <div class="progress"><i id="bar"></i></div>
-  <section class="card">
-   <div class="mode-inline">Partizip II</div>
-   <div class="verb" id="verb"></div>
-   <div class="translation" id="translation"></div>
-   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
-   <button class="check" id="check">Check</button>
-   <div class="result" id="result">
-    <div class="result-head"><div class="state" id="state"></div><div class="vowel-pattern" id="vowelPattern"></div></div>
-    <div class="forms" id="forms"></div>
-    <div class="meta" id="meta"></div>
-    <div class="example" id="example"></div>
-   </div>
-   <button class="next" id="next">Continue</button>
-  </section>
-  <div id="keyboardMount"></div>
-  <div class="in-session-pattern"><button class="pattern-table-btn" data-pattern-table>Pattern table</button></div>
- </section>
+    <section class="choices" aria-label="Übungen">
+      <button class="choice" type="button" data-target="Partizip%20II/">
+        <div class="choice-title">Partizip II</div>
+        <div class="choice-subtitle">Unregelmäßige Formen</div>
+      </button>
 
- <section id="finish" class="finish hidden">
-  <h2>Done.</h2>
-  <div id="finalScore" class="final-score"></div>
-  <p id="summary"></p>
-  <div class="finish-actions">
-   <button class="again" id="again">Another session</button>
-   <button class="home-back" id="homeBack">Back to Home</button>
-  </div>
- </section>
- <div id="patternModal" class="pattern-modal" aria-hidden="true">
-  <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
-   <div class="pattern-modal-head">
-    <h2 id="patternModalTitle">Partizip II · Pattern families</h2>
-    <button class="pattern-close" id="patternClose" aria-label="Close">×</button>
-   </div>
-   <div id="patternModalBody"></div>
-  </div>
- </div>
-</main>
-<div class="version-tag">v42-clean · Partizip II exercise</div>
+      <button class="choice" type="button" data-target="Modalverben/">
+        <div class="choice-title">Modalverben</div>
+        <div class="choice-subtitle">Formen im Kontext</div>
+      </button>
+    </section>
+  </main>
 
-<script src="verbs.js"></script>
-<script>
-const STORAGE_KEY="verbformenDifficultyV1";
-let difficulty={};
-try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
+  <div class="version">Verbformen · Auswahl</div>
 
-const DAILY_STATS_KEY="deutschDailyStatsV1";
-function localDateKey(){
- const d=new Date();
- return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-}
-function recordVerbformenAnswer(){
- let stats={};
- try{stats=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}")}catch(e){stats={}}
- const today=localDateKey();
- if(stats.date!==today) stats={date:today};
- if(typeof stats.verbformen==="object"){
-   stats.verbformen.answers=Number(stats.verbformen.answers||0)+1;
- }else{
-   stats.verbformen=Number(stats.verbformen||0)+1;
- }
- localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
-}
+  <script>
+    const DAILY_STATS_KEY="deutschDailyStatsV1";
 
-let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
-
-const $=id=>document.getElementById(id);
-const isMobileKeyboard = window.matchMedia("(max-width: 699px)").matches;
-if(isMobileKeyboard){
-  $("answer").readOnly=true;
-  $("answer").setAttribute("inputmode","none");
-  $("answer").setAttribute("readonly","");
-  $("check").style.display="none";
-}
-// Partizip-II exercise: modal verbs stay in verbs.js for other exercises,
-// but are excluded from this exercise.
-const EXERCISE_VERBS=VERBS.filter(v=>!v.modal);
-const key=v=>v.infinitive.toLowerCase();
-
-function saveDifficulty(){
- localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
-}
-
-function weightFor(v){
- return Math.max(1,Number(difficulty[key(v)]||1));
-}
-
-/* Weighted sampling WITHOUT replacement:
-   difficult verbs are more likely to enter a session,
-   but no verb can occur twice in that session. */
-function buildDeck(size){
- const ranked=EXERCISE_VERBS.map(v=>{
-   const weight=weightFor(v);
-   const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
-   return {v,randomKey};
- }).sort((a,b)=>a.randomKey-b.randomKey);
-
- return ranked.slice(0,Math.min(size,EXERCISE_VERBS.length)).map(x=>x.v);
-}
-
-function startSession(size){
- sessionSize=Math.min(size,EXERCISE_VERBS.length);
- deck=buildDeck(sessionSize);
- index=0;correctCount=0;
- $("start").classList.add("hidden");
- $("finish").classList.add("hidden");
- $("study").classList.remove("hidden");
- render();
-}
-
-function syncKeyboardAndFocus(){
-  if(window.deutschKeyboardReady && isMobileKeyboard && !checked){
-    $("keyboard").classList.add("show");
-  }
-  if(!isMobileKeyboard){
-    setTimeout(()=>{
-      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
-    },80);
-  }
-}
-
-function render(){
- const v=deck[index];checked=false;
- $("verb").textContent=v.infinitive;
- $("translation").textContent=v.translation;
- $("answer").value="";
- $("result").className="result";
- $("vowelPattern").textContent="";
- $("next").className="next";
- $("check").style.display=isMobileKeyboard?"none":"";
- $("count").textContent=(index+1)+" / "+deck.length;
- $("bar").style.width=((index+1)/deck.length*100)+"%";
- $("answer").disabled=false;
- syncKeyboardAndFocus();
-}
-
-function updateDifficulty(v,correct){
- const k=key(v);
- let d=weightFor(v);
- if(correct){
-   d=Math.max(1,d-0.5);
- }else{
-   d=Math.min(6,d+1.5);
- }
- difficulty[k]=Number(d.toFixed(2));
- saveDifficulty();
-}
-
-function partizipPattern(pattern){
- const parts=String(pattern||"").split(/\s*-\s*/);
- if(parts.length>=3) return parts[0]+" → "+parts[2];
- return String(pattern||"");
-}
-
-function shouldShowPreterite(v){
- return v.infinitive==="sein" || v.infinitive==="haben";
-}
-
-function checkAnswer(){
- if(checked){next();return}
- const v=deck[index];
- const a=$("answer").value.trim().toLowerCase();
- if(!a)return;
-
- checked=true;
-  recordVerbformenAnswer();
- const ok=a===v.participle.toLowerCase();
- if(ok)correctCount++;
- updateDifficulty(v,ok);
-
- $("result").className="result show "+(ok?"good":"bad");
- if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
- $("state").textContent=ok?"Correct":"Not quite";
- $("vowelPattern").textContent=partizipPattern(v.pattern);
- $("forms").textContent=shouldShowPreterite(v)
-   ? v.infinitive+" → "+v.preterite+" → "+v.participle
-   : v.infinitive+" → "+v.participle;
- $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
- $("example").textContent=v.example;
- $("answer").disabled=true;
- $("answer").blur();
- $("check").style.display="none";
- $("next").className="next show";
-}
-
-function next(){
- if(index+1>=deck.length){finishSession();return}
- index++;
- render();
-}
-
-function finishSession(){
- $("study").classList.add("hidden");
- $("finish").classList.remove("hidden");
- $("finalScore").textContent=correctCount+" / "+deck.length;
- $("summary").textContent="Difficult verbs will have a better chance of returning in a future session.";
-}
-
-document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
-$("check").onclick=checkAnswer;
-$("next").onclick=next;
-$("again").onclick=()=>{
- $("finish").classList.add("hidden");
- $("start").classList.remove("hidden");
-};
-function goBackToHome(){
-  try{
-    if(window.parent && window.parent !== window){
-      if(typeof window.parent.closeApp === 'function'){
-        window.parent.closeApp();
-        return;
-      }
-      const parentDoc=window.parent.document;
-      const shell=parentDoc.getElementById('appShell');
-      const frame=parentDoc.getElementById('appFrame');
-      if(shell && frame){
-        shell.classList.remove('open');
-        shell.setAttribute('aria-hidden','true');
-        parentDoc.documentElement.classList.remove('app-open');
-        frame.src='about:blank';
-        return;
-      }
+    function localDateKey(){
+      const d=new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
     }
-  }catch(e){}
-  window.parent.postMessage({type:'deutsch:home'}, '*');
-}
-$("homeBack").onclick=goBackToHome;
 
-document.addEventListener("keydown", e => {
- if(e.key === "Enter"){
-   e.preventDefault();
-   if(checked){next();return}
-   if(document.activeElement === $("answer")) checkAnswer();
- }
- if(e.key === "Backspace" && window.innerWidth < 700){
-   e.preventDefault();
-   $("answer").value=$("answer").value.slice(0,-1);
- }
-});
+    function recordExerciseAnswer(exercise){
+      let stats={};
+      try{stats=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}")}catch(e){stats={}}
 
-document.addEventListener("deutsch-keyboard-input", e => {
- const k=e.detail?.key||"";
- if($("study").classList.contains("hidden") || checked) return;
- if(k==="BACK"){
-   $("answer").value=$("answer").value.slice(0,-1);
-   return;
- }
- if(k==="OK"){
-   checkAnswer();
-   return;
- }
- if(k==="SPACE"){
-   if($("answer").value.length && !$("answer").value.endsWith(" ")) $("answer").value+=" ";
-   return;
- }
- if(k) $("answer").value+=k;
-});
+      const today=localDateKey();
+      if(stats.date!==today) stats={date:today};
 
-const patternReference=`<p class="pattern-intro">Infinitiv → Partizip II · possible vowel changes in this set</p><div class="pattern-grid">
-<div class="pattern-cell"><div class="pattern-source">a</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">au</div><div class="pattern-options"><span class="arrow">→</span><span>au</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">e</div><div class="pattern-options"><span class="arrow">→</span><span>e</span><span class="arrow">·</span><span>a</span><span class="arrow">·</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ei</div><div class="pattern-options"><span class="arrow">→</span><span>ei</span><span class="arrow">·</span><span>ie</span><span class="arrow">·</span><span>i</span><span class="arrow">·</span><span>e</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">i</div><div class="pattern-options"><span class="arrow">→</span><span>i</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span><span class="arrow">·</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ie</div><div class="pattern-options"><span class="arrow">→</span><span>ie</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">o</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ö</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">u</div><div class="pattern-options"><span class="arrow">→</span><span>u</span><span class="arrow">·</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ü</div><div class="pattern-options"><span class="arrow">→</span><span>ü</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span></div></div>
-</div>`;
+      if(!stats.verbformen || typeof stats.verbformen!=="object"){
+        stats.verbformen={};
+      }
 
-function openPatternTable(){
-  $("patternModalBody").innerHTML=patternReference;
-  const modal=$("patternModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-}
-function closePatternTable(){
-  const modal=$("patternModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-}
-document.querySelectorAll("[data-pattern-table]").forEach(b=>b.addEventListener("click",openPatternTable));
-$("patternClose").onclick=closePatternTable;
-$("patternModal").onclick=e=>{if(e.target===$("patternModal"))closePatternTable()};
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape" && $("patternModal").classList.contains("open")) closePatternTable();
-});
+      stats.verbformen[exercise]=Number(stats.verbformen[exercise]||0)+1;
+      localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
+    }
 
-async function loadKeyboardComponent(){
- const mount=$("keyboardMount");
- if(!mount) return false;
- const r=await fetch("../components/deutsch-keyboard-v2.60.html");
- if(!r.ok) throw new Error("Keyboard component failed to load");
- const text=await r.text();
- const tpl=document.createElement("template");
- tpl.innerHTML=text;
- const scripts=[];
- tpl.content.querySelectorAll("script").forEach(sc=>{scripts.push(sc.textContent);sc.remove()});
- mount.appendChild(tpl.content);
- for(const code of scripts){
-   const sc=document.createElement("script");
-   sc.textContent=code;
-   document.body.appendChild(sc);
- }
- const kb=$("keyboard");
- window.deutschKeyboardReady=true;
- if(isMobileKeyboard && !$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
- return true;
-}
+    window.addEventListener("message",event=>{
+      if(event.data?.type!=="deutsch:exerciseAnswer") return;
 
-loadKeyboardComponent().catch(e=>console.error(e));
-</script>
+      const exercise=event.data.exercise;
+      if(exercise!=="partizipII" && exercise!=="modalverben") return;
+
+      recordExerciseAnswer(exercise);
+    });
+
+    document.querySelectorAll("[data-target]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        window.location.href=button.dataset.target;
+      });
+    });
+  </script>
 </body>
 </html>
