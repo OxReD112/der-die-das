@@ -193,7 +193,7 @@
       </button>
 
       <button class="choice" type="button" data-target="modalverben/">
-        <div class="choice-title">Modalverben</div>
+        <div class="choice-title">Modalverben + werden</div>
         <div class="choice-subtitle">Formen im Kontext</div>
       </button>
     </section>
@@ -202,38 +202,12 @@
   <div class="version">Verbformen · Auswahl</div>
 
   <script>
-    const DAILY_STATS_KEY="deutschDailyStatsV1";
-
-    function localDateKey(){
-      const d=new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-    }
-
-    function recordExerciseAnswer(exercise){
-      let stats={};
-      try{stats=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}")}catch(e){stats={}}
-
-      const today=localDateKey();
-      if(stats.date!==today) stats={date:today};
-
-      if(!stats.verbformen || typeof stats.verbformen!=="object"){
-        stats.verbformen={};
-      }
-
-      stats.verbformen[exercise]=Number(stats.verbformen[exercise]||0)+1;
-      localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
-    }
-
-    window.addEventListener("message",event=>{
-      if(event.data?.type!=="deutsch:exerciseAnswer") return;
-
-      const exercise=event.data.exercise;
-      if(exercise!=="partizipII" && exercise!=="modalverben") return;
-
-      recordExerciseAnswer(exercise);
+    document.querySelectorAll("[data-target]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        window.location.href=button.dataset.target;
+      });
     });
 
-    document.querySelectorAll("[data-target]").forEach(button=>{
       button.addEventListener("click",()=>{
         window.location.href=button.dataset.target;
       });
