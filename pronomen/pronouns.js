@@ -266,7 +266,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · Sie → Sie",
-    "context": "Herr Klein, ich kenne ___ schon.",
+    "context": "Herr Klein, ich kenne schon.",
     "sentence": "Schön, ___ wiederzusehen.",
     "answer": "Sie",
     "translation": "Рад снова Вас видеть."
