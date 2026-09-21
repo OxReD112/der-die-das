@@ -12,41 +12,85 @@
 
     <title>Artikel</title>
 <style>
-:root{--bg:#1c1c1e;--panel:#252527;--text:#f5f5f7;--muted:#929297;--mint:#5ac8a0;--coral:#ff6969;--blue:#72a7ff;--line:rgba(255,255,255,.09)}
+:root{
+  /* ===== PALETTE ===== */
+  --bg:#1c1c1e;
+  --panel:#252527;
+  --text:#f5f5f7;
+  --muted:#929297;
+  --text-secondary:#c8c8cc;
+  --text-strong:#e5e5e7;
+  --text-subtle:#aaa6a0;
+  --text-label:#aaa093;
+  --mint:#5ac8a0;
+  --coral:#ff6969;
+  --blue:#72a7ff;
+
+  /* ===== SEMANTIC COLORS ===== */
+  --button:var(--coral);
+  --line:rgba(255,255,255,.09);
+  --top-line:rgba(255,255,255,.08);
+  --top-title:rgba(255,255,255,.48);
+  --progress:rgba(255,255,255,.38);
+  --answer-surface:rgba(28,28,30,.58);
+  --game-title:rgba(255,255,255,.11);
+  --version:rgba(255,255,255,.18);
+  --good:rgba(90,200,160,.5);
+  --bad:rgba(255,105,105,.5);
+  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(90,200,160,.42) 0%,rgba(90,200,160,.24) 18%,rgba(90,200,160,.11) 40%,rgba(90,200,160,.04) 60%,transparent 78%);
+  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.48) 0%,rgba(255,105,105,.28) 18%,rgba(255,105,105,.13) 40%,rgba(255,105,105,.05) 60%,transparent 78%);
+  --card-shadow:0 18px 55px rgba(0,0,0,.18);
+  --session-button-bg:#303033;
+}
+[data-theme="light"]{
+  /* ===== LIGHT THEME ===== */
+  --bg:#f6f4f1;
+  --panel:#ffffff;
+  --text:#252528;
+  --muted:#727278;
+  --text-secondary:#55565b;
+  --text-strong:#55565b;
+  --text-subtle:#77777d;
+  --text-label:#6f6b66;
+  --mint:#69c9b1;
+  --coral:#ff6f73;
+
+  --button:var(--coral);
+  --line:rgba(105,201,177,.42);
+  --top-line:rgba(32,32,35,.08);
+  --top-title:rgba(37,37,40,.48);
+  --progress:rgba(32,32,35,.28);
+  --answer-surface:rgba(32,32,35,.035);
+  --game-title:rgba(37,37,40,.11);
+  --version:rgba(37,37,40,.30);
+  --good:rgba(105,201,177,.5);
+  --bad:rgba(255,111,115,.5);
+  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(105,201,177,.18) 0%,rgba(105,201,177,.09) 18%,rgba(105,201,177,.03) 40%,transparent 70%);
+  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(255,111,115,.19) 0%,rgba(255,111,115,.09) 18%,rgba(255,111,115,.025) 40%,transparent 70%);
+  --card-shadow:none;
+  --session-button-bg:#eeeae5;
+}
+
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
-.app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:rgba(255,255,255,.48)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:rgba(255,255,255,.38);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:0 18px 55px rgba(0,0,0,.18);touch-action:pan-y;transition:transform .18s ease,opacity .18s ease}
-.eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em}.translation{font-size:18px;color:var(--muted);margin-top:14px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:#252527;color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
-.feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:#242426;border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:radial-gradient(ellipse at 50% 42%,rgba(90,200,160,.42) 0%,rgba(90,200,160,.24) 18%,rgba(90,200,160,.11) 40%,rgba(90,200,160,.04) 60%,transparent 78%)}.feedback.wrong::before{background:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.48) 0%,rgba(255,105,105,.28) 18%,rgba(255,105,105,.13) 40%,rgba(255,105,105,.05) 60%,transparent 78%)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:#c8c8cc;line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(28,28,30,.58)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:#aaa093;font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
-.answer-word.article-der,.answer-word.article-die,.answer-word.article-das{color:var(--text)}
-.answer-word .article{color:inherit}.answer-translation{color:var(--muted);margin-top:6px}.rule-title{font-size:16px;font-weight:400;margin-bottom:8px;line-height:1.5}.rule-text{color:#e5e5e7;line-height:1.5}.rule-examples{font-size:13px;font-style:italic;color:#aaa6a0;margin-top:10px;line-height:1.45}.rule-reliability{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:#aaa6a0}.rule-reliability strong{color:#e5e5e7}.feedback.correct{border-color:rgba(90,200,160,.5)}.feedback.wrong{border-color:rgba(255,105,105,.5)}.continue{position:relative;width:100%;margin-top:18px;border:0;border-radius:15px;padding:15px;background:var(--coral);color:white;font-size:17px;font-weight:650;cursor:pointer}
+.app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--top-line);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:var(--top-title)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--progress);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:var(--card-shadow)}
+.eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em}.translation{font-size:18px;color:var(--muted);margin-top:14px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
+.feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:var(--good-glow)}.feedback.wrong::before{background:var(--bad-glow)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:var(--text-secondary);line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--answer-surface)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:var(--text-label);font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
 
-
-.game-title{
-    font-size:clamp(58px,10vw,118px);
-    line-height:.9;
-    font-weight:700;
-    letter-spacing:-.065em;
-    color:rgba(255,255,255,.11);
-    margin:0 0 72px;
-    user-select:none;
-}
-.session-screen{
-    padding-top:64px!important;
-}
-
-.session-screen,.end-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:560px;text-align:center;padding:42px 24px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:0 18px 55px rgba(0,0,0,.18)}
+.answer-translation{color:var(--muted);margin-top:6px}.rule-title{font-size:16px;font-weight:400;margin-bottom:8px;line-height:1.5}.rule-examples{font-size:13px;font-style:italic;color:var(--text-subtle);margin-top:10px;line-height:1.45}.rule-reliability{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--text-subtle)}.rule-reliability strong{color:var(--text-strong)}.feedback.correct{border-color:var(--good)}.feedback.wrong{border-color:var(--bad)}.continue{width:100%;margin-top:18px;border:0;border-radius:15px;padding:15px;background:var(--button);color:white;font-size:17px;font-weight:650;cursor:pointer}
+.game-title{font-size:clamp(58px,10vw,118px);line-height:.9;font-weight:700;letter-spacing:-.065em;color:var(--game-title);margin:0 0 72px;user-select:none}
+.session-screen,.end-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:560px;text-align:center;padding:64px 24px 42px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--card-shadow)}
 .session-screen h1,.end-screen h1{font-size:34px;margin:0 0 10px;letter-spacing:-.03em}
 .session-screen p,.end-screen p{color:var(--muted);font-size:17px;line-height:1.5;margin:0 0 28px}
 .session-options{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.session-option{min-width:112px;border:1px solid var(--line);background:#303033;color:var(--text);border-radius:18px;padding:18px 22px;font-size:22px;font-weight:650;cursor:pointer}
+.session-option{min-width:112px;border:1px solid var(--line);background:var(--session-button-bg);color:var(--text);border-radius:18px;padding:18px 22px;font-size:22px;font-weight:650;cursor:pointer}
 .session-option:active,.play-again:active{transform:scale(.98)}
 .progress-label{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
 .end-score{font-size:56px;font-weight:700;letter-spacing:-.05em;margin:6px 0 8px}
 .play-again{border:0;border-radius:15px;padding:15px 28px;background:var(--coral);color:white;font-size:17px;font-weight:650;cursor:pointer}
-.hidden{display:none!important}
+#game.hidden,.session-screen.hidden,.end-screen.hidden{display:none}
 
 @media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 8px)}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}}
-.version-mark{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px;letter-spacing:.04em;pointer-events:none}
+.version-mark{position:fixed;right:10px;bottom:8px;color:var(--version);font-size:11px;letter-spacing:.04em;pointer-events:none}
 </style>
 </head>
 <body><main class="app">
@@ -71,7 +115,7 @@
 <div class="eyebrow">Choose the correct article</div><div class="word" id="word"></div><div class="translation" id="translation"></div>
 </section>
 <section class="choices" id="choices"><button class="choice der" data-a="der">der</button><button class="choice die" data-a="die">die</button><button class="choice das" data-a="das">das</button></section>
-<section class="feedback" id="feedback"><h2 id="feedbackTitle"></h2><p id="choiceLine"></p><div class="answer-card"><div class="answer-label">The word</div><div class="answer-word"><span class="article" id="answerArticle"></span> <span id="answerWord"></span></div><div class="answer-translation" id="answerTranslation"></div></div><div class="rule-card"><div class="rule-label" id="ruleLabel"></div><div class="rule-title" id="ruleTitle"></div><div class="rule-text" id="ruleText"></div><div class="rule-examples" id="ruleExamples"></div><div class="rule-reliability" id="ruleReliability"></div></div><button class="continue" id="continue">Continue</button></section>
+<section class="feedback" id="feedback"><h2 id="feedbackTitle"></h2><p id="choiceLine"></p><div class="answer-card"><div class="answer-label">The word</div><div class="answer-word"><span class="article" id="answerArticle"></span> <span id="answerWord"></span></div><div class="answer-translation" id="answerTranslation"></div></div><div class="rule-card"><div class="rule-label" id="ruleLabel"></div><div class="rule-title" id="ruleTitle"></div><div class="rule-examples" id="ruleExamples"></div><div class="rule-reliability" id="ruleReliability"></div></div><button class="continue" id="continue">Continue</button></section>
 </div>
 
 <section class="end-screen hidden" id="endScreen">
@@ -86,7 +130,7 @@
 <script src="words.js"></script>
 <script>
 const words=window.WORDS;
-let deck=[],index=0,score=0,total=0,correct=0,streak=0,sessionSize=0;
+let deck=[],index=0,total=0,correct=0,sessionSize=0;
 const $=id=>document.getElementById(id);
 
 // Persistent difficulty: mistakes make a word more likely to reappear in future rounds.
@@ -141,10 +185,10 @@ function recordDailyArtikel(ok){
   }catch(e){}
 }
 
-function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(ok){correct++;streak++;score+=10+Math.min(streak,5)*2}else{streak=0}
- $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>.`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;document.querySelector('.answer-word').className='answer-word article-'+w.article;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleText').textContent='';$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
+function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(ok){correct++}
+ $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>.`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
- sessionSize=size; score=0; total=0; correct=0; streak=0;
+ sessionSize=size; total=0; correct=0;
  
  newDeck();
  $('sessionScreen').classList.add('hidden');
@@ -157,7 +201,7 @@ function endSession(){
  $('endScreen').classList.remove('hidden');
  $('endCorrect').textContent=`${correct}/${sessionSize}`;
  const pct=Math.round((correct/sessionSize)*100);
- $('endSummary').textContent=`${pct}% correct · ${score} points. Your difficult words are saved for future sessions.`;
+ $('endSummary').textContent=`${pct}% correct. Your difficult words are saved for future sessions.`;
 }
 $('continue').onclick=()=>{
  if(total>=sessionSize){endSession();return}
