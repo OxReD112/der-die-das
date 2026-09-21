@@ -3149,44 +3149,44 @@ window.WORDS = [
     "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
   },
   {
-    "word": "das Bier",
+    "word": "Bier",
     "article": "das",
     "translation": "пиво",
     "ruleType": "category",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
     "examples": [
-      "das das Bier",
-      "der der Wein",
-      "der der Kaffee"
+      "das Bier",
+      "der Wein",
+      "der Kaffee"
     ],
     "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
   },
   {
-    "word": "der Wein",
+    "word": "Wein",
     "article": "der",
     "translation": "вино",
     "ruleType": "category",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
     "examples": [
-      "das das Bier",
-      "der der Wein",
-      "der der Kaffee"
+      "das Bier",
+      "der Wein",
+      "der Kaffee"
     ],
     "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
   },
   {
-    "word": "der Kaffee",
+    "word": "Kaffee",
     "article": "der",
     "translation": "кофе",
     "ruleType": "category",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
     "examples": [
-      "das das Bier",
-      "der der Wein",
-      "der der Kaffee"
+      "das Bier",
+      "der Wein",
+      "der Kaffee"
     ],
     "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
   },
