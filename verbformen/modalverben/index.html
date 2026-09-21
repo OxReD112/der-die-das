@@ -1,1 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Modalverben.</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Modalverben">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#17181a;--cream:#eee7dc;--mint:#5bc8a4;--coral:#ff7770;--line:rgba(255,255,255,.08)}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+body{height:100vh;height:100dvh;overflow:hidden}
+.app{position:fixed;inset:0;width:min(100%,480px);height:100vh;height:100dvh;margin:0 auto;padding:24px;padding-top:max(24px,calc(env(safe-area-inset-top) + 12px));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.top{display:grid;grid-template-columns:1fr auto;align-items:center;color:#777;font-size:13px;position:sticky;top:0;z-index:50;background:var(--bg);padding:4px 0 10px}
+.brand{font-family:Georgia,serif;font-size:20px;color:#a5a19a;letter-spacing:-.5px}
+#count{text-align:right}
+.progress{height:3px;background:#292a2c;border-radius:9px;overflow:hidden;margin-bottom:26px;position:sticky;top:36px;z-index:50}
+.progress>i{display:block;height:100%;background:#777;border-radius:9px}
+.card{position:relative;text-align:center;padding:28px 20px 26px;isolation:isolate}
+.card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,rgba(91,200,164,.09),transparent 63%);opacity:.35}
+.verb{color:#737473;font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:400;letter-spacing:0;line-height:1;margin-bottom:18px}
+.sentence{font-family:Georgia,"Times New Roman",serif;font-size:26px;line-height:1.35;max-width:410px;margin:0 auto 18px}
+.sentence .gap{display:inline-block;min-width:3.6em;border-bottom:2px solid #777;vertical-align:baseline;line-height:.95;text-align:center;color:var(--cream)}
+.sentence .gap.filled{border-bottom-color:var(--mint)}
+.sentence .gap.filled.wrong{border-bottom-color:var(--coral)}
+.translation{color:#737473;font-size:15px;line-height:1.45;margin-bottom:30px}
+.answer-area{margin-top:4px}
+.answer{width:100%;height:66px;border:1px solid #343638;border-radius:18px;background:#1c1d1f;color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
+.answer:focus{border-color:rgba(91,200,164,.55);box-shadow:0 0 0 3px rgba(91,200,164,.08)}
+.answer::placeholder{color:#48494a}
+.check{display:block;margin:14px auto 0;width:100%;height:56px;border:0;border-radius:17px;background:#ece6dc;color:#1b1c1e;font-size:16px;font-weight:650}
+.check:active,.next:active,.choice:active,.again:active,.home-back:active{transform:scale(.99)}
+.result{display:none;position:relative;margin-top:24px;border-top:1px solid var(--line);padding:22px 24px 18px;text-align:left;isolation:isolate}
+.result.show{display:block}
+.result:before{content:"";position:absolute;z-index:2;top:-1px;left:50%;width:0;height:2px;background:var(--line);animation:spread .42s ease-out forwards}
+.result.good:before{background:var(--mint);box-shadow:0 0 18px rgba(91,200,164,.7)}
+.result.bad:before{background:var(--coral);box-shadow:0 0 18px rgba(255,119,112,.7)}
+@keyframes spread{to{left:0;width:100%}}
+.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px rgba(91,200,164,.8)}
+.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px rgba(255,119,112,.85)}
+.state{font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
+.form-line{font-family:Georgia,serif;font-size:22px;line-height:1.3;margin-bottom:7px}
+.form-kind{color:#858583;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.explanation{color:#858583;font-size:14px;line-height:1.5}
+.wrong-answer{color:var(--coral);text-decoration:line-through;text-decoration-thickness:1.5px}
+.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
+.next{display:none;margin-top:15px;width:100%;height:52px;border:1px solid #37383a;border-radius:17px;background:#222326;color:var(--cream);font-size:16px;font-weight:600}
+.next.show{display:block}
+.start,.finish{text-align:center;padding:36px 20px}
+.title{font-family:Georgia,serif;font-size:clamp(54px,15vw,78px);font-weight:400;letter-spacing:-3px;margin:0 0 12px}
+.subtitle{color:#777;font-size:16px;margin:0 0 28px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{height:62px;border:1px solid #36383a;border-radius:18px;background:#202124;color:var(--cream);font-size:20px}
+.choice:hover{border-color:#555}
+.finish h2{font-family:Georgia,serif;font-size:48px;font-weight:400;margin:0 0 12px}
+.finish p{color:#888;margin:0 0 28px;line-height:1.5}
+.finish-actions{display:grid;gap:10px}
+.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer}
+.again{background:rgba(255,255,255,.07);color:rgba(238,231,220,.42)}
+.home-back{background:#ece6dc;color:#1b1c1e}
+.hidden{display:none!important}
+.forms-table-btn{
+  border:1px solid rgba(255,255,255,.06);
+  background:transparent;color:#aaa;border-radius:12px;
+  font-size:11px;font-weight:400;padding:8px 11px;cursor:pointer;
+}
+.start .forms-table-btn{margin-top:10px;font-size:14px;padding:11px 14px}
+.forms-table-btn:active{transform:scale(.99)}
+.in-session-forms{margin:20px auto 4px;display:flex;justify-content:center;position:relative;z-index:60}
 
+.forms-modal{position:fixed;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
+.forms-modal.open{opacity:1;visibility:visible;background:rgba(0,0,0,.28);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
+.forms-modal-card{width:min(560px,100%);max-height:82vh;overflow:hidden;background:#252527;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:4px 18px 14px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.forms-modal.open .forms-modal-card{opacity:1;transform:scale(1);filter:blur(0)}
+.forms-modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}
+.forms-modal-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400}
+.forms-close{border:0;background:transparent;color:white;font-size:28px;line-height:1;padding:8px;cursor:pointer}
+#formsModalBody{overflow:auto;min-height:0;padding-top:0}
+.forms-intro{color:#92918e;font-size:11px;line-height:1.45;margin:6px 0 8px}
+
+.forms-table{width:100%;border-collapse:collapse;font-size:12px}
+.forms-table th{position:static;color:#777;font-size:9px;font-weight:500;letter-spacing:.10em;text-transform:uppercase;padding:7px 5px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08);background:transparent}
+.forms-table th:first-child,.forms-table td:first-child{padding-left:0}
+.forms-table td{padding:10px 5px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:middle}
+.forms-table .verb-group-row{cursor:default}
+.forms-table .verb-group-row:hover td{background:rgba(255,255,255,.025)}
+.forms-table .verb-group{font-family:Georgia,serif;font-size:16px;color:#c7c3bc;line-height:1.35}
+.forms-table .verb-choice{border:0;background:none;color:#c7c3bc;font:inherit;font-family:Georgia,serif;font-size:16px;padding:0;cursor:pointer}
+.forms-table .verb-choice:hover,.forms-table .verb-choice:focus-visible{text-decoration:underline;outline:none}
+.forms-table .group-separator{color:#686967;margin:0 4px}
+.forms-table .reset-cell{text-align:right;white-space:nowrap}
+.forms-reset{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);color:#888;border-radius:9px;padding:6px 8px;font-size:9px;cursor:pointer}
+.forms-reset:active{transform:scale(.98)}
+.forms-chevron{display:inline-block;width:12px;color:#686967;font-size:12px;line-height:1;transition:transform .16s ease;cursor:pointer}
+.forms-group.open .forms-chevron{transform:rotate(90deg)}
+.forms-detail-row{display:none}
+.forms-group.open .forms-detail-row{display:table-row}
+.forms-detail{padding:8px 0 12px}
+.forms-detail-table{width:100%;border-collapse:collapse}
+.forms-detail-table th,.forms-detail-table td{padding:7px 5px;text-align:left;border-bottom:1px solid rgba(255,255,255,.045)}
+.forms-detail-table th{font-size:9px;color:#777;font-weight:500;letter-spacing:.10em;text-transform:uppercase}
+.forms-detail-table td{font-size:12px;color:#c7c3bc}
+.forms-detail-table .forms-person{color:#8b8985;font-size:11px;width:19%}
+.forms-detail-table .forms-scheme{color:#aaa7a1;font-family:Georgia,serif}
+.forms-note{margin-top:8px;color:#92918e;font-size:10px;line-height:1.4}
+.forms-detail-participle{margin-top:9px;color:#92918e;font-size:11px}
+.forms-detail-participle b{color:#c7c3bc;font-family:Georgia,serif;font-size:16px;font-weight:400}
+.umlaut-remove{font:inherit;line-height:inherit;font-weight:inherit;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-skip-ink:none}.umlaut-slot{display:inline-block;width:0.9em}
+@media(max-width:600px){
+  .app{padding-left:18px;padding-right:18px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px))}
+  .app::before{content:"";position:fixed;z-index:40;top:0;left:50%;transform:translateX(-50%);width:min(100%,480px);height:max(58px,calc(env(safe-area-inset-top) + 42px));background:var(--bg);pointer-events:none}
+  .top{position:sticky;top:0;z-index:50}
+  .progress{position:sticky;z-index:50}
+  .card{padding-top:12px}
+  .sentence{font-size:24px}
+  .result{margin-top:20px;padding:20px 22px 16px}
+html,body{overscroll-behavior-y:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="formsModal" class="forms-modal" aria-hidden="true">
+  <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
+    <div class="forms-modal-head">
+      <h2 id="formsModalTitle">Modalverben · Forms</h2>
+      <button class="forms-close" id="formsClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="formsModalBody"></div>
+  </div>
+</div>
+<main class="app">
+  <section id="start" class="start">
+    <h1 class="title">Modalverben.</h1>
+    <p class="subtitle">How many sentences?</p>
+    <div class="choices">
+      <button class="choice" data-size="10">10</button>
+      <button class="choice" data-size="20">20</button>
+      <button class="choice" data-size="30">30</button>
+    </div>
+    <button class="forms-table-btn" data-forms-table>Forms · Table</button>
+  </section>
+
+  <section id="study" class="hidden">
+    <div class="top"><span class="brand">Modalverben.</span><span id="count"></span></div>
+    <div class="progress"><i id="bar"></i></div>
+    <section class="card">
+      <div class="verb" id="verb"></div>
+      <div class="sentence" id="sentence"></div>
+      <div class="translation" id="translation"></div>
+      <div class="answer-area" id="answer-area">
+        <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
+        <button class="check" id="check">Check</button>
+      </div>
+      <div class="result" id="result">
+        <div class="state" id="state"></div>
+        <div class="form-line" id="formLine"></div>
+        <div class="form-kind" id="formKind"></div>
+        <div class="explanation" id="explanation"></div>
+      </div>
+      <button class="next" id="next">Continue</button>
+    </section>
+    <div id="keyboardMount"></div>
+    <div class="in-session-forms"><button class="forms-table-btn" data-forms-table>Forms table</button></div>
+  </section>
+
+  <section id="finish" class="finish hidden">
+    <h2>Done.</h2>
+    <div id="finalScore" class="final-score"></div>
+    <p id="summary"></p>
+    <div class="finish-actions">
+      <button class="again" id="again">Another session</button>
+      <button class="home-back" id="homeBack">Back to Home</button>
+    </div>
+  </section>
+</main>
+
+<script src="special_verbs.js"></script>
+<script>
+const STORAGE_KEY="modalverbenDifficultyV1";
+let difficulty={};
+try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
+
+function recordAnswer(){
+  window.parent.postMessage({
+    type:"deutsch:exerciseAnswer",
+    exercise:"modalverben"
+  },"*");
+}
+
+let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
+const $=id=>document.getElementById(id);
+const isMobileKeyboard=window.matchMedia("(max-width:699px)").matches;
+
+if(isMobileKeyboard){
+  $("answer").readOnly=true;
+  $("answer").setAttribute("inputmode","none");
+  $("answer").setAttribute("readonly","");
+  $("check").style.display="none";
+}
+
+function itemKey(item){
+  return `${item.infinitive}|${item.form}|${item.sentence}`;
+}
+function weightFor(item){
+  return Math.max(1,Number(difficulty[itemKey(item)]||1));
+}
+function saveDifficulty(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
+}
+function buildDeck(size){
+  const ranked=SPECIAL_VERB_EXERCISES.map(item=>{
+    const weight=weightFor(item);
+    const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
+    return {item,randomKey};
+  }).sort((a,b)=>a.randomKey-b.randomKey);
+  return ranked.slice(0,Math.min(size,SPECIAL_VERB_EXERCISES.length)).map(x=>x.item);
+}
+function updateDifficulty(item,correct){
+  const k=itemKey(item);
+  let d=weightFor(item);
+  d=correct?Math.max(1,d-.5):Math.min(6,d+1.5);
+  difficulty[k]=Number(d.toFixed(2));
+  saveDifficulty();
+}
+
+function startSession(size){
+  sessionSize=Math.min(size,SPECIAL_VERB_EXERCISES.length);
+  deck=buildDeck(sessionSize);
+  index=0;correctCount=0;
+  $("start").classList.add("hidden");
+  $("finish").classList.add("hidden");
+  $("study").classList.remove("hidden");
+  render();
+}
+function syncKeyboardAndFocus(){
+  if(window.deutschKeyboardReady && isMobileKeyboard && !checked){
+    $("keyboard").classList.add("show");
+  }
+  if(!isMobileKeyboard){
+    setTimeout(()=>{
+      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
+    },80);
+  }
+}
+function sentenceWithGap(item,filled=false,wrong=false){
+  const sentence=String(item.sentence||"");
+  const answer=String(item.answer||"");
+  const gapClass=filled ? ("gap filled"+(wrong?" wrong":"")) : "gap";
+  const visible=filled?answer:"&nbsp;&nbsp;&nbsp;";
+  if(sentence.includes("___")){
+    const parts=sentence.split("___");
+    return parts[0]+'<span class="'+gapClass+'">'+visible+'</span>'+parts.slice(1).join("___");
+  }
+  const escapedAnswer=answer.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const re=new RegExp(escapedAnswer,"i");
+  return sentence.replace(re,'<span class="'+gapClass+'">'+visible+'</span>');
+}
+function render(){
+  const item=deck[index];
+  checked=false;
+  $("verb").textContent=item.infinitive;
+  $("sentence").innerHTML=sentenceWithGap(item);
+  $("translation").textContent=item.translation;
+  $("answer").value="";
+  $("answer-area").classList.remove("hidden");
+  $("result").className="result";
+  $("next").className="next";
+  $("check").style.display=isMobileKeyboard?"none":"";
+  $("count").textContent=(index+1)+" / "+deck.length;
+  $("bar").style.width=((index+1)/deck.length*100)+"%";
+  $("answer").disabled=false;
+  syncKeyboardAndFocus();
+}
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[char]));
+}
+function checkAnswer(){
+  if(checked){next();return}
+  const item=deck[index];
+  const a=$("answer").value.trim().toLowerCase();
+  if(!a)return;
+  checked=true;
+  recordAnswer();
+  const ok=a===item.answer.trim().toLowerCase();
+  if(ok)correctCount++;
+  updateDifficulty(item,ok);
+
+  $("result").className="result show "+(ok?"good":"bad");
+  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+  $("sentence").innerHTML=sentenceWithGap(item,true,!ok);
+  $("state").textContent=ok?"Correct":"Not quite";
+  $("formKind").textContent=item.form;
+  $("formLine").innerHTML=ok
+    ? `${item.infinitive} → ${item.answer}`
+    : `${item.infinitive} → ${item.answer} → <span class="wrong-answer">${escapeHtml(a)}</span>`;
+  $("explanation").textContent=item.explanation;
+  $("answer-area").classList.add("hidden");
+  $("next").className="next show";
+}
+function next(){
+  if(index+1>=deck.length){finishSession();return}
+  index++;
+  render();
+}
+function finishSession(){
+  $("study").classList.add("hidden");
+  $("finish").classList.remove("hidden");
+  $("finalScore").textContent=correctCount+" / "+deck.length;
+  $("summary").textContent="Difficult forms will have a better chance of returning in a future session.";
+}
+
+document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
+$("check").onclick=checkAnswer;
+$("next").onclick=next;
+$("again").onclick=()=>{
+  $("finish").classList.add("hidden");
+  $("start").classList.remove("hidden");
+};
+
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src="about:blank";
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+$("homeBack").onclick=goBackToHome;
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && $("formsModal").classList.contains("open")){closeFormsTable();return}
+  if(e.key==="Enter"){
+    e.preventDefault();
+    if(checked){next();return}
+    if(document.activeElement===$("answer")) checkAnswer();
+  }
+  if(e.key==="Backspace" && window.innerWidth<700){
+    e.preventDefault();
+    $("answer").value=$("answer").value.slice(0,-1);
+  }
+});
+
+document.addEventListener("deutsch-keyboard-input",e=>{
+  const k=e.detail?.key||"";
+  if($("study").classList.contains("hidden") || checked)return;
+  if(k==="BACK"){
+    $("answer").value=$("answer").value.slice(0,-1);
+    return;
+  }
+  if(k==="OK"){
+    checkAnswer();
+    return;
+  }
+  if(k==="SPACE"){
+    if($("answer").value.length && !$("answer").value.endsWith(" ")) $("answer").value+=" ";
+    return;
+  }
+  if(k) $("answer").value+=k;
+});
+
+
+const MODAL_FORM_PERSONS=["ich","du","er/sie/es","wir","ihr","sie/Sie"];
+
+const MODAL_FORM_GROUP={
+  verbs:["können","müssen","dürfen","sollen","wollen"],
+  forms:{
+    "können":{
+      present:["kann","kannst","kann","können","könnt","können"],
+      preterite:["konnte","konntest","konnte","konnten","konntet","konnten"],
+      k2:["könnte","könntest","könnte","könnten","könntet","könnten"]
+    },
+    "müssen":{
+      present:["muss","musst","muss","müssen","müsst","müssen"],
+      preterite:["musste","musstest","musste","mussten","musstet","mussten"],
+      k2:["müsste","müsstest","müsste","müssten","müsstet","müssten"]
+    },
+    "dürfen":{
+      present:["darf","darfst","darf","dürfen","dürft","dürfen"],
+      preterite:["durfte","durftest","durfte","durften","durftet","durften"],
+      k2:["dürfte","dürftest","dürfte","dürften","dürftet","dürften"]
+    },
+    "sollen":{
+      present:["soll","sollst","soll","sollen","sollt","sollen"],
+      preterite:["sollte","solltest","sollte","sollten","solltet","sollten"],
+      k2:["sollte","solltest","sollte","sollten","solltet","sollten"]
+    },
+    "wollen":{
+      present:["will","willst","will","wollen","wollt","wollen"],
+      preterite:["wollte","wolltest","wollte","wollten","wolltet","wollten"],
+      k2:["wollte","wolltest","wollte","wollten","wolltet","wollten"]
+    }
+  }
+};
+
+const MODAL_FORM_SPECIAL={
+  "mögen":{
+    present:["mag","magst","mag","mögen","mögt","mögen"],
+    preterite:["mochte","mochtest","mochte","mochten","mochtet","mochten"],
+    k2:["möchte","möchtest","möchte","möchten","möchtet","möchten"]
+  },
+  "werden":{
+    present:["werde","wirst","wird","werden","werdet","werden"],
+    preterite:["wurde","wurdest","wurde","wurden","wurdet","wurden"],
+    k2:["würde","würdest","würde","würden","würdet","würden"],
+    participle:"geworden"
+  }
+};
+
+const MODAL_FORM_SCHEME={
+  present:["-","-st","-","-en","-t","-en"],
+  preterite:["-e","-est","-e","-en","-et","-en"],
+  k2:["-e","-est","-e","-en","-et","-en"]
+};
+
+let modalFormMode="scheme";
+let modalFormGroupOpen=true;
+let modalSpecialOpen={mögen:false,werden:false};
+
+function umlautGlyph(){
+  return '<span class="umlaut-remove">o</span>';
+}
+
+function renderFormsDetail(verb,scheme=false){
+  const forms=scheme?MODAL_FORM_SCHEME:
+    (MODAL_FORM_GROUP.forms[verb]||MODAL_FORM_SPECIAL[verb]);
+
+  const rows=MODAL_FORM_PERSONS.map((person,i)=>`
+    <tr>
+      <td class="forms-person">${person}</td>
+      <td class="${scheme?"forms-scheme":""}">${scheme&&i<3?`<span class="umlaut-slot">${umlautGlyph()} </span>${forms.present[i]}`:scheme?`<span class="umlaut-slot">&nbsp;&nbsp;&nbsp;</span>${forms.present[i]}`:forms.present[i]}</td>
+      <td class="${scheme?"forms-scheme":""}">${scheme?`<span class="umlaut-slot">${umlautGlyph()} </span>${forms.preterite[i]}`:forms.preterite[i]}</td>
+      <td class="${scheme?"forms-scheme":""}">${forms.k2[i]}</td>
+    </tr>`).join("");
+
+  const note=scheme
+    ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>`
+    : "";
+
+  const participle=verb==="werden"
+    ? `<div class="forms-detail-participle">Partizip II · <b>geworden</b></div>`
+    : "";
+
+  return `
+    <div class="forms-detail">
+      <table class="forms-detail-table">
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Präsens</th>
+            <th>Präteritum</th>
+            <th>Konjunktiv II</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      ${note}${participle}
+    </div>`;
+}
+
+function renderFormsTable(){
+  const selected=modalFormMode!=="scheme"?modalFormMode:null;
+
+  const groupButtons=MODAL_FORM_GROUP.verbs.map((verb,i)=>`
+    ${i?"<span class=\"group-separator\">·</span>":""}
+    <button class="verb-choice" type="button" data-modal-verb="${verb}">${verb}</button>`).join("");
+
+  const groupRow=`
+    <tbody class="forms-group${modalFormGroupOpen?" open":""}" data-forms-group>
+      <tr class="verb-group-row">
+        <td class="verb-group" colspan="3">
+          <span class="forms-chevron" data-toggle-group aria-label="Toggle modal verbs">›</span>
+          ${groupButtons}
+        </td>
+        <td class="reset-cell">
+          <button class="forms-reset" type="button" data-reset-forms>Reset</button>
+        </td>
+      </tr>
+      <tr class="forms-detail-row">
+        <td colspan="4">${renderFormsDetail(selected||"können",!selected)}</td>
+      </tr>
+    </tbody>`;
+
+  const specialRows=["mögen","werden"].map(verb=>`
+    <tbody class="forms-group${modalSpecialOpen[verb]?" open":""}" data-special-group="${verb}">
+      <tr class="verb-group-row">
+        <td class="verb-group" colspan="4">
+          <span class="forms-chevron" data-toggle-special="${verb}" aria-label="Toggle ${verb}">›</span>
+          <button class="verb-choice" type="button" data-special-verb="${verb}">${verb}</button>
+        </td>
+      </tr>
+      <tr class="forms-detail-row">
+        <td colspan="4">${renderFormsDetail(verb,false)}</td>
+      </tr>
+    </tbody>`).join("");
+
+  $("formsModalBody").innerHTML=`
+    <p class="forms-intro">Klicke auf ein Verb der Gruppe, um seine konkreten Formen zu sehen.</p>
+    <table class="forms-table">
+      ${groupRow}
+      ${specialRows}
+    </table>`;
+}
+
+function setFormsMode(mode){
+  modalFormMode=mode;
+  modalFormGroupOpen=true;
+  renderFormsTable();
+}
+
+function openFormsTable(){
+  modalFormMode="scheme";
+  modalFormGroupOpen=true;
+  modalSpecialOpen={mögen:false,werden:false};
+  renderFormsTable();
+  const modal=$("formsModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+
+function closeFormsTable(){
+  const modal=$("formsModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+
+document.querySelectorAll("[data-forms-table]").forEach(button=>button.addEventListener("click",openFormsTable));
+$("formsClose").onclick=closeFormsTable;
+$("formsModal").onclick=e=>{if(e.target===$("formsModal"))closeFormsTable()};
+
+$("formsModalBody").addEventListener("click",e=>{
+  const reset=e.target.closest("[data-reset-forms]");
+  if(reset){
+    e.stopPropagation();
+    modalFormMode="scheme";
+    modalFormGroupOpen=true;
+    renderFormsTable();
+    return;
+  }
+
+  const verbButton=e.target.closest("[data-modal-verb]");
+  if(verbButton){
+    e.stopPropagation();
+    setFormsMode(verbButton.dataset.modalVerb);
+    return;
+  }
+
+  const groupToggle=e.target.closest("[data-toggle-group]");
+  if(groupToggle){
+    e.stopPropagation();
+    modalFormGroupOpen=!modalFormGroupOpen;
+    renderFormsTable();
+    return;
+  }
+
+  const specialToggle=e.target.closest("[data-toggle-special]");
+  const specialButton=e.target.closest("[data-special-verb]");
+  if(specialToggle || specialButton){
+    e.stopPropagation();
+    const verb=(specialToggle||specialButton).dataset.toggleSpecial ||
+      (specialToggle||specialButton).dataset.specialVerb;
+    modalSpecialOpen[verb]=!modalSpecialOpen[verb];
+    renderFormsTable();
+  }
+});
+
+
+
+async function loadKeyboardComponent(){
+  const mount=$("keyboardMount");
+  if(!mount)return false;
+  const r=await fetch("../components/deutsch-keyboard-v2.60.html");
+  if(!r.ok)throw new Error("Keyboard component failed to load");
+  const text=await r.text();
+  const tpl=document.createElement("template");
+  tpl.innerHTML=text;
+  const scripts=[];
+  tpl.content.querySelectorAll("script").forEach(sc=>{scripts.push(sc.textContent);sc.remove()});
+  mount.appendChild(tpl.content);
+  for(const code of scripts){
+    const sc=document.createElement("script");
+    sc.textContent=code;
+    document.body.appendChild(sc);
+  }
+  const kb=$("keyboard");
+  window.deutschKeyboardReady=true;
+  if(isMobileKeyboard && !$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
+  return true;
+}
+loadKeyboardComponent().catch(e=>console.error(e));
+</script>
+</body>
+</html>
