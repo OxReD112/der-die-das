@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Wortschatz</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+:root{
+  /* ===== PALETTE ===== */
+  --green:#43d2ad;
+  --red:#ff6f73;
+
+  --gray-100:#f3f1ed;
+  --gray-300:#aaa;
+  --gray-500:#8c8c91;
+  --gray-700:#444448;
+
+  /* ===== SURFACES ===== */
+  --bg:#1c1c1e;
+  --surface:#222225;
+
+  /* ===== SEMANTIC COLORS ===== */
+  --text:var(--gray-100);
+  --muted:var(--gray-500);
+  --brand:#aaa69f;
+  --accent:var(--green);
+  --error:var(--red);
+
+  --line:rgba(67,210,173,.45);
+  --progress-track:#292a2c;
+  --progress-fill:#777;
+  --blank-line:rgba(243,241,237,.72);
+
+  /* ===== CONTROLS ===== */
+  --button-bg:#eee8df;
+  --button-text:#18181a;
+
+  /* ===== DETAIL TEXT ===== */
+  --divider:var(--gray-700);
+  --base-text:var(--gray-300);
+  --meaning-text:#8d9996;
+  --grammar-text:#737a78;
+  --continue-text:#9b9b9f;
+  --continue-hover:#d5d5d7;
+
+  /* ===== ANSWER DIFFERENCES ===== */
+  --diff-word-bg:rgba(255,255,255,.025);
+  --diff-same:var(--green);
+  --diff-wrong:var(--error);
+  --diff-error-bg:rgba(255,91,98,.10);
+  --diff-missing:var(--error);
+  --diff-arrow:#e8d9d9;
+  --diff-correct:#ddd;
+
+  /* ===== OTHER COMPONENTS ===== */
+  --done-score:var(--text);
+  --add-words-bg:#242426;
+  --add-words-text:var(--text);
+  --version:#4f4f53;
+
+  /* ===== FEEDBACK EFFECTS ===== */
+  --good-glow:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);
+  --bad-glow:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);
+  --good-line-shadow:0 0 14px rgba(67,210,173,.3);
+  --bad-line-shadow:0 0 14px rgba(255,91,98,.34);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;touch-action:manipulation}
+button{font:inherit}
+.app{width:min(760px,100%);margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
+#question{width:min(560px,100%)}
+.top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
+.brand{font:26px Georgia,serif;color:var(--brand)}
+.progress{height:3px;background:var(--progress-track);border-radius:8px;overflow:hidden}
+.progress div{height:100%;background:var(--progress-fill);transition:width .2s}
+.stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
+.topZone{width:min(620px,100%)}
+.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px}
+.blank{display:inline-block;width:1.87em;height:.82em;border-bottom:2px solid var(--blank-line);vertical-align:baseline;margin:0 .08em}
+.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
+.inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:var(--surface);color:var(--text);text-align:center;caret-color:var(--accent)}
+.inputbox:focus{border-color:var(--accent)}
+.check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:var(--button-bg);color:var(--button-text);font-weight:750;font-size:17px}
+.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
+.feedback.show{display:block}
+.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center}
+.feedbackShell.show{display:flex}
+.feedbackShell .feedback{width:100%}.feedback .topZone{margin-left:auto;margin-right:auto}
+.feedbackShell .continue{
+  width:auto;
+  margin-top:18px;
+  border:0;
+  border-radius:15px;
+  padding:10px 18px;
+  background:var(--button-bg);
+  color:var(--button-text);
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+}
+.feedbackShell .continue:hover{filter:brightness(1.03)}
+.feedbackShell .continue:active{transform:translateY(1px)}
+@media(max-width:699px){.feedbackShell{touch-action:manipulation;will-change:transform,opacity}}
+@keyframes glowIn{from{opacity:0}to{opacity:1}}
+@keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--accent)}.feedback.bad .answerSentence .target{color:var(--text)}
+.answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
+.targetForm{display:inline-block;margin-top:22px;color:var(--accent);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
+.diffBlock{display:none;margin-top:26px;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:var(--diff-word-bg)}.diffSame{color:var(--diff-same)}.diffWrong{color:var(--diff-wrong);background:var(--diff-error-bg)}.diffMissing{color:var(--diff-missing);background:var(--diff-error-bg)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow{margin:1px 0;color:var(--diff-arrow);font:24px/1 sans-serif}.diffCorrect{color:var(--diff-correct)}.diffCorrect .diffSame{color:var(--diff-same)}
+.answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}
+.detail{position:relative;border-top:1px solid var(--divider);padding-top:24px;color:var(--base-text);text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--accent);box-shadow:var(--good-line-shadow);z-index:2}.feedback.bad .detail::before{background:var(--error);box-shadow:var(--bad-line-shadow)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:var(--good-glow);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:var(--bad-glow);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
+.base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:var(--meaning-text)}.grammar{margin-top:14px;font-size:14px;color:var(--grammar-text)}
+.continue{margin-top:18px;width:auto;border:0;border-radius:12px;padding:8px 12px;background:transparent;color:var(--continue-text);font-weight:650;font-size:17px;cursor:pointer;transition:transform .16s ease,color .16s ease}.continue:hover{transform:scale(1.12);color:var(--continue-hover)}.continue:active{transform:scale(1.05)}
+
+.done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:var(--done-score);font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid var(--divider);border-radius:16px;padding:15px 18px;background:var(--add-words-bg);color:var(--add-words-text);font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
+.version{text-align:center;color:var(--version);font-size:10px;margin-top:18px}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex!important;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.detail{padding-top:12px}.grammar{margin-top:26px}}
+</style>
+</head>
+<body><main class="app">
+<header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
+<section class="stage" id="study">
+ <div id="question">
+  <div class="topZone">
+   <div class="sentence" id="sentence"></div>
+   <div class="translation" id="translation"></div>
+  </div>
+  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+  <button class="check" id="desktopCheck">Check</button>
+  <div id="keyboardMount"></div>
+ </div>
+ <div class="feedbackShell" id="feedbackShell">
+  <div class="feedback" id="feedback">
+   <div class="topZone answerTop" id="answerTop">
+    <div class="answerSentence" id="answerSentence"></div>
+    <div class="answerTranslation" id="answerTranslation"></div>
+   </div>
+   <div class="targetForm" id="targetForm"></div>
+   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
+   <button class="speakTop" id="speakTop" aria-label="Hear sentence"><img class="speakTopIcon" src="../components/icons/Audio.svg" alt="" aria-hidden="true"></button>
+   <div class="detail">
+    <div class="answerTargetRow"><div class="base" id="base"></div></div>
+    <div class="meaning" id="meaning"></div>
+    <div class="grammar" id="grammar"></div>
+   </div>
+  </div>
+  <button class="continue" id="continue">Continue</button>
+ </div>
+</section>
+<section class="done" id="done"><div><h1>Done for today.</h1><p>Come back tomorrow.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ Add 5 new words</button><div class="allAdded" id="allAdded">All words are already in your deck.</div></div></section>
+<div class="version">v2.72 · notifications</div>
+</main>
+<script src="words.js"></script>
+<script>
+// App-side keyboard bridge: the reusable component only emits intent.
+document.addEventListener("deutsch-keyboard-input",e=>{
+ const k=e.detail?.key||"",input=document.getElementById("answerInput");
+ if(!input)return;
+ if(k==="BACK"){input.value=input.value.slice(0,-1);return}
+ if(k==="OK"){check();return}
+ if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
+ if(k)input.value+=k;
+});
+const isTouchDeviceForCheck =
+  navigator.maxTouchPoints > 0 ||
+  window.matchMedia("(pointer: coarse)").matches;
+
+$("desktopCheck").style.display = isTouchDeviceForCheck ? "none" : "";
+
+async function loadKeyboardComponent(){
+ const mount=document.getElementById("keyboardMount");
+ if(!mount)return false;
+ const r=await fetch("../components/deutsch-keyboard-v2.60.html");
+ if(!r.ok)throw new Error("Keyboard component failed to load");
+ const text=await r.text();
+ const tpl=document.createElement("template");
+ tpl.innerHTML=text;
+ const scripts=[];
+ tpl.content.querySelectorAll("script").forEach(s=>{scripts.push(s.textContent);s.remove()});
+ mount.appendChild(tpl.content);
+ for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
+ const kb=document.getElementById("keyboard");
+ window.deutschKeyboardReady=true;
+ const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+  if(isTouchDevice){kb.classList.add("show");kb.style.setProperty("display","block","important");}
+ return true;
+}
+</script>
+
+<script>
+const $=id=>document.getElementById(id), STORE="wortsternSRSv03", HOME_STATS="deutschHomeStatsV1";
+
+function publishWortschatzStatus(done=false){
+  try{
+    const today=day();
+    const allDue=activeCards().filter(c=>rec(c).due<=today);
+    const status={
+      date:today,
+      done:!!done || allDue.length===0,
+      remaining:allDue.length,
+      updatedAt:Date.now()
+    };
+    const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
+    home.wortschatz=status;
+    localStorage.setItem(HOME_STATS,JSON.stringify(home));
+  }catch(e){}
+}
+// Simple SRS: first success -> tomorrow, then +8, +20, +45, +90 days.
+// A mistake resets the card: it stays in today's session until answered correctly, then returns tomorrow.
+const steps=[1,8,20,45,90];
+const INITIAL_WORDS=10, ADD_BATCH=5;
+let state={cards:{},activeIds:[]};
+try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&saved.cards&&Array.isArray(saved.activeIds))state=saved}catch(e){}
+const day=()=>{let d=new Date();d.setHours(12,0,0,0);return d.toISOString().slice(0,10)}
+const add=n=>{let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function save(){localStorage.setItem(STORE,JSON.stringify(state))}
+function ensureDeck(){
+ if(!state.activeIds.length){state.activeIds=WORDS.slice(0,INITIAL_WORDS).map(c=>c.id);save()}
+}
+function rec(c){
+ if(!state.cards[c.id])state.cards[c.id]={level:0,due:day()};
+ return state.cards[c.id];
+}
+let queue=[],idx=0,current=null,sessionTotal=0,completed=0,failedToday=new Set(),closedToday=new Set();
+function normalize(s){return s.trim().toLocaleLowerCase("de-DE").replace(/\s*,\s*/g," ").replace(/\s+/g," ")}
+function targetParts(c){return (c.target||"").split(" / ").map(x=>x.trim()).filter(Boolean)}
+function targets(c){
+ const parts=targetParts(c);
+ // With several blanks, the slash separates the pieces of ONE separable verb,
+ // not alternative answers. The learner types both pieces in one field.
+ if((c.blank.match(/_____/g)||[]).length>1)return [parts.join(" ")];
+ return parts;
+}
+function activeCards(){const ids=new Set(state.activeIds);return WORDS.filter(c=>ids.has(c.id))}
+const NOTIFICATION_SERVER="https://german-learning-notifications.d45zgw2cgh.workers.dev";
+const NOTIFICATION_USER_KEY="deutschNotificationUserIdV1";
+const NOTIFICATION_DEVICE_KEY="deutschNotificationDeviceIdV1";
+
+function getNotificationUserId(){
+  let id=localStorage.getItem(NOTIFICATION_USER_KEY);
+  if(!id){
+    try{id=crypto.randomUUID?crypto.randomUUID():"user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    catch(e){id="user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    localStorage.setItem(NOTIFICATION_USER_KEY,id);
+  }
+  return id;
+}
+
+function getNotificationDeviceId(){
+  let id=localStorage.getItem(NOTIFICATION_DEVICE_KEY);
+  if(!id){
+    try{id=crypto.randomUUID?crypto.randomUUID():"device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    catch(e){id="device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
+    localStorage.setItem(NOTIFICATION_DEVICE_KEY,id);
+  }
+  return id;
+}
+
+async function syncNotificationPool(pool){
+  try{
+    const response=await fetch(NOTIFICATION_SERVER+"/pool",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getNotificationUserId(),
+        deviceId:getNotificationDeviceId(),
+        date:pool.date,
+        notifications:pool.notifications.map(item=>({
+          id:item.id,
+          de:item.sentence,
+          ru:item.translation
+        }))
+      })
+    });
+    if(!response.ok)throw new Error("pool-"+response.status);
+    console.log("[German Learning] Notification pool synced:",pool.date);
+    return true;
+  }catch(e){
+    console.warn("[German Learning] Could not sync notification pool:",e);
+    return false;
+  }
+}
+
+async function publishNotificationDone(){
+  const event={date:day(),done:true,completedAt:Date.now()};
+  try{
+    localStorage.setItem("deutschNotificationDoneV1",JSON.stringify(event));
+    const response=await fetch(NOTIFICATION_SERVER+"/done",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getNotificationUserId(),
+        deviceId:getNotificationDeviceId(),
+        date:event.date
+      })
+    });
+    if(!response.ok)throw new Error("done-"+response.status);
+    console.log("[German Learning] DONE synced:",event);
+  }catch(e){
+    console.warn("[German Learning] Could not sync DONE event:",e);
+  }
+  return event;
+}
+
+function prepareTomorrowNotifications(limit=4){
+  const tomorrow=add(1);
+  const candidates=activeCards().filter(c=>rec(c).due===tomorrow);
+  const shuffled=[...candidates].sort(()=>Math.random()-.5);
+  const notifications=shuffled.slice(0,Math.min(4,limit)).map(c=>({
+    id:c.id,
+    sentence:c.revealed||c.sentence||"",
+    translation:c.ru||""
+  }));
+  const pool={date:tomorrow,notifications,createdAt:Date.now()};
+  try{
+    localStorage.setItem("deutschNotificationPoolV1",JSON.stringify(pool));
+    console.log("[German Learning] Tomorrow notification pool:",pool);
+  }catch(e){
+    console.warn("[German Learning] Could not save notification pool:",e);
+  }
+  syncNotificationPool(pool);
+  return pool;
+}
+function build(cards=null){
+ ensureDeck();
+ queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
+ idx=0;sessionTotal=queue.length;completed=0;failedToday=new Set();closedToday=new Set();
+ publishWortschatzStatus(queue.length===0);
+ render();
+}
+function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank' aria-label='missing word'></span>")}
+function revealHTML(c){
+ let escaped=c.revealed.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ const ts=targetParts(c); for(const t of ts){let e=t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");escaped=escaped.replace(new RegExp(e),"<span class='target'>"+t+"</span>")}
+ return escaped;
+}
+function render(){
+ if(idx>=queue.length){showDone();return}
+ current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
+ $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
+ $("question").style.display="block";$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+  if(window.deutschKeyboardReady&&isTouchDevice){$("keyboard").classList.add("show");$("keyboard").style.setProperty("display","block","important");}
+ if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
+}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function diffHTML(typed,correct){
+ const a=[...typed],b=[...correct],m=a.length,n=b.length,dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
+ for(let i=m;i>=0;i--)for(let j=n;j>=0;j--){if(i===m)dp[i][j]=n-j;else if(j===n)dp[i][j]=m-i;else if(a[i]===b[j])dp[i][j]=dp[i+1][j+1];else dp[i][j]=1+Math.min(dp[i+1][j+1],dp[i+1][j],dp[i][j+1])}
+ let i=0,j=0,top=[],bottom=[];
+ while(i<m||j<n){
+  if(i<m&&j<n&&a[i]===b[j]){top.push(`<span class="diffSame">${esc(a[i])}</span>`);bottom.push(`<span class="diffSame">${esc(b[j])}</span>`);i++;j++;continue}
+  const sub=i<m&&j<n?dp[i+1][j+1]:1e9,del=i<m?dp[i+1][j]:1e9,ins=j<n?dp[i][j+1]:1e9;
+  if(sub<=del&&sub<=ins){top.push(`<span class="diffWrong">${esc(a[i])}</span>`);bottom.push(`<span class="diffMissing">${esc(b[j])}</span>`);i++;j++}
+  else if(del<=ins){top.push(`<span class="diffWrong">${esc(a[i])}</span>`);i++}
+  else{bottom.push(`<span class="diffMissing">${esc(b[j])}</span>`);j++}
+ }
+ return [top.join(""),bottom.join("")];
+}
+function check(){
+ let typed=normalize($("answerInput").value);if(!typed)return;
+ const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
+ let ok=!!matched;
+ // For an error, compare against the closest accepted answer so the highlighted difference is useful.
+ let correct=opts[0]||"";
+ if(!ok&&opts.length>1){
+   const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
+   correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
+ } else if(ok) correct=matched;
+ $("question").style.setProperty("display","none","important");$("keyboard").classList.remove("show");$("keyboard").style.removeProperty("display");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
+ $("answerTranslation").textContent=current.ru;
+ let displayCorrect=normalize(correct);
+ if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
+   displayCorrect=displayCorrect.charAt(0).toLocaleUpperCase("de-DE")+displayCorrect.slice(1);
+ }
+ $("targetForm").textContent=displayCorrect;
+ $("targetForm").style.display=ok?"inline-block":"none";
+ if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
+ $("base").textContent=current.base;$("meaning").textContent=current.translation;$("grammar").textContent=current.grammar||"";
+ const r=rec(current);
+ if(ok){
+   if(failedToday.has(current.id)){r.level=0;r.due=add(1)}
+   else{r.level=Math.min(r.level+1,steps.length);r.due=add(steps[Math.min(r.level-1,steps.length-1)])}
+   if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
+ } else {
+   failedToday.add(current.id);
+   r.level=0;r.due=day();
+   // Reinsert once at the end. It remains one of today's unique cards, so the total never grows.
+   if(!queue.slice(idx+1).some(c=>c.id===current.id))queue.push(current);
+ }
+ save();
+}
+function showDone(){
+ publishWortschatzStatus(true);
+ if(sessionTotal>0){
+   publishNotificationDone();
+   prepareTomorrowNotifications();
+ }
+ $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
+ $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} complete`:"Nothing due right now.";
+ const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
+ $("addWords").style.display=remaining?"block":"none";$("allAdded").style.display=remaining?"none":"block";
+}
+function addFive(){
+ const fresh=WORDS.filter(c=>!state.activeIds.includes(c.id)).slice(0,ADD_BATCH);if(!fresh.length)return;
+ fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();publishWortschatzStatus(false);
+ $("done").className="done";$("study").style.display="flex";build(fresh);
+}
+function next(){idx++;render()}
+$("addWords").onclick=addFive;
+$("desktopCheck").onclick=check;$("continue").onclick=next;
+document.addEventListener("keydown",e=>{
+ if(e.key!=="Enter"||innerWidth<700)return;
+ if(!$("feedback").classList.contains("show"))return;
+ e.preventDefault();next();
+});
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
+function speakCurrent(){
+ speechSynthesis.cancel();
+ let u=new SpeechSynthesisUtterance(current.revealed);
+ u.lang="de-DE";u.rate=.88;
+ speechSynthesis.speak(u);
+}
+$("feedback").addEventListener("click",e=>{
+  if(e.target.closest("#answerTop,#speakTop"))speakCurrent();
+});
+loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
+</script>
+</body></html>
