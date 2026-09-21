@@ -9,72 +9,109 @@
 <meta name="apple-mobile-web-app-title" content="Pronomen">
 <title>Pronomen</title>
 <style>
-:root{--bg:#1c1c1e;--text:#f5f5f7;--muted:#929297;--mint:#4fd7b3;--red:#ff6b73;--line:rgba(255,255,255,.10);--key:#303033}
+:root{
+  /* ===== PALETTE (dark, default) ===== */
+  --bg:#1c1c1e;
+  --text:#f5f5f7;
+  --muted:#929297;
+  --tertiary-text:#aaa;
+  --secondary-text:#c7c7cc;
+  --placeholder-text:#666;
+  --mint:#4fd7b3;
+  --red:#ff6b73;
+
+  /* ===== SURFACES ===== */
+  --surface:#202022;
+  --surface-2:#252527;
+  --key:#303033;
+
+  /* ===== LINES ===== */
+  --line:rgba(255,255,255,.10);
+  --divider:rgba(255,255,255,.08);
+  --feedback-divider:rgba(255,255,255,.11);
+  --in-session-line:rgba(255,255,255,.06);
+
+  /* ===== BRAND / DECORATIVE ===== */
+  --brand-text:rgba(255,255,255,.11);
+  --version-text:rgba(255,255,255,.18);
+
+  /* ===== CTA BUTTONS (Check / Continue) ===== */
+  --cta-bg:#eee8df;
+  --cta-text:#171719;
+
+  /* ===== DONE SCREEN ACTIONS ===== */
+  --home-bg:rgba(255,255,255,.10);
+  --home-text:rgba(238,231,220,.55);
+  --home-back-bg:#ece6dc;
+  --home-back-text:#1b1c1e;
+  --weak-text:#c8c8cc;
+
+  /* ===== MODAL ===== */
+  --modal-scrim:rgba(0,0,0,.28);
+  --close-icon:#fff;
+  --hot-text:#ffd2d5;
+}
+
+[data-theme="light"]{
+  --bg:#f6f4f1;
+  --text:#242426;
+  --muted:#77777d;
+  --tertiary-text:#8a8a90;
+  --secondary-text:#5b5b60;
+  --placeholder-text:#9a9a9a;
+  --mint:#2fae90;
+  --red:#e0454d;
+
+  --surface:#fff;
+  --surface-2:#fff;
+  --key:#efece6;
+
+  --line:rgba(0,0,0,.10);
+  --divider:rgba(0,0,0,.08);
+  --feedback-divider:rgba(0,0,0,.11);
+  --in-session-line:rgba(0,0,0,.06);
+
+  --brand-text:rgba(0,0,0,.08);
+  --version-text:rgba(0,0,0,.18);
+
+  --cta-bg:#242426;
+  --cta-text:#f5f5f7;
+
+  --home-bg:rgba(0,0,0,.06);
+  --home-text:rgba(36,36,38,.6);
+  --home-back-bg:#242426;
+  --home-back-text:#f5f5f7;
+  --weak-text:#5b5b60;
+
+  --modal-scrim:rgba(0,0,0,.18);
+  --close-icon:#242426;
+  --hot-text:#a3222a;
+}
+
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
 body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
-.screen{min-height:690px;padding:20px 14px;background:transparent}.hidden{display:none!important}.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:rgba(255,255,255,.11);margin:30px 0 70px}
+.screen{min-height:690px;padding:20px 14px;background:transparent}.screen.hidden,.modal.hidden,.weak.hidden,.feedback.hidden{display:none}.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--brand-text);margin:30px 0 70px}.brand.brand-done{margin-bottom:45px}
 .center{text-align:center}.muted{color:var(--muted)}h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}p{line-height:1.5}
-.options{display:flex;justify-content:center;gap:10px;margin:28px 0}.btn,.size{border:1px solid var(--line);background:#303033;color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer}.start-table-btn{font-size:14px;font-weight:400;padding:11px 14px;color:#aaa;background:transparent}.size{font-size:22px;min-width:82px}.secondary{background:transparent;color:#c7c7cc}.table-buttons{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}
+.options{display:flex;justify-content:center;gap:10px;margin:28px 0}.btn,.size{border:1px solid var(--line);background:var(--key);color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer}.start-table-btn{font-size:14px;font-weight:400;padding:11px 14px;color:var(--tertiary-text);background:transparent}.size{font-size:22px;min-width:82px}.secondary{background:transparent;color:var(--secondary-text)}.table-buttons{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--divider);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}
 .exercise{display:flex;flex-direction:column;min-height:600px}.prompt{text-align:center;margin:44px auto 0;max-width:680px}.context{color:var(--muted);font-size:16px;margin-bottom:17px}.sentence{font-size:clamp(30px,7vw,45px);line-height:1.18;font-weight:600;letter-spacing:-.03em}.translation{font-size:16px;color:var(--muted);margin-top:17px}
-.answerbox{margin:34px auto 0;width:min(600px,100%);border:1px solid var(--line);border-radius:18px;background:#202022;min-height:58px;padding:15px 17px;font-size:24px;display:flex;align-items:center;justify-content:center}.placeholder{color:#666;font-size:12px}.check{display:none;width:min(600px,100%);margin:14px auto 0;height:56px;border:0;border-radius:17px;background:#eee8df;color:#171719;font-size:16px;font-weight:700;cursor:pointer}.check:active{transform:scale(.99)}@media(min-width:700px){.check{display:block}}
-.feedback{--state:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid rgba(255,255,255,.11);isolation:isolate}.feedback.wrong{--state:var(--red)}
+.answerbox{margin:34px auto 0;width:min(600px,100%);border:1px solid var(--line);border-radius:18px;background:var(--surface);min-height:58px;padding:15px 17px;font-size:24px;display:flex;align-items:center;justify-content:center}.placeholder{color:var(--placeholder-text);font-size:12px}.check{display:none;width:min(600px,100%);margin:14px auto 0;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:700;cursor:pointer}.check:active{transform:scale(.99)}html:not(.is-touch) .check{display:block}
+.feedback{--state:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid var(--feedback-divider);isolation:isolate}.feedback.wrong{--state:var(--red)}
 .feedback:before{pointer-events:none}.feedback:after{content:"";position:absolute;z-index:-2;left:0;right:0;top:-180px;height:360px;pointer-events:none;opacity:.9;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--state) 22%,transparent) 0%,color-mix(in srgb,var(--state) 10%,transparent) 32%,transparent 70%)}
 .feedback:before{content:"";position:absolute;z-index:-1;top:-1px;left:50%;width:0;height:2px;background:var(--state);box-shadow:0 0 18px color-mix(in srgb,var(--state) 70%,transparent);animation:spread .42s ease-out forwards}
 @keyframes spread{to{left:0;width:100%}}
-.given{font-size:30px;font-weight:650}.correctText{font-size:30px;font-weight:650;margin-top:5px}.bad{color:var(--red)}.good{color:var(--mint)}.skill{margin-top:24px;color:var(--muted);font-size:14px}.continue{position:relative;z-index:2;touch-action:manipulation;width:min(600px,100%);margin-top:25px;border:0;border-radius:15px;padding:15px;background:#eee8df;color:#171719;font-size:17px;font-weight:700}
-.in-session-tables{margin-top:auto;padding-top:30px;justify-content:center;opacity:.22}.in-session-tables .btn{font-size:11px;font-weight:400;padding:7px 10px;border-color:rgba(255,255,255,.06);background:transparent;color:#aaa}
-.done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:#c8c8cc}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}.modal-card{width:min(680px,100%);max-height:86vh;overflow:hidden;background:#252527;border:1px solid var(--line);border-radius:24px;padding:4px 22px 18px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}.modal.open{opacity:1;visibility:visible;background:rgba(0,0,0,.28);transition:opacity .18s ease,background-color .18s ease,visibility 0s}.modal.open .modal-card{opacity:1;transform:scale(1);filter:blur(0)}@media (prefers-reduced-motion:reduce){.modal,.modal-card{transition:none!important}}.modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}.close{border:0;background:transparent;color:white;font-size:28px}.modal #modalBody{overflow:auto;min-height:0;padding-top:0}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}
-.table-subtitle{margin:34px 0 4px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.nom{font-weight:700}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:#ffd2d5;font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:rgba(255,255,255,.18);font-size:11px}
-@media(min-width:700px){.answerbox{cursor:text}}
+.given{font-size:30px;font-weight:650}.correctText{font-size:30px;font-weight:650;margin-top:5px}.bad{color:var(--red)}.good{color:var(--mint)}.skill{margin-top:24px;color:var(--muted);font-size:14px}.continue{position:relative;z-index:2;touch-action:manipulation;width:min(600px,100%);margin-top:25px;border:0;border-radius:15px;padding:15px;background:var(--cta-bg);color:var(--cta-text);font-size:17px;font-weight:700}
+.in-session-tables{margin-top:auto;padding-top:30px;justify-content:center;opacity:.22}.in-session-tables .btn{font-size:11px;font-weight:400;padding:7px 10px;border-color:var(--in-session-line);background:transparent;color:var(--tertiary-text)}
+.done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:var(--weak-text)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}.modal-card{width:min(680px,100%);max-height:86vh;overflow:hidden;background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:4px 22px 18px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}.modal.open{opacity:1;visibility:visible;background:var(--modal-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}.modal.open .modal-card{opacity:1;transform:scale(1);filter:blur(0)}@media (prefers-reduced-motion:reduce){.modal,.modal-card{transition:none!important}}.modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}.close{border:0;background:transparent;color:var(--close-icon);font-size:28px}.modal #modalBody{overflow:auto;min-height:0;padding-top:0}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 7px;border-bottom:1px solid var(--line);text-align:left}
+.table-subtitle{margin:34px 0 4px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.nom{font-weight:700}.tbl td.hot{background:color-mix(in srgb,var(--red) 15%,transparent);color:var(--hot-text);font-weight:650;border-radius:7px}.focus-note{margin:12px 0 0;color:var(--muted);font-size:12px}.version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
+html:not(.is-touch) .answerbox{cursor:text}
 
-.possessive-heading{margin-top:22px;margin-bottom:6px}
-
-/* v7.6 — modal table spacing */
-.modalHead{padding-top:4px!important;padding-bottom:4px!important}
-.modalBody{padding-top:0!important}
-.modalBody .possessive-heading{margin-top:28px!important;margin-bottom:4px!important}
-
-
-    #homeBack {
-      background: #fff;
-      color: #222;
-      border: 1px solid rgba(0,0,0,.12);
-    }
-.done-actions {
-      width: min(100%, 440px);
-      margin: 20px auto 0;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-    }
-
-    #home, #homeBack {
-      width: 100%;
-      height: 56px;
-      border: 0;
-      border-radius: 17px;
-      font: inherit;
-      font-size: 16px;
-      font-weight: 650;
-      cursor: pointer;
-    }
-
-    #home {
-      background: rgba(255,255,255,.10);
-      color: rgba(238,231,220,.55);
-    }
-
-    #homeBack {
-      background: #ece6dc;
-      color: #1b1c1e;
-    }
-
-    #home:active, #homeBack:active {
-      transform: scale(.99);
-    }
+.done-actions{width:min(100%,440px);margin:20px auto 0;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#home,#homeBack{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer}
+#home{background:var(--home-bg);color:var(--home-text)}
+#homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
+#home:active,#homeBack:active{transform:scale(.99)}
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -100,7 +137,7 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </div></section>
 
 <section id="done" class="screen center hidden">
-<div class="brand" style="margin-bottom:45px">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
+<div class="brand brand-done">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
 <div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
 <div class="weak hidden" id="weak"></div>
 <div class="done-actions">
@@ -115,6 +152,10 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 <script src="pronouns.js"></script>
 <script>
 const $=x=>document.getElementById(x), data=window.PRONOUN_EXERCISES||[];
+function isTouchDevice(){
+  return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+}
+document.documentElement.classList.toggle('is-touch', isTouchDevice());
 const STATS_STORE='pronomenStatsV2';
 let statsStore={sessions:[]};
 try{statsStore=JSON.parse(localStorage.getItem(STATS_STORE)||'{"sessions":[]}')}catch(e){statsStore={sessions:[]}}
@@ -212,7 +253,7 @@ function weightedDeck(count){
   return selected.sort(()=>Math.random()-0.5);
 }
 function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionAnswers={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
-function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=x.translation;$('answerbox').innerHTML='<span class="placeholder">Type the missing form</span>';$('answerbox').style.display='flex';$('check').style.display=innerWidth>=700?'block':'none';$('feedback').className='feedback hidden';if(window.deutschKeyboardReady&&innerWidth<700)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
+function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=x.translation;$('answerbox').innerHTML='<span class="placeholder">Type the missing form</span>';$('answerbox').style.display='flex';$('check').style.removeProperty('display');$('feedback').className='feedback hidden';if(window.deutschKeyboardReady)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
 function paintAnswer(){ $('answerbox').textContent=answer||'' }
 function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;
 let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
@@ -299,10 +340,9 @@ async function loadKeyboardComponent(){
  for(const code of scripts){const s=document.createElement('script');s.textContent=code;document.body.appendChild(s)}
  const kb=$('keyboard');
  window.deutschKeyboardReady=true;
- if(innerWidth<700)kb.classList.add('show');
+ kb.classList.add('show');
  return true;
 }
-$('answerbox').onclick=()=>{if(innerWidth>=700){}};
 $('check').onclick=submit;
 const reference=`<table class="tbl"><tr><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessive*</th></tr><tr><td class="nom" data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer- (→ eur- before endings)</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)|Sie">ihr- / Ihr-</td></tr></table><div class="table-subtitle">Possessive endings</div><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">* Possessive: combine the base with the ending for the gender and case of the noun: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
 
