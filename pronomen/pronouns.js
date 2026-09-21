@@ -506,7 +506,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · er → sein · Akkusativ",
-    "context": "Paul sucht seine Brille.",
+    "context": "Paul hat eine Brille zum Lesen.",
     "sentence": "Er findet ___ Brille nicht.",
     "answer": "seine",
     "translation": "Он не может найти свои очки.",
@@ -605,7 +605,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Akkusativ",
-    "context": "Anna sucht ihre Karte.",
+    "context": "Anna braucht die Karte für den Termin.",
     "sentence": "Sie findet ___ Karte nicht.",
     "answer": "ihre",
     "translation": "Она не может найти свою карту.",
