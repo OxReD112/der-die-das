@@ -1148,7 +1148,14 @@ header h1 {
       let exercisePoints=0;
 
       configs.forEach(cfg=>{
-        const answers=answerCount(data[cfg.key]);
+        let answers=answerCount(data[cfg.key]);
+
+        if(cfg.key==='verbformen'){
+          const partizipII=Number(data.verbformen?.partizipII)||0;
+          const modalverben=Number(data.verbformen?.modalverben)||0;
+          answers=partizipII+modalverben;
+        }
+
         exercisePoints+=answers;
 
         const tile=document.querySelector(cfg.selector);
