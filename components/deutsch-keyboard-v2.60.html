@@ -1,11 +1,46 @@
 <!-- Reusable German keyboard component -->
 <style>
-.keyboard{--key:#303033;--keyline:rgba(255,255,255,.10)}
-.keyboard{display:none;width:100%;margin-top:20px;padding-top:12px;position:relative}.keyPopup{position:absolute;z-index:20;display:none;align-items:center;justify-content:center;pointer-events:none;width:48px;height:56px;border:1px solid transparent;border-radius:11px;background:#3a3a3e;color:#eee;font-size:25px;font-weight:500;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.18)}.keyPopup.show{display:flex}
-.keyboard.show{display:block}.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}.key{height:44px;width:calc((100% - 27px)/10);padding:0;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1;flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid transparent;border-radius:10px;background:var(--key);color:#eee;font-size:20px}.row.third{justify-content:flex-end}.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}.row.special{width:100%;justify-content:center;gap:3px}.row.special .key{color:#b8ddd2}.row.special .space{flex:1 1 auto;width:auto;color:#eee}.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:transparent;font-size:22px;font-weight:500}
-@media(max-width:699px){.keyboard .key{user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}.keyboard .key:active,.keyboard .key.is-pressed{transform:scale(1.08);background:#3a3a3e;border-color:transparent;position:relative;z-index:3}.keyboard .key.ok:active,.keyboard .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:#1b1d1c}}
-@media(max-width:699px){.keyboard{display:none}.keyboard.show{display:block}}
-@media(min-width:700px){.keyboard{display:none!important}}
+.keyboard{
+  /* ===== PALETTE (dark, default) — override these to theme the keyboard ===== */
+  --key:#303033;
+  --key-text:#eee;
+  --key-active-bg:#3a3a3e;
+  --special-text:#b8ddd2;
+  --mint:#43d2ad;
+  --ok-active-text:#fff;
+  --popup-bg:#3a3a3e;
+  --popup-text:#eee;
+
+  /* ===== LAYOUT ===== */
+  display:none;
+  width:100%;
+  margin-top:20px;
+  padding-top:12px;
+  position:relative;
+}
+
+/* Visible only when both are true: this is a touch device (detected once,
+   below, and marked with "is-touch") AND the host app wants it shown right
+   now (the "show" class, toggled per question). Neither class alone shows it. */
+.keyboard.is-touch.show{display:block}
+
+.keyPopup{position:absolute;z-index:20;display:none;align-items:center;justify-content:center;pointer-events:none;width:48px;height:56px;border:1px solid transparent;border-radius:11px;background:var(--popup-bg);color:var(--popup-text);font-size:25px;font-weight:500;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.18)}
+.keyPopup.show{display:flex}
+
+/* ===== ROWS & KEYS ===== */
+.row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}
+.key{height:44px;width:calc((100% - 27px)/10);padding:0;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1;flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid transparent;border-radius:10px;background:var(--key);color:var(--key-text);font-size:20px}
+.row.third{justify-content:flex-end}
+.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}
+.row.special{width:100%;justify-content:center;gap:3px}
+.row.special .key{color:var(--special-text)}
+.row.special .space{flex:1 1 auto;width:auto;color:var(--key-text)}
+.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:transparent;font-size:22px;font-weight:500}
+
+/* ===== PRESS FEEDBACK (touch only) ===== */
+.keyboard.is-touch .key{user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}
+.keyboard.is-touch .key:active,.keyboard.is-touch .key.is-pressed{transform:scale(1.08);background:var(--key-active-bg);border-color:transparent;position:relative;z-index:3}
+.keyboard.is-touch .key.ok:active,.keyboard.is-touch .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:var(--ok-active-text)}
 </style>
 <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
  <div class="row" data-keys="QWERTYUIOP"></div>
@@ -17,6 +52,12 @@
 (()=>{
  const kb=document.getElementById("keyboard"),popup=document.getElementById("keyPopup");
  if(!kb||!popup)return;
+
+ // This keyboard only ever appears on touch devices. Detected once here,
+ // rather than by the host page fighting viewport-width media queries.
+ const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+ if(isTouchDevice) kb.classList.add("is-touch");
+
  let hideTimer=0;
  const release=()=>{
    kb.querySelectorAll(".key.is-pressed").forEach(k=>k.classList.remove("is-pressed"));
