@@ -110,12 +110,48 @@ body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.20 · home navigation</div>
+<div class="version">v7.21 · stats logic</div>
 </main>
 <script src="pronouns.js"></script>
 <script>
 const $=x=>document.getElementById(x), data=window.PRONOUN_EXERCISES||[];
-const STORE='pronomenWeaknessV1'; let weak={}; try{weak=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){}
+const STATS_STORE='pronomenStatsV2';
+let statsStore={sessions:[]};
+try{statsStore=JSON.parse(localStorage.getItem(STATS_STORE)||'{"sessions":[]}')}catch(e){statsStore={sessions:[]}}
+if(!Array.isArray(statsStore.sessions))statsStore.sessions=[];
+const SESSION_WINDOW=5;
+const MIN_ATTEMPTS=2;
+const ERROR_THRESHOLD=.4;
+function saveStats(){try{localStorage.setItem(STATS_STORE,JSON.stringify(statsStore))}catch(e){}}
+function statKey(x){
+  if(x.type==='possessive'){
+    const gender=x.gender?` · ${x.gender}`:'';
+    return {root:`root · ${x.skill.split(' → ')[0]} →`, detail:`detail · ${x.skill}${gender}`, type:'possessive'};
+  }
+  return {root:`personal · ${x.skill}`, detail:`personal · ${x.skill}`, type:'personal'};
+}
+function currentStats(){
+  const map={};
+  for(let s=0;s<statsStore.sessions.length;s++){
+    const session=statsStore.sessions[s];
+    const weight=s+1;
+    for(const [key,v] of Object.entries(session.answers||{})){
+      if(!map[key])map[key]={correct:0,wrong:0,weightedCorrect:0,weightedWrong:0,attempts:0};
+      map[key].correct+=v.correct||0;
+      map[key].wrong+=v.wrong||0;
+      map[key].weightedCorrect+=(v.correct||0)*weight;
+      map[key].weightedWrong+=(v.wrong||0)*weight;
+      map[key].attempts+=(v.correct||0)+(v.wrong||0);
+    }
+  }
+  for(const v of Object.values(map)){
+    const total=v.weightedCorrect+v.weightedWrong;
+    v.errorRate=total?v.weightedWrong/total:0;
+    v.weak=v.attempts>=MIN_ATTEMPTS&&v.errorRate>=ERROR_THRESHOLD;
+  }
+  return map;
+}
+function isWeak(key){return !!currentStats()[key]?.weak}
 
 const DAILY_STATS_KEY='deutschDailyStatsV1';
 function localDateKey(){
@@ -133,12 +169,16 @@ function recordPronomenAnswer(){
  localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
 }
 
-let deck=[],i=0,n=10,answer='',correct=0,sessionWeak={};
+let deck=[],i=0,n=10,answer='',correct=0,sessionAnswers={};
 const norm=s=>s.trim().toLocaleLowerCase('de-DE').replace(/[.,!?;:]/g,'');
-function save(){try{localStorage.setItem(STORE,JSON.stringify(weak))}catch(e){}}
 function weightedPick(items,count){
+  const current=currentStats();
   return items
-    .map(x=>({x,k:-Math.log(Math.max(Math.random(),1e-9))/(1+(weak[x.skill]||0))}))
+    .map(x=>{
+      const keys=statKey(x);
+      const weakScore=(current[keys.detail]?.errorRate||0);
+      return {x,k:-Math.log(Math.max(Math.random(),1e-9))/(1+weakScore*4)};
+    })
     .sort((a,b)=>a.k-b.k)
     .slice(0,Math.min(count,items.length))
     .map(o=>o.x);
@@ -171,12 +211,47 @@ function weightedDeck(count){
   // Shuffle the selected exercises so the two types are genuinely mixed.
   return selected.sort(()=>Math.random()-0.5);
 }
-function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionWeak={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
+function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionAnswers={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
 function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=x.translation;$('answerbox').innerHTML='<span class="placeholder">Type the missing form</span>';$('answerbox').style.display='flex';$('check').style.display=innerWidth>=700?'block':'none';$('feedback').className='feedback hidden';if(window.deutschKeyboardReady&&innerWidth<700)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
 function paintAnswer(){ $('answerbox').textContent=answer||'' }
-function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();let detailKey=x.type==='possessive'&&x.gender?x.skill+' · '+x.gender:null;if(ok){correct++;weak[x.skill]=Math.max(0,(weak[x.skill]||0)-.25);if(detailKey)weak[detailKey]=Math.max(0,(weak[detailKey]||0)-.25)}else{weak[x.skill]=(weak[x.skill]||0)+1;if(detailKey)weak[detailKey]=(weak[detailKey]||0)+1;sessionWeak[x.skill]=(sessionWeak[x.skill]||0)+1}save();$('feedback').className='feedback '+(ok?'correct':'wrong');$('given').innerHTML=ok?`<span class="good">${answer}</span>`:`<span class="bad">${answer}</span>`;$('correctText').innerHTML=ok?'':`<span class="good">→ ${x.answer}</span>`;$('skill').textContent=x.skill+(x.type==='possessive'&&x.gender?' · '+x.gender:'');$('answerbox').style.display='none';$('check').style.display='none';if(window.deutschKeyboardReady)$('keyboard').classList.remove('show')}
+function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;
+let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
+const keys=statKey(x);
+if(x.type==='possessive'){
+  const expectedStem=x.skill.split(' → ')[1]?.split(' · ')[0]||'';
+  const input=norm(answer);
+  const stemOK=expectedStem && input.startsWith(expectedStem.toLocaleLowerCase('de-DE'));
+
+  // Root and ending are scored independently. If the stem itself is wrong,
+  // the ending is not assessed, so one mistake cannot falsely weaken both.
+  const rootV=sessionAnswers[keys.root]||{correct:0,wrong:0};
+  if(stemOK)rootV.correct++;else rootV.wrong++;
+  sessionAnswers[keys.root]=rootV;
+
+  if(stemOK){
+    const detailV=sessionAnswers[keys.detail]||{correct:0,wrong:0};
+    if(ok)detailV.correct++;else detailV.wrong++;
+    sessionAnswers[keys.detail]=detailV;
+  }
+}else{
+  const v=sessionAnswers[keys.detail]||{correct:0,wrong:0};
+  if(ok)v.correct++;else v.wrong++;
+  sessionAnswers[keys.detail]=v;
+}
+if(ok)correct++;
+$('feedback').className='feedback '+(ok?'correct':'wrong');$('given').innerHTML=ok?`<span class="good">${answer}</span>`:`<span class="bad">${answer}</span>`;$('correctText').innerHTML=ok?'':`<span class="good">→ ${x.answer}</span>`;$('skill').textContent=x.skill+(x.type==='possessive'&&x.gender?' · '+x.gender:'');$('answerbox').style.display='none';$('check').style.display='none';if(window.deutschKeyboardReady)$('keyboard').classList.remove('show')}
 function next(){i++;if(i>=deck.length){finish();return}render()}
-function finish(){$('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;let arr=Object.entries(sessionWeak).sort((a,b)=>b[1]-a[1]).slice(0,3);if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(x=>x[0]).join('<br>')}else $('weak').classList.add('hidden')}
+function finish(){
+  if(Object.keys(sessionAnswers).length){
+    statsStore.sessions.push({date:localDateKey(),answers:sessionAnswers});
+    if(statsStore.sessions.length>SESSION_WINDOW)statsStore.sessions=statsStore.sessions.slice(-SESSION_WINDOW);
+    saveStats();
+  }
+  $('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;
+  const current=currentStats();
+  const arr=Object.entries(current).filter(([,v])=>v.weak).sort((a,b)=>b[1].errorRate-a[1].errorRate).slice(0,3);
+  if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
+}
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
   function goBackToHome(){
   try{
@@ -232,37 +307,37 @@ $('check').onclick=submit;
 const reference=`<table class="tbl"><tr><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessive*</th></tr><tr><td class="nom" data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)|Sie">ihr- / Ihr-</td></tr></table><div class="table-subtitle">Possessive endings</div><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">* Possessive: combine the base with the ending for the gender and case of the noun: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
 
 function markWeakTable(){
-  const hard=Object.entries(weak).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
-  if(!hard.length)return;
-
-  const hasWeakPersonal=key=>hard.some(([k])=>k===key||k.startsWith(key+' ·'));
+  const weakKeys=currentStats();
+  const hasWeakPersonal=key=>isWeak(`personal · ${key}`);
   const hasWeakPossessive=(owner,cas,gender)=>{
     const owners=owner.split('|');
-    return hard.some(([k])=>{
-      const m=k.match(/^Possessiv · (.+?) → (.+?) · (Nominativ|Akkusativ|Dativ|Genitiv)(?: · (Maskulin|Feminin|Neutrum|Plural))?$/);
-      if(!m)return false;
-      const ownerKey=m[1],caseKey=m[3],genderKey=m[4];
-      return owners.includes(ownerKey) && (!cas||caseKey===cas) && (!gender||genderKey===gender);
-    });
+    return owners.some(o=>isWeak(`root · Possessiv · ${o} →`)||false) ||
+      Object.keys(weakKeys).some(k=>{
+        if(!weakKeys[k]?.weak||!k.startsWith('detail · Possessiv · '))return false;
+        const parts=k.slice('detail · '.length).split(' · ');
+        return owners.includes(parts[0]) && (!cas||parts.includes(cas)) && (!gender||parts.includes(gender));
+      });
   };
-
   document.querySelectorAll('#modalBody [data-focus]').forEach(td=>{
     if(hasWeakPersonal(td.dataset.focus))td.classList.add('hot');
   });
-
   document.querySelectorAll('#modalBody [data-owner]').forEach(td=>{
-    if(hasWeakPossessive(td.dataset.owner))td.classList.add('hot');
+    const owners=td.dataset.owner.split('|');
+    if(Object.keys(weakKeys).some(k=>{
+      if(!weakKeys[k]?.weak)return false;
+      if(!k.startsWith('root · Possessiv · '))return false;
+      return owners.some(o=>k.includes(` · ${o} →`));
+    }))td.classList.add('hot');
   });
-
   document.querySelectorAll('#modalBody [data-ending]').forEach(td=>{
     const [cas,gen]=td.dataset.ending.split('|');
     if(hasWeakPossessive('ich|du|er|sie|wir|ihr|sie(pl.)|Sie',cas,gen))td.classList.add('hot');
   });
-
   if(document.querySelector('#modalBody .hot')){
-    $('modalBody').insertAdjacentHTML('beforeend','<div class="focus-note">Highlighted forms are the ones your saved practice statistics currently find most difficult.</div>');
+    $('modalBody').insertAdjacentHTML('beforeend','<div class="focus-note">Highlighted forms are the ones your recent practice sessions currently find most difficult.</div>');
   }
 }
+
 document.querySelectorAll('[data-table]').forEach(b=>b.onclick=()=>{
   $('modalTitle').textContent='Pronomen';
   $('modalBody').innerHTML=reference;
