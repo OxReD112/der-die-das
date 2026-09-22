@@ -80,7 +80,7 @@ header {
   right: auto;
   width: min(calc(100% - 48px), 720px);
   transform: translateX(-50%);
-  z-index: 30;
+  z-index: 20;
   margin: 0;
   padding: 0;
   background: var(--bg);
@@ -666,6 +666,51 @@ header h1 {
   }
 }
 
+.backup-tools {
+  width: min(100%, 620px);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.backup-save {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  padding: 8px 12px;
+  background: transparent;
+  color: #66666b;
+  font: 500 12px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.backup-save:active {
+  color: #929298;
+}
+
+.backup-separator {
+  color: #66666b;
+  font: 500 12px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.backup-file {
+  display: none;
+}
+
+.backup-note {
+  min-height: 14px;
+  margin-top: 2px;
+  color: #55555a;
+  font-size: 10px;
+}
+
+.backup-note:empty {
+  min-height: 0;
+  margin-top: 0;
+}
+
+
 /* --------------------------------------------------------------------------
    Settings
    -------------------------------------------------------------------------- */
@@ -1021,7 +1066,7 @@ header h1 {
      </section>
     </div>
    </div>
-  </main>
+   </main>
   <div class="settings-layer" id="settingsLayer">
    <section aria-hidden="true" class="settings-panel" id="settingsPanel">
    <div class="settings-content">
