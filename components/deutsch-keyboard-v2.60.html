@@ -19,6 +19,20 @@
   position:relative;
 }
 
+/* Light theme — active only when something above this component in the
+   DOM (the host page's <html>) carries data-theme="light". This component
+   never decides its own theme; it just inherits whatever the host page set. */
+[data-theme="light"] .keyboard{
+  --key:#efece6;
+  --key-text:#242426;
+  --key-active-bg:#e2ded4;
+  --special-text:#2f8f78;
+  --mint:#2f9e82;
+  --ok-active-text:#fff;
+  --popup-bg:#fff;
+  --popup-text:#242426;
+}
+
 /* Visible only when both are true: this is a touch device (detected once,
    below, and marked with "is-touch") AND the host app wants it shown right
    now (the "show" class, toggled per question). Neither class alone shows it. */
