@@ -472,6 +472,7 @@ function check(){
    if(!queue.slice(idx+1).some(c=>c.id===current.id))queue.push(current);
  }
  save();
+ publishWortschatzStatus();
 }
 function showDone(){
  publishWortschatzStatus(true);
