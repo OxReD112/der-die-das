@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<script>
+(function(){
+  if(localStorage.getItem("deutschThemeV1")==="light"){
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -129,17 +136,6 @@
 </main>
 <script src="words.js"></script>
 <script>
-
-// Shared theme — controlled by Home Settings 
-(function initTheme(){
- const THEME_KEY="deutschThemeV1";
-  if(localStorage.getItem(THEME_KEY)==="light"){
-    document.documentElement.setAttribute("data-theme","light");
-  }else{
-    document.documentElement.removeAttribute("data-theme");
-  }
-})();
-    
 const words=window.WORDS;
 let deck=[],index=0,total=0,correct=0,sessionSize=0;
 const $=id=>document.getElementById(id);
