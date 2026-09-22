@@ -2,6 +2,13 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
+  <script>
+  (function(){
+    if(localStorage.getItem("deutschThemeV1")==="light"){
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17181a">
   <title>Verbformen.</title>
