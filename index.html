@@ -4,30 +4,130 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
   <meta content="#1b1b1d" name="theme-color"/>
+  <script>
+   window.DeutschTheme = (function(){
+     var THEME_KEY = "deutschThemeV1";
+     var DARK_META = "#1b1b1d";
+     var LIGHT_META = "#f6f4f1";
+
+     function isLight(){ return localStorage.getItem(THEME_KEY) === "light"; }
+
+     function setMeta(light){
+       var meta = document.querySelector('meta[name="theme-color"]');
+       if(meta) meta.setAttribute("content", light ? LIGHT_META : DARK_META);
+     }
+
+     // Icons live at the same path as their dark counterpart, named
+     // "icon_light.webp" instead of "icon.webp". The dark path is cached
+     // on first run so repeated theme switches never double-transform it.
+     function applyIcons(light){
+       document.querySelectorAll(".tile-art img").forEach(function(img){
+         if(!img.dataset.iconDark) img.dataset.iconDark = img.getAttribute("src");
+         if(!img.dataset.iconLight) img.dataset.iconLight = img.dataset.iconDark.replace(/icon\.webp$/, "icon_light.webp");
+         img.src = light ? img.dataset.iconLight : img.dataset.iconDark;
+       });
+     }
+
+     function apply(light){
+       if(light) document.documentElement.setAttribute("data-theme", "light");
+       else document.documentElement.removeAttribute("data-theme");
+       setMeta(light);
+       applyIcons(light);
+     }
+
+     function set(light){
+       localStorage.setItem(THEME_KEY, light ? "light" : "dark");
+       apply(light);
+     }
+
+     // Applied immediately so the page never paints the wrong theme.
+     // Icons can't be touched yet (the body hasn't parsed), so applyIcons()
+     // here is a no-op; the settings panel calls apply() again once ready.
+     if(isLight()) document.documentElement.setAttribute("data-theme", "light");
+
+     return {isLight: isLight, apply: apply, set: set};
+   })();
+  </script>
   <title>
    Deutsch
   </title>
   <style>
    :root {
-  /* Core palette */
+  /* ===== Core palette (dark, default) ===== */
   --bg: #1b1b1d;
   --text: #f2f0ed;
   --muted: #8f8f94;
   --mint: #55d7b5;
 
-  /* Card system */
+  /* ===== Card system ===== */
   --card-bg: rgba(255,255,255,.018);
   --card-bg-soft: rgba(255,255,255,.014);
   --card-border: rgba(255,255,255,.09);
   --card-radius: 25px;
+  --vocab-border: rgba(255,255,255,.10);
 
-  /* Completion glow */
+  /* ===== Completion glow ===== */
   --mint-core: rgba(104,235,195,.38);
   --mint-mid: rgba(78,220,181,.24);
 
-  /* Layout */
+  /* ===== Text roles ===== */
+  --label-text: #d8d6d2;
+  --strong-text: #f0efec;
+  --dim-text: #77777d;
+  --faint-text-1: rgba(190,189,186,.58);
+  --faint-text-2: rgba(190,189,186,.68);
+  --faint-text-3: rgba(169,167,163,.58);
+  --tertiary-text: #66666b;
+  --tertiary-text-active: #929298;
+  --quaternary-text: #55555a;
+
+  /* ===== Surfaces / overlays ===== */
+  --today-track: rgba(255,255,255,.09);
+  --tile-today-sheen: rgba(255,255,255,.025);
+  --back-btn-border: rgba(255,255,255,.07);
+  --toggle-track: rgba(255,255,255,.12);
+  --confirm-btn-border: rgba(255,255,255,.08);
+  --confirm-btn-bg: rgba(255,255,255,.025);
+  --confirm-scrim: rgba(0,0,0,.34);
+  --confirm-shadow: rgba(0,0,0,.22);
+
+  /* ===== Layout ===== */
   --dashboard-width: 430px;
   --mobile-dashboard-width: 350px;
+}
+
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --text: #242426;
+  --muted: #86868b;
+  --mint: #2f9e82;
+
+  --card-bg: rgba(0,0,0,.03);
+  --card-bg-soft: rgba(0,0,0,.025);
+  --card-border: rgba(0,0,0,.09);
+  --vocab-border: rgba(0,0,0,.10);
+
+  --mint-core: rgba(47,158,130,.30);
+  --mint-mid: rgba(47,158,130,.18);
+
+  --label-text: #4a4a4d;
+  --strong-text: #242426;
+  --dim-text: #8a8a8f;
+  --faint-text-1: rgba(60,60,58,.55);
+  --faint-text-2: rgba(60,60,58,.65);
+  --faint-text-3: rgba(60,60,58,.50);
+  --tertiary-text: #8a8a8f;
+  --tertiary-text-active: #58585c;
+  --quaternary-text: #9a9a9e;
+
+  --today-track: rgba(0,0,0,.09);
+  --tile-today-sheen: rgba(0,0,0,.025);
+  --back-btn-border: rgba(0,0,0,.08);
+  --toggle-track: rgba(0,0,0,.12);
+  --confirm-btn-border: rgba(0,0,0,.08);
+  --confirm-btn-bg: rgba(0,0,0,.025);
+  --confirm-scrim: rgba(0,0,0,.20);
+  --confirm-shadow: rgba(0,0,0,.14);
 }
 
 * {
@@ -156,7 +256,7 @@ header h1 {
   grid-template-columns: 1.08fr .92fr;
   align-items: center;
 
-  border-color: rgba(255,255,255,.10);
+  border-color: var(--vocab-border);
   background: var(--card-bg-soft);
   box-shadow: none;
   isolation: isolate;
@@ -171,7 +271,7 @@ header h1 {
   position: absolute;
   inset: 0;
   z-index: 2;
-  border-radius: 25px;
+  border-radius: var(--card-radius);
   pointer-events: none;
 }
 
@@ -248,28 +348,28 @@ header h1 {
 .mosaic .tile-vocab.is-done::before {
   background:
     radial-gradient(circle at 100% 0%,
-      rgba(69,218,178,.40) 0%,
-      rgba(69,218,178,.25) 14%,
-      rgba(69,218,178,.12) 28%,
-      rgba(69,218,178,.035) 42%,
+      color-mix(in srgb, var(--mint) 40%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 14%,
+      color-mix(in srgb, var(--mint) 12%, transparent) 28%,
+      color-mix(in srgb, var(--mint) 3.5%, transparent) 42%,
       transparent 55%),
     radial-gradient(circle at 0% 100%,
-      rgba(69,218,178,.58) 0%,
-      rgba(69,218,178,.36) 10%,
-      rgba(69,218,178,.17) 20%,
-      rgba(69,218,178,.05) 30%,
+      color-mix(in srgb, var(--mint) 58%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 36%, transparent) 10%,
+      color-mix(in srgb, var(--mint) 17%, transparent) 20%,
+      color-mix(in srgb, var(--mint) 5%, transparent) 30%,
       transparent 40%);
 }
 
 .mosaic .tile-vocab.is-done::after {
   background:
     radial-gradient(circle at 100% 0%,
-      rgba(69,218,178,.23) 0%,
-      rgba(69,218,178,.09) 16%,
+      color-mix(in srgb, var(--mint) 23%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 9%, transparent) 16%,
       transparent 31%),
     radial-gradient(circle at 0% 100%,
-      rgba(69,218,178,.25) 0%,
-      rgba(69,218,178,.10) 16%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 10%, transparent) 16%,
       transparent 31%);
 }
 
@@ -336,12 +436,12 @@ header h1 {
   text-align: center;
   background: linear-gradient(
     to bottom,
-    rgba(23,24,26,0) 0%,
-    rgba(23,24,26,.08) 12%,
-    rgba(23,24,26,.34) 32%,
-    rgba(23,24,26,.72) 58%,
-    rgba(23,24,26,.94) 82%,
-    rgba(23,24,26,.98) 100%
+    color-mix(in srgb, var(--bg) 0%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 8%, transparent) 12%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 32%,
+    color-mix(in srgb, var(--bg) 72%, transparent) 58%,
+    color-mix(in srgb, var(--bg) 94%, transparent) 82%,
+    color-mix(in srgb, var(--bg) 98%, transparent) 100%
   );
 }
 
@@ -388,8 +488,8 @@ header h1 {
     circle at 50% 50%,
     var(--mint-core) 0%,
     var(--mint-mid) 25%,
-    rgba(74,214,176,.10) 48%,
-    rgba(74,214,176,.035) 70%,
+    color-mix(in srgb, var(--mint) 10%, transparent) 48%,
+    color-mix(in srgb, var(--mint) 3.5%, transparent) 70%,
     transparent 82%
   );
 }
@@ -410,7 +510,7 @@ header h1 {
   border: 1px solid var(--card-border);
   border-radius: var(--card-radius);
   background:
-    radial-gradient(circle at 50% 34%, rgba(86,219,183,.055), transparent 64%),
+    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--mint) 5.5%, transparent), transparent 64%),
     var(--card-bg-soft);
   box-shadow: none;
   padding: 8px 10px;
@@ -429,7 +529,7 @@ header h1 {
   pointer-events: none;
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(255,255,255,.025),
+    var(--tile-today-sheen),
     transparent 58%
   );
 }
@@ -440,14 +540,14 @@ header h1 {
 }
 
 .today-label {
-  color: #d8d6d2;
+  color: var(--label-text);
   font-size: 12px;
   font-weight: 650;
 }
 
 .today-number {
   margin-top: 10px;
-  color: #f0efec;
+  color: var(--strong-text);
   font-size: 28px;
   line-height: 1;
   font-weight: 650;
@@ -465,7 +565,7 @@ header h1 {
   margin-top: 14px;
   overflow: hidden;
   border-radius: 99px;
-  background: rgba(255,255,255,.09);
+  background: var(--today-track);
 }
 
 .today-progress-fill {
@@ -535,7 +635,7 @@ header h1 {
 }
 
 .phrase-week-label {
-  color: #77777d;
+  color: var(--dim-text);
   font-size: 10px;
   line-height: 1.2;
   letter-spacing: .45px;
@@ -552,21 +652,21 @@ header h1 {
 
 .phrase-week-literal {
   margin-top: 6px;
-  color: rgba(190,189,186,.58);
+  color: var(--faint-text-1);
   font-size: 17px;
   line-height: 1.45;
 }
 
 .phrase-week-meaning {
   margin-top: 28px;
-  color: rgba(190,189,186,.68);
+  color: var(--faint-text-2);
   font-size: 18px;
   line-height: 1.45;
 }
 
 .phrase-week-example {
   margin-top: 18px;
-  color: rgba(169,167,163,.58);
+  color: var(--faint-text-3);
   font-size: 16px;
   line-height: 1.5;
   font-style: italic;
@@ -581,10 +681,10 @@ header h1 {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid rgba(255,255,255,.07);
+  border: 1px solid var(--back-btn-border);
   border-radius: 50%;
-  background: rgba(27,27,29,.58);
-  color: rgba(242,240,237,.62);
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
   font: 400 28px/42px -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   text-align: center;
   -webkit-backdrop-filter: blur(10px);
@@ -641,7 +741,7 @@ header h1 {
 
 .phrase-week-home-literal {
   margin-top: 1px;
-  color: rgba(190,189,186,.58);
+  color: var(--faint-text-1);
   font-size: 13px;
   line-height: 1.45;
 }
@@ -666,92 +766,50 @@ header h1 {
   }
 }
 
-/* --------------------------------------------------------------------------
-   Backup / utilities
-   -------------------------------------------------------------------------- */
-.home-utilities {
-  position: fixed;
-  left: 50%;
-  bottom: calc(env(safe-area-inset-bottom) + 28px);
-  transform: translateX(-50%);
-  width: min(calc(100% - 48px), 720px);
-  z-index: 10;
-  pointer-events: none;
-}
-
-.home-utilities .backup-tools,
-.home-utilities #notificationSettings {
-  pointer-events: auto;
-}
-
-.backup-tools {
-  width: min(100%, 620px);
-  margin: 0 auto;
-  text-align: center;
-}
-
-.backup-save {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  padding: 8px 12px;
-  background: transparent;
-  color: #66666b;
-  font: 500 12px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Helvetica Neue", Arial, sans-serif;
-  cursor: pointer;
-}
-
-.backup-save:active {
-  color: #929298;
-}
-
-.backup-separator {
-  color: #66666b;
-  font: 500 12px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Helvetica Neue", Arial, sans-serif;
-}
-
 .backup-file {
   display: none;
 }
 
-.backup-note {
-  min-height: 14px;
-  margin-top: 2px;
-  color: #55555a;
-  font-size: 10px;
-}
 
-.backup-note:empty {
-  min-height: 0;
-  margin-top: 0;
-}
+/* --------------------------------------------------------------------------
+   Settings
+   -------------------------------------------------------------------------- */
 
-#notificationSettings {
-  width: 100%;
-  margin-top: -10px;
-  text-align: center;
-}
-
-#notificationToggle {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  background: transparent;
-  color: #66666b;
-  font: 500 12px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Helvetica Neue", Arial, sans-serif;
-  cursor: pointer;
-  padding: 8px 12px;
-}
-
-#notificationNote {
-  min-height: 14px;
-  margin-top: 2px;
-  color: #55555a;
-  font-size: 10px;
-}
+.settings-layer{position:fixed;inset:0;z-index:10;pointer-events:none}
+.settings-panel{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;padding:calc(env(safe-area-inset-top) + 82px) max(24px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 32px) max(24px,env(safe-area-inset-left));background:var(--bg);transform:translateY(100%);transition:transform .42s cubic-bezier(.22,.61,.36,1);will-change:transform;overflow:auto;overscroll-behavior:contain;pointer-events:none}
+.settings-panel.is-open{transform:translateY(0);pointer-events:auto}
+.settings-launcher{position:absolute;right:50%;transform:translateX(50%);bottom:calc(env(safe-area-inset-bottom) + 28px);z-index:2;appearance:none;-webkit-appearance:none;border:0;padding:8px 12px;background:transparent;color:var(--tertiary-text);font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:1;transition:opacity .2s ease}
+.settings-launcher:active{color:var(--tertiary-text-active)}
+.home-settings-open .settings-launcher{opacity:0;pointer-events:none}
+.settings-content{width:min(100%,430px);padding-top:24px}
+.settings-title-row{position:relative;display:flex;align-items:center;justify-content:center}
+.settings-title{margin:0;text-align:center;font-size:22px;line-height:1.1;font-weight:700;letter-spacing:-.55px}
+.settings-close{position:absolute;right:0;top:50%;transform:translateY(-50%);appearance:none;-webkit-appearance:none;padding:0;border:0;background:transparent;color:color-mix(in srgb, var(--text) 62%, transparent);font:300 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-list{margin-top:54px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.settings-action{appearance:none;-webkit-appearance:none;width:100%;min-height:48px;padding:0;border:0;background:transparent;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-action-content{display:flex;align-items:baseline;gap:10px;min-width:0}
+.settings-action-note{color:var(--quaternary-text);font-size:10px;line-height:1.2;white-space:nowrap}
+#notificationNote{margin-top:6px}
+.settings-gap{height:48px}
+.settings-toggle{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;width:42px;height:25px;padding:0;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--muted);transition:transform .22s ease,background .22s ease}
+.settings-toggle[aria-checked="true"]{background:color-mix(in srgb, var(--mint) 30%, transparent)}
+.settings-toggle[aria-checked="true"]::after{transform:translateX(17px);background:var(--mint)}
+.settings-toggle:disabled{opacity:.5}
+.settings-confirm{position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;padding:24px;background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.settings-confirm.is-open{display:flex}
+.settings-confirm-card{width:min(100%,360px);padding:28px 24px 22px;border:1px solid var(--card-border);border-radius:var(--card-radius);background:var(--bg);text-align:center;box-shadow:0 20px 60px var(--confirm-shadow)}
+.settings-confirm-title{font-size:20px;line-height:1.2;font-weight:700}
+.settings-confirm-text{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.5}
+.settings-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.settings-confirm-button{appearance:none;-webkit-appearance:none;min-height:44px;border:1px solid var(--confirm-btn-border);border-radius:14px;background:var(--confirm-btn-bg);color:var(--text);font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-confirm-button:active{opacity:.65}
+.home-screen{transition:transform .42s cubic-bezier(.22,.61,.36,1),opacity .42s ease}
+.home-settings-open .home-screen{transform:translateY(-12vh);opacity:0;pointer-events:none}
+.settings-morph{position:fixed;left:0;top:0;z-index:6;display:flex;margin:0;padding:0;opacity:0;pointer-events:none;white-space:nowrap;transform-origin:top left;will-change:transform,opacity,color}
+@media(max-width:430px){.settings-content{width:min(100%,350px)}}
+@media(prefers-reduced-motion:reduce){.settings-panel,.settings-launcher,.home-screen{transition:none}}
 
 /* --------------------------------------------------------------------------
    Embedded exercise shell
@@ -828,10 +886,10 @@ header h1 {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid rgba(255,255,255,.07);
+  border: 1px solid var(--back-btn-border);
   border-radius: 50%;
-  background: rgba(27,27,29,.58);
-  color: rgba(242,240,237,.52);
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: color-mix(in srgb, var(--text) 52%, transparent);
   font: 400 22px/42px -apple-system, BlinkMacSystemFont, "SF Pro Display",
     sans-serif;
   text-align: center;
@@ -845,20 +903,6 @@ header h1 {
   display: inline-block;
   transform: scaleX(1.28);
   transform-origin: center;
-}
-
-.home-version {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: calc(env(safe-area-inset-bottom) + 10px);
-  z-index: 10;
-  text-align: center;
-  color: #55555a;
-  font-size: 11px;
-  line-height: 1;
-  letter-spacing: .35px;
-  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -895,9 +939,6 @@ header h1 {
 
   .dashboard.mosaic {
     width: min(100%, var(--mobile-dashboard-width));
-  }
-
-  .dashboard.mosaic {
     grid-template-rows: repeat(2, 121px);
     gap: 8px;
   }
@@ -942,7 +983,8 @@ header h1 {
 
 
 }
-  </style>
+.settings-version{margin-top:42px;margin-bottom:26px;color:color-mix(in srgb, var(--text) 42%, transparent);font:400 10px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:left}
+</style>
   <link href="icon.png" rel="icon" type="image/png"/>
   <link href="icon.png" rel="apple-touch-icon"/>
   <link href="manifest.webmanifest" rel="manifest"/>
@@ -1069,36 +1111,37 @@ header h1 {
      </section>
     </div>
    </div>
-   <div aria-label="Home utilities" class="home-utilities">
-    <div aria-label="Backup and restore" class="backup-tools">
-     <button class="backup-save" id="backupSave" type="button">
-      Backup
-     </button>
-     <span aria-hidden="true" class="backup-separator">
-      &nbsp;&nbsp;&middot;&nbsp;&nbsp;
-     </span>
-     <button class="backup-save" id="backupRestore" type="button">
-      Restore
-     </button>
+   </main>
+  <div class="settings-layer" id="settingsLayer">
+   <section aria-hidden="true" class="settings-panel" id="settingsPanel">
+   <div class="settings-content">
+    <div class="settings-title-row"><h2 class="settings-title">Settings</h2><button class="settings-close" id="settingsClose" type="button" aria-label="Close settings">×</button></div>
+    <div class="settings-list">
+     <button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button>
+     <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
-     <div aria-live="polite" class="backup-note" id="backupNote">
+     <div class="settings-gap"></div>
+     <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
+     <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
+     <div id="notificationSettings" hidden>
+      <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
+      <div id="notificationNote" class="settings-action-note"></div>
      </div>
     </div>
-    <div hidden="" id="notificationSettings">
-     <button aria-checked="false" id="notificationToggle" role="switch" type="button">
-      Notifications
-      <span id="notificationState">
-       OFF
-      </span>
-     </button>
-     <div id="notificationNote">
-     </div>
-    </div>
+    <div class="settings-version">Deutsch. version 5.17</div>
    </div>
-  </main>
-  <div aria-hidden="true" class="home-version">
-   Deutsch Home &middot; v5.5
+   </section>
+   <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
+   <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
   </div>
+  <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
+   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
+    <div class="settings-confirm-title" id="dailyLimitConfirmTitle">Are you sure?</div>
+    <div class="settings-confirm-text">You can keep practicing today without a daily limit.<br>It will turn on again automatically tomorrow.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button" id="dailyLimitNo" type="button">No</button><button class="settings-confirm-button" id="dailyLimitYes" type="button">Yes</button></div>
+   </div>
+  </div>
+
   <section aria-hidden="true" class="app-shell" id="appShell">
    <button aria-label="Home" class="home-back" id="homeBack" type="button">
     <span class="home-glyph">
@@ -1183,7 +1226,20 @@ header h1 {
       const d=new Date();
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     }
+
+    const DAILY_LIMIT_OFF_DATE_KEY="deutschDailyLimitOffDateV1";
+
+    function resetDailyLimitForNewDay(){
+      const today=localDayKey();
+      const offDate=localStorage.getItem(DAILY_LIMIT_OFF_DATE_KEY);
+
+      if(localStorage.getItem("deutschDailyLimitEnabledV1")==="0" && offDate && offDate!==today){
+        localStorage.setItem("deutschDailyLimitEnabledV1","1");
+        localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
+      }
+    }
     function renderDailyStats(){
+      resetDailyLimitForNewDay();
       let data={};
       try{ data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}'); }catch(e){}
       if(data.date!==localDayKey()) data={};
@@ -1221,7 +1277,6 @@ header h1 {
 
         if(status){
           status.textContent=done?'✓ fertig':`${Math.min(answers,cfg.goal)} / ${cfg.goal}`;
-          status.style.color=done?'var(--mint)':'';
         }
         if(tile) tile.classList.toggle('is-done',done);
       });
@@ -1240,7 +1295,8 @@ header h1 {
       document.getElementById('todayProgress').style.width=`${Math.min(points,100)}%`;
 
       const hardStopOverlay=document.getElementById('hardStopOverlay');
-      const hardStop=vocabDone && points>=150;
+      const dailyLimitEnabled=localStorage.getItem("deutschDailyLimitEnabledV1")!=="0";
+       const hardStop=dailyLimitEnabled && vocabDone && points>=150;
       if(hardStopOverlay){
         hardStopOverlay.classList.toggle('is-active',hardStop);
         hardStopOverlay.setAttribute('aria-hidden',hardStop?'false':'true');
@@ -1284,8 +1340,7 @@ header h1 {
     }
 
     back.addEventListener('click', closeApp);
-    renderDailyStats();
-  
+
 const HOME_STATS="deutschHomeStatsV1";
 
 function localDay(){
@@ -1304,16 +1359,11 @@ function syncHomeDashboard(){
     const done=!!(ws && ws.date===localDay() && ws.done);
     if(wsTile)wsTile.classList.toggle("is-done",done);
     if(wsStatus)wsStatus.textContent=done?"✓ fertig":((ws && ws.date===localDay() && Number.isFinite(Number(ws.remaining)) && Number(ws.remaining)>0)?`${Number(ws.remaining)} ${Number(ws.remaining)===1?"Wort":"Wörter"} übrig`:"noch offen");
-    if(done && wsStatus)wsStatus.style.color="var(--mint)";
-    if(!done && wsStatus)wsStatus.style.color="";
   }catch(e){}
 
-  /* Existing compact cards already expose their completion through their
-     visible status; mirror that into the subtle bottom glow. */
-  document.querySelectorAll(".tile-small").forEach(tile=>{
-    const txt=(tile.querySelector(".status")?.textContent||"").toLowerCase();
-    tile.classList.toggle("is-done",txt.includes("fertig")||txt.includes("✓"));
-  });
+  /* renderDailyStats() is the sole authority on the compact cards' .is-done
+     state and status text — it recomputes both right below, so nothing
+     needs to pre-mark them here. */
   renderDailyStats();
 }
 
@@ -1363,7 +1413,7 @@ function saveDeutschBackup(){
   try{
     const backup=buildDeutschBackup();
     if(Object.keys(backup.modules).length===0){
-      if(note)note.textContent="Noch kein Fortschritt gefunden.";
+      if(note)note.textContent="· No progress found";
       return;
     }
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
@@ -1375,9 +1425,9 @@ function saveDeutschBackup(){
     a.click();
     a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
-    if(note)note.textContent="Backup erstellt.";
+    if(note)note.textContent="· Backup created";
   }catch(e){
-    if(note)note.textContent="Backup konnte nicht erstellt werden.";
+    if(note)note.textContent="· Backup failed";
   }
 }
 
@@ -1399,7 +1449,7 @@ function validateDeutschBackup(backup){
 }
 
 async function restoreDeutschBackup(file){
-  const note=document.getElementById("backupNote");
+  const note=document.getElementById("restoreNote");
   try{
     const backup=JSON.parse(await file.text());
     const restorable=validateDeutschBackup(backup);
@@ -1409,7 +1459,7 @@ async function restoreDeutschBackup(file){
       : "unknown date";
     const moduleLabel=restorable.map(([name])=>name==="wortschatz"?"Wortschatz":name).join(", ");
     if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
-      if(note)note.textContent="Restore cancelled.";
+      if(note)note.textContent="· Restore cancelled";
       return;
     }
     restorable.forEach(([,config,state])=>{
@@ -1442,10 +1492,10 @@ async function restoreDeutschBackup(file){
       }catch(e){}
     }
 
-    if(note)note.textContent="Restore complete.";
+    if(note)note.textContent="· Restore complete";
     syncHomeDashboard();
   }catch(e){
-    if(note)note.textContent="This backup cannot be restored.";
+    if(note)note.textContent="· Restore failed";
   }
 }
 
@@ -1534,7 +1584,6 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     const on=enabled();
     state.textContent=on?"ON":"OFF";
     toggle.setAttribute("aria-checked",on?"true":"false");
-    toggle.style.color="#66666b";
   }
 
   function base64ToBytes(value){
@@ -1613,8 +1662,165 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     }
   });
 
+  resetDailyLimitForNewDay();
   render();
 })();
-  </script>
+  
+(function initDeutschSettings(){
+  const open=document.getElementById("settingsOpen");
+  const panel=document.getElementById("settingsPanel");
+  const title=document.getElementById("settingsPanel")?.querySelector(".settings-title");
+  const ghost=document.getElementById("settingsMorph");
+  const close=document.getElementById("settingsClose");
+  const theme=document.getElementById("themeToggle");
+  const limit=document.getElementById("dailyLimitToggle");
+  const confirm=document.getElementById("dailyLimitConfirm");
+  const no=document.getElementById("dailyLimitNo");
+  const yes=document.getElementById("dailyLimitYes");
+  const LIMIT_KEY="deutschDailyLimitEnabledV1";
+
+  const limitOn=()=>localStorage.getItem(LIMIT_KEY)!=="0";
+
+  function render(){
+    resetDailyLimitForNewDay();
+    theme.setAttribute("aria-checked",window.DeutschTheme.isLight()?"true":"false");
+    limit.setAttribute("aria-checked",limitOn()?"true":"false");
+  }
+
+  /* Word-morph animation: the "Settings" launcher word flies up, scales and
+     brightens into the panel's header title (and reverses on close), instead
+     of just appearing/disappearing as the panel slides. Font-size is never
+     animated directly (expensive, can look jerky) — the ghost is rendered at
+     the destination's true size and transformed to visually sit at the
+     origin, then that transform animates back to identity. */
+  const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canMorph=!reduceMotion && open && panel && title && ghost;
+
+  function rectAsIfOpen(){
+    // While the panel is closed it sits translateY(100%) — i.e. shifted
+    // down by exactly its own rendered height — so the title's on-screen
+    // position once open is simply its current rect shifted up by that.
+    const r=title.getBoundingClientRect();
+    const h=panel.offsetHeight;
+    return {left:r.left, top:r.top-h, width:r.width, height:r.height};
+  }
+
+  function flyGhost(from,to,fromColor,toColor,onDone){
+    ghost.style.transition="none";
+    ghost.style.left=to.left+"px";
+    ghost.style.top=to.top+"px";
+    ghost.style.width=to.width+"px";
+    ghost.style.height=to.height+"px";
+    ghost.style.alignItems="center";
+    ghost.style.justifyContent="center";
+    ghost.style.fontSize=getComputedStyle(title).fontSize;
+    ghost.style.fontWeight=getComputedStyle(title).fontWeight;
+    ghost.style.letterSpacing=getComputedStyle(title).letterSpacing;
+    ghost.style.color=fromColor;
+    ghost.style.opacity="1";
+
+    const scaleX=from.width/to.width;
+    const scaleY=from.height/to.height;
+    const dx=(from.left+from.width/2)-(to.left+to.width/2);
+    const dy=(from.top+from.height/2)-(to.top+to.height/2);
+    ghost.style.transform=`translate(${dx}px,${dy}px) scale(${scaleX},${scaleY})`;
+
+    void ghost.offsetWidth; // flush so the start state above actually renders
+
+    ghost.style.transition="transform .42s cubic-bezier(.22,.61,.36,1), color .3s ease";
+    ghost.style.transform="translate(0,0) scale(1,1)";
+    ghost.style.color=toColor;
+
+    let done=false;
+    const finish=()=>{
+      if(done) return;
+      done=true;
+      ghost.style.opacity="0";
+      onDone();
+    };
+    ghost.addEventListener("transitionend",finish,{once:true});
+    setTimeout(finish,460); // safety net if transitionend never fires
+  }
+
+  function playOpenMorph(){
+    // Measured while still closed, so the subtraction trick above holds.
+    const from=open.getBoundingClientRect();
+    const to=rectAsIfOpen();
+    const fromColor=getComputedStyle(open).color;
+    const toColor=getComputedStyle(title).color;
+    title.style.visibility="hidden";
+    flyGhost(from,to,fromColor,toColor,()=>{ title.style.visibility=""; });
+  }
+
+  function playCloseMorph(){
+    // Measured while still open, so no adjustment is needed here.
+    const from=title.getBoundingClientRect();
+    const to=open.getBoundingClientRect();
+    const fromColor=getComputedStyle(title).color;
+    const toColor=getComputedStyle(open).color;
+    open.style.visibility="hidden";
+    flyGhost(from,to,fromColor,toColor,()=>{ open.style.visibility=""; });
+  }
+
+  function openSettings(){
+    if(canMorph) playOpenMorph();
+    document.documentElement.classList.add("home-settings-open");
+    panel.classList.add("is-open");
+    panel.setAttribute("aria-hidden","false");
+    open?.setAttribute("aria-expanded","true");
+  }
+  function closeSettings(){
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    if(canMorph) playCloseMorph();
+    panel.classList.remove("is-open");
+    panel.setAttribute("aria-hidden","true");
+    document.documentElement.classList.remove("home-settings-open");
+    open?.setAttribute("aria-expanded","false");
+  }
+
+  open?.addEventListener("click",()=>{ panel.classList.contains("is-open") ? closeSettings() : openSettings(); });
+  close?.addEventListener("click",closeSettings);
+
+  theme?.addEventListener("click",()=>{
+    window.DeutschTheme.set(!window.DeutschTheme.isLight());
+    render();
+  });
+
+  limit?.addEventListener("click",()=>{
+    if(limitOn()){
+      confirm.classList.add("is-open");
+      confirm.setAttribute("aria-hidden","false");
+    }else{
+      localStorage.setItem(LIMIT_KEY,"1");
+      localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
+      renderDailyStats();
+      render();
+    }
+  });
+
+  no?.addEventListener("click",()=>{
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    render();
+  });
+
+  yes?.addEventListener("click",()=>{
+    localStorage.setItem(LIMIT_KEY,"0");
+    localStorage.setItem(DAILY_LIMIT_OFF_DATE_KEY,localDayKey());
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    renderDailyStats();
+    render();
+  });
+
+  // The early <head> script already set data-theme before first paint (to
+  // avoid a flash), but couldn't touch icons — the DOM didn't exist yet.
+  // Apply the full theme now, including icons, now that it does.
+  window.DeutschTheme.apply(window.DeutschTheme.isLight());
+  render();
+})();
+
+</script>
  </body>
 </html>
