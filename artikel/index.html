@@ -129,6 +129,17 @@
 </main>
 <script src="words.js"></script>
 <script>
+
+// Shared theme — controlled by Home Settings 
+(function initTheme(){
+ const THEME_KEY="deutschThemeV1";
+  if(localStorage.getItem(THEME_KEY)==="light"){
+    document.documentElement.setAttribute("data-theme","light");
+  }else{
+    document.documentElement.removeAttribute("data-theme");
+  }
+})();
+    
 const words=window.WORDS;
 let deck=[],index=0,total=0,correct=0,sessionSize=0;
 const $=id=>document.getElementById(id);
