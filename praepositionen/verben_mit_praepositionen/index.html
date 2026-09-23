@@ -109,7 +109,12 @@ p{line-height:1.5}
 .options{display:flex;justify-content:center;gap:10px;margin:28px 0}
 .btn,.size{border:1px solid var(--line);background:var(--key);color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer;font-family:inherit}
 .size{font-size:22px;min-width:82px}
-.btn:active,.size:active{transform:scale(.98)}
+.btn:active{transform:scale(.98)}
+/* Session-size buttons (10/20/30): same look as the case buttons, larger numbers. */
+.size{border:0;border-radius:14px;background:var(--button-bg);color:var(--button-text);font-weight:650;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+.size:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+.size:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
+.size:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 
 /* ===== TOP BAR ===== */
 .top{display:flex;justify-content:space-between;align-items:center;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}
@@ -291,7 +296,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   </div>
 </section>
 
-<div class="version">v3.0 · Test 2: Frage oben, Buttons unten</div>
+<div class="version">v3.1 · Verben mit Präpositionen</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
