@@ -203,6 +203,33 @@ header h1 {
   text-align: center;
 }
 
+/* Personal greeting (v5.18): replaces the static intro line.
+   Always reserves two lines of height so the tiles never jump.
+   Line 1 = intro style, line 2 = smaller and softer. Max. 240px wide.
+   Phrases live in greetings.js; rules in Documentation/PERSONAL_GREETINGS.md */
+.intro.greeting {
+  width: min(100%, 240px);
+  min-height: calc(15px * 1.4 + 2px + 13px * 1.4);
+  margin: 0 auto 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .25s ease;
+}
+.intro.greeting.is-fading { opacity: 0; }
+.greeting-line { display: block; white-space: nowrap; }
+.greeting-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--tertiary-text);
+  white-space: nowrap;
+}
+.greeting-sub:empty { display: none; }
+@media (prefers-reduced-motion: reduce) { .intro.greeting { transition: none; } }
+
 /* --------------------------------------------------------------------------
    Dashboard
    -------------------------------------------------------------------------- */
@@ -940,6 +967,9 @@ header h1 {
 .settings-action-note{color:var(--quaternary-text);font-size:10px;line-height:1.2;white-space:nowrap}
 #notificationNote{margin-top:6px}
 .settings-gap{height:48px}
+.settings-name-wrap{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
+.settings-name{appearance:none;-webkit-appearance:none;width:114.3%;max-width:228px;margin:0;flex:0 0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:var(--label-text);font:500 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:right;transform:scale(.875);transform-origin:right center;outline:none;caret-color:var(--mint)}
+.settings-name::placeholder{color:var(--quaternary-text);opacity:1}
 .settings-toggle{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;width:42px;height:25px;padding:0;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--muted);transition:transform .22s ease,background .22s ease}
 .settings-toggle[aria-checked="true"]{background:color-mix(in srgb, var(--mint) 30%, transparent)}
@@ -1161,14 +1191,15 @@ header h1 {
         Ruh dich aus, mach etwas Schönes<br>
         und komm morgen wieder.
         <span class="hard-stop-warm">
-          <strong>Ich freue mich auf dich.</strong><br>
+          <strong id="hardStopWarmLine">Ich freue mich auf dich.</strong><br>
           ♡
         </span>
       </div>
     </div>
   </div>
-   <p class="intro">
-    Was m&ouml;chtest du heute &uuml;ben?
+   <p class="intro greeting" id="greeting" aria-live="polite">
+    <span class="greeting-line" id="greetingLine">Was m&ouml;chtest du heute &uuml;ben?</span>
+    <span class="greeting-sub" id="greetingSub"></span>
    </p>
    <section aria-label="&Uuml;bungen" class="dashboard mosaic tile-pager">
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
@@ -1304,6 +1335,7 @@ header h1 {
      <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
      <div class="settings-gap"></div>
+     <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
      <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
      <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
      <div id="notificationSettings" hidden>
@@ -1311,7 +1343,7 @@ header h1 {
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
     </div>
-    <div class="settings-version">Deutsch. version 5.17</div>
+    <div class="settings-version">Deutsch. version 5.18</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1335,6 +1367,8 @@ header h1 {
    </iframe>
   </section>
   <script src="phrases.js">
+  </script>
+  <script src="greetings.js">
   </script>
   <script>
        /* Phrase of the Week — data lives in phrases.js.
@@ -1411,6 +1445,98 @@ header h1 {
     }
 
     const DAILY_LIMIT_OFF_DATE_KEY="deutschDailyLimitOffDateV1";
+
+    /* Personal greeting v1 — see Documentation/PERSONAL_GREETINGS.md */
+    const PROFILE_KEY="deutschProfileV1";
+    const GREETING_MAX_WIDTH=240;
+
+    function getUserName(){
+      try{
+        const profile=JSON.parse(localStorage.getItem(PROFILE_KEY)||"{}");
+        return typeof profile.name==="string" ? profile.name.trim().slice(0,20) : "";
+      }catch(e){ return ""; }
+    }
+
+    function setUserName(name){
+      const clean=String(name||"").replace(/\s+/g," ").trim().slice(0,20);
+      try{
+        if(clean) localStorage.setItem(PROFILE_KEY,JSON.stringify({name:clean}));
+        else localStorage.removeItem(PROFILE_KEY);
+      }catch(e){}
+    }
+
+    function greetingState(points,vocabDone,hour){
+      if(hour>=23 || hour<5) return "lateNight";
+      if(points>=120) return "bonus";
+      if(points>=100) return "goal";
+      if(vocabDone) return "vocabDone";
+      if(points>=50) return "halfway";
+      if(points>=1) return "started";
+      if(hour<11) return "morning";
+      if(hour<18) return "daytime";
+      return "evening";
+    }
+
+    /* Same state on the same day always gives the same phrase. */
+    function dailyIndex(seed,length){
+      let h=2166136261;
+      for(let i=0;i<seed.length;i++){ h^=seed.charCodeAt(i); h=Math.imul(h,16777619); }
+      return (h>>>0)%length;
+    }
+
+    const greetingCanvas=document.createElement("canvas").getContext("2d");
+    function lineFits(text,element){
+      if(!element || !greetingCanvas) return true;
+      const cs=getComputedStyle(element);
+      greetingCanvas.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const box=document.getElementById("greeting");
+      const max=Math.min(GREETING_MAX_WIDTH, box && box.clientWidth ? box.clientWidth : GREETING_MAX_WIDTH);
+      return greetingCanvas.measureText(text).width<=max;
+    }
+
+    let greetingKey=null;
+    function renderGreeting(points,vocabDone){
+      const data=window.GREETINGS;
+      const box=document.getElementById("greeting");
+      const line=document.getElementById("greetingLine");
+      const sub=document.getElementById("greetingSub");
+      const name=getUserName();
+
+      const warm=document.getElementById("hardStopWarmLine");
+      if(warm && data && data.hardStop){
+        warm.textContent=name ? data.hardStop.name.replace("{name}",name) : data.hardStop.noName;
+      }
+
+      if(!data || !box || !line || !sub) return;
+      const state=greetingState(points,vocabDone,new Date().getHours());
+      const list=data[state];
+      if(!Array.isArray(list) || list.length===0) return;
+      const index=dailyIndex(`${localDayKey()}|${state}`,list.length);
+      const entry=list[index];
+
+      let lines=entry.lines;
+      if(!lines){
+        lines=entry.noName;
+        if(name){
+          const named=entry.name.map(l=>l.replace("{name}",name));
+          if(named.every((l,i)=>lineFits(l,i===0?line:sub))) lines=named;
+        }
+      }
+
+      const key=`${state}|${index}|${lines.join("|")}`;
+      if(key===greetingKey) return;
+      const first=greetingKey===null;
+      greetingKey=key;
+
+      const apply=()=>{
+        line.textContent=lines[0]||"";
+        sub.textContent=lines[1]||"";
+      };
+      const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(first || reduce){ apply(); return; }
+      box.classList.add("is-fading");
+      setTimeout(()=>{ apply(); box.classList.remove("is-fading"); },250);
+    }
 
     function resetDailyLimitForNewDay(){
       const today=localDayKey();
@@ -1490,6 +1616,8 @@ header h1 {
         hardStopOverlay.classList.toggle('is-active',hardStop);
         hardStopOverlay.setAttribute('aria-hidden',hardStop?'false':'true');
       }
+
+      renderGreeting(points,vocabDone);
     }
 
     window.addEventListener('message', event => {
@@ -1619,6 +1747,10 @@ const BACKUP_MODULES={
   wortschatz:{
     storageKey:"wortsternSRSv03",
     storageVersion:"wortsternSRSv03"
+  },
+  profile:{
+    storageKey:"deutschProfileV1",
+    storageVersion:"deutschProfileV1"
   }
 };
 
@@ -1691,7 +1823,7 @@ async function restoreDeutschBackup(file){
     const dateLabel=created&&!Number.isNaN(created.getTime())
       ? created.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})
       : "unknown date";
-    const moduleLabel=restorable.map(([name])=>name==="wortschatz"?"Wortschatz":name).join(", ");
+    const moduleLabel=restorable.map(([name])=>name==="wortschatz"?"Wortschatz":name==="profile"?"Name":name).join(", ");
     if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
       if(note)note.textContent="· Restore cancelled";
       return;
@@ -1727,6 +1859,8 @@ async function restoreDeutschBackup(file){
     }
 
     if(note)note.textContent="· Restore complete";
+    const nameField=document.getElementById("nameInput");
+    if(nameField)nameField.value=getUserName();
     syncHomeDashboard();
   }catch(e){
     if(note)note.textContent="· Restore failed";
@@ -1912,6 +2046,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
   const no=document.getElementById("dailyLimitNo");
   const yes=document.getElementById("dailyLimitYes");
   const LIMIT_KEY="deutschDailyLimitEnabledV1";
+  const nameInput=document.getElementById("nameInput");
 
   const limitOn=()=>localStorage.getItem(LIMIT_KEY)!=="0";
 
@@ -1919,6 +2054,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     resetDailyLimitForNewDay();
     theme.setAttribute("aria-checked",window.DeutschTheme.isLight()?"true":"false");
     limit.setAttribute("aria-checked",limitOn()?"true":"false");
+    if(nameInput && document.activeElement!==nameInput) nameInput.value=getUserName();
   }
 
   /* Word-morph animation: the "Settings" launcher word flies up, scales and
@@ -1997,6 +2133,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
   }
 
   function openSettings(){
+    render();
     if(canMorph) playOpenMorph();
     document.documentElement.classList.add("home-settings-open");
     panel.classList.add("is-open");
@@ -2004,6 +2141,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     open?.setAttribute("aria-expanded","true");
   }
   function closeSettings(){
+    nameInput?.blur();
     confirm.classList.remove("is-open");
     confirm.setAttribute("aria-hidden","true");
     if(canMorph) playCloseMorph();
@@ -2015,6 +2153,15 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
 
   open?.addEventListener("click",()=>{ panel.classList.contains("is-open") ? closeSettings() : openSettings(); });
   close?.addEventListener("click",closeSettings);
+
+  nameInput?.addEventListener("input",()=>{
+    setUserName(nameInput.value);
+    renderDailyStats();
+  });
+  nameInput?.addEventListener("keydown",event=>{
+    if(event.key==="Enter"){ event.preventDefault(); nameInput.blur(); }
+  });
+  nameInput?.addEventListener("blur",()=>{ nameInput.value=getUserName(); });
 
   theme?.addEventListener("click",()=>{
     window.DeutschTheme.set(!window.DeutschTheme.isLight());
