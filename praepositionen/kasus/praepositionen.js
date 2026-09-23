@@ -66,7 +66,7 @@ window.PRAEPOSITIONEN = [
     "exampleTranslation": "Мы сидим за столом."
   },
   {
-    "preposition": "entlang",
+    "preposition": "… entlang",
     "translation": "вдоль",
     "cases": [
       {
@@ -74,22 +74,25 @@ window.PRAEPOSITIONEN = [
         "status": "standard"
       }
     ],
-    "note": "В рассматриваемом списке указано как nachgestellt: die Straße entlang.",
     "example": "Er geht die Straße entlang.",
     "exampleTranslation": "Он идёт вдоль улицы."
   },
   {
-    "preposition": "wider",
-    "translation": "против, вопреки",
+    "preposition": "entlang …",
+    "translation": "вдоль",
     "cases": [
       {
-        "case": "Akkusativ",
+        "case": "Genitiv",
         "status": "standard"
+      },
+      {
+        "case": "Dativ",
+        "status": "also_correct"
       }
     ],
-    "note": "Книжный/формальный вариант.",
-    "example": "Das geschah wider seinen Willen.",
-    "exampleTranslation": "Это произошло против его воли."
+    "note": "Dativ также возможен, но реже.",
+    "example": "Entlang des Flusses stehen alte Bäume.",
+    "exampleTranslation": "Вдоль реки стоят старые деревья."
   },
   {
     "preposition": "aus",
@@ -253,16 +256,16 @@ window.PRAEPOSITIONEN = [
     "cases": [
       {
         "case": "Genitiv",
-        "status": "formal"
+        "status": "standard"
       },
       {
         "case": "Dativ",
         "status": "colloquial"
       }
     ],
-    "note": "Genitiv ist die formellere Variante; Dativ wird besonders in der gesprochenen Sprache verwendet.",
-    "example": "Laut einem Bericht ist er zurückgetreten.",
-    "exampleTranslation": "Согласно одному из сообщений, он ушёл в отставку."
+    "note": "В разговорной речи также используется Dativ.",
+    "example": "Laut des Berichts ist er zurückgetreten.",
+    "exampleTranslation": "Согласно сообщению, он ушёл в отставку."
   },
   {
     "preposition": "mitsamt",
@@ -393,54 +396,6 @@ window.PRAEPOSITIONEN = [
     "exampleTranslation": "Благодаря его помощи мы справились."
   },
   {
-    "preposition": "infolge",
-    "translation": "вследствие",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Infolge des Unfalls musste die Straße gesperrt werden.",
-    "exampleTranslation": "Вследствие аварии дорогу пришлось перекрыть."
-  },
-  {
-    "preposition": "mangels",
-    "translation": "за неимением, из-за отсутствия",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Mangels Beweisen wurde er freigesprochen.",
-    "exampleTranslation": "За отсутствием доказательств его оправдали."
-  },
-  {
-    "preposition": "kraft",
-    "translation": "в силу, на основании",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Kraft seines Amtes entschied er allein.",
-    "exampleTranslation": "В силу своей должности он принял решение."
-  },
-  {
-    "preposition": "mittels",
-    "translation": "посредством, с помощью",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Mittels eines Schlüssels.",
-    "exampleTranslation": "С помощью ключа."
-  },
-  {
     "preposition": "mithilfe",
     "translation": "с помощью",
     "cases": [
@@ -475,66 +430,6 @@ window.PRAEPOSITIONEN = [
     ],
     "example": "Angesichts der Lage müssen wir handeln.",
     "exampleTranslation": "Учитывая ситуацию, мы должны действовать."
-  },
-  {
-    "preposition": "anlässlich",
-    "translation": "по случаю",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Anlässlich seines Geburtstags.",
-    "exampleTranslation": "По случаю его дня рождения."
-  },
-  {
-    "preposition": "zwecks",
-    "translation": "с целью",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Zwecks einer Überprüfung.",
-    "exampleTranslation": "С целью проверки."
-  },
-  {
-    "preposition": "seitens",
-    "translation": "со стороны",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Seitens der Regierung.",
-    "exampleTranslation": "Со стороны правительства."
-  },
-  {
-    "preposition": "vonseiten",
-    "translation": "со стороны",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Vonseiten der Regierung.",
-    "exampleTranslation": "Со стороны правительства."
-  },
-  {
-    "preposition": "ungeachtet",
-    "translation": "несмотря на, невзирая на",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Ungeachtet aller Warnungen.",
-    "exampleTranslation": "Несмотря на все предупреждения."
   },
   {
     "preposition": "binnen",
