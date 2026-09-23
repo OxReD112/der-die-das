@@ -96,7 +96,7 @@ button{font:inherit}
 .progress i{display:block;height:100%;width:0;background:var(--progress);border-radius:inherit;transition:width .25s ease}
 .card{margin-top:15px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--shadow);padding:30px 24px 25px;min-height:365px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
 .card:before{content:"";position:absolute;inset:0;background:var(--card-sheen);pointer-events:none}
-.preposition{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(64px,18vw,88px);letter-spacing:-3px;line-height:1;margin-bottom:14px}
+.preposition{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(52px,14vw,88px);white-space:nowrap;letter-spacing:-3px;line-height:1;margin-bottom:14px}
 .translation{position:relative;color:var(--text-secondary);font-size:16px;line-height:1.4;min-height:23px}
 .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
 
@@ -111,7 +111,7 @@ button{font:inherit}
 @keyframes glowIn{from{opacity:0}}
 .answer-card-main>*{position:relative}
 .answer-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.10em;color:var(--mint);font-weight:650;margin-bottom:22px}
-.answer-preposition{font-family:Georgia,"Times New Roman",serif;font-size:clamp(50px,13vw,70px);line-height:1;letter-spacing:-3px}
+.answer-preposition{font-family:Georgia,"Times New Roman",serif;font-size:clamp(44px,11.5vw,70px);white-space:nowrap;line-height:1;letter-spacing:-3px}
 .answer-divider{width:42px;height:1px;background:var(--line);margin:20px 0}
 .answer-case-large{font-size:30px;font-weight:700;letter-spacing:-.03em}
 .answer-note{margin-top:10px;max-width:410px;color:var(--text-secondary);font-size:13px;line-height:1.4}
@@ -179,7 +179,7 @@ button{font:inherit}
     <button class="home-back" id="homeBack">Back to Home</button>
   </div>
 </section>
-<div class="version-mark">v5</div>
+<div class="version-mark">v6</div>
 </main>
 
 <script src="praepositionen.js"></script>
@@ -279,7 +279,25 @@ function render(){
   els.answerState.classList.add("hidden");
   els.next.classList.add("hidden");
   els.choices.classList.remove("hidden");
+  fitToCard(els.preposition);
 }
+
+// ===== FIT LONG PREPOSITIONS =====
+// Keeps the CSS size for words that fit; shrinks only a word that is wider
+// than its card (e.g. "entsprechend" on small phones).
+function fitToCard(el){
+  el.style.fontSize="";
+  const card=el.parentElement,cs=getComputedStyle(card);
+  const available=card.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const width=el.getBoundingClientRect().width;
+  if(width>available&&available>0){
+    el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)*available/width*0.97)+"px";
+  }
+}
+window.addEventListener("resize",()=>{
+  if(els.game.classList.contains("hidden"))return;
+  fitToCard(answered?els.answerPreposition:els.preposition);
+});
 function answer(selected){
   if(answered)return;
   answered=true;
@@ -321,6 +339,7 @@ function answer(selected){
   els.exampleTranslation.textContent=entry.exampleTranslation||"";
   els.next.textContent=index===session.length-1?"Finish":"Continue";
   els.bar.style.width=((index+1)/session.length*100)+"%";
+  fitToCard(els.answerPreposition);
   animateReveal(fromRect);
 }
 
