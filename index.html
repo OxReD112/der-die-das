@@ -217,45 +217,66 @@ header h1 {
   gap: var(--tile-gap);
 }
 
-/* Top row: Wortschatz (2 columns) + Heute */
-.dashboard-top {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: var(--tile-row);
-  gap: var(--tile-gap);
-}
-
-/* Bottom row: horizontally scrollable exercise tiles.
-   Each tile is exactly one top-grid column wide, so with 3 tiles
-   the row looks like the old grid; more tiles make it scroll. */
-.exercise-rail {
+/* Paged tile block (iPhone home-screen style).
+   Each page is a 3x2 grid. The block scrolls horizontally and snaps
+   one whole page at a time (scroll-snap-stop: always = never skip pages). */
+.tile-pager {
   position: relative;
 }
 
-.exercise-row {
+.tile-pages {
   display: flex;
   gap: var(--tile-gap);
-  height: var(--tile-row);
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  border-radius: var(--card-radius);
 }
 
-.exercise-row::-webkit-scrollbar {
+.tile-pages::-webkit-scrollbar {
   display: none;
 }
 
-.exercise-row > .tile {
-  flex: 0 0 calc((100% - 2 * var(--tile-gap)) / 3);
-  height: 100%;
+.tile-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, var(--tile-row));
+  gap: var(--tile-gap);
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-/* Empty placeholder card (for testing the scroll row) */
+/* Page dots */
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.page-dot {
+  width: 6px;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--today-track);
+  cursor: pointer;
+  transition: background .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-dot.is-active {
+  background: var(--muted);
+}
+
+/* Empty placeholder card (for testing the pages) */
 .mosaic .tile-placeholder {
   cursor: default;
 }
@@ -269,7 +290,7 @@ header h1 {
   .rail-arrow {
     position: absolute;
     z-index: 10;
-    top: 50%;
+    top: calc(var(--tile-row) + var(--tile-gap) / 2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -302,11 +323,60 @@ header h1 {
   .rail-prev { left: 6px; }
   .rail-next { right: 6px; }
 
-  .exercise-rail:hover .rail-arrow.is-available,
+  .tile-pager:hover .rail-arrow.is-available,
   .rail-arrow.is-available:focus-visible {
     opacity: 1;
     pointer-events: auto;
   }
+}
+
+/* Heute card at the bottom of the home page, under Phrase of the Week */
+.today-bottom {
+  width: min(100%, var(--dashboard-width));
+  margin: 18px auto 0;
+}
+
+.mosaic .tile-today.tile-today-wide {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  row-gap: 12px;
+  padding: 16px 20px 18px;
+  text-align: left;
+}
+
+.tile-today-wide .today-label {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+.tile-today-wide .today-score {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.tile-today-wide .today-number,
+.tile-today-wide .today-unit {
+  margin-top: 0;
+}
+
+.tile-today-wide .today-number {
+  font-size: 24px;
+}
+
+.tile-today-wide .today-unit {
+  font-size: 11px;
+}
+
+.tile-today-wide .today-progress {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  margin-top: 0;
 }
 
 .module {
@@ -481,7 +551,7 @@ header h1 {
   overflow: hidden;
 }
 
-/* Small tiles are laid out by the scrollable .exercise-row (flex). */
+/* Small tiles are placed by the .tile-page grid. */
 
 .mosaic .tile-small .tile-art {
   position: absolute;
@@ -583,8 +653,6 @@ header h1 {
    -------------------------------------------------------------------------- */
 
 .mosaic .tile-today {
-  grid-column: 3;
-  grid-row: 1;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--card-border);
@@ -1023,9 +1091,12 @@ header h1 {
     width: min(100%, var(--mobile-dashboard-width));
   }
 
-  .mosaic .tile,
-  .exercise-row {
+  .mosaic .tile {
     border-radius: 24px;
+  }
+
+  .today-bottom {
+    width: min(100%, var(--mobile-dashboard-width));
   }
 
   .mosaic .tile-vocab {
@@ -1099,8 +1170,10 @@ header h1 {
    <p class="intro">
     Was m&ouml;chtest du heute &uuml;ben?
    </p>
-   <section aria-label="&Uuml;bungen" class="dashboard mosaic">
-    <div class="dashboard-top">
+   <section aria-label="&Uuml;bungen" class="dashboard mosaic tile-pager">
+    <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
+    <div class="tile-pages" id="tilePages">
+     <div class="tile-page">
     <button class="tile tile-vocab module" data-app="wortschatz/?v=2.1" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
@@ -1114,25 +1187,19 @@ header h1 {
       </div>
      </div>
     </button>
-    <div aria-label="Tagesziel" class="tile tile-today">
-     <div class="today-label">
-      Heute
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.2" type="button">
+     <div class="tile-art">
+      <img alt="" src="artikel/icon.webp"/>
      </div>
-     <div class="today-number" id="todayTotal">
-      0
-     </div>
-     <div class="today-unit">
-      Punkte
-     </div>
-     <div class="today-progress">
-      <div class="today-progress-fill" id="todayProgress">
+     <div class="tile-copy">
+      <div class="name">
+       Artikel
+      </div>
+      <div class="status" id="artikelStatus">
+       0 / 20
       </div>
      </div>
-    </div>
-    </div>
-    <div class="exercise-rail">
-     <button aria-label="Zur&uuml;ck scrollen" class="rail-arrow rail-prev" id="railPrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
-     <div class="exercise-row" id="exerciseRow">
+    </button>
     <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.1" type="button">
      <div class="tile-art">
       <img alt="" src="verbformen/icon.webp"/>
@@ -1142,7 +1209,7 @@ header h1 {
        Verbformen
       </div>
       <div class="status">
-       0 / 30
+       0 / 10
       </div>
      </div>
     </button>
@@ -1155,28 +1222,33 @@ header h1 {
        Pronomen
       </div>
       <div class="status">
-       0 / 20
+       0 / 10
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.2" type="button">
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=1" type="button">
      <div class="tile-art">
-      <img alt="" src="artikel/icon.webp"/>
+      <img alt="" src="praepositionen/icon.webp"/>
      </div>
      <div class="tile-copy">
       <div class="name">
-       Artikel
+       Präpositionen
       </div>
-      <div class="status" id="artikelStatus">
-       0 / 50
+      <div class="status">
+       0 / 10
       </div>
      </div>
     </button>
-     <!-- TEST: empty placeholder card to try the scroll row; delete when adding real exercises -->
+     </div>
+     <div class="tile-page">
+     <!-- TEST: empty placeholder card; delete when adding real exercises -->
+     <div aria-hidden="true" class="tile tile-small tile-placeholder"></div>
+     <!-- TEST: empty placeholder card; delete when adding real exercises -->
      <div aria-hidden="true" class="tile tile-small tile-placeholder"></div>
      </div>
-     <button aria-label="Weiter scrollen" class="rail-arrow rail-next" id="railNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
     </div>
+    <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
+    <div aria-label="Seiten" class="page-dots" id="pageDots"></div>
    </section>
        <button aria-label="Show phrase details" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
      <div class="phrase-week-home-copy">
@@ -1186,6 +1258,26 @@ header h1 {
      </div>
      <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
     </button>
+
+    <div class="mosaic today-bottom">
+    <div aria-label="Tagesziel" class="tile tile-today tile-today-wide">
+     <div class="today-label">
+      Heute
+     </div>
+     <div class="today-score">
+      <div class="today-number" id="todayTotal">
+       0
+      </div>
+      <div class="today-unit">
+       Punkte
+      </div>
+     </div>
+     <div class="today-progress">
+      <div class="today-progress-fill" id="todayProgress">
+      </div>
+     </div>
+    </div>
+    </div>
 
      </div>
      <section aria-label="Phrase of the Week details" class="phrase-screen" id="phraseScreen" aria-hidden="true">
@@ -1343,7 +1435,8 @@ header h1 {
       const configs=[
         {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:20},
         {key:'verbformen', selector:'.tile-verbs', status:null, goal:10},
-        {key:'pronomen', selector:'.tile-pronouns', status:null, goal:10}
+        {key:'pronomen', selector:'.tile-pronouns', status:null, goal:10},
+        {key:'praepositionen', selector:'.tile-prepositions', status:null, goal:10}
       ];
 
       let exercisePoints=0;
@@ -1355,6 +1448,11 @@ header h1 {
           const partizipII=Number(data.verbformen?.partizipII)||0;
           const modalverben=Number(data.verbformen?.modalverben)||0;
           answers=partizipII+modalverben;
+        }
+
+        if(cfg.key==='praepositionen'){
+          // Sum of all Präpositionen exercises; add new ones here.
+          answers=answerCount(data.festerKasus);
         }
 
         exercisePoints+=answers;
@@ -1422,31 +1520,49 @@ header h1 {
       });
     });
 
-    /* Scrollable exercise row: arrow buttons (hover devices only via CSS). */
+    /* Paged tile block: page dots + arrow buttons (arrows on hover devices only). */
     (() => {
-      const row = document.getElementById('exerciseRow');
-      const prev = document.getElementById('railPrev');
-      const next = document.getElementById('railNext');
-      if (!row || !prev || !next) return;
+      const pager = document.getElementById('tilePages');
+      const prev = document.getElementById('pagePrev');
+      const next = document.getElementById('pageNext');
+      const dotsBox = document.getElementById('pageDots');
+      if (!pager || !prev || !next || !dotsBox) return;
+      const pages = [...pager.querySelectorAll('.tile-page')];
 
-      function updateArrows() {
-        const max = row.scrollWidth - row.clientWidth;
-        prev.classList.toggle('is-available', row.scrollLeft > 1);
-        next.classList.toggle('is-available', row.scrollLeft < max - 1);
+      const dots = pages.map((_, n) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'page-dot';
+        dot.setAttribute('aria-label', 'Seite ' + (n + 1));
+        dot.addEventListener('click', () => goTo(n));
+        dotsBox.appendChild(dot);
+        return dot;
+      });
+      dotsBox.hidden = pages.length < 2;
+
+      function pageStep() {
+        const gap = parseFloat(getComputedStyle(pager).columnGap) || 0;
+        return pager.clientWidth + gap;
+      }
+      function current() {
+        return Math.round(pager.scrollLeft / pageStep());
+      }
+      function goTo(n) {
+        n = Math.max(0, Math.min(pages.length - 1, n));
+        pager.scrollTo({ left: n * pageStep(), behavior: 'smooth' });
+      }
+      function update() {
+        const n = current();
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === n));
+        prev.classList.toggle('is-available', n > 0);
+        next.classList.toggle('is-available', n < pages.length - 1);
       }
 
-      function step(dir) {
-        const tile = row.querySelector('.tile');
-        const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
-        const amount = tile ? tile.getBoundingClientRect().width + gap : row.clientWidth / 3;
-        row.scrollBy({ left: dir * amount, behavior: 'smooth' });
-      }
-
-      prev.addEventListener('click', () => step(-1));
-      next.addEventListener('click', () => step(1));
-      row.addEventListener('scroll', updateArrows, { passive: true });
-      window.addEventListener('resize', updateArrows);
-      updateArrows();
+      prev.addEventListener('click', () => goTo(current() - 1));
+      next.addEventListener('click', () => goTo(current() + 1));
+      pager.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     })();
 
     function closeApp() {
