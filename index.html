@@ -1433,7 +1433,7 @@ header h1 {
       }
 
       const configs=[
-        {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:20},
+        {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:10},
         {key:'verbformen', selector:'.tile-verbs', status:null, goal:10},
         {key:'pronomen', selector:'.tile-pronouns', status:null, goal:10},
         {key:'praepositionen', selector:'.tile-prepositions', status:null, goal:10}
@@ -1452,7 +1452,7 @@ header h1 {
 
         if(cfg.key==='praepositionen'){
           // Sum of all Präpositionen exercises; add new ones here.
-          answers=answerCount(data.festerKasus);
+          answers=answerCount(data.festerKasus)+answerCount(data.verbenMitPraepositionen);
         }
 
         exercisePoints+=answers;
