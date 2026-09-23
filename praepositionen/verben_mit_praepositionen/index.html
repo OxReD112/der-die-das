@@ -1,1 +1,620 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){
+  if(localStorage.getItem("deutschThemeV1")==="light"){
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Verben + Präp.">
+<title>Verben mit Präpositionen</title>
+<style>
+/* Registered so each half of the line/glow can fade between mint and red.
+   --state-l = preposition (left half), --state-r = case (right half). */
+@property --state-l{syntax:"<color>";inherits:true;initial-value:#4fd7b3}
+@property --state-r{syntax:"<color>";inherits:true;initial-value:#4fd7b3}
 
+:root{
+  /* ===== PALETTE (dark, default) — same as Pronomen ===== */
+  --bg:#1c1c1e;
+  --text:#f5f5f7;
+  --muted:#929297;
+  --tertiary-text:#aaa;
+  --secondary-text:#c7c7cc;
+  --placeholder-text:#666;
+  --mint:#4fd7b3;
+  --red:#ff6b73;
+
+  --surface:#202022;
+  --surface-2:#252527;
+  --key:#303033;
+
+  --line:rgba(255,255,255,.10);
+  --divider:rgba(255,255,255,.08);
+  --feedback-divider:rgba(255,255,255,.11);
+  --gap-line:rgba(255,255,255,.28);
+
+  --brand-text:rgba(255,255,255,.11);
+  --version-text:rgba(255,255,255,.18);
+
+  --cta-bg:#eee8df;
+  --cta-text:#171719;
+
+  --home-bg:rgba(255,255,255,.10);
+  --home-text:rgba(238,231,220,.55);
+  --home-back-bg:#ece6dc;
+  --home-back-text:#1b1c1e;
+  --weak-text:#c8c8cc;
+
+  /* ===== CASE BUTTONS (same as Fester Kasus) ===== */
+  --button-bg:#202124;
+  --button-bg-hover:#252629;
+  --button-text:#fff;
+  --button-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 5px 14px rgba(0,0,0,.12);
+  --button-shadow-hover:inset 0 1px 0 rgba(255,255,255,.05),0 7px 18px rgba(0,0,0,.16);
+  --button-shadow-active:inset 0 1px 0 rgba(255,255,255,.03),0 3px 9px rgba(0,0,0,.12);
+  --focus:rgba(255,255,255,.18);
+}
+
+[data-theme="light"]{
+  --bg:#f6f4f1;
+  --text:#242426;
+  --muted:#77777d;
+  --tertiary-text:#8a8a90;
+  --secondary-text:#5b5b60;
+  --placeholder-text:#9a9a9a;
+  --mint:#2fae90;
+  --red:#e0454d;
+
+  --surface:#fff;
+  --surface-2:#fff;
+  --key:#efece6;
+
+  --line:rgba(0,0,0,.10);
+  --divider:rgba(0,0,0,.08);
+  --feedback-divider:rgba(0,0,0,.11);
+  --gap-line:rgba(0,0,0,.25);
+
+  --brand-text:rgba(0,0,0,.08);
+  --version-text:rgba(0,0,0,.18);
+
+  --cta-bg:#242426;
+  --cta-text:#f5f5f7;
+
+  --home-bg:rgba(0,0,0,.06);
+  --home-text:rgba(36,36,38,.6);
+  --home-back-bg:#242426;
+  --home-back-text:#f5f5f7;
+  --weak-text:#5b5b60;
+
+  --button-bg:#fff;
+  --button-bg-hover:#f4f2ef;
+  --button-text:#242426;
+  --button-shadow:0 0 0 1px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.05);
+  --button-shadow-hover:0 0 0 1px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.07);
+  --button-shadow-active:0 0 0 1px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.05);
+  --focus:rgba(0,0,0,.18);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+body{display:flex;justify-content:center}
+.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
+.screen{min-height:690px;padding:20px 14px}
+.hidden{display:none!important}
+.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--brand-text);margin:30px 0 70px}
+.start-title{margin:60px 0 12px}
+.start-sub{font-size:19px;font-weight:600;color:var(--secondary-text);margin-bottom:4px}
+.center{text-align:center}
+.muted{color:var(--muted)}
+h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}
+p{line-height:1.5}
+.options{display:flex;justify-content:center;gap:10px;margin:28px 0}
+.btn,.size{border:1px solid var(--line);background:var(--key);color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer;font-family:inherit}
+.size{font-size:22px;min-width:82px}
+.btn:active,.size:active{transform:scale(.98)}
+
+/* ===== TOP BAR ===== */
+.top{display:flex;justify-content:space-between;align-items:center;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}
+.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--divider);border-radius:99px}
+.top-title{font-size:18px;font-weight:700}
+.counter{color:var(--muted);font-size:14px}
+.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}
+.progress i{display:block;height:100%;background:var(--mint);width:0;transition:width .25s ease}
+
+/* ===== PROMPT ===== */
+.exercise{display:flex;flex-direction:column}
+.prompt{text-align:center;margin:44px auto 0;max-width:680px;width:100%}
+.sentence{font-size:clamp(30px,7vw,45px);line-height:1.18;font-weight:600;letter-spacing:-.03em;white-space:nowrap}
+.gap{position:relative;display:inline-block;min-width:3.2em;padding:0 .12em;border-bottom:2px solid var(--gap-line);text-align:center;line-height:1.1;vertical-align:baseline}
+html:not(.is-touch) .gap.typing{cursor:text}
+.gap.filled{border-bottom-color:transparent;min-width:0;padding:0}
+/* Real text field inside the gap: needed for the macOS press-and-hold accent menu (ä ö ü). */
+.gap-mirror{visibility:hidden;white-space:pre}
+.gap-input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0 .12em;border:0;outline:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-align:center;caret-color:var(--text);-webkit-appearance:none;appearance:none}
+html.is-touch .gap-input{pointer-events:none}
+.case-line{margin-top:8px;font-size:clamp(22px,5vw,28px);font-weight:650;letter-spacing:-.02em;line-height:1.2;opacity:0;transition:opacity .3s ease}
+.case-line.shown{opacity:1}
+.context{color:var(--muted);font-size:16px;line-height:1.4;margin-bottom:17px}
+
+.check{display:none;width:min(600px,100%);margin:60px auto 0;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+.check:active{transform:scale(.99)}
+html:not(.is-touch) .check{display:block}
+html:not(.is-touch) .check.hidden{display:none}
+
+/* ===== FEEDBACK (Pronomen style, glow per step) ===== */
+.feedback{--state-l:var(--mint);--state-r:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid var(--feedback-divider);isolation:isolate;transition:--state-l .45s ease,--state-r .45s ease}
+.feedback.wrong-l{--state-l:var(--red)}
+.feedback.wrong-r{--state-r:var(--red)}
+/* Glow: one ellipse per half, masked so they meet softly in the middle.
+   When both halves have the same colour it looks like one single glow. */
+.glow{position:absolute;z-index:-2;left:0;right:0;top:-180px;height:360px;pointer-events:none;opacity:.9}
+.glow.l{background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--state-l) 22%,transparent) 0%,color-mix(in srgb,var(--state-l) 10%,transparent) 32%,transparent 70%);-webkit-mask-image:linear-gradient(to right,#000 44%,transparent 56%);mask-image:linear-gradient(to right,#000 44%,transparent 56%)}
+.glow.r{background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--state-r) 22%,transparent) 0%,color-mix(in srgb,var(--state-r) 10%,transparent) 32%,transparent 70%);-webkit-mask-image:linear-gradient(to right,transparent 44%,#000 56%);mask-image:linear-gradient(to right,transparent 44%,#000 56%)}
+/* Divider line: spreads out from the centre; left/right colours blend in the middle. */
+.divider{position:absolute;z-index:-1;top:-1px;left:50%;width:0;height:2px;pointer-events:none;animation:spread .42s ease-out forwards}
+/* The visible 2px line blends left → right colour in the middle.
+   Its soft shadow (same as Pronomen: 18px, 70%) comes from two halves that
+   meet exactly at 50%, so the glow is even and never doubles up. */
+.divider i{position:absolute;top:0;height:2px}
+.divider i.line{left:0;right:0;background:linear-gradient(to right,var(--state-l) 0%,var(--state-l) 46%,var(--state-r) 54%,var(--state-r) 100%)}
+.divider i.sl{left:0;right:50%;box-shadow:0 0 18px color-mix(in srgb,var(--state-l) 70%,transparent)}
+.divider i.sr{left:50%;right:0;box-shadow:0 0 18px color-mix(in srgb,var(--state-r) 70%,transparent)}
+@keyframes spread{to{left:0;width:100%}}
+/* Step-1 answer: one line, centred on the same row the result pills use later. */
+.given{height:31px;display:flex;align-items:center;justify-content:center;gap:.35em;font-size:30px;font-weight:650;line-height:1;white-space:nowrap}
+.bad{color:var(--red)}
+.good{color:var(--mint)}
+.struck{text-decoration:line-through;text-decoration-thickness:2px}
+
+.case-step{margin-top:28px}
+.case-question{color:var(--muted);font-size:15px;line-height:18px;margin-bottom:12px}
+.choices{display:grid;grid-template-columns:repeat(var(--case-count,2),1fr);gap:10px;width:min(600px,100%);margin:0 auto}
+.case-choice{appearance:none;border:0;border-radius:14px;min-height:56px;padding:0 18px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+.case-choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+.case-choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
+.case-choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+@media(max-width:520px){.case-choice{font-size:19px}}
+
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:baseline;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:11px;font-size:13px;color:var(--secondary-text)}
+.chip .mark{font-weight:700}
+.chip.ok .mark{color:var(--mint)}
+.chip.no .mark{color:var(--red)}
+.chip .struck{color:var(--muted);text-decoration-color:var(--red);text-decoration-thickness:1.5px}
+.example{margin-top:24px;font-size:17px;font-weight:400;line-height:1.4;color:var(--tertiary-text)}
+.example-tr{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.4}
+.continue{position:relative;z-index:2;touch-action:manipulation;width:min(600px,100%);margin-top:40px;border:0;border-radius:15px;padding:15px;background:var(--cta-bg);color:var(--cta-text);font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+
+/* ===== DONE ===== */
+.done-title{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:60px 0 6px}
+.done-score{font-size:34px;font-weight:700;letter-spacing:-.03em;margin:18px 0 2px}
+.done-score-label{color:var(--muted);font-size:14px;margin-bottom:16px}
+.done-parts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.done-part{padding:8px 13px;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--secondary-text)}
+.done-part b{color:var(--text)}
+.done-note{color:var(--muted);margin-bottom:28px}
+.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:var(--weak-text);line-height:1.55}
+.done-actions{width:min(100%,440px);margin:20px auto 0;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#home,#homeBack{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer}
+#home{background:var(--home-bg);color:var(--home-text)}
+#homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
+#home:active,#homeBack:active{transform:scale(.99)}
+
+.version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.divider{left:0;width:100%}}
+</style>
+</head>
+<body><main class="app">
+
+<section id="start" class="screen center">
+  <h1 class="start-title">Verben mit Präpositionen</h1>
+  <div class="start-sub">How many exercises?</div>
+  <p class="muted">Type the preposition, then choose the case.</p>
+  <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
+</section>
+
+<section id="game" class="screen hidden">
+  <div class="top"><div><div class="top-title">Verben mit Präpositionen</div><div class="progress"><i id="bar"></i></div></div><div class="counter" id="counter">1 / 10</div></div>
+
+  <div class="exercise">
+    <div class="prompt" id="prompt">
+      <div class="context" id="meaning"></div>
+      <div class="sentence" id="sentence"><span id="verb"></span> <span class="gap typing" id="gap"></span></div>
+      <div class="case-line" id="caseLine" aria-hidden="true">&nbsp;</div>
+    </div>
+    <button class="check" id="check">Check</button>
+
+    <div id="feedback" class="feedback hidden">
+      <div class="glow l"></div><div class="glow r"></div>
+      <div class="divider"><i class="sl"></i><i class="sr"></i><i class="line"></i></div>
+      <div id="prepFeedback">
+        <div class="given" id="given"></div>
+        <div class="case-step hidden" id="caseStep">
+          <div class="case-question">Welcher Kasus?</div>
+          <div class="choices" id="choices"></div>
+        </div>
+      </div>
+      <div id="finalFeedback" class="hidden">
+        <div class="chips" id="chips"></div>
+        <div class="example" id="example"></div>
+        <div class="example-tr" id="exampleTr"></div>
+        <button class="continue" id="continue">Continue</button>
+      </div>
+    </div>
+    <div id="keyboardMount"></div>
+  </div>
+</section>
+
+<section id="done" class="screen center hidden">
+  <h1 class="done-title">Done.</h1>
+  <div class="done-score" id="score">0 / 10</div>
+  <div class="done-score-label">fully correct</div>
+  <div class="done-parts" id="parts"></div>
+  <div class="weak hidden" id="weak"></div>
+  <div class="done-note">Tricky verbs will come up more often next time.</div>
+  <div class="done-actions">
+    <button class="btn" id="home">Start Again</button>
+    <button class="btn" id="homeBack">Back to Home</button>
+  </div>
+</section>
+
+<div class="version">v2.6 · Verben mit Präpositionen</div>
+</main>
+
+<script src="verben_mit_praepositionen.js"></script>
+<script>
+const DATA = window.VERBEN_MIT_PRAEPOSITIONEN || [];
+const $ = id => document.getElementById(id);
+
+function isTouchDevice(){
+  return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+}
+const IS_TOUCH = isTouchDevice();
+document.documentElement.classList.toggle("is-touch", IS_TOUCH);
+
+// ===== CASE BUTTONS =====
+// Built from the cases that occur in the database (currently Akkusativ + Dativ).
+// Entries whose case has no button (arbeiten als + Nominativ) skip step 2.
+const CASE_ORDER = ["Akkusativ","Dativ","Genitiv"];
+const CHOICE_CASES = CASE_ORDER.filter(c => DATA.some(x => x.case === c));
+const asksCase = x => CHOICE_CASES.includes(x.case);
+
+// ===== STATS (weak spots) =====
+// Preposition and case tracked separately per entry: "<id>|prep", "<id>|case".
+const STATS_STORE = "verbenPraepStatsV1";
+const SESSION_WINDOW = 5, MIN_ATTEMPTS = 2, ERROR_THRESHOLD = .4;
+let statsStore = {sessions:[]};
+try{ statsStore = JSON.parse(localStorage.getItem(STATS_STORE) || '{"sessions":[]}'); }catch(e){ statsStore = {sessions:[]}; }
+if(!Array.isArray(statsStore.sessions)) statsStore.sessions = [];
+function saveStats(){ try{ localStorage.setItem(STATS_STORE, JSON.stringify(statsStore)); }catch(e){} }
+function currentStats(){
+  const map = {};
+  statsStore.sessions.forEach((session, s) => {
+    const weight = s + 1;
+    for(const [key, v] of Object.entries(session.answers || {})){
+      if(!map[key]) map[key] = {wc:0, ww:0, attempts:0};
+      map[key].wc += (v.correct || 0) * weight;
+      map[key].ww += (v.wrong || 0) * weight;
+      map[key].attempts += (v.correct || 0) + (v.wrong || 0);
+    }
+  });
+  for(const v of Object.values(map)){
+    const total = v.wc + v.ww;
+    v.errorRate = total ? v.ww / total : 0;
+    v.weak = v.attempts >= MIN_ATTEMPTS && v.errorRate >= ERROR_THRESHOLD;
+  }
+  return map;
+}
+
+// ===== DAILY STATS (Home tile) =====
+const DAILY_STATS_KEY = "deutschDailyStatsV1";
+function localDayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function recordDaily(correct){
+  try{
+    const today = localDayKey();
+    let data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
+    if(data.date !== today) data = {date:today};
+    if(!data.verbenMitPraepositionen) data.verbenMitPraepositionen = {answers:0, correct:0};
+    data.verbenMitPraepositionen.answers++;
+    if(correct) data.verbenMitPraepositionen.correct++;
+    localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
+  }catch(e){}
+}
+
+// ===== SESSION =====
+let session = [], index = 0, phase = "type", typed = "";
+let prepOK = false, caseOK = null, chosenCase = null, caseShownAt = 0;
+let score = {full:0, prep:0, cas:0, casTotal:0}, sessionAnswers = {};
+
+function buildSession(size){
+  const stats = currentStats();
+  return DATA.map(x => {
+    const err = Math.max(stats[x.id + "|prep"]?.errorRate || 0, stats[x.id + "|case"]?.errorRate || 0);
+    return {x, k: -Math.log(Math.max(Math.random(), 1e-12)) / (1 + err * 4)};
+  }).sort((a, b) => a.k - b.k).slice(0, Math.min(size, DATA.length)).map(o => o.x);
+}
+function mark(key, ok){
+  const v = sessionAnswers[key] || {correct:0, wrong:0};
+  if(ok) v.correct++; else v.wrong++;
+  sessionAnswers[key] = v;
+}
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s => s.trim().toLocaleLowerCase("de-DE").replace(/[.,!?;:]/g, "").replace(/\s+/g, " ");
+function prepMatches(input, target){
+  const a = norm(input), b = norm(target);
+  return a === b || a.replace(/ae/g,"ä").replace(/oe/g,"ö").replace(/ue/g,"ü") === b;
+}
+
+function start(size){
+  session = buildSession(size); index = 0;
+  score = {full:0, prep:0, cas:0, casTotal:0}; sessionAnswers = {};
+  $("start").classList.add("hidden"); $("done").classList.add("hidden"); $("game").classList.remove("hidden");
+  render();
+}
+
+function render(){
+  const x = session[index];
+  phase = "type"; typed = ""; prepOK = false; caseOK = null; chosenCase = null;
+  $("counter").textContent = (index + 1) + " / " + session.length;
+  $("bar").style.width = (index / session.length * 100) + "%";
+  $("verb").textContent = x.verb;
+  $("meaning").textContent = x.meaning || "";
+  $("gap").className = "gap typing";
+  $("gap").innerHTML = '<span class="gap-mirror" id="gapMirror"></span>'
+    + '<input class="gap-input" id="gapInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" aria-label="Präposition">';
+  const input = $("gapInput");
+  if(IS_TOUCH){
+    // Phones use the in-app German keyboard; never open the system keyboard.
+    input.readOnly = true; input.tabIndex = -1; input.setAttribute("inputmode","none");
+  }else{
+    input.addEventListener("input", () => { typed = input.value; paintGap(); });
+    input.addEventListener("keydown", e => {
+      if(e.key === "Enter" && !e.isComposing){ e.preventDefault(); e.stopPropagation(); submitPrep(); }
+    });
+  }
+  // Space for "+ Kasus" is always reserved so the meaning and the line never move.
+  $("caseLine").className = "case-line";
+  $("caseLine").innerHTML = "&nbsp;";
+  $("caseLine").setAttribute("aria-hidden","true");
+  paintGap();
+  $("check").classList.remove("hidden");
+  $("feedback").className = "feedback hidden";
+  $("caseStep").classList.add("hidden");
+  $("finalFeedback").classList.add("hidden");
+  $("prepFeedback").classList.remove("hidden");
+  if(window.deutschKeyboardReady) $("keyboard").classList.add("show");
+  fitSentence();
+  focusGap();
+}
+
+// The hidden mirror gives the gap its width; the text field sits on top of it.
+function paintGap(){
+  const input = $("gapInput"), mirror = $("gapMirror");
+  if(!input) return;
+  if(input.value !== typed) input.value = typed;
+  mirror.textContent = typed;
+  fitSentence();
+}
+function focusGap(){
+  if(IS_TOUCH || phase !== "type") return;
+  const input = $("gapInput");
+  if(input && document.activeElement !== input) input.focus({preventScroll:true});
+}
+
+// Keep verb + gap on one line: shrink only when the line is wider than the screen.
+function fitSentence(){
+  const el = $("sentence");
+  el.style.fontSize = "";
+  const available = $("prompt").clientWidth;
+  const width = el.scrollWidth;
+  if(width > available && available > 0){
+    el.style.fontSize = (parseFloat(getComputedStyle(el).fontSize) * available / width * 0.97) + "px";
+  }
+}
+window.addEventListener("resize", () => { if(!$("game").classList.contains("hidden")) fitSentence(); });
+
+// Step 1 — preposition. Glow reflects the preposition.
+function submitPrep(){
+  if(phase !== "type" || !typed.trim()) return;
+  const x = session[index];
+  prepOK = prepMatches(typed, x.preposition);
+  mark(x.id + "|prep", prepOK);
+  if(prepOK) score.prep++;
+
+  $("gap").className = "gap filled";
+  $("gap").textContent = x.preposition;
+  fitSentence();
+  $("check").classList.add("hidden");
+  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+
+  $("given").innerHTML = prepOK
+    ? `<span class="good">${esc(x.preposition)}</span>`
+    : `<span class="bad struck">${esc(typed.trim())}</span><span class="good">→ ${esc(x.preposition)}</span>`;
+  // Step 1: the whole line + glow shows the preposition result.
+  $("feedback").className = "feedback" + (prepOK ? "" : " wrong-l wrong-r");
+
+  if(asksCase(x)){
+    phase = "case";
+    caseShownAt = performance.now();
+    $("caseStep").classList.remove("hidden");
+  }else{
+    showAnswer();
+  }
+}
+
+// Step 2 — case (asked for the CORRECT preposition).
+function chooseCase(c){
+  if(phase !== "case") return;
+  const x = session[index];
+  chosenCase = c;
+  caseOK = c === x.case;
+  mark(x.id + "|case", caseOK);
+  score.casTotal++;
+  if(caseOK) score.cas++;
+  showAnswer();
+}
+
+function chip(ok, label, wrongValue){
+  return `<span class="chip ${ok ? "ok" : "no"}"><span class="mark">${ok ? "✓" : "✗"}</span>${label}`
+    + (!ok && wrongValue ? ` <span class="struck">${esc(wrongValue)}</span>` : "") + `</span>`;
+}
+
+// Final answer. Left half = preposition, right half = case.
+function showAnswer(){
+  phase = "answer";
+  const x = session[index];
+  const full = prepOK && caseOK !== false;
+  if(full) score.full++;
+  recordDaily(full);
+
+  // Step 2: the right half fades to the case result (left half keeps the preposition).
+  if(caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
+  $("caseLine").textContent = "+ " + x.case;
+  $("caseLine").removeAttribute("aria-hidden");
+  $("caseLine").classList.add("shown");
+
+  let chips = chip(prepOK, "Präposition", typed.trim());
+  if(caseOK !== null) chips += chip(caseOK, "Kasus", chosenCase);
+  $("chips").innerHTML = chips;
+  $("example").textContent = x.example || "";
+  $("exampleTr").textContent = x.exampleTranslation || "";
+  $("continue").textContent = index === session.length - 1 ? "Finish" : "Continue";
+
+  $("prepFeedback").classList.add("hidden");
+  $("finalFeedback").classList.remove("hidden");
+  $("bar").style.width = ((index + 1) / session.length * 100) + "%";
+}
+
+function next(){
+  if(phase !== "answer") return;
+  if(index >= session.length - 1){ finish(); return; }
+  index++; render();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function weakLabel(key){
+  const [id, part] = key.split("|");
+  const x = DATA.find(e => e.id === id);
+  if(!x) return null;
+  return part === "prep" ? `${x.verb} → ${x.preposition}` : `${x.verb} ${x.preposition} → ${x.case}`;
+}
+
+function finish(){
+  if(Object.keys(sessionAnswers).length){
+    statsStore.sessions.push({date:localDayKey(), answers:sessionAnswers});
+    if(statsStore.sessions.length > SESSION_WINDOW) statsStore.sessions = statsStore.sessions.slice(-SESSION_WINDOW);
+    saveStats();
+  }
+  $("game").classList.add("hidden"); $("done").classList.remove("hidden");
+  $("score").textContent = score.full + " / " + session.length;
+  let parts = `<span class="done-part">Präposition <b>${score.prep} / ${session.length}</b></span>`;
+  if(score.casTotal) parts += `<span class="done-part">Kasus <b>${score.cas} / ${score.casTotal}</b></span>`;
+  $("parts").innerHTML = parts;
+
+  const weak = Object.entries(currentStats())
+    .filter(([, v]) => v.weak)
+    .sort((a, b) => b[1].errorRate - a[1].errorRate)
+    .map(([k]) => weakLabel(k)).filter(Boolean).slice(0, 3);
+  if(weak.length){
+    $("weak").innerHTML = "<b>Needs more practice</b><br>" + weak.map(esc).join("<br>");
+    $("weak").classList.remove("hidden");
+  }else $("weak").classList.add("hidden");
+  window.scrollTo({top:0, behavior:"auto"});
+}
+
+// ===== CASE BUTTONS =====
+$("choices").style.setProperty("--case-count", CHOICE_CASES.length);
+$("choices").innerHTML = CHOICE_CASES.map(c => `<button class="case-choice" data-case="${c}">${c}</button>`).join("");
+$("choices").addEventListener("click", e => {
+  const b = e.target.closest("button[data-case]");
+  // On phones the tap on the keyboard's ✓ can "click through" onto the case
+  // button that appears under the finger — ignore taps in the first moment.
+  if(b && performance.now() - caseShownAt > 450) chooseCase(b.dataset.case);
+});
+
+// ===== INPUT =====
+function typeKey(k){
+  if(phase !== "type") return;
+  if(k === "BACK"){ typed = typed.slice(0, -1); paintGap(); return; }
+  if(k === "OK"){ submitPrep(); return; }
+  if(k === "SPACE"){ if(typed.length && !typed.endsWith(" ")) typed += " "; paintGap(); return; }
+  if(typed.length < 20){ typed += k; paintGap(); }
+}
+document.addEventListener("keydown", e => {
+  if($("game").classList.contains("hidden") || e.metaKey || e.ctrlKey || e.altKey) return;
+  if(phase === "answer"){
+    if(e.key === "Enter"){ e.preventDefault(); next(); }
+    return;
+  }
+  if(phase === "case"){
+    const n = parseInt(e.key, 10);
+    if(n >= 1 && n <= CHOICE_CASES.length){ chooseCase(CHOICE_CASES[n - 1]); return; }
+    const byLetter = CHOICE_CASES.find(c => c[0].toLowerCase() === e.key.toLowerCase());
+    if(byLetter) chooseCase(byLetter);
+    return;
+  }
+  // Typing phase on a computer: the text field handles letters, Backspace and
+  // the accent menu itself. If focus got lost, put it back before the key lands.
+  if(!IS_TOUCH && e.target !== $("gapInput")) focusGap();
+});
+// Clicking anywhere on the page during typing returns focus to the gap.
+document.addEventListener("mousedown", e => {
+  if(phase !== "type" || IS_TOUCH || e.target.closest("button")) return;
+  if(e.target !== $("gapInput")){ e.preventDefault(); focusGap(); }
+});
+document.addEventListener("deutsch-keyboard-input", e => typeKey(e.detail?.key || ""));
+
+async function loadKeyboardComponent(){
+  const mount = $("keyboardMount");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html");
+  if(!r.ok) throw new Error("Keyboard component failed to load");
+  const tpl = document.createElement("template");
+  tpl.innerHTML = await r.text();
+  const scripts = [];
+  tpl.content.querySelectorAll("script").forEach(s => { scripts.push(s.textContent); s.remove(); });
+  mount.appendChild(tpl.content);
+  for(const code of scripts){ const s = document.createElement("script"); s.textContent = code; document.body.appendChild(s); }
+  window.deutschKeyboardReady = true;
+  if(phase === "type") $("keyboard").classList.add("show");
+}
+
+// ===== BUTTONS =====
+document.querySelectorAll(".size").forEach(b => b.addEventListener("click", () => start(Number(b.dataset.n))));
+$("check").addEventListener("click", submitPrep);
+$("continue").addEventListener("click", next);
+$("home").addEventListener("click", () => { $("done").classList.add("hidden"); $("start").classList.remove("hidden"); });
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent !== window){
+      if(typeof window.parent.closeApp === "function"){ window.parent.closeApp(); return; }
+      const parentDoc = window.parent.document;
+      const shell = parentDoc.getElementById("appShell");
+      const frame = parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src = "about:blank";
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"}, "*");
+}
+$("homeBack").addEventListener("click", goBackToHome);
+
+loadKeyboardComponent().catch(e => console.error(e));
+</script>
+</body>
+</html>
