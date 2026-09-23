@@ -208,12 +208,105 @@ header h1 {
    -------------------------------------------------------------------------- */
 
 .dashboard.mosaic {
+  --tile-gap: 10px;
+  --tile-row: 141px;
   width: min(100%, var(--dashboard-width));
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
+}
+
+/* Top row: Wortschatz (2 columns) + Heute */
+.dashboard-top {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(2, 141px);
-  gap: 10px;
+  grid-template-rows: var(--tile-row);
+  gap: var(--tile-gap);
+}
+
+/* Bottom row: horizontally scrollable exercise tiles.
+   Each tile is exactly one top-grid column wide, so with 3 tiles
+   the row looks like the old grid; more tiles make it scroll. */
+.exercise-rail {
+  position: relative;
+}
+
+.exercise-row {
+  display: flex;
+  gap: var(--tile-gap);
+  height: var(--tile-row);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: var(--card-radius);
+}
+
+.exercise-row::-webkit-scrollbar {
+  display: none;
+}
+
+.exercise-row > .tile {
+  flex: 0 0 calc((100% - 2 * var(--tile-gap)) / 3);
+  height: 100%;
+  scroll-snap-align: start;
+}
+
+/* Empty placeholder card (for testing the scroll row) */
+.mosaic .tile-placeholder {
+  cursor: default;
+}
+
+/* Arrow buttons: only on devices with a real hover-capable pointer */
+.rail-arrow {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-arrow {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0 0 2px;
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--muted);
+    font: 300 24px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
+      "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: opacity .2s ease, color .2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rail-arrow:hover {
+    color: var(--text);
+  }
+
+  .rail-prev { left: 6px; }
+  .rail-next { right: 6px; }
+
+  .exercise-rail:hover .rail-arrow.is-available,
+  .rail-arrow.is-available:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 .module {
@@ -388,20 +481,7 @@ header h1 {
   overflow: hidden;
 }
 
-.mosaic .tile-articles {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.mosaic .tile-verbs {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.mosaic .tile-pronouns {
-  grid-column: 2;
-  grid-row: 2;
-}
+/* Small tiles are laid out by the scrollable .exercise-row (flex). */
 
 .mosaic .tile-small .tile-art {
   position: absolute;
@@ -504,7 +584,7 @@ header h1 {
 
 .mosaic .tile-today {
   grid-column: 3;
-  grid-row: 2;
+  grid-row: 1;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--card-border);
@@ -938,12 +1018,13 @@ header h1 {
   }
 
   .dashboard.mosaic {
+    --tile-gap: 8px;
+    --tile-row: 121px;
     width: min(100%, var(--mobile-dashboard-width));
-    grid-template-rows: repeat(2, 121px);
-    gap: 8px;
   }
 
-  .mosaic .tile {
+  .mosaic .tile,
+  .exercise-row {
     border-radius: 24px;
   }
 
@@ -1019,6 +1100,7 @@ header h1 {
     Was m&ouml;chtest du heute &uuml;ben?
    </p>
    <section aria-label="&Uuml;bungen" class="dashboard mosaic">
+    <div class="dashboard-top">
     <button class="tile tile-vocab module" data-app="wortschatz/?v=2.1" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
@@ -1032,19 +1114,25 @@ header h1 {
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.2" type="button">
-     <div class="tile-art">
-      <img alt="" src="artikel/icon.webp"/>
+    <div aria-label="Tagesziel" class="tile tile-today">
+     <div class="today-label">
+      Heute
      </div>
-     <div class="tile-copy">
-      <div class="name">
-       Artikel
-      </div>
-      <div class="status" id="artikelStatus">
-       0 / 50
+     <div class="today-number" id="todayTotal">
+      0
+     </div>
+     <div class="today-unit">
+      Punkte
+     </div>
+     <div class="today-progress">
+      <div class="today-progress-fill" id="todayProgress">
       </div>
      </div>
-    </button>
+    </div>
+    </div>
+    <div class="exercise-rail">
+     <button aria-label="Zur&uuml;ck scrollen" class="rail-arrow rail-prev" id="railPrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
+     <div class="exercise-row" id="exerciseRow">
     <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.1" type="button">
      <div class="tile-art">
       <img alt="" src="verbformen/icon.webp"/>
@@ -1071,20 +1159,23 @@ header h1 {
       </div>
      </div>
     </button>
-    <div aria-label="Tagesziel" class="tile tile-today">
-     <div class="today-label">
-      Heute
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.2" type="button">
+     <div class="tile-art">
+      <img alt="" src="artikel/icon.webp"/>
      </div>
-     <div class="today-number" id="todayTotal">
-      0
-     </div>
-     <div class="today-unit">
-      Punkte
-     </div>
-     <div class="today-progress">
-      <div class="today-progress-fill" id="todayProgress">
+     <div class="tile-copy">
+      <div class="name">
+       Artikel
+      </div>
+      <div class="status" id="artikelStatus">
+       0 / 50
       </div>
      </div>
+    </button>
+     <!-- TEST: empty placeholder card to try the scroll row; delete when adding real exercises -->
+     <div aria-hidden="true" class="tile tile-small tile-placeholder"></div>
+     </div>
+     <button aria-label="Weiter scrollen" class="rail-arrow rail-next" id="railNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
     </div>
    </section>
        <button aria-label="Show phrase details" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
@@ -1330,6 +1421,33 @@ header h1 {
         document.documentElement.classList.add('app-open');
       });
     });
+
+    /* Scrollable exercise row: arrow buttons (hover devices only via CSS). */
+    (() => {
+      const row = document.getElementById('exerciseRow');
+      const prev = document.getElementById('railPrev');
+      const next = document.getElementById('railNext');
+      if (!row || !prev || !next) return;
+
+      function updateArrows() {
+        const max = row.scrollWidth - row.clientWidth;
+        prev.classList.toggle('is-available', row.scrollLeft > 1);
+        next.classList.toggle('is-available', row.scrollLeft < max - 1);
+      }
+
+      function step(dir) {
+        const tile = row.querySelector('.tile');
+        const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+        const amount = tile ? tile.getBoundingClientRect().width + gap : row.clientWidth / 3;
+        row.scrollBy({ left: dir * amount, behavior: 'smooth' });
+      }
+
+      prev.addEventListener('click', () => step(-1));
+      next.addEventListener('click', () => step(1));
+      row.addEventListener('scroll', updateArrows, { passive: true });
+      window.addEventListener('resize', updateArrows);
+      updateArrows();
+    })();
 
     function closeApp() {
       renderDailyStats();
