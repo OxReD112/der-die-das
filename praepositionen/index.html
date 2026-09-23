@@ -1,1 +1,220 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <script>
+  (function(){
+    if(localStorage.getItem("deutschThemeV1")==="light"){
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17181a">
+  <title>Präpositionen.</title>
+  <style>
+    *{box-sizing:border-box}
 
+    :root{
+      --bg:#17181a;
+      --cream:#eee7dc;
+      --muted:#777875;
+      --card:rgba(255,255,255,.018);
+      --line:rgba(255,255,255,.08);
+      --heading:#a5a19a;
+      --chevron:#565856;
+      --choice-active-bg:rgba(255,255,255,.028);
+      --choice-active-border:rgba(255,255,255,.12);
+      --subtitle:rgba(190,189,186,.52);
+      --version-text:#55565a;
+    }
+
+    [data-theme="light"]{
+      --bg:#f6f3ee;
+      --cream:#2b2a27;
+      --muted:#8a8a86;
+      --card:rgba(0,0,0,.03);
+      --line:rgba(0,0,0,.10);
+      --heading:#8f8b83;
+      --chevron:#9c9c98;
+      --choice-active-bg:rgba(0,0,0,.045);
+      --choice-active-border:rgba(0,0,0,.14);
+      --subtitle:rgba(60,58,54,.55);
+      --version-text:rgba(43,42,39,.45);
+    }
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--cream);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      height:100vh;
+      height:100dvh;
+      overflow:hidden;
+    }
+
+    .page{
+      position:fixed;
+      inset:0;
+      width:min(100%,480px);
+      height:100vh;
+      height:100dvh;
+      margin:0 auto;
+      padding:
+        max(24px,calc(env(safe-area-inset-top) + 12px))
+        24px
+        max(24px,env(safe-area-inset-bottom));
+      overflow-x:hidden;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    header{
+      text-align:center;
+      padding:36px 20px 0;
+      margin-bottom:0;
+    }
+
+    h1{
+      margin:0;
+      color:var(--heading);
+      font-size:40px;
+      font-weight:700;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .intro{
+      margin:48px 0 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .choices{
+      display:grid;
+      gap:16px;
+      margin-top:0;
+    }
+
+    .choice{
+      appearance:none;
+      -webkit-appearance:none;
+      position:relative;
+      width:100%;
+      min-height:96px;
+      padding:20px 22px;
+      border:1px solid var(--line);
+      border-radius:21px;
+      background:var(--card);
+      color:inherit;
+      font:inherit;
+      text-align:left;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+      overflow:hidden;
+      transition:background .16s ease,border-color .16s ease,transform .16s ease;
+    }
+
+    .choice::after{
+      content:"›";
+      position:absolute;
+      right:18px;
+      top:50%;
+      transform:translateY(-52%);
+      color:var(--chevron);
+      font-size:28px;
+      font-weight:300;
+    }
+
+    .choice:active{
+      transform:scale(.992);
+      background:var(--choice-active-bg);
+      border-color:var(--choice-active-border);
+    }
+
+    .choice-title{
+      color:var(--cream);
+      font-size:20px;
+      font-weight:650;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .choice-subtitle{
+      margin-top:6px;
+      color:var(--subtitle);
+      font-size:13px;
+      line-height:1.4;
+    }
+
+    .version{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:calc(env(safe-area-inset-bottom) + 10px);
+      color:var(--version-text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+      font-size:10px;
+      line-height:1;
+      letter-spacing:.35px;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    @media(max-width:430px){
+      .page{
+        padding-left:18px;
+        padding-right:18px;
+      }
+
+      h1{font-size:37px}
+
+      .intro{margin:42px 0 12px}
+
+      .choice{
+        min-height:92px;
+        padding:19px 20px;
+        border-radius:20px;
+      }
+
+      .choice-title{font-size:19px}
+      .choice-subtitle{font-size:12px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .choice{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Präpositionen.</h1>
+      <p class="intro">Was möchtest du üben?</p>
+    </header>
+
+    <section class="choices" aria-label="Übungen">
+      <button class="choice" type="button" data-target="kasus/kasus.html">
+        <div class="choice-title">Fester Kasus</div>
+        <div class="choice-subtitle">Präposition → Kasus</div>
+      </button>
+    </section>
+  </main>
+
+  <div class="version">Präpositionen · Auswahl</div>
+
+  <script>
+    document.querySelectorAll("[data-target]").forEach(button=>{
+      button.addEventListener("click",()=>{
+        window.location.href=button.dataset.target;
+      });
+    });
+  </script>
+</body>
+</html>
