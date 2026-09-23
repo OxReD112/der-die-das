@@ -1226,7 +1226,7 @@ header h1 {
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=1" type="button">
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=3" type="button">
      <div class="tile-art">
       <img alt="" src="praepositionen/icon.webp"/>
      </div>
@@ -1452,7 +1452,7 @@ header h1 {
 
         if(cfg.key==='praepositionen'){
           // Sum of all Präpositionen exercises; add new ones here.
-          answers=answerCount(data.festerKasus)+answerCount(data.verbenMitPraepositionen);
+          answers=answerCount(data.festerKasus)+answerCount(data.verbenMitPraepositionen)+answerCount(data.ortspraepositionen);
         }
 
         exercisePoints+=answers;
