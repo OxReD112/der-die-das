@@ -785,7 +785,8 @@ header h1 {
 
 .phrase-screen {
   position: relative;
-  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
+  /* -56px = .page padding-top; without it the page was always 56px too tall and scrolled */
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px - 56px);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
