@@ -27,12 +27,9 @@
   --muted:#929297;
   --tertiary-text:#aaa;
   --secondary-text:#c7c7cc;
-  --placeholder-text:#666;
   --mint:#4fd7b3;
   --red:#ff6b73;
 
-  --surface:#202022;
-  --surface-2:#252527;
   --key:#303033;
 
   --line:rgba(255,255,255,.10);
@@ -40,7 +37,6 @@
   --feedback-divider:rgba(255,255,255,.11);
   --gap-line:rgba(255,255,255,.28);
 
-  --brand-text:rgba(255,255,255,.11);
   --version-text:rgba(255,255,255,.18);
 
   --cta-bg:#eee8df;
@@ -68,12 +64,9 @@
   --muted:#77777d;
   --tertiary-text:#8a8a90;
   --secondary-text:#5b5b60;
-  --placeholder-text:#9a9a9a;
   --mint:#2fae90;
   --red:#e0454d;
 
-  --surface:#fff;
-  --surface-2:#fff;
   --key:#efece6;
 
   --line:rgba(0,0,0,.10);
@@ -81,7 +74,6 @@
   --feedback-divider:rgba(0,0,0,.11);
   --gap-line:rgba(0,0,0,.25);
 
-  --brand-text:rgba(0,0,0,.08);
   --version-text:rgba(0,0,0,.18);
 
   --cta-bg:#242426;
@@ -108,7 +100,6 @@ body{display:flex;justify-content:center}
 .app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
 .screen{min-height:690px;padding:20px 14px}
 .hidden{display:none!important}
-.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--brand-text);margin:30px 0 70px}
 .start-title{margin:60px 0 12px}
 .start-sub{font-size:19px;font-weight:600;color:var(--secondary-text);margin-bottom:4px}
 .center{text-align:center}
@@ -265,7 +256,7 @@ html:not(.is-touch) .check.hidden{display:none}
   </div>
 </section>
 
-<div class="version">v2.6 · Verben mit Präpositionen</div>
+<div class="version">v2.7 · Verben mit Präpositionen</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
@@ -334,7 +325,7 @@ function recordDaily(correct){
 // ===== SESSION =====
 let session = [], index = 0, phase = "type", typed = "";
 let prepOK = false, caseOK = null, chosenCase = null, caseShownAt = 0;
-let score = {full:0, prep:0, cas:0, casTotal:0}, sessionAnswers = {};
+let score = {full:0, prep:0, cas:0, casTotal:0}, sessionAnswers = {}, liveSession = null;
 
 function buildSession(size){
   const stats = currentStats();
@@ -343,10 +334,18 @@ function buildSession(size){
     return {x, k: -Math.log(Math.max(Math.random(), 1e-12)) / (1 + err * 4)};
   }).sort((a, b) => a.k - b.k).slice(0, Math.min(size, DATA.length)).map(o => o.x);
 }
+// Stats are saved after every answer, so leaving mid-session keeps them.
+// The session is added to the history on its first answer (empty ones never are).
 function mark(key, ok){
   const v = sessionAnswers[key] || {correct:0, wrong:0};
   if(ok) v.correct++; else v.wrong++;
   sessionAnswers[key] = v;
+  if(!liveSession){
+    liveSession = {date:localDayKey(), answers:sessionAnswers};
+    statsStore.sessions.push(liveSession);
+    if(statsStore.sessions.length > SESSION_WINDOW) statsStore.sessions = statsStore.sessions.slice(-SESSION_WINDOW);
+  }
+  saveStats();
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -358,7 +357,7 @@ function prepMatches(input, target){
 
 function start(size){
   session = buildSession(size); index = 0;
-  score = {full:0, prep:0, cas:0, casTotal:0}; sessionAnswers = {};
+  score = {full:0, prep:0, cas:0, casTotal:0}; sessionAnswers = {}; liveSession = null;
   $("start").classList.add("hidden"); $("done").classList.add("hidden"); $("game").classList.remove("hidden");
   render();
 }
@@ -511,11 +510,6 @@ function weakLabel(key){
 }
 
 function finish(){
-  if(Object.keys(sessionAnswers).length){
-    statsStore.sessions.push({date:localDayKey(), answers:sessionAnswers});
-    if(statsStore.sessions.length > SESSION_WINDOW) statsStore.sessions = statsStore.sessions.slice(-SESSION_WINDOW);
-    saveStats();
-  }
   $("game").classList.add("hidden"); $("done").classList.remove("hidden");
   $("score").textContent = score.full + " / " + session.length;
   let parts = `<span class="done-part">Präposition <b>${score.prep} / ${session.length}</b></span>`;
