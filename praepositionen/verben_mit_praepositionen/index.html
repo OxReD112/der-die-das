@@ -172,6 +172,10 @@ html:not(.is-touch) .check.hidden{display:none}
 /* Compact case question + buttons (Fester Kasus style, smaller). */
 .case-question{align-self:start;color:var(--muted);font-size:16px;line-height:1.2;padding-top:6px}
 .case-step{margin-top:28px}
+/* Phone: extra gap above the case buttons grows with the screen height
+   (≈ half a button on an iPhone 15, a bit less on small phones, more on large ones).
+   Tune the 8dvh / 40px pair to move them. */
+html.is-touch .case-step{margin-top:calc(28px + max(0px, 8vh - 40px));margin-top:calc(28px + max(0px, 8dvh - 40px))}
 .choices{display:grid;grid-template-columns:repeat(var(--case-count,2),1fr);gap:10px;width:min(600px,100%);margin:0 auto}
 .case-choice{appearance:none;border:0;border-radius:14px;min-height:56px;padding:0 18px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
 .case-choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
@@ -287,7 +291,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   </div>
 </section>
 
-<div class="version">v2.9 · Test 2: Frage oben, Buttons unten</div>
+<div class="version">v3.0 · Test 2: Frage oben, Buttons unten</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
