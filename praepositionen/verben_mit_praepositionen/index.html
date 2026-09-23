@@ -130,17 +130,22 @@ html:not(.is-touch) .gap.typing{cursor:text}
 .gap-mirror{visibility:hidden;white-space:pre}
 .gap-input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0 .12em;border:0;outline:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-align:center;caret-color:var(--text);-webkit-appearance:none;appearance:none}
 html.is-touch .gap-input{pointer-events:none}
-.case-line{margin-top:8px;font-size:clamp(22px,5vw,28px);font-weight:650;letter-spacing:-.02em;line-height:1.2;opacity:0;transition:opacity .3s ease}
-.case-line.shown{opacity:1}
+/* Slot under the verb: case question/buttons and "+ Kasus" share one grid cell. */
+.above-slot{display:grid;margin-top:14px}
+/* Keep the question area (and its buttons) above the feedback glow. */
+.prompt{position:relative;z-index:1}
+.above-slot>*{grid-area:1/1;transition:opacity .25s ease}
+.above-slot>.off{opacity:0;visibility:hidden}
+.case-line{align-self:start;font-size:clamp(22px,5vw,28px);font-weight:650;letter-spacing:-.02em;line-height:1.2}
 .context{color:var(--muted);font-size:16px;line-height:1.4;margin-bottom:17px}
 
-.check{display:none;width:min(600px,100%);margin:60px auto 0;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+.check{display:none;width:min(600px,100%);margin:28px auto 0;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
 .check:active{transform:scale(.99)}
 html:not(.is-touch) .check{display:block}
 html:not(.is-touch) .check.hidden{display:none}
 
 /* ===== FEEDBACK (Pronomen style, glow per step) ===== */
-.feedback{--state-l:var(--mint);--state-r:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid var(--feedback-divider);isolation:isolate;transition:--state-l .45s ease,--state-r .45s ease}
+.feedback{--state-l:var(--mint);--state-r:var(--mint);position:relative;margin:30px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid var(--feedback-divider);isolation:isolate;transition:--state-l .45s ease,--state-r .45s ease}
 .feedback.wrong-l{--state-l:var(--red)}
 .feedback.wrong-r{--state-r:var(--red)}
 /* Glow: one ellipse per half, masked so they meet softly in the middle.
@@ -164,14 +169,14 @@ html:not(.is-touch) .check.hidden{display:none}
 .good{color:var(--mint)}
 .struck{text-decoration:line-through;text-decoration-thickness:2px}
 
-.case-step{margin-top:28px}
-.case-question{color:var(--muted);font-size:15px;line-height:18px;margin-bottom:12px}
-.choices{display:grid;grid-template-columns:repeat(var(--case-count,2),1fr);gap:10px;width:min(600px,100%);margin:0 auto}
-.case-choice{appearance:none;border:0;border-radius:14px;min-height:56px;padding:0 18px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+/* Compact case question + buttons (Fester Kasus style, smaller). */
+.case-question{color:var(--muted);font-size:13px;line-height:16px;margin-bottom:9px}
+.choices{display:flex;justify-content:center;gap:10px}
+.case-choice{appearance:none;border:0;border-radius:12px;min-height:44px;min-width:128px;padding:0 20px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
 .case-choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
 .case-choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
 .case-choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-@media(max-width:520px){.case-choice{font-size:19px}}
+@media(max-width:520px){.case-choice{font-size:16px;min-width:124px}}
 
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .chip{display:inline-flex;align-items:baseline;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:11px;font-size:13px;color:var(--secondary-text)}
@@ -198,6 +203,19 @@ html:not(.is-touch) .check.hidden{display:none}
 #homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
 #home:active,#homeBack:active{transform:scale(.99)}
 
+/* ===== PHONE: KEYBOARD POSITION =====
+   While typing on a phone, the question screen fills the full height and the
+   free space below the verb is split 2 : 1 — two parts above the keyboard,
+   one part below it (plus the home-indicator safe area). Adapts to any phone;
+   change the two flex values to move it (3 : 1 = lower, 3 : 2 = higher). */
+.kb-space{display:none}
+html.is-touch .app{padding-bottom:0}
+html.is-touch #game{display:flex;flex-direction:column;min-height:calc(100vh - env(safe-area-inset-top) - 8px);min-height:calc(100dvh - env(safe-area-inset-top) - 8px);padding-bottom:env(safe-area-inset-bottom)}
+html.is-touch .exercise{flex:1}
+html.is-touch .exercise.typing .kb-space{display:block}
+html.is-touch .exercise.typing .kb-space.above{flex:2}
+html.is-touch .exercise.typing .kb-space.below{flex:1}
+
 .version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.divider{left:0;width:100%}}
 </style>
@@ -214,11 +232,20 @@ html:not(.is-touch) .check.hidden{display:none}
 <section id="game" class="screen hidden">
   <div class="top"><div><div class="top-title">Verben mit Präpositionen</div><div class="progress"><i id="bar"></i></div></div><div class="counter" id="counter">1 / 10</div></div>
 
-  <div class="exercise">
+  <div class="exercise" id="exercise">
     <div class="prompt" id="prompt">
       <div class="context" id="meaning"></div>
       <div class="sentence" id="sentence"><span id="verb"></span> <span class="gap typing" id="gap"></span></div>
-      <div class="case-line" id="caseLine" aria-hidden="true">&nbsp;</div>
+      <!-- One slot under the verb: holds "Welcher Kasus?" + buttons during step 2,
+           then "+ Kasus" after the answer. Its height is reserved from the start,
+           so the line below never moves. -->
+      <div class="above-slot">
+        <div class="case-line off" id="caseLine" aria-hidden="true">&nbsp;</div>
+        <div class="case-step off" id="caseStep">
+          <div class="case-question">Welcher Kasus?</div>
+          <div class="choices" id="choices"></div>
+        </div>
+      </div>
     </div>
     <button class="check" id="check">Check</button>
 
@@ -227,10 +254,6 @@ html:not(.is-touch) .check.hidden{display:none}
       <div class="divider"><i class="sl"></i><i class="sr"></i><i class="line"></i></div>
       <div id="prepFeedback">
         <div class="given" id="given"></div>
-        <div class="case-step hidden" id="caseStep">
-          <div class="case-question">Welcher Kasus?</div>
-          <div class="choices" id="choices"></div>
-        </div>
       </div>
       <div id="finalFeedback" class="hidden">
         <div class="chips" id="chips"></div>
@@ -239,7 +262,9 @@ html:not(.is-touch) .check.hidden{display:none}
         <button class="continue" id="continue">Continue</button>
       </div>
     </div>
+    <div class="kb-space above"></div>
     <div id="keyboardMount"></div>
+    <div class="kb-space below"></div>
   </div>
 </section>
 
@@ -256,7 +281,7 @@ html:not(.is-touch) .check.hidden{display:none}
   </div>
 </section>
 
-<div class="version">v2.7 · Verben mit Präpositionen</div>
+<div class="version">v2.8 · Test: Kasus über der Linie</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
@@ -383,13 +408,14 @@ function render(){
     });
   }
   // Space for "+ Kasus" is always reserved so the meaning and the line never move.
-  $("caseLine").className = "case-line";
+  $("caseLine").className = "case-line off";
   $("caseLine").innerHTML = "&nbsp;";
   $("caseLine").setAttribute("aria-hidden","true");
+  $("caseStep").classList.add("off");
   paintGap();
   $("check").classList.remove("hidden");
+  $("exercise").classList.add("typing");
   $("feedback").className = "feedback hidden";
-  $("caseStep").classList.add("hidden");
   $("finalFeedback").classList.add("hidden");
   $("prepFeedback").classList.remove("hidden");
   if(window.deutschKeyboardReady) $("keyboard").classList.add("show");
@@ -435,6 +461,7 @@ function submitPrep(){
   $("gap").textContent = x.preposition;
   fitSentence();
   $("check").classList.add("hidden");
+  $("exercise").classList.remove("typing");
   if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
 
   $("given").innerHTML = prepOK
@@ -446,7 +473,7 @@ function submitPrep(){
   if(asksCase(x)){
     phase = "case";
     caseShownAt = performance.now();
-    $("caseStep").classList.remove("hidden");
+    $("caseStep").classList.remove("off");
   }else{
     showAnswer();
   }
@@ -481,7 +508,8 @@ function showAnswer(){
   if(caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
   $("caseLine").textContent = "+ " + x.case;
   $("caseLine").removeAttribute("aria-hidden");
-  $("caseLine").classList.add("shown");
+  $("caseStep").classList.add("off");
+  $("caseLine").classList.remove("off");
 
   let chips = chip(prepOK, "Präposition", typed.trim());
   if(caseOK !== null) chips += chip(caseOK, "Kasus", chosenCase);
@@ -532,8 +560,8 @@ $("choices").style.setProperty("--case-count", CHOICE_CASES.length);
 $("choices").innerHTML = CHOICE_CASES.map(c => `<button class="case-choice" data-case="${c}">${c}</button>`).join("");
 $("choices").addEventListener("click", e => {
   const b = e.target.closest("button[data-case]");
-  // On phones the tap on the keyboard's ✓ can "click through" onto the case
-  // button that appears under the finger — ignore taps in the first moment.
+  // Safety guard: ignore taps in the first moment after the buttons appear
+  // (a tap on the keyboard's ✓ must never also pick a case).
   if(b && performance.now() - caseShownAt > 450) chooseCase(b.dataset.case);
 });
 
