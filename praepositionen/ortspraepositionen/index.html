@@ -1,1 +1,448 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){
+  try{
+    if(localStorage.getItem("deutschThemeV1")==="light"){
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  }catch(e){}
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ortspräpositionen">
+<title>Ortspräpositionen</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#17181a;--panel:#1f2022;--panel-2:#252629;--text:#eee9e0;--muted:#8c8b89;
+  --text-secondary:#b9b5ae;--line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.20);--top-title:rgba(255,255,255,.48);
+  --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
+  --cta-bg:#ece6dc;--cta-text:#1b1c1e;
+  --button-bg:#2a2b2e;--button-bg-hover:#313235;--button-text:#fff;
+  --button-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --button-shadow-hover:inset 0 1px 0 rgba(255,255,255,.05),0 7px 18px rgba(0,0,0,.16);
+  --button-shadow-active:inset 0 1px 0 rgba(255,255,255,.03),0 3px 9px rgba(0,0,0,.12);
+  --focus:rgba(255,255,255,.18);
+  --secondary-bg:rgba(0,0,0,.05);--secondary-text:rgba(238,233,224,.55);
+  --version:rgba(255,255,255,.18);
+  --card-sheen:radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.10) 0%,rgba(255,255,255,.045) 22%,transparent 48%),radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.12) 0%,rgba(0,0,0,.055) 24%,transparent 52%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(91,200,164,.38) 0%,rgba(91,200,164,.20) 24%,rgba(91,200,164,.08) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(255,119,112,.40) 0%,rgba(255,119,112,.20) 24%,rgba(255,119,112,.08) 48%,transparent 76%);
+  --shadow:0 18px 55px rgba(0,0,0,.18);
+  --step-bg:rgba(255,255,255,.035);
+  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(91,200,164,.34) 0%,rgba(91,200,164,.17) 35%,rgba(91,200,164,.06) 68%,rgba(91,200,164,0) 100%);
+  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(255,119,112,.36) 0%,rgba(255,119,112,.18) 35%,rgba(255,119,112,.06) 68%,rgba(255,119,112,0) 100%);
+}
+[data-theme="light"]{
+  --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#252528;--muted:#727278;
+  --text-secondary:#55565b;--line:rgba(0,0,0,.09);--line-strong:rgba(0,0,0,.20);--top-title:rgba(37,37,40,.48);
+  --progress:rgba(32,32,35,.28);--mint:#55b99a;--coral:#ef666c;--blue:#5d8fe5;
+  --cta-bg:#252528;--cta-text:#f5f2ec;
+  --button-bg:#fff;--button-bg-hover:#f4f2ef;--button-text:var(--text);
+  --button-shadow:0 0 0 1px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.07);
+  --button-shadow-hover:0 0 0 1px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.07);
+  --button-shadow-active:0 0 0 1px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.05);
+  --focus:rgba(0,0,0,.18);
+  --secondary-bg:rgba(0,0,0,.03);--secondary-text:rgba(37,37,40,.55);
+  --version:rgba(37,37,40,.30);
+  --card-sheen:radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.035) 0%,rgba(0,0,0,.015) 24%,transparent 52%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(85,185,154,.28) 0%,rgba(85,185,154,.13) 24%,rgba(85,185,154,.05) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(239,102,108,.27) 0%,rgba(239,102,108,.12) 24%,rgba(239,102,108,.04) 48%,transparent 76%);
+  --shadow:0 12px 40px rgba(0,0,0,.06);
+  --step-bg:rgba(255,255,255,.42);
+  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(85,185,154,.26) 0%,rgba(85,185,154,.12) 35%,rgba(85,185,154,.04) 68%,rgba(85,185,154,0) 100%);
+  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(239,102,108,.25) 0%,rgba(239,102,108,.11) 35%,rgba(239,102,108,.04) 68%,rgba(239,102,108,0) 100%);
+}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;-webkit-tap-highlight-color:transparent}
+.app{width:min(100%,620px);margin:0 auto;padding:clamp(20px,5vw,38px) 18px 36px;min-height:100vh}
+.hidden{display:none!important}
 
+/* ===== START + END SCREENS (same as Fester Kasus) ===== */
+.session-screen,.end-screen{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding:8px 20px 36px}
+.session-screen{padding-top:56px}
+.session-screen h1,.end-screen h1{line-height:1.05;letter-spacing:-.04em;margin:0 0 11px}
+.session-screen h1{font-size:clamp(28px,8.6vw,36px)}
+.end-screen h1{font-size:54px;margin-bottom:24px}
+.session-screen p{color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 28px;max-width:390px}
+.end-score{font-size:36px;line-height:1;font-weight:650;letter-spacing:-1.5px;margin:0 0 28px}
+.end-note{color:var(--muted);font-size:14px;line-height:1.4;margin:0 0 28px;max-width:390px}
+.finish-actions{width:min(100%,360px)}
+.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font-size:16px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.finish-actions .again{background:var(--secondary-bg);color:var(--secondary-text);border:1px solid var(--line)}
+.finish-actions .home-back{margin-top:10px;background:var(--cta-bg);color:var(--cta-text)}
+.finish-actions button:active{transform:scale(.99)}
+
+/* ===== BUTTONS ===== */
+.session-options{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.session-option,.choice{
+  appearance:none;border:0;border-radius:14px;
+  background:var(--button-bg);color:var(--button-text);
+  font-weight:650;cursor:pointer;box-shadow:var(--button-shadow);
+  transition:transform .16s ease,background .16s ease,box-shadow .16s ease,opacity .16s ease;
+}
+.session-option{min-width:105px;padding:17px 20px;font-size:21px}
+.choice{min-height:56px;padding:0 10px;font-size:17px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.session-option:hover,.choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+.session-option:active,.choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
+.session-option:focus-visible,.choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.choice:disabled{opacity:.45;cursor:default;transform:none}
+
+/* Fixed slots: 1 in/aus · 2 an · 3 auf · 4 bei/zu (Personen) · 5 extra (zu Hause / nach)
+   Wo + Wohin: 3 on top, 2 below. Woher: 2 side by side. */
+.choices{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
+.choice{grid-column:span 2}
+.choices.five .choice:nth-child(n+4){grid-column:span 3}
+.choices.two .choice{grid-column:span 3}
+
+/* ===== GAME ===== */
+.top{margin:2px 2px 0}
+.top-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+.top-title{font-size:14px;color:var(--top-title);font-weight:650}
+.counter{font-size:13px;color:var(--muted);padding-bottom:2px;font-variant-numeric:tabular-nums}
+.progress{margin-top:10px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--progress);border-radius:inherit;transition:width .25s ease}
+
+/* No card: the word, the three lines and the rule sit directly on the page. */
+.card{margin-top:15px;padding:34px 0 0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+
+/* Result glow: starts right under the progress line (straight top edge)
+   and fades to zero exactly at the progress line's left and right ends. */
+.top{position:relative}
+.glow{position:absolute;left:0;right:0;top:100%;height:440px;pointer-events:none;z-index:0;opacity:0;transition:opacity .25s ease-out;background:var(--result-glow,none)}
+#game.good .glow{--result-glow:var(--top-good-glow);opacity:1}
+#game.bad .glow{--result-glow:var(--top-bad-glow);opacity:1}
+
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.10em;font-weight:650;height:14px;margin-bottom:12px;color:transparent;transition:color .2s ease}
+#game.good .eyebrow{color:var(--mint)}
+#game.bad .eyebrow{color:var(--coral)}
+
+.place{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:32px;white-space:nowrap;letter-spacing:-.6px;line-height:1.05;margin-bottom:6px}
+.place .article{color:var(--muted);font-size:.62em;letter-spacing:-.2px;margin-right:.2em;vertical-align:.08em}
+.translation{color:var(--text-secondary);font-size:15px;line-height:1.4;min-height:23px}
+
+/* Three steps: Wo · Wohin · Woher */
+.steps{width:100%;margin-top:24px;display:grid;gap:8px;text-align:left}
+.step{display:grid;grid-template-columns:62px 1fr;align-items:baseline;gap:10px;padding:12px 14px;border-radius:15px;border:1px solid var(--line);background:var(--step-bg);transition:opacity .2s ease,border-color .2s ease}
+.step.pending{opacity:.38}
+.step.active{border-color:var(--line-strong)}
+.step-q{font-size:13px;font-weight:650;color:var(--muted)}
+.step.active .step-q{color:var(--text)}
+.sentence{font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.35;min-width:0}
+.sentence .lead{color:var(--muted)}
+.slot{display:inline-block;min-width:3.2em;padding:0 .15em;margin:0 .12em;text-align:center;border-bottom:1.5px solid var(--line-strong);line-height:1.15}
+.step.active .slot{border-bottom-color:var(--text)}
+.slot.good{border-bottom-color:transparent;color:var(--mint);min-width:0}
+.slot.bad{border-bottom-color:transparent;min-width:0}
+.step .slot.good,.step .slot.bad{border-bottom-color:transparent}
+.slot .wrong{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--coral);opacity:.82;margin-right:.3em}
+.slot .right{color:var(--text)}
+
+.rule{margin-top:18px;min-height:40px;opacity:0;transition:opacity .25s ease}
+.card.done .rule{opacity:1}
+.rule-label{font-size:13px;color:var(--text-secondary);line-height:1.4}
+.rule-forms{margin-top:3px;font-size:15px;font-weight:650;letter-spacing:-.01em}
+
+.next{width:100%;height:54px;margin-top:14px;border:0;border-radius:16px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650;cursor:pointer}
+.next:active{transform:scale(.985)}
+
+.version-mark{position:fixed;right:10px;bottom:8px;color:var(--version);font-size:11px;letter-spacing:.04em;pointer-events:none}
+
+@media(max-width:520px){
+  .app{padding-top:calc(env(safe-area-inset-top) + 10px)}
+  .card{padding-top:28px}
+  .step{grid-template-columns:54px 1fr;padding:11px 12px;gap:8px}
+  .sentence{font-size:17px}
+  .choices{position:sticky;bottom:10px;z-index:10}
+  .choice{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<section class="session-screen" id="sessionScreen">
+  <h1>Ortspräpositionen</h1>
+  <p>Wie viele Übungen möchtest du machen?</p>
+  <div class="session-options">
+    <button class="session-option" data-size="10">10</button>
+    <button class="session-option" data-size="20">20</button>
+    <button class="session-option" data-size="30">30</button>
+  </div>
+</section>
+
+<section id="game" class="hidden">
+  <header class="top"><div class="top-row"><div class="top-title">Ortspräpositionen</div><div class="counter" id="counter">1 / 10</div></div><div class="progress"><i id="bar"></i></div><div class="glow" aria-hidden="true"></div></header>
+
+  <section class="card" id="card">
+    <div class="eyebrow" id="eyebrow">&nbsp;</div>
+    <div class="place" id="place"></div>
+    <div class="translation" id="translation"></div>
+    <div class="steps" id="steps"></div>
+    <div class="rule" id="rule">
+      <div class="rule-label" id="ruleLabel"></div>
+      <div class="rule-forms" id="ruleForms"></div>
+    </div>
+  </section>
+
+  <section class="choices" id="choices"></section>
+  <button class="next hidden" id="next">Continue</button>
+</section>
+
+<section class="end-screen hidden" id="endScreen">
+  <h1>Done.</h1>
+  <div class="end-score" id="endScore">0 / 30</div>
+  <div class="end-note" id="endNote"></div>
+  <div class="finish-actions">
+    <button class="again" id="again">Another session</button>
+    <button class="home-back" id="homeBack">Back to Home</button>
+  </div>
+</section>
+<div class="version-mark">v3</div>
+</main>
+
+<script src="ortspraepositionen.js?v=1"></script>
+<script>
+const PLACES = window.ORTSPRAEPOSITIONEN || [];
+const CATEGORIES = window.ORTS_KATEGORIEN || {};
+
+// ===== QUESTIONS + BUTTON SETS =====
+// Every question always shows its full set of prepositions, in fixed slots,
+// already fused with the article of the place's gender (m / f / n / pl / none).
+const QUESTIONS = [
+  {key:"wo",    label:"Wo?",    lead:"Ich bin"},
+  {key:"wohin", label:"Wohin?", lead:"Ich gehe"},
+  {key:"woher", label:"Woher?", lead:"Ich komme"}
+];
+const BUTTONS = {
+  wo:{
+    m:["im","am","auf dem","beim","zum"],   f:["in der","an der","auf der","bei der","zur"],
+    n:["im","am","auf dem","beim","zum"],   pl:["in den","an den","auf den","bei den","zu den"],
+    none:["in","an","auf","bei","zu"]
+  },
+  wohin:{
+    m:["in den","an den","auf den","zum","nach"], f:["in die","an die","auf die","zur","nach"],
+    n:["ins","ans","auf das","zum","nach"],       pl:["in die","an die","auf die","zu den","nach"],
+    none:["in","an","auf","zu","nach"]
+  },
+  woher:{
+    m:["aus dem","vom"], f:["aus der","von der"], n:["aus dem","vom"], pl:["aus den","von den"], none:["aus","von"]
+  }
+};
+function buttonsFor(entry,q){return BUTTONS[q][entry.gender||"none"];}
+function nounFor(entry,q){return (entry.forms&&entry.forms[q])||entry.noun;}
+
+const els = {
+  session:document.getElementById("sessionScreen"),game:document.getElementById("game"),end:document.getElementById("endScreen"),
+  counter:document.getElementById("counter"),bar:document.getElementById("bar"),card:document.getElementById("card"),
+  eyebrow:document.getElementById("eyebrow"),place:document.getElementById("place"),translation:document.getElementById("translation"),
+  steps:document.getElementById("steps"),rule:document.getElementById("rule"),ruleLabel:document.getElementById("ruleLabel"),ruleForms:document.getElementById("ruleForms"),
+  choices:document.getElementById("choices"),next:document.getElementById("next"),
+  endScore:document.getElementById("endScore"),endNote:document.getElementById("endNote"),again:document.getElementById("again"),homeBack:document.getElementById("homeBack")
+};
+
+let session=[], index=0, step=0, score=0, taps=0, cardResults=[], locked=false, cardDone=false;
+
+// ===== PERSISTENT DIFFICULTY =====
+// Tracked per place AND per question: missing "Woher? Strand" only raises
+// that step. A card's weight is the average of its three steps.
+// A place appears only once per session (weighted sampling without replacement).
+const DIFFICULTY_KEY="ortspraepositionenDifficultyV1";
+let difficulty={};
+try{difficulty=JSON.parse(localStorage.getItem(DIFFICULTY_KEY)||"{}")}catch(e){difficulty={}}
+function saveDifficulty(){try{localStorage.setItem(DIFFICULTY_KEY,JSON.stringify(difficulty))}catch(e){}}
+function stepWeight(entry,q){return Math.max(1,Number((difficulty[entry.id]||{})[q]||1));}
+function cardWeight(entry){return QUESTIONS.reduce((s,q)=>s+stepWeight(entry,q.key),0)/QUESTIONS.length;}
+function updateDifficulty(entry,q,correct){
+  let d=stepWeight(entry,q);
+  d=correct?Math.max(1,d-0.5):Math.min(4,d+1);
+  if(!difficulty[entry.id])difficulty[entry.id]={};
+  difficulty[entry.id][q]=Number(d.toFixed(2));
+  saveDifficulty();
+}
+function buildSession(size){
+  return PLACES.map(entry=>({entry,key:-Math.log(Math.max(Math.random(),1e-12))/cardWeight(entry)}))
+    .sort((a,b)=>a.key-b.key).slice(0,Math.min(size,PLACES.length)).map(x=>x.entry);
+}
+
+// ===== DAILY STATS (read by Home) =====
+// Every tap counts as one answer, like one answer in Fester Kasus.
+const DAILY_STATS_KEY="deutschDailyStatsV1";
+function localDayKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function recordDaily(correct){
+  try{
+    const today=localDayKey();
+    let data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}");
+    if(data.date!==today)data={date:today};
+    if(!data.ortspraepositionen)data.ortspraepositionen={answers:0,correct:0};
+    data.ortspraepositionen.answers++;
+    if(correct)data.ortspraepositionen.correct++;
+    localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(data));
+  }catch(e){}
+}
+
+// ===== FLOW =====
+function start(size){
+  session=buildSession(size);index=0;score=0;taps=0;
+  els.session.classList.add("hidden");els.end.classList.add("hidden");els.game.classList.remove("hidden");
+  render();
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function render(){
+  const entry=session[index];
+  step=0;cardResults=[];locked=false;cardDone=false;
+  els.counter.textContent=(index+1)+" / "+session.length;
+  els.bar.style.width=(index/session.length*100)+"%";
+
+  els.card.className="card";els.game.classList.remove("good","bad");
+  els.eyebrow.innerHTML="&nbsp;";
+  els.place.innerHTML=(entry.article?'<span class="article">'+escapeHtml(entry.article)+'</span>':"")+escapeHtml(entry.noun);
+  els.translation.textContent=entry.ru||"";
+
+  els.steps.innerHTML=QUESTIONS.map((q,i)=>
+    '<div class="step '+(i===0?"active":"pending")+'" data-step="'+i+'">'+
+      '<div class="step-q">'+q.label+'</div>'+
+      '<div class="sentence"><span class="lead">'+q.lead+'</span> <span class="slot" id="slot'+i+'">&nbsp;</span> '+escapeHtml(nounFor(entry,q.key))+'.</div>'+
+    '</div>'
+  ).join("");
+
+  els.ruleLabel.textContent="";els.ruleForms.textContent="";
+  els.next.classList.add("hidden");
+  els.choices.classList.remove("hidden");
+  renderChoices();
+  fitToCard(els.place);
+}
+
+function renderChoices(){
+  const entry=session[index],q=QUESTIONS[step].key,list=buttonsFor(entry,q);
+  els.choices.className="choices "+(list.length===2?"two":"five");
+  els.choices.innerHTML=list.map((form,i)=>'<button class="choice" data-form="'+escapeHtml(form)+'" data-slot="'+(i+1)+'">'+escapeHtml(form)+'</button>').join("");
+}
+
+function answer(form){
+  if(locked||cardDone)return;
+  const entry=session[index],q=QUESTIONS[step],right=entry[q.key],correct=form===right;
+  locked=true;
+  taps++;if(correct)score++;
+  cardResults.push(correct);
+  recordDaily(correct);
+  updateDifficulty(entry,q.key,correct);
+
+  const slot=document.getElementById("slot"+step);
+  if(correct){
+    slot.className="slot good";slot.textContent=right;
+  }else{
+    slot.className="slot bad";
+    slot.innerHTML='<span class="wrong">'+escapeHtml(form)+'</span><span class="right">'+escapeHtml(right)+'</span>';
+  }
+  pop(slot);
+  els.choices.querySelectorAll("button").forEach(b=>b.disabled=true);
+
+  // Short pause so the result of this line can be seen, then the next line opens.
+  setTimeout(()=>{
+    const rows=els.steps.querySelectorAll(".step");
+    rows[step].classList.remove("active");
+    if(step<QUESTIONS.length-1){
+      step++;
+      rows[step].classList.remove("pending");rows[step].classList.add("active");
+      renderChoices();locked=false;
+    }else{
+      finishCard();
+    }
+  },correct?380:700);
+}
+
+function finishCard(){
+  const entry=session[index],cat=CATEGORIES[entry.cat]||{};
+  const wrong=cardResults.filter(x=>!x).length;
+  cardDone=true;locked=false;
+  els.card.classList.add("done");els.game.classList.add(wrong?"bad":"good");
+  els.eyebrow.textContent=wrong?"Nicht ganz · "+(3-wrong)+" / 3":"Richtig";
+  els.ruleLabel.textContent=cat.label||"";
+  els.ruleForms.textContent=cat.rule||"";
+  els.choices.classList.add("hidden");
+  els.next.textContent=index===session.length-1?"Finish":"Continue";
+  els.next.classList.remove("hidden");
+  els.bar.style.width=((index+1)/session.length*100)+"%";
+}
+
+function next(){
+  if(!cardDone)return;
+  if(index>=session.length-1){finish();return;}
+  index++;render();window.scrollTo({top:0,behavior:"smooth"});
+}
+function finish(){
+  els.game.classList.add("hidden");els.end.classList.remove("hidden");
+  els.endScore.textContent=score+" / "+taps;window.scrollTo({top:0,behavior:"auto"});
+  els.endNote.textContent="Places you miss come back more often in future sessions.";
+}
+
+// ===== SMALL MOTION =====
+const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+function pop(el){
+  if(reduceMotion.matches||!el.animate)return;
+  el.animate([{opacity:0,transform:"translateY(-5px)"},{opacity:1,transform:"none"}],{duration:180,easing:"ease-out"});
+}
+
+// Keeps the CSS size for places that fit; shrinks only a word wider than the card.
+function fitToCard(el){
+  el.style.fontSize="";
+  const card=el.parentElement,cs=getComputedStyle(card);
+  const available=card.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const width=el.getBoundingClientRect().width;
+  if(width>available&&available>0){
+    el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)*available/width*0.97)+"px";
+  }
+}
+window.addEventListener("resize",()=>{if(!els.game.classList.contains("hidden"))fitToCard(els.place);});
+
+// ===== EVENTS =====
+document.querySelectorAll(".session-option").forEach(btn=>btn.addEventListener("click",()=>start(Number(btn.dataset.size))));
+els.choices.addEventListener("click",e=>{const btn=e.target.closest("button[data-form]");if(btn&&!btn.disabled)answer(btn.dataset.form);});
+els.next.addEventListener("click",next);
+els.again.addEventListener("click",()=>{els.end.classList.add("hidden");els.session.classList.remove("hidden");});
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src="about:blank";
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+els.homeBack.addEventListener("click",goBackToHome);
+// Desktop: keys 1–5 pick the button in that slot, Enter/Space continues.
+document.addEventListener("keydown",e=>{
+  if(els.game.classList.contains("hidden"))return;
+  if(cardDone){
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();next();}
+    return;
+  }
+  const btn=els.choices.querySelector('button[data-slot="'+e.key+'"]');
+  if(btn&&!btn.disabled)answer(btn.dataset.form);
+});
+</script>
+</body>
+</html>
