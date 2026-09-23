@@ -203,18 +203,23 @@ html:not(.is-touch) .check.hidden{display:none}
 #homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
 #home:active,#homeBack:active{transform:scale(.99)}
 
-/* ===== PHONE: KEYBOARD POSITION =====
-   While typing on a phone, the question screen fills the full height and the
-   free space below the verb is split 2 : 1 — two parts above the keyboard,
-   one part below it (plus the home-indicator safe area). Adapts to any phone;
-   change the two flex values to move it (3 : 1 = lower, 3 : 2 = higher). */
-.kb-space{display:none}
+/* ===== PHONE LAYOUT: TWO ZONES =====
+   The question screen fills the phone's height and is split into
+   1) a question zone (top): the question is centred in it, and
+   2) a keyboard zone (bottom): keyboard + a gap below it that scales with
+      the screen height (tune the 33.5dvh / 150px pair to move the keyboard).
+   The keyboard zone stays reserved after Check (keyboard only becomes
+   invisible), so the question never moves. The line and results are placed
+   under the question without affecting the centring. */
 html.is-touch .app{padding-bottom:0}
 html.is-touch #game{display:flex;flex-direction:column;min-height:calc(100vh - env(safe-area-inset-top) - 8px);min-height:calc(100dvh - env(safe-area-inset-top) - 8px);padding-bottom:env(safe-area-inset-bottom)}
-html.is-touch .exercise{flex:1}
-html.is-touch .exercise.typing .kb-space{display:block}
-html.is-touch .exercise.typing .kb-space.above{flex:2}
-html.is-touch .exercise.typing .kb-space.below{flex:1}
+html.is-touch .exercise{flex:1;display:grid;grid-template-rows:minmax(0,1fr) auto}
+html.is-touch .qzone{display:flex;align-items:center}
+html.is-touch .anchor{position:relative;width:100%}
+html.is-touch .prompt{margin:0 auto}
+html.is-touch .feedback{position:absolute;left:0;right:0;top:100%}
+html.is-touch .kbzone{padding-bottom:max(4px,calc(33.5vh - 150px));padding-bottom:max(4px,calc(33.5dvh - 150px))}
+html.is-touch .kbzone.kb-off{visibility:hidden}
 
 .version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.divider{left:0;width:100%}}
@@ -233,6 +238,7 @@ html.is-touch .exercise.typing .kb-space.below{flex:1}
   <div class="top"><div><div class="top-title">Verben mit Präpositionen</div><div class="progress"><i id="bar"></i></div></div><div class="counter" id="counter">1 / 10</div></div>
 
   <div class="exercise" id="exercise">
+   <div class="qzone"><div class="anchor">
     <div class="prompt" id="prompt">
       <div class="context" id="meaning"></div>
       <div class="sentence" id="sentence"><span id="verb"></span> <span class="gap typing" id="gap"></span></div>
@@ -262,9 +268,8 @@ html.is-touch .exercise.typing .kb-space.below{flex:1}
         <button class="continue" id="continue">Continue</button>
       </div>
     </div>
-    <div class="kb-space above"></div>
-    <div id="keyboardMount"></div>
-    <div class="kb-space below"></div>
+   </div></div>
+    <div class="kbzone" id="kbZone"><div id="keyboardMount"></div></div>
   </div>
 </section>
 
@@ -281,7 +286,7 @@ html.is-touch .exercise.typing .kb-space.below{flex:1}
   </div>
 </section>
 
-<div class="version">v2.8 · Test: Kasus über der Linie</div>
+<div class="version">v2.9 · Test: Kasus über der Linie</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
@@ -414,11 +419,11 @@ function render(){
   $("caseStep").classList.add("off");
   paintGap();
   $("check").classList.remove("hidden");
-  $("exercise").classList.add("typing");
   $("feedback").className = "feedback hidden";
   $("finalFeedback").classList.add("hidden");
   $("prepFeedback").classList.remove("hidden");
   if(window.deutschKeyboardReady) $("keyboard").classList.add("show");
+  $("kbZone").classList.remove("kb-off");
   fitSentence();
   focusGap();
 }
@@ -461,8 +466,9 @@ function submitPrep(){
   $("gap").textContent = x.preposition;
   fitSentence();
   $("check").classList.add("hidden");
-  $("exercise").classList.remove("typing");
-  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+  // Phone: keyboard keeps its space (so the question doesn't move), it just hides.
+  if(IS_TOUCH) $("kbZone").classList.add("kb-off");
+  else if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
 
   $("given").innerHTML = prepOK
     ? `<span class="good">${esc(x.preposition)}</span>`
