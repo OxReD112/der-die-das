@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){
+  if(localStorage.getItem("deutschThemeV1")==="light"){
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fester Kasus">
+<title>Fester Kasus</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#17181a;--panel:#1f2022;--panel-2:#252629;--text:#eee9e0;--muted:#8c8b89;
+  --text-secondary:#b9b5ae;--line:rgba(255,255,255,.09);--top-title:rgba(255,255,255,.48);
+  --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
+  --cta-bg:#ece6dc;--cta-text:#1b1c1e;
+  --button-bg:#202124;--button-bg-hover:var(--panel-2);--button-text:#fff;
+  --button-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 5px 14px rgba(0,0,0,.12);
+  --button-shadow-hover:inset 0 1px 0 rgba(255,255,255,.05),0 7px 18px rgba(0,0,0,.16);
+  --button-shadow-active:inset 0 1px 0 rgba(255,255,255,.03),0 3px 9px rgba(0,0,0,.12);
+  --focus:rgba(255,255,255,.18);
+  --secondary-bg:rgba(0,0,0,.05);--secondary-text:rgba(238,233,224,.55);
+  --version:rgba(255,255,255,.18);
+  --card-sheen:radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.10) 0%,rgba(255,255,255,.045) 22%,transparent 48%),radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.12) 0%,rgba(0,0,0,.055) 24%,transparent 52%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(91,200,164,.38) 0%,rgba(91,200,164,.20) 24%,rgba(91,200,164,.08) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(255,119,112,.40) 0%,rgba(255,119,112,.20) 24%,rgba(255,119,112,.08) 48%,transparent 76%);
+  --special-glow:radial-gradient(ellipse at 50% 38%,rgba(114,167,255,.34) 0%,rgba(114,167,255,.16) 24%,rgba(114,167,255,.06) 48%,transparent 76%);
+  --shadow:0 18px 55px rgba(0,0,0,.18);
+}
+[data-theme="light"]{
+  --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#252528;--muted:#727278;
+  --text-secondary:#55565b;--line:rgba(0,0,0,.09);--top-title:rgba(37,37,40,.48);
+  --progress:rgba(32,32,35,.28);--mint:#55b99a;--coral:#ef666c;--blue:#5d8fe5;
+  --cta-bg:#252528;--cta-text:#f5f2ec;
+  --button-bg:#fff;--button-text:var(--text);
+  --button-shadow:0 0 0 1px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.05);
+  --button-shadow-hover:0 0 0 1px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.07);
+  --button-shadow-active:0 0 0 1px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.05);
+  --focus:rgba(0,0,0,.18);
+  --secondary-bg:rgba(0,0,0,.03);--secondary-text:rgba(37,37,40,.55);
+  --version:rgba(37,37,40,.30);
+  --card-sheen:radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.035) 0%,rgba(0,0,0,.015) 24%,transparent 52%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(85,185,154,.28) 0%,rgba(85,185,154,.13) 24%,rgba(85,185,154,.05) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(239,102,108,.27) 0%,rgba(239,102,108,.12) 24%,rgba(239,102,108,.04) 48%,transparent 76%);
+  --special-glow:radial-gradient(ellipse at 50% 38%,rgba(93,143,229,.24) 0%,rgba(93,143,229,.11) 24%,rgba(93,143,229,.04) 48%,transparent 76%);
+  --shadow:0 12px 40px rgba(0,0,0,.06);
+}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit}
+.app{width:min(100%,620px);margin:0 auto;padding:clamp(20px,5vw,38px) 18px 36px;min-height:100vh}
+.hidden{display:none!important}
+
+/* ===== START + END SCREENS ===== */
+.session-screen,.end-screen{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding:8px 20px 36px}
+.session-screen{padding-top:56px}
+.session-screen h1,.end-screen h1{line-height:1.05;letter-spacing:-.04em;margin:0 0 11px}
+.session-screen h1{font-size:36px}
+.end-screen h1{font-size:54px;margin-bottom:24px}
+.session-screen p{color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 28px;max-width:390px}
+.end-score{font-size:36px;line-height:1;font-weight:650;letter-spacing:-1.5px;margin:0 0 28px}
+.end-note{color:var(--muted);font-size:14px;line-height:1.4;margin:0 0 28px;max-width:390px}
+.finish-actions{width:min(100%,360px)}
+.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font-size:16px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.finish-actions .again{background:var(--secondary-bg);color:var(--secondary-text);border:1px solid var(--line)}
+.finish-actions .home-back{margin-top:10px;background:var(--cta-bg);color:var(--cta-text)}
+.finish-actions button:active{transform:scale(.99)}
+
+/* ===== BUTTONS (session size + case choice) ===== */
+.session-options{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.session-option,.case-choice{
+  appearance:none;border:0;border-radius:14px;
+  background:var(--button-bg);color:var(--button-text);
+  font-weight:650;cursor:pointer;box-shadow:var(--button-shadow);
+  transition:transform .16s ease,background .16s ease,box-shadow .16s ease;
+}
+.session-option{min-width:105px;padding:17px 20px;font-size:21px}
+.case-choice{min-height:56px;padding:0 18px;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.session-option:hover,.case-choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+.session-option:active,.case-choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
+.session-option:focus-visible,.case-choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ===== GAME ===== */
+.top{margin:2px 2px 0}
+.top-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+.top-title{font-size:14px;color:var(--top-title);font-weight:650}
+.counter{font-size:13px;color:var(--muted);padding-bottom:2px;font-variant-numeric:tabular-nums}
+.progress{margin-top:10px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--progress);border-radius:inherit;transition:width .25s ease}
+.card{margin-top:15px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--shadow);padding:30px 24px 25px;min-height:365px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:var(--card-sheen);pointer-events:none}
+.preposition{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(64px,18vw,88px);letter-spacing:-3px;line-height:1;margin-bottom:14px}
+.translation{position:relative;color:var(--text-secondary);font-size:16px;line-height:1.4;min-height:23px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+
+/* ===== ANSWER CARD ===== */
+.answer-state{margin-top:15px}
+.answer-card-main{
+  min-height:365px;border:1px solid var(--line);border-radius:26px;background:var(--panel);
+  box-shadow:var(--shadow);padding:30px 28px 25px;display:flex;flex-direction:column;
+  align-items:center;text-align:center;position:relative;overflow:hidden;
+}
+.answer-card-main:before{content:"";position:absolute;inset:-170px -30% auto;height:380px;background:var(--answer-glow,var(--good-glow));pointer-events:none;animation:glowIn .25s ease-out both}
+@keyframes glowIn{from{opacity:0}}
+.answer-card-main>*{position:relative}
+.answer-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.10em;color:var(--mint);font-weight:650;margin-bottom:22px}
+.answer-preposition{font-family:Georgia,"Times New Roman",serif;font-size:clamp(50px,13vw,70px);line-height:1;letter-spacing:-3px}
+.answer-divider{width:42px;height:1px;background:var(--line);margin:20px 0}
+.answer-case-large{font-size:30px;font-weight:700;letter-spacing:-.03em}
+.answer-note{margin-top:10px;max-width:410px;color:var(--text-secondary);font-size:13px;line-height:1.4}
+.wrong-choice{display:inline-block;color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--coral);opacity:.82}
+.answer-example{margin-top:auto;padding-top:23px;font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.4}
+.answer-example-translation{margin-top:5px;color:var(--muted);font-size:12px;opacity:.68}
+.answer-card-main.special{--answer-glow:var(--special-glow)}
+.answer-card-main.special .answer-eyebrow{color:var(--blue)}
+.answer-card-main.wrong{--answer-glow:var(--bad-glow)}
+.answer-card-main.wrong .answer-eyebrow{color:var(--coral)}
+.next{width:100%;height:54px;margin-top:14px;border:0;border-radius:16px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650;cursor:pointer}
+.next:active{transform:scale(.985)}
+
+.version-mark{position:fixed;right:10px;bottom:8px;color:var(--version);font-size:11px;letter-spacing:.04em;pointer-events:none}
+
+@media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 10px)}.choices{position:sticky;bottom:10px;z-index:10}.case-choice{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<section class="session-screen" id="sessionScreen">
+  <h1>Fester Kasus</h1>
+  <p>Wie viele Übungen möchtest du machen?</p>
+  <div class="session-options">
+    <button class="session-option" data-size="10">10</button>
+    <button class="session-option" data-size="20">20</button>
+    <button class="session-option" data-size="30">30</button>
+  </div>
+</section>
+
+<section id="game" class="hidden">
+<header class="top"><div class="top-row"><div class="top-title">Fester Kasus</div><div class="counter" id="counter">1 / 10</div></div><div class="progress"><i id="bar"></i></div></header>
+<section class="card" id="questionCard">
+  <div class="preposition" id="preposition">mit</div>
+  <div class="translation" id="translation">с</div>
+</section>
+
+<section class="answer-state hidden" id="answerState">
+  <div class="answer-card-main" id="answerCardMain">
+    <div class="answer-eyebrow" id="answerEyebrow">Richtig</div>
+    <div class="answer-preposition" id="answerPreposition">mit</div>
+    <div class="answer-divider"></div>
+    <div class="answer-case-large" id="answerCase">Dativ</div>
+    <div class="answer-note" id="rule"></div>
+    <div class="answer-example" id="exampleText"></div>
+    <div class="answer-example-translation" id="exampleTranslation"></div>
+  </div>
+</section>
+
+<section class="choices" id="choices">
+  <button class="case-choice" data-case="Akkusativ">Akkusativ</button>
+  <button class="case-choice" data-case="Dativ">Dativ</button>
+  <button class="case-choice" data-case="Genitiv">Genitiv</button>
+</section>
+<button class="next hidden" id="next">Continue</button>
+</section>
+
+<section class="end-screen hidden" id="endScreen">
+  <h1>Done.</h1>
+  <div class="end-score" id="endScore">0 / 10</div>
+  <div class="end-note" id="endNote"></div>
+  <div class="finish-actions">
+    <button class="again" id="again">Another session</button>
+    <button class="home-back" id="homeBack">Back to Home</button>
+  </div>
+</section>
+<div class="version-mark">v5</div>
+</main>
+
+<script src="praepositionen.js"></script>
+<script>
+const PREPOSITIONS = window.PRAEPOSITIONEN || [];
+
+const els = {
+  session:document.getElementById("sessionScreen"),game:document.getElementById("game"),end:document.getElementById("endScreen"),
+  counter:document.getElementById("counter"),bar:document.getElementById("bar"),preposition:document.getElementById("preposition"),
+  translation:document.getElementById("translation"),choices:document.getElementById("choices"),
+  questionCard:document.getElementById("questionCard"),answerState:document.getElementById("answerState"),
+  answerCardMain:document.getElementById("answerCardMain"),answerEyebrow:document.getElementById("answerEyebrow"),
+  answerPreposition:document.getElementById("answerPreposition"),answerCase:document.getElementById("answerCase"),rule:document.getElementById("rule"),
+  exampleText:document.getElementById("exampleText"),exampleTranslation:document.getElementById("exampleTranslation"),next:document.getElementById("next"),
+  endScore:document.getElementById("endScore"),endNote:document.getElementById("endNote"),again:document.getElementById("again"),homeBack:document.getElementById("homeBack")
+};
+
+let session=[], index=0, score=0, answered=false;
+
+// Persistent difficulty: prepositions answered incorrectly get a higher
+// chance of appearing in future sessions. A preposition can appear only
+// once within a single session (weighted sampling without replacement).
+const DIFFICULTY_KEY = "festerKasusDifficultyV1";
+let difficulty = {};
+try{difficulty=JSON.parse(localStorage.getItem(DIFFICULTY_KEY)||"{}")}catch(e){difficulty={}}
+
+function saveDifficulty(){
+  try{localStorage.setItem(DIFFICULTY_KEY,JSON.stringify(difficulty))}catch(e){}
+}
+function prepositionKey(entry){return String(entry.preposition||"").toLowerCase()}
+function weightFor(entry){return Math.max(1,Number(difficulty[prepositionKey(entry)]||1))}
+function updateDifficulty(entry,correct){
+  const key=prepositionKey(entry);
+  let d=weightFor(entry);
+  if(correct){
+    d=Math.max(1,d-0.5);
+  }else{
+    d=Math.min(4,d+1);
+  }
+  difficulty[key]=Number(d.toFixed(2));
+  saveDifficulty();
+}
+function buildSession(size){
+  const ranked=PREPOSITIONS.map(entry=>{
+    const weight=weightFor(entry);
+    const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
+    return {entry,randomKey};
+  }).sort((a,b)=>a.randomKey-b.randomKey);
+
+  return ranked.slice(0,Math.min(size,PREPOSITIONS.length)).map(x=>x.entry);
+}
+
+const DAILY_STATS_KEY="deutschDailyStatsV1";
+function localDayKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function recordDailyKasus(correct){
+  try{
+    const today=localDayKey();
+    let data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}");
+    if(data.date!==today)data={date:today};
+    if(!data.festerKasus)data.festerKasus={answers:0,correct:0};
+    data.festerKasus.answers++;
+    if(correct)data.festerKasus.correct++;
+    localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(data));
+  }catch(e){}
+}
+
+function getCase(entry,selected){return entry.cases.find(c=>c.case===selected)||null;}
+
+function statusMessage(status,entry,selected){
+  if(status==="formal"){
+    const other=entry.cases.find(c=>c.status==="standard");
+    return other ? "Formell: "+selected+". Umgangssprachlich auch "+other.case+"." : "Formelle Variante.";
+  }
+  if(entry.cases.some(c=>c.status==="formal")){
+    const formal=entry.cases.find(c=>c.status==="formal");
+    return formal ? "Umgangssprachlich: "+selected+". Formell: "+formal.case+"." : "";
+  }
+  return "";
+}
+
+function start(size){
+  session=buildSession(size);index=0;score=0;answered=false;
+  els.session.classList.add("hidden");els.end.classList.add("hidden");els.game.classList.remove("hidden");render();
+}
+function render(){
+  const entry=session[index];answered=false;
+  stopReveal();
+  els.counter.textContent=(index+1)+" / "+session.length;
+  els.bar.style.width=(index/session.length*100)+"%";
+  els.preposition.textContent=entry.preposition;
+  els.translation.textContent=entry.translation;
+
+  els.questionCard.classList.remove("hidden");
+  els.answerState.classList.add("hidden");
+  els.next.classList.add("hidden");
+  els.choices.classList.remove("hidden");
+}
+function answer(selected){
+  if(answered)return;
+  answered=true;
+
+  const entry=session[index];
+  const match=getCase(entry,selected);
+  const correct=Boolean(match);
+  recordDailyKasus(correct);
+  updateDifficulty(entry,correct);
+  if(correct)score++;
+
+  const primary=entry.cases.find(c=>c.status==="standard"||c.status==="formal")||entry.cases[0];
+  const shownCase=correct ? selected : primary.case;
+  const shownStatus=correct ? match.status : primary.status;
+  const fromRect=els.preposition.getBoundingClientRect();
+
+  els.questionCard.classList.add("hidden");
+  els.answerState.classList.remove("hidden");
+  els.next.classList.remove("hidden");
+  els.choices.classList.add("hidden");
+
+  // Formal Genitiv is the special/blue answer.
+  // Conversational Dativ remains a normal green correct answer with a note.
+  const isFormalGenitiv = correct && shownStatus==="formal" && shownCase==="Genitiv";
+  els.answerCardMain.className="answer-card-main "+(isFormalGenitiv ? "special" : (!correct ? "wrong" : ""));
+
+  els.answerEyebrow.textContent=correct
+    ? (isFormalGenitiv ? "Richtig · Formell" : "Richtig")
+    : "Nicht ganz";
+  els.answerPreposition.textContent=entry.preposition;
+  els.answerCase.textContent=shownCase;
+  if(correct){
+    els.rule.textContent=statusMessage(shownStatus,entry,selected) || entry.note || "";
+  }else{
+    els.rule.innerHTML='<span class="wrong-choice">'+selected+'</span>';
+  }
+
+  els.exampleText.textContent=entry.example||"";
+  els.exampleTranslation.textContent=entry.exampleTranslation||"";
+  els.next.textContent=index===session.length-1?"Finish":"Continue";
+  els.bar.style.width=((index+1)/session.length*100)+"%";
+  animateReveal(fromRect);
+}
+
+// ===== ANSWER REVEAL ANIMATION =====
+// The preposition flies from its question position into the answer card (FLIP),
+// the rest of the answer fades in and slides down slightly, one after another.
+const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+let revealAnims=[];
+function stopReveal(){revealAnims.forEach(a=>a.cancel());revealAnims=[];}
+function animateReveal(fromRect){
+  stopReveal();
+  if(reduceMotion.matches||!els.answerPreposition.animate)return;
+  const toRect=els.answerPreposition.getBoundingClientRect();
+  if(!fromRect.height||!toRect.height)return;
+  const dx=(fromRect.left+fromRect.width/2)-(toRect.left+toRect.width/2);
+  const dy=(fromRect.top+fromRect.height/2)-(toRect.top+toRect.height/2);
+  const scale=fromRect.height/toRect.height;
+  revealAnims.push(els.answerPreposition.animate(
+    [{transform:`translate(${dx}px,${dy}px) scale(${scale})`},{transform:"none"}],
+    {duration:260,easing:"cubic-bezier(.2,.8,.2,1)"}
+  ));
+  const parts=[els.answerEyebrow,els.answerCardMain.querySelector(".answer-divider"),els.answerCase,els.rule,els.exampleText,els.exampleTranslation];
+  parts.forEach((el,i)=>{
+    revealAnims.push(el.animate(
+      [{opacity:0,transform:"translateY(-6px)"},{opacity:1,transform:"none"}],
+      {duration:190,delay:i*20,easing:"ease-out",fill:"backwards"}
+    ));
+  });
+}
+function next(){
+  if(!answered)return;if(index>=session.length-1){finish();return;}index++;render();window.scrollTo({top:0,behavior:"smooth"});
+}
+function finish(){
+  els.game.classList.add("hidden");els.end.classList.remove("hidden");els.endScore.textContent=score+" / "+session.length;window.scrollTo({top:0,behavior:"auto"});
+  els.endNote.textContent="Difficult prepositions are weighted higher in future sessions.";
+}
+document.querySelectorAll(".session-option").forEach(btn=>btn.addEventListener("click",()=>start(Number(btn.dataset.size))));
+els.choices.addEventListener("click",e=>{const btn=e.target.closest("button[data-case]");if(btn)answer(btn.dataset.case);});
+els.next.addEventListener("click",next);
+els.again.addEventListener("click",()=>{els.end.classList.add("hidden");els.session.classList.remove("hidden");});
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src="about:blank";
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+els.homeBack.addEventListener("click",goBackToHome);
+document.addEventListener("keydown",e=>{
+  if(els.game.classList.contains("hidden"))return;
+  if(answered){
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();next();}
+    return;
+  }
+  const map={"1":"Akkusativ","2":"Dativ","3":"Genitiv"};
+  if(map[e.key])answer(map[e.key]);
+});
+</script>
+</body>
+</html>
