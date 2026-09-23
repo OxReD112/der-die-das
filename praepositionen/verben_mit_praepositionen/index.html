@@ -49,10 +49,10 @@
   --weak-text:#c8c8cc;
 
   /* ===== CASE BUTTONS (same as Fester Kasus) ===== */
-  --button-bg:#202124;
-  --button-bg-hover:#252629;
+  --button-bg:#2a2b2e;
+  --button-bg-hover:#313235;
   --button-text:#fff;
-  --button-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 5px 14px rgba(0,0,0,.12);
+  --button-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
   --button-shadow-hover:inset 0 1px 0 rgba(255,255,255,.05),0 7px 18px rgba(0,0,0,.16);
   --button-shadow-active:inset 0 1px 0 rgba(255,255,255,.03),0 3px 9px rgba(0,0,0,.12);
   --focus:rgba(255,255,255,.18);
@@ -88,7 +88,7 @@
   --button-bg:#fff;
   --button-bg-hover:#f4f2ef;
   --button-text:#242426;
-  --button-shadow:0 0 0 1px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.05);
+  --button-shadow:0 0 0 1px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.07);
   --button-shadow-hover:0 0 0 1px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.07);
   --button-shadow-active:0 0 0 1px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.05);
   --focus:rgba(0,0,0,.18);
@@ -170,13 +170,14 @@ html:not(.is-touch) .check.hidden{display:none}
 .struck{text-decoration:line-through;text-decoration-thickness:2px}
 
 /* Compact case question + buttons (Fester Kasus style, smaller). */
-.case-question{color:var(--muted);font-size:13px;line-height:16px;margin-bottom:9px}
-.choices{display:flex;justify-content:center;gap:10px}
-.case-choice{appearance:none;border:0;border-radius:12px;min-height:44px;min-width:128px;padding:0 20px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+.case-question{align-self:start;color:var(--muted);font-size:16px;line-height:1.2;padding-top:6px}
+.case-step{margin-top:28px}
+.choices{display:grid;grid-template-columns:repeat(var(--case-count,2),1fr);gap:10px;width:min(600px,100%);margin:0 auto}
+.case-choice{appearance:none;border:0;border-radius:14px;min-height:56px;padding:0 18px;background:var(--button-bg);color:var(--button-text);font:inherit;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:var(--button-shadow);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
 .case-choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
 .case-choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
 .case-choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-@media(max-width:520px){.case-choice{font-size:16px;min-width:124px}}
+@media(max-width:520px){.case-choice{font-size:19px}}
 
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .chip{display:inline-flex;align-items:baseline;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:11px;font-size:13px;color:var(--secondary-text)}
@@ -242,15 +243,12 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
     <div class="prompt" id="prompt">
       <div class="context" id="meaning"></div>
       <div class="sentence" id="sentence"><span id="verb"></span> <span class="gap typing" id="gap"></span></div>
-      <!-- One slot under the verb: holds "Welcher Kasus?" + buttons during step 2,
-           then "+ Kasus" after the answer. Its height is reserved from the start,
+      <!-- One slot under the verb: holds the question "Welcher Kasus?" during step 2,
+           then "+ Kasus" after the answer (the buttons sit under the line). Its height is reserved from the start,
            so the line below never moves. -->
       <div class="above-slot">
         <div class="case-line off" id="caseLine" aria-hidden="true">&nbsp;</div>
-        <div class="case-step off" id="caseStep">
-          <div class="case-question">Welcher Kasus?</div>
-          <div class="choices" id="choices"></div>
-        </div>
+        <div class="case-question off" id="caseQuestion">Welcher Kasus?</div>
       </div>
     </div>
     <button class="check" id="check">Check</button>
@@ -260,6 +258,9 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
       <div class="divider"><i class="sl"></i><i class="sr"></i><i class="line"></i></div>
       <div id="prepFeedback">
         <div class="given" id="given"></div>
+        <div class="case-step hidden" id="caseStep">
+          <div class="choices" id="choices"></div>
+        </div>
       </div>
       <div id="finalFeedback" class="hidden">
         <div class="chips" id="chips"></div>
@@ -286,7 +287,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   </div>
 </section>
 
-<div class="version">v2.9 · Test: Kasus über der Linie</div>
+<div class="version">v2.9 · Test 2: Frage oben, Buttons unten</div>
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
@@ -416,7 +417,8 @@ function render(){
   $("caseLine").className = "case-line off";
   $("caseLine").innerHTML = "&nbsp;";
   $("caseLine").setAttribute("aria-hidden","true");
-  $("caseStep").classList.add("off");
+  $("caseQuestion").classList.add("off");
+  $("caseStep").classList.add("hidden");
   paintGap();
   $("check").classList.remove("hidden");
   $("feedback").className = "feedback hidden";
@@ -479,7 +481,8 @@ function submitPrep(){
   if(asksCase(x)){
     phase = "case";
     caseShownAt = performance.now();
-    $("caseStep").classList.remove("off");
+    $("caseQuestion").classList.remove("off");
+    $("caseStep").classList.remove("hidden");
   }else{
     showAnswer();
   }
@@ -514,7 +517,7 @@ function showAnswer(){
   if(caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
   $("caseLine").textContent = "+ " + x.case;
   $("caseLine").removeAttribute("aria-hidden");
-  $("caseStep").classList.add("off");
+  $("caseQuestion").classList.add("off");
   $("caseLine").classList.remove("off");
 
   let chips = chip(prepOK, "Präposition", typed.trim());
