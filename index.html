@@ -1193,7 +1193,7 @@ header h1 {
         Ruh dich aus, mach etwas Schönes<br>
         und komm morgen wieder.
         <span class="hard-stop-warm">
-          <strong id="hardStopWarmLine">Ich freue mich auf dich.</strong><br>
+          <strong>Ich freue mich auf dich.</strong><br>
           ♡
         </span>
       </div>
@@ -1503,11 +1503,6 @@ header h1 {
       const line=document.getElementById("greetingLine");
       const sub=document.getElementById("greetingSub");
       const name=getUserName();
-
-      const warm=document.getElementById("hardStopWarmLine");
-      if(warm && data && data.hardStop){
-        warm.textContent=name ? data.hardStop.name.replace("{name}",name) : data.hardStop.noName;
-      }
 
       if(!data || !box || !line || !sub) return;
       const state=greetingState(points,vocabDone,new Date().getHours());

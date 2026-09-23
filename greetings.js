@@ -89,11 +89,5 @@ window.GREETINGS = {
     { lines: ["Ab jetzt ist alles Extra."] },
     { lines: ["Noch mehr?", "Du bist ja deutscher als die Deutschen."] },
     { lines: ["Streber-Modus: an."] }
-  ],
-
-  /* Last line of the hard stop overlay (150 points) */
-  hardStop: {
-    name: "Ich freue mich auf dich, {name}.",
-    noName: "Ich freue mich auf dich."
-  }
+  ]
 };
