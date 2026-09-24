@@ -129,7 +129,6 @@ html:not(.is-touch) .answerbox{cursor:text}
 <p class="muted">Personal and possessive pronouns are mixed together.</p>
 <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="30">30</button><button class="size" data-n="50">50</button></div>
 <div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Table</button></div>
-<p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="screen hidden">
@@ -148,7 +147,6 @@ html:not(.is-touch) .answerbox{cursor:text}
 <div class="brand brand-done">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
 <div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
 <div class="weak hidden" id="weak"></div>
-<p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 <div class="done-actions">
       <button class="btn" id="home">Start Again</button>
       <button class="btn" id="homeBack">Back to Home</button>
@@ -253,12 +251,6 @@ if(hasProgress()){
   });
   DeutschProgress.init(PROGRESS_ID,[...items.values()]);
 }
-// TEMP (progress test): small line on the start/done screens — remove after testing.
-function showProgressDebug(){
-  if(!hasProgress())return;
-  const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
-  document.querySelectorAll('.progress-debug').forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(', ')}`:''));
-}
 
 let deck=[],i=0,n=10,answer='',correct=0,sessionAnswers={};
 const norm=s=>s.trim().toLocaleLowerCase('de-DE').replace(/[.,!?;:]/g,'');
@@ -350,9 +342,7 @@ function finish(){
   const current=currentStats();
   const arr=Object.entries(current).filter(([,v])=>v.weak).sort((a,b)=>b[1].errorRate-a[1].errorRate).slice(0,3);
   if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
-  showProgressDebug();
 }
-showProgressDebug();
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
   function goBackToHome(){
   try{
