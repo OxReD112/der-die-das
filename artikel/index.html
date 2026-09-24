@@ -162,12 +162,17 @@ function progressLabel(w){
  l=l.startsWith('-')?l.toLowerCase():l.charAt(0)+l.slice(1).toLowerCase();
  return l+' → '+w.article;
 }
-if(hasProgress())DeutschProgress.init(PROGRESS_ID,words.map(w=>({key:progressKey(w),label:progressLabel(w)})));
+// Weight = number of nouns the item covers, so the bar % = share of the 238 nouns I reliably know.
+if(hasProgress()){
+ const items=new Map();
+ words.forEach(w=>{const k=progressKey(w),e=items.get(k);if(e)e.weight++;else items.set(k,{key:k,label:progressLabel(w),weight:1})});
+ DeutschProgress.init(PROGRESS_ID,[...items.values()]);
+}
 // TEMP (progress pilot): small counter on the start/end screens — remove after testing.
 function showProgressDebug(){
  if(!hasProgress())return;
  const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
- document.querySelectorAll('.progress-debug').forEach(el=>el.textContent=`Test · ${sm.sicher} sicher / ${sm.total}`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(', ')}`:''));
+ document.querySelectorAll('.progress-debug').forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% (${sm.sicher}/${sm.total} Nomen) · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(', ')}`:''));
 }
 function saveDifficulty(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty))}catch(e){}}
 function updateDifficulty(w,ok){
