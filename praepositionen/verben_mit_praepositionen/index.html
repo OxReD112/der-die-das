@@ -242,7 +242,6 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   <div class="start-sub">How many exercises?</div>
   <p class="muted">Type the preposition, then choose the case.</p>
   <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
-  <p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="screen hidden">
@@ -291,7 +290,6 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   <div class="done-parts" id="parts"></div>
   <div class="weak hidden" id="weak"></div>
   <div class="done-note">Tricky verbs will come up more often next time.</div>
-  <p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
   <div class="done-actions">
     <button class="btn" id="home">Start Again</button>
     <button class="btn" id="homeBack">Back to Home</button>
@@ -379,12 +377,6 @@ function updateDifficulty(x, ok){
 const PROGRESS_ID = "verbenMitPraepositionen";
 const hasProgress = () => typeof window.DeutschProgress === "object";
 if(hasProgress()) DeutschProgress.init(PROGRESS_ID, DATA.map(x => ({key:x.id, label:`${x.verb} ${x.preposition} + ${x.case}`})));
-// TEMP (progress test): small line on the start/done screens — remove after testing.
-function showProgressDebug(){
-  if(!hasProgress()) return;
-  const sm = DeutschProgress.summary(PROGRESS_ID); if(!sm) return;
-  document.querySelectorAll(".progress-debug").forEach(el => el.textContent = `Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher` + (sm.recent.length ? ` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(", ")}` : ""));
-}
 
 // ===== DAILY STATS (Home tile) =====
 const DAILY_STATS_KEY = "deutschDailyStatsV1";
@@ -613,10 +605,8 @@ function finish(){
     $("weak").innerHTML = "<b>Needs more practice</b><br>" + weak.map(esc).join("<br>");
     $("weak").classList.remove("hidden");
   }else $("weak").classList.add("hidden");
-  showProgressDebug();
   window.scrollTo({top:0, behavior:"auto"});
 }
-showProgressDebug();
 
 // ===== CASE BUTTONS =====
 $("choices").style.setProperty("--case-count", CHOICE_CASES.length);
