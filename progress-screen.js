@@ -59,11 +59,12 @@
 .pg-card+.pg-card{margin-top:12px;padding-top:12px;border-top:1px solid var(--pg-line)}
 .pg-grammar{padding:8px}
 .pg-hero{padding:8px 10px 4px;text-align:center}
-.pg-kick{color:var(--muted);font-size:12px}
+.pg-kick{color:var(--muted);font-size:13px}
 .pg-big{display:flex;align-items:center;justify-content:center;margin-top:4px}
-.pg-big b{font-size:34px;font-weight:700;letter-spacing:-.8px;color:var(--mint);line-height:1}
-.pg-big span{font-size:14px;font-weight:600;margin-left:8px;line-height:1.15;text-align:left}
-.pg-say{font-size:13.5px;line-height:1.35;color:var(--label-text,var(--text));margin-top:6px}
+.pg-big b{font-size:58px;font-weight:700;letter-spacing:-1.4px;color:var(--mint);line-height:1}
+.pg-big span{font-size:18px;font-weight:600;margin-left:10px;line-height:1.15;text-align:left}
+.pg-say{font-size:14px;line-height:1.35;color:var(--label-text,var(--text));margin-top:8px}
+.pg-say em{font-style:normal;color:var(--muted)}
 .pg-hero svg{margin-top:10px}
 .pg-divider{height:1px;background:var(--pg-line);margin:8px 10px 2px}
 .pg svg{width:100%;height:auto;display:block;overflow:visible}
@@ -92,9 +93,9 @@
 .pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--dim-text);font-size:11.5px}
 .pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
 .pg-chapters .pg-row{padding:8px 10px 9px}
-.pg-words .pg-row{padding:16px 10px 12px}
-.pg-words .pg-n{font-size:17px}
-.pg-words .pg-legend{margin:12px 0 0}
+.pg-words .pg-row{padding:6px 10px 4px}
+.pg-words .pg-top{margin-bottom:7px}
+.pg-words .pg-n{font-size:15px}
 .pg-change{margin:0 10px 8px;color:var(--muted);font-size:14px}
 .pg-change b{color:var(--mint);font-weight:650}.pg-change b.down{color:var(--pg-down)}
 .pg-row .pg-change{margin:0 0 6px;font-size:13px}
@@ -261,26 +262,24 @@
   function overview(v){
     const m=model;setHead("",null);
     const up=round(m.gNow)>=round(m.gThen);
-    const say=up?"Du wirst besser.":`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
+    const total=`<em>· ${round(m.gNow)}% gesamt</em>`;
+    const say=up?`Du wirst besser. ${total}`:`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut. ${total}`;
     v.innerHTML=`<div class="pg-card pg-grammar">
         <div class="pg-hero">
           <div class="pg-kick">${m.sinceStart?"Seit Start":"In 3 Wochen"}</div>
           <div class="pg-big"><b>+${m.learned}</b><span>Sachen<br>sitzen jetzt</span></div>
           <div class="pg-say">${say}</div>
-          <div class="pg-hs"></div>
         </div>
         <div class="pg-divider"></div>
         <div class="pg-chapters"></div>
         <div class="pg-legend"><span><i style="background:var(--pg-ghost)"></i>${m.sinceStart?"Start":"vor 3 Wochen"}</span><span><i style="background:var(--mint)"></i>dazu</span></div>
       </div>
       <div class="pg-card pg-list pg-words"></div>`;
-    v.querySelector(".pg-hs").append(spark(m.gSeries,{labels:false,H:40,end:round(m.gNow)+"%"}));
     // Wortschatz: whole stack · started · fully learned — no drill-down
     const w=v.querySelector(".pg-words"), wr=document.createElement("div");wr.className="pg-row static";
     const W=m.words;
     wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>`;
     const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
-    if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>');
     if(W&&W.total){const go=()=>{tr.children[0].style.width=W.started/W.total*100+"%";setTimeout(()=>tr.children[1].style.width=W.learned/W.total*100+"%",300)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
     else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0;font-size:13px">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
