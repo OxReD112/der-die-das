@@ -173,17 +173,29 @@ html.app-open body {
   padding-top: 56px;
 }
 
+/* v5.19: the header covers everything from the very top of the screen
+   (status bar area) down to under the title, full width, so scrolled
+   tiles never show above it. A short fade softens the lower edge. */
 header {
   position: fixed;
-  top: calc(env(safe-area-inset-top) + 22px);
-  left: 50%;
-  right: auto;
-  width: min(calc(100% - 48px), 720px);
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   margin: 0;
-  padding: 0;
+  padding: calc(env(safe-area-inset-top) + 22px) 0 0;
   background: var(--bg);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 18px;
+  background: linear-gradient(var(--bg), color-mix(in srgb, var(--bg) 0%, transparent));
+  pointer-events: none;
 }
 
 header h1 {
@@ -977,7 +989,7 @@ header h1 {
 .settings-toggle[aria-checked="true"]{background:color-mix(in srgb, var(--mint) 30%, transparent)}
 .settings-toggle[aria-checked="true"]::after{transform:translateX(17px);background:var(--mint)}
 .settings-toggle:disabled{opacity:.5}
-.settings-confirm{position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;padding:24px;background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.settings-confirm{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:950;display:none;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .settings-confirm.is-open{display:flex}
 .settings-confirm-card{width:min(100%,360px);padding:28px 24px 22px;border:1px solid var(--card-border);border-radius:var(--card-radius);background:var(--bg);text-align:center;box-shadow:0 20px 60px var(--confirm-shadow)}
 .settings-confirm-title{font-size:20px;line-height:1.2;font-weight:700}
@@ -1113,10 +1125,6 @@ header h1 {
 }
 
 @media (max-width: 430px) {
-  header {
-    width: calc(100% - 48px);
-  }
-
   .dashboard.mosaic {
     --tile-gap: 8px;
     --tile-row: 121px;
@@ -1345,7 +1353,7 @@ header h1 {
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
     </div>
-    <div class="settings-version">Deutsch. version 5.18</div>
+    <div class="settings-version">Deutsch. version 5.19</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
