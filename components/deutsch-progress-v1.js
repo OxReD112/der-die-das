@@ -11,6 +11,9 @@
    - An item with no entry = "neu" (never answered); entry below 3 = "wackelig".
    - sicherSince (d) = date the item became sicher; removed when it falls back.
    - Each exercise also keeps a summary for Home: total, sicher, recent (learned in the last 22 days).
+   - An item can be a single question or a group (e.g. an Artikel rule, a Pronomen category):
+     the exercise decides which key it reports.
+   - init() drops stored entries whose key no longer exists in the exercise.
 
    Storage key: deutschProgressV1 (included in Backup).
    {
@@ -78,7 +81,9 @@
     const map=new Map();
     (items||[]).forEach(it=>{ if(it&&it.key!=null&&!map.has(String(it.key))) map.set(String(it.key),String(it.label??it.key)); });
     catalog[exercise]=map;
-    const data=load(); summarize(bucket(data,exercise),exercise); save(data);
+    const data=load(), ex=bucket(data,exercise);
+    for(const k in ex.items) if(!map.has(k)) delete ex.items[k]; // items no longer in the exercise
+    summarize(ex,exercise); save(data);
   }
 
   function record(exercise,key,ok){
