@@ -129,6 +129,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 <p class="muted">Personal and possessive pronouns are mixed together.</p>
 <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="30">30</button><button class="size" data-n="50">50</button></div>
 <div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Table</button></div>
+<p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="screen hidden">
@@ -147,6 +148,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 <div class="brand brand-done">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
 <div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
 <div class="weak hidden" id="weak"></div>
+<p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 <div class="done-actions">
       <button class="btn" id="home">Start Again</button>
       <button class="btn" id="homeBack">Back to Home</button>
@@ -157,6 +159,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 <div class="version">v7.22 · stats logic</div>
 </main>
 <script src="pronouns.js"></script>
+<script src="../components/deutsch-progress-v1.js"></script>
 <script>
 const $=x=>document.getElementById(x), data=window.PRONOUN_EXERCISES||[];
 function isTouchDevice(){
@@ -217,6 +220,46 @@ function recordPronomenAnswer(){
  localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
 }
 
+// ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====
+// 41 categories: 18 personal (person × case), 8 possessive owners (ich → mein …),
+// 15 possessive endings (case × gender, e.g. "Dativ · Maskulin → -em").
+// A possessive sentence counts for its owner AND its ending — same logic as the existing stats:
+// owner = right stem; ending = only judged when the stem was right.
+// Weight = sentences covered (a possessive sentence gives ½ to its owner, ½ to its ending),
+// so the bar = share of the 108 sentences' grammar I reliably know.
+const PROGRESS_ID='pronomen';
+const hasProgress=()=>typeof window.DeutschProgress==='object';
+// "euer" drops its second e before endings: eure, eurem, euren.
+function ownerStem(x){return (x.skill.split(' → ')[1]?.split(' · ')[0]||'').toLocaleLowerCase('de-DE')}
+function stemMatches(input,stem){return !!stem&&(input.startsWith(stem)||(stem==='euer'&&input.startsWith('eur')))}
+function possessiveCase(x){return x.skill.split(' · ').pop()}
+function endingOf(x){
+  const a=x.answer.trim().toLocaleLowerCase('de-DE'),st=ownerStem(x),base=a.startsWith(st)?st:(st==='euer'?'eur':st);
+  return a.slice(base.length);
+}
+function progressKeys(x){
+  if(x.type!=='possessive')return {personal:'personal:'+x.skill};
+  return {owner:'owner:'+x.skill.split(' → ')[0].replace('Possessiv · ','')+' → '+ownerStem(x),
+          ending:'ending:'+possessiveCase(x)+'|'+(x.gender||'')};
+}
+if(hasProgress()){
+  const items=new Map(),add=(key,label,w)=>{const it=items.get(key);if(it)it.weight+=w;else items.set(key,{key,label,weight:w})};
+  data.forEach(x=>{
+    const k=progressKeys(x);
+    if(k.personal){add(k.personal,x.skill.replace('Personal · ','').replace(/^(\w+) · (.*)$/,'$2 ($1)'),1);return}
+    add(k.owner,k.owner.slice(6),.5);
+    const e=endingOf(x);
+    add(k.ending,possessiveCase(x)+' · '+(x.gender||'')+' → '+(e?'-'+e:'ohne Endung'),.5);
+  });
+  DeutschProgress.init(PROGRESS_ID,[...items.values()]);
+}
+// TEMP (progress test): small line on the start/done screens — remove after testing.
+function showProgressDebug(){
+  if(!hasProgress())return;
+  const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
+  document.querySelectorAll('.progress-debug').forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(', ')}`:''));
+}
+
 let deck=[],i=0,n=10,answer='',correct=0,sessionAnswers={};
 const norm=s=>s.trim().toLocaleLowerCase('de-DE').replace(/[.,!?;:]/g,'');
 function weightedPick(items,count){
@@ -266,9 +309,8 @@ function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden')
 let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
 const keys=statKey(x);
 if(x.type==='possessive'){
-  const expectedStem=x.skill.split(' → ')[1]?.split(' · ')[0]||'';
   const input=norm(answer);
-  const stemOK=expectedStem && input.startsWith(expectedStem.toLocaleLowerCase('de-DE'));
+  const stemOK=stemMatches(input,ownerStem(x)); // fixed: euer → eure/eurem/euren now counts as the right stem
 
   // Root and ending are scored independently. If the stem itself is wrong,
   // the ending is not assessed, so one mistake cannot falsely weaken both.
@@ -286,6 +328,15 @@ if(x.type==='possessive'){
   if(ok)v.correct++;else v.wrong++;
   sessionAnswers[keys.detail]=v;
 }
+if(hasProgress()){
+  const pk=progressKeys(x);
+  if(pk.personal)DeutschProgress.record(PROGRESS_ID,pk.personal,ok);
+  else{
+    const stemOK=stemMatches(norm(answer),ownerStem(x));
+    DeutschProgress.record(PROGRESS_ID,pk.owner,stemOK);
+    if(stemOK)DeutschProgress.record(PROGRESS_ID,pk.ending,ok);
+  }
+}
 if(ok)correct++;
 $('feedback').className='feedback '+(ok?'correct':'wrong');$('given').innerHTML=ok?`<span class="good">${answer}</span>`:`<span class="bad">${answer}</span>`;$('correctText').innerHTML=ok?'':`<span class="good">→ ${x.answer}</span>`;$('skill').textContent=x.skill+(x.type==='possessive'&&x.gender?' · '+x.gender:'');$('answerbox').style.display='none';$('check').style.display='none';if(window.deutschKeyboardReady)$('keyboard').classList.remove('show')}
 function next(){i++;if(i>=deck.length){finish();return}render()}
@@ -299,7 +350,9 @@ function finish(){
   const current=currentStats();
   const arr=Object.entries(current).filter(([,v])=>v.weak).sort((a,b)=>b[1].errorRate-a[1].errorRate).slice(0,3);
   if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
+  showProgressDebug();
 }
+showProgressDebug();
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
   function goBackToHome(){
   try{
