@@ -141,6 +141,7 @@ button{font:inherit}
     <button class="session-option" data-size="20">20</button>
     <button class="session-option" data-size="30">30</button>
   </div>
+  <p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="hidden">
@@ -174,6 +175,7 @@ button{font:inherit}
   <h1>Done.</h1>
   <div class="end-score" id="endScore">0 / 10</div>
   <div class="end-note" id="endNote"></div>
+  <p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
   <div class="finish-actions">
     <button class="again" id="again">Another session</button>
     <button class="home-back" id="homeBack">Back to Home</button>
@@ -183,6 +185,7 @@ button{font:inherit}
 </main>
 
 <script src="praepositionen.js?v=8"></script>
+<script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PREPOSITIONS = window.PRAEPOSITIONEN || [];
 
@@ -222,6 +225,22 @@ function updateDifficulty(entry,correct){
   difficulty[key]=Number(d.toFixed(2));
   saveDifficulty();
 }
+// Progress tracking (Documentation/PROGRESS_TRACKER.md): one item per preposition.
+// Guarded: the exercise keeps working if the helper is missing.
+const PROGRESS_ID="festerKasus";
+const hasProgress=()=>typeof window.DeutschProgress==="object";
+function progressLabel(entry){
+  const std=entry.cases.find(c=>c.status==="standard")||entry.cases[0];
+  return entry.preposition+(std?" + "+std.case:"");
+}
+if(hasProgress())DeutschProgress.init(PROGRESS_ID,PREPOSITIONS.map(e=>({key:prepositionKey(e),label:progressLabel(e)})));
+// TEMP (progress test): small line on the start/end screens — remove after testing.
+function showProgressDebug(){
+  if(!hasProgress())return;
+  const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
+  document.querySelectorAll(".progress-debug").forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(", ")}`:""));
+}
+
 function buildSession(size){
   const ranked=PREPOSITIONS.map(entry=>{
     const weight=weightFor(entry);
@@ -306,6 +325,7 @@ function answer(selected){
   const correct=Boolean(match);
   recordDailyKasus(correct);
   updateDifficulty(entry,correct);
+  if(hasProgress())DeutschProgress.record(PROGRESS_ID,prepositionKey(entry),correct);
   if(correct)score++;
 
   const primary=entry.cases.find(c=>c.status==="standard")||entry.cases[0];
@@ -373,7 +393,9 @@ function next(){
 function finish(){
   els.game.classList.add("hidden");els.end.classList.remove("hidden");els.endScore.textContent=score+" / "+session.length;window.scrollTo({top:0,behavior:"auto"});
   els.endNote.textContent="Difficult prepositions are weighted higher in future sessions.";
+  showProgressDebug();
 }
+showProgressDebug();
 document.querySelectorAll(".session-option").forEach(btn=>btn.addEventListener("click",()=>start(Number(btn.dataset.size))));
 els.choices.addEventListener("click",e=>{const btn=e.target.closest("button[data-case]");if(btn)answer(btn.dataset.case);});
 els.next.addEventListener("click",next);
