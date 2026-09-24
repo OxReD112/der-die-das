@@ -27,33 +27,33 @@
 
   /* ---------- styles ---------- */
   const css=`
-:root{--pg-scrim:rgba(0,0,0,.5);--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:rgba(232,130,111,.62);--pg-down:#e8a08f;--pg-started:rgba(255,255,255,.26);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.05);--pg-fill:rgba(85,215,181,.08)}
-[data-theme="light"]{--pg-scrim:rgba(0,0,0,.22);--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:rgba(214,110,86,.45);--pg-down:#c0634c;--pg-started:rgba(0,0,0,.14);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.06);--pg-fill:rgba(47,158,130,.10)}
+:root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#252527;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:rgba(232,130,111,.62);--pg-down:#e8a08f;--pg-started:rgba(255,255,255,.26);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.05);--pg-fill:rgba(85,215,181,.08)}
+[data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:rgba(214,110,86,.45);--pg-down:#c0634c;--pg-started:rgba(0,0,0,.14);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.06);--pg-fill:rgba(47,158,130,.10)}
 .tile-today{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tile-today:active{opacity:.8}
-.pg{position:fixed;inset:0;z-index:25;visibility:hidden;transition:visibility 0s .45s;color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
-.pg.open{visibility:visible;transition:visibility 0s}
-.pg-scrim{position:absolute;inset:0;background:var(--pg-scrim);opacity:0;transition:opacity .4s ease}
-.pg.open .pg-scrim{opacity:1}
-.pg-sheet{position:absolute;left:50%;bottom:0;top:calc(env(safe-area-inset-top) + 12px);width:min(100%,430px);
-  transform:translate(-50%,100%);background:var(--pg-bg);border-radius:18px 18px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.28);
-  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transition:transform .44s cubic-bezier(.22,.61,.36,1)}
-.pg.open .pg-sheet{transform:translate(-50%,0)}
-.pg.dragging .pg-sheet,.pg.dragging .pg-scrim{transition:none}
-.pg-head{position:sticky;top:0;z-index:3;height:30px;background:var(--pg-bg);display:flex;justify-content:center}
-.pg-handle{appearance:none;-webkit-appearance:none;border:0;background:none;padding:6px 30px 12px;cursor:pointer}
-.pg-handle i{display:block;width:38px;height:5px;border-radius:3px;background:var(--toggle-track)}
-.pg-x{position:absolute;right:8px;top:0;width:36px;height:30px;border:0;background:none;color:var(--muted);
-  font:300 24px/28px -apple-system,BlinkMacSystemFont,sans-serif;padding:0;cursor:pointer}
-.pg-x:active,.pg-handle:active{opacity:.6}
-.pg-inner{position:relative;padding:0 16px calc(env(safe-area-inset-bottom) + 32px)}
+.pg{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:18px;color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
+.pg.open{opacity:1;visibility:visible;background:var(--pg-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
+.pg-modal{width:min(460px,100%);max-height:82vh;overflow:hidden;background:var(--pg-modal-bg);border:1px solid var(--pg-modal-border);
+  border-radius:24px;padding:4px 12px 12px;display:flex;flex-direction:column;
+  opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.pg.open .pg-modal{opacity:1;transform:scale(1);filter:blur(0)}
+.pg-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto;padding:2px 2px 2px 8px}
+.pg-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400;display:flex;align-items:center;min-width:0}
+.pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
+.pg-x{border:0;background:transparent;color:var(--pg-close);font-size:28px;line-height:1;padding:8px;cursor:pointer}
+.pg-x:active,.pg-head-back:active{opacity:.6}
+.pg-body-scroll{overflow:auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.pg-inner{position:relative;padding:0 0 4px}
 .pg-view{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
-.pg-view.away{position:absolute;top:0;left:16px;right:16px;opacity:0;pointer-events:none}
+.pg-view.away{position:absolute;top:0;left:0;right:0;opacity:0;pointer-events:none}
+@media(max-width:600px){.pg{padding:10px}.pg-modal{max-height:84vh;padding:3px 10px 10px}.pg-head h2{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.pg,.pg-modal{transition:none!important}}
 .pg-view.away.l{transform:translateX(-30%)}.pg-view.away.r{transform:translateX(30%)}
 .pg-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:15px;padding:6px 0;margin-bottom:12px;cursor:pointer}
-.pg-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--card-radius,25px);padding:20px 18px}
-.pg-card+.pg-card{margin-top:14px}
+.pg-card{padding:0}
+.pg-card+.pg-card{margin-top:12px;padding-top:12px;border-top:1px solid var(--pg-line)}
 .pg-grammar{padding:8px}
 .pg-hero{padding:10px 10px 4px;text-align:center}
 .pg-kick{color:var(--muted);font-size:12px}
@@ -92,7 +92,7 @@
 .pg-words .pg-row{padding:16px 10px 12px}
 .pg-words .pg-n{font-size:17px}
 .pg-words .pg-legend{margin:12px 0 0}
-.pg-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.pg-title{display:flex;justify-content:flex-start;align-items:baseline;margin:0 10px 6px}
 .pg-title h2{font-size:24px;font-weight:650;margin:0}
 .pg-title span{color:var(--muted);font-size:14px}
 .pg-title b{color:var(--mint)}.pg-title b.down{color:var(--pg-down)}
@@ -242,7 +242,11 @@
   }
 
   /* ---------- screens ---------- */
-  let root,sheet,inner,current=null,model=null;
+  let root,scroller,inner,titleEl,backEl,current=null,model=null;
+  function setHead(title,back){
+    titleEl.textContent=title;
+    backEl.hidden=!back;backEl.onclick=back||null;
+  }
   function go(build,dir){
     const next=document.createElement("div");next.className="pg-view";build(next);
     if(current&&dir){
@@ -250,10 +254,10 @@
       next.classList.add("away",dir==="fwd"?"r":"l");inner.append(next);
       requestAnimationFrame(()=>requestAnimationFrame(()=>next.classList.remove("away","l","r")));
     }else{if(current)current.remove();inner.append(next)}
-    current=next;sheet.scrollTop=0;
+    current=next;scroller.scrollTop=0;
   }
   function overview(v){
-    const m=model;
+    const m=model;setHead("Fortschritt",null);
     const up=round(m.gNow)>=round(m.gThen);
     const say=up?"Du wirst besser.":`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
     v.innerHTML=`<div class="pg-card pg-grammar">
@@ -289,10 +293,9 @@
   }
   function chapter(v,i){
     const c=model.chapters[i], down=round(c.now)<round(c.then);
-    v.innerHTML=`<button class="pg-back" type="button">‹ Fortschritt</button>
-      <div class="pg-title"><h2>${c.name}</h2><span>${round(c.then)}% → <b class="${down?"down":""}">${round(c.now)}%</b></span></div>
+    setHead(c.name,()=>go(overview,"back"));
+    v.innerHTML=`<div class="pg-title"><span>${model.sinceStart?"Start":"vor 3 Wochen"} ${round(c.then)}% → heute <b class="${down?"down":""}">${round(c.now)}%</b></span></div>
       <div class="pg-card pg-body"></div>`;
-    v.querySelector(".pg-back").onclick=()=>go(overview,"back");
     const body=v.querySelector(".pg-body");
     if(c.single){body.append(detail(c.single));return}
     body.style.padding="8px";
@@ -312,66 +315,31 @@
     v.insertAdjacentHTML("beforeend",'<div class="pg-note">Tippe auf eine Übung für Details</div>');
   }
 
-  /* ---------- open / close: bottom sheet ---------- */
-  // Slides up from the bottom with its content already visible; Home stays visible, dimmed, behind it.
-  // Close: ✕ (top right), tap the handle, tap the dimmed area, Escape, or swipe the sheet down.
+  /* ---------- open / close: pop-up (same style as the Partizip II pattern table) ---------- */
+  // Centered card, fades in from 92 % with a short blur; Home dims behind it.
+  // Close: × (top right), tap outside the card, or Escape.
   function open(){
     if(root.classList.contains("open"))return;
     try{model=buildModel()}catch(e){console.error(e);return}
-    current=null;inner.innerHTML="";go(overview);sheet.scrollTop=0;
-    sheet.style.transform="";root.classList.remove("dragging");
-    // top edge right below the Home header ("Deutsch."), so the title stays visible
-    const hd=document.querySelector("main.page > header");
-    const hb=hd?hd.getBoundingClientRect().bottom:0;
-    sheet.style.top=hb>0&&hb<innerHeight*0.4?Math.round(hb+8)+"px":"";
+    current=null;inner.innerHTML="";go(overview);scroller.scrollTop=0;
     root.getBoundingClientRect();
     root.classList.add("open");root.setAttribute("aria-hidden","false");
   }
   function close(){
     if(!root.classList.contains("open"))return;
-    root.classList.remove("dragging");sheet.style.transform="";root.querySelector(".pg-scrim").style.opacity="";
     root.classList.remove("open");root.setAttribute("aria-hidden","true");
   }
-  // Swipe down to close (touch). Starts on the header, or anywhere when the sheet is scrolled to the top.
-  function enableSwipe(){
-    const scrim=root.querySelector(".pg-scrim");
-    let y0=0,t0=0,dy=0,tracking=false,dragging=false;
-    sheet.addEventListener("touchstart",e=>{
-      if(e.touches.length!==1)return;
-      tracking=sheet.scrollTop<=0||!!e.target.closest(".pg-head");
-      y0=e.touches[0].clientY;t0=Date.now();dy=0;dragging=false;
-    },{passive:true});
-    sheet.addEventListener("touchmove",e=>{
-      if(!tracking)return;
-      dy=e.touches[0].clientY-y0;
-      if(!dragging){ if(dy<=4){ if(dy<-4)tracking=false; return } dragging=true;root.classList.add("dragging") }
-      e.preventDefault();
-      const d=Math.max(0,dy);
-      sheet.style.transform=`translate(-50%,${d}px)`;
-      scrim.style.opacity=String(Math.max(0,1-d/(sheet.offsetHeight||600)));
-    },{passive:false});
-    const end=()=>{
-      if(!dragging){tracking=false;return}
-      const v=dy/Math.max(1,Date.now()-t0);
-      tracking=dragging=false;
-      if(dy>110||(dy>40&&v>.6))close();
-      else{root.classList.remove("dragging");sheet.style.transform="";scrim.style.opacity=""}
-    };
-    sheet.addEventListener("touchend",end);sheet.addEventListener("touchcancel",end);
-  }
   function init(){
-    root=document.createElement("section");root.className="pg";root.id="progressScreen";
-    root.setAttribute("aria-hidden","true");root.setAttribute("aria-label","Fortschritt");
-    root.innerHTML='<div class="pg-scrim"></div><div class="pg-sheet" role="dialog" aria-modal="true" aria-label="Fortschritt">'
-      +'<div class="pg-head"><button class="pg-handle" type="button" aria-label="Schließen"><i></i></button>'
-      +'<button class="pg-x" type="button" aria-label="Schließen">×</button></div><div class="pg-inner"></div></div>';
+    root=document.createElement("div");root.className="pg";root.id="progressScreen";root.setAttribute("aria-hidden","true");
+    root.innerHTML='<div class="pg-modal" role="dialog" aria-modal="true" aria-labelledby="pgTitle">'
+      +'<div class="pg-head"><h2><button class="pg-head-back" type="button" aria-label="Zurück" hidden>‹</button><span id="pgTitle">Fortschritt</span></h2>'
+      +'<button class="pg-x" type="button" aria-label="Schließen">×</button></div>'
+      +'<div class="pg-body-scroll"><div class="pg-inner"></div></div></div>';
     document.body.append(root);
-    sheet=root.querySelector(".pg-sheet");inner=root.querySelector(".pg-inner");
-    root.querySelector(".pg-scrim").addEventListener("click",close);
+    scroller=root.querySelector(".pg-body-scroll");inner=root.querySelector(".pg-inner");
+    titleEl=root.querySelector("#pgTitle");backEl=root.querySelector(".pg-head-back");
     root.querySelector(".pg-x").addEventListener("click",close);
-    root.querySelector(".pg-handle").addEventListener("click",close);
-    if(reduceMotion)sheet.style.transition="none";
-    enableSwipe();
+    root.addEventListener("click",e=>{if(e.target===root)close()});
     const tile=document.querySelector(".tile-today");
     if(tile){
       tile.setAttribute("role","button");tile.setAttribute("tabindex","0");
