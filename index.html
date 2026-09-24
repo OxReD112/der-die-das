@@ -1738,16 +1738,70 @@ syncHomeDashboard();
 
 /* Deutsch Backup v1.
    The envelope is intentionally module-based so future exercises can add
-   their own persistent state without changing the export workflow. */
+   their own persistent state without changing the export workflow.
+   - Keys that don't exist yet are skipped on save, so planned keys can be
+     listed here before the feature that writes them exists.
+   - Restore skips modules it doesn't understand (unknown or outdated
+     storageVersion) instead of failing, so old backup files stay restorable.
+   - Score format changes happen inside the stored data (a format marker),
+     not by renaming keys — see Documentation/PROGRESS_TRACKER.md. */
 const DEUTSCH_BACKUP_VERSION=1;
 const BACKUP_MODULES={
   wortschatz:{
+    label:"Wortschatz",
     storageKey:"wortsternSRSv03",
     storageVersion:"wortsternSRSv03"
   },
   profile:{
+    label:"Name",
     storageKey:"deutschProfileV1",
     storageVersion:"deutschProfileV1"
+  },
+  artikel:{
+    label:"Artikel",
+    storageKey:"artikelGameDifficultyV1",
+    storageVersion:"artikelGameDifficultyV1"
+  },
+  modalverben:{
+    label:"Modalverben",
+    storageKey:"modalverbenDifficultyV1",
+    storageVersion:"modalverbenDifficultyV1"
+  },
+  partizipII:{
+    label:"Partizip II",
+    storageKey:"verbformenDifficultyV1",
+    storageVersion:"verbformenDifficultyV1"
+  },
+  pronomen:{
+    label:"Pronomen",
+    storageKey:"pronomenStatsV2",
+    storageVersion:"pronomenStatsV2"
+  },
+  festerKasus:{
+    label:"Fester Kasus",
+    storageKey:"festerKasusDifficultyV1",
+    storageVersion:"festerKasusDifficultyV1"
+  },
+  verbenMitPraepositionen:{
+    label:"Verben mit Präpositionen",
+    storageKey:"verbenPraepStatsV1",
+    storageVersion:"verbenPraepStatsV1"
+  },
+  ortspraepositionen:{
+    label:"Ortspräpositionen",
+    storageKey:"ortspraepositionenDifficultyV1",
+    storageVersion:"ortspraepositionenDifficultyV1"
+  },
+  /* Planned — Progress Tracker (not written by any module yet). */
+  progress:{
+    label:"Fortschritt",
+    storageKey:"deutschProgressV1",
+    storageVersion:"deutschProgressV1"
+  },
+  progressSnapshots:{
+    label:"Fortschritt-Verlauf",
+    storageKey:"deutschProgressSnapshotsV1",
+    storageVersion:"deutschProgressSnapshotsV1"
   }
 };
 
@@ -1802,9 +1856,10 @@ function validateDeutschBackup(backup){
   const restorable=[];
   Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
     const moduleBackup=backup.modules[moduleName];
-    if(!moduleBackup)return;
-    if(moduleBackup.storageVersion!==config.storageVersion)throw new Error("storage-version");
-    if(moduleBackup.state===undefined)throw new Error("state");
+    if(!moduleBackup||typeof moduleBackup!=="object")return;
+    /* Skip what this app version doesn't understand instead of failing the whole restore. */
+    if(moduleBackup.storageVersion!==config.storageVersion)return;
+    if(moduleBackup.state===undefined||moduleBackup.state===null)return;
     restorable.push([moduleName,config,moduleBackup.state]);
   });
   if(restorable.length===0)throw new Error("nothing");
@@ -1820,7 +1875,7 @@ async function restoreDeutschBackup(file){
     const dateLabel=created&&!Number.isNaN(created.getTime())
       ? created.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})
       : "unknown date";
-    const moduleLabel=restorable.map(([name])=>name==="wortschatz"?"Wortschatz":name==="profile"?"Name":name).join(", ");
+    const moduleLabel=restorable.map(([name,config])=>config.label||name).join(", ");
     if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
       if(note)note.textContent="· Restore cancelled";
       return;
