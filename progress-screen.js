@@ -35,17 +35,19 @@
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
   background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
 .pg.open{opacity:1;visibility:visible;background:var(--confirm-scrim,var(--pg-scrim));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
-.pg-modal{width:min(460px,100%);max-height:82vh;overflow:hidden;background:var(--pg-modal-bg);border:1px solid var(--pg-modal-border);
+.pg-modal{--pg-glow-at:50% 100%;width:min(460px,100%);max-height:82vh;overflow:hidden;
+  /* soft mint glow like the "Heute" tile — from the bottom edge (top has the big green number) */
+  background:radial-gradient(120% 60% at var(--pg-glow-at),color-mix(in srgb,var(--mint) 7%,transparent),transparent 70%),var(--pg-modal-bg);border:1px solid var(--pg-modal-border);
   border-radius:24px;padding:0 12px 12px;display:flex;flex-direction:column;
   opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
 .pg.open .pg-modal{opacity:1;transform:scale(1);filter:blur(0)}
 .pg-modal{position:relative}
-.pg-head{position:absolute;top:2px;left:12px;right:2px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px;pointer-events:none}
+.pg-head{position:absolute;top:2px;left:12px;right:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px;pointer-events:none}
 .pg-head>*{pointer-events:auto}
 .pg-modal.in-chapter .pg-inner{padding-top:40px}
 .pg-head h2{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;min-width:0}
 .pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
-.pg-x{border:0;background:transparent;color:var(--pg-close);font-size:28px;line-height:1;padding:8px;cursor:pointer}
+.pg-x{border:0;background:transparent;color:var(--muted);font-size:28px;line-height:1;padding:8px;cursor:pointer}
 .pg-x:active,.pg-head-back:active{opacity:.6}
 .pg-body-scroll{overflow:auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .pg-inner{position:relative;padding:0 0 4px}
