@@ -242,6 +242,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   <div class="start-sub">How many exercises?</div>
   <p class="muted">Type the preposition, then choose the case.</p>
   <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
+  <p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="screen hidden">
@@ -290,6 +291,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   <div class="done-parts" id="parts"></div>
   <div class="weak hidden" id="weak"></div>
   <div class="done-note">Tricky verbs will come up more often next time.</div>
+  <p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
   <div class="done-actions">
     <button class="btn" id="home">Start Again</button>
     <button class="btn" id="homeBack">Back to Home</button>
@@ -300,6 +302,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 </main>
 
 <script src="verben_mit_praepositionen.js"></script>
+<script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const DATA = window.VERBEN_MIT_PRAEPOSITIONEN || [];
 const $ = id => document.getElementById(id);
@@ -344,6 +347,45 @@ function currentStats(){
   return map;
 }
 
+// ===== DIFFICULTY per verb (Documentation/PROGRESS_TRACKER.md) =====
+// Common scale 1–4: wrong +1, right −0.5. A verb counts as right only if preposition AND case are right.
+// Stored inside the same key (verbenPraepStatsV1 → .difficulty), so Backup already covers it.
+// The per-part session stats above stay — they drive the "Needs more practice" list at the end.
+// Format marker "__format": 2. Old data has none → starting scores are seeded ONCE from the
+// session stats: 1 + error rate × 3, rounded to 0.5 (never missed → 1, always missed → 4).
+const DIFFICULTY_FORMAT = 2;
+if(statsStore.__format !== DIFFICULTY_FORMAT || !statsStore.difficulty || typeof statsStore.difficulty !== "object"){
+  const stats = currentStats(), seeded = {};
+  DATA.forEach(x => {
+    const p = stats[x.id + "|prep"], c = stats[x.id + "|case"];
+    if(!p && !c) return;
+    const err = Math.max(p?.errorRate || 0, c?.errorRate || 0);
+    seeded[x.id] = Math.min(4, Math.max(1, Math.round((1 + err * 3) * 2) / 2));
+  });
+  statsStore.difficulty = seeded;
+  statsStore.__format = DIFFICULTY_FORMAT;
+  saveStats();
+}
+function weightFor(x){ return Math.max(1, Number(statsStore.difficulty[x.id] || 1)); }
+function updateDifficulty(x, ok){
+  let d = weightFor(x);
+  d = ok ? Math.max(1, d - 0.5) : Math.min(4, d + 1);
+  statsStore.difficulty[x.id] = Number(d.toFixed(2));
+  saveStats();
+}
+
+// ===== PROGRESS (one item per verb) =====
+// Guarded: the exercise keeps working if the helper is missing.
+const PROGRESS_ID = "verbenMitPraepositionen";
+const hasProgress = () => typeof window.DeutschProgress === "object";
+if(hasProgress()) DeutschProgress.init(PROGRESS_ID, DATA.map(x => ({key:x.id, label:`${x.verb} ${x.preposition} + ${x.case}`})));
+// TEMP (progress test): small line on the start/done screens — remove after testing.
+function showProgressDebug(){
+  if(!hasProgress()) return;
+  const sm = DeutschProgress.summary(PROGRESS_ID); if(!sm) return;
+  document.querySelectorAll(".progress-debug").forEach(el => el.textContent = `Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher` + (sm.recent.length ? ` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(", ")}` : ""));
+}
+
 // ===== DAILY STATS (Home tile) =====
 const DAILY_STATS_KEY = "deutschDailyStatsV1";
 function localDayKey(){
@@ -368,10 +410,9 @@ let prepOK = false, caseOK = null, chosenCase = null, caseShownAt = 0;
 let score = {full:0, prep:0, cas:0, casTotal:0}, sessionAnswers = {}, liveSession = null;
 
 function buildSession(size){
-  const stats = currentStats();
+  // Weighted sampling without replacement by the verb's difficulty score (like Artikel).
   return DATA.map(x => {
-    const err = Math.max(stats[x.id + "|prep"]?.errorRate || 0, stats[x.id + "|case"]?.errorRate || 0);
-    return {x, k: -Math.log(Math.max(Math.random(), 1e-12)) / (1 + err * 4)};
+    return {x, k: -Math.log(Math.max(Math.random(), 1e-12)) / weightFor(x)};
   }).sort((a, b) => a.k - b.k).slice(0, Math.min(size, DATA.length)).map(o => o.x);
 }
 // Stats are saved after every answer, so leaving mid-session keeps them.
@@ -521,6 +562,8 @@ function showAnswer(){
   const full = prepOK && caseOK !== false;
   if(full) score.full++;
   recordDaily(full);
+  updateDifficulty(x, full);
+  if(hasProgress()) DeutschProgress.record(PROGRESS_ID, x.id, full);
 
   // Step 2: the right half fades to the case result (left half keeps the preposition).
   if(caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
@@ -570,8 +613,10 @@ function finish(){
     $("weak").innerHTML = "<b>Needs more practice</b><br>" + weak.map(esc).join("<br>");
     $("weak").classList.remove("hidden");
   }else $("weak").classList.add("hidden");
+  showProgressDebug();
   window.scrollTo({top:0, behavior:"auto"});
 }
+showProgressDebug();
 
 // ===== CASE BUTTONS =====
 $("choices").style.setProperty("--case-count", CHOICE_CASES.length);
