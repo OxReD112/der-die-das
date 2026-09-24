@@ -13,7 +13,7 @@
   "use strict";
 
   const PROGRESS_KEY="deutschProgressV1", SNAP_KEY="deutschProgressSnapshotsV1", PROFILE_KEY="deutschProfileV1";
-  const WINDOW_DAYS=21, LIST_MAX=5;
+  const WINDOW_DAYS=21, LIST_MAX=3, MIN_GRAPH_POINTS=4; // graph only once there are 3+ days of history
   const EX_NAMES={artikel:"Artikel",partizipII:"Partizip II",modalverben:"Modalverben",pronomen:"Pronomen",
     festerKasus:"Fester Kasus",verbenMitPraepositionen:"Verben mit Präpositionen",ortspraepositionen:"Ortspräpositionen"};
   const CHAPTERS=[
@@ -36,14 +36,14 @@
   background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
 .pg.open{opacity:1;visibility:visible;background:var(--pg-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
 .pg-modal{width:min(460px,100%);max-height:82vh;overflow:hidden;background:var(--pg-modal-bg);border:1px solid var(--pg-modal-border);
-  border-radius:24px;padding:4px 12px 12px;display:flex;flex-direction:column;
+  border-radius:24px;padding:0 12px 12px;display:flex;flex-direction:column;
   opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
 .pg.open .pg-modal{opacity:1;transform:scale(1);filter:blur(0)}
 .pg-modal{position:relative}
-.pg-head{position:absolute;top:3px;left:12px;right:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:2px 2px 2px 8px;pointer-events:none}
+.pg-head{position:absolute;top:2px;left:12px;right:2px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px;pointer-events:none}
 .pg-head>*{pointer-events:auto}
-.pg-modal.in-chapter .pg-inner{padding-top:44px}
-.pg-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400;display:flex;align-items:center;min-width:0}
+.pg-modal.in-chapter .pg-inner{padding-top:40px}
+.pg-head h2{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;min-width:0}
 .pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
 .pg-x{border:0;background:transparent;color:var(--pg-close);font-size:28px;line-height:1;padding:8px;cursor:pointer}
 .pg-x:active,.pg-head-back:active{opacity:.6}
@@ -51,14 +51,14 @@
 .pg-inner{position:relative;padding:0 0 4px}
 .pg-view{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .pg-view.away{position:absolute;top:0;left:0;right:0;opacity:0;pointer-events:none}
-@media(max-width:600px){.pg{padding:10px}.pg-modal{max-height:84vh;padding:3px 10px 10px}.pg-head h2{font-size:19px}}
+@media(max-width:600px){.pg{padding:10px}.pg-modal{max-height:84vh;padding:0 10px 10px}}
 @media(prefers-reduced-motion:reduce){.pg,.pg-modal{transition:none!important}}
 .pg-view.away.l{transform:translateX(-30%)}.pg-view.away.r{transform:translateX(30%)}
 .pg-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:15px;padding:6px 0;margin-bottom:12px;cursor:pointer}
 .pg-card{padding:0}
 .pg-card+.pg-card{margin-top:12px;padding-top:12px;border-top:1px solid var(--pg-line)}
 .pg-grammar{padding:8px}
-.pg-hero{padding:12px 10px 4px;text-align:center}
+.pg-hero{padding:8px 10px 4px;text-align:center}
 .pg-kick{color:var(--muted);font-size:12px}
 .pg-big{display:flex;align-items:center;justify-content:center;margin-top:4px}
 .pg-big b{font-size:34px;font-weight:700;letter-spacing:-.8px;color:var(--mint);line-height:1}
@@ -95,7 +95,9 @@
 .pg-words .pg-row{padding:16px 10px 12px}
 .pg-words .pg-n{font-size:17px}
 .pg-words .pg-legend{margin:12px 0 0}
-.pg-title{display:flex;justify-content:flex-start;align-items:baseline;margin:0 10px 6px}
+.pg-change{margin:0 10px 8px;color:var(--muted);font-size:14px}
+.pg-change b{color:var(--mint);font-weight:650}.pg-change b.down{color:var(--pg-down)}
+.pg-row .pg-change{margin:0 0 6px;font-size:13px}
 .pg-title h2{font-size:24px;font-weight:650;margin:0}
 .pg-title span{color:var(--muted);font-size:14px}
 .pg-title b{color:var(--mint)}.pg-title b.down{color:var(--pg-down)}
@@ -197,7 +199,7 @@
     reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go));
   }
   function spark(h,{labels=true,H=110,end=null}={}){
-    const W=320,pl=4,pr=labels?34:(end!=null?44:4),pt=12,pb=labels?20:4;
+    const W=320,pl=4,pr=labels?6:(end!=null?44:4),pt=12,pb=labels?20:4;
     if(h.length<2)h=[h[0]||0,h[0]||0];
     const lo=Math.max(0,Math.min(...h)-5),hi=Math.min(100,Math.max(...h)+5)||1;
     const span=Math.max(hi-lo,1);
@@ -210,8 +212,6 @@
     if(end!=null)s.append(txt({x:x(L)+9,y:y(h[L])+4,fill:"var(--text)","font-size":12.5,"font-weight":650},end));
     if(labels){
       s.append(el("circle",{cx:x(0),cy:y(h[0]),r:3.5,fill:"var(--bg)",stroke:"var(--pg-ghost)","stroke-width":2}));
-      s.append(txt({x:x(0),y:y(h[0])-9,fill:"var(--muted)","font-size":11},round(h[0])+"%"));
-      s.append(txt({x:x(L)+8,y:y(h[L])+4,fill:"var(--text)","font-size":12,"font-weight":650},round(h[L])+"%"));
       s.append(txt({x:x(0),y:H-3,fill:"var(--dim-text)","font-size":10.5},model.sinceStart?"Start":"vor 3 Wo."));
       s.append(txt({x:x(L),y:H-3,fill:"var(--dim-text)","font-size":10.5,"text-anchor":"end"},"heute"));
     }
@@ -219,22 +219,20 @@
       p.getBoundingClientRect();p.style.transition="stroke-dashoffset 1.2s ease";p.style.strokeDashoffset=0});
     return s;
   }
-  function detail(o){
+  function change(o){
+    const down=round(o.now)<round(o.then);
+    return `<div class="pg-change">${round(o.then)}% → <b class="${down?"down":""}">${round(o.now)}%</b></div>`;
+  }
+  function detail(o,{line=false}={}){
     const d=document.createElement("div");
     const items=[...o.recent].sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0);
-    d.innerHTML=`<h3>Verlauf · ${model.sinceStart?"seit Start":"3 Wochen"}</h3><div class="pg-spark"></div>
-      <h3 style="margin-top:20px">Neu gelernt</h3>`;
-    d.querySelector(".pg-spark").append(spark(o.series));
+    if(line)d.insertAdjacentHTML("beforeend",change(o));
+    if(o.series.length>=MIN_GRAPH_POINTS){const g=document.createElement("div");g.className="pg-spark";g.append(spark(o.series));d.append(g)}
+    d.insertAdjacentHTML("beforeend",`<h3 style="margin-top:16px">Neu gelernt</h3>`);
     if(!items.length){d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Noch nichts – das kommt!</div>');return d}
     const ul=document.createElement("ul");ul.className="pg-items";
     ul.innerHTML=items.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
     d.append(ul);
-    if(items.length>LIST_MAX){
-      const more=document.createElement("button");more.type="button";more.className="pg-more";
-      more.textContent=`+ ${items.length-LIST_MAX} weitere`;
-      more.onclick=e=>{e.stopPropagation();ul.insertAdjacentHTML("beforeend",items.slice(LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join(""));more.remove()};
-      d.append(more);
-    }
     return d;
   }
 
@@ -298,8 +296,7 @@
   function chapter(v,i){
     const c=model.chapters[i], down=round(c.now)<round(c.then);
     setHead(c.name,()=>go(overview,"back"));
-    v.innerHTML=`<div class="pg-title"><span>${model.sinceStart?"Start":"vor 3 Wochen"} ${round(c.then)}% → heute <b class="${down?"down":""}">${round(c.now)}%</b></span></div>
-      <div class="pg-card pg-body"></div>`;
+    v.innerHTML=`${change(c)}<div class="pg-card pg-body"></div>`;
     const body=v.querySelector(".pg-body");
     if(c.single){body.append(detail(c.single));return}
     body.style.padding="8px";
@@ -312,7 +309,7 @@
         if(ev.target.closest(".pg-expand"))return;
         const open=!r.classList.contains("open");
         body.querySelectorAll(".pg-row.open").forEach(x=>x.classList.remove("open"));
-        if(open){inn.innerHTML="";const d=detail(e);d.style.paddingTop="16px";inn.append(d);r.classList.add("open")}
+        if(open){inn.innerHTML="";const d=detail(e,{line:true});d.style.paddingTop="12px";inn.append(d);r.classList.add("open")}
       };
       body.append(r);
     });
