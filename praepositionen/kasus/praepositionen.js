@@ -1,6 +1,7 @@
 // German Learning App — Präpositionen → Kasus
 // База для тренажёра «Präposition → Kasus».
-// Источник отбора: предоставленные учебные материалы пользователя и согласованный в диалоге основной пул.
+// Источник отбора: список преподавателя «Liste der deutschen Präpositionen nach Kasus»; QA 2026-09-24:
+// только разговорные и «образованные» B1–B2, без канцелярских (см. Documentation/QA/QA_03_Kasus.md).
 // Не включены: Wechselpräpositionen и локальные Präpositionen для отдельной будущей игры.
 // Loaded by kasus.html as window.PRAEPOSITIONEN (same pattern as Artikel/words.js).
 
@@ -39,7 +40,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Sie ist gegen die Wand gelaufen.",
-    "exampleTranslation": "Она ударилась о стену."
+    "exampleTranslation": "Она врезалась в стену."
   },
   {
     "preposition": "ohne",
@@ -62,8 +63,21 @@ window.PRAEPOSITIONEN = [
         "status": "standard"
       }
     ],
-    "example": "Wir sitzen um den Tisch.",
-    "exampleTranslation": "Мы сидим за столом."
+    "example": "Wir sitzen um den Tisch herum.",
+    "exampleTranslation": "Мы сидим вокруг стола."
+  },
+  {
+    "preposition": "bis",
+    "translation": "до",
+    "cases": [
+      {
+        "case": "Akkusativ",
+        "status": "standard"
+      }
+    ],
+    "note": "Часто вместе с другим предлогом: bis zum Bahnhof (тогда Dativ из-за zu).",
+    "example": "Ich arbeite bis nächsten Freitag.",
+    "exampleTranslation": "Я работаю до следующей пятницы."
   },
   {
     "preposition": "… entlang",
@@ -91,6 +105,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "note": "Dativ также возможен, но реже.",
+    "variantNote": "Dativ тоже возможен, но Genitiv встречается чаще.",
     "example": "Entlang des Flusses stehen alte Bäume.",
     "exampleTranslation": "Вдоль реки стоят старые деревья."
   },
@@ -104,7 +119,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Sie kommt aus Japan.",
-    "exampleTranslation": "Она приехала из Японии."
+    "exampleTranslation": "Она из Японии."
   },
   {
     "preposition": "bei",
@@ -227,57 +242,22 @@ window.PRAEPOSITIONEN = [
     "exampleTranslation": "Вопреки моим ожиданиям, он победил."
   },
   {
-    "preposition": "entsprechend",
-    "translation": "согласно, соответственно",
-    "cases": [
-      {
-        "case": "Dativ",
-        "status": "standard"
-      }
-    ],
-    "example": "Entsprechend den Regeln wurde er disqualifiziert.",
-    "exampleTranslation": "Согласно правилам, его дисквалифицировали."
-  },
-  {
-    "preposition": "gemäß",
-    "translation": "согласно",
-    "cases": [
-      {
-        "case": "Dativ",
-        "status": "standard"
-      }
-    ],
-    "example": "Gemäß dem Vertrag zahlen Sie monatlich.",
-    "exampleTranslation": "Согласно договору, вы платите ежемесячно."
-  },
-  {
     "preposition": "laut",
     "translation": "согласно, по данным",
     "cases": [
       {
-        "case": "Genitiv",
+        "case": "Dativ",
         "status": "standard"
       },
       {
-        "case": "Dativ",
-        "status": "colloquial"
+        "case": "Genitiv",
+        "status": "also_correct"
       }
     ],
-    "note": "В разговорной речи также используется Dativ.",
-    "example": "Laut des Berichts ist er zurückgetreten.",
-    "exampleTranslation": "Согласно сообщению, он ушёл в отставку."
-  },
-  {
-    "preposition": "mitsamt",
-    "translation": "вместе с, включая",
-    "cases": [
-      {
-        "case": "Dativ",
-        "status": "standard"
-      }
-    ],
-    "example": "Er kam mitsamt seiner Familie.",
-    "exampleTranslation": "Он пришёл вместе со своей семьёй."
+    "note": "Genitiv тоже возможен, но реже.",
+    "variantNote": "Genitiv тоже возможен, но Dativ встречается чаще.",
+    "example": "Laut einem Bericht ist er zurückgetreten.",
+    "exampleTranslation": "Согласно сообщению, он подал в отставку."
   },
   {
     "preposition": "wegen",
@@ -293,6 +273,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "note": "В разговорной речи также используется Dativ.",
+    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
     "example": "Wegen des schlechten Wetters blieben wir zu Hause.",
     "exampleTranslation": "Из-за плохой погоды мы остались дома."
   },
@@ -310,6 +291,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "note": "В разговорной речи также используется Dativ.",
+    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
     "example": "Trotz des Regens gingen wir spazieren.",
     "exampleTranslation": "Несмотря на дождь, мы пошли гулять."
   },
@@ -327,32 +309,27 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "note": "В разговорной речи также используется Dativ.",
+    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
     "example": "Während des Essens sprachen sie nicht.",
     "exampleTranslation": "Во время еды они не разговаривали."
   },
   {
-    "preposition": "statt",
+    "preposition": "statt / anstatt",
     "translation": "вместо",
     "cases": [
       {
         "case": "Genitiv",
         "status": "standard"
+      },
+      {
+        "case": "Dativ",
+        "status": "colloquial"
       }
     ],
     "example": "Statt eines Kuchens gab es Eis.",
-    "exampleTranslation": "Вместо торта было мороженое."
-  },
-  {
-    "preposition": "anstatt",
-    "translation": "вместо",
-    "cases": [
-      {
-        "case": "Genitiv",
-        "status": "standard"
-      }
-    ],
-    "example": "Anstatt meines Bruders kam ich.",
-    "exampleTranslation": "Вместо моего брата пришёл я."
+    "exampleTranslation": "Вместо торта было мороженое.",
+    "note": "В разговорной речи также используется Dativ.",
+    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv."
   },
   {
     "preposition": "anstelle",
@@ -392,6 +369,7 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "note": "Dativ также возможен.",
+    "variantNote": "Dativ тоже возможен, но Genitiv встречается чаще.",
     "example": "Dank seiner Hilfe haben wir es geschafft.",
     "exampleTranslation": "Благодаря его помощи мы справились."
   },
@@ -404,20 +382,20 @@ window.PRAEPOSITIONEN = [
         "status": "standard"
       }
     ],
-    "example": "Mithilfe einer Karte.",
-    "exampleTranslation": "С помощью карты."
+    "example": "Mithilfe einer Karte haben wir den Weg gefunden.",
+    "exampleTranslation": "С помощью карты мы нашли дорогу."
   },
   {
     "preposition": "anhand",
-    "translation": "на основании, с помощью",
+    "translation": "на примере, на основе, по",
     "cases": [
       {
         "case": "Genitiv",
         "status": "standard"
       }
     ],
-    "example": "Anhand eines Beispiels.",
-    "exampleTranslation": "На основании примера."
+    "example": "Anhand eines Beispiels erkläre ich es dir.",
+    "exampleTranslation": "Я объясню тебе это на примере."
   },
   {
     "preposition": "angesichts",
@@ -432,20 +410,27 @@ window.PRAEPOSITIONEN = [
     "exampleTranslation": "Учитывая ситуацию, мы должны действовать."
   },
   {
-    "preposition": "binnen",
-    "translation": "в течение, в пределах",
+    "preposition": "innerhalb",
+    "translation": "внутри, в течение",
     "cases": [
       {
         "case": "Genitiv",
         "status": "standard"
-      },
-      {
-        "case": "Dativ",
-        "status": "also_correct"
       }
     ],
-    "note": "Dativ также возможен.",
-    "example": "Binnen eines Monats.",
-    "exampleTranslation": "В течение месяца."
+    "example": "Innerhalb einer Woche war alles fertig.",
+    "exampleTranslation": "В течение недели всё было готово."
+  },
+  {
+    "preposition": "außerhalb",
+    "translation": "вне, за пределами",
+    "cases": [
+      {
+        "case": "Genitiv",
+        "status": "standard"
+      }
+    ],
+    "example": "Wir wohnen außerhalb der Stadt.",
+    "exampleTranslation": "Мы живём за городом."
   }
 ];
