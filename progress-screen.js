@@ -61,6 +61,8 @@
 .pg-d{font-size:12.5px;font-weight:600;color:var(--mint);white-space:nowrap}
 .pg-d.down{color:var(--pg-down)}.pg-d.none{color:var(--dim-text)}
 .pg-d .tot{color:var(--muted);font-weight:500;font-size:12px}
+.pg-d .pg-ws{color:var(--label-text,var(--text));font-weight:600;font-size:12px}
+.pg-d .pg-wl{color:var(--mint);font-weight:650;font-size:12px}
 .pg-chev{color:var(--dim-text);margin-left:8px;display:inline-block;transition:transform .25s}
 .pg-row.open .pg-chev{transform:rotate(90deg)}
 .pg-track{position:relative;height:10px;border-radius:5px;background:var(--today-track)}
@@ -216,6 +218,12 @@
     return d;
   }
 
+  // Wortschatz numbers: [learned (mint) / ] started (gray) / total — learned only once ≥ 1
+  function wordCounts(W){
+    const sep='<span class="tot"> / </span>';
+    return (W.learned>0?`<span class="pg-wl">${W.learned}</span>${sep}`:"")+`<span class="pg-ws">${W.started}</span>${sep}<span class="tot">${W.total}</span>`;
+  }
+
   /* ---------- screens ---------- */
   let root,inner,current=null,model=null;
   function go(build,dir){
@@ -246,10 +254,11 @@
     // Wortschatz: whole stack · started · fully learned — no drill-down
     const w=v.querySelector(".pg-words"), wr=document.createElement("div");wr.className="pg-row static";
     const W=m.words;
-    wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d"><span class="tot">${W&&W.total?W.total:""}</span></span></div>`;
+    wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>`;
     const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
     if(W&&W.total){const go=()=>{tr.children[0].style.width=W.started/W.total*100+"%";setTimeout(()=>tr.children[1].style.width=W.learned/W.total*100+"%",300)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
+    else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0;font-size:13px">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
     // grammar chapters
     const list=v.querySelector(".pg-chapters");
     m.chapters.forEach((c,i)=>{
