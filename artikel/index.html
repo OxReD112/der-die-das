@@ -110,6 +110,7 @@
 <button class="session-option" data-size="30">30</button>
 <button class="session-option" data-size="50">50</button>
 </div>
+<p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress pilot -->
 </section>
 
 <div id="game" class="hidden">
@@ -130,11 +131,13 @@
 <h1>Nice work.</h1>
 <div class="end-score" id="endCorrect">0/0</div>
 <p id="endSummary">You finished your session.</p>
+<p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress pilot -->
 <button class="play-again" id="playAgain">Choose another session</button>
 </section>
 <div class="version-mark">v10</div>
 </main>
 <script src="words.js"></script>
+<script src="../components/deutsch-progress-v1.js"></script>
 <script>
 const words=window.WORDS;
 let deck=[],index=0,total=0,correct=0,sessionSize=0;
@@ -145,6 +148,17 @@ const STORAGE_KEY='artikelGameDifficultyV1';
 let difficulty={};
 try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch(e){difficulty={}}
 const wordKey=w=>w.article+'|'+w.word;
+
+// Progress tracking (Documentation/PROGRESS_TRACKER.md). Guarded: Artikel keeps working if the helper is missing.
+const PROGRESS_ID='artikel';
+const hasProgress=()=>typeof window.DeutschProgress==='object';
+if(hasProgress())DeutschProgress.init(PROGRESS_ID,words.map(w=>({key:wordKey(w),label:w.article+' '+w.word})));
+// TEMP (progress pilot): small counter on the start/end screens — remove after testing.
+function showProgressDebug(){
+ if(!hasProgress())return;
+ const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
+ document.querySelectorAll('.progress-debug').forEach(el=>el.textContent=`Test · ${sm.sicher} sicher / ${sm.total}`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(', ')}`:''));
+}
 function saveDifficulty(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty))}catch(e){}}
 function updateDifficulty(w,ok){
  const key=wordKey(w),old=difficulty[key]||1;
@@ -192,7 +206,7 @@ function recordDailyArtikel(ok){
   }catch(e){}
 }
 
-function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(ok){correct++}
+function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,wordKey(w),ok); if(ok){correct++}
  $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>.`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; total=0; correct=0;
@@ -209,12 +223,14 @@ function endSession(){
  $('endCorrect').textContent=`${correct}/${sessionSize}`;
  const pct=Math.round((correct/sessionSize)*100);
  $('endSummary').textContent=`${pct}% correct. Your difficult words are saved for future sessions.`;
+ showProgressDebug();
 }
 $('continue').onclick=()=>{
  if(total>=sessionSize){endSession();return}
  index++;
  render();
 };
+showProgressDebug();
 document.querySelectorAll('.session-option').forEach(b=>b.onclick=()=>startSession(Number(b.dataset.size)));
 $('playAgain').onclick=()=>{$('endScreen').classList.add('hidden');$('sessionScreen').classList.remove('hidden')};
 document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>choose(b.dataset.a));
