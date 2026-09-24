@@ -41,11 +41,11 @@
   overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transition:transform .44s cubic-bezier(.22,.61,.36,1)}
 .pg.open .pg-sheet{transform:translate(-50%,0)}
 .pg.dragging .pg-sheet,.pg.dragging .pg-scrim{transition:none}
-.pg-head{position:sticky;top:0;z-index:3;height:42px;background:var(--pg-bg);display:flex;justify-content:center}
-.pg-handle{appearance:none;-webkit-appearance:none;border:0;background:none;padding:8px 30px 14px;cursor:pointer}
+.pg-head{position:sticky;top:0;z-index:3;height:30px;background:var(--pg-bg);display:flex;justify-content:center}
+.pg-handle{appearance:none;-webkit-appearance:none;border:0;background:none;padding:6px 30px 12px;cursor:pointer}
 .pg-handle i{display:block;width:38px;height:5px;border-radius:3px;background:var(--toggle-track)}
-.pg-x{position:absolute;right:12px;top:8px;width:30px;height:30px;border-radius:50%;border:1px solid var(--card-border);
-  background:var(--card-bg);color:var(--muted);font:400 19px/28px -apple-system,BlinkMacSystemFont,sans-serif;padding:0;cursor:pointer}
+.pg-x{position:absolute;right:8px;top:0;width:36px;height:30px;border:0;background:none;color:var(--muted);
+  font:300 24px/28px -apple-system,BlinkMacSystemFont,sans-serif;padding:0;cursor:pointer}
 .pg-x:active,.pg-handle:active{opacity:.6}
 .pg-inner{position:relative;padding:0 16px calc(env(safe-area-inset-bottom) + 32px)}
 .pg-view{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
@@ -55,13 +55,12 @@
 .pg-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--card-radius,25px);padding:20px 18px}
 .pg-card+.pg-card{margin-top:14px}
 .pg-grammar{padding:8px}
-.pg-hero{padding:10px 10px 4px}
+.pg-hero{padding:10px 10px 4px;text-align:center}
 .pg-kick{color:var(--muted);font-size:12px}
-.pg-hrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
-.pg-big{display:flex;align-items:center;flex:none}
+.pg-big{display:flex;align-items:center;justify-content:center;margin-top:4px}
 .pg-big b{font-size:34px;font-weight:700;letter-spacing:-.8px;color:var(--mint);line-height:1}
-.pg-big span{font-size:14px;font-weight:600;margin-left:8px;line-height:1.15}
-.pg-say{font-size:13px;line-height:1.3;color:var(--label-text,var(--text));text-align:right;max-width:52%}
+.pg-big span{font-size:14px;font-weight:600;margin-left:8px;line-height:1.15;text-align:left}
+.pg-say{font-size:13.5px;line-height:1.35;color:var(--label-text,var(--text));margin-top:6px}
 .pg-hero svg{margin-top:10px}
 .pg-divider{height:1px;background:var(--pg-line);margin:8px 10px 2px}
 .pg svg{width:100%;height:auto;display:block;overflow:visible}
@@ -87,8 +86,12 @@
 .pg-lost{background:var(--pg-lost);border-radius:0!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-started{background:var(--pg-started);transition:width 1s cubic-bezier(.2,.8,.2,1)}
 .pg-notch{top:-4px!important;bottom:-4px!important;width:2px!important;margin-left:-1px;border-radius:1px!important;background:var(--text);opacity:0;transition:opacity .4s .8s}
-.pg-legend{display:flex;gap:16px;justify-content:center;margin:10px 0 4px;color:var(--dim-text);font-size:11.5px}
-.pg-legend i{display:inline-block;width:12px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--dim-text);font-size:11.5px}
+.pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
+.pg-chapters .pg-row{padding:8px 10px 9px}
+.pg-words .pg-row{padding:16px 10px 12px}
+.pg-words .pg-n{font-size:17px}
+.pg-words .pg-legend{margin:12px 0 0}
 .pg-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
 .pg-title h2{font-size:24px;font-weight:650;margin:0}
 .pg-title span{color:var(--muted);font-size:14px}
@@ -252,25 +255,26 @@
   function overview(v){
     const m=model;
     const up=round(m.gNow)>=round(m.gThen);
-    const say=up?"Du wirst besser.":`Auf und Ab gehört<br>zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
-    v.innerHTML=`<div class="pg-card pg-list pg-words"></div>
-      <div class="pg-legend" style="margin-bottom:14px"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>
-      <div class="pg-card pg-grammar">
+    const say=up?"Du wirst besser.":`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
+    v.innerHTML=`<div class="pg-card pg-grammar">
         <div class="pg-hero">
           <div class="pg-kick">${m.sinceStart?"Seit Start":"In 3 Wochen"}</div>
-          <div class="pg-hrow"><div class="pg-big"><b>+${m.learned}</b><span>Sachen<br>sitzen jetzt</span></div><div class="pg-say">${say}</div></div>
+          <div class="pg-big"><b>+${m.learned}</b><span>Sachen<br>sitzen jetzt</span></div>
+          <div class="pg-say">${say}</div>
           <div class="pg-hs"></div>
         </div>
         <div class="pg-divider"></div>
         <div class="pg-chapters"></div>
+        <div class="pg-legend"><span><i style="background:var(--pg-ghost)"></i>${m.sinceStart?"Start":"vor 3 Wochen"}</span><span><i style="background:var(--mint)"></i>dazu</span></div>
       </div>
-      <div class="pg-legend"><span><i style="background:var(--pg-ghost)"></i>${m.sinceStart?"Start":"vor 3 Wochen"}</span><span><i style="background:var(--mint)"></i>dazu</span></div>`;
+      <div class="pg-card pg-list pg-words"></div>`;
     v.querySelector(".pg-hs").append(spark(m.gSeries,{labels:false,H:40,end:round(m.gNow)+"%"}));
     // Wortschatz: whole stack · started · fully learned — no drill-down
     const w=v.querySelector(".pg-words"), wr=document.createElement("div");wr.className="pg-row static";
     const W=m.words;
     wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>`;
     const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
+    if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>');
     if(W&&W.total){const go=()=>{tr.children[0].style.width=W.started/W.total*100+"%";setTimeout(()=>tr.children[1].style.width=W.learned/W.total*100+"%",300)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
     else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0;font-size:13px">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
@@ -316,6 +320,10 @@
     try{model=buildModel()}catch(e){console.error(e);return}
     current=null;inner.innerHTML="";go(overview);sheet.scrollTop=0;
     sheet.style.transform="";root.classList.remove("dragging");
+    // top edge right below the Home header ("Deutsch."), so the title stays visible
+    const hd=document.querySelector("main.page > header");
+    const hb=hd?hd.getBoundingClientRect().bottom:0;
+    sheet.style.top=hb>0&&hb<innerHeight*0.4?Math.round(hb+8)+"px":"";
     root.getBoundingClientRect();
     root.classList.add("open");root.setAttribute("aria-hidden","false");
   }
