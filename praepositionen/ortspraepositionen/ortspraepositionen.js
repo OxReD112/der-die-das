@@ -21,7 +21,7 @@ window.ORTS_KATEGORIEN = {
   kontakt:  {label:"Kontakt, „Wasser“",                 rule:"an · an · von"},
   flaeche:  {label:"Offene Fläche",                     rule:"auf · auf · von"},
   person:   {label:"Person, Geschäft, Aktivität, Nähe", rule:"bei · zu · von"},
-  ausnahme: {label:"Wald, Park, Garten, Schwimmbad, Berge, Alpen, Wasser", rule:"in · in · aus (immer in)"},
+  ausnahme: {label:"Wald, Park, Garten, Schwimmbad, Berge, Alpen", rule:"in · in · aus (immer in)"},
   adresse:  {label:"Straße als Adresse",                rule:"in · in · aus"},
   hause:    {label:"Zuhause",                           rule:"zu · nach · von zu"},
   anzu:     {label:"Bahnhof, Supermarkt (am Gebäude)",   rule:"an · zu · von"}
@@ -69,7 +69,6 @@ window.ORTSPRAEPOSITIONEN = [
   {id:"meer",        noun:"Meer",        article:"das", gender:"n",  ru:"море (на побережье)",      cat:"kontakt", wo:"am",      wohin:"ans",      woher:"vom"},
   {id:"see",         noun:"See",         article:"der", gender:"m",  ru:"озеро (на берегу)",     cat:"kontakt", wo:"am",      wohin:"an den",   woher:"vom"},
   {id:"fluss",       noun:"Fluss",       article:"der", gender:"m",  ru:"река (на берегу)",      cat:"kontakt", wo:"am",      wohin:"an den",   woher:"vom"},
-  {id:"wasser-ufer", noun:"Wasser",      article:"das", gender:"n",  ru:"вода (у воды, на берегу)",      cat:"kontakt", wo:"am",      wohin:"ans",      woher:"vom"},
   {id:"kueste",      noun:"Küste",       article:"die", gender:"f",  ru:"побережье",             cat:"kontakt", wo:"an der",  wohin:"an die",   woher:"von der"},
   {id:"fenster",     noun:"Fenster",     article:"das", gender:"n",  ru:"окно",                  cat:"kontakt", wo:"am",      wohin:"ans",      woher:"vom"},
   {id:"tisch",       noun:"Tisch",       article:"der", gender:"m",  ru:"стол (сесть за стол)",  cat:"kontakt", wo:"am",      wohin:"an den",   woher:"vom"},
@@ -114,7 +113,6 @@ window.ORTSPRAEPOSITIONEN = [
   {id:"berge",       noun:"Berge",       article:"die", gender:"pl", ru:"горы (в горах)",                  cat:"ausnahme", wo:"in den", wohin:"in die",   woher:"aus den",
      forms:{wo:"Bergen", wohin:"Berge", woher:"Bergen"}},
   {id:"alpen",       noun:"Alpen",       article:"die", gender:"pl", ru:"Альпы",                 cat:"ausnahme", wo:"in den", wohin:"in die",   woher:"aus den", lead:{wohin:"Ich fahre"}},
-  {id:"wasser-im",   noun:"Wasser",      article:"das", gender:"n",  ru:"вода (в воде, плавать)", cat:"ausnahme",     wo:"im",     wohin:"ins",      woher:"aus dem"},
 
   // ── Straße als Adresse: in / in / aus (vs. auf der Straße) ──
   {id:"goethestrasse", noun:"Goethestraße", article:"die", gender:"f", ru:"улица Гёте (адрес)",  cat:"adresse",  wo:"in der", wohin:"in die",   woher:"aus der", lead:{wo:"Ich wohne", wohin:"Ich ziehe"}},
