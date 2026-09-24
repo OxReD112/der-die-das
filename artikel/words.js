@@ -1011,7 +1011,7 @@ window.WORDS = [
     "word": "Schule",
     "article": "die",
     "translation": "школа",
-    "ruleType": "pattern",
+    "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
     "examples": [
@@ -1025,7 +1025,7 @@ window.WORDS = [
     "word": "Straße",
     "article": "die",
     "translation": "улица",
-    "ruleType": "pattern",
+    "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
     "examples": [
@@ -1039,7 +1039,7 @@ window.WORDS = [
     "word": "Sprache",
     "article": "die",
     "translation": "язык",
-    "ruleType": "pattern",
+    "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
     "examples": [
@@ -1053,7 +1053,7 @@ window.WORDS = [
     "word": "Küche",
     "article": "die",
     "translation": "кухня",
-    "ruleType": "pattern",
+    "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
     "examples": [
@@ -1067,7 +1067,7 @@ window.WORDS = [
     "word": "Frage",
     "article": "die",
     "translation": "вопрос",
-    "ruleType": "pattern",
+    "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
     "examples": [
@@ -1269,11 +1269,15 @@ window.WORDS = [
     "word": "Kaffee",
     "article": "der",
     "translation": "кофе",
-    "ruleType": "none",
-    "ruleLabel": "NO RELIABLE RULE",
-    "explanation": " ",
-    "examples": [],
-    "reliability": "Memorise the noun with its article."
+    "ruleType": "category",
+    "ruleLabel": "BEVERAGES → MOSTLY DER",
+    "explanation": "Many common beverage nouns are masculine.",
+    "examples": [
+      "der Wein",
+      "der Kaffee",
+      "der Tee"
+    ],
+    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
   },
   {
     "word": "Arbeit",
@@ -1354,8 +1358,7 @@ window.WORDS = [
     "explanation": " ",
     "examples": [],
     "reliability": "Memorise the noun with its article."
-  }
-,
+  },
   {
     "word": "Entscheidung",
     "article": "die",
@@ -2102,7 +2105,7 @@ window.WORDS = [
     "word": "Trinken",
     "article": "das",
     "translation": "питьё",
-    "ruleType": "suffix",
+    "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
     "examples": [
@@ -2116,7 +2119,7 @@ window.WORDS = [
     "word": "Schwimmen",
     "article": "das",
     "translation": "плавание",
-    "ruleType": "suffix",
+    "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
     "examples": [
@@ -2130,7 +2133,7 @@ window.WORDS = [
     "word": "Schreiben",
     "article": "das",
     "translation": "письмо, писание",
-    "ruleType": "suffix",
+    "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
     "examples": [
@@ -2144,7 +2147,7 @@ window.WORDS = [
     "word": "Reisen",
     "article": "das",
     "translation": "путешествия",
-    "ruleType": "suffix",
+    "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
     "examples": [
@@ -2382,7 +2385,7 @@ window.WORDS = [
     "word": "Junge",
     "article": "der",
     "translation": "мальчик",
-    "ruleType": "suffix",
+    "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Some common nouns ending in -e are masculine or neuter and must be memorised.",
     "examples": [
@@ -2396,7 +2399,7 @@ window.WORDS = [
     "word": "Hase",
     "article": "der",
     "translation": "заяц",
-    "ruleType": "suffix",
+    "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Some common nouns ending in -e are masculine or neuter and must be memorised.",
     "examples": [
@@ -3152,35 +3155,7 @@ window.WORDS = [
     "word": "Bier",
     "article": "das",
     "translation": "пиво",
-    "ruleType": "category",
-    "ruleLabel": "BEVERAGE EXCEPTION",
-    "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
-    "examples": [
-      "das Bier",
-      "der Wein",
-      "der Kaffee"
-    ],
-    "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
-  },
-  {
-    "word": "Wein",
-    "article": "der",
-    "translation": "вино",
-    "ruleType": "category",
-    "ruleLabel": "BEVERAGE EXCEPTION",
-    "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
-    "examples": [
-      "das Bier",
-      "der Wein",
-      "der Kaffee"
-    ],
-    "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
-  },
-  {
-    "word": "Kaffee",
-    "article": "der",
-    "translation": "кофе",
-    "ruleType": "category",
+    "ruleType": "exception",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
     "examples": [

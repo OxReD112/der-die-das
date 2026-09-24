@@ -152,7 +152,17 @@ const wordKey=w=>w.article+'|'+w.word;
 // Progress tracking (Documentation/PROGRESS_TRACKER.md). Guarded: Artikel keeps working if the helper is missing.
 const PROGRESS_ID='artikel';
 const hasProgress=()=>typeof window.DeutschProgress==='object';
-if(hasProgress())DeutschProgress.init(PROGRESS_ID,words.map(w=>({key:wordKey(w),label:w.article+' '+w.word})));
+// Counted per RULE, not per noun: all nouns of one rule (e.g. -ung → die) share one progress item.
+// Nouns without a reliable rule and exceptions (ruleType none / exception) are their own item.
+const isIndividual=w=>w.ruleType==='none'||w.ruleType==='exception';
+const progressKey=w=>isIndividual(w)?'word:'+wordKey(w):'rule:'+w.ruleLabel+'|'+w.article;
+function progressLabel(w){
+ if(isIndividual(w))return w.article+' '+w.word;
+ let l=w.ruleLabel.replace(/ ENDING$/,'').replace(/ PATTERN$/,'').replace(/ → MOSTLY (DER|DIE|DAS)$/,'');
+ l=l.startsWith('-')?l.toLowerCase():l.charAt(0)+l.slice(1).toLowerCase();
+ return l+' → '+w.article;
+}
+if(hasProgress())DeutschProgress.init(PROGRESS_ID,words.map(w=>({key:progressKey(w),label:progressLabel(w)})));
 // TEMP (progress pilot): small counter on the start/end screens — remove after testing.
 function showProgressDebug(){
  if(!hasProgress())return;
@@ -206,7 +216,7 @@ function recordDailyArtikel(ok){
   }catch(e){}
 }
 
-function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,wordKey(w),ok); if(ok){correct++}
+function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(w),ok); if(ok){correct++}
  $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>.`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; total=0; correct=0;
