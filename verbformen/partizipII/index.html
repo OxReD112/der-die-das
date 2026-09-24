@@ -253,7 +253,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <button class="choice" data-size="30">30</button>
   </div>
   <button class="pattern-table-btn" data-pattern-table>Pattern · Table</button>
-  <p class="progress-debug" style="margin-top:18px;font-size:12px;opacity:.5;text-align:center"></p><!-- TEMP progress test -->
  </section>
 
  <section id="study" class="hidden">
@@ -280,7 +279,6 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <h2>Done.</h2>
   <div id="finalScore" class="final-score"></div>
   <p id="summary"></p>
-  <p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
   <div class="finish-actions">
    <button class="again" id="again">Another session</button>
    <button class="home-back" id="homeBack">Back to Home</button>
@@ -349,12 +347,6 @@ const key=v=>v.infinitive.toLowerCase();
 const PROGRESS_ID="partizipII";
 const hasProgress=()=>typeof window.DeutschProgress==="object";
 if(hasProgress())DeutschProgress.init(PROGRESS_ID,EXERCISE_VERBS.map(v=>({key:key(v),label:v.infinitive+" → "+v.participle})));
-// TEMP (progress test): small line on the start/finish screens — remove after testing.
-function showProgressDebug(){
- if(!hasProgress())return;
- const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
- document.querySelectorAll(".progress-debug").forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,3).map(r=>r.l).join(", ")}`:""));
-}
 
 function saveDifficulty(){
  localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
@@ -474,9 +466,7 @@ function finishSession(){
  $("finish").classList.remove("hidden");
  $("finalScore").textContent=correctCount+" / "+deck.length;
  $("summary").textContent="Difficult verbs will have a better chance of returning in a future session.";
- showProgressDebug();
 }
-showProgressDebug();
 
 document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
 $("check").onclick=checkAnswer;
