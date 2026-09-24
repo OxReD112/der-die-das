@@ -34,7 +34,7 @@
 .pg{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:18px;color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
   background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
-.pg.open{opacity:1;visibility:visible;background:var(--pg-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
+.pg.open{opacity:1;visibility:visible;background:var(--confirm-scrim,var(--pg-scrim));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
 .pg-modal{width:min(460px,100%);max-height:82vh;overflow:hidden;background:var(--pg-modal-bg);border:1px solid var(--pg-modal-border);
   border-radius:24px;padding:0 12px 12px;display:flex;flex-direction:column;
   opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
@@ -93,7 +93,8 @@
 .pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--dim-text);font-size:11.5px}
 .pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
 .pg-chapters .pg-row{padding:8px 10px 9px}
-.pg-words .pg-row{padding:6px 10px 4px}
+.pg-words .pg-row{padding:12px 10px 8px}
+.pg-words .pg-legend{margin:10px 0 0}
 .pg-words .pg-top{margin-bottom:7px}
 .pg-words .pg-n{font-size:15px}
 .pg-change{margin:0 10px 8px;color:var(--muted);font-size:14px}
@@ -280,6 +281,7 @@
     const W=m.words;
     wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>`;
     const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
+    if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>');
     if(W&&W.total){const go=()=>{tr.children[0].style.width=W.started/W.total*100+"%";setTimeout(()=>tr.children[1].style.width=W.learned/W.total*100+"%",300)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
     else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0;font-size:13px">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
