@@ -39,7 +39,10 @@
   border-radius:24px;padding:4px 12px 12px;display:flex;flex-direction:column;
   opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
 .pg.open .pg-modal{opacity:1;transform:scale(1);filter:blur(0)}
-.pg-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto;padding:2px 2px 2px 8px}
+.pg-modal{position:relative}
+.pg-head{position:absolute;top:3px;left:12px;right:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:2px 2px 2px 8px;pointer-events:none}
+.pg-head>*{pointer-events:auto}
+.pg-modal.in-chapter .pg-inner{padding-top:44px}
 .pg-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400;display:flex;align-items:center;min-width:0}
 .pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
 .pg-x{border:0;background:transparent;color:var(--pg-close);font-size:28px;line-height:1;padding:8px;cursor:pointer}
@@ -55,7 +58,7 @@
 .pg-card{padding:0}
 .pg-card+.pg-card{margin-top:12px;padding-top:12px;border-top:1px solid var(--pg-line)}
 .pg-grammar{padding:8px}
-.pg-hero{padding:10px 10px 4px;text-align:center}
+.pg-hero{padding:12px 10px 4px;text-align:center}
 .pg-kick{color:var(--muted);font-size:12px}
 .pg-big{display:flex;align-items:center;justify-content:center;margin-top:4px}
 .pg-big b{font-size:34px;font-weight:700;letter-spacing:-.8px;color:var(--mint);line-height:1}
@@ -68,7 +71,7 @@
 .pg-row{display:block;width:100%;appearance:none;-webkit-appearance:none;border:0;background:none;color:inherit;font:inherit;text-align:left;padding:12px 10px 13px;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .pg-row.static{cursor:default}
 .pg-row.open{background:var(--pg-sheet)}
-.pg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.pg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
 .pg-n{font-size:14.5px;font-weight:600}
 .pg-row.sub .pg-n{font-weight:500;font-size:14px}
 .pg-d{font-size:12.5px;font-weight:600;color:var(--mint);white-space:nowrap}
@@ -78,14 +81,14 @@
 .pg-d .pg-wl{color:var(--mint);font-weight:650;font-size:12px}
 .pg-chev{color:var(--dim-text);margin-left:8px;display:inline-block;transition:transform .25s}
 .pg-row.open .pg-chev{transform:rotate(90deg)}
-.pg-track{position:relative;height:10px;border-radius:5px;background:var(--today-track)}
-.pg-row.sub .pg-track{height:8px}
+.pg-track{position:relative;height:5px;border-radius:3px;background:var(--today-track)}
+.pg-row.sub .pg-track{height:4px}
 .pg-track i{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:5px}
 .pg-fill{background:var(--mint);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
 .pg-past{background:var(--pg-ghost);border-radius:5px 0 0 5px!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-lost{background:var(--pg-lost);border-radius:0!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-started{background:var(--pg-started);transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.pg-notch{top:-4px!important;bottom:-4px!important;width:2px!important;margin-left:-1px;border-radius:1px!important;background:var(--text);opacity:0;transition:opacity .4s .8s}
+.pg-notch{top:-3px!important;bottom:-3px!important;width:2px!important;margin-left:-1px;border-radius:1px!important;background:var(--text);opacity:0;transition:opacity .4s .8s}
 .pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--dim-text);font-size:11.5px}
 .pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
 .pg-chapters .pg-row{padding:8px 10px 9px}
@@ -244,8 +247,9 @@
   /* ---------- screens ---------- */
   let root,scroller,inner,titleEl,backEl,current=null,model=null;
   function setHead(title,back){
-    titleEl.textContent=title;
+    titleEl.textContent=title||"";
     backEl.hidden=!back;backEl.onclick=back||null;
+    root.querySelector(".pg-modal").classList.toggle("in-chapter",!!title);
   }
   function go(build,dir){
     const next=document.createElement("div");next.className="pg-view";build(next);
@@ -257,7 +261,7 @@
     current=next;scroller.scrollTop=0;
   }
   function overview(v){
-    const m=model;setHead("Fortschritt",null);
+    const m=model;setHead("",null);
     const up=round(m.gNow)>=round(m.gThen);
     const say=up?"Du wirst besser.":`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
     v.innerHTML=`<div class="pg-card pg-grammar">
@@ -321,8 +325,12 @@
   function open(){
     if(root.classList.contains("open"))return;
     try{model=buildModel()}catch(e){console.error(e);return}
+    const modal=root.querySelector(".pg-modal");
+    modal.style.height="";
     current=null;inner.innerHTML="";go(overview);scroller.scrollTop=0;
     root.getBoundingClientRect();
+    // keep this height for the whole visit, so the pop-up never jumps when a chapter opens
+    modal.style.height=modal.offsetHeight+"px"; // offsetHeight ignores the opening scale
     root.classList.add("open");root.setAttribute("aria-hidden","false");
   }
   function close(){
