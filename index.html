@@ -1724,6 +1724,53 @@ function syncHomeDashboard(){
      state and status text — it recomputes both right below, so nothing
      needs to pre-mark them here. */
   renderDailyStats();
+  saveProgressSnapshot();
+}
+
+/* Progress snapshots (Documentation/PROGRESS_TRACKER.md, step 3).
+   Once per day Home stores each exercise's progress summary, so the progress screen
+   can compare today with 21 days ago and draw the 3-week lines.
+   - Source: deutschProgressV1 (written by the exercises via components/deutsch-progress-v1.js).
+   - Today's entry is overwritten whenever it changes → the last value of the day wins.
+   - Days without practice are not stored; readers use the last earlier snapshot (nothing changed).
+   - Rolling window: days older than 21 days are deleted, except the newest of them,
+     so there is always a baseline to compare against after a long break.
+   Format: {format:1, days:{"YYYY-MM-DD":{<exercise>:{t,s,i,is}}}}
+           t/s = total/sicher (weighted, bar %), i/is = items/items sicher. */
+const PROGRESS_KEY="deutschProgressV1";
+const SNAPSHOT_KEY="deutschProgressSnapshotsV1";
+const SNAPSHOT_WINDOW_DAYS=21;
+function dayKeyOffset(daysBack){
+  const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()-daysBack);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function saveProgressSnapshot(){
+  try{
+    const progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"null");
+    const exercises=progress&&progress.exercises;
+    if(!exercises||typeof exercises!=="object")return;
+    const entry={};
+    Object.keys(exercises).sort().forEach(id=>{
+      const sm=exercises[id]&&exercises[id].summary;
+      if(!sm||!(Number(sm.total)>0))return;
+      entry[id]={t:Number(sm.total),s:Number(sm.sicher)||0,i:Number(sm.items)||0,is:Number(sm.itemsSicher)||0};
+    });
+    if(!Object.keys(entry).length)return;
+
+    let store=null;
+    try{store=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"null")}catch(e){}
+    if(!store||typeof store!=="object"||!store.days||typeof store.days!=="object")store={format:1,days:{}};
+    const today=dayKeyOffset(0);
+    const before=JSON.stringify(store);
+    store.days[today]=entry;
+
+    const cutoff=dayKeyOffset(SNAPSHOT_WINDOW_DAYS);
+    const old=Object.keys(store.days).filter(d=>d<cutoff).sort();
+    old.slice(0,-1).forEach(d=>delete store.days[d]); // keep only the newest day older than the window
+
+    const after=JSON.stringify(store);
+    if(after!==before)localStorage.setItem(SNAPSHOT_KEY,after);
+  }catch(e){}
 }
 
 /* iframe/app navigation can update localStorage while Home stays mounted. */
