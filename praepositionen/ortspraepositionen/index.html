@@ -89,7 +89,11 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 }
 .session-option{min-width:105px;padding:17px 20px;font-size:21px}
 .choice{min-height:56px;padding:0 10px;font-size:17px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
-.session-option:hover,.choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+/* Hover only on devices with a real mouse. On iPhone a tapped spot keeps
+   :hover, so the new button drawn in that spot looked highlighted. */
+@media(hover:hover) and (pointer:fine){
+  .session-option:hover,.choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
+}
 .session-option:active,.choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
 .session-option:focus-visible,.choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .choice:disabled{opacity:.45;cursor:default;transform:none}
@@ -204,7 +208,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Back to Home</button>
   </div>
 </section>
-<div class="version-mark">v3</div>
+<div class="version-mark">v4</div>
 </main>
 
 <script src="ortspraepositionen.js?v=1"></script>
@@ -272,7 +276,8 @@ function buildSession(size){
 }
 
 // ===== DAILY STATS (read by Home) =====
-// Every tap counts as one answer, like one answer in Fester Kasus.
+// One finished card (all three lines) counts as one answer for Home.
+// It counts as correct only when all three lines were right.
 const DAILY_STATS_KEY="deutschDailyStatsV1";
 function localDayKey(){
   const d=new Date();
@@ -335,7 +340,6 @@ function answer(form){
   locked=true;
   taps++;if(correct)score++;
   cardResults.push(correct);
-  recordDaily(correct);
   updateDifficulty(entry,q.key,correct);
 
   const slot=document.getElementById("slot"+step);
@@ -366,6 +370,7 @@ function finishCard(){
   const entry=session[index],cat=CATEGORIES[entry.cat]||{};
   const wrong=cardResults.filter(x=>!x).length;
   cardDone=true;locked=false;
+  recordDaily(wrong===0);
   els.card.classList.add("done");els.game.classList.add(wrong?"bad":"good");
   els.eyebrow.textContent=wrong?"Nicht ganz · "+(3-wrong)+" / 3":"Richtig";
   els.ruleLabel.textContent=cat.label||"";
