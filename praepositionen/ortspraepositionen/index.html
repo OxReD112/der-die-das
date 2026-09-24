@@ -179,7 +179,6 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="session-option" data-size="20">20</button>
     <button class="session-option" data-size="30">30</button>
   </div>
-  <p class="progress-debug" style="margin-top:22px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
 </section>
 
 <section id="game" class="hidden">
@@ -204,7 +203,6 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
   <h1>Done.</h1>
   <div class="end-score" id="endScore">0 / 30</div>
   <div class="end-note" id="endNote"></div>
-  <p class="progress-debug" style="margin-top:10px;font-size:12px;opacity:.5"></p><!-- TEMP progress test -->
   <div class="finish-actions">
     <button class="again" id="again">Another session</button>
     <button class="home-back" id="homeBack">Back to Home</button>
@@ -287,12 +285,6 @@ if(hasProgress()){
     if(it)it.weight++;else items.set(k,{key:k,label:(c.label||e.cat)+(c.rule?" → "+c.rule:""),weight:1});
   });
   DeutschProgress.init(PROGRESS_ID,[...items.values()]);
-}
-// TEMP (progress test): small line on the start/end screens — remove after testing.
-function showProgressDebug(){
-  if(!hasProgress())return;
-  const sm=DeutschProgress.summary(PROGRESS_ID);if(!sm)return;
-  document.querySelectorAll(".progress-debug").forEach(el=>el.textContent=`Test · ${Math.round(sm.sicher/sm.total*100)}% (${sm.sicher}/${sm.total} Orte) · ${sm.itemsSicher} von ${sm.items} sicher`+(sm.recent.length?` · neu: ${sm.recent.slice(0,2).map(r=>r.l).join(" · ")}`:""));
 }
 
 function buildSession(size){
@@ -416,9 +408,7 @@ function finish(){
   els.game.classList.add("hidden");els.end.classList.remove("hidden");
   els.endScore.textContent=score+" / "+taps;window.scrollTo({top:0,behavior:"auto"});
   els.endNote.textContent="Places you miss come back more often in future sessions.";
-  showProgressDebug();
 }
-showProgressDebug();
 
 // ===== SMALL MOTION =====
 const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
