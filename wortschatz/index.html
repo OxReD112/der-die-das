@@ -250,7 +250,7 @@ function isTouchDevice(){
   return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
 }
 
-$("desktopCheck").style.display = isTouchDevice() ? "none" : "";
+document.getElementById("desktopCheck").style.display = isTouchDevice() ? "none" : ""; // $ is defined only in a later script
 
 async function loadKeyboardComponent(){
  const mount=document.getElementById("keyboardMount");
@@ -291,13 +291,32 @@ function publishWortschatzStatus(done=false){
 }
 // Simple SRS: first success -> tomorrow, then +8, +20, +45, +90 days.
 // A mistake resets the card: it stays in today's session until answered correctly, then returns tomorrow.
+// Level 6 = FULLY LEARNED: the word also passed the 90-day review (6 correct reviews in a row).
+// After level 5 the interval stays 90 days; reaching level 6 only marks the word as learned.
 const steps=[1,8,20,45,90];
+const LEARNED_LEVEL=steps.length+1;
 const INITIAL_WORDS=10, ADD_BATCH=5;
 let state={cards:{},activeIds:[]};
 try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&saved.cards&&Array.isArray(saved.activeIds))state=saved}catch(e){}
 const day=()=>{let d=new Date();d.setHours(12,0,0,0);return d.toISOString().slice(0,10)}
 const add=n=>{let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
-function save(){localStorage.setItem(STORE,JSON.stringify(state))}
+function save(){localStorage.setItem(STORE,JSON.stringify(state));publishWortschatzProgress()}
+// Progress summary for Home (Documentation/PROGRESS_TRACKER.md, section 7):
+// total = words in words.js · started = words in the active set · learned = level 6.
+function publishWortschatzProgress(){
+ try{
+   const ids=new Set(WORDS.map(c=>c.id));
+   const started=state.activeIds.filter(id=>ids.has(id)).length;
+   const learned=state.activeIds.filter(id=>ids.has(id)&&(state.cards[id]?.level||0)>=LEARNED_LEVEL).length;
+   let data=null;
+   try{data=JSON.parse(localStorage.getItem("deutschProgressV1")||"null")}catch(e){}
+   if(!data||typeof data!=="object"||!data.exercises||typeof data.exercises!=="object")data={format:1,exercises:{}};
+   const d=new Date();
+   const today=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+   data.exercises.wortschatz={summary:{kind:"words",total:ids.size,started,learned,sicher:learned,items:ids.size,itemsSicher:learned,updated:today,recent:[]}};
+   localStorage.setItem("deutschProgressV1",JSON.stringify(data));
+ }catch(e){}
+}
 function ensureDeck(){
  if(!state.activeIds.length){state.activeIds=WORDS.slice(0,INITIAL_WORDS).map(c=>c.id);save()}
 }
@@ -410,6 +429,7 @@ function build(cards=null){
  queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
  idx=0;sessionTotal=queue.length;completed=0;failedToday=new Set();closedToday=new Set();
  publishWortschatzStatus(queue.length===0);
+ publishWortschatzProgress();
  render();
 }
 function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank' aria-label='missing word'></span>")}
@@ -463,7 +483,7 @@ function check(){
  const r=rec(current);
  if(ok){
    if(failedToday.has(current.id)){r.level=0;r.due=add(1)}
-   else{r.level=Math.min(r.level+1,steps.length);r.due=add(steps[Math.min(r.level-1,steps.length-1)])}
+   else{r.level=Math.min(r.level+1,LEARNED_LEVEL);r.due=add(steps[Math.min(r.level-1,steps.length-1)])}
    if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
  } else {
    failedToday.add(current.id);
