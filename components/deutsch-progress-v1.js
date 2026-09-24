@@ -3,7 +3,7 @@
 
    Usage in an exercise:
      <script src="../components/deutsch-progress-v1.js"></script>   (adjust ../ depth)
-     DeutschProgress.init("artikel", items);   // items: [{key, label}] — every item of the exercise
+     DeutschProgress.init("artikel", items);   // items: [{key, label, weight?}] — every item of the exercise
      DeutschProgress.record("artikel", key, ok); // after every answer
 
    Rules:
@@ -14,6 +14,8 @@
    - An item can be a single question or a group (e.g. an Artikel rule, a Pronomen category):
      the exercise decides which key it reports.
    - init() drops stored entries whose key no longer exists in the exercise.
+   - weight (default 1): how much an item counts toward the bar %. Artikel passes the number of
+     nouns a rule covers (-ung → die = 17), so the bar means "share of nouns I reliably know".
 
    Storage key: deutschProgressV1 (included in Backup).
    {
@@ -21,7 +23,9 @@
      exercises: {
        <exercise>: {
          items:   { <itemKey>: { s: <streak>, d: "YYYY-MM-DD" (only while sicher) } },
-         summary: { total, sicher, updated: "YYYY-MM-DD",
+         summary: { total, sicher,            // weighted → bar % = sicher / total
+                    items, itemsSicher,       // unweighted counts
+                    updated: "YYYY-MM-DD",
                     recent: [ { l: <label>, d: "YYYY-MM-DD" } ]  // newest first }
        }
      }
@@ -32,7 +36,7 @@
   const FORMAT=1;
   const SICHER_STREAK=3;
   const RECENT_DAYS=22; // today + 21 days back
-  const catalog={};     // exercise -> Map(itemKey -> label), set by init()
+  const catalog={};     // exercise -> Map(itemKey -> {label, weight}), set by init()
 
   function today(){
     const d=new Date();
@@ -65,21 +69,25 @@
     const list=catalog[exercise];
     if(!list) return;
     const since=daysAgo(RECENT_DAYS-1);
-    let sicher=0; const recent=[];
-    list.forEach((label,key)=>{
+    let total=0, sicher=0, itemsSicher=0; const recent=[];
+    list.forEach((info,key)=>{
+      total+=info.weight;
       const it=ex.items[key];
       if(it&&it.s>=SICHER_STREAK){
-        sicher++;
-        if(it.d&&it.d>=since) recent.push({l:label,d:it.d});
+        sicher+=info.weight; itemsSicher++;
+        if(it.d&&it.d>=since) recent.push({l:info.label,d:it.d});
       }
     });
     recent.sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0);
-    ex.summary={total:list.size,sicher,updated:today(),recent};
+    ex.summary={total,sicher,items:list.size,itemsSicher,updated:today(),recent};
   }
 
   function init(exercise,items){
     const map=new Map();
-    (items||[]).forEach(it=>{ if(it&&it.key!=null&&!map.has(String(it.key))) map.set(String(it.key),String(it.label??it.key)); });
+    (items||[]).forEach(it=>{
+      if(!it||it.key==null||map.has(String(it.key))) return;
+      const w=Number(it.weight); map.set(String(it.key),{label:String(it.label??it.key),weight:w>0?w:1});
+    });
     catalog[exercise]=map;
     const data=load(), ex=bucket(data,exercise);
     for(const k in ex.items) if(!map.has(k)) delete ex.items[k]; // items no longer in the exercise
