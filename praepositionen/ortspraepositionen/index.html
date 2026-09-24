@@ -152,6 +152,9 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 .card.done .rule{opacity:1}
 .rule-label{font-size:13px;color:var(--text-secondary);line-height:1.4}
 .rule-forms{margin-top:3px;font-size:15px;font-weight:650;letter-spacing:-.01em}
+.rule-note{margin-top:16px;font-size:13px;color:var(--text-secondary);line-height:1.45;text-align:center}
+.rule-note:empty{display:none}
+.rule-note div+div{margin-top:4px}
 
 .next{width:100%;height:54px;margin-top:14px;border:0;border-radius:16px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650;cursor:pointer}
 .next:active{transform:scale(.985)}
@@ -197,6 +200,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 
   <section class="choices" id="choices"></section>
   <button class="next hidden" id="next">Continue</button>
+  <div class="rule-note" id="ruleNote"></div>
 </section>
 
 <section class="end-screen hidden" id="endScreen">
@@ -208,10 +212,10 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Back to Home</button>
   </div>
 </section>
-<div class="version-mark">v4</div>
+<div class="version-mark">v7</div>
 </main>
 
-<script src="ortspraepositionen.js?v=1"></script>
+<script src="ortspraepositionen.js?v=3"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PLACES = window.ORTSPRAEPOSITIONEN || [];
@@ -233,7 +237,7 @@ const BUTTONS = {
   },
   wohin:{
     m:["in den","an den","auf den","zum","nach"], f:["in die","an die","auf die","zur","nach"],
-    n:["ins","ans","auf das","zum","nach"],       pl:["in die","an die","auf die","zu den","nach"],
+    n:["ins","ans","aufs","zum","nach"],       pl:["in die","an die","auf die","zu den","nach"],
     none:["in","an","auf","zu","nach"]
   },
   woher:{
@@ -242,17 +246,34 @@ const BUTTONS = {
 };
 function buttonsFor(entry,q){return BUTTONS[q][entry.gender||"none"];}
 function nounFor(entry,q){return (entry.forms&&entry.forms[q])||entry.noun;}
+function leadFor(entry,q){return (entry.lead&&entry.lead[q.key])||q.lead;}
+function altsFor(entry,q){return (entry.alt&&entry.alt[q])||[];}
+// Shown below the Continue button when a real everyday variant was chosen (e.g. "auf der Arbeit").
+function altNote(entry,q,form){return "Auch richtig: "+form+" "+nounFor(entry,q)+".";}
+// Shown below the Continue button ONLY when zu/von was picked where the box wants in/an/auf (Wohin) or aus (Woher):
+// this drill trains ending up IN/AT/ON the place, not just going up to it.
+const ZU_BOX={raum:"in",ausnahme:"in",land:"in",adresse:"in",kontakt:"an",flaeche:"auf"};
+const ZU_MEANING={in:"hinein · внутрь",an:"direkt dran · вплотную",auf:"drauf · на само место"};
+function zuHint(entry,q,form){
+  const box=ZU_BOX[entry.cat];if(!box)return "";
+  const b=s=>"<b>"+escapeHtml(s)+"</b>";
+  if(q==="wohin"&&/^zu/.test(form))
+    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+ZU_MEANING[box]+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — nur bis dorthin · только до</div>";
+  if(q==="woher"&&/^von?/.test(form)&&/^aus/.test(entry.woher))
+    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — heraus · изнутри</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — nur von dort · просто оттуда</div>";
+  return "";
+}
 
 const els = {
   session:document.getElementById("sessionScreen"),game:document.getElementById("game"),end:document.getElementById("endScreen"),
   counter:document.getElementById("counter"),bar:document.getElementById("bar"),card:document.getElementById("card"),
   eyebrow:document.getElementById("eyebrow"),place:document.getElementById("place"),translation:document.getElementById("translation"),
-  steps:document.getElementById("steps"),rule:document.getElementById("rule"),ruleLabel:document.getElementById("ruleLabel"),ruleForms:document.getElementById("ruleForms"),
+  steps:document.getElementById("steps"),rule:document.getElementById("rule"),ruleLabel:document.getElementById("ruleLabel"),ruleForms:document.getElementById("ruleForms"),ruleNote:document.getElementById("ruleNote"),
   choices:document.getElementById("choices"),next:document.getElementById("next"),
   endScore:document.getElementById("endScore"),endNote:document.getElementById("endNote"),again:document.getElementById("again"),homeBack:document.getElementById("homeBack")
 };
 
-let session=[], index=0, step=0, score=0, taps=0, cardResults=[], locked=false, cardDone=false;
+let session=[], index=0, step=0, score=0, taps=0, cardResults=[], usedAlts=[], zuHints=[], locked=false, cardDone=false;
 
 // ===== PERSISTENT DIFFICULTY =====
 // Tracked per place AND per question: missing "Woher? Strand" only raises
@@ -322,7 +343,7 @@ function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"
 
 function render(){
   const entry=session[index];
-  step=0;cardResults=[];locked=false;cardDone=false;
+  step=0;cardResults=[];usedAlts=[];zuHints=[];locked=false;cardDone=false;
   els.counter.textContent=(index+1)+" / "+session.length;
   els.bar.style.width=(index/session.length*100)+"%";
 
@@ -334,11 +355,11 @@ function render(){
   els.steps.innerHTML=QUESTIONS.map((q,i)=>
     '<div class="step '+(i===0?"active":"pending")+'" data-step="'+i+'">'+
       '<div class="step-q">'+q.label+'</div>'+
-      '<div class="sentence"><span class="lead">'+q.lead+'</span> <span class="slot" id="slot'+i+'">&nbsp;</span> '+escapeHtml(nounFor(entry,q.key))+'.</div>'+
+      '<div class="sentence"><span class="lead">'+escapeHtml(leadFor(entry,q))+'</span> <span class="slot" id="slot'+i+'">&nbsp;</span> '+escapeHtml(nounFor(entry,q.key))+'.</div>'+
     '</div>'
   ).join("");
 
-  els.ruleLabel.textContent="";els.ruleForms.textContent="";
+  els.ruleLabel.textContent="";els.ruleForms.textContent="";els.ruleNote.innerHTML="";
   els.next.classList.add("hidden");
   els.choices.classList.remove("hidden");
   renderChoices();
@@ -353,7 +374,9 @@ function renderChoices(){
 
 function answer(form){
   if(locked||cardDone)return;
-  const entry=session[index],q=QUESTIONS[step],right=entry[q.key],correct=form===right;
+  const entry=session[index],q=QUESTIONS[step],right=entry[q.key],isAlt=altsFor(entry,q.key).includes(form),correct=form===right||isAlt;
+  if(isAlt)usedAlts.push({q:q.key,form});
+  if(!correct){const h=zuHint(entry,q.key,form);if(h)zuHints.push(h);}
   locked=true;
   taps++;if(correct)score++;
   cardResults.push(correct);
@@ -361,7 +384,7 @@ function answer(form){
 
   const slot=document.getElementById("slot"+step);
   if(correct){
-    slot.className="slot good";slot.textContent=right;
+    slot.className="slot good";slot.textContent=form;
   }else{
     slot.className="slot bad";
     slot.innerHTML='<span class="wrong">'+escapeHtml(form)+'</span><span class="right">'+escapeHtml(right)+'</span>';
@@ -393,6 +416,7 @@ function finishCard(){
   els.eyebrow.textContent=wrong?"Nicht ganz · "+(3-wrong)+" / 3":"Richtig";
   els.ruleLabel.textContent=cat.label||"";
   els.ruleForms.textContent=cat.rule||"";
+  els.ruleNote.innerHTML=usedAlts.map(a=>"<div>"+escapeHtml(altNote(entry,a.q,a.form))+"</div>").join("")+zuHints.join("");
   els.choices.classList.add("hidden");
   els.next.textContent=index===session.length-1?"Finish":"Continue";
   els.next.classList.remove("hidden");
