@@ -27,15 +27,14 @@
 
   /* ---------- styles ---------- */
   const css=`
-:root{--pg-ghost:#2c5a4e;--pg-lost:rgba(232,130,111,.62);--pg-down:#e8a08f;--pg-started:rgba(255,255,255,.26);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.05);--pg-fill:rgba(85,215,181,.08)}
-[data-theme="light"]{--pg-ghost:#b7dccf;--pg-lost:rgba(214,110,86,.45);--pg-down:#c0634c;--pg-started:rgba(0,0,0,.14);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.06);--pg-fill:rgba(47,158,130,.10)}
+:root{--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:rgba(232,130,111,.62);--pg-down:#e8a08f;--pg-started:rgba(255,255,255,.26);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.05);--pg-fill:rgba(85,215,181,.08)}
+[data-theme="light"]{--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:rgba(214,110,86,.45);--pg-down:#c0634c;--pg-started:rgba(0,0,0,.14);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.06);--pg-fill:rgba(47,158,130,.10)}
 .tile-today{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tile-today:active{opacity:.8}
 .pg{position:fixed;inset:0;z-index:25;background:var(--bg);color:var(--text);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
-  transform:translateX(100%);transition:transform .38s cubic-bezier(.22,.61,.36,1);visibility:hidden}
-.pg.open{transform:none;visibility:visible}
-.pg.closing{visibility:visible}
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;visibility:hidden}
+.pg.open{visibility:visible}
+.pg-inner{transition:opacity .22s ease}
 .pg-inner{position:relative;width:min(100%,430px);margin:0 auto;padding:calc(env(safe-area-inset-top) + 18px) 16px calc(env(safe-area-inset-bottom) + 40px)}
 .pg-view{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .pg-view.away{position:absolute;top:calc(env(safe-area-inset-top) + 18px);left:16px;right:16px;opacity:0;pointer-events:none}
@@ -43,13 +42,16 @@
 .pg-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:15px;padding:6px 0;margin-bottom:12px;cursor:pointer}
 .pg-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--card-radius,25px);padding:20px 18px}
 .pg-card+.pg-card{margin-top:14px}
-.pg-hero{text-align:center;padding:24px 18px 16px}
-.pg-kick{color:var(--muted);font-size:13px}
-.pg-big{display:flex;align-items:center;justify-content:center;margin-top:6px}
-.pg-big b{font-size:48px;font-weight:700;letter-spacing:-1px;color:var(--mint);line-height:1}
-.pg-big span{font-size:17px;font-weight:600;margin-left:10px;text-align:left;line-height:1.15}
-.pg-say{font-size:15px;margin-top:10px;line-height:1.35}
-.pg-hero svg{margin-top:14px}
+.pg-grammar{padding:8px}
+.pg-hero{padding:10px 10px 4px}
+.pg-kick{color:var(--muted);font-size:12px}
+.pg-hrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
+.pg-big{display:flex;align-items:center;flex:none}
+.pg-big b{font-size:34px;font-weight:700;letter-spacing:-.8px;color:var(--mint);line-height:1}
+.pg-big span{font-size:14px;font-weight:600;margin-left:8px;line-height:1.15}
+.pg-say{font-size:13px;line-height:1.3;color:var(--label-text,var(--text));text-align:right;max-width:52%}
+.pg-hero svg{margin-top:10px}
+.pg-divider{height:1px;background:var(--pg-line);margin:8px 10px 2px}
 .pg svg{width:100%;height:auto;display:block;overflow:visible}
 .pg-list{padding:8px}
 .pg-row{display:block;width:100%;appearance:none;-webkit-appearance:none;border:0;background:none;color:inherit;font:inherit;text-align:left;padding:12px 10px 13px;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -238,19 +240,22 @@
   function overview(v){
     const m=model;
     const up=round(m.gNow)>=round(m.gThen);
-    const say=up?"Du wirst besser.":`Auf und Ab gehört zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
+    const say=up?"Du wirst besser.":`Auf und Ab gehört<br>zum Lernen.<br>${m.name?esc(m.name)+", du":"Du"} machst das gut.`;
     v.innerHTML=`<button class="pg-back" type="button">‹ Home</button>
       <div class="pg-card pg-list pg-words"></div>
       <div class="pg-legend" style="margin-bottom:14px"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>
-      <div class="pg-card pg-hero">
-        <div class="pg-kick">${m.sinceStart?"Seit Start":"In 3 Wochen"}</div>
-        <div class="pg-big"><b>+${m.learned}</b><span>Sachen<br>sitzen jetzt</span></div>
-        <div class="pg-say">${say}</div><div class="pg-hs"></div>
+      <div class="pg-card pg-grammar">
+        <div class="pg-hero">
+          <div class="pg-kick">${m.sinceStart?"Seit Start":"In 3 Wochen"}</div>
+          <div class="pg-hrow"><div class="pg-big"><b>+${m.learned}</b><span>Sachen<br>sitzen jetzt</span></div><div class="pg-say">${say}</div></div>
+          <div class="pg-hs"></div>
+        </div>
+        <div class="pg-divider"></div>
+        <div class="pg-chapters"></div>
       </div>
-      <div class="pg-card pg-list pg-chapters"></div>
       <div class="pg-legend"><span><i style="background:var(--pg-ghost)"></i>${m.sinceStart?"Start":"vor 3 Wochen"}</span><span><i style="background:var(--mint)"></i>dazu</span></div>`;
     v.querySelector(".pg-back").onclick=close;
-    v.querySelector(".pg-hs").append(spark(m.gSeries,{labels:false,H:56,end:round(m.gNow)+"%"}));
+    v.querySelector(".pg-hs").append(spark(m.gSeries,{labels:false,H:40,end:round(m.gNow)+"%"}));
     // Wortschatz: whole stack · started · fully learned — no drill-down
     const w=v.querySelector(".pg-words"), wr=document.createElement("div");wr.className="pg-row static";
     const W=m.words;
@@ -294,14 +299,47 @@
   }
 
   /* ---------- open / close ---------- */
+  // Opening: the panel starts clipped to the "Heute" tile (same place, same rounded corners) and
+  // grows to the full screen; the content fades in. Closing reverses it back into the tile.
+  // Fallback (Reduce Motion / no tile): a plain slide up from the bottom.
+  const EASE="cubic-bezier(.22,.61,.36,1)", DUR=440;
+  let busy=false;
+  function tileClip(){
+    const tile=document.querySelector(".tile-today");if(!tile)return null;
+    const r=tile.getBoundingClientRect();if(!r.width||!r.height)return null;
+    const rad=parseFloat(getComputedStyle(tile).borderTopLeftRadius)||25;
+    return `inset(${r.top}px ${innerWidth-r.right}px ${innerHeight-r.bottom}px ${r.left}px round ${rad}px)`;
+  }
+  const FULL="inset(0px 0px 0px 0px round 0px)";
   function open(){
+    if(busy||root.classList.contains("open"))return;
     try{model=buildModel()}catch(e){console.error(e);return}
-    current=null;inner.innerHTML="";go(overview);
-    root.classList.remove("closing");root.classList.add("open");root.setAttribute("aria-hidden","false");
+    current=null;inner.innerHTML="";go(overview);root.scrollTop=0;
+    const clip=reduceMotion?null:tileClip();
+    busy=true;
+    root.style.transition="none";inner.style.transition="none";inner.style.opacity="0";
+    // start with the tile's own colour so it reads as "the tile grows", then settle into the page colour
+    if(clip){root.style.clipPath=clip;root.style.webkitClipPath=clip;root.style.transform="none";root.style.backgroundColor="var(--pg-tile)"}
+    else{root.style.clipPath="";root.style.webkitClipPath="";root.style.transform="translateY(100%)"}
+    root.classList.add("open");root.setAttribute("aria-hidden","false");
+    root.getBoundingClientRect();inner.getBoundingClientRect();
+    inner.style.transition="";
+    root.style.transition=clip?`clip-path ${DUR}ms ${EASE},-webkit-clip-path ${DUR}ms ${EASE},background-color ${DUR}ms ease`:`transform 400ms ${EASE}`;
+    if(clip){root.style.clipPath=FULL;root.style.webkitClipPath=FULL;root.style.backgroundColor=""}else root.style.transform="none";
+    setTimeout(()=>{inner.style.opacity="1"},clip?DUR*0.45:120);
+    setTimeout(()=>{busy=false},DUR);
   }
   function close(){
-    root.classList.add("closing");root.classList.remove("open");root.setAttribute("aria-hidden","true");
-    setTimeout(()=>root.classList.remove("closing"),400);
+    if(busy||!root.classList.contains("open"))return;
+    busy=true;root.setAttribute("aria-hidden","true");
+    const clip=reduceMotion?null:tileClip();
+    inner.style.opacity="0";
+    const wait=clip?120:0;
+    setTimeout(()=>{
+      root.style.transition=clip?`clip-path ${DUR-60}ms ${EASE},-webkit-clip-path ${DUR-60}ms ${EASE},background-color ${DUR-60}ms ease`:`transform 380ms ${EASE}`;
+      if(clip){root.style.clipPath=clip;root.style.webkitClipPath=clip;root.style.backgroundColor="var(--pg-tile)"}else root.style.transform="translateY(100%)";
+      setTimeout(()=>{root.classList.remove("open");root.style.transition="none";root.style.clipPath="";root.style.webkitClipPath="";root.style.transform="";root.style.backgroundColor="";busy=false},clip?DUR-40:400);
+    },wait);
   }
   function init(){
     root=document.createElement("section");root.className="pg";root.id="progressScreen";
