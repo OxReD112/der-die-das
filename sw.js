@@ -6,8 +6,8 @@ self.addEventListener("push", event => {
   const body = data.body || "";
   const options = {
     body,
-    icon: "./icon.png",
-    badge: "./icon.png",
+    icon: "./icon.webp",
+    badge: "./icon.webp",
     data: data.url || "./"
   };
 
