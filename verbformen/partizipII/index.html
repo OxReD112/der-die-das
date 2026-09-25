@@ -246,13 +246,13 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 <main class="app" id="appRoot">
  <section id="start" class="start">
   <h1 class="title">Partizip II.</h1>
-  <p class="subtitle">How many verbs?</p>
+  <p class="subtitle">Wie viele Verben?</p>
   <div class="choices">
    <button class="choice" data-size="10">10</button>
    <button class="choice" data-size="20">20</button>
    <button class="choice" data-size="30">30</button>
   </div>
-  <button class="pattern-table-btn" data-pattern-table>Pattern · Table</button>
+  <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
  </section>
 
  <section id="study" class="hidden">
@@ -262,33 +262,33 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
    <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
-   <button class="check" id="check">Check</button>
+   <button class="check" id="check">Prüfen</button>
    <div class="result" id="result">
     <div class="result-head"><div class="state" id="state"></div><div class="vowel-pattern" id="vowelPattern"></div></div>
     <div class="forms" id="forms"></div>
     <div class="meta" id="meta"></div>
     <div class="example" id="example"></div>
    </div>
-   <button class="next" id="next">Continue</button>
+   <button class="next" id="next">Weiter</button>
   </section>
   <div id="keyboardMount"></div>
-  <div class="in-session-pattern"><button class="pattern-table-btn" data-pattern-table>Pattern table</button></div>
+  <div class="in-session-pattern"><button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button></div>
  </section>
 
  <section id="finish" class="finish hidden">
-  <h2>Done.</h2>
+  <h2>Fertig.</h2>
   <div id="finalScore" class="final-score"></div>
   <p id="summary"></p>
   <div class="finish-actions">
-   <button class="again" id="again">Another session</button>
-   <button class="home-back" id="homeBack">Back to Home</button>
+   <button class="again" id="again">Noch eine Runde</button>
+   <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
  </section>
  <div id="patternModal" class="pattern-modal" aria-hidden="true">
   <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
    <div class="pattern-modal-head">
-    <h2 id="patternModalTitle">Partizip II · Pattern families</h2>
-    <button class="pattern-close" id="patternClose" aria-label="Close">×</button>
+    <h2 id="patternModalTitle">Partizip II · Vokalwechsel</h2>
+    <button class="pattern-close" id="patternClose" aria-label="Schließen">×</button>
    </div>
    <div id="patternModalBody"></div>
   </div>
@@ -296,7 +296,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 </main>
 <div class="version-tag">v43 · Partizip II exercise</div>
 
-<script src="verbs.js?v=2"></script>
+<script src="verbs.js?v=3"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const STORAGE_KEY="verbformenDifficultyV1";
@@ -442,7 +442,7 @@ function checkAnswer(){
 
  $("result").className="result show "+(ok?"good":"bad");
  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
- $("state").textContent=ok?"Correct":"Not quite";
+ $("state").textContent=ok?"Richtig":"Nicht ganz";
  $("vowelPattern").textContent=partizipPattern(v.pattern);
  $("forms").textContent=shouldShowPreterite(v)
    ? v.infinitive+" → "+v.preterite+" → "+v.participle
@@ -465,7 +465,7 @@ function finishSession(){
  $("study").classList.add("hidden");
  $("finish").classList.remove("hidden");
  $("finalScore").textContent=correctCount+" / "+deck.length;
- $("summary").textContent="Difficult verbs will have a better chance of returning in a future session.";
+ $("summary").textContent="Was schwierig war, kommt öfter wieder.";
 }
 
 document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
@@ -528,7 +528,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
  if(k) $("answer").value+=k;
 });
 
-const patternReference=`<p class="pattern-intro">Infinitiv → Partizip II · possible vowel changes in this set</p><div class="pattern-grid">
+const patternReference=`<p class="pattern-intro">Infinitiv → Partizip II · Vokalwechsel in dieser Übung</p><div class="pattern-grid">
 <div class="pattern-cell"><div class="pattern-source">a</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
 <div class="pattern-cell"><div class="pattern-source">ä</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
 <div class="pattern-cell"><div class="pattern-source">au</div><div class="pattern-options"><span class="arrow">→</span><span>au</span></div></div>
