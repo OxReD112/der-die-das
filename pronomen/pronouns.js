@@ -5,7 +5,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich stehe vor der Tür.",
     "sentence": "Kannst du ___ sehen?",
     "answer": "mich",
-    "translation": "Ты меня видишь?"
+    "translation": {
+      "ru": "Ты меня видишь?",
+      "en": "Can you see me?"
+    }
   },
   {
     "type": "personal",
@@ -13,7 +16,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich warte am Eingang.",
     "sentence": "Holst du ___ dort ab?",
     "answer": "mich",
-    "translation": "Ты заберёшь меня там?"
+    "translation": {
+      "ru": "Ты заберёшь меня там?",
+      "en": "Will you pick me up there?"
+    }
   },
   {
     "type": "personal",
@@ -21,7 +27,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe eine Frage.",
     "sentence": "Kannst du ___ helfen?",
     "answer": "mir",
-    "translation": "Ты можешь мне помочь?"
+    "translation": {
+      "ru": "Ты можешь мне помочь?",
+      "en": "Can you help me?"
+    }
   },
   {
     "type": "personal",
@@ -29,7 +38,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Mein Kaffee ist leer.",
     "sentence": "Bringst du ___ noch einen?",
     "answer": "mir",
-    "translation": "Принесёшь мне ещё один?"
+    "translation": {
+      "ru": "Принесёшь мне ещё один?",
+      "en": "Will you bring me another one?"
+    }
   },
   {
     "type": "personal",
@@ -37,7 +49,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du bist schon da.",
     "sentence": "Ich sehe ___!",
     "answer": "dich",
-    "translation": "Я тебя вижу!"
+    "translation": {
+      "ru": "Я тебя вижу!",
+      "en": "I see you!"
+    }
   },
   {
     "type": "personal",
@@ -45,7 +60,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du kommst heute später.",
     "sentence": "Ich rufe ___ am Abend an.",
     "answer": "dich",
-    "translation": "Я позвоню тебе вечером."
+    "translation": {
+      "ru": "Я позвоню тебе вечером.",
+      "en": "I'll call you in the evening."
+    }
   },
   {
     "type": "personal",
@@ -53,7 +71,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast morgen Geburtstag.",
     "sentence": "Ich gebe ___ ein Geschenk.",
     "answer": "dir",
-    "translation": "Я дарю тебе подарок."
+    "translation": {
+      "ru": "Я дарю тебе подарок.",
+      "en": "I'm giving you a present."
+    }
   },
   {
     "type": "personal",
@@ -61,7 +82,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du kennst den Weg nicht.",
     "sentence": "Ich zeige ___ den Weg.",
     "answer": "dir",
-    "translation": "Я покажу тебе дорогу."
+    "translation": {
+      "ru": "Я покажу тебе дорогу.",
+      "en": "I'll show you the way."
+    }
   },
   {
     "type": "personal",
@@ -69,7 +93,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul ist mein Nachbar.",
     "sentence": "Ich sehe ___ jeden Morgen.",
     "answer": "ihn",
-    "translation": "Я вижу его каждое утро."
+    "translation": {
+      "ru": "Я вижу его каждое утро.",
+      "en": "I see him every morning."
+    }
   },
   {
     "type": "personal",
@@ -77,7 +104,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Max wartet vor dem Kino.",
     "sentence": "Wir treffen ___ dort.",
     "answer": "ihn",
-    "translation": "Мы встретим его там."
+    "translation": {
+      "ru": "Мы встретим его там.",
+      "en": "We'll meet him there."
+    }
   },
   {
     "type": "personal",
@@ -85,7 +115,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul braucht Hilfe.",
     "sentence": "Ich helfe ___ heute.",
     "answer": "ihm",
-    "translation": "Я помогаю ему сегодня."
+    "translation": {
+      "ru": "Я помогаю ему сегодня.",
+      "en": "I'm helping him today."
+    }
   },
   {
     "type": "personal",
@@ -93,7 +126,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Max hat kein Geld dabei.",
     "sentence": "Ich bezahle ___ den Kaffee.",
     "answer": "ihm",
-    "translation": "Я оплачу ему кофе."
+    "translation": {
+      "ru": "Я оплачу ему кофе.",
+      "en": "I'll pay for his coffee."
+    }
   },
   {
     "type": "personal",
@@ -101,7 +137,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna wartet draußen.",
     "sentence": "Ich hole ___ gleich ab.",
     "answer": "sie",
-    "translation": "Я сейчас её заберу."
+    "translation": {
+      "ru": "Я сейчас её заберу.",
+      "en": "I'll pick her up in a moment."
+    }
   },
   {
     "type": "personal",
@@ -109,7 +148,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Lisa kommt auch zur Party.",
     "sentence": "Kennst du ___ schon?",
     "answer": "sie",
-    "translation": "Ты уже её знаешь?"
+    "translation": {
+      "ru": "Ты уже её знаешь?",
+      "en": "Do you already know her?"
+    }
   },
   {
     "type": "personal",
@@ -117,7 +159,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna braucht das Buch.",
     "sentence": "Ich gebe ___ das Buch.",
     "answer": "ihr",
-    "translation": "Я даю ей книгу."
+    "translation": {
+      "ru": "Я даю ей книгу.",
+      "en": "I'm giving her the book."
+    }
   },
   {
     "type": "personal",
@@ -125,7 +170,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Lisa friert.",
     "sentence": "Ich bringe ___ eine Jacke.",
     "answer": "ihr",
-    "translation": "Я принесу ей куртку."
+    "translation": {
+      "ru": "Я принесу ей куртку.",
+      "en": "I'll bring her a jacket."
+    }
   },
   {
     "type": "personal",
@@ -133,7 +181,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Das Handy liegt auf dem Tisch.",
     "sentence": "Ich nehme ___ mit.",
     "answer": "es",
-    "translation": "Я возьму его с собой."
+    "translation": {
+      "ru": "Я возьму его с собой.",
+      "en": "I'll take it with me."
+    }
   },
   {
     "type": "personal",
@@ -141,7 +192,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Das Fenster ist offen.",
     "sentence": "Kannst du ___ schließen?",
     "answer": "es",
-    "translation": "Ты можешь его закрыть?"
+    "translation": {
+      "ru": "Ты можешь его закрыть?",
+      "en": "Can you close it?"
+    }
   },
   {
     "type": "personal",
@@ -149,7 +203,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Das Kind hat Angst.",
     "sentence": "Ich helfe ___ sofort.",
     "answer": "ihm",
-    "translation": "Я сразу ему помогу."
+    "translation": {
+      "ru": "Я сразу ему помогу.",
+      "en": "I'll help him right away."
+    }
   },
   {
     "type": "personal",
@@ -157,7 +214,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Das Baby ist müde.",
     "sentence": "Ich lese ___ noch etwas vor.",
     "answer": "ihm",
-    "translation": "Я ещё немного ему почитаю."
+    "translation": {
+      "ru": "Я ещё немного ему почитаю.",
+      "en": "I'll read to him a little longer."
+    }
   },
   {
     "type": "personal",
@@ -165,7 +225,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir warten am Bahnhof.",
     "sentence": "Kannst du ___ abholen?",
     "answer": "uns",
-    "translation": "Ты можешь нас забрать?"
+    "translation": {
+      "ru": "Ты можешь нас забрать?",
+      "en": "Can you pick us up?"
+    }
   },
   {
     "type": "personal",
@@ -173,7 +236,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir sind schon im Café.",
     "sentence": "Siehst du ___?",
     "answer": "uns",
-    "translation": "Ты нас видишь?"
+    "translation": {
+      "ru": "Ты нас видишь?",
+      "en": "Do you see us?"
+    }
   },
   {
     "type": "personal",
@@ -181,7 +247,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben Hunger.",
     "sentence": "Er kocht ___ eine Suppe.",
     "answer": "uns",
-    "translation": "Он готовит нам суп."
+    "translation": {
+      "ru": "Он готовит нам суп.",
+      "en": "He's cooking us some soup."
+    }
   },
   {
     "type": "personal",
@@ -189,7 +258,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir kennen die Stadt nicht.",
     "sentence": "Kannst du ___ den Weg zeigen?",
     "answer": "uns",
-    "translation": "Ты можешь показать нам дорогу?"
+    "translation": {
+      "ru": "Ты можешь показать нам дорогу?",
+      "en": "Can you show us the way?"
+    }
   },
   {
     "type": "personal",
@@ -197,7 +269,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr steht vor dem Haus.",
     "sentence": "Ich sehe ___ vom Fenster aus.",
     "answer": "euch",
-    "translation": "Я вижу вас из окна."
+    "translation": {
+      "ru": "Я вижу вас из окна.",
+      "en": "I can see you from the window."
+    }
   },
   {
     "type": "personal",
@@ -205,7 +280,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr kommt morgen vorbei.",
     "sentence": "Ich erwarte ___ um acht.",
     "answer": "euch",
-    "translation": "Я жду вас в восемь."
+    "translation": {
+      "ru": "Я жду вас в восемь.",
+      "en": "I'm expecting you at eight."
+    }
   },
   {
     "type": "personal",
@@ -213,7 +291,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr seid neu in München.",
     "sentence": "Ich zeige ___ die Stadt.",
     "answer": "euch",
-    "translation": "Я покажу вам город."
+    "translation": {
+      "ru": "Я покажу вам город.",
+      "en": "I'll show you the city."
+    }
   },
   {
     "type": "personal",
@@ -221,7 +302,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt viele Fragen.",
     "sentence": "Ich erkläre ___ alles später.",
     "answer": "euch",
-    "translation": "Я объясню вам всё позже."
+    "translation": {
+      "ru": "Я объясню вам всё позже.",
+      "en": "I'll explain everything to you later."
+    }
   },
   {
     "type": "personal",
@@ -229,7 +313,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Meine Freunde kommen heute.",
     "sentence": "Ich treffe ___ nach der Arbeit.",
     "answer": "sie",
-    "translation": "Я встречу их после работы."
+    "translation": {
+      "ru": "Я встречу их после работы.",
+      "en": "I'll meet them after work."
+    }
   },
   {
     "type": "personal",
@@ -237,7 +324,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Kinder spielen draußen.",
     "sentence": "Ich rufe ___ zum Essen.",
     "answer": "sie",
-    "translation": "Я зову их есть."
+    "translation": {
+      "ru": "Я зову их есть.",
+      "en": "I'm calling them in to eat."
+    }
   },
   {
     "type": "personal",
@@ -245,7 +335,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Meine Eltern brauchen Hilfe.",
     "sentence": "Ich helfe ___ am Wochenende.",
     "answer": "ihnen",
-    "translation": "Я помогаю им на выходных."
+    "translation": {
+      "ru": "Я помогаю им на выходных.",
+      "en": "I'm helping them on the weekend."
+    }
   },
   {
     "type": "personal",
@@ -253,7 +346,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Gäste haben Durst.",
     "sentence": "Wir bringen ___ Wasser.",
     "answer": "ihnen",
-    "translation": "Мы принесём им воду."
+    "translation": {
+      "ru": "Мы принесём им воду.",
+      "en": "We'll bring them some water."
+    }
   },
   {
     "type": "personal",
@@ -261,7 +357,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Berger, Sie sind heute im Büro?",
     "sentence": "Dann besuche ich ___ um zehn.",
     "answer": "Sie",
-    "translation": "Тогда я зайду к Вам в десять."
+    "translation": {
+      "ru": "Тогда я зайду к Вам в десять.",
+      "en": "Then I'll visit you at ten."
+    }
   },
   {
     "type": "personal",
@@ -269,7 +368,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Herr Klein, wir kennen uns schon.",
     "sentence": "Schön, ___ wiederzusehen.",
     "answer": "Sie",
-    "translation": "Рад(а) снова Вас видеть."
+    "translation": {
+      "ru": "Рад(а) снова Вас видеть.",
+      "en": "Nice to see you again."
+    }
   },
   {
     "type": "personal",
@@ -277,7 +379,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Berger, Sie haben eine Frage?",
     "sentence": "Ich antworte ___ gleich.",
     "answer": "Ihnen",
-    "translation": "Я сейчас Вам отвечу."
+    "translation": {
+      "ru": "Я сейчас Вам отвечу.",
+      "en": "I'll answer you in a moment."
+    }
   },
   {
     "type": "personal",
@@ -285,7 +390,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Herr Klein, Sie brauchen die Unterlagen?",
     "sentence": "Ich schicke ___ die Datei.",
     "answer": "Ihnen",
-    "translation": "Я отправлю Вам файл."
+    "translation": {
+      "ru": "Я отправлю Вам файл.",
+      "en": "I'll send you the file."
+    }
   },
   {
     "type": "personal",
@@ -293,7 +401,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich bin gerade aufgestanden.",
     "sentence": "Ich wasche ___ schnell.",
     "answer": "mich",
-    "translation": "Я быстро умываюсь."
+    "translation": {
+      "ru": "Я быстро умываюсь.",
+      "en": "I'm having a quick wash."
+    }
   },
   {
     "type": "personal",
@@ -301,7 +412,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Es ist kalt draußen.",
     "sentence": "Ich ziehe ___ warm an.",
     "answer": "mich",
-    "translation": "Я тепло одеваюсь."
+    "translation": {
+      "ru": "Я тепло одеваюсь.",
+      "en": "I'm dressing warmly."
+    }
   },
   {
     "type": "personal",
@@ -309,7 +423,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich bin neu im Team.",
     "sentence": "Darf ich ___ kurz vorstellen?",
     "answer": "mich",
-    "translation": "Можно мне коротко представиться?"
+    "translation": {
+      "ru": "Можно мне коротко представиться?",
+      "en": "May I briefly introduce myself?"
+    }
   },
   {
     "type": "personal",
@@ -317,7 +434,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe gerade gegessen.",
     "sentence": "Ich wasche ___ die Hände.",
     "answer": "mir",
-    "translation": "Я мою руки."
+    "translation": {
+      "ru": "Я мою руки.",
+      "en": "I'm washing my hands."
+    }
   },
   {
     "type": "personal",
@@ -325,7 +445,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir gehen gleich raus.",
     "sentence": "Ich ziehe ___ eine Jacke an.",
     "answer": "mir",
-    "translation": "Я надеваю куртку."
+    "translation": {
+      "ru": "Я надеваю куртку.",
+      "en": "I'm putting on a jacket."
+    }
   },
   {
     "type": "personal",
@@ -333,7 +456,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Telefonnummer ist wichtig.",
     "sentence": "Ich merke ___ die Nummer.",
     "answer": "mir",
-    "translation": "Я запомню этот номер."
+    "translation": {
+      "ru": "Я запомню этот номер.",
+      "en": "I'll remember the number."
+    }
   },
   {
     "type": "personal",
@@ -341,7 +467,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du bist ganz nass.",
     "sentence": "Zieh ___ schnell um!",
     "answer": "dich",
-    "translation": "Быстро переоденься!"
+    "translation": {
+      "ru": "Быстро переоденься!",
+      "en": "Get changed quickly!"
+    }
   },
   {
     "type": "personal",
@@ -349,7 +478,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast die Prüfung bestanden.",
     "sentence": "Freust du ___?",
     "answer": "dich",
-    "translation": "Ты рад(а)?"
+    "translation": {
+      "ru": "Ты рад(а)?",
+      "en": "Are you happy?"
+    }
   },
   {
     "type": "personal",
@@ -357,7 +489,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du bist neu hier.",
     "sentence": "Stell ___ doch kurz vor!",
     "answer": "dich",
-    "translation": "Представься коротко!"
+    "translation": {
+      "ru": "Представься коротко!",
+      "en": "Go on, introduce yourself briefly!"
+    }
   },
   {
     "type": "personal",
@@ -365,7 +500,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du gehst gleich ins Bett.",
     "sentence": "Putz ___ noch die Zähne!",
     "answer": "dir",
-    "translation": "Почисти ещё зубы!"
+    "translation": {
+      "ru": "Почисти ещё зубы!",
+      "en": "Brush your teeth before bed!"
+    }
   },
   {
     "type": "personal",
@@ -373,7 +511,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast bald Geburtstag.",
     "sentence": "Was wünschst du ___?",
     "answer": "dir",
-    "translation": "Что ты хочешь себе в подарок?"
+    "translation": {
+      "ru": "Что ты хочешь себе в подарок?",
+      "en": "What would you like for your birthday?"
+    }
   },
   {
     "type": "personal",
@@ -381,7 +522,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du ziehst nach Berlin?",
     "sentence": "Kannst du ___ das wirklich vorstellen?",
     "answer": "dir",
-    "translation": "Ты правда можешь себе это представить?"
+    "translation": {
+      "ru": "Ты правда можешь себе это представить?",
+      "en": "Can you really imagine that?"
+    }
   },
   {
     "type": "possessive",
@@ -389,7 +533,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe einen Bruder.",
     "sentence": "___ Bruder wohnt in Berlin.",
     "answer": "mein",
-    "translation": "Мой брат живёт в Берлине.",
+    "translation": {
+      "ru": "Мой брат живёт в Берлине.",
+      "en": "My brother lives in Berlin."
+    },
     "gender": "Maskulin"
   },
   {
@@ -398,7 +545,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe eine Schwester.",
     "sentence": "___ Schwester studiert Medizin.",
     "answer": "meine",
-    "translation": "Моя сестра изучает медицину.",
+    "translation": {
+      "ru": "Моя сестра изучает медицину.",
+      "en": "My sister studies medicine."
+    },
     "gender": "Feminin"
   },
   {
@@ -407,7 +557,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe ein Fahrrad.",
     "sentence": "___ Fahrrad ist neu.",
     "answer": "mein",
-    "translation": "Мой велосипед новый.",
+    "translation": {
+      "ru": "Мой велосипед новый.",
+      "en": "My bike is new."
+    },
     "gender": "Neutrum"
   },
   {
@@ -416,7 +569,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe nette Nachbarn.",
     "sentence": "___ Nachbarn sind freundlich.",
     "answer": "meine",
-    "translation": "Мои соседи дружелюбные.",
+    "translation": {
+      "ru": "Мои соседи дружелюбные.",
+      "en": "My neighbours are friendly."
+    },
     "gender": "Plural"
   },
   {
@@ -425,7 +581,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe einen Bruder.",
     "sentence": "Ich besuche ___ Bruder morgen.",
     "answer": "meinen",
-    "translation": "Я навещаю моего брата завтра.",
+    "translation": {
+      "ru": "Я навещаю моего брата завтра.",
+      "en": "I'm visiting my brother tomorrow."
+    },
     "gender": "Maskulin"
   },
   {
@@ -434,7 +593,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe eine Tasche.",
     "sentence": "Ich suche ___ Tasche.",
     "answer": "meine",
-    "translation": "Я ищу мою сумку.",
+    "translation": {
+      "ru": "Я ищу мою сумку.",
+      "en": "I'm looking for my bag."
+    },
     "gender": "Feminin"
   },
   {
@@ -443,7 +605,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe einen Chef.",
     "sentence": "Ich spreche mit ___ Chef.",
     "answer": "meinem",
-    "translation": "Я разговариваю с моим начальником.",
+    "translation": {
+      "ru": "Я разговариваю с моим начальником.",
+      "en": "I'm talking to my boss."
+    },
     "gender": "Maskulin"
   },
   {
@@ -452,7 +617,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe eine Freundin.",
     "sentence": "Ich fahre mit ___ Freundin nach Wien.",
     "answer": "meiner",
-    "translation": "Я еду с моей подругой в Вену.",
+    "translation": {
+      "ru": "Я еду с моей подругой в Вену.",
+      "en": "I'm going to Vienna with my girlfriend."
+    },
     "gender": "Feminin"
   },
   {
@@ -461,7 +629,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe ein Kind.",
     "sentence": "Ich lese ___ Kind eine Geschichte vor.",
     "answer": "meinem",
-    "translation": "Я читаю моему ребёнку сказку.",
+    "translation": {
+      "ru": "Я читаю моему ребёнку сказку.",
+      "en": "I'm reading my child a story."
+    },
     "gender": "Neutrum"
   },
   {
@@ -470,7 +641,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe gute Freunde.",
     "sentence": "Ich schreibe ___ Freunden oft.",
     "answer": "meinen",
-    "translation": "Я часто пишу моим друзьям.",
+    "translation": {
+      "ru": "Я часто пишу моим друзьям.",
+      "en": "I often write to my friends."
+    },
     "gender": "Plural"
   },
   {
@@ -479,7 +653,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe einen Bruder.",
     "sentence": "Das ist das Auto ___ Bruders.",
     "answer": "meines",
-    "translation": "Это машина моего брата.",
+    "translation": {
+      "ru": "Это машина моего брата.",
+      "en": "This is my brother's car."
+    },
     "gender": "Maskulin"
   },
   {
@@ -488,7 +665,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ich habe eine Schwester.",
     "sentence": "Das ist die Wohnung ___ Schwester.",
     "answer": "meiner",
-    "translation": "Это квартира моей сестры.",
+    "translation": {
+      "ru": "Это квартира моей сестры.",
+      "en": "This is my sister's flat."
+    },
     "gender": "Feminin"
   },
   {
@@ -497,7 +677,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast einen Hund.",
     "sentence": "___ Hund ist sehr ruhig.",
     "answer": "dein",
-    "translation": "Твоя собака очень спокойная.",
+    "translation": {
+      "ru": "Твоя собака очень спокойная.",
+      "en": "Your dog is very calm."
+    },
     "gender": "Maskulin"
   },
   {
@@ -506,7 +689,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast eine neue Jacke.",
     "sentence": "___ Jacke gefällt mir.",
     "answer": "deine",
-    "translation": "Мне нравится твоя куртка.",
+    "translation": {
+      "ru": "Мне нравится твоя куртка.",
+      "en": "I like your jacket."
+    },
     "gender": "Feminin"
   },
   {
@@ -515,7 +701,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast einen Termin.",
     "sentence": "Hast du ___ Termin abgesagt?",
     "answer": "deinen",
-    "translation": "Ты отменил свою встречу?",
+    "translation": {
+      "ru": "Ты отменил свою встречу?",
+      "en": "Did you cancel your appointment?"
+    },
     "gender": "Maskulin"
   },
   {
@@ -524,7 +713,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast ein Handy.",
     "sentence": "Wo hast du ___ Handy gekauft?",
     "answer": "dein",
-    "translation": "Где ты купил свой телефон?",
+    "translation": {
+      "ru": "Где ты купил свой телефон?",
+      "en": "Where did you buy your phone?"
+    },
     "gender": "Neutrum"
   },
   {
@@ -533,7 +725,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast eine neue Kollegin.",
     "sentence": "Ich spreche mit ___ neuen Kollegin.",
     "answer": "deiner",
-    "translation": "Я разговариваю с твоей новой коллегой.",
+    "translation": {
+      "ru": "Я разговариваю с твоей новой коллегой.",
+      "en": "I'm talking to your new colleague."
+    },
     "gender": "Feminin"
   },
   {
@@ -542,7 +737,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast ein Auto.",
     "sentence": "Was ist mit ___ Auto passiert?",
     "answer": "deinem",
-    "translation": "Что случилось с твоей машиной?",
+    "translation": {
+      "ru": "Что случилось с твоей машиной?",
+      "en": "What happened to your car?"
+    },
     "gender": "Neutrum"
   },
   {
@@ -551,7 +749,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast zwei Kinder.",
     "sentence": "Spielst du oft mit ___ Kindern?",
     "answer": "deinen",
-    "translation": "Ты часто играешь со своими детьми?",
+    "translation": {
+      "ru": "Ты часто играешь со своими детьми?",
+      "en": "Do you often play with your children?"
+    },
     "gender": "Plural"
   },
   {
@@ -560,7 +761,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Du hast ein Haus.",
     "sentence": "Die Farbe ___ Hauses gefällt mir.",
     "answer": "deines",
-    "translation": "Мне нравится цвет твоего дома.",
+    "translation": {
+      "ru": "Мне нравится цвет твоего дома.",
+      "en": "I like the colour of your house."
+    },
     "gender": "Neutrum"
   },
   {
@@ -569,7 +773,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat einen Sohn.",
     "sentence": "___ Sohn geht schon zur Schule.",
     "answer": "sein",
-    "translation": "Его сын уже ходит в школу.",
+    "translation": {
+      "ru": "Его сын уже ходит в школу.",
+      "en": "His son already goes to school."
+    },
     "gender": "Maskulin"
   },
   {
@@ -578,7 +785,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat eine Schwester.",
     "sentence": "___ Schwester wohnt in Köln.",
     "answer": "seine",
-    "translation": "Его сестра живёт в Кёльне.",
+    "translation": {
+      "ru": "Его сестра живёт в Кёльне.",
+      "en": "His sister lives in Cologne."
+    },
     "gender": "Feminin"
   },
   {
@@ -587,7 +797,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat ein Auto.",
     "sentence": "Das ist ___ Auto.",
     "answer": "sein",
-    "translation": "Это его машина.",
+    "translation": {
+      "ru": "Это его машина.",
+      "en": "That's his car."
+    },
     "gender": "Neutrum"
   },
   {
@@ -596,7 +809,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat einen Hund.",
     "sentence": "Er nimmt ___ Hund mit.",
     "answer": "seinen",
-    "translation": "Он берёт свою собаку с собой.",
+    "translation": {
+      "ru": "Он берёт свою собаку с собой.",
+      "en": "He's taking his dog with him."
+    },
     "gender": "Maskulin"
   },
   {
@@ -605,7 +821,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat eine Brille zum Lesen.",
     "sentence": "Er findet ___ Brille nicht.",
     "answer": "seine",
-    "translation": "Он не может найти свои очки.",
+    "translation": {
+      "ru": "Он не может найти свои очки.",
+      "en": "He can't find his glasses."
+    },
     "gender": "Feminin"
   },
   {
@@ -614,7 +833,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat einen Bruder.",
     "sentence": "Er wohnt bei ___ Bruder.",
     "answer": "seinem",
-    "translation": "Он живёт у своего брата.",
+    "translation": {
+      "ru": "Он живёт у своего брата.",
+      "en": "He lives with his brother."
+    },
     "gender": "Maskulin"
   },
   {
@@ -623,7 +845,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat eine Schwester.",
     "sentence": "Ich spreche oft mit ___ Schwester.",
     "answer": "seiner",
-    "translation": "Я часто разговариваю с его сестрой.",
+    "translation": {
+      "ru": "Я часто разговариваю с его сестрой.",
+      "en": "I often talk to his sister."
+    },
     "gender": "Feminin"
   },
   {
@@ -632,7 +857,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat ein Kind.",
     "sentence": "Er hilft ___ Kind bei den Hausaufgaben.",
     "answer": "seinem",
-    "translation": "Он помогает своему ребёнку с домашним заданием.",
+    "translation": {
+      "ru": "Он помогает своему ребёнку с домашним заданием.",
+      "en": "He helps his child with homework."
+    },
     "gender": "Neutrum"
   },
   {
@@ -641,7 +869,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat viele Kollegen.",
     "sentence": "Er isst mit ___ Kollegen zu Mittag.",
     "answer": "seinen",
-    "translation": "Он обедает со своими коллегами.",
+    "translation": {
+      "ru": "Он обедает со своими коллегами.",
+      "en": "He has lunch with his colleagues."
+    },
     "gender": "Plural"
   },
   {
@@ -650,7 +881,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat eine Schwester.",
     "sentence": "Das ist die Wohnung ___ Schwester.",
     "answer": "seiner",
-    "translation": "Это квартира его сестры.",
+    "translation": {
+      "ru": "Это квартира его сестры.",
+      "en": "This is his sister's flat."
+    },
     "gender": "Feminin"
   },
   {
@@ -659,7 +893,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Paul hat einen Sohn.",
     "sentence": "Das ist das Fahrrad ___ Sohnes.",
     "answer": "seines",
-    "translation": "Это велосипед его сына.",
+    "translation": {
+      "ru": "Это велосипед его сына.",
+      "en": "This is his son's bike."
+    },
     "gender": "Maskulin"
   },
   {
@@ -668,7 +905,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat einen Bruder.",
     "sentence": "___ Bruder arbeitet hier.",
     "answer": "ihr",
-    "translation": "Её брат работает здесь.",
+    "translation": {
+      "ru": "Её брат работает здесь.",
+      "en": "Her brother works here."
+    },
     "gender": "Maskulin"
   },
   {
@@ -677,7 +917,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat eine Schwester.",
     "sentence": "Das ist ___ Schwester.",
     "answer": "ihre",
-    "translation": "Это её сестра.",
+    "translation": {
+      "ru": "Это её сестра.",
+      "en": "This is her sister."
+    },
     "gender": "Feminin"
   },
   {
@@ -686,7 +929,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat ein Zimmer.",
     "sentence": "___ Zimmer ist sehr hell.",
     "answer": "ihr",
-    "translation": "Её комната очень светлая.",
+    "translation": {
+      "ru": "Её комната очень светлая.",
+      "en": "Her room is very bright."
+    },
     "gender": "Neutrum"
   },
   {
@@ -695,7 +941,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat einen Hund.",
     "sentence": "Ich sehe ___ Hund oft im Park.",
     "answer": "ihren",
-    "translation": "Я часто вижу её собаку в парке.",
+    "translation": {
+      "ru": "Я часто вижу её собаку в парке.",
+      "en": "I often see her dog in the park."
+    },
     "gender": "Maskulin"
   },
   {
@@ -704,7 +953,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna braucht die Karte für den Termin.",
     "sentence": "Sie findet ___ Karte nicht.",
     "answer": "ihre",
-    "translation": "Она не может найти свою карту.",
+    "translation": {
+      "ru": "Она не может найти свою карту.",
+      "en": "She can't find her card."
+    },
     "gender": "Feminin"
   },
   {
@@ -713,7 +965,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat einen Vater.",
     "sentence": "Sie telefoniert mit ___ Vater.",
     "answer": "ihrem",
-    "translation": "Она разговаривает по телефону со своим отцом.",
+    "translation": {
+      "ru": "Она разговаривает по телефону со своим отцом.",
+      "en": "She's on the phone with her father."
+    },
     "gender": "Maskulin"
   },
   {
@@ -722,7 +977,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat eine Mutter.",
     "sentence": "Sie fährt mit ___ Mutter ans Meer.",
     "answer": "ihrer",
-    "translation": "Она едет со своей мамой к морю.",
+    "translation": {
+      "ru": "Она едет со своей мамой к морю.",
+      "en": "She's going to the seaside with her mother."
+    },
     "gender": "Feminin"
   },
   {
@@ -731,7 +989,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat ein Kind.",
     "sentence": "Sie liest ___ Kind ein Buch vor.",
     "answer": "ihrem",
-    "translation": "Она читает своему ребёнку книгу.",
+    "translation": {
+      "ru": "Она читает своему ребёнку книгу.",
+      "en": "She's reading her child a book."
+    },
     "gender": "Neutrum"
   },
   {
@@ -740,7 +1001,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat zwei Kinder.",
     "sentence": "Sie hilft ___ Kindern bei den Hausaufgaben.",
     "answer": "ihren",
-    "translation": "Она помогает своим детям с домашним заданием.",
+    "translation": {
+      "ru": "Она помогает своим детям с домашним заданием.",
+      "en": "She helps her children with their homework."
+    },
     "gender": "Plural"
   },
   {
@@ -749,7 +1013,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat einen Sohn.",
     "sentence": "Das ist das Fahrrad ___ Sohnes.",
     "answer": "ihres",
-    "translation": "Это велосипед её сына.",
+    "translation": {
+      "ru": "Это велосипед её сына.",
+      "en": "This is her son's bike."
+    },
     "gender": "Maskulin"
   },
   {
@@ -758,7 +1025,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Anna hat eine Tochter.",
     "sentence": "Das ist das Zimmer ___ Tochter.",
     "answer": "ihrer",
-    "translation": "Это комната её дочери.",
+    "translation": {
+      "ru": "Это комната её дочери.",
+      "en": "This is her daughter's room."
+    },
     "gender": "Feminin"
   },
   {
@@ -767,7 +1037,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben einen Lehrer.",
     "sentence": "___ Lehrer kommt aus Hamburg.",
     "answer": "unser",
-    "translation": "Наш учитель из Гамбурга.",
+    "translation": {
+      "ru": "Наш учитель из Гамбурга.",
+      "en": "Our teacher is from Hamburg."
+    },
     "gender": "Maskulin"
   },
   {
@@ -776,7 +1049,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben eine Wohnung.",
     "sentence": "___ Wohnung ist klein.",
     "answer": "unsere",
-    "translation": "Наша квартира маленькая.",
+    "translation": {
+      "ru": "Наша квартира маленькая.",
+      "en": "Our flat is small."
+    },
     "gender": "Feminin"
   },
   {
@@ -785,7 +1061,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben einen Chef.",
     "sentence": "Wir treffen ___ Chef morgen.",
     "answer": "unseren",
-    "translation": "Мы встречаемся с нашим начальником завтра.",
+    "translation": {
+      "ru": "Мы встречаемся с нашим начальником завтра.",
+      "en": "We're meeting our boss tomorrow."
+    },
     "gender": "Maskulin"
   },
   {
@@ -794,7 +1073,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben ein Auto.",
     "sentence": "Wir verkaufen ___ Auto.",
     "answer": "unser",
-    "translation": "Мы продаём нашу машину.",
+    "translation": {
+      "ru": "Мы продаём нашу машину.",
+      "en": "We're selling our car."
+    },
     "gender": "Neutrum"
   },
   {
@@ -803,7 +1085,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben einen Chef.",
     "sentence": "Wir sprechen mit ___ Chef.",
     "answer": "unserem",
-    "translation": "Мы разговариваем с нашим начальником.",
+    "translation": {
+      "ru": "Мы разговариваем с нашим начальником.",
+      "en": "We're talking to our boss."
+    },
     "gender": "Maskulin"
   },
   {
@@ -812,7 +1097,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben eine Nachbarin.",
     "sentence": "Wir helfen ___ Nachbarin oft.",
     "answer": "unserer",
-    "translation": "Мы часто помогаем нашей соседке.",
+    "translation": {
+      "ru": "Мы часто помогаем нашей соседке.",
+      "en": "We often help our neighbour."
+    },
     "gender": "Feminin"
   },
   {
@@ -821,7 +1109,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben Freunde in Wien.",
     "sentence": "Wir wohnen bei ___ Freunden.",
     "answer": "unseren",
-    "translation": "Мы живём у наших друзей.",
+    "translation": {
+      "ru": "Мы живём у наших друзей.",
+      "en": "We're staying with our friends."
+    },
     "gender": "Plural"
   },
   {
@@ -830,7 +1121,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Wir haben ein Haus.",
     "sentence": "Das Dach ___ Hauses ist neu.",
     "answer": "unseres",
-    "translation": "Крыша нашего дома новая.",
+    "translation": {
+      "ru": "Крыша нашего дома новая.",
+      "en": "The roof of our house is new."
+    },
     "gender": "Neutrum"
   },
   {
@@ -839,7 +1133,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt einen Sohn.",
     "sentence": "___ Sohn ist schon groß.",
     "answer": "euer",
-    "translation": "Ваш сын уже большой.",
+    "translation": {
+      "ru": "Ваш сын уже большой.",
+      "en": "Your son is already grown up."
+    },
     "gender": "Maskulin"
   },
   {
@@ -848,7 +1145,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt eine Wohnung.",
     "sentence": "___ Wohnung ist sehr schön.",
     "answer": "eure",
-    "translation": "Ваша квартира очень красивая.",
+    "translation": {
+      "ru": "Ваша квартира очень красивая.",
+      "en": "Your flat is very nice."
+    },
     "gender": "Feminin"
   },
   {
@@ -857,7 +1157,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt einen Hund.",
     "sentence": "Nehmt ihr ___ Hund mit?",
     "answer": "euren",
-    "translation": "Вы берёте свою собаку с собой?",
+    "translation": {
+      "ru": "Вы берёте свою собаку с собой?",
+      "en": "Are you taking your dog with you?"
+    },
     "gender": "Maskulin"
   },
   {
@@ -866,7 +1169,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt eine Idee.",
     "sentence": "Erklärt ihr ___ Idee noch einmal?",
     "answer": "eure",
-    "translation": "Вы ещё раз объясните свою идею?",
+    "translation": {
+      "ru": "Вы ещё раз объясните свою идею?",
+      "en": "Will you explain your idea again?"
+    },
     "gender": "Feminin"
   },
   {
@@ -875,7 +1181,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt einen Vater.",
     "sentence": "Fahrt ihr mit ___ Vater?",
     "answer": "eurem",
-    "translation": "Вы едете со своим отцом?",
+    "translation": {
+      "ru": "Вы едете со своим отцом?",
+      "en": "Are you going with your father?"
+    },
     "gender": "Maskulin"
   },
   {
@@ -884,7 +1193,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt eine Lehrerin.",
     "sentence": "Sprecht ihr mit ___ Lehrerin?",
     "answer": "eurer",
-    "translation": "Вы разговариваете со своей учительницей?",
+    "translation": {
+      "ru": "Вы разговариваете со своей учительницей?",
+      "en": "Are you talking to your teacher?"
+    },
     "gender": "Feminin"
   },
   {
@@ -893,7 +1205,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt neue Kollegen.",
     "sentence": "Geht ihr mit ___ Kollegen essen?",
     "answer": "euren",
-    "translation": "Вы идёте есть со своими коллегами?",
+    "translation": {
+      "ru": "Вы идёте есть со своими коллегами?",
+      "en": "Are you going out to eat with your colleagues?"
+    },
     "gender": "Plural"
   },
   {
@@ -902,7 +1217,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Ihr habt eine Tochter.",
     "sentence": "Das ist das Fahrrad ___ Tochter.",
     "answer": "eurer",
-    "translation": "Это велосипед вашей дочери.",
+    "translation": {
+      "ru": "Это велосипед вашей дочери.",
+      "en": "This is your daughter's bike."
+    },
     "gender": "Feminin"
   },
   {
@@ -911,7 +1229,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Müllers haben einen Sohn.",
     "sentence": "___ Sohn studiert in München.",
     "answer": "ihr",
-    "translation": "Их сын учится в Мюнхене.",
+    "translation": {
+      "ru": "Их сын учится в Мюнхене.",
+      "en": "Their son studies in Munich."
+    },
     "gender": "Maskulin"
   },
   {
@@ -920,7 +1241,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Kinder haben viele Bücher.",
     "sentence": "___ Bücher liegen überall.",
     "answer": "ihre",
-    "translation": "Их книги лежат повсюду.",
+    "translation": {
+      "ru": "Их книги лежат повсюду.",
+      "en": "Their books are lying everywhere."
+    },
     "gender": "Plural"
   },
   {
@@ -929,7 +1253,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Meine Eltern haben ein Auto.",
     "sentence": "Sie verkaufen ___ Auto.",
     "answer": "ihr",
-    "translation": "Они продают свою машину.",
+    "translation": {
+      "ru": "Они продают свою машину.",
+      "en": "They're selling their car."
+    },
     "gender": "Neutrum"
   },
   {
@@ -938,7 +1265,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Gäste haben Jacken.",
     "sentence": "Sie nehmen ___ Jacken mit.",
     "answer": "ihre",
-    "translation": "Гости забирают свои куртки.",
+    "translation": {
+      "ru": "Гости забирают свои куртки.",
+      "en": "The guests are taking their jackets."
+    },
     "gender": "Plural"
   },
   {
@@ -947,7 +1277,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Meine Eltern haben eine Nachbarin.",
     "sentence": "Sie helfen ___ Nachbarin oft.",
     "answer": "ihrer",
-    "translation": "Они часто помогают своей соседке.",
+    "translation": {
+      "ru": "Они часто помогают своей соседке.",
+      "en": "They often help their neighbour."
+    },
     "gender": "Feminin"
   },
   {
@@ -956,7 +1289,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Die Kinder haben Eltern.",
     "sentence": "Ich spreche mit ___ Eltern.",
     "answer": "ihren",
-    "translation": "Я разговариваю с их родителями.",
+    "translation": {
+      "ru": "Я разговариваю с их родителями.",
+      "en": "I'm talking to their parents."
+    },
     "gender": "Plural"
   },
   {
@@ -965,7 +1301,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Meine Eltern haben ein Haus.",
     "sentence": "Der Garten ___ Hauses ist groß.",
     "answer": "ihres",
-    "translation": "Сад их дома большой.",
+    "translation": {
+      "ru": "Сад их дома большой.",
+      "en": "The garden of their house is big."
+    },
     "gender": "Neutrum"
   },
   {
@@ -974,7 +1313,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Meier, Sie haben einen Termin.",
     "sentence": "___ Termin ist um zehn Uhr.",
     "answer": "Ihr",
-    "translation": "Ваша встреча в десять часов.",
+    "translation": {
+      "ru": "Ваша встреча в десять часов.",
+      "en": "Your appointment is at ten o'clock."
+    },
     "gender": "Maskulin"
   },
   {
@@ -983,7 +1325,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Herr Klein, Sie haben eine Tochter.",
     "sentence": "___ Tochter wartet draußen.",
     "answer": "Ihre",
-    "translation": "Ваша дочь ждёт снаружи.",
+    "translation": {
+      "ru": "Ваша дочь ждёт снаружи.",
+      "en": "Your daughter is waiting outside."
+    },
     "gender": "Feminin"
   },
   {
@@ -992,7 +1337,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Meier, Sie haben einen Ausweis.",
     "sentence": "Bitte zeigen Sie ___ Ausweis.",
     "answer": "Ihren",
-    "translation": "Пожалуйста, покажите Ваше удостоверение.",
+    "translation": {
+      "ru": "Пожалуйста, покажите Ваше удостоверение.",
+      "en": "Please show your ID."
+    },
     "gender": "Maskulin"
   },
   {
@@ -1001,7 +1349,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Herr Klein, Sie haben ein Ticket.",
     "sentence": "Haben Sie ___ Ticket dabei?",
     "answer": "Ihr",
-    "translation": "У Вас с собой Ваш билет?",
+    "translation": {
+      "ru": "У Вас с собой Ваш билет?",
+      "en": "Do you have your ticket with you?"
+    },
     "gender": "Neutrum"
   },
   {
@@ -1010,7 +1361,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Meier, Sie haben eine Kollegin.",
     "sentence": "Ich spreche mit ___ Kollegin.",
     "answer": "Ihrer",
-    "translation": "Я разговариваю с Вашей коллегой.",
+    "translation": {
+      "ru": "Я разговариваю с Вашей коллегой.",
+      "en": "I'm talking to your colleague."
+    },
     "gender": "Feminin"
   },
   {
@@ -1019,7 +1373,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Herr Klein, Sie haben zwei Kinder.",
     "sentence": "Reisen Sie mit ___ Kindern?",
     "answer": "Ihren",
-    "translation": "Вы путешествуете со своими детьми?",
+    "translation": {
+      "ru": "Вы путешествуете со своими детьми?",
+      "en": "Are you travelling with your children?"
+    },
     "gender": "Plural"
   },
   {
@@ -1028,7 +1385,10 @@ window.PRONOUN_EXERCISES = [
     "context": "Frau Meier, Sie haben einen Sohn.",
     "sentence": "Das ist das Zimmer ___ Sohnes.",
     "answer": "Ihres",
-    "translation": "Это комната Вашего сына.",
+    "translation": {
+      "ru": "Это комната Вашего сына.",
+      "en": "This is your son's room."
+    },
     "gender": "Maskulin"
   }
 ];
