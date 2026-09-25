@@ -3900,7 +3900,7 @@ window.WORDS = [
     "word": "Ärztin",
     "article": "die",
     "translation": {
-      "ru": "врач (женщина)",
+      "ru": "врач",
       "en": "doctor"
     },
     "ruleType": "suffix",
@@ -3917,7 +3917,7 @@ window.WORDS = [
     "word": "Kollegin",
     "article": "die",
     "translation": {
-      "ru": "коллега (женщина)",
+      "ru": "коллега",
       "en": "colleague"
     },
     "ruleType": "suffix",
