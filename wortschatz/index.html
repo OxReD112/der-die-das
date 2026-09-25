@@ -235,7 +235,8 @@ button{font:inherit}
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ 5 neue Wörter</button><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div></div></section>
 <div class="version">v2.72 · notifications</div>
 </main>
-<script src="words.js?v=2"></script>
+<script src="../components/deutsch-translation-v1.js?v=2"></script>
+<script src="words.js?v=3"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -412,7 +413,7 @@ function prepareTomorrowNotifications(limit=4){
   const notifications=shuffled.slice(0,Math.min(4,limit)).map(c=>({
     id:c.id,
     sentence:c.revealed||c.sentence||"",
-    translation:c.ru||""
+    translation:getTranslation(c,"sentenceTranslation")
   }));
   const pool={date:tomorrow,notifications,createdAt:Date.now()};
   try{
@@ -441,7 +442,7 @@ function revealHTML(c){
 function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
- $("sentence").innerHTML=blankHTML(current);$("translation").textContent=current.ru;$("answerInput").value="";
+ $("sentence").innerHTML=blankHTML(current);$("translation").textContent=getTranslation(current,"sentenceTranslation");$("answerInput").value="";
  $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";
   if(window.deutschKeyboardReady){$("keyboard").classList.add("show");}
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
@@ -471,7 +472,7 @@ function check(){
    correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
  } else if(ok) correct=matched;
  $("question").classList.add("hidden");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
- $("answerTranslation").textContent=current.ru;
+ $("answerTranslation").textContent=getTranslation(current,"sentenceTranslation");
  let displayCorrect=normalize(correct);
  if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
    displayCorrect=displayCorrect.charAt(0).toLocaleUpperCase("de-DE")+displayCorrect.slice(1);
@@ -479,7 +480,7 @@ function check(){
  $("targetForm").textContent=displayCorrect;
  $("targetForm").style.display=ok?"inline-block":"none";
  if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
- $("base").textContent=current.base;$("meaning").textContent=current.translation;$("grammar").textContent=current.grammar||"";
+ $("base").textContent=current.base;$("meaning").textContent=getTranslation(current,"translation");$("grammar").textContent=getTranslation(current,"grammar");
  const r=rec(current);
  if(ok){
    if(failedToday.has(current.id)){r.level=0;r.due=add(1)}
