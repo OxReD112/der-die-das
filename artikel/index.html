@@ -21,10 +21,10 @@
 <style>
 :root{
   /* ===== PALETTE ===== */
-  --bg:#1c1c1e;
+  --bg:#1b1b1d;
   --panel:#252527;
-  --text:#f5f5f7;
-  --muted:#929297;
+  --text:#f2f0ed;
+  --muted:#8f8f94;
   --text-secondary:#c8c8cc;
   --text-strong:#e5e5e7;
   --text-subtle:#aaa6a0;
@@ -53,7 +53,7 @@
   /* ===== LIGHT THEME ===== */
   --bg:#f6f4f1;
   --panel:#ffffff;
-  --text:#252528;
+  --text:#242426;
   --muted:#727278;
   --text-secondary:#55565b;
   --text-strong:#55565b;
@@ -68,7 +68,7 @@
   --top-title:rgba(37,37,40,.48);
   --progress:rgba(32,32,35,.28);
   --answer-surface:rgba(32,32,35,.035);
-  --game-title:rgba(37,37,40,.11);
+  --game-title:rgba(36,36,38,.09);
   --version:rgba(37,37,40,.30);
   --good:rgba(105,201,177,.5);
   --bad:rgba(255,111,115,.5);
@@ -78,13 +78,13 @@
   --session-button-bg:#eeeae5;
 }
 
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;min-height:100vh;display:flex;justify-content:center}
 .app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--top-line);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:var(--top-title)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--progress);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:var(--card-shadow)}
 .eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em;text-align:center}.translation{font-size:18px;color:var(--muted);margin-top:14px;text-align:center}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
 .feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:var(--good-glow)}.feedback.wrong::before{background:var(--bad-glow)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:var(--text-secondary);line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--answer-surface)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:var(--text-label);font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
 
 .answer-translation{color:var(--muted);margin-top:6px}.rule-title{font-size:16px;font-weight:400;margin-bottom:8px;line-height:1.5}.rule-examples{font-size:13px;font-style:italic;color:var(--text-subtle);margin-top:10px;line-height:1.45}.rule-reliability{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--text-subtle)}.rule-reliability strong{color:var(--text-strong)}.feedback.correct{border-color:var(--good)}.feedback.wrong{border-color:var(--bad)}.continue{width:100%;margin-top:18px;border:0;border-radius:15px;padding:15px;background:var(--button);color:white;font-size:17px;font-weight:650;cursor:pointer}
-.game-title{font-size:clamp(58px,10vw,118px);line-height:.9;font-weight:700;letter-spacing:-.065em;color:var(--game-title);margin:0 0 72px;user-select:none}
+.game-title{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--game-title);margin:30px 0 70px;user-select:none}
 .session-screen,.end-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:560px;text-align:center;padding:64px 24px 42px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--card-shadow)}
 .session-screen h1,.end-screen h1{font-size:34px;margin:0 0 10px;letter-spacing:-.03em}
 .session-screen p,.end-screen p{color:var(--muted);font-size:17px;line-height:1.5;margin:0 0 28px}
@@ -98,6 +98,82 @@
 
 @media(max-width:520px){.app{padding-top:calc(env(safe-area-inset-top) + 8px)}.card{min-height:360px}.choices{position:sticky;bottom:10px}.choice{font-size:22px}}
 .version-mark{position:fixed;right:10px;bottom:8px;color:var(--version);font-size:11px;letter-spacing:.04em;pointer-events:none}
+
+/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
+   Same colours, button shape, press effect, table button and version mark in every exercise.
+   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
+:root{
+  --start-btn-bg:#2a2a2d;
+  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --start-line:rgba(255,255,255,.10);
+  --start-table-text:#c8c7c4;
+  --start-version:rgba(255,255,255,.24);
+}
+[data-theme="light"]{
+  --start-btn-bg:#fff;
+  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+  --start-line:rgba(0,0,0,.10);
+  --start-table-text:#55565b;
+  --start-version:rgba(36,36,38,.34);
+}
+#sessionScreen .session-options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
+#sessionScreen .session-option{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
+  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+#sessionScreen .session-option:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#sessionScreen .session-option:active{transform:scale(.97);filter:brightness(.94)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
+/* Artikel start screen: no card; same structure and height as Pronomen (block flow, margins collapse the same way) */
+#sessionScreen{display:block;min-height:690px;padding:20px 14px;border:0;border-radius:0;background:transparent;box-shadow:none}
+#sessionScreen.hidden{display:none}
+#sessionScreen h1{margin:0 0 10px}
+#sessionScreen p{font-size:16px;line-height:1.5;margin:16px 0}
+#sessionScreen .session-options{margin:28px 0}
+
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#endScreen .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#endScreen #playAgain,#endScreen #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#endScreen #playAgain{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#endScreen #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#endScreen #playAgain:active,#endScreen #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+/* Artikel summary: same structure and sizes as Pronomen (no card) */
+#endScreen{display:block;min-height:690px;padding:20px 14px;border:0;border-radius:0;background:transparent;box-shadow:none}
+#endScreen.hidden{display:none}
+#endScreen .game-title-done{margin-bottom:45px}
+#endScreen h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}
+#endScreen .end-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}
+#endScreen p{color:var(--muted);font-size:16px;line-height:normal;margin:0 0 28px}
+#endScreen .finish-actions{margin-top:20px}
+
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+#game .top-title{color:var(--muted)}
+#game .top:after{background:var(--bar-track)}
+#game .progress i{background:var(--muted)}
+/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
+#game{padding-top:11px}
+#game .top{padding-bottom:18px}
 </style>
 </head>
 <body><main class="app">
@@ -107,8 +183,8 @@
 <p>Wähle eine Runde.</p>
 <div class="session-options">
 <button class="session-option" data-size="10">10</button>
+<button class="session-option" data-size="20">20</button>
 <button class="session-option" data-size="30">30</button>
-<button class="session-option" data-size="50">50</button>
 </div>
 </section>
 
@@ -126,13 +202,16 @@
 </div>
 
 <section class="end-screen hidden" id="endScreen">
-<div class="progress-label">Fertig</div>
-<h1>Gut gemacht!</h1>
-<div class="end-score" id="endCorrect">0/0</div>
+<div class="game-title game-title-done">Der.Die.Das.</div>
+<h1>Fertig.</h1>
+<div class="end-score" id="endCorrect">0 / 0</div>
 <p id="endSummary">Runde geschafft.</p>
-<button class="play-again" id="playAgain">Noch eine Runde</button>
+<div class="finish-actions">
+<button class="again" id="playAgain">Noch eine Runde</button>
+<button class="home-back" id="homeBack">Zur Startseite</button>
+</div>
 </section>
-<div class="version-mark">v10</div>
+<div class="version-mark">v14</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
@@ -240,7 +319,7 @@ function startSession(size){
 function endSession(){
  $('game').classList.add('hidden');
  $('endScreen').classList.remove('hidden');
- $('endCorrect').textContent=`${correct}/${sessionSize}`;
+ $('endCorrect').textContent=`${correct} / ${sessionSize}`;
  const pct=Math.round((correct/sessionSize)*100);
  $('endSummary').textContent=`${pct} % richtig. Was schwierig war, kommt öfter wieder.`;
 }
@@ -255,4 +334,21 @@ document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>choose(b.dataset.a
 document.addEventListener('keydown',e=>{if($('feedback').classList.contains('show')){if(e.key==='Enter'||e.key===' ')$('continue').click();return}if(e.key==='ArrowLeft'||e.key==='1')choose('der');if(e.key==='ArrowUp'||e.key==='2')choose('die');if(e.key==='ArrowRight'||e.key==='3')choose('das')});
 
 
+
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){window.parent.closeApp();return;}
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");frame.src="about:blank";return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+document.getElementById("homeBack").onclick=goBackToHome;
 </script></body></html>
