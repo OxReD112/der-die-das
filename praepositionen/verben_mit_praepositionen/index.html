@@ -22,11 +22,11 @@
 
 :root{
   /* ===== PALETTE (dark, default) — same as Pronomen ===== */
-  --bg:#1c1c1e;
-  --text:#f5f5f7;
-  --muted:#929297;
+  --bg:#1b1b1d;
+  --text:#f2f0ed;
+  --muted:#8f8f94;
   --tertiary-text:#aaa;
-  --secondary-text:#c7c7cc;
+  --secondary-text:#c8c7c4;
   --mint:#4fd7b3;
   --red:#ff6b73;
 
@@ -46,7 +46,7 @@
   --home-text:rgba(238,231,220,.55);
   --home-back-bg:#ece6dc;
   --home-back-text:#1b1c1e;
-  --weak-text:#c8c8cc;
+  --weak-text:#c8c7c4;
 
   /* ===== CASE BUTTONS (same as Fester Kasus) ===== */
   --button-bg:#2a2b2e;
@@ -61,9 +61,9 @@
 [data-theme="light"]{
   --bg:#f6f4f1;
   --text:#242426;
-  --muted:#77777d;
+  --muted:#727278;
   --tertiary-text:#8a8a90;
-  --secondary-text:#5b5b60;
+  --secondary-text:#55565b;
   --mint:#2fae90;
   --red:#e0454d;
 
@@ -83,7 +83,7 @@
   --home-text:rgba(36,36,38,.6);
   --home-back-bg:#242426;
   --home-back-text:#f5f5f7;
-  --weak-text:#5b5b60;
+  --weak-text:#55565b;
 
   --button-bg:#fff;
   --button-bg-hover:#f4f2ef;
@@ -95,13 +95,13 @@
 }
 
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{display:flex;justify-content:center}
 .app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
 .screen{min-height:690px;padding:20px 14px}
 .hidden{display:none!important}
-.start-title{margin:60px 0 12px}
-.start-sub{font-size:19px;font-weight:600;color:var(--secondary-text);margin-bottom:4px}
+.start-title{margin:38px 0 11px;font-size:36px;line-height:1.05;letter-spacing:-.04em}
+.start-sub{font-size:16px;font-weight:400;line-height:1.5;color:var(--muted);margin-bottom:4px}
 .center{text-align:center}
 .muted{color:var(--muted)}
 h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}
@@ -233,6 +233,68 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 
 .version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.divider{left:0;width:100%}}
+
+/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
+   Same colours, button shape, press effect, table button and version mark in every exercise.
+   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
+:root{
+  --start-btn-bg:#2a2a2d;
+  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --start-line:rgba(255,255,255,.10);
+  --start-table-text:#c8c7c4;
+  --start-version:rgba(255,255,255,.24);
+}
+[data-theme="light"]{
+  --start-btn-bg:#fff;
+  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+  --start-line:rgba(0,0,0,.10);
+  --start-table-text:#55565b;
+  --start-version:rgba(36,36,38,.34);
+}
+#start .options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
+#start .size{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
+  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+#start .size:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#start .size:active{transform:scale(.97);filter:brightness(.94)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
+
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#done .done-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#done #home,#done #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#done #home{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#done #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#done #home:active,#done #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+#game .top-title{color:var(--muted)}
+#game .top:after{background:var(--bar-track)}
+#game .progress i{background:var(--muted)}
+/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
+#game.screen{padding-top:15px}
+#game .top{margin-left:-14px;margin-right:-14px;padding-bottom:14px}
 </style>
 </head>
 <body><main class="app">
@@ -296,7 +358,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   </div>
 </section>
 
-<div class="version">v3.3 · Verben mit Präpositionen</div>
+<div class="version-mark">v3.8</div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
