@@ -296,7 +296,8 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 </main>
 <div class="version-tag">v43 · Partizip II exercise</div>
 
-<script src="verbs.js?v=3"></script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="verbs.js?v=4"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const STORAGE_KEY="verbformenDifficultyV1";
@@ -393,7 +394,7 @@ function syncKeyboardAndFocus(){
 function render(){
  const v=deck[index];checked=false;
  $("verb").textContent=v.infinitive;
- $("translation").textContent=v.translation;
+ $("translation").textContent=getTranslation(v,"translation");
  $("answer").value="";
  $("result").className="result";
  $("vowelPattern").textContent="";
