@@ -967,6 +967,8 @@ header h1 {
 .settings-layer{position:fixed;inset:0;z-index:10;pointer-events:none}
 .settings-panel{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;padding:calc(env(safe-area-inset-top) + 82px) max(24px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 32px) max(24px,env(safe-area-inset-left));background:var(--bg);transform:translateY(100%);transition:transform .42s cubic-bezier(.22,.61,.36,1);will-change:transform;overflow:auto;overscroll-behavior:contain;pointer-events:none}
 .settings-panel.is-open{transform:translateY(0);pointer-events:auto}
+/* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
+.settings-panel,.settings-panel button,.settings-confirm button{touch-action:manipulation}
 .settings-launcher{position:absolute;right:50%;transform:translateX(50%);bottom:calc(env(safe-area-inset-bottom) + 28px);z-index:2;appearance:none;-webkit-appearance:none;border:0;padding:8px 12px;background:transparent;color:var(--tertiary-text);font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:1;transition:opacity .2s ease}
 .settings-launcher:active{color:var(--tertiary-text-active)}
 .home-settings-open .settings-launcher{opacity:0;pointer-events:none}
