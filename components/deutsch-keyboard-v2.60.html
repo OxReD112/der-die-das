@@ -52,7 +52,7 @@
 .row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:transparent;font-size:22px;font-weight:500}
 
 /* ===== PRESS FEEDBACK (touch only) ===== */
-.keyboard.is-touch .key{user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}
+.keyboard.is-touch .key{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}
 .keyboard.is-touch .key:active,.keyboard.is-touch .key.is-pressed{transform:scale(1.08);background:var(--key-active-bg);border-color:transparent;position:relative;z-index:3}
 .keyboard.is-touch .key.ok:active,.keyboard.is-touch .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:var(--ok-active-text)}
 </style>
@@ -87,20 +87,27 @@
    popup.style.left=(kr.left-r.left+kr.width/2-pr.width/2)+"px";
    popup.style.top=(kr.top-r.top-pr.height+1)+"px";
  },{passive:true});
- let touchActivated=false;
+ // Each tap must produce exactly one key. A tap fires "touchend" and then,
+ // a moment later, the browser's own synthetic "click". We type on touchend,
+ // cancel that synthetic click, and additionally ignore any click that comes
+ // within 800 ms of the most recent touch. (The old version used a shared
+ // 450 ms timer: when typing fast, an earlier tap's timer switched the guard
+ // off before the later tap's click arrived, so that letter typed twice.)
+ let lastTouchEnd=0;
  const emit=(b)=>{
    if(!b)return;
    kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:b.dataset.key||""}}));
  };
  kb.addEventListener("touchend",e=>{
+   lastTouchEnd=Date.now();
    const b=e.target.closest("[data-key]");
-   if(b){touchActivated=true;emit(b);setTimeout(()=>{touchActivated=false},450)}
+   if(b){if(e.cancelable)e.preventDefault();emit(b)}
    release();
- },{passive:true});
- kb.addEventListener("touchcancel",release,{passive:true});
+ },{passive:false});
+ kb.addEventListener("touchcancel",e=>{lastTouchEnd=Date.now();release()},{passive:true});
  kb.addEventListener("click",e=>{
    const b=e.target.closest("[data-key]");if(!b)return;
-   if(touchActivated){e.preventDefault();return}
+   if(Date.now()-lastTouchEnd<800){e.preventDefault();return}
    emit(b);
  });
  document.querySelectorAll("#keyboard .row[data-keys]").forEach(row=>{
