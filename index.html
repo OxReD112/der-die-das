@@ -1385,7 +1385,7 @@ header h1 {
    </iframe>
   </section>
   <script src="components/deutsch-translation-v1.js?v=2"></script>
-  <script src="phrases.js?v=2">
+  <script src="phrases.js?v=3">
   </script>
   <script src="greetings.js?v=2">
   </script>
@@ -1445,16 +1445,18 @@ header h1 {
         // The same weekly phrase object feeds both the compact Home preview
         // and the full-screen details. There is only one source of truth.
         phraseHomeTitle.textContent=phrase.title;
-        phraseHomeLiteral.textContent=phrase.literal;
+        phraseHomeLiteral.textContent=getTranslation(phrase,"literal");
 
         phraseTitle.textContent=phrase.title;
-        phraseLiteral.textContent=phrase.literal;
-        phraseMeaning.textContent="→ "+phrase.meaning;
+        phraseLiteral.textContent=getTranslation(phrase,"literal");
+        phraseMeaning.textContent="→ "+getTranslation(phrase,"meaning");
         phraseExample.textContent=phrase.example;
       }
 
       if(Array.isArray(window.PHRASES)) render();
       else window.addEventListener("phrasesready",render,{once:true});
+      // Settings → Translations ENG/RUS: update the phrase right away.
+      document.addEventListener("deutsch:translationlang",render);
     })();
 
     const DAILY_STATS_KEY='deutschDailyStatsV1';
