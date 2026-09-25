@@ -215,7 +215,8 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 <div class="version-mark">v7</div>
 </main>
 
-<script src="ortspraepositionen.js?v=5"></script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="ortspraepositionen.js?v=6"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PLACES = window.ORTSPRAEPOSITIONEN || [];
@@ -258,9 +259,9 @@ function zuHint(entry,q,form){
   const box=ZU_BOX[entry.cat];if(!box)return "";
   const b=s=>"<b>"+escapeHtml(s)+"</b>";
   if(q==="wohin"&&/^zu/.test(form))
-    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+(ZU_TEXT[box]||"")+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — "+(ZU_TEXT.zu||"")+"</div>";
+    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,box)+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — "+getTranslation(ZU_TEXT,"zu")+"</div>";
   if(q==="woher"&&/^von?/.test(form)&&/^aus/.test(entry.woher))
-    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — "+(ZU_TEXT.aus||"")+"</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — "+(ZU_TEXT.von||"")+"</div>";
+    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — "+getTranslation(ZU_TEXT,"aus")+"</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — "+getTranslation(ZU_TEXT,"von")+"</div>";
   return "";
 }
 
@@ -350,7 +351,7 @@ function render(){
   els.card.className="card";els.game.classList.remove("good","bad");
   els.eyebrow.innerHTML="&nbsp;";
   els.place.innerHTML=(entry.article?'<span class="article">'+escapeHtml(entry.article)+'</span>':"")+escapeHtml(entry.noun);
-  els.translation.textContent=entry.ru||"";
+  els.translation.textContent=getTranslation(entry,"translation");
 
   els.steps.innerHTML=QUESTIONS.map((q,i)=>
     '<div class="step '+(i===0?"active":"pending")+'" data-step="'+i+'">'+
