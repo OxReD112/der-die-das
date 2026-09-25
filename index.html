@@ -86,6 +86,7 @@
   --tile-today-sheen: rgba(255,255,255,.025);
   --back-btn-border: rgba(255,255,255,.07);
   --toggle-track: rgba(255,255,255,.12);
+  --toggle-track-solid: #363638; /* --toggle-track on --bg, opaque */
   --confirm-btn-border: rgba(255,255,255,.08);
   --confirm-btn-bg: rgba(255,255,255,.025);
   --confirm-scrim: rgba(0,0,0,.34);
@@ -124,6 +125,7 @@
   --tile-today-sheen: rgba(0,0,0,.025);
   --back-btn-border: rgba(0,0,0,.08);
   --toggle-track: rgba(0,0,0,.12);
+  --toggle-track-solid: #d9d7d4; /* --toggle-track on --bg, opaque */
   --confirm-btn-border: rgba(0,0,0,.08);
   --confirm-btn-bg: rgba(0,0,0,.025);
   --confirm-scrim: rgba(0,0,0,.20);
@@ -985,6 +987,7 @@ header h1 {
 .settings-gap{height:48px}
 .settings-name-wrap{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
 .settings-name{appearance:none;-webkit-appearance:none;width:114.3%;max-width:228px;margin:0;flex:0 0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:var(--label-text);font:500 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:right;transform:scale(.875);transform-origin:right center;outline:none;caret-color:var(--mint)}
+.settings-name:not(:placeholder-shown){color:var(--mint)}
 .settings-name::placeholder{color:var(--quaternary-text);opacity:1}
 .settings-toggle{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;width:42px;height:25px;padding:0;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--muted);transition:transform .22s ease,background .22s ease}
@@ -992,10 +995,10 @@ header h1 {
 .settings-toggle[aria-checked="true"]::after{transform:translateX(17px);background:var(--mint)}
 .settings-toggle:disabled{opacity:.5}
 .settings-lang{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;display:flex;width:88px;height:25px;padding:2px;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
-.settings-lang::before{content:"";position:absolute;top:2px;left:2px;width:42px;height:21px;border-radius:99px;background:color-mix(in srgb, var(--mint) 30%, transparent);transition:transform .22s ease}
+.settings-lang::before{content:"";position:absolute;top:2px;left:2px;width:42px;height:21px;border-radius:99px;background:var(--mint);transition:transform .22s ease}
 .settings-lang[data-lang="ru"]::before{transform:translateX(42px)}
-.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;transition:color .22s ease}
-.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--mint)}
+.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;letter-spacing:normal;transition:color .22s ease}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--toggle-track-solid)}
 .settings-confirm{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:950;display:none;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .settings-confirm.is-open{display:flex}
 .settings-confirm-card{width:min(100%,360px);padding:28px 24px 22px;border:1px solid var(--card-border);border-radius:var(--card-radius);background:var(--bg);text-align:center;box-shadow:0 20px 60px var(--confirm-shadow)}
@@ -1353,9 +1356,9 @@ header h1 {
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
      <div class="settings-gap"></div>
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
+     <div class="settings-row"><span>Translations</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Translation language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
      <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
      <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
-     <div class="settings-row"><span>Translations</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Translation language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
      <div id="notificationSettings" hidden>
       <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
       <div id="notificationNote" class="settings-action-note"></div>
