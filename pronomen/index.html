@@ -21,11 +21,11 @@
   --bg:#1b1b1d;
   --text:#f2f0ed;
   --muted:#8f8f94;
-  --tertiary-text:#aaa;
+  --tertiary-text:#c8c7c4;
   --secondary-text:#c8c7c4;
   --placeholder-text:#666;
-  --mint:#4fd7b3;
-  --red:#ff6b73;
+  --mint:#5bc8a4;
+  --red:#ff7770;
 
   /* ===== SURFACES ===== */
   --surface:#202022;
@@ -63,11 +63,11 @@
   --bg:#f6f4f1;
   --text:#242426;
   --muted:#727278;
-  --tertiary-text:#8a8a90;
+  --tertiary-text:#727278;
   --secondary-text:#55565b;
   --placeholder-text:#9a9a9a;
-  --mint:#2fae90;
-  --red:#e0454d;
+  --mint:#3fa68a;
+  --red:#e95e66;
 
   --surface:#fff;
   --surface-2:#fff;
@@ -184,6 +184,63 @@ html:not(.is-touch) .answerbox{cursor:text}
 /* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
 #game.screen{padding-top:15px}
 #game .top{margin-left:-14px;margin-right:-14px;padding-bottom:14px}
+
+/* Question text sizes (Design Police): sentences 28px on phones */
+@media(max-width:699px){#sentence{font-size:28px}}
+
+/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
+   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
+   typed text 24px in the group's font. Never green (green = correct).
+   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
+:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
+@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
+@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+#answerbox{min-height:58px;border:1px solid var(--field-line);border-radius:18px;background:var(--field-bg);
+  padding:0 17px;font:400 24px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:var(--text)}
+#answerbox .placeholder{font-size:0;color:transparent}
+#answerbox .placeholder::after{content:"";display:inline-block;width:2px;height:28px;background:var(--text);vertical-align:middle;
+  animation:fieldCaret 1.1s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){#answerbox .placeholder::after{animation:none}}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;padding:0;}
+#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#continue:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
+   (centred, 28px above the bottom edge).
+   (Design Police 2026-09-25) ===== */
+#game .in-session-tables{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
+#game .in-session-tables .btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
+  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#game .in-session-tables .btn:hover{background:var(--bg);transform:none}
+#game .in-session-tables .btn:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#game:not(.hidden)) .version-mark{display:none}
+
+/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
+   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
+#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
+#check:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
+   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
+   Window: palette card colour, shared outline, 24px corners. */
+:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
+.modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
+.modal.open{background:var(--overlay-scrim)}
+.modal-card{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -219,7 +276,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version-mark">v7.30</div>
+<div class="version-mark">v7.34</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="pronouns.js?v=5"></script>
@@ -362,7 +419,7 @@ function weightedDeck(count){
 }
 function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionAnswers={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
 function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=getTranslation(x,'translation');$('answerbox').innerHTML='<span class="placeholder">Fehlende Form eingeben</span>';$('answerbox').style.display='flex';$('check').style.removeProperty('display');$('feedback').className='feedback hidden';if(window.deutschKeyboardReady)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
-function paintAnswer(){ $('answerbox').textContent=answer||'' }
+function paintAnswer(){ if(answer)$('answerbox').textContent=answer; else $('answerbox').innerHTML='<span class="placeholder">Fehlende Form eingeben</span>' } // empty again → blinking cursor again
 function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;
 let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
 const keys=statKey(x);
