@@ -18,11 +18,11 @@
 <style>
 :root{
   /* ===== PALETTE (dark, default) ===== */
-  --bg:#1c1c1e;
-  --text:#f5f5f7;
-  --muted:#929297;
+  --bg:#1b1b1d;
+  --text:#f2f0ed;
+  --muted:#8f8f94;
   --tertiary-text:#aaa;
-  --secondary-text:#c7c7cc;
+  --secondary-text:#c8c7c4;
   --placeholder-text:#666;
   --mint:#4fd7b3;
   --red:#ff6b73;
@@ -51,7 +51,7 @@
   --home-text:rgba(238,231,220,.55);
   --home-back-bg:#ece6dc;
   --home-back-text:#1b1c1e;
-  --weak-text:#c8c8cc;
+  --weak-text:#c8c7c4;
 
   /* ===== MODAL ===== */
   --modal-scrim:rgba(0,0,0,.28);
@@ -62,9 +62,9 @@
 [data-theme="light"]{
   --bg:#f6f4f1;
   --text:#242426;
-  --muted:#77777d;
+  --muted:#727278;
   --tertiary-text:#8a8a90;
-  --secondary-text:#5b5b60;
+  --secondary-text:#55565b;
   --placeholder-text:#9a9a9a;
   --mint:#2fae90;
   --red:#e0454d;
@@ -78,7 +78,7 @@
   --feedback-divider:rgba(0,0,0,.11);
   --in-session-line:rgba(0,0,0,.06);
 
-  --brand-text:rgba(0,0,0,.08);
+  --brand-text:rgba(36,36,38,.09);
   --version-text:rgba(0,0,0,.18);
 
   --cta-bg:#242426;
@@ -88,14 +88,14 @@
   --home-text:rgba(36,36,38,.6);
   --home-back-bg:#242426;
   --home-back-text:#f5f5f7;
-  --weak-text:#5b5b60;
+  --weak-text:#55565b;
 
   --modal-scrim:rgba(0,0,0,.18);
   --close-icon:#242426;
   --hot-text:#a3222a;
 }
 
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
 .screen{min-height:690px;padding:20px 14px;background:transparent}.screen.hidden,.modal.hidden,.weak.hidden,.feedback.hidden{display:none}.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--brand-text);margin:30px 0 70px}.brand.brand-done{margin-bottom:45px}
 .center{text-align:center}.muted{color:var(--muted)}h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}p{line-height:1.5}
@@ -119,6 +119,71 @@ html:not(.is-touch) .answerbox{cursor:text}
 #home{background:var(--home-bg);color:var(--home-text)}
 #homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
 #home:active,#homeBack:active{transform:scale(.99)}
+
+/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
+   Same colours, button shape, press effect, table button and version mark in every exercise.
+   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
+:root{
+  --start-btn-bg:#2a2a2d;
+  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --start-line:rgba(255,255,255,.10);
+  --start-table-text:#c8c7c4;
+  --start-version:rgba(255,255,255,.24);
+}
+[data-theme="light"]{
+  --start-btn-bg:#fff;
+  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+  --start-line:rgba(0,0,0,.10);
+  --start-table-text:#55565b;
+  --start-version:rgba(36,36,38,.34);
+}
+#start .options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
+#start .size{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
+  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+#start .size:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#start .size:active{transform:scale(.97);filter:brightness(.94)}
+#start .start-table-btn{margin-top:0;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
+  border-radius:17px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#start .start-table-btn:active{transform:scale(.97);filter:brightness(.94)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
+
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#done .done-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#done #home,#done #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#done #home{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#done #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#done #home:active,#done #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+#game .top-title{color:var(--muted)}
+#game .top:after{background:var(--bar-track)}
+#game .progress i{background:var(--muted)}
+/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
+#game.screen{padding-top:15px}
+#game .top{margin-left:-14px;margin-right:-14px;padding-bottom:14px}
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -127,7 +192,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 <section id="start" class="screen center">
 <div class="brand">Pronomen</div><h1>Wie viele Übungen?</h1>
 <p class="muted">Personal- und Possessivpronomen gemischt.</p>
-<div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="30">30</button><button class="size" data-n="50">50</button></div>
+<div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
 <div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Tabelle</button></div>
 </section>
 
@@ -154,7 +219,7 @@ html:not(.is-touch) .answerbox{cursor:text}
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.24 · effectiveness</div>
+<div class="version-mark">v7.30</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="pronouns.js?v=5"></script>
