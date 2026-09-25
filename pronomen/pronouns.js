@@ -59,9 +59,9 @@ window.PRONOUN_EXERCISES = [
     "type": "personal",
     "skill": "Personal · Dativ · du → dir",
     "context": "Du kennst den Weg nicht.",
-    "sentence": "Ich zeige ___ die Adresse.",
+    "sentence": "Ich zeige ___ den Weg.",
     "answer": "dir",
-    "translation": "Я покажу тебе адрес."
+    "translation": "Я покажу тебе дорогу."
   },
   {
     "type": "personal",
@@ -122,7 +122,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Dativ · sie → ihr",
-    "context": "Lisa ist kalt.",
+    "context": "Lisa friert.",
     "sentence": "Ich bringe ___ eine Jacke.",
     "answer": "ihr",
     "translation": "Я принесу ей куртку."
@@ -195,7 +195,7 @@ window.PRONOUN_EXERCISES = [
     "type": "personal",
     "skill": "Personal · Akkusativ · ihr → euch",
     "context": "Ihr steht vor dem Haus.",
-    "sentence": "Ich sehe ___ vom Fenster.",
+    "sentence": "Ich sehe ___ vom Fenster aus.",
     "answer": "euch",
     "translation": "Я вижу вас из окна."
   },
@@ -258,23 +258,23 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · Sie → Sie",
-    "context": "Frau Berger wartet im Büro.",
-    "sentence": "Ich besuche ___ um zehn.",
+    "context": "Frau Berger, Sie sind heute im Büro?",
+    "sentence": "Dann besuche ich ___ um zehn.",
     "answer": "Sie",
-    "translation": "Я навещу Вас в десять."
+    "translation": "Тогда я зайду к Вам в десять."
   },
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · Sie → Sie",
-    "context": "Herr Klein, ich kenne schon.",
+    "context": "Herr Klein, wir kennen uns schon.",
     "sentence": "Schön, ___ wiederzusehen.",
     "answer": "Sie",
-    "translation": "Рад снова Вас видеть."
+    "translation": "Рад(а) снова Вас видеть."
   },
   {
     "type": "personal",
     "skill": "Personal · Dativ · Sie → Ihnen",
-    "context": "Frau Berger hat eine Frage.",
+    "context": "Frau Berger, Sie haben eine Frage?",
     "sentence": "Ich antworte ___ gleich.",
     "answer": "Ihnen",
     "translation": "Я сейчас Вам отвечу."
@@ -282,10 +282,106 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Dativ · Sie → Ihnen",
-    "context": "Herr Klein braucht die Unterlagen.",
+    "context": "Herr Klein, Sie brauchen die Unterlagen?",
     "sentence": "Ich schicke ___ die Datei.",
     "answer": "Ihnen",
     "translation": "Я отправлю Вам файл."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · ich → mich",
+    "context": "Ich bin gerade aufgestanden.",
+    "sentence": "Ich wasche ___ schnell.",
+    "answer": "mich",
+    "translation": "Я быстро умываюсь."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · ich → mich",
+    "context": "Es ist kalt draußen.",
+    "sentence": "Ich ziehe ___ warm an.",
+    "answer": "mich",
+    "translation": "Я тепло одеваюсь."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · ich → mich",
+    "context": "Ich bin neu im Team.",
+    "sentence": "Darf ich ___ kurz vorstellen?",
+    "answer": "mich",
+    "translation": "Можно мне коротко представиться?"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · ich → mir",
+    "context": "Ich habe gerade gegessen.",
+    "sentence": "Ich wasche ___ die Hände.",
+    "answer": "mir",
+    "translation": "Я мою руки."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · ich → mir",
+    "context": "Wir gehen gleich raus.",
+    "sentence": "Ich ziehe ___ eine Jacke an.",
+    "answer": "mir",
+    "translation": "Я надеваю куртку."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · ich → mir",
+    "context": "Die Telefonnummer ist wichtig.",
+    "sentence": "Ich merke ___ die Nummer.",
+    "answer": "mir",
+    "translation": "Я запомню этот номер."
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · du → dich",
+    "context": "Du bist ganz nass.",
+    "sentence": "Zieh ___ schnell um!",
+    "answer": "dich",
+    "translation": "Быстро переоденься!"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · du → dich",
+    "context": "Du hast die Prüfung bestanden.",
+    "sentence": "Freust du ___?",
+    "answer": "dich",
+    "translation": "Ты рад(а)?"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Akkusativ · du → dich",
+    "context": "Du bist neu hier.",
+    "sentence": "Stell ___ doch kurz vor!",
+    "answer": "dich",
+    "translation": "Представься коротко!"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · du → dir",
+    "context": "Du gehst gleich ins Bett.",
+    "sentence": "Putz ___ noch die Zähne!",
+    "answer": "dir",
+    "translation": "Почисти ещё зубы!"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · du → dir",
+    "context": "Du hast bald Geburtstag.",
+    "sentence": "Was wünschst du ___?",
+    "answer": "dir",
+    "translation": "Что ты хочешь себе в подарок?"
+  },
+  {
+    "type": "personal",
+    "skill": "Reflexiv · Dativ · du → dir",
+    "context": "Du ziehst nach Berlin?",
+    "sentence": "Kannst du ___ das wirklich vorstellen?",
+    "answer": "dir",
+    "translation": "Ты правда можешь себе это представить?"
   },
   {
     "type": "possessive",
@@ -751,7 +847,7 @@ window.PRONOUN_EXERCISES = [
     "skill": "Possessiv · ihr → euer · Nominativ",
     "context": "Ihr habt eine Wohnung.",
     "sentence": "___ Wohnung ist sehr schön.",
-    "answer": "Eure",
+    "answer": "eure",
     "translation": "Ваша квартира очень красивая.",
     "gender": "Feminin"
   },
