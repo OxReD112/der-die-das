@@ -989,6 +989,11 @@ header h1 {
 .settings-toggle[aria-checked="true"]{background:color-mix(in srgb, var(--mint) 30%, transparent)}
 .settings-toggle[aria-checked="true"]::after{transform:translateX(17px);background:var(--mint)}
 .settings-toggle:disabled{opacity:.5}
+.settings-lang{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;display:flex;width:88px;height:25px;padding:2px;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-lang::before{content:"";position:absolute;top:2px;left:2px;width:42px;height:21px;border-radius:99px;background:color-mix(in srgb, var(--mint) 30%, transparent);transition:transform .22s ease}
+.settings-lang[data-lang="ru"]::before{transform:translateX(42px)}
+.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;transition:color .22s ease}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--mint)}
 .settings-confirm{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:950;display:none;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .settings-confirm.is-open{display:flex}
 .settings-confirm-card{width:min(100%,360px);padding:28px 24px 22px;border:1px solid var(--card-border);border-radius:var(--card-radius);background:var(--bg);text-align:center;box-shadow:0 20px 60px var(--confirm-shadow)}
@@ -1348,6 +1353,7 @@ header h1 {
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
      <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
      <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
+     <div class="settings-row"><span>Translations</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Translation language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
      <div id="notificationSettings" hidden>
       <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
       <div id="notificationNote" class="settings-action-note"></div>
@@ -1376,6 +1382,7 @@ header h1 {
    <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
    </iframe>
   </section>
+  <script src="../components/deutsch-translation-v1.js?v=2"></script>
   <script src="phrases.js?v=2">
   </script>
   <script src="greetings.js?v=2">
@@ -1847,6 +1854,15 @@ const BACKUP_MODULES={
     storageKey:"ortspraepositionenDifficultyV1",
     storageVersion:"ortspraepositionenDifficultyV1"
   },
+  /* Setting, not progress: always included (current value, even if never
+     changed), but a backup with only settings counts as "No progress found". */
+  translations:{
+    label:"Translations",
+    storageKey:"deutschTranslationLangV1",
+    storageVersion:"deutschTranslationLangV1",
+    setting:true,
+    current:()=>window.DeutschTranslation ? window.DeutschTranslation.getLang() : null
+  },
   /* Planned — Progress Tracker (not written by any module yet). */
   progress:{
     label:"Fortschritt",
@@ -1864,9 +1880,14 @@ function buildDeutschBackup(){
   const modules={};
   Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
     const raw=localStorage.getItem(config.storageKey);
-    if(raw===null)return;
     let state;
-    try{state=JSON.parse(raw)}catch(e){state=raw}
+    if(config.current){
+      state=config.current();
+      if(state===null||state===undefined)return;
+    }else{
+      if(raw===null)return;
+      try{state=JSON.parse(raw)}catch(e){state=raw}
+    }
     modules[moduleName]={
       storageVersion:config.storageVersion,
       state
@@ -1884,7 +1905,7 @@ function saveDeutschBackup(){
   const note=document.getElementById("backupNote");
   try{
     const backup=buildDeutschBackup();
-    if(Object.keys(backup.modules).length===0){
+    if(!Object.keys(backup.modules).some(name=>!BACKUP_MODULES[name]?.setting)){
       if(note)note.textContent="· No progress found";
       return;
     }
@@ -1963,6 +1984,13 @@ async function restoreDeutschBackup(file){
           wortschatz:{date:today,remaining,done,total}
         }));
       }catch(e){}
+    }
+
+    const langToggle=document.getElementById("translationLangToggle");
+    if(langToggle&&window.DeutschTranslation){
+      const lang=window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang",lang);
+      langToggle.setAttribute("aria-label","Translation language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
 
     if(note)note.textContent="· Restore complete";
@@ -2149,6 +2177,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
   const close=document.getElementById("settingsClose");
   const theme=document.getElementById("themeToggle");
   const limit=document.getElementById("dailyLimitToggle");
+  const langToggle=document.getElementById("translationLangToggle");
   const confirm=document.getElementById("dailyLimitConfirm");
   const no=document.getElementById("dailyLimitNo");
   const yes=document.getElementById("dailyLimitYes");
@@ -2161,6 +2190,11 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     resetDailyLimitForNewDay();
     theme.setAttribute("aria-checked",window.DeutschTheme.isLight()?"true":"false");
     limit.setAttribute("aria-checked",limitOn()?"true":"false");
+    if(langToggle && window.DeutschTranslation){
+      const lang=window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang",lang);
+      langToggle.setAttribute("aria-label","Translation language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+    }
     if(nameInput && document.activeElement!==nameInput) nameInput.value=getUserName();
   }
 
@@ -2273,6 +2307,13 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
   theme?.addEventListener("click",()=>{
     window.DeutschTheme.set(!window.DeutschTheme.isLight());
     render();
+  });
+
+  langToggle?.addEventListener("click",()=>{
+    if(!window.DeutschTranslation)return;
+    window.DeutschTranslation.setLang(window.DeutschTranslation.getLang()==="en"?"ru":"en");
+    render();
+    document.dispatchEvent(new CustomEvent("deutsch:translationlang"));
   });
 
   limit?.addEventListener("click",()=>{
