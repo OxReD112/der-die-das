@@ -1,257 +1,863 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <script>
-  (function(){
-    if(localStorage.getItem("deutschThemeV1")==="light"){
-      document.documentElement.setAttribute("data-theme","light");
-    }
-  })();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1b1b1d">
-  <title>Verbformen.</title>
-  <style>
-    *{box-sizing:border-box}
+<meta charset="utf-8">
+<script>
+(function(){
+  if(localStorage.getItem("deutschThemeV1")==="light"){
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Modalverben.</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Modalverben">
+<style>
+*{box-sizing:border-box}
+:root{
+  /* ===== PALETTE (dark, default) ===== */
+  --bg:#1b1b1d;
+  --cream:#f2f0ed;
+  --mint:#5bc8a4;
+  --coral:#ff7770;
 
-    :root{
-      --bg:#1b1b1d;
-      --cream:#f2f0ed;
-      --muted:#8f8f94;
-      --card:rgba(255,255,255,.018);
-      --line:rgba(255,255,255,.08);
-      --heading:var(--cream);
-      --chevron:var(--muted);
-      --choice-active-bg:rgba(255,255,255,.028);
-      --choice-active-border:rgba(255,255,255,.12);
-      --subtitle:var(--muted);
-      --version-text:#55565a;
-    }
+  /* ===== TEXT ===== */
+  --muted:#8f8f94;
+  --muted-2:#8f8f94;
+  --secondary-text:#8f8f94;
+  --detail-text:#8f8f94;
+  --brand-text:#a5a19a;
+  --tertiary-text:#c8c7c4;
+  --placeholder-text:#48494a;
 
-    [data-theme="light"]{
-      --bg:#f6f4f1;
-      --cream:#242426;
-      --muted:#727278;
-      --card:rgba(0,0,0,.03);
-      --line:rgba(0,0,0,.10);
-      --heading:var(--cream);
-      --chevron:var(--muted);
-      --choice-active-bg:rgba(0,0,0,.045);
-      --choice-active-border:rgba(0,0,0,.14);
-      --subtitle:var(--muted);
-      --version-text:rgba(43,42,39,.45);
-    }
+  /* ===== FORMS TABLE TEXT ===== */
+  --forms-text:#c7c3bc;
+  --forms-dim:#92918e;
+  --forms-person:#8b8985;
+  --forms-scheme:#aaa7a1;
+  --forms-sep:#686967;
 
-    html,body{
-      margin:0;
-      min-height:100%;
-      background:var(--bg);
-      color:var(--cream);
-      font-family:Georgia,"Times New Roman",serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+  /* ===== SURFACES ===== */
+  --track:#292a2c;
+  --surface:#1c1d1f;
+  --surface-2:#202124;
+  --surface-3:#222326;
+  --surface-4:#252527;
 
-    body{
-      height:100vh;
-      height:100dvh;
-      overflow:hidden;
-    }
+  /* ===== LINES / BORDERS ===== */
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.07);
+  --detail-line:rgba(255,255,255,.045);
+  --subtle-fill:rgba(255,255,255,.025);
+  --border:#343638;
+  --border-2:#36383a;
+  --border-3:#37383a;
+  --border-hover:#555;
+  --forms-btn-line:rgba(255,255,255,.06);
+  --modal-border:rgba(255,255,255,.10);
 
-    .page{
-      position:fixed;
-      inset:0;
-      width:min(100%,480px);
-      height:100vh;
-      height:100dvh;
-      margin:0 auto;
-      padding:
-        max(24px,calc(env(safe-area-inset-top) + 12px))
-        24px
-        max(24px,env(safe-area-inset-bottom));
-      overflow-x:hidden;
-      overflow-y:auto;
-      -webkit-overflow-scrolling:touch;
-    }
+  /* ===== CTA BUTTONS (Check / Home) ===== */
+  --cta-bg:#ece6dc;
+  --cta-text:#1b1c1e;
 
-    header{
-      text-align:center;
-      padding:36px 20px 0;
-      margin-bottom:0;
-    }
+  /* ===== "AGAIN" BUTTON ===== */
+  --again-bg:rgba(255,255,255,.07);
+  --again-text:rgba(238,231,220,.42);
 
-    h1{
-      margin:0;
-      color:var(--heading);
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:40px;
-      font-weight:400;
-      line-height:1;
-      letter-spacing:-1px;
-    }
+  /* ===== MODAL ===== */
+  --modal-scrim:rgba(0,0,0,.28);
+  --close-icon:#fff;
+}
 
-    .intro{
-      margin:48px 0 14px;
-      color:var(--muted);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      font-size:14px;
-      line-height:1.4;
-    }
+[data-theme="light"]{
+  --bg:#f6f4f1;
+  --cream:#242426;
+  --mint:#3fa68a;
+  --coral:#e95e66;
 
-    .choices{
-      display:grid;
-      gap:16px;
-      margin-top:0;
-    }
+  --muted:#727278;
+  --muted-2:#727278;
+  --secondary-text:#727278;
+  --detail-text:#727278;
+  --brand-text:#8f8b83;
+  --tertiary-text:#727278;
+  --placeholder-text:#b9b9b9;
 
-    .choice{
-      appearance:none;
-      -webkit-appearance:none;
-      position:relative;
-      width:100%;
-      min-height:96px;
-      padding:20px 22px;
-      border:1px solid var(--line);
-      border-radius:21px;
-      background:var(--card);
-      color:inherit;
-      font:inherit;
-      text-align:left;
-      cursor:pointer;
-      -webkit-tap-highlight-color:transparent;
-      overflow:hidden;
-      transition:background .16s ease,border-color .16s ease,transform .16s ease;
-    }
+  --forms-text:#4a4844;
+  --forms-dim:#84817b;
+  --forms-person:#8b8781;
+  --forms-scheme:#7a766f;
+  --forms-sep:#a7a49d;
 
-    .choice::after{
-      content:"›";
-      position:absolute;
-      right:18px;
-      top:50%;
-      transform:translateY(-52%);
-      color:var(--chevron);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-      font-size:28px;
-      font-weight:300;
-    }
+  --track:#e4e1da;
+  --surface:#fff;
+  --surface-2:#fff;
+  --surface-3:#fff;
+  --surface-4:#fff;
 
-    .choice:active{
-      transform:scale(.992);
-      background:var(--choice-active-bg);
-      border-color:var(--choice-active-border);
-    }
+  --line:rgba(0,0,0,.10);
+  --line-2:rgba(0,0,0,.09);
+  --detail-line:rgba(0,0,0,.07);
+  --subtle-fill:rgba(0,0,0,.035);
+  --border:#ddd8ce;
+  --border-2:#ddd8ce;
+  --border-3:#ddd8ce;
+  --border-hover:#bbb;
+  --forms-btn-line:rgba(0,0,0,.08);
+  --modal-border:rgba(0,0,0,.10);
 
-    .choice-title{
-      color:var(--cream);
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:20px;
-      font-weight:400;
-      line-height:1.15;
-      letter-spacing:-.25px;
-    }
+  --cta-bg:#242426;
+  --cta-text:#f5f5f7;
 
-    .choice-subtitle{
-      margin-top:6px;
-      color:var(--subtitle);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      font-size:13px;
-      line-height:1.4;
-    }
+  --again-bg:rgba(0,0,0,.05);
+  --again-text:rgba(36,36,38,.55);
 
-    .version{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:calc(env(safe-area-inset-bottom) + 10px);
-      color:var(--version-text);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
-      font-size:10px;
-      line-height:1;
-      letter-spacing:.35px;
-      text-align:center;
-      pointer-events:none;
-    }
+  --modal-scrim:rgba(0,0,0,.18);
+  --close-icon:#242426;
+}
 
-    @media(max-width:430px){
-      .page{
-        padding-left:18px;
-        padding-right:18px;
-      }
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{height:100vh;height:100dvh;overflow:hidden}
+.app{position:fixed;inset:0;width:min(100%,480px);height:100vh;height:100dvh;margin:0 auto;padding:24px;padding-top:max(24px,calc(env(safe-area-inset-top) + 12px));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.top{display:grid;grid-template-columns:1fr auto;align-items:center;color:var(--muted);font-size:13px;position:sticky;top:0;z-index:50;background:var(--bg);padding:4px 0 10px}
+.brand{font-family:Georgia,serif;font-size:20px;color:var(--brand-text);letter-spacing:-.5px}
+#count{text-align:right}
+.progress{height:3px;background:var(--track);border-radius:9px;overflow:hidden;margin-bottom:26px;position:sticky;top:36px;z-index:50}
+.progress>i{display:block;height:100%;background:var(--muted);border-radius:9px}
+.card{position:relative;text-align:center;padding:28px 20px 26px;isolation:isolate}
+.card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,color-mix(in srgb,var(--mint) 9%,transparent),transparent 63%);opacity:.35}
+.verb{color:var(--muted);font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:400;letter-spacing:0;line-height:1;margin-bottom:18px}
+.sentence{font-family:Georgia,"Times New Roman",serif;font-size:26px;line-height:1.35;max-width:410px;margin:0 auto 18px}
+.sentence .gap{display:inline-block;min-width:3.6em;border-bottom:2px solid var(--muted);vertical-align:baseline;line-height:.95;text-align:center;color:var(--cream)}
+.sentence .gap.filled{border-bottom-color:var(--mint)}
+.sentence .gap.filled.wrong{border-bottom-color:var(--coral)}
+.translation{color:var(--muted);font-size:16px;line-height:1.45;margin-bottom:30px}
+.answer-area{margin-top:4px}
+.answer{width:100%;height:66px;border:1px solid var(--border);border-radius:18px;background:var(--surface);color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
+.answer:focus{border-color:color-mix(in srgb,var(--mint) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--mint) 8%,transparent)}
+.answer::placeholder{color:var(--placeholder-text)}
+.check{display:block;margin:14px auto 0;width:100%;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650}
+.check:active,.next:active,.choice:active,.again:active,.home-back:active{transform:scale(.99)}
+.result{display:none;position:relative;margin-top:24px;border-top:1px solid var(--line);padding:22px 24px 18px;text-align:left;isolation:isolate}
+.result.show{display:block}
+.result:before{content:"";position:absolute;z-index:2;top:-1px;left:50%;width:0;height:2px;background:var(--line);animation:spread .42s ease-out forwards}
+.result.good:before{background:var(--mint);box-shadow:0 0 18px color-mix(in srgb,var(--mint) 70%,transparent)}
+.result.bad:before{background:var(--coral);box-shadow:0 0 18px color-mix(in srgb,var(--coral) 70%,transparent)}
+@keyframes spread{to{left:0;width:100%}}
+.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px color-mix(in srgb,var(--mint) 80%,transparent)}
+.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px color-mix(in srgb,var(--coral) 85%,transparent)}
+.state{font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
+.form-line{font-family:Georgia,serif;font-size:22px;line-height:1.3;margin-bottom:7px}
+.form-kind{color:var(--detail-text);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.explanation{color:var(--detail-text);font-size:14px;line-height:1.5}
+.wrong-answer{color:var(--coral);text-decoration:line-through;text-decoration-thickness:1.5px}
+.next{display:none;margin-top:15px;width:100%;height:52px;border:1px solid var(--border-3);border-radius:17px;background:var(--surface-3);color:var(--cream);font-size:16px;font-weight:600}
+.next.show{display:block}
+.start,.finish{text-align:center;padding:36px 20px}
+.title{font-family:Georgia,serif;font-size:clamp(54px,15vw,78px);font-weight:400;letter-spacing:-3px;margin:0 0 12px}
+.subtitle{color:var(--muted);font-size:16px;margin:0 0 28px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{height:62px;border:1px solid var(--border-2);border-radius:18px;background:var(--surface-2);color:var(--cream);font-size:20px}
+.choice:hover{border-color:var(--border-hover)}
+.finish h2{font-family:Georgia,serif;font-size:48px;font-weight:400;margin:0 0 12px}
+.finish p{color:var(--muted);margin:0 0 28px;line-height:1.5}
+.finish-actions{display:grid;gap:10px}
+.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer}
+.again{background:var(--again-bg);color:var(--again-text)}
+.home-back{background:var(--cta-bg);color:var(--cta-text)}
+.hidden{display:none}
+.forms-table-btn{border:1px solid var(--forms-btn-line);background:transparent;color:var(--tertiary-text);border-radius:12px;font-size:11px;font-weight:400;padding:8px 11px;cursor:pointer}
+.start .forms-table-btn{margin-top:10px;font-size:14px;padding:11px 14px}
+.forms-table-btn:active{transform:scale(.99)}
+.in-session-forms{margin:20px auto 4px;display:flex;justify-content:center;position:relative;z-index:60}
 
-      header{
-        padding:36px 20px 0;
-        margin-bottom:0;
-      }
+.forms-modal{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));z-index:100;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
+.forms-modal.open{opacity:1;visibility:visible;background:var(--modal-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
+.forms-modal-card{width:min(560px,100%);max-height:82vh;overflow:hidden;background:var(--surface-4);border:1px solid var(--modal-border);border-radius:24px;padding:4px 18px 14px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.forms-modal.open .forms-modal-card{opacity:1;transform:scale(1);filter:blur(0)}
+.forms-modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}
+.forms-modal-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400}
+.forms-close{border:0;background:transparent;color:var(--close-icon);font-size:28px;line-height:1;padding:8px;cursor:pointer}
+#formsModalBody{overflow:auto;min-height:0;padding-top:0}
+.forms-intro{color:var(--forms-dim);font-size:11px;line-height:1.45;margin:6px 0 8px}
 
-      h1{font-size:37px}
+.forms-table{width:100%;border-collapse:collapse;font-size:12px}
+.forms-table th{position:static;color:var(--muted);font-size:9px;font-weight:500;letter-spacing:.10em;text-transform:uppercase;padding:7px 5px;text-align:left;border-bottom:1px solid var(--line);background:transparent}
+.forms-table th:first-child,.forms-table td:first-child{padding-left:0}
+.forms-table td{padding:10px 5px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.forms-table .verb-group-row{cursor:default}
+.forms-table .verb-group-row:hover td{background:var(--subtle-fill)}
+.forms-table .verb-group{font-family:Georgia,serif;font-size:16px;color:var(--forms-text);line-height:1.35}
+.forms-table .verb-choice{border:0;background:none;color:var(--forms-text);font:inherit;font-family:Georgia,serif;font-size:16px;padding:0;cursor:pointer}
+.forms-table .verb-choice:hover,.forms-table .verb-choice:focus-visible{text-decoration:underline;outline:none}
+.forms-table .group-separator{color:var(--forms-sep);margin:0 4px}
+.forms-table .reset-cell{text-align:right;white-space:nowrap}
+.forms-reset{border:1px solid var(--line);background:var(--subtle-fill);color:var(--muted-2);border-radius:9px;padding:6px 8px;font-size:9px;cursor:pointer}
+.forms-reset:active{transform:scale(.98)}
+.forms-chevron{display:inline-block;width:12px;color:var(--forms-sep);font-size:12px;line-height:1;transition:transform .16s ease;cursor:pointer}
+.forms-group.open .forms-chevron{transform:rotate(90deg)}
+.forms-detail-row{display:none}
+.forms-group.open .forms-detail-row{display:table-row}
+.forms-detail{padding:8px 0 12px}
+.forms-detail-table{width:100%;border-collapse:collapse}
+.forms-detail-table th,.forms-detail-table td{padding:7px 5px;text-align:left;border-bottom:1px solid var(--detail-line)}
+.forms-detail-table th{font-size:9px;color:var(--muted);font-weight:500;letter-spacing:.10em;text-transform:uppercase}
+.forms-detail-table td{font-size:12px;color:var(--forms-text)}
+.forms-detail-table .forms-person{color:var(--forms-person);font-size:11px;width:19%}
+.forms-detail-table .forms-scheme{color:var(--forms-scheme);font-family:Georgia,serif}
+.forms-note{margin-top:8px;color:var(--forms-dim);font-size:10px;line-height:1.4}
+.forms-detail-participle{margin-top:9px;color:var(--forms-dim);font-size:11px}
+.forms-detail-participle b{color:var(--forms-text);font-family:Georgia,serif;font-size:16px;font-weight:400}
+.umlaut-remove{font:inherit;line-height:inherit;font-weight:inherit}.umlaut-slot{display:inline-block;width:0.9em}
+@media(max-width:600px){
+  .app{padding-left:18px;padding-right:18px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px))}
+  .app::before{content:"";position:fixed;z-index:40;top:0;left:50%;transform:translateX(-50%);width:min(100%,480px);height:max(58px,calc(env(safe-area-inset-top) + 42px));background:var(--bg);pointer-events:none}
+  .top{position:sticky;top:0;z-index:50}
+  .progress{position:sticky;z-index:50}
+  .card{padding-top:12px}
+  .sentence{font-size:28px}
+  .result{margin-top:20px;padding:20px 22px 16px}
+html,body{overscroll-behavior-y:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
-      .intro{
-        margin:42px 0 12px;
-        font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      }
+/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
+   Same colours, button shape, press effect, table button and version mark in every exercise.
+   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
+:root{
+  --start-btn-bg:#2a2a2d;
+  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --start-line:rgba(255,255,255,.10);
+  --start-table-text:#c8c7c4;
+  --start-version:rgba(255,255,255,.24);
+}
+[data-theme="light"]{
+  --start-btn-bg:#fff;
+  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+  --start-line:rgba(0,0,0,.10);
+  --start-table-text:#55565b;
+  --start-version:rgba(36,36,38,.34);
+}
+#start .choices{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
+#start .choice{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
+  background:var(--start-btn-bg);color:var(--cream);box-shadow:var(--start-btn-shadow);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+#start .choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#start .choice:active{transform:scale(.97);filter:brightness(.94)}
+#start .forms-table-btn{margin-top:28px;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
+  border-radius:17px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#start .forms-table-btn:active{transform:scale(.97);filter:brightness(.94)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
 
-      .choice{
-        min-height:92px;
-        padding:19px 20px;
-        border-radius:20px;
-      }
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#finish .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#finish #again,#finish #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#finish #again{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#finish #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#finish #again:active,#finish #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+/* score: same as Partizip II */
+.final-score{margin:18px 0 12px;color:var(--cream);font:500 34px/1.05 Georgia,serif;letter-spacing:-.03em}
 
-      .choice-title{font-size:19px}
-      .choice-subtitle{font-size:12px; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
-    }
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+#study .top{font-size:14px}
+#study .brand{color:var(--muted)}
+#study .progress{background:var(--bar-track)}
+#study .progress>i{background:var(--muted)}
 
-    @media(prefers-reduced-motion:reduce){
-      .choice{transition:none}
-    }
-  
-    /* ===== CHAPTER PICKER · shared design (Design Police 2026-09-25) =====
-       Same palette and button logic as the exercise start screens:
-       cards are a filled surface, lighter than the background, lifted by a soft shadow, no outline. */
-    :root{
-      --pick-card-bg:#2a2a2d;
-      --pick-card-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
-      --pick-version:rgba(255,255,255,.24);
-    }
-    [data-theme="light"]{
-      --pick-card-bg:#fff;
-      --pick-card-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
-      --pick-version:rgba(36,36,38,.34);
-    }
-    .intro{font-size:16px}
-    .choice{border:0;background:var(--pick-card-bg);box-shadow:var(--pick-card-shadow);transition:transform .12s ease,filter .12s ease}
-    .choice:active{transform:scale(.97);filter:brightness(.94);background:var(--pick-card-bg);border-color:transparent}
-    .version{bottom:calc(env(safe-area-inset-bottom) + 28px);font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--pick-version)}
-  </style>
+/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
+   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
+   typed text 24px in the group's font. Never green (green = correct).
+   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
+:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
+@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
+@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+#answer{height:58px;min-height:58px;border:1px solid var(--field-line);border-radius:18px;background-color:var(--field-bg);
+  box-shadow:none;outline:none;padding:0 17px;font:400 24px Georgia,"Times New Roman",serif;color:var(--cream)}
+#answer:focus{border-color:var(--field-line);box-shadow:none}
+#answer:placeholder-shown{caret-color:transparent;background-image:linear-gradient(var(--cream),var(--cream));background-repeat:no-repeat;
+  background-position:center;background-size:2px 28px;animation:fieldCaretBg 1.1s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){#answer:placeholder-shown{animation:none}}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--cream);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
+#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#next:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
+   (centred, 28px above the bottom edge).
+   (Design Police 2026-09-25) ===== */
+#study .in-session-forms{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
+#study .in-session-forms .forms-table-btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
+  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#study .in-session-forms .forms-table-btn:hover{background:var(--bg);transform:none}
+#study .in-session-forms .forms-table-btn:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#study:not(.hidden)) .version-mark{display:none}
+
+/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
+   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
+#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
+#check:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
+   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
+   Window: palette card colour, shared outline, 24px corners. */
+:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
+.forms-modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
+.forms-modal.open{background:var(--overlay-scrim)}
+.forms-modal-card{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
+</style>
 </head>
 <body>
-  <main class="page">
-    <header>
-      <h1>Verbformen.</h1>
-      <p class="intro">Was möchtest du üben?</p>
-    </header>
+<div id="formsModal" class="forms-modal" aria-hidden="true">
+  <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
+    <div class="forms-modal-head">
+      <h2 id="formsModalTitle">Modalverben · Formen</h2>
+      <button class="forms-close" id="formsClose" type="button" aria-label="Schließen">×</button>
+    </div>
+    <div id="formsModalBody"></div>
+  </div>
+</div>
+<main class="app">
+  <section id="start" class="start">
+    <h1 class="title">Modalverben.</h1>
+    <p class="subtitle">Wie viele Sätze?</p>
+    <div class="choices">
+      <button class="choice" data-size="10">10</button>
+      <button class="choice" data-size="20">20</button>
+      <button class="choice" data-size="30">30</button>
+    </div>
+    <button class="forms-table-btn" data-forms-table>Formen · Tabelle</button>
+  </section>
 
-    <section class="choices" aria-label="Übungen">
-      <button class="choice" type="button" data-target="partizipII/?v=12">
-        <div class="choice-title">Partizip II</div>
-        <div class="choice-subtitle">Unregelmäßige Formen</div>
-      </button>
-
-      <button class="choice" type="button" data-target="modalverben/?v=13">
-        <div class="choice-title">Modalverben + werden</div>
-        <div class="choice-subtitle">Formen im Kontext</div>
-      </button>
+  <section id="study" class="hidden">
+    <div class="top"><span class="brand">Modalverben.</span><span id="count"></span></div>
+    <div class="progress"><i id="bar"></i></div>
+    <section class="card">
+      <div class="verb" id="verb"></div>
+      <div class="sentence" id="sentence"></div>
+      <div class="translation" id="translation"></div>
+      <div class="answer-area" id="answer-area">
+        <input id="answer" class="answer" placeholder=" " aria-label="Fehlende Form" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
+        <button class="check" id="check">Prüfen</button>
+      </div>
+      <div class="result" id="result">
+        <div class="state" id="state"></div>
+        <div class="form-line" id="formLine"></div>
+        <div class="form-kind" id="formKind"></div>
+        <div class="explanation" id="explanation"></div>
+      </div>
+      <button class="next" id="next">Weiter</button>
     </section>
-  </main>
+    <div id="keyboardMount"></div>
+    <div class="in-session-forms"><button class="forms-table-btn" data-forms-table>Formen · Tabelle</button></div>
+  </section>
 
-  <div class="version">v7</div>
+  <section id="finish" class="finish hidden">
+    <h2>Fertig.</h2>
+    <div id="finalScore" class="final-score"></div>
+    <p id="summary"></p>
+    <div class="finish-actions">
+      <button class="again" id="again">Noch eine Runde</button>
+      <button class="home-back" id="homeBack">Zur Startseite</button>
+    </div>
+  </section>
+  <div class="version-mark">v10</div>
+</main>
 
-  <script>
-    document.querySelectorAll("[data-target]").forEach(button=>{
-      button.addEventListener("click",()=>{
-        window.location.href=button.dataset.target;
-      });
-    });
-  </script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="special_verbs.js?v=4"></script>
+<script src="../../components/deutsch-progress-v1.js"></script>
+<script>
+const STORAGE_KEY="modalverbenDifficultyV1";
+let difficulty={};
+try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
+if(!difficulty||typeof difficulty!=="object")difficulty={};
+
+/* Scoring format 2 (Documentation/PROGRESS_TRACKER.md): common scale 1–4, wrong +1, right −0.5.
+   Format 1 (old): 1–6, wrong +1.5. Old data has no "__format" marker → converted ONCE:
+   new = 1 + (old − 1) × 3/5, rounded to 0.5. The key name stays the same, so an old backup
+   restored later is simply converted again. */
+const DIFFICULTY_FORMAT=2;
+if(difficulty.__format!==DIFFICULTY_FORMAT){
+  for(const k in difficulty){
+    if(k==="__format")continue;
+    const old=Number(difficulty[k]);
+    if(!Number.isFinite(old)){delete difficulty[k];continue}
+    const scaled=1+(Math.min(6,Math.max(1,old))-1)*3/5;
+    difficulty[k]=Math.min(4,Math.max(1,Math.round(scaled*2)/2));
+  }
+  difficulty.__format=DIFFICULTY_FORMAT;
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty))}catch(e){}
+}
+
+function recordAnswer(){
+  window.parent.postMessage({
+    type:"deutsch:exerciseAnswer",
+    exercise:"modalverben"
+  },"*");
+}
+
+let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
+const $=id=>document.getElementById(id);
+const isTouchDevice=navigator.maxTouchPoints>0||window.matchMedia("(pointer: coarse)").matches;
+
+if(isTouchDevice){
+  $("answer").readOnly=true;
+  $("answer").setAttribute("inputmode","none");
+  $("answer").setAttribute("readonly","");
+  $("check").style.display="none";
+}
+
+function itemKey(item){
+  return `${item.infinitive}|${item.form}|${item.sentence}`;
+}
+// Progress tracking: counted per VERB + FORM (e.g. "müssen · Präteritum", 8 sentences each → 15 items),
+// not per sentence. Guarded: the exercise keeps working if the helper is missing.
+const PROGRESS_ID="modalverben";
+const hasProgress=()=>typeof window.DeutschProgress==="object";
+const progressKey=item=>item.infinitive+"|"+item.form;
+if(hasProgress())DeutschProgress.init(PROGRESS_ID,SPECIAL_VERB_EXERCISES.map(i=>({key:progressKey(i),label:i.infinitive+" · "+i.form})));
+function weightFor(item){
+  return Math.max(1,Number(difficulty[itemKey(item)]||1));
+}
+function saveDifficulty(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
+}
+function buildDeck(size){
+  const ranked=SPECIAL_VERB_EXERCISES.map(item=>{
+    const weight=weightFor(item);
+    const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
+    return {item,randomKey};
+  }).sort((a,b)=>a.randomKey-b.randomKey);
+  return ranked.slice(0,Math.min(size,SPECIAL_VERB_EXERCISES.length)).map(x=>x.item);
+}
+function updateDifficulty(item,correct){
+  const k=itemKey(item);
+  let d=weightFor(item);
+  d=correct?Math.max(1,d-.5):Math.min(4,d+1);
+  difficulty[k]=Number(d.toFixed(2));
+  saveDifficulty();
+}
+
+function startSession(size){
+  sessionSize=Math.min(size,SPECIAL_VERB_EXERCISES.length);
+  deck=buildDeck(sessionSize);
+  index=0;correctCount=0;
+  $("start").classList.add("hidden");
+  $("finish").classList.add("hidden");
+  $("study").classList.remove("hidden");
+  render();
+}
+function syncKeyboardAndFocus(){
+  if(window.deutschKeyboardReady && !checked){
+    $("keyboard").classList.add("show");
+  }
+  if(!isTouchDevice){
+    setTimeout(()=>{
+      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
+    },80);
+  }
+}
+function sentenceWithGap(item,filled=false,wrong=false){
+  const sentence=String(item.sentence||"");
+  const answer=String(item.answer||"");
+  const gapClass=filled ? ("gap filled"+(wrong?" wrong":"")) : "gap";
+  const visible=filled?answer:"&nbsp;&nbsp;&nbsp;";
+  if(sentence.includes("___")){
+    const parts=sentence.split("___");
+    return parts[0]+'<span class="'+gapClass+'">'+visible+'</span>'+parts.slice(1).join("___");
+  }
+  const escapedAnswer=answer.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const re=new RegExp(escapedAnswer,"i");
+  return sentence.replace(re,'<span class="'+gapClass+'">'+visible+'</span>');
+}
+function render(){
+  const item=deck[index];
+  checked=false;
+  $("verb").textContent=item.infinitive;
+  $("sentence").innerHTML=sentenceWithGap(item);
+  $("translation").textContent=getTranslation(item,"translation");
+  $("answer").value="";
+  $("answer-area").classList.remove("hidden");
+  $("result").className="result";
+  $("next").className="next";
+  $("check").style.display=isTouchDevice?"none":"";
+  $("count").textContent=(index+1)+" / "+deck.length;
+  $("bar").style.width=((index+1)/deck.length*100)+"%";
+  $("answer").disabled=false;
+  syncKeyboardAndFocus();
+}
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[char]));
+}
+function checkAnswer(){
+  if(checked){next();return}
+  const item=deck[index];
+  const a=$("answer").value.trim().toLowerCase();
+  if(!a)return;
+  checked=true;
+  recordAnswer();
+  const ok=a===item.answer.trim().toLowerCase();
+  if(ok)correctCount++;
+  updateDifficulty(item,ok);
+  if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(item),ok);
+
+  $("result").className="result show "+(ok?"good":"bad");
+  if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+  $("sentence").innerHTML=sentenceWithGap(item,true,!ok);
+  $("state").textContent=ok?"Richtig":"Nicht ganz";
+  $("formKind").textContent=item.form;
+  $("formLine").innerHTML=ok
+    ? `${item.infinitive} → ${item.answer}`
+    : `${item.infinitive} → ${item.answer} → <span class="wrong-answer">${escapeHtml(a)}</span>`;
+  $("explanation").textContent=getTranslation(item,"explanation");
+  $("answer-area").classList.add("hidden");
+  $("next").className="next show";
+}
+function next(){
+  if(index+1>=deck.length){finishSession();return}
+  index++;
+  render();
+}
+function finishSession(){
+  $("study").classList.add("hidden");
+  $("finish").classList.remove("hidden");
+  $("finalScore").textContent=correctCount+" / "+deck.length;
+  $("summary").textContent="Was schwierig war, kommt öfter wieder.";
+}
+
+document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
+$("check").onclick=checkAnswer;
+$("next").onclick=next;
+$("again").onclick=()=>{
+  $("finish").classList.add("hidden");
+  $("start").classList.remove("hidden");
+};
+
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src="about:blank";
+        return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+$("homeBack").onclick=goBackToHome;
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && $("formsModal").classList.contains("open")){closeFormsTable();return}
+  if(e.key==="Enter"){
+    e.preventDefault();
+    if(checked){next();return}
+    if(document.activeElement===$("answer")) checkAnswer();
+  }
+  if(e.key==="Backspace" && isTouchDevice){
+    e.preventDefault();
+    $("answer").value=$("answer").value.slice(0,-1);
+  }
+});
+
+document.addEventListener("deutsch-keyboard-input",e=>{
+  const k=e.detail?.key||"";
+  if($("study").classList.contains("hidden") || checked)return;
+  if(k==="BACK"){
+    $("answer").value=$("answer").value.slice(0,-1);
+    return;
+  }
+  if(k==="OK"){
+    checkAnswer();
+    return;
+  }
+  if(k==="SPACE"){
+    if($("answer").value.length && !$("answer").value.endsWith(" ")) $("answer").value+=" ";
+    return;
+  }
+  if(k) $("answer").value+=k;
+});
+
+
+const MODAL_FORM_PERSONS=["ich","du","er/sie/es","wir","ihr","sie/Sie"];
+
+const MODAL_FORM_GROUP={
+  verbs:["können","müssen","dürfen","sollen","wollen"],
+  forms:{
+    "können":{
+      present:["kann","kannst","kann","können","könnt","können"],
+      preterite:["konnte","konntest","konnte","konnten","konntet","konnten"],
+      k2:["könnte","könntest","könnte","könnten","könntet","könnten"]
+    },
+    "müssen":{
+      present:["muss","musst","muss","müssen","müsst","müssen"],
+      preterite:["musste","musstest","musste","mussten","musstet","mussten"],
+      k2:["müsste","müsstest","müsste","müssten","müsstet","müssten"]
+    },
+    "dürfen":{
+      present:["darf","darfst","darf","dürfen","dürft","dürfen"],
+      preterite:["durfte","durftest","durfte","durften","durftet","durften"],
+      k2:["dürfte","dürftest","dürfte","dürften","dürftet","dürften"]
+    },
+    "sollen":{
+      present:["soll","sollst","soll","sollen","sollt","sollen"],
+      preterite:["sollte","solltest","sollte","sollten","solltet","sollten"],
+      k2:["sollte","solltest","sollte","sollten","solltet","sollten"]
+    },
+    "wollen":{
+      present:["will","willst","will","wollen","wollt","wollen"],
+      preterite:["wollte","wolltest","wollte","wollten","wolltet","wollten"],
+      k2:["wollte","wolltest","wollte","wollten","wolltet","wollten"]
+    }
+  }
+};
+
+const MODAL_FORM_SPECIAL={
+  "mögen":{
+    present:["mag","magst","mag","mögen","mögt","mögen"],
+    preterite:["mochte","mochtest","mochte","mochten","mochtet","mochten"],
+    k2:["möchte","möchtest","möchte","möchten","möchtet","möchten"]
+  },
+  "werden":{
+    present:["werde","wirst","wird","werden","werdet","werden"],
+    preterite:["wurde","wurdest","wurde","wurden","wurdet","wurden"],
+    k2:["würde","würdest","würde","würden","würdet","würden"],
+    participle:"geworden"
+  }
+};
+
+const MODAL_FORM_SCHEME={
+  present:["-","-st","-","-en","-t","-en"],
+  preterite:["-e","-est","-e","-en","-et","-en"],
+  k2:["-e","-est","-e","-en","-et","-en"]
+};
+
+let modalFormMode="scheme";
+let modalFormGroupOpen=true;
+let modalSpecialOpen={mögen:false,werden:false};
+
+function umlautGlyph(){
+  return '<span class="umlaut-remove">ø</span>';
+}
+
+function renderFormsDetail(verb,scheme=false){
+  const forms=scheme?MODAL_FORM_SCHEME:
+    (MODAL_FORM_GROUP.forms[verb]||MODAL_FORM_SPECIAL[verb]);
+
+  const rows=MODAL_FORM_PERSONS.map((person,i)=>`
+    <tr>
+      <td class="forms-person">${person}</td>
+      <td class="${scheme?"forms-scheme":""}">${scheme&&i<3?`<span class="umlaut-slot">${umlautGlyph()} </span>${forms.present[i]}`:scheme?`<span class="umlaut-slot">&nbsp;&nbsp;&nbsp;</span>${forms.present[i]}`:forms.present[i]}</td>
+      <td class="${scheme?"forms-scheme":""}">${scheme?`<span class="umlaut-slot">${umlautGlyph()} </span>${forms.preterite[i]}`:forms.preterite[i]}</td>
+      <td class="${scheme?"forms-scheme":""}">${forms.k2[i]}</td>
+    </tr>`).join("");
+
+  const note=scheme
+    ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>`
+    : "";
+
+  const participle=verb==="werden"
+    ? `<div class="forms-detail-participle">Partizip II · <b>geworden</b></div>`
+    : "";
+
+  return `
+    <div class="forms-detail">
+      <table class="forms-detail-table">
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Präsens</th>
+            <th>Präteritum</th>
+            <th>Konjunktiv II</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      ${note}${participle}
+    </div>`;
+}
+
+function renderFormsTable(){
+  const selected=modalFormMode!=="scheme"?modalFormMode:null;
+
+  const groupButtons=MODAL_FORM_GROUP.verbs.map((verb,i)=>`
+    ${i?"<span class=\"group-separator\">·</span>":""}
+    <button class="verb-choice" type="button" data-modal-verb="${verb}">${verb}</button>`).join("");
+
+  const groupRow=`
+    <tbody class="forms-group${modalFormGroupOpen?" open":""}" data-forms-group>
+      <tr class="verb-group-row">
+        <td class="verb-group" colspan="3">
+          <span class="forms-chevron" data-toggle-group aria-label="Modalverben auf- und zuklappen">›</span>
+          ${groupButtons}
+        </td>
+        <td class="reset-cell">
+          <button class="forms-reset" type="button" data-reset-forms>Zurücksetzen</button>
+        </td>
+      </tr>
+      <tr class="forms-detail-row">
+        <td colspan="4">${renderFormsDetail(selected||"können",!selected)}</td>
+      </tr>
+    </tbody>`;
+
+  const specialRows=["mögen","werden"].map(verb=>`
+    <tbody class="forms-group${modalSpecialOpen[verb]?" open":""}" data-special-group="${verb}">
+      <tr class="verb-group-row">
+        <td class="verb-group" colspan="4">
+          <span class="forms-chevron" data-toggle-special="${verb}" aria-label="${verb} auf- und zuklappen">›</span>
+          <button class="verb-choice" type="button" data-special-verb="${verb}">${verb}</button>
+        </td>
+      </tr>
+      <tr class="forms-detail-row">
+        <td colspan="4">${renderFormsDetail(verb,false)}</td>
+      </tr>
+    </tbody>`).join("");
+
+  $("formsModalBody").innerHTML=`
+    <p class="forms-intro">Klicke auf ein Verb der Gruppe, um seine konkreten Formen zu sehen.</p>
+    <table class="forms-table">
+      ${groupRow}
+      ${specialRows}
+    </table>`;
+}
+
+function setFormsMode(mode){
+  modalFormMode=mode;
+  modalFormGroupOpen=true;
+  renderFormsTable();
+}
+
+function openFormsTable(){
+  modalFormMode="scheme";
+  modalFormGroupOpen=true;
+  modalSpecialOpen={mögen:false,werden:false};
+  renderFormsTable();
+  const modal=$("formsModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+
+function closeFormsTable(){
+  const modal=$("formsModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+
+document.querySelectorAll("[data-forms-table]").forEach(button=>button.addEventListener("click",openFormsTable));
+$("formsClose").onclick=closeFormsTable;
+$("formsModal").onclick=e=>{if(e.target===$("formsModal"))closeFormsTable()};
+
+$("formsModalBody").addEventListener("click",e=>{
+  const reset=e.target.closest("[data-reset-forms]");
+  if(reset){
+    e.stopPropagation();
+    modalFormMode="scheme";
+    modalFormGroupOpen=true;
+    renderFormsTable();
+    return;
+  }
+
+  const verbButton=e.target.closest("[data-modal-verb]");
+  if(verbButton){
+    e.stopPropagation();
+    setFormsMode(verbButton.dataset.modalVerb);
+    return;
+  }
+
+  const groupToggle=e.target.closest("[data-toggle-group]");
+  if(groupToggle){
+    e.stopPropagation();
+    modalFormGroupOpen=!modalFormGroupOpen;
+    renderFormsTable();
+    return;
+  }
+
+  const specialToggle=e.target.closest("[data-toggle-special]");
+  const specialButton=e.target.closest("[data-special-verb]");
+  if(specialToggle || specialButton){
+    e.stopPropagation();
+    const verb=(specialToggle||specialButton).dataset.toggleSpecial ||
+      (specialToggle||specialButton).dataset.specialVerb;
+    modalSpecialOpen[verb]=!modalSpecialOpen[verb];
+    renderFormsTable();
+  }
+});
+
+
+
+async function loadKeyboardComponent(){
+  const mount=$("keyboardMount");
+  if(!mount)return false;
+  const r=await fetch("../../components/deutsch-keyboard-v2.60.html");
+  if(!r.ok)throw new Error("Keyboard component failed to load");
+  const text=await r.text();
+  const tpl=document.createElement("template");
+  tpl.innerHTML=text;
+  const scripts=[];
+  tpl.content.querySelectorAll("script").forEach(sc=>{scripts.push(sc.textContent);sc.remove()});
+  mount.appendChild(tpl.content);
+  for(const code of scripts){
+    const sc=document.createElement("script");
+    sc.textContent=code;
+    document.body.appendChild(sc);
+  }
+  const kb=$("keyboard");
+  window.deutschKeyboardReady=true;
+  if(!$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
+  return true;
+}
+loadKeyboardComponent().catch(e=>console.error(e));
+</script>
 </body>
 </html>
