@@ -125,10 +125,10 @@ html:not(.is-touch) .answerbox{cursor:text}
 </head>
 <body><main class="app">
 <section id="start" class="screen center">
-<div class="brand">Pronomen</div><h1>How many exercises?</h1>
-<p class="muted">Personal and possessive pronouns are mixed together.</p>
+<div class="brand">Pronomen</div><h1>Wie viele Übungen?</h1>
+<p class="muted">Personal- und Possessivpronomen gemischt.</p>
 <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="30">30</button><button class="size" data-n="50">50</button></div>
-<div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Table</button></div>
+<div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Tabelle</button></div>
 </section>
 
 <section id="game" class="screen hidden">
@@ -136,20 +136,20 @@ html:not(.is-touch) .answerbox{cursor:text}
 
 <div class="exercise">
 <div class="prompt"><div class="context" id="context"></div><div class="sentence" id="sentence"></div><div class="translation" id="translation"></div></div>
-<div class="answerbox" id="answerbox"><span class="placeholder">Type the missing form</span></div>
-<button class="check" id="check">Check</button>
-<div id="feedback" class="feedback hidden"><div class="given" id="given"></div><div class="correctText" id="correctText"></div><div class="skill" id="skill"></div><button class="continue" id="continue">Continue</button></div>
+<div class="answerbox" id="answerbox"><span class="placeholder">Fehlende Form eingeben</span></div>
+<button class="check" id="check">Prüfen</button>
+<div id="feedback" class="feedback hidden"><div class="given" id="given"></div><div class="correctText" id="correctText"></div><div class="skill" id="skill"></div><button class="continue" id="continue">Weiter</button></div>
 <div id="keyboardMount"></div>
-<div class="table-buttons in-session-tables"><button class="btn secondary" data-table="reference">Pronomen table</button></div>
+<div class="table-buttons in-session-tables"><button class="btn secondary" data-table="reference">Pronomen · Tabelle</button></div>
 </div></section>
 
 <section id="done" class="screen center hidden">
-<div class="brand brand-done">Pronomen</div><h1>Done for now.</h1><div class="done-score" id="score">0 / 10</div>
-<div class="done-note">Session complete. You can come back later without turning it into a marathon.</div>
+<div class="brand brand-done">Pronomen</div><h1>Fertig.</h1><div class="done-score" id="score">0 / 10</div>
+<div class="done-note">Gut gemacht – Runde geschafft!</div>
 <div class="weak hidden" id="weak"></div>
 <div class="done-actions">
-      <button class="btn" id="home">Start Again</button>
-      <button class="btn" id="homeBack">Back to Home</button>
+      <button class="btn" id="home">Noch eine Runde</button>
+      <button class="btn" id="homeBack">Zur Startseite</button>
     </div>
 </section>
 
@@ -295,7 +295,7 @@ function weightedDeck(count){
   return selected.sort(()=>Math.random()-0.5);
 }
 function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionAnswers={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
-function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=x.translation;$('answerbox').innerHTML='<span class="placeholder">Type the missing form</span>';$('answerbox').style.display='flex';$('check').style.removeProperty('display');$('feedback').className='feedback hidden';if(window.deutschKeyboardReady)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
+function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=x.translation;$('answerbox').innerHTML='<span class="placeholder">Fehlende Form eingeben</span>';$('answerbox').style.display='flex';$('check').style.removeProperty('display');$('feedback').className='feedback hidden';if(window.deutschKeyboardReady)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
 function paintAnswer(){ $('answerbox').textContent=answer||'' }
 function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;
 let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
@@ -341,7 +341,7 @@ function finish(){
   $('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;
   const current=currentStats();
   const arr=Object.entries(current).filter(([,v])=>v.weak).sort((a,b)=>b[1].errorRate-a[1].errorRate).slice(0,3);
-  if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Needs more practice</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
+  if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Noch üben</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
 }
 document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
   function goBackToHome(){
@@ -394,7 +394,7 @@ async function loadKeyboardComponent(){
  return true;
 }
 $('check').onclick=submit;
-const reference=`<table class="tbl"><tr><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessive*</th></tr><tr><td class="nom" data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer- (→ eur- before endings)</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)|Sie">ihr- / Ihr-</td></tr></table><div class="table-subtitle">Possessive endings</div><table class="tbl"><tr><th>Case</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">* Possessive: combine the base with the ending for the gender and case of the noun: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
+const reference=`<table class="tbl"><tr><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessiv*</th></tr><tr><td class="nom" data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer- (→ eur- vor Endungen)</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)|Sie">ihr- / Ihr-</td></tr></table><div class="table-subtitle">Possessiv-Endungen</div><table class="tbl"><tr><th>Kasus</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Plural">-er</td></tr></table><p class="muted">* Possessiv: Stamm + Endung nach Genus und Kasus des Nomens: sein Auto · seinen Bruder · seiner Schwester · seines Bruders.</p>`;
 
 function markWeakTable(){
   const weakKeys=currentStats();
