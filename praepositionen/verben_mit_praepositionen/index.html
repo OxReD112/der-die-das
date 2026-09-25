@@ -17,18 +17,18 @@
 <style>
 /* Registered so each half of the line/glow can fade between mint and red.
    --state-l = preposition (left half), --state-r = case (right half). */
-@property --state-l{syntax:"<color>";inherits:true;initial-value:#4fd7b3}
-@property --state-r{syntax:"<color>";inherits:true;initial-value:#4fd7b3}
+@property --state-l{syntax:"<color>";inherits:true;initial-value:#5bc8a4}
+@property --state-r{syntax:"<color>";inherits:true;initial-value:#5bc8a4}
 
 :root{
   /* ===== PALETTE (dark, default) — same as Pronomen ===== */
   --bg:#1b1b1d;
   --text:#f2f0ed;
   --muted:#8f8f94;
-  --tertiary-text:#aaa;
+  --tertiary-text:#c8c7c4;
   --secondary-text:#c8c7c4;
-  --mint:#4fd7b3;
-  --red:#ff6b73;
+  --mint:#5bc8a4;
+  --red:#ff7770;
 
   --key:#303033;
 
@@ -62,10 +62,10 @@
   --bg:#f6f4f1;
   --text:#242426;
   --muted:#727278;
-  --tertiary-text:#8a8a90;
+  --tertiary-text:#727278;
   --secondary-text:#55565b;
-  --mint:#2fae90;
-  --red:#e0454d;
+  --mint:#3fa68a;
+  --red:#e95e66;
 
   --key:#efece6;
 
@@ -295,6 +295,44 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 /* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
 #game.screen{padding-top:15px}
 #game .top{margin-left:-14px;margin-right:-14px;padding-bottom:14px}
+
+/* Question text sizes (Design Police): sentences 28px on phones */
+@media(max-width:699px){.sentence{font-size:28px}}
+/* Phone layout: question at a fixed height (same as Ortspräpositionen) instead of centred;
+   the keyboard is lifted by the same amount (see placeQuestion), so all distances stay as before.
+   The feedback still hangs below the question, so nothing moves when the answer appears. */
+html.is-touch:not(.vmp-measure) .qzone{align-items:flex-start}
+html.is-touch:not(.vmp-measure) .anchor{padding-top:var(--vmp-question-top,0px)}
+html.is-touch:not(.vmp-measure) .kbzone{padding-bottom:calc(max(4px,calc(33.5vh - 150px)) + var(--vmp-lift,0px));padding-bottom:calc(max(4px,calc(33.5dvh - 150px)) + var(--vmp-lift,0px))}
+
+/* ===== TYPING CURSOR · same blinking cursor as the typing fields in the other exercises (Design Police 2026-09-25) ===== */
+@keyframes gapCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+/* drawn on the blank itself (the invisible text field inside it has no height while empty) */
+.gap.typing:has(.gap-input:placeholder-shown)::after{content:"";position:absolute;left:50%;bottom:.14em;width:2px;height:1em;margin-left:-1px;
+  background:var(--text);animation:gapCaret 1.1s steps(1) infinite;pointer-events:none}
+.gap-input:placeholder-shown{caret-color:transparent}
+.gap-input::placeholder{color:transparent}
+@media(prefers-reduced-motion:reduce){.gap.typing:has(.gap-input:placeholder-shown)::after{animation:none}}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;padding:0;}
+#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#continue:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#game:not(.hidden)) .version-mark{display:none}
+
+/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
+   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
+#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
+#check:active{transform:scale(.97);filter:brightness(.94)}
 </style>
 </head>
 <body><main class="app">
@@ -358,7 +396,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
   </div>
 </section>
 
-<div class="version-mark">v3.8</div>
+<div class="version-mark">v3.11</div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
@@ -507,7 +545,7 @@ function render(){
   $("meaning").textContent = getTranslation(x, "meaning");
   $("gap").className = "gap typing";
   $("gap").innerHTML = '<span class="gap-mirror" id="gapMirror"></span>'
-    + '<input class="gap-input" id="gapInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" aria-label="Präposition">';
+    + '<input class="gap-input" id="gapInput" type="text" placeholder=" " autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" aria-label="Präposition">';
   const input = $("gapInput");
   if(IS_TOUCH){
     // Phones use the in-app German keyboard; never open the system keyboard.
@@ -532,6 +570,7 @@ function render(){
   if(window.deutschKeyboardReady) $("keyboard").classList.add("show");
   $("kbZone").classList.remove("kb-off");
   fitSentence();
+  placeQuestion();
   focusGap();
 }
 
@@ -592,6 +631,25 @@ function submitPrep(){
     showAnswer();
   }
 }
+
+// Phone: the question starts at the same height as in Ortspräpositionen (69px below the top bar's line).
+// The keyboard is lifted by exactly as much as the question was lifted, so the distances between the question,
+// the keyboard and the case buttons stay what they were when the question was centred.
+// Measured once per round (again on resize / when the keyboard has loaded), so nothing moves between questions.
+let vmpPlaced = false;
+function placeQuestion(force){
+  if(!IS_TOUCH || (vmpPlaced && !force)) return;
+  const root = document.documentElement;
+  root.classList.add("vmp-measure");                        // original layout: question centred, keyboard low
+  const centredTop = document.querySelector(".anchor").getBoundingClientRect().top;
+  root.classList.remove("vmp-measure");
+  const target = document.querySelector("#game .top").getBoundingClientRect().bottom + 69;
+  const zoneTop = document.querySelector(".qzone").getBoundingClientRect().top;
+  root.style.setProperty("--vmp-question-top", Math.max(0, Math.round(target - zoneTop)) + "px");
+  root.style.setProperty("--vmp-lift", Math.max(0, Math.round(centredTop - target)) + "px");
+  vmpPlaced = true;
+}
+window.addEventListener("resize", () => { if(!$("game").classList.contains("hidden")) placeQuestion(true); });
 
 // Step 2 — case (asked for the CORRECT preposition).
 function chooseCase(c){
@@ -724,6 +782,7 @@ async function loadKeyboardComponent(){
   mount.appendChild(tpl.content);
   for(const code of scripts){ const s = document.createElement("script"); s.textContent = code; document.body.appendChild(s); }
   window.deutschKeyboardReady = true;
+  if(!$("game").classList.contains("hidden")) placeQuestion(true);
   if(phase === "type") $("keyboard").classList.add("show");
 }
 
