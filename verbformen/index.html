@@ -10,36 +10,36 @@
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#17181a">
+  <meta name="theme-color" content="#1b1b1d">
   <title>Verbformen.</title>
   <style>
     *{box-sizing:border-box}
 
     :root{
-      --bg:#17181a;
-      --cream:#eee7dc;
-      --muted:#777875;
+      --bg:#1b1b1d;
+      --cream:#f2f0ed;
+      --muted:#8f8f94;
       --card:rgba(255,255,255,.018);
       --line:rgba(255,255,255,.08);
-      --heading:#a5a19a;
-      --chevron:#565856;
+      --heading:var(--cream);
+      --chevron:var(--muted);
       --choice-active-bg:rgba(255,255,255,.028);
       --choice-active-border:rgba(255,255,255,.12);
-      --subtitle:rgba(190,189,186,.52);
+      --subtitle:var(--muted);
       --version-text:#55565a;
     }
 
     [data-theme="light"]{
-      --bg:#f6f3ee;
-      --cream:#2b2a27;
-      --muted:#8a8a86;
+      --bg:#f6f4f1;
+      --cream:#242426;
+      --muted:#727278;
       --card:rgba(0,0,0,.03);
       --line:rgba(0,0,0,.10);
-      --heading:#8f8b83;
-      --chevron:#9c9c98;
+      --heading:var(--cream);
+      --chevron:var(--muted);
       --choice-active-bg:rgba(0,0,0,.045);
       --choice-active-border:rgba(0,0,0,.14);
-      --subtitle:rgba(60,58,54,.55);
+      --subtitle:var(--muted);
       --version-text:rgba(43,42,39,.45);
     }
 
@@ -50,6 +50,7 @@
       color:var(--cream);
       font-family:Georgia,"Times New Roman",serif;
       -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
     body{
@@ -203,6 +204,24 @@
     @media(prefers-reduced-motion:reduce){
       .choice{transition:none}
     }
+  
+    /* ===== CHAPTER PICKER · shared design (Design Police 2026-09-25) =====
+       Same palette and button logic as the exercise start screens:
+       cards are a filled surface, lighter than the background, lifted by a soft shadow, no outline. */
+    :root{
+      --pick-card-bg:#2a2a2d;
+      --pick-card-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+      --pick-version:rgba(255,255,255,.24);
+    }
+    [data-theme="light"]{
+      --pick-card-bg:#fff;
+      --pick-card-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+      --pick-version:rgba(36,36,38,.34);
+    }
+    .intro{font-size:16px}
+    .choice{border:0;background:var(--pick-card-bg);box-shadow:var(--pick-card-shadow);transition:transform .12s ease,filter .12s ease}
+    .choice:active{transform:scale(.97);filter:brightness(.94);background:var(--pick-card-bg);border-color:transparent}
+    .version{bottom:calc(env(safe-area-inset-bottom) + 28px);font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--pick-version)}
   </style>
 </head>
 <body>
@@ -213,19 +232,19 @@
     </header>
 
     <section class="choices" aria-label="Übungen">
-      <button class="choice" type="button" data-target="partizipII/?v=5">
+      <button class="choice" type="button" data-target="partizipII/?v=8">
         <div class="choice-title">Partizip II</div>
         <div class="choice-subtitle">Unregelmäßige Formen</div>
       </button>
 
-      <button class="choice" type="button" data-target="modalverben/?v=6">
+      <button class="choice" type="button" data-target="modalverben/?v=9">
         <div class="choice-title">Modalverben + werden</div>
         <div class="choice-subtitle">Formen im Kontext</div>
       </button>
     </section>
   </main>
 
-  <div class="version">Verbformen · Auswahl</div>
+  <div class="version">v3</div>
 
   <script>
     document.querySelectorAll("[data-target]").forEach(button=>{
