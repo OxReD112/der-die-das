@@ -44,7 +44,7 @@ const VERBS = [
   { infinitive: "sitzen", pattern: "i - a - e", translation: "сидеть", preterite: "saß", participle: "gesessen", auxiliary: "haben", example: "Wir haben draußen gesessen.", priority: 2 },
   { infinitive: "sprechen", pattern: "e - a - o", translation: "говорить", preterite: "sprach", participle: "gesprochen", auxiliary: "haben", example: "Ich habe mit meiner Chefin gesprochen.", priority: 2 },
   { infinitive: "stehen", pattern: "e - a - a", translation: "стоять", preterite: "stand", participle: "gestanden", auxiliary: "haben", example: "Das Auto hat vor dem Haus gestanden.", priority: 2 },
-  { infinitive: "steigen", pattern: "ei - ie - ie", translation: "подниматься", preterite: "stieg", participle: "gestiegen", auxiliary: "sein", example: "Die Preise sind gestiegen.", priority: 1 },
+  { infinitive: "steigen", pattern: "ei - ie - ie", translation: "подниматься; расти (о ценах)", preterite: "stieg", participle: "gestiegen", auxiliary: "sein", example: "Die Preise sind gestiegen.", priority: 1 },
   { infinitive: "sterben", pattern: "e - a - o", translation: "умирать", preterite: "starb", participle: "gestorben", auxiliary: "sein", example: "Der Schauspieler ist 2020 gestorben.", priority: 1 },
   { infinitive: "tragen", pattern: "a - u - a", translation: "носить; нести", preterite: "trug", participle: "getragen", auxiliary: "haben", example: "Sie hat ein schwarzes Kleid getragen.", priority: 1 },
   { infinitive: "treffen", pattern: "e - a - o", translation: "встречать", preterite: "traf", participle: "getroffen", auxiliary: "haben", example: "Ich habe gestern Freunde getroffen.", priority: 1 },
