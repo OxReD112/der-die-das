@@ -19,7 +19,7 @@
 <style>
 *{box-sizing:border-box}
 :root{
-  --bg:#17181a;--panel:#1f2022;--panel-2:#252629;--text:#eee9e0;--muted:#8c8b89;
+  --bg:#1b1b1d;--panel:#1f2022;--panel-2:#252629;--text:#f2f0ed;--muted:#8f8f94;
   --text-secondary:#b9b5ae;--line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.20);--top-title:rgba(255,255,255,.48);
   --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
   --cta-bg:#ece6dc;--cta-text:#1b1c1e;
@@ -39,7 +39,7 @@
   --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(255,119,112,.36) 0%,rgba(255,119,112,.18) 35%,rgba(255,119,112,.06) 68%,rgba(255,119,112,0) 100%);
 }
 [data-theme="light"]{
-  --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#252528;--muted:#727278;
+  --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#242426;--muted:#727278;
   --text-secondary:#55565b;--line:rgba(0,0,0,.09);--line-strong:rgba(0,0,0,.20);--top-title:rgba(37,37,40,.48);
   --progress:rgba(32,32,35,.28);--mint:#55b99a;--coral:#ef666c;--blue:#5d8fe5;
   --cta-bg:#252528;--cta-text:#f5f2ec;
@@ -59,7 +59,7 @@
   --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(239,102,108,.25) 0%,rgba(239,102,108,.11) 35%,rgba(239,102,108,.04) 68%,rgba(239,102,108,0) 100%);
 }
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 button{font:inherit;-webkit-tap-highlight-color:transparent}
 .app{width:min(100%,620px);margin:0 auto;padding:clamp(20px,5vw,38px) 18px 36px;min-height:100vh}
 .hidden{display:none!important}
@@ -69,10 +69,10 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 .session-screen{padding-top:56px}
 .session-screen h1,.end-screen h1{line-height:1.05;letter-spacing:-.04em;margin:0 0 11px}
 .session-screen h1{font-size:clamp(28px,8.6vw,36px)}
-.end-screen h1{font-size:54px;margin-bottom:24px}
+.end-screen h1{font-size:58px;letter-spacing:-.05em;margin-bottom:24px}
 .session-screen p{color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 28px;max-width:390px}
-.end-score{font-size:36px;line-height:1;font-weight:650;letter-spacing:-1.5px;margin:0 0 28px}
-.end-note{color:var(--muted);font-size:14px;line-height:1.4;margin:0 0 28px;max-width:390px}
+.end-score{font-size:34px;line-height:1;font-weight:700;letter-spacing:-.03em;margin:0 0 28px}
+.end-note{color:var(--muted);font-size:16px;line-height:1.4;margin:0 0 28px;max-width:390px}
 .finish-actions{width:min(100%,360px)}
 .finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font-size:16px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .finish-actions .again{background:var(--secondary-bg);color:var(--secondary-text);border:1px solid var(--line)}
@@ -198,6 +198,73 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 .ofoot{margin-top:12px;font-size:14px;line-height:1.5}
 .ofoot span{color:var(--muted)}
 .onote{margin-top:10px;font-size:12px;color:var(--muted)}
+
+/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
+   Same colours, button shape, press effect, table button and version mark in every exercise.
+   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
+:root{
+  --start-btn-bg:#2a2a2d;
+  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
+  --start-line:rgba(255,255,255,.10);
+  --start-table-text:#c8c7c4;
+  --start-version:rgba(255,255,255,.24);
+}
+[data-theme="light"]{
+  --start-btn-bg:#fff;
+  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
+  --start-line:rgba(0,0,0,.10);
+  --start-table-text:#55565b;
+  --start-version:rgba(36,36,38,.34);
+}
+#sessionScreen .session-options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
+#sessionScreen .session-option{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
+  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+#sessionScreen .session-option:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#sessionScreen .session-option:active{transform:scale(.97);filter:brightness(.94)}
+#sessionScreen .table-btn{margin-top:28px;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
+  border-radius:17px;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#sessionScreen .table-btn:active{transform:scale(.97);filter:brightness(.94)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
+
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#endScreen .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#endScreen #again,#endScreen #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#endScreen #again{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#endScreen #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#endScreen #again:active,#endScreen #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+#game .top-title{font-size:18px;font-weight:700;color:var(--muted)}
+#game .counter{font-size:14px}
+#game .progress{background:var(--bar-track)}
+#game .progress i{background:var(--muted)}
+/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
+#game .top{margin:13px 0 0}
+#game .top-row{align-items:center}
+#game .progress{margin-top:11px}
 </style>
 </head>
 <body>
@@ -242,7 +309,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
-<div class="version-mark">v10</div>
+<div class="version-mark">v14</div>
 <div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
   <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
   <div id="otable"></div>
