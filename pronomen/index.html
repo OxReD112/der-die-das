@@ -154,10 +154,10 @@ html:not(.is-touch) .answerbox{cursor:text}
 </section>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version">v7.23 · balance</div>
+<div class="version">v7.24 · effectiveness</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
-<script src="pronouns.js?v=4"></script>
+<script src="pronouns.js?v=5"></script>
 <script src="../components/deutsch-progress-v1.js"></script>
 <script>
 const $=x=>document.getElementById(x), data=window.PRONOUN_EXERCISES||[];
@@ -220,12 +220,12 @@ function recordPronomenAnswer(){
 }
 
 // ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====
-// 45 categories: 18 personal + 4 reflexive (person × case), 8 possessive owners (ich → mein …),
+// 41 categories: 18 personal (person × case), 8 possessive owners (ich → mein …),
 // 15 possessive endings (case × gender, e.g. "Dativ · Maskulin → -em").
 // A possessive sentence counts for its owner AND its ending — same logic as the existing stats:
 // owner = right stem; ending = only judged when the stem was right.
 // Weight = sentences covered (a possessive sentence gives ½ to its owner, ½ to its ending),
-// so the bar = share of the 115 sentences' grammar I reliably know.
+// so the bar = share of the 103 sentences' grammar I reliably know.
 const PROGRESS_ID='pronomen';
 const hasProgress=()=>typeof window.DeutschProgress==='object';
 // "euer" drops its second e before endings: eure, eurem, euren.

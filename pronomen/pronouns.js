@@ -13,12 +13,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · ich → mich",
-    "context": "Ich bin gleich zu Hause.",
-    "sentence": "Ruf ___ später an!",
+    "context": "Ich warte am Eingang.",
+    "sentence": "Holst du ___ dort ab?",
     "answer": "mich",
     "translation": {
-      "ru": "Позвони мне позже!",
-      "en": "Call me later!"
+      "ru": "Ты заберёшь меня там?",
+      "en": "Will you pick me up there?"
     }
   },
   {
@@ -35,12 +35,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Dativ · ich → mir",
-    "context": "Ich erzähle dir etwas Wichtiges.",
-    "sentence": "Hör ___ bitte zu!",
+    "context": "Mein Kaffee ist leer.",
+    "sentence": "Bringst du ___ noch einen?",
     "answer": "mir",
     "translation": {
-      "ru": "Послушай меня, пожалуйста!",
-      "en": "Please listen to me!"
+      "ru": "Принесёшь мне ещё один?",
+      "en": "Will you bring me another one?"
     }
   },
   {
@@ -57,23 +57,23 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · du → dich",
-    "context": "Du kommst heute später.",
-    "sentence": "Ich rufe ___ am Abend an.",
+    "context": "Du bist krank?",
+    "sentence": "Ich besuche ___ morgen.",
     "answer": "dich",
     "translation": {
-      "ru": "Я позвоню тебе вечером.",
-      "en": "I'll call you in the evening."
+      "ru": "Я навещу тебя завтра.",
+      "en": "I'll visit you tomorrow."
     }
   },
   {
     "type": "personal",
     "skill": "Personal · Dativ · du → dir",
-    "context": "Du hast heute Geburtstag.",
-    "sentence": "Ich gratuliere ___!",
+    "context": "Du hast morgen Geburtstag.",
+    "sentence": "Ich gebe ___ ein Geschenk.",
     "answer": "dir",
     "translation": {
-      "ru": "Поздравляю тебя!",
-      "en": "Happy birthday! (I congratulate you)"
+      "ru": "Я дарю тебе подарок.",
+      "en": "I'm giving you a present."
     }
   },
   {
@@ -90,12 +90,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · er → ihn",
-    "context": "Max hat eine Wohnung direkt am See.",
-    "sentence": "Ich beneide ___!",
+    "context": "Paul ist mein Nachbar.",
+    "sentence": "Ich sehe ___ jeden Morgen.",
     "answer": "ihn",
     "translation": {
-      "ru": "Я ему завидую!",
-      "en": "I envy him!"
+      "ru": "Я вижу его каждое утро.",
+      "en": "I see him every morning."
     }
   },
   {
@@ -111,13 +111,24 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "personal",
+    "skill": "Personal · Akkusativ · er → ihn",
+    "context": "Mein Opa wohnt allein.",
+    "sentence": "Ich besuche ___ jeden Sonntag.",
+    "answer": "ihn",
+    "translation": {
+      "ru": "Я навещаю его каждое воскресенье.",
+      "en": "I visit him every Sunday."
+    }
+  },
+  {
+    "type": "personal",
     "skill": "Personal · Dativ · er → ihm",
-    "context": "Paul war gestern auch im Supermarkt.",
-    "sentence": "Ich bin ___ an der Kasse begegnet.",
+    "context": "Paul braucht Hilfe.",
+    "sentence": "Ich helfe ___ heute.",
     "answer": "ihm",
     "translation": {
-      "ru": "Я встретила его на кассе.",
-      "en": "I ran into him at the checkout."
+      "ru": "Я помогаю ему сегодня.",
+      "en": "I'm helping him today."
     }
   },
   {
@@ -133,13 +144,24 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "personal",
+    "skill": "Personal · Dativ · er → ihm",
+    "context": "Tom hat morgen Geburtstag.",
+    "sentence": "Ich kaufe ___ ein Buch.",
+    "answer": "ihm",
+    "translation": {
+      "ru": "Я куплю ему книгу.",
+      "en": "I'll buy him a book."
+    }
+  },
+  {
+    "type": "personal",
     "skill": "Personal · Akkusativ · sie → sie",
-    "context": "Anna wartet auf deine Antwort.",
-    "sentence": "Ruf ___ doch an!",
+    "context": "Anna wartet draußen.",
+    "sentence": "Ich hole ___ gleich ab.",
     "answer": "sie",
     "translation": {
-      "ru": "Позвони же ей!",
-      "en": "Why don't you call her?"
+      "ru": "Я сейчас её заберу.",
+      "en": "I'll pick her up in a moment."
     }
   },
   {
@@ -173,6 +195,17 @@ window.PRONOUN_EXERCISES = [
     "translation": {
       "ru": "Я принесу ей куртку.",
       "en": "I'll bring her a jacket."
+    }
+  },
+  {
+    "type": "personal",
+    "skill": "Personal · Dativ · sie → ihr",
+    "context": "Maria versteht die Aufgabe nicht.",
+    "sentence": "Ich erkläre ___ alles.",
+    "answer": "ihr",
+    "translation": {
+      "ru": "Я ей всё объясню.",
+      "en": "I'll explain everything to her."
     }
   },
   {
@@ -321,23 +354,23 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · sie(pl.) → sie",
-    "context": "Die Kinder schlafen schon.",
-    "sentence": "Bitte stör ___ nicht!",
+    "context": "Die Kinder spielen draußen.",
+    "sentence": "Ich rufe ___ zum Essen.",
     "answer": "sie",
     "translation": {
-      "ru": "Пожалуйста, не мешай им!",
-      "en": "Please don't disturb them!"
+      "ru": "Я зову их есть.",
+      "en": "I'm calling them in to eat."
     }
   },
   {
     "type": "personal",
     "skill": "Personal · Dativ · sie(pl.) → ihnen",
-    "context": "Die Touristen kennen den Weg.",
-    "sentence": "Wir folgen ___ einfach.",
+    "context": "Meine Eltern brauchen Hilfe.",
+    "sentence": "Ich helfe ___ am Wochenende.",
     "answer": "ihnen",
     "translation": {
-      "ru": "Мы просто пойдём за ними.",
-      "en": "We'll just follow them."
+      "ru": "Я помогаю им на выходных.",
+      "en": "I'm helping them on the weekend."
     }
   },
   {
@@ -353,13 +386,24 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "personal",
+    "skill": "Personal · Dativ · sie(pl.) → ihnen",
+    "context": "Unsere Gäste kommen aus Spanien.",
+    "sentence": "Wir zeigen ___ die Stadt.",
+    "answer": "ihnen",
+    "translation": {
+      "ru": "Мы покажем им город.",
+      "en": "We'll show them the city."
+    }
+  },
+  {
+    "type": "personal",
     "skill": "Personal · Akkusativ · Sie → Sie",
-    "context": "Herr Klein, haben Sie eine Minute?",
-    "sentence": "Darf ich ___ kurz stören?",
+    "context": "Frau Berger, Sie sind heute im Büro?",
+    "sentence": "Dann besuche ich ___ um zehn.",
     "answer": "Sie",
     "translation": {
-      "ru": "Можно Вам ненадолго помешать?",
-      "en": "May I disturb you for a moment?"
+      "ru": "Тогда я зайду к Вам в десять.",
+      "en": "Then I'll visit you at ten."
     }
   },
   {
@@ -376,12 +420,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Dativ · Sie → Ihnen",
-    "context": "Frau Berger, Sie haben mir sehr geholfen.",
-    "sentence": "Ich danke ___ sehr!",
+    "context": "Frau Berger, Sie haben eine Frage?",
+    "sentence": "Ich antworte ___ gleich.",
     "answer": "Ihnen",
     "translation": {
-      "ru": "Я Вас очень благодарю!",
-      "en": "Thank you very much!"
+      "ru": "Я сейчас Вам отвечу.",
+      "en": "I'll answer you in a moment."
     }
   },
   {
@@ -397,140 +441,19 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "personal",
-    "skill": "Reflexiv · Akkusativ · ich → mich",
-    "context": "Ich bin gerade aufgestanden.",
-    "sentence": "Ich wasche ___ schnell.",
-    "answer": "mich",
+    "skill": "Personal · Dativ · Sie → Ihnen",
+    "context": "Frau Berger, Sie haben heute Geburtstag.",
+    "sentence": "Ich wünsche ___ alles Gute!",
+    "answer": "Ihnen",
     "translation": {
-      "ru": "Я быстро умываюсь.",
-      "en": "I'm having a quick wash."
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Akkusativ · ich → mich",
-    "context": "Es ist kalt draußen.",
-    "sentence": "Ich ziehe ___ warm an.",
-    "answer": "mich",
-    "translation": {
-      "ru": "Я тепло одеваюсь.",
-      "en": "I'm dressing warmly."
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Akkusativ · ich → mich",
-    "context": "Ich bin neu im Team.",
-    "sentence": "Darf ich ___ kurz vorstellen?",
-    "answer": "mich",
-    "translation": {
-      "ru": "Можно мне коротко представиться?",
-      "en": "May I briefly introduce myself?"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · ich → mir",
-    "context": "Ich habe gerade gegessen.",
-    "sentence": "Ich wasche ___ die Hände.",
-    "answer": "mir",
-    "translation": {
-      "ru": "Я мою руки.",
-      "en": "I'm washing my hands."
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · ich → mir",
-    "context": "Wir gehen gleich raus.",
-    "sentence": "Ich ziehe ___ eine Jacke an.",
-    "answer": "mir",
-    "translation": {
-      "ru": "Я надеваю куртку.",
-      "en": "I'm putting on a jacket."
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · ich → mir",
-    "context": "Die Telefonnummer ist wichtig.",
-    "sentence": "Ich merke ___ die Nummer.",
-    "answer": "mir",
-    "translation": {
-      "ru": "Я запомню этот номер.",
-      "en": "I'll remember the number."
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Akkusativ · du → dich",
-    "context": "Du bist ganz nass.",
-    "sentence": "Zieh ___ schnell um!",
-    "answer": "dich",
-    "translation": {
-      "ru": "Быстро переоденься!",
-      "en": "Get changed quickly!"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Akkusativ · du → dich",
-    "context": "Du hast die Prüfung bestanden.",
-    "sentence": "Freust du ___?",
-    "answer": "dich",
-    "translation": {
-      "ru": "Ты рад(а)?",
-      "en": "Are you happy?"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Akkusativ · du → dich",
-    "context": "Du bist neu hier.",
-    "sentence": "Stell ___ doch kurz vor!",
-    "answer": "dich",
-    "translation": {
-      "ru": "Представься коротко!",
-      "en": "Go on, introduce yourself briefly!"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · du → dir",
-    "context": "Du gehst gleich ins Bett.",
-    "sentence": "Putz ___ noch die Zähne!",
-    "answer": "dir",
-    "translation": {
-      "ru": "Почисти ещё зубы!",
-      "en": "Brush your teeth before bed!"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · du → dir",
-    "context": "Du hast bald Geburtstag.",
-    "sentence": "Was wünschst du ___?",
-    "answer": "dir",
-    "translation": {
-      "ru": "Что ты хочешь себе в подарок?",
-      "en": "What would you like for your birthday?"
-    }
-  },
-  {
-    "type": "personal",
-    "skill": "Reflexiv · Dativ · du → dir",
-    "context": "Du ziehst nach Berlin?",
-    "sentence": "Kannst du ___ das wirklich vorstellen?",
-    "answer": "dir",
-    "translation": {
-      "ru": "Ты правда можешь себе это представить?",
-      "en": "Can you really imagine that?"
+      "ru": "Желаю Вам всего хорошего!",
+      "en": "I wish you all the best!"
     }
   },
   {
     "type": "possessive",
     "skill": "Possessiv · ich → mein · Nominativ",
-    "context": "Ich habe ein Fahrrad.",
+    "context": "Das Fahrrad vor der Tür gehört mir.",
     "sentence": "___ Fahrrad ist neu.",
     "answer": "mein",
     "translation": {
@@ -554,19 +477,19 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · ich → mein · Akkusativ",
-    "context": "Ich habe einen Bruder.",
-    "sentence": "Ich besuche ___ Bruder morgen.",
+    "context": "Der Koffer steht noch im Hotel.",
+    "sentence": "Ich hole ___ Koffer später ab.",
     "answer": "meinen",
     "translation": {
-      "ru": "Я навещаю моего брата завтра.",
-      "en": "I'm visiting my brother tomorrow."
+      "ru": "Я заберу свой чемодан позже.",
+      "en": "I'll pick up my suitcase later."
     },
     "gender": "Maskulin"
   },
   {
     "type": "possessive",
     "skill": "Possessiv · ich → mein · Akkusativ",
-    "context": "Ich habe eine Tasche.",
+    "context": "Die Tasche war eben noch hier.",
     "sentence": "Ich suche ___ Tasche.",
     "answer": "meine",
     "translation": {
@@ -613,18 +536,6 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "possessive",
-    "skill": "Possessiv · ich → mein · Dativ",
-    "context": "Ich habe gute Freunde.",
-    "sentence": "Ich schreibe ___ Freunden oft.",
-    "answer": "meinen",
-    "translation": {
-      "ru": "Я часто пишу моим друзьям.",
-      "en": "I often write to my friends."
-    },
-    "gender": "Plural"
-  },
-  {
-    "type": "possessive",
     "skill": "Possessiv · ich → mein · Genitiv",
     "context": "Ich habe einen Bruder.",
     "sentence": "Das ist das Auto ___ Bruders.",
@@ -650,7 +561,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · du → dein · Nominativ",
-    "context": "Du hast eine neue Jacke.",
+    "context": "Du trägst heute die rote Jacke.",
     "sentence": "___ Jacke gefällt mir.",
     "answer": "deine",
     "translation": {
@@ -662,7 +573,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · du → dein · Akkusativ",
-    "context": "Du hast einen Termin.",
+    "context": "Der Termin beim Arzt war heute, oder?",
     "sentence": "Hast du ___ Termin abgesagt?",
     "answer": "deinen",
     "translation": {
@@ -674,7 +585,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · du → dein · Akkusativ",
-    "context": "Du hast ein Handy.",
+    "context": "Das Handy sieht ganz neu aus.",
     "sentence": "Wo hast du ___ Handy gekauft?",
     "answer": "dein",
     "translation": {
@@ -694,18 +605,6 @@ window.PRONOUN_EXERCISES = [
       "en": "Have you got your keys with you?"
     },
     "gender": "Plural"
-  },
-  {
-    "type": "possessive",
-    "skill": "Possessiv · du → dein · Dativ",
-    "context": "Du hast eine neue Kollegin.",
-    "sentence": "Ich spreche mit ___ neuen Kollegin.",
-    "answer": "deiner",
-    "translation": {
-      "ru": "Я разговариваю с твоей новой коллегой.",
-      "en": "I'm talking to your new colleague."
-    },
-    "gender": "Feminin"
   },
   {
     "type": "possessive",
@@ -746,7 +645,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · er → sein · Nominativ",
-    "context": "Paul hat ein Auto.",
+    "context": "Paul fährt immer das rote Auto.",
     "sentence": "Das ist ___ Auto.",
     "answer": "sein",
     "translation": {
@@ -758,7 +657,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · er → sein · Akkusativ",
-    "context": "Paul hat einen Hund.",
+    "context": "Paul fährt weg – und der Hund?",
     "sentence": "Er nimmt ___ Hund mit.",
     "answer": "seinen",
     "translation": {
@@ -770,7 +669,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · er → sein · Akkusativ",
-    "context": "Paul hat eine Brille zum Lesen.",
+    "context": "Paul will lesen, aber die Brille ist weg.",
     "sentence": "Er findet ___ Brille nicht.",
     "answer": "seine",
     "translation": {
@@ -817,18 +716,6 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "possessive",
-    "skill": "Possessiv · er → sein · Dativ",
-    "context": "Paul hat viele Kollegen.",
-    "sentence": "Er isst mit ___ Kollegen zu Mittag.",
-    "answer": "seinen",
-    "translation": {
-      "ru": "Он обедает со своими коллегами.",
-      "en": "He has lunch with his colleagues."
-    },
-    "gender": "Plural"
-  },
-  {
-    "type": "possessive",
     "skill": "Possessiv · er → sein · Genitiv",
     "context": "Paul hat eine Schwester.",
     "sentence": "Das ist die Wohnung ___ Schwester.",
@@ -838,6 +725,18 @@ window.PRONOUN_EXERCISES = [
       "en": "This is his sister's flat."
     },
     "gender": "Feminin"
+  },
+  {
+    "type": "possessive",
+    "skill": "Possessiv · er → sein · Genitiv",
+    "context": "Paul arbeitet in einer Bank.",
+    "sentence": "Das Büro ___ Chefs ist im dritten Stock.",
+    "answer": "seines",
+    "translation": {
+      "ru": "Кабинет его начальника на третьем этаже.",
+      "en": "His boss's office is on the third floor."
+    },
+    "gender": "Maskulin"
   },
   {
     "type": "possessive",
@@ -854,7 +753,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Nominativ",
-    "context": "Anna hat ein Zimmer.",
+    "context": "Anna zeigt mir das Zimmer.",
     "sentence": "___ Zimmer ist sehr hell.",
     "answer": "ihr",
     "translation": {
@@ -866,12 +765,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Akkusativ",
-    "context": "Anna hat einen Hund.",
-    "sentence": "Ich sehe ___ Hund oft im Park.",
+    "context": "Anna sucht überall – der Schlüssel ist weg.",
+    "sentence": "Ich finde ___ Schlüssel auch nicht.",
     "answer": "ihren",
     "translation": {
-      "ru": "Я часто вижу её собаку в парке.",
-      "en": "I often see her dog in the park."
+      "ru": "Я тоже не могу найти её ключ.",
+      "en": "I can't find her key either."
     },
     "gender": "Maskulin"
   },
@@ -925,18 +824,6 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "possessive",
-    "skill": "Possessiv · sie → ihr · Dativ",
-    "context": "Anna hat zwei Kinder.",
-    "sentence": "Sie hilft ___ Kindern bei den Hausaufgaben.",
-    "answer": "ihren",
-    "translation": {
-      "ru": "Она помогает своим детям с домашним заданием.",
-      "en": "She helps her children with their homework."
-    },
-    "gender": "Plural"
-  },
-  {
-    "type": "possessive",
     "skill": "Possessiv · sie → ihr · Genitiv",
     "context": "Anna hat eine Tochter.",
     "sentence": "Das ist das Zimmer ___ Tochter.",
@@ -950,7 +837,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · wir → unser · Nominativ",
-    "context": "Wir haben eine Wohnung.",
+    "context": "Wir wohnen im Zentrum. Die Wohnung hat nur zwei Zimmer.",
     "sentence": "___ Wohnung ist klein.",
     "answer": "unsere",
     "translation": {
@@ -962,7 +849,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · wir → unser · Akkusativ",
-    "context": "Wir haben einen Chef.",
+    "context": "Der Chef ist aus dem Urlaub zurück.",
     "sentence": "Wir treffen ___ Chef morgen.",
     "answer": "unseren",
     "translation": {
@@ -974,7 +861,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · wir → unser · Akkusativ",
-    "context": "Wir haben ein Auto.",
+    "context": "Wir fahren jetzt Fahrrad. Das Auto brauchen wir nicht mehr.",
     "sentence": "Wir verkaufen ___ Auto.",
     "answer": "unser",
     "translation": {
@@ -1006,18 +893,6 @@ window.PRONOUN_EXERCISES = [
       "en": "We're talking to our boss."
     },
     "gender": "Maskulin"
-  },
-  {
-    "type": "possessive",
-    "skill": "Possessiv · wir → unser · Dativ",
-    "context": "Wir haben eine Nachbarin.",
-    "sentence": "Wir helfen ___ Nachbarin oft.",
-    "answer": "unserer",
-    "translation": {
-      "ru": "Мы часто помогаем нашей соседке.",
-      "en": "We often help our neighbour."
-    },
-    "gender": "Feminin"
   },
   {
     "type": "possessive",
@@ -1058,12 +933,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · ihr → euer · Nominativ",
-    "context": "Ihr habt eine Wohnung.",
-    "sentence": "___ Wohnung ist sehr schön.",
+    "context": "Ihr wohnt jetzt am Park? Die Wohnung habe ich noch nicht gesehen.",
+    "sentence": "Wie groß ist ___ Wohnung?",
     "answer": "eure",
     "translation": {
-      "ru": "Ваша квартира очень красивая.",
-      "en": "Your flat is very nice."
+      "ru": "Какого размера ваша квартира?",
+      "en": "How big is your flat?"
     },
     "gender": "Feminin"
   },
@@ -1082,19 +957,19 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · ihr → euer · Akkusativ",
-    "context": "Ihr habt einen Hund.",
-    "sentence": "Nehmt ihr ___ Hund mit?",
+    "context": "Ihr fahrt ans Meer – und der Kater?",
+    "sentence": "Nehmt ihr ___ Kater mit?",
     "answer": "euren",
     "translation": {
-      "ru": "Вы берёте свою собаку с собой?",
-      "en": "Are you taking your dog with you?"
+      "ru": "Вы берёте своего кота с собой?",
+      "en": "Are you taking your cat with you?"
     },
     "gender": "Maskulin"
   },
   {
     "type": "possessive",
     "skill": "Possessiv · ihr → euer · Akkusativ",
-    "context": "Ihr habt eine Idee.",
+    "context": "Die Idee ist gut, aber ich verstehe sie nicht ganz.",
     "sentence": "Erklärt ihr ___ Idee noch einmal?",
     "answer": "eure",
     "translation": {
@@ -1178,12 +1053,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie(pl.) → ihr · Akkusativ",
-    "context": "Meine Eltern haben ein Auto.",
-    "sentence": "Sie verkaufen ___ Auto.",
+    "context": "Das Haus ist zu groß für meine Eltern.",
+    "sentence": "Sie verkaufen ___ Haus.",
     "answer": "ihr",
     "translation": {
-      "ru": "Они продают свою машину.",
-      "en": "They're selling their car."
+      "ru": "Они продают свой дом.",
+      "en": "They're selling their house."
     },
     "gender": "Neutrum"
   },
@@ -1250,19 +1125,19 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · Sie → Ihr · Nominativ",
-    "context": "Herr Klein, Sie haben eine Tochter.",
-    "sentence": "___ Tochter wartet draußen.",
+    "context": "Frau Meier, die Rechnung ist fertig.",
+    "sentence": "___ Rechnung liegt an der Kasse.",
     "answer": "Ihre",
     "translation": {
-      "ru": "Ваша дочь ждёт снаружи.",
-      "en": "Your daughter is waiting outside."
+      "ru": "Ваш счёт лежит на кассе.",
+      "en": "Your bill is at the till."
     },
     "gender": "Feminin"
   },
   {
     "type": "possessive",
     "skill": "Possessiv · Sie → Ihr · Akkusativ",
-    "context": "Frau Meier, Sie haben einen Ausweis.",
+    "context": "Frau Meier, der Ausweis ist Pflicht.",
     "sentence": "Bitte zeigen Sie ___ Ausweis.",
     "answer": "Ihren",
     "translation": {
@@ -1274,7 +1149,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · Sie → Ihr · Akkusativ",
-    "context": "Herr Klein, Sie haben ein Ticket.",
+    "context": "Herr Klein, das Ticket brauchen Sie im Zug.",
     "sentence": "Haben Sie ___ Ticket dabei?",
     "answer": "Ihr",
     "translation": {
@@ -1294,18 +1169,6 @@ window.PRONOUN_EXERCISES = [
       "en": "Please bring your documents."
     },
     "gender": "Plural"
-  },
-  {
-    "type": "possessive",
-    "skill": "Possessiv · Sie → Ihr · Dativ",
-    "context": "Frau Meier, Sie haben eine Kollegin.",
-    "sentence": "Ich spreche mit ___ Kollegin.",
-    "answer": "Ihrer",
-    "translation": {
-      "ru": "Я разговариваю с Вашей коллегой.",
-      "en": "I'm talking to your colleague."
-    },
-    "gender": "Feminin"
   },
   {
     "type": "possessive",
