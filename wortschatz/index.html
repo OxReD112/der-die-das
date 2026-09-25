@@ -278,6 +278,20 @@ body:not(:has(#done.show)) .version-mark{display:none}
   font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
 #desktopCheck:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
 #desktopCheck:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TYPO TOLERANCE (2026-09-25) · only for words at level 2+ =====
+   A close answer: the typing field gets a subtle red frame + a short side-to-side shake; the text stays.
+   "Nur Tippfehler": quiet text button under Weiter on the wrong-answer screen. */
+@keyframes fieldNudge{0%,100%{transform:translateX(0)}18%{transform:translateX(-6px)}38%{transform:translateX(5px)}58%{transform:translateX(-3px)}78%{transform:translateX(2px)}}
+#answerInput.almost,#answerInput.almost:focus{border-color:color-mix(in srgb,var(--error) 60%,transparent)}
+#answerInput.nudge{animation:fieldNudge .34s ease-out}
+@media(prefers-reduced-motion:reduce){#answerInput.nudge{animation:none}}
+#typoBtn{display:none;margin:12px auto 0;padding:10px 14px;border:0;background:none;color:var(--muted);
+  font:500 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease}
+.feedbackShell.canTypo #typoBtn{display:block}
+#typoBtn:active{transform:scale(.97);filter:brightness(.94)}
+#typoBtn:disabled{cursor:default;transform:none;filter:none}
 </style>
 </head>
 <body><main class="app">
@@ -308,10 +322,11 @@ body:not(:has(#done.show)) .version-mark{display:none}
    </div>
   </div>
   <button class="continue" id="continue">Weiter</button>
+  <button id="typoBtn" type="button">Nur Tippfehler</button>
  </div>
 </section>
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
-<div class="version-mark">v2.78</div>
+<div class="version-mark">v2.81</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
@@ -403,8 +418,61 @@ function rec(c){
  if(!state.cards[c.id])state.cards[c.id]={level:0,due:day()};
  return state.cards[c.id];
 }
+let hintsUsed=0,typoUndo=null;
 let queue=[],idx=0,current=null,sessionTotal=0,completed=0,failedToday=new Set(),closedToday=new Set();
 function normalize(s){return s.trim().toLocaleLowerCase("de-DE").replace(/\s*,\s*/g," ").replace(/\s+/g," ")}
+// ===== TYPO TOLERANCE (2026-09-25, see Documentation/DECISIONS.md) =====
+// Only for words at level 2+. Levels 0-1 stay strict (exact answer only).
+// A close answer never counts as right. It gets a hint (red frame + shake, text stays) and up to 2 more tries.
+// After that it is wrong; the "Nur Tippfehler" button keeps the level and brings the word back tomorrow.
+const TOLERANT_FROM_LEVEL=2, MAX_HINTS=2;
+// Damerau (OSA) distance: missing / extra / wrong letter or two neighbouring letters swapped = 1 slip.
+function osa(x,y){
+ const a=[...x],b=[...y],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));
+ for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){
+  const c=a[i-1]===b[j-1]?0:1;
+  d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c);
+  if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1);
+ }
+ return d[a.length][b.length];
+}
+// Common learner slips, flattened (sounds the same / known trap). Used ONLY to decide whether to give the hint:
+// sch-ch-sh-sc, ß-ss-s, double-single consonant, ck-k, tz-z-ts, silent h, i-ie, v-f-w, ä-e, äu-eu, umlaut dots,
+// d-t / b-p / g-k at the end of a word, chs-ks-x, qu-kw, ph-f, th-t, dt-t.
+function loose(s){
+ return s.replace(/ß/g,"ss").replace(/äu/g,"eu").replace(/ä/g,"e").replace(/ö/g,"o").replace(/ü/g,"u")
+  .replace(/chs/g,"ks").replace(/x/g,"ks").replace(/sch/g,"S").replace(/sh|sc|ch/g,"S")
+  .replace(/qu/g,"kw").replace(/ph/g,"f").replace(/th/g,"t").replace(/dt/g,"t")
+  .replace(/ck/g,"k").replace(/tz|ts/g,"z").replace(/ie/g,"i")
+  .replace(/([aeiouy])h(?![aeiouy])/g,"$1").replace(/[vw]/g,"f")
+  .replace(/d\b/g,"t").replace(/b\b/g,"p").replace(/g\b/g,"k")
+  .replace(/([bcdfgklmnprstz])\1+/g,"$1");
+}
+const letterCount=s=>s.replace(/\s/g,"").length;
+// Slips allowed for the hint: 1-3 letters none (exact only), 4-6 letters 1, 7-10 letters 2, 11+ letters 3.
+function slipAllowance(n){return n<=3?0:n<=6?1:n<=10?2:3}
+// Another word from the list typed exactly = a mix-up, not a typo -> no hint.
+let listAnswers=null;
+function isOtherListWord(y,target){
+ if(!listAnswers)listAnswers=new Set(WORDS.flatMap(c=>targets(c)).map(normalize));
+ return y!==normalize(target)&&listAnswers.has(y);
+}
+function isClose(typed,target){
+ const t=normalize(target),y=typed,n=letterCount(t),allow=slipAllowance(n);
+ if(!allow||y===t)return false;
+ if(loose(y)[0]!==loose(t)[0])return false;   // the first letter must be right (sch/sh, v/f, ä/e count as the same)
+ if(isOtherListWord(y,target))return false;
+ // scrambled order: exactly the right letters, 5+ letters
+ const sorted=s=>[...s.replace(/\s/g,"")].sort().join("");
+ if(n>=5&&sorted(y)===sorted(t))return true;
+ const d=Math.min(osa(y,t),osa(loose(y),loose(t)));
+ if(letterCount(y)<Math.ceil(n/2)||n-d<Math.ceil(n/2))return false; // at least half the letters right
+ if(d<=allow)return true;
+ // wrong ending: same beginning, only the last few letters differ
+ let p=0;while(p<y.length&&p<t.length&&y[p]===t[p])p++;
+ return p>=4&&y.length-p<=3&&t.length-p<=3;
+}
 function targetParts(c){return (c.target||"").split(" / ").map(x=>x.trim()).filter(Boolean)}
 function targets(c){
  const parts=targetParts(c);
@@ -521,6 +589,8 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} heute`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=getTranslation(current,"sentenceTranslation");$("answerInput").value="";
+ hintsUsed=0;typoUndo=null;$("answerInput").classList.remove("almost","nudge");
+ $("typoBtn").textContent="Nur Tippfehler";$("typoBtn").disabled=false;
  $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";
   if(window.deutschKeyboardReady){$("keyboard").classList.add("show");}
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
@@ -543,6 +613,13 @@ function check(){
  let typed=normalize($("answerInput").value);if(!typed)return;
  const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
  let ok=!!matched;
+ const r=rec(current);
+ const tolerant=(r.level||0)>=TOLERANT_FROM_LEVEL&&!failedToday.has(current.id);
+ if(!ok&&tolerant&&hintsUsed<MAX_HINTS&&opts.some(t=>isClose(typed,t))){
+   hintsUsed++;
+   const f=$("answerInput");f.classList.add("almost");f.classList.remove("nudge");void f.offsetWidth;f.classList.add("nudge");
+   return;
+ }
  // For an error, compare against the closest accepted answer so the highlighted difference is useful.
  let correct=opts[0]||"";
  if(!ok&&opts.length>1){
@@ -559,12 +636,13 @@ function check(){
  $("targetForm").style.display=ok?"inline-block":"none";
  if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
  $("base").textContent=current.base;$("meaning").textContent=getTranslation(current,"translation");$("grammar").textContent=getTranslation(current,"grammar");
- const r=rec(current);
  if(ok){
    if(failedToday.has(current.id)){r.level=0;r.due=add(1)}
    else{r.level=Math.min(r.level+1,LEARNED_LEVEL);r.due=add(steps[Math.min(r.level-1,steps.length-1)])}
    if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
  } else {
+   typoUndo=tolerant?{id:current.id,level:r.level}:null;
+   if(typoUndo)$("feedbackShell").classList.add("canTypo");
    failedToday.add(current.id);
    r.level=0;r.due=day();
    // Reinsert once at the end. It remains one of today's unique cards, so the total never grows.
@@ -590,6 +668,18 @@ function addFive(){
  $("done").className="done";$("study").style.display="flex";build(fresh);
 }
 function next(){idx++;render()}
+// "Nur Tippfehler": undo the reset. The word keeps its level and comes back TOMORROW as a check
+// (not after its level's interval). Tomorrow correct -> it moves up normally.
+function markTypo(){
+ if(!typoUndo||!current||typoUndo.id!==current.id)return;
+ const r=rec(current);r.level=typoUndo.level;r.due=add(1);
+ failedToday.delete(current.id);
+ const j=queue.findIndex((c,k)=>k>idx&&c.id===current.id);if(j>-1)queue.splice(j,1);
+ if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
+ typoUndo=null;save();publishWortschatzStatus();
+ $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;
+}
+$("typoBtn").onclick=markTypo;
 $("addWords").onclick=addFive;
 $("desktopCheck").onclick=check;$("continue").onclick=next;
 document.addEventListener("keydown",e=>{
