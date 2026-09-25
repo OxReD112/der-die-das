@@ -19,13 +19,13 @@
 <style>
 :root{
   /* ===== PALETTE ===== */
-  --green:#43d2ad;
-  --red:#ff6f73;
+  --green:#5bc8a4;
+  --red:#ff7770;
 
   --gray-100:#f2f0ed;
-  --gray-300:#aaa;
+  --gray-300:#c8c7c4;
   --gray-500:#8f8f94;
-  --gray-700:#444448;
+  --gray-700:rgba(255,255,255,.10);
 
   /* ===== SURFACES ===== */
   --bg:#1b1b1d;
@@ -38,7 +38,7 @@
   --accent:var(--green);
   --error:var(--red);
 
-  --line:rgba(67,210,173,.45);
+  --line:rgba(91,200,164,.45);
   --progress-track:#292a2c;
   --progress-fill:#777;
   --blank-line:rgba(243,241,237,.72);
@@ -50,8 +50,8 @@
   /* ===== DETAIL TEXT ===== */
   --divider:var(--gray-700);
   --base-text:var(--gray-300);
-  --meaning-text:#8d9996;
-  --grammar-text:#737a78;
+  --meaning-text:#8f8f94;
+  --grammar-text:#8f8f94;
   --continue-text:#9b9b9f;
   --continue-hover:#d5d5d7;
 
@@ -59,10 +59,10 @@
   --diff-word-bg:rgba(255,255,255,.025);
   --diff-same:var(--green);
   --diff-wrong:var(--error);
-  --diff-error-bg:rgba(255,91,98,.10);
+  --diff-error-bg:rgba(255,119,112,.10);
   --diff-missing:var(--error);
   --diff-arrow:#e8d9d9;
-  --diff-correct:#ddd;
+  --diff-correct:#f2f0ed;
 
   /* ===== OTHER COMPONENTS ===== */
   --done-score:var(--text);
@@ -71,22 +71,22 @@
   --version:#4f4f53;
 
   /* ===== FEEDBACK EFFECTS ===== */
-  --good-glow:radial-gradient(ellipse,rgba(67,210,173,.24) 0%,rgba(67,210,173,.12) 28%,rgba(67,210,173,.04) 52%,transparent 74%);
-  --bad-glow:radial-gradient(ellipse,rgba(255,91,98,.34) 0%,rgba(255,91,98,.17) 30%,rgba(255,91,98,.055) 55%,transparent 76%);
-  --good-line-shadow:0 0 14px rgba(67,210,173,.3);
-  --bad-line-shadow:0 0 14px rgba(255,91,98,.34);
+  --good-glow:radial-gradient(ellipse,rgba(91,200,164,.24) 0%,rgba(91,200,164,.12) 28%,rgba(91,200,164,.04) 52%,transparent 74%);
+  --bad-glow:radial-gradient(ellipse,rgba(255,119,112,.34) 0%,rgba(255,119,112,.17) 30%,rgba(255,119,112,.055) 55%,transparent 76%);
+  --good-line-shadow:0 0 14px rgba(91,200,164,.3);
+  --bad-line-shadow:0 0 14px rgba(255,119,112,.34);
 }
 
 
 [data-theme="light"]{
   /* ===== PALETTE ===== */
-  --green:#69c9b1;
-  --red:#ff6f73;
+  --green:#3fa68a;
+  --red:#e95e66;
 
   --gray-100:#242426;
-  --gray-300:#77777d;
+  --gray-300:#727278;
   --gray-500:#727278;
-  --gray-700:#d8d8dc;
+  --gray-700:rgba(0,0,0,.10);
 
   /* ===== SURFACES ===== */
   --bg:#f6f4f1;
@@ -99,10 +99,10 @@
   --accent:var(--green);
   --error:var(--red);
 
-  --line:rgba(105,201,177,.42);
+  --line:rgba(63,166,138,.42);
   --progress-track:#dedee1;
   --progress-fill:#8d8d92;
-  --blank-line:rgba(32,32,35,.38);
+  --blank-line:rgba(36,36,38,.38);
 
   /* ===== CONTROLS ===== */
   --button-bg:#303033;
@@ -111,16 +111,16 @@
   /* ===== DETAIL TEXT ===== */
   --divider:var(--gray-700);
   --base-text:#55565b;
-  --meaning-text:#626b69;
-  --grammar-text:#747878;
+  --meaning-text:#55565b;
+  --grammar-text:#727278;
   --continue-text:#77777c;
   --continue-hover:#77777c;
 
   /* ===== ANSWER DIFFERENCES ===== */
-  --diff-word-bg:rgba(32,32,35,.035);
+  --diff-word-bg:rgba(36,36,38,.035);
   --diff-same:var(--green);
   --diff-wrong:var(--error);
-  --diff-error-bg:rgba(255,111,115,.10);
+  --diff-error-bg:rgba(233,94,102,.10);
   --diff-missing:var(--error);
   --diff-arrow:#77777c;
   --diff-correct:#55565b;
@@ -133,17 +133,17 @@
 
   /* ===== FEEDBACK EFFECTS ===== */
   --good-glow:radial-gradient(ellipse at center,
-    rgba(105,201,177,.16) 0%,
-    rgba(105,201,177,.08) 28%,
-    rgba(105,201,177,.025) 52%,
+    rgba(63,166,138,.16) 0%,
+    rgba(63,166,138,.08) 28%,
+    rgba(63,166,138,.025) 52%,
     transparent 74%);
   --bad-glow:radial-gradient(ellipse at center,
-    rgba(255,111,115,.19) 0%,
-    rgba(255,111,115,.09) 30%,
-    rgba(255,111,115,.025) 55%,
+    rgba(233,94,102,.19) 0%,
+    rgba(233,94,102,.09) 30%,
+    rgba(233,94,102,.025) 55%,
     transparent 76%);
-  --good-line-shadow:0 0 14px rgba(105,201,177,.22);
-  --bad-line-shadow:0 0 14px rgba(255,111,115,.24);
+  --good-line-shadow:0 0 14px rgba(63,166,138,.22);
+  --bad-line-shadow:0 0 14px rgba(233,94,102,.24);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:manipulation}
@@ -190,16 +190,16 @@ button{font:inherit}
 @keyframes glowIn{from{opacity:0}to{opacity:1}}
 @keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--accent)}.feedback.bad .answerSentence .target{color:var(--text)}
 .answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
-.targetForm{display:inline-block;margin-top:22px;color:var(--accent);font:36px Georgia,serif;background:rgba(67,210,173,.06);padding:1px 5px}.feedback.bad .targetForm{display:none}
+.targetForm{display:inline-block;margin-top:22px;color:var(--accent);font:36px Georgia,serif;background:color-mix(in srgb,var(--accent) 6%,transparent);padding:1px 5px}.feedback.bad .targetForm{display:none}
 .diffBlock{display:none;margin-top:26px;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:var(--diff-word-bg)}.diffSame{color:var(--diff-same)}.diffWrong{color:var(--diff-wrong);background:var(--diff-error-bg)}.diffMissing{color:var(--diff-missing);background:var(--diff-error-bg)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow{margin:1px 0;color:var(--diff-arrow);font:24px/1 sans-serif}.diffCorrect{color:var(--diff-correct)}.diffCorrect .diffSame{color:var(--diff-same)}
 .answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}
-.detail{position:relative;border-top:1px solid var(--divider);padding-top:24px;color:var(--base-text);text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--accent);box-shadow:var(--good-line-shadow);z-index:2}.feedback.bad .detail::before{background:var(--error);box-shadow:var(--bad-line-shadow)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,110vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:var(--good-glow);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:var(--bad-glow);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
+.detail{position:relative;border-top:1px solid var(--divider);padding-top:24px;color:var(--base-text);text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--accent);box-shadow:var(--good-line-shadow);z-index:2}.feedback.bad .detail::before{background:var(--error);box-shadow:var(--bad-line-shadow)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,100vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:var(--good-glow);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:var(--bad-glow);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
 .base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:var(--meaning-text)}.grammar{margin-top:14px;font-size:14px;color:var(--grammar-text)}
 
 
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:var(--done-score);font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid var(--divider);border-radius:16px;padding:15px 18px;background:var(--add-words-bg);color:var(--add-words-text);font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:var(--version);font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.detail{padding-top:12px}.grammar{margin-top:26px}}
+@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:16px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.detail{padding-top:12px}.grammar{margin-top:26px}}
 
 /* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
    "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
@@ -237,6 +237,47 @@ button{font:inherit}
 header .brand{color:var(--muted)}
 header .progress{background:var(--bar-track)}
 header .progress div{background:var(--muted)}
+
+/* Question text sizes (Design Police): sentences 28px on phones */
+@media(max-width:699px){#sentence,#answerSentence{font-size:28px}}
+
+/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
+   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
+   typed text 24px in the group's font. Never green (green = correct).
+   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
+:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
+@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
+@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+#answerInput{height:58px;min-height:58px;border:1px solid var(--field-line);border-radius:18px;background-color:var(--field-bg);
+  box-shadow:none;outline:none;padding:0 17px;font:400 24px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:var(--text)}
+#answerInput:focus{border-color:var(--field-line);box-shadow:none}
+#answerInput:placeholder-shown{caret-color:transparent;background-image:linear-gradient(var(--text),var(--text));background-repeat:no-repeat;
+  background-position:center;background-size:2px 28px;animation:fieldCaretBg 1.1s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){#answerInput:placeholder-shown{animation:none}}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;width:100%;padding:0;}
+#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#continue:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Wortschatz: "Weiter" half as wide, centred (its answer area is very wide) */
+#continue{width:50%;margin-left:auto;margin-right:auto;display:block}
+
+/* Version number only on the summary screen ("Fertig für heute"), not during the exercise (Design Police 2026-09-25) */
+body:not(:has(#done.show)) .version-mark{display:none}
+
+/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
+   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
+#desktopCheck{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#desktopCheck:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
+#desktopCheck:active{transform:scale(.97);filter:brightness(.94)}
 </style>
 </head>
 <body><main class="app">
@@ -247,7 +288,7 @@ header .progress div{background:var(--muted)}
    <div class="sentence" id="sentence"></div>
    <div class="translation" id="translation"></div>
   </div>
-  <input id="answerInput" class="inputbox" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
+  <input id="answerInput" class="inputbox" type="text" placeholder=" " aria-label="Fehlendes Wort" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Prüfen</button>
   <div id="keyboardMount"></div>
  </div>
@@ -270,7 +311,7 @@ header .progress div{background:var(--muted)}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
-<div class="version-mark">v2.75</div>
+<div class="version-mark">v2.78</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
