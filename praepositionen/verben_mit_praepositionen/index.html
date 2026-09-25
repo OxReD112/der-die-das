@@ -299,7 +299,8 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 <div class="version">v3.2 · Verben mit Präpositionen</div>
 </main>
 
-<script src="verben_mit_praepositionen.js?v=2"></script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="verben_mit_praepositionen.js?v=3"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const DATA = window.VERBEN_MIT_PRAEPOSITIONEN || [];
@@ -441,7 +442,7 @@ function render(){
   $("counter").textContent = (index + 1) + " / " + session.length;
   $("bar").style.width = (index / session.length * 100) + "%";
   $("verb").textContent = x.verb;
-  $("meaning").textContent = x.meaning || "";
+  $("meaning").textContent = getTranslation(x, "meaning");
   $("gap").className = "gap typing";
   $("gap").innerHTML = '<span class="gap-mirror" id="gapMirror"></span>'
     + '<input class="gap-input" id="gapInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" aria-label="Präposition">';
@@ -568,7 +569,7 @@ function showAnswer(){
   if(caseOK !== null) chips += chip(caseOK, "Kasus", chosenCase);
   $("chips").innerHTML = chips;
   $("example").textContent = x.example || "";
-  $("exampleTr").textContent = x.exampleTranslation || "";
+  $("exampleTr").textContent = getTranslation(x, "exampleTranslation");
   $("continue").textContent = index === session.length - 1 ? "Fertig" : "Weiter";
 
   $("prepFeedback").classList.add("hidden");
