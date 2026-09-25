@@ -170,6 +170,34 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
   .choice{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== TABELLE (Wo · Wohin · Woher) — minimal overview sheet ===== */
+.table-btn{appearance:none;border:0;background:transparent;color:var(--muted);font-size:14px;padding:11px 14px;margin-top:22px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in-session-table{display:flex;justify-content:center;margin-top:30px;opacity:.35}
+.in-session-table .table-btn{margin:0;font-size:11px;padding:7px 10px;border:1px solid var(--line);border-radius:17px}
+.omodal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));z-index:20;background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
+.omodal.open{opacity:1;visibility:visible;background:rgba(0,0,0,.28);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
+.osheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px 18px 16px;transform:scale(.94);transition:transform .2s ease}
+.omodal.open .osheet{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.omodal,.osheet{transition:none!important}}
+.ohead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ohead h2{margin:0;font-size:17px;font-weight:650;letter-spacing:-.01em}
+.oclose{border:0;background:transparent;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;padding:0 2px}
+.otbl{display:grid;grid-template-columns:1.5fr .9fr .9fr .9fr}
+.otbl>div{padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.otbl .h{font-size:12px;color:var(--muted);font-weight:650;padding-top:0}
+.otbl small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);margin-top:2px}
+.otbl .ex .n{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.05}
+.otbl .ex .a{color:var(--muted);font-size:.7em;margin-right:3px}
+.otbl .ex{min-width:0;padding-right:8px}
+.otbl .ex small{font-size:11px;margin-top:3px;white-space:normal;overflow-wrap:break-word}
+.otbl .p{font-size:18px;font-weight:600}
+.otbl .p.long{font-size:16px}
+.otbl .same{color:var(--muted);font-weight:500;opacity:.72}
+.ohot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:6px;vertical-align:3px}
+.ofoot{margin-top:12px;font-size:14px;line-height:1.5}
+.ofoot span{color:var(--muted)}
+.onote{margin-top:10px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -182,6 +210,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="session-option" data-size="20">20</button>
     <button class="session-option" data-size="30">30</button>
   </div>
+  <button class="table-btn" type="button" data-otable>Tabelle</button>
 </section>
 
 <section id="game" class="hidden">
@@ -201,6 +230,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
   <section class="choices" id="choices"></section>
   <button class="next hidden" id="next">Weiter</button>
   <div class="rule-note" id="ruleNote"></div>
+  <div class="in-session-table"><button class="table-btn" type="button" data-otable>Tabelle</button></div>
 </section>
 
 <section class="end-screen hidden" id="endScreen">
@@ -212,7 +242,11 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
-<div class="version-mark">v9</div>
+<div class="version-mark">v10</div>
+<div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
+  <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
+  <div id="otable"></div>
+</div></div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
@@ -494,6 +528,48 @@ document.addEventListener("keydown",e=>{
   const btn=els.choices.querySelector('button[data-slot="'+e.key+'"]');
   if(btn&&!btn.disabled)answer(btn.dataset.form);
 });
+// ===== TABELLE (Wo · Wohin · Woher) =====
+// One example per group. Wohin is dimmed when it repeats the Wo word (then it's Akkusativ);
+// when the word changes (nach / zu) it stays white and is marked "Dativ" — the exception to
+// "movement = Akkusativ". Dot = a group with a mistake not yet answered right again
+// (step weight >= 2 in the difficulty store, same data that makes cards come back).
+const TABLE_ROWS=[
+  {cat:"raum",   article:"das",noun:"Kino",    label:"Raum",                     wo:"in", wohin:"in",  woher:"aus"},
+  {cat:"land",   article:"die",noun:"Schweiz", label:"Land mit Artikel",         wo:"in", wohin:"in",  woher:"aus"},
+  {cat:"stadt",  article:"",   noun:"Berlin",  label:"Stadt, Land",              wo:"in", wohin:"nach",woher:"aus"},
+  {cat:"kontakt",article:"der",noun:"See",     label:"Wasser, Kontakt",          wo:"an", wohin:"an",  woher:"von"},
+  {cat:"flaeche",article:"der",noun:"Markt",   label:"offene Fläche",            wo:"auf",wohin:"auf", woher:"von"},
+  {cat:"person", article:"der",noun:"Arzt",    label:"Person, Firma, Aktivität", wo:"bei",wohin:"zu",  woher:"von"},
+  {cat:"anzu",   article:"der",noun:"Bahnhof", label:"am Ort",                   wo:"an", wohin:"zu",  woher:"von"},
+  {cat:"hause",  article:"",   noun:"Hause",   label:"zu Hause",                 wo:"zu", wohin:"nach",woher:"von zu"}
+];
+function weakCats(){
+  const out=new Set();
+  PLACES.forEach(e=>{const d=difficulty[e.id];if(d&&QUESTIONS.some(q=>Number(d[q.key]||1)>=2))out.add(e.cat);});
+  return out;
+}
+function renderTable(){
+  const weak=weakCats(),h=escapeHtml;
+  let html='<div class="otbl"><div class="h"></div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div>';
+  TABLE_ROWS.forEach(r=>{
+    const same=r.wohin===r.wo;
+    html+='<div class="ex"><span class="n'+(weak.has(r.cat)?' ohot':'')+'">'+(r.article?'<span class="a">'+h(r.article)+'</span>':'')+h(r.noun)+'</span><small>'+h(r.label)+'</small></div>'
+      +'<div class="p">'+h(r.wo)+'</div>'
+      +'<div class="p'+(same?' same':'')+'">'+h(r.wohin)+(same?'':'<small>Dativ</small>')+'</div>'
+      +'<div class="p'+(r.woher.length>4?' long':'')+'">'+h(r.woher)+'</div>';
+  });
+  html+='</div><div class="ofoot"><b'+(weak.has("ausnahme")?' class="ohot"':'')+'>immer in:</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>';
+  if(weak.size&&[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cat===c)))html+='<div class="onote"><span class="ohot"></span>hier gab es zuletzt Fehler</div>';
+  document.getElementById("otable").innerHTML=html;
+}
+const omodal=document.getElementById("omodal");
+function openTable(){renderTable();omodal.classList.add("open");omodal.setAttribute("aria-hidden","false");}
+function closeTable(){omodal.classList.remove("open");omodal.setAttribute("aria-hidden","true");}
+document.querySelectorAll("[data-otable]").forEach(b=>b.addEventListener("click",openTable));
+document.getElementById("oclose").addEventListener("click",closeTable);
+omodal.addEventListener("click",e=>{if(e.target===omodal)closeTable();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&omodal.classList.contains("open"))closeTable();});
+
 </script>
 </body>
 </html>
