@@ -103,8 +103,8 @@
 <body><main class="app">
 <section class="session-screen" id="sessionScreen">
 <div class="game-title">Der.Die.Das.</div>
-<h1>How many words?</h1>
-<p>Choose a small session. The game will stop when you reach the end.</p>
+<h1>Wie viele Wörter?</h1>
+<p>Wähle eine Runde.</p>
 <div class="session-options">
 <button class="session-option" data-size="10">10</button>
 <button class="session-option" data-size="30">30</button>
@@ -119,18 +119,18 @@
 </section>
 <section class="card" id="card">
 
-<div class="eyebrow">Choose the correct article</div><div class="word" id="word"></div><div class="translation" id="translation"></div>
+<div class="eyebrow">Wähle den richtigen Artikel.</div><div class="word" id="word"></div><div class="translation" id="translation"></div>
 </section>
 <section class="choices" id="choices"><button class="choice der" data-a="der">der</button><button class="choice die" data-a="die">die</button><button class="choice das" data-a="das">das</button></section>
-<section class="feedback" id="feedback"><h2 id="feedbackTitle"></h2><p id="choiceLine"></p><div class="answer-card"><div class="answer-label">The word</div><div class="answer-word"><span class="article" id="answerArticle"></span> <span id="answerWord"></span></div><div class="answer-translation" id="answerTranslation"></div></div><div class="rule-card"><div class="rule-label" id="ruleLabel"></div><div class="rule-title" id="ruleTitle"></div><div class="rule-examples" id="ruleExamples"></div><div class="rule-reliability" id="ruleReliability"></div></div><button class="continue" id="continue">Continue</button></section>
+<section class="feedback" id="feedback"><h2 id="feedbackTitle"></h2><p id="choiceLine"></p><div class="answer-card"><div class="answer-label">Das Wort</div><div class="answer-word"><span class="article" id="answerArticle"></span> <span id="answerWord"></span></div><div class="answer-translation" id="answerTranslation"></div></div><div class="rule-card"><div class="rule-label" id="ruleLabel"></div><div class="rule-title" id="ruleTitle"></div><div class="rule-examples" id="ruleExamples"></div><div class="rule-reliability" id="ruleReliability"></div></div><button class="continue" id="continue">Weiter</button></section>
 </div>
 
 <section class="end-screen hidden" id="endScreen">
-<div class="progress-label">Session complete</div>
-<h1>Nice work.</h1>
+<div class="progress-label">Fertig</div>
+<h1>Gut gemacht!</h1>
 <div class="end-score" id="endCorrect">0/0</div>
-<p id="endSummary">You finished your session.</p>
-<button class="play-again" id="playAgain">Choose another session</button>
+<p id="endSummary">Runde geschafft.</p>
+<button class="play-again" id="playAgain">Noch eine Runde</button>
 </section>
 <div class="version-mark">v10</div>
 </main>
@@ -214,7 +214,7 @@ function recordDailyArtikel(ok){
 }
 
 function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(w),ok); if(ok){correct++}
- $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Correct!':'✕ Not quite.';$('choiceLine').innerHTML=ok?`You chose <strong>${article}</strong>.`:`You chose <strong>${article}</strong>. Correct answer: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
+ $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Richtig!':'✕ Nicht ganz.';$('choiceLine').innerHTML=ok?`Deine Wahl: <strong>${article}</strong>.`:`Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; total=0; correct=0;
  
@@ -229,7 +229,7 @@ function endSession(){
  $('endScreen').classList.remove('hidden');
  $('endCorrect').textContent=`${correct}/${sessionSize}`;
  const pct=Math.round((correct/sessionSize)*100);
- $('endSummary').textContent=`${pct}% correct. Your difficult words are saved for future sessions.`;
+ $('endSummary').textContent=`${pct} % richtig. Was schwierig war, kommt öfter wieder.`;
 }
 $('continue').onclick=()=>{
  if(total>=sessionSize){endSession();return}
