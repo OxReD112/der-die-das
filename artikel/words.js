@@ -84,20 +84,6 @@ window.WORDS = [
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Bildung",
-    "article": "die",
-    "translation": "образование",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Wohnung",
-      "die Rechnung",
-      "die Meinung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
     "word": "Gesundheit",
     "article": "die",
     "translation": "здоровье",
@@ -270,8 +256,8 @@ window.WORDS = [
     "article": "die",
     "translation": "информация",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -284,8 +270,8 @@ window.WORDS = [
     "article": "die",
     "translation": "ситуация",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -298,8 +284,8 @@ window.WORDS = [
     "article": "die",
     "translation": "реакция",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1143,7 +1129,7 @@ window.WORDS = [
     "translation": "входная дверь",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DIE TÜR",
-    "explanation": "The important part is die Tür.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "die Tür",
       "die Haustür"
@@ -1156,7 +1142,7 @@ window.WORDS = [
     "translation": "ванная комната",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
-    "explanation": "The important part is das Zimmer.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "das Zimmer",
       "das Badezimmer"
@@ -1169,7 +1155,7 @@ window.WORDS = [
     "translation": "водительские права",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER SCHEIN",
-    "explanation": "The important part is der Schein.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "der Schein",
       "der Führerschein"
@@ -1182,7 +1168,7 @@ window.WORDS = [
     "translation": "гостиная",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
-    "explanation": "The important part is das Zimmer.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "das Zimmer",
       "das Wohnzimmer"
@@ -1195,7 +1181,7 @@ window.WORDS = [
     "translation": "вокзал",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER HOF",
-    "explanation": "The important part is der Hof.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "der Hof",
       "der Bahnhof"
@@ -1208,7 +1194,7 @@ window.WORDS = [
     "translation": "больница",
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS HAUS",
-    "explanation": "The important part is das Haus.",
+    "explanation": "Compound nouns take the article of the last word.",
     "examples": [
       "das Haus",
       "das Krankenhaus"
@@ -1277,7 +1263,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Arbeit",
@@ -1374,79 +1360,9 @@ window.WORDS = [
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Bewegung",
-    "article": "die",
-    "translation": "движение",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Bedeutung",
-    "article": "die",
-    "translation": "значение",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Verbindung",
-    "article": "die",
-    "translation": "связь",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Entwicklung",
-    "article": "die",
-    "translation": "развитие",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
     "word": "Ausbildung",
     "article": "die",
     "translation": "образование, профессиональное обучение",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Veranstaltung",
-    "article": "die",
-    "translation": "мероприятие",
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -1486,20 +1402,6 @@ window.WORDS = [
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Erklärung",
-    "article": "die",
-    "translation": "объяснение",
-    "ruleType": "suffix",
-    "ruleLabel": "-UNG ENDING",
-    "explanation": "Nouns ending in -ung are feminine.",
-    "examples": [
-      "die Rechnung",
-      "die Wohnung",
-      "die Erfahrung"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
     "word": "Wahrheit",
     "article": "die",
     "translation": "правда",
@@ -1509,7 +1411,7 @@ window.WORDS = [
     "examples": [
       "die Freiheit",
       "die Gesundheit",
-      "die Möglichkeit"
+      "die Krankheit"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1523,21 +1425,21 @@ window.WORDS = [
     "examples": [
       "die Freiheit",
       "die Gesundheit",
-      "die Möglichkeit"
+      "die Krankheit"
     ],
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Wichtigkeit",
+    "word": "Kleinigkeit",
     "article": "die",
-    "translation": "важность",
+    "translation": "мелочь",
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1549,37 +1451,37 @@ window.WORDS = [
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Schnelligkeit",
+    "word": "Geschwindigkeit",
     "article": "die",
     "translation": "скорость",
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Mündlichkeit",
+    "word": "Pünktlichkeit",
     "article": "die",
-    "translation": "устная форма",
+    "translation": "пунктуальность",
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1591,9 +1493,9 @@ window.WORDS = [
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1605,9 +1507,9 @@ window.WORDS = [
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
     "examples": [
-      "die Wichtigkeit",
       "die Sauberkeit",
-      "die Schnelligkeit"
+      "die Pünktlichkeit",
+      "die Kleinigkeit"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1658,8 +1560,8 @@ window.WORDS = [
     "article": "die",
     "translation": "нация",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1672,8 +1574,8 @@ window.WORDS = [
     "article": "die",
     "translation": "производство",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1686,8 +1588,8 @@ window.WORDS = [
     "article": "die",
     "translation": "организация",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1700,8 +1602,8 @@ window.WORDS = [
     "article": "die",
     "translation": "дискуссия",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1714,8 +1616,8 @@ window.WORDS = [
     "article": "die",
     "translation": "станция",
     "ruleType": "suffix",
-    "ruleLabel": "-TION ENDING",
-    "explanation": "Nouns ending in -tion are feminine.",
+    "ruleLabel": "-TION / -SION ENDING",
+    "explanation": "Nouns ending in -tion or -sion are feminine.",
     "examples": [
       "die Information",
       "die Situation",
@@ -1920,44 +1822,44 @@ window.WORDS = [
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Männchen",
+    "word": "Märchen",
     "article": "das",
-    "translation": "мужичок, фигурка мужчины",
+    "translation": "сказка",
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
     "examples": [
       "das Brötchen",
       "das Häuschen",
-      "das Männchen"
+      "das Märchen"
     ],
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Weibchen",
+    "word": "Würstchen",
     "article": "das",
-    "translation": "самка",
+    "translation": "сосиска",
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
     "examples": [
       "das Brötchen",
       "das Häuschen",
-      "das Männchen"
+      "das Märchen"
     ],
     "reliability": "A very reliable rule."
   },
   {
-    "word": "Entchen",
+    "word": "Hähnchen",
     "article": "das",
-    "translation": "утёнок",
+    "translation": "курица (блюдо), цыплёнок",
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
     "examples": [
       "das Brötchen",
       "das Häuschen",
-      "das Männchen"
+      "das Märchen"
     ],
     "reliability": "A very reliable rule."
   },
@@ -1971,7 +1873,7 @@ window.WORDS = [
     "examples": [
       "das Brötchen",
       "das Häuschen",
-      "das Männchen"
+      "das Märchen"
     ],
     "reliability": "A very reliable rule."
   },
@@ -2046,15 +1948,15 @@ window.WORDS = [
     "reliability": "A strong pattern, with some exceptions."
   },
   {
-    "word": "Stadium",
+    "word": "Gymnasium",
     "article": "das",
-    "translation": "стадион",
+    "translation": "гимназия",
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Nouns ending in -ium are neuter.",
     "examples": [
       "das Studium",
-      "das Stadium",
+      "das Gymnasium",
       "das Ministerium"
     ],
     "reliability": "A very strong pattern."
@@ -2068,7 +1970,7 @@ window.WORDS = [
     "explanation": "Nouns ending in -ium are neuter.",
     "examples": [
       "das Studium",
-      "das Stadium",
+      "das Gymnasium",
       "das Ministerium"
     ],
     "reliability": "A very strong pattern."
@@ -2078,14 +1980,14 @@ window.WORDS = [
     "article": "das",
     "translation": "практика",
     "ruleType": "suffix",
-    "ruleLabel": "-IUM ENDING",
-    "explanation": "Nouns ending in -ium are neuter.",
+    "ruleLabel": "-UM ENDING",
+    "explanation": "Many borrowed nouns ending in -um are neuter.",
     "examples": [
-      "das Studium",
-      "das Stadium",
-      "das Ministerium"
+      "das Datum",
+      "das Zentrum",
+      "das Museum"
     ],
-    "reliability": "A very strong pattern."
+    "reliability": "A strong pattern."
   },
   {
     "word": "Terrarium",
@@ -2096,7 +1998,7 @@ window.WORDS = [
     "explanation": "Nouns ending in -ium are neuter.",
     "examples": [
       "das Studium",
-      "das Stadium",
+      "das Gymnasium",
       "das Ministerium"
     ],
     "reliability": "A very strong pattern."
@@ -2284,20 +2186,6 @@ window.WORDS = [
     "reliability": "A useful pattern, but not an absolute rule."
   },
   {
-    "word": "Lampe",
-    "article": "die",
-    "translation": "лампа",
-    "ruleType": "suffix",
-    "ruleLabel": "-E PATTERN",
-    "explanation": "Many common nouns ending in -e are feminine.",
-    "examples": [
-      "die Lampe",
-      "die Tasche",
-      "die Flasche"
-    ],
-    "reliability": "A common pattern, but there are important exceptions."
-  },
-  {
     "word": "Tasche",
     "article": "die",
     "translation": "сумка",
@@ -2305,7 +2193,7 @@ window.WORDS = [
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
     "examples": [
-      "die Lampe",
+      "die Blume",
       "die Tasche",
       "die Flasche"
     ],
@@ -2319,7 +2207,7 @@ window.WORDS = [
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
     "examples": [
-      "die Lampe",
+      "die Blume",
       "die Tasche",
       "die Flasche"
     ],
@@ -2333,7 +2221,7 @@ window.WORDS = [
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
     "examples": [
-      "die Lampe",
+      "die Blume",
       "die Tasche",
       "die Flasche"
     ],
@@ -2347,7 +2235,7 @@ window.WORDS = [
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
     "examples": [
-      "die Lampe",
+      "die Blume",
       "die Tasche",
       "die Flasche"
     ],
@@ -2361,7 +2249,7 @@ window.WORDS = [
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
     "examples": [
-      "die Lampe",
+      "die Blume",
       "die Tasche",
       "die Flasche"
     ],
@@ -2371,15 +2259,11 @@ window.WORDS = [
     "word": "Nummer",
     "article": "die",
     "translation": "номер",
-    "ruleType": "suffix",
-    "ruleLabel": "-E PATTERN",
-    "explanation": "Many common nouns ending in -e are feminine.",
-    "examples": [
-      "die Lampe",
-      "die Tasche",
-      "die Flasche"
-    ],
-    "reliability": "A common pattern, but there are important exceptions."
+    "ruleType": "none",
+    "ruleLabel": "NO RELIABLE RULE",
+    "explanation": " ",
+    "examples": [],
+    "reliability": "Memorise the noun with its article."
   },
   {
     "word": "Junge",
@@ -2718,20 +2602,6 @@ window.WORDS = [
     "reliability": "A strong pattern, but not an absolute spelling rule."
   },
   {
-    "word": "Zensur",
-    "article": "die",
-    "translation": "цензура",
-    "ruleType": "suffix",
-    "ruleLabel": "-UR ENDING",
-    "explanation": "Many nouns ending in -ur are feminine.",
-    "examples": [
-      "die Kultur",
-      "die Natur",
-      "die Struktur"
-    ],
-    "reliability": "A strong pattern, but not an absolute spelling rule."
-  },
-  {
     "word": "Garage",
     "article": "die",
     "translation": "гараж",
@@ -2888,7 +2758,7 @@ window.WORDS = [
   {
     "word": "Marmelade",
     "article": "die",
-    "translation": "мармелад, джем",
+    "translation": "джем, варенье",
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2964,36 +2834,7 @@ window.WORDS = [
     "explanation": "Diminutives ending in -lein are neuter.",
     "examples": [
       "das Büchlein",
-      "das Häuslein",
-      "das Kindlein"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Häuslein",
-    "article": "das",
-    "translation": "домик",
-    "ruleType": "suffix",
-    "ruleLabel": "-LEIN ENDING",
-    "explanation": "Diminutives ending in -lein are neuter.",
-    "examples": [
-      "das Büchlein",
-      "das Häuslein",
-      "das Kindlein"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Kindlein",
-    "article": "das",
-    "translation": "ребёночек",
-    "ruleType": "suffix",
-    "ruleLabel": "-LEIN ENDING",
-    "explanation": "Diminutives ending in -lein are neuter.",
-    "examples": [
-      "das Büchlein",
-      "das Häuslein",
-      "das Kindlein"
+      "das Vöglein"
     ],
     "reliability": "A very reliable rule."
   },
@@ -3006,22 +2847,7 @@ window.WORDS = [
     "explanation": "Diminutives ending in -lein are neuter.",
     "examples": [
       "das Büchlein",
-      "das Häuslein",
-      "das Kindlein"
-    ],
-    "reliability": "A very reliable rule."
-  },
-  {
-    "word": "Fräulein",
-    "article": "das",
-    "translation": "девушка, барышня",
-    "ruleType": "suffix",
-    "ruleLabel": "-LEIN ENDING",
-    "explanation": "Diminutives ending in -lein are neuter.",
-    "examples": [
-      "das Büchlein",
-      "das Häuslein",
-      "das Kindlein"
+      "das Vöglein"
     ],
     "reliability": "A very reliable rule."
   },
@@ -3093,7 +2919,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Tee",
@@ -3107,7 +2933,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Saft",
@@ -3121,7 +2947,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Sekt",
@@ -3135,7 +2961,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Whisky",
@@ -3149,7 +2975,7 @@ window.WORDS = [
       "der Kaffee",
       "der Tee"
     ],
-    "reliability": "A useful tendency, but not a universal rule. Important exception: das Bier."
+    "reliability": "A useful tendency, but not a universal rule. Important exceptions: das Bier, das Wasser, die Milch."
   },
   {
     "word": "Bier",
@@ -3160,22 +2986,20 @@ window.WORDS = [
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
     "examples": [
       "das Bier",
-      "der Wein",
-      "der Kaffee"
+      "das Wasser",
+      "die Milch"
     ],
-    "reliability": "Important exception: most common beverage nouns are masculine, but Bier is neuter. Memorise: das Bier."
+    "reliability": "Important exceptions: most common drinks are masculine, but das Bier, das Wasser, die Milch are not."
   },
   {
     "word": "Baum",
     "article": "der",
     "translation": "дерево",
-    "ruleType": "category",
-    "ruleLabel": "TREES → MOSTLY DER",
-    "explanation": "Names of trees are usually masculine.",
-    "examples": [
-      "der Baum"
-    ],
-    "reliability": "A useful tendency: many tree names are masculine, but this is not a universal rule."
+    "ruleType": "none",
+    "ruleLabel": "NO RELIABLE RULE",
+    "explanation": " ",
+    "examples": [],
+    "reliability": "Memorise the noun with its article."
   },
   {
     "word": "Drama",
@@ -3262,17 +3086,367 @@ window.WORDS = [
     "reliability": "A strong pattern, but not universal."
   },
   {
-    "word": "Konjunktur",
-    "article": "die",
-    "translation": "конъюнктура, экономическая ситуация",
-    "ruleType": "suffix",
-    "ruleLabel": "-UR ENDING",
-    "explanation": "Many nouns ending in -ur are feminine.",
+    "word": "Wasser",
+    "article": "das",
+    "translation": "вода",
+    "ruleType": "exception",
+    "ruleLabel": "BEVERAGE EXCEPTION",
+    "explanation": "Wasser is an important exception to the usual masculine pattern for beverages.",
     "examples": [
-      "die Kultur",
-      "die Natur",
-      "die Struktur"
+      "das Bier",
+      "das Wasser",
+      "die Milch"
     ],
-    "reliability": "A strong pattern, but not an absolute spelling rule."
+    "reliability": "Important exceptions: most common drinks are masculine, but das Bier, das Wasser, die Milch are not."
+  },
+  {
+    "word": "Milch",
+    "article": "die",
+    "translation": "молоко",
+    "ruleType": "exception",
+    "ruleLabel": "BEVERAGE EXCEPTION",
+    "explanation": "Milch is an important exception to the usual masculine pattern for beverages.",
+    "examples": [
+      "das Bier",
+      "das Wasser",
+      "die Milch"
+    ],
+    "reliability": "Important exceptions: most common drinks are masculine, but das Bier, das Wasser, die Milch are not."
+  },
+  {
+    "word": "Moment",
+    "article": "der",
+    "translation": "момент, мгновение",
+    "ruleType": "exception",
+    "ruleLabel": "-MENT EXCEPTION",
+    "explanation": "Most nouns ending in -ment are neuter, but Moment is masculine.",
+    "examples": [
+      "der Moment",
+      "das Dokument",
+      "das Argument"
+    ],
+    "reliability": "Important exception. Memorise: der Moment."
+  },
+  {
+    "word": "Firma",
+    "article": "die",
+    "translation": "фирма, компания",
+    "ruleType": "exception",
+    "ruleLabel": "-MA EXCEPTION",
+    "explanation": "Most nouns ending in -ma are neuter, but Firma is feminine.",
+    "examples": [
+      "die Firma",
+      "das Thema",
+      "das Klima"
+    ],
+    "reliability": "Important exception. Memorise: die Firma."
+  },
+  {
+    "word": "Flur",
+    "article": "der",
+    "translation": "коридор, прихожая",
+    "ruleType": "exception",
+    "ruleLabel": "-UR EXCEPTION",
+    "explanation": "Many nouns ending in -ur are feminine, but Flur is masculine.",
+    "examples": [
+      "der Flur",
+      "die Kultur",
+      "die Natur"
+    ],
+    "reliability": "Important exception. Memorise: der Flur."
+  },
+  {
+    "word": "Erlaubnis",
+    "article": "die",
+    "translation": "разрешение",
+    "ruleType": "exception",
+    "ruleLabel": "-NIS EXCEPTION",
+    "explanation": "Most nouns ending in -nis are neuter, but Erlaubnis is feminine.",
+    "examples": [
+      "die Erlaubnis",
+      "das Ergebnis",
+      "das Zeugnis"
+    ],
+    "reliability": "Important exception. Memorise: die Erlaubnis."
+  },
+  {
+    "word": "Lehrerin",
+    "article": "die",
+    "translation": "учительница",
+    "ruleType": "suffix",
+    "ruleLabel": "-IN ENDING (FEMALE PERSON)",
+    "explanation": "Nouns for female persons ending in -in are feminine.",
+    "examples": [
+      "die Lehrerin",
+      "die Freundin",
+      "die Ärztin"
+    ],
+    "reliability": "A very reliable rule."
+  },
+  {
+    "word": "Freundin",
+    "article": "die",
+    "translation": "подруга",
+    "ruleType": "suffix",
+    "ruleLabel": "-IN ENDING (FEMALE PERSON)",
+    "explanation": "Nouns for female persons ending in -in are feminine.",
+    "examples": [
+      "die Lehrerin",
+      "die Freundin",
+      "die Ärztin"
+    ],
+    "reliability": "A very reliable rule."
+  },
+  {
+    "word": "Ärztin",
+    "article": "die",
+    "translation": "врач (женщина)",
+    "ruleType": "suffix",
+    "ruleLabel": "-IN ENDING (FEMALE PERSON)",
+    "explanation": "Nouns for female persons ending in -in are feminine.",
+    "examples": [
+      "die Lehrerin",
+      "die Freundin",
+      "die Ärztin"
+    ],
+    "reliability": "A very reliable rule."
+  },
+  {
+    "word": "Kollegin",
+    "article": "die",
+    "translation": "коллега (женщина)",
+    "ruleType": "suffix",
+    "ruleLabel": "-IN ENDING (FEMALE PERSON)",
+    "explanation": "Nouns for female persons ending in -in are feminine.",
+    "examples": [
+      "die Lehrerin",
+      "die Freundin",
+      "die Ärztin"
+    ],
+    "reliability": "A very reliable rule."
+  },
+  {
+    "word": "Chefin",
+    "article": "die",
+    "translation": "начальница",
+    "ruleType": "suffix",
+    "ruleLabel": "-IN ENDING (FEMALE PERSON)",
+    "explanation": "Nouns for female persons ending in -in are feminine.",
+    "examples": [
+      "die Lehrerin",
+      "die Freundin",
+      "die Ärztin"
+    ],
+    "reliability": "A very reliable rule."
+  },
+  {
+    "word": "Gebäude",
+    "article": "das",
+    "translation": "здание",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Gemüse",
+    "article": "das",
+    "translation": "овощи",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Getränk",
+    "article": "das",
+    "translation": "напиток",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Gespräch",
+    "article": "das",
+    "translation": "разговор",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Geschenk",
+    "article": "das",
+    "translation": "подарок",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Gesicht",
+    "article": "das",
+    "translation": "лицо",
+    "ruleType": "prefix",
+    "ruleLabel": "GE- PREFIX",
+    "explanation": "Many nouns beginning with Ge- are neuter.",
+    "examples": [
+      "das Gebäude",
+      "das Gemüse",
+      "das Geschenk"
+    ],
+    "reliability": "A strong pattern, but not universal: der Geschmack, die Geschichte."
+  },
+  {
+    "word": "Ergebnis",
+    "article": "das",
+    "translation": "результат",
+    "ruleType": "suffix",
+    "ruleLabel": "-NIS ENDING",
+    "explanation": "Many nouns ending in -nis are neuter.",
+    "examples": [
+      "das Ergebnis",
+      "das Zeugnis",
+      "das Erlebnis"
+    ],
+    "reliability": "A strong pattern, but not universal: die Erlaubnis, die Kenntnis."
+  },
+  {
+    "word": "Zeugnis",
+    "article": "das",
+    "translation": "аттестат, свидетельство",
+    "ruleType": "suffix",
+    "ruleLabel": "-NIS ENDING",
+    "explanation": "Many nouns ending in -nis are neuter.",
+    "examples": [
+      "das Ergebnis",
+      "das Zeugnis",
+      "das Erlebnis"
+    ],
+    "reliability": "A strong pattern, but not universal: die Erlaubnis, die Kenntnis."
+  },
+  {
+    "word": "Erlebnis",
+    "article": "das",
+    "translation": "переживание, впечатление",
+    "ruleType": "suffix",
+    "ruleLabel": "-NIS ENDING",
+    "explanation": "Many nouns ending in -nis are neuter.",
+    "examples": [
+      "das Ergebnis",
+      "das Zeugnis",
+      "das Erlebnis"
+    ],
+    "reliability": "A strong pattern, but not universal: die Erlaubnis, die Kenntnis."
+  },
+  {
+    "word": "Verständnis",
+    "article": "das",
+    "translation": "понимание",
+    "ruleType": "suffix",
+    "ruleLabel": "-NIS ENDING",
+    "explanation": "Many nouns ending in -nis are neuter.",
+    "examples": [
+      "das Ergebnis",
+      "das Zeugnis",
+      "das Erlebnis"
+    ],
+    "reliability": "A strong pattern, but not universal: die Erlaubnis, die Kenntnis."
+  },
+  {
+    "word": "Lehrer",
+    "article": "der",
+    "translation": "учитель",
+    "ruleType": "suffix",
+    "ruleLabel": "-ER ENDING (FROM A VERB)",
+    "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
+    "examples": [
+      "der Lehrer",
+      "der Fahrer",
+      "der Wecker"
+    ],
+    "reliability": "A strong pattern, but only for nouns made from verbs: die Butter, das Zimmer are not."
+  },
+  {
+    "word": "Fahrer",
+    "article": "der",
+    "translation": "водитель",
+    "ruleType": "suffix",
+    "ruleLabel": "-ER ENDING (FROM A VERB)",
+    "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
+    "examples": [
+      "der Lehrer",
+      "der Fahrer",
+      "der Wecker"
+    ],
+    "reliability": "A strong pattern, but only for nouns made from verbs: die Butter, das Zimmer are not."
+  },
+  {
+    "word": "Fernseher",
+    "article": "der",
+    "translation": "телевизор",
+    "ruleType": "suffix",
+    "ruleLabel": "-ER ENDING (FROM A VERB)",
+    "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
+    "examples": [
+      "der Lehrer",
+      "der Fahrer",
+      "der Wecker"
+    ],
+    "reliability": "A strong pattern, but only for nouns made from verbs: die Butter, das Zimmer are not."
+  },
+  {
+    "word": "Drucker",
+    "article": "der",
+    "translation": "принтер",
+    "ruleType": "suffix",
+    "ruleLabel": "-ER ENDING (FROM A VERB)",
+    "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
+    "examples": [
+      "der Lehrer",
+      "der Fahrer",
+      "der Wecker"
+    ],
+    "reliability": "A strong pattern, but only for nouns made from verbs: die Butter, das Zimmer are not."
+  },
+  {
+    "word": "Wecker",
+    "article": "der",
+    "translation": "будильник",
+    "ruleType": "suffix",
+    "ruleLabel": "-ER ENDING (FROM A VERB)",
+    "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
+    "examples": [
+      "der Lehrer",
+      "der Fahrer",
+      "der Wecker"
+    ],
+    "reliability": "A strong pattern, but only for nouns made from verbs: die Butter, das Zimmer are not."
   }
 ];
