@@ -1187,6 +1187,29 @@ header h1 {
 
 }
 .settings-version{margin-top:42px;margin-bottom:26px;color:color-mix(in srgb, var(--text) 42%, transparent);font:400 10px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:left}
+
+/* ===== HOME TILES + HEUTE · same lift as the buttons (Design Police 2026-09-25) =====
+   Soft shadow under the tile (outside the edge, so it works over the pictures), a thin light line along the
+   top edge drawn ON TOP of the picture (dark mode only, like the buttons), no outline.
+   Tile colours and the Heute card's background + green glow stay as they are. */
+:root{--lift-shadow:0 5px 14px rgba(0,0,0,.14);--lift-highlight:inset 0 1px 0 rgba(255,255,255,.06)}
+[data-theme="light"]{--lift-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);--lift-highlight:none}
+.mosaic .tile{border-color:transparent;box-shadow:var(--lift-shadow)}
+/* Exercise tiles: the buttons' card colour (the icons get the same flat background: #2A2A2D dark / #FFF light).
+   The Heute card keeps its own background + green glow. */
+:root{--tile-surface:#2a2a2d}
+[data-theme="light"]{--tile-surface:#fff}
+.mosaic .tile:not(.tile-today){background:var(--tile-surface)}
+.mosaic .tile-small::before,.mosaic .tile-vocab::before{content:"";position:absolute;inset:0;z-index:8;border-radius:inherit;pointer-events:none;box-shadow:var(--lift-highlight)}
+.mosaic .tile-today::before{box-shadow:var(--lift-highlight)}
+/* room for the shadow at the sides: the Home/phrase slider clipped exactly at the tile edges.
+   It now reaches 24px further on each side (into the page margin); each screen gets that 24px back as padding,
+   so everything stays where it was and the phrase screen still starts off-screen. */
+.home-viewport{width:calc(100% + 48px);margin-inline:-24px}
+.home-screen{box-sizing:border-box;padding-inline:24px}
+.phrase-screen{padding-right:calc(max(24px, env(safe-area-inset-right)) + 24px);padding-left:calc(max(24px, env(safe-area-inset-left)) + 24px)}
+/* room for the shadow inside the swipeable tile strip (it clips everything outside its box) */
+.tile-pages{padding:4px 14px 18px;margin:-4px -14px -18px;scroll-padding-inline:14px;column-gap:calc(var(--tile-gap) + 28px)}  /* wider gap between pages, so the next page doesn't peek into the extra room */
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1365,7 +1388,7 @@ header h1 {
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
     </div>
-    <div class="settings-version">Deutsch. version 5.27</div>
+    <div class="settings-version">Deutsch. version 5.28</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1689,8 +1712,8 @@ header h1 {
       dotsBox.hidden = pages.length < 2;
 
       function pageStep() {
-        const gap = parseFloat(getComputedStyle(pager).columnGap) || 0;
-        return pager.clientWidth + gap;
+        // distance from one page to the next (the strip has extra side room for the tile shadows)
+        return pages.length > 1 ? pages[1].offsetLeft - pages[0].offsetLeft : pager.clientWidth;
       }
       function current() {
         return Math.round(pager.scrollLeft / pageStep());
