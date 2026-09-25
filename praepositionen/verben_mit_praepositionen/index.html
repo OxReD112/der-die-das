@@ -239,8 +239,8 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 
 <section id="start" class="screen center">
   <h1 class="start-title">Verben mit Präpositionen</h1>
-  <div class="start-sub">How many exercises?</div>
-  <p class="muted">Type the preposition, then choose the case.</p>
+  <div class="start-sub">Wie viele Übungen?</div>
+  <p class="muted">Schreib die Präposition, dann wähle den Kasus.</p>
   <div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
 </section>
 
@@ -260,7 +260,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
         <div class="case-question off" id="caseQuestion">Welcher Kasus?</div>
       </div>
     </div>
-    <button class="check" id="check">Check</button>
+    <button class="check" id="check">Prüfen</button>
 
     <div id="feedback" class="feedback hidden">
       <div class="glow l"></div><div class="glow r"></div>
@@ -275,7 +275,7 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
         <div class="chips" id="chips"></div>
         <div class="example" id="example"></div>
         <div class="example-tr" id="exampleTr"></div>
-        <button class="continue" id="continue">Continue</button>
+        <button class="continue" id="continue">Weiter</button>
       </div>
     </div>
    </div></div>
@@ -284,15 +284,15 @@ html.is-touch .kbzone.kb-off{visibility:hidden}
 </section>
 
 <section id="done" class="screen center hidden">
-  <h1 class="done-title">Done.</h1>
+  <h1 class="done-title">Fertig.</h1>
   <div class="done-score" id="score">0 / 10</div>
-  <div class="done-score-label">fully correct</div>
+  <div class="done-score-label">komplett richtig</div>
   <div class="done-parts" id="parts"></div>
   <div class="weak hidden" id="weak"></div>
-  <div class="done-note">Tricky verbs will come up more often next time.</div>
+  <div class="done-note">Was schwierig war, kommt öfter wieder.</div>
   <div class="done-actions">
-    <button class="btn" id="home">Start Again</button>
-    <button class="btn" id="homeBack">Back to Home</button>
+    <button class="btn" id="home">Noch eine Runde</button>
+    <button class="btn" id="homeBack">Zur Startseite</button>
   </div>
 </section>
 
@@ -569,7 +569,7 @@ function showAnswer(){
   $("chips").innerHTML = chips;
   $("example").textContent = x.example || "";
   $("exampleTr").textContent = x.exampleTranslation || "";
-  $("continue").textContent = index === session.length - 1 ? "Finish" : "Continue";
+  $("continue").textContent = index === session.length - 1 ? "Fertig" : "Weiter";
 
   $("prepFeedback").classList.add("hidden");
   $("finalFeedback").classList.remove("hidden");
@@ -602,7 +602,7 @@ function finish(){
     .sort((a, b) => b[1].errorRate - a[1].errorRate)
     .map(([k]) => weakLabel(k)).filter(Boolean).slice(0, 3);
   if(weak.length){
-    $("weak").innerHTML = "<b>Needs more practice</b><br>" + weak.map(esc).join("<br>");
+    $("weak").innerHTML = "<b>Noch üben</b><br>" + weak.map(esc).join("<br>");
     $("weak").classList.remove("hidden");
   }else $("weak").classList.add("hidden");
   window.scrollTo({top:0, behavior:"auto"});
