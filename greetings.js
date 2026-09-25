@@ -83,10 +83,10 @@ window.GREETINGS = {
   ],
 
   bonus: [
-    { lines: ["Alles ab jetzt ist Bonus.", "Nur wenn du Lust hast."] },
+    { lines: ["Ab jetzt ist alles Bonus.", "Nur wenn du Lust hast."] },
     { name: ["Du hast genug getan, {name}."],
       noName: ["Du hast genug getan."] },
-    { lines: ["Ab jetzt ist alles Extra."] },
+    { lines: ["Pflicht erledigt –", "jetzt kommt die Kür."] },
     { lines: ["Noch mehr?", "Du bist ja deutscher als die Deutschen."] },
     { lines: ["Streber-Modus: an."] }
   ]

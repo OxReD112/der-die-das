@@ -68,5 +68,40 @@ window.PHRASES = [
     "literal": "«иметь полный нос»",
     "meaning": "Быть сытым по горло, с меня хватит.",
     "example": "Ich habe die Nase voll von diesem Wetter."
+  },
+  {
+    "id": 11,
+    "title": "jemandem auf den Keks gehen",
+    "literal": "«идти кому-то на печенье»",
+    "meaning": "Действовать на нервы, раздражать.",
+    "example": "Der ständige Lärm von nebenan geht mir echt auf den Keks."
+  },
+  {
+    "id": 12,
+    "title": "Das ist nicht mein Bier.",
+    "literal": "«Это не моё пиво.»",
+    "meaning": "Это не моё дело, меня это не касается.",
+    "example": "Wann die anderen nach Hause gehen, ist nicht mein Bier."
+  },
+  {
+    "id": 13,
+    "title": "den Nagel auf den Kopf treffen",
+    "literal": "«попасть гвоздю по шляпке»",
+    "meaning": "Попасть в точку, сказать именно то, что нужно.",
+    "example": "Mit deiner Antwort hast du den Nagel auf den Kopf getroffen."
+  },
+  {
+    "id": 14,
+    "title": "Da steppt der Bär.",
+    "literal": "«Там медведь танцует степ.»",
+    "meaning": "Там очень весело, там кипит жизнь (о вечеринке, событии).",
+    "example": "Komm heute Abend mit zur Party – da steppt der Bär!"
+  },
+  {
+    "id": 15,
+    "title": "Ende gut, alles gut.",
+    "literal": "«Конец хороший — всё хорошо.»",
+    "meaning": "Всё хорошо, что хорошо кончается.",
+    "example": "Der Zug hatte Verspätung, aber wir sind pünktlich angekommen. Ende gut, alles gut."
   }
 ];
