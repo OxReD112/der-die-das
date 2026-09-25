@@ -135,7 +135,7 @@ button{font:inherit}
 <main class="app">
 <section class="session-screen" id="sessionScreen">
   <h1>Fester Kasus</h1>
-  <p>Wie viele Übungen möchtest du machen?</p>
+  <p>Wie viele Übungen?</p>
   <div class="session-options">
     <button class="session-option" data-size="10">10</button>
     <button class="session-option" data-size="20">20</button>
@@ -167,16 +167,16 @@ button{font:inherit}
   <button class="case-choice" data-case="Dativ">Dativ</button>
   <button class="case-choice" data-case="Genitiv">Genitiv</button>
 </section>
-<button class="next hidden" id="next">Continue</button>
+<button class="next hidden" id="next">Weiter</button>
 </section>
 
 <section class="end-screen hidden" id="endScreen">
-  <h1>Done.</h1>
+  <h1>Fertig.</h1>
   <div class="end-score" id="endScore">0 / 10</div>
   <div class="end-note" id="endNote"></div>
   <div class="finish-actions">
-    <button class="again" id="again">Another session</button>
-    <button class="home-back" id="homeBack">Back to Home</button>
+    <button class="again" id="again">Noch eine Runde</button>
+    <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
 <div class="version-mark">v9</div>
@@ -347,7 +347,7 @@ function answer(selected){
 
   els.exampleText.textContent=entry.example||"";
   els.exampleTranslation.textContent=entry.exampleTranslation||"";
-  els.next.textContent=index===session.length-1?"Finish":"Continue";
+  els.next.textContent=index===session.length-1?"Fertig":"Weiter";
   els.bar.style.width=((index+1)/session.length*100)+"%";
   fitToCard(els.answerPreposition);
   animateReveal(fromRect);
@@ -384,7 +384,7 @@ function next(){
 }
 function finish(){
   els.game.classList.add("hidden");els.end.classList.remove("hidden");els.endScore.textContent=score+" / "+session.length;window.scrollTo({top:0,behavior:"auto"});
-  els.endNote.textContent="Difficult prepositions are weighted higher in future sessions.";
+  els.endNote.textContent="Was schwierig war, kommt öfter wieder.";
 }
 document.querySelectorAll(".session-option").forEach(btn=>btn.addEventListener("click",()=>start(Number(btn.dataset.size))));
 els.choices.addEventListener("click",e=>{const btn=e.target.closest("button[data-case]");if(btn)answer(btn.dataset.case);});
