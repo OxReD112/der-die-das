@@ -286,12 +286,26 @@ body:not(:has(#done.show)) .version-mark{display:none}
 #answerInput.almost,#answerInput.almost:focus{border-color:color-mix(in srgb,var(--error) 60%,transparent)}
 #answerInput.nudge{animation:fieldNudge .34s ease-out}
 @media(prefers-reduced-motion:reduce){#answerInput.nudge{animation:none}}
-#typoBtn{display:none;margin:12px auto 0;padding:10px 14px;border:0;background:none;color:var(--muted);
-  font:500 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;
+/* "Nur Tippfehler" = checkbox + label (no frame, so it doesn't compete with Weiter). Secondary text colour;
+   the tick uses the same grey (green stays reserved for "correct"). Tap area bigger than it looks. */
+#typoBtn{display:none;position:relative;align-items:center;gap:10px;margin:8px auto 0;padding:12px 16px;border:0;background:none;
+  color:var(--base-text);font:400 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;
   transition:transform .12s ease,filter .12s ease}
-.feedbackShell.canTypo #typoBtn{display:block}
+.feedbackShell.canTypo #typoBtn{display:inline-flex}
+#typoBtn::before{content:"";flex:0 0 18px;width:18px;height:18px;box-sizing:border-box;border:1.5px solid var(--base-text);border-radius:5px;opacity:.7}
+#typoBtn.done::before{opacity:1;background:var(--base-text)}
+#typoBtn.done::after{content:"";position:absolute;left:23px;top:50%;width:4px;height:9px;margin-top:-6px;
+  border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
 #typoBtn:active{transform:scale(.97);filter:brightness(.94)}
 #typoBtn:disabled{cursor:default;transform:none;filter:none}
+/* Hint line above the typing field: always reserved (nothing jumps), red text fades in with the frame.
+   16px = size of the grey hint/translation lines. Translation moved up 8px to make room. */
+#translation{margin-top:20px}
+#almostHint{height:22px;margin:14px 0 -20px;font:500 16px/22px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  color:var(--error);opacity:0;transition:opacity .15s ease}
+#almostHint.show{opacity:1}
+@media(max-width:699px){#question #almostHint{order:2;width:100%}}
+@media(prefers-reduced-motion:reduce){#almostHint{transition:none}}
 </style>
 </head>
 <body><main class="app">
@@ -302,6 +316,7 @@ body:not(:has(#done.show)) .version-mark{display:none}
    <div class="sentence" id="sentence"></div>
    <div class="translation" id="translation"></div>
   </div>
+  <div id="almostHint" aria-live="polite"></div>
   <input id="answerInput" class="inputbox" type="text" placeholder=" " aria-label="Fehlendes Wort" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
   <button class="check" id="desktopCheck">Prüfen</button>
   <div id="keyboardMount"></div>
@@ -326,7 +341,7 @@ body:not(:has(#done.show)) .version-mark{display:none}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
-<div class="version-mark">v2.81</div>
+<div class="version-mark">v2.83</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
@@ -426,6 +441,10 @@ function normalize(s){return s.trim().toLocaleLowerCase("de-DE").replace(/\s*,\s
 // A close answer never counts as right. It gets a hint (red frame + shake, text stays) and up to 2 more tries.
 // After that it is wrong; the "Nur Tippfehler" button keeps the level and brings the word back tomorrow.
 const TOLERANT_FROM_LEVEL=2, MAX_HINTS=2;
+// Hint texts: short, informal, kind. One picked at random.
+const HINT_FIRST=["Sooo nah dran!","Ups, fast! Nochmal?","Die Buchstaben machen Quatsch.","Knapp! Du hast es gleich."];
+const HINT_LAST=["Ein Blick noch. Keine Panik.","Einmal noch, ganz in Ruhe."];
+const pickOne=a=>a[Math.floor(Math.random()*a.length)];
 // Damerau (OSA) distance: missing / extra / wrong letter or two neighbouring letters swapped = 1 slip.
 function osa(x,y){
  const a=[...x],b=[...y],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));
@@ -589,8 +608,8 @@ function render(){
  if(idx>=queue.length){showDone();return}
  current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} heute`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=getTranslation(current,"sentenceTranslation");$("answerInput").value="";
- hintsUsed=0;typoUndo=null;$("answerInput").classList.remove("almost","nudge");
- $("typoBtn").textContent="Nur Tippfehler";$("typoBtn").disabled=false;
+ hintsUsed=0;typoUndo=null;$("answerInput").classList.remove("almost","nudge");$("almostHint").classList.remove("show");$("almostHint").textContent="";
+ $("typoBtn").textContent="Nur Tippfehler";$("typoBtn").disabled=false;$("typoBtn").classList.remove("done");
  $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";
   if(window.deutschKeyboardReady){$("keyboard").classList.add("show");}
  if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
@@ -617,6 +636,7 @@ function check(){
  const tolerant=(r.level||0)>=TOLERANT_FROM_LEVEL&&!failedToday.has(current.id);
  if(!ok&&tolerant&&hintsUsed<MAX_HINTS&&opts.some(t=>isClose(typed,t))){
    hintsUsed++;
+   $("almostHint").textContent=pickOne(hintsUsed>=MAX_HINTS?HINT_LAST:HINT_FIRST);$("almostHint").classList.add("show");
    const f=$("answerInput");f.classList.add("almost");f.classList.remove("nudge");void f.offsetWidth;f.classList.add("nudge");
    return;
  }
@@ -677,7 +697,7 @@ function markTypo(){
  const j=queue.findIndex((c,k)=>k>idx&&c.id===current.id);if(j>-1)queue.splice(j,1);
  if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
  typoUndo=null;save();publishWortschatzStatus();
- $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;
+ $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;$("typoBtn").classList.add("done");
 }
 $("typoBtn").onclick=markTypo;
 $("addWords").onclick=addFive;
