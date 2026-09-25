@@ -27,15 +27,15 @@
 
   /* ===== TEXT ===== */
   --muted:#8f8f94;
-  --muted-2:#888;
-  --secondary-text:#737473;
-  --dim-text:#92918e;
-  --example-text:#b8b3aa;
+  --muted-2:#8f8f94;
+  --secondary-text:#8f8f94;
+  --dim-text:#8f8f94;
+  --example-text:#c8c7c4;
   --brand-text:#a5a19a;
-  --tertiary-text:#aaa;
+  --tertiary-text:#c8c7c4;
   --placeholder-text:#48494a;
-  --vowel-text:#929391;
-  --score-text:#f1eee8;
+  --vowel-text:#8f8f94;
+  --score-text:#f2f0ed;
   --pattern-text:#c7c3bc;
 
   /* ===== SURFACES ===== */
@@ -75,18 +75,18 @@
 [data-theme="light"]{
   --bg:#f6f4f1;
   --cream:#242426;
-  --mint:#2f9e82;
-  --coral:#e15a54;
+  --mint:#3fa68a;
+  --coral:#e95e66;
 
   --muted:#727278;
-  --muted-2:#8f8f8f;
-  --secondary-text:#7a7a78;
-  --dim-text:#84817b;
-  --example-text:#8f8b83;
+  --muted-2:#727278;
+  --secondary-text:#727278;
+  --dim-text:#727278;
+  --example-text:#727278;
   --brand-text:#8f8b83;
-  --tertiary-text:#8a8a8a;
+  --tertiary-text:#727278;
   --placeholder-text:#b9b9b9;
-  --vowel-text:#83807a;
+  --vowel-text:#727278;
   --score-text:#242426;
   --pattern-text:#4a4844;
 
@@ -128,7 +128,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 .card{position:relative;text-align:center;padding:30px 20px 26px;isolation:isolate}
 .card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,color-mix(in srgb,var(--mint) 9%,transparent),transparent 63%);opacity:.35}
 .verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
-.translation{color:var(--secondary-text);font-size:16px;margin-bottom:44px}
+.translation{color:var(--muted);font-size:16px;margin-bottom:44px}
 .answer{width:100%;height:66px;border:1px solid var(--border);border-radius:18px;background:var(--surface);color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
 .answer:focus{border-color:color-mix(in srgb,var(--mint) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--mint) 8%,transparent)}
 .answer::placeholder{color:var(--placeholder-text)}
@@ -304,6 +304,66 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
 #study .brand{color:var(--muted)}
 #study .progress{background:var(--bar-track)}
 #study .progress>i{background:var(--muted)}
+
+/* Question text sizes (Design Police): single word 56px on phones */
+@media(max-width:699px){#verb{font-size:56px}}
+
+/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
+   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
+   typed text 24px in the group's font. Never green (green = correct).
+   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
+:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
+@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
+@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+#answer{height:58px;min-height:58px;border:1px solid var(--field-line);border-radius:18px;background-color:var(--field-bg);
+  box-shadow:none;outline:none;padding:0 17px;font:400 24px Georgia,"Times New Roman",serif;color:var(--cream)}
+#answer:focus{border-color:var(--field-line);box-shadow:none}
+#answer:placeholder-shown{caret-color:transparent;background-image:linear-gradient(var(--cream),var(--cream));background-repeat:no-repeat;
+  background-position:center;background-size:2px 28px;animation:fieldCaretBg 1.1s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){#answer:placeholder-shown{animation:none}}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--cream);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
+#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#next:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
+   (centred, 28px above the bottom edge).
+   (Design Police 2026-09-25) ===== */
+#study .in-session-pattern{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
+#study .in-session-pattern .pattern-table-btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
+  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#study .in-session-pattern .pattern-table-btn:hover{background:var(--bg);transform:none}
+#study .in-session-pattern .pattern-table-btn:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#study:not(.hidden)) .version-mark{display:none}
+
+/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
+   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
+#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
+#check:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
+   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
+   Window: palette card colour, shared outline, 24px corners. */
+:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
+.pattern-modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
+.pattern-modal.open{background:var(--overlay-scrim)}
+/* the version number sits outside the app layer, so the blur can't reach it: fade it out with the table instead */
+.version-mark{transition:opacity .18s ease}
+body:has(.pattern-modal.open) .version-mark{opacity:0}
+.pattern-modal-card{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
 </style>
 </head>
 <body>
@@ -325,7 +385,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   <section class="card">
    <div class="verb" id="verb"></div>
    <div class="translation" id="translation"></div>
-   <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
+   <input id="answer" class="answer" placeholder=" " aria-label="Fehlende Form" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
    <button class="check" id="check">Prüfen</button>
    <div class="result" id="result">
     <div class="result-head"><div class="state" id="state"></div><div class="vowel-pattern" id="vowelPattern"></div></div>
@@ -358,7 +418,7 @@ body{height:100vh;height:100dvh;overflow:hidden;padding:0}
   </div>
  </div>
 </main>
-<div class="version-mark">v49</div>
+<div class="version-mark">v53</div>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
 <script src="verbs.js?v=4"></script>
