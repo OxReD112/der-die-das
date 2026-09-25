@@ -176,7 +176,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 <main class="app">
 <section class="session-screen" id="sessionScreen">
   <h1>Ortspräpositionen</h1>
-  <p>Wie viele Übungen möchtest du machen?</p>
+  <p>Wie viele Übungen?</p>
   <div class="session-options">
     <button class="session-option" data-size="10">10</button>
     <button class="session-option" data-size="20">20</button>
@@ -199,23 +199,23 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
   </section>
 
   <section class="choices" id="choices"></section>
-  <button class="next hidden" id="next">Continue</button>
+  <button class="next hidden" id="next">Weiter</button>
   <div class="rule-note" id="ruleNote"></div>
 </section>
 
 <section class="end-screen hidden" id="endScreen">
-  <h1>Done.</h1>
+  <h1>Fertig.</h1>
   <div class="end-score" id="endScore">0 / 30</div>
   <div class="end-note" id="endNote"></div>
   <div class="finish-actions">
-    <button class="again" id="again">Another session</button>
-    <button class="home-back" id="homeBack">Back to Home</button>
+    <button class="again" id="again">Noch eine Runde</button>
+    <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
 <div class="version-mark">v7</div>
 </main>
 
-<script src="ortspraepositionen.js?v=4"></script>
+<script src="ortspraepositionen.js?v=5"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PLACES = window.ORTSPRAEPOSITIONEN || [];
@@ -253,14 +253,14 @@ function altNote(entry,q,form){return "Auch richtig: "+form+" "+nounFor(entry,q)
 // Shown below the Continue button ONLY when zu/von was picked where the box wants in/an/auf (Wohin) or aus (Woher):
 // this drill trains ending up IN/AT/ON the place, not just going up to it.
 const ZU_BOX={raum:"in",ausnahme:"in",land:"in",adresse:"in",kontakt:"an",flaeche:"auf"};
-const ZU_MEANING={in:"hinein · внутрь",an:"direkt dran · вплотную",auf:"drauf · на само место"};
+const ZU_TEXT=window.ORTS_ZU_HINTS||{};
 function zuHint(entry,q,form){
   const box=ZU_BOX[entry.cat];if(!box)return "";
   const b=s=>"<b>"+escapeHtml(s)+"</b>";
   if(q==="wohin"&&/^zu/.test(form))
-    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+ZU_MEANING[box]+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — nur bis dorthin · только до</div>";
+    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+(ZU_TEXT[box]||"")+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — "+(ZU_TEXT.zu||"")+"</div>";
   if(q==="woher"&&/^von?/.test(form)&&/^aus/.test(entry.woher))
-    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — heraus · изнутри</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — nur von dort · просто оттуда</div>";
+    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — "+(ZU_TEXT.aus||"")+"</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — "+(ZU_TEXT.von||"")+"</div>";
   return "";
 }
 
@@ -418,7 +418,7 @@ function finishCard(){
   els.ruleForms.textContent=cat.rule||"";
   els.ruleNote.innerHTML=usedAlts.map(a=>"<div>"+escapeHtml(altNote(entry,a.q,a.form))+"</div>").join("")+zuHints.join("");
   els.choices.classList.add("hidden");
-  els.next.textContent=index===session.length-1?"Finish":"Continue";
+  els.next.textContent=index===session.length-1?"Fertig":"Weiter";
   els.next.classList.remove("hidden");
   els.bar.style.width=((index+1)/session.length*100)+"%";
 }
@@ -431,7 +431,7 @@ function next(){
 function finish(){
   els.game.classList.add("hidden");els.end.classList.remove("hidden");
   els.endScore.textContent=score+" / "+taps;window.scrollTo({top:0,behavior:"auto"});
-  els.endNote.textContent="Places you miss come back more often in future sessions.";
+  els.endNote.textContent="Was schwierig war, kommt öfter wieder.";
 }
 
 // ===== SMALL MOTION =====

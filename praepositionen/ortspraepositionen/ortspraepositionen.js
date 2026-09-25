@@ -14,6 +14,17 @@
 //   alt       - optional other correct form per question, e.g. {wo:["auf der"]} → counted as correct,
 //               "Auch richtig: …" shown below the button. Only for real everyday variants (Arbeit, Party, Hochzeit).
 
+// Texts for the hint below the Continue button (shown only when zu/von was picked
+// where the box wants in/an/auf or aus). German · Russian.
+window.ORTS_ZU_HINTS = {
+  in:   "hinein · внутрь",
+  an:   "direkt dran · вплотную",
+  auf:  "drauf · на само место",
+  zu:   "nur bis dorthin · только до",
+  aus:  "heraus · изнутри",
+  von:  "nur von dort · просто оттуда"
+};
+
 window.ORTS_KATEGORIEN = {
   raum:     {label:"Raum, geschlossener Ort",           rule:"in · in · aus"},
   stadt:    {label:"Stadt, Land ohne Artikel",          rule:"in · nach · aus"},
