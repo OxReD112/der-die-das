@@ -212,11 +212,11 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
-<div class="version-mark">v7</div>
+<div class="version-mark">v9</div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
-<script src="ortspraepositionen.js?v=6"></script>
+<script src="ortspraepositionen.js?v=8"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PLACES = window.ORTSPRAEPOSITIONEN || [];
@@ -256,8 +256,11 @@ function altNote(entry,q,form){return "Auch richtig: "+form+" "+nounFor(entry,q)
 const ZU_BOX={raum:"in",ausnahme:"in",land:"in",adresse:"in",kontakt:"an",flaeche:"auf"};
 const ZU_TEXT=window.ORTS_ZU_HINTS||{};
 function zuHint(entry,q,form){
-  const box=ZU_BOX[entry.cat];if(!box)return "";
   const b=s=>"<b>"+escapeHtml(s)+"</b>";
+  // Bahnhof-type cards (an · zu · von): here zu IS right — note when an den / an die was picked.
+  if(entry.cat==="anzu"&&q==="wohin"&&/^an\b/.test(form))
+    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,"normal")+"</div><div>"+b(form+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,"unueblich")+"</div>";
+  const box=ZU_BOX[entry.cat];if(!box)return "";
   if(q==="wohin"&&/^zu/.test(form))
     return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,box)+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — "+getTranslation(ZU_TEXT,"zu")+"</div>";
   if(q==="woher"&&/^von?/.test(form)&&/^aus/.test(entry.woher))
@@ -417,7 +420,7 @@ function finishCard(){
   els.eyebrow.textContent=wrong?"Nicht ganz · "+(3-wrong)+" / 3":"Richtig";
   els.ruleLabel.textContent=cat.label||"";
   els.ruleForms.textContent=cat.rule||"";
-  els.ruleNote.innerHTML=usedAlts.map(a=>"<div>"+escapeHtml(altNote(entry,a.q,a.form))+"</div>").join("")+zuHints.join("");
+  els.ruleNote.innerHTML=(entry.note?"<div>"+escapeHtml(getTranslation(entry,"note"))+"</div>":"")+usedAlts.map(a=>"<div>"+escapeHtml(altNote(entry,a.q,a.form))+"</div>").join("")+zuHints.join("");
   els.choices.classList.add("hidden");
   els.next.textContent=index===session.length-1?"Fertig":"Weiter";
   els.next.classList.remove("hidden");
