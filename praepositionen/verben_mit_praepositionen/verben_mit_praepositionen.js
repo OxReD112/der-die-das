@@ -699,22 +699,6 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
   },
 
   {
-    "id": "vmp_051",
-    "verb": "bestehen",
-    "preposition": "auf",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "настаивать на",
-      "en": "to insist on"
-    },
-    "example": "Er besteht auf einer Antwort.",
-    "exampleTranslation": {
-      "ru": "Он настаивает на ответе.",
-      "en": "He insists on an answer."
-    }
-  },
-
-  {
     "id": "vmp_052",
     "verb": "sich entschuldigen",
     "preposition": "bei",
@@ -939,38 +923,6 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
   },
 
   {
-    "id": "vmp_066",
-    "verb": "leiden",
-    "preposition": "unter",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "страдать от",
-      "en": "to suffer from"
-    },
-    "example": "Viele Menschen leiden unter Stress.",
-    "exampleTranslation": {
-      "ru": "Многие люди страдают от стресса.",
-      "en": "Many people suffer from stress."
-    }
-  },
-
-  {
-    "id": "vmp_067",
-    "verb": "schmecken",
-    "preposition": "nach",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "иметь вкус чего-то",
-      "en": "to taste of"
-    },
-    "example": "Die Suppe schmeckt nach Knoblauch.",
-    "exampleTranslation": {
-      "ru": "У супа вкус чеснока.",
-      "en": "The soup tastes of garlic."
-    }
-  },
-
-  {
     "id": "vmp_068",
     "verb": "Angst haben",
     "preposition": "vor",
@@ -984,5 +936,118 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
       "ru": "Я боюсь пауков.",
       "en": "I'm afraid of spiders."
     }
+  },
+
+  {
+    "id": "vmp_069",
+    "verb": "Lust haben",
+    "preposition": "auf",
+    "case": "Akkusativ",
+    "meaning": {
+      "ru": "хотеть чего-то, иметь желание",
+      "en": "to feel like, to fancy"
+    },
+    "example": "Ich habe Lust auf ein Eis.",
+    "exampleTranslation": {
+      "ru": "Мне хочется мороженого.",
+      "en": "I fancy an ice cream."
+    }
+  },
+
+  {
+    "id": "vmp_070",
+    "verb": "telefonieren",
+    "preposition": "mit",
+    "case": "Dativ",
+    "meaning": {
+      "ru": "говорить по телефону с",
+      "en": "to be on the phone to, to call"
+    },
+    "example": "Ich telefoniere jeden Sonntag mit meiner Mutter.",
+    "exampleTranslation": {
+      "ru": "Я каждое воскресенье говорю по телефону с мамой.",
+      "en": "I talk to my mum on the phone every Sunday."
+    }
+  },
+
+  {
+    "id": "vmp_071",
+    "verb": "helfen",
+    "preposition": "bei",
+    "case": "Dativ",
+    "meaning": {
+      "ru": "помогать с чем-то (в каком-то деле)",
+      "en": "to help (someone) do something"
+    },
+    "example": "Kannst du mir beim Umzug helfen?",
+    "exampleTranslation": {
+      "ru": "Можешь помочь мне с переездом?",
+      "en": "Can you help me with the move?"
+    }
+  },
+
+  {
+    "id": "vmp_072",
+    "verb": "sich unterhalten",
+    "preposition": "mit",
+    "case": "Dativ",
+    "meaning": {
+      "ru": "беседовать с кем-то",
+      "en": "to chat to someone, to have a conversation"
+    },
+    "example": "Ich habe mich lange mit meiner Nachbarin unterhalten.",
+    "exampleTranslation": {
+      "ru": "Я долго беседовала с соседкой.",
+      "en": "I had a long chat with my neighbour."
+    }
+  },
+
+  {
+    "id": "vmp_073",
+    "verb": "sich unterhalten",
+    "preposition": "über",
+    "case": "Akkusativ",
+    "meaning": {
+      "ru": "беседовать о чём-то (тема разговора)",
+      "en": "to chat (on a topic), to discuss"
+    },
+    "example": "Wir haben uns über den Film unterhalten.",
+    "exampleTranslation": {
+      "ru": "Мы поговорили о фильме.",
+      "en": "We talked about the film."
+    }
+  },
+
+  {
+    "id": "vmp_074",
+    "verb": "diskutieren",
+    "preposition": "über",
+    "case": "Akkusativ",
+    "meaning": {
+      "ru": "обсуждать, спорить о",
+      "en": "to discuss, to debate"
+    },
+    "example": "Wir diskutieren oft über Politik.",
+    "exampleTranslation": {
+      "ru": "Мы часто спорим о политике.",
+      "en": "We often discuss politics."
+    }
+  },
+
+  {
+    "id": "vmp_075",
+    "verb": "achten",
+    "preposition": "auf",
+    "case": "Akkusativ",
+    "meaning": {
+      "ru": "обращать внимание на, следить за",
+      "en": "to pay attention to, to watch out for"
+    },
+    "example": "Ich achte auf meine Gesundheit.",
+    "exampleTranslation": {
+      "ru": "Я слежу за своим здоровьем.",
+      "en": "I look after my health."
+    }
   }
+
 ];
