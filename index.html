@@ -1361,7 +1361,7 @@ header h1 {
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
     </div>
-    <div class="settings-version">Deutsch. version 5.19</div>
+    <div class="settings-version">Deutsch. version 5.20</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1865,6 +1865,17 @@ const BACKUP_MODULES={
     setting:true,
     current:()=>window.DeutschTranslation ? window.DeutschTranslation.getLang() : null
   },
+  /* Anonymous notification user ID (Documentation/NOTIFICATION_SYSTEM_MASTER.md, §15).
+     Keeps the same notification identity after a Home Screen reinstall and
+     links a second device (iPad) to the same user. The deviceId is NOT
+     backed up: it must stay unique per device. Stored as a plain string. */
+  notificationUser:{
+    label:"Notifications",
+    storageKey:"deutschNotificationUserIdV1",
+    storageVersion:"deutschNotificationUserIdV1",
+    setting:true,
+    plain:true
+  },
   /* Planned — Progress Tracker (not written by any module yet). */
   progress:{
     label:"Fortschritt",
@@ -1958,8 +1969,10 @@ async function restoreDeutschBackup(file){
       if(note)note.textContent="· Restore cancelled";
       return;
     }
+    const previousNotificationUser=localStorage.getItem("deutschNotificationUserIdV1");
     restorable.forEach(([,config,state])=>{
-      localStorage.setItem(config.storageKey,JSON.stringify(state));
+      localStorage.setItem(config.storageKey,
+        config.plain&&typeof state==="string" ? state : JSON.stringify(state));
     });
 
     /* Refresh Home statistics from the restored Wortschatz state.
@@ -1995,7 +2008,17 @@ async function restoreDeutschBackup(file){
       langToggle.setAttribute("aria-label","Translation language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
 
-    if(note)note.textContent="· Restore complete";
+    /* Move this device's push subscription to the restored notification ID. */
+    const restoredNotificationUser=localStorage.getItem("deutschNotificationUserIdV1");
+    let notificationsMoved=true;
+    if(restoredNotificationUser&&restoredNotificationUser!==previousNotificationUser&&
+       window.DeutschNotifications){
+      notificationsMoved=await window.DeutschNotifications.relink(previousNotificationUser);
+    }
+
+    if(note)note.textContent=notificationsMoved
+      ? "· Restore complete"
+      : "· Restored · turn Notifications on again";
     const nameField=document.getElementById("nameInput");
     if(nameField)nameField.value=getUserName();
     syncHomeDashboard();
@@ -2166,6 +2189,47 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
       render();
     }
   });
+
+  /* After a backup restore changed the userId: if this device has
+     notifications ON, register its existing subscription under the restored
+     userId, enable that user and detach the device from the old userId.
+     The old userId is then cleaned up by the Worker Cron. */
+  async function relink(oldUserId){
+    if(!enabled()) return true;
+    try{
+      const registration=await navigator.serviceWorker.getRegistration("./");
+      const subscription=registration && await registration.pushManager.getSubscription();
+      if(!subscription) throw new Error("no-subscription");
+
+      const response=await fetch(SERVER+"/subscribe",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          userId:getUserId(),
+          deviceId:getDeviceId(),
+          subscription:subscription.toJSON()
+        })
+      });
+      if(!response.ok) throw new Error("subscribe-"+response.status);
+      await setServerState(true);
+
+      if(oldUserId && oldUserId!==getUserId()){
+        fetch(SERVER+"/unsubscribe",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({userId:oldUserId,deviceId:getDeviceId()})
+        }).catch(()=>{});
+      }
+      return true;
+    }catch(error){
+      console.error("Deutsch notifications relink:",error);
+      localStorage.setItem(ENABLED_KEY,"0");
+      render();
+      return false;
+    }
+  }
+
+  window.DeutschNotifications={relink};
 
   resetDailyLimitForNewDay();
   render();
