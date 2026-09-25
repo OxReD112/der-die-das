@@ -18,7 +18,7 @@
 *{box-sizing:border-box}
 :root{
   --bg:#1b1b1d;--panel:#1f2022;--panel-2:#252629;--text:#f2f0ed;--muted:#8f8f94;
-  --text-secondary:#b9b5ae;--line:rgba(255,255,255,.09);--top-title:rgba(255,255,255,.48);
+  --text-secondary:#c8c7c4;--line:rgba(255,255,255,.09);--top-title:rgba(255,255,255,.48);
   --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
   --cta-bg:#ece6dc;--cta-text:#1b1c1e;
   --button-bg:#2a2b2e;--button-bg-hover:#313235;--button-text:#fff;
@@ -37,7 +37,7 @@
 [data-theme="light"]{
   --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#242426;--muted:#727278;
   --text-secondary:#55565b;--line:rgba(0,0,0,.09);--top-title:rgba(37,37,40,.48);
-  --progress:rgba(32,32,35,.28);--mint:#55b99a;--coral:#ef666c;--blue:#5d8fe5;
+  --progress:rgba(32,32,35,.28);--mint:#3fa68a;--coral:#e95e66;--blue:#5588e0;
   --cta-bg:#252528;--cta-text:#f5f2ec;
   --button-bg:#fff;--button-bg-hover:#f4f2ef;--button-text:var(--text);
   --button-shadow:0 0 0 1px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.07);
@@ -47,9 +47,9 @@
   --secondary-bg:rgba(0,0,0,.03);--secondary-text:rgba(37,37,40,.55);
   --version:rgba(37,37,40,.30);
   --card-sheen:radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.035) 0%,rgba(0,0,0,.015) 24%,transparent 52%);
-  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(85,185,154,.28) 0%,rgba(85,185,154,.13) 24%,rgba(85,185,154,.05) 48%,transparent 76%);
-  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(239,102,108,.27) 0%,rgba(239,102,108,.12) 24%,rgba(239,102,108,.04) 48%,transparent 76%);
-  --special-glow:radial-gradient(ellipse at 50% 38%,rgba(93,143,229,.24) 0%,rgba(93,143,229,.11) 24%,rgba(93,143,229,.04) 48%,transparent 76%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(63,166,138,.28) 0%,rgba(63,166,138,.13) 24%,rgba(63,166,138,.05) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(233,94,102,.27) 0%,rgba(233,94,102,.12) 24%,rgba(233,94,102,.04) 48%,transparent 76%);
+  --special-glow:radial-gradient(ellipse at 50% 38%,rgba(85,136,224,.24) 0%,rgba(85,136,224,.11) 24%,rgba(85,136,224,.04) 48%,transparent 76%);
   --shadow:0 12px 40px rgba(0,0,0,.06);
 }
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
@@ -94,17 +94,17 @@ button{font:inherit}
 .counter{font-size:13px;color:var(--muted);padding-bottom:2px;font-variant-numeric:tabular-nums}
 .progress{margin-top:10px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--progress);border-radius:inherit;transition:width .25s ease}
-.card{margin-top:15px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--shadow);padding:30px 24px 25px;min-height:365px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
-.card:before{content:"";position:absolute;inset:0;background:var(--card-sheen);pointer-events:none}
-.preposition{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(52px,14vw,88px);white-space:nowrap;letter-spacing:-3px;line-height:1;margin-bottom:14px}
-.translation{position:relative;color:var(--text-secondary);font-size:16px;line-height:1.4;min-height:23px}
-.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.card{margin-top:26px;border-radius:26px;background:var(--card-bg);box-shadow:var(--card-lift);padding:30px 24px 25px;min-height:360px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+
+.preposition{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(56px,14vw,88px);white-space:nowrap;letter-spacing:-3px;line-height:1;margin-bottom:14px}
+.translation{position:relative;color:var(--muted);font-size:16px;line-height:1.4;min-height:23px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
 
 /* ===== ANSWER CARD ===== */
-.answer-state{margin-top:15px}
+.answer-state{margin-top:26px}
 .answer-card-main{
-  min-height:365px;border:1px solid var(--line);border-radius:26px;background:var(--panel);
-  box-shadow:var(--shadow);padding:30px 28px 25px;display:flex;flex-direction:column;
+  min-height:360px;border-radius:26px;background:var(--card-bg);
+  box-shadow:var(--card-lift);padding:30px 28px 25px;display:flex;flex-direction:column;
   align-items:center;text-align:center;position:relative;overflow:hidden;
 }
 .answer-card-main:before{content:"";position:absolute;inset:-170px -30% auto;height:380px;background:var(--answer-glow,var(--good-glow));pointer-events:none;animation:glowIn .25s ease-out both}
@@ -193,6 +193,39 @@ button{font:inherit}
 #game .top{margin:13px 0 0}
 #game .top-row{align-items:center}
 #game .progress{margin-top:11px}
+
+/* ===== WORD CARD · shared by Artikel and Fester Kasus (Design Police 2026-09-25) =====
+   Position and height = Artikel: 26px below the top bar, 360px high (question card and answer card). */
+:root{
+  --card-bg:#2a2a2d;
+  --card-lift:inset 0 1px 0 rgba(255,255,255,.06),0 18px 40px rgba(0,0,0,.30);
+}
+[data-theme="light"]{
+  --card-bg:#fff;
+  --card-lift:0 2px 4px rgba(0,0,0,.04),0 14px 34px rgba(0,0,0,.09);
+}
+@media(max-width:699px){.preposition{font-size:56px}}
+
+/* ===== ANSWER BUTTONS · shared by Artikel, Fester Kasus, Ortspräpositionen (Design Police 2026-09-25) ===== */
+#choices .case-choice{border:0;border-radius:14px;min-height:56px;height:56px;padding:0 10px;
+  background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:17px;font-weight:400;letter-spacing:0;color:var(--text);
+  transition:transform .12s ease,filter .12s ease,opacity .16s ease}
+#choices .case-choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#choices .case-choice:active{transform:scale(.97);filter:brightness(.94);box-shadow:var(--start-btn-shadow)}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
+#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#next:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#game:not(.hidden)) .version-mark{display:none}
 </style>
 </head>
 <body>
@@ -243,7 +276,7 @@ button{font:inherit}
     <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
-<div class="version-mark">v13</div>
+<div class="version-mark">v16</div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
