@@ -2,7 +2,10 @@ window.WORDS = [
   {
     "word": "Zeitung",
     "article": "die",
-    "translation": "газета",
+    "translation": {
+      "ru": "газета",
+      "en": "newspaper"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -16,7 +19,10 @@ window.WORDS = [
   {
     "word": "Wohnung",
     "article": "die",
-    "translation": "квартира",
+    "translation": {
+      "ru": "квартира",
+      "en": "flat, apartment"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -30,7 +36,10 @@ window.WORDS = [
   {
     "word": "Rechnung",
     "article": "die",
-    "translation": "счёт",
+    "translation": {
+      "ru": "счёт",
+      "en": "bill, invoice"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -44,7 +53,10 @@ window.WORDS = [
   {
     "word": "Erfahrung",
     "article": "die",
-    "translation": "опыт",
+    "translation": {
+      "ru": "опыт",
+      "en": "experience, know-how"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -58,7 +70,10 @@ window.WORDS = [
   {
     "word": "Einladung",
     "article": "die",
-    "translation": "приглашение",
+    "translation": {
+      "ru": "приглашение",
+      "en": "invitation"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -72,7 +87,10 @@ window.WORDS = [
   {
     "word": "Meinung",
     "article": "die",
-    "translation": "мнение",
+    "translation": {
+      "ru": "мнение",
+      "en": "opinion"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -86,7 +104,10 @@ window.WORDS = [
   {
     "word": "Gesundheit",
     "article": "die",
-    "translation": "здоровье",
+    "translation": {
+      "ru": "здоровье",
+      "en": "health"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -100,7 +121,10 @@ window.WORDS = [
   {
     "word": "Freiheit",
     "article": "die",
-    "translation": "свобода",
+    "translation": {
+      "ru": "свобода",
+      "en": "freedom"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -114,7 +138,10 @@ window.WORDS = [
   {
     "word": "Sicherheit",
     "article": "die",
-    "translation": "безопасность",
+    "translation": {
+      "ru": "безопасность",
+      "en": "safety, security"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -128,7 +155,10 @@ window.WORDS = [
   {
     "word": "Krankheit",
     "article": "die",
-    "translation": "болезнь",
+    "translation": {
+      "ru": "болезнь",
+      "en": "illness, disease"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -142,7 +172,10 @@ window.WORDS = [
   {
     "word": "Möglichkeit",
     "article": "die",
-    "translation": "возможность",
+    "translation": {
+      "ru": "возможность",
+      "en": "possibility, opportunity"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -156,7 +189,10 @@ window.WORDS = [
   {
     "word": "Schwierigkeit",
     "article": "die",
-    "translation": "трудность",
+    "translation": {
+      "ru": "трудность",
+      "en": "difficulty"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -170,7 +206,10 @@ window.WORDS = [
   {
     "word": "Fähigkeit",
     "article": "die",
-    "translation": "способность",
+    "translation": {
+      "ru": "способность",
+      "en": "ability, skill"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -184,7 +223,10 @@ window.WORDS = [
   {
     "word": "Wirklichkeit",
     "article": "die",
-    "translation": "реальность",
+    "translation": {
+      "ru": "реальность",
+      "en": "reality"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -198,7 +240,10 @@ window.WORDS = [
   {
     "word": "Freundschaft",
     "article": "die",
-    "translation": "дружба",
+    "translation": {
+      "ru": "дружба",
+      "en": "friendship"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -212,7 +257,10 @@ window.WORDS = [
   {
     "word": "Gesellschaft",
     "article": "die",
-    "translation": "общество",
+    "translation": {
+      "ru": "общество",
+      "en": "society; company"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -226,7 +274,10 @@ window.WORDS = [
   {
     "word": "Mannschaft",
     "article": "die",
-    "translation": "команда",
+    "translation": {
+      "ru": "команда",
+      "en": "team"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -240,7 +291,10 @@ window.WORDS = [
   {
     "word": "Landschaft",
     "article": "die",
-    "translation": "ландшафт",
+    "translation": {
+      "ru": "ландшафт",
+      "en": "landscape"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -254,7 +308,10 @@ window.WORDS = [
   {
     "word": "Information",
     "article": "die",
-    "translation": "информация",
+    "translation": {
+      "ru": "информация",
+      "en": "information"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -268,7 +325,10 @@ window.WORDS = [
   {
     "word": "Situation",
     "article": "die",
-    "translation": "ситуация",
+    "translation": {
+      "ru": "ситуация",
+      "en": "situation"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -282,7 +342,10 @@ window.WORDS = [
   {
     "word": "Reaktion",
     "article": "die",
-    "translation": "реакция",
+    "translation": {
+      "ru": "реакция",
+      "en": "reaction"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -296,7 +359,10 @@ window.WORDS = [
   {
     "word": "Universität",
     "article": "die",
-    "translation": "университет",
+    "translation": {
+      "ru": "университет",
+      "en": "university"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -310,7 +376,10 @@ window.WORDS = [
   {
     "word": "Qualität",
     "article": "die",
-    "translation": "качество",
+    "translation": {
+      "ru": "качество",
+      "en": "quality"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -324,7 +393,10 @@ window.WORDS = [
   {
     "word": "Aktivität",
     "article": "die",
-    "translation": "активность",
+    "translation": {
+      "ru": "активность",
+      "en": "activity"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -338,7 +410,10 @@ window.WORDS = [
   {
     "word": "Musik",
     "article": "die",
-    "translation": "музыка",
+    "translation": {
+      "ru": "музыка",
+      "en": "music"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -352,7 +427,10 @@ window.WORDS = [
   {
     "word": "Politik",
     "article": "die",
-    "translation": "политика",
+    "translation": {
+      "ru": "политика",
+      "en": "politics, policy"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -366,7 +444,10 @@ window.WORDS = [
   {
     "word": "Technik",
     "article": "die",
-    "translation": "техника, технология",
+    "translation": {
+      "ru": "техника, технология",
+      "en": "technology, engineering"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -380,7 +461,10 @@ window.WORDS = [
   {
     "word": "Bäckerei",
     "article": "die",
-    "translation": "пекарня",
+    "translation": {
+      "ru": "пекарня",
+      "en": "bakery"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -394,7 +478,10 @@ window.WORDS = [
   {
     "word": "Polizei",
     "article": "die",
-    "translation": "полиция",
+    "translation": {
+      "ru": "полиция",
+      "en": "police"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -408,7 +495,10 @@ window.WORDS = [
   {
     "word": "Mädchen",
     "article": "das",
-    "translation": "девочка",
+    "translation": {
+      "ru": "девочка",
+      "en": "girl"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -422,7 +512,10 @@ window.WORDS = [
   {
     "word": "Brötchen",
     "article": "das",
-    "translation": "булочка",
+    "translation": {
+      "ru": "булочка",
+      "en": "bread roll"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -436,7 +529,10 @@ window.WORDS = [
   {
     "word": "Häuschen",
     "article": "das",
-    "translation": "домик",
+    "translation": {
+      "ru": "домик",
+      "en": "little house, cottage"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -450,7 +546,10 @@ window.WORDS = [
   {
     "word": "Dokument",
     "article": "das",
-    "translation": "документ",
+    "translation": {
+      "ru": "документ",
+      "en": "document"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Many borrowed nouns ending in -ment are neuter.",
@@ -464,7 +563,10 @@ window.WORDS = [
   {
     "word": "Instrument",
     "article": "das",
-    "translation": "инструмент",
+    "translation": {
+      "ru": "инструмент",
+      "en": "instrument"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Many borrowed nouns ending in -ment are neuter.",
@@ -478,7 +580,10 @@ window.WORDS = [
   {
     "word": "Experiment",
     "article": "das",
-    "translation": "эксперимент",
+    "translation": {
+      "ru": "эксперимент",
+      "en": "experiment"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Many borrowed nouns ending in -ment are neuter.",
@@ -492,7 +597,10 @@ window.WORDS = [
   {
     "word": "Argument",
     "article": "das",
-    "translation": "аргумент",
+    "translation": {
+      "ru": "аргумент",
+      "en": "argument"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Many borrowed nouns ending in -ment are neuter.",
@@ -506,7 +614,10 @@ window.WORDS = [
   {
     "word": "Datum",
     "article": "das",
-    "translation": "дата",
+    "translation": {
+      "ru": "дата",
+      "en": "date"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Many borrowed nouns ending in -um are neuter.",
@@ -520,7 +631,10 @@ window.WORDS = [
   {
     "word": "Zentrum",
     "article": "das",
-    "translation": "центр",
+    "translation": {
+      "ru": "центр",
+      "en": "centre"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Many borrowed nouns ending in -um are neuter.",
@@ -534,7 +648,10 @@ window.WORDS = [
   {
     "word": "Museum",
     "article": "das",
-    "translation": "музей",
+    "translation": {
+      "ru": "музей",
+      "en": "museum"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Many borrowed nouns ending in -um are neuter.",
@@ -548,7 +665,10 @@ window.WORDS = [
   {
     "word": "Studium",
     "article": "das",
-    "translation": "учёба в вузе",
+    "translation": {
+      "ru": "учёба в вузе",
+      "en": "university studies"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Many borrowed nouns ending in -ium are neuter.",
@@ -562,7 +682,10 @@ window.WORDS = [
   {
     "word": "Aquarium",
     "article": "das",
-    "translation": "аквариум",
+    "translation": {
+      "ru": "аквариум",
+      "en": "aquarium"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Many borrowed nouns ending in -ium are neuter.",
@@ -576,7 +699,10 @@ window.WORDS = [
   {
     "word": "Thema",
     "article": "das",
-    "translation": "тема",
+    "translation": {
+      "ru": "тема",
+      "en": "topic, subject"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many Greek-derived nouns ending in -ma are neuter.",
@@ -590,7 +716,10 @@ window.WORDS = [
   {
     "word": "Klima",
     "article": "das",
-    "translation": "климат",
+    "translation": {
+      "ru": "климат",
+      "en": "climate"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many Greek-derived nouns ending in -ma are neuter.",
@@ -604,7 +733,10 @@ window.WORDS = [
   {
     "word": "Essen",
     "article": "das",
-    "translation": "еда",
+    "translation": {
+      "ru": "еда",
+      "en": "food, meal"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -618,7 +750,10 @@ window.WORDS = [
   {
     "word": "Lesen",
     "article": "das",
-    "translation": "чтение",
+    "translation": {
+      "ru": "чтение",
+      "en": "reading"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -632,7 +767,10 @@ window.WORDS = [
   {
     "word": "Lernen",
     "article": "das",
-    "translation": "учёба, процесс обучения",
+    "translation": {
+      "ru": "учёба, процесс обучения",
+      "en": "learning, studying"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -646,7 +784,10 @@ window.WORDS = [
   {
     "word": "Schmetterling",
     "article": "der",
-    "translation": "бабочка",
+    "translation": {
+      "ru": "бабочка",
+      "en": "butterfly"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -660,7 +801,10 @@ window.WORDS = [
   {
     "word": "Frühling",
     "article": "der",
-    "translation": "весна",
+    "translation": {
+      "ru": "весна",
+      "en": "spring (season)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -674,7 +818,10 @@ window.WORDS = [
   {
     "word": "Lehrling",
     "article": "der",
-    "translation": "ученик, подмастерье",
+    "translation": {
+      "ru": "ученик, подмастерье",
+      "en": "apprentice"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -688,7 +835,10 @@ window.WORDS = [
   {
     "word": "Zwilling",
     "article": "der",
-    "translation": "близнец",
+    "translation": {
+      "ru": "близнец",
+      "en": "twin"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -702,7 +852,10 @@ window.WORDS = [
   {
     "word": "Optimismus",
     "article": "der",
-    "translation": "оптимизм",
+    "translation": {
+      "ru": "оптимизм",
+      "en": "optimism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -716,7 +869,10 @@ window.WORDS = [
   {
     "word": "Tourismus",
     "article": "der",
-    "translation": "туризм",
+    "translation": {
+      "ru": "туризм",
+      "en": "tourism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -730,7 +886,10 @@ window.WORDS = [
   {
     "word": "Realismus",
     "article": "der",
-    "translation": "реализм",
+    "translation": {
+      "ru": "реализм",
+      "en": "realism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -744,7 +903,10 @@ window.WORDS = [
   {
     "word": "Student",
     "article": "der",
-    "translation": "студент",
+    "translation": {
+      "ru": "студент",
+      "en": "student"
+    },
     "ruleType": "category",
     "ruleLabel": "MALE PERSON",
     "explanation": "It refers to a male person, so it takes der.",
@@ -758,7 +920,10 @@ window.WORDS = [
   {
     "word": "Patient",
     "article": "der",
-    "translation": "пациент",
+    "translation": {
+      "ru": "пациент",
+      "en": "patient"
+    },
     "ruleType": "category",
     "ruleLabel": "MALE PERSON",
     "explanation": "It refers to a male person, so it takes der.",
@@ -772,7 +937,10 @@ window.WORDS = [
   {
     "word": "Direktor",
     "article": "der",
-    "translation": "директор",
+    "translation": {
+      "ru": "директор",
+      "en": "director"
+    },
     "ruleType": "category",
     "ruleLabel": "MALE PERSON",
     "explanation": "It refers to a male person, so it takes der.",
@@ -786,7 +954,10 @@ window.WORDS = [
   {
     "word": "Autor",
     "article": "der",
-    "translation": "автор",
+    "translation": {
+      "ru": "автор",
+      "en": "author"
+    },
     "ruleType": "category",
     "ruleLabel": "MALE PERSON",
     "explanation": "It refers to a male person, so it takes der.",
@@ -800,7 +971,10 @@ window.WORDS = [
   {
     "word": "Motor",
     "article": "der",
-    "translation": "мотор, двигатель",
+    "translation": {
+      "ru": "мотор, двигатель",
+      "en": "engine, motor"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-OR ENDING",
     "explanation": "Many nouns ending in -or are masculine.",
@@ -814,7 +988,10 @@ window.WORDS = [
   {
     "word": "Montag",
     "article": "der",
-    "translation": "понедельник",
+    "translation": {
+      "ru": "понедельник",
+      "en": "Monday"
+    },
     "ruleType": "category",
     "ruleLabel": "DAYS OF THE WEEK",
     "explanation": "Days of the week are masculine.",
@@ -828,7 +1005,10 @@ window.WORDS = [
   {
     "word": "Dienstag",
     "article": "der",
-    "translation": "вторник",
+    "translation": {
+      "ru": "вторник",
+      "en": "Tuesday"
+    },
     "ruleType": "category",
     "ruleLabel": "DAYS OF THE WEEK",
     "explanation": "Days of the week are masculine.",
@@ -842,7 +1022,10 @@ window.WORDS = [
   {
     "word": "Freitag",
     "article": "der",
-    "translation": "пятница",
+    "translation": {
+      "ru": "пятница",
+      "en": "Friday"
+    },
     "ruleType": "category",
     "ruleLabel": "DAYS OF THE WEEK",
     "explanation": "Days of the week are masculine.",
@@ -856,7 +1039,10 @@ window.WORDS = [
   {
     "word": "Januar",
     "article": "der",
-    "translation": "январь",
+    "translation": {
+      "ru": "январь",
+      "en": "January"
+    },
     "ruleType": "category",
     "ruleLabel": "MONTHS",
     "explanation": "Months are masculine.",
@@ -870,7 +1056,10 @@ window.WORDS = [
   {
     "word": "März",
     "article": "der",
-    "translation": "март",
+    "translation": {
+      "ru": "март",
+      "en": "March"
+    },
     "ruleType": "category",
     "ruleLabel": "MONTHS",
     "explanation": "Months are masculine.",
@@ -884,7 +1073,10 @@ window.WORDS = [
   {
     "word": "Oktober",
     "article": "der",
-    "translation": "октябрь",
+    "translation": {
+      "ru": "октябрь",
+      "en": "October"
+    },
     "ruleType": "category",
     "ruleLabel": "MONTHS",
     "explanation": "Months are masculine.",
@@ -898,7 +1090,10 @@ window.WORDS = [
   {
     "word": "Sommer",
     "article": "der",
-    "translation": "лето",
+    "translation": {
+      "ru": "лето",
+      "en": "summer"
+    },
     "ruleType": "category",
     "ruleLabel": "SEASONS",
     "explanation": "The four seasons are masculine.",
@@ -912,7 +1107,10 @@ window.WORDS = [
   {
     "word": "Winter",
     "article": "der",
-    "translation": "зима",
+    "translation": {
+      "ru": "зима",
+      "en": "winter"
+    },
     "ruleType": "category",
     "ruleLabel": "SEASONS",
     "explanation": "The four seasons are masculine.",
@@ -926,7 +1124,10 @@ window.WORDS = [
   {
     "word": "Herbst",
     "article": "der",
-    "translation": "осень",
+    "translation": {
+      "ru": "осень",
+      "en": "autumn"
+    },
     "ruleType": "category",
     "ruleLabel": "SEASONS",
     "explanation": "The four seasons are masculine.",
@@ -940,7 +1141,10 @@ window.WORDS = [
   {
     "word": "BMW",
     "article": "der",
-    "translation": "BMW (автомобиль)",
+    "translation": {
+      "ru": "BMW (автомобиль)",
+      "en": "BMW (car)"
+    },
     "ruleType": "category",
     "ruleLabel": "CAR NAMES",
     "explanation": "Names of cars are conventionally masculine when the name refers to the car or model.",
@@ -954,7 +1158,10 @@ window.WORDS = [
   {
     "word": "Golf",
     "article": "der",
-    "translation": "Volkswagen Golf",
+    "translation": {
+      "ru": "Volkswagen Golf",
+      "en": "VW Golf (car)"
+    },
     "ruleType": "category",
     "ruleLabel": "CAR NAMES",
     "explanation": "Names of cars are conventionally masculine when the name refers to the car or model.",
@@ -968,7 +1175,10 @@ window.WORDS = [
   {
     "word": "Harley-Davidson",
     "article": "die",
-    "translation": "Harley-Davidson (мотоцикл)",
+    "translation": {
+      "ru": "Harley-Davidson (мотоцикл)",
+      "en": "Harley-Davidson (motorbike)"
+    },
     "ruleType": "category",
     "ruleLabel": "MOTORCYCLE NAMES",
     "explanation": "Names of motorcycles are conventionally feminine.",
@@ -982,7 +1192,10 @@ window.WORDS = [
   {
     "word": "Yamaha",
     "article": "die",
-    "translation": "Yamaha (мотоцикл)",
+    "translation": {
+      "ru": "Yamaha (мотоцикл)",
+      "en": "Yamaha (motorbike)"
+    },
     "ruleType": "category",
     "ruleLabel": "MOTORCYCLE NAMES",
     "explanation": "Names of motorcycles are conventionally feminine.",
@@ -996,7 +1209,10 @@ window.WORDS = [
   {
     "word": "Schule",
     "article": "die",
-    "translation": "школа",
+    "translation": {
+      "ru": "школа",
+      "en": "school"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
@@ -1010,7 +1226,10 @@ window.WORDS = [
   {
     "word": "Straße",
     "article": "die",
-    "translation": "улица",
+    "translation": {
+      "ru": "улица",
+      "en": "street"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
@@ -1024,7 +1243,10 @@ window.WORDS = [
   {
     "word": "Sprache",
     "article": "die",
-    "translation": "язык",
+    "translation": {
+      "ru": "язык",
+      "en": "language"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
@@ -1038,7 +1260,10 @@ window.WORDS = [
   {
     "word": "Küche",
     "article": "die",
-    "translation": "кухня",
+    "translation": {
+      "ru": "кухня",
+      "en": "kitchen; cuisine"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
@@ -1052,7 +1277,10 @@ window.WORDS = [
   {
     "word": "Frage",
     "article": "die",
-    "translation": "вопрос",
+    "translation": {
+      "ru": "вопрос",
+      "en": "question"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many German nouns ending in -e are feminine.",
@@ -1066,7 +1294,10 @@ window.WORDS = [
   {
     "word": "Name",
     "article": "der",
-    "translation": "имя",
+    "translation": {
+      "ru": "имя",
+      "en": "name"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Many nouns ending in -e are feminine, but Name is not.",
@@ -1081,7 +1312,10 @@ window.WORDS = [
   {
     "word": "Käse",
     "article": "der",
-    "translation": "сыр",
+    "translation": {
+      "ru": "сыр",
+      "en": "cheese"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Many nouns ending in -e are feminine, but Käse is not.",
@@ -1096,7 +1330,10 @@ window.WORDS = [
   {
     "word": "Ende",
     "article": "das",
-    "translation": "конец",
+    "translation": {
+      "ru": "конец",
+      "en": "end"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Many nouns ending in -e are feminine, but Ende is not.",
@@ -1111,7 +1348,10 @@ window.WORDS = [
   {
     "word": "Auge",
     "article": "das",
-    "translation": "глаз",
+    "translation": {
+      "ru": "глаз",
+      "en": "eye"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Many nouns ending in -e are feminine, but Auge is not.",
@@ -1126,7 +1366,10 @@ window.WORDS = [
   {
     "word": "Haustür",
     "article": "die",
-    "translation": "входная дверь",
+    "translation": {
+      "ru": "входная дверь",
+      "en": "front door"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DIE TÜR",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1139,7 +1382,10 @@ window.WORDS = [
   {
     "word": "Badezimmer",
     "article": "das",
-    "translation": "ванная комната",
+    "translation": {
+      "ru": "ванная комната",
+      "en": "bathroom"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1152,7 +1398,10 @@ window.WORDS = [
   {
     "word": "Führerschein",
     "article": "der",
-    "translation": "водительские права",
+    "translation": {
+      "ru": "водительские права",
+      "en": "driving licence"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER SCHEIN",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1165,7 +1414,10 @@ window.WORDS = [
   {
     "word": "Wohnzimmer",
     "article": "das",
-    "translation": "гостиная",
+    "translation": {
+      "ru": "гостиная",
+      "en": "living room"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS ZIMMER",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1178,7 +1430,10 @@ window.WORDS = [
   {
     "word": "Bahnhof",
     "article": "der",
-    "translation": "вокзал",
+    "translation": {
+      "ru": "вокзал",
+      "en": "train station"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DER HOF",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1191,7 +1446,10 @@ window.WORDS = [
   {
     "word": "Krankenhaus",
     "article": "das",
-    "translation": "больница",
+    "translation": {
+      "ru": "больница",
+      "en": "hospital"
+    },
     "ruleType": "none",
     "ruleLabel": "REMEMBER: DAS HAUS",
     "explanation": "Compound nouns take the article of the last word.",
@@ -1204,7 +1462,10 @@ window.WORDS = [
   {
     "word": "Tisch",
     "article": "der",
-    "translation": "стол",
+    "translation": {
+      "ru": "стол",
+      "en": "table"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1214,7 +1475,10 @@ window.WORDS = [
   {
     "word": "Stuhl",
     "article": "der",
-    "translation": "стул",
+    "translation": {
+      "ru": "стул",
+      "en": "chair"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1224,7 +1488,10 @@ window.WORDS = [
   {
     "word": "Schlüssel",
     "article": "der",
-    "translation": "ключ",
+    "translation": {
+      "ru": "ключ",
+      "en": "key"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1234,7 +1501,10 @@ window.WORDS = [
   {
     "word": "Termin",
     "article": "der",
-    "translation": "встреча, назначенный срок",
+    "translation": {
+      "ru": "встреча, назначенный срок",
+      "en": "appointment"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1244,7 +1514,10 @@ window.WORDS = [
   {
     "word": "Beruf",
     "article": "der",
-    "translation": "профессия",
+    "translation": {
+      "ru": "профессия",
+      "en": "profession, occupation"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1254,7 +1527,10 @@ window.WORDS = [
   {
     "word": "Kaffee",
     "article": "der",
-    "translation": "кофе",
+    "translation": {
+      "ru": "кофе",
+      "en": "coffee"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -1268,7 +1544,10 @@ window.WORDS = [
   {
     "word": "Arbeit",
     "article": "die",
-    "translation": "работа",
+    "translation": {
+      "ru": "работа",
+      "en": "work, job"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1278,7 +1557,10 @@ window.WORDS = [
   {
     "word": "Antwort",
     "article": "die",
-    "translation": "ответ",
+    "translation": {
+      "ru": "ответ",
+      "en": "answer"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1288,7 +1570,10 @@ window.WORDS = [
   {
     "word": "Stadt",
     "article": "die",
-    "translation": "город",
+    "translation": {
+      "ru": "город",
+      "en": "city, town"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1298,7 +1583,10 @@ window.WORDS = [
   {
     "word": "Zeit",
     "article": "die",
-    "translation": "время",
+    "translation": {
+      "ru": "время",
+      "en": "time"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1308,7 +1596,10 @@ window.WORDS = [
   {
     "word": "Hand",
     "article": "die",
-    "translation": "рука, кисть",
+    "translation": {
+      "ru": "рука, кисть",
+      "en": "hand"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1318,7 +1609,10 @@ window.WORDS = [
   {
     "word": "Haus",
     "article": "das",
-    "translation": "дом",
+    "translation": {
+      "ru": "дом",
+      "en": "house"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1328,7 +1622,10 @@ window.WORDS = [
   {
     "word": "Kind",
     "article": "das",
-    "translation": "ребёнок",
+    "translation": {
+      "ru": "ребёнок",
+      "en": "child"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1338,7 +1635,10 @@ window.WORDS = [
   {
     "word": "Buch",
     "article": "das",
-    "translation": "книга",
+    "translation": {
+      "ru": "книга",
+      "en": "book"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -1348,7 +1648,10 @@ window.WORDS = [
   {
     "word": "Entscheidung",
     "article": "die",
-    "translation": "решение",
+    "translation": {
+      "ru": "решение",
+      "en": "decision"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -1362,7 +1665,10 @@ window.WORDS = [
   {
     "word": "Ausbildung",
     "article": "die",
-    "translation": "образование, профессиональное обучение",
+    "translation": {
+      "ru": "образование, профессиональное обучение",
+      "en": "vocational training"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -1376,7 +1682,10 @@ window.WORDS = [
   {
     "word": "Übung",
     "article": "die",
-    "translation": "упражнение",
+    "translation": {
+      "ru": "упражнение",
+      "en": "exercise, practice"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -1390,7 +1699,10 @@ window.WORDS = [
   {
     "word": "Bewerbung",
     "article": "die",
-    "translation": "заявление, заявка",
+    "translation": {
+      "ru": "заявление, заявка",
+      "en": "(job) application"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UNG ENDING",
     "explanation": "Nouns ending in -ung are feminine.",
@@ -1404,7 +1716,10 @@ window.WORDS = [
   {
     "word": "Wahrheit",
     "article": "die",
-    "translation": "правда",
+    "translation": {
+      "ru": "правда",
+      "en": "truth"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -1418,7 +1733,10 @@ window.WORDS = [
   {
     "word": "Schönheit",
     "article": "die",
-    "translation": "красота",
+    "translation": {
+      "ru": "красота",
+      "en": "beauty"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-HEIT ENDING",
     "explanation": "Nouns ending in -heit are feminine.",
@@ -1432,7 +1750,10 @@ window.WORDS = [
   {
     "word": "Kleinigkeit",
     "article": "die",
-    "translation": "мелочь",
+    "translation": {
+      "ru": "мелочь",
+      "en": "small thing, trifle"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1446,7 +1767,10 @@ window.WORDS = [
   {
     "word": "Sauberkeit",
     "article": "die",
-    "translation": "чистота",
+    "translation": {
+      "ru": "чистота",
+      "en": "cleanliness"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1460,7 +1784,10 @@ window.WORDS = [
   {
     "word": "Geschwindigkeit",
     "article": "die",
-    "translation": "скорость",
+    "translation": {
+      "ru": "скорость",
+      "en": "speed"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1474,7 +1801,10 @@ window.WORDS = [
   {
     "word": "Pünktlichkeit",
     "article": "die",
-    "translation": "пунктуальность",
+    "translation": {
+      "ru": "пунктуальность",
+      "en": "punctuality"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1488,7 +1818,10 @@ window.WORDS = [
   {
     "word": "Genauigkeit",
     "article": "die",
-    "translation": "точность",
+    "translation": {
+      "ru": "точность",
+      "en": "accuracy, precision"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1502,7 +1835,10 @@ window.WORDS = [
   {
     "word": "Freundlichkeit",
     "article": "die",
-    "translation": "дружелюбие",
+    "translation": {
+      "ru": "дружелюбие",
+      "en": "friendliness, kindness"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-KEIT ENDING",
     "explanation": "Nouns ending in -keit are feminine.",
@@ -1516,7 +1852,10 @@ window.WORDS = [
   {
     "word": "Nachbarschaft",
     "article": "die",
-    "translation": "соседство",
+    "translation": {
+      "ru": "соседство",
+      "en": "neighbourhood"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -1530,7 +1869,10 @@ window.WORDS = [
   {
     "word": "Partnerschaft",
     "article": "die",
-    "translation": "партнёрство",
+    "translation": {
+      "ru": "партнёрство",
+      "en": "partnership"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -1544,7 +1886,10 @@ window.WORDS = [
   {
     "word": "Wissenschaft",
     "article": "die",
-    "translation": "наука",
+    "translation": {
+      "ru": "наука",
+      "en": "science"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-SCHAFT ENDING",
     "explanation": "Nouns ending in -schaft are feminine.",
@@ -1558,7 +1903,10 @@ window.WORDS = [
   {
     "word": "Nation",
     "article": "die",
-    "translation": "нация",
+    "translation": {
+      "ru": "нация",
+      "en": "nation"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -1572,7 +1920,10 @@ window.WORDS = [
   {
     "word": "Produktion",
     "article": "die",
-    "translation": "производство",
+    "translation": {
+      "ru": "производство",
+      "en": "production"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -1586,7 +1937,10 @@ window.WORDS = [
   {
     "word": "Organisation",
     "article": "die",
-    "translation": "организация",
+    "translation": {
+      "ru": "организация",
+      "en": "organisation"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -1600,7 +1954,10 @@ window.WORDS = [
   {
     "word": "Diskussion",
     "article": "die",
-    "translation": "дискуссия",
+    "translation": {
+      "ru": "дискуссия",
+      "en": "discussion"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -1614,7 +1971,10 @@ window.WORDS = [
   {
     "word": "Station",
     "article": "die",
-    "translation": "станция",
+    "translation": {
+      "ru": "станция",
+      "en": "station, stop"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TION / -SION ENDING",
     "explanation": "Nouns ending in -tion or -sion are feminine.",
@@ -1628,7 +1988,10 @@ window.WORDS = [
   {
     "word": "Realität",
     "article": "die",
-    "translation": "реальность",
+    "translation": {
+      "ru": "реальность",
+      "en": "reality"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -1642,7 +2005,10 @@ window.WORDS = [
   {
     "word": "Identität",
     "article": "die",
-    "translation": "идентичность",
+    "translation": {
+      "ru": "идентичность",
+      "en": "identity"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -1656,7 +2022,10 @@ window.WORDS = [
   {
     "word": "Aktualität",
     "article": "die",
-    "translation": "актуальность",
+    "translation": {
+      "ru": "актуальность",
+      "en": "topicality, relevance"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-TÄT ENDING",
     "explanation": "Nouns ending in -tät are feminine.",
@@ -1670,7 +2039,10 @@ window.WORDS = [
   {
     "word": "Mathematik",
     "article": "die",
-    "translation": "математика",
+    "translation": {
+      "ru": "математика",
+      "en": "mathematics"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1684,7 +2056,10 @@ window.WORDS = [
   {
     "word": "Grammatik",
     "article": "die",
-    "translation": "грамматика",
+    "translation": {
+      "ru": "грамматика",
+      "en": "grammar"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1698,7 +2073,10 @@ window.WORDS = [
   {
     "word": "Logik",
     "article": "die",
-    "translation": "логика",
+    "translation": {
+      "ru": "логика",
+      "en": "logic"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1712,7 +2090,10 @@ window.WORDS = [
   {
     "word": "Kritik",
     "article": "die",
-    "translation": "критика",
+    "translation": {
+      "ru": "критика",
+      "en": "criticism; review"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1726,7 +2107,10 @@ window.WORDS = [
   {
     "word": "Republik",
     "article": "die",
-    "translation": "республика",
+    "translation": {
+      "ru": "республика",
+      "en": "republic"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1740,7 +2124,10 @@ window.WORDS = [
   {
     "word": "Dynamik",
     "article": "die",
-    "translation": "динамика",
+    "translation": {
+      "ru": "динамика",
+      "en": "dynamics"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IK ENDING",
     "explanation": "Many learned or borrowed nouns ending in -ik are feminine.",
@@ -1754,7 +2141,10 @@ window.WORDS = [
   {
     "word": "Bücherei",
     "article": "die",
-    "translation": "библиотека",
+    "translation": {
+      "ru": "библиотека",
+      "en": "(public) library"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -1768,7 +2158,10 @@ window.WORDS = [
   {
     "word": "Metzgerei",
     "article": "die",
-    "translation": "мясная лавка",
+    "translation": {
+      "ru": "мясная лавка",
+      "en": "butcher's shop"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -1782,7 +2175,10 @@ window.WORDS = [
   {
     "word": "Konditorei",
     "article": "die",
-    "translation": "кондитерская",
+    "translation": {
+      "ru": "кондитерская",
+      "en": "cake shop, café-patisserie"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -1796,7 +2192,10 @@ window.WORDS = [
   {
     "word": "Gärtnerei",
     "article": "die",
-    "translation": "садовый центр",
+    "translation": {
+      "ru": "садовый центр",
+      "en": "garden centre, nursery"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -1810,7 +2209,10 @@ window.WORDS = [
   {
     "word": "Wäscherei",
     "article": "die",
-    "translation": "прачечная",
+    "translation": {
+      "ru": "прачечная",
+      "en": "laundry"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-EI ENDING",
     "explanation": "Nouns ending in -ei are feminine.",
@@ -1824,7 +2226,10 @@ window.WORDS = [
   {
     "word": "Märchen",
     "article": "das",
-    "translation": "сказка",
+    "translation": {
+      "ru": "сказка",
+      "en": "fairy tale"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -1838,7 +2243,10 @@ window.WORDS = [
   {
     "word": "Würstchen",
     "article": "das",
-    "translation": "сосиска",
+    "translation": {
+      "ru": "сосиска",
+      "en": "sausage, frankfurter"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -1852,7 +2260,10 @@ window.WORDS = [
   {
     "word": "Hähnchen",
     "article": "das",
-    "translation": "курица (блюдо), цыплёнок",
+    "translation": {
+      "ru": "курица (блюдо), цыплёнок",
+      "en": "chicken (as food)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -1866,7 +2277,10 @@ window.WORDS = [
   {
     "word": "Kätzchen",
     "article": "das",
-    "translation": "котёнок",
+    "translation": {
+      "ru": "котёнок",
+      "en": "kitten"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-CHEN ENDING",
     "explanation": "Diminutives ending in -chen are neuter.",
@@ -1880,7 +2294,10 @@ window.WORDS = [
   {
     "word": "Apartment",
     "article": "das",
-    "translation": "квартира",
+    "translation": {
+      "ru": "квартира",
+      "en": "apartment, studio flat"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Nouns ending in -ment are usually neuter.",
@@ -1894,7 +2311,10 @@ window.WORDS = [
   {
     "word": "Kompliment",
     "article": "das",
-    "translation": "комплимент",
+    "translation": {
+      "ru": "комплимент",
+      "en": "compliment"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MENT ENDING",
     "explanation": "Nouns ending in -ment are usually neuter.",
@@ -1908,7 +2328,10 @@ window.WORDS = [
   {
     "word": "Publikum",
     "article": "das",
-    "translation": "публика",
+    "translation": {
+      "ru": "публика",
+      "en": "audience"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Nouns ending in -um are neuter.",
@@ -1922,7 +2345,10 @@ window.WORDS = [
   {
     "word": "Maximum",
     "article": "das",
-    "translation": "максимум",
+    "translation": {
+      "ru": "максимум",
+      "en": "maximum"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Nouns ending in -um are neuter.",
@@ -1936,7 +2362,10 @@ window.WORDS = [
   {
     "word": "Minimum",
     "article": "das",
-    "translation": "минимум",
+    "translation": {
+      "ru": "минимум",
+      "en": "minimum"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Nouns ending in -um are neuter.",
@@ -1950,7 +2379,10 @@ window.WORDS = [
   {
     "word": "Gymnasium",
     "article": "das",
-    "translation": "гимназия",
+    "translation": {
+      "ru": "гимназия",
+      "en": "academic secondary school"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Nouns ending in -ium are neuter.",
@@ -1964,7 +2396,10 @@ window.WORDS = [
   {
     "word": "Ministerium",
     "article": "das",
-    "translation": "министерство",
+    "translation": {
+      "ru": "министерство",
+      "en": "ministry"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Nouns ending in -ium are neuter.",
@@ -1978,7 +2413,10 @@ window.WORDS = [
   {
     "word": "Praktikum",
     "article": "das",
-    "translation": "практика",
+    "translation": {
+      "ru": "практика",
+      "en": "internship"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UM ENDING",
     "explanation": "Many borrowed nouns ending in -um are neuter.",
@@ -1992,7 +2430,10 @@ window.WORDS = [
   {
     "word": "Terrarium",
     "article": "das",
-    "translation": "террариум",
+    "translation": {
+      "ru": "террариум",
+      "en": "terrarium"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IUM ENDING",
     "explanation": "Nouns ending in -ium are neuter.",
@@ -2006,7 +2447,10 @@ window.WORDS = [
   {
     "word": "Trinken",
     "article": "das",
-    "translation": "питьё",
+    "translation": {
+      "ru": "питьё",
+      "en": "drinking"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -2020,7 +2464,10 @@ window.WORDS = [
   {
     "word": "Schwimmen",
     "article": "das",
-    "translation": "плавание",
+    "translation": {
+      "ru": "плавание",
+      "en": "swimming"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -2034,7 +2481,10 @@ window.WORDS = [
   {
     "word": "Schreiben",
     "article": "das",
-    "translation": "письмо, писание",
+    "translation": {
+      "ru": "письмо, писание",
+      "en": "writing; letter"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -2048,7 +2498,10 @@ window.WORDS = [
   {
     "word": "Reisen",
     "article": "das",
-    "translation": "путешествия",
+    "translation": {
+      "ru": "путешествия",
+      "en": "travelling"
+    },
     "ruleType": "form",
     "ruleLabel": "NOMINALIZED INFINITIVE",
     "explanation": "Infinitives used as nouns are neuter.",
@@ -2062,7 +2515,10 @@ window.WORDS = [
   {
     "word": "Flüchtling",
     "article": "der",
-    "translation": "беженец",
+    "translation": {
+      "ru": "беженец",
+      "en": "refugee"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -2076,7 +2532,10 @@ window.WORDS = [
   {
     "word": "Liebling",
     "article": "der",
-    "translation": "любимец",
+    "translation": {
+      "ru": "любимец",
+      "en": "darling, favourite"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LING ENDING",
     "explanation": "Nouns ending in -ling are masculine.",
@@ -2090,7 +2549,10 @@ window.WORDS = [
   {
     "word": "Kapitalismus",
     "article": "der",
-    "translation": "капитализм",
+    "translation": {
+      "ru": "капитализм",
+      "en": "capitalism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -2104,7 +2566,10 @@ window.WORDS = [
   {
     "word": "Kommunismus",
     "article": "der",
-    "translation": "коммунизм",
+    "translation": {
+      "ru": "коммунизм",
+      "en": "communism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -2118,7 +2583,10 @@ window.WORDS = [
   {
     "word": "Mechanismus",
     "article": "der",
-    "translation": "механизм",
+    "translation": {
+      "ru": "механизм",
+      "en": "mechanism"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ISMUS ENDING",
     "explanation": "Nouns ending in -ismus are masculine.",
@@ -2132,7 +2600,10 @@ window.WORDS = [
   {
     "word": "Professor",
     "article": "der",
-    "translation": "профессор",
+    "translation": {
+      "ru": "профессор",
+      "en": "professor"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-OR ENDING",
     "explanation": "Many nouns ending in -or are masculine.",
@@ -2146,7 +2617,10 @@ window.WORDS = [
   {
     "word": "Doktor",
     "article": "der",
-    "translation": "доктор",
+    "translation": {
+      "ru": "доктор",
+      "en": "doctor (title)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-OR ENDING",
     "explanation": "Many nouns ending in -or are masculine.",
@@ -2160,7 +2634,10 @@ window.WORDS = [
   {
     "word": "Traktor",
     "article": "der",
-    "translation": "трактор",
+    "translation": {
+      "ru": "трактор",
+      "en": "tractor"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-OR ENDING",
     "explanation": "Many nouns ending in -or are masculine.",
@@ -2174,7 +2651,10 @@ window.WORDS = [
   {
     "word": "Monitor",
     "article": "der",
-    "translation": "монитор",
+    "translation": {
+      "ru": "монитор",
+      "en": "monitor"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-OR ENDING",
     "explanation": "Many nouns ending in -or are masculine.",
@@ -2188,7 +2668,10 @@ window.WORDS = [
   {
     "word": "Tasche",
     "article": "die",
-    "translation": "сумка",
+    "translation": {
+      "ru": "сумка",
+      "en": "bag"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
@@ -2202,7 +2685,10 @@ window.WORDS = [
   {
     "word": "Flasche",
     "article": "die",
-    "translation": "бутылка",
+    "translation": {
+      "ru": "бутылка",
+      "en": "bottle"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
@@ -2216,7 +2702,10 @@ window.WORDS = [
   {
     "word": "Blume",
     "article": "die",
-    "translation": "цветок",
+    "translation": {
+      "ru": "цветок",
+      "en": "flower"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
@@ -2230,7 +2719,10 @@ window.WORDS = [
   {
     "word": "Brücke",
     "article": "die",
-    "translation": "мост",
+    "translation": {
+      "ru": "мост",
+      "en": "bridge"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
@@ -2244,7 +2736,10 @@ window.WORDS = [
   {
     "word": "Minute",
     "article": "die",
-    "translation": "минута",
+    "translation": {
+      "ru": "минута",
+      "en": "minute"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-E PATTERN",
     "explanation": "Many common nouns ending in -e are feminine.",
@@ -2258,7 +2753,10 @@ window.WORDS = [
   {
     "word": "Nummer",
     "article": "die",
-    "translation": "номер",
+    "translation": {
+      "ru": "номер",
+      "en": "number"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -2268,7 +2766,10 @@ window.WORDS = [
   {
     "word": "Junge",
     "article": "der",
-    "translation": "мальчик",
+    "translation": {
+      "ru": "мальчик",
+      "en": "boy"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Some common nouns ending in -e are masculine or neuter and must be memorised.",
@@ -2282,7 +2783,10 @@ window.WORDS = [
   {
     "word": "Hase",
     "article": "der",
-    "translation": "заяц",
+    "translation": {
+      "ru": "заяц",
+      "en": "hare, rabbit"
+    },
     "ruleType": "exception",
     "ruleLabel": "-E EXCEPTION",
     "explanation": "Some common nouns ending in -e are masculine or neuter and must be memorised.",
@@ -2296,7 +2800,10 @@ window.WORDS = [
   {
     "word": "Existenz",
     "article": "die",
-    "translation": "существование",
+    "translation": {
+      "ru": "существование",
+      "en": "existence"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2310,7 +2817,10 @@ window.WORDS = [
   {
     "word": "Differenz",
     "article": "die",
-    "translation": "разница",
+    "translation": {
+      "ru": "разница",
+      "en": "difference"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2324,7 +2834,10 @@ window.WORDS = [
   {
     "word": "Intelligenz",
     "article": "die",
-    "translation": "интеллект",
+    "translation": {
+      "ru": "интеллект",
+      "en": "intelligence"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2338,7 +2851,10 @@ window.WORDS = [
   {
     "word": "Konferenz",
     "article": "die",
-    "translation": "конференция",
+    "translation": {
+      "ru": "конференция",
+      "en": "conference"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2352,7 +2868,10 @@ window.WORDS = [
   {
     "word": "Toleranz",
     "article": "die",
-    "translation": "терпимость",
+    "translation": {
+      "ru": "терпимость",
+      "en": "tolerance"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2366,7 +2885,10 @@ window.WORDS = [
   {
     "word": "Distanz",
     "article": "die",
-    "translation": "дистанция",
+    "translation": {
+      "ru": "дистанция",
+      "en": "distance"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2380,7 +2902,10 @@ window.WORDS = [
   {
     "word": "Relevanz",
     "article": "die",
-    "translation": "релевантность",
+    "translation": {
+      "ru": "релевантность",
+      "en": "relevance"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ENZ / -ANZ ENDING",
     "explanation": "Nouns ending in -enz and -anz are feminine.",
@@ -2394,7 +2919,10 @@ window.WORDS = [
   {
     "word": "Familie",
     "article": "die",
-    "translation": "семья",
+    "translation": {
+      "ru": "семья",
+      "en": "family"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2408,7 +2936,10 @@ window.WORDS = [
   {
     "word": "Energie",
     "article": "die",
-    "translation": "энергия",
+    "translation": {
+      "ru": "энергия",
+      "en": "energy"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2422,7 +2953,10 @@ window.WORDS = [
   {
     "word": "Technologie",
     "article": "die",
-    "translation": "технология",
+    "translation": {
+      "ru": "технология",
+      "en": "technology"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2436,7 +2970,10 @@ window.WORDS = [
   {
     "word": "Demokratie",
     "article": "die",
-    "translation": "демократия",
+    "translation": {
+      "ru": "демократия",
+      "en": "democracy"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2450,7 +2987,10 @@ window.WORDS = [
   {
     "word": "Melodie",
     "article": "die",
-    "translation": "мелодия",
+    "translation": {
+      "ru": "мелодия",
+      "en": "melody"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2464,7 +3004,10 @@ window.WORDS = [
   {
     "word": "Biologie",
     "article": "die",
-    "translation": "биология",
+    "translation": {
+      "ru": "биология",
+      "en": "biology"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2478,7 +3021,10 @@ window.WORDS = [
   {
     "word": "Fotografie",
     "article": "die",
-    "translation": "фотография",
+    "translation": {
+      "ru": "фотография",
+      "en": "photography; photo"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2492,7 +3038,10 @@ window.WORDS = [
   {
     "word": "Theorie",
     "article": "die",
-    "translation": "теория",
+    "translation": {
+      "ru": "теория",
+      "en": "theory"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IE ENDING",
     "explanation": "Many nouns ending in -ie are feminine.",
@@ -2506,7 +3055,10 @@ window.WORDS = [
   {
     "word": "Kultur",
     "article": "die",
-    "translation": "культура",
+    "translation": {
+      "ru": "культура",
+      "en": "culture"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2520,7 +3072,10 @@ window.WORDS = [
   {
     "word": "Natur",
     "article": "die",
-    "translation": "природа",
+    "translation": {
+      "ru": "природа",
+      "en": "nature"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2534,7 +3089,10 @@ window.WORDS = [
   {
     "word": "Struktur",
     "article": "die",
-    "translation": "структура",
+    "translation": {
+      "ru": "структура",
+      "en": "structure"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2548,7 +3106,10 @@ window.WORDS = [
   {
     "word": "Literatur",
     "article": "die",
-    "translation": "литература",
+    "translation": {
+      "ru": "литература",
+      "en": "literature"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2562,7 +3123,10 @@ window.WORDS = [
   {
     "word": "Architektur",
     "article": "die",
-    "translation": "архитектура",
+    "translation": {
+      "ru": "архитектура",
+      "en": "architecture"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2576,7 +3140,10 @@ window.WORDS = [
   {
     "word": "Agentur",
     "article": "die",
-    "translation": "агентство",
+    "translation": {
+      "ru": "агентство",
+      "en": "agency"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2590,7 +3157,10 @@ window.WORDS = [
   {
     "word": "Temperatur",
     "article": "die",
-    "translation": "температура",
+    "translation": {
+      "ru": "температура",
+      "en": "temperature"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-UR ENDING",
     "explanation": "Many nouns ending in -ur are feminine.",
@@ -2604,7 +3174,10 @@ window.WORDS = [
   {
     "word": "Garage",
     "article": "die",
-    "translation": "гараж",
+    "translation": {
+      "ru": "гараж",
+      "en": "garage"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2618,7 +3191,10 @@ window.WORDS = [
   {
     "word": "Etage",
     "article": "die",
-    "translation": "этаж",
+    "translation": {
+      "ru": "этаж",
+      "en": "floor, storey"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2632,7 +3208,10 @@ window.WORDS = [
   {
     "word": "Reportage",
     "article": "die",
-    "translation": "репортаж",
+    "translation": {
+      "ru": "репортаж",
+      "en": "report, feature (media)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2646,7 +3225,10 @@ window.WORDS = [
   {
     "word": "Montage",
     "article": "die",
-    "translation": "монтаж",
+    "translation": {
+      "ru": "монтаж",
+      "en": "assembly, installation"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2660,7 +3242,10 @@ window.WORDS = [
   {
     "word": "Massage",
     "article": "die",
-    "translation": "массаж",
+    "translation": {
+      "ru": "массаж",
+      "en": "massage"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2674,7 +3259,10 @@ window.WORDS = [
   {
     "word": "Blamage",
     "article": "die",
-    "translation": "позор, неприятная ситуация",
+    "translation": {
+      "ru": "позор, неприятная ситуация",
+      "en": "embarrassment, disgrace"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-AGE ENDING",
     "explanation": "Many nouns ending in -age are feminine.",
@@ -2688,7 +3276,10 @@ window.WORDS = [
   {
     "word": "Zigarette",
     "article": "die",
-    "translation": "сигарета",
+    "translation": {
+      "ru": "сигарета",
+      "en": "cigarette"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ETTE ENDING",
     "explanation": "Many nouns ending in -ette are feminine.",
@@ -2702,7 +3293,10 @@ window.WORDS = [
   {
     "word": "Serviette",
     "article": "die",
-    "translation": "салфетка",
+    "translation": {
+      "ru": "салфетка",
+      "en": "napkin"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ETTE ENDING",
     "explanation": "Many nouns ending in -ette are feminine.",
@@ -2716,7 +3310,10 @@ window.WORDS = [
   {
     "word": "Kassette",
     "article": "die",
-    "translation": "кассета",
+    "translation": {
+      "ru": "кассета",
+      "en": "cassette"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ETTE ENDING",
     "explanation": "Many nouns ending in -ette are feminine.",
@@ -2730,7 +3327,10 @@ window.WORDS = [
   {
     "word": "Toilette",
     "article": "die",
-    "translation": "туалет",
+    "translation": {
+      "ru": "туалет",
+      "en": "toilet"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ETTE ENDING",
     "explanation": "Many nouns ending in -ette are feminine.",
@@ -2744,7 +3344,10 @@ window.WORDS = [
   {
     "word": "Tablette",
     "article": "die",
-    "translation": "таблетка",
+    "translation": {
+      "ru": "таблетка",
+      "en": "tablet, pill"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ETTE ENDING",
     "explanation": "Many nouns ending in -ette are feminine.",
@@ -2758,7 +3361,10 @@ window.WORDS = [
   {
     "word": "Marmelade",
     "article": "die",
-    "translation": "джем, варенье",
+    "translation": {
+      "ru": "джем, варенье",
+      "en": "jam"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2772,7 +3378,10 @@ window.WORDS = [
   {
     "word": "Schokolade",
     "article": "die",
-    "translation": "шоколад",
+    "translation": {
+      "ru": "шоколад",
+      "en": "chocolate"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2786,7 +3395,10 @@ window.WORDS = [
   {
     "word": "Limonade",
     "article": "die",
-    "translation": "лимонад",
+    "translation": {
+      "ru": "лимонад",
+      "en": "lemonade, soft drink"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2800,7 +3412,10 @@ window.WORDS = [
   {
     "word": "Ballade",
     "article": "die",
-    "translation": "баллада",
+    "translation": {
+      "ru": "баллада",
+      "en": "ballad"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2814,7 +3429,10 @@ window.WORDS = [
   {
     "word": "Fassade",
     "article": "die",
-    "translation": "фасад",
+    "translation": {
+      "ru": "фасад",
+      "en": "facade"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ADE ENDING",
     "explanation": "Many nouns ending in -ade are feminine.",
@@ -2828,7 +3446,10 @@ window.WORDS = [
   {
     "word": "Büchlein",
     "article": "das",
-    "translation": "книжечка",
+    "translation": {
+      "ru": "книжечка",
+      "en": "little book, booklet"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LEIN ENDING",
     "explanation": "Diminutives ending in -lein are neuter.",
@@ -2841,7 +3462,10 @@ window.WORDS = [
   {
     "word": "Vöglein",
     "article": "das",
-    "translation": "птичка",
+    "translation": {
+      "ru": "птичка",
+      "en": "little bird"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-LEIN ENDING",
     "explanation": "Diminutives ending in -lein are neuter.",
@@ -2854,7 +3478,10 @@ window.WORDS = [
   {
     "word": "Norden",
     "article": "der",
-    "translation": "север",
+    "translation": {
+      "ru": "север",
+      "en": "north"
+    },
     "ruleType": "category",
     "ruleLabel": "DIRECTIONS",
     "explanation": "The cardinal directions are masculine.",
@@ -2868,7 +3495,10 @@ window.WORDS = [
   {
     "word": "Süden",
     "article": "der",
-    "translation": "юг",
+    "translation": {
+      "ru": "юг",
+      "en": "south"
+    },
     "ruleType": "category",
     "ruleLabel": "DIRECTIONS",
     "explanation": "The cardinal directions are masculine.",
@@ -2882,7 +3512,10 @@ window.WORDS = [
   {
     "word": "Osten",
     "article": "der",
-    "translation": "восток",
+    "translation": {
+      "ru": "восток",
+      "en": "east"
+    },
     "ruleType": "category",
     "ruleLabel": "DIRECTIONS",
     "explanation": "The cardinal directions are masculine.",
@@ -2896,7 +3529,10 @@ window.WORDS = [
   {
     "word": "Westen",
     "article": "der",
-    "translation": "запад",
+    "translation": {
+      "ru": "запад",
+      "en": "west"
+    },
     "ruleType": "category",
     "ruleLabel": "DIRECTIONS",
     "explanation": "The cardinal directions are masculine.",
@@ -2910,7 +3546,10 @@ window.WORDS = [
   {
     "word": "Wein",
     "article": "der",
-    "translation": "вино",
+    "translation": {
+      "ru": "вино",
+      "en": "wine"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -2924,7 +3563,10 @@ window.WORDS = [
   {
     "word": "Tee",
     "article": "der",
-    "translation": "чай",
+    "translation": {
+      "ru": "чай",
+      "en": "tea"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -2938,7 +3580,10 @@ window.WORDS = [
   {
     "word": "Saft",
     "article": "der",
-    "translation": "сок",
+    "translation": {
+      "ru": "сок",
+      "en": "juice"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -2952,7 +3597,10 @@ window.WORDS = [
   {
     "word": "Sekt",
     "article": "der",
-    "translation": "игристое вино",
+    "translation": {
+      "ru": "игристое вино",
+      "en": "sparkling wine"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -2966,7 +3614,10 @@ window.WORDS = [
   {
     "word": "Whisky",
     "article": "der",
-    "translation": "виски",
+    "translation": {
+      "ru": "виски",
+      "en": "whisky"
+    },
     "ruleType": "category",
     "ruleLabel": "BEVERAGES → MOSTLY DER",
     "explanation": "Many common beverage nouns are masculine.",
@@ -2980,7 +3631,10 @@ window.WORDS = [
   {
     "word": "Bier",
     "article": "das",
-    "translation": "пиво",
+    "translation": {
+      "ru": "пиво",
+      "en": "beer"
+    },
     "ruleType": "exception",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Bier is an important exception to the usual masculine pattern for beverages.",
@@ -2994,7 +3648,10 @@ window.WORDS = [
   {
     "word": "Baum",
     "article": "der",
-    "translation": "дерево",
+    "translation": {
+      "ru": "дерево",
+      "en": "tree"
+    },
     "ruleType": "none",
     "ruleLabel": "NO RELIABLE RULE",
     "explanation": " ",
@@ -3004,7 +3661,10 @@ window.WORDS = [
   {
     "word": "Drama",
     "article": "das",
-    "translation": "драма",
+    "translation": {
+      "ru": "драма",
+      "en": "drama"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3018,7 +3678,10 @@ window.WORDS = [
   {
     "word": "Schema",
     "article": "das",
-    "translation": "схема",
+    "translation": {
+      "ru": "схема",
+      "en": "diagram, pattern"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3032,7 +3695,10 @@ window.WORDS = [
   {
     "word": "Dilemma",
     "article": "das",
-    "translation": "дилемма",
+    "translation": {
+      "ru": "дилемма",
+      "en": "dilemma"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3046,7 +3712,10 @@ window.WORDS = [
   {
     "word": "Komma",
     "article": "das",
-    "translation": "запятая",
+    "translation": {
+      "ru": "запятая",
+      "en": "comma"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3060,7 +3729,10 @@ window.WORDS = [
   {
     "word": "Dogma",
     "article": "das",
-    "translation": "догма",
+    "translation": {
+      "ru": "догма",
+      "en": "dogma"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3074,7 +3746,10 @@ window.WORDS = [
   {
     "word": "Aroma",
     "article": "das",
-    "translation": "аромат",
+    "translation": {
+      "ru": "аромат",
+      "en": "aroma, flavour"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-MA ENDING",
     "explanation": "Many learned nouns ending in -ma are neuter.",
@@ -3088,7 +3763,10 @@ window.WORDS = [
   {
     "word": "Wasser",
     "article": "das",
-    "translation": "вода",
+    "translation": {
+      "ru": "вода",
+      "en": "water"
+    },
     "ruleType": "exception",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Wasser is an important exception to the usual masculine pattern for beverages.",
@@ -3102,7 +3780,10 @@ window.WORDS = [
   {
     "word": "Milch",
     "article": "die",
-    "translation": "молоко",
+    "translation": {
+      "ru": "молоко",
+      "en": "milk"
+    },
     "ruleType": "exception",
     "ruleLabel": "BEVERAGE EXCEPTION",
     "explanation": "Milch is an important exception to the usual masculine pattern for beverages.",
@@ -3116,7 +3797,10 @@ window.WORDS = [
   {
     "word": "Moment",
     "article": "der",
-    "translation": "момент, мгновение",
+    "translation": {
+      "ru": "момент, мгновение",
+      "en": "moment"
+    },
     "ruleType": "exception",
     "ruleLabel": "-MENT EXCEPTION",
     "explanation": "Most nouns ending in -ment are neuter, but Moment is masculine.",
@@ -3130,7 +3814,10 @@ window.WORDS = [
   {
     "word": "Firma",
     "article": "die",
-    "translation": "фирма, компания",
+    "translation": {
+      "ru": "фирма, компания",
+      "en": "company, firm"
+    },
     "ruleType": "exception",
     "ruleLabel": "-MA EXCEPTION",
     "explanation": "Most nouns ending in -ma are neuter, but Firma is feminine.",
@@ -3144,7 +3831,10 @@ window.WORDS = [
   {
     "word": "Flur",
     "article": "der",
-    "translation": "коридор, прихожая",
+    "translation": {
+      "ru": "коридор, прихожая",
+      "en": "hallway, corridor"
+    },
     "ruleType": "exception",
     "ruleLabel": "-UR EXCEPTION",
     "explanation": "Many nouns ending in -ur are feminine, but Flur is masculine.",
@@ -3158,7 +3848,10 @@ window.WORDS = [
   {
     "word": "Erlaubnis",
     "article": "die",
-    "translation": "разрешение",
+    "translation": {
+      "ru": "разрешение",
+      "en": "permission"
+    },
     "ruleType": "exception",
     "ruleLabel": "-NIS EXCEPTION",
     "explanation": "Most nouns ending in -nis are neuter, but Erlaubnis is feminine.",
@@ -3172,7 +3865,10 @@ window.WORDS = [
   {
     "word": "Lehrerin",
     "article": "die",
-    "translation": "учительница",
+    "translation": {
+      "ru": "учительница",
+      "en": "teacher"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IN ENDING (FEMALE PERSON)",
     "explanation": "Nouns for female persons ending in -in are feminine.",
@@ -3186,7 +3882,10 @@ window.WORDS = [
   {
     "word": "Freundin",
     "article": "die",
-    "translation": "подруга",
+    "translation": {
+      "ru": "подруга",
+      "en": "friend, girlfriend"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IN ENDING (FEMALE PERSON)",
     "explanation": "Nouns for female persons ending in -in are feminine.",
@@ -3200,7 +3899,10 @@ window.WORDS = [
   {
     "word": "Ärztin",
     "article": "die",
-    "translation": "врач (женщина)",
+    "translation": {
+      "ru": "врач (женщина)",
+      "en": "doctor"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IN ENDING (FEMALE PERSON)",
     "explanation": "Nouns for female persons ending in -in are feminine.",
@@ -3214,7 +3916,10 @@ window.WORDS = [
   {
     "word": "Kollegin",
     "article": "die",
-    "translation": "коллега (женщина)",
+    "translation": {
+      "ru": "коллега (женщина)",
+      "en": "colleague"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IN ENDING (FEMALE PERSON)",
     "explanation": "Nouns for female persons ending in -in are feminine.",
@@ -3228,7 +3933,10 @@ window.WORDS = [
   {
     "word": "Chefin",
     "article": "die",
-    "translation": "начальница",
+    "translation": {
+      "ru": "начальница",
+      "en": "boss"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-IN ENDING (FEMALE PERSON)",
     "explanation": "Nouns for female persons ending in -in are feminine.",
@@ -3242,7 +3950,10 @@ window.WORDS = [
   {
     "word": "Gebäude",
     "article": "das",
-    "translation": "здание",
+    "translation": {
+      "ru": "здание",
+      "en": "building"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3256,7 +3967,10 @@ window.WORDS = [
   {
     "word": "Gemüse",
     "article": "das",
-    "translation": "овощи",
+    "translation": {
+      "ru": "овощи",
+      "en": "vegetables"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3270,7 +3984,10 @@ window.WORDS = [
   {
     "word": "Getränk",
     "article": "das",
-    "translation": "напиток",
+    "translation": {
+      "ru": "напиток",
+      "en": "drink, beverage"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3284,7 +4001,10 @@ window.WORDS = [
   {
     "word": "Gespräch",
     "article": "das",
-    "translation": "разговор",
+    "translation": {
+      "ru": "разговор",
+      "en": "conversation"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3298,7 +4018,10 @@ window.WORDS = [
   {
     "word": "Geschenk",
     "article": "das",
-    "translation": "подарок",
+    "translation": {
+      "ru": "подарок",
+      "en": "present, gift"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3312,7 +4035,10 @@ window.WORDS = [
   {
     "word": "Gesicht",
     "article": "das",
-    "translation": "лицо",
+    "translation": {
+      "ru": "лицо",
+      "en": "face"
+    },
     "ruleType": "prefix",
     "ruleLabel": "GE- PREFIX",
     "explanation": "Many nouns beginning with Ge- are neuter.",
@@ -3326,7 +4052,10 @@ window.WORDS = [
   {
     "word": "Ergebnis",
     "article": "das",
-    "translation": "результат",
+    "translation": {
+      "ru": "результат",
+      "en": "result"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-NIS ENDING",
     "explanation": "Many nouns ending in -nis are neuter.",
@@ -3340,7 +4069,10 @@ window.WORDS = [
   {
     "word": "Zeugnis",
     "article": "das",
-    "translation": "аттестат, свидетельство",
+    "translation": {
+      "ru": "аттестат, свидетельство",
+      "en": "report card, certificate"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-NIS ENDING",
     "explanation": "Many nouns ending in -nis are neuter.",
@@ -3354,7 +4086,10 @@ window.WORDS = [
   {
     "word": "Erlebnis",
     "article": "das",
-    "translation": "переживание, впечатление",
+    "translation": {
+      "ru": "переживание, впечатление",
+      "en": "experience (an event)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-NIS ENDING",
     "explanation": "Many nouns ending in -nis are neuter.",
@@ -3368,7 +4103,10 @@ window.WORDS = [
   {
     "word": "Verständnis",
     "article": "das",
-    "translation": "понимание",
+    "translation": {
+      "ru": "понимание",
+      "en": "understanding"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-NIS ENDING",
     "explanation": "Many nouns ending in -nis are neuter.",
@@ -3382,7 +4120,10 @@ window.WORDS = [
   {
     "word": "Lehrer",
     "article": "der",
-    "translation": "учитель",
+    "translation": {
+      "ru": "учитель",
+      "en": "teacher"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ER ENDING (FROM A VERB)",
     "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
@@ -3396,7 +4137,10 @@ window.WORDS = [
   {
     "word": "Fahrer",
     "article": "der",
-    "translation": "водитель",
+    "translation": {
+      "ru": "водитель",
+      "en": "driver"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ER ENDING (FROM A VERB)",
     "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
@@ -3410,7 +4154,10 @@ window.WORDS = [
   {
     "word": "Fernseher",
     "article": "der",
-    "translation": "телевизор",
+    "translation": {
+      "ru": "телевизор",
+      "en": "TV (set)"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ER ENDING (FROM A VERB)",
     "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
@@ -3424,7 +4171,10 @@ window.WORDS = [
   {
     "word": "Drucker",
     "article": "der",
-    "translation": "принтер",
+    "translation": {
+      "ru": "принтер",
+      "en": "printer"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ER ENDING (FROM A VERB)",
     "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
@@ -3438,7 +4188,10 @@ window.WORDS = [
   {
     "word": "Wecker",
     "article": "der",
-    "translation": "будильник",
+    "translation": {
+      "ru": "будильник",
+      "en": "alarm clock"
+    },
     "ruleType": "suffix",
     "ruleLabel": "-ER ENDING (FROM A VERB)",
     "explanation": "Nouns made from verbs with -er (a person or a device) are masculine.",
