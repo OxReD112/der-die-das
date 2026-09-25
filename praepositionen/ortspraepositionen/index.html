@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 :root{
   --bg:#1b1b1d;--panel:#1f2022;--panel-2:#252629;--text:#f2f0ed;--muted:#8f8f94;
-  --text-secondary:#b9b5ae;--line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.20);--top-title:rgba(255,255,255,.48);
+  --text-secondary:#c8c7c4;--line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.20);--top-title:rgba(255,255,255,.48);
   --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
   --cta-bg:#ece6dc;--cta-text:#1b1c1e;
   --button-bg:#2a2b2e;--button-bg-hover:#313235;--button-text:#fff;
@@ -41,7 +41,7 @@
 [data-theme="light"]{
   --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#242426;--muted:#727278;
   --text-secondary:#55565b;--line:rgba(0,0,0,.09);--line-strong:rgba(0,0,0,.20);--top-title:rgba(37,37,40,.48);
-  --progress:rgba(32,32,35,.28);--mint:#55b99a;--coral:#ef666c;--blue:#5d8fe5;
+  --progress:rgba(32,32,35,.28);--mint:#3fa68a;--coral:#e95e66;--blue:#5588e0;
   --cta-bg:#252528;--cta-text:#f5f2ec;
   --button-bg:#fff;--button-bg-hover:#f4f2ef;--button-text:var(--text);
   --button-shadow:0 0 0 1px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.07);
@@ -51,12 +51,12 @@
   --secondary-bg:rgba(0,0,0,.03);--secondary-text:rgba(37,37,40,.55);
   --version:rgba(37,37,40,.30);
   --card-sheen:radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.035) 0%,rgba(0,0,0,.015) 24%,transparent 52%);
-  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(85,185,154,.28) 0%,rgba(85,185,154,.13) 24%,rgba(85,185,154,.05) 48%,transparent 76%);
-  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(239,102,108,.27) 0%,rgba(239,102,108,.12) 24%,rgba(239,102,108,.04) 48%,transparent 76%);
+  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(63,166,138,.28) 0%,rgba(63,166,138,.13) 24%,rgba(63,166,138,.05) 48%,transparent 76%);
+  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(233,94,102,.27) 0%,rgba(233,94,102,.12) 24%,rgba(233,94,102,.04) 48%,transparent 76%);
   --shadow:0 12px 40px rgba(0,0,0,.06);
   --step-bg:rgba(255,255,255,.42);
-  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(85,185,154,.26) 0%,rgba(85,185,154,.12) 35%,rgba(85,185,154,.04) 68%,rgba(85,185,154,0) 100%);
-  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(239,102,108,.25) 0%,rgba(239,102,108,.11) 35%,rgba(239,102,108,.04) 68%,rgba(239,102,108,0) 100%);
+  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(63,166,138,.26) 0%,rgba(63,166,138,.12) 35%,rgba(63,166,138,.04) 68%,rgba(63,166,138,0) 100%);
+  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(233,94,102,.25) 0%,rgba(233,94,102,.11) 35%,rgba(233,94,102,.04) 68%,rgba(233,94,102,0) 100%);
 }
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -129,7 +129,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 
 .place{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:32px;white-space:nowrap;letter-spacing:-.6px;line-height:1.05;margin-bottom:6px}
 .place .article{color:var(--muted);font-size:.62em;letter-spacing:-.2px;margin-right:.2em;vertical-align:.08em}
-.translation{color:var(--text-secondary);font-size:15px;line-height:1.4;min-height:23px}
+.translation{color:var(--muted);font-size:16px;line-height:1.4;min-height:23px}
 
 /* Three steps: Wo · Wohin · Woher */
 .steps{width:100%;margin-top:24px;display:grid;gap:8px;text-align:left}
@@ -265,6 +265,52 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 #game .top{margin:13px 0 0}
 #game .top-row{align-items:center}
 #game .progress{margin-top:11px}
+
+/* Question text sizes (Design Police): sentences 28px on phones */
+@media(max-width:699px){.place{font-size:28px}}
+
+/* ===== ANSWER BUTTONS · shared by Artikel, Fester Kasus, Ortspräpositionen (Design Police 2026-09-25) ===== */
+#choices .choice{border:0;border-radius:14px;min-height:56px;height:56px;padding:0 10px;
+  background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:17px;font-weight:400;letter-spacing:0;color:var(--text);
+  transition:transform .12s ease,filter .12s ease,opacity .16s ease}
+#choices .choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#choices .choice:active{transform:scale(.97);filter:brightness(.94);box-shadow:var(--start-btn-shadow)}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
+#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#next:active{transform:scale(.97);filter:brightness(.94)}
+
+/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
+   (centred, 28px above the bottom edge).
+   (Design Police 2026-09-25) ===== */
+#game .in-session-table{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
+#game .in-session-table .table-btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
+  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
+#game .in-session-table .table-btn:hover{background:var(--bg);transform:none}
+#game .in-session-table .table-btn:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#game:not(.hidden)) .version-mark{display:none}
+
+/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
+   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
+   Window: palette card colour, shared outline, 24px corners. */
+:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
+.omodal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
+.omodal.open{background:var(--overlay-scrim)}
+.osheet{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
+.osheet{opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.omodal.open .osheet{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.osheet{filter:none;transition:none}}
 </style>
 </head>
 <body>
@@ -309,7 +355,7 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
     <button class="home-back" id="homeBack">Zur Startseite</button>
   </div>
 </section>
-<div class="version-mark">v14</div>
+<div class="version-mark">v18</div>
 <div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
   <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
   <div id="otable"></div>
