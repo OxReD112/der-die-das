@@ -22,13 +22,13 @@
   --green:#43d2ad;
   --red:#ff6f73;
 
-  --gray-100:#f3f1ed;
+  --gray-100:#f2f0ed;
   --gray-300:#aaa;
-  --gray-500:#8c8c91;
+  --gray-500:#8f8f94;
   --gray-700:#444448;
 
   /* ===== SURFACES ===== */
-  --bg:#1c1c1e;
+  --bg:#1b1b1d;
   --surface:#222225;
 
   /* ===== SEMANTIC COLORS ===== */
@@ -83,7 +83,7 @@
   --green:#69c9b1;
   --red:#ff6f73;
 
-  --gray-100:#252528;
+  --gray-100:#242426;
   --gray-300:#77777d;
   --gray-500:#727278;
   --gray-700:#d8d8dc;
@@ -146,7 +146,7 @@
   --bad-line-shadow:0 0 14px rgba(255,111,115,.24);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;touch-action:manipulation}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:manipulation}
 button{font:inherit}
 .app{width:min(760px,100%);margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
 #question{width:min(560px,100%)}
@@ -200,6 +200,43 @@ button{font:inherit}
 .done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:var(--done-score);font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid var(--divider);border-radius:16px;padding:15px 18px;background:var(--add-words-bg);color:var(--add-words-text);font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
 .version{text-align:center;color:var(--version);font-size:10px;margin-top:18px}
 @media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:17px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.detail{padding-top:12px}.grammar{margin-top:26px}}
+
+/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
+   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
+:root{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(242,240,237,.55);
+  --end-again-line:rgba(255,255,255,.10);
+  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text:#1b1b1d;
+}
+[data-theme="light"]{
+  --end-again-bg:transparent;
+  --end-again-text:rgba(36,36,38,.55);
+  --end-again-line:rgba(0,0,0,.10);
+  --end-main-bg:#242426;
+  --end-main-text:#f6f4f1;
+}
+#done .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#done #addWords,#done #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#done #addWords{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
+#done #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
+#done #addWords:active,#done #homeBack:active{transform:scale(.97);filter:brightness(.94)}
+#done .finish-actions{margin-top:30px}
+:root{--start-version:rgba(255,255,255,.24)}
+[data-theme="light"]{--start-version:rgba(36,36,38,.34)}
+.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
+  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
+
+/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
+   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for "correct". */
+:root{--bar-track:rgba(255,255,255,.10)}
+[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
+header .brand{color:var(--muted)}
+header .progress{background:var(--bar-track)}
+header .progress div{background:var(--muted)}
 </style>
 </head>
 <body><main class="app">
@@ -232,8 +269,8 @@ button{font:inherit}
   <button class="continue" id="continue">Weiter</button>
  </div>
 </section>
-<section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><button class="addWords" id="addWords">+ 5 neue Wörter</button><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div></div></section>
-<div class="version">v2.72 · notifications</div>
+<section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
+<div class="version-mark">v2.75</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
@@ -441,7 +478,7 @@ function revealHTML(c){
 }
 function render(){
  if(idx>=queue.length){showDone();return}
- current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} today`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
+ current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} heute`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
  $("sentence").innerHTML=blankHTML(current);$("translation").textContent=getTranslation(current,"sentenceTranslation");$("answerInput").value="";
  $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";
   if(window.deutschKeyboardReady){$("keyboard").classList.add("show");}
@@ -501,7 +538,7 @@ function showDone(){
    publishNotificationDone();
    prepareTomorrowNotifications();
  }
- $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} today`;$("bar").style.width="100%";
+ $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} heute`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"Gerade ist nichts fällig.";
  const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
  $("addWords").style.display=remaining?"block":"none";$("allAdded").style.display=remaining?"none":"block";
@@ -530,5 +567,22 @@ $("feedback").addEventListener("click",e=>{
   if(e.target.closest("#answerTop,#speakTop"))speakCurrent();
 });
 loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
+
+function goBackToHome(){
+  try{
+    if(window.parent && window.parent!==window){
+      if(typeof window.parent.closeApp==="function"){window.parent.closeApp();return;}
+      const parentDoc=window.parent.document;
+      const shell=parentDoc.getElementById("appShell");
+      const frame=parentDoc.getElementById("appFrame");
+      if(shell && frame){
+        shell.classList.remove("open");shell.setAttribute("aria-hidden","true");
+        parentDoc.documentElement.classList.remove("app-open");frame.src="about:blank";return;
+      }
+    }
+  }catch(e){}
+  window.parent.postMessage({type:"deutsch:home"},"*");
+}
+document.getElementById("homeBack").onclick=goBackToHome;
 </script>
 </body></html>
