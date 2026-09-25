@@ -80,7 +80,7 @@
 
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
 .app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--top-line);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:var(--top-title)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--progress);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:var(--card-shadow)}
-.eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em}.translation{font-size:18px;color:var(--muted);margin-top:14px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
+.eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em}.translation{font-size:18px;color:var(--muted);margin-top:14px;text-align:center}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
 .feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:var(--good-glow)}.feedback.wrong::before{background:var(--bad-glow)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:var(--text-secondary);line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--answer-surface)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:var(--text-label);font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
 
 .answer-translation{color:var(--muted);margin-top:6px}.rule-title{font-size:16px;font-weight:400;margin-bottom:8px;line-height:1.5}.rule-examples{font-size:13px;font-style:italic;color:var(--text-subtle);margin-top:10px;line-height:1.45}.rule-reliability{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--text-subtle)}.rule-reliability strong{color:var(--text-strong)}.feedback.correct{border-color:var(--good)}.feedback.wrong{border-color:var(--bad)}.continue{width:100%;margin-top:18px;border:0;border-radius:15px;padding:15px;background:var(--button);color:white;font-size:17px;font-weight:650;cursor:pointer}
@@ -134,7 +134,8 @@
 </section>
 <div class="version-mark">v10</div>
 </main>
-<script src="words.js?v=2"></script>
+<script src="../components/deutsch-translation-v1.js?v=2"></script>
+<script src="words.js?v=3"></script>
 <script src="../components/deutsch-progress-v1.js"></script>
 <script>
 const words=window.WORDS;
@@ -189,7 +190,7 @@ function newDeck(){
  index=0;
 }
 function current(){return deck[index]}
-function render(){const w=current();$('word').textContent=w.word;$('translation').textContent=w.translation;$('feedback').className='feedback';$('choices').style.display='grid';$('card').style.display='flex';$('counter').textContent=`${index+1} / ${sessionSize}`;$('bar').style.width=`${(index/sessionSize)*100}%`}
+function render(){const w=current();$('word').textContent=w.word;$('translation').textContent=getTranslation(w,'translation');$('feedback').className='feedback';$('choices').style.display='grid';$('card').style.display='flex';$('counter').textContent=`${index+1} / ${sessionSize}`;$('bar').style.width=`${(index/sessionSize)*100}%`}
 
 const DAILY_STATS_KEY='deutschDailyStatsV1';
 function localDayKey(){
@@ -214,7 +215,7 @@ function recordDailyArtikel(ok){
 }
 
 function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(w),ok); if(ok){correct++}
- $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Richtig!':'✕ Nicht ganz.';$('choiceLine').innerHTML=ok?`Deine Wahl: <strong>${article}</strong>.`:`Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=w.translation;$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
+ $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Richtig!':'✕ Nicht ganz.';$('choiceLine').innerHTML=ok?`Deine Wahl: <strong>${article}</strong>.`:`Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=getTranslation(w,'translation');$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none'}
 function startSession(size){
  sessionSize=size; total=0; correct=0;
  
