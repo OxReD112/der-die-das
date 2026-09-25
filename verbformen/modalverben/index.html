@@ -282,7 +282,8 @@ html,body{overscroll-behavior-y:none}
   </section>
 </main>
 
-<script src="special_verbs.js?v=2"></script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="special_verbs.js?v=3"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const STORAGE_KEY="modalverbenDifficultyV1";
@@ -393,7 +394,7 @@ function render(){
   checked=false;
   $("verb").textContent=item.infinitive;
   $("sentence").innerHTML=sentenceWithGap(item);
-  $("translation").textContent=item.translation;
+  $("translation").textContent=getTranslation(item,"translation");
   $("answer").value="";
   $("answer-area").classList.remove("hidden");
   $("result").className="result";
@@ -429,7 +430,7 @@ function checkAnswer(){
   $("formLine").innerHTML=ok
     ? `${item.infinitive} → ${item.answer}`
     : `${item.infinitive} → ${item.answer} → <span class="wrong-answer">${escapeHtml(a)}</span>`;
-  $("explanation").textContent=item.explanation;
+  $("explanation").textContent=getTranslation(item,"explanation");
   $("answer-area").classList.add("hidden");
   $("next").className="next show";
 }
