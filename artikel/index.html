@@ -22,15 +22,15 @@
 :root{
   /* ===== PALETTE ===== */
   --bg:#1b1b1d;
-  --panel:#252527;
+  --panel:#2a2a2d;
   --text:#f2f0ed;
   --muted:#8f8f94;
-  --text-secondary:#c8c8cc;
-  --text-strong:#e5e5e7;
-  --text-subtle:#aaa6a0;
-  --text-label:#aaa093;
-  --mint:#5ac8a0;
-  --coral:#ff6969;
+  --text-secondary:#c8c7c4;
+  --text-strong:#f2f0ed;
+  --text-subtle:#c8c7c4;
+  --text-label:#8f8f94;
+  --mint:#5bc8a4;
+  --coral:#ff7770;
   --blue:#72a7ff;
 
   /* ===== SEMANTIC COLORS ===== */
@@ -39,13 +39,13 @@
   --top-line:rgba(255,255,255,.08);
   --top-title:rgba(255,255,255,.48);
   --progress:rgba(255,255,255,.38);
-  --answer-surface:rgba(28,28,30,.58);
+  --answer-surface:rgba(27,27,29,.58);
   --game-title:rgba(255,255,255,.11);
   --version:rgba(255,255,255,.18);
-  --good:rgba(90,200,160,.5);
-  --bad:rgba(255,105,105,.5);
-  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(90,200,160,.42) 0%,rgba(90,200,160,.24) 18%,rgba(90,200,160,.11) 40%,rgba(90,200,160,.04) 60%,transparent 78%);
-  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(255,105,105,.48) 0%,rgba(255,105,105,.28) 18%,rgba(255,105,105,.13) 40%,rgba(255,105,105,.05) 60%,transparent 78%);
+  --good:rgba(91,200,164,.5);
+  --bad:rgba(255,119,112,.5);
+  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(91,200,164,.42) 0%,rgba(91,200,164,.24) 18%,rgba(91,200,164,.11) 40%,rgba(91,200,164,.04) 60%,transparent 78%);
+  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(255,119,112,.48) 0%,rgba(255,119,112,.28) 18%,rgba(255,119,112,.13) 40%,rgba(255,119,112,.05) 60%,transparent 78%);
   --card-shadow:0 18px 55px rgba(0,0,0,.18);
   --session-button-bg:#303033;
 }
@@ -57,30 +57,32 @@
   --muted:#727278;
   --text-secondary:#55565b;
   --text-strong:#55565b;
-  --text-subtle:#77777d;
-  --text-label:#6f6b66;
-  --mint:#69c9b1;
-  --coral:#ff6f73;
+  --text-subtle:#727278;
+  --text-label:#727278;
+  --mint:#3fa68a;
+  --coral:#e95e66;
 
   --button:var(--coral);
   --line:rgba(0,0,0,.09);
   --top-line:rgba(32,32,35,.08);
   --top-title:rgba(37,37,40,.48);
   --progress:rgba(32,32,35,.28);
-  --answer-surface:rgba(32,32,35,.035);
+  --answer-surface:rgba(36,36,38,.035);
   --game-title:rgba(36,36,38,.09);
   --version:rgba(37,37,40,.30);
-  --good:rgba(105,201,177,.5);
-  --bad:rgba(255,111,115,.5);
-  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(105,201,177,.18) 0%,rgba(105,201,177,.09) 18%,rgba(105,201,177,.03) 40%,transparent 70%);
-  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(255,111,115,.19) 0%,rgba(255,111,115,.09) 18%,rgba(255,111,115,.025) 40%,transparent 70%);
+  --good:rgba(63,166,138,.5);
+  --bad:rgba(233,94,102,.5);
+  --good-glow:radial-gradient(ellipse at 50% 42%,rgba(63,166,138,.18) 0%,rgba(63,166,138,.09) 18%,rgba(63,166,138,.03) 40%,transparent 70%);
+  --bad-glow:radial-gradient(ellipse at 50% 42%,rgba(233,94,102,.19) 0%,rgba(233,94,102,.09) 18%,rgba(233,94,102,.025) 40%,transparent 70%);
   --card-shadow:none;
   --session-button-bg:#eeeae5;
+
+  --blue:#5588e0;
 }
 
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;min-height:100vh;display:flex;justify-content:center}
-.app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--top-line);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:var(--top-title)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--progress);width:0}.card{position:relative;overflow:hidden;min-height:390px;border:1px solid var(--line);border-radius:26px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px;box-shadow:var(--card-shadow)}
-.eyebrow{font-size:14px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em;text-align:center}.translation{font-size:18px;color:var(--muted);margin-top:14px;text-align:center}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
+.app{width:min(720px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--top-line);border-radius:99px}.top-title{font-size:18px;font-weight:700;color:var(--top-title)}.counter{color:var(--muted);font-size:14px}.top-title,.counter{transform:translateY(4px)}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--progress);width:0}.card{position:relative;overflow:hidden;min-height:390px;border-radius:26px;background:var(--card-bg);box-shadow:var(--card-lift);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px 24px}
+.eyebrow{font-size:16px;color:var(--muted);margin-bottom:18px}.word{font-size:clamp(48px,11vw,76px);font-weight:650;letter-spacing:-.04em;text-align:center}.translation{font-size:16px;color:var(--muted);margin-top:14px;text-align:center}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.choice{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:17px 8px;font-size:25px;font-weight:650;cursor:pointer}.choice:active{transform:scale(.98)}.der{color:var(--blue)}.die{color:var(--coral)}.das{color:var(--mint)}
 .feedback{display:none;margin-top:18px;border-radius:22px;padding:22px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}.feedback.show{display:block}.feedback::before{content:"";position:absolute;left:50%;top:-230px;width:155%;height:650px;transform:translateX(-50%);pointer-events:none}.feedback.correct::before{background:var(--good-glow)}.feedback.wrong::before{background:var(--bad-glow)}.feedback h2,.feedback p,.feedback .answer-card,.feedback .rule-card{position:relative}.feedback h2{margin:0 0 10px;font-size:24px}.feedback p{margin:8px 0;color:var(--text-secondary);line-height:1.45}.answer-card,.rule-card{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--answer-surface)}.answer-card{text-align:center}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}.rule-label{font-size:14px;text-transform:uppercase;letter-spacing:.035em;color:var(--text-label);font-weight:400;margin-bottom:12px}.answer-word{font-size:30px;font-weight:700;transition:color .2s ease}
 
 .answer-translation{color:var(--muted);margin-top:6px}.rule-title{font-size:16px;font-weight:400;margin-bottom:8px;line-height:1.5}.rule-examples{font-size:13px;font-style:italic;color:var(--text-subtle);margin-top:10px;line-height:1.45}.rule-reliability{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--text-subtle)}.rule-reliability strong{color:var(--text-strong)}.feedback.correct{border-color:var(--good)}.feedback.wrong{border-color:var(--bad)}.continue{width:100%;margin-top:18px;border:0;border-radius:15px;padding:15px;background:var(--button);color:white;font-size:17px;font-weight:650;cursor:pointer}
@@ -174,6 +176,45 @@
 /* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
 #game{padding-top:11px}
 #game .top{padding-bottom:18px}
+
+/* ===== WORD CARD · shared by Artikel and Fester Kasus (Design Police 2026-09-25) ===== */
+:root{
+  --card-bg:#2a2a2d;
+  --card-lift:inset 0 1px 0 rgba(255,255,255,.06),0 18px 40px rgba(0,0,0,.30);
+}
+[data-theme="light"]{
+  --card-bg:#fff;
+  --card-lift:0 2px 4px rgba(0,0,0,.04),0 14px 34px rgba(0,0,0,.09);
+}
+
+/* ===== ANSWER BUTTONS · shared by Artikel, Fester Kasus, Ortspräpositionen (Design Police 2026-09-25) ===== */
+#choices .choice{border:0;border-radius:14px;min-height:56px;height:56px;padding:0 10px;
+  background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:22px;font-weight:650;
+  transition:transform .12s ease,filter .12s ease,opacity .16s ease}
+#choices .choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
+#choices .choice:active{transform:scale(.97);filter:brightness(.94);box-shadow:var(--start-btn-shadow)}
+
+/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
+   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
+   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
+:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
+#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;padding:0;}
+#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
+#continue:active{transform:scale(.97);filter:brightness(.94)}
+
+/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
+body:has(#game:not(.hidden)) .version-mark{display:none}
+
+/* Feedback headline: a bit smaller, centred like the line under it, no exclamation mark (Design Police 2026-09-25) */
+#feedbackTitle{font-size:20px;text-align:center}
+#choiceLine{text-align:center}
+
+/* Feedback headline in the answer colour, like the label in Fester Kasus (Design Police 2026-09-25) */
+.feedback.correct #feedbackTitle{color:var(--mint)}
+.feedback.wrong #feedbackTitle{color:var(--coral)}
 </style>
 </head>
 <body><main class="app">
@@ -211,7 +252,7 @@
 <button class="home-back" id="homeBack">Zur Startseite</button>
 </div>
 </section>
-<div class="version-mark">v14</div>
+<div class="version-mark">v17</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="words.js?v=3"></script>
@@ -306,7 +347,7 @@ function recordDailyArtikel(ok){
 }
 
 function choose(article){const w=current(),ok=article===w.article;total++; recordDailyArtikel(ok); updateDifficulty(w,ok); if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(w),ok); if(ok){correct++}
- $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Richtig!':'✕ Nicht ganz.';$('choiceLine').innerHTML=ok?`Deine Wahl: <strong>${article}</strong>.`:`Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=getTranslation(w,'translation');$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=Array.isArray(w.examples)?w.examples.join(', '):w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none';fitOneLine(document.querySelector('.answer-word'))}
+ $('feedback').className='feedback show '+(ok?'correct':'wrong');$('feedbackTitle').textContent=ok?'✓ Richtig':'✕ Nicht ganz';$('choiceLine').innerHTML=ok?`Deine Wahl: <strong>${article}</strong>.`:`Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;$('answerArticle').textContent=w.article;$('answerWord').textContent=w.word;$('answerTranslation').textContent=getTranslation(w,'translation');$('ruleLabel').textContent=`WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;$('ruleTitle').textContent=w.explanation;$('ruleExamples').textContent=Array.isArray(w.examples)?w.examples.join(', '):w.examples;$('ruleReliability').innerHTML=`<strong>Heads up:</strong> ${w.reliability}`;$('choices').style.display='none';$('card').style.display='none';fitOneLine(document.querySelector('.answer-word'))}
 function startSession(size){
  sessionSize=size; total=0; correct=0;
  
