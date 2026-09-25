@@ -147,7 +147,7 @@ button{font:inherit}
 <header class="top"><div class="top-row"><div class="top-title">Fester Kasus</div><div class="counter" id="counter">1 / 10</div></div><div class="progress"><i id="bar"></i></div></header>
 <section class="card" id="questionCard">
   <div class="preposition" id="preposition">mit</div>
-  <div class="translation" id="translation">с</div>
+  <div class="translation" id="translation"></div>
 </section>
 
 <section class="answer-state hidden" id="answerState">
@@ -182,7 +182,8 @@ button{font:inherit}
 <div class="version-mark">v9</div>
 </main>
 
-<script src="praepositionen.js?v=9"></script>
+<script src="../../components/deutsch-translation-v1.js?v=2"></script>
+<script src="praepositionen.js?v=10"></script>
 <script src="../../components/deutsch-progress-v1.js"></script>
 <script>
 const PREPOSITIONS = window.PRAEPOSITIONEN || [];
@@ -283,7 +284,7 @@ function render(){
   els.counter.textContent=(index+1)+" / "+session.length;
   els.bar.style.width=(index/session.length*100)+"%";
   els.preposition.textContent=entry.preposition;
-  els.translation.textContent=entry.translation;
+  els.translation.textContent=getTranslation(entry,"translation");
 
   els.questionCard.classList.remove("hidden");
   els.answerState.classList.add("hidden");
@@ -340,13 +341,13 @@ function answer(selected){
   els.answerPreposition.textContent=entry.preposition;
   els.answerCase.textContent=shownCase;
   if(correct){
-    els.rule.textContent=variantLabel ? (entry.variantNote||statusMessage(shownStatus,entry)) : (entry.note||"");
+    els.rule.textContent=variantLabel ? (getTranslation(entry,"variantNote")||statusMessage(shownStatus,entry)) : getTranslation(entry,"note");
   }else{
     els.rule.innerHTML='<span class="wrong-choice">'+selected+'</span>';
   }
 
   els.exampleText.textContent=entry.example||"";
-  els.exampleTranslation.textContent=entry.exampleTranslation||"";
+  els.exampleTranslation.textContent=getTranslation(entry,"exampleTranslation");
   els.next.textContent=index===session.length-1?"Fertig":"Weiter";
   els.bar.style.width=((index+1)/session.length*100)+"%";
   fitToCard(els.answerPreposition);

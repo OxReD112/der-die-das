@@ -4,11 +4,16 @@
 // только разговорные и «образованные» B1–B2, без канцелярских (см. Documentation/QA/QA_03_Kasus.md).
 // Не включены: Wechselpräpositionen и локальные Präpositionen для отдельной будущей игры.
 // Loaded by kasus.html as window.PRAEPOSITIONEN (same pattern as Artikel/words.js).
+// translation, exampleTranslation, note, variantNote are {ru, en}; picked by the Translations setting
+// via components/deutsch-translation-v1.js.
 
 window.PRAEPOSITIONEN = [
   {
     "preposition": "durch",
-    "translation": "через, сквозь",
+    "translation": {
+      "ru": "через, сквозь",
+      "en": "through"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -16,11 +21,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Er geht durch den Park.",
-    "exampleTranslation": "Он идёт через парк."
+    "exampleTranslation": {
+      "ru": "Он идёт через парк.",
+      "en": "He is walking through the park."
+    }
   },
   {
     "preposition": "für",
-    "translation": "для, за",
+    "translation": {
+      "ru": "для, за",
+      "en": "for"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -28,11 +39,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Das ist ein Geschenk für meinen Vater.",
-    "exampleTranslation": "Это подарок для моего отца."
+    "exampleTranslation": {
+      "ru": "Это подарок для моего отца.",
+      "en": "This is a present for my father."
+    }
   },
   {
     "preposition": "gegen",
-    "translation": "против, около",
+    "translation": {
+      "ru": "против, около",
+      "en": "against; around (time)"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -40,11 +57,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Sie ist gegen die Wand gelaufen.",
-    "exampleTranslation": "Она врезалась в стену."
+    "exampleTranslation": {
+      "ru": "Она врезалась в стену.",
+      "en": "She walked into the wall."
+    }
   },
   {
     "preposition": "ohne",
-    "translation": "без",
+    "translation": {
+      "ru": "без",
+      "en": "without"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -52,11 +75,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Ich trinke Kaffee ohne Zucker.",
-    "exampleTranslation": "Я пью кофе без сахара."
+    "exampleTranslation": {
+      "ru": "Я пью кофе без сахара.",
+      "en": "I drink coffee without sugar."
+    }
   },
   {
     "preposition": "um",
-    "translation": "вокруг, в (о времени)",
+    "translation": {
+      "ru": "вокруг, в (о времени)",
+      "en": "around; at (time)"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -64,24 +93,39 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Wir sitzen um den Tisch herum.",
-    "exampleTranslation": "Мы сидим вокруг стола."
+    "exampleTranslation": {
+      "ru": "Мы сидим вокруг стола.",
+      "en": "We are sitting around the table."
+    }
   },
   {
     "preposition": "bis",
-    "translation": "до",
+    "translation": {
+      "ru": "до",
+      "en": "until, as far as"
+    },
     "cases": [
       {
         "case": "Akkusativ",
         "status": "standard"
       }
     ],
-    "note": "Часто вместе с другим предлогом: bis zum Bahnhof (тогда Dativ из-за zu).",
+    "note": {
+      "ru": "Часто вместе с другим предлогом: bis zum Bahnhof (тогда Dativ из-за zu).",
+      "en": "Often used with another preposition: bis zum Bahnhof (then Dativ because of zu)."
+    },
     "example": "Ich arbeite bis nächsten Freitag.",
-    "exampleTranslation": "Я работаю до следующей пятницы."
+    "exampleTranslation": {
+      "ru": "Я работаю до следующей пятницы.",
+      "en": "I'm working until next Friday."
+    }
   },
   {
     "preposition": "… entlang",
-    "translation": "вдоль",
+    "translation": {
+      "ru": "вдоль",
+      "en": "along"
+    },
     "cases": [
       {
         "case": "Akkusativ",
@@ -89,11 +133,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Er geht die Straße entlang.",
-    "exampleTranslation": "Он идёт вдоль улицы."
+    "exampleTranslation": {
+      "ru": "Он идёт вдоль улицы.",
+      "en": "He is walking along the street."
+    }
   },
   {
     "preposition": "entlang …",
-    "translation": "вдоль",
+    "translation": {
+      "ru": "вдоль",
+      "en": "along"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -104,14 +154,26 @@ window.PRAEPOSITIONEN = [
         "status": "also_correct"
       }
     ],
-    "note": "Dativ также возможен, но реже.",
-    "variantNote": "Dativ тоже возможен, но Genitiv встречается чаще.",
+    "note": {
+      "ru": "Dativ также возможен, но реже.",
+      "en": "Dativ is also possible, but less common."
+    },
+    "variantNote": {
+      "ru": "Dativ тоже возможен, но Genitiv встречается чаще.",
+      "en": "Dativ is also possible, but Genitiv is more common."
+    },
     "example": "Entlang des Flusses stehen alte Bäume.",
-    "exampleTranslation": "Вдоль реки стоят старые деревья."
+    "exampleTranslation": {
+      "ru": "Вдоль реки стоят старые деревья.",
+      "en": "There are old trees along the river."
+    }
   },
   {
     "preposition": "aus",
-    "translation": "из, от",
+    "translation": {
+      "ru": "из, от",
+      "en": "out of, from"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -119,11 +181,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Sie kommt aus Japan.",
-    "exampleTranslation": "Она из Японии."
+    "exampleTranslation": {
+      "ru": "Она из Японии.",
+      "en": "She is from Japan."
+    }
   },
   {
     "preposition": "bei",
-    "translation": "у, при, около",
+    "translation": {
+      "ru": "у, при, около",
+      "en": "at, with, near"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -131,11 +199,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Er wohnt bei seinen Eltern.",
-    "exampleTranslation": "Он живёт у своих родителей."
+    "exampleTranslation": {
+      "ru": "Он живёт у своих родителей.",
+      "en": "He lives with his parents."
+    }
   },
   {
     "preposition": "mit",
-    "translation": "с",
+    "translation": {
+      "ru": "с",
+      "en": "with; by (transport)"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -143,11 +217,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Ich fahre mit dem Zug.",
-    "exampleTranslation": "Я еду на поезде."
+    "exampleTranslation": {
+      "ru": "Я еду на поезде.",
+      "en": "I'm going by train."
+    }
   },
   {
     "preposition": "nach",
-    "translation": "после, в/на",
+    "translation": {
+      "ru": "после, в/на",
+      "en": "after; to (places)"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -155,11 +235,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Nach der Arbeit gehe ich nach Hause.",
-    "exampleTranslation": "После работы я иду домой."
+    "exampleTranslation": {
+      "ru": "После работы я иду домой.",
+      "en": "After work I'm going home."
+    }
   },
   {
     "preposition": "seit",
-    "translation": "с, уже",
+    "translation": {
+      "ru": "с, уже",
+      "en": "since, for (time)"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -167,11 +253,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Ich lerne seit drei Jahren Deutsch.",
-    "exampleTranslation": "Я уже три года учу немецкий."
+    "exampleTranslation": {
+      "ru": "Я уже три года учу немецкий.",
+      "en": "I have been learning German for three years."
+    }
   },
   {
     "preposition": "von",
-    "translation": "от, из, с, о",
+    "translation": {
+      "ru": "от, из, с, о",
+      "en": "from, of, by"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -179,11 +271,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Das ist das Auto von meinem Chef.",
-    "exampleTranslation": "Это машина моего начальника."
+    "exampleTranslation": {
+      "ru": "Это машина моего начальника.",
+      "en": "That's my boss's car."
+    }
   },
   {
     "preposition": "zu",
-    "translation": "к, в, на",
+    "translation": {
+      "ru": "к, в, на",
+      "en": "to"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -191,11 +289,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Ich gehe zum Arzt.",
-    "exampleTranslation": "Я иду к врачу."
+    "exampleTranslation": {
+      "ru": "Я иду к врачу.",
+      "en": "I'm going to the doctor's."
+    }
   },
   {
     "preposition": "ab",
-    "translation": "начиная с",
+    "translation": {
+      "ru": "начиная с",
+      "en": "from, as of"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -203,11 +307,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Ab nächster Woche arbeite ich hier.",
-    "exampleTranslation": "Со следующей недели я работаю здесь."
+    "exampleTranslation": {
+      "ru": "Со следующей недели я работаю здесь.",
+      "en": "From next week, I'll be working here."
+    }
   },
   {
     "preposition": "außer",
-    "translation": "кроме",
+    "translation": {
+      "ru": "кроме",
+      "en": "except, apart from"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -215,11 +325,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Alle waren da, außer ihm.",
-    "exampleTranslation": "Все были там, кроме него."
+    "exampleTranslation": {
+      "ru": "Все были там, кроме него.",
+      "en": "Everyone was there except him."
+    }
   },
   {
     "preposition": "gegenüber",
-    "translation": "напротив",
+    "translation": {
+      "ru": "напротив",
+      "en": "opposite"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -227,11 +343,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Das Café ist gegenüber dem Bahnhof.",
-    "exampleTranslation": "Кафе находится напротив вокзала."
+    "exampleTranslation": {
+      "ru": "Кафе находится напротив вокзала.",
+      "en": "The café is opposite the station."
+    }
   },
   {
     "preposition": "entgegen",
-    "translation": "вопреки, навстречу",
+    "translation": {
+      "ru": "вопреки, навстречу",
+      "en": "contrary to; towards"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -239,11 +361,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Entgegen meiner Erwartung hat er gewonnen.",
-    "exampleTranslation": "Вопреки моим ожиданиям, он победил."
+    "exampleTranslation": {
+      "ru": "Вопреки моим ожиданиям, он победил.",
+      "en": "Contrary to my expectations, he won."
+    }
   },
   {
     "preposition": "laut",
-    "translation": "согласно, по данным",
+    "translation": {
+      "ru": "согласно, по данным",
+      "en": "according to"
+    },
     "cases": [
       {
         "case": "Dativ",
@@ -254,14 +382,26 @@ window.PRAEPOSITIONEN = [
         "status": "also_correct"
       }
     ],
-    "note": "Genitiv тоже возможен, но реже.",
-    "variantNote": "Genitiv тоже возможен, но Dativ встречается чаще.",
+    "note": {
+      "ru": "Genitiv тоже возможен, но реже.",
+      "en": "Genitiv is also possible, but less common."
+    },
+    "variantNote": {
+      "ru": "Genitiv тоже возможен, но Dativ встречается чаще.",
+      "en": "Genitiv is also possible, but Dativ is more common."
+    },
     "example": "Laut einem Bericht ist er zurückgetreten.",
-    "exampleTranslation": "Согласно сообщению, он подал в отставку."
+    "exampleTranslation": {
+      "ru": "Согласно сообщению, он подал в отставку.",
+      "en": "According to a report, he has resigned."
+    }
   },
   {
     "preposition": "wegen",
-    "translation": "из-за, вследствие",
+    "translation": {
+      "ru": "из-за, вследствие",
+      "en": "because of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -272,14 +412,26 @@ window.PRAEPOSITIONEN = [
         "status": "colloquial"
       }
     ],
-    "note": "В разговорной речи также используется Dativ.",
-    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+    "note": {
+      "ru": "В разговорной речи также используется Dativ.",
+      "en": "In spoken German, Dativ is also used."
+    },
+    "variantNote": {
+      "ru": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+      "en": "This is the colloquial form. In writing, Genitiv is better."
+    },
     "example": "Wegen des schlechten Wetters blieben wir zu Hause.",
-    "exampleTranslation": "Из-за плохой погоды мы остались дома."
+    "exampleTranslation": {
+      "ru": "Из-за плохой погоды мы остались дома.",
+      "en": "Because of the bad weather, we stayed at home."
+    }
   },
   {
     "preposition": "trotz",
-    "translation": "несмотря на",
+    "translation": {
+      "ru": "несмотря на",
+      "en": "despite, in spite of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -290,14 +442,26 @@ window.PRAEPOSITIONEN = [
         "status": "colloquial"
       }
     ],
-    "note": "В разговорной речи также используется Dativ.",
-    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+    "note": {
+      "ru": "В разговорной речи также используется Dativ.",
+      "en": "In spoken German, Dativ is also used."
+    },
+    "variantNote": {
+      "ru": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+      "en": "This is the colloquial form. In writing, Genitiv is better."
+    },
     "example": "Trotz des Regens gingen wir spazieren.",
-    "exampleTranslation": "Несмотря на дождь, мы пошли гулять."
+    "exampleTranslation": {
+      "ru": "Несмотря на дождь, мы пошли гулять.",
+      "en": "Despite the rain, we went for a walk."
+    }
   },
   {
     "preposition": "während",
-    "translation": "во время",
+    "translation": {
+      "ru": "во время",
+      "en": "during"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -308,14 +472,26 @@ window.PRAEPOSITIONEN = [
         "status": "colloquial"
       }
     ],
-    "note": "В разговорной речи также используется Dativ.",
-    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+    "note": {
+      "ru": "В разговорной речи также используется Dativ.",
+      "en": "In spoken German, Dativ is also used."
+    },
+    "variantNote": {
+      "ru": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+      "en": "This is the colloquial form. In writing, Genitiv is better."
+    },
     "example": "Während des Essens sprachen sie nicht.",
-    "exampleTranslation": "Во время еды они не разговаривали."
+    "exampleTranslation": {
+      "ru": "Во время еды они не разговаривали.",
+      "en": "They didn't talk during the meal."
+    }
   },
   {
     "preposition": "statt / anstatt",
-    "translation": "вместо",
+    "translation": {
+      "ru": "вместо",
+      "en": "instead of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -327,13 +503,25 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Statt eines Kuchens gab es Eis.",
-    "exampleTranslation": "Вместо торта было мороженое.",
-    "note": "В разговорной речи также используется Dativ.",
-    "variantNote": "Это разговорный вариант. В письменной речи лучше Genitiv."
+    "exampleTranslation": {
+      "ru": "Вместо торта было мороженое.",
+      "en": "Instead of a cake, there was ice cream."
+    },
+    "note": {
+      "ru": "В разговорной речи также используется Dativ.",
+      "en": "In spoken German, Dativ is also used."
+    },
+    "variantNote": {
+      "ru": "Это разговорный вариант. В письменной речи лучше Genitiv.",
+      "en": "This is the colloquial form. In writing, Genitiv is better."
+    }
   },
   {
     "preposition": "anstelle",
-    "translation": "вместо, на месте",
+    "translation": {
+      "ru": "вместо, на месте",
+      "en": "instead of, in place of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -341,11 +529,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Anstelle meines Bruders kam ich.",
-    "exampleTranslation": "Вместо моего брата пришёл я."
+    "exampleTranslation": {
+      "ru": "Вместо моего брата пришёл я.",
+      "en": "I came in place of my brother."
+    }
   },
   {
     "preposition": "aufgrund",
-    "translation": "из-за, вследствие, на основании",
+    "translation": {
+      "ru": "из-за, вследствие, на основании",
+      "en": "due to, on the basis of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -353,11 +547,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Aufgrund eines Fehlers wurde er entlassen.",
-    "exampleTranslation": "Из-за ошибки его уволили."
+    "exampleTranslation": {
+      "ru": "Из-за ошибки его уволили.",
+      "en": "He was fired due to a mistake."
+    }
   },
   {
     "preposition": "dank",
-    "translation": "благодаря",
+    "translation": {
+      "ru": "благодаря",
+      "en": "thanks to"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -368,14 +568,26 @@ window.PRAEPOSITIONEN = [
         "status": "also_correct"
       }
     ],
-    "note": "Dativ также возможен.",
-    "variantNote": "Dativ тоже возможен, но Genitiv встречается чаще.",
+    "note": {
+      "ru": "Dativ также возможен.",
+      "en": "Dativ is also possible."
+    },
+    "variantNote": {
+      "ru": "Dativ тоже возможен, но Genitiv встречается чаще.",
+      "en": "Dativ is also possible, but Genitiv is more common."
+    },
     "example": "Dank seiner Hilfe haben wir es geschafft.",
-    "exampleTranslation": "Благодаря его помощи мы справились."
+    "exampleTranslation": {
+      "ru": "Благодаря его помощи мы справились.",
+      "en": "Thanks to his help, we managed it."
+    }
   },
   {
     "preposition": "mithilfe",
-    "translation": "с помощью",
+    "translation": {
+      "ru": "с помощью",
+      "en": "with the help of"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -383,11 +595,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Mithilfe einer Karte haben wir den Weg gefunden.",
-    "exampleTranslation": "С помощью карты мы нашли дорогу."
+    "exampleTranslation": {
+      "ru": "С помощью карты мы нашли дорогу.",
+      "en": "We found the way with the help of a map."
+    }
   },
   {
     "preposition": "anhand",
-    "translation": "на примере, на основе, по",
+    "translation": {
+      "ru": "на примере, на основе, по",
+      "en": "using, based on"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -395,11 +613,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Anhand eines Beispiels erkläre ich es dir.",
-    "exampleTranslation": "Я объясню тебе это на примере."
+    "exampleTranslation": {
+      "ru": "Я объясню тебе это на примере.",
+      "en": "I'll explain it to you using an example."
+    }
   },
   {
     "preposition": "angesichts",
-    "translation": "ввиду, учитывая",
+    "translation": {
+      "ru": "ввиду, учитывая",
+      "en": "in view of, given"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -407,11 +631,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Angesichts der Lage müssen wir handeln.",
-    "exampleTranslation": "Учитывая ситуацию, мы должны действовать."
+    "exampleTranslation": {
+      "ru": "Учитывая ситуацию, мы должны действовать.",
+      "en": "Given the situation, we have to act."
+    }
   },
   {
     "preposition": "innerhalb",
-    "translation": "внутри, в течение",
+    "translation": {
+      "ru": "внутри, в течение",
+      "en": "inside; within (time)"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -419,11 +649,17 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Innerhalb einer Woche war alles fertig.",
-    "exampleTranslation": "В течение недели всё было готово."
+    "exampleTranslation": {
+      "ru": "В течение недели всё было готово.",
+      "en": "Within a week, everything was ready."
+    }
   },
   {
     "preposition": "außerhalb",
-    "translation": "вне, за пределами",
+    "translation": {
+      "ru": "вне, за пределами",
+      "en": "outside"
+    },
     "cases": [
       {
         "case": "Genitiv",
@@ -431,6 +667,9 @@ window.PRAEPOSITIONEN = [
       }
     ],
     "example": "Wir wohnen außerhalb der Stadt.",
-    "exampleTranslation": "Мы живём за городом."
+    "exampleTranslation": {
+      "ru": "Мы живём за городом.",
+      "en": "We live outside the city."
+    }
   }
 ];
