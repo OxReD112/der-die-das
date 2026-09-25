@@ -230,8 +230,8 @@ html,body{overscroll-behavior-y:none}
 <div id="formsModal" class="forms-modal" aria-hidden="true">
   <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
     <div class="forms-modal-head">
-      <h2 id="formsModalTitle">Modalverben · Forms</h2>
-      <button class="forms-close" id="formsClose" type="button" aria-label="Close">×</button>
+      <h2 id="formsModalTitle">Modalverben · Formen</h2>
+      <button class="forms-close" id="formsClose" type="button" aria-label="Schließen">×</button>
     </div>
     <div id="formsModalBody"></div>
   </div>
@@ -239,13 +239,13 @@ html,body{overscroll-behavior-y:none}
 <main class="app">
   <section id="start" class="start">
     <h1 class="title">Modalverben.</h1>
-    <p class="subtitle">How many sentences?</p>
+    <p class="subtitle">Wie viele Sätze?</p>
     <div class="choices">
       <button class="choice" data-size="10">10</button>
       <button class="choice" data-size="20">20</button>
       <button class="choice" data-size="30">30</button>
     </div>
-    <button class="forms-table-btn" data-forms-table>Forms · Table</button>
+    <button class="forms-table-btn" data-forms-table>Formen · Tabelle</button>
   </section>
 
   <section id="study" class="hidden">
@@ -257,7 +257,7 @@ html,body{overscroll-behavior-y:none}
       <div class="translation" id="translation"></div>
       <div class="answer-area" id="answer-area">
         <input id="answer" class="answer" placeholder="…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
-        <button class="check" id="check">Check</button>
+        <button class="check" id="check">Prüfen</button>
       </div>
       <div class="result" id="result">
         <div class="state" id="state"></div>
@@ -265,19 +265,19 @@ html,body{overscroll-behavior-y:none}
         <div class="form-kind" id="formKind"></div>
         <div class="explanation" id="explanation"></div>
       </div>
-      <button class="next" id="next">Continue</button>
+      <button class="next" id="next">Weiter</button>
     </section>
     <div id="keyboardMount"></div>
-    <div class="in-session-forms"><button class="forms-table-btn" data-forms-table>Forms table</button></div>
+    <div class="in-session-forms"><button class="forms-table-btn" data-forms-table>Formen · Tabelle</button></div>
   </section>
 
   <section id="finish" class="finish hidden">
-    <h2>Done.</h2>
+    <h2>Fertig.</h2>
     <div id="finalScore" class="final-score"></div>
     <p id="summary"></p>
     <div class="finish-actions">
-      <button class="again" id="again">Another session</button>
-      <button class="home-back" id="homeBack">Back to Home</button>
+      <button class="again" id="again">Noch eine Runde</button>
+      <button class="home-back" id="homeBack">Zur Startseite</button>
     </div>
   </section>
 </main>
@@ -424,7 +424,7 @@ function checkAnswer(){
   $("result").className="result show "+(ok?"good":"bad");
   if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   $("sentence").innerHTML=sentenceWithGap(item,true,!ok);
-  $("state").textContent=ok?"Correct":"Not quite";
+  $("state").textContent=ok?"Richtig":"Nicht ganz";
   $("formKind").textContent=item.form;
   $("formLine").innerHTML=ok
     ? `${item.infinitive} → ${item.answer}`
@@ -442,7 +442,7 @@ function finishSession(){
   $("study").classList.add("hidden");
   $("finish").classList.remove("hidden");
   $("finalScore").textContent=correctCount+" / "+deck.length;
-  $("summary").textContent="Difficult forms will have a better chance of returning in a future session.";
+  $("summary").textContent="Was schwierig war, kommt öfter wieder.";
 }
 
 document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
@@ -617,11 +617,11 @@ function renderFormsTable(){
     <tbody class="forms-group${modalFormGroupOpen?" open":""}" data-forms-group>
       <tr class="verb-group-row">
         <td class="verb-group" colspan="3">
-          <span class="forms-chevron" data-toggle-group aria-label="Toggle modal verbs">›</span>
+          <span class="forms-chevron" data-toggle-group aria-label="Modalverben auf- und zuklappen">›</span>
           ${groupButtons}
         </td>
         <td class="reset-cell">
-          <button class="forms-reset" type="button" data-reset-forms>Reset</button>
+          <button class="forms-reset" type="button" data-reset-forms>Zurücksetzen</button>
         </td>
       </tr>
       <tr class="forms-detail-row">
@@ -633,7 +633,7 @@ function renderFormsTable(){
     <tbody class="forms-group${modalSpecialOpen[verb]?" open":""}" data-special-group="${verb}">
       <tr class="verb-group-row">
         <td class="verb-group" colspan="4">
-          <span class="forms-chevron" data-toggle-special="${verb}" aria-label="Toggle ${verb}">›</span>
+          <span class="forms-chevron" data-toggle-special="${verb}" aria-label="${verb} auf- und zuklappen">›</span>
           <button class="verb-choice" type="button" data-special-verb="${verb}">${verb}</button>
         </td>
       </tr>
