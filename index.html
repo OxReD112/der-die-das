@@ -1381,7 +1381,7 @@ header h1 {
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.15" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.16" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -1542,6 +1542,7 @@ header h1 {
    </iframe>
   </section>
   <script src="components/deutsch-translation-v1.js?v=2"></script>
+  <script src="components/deutsch-wortschatz-due-v1.js?v=1"></script>
   <script src="phrases.js?v=3">
   </script>
   <script src="greetings.js?v=2">
@@ -1981,7 +1982,19 @@ function syncHomeDashboard(){
   /* Wortschatz publishes this object from its own page. */
   try{
     const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
-    const ws=home.wortschatz;
+    let ws=home.wortschatz;
+    /* (Home 5.40) First visit of the day: Wortschatz hasn't published today's count yet.
+       Count it here with the shared rule (components/deutsch-wortschatz-due-v1.js)
+       and store it, so the tile and the daily points agree. Wortschatz overwrites
+       it as soon as it opens. Only reads wortsternSRSv03, never changes it. */
+    if(!(ws && ws.date===localDay()) && window.DeutschWortschatzDue){
+      const fresh=DeutschWortschatzDue.status(DeutschWortschatzDue.readSaved());
+      if(fresh && fresh.date===localDay()){
+        ws={...fresh,updatedAt:Date.now()};
+        home.wortschatz=ws;
+        localStorage.setItem(HOME_STATS,JSON.stringify(home));
+      }
+    }
     const wsTile=document.querySelector(".tile-vocab");
     const wsStatus=document.getElementById("wortschatzStatus");
     const done=!!(ws && ws.date===localDay() && ws.done);
@@ -2235,15 +2248,21 @@ async function restoreDeutschBackup(file){
       const cards=state&&state.cards&&typeof state.cards==="object" ? state.cards : {};
       const activeIds=Array.isArray(state?.activeIds) ? state.activeIds : [];
       const today=localDay();
-      const now=Date.now();
-      const remaining=activeIds.filter(id=>{
-        const card=cards[id];
-        if(!card)return false;
-        if(!card.due)return true;
-        const due=new Date(card.due).getTime();
-        return Number.isNaN(due) || due<=now;
-      }).length;
-      const total=activeIds.length;
+      let remaining,total;
+      if(window.DeutschWortschatzDue){
+        /* Same rule as Wortschatz and the Home tile (components/deutsch-wortschatz-due-v1.js). */
+        ({remaining,total}=DeutschWortschatzDue.count({cards,activeIds}));
+      }else{
+        const now=Date.now();
+        remaining=activeIds.filter(id=>{
+          const card=cards[id];
+          if(!card)return false;
+          if(!card.due)return true;
+          const due=new Date(card.due).getTime();
+          return Number.isNaN(due) || due<=now;
+        }).length;
+        total=activeIds.length;
+      }
       const done=total>0 && remaining===0;
       try{
         localStorage.setItem(HOME_STATS,JSON.stringify({
