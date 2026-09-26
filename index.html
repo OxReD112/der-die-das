@@ -1358,6 +1358,33 @@ header h1 {
 @media (min-width:529px){.home-back{left:calc(50% - 240px + 6px)}}
 @media (prefers-reduced-motion:reduce){.home-back{transition:none}}
 
+/* ===== KEEP YOUR PROGRESS · Safari storage reminder (2026-09-26, Home 5.72) =====
+   Safari (and every iPhone/iPad browser) deletes site storage after 7 days without a visit.
+   The Home Screen web app is not affected. Card on Home (iPhone/iPad browser only),
+   "Show me how" window (= About window), "Last backup" note + hint in Settings.
+   Red = palette red (--error): "needs your attention" outside the exercises. */
+:root{--error:#ff7770}
+[data-theme="light"]{--error:#e95e66}
+.keep-card{position:relative;box-sizing:border-box;width:min(100%,var(--dashboard-width));margin:18px auto 0;padding:15px 44px 14px 20px;border-radius:var(--card-radius);background:var(--card-bg);border:1px solid var(--hairline);text-align:left}
+.keep-label{display:flex;align-items:center;gap:7px;color:var(--mint);font:600 11px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.keep-label svg{flex:0 0 auto}
+.keep-text{margin:7px 0 9px;color:var(--secondary-text);font:400 13px/1.42 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.keep-link{appearance:none;-webkit-appearance:none;border:0;background:none;padding:0;color:var(--strong-text);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.keep-x{position:absolute;top:8px;right:10px;appearance:none;-webkit-appearance:none;border:0;background:none;padding:4px 6px;color:var(--muted);font:300 22px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.keep-link,.keep-x,.keep-backup-btn{transition:transform .12s ease,filter .12s ease}
+.keep-link:active,.keep-x:active,.keep-backup-btn:active{transform:scale(.97);filter:brightness(.94)}
+.howto-steps{margin:6px 0 20px;padding:0;list-style:none;counter-reset:keep}
+.howto-steps li{counter-increment:keep;display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--hairline);color:var(--secondary-text);font:400 15px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.howto-steps li:first-child{border-top:0}
+.howto-steps li::before{content:counter(keep);flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--mint) 18%,transparent);color:var(--mint);font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.howto-steps b{color:var(--strong-text);font-weight:600}
+.share-ic{display:inline-block;vertical-align:-3px;margin:0 2px}
+.keep-backup-btn{appearance:none;-webkit-appearance:none;border:0;margin-top:9px;padding:9px 14px;border-radius:12px;background:#ece6dc;color:#1b1b1d;font:600 13px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+[data-theme="light"] .keep-backup-btn{background:#242426;color:#f6f4f1}
+.keep-backup-btn:disabled{opacity:.6;cursor:default}
+.keep-foot{font-size:13px;margin:0}
+.backup-hint{padding:0 0 10px;color:var(--muted);font:400 11.5px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:left}
+.settings-action-note.is-warning{color:var(--error)}
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1410,7 +1437,7 @@ header h1 {
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.18" type="button">
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.19" type="button">
      <div class="tile-art">
       <img alt="" src="artikel/icon.webp"/>
      </div>
@@ -1496,6 +1523,12 @@ header h1 {
     </div>
     </div>
 
+    <div class="keep-card" id="keepCard" hidden>
+     <div class="keep-label"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/></svg><span id="keepLabel"></span></div>
+     <button class="keep-x" id="keepDismiss" type="button" aria-label="Not now">&times;</button>
+     <div class="keep-text" id="keepText"></div>
+     <button class="keep-link" id="keepHow" type="button"></button>
+    </div>
      </div>
      <section aria-label="Redewendung der Woche" class="phrase-screen" id="phraseScreen" aria-hidden="true">
       <div class="phrase-screen-content">
@@ -1520,6 +1553,7 @@ header h1 {
      <button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button>
      <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
+     <div class="backup-hint" id="backupHint" hidden></div>
      <div class="settings-gap" aria-hidden="true"></div>
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
      <div class="settings-row"><span>Your Language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your Language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
@@ -1532,11 +1566,18 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.70</div>
+    <div class="settings-version">Deutsch. version 5.72</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
    <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
+  </div>
+  <div aria-hidden="true" class="about-window" id="keepWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="keepTitle">
+    <div class="about-head"><h2 id="keepTitle"></h2><button class="about-close" id="keepClose" type="button" aria-label="Close">×</button></div>
+    <ol class="howto-steps" id="keepSteps"></ol>
+    <p class="about-text keep-foot" id="keepFoot"></p>
+   </div>
   </div>
   <div aria-hidden="true" class="about-window" id="aboutWindow">
    <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
@@ -1986,7 +2027,7 @@ header h1 {
         backObserver = new MutationObserver(scheduleBack);
         backObserver.observe(frame.contentDocument.documentElement, {subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style', 'hidden', 'aria-hidden']});
         frame.contentWindow.addEventListener('resize', scheduleBack);
-        frame.contentWindow.addEventListener('scroll', scheduleBack, {passive: true});
+        frame.contentWindow.addEventListener('scroll', scheduleBack, {passive: true, capture: true}); // capture: also scrolling inside the exercise's panel (.app)
         frame.contentDocument.addEventListener('touchstart', noTouch, {passive: true}); // press effect on iPhone, see below
       } catch (e) {}
       scheduleBack();
@@ -2104,6 +2145,9 @@ syncHomeDashboard();
    - Score format changes happen inside the stored data (a format marker),
      not by renaming keys — see Documentation/PROGRESS_TRACKER.md. */
 const DEUTSCH_BACKUP_VERSION=1;
+/* When a backup was last made (or restored) on this device — ISO time, for the
+   "Last backup …" note in Settings. Per device, so NOT part of the backup. */
+const DEUTSCH_LAST_BACKUP_KEY="deutschLastBackupV1";
 const BACKUP_MODULES={
   wortschatz:{
     label:"Wortschatz",
@@ -2238,7 +2282,8 @@ function saveDeutschBackup(){
     a.click();
     a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
-    if(note)note.textContent="· Backup created";
+    try{localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY,new Date().toISOString())}catch(e){}
+    if(note){note.textContent="· Backup created";note.classList.remove("is-warning")}
   }catch(e){
     if(note)note.textContent="· Backup failed";
   }
@@ -2275,6 +2320,11 @@ async function restoreDeutschBackup(file){
     if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
       if(note)note.textContent="· Restore cancelled";
       return;
+    }
+    /* A restored file is a backup too: count its date as the last backup (if newer). */
+    if(created&&!Number.isNaN(created.getTime())){
+      const last=Date.parse(localStorage.getItem(DEUTSCH_LAST_BACKUP_KEY)||"");
+      if(!last||created.getTime()>last)localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY,created.toISOString());
     }
     const previousNotificationUser=localStorage.getItem("deutschNotificationUserIdV1");
     restorable.forEach(([,config,state])=>{
@@ -2763,6 +2813,108 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
   closeBtn.addEventListener("click",close);
   win.addEventListener("click",e=>{if(e.target===win)close();});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&win.classList.contains("open")){e.stopPropagation();close();}},true);
+})();
+/* ===== KEEP YOUR PROGRESS (2026-09-26, Home 5.72) — see Documentation/DECISIONS.md =====
+   - Settings: "· Last backup …" next to Backup on every device. Red (palette red) only in
+     Safari in the browser (iPhone/iPad browser or Mac Safari, not the Home Screen app)
+     when the last backup is more than 5 days old, or there is none yet.
+   - Home card: iPhone/iPad browser only, only once there is progress. × = "not now":
+     comes back once after 14 days, then never again. Texts follow Your Language. */
+(function(){
+  const CARD_KEY="deutschKeepCardV1";   // {dismissed:number, at:ISO} — per device, not backed up
+  const WARN_DAYS=5, AGAIN_DAYS=14;
+  const SHARE='<svg aria-hidden="true" class="share-ic" width="16" height="18" viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V1.5M4.5 5 8 1.5 11.5 5M5 8H2.5v10.5h11V8H11"/></svg>';
+  const T={
+    en:{label:"Keep your progress",
+        card:"Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
+        how:"Show me how ›",
+        title:"Add to Home Screen",
+        s1:"Save your progress first.", btn:"Make a Backup", done:"✓ Backup Created",
+        s2:"Tap <b>Share</b> "+SHARE+" in Safari, then <b>Add to Home Screen</b>.",
+        s3:"Open Deutsch. from the new icon, go to <b>Settings → Restore</b> and pick the backup file.",
+        foot:"The Home Screen app has its own storage, so your progress needs to be moved over once.",
+        hintIOS:"Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
+        hintMac:"Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often."},
+    ru:{label:"Сохраните прогресс",
+        card:"Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
+        how:"Как это сделать ›",
+        title:"На экран «Домой»",
+        s1:"Сначала сохраните прогресс.", btn:"Сделать бэкап", done:"✓ Бэкап сохранён",
+        s2:"Нажмите <b>Поделиться</b> "+SHARE+" в Safari, затем <b>На экран «Домой»</b>.",
+        s3:"Откройте Deutsch. с новой иконки, зайдите в <b>Settings → Restore</b> и выберите файл бэкапа.",
+        foot:"У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
+        hintIOS:"Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавьте Deutsch. на экран «Домой» или почаще делайте бэкап.",
+        hintMac:"Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делайте бэкап."}
+  };
+  const $=id=>document.getElementById(id);
+  function lang(){try{return window.DeutschTranslation?window.DeutschTranslation.getLang():(localStorage.getItem("deutschTranslationLangV1")||"en")}catch(e){return "en"}}
+  function t(){return T[lang()]||T.en}
+  function isIOS(){const ua=navigator.userAgent||"";return /iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
+  function isStandalone(){return navigator.standalone===true||!!(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)}
+  function isMacSafari(){const ua=navigator.userAgent||"";return !isIOS()&&/Version\/[\d.]+.*Safari\//.test(ua)&&!/Chrome|Chromium|Edg|OPR|Android/.test(ua)}
+  function atRisk(){return !isStandalone()&&(isIOS()||isMacSafari())}
+  function hasProgress(){try{const b=buildDeutschBackup();return Object.keys(b.modules).some(n=>!BACKUP_MODULES[n]?.setting)}catch(e){return false}}
+  function daysSince(iso){const ms=Date.parse(iso||"");if(!ms)return null;const a=new Date(ms),b=new Date();a.setHours(0,0,0,0);b.setHours(0,0,0,0);return Math.max(0,Math.round((b-a)/864e5))}
+  function lastDays(){try{return daysSince(localStorage.getItem(DEUTSCH_LAST_BACKUP_KEY))}catch(e){return null}}
+
+  /* Settings: note next to Backup + hint under Restore */
+  function renderBackupNote(){
+    const note=$("backupNote"),hint=$("backupHint");
+    const progress=hasProgress(),d=lastDays();
+    if(note){
+      note.classList.remove("is-warning");
+      if(!progress&&d===null){note.textContent=""}
+      else{
+        note.textContent=d===null?"· No backup yet":d===0?"· Last backup today":d===1?"· Last backup yesterday":"· Last backup "+d+" days ago";
+        if(atRisk()&&progress&&(d===null||d>WARN_DAYS))note.classList.add("is-warning");
+      }
+    }
+    if(hint){
+      if(atRisk()){hint.textContent=isIOS()?t().hintIOS:t().hintMac;hint.hidden=false}
+      else{hint.textContent="";hint.hidden=true}
+    }
+  }
+
+  /* Home card */
+  function cardState(){try{return JSON.parse(localStorage.getItem(CARD_KEY)||"{}")||{}}catch(e){return {}}}
+  function cardAllowed(){const s=cardState(),n=s.dismissed||0;if(n===0)return true;if(n===1){const d=daysSince(s.at);return d!==null&&d>=AGAIN_DAYS}return false}
+  function renderCard(){
+    const card=$("keepCard");if(!card)return;
+    const show=isIOS()&&!isStandalone()&&hasProgress()&&cardAllowed();
+    card.hidden=!show;if(!show)return;
+    $("keepLabel").textContent=t().label;$("keepText").textContent=t().card;$("keepHow").textContent=t().how;
+  }
+  $("keepDismiss")?.addEventListener("click",()=>{
+    const s=cardState();
+    try{localStorage.setItem(CARD_KEY,JSON.stringify({dismissed:(s.dismissed||0)+1,at:new Date().toISOString()}))}catch(e){}
+    $("keepCard").hidden=true;
+  });
+
+  /* "Show me how" window (built like About) */
+  const win=$("keepWindow");
+  function renderWindow(){
+    const x=t(),today=lastDays()===0;
+    $("keepTitle").textContent=x.title;
+    $("keepSteps").innerHTML='<li><span>'+x.s1+'<br><button class="keep-backup-btn" id="keepBackup" type="button"'+(today?" disabled":"")+'>'+(today?x.done:x.btn)+'</button></span></li><li><span>'+x.s2+'</span></li><li><span>'+x.s3+'</span></li>';
+    $("keepFoot").textContent=x.foot;
+  }
+  function openWin(){renderWindow();win.classList.add("open");win.setAttribute("aria-hidden","false")}
+  function closeWin(){win.classList.remove("open");win.setAttribute("aria-hidden","true")}
+  if(win){
+    $("keepHow")?.addEventListener("click",openWin);
+    $("keepClose")?.addEventListener("click",closeWin);
+    win.addEventListener("click",e=>{
+      if(e.target===win){closeWin();return}
+      if(e.target.closest&&e.target.closest("#keepBackup")){saveDeutschBackup();renderWindow()}
+    });
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&win.classList.contains("open")){e.stopPropagation();closeWin()}},true);
+  }
+
+  function renderAll(){renderCard();renderBackupNote()}
+  $("settingsOpen")?.addEventListener("click",()=>setTimeout(renderBackupNote,0));
+  $("translationLangToggle")?.addEventListener("click",()=>setTimeout(renderAll,0));
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)renderCard()});
+  renderAll();
 })();
 </script>
 </body>
