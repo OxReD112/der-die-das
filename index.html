@@ -1381,7 +1381,7 @@ header h1 {
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.17" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.19" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -1516,7 +1516,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.47</div>
+    <div class="settings-version">Deutsch. version 5.49</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1893,7 +1893,7 @@ header h1 {
       praepositionen: {label: 'Präpositionen', tile: '.tile-prepositions'}
     };
     const TITLE_SEL = '.top-title,.top .brand';
-    const WINDOW_SEL = '.modal,.pattern-modal,.forms-modal,.omodal';
+    const WINDOW_SEL = '.modal,.pattern-modal,.forms-modal,.omodal,.coll-modal'; // .coll-modal = Wortschatz collection window (Home 5.49)
     let backTarget = null, backObserver = null, backRaf = 0;
 
     function framePath() {
@@ -2081,6 +2081,19 @@ const BACKUP_MODULES={
     storageKey:"wortsternSRSv03",
     storageVersion:"wortsternSRSv03"
   },
+  /* Own word collection (wortschatz/collection.js, Documentation/WORTSCHATZ_COLLECTIONS.md).
+     Only present while the user practises their own words. */
+  wortschatzCollection:{
+    label:"Wortschatz · eigene Wörter",
+    storageKey:"deutschWortschatzCollectionV1",
+    storageVersion:"deutschWortschatzCollectionV1"
+  },
+  /* Progress of the built-in set, set aside while an own collection is active. */
+  wortschatzDemoProgress:{
+    label:"Wortschatz · Standard-Set (beiseitegelegt)",
+    storageKey:"deutschWortschatzDemoProgressV1",
+    storageVersion:"deutschWortschatzDemoProgressV1"
+  },
   profile:{
     label:"Name",
     storageKey:"deutschProfileV1",
@@ -2239,6 +2252,15 @@ async function restoreDeutschBackup(file){
       localStorage.setItem(config.storageKey,
         config.plain&&typeof state==="string" ? state : JSON.stringify(state));
     });
+    /* Wortschatz progress only makes sense together with the words it belongs to.
+       A backup with Wortschatz progress but no own collection (e.g. made before own collections
+       existed, or while using the built-in set) means: built-in set → drop an own collection on this
+       device, so old progress and other words never get mixed. Same for the set-aside demo progress. */
+    const restoredNames=new Set(restorable.map(([name])=>name));
+    if(restoredNames.has("wortschatz")){
+      if(!restoredNames.has("wortschatzCollection"))localStorage.removeItem("deutschWortschatzCollectionV1");
+      if(!restoredNames.has("wortschatzDemoProgress"))localStorage.removeItem("deutschWortschatzDemoProgressV1");
+    }
 
     /* Refresh Home statistics from the restored Wortschatz state.
        Wortschatz is closed during Restore, so there is no iframe to reload. */
