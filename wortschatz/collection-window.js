@@ -87,9 +87,10 @@
     card.appendChild(meta);
 
     // most-used action on top (like „Use My Own Words“ in the Starter-Set window)
-    const top=el("div","coll-form-buttons coll-top");
+    // v2.104: both ways to get words in, side by side (same shape; Add Word = the everyday action, cream)
+    const top=el("div","coll-pair");
     top.appendChild(button("coll-main","＋ Add Word",()=>viewForm(null)));
-    top.appendChild(button("coll-link","＋ Import Words",()=>viewImport({})));
+    top.appendChild(button("coll-quiet","Import List",()=>viewImport({})));
     card.appendChild(top);
 
     const box=el("div","coll-list coll-list-below");
@@ -210,7 +211,7 @@
     if(!editing&&!creating){
       const sw=el("label","coll-switch");sw.appendChild(el("span",null,"Learn Now"));
       now=el("input",null,null,{type:"checkbox","aria-label":"Learn now"});now.checked=true;sw.appendChild(now);sc.appendChild(sw);
-      sc.appendChild(el("p","coll-hint","On: comes up in your next round. Off: waits for „5 neue Wörter lernen“."));
+      sc.appendChild(el("p","coll-hint","On: comes up in your next round. Off: added to the end of your list."));
     }
     const err=el("p","coll-error");sc.appendChild(err);
     sc.addEventListener("input",()=>{err.textContent=""});           // an old hint disappears as soon as you type
@@ -321,7 +322,7 @@ Rules:
     const nameIn=el("input","coll-field",null,{id:"cfName",type:"text",maxlength:"40",placeholder:"My Words",autocomplete:"off"});sc.appendChild(nameIn);
     const nm=()=>nameIn.value.trim()||"My Words";
     const b=el("div","coll-form-buttons");
-    b.appendChild(button("coll-main","Import a List",()=>viewImport({create:true,name:nm()})));
+    b.appendChild(button("coll-main","Import List",()=>viewImport({create:true,name:nm()})));
     b.appendChild(button("coll-quiet","Type the First Word",()=>viewForm(null,{create:true,name:nm(),cancel:viewCreate})));
     card.appendChild(b);
   }
@@ -329,7 +330,7 @@ Rules:
   // Paste the AI's answer or pick a file. opts.create: this list starts a new collection.
   function viewImport(opts){
     card.textContent="";
-    card.appendChild(head(opts.create?"Import a List":"Import Words",opts.create?viewCreate:viewMain));
+    card.appendChild(head("Import List",opts.create?viewCreate:viewMain));
     const sc=el("div","coll-scroll");card.appendChild(sc);
     const intro=el("p","coll-text");intro.style.marginBottom="10px";
     intro.appendChild(document.createTextNode("Ask an AI for example sentences for your words and paste its answer here. To get the right format: "));
@@ -341,7 +342,7 @@ Rules:
     sc.appendChild(fileIn);
     const fileRow=el("p","coll-hint");fileRow.appendChild(document.createTextNode("Or: "));
     fileRow.appendChild(button("coll-link","Choose a File",()=>fileIn.click()));sc.appendChild(fileRow);
-    if(!opts.create)sc.appendChild(el("p","coll-hint","New words join the end of the queue for „5 neue Wörter lernen“."));
+    if(!opts.create)sc.appendChild(el("p","coll-hint","New words are added to the end of your list."));
     const err=el("p","coll-error");sc.appendChild(err);
     ta.addEventListener("input",()=>{err.textContent=""});
 
