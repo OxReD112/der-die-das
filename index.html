@@ -1314,6 +1314,17 @@ header h1 {
 .settings-confirm-button:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
 @media (prefers-reduced-motion:reduce){.settings-confirm,.settings-confirm-card,.settings-action,.settings-close,.settings-confirm-button{transition:none!important}}
 
+/* ===== PAUSE SCREEN (daily limit reached) · Design Police (2026-09-26, Home 5.42) =====
+   Same placement as the phrase screen: slightly above the middle (45 / 55) of the free space between
+   "Deutsch." and "Settings" (overlay starts 30px under the title, desktop 50px → same bottom padding).
+   Title 700 like the "Fertig." titles (was 800); size unchanged. */
+.hard-stop-overlay{flex-direction:column;align-items:center;justify-content:flex-start;padding:0 32px 62px}
+.hard-stop-overlay::before{content:"";flex:45 1 0}
+.hard-stop-overlay::after{content:"";flex:55 1 0}
+.hard-stop-copy{flex:0 0 auto}
+.hard-stop-title{font-weight:700}
+@media (min-width:650px){.hard-stop-overlay{padding-bottom:calc(82px - env(safe-area-inset-top))}}
+
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1333,7 +1344,7 @@ header h1 {
      <div class="home-screen">
   <div class="hard-stop-overlay" id="hardStopOverlay" aria-hidden="true">
     <div class="hard-stop-copy">
-      <div class="hard-stop-title">Das hast du heute richtig gut gemacht.</div>
+      <div class="hard-stop-title">Das hast du heute richtig gut&nbsp;gemacht.</div>
       <div class="hard-stop-text">
         Jetzt ist Zeit für eine Pause.<br>
         Ruh dich aus, mach etwas Schönes<br>
@@ -1488,7 +1499,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.41</div>
+    <div class="settings-version">Deutsch. version 5.42</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
