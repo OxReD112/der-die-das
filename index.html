@@ -974,16 +974,16 @@ header h1 {
 .settings-content{width:min(100%,430px);padding-top:24px}
 .settings-title-row{position:relative;display:flex;align-items:center;justify-content:center}
 .settings-title{margin:0;text-align:center;font-size:22px;line-height:1.1;font-weight:700;letter-spacing:-.55px}
-.settings-close{position:absolute;right:0;top:50%;transform:translateY(-50%);appearance:none;-webkit-appearance:none;padding:0;border:0;background:transparent;color:color-mix(in srgb, var(--text) 62%, transparent);font:300 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-close{position:absolute;right:0;top:50%;transform:translateY(-50%);appearance:none;-webkit-appearance:none;padding:0;border:0;background:transparent;color:color-mix(in srgb, var(--text) 62%, transparent);font:300 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-list{margin-top:54px}
-.settings-row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
-.settings-action{appearance:none;-webkit-appearance:none;width:100%;min-height:48px;padding:0;border:0;background:transparent;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.settings-action{appearance:none;-webkit-appearance:none;width:100%;min-height:48px;padding:0;border:0;background:transparent;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-action-content{display:flex;align-items:baseline;gap:10px;min-width:0}
 .settings-action-note{color:var(--quaternary-text);font-size:10px;line-height:1.2;white-space:nowrap}
 #notificationNote{margin-top:6px}
 .settings-gap{height:48px}
 .settings-name-wrap{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
-.settings-name{appearance:none;-webkit-appearance:none;width:114.3%;max-width:228px;margin:0;flex:0 0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:var(--label-text);font:500 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:right;transform:scale(.875);transform-origin:right center;outline:none;caret-color:var(--mint)}
+.settings-name{appearance:none;-webkit-appearance:none;width:114.3%;max-width:228px;margin:0;flex:0 0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:var(--label-text);font:500 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:right;transform:scale(.875);transform-origin:right center;outline:none;caret-color:var(--mint)}
 .settings-name:not(:placeholder-shown){color:var(--mint)}
 .settings-name::placeholder{color:var(--quaternary-text);opacity:1}
 .settings-toggle{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;width:42px;height:25px;padding:0;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -994,7 +994,7 @@ header h1 {
 .settings-lang{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;display:flex;width:88px;height:25px;padding:2px;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-lang::before{content:"";position:absolute;top:2px;left:2px;width:42px;height:21px;border-radius:99px;background:var(--mint);transition:transform .22s ease}
 .settings-lang[data-lang="ru"]::before{transform:translateX(42px)}
-.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;letter-spacing:normal;transition:color .22s ease}
+.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:normal;transition:color .22s ease}
 .settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--toggle-track-solid)}
 .settings-confirm{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:950;display:none;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .settings-confirm.is-open{display:flex}
@@ -1002,7 +1002,7 @@ header h1 {
 .settings-confirm-title{font-size:20px;line-height:1.2;font-weight:700}
 .settings-confirm-text{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.5}
 .settings-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
-.settings-confirm-button{appearance:none;-webkit-appearance:none;min-height:44px;border:1px solid var(--confirm-btn-border);border-radius:14px;background:var(--confirm-btn-bg);color:var(--text);font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-confirm-button{appearance:none;-webkit-appearance:none;min-height:44px;border:1px solid var(--confirm-btn-border);border-radius:14px;background:var(--confirm-btn-bg);color:var(--text);font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .settings-confirm-button:active{opacity:.65}
 .home-screen{transition:transform .42s cubic-bezier(.22,.61,.36,1),opacity .42s ease}
 .home-settings-open .home-screen{transform:translateY(-12vh);opacity:0;pointer-events:none}
@@ -1182,7 +1182,7 @@ header h1 {
 
 
 }
-.settings-version{margin-top:42px;margin-bottom:26px;color:color-mix(in srgb, var(--text) 42%, transparent);font:400 10px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:left}
+.settings-version{margin-top:42px;margin-bottom:26px;color:color-mix(in srgb, var(--text) 42%, transparent);font:400 10px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:left}
 
 /* ===== HOME TILES + HEUTE · same lift as the buttons (Design Police 2026-09-25) =====
    Soft shadow under the tile (outside the edge, so it works over the pictures), a thin light line along the
@@ -1222,9 +1222,9 @@ header h1 {
 .about-window.open .about-card{opacity:1;transform:none;filter:none}
 @media (prefers-reduced-motion:reduce){.about-window,.about-card{transition:none!important}}
 .about-head{display:flex;align-items:center;justify-content:space-between;min-height:56px}
-.about-head h2{margin:0;color:var(--text);font:650 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
-.about-close{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;padding:0 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.about-text{margin:4px 0 0;color:var(--muted);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.about-head h2{margin:0;color:var(--text);font:650 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.about-close{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:0 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.about-text{margin:4px 0 0;color:var(--muted);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
 
 /* ===== HOME SCREEN · Design Police clean-up (2026-09-26, Home 5.37) =====
    Palette only, shared press effect, no hover, 10% hairlines. Home screen only:
@@ -1276,6 +1276,43 @@ header h1 {
 .phrase-screen-back{border-color:var(--hairline);color:var(--text);font:400 28px/42px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;transition:transform .12s ease,filter .12s ease}
 .phrase-screen-back:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
 @media (prefers-reduced-motion:reduce){.phrase-screen-back{transition:none}}
+
+/* ===== SETTINGS · Design Police clean-up (2026-09-26, Home 5.39) ===== */
+/* colours → palette. Green stays for "on" (switches, chosen language) and the typed name:
+   outside the exercises green means "enabled / your progress". */
+.settings-row,.settings-action{color:var(--secondary-text)}
+.settings-name::placeholder{color:var(--muted)}
+.settings-action-note{color:var(--muted)}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--bg)}
+/* spacing: rows stay 48px; first row closer to the title; groups = 28px gap with a 10% hairline in the middle */
+.settings-list{margin-top:22px}
+.settings-gap{height:28px;position:relative}
+.settings-gap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;margin-top:-.5px;background:var(--hairline)}
+#notificationNote:empty{display:none}  /* an empty note pushed About 6px down */
+/* × = the About window's × */
+.settings-close{color:var(--text);font-weight:400}
+/* shared press effect on the rows and the × */
+.settings-action,.settings-close{transition:transform .12s ease,filter .12s ease}
+.settings-action:active{transform:scale(.97);filter:brightness(.94);transform-origin:left center}
+.settings-close:active{transform:translateY(-50%) scale(.97);filter:brightness(.94)}
+/* version mark = the rule's version mark (11px, white 24% / text 34%) */
+.settings-version{font-size:11px;color:rgba(255,255,255,.24)}
+[data-theme="light"] .settings-version{color:color-mix(in srgb, var(--text) 34%, transparent)}
+/* "Are you sure?" = built like the table windows: card colour, 10% outline, 24px corners, fade + zoom-in */
+.settings-confirm{display:flex;opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s}
+.settings-confirm.is-open{opacity:1;visibility:visible;transition:opacity .18s ease,visibility 0s}
+.settings-confirm-card{background:var(--about-card);border-color:var(--about-line);border-radius:24px;box-shadow:none;
+  opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.settings-confirm.is-open .settings-confirm-card{opacity:1;transform:none;filter:none}
+.settings-confirm-title{font-weight:650}
+/* No = contrast button (we'd rather the user says no), Yes = quiet button. Shape of "Zur Startseite". */
+.settings-confirm-button{min-height:56px;border-radius:17px;font:700 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  transition:transform .12s ease,filter .12s ease}
+.settings-confirm-button.is-main{border:0;background:#ece6dc;color:#1b1b1d}
+[data-theme="light"] .settings-confirm-button.is-main{background:#242426;color:#f6f4f1}
+.settings-confirm-button.is-quiet{border:1px solid var(--hairline);background:transparent;color:color-mix(in srgb, var(--text) 55%, transparent)}
+.settings-confirm-button:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.settings-confirm,.settings-confirm-card,.settings-action,.settings-close,.settings-confirm-button{transition:none!important}}
 
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
@@ -1439,18 +1476,19 @@ header h1 {
      <button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button>
      <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
-     <div class="settings-gap"></div>
+     <div class="settings-gap" aria-hidden="true"></div>
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
-     <div class="settings-row"><span>Your language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
+     <div class="settings-row"><span>Your Language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your Language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
      <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
-     <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
+     <div class="settings-row"><span>Daily Limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
      <div id="notificationSettings" hidden>
       <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
+     <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.38</div>
+    <div class="settings-version">Deutsch. version 5.39</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1465,8 +1503,8 @@ header h1 {
   <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
    <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
     <div class="settings-confirm-title" id="dailyLimitConfirmTitle">Are you sure?</div>
-    <div class="settings-confirm-text">You can keep practicing today without a daily limit.<br>It will turn on again automatically tomorrow.</div>
-    <div class="settings-confirm-actions"><button class="settings-confirm-button" id="dailyLimitNo" type="button">No</button><button class="settings-confirm-button" id="dailyLimitYes" type="button">Yes</button></div>
+    <div class="settings-confirm-text">You can keep practising today without a daily limit. It will turn on again automatically&nbsp;tomorrow.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="dailyLimitNo" type="button">No</button><button class="settings-confirm-button is-quiet" id="dailyLimitYes" type="button">Yes</button></div>
    </div>
   </div>
 
@@ -2102,7 +2140,7 @@ async function restoreDeutschBackup(file){
     if(langToggle&&window.DeutschTranslation){
       const lang=window.DeutschTranslation.getLang();
       langToggle.setAttribute("data-lang",lang);
-      langToggle.setAttribute("aria-label","Your language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+      langToggle.setAttribute("aria-label","Your Language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
 
     /* Move this device's push subscription to the restored notification ID. */
@@ -2356,7 +2394,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     if(langToggle && window.DeutschTranslation){
       const lang=window.DeutschTranslation.getLang();
       langToggle.setAttribute("data-lang",lang);
-      langToggle.setAttribute("aria-label","Your language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+      langToggle.setAttribute("aria-label","Your Language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
     if(nameInput && document.activeElement!==nameInput) nameInput.value=getUserName();
   }
@@ -2490,6 +2528,12 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
       render();
     }
   });
+
+  // Tap outside the window or Esc = "No" (like the table windows).
+  confirm?.addEventListener("click",event=>{ if(event.target===confirm) no?.click(); });
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape"&&confirm?.classList.contains("is-open")){ event.stopPropagation(); no?.click(); }
+  },true);
 
   no?.addEventListener("click",()=>{
     confirm.classList.remove("is-open");
