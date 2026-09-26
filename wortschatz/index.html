@@ -419,11 +419,32 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
 .coll-pre{margin:0;padding:12px 14px;border:1px solid var(--overlay-line);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;
   font:400 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sec-text);-webkit-user-select:text;user-select:text}
 .coll-text .coll-link{font-size:inherit}
+/* New words running out (step 6, v2.92): grey line on the start screen, same grey as the subline */
+#start .startNote{margin:-20px 0 28px;font-size:14px;color:var(--muted)}
+#start .startNote:empty{display:none}
+/* ===== START SCREEN · new order (2026-09-26, v2.93): Wortschatz. → DEINE WÖRTER → Starter-Set · 217 Wörter › →
+   Heute: 12 Karten (+ Noch … neue Wörter) → ＋ Use your own words (Starter-Set only) → Starten.
+   The collection is a plain text line with › (not a pill, so it isn't mistaken for a table button).
+   „Use your own words“ = filled card button like the 10/20/30 buttons; Starten stays the cream main button. */
+:root{--start-btn-bg:#2a2a2d;--start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14)}
+[data-theme="light"]{--start-btn-bg:#fff;--start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08)}
+#start .title{margin-bottom:44px}
+#start .startLabel{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+#start .coll-line{display:inline-flex;align-items:center;gap:0;max-width:100%;margin:0 0 6px;padding:6px 10px;border:0;border-radius:12px;background:none;color:var(--text);
+  font:500 17px/1.25 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#start .coll-line:active{transform:scale(.97);filter:brightness(.94)}
+#start .coll-line-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#start .coll-line-count{color:var(--muted);font-weight:400;white-space:pre;flex:0 0 auto}
+#start .coll-line-chev{color:var(--muted);font-size:22px;line-height:1;margin-left:8px;flex:0 0 auto;transform:translateY(-1px)}
+#start .subtitle{margin:0 0 28px}
+#start .ownWordsBtn{width:312px;max-width:100%;height:52px;margin:0 0 12px;padding:0;border:0;border-radius:16px;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);color:var(--text);
+  font:600 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#start .ownWordsBtn:active{transform:scale(.97);filter:brightness(.94)}
 </style>
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><p class="subtitle" id="startCount"></p><button id="startBtn" type="button">Starten</button><button class="coll-btn" id="collBtnStart" type="button"></button></section>
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></section>
 <section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
@@ -461,13 +482,13 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.91</div>
+<div class="version-mark">v2.93</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=5"></script>
+<script src="collection-window.js?v=6"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -829,9 +850,27 @@ function showDone(){
  }
  $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} heute`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"Gerade ist nichts fällig.";
- const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
- $("addWords").style.display=remaining?"block":"none";$("allAdded").style.display=remaining?"none":"block";
+ /* New words (step 6, 2026-09-26): the button says how many it really adds (+ 3 neue Wörter / + 1 neues Wort);
+    with 6–10 left, a grey line „Noch 8 neue Wörter“ (start screen: 1–10); with none left, an own collection gets
+    „+ Neue Wörter“ (opens the collection window to add or import), the built-in set keeps „Alle Wörter sind schon dabei.“ */
+ const remaining=newWordsLeft();
+ const own=!!(window.WortschatzCollection&&WortschatzCollection.isOwn()&&window.WortschatzCollectionWindow);
+ const btn=$("addWords"),note=$("allAdded");
+ if(remaining){
+   btn.textContent=remaining>=ADD_BATCH?"+ "+ADD_BATCH+" neue Wörter":"+ "+newWordsLabel(remaining);
+   btn.style.display="block";
+   // the line only adds something when the button says „+ 5“ (with fewer than 5 the button already says the number)
+   const showNote=remaining>ADD_BATCH&&remaining<=10;
+   note.textContent=showNote?"Noch "+newWordsLabel(remaining)+".":"";note.style.display=showNote?"block":"none";
+ }else if(own){
+   btn.textContent="+ Neue Wörter";btn.style.display="block";
+   note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
+ }else{
+   btn.style.display="none";note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
+ }
 }
+function newWordsLeft(){const ids=new Set(state.activeIds);return WORDS.filter(c=>!ids.has(c.id)).length}
+function newWordsLabel(n){return n===1?"1 neues Wort":n+" neue Wörter"}
 function addFive(){
  const fresh=WORDS.filter(c=>!state.activeIds.includes(c.id)).slice(0,ADD_BATCH);if(!fresh.length)return;
  fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();publishWortschatzStatus(false);
@@ -850,7 +889,7 @@ function markTypo(){
  $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;$("typoBtn").classList.add("done");
 }
 $("typoBtn").onclick=markTypo;
-$("addWords").onclick=addFive;
+$("addWords").onclick=()=>{if(newWordsLeft())addFive();else if(window.WortschatzCollectionWindow)WortschatzCollectionWindow.open()};
 $("desktopCheck").onclick=check;$("continue").onclick=next;
 document.addEventListener("keydown",e=>{
  if(e.key!=="Enter"||innerWidth<700)return;
@@ -884,6 +923,7 @@ function showStart(){
  publishWortschatzProgress();
  if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
  $("startCount").textContent="Heute: "+cardsLabel(n);
+ const left=newWordsLeft();$("startNote").textContent=left&&left<=10?"Noch "+newWordsLabel(left):"";
  $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
 }
 function startSession(){

@@ -1,8 +1,9 @@
-/* Wortschatz · collection button + window — v5, 2026-09-26 (v2: word form · v3: ✎ on the answer screen · v4: import · v5: English)
+/* Wortschatz · collection button + window — v6, 2026-09-26 (v2: word form · v3: ✎ on the answer screen · v4: import · v5: English · v6: Starter-Set + new start screen)
    All texts in this window are English on purpose: users whose German is still weak must understand
    how to manage and import their words. Labels in Title Case (Settings rule), questions in sentence case.
    Plan: Documentation/WORTSCHATZ_COLLECTIONS.md (step 3). Storage lives in collection.js.
-   - Button (start screen + „Fertig für heute“): „<name> · <count>“; the built-in set is called „Standard“.
+   - Start screen: „DEINE WÖRTER“ + „<name> · <n> Wörter ›“ (opens the window) + „＋ Use your own words“ (Starter-Set only).
+   - „Fertig für heute“: pill „<name> · <n> Wörter“. The built-in set is called „Starter-Set“.
    - Window: name, word count, word list; own collection: rename, export, delete → back to the built-in set.
    - Word form (step 4): „＋ Wort hinzufügen“ and tap a word in the list = edit / delete it.
      Changes that touch progress or WORDS set `dirty`; closing the window then reloads the page
@@ -13,7 +14,7 @@
   const $=id=>document.getElementById(id);
   const modal=$("collModal"),card=$("collCard");
   if(!C||!modal||!card)return;
-  const BUILTIN_NAME="Standard";
+  const BUILTIN_NAME="Starter-Set";
 
   const own=()=>C.isOwn();
   const list=()=>own()?C.cards():(window.WORDS||[]);
@@ -28,8 +29,17 @@
   function button(cls,text,onClick){const b=el("button",cls,text,{type:"button"});b.onclick=onClick;return b}
 
   function refreshButtons(){
-    const label=name()+" · "+list().length;
-    ["collBtnStart","collBtnDone"].forEach(id=>{const b=$(id);if(b){b.textContent=label;b.setAttribute("aria-label","Word collection: "+label)}});
+    const n=list().length,count=n===1?"1 Wort":n+" Wörter",label=name()+" · "+count;
+    const done=$("collBtnDone");if(done){done.textContent=label;done.setAttribute("aria-label","Word collection: "+label)}
+    const start=$("collBtnStart");
+    if(start){                                           // „Starter-Set · 217 Wörter ›“
+      start.textContent="";
+      start.appendChild(el("span","coll-line-name",name()));
+      start.appendChild(el("span","coll-line-count"," · "+count));
+      start.appendChild(el("span","coll-line-chev","›",{"aria-hidden":"true"}));
+      start.setAttribute("aria-label","Word collection: "+label);
+    }
+    const ownBtn=$("ownWordsBtn");if(ownBtn)ownBtn.style.display=own()?"none":"";
   }
 
   /* ---------- open / close (same timing as the table windows) ---------- */
@@ -59,6 +69,7 @@
 
   /* ---------- main view: name, count, list, actions ---------- */
   function viewMain(){
+    if(!own())return viewStarter();
     card.textContent="";
     const words=list();
     card.appendChild(head(name()));
@@ -82,13 +93,30 @@
       act.appendChild(button("coll-row","＋ Add Word",()=>viewForm(null)));
       act.appendChild(button("coll-row","＋ Import Words",()=>viewImport({})));
       act.appendChild(button("coll-row","Export",()=>exportFile()));
-      act.appendChild(button("coll-row","Delete · Back to Standard",viewDelete));
-      card.appendChild(act);
-    }else{
-      const act=el("div","coll-actions");
-      act.appendChild(button("coll-row","Use My Own Words",viewCreate));
+      act.appendChild(button("coll-row","Delete · Back to Starter-Set",viewDelete));
       card.appendChild(act);
     }
+  }
+
+  // Starter-Set: what it is + the way to your own words. The word list only on request.
+  function viewStarter(){
+    card.textContent="";
+    card.appendChild(head(BUILTIN_NAME));
+    const words=list();
+    card.appendChild(el("p","coll-text",words.length+" everyday German words in example sentences."));
+    const box=el("div","coll-list");box.style.display="none";
+    words.forEach(w=>{
+      const row=el("div","coll-word");
+      row.appendChild(el("span","coll-de",w.base||String(w.target||"").split(" / ").join(" ")));
+      row.appendChild(el("span","coll-tr",tr(w,"translation")));
+      box.appendChild(row);
+    });
+    card.appendChild(box);
+    const b=el("div","coll-form-buttons");
+    b.appendChild(button("coll-main","Use My Own Words",viewCreate));
+    const toggle=button("coll-link","Show All Words",()=>{const show=box.style.display==="none";box.style.display=show?"":"none";toggle.textContent=show?"Hide Words":"Show All Words"});
+    b.appendChild(toggle);
+    card.appendChild(b);
   }
 
 
@@ -268,12 +296,12 @@ Rules:
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>done(true),fallback);else fallback();
   }
 
-  // Standard → own words: name, then import a list or type the first word.
+  // Starter-Set → own words: name, then import a list or type the first word.
   function viewCreate(){
     card.textContent="";
     card.appendChild(head("Your Own Words"));
     const sc=el("div","coll-scroll");card.appendChild(sc);
-    sc.appendChild(el("p","coll-text","Your own words replace the Standard set. Your progress there is set aside - you can switch back later."));
+    sc.appendChild(el("p","coll-text","Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
     const l=el("label","coll-label","Collection Name",{for:"cfName"});sc.appendChild(l);
     const nameIn=el("input","coll-field",null,{id:"cfName",type:"text",maxlength:"40",placeholder:"My Words",autocomplete:"off"});sc.appendChild(nameIn);
     const nm=()=>nameIn.value.trim()||"My Words";
@@ -402,8 +430,8 @@ Rules:
   }
   function viewDemoChoice(){
     card.textContent="";
-    card.appendChild(head("Back to Standard"));
-    card.appendChild(el("p","coll-text","You have already practised with the Standard set. Do you want to continue where you left off?"));
+    card.appendChild(head("Back to Starter-Set"));
+    card.appendChild(el("p","coll-text","You have already practised with the Starter-Set. Do you want to continue where you left off?"));
     const b=el("div","coll-buttons");
     b.appendChild(button("coll-main","Continue",()=>finish(true)));
     b.appendChild(button("coll-quiet","Start Over",()=>finish(false)));
@@ -415,6 +443,7 @@ Rules:
   }
 
   ["collBtnStart","collBtnDone"].forEach(id=>{const b=$(id);if(b)b.onclick=open});
+  if($("ownWordsBtn"))$("ownWordsBtn").onclick=()=>open(viewCreate);   // start screen: straight to „Your Own Words“
   refreshButtons();
   // ✎ on the answer screen: edit the card you're looking at (own collection only)
   function editInSession(w,onSaved){if(own()&&w&&String(w.id).charAt(0)==="u")open(()=>viewForm(w,{session:true,onSaved}))}
