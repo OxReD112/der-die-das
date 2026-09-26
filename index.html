@@ -100,7 +100,7 @@
 [data-theme="light"] {
   --bg: #f6f4f1;
   --text: #242426;
-  --muted: #86868b;
+  --muted: #727278;
   --mint: #3fa68a;
 
   --card-bg: rgba(0,0,0,.03);
@@ -143,7 +143,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -349,17 +349,13 @@ header h1 {
     backdrop-filter: blur(8px);
     color: var(--muted);
     font: 300 24px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
-      "Helvetica Neue", Arial, sans-serif;
+      "Helvetica Neue", sans-serif;
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
     transform: translateY(-50%);
     transition: opacity .2s ease, color .2s ease;
     -webkit-tap-highlight-color: transparent;
-  }
-
-  .rail-arrow:hover {
-    color: var(--text);
   }
 
   .rail-prev { left: 6px; }
@@ -628,12 +624,12 @@ header h1 {
   text-align: center;
   background: linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--bg) 0%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 8%, transparent) 12%,
-    color-mix(in srgb, var(--bg) 34%, transparent) 32%,
-    color-mix(in srgb, var(--bg) 72%, transparent) 58%,
-    color-mix(in srgb, var(--bg) 94%, transparent) 82%,
-    color-mix(in srgb, var(--bg) 98%, transparent) 100%
+    color-mix(in srgb, var(--tile-surface) 0%, transparent) 0%,
+    color-mix(in srgb, var(--tile-surface) 8%, transparent) 12%,
+    color-mix(in srgb, var(--tile-surface) 34%, transparent) 32%,
+    color-mix(in srgb, var(--tile-surface) 72%, transparent) 58%,
+    color-mix(in srgb, var(--tile-surface) 94%, transparent) 82%,
+    color-mix(in srgb, var(--tile-surface) 98%, transparent) 100%
   );
 }
 
@@ -940,7 +936,7 @@ header h1 {
 .phrase-week-arrow {
   display: block;
   font: 300 34px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "Helvetica Neue", Arial, sans-serif;
+    "Helvetica Neue", sans-serif;
   transform: translateY(-1px);
 }
 
@@ -972,7 +968,7 @@ header h1 {
 .settings-panel.is-open{transform:translateY(0);pointer-events:auto}
 /* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
 .settings-panel,.settings-panel button,.settings-confirm button{touch-action:manipulation}
-.settings-launcher{position:absolute;right:50%;transform:translateX(50%);bottom:calc(env(safe-area-inset-bottom) + 28px);z-index:2;appearance:none;-webkit-appearance:none;border:0;padding:8px 12px;background:transparent;color:var(--tertiary-text);font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:1;transition:opacity .2s ease}
+.settings-launcher{position:absolute;right:50%;transform:translateX(50%);bottom:calc(env(safe-area-inset-bottom) + 28px);z-index:2;appearance:none;-webkit-appearance:none;border:0;padding:8px 12px;background:transparent;color:var(--tertiary-text);font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:1;transition:opacity .2s ease}
 .settings-launcher:active{color:var(--tertiary-text-active)}
 .home-settings-open .settings-launcher{opacity:0;pointer-events:none}
 .settings-content{width:min(100%,430px);padding-top:24px}
@@ -1194,7 +1190,7 @@ header h1 {
    Tile colours and the Heute card's background + green glow stay as they are. */
 :root{--lift-shadow:0 5px 14px rgba(0,0,0,.14);--lift-highlight:inset 0 1px 0 rgba(255,255,255,.06)}
 [data-theme="light"]{--lift-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);--lift-highlight:none}
-.mosaic .tile{border-color:transparent;box-shadow:var(--lift-shadow)}
+.mosaic .tile{border:0;box-shadow:var(--lift-shadow)}
 /* Exercise tiles: the buttons' card colour (the icons get the same flat background: #2A2A2D dark / #FFF light).
    The Heute card keeps its own background + green glow. */
 :root{--tile-surface:#2a2a2d}
@@ -1229,6 +1225,34 @@ header h1 {
 .about-head h2{margin:0;color:var(--text);font:650 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
 .about-close{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;padding:0 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .about-text{margin:4px 0 0;color:var(--muted);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+
+/* ===== HOME SCREEN · Design Police clean-up (2026-09-26, Home 5.37) =====
+   Palette only, shared press effect, no hover, 10% hairlines. Home screen only:
+   phrase screen, Settings, Fortschritt window and the ⌂ button get their own rounds. */
+:root{--secondary-text:#c8c7c4;--hairline:rgba(255,255,255,.10)}
+[data-theme="light"]{--secondary-text:#55565b;--hairline:rgba(0,0,0,.10)}
+/* colours → palette */
+.greeting-sub{color:var(--muted)}
+.today-label{color:var(--secondary-text)}
+.today-number{color:var(--text)}
+.phrase-week-home-row .phrase-week-label{color:var(--muted)}
+.phrase-week-home-literal{color:var(--muted)}
+.settings-launcher{color:var(--muted)}
+/* hairlines 10% */
+.today-progress{background:var(--hairline)}
+.page-dot{background:var(--hairline)}
+.page-dot.is-active{background:var(--muted)}
+.rail-arrow{border-color:var(--hairline)}
+/* only one tile page: keep the dots' room so nothing moves when a second page is added */
+.page-dots[hidden]{visibility:hidden}
+/* Wortschatz: the completion glow (and the dark-mode top line) sit UNDER the text, still over the picture */
+.mosaic .tile-vocab::before{z-index:3}
+/* shared press effect: shrink to 97% + darken slightly, 0.12s */
+.mosaic .module,.mosaic .tile-today,.phrase-week-home-row{transition:transform .12s ease,filter .12s ease}
+.mosaic .module:active,.mosaic .tile-today:active,.phrase-week-home-row:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+.settings-launcher{transition:opacity .2s ease,transform .12s ease,filter .12s ease}
+.settings-launcher:active{color:var(--muted);transform:translateX(50%) scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.mosaic .module,.mosaic .tile-today,.phrase-week-home-row,.settings-launcher{transition:none}}
 
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
@@ -1335,12 +1359,6 @@ header h1 {
      </div>
     </button>
      </div>
-     <div class="tile-page">
-     <!-- TEST: empty placeholder card; delete when adding real exercises -->
-     <div aria-hidden="true" class="tile tile-small tile-placeholder"></div>
-     <!-- TEST: empty placeholder card; delete when adding real exercises -->
-     <div aria-hidden="true" class="tile tile-small tile-placeholder"></div>
-     </div>
     </div>
     <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
     <div aria-label="Seiten" class="page-dots" id="pageDots"></div>
@@ -1409,7 +1427,7 @@ header h1 {
      </div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.36</div>
+    <div class="settings-version">Deutsch. version 5.37</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
