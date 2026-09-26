@@ -353,9 +353,6 @@ body:has(#study:not(.hidden)) .version-mark{display:none}
 .start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
 .start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
 body:has(#start.hidden) .start-about{display:none}
-/* Subline under the (small) Verbformen question: a bit smaller, directly below it */
-#start .subtitle:has(+ .subline){margin-bottom:4px}
-#start .subline{color:var(--muted);font-size:14px;line-height:1.4;margin:0 0 28px}
 </style>
 </head>
 <body>
@@ -372,7 +369,6 @@ body:has(#start.hidden) .start-about{display:none}
   <section id="start" class="start">
     <h1 class="title">Modalverben.</h1>
     <p class="subtitle">Wie viele Sätze?</p>
-    <p class="subline">Auch mit „werden“.</p>
     <div class="choices">
       <button class="choice" data-size="10">10</button>
       <button class="choice" data-size="20">20</button>
@@ -417,7 +413,7 @@ body:has(#start.hidden) .start-about{display:none}
     <h2>Worum geht's?</h2>
     <p class="about-de" id="aboutText"></p>
   </div>
-  <div class="version-mark">v11</div>
+  <div class="version-mark">v12</div>
 </main>
 
 <script src="../../components/deutsch-translation-v1.js?v=2"></script>
