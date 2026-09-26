@@ -1433,7 +1433,7 @@ header h1 {
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=19" type="button">
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=20" type="button">
      <div class="tile-art">
       <img alt="" src="praepositionen/icon.webp"/>
      </div>
@@ -1516,7 +1516,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.43</div>
+    <div class="settings-version">Deutsch. version 5.45</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1880,6 +1880,12 @@ header h1 {
        Game (a top-bar title is visible): only "‹", placed right in front of the title (Home makes room for it).
        Fades out while a table window is open. Home reads the exercise page directly (same site), so the
        exercise pages themselves need no changes. */
+    /* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
+       An empty, passive listener switches it on — for Home and (above, on load) for every exercise page.
+       It never blocks scrolling, swiping or the keyboard. Home 5.44. */
+    function noTouch() {}
+    document.addEventListener('touchstart', noTouch, {passive: true});
+
     const backLabel = document.getElementById('homeBackLabel');
     const CHAPTERS = {
       verbformen: {label: 'Verbformen.', tile: '.tile-verbs'},
@@ -1952,6 +1958,7 @@ header h1 {
         backObserver.observe(frame.contentDocument.documentElement, {subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style', 'hidden', 'aria-hidden']});
         frame.contentWindow.addEventListener('resize', scheduleBack);
         frame.contentWindow.addEventListener('scroll', scheduleBack, {passive: true});
+        frame.contentDocument.addEventListener('touchstart', noTouch, {passive: true}); // press effect on iPhone, see below
       } catch (e) {}
       scheduleBack();
       setTimeout(scheduleBack, 350); // after start-screen fade-ins
