@@ -341,9 +341,10 @@ body:not(:has(#done.show)) .version-mark{display:none}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
-<div class="version-mark">v2.83</div>
+<div class="version-mark">v2.84</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
+<script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
@@ -386,11 +387,18 @@ const $=id=>document.getElementById(id), STORE="wortsternSRSv03", HOME_STATS="de
 function publishWortschatzStatus(done=false){
   try{
     const today=day();
-    const allDue=activeCards().filter(c=>rec(c).due<=today);
+    /* The due-word rule lives in components/deutsch-wortschatz-due-v1.js (shared with Home).
+       If that file didn't load, fall back to counting here the same way. */
+    let remaining;
+    if(window.DeutschWortschatzDue){
+      remaining=DeutschWortschatzDue.count(state,new Set(WORDS.map(c=>c.id))).remaining;
+    }else{
+      remaining=activeCards().filter(c=>rec(c).due<=today).length;
+    }
     const status={
       date:today,
-      done:!!done || allDue.length===0,
-      remaining:allDue.length,
+      done:!!done || remaining===0,
+      remaining,
       updatedAt:Date.now()
     };
     const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
