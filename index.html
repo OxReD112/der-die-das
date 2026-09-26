@@ -1210,6 +1210,26 @@ header h1 {
 .phrase-screen{padding-right:calc(max(24px, env(safe-area-inset-right)) + 24px);padding-left:calc(max(24px, env(safe-area-inset-left)) + 24px)}
 /* room for the shadow inside the swipeable tile strip (it clips everything outside its box) */
 .tile-pages{padding:4px 14px 18px;margin:-4px -14px -18px;scroll-padding-inline:14px;column-gap:calc(var(--tile-gap) + 28px)}  /* wider gap between pages, so the next page doesn't peek into the extra room */
+/* ===== ABOUT window (Settings → About), 2026-09-26 =====
+   Built exactly like the exercises' table windows (Design Police · Table windows):
+   page behind blurred 8px + darkened (34% dark / 20% light), blur fades together with it;
+   window = palette card colour, 10% outline, 24px corners, short fade + zoom-in; × top right,
+   tap outside or Esc closes. Text follows Settings → Your language (EN/RU). */
+:root{--about-scrim:rgba(0,0,0,.34);--about-card:#2a2a2d;--about-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--about-scrim:rgba(0,0,0,.20);--about-card:#fff;--about-line:rgba(0,0,0,.10)}
+.about-window{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:960;display:flex;align-items:center;justify-content:center;
+  padding:18px;padding-top:calc(18px + env(safe-area-inset-top));background:var(--about-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s}
+.about-window.open{opacity:1;visibility:visible;transition:opacity .18s ease,visibility 0s}
+.about-card{width:min(100%,360px);padding:6px 22px 24px;background:var(--about-card);border:1px solid var(--about-line);border-radius:24px;
+  opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.about-window.open .about-card{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.about-window,.about-card{transition:none!important}}
+.about-head{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.about-head h2{margin:0;color:var(--text);font:650 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+.about-close{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;padding:0 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.about-text{margin:4px 0 0;color:var(--muted);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1380,19 +1400,26 @@ header h1 {
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
      <div class="settings-gap"></div>
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
-     <div class="settings-row"><span>Translations</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Translation language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
+     <div class="settings-row"><span>Your language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
      <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
      <div class="settings-row"><span>Daily limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
      <div id="notificationSettings" hidden>
       <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
       <div id="notificationNote" class="settings-action-note"></div>
      </div>
+     <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.33</div>
+    <div class="settings-version">Deutsch. version 5.36</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
    <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
+  </div>
+  <div aria-hidden="true" class="about-window" id="aboutWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-head"><h2 id="aboutTitle">About</h2><button class="about-close" id="aboutClose" type="button" aria-label="Close">×</button></div>
+    <p class="about-text" id="aboutText"></p>
+   </div>
   </div>
   <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
    <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
@@ -1482,7 +1509,7 @@ header h1 {
 
       if(Array.isArray(window.PHRASES)) render();
       else window.addEventListener("phrasesready",render,{once:true});
-      // Settings → Translations ENG/RUS: update the phrase right away.
+      // Settings → Your language ENG/RUS: update the phrase right away.
       document.addEventListener("deutsch:translationlang",render);
     })();
 
@@ -1888,7 +1915,7 @@ const BACKUP_MODULES={
   /* Setting, not progress: always included (current value, even if never
      changed), but a backup with only settings counts as "No progress found". */
   translations:{
-    label:"Translations",
+    label:"Your language",
     storageKey:"deutschTranslationLangV1",
     storageVersion:"deutschTranslationLangV1",
     setting:true,
@@ -2034,7 +2061,7 @@ async function restoreDeutschBackup(file){
     if(langToggle&&window.DeutschTranslation){
       const lang=window.DeutschTranslation.getLang();
       langToggle.setAttribute("data-lang",lang);
-      langToggle.setAttribute("aria-label","Translation language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+      langToggle.setAttribute("aria-label","Your language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
 
     /* Move this device's push subscription to the restored notification ID. */
@@ -2288,7 +2315,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
     if(langToggle && window.DeutschTranslation){
       const lang=window.DeutschTranslation.getLang();
       langToggle.setAttribute("data-lang",lang);
-      langToggle.setAttribute("aria-label","Translation language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+      langToggle.setAttribute("aria-label","Your language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
     }
     if(nameInput && document.activeElement!==nameInput) nameInput.value=getUserName();
   }
@@ -2447,5 +2474,24 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
 
 </script>
  <script src="progress-screen.js?v=15"></script>
+<script>
+/* ===== ABOUT window (Settings → About) — text in the chosen translation language =====
+   \u00a0 = non-breaking space: keeps each example group (der, die or das) on one line. */
+(function(){
+  const ABOUT_TEXT={
+    en:"Some German grammar you can understand. Some you just have to remember - der,\u00a0die\u00a0or\u00a0das, ihr\u00a0or\u00a0Ihnen, am\u00a0or\u00a0im. This app is made for exactly those parts. Short daily rounds help them stick.",
+    ru:"Часть немецкой грамматики можно понять. А часть приходится просто запомнить - der,\u00a0die\u00a0или\u00a0das, ihr\u00a0или\u00a0Ihnen, am\u00a0или\u00a0im. Именно для этого и создано приложение. Короткие ежедневные раунды помогают всё закрепить."
+  };
+  const win=document.getElementById("aboutWindow"),openBtn=document.getElementById("aboutOpen"),closeBtn=document.getElementById("aboutClose"),text=document.getElementById("aboutText");
+  if(!win||!openBtn)return;
+  function lang(){try{return window.DeutschTranslation?window.DeutschTranslation.getLang():(localStorage.getItem("deutschTranslationLangV1")||"en")}catch(e){return "en"}}
+  function open(){text.textContent=ABOUT_TEXT[lang()]||ABOUT_TEXT.en;win.classList.add("open");win.setAttribute("aria-hidden","false");}
+  function close(){win.classList.remove("open");win.setAttribute("aria-hidden","true");}
+  openBtn.addEventListener("click",open);
+  closeBtn.addEventListener("click",close);
+  win.addEventListener("click",e=>{if(e.target===win)close();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&win.classList.contains("open")){e.stopPropagation();close();}},true);
+})();
+</script>
 </body>
 </html>
