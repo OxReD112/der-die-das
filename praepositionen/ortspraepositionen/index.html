@@ -337,6 +337,9 @@ body:has(#sessionScreen.hidden) .start-about{display:none}
 .otbl2 .d{position:absolute;left:0;top:100%;font-size:10.5px;font-weight:500;color:var(--muted);line-height:1.1;white-space:nowrap}
 .otbl2 .cat{grid-column:1/-1;font-size:12.5px;line-height:1.25;color:var(--muted);padding:2px 0 9px;border-bottom:1px solid var(--line)}
 @media (max-width:359px){.otbl2 .ex{white-space:normal}}
+/* 2026-09-26: prepositions + their headers centered in their columns; the "Dativ" hint centered under nach / zu */
+.otbl2 .h:not(:first-child),.otbl2 .p{text-align:center}
+.otbl2 .d{left:50%;transform:translateX(-50%)}
 
 /* ===== MISTAKE MARKER v22 (2026-09-26) — replaces the red dots =====
    A faint highlighter stroke in palette red (see-through, as the colour rules allow) BEHIND the category text.
