@@ -1,4 +1,4 @@
-/* Wortschatz · collection button + window — v3, 2026-09-26 (v2: word form, step 4 · v3: ✎ on the answer screen)
+/* Wortschatz · collection button + window — v4, 2026-09-26 (v2: word form, step 4 · v3: ✎ on the answer screen · v4: import, step 5)
    Plan: Documentation/WORTSCHATZ_COLLECTIONS.md (step 3). Storage lives in collection.js.
    - Button (start screen + „Fertig für heute“): „<name> · <count>“; the built-in set is called „Standard“.
    - Window: name, word count, word list; own collection: rename, export, delete → back to the built-in set.
@@ -78,11 +78,14 @@
     if(own()){
       const act=el("div","coll-actions");
       act.appendChild(button("coll-row","＋ Wort hinzufügen",()=>viewForm(null)));
+      act.appendChild(button("coll-row","＋ Wörter importieren",()=>viewImport({})));
       act.appendChild(button("coll-row","Exportieren",()=>exportFile()));
       act.appendChild(button("coll-row","Löschen · zurück zum Standard-Set",viewDelete));
       card.appendChild(act);
     }else{
-      card.appendChild(el("div","coll-actions")).style.paddingTop="0";
+      const act=el("div","coll-actions");
+      act.appendChild(button("coll-row","Eigene Wörter verwenden",viewCreate));
+      card.appendChild(act);
     }
   }
 
@@ -125,7 +128,7 @@
   // onSaved(card) lets the running session show the corrected card right away.
   function viewForm(w,opts){
     opts=opts||{};
-    const editing=!!w,session=!!opts.session;
+    const editing=!!w,session=!!opts.session,creating=!!opts.create;
     card.textContent="";
     card.appendChild(head(editing?"Wort bearbeiten":"Neues Wort"));
     const sc=el("div","coll-scroll");card.appendChild(sc);
@@ -157,7 +160,7 @@
     drawPos();
 
     let now=null;
-    if(!editing){
+    if(!editing&&!creating){
       const sw=el("label","coll-switch");sw.appendChild(el("span",null,"Gleich lernen"));
       now=el("input",null,null,{type:"checkbox","aria-label":"Gleich lernen"});now.checked=true;sw.appendChild(now);sc.appendChild(sw);
       sc.appendChild(el("p","coll-hint","An: kommt schon in der nächsten Runde. Aus: wartet auf „+ 5 neue Wörter“."));
@@ -196,7 +199,7 @@
           if(r.reason){err.textContent=r.reason;return}
           if(session){if(opts.onSaved)opts.onSaved(r.card);close();return}
         }else{
-          const r=C.add([fields],{activateNow:now.checked});
+          const r=creating?C.create(opts.name,[fields]):C.add([fields],{activateNow:now.checked});
           if(r.duplicates){err.textContent="Dieses Wort ist schon in der Sammlung.";return}
           if(!r.added){err.textContent=(r.skipped[0]&&r.skipped[0].reason)||"Das Wort konnte nicht gespeichert werden.";return}
         }
@@ -205,9 +208,10 @@
     }
 
     const b=el("div","coll-form-buttons");
+    if(creating)opts.cancel=opts.cancel||viewMain;
     b.appendChild(button("coll-main","Speichern",save));
     if(editing&&!session)b.appendChild(button("coll-link","Wort löschen",()=>viewRemove(w)));
-    b.appendChild(button("coll-link","Abbrechen",session?close:viewMain));
+    b.appendChild(button("coll-link","Abbrechen",session?close:(opts.cancel||viewMain)));
     card.appendChild(b);
     if(!editing)setTimeout(()=>fSentence.focus(),60);
   }
@@ -219,6 +223,139 @@
     const b=el("div","coll-buttons");
     b.appendChild(button("coll-main","Behalten",()=>viewForm(w)));
     b.appendChild(button("coll-quiet","Löschen",()=>{C.remove(w.id);dirty=true;refreshButtons();viewMain()}));
+    card.appendChild(b);
+  }
+
+
+  /* ---------- step 5: own words — create a collection / import a list ---------- */
+  // The AI part: users write their own request (which words, level, language) and paste this block after it.
+  const FORMAT_BLOCK=`Format the words as a JSON list and answer with the list only - no other text.
+One object per word, like this:
+
+[
+  {
+    "sentence": "Ich {{c1::schlage}} Samstag {{c1::vor}}.",
+    "translation": "to suggest",
+    "sentenceTranslation": "I suggest Saturday.",
+    "base": "vorschlagen",
+    "grammar": "schlägt vor · schlug vor · hat vorgeschlagen",
+    "pos": "Verb"
+  },
+  {
+    "sentence": "Der {{c1::Termin}} ist morgen um zehn.",
+    "translation": "appointment",
+    "sentenceTranslation": "The appointment is tomorrow at ten.",
+    "base": "der Termin",
+    "grammar": "die Termine",
+    "pos": "Substantiv"
+  }
+]
+
+Rules:
+- "sentence": a short, natural, everyday German sentence. Mark the word to practise with {{c1::…}}, exactly as it appears in the sentence.
+- Mark only ONE word per sentence. Separable verbs: mark both parts, e.g. "Ich {{c1::rufe}} dich morgen {{c1::an}}."
+- "translation" (meaning of the word) and "sentenceTranslation" (the whole sentence): in the language I asked for - English if I didn't say.
+- "base": the dictionary form. Nouns with der / die / das.
+- "grammar": verbs: 3rd person · Präteritum · Perfekt. Nouns: the plural. Otherwise leave it empty.
+- "pos": the word class in German (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).`;
+
+  function copyText(text,done){
+    const fallback=()=>{const t=el("textarea",null,null,{readonly:"",style:"position:fixed;top:-1000px;opacity:0"});t.value=text;document.body.appendChild(t);
+      t.select();t.setSelectionRange(0,text.length);let ok=false;try{ok=document.execCommand("copy")}catch(e){}t.remove();done(ok)};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>done(true),fallback);else fallback();
+  }
+
+  // Standard → own words: name, then import a list or type the first word.
+  function viewCreate(){
+    card.textContent="";
+    card.appendChild(head("Eigene Wörter"));
+    const sc=el("div","coll-scroll");card.appendChild(sc);
+    sc.appendChild(el("p","coll-text","Deine eigenen Wörter ersetzen das Standard-Set. Dein Fortschritt dort wird beiseitegelegt - du kannst später zurückwechseln."));
+    const l=el("label","coll-label","Name der Sammlung",{for:"cfName"});sc.appendChild(l);
+    const nameIn=el("input","coll-field",null,{id:"cfName",type:"text",maxlength:"40",placeholder:"Meine Wörter",autocomplete:"off"});sc.appendChild(nameIn);
+    const nm=()=>nameIn.value.trim()||"Meine Wörter";
+    const b=el("div","coll-form-buttons");
+    b.appendChild(button("coll-main","Liste importieren",()=>viewImport({create:true,name:nm()})));
+    b.appendChild(button("coll-quiet","Erstes Wort eintippen",()=>viewForm(null,{create:true,name:nm(),cancel:viewCreate})));
+    b.appendChild(button("coll-link","Abbrechen",viewMain));
+    card.appendChild(b);
+  }
+
+  // Paste the AI's answer or pick a file. opts.create: this list starts a new collection.
+  function viewImport(opts){
+    card.textContent="";
+    card.appendChild(head(opts.create?"Liste importieren":"Wörter importieren"));
+    const sc=el("div","coll-scroll");card.appendChild(sc);
+    const intro=el("p","coll-text");intro.style.marginBottom="10px";
+    intro.appendChild(document.createTextNode("Frag eine KI nach Beispielsätzen für deine Wörter und füge ihre Antwort hier ein. Damit sie das richtige Format nimmt: "));
+    intro.appendChild(button("coll-link","Format für die KI",()=>viewFormat(()=>viewImport(opts))));
+    sc.appendChild(intro);
+    const ta=el("textarea","coll-field coll-paste",null,{id:"cfPaste",rows:"7",placeholder:"[ { \"sentence\": \"Ich {{c1::schlage}} …\", … } ]","aria-label":"Liste einfügen",autocomplete:"off",autocapitalize:"off",spellcheck:"false"});
+    sc.appendChild(ta);
+    const fileIn=el("input",null,null,{type:"file",accept:".json,.js,.txt,application/json,text/plain,text/javascript",style:"display:none"});
+    sc.appendChild(fileIn);
+    const fileRow=el("p","coll-hint");fileRow.appendChild(document.createTextNode("Oder: "));
+    fileRow.appendChild(button("coll-link","Datei wählen",()=>fileIn.click()));sc.appendChild(fileRow);
+    if(!opts.create)sc.appendChild(el("p","coll-hint","Neue Wörter kommen ans Ende der Warteschlange für „+ 5 neue Wörter“."));
+    const err=el("p","coll-error");sc.appendChild(err);
+    ta.addEventListener("input",()=>{err.textContent=""});
+
+    function run(text){
+      err.textContent="";
+      const parsed=C.parse(text);
+      if(parsed.error){
+        err.textContent=parsed.error==="empty"?"Bitte füge zuerst die Liste ein."
+          :"Das sieht nicht wie eine Liste aus. Kopiere die ganze Antwort der KI - von [ bis ].";
+        return;
+      }
+      let r;
+      try{r=opts.create?C.create(opts.name,parsed.items):C.add(parsed.items)}
+      catch(e){err.textContent=e.message==="storage-full"?"Der Speicher ist voll - nichts wurde gespeichert.":"Die Liste konnte nicht gespeichert werden.";return}
+      if(!r.added){
+        err.textContent=r.duplicates&&!r.skipped.length?"Alle Wörter sind schon in der Sammlung."
+          :"Keine Karte war brauchbar."+(r.skipped[0]?" Zum Beispiel Nr. "+r.skipped[0].n+": "+r.skipped[0].reason+".":"");
+        return;
+      }
+      dirty=true;refreshButtons();viewResult(r,opts);
+    }
+    fileIn.addEventListener("change",()=>{const f=fileIn.files&&fileIn.files[0];if(!f)return;
+      if(f.size>2e6){err.textContent="Die Datei ist zu groß.";return}
+      f.text().then(t=>{ta.value=t;run(t)},()=>{err.textContent="Die Datei konnte nicht gelesen werden."})});
+
+    const b=el("div","coll-form-buttons");
+    b.appendChild(button("coll-main",opts.create?"Sammlung anlegen":"Hinzufügen",()=>run(ta.value)));
+    b.appendChild(button("coll-link","Abbrechen",opts.create?viewCreate:viewMain));
+    card.appendChild(b);
+  }
+
+  function viewResult(r,opts){
+    card.textContent="";
+    card.appendChild(head(opts.create?"Sammlung angelegt":"Wörter hinzugefügt"));
+    const sc=el("div","coll-scroll");card.appendChild(sc);
+    sc.appendChild(el("p","coll-text",(r.added===1?"1 Wort":r.added+" Wörter")+(opts.create?" in „"+(C.get()?C.get().name:opts.name)+"“.":" hinzugefügt.")
+      +(opts.create&&r.added>10?" Du startest mit den ersten 10.":"")));
+    if(r.duplicates)sc.appendChild(el("p","coll-hint",(r.duplicates===1?"1 Wort war":r.duplicates+" Wörter waren")+" schon in der Sammlung."));
+    if(r.skipped.length){
+      sc.appendChild(el("p","coll-label",(r.skipped.length===1?"1 Karte":r.skipped.length+" Karten")+" übersprungen:"));
+      r.skipped.slice(0,30).forEach(x=>sc.appendChild(el("p","coll-hint","Nr. "+x.n+" · "+x.reason+(x.preview?" · „"+x.preview+"“":""))));
+      if(r.skipped.length>30)sc.appendChild(el("p","coll-hint","… und "+(r.skipped.length-30)+" weitere."));
+    }
+    const b=el("div","coll-form-buttons");
+    b.appendChild(button("coll-main","Fertig",close));
+    card.appendChild(b);
+  }
+
+  // Shows the format block and copies it.
+  function viewFormat(back){
+    card.textContent="";
+    card.appendChild(head("Format für die KI"));
+    const sc=el("div","coll-scroll");card.appendChild(sc);
+    sc.appendChild(el("p","coll-text","Schreib deiner KI zuerst, was du willst - welche Wörter, welches Niveau, welche Sprache für die Übersetzung. Dann füge diesen Text dazu:"));
+    sc.appendChild(el("pre","coll-pre",FORMAT_BLOCK));
+    const b=el("div","coll-form-buttons");
+    const copyBtn=button("coll-main","Kopieren",()=>copyText(FORMAT_BLOCK,ok=>{copyBtn.textContent=ok?"Kopiert ✓":"Bitte oben markieren und kopieren"}));
+    b.appendChild(copyBtn);
+    b.appendChild(button("coll-link","Zurück",back));
     card.appendChild(b);
   }
 

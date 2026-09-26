@@ -414,6 +414,11 @@ textarea.coll-field{min-height:68px}
 .editCard svg{width:19px;height:19px;display:block}
 .editCard:active{transform:scale(.92);opacity:1}
 .feedback.show .editCard.own{display:flex}
+/* Import (step 5, v2.90): paste box + the format block for the AI */
+textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.coll-pre{margin:0;padding:12px 14px;border:1px solid var(--overlay-line);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;
+  font:400 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sec-text);-webkit-user-select:text;user-select:text}
+.coll-text .coll-link{font-size:inherit}
 </style>
 </head>
 <body><main class="app">
@@ -456,13 +461,13 @@ textarea.coll-field{min-height:68px}
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.89</div>
+<div class="version-mark">v2.90</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=1"></script>
-<script src="collection-window.js?v=3"></script>
+<script src="collection-window.js?v=4"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
