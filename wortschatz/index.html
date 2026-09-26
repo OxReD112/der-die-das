@@ -269,8 +269,8 @@ header .progress div{background:var(--muted)}
 /* Wortschatz: "Weiter" half as wide, centred (its answer area is very wide) */
 #continue{width:50%;margin-left:auto;margin-right:auto;display:block}
 
-/* Version number only on the summary screen ("Fertig für heute"), not during the exercise (Design Police 2026-09-25) */
-body:not(:has(#done.show)) .version-mark{display:none}
+/* Version number only on the start screen and the summary screen ("Fertig für heute"), not during the exercise (Design Police 2026-09-25; start screen 2026-09-26) */
+body:not(:has(#done.show)):not(:has(#start.show)) .version-mark{display:none}
 
 /* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
    same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
@@ -306,11 +306,36 @@ body:not(:has(#done.show)) .version-mark{display:none}
 #almostHint.show{opacity:1}
 @media(max-width:699px){#question #almostHint{order:2;width:100%}}
 @media(prefers-reduced-motion:reduce){#almostHint{transition:none}}
+
+/* ===== START SCREEN · Wortschatz (2026-09-26, v2.85) =====
+   Same family as Partizip II (Georgia title + grey subline), shared start-screen colours and press effect.
+   No 10/20/30: the review schedule decides what is due, so the screen shows today's count + one main button.
+   Shown only when cards are due; with nothing due Wortschatz opens on "Fertig für heute" as before. */
+:root{--start-line:rgba(255,255,255,.10);--start-table-text:#c8c7c4}
+[data-theme="light"]{--start-line:rgba(0,0,0,.10);--start-table-text:#55565b}
+#start{display:none;flex-direction:column;align-items:center;text-align:center;padding-top:36px}
+#start.show{display:flex}
+#start .title{font:400 clamp(48px,13vw,72px)/1.05 Georgia,serif;letter-spacing:-2px;color:var(--text);margin:0 0 12px}
+#start .subtitle{color:var(--muted);font-size:16px;margin:0 0 28px}
+#start #startBtn{width:312px;max-width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
+  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
+#start #startBtn:active{transform:scale(.97);filter:brightness(.94)}
+/* The top bar (title, counter, progress line) belongs to the session, not to the start screen */
+body:has(#start.show) header{display:none}
+
+/* ===== START SCREEN · description "Worum geht's?" (same as the other exercises) ===== */
+.start-about{display:none;position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 64px);margin:0 auto;padding:0;width:312px;max-width:calc(100% - 36px);text-align:center;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;z-index:4}
+.start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
+.start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+body:has(#start.show) .start-about{display:block}
 </style>
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section class="stage" id="study">
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><p class="subtitle" id="startCount"></p><button id="startBtn" type="button">Starten</button></section>
+<section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
    <div class="sentence" id="sentence"></div>
@@ -341,7 +366,11 @@ body:not(:has(#done.show)) .version-mark{display:none}
  </div>
 </section>
 <section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
-<div class="version-mark">v2.84</div>
+<div class="start-about" id="startAbout">
+  <h2>Worum geht's?</h2>
+  <p class="about-de" id="aboutText"></p>
+</div>
+<div class="version-mark">v2.85</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
@@ -725,7 +754,34 @@ function speakCurrent(){
 $("feedback").addEventListener("click",e=>{
   if(e.target.closest("#answerTop,#speakTop"))speakCurrent();
 });
-loadKeyboardComponent().then(()=>build()).catch(e=>{console.error(e);build()});
+/* START SCREEN (2026-09-26): the session no longer starts on load.
+   Cards due -> start screen with today's count; Starten -> the same build() as before.
+   Nothing due -> straight to "Fertig für heute", exactly as before.
+   The keyboard loads in the background; render() shows it once it's ready. */
+const START_ABOUT={text:{
+  en:"Helps you remember words in real sentences. Each word comes back just before you'd forget it - and less and less often over time.",
+  ru:"Помогает запоминать слова в живых предложениях. Каждое слово возвращается как раз перед тем, как забудется, - и со временем всё реже."}};
+$("aboutText").textContent=getTranslation(START_ABOUT,"text");
+function dueCount(){return activeCards().filter(c=>rec(c).due<=day()).length}
+function cardsLabel(n){return n===1?"1 Karte":n+" Karten"}
+function showStart(){
+ ensureDeck();
+ const n=dueCount();
+ publishWortschatzStatus(n===0);
+ publishWortschatzProgress();
+ if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
+ $("startCount").textContent="Heute: "+cardsLabel(n);
+ $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
+}
+function startSession(){
+ $("start").classList.remove("show");$("study").style.display="flex";
+ build();
+}
+$("startBtn").onclick=startSession;
+showStart();
+// Desktop: Enter on the start screen = Starten
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&$("start").classList.contains("show")){e.preventDefault();startSession()}});
+loadKeyboardComponent().catch(e=>console.error(e));
 
 function goBackToHome(){
   try{
