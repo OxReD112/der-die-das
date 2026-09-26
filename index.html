@@ -163,6 +163,22 @@ html.app-open body {
   height: 100%;
 }
 
+/* Home 5.69: in the iPhone web app the exercise frame doesn't reach the very bottom of the screen (the strip where
+   Safari has its address bar), so a window inside an exercise can't darken it — Home's own background shows there.
+   While an exercise window is open, Home darkens that background the same way (bg + window scrim: 34 % / 20 % black). */
+html.app-open,
+html.app-open body {
+  transition: background-color .18s ease;
+}
+html.app-open.frame-window,
+html.app-open.frame-window body {
+  background: #121213;
+}
+html[data-theme="light"].app-open.frame-window,
+html[data-theme="light"].app-open.frame-window body {
+  background: #c5c3c1;
+}
+
 /* --------------------------------------------------------------------------
    Home layout
    -------------------------------------------------------------------------- */
@@ -1516,7 +1532,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.68</div>
+    <div class="settings-version">Deutsch. version 5.69</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1872,6 +1888,7 @@ header h1 {
       shell.classList.remove('open');
       shell.setAttribute('aria-hidden', 'true');
       document.documentElement.classList.remove('app-open');
+      setFrameWindow(false);
       frame.src = 'about:blank';
     }
 
@@ -1913,7 +1930,7 @@ header h1 {
     }
     function updateBack() {
       backRaf = 0;
-      if (!shell.classList.contains('open')) return;
+      if (!shell.classList.contains('open')) { setFrameWindow(false); return; }
       let doc, win;
       try { doc = frame.contentDocument; win = frame.contentWindow; } catch (e) {}
       // where does "‹" lead?
@@ -1945,6 +1962,17 @@ header h1 {
         back.style.left = '';
       }
       back.classList.toggle('is-hidden', windowOpen);
+      setFrameWindow(windowOpen);
+    }
+    // Home 5.69: darken the strip below the exercise frame (and the status-bar colour) while an exercise window is open
+    function setFrameWindow(on) {
+      const root = document.documentElement;
+      if (root.classList.contains('frame-window') === on) return;
+      root.classList.toggle('frame-window', on);
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (!meta) return;
+      if (on) { meta.dataset.plain = meta.getAttribute('content'); meta.setAttribute('content', root.dataset.theme === 'light' ? '#c5c3c1' : '#121213'); }
+      else if (meta.dataset.plain) { meta.setAttribute('content', meta.dataset.plain); delete meta.dataset.plain; }
     }
     let backLate = 0;
     function scheduleBack() {
