@@ -1,4 +1,6 @@
-/* Deutsch · Progress screen (Fortschritt) — v1 · Design Police clean-up 2026-09-26 (loaded as ?v=17)
+/* Deutsch · Progress screen (Fortschritt) — v1 · Design Police clean-up 2026-09-26 (loaded as ?v=18)
+   v18 (2026-09-26): Wortschatz card = bar over STARTED words with sitzt (level 3+) and gelernt (level 6) layers,
+   collection name in grey, no collection size. See PROGRESS_TRACKER.md section 7.
    Opens when the "Heute" tile on Home is tapped.
    Concept + rules: Documentation/PROGRESS_TRACKER.md · Design: Claude outputs/fortschritt-mockup-v2.html
 
@@ -29,8 +31,8 @@
   const css=`
 /* Design Police 2026-09-26 (v16): card colour, palette greys, 10% hairlines. Going down = palette grey (calm, no judging).
    --pg-ghost ("vor 3 Wochen") stays its own darker green on purpose (decision 2026-09-26). */
-:root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#2a2a2d;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.10);--pg-fill:color-mix(in srgb,var(--mint) 8%,transparent);--pg-secondary:#c8c7c4}
-[data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.10);--pg-fill:color-mix(in srgb,var(--mint) 10%,transparent);--pg-secondary:#55565b}
+:root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#2a2a2d;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.10);--pg-fill:color-mix(in srgb,var(--mint) 8%,transparent);--pg-secondary:#c8c7c4;--pg-sitzt:color-mix(in srgb,var(--mint) 65%,transparent)}
+[data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.10);--pg-fill:color-mix(in srgb,var(--mint) 10%,transparent);--pg-secondary:#55565b;--pg-sitzt:color-mix(in srgb,var(--mint) 65%,transparent)}
 .tile-today{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tile-today:active{opacity:.8}
 .pg{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:25;display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));color:var(--text);
@@ -98,6 +100,13 @@
 .pg-past{background:var(--pg-ghost);border-radius:5px 0 0 5px!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-lost{background:var(--pg-lost);border-radius:0!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-started{background:var(--pg-started);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.pg-sitzt{background:var(--pg-sitzt);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.pg-words .pg-started{border-radius:0 5px 5px 0;transition:width 1s cubic-bezier(.2,.8,.2,1),left 1s cubic-bezier(.2,.8,.2,1)}
+.pg-words .pg-started.whole{border-radius:5px}
+.pg-words .pg-sitzt,.pg-words .pg-fill{border-radius:5px 0 0 5px}
+.pg-words i.end{border-radius:5px}
+.pg-words .pg-coll{display:block;margin:-3px 0 9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-weight:500;font-size:13px}
+.pg-d .pg-wz{color:var(--mint);font-weight:500;font-size:12px}
 .pg-notch{top:-3px!important;bottom:-3px!important;width:2px!important;margin-left:-1px;border-radius:1px!important;background:var(--text);opacity:0;transition:opacity .4s .8s}
 .pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--muted);font-size:12px}
 .pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
@@ -185,7 +194,8 @@
     const ws=ex.wortschatz&&ex.wortschatz.summary;
     const profile=read(PROFILE_KEY);
     return {sinceStart,chapters,gNow,gThen,gSeries,learned,
-      words:ws?{total:Number(ws.total)||0,started:Number(ws.started)||0,learned:Number(ws.learned)||0}:null,
+      words:ws?{total:Number(ws.total)||0,started:Number(ws.started)||0,sitzt:Number(ws.sitzt)||0,learned:Number(ws.learned)||0,
+        collection:typeof ws.collection==="string"?ws.collection.trim().slice(0,40):""}:null,
       name:profile&&typeof profile.name==="string"?profile.name.trim().slice(0,20):""};
   }
 
@@ -247,10 +257,11 @@
     return d;
   }
 
-  // Wortschatz numbers: [learned (mint) / ] started (gray) / total — learned only once ≥ 1
+  // Wortschatz numbers (v18): [gelernt (mint, bold) / ] [sitzen (mint) / ] angefangen (gray) — same order as the bar,
+  // each part only once ≥ 1. No collection size: it grows and switches, and you can't act on it here.
   function wordCounts(W){
     const sep='<span class="tot"> / </span>';
-    return (W.learned>0?`<span class="pg-wl">${W.learned}</span>${sep}`:"")+`<span class="pg-ws">${W.started}</span>${sep}<span class="tot">${W.total}</span>`;
+    return (W.learned>0?`<span class="pg-wl">${W.learned}</span>${sep}`:"")+(W.sitzt>0?`<span class="pg-wz">${W.sitzt}</span>${sep}`:"")+`<span class="pg-ws">${W.started}</span>`;
   }
 
   /* ---------- screens ---------- */
@@ -285,13 +296,19 @@
         <div class="pg-legend"><span><i style="background:var(--pg-ghost)"></i>${m.sinceStart?"Start":"vor 3 Wochen"}</span><span><i style="background:var(--mint)"></i>dazu</span></div>
       </div>
       <div class="pg-card pg-list pg-words"></div>`;
-    // Wortschatz: whole stack · started · fully learned — no drill-down
+    // Wortschatz (v18): the whole bar = started words · sitzt (level 3+) · gelernt (level 6) — no drill-down.
+    // Counted live from the active collection, so switching collections needs nothing extra.
     const w=v.querySelector(".pg-words"), wr=document.createElement("div");wr.className="pg-row static";
     const W=m.words;
-    wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>`;
-    const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
-    if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--pg-started)"></i>angefangen</span><span><i style="background:var(--mint)"></i>gelernt</span></div>');
-    if(W&&W.total){const go=()=>{tr.children[0].style.width=W.started/W.total*100+"%";setTimeout(()=>tr.children[1].style.width=W.learned/W.total*100+"%",300)};
+    const coll=W&&W.collection?`<div class="pg-coll">${esc(W.collection)}</div>`:"";
+    wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>${coll}`;
+    const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-sitzt"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
+    if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--mint)"></i>gelernt</span><span><i style="background:var(--pg-sitzt)"></i>sitzt</span><span><i style="background:var(--pg-started)"></i>angefangen</span></div>');
+    if(W&&W.total){const S=W.started||1,sz=W.sitzt/S*100;
+      // segments don't overlap grey: grey = not sitting yet; the layer that reaches the end keeps both corners round
+      tr.children[0].classList.toggle("whole",!W.sitzt);tr.children[1].classList.toggle("end",W.sitzt>=W.started);tr.children[2].classList.toggle("end",W.learned>=W.started);
+      const go=()=>{tr.children[0].style.left=sz+"%";tr.children[0].style.width=(W.started?100-sz:0)+"%";
+        setTimeout(()=>tr.children[1].style.width=W.sitzt/S*100+"%",250);setTimeout(()=>tr.children[2].style.width=W.learned/S*100+"%",500)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
     else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0;font-size:13px">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
     // grammar chapters

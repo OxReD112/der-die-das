@@ -1381,7 +1381,7 @@ header h1 {
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.37" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.38" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -1516,7 +1516,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.67</div>
+    <div class="settings-version">Deutsch. version 5.68</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -2035,6 +2035,7 @@ function saveProgressSnapshot(){
     Object.keys(exercises).sort().forEach(id=>{
       const sm=exercises[id]&&exercises[id].summary;
       if(!sm||!(Number(sm.total)>0))return;
+      if(sm.kind==="words")return; // Wortschatz: not in the history (2026-09-26) — its card counts live from the words
       entry[id]={t:Number(sm.total),s:Number(sm.sicher)||0,i:Number(sm.items)||0,is:Number(sm.itemsSicher)||0};
     });
     if(!Object.keys(entry).length)return;
@@ -2716,7 +2717,7 @@ document.getElementById("backupFile")?.addEventListener("change",event=>{
 })();
 
 </script>
- <script src="progress-screen.js?v=17"></script>
+ <script src="progress-screen.js?v=18"></script>
 <script>
 /* ===== ABOUT window (Settings → About) — text in the chosen translation language =====
    \u00a0 = non-breaking space: keeps each example group (der, die or das) on one line. */
