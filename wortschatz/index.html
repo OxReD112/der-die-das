@@ -342,19 +342,33 @@ body:has(#start.show) .start-about{display:block}
   transition:transform .12s ease,filter .12s ease}
 .coll-btn:active{transform:scale(.97);filter:brightness(.94)}
 #done .coll-btn{display:inline-block;margin-top:28px}
-.coll-modal{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));display:flex;align-items:center;justify-content:center;padding:18px;
-  padding-top:calc(18px + env(safe-area-inset-top));padding-bottom:calc(18px + env(safe-area-inset-bottom));z-index:30;background:rgba(0,0,0,0);
+/* v2.100: the dark + blurred layer reaches 100px past the top AND bottom edge (inside the Home web app the page
+   isn't reliably told how tall the status bar / home indicator are), and the card keeps fixed safe margins. */
+.coll-modal{position:fixed;left:0;right:0;top:-100px;bottom:-100px;display:flex;align-items:center;justify-content:center;padding:18px;
+  padding-top:calc(100px + max(64px, env(safe-area-inset-top) + 20px));padding-bottom:calc(100px + max(40px, env(safe-area-inset-bottom) + 20px));z-index:30;background:rgba(0,0,0,0);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
 .coll-modal.open{opacity:1;visibility:visible;background:var(--overlay-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
-.coll-card{width:min(520px,100%);max-height:min(720px,100%);display:flex;flex-direction:column;overflow:hidden;background:var(--overlay-card);border:1px solid var(--overlay-line);
+.coll-card{width:min(520px,100%);max-height:min(640px,100%);display:flex;flex-direction:column;overflow:hidden;background:var(--overlay-card);border:1px solid var(--overlay-line);
   border-radius:24px;padding:6px 22px 14px;text-align:left;color:var(--text);opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
 .coll-modal.open .coll-card{opacity:1;transform:scale(1);filter:blur(0)}
 @media(prefers-reduced-motion:reduce){.coll-modal,.coll-card{transition:none!important}}
 .coll-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto;min-height:52px}
 .coll-title{margin:0;font-size:20px;font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .coll-close{flex:0 0 auto;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:8px;margin-right:-8px;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-close:active,.coll-link:active,.coll-row:active{transform:scale(.97);filter:brightness(.94)}
+.coll-close:active,.coll-link:active,.coll-row:active,.coll-back:active{transform:scale(.97);filter:brightness(.94)}
+.coll-back{flex:0 0 auto;border:0;background:transparent;color:var(--text);font:300 34px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  padding:4px 10px 8px 0;margin-left:-4px;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+.coll-head .coll-title{flex:1 1 auto;min-width:0}
+/* form: Save sits at the end of the scrolling form */
+.coll-scroll .coll-form-buttons{padding-top:18px;padding-bottom:6px}
+/* Starter-Set window (v2.101): fold-out line like the Pronomen table (▸ → ▾), list under it, main button always at the bottom */
+.coll-fold{flex:0 0 auto;align-self:flex-start;display:inline-flex;align-items:center;gap:7px;margin:-8px 0 14px;padding:4px 0;border:0;background:none;
+  color:var(--text);font:600 15px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-user-select:none;user-select:none}
+.coll-fold::before{content:"▸";display:inline-block;font-size:12px;color:var(--muted);transition:transform .15s}
+.coll-fold.open::before{transform:rotate(90deg)}
+.coll-fold:active{filter:brightness(.94)}
+.coll-bottom-main{padding-top:14px}
 .coll-meta{flex:0 0 auto;margin:0 0 14px;font-size:14px;color:var(--muted)}
 .coll-link{border:0;background:none;padding:0;margin:0;color:var(--sec-text);font:inherit;text-decoration:underline;text-decoration-color:var(--overlay-line);text-underline-offset:3px;cursor:pointer;transition:transform .12s ease,filter .12s ease}
 .coll-name-input{width:100%;box-sizing:border-box;height:44px;margin:4px 0 0;padding:0 14px;border:1px solid var(--overlay-line);border-radius:14px;background:transparent;color:var(--text);
@@ -489,7 +503,7 @@ body:has(#done.show) header{display:none}
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="collCount" id="collCountStart"></p><p class="startNote" id="startNote"></p></div><div class="startActions"><p class="subtitle" id="startCount"></p><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></div></section>
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="collCount" id="collCountStart"></p><p class="startNote" id="startNote"></p></div><div class="startActions"><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></div></section>
 <section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
@@ -527,13 +541,13 @@ body:has(#done.show) header{display:none}
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.99</div>
+<div class="version-mark">v2.102</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=10"></script>
+<script src="collection-window.js?v=13"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -914,6 +928,7 @@ function showDone(){
  }else{
    btn.style.display="none";note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
  }
+ if(window.WortschatzCollectionWindow)WortschatzCollectionWindow.refreshButtons();   // started count may have changed
  layoutDone();
 }
 /* Done screen height (v2.97): from its top down to 28px above the version number, so the buttons sit low
@@ -978,7 +993,8 @@ function showStart(){
  publishWortschatzStatus(n===0);
  publishWortschatzProgress();
  if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
- $("startCount").textContent="Heute: "+cardsLabel(n);
+ // v2.102: no „Heute: 12 Karten“ — the session counter shows it once you start
+ if(window.WortschatzCollectionWindow)WortschatzCollectionWindow.refreshButtons();   // „15 / 217 Wörter angefangen“
  const left=newWordsLeft();$("startNote").textContent=left>10?"":(left?"Noch "+newWordsLabel(left):"Keine neuen Wörter mehr");
  $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
  layoutStart();

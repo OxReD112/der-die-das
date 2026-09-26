@@ -37,7 +37,13 @@
       b.appendChild(el("span","coll-line-chev","›",{"aria-hidden":"true"}));
       b.setAttribute("aria-label","Word collection: "+label);
     });
-    ["collCountStart","collCountDone"].forEach(id=>{const c=$(id);if(c)c.textContent=count});   // count on its own line (v2.99)
+    // v2.102: „15 / 217 Wörter angefangen“ — words you've started (in your rotation) out of all words in the collection.
+    // Read from the saved progress, so it's right on both screens (the page saves after every change).
+    let started=0;
+    try{const st=JSON.parse(localStorage.getItem(C.PROGRESS_KEY)||"null");const ids=new Set(list().map(w=>String(w.id)));
+      started=(st&&Array.isArray(st.activeIds)?st.activeIds:[]).filter(id=>ids.has(String(id))).length}catch(e){}
+    const countText=started+" / "+n+" Wörter angefangen";
+    ["collCountStart","collCountDone"].forEach(id=>{const c=$(id);if(c)c.textContent=countText});
     const ownBtn=$("ownWordsBtn");if(ownBtn)ownBtn.style.display=own()?"none":"";
   }
 
@@ -59,8 +65,11 @@
   // Keys typed in the window (rename field) must not reach the exercise's Enter handlers
   card.addEventListener("keydown",e=>{if(e.key==="Enter")e.stopPropagation()});
 
-  function head(title){
+  // ‹ (one step back) left of the title, × (close the window) on the right — like the Fortschritt window.
+  // No „Cancel“ links any more (v2.100): ‹ does what they did.
+  function head(title,back){
     const h=el("div","coll-head");
+    if(back)h.appendChild(button("coll-back","‹",back)).setAttribute("aria-label","Back");
     h.appendChild(el("h2","coll-title",title,{id:"collTitle"}));
     h.appendChild(button("coll-close","×",close)).setAttribute("aria-label","Close");
     return h;
@@ -107,12 +116,12 @@
     card.appendChild(head(BUILTIN_NAME));
     const words=list();
     card.appendChild(el("p","coll-text",words.length+" everyday German words in example sentences."));
-    const b=el("div","coll-form-buttons");
-    b.appendChild(button("coll-main","Use My Own Words",viewCreate));
-    const toggle=button("coll-link","Show All Words in the Set",()=>{const show=box.style.display==="none";box.style.display=show?"":"none";toggle.textContent=show?"Hide Words":"Show All Words in the Set"});
-    b.appendChild(toggle);
-    card.appendChild(b);
-    // the list unfolds BELOW the link (and scrolls inside the window)
+    // v2.101: fold-out line (same mechanic as the Pronomen table: ▸ turns ▾) right under the description;
+    // the list unfolds under it and scrolls; „Use My Own Words“ stays visible at the bottom.
+    const toggle=button("coll-fold","All Words in the Set",()=>{const show=box.style.display==="none";box.style.display=show?"":"none";
+      toggle.classList.toggle("open",show);toggle.setAttribute("aria-expanded",show?"true":"false")});
+    toggle.setAttribute("aria-expanded","false");
+    card.appendChild(toggle);
     const box=el("div","coll-list coll-list-below");box.style.display="none";
     words.forEach(w=>{
       const row=el("div","coll-word");
@@ -121,6 +130,9 @@
       box.appendChild(row);
     });
     card.appendChild(box);
+    const b=el("div","coll-form-buttons coll-bottom-main");
+    b.appendChild(button("coll-main","Use My Own Words",viewCreate));
+    card.appendChild(b);
   }
 
 
@@ -165,7 +177,7 @@
     opts=opts||{};
     const editing=!!w,session=!!opts.session,creating=!!opts.create;
     card.textContent="";
-    card.appendChild(head(editing?"Edit Word":"New Word"));
+    card.appendChild(head(editing?"Edit Word":"New Word",session?null:(opts.cancel||viewMain)));
     const sc=el("div","coll-scroll");card.appendChild(sc);
 
     let toks=editing?tokensFromCloze(w.sentence):[];
@@ -246,8 +258,7 @@
     if(creating)opts.cancel=opts.cancel||viewMain;
     b.appendChild(button("coll-main","Save",save));
     if(editing&&!session)b.appendChild(button("coll-link","Delete Word",()=>viewRemove(w)));
-    b.appendChild(button("coll-link","Cancel",session?close:(opts.cancel||viewMain)));
-    card.appendChild(b);
+    sc.appendChild(b);                                   // Save at the very END of the form (v2.100): you pass every field first
     if(!editing)setTimeout(()=>fSentence.focus(),60);
   }
 
@@ -303,7 +314,7 @@ Rules:
   // Starter-Set → own words: name, then import a list or type the first word.
   function viewCreate(){
     card.textContent="";
-    card.appendChild(head("Your Own Words"));
+    card.appendChild(head("Your Own Words",viewMain));
     const sc=el("div","coll-scroll");card.appendChild(sc);
     sc.appendChild(el("p","coll-text","Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
     const l=el("label","coll-label","Collection Name",{for:"cfName"});sc.appendChild(l);
@@ -312,14 +323,13 @@ Rules:
     const b=el("div","coll-form-buttons");
     b.appendChild(button("coll-main","Import a List",()=>viewImport({create:true,name:nm()})));
     b.appendChild(button("coll-quiet","Type the First Word",()=>viewForm(null,{create:true,name:nm(),cancel:viewCreate})));
-    b.appendChild(button("coll-link","Cancel",viewMain));
     card.appendChild(b);
   }
 
   // Paste the AI's answer or pick a file. opts.create: this list starts a new collection.
   function viewImport(opts){
     card.textContent="";
-    card.appendChild(head(opts.create?"Import a List":"Import Words"));
+    card.appendChild(head(opts.create?"Import a List":"Import Words",opts.create?viewCreate:viewMain));
     const sc=el("div","coll-scroll");card.appendChild(sc);
     const intro=el("p","coll-text");intro.style.marginBottom="10px";
     intro.appendChild(document.createTextNode("Ask an AI for example sentences for your words and paste its answer here. To get the right format: "));
@@ -359,7 +369,6 @@ Rules:
 
     const b=el("div","coll-form-buttons");
     b.appendChild(button("coll-main",opts.create?"Create Collection":"Add",()=>run(ta.value)));
-    b.appendChild(button("coll-link","Cancel",opts.create?viewCreate:viewMain));
     card.appendChild(b);
   }
 
@@ -383,21 +392,20 @@ Rules:
   // Shows the format block and copies it.
   function viewFormat(back){
     card.textContent="";
-    card.appendChild(head("Format for the AI"));
+    card.appendChild(head("Format for the AI",back));
     const sc=el("div","coll-scroll");card.appendChild(sc);
     sc.appendChild(el("p","coll-text","First tell your AI what you want - which words, which level, which language for the translations. Then add this text:"));
     sc.appendChild(el("pre","coll-pre",FORMAT_BLOCK));
     const b=el("div","coll-form-buttons");
     const copyBtn=button("coll-main","Copy",()=>copyText(FORMAT_BLOCK,ok=>{copyBtn.textContent=ok?"Copied ✓":"Please select the text above and copy it"}));
     b.appendChild(copyBtn);
-    b.appendChild(button("coll-link","Back",back));
     card.appendChild(b);
   }
 
   /* ---------- rename ---------- */
   function viewRename(){
     card.textContent="";
-    card.appendChild(head("Rename"));
+    card.appendChild(head("Rename",viewMain));
     const input=el("input","coll-name-input",null,{type:"text",maxlength:"40","aria-label":"Collection Name",autocomplete:"off"});
     input.value=name();
     const save=()=>{C.rename(input.value);refreshButtons();viewMain()};
@@ -405,7 +413,6 @@ Rules:
     card.appendChild(input);
     const b=el("div","coll-buttons");b.style.marginTop="22px";
     b.appendChild(button("coll-main","Save",save));
-    b.appendChild(button("coll-link","Cancel",viewMain));
     card.appendChild(b);
     setTimeout(()=>{input.focus();input.select()},60);
   }
