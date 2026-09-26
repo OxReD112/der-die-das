@@ -1,938 +1,2740 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<script>
-(function(){
-  if(localStorage.getItem("deutschThemeV1")==="light"){
-    document.documentElement.setAttribute("data-theme","light");
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <meta content="#1b1b1d" name="theme-color"/>
+  <script>
+   window.DeutschTheme = (function(){
+     var THEME_KEY = "deutschThemeV1";
+     var DARK_META = "#1b1b1d";
+     var LIGHT_META = "#f6f4f1";
+
+     function isLight(){ return localStorage.getItem(THEME_KEY) === "light"; }
+
+     function setMeta(light){
+       var meta = document.querySelector('meta[name="theme-color"]');
+       if(meta) meta.setAttribute("content", light ? LIGHT_META : DARK_META);
+     }
+
+     // Icons live at the same path as their dark counterpart, named
+     // "icon_light.webp" instead of "icon.webp". The dark path is cached
+     // on first run so repeated theme switches never double-transform it.
+     function applyIcons(light){
+       document.querySelectorAll(".tile-art img").forEach(function(img){
+         if(!img.dataset.iconDark) img.dataset.iconDark = img.getAttribute("src");
+         if(!img.dataset.iconLight) img.dataset.iconLight = img.dataset.iconDark.replace(/icon\.webp$/, "icon_light.webp");
+         img.src = light ? img.dataset.iconLight : img.dataset.iconDark;
+       });
+     }
+
+     function apply(light){
+       if(light) document.documentElement.setAttribute("data-theme", "light");
+       else document.documentElement.removeAttribute("data-theme");
+       setMeta(light);
+       applyIcons(light);
+     }
+
+     function set(light){
+       localStorage.setItem(THEME_KEY, light ? "light" : "dark");
+       apply(light);
+     }
+
+     // Applied immediately so the page never paints the wrong theme.
+     // Icons can't be touched yet (the body hasn't parsed), so applyIcons()
+     // here is a no-op; the settings panel calls apply() again once ready.
+     if(isLight()) document.documentElement.setAttribute("data-theme", "light");
+
+     return {isLight: isLight, apply: apply, set: set};
+   })();
+  </script>
+  <title>
+   Deutsch
+  </title>
+  <style>
+   :root {
+  /* ===== Core palette (dark, default) ===== */
+  --bg: #1b1b1d;
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --mint: #5bc8a4;
+
+  /* ===== Card system ===== */
+  --card-bg: rgba(255,255,255,.018);
+  --card-bg-soft: rgba(255,255,255,.014);
+  --card-border: rgba(255,255,255,.09);
+  --card-radius: 25px;
+  --vocab-border: rgba(255,255,255,.10);
+
+  /* ===== Completion glow ===== */
+  --mint-core: rgba(91,200,164,.38);
+  --mint-mid: rgba(91,200,164,.24);
+
+  /* ===== Text roles ===== */
+  --label-text: #d8d6d2;
+  --strong-text: #f0efec;
+  --dim-text: #77777d;
+  --faint-text-1: rgba(190,189,186,.58);
+  --faint-text-2: rgba(190,189,186,.68);
+  --faint-text-3: rgba(169,167,163,.58);
+  --tertiary-text: #66666b;
+  --tertiary-text-active: #929298;
+  --quaternary-text: #55555a;
+
+  /* ===== Surfaces / overlays ===== */
+  --today-track: rgba(255,255,255,.09);
+  --tile-today-sheen: rgba(255,255,255,.025);
+  --back-btn-border: rgba(255,255,255,.07);
+  --toggle-track: rgba(255,255,255,.12);
+  --toggle-track-solid: #363638; /* --toggle-track on --bg, opaque */
+  --confirm-btn-border: rgba(255,255,255,.08);
+  --confirm-btn-bg: rgba(255,255,255,.025);
+  --confirm-scrim: rgba(0,0,0,.34);
+  --confirm-shadow: rgba(0,0,0,.22);
+
+  /* ===== Layout ===== */
+  --dashboard-width: 430px;
+  --mobile-dashboard-width: 350px;
+}
+
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --text: #242426;
+  --muted: #727278;
+  --mint: #3fa68a;
+
+  --card-bg: rgba(0,0,0,.03);
+  --card-bg-soft: rgba(0,0,0,.025);
+  --card-border: rgba(0,0,0,.03);
+  --vocab-border: rgba(0,0,0,.03);
+
+  --mint-core: rgba(63,166,138,.30);
+  --mint-mid: rgba(63,166,138,.18);
+
+  --label-text: #4a4a4d;
+  --strong-text: #242426;
+  --dim-text: #8a8a8f;
+  --faint-text-1: rgba(60,60,58,.55);
+  --faint-text-2: rgba(60,60,58,.65);
+  --faint-text-3: rgba(60,60,58,.50);
+  --tertiary-text: #8a8a8f;
+  --tertiary-text-active: #58585c;
+  --quaternary-text: #9a9a9e;
+
+  --today-track: rgba(0,0,0,.09);
+  --tile-today-sheen: rgba(0,0,0,.025);
+  --back-btn-border: rgba(0,0,0,.08);
+  --toggle-track: rgba(0,0,0,.12);
+  --toggle-track-solid: #d9d7d4; /* --toggle-track on --bg, opaque */
+  --confirm-btn-border: rgba(0,0,0,.08);
+  --confirm-btn-bg: rgba(0,0,0,.025);
+  --confirm-scrim: rgba(0,0,0,.20);
+  --confirm-shadow: rgba(0,0,0,.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  padding:
+    calc(env(safe-area-inset-top) + 28px)
+    max(24px, env(safe-area-inset-right))
+    calc(env(safe-area-inset-bottom) + 32px)
+    max(24px, env(safe-area-inset-left));
+}
+
+html.app-open,
+html.app-open body {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Home layout
+   -------------------------------------------------------------------------- */
+
+.page {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
+  display: flex;
+  flex-direction: column;
+  padding-top: 56px;
+}
+
+/* v5.19: the header covers everything from the very top of the screen
+   (status bar area) down to under the title, full width, so scrolled
+   tiles never show above it. A short fade softens the lower edge. */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: calc(env(safe-area-inset-top) + 22px) 0 0;
+  background: var(--bg);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 18px;
+  background: linear-gradient(var(--bg), color-mix(in srgb, var(--bg) 0%, transparent));
+  pointer-events: none;
+}
+
+header h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -.7px;
+  font-weight: 750;
+}
+
+.intro {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Personal greeting (v5.18): replaces the static intro line.
+   Always reserves two lines of height so the tiles never jump.
+   Line 1 = intro style, line 2 = smaller and softer. Max. 240px wide.
+   Phrases live in greetings.js; rules in Documentation/PERSONAL_GREETINGS.md */
+.intro.greeting {
+  width: min(100%, 240px);
+  min-height: calc(15px * 1.4 + 2px + 13px * 1.4);
+  margin: 0 auto 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .25s ease;
+}
+.intro.greeting.is-fading { opacity: 0; }
+.greeting-line { display: block; white-space: nowrap; }
+.greeting-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--tertiary-text);
+  white-space: nowrap;
+}
+.greeting-sub:empty { display: none; }
+@media (prefers-reduced-motion: reduce) { .intro.greeting { transition: none; } }
+
+/* --------------------------------------------------------------------------
+   Dashboard
+   -------------------------------------------------------------------------- */
+
+.dashboard.mosaic {
+  --tile-gap: 10px;
+  --tile-row: 141px;
+  width: min(100%, var(--dashboard-width));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
+}
+
+/* Paged tile block (iPhone home-screen style).
+   Each page is a 3x2 grid. The block scrolls horizontally and snaps
+   one whole page at a time (scroll-snap-stop: always = never skip pages). */
+.tile-pager {
+  position: relative;
+}
+
+.tile-pages {
+  display: flex;
+  gap: var(--tile-gap);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tile-pages::-webkit-scrollbar {
+  display: none;
+}
+
+.tile-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, var(--tile-row));
+  gap: var(--tile-gap);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Page dots */
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.page-dot {
+  width: 6px;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--today-track);
+  cursor: pointer;
+  transition: background .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-dot.is-active {
+  background: var(--muted);
+}
+
+/* Empty placeholder card (for testing the pages) */
+.mosaic .tile-placeholder {
+  cursor: default;
+}
+
+/* Arrow buttons: only on devices with a real hover-capable pointer */
+.rail-arrow {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-arrow {
+    position: absolute;
+    z-index: 10;
+    top: calc(var(--tile-row) + var(--tile-gap) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0 0 2px;
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--muted);
+    font: 300 24px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
+      "Helvetica Neue", sans-serif;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: opacity .2s ease, color .2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-})();
-</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Wortschatz</title>
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<style>
-:root{
-  /* ===== PALETTE ===== */
-  --green:#5bc8a4;
-  --red:#ff7770;
 
-  --gray-100:#f2f0ed;
-  --gray-300:#c8c7c4;
-  --gray-500:#8f8f94;
-  --gray-700:rgba(255,255,255,.10);
+  .rail-prev { left: 6px; }
+  .rail-next { right: 6px; }
 
-  /* ===== SURFACES ===== */
-  --bg:#1b1b1d;
-  --surface:#222225;
+  .tile-pager:hover .rail-arrow.is-available,
+  .rail-arrow.is-available:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 
-  /* ===== SEMANTIC COLORS ===== */
-  --text:var(--gray-100);
-  --muted:var(--gray-500);
-  --brand:#aaa69f;
-  --accent:var(--green);
-  --error:var(--red);
+/* Heute card at the bottom of the home page, under Phrase of the Week */
+.today-bottom {
+  width: min(100%, var(--dashboard-width));
+  margin: 18px auto 0;
+}
 
-  --line:rgba(91,200,164,.45);
-  --progress-track:#292a2c;
-  --progress-fill:#777;
-  --blank-line:rgba(243,241,237,.72);
+.mosaic .tile-today.tile-today-wide {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  row-gap: 12px;
+  padding: 16px 20px 18px;
+  text-align: left;
+}
 
-  /* ===== CONTROLS ===== */
-  --button-bg:#eee8df;
-  --button-text:#18181a;
+.tile-today-wide .today-label {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
 
-  /* ===== DETAIL TEXT ===== */
-  --divider:var(--gray-700);
-  --base-text:var(--gray-300);
-  --meaning-text:#8f8f94;
-  --grammar-text:#8f8f94;
-  --continue-text:#9b9b9f;
-  --continue-hover:#d5d5d7;
+.tile-today-wide .today-score {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
 
-  /* ===== ANSWER DIFFERENCES ===== */
-  --diff-word-bg:rgba(255,255,255,.025);
-  --diff-same:var(--green);
-  --diff-wrong:var(--error);
-  --diff-error-bg:rgba(255,119,112,.10);
-  --diff-missing:var(--error);
-  --diff-arrow:#e8d9d9;
-  --diff-correct:#f2f0ed;
+.tile-today-wide .today-number,
+.tile-today-wide .today-unit {
+  margin-top: 0;
+}
 
-  /* ===== OTHER COMPONENTS ===== */
-  --done-score:var(--text);
-  --add-words-bg:#242426;
-  --add-words-text:var(--text);
-  --version:#4f4f53;
+.tile-today-wide .today-number {
+  font-size: 24px;
+}
 
-  /* ===== FEEDBACK EFFECTS ===== */
-  --good-glow:radial-gradient(ellipse,rgba(91,200,164,.24) 0%,rgba(91,200,164,.12) 28%,rgba(91,200,164,.04) 52%,transparent 74%);
-  --bad-glow:radial-gradient(ellipse,rgba(255,119,112,.34) 0%,rgba(255,119,112,.17) 30%,rgba(255,119,112,.055) 55%,transparent 76%);
-  --good-line-shadow:0 0 14px rgba(91,200,164,.3);
-  --bad-line-shadow:0 0 14px rgba(255,119,112,.34);
+.tile-today-wide .today-unit {
+  font-size: 11px;
+}
+
+.tile-today-wide .today-progress {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  margin-top: 0;
+}
+
+.module {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mosaic .tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--card-bg);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Wortschatz card
+   -------------------------------------------------------------------------- */
+
+.mosaic .tile-vocab {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  align-items: center;
+
+  border-color: var(--vocab-border);
+  background: var(--card-bg-soft);
+  box-shadow: none;
+  isolation: isolate;
+  overflow: hidden;
+  clip-path: inset(0 round var(--card-radius));
+  -webkit-clip-path: inset(0 round var(--card-radius));
+}
+
+.mosaic .tile-vocab::before,
+.mosaic .tile-vocab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+}
+
+.mosaic .tile-vocab::before {
+  background: none;
+}
+
+.mosaic .tile-vocab::after {
+  background: none;
+}
+
+.mosaic .tile-vocab .tile-art {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  filter: none;
+  background: none;
+  box-shadow: none;
+}
+
+.mosaic .tile-vocab .tile-art img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: left center;
+  filter: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.mosaic .tile-vocab .tile-copy {
+  position: absolute;
+  z-index: 4;
+  left: auto;
+  right: 7px;
+  top: 50%;
+  bottom: auto;
+  width: 42%;
+  padding: 0;
+  transform: translateY(-50%);
+  text-align: left;
+}
+
+.mosaic .tile-vocab .name,
+.mosaic .tile-vocab .status {
+  text-align: left;
+}
+
+.mosaic .tile-vocab .name {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.12;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.mosaic .tile-vocab .status {
+  min-height: 14px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.15;
+}
+
+.mosaic .tile-vocab.is-done::before {
+  background:
+    radial-gradient(circle at 100% 0%,
+      color-mix(in srgb, var(--mint) 40%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 14%,
+      color-mix(in srgb, var(--mint) 12%, transparent) 28%,
+      color-mix(in srgb, var(--mint) 3.5%, transparent) 42%,
+      transparent 55%),
+    radial-gradient(circle at 0% 100%,
+      color-mix(in srgb, var(--mint) 58%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 36%, transparent) 10%,
+      color-mix(in srgb, var(--mint) 17%, transparent) 20%,
+      color-mix(in srgb, var(--mint) 5%, transparent) 30%,
+      transparent 40%);
+}
+
+.mosaic .tile-vocab.is-done::after {
+  background:
+    radial-gradient(circle at 100% 0%,
+      color-mix(in srgb, var(--mint) 23%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 9%, transparent) 16%,
+      transparent 31%),
+    radial-gradient(circle at 0% 100%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 10%, transparent) 16%,
+      transparent 31%);
+}
+
+.mosaic .tile-vocab.is-done .status {
+  color: var(--mint);
 }
 
 
-[data-theme="light"]{
-  /* ===== PALETTE ===== */
-  --green:#3fa68a;
-  --red:#e95e66;
 
-  --gray-100:#242426;
-  --gray-300:#727278;
-  --gray-500:#727278;
-  --gray-700:rgba(0,0,0,.10);
+/* --------------------------------------------------------------------------
+   Compact exercise cards
+   -------------------------------------------------------------------------- */
 
-  /* ===== SURFACES ===== */
-  --bg:#f6f4f1;
-  --surface:var(--bg);
-
-  /* ===== SEMANTIC COLORS ===== */
-  --text:var(--gray-100);
-  --muted:var(--gray-500);
-  --brand:#6b6863;
-  --accent:var(--green);
-  --error:var(--red);
-
-  --line:rgba(63,166,138,.42);
-  --progress-track:#dedee1;
-  --progress-fill:#8d8d92;
-  --blank-line:rgba(36,36,38,.38);
-
-  /* ===== CONTROLS ===== */
-  --button-bg:#303033;
-  --button-text:#f7f5f2;
-
-  /* ===== DETAIL TEXT ===== */
-  --divider:var(--gray-700);
-  --base-text:#55565b;
-  --meaning-text:#55565b;
-  --grammar-text:#727278;
-  --continue-text:#77777c;
-  --continue-hover:#77777c;
-
-  /* ===== ANSWER DIFFERENCES ===== */
-  --diff-word-bg:rgba(36,36,38,.035);
-  --diff-same:var(--green);
-  --diff-wrong:var(--error);
-  --diff-error-bg:rgba(233,94,102,.10);
-  --diff-missing:var(--error);
-  --diff-arrow:#77777c;
-  --diff-correct:#55565b;
-
-  /* ===== OTHER COMPONENTS ===== */
-  --done-score:var(--text);
-  --add-words-bg:#ffffff;
-  --add-words-text:var(--text);
-  --version:#9a9a9f;
-
-  /* ===== FEEDBACK EFFECTS ===== */
-  --good-glow:radial-gradient(ellipse at center,
-    rgba(63,166,138,.16) 0%,
-    rgba(63,166,138,.08) 28%,
-    rgba(63,166,138,.025) 52%,
-    transparent 74%);
-  --bad-glow:radial-gradient(ellipse at center,
-    rgba(233,94,102,.19) 0%,
-    rgba(233,94,102,.09) 30%,
-    rgba(233,94,102,.025) 55%,
-    transparent 76%);
-  --good-line-shadow:0 0 14px rgba(63,166,138,.22);
-  --bad-line-shadow:0 0 14px rgba(233,94,102,.24);
+.mosaic .tile-small {
+  border-radius: var(--card-radius);
+  overflow: hidden;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:manipulation}
-button{font:inherit}
-.app{width:min(760px,100%);margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
-#question{width:min(560px,100%)}
-#question.hidden{display:none}
-.top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
-.brand{font:26px Georgia,serif;color:var(--brand)}
-.progress{height:3px;background:var(--progress-track);border-radius:8px;overflow:hidden}
-.progress div{height:100%;background:var(--progress-fill);transition:width .2s}
-.stage{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(38px,8vh,80px);text-align:center}
-.topZone{width:min(620px,100%)}
-.sentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px}
-.blank{display:inline-block;width:1.87em;height:.82em;border-bottom:2px solid var(--blank-line);vertical-align:baseline;margin:0 .08em}
-.translation{margin-top:28px;color:var(--muted);font-size:clamp(16px,4.2vw,22px)}
-.inputbox{margin-top:34px;width:min(620px,100%);height:64px;border:1.5px solid var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;outline:none;background:var(--surface);color:var(--text);text-align:center;caret-color:var(--accent)}
-.inputbox:focus{border-color:var(--accent)}
-.check{margin-top:14px;width:min(620px,100%);border:0;border-radius:16px;padding:16px;background:var(--button-bg);color:var(--button-text);font-weight:750;font-size:17px}
-.feedback{display:none;width:min(690px,100%);position:relative;isolation:isolate;padding:0 0 24px;overflow:visible}
-.feedback.show{display:block}
-.feedbackShell{display:none;width:min(690px,100%);flex-direction:column;align-items:center}
-.feedbackShell.show{display:flex}
-.feedbackShell .feedback{width:100%}.feedback .topZone{margin-left:auto;margin-right:auto}
-.continue{
-  margin-top:18px;
-  width:auto;
-  border:0;
-  border-radius:15px;
-  padding:10px 18px;
-  background:var(--button-bg);
-  color:var(--button-text);
-  font-weight:700;
-  font-size:17px;
-  cursor:pointer;
-  transition:transform .16s ease;
+
+/* Small tiles are placed by the .tile-page grid. */
+
+.mosaic .tile-small .tile-art {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  overflow: visible;
+  margin: 0;
+  pointer-events: none;
 }
-.continue:hover{
-  transform:scale(1.12);
-  color:var(--button-text);
+
+.mosaic .tile-small .tile-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: unset;
+  object-position: initial;
+  border-radius: 0;
 }
-.continue:active{transform:scale(1.05)}
-@media(max-width:699px){.feedbackShell{touch-action:manipulation;will-change:transform,opacity}}
-@keyframes glowIn{from{opacity:0}to{opacity:1}}
-@keyframes audioPop{0%{transform:scale(1) rotate(0deg)}18%{transform:scale(1.07) rotate(-4deg);animation-timing-function:cubic-bezier(.22,.8,.28,1)}42%{transform:scale(1.11) rotate(3.5deg);animation-timing-function:cubic-bezier(.2,.9,.25,1)}62%{transform:scale(1.04) rotate(-1.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}80%{transform:scale(1.015) rotate(.8deg);animation-timing-function:cubic-bezier(.3,.7,.3,1)}100%{transform:scale(1) rotate(0deg)}}.answerTop{cursor:pointer}.answerTop .answerSentence{display:inline}.answerTop .answerTranslation{display:block}.speakTop{display:block;font-size:clamp(28px,7vw,42px);width:1em;height:auto;margin:16px auto 18px;padding:0;border:0;background:transparent;line-height:0;cursor:pointer;animation:audioPop .72s cubic-bezier(.22,.8,.28,1) 1.55s both}.speakTopIcon{display:block;width:100%;height:auto}.speakTop:active{transform:scale(.94)}.answerSentence{font-size:clamp(28px,7vw,42px);line-height:1.28;letter-spacing:-.025em;max-width:620px;margin:0 auto}.answerSentence .target{font-weight:600}.feedback.good .answerSentence .target{color:var(--accent)}.feedback.bad .answerSentence .target{color:var(--text)}
-.answerTranslation{margin-top:18px;color:var(--muted);font-size:clamp(17px,4.2vw,22px)}
-.targetForm{display:inline-block;margin-top:22px;color:var(--accent);font:36px Georgia,serif;background:color-mix(in srgb,var(--accent) 6%,transparent);padding:1px 5px}.feedback.bad .targetForm{display:none}
-.diffBlock{display:none;margin-top:26px;padding-bottom:0;font:32px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25}.feedback.bad .diffBlock{display:block}.diffWord{display:inline-block;padding:2px 5px;background:var(--diff-word-bg)}.diffSame{color:var(--diff-same)}.diffWrong{color:var(--diff-wrong);background:var(--diff-error-bg)}.diffMissing{color:var(--diff-missing);background:var(--diff-error-bg)}.diffArrow img{display:block;width:1em;height:1em;object-fit:contain;margin:0 auto}.diffArrow{margin:1px 0;color:var(--diff-arrow);font:24px/1 sans-serif}.diffCorrect{color:var(--diff-correct)}.diffCorrect .diffSame{color:var(--diff-same)}
-.answerTargetRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:0}.answerTargetRow .base{margin:0}
-.detail{position:relative;border-top:1px solid var(--divider);padding-top:24px;color:var(--base-text);text-align:center;isolation:isolate}.detail::before{content:"";position:absolute;left:50%;top:-1px;width:0;height:1px;transform:translateX(-50%);background:var(--accent);box-shadow:var(--good-line-shadow);z-index:2}.feedback.bad .detail::before{background:var(--error);box-shadow:var(--bad-line-shadow)}.feedback.show .detail::before{animation:lineGrow .62s cubic-bezier(.2,.8,.2,1) forwards}.detail::after{content:"";position:absolute;z-index:-1;left:50%;top:0;width:min(760px,100vw);height:360px;transform:translate(-50%,-50%);pointer-events:none;opacity:0}.feedback.good .detail::after{background:var(--good-glow);animation:glowIn .65s ease forwards}.feedback.bad .detail::after{background:var(--bad-glow);animation:glowIn .65s ease forwards}@keyframes lineGrow{to{width:100%}}
-.base{font-size:25px;margin-bottom:10px}.meaning{font-size:20px;color:var(--meaning-text)}.grammar{margin-top:14px;font-size:14px;color:var(--grammar-text)}
 
-
-.done{display:none;flex:1;align-items:center;justify-content:center;text-align:center}.done.show{display:flex}.done h1{font:46px Georgia,serif;margin:0 0 15px}.done p{color:var(--muted);font-size:18px;margin:0}.doneScore{margin-top:18px;color:var(--done-score);font-size:17px}.addWords{margin:30px auto 0;width:min(360px,82vw);border:1px solid var(--divider);border-radius:16px;padding:15px 18px;background:var(--add-words-bg);color:var(--add-words-text);font-weight:700;font-size:16px}.allAdded{display:none;margin-top:25px;color:var(--muted);font-size:15px}
-.version{text-align:center;color:var(--version);font-size:10px;margin-top:18px}
-@media(max-width:699px){.app{padding-left:16px;padding-right:16px}.stage{padding-top:34px}#question{display:flex;flex-direction:column;align-items:center;width:100%}#question .topZone{order:1}.feedback .topZone{width:100%}#question .inputbox{order:3}#question .check{order:4}#question #keyboardMount{order:5;width:100%}.topZone{width:min(620px,100%)}.feedbackShell{margin-top:0}.feedback{padding-top:0}.answerTop{text-align:center}.answerTop .answerSentence{display:inline}.sentence,.answerSentence{font-size:28px}.speakTop{width:1.25em}.topZone .sentence,.topZone .answerSentence{min-height:2.56em}.translation{font-size:16px;margin-top:28px}.answerTranslation{font-size:17px}.inputbox{height:60px;margin-top:28px}.check{display:none}.targetForm{margin-top:22px}.diffBlock{margin-top:22px;padding-bottom:0;font-size:28px}.answerTargetRow{margin-top:0}.detail{padding-top:12px}.grammar{margin-top:26px}}
-
-/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
-   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
-:root{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(242,240,237,.55);
-  --end-again-line:rgba(255,255,255,.10);
-  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
-  --end-main-text:#1b1b1d;
+.mosaic .tile-small .tile-copy {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 40px 5px 8px;
+  text-align: center;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--tile-surface) 0%, transparent) 0%,
+    color-mix(in srgb, var(--tile-surface) 8%, transparent) 12%,
+    color-mix(in srgb, var(--tile-surface) 34%, transparent) 32%,
+    color-mix(in srgb, var(--tile-surface) 72%, transparent) 58%,
+    color-mix(in srgb, var(--tile-surface) 94%, transparent) 82%,
+    color-mix(in srgb, var(--tile-surface) 98%, transparent) 100%
+  );
 }
-[data-theme="light"]{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(36,36,38,.55);
-  --end-again-line:rgba(0,0,0,.10);
-  --end-main-bg:#242426;
-  --end-main-text:#f6f4f1;
+
+.mosaic .tile-small .name,
+.mosaic .tile-small .status {
+  position: relative;
+  z-index: 7;
 }
-#done .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
-#done #addWords,#done #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
-#done #addWords{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
-#done #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
-#done #addWords:active,#done #homeBack:active{transform:scale(.97);filter:brightness(.94)}
-#done .finish-actions{margin-top:30px}
-:root{--start-version:rgba(255,255,255,.24)}
-[data-theme="light"]{--start-version:rgba(36,36,38,.34)}
-.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
 
-/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
-   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
-   Green stays reserved for "correct". */
-:root{--bar-track:rgba(255,255,255,.10)}
-[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
-header .brand{color:var(--muted)}
-header .progress{background:var(--bar-track)}
-header .progress div{background:var(--muted)}
+.mosaic .tile-small .name {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.12;
+  font-weight: 650;
+}
 
-/* Question text sizes (Design Police): sentences 28px on phones */
-@media(max-width:699px){#sentence,#answerSentence{font-size:28px}}
+.mosaic .tile-small .status {
+  min-height: 14px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.15;
+}
 
-/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
-   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
-   typed text 24px in the group's font. Never green (green = correct).
-   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
-:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
-@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
-@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
-#answerInput{height:58px;min-height:58px;border:1px solid var(--field-line);border-radius:18px;background-color:var(--field-bg);
-  box-shadow:none;outline:none;padding:0 17px;font:400 24px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:var(--text)}
-#answerInput:focus{border-color:var(--field-line);box-shadow:none}
-#answerInput:placeholder-shown{caret-color:transparent;background-image:linear-gradient(var(--text),var(--text));background-repeat:no-repeat;
-  background-position:center;background-size:2px 28px;animation:fieldCaretBg 1.1s steps(1) infinite}
-@media(prefers-reduced-motion:reduce){#answerInput:placeholder-shown{animation:none}}
+.mosaic .tile-small::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 5;
+  right: -90px;
+  bottom: -90px;
+  left: auto;
+  top: auto;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  opacity: 1;
+  border-radius: 50%;
+  background: none;
+}
 
-/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
-   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
-   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
-:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
-#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
-  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;width:100%;padding:0;}
-#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
-#continue:active{transform:scale(.97);filter:brightness(.94)}
+.mosaic .tile-small.is-done::after {
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--mint-core) 0%,
+    var(--mint-mid) 25%,
+    color-mix(in srgb, var(--mint) 10%, transparent) 48%,
+    color-mix(in srgb, var(--mint) 3.5%, transparent) 70%,
+    transparent 82%
+  );
+}
 
-/* Wortschatz: "Weiter" half as wide, centred (its answer area is very wide) */
-#continue{width:50%;margin-left:auto;margin-right:auto;display:block}
+.mosaic .tile-small.is-done .status {
+  color: var(--mint);
+}
 
-/* Version number only on the start screen and the summary screen ("Fertig für heute"), not during the exercise (Design Police 2026-09-25; start screen 2026-09-26) */
-body:not(:has(#done.show)):not(:has(#start.show)) .version-mark{display:none}
+/* --------------------------------------------------------------------------
+   Heute card
+   -------------------------------------------------------------------------- */
 
-/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
-   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
-#desktopCheck{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
-  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-#desktopCheck:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
-#desktopCheck:active{transform:scale(.97);filter:brightness(.94)}
+.mosaic .tile-today {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  background:
+    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--mint) 5.5%, transparent), transparent 64%),
+    var(--card-bg-soft);
+  box-shadow: none;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-/* ===== TYPO TOLERANCE (2026-09-25) · only for words at level 2+ =====
-   A close answer: the typing field gets a subtle red frame + a short side-to-side shake; the text stays.
-   "Nur Tippfehler": quiet text button under Weiter on the wrong-answer screen. */
-@keyframes fieldNudge{0%,100%{transform:translateX(0)}18%{transform:translateX(-6px)}38%{transform:translateX(5px)}58%{transform:translateX(-3px)}78%{transform:translateX(2px)}}
-#answerInput.almost,#answerInput.almost:focus{border-color:color-mix(in srgb,var(--error) 60%,transparent)}
-#answerInput.nudge{animation:fieldNudge .34s ease-out}
-@media(prefers-reduced-motion:reduce){#answerInput.nudge{animation:none}}
-/* "Nur Tippfehler" = checkbox + label (no frame, so it doesn't compete with Weiter). Secondary text colour;
-   the tick uses the same grey (green stays reserved for "correct"). Tap area bigger than it looks. */
-#typoBtn{display:none;position:relative;align-items:center;gap:10px;margin:8px auto 0;padding:12px 16px;border:0;background:none;
-  color:var(--base-text);font:400 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;
+.mosaic .tile-today::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--tile-today-sheen),
+    transparent 58%
+  );
+}
+
+.mosaic .tile-today > * {
+  position: relative;
+  z-index: 1;
+}
+
+.today-label {
+  color: var(--label-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.today-number {
+  margin-top: 10px;
+  color: var(--strong-text);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 650;
+}
+
+.today-unit {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.today-progress {
+  width: 72%;
+  height: 3px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--today-track);
+}
+
+.today-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--mint);
+  transition: width .25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Phrase of the Week
+   -------------------------------------------------------------------------- */
+
+.home-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-track {
+  display: flex;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform .42s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+.home-screen,
+.phrase-screen {
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+}
+
+.home-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+}
+
+.phrase-screen {
+  position: relative;
+  /* -56px = .page padding-top; without it the page was always 56px too tall and scrolled */
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px - 56px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding:
+    calc(env(safe-area-inset-top) + 56px)
+    max(24px, env(safe-area-inset-right))
+    calc(env(safe-area-inset-bottom) + 32px)
+    max(24px, env(safe-area-inset-left));
+  overflow: hidden;
+}
+
+.phrase-screen-content {
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  text-align: center;
+}
+
+.phrase-screen .phrase-week-label {
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.phrase-week-label {
+  color: var(--dim-text);
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: .45px;
+  text-transform: uppercase;
+}
+
+.phrase-week-title {
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -.35px;
+}
+
+.phrase-week-literal {
+  margin-top: 6px;
+  color: var(--faint-text-1);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.phrase-week-meaning {
+  margin-top: 28px;
+  color: var(--faint-text-2);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.phrase-week-example {
+  margin-top: 18px;
+  color: var(--faint-text-3);
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.phrase-screen-back {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px auto 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--back-btn-border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+  font: 400 28px/42px -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-screen-back:active {
+  opacity: .65;
+}
+
+.phrase-screen-back-arrow {
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.phrase-week-home-row {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(100%, 430px);
+  margin: 28px auto 0;
+  padding: 10px 20px 22px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-week-home-row:active {
+  opacity: .65;
+}
+
+.phrase-week-home-copy {
+  min-width: 0;
+  text-align: left;
+}
+
+.phrase-week-home-title {
+  margin-top: 5px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -.35px;
+}
+
+.phrase-week-home-literal {
+  margin-top: 1px;
+  color: var(--faint-text-1);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.phrase-week-arrow {
+  display: block;
+  font: 300 34px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", sans-serif;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 430px) {
+  .phrase-screen-content {
+    width: min(100%, 350px);
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .phrase-week-home-row {
+    width: min(100%, 350px);
+    margin-top: 22px;
+    padding: 10px 4px 14px;
+  }
+}
+
+.backup-file {
+  display: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   Settings
+   -------------------------------------------------------------------------- */
+
+.settings-layer{position:fixed;inset:0;z-index:10;pointer-events:none}
+.settings-panel{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;padding:calc(env(safe-area-inset-top) + 82px) max(24px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 32px) max(24px,env(safe-area-inset-left));background:var(--bg);transform:translateY(100%);transition:transform .42s cubic-bezier(.22,.61,.36,1);will-change:transform;overflow:auto;overscroll-behavior:contain;pointer-events:none}
+.settings-panel.is-open{transform:translateY(0);pointer-events:auto}
+/* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
+.settings-panel,.settings-panel button,.settings-confirm button{touch-action:manipulation}
+.settings-launcher{position:absolute;right:50%;transform:translateX(50%);bottom:calc(env(safe-area-inset-bottom) + 28px);z-index:2;appearance:none;-webkit-appearance:none;border:0;padding:8px 12px;background:transparent;color:var(--tertiary-text);font:500 12px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:1;transition:opacity .2s ease}
+.settings-launcher:active{color:var(--tertiary-text-active)}
+.home-settings-open .settings-launcher{opacity:0;pointer-events:none}
+.settings-content{width:min(100%,430px);padding-top:24px}
+.settings-title-row{position:relative;display:flex;align-items:center;justify-content:center}
+.settings-title{margin:0;text-align:center;font-size:22px;line-height:1.1;font-weight:700;letter-spacing:-.55px}
+.settings-close{position:absolute;right:0;top:50%;transform:translateY(-50%);appearance:none;-webkit-appearance:none;padding:0;border:0;background:transparent;color:color-mix(in srgb, var(--text) 62%, transparent);font:300 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-list{margin-top:54px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.settings-action{appearance:none;-webkit-appearance:none;width:100%;min-height:48px;padding:0;border:0;background:transparent;color:var(--label-text);font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-action-content{display:flex;align-items:baseline;gap:10px;min-width:0}
+.settings-action-note{color:var(--quaternary-text);font-size:10px;line-height:1.2;white-space:nowrap}
+#notificationNote{margin-top:6px}
+.settings-gap{height:48px}
+.settings-name-wrap{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
+.settings-name{appearance:none;-webkit-appearance:none;width:114.3%;max-width:228px;margin:0;flex:0 0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:var(--label-text);font:500 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:right;transform:scale(.875);transform-origin:right center;outline:none;caret-color:var(--mint)}
+.settings-name:not(:placeholder-shown){color:var(--mint)}
+.settings-name::placeholder{color:var(--quaternary-text);opacity:1}
+.settings-toggle{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;width:42px;height:25px;padding:0;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--muted);transition:transform .22s ease,background .22s ease}
+.settings-toggle[aria-checked="true"]{background:color-mix(in srgb, var(--mint) 30%, transparent)}
+.settings-toggle[aria-checked="true"]::after{transform:translateX(17px);background:var(--mint)}
+.settings-toggle:disabled{opacity:.5}
+.settings-lang{appearance:none;-webkit-appearance:none;position:relative;flex:0 0 auto;display:flex;width:88px;height:25px;padding:2px;border:0;border-radius:99px;background:var(--toggle-track);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-lang::before{content:"";position:absolute;top:2px;left:2px;width:42px;height:21px;border-radius:99px;background:var(--mint);transition:transform .22s ease}
+.settings-lang[data-lang="ru"]::before{transform:translateX(42px)}
+.settings-lang-opt{position:relative;flex:1 1 0;display:flex;align-items:center;justify-content:center;color:var(--muted);font:700 10.5px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:normal;transition:color .22s ease}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--toggle-track-solid)}
+.settings-confirm{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:950;display:none;align-items:center;justify-content:center;padding:24px;padding-top:calc(24px + env(safe-area-inset-top));background:var(--confirm-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.settings-confirm.is-open{display:flex}
+.settings-confirm-card{width:min(100%,360px);padding:28px 24px 22px;border:1px solid var(--card-border);border-radius:var(--card-radius);background:var(--bg);text-align:center;box-shadow:0 20px 60px var(--confirm-shadow)}
+.settings-confirm-title{font-size:20px;line-height:1.2;font-weight:700}
+.settings-confirm-text{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.5}
+.settings-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.settings-confirm-button{appearance:none;-webkit-appearance:none;min-height:44px;border:1px solid var(--confirm-btn-border);border-radius:14px;background:var(--confirm-btn-bg);color:var(--text);font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.settings-confirm-button:active{opacity:.65}
+.home-screen{transition:transform .42s cubic-bezier(.22,.61,.36,1),opacity .42s ease}
+.home-settings-open .home-screen{transform:translateY(-12vh);opacity:0;pointer-events:none}
+.settings-morph{position:fixed;left:0;top:0;z-index:6;display:flex;margin:0;padding:0;opacity:0;pointer-events:none;white-space:nowrap;transform-origin:top left;will-change:transform,opacity,color}
+@media(max-width:430px){.settings-content{width:min(100%,350px)}}
+@media(prefers-reduced-motion:reduce){.settings-panel,.settings-launcher,.home-screen{transition:none}}
+
+/* --------------------------------------------------------------------------
+   Embedded exercise shell
+   -------------------------------------------------------------------------- */
+
+.hard-stop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(180px, 18vh, 260px) 32px 32px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.hard-stop-overlay.is-active {
+  display: flex;
+}
+
+.hard-stop-copy {
+  width: min(100%, 380px);
+}
+
+.hard-stop-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.hard-stop-text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.hard-stop-warm {
+  display: block;
+  margin-top: 12px;
+  color: var(--text);
+}
+
+.app-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  background: var(--bg);
+}
+
+.app-shell.open {
+  display: block;
+}
+
+.app-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--bg);
+}
+
+.home-back {
+  position: absolute;
+  z-index: 1001;
+  top: auto;
+  right: auto;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  left: max(12px, env(safe-area-inset-left));
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--back-btn-border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: color-mix(in srgb, var(--text) 52%, transparent);
+  font: 400 22px/42px -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    sans-serif;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.home-glyph {
+  display: inline-block;
+  transform: scaleX(1.28);
+  transform-origin: center;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive layout
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 650px) {
+  body {
+    padding-top: 48px;
+  }
+
+  header {
+    margin-bottom: 62px;
+  }
+}
+
+@media (min-width: 529px) {
+  .home-back {
+    left: calc(50% - 240px + 12px);
+  }
+}
+
+@media (max-width: 700px) {
+  .mosaic .tile-today {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .dashboard.mosaic {
+    --tile-gap: 8px;
+    --tile-row: 121px;
+    width: min(100%, var(--mobile-dashboard-width));
+  }
+
+  .mosaic .tile {
+    border-radius: 24px;
+  }
+
+  .today-bottom {
+    width: min(100%, var(--mobile-dashboard-width));
+  }
+
+  .mosaic .tile-vocab {
+    grid-template-columns: 1.06fr .94fr;
+  }
+
+  .mosaic .tile-vocab .tile-copy {
+    right: 5px;
+    width: 42%;
+  }
+
+  .mosaic .tile-vocab .name {
+    font-size: 15px;
+  }
+
+  .mosaic .tile-small .tile-art {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mosaic .tile-small .tile-copy {
+    padding: 25px 4px 8px;
+  }
+
+  .mosaic .tile-small .name {
+    font-size: 12px;
+  }
+
+  .mosaic .tile-small .status {
+    font-size: 10px;
+  }
+
+  .mosaic .tile-today {
+    border-radius: 24px;
+  }
+
+
+}
+.settings-version{margin-top:42px;margin-bottom:26px;color:color-mix(in srgb, var(--text) 42%, transparent);font:400 10px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;text-align:left}
+
+/* ===== HOME TILES + HEUTE · same lift as the buttons (Design Police 2026-09-25) =====
+   Soft shadow under the tile (outside the edge, so it works over the pictures), a thin light line along the
+   top edge drawn ON TOP of the picture (dark mode only, like the buttons), no outline.
+   Tile colours and the Heute card's background + green glow stay as they are. */
+:root{--lift-shadow:0 5px 14px rgba(0,0,0,.14);--lift-highlight:inset 0 1px 0 rgba(255,255,255,.06)}
+[data-theme="light"]{--lift-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);--lift-highlight:none}
+.mosaic .tile{border:0;box-shadow:var(--lift-shadow)}
+/* Exercise tiles: the buttons' card colour (the icons get the same flat background: #2A2A2D dark / #FFF light).
+   The Heute card keeps its own background + green glow. */
+:root{--tile-surface:#2a2a2d}
+[data-theme="light"]{--tile-surface:#fff}
+.mosaic .tile:not(.tile-today){background:var(--tile-surface)}
+.mosaic .tile-small::before,.mosaic .tile-vocab::before{content:"";position:absolute;inset:0;z-index:8;border-radius:inherit;pointer-events:none;box-shadow:var(--lift-highlight)}
+.mosaic .tile-today::before{box-shadow:var(--lift-highlight)}
+/* room for the shadow at the sides: the Home/phrase slider clipped exactly at the tile edges.
+   It now reaches 24px further on each side (into the page margin); each screen gets that 24px back as padding,
+   so everything stays where it was and the phrase screen still starts off-screen. */
+.home-viewport{width:calc(100% + 48px);margin-inline:-24px}
+.home-screen{box-sizing:border-box;padding-inline:24px}
+.phrase-screen{padding-right:calc(max(24px, env(safe-area-inset-right)) + 24px);padding-left:calc(max(24px, env(safe-area-inset-left)) + 24px)}
+/* room for the shadow inside the swipeable tile strip (it clips everything outside its box) */
+.tile-pages{padding:4px 14px 18px;margin:-4px -14px -18px;scroll-padding-inline:14px;column-gap:calc(var(--tile-gap) + 28px)}  /* wider gap between pages, so the next page doesn't peek into the extra room */
+/* ===== ABOUT window (Settings → About), 2026-09-26 =====
+   Built exactly like the exercises' table windows (Design Police · Table windows):
+   page behind blurred 8px + darkened (34% dark / 20% light), blur fades together with it;
+   window = palette card colour, 10% outline, 24px corners, short fade + zoom-in; × top right,
+   tap outside or Esc closes. Text follows Settings → Your language (EN/RU). */
+:root{--about-scrim:rgba(0,0,0,.34);--about-card:#2a2a2d;--about-line:rgba(255,255,255,.10)}
+[data-theme="light"]{--about-scrim:rgba(0,0,0,.20);--about-card:#fff;--about-line:rgba(0,0,0,.10)}
+.about-window{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:960;display:flex;align-items:center;justify-content:center;
+  padding:18px;padding-top:calc(18px + env(safe-area-inset-top));background:var(--about-scrim);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s}
+.about-window.open{opacity:1;visibility:visible;transition:opacity .18s ease,visibility 0s}
+.about-card{width:min(100%,360px);padding:6px 22px 24px;background:var(--about-card);border:1px solid var(--about-line);border-radius:24px;
+  opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.about-window.open .about-card{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.about-window,.about-card{transition:none!important}}
+.about-head{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.about-head h2{margin:0;color:var(--text);font:650 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+.about-close{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:0 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.about-text{margin:4px 0 0;color:var(--muted);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
+
+/* ===== HOME SCREEN · Design Police clean-up (2026-09-26, Home 5.37) =====
+   Palette only, shared press effect, no hover, 10% hairlines. Home screen only:
+   phrase screen, Settings, Fortschritt window and the ⌂ button get their own rounds. */
+:root{--secondary-text:#c8c7c4;--hairline:rgba(255,255,255,.10)}
+[data-theme="light"]{--secondary-text:#55565b;--hairline:rgba(0,0,0,.10)}
+/* colours → palette */
+.greeting-sub{color:var(--muted)}
+.today-label{color:var(--secondary-text)}
+.today-number{color:var(--text)}
+.phrase-week-home-row .phrase-week-label{color:var(--muted)}
+.phrase-week-home-literal{color:var(--muted)}
+.settings-launcher{color:var(--muted)}
+/* hairlines 10% */
+.today-progress{background:var(--hairline)}
+.page-dot{background:var(--hairline)}
+.page-dot.is-active{background:var(--muted)}
+.rail-arrow{border-color:var(--hairline)}
+/* only one tile page: keep the dots' room so nothing moves when a second page is added */
+.page-dots[hidden]{visibility:hidden}
+/* Wortschatz: the completion glow (and the dark-mode top line) sit UNDER the text, still over the picture */
+.mosaic .tile-vocab::before{z-index:3}
+/* shared press effect: shrink to 97% + darken slightly, 0.12s */
+.mosaic .module,.mosaic .tile-today,.phrase-week-home-row{transition:transform .12s ease,filter .12s ease}
+.mosaic .module:active,.mosaic .tile-today:active,.phrase-week-home-row:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+.settings-launcher{transition:opacity .2s ease,transform .12s ease,filter .12s ease}
+.settings-launcher:active{color:var(--muted);transform:translateX(50%) scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.mosaic .module,.mosaic .tile-today,.phrase-week-home-row,.settings-launcher{transition:none}}
+
+/* ===== PHRASE SCREEN · Design Police clean-up (2026-09-26, Home 5.38) =====
+   Position: the block (label … ‹ button) sits slightly above the middle (45 / 55) of the free space
+   between the "Deutsch." title and the "Settings" link. The old top padding added the notch area a second
+   time (it is already in the body padding) → the block sat 45–60px too low on iPhones.
+   The screen starts 30px below the title (desktop: 50px), so the bottom padding gets the same extra
+   (26px up to "Settings" + 30, + 6px measured optical correction) to keep the middle of the free space. Long phrases: block starts at the top, page scrolls. */
+.phrase-screen{flex-direction:column;align-items:stretch;justify-content:flex-start;padding-top:0;padding-bottom:62px}
+.phrase-screen::before{content:"";flex:45 1 0}
+.phrase-screen::after{content:"";flex:55 1 0}
+.phrase-screen-content{flex:0 0 auto}
+@media (min-width:650px){
+  /* body padding-top is 48px here (not notch + 28px): the page was 20px taller than the window and scrolled */
+  .page{min-height:calc(100dvh - env(safe-area-inset-bottom) - 80px)}
+  .phrase-screen{min-height:calc(100dvh - env(safe-area-inset-bottom) - 136px);padding-bottom:calc(82px - env(safe-area-inset-top))}
+}
+/* colours → palette: meaning = secondary text (the explanation, easiest to read after the title); the rest = grey */
+.phrase-screen .phrase-week-label,.phrase-screen .phrase-week-literal,.phrase-screen .phrase-week-example{color:var(--muted)}
+.phrase-screen .phrase-week-meaning{color:var(--secondary-text)}
+/* ‹ button: 10% outline, arrow in text colour (like the › on the Home row), shared press effect, full font list */
+.phrase-screen-back{border-color:var(--hairline);color:var(--text);font:400 28px/42px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;transition:transform .12s ease,filter .12s ease}
+.phrase-screen-back:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.phrase-screen-back{transition:none}}
+
+/* ===== SETTINGS · Design Police clean-up (2026-09-26, Home 5.39) ===== */
+/* colours → palette. Green stays for "on" (switches, chosen language) and the typed name:
+   outside the exercises green means "enabled / your progress". */
+.settings-row,.settings-action{color:var(--secondary-text)}
+.settings-name::placeholder{color:var(--muted)}
+.settings-action-note{color:var(--muted)}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"]{color:var(--bg)}
+/* spacing: rows stay 48px; first row closer to the title; groups = 28px gap with a 10% hairline in the middle */
+.settings-list{margin-top:22px}
+.settings-gap{height:28px;position:relative}
+.settings-gap::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;margin-top:-.5px;background:var(--hairline)}
+#notificationNote:empty{display:none}  /* an empty note pushed About 6px down */
+/* × = the About window's × */
+.settings-close{color:var(--text);font-weight:400}
+/* shared press effect on the rows and the × */
+.settings-action,.settings-close{transition:transform .12s ease,filter .12s ease}
+.settings-action:active{transform:scale(.97);filter:brightness(.94);transform-origin:left center}
+.settings-close:active{transform:translateY(-50%) scale(.97);filter:brightness(.94)}
+/* version mark = the rule's version mark (11px, white 24% / text 34%) */
+.settings-version{font-size:11px;color:rgba(255,255,255,.24)}
+[data-theme="light"] .settings-version{color:color-mix(in srgb, var(--text) 34%, transparent)}
+/* "Are you sure?" = built like the table windows: card colour, 10% outline, 24px corners, fade + zoom-in */
+.settings-confirm{display:flex;opacity:0;visibility:hidden;transition:opacity .18s ease,visibility 0s linear .18s}
+.settings-confirm.is-open{opacity:1;visibility:visible;transition:opacity .18s ease,visibility 0s}
+.settings-confirm-card{background:var(--about-card);border-color:var(--about-line);border-radius:24px;box-shadow:none;
+  opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
+.settings-confirm.is-open .settings-confirm-card{opacity:1;transform:none;filter:none}
+.settings-confirm-title{font-weight:650}
+/* No = contrast button (we'd rather the user says no), Yes = quiet button. Shape of "Zur Startseite". */
+.settings-confirm-button{min-height:56px;border-radius:17px;font:700 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
   transition:transform .12s ease,filter .12s ease}
-.feedbackShell.canTypo #typoBtn{display:inline-flex}
-#typoBtn::before{content:"";flex:0 0 18px;width:18px;height:18px;box-sizing:border-box;border:1.5px solid var(--base-text);border-radius:5px;opacity:.7}
-#typoBtn.done::before{opacity:1;background:var(--base-text)}
-#typoBtn.done::after{content:"";position:absolute;left:23px;top:50%;width:4px;height:9px;margin-top:-6px;
-  border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
-#typoBtn:active{transform:scale(.97);filter:brightness(.94)}
-#typoBtn:disabled{cursor:default;transform:none;filter:none}
-/* Hint line above the typing field: always reserved (nothing jumps), red text fades in with the frame.
-   16px = size of the grey hint/translation lines. Translation moved up 8px to make room. */
-#translation{margin-top:20px}
-#almostHint{height:22px;margin:14px 0 -20px;font:500 16px/22px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  color:var(--error);opacity:0;transition:opacity .15s ease}
-#almostHint.show{opacity:1}
-@media(max-width:699px){#question #almostHint{order:2;width:100%}}
-@media(prefers-reduced-motion:reduce){#almostHint{transition:none}}
+.settings-confirm-button.is-main{border:0;background:#ece6dc;color:#1b1b1d}
+[data-theme="light"] .settings-confirm-button.is-main{background:#242426;color:#f6f4f1}
+.settings-confirm-button.is-quiet{border:1px solid var(--hairline);background:transparent;color:color-mix(in srgb, var(--text) 55%, transparent)}
+.settings-confirm-button:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.settings-confirm,.settings-confirm-card,.settings-action,.settings-close,.settings-confirm-button{transition:none!important}}
 
-/* ===== START SCREEN · Wortschatz (2026-09-26, v2.85) =====
-   Same family as Partizip II (Georgia title + grey subline), shared start-screen colours and press effect.
-   No 10/20/30: the review schedule decides what is due, so the screen shows today's count + one main button.
-   Shown only when cards are due; with nothing due Wortschatz opens on "Fertig für heute" as before. */
-:root{--start-line:rgba(255,255,255,.10);--start-table-text:#c8c7c4}
-[data-theme="light"]{--start-line:rgba(0,0,0,.10);--start-table-text:#55565b}
-#start{display:none;flex-direction:column;align-items:center;text-align:center;padding-top:36px}
-#start.show{display:flex}
-#start .title{font:400 clamp(48px,13vw,72px)/1.05 Georgia,serif;letter-spacing:-2px;color:var(--text);margin:0 0 12px}
-#start .subtitle{color:var(--muted);font-size:16px;margin:0 0 28px}
-#start #startBtn{width:312px;max-width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
-  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
-#start #startBtn:active{transform:scale(.97);filter:brightness(.94)}
-/* The top bar (title, counter, progress line) belongs to the session, not to the start screen */
-body:has(#start.show) header{display:none}
+/* ===== PAUSE SCREEN (daily limit reached) · Design Police (2026-09-26, Home 5.42) =====
+   Same placement as the phrase screen: slightly above the middle (45 / 55) of the free space between
+   "Deutsch." and "Settings" (overlay starts 30px under the title, desktop 50px → same bottom padding).
+   Title 700 like the "Fertig." titles (was 800); size unchanged. */
+.hard-stop-overlay{flex-direction:column;align-items:center;justify-content:flex-start;padding:0 32px 62px}
+.hard-stop-overlay::before{content:"";flex:45 1 0}
+.hard-stop-overlay::after{content:"";flex:55 1 0}
+.hard-stop-copy{flex:0 0 auto}
+.hard-stop-title{font-weight:700}
+@media (min-width:650px){.hard-stop-overlay{padding-bottom:calc(82px - env(safe-area-inset-top))}}
 
-/* ===== START SCREEN · description "Worum geht's?" (same as the other exercises) ===== */
-.start-about{display:none;position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 64px);margin:0 auto;padding:0;width:312px;max-width:calc(100% - 36px);text-align:center;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;z-index:4}
-.start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
-.start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-body:has(#start.show) .start-about{display:block}
+/* ===== BACK BUTTON · top left (2026-09-26, Home 5.43) — replaces the round ⌂ at the bottom =====
+   Quiet: palette grey, no circle, no outline. "‹ Deutsch." (or the chapter) on start / picker / summary screens,
+   only "‹" in front of the title in the game (JS places it there). 44px tap height. Fades out while a table window is open. */
+.home-back{top:calc(env(safe-area-inset-top) + 33.5px - 22px);bottom:auto;left:6px;right:auto;width:auto;height:44px;padding:0 10px 0 12px;
+  display:flex;align-items:center;gap:7px;border:0;border-radius:12px;background:transparent;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);
+  font:500 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:-.2px;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:opacity .18s ease,visibility 0s,transform .12s ease,filter .12s ease}
+.home-back.is-game{padding-right:4px}
+.home-back-chev{flex:0 0 auto;display:block}
+.home-back-label:empty{display:none}
+.home-back:active{transform:scale(.97);filter:brightness(.94)}
+.home-back.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s}
+@media (min-width:529px){.home-back{left:calc(50% - 240px + 6px)}}
+@media (prefers-reduced-motion:reduce){.home-back{transition:none}}
 
-/* ===== COLLECTION · button + window (2026-09-26, v2.87) — Documentation/WORTSCHATZ_COLLECTIONS.md step 3 =====
-   Button = the start-screen table pill. Window = the table-window rule (blur 8px + 34% / 20% darkening,
-   card colour, 10% outline, 24px corners, fade + zoom-in, × top right, tap outside / Esc closes).
-   Confirm buttons = the „Are you sure?“ rule: the safe choice is the contrast button, the risky one the quiet button. */
-:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10);--sec-text:#c8c7c4}
-[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10);--sec-text:#55565b}
-.coll-btn{margin:28px auto 0;max-width:312px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
-  border-radius:17px;font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;cursor:pointer;
-  transition:transform .12s ease,filter .12s ease}
-.coll-btn:active{transform:scale(.97);filter:brightness(.94)}
-#done .coll-btn{display:inline-block;margin-top:28px}
-.coll-modal{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));display:flex;align-items:center;justify-content:center;padding:18px;
-  padding-top:calc(18px + env(safe-area-inset-top));padding-bottom:calc(18px + env(safe-area-inset-bottom));z-index:30;background:rgba(0,0,0,0);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif}
-.coll-modal.open{opacity:1;visibility:visible;background:var(--overlay-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
-.coll-card{width:min(520px,100%);max-height:min(720px,100%);display:flex;flex-direction:column;overflow:hidden;background:var(--overlay-card);border:1px solid var(--overlay-line);
-  border-radius:24px;padding:6px 22px 14px;text-align:left;color:var(--text);opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
-.coll-modal.open .coll-card{opacity:1;transform:scale(1);filter:blur(0)}
-@media(prefers-reduced-motion:reduce){.coll-modal,.coll-card{transition:none!important}}
-.coll-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto;min-height:52px}
-.coll-title{margin:0;font-size:20px;font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.coll-close{flex:0 0 auto;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:8px;margin-right:-8px;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-close:active,.coll-link:active,.coll-row:active{transform:scale(.97);filter:brightness(.94)}
-.coll-meta{flex:0 0 auto;margin:0 0 14px;font-size:14px;color:var(--muted)}
-.coll-link{border:0;background:none;padding:0;margin:0;color:var(--sec-text);font:inherit;text-decoration:underline;text-decoration-color:var(--overlay-line);text-underline-offset:3px;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-name-input{width:100%;box-sizing:border-box;height:44px;margin:4px 0 0;padding:0 14px;border:1px solid var(--overlay-line);border-radius:14px;background:transparent;color:var(--text);
-  font:600 18px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;outline:none}
-.coll-list{flex:1 1 auto;min-height:60px;overflow:auto;margin:0 -22px;padding:0 22px;border-top:1px solid var(--overlay-line);border-bottom:1px solid var(--overlay-line);-webkit-overflow-scrolling:touch}
-.coll-word{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--overlay-line)}
-.coll-word:last-child{border-bottom:0}
-.coll-de{font-size:16px;color:var(--text);min-width:0;overflow-wrap:anywhere}
-.coll-tr{font-size:14px;color:var(--muted);text-align:right;min-width:0;overflow-wrap:anywhere}
-.coll-actions{flex:0 0 auto;padding-top:6px}
-.coll-row{display:flex;align-items:center;width:100%;height:48px;border:0;background:none;padding:0;color:var(--sec-text);font:400 16px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  text-align:left;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-note{margin:4px 0 0;font-size:13px;color:var(--muted)}
-.coll-text{margin:0 0 22px;font-size:15px;line-height:1.45;color:var(--sec-text)}
-.coll-buttons{display:flex;flex-direction:column;gap:10px;padding-bottom:8px}
-.coll-main,.coll-quiet{width:100%;height:56px;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-main{border:0;background:var(--end-main-bg);color:var(--end-main-text)}
-.coll-quiet{border:1px solid var(--end-again-line);background:transparent;color:var(--end-again-text)}
-.coll-main:active,.coll-quiet:active{transform:scale(.97);filter:brightness(.94)}
-.coll-buttons .coll-link{align-self:center;margin-top:6px;padding:8px}
-
-/* ===== COLLECTION · word form (add / edit one word) (2026-09-26, v2.88) — WORTSCHATZ_COLLECTIONS.md step 4 =====
-   Fields = typing-field look (10% outline, 14px corners), 16px text (no iPhone zoom). Word chips: tap = hide this word;
-   a chosen chip uses the main-button colours (green stays reserved for "correct"). Error line in the palette red. */
-.coll-scroll{flex:1 1 auto;min-height:0;overflow:auto;margin:0 -22px;padding:0 22px 4px;-webkit-overflow-scrolling:touch}
-.coll-label{display:block;margin:16px 0 6px;font-size:13px;font-weight:600;color:var(--muted)}
-.coll-label .opt{font-weight:400}
-.coll-field{width:100%;box-sizing:border-box;min-height:44px;padding:11px 14px;border:1px solid var(--overlay-line);border-radius:14px;background:transparent;color:var(--text);
-  font:400 16px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;outline:none;resize:none}
-.coll-field:focus{border-color:color-mix(in srgb,var(--text) 28%,transparent)}
-.coll-field::placeholder{color:var(--muted);opacity:.7}
-textarea.coll-field{min-height:68px}
-.coll-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.coll-chips:empty{display:none}
-.coll-chip{border:1px solid var(--overlay-line);background:transparent;color:var(--sec-text);border-radius:12px;padding:7px 11px;
-  font:400 15px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-chip.on{background:var(--end-main-bg);color:var(--end-main-text);border-color:transparent;font-weight:600}
-.coll-chip:active{transform:scale(.97);filter:brightness(.94)}
-.coll-preview{margin:10px 0 0;font-size:15px;color:var(--sec-text);min-height:20px}
-.coll-preview .blank{width:1.6em}
-.coll-hint{margin:6px 0 0;font-size:13px;color:var(--muted)}
-.coll-switch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 4px;font-size:16px;color:var(--sec-text);cursor:pointer}
-.coll-switch input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:48px;height:28px;border-radius:14px;background:var(--overlay-line);position:relative;margin:0;cursor:pointer;transition:background .15s}
-.coll-switch input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
-.coll-switch input:checked{background:var(--accent)}  /* green = "enabled" outside the exercises (Settings rule) */
-.coll-switch input:checked::after{transform:translateX(20px)}
-.coll-error{margin:12px 0 0;font-size:14px;color:var(--error);min-height:0}
-.coll-error:empty{display:none}
-.coll-word.is-btn{width:100%;border:0;border-bottom:1px solid var(--overlay-line);background:none;padding:11px 0;text-align:left;font:inherit;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-.coll-word.is-btn:active{transform:scale(.99);filter:brightness(.94)}
-.coll-form-buttons{flex:0 0 auto;display:flex;flex-direction:column;align-items:stretch;gap:4px;padding-top:12px}
-.coll-form-buttons .coll-link{align-self:center;padding:10px 12px}
-/* ✎ on the answer screen (own words only, 2026-09-26, v2.89): quiet corner button in the details area,
-   palette grey at low strength so it doesn't compete with the answer. 44px tap area. */
-.editCard{display:none;position:absolute;right:-10px;top:4px;width:44px;height:44px;padding:0;border:0;background:none;color:var(--muted);opacity:.6;
-  align-items:center;justify-content:center;cursor:pointer;z-index:3;transition:transform .12s ease,opacity .12s ease}
-.editCard svg{width:19px;height:19px;display:block}
-.editCard:active{transform:scale(.92);opacity:1}
-.feedback.show .editCard.own{display:flex}
-/* Import (step 5, v2.90): paste box + the format block for the AI */
-textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
-.coll-pre{margin:0;padding:12px 14px;border:1px solid var(--overlay-line);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;
-  font:400 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sec-text);-webkit-user-select:text;user-select:text}
-.coll-text .coll-link{font-size:inherit}
-/* New words running out (step 6, v2.92): grey line on the start screen, same grey as the subline */
-#start .startNote{margin:-20px 0 28px;font-size:14px;color:var(--muted)}
-#start .startNote:empty{display:none}
 </style>
-</head>
-<body><main class="app">
-<header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p><button id="startBtn" type="button">Starten</button><button class="coll-btn" id="collBtnStart" type="button"></button></section>
-<section class="stage" id="study" style="display:none">
- <div id="question">
-  <div class="topZone">
-   <div class="sentence" id="sentence"></div>
-   <div class="translation" id="translation"></div>
+  <link href="icon.webp" rel="icon" type="image/webp"/>
+  <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="manifest.webmanifest" rel="manifest"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+ </head>
+ <body>
+  <main class="page">
+   <header>
+    <h1>
+     Deutsch.
+    </h1>
+   </header>
+   <div class="home-viewport">
+    <div class="home-track" id="homeTrack">
+     <div class="home-screen">
+  <div class="hard-stop-overlay" id="hardStopOverlay" aria-hidden="true">
+    <div class="hard-stop-copy">
+      <div class="hard-stop-title">Das hast du heute richtig gut&nbsp;gemacht.</div>
+      <div class="hard-stop-text">
+        Jetzt ist Zeit für eine Pause.<br>
+        Ruh dich aus, mach etwas Schönes<br>
+        und komm morgen wieder.
+        <span class="hard-stop-warm">
+          <strong>Ich freue mich auf dich.</strong><br>
+          ♡
+        </span>
+      </div>
+    </div>
   </div>
-  <div id="almostHint" aria-live="polite"></div>
-  <input id="answerInput" class="inputbox" type="text" placeholder=" " aria-label="Fehlendes Wort" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="none">
-  <button class="check" id="desktopCheck">Prüfen</button>
-  <div id="keyboardMount"></div>
- </div>
- <div class="feedbackShell" id="feedbackShell">
-  <div class="feedback" id="feedback">
-   <div class="topZone answerTop" id="answerTop">
-    <div class="answerSentence" id="answerSentence"></div>
-    <div class="answerTranslation" id="answerTranslation"></div>
+   <p class="intro greeting" id="greeting" aria-live="polite">
+    <span class="greeting-line" id="greetingLine">Was m&ouml;chtest du heute &uuml;ben?</span>
+    <span class="greeting-sub" id="greetingSub"></span>
+   </p>
+   <section aria-label="&Uuml;bungen" class="dashboard mosaic tile-pager">
+    <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
+    <div class="tile-pages" id="tilePages">
+     <div class="tile-page">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=2.24" type="button">
+     <div class="tile-art vocab-art">
+      <img alt="" src="wortschatz/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Wortschatz
+      </div>
+      <div class="status" id="wortschatzStatus">
+       noch offen
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.18" type="button">
+     <div class="tile-art">
+      <img alt="" src="artikel/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Artikel
+      </div>
+      <div class="status" id="artikelStatus">
+       0 / 20
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.13" type="button">
+     <div class="tile-art">
+      <img alt="" src="verbformen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Verbformen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-pronouns module" data-app="pronomen/?v=24" type="button">
+     <div class="tile-art">
+      <img alt="" src="pronomen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Pronomen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=21" type="button">
+     <div class="tile-art">
+      <img alt="" src="praepositionen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Präpositionen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+     </div>
+    </div>
+    <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
+    <div aria-label="Seiten" class="page-dots" id="pageDots"></div>
+   </section>
+       <button aria-label="Redewendung anzeigen" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
+     <div class="phrase-week-home-copy">
+      <div class="phrase-week-label">Redewendung der Woche</div>
+      <div class="phrase-week-home-title" id="phraseWeekHomeTitle"></div>
+      <div class="phrase-week-home-literal" id="phraseWeekHomeLiteral"></div>
+     </div>
+     <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
+    </button>
+
+    <div class="mosaic today-bottom">
+    <div aria-label="Tagesziel" class="tile tile-today tile-today-wide">
+     <div class="today-label">
+      Heute
+     </div>
+     <div class="today-score">
+      <div class="today-number" id="todayTotal">
+       0
+      </div>
+      <div class="today-unit">
+       Punkte
+      </div>
+     </div>
+     <div class="today-progress">
+      <div class="today-progress-fill" id="todayProgress">
+      </div>
+     </div>
+    </div>
+    </div>
+
+     </div>
+     <section aria-label="Redewendung der Woche" class="phrase-screen" id="phraseScreen" aria-hidden="true">
+      <div class="phrase-screen-content">
+       <div class="phrase-week-label">Redewendung der Woche</div>
+       <div class="phrase-week-title" id="phraseWeekTitle"></div>
+       <div class="phrase-week-literal" id="phraseWeekLiteral"></div>
+       <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
+       <div class="phrase-week-example" id="phraseWeekExample"></div>
+      <button aria-label="Zur Startseite" class="phrase-screen-back" id="phraseScreenBack" type="button">
+       <span aria-hidden="true" class="phrase-screen-back-arrow">&lsaquo;</span>
+      </button>
+      </div>
+     </section>
+    </div>
    </div>
-   <div class="targetForm" id="targetForm"></div>
-   <div class="diffBlock" id="diffBlock"><div class="diffWord" id="typedDiff"></div><div class="diffArrow"><img src="../components/icons/Arrow_Down.svg" alt="" aria-hidden="true"></div><div class="diffWord diffCorrect" id="correctDiff"></div></div>
-   <button class="speakTop" id="speakTop" aria-label="Satz anhören"><img class="speakTopIcon" src="../components/icons/Audio.svg" alt="" aria-hidden="true"></button>
-   <div class="detail">
-    <div class="answerTargetRow"><div class="base" id="base"></div></div>
-    <div class="meaning" id="meaning"></div>
-    <div class="grammar" id="grammar"></div>
-    <button class="editCard" id="editCard" type="button" aria-label="Karte bearbeiten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.5l4 4L8 20H4v-4L16.5 3.5z"/><path d="M14 6l4 4"/></svg></button>
+   </main>
+  <div class="settings-layer" id="settingsLayer">
+   <section aria-hidden="true" class="settings-panel" id="settingsPanel">
+   <div class="settings-content">
+    <div class="settings-title-row"><h2 class="settings-title">Settings</h2><button class="settings-close" id="settingsClose" type="button" aria-label="Close settings">×</button></div>
+    <div class="settings-list">
+     <button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button>
+     <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
+     <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
+     <div class="settings-gap" aria-hidden="true"></div>
+     <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
+     <div class="settings-row"><span>Your Language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your Language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
+     <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
+     <div class="settings-row"><span>Daily Limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
+     <div id="notificationSettings" hidden>
+      <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
+      <div id="notificationNote" class="settings-action-note"></div>
+     </div>
+     <div class="settings-gap" aria-hidden="true"></div>
+     <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
+    </div>
+    <div class="settings-version">Deutsch. version 5.54</div>
+   </div>
+   </section>
+   <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
+   <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
+  </div>
+  <div aria-hidden="true" class="about-window" id="aboutWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-head"><h2 id="aboutTitle">About</h2><button class="about-close" id="aboutClose" type="button" aria-label="Close">×</button></div>
+    <p class="about-text" id="aboutText"></p>
    </div>
   </div>
-  <button class="continue" id="continue">Weiter</button>
-  <button id="typoBtn" type="button">Nur Tippfehler</button>
- </div>
-</section>
-<section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div><button class="coll-btn" id="collBtnDone" type="button"></button></div></section>
-<div class="coll-modal" id="collModal" aria-hidden="true"><div class="coll-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div></div>
-<div class="start-about" id="startAbout">
-  <h2>Worum geht's?</h2>
-  <p class="about-de" id="aboutText"></p>
-</div>
-<div class="version-mark">v2.92</div>
-</main>
-<script src="../components/deutsch-translation-v1.js?v=2"></script>
-<script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
-<script src="words.js?v=3"></script>
-<script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=5"></script>
-<script>
-// App-side keyboard bridge: the reusable component only emits intent.
-document.addEventListener("deutsch-keyboard-input",e=>{
- const k=e.detail?.key||"",input=document.getElementById("answerInput");
- if(!input)return;
- if(k==="BACK"){input.value=input.value.slice(0,-1);return}
- if(k==="OK"){check();return}
- if(k==="SPACE"){if(input.value.length&&!input.value.endsWith(" "))input.value+=" ";return}
- if(k)input.value+=k;
-});
-function isTouchDevice(){
-  return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-}
+  <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
+   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
+    <div class="settings-confirm-title" id="dailyLimitConfirmTitle">Are you sure?</div>
+    <div class="settings-confirm-text">You can keep practising today without a daily limit. It will turn on again automatically&nbsp;tomorrow.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="dailyLimitNo" type="button">No</button><button class="settings-confirm-button is-quiet" id="dailyLimitYes" type="button">Yes</button></div>
+   </div>
+  </div>
 
-document.getElementById("desktopCheck").style.display = isTouchDevice() ? "none" : ""; // $ is defined only in a later script
+  <section aria-hidden="true" class="app-shell" id="appShell">
+   <button aria-label="Zurück zu Deutsch." class="home-back" id="homeBack" type="button"><svg class="home-back-chev" width="10" height="17" viewBox="0 0 10 17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2 2 8.5 8 15"/></svg><span class="home-back-label" id="homeBackLabel">Deutsch.</span></button>
+   <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
+   </iframe>
+  </section>
+  <script src="components/deutsch-translation-v1.js?v=2"></script>
+  <script src="components/deutsch-wortschatz-due-v1.js?v=1"></script>
+  <script src="phrases.js?v=3">
+  </script>
+  <script src="greetings.js?v=2">
+  </script>
+  <script>
+       /* Phrase of the Week — data lives in phrases.js.
+       The details are a separate full-screen Home panel. */
+    (function initPhraseOfTheWeek(){
+      const phraseHomeTitle=document.getElementById("phraseWeekHomeTitle");
+      const phraseHomeLiteral=document.getElementById("phraseWeekHomeLiteral");
+      const phraseTitle=document.getElementById("phraseWeekTitle");
+      const phraseLiteral=document.getElementById("phraseWeekLiteral");
+      const phraseMeaning=document.getElementById("phraseWeekMeaning");
+      const phraseExample=document.getElementById("phraseWeekExample");
+      const phraseToggle=document.getElementById("phraseWeekToggle");
+      const phraseBack=document.getElementById("phraseScreenBack");
+      const homeTrack=document.getElementById("homeTrack");
+      const phraseScreen=document.getElementById("phraseScreen");
+      if(!phraseHomeTitle||!phraseHomeLiteral||!phraseTitle||!phraseLiteral||!phraseMeaning||!phraseExample||!phraseToggle||!phraseBack||!homeTrack||!phraseScreen) return;
 
-async function loadKeyboardComponent(){
- const mount=document.getElementById("keyboardMount");
- if(!mount)return false;
- const r=await fetch("../components/deutsch-keyboard-v2.60.html");
- if(!r.ok)throw new Error("Keyboard component failed to load");
- const text=await r.text();
- const tpl=document.createElement("template");
- tpl.innerHTML=text;
- const scripts=[];
- tpl.content.querySelectorAll("script").forEach(s=>{scripts.push(s.textContent);s.remove()});
- mount.appendChild(tpl.content);
- for(const code of scripts){const s=document.createElement("script");s.textContent=code;document.body.appendChild(s);}
- const kb=document.getElementById("keyboard");
- window.deutschKeyboardReady=true;
-  kb.classList.add("show"); // component itself stays hidden unless it detected a touch device
- return true;
-}
-</script>
+      function showPhrase(){
+        homeTrack.style.transform="translateX(-50%)";
+        phraseScreen.setAttribute("aria-hidden","false");
+      }
 
-<script>
-const $=id=>document.getElementById(id), STORE="wortsternSRSv03", HOME_STATS="deutschHomeStatsV1";
-/* Own word collection (collection.js, 2026-09-26): if the user has one, it replaces the built-in set.
-   Everything below (deck, due count, notifications, progress) works on WORDS, so nothing else changes. */
-if(window.WortschatzCollection&&WortschatzCollection.isOwn())window.WORDS=WortschatzCollection.cards();
+      function showHome(){
+        homeTrack.style.transform="translateX(0)";
+        phraseScreen.setAttribute("aria-hidden","true");
+      }
 
-function publishWortschatzStatus(done=false){
-  try{
-    const today=day();
-    /* The due-word rule lives in components/deutsch-wortschatz-due-v1.js (shared with Home).
-       If that file didn't load, fall back to counting here the same way. */
-    let remaining;
-    if(window.DeutschWortschatzDue){
-      remaining=DeutschWortschatzDue.count(state,new Set(WORDS.map(c=>c.id))).remaining;
-    }else{
-      remaining=activeCards().filter(c=>rec(c).due<=today).length;
+      phraseToggle.addEventListener("click",showPhrase);
+      phraseBack.addEventListener("click",showHome);
+
+      function getMonday(date){
+        const d=new Date(date);
+        d.setHours(0,0,0,0);
+        const day=d.getDay();
+        const diff=day===0 ? -6 : 1-day;
+        d.setDate(d.getDate()+diff);
+        return d;
+      }
+
+      function getISOWeekKey(date){
+        const monday=getMonday(date);
+        return monday.getTime();
+      }
+
+      function render(){
+        if(!Array.isArray(window.PHRASES)||window.PHRASES.length===0) return;
+
+        const startMonday=new Date(2026,0,5);
+        const currentWeek=getISOWeekKey(new Date());
+        const firstWeek=getISOWeekKey(startMonday);
+        const weeks=Math.max(0,Math.floor((currentWeek-firstWeek)/604800000));
+        const index=weeks % window.PHRASES.length;
+        const phrase=window.PHRASES[index];
+
+        // The same weekly phrase object feeds both the compact Home preview
+        // and the full-screen details. There is only one source of truth.
+        phraseHomeTitle.textContent=phrase.title;
+        phraseHomeLiteral.textContent=getTranslation(phrase,"literal");
+
+        phraseTitle.textContent=phrase.title;
+        phraseLiteral.textContent=getTranslation(phrase,"literal");
+        phraseMeaning.textContent="→ "+getTranslation(phrase,"meaning");
+        phraseExample.textContent=phrase.example;
+      }
+
+      if(Array.isArray(window.PHRASES)) render();
+      else window.addEventListener("phrasesready",render,{once:true});
+      // Settings → Your language ENG/RUS: update the phrase right away.
+      document.addEventListener("deutsch:translationlang",render);
+    })();
+
+    const DAILY_STATS_KEY='deutschDailyStatsV1';
+    function localDayKey(){
+      const d=new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     }
-    const status={
-      date:today,
-      done:!!done || remaining===0,
-      remaining,
-      updatedAt:Date.now()
-    };
-    const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
-    home.wortschatz=status;
-    localStorage.setItem(HOME_STATS,JSON.stringify(home));
-  }catch(e){}
-}
-// Simple SRS: first success -> tomorrow, then +8, +20, +45, +90 days.
-// A mistake resets the card: it stays in today's session until answered correctly, then returns tomorrow.
-// Level 6 = FULLY LEARNED: the word also passed the 90-day review (6 correct reviews in a row).
-// After level 5 the interval stays 90 days; reaching level 6 only marks the word as learned.
-const steps=[1,8,20,45,90];
-const LEARNED_LEVEL=steps.length+1;
-const INITIAL_WORDS=10, ADD_BATCH=5;
-let state={cards:{},activeIds:[]};
-try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&saved.cards&&Array.isArray(saved.activeIds))state=saved}catch(e){}
-const day=()=>{let d=new Date();d.setHours(12,0,0,0);return d.toISOString().slice(0,10)}
-const add=n=>{let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
-function save(){localStorage.setItem(STORE,JSON.stringify(state));publishWortschatzProgress()}
-// Progress summary for Home (Documentation/PROGRESS_TRACKER.md, section 7):
-// total = words in words.js · started = words in the active set · learned = level 6.
-function publishWortschatzProgress(){
- try{
-   const ids=new Set(WORDS.map(c=>c.id));
-   const started=state.activeIds.filter(id=>ids.has(id)).length;
-   const learned=state.activeIds.filter(id=>ids.has(id)&&(state.cards[id]?.level||0)>=LEARNED_LEVEL).length;
-   let data=null;
-   try{data=JSON.parse(localStorage.getItem("deutschProgressV1")||"null")}catch(e){}
-   if(!data||typeof data!=="object"||!data.exercises||typeof data.exercises!=="object")data={format:1,exercises:{}};
-   const d=new Date();
-   const today=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-   data.exercises.wortschatz={summary:{kind:"words",total:ids.size,started,learned,sicher:learned,items:ids.size,itemsSicher:learned,updated:today,recent:[]}};
-   localStorage.setItem("deutschProgressV1",JSON.stringify(data));
- }catch(e){}
-}
-function ensureDeck(){
- if(!state.activeIds.length){state.activeIds=WORDS.slice(0,INITIAL_WORDS).map(c=>c.id);save()}
-}
-function rec(c){
- if(!state.cards[c.id])state.cards[c.id]={level:0,due:day()};
- return state.cards[c.id];
-}
-let hintsUsed=0,typoUndo=null;
-let queue=[],idx=0,current=null,sessionTotal=0,completed=0,failedToday=new Set(),closedToday=new Set();
-function normalize(s){return s.trim().toLocaleLowerCase("de-DE").replace(/\s*,\s*/g," ").replace(/\s+/g," ")}
-// ===== TYPO TOLERANCE (2026-09-25, see Documentation/DECISIONS.md) =====
-// Only for words at level 2+. Levels 0-1 stay strict (exact answer only).
-// A close answer never counts as right. It gets a hint (red frame + shake, text stays) and up to 2 more tries.
-// After that it is wrong; the "Nur Tippfehler" button keeps the level and brings the word back tomorrow.
-const TOLERANT_FROM_LEVEL=2, MAX_HINTS=2;
-// Hint texts: short, informal, kind. One picked at random.
-const HINT_FIRST=["Sooo nah dran!","Ups, fast! Nochmal?","Die Buchstaben machen Quatsch.","Knapp! Du hast es gleich."];
-const HINT_LAST=["Ein Blick noch. Keine Panik.","Einmal noch, ganz in Ruhe."];
-const pickOne=a=>a[Math.floor(Math.random()*a.length)];
-// Damerau (OSA) distance: missing / extra / wrong letter or two neighbouring letters swapped = 1 slip.
-function osa(x,y){
- const a=[...x],b=[...y],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));
- for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;
- for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){
-  const c=a[i-1]===b[j-1]?0:1;
-  d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c);
-  if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1);
- }
- return d[a.length][b.length];
-}
-// Common learner slips, flattened (sounds the same / known trap). Used ONLY to decide whether to give the hint:
-// sch-ch-sh-sc, ß-ss-s, double-single consonant, ck-k, tz-z-ts, silent h, i-ie, v-f-w, ä-e, äu-eu, umlaut dots,
-// d-t / b-p / g-k at the end of a word, chs-ks-x, qu-kw, ph-f, th-t, dt-t.
-function loose(s){
- return s.replace(/ß/g,"ss").replace(/äu/g,"eu").replace(/ä/g,"e").replace(/ö/g,"o").replace(/ü/g,"u")
-  .replace(/chs/g,"ks").replace(/x/g,"ks").replace(/sch/g,"S").replace(/sh|sc|ch/g,"S")
-  .replace(/qu/g,"kw").replace(/ph/g,"f").replace(/th/g,"t").replace(/dt/g,"t")
-  .replace(/ck/g,"k").replace(/tz|ts/g,"z").replace(/ie/g,"i")
-  .replace(/([aeiouy])h(?![aeiouy])/g,"$1").replace(/[vw]/g,"f")
-  .replace(/d\b/g,"t").replace(/b\b/g,"p").replace(/g\b/g,"k")
-  .replace(/([bcdfgklmnprstz])\1+/g,"$1");
-}
-const letterCount=s=>s.replace(/\s/g,"").length;
-// Slips allowed for the hint: 1-3 letters none (exact only), 4-6 letters 1, 7-10 letters 2, 11+ letters 3.
-function slipAllowance(n){return n<=3?0:n<=6?1:n<=10?2:3}
-// Another word from the list typed exactly = a mix-up, not a typo -> no hint.
-let listAnswers=null;
-function isOtherListWord(y,target){
- if(!listAnswers)listAnswers=new Set(WORDS.flatMap(c=>targets(c)).map(normalize));
- return y!==normalize(target)&&listAnswers.has(y);
-}
-function isClose(typed,target){
- const t=normalize(target),y=typed,n=letterCount(t),allow=slipAllowance(n);
- if(!allow||y===t)return false;
- if(loose(y)[0]!==loose(t)[0])return false;   // the first letter must be right (sch/sh, v/f, ä/e count as the same)
- if(isOtherListWord(y,target))return false;
- // scrambled order: exactly the right letters, 5+ letters
- const sorted=s=>[...s.replace(/\s/g,"")].sort().join("");
- if(n>=5&&sorted(y)===sorted(t))return true;
- const d=Math.min(osa(y,t),osa(loose(y),loose(t)));
- if(letterCount(y)<Math.ceil(n/2)||n-d<Math.ceil(n/2))return false; // at least half the letters right
- if(d<=allow)return true;
- // wrong ending: same beginning, only the last few letters differ
- let p=0;while(p<y.length&&p<t.length&&y[p]===t[p])p++;
- return p>=4&&y.length-p<=3&&t.length-p<=3;
-}
-function targetParts(c){return (c.target||"").split(" / ").map(x=>x.trim()).filter(Boolean)}
-function targets(c){
- const parts=targetParts(c);
- // With several blanks, the slash separates the pieces of ONE separable verb,
- // not alternative answers. The learner types both pieces in one field.
- if((c.blank.match(/_____/g)||[]).length>1)return [parts.join(" ")];
- return parts;
-}
-function activeCards(){const ids=new Set(state.activeIds);return WORDS.filter(c=>ids.has(c.id))}
-const NOTIFICATION_SERVER="https://german-learning-notifications.d45zgw2cgh.workers.dev";
-const NOTIFICATION_USER_KEY="deutschNotificationUserIdV1";
-const NOTIFICATION_DEVICE_KEY="deutschNotificationDeviceIdV1";
 
-function getNotificationUserId(){
-  let id=localStorage.getItem(NOTIFICATION_USER_KEY);
-  if(!id){
-    try{id=crypto.randomUUID?crypto.randomUUID():"user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    catch(e){id="user-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    localStorage.setItem(NOTIFICATION_USER_KEY,id);
-  }
-  return id;
-}
+    const DAILY_LIMIT_OFF_DATE_KEY="deutschDailyLimitOffDateV1";
 
-function getNotificationDeviceId(){
-  let id=localStorage.getItem(NOTIFICATION_DEVICE_KEY);
-  if(!id){
-    try{id=crypto.randomUUID?crypto.randomUUID():"device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    catch(e){id="device-"+Date.now()+"-"+Math.random().toString(36).slice(2)}
-    localStorage.setItem(NOTIFICATION_DEVICE_KEY,id);
-  }
-  return id;
-}
+    /* Personal greeting v1 — see Documentation/PERSONAL_GREETINGS.md */
+    const PROFILE_KEY="deutschProfileV1";
+    const GREETING_MAX_WIDTH=240;
 
-async function syncNotificationPool(pool){
-  try{
-    const response=await fetch(NOTIFICATION_SERVER+"/pool",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        userId:getNotificationUserId(),
-        deviceId:getNotificationDeviceId(),
-        date:pool.date,
-        notifications:pool.notifications.map(item=>({
-          id:item.id,
-          de:item.sentence,
-          ru:item.translation
-        }))
-      })
-    });
-    if(!response.ok)throw new Error("pool-"+response.status);
-    console.log("[German Learning] Notification pool synced:",pool.date);
-    return true;
-  }catch(e){
-    console.warn("[German Learning] Could not sync notification pool:",e);
-    return false;
-  }
-}
+    function getUserName(){
+      try{
+        const profile=JSON.parse(localStorage.getItem(PROFILE_KEY)||"{}");
+        return typeof profile.name==="string" ? profile.name.trim().slice(0,20) : "";
+      }catch(e){ return ""; }
+    }
 
-async function publishNotificationDone(){
-  const event={date:day(),done:true,completedAt:Date.now()};
-  try{
-    localStorage.setItem("deutschNotificationDoneV1",JSON.stringify(event));
-    const response=await fetch(NOTIFICATION_SERVER+"/done",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        userId:getNotificationUserId(),
-        deviceId:getNotificationDeviceId(),
-        date:event.date
-      })
-    });
-    if(!response.ok)throw new Error("done-"+response.status);
-    console.log("[German Learning] DONE synced:",event);
-  }catch(e){
-    console.warn("[German Learning] Could not sync DONE event:",e);
-  }
-  return event;
-}
+    function setUserName(name){
+      const clean=String(name||"").replace(/\s+/g," ").trim().slice(0,20);
+      try{
+        if(clean) localStorage.setItem(PROFILE_KEY,JSON.stringify({name:clean}));
+        else localStorage.removeItem(PROFILE_KEY);
+      }catch(e){}
+    }
 
-function prepareTomorrowNotifications(limit=4){
-  const tomorrow=add(1);
-  const candidates=activeCards().filter(c=>rec(c).due===tomorrow);
-  const shuffled=[...candidates].sort(()=>Math.random()-.5);
-  const notifications=shuffled.slice(0,Math.min(4,limit)).map(c=>({
-    id:c.id,
-    sentence:c.revealed||c.sentence||"",
-    translation:getTranslation(c,"sentenceTranslation")
-  }));
-  const pool={date:tomorrow,notifications,createdAt:Date.now()};
-  try{
-    localStorage.setItem("deutschNotificationPoolV1",JSON.stringify(pool));
-    console.log("[German Learning] Tomorrow notification pool:",pool);
-  }catch(e){
-    console.warn("[German Learning] Could not save notification pool:",e);
-  }
-  syncNotificationPool(pool);
-  return pool;
-}
-function build(cards=null){
- ensureDeck();
- queue=(cards||activeCards().filter(c=>rec(c).due<=day())).sort(()=>Math.random()-.5);
- idx=0;sessionTotal=queue.length;completed=0;failedToday=new Set();closedToday=new Set();
- publishWortschatzStatus(queue.length===0);
- publishWortschatzProgress();
- render();
-}
-function blankHTML(c){return c.blank.replace(/_____/g,"<span class='blank' aria-label='missing word'></span>")}
-function revealHTML(c){
- let escaped=c.revealed.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
- const ts=targetParts(c); for(const t of ts){let e=t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");escaped=escaped.replace(new RegExp(e),"<span class='target'>"+t+"</span>")}
- return escaped;
-}
-function render(){
- if(idx>=queue.length){showDone();return}
- current=queue[idx];$("counter").textContent=`${completed} / ${sessionTotal} heute`;$("bar").style.width=`${sessionTotal?completed/sessionTotal*100:100}%`;
- $("sentence").innerHTML=blankHTML(current);$("translation").textContent=getTranslation(current,"sentenceTranslation");$("answerInput").value="";
- hintsUsed=0;typoUndo=null;$("answerInput").classList.remove("almost","nudge");$("almostHint").classList.remove("show");$("almostHint").textContent="";
- $("typoBtn").textContent="Nur Tippfehler";$("typoBtn").disabled=false;$("typoBtn").classList.remove("done");
- $("question").classList.remove("hidden");$("feedback").className="feedback";$("feedbackShell").className="feedbackShell";$("feedbackShell").style.transform="";$("feedbackShell").style.opacity="";
-  if(window.deutschKeyboardReady){$("keyboard").classList.add("show");}
- if(innerWidth>=700)setTimeout(()=>$("answerInput").focus(),30);
-}
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function diffHTML(typed,correct){
- const a=[...typed],b=[...correct],m=a.length,n=b.length,dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
- for(let i=m;i>=0;i--)for(let j=n;j>=0;j--){if(i===m)dp[i][j]=n-j;else if(j===n)dp[i][j]=m-i;else if(a[i]===b[j])dp[i][j]=dp[i+1][j+1];else dp[i][j]=1+Math.min(dp[i+1][j+1],dp[i+1][j],dp[i][j+1])}
- let i=0,j=0,top=[],bottom=[];
- while(i<m||j<n){
-  if(i<m&&j<n&&a[i]===b[j]){top.push(`<span class="diffSame">${esc(a[i])}</span>`);bottom.push(`<span class="diffSame">${esc(b[j])}</span>`);i++;j++;continue}
-  const sub=i<m&&j<n?dp[i+1][j+1]:1e9,del=i<m?dp[i+1][j]:1e9,ins=j<n?dp[i][j+1]:1e9;
-  if(sub<=del&&sub<=ins){top.push(`<span class="diffWrong">${esc(a[i])}</span>`);bottom.push(`<span class="diffMissing">${esc(b[j])}</span>`);i++;j++}
-  else if(del<=ins){top.push(`<span class="diffWrong">${esc(a[i])}</span>`);i++}
-  else{bottom.push(`<span class="diffMissing">${esc(b[j])}</span>`);j++}
- }
- return [top.join(""),bottom.join("")];
-}
-function check(){
- let typed=normalize($("answerInput").value);if(!typed)return;
- const opts=targets(current), matched=opts.find(t=>normalize(t)===typed);
- let ok=!!matched;
- const r=rec(current);
- const tolerant=(r.level||0)>=TOLERANT_FROM_LEVEL&&!failedToday.has(current.id);
- if(!ok&&tolerant&&hintsUsed<MAX_HINTS&&opts.some(t=>isClose(typed,t))){
-   hintsUsed++;
-   $("almostHint").textContent=pickOne(hintsUsed>=MAX_HINTS?HINT_LAST:HINT_FIRST);$("almostHint").classList.add("show");
-   const f=$("answerInput");f.classList.add("almost");f.classList.remove("nudge");void f.offsetWidth;f.classList.add("nudge");
-   return;
- }
- // For an error, compare against the closest accepted answer so the highlighted difference is useful.
- let correct=opts[0]||"";
- if(!ok&&opts.length>1){
-   const distance=(x,y)=>{const a=[...normalize(x)],b=[...normalize(y)],d=Array.from({length:a.length+1},(_,i)=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)d[i][0]=i;for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
-   correct=[...opts].sort((x,y)=>distance(typed,x)-distance(typed,y))[0];
- } else if(ok) correct=matched;
- $("question").classList.add("hidden");$("keyboard").classList.remove("show");$("feedbackShell").className="feedbackShell show";$("feedback").className="feedback show "+(ok?"good":"bad");$("answerSentence").innerHTML=revealHTML(current);
- $("answerTranslation").textContent=getTranslation(current,"sentenceTranslation");
- let displayCorrect=normalize(correct);
- if(current&&/^(der|die|das)\\s/i.test(String(current.base||""))){
-   displayCorrect=displayCorrect.charAt(0).toLocaleUpperCase("de-DE")+displayCorrect.slice(1);
- }
- $("targetForm").textContent=displayCorrect;
- $("targetForm").style.display=ok?"inline-block":"none";
- if(!ok){const [top,bottom]=diffHTML(typed,normalize(correct));$("typedDiff").innerHTML=top;$("correctDiff").innerHTML=bottom}else{$("typedDiff").innerHTML="";$("correctDiff").innerHTML=""}
- $("base").textContent=current.base;$("meaning").textContent=getTranslation(current,"translation");$("grammar").textContent=getTranslation(current,"grammar");
- if(ok){
-   if(failedToday.has(current.id)){r.level=0;r.due=add(1)}
-   else{r.level=Math.min(r.level+1,LEARNED_LEVEL);r.due=add(steps[Math.min(r.level-1,steps.length-1)])}
-   if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
- } else {
-   typoUndo=tolerant?{id:current.id,level:r.level}:null;
-   if(typoUndo)$("feedbackShell").classList.add("canTypo");
-   failedToday.add(current.id);
-   r.level=0;r.due=day();
-   // Reinsert once at the end. It remains one of today's unique cards, so the total never grows.
-   if(!queue.slice(idx+1).some(c=>c.id===current.id))queue.push(current);
- }
- save();
- publishWortschatzStatus();
- updateEditButton();
-}
-/* ✎ on the answer screen (own words only): edit the card you're looking at. The session keeps running —
-   the corrected text shows at once; WORDS and the queue hold the same card objects, so a card that
-   comes back later in this round is already corrected. Progress is not touched. */
-function updateEditButton(){
- const b=$("editCard");if(!b)return;
- b.classList.toggle("own",!!(current&&window.WortschatzCollectionWindow&&String(current.id).charAt(0)==="u"));
-}
-function applyEditedCard(fresh){
- if(!current||!fresh||fresh.id!==current.id)return;
- Object.assign(current,fresh);
- $("answerSentence").innerHTML=revealHTML(current);
- $("answerTranslation").textContent=getTranslation(current,"sentenceTranslation");
- $("base").textContent=current.base;$("meaning").textContent=getTranslation(current,"translation");$("grammar").textContent=getTranslation(current,"grammar");
- if($("targetForm").style.display!=="none")$("targetForm").textContent=normalize(targets(current).join(" "));
-}
-if($("editCard"))$("editCard").onclick=e=>{e.stopPropagation();if(current)WortschatzCollectionWindow.editInSession(current,applyEditedCard)};
-function showDone(){
- publishWortschatzStatus(true);
- if(sessionTotal>0){
-   publishNotificationDone();
-   prepareTomorrowNotifications();
- }
- $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} heute`;$("bar").style.width="100%";
- $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"Gerade ist nichts fällig.";
- /* New words (step 6, 2026-09-26): the button says how many it really adds (+ 3 neue Wörter / + 1 neues Wort);
-    with 6–10 left, a grey line „Noch 8 neue Wörter“ (start screen: 1–10); with none left, an own collection gets
-    „+ Neue Wörter“ (opens the collection window to add or import), the built-in set keeps „Alle Wörter sind schon dabei.“ */
- const remaining=newWordsLeft();
- const own=!!(window.WortschatzCollection&&WortschatzCollection.isOwn()&&window.WortschatzCollectionWindow);
- const btn=$("addWords"),note=$("allAdded");
- if(remaining){
-   btn.textContent=remaining>=ADD_BATCH?"+ "+ADD_BATCH+" neue Wörter":"+ "+newWordsLabel(remaining);
-   btn.style.display="block";
-   // the line only adds something when the button says „+ 5“ (with fewer than 5 the button already says the number)
-   const showNote=remaining>ADD_BATCH&&remaining<=10;
-   note.textContent=showNote?"Noch "+newWordsLabel(remaining)+".":"";note.style.display=showNote?"block":"none";
- }else if(own){
-   btn.textContent="+ Neue Wörter";btn.style.display="block";
-   note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
- }else{
-   btn.style.display="none";note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
- }
-}
-function newWordsLeft(){const ids=new Set(state.activeIds);return WORDS.filter(c=>!ids.has(c.id)).length}
-function newWordsLabel(n){return n===1?"1 neues Wort":n+" neue Wörter"}
-function addFive(){
- const fresh=WORDS.filter(c=>!state.activeIds.includes(c.id)).slice(0,ADD_BATCH);if(!fresh.length)return;
- fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();publishWortschatzStatus(false);
- $("done").className="done";$("study").style.display="flex";build(fresh);
-}
-function next(){idx++;render()}
-// "Nur Tippfehler": undo the reset. The word keeps its level and comes back TOMORROW as a check
-// (not after its level's interval). Tomorrow correct -> it moves up normally.
-function markTypo(){
- if(!typoUndo||!current||typoUndo.id!==current.id)return;
- const r=rec(current);r.level=typoUndo.level;r.due=add(1);
- failedToday.delete(current.id);
- const j=queue.findIndex((c,k)=>k>idx&&c.id===current.id);if(j>-1)queue.splice(j,1);
- if(!closedToday.has(current.id)){closedToday.add(current.id);completed++}
- typoUndo=null;save();publishWortschatzStatus();
- $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;$("typoBtn").classList.add("done");
-}
-$("typoBtn").onclick=markTypo;
-$("addWords").onclick=()=>{if(newWordsLeft())addFive();else if(window.WortschatzCollectionWindow)WortschatzCollectionWindow.open()};
-$("desktopCheck").onclick=check;$("continue").onclick=next;
-document.addEventListener("keydown",e=>{
- if(e.key!=="Enter"||innerWidth<700)return;
- if(!$("feedback").classList.contains("show"))return;
- e.preventDefault();next();
-});
-$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();check()}});
-function speakCurrent(){
- speechSynthesis.cancel();
- let u=new SpeechSynthesisUtterance(current.revealed);
- u.lang="de-DE";u.rate=.88;
- speechSynthesis.speak(u);
-}
-$("feedback").addEventListener("click",e=>{
-  if(e.target.closest("#answerTop,#speakTop"))speakCurrent();
-});
-/* START SCREEN (2026-09-26): the session no longer starts on load.
-   Cards due -> start screen with today's count; Starten -> the same build() as before.
-   Nothing due -> straight to "Fertig für heute", exactly as before.
-   The keyboard loads in the background; render() shows it once it's ready. */
-const START_ABOUT={text:{
-  en:"Helps you remember words in real sentences. Each word comes back just before you'd forget it - and less and less often over time.",
-  ru:"Помогает запоминать слова в живых предложениях. Каждое слово возвращается как раз перед тем, как забудется, - и со временем всё реже."}};
-$("aboutText").textContent=getTranslation(START_ABOUT,"text");
-function dueCount(){return activeCards().filter(c=>rec(c).due<=day()).length}
-function cardsLabel(n){return n===1?"1 Karte":n+" Karten"}
-function showStart(){
- ensureDeck();
- const n=dueCount();
- publishWortschatzStatus(n===0);
- publishWortschatzProgress();
- if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
- $("startCount").textContent="Heute: "+cardsLabel(n);
- const left=newWordsLeft();$("startNote").textContent=left&&left<=10?"Noch "+newWordsLabel(left):"";
- $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
-}
-function startSession(){
- $("start").classList.remove("show");$("study").style.display="flex";
- build();
-}
-$("startBtn").onclick=startSession;
-showStart();
-// Desktop: Enter on the start screen = Starten
-document.addEventListener("keydown",e=>{if(e.key==="Enter"&&$("start").classList.contains("show")){e.preventDefault();startSession()}});
-loadKeyboardComponent().catch(e=>console.error(e));
+    function greetingState(points,vocabDone,hour){
+      if(hour>=23 || hour<5) return "lateNight";
+      if(points>=120) return "bonus";
+      if(points>=100) return "goal";
+      if(vocabDone) return "vocabDone";
+      if(points>=50) return "halfway";
+      if(points>=1) return "started";
+      if(hour<11) return "morning";
+      if(hour<18) return "daytime";
+      return "evening";
+    }
 
-function goBackToHome(){
-  try{
-    if(window.parent && window.parent!==window){
-      if(typeof window.parent.closeApp==="function"){window.parent.closeApp();return;}
-      const parentDoc=window.parent.document;
-      const shell=parentDoc.getElementById("appShell");
-      const frame=parentDoc.getElementById("appFrame");
-      if(shell && frame){
-        shell.classList.remove("open");shell.setAttribute("aria-hidden","true");
-        parentDoc.documentElement.classList.remove("app-open");frame.src="about:blank";return;
+    /* Same state on the same day always gives the same phrase. */
+    function dailyIndex(seed,length){
+      let h=2166136261;
+      for(let i=0;i<seed.length;i++){ h^=seed.charCodeAt(i); h=Math.imul(h,16777619); }
+      return (h>>>0)%length;
+    }
+
+    const greetingCanvas=document.createElement("canvas").getContext("2d");
+    function lineFits(text,element){
+      if(!element || !greetingCanvas) return true;
+      const cs=getComputedStyle(element);
+      greetingCanvas.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const box=document.getElementById("greeting");
+      const max=Math.min(GREETING_MAX_WIDTH, box && box.clientWidth ? box.clientWidth : GREETING_MAX_WIDTH);
+      return greetingCanvas.measureText(text).width<=max;
+    }
+
+    let greetingKey=null;
+    function renderGreeting(points,vocabDone){
+      const data=window.GREETINGS;
+      const box=document.getElementById("greeting");
+      const line=document.getElementById("greetingLine");
+      const sub=document.getElementById("greetingSub");
+      const name=getUserName();
+
+      if(!data || !box || !line || !sub) return;
+      const state=greetingState(points,vocabDone,new Date().getHours());
+      const list=data[state];
+      if(!Array.isArray(list) || list.length===0) return;
+      const index=dailyIndex(`${localDayKey()}|${state}`,list.length);
+      const entry=list[index];
+
+      let lines=entry.lines;
+      if(!lines){
+        lines=entry.noName;
+        if(name){
+          const named=entry.name.map(l=>l.replace("{name}",name));
+          if(named.every((l,i)=>lineFits(l,i===0?line:sub))) lines=named;
+        }
+      }
+
+      const key=`${state}|${index}|${lines.join("|")}`;
+      if(key===greetingKey) return;
+      const first=greetingKey===null;
+      greetingKey=key;
+
+      const apply=()=>{
+        line.textContent=lines[0]||"";
+        sub.textContent=lines[1]||"";
+      };
+      const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(first || reduce){ apply(); return; }
+      box.classList.add("is-fading");
+      setTimeout(()=>{ apply(); box.classList.remove("is-fading"); },250);
+    }
+
+    function resetDailyLimitForNewDay(){
+      const today=localDayKey();
+      const offDate=localStorage.getItem(DAILY_LIMIT_OFF_DATE_KEY);
+
+      if(localStorage.getItem("deutschDailyLimitEnabledV1")==="0" && offDate && offDate!==today){
+        localStorage.setItem("deutschDailyLimitEnabledV1","1");
+        localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
       }
     }
-  }catch(e){}
-  window.parent.postMessage({type:"deutsch:home"},"*");
+    function renderDailyStats(){
+      resetDailyLimitForNewDay();
+      let data={};
+      try{ data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}'); }catch(e){}
+      if(data.date!==localDayKey()) data={};
+
+      function answerCount(value){
+        if(value && typeof value==="object") return Math.max(0,Number(value.answers)||0);
+        return Math.max(0,Number(value)||0);
+      }
+
+      const configs=[
+        {key:'artikel', selector:'.tile-articles', status:'artikelStatus', goal:10},
+        {key:'verbformen', selector:'.tile-verbs', status:null, goal:10},
+        {key:'pronomen', selector:'.tile-pronouns', status:null, goal:10},
+        {key:'praepositionen', selector:'.tile-prepositions', status:null, goal:10}
+      ];
+
+      let exercisePoints=0;
+
+      configs.forEach(cfg=>{
+        let answers=answerCount(data[cfg.key]);
+
+        if(cfg.key==='verbformen'){
+          const partizipII=Number(data.verbformen?.partizipII)||0;
+          const modalverben=Number(data.verbformen?.modalverben)||0;
+          answers=partizipII+modalverben;
+        }
+
+        if(cfg.key==='praepositionen'){
+          // Sum of all Präpositionen exercises; add new ones here.
+          answers=answerCount(data.festerKasus)+answerCount(data.verbenMitPraepositionen)+answerCount(data.ortspraepositionen);
+        }
+
+        exercisePoints+=answers;
+
+        const tile=document.querySelector(cfg.selector);
+        const status=cfg.status
+          ? document.getElementById(cfg.status)
+          : tile?.querySelector('.status');
+
+        const done=answers>=cfg.goal;
+
+        if(status){
+          status.textContent=done?'✓ fertig':`${Math.min(answers,cfg.goal)} / ${cfg.goal}`;
+        }
+        if(tile) tile.classList.toggle('is-done',done);
+      });
+
+      let vocabPoints=0;
+      let vocabDone=false;
+      try{
+        const home=JSON.parse(localStorage.getItem('deutschHomeStatsV1')||'{}');
+        const ws=home.wortschatz;
+        vocabDone=!!(ws && ws.date===localDayKey() && ws.done);
+        if(vocabDone) vocabPoints=60;
+      }catch(e){}
+
+      const points=exercisePoints+vocabPoints;
+      document.getElementById('todayTotal').textContent=String(points);
+      document.getElementById('todayProgress').style.width=`${Math.min(points,100)}%`;
+
+      const hardStopOverlay=document.getElementById('hardStopOverlay');
+      const dailyLimitEnabled=localStorage.getItem("deutschDailyLimitEnabledV1")!=="0";
+       const hardStop=dailyLimitEnabled && vocabDone && points>=150;
+      if(hardStopOverlay){
+        hardStopOverlay.classList.toggle('is-active',hardStop);
+        hardStopOverlay.setAttribute('aria-hidden',hardStop?'false':'true');
+      }
+
+      renderGreeting(points,vocabDone);
+    }
+
+    window.addEventListener('message', event => {
+      const {type, exercise} = event.data || {};
+      if(type !== 'deutsch:exerciseAnswer') return;
+      if(exercise !== 'partizipII' && exercise !== 'modalverben') return;
+
+      let data = {};
+      try{ data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || '{}'); }catch(e){}
+      if(data.date !== localDayKey()) data = {date: localDayKey()};
+      data.verbformen ||= {};
+      data.verbformen[exercise] = (Number(data.verbformen[exercise]) || 0) + 1;
+
+      localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
+      renderDailyStats();
+    });
+
+    const shell = document.getElementById('appShell');
+    const frame = document.getElementById('appFrame');
+    const back = document.getElementById('homeBack');
+
+    document.querySelectorAll('[data-app]').forEach(button => {
+      button.addEventListener('click', () => {
+        frame.src = button.dataset.app;
+        shell.classList.add('open');
+        shell.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('app-open');
+      });
+    });
+
+    /* Paged tile block: page dots + arrow buttons (arrows on hover devices only). */
+    (() => {
+      const pager = document.getElementById('tilePages');
+      const prev = document.getElementById('pagePrev');
+      const next = document.getElementById('pageNext');
+      const dotsBox = document.getElementById('pageDots');
+      if (!pager || !prev || !next || !dotsBox) return;
+      const pages = [...pager.querySelectorAll('.tile-page')];
+
+      const dots = pages.map((_, n) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'page-dot';
+        dot.setAttribute('aria-label', 'Seite ' + (n + 1));
+        dot.addEventListener('click', () => goTo(n));
+        dotsBox.appendChild(dot);
+        return dot;
+      });
+      dotsBox.hidden = pages.length < 2;
+
+      function pageStep() {
+        // distance from one page to the next (the strip has extra side room for the tile shadows)
+        return pages.length > 1 ? pages[1].offsetLeft - pages[0].offsetLeft : pager.clientWidth;
+      }
+      function current() {
+        return Math.round(pager.scrollLeft / pageStep());
+      }
+      function goTo(n) {
+        n = Math.max(0, Math.min(pages.length - 1, n));
+        pager.scrollTo({ left: n * pageStep(), behavior: 'smooth' });
+      }
+      function update() {
+        const n = current();
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === n));
+        prev.classList.toggle('is-available', n > 0);
+        next.classList.toggle('is-available', n < pages.length - 1);
+      }
+
+      prev.addEventListener('click', () => goTo(current() - 1));
+      next.addEventListener('click', () => goTo(current() + 1));
+      pager.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+
+    function closeApp() {
+      renderDailyStats();
+      shell.classList.remove('open');
+      shell.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('app-open');
+      frame.src = 'about:blank';
+    }
+
+    /* ===== Back button (top left, 2026-09-26, Home 5.43) =====
+       One step up: chapter exercise (Partizip II, Fester Kasus …) → its picker; picker or single exercise → Home.
+       Start / picker / summary screens: "‹ Deutsch." / "‹ Verbformen." / "‹ Präpositionen".
+       Game (a top-bar title is visible): only "‹", placed right in front of the title (Home makes room for it).
+       Fades out while a table window is open. Home reads the exercise page directly (same site), so the
+       exercise pages themselves need no changes. */
+    /* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
+       An empty, passive listener switches it on — for Home and (above, on load) for every exercise page.
+       It never blocks scrolling, swiping or the keyboard. Home 5.44. */
+    function noTouch() {}
+    document.addEventListener('touchstart', noTouch, {passive: true});
+
+    const backLabel = document.getElementById('homeBackLabel');
+    const CHAPTERS = {
+      verbformen: {label: 'Verbformen.', tile: '.tile-verbs'},
+      praepositionen: {label: 'Präpositionen', tile: '.tile-prepositions'}
+    };
+    const TITLE_SEL = '.top-title,.top .brand';
+    const WINDOW_SEL = '.modal,.pattern-modal,.forms-modal,.omodal,.coll-modal'; // .coll-modal = Wortschatz collection window (Home 5.49)
+    let backTarget = null, backObserver = null, backRaf = 0;
+
+    function framePath() {
+      try {
+        const base = new URL('./', location.href).pathname.toLowerCase();
+        let path = decodeURIComponent(frame.contentWindow.location.pathname).toLowerCase();
+        if (path.startsWith(base)) path = path.slice(base.length);
+        return path.replace(/index\.html$/, '');
+      } catch (e) { return ''; }
+    }
+    // windows fade: judge them by display/visibility (switched at once when opening), not by the fading opacity
+    function isShown(el, win, ignoreOpacity) {
+      const cs = win.getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || (!ignoreOpacity && parseFloat(cs.opacity) < .05)) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0;
+    }
+    function updateBack() {
+      backRaf = 0;
+      if (!shell.classList.contains('open')) return;
+      let doc, win;
+      try { doc = frame.contentDocument; win = frame.contentWindow; } catch (e) {}
+      // where does "‹" lead?
+      const parts = framePath().split('/').filter(Boolean);
+      const chapter = parts.length > 1 ? CHAPTERS[parts[0]] : null;
+      backTarget = chapter ? chapter.tile : null;
+      const label = chapter ? chapter.label : 'Deutsch.';
+      back.setAttribute('aria-label', 'Zurück zu ' + label);
+      // game (visible top-bar title) or start / picker / summary screen?
+      let title = null, windowOpen = false;
+      if (doc && doc.body) {
+        if (!doc.getElementById('deutsch-back-room')) {
+          const st = doc.createElement('style');
+          st.id = 'deutsch-back-room';
+          st.textContent = '.top-title,.top .brand{padding-left:20px}'; /* room for Home's "‹" in the game top bar */
+          doc.head.appendChild(st);
+        }
+        title = [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80) || null;
+        windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
+      }
+      back.classList.toggle('is-game', !!title);
+      backLabel.textContent = title ? '' : label;
+      if (title) {
+        const r = title.getBoundingClientRect();
+        back.style.top = (r.top + r.height / 2 - 22) + 'px';
+        back.style.left = (r.left - 12) + 'px';
+      } else {
+        back.style.top = '';
+        back.style.left = '';
+      }
+      back.classList.toggle('is-hidden', windowOpen);
+    }
+    let backLate = 0;
+    function scheduleBack() {
+      if (!backRaf) backRaf = requestAnimationFrame(updateBack);
+      clearTimeout(backLate); backLate = setTimeout(updateBack, 260); // again after a window's fade has finished
+    }
+    frame.addEventListener('load', () => {
+      if (backObserver) backObserver.disconnect();
+      back.classList.remove('is-hidden');
+      try {
+        backObserver = new MutationObserver(scheduleBack);
+        backObserver.observe(frame.contentDocument.documentElement, {subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style', 'hidden', 'aria-hidden']});
+        frame.contentWindow.addEventListener('resize', scheduleBack);
+        frame.contentWindow.addEventListener('scroll', scheduleBack, {passive: true});
+        frame.contentDocument.addEventListener('touchstart', noTouch, {passive: true}); // press effect on iPhone, see below
+      } catch (e) {}
+      scheduleBack();
+      setTimeout(scheduleBack, 350); // after start-screen fade-ins
+    });
+    back.addEventListener('click', () => {
+      const tile = backTarget && document.querySelector(backTarget);
+      if (tile && tile.dataset.app) frame.src = tile.dataset.app; // chapter exercise → its picker
+      else closeApp();
+    });
+
+const HOME_STATS="deutschHomeStatsV1";
+
+function localDay(){
+  const d=new Date();
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),dd=String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${dd}`;
 }
-document.getElementById("homeBack").onclick=goBackToHome;
+
+function syncHomeDashboard(){
+  /* Wortschatz publishes this object from its own page. */
+  try{
+    const home=JSON.parse(localStorage.getItem(HOME_STATS)||"{}");
+    let ws=home.wortschatz;
+    /* (Home 5.40) First visit of the day: Wortschatz hasn't published today's count yet.
+       Count it here with the shared rule (components/deutsch-wortschatz-due-v1.js)
+       and store it, so the tile and the daily points agree. Wortschatz overwrites
+       it as soon as it opens. Only reads wortsternSRSv03, never changes it. */
+    if(!(ws && ws.date===localDay()) && window.DeutschWortschatzDue){
+      const fresh=DeutschWortschatzDue.status(DeutschWortschatzDue.readSaved());
+      if(fresh && fresh.date===localDay()){
+        ws={...fresh,updatedAt:Date.now()};
+        home.wortschatz=ws;
+        localStorage.setItem(HOME_STATS,JSON.stringify(home));
+      }
+    }
+    const wsTile=document.querySelector(".tile-vocab");
+    const wsStatus=document.getElementById("wortschatzStatus");
+    const done=!!(ws && ws.date===localDay() && ws.done);
+    if(wsTile)wsTile.classList.toggle("is-done",done);
+    if(wsStatus)wsStatus.textContent=done?"✓ fertig":((ws && ws.date===localDay() && Number.isFinite(Number(ws.remaining)) && Number(ws.remaining)>0)?`${Number(ws.remaining)} ${Number(ws.remaining)===1?"Wort":"Wörter"} übrig`:"noch offen");
+  }catch(e){}
+
+  /* renderDailyStats() is the sole authority on the compact cards' .is-done
+     state and status text — it recomputes both right below, so nothing
+     needs to pre-mark them here. */
+  renderDailyStats();
+  saveProgressSnapshot();
+}
+
+/* Progress snapshots (Documentation/PROGRESS_TRACKER.md, step 3).
+   Once per day Home stores each exercise's progress summary, so the progress screen
+   can compare today with 21 days ago and draw the 3-week lines.
+   - Source: deutschProgressV1 (written by the exercises via components/deutsch-progress-v1.js).
+   - Today's entry is overwritten whenever it changes → the last value of the day wins.
+   - Days without practice are not stored; readers use the last earlier snapshot (nothing changed).
+   - Rolling window: days older than 21 days are deleted, except the newest of them,
+     so there is always a baseline to compare against after a long break.
+   Format: {format:1, days:{"YYYY-MM-DD":{<exercise>:{t,s,i,is}}}}
+           t/s = total/sicher (weighted, bar %), i/is = items/items sicher. */
+const PROGRESS_KEY="deutschProgressV1";
+const SNAPSHOT_KEY="deutschProgressSnapshotsV1";
+const SNAPSHOT_WINDOW_DAYS=21;
+function dayKeyOffset(daysBack){
+  const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()-daysBack);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function saveProgressSnapshot(){
+  try{
+    const progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"null");
+    const exercises=progress&&progress.exercises;
+    if(!exercises||typeof exercises!=="object")return;
+    const entry={};
+    Object.keys(exercises).sort().forEach(id=>{
+      const sm=exercises[id]&&exercises[id].summary;
+      if(!sm||!(Number(sm.total)>0))return;
+      entry[id]={t:Number(sm.total),s:Number(sm.sicher)||0,i:Number(sm.items)||0,is:Number(sm.itemsSicher)||0};
+    });
+    if(!Object.keys(entry).length)return;
+
+    let store=null;
+    try{store=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"null")}catch(e){}
+    if(!store||typeof store!=="object"||!store.days||typeof store.days!=="object")store={format:1,days:{}};
+    const today=dayKeyOffset(0);
+    const before=JSON.stringify(store);
+    store.days[today]=entry;
+
+    const cutoff=dayKeyOffset(SNAPSHOT_WINDOW_DAYS);
+    const old=Object.keys(store.days).filter(d=>d<cutoff).sort();
+    old.slice(0,-1).forEach(d=>delete store.days[d]); // keep only the newest day older than the window
+
+    const after=JSON.stringify(store);
+    if(after!==before)localStorage.setItem(SNAPSHOT_KEY,after);
+  }catch(e){}
+}
+
+/* iframe/app navigation can update localStorage while Home stays mounted. */
+window.addEventListener("pageshow",syncHomeDashboard);
+window.addEventListener("storage",syncHomeDashboard);
+window.addEventListener("focus",syncHomeDashboard);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncHomeDashboard()});
+setInterval(syncHomeDashboard,1000);
+
+syncHomeDashboard();
+
+
+/* Deutsch Backup v1.
+   The envelope is intentionally module-based so future exercises can add
+   their own persistent state without changing the export workflow.
+   - Keys that don't exist yet are skipped on save, so planned keys can be
+     listed here before the feature that writes them exists.
+   - Restore skips modules it doesn't understand (unknown or outdated
+     storageVersion) instead of failing, so old backup files stay restorable.
+   - Score format changes happen inside the stored data (a format marker),
+     not by renaming keys — see Documentation/PROGRESS_TRACKER.md. */
+const DEUTSCH_BACKUP_VERSION=1;
+const BACKUP_MODULES={
+  wortschatz:{
+    label:"Wortschatz",
+    storageKey:"wortsternSRSv03",
+    storageVersion:"wortsternSRSv03"
+  },
+  /* Own word collection (wortschatz/collection.js, Documentation/WORTSCHATZ_COLLECTIONS.md).
+     Only present while the user practises their own words. */
+  wortschatzCollection:{
+    label:"Wortschatz · eigene Wörter",
+    storageKey:"deutschWortschatzCollectionV1",
+    storageVersion:"deutschWortschatzCollectionV1"
+  },
+  /* Progress of the built-in set, set aside while an own collection is active. */
+  wortschatzDemoProgress:{
+    label:"Wortschatz · Standard-Set (beiseitegelegt)",
+    storageKey:"deutschWortschatzDemoProgressV1",
+    storageVersion:"deutschWortschatzDemoProgressV1"
+  },
+  profile:{
+    label:"Name",
+    storageKey:"deutschProfileV1",
+    storageVersion:"deutschProfileV1"
+  },
+  artikel:{
+    label:"Artikel",
+    storageKey:"artikelGameDifficultyV1",
+    storageVersion:"artikelGameDifficultyV1"
+  },
+  modalverben:{
+    label:"Modalverben",
+    storageKey:"modalverbenDifficultyV1",
+    storageVersion:"modalverbenDifficultyV1"
+  },
+  partizipII:{
+    label:"Partizip II",
+    storageKey:"verbformenDifficultyV1",
+    storageVersion:"verbformenDifficultyV1"
+  },
+  pronomen:{
+    label:"Pronomen",
+    storageKey:"pronomenStatsV2",
+    storageVersion:"pronomenStatsV2"
+  },
+  festerKasus:{
+    label:"Fester Kasus",
+    storageKey:"festerKasusDifficultyV1",
+    storageVersion:"festerKasusDifficultyV1"
+  },
+  verbenMitPraepositionen:{
+    label:"Verben mit Präpositionen",
+    storageKey:"verbenPraepStatsV1",
+    storageVersion:"verbenPraepStatsV1"
+  },
+  ortspraepositionen:{
+    label:"Ortspräpositionen",
+    storageKey:"ortspraepositionenDifficultyV1",
+    storageVersion:"ortspraepositionenDifficultyV1"
+  },
+  /* Setting, not progress: always included (current value, even if never
+     changed), but a backup with only settings counts as "No progress found". */
+  translations:{
+    label:"Your language",
+    storageKey:"deutschTranslationLangV1",
+    storageVersion:"deutschTranslationLangV1",
+    setting:true,
+    current:()=>window.DeutschTranslation ? window.DeutschTranslation.getLang() : null
+  },
+  /* Anonymous notification user ID (Documentation/NOTIFICATION_SYSTEM_MASTER.md, §15).
+     Keeps the same notification identity after a Home Screen reinstall and
+     links a second device (iPad) to the same user. The deviceId is NOT
+     backed up: it must stay unique per device. Stored as a plain string. */
+  notificationUser:{
+    label:"Notifications",
+    storageKey:"deutschNotificationUserIdV1",
+    storageVersion:"deutschNotificationUserIdV1",
+    setting:true,
+    plain:true
+  },
+  /* Planned — Progress Tracker (not written by any module yet). */
+  progress:{
+    label:"Fortschritt",
+    storageKey:"deutschProgressV1",
+    storageVersion:"deutschProgressV1"
+  },
+  progressSnapshots:{
+    label:"Fortschritt-Verlauf",
+    storageKey:"deutschProgressSnapshotsV1",
+    storageVersion:"deutschProgressSnapshotsV1"
+  }
+};
+
+function buildDeutschBackup(){
+  const modules={};
+  Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
+    const raw=localStorage.getItem(config.storageKey);
+    let state;
+    if(config.current){
+      state=config.current();
+      if(state===null||state===undefined)return;
+    }else{
+      if(raw===null)return;
+      try{state=JSON.parse(raw)}catch(e){state=raw}
+    }
+    modules[moduleName]={
+      storageVersion:config.storageVersion,
+      state
+    };
+  });
+  return {
+    app:"Deutsch",
+    backupVersion:DEUTSCH_BACKUP_VERSION,
+    createdAt:new Date().toISOString(),
+    modules
+  };
+}
+
+function saveDeutschBackup(){
+  const note=document.getElementById("backupNote");
+  try{
+    const backup=buildDeutschBackup();
+    if(!Object.keys(backup.modules).some(name=>!BACKUP_MODULES[name]?.setting)){
+      if(note)note.textContent="· No progress found";
+      return;
+    }
+    const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="Deutsch Backup.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    if(note)note.textContent="· Backup created";
+  }catch(e){
+    if(note)note.textContent="· Backup failed";
+  }
+}
+
+function validateDeutschBackup(backup){
+  if(!backup||backup.app!=="Deutsch")throw new Error("not-deutsch");
+  if(backup.backupVersion!==DEUTSCH_BACKUP_VERSION)throw new Error("version");
+  if(!backup.modules||typeof backup.modules!=="object")throw new Error("modules");
+
+  const restorable=[];
+  Object.entries(BACKUP_MODULES).forEach(([moduleName,config])=>{
+    const moduleBackup=backup.modules[moduleName];
+    if(!moduleBackup||typeof moduleBackup!=="object")return;
+    /* Skip what this app version doesn't understand instead of failing the whole restore. */
+    if(moduleBackup.storageVersion!==config.storageVersion)return;
+    if(moduleBackup.state===undefined||moduleBackup.state===null)return;
+    restorable.push([moduleName,config,moduleBackup.state]);
+  });
+  if(restorable.length===0)throw new Error("nothing");
+  return restorable;
+}
+
+async function restoreDeutschBackup(file){
+  const note=document.getElementById("restoreNote");
+  try{
+    const backup=JSON.parse(await file.text());
+    const restorable=validateDeutschBackup(backup);
+    const created=backup.createdAt ? new Date(backup.createdAt) : null;
+    const dateLabel=created&&!Number.isNaN(created.getTime())
+      ? created.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})
+      : "unknown date";
+    const moduleLabel=restorable.map(([name,config])=>config.label||name).join(", ");
+    if(!window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)){
+      if(note)note.textContent="· Restore cancelled";
+      return;
+    }
+    const previousNotificationUser=localStorage.getItem("deutschNotificationUserIdV1");
+    restorable.forEach(([,config,state])=>{
+      localStorage.setItem(config.storageKey,
+        config.plain&&typeof state==="string" ? state : JSON.stringify(state));
+    });
+    /* Wortschatz progress only makes sense together with the words it belongs to.
+       A backup with Wortschatz progress but no own collection (e.g. made before own collections
+       existed, or while using the built-in set) means: built-in set → drop an own collection on this
+       device, so old progress and other words never get mixed. Same for the set-aside demo progress. */
+    const restoredNames=new Set(restorable.map(([name])=>name));
+    if(restoredNames.has("wortschatz")){
+      if(!restoredNames.has("wortschatzCollection"))localStorage.removeItem("deutschWortschatzCollectionV1");
+      if(!restoredNames.has("wortschatzDemoProgress"))localStorage.removeItem("deutschWortschatzDemoProgressV1");
+    }
+
+    /* Refresh Home statistics from the restored Wortschatz state.
+       Wortschatz is closed during Restore, so there is no iframe to reload. */
+    const restoredWortschatz=restorable.find(([name])=>name==="wortschatz");
+    if(restoredWortschatz){
+      const state=restoredWortschatz[2];
+      const cards=state&&state.cards&&typeof state.cards==="object" ? state.cards : {};
+      const activeIds=Array.isArray(state?.activeIds) ? state.activeIds : [];
+      const today=localDay();
+      let remaining,total;
+      if(window.DeutschWortschatzDue){
+        /* Same rule as Wortschatz and the Home tile (components/deutsch-wortschatz-due-v1.js). */
+        ({remaining,total}=DeutschWortschatzDue.count({cards,activeIds}));
+      }else{
+        const now=Date.now();
+        remaining=activeIds.filter(id=>{
+          const card=cards[id];
+          if(!card)return false;
+          if(!card.due)return true;
+          const due=new Date(card.due).getTime();
+          return Number.isNaN(due) || due<=now;
+        }).length;
+        total=activeIds.length;
+      }
+      const done=total>0 && remaining===0;
+      try{
+        localStorage.setItem(HOME_STATS,JSON.stringify({
+          date:today,
+          wortschatz:{date:today,remaining,done,total}
+        }));
+      }catch(e){}
+    }
+
+    const langToggle=document.getElementById("translationLangToggle");
+    if(langToggle&&window.DeutschTranslation){
+      const lang=window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang",lang);
+      langToggle.setAttribute("aria-label","Your Language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+    }
+
+    /* Move this device's push subscription to the restored notification ID. */
+    const restoredNotificationUser=localStorage.getItem("deutschNotificationUserIdV1");
+    let notificationsMoved=true;
+    if(restoredNotificationUser&&restoredNotificationUser!==previousNotificationUser&&
+       window.DeutschNotifications){
+      notificationsMoved=await window.DeutschNotifications.relink(previousNotificationUser);
+    }
+
+    if(note)note.textContent=notificationsMoved
+      ? "· Restore complete"
+      : "· Restored · turn Notifications on again";
+    const nameField=document.getElementById("nameInput");
+    if(nameField)nameField.value=getUserName();
+    syncHomeDashboard();
+  }catch(e){
+    if(note)note.textContent="· Restore failed";
+  }
+}
+
+document.getElementById("backupSave")?.addEventListener("click",saveDeutschBackup);
+document.getElementById("backupRestore")?.addEventListener("click",()=>{
+  const input=document.getElementById("backupFile");
+  if(input){input.value="";input.click()}
+});
+document.getElementById("backupFile")?.addEventListener("change",event=>{
+  const file=event.target.files?.[0];
+  if(file)restoreDeutschBackup(file);
+});
+
+
+/* Notifications v5.2 — iOS Safari Home Screen Web App only.
+   This block is isolated from the existing Home logic. */
+(function initDeutschNotifications(){
+  const SERVER="https://german-learning-notifications.d45zgw2cgh.workers.dev";
+  const ENABLED_KEY="deutschNotificationEnabledV1";
+  const USER_KEY="deutschNotificationUserIdV1";
+  const DEVICE_KEY="deutschNotificationDeviceIdV1";
+
+  const box=document.getElementById("notificationSettings");
+  const toggle=document.getElementById("notificationToggle");
+  const state=document.getElementById("notificationState");
+  const note=document.getElementById("notificationNote");
+
+  if(!box || !toggle || !state) return;
+
+  box.style.width="100%";
+  box.style.textAlign="center";
+
+  function isIOSDevice(){
+    const ua=navigator.userAgent||"";
+    const platform=navigator.platform||"";
+    return /iPhone|iPad|iPod/i.test(ua) ||
+      (platform==="MacIntel" && navigator.maxTouchPoints>1);
+  }
+
+  function isStandalone(){
+    return navigator.standalone===true ||
+      !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+  }
+
+  function isIOSHomeScreenApp(){
+    return isIOSDevice() && isStandalone();
+  }
+
+  function enabled(){
+    return localStorage.getItem(ENABLED_KEY)==="1";
+  }
+
+  function getDeviceId(){
+    let id=localStorage.getItem(DEVICE_KEY);
+    if(!id){
+      try{
+        id=(crypto.randomUUID ? crypto.randomUUID() :
+          "device-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+      }catch(e){
+        id="device-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+      }
+      localStorage.setItem(DEVICE_KEY,id);
+    }
+    return id;
+  }
+
+  function getUserId(){
+    let id=localStorage.getItem(USER_KEY);
+    if(!id){
+      try{
+        id=(crypto.randomUUID ? crypto.randomUUID() :
+          "user-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+      }catch(e){
+        id="user-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+      }
+      localStorage.setItem(USER_KEY,id);
+    }
+    return id;
+  }
+
+  function render(){
+    const visible=isIOSHomeScreenApp();
+    box.hidden=!visible;
+    if(!visible) return;
+
+    const on=enabled();
+    state.textContent=on?"ON":"OFF";
+    toggle.setAttribute("aria-checked",on?"true":"false");
+  }
+
+  function base64ToBytes(value){
+    const padding="=".repeat((4-value.length%4)%4);
+    const base64=(value+padding).replace(/-/g,"+").replace(/_/g,"/");
+    const raw=atob(base64);
+    const out=new Uint8Array(raw.length);
+    for(let i=0;i<raw.length;i++) out[i]=raw.charCodeAt(i);
+    return out;
+  }
+
+  async function registerPush(){
+    if(!("serviceWorker" in navigator)) throw new Error("service-worker");
+    if(!("PushManager" in window)) throw new Error("push-not-supported");
+    if(!("Notification" in window)) throw new Error("notifications-not-supported");
+
+    const registration=await navigator.serviceWorker.register("./sw.js",{scope:"./"});
+    await navigator.serviceWorker.ready;
+
+    const permission=await Notification.requestPermission();
+    if(permission!=="granted") throw new Error("permission");
+
+    const configResponse=await fetch(SERVER+"/push-config",{cache:"no-store"});
+    if(!configResponse.ok) throw new Error("push-config-"+configResponse.status);
+    const config=await configResponse.json();
+    if(!config.publicKey) throw new Error("missing-public-key");
+
+    let subscription=await registration.pushManager.getSubscription();
+    if(!subscription){
+      subscription=await registration.pushManager.subscribe({
+        userVisibleOnly:true,
+        applicationServerKey:base64ToBytes(config.publicKey)
+      });
+    }
+
+    const response=await fetch(SERVER+"/subscribe",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getUserId(),
+        deviceId:getDeviceId(),
+        subscription:subscription.toJSON()
+      })
+    });
+
+    if(!response.ok) throw new Error("subscribe-"+response.status);
+  }
+
+  async function setServerState(on){
+    const response=await fetch(SERVER+(on?"/go":"/stop"),{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId:getUserId(),
+        deviceId:getDeviceId()
+      })
+    });
+    if(!response.ok) throw new Error((on?"/go":"/stop")+"-"+response.status);
+  }
+
+  toggle.addEventListener("click",async()=>{
+    const next=!enabled();
+    toggle.disabled=true;
+    if(note) note.textContent="";
+
+    try{
+      if(next) await registerPush();
+      await setServerState(next);
+      localStorage.setItem(ENABLED_KEY,next?"1":"0");
+    }catch(error){
+      console.error("Deutsch notifications:",error);
+      if(note) note.textContent="Notification setup failed.";
+    }finally{
+      toggle.disabled=false;
+      render();
+    }
+  });
+
+  /* After a backup restore changed the userId: if this device has
+     notifications ON, register its existing subscription under the restored
+     userId, enable that user and detach the device from the old userId.
+     The old userId is then cleaned up by the Worker Cron. */
+  async function relink(oldUserId){
+    if(!enabled()) return true;
+    try{
+      const registration=await navigator.serviceWorker.getRegistration("./");
+      const subscription=registration && await registration.pushManager.getSubscription();
+      if(!subscription) throw new Error("no-subscription");
+
+      const response=await fetch(SERVER+"/subscribe",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          userId:getUserId(),
+          deviceId:getDeviceId(),
+          subscription:subscription.toJSON()
+        })
+      });
+      if(!response.ok) throw new Error("subscribe-"+response.status);
+      await setServerState(true);
+
+      if(oldUserId && oldUserId!==getUserId()){
+        fetch(SERVER+"/unsubscribe",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({userId:oldUserId,deviceId:getDeviceId()})
+        }).catch(()=>{});
+      }
+      return true;
+    }catch(error){
+      console.error("Deutsch notifications relink:",error);
+      localStorage.setItem(ENABLED_KEY,"0");
+      render();
+      return false;
+    }
+  }
+
+  window.DeutschNotifications={relink};
+
+  resetDailyLimitForNewDay();
+  render();
+})();
+  
+(function initDeutschSettings(){
+  const open=document.getElementById("settingsOpen");
+  const panel=document.getElementById("settingsPanel");
+  const title=document.getElementById("settingsPanel")?.querySelector(".settings-title");
+  const ghost=document.getElementById("settingsMorph");
+  const close=document.getElementById("settingsClose");
+  const theme=document.getElementById("themeToggle");
+  const limit=document.getElementById("dailyLimitToggle");
+  const langToggle=document.getElementById("translationLangToggle");
+  const confirm=document.getElementById("dailyLimitConfirm");
+  const no=document.getElementById("dailyLimitNo");
+  const yes=document.getElementById("dailyLimitYes");
+  const LIMIT_KEY="deutschDailyLimitEnabledV1";
+  const nameInput=document.getElementById("nameInput");
+
+  const limitOn=()=>localStorage.getItem(LIMIT_KEY)!=="0";
+
+  function render(){
+    resetDailyLimitForNewDay();
+    theme.setAttribute("aria-checked",window.DeutschTheme.isLight()?"true":"false");
+    limit.setAttribute("aria-checked",limitOn()?"true":"false");
+    if(langToggle && window.DeutschTranslation){
+      const lang=window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang",lang);
+      langToggle.setAttribute("aria-label","Your Language: "+(lang==="en"?"English":"Russian")+". Tap to switch.");
+    }
+    if(nameInput && document.activeElement!==nameInput) nameInput.value=getUserName();
+  }
+
+  /* Word-morph animation: the "Settings" launcher word flies up, scales and
+     brightens into the panel's header title (and reverses on close), instead
+     of just appearing/disappearing as the panel slides. Font-size is never
+     animated directly (expensive, can look jerky) — the ghost is rendered at
+     the destination's true size and transformed to visually sit at the
+     origin, then that transform animates back to identity. */
+  const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canMorph=!reduceMotion && open && panel && title && ghost;
+
+  function rectAsIfOpen(){
+    // While the panel is closed it sits translateY(100%) — i.e. shifted
+    // down by exactly its own rendered height — so the title's on-screen
+    // position once open is simply its current rect shifted up by that.
+    const r=title.getBoundingClientRect();
+    const h=panel.offsetHeight;
+    return {left:r.left, top:r.top-h, width:r.width, height:r.height};
+  }
+
+  function flyGhost(from,to,fromColor,toColor,onDone){
+    ghost.style.transition="none";
+    ghost.style.left=to.left+"px";
+    ghost.style.top=to.top+"px";
+    ghost.style.width=to.width+"px";
+    ghost.style.height=to.height+"px";
+    ghost.style.alignItems="center";
+    ghost.style.justifyContent="center";
+    ghost.style.fontSize=getComputedStyle(title).fontSize;
+    ghost.style.fontWeight=getComputedStyle(title).fontWeight;
+    ghost.style.letterSpacing=getComputedStyle(title).letterSpacing;
+    ghost.style.color=fromColor;
+    ghost.style.opacity="1";
+
+    const scaleX=from.width/to.width;
+    const scaleY=from.height/to.height;
+    const dx=(from.left+from.width/2)-(to.left+to.width/2);
+    const dy=(from.top+from.height/2)-(to.top+to.height/2);
+    ghost.style.transform=`translate(${dx}px,${dy}px) scale(${scaleX},${scaleY})`;
+
+    void ghost.offsetWidth; // flush so the start state above actually renders
+
+    ghost.style.transition="transform .42s cubic-bezier(.22,.61,.36,1), color .3s ease";
+    ghost.style.transform="translate(0,0) scale(1,1)";
+    ghost.style.color=toColor;
+
+    let done=false;
+    const finish=()=>{
+      if(done) return;
+      done=true;
+      ghost.style.opacity="0";
+      onDone();
+    };
+    ghost.addEventListener("transitionend",finish,{once:true});
+    setTimeout(finish,460); // safety net if transitionend never fires
+  }
+
+  function playOpenMorph(){
+    // Measured while still closed, so the subtraction trick above holds.
+    const from=open.getBoundingClientRect();
+    const to=rectAsIfOpen();
+    const fromColor=getComputedStyle(open).color;
+    const toColor=getComputedStyle(title).color;
+    title.style.visibility="hidden";
+    flyGhost(from,to,fromColor,toColor,()=>{ title.style.visibility=""; });
+  }
+
+  function playCloseMorph(){
+    // Measured while still open, so no adjustment is needed here.
+    const from=title.getBoundingClientRect();
+    const to=open.getBoundingClientRect();
+    const fromColor=getComputedStyle(title).color;
+    const toColor=getComputedStyle(open).color;
+    open.style.visibility="hidden";
+    flyGhost(from,to,fromColor,toColor,()=>{ open.style.visibility=""; });
+  }
+
+  function openSettings(){
+    render();
+    if(canMorph) playOpenMorph();
+    document.documentElement.classList.add("home-settings-open");
+    panel.classList.add("is-open");
+    panel.setAttribute("aria-hidden","false");
+    open?.setAttribute("aria-expanded","true");
+  }
+  function closeSettings(){
+    nameInput?.blur();
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    if(canMorph) playCloseMorph();
+    panel.classList.remove("is-open");
+    panel.setAttribute("aria-hidden","true");
+    document.documentElement.classList.remove("home-settings-open");
+    open?.setAttribute("aria-expanded","false");
+  }
+
+  open?.addEventListener("click",()=>{ panel.classList.contains("is-open") ? closeSettings() : openSettings(); });
+  close?.addEventListener("click",closeSettings);
+
+  nameInput?.addEventListener("input",()=>{
+    setUserName(nameInput.value);
+    renderDailyStats();
+  });
+  nameInput?.addEventListener("keydown",event=>{
+    if(event.key==="Enter"){ event.preventDefault(); nameInput.blur(); }
+  });
+  nameInput?.addEventListener("blur",()=>{ nameInput.value=getUserName(); });
+
+  theme?.addEventListener("click",()=>{
+    window.DeutschTheme.set(!window.DeutschTheme.isLight());
+    render();
+  });
+
+  langToggle?.addEventListener("click",()=>{
+    if(!window.DeutschTranslation)return;
+    window.DeutschTranslation.setLang(window.DeutschTranslation.getLang()==="en"?"ru":"en");
+    render();
+    document.dispatchEvent(new CustomEvent("deutsch:translationlang"));
+  });
+
+  limit?.addEventListener("click",()=>{
+    if(limitOn()){
+      confirm.classList.add("is-open");
+      confirm.setAttribute("aria-hidden","false");
+    }else{
+      localStorage.setItem(LIMIT_KEY,"1");
+      localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
+      renderDailyStats();
+      render();
+    }
+  });
+
+  // Tap outside the window or Esc = "No" (like the table windows).
+  confirm?.addEventListener("click",event=>{ if(event.target===confirm) no?.click(); });
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape"&&confirm?.classList.contains("is-open")){ event.stopPropagation(); no?.click(); }
+  },true);
+
+  no?.addEventListener("click",()=>{
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    render();
+  });
+
+  yes?.addEventListener("click",()=>{
+    localStorage.setItem(LIMIT_KEY,"0");
+    localStorage.setItem(DAILY_LIMIT_OFF_DATE_KEY,localDayKey());
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden","true");
+    renderDailyStats();
+    render();
+  });
+
+  // The early <head> script already set data-theme before first paint (to
+  // avoid a flash), but couldn't touch icons — the DOM didn't exist yet.
+  // Apply the full theme now, including icons, now that it does.
+  window.DeutschTheme.apply(window.DeutschTheme.isLight());
+  render();
+})();
+
 </script>
-</body></html>
+ <script src="progress-screen.js?v=17"></script>
+<script>
+/* ===== ABOUT window (Settings → About) — text in the chosen translation language =====
+   \u00a0 = non-breaking space: keeps each example group (der, die or das) on one line. */
+(function(){
+  const ABOUT_TEXT={
+    en:"Some German grammar you can understand. Some you just have to remember - der,\u00a0die\u00a0or\u00a0das, ihr\u00a0or\u00a0Ihnen, am\u00a0or\u00a0im. This app is made for exactly those parts. Short daily rounds help them stick.",
+    ru:"Часть немецкой грамматики можно понять. А часть приходится просто запомнить - der,\u00a0die\u00a0или\u00a0das, ihr\u00a0или\u00a0Ihnen, am\u00a0или\u00a0im. Именно для этого и создано приложение. Короткие ежедневные раунды помогают всё закрепить."
+  };
+  const win=document.getElementById("aboutWindow"),openBtn=document.getElementById("aboutOpen"),closeBtn=document.getElementById("aboutClose"),text=document.getElementById("aboutText");
+  if(!win||!openBtn)return;
+  function lang(){try{return window.DeutschTranslation?window.DeutschTranslation.getLang():(localStorage.getItem("deutschTranslationLangV1")||"en")}catch(e){return "en"}}
+  function open(){text.textContent=ABOUT_TEXT[lang()]||ABOUT_TEXT.en;win.classList.add("open");win.setAttribute("aria-hidden","false");}
+  function close(){win.classList.remove("open");win.setAttribute("aria-hidden","true");}
+  openBtn.addEventListener("click",open);
+  closeBtn.addEventListener("click",close);
+  win.addEventListener("click",e=>{if(e.target===win)close();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&win.classList.contains("open")){e.stopPropagation();close();}},true);
+})();
+</script>
+</body>
+</html>
