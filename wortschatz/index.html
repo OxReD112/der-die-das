@@ -455,7 +455,10 @@ body:has(#done.show) header{display:none}
 #done.show{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
 #done .doneInner{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;width:100%;padding-top:36px}
 #done .doneTop h1{margin:0 0 15px}
-#done .doneWords{margin:auto 0;padding:28px 0;display:flex;flex-direction:column;align-items:center}
+#done .doneWords{margin:0;padding:clamp(40px,8vh,80px) 0;display:flex;flex-direction:column;align-items:center}
+/* v2.98: compact — fixed moderate gaps, the whole group centred vertically (headline lower, buttons higher) */
+#done .doneInner{justify-content:center;padding-top:0}
+#done .doneTop h1{line-height:1.05}
 #done .allAdded{margin:6px 0 0;font-size:14px}
 #done .finish-actions{margin-top:0}
 #done .startLabel,#start .startLabel{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
@@ -464,6 +467,14 @@ body:has(#done.show) header{display:none}
 #done .coll-line:active{transform:scale(.97);filter:brightness(.94)}
 #done .coll-line-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 #done .coll-line-count{color:var(--muted);font-weight:400;white-space:pre;flex:0 0 auto}
+/* v2.99: name ›  on one line, the word count underneath (grey), then the red note; „Heute: 12 Karten“ above the buttons.
+   Red = „needs your attention“ outside the exercises (palette red): few or no new words left. */
+#start .collCount,#done .collCount{margin:2px 0 0;font-size:14px;color:var(--muted)}
+#start .startNote,#done .allAdded{color:var(--error);font-size:14px;font-weight:500}
+#start .startWords .startNote{margin:10px 0 0}
+#done .allAdded{margin:10px 0 0}
+#start .startActions .subtitle{margin:0 0 14px;font-size:15px}
+#done .doneScore:empty{display:none}
 #done .coll-line-chev{color:var(--muted);font-size:22px;line-height:1;margin-left:8px;flex:0 0 auto;transform:translateY(-1px)}
 /* Starter-Set window: the word list unfolds below „Show All Words in the Set“ */
 .coll-list-below{margin-top:6px;border-bottom:0}
@@ -478,7 +489,7 @@ body:has(#done.show) header{display:none}
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p></div><div class="startActions"><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></div></section>
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="collCount" id="collCountStart"></p><p class="startNote" id="startNote"></p></div><div class="startActions"><p class="subtitle" id="startCount"></p><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></div></section>
 <section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
@@ -510,19 +521,19 @@ body:has(#done.show) header{display:none}
   <button id="typoBtn" type="button">Nur Tippfehler</button>
  </div>
 </section>
-<section class="done" id="done"><div class="doneInner" id="doneInner"><div class="doneTop"><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div></div><div class="doneWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnDone" type="button"></button><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div></div><div class="finish-actions"><button class="addWords" id="addWords">5 neue Wörter lernen</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
+<section class="done" id="done"><div class="doneInner" id="doneInner"><div class="doneTop"><h1>Fertig<br>für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div></div><div class="doneWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnDone" type="button"></button><p class="collCount" id="collCountDone"></p><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div></div><div class="finish-actions"><button class="addWords" id="addWords">5 neue Wörter lernen</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
 <div class="coll-modal" id="collModal" aria-hidden="true"><div class="coll-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div></div>
 <div class="start-about" id="startAbout">
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.97</div>
+<div class="version-mark">v2.99</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=9"></script>
+<script src="collection-window.js?v=10"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -883,7 +894,7 @@ function showDone(){
    prepareTomorrowNotifications();
  }
  $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} heute`;$("bar").style.width="100%";
- $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"Gerade ist nichts fällig.";
+ $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"";   // v2.99: no „Gerade ist nichts fällig.“ — „Fertig für heute. Komm morgen wieder.“ says it
  /* New words (step 6, 2026-09-26): the button says how many it really adds (+ 3 neue Wörter / + 1 neues Wort);
     with 6–10 left, a grey line „Noch 8 neue Wörter“ (start screen: 1–10); with none left, an own collection gets
     „+ Neue Wörter“ (opens the collection window to add or import), the built-in set keeps „Alle Wörter sind schon dabei.“ */
@@ -894,9 +905,9 @@ function showDone(){
  if(remaining){
    btn.textContent=remaining>=ADD_BATCH?ADD_BATCH+" neue Wörter lernen":newWordsLabel(remaining)+" lernen";
    btn.style.display="block";
-   // the line only adds something when the button says „+ 5“ (with fewer than 5 the button already says the number)
-   const showNote=remaining>ADD_BATCH&&remaining<=10;
-   note.textContent=showNote?"Noch "+newWordsLabel(remaining)+".":"";note.style.display=showNote?"block":"none";
+   // v2.99: red note whenever 10 or fewer are left — also when the button already says the number (to make it clear)
+   const showNote=remaining<=10;
+   note.textContent=showNote?"Noch "+newWordsLabel(remaining):"";note.style.display=showNote?"block":"none";
  }else if(own){
    btn.textContent="＋ Neue Wörter";btn.style.display="block";
    note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
@@ -968,7 +979,7 @@ function showStart(){
  publishWortschatzProgress();
  if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
  $("startCount").textContent="Heute: "+cardsLabel(n);
- const left=newWordsLeft();$("startNote").textContent=left&&left<=10?"Noch "+newWordsLabel(left):"";
+ const left=newWordsLeft();$("startNote").textContent=left>10?"":(left?"Noch "+newWordsLabel(left):"Keine neuen Wörter mehr");
  $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
  layoutStart();
 }

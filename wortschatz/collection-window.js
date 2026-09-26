@@ -34,10 +34,10 @@
       const b=$(id);if(!b)return;
       b.textContent="";
       b.appendChild(el("span","coll-line-name",name()));
-      b.appendChild(el("span","coll-line-count"," · "+count));
       b.appendChild(el("span","coll-line-chev","›",{"aria-hidden":"true"}));
       b.setAttribute("aria-label","Word collection: "+label);
     });
+    ["collCountStart","collCountDone"].forEach(id=>{const c=$(id);if(c)c.textContent=count});   // count on its own line (v2.99)
     const ownBtn=$("ownWordsBtn");if(ownBtn)ownBtn.style.display=own()?"none":"";
   }
 
