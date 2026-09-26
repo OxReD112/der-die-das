@@ -1254,6 +1254,29 @@ header h1 {
 .settings-launcher:active{color:var(--muted);transform:translateX(50%) scale(.97);filter:brightness(.94)}
 @media (prefers-reduced-motion:reduce){.mosaic .module,.mosaic .tile-today,.phrase-week-home-row,.settings-launcher{transition:none}}
 
+/* ===== PHRASE SCREEN · Design Police clean-up (2026-09-26, Home 5.38) =====
+   Position: the block (label … ‹ button) sits slightly above the middle (45 / 55) of the free space
+   between the "Deutsch." title and the "Settings" link. The old top padding added the notch area a second
+   time (it is already in the body padding) → the block sat 45–60px too low on iPhones.
+   The screen starts 30px below the title (desktop: 50px), so the bottom padding gets the same extra
+   (26px up to "Settings" + 30, + 6px measured optical correction) to keep the middle of the free space. Long phrases: block starts at the top, page scrolls. */
+.phrase-screen{flex-direction:column;align-items:stretch;justify-content:flex-start;padding-top:0;padding-bottom:62px}
+.phrase-screen::before{content:"";flex:45 1 0}
+.phrase-screen::after{content:"";flex:55 1 0}
+.phrase-screen-content{flex:0 0 auto}
+@media (min-width:650px){
+  /* body padding-top is 48px here (not notch + 28px): the page was 20px taller than the window and scrolled */
+  .page{min-height:calc(100dvh - env(safe-area-inset-bottom) - 80px)}
+  .phrase-screen{min-height:calc(100dvh - env(safe-area-inset-bottom) - 136px);padding-bottom:calc(82px - env(safe-area-inset-top))}
+}
+/* colours → palette: meaning = secondary text (the explanation, easiest to read after the title); the rest = grey */
+.phrase-screen .phrase-week-label,.phrase-screen .phrase-week-literal,.phrase-screen .phrase-week-example{color:var(--muted)}
+.phrase-screen .phrase-week-meaning{color:var(--secondary-text)}
+/* ‹ button: 10% outline, arrow in text colour (like the › on the Home row), shared press effect, full font list */
+.phrase-screen-back{border-color:var(--hairline);color:var(--text);font:400 28px/42px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;transition:transform .12s ease,filter .12s ease}
+.phrase-screen-back:active{opacity:1;transform:scale(.97);filter:brightness(.94)}
+@media (prefers-reduced-motion:reduce){.phrase-screen-back{transition:none}}
+
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1427,7 +1450,7 @@ header h1 {
      </div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.37</div>
+    <div class="settings-version">Deutsch. version 5.38</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
