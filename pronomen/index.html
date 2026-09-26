@@ -265,6 +265,18 @@ body:has(#start.hidden) .start-about{display:none}
   background:linear-gradient(100deg,transparent 0 1%,color-mix(in srgb,var(--red) var(--mark-strength),transparent) 3% 96%,transparent 99%);
   background-size:100% 78%;background-position:0 70%;background-repeat:no-repeat}
 .mk-legend{margin:8px 0 0;font-size:11px;font-weight:500;line-height:1.35;color:var(--muted)}
+/* ===== REFERENCE TABLE · COMPACT (2026-09-26) — shorter window that scrolls inside, tighter title gap and rows,
+   legend above the first table so both tables sit close, opening the endings scrolls them into view ===== */
+.modal-card{max-height:min(74vh,640px)}
+.modal-head h2{margin:10px 0 2px}
+#modalBody .tbl{margin-top:4px}
+#modalBody .tbl th,#modalBody .tbl td{padding:7px 12px;line-height:1.3}
+#modalBody .tbl th:first-child,#modalBody .tbl td:first-child{padding-left:0}
+#modalBody .tbl th:last-child,#modalBody .tbl td:last-child{padding-right:0}
+#modalBody .mk-legend{margin:2px 0 6px}
+#modalBody .tbl-note{margin-top:8px}
+#modalBody .tbl-more{margin-top:16px;padding-bottom:2px}
+#modalBody .tbl-more .tbl{margin-top:2px}
 </style>
 
 <link rel="manifest" href="../manifest.webmanifest">
@@ -585,10 +597,18 @@ function markWeakTable(){
   });
   document.querySelectorAll('#modalBody td.hot').forEach(td=>{td.innerHTML='<span class="mk">'+td.innerHTML+'</span>'});
   if(document.querySelector('#modalBody .hot')){
-    document.querySelector('#modalBody .tbl-note').insertAdjacentHTML('afterend','<div class="mk-legend"><span class="mk">markiert</span> = zuletzt Fehler</div>');
+    document.querySelector('#modalBody .tbl').insertAdjacentHTML('beforebegin','<div class="mk-legend"><span class="mk">markiert</span> = zuletzt Fehler</div>');
   }
   const more=document.querySelector('#modalBody .tbl-more');
   if(more&&more.querySelector('.hot'))more.open=true;
+  if(more)more.addEventListener('toggle',()=>{
+    if(!more.open)return;
+    const body=$('modalBody');
+    requestAnimationFrame(()=>{  /* bring the opened endings table into view so the change is always visible */
+      const top=body.scrollTop+more.getBoundingClientRect().top-body.getBoundingClientRect().top-6;
+      body.scrollTo({top:Math.min(top,body.scrollHeight-body.clientHeight),behavior:'smooth'});
+    });
+  });
 }
 
 document.querySelectorAll('[data-table]').forEach(b=>b.onclick=()=>{
