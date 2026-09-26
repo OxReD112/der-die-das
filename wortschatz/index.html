@@ -440,6 +440,15 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
 #start .ownWordsBtn{width:312px;max-width:100%;height:52px;margin:0 0 12px;padding:0;border:0;border-radius:16px;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);color:var(--text);
   font:600 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
 #start .ownWordsBtn:active{transform:scale(.97);filter:brightness(.94)}
+/* Starter-Set window: the word list unfolds below „Show All Words in the Set“ */
+.coll-list-below{margin-top:6px;border-bottom:0}
+/* Own collection window (v2.95): ＋ Add Word on top, list in the middle, Export · Delete as quiet links at the bottom */
+.coll-top{padding-top:2px}
+.coll-top .coll-link{align-self:center;padding:10px 12px}
+.coll-bottom{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:10px;padding:12px 0 4px;margin:0 -22px;border-top:1px solid var(--overlay-line);font-size:15px}
+.coll-bottom .coll-link{padding:6px 4px}
+.coll-dot{color:var(--muted)}
+.coll-word.is-btn:last-child{border-bottom:0}
 </style>
 </head>
 <body><main class="app">
@@ -482,13 +491,13 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.93</div>
+<div class="version-mark">v2.95</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=6"></script>
+<script src="collection-window.js?v=8"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{

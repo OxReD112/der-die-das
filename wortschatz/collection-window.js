@@ -74,11 +74,17 @@
     const words=list();
     card.appendChild(head(name()));
     const meta=el("p","coll-meta");
-    meta.appendChild(document.createTextNode(wordsLabel(words.length)+(own()?" · ":" · built-in set")));
-    if(own())meta.appendChild(button("coll-link","Rename",viewRename));
+    meta.appendChild(document.createTextNode(wordsLabel(words.length)+" · "));
+    meta.appendChild(button("coll-link","Rename",viewRename));
     card.appendChild(meta);
 
-    const box=el("div","coll-list");
+    // most-used action on top (like „Use My Own Words“ in the Starter-Set window)
+    const top=el("div","coll-form-buttons coll-top");
+    top.appendChild(button("coll-main","＋ Add Word",()=>viewForm(null)));
+    top.appendChild(button("coll-link","＋ Import Words",()=>viewImport({})));
+    card.appendChild(top);
+
+    const box=el("div","coll-list coll-list-below");
     words.forEach(w=>{
       const row=own()?button("coll-word is-btn","",()=>viewForm(w)):el("div","coll-word");
       row.appendChild(el("span","coll-de",w.base||String(w.target||"").split(" / ").join(" ")));
@@ -88,14 +94,12 @@
     if(!words.length)box.appendChild(el("p","coll-note","No words yet."));
     card.appendChild(box);
 
-    if(own()){
-      const act=el("div","coll-actions");
-      act.appendChild(button("coll-row","＋ Add Word",()=>viewForm(null)));
-      act.appendChild(button("coll-row","＋ Import Words",()=>viewImport({})));
-      act.appendChild(button("coll-row","Export",()=>exportFile()));
-      act.appendChild(button("coll-row","Delete · Back to Starter-Set",viewDelete));
-      card.appendChild(act);
-    }
+    // rare / risky actions: two quiet links at the bottom
+    const bottom=el("div","coll-bottom");
+    bottom.appendChild(button("coll-link","Export",()=>exportFile()));
+    bottom.appendChild(el("span","coll-dot","·",{"aria-hidden":"true"}));
+    bottom.appendChild(button("coll-link","Delete",viewDelete));
+    card.appendChild(bottom);
   }
 
   // Starter-Set: what it is + the way to your own words. The word list only on request.
@@ -104,7 +108,13 @@
     card.appendChild(head(BUILTIN_NAME));
     const words=list();
     card.appendChild(el("p","coll-text",words.length+" everyday German words in example sentences."));
-    const box=el("div","coll-list");box.style.display="none";
+    const b=el("div","coll-form-buttons");
+    b.appendChild(button("coll-main","Use My Own Words",viewCreate));
+    const toggle=button("coll-link","Show All Words in the Set",()=>{const show=box.style.display==="none";box.style.display=show?"":"none";toggle.textContent=show?"Hide Words":"Show All Words in the Set"});
+    b.appendChild(toggle);
+    card.appendChild(b);
+    // the list unfolds BELOW the link (and scrolls inside the window)
+    const box=el("div","coll-list coll-list-below");box.style.display="none";
     words.forEach(w=>{
       const row=el("div","coll-word");
       row.appendChild(el("span","coll-de",w.base||String(w.target||"").split(" / ").join(" ")));
@@ -112,11 +122,6 @@
       box.appendChild(row);
     });
     card.appendChild(box);
-    const b=el("div","coll-form-buttons");
-    b.appendChild(button("coll-main","Use My Own Words",viewCreate));
-    const toggle=button("coll-link","Show All Words",()=>{const show=box.style.display==="none";box.style.display=show?"":"none";toggle.textContent=show?"Hide Words":"Show All Words"});
-    b.appendChild(toggle);
-    card.appendChild(b);
   }
 
 
@@ -421,7 +426,7 @@ Rules:
     const n=list().length;
     card.textContent="";
     card.appendChild(head("Delete this collection?"));
-    card.appendChild(el("p","coll-text","„"+name()+"“ with "+wordsLabel(n)+" and your progress with it will be deleted. This can't be undone - export the words first if you want to keep them."));
+    card.appendChild(el("p","coll-text","„"+name()+"“ with "+wordsLabel(n)+" and your progress with it will be deleted, and you go back to the Starter-Set. This can't be undone - export the words first if you want to keep them."));
     const b=el("div","coll-buttons");
     b.appendChild(button("coll-main","Keep",viewMain));          // safe choice = contrast button
     b.appendChild(button("coll-quiet","Delete",()=>C.hasDemoProgress()?viewDemoChoice():finish(false)));
