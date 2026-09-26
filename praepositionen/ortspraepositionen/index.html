@@ -338,6 +338,16 @@ body:has(#sessionScreen.hidden) .start-about{display:none}
 .otbl2 .cat{grid-column:1/-1;font-size:12.5px;line-height:1.25;color:var(--muted);padding:2px 0 9px;border-bottom:1px solid var(--line)}
 @media (max-width:359px){.otbl2 .ex{white-space:normal}}
 
+/* ===== MISTAKE MARKER v22 (2026-09-26) — replaces the red dots =====
+   A faint highlighter stroke in palette red (see-through, as the colour rules allow) BEHIND the category text.
+   Strength = one number per theme: --mark-strength (tune after the phone test). Nothing moves; text stays full colour. */
+:root{--mark-strength:15%}
+[data-theme="light"]{--mark-strength:12%}
+.mk{padding:0 3px;margin:0 -3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(100deg,transparent 0 1%,color-mix(in srgb,var(--coral) var(--mark-strength),transparent) 3% 96%,transparent 99%);
+  background-size:100% 78%;background-position:0 70%;background-repeat:no-repeat}
+.mk-legend{display:block;font-size:11px;font-weight:500;line-height:1.35;color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -386,7 +396,7 @@ body:has(#sessionScreen.hidden) .start-about{display:none}
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v21</div>
+<div class="version-mark">v22</div>
 <div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
   <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
   <div id="otable"></div>
@@ -687,7 +697,7 @@ document.addEventListener("keydown",e=>{
 const TABLE_ROWS=[
   // v21: two examples (no articles, except a country that needs one), the category underneath.
   // Kino + Schweiz share one row: same pattern in · in · aus.
-  {cats:["raum","land"],ex:"Kino, die Schweiz",label:"Raum · Land mit Artikel",  wo:"in", wohin:"in",  woher:"aus"},
+  {cats:["raum","land"],ex:"Kino, die Schweiz",label:"Raum · Land mit Artikel",parts:[["raum","Raum"],["land","Land mit Artikel"]],  wo:"in", wohin:"in",  woher:"aus"},
   {cats:["stadt"],      ex:"Berlin, Japan",    label:"Stadt, Land ohne Artikel", wo:"in", wohin:"nach",woher:"aus"},
   {cats:["kontakt"],    ex:"See, Tisch",       label:"Wasser, Kontakt",          wo:"an", wohin:"an",  woher:"von"},
   {cats:["flaeche"],    ex:"Markt, Balkon",    label:"offene Fläche",            wo:"auf",wohin:"auf", woher:"von"},
@@ -703,17 +713,21 @@ function weakCats(){
 function renderTable(){
   const weak=weakCats(),h=escapeHtml;
   // v21 layout: examples + prepositions on one line, the category on a line of its own underneath.
-  let html='<div class="otbl2"><div class="h"></div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div><div class="hl"></div>';
+  // v22: recent mistakes = a faint red marker UNDER the category text (only the category, only the part with mistakes);
+  // no dots. The explanation sits in the empty top-left header cell and only shows when something is marked.
+  const mk=t=>'<span class="mk">'+h(t)+'</span>';
+  const anyMark=[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cats.includes(c)));
+  let html='<div class="otbl2"><div class="h">'+(anyMark?'<span class="mk-legend">'+mk("markiert")+' =<br>zuletzt Fehler</span>':'')+'</div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div><div class="hl"></div>';
   TABLE_ROWS.forEach(r=>{
-    const same=r.wohin===r.wo, hot=r.cats.some(c=>weak.has(c));
-    html+='<div class="ex'+(hot?' ohot':'')+'">'+h(r.ex)+'</div>'
+    const same=r.wohin===r.wo;
+    const label=r.parts?r.parts.map(([c,t])=>weak.has(c)?mk(t):h(t)).join(' · '):(weak.has(r.cats[0])?mk(r.label):h(r.label));
+    html+='<div class="ex">'+h(r.ex)+'</div>'
       +'<div class="p">'+h(r.wo)+'</div>'
       +'<div class="p'+(same?' same':'')+'"><span class="w">'+h(r.wohin)+(same?'':'<span class="d">Dativ</span>')+'</span></div>'
       +'<div class="p'+(r.woher.length>4?' long':'')+'">'+h(r.woher)+'</div>'
-      +'<div class="cat">'+h(r.label)+'</div>';
+      +'<div class="cat">'+label+'</div>';
   });
-  html+='</div><div class="ofoot"><b'+(weak.has("ausnahme")?' class="ohot"':'')+'>immer in:</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>';
-  if(weak.size&&[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cats.includes(c))))html+='<div class="onote"><span class="ohot"></span>hier gab es zuletzt Fehler</div>';
+  html+='</div><div class="ofoot"><b>'+(weak.has("ausnahme")?mk("immer in:"):'immer in:')+'</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>';
   document.getElementById("otable").innerHTML=html;
 }
 const omodal=document.getElementById("omodal");
