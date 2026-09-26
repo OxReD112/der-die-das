@@ -448,6 +448,23 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
 #start .ownWordsBtn{width:312px;max-width:100%;height:52px;margin:0 0 12px;padding:0;border:0;border-radius:16px;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);color:var(--text);
   font:600 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
 #start .ownWordsBtn:active{transform:scale(.97);filter:brightness(.94)}
+/* ===== DONE SCREEN v2 (2026-09-26, v2.97) — mirrors the start screen =====
+   No top bar. „Fertig für heute.“ on top, buttons low (just above the version number), the DEINE WÖRTER block
+   centred between them (same label + › line as the start screen). Height set by layoutDone(). */
+body:has(#done.show) header{display:none}
+#done.show{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+#done .doneInner{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;width:100%;padding-top:36px}
+#done .doneTop h1{margin:0 0 15px}
+#done .doneWords{margin:auto 0;padding:28px 0;display:flex;flex-direction:column;align-items:center}
+#done .allAdded{margin:6px 0 0;font-size:14px}
+#done .finish-actions{margin-top:0}
+#done .startLabel,#start .startLabel{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+#done .coll-line{display:inline-flex;align-items:center;max-width:100%;margin:0;padding:6px 10px;border:0;border-radius:12px;background:none;color:var(--text);
+  font:500 17px/1.25 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
+#done .coll-line:active{transform:scale(.97);filter:brightness(.94)}
+#done .coll-line-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#done .coll-line-count{color:var(--muted);font-weight:400;white-space:pre;flex:0 0 auto}
+#done .coll-line-chev{color:var(--muted);font-size:22px;line-height:1;margin-left:8px;flex:0 0 auto;transform:translateY(-1px)}
 /* Starter-Set window: the word list unfolds below „Show All Words in the Set“ */
 .coll-list-below{margin-top:6px;border-bottom:0}
 /* Own collection window (v2.95): ＋ Add Word on top, list in the middle, Export · Delete as quiet links at the bottom */
@@ -493,19 +510,19 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
   <button id="typoBtn" type="button">Nur Tippfehler</button>
  </div>
 </section>
-<section class="done" id="done"><div><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div><div class="finish-actions"><button class="addWords" id="addWords">+ 5 neue Wörter</button><button class="home-back" id="homeBack">Zur Startseite</button></div><button class="coll-btn" id="collBtnDone" type="button"></button></div></section>
+<section class="done" id="done"><div class="doneInner" id="doneInner"><div class="doneTop"><h1>Fertig für heute.</h1><p>Komm morgen wieder.</p><div class="doneScore" id="doneScore"></div></div><div class="doneWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnDone" type="button"></button><div class="allAdded" id="allAdded">Alle Wörter sind schon dabei.</div></div><div class="finish-actions"><button class="addWords" id="addWords">5 neue Wörter lernen</button><button class="home-back" id="homeBack">Zur Startseite</button></div></div></section>
 <div class="coll-modal" id="collModal" aria-hidden="true"><div class="coll-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div></div>
 <div class="start-about" id="startAbout">
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.96</div>
+<div class="version-mark">v2.97</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=8"></script>
+<script src="collection-window.js?v=9"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -873,19 +890,30 @@ function showDone(){
  const remaining=newWordsLeft();
  const own=!!(window.WortschatzCollection&&WortschatzCollection.isOwn()&&window.WortschatzCollectionWindow);
  const btn=$("addWords"),note=$("allAdded");
+ /* v2.97: „… lernen“ = take new words into today's practice; „＋“ only for adding words to the set */
  if(remaining){
-   btn.textContent=remaining>=ADD_BATCH?"+ "+ADD_BATCH+" neue Wörter":"+ "+newWordsLabel(remaining);
+   btn.textContent=remaining>=ADD_BATCH?ADD_BATCH+" neue Wörter lernen":newWordsLabel(remaining)+" lernen";
    btn.style.display="block";
    // the line only adds something when the button says „+ 5“ (with fewer than 5 the button already says the number)
    const showNote=remaining>ADD_BATCH&&remaining<=10;
    note.textContent=showNote?"Noch "+newWordsLabel(remaining)+".":"";note.style.display=showNote?"block":"none";
  }else if(own){
-   btn.textContent="+ Neue Wörter";btn.style.display="block";
+   btn.textContent="＋ Neue Wörter";btn.style.display="block";
    note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
  }else{
    btn.style.display="none";note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
  }
+ layoutDone();
 }
+/* Done screen height (v2.97): from its top down to 28px above the version number, so the buttons sit low
+   and the DEINE WÖRTER block is centred between „Fertig für heute.“ and the buttons. */
+function layoutDone(){
+ const inner=$("doneInner"),vm=document.querySelector(".version-mark");if(!inner||!$("done").classList.contains("show"))return;
+ inner.style.minHeight="";
+ const top=inner.getBoundingClientRect().top,vmTop=vm?vm.getBoundingClientRect().top:innerHeight;
+ inner.style.minHeight=Math.max(0,Math.round(vmTop-top-28))+"px";
+}
+addEventListener("resize",layoutDone);
 function newWordsLeft(){const ids=new Set(state.activeIds);return WORDS.filter(c=>!ids.has(c.id)).length}
 function newWordsLabel(n){return n===1?"1 neues Wort":n+" neue Wörter"}
 function addFive(){

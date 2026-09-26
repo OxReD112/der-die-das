@@ -30,15 +30,14 @@
 
   function refreshButtons(){
     const n=list().length,count=n===1?"1 Wort":n+" Wörter",label=name()+" · "+count;
-    const done=$("collBtnDone");if(done){done.textContent=label;done.setAttribute("aria-label","Word collection: "+label)}
-    const start=$("collBtnStart");
-    if(start){                                           // „Starter-Set · 217 Wörter ›“
-      start.textContent="";
-      start.appendChild(el("span","coll-line-name",name()));
-      start.appendChild(el("span","coll-line-count"," · "+count));
-      start.appendChild(el("span","coll-line-chev","›",{"aria-hidden":"true"}));
-      start.setAttribute("aria-label","Word collection: "+label);
-    }
+    ["collBtnStart","collBtnDone"].forEach(id=>{            // „Starter-Set · 217 Wörter ›“ on both screens
+      const b=$(id);if(!b)return;
+      b.textContent="";
+      b.appendChild(el("span","coll-line-name",name()));
+      b.appendChild(el("span","coll-line-count"," · "+count));
+      b.appendChild(el("span","coll-line-chev","›",{"aria-hidden":"true"}));
+      b.setAttribute("aria-label","Word collection: "+label);
+    });
     const ownBtn=$("ownWordsBtn");if(ownBtn)ownBtn.style.display=own()?"none":"";
   }
 
@@ -199,7 +198,7 @@
     if(!editing&&!creating){
       const sw=el("label","coll-switch");sw.appendChild(el("span",null,"Learn Now"));
       now=el("input",null,null,{type:"checkbox","aria-label":"Learn now"});now.checked=true;sw.appendChild(now);sc.appendChild(sw);
-      sc.appendChild(el("p","coll-hint","On: comes up in your next round. Off: waits for „+ 5 neue Wörter“."));
+      sc.appendChild(el("p","coll-hint","On: comes up in your next round. Off: waits for „5 neue Wörter lernen“."));
     }
     const err=el("p","coll-error");sc.appendChild(err);
     sc.addEventListener("input",()=>{err.textContent=""});           // an old hint disappears as soon as you type
@@ -332,7 +331,7 @@ Rules:
     sc.appendChild(fileIn);
     const fileRow=el("p","coll-hint");fileRow.appendChild(document.createTextNode("Or: "));
     fileRow.appendChild(button("coll-link","Choose a File",()=>fileIn.click()));sc.appendChild(fileRow);
-    if(!opts.create)sc.appendChild(el("p","coll-hint","New words join the end of the queue for „+ 5 neue Wörter“."));
+    if(!opts.create)sc.appendChild(el("p","coll-hint","New words join the end of the queue for „5 neue Wörter lernen“."));
     const err=el("p","coll-error");sc.appendChild(err);
     ta.addEventListener("input",()=>{err.textContent=""});
 
