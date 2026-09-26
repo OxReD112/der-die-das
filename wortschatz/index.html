@@ -428,13 +428,21 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
    „Use your own words“ = filled card button like the 10/20/30 buttons; Starten stays the cream main button. */
 :root{--start-btn-bg:#2a2a2d;--start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14)}
 [data-theme="light"]{--start-btn-bg:#fff;--start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08)}
-#start .title{margin-bottom:44px}
+#start .title{margin-bottom:0}
 #start .startLabel{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
 #start .coll-line{display:inline-flex;align-items:center;gap:0;max-width:100%;margin:0 0 6px;padding:6px 10px;border:0;border-radius:12px;background:none;color:var(--text);
   font:500 17px/1.25 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer;transition:transform .12s ease,filter .12s ease}
 #start .coll-line:active{transform:scale(.97);filter:brightness(.94)}
 #start .coll-line-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 #start .coll-line-count{color:var(--muted);font-weight:400;white-space:pre;flex:0 0 auto}
+/* Balance (v2.96): title on top, Starten low (just above „Worum geht's?“), the DEINE WÖRTER block centred between them.
+   #start gets its height from JS (layoutStart): from its top down to 36px above the description. */
+#start .title{margin-bottom:0}
+#start{box-sizing:border-box}
+#start .startWords{margin:auto 0;padding:28px 0;display:flex;flex-direction:column;align-items:center}
+#start .startWords .subtitle{margin-bottom:0}
+#start .startWords .startNote{margin:6px 0 0}
+#start .startActions{display:flex;flex-direction:column;align-items:center;width:100%}
 #start .coll-line-chev{color:var(--muted);font-size:22px;line-height:1;margin-left:8px;flex:0 0 auto;transform:translateY(-1px)}
 #start .subtitle{margin:0 0 28px}
 #start .ownWordsBtn{width:312px;max-width:100%;height:52px;margin:0 0 12px;padding:0;border:0;border-radius:16px;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);color:var(--text);
@@ -453,7 +461,7 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></section>
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><div class="startWords"><div class="startLabel">Deine Wörter</div><button class="coll-line" id="collBtnStart" type="button"></button><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p></div><div class="startActions"><button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button><button id="startBtn" type="button">Starten</button></div></section>
 <section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
@@ -491,7 +499,7 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.95</div>
+<div class="version-mark">v2.96</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
@@ -934,7 +942,17 @@ function showStart(){
  $("startCount").textContent="Heute: "+cardsLabel(n);
  const left=newWordsLeft();$("startNote").textContent=left&&left<=10?"Noch "+newWordsLabel(left):"";
  $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
+ layoutStart();
 }
+/* Start screen height (v2.96): fill the space down to the „Worum geht's?“ description, so Starten sits low
+   and the DEINE WÖRTER block is centred between the title and the buttons (flex + margin:auto). */
+function layoutStart(){
+ const st=$("start"),about=$("startAbout");if(!st||!st.classList.contains("show"))return;
+ st.style.minHeight="";
+ const top=st.getBoundingClientRect().top,aboutTop=about?about.getBoundingClientRect().top:innerHeight;
+ st.style.minHeight=Math.max(0,Math.round(aboutTop-top-36))+"px";
+}
+addEventListener("resize",layoutStart);
 function startSession(){
  $("start").classList.remove("show");$("study").style.display="flex";
  build();
