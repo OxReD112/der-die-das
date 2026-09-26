@@ -409,7 +409,7 @@ Rules:
     card.appendChild(head("Rename",viewMain));
     const input=el("input","coll-name-input",null,{type:"text",maxlength:"40","aria-label":"Collection Name",autocomplete:"off"});
     input.value=name();
-    const save=()=>{C.rename(input.value);refreshButtons();viewMain()};
+    const save=()=>{C.rename(input.value);refreshButtons();try{window.publishWortschatzProgress&&window.publishWortschatzProgress()}catch(e){}viewMain()}; // v16: new name reaches the Fortschritt card
     input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();save()}});
     card.appendChild(input);
     const b=el("div","coll-buttons");b.style.marginTop="22px";

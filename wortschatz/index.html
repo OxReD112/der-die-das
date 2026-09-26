@@ -553,13 +553,13 @@ body:has(#done.show) header{display:none}
   <h2><button class="aboutToggle" id="aboutToggle" type="button" aria-expanded="false" aria-controls="aboutText">Worum geht's?</button></h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.105</div>
+<div class="version-mark">v2.106</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
 <script src="words.js?v=3"></script>
 <script src="collection.js?v=2"></script>
-<script src="collection-window.js?v=15"></script>
+<script src="collection-window.js?v=16"></script>
 <script>
 // App-side keyboard bridge: the reusable component only emits intent.
 document.addEventListener("deutsch-keyboard-input",e=>{
@@ -636,18 +636,25 @@ const day=()=>{let d=new Date();d.setHours(12,0,0,0);return d.toISOString().slic
 const add=n=>{let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
 function save(){localStorage.setItem(STORE,JSON.stringify(state));publishWortschatzProgress()}
 // Progress summary for Home (Documentation/PROGRESS_TRACKER.md, section 7):
-// total = words in words.js · started = words in the active set · learned = level 6.
+// total = words in the active collection (kept for old readers, not shown) · started = words in the active set ·
+// sitzt = level 3+ (passed the 8-day review) · learned = level 6 · collection = name of the active collection (v2.106).
+const SITZT_LEVEL=3;
 function publishWortschatzProgress(){
  try{
    const ids=new Set(WORDS.map(c=>c.id));
-   const started=state.activeIds.filter(id=>ids.has(id)).length;
-   const learned=state.activeIds.filter(id=>ids.has(id)&&(state.cards[id]?.level||0)>=LEARNED_LEVEL).length;
+   const mine=state.activeIds.filter(id=>ids.has(id));
+   const lvl=id=>state.cards[id]?.level||0;
+   const started=mine.length;
+   const sitzt=mine.filter(id=>lvl(id)>=SITZT_LEVEL).length;
+   const learned=mine.filter(id=>lvl(id)>=LEARNED_LEVEL).length;
+   let collection="Starter-Set";
+   try{if(window.WortschatzCollection&&WortschatzCollection.isOwn())collection=String(WortschatzCollection.get().name||"My Words")}catch(e){}
    let data=null;
    try{data=JSON.parse(localStorage.getItem("deutschProgressV1")||"null")}catch(e){}
    if(!data||typeof data!=="object"||!data.exercises||typeof data.exercises!=="object")data={format:1,exercises:{}};
    const d=new Date();
    const today=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-   data.exercises.wortschatz={summary:{kind:"words",total:ids.size,started,learned,sicher:learned,items:ids.size,itemsSicher:learned,updated:today,recent:[]}};
+   data.exercises.wortschatz={summary:{kind:"words",total:ids.size,started,sitzt,learned,collection,sicher:learned,items:ids.size,itemsSicher:learned,updated:today,recent:[]}};
    localStorage.setItem("deutschProgressV1",JSON.stringify(data));
  }catch(e){}
 }
