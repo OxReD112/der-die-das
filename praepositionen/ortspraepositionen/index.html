@@ -320,6 +320,24 @@ body:has(#game:not(.hidden)) .version-mark{display:none}
 .start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
 .start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
 body:has(#sessionScreen.hidden) .start-about{display:none}
+/* ===== TABLE v21 (2026-09-26) — easier to take in as one picture =====
+   Examples (two, no articles except a country that needs one) and the prepositions on ONE line; the category on its own
+   line underneath, full width. Kino + Schweiz share a row. Same space left and right (Woher column ends at the padding).
+   "Dativ" hangs under nach / zu without lifting the word, so all prepositions sit on one line. Tighter rows. */
+.otbl2{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;column-gap:14px;align-items:baseline}
+.otbl2>div{min-width:0}
+.otbl2 .h{font-size:12px;color:var(--muted);font-weight:650;padding:0 0 8px;align-self:end}
+.otbl2 .h small{display:block;font-size:10.5px;font-weight:500;margin-top:2px}
+.otbl2 .hl{grid-column:1/-1;border-bottom:1px solid var(--line)}
+.otbl2 .ex{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.2;padding-top:10px;white-space:nowrap}
+.otbl2 .p{font-size:18px;font-weight:600;line-height:1.2;padding-top:10px;white-space:nowrap}
+.otbl2 .p.long{font-size:16px}
+.otbl2 .same{color:var(--muted);font-weight:500;opacity:.72}
+.otbl2 .w{position:relative;display:inline-block}
+.otbl2 .d{position:absolute;left:0;top:100%;font-size:10.5px;font-weight:500;color:var(--muted);line-height:1.1;white-space:nowrap}
+.otbl2 .cat{grid-column:1/-1;font-size:12.5px;line-height:1.25;color:var(--muted);padding:2px 0 9px;border-bottom:1px solid var(--line)}
+@media (max-width:359px){.otbl2 .ex{white-space:normal}}
+
 </style>
 </head>
 <body>
@@ -368,7 +386,7 @@ body:has(#sessionScreen.hidden) .start-about{display:none}
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v20</div>
+<div class="version-mark">v21</div>
 <div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
   <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
   <div id="otable"></div>
@@ -667,14 +685,15 @@ document.addEventListener("keydown",e=>{
 // "movement = Akkusativ". Dot = a group with a mistake not yet answered right again
 // (step weight >= 2 in the difficulty store, same data that makes cards come back).
 const TABLE_ROWS=[
-  {cat:"raum",   article:"das",noun:"Kino",    label:"Raum",                     wo:"in", wohin:"in",  woher:"aus"},
-  {cat:"land",   article:"die",noun:"Schweiz", label:"Land mit Artikel",         wo:"in", wohin:"in",  woher:"aus"},
-  {cat:"stadt",  article:"",   noun:"Berlin",  label:"Stadt, Land",              wo:"in", wohin:"nach",woher:"aus"},
-  {cat:"kontakt",article:"der",noun:"See",     label:"Wasser, Kontakt",          wo:"an", wohin:"an",  woher:"von"},
-  {cat:"flaeche",article:"der",noun:"Markt",   label:"offene Fläche",            wo:"auf",wohin:"auf", woher:"von"},
-  {cat:"person", article:"der",noun:"Arzt",    label:"Person, Firma, Aktivität", wo:"bei",wohin:"zu",  woher:"von"},
-  {cat:"anzu",   article:"der",noun:"Bahnhof", label:"am Ort",                   wo:"an", wohin:"zu",  woher:"von"},
-  {cat:"hause",  article:"",   noun:"Hause",   label:"zu Hause",                 wo:"zu", wohin:"nach",woher:"von zu"}
+  // v21: two examples (no articles, except a country that needs one), the category underneath.
+  // Kino + Schweiz share one row: same pattern in · in · aus.
+  {cats:["raum","land"],ex:"Kino, die Schweiz",label:"Raum · Land mit Artikel",  wo:"in", wohin:"in",  woher:"aus"},
+  {cats:["stadt"],      ex:"Berlin, Japan",    label:"Stadt, Land ohne Artikel", wo:"in", wohin:"nach",woher:"aus"},
+  {cats:["kontakt"],    ex:"See, Tisch",       label:"Wasser, Kontakt",          wo:"an", wohin:"an",  woher:"von"},
+  {cats:["flaeche"],    ex:"Markt, Balkon",    label:"offene Fläche",            wo:"auf",wohin:"auf", woher:"von"},
+  {cats:["person"],     ex:"Arzt, Arbeit",     label:"Person, Firma, Aktivität", wo:"bei",wohin:"zu",  woher:"von"},
+  {cats:["anzu"],       ex:"Bahnhof, Kasse",   label:"am Ort",                   wo:"an", wohin:"zu",  woher:"von"},
+  {cats:["hause"],      ex:"Hause",            label:"zu Hause",                 wo:"zu", wohin:"nach",woher:"von zu"}
 ];
 function weakCats(){
   const out=new Set();
@@ -683,16 +702,18 @@ function weakCats(){
 }
 function renderTable(){
   const weak=weakCats(),h=escapeHtml;
-  let html='<div class="otbl"><div class="h"></div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div>';
+  // v21 layout: examples + prepositions on one line, the category on a line of its own underneath.
+  let html='<div class="otbl2"><div class="h"></div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div><div class="hl"></div>';
   TABLE_ROWS.forEach(r=>{
-    const same=r.wohin===r.wo;
-    html+='<div class="ex"><span class="n'+(weak.has(r.cat)?' ohot':'')+'">'+(r.article?'<span class="a">'+h(r.article)+'</span>':'')+h(r.noun)+'</span><small>'+h(r.label)+'</small></div>'
+    const same=r.wohin===r.wo, hot=r.cats.some(c=>weak.has(c));
+    html+='<div class="ex'+(hot?' ohot':'')+'">'+h(r.ex)+'</div>'
       +'<div class="p">'+h(r.wo)+'</div>'
-      +'<div class="p'+(same?' same':'')+'">'+h(r.wohin)+(same?'':'<small>Dativ</small>')+'</div>'
-      +'<div class="p'+(r.woher.length>4?' long':'')+'">'+h(r.woher)+'</div>';
+      +'<div class="p'+(same?' same':'')+'"><span class="w">'+h(r.wohin)+(same?'':'<span class="d">Dativ</span>')+'</span></div>'
+      +'<div class="p'+(r.woher.length>4?' long':'')+'">'+h(r.woher)+'</div>'
+      +'<div class="cat">'+h(r.label)+'</div>';
   });
   html+='</div><div class="ofoot"><b'+(weak.has("ausnahme")?' class="ohot"':'')+'>immer in:</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>';
-  if(weak.size&&[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cat===c)))html+='<div class="onote"><span class="ohot"></span>hier gab es zuletzt Fehler</div>';
+  if(weak.size&&[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cats.includes(c))))html+='<div class="onote"><span class="ohot"></span>hier gab es zuletzt Fehler</div>';
   document.getElementById("otable").innerHTML=html;
 }
 const omodal=document.getElementById("omodal");
