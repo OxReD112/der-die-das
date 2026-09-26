@@ -1,4 +1,4 @@
-/* Deutsch · Progress screen (Fortschritt) — v1
+/* Deutsch · Progress screen (Fortschritt) — v1 · Design Police clean-up 2026-09-26 (loaded as ?v=17)
    Opens when the "Heute" tile on Home is tapped.
    Concept + rules: Documentation/PROGRESS_TRACKER.md · Design: Claude outputs/fortschritt-mockup-v2.html
 
@@ -27,12 +27,14 @@
 
   /* ---------- styles ---------- */
   const css=`
-:root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#252527;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:rgba(232,130,111,.62);--pg-down:#e8a08f;--pg-started:rgba(255,255,255,.26);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.05);--pg-fill:rgba(85,215,181,.08)}
-[data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:rgba(214,110,86,.45);--pg-down:#c0634c;--pg-started:rgba(0,0,0,.14);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.06);--pg-fill:rgba(47,158,130,.10)}
+/* Design Police 2026-09-26 (v16): card colour, palette greys, 10% hairlines. Going down = palette grey (calm, no judging).
+   --pg-ghost ("vor 3 Wochen") stays its own darker green on purpose (decision 2026-09-26). */
+:root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#2a2a2d;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.10);--pg-fill:color-mix(in srgb,var(--mint) 8%,transparent);--pg-secondary:#c8c7c4}
+[data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.10);--pg-fill:color-mix(in srgb,var(--mint) 10%,transparent);--pg-secondary:#55565b}
 .tile-today{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tile-today:active{opacity:.8}
 .pg{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:25;display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
   background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
 .pg.open{opacity:1;visibility:visible;background:var(--confirm-scrim,var(--pg-scrim));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
 .pg-modal{--pg-glow-at:50% 100%;width:min(460px,100%);max-height:82vh;overflow:hidden;
@@ -44,11 +46,16 @@
 .pg-modal{position:relative}
 .pg-head{position:absolute;top:2px;left:12px;right:12px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:0 0 0 8px;pointer-events:none}
 .pg-head>*{pointer-events:auto}
+/* v17: in a chapter, scrolled content disappears behind the title line (window colour, soft 12px fade at the bottom,
+   ending just above the „26 % → 21 %“ line so nothing is covered at rest). Overview: no background (it would hide „In 3 Wochen“). */
+.pg-modal.in-chapter .pg-head::before{content:"";position:absolute;z-index:-1;top:-2px;left:-14px;right:-14px;height:36px;pointer-events:none;
+  background:linear-gradient(var(--pg-modal-bg) 0,var(--pg-modal-bg) 24px,color-mix(in srgb,var(--pg-modal-bg) 0%,transparent) 100%)}
 .pg-modal.in-chapter .pg-inner{padding-top:40px}
-.pg-head h2{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;min-width:0}
-.pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--mint);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
-.pg-x{border:0;background:transparent;color:var(--muted);font-size:28px;line-height:1;padding:8px;cursor:pointer}
-.pg-x:active,.pg-head-back:active{opacity:.6}
+.pg-head h2{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:20px;font-weight:650;letter-spacing:-.3px;display:flex;align-items:center;min-width:0}
+.pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--text);font:inherit;font-size:24px;line-height:1;padding:4px 10px 6px 0;cursor:pointer}
+.pg-x{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--text);font:400 28px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pg-x,.pg-head-back,.pg-row:not(.static){transition:transform .12s ease,filter .12s ease,background-color .2s}
+.pg-x:active,.pg-head-back:active,.pg-row:not(.static):active{transform:scale(.97);filter:brightness(.94)}
 .pg-body-scroll{overflow:auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .pg-inner{position:relative;padding:0 0 4px}
 .pg-view{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
@@ -65,7 +72,7 @@
 .pg-big{display:flex;align-items:center;justify-content:center;margin-top:4px}
 .pg-big b{font-size:58px;font-weight:700;letter-spacing:-1.4px;color:var(--mint);line-height:1}
 .pg-big span{font-size:18px;font-weight:600;margin-left:10px;line-height:1.15;text-align:left}
-.pg-say{font-size:14px;line-height:1.35;color:var(--label-text,var(--text));margin-top:8px}
+.pg-say{font-size:14px;line-height:1.35;color:var(--pg-secondary);margin-top:8px}
 .pg-say em{font-style:normal;color:var(--muted)}
 .pg-hero svg{margin-top:10px}
 .pg-divider{height:1px;background:var(--pg-line);margin:8px 10px 2px}
@@ -75,16 +82,16 @@
 .pg-row.static{cursor:default}
 .pg-row.open{background:var(--pg-sheet)}
 .pg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-.pg-n{font-size:14.5px;font-weight:600}
+.pg-n{font-size:15px;font-weight:600}
 .pg-row.sub .pg-n{font-weight:500;font-size:14px}
-.pg-d{font-size:12.5px;font-weight:600;color:var(--mint);white-space:nowrap}
-.pg-d.down{color:var(--pg-down)}.pg-d.none{color:var(--dim-text)}
+.pg-d{font-size:13px;font-weight:600;color:var(--mint);white-space:nowrap}
+.pg-d.down{color:var(--pg-down)}.pg-d.none{color:var(--muted)}
 .pg-d .tot{color:var(--muted);font-weight:500;font-size:12px}
-.pg-d .pg-ws{color:var(--label-text,var(--text));font-weight:600;font-size:12px}
+.pg-d .pg-ws{color:var(--pg-secondary);font-weight:600;font-size:12px}
 .pg-d .pg-wl{color:var(--mint);font-weight:650;font-size:12px}
-.pg-chev{color:var(--dim-text);margin-left:8px;display:inline-block;transition:transform .25s}
+.pg-chev{color:var(--muted);margin-left:8px;display:inline-block;transition:transform .25s}
 .pg-row.open .pg-chev{transform:rotate(90deg)}
-.pg-track{position:relative;height:5px;border-radius:3px;background:var(--today-track)}
+.pg-track{position:relative;height:5px;border-radius:3px;background:var(--pg-line)}
 .pg-row.sub .pg-track{height:4px}
 .pg-track i{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:5px}
 .pg-fill{background:var(--mint);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
@@ -92,7 +99,7 @@
 .pg-lost{background:var(--pg-lost);border-radius:0!important;transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .pg-started{background:var(--pg-started);transition:width 1s cubic-bezier(.2,.8,.2,1)}
 .pg-notch{top:-3px!important;bottom:-3px!important;width:2px!important;margin-left:-1px;border-radius:1px!important;background:var(--text);opacity:0;transition:opacity .4s .8s}
-.pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--dim-text);font-size:11.5px}
+.pg-legend{display:flex;gap:16px;justify-content:center;margin:6px 0 6px;color:var(--muted);font-size:12px}
 .pg-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin:-2px 6px 0 0}
 .pg-chapters .pg-row{padding:8px 10px 9px}
 .pg-words .pg-row{padding:12px 10px 8px}
@@ -107,14 +114,14 @@
 .pg-title b{color:var(--mint)}.pg-title b.down{color:var(--pg-down)}
 .pg h3{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin:4px 0 10px}
 .pg-items{list-style:none;margin:0;padding:0}
-.pg-items li{padding:10px 2px;border-bottom:1px solid var(--pg-line);font-size:14.5px}
+.pg-items li{padding:10px 2px;border-bottom:1px solid var(--pg-line);font-size:15px}
 .pg-items li:last-child{border-bottom:0}
 .pg-more{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:13px;padding:10px 2px;cursor:pointer}
-.pg-empty{color:var(--dim-text);font-size:14px;padding:6px 2px}
+.pg-empty{color:var(--muted);font-size:14px;padding:6px 2px}
 .pg-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
 .pg-row.open .pg-expand{grid-template-rows:1fr}
 .pg-expand>div{overflow:hidden}
-.pg-note{color:var(--dim-text);font-size:12px;text-align:center;margin-top:16px}
+.pg-note{color:var(--muted);font-size:12px;text-align:center;margin-top:16px}
 `;
   const style=document.createElement("style");style.textContent=css;document.head.appendChild(style);
 
@@ -213,11 +220,11 @@
     const p=el("path",{d:`M${P.join(" L")}`,fill:"none",stroke:"var(--mint)","stroke-width":2.2,"stroke-linejoin":"round","stroke-linecap":"round"});
     s.append(p);
     s.append(el("circle",{cx:x(L),cy:y(h[L]),r:4.5,fill:"var(--mint)"}));
-    if(end!=null)s.append(txt({x:x(L)+9,y:y(h[L])+4,fill:"var(--text)","font-size":12.5,"font-weight":650},end));
+    if(end!=null)s.append(txt({x:x(L)+9,y:y(h[L])+4,fill:"var(--text)","font-size":13,"font-weight":650},end));
     if(labels){
       s.append(el("circle",{cx:x(0),cy:y(h[0]),r:3.5,fill:"var(--bg)",stroke:"var(--pg-ghost)","stroke-width":2}));
-      s.append(txt({x:x(0),y:H-3,fill:"var(--dim-text)","font-size":10.5},model.sinceStart?"Start":"vor 3 Wo."));
-      s.append(txt({x:x(L),y:H-3,fill:"var(--dim-text)","font-size":10.5,"text-anchor":"end"},"heute"));
+      s.append(txt({x:x(0),y:H-3,fill:"var(--muted)","font-size":11},model.sinceStart?"Start":"vor 3 Wo."));
+      s.append(txt({x:x(L),y:H-3,fill:"var(--muted)","font-size":11,"text-anchor":"end"},"heute"));
     }
     if(!reduceMotion)requestAnimationFrame(()=>{const len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;
       p.getBoundingClientRect();p.style.transition="stroke-dashoffset 1.2s ease";p.style.strokeDashoffset=0});

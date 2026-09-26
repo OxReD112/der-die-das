@@ -1325,6 +1325,23 @@ header h1 {
 .hard-stop-title{font-weight:700}
 @media (min-width:650px){.hard-stop-overlay{padding-bottom:calc(82px - env(safe-area-inset-top))}}
 
+/* ===== BACK BUTTON · top left (2026-09-26, Home 5.43) — replaces the round ⌂ at the bottom =====
+   Quiet: palette grey, no circle, no outline. "‹ Deutsch." (or the chapter) on start / picker / summary screens,
+   only "‹" in front of the title in the game (JS places it there). 44px tap height. Fades out while a table window is open. */
+.home-back{top:calc(env(safe-area-inset-top) + 33.5px - 22px);bottom:auto;left:6px;right:auto;width:auto;height:44px;padding:0 10px 0 12px;
+  display:flex;align-items:center;gap:7px;border:0;border-radius:12px;background:transparent;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);
+  font:500 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:-.2px;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:opacity .18s ease,visibility 0s,transform .12s ease,filter .12s ease}
+.home-back.is-game{padding-right:4px}
+.home-back-chev{flex:0 0 auto;display:block}
+.home-back-label:empty{display:none}
+.home-back:active{transform:scale(.97);filter:brightness(.94)}
+.home-back.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s}
+@media (min-width:529px){.home-back{left:calc(50% - 240px + 6px)}}
+@media (prefers-reduced-motion:reduce){.home-back{transition:none}}
+
 </style>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -1499,7 +1516,7 @@ header h1 {
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.42</div>
+    <div class="settings-version">Deutsch. version 5.43</div>
    </div>
    </section>
    <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
@@ -1520,11 +1537,7 @@ header h1 {
   </div>
 
   <section aria-hidden="true" class="app-shell" id="appShell">
-   <button aria-label="Home" class="home-back" id="homeBack" type="button">
-    <span class="home-glyph">
-     ⌂
-    </span>
-   </button>
+   <button aria-label="Zurück zu Deutsch." class="home-back" id="homeBack" type="button"><svg class="home-back-chev" width="10" height="17" viewBox="0 0 10 17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2 2 8.5 8 15"/></svg><span class="home-back-label" id="homeBackLabel">Deutsch.</span></button>
    <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
    </iframe>
   </section>
@@ -1861,7 +1874,93 @@ header h1 {
       frame.src = 'about:blank';
     }
 
-    back.addEventListener('click', closeApp);
+    /* ===== Back button (top left, 2026-09-26, Home 5.43) =====
+       One step up: chapter exercise (Partizip II, Fester Kasus …) → its picker; picker or single exercise → Home.
+       Start / picker / summary screens: "‹ Deutsch." / "‹ Verbformen." / "‹ Präpositionen".
+       Game (a top-bar title is visible): only "‹", placed right in front of the title (Home makes room for it).
+       Fades out while a table window is open. Home reads the exercise page directly (same site), so the
+       exercise pages themselves need no changes. */
+    const backLabel = document.getElementById('homeBackLabel');
+    const CHAPTERS = {
+      verbformen: {label: 'Verbformen.', tile: '.tile-verbs'},
+      praepositionen: {label: 'Präpositionen', tile: '.tile-prepositions'}
+    };
+    const TITLE_SEL = '.top-title,.top .brand';
+    const WINDOW_SEL = '.modal,.pattern-modal,.forms-modal,.omodal';
+    let backTarget = null, backObserver = null, backRaf = 0;
+
+    function framePath() {
+      try {
+        const base = new URL('./', location.href).pathname.toLowerCase();
+        let path = decodeURIComponent(frame.contentWindow.location.pathname).toLowerCase();
+        if (path.startsWith(base)) path = path.slice(base.length);
+        return path.replace(/index\.html$/, '');
+      } catch (e) { return ''; }
+    }
+    // windows fade: judge them by display/visibility (switched at once when opening), not by the fading opacity
+    function isShown(el, win, ignoreOpacity) {
+      const cs = win.getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || (!ignoreOpacity && parseFloat(cs.opacity) < .05)) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0;
+    }
+    function updateBack() {
+      backRaf = 0;
+      if (!shell.classList.contains('open')) return;
+      let doc, win;
+      try { doc = frame.contentDocument; win = frame.contentWindow; } catch (e) {}
+      // where does "‹" lead?
+      const parts = framePath().split('/').filter(Boolean);
+      const chapter = parts.length > 1 ? CHAPTERS[parts[0]] : null;
+      backTarget = chapter ? chapter.tile : null;
+      const label = chapter ? chapter.label : 'Deutsch.';
+      back.setAttribute('aria-label', 'Zurück zu ' + label);
+      // game (visible top-bar title) or start / picker / summary screen?
+      let title = null, windowOpen = false;
+      if (doc && doc.body) {
+        if (!doc.getElementById('deutsch-back-room')) {
+          const st = doc.createElement('style');
+          st.id = 'deutsch-back-room';
+          st.textContent = '.top-title,.top .brand{padding-left:20px}'; /* room for Home's "‹" in the game top bar */
+          doc.head.appendChild(st);
+        }
+        title = [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80) || null;
+        windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
+      }
+      back.classList.toggle('is-game', !!title);
+      backLabel.textContent = title ? '' : label;
+      if (title) {
+        const r = title.getBoundingClientRect();
+        back.style.top = (r.top + r.height / 2 - 22) + 'px';
+        back.style.left = (r.left - 12) + 'px';
+      } else {
+        back.style.top = '';
+        back.style.left = '';
+      }
+      back.classList.toggle('is-hidden', windowOpen);
+    }
+    let backLate = 0;
+    function scheduleBack() {
+      if (!backRaf) backRaf = requestAnimationFrame(updateBack);
+      clearTimeout(backLate); backLate = setTimeout(updateBack, 260); // again after a window's fade has finished
+    }
+    frame.addEventListener('load', () => {
+      if (backObserver) backObserver.disconnect();
+      back.classList.remove('is-hidden');
+      try {
+        backObserver = new MutationObserver(scheduleBack);
+        backObserver.observe(frame.contentDocument.documentElement, {subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style', 'hidden', 'aria-hidden']});
+        frame.contentWindow.addEventListener('resize', scheduleBack);
+        frame.contentWindow.addEventListener('scroll', scheduleBack, {passive: true});
+      } catch (e) {}
+      scheduleBack();
+      setTimeout(scheduleBack, 350); // after start-screen fade-ins
+    });
+    back.addEventListener('click', () => {
+      const tile = backTarget && document.querySelector(backTarget);
+      if (tile && tile.dataset.app) frame.src = tile.dataset.app; // chapter exercise → its picker
+      else closeApp();
+    });
 
 const HOME_STATS="deutschHomeStatsV1";
 
