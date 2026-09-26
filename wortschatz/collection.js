@@ -68,15 +68,15 @@
   // Hidden words alone are NOT compared: „der Bescheid“ and „Bescheid geben“ hide the same word but are
   // different things to learn. A duplicate slipping through is harmless; skipping a wanted word is not.
   function germanKeys(card){return [...new Set(["b:"+germanKey(card),"s:"+str(card.sentence).toLowerCase()])]}
-  // Returns {card} or {reason}. Reasons are short German texts for the import summary.
+  // Returns {card} or {reason}. Reasons are short English texts for the import summary (the collection screens are in English).
   function normalize(raw){
-    if(!raw||typeof raw!=="object")return {reason:"Kein gültiger Eintrag"};
+    if(!raw||typeof raw!=="object")return {reason:"Not a valid entry"};
     const sentence=str(raw.sentence);
-    if(!sentence)return {reason:"Satz fehlt"};
+    if(!sentence)return {reason:"No sentence"};
     const parts=hiddenParts(sentence);
-    if(!parts.length||parts.some(p=>!p))return {reason:"Keine Lücke {{c1::…}} im Satz"};
+    if(!parts.length||parts.some(p=>!p))return {reason:"No word marked with {{c1::…}} in the sentence"};
     const translation=translationValue(raw.translation);
-    if(!translation)return {reason:"Bedeutung fehlt"};
+    if(!translation)return {reason:"No meaning"};
     const clean=sentence.replace(CLOZE,(m,w)=>"{{c1::"+w.trim()+"}}");
     const card={
       sentence:clean,
@@ -121,7 +121,7 @@
     if(isOwn())throw new Error("already-own");
     const p=prepare(items,[]);
     if(!p.cards.length)return summary(p,{created:false});
-    const c={v:1,name:str(name)||"Meine Wörter",createdAt:new Date().toISOString(),nextId:1,cards:[]};
+    const c={v:1,name:str(name)||"My Words",createdAt:new Date().toISOString(),nextId:1,cards:[]};
     c.cards=withIds(c,p.cards);
     const demo=localStorage.getItem(PROGRESS_KEY);
     write(KEY,c);                                             // throws if storage is full — nothing changed yet
@@ -150,11 +150,11 @@
   // Edit one card (✎). Same id → progress kept. Returns {card} or {reason}.
   function update(id,fields){
     const c=get();if(!c)throw new Error("no-collection");
-    const i=c.cards.findIndex(x=>x.id===id);if(i<0)return {reason:"Karte nicht gefunden"};
+    const i=c.cards.findIndex(x=>x.id===id);if(i<0)return {reason:"Card not found"};
     const merged={};FIELDS.forEach(f=>merged[f]=fields&&fields[f]!==undefined?fields[f]:c.cards[i][f]);
     const r=normalize(merged);if(!r.card)return r;
     const ks=germanKeys(r.card);
-    if(c.cards.some((x,j)=>j!==i&&germanKeys(x).some(k=>ks.includes(k))))return {reason:"Dieses Wort ist schon in der Sammlung"};
+    if(c.cards.some((x,j)=>j!==i&&germanKeys(x).some(k=>ks.includes(k))))return {reason:"This word is already in your collection"};
     c.cards[i]=Object.assign({id},r.card);
     write(KEY,c);
     return {card:c.cards[i]};
