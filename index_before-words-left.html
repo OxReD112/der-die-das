@@ -419,14 +419,11 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
 .coll-pre{margin:0;padding:12px 14px;border:1px solid var(--overlay-line);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;
   font:400 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sec-text);-webkit-user-select:text;user-select:text}
 .coll-text .coll-link{font-size:inherit}
-/* New words running out (step 6, v2.92): grey line on the start screen, same grey as the subline */
-#start .startNote{margin:-20px 0 28px;font-size:14px;color:var(--muted)}
-#start .startNote:empty{display:none}
 </style>
 </head>
 <body><main class="app">
 <header><div class="top"><span class="brand">Wortschatz.</span><span id="counter"></span></div><div class="progress"><div id="bar"></div></div></header>
-<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><p class="subtitle" id="startCount"></p><p class="startNote" id="startNote"></p><button id="startBtn" type="button">Starten</button><button class="coll-btn" id="collBtnStart" type="button"></button></section>
+<section id="start" aria-labelledby="startTitle"><h1 class="title" id="startTitle">Wortschatz.</h1><p class="subtitle" id="startCount"></p><button id="startBtn" type="button">Starten</button><button class="coll-btn" id="collBtnStart" type="button"></button></section>
 <section class="stage" id="study" style="display:none">
  <div id="question">
   <div class="topZone">
@@ -464,7 +461,7 @@ textarea.coll-paste{min-height:150px;font:400 13px/1.4 ui-monospace,SFMono-Regul
   <h2>Worum geht's?</h2>
   <p class="about-de" id="aboutText"></p>
 </div>
-<div class="version-mark">v2.92</div>
+<div class="version-mark">v2.91</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script src="../components/deutsch-wortschatz-due-v1.js?v=1"></script>
@@ -832,27 +829,9 @@ function showDone(){
  }
  $("study").style.display="none";$("done").className="done show";$("counter").textContent=`${sessionTotal} / ${sessionTotal} heute`;$("bar").style.width="100%";
  $("doneScore").textContent=sessionTotal?`${sessionTotal} / ${sessionTotal} geschafft`:"Gerade ist nichts fällig.";
- /* New words (step 6, 2026-09-26): the button says how many it really adds (+ 3 neue Wörter / + 1 neues Wort);
-    with 6–10 left, a grey line „Noch 8 neue Wörter“ (start screen: 1–10); with none left, an own collection gets
-    „+ Neue Wörter“ (opens the collection window to add or import), the built-in set keeps „Alle Wörter sind schon dabei.“ */
- const remaining=newWordsLeft();
- const own=!!(window.WortschatzCollection&&WortschatzCollection.isOwn()&&window.WortschatzCollectionWindow);
- const btn=$("addWords"),note=$("allAdded");
- if(remaining){
-   btn.textContent=remaining>=ADD_BATCH?"+ "+ADD_BATCH+" neue Wörter":"+ "+newWordsLabel(remaining);
-   btn.style.display="block";
-   // the line only adds something when the button says „+ 5“ (with fewer than 5 the button already says the number)
-   const showNote=remaining>ADD_BATCH&&remaining<=10;
-   note.textContent=showNote?"Noch "+newWordsLabel(remaining)+".":"";note.style.display=showNote?"block":"none";
- }else if(own){
-   btn.textContent="+ Neue Wörter";btn.style.display="block";
-   note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
- }else{
-   btn.style.display="none";note.textContent="Alle Wörter sind schon dabei.";note.style.display="block";
- }
+ const remaining=WORDS.filter(c=>!state.activeIds.includes(c.id)).length;
+ $("addWords").style.display=remaining?"block":"none";$("allAdded").style.display=remaining?"none":"block";
 }
-function newWordsLeft(){const ids=new Set(state.activeIds);return WORDS.filter(c=>!ids.has(c.id)).length}
-function newWordsLabel(n){return n===1?"1 neues Wort":n+" neue Wörter"}
 function addFive(){
  const fresh=WORDS.filter(c=>!state.activeIds.includes(c.id)).slice(0,ADD_BATCH);if(!fresh.length)return;
  fresh.forEach(c=>{state.activeIds.push(c.id);state.cards[c.id]={level:0,due:day()}});save();publishWortschatzStatus(false);
@@ -871,7 +850,7 @@ function markTypo(){
  $("typoBtn").textContent="Kommt morgen wieder";$("typoBtn").disabled=true;$("typoBtn").classList.add("done");
 }
 $("typoBtn").onclick=markTypo;
-$("addWords").onclick=()=>{if(newWordsLeft())addFive();else if(window.WortschatzCollectionWindow)WortschatzCollectionWindow.open()};
+$("addWords").onclick=addFive;
 $("desktopCheck").onclick=check;$("continue").onclick=next;
 document.addEventListener("keydown",e=>{
  if(e.key!=="Enter"||innerWidth<700)return;
@@ -905,7 +884,6 @@ function showStart(){
  publishWortschatzProgress();
  if(!n){build();return}                       // nothing due -> "Fertig für heute" as before
  $("startCount").textContent="Heute: "+cardsLabel(n);
- const left=newWordsLeft();$("startNote").textContent=left&&left<=10?"Noch "+newWordsLabel(left):"";
  $("done").className="done";$("study").style.display="none";$("start").classList.add("show");
 }
 function startSession(){
