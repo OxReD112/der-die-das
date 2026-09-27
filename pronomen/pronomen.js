@@ -222,6 +222,7 @@ function render() {
   $("check").style.removeProperty("display");
   $("feedback").className = "feedback hidden";
   if (window.deutschKeyboardReady) $("keyboard").classList.add("show");
+  fitPrompt();
   $("counter").textContent = `${i + 1} / ${deck.length}`;
   $("bar").style.width = `${(i / deck.length) * 100}%`;
 }
@@ -403,6 +404,24 @@ document.addEventListener("deutsch-keyboard-input", e => {
     paintAnswer();
   }
 });
+/* Keyboard above the Home button (see the CSS block KEYBOARD ABOVE THE HOME BUTTON): when a long sentence on a
+   small screen leaves no room for the keyboard at its place, the question shrinks just enough (down to 80%).
+   Measured for every sentence, and again when the screen size changes. */
+const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+function fitPrompt() {
+  const prompt = document.querySelector("#game .prompt"),
+    kb = $("keyboard"),
+    app = document.querySelector(".app");
+  prompt.style.zoom = "";
+  if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  const over = app.scrollHeight - app.clientHeight;
+  if (over <= 0) return;
+  const h = prompt.offsetHeight;
+  prompt.style.zoom = Math.max(0.8, (h - over) / h).toFixed(3);
+}
+window.addEventListener("resize", () => {
+  if (!$("game").classList.contains("hidden")) fitPrompt();
+});
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
@@ -424,6 +443,7 @@ async function loadKeyboardComponent() {
   }
   window.deutschKeyboardReady = true;
   $("keyboard").classList.add("show");
+  if (!$("game").classList.contains("hidden")) fitPrompt();
   return true;
 }
 

@@ -545,19 +545,21 @@ html:not(.is-touch) .check {
   filter: brightness(0.94);
 }
 
-/* Table button during the game: at the Home screen's „Settings“ spot (centred, 28px above the bottom edge) */
+/* Table button during the game: centred in the Home button's row, a bit smaller (2026-09-27) */
 .in-session-tables {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  bottom: calc(env(safe-area-inset-bottom) + 16px); /* centred on the Home button's row (33.5px up) */
   z-index: 20;
   pointer-events: none;
 }
 .in-session-tables .table-btn {
   pointer-events: auto;
   background: var(--bg);
-  font: 400 14px/1.2 var(--font);
+  font: 400 12.5px/1.2 var(--font); /* ≈12% smaller than on the start screen: there if needed, not inviting */
+  padding: 9px 12px;
+  border-radius: 15px;
 }
 
 /* ===== TABLE WINDOW =====
@@ -742,4 +744,52 @@ html:not(.is-touch) .check {
 
 .hidden {
   display: none;
+}
+
+/* ===== KEYBOARD ABOVE THE HOME BUTTON (phones and tablets, 2026-09-27) =====
+   During the game the on-screen keyboard sits at a fixed place: its last row ends 72px above the bottom edge
+   (+ home indicator) — ≈16px of air above the round Home button, whose row is centred 33.5px up.
+   Less room (small phone, long sentence): the keyboard rises towards the answer field; once the gap is at its
+   minimum, the script shrinks the question (fitPrompt(), down to 80%); after that the page scrolls as before.
+   Only when the keyboard is the touch keyboard — computers are unchanged. Short screens keep the old flow. */
+#game:not(.hidden):has(.keyboard.is-touch) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+#game:has(.keyboard.is-touch) .exercise {
+  flex: 1 0 auto;
+}
+#game:has(.keyboard.is-touch) #keyboardMount {
+  margin-top: auto;
+  /* .app 42px + .screen 20px below it */
+  padding-bottom: calc(env(safe-area-inset-bottom) + 72px - 62px);
+}
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  #game:has(.keyboard.is-touch) #keyboardMount {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  /* the table button follows the keyboard instead of covering it (same as Modalverben / Partizip II) */
+  .in-session-tables {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+/* Keyboard width = the other keyboard exercises (2026-09-27): 18px from the screen edge on phones (the game
+   screen has 14px more padding here, so the keyboard reaches into it); tablets: at most as wide as in the
+   480px exercises. */
+@media (max-width: 600px) {
+  #keyboardMount {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+}
+@media (min-width: 601px) {
+  #keyboardMount {
+    width: min(100%, 432px);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
