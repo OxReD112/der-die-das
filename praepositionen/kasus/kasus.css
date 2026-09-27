@@ -1,0 +1,598 @@
+/* Fester Kasus — styles. Markup: index.html · script: kasus.js · prepositions: prepositions.js
+   When this file changes, raise its ?v= in index.html, the Präpositionen page's kasus/index.html?v=
+   and the Home tile's praepositionen/?v= */
+
+/* ===== PALETTE ===== */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif; /* the preposition and the example sentence */
+
+  --bg: #1b1b1d;
+  --card-bg: #2a2a2d; /* 10/20/30 buttons, word card, answer buttons */
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --text-secondary: #c8c7c4; /* note under the case */
+  --mint: #5bc8a4;
+  --red: #ff7770;
+  --blue: #72a7ff; /* accepted variant: „Auch möglich“ / „Umgangssprachlich“ */
+
+  --hairline: rgba(255, 255, 255, 0.1); /* outlines, progress track */
+  --divider: rgba(255, 255, 255, 0.09); /* short line between preposition and case */
+  --field-bg: rgba(255, 255, 255, 0.03); /* Weiter */
+  --focus: rgba(255, 255, 255, 0.18);
+  --card-lift: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.3);
+  --good-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(91, 200, 164, 0.38) 0%,
+    rgba(91, 200, 164, 0.2) 24%,
+    rgba(91, 200, 164, 0.08) 48%,
+    transparent 76%
+  );
+  --bad-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(255, 119, 112, 0.4) 0%,
+    rgba(255, 119, 112, 0.2) 24%,
+    rgba(255, 119, 112, 0.08) 48%,
+    transparent 76%
+  );
+  --special-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(114, 167, 255, 0.34) 0%,
+    rgba(114, 167, 255, 0.16) 24%,
+    rgba(114, 167, 255, 0.06) 48%,
+    transparent 76%
+  );
+
+  /* shared across exercises (Design Police 2026-09-25) */
+  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
+  --start-version: rgba(255, 255, 255, 0.24);
+  --end-again-text: rgba(242, 240, 237, 0.55);
+  --end-main-bg: #ece6dc; /* cream: „Zur Startseite“ */
+  --end-main-text: #1b1b1d;
+}
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --card-bg: #fff;
+  --text: #242426;
+  --muted: #727278;
+  --text-secondary: #55565b;
+  --mint: #3fa68a;
+  --red: #e95e66;
+  --blue: #5588e0;
+
+  --hairline: rgba(0, 0, 0, 0.1);
+  --divider: rgba(0, 0, 0, 0.09);
+  --field-bg: #fff;
+  --focus: rgba(0, 0, 0, 0.18);
+  --card-lift: 0 2px 4px rgba(0, 0, 0, 0.04), 0 14px 34px rgba(0, 0, 0, 0.09);
+  --good-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(63, 166, 138, 0.28) 0%,
+    rgba(63, 166, 138, 0.13) 24%,
+    rgba(63, 166, 138, 0.05) 48%,
+    transparent 76%
+  );
+  --bad-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(233, 94, 102, 0.27) 0%,
+    rgba(233, 94, 102, 0.12) 24%,
+    rgba(233, 94, 102, 0.04) 48%,
+    transparent 76%
+  );
+  --special-glow: radial-gradient(
+    ellipse at 50% 38%,
+    rgba(85, 136, 224, 0.24) 0%,
+    rgba(85, 136, 224, 0.11) 24%,
+    rgba(85, 136, 224, 0.04) 48%,
+    transparent 76%
+  );
+
+  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --start-version: rgba(36, 36, 38, 0.34);
+  --end-again-text: rgba(36, 36, 38, 0.55);
+  --end-main-bg: #242426;
+  --end-main-text: #f6f4f1;
+}
+
+/* ===== PAGE SHELL (same as Ortspräpositionen / Partizip II / Modalverben) =====
+   The page itself never scrolls or bounces. Everything lives in .app, which fills the screen
+   and scrolls on its own only when the content is taller than the screen (small phones, large text).
+   .app has no top or bottom padding on purpose: Safari measures sticky offsets from inside the scroller's
+   padding, Chrome from its edge (the answer buttons stick to the bottom on phones). The space at the top
+   (status bar + gap, --shell-top) is on the screens; the space at the bottom is .app::after. */
+:root {
+  --shell-top: clamp(20px, 5vw, 38px);
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: 0;
+}
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.app {
+  position: fixed;
+  inset: 0;
+  width: min(100%, 620px);
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: 0 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.app::after {
+  content: "";
+  display: block;
+  height: 36px;
+}
+.hidden {
+  display: none !important;
+}
+
+/* ===== START + SUMMARY SCREENS ===== */
+#sessionScreen,
+#endScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--shell-top) + 8px) 20px 36px;
+}
+#sessionScreen {
+  padding-top: calc(var(--shell-top) + 56px);
+}
+#sessionScreen h1,
+#endScreen h1 {
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0 0 11px;
+}
+#sessionScreen h1 {
+  font-size: 36px;
+}
+#sessionScreen p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+  max-width: 390px;
+}
+
+/* 10 / 20 / 30 */
+.session-options {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 12px;
+}
+.session-option {
+  appearance: none;
+  flex: 0 0 96px;
+  width: 96px;
+  min-width: 0;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font: 650 21px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.session-option:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.session-option:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Description „Worum geht's?“ (same as the other exercises).
+   Width = the 10/20/30 row (3 × 96px + 2 × 12px = 312px). Headline German, text in the user's language
+   (Settings → Translations), fixed above the version mark. Palette grey, so it doesn't compete with the buttons. */
+.start-about {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 64px);
+  margin: 0 auto;
+  padding: 0;
+  width: 312px;
+  max-width: calc(100% - 36px);
+  text-align: center;
+  font-family: var(--font);
+  z-index: 4;
+}
+.start-about h2 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.start-about .about-de {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+body:has(#sessionScreen.hidden) .start-about {
+  display: none;
+}
+
+/* Version number: only on the start and summary screens */
+.version-mark {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font: 400 11px/1 var(--font);
+  letter-spacing: 0.04em;
+  color: var(--start-version);
+  pointer-events: none;
+  z-index: 5;
+}
+body:has(#game:not(.hidden)) .version-mark {
+  display: none;
+}
+
+/* Summary */
+#endScreen h1 {
+  font-size: 58px;
+  letter-spacing: -0.05em;
+  margin-bottom: 24px;
+}
+.end-score {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+}
+.end-note {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 28px;
+  max-width: 390px;
+}
+.finish-actions {
+  width: min(100%, 360px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.finish-actions button {
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#playAgain {
+  background: transparent;
+  color: var(--end-again-text);
+  border: 1px solid var(--hairline);
+}
+#homeBack {
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+}
+.finish-actions button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== TOP BAR ===== title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for „correct“. Position = Partizip II: title and counter centred 33.5px from the top,
+   line at 55px. */
+#game {
+  padding-top: var(--shell-top);
+}
+.top {
+  margin: 13px 0 0;
+}
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.counter {
+  font-size: 14px;
+  color: var(--muted);
+  padding-bottom: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.progress {
+  margin-top: 11px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--muted);
+  border-radius: inherit;
+  transition: width 0.25s ease;
+}
+
+/* ===== WORD CARD ===== shared look with Artikel (the flash-card feeling): „lifted“, no outline.
+   Position and height = Artikel: 26px below the top bar, 360px high — the answer card too, so nothing jumps. */
+.card,
+.answer-card-main {
+  min-height: 360px;
+  border-radius: 26px;
+  background: var(--card-bg);
+  box-shadow: var(--card-lift);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.card {
+  margin-top: 26px;
+  padding: 30px 24px 25px;
+  justify-content: center;
+}
+.preposition {
+  position: relative;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(56px, 14vw, 88px);
+  white-space: nowrap;
+  letter-spacing: -3px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.translation {
+  position: relative;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  min-height: 23px;
+}
+
+/* ===== ANSWER BUTTONS ===== same shape as Artikel and Ortspräpositionen. Keys 1 / 2 / 3 on a computer. */
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+.case-choice {
+  appearance: none;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease,
+    opacity 0.16s ease;
+}
+.case-choice:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.case-choice:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ===== ANSWER CARD =====
+   Green = standard answer, blue = accepted variant (e.g. wegen + Dativ), red = wrong.
+   The glow comes from the top of the card and fades in. */
+.answer-state {
+  margin-top: 26px;
+}
+.answer-card-main {
+  padding: 30px 28px 25px;
+}
+.answer-card-main::before {
+  content: "";
+  position: absolute;
+  inset: -170px -30% auto;
+  height: 380px;
+  background: var(--answer-glow, var(--good-glow));
+  pointer-events: none;
+  animation: glowIn 0.25s ease-out both;
+}
+@keyframes glowIn {
+  from {
+    opacity: 0;
+  }
+}
+.answer-card-main > * {
+  position: relative;
+}
+.answer-card-main.special {
+  --answer-glow: var(--special-glow);
+}
+.answer-card-main.wrong {
+  --answer-glow: var(--bad-glow);
+}
+.answer-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mint);
+  font-weight: 650;
+  margin-bottom: 22px;
+}
+.answer-card-main.special .answer-eyebrow {
+  color: var(--blue);
+}
+.answer-card-main.wrong .answer-eyebrow {
+  color: var(--red);
+}
+.answer-preposition {
+  font-family: var(--serif);
+  font-size: clamp(44px, 11.5vw, 70px);
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: -3px;
+}
+.answer-divider {
+  width: 42px;
+  height: 1px;
+  background: var(--divider);
+  margin: 20px 0;
+}
+.answer-case-large {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.answer-note {
+  margin-top: 10px;
+  max-width: 410px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.wrong-choice {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--red);
+  opacity: 0.82;
+}
+.answer-example {
+  margin-top: auto;
+  padding-top: 23px;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.4;
+}
+.answer-example-translation {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 0.68;
+}
+
+/* ===== WEITER ===== the quiet button (blueprint: Partizip II). It doesn't urge you on; you read the answer first. */
+#next {
+  width: 100%;
+  height: 56px;
+  margin-top: 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: 600 16px/1 var(--font);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#next:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== PHONES ===== */
+@media (max-width: 699px) {
+  .preposition {
+    font-size: 56px;
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --shell-top: calc(env(safe-area-inset-top) + 10px);
+  }
+  /* the answer buttons stay in reach when the card is taller than the screen */
+  .choices {
+    position: sticky;
+    bottom: 10px;
+    z-index: 10;
+  }
+}
+
+/* ===== SHORT SCREENS (small phones, phone sideways, large text) =====
+   The description and the version number follow the content instead of being pinned to the bottom,
+   so they never cover the 10/20/30 or summary buttons (same breakpoints as the other exercises). */
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  .start-about,
+  .version-mark {
+    position: static;
+  }
+  .start-about {
+    margin-top: 12px;
+  }
+  .version-mark {
+    padding: 28px 0 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
