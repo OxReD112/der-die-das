@@ -829,9 +829,11 @@ html.is-touch .case-step {
   margin-top: calc(28px + max(0px, 8vh - 40px));
   margin-top: calc(28px + max(0px, 8dvh - 40px));
 }
+/* Keyboard above the Home button (2026-09-27, all keyboard exercises): the last row ends 72px above the bottom
+   edge (+ home indicator, #game's padding) — ≈16px of air above the round Home button, whose row is centred
+   33.5px up. Replaces the old „33.5dvh − 150px + lift“ gap. The question keeps its place (placeQuestion()). */
 html.is-touch .kbzone {
-  padding-bottom: calc(max(4px, calc(33.5vh - 150px)) + var(--vmp-lift, 0px));
-  padding-bottom: calc(max(4px, calc(33.5dvh - 150px)) + var(--vmp-lift, 0px));
+  padding-bottom: 72px;
 }
 html.is-touch .kbzone.kb-off {
   visibility: hidden;
@@ -846,6 +848,21 @@ html.is-touch.vmp-measure .anchor {
 html.is-touch.vmp-measure .kbzone {
   padding-bottom: max(4px, calc(33.5vh - 150px));
   padding-bottom: max(4px, calc(33.5dvh - 150px));
+}
+
+/* Keyboard width = the other keyboard exercises: 18px from the screen edge on phones (the round has 14px more
+   padding here, so the keyboard reaches into it); tablets: at most as wide as in the 480px exercises. */
+@media (max-width: 600px) {
+  .kbzone {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+}
+@media (min-width: 601px) {
+  .kbzone #keyboardMount {
+    width: min(100%, 432px);
+    margin: 0 auto;
+  }
 }
 
 /* ===== SHORT SCREENS (small phones, phone sideways, large text) =====
@@ -866,6 +883,12 @@ html.is-touch.vmp-measure .kbzone {
 /* Phone sideways: the two zones don't fit, so the round flows from the top instead — question just below
    the top bar, keyboard right under it; after the check the keyboard makes room for the case buttons and
    the answer. The empty slot under the verb only takes space once it's needed. */
+@media (max-width: 340px) and (max-height: 609px) {
+  html.is-touch .kbzone {
+    padding-bottom: max(4px, calc(33.5vh - 150px));
+    padding-bottom: max(4px, calc(33.5dvh - 150px));
+  }
+}
 @media (max-height: 559px) {
   html.is-touch #game {
     min-height: 0;
