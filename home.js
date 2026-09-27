@@ -345,25 +345,27 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-/* ===== Open / close an exercise (Home 5.86, tuned in 5.87) =====
+/* ===== Open / close an exercise (Home 5.86, tuned in 5.87 / 5.88) =====
    Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
    animation*). The exercise layer (page colour) fades in over Home; the exercise's content fades in and settles
    from 94 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
    the data files, like the page appeared before 5.84; Wortschatz waits for its scripts). The exercise pages use the
    same page colour as Home, so only the content seems to move.
-   Closing: the content shrinks to 96 % and fades out, the layer fades away over Home, and the tile it came from
-   settles from 103 % to its size. Only scale and fade are animated — what a phone does smoothly.
+   Closing: the content shrinks to 96 % and fades out. Still behind the layer, the exercise is unloaded, Home leaves
+   exercise mode and its tile pictures are decoded — so Home is completely drawn before it shows (5.87 did this after
+   the layer had gone, and Home seemed to load). Then the layer fades away while Home settles from 103 % to its
+   size (like leaving an app on the iPhone). Only scale and fade are animated — what a phone does smoothly.
    The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
    Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
 const LAYER_FADE_MS = 150;
 const ZOOM_IN_MS = 280;
 const ZOOM_OUT_MS = 160;
-const TILE_SETTLE_MS = 250;
-const TILE_SETTLE_FROM = 1.03;
+const HOME_SETTLE_MS = 320;
+const HOME_SETTLE_FROM = 1.03;
 const EASE_OUT = "cubic-bezier(0.2, 0.8, 0.2, 1)";
-let originTile = null, // the Home tile the exercise came from (for a chapter exercise: the chapter tile)
-  animBusy = false,
+const homeArea = document.querySelector(".home-viewport"); // greeting + tiles (the fixed header can't be scaled)
+let animBusy = false,
   preloadedApp = null, // page already loading because a finger is on its tile
   preloadTimer = 0;
 
@@ -410,7 +412,6 @@ function preloadApp(tile) {
 function openApp(tile) {
   if (animBusy) return;
   clearTimeout(preloadTimer);
-  originTile = tile;
   if (preloadedApp !== tile.dataset.app) frame.src = tile.dataset.app;
   preloadedApp = null;
   const zoom = useAnimation();
@@ -458,18 +459,19 @@ function openApp(tile) {
 function closeApp() {
   if (animBusy) return;
   renderDailyStats();
-  const tile = originTile;
-  const finish = () => {
-    shell.classList.remove("open", "preload", "is-animating");
-    shell.setAttribute("aria-hidden", "true");
+  const leaveExercise = () => {
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
     frame.src = "about:blank";
-    originTile = null;
+  };
+  const hideShell = () => {
+    shell.classList.remove("open", "preload", "is-animating");
+    shell.setAttribute("aria-hidden", "true");
     animBusy = false;
   };
   if (!useAnimation() || !shell.classList.contains("open")) {
-    finish();
+    leaveExercise();
+    hideShell();
     return;
   }
   animBusy = true;
@@ -482,20 +484,28 @@ function closeApp() {
     ],
     { duration: ZOOM_OUT_MS, easing: "ease-in", fill: "forwards" }
   );
-  out.onfinish = () => {
+  out.onfinish = async () => {
+    // behind the page-colour layer: unload the exercise, lay Home out again, have its tile pictures decoded
+    leaveExercise();
+    out.cancel();
+    const pictures = [...homeArea.querySelectorAll("img")].map(img => (img.decode ? img.decode().catch(() => {}) : 0));
+    await Promise.race([Promise.all(pictures), new Promise(r => setTimeout(r, 250))]);
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); // Home drawn once more
+    // then reveal it: the layer fades away while Home settles into place from the centre of the screen
+    const box = homeArea.getBoundingClientRect();
+    homeArea.style.transformOrigin = `${innerWidth / 2 - box.left}px ${innerHeight / 2 - box.top}px`;
+    const settle = homeArea.animate([{ transform: `scale(${HOME_SETTLE_FROM})` }, { transform: "scale(1)" }], {
+      duration: HOME_SETTLE_MS,
+      easing: EASE_OUT
+    });
+    settle.onfinish = () => (homeArea.style.transformOrigin = "");
     const fade = shell.animate([{ opacity: 1 }, { opacity: 0 }], {
       duration: LAYER_FADE_MS,
       easing: "ease-out",
       fill: "forwards"
     });
-    if (tile)
-      tile.animate([{ transform: `scale(${TILE_SETTLE_FROM})` }, { transform: "scale(1)" }], {
-        duration: TILE_SETTLE_MS,
-        easing: EASE_OUT
-      });
     fade.onfinish = () => {
-      finish();
-      out.cancel();
+      hideShell();
       fade.cancel();
     };
   };
