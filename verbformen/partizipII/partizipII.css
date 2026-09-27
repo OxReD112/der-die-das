@@ -384,6 +384,7 @@ body:has(.pattern-modal.open) .version-mark {
   inset: -100px -30px;
   background: radial-gradient(ellipse at 50% 53%, color-mix(in srgb, var(--mint) 9%, transparent), transparent 63%);
   opacity: 0.35;
+  pointer-events: none; /* the glow reaches 100px past the card: it must not catch taps meant for the table button */
 }
 #verb {
   font-family: var(--serif);
