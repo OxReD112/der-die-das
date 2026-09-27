@@ -345,29 +345,46 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-/* ===== Open / close an exercise (Home 5.86, tuned in 5.87 / 5.88) =====
+/* ===== Open / close an exercise (Home 5.86, tuned up to 5.89) =====
    Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
    animation*). The exercise layer (page colour) fades in over Home; the exercise's content fades in and settles
    from 94 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
    the data files, like the page appeared before 5.84; Wortschatz waits for its scripts). The exercise pages use the
    same page colour as Home, so only the content seems to move.
-   Closing: the content shrinks to 96 % and fades out. Still behind the layer, the exercise is unloaded, Home leaves
-   exercise mode and its tile pictures are decoded — so Home is completely drawn before it shows (5.87 did this after
-   the layer had gone, and Home seemed to load). Then the layer fades away while Home settles from 103 % to its
-   size (like leaving an app on the iPhone). Only scale and fade are animated — what a phone does smoothly.
+   Closing — one crossfade, nothing swapped while it's on screen: at the tap Home's pictures are prepared, the whole
+   exercise screen (layer + content) fades out while its content shrinks a little, and Home — which never unloads,
+   it's always there underneath — grows from 97 % to its size. When the exercise screen is invisible it's hidden and
+   Home leaves exercise mode; the exercise page is unloaded half a second later, when nothing moves any more
+   (5.87 unloaded it just as Home appeared, 5.88 under the cover — both showed as a jump / blink on the iPhone).
+   Only scale and fade are animated — what a phone does smoothly.
    The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
    Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
 const LAYER_FADE_MS = 150;
 const ZOOM_IN_MS = 280;
-const ZOOM_OUT_MS = 160;
-const HOME_SETTLE_MS = 320;
-const HOME_SETTLE_FROM = 1.03;
+const CLOSE_FADE_MS = 240;
+const CLOSE_SHRINK_TO = 0.97;
+const HOME_SETTLE_MS = 380;
+const HOME_SETTLE_FROM = 0.97;
+const UNLOAD_AFTER_MS = 500;
 const EASE_OUT = "cubic-bezier(0.2, 0.8, 0.2, 1)";
 const homeArea = document.querySelector(".home-viewport"); // greeting + tiles (the fixed header can't be scaled)
 let animBusy = false,
   preloadedApp = null, // page already loading because a finger is on its tile
-  preloadTimer = 0;
+  preloadTimer = 0,
+  unloadTimer = 0,
+  docBefore = null; // the page that was in the frame before the last navigation
+
+// every page change of the exercise frame goes through here
+function setFrameSrc(url) {
+  clearTimeout(unloadTimer);
+  try {
+    docBefore = frame.contentDocument;
+  } catch (e) {
+    docBefore = null;
+  }
+  frame.src = url;
+}
 
 function useAnimation() {
   return (
@@ -382,7 +399,7 @@ const WAIT_FOR_SCRIPTS = ["wortschatz/"];
 function pageShowable() {
   try {
     const doc = frame.contentDocument;
-    if (frame.contentWindow.location.href === "about:blank" || !doc || !doc.body) return false;
+    if (frame.contentWindow.location.href === "about:blank" || !doc || !doc.body || doc === docBefore) return false;
     if (doc.readyState !== "loading") return true;
     if (WAIT_FOR_SCRIPTS.includes(framePath())) return false;
     const styles = [...doc.querySelectorAll('link[rel="stylesheet"]')];
@@ -399,20 +416,20 @@ function preloadApp(tile) {
   if (preloadedApp !== tile.dataset.app) {
     preloadedApp = tile.dataset.app;
     shell.classList.add("preload");
-    frame.src = preloadedApp;
+    setFrameSrc(preloadedApp);
   }
   preloadTimer = setTimeout(() => {
     if (shell.classList.contains("open")) return;
     shell.classList.remove("preload");
     preloadedApp = null;
-    frame.src = "about:blank";
+    setFrameSrc("about:blank");
   }, 1500);
 }
 
 function openApp(tile) {
   if (animBusy) return;
   clearTimeout(preloadTimer);
-  if (preloadedApp !== tile.dataset.app) frame.src = tile.dataset.app;
+  if (preloadedApp !== tile.dataset.app) setFrameSrc(tile.dataset.app);
   preloadedApp = null;
   const zoom = useAnimation();
   if (zoom) {
@@ -459,55 +476,45 @@ function openApp(tile) {
 function closeApp() {
   if (animBusy) return;
   renderDailyStats();
-  const leaveExercise = () => {
-    document.documentElement.classList.remove("app-open");
-    setFrameWindow(false);
-    frame.src = "about:blank";
-  };
   const hideShell = () => {
     shell.classList.remove("open", "preload", "is-animating");
     shell.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("app-open");
+    setFrameWindow(false);
     animBusy = false;
   };
   if (!useAnimation() || !shell.classList.contains("open")) {
-    leaveExercise();
     hideShell();
+    setFrameSrc("about:blank");
     return;
   }
   animBusy = true;
   setFrameWindow(false);
-  shell.classList.add("is-animating");
-  const out = frame.animate(
-    [
-      { opacity: 1, transform: "scale(1)" },
-      { opacity: 0, transform: "scale(0.96)" }
-    ],
-    { duration: ZOOM_OUT_MS, easing: "ease-in", fill: "forwards" }
-  );
-  out.onfinish = async () => {
-    // behind the page-colour layer: unload the exercise, lay Home out again, have its tile pictures decoded
-    leaveExercise();
-    out.cancel();
-    const pictures = [...homeArea.querySelectorAll("img")].map(img => (img.decode ? img.decode().catch(() => {}) : 0));
-    await Promise.race([Promise.all(pictures), new Promise(r => setTimeout(r, 250))]);
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); // Home drawn once more
-    // then reveal it: the layer fades away while Home settles into place from the centre of the screen
-    const box = homeArea.getBoundingClientRect();
-    homeArea.style.transformOrigin = `${innerWidth / 2 - box.left}px ${innerHeight / 2 - box.top}px`;
-    const settle = homeArea.animate([{ transform: `scale(${HOME_SETTLE_FROM})` }, { transform: "scale(1)" }], {
-      duration: HOME_SETTLE_MS,
-      easing: EASE_OUT
-    });
-    settle.onfinish = () => (homeArea.style.transformOrigin = "");
-    const fade = shell.animate([{ opacity: 1 }, { opacity: 0 }], {
-      duration: LAYER_FADE_MS,
+  shell.classList.add("is-animating"); // Home button gone at once
+  // Home's pictures: get them ready now (Safari may have dropped them while the exercise covered Home)
+  homeArea.querySelectorAll("img").forEach(img => img.decode && img.decode().catch(() => {}));
+  const box = homeArea.getBoundingClientRect();
+  homeArea.style.transformOrigin = `${innerWidth / 2 - box.left}px ${innerHeight / 2 - box.top}px`;
+  const anims = [
+    shell.animate([{ opacity: 1 }, { opacity: 0 }], { duration: CLOSE_FADE_MS, easing: "ease-out", fill: "forwards" }),
+    frame.animate([{ transform: "scale(1)" }, { transform: `scale(${CLOSE_SHRINK_TO})` }], {
+      duration: CLOSE_FADE_MS,
       easing: "ease-out",
       fill: "forwards"
-    });
-    fade.onfinish = () => {
-      hideShell();
-      fade.cancel();
-    };
+    })
+  ];
+  const settle = homeArea.animate([{ transform: `scale(${HOME_SETTLE_FROM})` }, { transform: "scale(1)" }], {
+    duration: HOME_SETTLE_MS,
+    easing: "ease" // softer than EASE_OUT: still growing while Home comes through the fading exercise screen
+  });
+  settle.onfinish = settle.oncancel = () => (homeArea.style.transformOrigin = "");
+  anims[0].onfinish = () => {
+    hideShell();
+    anims.forEach(a => a.cancel());
+    // unload the exercise page once nothing moves any more (not if an exercise was opened again meanwhile)
+    unloadTimer = setTimeout(() => {
+      if (!shell.classList.contains("open") && !shell.classList.contains("preload")) setFrameSrc("about:blank");
+    }, UNLOAD_AFTER_MS);
   };
 }
 
