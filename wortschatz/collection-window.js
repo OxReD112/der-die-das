@@ -147,7 +147,8 @@
           w.base ||
             String(w.target || "")
               .split(" / ")
-              .join(" ")
+              .join(" "),
+          { lang: "de" } // v2.112: German hyphenation for the rare word that is too long for its column
         )
       );
       row.appendChild(el("span", "coll-tr", tr(w, "translation")));
@@ -191,7 +192,8 @@
           w.base ||
             String(w.target || "")
               .split(" / ")
-              .join(" ")
+              .join(" "),
+          { lang: "de" } // v2.112: German hyphenation for the rare word that is too long for its column
         )
       );
       row.appendChild(el("span", "coll-tr", tr(w, "translation")));

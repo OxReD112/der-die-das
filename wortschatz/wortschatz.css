@@ -1222,18 +1222,27 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
   transform: scale(0.99);
   filter: brightness(0.94);
 }
+/* v2.112 line breaks: the German keeps its natural width (up to 62% of the row) and only wraps between words;
+   the translation takes the rest and wraps between words, never inside one (its longest word is its minimum).
+   Before, both sides shrank together and „overflow-wrap: anywhere“ let the browser cut a word anywhere
+   (das Fernwe|h) even when it would fit. Only a German word too long for its column is split — hyphenated
+   (lang="de", Safari), cut only if no hyphen point fits. */
 .coll-de {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 62%;
   font-size: 16px;
   color: var(--text);
-  min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 .coll-tr {
+  flex: 1 1 0;
   font-size: 14px;
   color: var(--muted);
   text-align: right;
-  min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 /* own collection: Export · Delete as quiet links at the bottom */
 .coll-bottom {
