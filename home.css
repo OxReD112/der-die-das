@@ -101,29 +101,36 @@ body {
     calc(env(safe-area-inset-bottom) + 32px) max(24px, env(safe-area-inset-left));
 }
 
-/* Exercise open: the page underneath doesn't scroll.
-   Home 5.69: in the iPhone web app the exercise frame doesn't reach the very bottom of the screen (the strip where
-   Safari has its address bar), so a window inside an exercise can't darken it — Home's own background shows there.
-   While an exercise window is open, Home darkens that background the same way (bg + window scrim: 34 % / 20 % black). */
+/* Exercise open: the page underneath doesn't scroll. */
 html.app-open,
 html.app-open body {
   overflow: hidden;
   height: 100%;
+}
+
+/* Windows reach the bottom strip (Home 5.69, Home's own windows since 5.92): in the iPhone web app full-screen
+   windows don't reach the very bottom of the screen, so the strip there shows Home's plain background.
+   While any window is open — inside an exercise, or Home's own (Fortschritt, About, Keep your progress,
+   "Are you sure?") — home.js sets .window-dim and that background takes the dimmed colour
+   (bg + window scrim: 34 % / 20 % black), fading with the window. */
+html,
+body {
   transition: background-color 0.18s ease;
 }
 
-html.app-open.frame-window,
-html.app-open.frame-window body {
+html.window-dim,
+html.window-dim body {
   background: #121213;
 }
 
-html[data-theme="light"].app-open.frame-window,
-html[data-theme="light"].app-open.frame-window body {
+html[data-theme="light"].window-dim,
+html[data-theme="light"].window-dim body {
   background: #c5c3c1;
 }
 
 /* ===== Page + header ===== */
 .page {
+  position: relative; /* the Settings link sits at its bottom (5.92) */
   width: min(100%, 720px);
   margin: 0 auto;
   min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
@@ -236,6 +243,7 @@ header h1 {
   flex-direction: column;
   min-height: inherit;
   padding-inline: 24px;
+  padding-bottom: 56px; /* room for the Settings link: long content (Keep your progress card, small phones) ends above it (5.92) */
   transition:
     transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
     opacity 0.42s ease;
@@ -909,11 +917,14 @@ header h1 {
 .settings-confirm button {
   touch-action: manipulation;
 }
+/* Part of the page since 5.92 (was pinned to the screen and covered the Keep your progress card / tiles on small
+   phones): at the bottom of .page — same place as before when everything fits (page ends 32px + safe area above the
+   screen's bottom, the link 28px + safe area), below the last card when the content is taller (then the page scrolls). */
 .settings-launcher {
   position: absolute;
   right: 50%;
   transform: translateX(50%);
-  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  bottom: -4px;
   z-index: 2;
   appearance: none;
   -webkit-appearance: none;

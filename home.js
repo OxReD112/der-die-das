@@ -641,11 +641,26 @@ function updateBack() {
     placeBack("row", W / 2, rowTop);
   } else placeBack("corner", Math.max(12, (W - 480) / 2 + 12), rowTop); // during a round: bottom left, same height
 }
-// Home 5.69: darken the strip below the exercise frame (and the status-bar colour) while an exercise window is open
+/* Window dim (Home 5.69, Home's own windows since 5.92): in the iPhone web app windows don't reach the very bottom
+   of the screen, so while any window is open Home's background (and the status-bar colour) takes the dimmed colour
+   — see home.css → .window-dim. Two sources: a window inside the exercise (setFrameWindow, from the Home button
+   code) and Home's own windows (watched below). The dim stays while either is open. */
+const HOME_WINDOWS = ".pg, .about-window, .settings-confirm"; // Fortschritt, About + Keep your progress, "Are you sure?"
+const HOME_WINDOW_OPEN = ".pg.open, .about-window.open, .settings-confirm.is-open";
+const windowDim = { frame: false, home: false };
 function setFrameWindow(on) {
+  setWindowDim("frame", on);
+}
+new MutationObserver(records => {
+  if (records.some(r => r.target.matches && r.target.matches(HOME_WINDOWS)))
+    setWindowDim("home", !!document.querySelector(HOME_WINDOW_OPEN));
+}).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["class"] });
+function setWindowDim(source, on) {
+  windowDim[source] = on;
+  on = windowDim.frame || windowDim.home;
   const root = document.documentElement;
-  if (root.classList.contains("frame-window") === on) return;
-  root.classList.toggle("frame-window", on);
+  if (root.classList.contains("window-dim") === on) return;
+  root.classList.toggle("window-dim", on);
   const meta = document.querySelector('meta[name="theme-color"]');
   if (!meta) return;
   if (on) {
