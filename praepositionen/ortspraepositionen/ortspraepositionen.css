@@ -205,8 +205,8 @@ button {
   outline-offset: 2px;
 }
 
-/* „Orte · Tabelle“: on the start screen under 10/20/30, during a round at the Home screen's
-   „Settings“ spot (centred, 28px above the bottom edge) */
+/* „Orte · Tabelle“: on the start screen under 10/20/30, during a round centred in the Home
+   button's row, a bit smaller (2026-09-27) */
 .table-btn {
   appearance: none;
   border: 1px solid var(--hairline);
@@ -234,7 +234,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  bottom: calc(env(safe-area-inset-bottom) + 16px); /* centred on the Home button's row (33.5px up), 2026-09-27 */
   margin: 0;
   padding: 0;
   display: flex;
@@ -246,7 +246,9 @@ button {
   pointer-events: auto;
   margin: 0;
   background: var(--bg);
-  font: 400 14px/1.2 var(--font);
+  font: 400 12.5px/1.2 var(--font); /* ≈12% smaller than on the start screen: there if needed, not inviting */
+  padding: 9px 12px;
+  border-radius: 15px;
 }
 
 /* Description „Worum geht's?“ (same as the other exercises).
