@@ -1523,3 +1523,31 @@ textarea.coll-paste {
     transition: none !important;
   }
 }
+
+/* ===== KEYBOARD ABOVE THE HOME BUTTON (phones and tablets, 2026-09-27) =====
+   While a word is asked the on-screen keyboard sits at a fixed place: its last row ends 72px above the bottom
+   edge (+ home indicator) — ≈16px of air above the round Home button, whose row is centred 33.5px up.
+   Less room (small phone, long sentence): the keyboard rises towards the typing field; once the gap is at its
+   minimum, the script shrinks the sentence + translation (fitTopZone(), down to 80%); after that the page
+   scrolls as before. Only when the keyboard is the touch keyboard — computers are unchanged. */
+#question:not(.hidden):has(.keyboard.is-touch) {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#question:has(.keyboard.is-touch) #almostHint,
+#question:has(.keyboard.is-touch) #keyboardMount {
+  width: 100%;
+}
+#question:has(.keyboard.is-touch) #keyboardMount {
+  margin-top: auto;
+  padding-bottom: 48px; /* + the page's own safe area + 24px below it = 72px */
+}
+/* short screens (phone sideways, 4-inch iPhones): the Home button is at the top — keyboard follows the field */
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  #question:has(.keyboard.is-touch) #keyboardMount {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+}

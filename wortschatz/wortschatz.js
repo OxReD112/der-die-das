@@ -25,6 +25,23 @@ function isTouchDevice() {
 
 document.getElementById("desktopCheck").style.display = isTouchDevice() ? "none" : ""; // Prüfen only without a touch screen
 
+/* Keyboard above the Home button (see the CSS block KEYBOARD ABOVE THE HOME BUTTON): when a long sentence on a
+   small screen leaves no room for the keyboard at its place, sentence + translation shrink just enough (down to
+   80%). Measured for every card, and again when the screen size changes. */
+const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+function fitTopZone() {
+  const zone = document.querySelector("#question .topZone"),
+    kb = document.getElementById("keyboard");
+  if (!zone) return;
+  zone.style.zoom = "";
+  if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  if (document.getElementById("study").style.display === "none" || document.getElementById("question").classList.contains("hidden")) return;
+  const over = document.documentElement.scrollHeight - innerHeight;
+  if (over <= 0) return;
+  const h = zone.offsetHeight;
+  zone.style.zoom = Math.max(0.8, (h - over) / h).toFixed(3);
+}
+addEventListener("resize", fitTopZone);
 async function loadKeyboardComponent() {
   const mount = document.getElementById("keyboardMount");
   if (!mount) return false;
@@ -47,6 +64,7 @@ async function loadKeyboardComponent() {
   const kb = document.getElementById("keyboard");
   window.deutschKeyboardReady = true;
   kb.classList.add("show"); // component itself stays hidden unless it detected a touch device
+  fitTopZone();
   return true;
 }
 
@@ -419,6 +437,7 @@ function render() {
   if (window.deutschKeyboardReady) {
     $("keyboard").classList.add("show");
   }
+  fitTopZone();
   if (innerWidth >= 700) setTimeout(() => $("answerInput").focus(), 30);
 }
 function esc(s) {
