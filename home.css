@@ -1740,13 +1740,7 @@ header h1 {
     visibility 0s linear 0.18s;
 }
 
-/* open / close animation on phones (home.js → openApp / closeApp): only transform + opacity move.
-   .app-card = the plain card that grows out of the tile; .home-dim = the dark layer over Home. */
-.app-shell.is-animating,
-.app-shell.is-animating .app-frame {
-  background: transparent;
-}
-
+/* open / close zoom on phones (home.js → openApp / closeApp) */
 .app-shell.is-animating .app-frame {
   will-change: opacity, transform;
 }
@@ -1756,28 +1750,6 @@ header h1 {
   display: block;
   visibility: hidden;
   pointer-events: none;
-}
-
-.app-card,
-.home-dim {
-  position: fixed;
-  inset: 0;
-  display: none;
-  pointer-events: none;
-}
-
-.app-card {
-  z-index: 999;
-  background: var(--bg);
-  transform-origin: 0 0;
-  will-change: transform, opacity;
-}
-
-.home-dim {
-  z-index: 998;
-  background: #000;
-  opacity: 0;
-  will-change: opacity;
 }
 
 /* ===== Responsive ===== */

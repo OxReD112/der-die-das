@@ -345,29 +345,18 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-/* ===== Open / close an exercise (Home 5.84, smoother in 5.85) =====
-   Phones: the exercise grows out of the tile that was tapped and, on the way back, folds into it again
-   (Documentation/DECISIONS.md → *Home button + open / close animation*).
-   Only moving / scaling and fading are animated — the two things a phone can animate without redrawing anything
-   (5.84 cut the exercise out with a clip mask and dimmed Home with a filter: both redraw every frame, and the phone
-   couldn't keep up while the exercise was loading):
-   - A plain card in the page colour (.app-card) grows from the tile's shape to the full screen, starting the moment
-     the tile is tapped (5.84 first waited for the page to load — up to 450ms of nothing).
-   - The exercise loads from the moment the finger touches the tile, invisibly, and fades in on the card as soon as
-     it's ready (not before the card is nearly full size).
-   - Home zooms back a little under a dark see-through layer (.home-dim) that fades in.
-   - Closing: the exercise shrinks towards its tile and fades; the card lands on the real tile and fades away over it.
-   Tablets, computers and Reduce Motion: no animation (the exercise simply appears / disappears, as before).
+/* ===== Open / close an exercise (Home 5.86) =====
+   Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
+   animation*). The exercise layer (page colour) fills the screen at once; the exercise's content fades in and settles
+   from 94 % to full size. The exercise pages use the same page colour as Home, so only the content seems to move.
+   Closing: the content shrinks to 96 % and fades out, Home is back, and the tile it came from settles from 106 % to
+   its size. Only scale and fade are animated — what a phone does smoothly.
+   The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
+   Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
-const ANIM_OPEN = 440;
-const ANIM_CLOSE = 400;
-const ANIM_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
-const homeArea = document.querySelector(".home-viewport"); // only the tile area zooms: the fixed header must stay put
-const appCard = document.createElement("div");
-appCard.className = "app-card";
-const homeDim = document.createElement("div");
-homeDim.className = "home-dim";
-document.body.append(homeDim, appCard);
+const ZOOM_IN_MS = 280;
+const ZOOM_OUT_MS = 160;
+const TILE_SETTLE_MS = 250;
 let originTile = null, // the Home tile the exercise came from (for a chapter exercise: the chapter tile)
   animBusy = false,
   preloadedApp = null, // page already loading because a finger is on its tile
@@ -378,41 +367,6 @@ function useAnimation() {
   return (
     window.matchMedia("(max-width: 600px)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
-}
-function tileBox(tile) {
-  const r = tile.getBoundingClientRect();
-  if (!r.width || r.bottom < 0 || r.top > innerHeight) return null; // tile not on screen → no animation
-  return { x: r.left, y: r.top, w: r.width, h: r.height, rad: parseFloat(getComputedStyle(tile).borderTopLeftRadius) || 25 };
-}
-// the card at the tile's place and shape (scaled down from full screen; the corners are counter-scaled so they stay round)
-function cardAtTile(b, W, H) {
-  const sx = b.w / W,
-    sy = b.h / H;
-  return {
-    transform: `translate(${b.x}px, ${b.y}px) scale(${sx}, ${sy})`,
-    borderRadius: `${b.rad / sx}px / ${b.rad / sy}px`
-  };
-}
-const CARD_FULL = { transform: "translate(0px, 0px) scale(1, 1)", borderRadius: "0px / 0px" };
-function pageColour() {
-  return getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#1b1b1d";
-}
-function homeZoom(b, from, to, d) {
-  homeArea.style.transformOrigin = `${b.x + b.w / 2 - homeArea.getBoundingClientRect().left}px ${
-    b.y + b.h / 2 - homeArea.getBoundingClientRect().top
-  }px`;
-  const o = { duration: d, easing: ANIM_EASE, fill: "forwards" };
-  return [
-    homeArea.animate([{ transform: `scale(${from})` }, { transform: `scale(${to})` }], o),
-    homeDim.animate([{ opacity: from === 1 ? 0 : 0.35 }, { opacity: from === 1 ? 0.35 : 0 }], o)
-  ];
-}
-function endAnimations(list) {
-  list.forEach(a => a && a.cancel());
-  appCard.style.display = homeDim.style.display = "none";
-  homeArea.style.transformOrigin = "";
-  frame.style.opacity = frame.style.transformOrigin = "";
-  shell.classList.remove("is-animating");
 }
 
 frame.addEventListener("load", () => {
@@ -448,86 +402,50 @@ function openApp(tile) {
   if (animBusy) return;
   clearTimeout(preloadTimer);
   originTile = tile;
-  const app = tile.dataset.app;
-  const wasPreloaded = preloadedApp === app;
+  if (preloadedApp !== tile.dataset.app) loadInFrame(tile.dataset.app);
   preloadedApp = null;
-  const showShell = () => {
-    shell.classList.remove("preload");
-    shell.classList.add("open");
-    shell.setAttribute("aria-hidden", "false");
-    document.documentElement.classList.add("app-open");
-  };
-  const b = useAnimation() ? tileBox(tile) : null;
-  if (!b) {
-    if (!wasPreloaded) loadInFrame(app);
-    showShell();
-    return;
+  const zoom = useAnimation();
+  if (zoom) {
+    animBusy = true;
+    shell.classList.add("is-animating"); // Home button hidden until the content is in place
+    frame.style.opacity = "0";
   }
-  animBusy = true;
-  if (!wasPreloaded) loadInFrame(app);
-  shell.classList.add("is-animating"); // see-through, Home button hidden
-  frame.style.opacity = "0";
-  showShell();
-  appCard.style.display = homeDim.style.display = "block";
-  const W = appCard.offsetWidth,
-    H = appCard.offsetHeight,
-    d = ANIM_OPEN,
-    t0 = performance.now();
-  const tileColour = getComputedStyle(tile).backgroundColor;
-  const anims = [
-    appCard.animate(
-      [
-        { ...cardAtTile(b, W, H), opacity: 0, backgroundColor: tileColour },
-        { opacity: 1, offset: 0.25 },
-        { ...CARD_FULL, opacity: 1, backgroundColor: pageColour() }
-      ],
-      { duration: d, easing: ANIM_EASE, fill: "forwards" }
-    ),
-    ...homeZoom(b, 1, 0.94, d)
-  ];
-  // the exercise fades in once it has loaded — not before the card is nearly full size (55 % of the time ≈ 95 % of the way)
-  let revealed = false,
-    cardDone = false,
-    contentDone = false;
-  const done = () => {
-    if (!cardDone || !contentDone) return;
-    endAnimations(anims);
+  shell.classList.remove("preload");
+  shell.classList.add("open");
+  shell.setAttribute("aria-hidden", "false");
+  document.documentElement.classList.add("app-open");
+  if (!zoom) return;
+
+  let started = false;
+  const settled = () => {
+    shell.classList.remove("is-animating");
     animBusy = false;
     scheduleBack();
   };
-  const reveal = () => {
-    if (revealed) return;
-    revealed = true;
-    frame.style.transformOrigin = "50% 40%";
-    const fade = frame.animate(
+  const zoomIn = () => {
+    if (started) return;
+    started = true;
+    frame.style.opacity = "";
+    const a = frame.animate(
       [
-        { opacity: 0, transform: "scale(0.97)" },
+        { opacity: 0, transform: "scale(0.94)" },
         { opacity: 1, transform: "scale(1)" }
       ],
-      { duration: 200, easing: "ease-out" }
+      { duration: ZOOM_IN_MS, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" }
     );
-    frame.style.opacity = "";
-    anims.push(fade);
-    fade.onfinish = () => {
-      contentDone = true;
-      done();
-    };
+    a.onfinish = a.oncancel = settled;
   };
-  const whenReady = () => setTimeout(reveal, Math.max(0, t0 + d * 0.55 - performance.now()));
-  if (frameReady) whenReady();
-  else frame.addEventListener("load", whenReady, { once: true });
-  setTimeout(reveal, 1500); // very slow network: show whatever has arrived
-  anims[0].onfinish = () => {
-    cardDone = true;
-    done();
-  };
+  if (frameReady) zoomIn();
+  else frame.addEventListener("load", zoomIn, { once: true });
+  setTimeout(zoomIn, 1500); // very slow network: show whatever has arrived
 }
 
 function closeApp() {
   if (animBusy) return;
   renderDailyStats();
+  const tile = originTile;
   const finish = () => {
-    shell.classList.remove("open", "preload");
+    shell.classList.remove("open", "preload", "is-animating");
     shell.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
@@ -536,42 +454,28 @@ function closeApp() {
     originTile = null;
     animBusy = false;
   };
-  const b = originTile && useAnimation() && shell.classList.contains("open") ? tileBox(originTile) : null;
-  if (!b) {
+  if (!useAnimation() || !shell.classList.contains("open")) {
     finish();
     return;
   }
   animBusy = true;
   setFrameWindow(false);
-  appCard.style.display = homeDim.style.display = "block";
   shell.classList.add("is-animating");
-  const W = appCard.offsetWidth,
-    H = appCard.offsetHeight,
-    d = ANIM_CLOSE;
-  const tileColour = getComputedStyle(originTile).backgroundColor;
-  frame.style.transformOrigin = `${b.x + b.w / 2}px ${b.y + b.h / 2}px`;
-  const o = { duration: d, easing: ANIM_EASE, fill: "forwards" };
-  const anims = [
-    appCard.animate(
-      [
-        { ...CARD_FULL, opacity: 1, backgroundColor: pageColour() },
-        { opacity: 1, offset: 0.55 },
-        { ...cardAtTile(b, W, H), opacity: 0, backgroundColor: tileColour }
-      ],
-      o
-    ),
-    frame.animate(
-      [
-        { opacity: 1, transform: "scale(1)" },
-        { opacity: 0, transform: `scale(${Math.max(0.2, b.w / W)})` }
-      ],
-      { duration: Math.round(d * 0.6), easing: ANIM_EASE, fill: "forwards" }
-    ),
-    ...homeZoom(b, 0.94, 1, d)
-  ];
-  anims[0].onfinish = () => {
+  const a = frame.animate(
+    [
+      { opacity: 1, transform: "scale(1)" },
+      { opacity: 0, transform: "scale(0.96)" }
+    ],
+    { duration: ZOOM_OUT_MS, easing: "ease-in", fill: "forwards" }
+  );
+  a.onfinish = () => {
     finish();
-    endAnimations(anims);
+    a.cancel();
+    if (tile)
+      tile.animate([{ transform: "scale(1.06)" }, { transform: "scale(1)" }], {
+        duration: TILE_SETTLE_MS,
+        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)"
+      });
   };
 }
 
