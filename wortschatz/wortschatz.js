@@ -701,10 +701,34 @@ $("answerInput").addEventListener("keydown", e => {
     check();
   }
 });
+/* GERMAN VOICE ONLY (2026-09-27): we pick a German voice ourselves instead of letting
+   the phone choose. If the device has no German voice, the speaker icon is hidden
+   (body.noGermanVoice) and tapping the sentence does nothing - never a wrong-language voice.
+   The voice list can arrive late, so we re-check on voiceschanged and a few times after load. */
+let germanVoice = null;
+function pickGermanVoice() {
+  const voices = "speechSynthesis" in window ? speechSynthesis.getVoices() : [];
+  const de = voices.filter(v => /^de([-_]|$)/i.test(v.lang || ""));
+  const isDeDE = v => /^de[-_]DE$/i.test(v.lang);
+  germanVoice =
+    de.find(v => isDeDE(v) && v.localService) ||
+    de.find(isDeDE) ||
+    de.find(v => v.localService) ||
+    de[0] ||
+    null;
+  document.body.classList.toggle("noGermanVoice", !germanVoice);
+}
+pickGermanVoice();
+if ("speechSynthesis" in window) {
+  speechSynthesis.addEventListener("voiceschanged", pickGermanVoice);
+  [500, 1500, 4000].forEach(ms => setTimeout(pickGermanVoice, ms));
+}
 function speakCurrent() {
+  if (!germanVoice) return;
   speechSynthesis.cancel();
   let u = new SpeechSynthesisUtterance(current.revealed);
-  u.lang = "de-DE";
+  u.voice = germanVoice;
+  u.lang = germanVoice.lang;
   u.rate = 0.88;
   speechSynthesis.speak(u);
 }

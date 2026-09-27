@@ -587,6 +587,13 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
 .speakTop:active {
   transform: scale(0.94);
 }
+/* No German voice on this device: no speaker icon, sentence not tappable. */
+.noGermanVoice .speakTop {
+  display: none;
+}
+.noGermanVoice .answerTop {
+  cursor: default;
+}
 .speakTopIcon {
   display: block;
   width: 100%;
