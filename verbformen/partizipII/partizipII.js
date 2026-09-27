@@ -126,8 +126,28 @@ function startSession(size) {
   render();
 }
 
+/* Keyboard above the Home button (see the CSS block KEYBOARD ABOVE THE HOME BUTTON): when a long line on a
+   small screen leaves no room for the keyboard at its place, the question card shrinks just enough (down to 80%).
+   Measured for every sentence, and again when the screen size changes. */
+const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+function fitCard() {
+  const card = document.querySelector("#study .card"),
+    kb = $("keyboard"),
+    app = document.querySelector(".app");
+  card.style.zoom = "";
+  if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  const over = app.scrollHeight - app.clientHeight;
+  if (over <= 0) return;
+  const h = card.offsetHeight;
+  card.style.zoom = Math.max(0.8, (h - over) / h).toFixed(3);
+}
+window.addEventListener("resize", () => {
+  if (inRound() && !checked) fitCard();
+});
+
 function syncKeyboardAndFocus() {
   if (window.deutschKeyboardReady && !checked) $("keyboard").classList.add("show");
+  fitCard();
   if (!isTouchDevice) setTimeout(focusAnswer, 80);
 }
 
@@ -302,7 +322,10 @@ async function loadKeyboardComponent() {
     document.body.appendChild(sc);
   }
   window.deutschKeyboardReady = true;
-  if (inRound() && !checked) $("keyboard").classList.add("show");
+  if (inRound() && !checked) {
+    $("keyboard").classList.add("show");
+    fitCard();
+  }
   return true;
 }
 loadKeyboardComponent().catch(e => console.error(e));

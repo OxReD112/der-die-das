@@ -156,8 +156,8 @@ body {
   filter: brightness(0.94);
 }
 
-/* „Vokalwechsel · Tabelle“: on the start screen under 10/20/30, during a round at the Home screen's
-   „Settings“ spot (centred, 28px above the bottom edge) */
+/* „Vokalwechsel · Tabelle“: on the start screen under 10/20/30, during a round centred in the Home
+   button's row, a bit smaller (2026-09-27) */
 .pattern-table-btn {
   border: 1px solid var(--hairline);
   border-radius: 17px;
@@ -184,7 +184,7 @@ body {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  bottom: calc(env(safe-area-inset-bottom) + 16px); /* centred on the Home button's row (33.5px up) */
   display: flex;
   justify-content: center;
   z-index: 20;
@@ -194,7 +194,9 @@ body {
   pointer-events: auto;
   margin: 0;
   background: var(--bg);
-  font: 400 14px/1.2 var(--font);
+  font: 400 12.5px/1.2 var(--font); /* ≈12% smaller than on the start screen: there if needed, not inviting */
+  padding: 9px 12px;
+  border-radius: 15px;
 }
 
 /* Description „Worum geht's?“ (same as Artikel / Pronomen / Modalverben).
@@ -812,6 +814,25 @@ body:has(.pattern-modal.open) .version-mark {
   }
 }
 
+/* ===== KEYBOARD ABOVE THE HOME BUTTON (phones and tablets, 2026-09-27) =====
+   During a round the on-screen keyboard sits at a fixed place: its last row ends 72px above the bottom edge
+   (+ home indicator) — ≈16px of air above the round Home button, whose row is centred 33.5px up.
+   Less room (small phone, long sentence): the keyboard rises towards the typing field; once the gap is at its
+   minimum, the script shrinks the question card (fitCard(), down to 80%); after that the page scrolls as before.
+   Only when the keyboard is the touch keyboard — computers are unchanged. Short screens: see below. */
+#study:not(.hidden):has(.keyboard.is-touch) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+#study:has(.keyboard.is-touch) #keyboardMount {
+  margin-top: auto;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 72px - max(24px, env(safe-area-inset-bottom)));
+}
+#keyboardMount .keyboard {
+  margin-top: 0; /* minimum gap field → keys = card padding 26px + keyboard padding 12px */
+}
+
 /* ===== SHORT SCREENS (small phones, phone sideways, large text) =====
    The description, the version number and the table button during a round follow the content instead of
    being pinned to the bottom, so they never cover the 10/20/30 buttons, the on-screen keys or Weiter
@@ -829,6 +850,13 @@ body:has(.pattern-modal.open) .version-mark {
     padding: 28px 0 4px;
   }
   .in-session-pattern {
+    margin-top: 20px;
+  }  /* keyboard follows the content as before (the Home button is at the top here) */
+  #study:has(.keyboard.is-touch) #keyboardMount {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  #keyboardMount .keyboard {
     margin-top: 20px;
   }
 }
