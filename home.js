@@ -1,0 +1,1583 @@
+/* Deutsch. · Home script
+   Loaded at the end of <body> (all markup already exists), before progress-screen.js.
+   The tiny theme script stays inline in <head> of index.html: it must set data-theme
+   before the first paint, otherwise the page flashes in the wrong theme. */
+
+/* Phrase of the Week — data lives in phrases.js.
+       The details are a separate full-screen Home panel. */
+(function initPhraseOfTheWeek() {
+  const phraseHomeTitle = document.getElementById("phraseWeekHomeTitle");
+  const phraseHomeLiteral = document.getElementById("phraseWeekHomeLiteral");
+  const phraseTitle = document.getElementById("phraseWeekTitle");
+  const phraseLiteral = document.getElementById("phraseWeekLiteral");
+  const phraseMeaning = document.getElementById("phraseWeekMeaning");
+  const phraseExample = document.getElementById("phraseWeekExample");
+  const phraseToggle = document.getElementById("phraseWeekToggle");
+  const phraseBack = document.getElementById("phraseScreenBack");
+  const homeTrack = document.getElementById("homeTrack");
+  const phraseScreen = document.getElementById("phraseScreen");
+  if (
+    !phraseHomeTitle ||
+    !phraseHomeLiteral ||
+    !phraseTitle ||
+    !phraseLiteral ||
+    !phraseMeaning ||
+    !phraseExample ||
+    !phraseToggle ||
+    !phraseBack ||
+    !homeTrack ||
+    !phraseScreen
+  )
+    return;
+
+  function showPhrase() {
+    homeTrack.style.transform = "translateX(-50%)";
+    phraseScreen.setAttribute("aria-hidden", "false");
+  }
+
+  function showHome() {
+    homeTrack.style.transform = "translateX(0)";
+    phraseScreen.setAttribute("aria-hidden", "true");
+  }
+
+  phraseToggle.addEventListener("click", showPhrase);
+  phraseBack.addEventListener("click", showHome);
+
+  function getMonday(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    const day = d.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + diff);
+    return d;
+  }
+
+  function getISOWeekKey(date) {
+    const monday = getMonday(date);
+    return monday.getTime();
+  }
+
+  function render() {
+    if (!Array.isArray(window.PHRASES) || window.PHRASES.length === 0) return;
+
+    const startMonday = new Date(2026, 0, 5);
+    const currentWeek = getISOWeekKey(new Date());
+    const firstWeek = getISOWeekKey(startMonday);
+    const weeks = Math.max(0, Math.floor((currentWeek - firstWeek) / 604800000));
+    const index = weeks % window.PHRASES.length;
+    const phrase = window.PHRASES[index];
+
+    // The same weekly phrase object feeds both the compact Home preview
+    // and the full-screen details. There is only one source of truth.
+    phraseHomeTitle.textContent = phrase.title;
+    phraseHomeLiteral.textContent = getTranslation(phrase, "literal");
+
+    phraseTitle.textContent = phrase.title;
+    phraseLiteral.textContent = getTranslation(phrase, "literal");
+    phraseMeaning.textContent = "→ " + getTranslation(phrase, "meaning");
+    phraseExample.textContent = phrase.example;
+  }
+
+  if (Array.isArray(window.PHRASES)) render();
+  else window.addEventListener("phrasesready", render, { once: true });
+  // Settings → Your language ENG/RUS: update the phrase right away.
+  document.addEventListener("deutsch:translationlang", render);
+})();
+
+const DAILY_STATS_KEY = "deutschDailyStatsV1";
+
+const DAILY_LIMIT_OFF_DATE_KEY = "deutschDailyLimitOffDateV1";
+
+/* Personal greeting v1 — see Documentation/PERSONAL_GREETINGS.md */
+const PROFILE_KEY = "deutschProfileV1";
+const GREETING_MAX_WIDTH = 240;
+
+function getUserName() {
+  try {
+    const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || "{}");
+    return typeof profile.name === "string" ? profile.name.trim().slice(0, 20) : "";
+  } catch (e) {
+    return "";
+  }
+}
+
+function setUserName(name) {
+  const clean = String(name || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 20);
+  try {
+    if (clean) localStorage.setItem(PROFILE_KEY, JSON.stringify({ name: clean }));
+    else localStorage.removeItem(PROFILE_KEY);
+  } catch (e) {}
+}
+
+function greetingState(points, vocabDone, hour) {
+  if (hour >= 23 || hour < 5) return "lateNight";
+  if (points >= 120) return "bonus";
+  if (points >= 100) return "goal";
+  if (vocabDone) return "vocabDone";
+  if (points >= 50) return "halfway";
+  if (points >= 1) return "started";
+  if (hour < 11) return "morning";
+  if (hour < 18) return "daytime";
+  return "evening";
+}
+
+/* Same state on the same day always gives the same phrase. */
+function dailyIndex(seed, length) {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0) % length;
+}
+
+const greetingCanvas = document.createElement("canvas").getContext("2d");
+function lineFits(text, element) {
+  if (!element || !greetingCanvas) return true;
+  const cs = getComputedStyle(element);
+  greetingCanvas.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+  const box = document.getElementById("greeting");
+  const max = Math.min(GREETING_MAX_WIDTH, box && box.clientWidth ? box.clientWidth : GREETING_MAX_WIDTH);
+  return greetingCanvas.measureText(text).width <= max;
+}
+
+let greetingKey = null;
+function renderGreeting(points, vocabDone) {
+  const data = window.GREETINGS;
+  const box = document.getElementById("greeting");
+  const line = document.getElementById("greetingLine");
+  const sub = document.getElementById("greetingSub");
+  const name = getUserName();
+
+  if (!data || !box || !line || !sub) return;
+  const state = greetingState(points, vocabDone, new Date().getHours());
+  const list = data[state];
+  if (!Array.isArray(list) || list.length === 0) return;
+  const index = dailyIndex(`${DeutschDay.key()}|${state}`, list.length);
+  const entry = list[index];
+
+  let lines = entry.lines;
+  if (!lines) {
+    lines = entry.noName;
+    if (name) {
+      const named = entry.name.map(l => l.replace("{name}", name));
+      if (named.every((l, i) => lineFits(l, i === 0 ? line : sub))) lines = named;
+    }
+  }
+
+  const key = `${state}|${index}|${lines.join("|")}`;
+  if (key === greetingKey) return;
+  const first = greetingKey === null;
+  greetingKey = key;
+
+  const apply = () => {
+    line.textContent = lines[0] || "";
+    sub.textContent = lines[1] || "";
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (first || reduce) {
+    apply();
+    return;
+  }
+  box.classList.add("is-fading");
+  setTimeout(() => {
+    apply();
+    box.classList.remove("is-fading");
+  }, 250);
+}
+
+function resetDailyLimitForNewDay() {
+  const today = DeutschDay.key();
+  const offDate = localStorage.getItem(DAILY_LIMIT_OFF_DATE_KEY);
+
+  if (localStorage.getItem("deutschDailyLimitEnabledV1") === "0" && offDate && offDate !== today) {
+    localStorage.setItem("deutschDailyLimitEnabledV1", "1");
+    localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
+  }
+}
+function renderDailyStats() {
+  resetDailyLimitForNewDay();
+  let data = {};
+  try {
+    data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
+  } catch (e) {}
+  if (data.date !== DeutschDay.key()) data = {};
+
+  function answerCount(value) {
+    if (value && typeof value === "object") return Math.max(0, Number(value.answers) || 0);
+    return Math.max(0, Number(value) || 0);
+  }
+
+  const configs = [
+    { key: "artikel", selector: ".tile-articles", status: "artikelStatus", goal: 10 },
+    { key: "verbformen", selector: ".tile-verbs", status: null, goal: 10 },
+    { key: "pronomen", selector: ".tile-pronouns", status: null, goal: 10 },
+    { key: "praepositionen", selector: ".tile-prepositions", status: null, goal: 10 }
+  ];
+
+  let exercisePoints = 0;
+
+  configs.forEach(cfg => {
+    let answers = answerCount(data[cfg.key]);
+
+    if (cfg.key === "verbformen") {
+      const partizipII = Number(data.verbformen?.partizipII) || 0;
+      const modalverben = Number(data.verbformen?.modalverben) || 0;
+      answers = partizipII + modalverben;
+    }
+
+    if (cfg.key === "praepositionen") {
+      // Sum of all Präpositionen exercises; add new ones here.
+      answers =
+        answerCount(data.festerKasus) +
+        answerCount(data.verbenMitPraepositionen) +
+        answerCount(data.ortspraepositionen);
+    }
+
+    exercisePoints += answers;
+
+    const tile = document.querySelector(cfg.selector);
+    const status = cfg.status ? document.getElementById(cfg.status) : tile?.querySelector(".status");
+
+    const done = answers >= cfg.goal;
+
+    if (status) {
+      status.textContent = done ? "✓ fertig" : `${Math.min(answers, cfg.goal)} / ${cfg.goal}`;
+    }
+    if (tile) tile.classList.toggle("is-done", done);
+  });
+
+  let vocabPoints = 0;
+  let vocabDone = false;
+  try {
+    const home = JSON.parse(localStorage.getItem("deutschHomeStatsV1") || "{}");
+    const ws = home.wortschatz;
+    vocabDone = !!(ws && ws.date === DeutschDay.key() && ws.done);
+    if (vocabDone) vocabPoints = 60;
+  } catch (e) {}
+
+  const points = exercisePoints + vocabPoints;
+  document.getElementById("todayTotal").textContent = String(points);
+  document.getElementById("todayProgress").style.width = `${Math.min(points, 100)}%`;
+
+  const hardStopOverlay = document.getElementById("hardStopOverlay");
+  const dailyLimitEnabled = localStorage.getItem("deutschDailyLimitEnabledV1") !== "0";
+  const hardStop = dailyLimitEnabled && vocabDone && points >= 150;
+  if (hardStopOverlay) {
+    hardStopOverlay.classList.toggle("is-active", hardStop);
+    hardStopOverlay.setAttribute("aria-hidden", hardStop ? "false" : "true");
+  }
+
+  renderGreeting(points, vocabDone);
+}
+
+window.addEventListener("message", event => {
+  const { type, exercise } = event.data || {};
+  if (type !== "deutsch:exerciseAnswer") return;
+  if (exercise !== "partizipII" && exercise !== "modalverben") return;
+
+  let data = {};
+  try {
+    data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
+  } catch (e) {}
+  if (data.date !== DeutschDay.key()) data = { date: DeutschDay.key() };
+  data.verbformen ||= {};
+  data.verbformen[exercise] = (Number(data.verbformen[exercise]) || 0) + 1;
+
+  localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
+  renderDailyStats();
+});
+
+const shell = document.getElementById("appShell");
+const frame = document.getElementById("appFrame");
+const back = document.getElementById("homeBack");
+
+document.querySelectorAll("[data-app]").forEach(button => {
+  button.addEventListener("click", () => {
+    frame.src = button.dataset.app;
+    shell.classList.add("open");
+    shell.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("app-open");
+  });
+});
+
+/* Paged tile block: page dots + arrow buttons (arrows on hover devices only). */
+(() => {
+  const pager = document.getElementById("tilePages");
+  const prev = document.getElementById("pagePrev");
+  const next = document.getElementById("pageNext");
+  const dotsBox = document.getElementById("pageDots");
+  if (!pager || !prev || !next || !dotsBox) return;
+  const pages = [...pager.querySelectorAll(".tile-page")];
+
+  const dots = pages.map((_, n) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "page-dot";
+    dot.setAttribute("aria-label", "Seite " + (n + 1));
+    dot.addEventListener("click", () => goTo(n));
+    dotsBox.appendChild(dot);
+    return dot;
+  });
+  dotsBox.hidden = pages.length < 2;
+
+  function pageStep() {
+    // distance from one page to the next (the strip has extra side room for the tile shadows)
+    return pages.length > 1 ? pages[1].offsetLeft - pages[0].offsetLeft : pager.clientWidth;
+  }
+  function current() {
+    return Math.round(pager.scrollLeft / pageStep());
+  }
+  function goTo(n) {
+    n = Math.max(0, Math.min(pages.length - 1, n));
+    pager.scrollTo({ left: n * pageStep(), behavior: "smooth" });
+  }
+  function update() {
+    const n = current();
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === n));
+    prev.classList.toggle("is-available", n > 0);
+    next.classList.toggle("is-available", n < pages.length - 1);
+  }
+
+  prev.addEventListener("click", () => goTo(current() - 1));
+  next.addEventListener("click", () => goTo(current() + 1));
+  pager.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+
+function closeApp() {
+  renderDailyStats();
+  shell.classList.remove("open");
+  shell.setAttribute("aria-hidden", "true");
+  document.documentElement.classList.remove("app-open");
+  setFrameWindow(false);
+  frame.src = "about:blank";
+}
+
+/* ===== Back button (top left, 2026-09-26, Home 5.43) =====
+       One step up: chapter exercise (Partizip II, Fester Kasus …) → its picker; picker or single exercise → Home.
+       Start / picker / summary screens: "‹ Deutsch." / "‹ Verbformen." / "‹ Präpositionen".
+       Game (a top-bar title is visible): only "‹", placed right in front of the title (Home makes room for it).
+       Fades out while a table window is open. Home reads the exercise page directly (same site), so the
+       exercise pages themselves need no changes. */
+/* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
+       An empty, passive listener switches it on — for Home and (above, on load) for every exercise page.
+       It never blocks scrolling, swiping or the keyboard. Home 5.44. */
+function noTouch() {}
+document.addEventListener("touchstart", noTouch, { passive: true });
+
+const backLabel = document.getElementById("homeBackLabel");
+const CHAPTERS = {
+  verbformen: { label: "Verbformen.", tile: ".tile-verbs" },
+  praepositionen: { label: "Präpositionen", tile: ".tile-prepositions" }
+};
+const TITLE_SEL = ".top-title,.top .brand";
+const WINDOW_SEL = ".modal,.pattern-modal,.forms-modal,.omodal,.coll-modal"; // .coll-modal = Wortschatz collection window (Home 5.49)
+let backTarget = null,
+  backObserver = null,
+  backRaf = 0;
+
+function framePath() {
+  try {
+    const base = new URL("./", location.href).pathname.toLowerCase();
+    let path = decodeURIComponent(frame.contentWindow.location.pathname).toLowerCase();
+    if (path.startsWith(base)) path = path.slice(base.length);
+    return path.replace(/index\.html$/, "");
+  } catch (e) {
+    return "";
+  }
+}
+// windows fade: judge them by display/visibility (switched at once when opening), not by the fading opacity
+function isShown(el, win, ignoreOpacity) {
+  const cs = win.getComputedStyle(el);
+  if (cs.display === "none" || cs.visibility === "hidden" || (!ignoreOpacity && parseFloat(cs.opacity) < 0.05))
+    return false;
+  const r = el.getBoundingClientRect();
+  return r.width > 0 && r.height > 0;
+}
+function updateBack() {
+  backRaf = 0;
+  if (!shell.classList.contains("open")) {
+    setFrameWindow(false);
+    return;
+  }
+  let doc, win;
+  try {
+    doc = frame.contentDocument;
+    win = frame.contentWindow;
+  } catch (e) {}
+  // where does "‹" lead?
+  const parts = framePath().split("/").filter(Boolean);
+  const chapter = parts.length > 1 ? CHAPTERS[parts[0]] : null;
+  backTarget = chapter ? chapter.tile : null;
+  const label = chapter ? chapter.label : "Deutsch.";
+  back.setAttribute("aria-label", "Zurück zu " + label);
+  // game (visible top-bar title) or start / picker / summary screen?
+  let title = null,
+    windowOpen = false;
+  if (doc && doc.body) {
+    if (!doc.getElementById("deutsch-back-room")) {
+      const st = doc.createElement("style");
+      st.id = "deutsch-back-room";
+      st.textContent = ".top-title,.top .brand{padding-left:20px}"; /* room for Home's "‹" in the game top bar */
+      doc.head.appendChild(st);
+    }
+    title =
+      [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80) || null;
+    windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
+  }
+  back.classList.toggle("is-game", !!title);
+  backLabel.textContent = title ? "" : label;
+  if (title) {
+    const r = title.getBoundingClientRect();
+    back.style.top = r.top + r.height / 2 - 22 + "px";
+    back.style.left = r.left - 12 + "px";
+  } else {
+    back.style.top = "";
+    back.style.left = "";
+  }
+  back.classList.toggle("is-hidden", windowOpen);
+  setFrameWindow(windowOpen);
+}
+// Home 5.69: darken the strip below the exercise frame (and the status-bar colour) while an exercise window is open
+function setFrameWindow(on) {
+  const root = document.documentElement;
+  if (root.classList.contains("frame-window") === on) return;
+  root.classList.toggle("frame-window", on);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (!meta) return;
+  if (on) {
+    meta.dataset.plain = meta.getAttribute("content");
+    meta.setAttribute("content", root.dataset.theme === "light" ? "#c5c3c1" : "#121213");
+  } else if (meta.dataset.plain) {
+    meta.setAttribute("content", meta.dataset.plain);
+    delete meta.dataset.plain;
+  }
+}
+let backLate = 0;
+function scheduleBack() {
+  if (!backRaf) backRaf = requestAnimationFrame(updateBack);
+  clearTimeout(backLate);
+  backLate = setTimeout(updateBack, 260); // again after a window's fade has finished
+}
+frame.addEventListener("load", () => {
+  if (backObserver) backObserver.disconnect();
+  back.classList.remove("is-hidden");
+  try {
+    backObserver = new MutationObserver(scheduleBack);
+    backObserver.observe(frame.contentDocument.documentElement, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["class", "style", "hidden", "aria-hidden"]
+    });
+    frame.contentWindow.addEventListener("resize", scheduleBack);
+    frame.contentWindow.addEventListener("scroll", scheduleBack, { passive: true, capture: true }); // capture: also scrolling inside the exercise's panel (.app)
+    frame.contentDocument.addEventListener("touchstart", noTouch, { passive: true }); // press effect on iPhone, see below
+  } catch (e) {}
+  scheduleBack();
+  setTimeout(scheduleBack, 350); // after start-screen fade-ins
+});
+back.addEventListener("click", () => {
+  const tile = backTarget && document.querySelector(backTarget);
+  if (tile && tile.dataset.app)
+    frame.src = tile.dataset.app; // chapter exercise → its picker
+  else closeApp();
+});
+
+const HOME_STATS = "deutschHomeStatsV1";
+
+function syncHomeDashboard() {
+  /* Wortschatz publishes this object from its own page. */
+  try {
+    const home = JSON.parse(localStorage.getItem(HOME_STATS) || "{}");
+    let ws = home.wortschatz;
+    /* (Home 5.40) First visit of the day: Wortschatz hasn't published today's count yet.
+       Count it here with the shared rule (components/deutsch-wortschatz-due-v1.js)
+       and store it, so the tile and the daily points agree. Wortschatz overwrites
+       it as soon as it opens. Only reads wortsternSRSv03, never changes it. */
+    if (!(ws && ws.date === DeutschDay.key()) && window.DeutschWortschatzDue) {
+      const fresh = DeutschWortschatzDue.status(DeutschWortschatzDue.readSaved());
+      if (fresh && fresh.date === DeutschDay.key()) {
+        ws = { ...fresh, updatedAt: Date.now() };
+        home.wortschatz = ws;
+        localStorage.setItem(HOME_STATS, JSON.stringify(home));
+      }
+    }
+    const wsTile = document.querySelector(".tile-vocab");
+    const wsStatus = document.getElementById("wortschatzStatus");
+    const done = !!(ws && ws.date === DeutschDay.key() && ws.done);
+    if (wsTile) wsTile.classList.toggle("is-done", done);
+    if (wsStatus)
+      wsStatus.textContent = done
+        ? "✓ fertig"
+        : ws && ws.date === DeutschDay.key() && Number.isFinite(Number(ws.remaining)) && Number(ws.remaining) > 0
+          ? `${Number(ws.remaining)} ${Number(ws.remaining) === 1 ? "Wort" : "Wörter"} übrig`
+          : "noch offen";
+  } catch (e) {}
+
+  /* renderDailyStats() is the sole authority on the compact cards' .is-done
+     state and status text — it recomputes both right below, so nothing
+     needs to pre-mark them here. */
+  renderDailyStats();
+  saveProgressSnapshot();
+}
+
+/* Progress snapshots (Documentation/PROGRESS_TRACKER.md, step 3).
+   Once per day Home stores each exercise's progress summary, so the progress screen
+   can compare today with 21 days ago and draw the 3-week lines.
+   - Source: deutschProgressV1 (written by the exercises via components/deutsch-progress-v1.js).
+   - Today's entry is overwritten whenever it changes → the last value of the day wins.
+   - Days without practice are not stored; readers use the last earlier snapshot (nothing changed).
+   - Rolling window: days older than 21 days are deleted, except the newest of them,
+     so there is always a baseline to compare against after a long break.
+   Format: {format:1, days:{"YYYY-MM-DD":{<exercise>:{t,s,i,is}}}}
+           t/s = total/sicher (weighted, bar %), i/is = items/items sicher. */
+const PROGRESS_KEY = "deutschProgressV1";
+const SNAPSHOT_KEY = "deutschProgressSnapshotsV1";
+const SNAPSHOT_WINDOW_DAYS = 21;
+function saveProgressSnapshot() {
+  try {
+    const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "null");
+    const exercises = progress && progress.exercises;
+    if (!exercises || typeof exercises !== "object") return;
+    const entry = {};
+    Object.keys(exercises)
+      .sort()
+      .forEach(id => {
+        const sm = exercises[id] && exercises[id].summary;
+        if (!sm || !(Number(sm.total) > 0)) return;
+        if (sm.kind === "words") return; // Wortschatz: not in the history (2026-09-26) — its card counts live from the words
+        entry[id] = {
+          t: Number(sm.total),
+          s: Number(sm.sicher) || 0,
+          i: Number(sm.items) || 0,
+          is: Number(sm.itemsSicher) || 0
+        };
+      });
+    if (!Object.keys(entry).length) return;
+
+    let store = null;
+    try {
+      store = JSON.parse(localStorage.getItem(SNAPSHOT_KEY) || "null");
+    } catch (e) {}
+    if (!store || typeof store !== "object" || !store.days || typeof store.days !== "object")
+      store = { format: 1, days: {} };
+    const today = DeutschDay.key();
+    const before = JSON.stringify(store);
+    store.days[today] = entry;
+
+    const cutoff = DeutschDay.key(SNAPSHOT_WINDOW_DAYS);
+    const old = Object.keys(store.days)
+      .filter(d => d < cutoff)
+      .sort();
+    old.slice(0, -1).forEach(d => delete store.days[d]); // keep only the newest day older than the window
+
+    const after = JSON.stringify(store);
+    if (after !== before) localStorage.setItem(SNAPSHOT_KEY, after);
+  } catch (e) {}
+}
+
+/* iframe/app navigation can update localStorage while Home stays mounted. */
+window.addEventListener("pageshow", syncHomeDashboard);
+window.addEventListener("storage", syncHomeDashboard);
+window.addEventListener("focus", syncHomeDashboard);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) syncHomeDashboard();
+});
+setInterval(syncHomeDashboard, 1000);
+
+syncHomeDashboard();
+
+/* Deutsch Backup v1.
+   The envelope is intentionally module-based so future exercises can add
+   their own persistent state without changing the export workflow.
+   - Keys that don't exist yet are skipped on save, so planned keys can be
+     listed here before the feature that writes them exists.
+   - Restore skips modules it doesn't understand (unknown or outdated
+     storageVersion) instead of failing, so old backup files stay restorable.
+   - Score format changes happen inside the stored data (a format marker),
+     not by renaming keys — see Documentation/PROGRESS_TRACKER.md. */
+const DEUTSCH_BACKUP_VERSION = 1;
+/* When a backup was last made (or restored) on this device — ISO time, for the
+   "Last backup …" note in Settings. Per device, so NOT part of the backup. */
+const DEUTSCH_LAST_BACKUP_KEY = "deutschLastBackupV1";
+const BACKUP_MODULES = {
+  wortschatz: {
+    label: "Wortschatz",
+    storageKey: "wortsternSRSv03",
+    storageVersion: "wortsternSRSv03"
+  },
+  /* Own word collection (wortschatz/collection.js, Documentation/WORTSCHATZ_COLLECTIONS.md).
+     Only present while the user practises their own words. */
+  wortschatzCollection: {
+    label: "Wortschatz · eigene Wörter",
+    storageKey: "deutschWortschatzCollectionV1",
+    storageVersion: "deutschWortschatzCollectionV1"
+  },
+  /* Progress of the built-in set, set aside while an own collection is active. */
+  wortschatzDemoProgress: {
+    label: "Wortschatz · Standard-Set (beiseitegelegt)",
+    storageKey: "deutschWortschatzDemoProgressV1",
+    storageVersion: "deutschWortschatzDemoProgressV1"
+  },
+  profile: {
+    label: "Name",
+    storageKey: "deutschProfileV1",
+    storageVersion: "deutschProfileV1"
+  },
+  artikel: {
+    label: "Artikel",
+    storageKey: "artikelGameDifficultyV1",
+    storageVersion: "artikelGameDifficultyV1"
+  },
+  modalverben: {
+    label: "Modalverben",
+    storageKey: "modalverbenDifficultyV1",
+    storageVersion: "modalverbenDifficultyV1"
+  },
+  partizipII: {
+    label: "Partizip II",
+    storageKey: "verbformenDifficultyV1",
+    storageVersion: "verbformenDifficultyV1"
+  },
+  pronomen: {
+    label: "Pronomen",
+    storageKey: "pronomenStatsV2",
+    storageVersion: "pronomenStatsV2"
+  },
+  festerKasus: {
+    label: "Fester Kasus",
+    storageKey: "festerKasusDifficultyV1",
+    storageVersion: "festerKasusDifficultyV1"
+  },
+  verbenMitPraepositionen: {
+    label: "Verben mit Präpositionen",
+    storageKey: "verbenPraepStatsV1",
+    storageVersion: "verbenPraepStatsV1"
+  },
+  ortspraepositionen: {
+    label: "Ortspräpositionen",
+    storageKey: "ortspraepositionenDifficultyV1",
+    storageVersion: "ortspraepositionenDifficultyV1"
+  },
+  /* Setting, not progress: always included (current value, even if never
+     changed), but a backup with only settings counts as "No progress found". */
+  translations: {
+    label: "Your language",
+    storageKey: "deutschTranslationLangV1",
+    storageVersion: "deutschTranslationLangV1",
+    setting: true,
+    current: () => (window.DeutschTranslation ? window.DeutschTranslation.getLang() : null)
+  },
+  /* Anonymous notification user ID (Documentation/NOTIFICATION_SYSTEM_MASTER.md, §15).
+     Keeps the same notification identity after a Home Screen reinstall and
+     links a second device (iPad) to the same user. The deviceId is NOT
+     backed up: it must stay unique per device. Stored as a plain string. */
+  notificationUser: {
+    label: "Notifications",
+    storageKey: "deutschNotificationUserIdV1",
+    storageVersion: "deutschNotificationUserIdV1",
+    setting: true,
+    plain: true
+  },
+  /* Planned — Progress Tracker (not written by any module yet). */
+  progress: {
+    label: "Fortschritt",
+    storageKey: "deutschProgressV1",
+    storageVersion: "deutschProgressV1"
+  },
+  progressSnapshots: {
+    label: "Fortschritt-Verlauf",
+    storageKey: "deutschProgressSnapshotsV1",
+    storageVersion: "deutschProgressSnapshotsV1"
+  }
+};
+
+function buildDeutschBackup() {
+  const modules = {};
+  Object.entries(BACKUP_MODULES).forEach(([moduleName, config]) => {
+    const raw = localStorage.getItem(config.storageKey);
+    let state;
+    if (config.current) {
+      state = config.current();
+      if (state === null || state === undefined) return;
+    } else {
+      if (raw === null) return;
+      try {
+        state = JSON.parse(raw);
+      } catch (e) {
+        state = raw;
+      }
+    }
+    modules[moduleName] = {
+      storageVersion: config.storageVersion,
+      state
+    };
+  });
+  return {
+    app: "Deutsch",
+    backupVersion: DEUTSCH_BACKUP_VERSION,
+    createdAt: new Date().toISOString(),
+    modules
+  };
+}
+
+function saveDeutschBackup() {
+  const note = document.getElementById("backupNote");
+  try {
+    const backup = buildDeutschBackup();
+    if (!Object.keys(backup.modules).some(name => !BACKUP_MODULES[name]?.setting)) {
+      if (note) note.textContent = "· No progress found";
+      return;
+    }
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Deutsch Backup.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    try {
+      localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY, new Date().toISOString());
+    } catch (e) {}
+    if (note) {
+      note.textContent = "· Backup created";
+      note.classList.remove("is-warning");
+    }
+  } catch (e) {
+    if (note) note.textContent = "· Backup failed";
+  }
+}
+
+function validateDeutschBackup(backup) {
+  if (!backup || backup.app !== "Deutsch") throw new Error("not-deutsch");
+  if (backup.backupVersion !== DEUTSCH_BACKUP_VERSION) throw new Error("version");
+  if (!backup.modules || typeof backup.modules !== "object") throw new Error("modules");
+
+  const restorable = [];
+  Object.entries(BACKUP_MODULES).forEach(([moduleName, config]) => {
+    const moduleBackup = backup.modules[moduleName];
+    if (!moduleBackup || typeof moduleBackup !== "object") return;
+    /* Skip what this app version doesn't understand instead of failing the whole restore. */
+    if (moduleBackup.storageVersion !== config.storageVersion) return;
+    if (moduleBackup.state === undefined || moduleBackup.state === null) return;
+    restorable.push([moduleName, config, moduleBackup.state]);
+  });
+  if (restorable.length === 0) throw new Error("nothing");
+  return restorable;
+}
+
+async function restoreDeutschBackup(file) {
+  const note = document.getElementById("restoreNote");
+  try {
+    const backup = JSON.parse(await file.text());
+    const restorable = validateDeutschBackup(backup);
+    const created = backup.createdAt ? new Date(backup.createdAt) : null;
+    const dateLabel =
+      created && !Number.isNaN(created.getTime())
+        ? created.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })
+        : "unknown date";
+    const moduleLabel = restorable.map(([name, config]) => config.label || name).join(", ");
+    if (
+      !window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)
+    ) {
+      if (note) note.textContent = "· Restore cancelled";
+      return;
+    }
+    /* A restored file is a backup too: count its date as the last backup (if newer). */
+    if (created && !Number.isNaN(created.getTime())) {
+      const last = Date.parse(localStorage.getItem(DEUTSCH_LAST_BACKUP_KEY) || "");
+      if (!last || created.getTime() > last) localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY, created.toISOString());
+    }
+    const previousNotificationUser = localStorage.getItem("deutschNotificationUserIdV1");
+    restorable.forEach(([, config, state]) => {
+      localStorage.setItem(
+        config.storageKey,
+        config.plain && typeof state === "string" ? state : JSON.stringify(state)
+      );
+    });
+    /* Wortschatz progress only makes sense together with the words it belongs to.
+       A backup with Wortschatz progress but no own collection (e.g. made before own collections
+       existed, or while using the built-in set) means: built-in set → drop an own collection on this
+       device, so old progress and other words never get mixed. Same for the set-aside demo progress. */
+    const restoredNames = new Set(restorable.map(([name]) => name));
+    if (restoredNames.has("wortschatz")) {
+      if (!restoredNames.has("wortschatzCollection")) localStorage.removeItem("deutschWortschatzCollectionV1");
+      if (!restoredNames.has("wortschatzDemoProgress")) localStorage.removeItem("deutschWortschatzDemoProgressV1");
+    }
+
+    /* Refresh Home statistics from the restored Wortschatz state.
+       Wortschatz is closed during Restore, so there is no iframe to reload. */
+    const restoredWortschatz = restorable.find(([name]) => name === "wortschatz");
+    if (restoredWortschatz) {
+      const state = restoredWortschatz[2];
+      const cards = state && state.cards && typeof state.cards === "object" ? state.cards : {};
+      const activeIds = Array.isArray(state?.activeIds) ? state.activeIds : [];
+      const today = DeutschDay.key();
+      let remaining, total;
+      if (window.DeutschWortschatzDue) {
+        /* Same rule as Wortschatz and the Home tile (components/deutsch-wortschatz-due-v1.js). */
+        ({ remaining, total } = DeutschWortschatzDue.count({ cards, activeIds }));
+      } else {
+        const now = Date.now();
+        remaining = activeIds.filter(id => {
+          const card = cards[id];
+          if (!card) return false;
+          if (!card.due) return true;
+          const due = new Date(card.due).getTime();
+          return Number.isNaN(due) || due <= now;
+        }).length;
+        total = activeIds.length;
+      }
+      const done = total > 0 && remaining === 0;
+      try {
+        localStorage.setItem(
+          HOME_STATS,
+          JSON.stringify({
+            date: today,
+            wortschatz: { date: today, remaining, done, total }
+          })
+        );
+      } catch (e) {}
+    }
+
+    const langToggle = document.getElementById("translationLangToggle");
+    if (langToggle && window.DeutschTranslation) {
+      const lang = window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang", lang);
+      langToggle.setAttribute(
+        "aria-label",
+        "Your Language: " + (lang === "en" ? "English" : "Russian") + ". Tap to switch."
+      );
+    }
+
+    /* Move this device's push subscription to the restored notification ID. */
+    const restoredNotificationUser = localStorage.getItem("deutschNotificationUserIdV1");
+    let notificationsMoved = true;
+    if (
+      restoredNotificationUser &&
+      restoredNotificationUser !== previousNotificationUser &&
+      window.DeutschNotifications
+    ) {
+      notificationsMoved = await window.DeutschNotifications.relink(previousNotificationUser);
+    }
+
+    if (note) note.textContent = notificationsMoved ? "· Restore complete" : "· Restored · turn Notifications on again";
+    const nameField = document.getElementById("nameInput");
+    if (nameField) nameField.value = getUserName();
+    syncHomeDashboard();
+  } catch (e) {
+    if (note) note.textContent = "· Restore failed";
+  }
+}
+
+document.getElementById("backupSave")?.addEventListener("click", saveDeutschBackup);
+document.getElementById("backupRestore")?.addEventListener("click", () => {
+  const input = document.getElementById("backupFile");
+  if (input) {
+    input.value = "";
+    input.click();
+  }
+});
+document.getElementById("backupFile")?.addEventListener("change", event => {
+  const file = event.target.files?.[0];
+  if (file) restoreDeutschBackup(file);
+});
+
+/* Notifications v5.2 — iOS Safari Home Screen Web App only.
+   This block is isolated from the existing Home logic. */
+(function initDeutschNotifications() {
+  const SERVER = "https://german-learning-notifications.d45zgw2cgh.workers.dev";
+  const ENABLED_KEY = "deutschNotificationEnabledV1";
+  const USER_KEY = "deutschNotificationUserIdV1";
+  const DEVICE_KEY = "deutschNotificationDeviceIdV1";
+
+  const box = document.getElementById("notificationSettings");
+  const toggle = document.getElementById("notificationToggle");
+  const state = document.getElementById("notificationState");
+  const note = document.getElementById("notificationNote");
+
+  if (!box || !toggle || !state) return;
+
+  box.style.width = "100%";
+  box.style.textAlign = "center";
+
+  function isIOSDevice() {
+    const ua = navigator.userAgent || "";
+    const platform = navigator.platform || "";
+    return /iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+
+  function isStandalone() {
+    return (
+      navigator.standalone === true || !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+    );
+  }
+
+  function isIOSHomeScreenApp() {
+    return isIOSDevice() && isStandalone();
+  }
+
+  function enabled() {
+    return localStorage.getItem(ENABLED_KEY) === "1";
+  }
+
+  function getDeviceId() {
+    let id = localStorage.getItem(DEVICE_KEY);
+    if (!id) {
+      try {
+        id = crypto.randomUUID
+          ? crypto.randomUUID()
+          : "device-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+      } catch (e) {
+        id = "device-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+      }
+      localStorage.setItem(DEVICE_KEY, id);
+    }
+    return id;
+  }
+
+  function getUserId() {
+    let id = localStorage.getItem(USER_KEY);
+    if (!id) {
+      try {
+        id = crypto.randomUUID ? crypto.randomUUID() : "user-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+      } catch (e) {
+        id = "user-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+      }
+      localStorage.setItem(USER_KEY, id);
+    }
+    return id;
+  }
+
+  function render() {
+    const visible = isIOSHomeScreenApp();
+    box.hidden = !visible;
+    if (!visible) return;
+
+    const on = enabled();
+    state.textContent = on ? "ON" : "OFF";
+    toggle.setAttribute("aria-checked", on ? "true" : "false");
+  }
+
+  function base64ToBytes(value) {
+    const padding = "=".repeat((4 - (value.length % 4)) % 4);
+    const base64 = (value + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const raw = atob(base64);
+    const out = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  async function registerPush() {
+    if (!("serviceWorker" in navigator)) throw new Error("service-worker");
+    if (!("PushManager" in window)) throw new Error("push-not-supported");
+    if (!("Notification" in window)) throw new Error("notifications-not-supported");
+
+    const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+    await navigator.serviceWorker.ready;
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") throw new Error("permission");
+
+    const configResponse = await fetch(SERVER + "/push-config", { cache: "no-store" });
+    if (!configResponse.ok) throw new Error("push-config-" + configResponse.status);
+    const config = await configResponse.json();
+    if (!config.publicKey) throw new Error("missing-public-key");
+
+    let subscription = await registration.pushManager.getSubscription();
+    if (!subscription) {
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: base64ToBytes(config.publicKey)
+      });
+    }
+
+    const response = await fetch(SERVER + "/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: getUserId(),
+        deviceId: getDeviceId(),
+        subscription: subscription.toJSON()
+      })
+    });
+
+    if (!response.ok) throw new Error("subscribe-" + response.status);
+  }
+
+  async function setServerState(on) {
+    const response = await fetch(SERVER + (on ? "/go" : "/stop"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: getUserId(),
+        deviceId: getDeviceId()
+      })
+    });
+    if (!response.ok) throw new Error((on ? "/go" : "/stop") + "-" + response.status);
+  }
+
+  toggle.addEventListener("click", async () => {
+    const next = !enabled();
+    toggle.disabled = true;
+    if (note) note.textContent = "";
+
+    try {
+      if (next) await registerPush();
+      await setServerState(next);
+      localStorage.setItem(ENABLED_KEY, next ? "1" : "0");
+    } catch (error) {
+      console.error("Deutsch notifications:", error);
+      if (note) note.textContent = "Notification setup failed.";
+    } finally {
+      toggle.disabled = false;
+      render();
+    }
+  });
+
+  /* After a backup restore changed the userId: if this device has
+     notifications ON, register its existing subscription under the restored
+     userId, enable that user and detach the device from the old userId.
+     The old userId is then cleaned up by the Worker Cron. */
+  async function relink(oldUserId) {
+    if (!enabled()) return true;
+    try {
+      const registration = await navigator.serviceWorker.getRegistration("./");
+      const subscription = registration && (await registration.pushManager.getSubscription());
+      if (!subscription) throw new Error("no-subscription");
+
+      const response = await fetch(SERVER + "/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: getUserId(),
+          deviceId: getDeviceId(),
+          subscription: subscription.toJSON()
+        })
+      });
+      if (!response.ok) throw new Error("subscribe-" + response.status);
+      await setServerState(true);
+
+      if (oldUserId && oldUserId !== getUserId()) {
+        fetch(SERVER + "/unsubscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: oldUserId, deviceId: getDeviceId() })
+        }).catch(() => {});
+      }
+      return true;
+    } catch (error) {
+      console.error("Deutsch notifications relink:", error);
+      localStorage.setItem(ENABLED_KEY, "0");
+      render();
+      return false;
+    }
+  }
+
+  window.DeutschNotifications = { relink };
+
+  resetDailyLimitForNewDay();
+  render();
+})();
+
+(function initDeutschSettings() {
+  const open = document.getElementById("settingsOpen");
+  const panel = document.getElementById("settingsPanel");
+  const title = document.getElementById("settingsPanel")?.querySelector(".settings-title");
+  const ghost = document.getElementById("settingsMorph");
+  const close = document.getElementById("settingsClose");
+  const theme = document.getElementById("themeToggle");
+  const limit = document.getElementById("dailyLimitToggle");
+  const langToggle = document.getElementById("translationLangToggle");
+  const confirm = document.getElementById("dailyLimitConfirm");
+  const no = document.getElementById("dailyLimitNo");
+  const yes = document.getElementById("dailyLimitYes");
+  const LIMIT_KEY = "deutschDailyLimitEnabledV1";
+  const nameInput = document.getElementById("nameInput");
+
+  const limitOn = () => localStorage.getItem(LIMIT_KEY) !== "0";
+
+  function render() {
+    resetDailyLimitForNewDay();
+    theme.setAttribute("aria-checked", window.DeutschTheme.isLight() ? "true" : "false");
+    limit.setAttribute("aria-checked", limitOn() ? "true" : "false");
+    if (langToggle && window.DeutschTranslation) {
+      const lang = window.DeutschTranslation.getLang();
+      langToggle.setAttribute("data-lang", lang);
+      langToggle.setAttribute(
+        "aria-label",
+        "Your Language: " + (lang === "en" ? "English" : "Russian") + ". Tap to switch."
+      );
+    }
+    if (nameInput && document.activeElement !== nameInput) nameInput.value = getUserName();
+  }
+
+  /* Word-morph animation: the "Settings" launcher word flies up, scales and
+     brightens into the panel's header title (and reverses on close), instead
+     of just appearing/disappearing as the panel slides. Font-size is never
+     animated directly (expensive, can look jerky) — the ghost is rendered at
+     the destination's true size and transformed to visually sit at the
+     origin, then that transform animates back to identity. */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canMorph = !reduceMotion && open && panel && title && ghost;
+
+  function rectAsIfOpen() {
+    // While the panel is closed it sits translateY(100%) — i.e. shifted
+    // down by exactly its own rendered height — so the title's on-screen
+    // position once open is simply its current rect shifted up by that.
+    const r = title.getBoundingClientRect();
+    const h = panel.offsetHeight;
+    return { left: r.left, top: r.top - h, width: r.width, height: r.height };
+  }
+
+  function flyGhost(from, to, fromColor, toColor, onDone) {
+    ghost.style.transition = "none";
+    ghost.style.left = to.left + "px";
+    ghost.style.top = to.top + "px";
+    ghost.style.width = to.width + "px";
+    ghost.style.height = to.height + "px";
+    ghost.style.alignItems = "center";
+    ghost.style.justifyContent = "center";
+    ghost.style.fontSize = getComputedStyle(title).fontSize;
+    ghost.style.fontWeight = getComputedStyle(title).fontWeight;
+    ghost.style.letterSpacing = getComputedStyle(title).letterSpacing;
+    ghost.style.color = fromColor;
+    ghost.style.opacity = "1";
+
+    const scaleX = from.width / to.width;
+    const scaleY = from.height / to.height;
+    const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+    const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+    ghost.style.transform = `translate(${dx}px,${dy}px) scale(${scaleX},${scaleY})`;
+
+    void ghost.offsetWidth; // flush so the start state above actually renders
+
+    ghost.style.transition = "transform .42s cubic-bezier(.22,.61,.36,1), color .3s ease";
+    ghost.style.transform = "translate(0,0) scale(1,1)";
+    ghost.style.color = toColor;
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      ghost.style.opacity = "0";
+      onDone();
+    };
+    ghost.addEventListener("transitionend", finish, { once: true });
+    setTimeout(finish, 460); // safety net if transitionend never fires
+  }
+
+  function playOpenMorph() {
+    // Measured while still closed, so the subtraction trick above holds.
+    const from = open.getBoundingClientRect();
+    const to = rectAsIfOpen();
+    const fromColor = getComputedStyle(open).color;
+    const toColor = getComputedStyle(title).color;
+    title.style.visibility = "hidden";
+    flyGhost(from, to, fromColor, toColor, () => {
+      title.style.visibility = "";
+    });
+  }
+
+  function playCloseMorph() {
+    // Measured while still open, so no adjustment is needed here.
+    const from = title.getBoundingClientRect();
+    const to = open.getBoundingClientRect();
+    const fromColor = getComputedStyle(title).color;
+    const toColor = getComputedStyle(open).color;
+    open.style.visibility = "hidden";
+    flyGhost(from, to, fromColor, toColor, () => {
+      open.style.visibility = "";
+    });
+  }
+
+  function openSettings() {
+    render();
+    if (canMorph) playOpenMorph();
+    document.documentElement.classList.add("home-settings-open");
+    panel.classList.add("is-open");
+    panel.setAttribute("aria-hidden", "false");
+    open?.setAttribute("aria-expanded", "true");
+  }
+  function closeSettings() {
+    nameInput?.blur();
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden", "true");
+    if (canMorph) playCloseMorph();
+    panel.classList.remove("is-open");
+    panel.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("home-settings-open");
+    open?.setAttribute("aria-expanded", "false");
+  }
+
+  open?.addEventListener("click", () => {
+    panel.classList.contains("is-open") ? closeSettings() : openSettings();
+  });
+  close?.addEventListener("click", closeSettings);
+
+  nameInput?.addEventListener("input", () => {
+    setUserName(nameInput.value);
+    renderDailyStats();
+  });
+  nameInput?.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      nameInput.blur();
+    }
+  });
+  nameInput?.addEventListener("blur", () => {
+    nameInput.value = getUserName();
+  });
+
+  theme?.addEventListener("click", () => {
+    window.DeutschTheme.set(!window.DeutschTheme.isLight());
+    render();
+  });
+
+  langToggle?.addEventListener("click", () => {
+    if (!window.DeutschTranslation) return;
+    window.DeutschTranslation.setLang(window.DeutschTranslation.getLang() === "en" ? "ru" : "en");
+    render();
+    document.dispatchEvent(new CustomEvent("deutsch:translationlang"));
+  });
+
+  limit?.addEventListener("click", () => {
+    if (limitOn()) {
+      confirm.classList.add("is-open");
+      confirm.setAttribute("aria-hidden", "false");
+    } else {
+      localStorage.setItem(LIMIT_KEY, "1");
+      localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
+      renderDailyStats();
+      render();
+    }
+  });
+
+  // Tap outside the window or Esc = "No" (like the table windows).
+  confirm?.addEventListener("click", event => {
+    if (event.target === confirm) no?.click();
+  });
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (event.key === "Escape" && confirm?.classList.contains("is-open")) {
+        event.stopPropagation();
+        no?.click();
+      }
+    },
+    true
+  );
+
+  no?.addEventListener("click", () => {
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden", "true");
+    render();
+  });
+
+  yes?.addEventListener("click", () => {
+    localStorage.setItem(LIMIT_KEY, "0");
+    localStorage.setItem(DAILY_LIMIT_OFF_DATE_KEY, DeutschDay.key());
+    confirm.classList.remove("is-open");
+    confirm.setAttribute("aria-hidden", "true");
+    renderDailyStats();
+    render();
+  });
+
+  // The early <head> script already set data-theme before first paint (to
+  // avoid a flash), but couldn't touch icons — the DOM didn't exist yet.
+  // Apply the full theme now, including icons, now that it does.
+  window.DeutschTheme.apply(window.DeutschTheme.isLight());
+  render();
+})();
+
+/* ===== ABOUT window (Settings → About) — text in the chosen translation language =====
+   \u00a0 = non-breaking space: keeps each example group (der, die or das) on one line. */
+(function () {
+  const ABOUT_TEXT = {
+    en: "Some German grammar you can understand. Some you just have to remember - der,\u00a0die\u00a0or\u00a0das, ihr\u00a0or\u00a0Ihnen, am\u00a0or\u00a0im. This app is made for exactly those parts. Short daily rounds help them stick.",
+    ru: "Часть немецкой грамматики можно понять. А часть приходится просто запомнить - der,\u00a0die\u00a0или\u00a0das, ihr\u00a0или\u00a0Ihnen, am\u00a0или\u00a0im. Именно для этого и создано приложение. Короткие ежедневные раунды помогают всё закрепить."
+  };
+  const win = document.getElementById("aboutWindow"),
+    openBtn = document.getElementById("aboutOpen"),
+    closeBtn = document.getElementById("aboutClose"),
+    text = document.getElementById("aboutText");
+  if (!win || !openBtn) return;
+  function lang() {
+    try {
+      return window.DeutschTranslation
+        ? window.DeutschTranslation.getLang()
+        : localStorage.getItem("deutschTranslationLangV1") || "en";
+    } catch (e) {
+      return "en";
+    }
+  }
+  function open() {
+    text.textContent = ABOUT_TEXT[lang()] || ABOUT_TEXT.en;
+    win.classList.add("open");
+    win.setAttribute("aria-hidden", "false");
+  }
+  function close() {
+    win.classList.remove("open");
+    win.setAttribute("aria-hidden", "true");
+  }
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  win.addEventListener("click", e => {
+    if (e.target === win) close();
+  });
+  document.addEventListener(
+    "keydown",
+    e => {
+      if (e.key === "Escape" && win.classList.contains("open")) {
+        e.stopPropagation();
+        close();
+      }
+    },
+    true
+  );
+})();
+/* ===== KEEP YOUR PROGRESS (2026-09-26, Home 5.72) — see Documentation/DECISIONS.md =====
+   - Settings: "· Last backup …" next to Backup on every device. Red (palette red) only in
+     Safari in the browser (iPhone/iPad browser or Mac Safari, not the Home Screen app)
+     when the last backup is more than 5 days old, or there is none yet.
+   - Home card: iPhone/iPad browser only, only once there is progress. × = "not now":
+     comes back once after 14 days, then never again. Texts follow Your Language. */
+(function () {
+  const CARD_KEY = "deutschKeepCardV1"; // {dismissed:number, at:ISO} — per device, not backed up
+  const WARN_DAYS = 5,
+    AGAIN_DAYS = 14;
+  const SHARE =
+    '<svg aria-hidden="true" class="share-ic" width="16" height="18" viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V1.5M4.5 5 8 1.5 11.5 5M5 8H2.5v10.5h11V8H11"/></svg>';
+  const T = {
+    en: {
+      label: "Keep your progress",
+      card: "Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
+      how: "Show me how ›",
+      title: "Add to Home Screen",
+      s1: "Save your progress first.",
+      btn: "Make a Backup",
+      done: "✓ Backup Created",
+      s2: "Tap <b>Share</b> " + SHARE + " in Safari, then <b>Add to Home Screen</b>.",
+      s3: "Open Deutsch. from the new icon, go to <b>Settings → Restore</b> and pick the backup file.",
+      foot: "The Home Screen app has its own storage, so your progress needs to be moved over once.",
+      hintIOS:
+        "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
+      hintMac:
+        "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often."
+    },
+    ru: {
+      label: "Сохраните прогресс",
+      card: "Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
+      how: "Как это сделать ›",
+      title: "На экран «Домой»",
+      s1: "Сначала сохраните прогресс.",
+      btn: "Сделать бэкап",
+      done: "✓ Бэкап сохранён",
+      s2: "Нажмите <b>Поделиться</b> " + SHARE + " в Safari, затем <b>На экран «Домой»</b>.",
+      s3: "Откройте Deutsch. с новой иконки, зайдите в <b>Settings → Restore</b> и выберите файл бэкапа.",
+      foot: "У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
+      hintIOS:
+        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавьте Deutsch. на экран «Домой» или почаще делайте бэкап.",
+      hintMac:
+        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делайте бэкап."
+    }
+  };
+  const $ = id => document.getElementById(id);
+  function lang() {
+    try {
+      return window.DeutschTranslation
+        ? window.DeutschTranslation.getLang()
+        : localStorage.getItem("deutschTranslationLangV1") || "en";
+    } catch (e) {
+      return "en";
+    }
+  }
+  function t() {
+    return T[lang()] || T.en;
+  }
+  function isIOS() {
+    const ua = navigator.userAgent || "";
+    return /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+  function isStandalone() {
+    return (
+      navigator.standalone === true || !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+    );
+  }
+  function isMacSafari() {
+    const ua = navigator.userAgent || "";
+    return !isIOS() && /Version\/[\d.]+.*Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR|Android/.test(ua);
+  }
+  function atRisk() {
+    return !isStandalone() && (isIOS() || isMacSafari());
+  }
+  function hasProgress() {
+    try {
+      const b = buildDeutschBackup();
+      return Object.keys(b.modules).some(n => !BACKUP_MODULES[n]?.setting);
+    } catch (e) {
+      return false;
+    }
+  }
+  function daysSince(iso) {
+    const ms = Date.parse(iso || "");
+    if (!ms) return null;
+    const a = new Date(ms),
+      b = new Date();
+    a.setHours(0, 0, 0, 0);
+    b.setHours(0, 0, 0, 0);
+    return Math.max(0, Math.round((b - a) / 864e5));
+  }
+  function lastDays() {
+    try {
+      return daysSince(localStorage.getItem(DEUTSCH_LAST_BACKUP_KEY));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /* Settings: note next to Backup + hint under Restore */
+  function renderBackupNote() {
+    const note = $("backupNote"),
+      hint = $("backupHint");
+    const progress = hasProgress(),
+      d = lastDays();
+    if (note) {
+      note.classList.remove("is-warning");
+      if (!progress && d === null) {
+        note.textContent = "";
+      } else {
+        note.textContent =
+          d === null
+            ? "· No backup yet"
+            : d === 0
+              ? "· Last backup today"
+              : d === 1
+                ? "· Last backup yesterday"
+                : "· Last backup " + d + " days ago";
+        if (atRisk() && progress && (d === null || d > WARN_DAYS)) note.classList.add("is-warning");
+      }
+    }
+    if (hint) {
+      if (atRisk()) {
+        hint.textContent = isIOS() ? t().hintIOS : t().hintMac;
+        hint.hidden = false;
+      } else {
+        hint.textContent = "";
+        hint.hidden = true;
+      }
+    }
+  }
+
+  /* Home card */
+  function cardState() {
+    try {
+      return JSON.parse(localStorage.getItem(CARD_KEY) || "{}") || {};
+    } catch (e) {
+      return {};
+    }
+  }
+  function cardAllowed() {
+    const s = cardState(),
+      n = s.dismissed || 0;
+    if (n === 0) return true;
+    if (n === 1) {
+      const d = daysSince(s.at);
+      return d !== null && d >= AGAIN_DAYS;
+    }
+    return false;
+  }
+  function renderCard() {
+    const card = $("keepCard");
+    if (!card) return;
+    const show = isIOS() && !isStandalone() && hasProgress() && cardAllowed();
+    card.hidden = !show;
+    if (!show) return;
+    $("keepLabel").textContent = t().label;
+    $("keepText").textContent = t().card;
+    $("keepHow").textContent = t().how;
+  }
+  $("keepDismiss")?.addEventListener("click", () => {
+    const s = cardState();
+    try {
+      localStorage.setItem(
+        CARD_KEY,
+        JSON.stringify({ dismissed: (s.dismissed || 0) + 1, at: new Date().toISOString() })
+      );
+    } catch (e) {}
+    $("keepCard").hidden = true;
+  });
+
+  /* "Show me how" window (built like About) */
+  const win = $("keepWindow");
+  function renderWindow() {
+    const x = t(),
+      today = lastDays() === 0;
+    $("keepTitle").textContent = x.title;
+    $("keepSteps").innerHTML =
+      "<li><span>" +
+      x.s1 +
+      '<br><button class="keep-backup-btn" id="keepBackup" type="button"' +
+      (today ? " disabled" : "") +
+      ">" +
+      (today ? x.done : x.btn) +
+      "</button></span></li><li><span>" +
+      x.s2 +
+      "</span></li><li><span>" +
+      x.s3 +
+      "</span></li>";
+    $("keepFoot").textContent = x.foot;
+  }
+  function openWin() {
+    renderWindow();
+    win.classList.add("open");
+    win.setAttribute("aria-hidden", "false");
+  }
+  function closeWin() {
+    win.classList.remove("open");
+    win.setAttribute("aria-hidden", "true");
+  }
+  if (win) {
+    $("keepHow")?.addEventListener("click", openWin);
+    $("keepClose")?.addEventListener("click", closeWin);
+    win.addEventListener("click", e => {
+      if (e.target === win) {
+        closeWin();
+        return;
+      }
+      if (e.target.closest && e.target.closest("#keepBackup")) {
+        saveDeutschBackup();
+        renderWindow();
+      }
+    });
+    document.addEventListener(
+      "keydown",
+      e => {
+        if (e.key === "Escape" && win.classList.contains("open")) {
+          e.stopPropagation();
+          closeWin();
+        }
+      },
+      true
+    );
+  }
+
+  function renderAll() {
+    renderCard();
+    renderBackupNote();
+  }
+  $("settingsOpen")?.addEventListener("click", () => setTimeout(renderBackupNote, 0));
+  $("translationLangToggle")?.addEventListener("click", () => setTimeout(renderAll, 0));
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) renderCard();
+  });
+  renderAll();
+})();

@@ -34,7 +34,6 @@
 :root{--pg-scrim:rgba(0,0,0,.28);--pg-modal-bg:#2a2a2d;--pg-modal-border:rgba(255,255,255,.10);--pg-close:#fff;--pg-bg:#1f1f21;--pg-tile:#212123;--pg-ghost:#2c5a4e;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(255,255,255,.03);--pg-line:rgba(255,255,255,.10);--pg-fill:color-mix(in srgb,var(--mint) 8%,transparent);--pg-secondary:#c8c7c4;--pg-sitzt:color-mix(in srgb,var(--mint) 65%,transparent)}
 [data-theme="light"]{--pg-scrim:rgba(0,0,0,.18);--pg-modal-bg:#fff;--pg-modal-border:rgba(0,0,0,.10);--pg-close:#242426;--pg-bg:var(--bg);--pg-tile:#ecebe8;--pg-ghost:#b7dccf;--pg-lost:color-mix(in srgb,var(--muted) 55%,transparent);--pg-down:var(--muted);--pg-started:color-mix(in srgb,var(--muted) 55%,transparent);--pg-sheet:rgba(0,0,0,.025);--pg-line:rgba(0,0,0,.10);--pg-fill:color-mix(in srgb,var(--mint) 10%,transparent);--pg-secondary:#55565b;--pg-sitzt:color-mix(in srgb,var(--mint) 65%,transparent)}
 .tile-today{cursor:pointer;-webkit-tap-highlight-color:transparent}
-.tile-today:active{opacity:.8}
 .pg{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));z-index:25;display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
   background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
@@ -140,10 +139,6 @@
   const txt=(a,s)=>{const e=el("text",a);e.textContent=s;return e};
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const read=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}};
-  function dayKey(back){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-back);
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
-  function addDay(k,n){const [y,m,d]=k.split("-").map(Number);const t=new Date(y,m-1,d,12);t.setDate(t.getDate()+n);
-    return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`}
   const pct=(s,t)=>t>0?s/t*100:0;
   const round=x=>Math.round(x);
 
@@ -152,7 +147,7 @@
     const prog=read(PROGRESS_KEY), ex=(prog&&prog.exercises)||{};
     const snapStore=read(SNAP_KEY), snaps=(snapStore&&snapStore.days)||{};
     const days=Object.keys(snaps).sort();
-    const today=dayKey(0), target=dayKey(WINDOW_DAYS);
+    const today=DeutschDay.key(0), target=DeutschDay.key(WINDOW_DAYS);
     const older=days.filter(d=>d<=target);
     const sinceStart=!older.length;
     const baseDay=sinceStart?null:older[older.length-1];
@@ -172,7 +167,7 @@
       // series: one point per day from startDay to today (today = live value)
       const series=[];
       if(sinceStart)series.push(0);
-      for(let d=startDay;d<today;d=addDay(d,1)){const v=snapAt(id,d);series.push(v?pct(v.s,v.t):0)}
+      for(let d=startDay;d<today;d=DeutschDay.add(d,1)){const v=snapAt(id,d);series.push(v?pct(v.s,v.t):0)}
       series.push(now);
       E[id]={id,name:EX_NAMES[id],known:t>0,s,t,now,then,series,recent:(sm&&Array.isArray(sm.recent))?sm.recent:[]};
     });
@@ -188,7 +183,7 @@
     let ls=0,lt=0;GRAMMAR.forEach(id=>{if(E[id].known){ls+=E[id].s;lt+=E[id].t}});
     const gNow=pct(ls,lt), gThen=sinceStart?0:grammarAt(baseDay);
     const gSeries=[];if(sinceStart)gSeries.push(0);
-    for(let d=startDay;d<today;d=addDay(d,1))gSeries.push(grammarAt(d));
+    for(let d=startDay;d<today;d=DeutschDay.add(d,1))gSeries.push(grammarAt(d));
     gSeries.push(gNow);
     const learned=GRAMMAR.reduce((a,id)=>a+E[id].recent.length,0);
     const ws=ex.wortschatz&&ex.wortschatz.summary;

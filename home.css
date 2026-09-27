@@ -1,0 +1,1836 @@
+/* ==========================================================================
+   Deutsch. · Home styles
+   One rule per element: when a design round changes something, change the rule
+   itself (no override blocks at the end). History: git log / DECISIONS.md.
+   ========================================================================== */
+
+/* ===== Palette · dark (default) ===== */
+:root {
+  --bg: #1b1b1d;
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --mint: #5bc8a4;
+  --error: #ff7770; /* palette red: "needs your attention" outside the exercises */
+
+  /* text roles */
+  --secondary-text: #c8c7c4;
+  --label-text: #d8d6d2; /* typed name in Settings */
+  --strong-text: #f0efec;
+  --version-mark: rgba(255, 255, 255, 0.24);
+
+  /* lines + tracks */
+  --hairline: rgba(255, 255, 255, 0.1);
+  --toggle-track: rgba(255, 255, 255, 0.12);
+
+  /* cards + tiles (tiles = the buttons' card colour, soft lift shadow, thin top line in dark only) */
+  --card-radius: 25px;
+  --card-bg: rgba(255, 255, 255, 0.018);
+  --card-bg-soft: rgba(255, 255, 255, 0.014);
+  --tile-surface: #2a2a2d;
+  --tile-today-sheen: rgba(255, 255, 255, 0.025);
+  --lift-shadow: 0 5px 14px rgba(0, 0, 0, 0.14);
+  --lift-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* completion glow */
+  --mint-core: rgba(91, 200, 164, 0.38);
+  --mint-mid: rgba(91, 200, 164, 0.24);
+
+  /* windows (About, "Are you sure?", Keep your progress) — progress-screen.js also uses --confirm-scrim */
+  --confirm-scrim: rgba(0, 0, 0, 0.34);
+  --window-card: #2a2a2d;
+  --window-line: rgba(255, 255, 255, 0.1);
+
+  /* layout */
+  --dashboard-width: 430px;
+  --mobile-dashboard-width: 350px;
+}
+
+/* ===== Palette · light ===== */
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --text: #242426;
+  --muted: #727278;
+  --mint: #3fa68a;
+  --error: #e95e66;
+
+  --secondary-text: #55565b;
+  --label-text: #4a4a4d;
+  --strong-text: #242426;
+  --version-mark: color-mix(in srgb, var(--text) 34%, transparent);
+
+  --hairline: rgba(0, 0, 0, 0.1);
+  --toggle-track: rgba(0, 0, 0, 0.12);
+
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-bg-soft: rgba(0, 0, 0, 0.025);
+  --tile-surface: #fff;
+  --tile-today-sheen: rgba(0, 0, 0, 0.025);
+  --lift-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --lift-highlight: none;
+
+  --mint-core: rgba(63, 166, 138, 0.3);
+  --mint-mid: rgba(63, 166, 138, 0.18);
+
+  --confirm-scrim: rgba(0, 0, 0, 0.2);
+  --window-card: #fff;
+  --window-line: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  padding: calc(env(safe-area-inset-top) + 28px) max(24px, env(safe-area-inset-right))
+    calc(env(safe-area-inset-bottom) + 32px) max(24px, env(safe-area-inset-left));
+}
+
+/* Exercise open: the page underneath doesn't scroll.
+   Home 5.69: in the iPhone web app the exercise frame doesn't reach the very bottom of the screen (the strip where
+   Safari has its address bar), so a window inside an exercise can't darken it — Home's own background shows there.
+   While an exercise window is open, Home darkens that background the same way (bg + window scrim: 34 % / 20 % black). */
+html.app-open,
+html.app-open body {
+  overflow: hidden;
+  height: 100%;
+  transition: background-color 0.18s ease;
+}
+
+html.app-open.frame-window,
+html.app-open.frame-window body {
+  background: #121213;
+}
+
+html[data-theme="light"].app-open.frame-window,
+html[data-theme="light"].app-open.frame-window body {
+  background: #c5c3c1;
+}
+
+/* ===== Page + header ===== */
+.page {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
+  display: flex;
+  flex-direction: column;
+  padding-top: 56px;
+}
+
+/* v5.19: the header covers everything from the very top of the screen (status bar area) down to under the title,
+   full width, so scrolled tiles never show above it. A short fade softens the lower edge. */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: calc(env(safe-area-inset-top) + 22px) 0 0;
+  background: var(--bg);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 18px;
+  background: linear-gradient(var(--bg), color-mix(in srgb, var(--bg) 0%, transparent));
+  pointer-events: none;
+}
+
+header h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.7px;
+  font-weight: 750;
+}
+
+/* ===== Personal greeting (v5.18) =====
+   Always reserves two lines of height so the tiles never jump. Line 1 = main line, line 2 = smaller.
+   Max. 240px wide. Phrases live in greetings.js; rules in Documentation/PERSONAL_GREETINGS.md */
+.greeting {
+  width: min(100%, 240px);
+  min-height: calc(15px * 1.4 + 2px + 13px * 1.4);
+  margin: 0 auto 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.greeting.is-fading {
+  opacity: 0;
+}
+
+.greeting-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.greeting-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.greeting-sub:empty {
+  display: none;
+}
+
+/* ===== Home ⇄ phrase screen slider =====
+   The slider reaches 24px further on each side (into the page margin) so the tiles' shadow isn't cut off;
+   each screen gets those 24px back as padding, so everything stays in place. */
+.home-viewport {
+  position: relative;
+  width: calc(100% + 48px);
+  margin-inline: -24px;
+  overflow: hidden;
+}
+
+.home-track {
+  display: flex;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+.home-screen,
+.phrase-screen {
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+}
+
+.home-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  padding-inline: 24px;
+  transition:
+    transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.42s ease;
+}
+
+.home-settings-open .home-screen {
+  transform: translateY(-12vh);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== Tile pager (iPhone home-screen style) =====
+   Each page is a 3×2 grid. The block scrolls sideways and snaps one whole page at a time. */
+.dashboard.mosaic {
+  --tile-gap: 10px;
+  --tile-row: 141px;
+  width: min(100%, var(--dashboard-width));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tile-gap);
+}
+
+.tile-pager {
+  position: relative;
+}
+
+/* Extra padding (with a matching negative margin) = room for the tiles' shadow inside the scroller, which clips
+   everything outside its box. The wider gap between pages keeps the next page from peeking into that room. */
+.tile-pages {
+  display: flex;
+  row-gap: var(--tile-gap);
+  column-gap: calc(var(--tile-gap) + 28px);
+  margin: -4px -14px -18px;
+  padding: 4px 14px 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 14px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tile-pages::-webkit-scrollbar {
+  display: none;
+}
+
+.tile-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, var(--tile-row));
+  gap: var(--tile-gap);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+/* only one page: keep the dots' room so nothing moves when a second page is added */
+.page-dots[hidden] {
+  visibility: hidden;
+}
+
+.page-dot {
+  width: 6px;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--hairline);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-dot.is-active {
+  background: var(--muted);
+}
+
+/* Arrow buttons: only on devices with a real hover-capable pointer */
+.rail-arrow {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-arrow {
+    position: absolute;
+    z-index: 10;
+    top: calc(var(--tile-row) + var(--tile-gap) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0 0 2px;
+    border: 1px solid var(--hairline);
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--muted);
+    font:
+      300 24px/1 -apple-system,
+      BlinkMacSystemFont,
+      "SF Pro Display",
+      "Helvetica Neue",
+      sans-serif;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition:
+      opacity 0.2s ease,
+      color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rail-prev {
+    left: 6px;
+  }
+  .rail-next {
+    right: 6px;
+  }
+
+  .tile-pager:hover .rail-arrow.is-available,
+  .rail-arrow.is-available:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ===== Tiles (shared) ===== */
+.module {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mosaic .tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--card-radius);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--tile-surface);
+  text-align: center;
+  box-shadow: var(--lift-shadow);
+}
+
+/* Shared press effect: shrink to 97 % + darken slightly, 0.12 s */
+.mosaic .module,
+.mosaic .tile-today,
+.phrase-week-home-row {
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+.mosaic .module:active,
+.mosaic .tile-today:active,
+.phrase-week-home-row:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== Wortschatz tile (wide, picture on the left) ===== */
+.mosaic .tile-vocab {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  isolation: isolate;
+}
+
+.mosaic .tile-vocab::before,
+.mosaic .tile-vocab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ::before = dark-mode top line + completion glow: under the text, over the picture */
+.mosaic .tile-vocab::before {
+  z-index: 3;
+  border-radius: inherit;
+  box-shadow: var(--lift-highlight);
+}
+
+.mosaic .tile-vocab::after {
+  z-index: 2;
+  border-radius: var(--card-radius);
+}
+
+.mosaic .tile-vocab .tile-art {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.mosaic .tile-vocab .tile-art img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.mosaic .tile-vocab .tile-copy {
+  position: absolute;
+  z-index: 4;
+  right: 7px;
+  top: 50%;
+  width: 42%;
+  transform: translateY(-50%);
+  text-align: left;
+}
+
+.mosaic .tile-vocab .name {
+  font-size: 17px;
+  line-height: 1.12;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.mosaic .tile-vocab .status {
+  min-height: 14px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.15;
+}
+
+.mosaic .tile-vocab.is-done::before {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--mint) 40%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 14%,
+      color-mix(in srgb, var(--mint) 12%, transparent) 28%,
+      color-mix(in srgb, var(--mint) 3.5%, transparent) 42%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      color-mix(in srgb, var(--mint) 58%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 36%, transparent) 10%,
+      color-mix(in srgb, var(--mint) 17%, transparent) 20%,
+      color-mix(in srgb, var(--mint) 5%, transparent) 30%,
+      transparent 40%
+    );
+}
+
+.mosaic .tile-vocab.is-done::after {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--mint) 23%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 9%, transparent) 16%,
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      color-mix(in srgb, var(--mint) 25%, transparent) 0%,
+      color-mix(in srgb, var(--mint) 10%, transparent) 16%,
+      transparent 31%
+    );
+}
+
+.mosaic .tile-vocab.is-done .status {
+  color: var(--mint);
+}
+
+/* ===== Exercise tiles (small, picture on top) — placed by the .tile-page grid ===== */
+.mosaic .tile-small .tile-art {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mosaic .tile-small .tile-art img {
+  display: block;
+  width: 100%;
+}
+
+/* the title sits on a fade into the tile colour, so it stays readable over the picture */
+.mosaic .tile-small .tile-copy {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px 5px 8px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--tile-surface) 0%, transparent) 0%,
+    color-mix(in srgb, var(--tile-surface) 8%, transparent) 12%,
+    color-mix(in srgb, var(--tile-surface) 34%, transparent) 32%,
+    color-mix(in srgb, var(--tile-surface) 72%, transparent) 58%,
+    color-mix(in srgb, var(--tile-surface) 94%, transparent) 82%,
+    color-mix(in srgb, var(--tile-surface) 98%, transparent) 100%
+  );
+}
+
+.mosaic .tile-small .name,
+.mosaic .tile-small .status {
+  position: relative;
+  z-index: 7;
+}
+
+.mosaic .tile-small .name {
+  font-size: 13px;
+  line-height: 1.12;
+  font-weight: 650;
+}
+
+.mosaic .tile-small .status {
+  min-height: 14px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+/* ::before = dark-mode top line, drawn on top of the picture */
+.mosaic .tile-small::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: var(--lift-highlight);
+}
+
+/* ::after = completion glow in the bottom-right corner */
+.mosaic .tile-small::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  right: -90px;
+  bottom: -90px;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.mosaic .tile-small.is-done::after {
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--mint-core) 0%,
+    var(--mint-mid) 25%,
+    color-mix(in srgb, var(--mint) 10%, transparent) 48%,
+    color-mix(in srgb, var(--mint) 3.5%, transparent) 70%,
+    transparent 82%
+  );
+}
+
+.mosaic .tile-small.is-done .status {
+  color: var(--mint);
+}
+
+/* ===== Phrase of the Week · row on Home ===== */
+.phrase-week-home-row {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(100%, 430px);
+  margin: 28px auto 0;
+  padding: 10px 20px 22px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phrase-week-home-copy {
+  min-width: 0;
+  text-align: left;
+}
+
+.phrase-week-label {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+}
+
+.phrase-week-home-title {
+  margin-top: 5px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -0.35px;
+}
+
+.phrase-week-home-literal {
+  margin-top: 1px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.phrase-week-arrow {
+  display: block;
+  font:
+    300 34px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  transform: translateY(-1px);
+}
+
+/* ===== Heute card (under Phrase of the Week) — opens the Fortschritt window (progress-screen.js) ===== */
+.today-bottom {
+  width: min(100%, var(--dashboard-width));
+  margin: 18px auto 0;
+}
+
+.mosaic .tile-today {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  row-gap: 12px;
+  padding: 16px 20px 18px;
+  text-align: left;
+  background:
+    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--mint) 5.5%, transparent), transparent 64%),
+    var(--card-bg-soft);
+}
+
+.mosaic .tile-today::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, var(--tile-today-sheen), transparent 58%);
+  box-shadow: var(--lift-highlight);
+}
+
+.mosaic .tile-today > * {
+  position: relative;
+  z-index: 1;
+}
+
+.today-label {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  color: var(--secondary-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.today-score {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.today-number {
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 650;
+}
+
+.today-unit {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.today-progress {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--hairline);
+}
+
+.today-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--mint);
+  transition: width 0.25s ease;
+}
+
+/* ===== Phrase of the Week · full screen =====
+   The block (label … ‹ button) sits slightly above the middle (45 / 55) of the free space between the
+   "Deutsch." title and the "Settings" link (Home 5.38). Long phrases: block starts at the top, page scrolls. */
+.phrase-screen {
+  position: relative;
+  /* -56px = .page padding-top; without it the page was always 56px too tall and scrolled */
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px - 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0 calc(max(24px, env(safe-area-inset-right)) + 24px) 62px calc(max(24px, env(safe-area-inset-left)) + 24px);
+  overflow: hidden;
+}
+
+.phrase-screen::before {
+  content: "";
+  flex: 45 1 0;
+}
+
+.phrase-screen::after {
+  content: "";
+  flex: 55 1 0;
+}
+
+.phrase-screen-content {
+  flex: 0 0 auto;
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  text-align: center;
+}
+
+.phrase-screen .phrase-week-label {
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.phrase-week-title {
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1.18;
+  font-weight: 650;
+  letter-spacing: -0.35px;
+}
+
+.phrase-week-literal {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+/* the explanation: easiest to read after the title */
+.phrase-week-meaning {
+  margin-top: 28px;
+  color: var(--secondary-text);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.phrase-week-example {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.phrase-screen-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px auto 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: var(--text);
+  font:
+    400 28px/42px -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+.phrase-screen-back:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+.phrase-screen-back-arrow {
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* ===== Settings ===== */
+.backup-file {
+  display: none;
+}
+.settings-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.settings-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(env(safe-area-inset-top) + 82px) max(24px, env(safe-area-inset-right))
+    calc(env(safe-area-inset-bottom) + 32px) max(24px, env(safe-area-inset-left));
+  background: var(--bg);
+  transform: translateY(100%);
+  transition: transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+  overflow: auto;
+  overscroll-behavior: contain;
+  pointer-events: none;
+}
+.settings-panel.is-open {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
+.settings-panel,
+.settings-panel button,
+.settings-confirm button {
+  touch-action: manipulation;
+}
+.settings-launcher {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  z-index: 2;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--muted);
+  font:
+    500 12px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  opacity: 1;
+  transition:
+    opacity 0.2s ease,
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-launcher:active {
+  transform: translateX(50%) scale(0.97);
+  filter: brightness(0.94);
+}
+.home-settings-open .settings-launcher {
+  opacity: 0;
+  pointer-events: none;
+}
+.settings-content {
+  width: min(100%, 430px);
+  padding-top: 24px;
+}
+.settings-title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settings-title {
+  margin: 0;
+  text-align: center;
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.55px;
+}
+.settings-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font:
+    400 28px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-close:active {
+  transform: translateY(-50%) scale(0.97);
+  filter: brightness(0.94);
+}
+/* rows are 48px; groups = 28px gap with a 10% hairline in the middle */
+.settings-list {
+  margin-top: 22px;
+}
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 48px;
+  color: var(--secondary-text);
+  font:
+    500 14px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.settings-action {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--secondary-text);
+  font:
+    500 14px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-action:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+  transform-origin: left center;
+}
+.settings-action-content {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+.settings-action-note {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.settings-action-note.is-warning {
+  color: var(--error);
+}
+#notificationNote {
+  margin-top: 6px;
+}
+#notificationNote:empty {
+  display: none;
+}
+.backup-hint {
+  padding: 0 0 10px;
+  color: var(--muted);
+  font:
+    400 11.5px/1.45 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  text-align: left;
+}
+.settings-gap {
+  position: relative;
+  height: 28px;
+}
+.settings-gap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  background: var(--hairline);
+}
+.settings-name-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.settings-name {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 114.3%;
+  max-width: 228px;
+  margin: 0;
+  flex: 0 0 auto;
+  padding: 6px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--label-text);
+  font:
+    500 16px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  text-align: right;
+  transform: scale(0.875);
+  transform-origin: right center;
+  outline: none;
+  caret-color: var(--mint);
+}
+/* green outside the exercises = "enabled / your progress": switches that are on, the chosen language, the typed name */
+.settings-name:not(:placeholder-shown) {
+  color: var(--mint);
+}
+.settings-name::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.settings-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: var(--toggle-track);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.settings-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease;
+}
+.settings-toggle[aria-checked="true"] {
+  background: color-mix(in srgb, var(--mint) 30%, transparent);
+}
+.settings-toggle[aria-checked="true"]::after {
+  transform: translateX(17px);
+  background: var(--mint);
+}
+.settings-toggle:disabled {
+  opacity: 0.5;
+}
+.settings-lang {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  width: 88px;
+  height: 25px;
+  padding: 2px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--toggle-track);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.settings-lang::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 42px;
+  height: 21px;
+  border-radius: 99px;
+  background: var(--mint);
+  transition: transform 0.22s ease;
+}
+.settings-lang[data-lang="ru"]::before {
+  transform: translateX(42px);
+}
+.settings-lang-opt {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font:
+    700 10.5px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  letter-spacing: normal;
+  transition: color 0.22s ease;
+}
+.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],
+.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"] {
+  color: var(--bg);
+}
+.settings-morph {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transform-origin: top left;
+  will-change: transform, opacity, color;
+}
+/* version mark = the rule's version mark (11px, white 24% / text 34%) */
+.settings-version {
+  margin-top: 42px;
+  margin-bottom: 26px;
+  color: var(--version-mark);
+  font:
+    400 11px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  text-align: left;
+}
+
+/* ===== Windows: About, Keep your progress, "Are you sure?" =====
+   Built like the exercises' table windows: page behind blurred 8px + darkened (34 % dark / 20 % light);
+   window = card colour, 10 % outline, 24px corners, short fade + zoom-in; × top right, tap outside or Esc closes. */
+.about-window {
+  position: fixed;
+  inset: 0;
+  top: calc(-1 * env(safe-area-inset-top));
+  z-index: 960;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  padding-top: calc(18px + env(safe-area-inset-top));
+  background: var(--confirm-scrim);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.about-window.open {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s;
+}
+.about-card {
+  width: min(100%, 360px);
+  padding: 6px 22px 24px;
+  background: var(--window-card);
+  border: 1px solid var(--window-line);
+  border-radius: 24px;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.about-window.open .about-card {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.about-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+}
+.about-head h2 {
+  margin: 0;
+  color: var(--text);
+  font:
+    650 20px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.about-close {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font:
+    400 28px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  padding: 0 2px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.about-text {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font:
+    400 15px/1.5 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+.settings-confirm {
+  position: fixed;
+  inset: 0;
+  top: calc(-1 * env(safe-area-inset-top));
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  padding-top: calc(24px + env(safe-area-inset-top));
+  background: var(--confirm-scrim);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.settings-confirm.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s;
+}
+.settings-confirm-card {
+  width: min(100%, 360px);
+  padding: 28px 24px 22px;
+  border: 1px solid var(--window-line);
+  border-radius: 24px;
+  background: var(--window-card);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.settings-confirm.is-open .settings-confirm-card {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.settings-confirm-title {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 650;
+}
+.settings-confirm-text {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.settings-confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
+/* No = contrast button (we'd rather the user says no), Yes = quiet button. Shape of "Zur Startseite". */
+.settings-confirm-button {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 56px;
+  border-radius: 17px;
+  font:
+    700 16px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-confirm-button.is-main {
+  border: 0;
+  background: #ece6dc;
+  color: #1b1b1d;
+}
+[data-theme="light"] .settings-confirm-button.is-main {
+  background: #242426;
+  color: #f6f4f1;
+}
+.settings-confirm-button.is-quiet {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+}
+.settings-confirm-button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== Keep your progress · Safari storage reminder (Home 5.72) =====
+   Card on Home (iPhone/iPad browser only), "Show me how" window (= About window), "Last backup" note in Settings. */
+.keep-card {
+  position: relative;
+  width: min(100%, var(--dashboard-width));
+  margin: 18px auto 0;
+  padding: 15px 44px 14px 20px;
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  text-align: left;
+}
+.keep-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--mint);
+  font:
+    600 11px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.keep-label svg {
+  flex: 0 0 auto;
+}
+.keep-text {
+  margin: 7px 0 9px;
+  color: var(--secondary-text);
+  font:
+    400 13px/1.42 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.keep-link {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--strong-text);
+  font:
+    600 13px/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.keep-x {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  padding: 4px 6px;
+  color: var(--muted);
+  font:
+    300 22px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.keep-link,
+.keep-x,
+.keep-backup-btn {
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.keep-link:active,
+.keep-x:active,
+.keep-backup-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.howto-steps {
+  margin: 6px 0 20px;
+  padding: 0;
+  list-style: none;
+  counter-reset: keep;
+}
+.howto-steps li {
+  counter-increment: keep;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 11px 0;
+  border-top: 1px solid var(--hairline);
+  color: var(--secondary-text);
+  font:
+    400 15px/1.4 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.howto-steps li:first-child {
+  border-top: 0;
+}
+.howto-steps li::before {
+  content: counter(keep);
+  flex: 0 0 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--mint) 18%, transparent);
+  color: var(--mint);
+  font:
+    600 13px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.howto-steps b {
+  color: var(--strong-text);
+  font-weight: 600;
+}
+.share-ic {
+  display: inline-block;
+  vertical-align: -3px;
+  margin: 0 2px;
+}
+.keep-backup-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  margin-top: 9px;
+  padding: 9px 14px;
+  border-radius: 12px;
+  background: #ece6dc;
+  color: #1b1b1d;
+  font:
+    600 13px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-theme="light"] .keep-backup-btn {
+  background: #242426;
+  color: #f6f4f1;
+}
+.keep-backup-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.keep-foot {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ===== Pause screen (daily limit reached) =====
+   Same placement as the phrase screen: slightly above the middle (45 / 55) of the free space. */
+.hard-stop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 32px 62px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.hard-stop-overlay.is-active {
+  display: flex;
+}
+
+.hard-stop-overlay::before {
+  content: "";
+  flex: 45 1 0;
+}
+
+.hard-stop-overlay::after {
+  content: "";
+  flex: 55 1 0;
+}
+
+.hard-stop-copy {
+  flex: 0 0 auto;
+  width: min(100%, 380px);
+}
+
+.hard-stop-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.hard-stop-text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.hard-stop-warm {
+  display: block;
+  margin-top: 12px;
+  color: var(--text);
+}
+
+/* ===== Exercise shell (iframe) + back button ===== */
+.app-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  background: var(--bg);
+}
+
+.app-shell.open {
+  display: block;
+}
+
+.app-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--bg);
+}
+
+/* Back button, top left (Home 5.43): palette grey, no circle, no outline. "‹ Deutsch." (or the chapter) on start /
+   picker / summary screens, only "‹" in front of the title in the game (JS places it there). 44px tap height.
+   Fades out while a table window is open. */
+.home-back {
+  position: absolute;
+  z-index: 1001;
+  top: calc(env(safe-area-inset-top) + 33.5px - 22px);
+  left: 6px;
+  height: 44px;
+  padding: 0 10px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font:
+    500 15px/1 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  letter-spacing: -0.2px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s,
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+.home-back.is-game {
+  padding-right: 4px;
+}
+
+.home-back-chev {
+  flex: 0 0 auto;
+  display: block;
+}
+
+.home-back-label:empty {
+  display: none;
+}
+
+.home-back:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+.home-back.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 529px) {
+  .home-back {
+    left: calc(50% - 240px + 6px);
+  }
+}
+
+/* body padding-top is 48px here (not notch + 28px), so the page, phrase screen and pause screen get
+   their own heights: the page was 20px taller than the window and scrolled. */
+@media (min-width: 650px) {
+  body {
+    padding-top: 48px;
+  }
+
+  header {
+    margin-bottom: 62px;
+  }
+
+  .page {
+    min-height: calc(100dvh - env(safe-area-inset-bottom) - 80px);
+  }
+
+  .phrase-screen {
+    min-height: calc(100dvh - env(safe-area-inset-bottom) - 136px);
+    padding-bottom: calc(82px - env(safe-area-inset-top));
+  }
+
+  .hard-stop-overlay {
+    padding-bottom: calc(82px - env(safe-area-inset-top));
+  }
+}
+
+@media (max-width: 430px) {
+  .dashboard.mosaic {
+    --tile-gap: 8px;
+    --tile-row: 121px;
+    width: min(100%, var(--mobile-dashboard-width));
+  }
+
+  .mosaic .tile {
+    border-radius: 24px;
+  }
+
+  .today-bottom {
+    width: min(100%, var(--mobile-dashboard-width));
+  }
+
+  .mosaic .tile-vocab .tile-copy {
+    right: 5px;
+  }
+
+  .mosaic .tile-vocab .name {
+    font-size: 15px;
+  }
+
+  .mosaic .tile-small .tile-copy {
+    padding: 25px 4px 8px;
+  }
+
+  .mosaic .tile-small .name {
+    font-size: 12px;
+  }
+
+  .mosaic .tile-small .status {
+    font-size: 10px;
+  }
+
+  .phrase-screen-content {
+    width: min(100%, 350px);
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .phrase-week-home-row {
+    width: min(100%, 350px);
+    margin-top: 22px;
+    padding: 10px 4px 14px;
+  }
+
+  .settings-content {
+    width: min(100%, 350px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .greeting,
+  .home-screen,
+  .mosaic .module,
+  .mosaic .tile-today,
+  .phrase-week-home-row,
+  .phrase-screen-back,
+  .home-back,
+  .settings-panel,
+  .settings-launcher,
+  .settings-action,
+  .settings-close,
+  .settings-confirm,
+  .settings-confirm.is-open,
+  .settings-confirm-card,
+  .settings-confirm-button,
+  .about-window,
+  .about-window.open,
+  .about-card {
+    transition: none;
+  }
+}
