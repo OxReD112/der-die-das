@@ -79,7 +79,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "entlang …",
     translation: { ru: "вдоль", en: "along" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "also_correct" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "also_correct" }
+    ],
     note: { ru: "Dativ также возможен, но реже.", en: "Dativ is also possible, but less common." },
     variantNote: {
       ru: "Dativ тоже возможен, но Genitiv встречается чаще.",
@@ -168,7 +171,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "laut",
     translation: { ru: "согласно, по данным", en: "according to" },
-    cases: [{ case: "Dativ", status: "standard" }, { case: "Genitiv", status: "also_correct" }],
+    cases: [
+      { case: "Dativ", status: "standard" },
+      { case: "Genitiv", status: "also_correct" }
+    ],
     note: { ru: "Genitiv тоже возможен, но реже.", en: "Genitiv is also possible, but less common." },
     variantNote: {
       ru: "Genitiv тоже возможен, но Dativ встречается чаще.",
@@ -183,7 +189,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "wegen",
     translation: { ru: "из-за, вследствие", en: "because of" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "colloquial" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "colloquial" }
+    ],
     note: { ru: "В разговорной речи также используется Dativ.", en: "In spoken German, Dativ is also used." },
     variantNote: {
       ru: "Это разговорный вариант. В письменной речи лучше Genitiv.",
@@ -198,7 +207,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "trotz",
     translation: { ru: "несмотря на", en: "despite, in spite of" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "colloquial" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "colloquial" }
+    ],
     note: { ru: "В разговорной речи также используется Dativ.", en: "In spoken German, Dativ is also used." },
     variantNote: {
       ru: "Это разговорный вариант. В письменной речи лучше Genitiv.",
@@ -210,7 +222,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "während",
     translation: { ru: "во время", en: "during" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "colloquial" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "colloquial" }
+    ],
     note: { ru: "В разговорной речи также используется Dativ.", en: "In spoken German, Dativ is also used." },
     variantNote: {
       ru: "Это разговорный вариант. В письменной речи лучше Genitiv.",
@@ -222,7 +237,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "statt / anstatt",
     translation: { ru: "вместо", en: "instead of" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "colloquial" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "colloquial" }
+    ],
     example: "Statt eines Kuchens gab es Eis.",
     exampleTranslation: { ru: "Вместо торта было мороженое.", en: "Instead of a cake, there was ice cream." },
     note: { ru: "В разговорной речи также используется Dativ.", en: "In spoken German, Dativ is also used." },
@@ -248,7 +266,10 @@ window.PRAEPOSITIONEN = [
   {
     preposition: "dank",
     translation: { ru: "благодаря", en: "thanks to" },
-    cases: [{ case: "Genitiv", status: "standard" }, { case: "Dativ", status: "also_correct" }],
+    cases: [
+      { case: "Genitiv", status: "standard" },
+      { case: "Dativ", status: "also_correct" }
+    ],
     note: { ru: "Dativ также возможен.", en: "Dativ is also possible." },
     variantNote: {
       ru: "Dativ тоже возможен, но Genitiv встречается чаще.",

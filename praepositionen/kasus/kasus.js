@@ -50,7 +50,10 @@ function progressLabel(entry) {
   return entry.preposition + (std ? " + " + std.case : "");
 }
 if (hasProgress()) {
-  DeutschProgress.init(PROGRESS_ID, PREPOSITIONS.map(e => ({ key: prepositionKey(e), label: progressLabel(e) })));
+  DeutschProgress.init(
+    PROGRESS_ID,
+    PREPOSITIONS.map(e => ({ key: prepositionKey(e), label: progressLabel(e) }))
+  );
 }
 function recordProgress(entry, correct) {
   try {
@@ -267,12 +270,18 @@ function animateReveal(fromRect) {
   parts.push(els.exampleText, els.exampleTranslation);
   parts.forEach((el, i) => {
     revealAnims.push(
-      el.animate([{ opacity: 0, transform: "translateY(-6px)" }, { opacity: 1, transform: "none" }], {
-        duration: 190,
-        delay: i * 20,
-        easing: "ease-out",
-        fill: "backwards"
-      })
+      el.animate(
+        [
+          { opacity: 0, transform: "translateY(-6px)" },
+          { opacity: 1, transform: "none" }
+        ],
+        {
+          duration: 190,
+          delay: i * 20,
+          easing: "ease-out",
+          fill: "backwards"
+        }
+      )
     );
   });
 }
