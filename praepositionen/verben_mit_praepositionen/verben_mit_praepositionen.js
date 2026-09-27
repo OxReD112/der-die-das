@@ -1,1053 +1,592 @@
-// German Learning App — Verben mit Präpositionen
-// База для тренажёра «Verben mit Präpositionen».
-// Каждый объект имеет стабильный уникальный ID.
-// Поля: id, verb, preposition, case, meaning, example, exampleTranslation.
-// meaning and exampleTranslation are {ru, en}, picked by the Translations setting
-// (components/deutsch-translation-v1.js). The English meaning must never contain the
-// English twin of the German preposition (e.g. no "with" for mit, no "as" for als).
-// Один глагол с разными Präpositionen — отдельная запись с отдельным ID.
-// Основа структуры согласована с существующей базой Präpositionen.
-
-window.VERBEN_MIT_PRAEPOSITIONEN = [
-
-  {
-    "id": "vmp_001",
-    "verb": "denken",
-    "preposition": "an",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "думать о ком-то / вспоминать",
-      "en": "to think of, to remember"
-    },
-    "example": "Ich denke oft an meine Familie.",
-    "exampleTranslation": {
-      "ru": "Я часто думаю о своей семье.",
-      "en": "I often think of my family."
-    }
-  },
-
-  {
-    "id": "vmp_002",
-    "verb": "sich erinnern",
-    "preposition": "an",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "вспоминать, помнить о",
-      "en": "to remember"
-    },
-    "example": "Ich erinnere mich an den Urlaub.",
-    "exampleTranslation": {
-      "ru": "Я вспоминаю отпуск.",
-      "en": "I remember the holiday."
-    }
-  },
-
-  {
-    "id": "vmp_003",
-    "verb": "glauben",
-    "preposition": "an",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "верить в",
-      "en": "to believe in"
-    },
-    "example": "Ich glaube an dich.",
-    "exampleTranslation": {
-      "ru": "Я верю в тебя.",
-      "en": "I believe in you."
-    }
-  },
-
-  {
-    "id": "vmp_004",
-    "verb": "teilnehmen",
-    "preposition": "an",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "участвовать в",
-      "en": "to take part, to participate"
-    },
-    "example": "Ich nehme am Kurs teil.",
-    "exampleTranslation": {
-      "ru": "Я участвую в курсе.",
-      "en": "I'm taking part in the course."
-    }
-  },
-
-  {
-    "id": "vmp_005",
-    "verb": "arbeiten",
-    "preposition": "an",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "работать над",
-      "en": "to work on"
-    },
-    "example": "Sie arbeitet an einem neuen Projekt.",
-    "exampleTranslation": {
-      "ru": "Она работает над новым проектом.",
-      "en": "She is working on a new project."
-    }
-  },
-
-  {
-    "id": "vmp_006",
-    "verb": "antworten",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "отвечать на",
-      "en": "to answer, to reply"
-    },
-    "example": "Ich antworte auf die Frage.",
-    "exampleTranslation": {
-      "ru": "Я отвечаю на вопрос.",
-      "en": "I'm answering the question."
-    }
-  },
-
-  {
-    "id": "vmp_007",
-    "verb": "sich freuen",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "с нетерпением ждать, радоваться тому, что предстоит",
-      "en": "to look forward to"
-    },
-    "example": "Ich freue mich auf den Urlaub.",
-    "exampleTranslation": {
-      "ru": "Я с нетерпением жду отпуска.",
-      "en": "I'm looking forward to the holiday."
-    }
-  },
-
-  {
-    "id": "vmp_008",
-    "verb": "hoffen",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "надеяться на",
-      "en": "to hope for"
-    },
-    "example": "Wir hoffen auf gutes Wetter.",
-    "exampleTranslation": {
-      "ru": "Мы надеемся на хорошую погоду.",
-      "en": "We're hoping for good weather."
-    }
-  },
-
-  {
-    "id": "vmp_009",
-    "verb": "reagieren",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "реагировать на",
-      "en": "to react, to respond"
-    },
-    "example": "Er reagiert schnell auf Kritik.",
-    "exampleTranslation": {
-      "ru": "Он быстро реагирует на критику.",
-      "en": "He reacts quickly to criticism."
-    }
-  },
-
-  {
-    "id": "vmp_010",
-    "verb": "sich vorbereiten",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "готовиться к",
-      "en": "to prepare (yourself)"
-    },
-    "example": "Ich bereite mich auf die Prüfung vor.",
-    "exampleTranslation": {
-      "ru": "Я готовлюсь к экзамену.",
-      "en": "I'm preparing for the exam."
-    }
-  },
-
-  {
-    "id": "vmp_011",
-    "verb": "warten",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "ждать",
-      "en": "to wait"
-    },
-    "example": "Ich warte auf den Bus.",
-    "exampleTranslation": {
-      "ru": "Я жду автобус.",
-      "en": "I'm waiting for the bus."
-    }
-  },
-
-  {
-    "id": "vmp_012",
-    "verb": "sich bedanken",
-    "preposition": "bei",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "благодарить кого-то (человека)",
-      "en": "to thank (a person)"
-    },
-    "example": "Ich bedanke mich bei dir für die Einladung.",
-    "exampleTranslation": {
-      "ru": "Я благодарю тебя за приглашение.",
-      "en": "I'd like to thank you for the invitation."
-    }
-  },
-
-  {
-    "id": "vmp_014",
-    "verb": "anfangen",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "начинать с, начинать что-либо",
-      "en": "to start, to begin (something)"
-    },
-    "example": "Wir fangen mit der Arbeit an.",
-    "exampleTranslation": {
-      "ru": "Мы начинаем работу.",
-      "en": "We're starting work."
-    }
-  },
-
-  {
-    "id": "vmp_017",
-    "verb": "sprechen",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "разговаривать, говорить с",
-      "en": "to talk, to speak (to someone)"
-    },
-    "example": "Ich spreche mit meiner Mutter.",
-    "exampleTranslation": {
-      "ru": "Я разговариваю с мамой.",
-      "en": "I'm talking to my mother."
-    }
-  },
-
-  {
-    "id": "vmp_018",
-    "verb": "sich treffen",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "встречаться с",
-      "en": "to meet (someone)"
-    },
-    "example": "Ich treffe mich mit Freunden.",
-    "exampleTranslation": {
-      "ru": "Я встречаюсь с друзьями.",
-      "en": "I'm meeting up with friends."
-    }
-  },
-
-  {
-    "id": "vmp_019",
-    "verb": "fragen",
-    "preposition": "nach",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "спрашивать о, спрашивать кого-либо о",
-      "en": "to ask about"
-    },
-    "example": "Ich frage nach dem Preis.",
-    "exampleTranslation": {
-      "ru": "Я спрашиваю о цене.",
-      "en": "I'm asking about the price."
-    }
-  },
-
-  {
-    "id": "vmp_020",
-    "verb": "suchen",
-    "preposition": "nach",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "искать",
-      "en": "to look for, to search"
-    },
-    "example": "Ich suche nach meinen Schlüsseln.",
-    "exampleTranslation": {
-      "ru": "Я ищу свои ключи.",
-      "en": "I'm looking for my keys."
-    }
-  },
-
-  {
-    "id": "vmp_022",
-    "verb": "danken",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "благодарить за (человек — Dativ без предлога)",
-      "en": "to thank (for sth)"
-    },
-    "example": "Ich danke dir für deine Hilfe.",
-    "exampleTranslation": {
-      "ru": "Спасибо тебе за помощь.",
-      "en": "Thank you for your help."
-    }
-  },
-
-  {
-    "id": "vmp_023",
-    "verb": "sich entschuldigen",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "извиняться за",
-      "en": "to apologise, to say sorry"
-    },
-    "example": "Ich entschuldige mich für meinen Fehler.",
-    "exampleTranslation": {
-      "ru": "Я извиняюсь за свою ошибку.",
-      "en": "I apologise for my mistake."
-    }
-  },
-
-  {
-    "id": "vmp_024",
-    "verb": "sich entscheiden",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "решить выбрать, выбрать в пользу",
-      "en": "to decide on, to choose"
-    },
-    "example": "Ich entscheide mich für den blauen Mantel.",
-    "exampleTranslation": {
-      "ru": "Я выбираю синее пальто.",
-      "en": "I'm choosing the blue coat."
-    }
-  },
-
-  {
-    "id": "vmp_025",
-    "verb": "sich interessieren",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "интересоваться",
-      "en": "to be interested in"
-    },
-    "example": "Ich interessiere mich für Kunst.",
-    "exampleTranslation": {
-      "ru": "Я интересуюсь искусством.",
-      "en": "I'm interested in art."
-    }
-  },
-
-  {
-    "id": "vmp_028",
-    "verb": "bitten",
-    "preposition": "um",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "просить о",
-      "en": "to ask (politely) for"
-    },
-    "example": "Ich bitte um deine Hilfe.",
-    "exampleTranslation": {
-      "ru": "Я прошу о твоей помощи.",
-      "en": "I'm asking for your help."
-    }
-  },
-
-  {
-    "id": "vmp_029",
-    "verb": "sich kümmern",
-    "preposition": "um",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "заботиться о, позаботиться о",
-      "en": "to take care of, to look after"
-    },
-    "example": "Ich kümmere mich um die Kinder.",
-    "exampleTranslation": {
-      "ru": "Я забочусь о детях.",
-      "en": "I look after the children."
-    }
-  },
-
-  {
-    "id": "vmp_030",
-    "verb": "es geht",
-    "preposition": "um",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "речь идёт о",
-      "en": "it's about"
-    },
-    "example": "Es geht um ein wichtiges Thema.",
-    "exampleTranslation": {
-      "ru": "Речь идёт о важной теме.",
-      "en": "It's about an important topic."
-    }
-  },
-
-  {
-    "id": "vmp_031",
-    "verb": "sich freuen",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "радоваться чему-либо, что уже произошло или уже есть",
-      "en": "to be pleased with (sth you have)"
-    },
-    "example": "Ich freue mich über das Geschenk.",
-    "exampleTranslation": {
-      "ru": "Я радуюсь подарку.",
-      "en": "I'm really pleased with the present."
-    }
-  },
-
-  {
-    "id": "vmp_032",
-    "verb": "denken",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "думать о (какое мнение)",
-      "en": "to have thoughts on, to have a view on"
-    },
-    "example": "Was denkst du über meinen Plan?",
-    "exampleTranslation": {
-      "ru": "Что ты думаешь о моём плане?",
-      "en": "What do you think of my plan?"
-    }
-  },
-
-  {
-    "id": "vmp_033",
-    "verb": "nachdenken",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "размышлять, обдумывать",
-      "en": "to reflect on, to think over"
-    },
-    "example": "Ich denke über die Frage nach.",
-    "exampleTranslation": {
-      "ru": "Я размышляю над вопросом.",
-      "en": "I'm thinking about the question."
-    }
-  },
-
-  {
-    "id": "vmp_034",
-    "verb": "sprechen",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "говорить о, разговаривать о",
-      "en": "to talk about"
-    },
-    "example": "Wir sprechen über den Film.",
-    "exampleTranslation": {
-      "ru": "Мы говорим о фильме.",
-      "en": "We're talking about the film."
-    }
-  },
-
-  {
-    "id": "vmp_035",
-    "verb": "sich informieren",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "узнавать информацию о, информироваться о",
-      "en": "to find out, to get information"
-    },
-    "example": "Ich informiere mich über den Kurs.",
-    "exampleTranslation": {
-      "ru": "Я узнаю информацию о курсе.",
-      "en": "I'm finding out about the course."
-    }
-  },
-
-  {
-    "id": "vmp_037",
-    "verb": "erzählen",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "рассказывать о",
-      "en": "to tell (someone) about"
-    },
-    "example": "Sie erzählt von ihrer Arbeit.",
-    "exampleTranslation": {
-      "ru": "Она рассказывает о своей работе.",
-      "en": "She's telling us about her work."
-    }
-  },
-
-  {
-    "id": "vmp_038",
-    "verb": "träumen",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "мечтать о, сниться",
-      "en": "to dream about"
-    },
-    "example": "Ich träume von einer Reise.",
-    "exampleTranslation": {
-      "ru": "Я мечтаю о путешествии.",
-      "en": "I'm dreaming of a trip."
-    }
-  },
-
-  {
-    "id": "vmp_039",
-    "verb": "gehören",
-    "preposition": "zu",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "относиться к, принадлежать к",
-      "en": "to be part of, to belong to"
-    },
-    "example": "Das gehört zu meinem Beruf.",
-    "exampleTranslation": {
-      "ru": "Это относится к моей профессии.",
-      "en": "That's part of my job."
-    }
-  },
-
-  {
-    "id": "vmp_040",
-    "verb": "gratulieren",
-    "preposition": "zu",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "поздравлять с",
-      "en": "to congratulate on"
-    },
-    "example": "Ich gratuliere dir zum Geburtstag.",
-    "exampleTranslation": {
-      "ru": "Я поздравляю тебя с днём рождения.",
-      "en": "Happy birthday to you!"
-    }
-  },
-
-  {
-    "id": "vmp_041",
-    "verb": "einladen",
-    "preposition": "zu",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "приглашать на",
-      "en": "to invite (for a meal, party…)"
-    },
-    "example": "Ich lade dich zum Essen ein.",
-    "exampleTranslation": {
-      "ru": "Я приглашаю тебя на ужин.",
-      "en": "I'm inviting you for a meal."
-    }
-  },
-
-  {
-    "id": "vmp_042",
-    "verb": "warnen",
-    "preposition": "vor",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "предупреждать о, предостерегать от",
-      "en": "to warn about, to warn against"
-    },
-    "example": "Ich warne dich vor diesem Mann.",
-    "exampleTranslation": {
-      "ru": "Я предостерегаю тебя от этого мужчины.",
-      "en": "I'm warning you about this man."
-    }
-  },
-
-  {
-    "id": "vmp_043",
-    "verb": "sich verlieben",
-    "preposition": "in",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "влюбиться в",
-      "en": "to fall for (someone)"
-    },
-    "example": "Sie hat sich in ihn verliebt.",
-    "exampleTranslation": {
-      "ru": "Она влюбилась в него.",
-      "en": "She has fallen in love with him."
-    }
-  },
-
-  {
-    "id": "vmp_044",
-    "verb": "bestehen",
-    "preposition": "aus",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "состоять из",
-      "en": "to consist of, to be made up of"
-    },
-    "example": "Der Kurs besteht aus zehn Lektionen.",
-    "exampleTranslation": {
-      "ru": "Курс состоит из десяти уроков.",
-      "en": "The course consists of ten lessons."
-    }
-  },
-
-  {
-    "id": "vmp_045",
-    "verb": "arbeiten",
-    "preposition": "als",
-    "case": "Nominativ",
-    "meaning": {
-      "ru": "работать кем-либо, в качестве кого-либо",
-      "en": "to work (in a job, a role)"
-    },
-    "example": "Sie arbeitet als Designerin.",
-    "exampleTranslation": {
-      "ru": "Она работает дизайнером.",
-      "en": "She works as a designer."
-    }
-  },
-
-  {
-    "id": "vmp_046",
-    "verb": "sich gewöhnen",
-    "preposition": "an",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "привыкать к",
-      "en": "to get used to"
-    },
-    "example": "Ich gewöhne mich an die neue Arbeit.",
-    "exampleTranslation": {
-      "ru": "Я привыкаю к новой работе.",
-      "en": "I'm getting used to the new job."
-    }
-  },
-
-  {
-    "id": "vmp_047",
-    "verb": "schreiben",
-    "preposition": "an",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "писать кому-то (письмо, e-mail)",
-      "en": "to write (to someone)"
-    },
-    "example": "Ich schreibe eine E-Mail an meinen Chef.",
-    "exampleTranslation": {
-      "ru": "Я пишу e-mail своему начальнику.",
-      "en": "I'm writing an email to my boss."
-    }
-  },
-
-  {
-    "id": "vmp_048",
-    "verb": "aufpassen",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "присматривать за, следить за",
-      "en": "to look after, to watch"
-    },
-    "example": "Kannst du auf meine Tasche aufpassen?",
-    "exampleTranslation": {
-      "ru": "Можешь присмотреть за моей сумкой?",
-      "en": "Can you keep an eye on my bag?"
-    }
-  },
-
-  {
-    "id": "vmp_049",
-    "verb": "sich konzentrieren",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "сосредоточиться на",
-      "en": "to concentrate, to focus"
-    },
-    "example": "Ich kann mich nicht auf die Arbeit konzentrieren.",
-    "exampleTranslation": {
-      "ru": "Я не могу сосредоточиться на работе.",
-      "en": "I can't concentrate on my work."
-    }
-  },
-
-  {
-    "id": "vmp_050",
-    "verb": "sich verlassen",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "полагаться на",
-      "en": "to rely on, to count on"
-    },
-    "example": "Du kannst dich auf mich verlassen.",
-    "exampleTranslation": {
-      "ru": "Ты можешь на меня положиться.",
-      "en": "You can rely on me."
-    }
-  },
-
-  {
-    "id": "vmp_052",
-    "verb": "sich entschuldigen",
-    "preposition": "bei",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "извиняться перед кем-то",
-      "en": "to apologise (to a person)"
-    },
-    "example": "Ich entschuldige mich bei dir für die Verspätung.",
-    "exampleTranslation": {
-      "ru": "Я извиняюсь перед тобой за опоздание.",
-      "en": "I apologise to you for being late."
-    }
-  },
-
-  {
-    "id": "vmp_053",
-    "verb": "aufhören",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "прекращать, бросать (делать что-то)",
-      "en": "to stop, to give up (doing sth)"
-    },
-    "example": "Ich höre mit dem Rauchen auf.",
-    "exampleTranslation": {
-      "ru": "Я бросаю курить.",
-      "en": "I'm giving up smoking."
-    }
-  },
-
-  {
-    "id": "vmp_054",
-    "verb": "sich beschäftigen",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "заниматься чем-то",
-      "en": "to spend time on, to study"
-    },
-    "example": "Ich beschäftige mich gerade mit Grammatik.",
-    "exampleTranslation": {
-      "ru": "Сейчас я занимаюсь грамматикой.",
-      "en": "I'm working on grammar at the moment."
-    }
-  },
-
-  {
-    "id": "vmp_055",
-    "verb": "abhängen",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "зависеть от",
-      "en": "to depend on"
-    },
-    "example": "Das hängt vom Wetter ab.",
-    "exampleTranslation": {
-      "ru": "Это зависит от погоды.",
-      "en": "It depends on the weather."
-    }
-  },
-
-  {
-    "id": "vmp_056",
-    "verb": "halten",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "быть какого-то мнения о",
-      "en": "to think highly / little of"
-    },
-    "example": "Was hältst du von meiner Idee?",
-    "exampleTranslation": {
-      "ru": "Что ты думаешь о моей идее?",
-      "en": "What do you think of my idea?"
-    }
-  },
-
-  {
-    "id": "vmp_057",
-    "verb": "sich erholen",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "отдыхать, восстанавливаться после",
-      "en": "to recover from"
-    },
-    "example": "Ich muss mich von der Arbeit erholen.",
-    "exampleTranslation": {
-      "ru": "Мне нужно отдохнуть от работы.",
-      "en": "I need to recover from work."
-    }
-  },
-
-  {
-    "id": "vmp_058",
-    "verb": "sich verabschieden",
-    "preposition": "von",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "прощаться с",
-      "en": "to say goodbye (to someone)"
-    },
-    "example": "Ich verabschiede mich von meinen Kollegen.",
-    "exampleTranslation": {
-      "ru": "Я прощаюсь с коллегами.",
-      "en": "I'm saying goodbye to my colleagues."
-    }
-  },
-
-  {
-    "id": "vmp_059",
-    "verb": "sich ärgern",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "злиться на, из-за",
-      "en": "to be annoyed (by)"
-    },
-    "example": "Ich ärgere mich über den Stau.",
-    "exampleTranslation": {
-      "ru": "Я злюсь из-за пробки.",
-      "en": "The traffic jam is annoying me."
-    }
-  },
-
-  {
-    "id": "vmp_060",
-    "verb": "sich beschweren",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "жаловаться на",
-      "en": "to complain"
-    },
-    "example": "Er beschwert sich über den Lärm.",
-    "exampleTranslation": {
-      "ru": "Он жалуется на шум.",
-      "en": "He's complaining about the noise."
-    }
-  },
-
-  {
-    "id": "vmp_061",
-    "verb": "sich bewerben",
-    "preposition": "um",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "подавать заявку на (работу, место)",
-      "en": "to apply for (a job, a place)"
-    },
-    "example": "Ich bewerbe mich um eine Stelle als Designerin.",
-    "exampleTranslation": {
-      "ru": "Я подаю заявку на место дизайнера.",
-      "en": "I'm applying for a job as a designer."
-    }
-  },
-
-  {
-    "id": "vmp_062",
-    "verb": "sich Sorgen machen",
-    "preposition": "um",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "беспокоиться о, переживать за",
-      "en": "to worry about"
-    },
-    "example": "Ich mache mir Sorgen um meine Mutter.",
-    "exampleTranslation": {
-      "ru": "Я переживаю за маму.",
-      "en": "I'm worried about my mother."
-    }
-  },
-
-  {
-    "id": "vmp_063",
-    "verb": "passen",
-    "preposition": "zu",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "подходить к, сочетаться с",
-      "en": "to go well, to match"
-    },
-    "example": "Die Schuhe passen gut zu deinem Kleid.",
-    "exampleTranslation": {
-      "ru": "Туфли хорошо подходят к твоему платью.",
-      "en": "The shoes go well with your dress."
-    }
-  },
-
-  {
-    "id": "vmp_064",
-    "verb": "sorgen",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "обеспечивать, позаботиться о",
-      "en": "to take care of, to provide"
-    },
-    "example": "Wer sorgt für die Getränke?",
-    "exampleTranslation": {
-      "ru": "Кто позаботится о напитках?",
-      "en": "Who's taking care of the drinks?"
-    }
-  },
-
-  {
-    "id": "vmp_065",
-    "verb": "halten",
-    "preposition": "für",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "считать кем-то / чем-то",
-      "en": "to consider, to regard as"
-    },
-    "example": "Ich halte ihn für sehr klug.",
-    "exampleTranslation": {
-      "ru": "Я считаю его очень умным.",
-      "en": "I consider him very clever."
-    }
-  },
-
-  {
-    "id": "vmp_068",
-    "verb": "Angst haben",
-    "preposition": "vor",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "бояться кого-то / чего-то",
-      "en": "to be afraid of"
-    },
-    "example": "Ich habe Angst vor Spinnen.",
-    "exampleTranslation": {
-      "ru": "Я боюсь пауков.",
-      "en": "I'm afraid of spiders."
-    }
-  },
-
-  {
-    "id": "vmp_069",
-    "verb": "Lust haben",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "хотеть чего-то, иметь желание",
-      "en": "to feel like, to fancy"
-    },
-    "example": "Ich habe Lust auf ein Eis.",
-    "exampleTranslation": {
-      "ru": "Мне хочется мороженого.",
-      "en": "I fancy an ice cream."
-    }
-  },
-
-  {
-    "id": "vmp_070",
-    "verb": "telefonieren",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "говорить по телефону с",
-      "en": "to be on the phone to, to call"
-    },
-    "example": "Ich telefoniere jeden Sonntag mit meiner Mutter.",
-    "exampleTranslation": {
-      "ru": "Я каждое воскресенье говорю по телефону с мамой.",
-      "en": "I talk to my mum on the phone every Sunday."
-    }
-  },
-
-  {
-    "id": "vmp_071",
-    "verb": "helfen",
-    "preposition": "bei",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "помогать с чем-то (в каком-то деле)",
-      "en": "to help (someone) do something"
-    },
-    "example": "Kannst du mir beim Umzug helfen?",
-    "exampleTranslation": {
-      "ru": "Можешь помочь мне с переездом?",
-      "en": "Can you help me with the move?"
-    }
-  },
-
-  {
-    "id": "vmp_072",
-    "verb": "sich unterhalten",
-    "preposition": "mit",
-    "case": "Dativ",
-    "meaning": {
-      "ru": "беседовать с кем-то",
-      "en": "to chat to someone, to have a conversation"
-    },
-    "example": "Ich habe mich lange mit meiner Nachbarin unterhalten.",
-    "exampleTranslation": {
-      "ru": "Я долго беседовала с соседкой.",
-      "en": "I had a long chat with my neighbour."
-    }
-  },
-
-  {
-    "id": "vmp_073",
-    "verb": "sich unterhalten",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "беседовать о чём-то (тема разговора)",
-      "en": "to chat (on a topic), to discuss"
-    },
-    "example": "Wir haben uns über den Film unterhalten.",
-    "exampleTranslation": {
-      "ru": "Мы поговорили о фильме.",
-      "en": "We talked about the film."
-    }
-  },
-
-  {
-    "id": "vmp_074",
-    "verb": "diskutieren",
-    "preposition": "über",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "обсуждать, спорить о",
-      "en": "to discuss, to debate"
-    },
-    "example": "Wir diskutieren oft über Politik.",
-    "exampleTranslation": {
-      "ru": "Мы часто спорим о политике.",
-      "en": "We often discuss politics."
-    }
-  },
-
-  {
-    "id": "vmp_075",
-    "verb": "achten",
-    "preposition": "auf",
-    "case": "Akkusativ",
-    "meaning": {
-      "ru": "обращать внимание на, следить за",
-      "en": "to pay attention to, to watch out for"
-    },
-    "example": "Ich achte auf meine Gesundheit.",
-    "exampleTranslation": {
-      "ru": "Я слежу за своим здоровьем.",
-      "en": "I look after my health."
-    }
+/* Verben mit Präpositionen — script. Markup: index.html · styles: verben_mit_praepositionen.css
+   Verbs: verbs.js (window.VERBEN_MIT_PRAEPOSITIONEN). When this file changes, raise its ?v= in index.html,
+   the Präpositionen page's verben_mit_praepositionen/index.html?v= and the Home tile's praepositionen/?v=
+
+   A card: meaning (Your Language) + verb → type the preposition → pick the case (Akkusativ / Dativ;
+   skipped for arbeiten als + Nominativ) → answer with the example sentence. */
+
+const DATA = window.VERBEN_MIT_PRAEPOSITIONEN || [];
+const $ = id => document.getElementById(id);
+
+function isTouchDevice() {
+  return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+}
+const IS_TOUCH = isTouchDevice();
+document.documentElement.classList.toggle("is-touch", IS_TOUCH);
+
+// Phone sideways / large text: the round flows from the top instead of the two zones (see the CSS)
+const SHORT_SCREEN = window.matchMedia("(max-height: 559px)");
+
+/* ===== START-SCREEN DESCRIPTION ===== „Worum geht's?“, in the user's language so it is surely understood */
+const START_ABOUT = {
+  text: {
+    en: "Some verbs always come with the same preposition. A little practice helps you remember which one - and the case after it.",
+    ru: "Некоторые глаголы всегда идут с определённым предлогом. Немного практики - и легче запомнить, с каким именно и какой после него падеж."
   }
+};
+$("aboutText").textContent = getTranslation(START_ABOUT, "text");
 
-];
+/* ===== CASES =====
+   The case buttons are built from the cases that occur in the verbs (currently Akkusativ + Dativ).
+   A verb whose case has no button (arbeiten als + Nominativ) skips the case step. */
+const CASE_ORDER = ["Akkusativ", "Dativ", "Genitiv"];
+const CHOICE_CASES = CASE_ORDER.filter(c => DATA.some(x => x.case === c));
+const asksCase = x => CHOICE_CASES.includes(x.case);
+
+/* ===== STATS (weak spots) =====
+   Preposition and case are tracked separately per verb ("<id>|prep", "<id>|case") over the last 5 rounds.
+   They drive the „Noch üben“ list on the summary (and seeded the difficulty scores once, below). */
+const STATS_STORE = "verbenPraepStatsV1";
+const SESSION_WINDOW = 5,
+  MIN_ATTEMPTS = 2,
+  ERROR_THRESHOLD = 0.4;
+let statsStore = { sessions: [] };
+try {
+  statsStore = JSON.parse(localStorage.getItem(STATS_STORE) || '{"sessions":[]}');
+} catch (e) {
+  statsStore = { sessions: [] };
+}
+if (!statsStore || typeof statsStore !== "object") statsStore = { sessions: [] };
+if (!Array.isArray(statsStore.sessions)) statsStore.sessions = [];
+
+function saveStats() {
+  try {
+    localStorage.setItem(STATS_STORE, JSON.stringify(statsStore));
+  } catch (e) {}
+}
+
+function currentStats() {
+  const map = {};
+  statsStore.sessions.forEach((session, s) => {
+    const weight = s + 1; // newer rounds count more
+    for (const [key, v] of Object.entries(session.answers || {})) {
+      if (!map[key]) map[key] = { wc: 0, ww: 0, attempts: 0 };
+      map[key].wc += (v.correct || 0) * weight;
+      map[key].ww += (v.wrong || 0) * weight;
+      map[key].attempts += (v.correct || 0) + (v.wrong || 0);
+    }
+  });
+  for (const v of Object.values(map)) {
+    const total = v.wc + v.ww;
+    v.errorRate = total ? v.ww / total : 0;
+    v.weak = v.attempts >= MIN_ATTEMPTS && v.errorRate >= ERROR_THRESHOLD;
+  }
+  return map;
+}
+
+/* ===== DIFFICULTY per verb (Documentation/PROGRESS_TRACKER.md) =====
+   Common scale 1–4: wrong +1, right −0.5. A verb counts as right only if preposition AND case are right.
+   Stored inside the same key (verbenPraepStatsV1 → .difficulty), so Backup already covers it.
+   Format marker "__format": 2. Old data has none → the starting scores are seeded ONCE from the
+   session stats: 1 + error rate × 3, rounded to 0.5 (never missed → 1, always missed → 4). */
+const DIFFICULTY_FORMAT = 2;
+if (statsStore.__format !== DIFFICULTY_FORMAT || !statsStore.difficulty || typeof statsStore.difficulty !== "object") {
+  const stats = currentStats(),
+    seeded = {};
+  DATA.forEach(x => {
+    const p = stats[x.id + "|prep"],
+      c = stats[x.id + "|case"];
+    if (!p && !c) return;
+    const err = Math.max(p?.errorRate || 0, c?.errorRate || 0);
+    seeded[x.id] = Math.min(4, Math.max(1, Math.round((1 + err * 3) * 2) / 2));
+  });
+  statsStore.difficulty = seeded;
+  statsStore.__format = DIFFICULTY_FORMAT;
+  saveStats();
+}
+function weightFor(x) {
+  return Math.max(1, Number(statsStore.difficulty[x.id] || 1));
+}
+function updateDifficulty(x, ok) {
+  let d = weightFor(x);
+  d = ok ? Math.max(1, d - 0.5) : Math.min(4, d + 1);
+  statsStore.difficulty[x.id] = Number(d.toFixed(2));
+  saveStats();
+}
+
+/* ===== PROGRESS (one item per verb) ===== guarded: the exercise keeps working if the helper is missing */
+const PROGRESS_ID = "verbenMitPraepositionen";
+const hasProgress = () => typeof window.DeutschProgress === "object";
+if (hasProgress()) {
+  DeutschProgress.init(
+    PROGRESS_ID,
+    DATA.map(x => ({ key: x.id, label: `${x.verb} ${x.preposition} + ${x.case}` }))
+  );
+}
+
+/* ===== DAILY STATS (Home: „Heute“) ===== */
+const DAILY_STATS_KEY = "deutschDailyStatsV1";
+function recordDaily(correct) {
+  try {
+    const today = DeutschDay.key();
+    let data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
+    if (data.date !== today) data = { date: today };
+    if (!data.verbenMitPraepositionen) data.verbenMitPraepositionen = { answers: 0, correct: 0 };
+    data.verbenMitPraepositionen.answers++;
+    if (correct) data.verbenMitPraepositionen.correct++;
+    localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
+  } catch (e) {}
+}
+
+/* ===== SESSION ===== */
+let session = [],
+  index = 0,
+  phase = "type", // "type" → "case" (if the verb asks for one) → "answer"
+  typed = "";
+let prepOK = false,
+  caseOK = null,
+  chosenCase = null,
+  caseShownAt = 0;
+let score = { full: 0, prep: 0, cas: 0, casTotal: 0 },
+  sessionAnswers = {},
+  liveSession = null;
+
+// Weighted sampling without replacement by the verb's difficulty score (like Artikel)
+function buildSession(size) {
+  return DATA.map(x => ({ x, k: -Math.log(Math.max(Math.random(), 1e-12)) / weightFor(x) }))
+    .sort((a, b) => a.k - b.k)
+    .slice(0, Math.min(size, DATA.length))
+    .map(o => o.x);
+}
+
+// Stats are saved after every answer, so leaving mid-round keeps them.
+// The round is added to the history on its first answer (empty rounds never are).
+function mark(key, ok) {
+  const v = sessionAnswers[key] || { correct: 0, wrong: 0 };
+  if (ok) v.correct++;
+  else v.wrong++;
+  sessionAnswers[key] = v;
+  if (!liveSession) {
+    liveSession = { date: DeutschDay.key(), answers: sessionAnswers };
+    statsStore.sessions.push(liveSession);
+    if (statsStore.sessions.length > SESSION_WINDOW) statsStore.sessions = statsStore.sessions.slice(-SESSION_WINDOW);
+  }
+  saveStats();
+}
+
+const norm = s =>
+  s
+    .trim()
+    .toLocaleLowerCase("de-DE")
+    .replace(/[.,!?;:]/g, "")
+    .replace(/\s+/g, " ");
+// ae / oe / ue count as ä / ö / ü
+function prepMatches(input, target) {
+  const a = norm(input),
+    b = norm(target);
+  return a === b || a.replace(/ae/g, "ä").replace(/oe/g, "ö").replace(/ue/g, "ü") === b;
+}
+
+/* ===== SCREENS ===== */
+const inRound = () => !$("game").classList.contains("hidden");
+
+// Every screen and every new card starts at the top (on short screens the panel scrolls)
+function scrollToTop() {
+  document.querySelector(".app").scrollTop = 0;
+}
+
+function showScreen(id) {
+  ["start", "game", "done"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  scrollToTop();
+}
+
+function start(size) {
+  session = buildSession(size);
+  index = 0;
+  score = { full: 0, prep: 0, cas: 0, casTotal: 0 };
+  sessionAnswers = {};
+  liveSession = null;
+  showScreen("game");
+  render();
+}
+
+/* ===== QUESTION ===== */
+function render() {
+  const x = session[index];
+  phase = "type";
+  typed = "";
+  prepOK = false;
+  caseOK = null;
+  chosenCase = null;
+  $("counter").textContent = index + 1 + " / " + session.length;
+  $("bar").style.width = (index / session.length) * 100 + "%";
+  $("verb").textContent = x.verb;
+  $("meaning").textContent = getTranslation(x, "meaning");
+  buildGap();
+  // The slot for „+ Kasus“ is always reserved, so the meaning and the line never move
+  $("caseLine").className = "case-line off";
+  $("caseLine").innerHTML = "&nbsp;";
+  $("caseLine").setAttribute("aria-hidden", "true");
+  $("caseQuestion").classList.add("off");
+  $("caseStep").classList.add("hidden");
+  paintGap();
+  $("check").classList.remove("hidden");
+  $("feedback").className = "feedback hidden";
+  $("finalFeedback").classList.add("hidden");
+  $("prepFeedback").classList.remove("hidden");
+  if (window.deutschKeyboardReady) $("keyboard").classList.add("show");
+  $("kbZone").classList.remove("kb-off");
+  fitSentence();
+  placeQuestion();
+  scrollToTop();
+  focusGap();
+}
+
+// The blank under the verb: a hidden mirror gives it its width, a real text field sits on top of it
+function buildGap() {
+  const gap = $("gap");
+  gap.className = "gap typing";
+  const mirror = document.createElement("span");
+  mirror.className = "gap-mirror";
+  mirror.id = "gapMirror";
+  const input = document.createElement("input");
+  input.className = "gap-input";
+  input.id = "gapInput";
+  input.type = "text";
+  input.placeholder = " ";
+  input.maxLength = 20;
+  input.setAttribute("autocomplete", "off");
+  input.setAttribute("autocorrect", "off");
+  input.setAttribute("autocapitalize", "off");
+  input.setAttribute("spellcheck", "false");
+  input.setAttribute("aria-label", "Präposition");
+  gap.replaceChildren(mirror, input);
+  if (IS_TOUCH) {
+    // Phones use the in-app German keyboard; the system keyboard never opens
+    input.readOnly = true;
+    input.tabIndex = -1;
+    input.setAttribute("inputmode", "none");
+  } else {
+    input.addEventListener("input", () => {
+      typed = input.value;
+      paintGap();
+    });
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.isComposing) {
+        e.preventDefault();
+        e.stopPropagation();
+        submitPrep();
+      }
+    });
+  }
+}
+
+function paintGap() {
+  const input = $("gapInput"),
+    mirror = $("gapMirror");
+  if (!input) return;
+  if (input.value !== typed) input.value = typed;
+  mirror.textContent = typed;
+  fitSentence();
+}
+
+function focusGap() {
+  if (IS_TOUCH || phase !== "type") return;
+  const input = $("gapInput");
+  if (input && document.activeElement !== input) input.focus({ preventScroll: true });
+}
+
+// Keep verb + blank on one line: shrink only when the line is wider than the screen
+function fitSentence() {
+  const el = $("sentence");
+  el.style.fontSize = "";
+  const available = $("prompt").clientWidth;
+  const width = el.scrollWidth;
+  if (width > available && available > 0) {
+    el.style.fontSize = ((parseFloat(getComputedStyle(el).fontSize) * available) / width) * 0.97 + "px";
+  }
+}
+
+// Phone: the question starts at the same height as in Ortspräpositionen (69px below the top bar's line).
+// The keyboard is lifted by exactly as much as the question was lifted, so the distances between the
+// question, the keyboard and the case buttons stay what they were when the question was centred.
+// Measured once per round (again on resize / when the keyboard has loaded), so nothing moves between cards.
+// Phone sideways: not needed, the round flows from the top (see the CSS).
+let questionPlaced = false;
+function placeQuestion(force) {
+  if (!IS_TOUCH || SHORT_SCREEN.matches || (questionPlaced && !force)) return;
+  const root = document.documentElement;
+  root.classList.add("vmp-measure"); // original layout: question centred, keyboard low
+  const centredTop = document.querySelector(".anchor").getBoundingClientRect().top;
+  root.classList.remove("vmp-measure");
+  const target = document.querySelector("#game .top").getBoundingClientRect().bottom + 69;
+  const zoneTop = document.querySelector(".qzone").getBoundingClientRect().top;
+  root.style.setProperty("--vmp-question-top", Math.max(0, Math.round(target - zoneTop)) + "px");
+  root.style.setProperty("--vmp-lift", Math.max(0, Math.round(centredTop - target)) + "px");
+  questionPlaced = true;
+}
+
+window.addEventListener("resize", () => {
+  if (!inRound()) return;
+  fitSentence();
+  placeQuestion(true);
+});
+
+/* ===== STEP 1 — PREPOSITION ===== the whole line + glow shows the preposition result */
+function submitPrep() {
+  if (phase !== "type" || !typed.trim()) return;
+  const x = session[index];
+  prepOK = prepMatches(typed, x.preposition);
+  mark(x.id + "|prep", prepOK);
+  if (prepOK) score.prep++;
+
+  const gap = $("gap");
+  gap.className = "gap filled";
+  gap.textContent = x.preposition;
+  fitSentence();
+  $("check").classList.add("hidden");
+  // Phone: the keyboard keeps its space (so the question doesn't move), it just hides
+  if (IS_TOUCH) $("kbZone").classList.add("kb-off");
+  else if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+
+  const given = $("given");
+  if (prepOK) given.replaceChildren(span("good", x.preposition));
+  else given.replaceChildren(span("bad struck", typed.trim()), span("good", "→ " + x.preposition));
+  $("feedback").className = "feedback" + (prepOK ? "" : " wrong-l wrong-r");
+
+  if (asksCase(x)) {
+    phase = "case";
+    caseShownAt = performance.now();
+    $("caseQuestion").classList.remove("off");
+    $("caseStep").classList.remove("hidden");
+  } else {
+    showAnswer();
+  }
+}
+
+function span(className, text) {
+  const el = document.createElement("span");
+  el.className = className;
+  el.textContent = text;
+  return el;
+}
+
+/* ===== STEP 2 — CASE ===== asked for the CORRECT preposition */
+function chooseCase(c) {
+  if (phase !== "case") return;
+  const x = session[index];
+  chosenCase = c;
+  caseOK = c === x.case;
+  mark(x.id + "|case", caseOK);
+  score.casTotal++;
+  if (caseOK) score.cas++;
+  showAnswer();
+}
+
+/* ===== ANSWER ===== left half of the line = preposition, right half = case */
+function chip(ok, label, wrongValue) {
+  const el = span("chip " + (ok ? "ok" : "no"), "");
+  el.append(span("mark", ok ? "✓" : "✗"), label);
+  if (!ok && wrongValue) el.append(" ", span("struck", wrongValue));
+  return el;
+}
+
+function showAnswer() {
+  phase = "answer";
+  const x = session[index];
+  const full = prepOK && caseOK !== false;
+  if (full) score.full++;
+  recordDaily(full);
+  updateDifficulty(x, full);
+  if (hasProgress()) DeutschProgress.record(PROGRESS_ID, x.id, full);
+
+  // Step 2: the right half fades to the case result (the left half keeps the preposition)
+  if (caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
+  $("caseLine").textContent = "+ " + x.case;
+  $("caseLine").removeAttribute("aria-hidden");
+  $("caseQuestion").classList.add("off");
+  $("caseLine").classList.remove("off");
+
+  const chips = [chip(prepOK, "Präposition", typed.trim())];
+  if (caseOK !== null) chips.push(chip(caseOK, "Kasus", chosenCase));
+  $("chips").replaceChildren(...chips);
+  $("example").textContent = x.example || "";
+  $("exampleTr").textContent = getTranslation(x, "exampleTranslation");
+  $("continue").textContent = index === session.length - 1 ? "Fertig" : "Weiter";
+
+  $("prepFeedback").classList.add("hidden");
+  $("finalFeedback").classList.remove("hidden");
+  $("bar").style.width = ((index + 1) / session.length) * 100 + "%";
+}
+
+function next() {
+  if (phase !== "answer") return;
+  if (index >= session.length - 1) {
+    finish();
+    return;
+  }
+  index++;
+  render();
+}
+
+/* ===== SUMMARY ===== */
+function weakLabel(key) {
+  const [id, part] = key.split("|");
+  const x = DATA.find(e => e.id === id);
+  if (!x) return null;
+  return part === "prep" ? `${x.verb} → ${x.preposition}` : `${x.verb} ${x.preposition} → ${x.case}`;
+}
+
+function finish() {
+  showScreen("done");
+  $("score").textContent = score.full + " / " + session.length;
+  const part = (label, value) => {
+    const el = span("done-part", label + " ");
+    const b = document.createElement("b");
+    b.textContent = value;
+    el.append(b);
+    return el;
+  };
+  const parts = [part("Präposition", `${score.prep} / ${session.length}`)];
+  if (score.casTotal) parts.push(part("Kasus", `${score.cas} / ${score.casTotal}`));
+  $("parts").replaceChildren(...parts);
+
+  const weak = Object.entries(currentStats())
+    .filter(([, v]) => v.weak)
+    .sort((a, b) => b[1].errorRate - a[1].errorRate)
+    .map(([k]) => weakLabel(k))
+    .filter(Boolean)
+    .slice(0, 3);
+  if (weak.length) {
+    const title = document.createElement("b");
+    title.textContent = "Noch üben";
+    const lines = weak.flatMap(w => [document.createElement("br"), w]);
+    $("weak").replaceChildren(title, ...lines);
+    $("weak").classList.remove("hidden");
+  } else $("weak").classList.add("hidden");
+}
+
+/* ===== CASE BUTTONS ===== */
+$("choices").style.setProperty("--case-count", CHOICE_CASES.length);
+$("choices").replaceChildren(
+  ...CHOICE_CASES.map(c => {
+    const b = document.createElement("button");
+    b.className = "case-choice";
+    b.dataset.case = c;
+    b.textContent = c;
+    return b;
+  })
+);
+$("choices").addEventListener("click", e => {
+  const b = e.target.closest("button[data-case]");
+  // Safety guard: ignore taps in the first moment after the buttons appear
+  // (a tap on the keyboard's ✓ must never also pick a case)
+  if (b && performance.now() - caseShownAt > 450) chooseCase(b.dataset.case);
+});
+
+/* ===== ON-SCREEN KEYBOARD (phones and tablets) ===== */
+function typeKey(k) {
+  if (!inRound() || phase !== "type") return;
+  if (k === "BACK") {
+    typed = typed.slice(0, -1);
+    paintGap();
+    return;
+  }
+  if (k === "OK") {
+    submitPrep();
+    return;
+  }
+  if (k === "SPACE") {
+    if (typed.length && !typed.endsWith(" ")) typed += " ";
+    paintGap();
+    return;
+  }
+  if (typed.length < 20) {
+    typed += k;
+    paintGap();
+  }
+}
+document.addEventListener("deutsch-keyboard-input", e => typeKey(e.detail?.key || ""));
+
+async function loadKeyboardComponent() {
+  const mount = $("keyboardMount");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html");
+  if (!r.ok) throw new Error("Keyboard component failed to load");
+  const tpl = document.createElement("template");
+  tpl.innerHTML = await r.text();
+  const scripts = [];
+  tpl.content.querySelectorAll("script").forEach(s => {
+    scripts.push(s.textContent);
+    s.remove();
+  });
+  mount.appendChild(tpl.content);
+  for (const code of scripts) {
+    const s = document.createElement("script");
+    s.textContent = code;
+    document.body.appendChild(s);
+  }
+  window.deutschKeyboardReady = true;
+  if (inRound()) placeQuestion(true);
+  if (inRound() && phase === "type") $("keyboard").classList.add("show");
+}
+
+/* ===== KEYS (computer keyboard) =====
+   Only during a round; Cmd/Ctrl/Option combinations are left to the browser.
+   Enter after the answer is handled here once (preventDefault), so a focused Weiter can't move on twice.
+   On the start and summary screens Enter presses the focused button, as usual. */
+document.addEventListener("keydown", e => {
+  if (!inRound() || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (phase === "answer") {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (!e.repeat) next();
+    }
+    return;
+  }
+  if (phase === "case") {
+    if (e.repeat) return;
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= CHOICE_CASES.length) {
+      chooseCase(CHOICE_CASES[n - 1]);
+      return;
+    }
+    const byLetter = CHOICE_CASES.find(c => c[0].toLowerCase() === e.key.toLowerCase());
+    if (byLetter) chooseCase(byLetter);
+    return;
+  }
+  // Typing on a computer: the text field handles letters, Backspace and the accent menu itself.
+  // If the focus got lost, put it back before the key lands.
+  if (!IS_TOUCH && e.target !== $("gapInput")) focusGap();
+});
+// Clicking anywhere during typing returns the focus to the blank (not on the start and summary screens)
+document.addEventListener("mousedown", e => {
+  if (!inRound() || phase !== "type" || IS_TOUCH || e.target.closest("button")) return;
+  if (e.target !== $("gapInput")) {
+    e.preventDefault();
+    focusGap();
+  }
+});
+
+/* ===== BACK TO HOME ===== */
+function goBackToHome() {
+  try {
+    if (window.parent && window.parent !== window) {
+      if (typeof window.parent.closeApp === "function") {
+        window.parent.closeApp();
+        return;
+      }
+      const parentDoc = window.parent.document;
+      const shell = parentDoc.getElementById("appShell");
+      const frame = parentDoc.getElementById("appFrame");
+      if (shell && frame) {
+        shell.classList.remove("open");
+        shell.setAttribute("aria-hidden", "true");
+        parentDoc.documentElement.classList.remove("app-open");
+        frame.src = "about:blank";
+        return;
+      }
+    }
+  } catch (e) {}
+  window.parent.postMessage({ type: "deutsch:home" }, "*");
+}
+
+/* ===== BUTTONS ===== */
+document
+  .querySelectorAll(".session-option")
+  .forEach(b => b.addEventListener("click", () => start(Number(b.dataset.size))));
+$("check").addEventListener("click", submitPrep);
+$("continue").addEventListener("click", next);
+$("playAgain").addEventListener("click", () => showScreen("start"));
+$("homeBack").addEventListener("click", goBackToHome);
+
+loadKeyboardComponent().catch(e => console.error(e));
