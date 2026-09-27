@@ -1,0 +1,1525 @@
+/* Wortschatz · styles (v2.108, clean-up 2026-09-27: every element is described once; one palette per theme)
+   Design rules: Documentation/DECISIONS.md („Design Police“ 2026-09-25, start/done screens 2026-09-26). */
+
+/* ===== PALETTE · dark (default) ===== */
+:root {
+  --green: #5bc8a4;
+  --red: #ff7770;
+  --gray-100: #f2f0ed;
+  --gray-300: #c8c7c4;
+  --gray-500: #8f8f94;
+
+  --bg: #1b1b1d;
+  --text: var(--gray-100);
+  --sec-text: var(--gray-300); /* secondary text: details, links, list rows */
+  --muted: var(--gray-500); /* palette grey: sublines, labels, top bar */
+  --meaning-text: var(--gray-500);
+  --accent: var(--green); /* green = „correct“ (outside the exercises also „enabled“) */
+  --error: var(--red);
+  --hairline: rgba(255, 255, 255, 0.1); /* the shared 10% outline / divider */
+  --blank-line: rgba(243, 241, 237, 0.72);
+  --version: rgba(255, 255, 255, 0.24);
+
+  --field-bg: rgba(255, 255, 255, 0.03); /* typing field + quiet Weiter button */
+  --card-bg: #2a2a2d; /* window card + „Use your own words“ button */
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
+  --main-bg: #ece6dc; /* the one main button: cream */
+  --main-text: #1b1b1d;
+  --quiet-text: rgba(242, 240, 237, 0.55); /* outlined second button */
+  --overlay-scrim: rgba(0, 0, 0, 0.34);
+
+  --diff-word-bg: rgba(255, 255, 255, 0.025);
+  --diff-error-bg: rgba(255, 119, 112, 0.1);
+  --diff-arrow: #e8d9d9;
+  --diff-correct: #f2f0ed;
+
+  --good-glow: radial-gradient(
+    ellipse,
+    rgba(91, 200, 164, 0.24) 0%,
+    rgba(91, 200, 164, 0.12) 28%,
+    rgba(91, 200, 164, 0.04) 52%,
+    transparent 74%
+  );
+  --bad-glow: radial-gradient(
+    ellipse,
+    rgba(255, 119, 112, 0.34) 0%,
+    rgba(255, 119, 112, 0.17) 30%,
+    rgba(255, 119, 112, 0.055) 55%,
+    transparent 76%
+  );
+  --good-line-shadow: 0 0 14px rgba(91, 200, 164, 0.3);
+  --bad-line-shadow: 0 0 14px rgba(255, 119, 112, 0.34);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+}
+
+/* ===== PALETTE · light ===== */
+[data-theme="light"] {
+  --green: #3fa68a;
+  --red: #e95e66;
+  --gray-100: #242426;
+  --gray-300: #727278;
+  --gray-500: #727278;
+
+  --bg: #f6f4f1;
+  --sec-text: #55565b;
+  --meaning-text: #55565b;
+  --hairline: rgba(0, 0, 0, 0.1);
+  --blank-line: rgba(36, 36, 38, 0.38);
+  --version: rgba(36, 36, 38, 0.34);
+
+  --field-bg: #fff;
+  --card-bg: #fff;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --main-bg: #242426;
+  --main-text: #f6f4f1;
+  --quiet-text: rgba(36, 36, 38, 0.55);
+  --overlay-scrim: rgba(0, 0, 0, 0.2);
+
+  --diff-word-bg: rgba(36, 36, 38, 0.035);
+  --diff-error-bg: rgba(233, 94, 102, 0.1);
+  --diff-arrow: #77777c;
+  --diff-correct: #55565b;
+
+  --good-glow: radial-gradient(
+    ellipse at center,
+    rgba(63, 166, 138, 0.16) 0%,
+    rgba(63, 166, 138, 0.08) 28%,
+    rgba(63, 166, 138, 0.025) 52%,
+    transparent 74%
+  );
+  --bad-glow: radial-gradient(
+    ellipse at center,
+    rgba(233, 94, 102, 0.19) 0%,
+    rgba(233, 94, 102, 0.09) 30%,
+    rgba(233, 94, 102, 0.025) 55%,
+    transparent 76%
+  );
+  --good-line-shadow: 0 0 14px rgba(63, 166, 138, 0.22);
+  --bad-line-shadow: 0 0 14px rgba(233, 94, 102, 0.24);
+}
+
+/* ===== PAGE ===== */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+button {
+  font: inherit;
+}
+.app {
+  width: min(760px, 100%);
+  margin: auto;
+  min-height: 100dvh;
+  padding: calc(env(safe-area-inset-top) + 18px) 22px calc(env(safe-area-inset-bottom) + 24px);
+  display: flex;
+  flex-direction: column;
+}
+/* shared press effect for every button: .97 + a touch darker */
+#startBtn:active,
+.ownWordsBtn:active,
+.coll-line:active,
+.check:active,
+.continue:active,
+#typoBtn:active,
+.finish-actions button:active,
+.coll-close:active,
+.coll-back:active,
+.coll-link:active,
+.coll-main:active,
+.coll-quiet:active,
+.coll-chip:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== TOP BAR · title, counter, 3px progress line: hairline track + grey fill (green = „correct“ only) ===== */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.brand {
+  font:
+    26px Georgia,
+    serif;
+  color: var(--muted);
+}
+.progress {
+  height: 3px;
+  background: var(--hairline);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.progress div {
+  height: 100%;
+  background: var(--muted);
+  transition: width 0.2s;
+}
+/* the top bar belongs to the session, not to the start and done screens */
+body:has(#start.show) header,
+body:has(#done.show) header {
+  display: none;
+}
+
+/* ===== START SCREEN (v2.93–v2.102) =====
+   Wortschatz. → DEINE WÖRTER → „Starter-Set ›“ + word count → ＋ Use your own words (Starter-Set only) → Starten.
+   Title on top, Starten low (just above „Worum geht's?“), the DEINE WÖRTER block centred between them.
+   #start gets its height from layoutStart(). Shown only when cards are due; otherwise „Fertig für heute“. */
+#start {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 36px;
+}
+#start.show {
+  display: flex;
+}
+#start .title {
+  font:
+    400 clamp(48px, 13vw, 72px) / 1.05 Georgia,
+    serif;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin: 0;
+}
+#start .startWords {
+  margin: auto 0;
+  padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* new words running out: red = „needs your attention“ outside the exercises */
+#start .startNote {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--error);
+}
+#start .startNote:empty {
+  display: none;
+}
+#start .startActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+#start .ownWordsBtn {
+  width: 312px;
+  max-width: 100%;
+  height: 52px;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  font: 600 15px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#start #startBtn {
+  width: 312px;
+  max-width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  background: var(--main-bg);
+  color: var(--main-text);
+  font: 650 16px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+/* DEINE WÖRTER block — same on the start and the done screen: label, „<name> ›“ (opens the window), word count */
+.startLabel {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.coll-line {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  margin: 0;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--text);
+  font: 500 17px/1.25 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#start .coll-line {
+  margin-bottom: 6px;
+}
+.coll-line-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.coll-line-chev {
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  margin-left: 8px;
+  flex: 0 0 auto;
+  transform: translateY(-1px);
+}
+.collCount {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ===== START SCREEN · „Worum geht's?“ — folded (v2.105): only the headline shows, at the height of the
+   description's last line (anchored at the bottom). Tap = the text unfolds, the headline moves up. ===== */
+.start-about {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 64px);
+  margin: 0 auto;
+  padding: 0;
+  width: 312px;
+  max-width: calc(100% - 36px);
+  text-align: center;
+  font-family: var(--font);
+  z-index: 4;
+}
+body:has(#start.show) .start-about {
+  display: block;
+}
+.start-about h2 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.start-about:not(.open) h2 {
+  margin: 0;
+}
+.start-about .about-de {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.start-about:not(.open):not(.measure) .about-de {
+  display: none;
+}
+.aboutToggle {
+  border: 0;
+  background: none;
+  padding: 6px 8px;
+  margin: -6px -8px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.aboutToggle::after {
+  content: "▸";
+  font-size: 10px;
+  transition: transform 0.15s;
+}
+.start-about.open .aboutToggle::after {
+  transform: rotate(90deg);
+}
+
+/* Version number: only on the start and the done screen */
+.version-mark {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font: 400 11px/1 var(--font);
+  letter-spacing: 0.04em;
+  color: var(--version);
+  pointer-events: none;
+  z-index: 5;
+}
+body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
+  display: none;
+}
+
+/* ===== QUESTION ===== */
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: clamp(38px, 8vh, 80px);
+  text-align: center;
+}
+#question {
+  width: min(560px, 100%);
+}
+#question.hidden {
+  display: none;
+}
+.topZone {
+  width: min(620px, 100%);
+}
+.sentence {
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+  max-width: 620px;
+}
+.blank {
+  display: inline-block;
+  width: 1.87em;
+  height: 0.82em;
+  border-bottom: 2px solid var(--blank-line);
+  vertical-align: baseline;
+  margin: 0 0.08em;
+}
+.translation {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: clamp(16px, 4.2vw, 22px);
+}
+
+/* Typo hint above the typing field: the line is always reserved (nothing jumps), red text fades in */
+#almostHint {
+  height: 22px;
+  margin: 14px 0 -20px;
+  font: 500 16px/22px var(--font);
+  color: var(--error);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+#almostHint.show {
+  opacity: 1;
+}
+
+/* TYPING FIELD (shared by Wortschatz, Pronomen, Modalverben, Partizip II): surface slightly lighter than the
+   background + 10% outline, 58px, 18px corners, 24px text. Never green. Empty field: a blinking cursor in the
+   middle is the only hint. */
+.inputbox {
+  margin-top: 34px;
+  width: min(620px, 100%);
+  height: 58px;
+  min-height: 58px;
+  padding: 0 17px;
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 400 24px var(--font);
+  outline: none;
+  background-color: var(--field-bg);
+  box-shadow: none;
+  color: var(--text);
+  text-align: center;
+  caret-color: var(--accent);
+}
+.inputbox:placeholder-shown {
+  caret-color: transparent;
+  background-image: linear-gradient(var(--text), var(--text));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2px 28px;
+  animation: fieldCaretBg 1.1s steps(1) infinite;
+}
+@keyframes fieldCaretBg {
+  0%,
+  49% {
+    background-size: 2px 28px;
+  }
+  50%,
+  100% {
+    background-size: 0 0;
+  }
+}
+/* a close answer (level 2+): subtle red frame + a short shake; the text stays */
+.inputbox.almost {
+  border-color: color-mix(in srgb, var(--error) 60%, transparent);
+}
+.inputbox.nudge {
+  animation: fieldNudge 0.34s ease-out;
+}
+@keyframes fieldNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  18% {
+    transform: translateX(-6px);
+  }
+  38% {
+    transform: translateX(5px);
+  }
+  58% {
+    transform: translateX(-3px);
+  }
+  78% {
+    transform: translateX(2px);
+  }
+}
+
+/* PRÜFEN (desktop only; touch devices use the keyboard's OK): the one strong button, main-button colours */
+.check {
+  margin-top: 14px;
+  width: min(620px, 100%);
+  height: 56px;
+  border: 0;
+  border-radius: 17px;
+  padding: 16px;
+  background: var(--main-bg);
+  color: var(--main-text);
+  font: 650 16px/1 var(--font);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+/* ===== ANSWER ===== */
+.feedbackShell {
+  display: none;
+  width: min(690px, 100%);
+  flex-direction: column;
+  align-items: center;
+}
+.feedbackShell.show {
+  display: flex;
+}
+.feedback {
+  display: none;
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+  padding: 0 0 24px;
+  overflow: visible;
+}
+.feedback.show {
+  display: block;
+}
+.feedback .topZone {
+  margin-left: auto;
+  margin-right: auto;
+}
+.answerTop {
+  cursor: pointer;
+}
+.answerSentence {
+  display: inline;
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.answerSentence .target {
+  font-weight: 600;
+}
+.feedback.good .answerSentence .target {
+  color: var(--accent);
+}
+.feedback.bad .answerSentence .target {
+  color: var(--text);
+}
+.answerTranslation {
+  display: block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: clamp(17px, 4.2vw, 22px);
+}
+.speakTop {
+  display: block;
+  font-size: clamp(28px, 7vw, 42px);
+  width: 1em;
+  height: auto;
+  margin: 16px auto 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+  cursor: pointer;
+  animation: audioPop 0.72s cubic-bezier(0.22, 0.8, 0.28, 1) 1.55s both;
+}
+.speakTop:active {
+  transform: scale(0.94);
+}
+.speakTopIcon {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@keyframes audioPop {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  18% {
+    transform: scale(1.07) rotate(-4deg);
+    animation-timing-function: cubic-bezier(0.22, 0.8, 0.28, 1);
+  }
+  42% {
+    transform: scale(1.11) rotate(3.5deg);
+    animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1);
+  }
+  62% {
+    transform: scale(1.04) rotate(-1.8deg);
+    animation-timing-function: cubic-bezier(0.3, 0.7, 0.3, 1);
+  }
+  80% {
+    transform: scale(1.015) rotate(0.8deg);
+    animation-timing-function: cubic-bezier(0.3, 0.7, 0.3, 1);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* right answer: the word in green */
+.targetForm {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--accent);
+  font:
+    36px Georgia,
+    serif;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  padding: 1px 5px;
+}
+.feedback.bad .targetForm {
+  display: none;
+}
+
+/* wrong answer: what you typed ↓ the right word, differences marked */
+.diffBlock {
+  display: none;
+  margin-top: 26px;
+  padding-bottom: 0;
+  font:
+    32px ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  line-height: 1.25;
+}
+.feedback.bad .diffBlock {
+  display: block;
+}
+.diffWord {
+  display: inline-block;
+  padding: 2px 5px;
+  background: var(--diff-word-bg);
+}
+.diffSame {
+  color: var(--accent);
+}
+.diffWrong,
+.diffMissing {
+  color: var(--error);
+  background: var(--diff-error-bg);
+}
+.diffArrow {
+  margin: 1px 0;
+  color: var(--diff-arrow);
+  font: 24px/1 sans-serif;
+}
+.diffArrow img {
+  display: block;
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.diffCorrect {
+  color: var(--diff-correct);
+}
+
+/* details under the line: base form, meaning, grammar. The line grows from the middle; a soft glow behind it. */
+.detail {
+  position: relative;
+  border-top: 1px solid var(--hairline);
+  padding-top: 24px;
+  color: var(--sec-text);
+  text-align: center;
+  isolation: isolate;
+}
+.detail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  width: 0;
+  height: 1px;
+  transform: translateX(-50%);
+  background: var(--accent);
+  box-shadow: var(--good-line-shadow);
+  z-index: 2;
+}
+.feedback.bad .detail::before {
+  background: var(--error);
+  box-shadow: var(--bad-line-shadow);
+}
+.feedback.show .detail::before {
+  animation: lineGrow 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.detail::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 0;
+  width: min(760px, 100vw);
+  height: 360px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+}
+.feedback.good .detail::after {
+  background: var(--good-glow);
+  animation: glowIn 0.65s ease forwards;
+}
+.feedback.bad .detail::after {
+  background: var(--bad-glow);
+  animation: glowIn 0.65s ease forwards;
+}
+@keyframes lineGrow {
+  to {
+    width: 100%;
+  }
+}
+@keyframes glowIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.answerTargetRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.base {
+  font-size: 25px;
+  margin: 0;
+}
+.meaning {
+  font-size: 20px;
+  color: var(--meaning-text);
+}
+.grammar {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+/* ✎ (own words only): quiet corner button, palette grey at low strength, 44px tap area */
+.editCard {
+  display: none;
+  position: absolute;
+  right: -10px;
+  top: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  opacity: 0.6;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+}
+.feedback.show .editCard.own {
+  display: flex;
+}
+.editCard svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+}
+.editCard:active {
+  transform: scale(0.92);
+  opacity: 1;
+}
+
+/* WEITER: the quiet button — it doesn't urge you on, you read the answer first. Same surface + outline as the
+   typing field; half as wide as the answer area, centred. */
+.continue {
+  display: block;
+  width: 50%;
+  height: 56px;
+  margin: 18px auto 0;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: 600 16px/1 var(--font);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+/* „Nur Tippfehler“ (wrong answer at level 2+): checkbox + label, no frame, secondary text colour;
+   the tick uses the same grey (green = „correct“ only). Tap area bigger than it looks. */
+#typoBtn {
+  display: none;
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  margin: 8px auto 0;
+  padding: 12px 16px;
+  border: 0;
+  background: none;
+  color: var(--sec-text);
+  font: 400 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.feedbackShell.canTypo #typoBtn {
+  display: inline-flex;
+}
+#typoBtn::before {
+  content: "";
+  box-sizing: border-box;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--sec-text);
+  border-radius: 5px;
+  opacity: 0.7;
+}
+#typoBtn.done::before {
+  opacity: 1;
+  background: var(--sec-text);
+}
+#typoBtn.done::after {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 50%;
+  width: 4px;
+  height: 9px;
+  margin-top: -6px;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+#typoBtn:disabled {
+  cursor: default;
+  transform: none;
+  filter: none;
+}
+
+/* ===== DONE SCREEN (v2.97–v2.99) · mirrors the start screen =====
+   „Fertig für heute.“, the DEINE WÖRTER block, then the buttons low (just above the version number).
+   #doneInner gets its height from layoutDone(). */
+#done {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: center;
+}
+#done.show {
+  display: flex;
+}
+.doneInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+#done h1 {
+  font:
+    46px/1.05 Georgia,
+    serif;
+  margin: 0 0 15px;
+}
+.doneTop p {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 0;
+}
+.doneScore {
+  margin-top: 18px;
+  color: var(--text);
+  font-size: 17px;
+}
+.doneScore:empty {
+  display: none;
+}
+.doneWords {
+  padding: clamp(40px, 8vh, 80px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.allAdded {
+  display: none;
+  margin: 10px 0 0;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 500;
+}
+/* „5 neue Wörter lernen“ (quiet, outlined) + „Zur Startseite“ (main) — the summary buttons of all exercises */
+.finish-actions {
+  width: min(100%, 360px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.finish-actions button {
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.finish-actions .addWords {
+  background: transparent;
+  color: var(--quiet-text);
+  border: 1px solid var(--hairline);
+}
+.finish-actions .home-back {
+  background: var(--main-bg);
+  color: var(--main-text);
+}
+
+/* ===== COLLECTION WINDOW (v2.87–v2.107) — Documentation/WORTSCHATZ_COLLECTIONS.md =====
+   The table-window rule: blur 8px + 34% / 20% darkening, card colour, 10% outline, 24px corners, fade + zoom-in,
+   × top right, tap outside / Esc closes. The layer fills the screen exactly (inset:0, v2.107).
+   Confirm buttons = the „Are you sure?“ rule: the safe choice is the main button, the risky one the quiet button. */
+.coll-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  padding-top: max(64px, env(safe-area-inset-top) + 20px);
+  padding-bottom: max(40px, env(safe-area-inset-bottom) + 20px);
+  z-index: 30;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+  font-family: var(--font);
+}
+.coll-modal.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.coll-card {
+  width: min(520px, 100%);
+  max-height: min(640px, 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 6px 22px 14px;
+  text-align: left;
+  color: var(--text);
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.coll-modal.open .coll-card {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+.coll-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-height: 52px;
+}
+.coll-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.coll-close {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 400 28px/1 var(--font);
+  padding: 8px;
+  margin-right: -8px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-back {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 300 34px/1 var(--font);
+  padding: 4px 10px 8px 0;
+  margin-left: -4px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-text {
+  margin: 0 0 22px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sec-text);
+}
+.coll-meta {
+  flex: 0 0 auto;
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.coll-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: var(--sec-text);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-text .coll-link {
+  font-size: inherit;
+}
+.coll-note {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* main (cream) and quiet (outlined) buttons */
+.coll-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.coll-buttons .coll-link {
+  align-self: center;
+  margin-top: 6px;
+  padding: 8px;
+}
+.coll-main,
+.coll-quiet {
+  width: 100%;
+  height: 56px;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-main {
+  border: 0;
+  background: var(--main-bg);
+  color: var(--main-text);
+}
+.coll-quiet {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--quiet-text);
+}
+/* own collection (v2.104): ＋ Add Word (cream) and Import List (outlined) side by side, same shape */
+.coll-pair {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  padding: 2px 0 14px;
+}
+.coll-pair .coll-main,
+.coll-pair .coll-quiet {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* word list */
+.coll-list {
+  flex: 1 1 auto;
+  min-height: 60px;
+  overflow: auto;
+  margin: 0 -22px;
+  padding: 0 22px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  -webkit-overflow-scrolling: touch;
+}
+.coll-list-below {
+  margin-top: 6px;
+  border-bottom: 0;
+}
+.coll-word {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.coll-word:last-child {
+  border-bottom: 0;
+}
+.coll-word.is-btn {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-word.is-btn:last-child {
+  border-bottom: 0;
+}
+.coll-word.is-btn:active {
+  transform: scale(0.99);
+  filter: brightness(0.94);
+}
+.coll-de {
+  font-size: 16px;
+  color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.coll-tr {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* own collection: Export · Delete as quiet links at the bottom */
+.coll-bottom {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 4px;
+  margin: 0 -22px;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+}
+.coll-bottom .coll-link {
+  padding: 6px 4px;
+}
+.coll-dot {
+  color: var(--muted);
+}
+/* Starter-Set window (v2.101): fold-out line like the Pronomen table (▸ → ▾), main button always at the bottom */
+.coll-fold {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: -8px 0 14px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: 600 15px var(--font);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.coll-fold::before {
+  content: "▸";
+  display: inline-block;
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+.coll-fold.open::before {
+  transform: rotate(90deg);
+}
+.coll-fold:active {
+  filter: brightness(0.94);
+}
+.coll-bottom-main {
+  padding-top: 14px;
+}
+/* rename */
+.coll-name-input {
+  width: 100%;
+  height: 44px;
+  margin: 4px 0 0;
+  padding: 0 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: 600 18px var(--font);
+  outline: none;
+}
+
+/* word form (add / edit one word, v2.88): typing-field look, 16px text (no iPhone zoom). Word chips: tap = hide
+   this word; a chosen chip uses the main-button colours. Error line in the palette red. */
+.coll-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  margin: 0 -22px;
+  padding: 0 22px 4px;
+  -webkit-overflow-scrolling: touch;
+}
+.coll-label {
+  display: block;
+  margin: 16px 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.coll-label .opt {
+  font-weight: 400;
+}
+.coll-field {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: 400 16px/1.35 var(--font);
+  outline: none;
+  resize: none;
+}
+.coll-field:focus {
+  border-color: color-mix(in srgb, var(--text) 28%, transparent);
+}
+.coll-field::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+textarea.coll-field {
+  min-height: 68px;
+}
+.coll-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.coll-chips:empty {
+  display: none;
+}
+.coll-chip {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--sec-text);
+  border-radius: 12px;
+  padding: 7px 11px;
+  font: 400 15px/1.2 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-chip.on {
+  background: var(--main-bg);
+  color: var(--main-text);
+  border-color: transparent;
+  font-weight: 600;
+}
+.coll-preview {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: var(--sec-text);
+  min-height: 20px;
+}
+.coll-preview .blank {
+  width: 1.6em;
+}
+.coll-hint {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.coll-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0 4px;
+  font-size: 16px;
+  color: var(--sec-text);
+  cursor: pointer;
+}
+.coll-switch input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--hairline);
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.coll-switch input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s;
+}
+.coll-switch input:checked {
+  background: var(--accent); /* green = „enabled“ outside the exercises (Settings rule) */
+}
+.coll-switch input:checked::after {
+  transform: translateX(20px);
+}
+.coll-error {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--error);
+}
+.coll-error:empty {
+  display: none;
+}
+.coll-form-buttons {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding-top: 12px;
+}
+.coll-scroll .coll-form-buttons {
+  padding-top: 18px; /* Save at the end of the scrolling form */
+  padding-bottom: 6px;
+}
+.coll-form-buttons .coll-link {
+  align-self: center;
+  padding: 10px 12px;
+}
+/* import (v2.90): paste box + the format block for the AI */
+textarea.coll-paste {
+  min-height: 150px;
+  font:
+    400 13px/1.4 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+.coll-pre {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    400 12px/1.45 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  color: var(--sec-text);
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* ===== PHONES ===== */
+@media (max-width: 699px) {
+  .app {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .stage {
+    padding-top: 34px;
+  }
+  #question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  #question .topZone {
+    order: 1;
+  }
+  #question #almostHint {
+    order: 2;
+    width: 100%;
+  }
+  #question .inputbox {
+    order: 3;
+    margin-top: 28px;
+  }
+  #question .check {
+    order: 4;
+    display: none;
+  }
+  #question #keyboardMount {
+    order: 5;
+    width: 100%;
+  }
+  .feedbackShell {
+    touch-action: manipulation;
+    will-change: transform, opacity;
+  }
+  .feedback .topZone {
+    width: 100%;
+  }
+  .sentence,
+  .answerSentence {
+    font-size: 28px;
+  }
+  .topZone .sentence,
+  .topZone .answerSentence {
+    min-height: 2.56em;
+  }
+  .translation {
+    font-size: 16px;
+  }
+  .answerTranslation {
+    font-size: 17px;
+  }
+  .speakTop {
+    width: 1.25em;
+  }
+  .diffBlock {
+    margin-top: 22px;
+    font-size: 28px;
+  }
+  .detail {
+    padding-top: 12px;
+  }
+  .grammar {
+    margin-top: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inputbox:placeholder-shown,
+  .inputbox.nudge {
+    animation: none;
+  }
+  #almostHint {
+    transition: none;
+  }
+  .coll-modal,
+  .coll-card {
+    transition: none !important;
+  }
+}
