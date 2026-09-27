@@ -347,7 +347,8 @@ document.querySelectorAll("[data-app]").forEach(button => {
 
 /* ===== Open / close an exercise (Home 5.86, tuned up to 5.89) =====
    Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
-   animation*). The exercise layer (page colour) fades in over Home; the exercise's content fades in and settles
+   animation*). At the tap Home steps back (shrinks to 97 %) while the exercise layer (page colour) fades in over it —
+   the page loads during that movement (5.91). The exercise's content then fades in and settles
    from 94 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
    the data files, like the page appeared before 5.84; Wortschatz waits for its scripts). The exercise pages use the
    same page colour as Home, so only the content seems to move.
@@ -360,12 +361,12 @@ document.querySelectorAll("[data-app]").forEach(button => {
    The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
    Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
-const LAYER_FADE_MS = 150;
+const LAYER_FADE_MS = 220;
 const ZOOM_IN_MS = 280;
 const CLOSE_FADE_MS = 240;
 const CLOSE_SHRINK_TO = 0.97;
-const HOME_SETTLE_MS = 380;
-const HOME_SETTLE_FROM = 0.97;
+const HOME_STEP_MS = 380; // Home steps back (opening) / grows back (closing) — same size, same speed
+const HOME_STEP_SCALE = 0.97;
 const UNLOAD_AFTER_MS = 500;
 const EASE_OUT = "cubic-bezier(0.2, 0.8, 0.2, 1)";
 const homeArea = document.querySelector(".home-viewport"); // greeting + tiles (the fixed header can't be scaled)
@@ -444,9 +445,19 @@ function openApp(tile) {
   if (!zoom) return;
 
   shell.animate([{ opacity: 0 }, { opacity: 1 }], { duration: LAYER_FADE_MS, easing: "ease-out" });
+  // Home steps back under the fading-in layer (the reverse of closing, where it grows back from 97 %)
+  const box = homeArea.getBoundingClientRect();
+  homeArea.style.transformOrigin = `${innerWidth / 2 - box.left}px ${innerHeight / 2 - box.top}px`;
+  const homeStepBack = homeArea.animate([{ transform: "scale(1)" }, { transform: `scale(${HOME_STEP_SCALE})` }], {
+    duration: HOME_STEP_MS,
+    easing: EASE_OUT,
+    fill: "forwards"
+  });
   const earliest = performance.now() + LAYER_FADE_MS * 0.6; // content starts once the layer has (almost) covered Home
   let started = false;
   const settled = () => {
+    homeStepBack.cancel(); // Home is covered now; back to normal size underneath
+    homeArea.style.transformOrigin = "";
     animBusy = false;
     scheduleBack();
   };
@@ -505,8 +516,8 @@ function closeApp() {
       fill: "forwards"
     })
   ];
-  const settle = homeArea.animate([{ transform: `scale(${HOME_SETTLE_FROM})` }, { transform: "scale(1)" }], {
-    duration: HOME_SETTLE_MS,
+  const settle = homeArea.animate([{ transform: `scale(${HOME_STEP_SCALE})` }, { transform: "scale(1)" }], {
+    duration: HOME_STEP_MS,
     easing: "ease" // softer than EASE_OUT: still growing while Home comes through the fading exercise screen
   });
   settle.onfinish = settle.oncancel = () => (homeArea.style.transformOrigin = "");

@@ -1666,8 +1666,8 @@ header h1 {
   background: var(--bg);
 }
 
-/* Home button (Home 5.84): round, like the phrase screen's ‹ button — 44px circle, 10% outline, blurred see-through
-   background, house in the text colour, shared press effect. Always goes straight to Home.
+/* Home button (Home 5.84): round, like the phrase screen's ‹ button — 44px circle, 10% outline, solid page-colour
+   background (5.91; was blurred see-through), house in the text colour, shared press effect. Always goes straight to Home.
    JS places it (see home.js → Home button): in the bottom row on the version number's line — centred on start /
    chapter / summary screens, bottom left during a round (.is-corner until that line is known); small (32px) top left
    or in the top bar on short screens (.is-small).
@@ -1685,10 +1685,8 @@ header h1 {
   justify-content: center;
   border: 1px solid var(--hairline);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  background: var(--bg); /* solid: it always sits on the plain page colour (a blur was drawn late by Safari → blink) */
   color: var(--text);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -1726,9 +1724,10 @@ header h1 {
   filter: brightness(0.94);
 }
 
+/* while the exercise opens / closes: invisible, but still drawn — so it only has to fade in (5.91) */
 .app-shell.is-animating .home-back {
   opacity: 0;
-  visibility: hidden;
+  pointer-events: none;
   transition: none;
 }
 
