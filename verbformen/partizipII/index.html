@@ -1,736 +1,99 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<script>
-(function(){
-  if(localStorage.getItem("deutschThemeV1")==="light"){
-    document.documentElement.setAttribute("data-theme","light");
-  }
-})();
-</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Partizip II.</title>
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Verbformen">
-<style>
-*{box-sizing:border-box}
-:root{
-  /* ===== PALETTE (dark, default) ===== */
-  --bg:#1b1b1d;
-  --cream:#f2f0ed;
-  --mint:#5bc8a4;
-  --coral:#ff7770;
-
-  /* ===== TEXT ===== */
-  --muted:#8f8f94;
-  --muted-2:#8f8f94;
-  --secondary-text:#8f8f94;
-  --dim-text:#8f8f94;
-  --example-text:#c8c7c4;
-  --brand-text:#a5a19a;
-  --tertiary-text:#c8c7c4;
-  --placeholder-text:#48494a;
-  --vowel-text:#8f8f94;
-  --score-text:#f2f0ed;
-  --pattern-text:#c7c3bc;
-
-  /* ===== SURFACES ===== */
-  --track:#292a2c;
-  --surface:#1c1d1f;
-  --surface-2:#202124;
-  --surface-3:#222326;
-  --surface-4:#252527;
-
-  /* ===== LINES / BORDERS ===== */
-  --line:rgba(255,255,255,.08);
-  --line-2:rgba(255,255,255,.07);
-  --subtle-fill:rgba(255,255,255,.025);
-  --border:#343638;
-  --border-2:#36383a;
-  --border-3:#37383a;
-  --border-hover:#555;
-  --pattern-btn-line:rgba(255,255,255,.06);
-  --modal-border:rgba(255,255,255,.10);
-
-  /* ===== CTA BUTTONS (Check / Home) ===== */
-  --cta-bg:#ece6dc;
-  --cta-text:#1b1c1e;
-
-  /* ===== "AGAIN" BUTTON ===== */
-  --again-bg:rgba(255,255,255,.07);
-  --again-text:rgba(238,231,220,.42);
-
-  /* ===== MODAL ===== */
-  --modal-scrim:rgba(0,0,0,.28);
-  --close-icon:#fff;
-
-  /* ===== MISC ===== */
-  --version-text:rgba(255,255,255,.22);
-}
-
-[data-theme="light"]{
-  --bg:#f6f4f1;
-  --cream:#242426;
-  --mint:#3fa68a;
-  --coral:#e95e66;
-
-  --muted:#727278;
-  --muted-2:#727278;
-  --secondary-text:#727278;
-  --dim-text:#727278;
-  --example-text:#727278;
-  --brand-text:#8f8b83;
-  --tertiary-text:#727278;
-  --placeholder-text:#b9b9b9;
-  --vowel-text:#727278;
-  --score-text:#242426;
-  --pattern-text:#4a4844;
-
-  --track:#e4e1da;
-  --surface:#fff;
-  --surface-2:#fff;
-  --surface-3:#fff;
-  --surface-4:#fff;
-
-  --line:rgba(0,0,0,.10);
-  --line-2:rgba(0,0,0,.09);
-  --subtle-fill:rgba(0,0,0,.035);
-  --border:#ddd8ce;
-  --border-2:#ddd8ce;
-  --border-3:#ddd8ce;
-  --border-hover:#bbb;
-  --pattern-btn-line:rgba(0,0,0,.08);
-  --modal-border:rgba(0,0,0,.10);
-
-  --cta-bg:#242426;
-  --cta-text:#f5f5f7;
-
-  --again-bg:rgba(0,0,0,.05);
-  --again-text:rgba(36,36,38,.55);
-
-  --modal-scrim:rgba(0,0,0,.18);
-  --close-icon:#242426;
-
-  --version-text:rgba(37,37,40,.30);
-}
-
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{height:100vh;height:100dvh;overflow:hidden;padding:0}
-.app{position:fixed;inset:0;width:min(100%,480px);height:100vh;height:100dvh;margin:0 auto;padding:24px;padding-top:max(24px,calc(env(safe-area-inset-top) + 12px));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.top{display:grid;grid-template-columns:1fr auto;align-items:center;color:var(--muted);font-size:13px;position:sticky;top:0;z-index:50;background:var(--bg);padding:4px 0 10px;margin-bottom:0}
-.brand{font-family:Georgia,serif;font-size:20px;color:var(--brand-text);letter-spacing:-.5px}.top #count{text-align:right}
-.progress{height:3px;background:var(--track);border-radius:9px;overflow:hidden;margin-bottom:32px;position:sticky;top:36px;z-index:50}
-.progress>i{display:block;height:100%;background:var(--muted);border-radius:9px}
-.card{position:relative;text-align:center;padding:30px 20px 26px;isolation:isolate}
-.card:before{content:"";position:absolute;z-index:-1;inset:-100px -30px;background:radial-gradient(ellipse at 50% 53%,color-mix(in srgb,var(--mint) 9%,transparent),transparent 63%);opacity:.35}
-.verb{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(58px,17vw,84px);letter-spacing:-3px;line-height:1;margin-bottom:13px}
-.translation{color:var(--muted);font-size:16px;margin-bottom:44px}
-.answer{width:100%;height:66px;border:1px solid var(--border);border-radius:18px;background:var(--surface);color:var(--cream);font-family:Georgia,serif;font-size:29px;text-align:center;outline:none;padding:0 18px}
-.answer:focus{border-color:color-mix(in srgb,var(--mint) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--mint) 8%,transparent)}
-.answer::placeholder{color:var(--placeholder-text)}
-.check,.next{margin:20px auto 0}
-.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
-.again{background:var(--again-bg);color:var(--again-text)}
-.home-back{margin-top:10px;background:var(--cta-bg);color:var(--cta-text)}
-.finish-actions button:active{transform:scale(.99)}
-.check{margin-top:14px;width:100%;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650}
-.check:active,.next:active,.choice:active,.again:active{transform:scale(.99)}
-.result{display:none;position:relative;margin-top:28px;border-top:1px solid var(--line);padding:30px 26px 20px;text-align:left;isolation:isolate}
-.result.show{display:block}
-.result:before{content:"";position:absolute;z-index:2;top:-1px;left:50%;width:0;height:2px;background:var(--line);animation:spread .42s ease-out forwards}
-.result.good:before{background:var(--mint);box-shadow:0 0 18px color-mix(in srgb,var(--mint) 70%,transparent)}
-.result.bad:before{background:var(--coral);box-shadow:0 0 18px color-mix(in srgb,var(--coral) 70%,transparent)}
-@keyframes spread{to{left:0;width:100%}}
-.result.good{border-top-color:var(--mint);box-shadow:0 -24px 65px -32px color-mix(in srgb,var(--mint) 80%,transparent);animation:resultGlowGood .42s ease-out forwards}
-.result.bad{border-top-color:var(--coral);box-shadow:0 -24px 70px -30px color-mix(in srgb,var(--coral) 85%,transparent);animation:resultGlowBad .42s ease-out forwards}
-@keyframes resultGlowGood{from{box-shadow:0 -24px 65px -32px color-mix(in srgb,var(--mint) 0%,transparent)}to{box-shadow:0 -24px 65px -32px color-mix(in srgb,var(--mint) 80%,transparent)}}
-@keyframes resultGlowBad{from{box-shadow:0 -24px 70px -30px color-mix(in srgb,var(--coral) 0%,transparent)}to{box-shadow:0 -24px 70px -30px color-mix(in srgb,var(--coral) 85%,transparent)}}
-.state{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
-.good .state{color:var(--mint)}.bad .state{color:var(--coral)}
-.forms{font-family:Georgia,serif;font-size:26px;line-height:1.35;margin-bottom:10px}
-.meta{color:var(--dim-text);font-size:15px;line-height:1.55}.example{margin-top:15px;color:var(--example-text);font-size:15px;font-style:italic}
-.next{display:none;margin-top:18px;width:100%;height:56px;border:1px solid var(--border-3);border-radius:17px;background:var(--surface-3);color:var(--cream);font-size:16px;font-weight:600}
-.next.show{display:block}
-.start,.finish{text-align:center;padding:36px 20px}
-.title{font-family:Georgia,serif;font-size:clamp(54px,15vw,78px);font-weight:400;letter-spacing:-3px;margin:0 0 12px}
-.subtitle{color:var(--muted);font-size:16px;margin:0 0 28px}
-.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.choice{height:62px;border:1px solid var(--border-2);border-radius:18px;background:var(--surface-2);color:var(--cream);font-size:20px}
-.choice:hover{border-color:var(--border-hover)}
-.finish h2{font-family:Georgia,serif;font-size:48px;font-weight:400;margin:0 0 12px}
-.finish p{color:var(--muted);margin:0 0 28px;line-height:1.5}
-.hidden{display:none}
-
-/* Stable top-anchored layout: keyboard/result changes never re-center the app. */
-@media(max-width:600px){
- .app{padding-left:18px;padding-right:18px;padding-top:max(18px,calc(env(safe-area-inset-top) + 10px))}
- .card{padding-top:14px}
-}
-
-@media(max-width:600px){
- .result{margin-top:22px;padding:22px 24px 18px}
- .state{font-size:10px;margin-bottom:9px}
- .forms{font-size:22px;line-height:1.28;margin-bottom:7px}
- .meta{font-size:13px;line-height:1.4}
- .example{margin-top:10px;font-size:13px;line-height:1.4}
- .next{margin-top:13px;height:52px}
-}
-.version-tag{position:fixed;right:8px;bottom:max(6px,env(safe-area-inset-bottom));z-index:9999;font-size:9px;letter-spacing:.08em;color:var(--version-text);pointer-events:none}
-.result-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}
-.result-head .state{margin-bottom:0}
-.vowel-pattern{color:var(--vowel-text);font-size:13px;letter-spacing:.12em;text-transform:lowercase;white-space:nowrap}
-@media(max-width:600px){
- .result-head{margin-bottom:9px}
- .vowel-pattern{font-size:11px;letter-spacing:.10em}
-}
-
-@media(max-width:600px){
- .app::before{content:"";position:fixed;z-index:40;top:0;left:50%;transform:translateX(-50%);width:min(100%,480px);height:max(58px,calc(env(safe-area-inset-top) + 42px));background:var(--bg);pointer-events:none}
- .top{position:sticky;top:0;z-index:50}
- .progress{position:sticky;z-index:50}
- html,body{overscroll-behavior-y:none}
-}
-
-@media(max-width:900px){
- .key-row-tools .key-backspace{flex:2.5 1 0}
-}
-
-@media(max-width:900px){
- .key-row-tools{padding-left:17%;padding-right:0;width:100%;box-sizing:border-box;justify-content:flex-start}
- .key-row-tools .key-backspace{flex:0 0 30%;margin-left:auto;border-top-right-radius:12px;border-bottom-right-radius:12px}
-}
-
-.final-score{margin:18px 0 12px;color:var(--cream);font:500 34px/1.05 Georgia,serif;letter-spacing:-.03em}
-
-.pattern-table-btn{border:1px solid var(--pattern-btn-line);background:transparent;color:var(--tertiary-text);border-radius:12px;font-size:11px;font-weight:400;padding:8px 11px;cursor:pointer}
-.start .pattern-table-btn{margin-top:10px;font-size:14px;padding:11px 14px}
-.pattern-table-btn:active{transform:scale(.99)}
-
-.pattern-modal{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));z-index:100;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
-.pattern-modal.open{opacity:1;visibility:visible;background:var(--modal-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
-.pattern-modal-card{width:min(560px,100%);max-height:82vh;overflow:hidden;background:var(--surface-4);border:1px solid var(--modal-border);border-radius:24px;padding:4px 18px 14px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
-.pattern-modal.open .pattern-modal-card{opacity:1;transform:scale(1);filter:blur(0)}
-.pattern-modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}
-.pattern-modal-head h2{margin:0;font-family:Georgia,serif;font-size:20px;font-weight:400}
-.pattern-close{border:0;background:transparent;color:var(--close-icon);font-size:28px;line-height:1;padding:8px;cursor:pointer}
-#patternModalBody{overflow:auto;min-height:0;padding-top:0}
-.pattern-intro{color:var(--dim-text);font-size:11px;line-height:1.45;margin:6px 0 8px}
-.pattern-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 10px;margin-top:8px}
-.pattern-cell{display:flex;align-items:center;gap:5px;min-height:40px;padding:8px 9px;border:1px solid var(--line-2);border-radius:11px;background:var(--subtle-fill)}
-.pattern-source{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:15px;font-weight:650;color:var(--pattern-text);line-height:1}
-.pattern-options{display:flex;align-items:center;flex-wrap:wrap;gap:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:15px;color:var(--pattern-text);line-height:1}
-.pattern-options .arrow{color:var(--muted);font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;margin:0 3px}
-.in-session-pattern{margin:20px auto 4px;display:flex;justify-content:center;position:relative;z-index:60}
-@media(max-width:600px){
-  .pattern-modal{padding:10px}
-  .pattern-modal-card{max-height:84vh;padding:3px 12px 12px}
-  .pattern-modal-head{padding:2px 2px 3px}
-  .pattern-modal-head h2{font-size:19px}
-  .pattern-intro{font-size:10px;margin:3px 0 7px}
-  .pattern-grid{gap:6px 7px;margin-top:5px}
-  .pattern-cell{gap:4px;min-height:34px;padding:7px 7px;border-radius:9px}
-  .pattern-source{font-size:14px}
-  .pattern-options{font-size:14px}
-  .pattern-options .arrow{font-size:11px;margin:0 2px}
-}
-@media(prefers-reduced-motion:reduce){
-  .pattern-modal,.pattern-modal-card{transition:none!important}
-}
-
-/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
-   Same colours, button shape, press effect, table button and version mark in every exercise.
-   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
-:root{
-  --start-btn-bg:#2a2a2d;
-  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
-  --start-line:rgba(255,255,255,.10);
-  --start-table-text:#c8c7c4;
-  --start-version:rgba(255,255,255,.24);
-}
-[data-theme="light"]{
-  --start-btn-bg:#fff;
-  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
-  --start-line:rgba(0,0,0,.10);
-  --start-table-text:#55565b;
-  --start-version:rgba(36,36,38,.34);
-}
-#start .choices{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
-#start .choice{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
-  background:var(--start-btn-bg);color:var(--cream);box-shadow:var(--start-btn-shadow);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
-  transition:transform .12s ease,filter .12s ease}
-#start .choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
-#start .choice:active{transform:scale(.97);filter:brightness(.94)}
-#start .pattern-table-btn{margin-top:28px;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
-  border-radius:17px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#start .pattern-table-btn:active{transform:scale(.97);filter:brightness(.94)}
-.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
-
-/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
-   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
-:root{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(242,240,237,.55);
-  --end-again-line:rgba(255,255,255,.10);
-  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
-  --end-main-text:#1b1b1d;
-}
-[data-theme="light"]{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(36,36,38,.55);
-  --end-again-line:rgba(0,0,0,.10);
-  --end-main-bg:#242426;
-  --end-main-text:#f6f4f1;
-}
-#finish .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
-#finish #again,#finish #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
-#finish #again{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
-#finish #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
-#finish #again:active,#finish #homeBack:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
-   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
-   Green stays reserved for "correct". */
-:root{--bar-track:rgba(255,255,255,.10)}
-[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
-#study .top{font-size:14px}
-#study .brand{color:var(--muted)}
-#study .progress{background:var(--bar-track)}
-#study .progress>i{background:var(--muted)}
-
-/* Question text sizes (Design Police): single word 56px on phones */
-@media(max-width:699px){#verb{font-size:56px}}
-
-/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
-   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
-   typed text 24px in the group's font. Never green (green = correct).
-   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
-:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
-@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
-@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
-#answer{height:58px;min-height:58px;border:1px solid var(--field-line);border-radius:18px;background-color:var(--field-bg);
-  box-shadow:none;outline:none;padding:0 17px;font:400 24px Georgia,"Times New Roman",serif;color:var(--cream)}
-#answer:focus{border-color:var(--field-line);box-shadow:none}
-#answer:placeholder-shown{caret-color:transparent;background-image:linear-gradient(var(--cream),var(--cream));background-repeat:no-repeat;
-  background-position:center;background-size:2px 28px;animation:fieldCaretBg 1.1s steps(1) infinite}
-@media(prefers-reduced-motion:reduce){#answer:placeholder-shown{animation:none}}
-
-/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
-   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
-   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
-:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
-#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--cream);
-  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
-#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
-#next:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
-   (centred, 28px above the bottom edge).
-   (Design Police 2026-09-25) ===== */
-#study .in-session-pattern{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
-#study .in-session-pattern .pattern-table-btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
-  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#study .in-session-pattern .pattern-table-btn:hover{background:var(--bg);transform:none}
-#study .in-session-pattern .pattern-table-btn:active{transform:scale(.97);filter:brightness(.94)}
-
-/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
-body:has(#study:not(.hidden)) .version-mark{display:none}
-
-/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
-   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
-#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
-  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
-#check:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
-   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
-   Window: palette card colour, shared outline, 24px corners. */
-:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
-.pattern-modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
-.pattern-modal.open{background:var(--overlay-scrim)}
-/* the version number sits outside the app layer, so the blur can't reach it: fade it out with the table instead */
-.version-mark{transition:opacity .18s ease}
-body:has(.pattern-modal.open) .version-mark{opacity:0}
-.pattern-modal-card{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
-/* ===== START SCREEN · description "Worum geht's?" (2026-09-26, same as Artikel / Pronomen / Modalverben) =====
-   Width = the 10/20/30 row (3 × 96px + 2 × 12px = 312px).
-   Headline German, text in the user's language (Settings → Translations), fixed above the Home button / version mark.
-   Palette grey text (the darkest text colour) so it blends in and doesn't compete with the buttons. */
-.start-about{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 64px);margin:0 auto;padding:0;width:312px;max-width:calc(100% - 36px);text-align:center;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;z-index:4}
-.start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
-.start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-body:has(#start.hidden) .start-about{display:none}
-/* The table's blur can't reach fixed elements here → fade out like the version mark */
-.start-about{transition:opacity .18s ease}
-body:has(.pattern-modal.open) .start-about{opacity:0}
-</style>
-</head>
-<body>
-<main class="app" id="appRoot">
- <section id="start" class="start">
-  <h1 class="title">Partizip II.</h1>
-  <p class="subtitle">Wie viele Verben?</p>
-  <div class="choices">
-   <button class="choice" data-size="10">10</button>
-   <button class="choice" data-size="20">20</button>
-   <button class="choice" data-size="30">30</button>
-  </div>
-  <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
- </section>
-
- <section id="study" class="hidden">
-  <div class="top"><span class="brand">Partizip II.</span><span id="count"></span></div>
-  <div class="progress"><i id="bar"></i></div>
-  <section class="card">
-   <div class="verb" id="verb"></div>
-   <div class="translation" id="translation"></div>
-   <input id="answer" class="answer" placeholder=" " aria-label="Fehlende Form" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done">
-   <button class="check" id="check">Prüfen</button>
-   <div class="result" id="result">
-    <div class="result-head"><div class="state" id="state"></div><div class="vowel-pattern" id="vowelPattern"></div></div>
-    <div class="forms" id="forms"></div>
-    <div class="meta" id="meta"></div>
-    <div class="example" id="example"></div>
-   </div>
-   <button class="next" id="next">Weiter</button>
-  </section>
-  <div id="keyboardMount"></div>
-  <div class="in-session-pattern"><button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button></div>
- </section>
-
- <section id="finish" class="finish hidden">
-  <h2>Fertig.</h2>
-  <div id="finalScore" class="final-score"></div>
-  <p id="summary"></p>
-  <div class="finish-actions">
-   <button class="again" id="again">Noch eine Runde</button>
-   <button class="home-back" id="homeBack">Zur Startseite</button>
-  </div>
- </section>
- <div id="patternModal" class="pattern-modal" aria-hidden="true">
-  <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
-   <div class="pattern-modal-head">
-    <h2 id="patternModalTitle">Partizip II · Vokalwechsel</h2>
-    <button class="pattern-close" id="patternClose" aria-label="Schließen">×</button>
-   </div>
-   <div id="patternModalBody"></div>
-  </div>
- </div>
-</main>
-<div class="start-about" id="startAbout">
-  <h2>Worum geht's?</h2>
-  <p class="about-de" id="aboutText"></p>
-</div>
-<div class="version-mark">v54</div>
-
-<script src="../../components/deutsch-translation-v1.js?v=2"></script>
-<script>
-// Start-screen description: shown in the user's language so it is surely understood (like a hint).
-const START_ABOUT={text:{
-  en:"Helps you learn the Partizip II of the most common irregular verbs - with tips and tricks along the way.",
-  ru:"Помогает запомнить Partizip II самых частых неправильных глаголов - с полезными подсказками."}};
-document.getElementById("aboutText").textContent=getTranslation(START_ABOUT,"text");
-</script>
-<script src="verbs.js?v=4"></script>
-<script src="../../components/deutsch-progress-v1.js"></script>
-<script>
-const STORAGE_KEY="verbformenDifficultyV1";
-let difficulty={};
-try{difficulty=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch(e){difficulty={}}
-if(!difficulty||typeof difficulty!=="object")difficulty={};
-
-/* Scoring format 2 (Documentation/PROGRESS_TRACKER.md): common scale 1–4, wrong +1, right −0.5.
-   Format 1 (old): 1–6, wrong +1.5. Old data has no "__format" marker → converted ONCE:
-   new = 1 + (old − 1) × 3/5, rounded to 0.5. The key name stays the same, so an old backup
-   restored later is simply converted again. */
-const DIFFICULTY_FORMAT=2;
-if(difficulty.__format!==DIFFICULTY_FORMAT){
- for(const k in difficulty){
-   if(k==="__format")continue;
-   const old=Number(difficulty[k]);
-   if(!Number.isFinite(old)){delete difficulty[k];continue}
-   const scaled=1+(Math.min(6,Math.max(1,old))-1)*3/5;
-   difficulty[k]=Math.min(4,Math.max(1,Math.round(scaled*2)/2));
- }
- difficulty.__format=DIFFICULTY_FORMAT;
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty))}catch(e){}
-}
-
-function recordVerbformenAnswer(){
- window.parent.postMessage({
-   type:"deutsch:exerciseAnswer",
-   exercise:"partizipII"
- }, "*");
-}
-
-let deck=[],index=0,sessionSize=10,checked=false,correctCount=0;
-
-const $=id=>document.getElementById(id);
-const isTouchDevice = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-if(isTouchDevice){
-  $("answer").readOnly=true;
-  $("answer").setAttribute("inputmode","none");
-  $("answer").setAttribute("readonly","");
-  $("check").style.display="none";
-}
-// Partizip-II exercise: modal verbs stay in verbs.js for other exercises,
-// but are excluded from this exercise.
-const EXERCISE_VERBS=VERBS.filter(v=>!v.modal);
-const key=v=>v.infinitive.toLowerCase();
-
-// Progress tracking: one item per verb. Guarded: the exercise keeps working if the helper is missing.
-const PROGRESS_ID="partizipII";
-const hasProgress=()=>typeof window.DeutschProgress==="object";
-if(hasProgress())DeutschProgress.init(PROGRESS_ID,EXERCISE_VERBS.map(v=>({key:key(v),label:v.infinitive+" → "+v.participle})));
-
-function saveDifficulty(){
- localStorage.setItem(STORAGE_KEY,JSON.stringify(difficulty));
-}
-
-function weightFor(v){
- return Math.max(1,Number(difficulty[key(v)]||1));
-}
-
-/* Weighted sampling WITHOUT replacement:
-   difficult verbs are more likely to enter a session,
-   but no verb can occur twice in that session. */
-function buildDeck(size){
- const ranked=EXERCISE_VERBS.map(v=>{
-   const weight=weightFor(v);
-   const randomKey=-Math.log(Math.max(Math.random(),1e-12))/weight;
-   return {v,randomKey};
- }).sort((a,b)=>a.randomKey-b.randomKey);
-
- return ranked.slice(0,Math.min(size,EXERCISE_VERBS.length)).map(x=>x.v);
-}
-
-function startSession(size){
- sessionSize=Math.min(size,EXERCISE_VERBS.length);
- deck=buildDeck(sessionSize);
- index=0;correctCount=0;
- $("start").classList.add("hidden");
- $("finish").classList.add("hidden");
- $("study").classList.remove("hidden");
- render();
-}
-
-function syncKeyboardAndFocus(){
-  if(window.deutschKeyboardReady && !checked){
-    $("keyboard").classList.add("show");
-  }
-  if(!isTouchDevice){
-    setTimeout(()=>{
-      try{$("answer").focus({preventScroll:true})}catch(e){$("answer").focus()}
-    },80);
-  }
-}
-
-function render(){
- const v=deck[index];checked=false;
- $("verb").textContent=v.infinitive;
- $("translation").textContent=getTranslation(v,"translation");
- $("answer").value="";
- $("result").className="result";
- $("vowelPattern").textContent="";
- $("next").className="next";
- $("check").style.display=isTouchDevice?"none":"";
- $("count").textContent=(index+1)+" / "+deck.length;
- $("bar").style.width=((index+1)/deck.length*100)+"%";
- $("answer").disabled=false;
- syncKeyboardAndFocus();
-}
-
-function updateDifficulty(v,correct){
- const k=key(v);
- let d=weightFor(v);
- if(correct){
-   d=Math.max(1,d-0.5);
- }else{
-   d=Math.min(4,d+1);
- }
- difficulty[k]=Number(d.toFixed(2));
- saveDifficulty();
-}
-
-function partizipPattern(pattern){
- const parts=String(pattern||"").split(/\s*-\s*/);
- if(parts.length>=3) return parts[0]+" → "+parts[2];
- return String(pattern||"");
-}
-
-function shouldShowPreterite(v){
- return v.infinitive==="sein" || v.infinitive==="haben";
-}
-
-function checkAnswer(){
- if(checked){next();return}
- const v=deck[index];
- const a=$("answer").value.trim().toLowerCase();
- if(!a)return;
-
- checked=true;
-  recordVerbformenAnswer();
- const ok=a===v.participle.toLowerCase();
- if(ok)correctCount++;
- updateDifficulty(v,ok);
- if(hasProgress())DeutschProgress.record(PROGRESS_ID,key(v),ok);
-
- $("result").className="result show "+(ok?"good":"bad");
- if(window.deutschKeyboardReady) $("keyboard").classList.remove("show");
- $("state").textContent=ok?"Richtig":"Nicht ganz";
- $("vowelPattern").textContent=partizipPattern(v.pattern);
- $("forms").textContent=shouldShowPreterite(v)
-   ? v.infinitive+" → "+v.preterite+" → "+v.participle
-   : v.infinitive+" → "+v.participle;
- $("meta").innerHTML="Perfekt: <b>"+v.auxiliary+" "+v.participle+"</b>";
- $("example").textContent=v.example;
- $("answer").disabled=true;
- $("answer").blur();
- $("check").style.display="none";
- $("next").className="next show";
-}
-
-function next(){
- if(index+1>=deck.length){finishSession();return}
- index++;
- render();
-}
-
-function finishSession(){
- $("study").classList.add("hidden");
- $("finish").classList.remove("hidden");
- $("finalScore").textContent=correctCount+" / "+deck.length;
- $("summary").textContent="Was schwierig war, kommt öfter wieder.";
-}
-
-document.querySelectorAll(".choice").forEach(b=>b.addEventListener("click",()=>startSession(Number(b.dataset.size))));
-$("check").onclick=checkAnswer;
-$("next").onclick=next;
-$("again").onclick=()=>{
- $("finish").classList.add("hidden");
- $("start").classList.remove("hidden");
-};
-function goBackToHome(){
-  try{
-    if(window.parent && window.parent !== window){
-      if(typeof window.parent.closeApp === 'function'){
-        window.parent.closeApp();
-        return;
-      }
-      const parentDoc=window.parent.document;
-      const shell=parentDoc.getElementById('appShell');
-      const frame=parentDoc.getElementById('appFrame');
-      if(shell && frame){
-        shell.classList.remove('open');
-        shell.setAttribute('aria-hidden','true');
-        parentDoc.documentElement.classList.remove('app-open');
-        frame.src='about:blank';
-        return;
-      }
-    }
-  }catch(e){}
-  window.parent.postMessage({type:'deutsch:home'}, '*');
-}
-$("homeBack").onclick=goBackToHome;
-
-document.addEventListener("keydown", e => {
- if(e.key === "Enter"){
-   e.preventDefault();
-   if(checked){next();return}
-   if(document.activeElement === $("answer")) checkAnswer();
- }
- if(e.key === "Backspace" && isTouchDevice){
-   e.preventDefault();
-   $("answer").value=$("answer").value.slice(0,-1);
- }
-});
-
-document.addEventListener("deutsch-keyboard-input", e => {
- const k=e.detail?.key||"";
- if($("study").classList.contains("hidden") || checked) return;
- if(k==="BACK"){
-   $("answer").value=$("answer").value.slice(0,-1);
-   return;
- }
- if(k==="OK"){
-   checkAnswer();
-   return;
- }
- if(k==="SPACE"){
-   if($("answer").value.length && !$("answer").value.endsWith(" ")) $("answer").value+=" ";
-   return;
- }
- if(k) $("answer").value+=k;
-});
-
-const patternReference=`<p class="pattern-intro">Infinitiv → Partizip II · Vokalwechsel in dieser Übung</p><div class="pattern-grid">
-<div class="pattern-cell"><div class="pattern-source">a</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ä</div><div class="pattern-options"><span class="arrow">→</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">au</div><div class="pattern-options"><span class="arrow">→</span><span>au</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">o</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ö</div><div class="pattern-options"><span class="arrow">→</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">u</div><div class="pattern-options"><span class="arrow">→</span><span>u</span><span class="arrow">·</span><span>a</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ü</div><div class="pattern-options"><span class="arrow">→</span><span>ü</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">e</div><div class="pattern-options"><span class="arrow">→</span><span>e</span><span class="arrow">·</span><span>a</span><span class="arrow">·</span><span>o</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ie</div><div class="pattern-options"><span class="arrow">→</span><span>ie</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">ei</div><div class="pattern-options"><span class="arrow">→</span><span>ei</span><span class="arrow">·</span><span>ie</span><span class="arrow">·</span><span>i</span><span class="arrow">·</span><span>e</span></div></div>
-<div class="pattern-cell"><div class="pattern-source">i</div><div class="pattern-options"><span class="arrow">→</span><span>i</span><span class="arrow">·</span><span>u</span><span class="arrow">·</span><span>o</span><span class="arrow">·</span><span>e</span><span class="arrow">·</span><span>a</span></div></div>
-</div>`;
-
-function openPatternTable(){
-  $("patternModalBody").innerHTML=patternReference;
-  const modal=$("patternModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-}
-function closePatternTable(){
-  const modal=$("patternModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-}
-document.querySelectorAll("[data-pattern-table]").forEach(b=>b.addEventListener("click",openPatternTable));
-$("patternClose").onclick=closePatternTable;
-$("patternModal").onclick=e=>{if(e.target===$("patternModal"))closePatternTable()};
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape" && $("patternModal").classList.contains("open")) closePatternTable();
-});
-
-async function loadKeyboardComponent(){
- const mount=$("keyboardMount");
- if(!mount) return false;
- const r=await fetch("../../components/deutsch-keyboard-v2.60.html");
- if(!r.ok) throw new Error("Keyboard component failed to load");
- const text=await r.text();
- const tpl=document.createElement("template");
- tpl.innerHTML=text;
- const scripts=[];
- tpl.content.querySelectorAll("script").forEach(sc=>{scripts.push(sc.textContent);sc.remove()});
- mount.appendChild(tpl.content);
- for(const code of scripts){
-   const sc=document.createElement("script");
-   sc.textContent=code;
-   document.body.appendChild(sc);
- }
- const kb=$("keyboard");
- window.deutschKeyboardReady=true;
- if(!$("study").classList.contains("hidden") && !checked) kb.classList.add("show");
- return true;
-}
-
-loadKeyboardComponent().catch(e=>console.error(e));
-</script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        if (localStorage.getItem("deutschThemeV1") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Partizip II.</title>
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Verbformen" />
+    <link rel="stylesheet" href="partizipII.css?v=1" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="start">
+        <h1 class="title">Partizip II.</h1>
+        <p class="subtitle">Wie viele Verben?</p>
+        <div class="choices">
+          <button class="choice" data-size="10">10</button>
+          <button class="choice" data-size="20">20</button>
+          <button class="choice" data-size="30">30</button>
+        </div>
+        <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
+      </section>
+      <div class="start-about" id="startAbout">
+        <h2>Worum geht's?</h2>
+        <p class="about-de" id="aboutText"></p>
+      </div>
+
+      <section id="study" class="hidden">
+        <div class="top"><span class="brand">Partizip II.</span><span id="count"></span></div>
+        <div class="progress"><i id="bar"></i></div>
+        <section class="card">
+          <div id="verb"></div>
+          <div class="translation" id="translation"></div>
+          <input
+            id="answer"
+            placeholder=" "
+            aria-label="Fehlende Form"
+            autocomplete="off"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="done"
+          />
+          <button id="check">Prüfen</button>
+          <div class="result" id="result">
+            <div class="result-head">
+              <div class="state" id="state"></div>
+              <div class="vowel-pattern" id="vowelPattern"></div>
+            </div>
+            <div class="forms" id="forms"></div>
+            <div class="meta" id="meta"></div>
+            <div class="example" id="example"></div>
+          </div>
+          <button id="next">Weiter</button>
+        </section>
+        <div id="keyboardMount"></div>
+        <div class="in-session-pattern">
+          <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
+        </div>
+      </section>
+
+      <section id="finish" class="hidden">
+        <h2>Fertig.</h2>
+        <div id="finalScore" class="final-score"></div>
+        <p id="summary"></p>
+        <div class="finish-actions">
+          <button id="playAgain">Noch eine Runde</button>
+          <button id="homeBack">Zur Startseite</button>
+        </div>
+      </section>
+
+      <div id="patternModal" class="pattern-modal" aria-hidden="true">
+        <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
+          <div class="pattern-modal-head">
+            <h2 id="patternModalTitle">Partizip II · Vokalwechsel</h2>
+            <button class="pattern-close" id="patternClose" aria-label="Schließen">×</button>
+          </div>
+          <div id="patternModalBody"></div>
+        </div>
+      </div>
+      <div class="version-mark">v55</div>
+    </main>
+
+    <script src="../../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="verbs.js?v=5"></script>
+    <script src="../../components/deutsch-progress-v1.js"></script>
+    <script src="partizipII.js?v=1"></script>
+  </body>
 </html>
