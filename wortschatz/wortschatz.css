@@ -139,6 +139,7 @@ button {
 .coll-link:active,
 .coll-main:active,
 .coll-quiet:active,
+.coll-raised:active,
 .coll-chip:active {
   transform: scale(0.97);
   filter: brightness(0.94);
@@ -925,7 +926,7 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
   font-size: 14px;
   font-weight: 500;
 }
-/* „5 neue Wörter lernen“ (quiet, outlined) + „Zur Startseite“ (main) — the summary buttons of all exercises */
+/* „5 neue Wörter lernen“ (raised, v2.111) + „Zur Startseite“ (main) — the summary buttons of all exercises */
 .finish-actions {
   width: min(100%, 360px);
   margin: 0 auto;
@@ -951,9 +952,10 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
     filter 0.12s ease;
 }
 .finish-actions .addWords {
-  background: transparent;
-  color: var(--quiet-text);
-  border: 1px solid var(--hairline);
+  /* v2.111: the raised „＋ Use your own words“ look (was outlined, text at 55% — looked disabled) */
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
 }
 .finish-actions .home-back {
   background: var(--main-bg);
@@ -1133,7 +1135,31 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
   background: transparent;
   color: var(--quiet-text);
 }
-/* own collection (v2.104): ＋ Add Word (cream) and Import List (outlined) side by side, same shape */
+/* „Type the First Word“ (v2.110), „Import List“ in an own collection (v2.111) = the „＋ Use your own words“ look (raised card, full text colour, soft shadow)
+   in the window's button shape. The outlined quiet button looked disabled here. On the card itself the surface
+   is lifted one step (dark) / given the 10% outline (light), so it doesn't melt into the card. */
+.coll-raised {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--card-bg) 92%, #fff);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+[data-theme="light"] .coll-raised {
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline), var(--card-shadow);
+}
+.coll-form-buttons .coll-main + .coll-raised {
+  margin-top: 6px; /* 10px between the two buttons, like the other button pairs */
+}
+/* own collection (v2.104): ＋ Add Word (cream) and Import List (raised since v2.111) side by side, same shape */
 .coll-pair {
   flex: 0 0 auto;
   display: flex;
@@ -1141,7 +1167,8 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
   padding: 2px 0 14px;
 }
 .coll-pair .coll-main,
-.coll-pair .coll-quiet {
+.coll-pair .coll-quiet,
+.coll-pair .coll-raised {
   flex: 1 1 0;
   min-width: 0;
   height: 48px;

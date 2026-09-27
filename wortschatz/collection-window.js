@@ -131,9 +131,10 @@
 
     // most-used action on top (like „Use My Own Words“ in the Starter-Set window)
     // v2.104: both ways to get words in, side by side (same shape; Add Word = the everyday action, cream)
+    // v2.111: Import List = the raised „Use your own words“ look (the outlined one looked disabled)
     const top = el("div", "coll-pair");
     top.appendChild(button("coll-main", "＋ Add Word", () => viewForm(null)));
-    top.appendChild(button("coll-quiet", "Import List", () => viewImport({})));
+    top.appendChild(button("coll-raised", "Import List", () => viewImport({})));
     card.appendChild(top);
 
     const box = el("div", "coll-list coll-list-below");
@@ -554,7 +555,7 @@ Rules:
     const b = el("div", "coll-form-buttons");
     b.appendChild(button("coll-main", "Import List", () => viewImport({ create: true, name: nm() })));
     b.appendChild(
-      button("coll-quiet", "Type the First Word", () =>
+      button("coll-raised", "Type the First Word", () =>
         viewForm(null, { create: true, name: nm(), cancel: viewCreate })
       )
     );
