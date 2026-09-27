@@ -92,18 +92,20 @@
 
 /* ===== PAGE SHELL (same as Partizip II) =====
    The page itself never scrolls or bounces. Everything lives in .app, which fills the screen
-   and scrolls on its own only when the content is taller than the screen (small phones, large text). */
+   and scrolls on its own only when the content is taller than the screen (small phones, large text).
+   .app has no top padding on purpose: Safari measures the sticky top bar from inside the scroller's
+   padding, Chrome from its edge. The status-bar space is on the screens themselves instead. */
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 .app{position:fixed;inset:0;width:min(720px,100%);margin:0 auto;
-  padding:calc(env(safe-area-inset-top) + 8px) 18px calc(env(safe-area-inset-bottom) + 40px);
+  padding:0 18px calc(env(safe-area-inset-bottom) + 40px);
   overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .hidden{display:none}
 
 /* ===== START + SUMMARY SCREENS ===== */
 .game-title{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--game-title);margin:30px 0 70px;user-select:none}
-#sessionScreen,#endScreen{padding:20px 14px;text-align:center}
+#sessionScreen,#endScreen{padding:calc(env(safe-area-inset-top) + 28px) 14px 20px;text-align:center}
 #sessionScreen h1,#endScreen h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}
 #sessionScreen p,#endScreen p{color:var(--muted);font-size:16px}
 
@@ -145,11 +147,11 @@ body:has(#game:not(.hidden)) .version-mark{display:none}
 }
 
 /* ===== TOP BAR · position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px ===== */
-#game{padding-top:11px}
+#game{padding-top:calc(env(safe-area-inset-top) + 19px)}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;padding-bottom:18px;
   position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;background:var(--bg)}
 .top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--bar-track);border-radius:99px}
-.top:before{content:"";position:absolute;left:0;right:0;bottom:100%;height:calc(env(safe-area-inset-top) + 8px);background:var(--bg)}   /* covers the strip above the bar while the panel scrolls */
+.top:before{content:"";position:absolute;left:0;right:0;bottom:100%;height:calc(env(safe-area-inset-top) + 4px);background:var(--bg)}   /* covers the strip above the bar while the panel scrolls */
 .top-title{font-size:18px;font-weight:700;color:var(--muted)}
 .counter{color:var(--muted);font-size:14px}
 .top-title,.counter{transform:translateY(4px)}
@@ -242,7 +244,7 @@ body:has(#game:not(.hidden)) .version-mark{display:none}
 <button class="home-back" id="homeBack">Zur Startseite</button>
 </div>
 </section>
-<div class="version-mark">v25</div>
+<div class="version-mark">v26</div>
 </main>
 <script src="../components/deutsch-translation-v1.js?v=2"></script>
 <script>
