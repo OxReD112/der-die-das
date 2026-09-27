@@ -1666,31 +1666,28 @@ header h1 {
   background: var(--bg);
 }
 
-/* Back button, top left (Home 5.43): palette grey, no circle, no outline. "‹ Deutsch." (or the chapter) on start /
-   picker / summary screens, only "‹" in front of the title in the game (JS places it there). 44px tap height.
+/* Home button (Home 5.84): round, like the phrase screen's ‹ button — 44px circle, 10% outline, blurred see-through
+   background, house in the text colour, shared press effect. Always goes straight to Home.
+   JS places it (see home.js → Home button): centred low on start / chapter / summary screens, bottom-left corner
+   during a round (.is-corner), small (32px) in the top bar or top left where there's no room (.is-small).
    Fades out while a table window is open. */
 .home-back {
   position: absolute;
   z-index: 1001;
-  top: calc(env(safe-area-inset-top) + 33.5px - 22px);
-  left: 6px;
+  top: calc(env(safe-area-inset-top) + 12px);
+  left: max(12px, env(safe-area-inset-left));
+  width: 44px;
   height: 44px;
-  padding: 0 10px 0 12px;
+  padding: 0;
   display: flex;
   align-items: center;
-  gap: 7px;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: var(--muted);
-  font:
-    500 15px/1 -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "Helvetica Neue",
-    sans-serif;
-  letter-spacing: -0.2px;
-  text-align: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  color: var(--text);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -1701,17 +1698,26 @@ header h1 {
     filter 0.12s ease;
 }
 
-.home-back.is-game {
-  padding-right: 4px;
-}
-
-.home-back-chev {
-  flex: 0 0 auto;
+.home-back svg {
   display: block;
+  width: 20px;
+  height: 20px;
 }
 
-.home-back-label:empty {
-  display: none;
+.home-back.is-small {
+  width: 32px;
+  height: 32px;
+}
+
+.home-back.is-small svg {
+  width: 16px;
+  height: 16px;
+}
+
+.home-back.is-corner {
+  top: auto;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  left: max(12px, env(safe-area-inset-left));
 }
 
 .home-back:active {
@@ -1719,7 +1725,8 @@ header h1 {
   filter: brightness(0.94);
 }
 
-.home-back.is-hidden {
+.home-back.is-hidden,
+.app-shell.is-animating .home-back {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1728,10 +1735,19 @@ header h1 {
     visibility 0s linear 0.18s;
 }
 
+/* open / close animation on phones (home.js → openApp / closeApp) */
+.app-shell.is-animating {
+  will-change: clip-path;
+}
+
+.app-shell.is-animating .app-frame {
+  will-change: opacity, transform;
+}
+
 /* ===== Responsive ===== */
 @media (min-width: 529px) {
-  .home-back {
-    left: calc(50% - 240px + 6px);
+  .home-back.is-corner {
+    left: calc(50% - 240px + 12px);
   }
 }
 

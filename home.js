@@ -296,12 +296,7 @@ const frame = document.getElementById("appFrame");
 const back = document.getElementById("homeBack");
 
 document.querySelectorAll("[data-app]").forEach(button => {
-  button.addEventListener("click", () => {
-    frame.src = button.dataset.app;
-    shell.classList.add("open");
-    shell.setAttribute("aria-hidden", "false");
-    document.documentElement.classList.add("app-open");
-  });
+  button.addEventListener("click", () => openApp(button));
 });
 
 /* Paged tile block: page dots + arrow buttons (arrows on hover devices only). */
@@ -349,37 +344,199 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-function closeApp() {
-  renderDailyStats();
-  shell.classList.remove("open");
-  shell.setAttribute("aria-hidden", "true");
-  document.documentElement.classList.remove("app-open");
-  setFrameWindow(false);
-  frame.src = "about:blank";
+/* ===== Open / close an exercise (Home 5.84) =====
+   Phones: the exercise grows out of the tile that was tapped and, on the way back, folds into it again
+   (Documentation/DECISIONS.md → *Home button + open / close animation*). It starts growing only once the page
+   has loaded (at most 450ms), so it never grows as an empty box. On the way back the real tile is already
+   under the shrinking exercise, which fades out over the second half — so it lands on the finished tile.
+   Tablets, computers and Reduce Motion: no animation (the exercise simply appears / disappears, as before).
+   Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
+const ANIM_OPEN = 480;
+const ANIM_CLOSE = 420;
+const ANIM_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
+// Home behind the exercise zooms back a little and dims. Only the tile area is scaled: scaling the whole page would
+// pull the fixed "Deutsch." header out of place (a fixed element inside a transformed parent moves with it).
+const pageEl = document.querySelector(".home-viewport");
+const dimEls = [document.querySelector(".page > header"), document.getElementById("settingsOpen")].filter(Boolean);
+let originTile = null, // the Home tile the exercise came from (for a chapter exercise: the chapter tile)
+  animBusy = false;
+
+function useAnimation() {
+  return (
+    window.matchMedia("(max-width: 600px)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+function tileInset(tile) {
+  const r = tile.getBoundingClientRect();
+  if (!r.width || r.bottom < 0 || r.top > innerHeight) return null; // tile not on screen → no animation
+  const radius = parseFloat(getComputedStyle(tile).borderTopLeftRadius) || 25;
+  return `inset(${r.top}px ${innerWidth - r.right}px ${innerHeight - r.bottom}px ${r.left}px round ${radius}px)`;
+}
+function tileCentre(tile, box) {
+  // the tile's centre, relative to `box` (default: the screen)
+  const r = tile.getBoundingClientRect(),
+    b = box ? box.getBoundingClientRect() : { left: 0, top: 0 };
+  return `${r.left + r.width / 2 - b.left}px ${r.top + r.height / 2 - b.top}px`;
+}
+function homeBehind(on, d) {
+  // d = transition time in ms (0 = at once)
+  const t = d ? `transform ${d}ms ${ANIM_EASE}, filter ${d}ms ${ANIM_EASE}` : "none";
+  pageEl.style.transition = t;
+  pageEl.style.transform = on ? "scale(0.94)" : "none";
+  [pageEl, ...dimEls].forEach(el => {
+    el.style.transition = t;
+    el.style.filter = on ? "brightness(0.7)" : "none";
+  });
+}
+function setClip(v) {
+  shell.style.clipPath = v;
+  shell.style.webkitClipPath = v;
+}
+function resetAnimStyles() {
+  [shell, frame, pageEl, ...dimEls].forEach(el => {
+    if (!el) return;
+    el.style.transition = "";
+    el.style.transform = "";
+    el.style.transformOrigin = "";
+    el.style.opacity = "";
+    el.style.filter = "";
+  });
+  setClip("");
+  shell.style.backgroundColor = "";
+  shell.classList.remove("is-animating");
 }
 
-/* ===== Back button (top left, 2026-09-26, Home 5.43) =====
-       One step up: chapter exercise (Partizip II, Fester Kasus …) → its picker; picker or single exercise → Home.
-       Start / picker / summary screens: "‹ Deutsch." / "‹ Verbformen." / "‹ Präpositionen".
-       Game (a top-bar title is visible): only "‹", placed right in front of the title (Home makes room for it).
-       Fades out while a table window is open. Home reads the exercise page directly (same site), so the
-       exercise pages themselves need no changes. */
+function openApp(tile) {
+  if (animBusy) return;
+  originTile = tile;
+  const showShell = () => {
+    shell.classList.add("open");
+    shell.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("app-open");
+  };
+  if (!useAnimation()) {
+    frame.src = tile.dataset.app;
+    showShell();
+    return;
+  }
+  animBusy = true;
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    frame.removeEventListener("load", start);
+    showShell();
+    const from = tileInset(tile);
+    if (!from) {
+      animBusy = false;
+      return;
+    }
+    // start: exactly over the tile, see-through, exercise slightly small
+    resetAnimStyles();
+    shell.classList.add("is-animating");
+    shell.style.transition = frame.style.transition = "none";
+    setClip(from);
+    shell.style.backgroundColor = "transparent";
+    frame.style.opacity = "0";
+    frame.style.transformOrigin = tileCentre(tile);
+    frame.style.transform = "scale(0.86)";
+    void shell.offsetWidth;
+    requestAnimationFrame(() => {
+      const d = ANIM_OPEN;
+      shell.style.transition = `clip-path ${d}ms ${ANIM_EASE}, -webkit-clip-path ${d}ms ${ANIM_EASE}, background-color ${Math.round(d * 0.3)}ms ease`;
+      frame.style.transition = `opacity ${Math.round(d * 0.35)}ms ease, transform ${d}ms ${ANIM_EASE}`;
+      setClip(`inset(0px 0px 0px 0px round 0px)`);
+      shell.style.backgroundColor = "";
+      frame.style.opacity = "1";
+      frame.style.transform = "none";
+      pageEl.style.transformOrigin = tileCentre(tile, pageEl);
+      homeBehind(true, d);
+      setTimeout(() => {
+        resetAnimStyles();
+        animBusy = false;
+        scheduleBack();
+      }, d + 40);
+    });
+  };
+  frame.addEventListener("load", start);
+  frame.src = tile.dataset.app;
+  setTimeout(start, 450); // slow network: grow anyway
+}
+
+function closeApp() {
+  if (animBusy) return;
+  renderDailyStats();
+  const finish = () => {
+    resetAnimStyles();
+    shell.classList.remove("open");
+    shell.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("app-open");
+    setFrameWindow(false);
+    frame.src = "about:blank";
+    originTile = null;
+    animBusy = false;
+  };
+  const to = originTile && useAnimation() && shell.classList.contains("open") ? tileInset(originTile) : null;
+  if (!to) {
+    finish();
+    return;
+  }
+  animBusy = true;
+  const tile = originTile;
+  const d = ANIM_CLOSE;
+  setFrameWindow(false);
+  resetAnimStyles();
+  shell.classList.add("is-animating");
+  shell.style.transition = frame.style.transition = "none";
+  setClip(`inset(0px 0px 0px 0px round 0px)`);
+  frame.style.transformOrigin = tileCentre(tile);
+  pageEl.style.transformOrigin = tileCentre(tile, pageEl);
+  homeBehind(true, 0);
+  void shell.offsetWidth;
+  requestAnimationFrame(() => {
+    const fade = `${Math.round(d * 0.55)}ms ease ${Math.round(d * 0.35)}ms`;
+    shell.style.transition = `clip-path ${d}ms ${ANIM_EASE}, -webkit-clip-path ${d}ms ${ANIM_EASE}, background-color ${fade}`;
+    frame.style.transition = `opacity ${fade}, transform ${d}ms ${ANIM_EASE}`;
+    setClip(to);
+    shell.style.backgroundColor = "transparent";
+    frame.style.opacity = "0";
+    frame.style.transform = "scale(0.86)";
+    homeBehind(false, d);
+    setTimeout(finish, d + 40);
+  });
+}
+
 /* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
        An empty, passive listener switches it on — for Home and (above, on load) for every exercise page.
        It never blocks scrolling, swiping or the keyboard. Home 5.44. */
 function noTouch() {}
 document.addEventListener("touchstart", noTouch, { passive: true });
 
-const backLabel = document.getElementById("homeBackLabel");
-const CHAPTERS = {
-  verbformen: { label: "Verbformen.", tile: ".tile-verbs" },
-  praepositionen: { label: "Präpositionen", tile: ".tile-prepositions" }
-};
+/* ===== Home button (Home 5.84, replaces the "‹" of Home 5.43) =====
+       One round house button; it always goes straight to Home (closeApp), from every screen of every exercise.
+       Where it sits (Home reads the open exercise page directly — same site — so the exercises need no changes):
+       - start screens: centred, 28px above the „Worum geht's?“ description;
+       - chapter pages: centred, 28px above the version number;
+       - summary screens: centred in the free space under the last button, slightly above its middle (45 / 55,
+         like the phrase screen). „Zur Startseite“ is hidden there (Home adds a style to the page) — the round
+         button replaces it;
+       - during a round: bottom-left corner, 12px from the edges (like the old ⌂). If it would touch anything
+         there (on-screen keyboard, answer buttons — 4-inch iPhones, phone sideways), it moves into the top bar,
+         small, in front of the title, and stays there for this page and screen size.
+       - If a centred spot doesn't fit (short screens), the same small button sits top left.
+       Fades out while a table window is open. */
 const TITLE_SEL = ".top-title,.top .brand";
 const WINDOW_SEL = ".modal,.pattern-modal,.forms-modal,.omodal,.coll-modal"; // .coll-modal = Wortschatz collection window (Home 5.49)
-let backTarget = null,
-  backObserver = null,
-  backRaf = 0;
+const CHAPTER_PATHS = ["verbformen/", "praepositionen/"];
+// things the corner button must not cover: controls, the on-screen keyboard and the question / answer text
+const HIT_SEL =
+  "button,input,textarea,a,.keyboard,.key,.card,.result,p,h1,h2,h3,[class*='step'],[class*='row'],[class*='line']";
+// the exercises' short-screen rule (phone sideways, 4-inch iPhones): no corner button there — the top bar instead
+const SHORT_SCREEN = "(max-height: 559px), (max-width: 340px) and (max-height: 609px)";
+let backObserver = null,
+  backRaf = 0,
+  topBarMode = false, // sticky "top bar" fallback during a round
+  topBarKey = "";
 
 function framePath() {
   try {
@@ -399,6 +556,46 @@ function isShown(el, win, ignoreOpacity) {
   const r = el.getBoundingClientRect();
   return r.width > 0 && r.height > 0;
 }
+function firstShown(doc, win, sel) {
+  return [...doc.querySelectorAll(sel)].find(el => isShown(el, win)) || null;
+}
+function overlaps(a, b, pad) {
+  return a.left < b.right + pad && a.right > b.left - pad && a.top < b.bottom + pad && a.bottom > b.top - pad;
+}
+// lowest bottom edge of the visible page content above `limit` (the description / version number / screen edge)
+function contentBottom(doc, win, limit) {
+  let low = 0;
+  doc.querySelectorAll("h1,h2,h3,p,button,input,.choices,.coll-line,.collCount,.doneScore,.final-score").forEach(el => {
+    if (el.closest(".start-about,.version-mark," + WINDOW_SEL) || !isShown(el, win)) return;
+    const r = el.getBoundingClientRect();
+    if (r.bottom <= limit + 1 && r.bottom > low) low = r.bottom;
+  });
+  return low;
+}
+function placeBack(mode, x, y) {
+  // mode: "center" (44px, x = centre, y = top) · "corner" (CSS places it) · "bar" / "topleft" (32px, x/y = top-left)
+  back.classList.toggle("is-small", mode === "bar" || mode === "topleft");
+  back.classList.toggle("is-corner", mode === "corner");
+  if (mode === "corner") {
+    back.style.top = back.style.left = "";
+    return;
+  }
+  const w = mode === "center" ? 44 : 32;
+  back.style.left = Math.round(mode === "center" ? x - w / 2 : x) + "px";
+  back.style.top = Math.round(y) + "px";
+}
+// the status-bar height as Home sees it (exercise pages inside the frame aren't reliably told)
+const safeProbe = document.createElement("div");
+safeProbe.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;visibility:hidden;padding-top:env(safe-area-inset-top)";
+document.body.appendChild(safeProbe);
+function safeTop() {
+  return parseFloat(getComputedStyle(safeProbe).paddingTop) || 0;
+}
+function setTitleRoom(doc, on) {
+  if (!doc || !doc.documentElement) return;
+  doc.documentElement.classList.toggle("deutsch-home-in-bar", on);
+}
+
 function updateBack() {
   backRaf = 0;
   if (!shell.classList.contains("open")) {
@@ -410,38 +607,76 @@ function updateBack() {
     doc = frame.contentDocument;
     win = frame.contentWindow;
   } catch (e) {}
-  // where does "‹" lead?
-  const parts = framePath().split("/").filter(Boolean);
-  const chapter = parts.length > 1 ? CHAPTERS[parts[0]] : null;
-  backTarget = chapter ? chapter.tile : null;
-  const label = chapter ? chapter.label : "Deutsch.";
-  back.setAttribute("aria-label", "Zurück zu " + label);
-  // game (visible top-bar title) or start / picker / summary screen?
-  let title = null,
-    windowOpen = false;
-  if (doc && doc.body) {
-    if (!doc.getElementById("deutsch-back-room")) {
-      const st = doc.createElement("style");
-      st.id = "deutsch-back-room";
-      st.textContent = ".top-title,.top .brand{padding-left:20px}"; /* room for Home's "‹" in the game top bar */
-      doc.head.appendChild(st);
-    }
-    title =
-      [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80) || null;
-    windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
+  if (!doc || !doc.body || !win) {
+    placeBack("corner");
+    return;
   }
-  back.classList.toggle("is-game", !!title);
-  backLabel.textContent = title ? "" : label;
-  if (title) {
-    const r = title.getBoundingClientRect();
-    back.style.top = r.top + r.height / 2 - 22 + "px";
-    back.style.left = r.left - 12 + "px";
-  } else {
-    back.style.top = "";
-    back.style.left = "";
+  if (!doc.getElementById("deutsch-home-button")) {
+    const st = doc.createElement("style");
+    st.id = "deutsch-home-button";
+    st.textContent =
+      "#homeBack{display:none!important}" + // „Zur Startseite“: the round button replaces it
+      ".deutsch-home-in-bar .top-title,.deutsch-home-in-bar .top .brand{padding-left:42px}"; // room for the small button in the top bar
+    doc.head.appendChild(st);
   }
+  const H = win.innerHeight,
+    W = win.innerWidth;
+  const windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
   back.classList.toggle("is-hidden", windowOpen);
   setFrameWindow(windowOpen);
+  if (windowOpen) return;
+
+  const path = framePath();
+  const about = firstShown(doc, win, ".start-about");
+  const version = firstShown(doc, win, ".version-mark");
+  const summary = firstShown(doc, win, "#playAgain,#done .finish-actions,#done .doneWords");
+  const chapter = CHAPTER_PATHS.includes(path);
+  const title = [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80);
+
+  // --- start, chapter and summary screens: centred ---
+  if (about || summary || chapter) {
+    setTitleRoom(doc, false);
+    const bottomEdge = H - 24;
+    let lower, y;
+    if (summary) {
+      lower = version ? version.getBoundingClientRect().top : bottomEdge;
+      const upper = contentBottom(doc, win, lower);
+      y = upper + (lower - upper) * 0.45 - 22;
+      if (lower - upper < 44 + 40) y = -1; // no room
+    } else {
+      lower = about ? about.getBoundingClientRect().top : version ? version.getBoundingClientRect().top : bottomEdge;
+      const upper = contentBottom(doc, win, lower);
+      y = lower - 28 - 44;
+      if (y < upper + 20) y = lower - upper >= 44 + 28 ? upper + (lower - upper) / 2 - 22 : -1; // tight: centre in the gap, or no room
+    }
+    if (y >= 0) placeBack("center", W / 2, y);
+    else placeBack("topleft", Math.max(12, (W - 480) / 2 + 12), safeTop() + 12);
+    return;
+  }
+
+  // --- during a round: bottom-left corner, or the top bar if the corner is taken ---
+  const key = path + "|" + W + "x" + H;
+  if (key !== topBarKey) {
+    topBarKey = key;
+    topBarMode = false;
+  }
+  if (!topBarMode && title && win.matchMedia(SHORT_SCREEN).matches) topBarMode = true;
+  if (!topBarMode) {
+    placeBack("corner");
+    const me = back.getBoundingClientRect();
+    const hit = [...doc.querySelectorAll(HIT_SEL)].some(
+      el => !el.closest(WINDOW_SEL) && isShown(el, win) && overlaps(me, el.getBoundingClientRect(), 6)
+    );
+    if (hit && title) topBarMode = true;
+  }
+  if (topBarMode && title) {
+    setTitleRoom(doc, true);
+    const r = title.getBoundingClientRect();
+    placeBack("bar", r.left, r.top + r.height / 2 - 16);
+  } else {
+    setTitleRoom(doc, false);
+    placeBack("corner");
+  }
 }
 // Home 5.69: darken the strip below the exercise frame (and the status-bar colour) while an exercise window is open
 function setFrameWindow(on) {
@@ -473,7 +708,7 @@ frame.addEventListener("load", () => {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ["class", "style", "hidden", "aria-hidden"]
+      attributeFilter: ["class", "style", "hidden", "aria-hidden", "aria-expanded"]
     });
     frame.contentWindow.addEventListener("resize", scheduleBack);
     frame.contentWindow.addEventListener("scroll", scheduleBack, { passive: true, capture: true }); // capture: also scrolling inside the exercise's panel (.app)
@@ -482,12 +717,7 @@ frame.addEventListener("load", () => {
   scheduleBack();
   setTimeout(scheduleBack, 350); // after start-screen fade-ins
 });
-back.addEventListener("click", () => {
-  const tile = backTarget && document.querySelector(backTarget);
-  if (tile && tile.dataset.app)
-    frame.src = tile.dataset.app; // chapter exercise → its picker
-  else closeApp();
-});
+back.addEventListener("click", closeApp);
 
 const HOME_STATS = "deutschHomeStatsV1";
 
