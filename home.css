@@ -1725,8 +1725,13 @@ header h1 {
   filter: brightness(0.94);
 }
 
-.home-back.is-hidden,
 .app-shell.is-animating .home-back {
+  opacity: 0;
+  visibility: hidden;
+  transition: none;
+}
+
+.home-back.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1735,13 +1740,44 @@ header h1 {
     visibility 0s linear 0.18s;
 }
 
-/* open / close animation on phones (home.js → openApp / closeApp) */
-.app-shell.is-animating {
-  will-change: clip-path;
+/* open / close animation on phones (home.js → openApp / closeApp): only transform + opacity move.
+   .app-card = the plain card that grows out of the tile; .home-dim = the dark layer over Home. */
+.app-shell.is-animating,
+.app-shell.is-animating .app-frame {
+  background: transparent;
 }
 
 .app-shell.is-animating .app-frame {
   will-change: opacity, transform;
+}
+
+/* a finger is on a tile: the page loads already — laid out at full size, but not visible yet */
+.app-shell.preload {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.app-card,
+.home-dim {
+  position: fixed;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+.app-card {
+  z-index: 999;
+  background: var(--bg);
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+}
+
+.home-dim {
+  z-index: 998;
+  background: #000;
+  opacity: 0;
+  will-change: opacity;
 }
 
 /* ===== Responsive ===== */

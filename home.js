@@ -296,6 +296,7 @@ const frame = document.getElementById("appFrame");
 const back = document.getElementById("homeBack");
 
 document.querySelectorAll("[data-app]").forEach(button => {
+  button.addEventListener("pointerdown", () => preloadApp(button), { passive: true });
   button.addEventListener("click", () => openApp(button));
 });
 
@@ -344,173 +345,235 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-/* ===== Open / close an exercise (Home 5.84) =====
+/* ===== Open / close an exercise (Home 5.84, smoother in 5.85) =====
    Phones: the exercise grows out of the tile that was tapped and, on the way back, folds into it again
-   (Documentation/DECISIONS.md → *Home button + open / close animation*). It starts growing only once the page
-   has loaded (at most 450ms), so it never grows as an empty box. On the way back the real tile is already
-   under the shrinking exercise, which fades out over the second half — so it lands on the finished tile.
+   (Documentation/DECISIONS.md → *Home button + open / close animation*).
+   Only moving / scaling and fading are animated — the two things a phone can animate without redrawing anything
+   (5.84 cut the exercise out with a clip mask and dimmed Home with a filter: both redraw every frame, and the phone
+   couldn't keep up while the exercise was loading):
+   - A plain card in the page colour (.app-card) grows from the tile's shape to the full screen, starting the moment
+     the tile is tapped (5.84 first waited for the page to load — up to 450ms of nothing).
+   - The exercise loads from the moment the finger touches the tile, invisibly, and fades in on the card as soon as
+     it's ready (not before the card is nearly full size).
+   - Home zooms back a little under a dark see-through layer (.home-dim) that fades in.
+   - Closing: the exercise shrinks towards its tile and fades; the card lands on the real tile and fades away over it.
    Tablets, computers and Reduce Motion: no animation (the exercise simply appears / disappears, as before).
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
-const ANIM_OPEN = 480;
-const ANIM_CLOSE = 420;
+const ANIM_OPEN = 440;
+const ANIM_CLOSE = 400;
 const ANIM_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
-// Home behind the exercise zooms back a little and dims. Only the tile area is scaled: scaling the whole page would
-// pull the fixed "Deutsch." header out of place (a fixed element inside a transformed parent moves with it).
-const pageEl = document.querySelector(".home-viewport");
-const dimEls = [document.querySelector(".page > header"), document.getElementById("settingsOpen")].filter(Boolean);
+const homeArea = document.querySelector(".home-viewport"); // only the tile area zooms: the fixed header must stay put
+const appCard = document.createElement("div");
+appCard.className = "app-card";
+const homeDim = document.createElement("div");
+homeDim.className = "home-dim";
+document.body.append(homeDim, appCard);
 let originTile = null, // the Home tile the exercise came from (for a chapter exercise: the chapter tile)
-  animBusy = false;
+  animBusy = false,
+  preloadedApp = null, // page already loading because a finger is on its tile
+  preloadTimer = 0,
+  frameReady = false;
 
 function useAnimation() {
   return (
     window.matchMedia("(max-width: 600px)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
-function tileInset(tile) {
+function tileBox(tile) {
   const r = tile.getBoundingClientRect();
   if (!r.width || r.bottom < 0 || r.top > innerHeight) return null; // tile not on screen → no animation
-  const radius = parseFloat(getComputedStyle(tile).borderTopLeftRadius) || 25;
-  return `inset(${r.top}px ${innerWidth - r.right}px ${innerHeight - r.bottom}px ${r.left}px round ${radius}px)`;
+  return { x: r.left, y: r.top, w: r.width, h: r.height, rad: parseFloat(getComputedStyle(tile).borderTopLeftRadius) || 25 };
 }
-function tileCentre(tile, box) {
-  // the tile's centre, relative to `box` (default: the screen)
-  const r = tile.getBoundingClientRect(),
-    b = box ? box.getBoundingClientRect() : { left: 0, top: 0 };
-  return `${r.left + r.width / 2 - b.left}px ${r.top + r.height / 2 - b.top}px`;
+// the card at the tile's place and shape (scaled down from full screen; the corners are counter-scaled so they stay round)
+function cardAtTile(b, W, H) {
+  const sx = b.w / W,
+    sy = b.h / H;
+  return {
+    transform: `translate(${b.x}px, ${b.y}px) scale(${sx}, ${sy})`,
+    borderRadius: `${b.rad / sx}px / ${b.rad / sy}px`
+  };
 }
-function homeBehind(on, d) {
-  // d = transition time in ms (0 = at once)
-  const t = d ? `transform ${d}ms ${ANIM_EASE}, filter ${d}ms ${ANIM_EASE}` : "none";
-  pageEl.style.transition = t;
-  pageEl.style.transform = on ? "scale(0.94)" : "none";
-  [pageEl, ...dimEls].forEach(el => {
-    el.style.transition = t;
-    el.style.filter = on ? "brightness(0.7)" : "none";
-  });
+const CARD_FULL = { transform: "translate(0px, 0px) scale(1, 1)", borderRadius: "0px / 0px" };
+function pageColour() {
+  return getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#1b1b1d";
 }
-function setClip(v) {
-  shell.style.clipPath = v;
-  shell.style.webkitClipPath = v;
+function homeZoom(b, from, to, d) {
+  homeArea.style.transformOrigin = `${b.x + b.w / 2 - homeArea.getBoundingClientRect().left}px ${
+    b.y + b.h / 2 - homeArea.getBoundingClientRect().top
+  }px`;
+  const o = { duration: d, easing: ANIM_EASE, fill: "forwards" };
+  return [
+    homeArea.animate([{ transform: `scale(${from})` }, { transform: `scale(${to})` }], o),
+    homeDim.animate([{ opacity: from === 1 ? 0 : 0.35 }, { opacity: from === 1 ? 0.35 : 0 }], o)
+  ];
 }
-function resetAnimStyles() {
-  [shell, frame, pageEl, ...dimEls].forEach(el => {
-    if (!el) return;
-    el.style.transition = "";
-    el.style.transform = "";
-    el.style.transformOrigin = "";
-    el.style.opacity = "";
-    el.style.filter = "";
-  });
-  setClip("");
-  shell.style.backgroundColor = "";
+function endAnimations(list) {
+  list.forEach(a => a && a.cancel());
+  appCard.style.display = homeDim.style.display = "none";
+  homeArea.style.transformOrigin = "";
+  frame.style.opacity = frame.style.transformOrigin = "";
   shell.classList.remove("is-animating");
+}
+
+frame.addEventListener("load", () => {
+  let blank = true;
+  try {
+    blank = frame.contentWindow.location.href === "about:blank";
+  } catch (e) {}
+  frameReady = !blank;
+});
+function loadInFrame(app) {
+  frameReady = false;
+  frame.src = app;
+}
+// a finger on a tile: start loading its page already, invisibly (shell rendered but hidden, so the page lays out
+// with the right size). If no tap follows (the finger scrolled the tiles), it's dropped again.
+function preloadApp(tile) {
+  if (!useAnimation() || animBusy || shell.classList.contains("open")) return;
+  clearTimeout(preloadTimer);
+  if (preloadedApp !== tile.dataset.app) {
+    preloadedApp = tile.dataset.app;
+    shell.classList.add("preload");
+    loadInFrame(preloadedApp);
+  }
+  preloadTimer = setTimeout(() => {
+    if (shell.classList.contains("open")) return;
+    shell.classList.remove("preload");
+    preloadedApp = null;
+    frame.src = "about:blank";
+  }, 1500);
 }
 
 function openApp(tile) {
   if (animBusy) return;
+  clearTimeout(preloadTimer);
   originTile = tile;
+  const app = tile.dataset.app;
+  const wasPreloaded = preloadedApp === app;
+  preloadedApp = null;
   const showShell = () => {
+    shell.classList.remove("preload");
     shell.classList.add("open");
     shell.setAttribute("aria-hidden", "false");
     document.documentElement.classList.add("app-open");
   };
-  if (!useAnimation()) {
-    frame.src = tile.dataset.app;
+  const b = useAnimation() ? tileBox(tile) : null;
+  if (!b) {
+    if (!wasPreloaded) loadInFrame(app);
     showShell();
     return;
   }
   animBusy = true;
-  let started = false;
-  const start = () => {
-    if (started) return;
-    started = true;
-    frame.removeEventListener("load", start);
-    showShell();
-    const from = tileInset(tile);
-    if (!from) {
-      animBusy = false;
-      return;
-    }
-    // start: exactly over the tile, see-through, exercise slightly small
-    resetAnimStyles();
-    shell.classList.add("is-animating");
-    shell.style.transition = frame.style.transition = "none";
-    setClip(from);
-    shell.style.backgroundColor = "transparent";
-    frame.style.opacity = "0";
-    frame.style.transformOrigin = tileCentre(tile);
-    frame.style.transform = "scale(0.86)";
-    void shell.offsetWidth;
-    requestAnimationFrame(() => {
-      const d = ANIM_OPEN;
-      shell.style.transition = `clip-path ${d}ms ${ANIM_EASE}, -webkit-clip-path ${d}ms ${ANIM_EASE}, background-color ${Math.round(d * 0.3)}ms ease`;
-      frame.style.transition = `opacity ${Math.round(d * 0.35)}ms ease, transform ${d}ms ${ANIM_EASE}`;
-      setClip(`inset(0px 0px 0px 0px round 0px)`);
-      shell.style.backgroundColor = "";
-      frame.style.opacity = "1";
-      frame.style.transform = "none";
-      pageEl.style.transformOrigin = tileCentre(tile, pageEl);
-      homeBehind(true, d);
-      setTimeout(() => {
-        resetAnimStyles();
-        animBusy = false;
-        scheduleBack();
-      }, d + 40);
-    });
+  if (!wasPreloaded) loadInFrame(app);
+  shell.classList.add("is-animating"); // see-through, Home button hidden
+  frame.style.opacity = "0";
+  showShell();
+  appCard.style.display = homeDim.style.display = "block";
+  const W = appCard.offsetWidth,
+    H = appCard.offsetHeight,
+    d = ANIM_OPEN,
+    t0 = performance.now();
+  const tileColour = getComputedStyle(tile).backgroundColor;
+  const anims = [
+    appCard.animate(
+      [
+        { ...cardAtTile(b, W, H), opacity: 0, backgroundColor: tileColour },
+        { opacity: 1, offset: 0.25 },
+        { ...CARD_FULL, opacity: 1, backgroundColor: pageColour() }
+      ],
+      { duration: d, easing: ANIM_EASE, fill: "forwards" }
+    ),
+    ...homeZoom(b, 1, 0.94, d)
+  ];
+  // the exercise fades in once it has loaded — not before the card is nearly full size (55 % of the time ≈ 95 % of the way)
+  let revealed = false,
+    cardDone = false,
+    contentDone = false;
+  const done = () => {
+    if (!cardDone || !contentDone) return;
+    endAnimations(anims);
+    animBusy = false;
+    scheduleBack();
   };
-  frame.addEventListener("load", start);
-  frame.src = tile.dataset.app;
-  setTimeout(start, 450); // slow network: grow anyway
+  const reveal = () => {
+    if (revealed) return;
+    revealed = true;
+    frame.style.transformOrigin = "50% 40%";
+    const fade = frame.animate(
+      [
+        { opacity: 0, transform: "scale(0.97)" },
+        { opacity: 1, transform: "scale(1)" }
+      ],
+      { duration: 200, easing: "ease-out" }
+    );
+    frame.style.opacity = "";
+    anims.push(fade);
+    fade.onfinish = () => {
+      contentDone = true;
+      done();
+    };
+  };
+  const whenReady = () => setTimeout(reveal, Math.max(0, t0 + d * 0.55 - performance.now()));
+  if (frameReady) whenReady();
+  else frame.addEventListener("load", whenReady, { once: true });
+  setTimeout(reveal, 1500); // very slow network: show whatever has arrived
+  anims[0].onfinish = () => {
+    cardDone = true;
+    done();
+  };
 }
 
 function closeApp() {
   if (animBusy) return;
   renderDailyStats();
   const finish = () => {
-    resetAnimStyles();
-    shell.classList.remove("open");
+    shell.classList.remove("open", "preload");
     shell.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
     frame.src = "about:blank";
+    frameReady = false;
     originTile = null;
     animBusy = false;
   };
-  const to = originTile && useAnimation() && shell.classList.contains("open") ? tileInset(originTile) : null;
-  if (!to) {
+  const b = originTile && useAnimation() && shell.classList.contains("open") ? tileBox(originTile) : null;
+  if (!b) {
     finish();
     return;
   }
   animBusy = true;
-  const tile = originTile;
-  const d = ANIM_CLOSE;
   setFrameWindow(false);
-  resetAnimStyles();
+  appCard.style.display = homeDim.style.display = "block";
   shell.classList.add("is-animating");
-  shell.style.transition = frame.style.transition = "none";
-  setClip(`inset(0px 0px 0px 0px round 0px)`);
-  frame.style.transformOrigin = tileCentre(tile);
-  pageEl.style.transformOrigin = tileCentre(tile, pageEl);
-  homeBehind(true, 0);
-  void shell.offsetWidth;
-  requestAnimationFrame(() => {
-    const fade = `${Math.round(d * 0.55)}ms ease ${Math.round(d * 0.35)}ms`;
-    shell.style.transition = `clip-path ${d}ms ${ANIM_EASE}, -webkit-clip-path ${d}ms ${ANIM_EASE}, background-color ${fade}`;
-    frame.style.transition = `opacity ${fade}, transform ${d}ms ${ANIM_EASE}`;
-    setClip(to);
-    shell.style.backgroundColor = "transparent";
-    frame.style.opacity = "0";
-    frame.style.transform = "scale(0.86)";
-    homeBehind(false, d);
-    setTimeout(finish, d + 40);
-  });
+  const W = appCard.offsetWidth,
+    H = appCard.offsetHeight,
+    d = ANIM_CLOSE;
+  const tileColour = getComputedStyle(originTile).backgroundColor;
+  frame.style.transformOrigin = `${b.x + b.w / 2}px ${b.y + b.h / 2}px`;
+  const o = { duration: d, easing: ANIM_EASE, fill: "forwards" };
+  const anims = [
+    appCard.animate(
+      [
+        { ...CARD_FULL, opacity: 1, backgroundColor: pageColour() },
+        { opacity: 1, offset: 0.55 },
+        { ...cardAtTile(b, W, H), opacity: 0, backgroundColor: tileColour }
+      ],
+      o
+    ),
+    frame.animate(
+      [
+        { opacity: 1, transform: "scale(1)" },
+        { opacity: 0, transform: `scale(${Math.max(0.2, b.w / W)})` }
+      ],
+      { duration: Math.round(d * 0.6), easing: ANIM_EASE, fill: "forwards" }
+    ),
+    ...homeZoom(b, 0.94, 1, d)
+  ];
+  anims[0].onfinish = () => {
+    finish();
+    endAnimations(anims);
+  };
 }
-
-/* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
-       An empty, passive listener switches it on — for Home and (above, on load) for every exercise page.
-       It never blocks scrolling, swiping or the keyboard. Home 5.44. */
-function noTouch() {}
-document.addEventListener("touchstart", noTouch, { passive: true });
 
 /* ===== Home button (Home 5.84, replaces the "‹" of Home 5.43) =====
        One round house button; it always goes straight to Home (closeApp), from every screen of every exercise.
@@ -598,6 +661,7 @@ function setTitleRoom(doc, on) {
 
 function updateBack() {
   backRaf = 0;
+  if (animBusy) return; // placed again when the animation has finished
   if (!shell.classList.contains("open")) {
     setFrameWindow(false);
     return;
