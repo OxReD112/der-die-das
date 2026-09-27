@@ -1,746 +1,94 @@
 <!doctype html>
 <html lang="de">
-<head>
-<meta charset="utf-8">
-<script>
-(function(){
-  try{
-    if(localStorage.getItem("deutschThemeV1")==="light"){
-      document.documentElement.setAttribute("data-theme","light");
-    }
-  }catch(e){}
-})();
-</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Ortspräpositionen">
-<title>Ortspräpositionen</title>
-<style>
-*{box-sizing:border-box}
-:root{
-  --bg:#1b1b1d;--panel:#1f2022;--panel-2:#252629;--text:#f2f0ed;--muted:#8f8f94;
-  --text-secondary:#c8c7c4;--line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.20);--top-title:rgba(255,255,255,.48);
-  --progress:rgba(255,255,255,.34);--mint:#5bc8a4;--coral:#ff7770;--blue:#72a7ff;
-  --cta-bg:#ece6dc;--cta-text:#1b1c1e;
-  --button-bg:#2a2b2e;--button-bg-hover:#313235;--button-text:#fff;
-  --button-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
-  --button-shadow-hover:inset 0 1px 0 rgba(255,255,255,.05),0 7px 18px rgba(0,0,0,.16);
-  --button-shadow-active:inset 0 1px 0 rgba(255,255,255,.03),0 3px 9px rgba(0,0,0,.12);
-  --focus:rgba(255,255,255,.18);
-  --secondary-bg:rgba(0,0,0,.05);--secondary-text:rgba(238,233,224,.55);
-  --version:rgba(255,255,255,.18);
-  --card-sheen:radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.10) 0%,rgba(255,255,255,.045) 22%,transparent 48%),radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.12) 0%,rgba(0,0,0,.055) 24%,transparent 52%);
-  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(91,200,164,.38) 0%,rgba(91,200,164,.20) 24%,rgba(91,200,164,.08) 48%,transparent 76%);
-  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(255,119,112,.40) 0%,rgba(255,119,112,.20) 24%,rgba(255,119,112,.08) 48%,transparent 76%);
-  --shadow:0 18px 55px rgba(0,0,0,.18);
-  --step-bg:rgba(255,255,255,.035);
-  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(91,200,164,.34) 0%,rgba(91,200,164,.17) 35%,rgba(91,200,164,.06) 68%,rgba(91,200,164,0) 100%);
-  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(255,119,112,.36) 0%,rgba(255,119,112,.18) 35%,rgba(255,119,112,.06) 68%,rgba(255,119,112,0) 100%);
-}
-[data-theme="light"]{
-  --bg:#f6f4f1;--panel:#fff;--panel-2:#f4f2ef;--text:#242426;--muted:#727278;
-  --text-secondary:#55565b;--line:rgba(0,0,0,.09);--line-strong:rgba(0,0,0,.20);--top-title:rgba(37,37,40,.48);
-  --progress:rgba(32,32,35,.28);--mint:#3fa68a;--coral:#e95e66;--blue:#5588e0;
-  --cta-bg:#252528;--cta-text:#f5f2ec;
-  --button-bg:#fff;--button-bg-hover:#f4f2ef;--button-text:var(--text);
-  --button-shadow:0 0 0 1px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.07);
-  --button-shadow-hover:0 0 0 1px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.07);
-  --button-shadow-active:0 0 0 1px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.05);
-  --focus:rgba(0,0,0,.18);
-  --secondary-bg:rgba(0,0,0,.03);--secondary-text:rgba(37,37,40,.55);
-  --version:rgba(37,37,40,.30);
-  --card-sheen:radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.035) 0%,rgba(0,0,0,.015) 24%,transparent 52%);
-  --good-glow:radial-gradient(ellipse at 50% 38%,rgba(63,166,138,.28) 0%,rgba(63,166,138,.13) 24%,rgba(63,166,138,.05) 48%,transparent 76%);
-  --bad-glow:radial-gradient(ellipse at 50% 38%,rgba(233,94,102,.27) 0%,rgba(233,94,102,.12) 24%,rgba(233,94,102,.04) 48%,transparent 76%);
-  --shadow:0 12px 40px rgba(0,0,0,.06);
-  --step-bg:rgba(255,255,255,.42);
-  --top-good-glow:radial-gradient(farthest-side at 50% 0%,rgba(63,166,138,.26) 0%,rgba(63,166,138,.12) 35%,rgba(63,166,138,.04) 68%,rgba(63,166,138,0) 100%);
-  --top-bad-glow:radial-gradient(farthest-side at 50% 0%,rgba(233,94,102,.25) 0%,rgba(233,94,102,.11) 35%,rgba(233,94,102,.04) 68%,rgba(233,94,102,0) 100%);
-}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-button{font:inherit;-webkit-tap-highlight-color:transparent}
-.app{width:min(100%,620px);margin:0 auto;padding:clamp(20px,5vw,38px) 18px 36px;min-height:100vh}
-.hidden{display:none!important}
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("deutschThemeV1") === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ortspräpositionen" />
+    <title>Ortspräpositionen</title>
+    <link rel="stylesheet" href="ortspraepositionen.css?v=1" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="sessionScreen">
+        <h1>Ortspräpositionen</h1>
+        <p>Wie viele Übungen?</p>
+        <div class="session-options">
+          <button class="session-option" data-size="10">10</button>
+          <button class="session-option" data-size="20">20</button>
+          <button class="session-option" data-size="30">30</button>
+        </div>
+        <button class="table-btn" type="button" data-otable>Orte · Tabelle</button>
+      </section>
 
-/* ===== START + END SCREENS (same as Fester Kasus) ===== */
-.session-screen,.end-screen{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding:8px 20px 36px}
-.session-screen{padding-top:56px}
-.session-screen h1,.end-screen h1{line-height:1.05;letter-spacing:-.04em;margin:0 0 11px}
-.session-screen h1{font-size:clamp(28px,8.6vw,36px)}
-.end-screen h1{font-size:58px;letter-spacing:-.05em;margin-bottom:24px}
-.session-screen p{color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 28px;max-width:390px}
-.end-score{font-size:34px;line-height:1;font-weight:700;letter-spacing:-.03em;margin:0 0 28px}
-.end-note{color:var(--muted);font-size:16px;line-height:1.4;margin:0 0 28px;max-width:390px}
-.finish-actions{width:min(100%,360px)}
-.finish-actions button{width:100%;height:56px;border:0;border-radius:17px;font-size:16px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
-.finish-actions .again{background:var(--secondary-bg);color:var(--secondary-text);border:1px solid var(--line)}
-.finish-actions .home-back{margin-top:10px;background:var(--cta-bg);color:var(--cta-text)}
-.finish-actions button:active{transform:scale(.99)}
+      <section id="game" class="hidden">
+        <header class="top">
+          <div class="top-row">
+            <div class="top-title">Ortspräpositionen</div>
+            <div class="counter" id="counter">1 / 10</div>
+          </div>
+          <div class="progress"><i id="bar"></i></div>
+          <div class="glow" aria-hidden="true"></div>
+        </header>
 
-/* ===== BUTTONS ===== */
-.session-options{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.session-option,.choice{
-  appearance:none;border:0;border-radius:14px;
-  background:var(--button-bg);color:var(--button-text);
-  font-weight:650;cursor:pointer;box-shadow:var(--button-shadow);
-  transition:transform .16s ease,background .16s ease,box-shadow .16s ease,opacity .16s ease;
-}
-.session-option{min-width:105px;padding:17px 20px;font-size:21px}
-.choice{min-height:56px;padding:0 10px;font-size:17px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
-/* Hover only on devices with a real mouse. On iPhone a tapped spot keeps
-   :hover, so the new button drawn in that spot looked highlighted. */
-@media(hover:hover) and (pointer:fine){
-  .session-option:hover,.choice:hover{background:var(--button-bg-hover);box-shadow:var(--button-shadow-hover);transform:translateY(-1px)}
-}
-.session-option:active,.choice:active{transform:scale(.985);box-shadow:var(--button-shadow-active)}
-.session-option:focus-visible,.choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.choice:disabled{opacity:.45;cursor:default;transform:none}
+        <section class="card" id="card">
+          <div class="eyebrow" id="eyebrow">&nbsp;</div>
+          <div class="place" id="place"></div>
+          <div class="translation" id="translation"></div>
+          <div class="steps" id="steps"></div>
+          <div class="rule" id="rule">
+            <div class="rule-label" id="ruleLabel"></div>
+            <div class="rule-forms" id="ruleForms"></div>
+          </div>
+        </section>
 
-/* Fixed slots: 1 in/aus · 2 an · 3 auf · 4 bei/zu (Personen) · 5 extra (zu Hause / nach)
-   Wo + Wohin: 3 on top, 2 below. Woher: 2 side by side. */
-.choices{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
-.choice{grid-column:span 2}
-.choices.five .choice:nth-child(n+4){grid-column:span 3}
-.choices.two .choice{grid-column:span 3}
+        <section class="choices" id="choices"></section>
+        <button class="hidden" id="next">Weiter</button>
+        <div class="rule-note" id="ruleNote"></div>
+        <div class="in-session-table">
+          <button class="table-btn" type="button" data-otable>Orte · Tabelle</button>
+        </div>
+      </section>
 
-/* ===== GAME ===== */
-.top{margin:2px 2px 0}
-.top-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
-.top-title{font-size:14px;color:var(--top-title);font-weight:650}
-.counter{font-size:13px;color:var(--muted);padding-bottom:2px;font-variant-numeric:tabular-nums}
-.progress{margin-top:10px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
-.progress i{display:block;height:100%;width:0;background:var(--progress);border-radius:inherit;transition:width .25s ease}
+      <section class="hidden" id="endScreen">
+        <h1>Fertig.</h1>
+        <div class="end-score" id="endScore">0 / 30</div>
+        <div class="end-note" id="endNote"></div>
+        <div class="finish-actions">
+          <button id="playAgain">Noch eine Runde</button>
+          <button id="homeBack">Zur Startseite</button>
+        </div>
+      </section>
+      <div class="start-about" id="startAbout">
+        <h2>Worum geht's?</h2>
+        <p class="about-de" id="aboutText"></p>
+      </div>
+      <div class="version-mark">v23</div>
+      <div class="omodal" id="omodal" aria-hidden="true">
+        <div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
+          <div class="ohead">
+            <h2>Wo · Wohin · Woher</h2>
+            <button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button>
+          </div>
+          <div id="otable"></div>
+        </div>
+      </div>
+    </main>
 
-/* No card: the word, the three lines and the rule sit directly on the page. */
-.card{margin-top:15px;padding:34px 0 0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
-
-/* Result glow: starts right under the progress line (straight top edge)
-   and fades to zero exactly at the progress line's left and right ends. */
-.top{position:relative}
-.glow{position:absolute;left:0;right:0;top:100%;height:440px;pointer-events:none;z-index:0;opacity:0;transition:opacity .25s ease-out;background:var(--result-glow,none)}
-#game.good .glow{--result-glow:var(--top-good-glow);opacity:1}
-#game.bad .glow{--result-glow:var(--top-bad-glow);opacity:1}
-
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.10em;font-weight:650;height:14px;margin-bottom:12px;color:transparent;transition:color .2s ease}
-#game.good .eyebrow{color:var(--mint)}
-#game.bad .eyebrow{color:var(--coral)}
-
-.place{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:32px;white-space:nowrap;letter-spacing:-.6px;line-height:1.05;margin-bottom:6px}
-.place .article{color:var(--muted);font-size:.62em;letter-spacing:-.2px;margin-right:.2em;vertical-align:.08em}
-.translation{color:var(--muted);font-size:16px;line-height:1.4;min-height:23px}
-
-/* Three steps: Wo · Wohin · Woher */
-.steps{width:100%;margin-top:24px;display:grid;gap:8px;text-align:left}
-.step{display:grid;grid-template-columns:62px 1fr;align-items:baseline;gap:10px;padding:12px 14px;border-radius:15px;border:1px solid var(--line);background:var(--step-bg);transition:opacity .2s ease,border-color .2s ease}
-.step.pending{opacity:.38}
-.step.active{border-color:var(--line-strong)}
-.step-q{font-size:13px;font-weight:650;color:var(--muted)}
-.step.active .step-q{color:var(--text)}
-.sentence{font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.35;min-width:0}
-.sentence .lead{color:var(--muted)}
-.slot{display:inline-block;min-width:3.2em;padding:0 .15em;margin:0 .12em;text-align:center;border-bottom:1.5px solid var(--line-strong);line-height:1.15}
-.step.active .slot{border-bottom-color:var(--text)}
-.slot.good{border-bottom-color:transparent;color:var(--mint);min-width:0}
-.slot.bad{border-bottom-color:transparent;min-width:0}
-.step .slot.good,.step .slot.bad{border-bottom-color:transparent}
-.slot .wrong{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--coral);opacity:.82;margin-right:.3em}
-.slot .right{color:var(--text)}
-
-.rule{margin-top:18px;min-height:40px;opacity:0;transition:opacity .25s ease}
-.card.done .rule{opacity:1}
-.rule-label{font-size:13px;color:var(--text-secondary);line-height:1.4}
-.rule-forms{margin-top:3px;font-size:15px;font-weight:650;letter-spacing:-.01em}
-.rule-note{margin-top:16px;font-size:13px;color:var(--text-secondary);line-height:1.45;text-align:center}
-.rule-note:empty{display:none}
-.rule-note div+div{margin-top:4px}
-
-.next{width:100%;height:54px;margin-top:14px;border:0;border-radius:16px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:650;cursor:pointer}
-.next:active{transform:scale(.985)}
-
-.version-mark{position:fixed;right:10px;bottom:8px;color:var(--version);font-size:11px;letter-spacing:.04em;pointer-events:none}
-
-@media(max-width:520px){
-  .app{padding-top:calc(env(safe-area-inset-top) + 10px)}
-  .card{padding-top:28px}
-  .step{grid-template-columns:54px 1fr;padding:11px 12px;gap:8px}
-  .sentence{font-size:17px}
-  .choices{position:sticky;bottom:10px;z-index:10}
-  .choice{font-size:18px}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* ===== TABELLE (Wo · Wohin · Woher) — minimal overview sheet ===== */
-.table-btn{appearance:none;border:0;background:transparent;color:var(--muted);font-size:14px;padding:11px 14px;margin-top:22px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.in-session-table{display:flex;justify-content:center;margin-top:30px;opacity:.35}
-.in-session-table .table-btn{margin:0;font-size:11px;padding:7px 10px;border:1px solid var(--line);border-radius:17px}
-.omodal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));z-index:20;background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}
-.omodal.open{opacity:1;visibility:visible;background:rgba(0,0,0,.28);transition:opacity .18s ease,background-color .18s ease,visibility 0s}
-.osheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px 18px 16px;transform:scale(.94);transition:transform .2s ease}
-.omodal.open .osheet{transform:scale(1)}
-@media (prefers-reduced-motion:reduce){.omodal,.osheet{transition:none!important}}
-.ohead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.ohead h2{margin:0;font-size:17px;font-weight:650;letter-spacing:-.01em}
-.oclose{border:0;background:transparent;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;padding:0 2px}
-.otbl{display:grid;grid-template-columns:1.5fr .9fr .9fr .9fr}
-.otbl>div{padding:10px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
-.otbl .h{font-size:12px;color:var(--muted);font-weight:650;padding-top:0}
-.otbl small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);margin-top:2px}
-.otbl .ex .n{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.05}
-.otbl .ex .a{color:var(--muted);font-size:.7em;margin-right:3px}
-.otbl .ex{min-width:0;padding-right:8px}
-.otbl .ex small{font-size:11px;margin-top:3px;white-space:normal;overflow-wrap:break-word}
-.otbl .p{font-size:18px;font-weight:600}
-.otbl .p.long{font-size:16px}
-.otbl .same{color:var(--muted);font-weight:500;opacity:.72}
-.ohot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:6px;vertical-align:3px}
-.ofoot{margin-top:12px;font-size:14px;line-height:1.5}
-.ofoot span{color:var(--muted)}
-.onote{margin-top:10px;font-size:12px;color:var(--muted)}
-
-/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
-   Same colours, button shape, press effect, table button and version mark in every exercise.
-   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
-:root{
-  --start-btn-bg:#2a2a2d;
-  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
-  --start-line:rgba(255,255,255,.10);
-  --start-table-text:#c8c7c4;
-  --start-version:rgba(255,255,255,.24);
-}
-[data-theme="light"]{
-  --start-btn-bg:#fff;
-  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
-  --start-line:rgba(0,0,0,.10);
-  --start-table-text:#55565b;
-  --start-version:rgba(36,36,38,.34);
-}
-#sessionScreen .session-options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
-#sessionScreen .session-option{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
-  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
-  transition:transform .12s ease,filter .12s ease}
-#sessionScreen .session-option:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
-#sessionScreen .session-option:active{transform:scale(.97);filter:brightness(.94)}
-#sessionScreen .table-btn{margin-top:28px;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
-  border-radius:17px;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#sessionScreen .table-btn:active{transform:scale(.97);filter:brightness(.94)}
-.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
-
-/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
-   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
-:root{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(242,240,237,.55);
-  --end-again-line:rgba(255,255,255,.10);
-  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
-  --end-main-text:#1b1b1d;
-}
-[data-theme="light"]{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(36,36,38,.55);
-  --end-again-line:rgba(0,0,0,.10);
-  --end-main-bg:#242426;
-  --end-main-text:#f6f4f1;
-}
-#endScreen .finish-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
-#endScreen #again,#endScreen #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
-#endScreen #again{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
-#endScreen #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
-#endScreen #again:active,#endScreen #homeBack:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
-   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
-   Green stays reserved for "correct". */
-:root{--bar-track:rgba(255,255,255,.10)}
-[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
-#game .top-title{font-size:18px;font-weight:700;color:var(--muted)}
-#game .counter{font-size:14px}
-#game .progress{background:var(--bar-track)}
-#game .progress i{background:var(--muted)}
-/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
-#game .top{margin:13px 0 0}
-#game .top-row{align-items:center}
-#game .progress{margin-top:11px}
-
-/* Question text sizes (Design Police): sentences 28px on phones */
-@media(max-width:699px){.place{font-size:28px}}
-
-/* ===== ANSWER BUTTONS · shared by Artikel, Fester Kasus, Ortspräpositionen (Design Police 2026-09-25) ===== */
-#choices .choice{border:0;border-radius:14px;min-height:56px;height:56px;padding:0 10px;
-  background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:17px;font-weight:400;letter-spacing:0;color:var(--text);
-  transition:transform .12s ease,filter .12s ease,opacity .16s ease}
-#choices .choice:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
-#choices .choice:active{transform:scale(.97);filter:brightness(.94);box-shadow:var(--start-btn-shadow)}
-
-/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
-   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
-   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
-:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
-#next{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
-  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;}
-#next:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
-#next:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
-   (centred, 28px above the bottom edge).
-   (Design Police 2026-09-25) ===== */
-#game .in-session-table{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
-#game .in-session-table .table-btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
-  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#game .in-session-table .table-btn:hover{background:var(--bg);transform:none}
-#game .in-session-table .table-btn:active{transform:scale(.97);filter:brightness(.94)}
-
-/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
-body:has(#game:not(.hidden)) .version-mark{display:none}
-
-/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
-   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
-   Window: palette card colour, shared outline, 24px corners. */
-:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
-.omodal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
-.omodal.open{background:var(--overlay-scrim)}
-.osheet{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
-.osheet{opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
-.omodal.open .osheet{opacity:1;transform:none;filter:none}
-@media (prefers-reduced-motion:reduce){.osheet{filter:none;transition:none}}
-/* ===== START SCREEN · description "Worum geht's?" (2026-09-26, same as the other exercises) =====
-   Width = the 10/20/30 row (3 × 96px + 2 × 12px = 312px).
-   Headline German, text in the user's language (Settings → Translations), fixed above the Home button / version mark.
-   Palette grey text (the darkest text colour) so it blends in and doesn't compete with the buttons. */
-.start-about{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 64px);margin:0 auto;padding:0;width:312px;max-width:calc(100% - 36px);text-align:center;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;z-index:4}
-.start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
-.start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-body:has(#sessionScreen.hidden) .start-about{display:none}
-/* ===== TABLE v21 (2026-09-26) — easier to take in as one picture =====
-   Examples (two, no articles except a country that needs one) and the prepositions on ONE line; the category on its own
-   line underneath, full width. Kino + Schweiz share a row. Same space left and right (Woher column ends at the padding).
-   "Dativ" hangs under nach / zu without lifting the word, so all prepositions sit on one line. Tighter rows. */
-.otbl2{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;column-gap:14px;align-items:baseline}
-.otbl2>div{min-width:0}
-.otbl2 .h{font-size:12px;color:var(--muted);font-weight:650;padding:0 0 8px;align-self:end}
-.otbl2 .h small{display:block;font-size:10.5px;font-weight:500;margin-top:2px}
-.otbl2 .hl{grid-column:1/-1;border-bottom:1px solid var(--line)}
-.otbl2 .ex{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.2;padding-top:10px;white-space:nowrap}
-/* 2026-09-26: one size for all prepositions (was 18px, long Woher forms shrank to 16px → uneven) */
-.otbl2 .p{font-size:16px;font-weight:600;line-height:1.2;padding-top:10px;white-space:nowrap}
-.otbl2 .same{color:var(--muted);font-weight:500;opacity:.72}
-.otbl2 .w{position:relative;display:inline-block}
-.otbl2 .d{position:absolute;left:0;top:100%;font-size:10.5px;font-weight:500;color:var(--muted);line-height:1.1;white-space:nowrap}
-.otbl2 .cat{grid-column:1/-1;font-size:12.5px;line-height:1.25;color:var(--muted);padding:2px 0 9px;border-bottom:1px solid var(--line)}
-@media (max-width:359px){.otbl2 .ex{white-space:normal}}
-/* 2026-09-26: prepositions + their headers centered in their columns; the "Dativ" hint centered under nach / zu */
-.otbl2 .h:not(:first-child),.otbl2 .p{text-align:center}
-.otbl2 .d{left:50%;transform:translateX(-50%)}
-
-/* ===== MISTAKE MARKER v22 (2026-09-26) — replaces the red dots =====
-   A faint highlighter stroke in palette red (see-through, as the colour rules allow) BEHIND the category text.
-   Strength = one number per theme: --mark-strength (tune after the phone test). Nothing moves; text stays full colour. */
-:root{--mark-strength:15%}
-[data-theme="light"]{--mark-strength:12%}
-.mk{padding:0 3px;margin:0 -3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone;
-  background:linear-gradient(100deg,transparent 0 1%,color-mix(in srgb,var(--coral) var(--mark-strength),transparent) 3% 96%,transparent 99%);
-  background-size:100% 78%;background-position:0 70%;background-repeat:no-repeat}
-.mk-legend{display:block;font-size:11px;font-weight:500;line-height:1.35;color:var(--muted)}
-
-</style>
-</head>
-<body>
-<main class="app">
-<section class="session-screen" id="sessionScreen">
-  <h1>Ortspräpositionen</h1>
-  <p>Wie viele Übungen?</p>
-  <div class="session-options">
-    <button class="session-option" data-size="10">10</button>
-    <button class="session-option" data-size="20">20</button>
-    <button class="session-option" data-size="30">30</button>
-  </div>
-  <button class="table-btn" type="button" data-otable>Orte · Tabelle</button>
-</section>
-
-<section id="game" class="hidden">
-  <header class="top"><div class="top-row"><div class="top-title">Ortspräpositionen</div><div class="counter" id="counter">1 / 10</div></div><div class="progress"><i id="bar"></i></div><div class="glow" aria-hidden="true"></div></header>
-
-  <section class="card" id="card">
-    <div class="eyebrow" id="eyebrow">&nbsp;</div>
-    <div class="place" id="place"></div>
-    <div class="translation" id="translation"></div>
-    <div class="steps" id="steps"></div>
-    <div class="rule" id="rule">
-      <div class="rule-label" id="ruleLabel"></div>
-      <div class="rule-forms" id="ruleForms"></div>
-    </div>
-  </section>
-
-  <section class="choices" id="choices"></section>
-  <button class="next hidden" id="next">Weiter</button>
-  <div class="rule-note" id="ruleNote"></div>
-  <div class="in-session-table"><button class="table-btn" type="button" data-otable>Orte · Tabelle</button></div>
-</section>
-
-<section class="end-screen hidden" id="endScreen">
-  <h1>Fertig.</h1>
-  <div class="end-score" id="endScore">0 / 30</div>
-  <div class="end-note" id="endNote"></div>
-  <div class="finish-actions">
-    <button class="again" id="again">Noch eine Runde</button>
-    <button class="home-back" id="homeBack">Zur Startseite</button>
-  </div>
-</section>
-<div class="start-about" id="startAbout">
-  <h2>Worum geht's?</h2>
-  <p class="about-de" id="aboutText"></p>
-</div>
-<div class="version-mark">v22</div>
-<div class="omodal" id="omodal" aria-hidden="true"><div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
-  <div class="ohead"><h2>Wo · Wohin · Woher</h2><button class="oclose" id="oclose" type="button" aria-label="Schließen">×</button></div>
-  <div id="otable"></div>
-</div></div>
-</main>
-
-<script src="../../components/deutsch-translation-v1.js?v=2"></script>
-<script>
-// Start-screen description: shown in the user's language so it is surely understood (like a hint).
-const START_ABOUT={text:{
-  en:"Where? Where to? Where from? Helps you pick the right preposition for every place.",
-  ru:"Где? Куда? Откуда? Помогает подобрать правильный предлог к каждому месту."}};
-document.getElementById("aboutText").textContent=getTranslation(START_ABOUT,"text");
-</script>
-<script src="ortspraepositionen.js?v=8"></script>
-<script src="../../components/deutsch-progress-v1.js"></script>
-<script>
-const PLACES = window.ORTSPRAEPOSITIONEN || [];
-const CATEGORIES = window.ORTS_KATEGORIEN || {};
-
-// ===== QUESTIONS + BUTTON SETS =====
-// Every question always shows its full set of prepositions, in fixed slots,
-// already fused with the article of the place's gender (m / f / n / pl / none).
-const QUESTIONS = [
-  {key:"wo",    label:"Wo?",    lead:"Ich bin"},
-  {key:"wohin", label:"Wohin?", lead:"Ich gehe"},
-  {key:"woher", label:"Woher?", lead:"Ich komme"}
-];
-const BUTTONS = {
-  wo:{
-    m:["im","am","auf dem","beim","zum"],   f:["in der","an der","auf der","bei der","zur"],
-    n:["im","am","auf dem","beim","zum"],   pl:["in den","an den","auf den","bei den","zu den"],
-    none:["in","an","auf","bei","zu"]
-  },
-  wohin:{
-    m:["in den","an den","auf den","zum","nach"], f:["in die","an die","auf die","zur","nach"],
-    n:["ins","ans","aufs","zum","nach"],       pl:["in die","an die","auf die","zu den","nach"],
-    none:["in","an","auf","zu","nach"]
-  },
-  woher:{
-    m:["aus dem","vom"], f:["aus der","von der"], n:["aus dem","vom"], pl:["aus den","von den"], none:["aus","von"]
-  }
-};
-function buttonsFor(entry,q){return BUTTONS[q][entry.gender||"none"];}
-function nounFor(entry,q){return (entry.forms&&entry.forms[q])||entry.noun;}
-function leadFor(entry,q){return (entry.lead&&entry.lead[q.key])||q.lead;}
-function altsFor(entry,q){return (entry.alt&&entry.alt[q])||[];}
-// Shown below the Continue button when a real everyday variant was chosen (e.g. "auf der Arbeit").
-function altNote(entry,q,form){return "Auch richtig: "+form+" "+nounFor(entry,q)+".";}
-// Shown below the Continue button ONLY when zu/von was picked where the box wants in/an/auf (Wohin) or aus (Woher):
-// this drill trains ending up IN/AT/ON the place, not just going up to it.
-const ZU_BOX={raum:"in",ausnahme:"in",land:"in",adresse:"in",kontakt:"an",flaeche:"auf"};
-const ZU_TEXT=window.ORTS_ZU_HINTS||{};
-function zuHint(entry,q,form){
-  const b=s=>"<b>"+escapeHtml(s)+"</b>";
-  // Bahnhof-type cards (an · zu · von): here zu IS right — note when an den / an die was picked.
-  if(entry.cat==="anzu"&&q==="wohin"&&/^an\b/.test(form))
-    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,"normal")+"</div><div>"+b(form+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,"unueblich")+"</div>";
-  const box=ZU_BOX[entry.cat];if(!box)return "";
-  if(q==="wohin"&&/^zu/.test(form))
-    return "<div>"+b(entry.wohin+" "+nounFor(entry,"wohin"))+" — "+getTranslation(ZU_TEXT,box)+"</div><div>"+b(form+" "+nounFor(entry,"wo"))+" — "+getTranslation(ZU_TEXT,"zu")+"</div>";
-  if(q==="woher"&&/^von?/.test(form)&&/^aus/.test(entry.woher))
-    return "<div>"+b(entry.woher+" "+nounFor(entry,"woher"))+" — "+getTranslation(ZU_TEXT,"aus")+"</div><div>"+b(form+" "+nounFor(entry,"woher"))+" — "+getTranslation(ZU_TEXT,"von")+"</div>";
-  return "";
-}
-
-const els = {
-  session:document.getElementById("sessionScreen"),game:document.getElementById("game"),end:document.getElementById("endScreen"),
-  counter:document.getElementById("counter"),bar:document.getElementById("bar"),card:document.getElementById("card"),
-  eyebrow:document.getElementById("eyebrow"),place:document.getElementById("place"),translation:document.getElementById("translation"),
-  steps:document.getElementById("steps"),rule:document.getElementById("rule"),ruleLabel:document.getElementById("ruleLabel"),ruleForms:document.getElementById("ruleForms"),ruleNote:document.getElementById("ruleNote"),
-  choices:document.getElementById("choices"),next:document.getElementById("next"),
-  endScore:document.getElementById("endScore"),endNote:document.getElementById("endNote"),again:document.getElementById("again"),homeBack:document.getElementById("homeBack")
-};
-
-let session=[], index=0, step=0, score=0, taps=0, cardResults=[], usedAlts=[], zuHints=[], locked=false, cardDone=false;
-
-// ===== PERSISTENT DIFFICULTY =====
-// Tracked per place AND per question: missing "Woher? Strand" only raises
-// that step. A card's weight is the average of its three steps.
-// A place appears only once per session (weighted sampling without replacement).
-const DIFFICULTY_KEY="ortspraepositionenDifficultyV1";
-let difficulty={};
-try{difficulty=JSON.parse(localStorage.getItem(DIFFICULTY_KEY)||"{}")}catch(e){difficulty={}}
-function saveDifficulty(){try{localStorage.setItem(DIFFICULTY_KEY,JSON.stringify(difficulty))}catch(e){}}
-function stepWeight(entry,q){return Math.max(1,Number((difficulty[entry.id]||{})[q]||1));}
-function cardWeight(entry){return QUESTIONS.reduce((s,q)=>s+stepWeight(entry,q.key),0)/QUESTIONS.length;}
-function updateDifficulty(entry,q,correct){
-  let d=stepWeight(entry,q);
-  d=correct?Math.max(1,d-0.5):Math.min(4,d+1);
-  if(!difficulty[entry.id])difficulty[entry.id]={};
-  difficulty[entry.id][q]=Number(d.toFixed(2));
-  saveDifficulty();
-}
-// ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====
-// Counted per RULE category (e.g. "Raum → in · in · aus"), weighted by the number of places it covers,
-// like Artikel. A card counts as right only when all three lines (Wo / Wohin / Woher) were right.
-// Guarded: the exercise keeps working if the helper is missing.
-const PROGRESS_ID="ortspraepositionen";
-const hasProgress=()=>typeof window.DeutschProgress==="object";
-const progressKey=entry=>"cat:"+entry.cat;
-if(hasProgress()){
-  const items=new Map();
-  PLACES.forEach(e=>{
-    const k=progressKey(e),c=CATEGORIES[e.cat]||{},it=items.get(k);
-    if(it)it.weight++;else items.set(k,{key:k,label:(c.label||e.cat)+(c.rule?" → "+c.rule:""),weight:1});
-  });
-  DeutschProgress.init(PROGRESS_ID,[...items.values()]);
-}
-
-function buildSession(size){
-  return PLACES.map(entry=>({entry,key:-Math.log(Math.max(Math.random(),1e-12))/cardWeight(entry)}))
-    .sort((a,b)=>a.key-b.key).slice(0,Math.min(size,PLACES.length)).map(x=>x.entry);
-}
-
-// ===== DAILY STATS (read by Home) =====
-// One finished card (all three lines) counts as one answer for Home.
-// It counts as correct only when all three lines were right.
-const DAILY_STATS_KEY="deutschDailyStatsV1";
-function localDayKey(){
-  const d=new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-}
-function recordDaily(correct){
-  try{
-    const today=localDayKey();
-    let data=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"{}");
-    if(data.date!==today)data={date:today};
-    if(!data.ortspraepositionen)data.ortspraepositionen={answers:0,correct:0};
-    data.ortspraepositionen.answers++;
-    if(correct)data.ortspraepositionen.correct++;
-    localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(data));
-  }catch(e){}
-}
-
-// ===== FLOW =====
-function start(size){
-  session=buildSession(size);index=0;score=0;taps=0;
-  els.session.classList.add("hidden");els.end.classList.add("hidden");els.game.classList.remove("hidden");
-  render();
-}
-function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-
-function render(){
-  const entry=session[index];
-  step=0;cardResults=[];usedAlts=[];zuHints=[];locked=false;cardDone=false;
-  els.counter.textContent=(index+1)+" / "+session.length;
-  els.bar.style.width=(index/session.length*100)+"%";
-
-  els.card.className="card";els.game.classList.remove("good","bad");
-  els.eyebrow.innerHTML="&nbsp;";
-  els.place.innerHTML=(entry.article?'<span class="article">'+escapeHtml(entry.article)+'</span>':"")+escapeHtml(entry.noun);
-  els.translation.textContent=getTranslation(entry,"translation");
-
-  els.steps.innerHTML=QUESTIONS.map((q,i)=>
-    '<div class="step '+(i===0?"active":"pending")+'" data-step="'+i+'">'+
-      '<div class="step-q">'+q.label+'</div>'+
-      '<div class="sentence"><span class="lead">'+escapeHtml(leadFor(entry,q))+'</span> <span class="slot" id="slot'+i+'">&nbsp;</span> '+escapeHtml(nounFor(entry,q.key))+'.</div>'+
-    '</div>'
-  ).join("");
-
-  els.ruleLabel.textContent="";els.ruleForms.textContent="";els.ruleNote.innerHTML="";
-  els.next.classList.add("hidden");
-  els.choices.classList.remove("hidden");
-  renderChoices();
-  fitToCard(els.place);
-}
-
-function renderChoices(){
-  const entry=session[index],q=QUESTIONS[step].key,list=buttonsFor(entry,q);
-  els.choices.className="choices "+(list.length===2?"two":"five");
-  els.choices.innerHTML=list.map((form,i)=>'<button class="choice" data-form="'+escapeHtml(form)+'" data-slot="'+(i+1)+'">'+escapeHtml(form)+'</button>').join("");
-}
-
-function answer(form){
-  if(locked||cardDone)return;
-  const entry=session[index],q=QUESTIONS[step],right=entry[q.key],isAlt=altsFor(entry,q.key).includes(form),correct=form===right||isAlt;
-  if(isAlt)usedAlts.push({q:q.key,form});
-  if(!correct){const h=zuHint(entry,q.key,form);if(h)zuHints.push(h);}
-  locked=true;
-  taps++;if(correct)score++;
-  cardResults.push(correct);
-  updateDifficulty(entry,q.key,correct);
-
-  const slot=document.getElementById("slot"+step);
-  if(correct){
-    slot.className="slot good";slot.textContent=form;
-  }else{
-    slot.className="slot bad";
-    slot.innerHTML='<span class="wrong">'+escapeHtml(form)+'</span><span class="right">'+escapeHtml(right)+'</span>';
-  }
-  pop(slot);
-  els.choices.querySelectorAll("button").forEach(b=>b.disabled=true);
-
-  // Short pause so the result of this line can be seen, then the next line opens.
-  setTimeout(()=>{
-    const rows=els.steps.querySelectorAll(".step");
-    rows[step].classList.remove("active");
-    if(step<QUESTIONS.length-1){
-      step++;
-      rows[step].classList.remove("pending");rows[step].classList.add("active");
-      renderChoices();locked=false;
-    }else{
-      finishCard();
-    }
-  },correct?380:700);
-}
-
-function finishCard(){
-  const entry=session[index],cat=CATEGORIES[entry.cat]||{};
-  const wrong=cardResults.filter(x=>!x).length;
-  cardDone=true;locked=false;
-  recordDaily(wrong===0);
-  if(hasProgress())DeutschProgress.record(PROGRESS_ID,progressKey(entry),wrong===0);
-  els.card.classList.add("done");els.game.classList.add(wrong?"bad":"good");
-  els.eyebrow.textContent=wrong?"Nicht ganz · "+(3-wrong)+" / 3":"Richtig";
-  els.ruleLabel.textContent=cat.label||"";
-  els.ruleForms.textContent=cat.rule||"";
-  els.ruleNote.innerHTML=(entry.note?"<div>"+escapeHtml(getTranslation(entry,"note"))+"</div>":"")+usedAlts.map(a=>"<div>"+escapeHtml(altNote(entry,a.q,a.form))+"</div>").join("")+zuHints.join("");
-  els.choices.classList.add("hidden");
-  els.next.textContent=index===session.length-1?"Fertig":"Weiter";
-  els.next.classList.remove("hidden");
-  els.bar.style.width=((index+1)/session.length*100)+"%";
-}
-
-function next(){
-  if(!cardDone)return;
-  if(index>=session.length-1){finish();return;}
-  index++;render();window.scrollTo({top:0,behavior:"smooth"});
-}
-function finish(){
-  els.game.classList.add("hidden");els.end.classList.remove("hidden");
-  els.endScore.textContent=score+" / "+taps;window.scrollTo({top:0,behavior:"auto"});
-  els.endNote.textContent="Was schwierig war, kommt öfter wieder.";
-}
-
-// ===== SMALL MOTION =====
-const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
-function pop(el){
-  if(reduceMotion.matches||!el.animate)return;
-  el.animate([{opacity:0,transform:"translateY(-5px)"},{opacity:1,transform:"none"}],{duration:180,easing:"ease-out"});
-}
-
-// Keeps the CSS size for places that fit; shrinks only a word wider than the card.
-function fitToCard(el){
-  el.style.fontSize="";
-  const card=el.parentElement,cs=getComputedStyle(card);
-  const available=card.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
-  const width=el.getBoundingClientRect().width;
-  if(width>available&&available>0){
-    el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)*available/width*0.97)+"px";
-  }
-}
-window.addEventListener("resize",()=>{if(!els.game.classList.contains("hidden"))fitToCard(els.place);});
-
-// ===== EVENTS =====
-document.querySelectorAll(".session-option").forEach(btn=>btn.addEventListener("click",()=>start(Number(btn.dataset.size))));
-els.choices.addEventListener("click",e=>{const btn=e.target.closest("button[data-form]");if(btn&&!btn.disabled)answer(btn.dataset.form);});
-els.next.addEventListener("click",next);
-els.again.addEventListener("click",()=>{els.end.classList.add("hidden");els.session.classList.remove("hidden");});
-function goBackToHome(){
-  try{
-    if(window.parent && window.parent!==window){
-      if(typeof window.parent.closeApp==="function"){
-        window.parent.closeApp();
-        return;
-      }
-      const parentDoc=window.parent.document;
-      const shell=parentDoc.getElementById("appShell");
-      const frame=parentDoc.getElementById("appFrame");
-      if(shell && frame){
-        shell.classList.remove("open");
-        shell.setAttribute("aria-hidden","true");
-        parentDoc.documentElement.classList.remove("app-open");
-        frame.src="about:blank";
-        return;
-      }
-    }
-  }catch(e){}
-  window.parent.postMessage({type:"deutsch:home"},"*");
-}
-els.homeBack.addEventListener("click",goBackToHome);
-// Desktop: keys 1–5 pick the button in that slot, Enter/Space continues.
-document.addEventListener("keydown",e=>{
-  if(els.game.classList.contains("hidden"))return;
-  if(cardDone){
-    if(e.key==="Enter"||e.key===" "){e.preventDefault();next();}
-    return;
-  }
-  const btn=els.choices.querySelector('button[data-slot="'+e.key+'"]');
-  if(btn&&!btn.disabled)answer(btn.dataset.form);
-});
-// ===== TABELLE (Wo · Wohin · Woher) =====
-// One example per group. Wohin is dimmed when it repeats the Wo word (then it's Akkusativ);
-// when the word changes (nach / zu) it stays white and is marked "Dativ" — the exception to
-// "movement = Akkusativ". Dot = a group with a mistake not yet answered right again
-// (step weight >= 2 in the difficulty store, same data that makes cards come back).
-const TABLE_ROWS=[
-  // v21: two examples (no articles, except a country that needs one), the category underneath.
-  // Kino + Schweiz share one row: same pattern in · in · aus.
-  {cats:["raum","land"],ex:"Kino, die Schweiz",label:"Raum · Land mit Artikel",parts:[["raum","Raum"],["land","Land mit Artikel"]],  wo:"in", wohin:"in",  woher:"aus"},
-  {cats:["stadt"],      ex:"Berlin, Japan",    label:"Stadt, Land ohne Artikel", wo:"in", wohin:"nach",woher:"aus"},
-  {cats:["kontakt"],    ex:"See, Tisch",       label:"Wasser, Kontakt",          wo:"an", wohin:"an",  woher:"von"},
-  {cats:["flaeche"],    ex:"Markt, Balkon",    label:"offene Fläche",            wo:"auf",wohin:"auf", woher:"von"},
-  {cats:["person"],     ex:"Arzt, Arbeit",     label:"Person, Firma, Aktivität", wo:"bei",wohin:"zu",  woher:"von"},
-  {cats:["anzu"],       ex:"Bahnhof, Kasse",   label:"am Ort",                   wo:"an", wohin:"zu",  woher:"von"},
-  {cats:["hause"],      ex:"Hause",            label:"zu Hause",                 wo:"zu", wohin:"nach",woher:"von zu"}
-];
-function weakCats(){
-  const out=new Set();
-  PLACES.forEach(e=>{const d=difficulty[e.id];if(d&&QUESTIONS.some(q=>Number(d[q.key]||1)>=2))out.add(e.cat);});
-  return out;
-}
-function renderTable(){
-  const weak=weakCats(),h=escapeHtml;
-  // v21 layout: examples + prepositions on one line, the category on a line of its own underneath.
-  // v22: recent mistakes = a faint red marker UNDER the category text (only the category, only the part with mistakes);
-  // no dots. The explanation sits in the empty top-left header cell and only shows when something is marked.
-  const mk=t=>'<span class="mk">'+h(t)+'</span>';
-  const anyMark=[...weak].some(c=>c==="ausnahme"||TABLE_ROWS.some(r=>r.cats.includes(c)));
-  let html='<div class="otbl2"><div class="h">'+(anyMark?'<span class="mk-legend">'+mk("markiert")+' =<br>zuletzt Fehler</span>':'')+'</div><div class="h">Wo?<small>Dativ</small></div><div class="h">Wohin?<small>Akk / Dat</small></div><div class="h">Woher?<small>Dativ</small></div><div class="hl"></div>';
-  TABLE_ROWS.forEach(r=>{
-    const same=r.wohin===r.wo;
-    const label=r.parts?r.parts.map(([c,t])=>weak.has(c)?mk(t):h(t)).join(' · '):(weak.has(r.cats[0])?mk(r.label):h(r.label));
-    html+='<div class="ex">'+h(r.ex)+'</div>'
-      +'<div class="p">'+h(r.wo)+'</div>'
-      +'<div class="p'+(same?' same':'')+'"><span class="w">'+h(r.wohin)+(same?'':'<span class="d">Dativ</span>')+'</span></div>'
-      +'<div class="p'+(r.woher.length>4?' long':'')+'">'+h(r.woher)+'</div>'
-      +'<div class="cat">'+label+'</div>';
-  });
-  html+='</div><div class="ofoot"><b>'+(weak.has("ausnahme")?mk("immer in:"):'immer in:')+'</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>';
-  document.getElementById("otable").innerHTML=html;
-}
-const omodal=document.getElementById("omodal");
-function openTable(){renderTable();omodal.classList.add("open");omodal.setAttribute("aria-hidden","false");}
-function closeTable(){omodal.classList.remove("open");omodal.setAttribute("aria-hidden","true");}
-document.querySelectorAll("[data-otable]").forEach(b=>b.addEventListener("click",openTable));
-document.getElementById("oclose").addEventListener("click",closeTable);
-omodal.addEventListener("click",e=>{if(e.target===omodal)closeTable();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&omodal.classList.contains("open"))closeTable();});
-
-</script>
-</body>
+    <script src="../../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="../../components/deutsch-day-v1.js?v=1"></script>
+    <script src="places.js?v=1"></script>
+    <script src="../../components/deutsch-progress-v1.js"></script>
+    <script src="ortspraepositionen.js?v=1"></script>
+  </body>
 </html>

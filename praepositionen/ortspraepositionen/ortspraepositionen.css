@@ -1,0 +1,907 @@
+/* Ortspräpositionen — styles. Markup: index.html · script: ortspraepositionen.js · places: places.js
+   When this file changes, raise its ?v= in index.html, the Präpositionen page's ortspraepositionen/index.html?v=
+   and the Home tile's praepositionen/?v= */
+
+/* ===== PALETTE ===== */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif; /* places, sentences, table examples */
+
+  --bg: #1b1b1d;
+  --card-bg: #2a2a2d; /* 10/20/30 buttons, answer buttons, table window */
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --text-secondary: #c8c7c4; /* table button, rule label, notes */
+  --mint: #5bc8a4;
+  --red: #ff7770;
+
+  --hairline: rgba(255, 255, 255, 0.1); /* outlines, progress track */
+  --row-line: rgba(255, 255, 255, 0.09); /* Wo / Wohin / Woher rows, table lines */
+  --line-strong: rgba(255, 255, 255, 0.2); /* active row, empty answer slot */
+  --row-bg: rgba(255, 255, 255, 0.035); /* Wo / Wohin / Woher rows */
+  --field-bg: rgba(255, 255, 255, 0.03); /* Weiter */
+  --focus: rgba(255, 255, 255, 0.18);
+  --overlay-scrim: rgba(0, 0, 0, 0.34);
+  --mark-strength: 15%; /* mistake marker in the table */
+  --top-good-glow: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(91, 200, 164, 0.34) 0%,
+    rgba(91, 200, 164, 0.17) 35%,
+    rgba(91, 200, 164, 0.06) 68%,
+    rgba(91, 200, 164, 0) 100%
+  );
+  --top-bad-glow: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(255, 119, 112, 0.36) 0%,
+    rgba(255, 119, 112, 0.18) 35%,
+    rgba(255, 119, 112, 0.06) 68%,
+    rgba(255, 119, 112, 0) 100%
+  );
+
+  /* shared across exercises (Design Police 2026-09-25) */
+  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
+  --start-version: rgba(255, 255, 255, 0.24);
+  --end-again-text: rgba(242, 240, 237, 0.55);
+  --end-main-bg: #ece6dc; /* cream: „Zur Startseite“ */
+  --end-main-text: #1b1b1d;
+}
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --card-bg: #fff;
+  --text: #242426;
+  --muted: #727278;
+  --text-secondary: #55565b;
+  --mint: #3fa68a;
+  --red: #e95e66;
+
+  --hairline: rgba(0, 0, 0, 0.1);
+  --row-line: rgba(0, 0, 0, 0.09);
+  --line-strong: rgba(0, 0, 0, 0.2);
+  --row-bg: rgba(255, 255, 255, 0.42);
+  --field-bg: #fff;
+  --focus: rgba(0, 0, 0, 0.18);
+  --overlay-scrim: rgba(0, 0, 0, 0.2);
+  --mark-strength: 12%;
+  --top-good-glow: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(63, 166, 138, 0.26) 0%,
+    rgba(63, 166, 138, 0.12) 35%,
+    rgba(63, 166, 138, 0.04) 68%,
+    rgba(63, 166, 138, 0) 100%
+  );
+  --top-bad-glow: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(233, 94, 102, 0.25) 0%,
+    rgba(233, 94, 102, 0.11) 35%,
+    rgba(233, 94, 102, 0.04) 68%,
+    rgba(233, 94, 102, 0) 100%
+  );
+
+  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --start-version: rgba(36, 36, 38, 0.34);
+  --end-again-text: rgba(36, 36, 38, 0.55);
+  --end-main-bg: #242426;
+  --end-main-text: #f6f4f1;
+}
+
+/* ===== PAGE SHELL (same as Partizip II / Modalverben) =====
+   The page itself never scrolls or bounces. Everything lives in .app, which fills the screen
+   and scrolls on its own only when the content is taller than the screen (small phones, large text).
+   .app has no top or bottom padding on purpose: Safari measures sticky offsets from inside the scroller's
+   padding, Chrome from its edge (the answer buttons stick to the bottom on phones). The space at the top
+   (status bar + gap, --shell-top) is on the screens; the space at the bottom is .app::after. */
+:root {
+  --shell-top: clamp(20px, 5vw, 38px);
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: 0;
+}
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.app {
+  position: fixed;
+  inset: 0;
+  width: min(100%, 620px);
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: 0 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.app::after {
+  content: "";
+  display: block;
+  height: 36px;
+}
+.hidden {
+  display: none !important;
+}
+
+/* ===== START + SUMMARY SCREENS ===== */
+#sessionScreen,
+#endScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--shell-top) + 8px) 20px 36px;
+}
+#sessionScreen {
+  padding-top: calc(var(--shell-top) + 56px);
+}
+#sessionScreen h1,
+#endScreen h1 {
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0 0 11px;
+}
+#sessionScreen h1 {
+  font-size: clamp(28px, 8.6vw, 36px);
+}
+#sessionScreen p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+  max-width: 390px;
+}
+
+/* 10 / 20 / 30 */
+.session-options {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 12px;
+}
+.session-option {
+  appearance: none;
+  flex: 0 0 96px;
+  width: 96px;
+  min-width: 0;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font: 650 21px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.session-option:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.session-option:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* „Orte · Tabelle“: on the start screen under 10/20/30, during a round at the Home screen's
+   „Settings“ spot (centred, 28px above the bottom edge) */
+.table-btn {
+  appearance: none;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 11px 14px;
+  box-shadow: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.table-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+#sessionScreen .table-btn {
+  margin-top: 28px;
+}
+.in-session-table {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+}
+.in-session-table .table-btn {
+  pointer-events: auto;
+  margin: 0;
+  background: var(--bg);
+  font: 400 14px/1.2 var(--font);
+}
+
+/* Description „Worum geht's?“ (same as the other exercises).
+   Width = the 10/20/30 row (3 × 96px + 2 × 12px = 312px). Headline German, text in the user's language
+   (Settings → Translations), fixed above the version mark. Palette grey, so it doesn't compete with the buttons. */
+.start-about {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 64px);
+  margin: 0 auto;
+  padding: 0;
+  width: 312px;
+  max-width: calc(100% - 36px);
+  text-align: center;
+  font-family: var(--font);
+  z-index: 4;
+}
+.start-about h2 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.start-about .about-de {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+body:has(#sessionScreen.hidden) .start-about {
+  display: none;
+}
+
+/* Version number: only on the start and summary screens */
+.version-mark {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font: 400 11px/1 var(--font);
+  letter-spacing: 0.04em;
+  color: var(--start-version);
+  pointer-events: none;
+  z-index: 5;
+}
+body:has(#game:not(.hidden)) .version-mark {
+  display: none;
+}
+
+/* Summary */
+#endScreen h1 {
+  font-size: 58px;
+  letter-spacing: -0.05em;
+  margin-bottom: 24px;
+}
+.end-score {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+}
+.end-note {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 28px;
+  max-width: 390px;
+}
+.finish-actions {
+  width: min(100%, 360px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.finish-actions button {
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#playAgain {
+  background: transparent;
+  color: var(--end-again-text);
+  border: 1px solid var(--hairline);
+}
+#homeBack {
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+}
+.finish-actions button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== TOP BAR ===== title and counter in the palette grey, 3px progress line: hairline track + grey fill.
+   Green stays reserved for „correct“. Position = Partizip II: title and counter centred 33.5px from the top,
+   line at 55px. */
+#game {
+  padding-top: var(--shell-top);
+}
+.top {
+  position: relative;
+  margin: 13px 0 0;
+}
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.counter {
+  font-size: 14px;
+  color: var(--muted);
+  padding-bottom: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.progress {
+  margin-top: 11px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--muted);
+  border-radius: inherit;
+  transition: width 0.25s ease;
+}
+
+/* Result glow: starts right under the progress line (straight top edge)
+   and fades to zero exactly at the progress line's left and right ends. */
+.glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 440px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+  background: var(--result-glow, none);
+}
+#game.good .glow {
+  --result-glow: var(--top-good-glow);
+  opacity: 1;
+}
+#game.bad .glow {
+  --result-glow: var(--top-bad-glow);
+  opacity: 1;
+}
+
+/* ===== QUESTION CARD =====
+   No card background: the place, the three lines and the rule sit directly on the page. */
+.card {
+  margin-top: 15px;
+  padding: 34px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 650;
+  height: 14px;
+  margin-bottom: 12px;
+  color: transparent;
+  transition: color 0.2s ease;
+}
+#game.good .eyebrow {
+  color: var(--mint);
+}
+#game.bad .eyebrow {
+  color: var(--red);
+}
+.place {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 32px;
+  white-space: nowrap;
+  letter-spacing: -0.6px;
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+.place .article {
+  color: var(--muted);
+  font-size: 0.62em;
+  letter-spacing: -0.2px;
+  margin-right: 0.2em;
+  vertical-align: 0.08em;
+}
+.translation {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
+  min-height: 23px;
+}
+
+/* Three lines: Wo · Wohin · Woher */
+.steps {
+  width: 100%;
+  margin-top: 24px;
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+.step {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 15px;
+  border: 1px solid var(--row-line);
+  background: var(--row-bg);
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease;
+}
+.step.pending {
+  opacity: 0.38;
+}
+.step.active {
+  border-color: var(--line-strong);
+}
+.step-q {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.step.active .step-q {
+  color: var(--text);
+}
+.sentence {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.35;
+  min-width: 0;
+}
+.sentence .lead {
+  color: var(--muted);
+}
+.slot {
+  display: inline-block;
+  min-width: 3.2em;
+  padding: 0 0.15em;
+  margin: 0 0.12em;
+  text-align: center;
+  border-bottom: 1.5px solid var(--line-strong);
+  line-height: 1.15;
+}
+.step.active .slot {
+  border-bottom-color: var(--text);
+}
+.step .slot.good,
+.step .slot.bad {
+  border-bottom-color: transparent;
+  min-width: 0;
+}
+.slot.good {
+  color: var(--mint);
+}
+.slot .wrong {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--red);
+  opacity: 0.82;
+  margin-right: 0.3em;
+}
+.slot .right {
+  color: var(--text);
+}
+
+/* After the card: the rule group, its three prepositions and any notes below Weiter */
+.rule {
+  margin-top: 18px;
+  min-height: 40px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.card.done .rule {
+  opacity: 1;
+}
+.rule-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.rule-forms {
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.rule-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  text-align: center;
+}
+.rule-note:empty {
+  display: none;
+}
+.rule-note div + div {
+  margin-top: 4px;
+}
+
+/* ===== ANSWER BUTTONS ===== same shape as Artikel and Fester Kasus.
+   Fixed slots: 1 in/aus · 2 an · 3 auf · 4 bei/zu (Personen) · 5 extra (zu Hause / nach).
+   Wo + Wohin: 3 on top, 2 below. Woher: 2 side by side. */
+.choices {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+.choice {
+  grid-column: span 2;
+  appearance: none;
+  min-height: 56px;
+  height: 56px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease,
+    opacity 0.16s ease;
+}
+.choices.five .choice:nth-child(n + 4),
+.choices.two .choice {
+  grid-column: span 3;
+}
+.choice:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.choice:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.choice:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ===== WEITER ===== the quiet button (blueprint: Partizip II). It doesn't urge you on; you read the answer first. */
+#next {
+  width: 100%;
+  height: 56px;
+  margin-top: 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: 600 16px/1 var(--font);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#next:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== TABLE WINDOW „Wo · Wohin · Woher“ =====
+   The table-window rule: blur 8px + 34% / 20% darkening (like Home's settings dialog), card colour,
+   10% outline, 24px corners, fade + zoom-in, × top right, tap outside / Esc closes. */
+.omodal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  z-index: 20;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px); /* on the layer itself, so the blur fades in and out together with it */
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.omodal.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.osheet {
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 18px 18px 16px;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.omodal.open .osheet {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.ohead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.ohead h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.oclose {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+/* Table (v21): examples (two, no articles except a country that needs one) and the prepositions on ONE line;
+   the category on its own line underneath, full width. „Dativ“ hangs under nach / zu without lifting the word,
+   so all prepositions sit on one line. Prepositions and their headers centred in their columns. */
+.otbl2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  column-gap: 14px;
+  align-items: baseline;
+}
+.otbl2 > div {
+  min-width: 0;
+}
+.otbl2 .h {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 650;
+  padding: 0 0 8px;
+  align-self: end;
+}
+.otbl2 .h small {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+.otbl2 .hl {
+  grid-column: 1/-1;
+  border-bottom: 1px solid var(--row-line);
+}
+.otbl2 .ex {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.2;
+  padding-top: 10px;
+  white-space: nowrap;
+}
+.otbl2 .p {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding-top: 10px;
+  white-space: nowrap;
+}
+.otbl2 .h:not(:first-child),
+.otbl2 .p {
+  text-align: center;
+}
+.otbl2 .same {
+  color: var(--muted);
+  font-weight: 500;
+  opacity: 0.72;
+}
+.otbl2 .w {
+  position: relative;
+  display: inline-block;
+}
+.otbl2 .d {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.otbl2 .cat {
+  grid-column: 1/-1;
+  font-size: 12.5px;
+  line-height: 1.25;
+  color: var(--muted);
+  padding: 2px 0 9px;
+  border-bottom: 1px solid var(--row-line);
+}
+.ofoot {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ofoot span {
+  color: var(--muted);
+}
+
+/* Mistake marker (v22): a faint highlighter stroke in palette red BEHIND the category text of groups with
+   recent mistakes. Strength = --mark-strength per theme. Nothing moves; the text stays full colour. */
+.mk {
+  padding: 0 3px;
+  margin: 0 -3px;
+  border-radius: 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: linear-gradient(
+    100deg,
+    transparent 0 1%,
+    color-mix(in srgb, var(--red) var(--mark-strength), transparent) 3% 96%,
+    transparent 99%
+  );
+  background-size: 100% 78%;
+  background-position: 0 70%;
+  background-repeat: no-repeat;
+}
+.mk-legend {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* ===== PHONES ===== */
+@media (max-width: 699px) {
+  .place {
+    font-size: 28px;
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --shell-top: calc(env(safe-area-inset-top) + 10px);
+  }
+  .card {
+    padding-top: 28px;
+  }
+  .step {
+    grid-template-columns: 54px 1fr;
+    padding: 11px 12px;
+    gap: 8px;
+  }
+  .sentence {
+    font-size: 17px;
+  }
+  /* the answer buttons stay in reach when the card is taller than the screen */
+  .choices {
+    position: sticky;
+    bottom: 10px;
+    z-index: 10;
+  }
+}
+@media (max-width: 359px) {
+  .otbl2 .ex {
+    white-space: normal;
+  }
+}
+
+/* ===== SHORT SCREENS (small phones, phone sideways, large text) =====
+   The description, the version number and the table button during a round follow the content instead of
+   being pinned to the bottom, so they never cover the 10/20/30 buttons, Weiter or the notes
+   (same breakpoints as Artikel / Pronomen / Partizip II / Modalverben). */
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  .start-about,
+  .version-mark,
+  .in-session-table {
+    position: static;
+  }
+  .start-about {
+    margin-top: 12px;
+  }
+  .version-mark {
+    padding: 28px 0 4px;
+  }
+  .in-session-table {
+    margin-top: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+  .osheet {
+    filter: none;
+  }
+}
