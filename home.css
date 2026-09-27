@@ -1668,8 +1668,9 @@ header h1 {
 
 /* Home button (Home 5.84): round, like the phrase screen's ‹ button — 44px circle, 10% outline, blurred see-through
    background, house in the text colour, shared press effect. Always goes straight to Home.
-   JS places it (see home.js → Home button): centred low on start / chapter / summary screens, bottom-left corner
-   during a round (.is-corner), small (32px) in the top bar or top left where there's no room (.is-small).
+   JS places it (see home.js → Home button): in the bottom row on the version number's line — centred on start /
+   chapter / summary screens, bottom left during a round (.is-corner until that line is known); small (32px) top left
+   or in the top bar on short screens (.is-small).
    Fades out while a table window is open. */
 .home-back {
   position: absolute;

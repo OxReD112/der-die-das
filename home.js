@@ -447,13 +447,15 @@ function openApp(tile) {
   const earliest = performance.now() + LAYER_FADE_MS * 0.6; // content starts once the layer has (almost) covered Home
   let started = false;
   const settled = () => {
-    shell.classList.remove("is-animating");
     animBusy = false;
     scheduleBack();
   };
   const zoomIn = () => {
     if (started) return;
     started = true;
+    shell.classList.remove("is-animating");
+    updateBack(); // the Home button is placed now and fades in with the content
+    back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ZOOM_IN_MS, easing: EASE_OUT });
     frame.style.opacity = "";
     const a = frame.animate(
       [
@@ -477,7 +479,7 @@ function closeApp() {
   if (animBusy) return;
   renderDailyStats();
   const hideShell = () => {
-    shell.classList.remove("open", "preload", "is-animating");
+    shell.classList.remove("open", "preload", "is-animating", "is-closing");
     shell.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
@@ -490,7 +492,7 @@ function closeApp() {
   }
   animBusy = true;
   setFrameWindow(false);
-  shell.classList.add("is-animating"); // Home button gone at once
+  shell.classList.add("is-animating", "is-closing"); // Home button gone at once
   // Home's pictures: get them ready now (Safari may have dropped them while the exercise covered Home)
   homeArea.querySelectorAll("img").forEach(img => img.decode && img.decode().catch(() => {}));
   const box = homeArea.getBoundingClientRect();
@@ -518,31 +520,28 @@ function closeApp() {
   };
 }
 
-/* ===== Home button (Home 5.84, replaces the "‹" of Home 5.43) =====
+/* ===== Home button (Home 5.84, one fixed row since 5.90; replaces the "‹" of Home 5.43) =====
        One round house button; it always goes straight to Home (closeApp), from every screen of every exercise.
-       Where it sits (Home reads the open exercise page directly — same site — so the exercises need no changes):
-       - start screens: centred, 28px above the „Worum geht's?“ description;
-       - chapter pages: centred, 28px above the version number;
-       - summary screens: centred in the free space under the last button, slightly above its middle (45 / 55,
-         like the phrase screen). „Zur Startseite“ is hidden there (Home adds a style to the page) — the round
-         button replaces it;
-       - during a round: bottom-left corner, 12px from the edges (like the old ⌂). If it would touch anything
-         there (on-screen keyboard, answer buttons — 4-inch iPhones, phone sideways), it moves into the top bar,
-         small, in front of the title, and stays there for this page and screen size.
-       - If a centred spot doesn't fit (short screens), the same small button sits top left.
-       Fades out while a table window is open. */
+       It always sits in the same place — the bottom row, on the line of the version number:
+       - start screens, chapter pages, summaries: in the centre; the version number moves to the right end of
+         that row (Home adds a small style to the exercise page, see ROW_STYLE);
+       - during a round: bottom left, at the same height;
+       - short screens (the exercises' short-screen rule — phone sideways, 4-inch iPhones), where the version number
+         follows the content: small, top left — during a round in front of the top-bar title.
+       No measuring of the page layout (5.84–5.89 searched each screen for a gap: slow, and a different place on
+       every screen). It appears together with the exercise's content and fades out while a table window is open. */
 const TITLE_SEL = ".top-title,.top .brand";
 const WINDOW_SEL = ".modal,.pattern-modal,.forms-modal,.omodal,.coll-modal"; // .coll-modal = Wortschatz collection window (Home 5.49)
-const CHAPTER_PATHS = ["verbformen/", "praepositionen/"];
-// things the corner button must not cover: controls, the on-screen keyboard and the question / answer text
-const HIT_SEL =
-  "button,input,textarea,a,.keyboard,.key,.card,.result,p,h1,h2,h3,[class*='step'],[class*='row'],[class*='line']";
-// the exercises' short-screen rule (phone sideways, 4-inch iPhones): no corner button there — the top bar instead
 const SHORT_SCREEN = "(max-height: 559px), (max-width: 340px) and (max-height: 609px)";
+// added to every exercise page Home opens (to move into the exercises' own styles in the shared-stylesheet round)
+const ROW_STYLE =
+  "#homeBack{display:none!important}" + // „Zur Startseite“: the round button replaces it
+  ".version-mark{text-align:right!important;padding-right:max(20px,calc((100% - 480px) / 2 + 20px))!important}" + // version → right end of the bottom row
+  ".start-about{bottom:calc(env(safe-area-inset-bottom) + 80px)!important}" + // „Worum geht's?“ 16px up: room for the button
+  ".deutsch-home-in-bar .top-title,.deutsch-home-in-bar .top .brand{padding-left:42px}"; // room for the small button in the top bar
 let backObserver = null,
   backRaf = 0,
-  topBarMode = false, // sticky "top bar" fallback during a round
-  topBarKey = "";
+  rowTop = null; // top of the button in the bottom row (from the version number's line), for this page
 
 function framePath() {
   try {
@@ -562,32 +561,16 @@ function isShown(el, win, ignoreOpacity) {
   const r = el.getBoundingClientRect();
   return r.width > 0 && r.height > 0;
 }
-function firstShown(doc, win, sel) {
-  return [...doc.querySelectorAll(sel)].find(el => isShown(el, win)) || null;
-}
-function overlaps(a, b, pad) {
-  return a.left < b.right + pad && a.right > b.left - pad && a.top < b.bottom + pad && a.bottom > b.top - pad;
-}
-// lowest bottom edge of the visible page content above `limit` (the description / version number / screen edge)
-function contentBottom(doc, win, limit) {
-  let low = 0;
-  doc.querySelectorAll("h1,h2,h3,p,button,input,.choices,.coll-line,.collCount,.doneScore,.final-score").forEach(el => {
-    if (el.closest(".start-about,.version-mark," + WINDOW_SEL) || !isShown(el, win)) return;
-    const r = el.getBoundingClientRect();
-    if (r.bottom <= limit + 1 && r.bottom > low) low = r.bottom;
-  });
-  return low;
-}
-function placeBack(mode, x, y) {
-  // mode: "center" (44px, x = centre, y = top) · "corner" (CSS places it) · "bar" / "topleft" (32px, x/y = top-left)
-  back.classList.toggle("is-small", mode === "bar" || mode === "topleft");
-  back.classList.toggle("is-corner", mode === "corner");
-  if (mode === "corner") {
+function placeBack(mode, x, y = null) {
+  // mode: "row" (44px, x = centre, y = top) · "corner" (44px, x / y = top left; CSS bottom left if y unknown) ·
+  //       "small" (32px, x / y = top left)
+  back.classList.toggle("is-small", mode === "small");
+  back.classList.toggle("is-corner", mode === "corner" && y == null);
+  if (mode === "corner" && y == null) {
     back.style.top = back.style.left = "";
     return;
   }
-  const w = mode === "center" ? 44 : 32;
-  back.style.left = Math.round(mode === "center" ? x - w / 2 : x) + "px";
+  back.style.left = Math.round(mode === "row" ? x - 22 : x) + "px";
   back.style.top = Math.round(y) + "px";
 }
 // the status-bar height as Home sees it (exercise pages inside the frame aren't reliably told)
@@ -597,16 +580,11 @@ document.body.appendChild(safeProbe);
 function safeTop() {
   return parseFloat(getComputedStyle(safeProbe).paddingTop) || 0;
 }
-function setTitleRoom(doc, on) {
-  if (!doc || !doc.documentElement) return;
-  doc.documentElement.classList.toggle("deutsch-home-in-bar", on);
-}
 
 function updateBack() {
   backRaf = 0;
-  if (animBusy) return; // placed again when the animation has finished
-  if (!shell.classList.contains("open")) {
-    setFrameWindow(false);
+  if (!shell.classList.contains("open") || shell.classList.contains("is-closing")) {
+    if (!shell.classList.contains("open")) setFrameWindow(false);
     return;
   }
   let doc, win;
@@ -614,76 +592,43 @@ function updateBack() {
     doc = frame.contentDocument;
     win = frame.contentWindow;
   } catch (e) {}
-  if (!doc || !doc.body || !win) {
+  if (!doc || !doc.head || !win) {
     placeBack("corner");
     return;
   }
   if (!doc.getElementById("deutsch-home-button")) {
     const st = doc.createElement("style");
     st.id = "deutsch-home-button";
-    st.textContent =
-      "#homeBack{display:none!important}" + // „Zur Startseite“: the round button replaces it
-      ".deutsch-home-in-bar .top-title,.deutsch-home-in-bar .top .brand{padding-left:42px}"; // room for the small button in the top bar
+    st.textContent = ROW_STYLE;
     doc.head.appendChild(st);
+    rowTop = null;
+    win.dispatchEvent(new Event("resize")); // pages that measure their own layout (Wortschatz) do it again
   }
-  const H = win.innerHeight,
-    W = win.innerWidth;
   const windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
   back.classList.toggle("is-hidden", windowOpen);
   setFrameWindow(windowOpen);
   if (windowOpen) return;
 
-  const path = framePath();
-  const about = firstShown(doc, win, ".start-about");
-  const version = firstShown(doc, win, ".version-mark");
-  const summary = firstShown(doc, win, "#playAgain,#done .finish-actions,#done .doneWords");
-  const chapter = CHAPTER_PATHS.includes(path);
-  const title = [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80);
+  const W = win.innerWidth;
+  const version = [...doc.querySelectorAll(".version-mark")].find(el => isShown(el, win, true));
+  const short = win.matchMedia(SHORT_SCREEN).matches;
+  doc.documentElement.classList.remove("deutsch-home-in-bar");
 
-  // --- start, chapter and summary screens: centred ---
-  if (about || summary || chapter) {
-    setTitleRoom(doc, false);
-    const bottomEdge = H - 24;
-    let lower, y;
-    if (summary) {
-      lower = version ? version.getBoundingClientRect().top : bottomEdge;
-      const upper = contentBottom(doc, win, lower);
-      y = upper + (lower - upper) * 0.45 - 22;
-      if (lower - upper < 44 + 40) y = -1; // no room
-    } else {
-      lower = about ? about.getBoundingClientRect().top : version ? version.getBoundingClientRect().top : bottomEdge;
-      const upper = contentBottom(doc, win, lower);
-      y = lower - 28 - 44;
-      if (y < upper + 20) y = lower - upper >= 44 + 28 ? upper + (lower - upper) / 2 - 22 : -1; // tight: centre in the gap, or no room
-    }
-    if (y >= 0) placeBack("center", W / 2, y);
-    else placeBack("topleft", Math.max(12, (W - 480) / 2 + 12), safeTop() + 12);
+  if (short) {
+    const title = !version && [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80);
+    if (title) {
+      doc.documentElement.classList.add("deutsch-home-in-bar");
+      const r = title.getBoundingClientRect();
+      placeBack("small", r.left, r.top + r.height / 2 - 16);
+    } else placeBack("small", Math.max(12, (W - 480) / 2 + 12), safeTop() + 12);
     return;
   }
-
-  // --- during a round: bottom-left corner, or the top bar if the corner is taken ---
-  const key = path + "|" + W + "x" + H;
-  if (key !== topBarKey) {
-    topBarKey = key;
-    topBarMode = false;
-  }
-  if (!topBarMode && title && win.matchMedia(SHORT_SCREEN).matches) topBarMode = true;
-  if (!topBarMode) {
-    placeBack("corner");
-    const me = back.getBoundingClientRect();
-    const hit = [...doc.querySelectorAll(HIT_SEL)].some(
-      el => !el.closest(WINDOW_SEL) && isShown(el, win) && overlaps(me, el.getBoundingClientRect(), 6)
-    );
-    if (hit && title) topBarMode = true;
-  }
-  if (topBarMode && title) {
-    setTitleRoom(doc, true);
-    const r = title.getBoundingClientRect();
-    placeBack("bar", r.left, r.top + r.height / 2 - 16);
-  } else {
-    setTitleRoom(doc, false);
-    placeBack("corner");
-  }
+  if (version) {
+    // start / chapter / summary screen: centred on the version number's line
+    const r = version.getBoundingClientRect();
+    rowTop = (r.top + r.bottom) / 2 - 22;
+    placeBack("row", W / 2, rowTop);
+  } else placeBack("corner", Math.max(12, (W - 480) / 2 + 12), rowTop); // during a round: bottom left, same height
 }
 // Home 5.69: darken the strip below the exercise frame (and the status-bar colour) while an exercise window is open
 function setFrameWindow(on) {
