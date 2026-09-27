@@ -38,10 +38,7 @@
   const RECENT_DAYS=22; // today + 21 days back
   const catalog={};     // exercise -> Map(itemKey -> {label, weight}), set by init()
 
-  function today(){
-    const d=new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-  }
+  function today(){ return daysAgo(0); }
   function daysAgo(n){
     const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()-n);
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
