@@ -1,0 +1,745 @@
+/* Pronomen — styles. Markup: index.html · script: pronomen.js
+   When this file changes, raise its ?v= in index.html and the Home tile's pronomen/?v= */
+
+/* ===== PALETTE ===== */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+
+  --bg: #1b1b1d;
+  --card-bg: #2a2a2d; /* 10/20/30 buttons, table window */
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --text-secondary: #c8c7c4; /* table button, „Noch üben“ box */
+  --mint: #5bc8a4;
+  --red: #ff7770;
+
+  --hairline: rgba(255, 255, 255, 0.1); /* outlines, table lines, progress track */
+  --feedback-line: rgba(255, 255, 255, 0.11);
+  --field-bg: rgba(255, 255, 255, 0.03); /* typing field and Weiter */
+  --game-title: rgba(255, 255, 255, 0.11);
+  --overlay-scrim: rgba(0, 0, 0, 0.34);
+  --close-icon: #fff;
+  --mark-strength: 15%;
+
+  /* shared across exercises (Design Police 2026-09-25) */
+  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
+  --start-version: rgba(255, 255, 255, 0.24);
+  --end-again-text: rgba(242, 240, 237, 0.55);
+  --end-main-bg: #ece6dc; /* cream: Prüfen and „Zur Startseite“ */
+  --end-main-text: #1b1b1d;
+}
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --card-bg: #fff;
+  --text: #242426;
+  --muted: #727278;
+  --text-secondary: #55565b;
+  --mint: #3fa68a;
+  --red: #e95e66;
+
+  --hairline: rgba(0, 0, 0, 0.1);
+  --feedback-line: rgba(0, 0, 0, 0.11);
+  --field-bg: #fff;
+  --game-title: rgba(36, 36, 38, 0.09);
+  --overlay-scrim: rgba(0, 0, 0, 0.2);
+  --close-icon: #242426;
+  --mark-strength: 12%;
+
+  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --start-version: rgba(36, 36, 38, 0.34);
+  --end-again-text: rgba(36, 36, 38, 0.55);
+  --end-main-bg: #242426;
+  --end-main-text: #f6f4f1;
+}
+
+/* ===== PAGE SHELL (same as Artikel and Partizip II) =====
+   The page itself never scrolls or bounces. Everything lives in .app, which fills the screen
+   and scrolls on its own only when the content is taller than the screen (small phones, large text).
+   .app has no top padding on purpose: Safari measures the sticky top bar from inside the scroller's
+   padding, Chrome from its edge. The status-bar space is on the screens themselves instead. */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.app {
+  position: fixed;
+  inset: 0;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 0 18px 42px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.screen {
+  padding: calc(env(safe-area-inset-top) + 28px) 14px 20px;
+}
+p {
+  line-height: 1.5;
+}
+
+/* ===== START + SUMMARY SCREENS ===== */
+#start,
+#done {
+  text-align: center;
+}
+.brand {
+  font-size: clamp(56px, 12vw, 94px);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  color: var(--game-title);
+  margin: 30px 0 70px;
+}
+.brand-done {
+  margin-bottom: 45px;
+}
+h1 {
+  font-size: 34px;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+}
+.muted {
+  color: var(--muted);
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0;
+}
+.size {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font: 650 21px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.size:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* „Pronomen · Tabelle“ — on the start screen and during the game */
+.table-buttons {
+  display: flex;
+  gap: 9px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.table-btn {
+  margin: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.table-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* „Worum geht's?“ — width = the 10/20/30 row (3 × 96px + 2 × 12px), fixed above the version mark (2026-09-26) */
+.start-about {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 64px);
+  margin: 0 auto;
+  padding: 0;
+  width: 312px;
+  max-width: calc(100% - 36px);
+  text-align: center;
+  z-index: 4;
+}
+.start-about h2 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.start-about .about-de {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+body:has(#start.hidden) .start-about {
+  display: none;
+}
+
+.done-score {
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin: 18px 0 6px;
+}
+.done-note {
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.weak {
+  margin: 22px auto;
+  max-width: 420px;
+  padding: 16px;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  color: var(--text-secondary);
+}
+.done-actions {
+  width: min(100%, 360px);
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.done-actions button {
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.done-actions button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+#playAgain {
+  background: transparent;
+  color: var(--end-again-text);
+  border: 1px solid var(--hairline);
+}
+#homeBack {
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+}
+
+/* Version number: only on the start and summary screens */
+.version-mark {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font: 400 11px/1 var(--font);
+  letter-spacing: 0.04em;
+  color: var(--start-version);
+  pointer-events: none;
+  z-index: 5;
+}
+body:has(#game:not(.hidden)) .version-mark {
+  display: none;
+}
+
+/* Short screens: the description and version number follow the content instead of being pinned
+   to the bottom, so they never cover the 10/20/30 or summary buttons (same as Artikel) */
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  .start-about,
+  .version-mark {
+    position: static;
+    margin: 0 auto;
+  }
+  .start-about {
+    margin-top: 12px;
+  }
+  .version-mark {
+    padding: 28px 0 4px;
+  }
+}
+
+/* ===== TOP BAR · position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px ===== */
+#game {
+  padding-top: calc(env(safe-area-inset-top) + 23px);
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -14px;
+  padding-bottom: 14px;
+  position: sticky;
+  top: calc(env(safe-area-inset-top) + 4px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--hairline);
+  border-radius: 99px;
+}
+/* covers the strip above the bar while the panel scrolls */
+.top:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(env(safe-area-inset-top) + 4px);
+  background: var(--bg);
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.counter {
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 99px;
+  overflow: hidden;
+  z-index: 1;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--muted);
+  width: 0;
+}
+
+/* ===== QUESTION ===== */
+.exercise {
+  display: flex;
+  flex-direction: column;
+}
+.prompt {
+  text-align: center;
+  margin: 44px auto 0;
+  max-width: 680px;
+}
+.context {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 17px;
+}
+.sentence {
+  font-size: clamp(30px, 7vw, 45px);
+  line-height: 1.18;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 699px) {
+  .sentence {
+    font-size: 28px; /* sentences 28px on phones */
+  }
+}
+.translation {
+  font-size: 16px;
+  color: var(--muted);
+  margin-top: 17px;
+}
+
+/* Typing field (shared look: Wortschatz, Pronomen, Modalverben, Partizip II). Never green (green = correct).
+   Empty field: a blinking cursor in the middle is the only hint („type here“). */
+.answerbox {
+  margin: 34px auto 0;
+  width: min(600px, 100%);
+  min-height: 58px;
+  padding: 0 17px;
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: 400 24px var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html:not(.is-touch) .answerbox {
+  cursor: text;
+}
+.placeholder {
+  font-size: 0; /* empty span: the caret below is the only thing shown */
+}
+.placeholder::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 28px;
+  background: var(--text);
+  vertical-align: middle;
+  animation: fieldCaret 1.1s steps(1) infinite;
+}
+@keyframes fieldCaret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Prüfen (computer only; phones answer with ✓ on the keyboard): the one strong button in the game */
+.check {
+  display: none;
+  width: min(600px, 100%);
+  height: 56px;
+  margin: 14px auto 0;
+  border: 0;
+  border-radius: 17px;
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+html:not(.is-touch) .check {
+  display: block;
+}
+.check:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* ===== FEEDBACK ===== */
+.feedback {
+  --state: var(--mint);
+  position: relative;
+  margin: 42px 0 0;
+  padding: 32px 0 0;
+  text-align: center;
+  border-top: 1px solid var(--feedback-line);
+  isolation: isolate;
+}
+.feedback.wrong {
+  --state: var(--red);
+}
+.feedback:after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: 0;
+  right: 0;
+  top: -180px;
+  height: 360px;
+  pointer-events: none;
+  opacity: 0.9;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    color-mix(in srgb, var(--state) 22%, transparent) 0%,
+    color-mix(in srgb, var(--state) 10%, transparent) 32%,
+    transparent 70%
+  );
+}
+.feedback:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -1px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--state);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--state) 70%, transparent);
+  pointer-events: none;
+  animation: spread 0.42s ease-out forwards;
+}
+@keyframes spread {
+  to {
+    left: 0;
+    width: 100%;
+  }
+}
+.given,
+.correct-text {
+  font-size: 30px;
+  font-weight: 650;
+}
+.correct-text {
+  margin-top: 5px;
+}
+.bad {
+  color: var(--red);
+}
+.good {
+  color: var(--mint);
+}
+.skill {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+/* Weiter — the quiet button (blueprint: Partizip II): same surface and outline as the typing field */
+.continue {
+  position: relative;
+  z-index: 2;
+  touch-action: manipulation;
+  width: min(600px, 100%);
+  height: 56px;
+  margin-top: 25px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: 600 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.continue:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* Table button during the game: at the Home screen's „Settings“ spot (centred, 28px above the bottom edge) */
+.in-session-tables {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  z-index: 20;
+  pointer-events: none;
+}
+.in-session-tables .table-btn {
+  pointer-events: auto;
+  background: var(--bg);
+  font: 400 14px/1.2 var(--font);
+}
+
+/* ===== TABLE WINDOW =====
+   The table-window rule: blur 8px + 34% / 20% darkening (like Home's settings dialog), card colour,
+   10% outline, 24px corners, fade + zoom-in, × top right, tap outside / Esc closes.
+   The layer fills the screen exactly (inset:0, like Wortschatz v2.107). */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.modal-card {
+  width: min(680px, 100%);
+  max-height: min(74vh, 640px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 4px 22px 18px;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.modal.open .modal-card {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal-card {
+    transition: none !important;
+  }
+  .placeholder::after {
+    animation: none;
+  }
+}
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.modal-head h2 {
+  margin: 10px 0 2px;
+}
+.close {
+  border: 0;
+  background: transparent;
+  color: var(--close-icon);
+  font-size: 28px;
+}
+#modalBody {
+  overflow: auto;
+  min-height: 0;
+}
+
+/* Reference table: compact rows, the window scrolls inside */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+  font-size: 14px;
+}
+.tbl th,
+.tbl td {
+  padding: 7px 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--hairline);
+  text-align: left;
+}
+.tbl th:first-child,
+.tbl td:first-child {
+  padding-left: 0;
+}
+.tbl th:last-child,
+.tbl td:last-child {
+  padding-right: 0;
+}
+.tbl th {
+  color: var(--muted);
+  font-weight: 500;
+}
+.tbl td.nom {
+  font-weight: 700;
+}
+.formal-row:not(.show) {
+  display: none; /* formal Sie row: only shown when it has a recent mistake */
+}
+.tbl-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+/* „Possessiv-Endungen“ fold-out */
+.tbl-more {
+  margin-top: 16px;
+  padding-bottom: 2px;
+}
+.tbl-more summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.tbl-more summary::-webkit-details-marker {
+  display: none;
+}
+.tbl-more summary::before {
+  content: "▸";
+  display: inline-block;
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+.tbl-more[open] summary::before {
+  transform: rotate(90deg);
+}
+.tbl-more .tbl {
+  margin-top: 2px;
+}
+/* Recent mistake marker (same as Ortspräpositionen) */
+.mk {
+  padding: 0 3px;
+  margin: 0 -3px;
+  border-radius: 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: linear-gradient(
+    100deg,
+    transparent 0 1%,
+    color-mix(in srgb, var(--red) var(--mark-strength), transparent) 3% 96%,
+    transparent 99%
+  );
+  background-size: 100% 78%;
+  background-position: 0 70%;
+  background-repeat: no-repeat;
+}
+.mk-legend {
+  margin: 2px 0 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none;
+}

@@ -1,627 +1,100 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<script>
-(function(){
-  if(localStorage.getItem("deutschThemeV1")==="light"){
-    document.documentElement.setAttribute("data-theme","light");
-  }
-})();
-</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Pronomen">
-<title>Pronomen</title>
-<style>
-:root{
-  /* ===== PALETTE (dark, default) ===== */
-  --bg:#1b1b1d;
-  --text:#f2f0ed;
-  --muted:#8f8f94;
-  --tertiary-text:#c8c7c4;
-  --secondary-text:#c8c7c4;
-  --placeholder-text:#666;
-  --mint:#5bc8a4;
-  --red:#ff7770;
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        if (localStorage.getItem("deutschThemeV1") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Pronomen" />
+    <title>Pronomen</title>
+    <link rel="stylesheet" href="pronomen.css?v=1" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="start" class="screen">
+        <div class="brand">Pronomen</div>
+        <h1>Wie viele Übungen?</h1>
+        <p class="muted">Personal- und Possessivpronomen gemischt.</p>
+        <div class="options">
+          <button class="size" data-n="10">10</button>
+          <button class="size" data-n="20">20</button>
+          <button class="size" data-n="30">30</button>
+        </div>
+        <div class="table-buttons">
+          <button class="table-btn" data-table="reference">Pronomen · Tabelle</button>
+        </div>
+      </section>
+      <div class="start-about" id="startAbout">
+        <h2>Worum geht's?</h2>
+        <p class="about-de" id="aboutText"></p>
+      </div>
 
-  /* ===== SURFACES ===== */
-  --surface:#202022;
-  --surface-2:#252527;
-  --key:#303033;
+      <section id="game" class="screen hidden">
+        <div class="top">
+          <div>
+            <div class="top-title">Pronomen</div>
+            <div class="progress"><i id="bar"></i></div>
+          </div>
+          <div class="counter" id="counter">1 / 10</div>
+        </div>
 
-  /* ===== LINES ===== */
-  --line:rgba(255,255,255,.10);
-  --divider:rgba(255,255,255,.08);
-  --feedback-divider:rgba(255,255,255,.11);
-  --in-session-line:rgba(255,255,255,.06);
+        <div class="exercise">
+          <div class="prompt">
+            <div class="context" id="context"></div>
+            <div class="sentence" id="sentence"></div>
+            <div class="translation" id="translation"></div>
+          </div>
+          <div class="answerbox" id="answerbox"></div>
+          <button class="check" id="check">Prüfen</button>
+          <div id="feedback" class="feedback hidden">
+            <div class="given" id="given"></div>
+            <div class="correct-text" id="correctText"></div>
+            <div class="skill" id="skill"></div>
+            <button class="continue" id="continue">Weiter</button>
+          </div>
+          <div id="keyboardMount"></div>
+          <div class="table-buttons in-session-tables">
+            <button class="table-btn" data-table="reference">Pronomen · Tabelle</button>
+          </div>
+        </div>
+      </section>
 
-  /* ===== BRAND / DECORATIVE ===== */
-  --brand-text:rgba(255,255,255,.11);
-  --version-text:rgba(255,255,255,.18);
+      <section id="done" class="screen hidden">
+        <div class="brand brand-done">Pronomen</div>
+        <h1>Fertig.</h1>
+        <div class="done-score" id="score">0 / 10</div>
+        <div class="done-note">Gut gemacht – Runde geschafft!</div>
+        <div class="weak hidden" id="weak"></div>
+        <div class="done-actions">
+          <button id="playAgain">Noch eine Runde</button>
+          <button id="homeBack">Zur Startseite</button>
+        </div>
+      </section>
 
-  /* ===== CTA BUTTONS (Check / Continue) ===== */
-  --cta-bg:#eee8df;
-  --cta-text:#171719;
-
-  /* ===== DONE SCREEN ACTIONS ===== */
-  --home-bg:rgba(255,255,255,.10);
-  --home-text:rgba(238,231,220,.55);
-  --home-back-bg:#ece6dc;
-  --home-back-text:#1b1c1e;
-  --weak-text:#c8c7c4;
-
-  /* ===== MODAL ===== */
-  --modal-scrim:rgba(0,0,0,.28);
-  --close-icon:#fff;
-  --hot-text:#ffd2d5;
-}
-
-[data-theme="light"]{
-  --bg:#f6f4f1;
-  --text:#242426;
-  --muted:#727278;
-  --tertiary-text:#727278;
-  --secondary-text:#55565b;
-  --placeholder-text:#9a9a9a;
-  --mint:#3fa68a;
-  --red:#e95e66;
-
-  --surface:#fff;
-  --surface-2:#fff;
-  --key:#efece6;
-
-  --line:rgba(0,0,0,.10);
-  --divider:rgba(0,0,0,.08);
-  --feedback-divider:rgba(0,0,0,.11);
-  --in-session-line:rgba(0,0,0,.06);
-
-  --brand-text:rgba(36,36,38,.09);
-  --version-text:rgba(0,0,0,.18);
-
-  --cta-bg:#242426;
-  --cta-text:#f5f5f7;
-
-  --home-bg:rgba(0,0,0,.06);
-  --home-text:rgba(36,36,38,.6);
-  --home-back-bg:#242426;
-  --home-back-text:#f5f5f7;
-  --weak-text:#55565b;
-
-  --modal-scrim:rgba(0,0,0,.18);
-  --close-icon:#242426;
-  --hot-text:#a3222a;
-}
-
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{display:flex;justify-content:center}.app{width:min(760px,100%);padding:calc(env(safe-area-inset-top) + 8px) 18px 42px}
-.screen{min-height:690px;padding:20px 14px;background:transparent}.screen.hidden,.modal.hidden,.weak.hidden,.feedback.hidden{display:none}.brand{font-size:clamp(56px,12vw,94px);font-weight:700;letter-spacing:-.065em;color:var(--brand-text);margin:30px 0 70px}.brand.brand-done{margin-bottom:45px}
-.center{text-align:center}.muted{color:var(--muted)}h1{font-size:34px;letter-spacing:-.03em;margin:0 0 10px}p{line-height:1.5}
-.options{display:flex;justify-content:center;gap:10px;margin:28px 0}.btn,.size{border:1px solid var(--line);background:var(--key);color:var(--text);border-radius:17px;padding:15px 18px;font-size:17px;font-weight:650;cursor:pointer}.start-table-btn{font-size:14px;font-weight:400;padding:11px 14px;color:var(--tertiary-text);background:transparent}.size{font-size:22px;min-width:82px}.secondary{background:transparent;color:var(--secondary-text)}.table-buttons{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:10;padding-bottom:17px;background:var(--bg)}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--divider);border-radius:99px}.top-title{font-size:18px;font-weight:700}.counter{color:var(--muted);font-size:14px}.progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:99px;overflow:hidden;z-index:1}.progress i{display:block;height:100%;background:var(--mint);width:0}
-.exercise{display:flex;flex-direction:column;min-height:600px}.prompt{text-align:center;margin:44px auto 0;max-width:680px}.context{color:var(--muted);font-size:16px;margin-bottom:17px}.sentence{font-size:clamp(30px,7vw,45px);line-height:1.18;font-weight:600;letter-spacing:-.03em}.translation{font-size:16px;color:var(--muted);margin-top:17px}
-.answerbox{margin:34px auto 0;width:min(600px,100%);border:1px solid var(--line);border-radius:18px;background:var(--surface);min-height:58px;padding:15px 17px;font-size:24px;display:flex;align-items:center;justify-content:center}.placeholder{color:var(--placeholder-text);font-size:12px}.check{display:none;width:min(600px,100%);margin:14px auto 0;height:56px;border:0;border-radius:17px;background:var(--cta-bg);color:var(--cta-text);font-size:16px;font-weight:700;cursor:pointer}.check:active{transform:scale(.99)}html:not(.is-touch) .check{display:block}
-.feedback{--state:var(--mint);position:relative;margin:42px 0 0;padding:32px 0 0;text-align:center;border-top:1px solid var(--feedback-divider);isolation:isolate}.feedback.wrong{--state:var(--red)}
-.feedback:before{pointer-events:none}.feedback:after{content:"";position:absolute;z-index:-2;left:0;right:0;top:-180px;height:360px;pointer-events:none;opacity:.9;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--state) 22%,transparent) 0%,color-mix(in srgb,var(--state) 10%,transparent) 32%,transparent 70%)}
-.feedback:before{content:"";position:absolute;z-index:-1;top:-1px;left:50%;width:0;height:2px;background:var(--state);box-shadow:0 0 18px color-mix(in srgb,var(--state) 70%,transparent);animation:spread .42s ease-out forwards}
-@keyframes spread{to{left:0;width:100%}}
-.given{font-size:30px;font-weight:650}.correctText{font-size:30px;font-weight:650;margin-top:5px}.bad{color:var(--red)}.good{color:var(--mint)}.skill{margin-top:24px;color:var(--muted);font-size:14px}.continue{position:relative;z-index:2;touch-action:manipulation;width:min(600px,100%);margin-top:25px;border:0;border-radius:15px;padding:15px;background:var(--cta-bg);color:var(--cta-text);font-size:17px;font-weight:700}
-.in-session-tables{margin-top:auto;padding-top:30px;justify-content:center;opacity:.22}.in-session-tables .btn{font-size:11px;font-weight:400;padding:7px 10px;border-color:var(--in-session-line);background:transparent;color:var(--tertiary-text)}
-.done-score{font-size:58px;font-weight:700;letter-spacing:-.05em;margin:18px 0 6px}.done-note{color:var(--muted);margin-bottom:28px}.weak{margin:22px auto;max-width:420px;padding:16px;border:1px solid var(--line);border-radius:17px;color:var(--weak-text)}
-.modal{position:fixed;inset:0;top:calc(-1 * env(safe-area-inset-top));background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;padding-top:calc(18px + env(safe-area-inset-top));z-index:20;opacity:0;visibility:hidden;transition:opacity .18s ease,background-color .18s ease,visibility 0s linear .18s}.modal-card{width:min(680px,100%);max-height:86vh;overflow:hidden;background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:4px 22px 18px;display:flex;flex-direction:column;opacity:0;transform:scale(.92);filter:blur(8px);transition:opacity .2s ease,transform .2s ease,filter .2s ease}.modal.open{opacity:1;visibility:visible;background:var(--modal-scrim);transition:opacity .18s ease,background-color .18s ease,visibility 0s}.modal.open .modal-card{opacity:1;transform:scale(1);filter:blur(0)}@media (prefers-reduced-motion:reduce){.modal,.modal-card{transition:none!important}}.modal-head{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto}.close{border:0;background:transparent;color:var(--close-icon);font-size:28px}.modal #modalBody{overflow:auto;min-height:0;padding-top:0}.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.tbl th,.tbl td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
-.table-subtitle{margin:34px 0 4px;font-size:13px;color:var(--muted);font-weight:600}.tbl th{color:var(--muted);font-weight:500}.tbl td.nom{font-weight:700}.tbl th:first-child,.tbl td:first-child{padding-left:0}.tbl th:last-child,.tbl td:last-child{padding-right:0}.version{position:fixed;right:10px;bottom:8px;color:var(--version-text);font-size:11px}
-html:not(.is-touch) .answerbox{cursor:text}
-
-.done-actions{width:min(100%,440px);margin:20px auto 0;display:flex;flex-direction:column;align-items:stretch;gap:10px}
-#home,#homeBack{width:100%;height:56px;border:0;border-radius:17px;font:inherit;font-size:16px;font-weight:650;cursor:pointer}
-#home{background:var(--home-bg);color:var(--home-text)}
-#homeBack{background:var(--home-back-bg);color:var(--home-back-text)}
-#home:active,#homeBack:active{transform:scale(.99)}
-
-/* ===== START SCREEN · shared design across all exercises (Design Police 2026-09-25) =====
-   Same colours, button shape, press effect, table button and version mark in every exercise.
-   Title fonts stay per group: Artikel+Pronomen / Verbformen / Präpositionen. */
-:root{
-  --start-btn-bg:#2a2a2d;
-  --start-btn-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 5px 14px rgba(0,0,0,.14);
-  --start-line:rgba(255,255,255,.10);
-  --start-table-text:#c8c7c4;
-  --start-version:rgba(255,255,255,.24);
-}
-[data-theme="light"]{
-  --start-btn-bg:#fff;
-  --start-btn-shadow:0 1px 2px rgba(0,0,0,.05),0 5px 14px rgba(0,0,0,.08);
-  --start-line:rgba(0,0,0,.10);
-  --start-table-text:#55565b;
-  --start-version:rgba(36,36,38,.34);
-}
-#start .options{display:flex;flex-wrap:nowrap;justify-content:center;gap:12px}
-#start .size{flex:0 0 96px;width:96px;min-width:0;height:58px;margin:0;padding:0;border:0;border-radius:16px;
-  background:var(--start-btn-bg);color:var(--text);box-shadow:var(--start-btn-shadow);font:650 21px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;transform:none;cursor:pointer;
-  transition:transform .12s ease,filter .12s ease}
-#start .size:hover{transform:none;background:var(--start-btn-bg);box-shadow:var(--start-btn-shadow)}
-#start .size:active{transform:scale(.97);filter:brightness(.94)}
-#start .start-table-btn{margin-top:0;border:1px solid var(--start-line);background:transparent;color:var(--start-table-text);
-  border-radius:17px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:14px;font-weight:400;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#start .start-table-btn:active{transform:scale(.97);filter:brightness(.94)}
-.version-mark{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  text-align:center;font:400 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;letter-spacing:.04em;color:var(--start-version);pointer-events:none;z-index:5}
-
-/* ===== SUMMARY SCREEN · shared buttons across all exercises (Design Police 2026-09-25) =====
-   "Noch eine Runde" (quiet, outlined) + "Zur Startseite" (main). Style taken from Ortspräpositionen. */
-:root{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(242,240,237,.55);
-  --end-again-line:rgba(255,255,255,.10);
-  --end-main-bg:#ece6dc;   /* cream: same as the Prüfen/Weiter buttons */
-  --end-main-text:#1b1b1d;
-}
-[data-theme="light"]{
-  --end-again-bg:transparent;
-  --end-again-text:rgba(36,36,38,.55);
-  --end-again-line:rgba(0,0,0,.10);
-  --end-main-bg:#242426;
-  --end-main-text:#f6f4f1;
-}
-#done .done-actions{width:min(100%,360px);margin-left:auto;margin-right:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
-#done #home,#done #homeBack{width:100%;height:56px;margin:0;padding:0;border:0;border-radius:17px;font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transform:none;transition:transform .12s ease,filter .12s ease}
-#done #home{background:var(--end-again-bg);color:var(--end-again-text);border:1px solid var(--end-again-line)}
-#done #homeBack{background:var(--end-main-bg);color:var(--end-main-text)}
-#done #home:active,#done #homeBack:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== TOP BAR · shared design across all exercises (Design Police 2026-09-25) =====
-   Title and counter in the palette grey, 3px progress line: hairline track + grey fill.
-   Green stays reserved for "correct". */
-:root{--bar-track:rgba(255,255,255,.10)}
-[data-theme="light"]{--bar-track:rgba(0,0,0,.10)}
-#game .top-title{color:var(--muted)}
-#game .top:after{background:var(--bar-track)}
-#game .progress i{background:var(--muted)}
-/* Top bar position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px, 18px side margins */
-#game.screen{padding-top:15px}
-#game .top{margin-left:-14px;margin-right:-14px;padding-bottom:14px}
-
-/* Question text sizes (Design Police): sentences 28px on phones */
-@media(max-width:699px){#sentence{font-size:28px}}
-
-/* ===== TYPING FIELD · shared by Wortschatz, Pronomen, Modalverben, Partizip II (Design Police 2026-09-25) =====
-   Pronomen look: surface slightly lighter than the background + shared 10% outline, 58px, 18px corners,
-   typed text 24px in the group's font. Never green (green = correct).
-   Empty field: a blinking cursor in the middle is the only hint ("type here"). */
-:root{--field-bg:rgba(255,255,255,.03);--field-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--field-bg:#fff;--field-line:rgba(0,0,0,.10)}
-@keyframes fieldCaretBg{0%,49%{background-size:2px 28px}50%,100%{background-size:0 0}}
-@keyframes fieldCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
-#answerbox{min-height:58px;border:1px solid var(--field-line);border-radius:18px;background:var(--field-bg);
-  padding:0 17px;font:400 24px -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;color:var(--text)}
-#answerbox .placeholder{font-size:0;color:transparent}
-#answerbox .placeholder::after{content:"";display:inline-block;width:2px;height:28px;background:var(--text);vertical-align:middle;
-  animation:fieldCaret 1.1s steps(1) infinite}
-@media(prefers-reduced-motion:reduce){#answerbox .placeholder::after{animation:none}}
-
-/* ===== WEITER · the quiet button, shared by all exercises (Design Police 2026-09-25) =====
-   Blueprint: Partizip II. It doesn't urge you on; you read the answer first.
-   Same surface + outline as the typing field; full text colour; as wide as the answer area. */
-:root{--quiet-bg:rgba(255,255,255,.03);--quiet-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--quiet-bg:#fff;--quiet-line:rgba(0,0,0,.10)}
-#continue{height:56px;border:1px solid var(--quiet-line);border-radius:17px;background:var(--quiet-bg);color:var(--text);
-  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease;padding:0;}
-#continue:hover{background:var(--quiet-bg);box-shadow:none;transform:none}
-#continue:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== IN-GAME TABLE BUTTON · same pill as on the start screens, at the Home screen's "Settings" spot
-   (centred, 28px above the bottom edge).
-   (Design Police 2026-09-25) ===== */
-#game .in-session-tables{position:fixed;left:0;right:0;top:auto;bottom:calc(env(safe-area-inset-bottom) + 28px);margin:0;padding:0;
-  display:flex;justify-content:center;opacity:1;z-index:20;pointer-events:none}
-#game .in-session-tables .btn{pointer-events:auto;margin:0;height:auto;width:auto;border:1px solid var(--start-line);border-radius:17px;background:var(--bg);
-  color:var(--start-table-text);font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;padding:11px 14px;box-shadow:none;transition:transform .12s ease,filter .12s ease}
-#game .in-session-tables .btn:hover{background:var(--bg);transform:none}
-#game .in-session-tables .btn:active{transform:scale(.97);filter:brightness(.94)}
-
-/* Version number only on the start and summary screens, not during the exercise (Design Police 2026-09-25) */
-body:has(#game:not(.hidden)) .version-mark{display:none}
-
-/* ===== PRÜFEN (desktop) · the one strong button in the game: main-button colours from the palette,
-   same shape as "Zur Startseite" (Design Police 2026-09-25) ===== */
-#check{height:56px;border:0;border-radius:17px;background:var(--end-main-bg);color:var(--end-main-text);
-  font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;box-shadow:none;cursor:pointer;transition:transform .12s ease,filter .12s ease}
-#check:hover{background:var(--end-main-bg);transform:none;box-shadow:none}
-#check:active{transform:scale(.97);filter:brightness(.94)}
-
-/* ===== TABLE WINDOW · shared by all exercises (Design Police 2026-09-25) =====
-   Background behind the window: slightly darkened + slightly blurred, exactly like Home's settings dialog.
-   Window: palette card colour, shared outline, 24px corners. */
-:root{--overlay-scrim:rgba(0,0,0,.34);--overlay-card:#2a2a2d;--overlay-line:rgba(255,255,255,.10)}
-[data-theme="light"]{--overlay-scrim:rgba(0,0,0,.20);--overlay-card:#fff;--overlay-line:rgba(0,0,0,.10)}
-.modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}  /* on the layer itself, so the blur fades in and out together with it */
-.modal.open{background:var(--overlay-scrim)}
-.modal-card{background:var(--overlay-card);border:1px solid var(--overlay-line);border-radius:24px}
-/* ===== START SCREEN · description "Worum geht's?" (2026-09-26, same as Artikel) =====
-   Width = the 10/20/30 row (3 × 96px + 2 × 12px = 312px).
-   Headline German, text in the user's language (Settings → Translations), fixed above the Home button / version mark.
-   Palette grey text (the darkest text colour) so it blends in and doesn't compete with the buttons. */
-.start-about{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 64px);margin:0 auto;padding:0;width:312px;max-width:calc(100% - 36px);text-align:center;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;z-index:4}
-.start-about h2{margin:0 0 5px;font-size:13px;font-weight:650;line-height:1.3;color:var(--muted);letter-spacing:0}
-.start-about .about-de{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-body:has(#start.hidden) .start-about{display:none}
-
-/* ===== REFERENCE TABLE POLISH (2026-09-26) — note, collapsible endings, mistake marker as in Ortspräpositionen ===== */
-.tbl-note{margin:10px 0 0;font-size:12px;line-height:1.4;color:var(--muted)}
-.tbl-more{margin-top:30px}
-.tbl-more summary{list-style:none;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);display:inline-flex;align-items:center;gap:7px;-webkit-user-select:none;user-select:none}
-.tbl-more summary::-webkit-details-marker{display:none}
-.tbl-more summary::before{content:"▸";display:inline-block;font-size:12px;color:var(--muted);transition:transform .15s}
-.tbl-more[open] summary::before{transform:rotate(90deg)}
-.tbl-more .tbl{margin-top:10px}
-:root{--mark-strength:15%}
-[data-theme="light"]{--mark-strength:12%}
-.mk{padding:0 3px;margin:0 -3px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone;
-  background:linear-gradient(100deg,transparent 0 1%,color-mix(in srgb,var(--red) var(--mark-strength),transparent) 3% 96%,transparent 99%);
-  background-size:100% 78%;background-position:0 70%;background-repeat:no-repeat}
-.mk-legend{margin:8px 0 0;font-size:11px;font-weight:500;line-height:1.35;color:var(--muted)}
-/* ===== REFERENCE TABLE · COMPACT (2026-09-26) — shorter window that scrolls inside, tighter title gap and rows,
-   legend above the first table so both tables sit close, opening the endings scrolls them into view ===== */
-.modal-card{max-height:min(74vh,640px)}
-.modal-head h2{margin:10px 0 2px}
-#modalBody .tbl{margin-top:4px}
-#modalBody .tbl th,#modalBody .tbl td{padding:7px 12px;line-height:1.3;white-space:nowrap}
-#modalBody .tbl th:first-child,#modalBody .tbl td:first-child{padding-left:0}
-#modalBody .tbl th:last-child,#modalBody .tbl td:last-child{padding-right:0}
-#modalBody .mk-legend{margin:2px 0 6px}
-#modalBody .tbl-note{margin-top:8px}
-#modalBody .tbl-more{margin-top:16px;padding-bottom:2px}
-#modalBody .tbl-more .tbl{margin-top:2px}
-#modalBody .formal-row:not(.show){display:none}  /* formal Sie row: only shown when it has a recent mistake */
-</style>
-
-<link rel="manifest" href="../manifest.webmanifest">
-</head>
-<body><main class="app">
-<section id="start" class="screen center">
-<div class="brand">Pronomen</div><h1>Wie viele Übungen?</h1>
-<p class="muted">Personal- und Possessivpronomen gemischt.</p>
-<div class="options"><button class="size" data-n="10">10</button><button class="size" data-n="20">20</button><button class="size" data-n="30">30</button></div>
-<div class="table-buttons"><button class="btn secondary start-table-btn" data-table="reference">Pronomen · Tabelle</button></div>
-</section>
-<div class="start-about" id="startAbout">
-  <h2>Worum geht's?</h2>
-  <p class="about-de" id="aboutText"></p>
-</div>
-
-<section id="game" class="screen hidden">
-<div class="top"><div><div class="top-title">Pronomen</div><div class="progress"><i id="bar"></i></div></div><div class="counter" id="counter">1 / 10</div></div>
-
-<div class="exercise">
-<div class="prompt"><div class="context" id="context"></div><div class="sentence" id="sentence"></div><div class="translation" id="translation"></div></div>
-<div class="answerbox" id="answerbox"><span class="placeholder">Fehlende Form eingeben</span></div>
-<button class="check" id="check">Prüfen</button>
-<div id="feedback" class="feedback hidden"><div class="given" id="given"></div><div class="correctText" id="correctText"></div><div class="skill" id="skill"></div><button class="continue" id="continue">Weiter</button></div>
-<div id="keyboardMount"></div>
-<div class="table-buttons in-session-tables"><button class="btn secondary" data-table="reference">Pronomen · Tabelle</button></div>
-</div></section>
-
-<section id="done" class="screen center hidden">
-<div class="brand brand-done">Pronomen</div><h1>Fertig.</h1><div class="done-score" id="score">0 / 10</div>
-<div class="done-note">Gut gemacht – Runde geschafft!</div>
-<div class="weak hidden" id="weak"></div>
-<div class="done-actions">
-      <button class="btn" id="home">Noch eine Runde</button>
-      <button class="btn" id="homeBack">Zur Startseite</button>
-    </div>
-</section>
-
-<div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
-<div class="version-mark">v7.38</div>
-</main>
-<script src="../components/deutsch-translation-v1.js?v=2"></script>
-<script>
-// Start-screen description: shown in the user's language so it is surely understood (like a hint).
-// \u00a0 = non-breaking space: keeps each example pair (mich or mir) on one line.
-const START_ABOUT={text:{
-  en:"Helps you learn the pronoun forms by heart - mich\u00a0or\u00a0mir, sein\u00a0or\u00a0seinen - in short everyday sentences.",
-  ru:"Помогает запомнить формы местоимений - mich\u00a0или\u00a0mir, sein\u00a0или\u00a0seinen - на примерах из повседневной речи."}};
-document.getElementById("aboutText").textContent=getTranslation(START_ABOUT,"text");
-</script>
-<script src="pronouns.js?v=5"></script>
-<script src="../components/deutsch-progress-v1.js"></script>
-<script>
-const $=x=>document.getElementById(x), data=window.PRONOUN_EXERCISES||[];
-function isTouchDevice(){
-  return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
-}
-document.documentElement.classList.toggle('is-touch', isTouchDevice());
-const STATS_STORE='pronomenStatsV2';
-let statsStore={sessions:[]};
-try{statsStore=JSON.parse(localStorage.getItem(STATS_STORE)||'{"sessions":[]}')}catch(e){statsStore={sessions:[]}}
-if(!Array.isArray(statsStore.sessions))statsStore.sessions=[];
-const SESSION_WINDOW=5;
-const MIN_ATTEMPTS=2;
-const ERROR_THRESHOLD=.4;
-function saveStats(){try{localStorage.setItem(STATS_STORE,JSON.stringify(statsStore))}catch(e){}}
-function statKey(x){
-  if(x.type==='possessive'){
-    const gender=x.gender?` · ${x.gender}`:'';
-    return {root:`root · ${x.skill.split(' → ')[0]} →`, detail:`detail · ${x.skill}${gender}`, type:'possessive'};
-  }
-  return {root:`personal · ${x.skill}`, detail:`personal · ${x.skill}`, type:'personal'};
-}
-function currentStats(){
-  const map={};
-  for(let s=0;s<statsStore.sessions.length;s++){
-    const session=statsStore.sessions[s];
-    const weight=s+1;
-    for(const [key,v] of Object.entries(session.answers||{})){
-      if(!map[key])map[key]={correct:0,wrong:0,weightedCorrect:0,weightedWrong:0,attempts:0};
-      map[key].correct+=v.correct||0;
-      map[key].wrong+=v.wrong||0;
-      map[key].weightedCorrect+=(v.correct||0)*weight;
-      map[key].weightedWrong+=(v.wrong||0)*weight;
-      map[key].attempts+=(v.correct||0)+(v.wrong||0);
-    }
-  }
-  for(const v of Object.values(map)){
-    const total=v.weightedCorrect+v.weightedWrong;
-    v.errorRate=total?v.weightedWrong/total:0;
-    v.weak=v.attempts>=MIN_ATTEMPTS&&v.errorRate>=ERROR_THRESHOLD;
-  }
-  return map;
-}
-function isWeak(key){return !!currentStats()[key]?.weak}
-
-const DAILY_STATS_KEY='deutschDailyStatsV1';
-function localDateKey(){
- const d=new Date();
- return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function recordPronomenAnswer(){
- let stats={};
- try{stats=JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||'{}')}catch(e){stats={}}
- const today=localDateKey();
- if(stats.date!==today) stats={date:today};
-
- // Home v4.4+ accepts either a number or {answers:...}; keep this simple.
- stats.pronomen=Number(stats.pronomen||0)+1;
- localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(stats));
-}
-
-// ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====
-// 41 categories: 18 personal (person × case), 8 possessive owners (ich → mein …),
-// 15 possessive endings (case × gender, e.g. "Dativ · Maskulin → -em").
-// A possessive sentence counts for its owner AND its ending — same logic as the existing stats:
-// owner = right stem; ending = only judged when the stem was right.
-// Weight = sentences covered (a possessive sentence gives ½ to its owner, ½ to its ending),
-// so the bar = share of the 103 sentences' grammar I reliably know.
-const PROGRESS_ID='pronomen';
-const hasProgress=()=>typeof window.DeutschProgress==='object';
-// "euer" drops its second e before endings: eure, eurem, euren.
-function ownerStem(x){return (x.skill.split(' → ')[1]?.split(' · ')[0]||'').toLocaleLowerCase('de-DE')}
-function stemMatches(input,stem){return !!stem&&(input.startsWith(stem)||(stem==='euer'&&input.startsWith('eur')))}
-function possessiveCase(x){return x.skill.split(' · ').pop()}
-function endingOf(x){
-  const a=x.answer.trim().toLocaleLowerCase('de-DE'),st=ownerStem(x),base=a.startsWith(st)?st:(st==='euer'?'eur':st);
-  return a.slice(base.length);
-}
-function progressKeys(x){
-  if(x.type!=='possessive')return {personal:'personal:'+x.skill};
-  return {owner:'owner:'+x.skill.split(' → ')[0].replace('Possessiv · ','')+' → '+ownerStem(x),
-          ending:'ending:'+possessiveCase(x)+'|'+(x.gender||'')};
-}
-if(hasProgress()){
-  const items=new Map(),add=(key,label,w)=>{const it=items.get(key);if(it)it.weight+=w;else items.set(key,{key,label,weight:w})};
-  data.forEach(x=>{
-    const k=progressKeys(x);
-    if(k.personal){add(k.personal,x.skill.replace('Personal · ','').replace(/^(\w+) · (.*)$/,'$2 ($1)'),1);return}
-    add(k.owner,k.owner.slice(6),.5);
-    const e=endingOf(x);
-    add(k.ending,possessiveCase(x)+' · '+(x.gender||'')+' → '+(e?'-'+e:'ohne Endung'),.5);
-  });
-  DeutschProgress.init(PROGRESS_ID,[...items.values()]);
-}
-
-let deck=[],i=0,n=10,answer='',correct=0,sessionAnswers={};
-const norm=s=>s.trim().toLocaleLowerCase('de-DE').replace(/[.,!?;:]/g,'');
-function weightedPick(items,count){
-  const current=currentStats();
-  return items
-    .map(x=>{
-      const keys=statKey(x);
-      const weakScore=(current[keys.detail]?.errorRate||0);
-      return {x,k:-Math.log(Math.max(Math.random(),1e-9))/(1+weakScore*4)};
-    })
-    .sort((a,b)=>a.k-b.k)
-    .slice(0,Math.min(count,items.length))
-    .map(o=>o.x);
-}
-function weightedDeck(count){
-  const personal=data.filter(x=>x.type==='personal');
-  const possessive=data.filter(x=>x.type==='possessive');
-  const total=Math.min(count,data.length);
-
-  // Keep Personal and Possessive mixed in every session as evenly as possible.
-  // The existing weakness weighting is still applied independently inside each type.
-  let personalCount=Math.floor(total/2);
-  let possessiveCount=total-personalCount;
-
-  // If one type cannot supply its half, give the remaining slots to the other type.
-  if(personalCount>personal.length){
-    possessiveCount+=personalCount-personal.length;
-    personalCount=personal.length;
-  }
-  if(possessiveCount>possessive.length){
-    personalCount+=possessiveCount-possessive.length;
-    possessiveCount=possessive.length;
-  }
-
-  const selected=[
-    ...weightedPick(personal,personalCount),
-    ...weightedPick(possessive,possessiveCount)
-  ];
-
-  // Shuffle the selected exercises so the two types are genuinely mixed.
-  return selected.sort(()=>Math.random()-0.5);
-}
-function start(count){n=count;deck=weightedDeck(count);i=0;answer='';correct=0;sessionAnswers={};$('start').classList.add('hidden');$('done').classList.add('hidden');$('game').classList.remove('hidden');render()}
-function render(){let x=deck[i];answer='';$('context').textContent=x.context;$('sentence').textContent=x.sentence;$('translation').textContent=getTranslation(x,'translation');$('answerbox').innerHTML='<span class="placeholder">Fehlende Form eingeben</span>';$('answerbox').style.display='flex';$('check').style.removeProperty('display');$('feedback').className='feedback hidden';if(window.deutschKeyboardReady)$('keyboard').classList.add('show');$('counter').textContent=`${i+1} / ${deck.length}`;$('bar').style.width=`${(i/deck.length)*100}%`}
-function paintAnswer(){ if(answer)$('answerbox').textContent=answer; else $('answerbox').innerHTML='<span class="placeholder">Fehlende Form eingeben</span>' } // empty again → blinking cursor again
-function submit(){if(!answer.trim()||!$('feedback').classList.contains('hidden'))return;
-let x=deck[i],ok=norm(answer)===norm(x.answer);recordPronomenAnswer();
-const keys=statKey(x);
-if(x.type==='possessive'){
-  const input=norm(answer);
-  const stemOK=stemMatches(input,ownerStem(x)); // fixed: euer → eure/eurem/euren now counts as the right stem
-
-  // Root and ending are scored independently. If the stem itself is wrong,
-  // the ending is not assessed, so one mistake cannot falsely weaken both.
-  const rootV=sessionAnswers[keys.root]||{correct:0,wrong:0};
-  if(stemOK)rootV.correct++;else rootV.wrong++;
-  sessionAnswers[keys.root]=rootV;
-
-  if(stemOK){
-    const detailV=sessionAnswers[keys.detail]||{correct:0,wrong:0};
-    if(ok)detailV.correct++;else detailV.wrong++;
-    sessionAnswers[keys.detail]=detailV;
-  }
-}else{
-  const v=sessionAnswers[keys.detail]||{correct:0,wrong:0};
-  if(ok)v.correct++;else v.wrong++;
-  sessionAnswers[keys.detail]=v;
-}
-if(hasProgress()){
-  const pk=progressKeys(x);
-  if(pk.personal)DeutschProgress.record(PROGRESS_ID,pk.personal,ok);
-  else{
-    const stemOK=stemMatches(norm(answer),ownerStem(x));
-    DeutschProgress.record(PROGRESS_ID,pk.owner,stemOK);
-    if(stemOK)DeutschProgress.record(PROGRESS_ID,pk.ending,ok);
-  }
-}
-if(ok)correct++;
-$('feedback').className='feedback '+(ok?'correct':'wrong');$('given').innerHTML=ok?`<span class="good">${answer}</span>`:`<span class="bad">${answer}</span>`;$('correctText').innerHTML=ok?'':`<span class="good">→ ${x.answer}</span>`;$('skill').textContent=x.skill+(x.type==='possessive'&&x.gender?' · '+x.gender:'');$('answerbox').style.display='none';$('check').style.display='none';if(window.deutschKeyboardReady)$('keyboard').classList.remove('show')}
-function next(){i++;if(i>=deck.length){finish();return}render()}
-function finish(){
-  if(Object.keys(sessionAnswers).length){
-    statsStore.sessions.push({date:localDateKey(),answers:sessionAnswers});
-    if(statsStore.sessions.length>SESSION_WINDOW)statsStore.sessions=statsStore.sessions.slice(-SESSION_WINDOW);
-    saveStats();
-  }
-  $('game').classList.add('hidden');$('done').classList.remove('hidden');$('score').textContent=`${correct} / ${deck.length}`;
-  const current=currentStats();
-  const arr=Object.entries(current).filter(([,v])=>v.weak).sort((a,b)=>b[1].errorRate-a[1].errorRate).slice(0,3);
-  if(arr.length){$('weak').classList.remove('hidden');$('weak').innerHTML='<b>Noch üben</b><br>'+arr.map(([k])=>k).join('<br>')}else $('weak').classList.add('hidden');
-}
-document.querySelectorAll('.size').forEach(b=>b.onclick=()=>start(+b.dataset.n));$('continue').onclick=next;$('home').onclick=()=>{$('done').classList.add('hidden');$('start').classList.remove('hidden')};
-  function goBackToHome(){
-  try{
-    if(window.parent && window.parent !== window){
-      if(typeof window.parent.closeApp === 'function'){
-        window.parent.closeApp();
-        return;
-      }
-      const parentDoc=window.parent.document;
-      const shell=parentDoc.getElementById('appShell');
-      const frame=parentDoc.getElementById('appFrame');
-      if(shell && frame){
-        shell.classList.remove('open');
-        shell.setAttribute('aria-hidden','true');
-        parentDoc.documentElement.classList.remove('app-open');
-        frame.src='about:blank';
-        return;
-      }
-    }
-  }catch(e){}
-  window.parent.postMessage({type:'deutsch:home'}, '*');
-}
-$('homeBack').onclick=goBackToHome;
-document.addEventListener('keydown',e=>{if($('game').classList.contains('hidden'))return;if(!$('feedback').classList.contains('hidden')){if(e.key==='Enter')next();return}if(e.key==='Enter'){submit();return}if(e.key==='Backspace'){answer=answer.slice(0,-1);paintAnswer();return}if(e.key.length===1){answer+=e.key;paintAnswer()}})
-// Reusable German keyboard bridge: the component emits intent; Pronomen owns answer state.
-document.addEventListener('deutsch-keyboard-input',e=>{
- const k=e.detail?.key||'';
- if($('game').classList.contains('hidden')||!$('feedback').classList.contains('hidden'))return;
- if(k==='BACK'){answer=answer.slice(0,-1);paintAnswer();return}
- if(k==='OK'){submit();return}
- if(k==='SPACE'){if(answer.length&&!answer.endsWith(' '))answer+=' ';paintAnswer();return}
- if(k){answer+=k;paintAnswer()}
-});
-async function loadKeyboardComponent(){
- const mount=$('keyboardMount');
- if(!mount)return false;
- const r=await fetch('../components/deutsch-keyboard-v2.60.html');
- if(!r.ok)throw new Error('Keyboard component failed to load');
- const text=await r.text();
- const tpl=document.createElement('template');
- tpl.innerHTML=text;
- const scripts=[];
- tpl.content.querySelectorAll('script').forEach(s=>{scripts.push(s.textContent);s.remove()});
- mount.appendChild(tpl.content);
- for(const code of scripts){const s=document.createElement('script');s.textContent=code;document.body.appendChild(s)}
- const kb=$('keyboard');
- window.deutschKeyboardReady=true;
- kb.classList.add('show');
- return true;
-}
-$('check').onclick=submit;
-const reference=`<table class="tbl"><tr><th>Nom.</th><th>Akk.</th><th>Dat.</th><th>Possessiv</th></tr><tr><td class="nom" data-focus="Personal · Nominativ · ich">ich</td><td data-focus="Personal · Akkusativ · ich">mich</td><td data-focus="Personal · Dativ · ich">mir</td><td data-owner="ich">mein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · du">du</td><td data-focus="Personal · Akkusativ · du">dich</td><td data-focus="Personal · Dativ · du">dir</td><td data-owner="du">dein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · er">er</td><td data-focus="Personal · Akkusativ · er">ihn</td><td data-focus="Personal · Dativ · er">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie">sie</td><td data-focus="Personal · Akkusativ · sie">sie</td><td data-focus="Personal · Dativ · sie">ihr</td><td data-owner="sie">ihr-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · es">es</td><td data-focus="Personal · Akkusativ · es">es</td><td data-focus="Personal · Dativ · es">ihm</td><td data-owner="er">sein-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · wir">wir</td><td data-focus="Personal · Akkusativ · wir">uns</td><td data-focus="Personal · Dativ · wir">uns</td><td data-owner="wir">unser-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · ihr">ihr</td><td data-focus="Personal · Akkusativ · ihr">euch</td><td data-focus="Personal · Dativ · ihr">euch</td><td data-owner="ihr">euer / eur-</td></tr><tr><td class="nom" data-focus="Personal · Nominativ · sie(pl.)">sie</td><td data-focus="Personal · Akkusativ · sie(pl.)">sie</td><td data-focus="Personal · Dativ · sie(pl.)">ihnen</td><td data-owner="sie(pl.)">ihr-</td></tr><tr class="formal-row"><td class="nom" data-focus="Personal · Nominativ · Sie">Sie</td><td data-focus="Personal · Akkusativ · Sie">Sie</td><td data-focus="Personal · Dativ · Sie">Ihnen</td><td data-owner="Sie">Ihr-</td></tr></table><p class="tbl-note">Possessiv = Stamm + Endung: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren</p><details class="tbl-more"><summary>Possessiv-Endungen</summary><table class="tbl"><tr><th>Kasus</th><th>Mask.</th><th>Neutr.</th><th>Fem.</th><th>Plural</th></tr><tr><td>Nom.</td><td data-ending="Nominativ|Maskulin">—</td><td data-ending="Nominativ|Neutrum">—</td><td data-ending="Nominativ|Feminin">-e</td><td data-ending="Nominativ|Plural">-e</td></tr><tr><td>Akk.</td><td data-ending="Akkusativ|Maskulin">-en</td><td data-ending="Akkusativ|Neutrum">—</td><td data-ending="Akkusativ|Feminin">-e</td><td data-ending="Akkusativ|Plural">-e</td></tr><tr><td>Dat.</td><td data-ending="Dativ|Maskulin">-em</td><td data-ending="Dativ|Neutrum">-em</td><td data-ending="Dativ|Feminin">-er</td><td data-ending="Dativ|Plural">-en</td></tr><tr><td>Gen.</td><td data-ending="Genitiv|Maskulin">-es</td><td data-ending="Genitiv|Neutrum">-es</td><td data-ending="Genitiv|Feminin">-er</td><td data-ending="Genitiv|Plural">-er</td></tr></table></details>`;
-
-function markWeakTable(){
-  const weakKeys=currentStats();
-  const hasWeakPersonal=focus=>focus.split('|').some(f=>Object.keys(weakKeys).some(k=>weakKeys[k]?.weak&&k.startsWith(`personal · ${f} →`)));  /* stored keys end in "→ answer", e.g. "personal · Personal · Dativ · ich → mir" */
-  const hasWeakPossessive=(owner,cas,gender)=>{
-    const owners=owner.split('|');
-    return Object.keys(weakKeys).some(k=>{
-      if(!weakKeys[k]?.weak)return false;
-      const m=k.match(/^detail · Possessiv · (.+?) → .+ · (Nominativ|Akkusativ|Dativ|Genitiv) · (.+)$/);
-      if(!m)return false;
-      const [,detailOwner,detailCase,detailGender]=m;
-      return owners.includes(detailOwner) && (!cas||detailCase===cas) && (!gender||detailGender===gender);
-    });
-  };
-  document.querySelectorAll('#modalBody [data-focus]').forEach(td=>{
-    if(hasWeakPersonal(td.dataset.focus))td.classList.add('hot');
-  });
-  document.querySelectorAll('#modalBody [data-owner]').forEach(td=>{
-    const owners=td.dataset.owner.split('|');
-    if(Object.keys(weakKeys).some(k=>{
-      if(!weakKeys[k]?.weak)return false;
-      if(!k.startsWith('root · Possessiv · '))return false;
-      return owners.some(o=>k.includes(` · ${o} →`));
-    }))td.classList.add('hot');
-  });
-  document.querySelectorAll('#modalBody [data-ending]').forEach(td=>{
-    const [cas,gen]=td.dataset.ending.split('|');
-    if(hasWeakPossessive('ich|du|er|sie|wir|ihr|sie(pl.)|Sie',cas,gen))td.classList.add('hot');
-  });
-  document.querySelectorAll('#modalBody td.hot').forEach(td=>{td.innerHTML='<span class="mk">'+td.innerHTML+'</span>'});
-  if(document.querySelector('#modalBody .hot')){
-    document.querySelector('#modalBody .tbl').insertAdjacentHTML('beforebegin','<div class="mk-legend"><span class="mk">markiert</span> = zuletzt Fehler</div>');
-  }
-  document.querySelector('#modalBody .formal-row:has(.hot)')?.classList.add('show');
-  const more=document.querySelector('#modalBody .tbl-more');
-  if(more&&more.querySelector('.hot'))more.open=true;
-  if(more)more.addEventListener('toggle',()=>{
-    if(!more.open)return;
-    const body=$('modalBody');
-    requestAnimationFrame(()=>{  /* bring the opened endings table into view so the change is always visible */
-      const top=body.scrollTop+more.getBoundingClientRect().top-body.getBoundingClientRect().top-6;
-      body.scrollTo({top:Math.min(top,body.scrollHeight-body.clientHeight),behavior:'smooth'});
-    });
-  });
-}
-
-document.querySelectorAll('[data-table]').forEach(b=>b.onclick=()=>{
-  $('modalTitle').textContent='Pronomen';
-  $('modalBody').innerHTML=reference;
-  markWeakTable();
-  $('modal').classList.remove('hidden');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>$('modal').classList.add('open')));
-});
-function closeModal(){const m=$('modal');m.classList.remove('open');setTimeout(()=>m.classList.add('hidden'),220)}
-$('close').onclick=closeModal;
-$('modal').onclick=e=>{if(e.target===$('modal'))closeModal()}
-loadKeyboardComponent().catch(e=>console.error(e));
-</script></body></html>
+      <div id="modal" class="modal hidden">
+        <div class="modal-card">
+          <div class="modal-head">
+            <h2 id="modalTitle"></h2>
+            <button class="close" id="close">×</button>
+          </div>
+          <div id="modalBody"></div>
+        </div>
+      </div>
+      <div class="version-mark">v7.39</div>
+    </main>
+    <script src="../components/deutsch-day-v1.js?v=1"></script>
+    <script src="../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="sentences.js?v=1"></script>
+    <script src="../components/deutsch-progress-v1.js"></script>
+    <script src="pronomen.js?v=1"></script>
+  </body>
+</html>
