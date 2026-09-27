@@ -459,26 +459,33 @@ function openApp(tile) {
     fill: "forwards"
   });
   const earliest = performance.now() + LAYER_FADE_MS * 0.6; // content starts once the layer has (almost) covered Home
-  let started = false;
-  const settled = () => {
+  zoomContentIn(earliest, true, () => {
     homeStepBack.cancel(); // Home is covered now; back to normal size underneath
     homeArea.style.transformOrigin = "";
     animBusy = false;
     scheduleBack();
-  };
+  });
+}
+
+// the new page's content fades in and settles from 96 % — as soon as it can be drawn, at the earliest at `earliest`.
+// withButton: the Home button fades in with it (opening from Home); a chapter card leaves it where it is.
+function zoomContentIn(earliest, withButton, onSettled) {
+  let started = false;
   const zoomIn = () => {
     if (started) return;
     started = true;
-    shell.classList.remove("is-animating");
-    updateBack(); // the Home button is placed now and fades in with the content
-    back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
+    if (withButton) {
+      shell.classList.remove("is-animating");
+      updateBack(); // the Home button is placed now and fades in with the content
+      back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
+    }
     frame.style.opacity = "";
     frame.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
     const zoom = frame.animate([{ transform: `scale(${ZOOM_IN_FROM})` }, { transform: "scale(1)" }], {
       duration: ZOOM_IN_MS,
       easing: EASE_ZOOM
     });
-    zoom.onfinish = zoom.oncancel = settled;
+    zoom.onfinish = zoom.oncancel = onSettled;
   };
   // the page is ready: give it two frames to finish its own setup, so the zoom's first frames aren't dropped
   const startSoon = () => requestAnimationFrame(() => requestAnimationFrame(zoomIn));
@@ -489,6 +496,26 @@ function openApp(tile) {
   };
   whenShowable();
   setTimeout(zoomIn, 1500); // very slow network: show whatever has arrived
+}
+
+/* A card on a chapter page (Verbformen, Präpositionen) opens its exercise (Home 5.94). Phones: the chapter page
+   goes at once and the exercise arrives with the same fade + zoom as from Home — before, it simply appeared, which
+   felt broken right after the zoom into the chapter. The Home button stays where it is (same spot on both screens).
+   Tablets, computers, Reduce Motion: plain page change. Called by the chapter pages (verbformen.js,
+   praepositionen.js); url is absolute. */
+function openChapterExercise(url) {
+  if (animBusy) return;
+  if (!useAnimation() || !shell.classList.contains("open")) {
+    setFrameSrc(url);
+    return;
+  }
+  animBusy = true;
+  frame.style.opacity = "0"; // the chapter page goes at once — nothing is swapped while it's on screen
+  setFrameSrc(url);
+  zoomContentIn(performance.now(), false, () => {
+    animBusy = false;
+    scheduleBack();
+  });
 }
 
 function closeApp() {
@@ -535,6 +562,12 @@ function closeApp() {
     }, UNLOAD_AFTER_MS);
   };
 }
+
+/* iPhone Safari shows :active (the shared press effect) only on pages that listen for touches.
+       An empty, passive listener switches it on — for Home and (on load) for every exercise and chapter page.
+       It never blocks scrolling, swiping or the keyboard. Home 5.44; lost in 5.85, back in 5.94. */
+function noTouch() {}
+document.addEventListener("touchstart", noTouch, { passive: true });
 
 /* ===== Home button (Home 5.84, one fixed row since 5.90; replaces the "‹" of Home 5.43) =====
        One round house button; it always goes straight to Home (closeApp), from every screen of every exercise.
