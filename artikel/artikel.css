@@ -1,0 +1,595 @@
+/* Artikel (Der.Die.Das.) — styles. Markup: index.html · script: artikel.js
+   When this file changes, raise its ?v= in index.html and the Home tile's artikel/?v= */
+
+/* ===== PALETTE ===== */
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+
+  --bg: #1b1b1d;
+  --card-bg: #2a2a2d; /* word card, feedback panel, 10/20/30 and der/die/das buttons */
+  --text: #f2f0ed;
+  --muted: #8f8f94;
+  --text-secondary: #c8c7c4;
+  --text-strong: #f2f0ed;
+  --text-subtle: #c8c7c4;
+  --mint: #5bc8a4;
+  --coral: #ff7770;
+  --blue: #72a7ff;
+
+  --line: rgba(255, 255, 255, 0.09);
+  --hairline: rgba(255, 255, 255, 0.1); /* progress track, Weiter and „Noch eine Runde“ outline */
+  --answer-surface: rgba(27, 27, 29, 0.58);
+  --game-title: rgba(255, 255, 255, 0.11);
+  --good: rgba(91, 200, 164, 0.5);
+  --bad: rgba(255, 119, 112, 0.5);
+  --good-glow: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(91, 200, 164, 0.42) 0%,
+    rgba(91, 200, 164, 0.24) 18%,
+    rgba(91, 200, 164, 0.11) 40%,
+    rgba(91, 200, 164, 0.04) 60%,
+    transparent 78%
+  );
+  --bad-glow: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(255, 119, 112, 0.48) 0%,
+    rgba(255, 119, 112, 0.28) 18%,
+    rgba(255, 119, 112, 0.13) 40%,
+    rgba(255, 119, 112, 0.05) 60%,
+    transparent 78%
+  );
+
+  /* shared across exercises (Design Police 2026-09-25) */
+  --card-lift: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.3);
+  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
+  --start-version: rgba(255, 255, 255, 0.24);
+  --quiet-bg: rgba(255, 255, 255, 0.03);
+  --end-again-text: rgba(242, 240, 237, 0.55);
+  --end-main-bg: #ece6dc; /* cream: same as the Prüfen/Weiter buttons */
+  --end-main-text: #1b1b1d;
+}
+[data-theme="light"] {
+  --bg: #f6f4f1;
+  --card-bg: #fff;
+  --text: #242426;
+  --muted: #727278;
+  --text-secondary: #55565b;
+  --text-strong: #55565b;
+  --text-subtle: #727278;
+  --mint: #3fa68a;
+  --coral: #e95e66;
+  --blue: #5588e0;
+
+  --line: rgba(0, 0, 0, 0.09);
+  --hairline: rgba(0, 0, 0, 0.1);
+  --answer-surface: rgba(36, 36, 38, 0.035);
+  --game-title: rgba(36, 36, 38, 0.09);
+  --good: rgba(63, 166, 138, 0.5);
+  --bad: rgba(233, 94, 102, 0.5);
+  --good-glow: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(63, 166, 138, 0.18) 0%,
+    rgba(63, 166, 138, 0.09) 18%,
+    rgba(63, 166, 138, 0.03) 40%,
+    transparent 70%
+  );
+  --bad-glow: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(233, 94, 102, 0.19) 0%,
+    rgba(233, 94, 102, 0.09) 18%,
+    rgba(233, 94, 102, 0.025) 40%,
+    transparent 70%
+  );
+
+  --card-lift: 0 2px 4px rgba(0, 0, 0, 0.04), 0 14px 34px rgba(0, 0, 0, 0.09);
+  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
+  --start-version: rgba(36, 36, 38, 0.34);
+  --quiet-bg: #fff;
+  --end-again-text: rgba(36, 36, 38, 0.55);
+  --end-main-bg: #242426;
+  --end-main-text: #f6f4f1;
+}
+
+/* ===== PAGE SHELL (same as Partizip II) =====
+   The page itself never scrolls or bounces. Everything lives in .app, which fills the screen
+   and scrolls on its own only when the content is taller than the screen (small phones, large text).
+   .app has no top padding on purpose: Safari measures the sticky top bar from inside the scroller's
+   padding, Chrome from its edge. The status-bar space is on the screens themselves instead. */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button {
+  font-family: inherit;
+}
+.app {
+  position: fixed;
+  inset: 0;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 0 18px calc(env(safe-area-inset-bottom) + 40px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.hidden {
+  display: none;
+}
+
+/* ===== START + SUMMARY SCREENS ===== */
+.game-title {
+  font-size: clamp(56px, 12vw, 94px);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  color: var(--game-title);
+  margin: 30px 0 70px;
+  user-select: none;
+}
+#sessionScreen,
+#endScreen {
+  padding: calc(env(safe-area-inset-top) + 28px) 14px 20px;
+  text-align: center;
+}
+#sessionScreen h1,
+#endScreen h1 {
+  font-size: 34px;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+}
+#sessionScreen p,
+#endScreen p {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+#sessionScreen p {
+  line-height: 1.5;
+  margin: 16px 0;
+}
+.session-options {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0;
+}
+.session-option {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font-size: 21px;
+  font-weight: 650;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.session-option:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
+/* „Worum geht's?“ — width = the 10/20/30 row (3 × 96px + 2 × 12px), fixed above the version mark (2026-09-26) */
+.start-about {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 64px);
+  margin: 0 auto;
+  padding: 0;
+  width: 312px;
+  max-width: calc(100% - 36px);
+  text-align: center;
+  z-index: 4;
+}
+.start-about h2 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.start-about .about-de {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+body:has(#sessionScreen.hidden) .start-about {
+  display: none;
+}
+
+#endScreen .game-title {
+  margin-bottom: 45px;
+}
+#endScreen p {
+  margin: 0 0 28px;
+}
+.end-score {
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin: 18px 0 6px;
+}
+.finish-actions {
+  width: min(100%, 360px);
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.finish-actions button {
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.finish-actions button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+#playAgain {
+  background: transparent;
+  color: var(--end-again-text);
+  border: 1px solid var(--hairline);
+}
+#homeBack {
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+}
+
+/* Version number: only on the start and summary screens */
+.version-mark {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 28px);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--start-version);
+  pointer-events: none;
+  z-index: 5;
+}
+body:has(#game:not(.hidden)) .version-mark {
+  display: none;
+}
+
+/* Short screens (phone turned sideways, very small phones): not enough room to pin the description and
+   the version number to the bottom without covering the buttons, so they follow the content instead. */
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  .start-about,
+  .version-mark {
+    position: static;
+    margin: 0 auto;
+  }
+  .start-about {
+    margin-top: 12px;
+  }
+  .version-mark {
+    padding: 28px 0 4px;
+  }
+}
+
+/* ===== TOP BAR · position = Partizip II (reference): title and counter centred 33.5px from the top, line at 55px ===== */
+#game {
+  padding-top: calc(env(safe-area-inset-top) + 19px);
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  position: sticky;
+  top: calc(env(safe-area-inset-top) + 4px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--hairline);
+  border-radius: 99px;
+}
+/* covers the strip above the bar while the panel scrolls */
+.top:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(env(safe-area-inset-top) + 4px);
+  background: var(--bg);
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.counter {
+  color: var(--muted);
+  font-size: 14px;
+}
+.top-title,
+.counter {
+  transform: translateY(4px);
+}
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 99px;
+  overflow: hidden;
+  z-index: 1;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--muted);
+  width: 0;
+}
+
+/* ===== WORD CARD + ANSWER BUTTONS ===== */
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 390px;
+  border-radius: 26px;
+  background: var(--card-bg);
+  box-shadow: var(--card-lift);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 42px 24px;
+}
+.eyebrow {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.word {
+  font-size: clamp(48px, 11vw, 76px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+.translation {
+  font-size: 16px;
+  color: var(--muted);
+  margin-top: 14px;
+  text-align: center;
+}
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+.choice {
+  height: 56px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: var(--start-btn-shadow);
+  font-size: 22px;
+  font-weight: 650;
+  line-height: normal;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease,
+    opacity 0.16s ease;
+}
+.choice:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.der {
+  color: var(--blue);
+}
+.die {
+  color: var(--coral);
+}
+.das {
+  color: var(--mint);
+}
+@media (max-width: 520px) {
+  .card {
+    min-height: 360px;
+  }
+  .choices {
+    position: sticky;
+    bottom: 10px;
+  }
+}
+
+/* ===== FEEDBACK ===== */
+.feedback {
+  display: none;
+  margin-top: 18px;
+  border-radius: 22px;
+  padding: 22px;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.feedback.show {
+  display: block;
+}
+.feedback.correct {
+  border-color: var(--good);
+}
+.feedback.wrong {
+  border-color: var(--bad);
+}
+.feedback::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -230px;
+  width: 155%;
+  height: 650px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.feedback.correct::before {
+  background: var(--good-glow);
+}
+.feedback.wrong::before {
+  background: var(--bad-glow);
+}
+/* above the glow */
+.feedback h2,
+.feedback p,
+.answer-card,
+.rule-card {
+  position: relative;
+}
+#feedbackTitle {
+  margin: 0 0 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.feedback.correct #feedbackTitle {
+  color: var(--mint);
+}
+.feedback.wrong #feedbackTitle {
+  color: var(--coral);
+}
+#choiceLine {
+  margin: 8px 0;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  text-align: center;
+}
+.answer-card,
+.rule-card {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--answer-surface);
+}
+.answer-card {
+  text-align: center;
+}
+.answer-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.answer-word {
+  font-size: 30px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+.answer-translation {
+  color: var(--muted);
+  margin-top: 6px;
+}
+.rule-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  color: var(--muted);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.rule-title {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.rule-examples {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-subtle);
+  margin-top: 10px;
+  line-height: 1.45;
+}
+.rule-reliability {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 10px;
+  color: var(--text-subtle);
+}
+.rule-reliability strong {
+  color: var(--text-strong);
+}
+
+/* Weiter: the quiet button, shared by all exercises (blueprint: Partizip II) — you read the answer first */
+#continue {
+  width: 100%;
+  height: 56px;
+  margin-top: 18px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  background: var(--quiet-bg);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#continue:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
