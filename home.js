@@ -43,27 +43,22 @@
   phraseToggle.addEventListener("click", showPhrase);
   phraseBack.addEventListener("click", showHome);
 
-  function getMonday(date) {
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
-    const day = d.getDay();
-    const diff = day === 0 ? -6 : 1 - day;
-    d.setDate(d.getDate() + diff);
-    return d;
-  }
+  /* Weeks are counted in whole calendar days of the device's own date
+     (Date.UTC), not in milliseconds, so summer/winter time changes can't
+     shift the count by an hour. Everyone gets the same phrase each week;
+     it changes at each person's local Monday 00:00. */
+  const DAY_MS = 86400000;
 
-  function getISOWeekKey(date) {
-    const monday = getMonday(date);
-    return monday.getTime();
+  function calendarDayNumber(date) {
+    return Math.round(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / DAY_MS);
   }
 
   function render() {
     if (!Array.isArray(window.PHRASES) || window.PHRASES.length === 0) return;
 
-    const startMonday = new Date(2026, 0, 5);
-    const currentWeek = getISOWeekKey(new Date());
-    const firstWeek = getISOWeekKey(startMonday);
-    const weeks = Math.max(0, Math.floor((currentWeek - firstWeek) / 604800000));
+    // Monday 5 January 2026 is week 0.
+    const firstMonday = Math.round(Date.UTC(2026, 0, 5) / DAY_MS);
+    const weeks = Math.max(0, Math.floor((calendarDayNumber(new Date()) - firstMonday) / 7));
     const index = weeks % window.PHRASES.length;
     const phrase = window.PHRASES[index];
 
