@@ -345,40 +345,49 @@ document.querySelectorAll("[data-app]").forEach(button => {
   update();
 })();
 
-/* ===== Open / close an exercise (Home 5.86) =====
+/* ===== Open / close an exercise (Home 5.86, tuned in 5.87) =====
    Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
-   animation*). The exercise layer (page colour) fills the screen at once; the exercise's content fades in and settles
-   from 94 % to full size. The exercise pages use the same page colour as Home, so only the content seems to move.
-   Closing: the content shrinks to 96 % and fades out, Home is back, and the tile it came from settles from 106 % to
-   its size. Only scale and fade are animated — what a phone does smoothly.
+   animation*). The exercise layer (page colour) fades in over Home; the exercise's content fades in and settles
+   from 94 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
+   the data files, like the page appeared before 5.84; Wortschatz waits for its scripts). The exercise pages use the
+   same page colour as Home, so only the content seems to move.
+   Closing: the content shrinks to 96 % and fades out, the layer fades away over Home, and the tile it came from
+   settles from 103 % to its size. Only scale and fade are animated — what a phone does smoothly.
    The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
    Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
+const LAYER_FADE_MS = 150;
 const ZOOM_IN_MS = 280;
 const ZOOM_OUT_MS = 160;
 const TILE_SETTLE_MS = 250;
+const TILE_SETTLE_FROM = 1.03;
+const EASE_OUT = "cubic-bezier(0.2, 0.8, 0.2, 1)";
 let originTile = null, // the Home tile the exercise came from (for a chapter exercise: the chapter tile)
   animBusy = false,
   preloadedApp = null, // page already loading because a finger is on its tile
-  preloadTimer = 0,
-  frameReady = false;
+  preloadTimer = 0;
 
 function useAnimation() {
   return (
     window.matchMedia("(max-width: 600px)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
-
-frame.addEventListener("load", () => {
-  let blank = true;
+// the new page can be drawn: its layout and styles are there (the moment the page used to appear before 5.84).
+// Data files and scripts at the end of the page may still be coming — the zoom doesn't wait for them.
+// Exception: pages whose script decides which screen to show first (Wortschatz: start screen or „Fertig für heute“)
+// wait for their scripts, otherwise an empty skeleton would zoom in.
+const WAIT_FOR_SCRIPTS = ["wortschatz/"];
+function pageShowable() {
   try {
-    blank = frame.contentWindow.location.href === "about:blank";
-  } catch (e) {}
-  frameReady = !blank;
-});
-function loadInFrame(app) {
-  frameReady = false;
-  frame.src = app;
+    const doc = frame.contentDocument;
+    if (frame.contentWindow.location.href === "about:blank" || !doc || !doc.body) return false;
+    if (doc.readyState !== "loading") return true;
+    if (WAIT_FOR_SCRIPTS.includes(framePath())) return false;
+    const styles = [...doc.querySelectorAll('link[rel="stylesheet"]')];
+    return !!doc.querySelector("main, .app") && styles.every(l => l.sheet);
+  } catch (e) {
+    return false;
+  }
 }
 // a finger on a tile: start loading its page already, invisibly (shell rendered but hidden, so the page lays out
 // with the right size). If no tap follows (the finger scrolled the tiles), it's dropped again.
@@ -388,7 +397,7 @@ function preloadApp(tile) {
   if (preloadedApp !== tile.dataset.app) {
     preloadedApp = tile.dataset.app;
     shell.classList.add("preload");
-    loadInFrame(preloadedApp);
+    frame.src = preloadedApp;
   }
   preloadTimer = setTimeout(() => {
     if (shell.classList.contains("open")) return;
@@ -402,7 +411,7 @@ function openApp(tile) {
   if (animBusy) return;
   clearTimeout(preloadTimer);
   originTile = tile;
-  if (preloadedApp !== tile.dataset.app) loadInFrame(tile.dataset.app);
+  if (preloadedApp !== tile.dataset.app) frame.src = tile.dataset.app;
   preloadedApp = null;
   const zoom = useAnimation();
   if (zoom) {
@@ -416,6 +425,8 @@ function openApp(tile) {
   document.documentElement.classList.add("app-open");
   if (!zoom) return;
 
+  shell.animate([{ opacity: 0 }, { opacity: 1 }], { duration: LAYER_FADE_MS, easing: "ease-out" });
+  const earliest = performance.now() + LAYER_FADE_MS * 0.6; // content starts once the layer has (almost) covered Home
   let started = false;
   const settled = () => {
     shell.classList.remove("is-animating");
@@ -431,12 +442,16 @@ function openApp(tile) {
         { opacity: 0, transform: "scale(0.94)" },
         { opacity: 1, transform: "scale(1)" }
       ],
-      { duration: ZOOM_IN_MS, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" }
+      { duration: ZOOM_IN_MS, easing: EASE_OUT }
     );
     a.onfinish = a.oncancel = settled;
   };
-  if (frameReady) zoomIn();
-  else frame.addEventListener("load", zoomIn, { once: true });
+  const whenShowable = () => {
+    if (started) return;
+    if (pageShowable() && performance.now() >= earliest) zoomIn();
+    else requestAnimationFrame(whenShowable);
+  };
+  whenShowable();
   setTimeout(zoomIn, 1500); // very slow network: show whatever has arrived
 }
 
@@ -450,7 +465,6 @@ function closeApp() {
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
     frame.src = "about:blank";
-    frameReady = false;
     originTile = null;
     animBusy = false;
   };
@@ -461,21 +475,29 @@ function closeApp() {
   animBusy = true;
   setFrameWindow(false);
   shell.classList.add("is-animating");
-  const a = frame.animate(
+  const out = frame.animate(
     [
       { opacity: 1, transform: "scale(1)" },
       { opacity: 0, transform: "scale(0.96)" }
     ],
     { duration: ZOOM_OUT_MS, easing: "ease-in", fill: "forwards" }
   );
-  a.onfinish = () => {
-    finish();
-    a.cancel();
+  out.onfinish = () => {
+    const fade = shell.animate([{ opacity: 1 }, { opacity: 0 }], {
+      duration: LAYER_FADE_MS,
+      easing: "ease-out",
+      fill: "forwards"
+    });
     if (tile)
-      tile.animate([{ transform: "scale(1.06)" }, { transform: "scale(1)" }], {
+      tile.animate([{ transform: `scale(${TILE_SETTLE_FROM})` }, { transform: "scale(1)" }], {
         duration: TILE_SETTLE_MS,
-        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)"
+        easing: EASE_OUT
       });
+    fade.onfinish = () => {
+      finish();
+      out.cancel();
+      fade.cancel();
+    };
   };
 }
 
