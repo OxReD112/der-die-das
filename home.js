@@ -1617,7 +1617,13 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       hintIOS:
         "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
       hintMac:
-        "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often."
+        "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often.",
+      infoTitle: "Your progress",
+      info1:
+        "Your progress is saved only on this device - in this browser, or in the Home Screen app. It isn't stored online, so clearing website data, deleting the app or switching to a new device would erase it.",
+      infoSafari: " Safari also deletes it after 7 days without a visit.",
+      info2:
+        "Make a backup now and then. It's a small file you can bring back anytime with Restore - on this device or a new one."
     },
     ru: {
       label: "Сохраните прогресс",
@@ -1633,7 +1639,13 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       hintIOS:
         "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавьте Deutsch. на экран «Домой» или почаще делайте бэкап.",
       hintMac:
-        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делайте бэкап."
+        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делайте бэкап.",
+      infoTitle: "Ваш прогресс",
+      info1:
+        "Прогресс хранится только на этом устройстве - в этом браузере или в приложении на экране «Домой». В интернете он не сохраняется, поэтому если очистить данные сайта, удалить приложение или перейти на новое устройство, он пропадёт.",
+      infoSafari: " Кроме того, Safari удаляет его, если 7 дней не заходить на сайт.",
+      info2:
+        "Время от времени делайте бэкап. Это небольшой файл, из которого прогресс можно вернуть через Restore - на этом же или на новом устройстве."
     }
   };
   const $ = id => document.getElementById(id);
@@ -1810,6 +1822,51 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
         if (e.key === "Escape" && win.classList.contains("open")) {
           e.stopPropagation();
           closeWin();
+        }
+      },
+      true
+    );
+  }
+
+  /* (i) next to Backup in Settings → "Your progress" window (Home 5.97). Every device, browser and
+     Home Screen app alike; the Safari 7-day sentence only where it applies (atRisk). */
+  const infoWin = $("backupInfoWindow");
+  function renderInfo() {
+    const x = t(),
+      today = lastDays() === 0;
+    $("backupInfoTitle").textContent = x.infoTitle;
+    $("backupInfoText").textContent = x.info1 + (atRisk() ? x.infoSafari : "");
+    $("backupInfoText2").textContent = x.info2;
+    const btn = $("backupInfoSave");
+    btn.textContent = today ? x.done : x.btn;
+    btn.disabled = today;
+  }
+  function openInfo() {
+    renderInfo();
+    infoWin.classList.add("open");
+    infoWin.setAttribute("aria-hidden", "false");
+  }
+  function closeInfo() {
+    infoWin.classList.remove("open");
+    infoWin.setAttribute("aria-hidden", "true");
+  }
+  if (infoWin) {
+    $("backupInfoOpen")?.addEventListener("click", openInfo);
+    $("backupInfoClose")?.addEventListener("click", closeInfo);
+    $("backupInfoSave")?.addEventListener("click", () => {
+      saveDeutschBackup();
+      renderInfo();
+      renderBackupNote();
+    });
+    infoWin.addEventListener("click", e => {
+      if (e.target === infoWin) closeInfo();
+    });
+    document.addEventListener(
+      "keydown",
+      e => {
+        if (e.key === "Escape" && infoWin.classList.contains("open")) {
+          e.stopPropagation();
+          closeInfo();
         }
       },
       true

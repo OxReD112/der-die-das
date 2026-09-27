@@ -1051,6 +1051,44 @@ header h1 {
   gap: 10px;
   min-width: 0;
 }
+/* Backup row: Backup on the left, (i) on the right → "Your progress" window (Home 5.97) */
+.settings-action-row {
+  display: flex;
+  align-items: center;
+}
+.settings-action-row .settings-action {
+  flex: 1;
+  min-width: 0;
+}
+.settings-info {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: none;
+  width: 44px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-info:active {
+  transform: scale(0.94);
+  filter: brightness(0.94);
+}
+.about-text + .about-text {
+  margin-top: 12px;
+}
+.backup-info-btn {
+  margin-top: 18px;
+}
 .settings-action-note {
   color: var(--muted);
   font-size: 10px;
@@ -1897,6 +1935,7 @@ header h1 {
   .settings-panel,
   .settings-launcher,
   .settings-action,
+  .settings-info,
   .settings-close,
   .settings-confirm,
   .settings-confirm.is-open,

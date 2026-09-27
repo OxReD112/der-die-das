@@ -51,7 +51,7 @@
   <title>
    Deutsch
   </title>
-  <link href="home.css?v=8" rel="stylesheet"/>
+  <link href="home.css?v=9" rel="stylesheet"/>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
   <link href="manifest.webmanifest" rel="manifest"/>
@@ -217,7 +217,7 @@
    <div class="settings-content">
     <div class="settings-title-row"><h2 class="settings-title">Settings</h2><button class="settings-close" id="settingsClose" type="button" aria-label="Close settings">×</button></div>
     <div class="settings-list">
-     <button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button>
+     <div class="settings-action-row"><button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button><button class="settings-info" id="backupInfoOpen" type="button" aria-label="Where is my progress saved?"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg></button></div>
      <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
      <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
      <div class="backup-hint" id="backupHint" hidden></div>
@@ -233,7 +233,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.96</div>
+    <div class="settings-version">Deutsch. version 5.97</div>
    </div>
    </section>
    <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
@@ -243,6 +243,14 @@
     <div class="about-head"><h2 id="keepTitle"></h2><button class="about-close" id="keepClose" type="button" aria-label="Close">×</button></div>
     <ol class="howto-steps" id="keepSteps"></ol>
     <p class="about-text keep-foot" id="keepFoot"></p>
+   </div>
+  </div>
+  <div aria-hidden="true" class="about-window" id="backupInfoWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="backupInfoTitle">
+    <div class="about-head"><h2 id="backupInfoTitle"></h2><button class="about-close" id="backupInfoClose" type="button" aria-label="Close">×</button></div>
+    <p class="about-text" id="backupInfoText"></p>
+    <p class="about-text" id="backupInfoText2"></p>
+    <button class="keep-backup-btn backup-info-btn" id="backupInfoSave" type="button"></button>
    </div>
   </div>
   <div aria-hidden="true" class="about-window" id="aboutWindow">
@@ -277,7 +285,7 @@
   </script>
   <script src="greetings.js?v=2">
   </script>
-  <script src="home.js?v=12"></script>
+  <script src="home.js?v=13"></script>
  <script src="progress-screen.js?v=18"></script>
 </body>
 </html>
