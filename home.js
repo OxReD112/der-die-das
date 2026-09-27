@@ -349,7 +349,7 @@ document.querySelectorAll("[data-app]").forEach(button => {
    Phones: a short zoom, the same idea as the app's windows (Documentation/DECISIONS.md → *Home button + open / close
    animation*). At the tap Home steps back (shrinks to 97 %) while the exercise layer (page colour) fades in over it —
    the page loads during that movement (5.91). The exercise's content then fades in and settles
-   from 94 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
+   from 96 % to full size as soon as the page can be drawn (its layout and styles are there — it doesn't wait for
    the data files, like the page appeared before 5.84; Wortschatz waits for its scripts). The exercise pages use the
    same page colour as Home, so only the content seems to move.
    Closing — one crossfade, nothing swapped while it's on screen: at the tap Home's pictures are prepared, the whole
@@ -362,13 +362,18 @@ document.querySelectorAll("[data-app]").forEach(button => {
    Tablets, computers and Reduce Motion: no animation.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
 const LAYER_FADE_MS = 220;
-const ZOOM_IN_MS = 280;
+// the content arriving (5.93, calmer): a gentle fade and, separately, a longer zoom that still moves in its second
+// half — so it's visible while it's still settling instead of popping up and then snapping into place
+const CONTENT_FADE_MS = 300;
+const ZOOM_IN_MS = 420;
+const ZOOM_IN_FROM = 0.96;
+const EASE_SOFT = "cubic-bezier(0.25, 0.1, 0.25, 1)"; // gentle start and end (CSS "ease")
+const EASE_ZOOM = "cubic-bezier(0.33, 1, 0.68, 1)"; // eases out, but keeps moving noticeably in its second half
 const CLOSE_FADE_MS = 240;
 const CLOSE_SHRINK_TO = 0.97;
 const HOME_STEP_MS = 380; // Home steps back (opening) / grows back (closing) — same size, same speed
 const HOME_STEP_SCALE = 0.97;
 const UNLOAD_AFTER_MS = 500;
-const EASE_OUT = "cubic-bezier(0.2, 0.8, 0.2, 1)";
 const homeArea = document.querySelector(".home-viewport"); // greeting + tiles (the fixed header can't be scaled)
 let animBusy = false,
   preloadedApp = null, // page already loading because a finger is on its tile
@@ -450,7 +455,7 @@ function openApp(tile) {
   homeArea.style.transformOrigin = `${innerWidth / 2 - box.left}px ${innerHeight / 2 - box.top}px`;
   const homeStepBack = homeArea.animate([{ transform: "scale(1)" }, { transform: `scale(${HOME_STEP_SCALE})` }], {
     duration: HOME_STEP_MS,
-    easing: EASE_OUT,
+    easing: EASE_SOFT,
     fill: "forwards"
   });
   const earliest = performance.now() + LAYER_FADE_MS * 0.6; // content starts once the layer has (almost) covered Home
@@ -466,20 +471,20 @@ function openApp(tile) {
     started = true;
     shell.classList.remove("is-animating");
     updateBack(); // the Home button is placed now and fades in with the content
-    back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ZOOM_IN_MS, easing: EASE_OUT });
+    back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
     frame.style.opacity = "";
-    const a = frame.animate(
-      [
-        { opacity: 0, transform: "scale(0.94)" },
-        { opacity: 1, transform: "scale(1)" }
-      ],
-      { duration: ZOOM_IN_MS, easing: EASE_OUT }
-    );
-    a.onfinish = a.oncancel = settled;
+    frame.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
+    const zoom = frame.animate([{ transform: `scale(${ZOOM_IN_FROM})` }, { transform: "scale(1)" }], {
+      duration: ZOOM_IN_MS,
+      easing: EASE_ZOOM
+    });
+    zoom.onfinish = zoom.oncancel = settled;
   };
+  // the page is ready: give it two frames to finish its own setup, so the zoom's first frames aren't dropped
+  const startSoon = () => requestAnimationFrame(() => requestAnimationFrame(zoomIn));
   const whenShowable = () => {
     if (started) return;
-    if (pageShowable() && performance.now() >= earliest) zoomIn();
+    if (pageShowable() && performance.now() >= earliest) startSoon();
     else requestAnimationFrame(whenShowable);
   };
   whenShowable();
@@ -518,7 +523,7 @@ function closeApp() {
   ];
   const settle = homeArea.animate([{ transform: `scale(${HOME_STEP_SCALE})` }, { transform: "scale(1)" }], {
     duration: HOME_STEP_MS,
-    easing: "ease" // softer than EASE_OUT: still growing while Home comes through the fading exercise screen
+    easing: EASE_SOFT // still growing while Home comes through the fading exercise screen
   });
   settle.onfinish = settle.oncancel = () => (homeArea.style.transformOrigin = "");
   anims[0].onfinish = () => {
