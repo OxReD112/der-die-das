@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Verbformen" />
-    <link rel="stylesheet" href="partizipII.css?v=3" />
+    <link rel="stylesheet" href="partizipII.css?v=4" />
   </head>
   <body>
     <main class="app">
@@ -65,7 +65,9 @@
         </section>
         <div id="keyboardMount"></div>
         <div class="in-session-pattern">
-          <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
+          <button class="pattern-table-btn" type="button" id="roundTableBtn" data-pattern-table="round" disabled>
+            Vokalwechsel · Tabelle
+          </button>
         </div>
       </section>
 
@@ -88,12 +90,12 @@
           <div id="patternModalBody"></div>
         </div>
       </div>
-      <div class="version-mark">v57</div>
+      <div class="version-mark">v58</div>
     </main>
 
     <script src="../../components/deutsch-translation-v1.js?v=2"></script>
     <script src="verbs.js?v=5"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="partizipII.js?v=2"></script>
+    <script src="partizipII.js?v=3"></script>
   </body>
 </html>

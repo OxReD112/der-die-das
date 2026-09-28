@@ -14,6 +14,10 @@
   --text-secondary: #c8c7c4; /* table button */
   --example-text: #c8c7c4;
   --pattern-text: #c7c3bc; /* vowels in the table */
+  --lit-bg: rgba(232, 196, 120, 0.13); /* the verb's vowel change after Prüfen (gold, like Modalverben) */
+  --lit-line: rgba(232, 196, 120, 0.55);
+  --lit-text: #e8c478;
+  --lit-form: #efe6d4;
   --mint: #5bc8a4;
   --red: #ff7770;
 
@@ -40,6 +44,10 @@
   --text-secondary: #55565b;
   --example-text: #727278;
   --pattern-text: #4a4844;
+  --lit-bg: rgba(196, 146, 40, 0.13);
+  --lit-line: rgba(160, 112, 20, 0.5);
+  --lit-text: #97680f;
+  --lit-form: #3a3326;
   --mint: #3fa68a;
   --red: #e95e66;
 
@@ -189,6 +197,15 @@ body {
   justify-content: center;
   z-index: 20;
   pointer-events: none;
+}
+/* during a round: off until Prüfen - greyed out, does nothing (no note) */
+.pattern-table-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.pattern-table-btn:disabled:active {
+  transform: none;
+  filter: none;
 }
 .in-session-pattern .pattern-table-btn {
   pointer-events: auto;
@@ -705,6 +722,21 @@ body:has(.pattern-modal.open) .version-mark {
   font-family: var(--font);
   font-size: 12px;
   margin: 0 3px;
+}
+/* the verb's cell after Prüfen (during a round): gold outline, gold infinitive vowel, its Partizip II vowel marked */
+.pattern-cell.lit {
+  border-color: var(--lit-line);
+}
+.pattern-cell.lit .pattern-source {
+  color: var(--lit-text);
+}
+.lit-vowel {
+  padding: 2px 4px;
+  margin: -2px 0;
+  border-radius: 4px;
+  background: var(--lit-bg);
+  color: var(--lit-form);
+  font-weight: 650;
 }
 
 /* ===== ON-SCREEN KEYBOARD (components/deutsch-keyboard) · layout of the bottom row on phones and tablets ===== */

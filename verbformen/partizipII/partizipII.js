@@ -169,6 +169,7 @@ function render() {
   $("result").className = "result";
   $("vowelPattern").textContent = "";
   $("next").classList.remove("show");
+  $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("check").style.display = isTouchDevice ? "none" : "";
   $("count").textContent = index + 1 + " / " + deck.length;
   $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
@@ -218,6 +219,7 @@ function checkAnswer() {
   $("answer").blur();
   $("check").style.display = "none";
   $("next").classList.add("show");
+  $("roundTableBtn").disabled = false;
 }
 
 function next() {
@@ -331,7 +333,9 @@ async function loadKeyboardComponent() {
 loadKeyboardComponent().catch(e => console.error(e));
 
 /* ===== TABLE WINDOW „Vokalwechsel“ =====
-   Infinitive vowel → the vowels its Partizip II can have in this exercise. */
+   Infinitive vowel → the vowels its Partizip II can have in this exercise.
+   During a round (2026-09-28, like Vielseitige Verben): the button is off until Prüfen; then the verb's cell is
+   lit (its infinitive vowel) with its Partizip II vowel marked - from the verb's pattern („ei - ie - ie“ → ei → ie). */
 const VOWEL_CHANGES = [
   ["a", ["a"]],
   ["ä", ["a"]],
@@ -346,15 +350,19 @@ const VOWEL_CHANGES = [
   ["i", ["i", "u", "o", "e", "a"]]
 ];
 
-function patternTableHtml() {
-  const cells = VOWEL_CHANGES.map(
-    ([from, to]) =>
-      '<div class="pattern-cell"><div class="pattern-source">' +
+function patternTableHtml(lit = null) {
+  const cells = VOWEL_CHANGES.map(([from, to]) => {
+    const on = lit && lit[0] === from;
+    return (
+      '<div class="pattern-cell' +
+      (on ? " lit" : "") +
+      '"><div class="pattern-source">' +
       from +
       '</div><div class="pattern-options"><span class="arrow">→</span>' +
-      to.map(v => "<span>" + v + "</span>").join('<span class="arrow">·</span>') +
+      to.map(v => (on && v === lit[1] ? '<span class="lit-vowel">' : "<span>") + v + "</span>").join('<span class="arrow">·</span>') +
       "</div></div>\n"
-  );
+    );
+  });
   return (
     '<p class="pattern-intro">Infinitiv → Partizip II · Vokalwechsel in dieser Übung</p><div class="pattern-grid">\n' +
     cells.join("") +
@@ -363,8 +371,15 @@ function patternTableHtml() {
 }
 const tableIsOpen = () => $("patternModal").classList.contains("open");
 
-function openPatternTable() {
-  $("patternModalBody").innerHTML = patternTableHtml();
+// „ei - ie - ie“ → ["ei", "ie"] (infinitive vowel, Partizip II vowel)
+function patternLit(v) {
+  const parts = String(v.pattern || "").split(/\s*-\s*/);
+  return parts.length >= 3 ? [parts[0], parts[2]] : null;
+}
+
+function openPatternTable(round) {
+  if (round && !(inRound() && checked)) return; // off until Prüfen
+  $("patternModalBody").innerHTML = patternTableHtml(round ? patternLit(deck[index]) : null);
   const modal = $("patternModal");
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -376,7 +391,9 @@ function closePatternTable() {
   // computer: back to typing without clicking into the field first
   if (inRound() && !checked && !isTouchDevice) focusAnswer();
 }
-document.querySelectorAll("[data-pattern-table]").forEach(b => b.addEventListener("click", openPatternTable));
+document
+  .querySelectorAll("[data-pattern-table]")
+  .forEach(b => b.addEventListener("click", () => openPatternTable(b.dataset.patternTable === "round")));
 $("patternClose").onclick = closePatternTable;
 $("patternModal").onclick = e => {
   if (e.target === $("patternModal")) closePatternTable();
