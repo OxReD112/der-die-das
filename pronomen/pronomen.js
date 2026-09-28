@@ -221,6 +221,7 @@ function render() {
   $("answerbox").style.display = "flex";
   $("check").style.removeProperty("display");
   $("feedback").className = "feedback hidden";
+  $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   if (window.deutschKeyboardReady) $("keyboard").classList.add("show");
   fitPrompt();
   $("counter").textContent = `${i + 1} / ${deck.length}`;
@@ -283,6 +284,7 @@ function submit() {
   $("answerbox").style.display = "none";
   $("check").style.display = "none";
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+  $("roundTableBtn").disabled = false;
 }
 function next() {
   i++;
@@ -545,6 +547,39 @@ function markWeakTable() {
   document.querySelector("#modalBody .formal-row:has(.hot)")?.classList.add("show");
   const more = document.querySelector("#modalBody .tbl-more");
   if (more && more.querySelector(".hot")) more.open = true;
+}
+
+/* During a round (2026-09-28, like Vielseitige Verben): the button is off until Prüfen; then the table opens with
+   the answer lit - personal: its cell (Akk. / Dat.); possessive: the owner's stem (mein-, sein- …) and the ending
+   (case × gender) with „Possessiv-Endungen“ open. The formal Sie row shows when the answer is in it.
+   No „zuletzt Fehler“ marks there (one kind of highlight at a time); the start screen keeps them. */
+const litSpan = td => {
+  td.innerHTML = '<span class="lit">' + td.innerHTML + "</span>";
+  const col = td.cellIndex,
+    head = td.closest("table").rows[0].cells[col];
+  if (head) head.classList.add("lit-head");
+  td.closest("tr").classList.add("show"); // the formal Sie row
+};
+function markAnswer(x) {
+  const body = $("modalBody");
+  if (x.type !== "possessive") {
+    const td = body.querySelector(`[data-focus="${x.skill.split(" → ")[0]}"]`);
+    if (td) litSpan(td);
+    return;
+  }
+  const owner = x.skill.split(" · ")[1].split(" → ")[0];
+  const nom = body.querySelector(`td.nom[data-focus="Personal · Nominativ · ${owner}"]`);
+  const stem = nom && nom.closest("tr").querySelector("[data-owner]");
+  if (stem) litSpan(stem);
+  const ending = body.querySelector(`[data-ending="${possessiveCase(x)}|${x.gender || ""}"]`);
+  if (ending) {
+    litSpan(ending);
+    body.querySelector(".tbl-more").open = true;
+  }
+}
+
+function wireEndingsFold() {
+  const more = document.querySelector("#modalBody .tbl-more");
   if (more)
     more.addEventListener("toggle", () => {
       if (!more.open) return;
@@ -560,9 +595,14 @@ function markWeakTable() {
 document.querySelectorAll("[data-table]").forEach(
   b =>
     (b.onclick = () => {
+      const round = b.dataset.table === "round";
+      if (round && ($("game").classList.contains("hidden") || !feedbackOpen())) return; // off until Prüfen
       $("modalTitle").textContent = "Pronomen";
       $("modalBody").innerHTML = reference;
-      markWeakTable();
+      if (round) markAnswer(deck[i]);
+      else markWeakTable();
+      wireEndingsFold();
+      $("modalBody").scrollTop = 0;
       $("modal").classList.remove("hidden");
       requestAnimationFrame(() => requestAnimationFrame(() => $("modal").classList.add("open")));
     })
