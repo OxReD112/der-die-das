@@ -346,13 +346,15 @@ async function loadKeyboardComponent() {
 loadKeyboardComponent().catch(e => console.error(e));
 
 /* ===== TABLE WINDOW „Modalverben · Formen“ =====
-   Group row (können · müssen · dürfen · sollen · wollen): first the ending scheme, a tap on a verb shows its
-   forms, „Zurücksetzen“ goes back to the scheme. mögen and werden fold out on their own. */
+   Group row (können · müssen · dürfen · mögen · sollen · wollen), always open: first the ending scheme, a tap
+   on a verb shows its forms, „Zurücksetzen“ goes back to the scheme. werden folds out on its own.
+   A verb's ich / du / er Präsens forms get one frame (the vowel change to memorise) - not for sollen,
+   whose vowel stays. */
 
 const MODAL_FORM_PERSONS = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
 
 const MODAL_FORM_GROUP = {
-  verbs: ["können", "müssen", "dürfen", "sollen", "wollen"],
+  verbs: ["können", "müssen", "dürfen", "mögen", "sollen", "wollen"],
   forms: {
     können: {
       present: ["kann", "kannst", "kann", "können", "könnt", "können"],
@@ -369,6 +371,11 @@ const MODAL_FORM_GROUP = {
       preterite: ["durfte", "durftest", "durfte", "durften", "durftet", "durften"],
       k2: ["dürfte", "dürftest", "dürfte", "dürften", "dürftet", "dürften"]
     },
+    mögen: {
+      present: ["mag", "magst", "mag", "mögen", "mögt", "mögen"],
+      preterite: ["mochte", "mochtest", "mochte", "mochten", "mochtet", "mochten"],
+      k2: ["möchte", "möchtest", "möchte", "möchten", "möchtet", "möchten"]
+    },
     sollen: {
       present: ["soll", "sollst", "soll", "sollen", "sollt", "sollen"],
       preterite: ["sollte", "solltest", "sollte", "sollten", "solltet", "sollten"],
@@ -383,11 +390,6 @@ const MODAL_FORM_GROUP = {
 };
 
 const MODAL_FORM_SPECIAL = {
-  mögen: {
-    present: ["mag", "magst", "mag", "mögen", "mögt", "mögen"],
-    preterite: ["mochte", "mochtest", "mochte", "mochten", "mochtet", "mochten"],
-    k2: ["möchte", "möchtest", "möchte", "möchten", "möchtet", "möchten"]
-  },
   werden: {
     present: ["werde", "wirst", "wird", "werden", "werdet", "werden"],
     preterite: ["wurde", "wurdest", "wurde", "wurden", "wurdet", "wurden"],
@@ -398,13 +400,15 @@ const MODAL_FORM_SPECIAL = {
 
 const MODAL_FORM_SCHEME = {
   present: ["-", "-st", "-", "-en", "-t", "-en"],
-  preterite: ["-e", "-est", "-e", "-en", "-et", "-en"],
-  k2: ["-e", "-est", "-e", "-en", "-et", "-en"]
+  preterite: ["-te", "-test", "-te", "-ten", "-tet", "-ten"],
+  k2: ["-te", "-test", "-te", "-ten", "-tet", "-ten"]
 };
 
+/* no frame: the vowel stays (soll, sollst, soll) */
+const MODAL_FORM_NO_FRAME = ["sollen"];
+
 let modalFormMode = "scheme";
-let modalFormGroupOpen = true;
-let modalSpecialOpen = { mögen: false, werden: false };
+let modalSpecialOpen = { werden: false };
 
 function umlautGlyph() {
   return '<span class="umlaut-remove">ø</span>';
@@ -413,13 +417,16 @@ function umlautGlyph() {
 function renderFormsDetail(verb, scheme = false) {
   const forms = scheme ? MODAL_FORM_SCHEME : MODAL_FORM_GROUP.forms[verb] || MODAL_FORM_SPECIAL[verb];
 
+  const framed = !scheme && !MODAL_FORM_NO_FRAME.includes(verb);
+  const frameClass = i => (framed && i < 3 ? ` stem-frame stem-frame-${["top", "mid", "bottom"][i]}` : "");
+
   const rows = MODAL_FORM_PERSONS.map(
     (person, i) => `
     <tr>
       <td class="forms-person">${person}</td>
-      <td class="${scheme ? "forms-scheme" : ""}">${scheme && i < 3 ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.present[i]}` : scheme ? `<span class="umlaut-slot">&nbsp;&nbsp;&nbsp;</span>${forms.present[i]}` : forms.present[i]}</td>
-      <td class="${scheme ? "forms-scheme" : ""}">${scheme ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.preterite[i]}` : forms.preterite[i]}</td>
-      <td class="${scheme ? "forms-scheme" : ""}">${forms.k2[i]}</td>
+      <td class="${scheme ? "forms-scheme" : "forms-form"}${frameClass(i)}">${scheme && i < 3 ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.present[i]}` : scheme ? `<span class="umlaut-slot">&nbsp;&nbsp;&nbsp;</span>${forms.present[i]}` : forms.present[i]}</td>
+      <td class="${scheme ? "forms-scheme" : "forms-form"}">${scheme ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.preterite[i]}` : forms.preterite[i]}</td>
+      <td class="${scheme ? "forms-scheme" : "forms-form"}">${forms.k2[i]}</td>
     </tr>`
   ).join("");
 
@@ -457,10 +464,9 @@ function renderFormsTable() {
     .join("");
 
   const groupRow = `
-    <tbody class="forms-group${modalFormGroupOpen ? " open" : ""}" data-forms-group>
+    <tbody class="forms-group open" data-forms-group>
       <tr class="verb-group-row">
         <td class="verb-group" colspan="3">
-          <span class="forms-chevron" data-toggle-group aria-label="Modalverben auf- und zuklappen">›</span>
           ${groupButtons}
         </td>
         <td class="reset-cell">
@@ -472,7 +478,7 @@ function renderFormsTable() {
       </tr>
     </tbody>`;
 
-  const specialRows = ["mögen", "werden"]
+  const specialRows = ["werden"]
     .map(
       verb => `
     <tbody class="forms-group${modalSpecialOpen[verb] ? " open" : ""}" data-special-group="${verb}">
@@ -499,14 +505,12 @@ function renderFormsTable() {
 
 function setFormsMode(mode) {
   modalFormMode = mode;
-  modalFormGroupOpen = true;
   renderFormsTable();
 }
 
 function openFormsTable() {
   modalFormMode = "scheme";
-  modalFormGroupOpen = true;
-  modalSpecialOpen = { mögen: false, werden: false };
+  modalSpecialOpen = { werden: false };
   renderFormsTable();
   const modal = $("formsModal");
   modal.classList.add("open");
@@ -534,7 +538,6 @@ $("formsModalBody").addEventListener("click", e => {
   if (reset) {
     e.stopPropagation();
     modalFormMode = "scheme";
-    modalFormGroupOpen = true;
     renderFormsTable();
     return;
   }
@@ -543,14 +546,6 @@ $("formsModalBody").addEventListener("click", e => {
   if (verbButton) {
     e.stopPropagation();
     setFormsMode(verbButton.dataset.modalVerb);
-    return;
-  }
-
-  const groupToggle = e.target.closest("[data-toggle-group]");
-  if (groupToggle) {
-    e.stopPropagation();
-    modalFormGroupOpen = !modalFormGroupOpen;
-    renderFormsTable();
     return;
   }
 

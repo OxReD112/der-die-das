@@ -27,6 +27,7 @@
   --forms-person: #8b8985;
   --forms-scheme: #aaa7a1;
   --forms-sep: #686967;
+  --forms-frame: rgba(255, 255, 255, 0.22); /* frame around ich / du / er Präsens */
   --cell-line: rgba(255, 255, 255, 0.07); /* table rows */
   --detail-line: rgba(255, 255, 255, 0.045); /* rows of a verb's forms */
   --cell-bg: rgba(255, 255, 255, 0.025); /* row under the pointer, „Zurücksetzen“ */
@@ -58,6 +59,7 @@
   --forms-person: #8b8781;
   --forms-scheme: #7a766f;
   --forms-sep: #a7a49d;
+  --forms-frame: rgba(0, 0, 0, 0.2); /* frame around ich / du / er Präsens */
   --cell-line: rgba(0, 0, 0, 0.09);
   --detail-line: rgba(0, 0, 0, 0.07);
   --cell-bg: rgba(0, 0, 0, 0.035);
@@ -672,7 +674,7 @@ body:has(#study:not(.hidden)) .version-mark {
   margin: 6px 0 8px;
 }
 
-/* Group row + mögen + werden */
+/* Group row + werden */
 .forms-table {
   width: 100%;
   border-collapse: collapse;
@@ -760,7 +762,8 @@ body:has(#study:not(.hidden)) .version-mark {
 }
 .forms-detail-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* so the ich / du / er frame can have round corners */
+  border-spacing: 0;
 }
 .forms-detail-table th,
 .forms-detail-table td {
@@ -776,13 +779,40 @@ body:has(#study:not(.hidden)) .version-mark {
   text-transform: uppercase;
 }
 .forms-detail-table td {
-  font-size: 12px;
+  font-family: var(--serif);
+  font-size: 16px; /* the forms: as big as the verb names above */
+  line-height: 1.25;
   color: var(--forms-text);
 }
 .forms-detail-table .forms-person {
+  font-family: var(--font);
   color: var(--forms-person);
-  font-size: 11px;
+  font-size: 13px;
   width: 19%;
+}
+/* ich / du / er Präsens of the chosen verb: one frame over three cells (drawn inside, no layout shift) */
+.forms-detail-table td:nth-child(2) {
+  padding-left: 9px; /* Präsens: room inside the frame, same start in every row */
+}
+.forms-detail-table .stem-frame-top {
+  border-radius: 8px 8px 0 0;
+  box-shadow:
+    inset 1px 0 0 var(--forms-frame),
+    inset -1px 0 0 var(--forms-frame),
+    inset 0 1px 0 var(--forms-frame);
+}
+.forms-detail-table .stem-frame-mid {
+  box-shadow:
+    inset 1px 0 0 var(--forms-frame),
+    inset -1px 0 0 var(--forms-frame);
+}
+.forms-detail-table .stem-frame-bottom {
+  border-radius: 0 0 8px 8px;
+  border-bottom-color: transparent;
+  box-shadow:
+    inset 1px 0 0 var(--forms-frame),
+    inset -1px 0 0 var(--forms-frame),
+    inset 0 -1px 0 var(--forms-frame);
 }
 .forms-detail-table .forms-scheme {
   color: var(--forms-scheme);
