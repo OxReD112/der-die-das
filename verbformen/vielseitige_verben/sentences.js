@@ -11,7 +11,8 @@
 //   answer    main answer · also: other accepted answers
 //   marks     clue words, marked in the sentence after Prüfen: only what decides the verb or the form
 //             (e.g. letzte Woche when nothing else in the sentence says „past“)
-//   rule      { en, ru } the construction, named as building blocks (not the words of the sentence): helper and main
+//   rule      { en, ru } fallback only: after Prüfen the exercise shows the table's card of the meaning with the same
+//             job (forms_table.js); this line is shown only if no meaning has that job. The construction, named as building blocks (not the words of the sentence): helper and main
 //             verbs by their form („werden im Präteritum“, „Partizip II von lassen“), as textbooks say it
 // Each sentence's difficulty is stored under verb|sentence, so a sentence changed here starts again at 1.
 

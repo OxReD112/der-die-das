@@ -1,7 +1,7 @@
 /* Vielseitige Verben — script. Markup: index.html · styles: vielseitige_verben.css
    Needs (loaded before this file): components/deutsch-translation-v1.js, sentences.js (VV_SENTENCES, VV_JOBS,
-   VV_FORMS, VV_USE_PAIRS, VV_HINTS), components/deutsch-progress-v1.js (optional).
-   Built from modalverben.js (same difficulty, deck, keyboard, keys and back-to-Home code); no table window.
+   VV_FORMS, VV_USE_PAIRS, VV_HINTS), forms_table.js (VV_TABLE), components/deutsch-progress-v1.js (optional).
+   Built from modalverben.js (same difficulty, deck, keyboard, keys, table window and back-to-Home code).
    When this file changes, raise its ?v= in index.html, the Verbformen page's vielseitige_verben/?v=
    and the Home tile's verbformen/?v= */
 
@@ -193,6 +193,7 @@ function render() {
   $("hint").classList.add("hidden");
   $("next").classList.remove("show");
   $("check").style.display = isTouchDevice ? "none" : "";
+  $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("count").textContent = index + 1 + " / " + deck.length;
   $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
   scrollToTop();
@@ -290,12 +291,16 @@ function checkAnswer() {
   $("formLine").innerHTML =
     `<span class="right">${esc(shown)}</span>` + (ok ? "" : `<span class="wrong-answer">${esc(typed)}</span>`);
   $("formKind").textContent = item.form;
-  $("explanation").textContent = pick(item.rule);
+  // the explanation = the table's card for this meaning (fallback: the sentence's own rule line)
+  const meaning = meaningFor(item);
+  if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false);
+  else $("explanation").textContent = pick(item.rule);
   const hint = ok ? "" : hintHtml(item, typed);
   $("hint").innerHTML = hint;
   $("hint").classList.toggle("hidden", !hint);
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
+  $("roundTableBtn").disabled = false;
 }
 
 function next() {
@@ -367,12 +372,18 @@ function goBackToHome() {
 $("homeBack").onclick = goBackToHome;
 
 /* ===== KEYS (computer keyboard) =====
-   Only during a round. Enter is handled here once (preventDefault), so a focused Weiter can't move on twice;
-   holding it doesn't race through the sentences. On the start and summary screens Enter presses the focused
-   button, as usual. */
+   Only during a round and while the table window is closed; Esc closes the table.
+   Enter is handled here once (preventDefault), so a focused Weiter can't move on twice; holding it doesn't
+   race through the sentences. Enter on the table button still opens the table. On the start and summary
+   screens Enter presses the focused button, as usual. */
 document.addEventListener("keydown", e => {
+  if (tableIsOpen()) {
+    if (e.key === "Escape") closeFormsTable();
+    return;
+  }
   if (!inRound()) return;
   if (e.key === "Enter") {
+    if (document.activeElement && document.activeElement.matches("[data-forms-table]")) return;
     e.preventDefault();
     if (e.repeat) return;
     if (checked) next();
@@ -387,7 +398,7 @@ document.addEventListener("keydown", e => {
 /* ===== ON-SCREEN KEYBOARD (phones and tablets) ===== */
 document.addEventListener("deutsch-keyboard-input", e => {
   const k = e.detail?.key || "";
-  if (!inRound() || checked) return;
+  if (!inRound() || checked || tableIsOpen()) return;
   const field = $("answer");
   if (k === "BACK") field.value = field.value.slice(0, -1);
   else if (k === "OK") checkAnswer();
@@ -422,3 +433,212 @@ async function loadKeyboardComponent() {
   return true;
 }
 loadKeyboardComponent().catch(e => console.error(e));
+
+/* ===== TABLE WINDOW „Formen · Tabelle“ (2026-09-28, v4) =====
+   Two ways in, one window:
+   - start screen → the full table: a tab per verb, its forms, and „What do you want to say?“ tags. A tag lights
+     the forms it uses and shows the construction as building blocks (gold = the verb, dashed = what comes with
+     it and decides the meaning) + a German example; the window rolls up so that part is visible.
+   - during a round → only the verb of the current sentence, only its forms, the answer's form lit. The button is
+     off until Prüfen (the verb is part of the task: no peeking).
+   No now / past symbols here (unlike Modalverben): Präsens also carries the future, a guess and the Perfekt
+   helper, so they would mislead. Konjunktiv II only for werden (hidden, keeping its place, for the others).
+   Data: forms_table.js (VV_TABLE). */
+
+const FORMS_PERSONS = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
+const FORMS_COLUMNS = ["Präsens", "Präteritum", "Konjunktiv II"];
+const FORMS_TEXT = { question: { en: "What do you want to say?", ru: "Что ты хочешь сказать?" } };
+
+let formsMode = "full"; // "full" (start screen) · "verb" (during a round)
+let formsVerb = "werden";
+let formsTag = null; // index of the lit meaning tag
+
+const formsText = v => (typeof v === "string" ? v : pick(v));
+// example: *verb form* → gold · _partner_ → dashed underline
+const formsExample = s =>
+  esc(s)
+    .replace(/\*(.+?)\*/g, "<b>$1</b>")
+    .replace(/_(.+?)_/g, "<u>$1</u>");
+const formsAlso = s => esc(s).replace(/\*(.+?)\*/g, '<i lang="de">$1</i>');
+const bareForm = s => norm(String(s).replace(/!/g, "").replace(/ sie$/i, ""));
+
+/* the forms of the current sentence's answer, in the table's terms: { cols: [[row, col]…] } or { p2 / imp: [i] } */
+function answerCells(item) {
+  const V = VV_TABLE[item.verb];
+  const a = bareForm(item.answer);
+  const col = FORMS_COLUMNS.indexOf(item.form);
+  if (col >= 0) {
+    const cells = [];
+    V.rows.forEach((r, i) => norm(r[col]) === a && cells.push([i, col]));
+    return { cells };
+  }
+  if (item.form.startsWith("Imperativ") && V.imp) return { imp: V.imp.map((f, i) => (bareForm(f) === a ? i : -1)).filter(i => i >= 0) };
+  // Partizip II, and the Infinitiv „lassen“ after a second verb (its own place in the Partizip II row)
+  return { p2: V.p2.map(([f], i) => (norm(f) === a ? i : -1)).filter(i => i >= 0) };
+}
+
+function renderFormsGrid(verb, lit) {
+  const V = VV_TABLE[verb];
+  const cols = lit.cols || [];
+  const cells = lit.cells || [];
+  const isLit = (r, c) => cols.includes(c) || cells.some(([cr, cc]) => cr === r && cc === c);
+  const headLit = c => cols.includes(c) || cells.some(([, cc]) => cc === c);
+  const hidden = c => (c === 2 && !V.k2 ? " off" : ""); // Konjunktiv II: werden only
+  const heads = FORMS_COLUMNS.map((name, c) => `<th class="${headLit(c) ? "lit" : ""}${hidden(c)}">${name}</th>`).join("");
+  const rows = V.rows
+    .map(
+      (r, i) =>
+        `<tr><td class="vv-person">${FORMS_PERSONS[i]}</td>` +
+        r.map((f, c) => `<td class="${isLit(i, c) ? "lit" : ""}${hidden(c)}">${esc(f)}</td>`).join("") +
+        "</tr>"
+    )
+    .join("");
+  const variants = (list, litList = []) =>
+    list
+      .map((v, k) => {
+        const [form, note] = Array.isArray(v) ? v : [v, ""];
+        return (
+          `<span class="vv-variant${litList.includes(k) ? " lit" : ""}">${esc(form)}</span>` +
+          (note ? `<span class="vv-note">${esc(formsText(note))}</span>` : "")
+        );
+      })
+      .join('<span class="vv-dot">·</span>');
+  const p2 = `<tr class="vv-extra first"><td class="vv-person">Partizip II</td><td colspan="3">${variants(V.p2, lit.p2)}</td></tr>`;
+  const imp = V.imp
+    ? `<tr class="vv-extra"><td class="vv-person">Imperativ</td><td colspan="3">${variants(V.imp, lit.imp)}</td></tr>`
+    : "";
+  return `
+    <table class="vv-forms">
+      <thead><tr><th>Person</th>${heads}</tr></thead>
+      <tbody>${rows}${p2}${imp}</tbody>
+    </table>`;
+}
+
+/* The construction card of one meaning: building blocks (gold = the verb, dashed = what comes with it) + „= what it
+   says“ + a German example + the small extra line. Used in the table (tags) and, after Prüfen, as the explanation
+   of the sentence (same blocks, so the exercise and the table teach the same picture — there without the example
+   and without the box: withExample = false). */
+function recipeHtml(m, withExample = true) {
+  let blocks = "";
+  m.blocks.forEach(([text, kind], i) => {
+    const prev = i ? m.blocks[i - 1][1] : null;
+    if (i && kind !== "or" && prev !== "or") blocks += '<span class="vv-plus">+</span>';
+    blocks +=
+      kind === "or"
+        ? `<span class="vv-plus">${esc(text)}</span>`
+        : `<span class="vv-block ${kind}">${esc(formsText(text))}</span>`;
+  });
+  return `
+    <div class="vv-recipe">
+      <div class="vv-blocks">${blocks}<span class="vv-means">= <b>${esc(formsText(m.means))}</b></span></div>
+      ${!withExample ? "" : `<div class="vv-example" lang="de">${formsExample(m.ex)}</div>`}
+      ${m.also ? `<div class="vv-also">${formsAlso(formsText(m.also))}</div>` : ""}
+    </div>`;
+}
+
+/* the table meaning that explains a sentence (same verb, same job) */
+const meaningFor = item => (VV_TABLE[item.verb]?.meanings || []).find(m => m.job === item.job) || null;
+
+function renderFormsMeanings(verb) {
+  const meanings = VV_TABLE[verb].meanings;
+  const tags = meanings
+    .map(
+      (m, k) =>
+        `<button class="vv-tag${k === formsTag ? " on" : ""}" type="button" data-meaning="${k}" aria-pressed="${k === formsTag}">${esc(
+          formsText(m.tag)
+        )}</button>`
+    )
+    .join("");
+  const recipe = formsTag !== null ? recipeHtml(meanings[formsTag]) : "";
+  return `
+    <div class="vv-meanings">
+      <div class="vv-question">${esc(pick(FORMS_TEXT.question))}</div>
+      <div class="vv-tags">${tags}</div>
+      ${recipe}
+    </div>`;
+}
+
+function renderFormsTable() {
+  const full = formsMode === "full";
+  $("formsModalTitle").textContent = full ? "Vielseitige Verben · Formen" : formsVerb + " · Formen";
+  $("formsTabs").classList.toggle("hidden", !full);
+  $("formsTabs").innerHTML = full
+    ? Object.keys(VV_TABLE)
+        .map(
+          v =>
+            `<button class="vv-tab${v === formsVerb ? " on" : ""}" type="button" role="tab" data-forms-verb="${v}" aria-selected="${
+              v === formsVerb
+            }">${v}</button>`
+        )
+        .join("")
+    : "";
+  let lit = {};
+  if (full && formsTag !== null) lit = VV_TABLE[formsVerb].meanings[formsTag].lit;
+  if (!full) lit = answerCells(deck[index]);
+  $("formsModalBody").innerHTML =
+    `<div class="vv-detail">${renderFormsGrid(formsVerb, lit)}</div>` + (full ? renderFormsMeanings(formsVerb) : "");
+}
+
+/* After a tag: roll the window up just enough that the building blocks + example are visible
+   (at least their top, if they are taller than the window). Never rolls down. */
+function revealRecipe() {
+  const body = $("formsModalBody");
+  const recipe = body.querySelector(".vv-recipe");
+  if (!recipe) return;
+  const box = body.getBoundingClientRect(),
+    r = recipe.getBoundingClientRect();
+  const delta = Math.min(r.bottom + 14 - box.bottom, r.top - box.top - 60);
+  if (delta <= 0) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  body.scrollTo({ top: body.scrollTop + delta, behavior: reduce ? "auto" : "smooth" });
+}
+
+function openFormsTable(mode) {
+  if (mode === "verb" && !(inRound() && checked)) return; // off until Prüfen
+  formsMode = mode;
+  formsTag = null;
+  if (mode === "verb") formsVerb = deck[index].verb;
+  renderFormsTable();
+  $("formsModalBody").scrollTop = 0;
+  const modal = $("formsModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+const tableIsOpen = () => $("formsModal").classList.contains("open");
+
+function closeFormsTable() {
+  const modal = $("formsModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+document
+  .querySelectorAll("[data-forms-table]")
+  .forEach(button => button.addEventListener("click", () => openFormsTable(button.dataset.formsTable)));
+$("formsClose").onclick = closeFormsTable;
+$("formsModal").onclick = e => {
+  if (e.target === $("formsModal")) closeFormsTable();
+};
+
+$("formsTabs").addEventListener("click", e => {
+  const tab = e.target.closest("[data-forms-verb]");
+  if (!tab) return;
+  formsVerb = tab.dataset.formsVerb;
+  formsTag = null;
+  renderFormsTable();
+  $("formsModalBody").scrollTop = 0;
+});
+
+$("formsModalBody").addEventListener("click", e => {
+  const tag = e.target.closest("[data-meaning]");
+  if (!tag) return;
+  e.stopPropagation();
+  const body = $("formsModalBody");
+  const keep = body.scrollTop;
+  const k = Number(tag.dataset.meaning);
+  formsTag = formsTag === k ? null : k; // a second tap turns it off
+  renderFormsTable();
+  body.scrollTop = keep;
+  if (formsTag !== null) revealRecipe();
+});

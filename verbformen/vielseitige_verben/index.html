@@ -17,9 +17,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Vielseitige Verben" />
-    <link rel="stylesheet" href="vielseitige_verben.css?v=1" />
+    <link rel="stylesheet" href="vielseitige_verben.css?v=3" />
   </head>
   <body>
+    <div id="formsModal" class="forms-modal" aria-hidden="true">
+      <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
+        <div class="forms-modal-head">
+          <h2 id="formsModalTitle">Vielseitige Verben · Formen</h2>
+          <button class="forms-close" id="formsClose" type="button" aria-label="Schließen">×</button>
+        </div>
+        <div class="vv-tabs" id="formsTabs" role="tablist"></div>
+        <div id="formsModalBody"></div>
+      </div>
+    </div>
     <main class="app">
       <section id="start">
         <h1 class="title">Vielseitige Verben.</h1>
@@ -29,6 +39,7 @@
           <button class="choice" data-size="20">20</button>
           <button class="choice" data-size="30">30</button>
         </div>
+        <button class="forms-table-btn" type="button" data-forms-table="full">Formen · Tabelle</button>
       </section>
 
       <section id="study" class="hidden">
@@ -60,6 +71,11 @@
           <button id="next">Weiter</button>
         </section>
         <div id="keyboardMount"></div>
+        <div class="in-session-forms">
+          <button class="forms-table-btn" type="button" id="roundTableBtn" data-forms-table="verb" disabled>
+            Formen · Tabelle
+          </button>
+        </div>
       </section>
 
       <section id="finish" class="hidden">
@@ -76,12 +92,13 @@
         <h2>Worum geht's?</h2>
         <p class="about-de" id="aboutText"></p>
       </div>
-      <div class="version-mark">v3</div>
+      <div class="version-mark">v5</div>
     </main>
 
     <script src="../../components/deutsch-translation-v1.js?v=2"></script>
     <script src="sentences.js?v=3"></script>
+    <script src="forms_table.js?v=2"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="vielseitige_verben.js?v=1"></script>
+    <script src="vielseitige_verben.js?v=3"></script>
   </body>
 </html>
