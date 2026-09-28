@@ -603,6 +603,20 @@ function renderFormsTable() {
     </table>`;
 }
 
+/* After a meaning tag: roll the window up just enough that the example below the tags is visible (on a phone it
+   was hidden under the edge, so nothing seemed to happen). Never rolls down. */
+function revealMeaningAnswer() {
+  const body = $("formsModalBody");
+  const answer = body.querySelector(".meaning-answer");
+  if (!answer || !answer.firstElementChild) return;
+  const box = body.getBoundingClientRect(),
+    r = answer.getBoundingClientRect();
+  const delta = Math.min(r.bottom + 14 - box.bottom, r.top - box.top - 60);
+  if (delta <= 0) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  body.scrollTo({ top: body.scrollTop + delta, behavior: reduce ? "auto" : "smooth" });
+}
+
 function setFormsMode(mode) {
   modalFormMode = mode;
   modalFormTag = null;
@@ -647,7 +661,11 @@ $("formsModalBody").addEventListener("click", e => {
     e.stopPropagation();
     const k = Number(meaningTag.dataset.meaning);
     modalFormTag = modalFormTag === k ? null : k; // a second tap turns it off
+    const body = $("formsModalBody");
+    const keep = body.scrollTop;
     renderFormsTable();
+    body.scrollTop = keep;
+    if (modalFormTag !== null) revealMeaningAnswer();
     return;
   }
 

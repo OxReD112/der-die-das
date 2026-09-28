@@ -672,7 +672,8 @@ body:has(#study:not(.hidden)) .version-mark {
   cursor: pointer;
 }
 #formsModalBody {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden; /* never sideways on the phone */
   min-height: 0;
 }
 .forms-intro {
@@ -745,7 +746,7 @@ body:has(#study:not(.hidden)) .version-mark {
   color: var(--muted);
   width: 40px;
   height: 40px;
-  margin-right: -8px; /* icon lines up with the table's right edge, tap area stays 40px */
+  margin-right: -5px; /* = the cell's padding: no overhang (-8px stuck out 3px → the table scrolled sideways on the phone) */
   padding: 9px;
   display: inline-flex;
   align-items: center;
