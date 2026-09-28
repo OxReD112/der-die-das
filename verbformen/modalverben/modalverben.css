@@ -712,9 +712,15 @@ body:has(#study:not(.hidden)) .version-mark {
   cursor: pointer;
 }
 .forms-table .verb-choice:hover,
-.forms-table .verb-choice:focus-visible {
+.forms-table .verb-choice:focus-visible,
+.forms-table .verb-choice.chosen {
   text-decoration: underline;
+  text-underline-offset: 3px;
   outline: none;
+}
+.forms-table .verb-line {
+  display: block; /* können · müssen · dürfen / mögen · sollen · wollen */
+  white-space: nowrap;
 }
 .forms-table .group-separator {
   color: var(--forms-sep);
@@ -724,18 +730,36 @@ body:has(#study:not(.hidden)) .version-mark {
   text-align: right;
   white-space: nowrap;
 }
+/* ↺ clears the chosen verb (back to the endings); only there when a verb is chosen, keeps its place */
 .forms-reset {
-  border: 1px solid var(--result-line);
-  background: var(--cell-bg);
+  border: 0;
+  background: none;
   color: var(--muted);
-  border-radius: 9px;
-  padding: 6px 8px;
-  font-family: var(--font);
-  font-size: 9px;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px; /* icon lines up with the table's right edge, tap area stays 40px */
+  padding: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: opacity 0.16s ease;
+}
+.forms-reset svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.forms-reset.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 .forms-reset:active {
-  transform: scale(0.98);
+  transform: scale(0.94);
 }
 .forms-chevron {
   display: inline-block;

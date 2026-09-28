@@ -347,7 +347,7 @@ loadKeyboardComponent().catch(e => console.error(e));
 
 /* ===== TABLE WINDOW „Modalverben · Formen“ =====
    Group row (können · müssen · dürfen · mögen · sollen · wollen), always open: first the ending scheme, a tap
-   on a verb shows its forms, „Zurücksetzen“ goes back to the scheme. werden folds out on its own.
+   on a verb shows its forms, ↺ (or a second tap on that verb) goes back to the scheme. werden folds out on its own.
    A verb's ich / du / er Präsens forms get one frame (the vowel change to memorise) - not for sollen,
    whose vowel stays. */
 
@@ -455,12 +455,14 @@ function renderFormsDetail(verb, scheme = false) {
 function renderFormsTable() {
   const selected = modalFormMode !== "scheme" ? modalFormMode : null;
 
-  const groupButtons = MODAL_FORM_GROUP.verbs
-    .map(
-      (verb, i) => `
+  /* two fixed lines of three verbs: a separator dot never starts a line */
+  const verbButton = (verb, i) => `
     ${i ? '<span class="group-separator">·</span>' : ""}
-    <button class="verb-choice" type="button" data-modal-verb="${verb}">${verb}</button>`
-    )
+    <button class="verb-choice${verb === selected ? " chosen" : ""}" type="button" data-modal-verb="${verb}"
+      aria-pressed="${verb === selected}">${verb}</button>`;
+  const verbs = MODAL_FORM_GROUP.verbs;
+  const groupButtons = [verbs.slice(0, 3), verbs.slice(3)]
+    .map(line => `<span class="verb-line">${line.map(verbButton).join("")}</span>`)
     .join("");
 
   const groupRow = `
@@ -470,7 +472,13 @@ function renderFormsTable() {
           ${groupButtons}
         </td>
         <td class="reset-cell">
-          <button class="forms-reset" type="button" data-reset-forms>Zurücksetzen</button>
+          <button class="forms-reset${selected ? "" : " hidden"}" type="button" data-reset-forms
+            aria-label="Tabelle leeren" title="Tabelle leeren"${selected ? "" : ' tabindex="-1"'}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 4v6h6" />
+              <path d="M5.2 15a8 8 0 1 0 1.9-8.3L3 10" />
+            </svg>
+          </button>
         </td>
       </tr>
       <tr class="forms-detail-row">
@@ -545,7 +553,8 @@ $("formsModalBody").addEventListener("click", e => {
   const verbButton = e.target.closest("[data-modal-verb]");
   if (verbButton) {
     e.stopPropagation();
-    setFormsMode(verbButton.dataset.modalVerb);
+    const verb = verbButton.dataset.modalVerb;
+    setFormsMode(verb === modalFormMode ? "scheme" : verb); // second tap on the chosen verb clears the table
     return;
   }
 
