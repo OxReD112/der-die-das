@@ -228,19 +228,27 @@ function neededLabel(item) {
   return item.form;
 }
 
-const rich = text => esc(text).replace(/\*([^*]+)\*/g, "<i>$1</i>");
+const rich = text =>
+  esc(text)
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/\*([^*]+)\*/g, "<i>$1</i>");
 
 /* Yellow box, only after a wrong answer:
    - another verb, known mix-up → a contrast, one line per verb (VV_HINTS)
    - another verb, no known mix-up (a fixed phrase…) → nothing, the rule line is enough
    - the right verb in the wrong form → „yours / needed“ rows with the form names
-     (geworden / worden, gelassen / lassen: the use + a tiny example instead of the same form name) */
+     (geworden / worden, gelassen / lassen: the use instead of the same form name) */
 function hintHtml(item, typed) {
   const hit = lookupForm(typed);
-  if (!hit) return "";
+  if (!hit) {
+    const o = (window.VV_OTHER_WORDS || {})[norm(typed)]; // a known trap outside the five verbs (will …)
+    if (!o || (o.only && !o.only.includes(item.job)) || (o.verb && o.verb !== item.verb)) return "";
+    if (o.forms && !o.forms.includes(item.form)) return "";
+    return o.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
+  }
   if (hit.verb !== item.verb) {
-    const h = VV_HINTS[item.verb + ">" + hit.verb];
-    if (!h || (h.only && !h.only.includes(item.job))) return "";
+    const h = [].concat(VV_HINTS[item.verb + ">" + hit.verb] || []).find(e => !e.only || e.only.includes(item.job));
+    if (!h) return "";
     return h.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
   }
   const yoursTag = pick({ en: "yours", ru: "твой" }),
@@ -251,9 +259,11 @@ function hintHtml(item, typed) {
     const [x, y] = key.split("|");
     if ((t === x && a === y) || (t === y && a === x)) {
       const P = VV_USE_PAIRS[key];
+      if (P.forms && !P.forms.includes(item.form)) break; // this pair only in these sentences: else the plain rows
+      if (P.lines) return P.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
       const row = (cls, tag, w) =>
         `<span class="tag">${tag}</span><span class="w ${cls}">${esc(w)}</span>` +
-        `<span class="lbl">${esc(pick(P[w]))} — <i>${esc(P[w].ex)}</i></span>`;
+        `<span class="lbl">${esc(pick(P[w]))}</span>`;
       return `<div class="hint-rows">${row("yours", yoursTag, t)}${row("needed", neededTag, a)}</div>`;
     }
   }
@@ -293,9 +303,10 @@ function checkAnswer() {
   $("formKind").textContent = item.form;
   // the explanation = the table's card for this meaning (fallback: the sentence's own rule line)
   const meaning = item.tip || meaningFor(item); // the sentence's own tip first (its tense), else the table's card
-  if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false);
+  if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false, false); // no example, no small extra line: those are for the table
   else $("explanation").textContent = pick(item.rule);
-  const hint = ok ? "" : hintHtml(item, typed);
+  const alsoNote = ok && norm(typed) !== norm(item.answer) ? (window.VV_ALSO_NOTES || {})[norm(typed)] : null; // kriegen / erhalten
+  const hint = ok ? (alsoNote ? `<div class="hint-line">${rich(pick(alsoNote))}</div>` : "") : hintHtml(item, typed);
   $("hint").innerHTML = hint;
   $("hint").classList.toggle("hidden", !hint);
   $("answer-area").classList.add("hidden");
@@ -518,7 +529,7 @@ function renderFormsGrid(verb, lit) {
    says“ + a German example + the small extra line. Used in the table (tags) and, after Prüfen, as the explanation
    of the sentence (same blocks, so the exercise and the table teach the same picture — there without the example
    and without the box: withExample = false). */
-function recipeHtml(m, withExample = true) {
+function recipeHtml(m, withExample = true, withAlso = true) {
   let blocks = "";
   m.blocks.forEach(([text, kind], i) => {
     const prev = i ? m.blocks[i - 1][1] : null;
@@ -532,7 +543,7 @@ function recipeHtml(m, withExample = true) {
     <div class="vv-recipe">
       <div class="vv-blocks">${blocks}<span class="vv-means">= <b>${esc(formsText(m.means))}</b></span></div>
       ${!withExample ? "" : `<div class="vv-example" lang="de">${formsExample(m.ex)}</div>`}
-      ${m.also ? `<div class="vv-also">${formsAlso(formsText(m.also))}</div>` : ""}
+      ${withAlso && m.also ? `<div class="vv-also">${formsAlso(formsText(m.also))}</div>` : ""}
     </div>`;
 }
 
@@ -600,7 +611,7 @@ function revealRecipe() {
 function lockFormsHeight() {
   const card = document.querySelector(".forms-modal-card");
   card.style.height = "";
-  if (formsMode !== "full") return;
+  if (formsMode !== "full") return renderFormsTable(); // during a round: natural height, but still fill the table
   const keepVerb = formsVerb,
     keepTag = formsTag;
   formsTag = null;

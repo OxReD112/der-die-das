@@ -23,7 +23,7 @@
 (function () {
 // short names for repeated block texts (inside a function: no global names)
 const T = {
-  thing: { en: "thing", ru: "вещь" },
+  thing: { en: "object", ru: "вещь" },
   person: { en: "person", ru: "человек" },
   inf: { en: "infinitive", ru: "Infinitiv" },
   zuInf: { en: "zu + infinitive", ru: "zu + Infinitiv" }
@@ -58,7 +58,7 @@ window.VV_TABLE = {
         tag: { en: "future", ru: "будущее" },
         job: "future",
         lit: { cols: [0] },
-        blocks: [["werden im Präsens", "verb"], [{ en: "infinitive at the end", ru: "Infinitiv в конце" }, "part"]],
+        blocks: [["werden", "verb"], [T.inf, "part"]],
         means: { en: "will", ru: "будет (делать)" },
         ex: "Ich *werde* dich morgen _anrufen_."
       },
@@ -66,7 +66,7 @@ window.VV_TABLE = {
         tag: { en: "a guess", ru: "предположение" },
         job: "guess",
         lit: { cols: [0] },
-        blocks: [["werden im Präsens", "verb"], ["wohl", "plain"], [T.inf, "part"]],
+        blocks: [["werden", "verb"], ["wohl", "part"], [T.inf, "part"]],
         means: { en: "probably", ru: "наверное" },
         ex: "Er *wird* wohl _schlafen_."
       },
@@ -114,18 +114,14 @@ window.VV_TABLE = {
         lit: { cols: [0, 1], p2: [0] },
         blocks: [["lassen", "verb"], [T.thing, "plain"], [{ en: "place", ru: "место" }, "part"]],
         means: { en: "leave (somewhere)", ru: "оставить (где-то)" },
-        ex: "Ich *lasse* den Schlüssel _auf dem Tisch_.",
-        also: {
-          en: "Perfekt: *Ich habe ihn zu Hause gelassen.* With a second verb, lassen: *Ich habe ihn liegen lassen.*",
-          ru: "Perfekt: *Ich habe ihn zu Hause gelassen.* Со вторым глаголом — lassen: *Ich habe ihn liegen lassen.*"
-        }
+        ex: "Ich *lasse* den Schlüssel _auf dem Tisch_."
       },
       {
         tag: { en: "have someone do it", ru: "поручить сделать" },
         job: "haveDone",
         lit: { cols: [0, 1] },
         blocks: [["lassen", "verb"], [T.thing, "plain"], [T.inf, "part"]],
-        means: { en: "someone else does it for me", ru: "делает кто-то другой" },
+        means: { en: "someone else does it for you", ru: "делает кто-то другой" },
         ex: "Ich *lasse* mein Auto _reparieren_.",
         also: {
           en: "Perfekt with two infinitives, no gelassen: *Ich habe mein Auto reparieren lassen.*",
@@ -153,8 +149,8 @@ window.VV_TABLE = {
         tag: { en: "can be done", ru: "можно сделать" },
         job: "canBeDone",
         lit: { cols: [0] },
-        blocks: [["lassen im Präsens", "verb"], ["sich", "plain"], [T.inf, "part"]],
-        means: { en: "it's possible", ru: "это можно" },
+        blocks: [["lassen", "verb"], ["sich", "part"], [T.inf, "part"]],
+        means: { en: "it can be done", ru: "это можно сделать" },
         ex: "Das Fenster *lässt* sich nicht _öffnen_."
       },
       {
@@ -162,7 +158,7 @@ window.VV_TABLE = {
         job: "stop",
         lit: { imp: [0] },
         blocks: [["Lass das!", "verb"]],
-        means: { en: "fixed phrase", ru: "устойчивое выражение" },
+        means: { en: "stop it", ru: "прекрати" },
         ex: "*Lass* das!"
       }
     ]
@@ -184,7 +180,7 @@ window.VV_TABLE = {
         job: "state",
         lit: { cols: [0, 1] },
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
-        means: { en: "it's done and stays that way", ru: "сделано, так и осталось" },
+        means: { en: "a state at that moment, no action", ru: "состояние в тот момент, без действия" },
         ex: "Die Tür *ist* schon _geschlossen_.",
         also: {
           en: "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
@@ -196,14 +192,14 @@ window.VV_TABLE = {
         job: "canBeDone",
         lit: { cols: [0, 1] },
         blocks: [["sein", "verb"], [T.zuInf, "part"]],
-        means: { en: "it can be done", ru: "это можно сделать" },
+        means: { en: "it can / could be done", ru: "это можно / можно было сделать" },
         ex: "Die Aufgabe *ist* leicht _zu lösen_."
       },
       {
         tag: { en: "Perfekt (going A → B)", ru: "Perfekt (из A в B)" },
         job: "pastHelper",
         lit: { cols: [0] },
-        blocks: [["sein im Präsens", "verb"], ["Partizip II", "part"]],
+        blocks: [["sein", "verb"], ["Partizip II", "part"]],
         means: { en: "past, with movement or change", ru: "прошлое: движение или изменение" },
         ex: "Wir *sind* nach Berlin _gefahren_."
       }
@@ -225,7 +221,7 @@ window.VV_TABLE = {
         tag: { en: "Perfekt", ru: "Perfekt" },
         job: "pastHelper",
         lit: { cols: [0] },
-        blocks: [["haben im Präsens", "verb"], ["Partizip II", "part"]],
+        blocks: [["haben", "verb"], ["Partizip II", "part"]],
         means: { en: "past (most verbs)", ru: "прошлое (большинство глаголов)" },
         ex: "Ich *habe* schon _gegessen_."
       },
@@ -234,7 +230,7 @@ window.VV_TABLE = {
         job: "mustDo",
         lit: { cols: [0, 1] },
         blocks: [["haben", "verb"], [T.zuInf, "part"]],
-        means: { en: "must, have to", ru: "нужно, надо" },
+        means: { en: "have to / had to", ru: "нужно / нужно было" },
         ex: "Ich *habe* noch viel _zu tun_."
       },
       {
@@ -290,7 +286,7 @@ window.VV_TABLE = {
         tag: { en: "get ill", ru: "заболеть" },
         job: "happen",
         lit: { p2: [0] },
-        blocks: [["haben", "plain"], [{ en: "illness", ru: "болезнь" }, "part"], ["Partizip II von bekommen", "verb"]],
+        blocks: [["haben", "plain"], [{ en: "illness", ru: "болезнь" }, "part"], ["bekommen", "verb"]],
         means: { en: "caught (a cold …)", ru: "заболел(а)" },
         ex: "Ich habe _eine Erkältung_ *bekommen*."
       },
@@ -298,8 +294,8 @@ window.VV_TABLE = {
         tag: { en: "have a baby", ru: "родить ребёнка" },
         job: "baby",
         lit: { p2: [0] },
-        blocks: [["haben", "plain"], ["ein Baby", "part"], ["Partizip II von bekommen", "verb"]],
-        means: { en: "had a baby", ru: "родила" },
+        blocks: [["haben", "plain"], ["ein Baby", "part"], ["bekommen", "verb"]],
+        means: { en: "had a baby", ru: "появился ребёнок" },
         ex: "Sie hat _ein Baby_ *bekommen*."
       },
       {
