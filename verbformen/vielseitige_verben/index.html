@@ -1,1 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("deutschThemeV1") === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Vielseitige Verben.</title>
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Vielseitige Verben" />
+    <link rel="stylesheet" href="vielseitige_verben.css?v=1" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="start">
+        <h1 class="title">Vielseitige Verben.</h1>
+        <p class="subtitle">Wie viele Sätze?</p>
+        <div class="choices">
+          <button class="choice" data-size="10">10</button>
+          <button class="choice" data-size="20">20</button>
+          <button class="choice" data-size="30">30</button>
+        </div>
+      </section>
 
+      <section id="study" class="hidden">
+        <div class="top"><span class="brand">Vielseitige Verben.</span><span id="count"></span></div>
+        <div class="progress"><i id="bar"></i></div>
+        <section class="card">
+          <div class="scene"><span class="scene-label">Situation</span><span id="situation"></span></div>
+          <div class="sentence" id="sentence"></div>
+          <div class="answer-area" id="answer-area">
+            <input
+              id="answer"
+              placeholder=" "
+              aria-label="Fehlende Form"
+              autocomplete="off"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              enterkeyhint="done"
+            />
+            <button id="check">Prüfen</button>
+          </div>
+          <div class="result" id="result">
+            <div class="state" id="state"></div>
+            <div class="form-line" id="formLine"></div>
+            <div class="form-kind" id="formKind"></div>
+            <div class="explanation" id="explanation"></div>
+            <div class="hint hidden" id="hint"></div>
+          </div>
+          <button id="next">Weiter</button>
+        </section>
+        <div id="keyboardMount"></div>
+      </section>
+
+      <section id="finish" class="hidden">
+        <h2>Fertig.</h2>
+        <div id="finalScore" class="final-score"></div>
+        <p id="summary"></p>
+        <div id="slipped" class="slipped"></div>
+        <div class="finish-actions">
+          <button id="playAgain">Noch eine Runde</button>
+          <button id="homeBack">Zur Startseite</button>
+        </div>
+      </section>
+      <div class="start-about" id="startAbout">
+        <h2>Worum geht's?</h2>
+        <p class="about-de" id="aboutText"></p>
+      </div>
+      <div class="version-mark">v2</div>
+    </main>
+
+    <script src="../../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="sentences.js?v=2"></script>
+    <script src="../../components/deutsch-progress-v1.js"></script>
+    <script src="vielseitige_verben.js?v=1"></script>
+  </body>
+</html>
