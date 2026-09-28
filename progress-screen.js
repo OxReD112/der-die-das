@@ -1,4 +1,5 @@
-/* Deutsch · Progress screen (Fortschritt) — v1 · Design Police clean-up 2026-09-26 (loaded as ?v=18)
+/* Deutsch · Progress screen (Fortschritt) — v1 · Design Police clean-up 2026-09-26 (loaded as ?v=19)
+   v19 (2026-09-28): Vielseitige Verben joins the Verbformen chapter.
    v18 (2026-09-26): Wortschatz card = bar over STARTED words with sitzt (level 3+) and gelernt (level 6) layers,
    collection name in grey, no collection size. See PROGRESS_TRACKER.md section 7.
    Opens when the "Heute" tile on Home is tapped.
@@ -16,11 +17,11 @@
 
   const PROGRESS_KEY="deutschProgressV1", SNAP_KEY="deutschProgressSnapshotsV1", PROFILE_KEY="deutschProfileV1";
   const WINDOW_DAYS=21, LIST_MAX=3, MIN_GRAPH_POINTS=4; // graph only once there are 3+ days of history
-  const EX_NAMES={artikel:"Artikel",partizipII:"Partizip II",modalverben:"Modalverben",pronomen:"Pronomen",
+  const EX_NAMES={artikel:"Artikel",partizipII:"Partizip II",modalverben:"Modalverben",vielseitigeVerben:"Vielseitige Verben",pronomen:"Pronomen",
     festerKasus:"Fester Kasus",verbenMitPraepositionen:"Verben mit Präpositionen",ortspraepositionen:"Ortspräpositionen"};
   const CHAPTERS=[
     {name:"Artikel",ex:["artikel"]},
-    {name:"Verbformen",ex:["partizipII","modalverben"]},
+    {name:"Verbformen",ex:["partizipII","modalverben","vielseitigeVerben"]},
     {name:"Pronomen",ex:["pronomen"]},
     {name:"Präpositionen",ex:["festerKasus","verbenMitPraepositionen","ortspraepositionen"]}
   ];

@@ -221,7 +221,8 @@ function renderDailyStats() {
     if (cfg.key === "verbformen") {
       const partizipII = Number(data.verbformen?.partizipII) || 0;
       const modalverben = Number(data.verbformen?.modalverben) || 0;
-      answers = partizipII + modalverben;
+      const vielseitigeVerben = Number(data.verbformen?.vielseitigeVerben) || 0;
+      answers = partizipII + modalverben + vielseitigeVerben;
     }
 
     if (cfg.key === "praepositionen") {
@@ -272,7 +273,7 @@ function renderDailyStats() {
 window.addEventListener("message", event => {
   const { type, exercise } = event.data || {};
   if (type !== "deutsch:exerciseAnswer") return;
-  if (exercise !== "partizipII" && exercise !== "modalverben") return;
+  if (exercise !== "partizipII" && exercise !== "modalverben" && exercise !== "vielseitigeVerben") return;
 
   let data = {};
   try {
@@ -880,6 +881,11 @@ const BACKUP_MODULES = {
     label: "Modalverben",
     storageKey: "modalverbenDifficultyV1",
     storageVersion: "modalverbenDifficultyV1"
+  },
+  vielseitigeVerben: {
+    label: "Vielseitige Verben",
+    storageKey: "vielseitigeVerbenDifficultyV1",
+    storageVersion: "vielseitigeVerbenDifficultyV1"
   },
   partizipII: {
     label: "Partizip II",
