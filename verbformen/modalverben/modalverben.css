@@ -197,6 +197,15 @@ body {
   transform: scale(0.97);
   filter: brightness(0.94);
 }
+/* during a round: off until Prüfen - greyed out, does nothing (no note) */
+.forms-table-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.forms-table-btn:disabled:active {
+  transform: none;
+  filter: none;
+}
 #start .forms-table-btn {
   margin-top: 28px;
 }
@@ -844,6 +853,17 @@ body:has(#study:not(.hidden)) .version-mark {
   color: var(--forms-dim);
   font-size: 10px;
   line-height: 1.4;
+}
+/* during a round, Konjunktiv II Vergangenheit: „hätte + … + Infinitiv: sollen“ */
+.forms-answer-note {
+  margin-top: 10px;
+  color: var(--forms-dim);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.forms-answer-note b {
+  color: var(--forms-lit-text);
+  font-weight: 600;
 }
 /* ===== Meaning: symbols over the tense names, legend, „What do you want to say?“ tags ===== */
 .forms-detail-table th {

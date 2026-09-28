@@ -205,6 +205,7 @@ function render() {
   $("answer").disabled = false;
   $("answer-area").classList.remove("hidden");
   $("result").className = "result";
+  $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("next").classList.remove("show");
   $("check").style.display = isTouchDevice ? "none" : "";
   $("count").textContent = index + 1 + " / " + deck.length;
@@ -246,6 +247,7 @@ function checkAnswer() {
   $("explanation").textContent = getTranslation(item, "explanation");
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
+  $("roundTableBtn").disabled = false;
 }
 
 function next() {
@@ -362,7 +364,14 @@ loadKeyboardComponent().catch(e => console.error(e));
    Group row (können · müssen · dürfen · mögen · sollen · wollen), always open: first the ending scheme, a tap
    on a verb shows its forms, ↺ (or a second tap on that verb) goes back to the scheme.
    A verb's ich / du / er Präsens forms get one frame (the vowel change to memorise) - not for sollen,
-   whose vowel stays. */
+   whose vowel stays.
+   Two ways in, one window (2026-09-28, like Vielseitige Verben):
+   - start screen → the whole group as described above.
+   - during a round → only the verb of the current sentence, the answer's form lit (both cells when a form fits
+     two persons: können = wir / sie). The column comes from the sentence's tense, not from the word (sollte is
+     Präteritum and Konjunktiv II). Konjunktiv II Vergangenheit („hätte kommen sollen“): the answer is the
+     infinitive, not a form in the table - only the Konjunktiv II heading is lit, with a short note.
+     The button is off until Prüfen (no peeking). */
 
 const MODAL_FORM_PERSONS = ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"];
 
@@ -413,6 +422,7 @@ const MODAL_FORM_NO_FRAME = ["sollen"];
 
 let modalFormMode = "scheme";
 let modalFormTag = null; // index of the lit meaning tag of the chosen verb
+let modalFormRound = false; // true: opened during a round (one verb, the answer lit)
 
 function umlautGlyph() {
   return '<span class="umlaut-remove">ø</span>';
@@ -512,16 +522,17 @@ function renderFormsMeanings(verb) {
     </div>`;
 }
 
-function renderFormsDetail(verb, scheme = false) {
+function renderFormsDetail(verb, scheme = false, answer = null) {
   const forms = scheme ? MODAL_FORM_SCHEME : MODAL_FORM_GROUP.forms[verb];
   const inGroup = scheme || MODAL_FORM_GROUP.verbs.includes(verb); // symbols, legend, tags
-  const meanings = !scheme && MODAL_FORM_MEANINGS[verb];
-  const litColumn = meanings && meanings[modalFormTag] ? meanings[modalFormTag].column : -1;
+  const meanings = !scheme && !answer && MODAL_FORM_MEANINGS[verb];
+  const litColumn = answer ? answer.column : meanings && meanings[modalFormTag] ? meanings[modalFormTag].column : -1;
+  const litCell = (c, i) => (answer ? answer.cells.some(([r, cc]) => r === i && cc === c) : c === litColumn);
 
   const framed = !scheme && !MODAL_FORM_NO_FRAME.includes(verb);
   const frameClass = i => (framed && i < 3 ? ` stem-frame stem-frame-${["top", "mid", "bottom"][i]}` : "");
   const cellClass = (c, i) =>
-    (scheme ? "forms-scheme" : "forms-form") + (c === 0 ? frameClass(i) : "") + (c === litColumn ? " lit" : "");
+    (scheme ? "forms-scheme" : "forms-form") + (c === 0 ? frameClass(i) : "") + (litCell(c, i) ? " lit" : "");
 
   const cellText = (c, i) => {
     const form = forms[MODAL_FORM_COLUMNS[c].key][i];
@@ -545,7 +556,11 @@ function renderFormsDetail(verb, scheme = false) {
       }${col.name}</th>`
   ).join("");
 
-  const note = scheme ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>` : "";
+  const note = scheme
+    ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>`
+    : answer && answer.note
+      ? `<div class="forms-answer-note" lang="de">${answer.note}</div>`
+      : "";
 
   return `
     <div class="forms-detail">
@@ -562,7 +577,28 @@ function renderFormsDetail(verb, scheme = false) {
     </div>`;
 }
 
+/* the answer of the current sentence in the table's terms: { column, cells: [[row, column]…], note } */
+const MODAL_FORM_COLUMN_OF = { Präsens: 0, Präteritum: 1, "Präteritum · höflich": 1, "Konjunktiv II": 2 };
+function modalAnswerCells(item) {
+  const forms = MODAL_FORM_GROUP.forms[item.infinitive];
+  if (item.form === "Konjunktiv II Vergangenheit")
+    return { column: 2, cells: [], note: `hätte + … + Infinitiv: <b>${item.answer.toLowerCase()}</b>` };
+  const column = MODAL_FORM_COLUMN_OF[item.form] ?? -1;
+  if (!forms || column < 0) return { column: -1, cells: [] };
+  const a = item.answer.trim().toLowerCase();
+  const cells = [];
+  forms[MODAL_FORM_COLUMNS[column].key].forEach((f, i) => f === a && cells.push([i, column]));
+  return { column, cells };
+}
+
 function renderFormsTable() {
+  if (modalFormRound) {
+    const item = deck[index];
+    $("formsModalTitle").textContent = item.infinitive + " · Formen";
+    $("formsModalBody").innerHTML = renderFormsDetail(item.infinitive, false, modalAnswerCells(item));
+    return;
+  }
+  $("formsModalTitle").textContent = "Modalverben · Formen";
   const selected = modalFormMode !== "scheme" ? modalFormMode : null;
 
   /* two fixed lines of three verbs: a separator dot never starts a line */
@@ -623,7 +659,9 @@ function setFormsMode(mode) {
   renderFormsTable();
 }
 
-function openFormsTable() {
+function openFormsTable(mode) {
+  if (mode === "verb" && !(inRound() && checked)) return; // off until Prüfen
+  modalFormRound = mode === "verb";
   modalFormMode = "scheme";
   modalFormTag = null;
   renderFormsTable();
@@ -642,7 +680,9 @@ function closeFormsTable() {
   if (inRound() && !checked && !isTouchDevice) focusAnswer();
 }
 
-document.querySelectorAll("[data-forms-table]").forEach(button => button.addEventListener("click", openFormsTable));
+document
+  .querySelectorAll("[data-forms-table]")
+  .forEach(button => button.addEventListener("click", () => openFormsTable(button.dataset.formsTable)));
 $("formsClose").onclick = closeFormsTable;
 $("formsModal").onclick = e => {
   if (e.target === $("formsModal")) closeFormsTable();
