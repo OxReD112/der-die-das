@@ -682,7 +682,7 @@ body:has(#study:not(.hidden)) .version-mark {
   margin: 6px 0 8px;
 }
 
-/* Group row + werden */
+/* Group row */
 .forms-table {
   width: 100%;
   border-collapse: collapse;
@@ -769,18 +769,6 @@ body:has(#study:not(.hidden)) .version-mark {
 .forms-reset:active {
   transform: scale(0.94);
 }
-.forms-chevron {
-  display: inline-block;
-  width: 12px;
-  color: var(--forms-sep);
-  font-size: 12px;
-  line-height: 1;
-  transition: transform 0.16s ease;
-  cursor: pointer;
-}
-.forms-group.open .forms-chevron {
-  transform: rotate(90deg);
-}
 .forms-detail-row {
   display: none;
 }
@@ -855,17 +843,6 @@ body:has(#study:not(.hidden)) .version-mark {
   color: var(--forms-dim);
   font-size: 10px;
   line-height: 1.4;
-}
-.forms-detail-participle {
-  margin-top: 9px;
-  color: var(--forms-dim);
-  font-size: 11px;
-}
-.forms-detail-participle b {
-  color: var(--forms-text);
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 400;
 }
 /* ===== Meaning: symbols over the tense names, legend, „What do you want to say?“ tags ===== */
 .forms-detail-table th {

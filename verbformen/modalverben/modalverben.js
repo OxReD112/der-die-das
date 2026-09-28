@@ -8,8 +8,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you learn all forms of the modal verbs and werden - and pick the right one for what you mean.",
-    ru: "Помогает запомнить все формы модальных глаголов и werden - и выбрать нужную по смыслу."
+    en: "Helps you learn all forms of the modal verbs - and pick the right one for what you mean.",
+    ru: "Помогает запомнить все формы модальных глаголов - и выбрать нужную по смыслу."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
@@ -55,6 +55,19 @@ if (difficulty.__format !== DIFFICULTY_FORMAT) {
   }
   difficulty.__format = DIFFICULTY_FORMAT;
   saveDifficulty();
+}
+
+/* Scores of sentences no longer in the exercise (e.g. the werden sentences, removed 2026-09-28) are dropped. */
+{
+  const known = new Set(SENTENCES.map(i => `${i.infinitive}|${i.form}|${i.sentence}`));
+  let pruned = false;
+  for (const k in difficulty) {
+    if (k !== "__format" && !known.has(k)) {
+      delete difficulty[k];
+      pruned = true;
+    }
+  }
+  if (pruned) saveDifficulty();
 }
 
 function saveDifficulty() {
@@ -347,7 +360,7 @@ loadKeyboardComponent().catch(e => console.error(e));
 
 /* ===== TABLE WINDOW „Modalverben · Formen“ =====
    Group row (können · müssen · dürfen · mögen · sollen · wollen), always open: first the ending scheme, a tap
-   on a verb shows its forms, ↺ (or a second tap on that verb) goes back to the scheme. werden folds out on its own.
+   on a verb shows its forms, ↺ (or a second tap on that verb) goes back to the scheme.
    A verb's ich / du / er Präsens forms get one frame (the vowel change to memorise) - not for sollen,
    whose vowel stays. */
 
@@ -389,15 +402,6 @@ const MODAL_FORM_GROUP = {
   }
 };
 
-const MODAL_FORM_SPECIAL = {
-  werden: {
-    present: ["werde", "wirst", "wird", "werden", "werdet", "werden"],
-    preterite: ["wurde", "wurdest", "wurde", "wurden", "wurdet", "wurden"],
-    k2: ["würde", "würdest", "würde", "würden", "würdet", "würden"],
-    participle: "geworden"
-  }
-};
-
 const MODAL_FORM_SCHEME = {
   present: ["-", "-st", "-", "-en", "-t", "-en"],
   preterite: ["-te", "-test", "-te", "-ten", "-tet", "-ten"],
@@ -409,14 +413,13 @@ const MODAL_FORM_NO_FRAME = ["sollen"];
 
 let modalFormMode = "scheme";
 let modalFormTag = null; // index of the lit meaning tag of the chosen verb
-let modalSpecialOpen = { werden: false };
 
 function umlautGlyph() {
   return '<span class="umlaut-remove">ø</span>';
 }
 
 /* ===== Meaning: symbols over the tense names + „What do you want to say?“ tags =====
-   Group table only (werden stays as it is). The symbols and their legend show in the scheme too;
+   The symbols and their legend show in the scheme too;
    the tags come with a chosen verb. A tag lights up its column and shows one German example.
    Tags, question and legend are explanations → in the language from Settings (EN / RU), like „Worum geht's?“;
    forms and examples stay German. */
@@ -510,8 +513,8 @@ function renderFormsMeanings(verb) {
 }
 
 function renderFormsDetail(verb, scheme = false) {
-  const forms = scheme ? MODAL_FORM_SCHEME : MODAL_FORM_GROUP.forms[verb] || MODAL_FORM_SPECIAL[verb];
-  const inGroup = scheme || MODAL_FORM_GROUP.verbs.includes(verb); // symbols, legend, tags: not for werden
+  const forms = scheme ? MODAL_FORM_SCHEME : MODAL_FORM_GROUP.forms[verb];
+  const inGroup = scheme || MODAL_FORM_GROUP.verbs.includes(verb); // symbols, legend, tags
   const meanings = !scheme && MODAL_FORM_MEANINGS[verb];
   const litColumn = meanings && meanings[modalFormTag] ? meanings[modalFormTag].column : -1;
 
@@ -544,9 +547,6 @@ function renderFormsDetail(verb, scheme = false) {
 
   const note = scheme ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>` : "";
 
-  const participle =
-    verb === "werden" ? `<div class="forms-detail-participle">Partizip II · <b>geworden</b></div>` : "";
-
   return `
     <div class="forms-detail">
       <table class="forms-detail-table">
@@ -558,7 +558,7 @@ function renderFormsDetail(verb, scheme = false) {
         </thead>
         <tbody>${rows}</tbody>
       </table>
-      ${inGroup ? renderFormsLegend() : ""}${note}${participle}${meanings ? renderFormsMeanings(verb) : ""}
+      ${inGroup ? renderFormsLegend() : ""}${note}${meanings ? renderFormsMeanings(verb) : ""}
     </div>`;
 }
 
@@ -596,28 +596,10 @@ function renderFormsTable() {
       </tr>
     </tbody>`;
 
-  const specialRows = ["werden"]
-    .map(
-      verb => `
-    <tbody class="forms-group${modalSpecialOpen[verb] ? " open" : ""}" data-special-group="${verb}">
-      <tr class="verb-group-row">
-        <td class="verb-group" colspan="4">
-          <span class="forms-chevron" data-toggle-special="${verb}" aria-label="${verb} auf- und zuklappen">›</span>
-          <button class="verb-choice" type="button" data-special-verb="${verb}">${verb}</button>
-        </td>
-      </tr>
-      <tr class="forms-detail-row">
-        <td colspan="4">${renderFormsDetail(verb, false)}</td>
-      </tr>
-    </tbody>`
-    )
-    .join("");
-
   $("formsModalBody").innerHTML = `
     <p class="forms-intro">Klicke auf ein Verb der Gruppe, um seine konkreten Formen zu sehen.</p>
     <table class="forms-table">
       ${groupRow}
-      ${specialRows}
     </table>`;
 }
 
@@ -630,7 +612,6 @@ function setFormsMode(mode) {
 function openFormsTable() {
   modalFormMode = "scheme";
   modalFormTag = null;
-  modalSpecialOpen = { werden: false };
   renderFormsTable();
   const modal = $("formsModal");
   modal.classList.add("open");
@@ -676,15 +657,5 @@ $("formsModalBody").addEventListener("click", e => {
     const verb = verbButton.dataset.modalVerb;
     setFormsMode(verb === modalFormMode ? "scheme" : verb); // second tap on the chosen verb clears the table
     return;
-  }
-
-  const specialToggle = e.target.closest("[data-toggle-special]");
-  const specialButton = e.target.closest("[data-special-verb]");
-  if (specialToggle || specialButton) {
-    e.stopPropagation();
-    const verb =
-      (specialToggle || specialButton).dataset.toggleSpecial || (specialToggle || specialButton).dataset.specialVerb;
-    modalSpecialOpen[verb] = !modalSpecialOpen[verb];
-    renderFormsTable();
   }
 });
