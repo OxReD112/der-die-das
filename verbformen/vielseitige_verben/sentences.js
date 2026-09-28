@@ -14,6 +14,9 @@
 //   rule      { en, ru } fallback only: after Prüfen the exercise shows the table's card of the meaning with the same
 //             job (forms_table.js); this line is shown only if no meaning has that job. The construction, named as building blocks (not the words of the sentence): helper and main
 //             verbs by their form („werden im Präteritum“, „Partizip II von lassen“), as textbooks say it
+//   tip       optional, { blocks, means } like a table meaning (forms_table.js): the explanation after Prüfen for
+//             this sentence only, when the table's card is too general — the tense of the sentence (werden im
+//             Präsens / Präteritum / sein + … + worden) and adjective or noun. Without it: the table's card.
 // Each sentence's difficulty is stored under verb|sentence, so a sentence changed here starts again at 1.
 
 window.VV_SENTENCES = [
@@ -22,25 +25,29 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Präteritum", job: "become",
     situation: { en: "Tell how the school trip ended: the children got tired quickly.", ru: "Расскажи, чем закончилась экскурсия: дети быстро устали." },
     sentence: "Nach dem Ausflug ___ die Kinder schnell müde.", answer: "wurden", marks: ["Nach dem Ausflug", "müde"],
-    rule: { en: "time in the past + werden im Präteritum + adjective = became, got", ru: "время в прошлом + werden im Präteritum + прилагательное = стали" }
+    rule: { en: "time in the past + werden im Präteritum + adjective = became, got", ru: "время в прошлом + werden im Präteritum + прилагательное = стали" },
+    tip: { blocks: [["werden im Präteritum", "verb"], [{ en: "adjective", ru: "прилагательное" }, "part"]], means: { en: "became, got", ru: "стали" } }
   },
   {
     verb: "werden", form: "Präteritum", job: "become",
     situation: { en: "Tell his story: he studied medicine and finished in 2015.", ru: "Расскажи его историю: он учился на врача и закончил в 2015." },
     sentence: "2015 ___ er Arzt.", answer: "wurde", marks: ["2015", "Arzt"],
-    rule: { en: "a year in the past + werden im Präteritum + noun = became", ru: "год в прошлом + werden im Präteritum + существительное = стал" }
+    rule: { en: "a year in the past + werden im Präteritum + noun = became", ru: "год в прошлом + werden im Präteritum + существительное = стал" },
+    tip: { blocks: [["werden im Präteritum", "verb"], [{ en: "noun", ru: "существительное" }, "part"]], means: { en: "became", ru: "стал" } }
   },
   {
     verb: "werden", form: "Partizip II", job: "become",
     situation: { en: "Your sister finished her studies. Now she's a teacher. Tell a friend.", ru: "Твоя сестра закончила учёбу, теперь она учительница. Расскажи подруге." },
     sentence: "Meine Schwester ist Lehrerin ___.", answer: "geworden", marks: ["ist"],
-    rule: { en: "sein im Präsens + Partizip II von werden, no second verb = became", ru: "sein im Präsens + Partizip II von werden, без второго глагола = стала" }
+    rule: { en: "sein im Präsens + Partizip II von werden, no second verb = became", ru: "sein im Präsens + Partizip II von werden, без второго глагола = стала" },
+    tip: { blocks: [["sein", "plain"], [{ en: "noun", ru: "существительное" }, "part"], ["geworden", "verb"]], means: { en: "became", ru: "стала" } }
   },
   {
     verb: "werden", form: "Partizip II", job: "passive",
     situation: { en: "Your bike isn't where you left it. Someone took it.", ru: "Твоего велосипеда нет там, где ты его оставила. Кто-то его взял." },
     sentence: "Mein Fahrrad ist gestohlen ___.", answer: "worden", marks: ["ist", "gestohlen"],
-    rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" }
+    rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" },
+    tip: { blocks: [["sein", "plain"], ["Partizip II", "part"], ["worden", "verb"]], means: { en: "it was done", ru: "это сделали" } }
   },
   {
     verb: "werden", form: "Präsens", job: "future",
@@ -58,31 +65,36 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Präsens", job: "passive",
     situation: { en: "Right now, as you watch, the cleaners are washing the windows.", ru: "Прямо сейчас у тебя на глазах уборщики моют окна." },
     sentence: "Die Fenster ___ gerade geputzt.", answer: "werden", marks: ["gerade", "geputzt"],
-    rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" }
+    rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" },
+    tip: { blocks: [["werden im Präsens", "verb"], ["Partizip II", "part"]], means: { en: "it is being done", ru: "это делают (сейчас)" } }
   },
   {
     verb: "werden", form: "Präteritum", job: "passive",
     situation: { en: "A history fact: the Berlin Wall, 1961.", ru: "Исторический факт: Берлинская стена, 1961 год." },
     sentence: "Die Mauer ___ 1961 gebaut.", answer: "wurde", marks: ["1961", "gebaut"],
-    rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
+    rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" },
+    tip: { blocks: [["werden im Präteritum", "verb"], ["Partizip II", "part"]], means: { en: "it was done", ru: "это сделали" } }
   },
   {
     verb: "werden", form: "Präteritum", job: "passive",
     situation: { en: "Talk about your kitchen: workers renovated it last week.", ru: "Расскажи о кухне: на прошлой неделе там сделали ремонт." },
     sentence: "Die Küche ___ letzte Woche renoviert.", answer: "wurde", marks: ["letzte Woche", "renoviert"],
-    rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
+    rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" },
+    tip: { blocks: [["werden im Präteritum", "verb"], ["Partizip II", "part"]], means: { en: "it was done", ru: "это сделали" } }
   },
   {
     verb: "werden", form: "Präsens", job: "passive",
     situation: { en: "The mechanic is working on your car right now. Talk about the car.", ru: "Механик прямо сейчас чинит твою машину. Скажи про машину." },
     sentence: "Mein Auto ___ gerade repariert.", answer: "wird", marks: ["Mein Auto", "gerade", "repariert"],
-    rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" }
+    rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" },
+    tip: { blocks: [["werden im Präsens", "verb"], ["Partizip II", "part"]], means: { en: "it is being done", ru: "это делают (сейчас)" } }
   },
   {
     verb: "werden", form: "Partizip II", job: "passive",
     situation: { en: "Your car is back from the garage. Talk about the car.", ru: "Машина вернулась из автосервиса. Скажи про машину." },
     sentence: "Mein Auto ist gestern repariert ___.", answer: "worden", marks: ["Mein Auto", "ist", "repariert"],
-    rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" }
+    rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" },
+    tip: { blocks: [["sein", "plain"], ["Partizip II", "part"], ["worden", "verb"]], means: { en: "it was done", ru: "это сделали" } }
   },
   {
     verb: "werden", form: "Konjunktiv II", job: "wuerde",
@@ -100,7 +112,8 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Präsens", job: "become",
     situation: { en: "Before every exam you and your classmates get nervous.", ru: "Перед каждым экзаменом вы с одногруппниками начинаете нервничать." },
     sentence: "Vor jeder Prüfung ___ wir nervös.", answer: "werden", marks: ["nervös"],
-    rule: { en: "werden im Präsens + adjective = become, get", ru: "werden im Präsens + прилагательное = становиться" }
+    rule: { en: "werden im Präsens + adjective = become, get", ru: "werden im Präsens + прилагательное = становиться" },
+    tip: { blocks: [["werden im Präsens", "verb"], [{ en: "adjective", ru: "прилагательное" }, "part"]], means: { en: "become, get", ru: "становиться" } }
   },
 
   {
@@ -113,7 +126,8 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Präsens", job: "passive",
     situation: { en: "Tomorrow a taxi comes for you and your family at eight. Say it from your side.", ru: "Завтра в восемь за вами с семьёй приедет такси. Скажи со своей стороны." },
     sentence: "Wir ___ morgen um acht abgeholt.", answer: "werden", marks: ["abgeholt"],
-    rule: { en: "person + werden im Präsens + Partizip II = Passiv, it's done to us", ru: "человек + werden im Präsens + Partizip II = Passiv, это делают с нами" }
+    rule: { en: "person + werden im Präsens + Partizip II = Passiv, it's done to us", ru: "человек + werden im Präsens + Partizip II = Passiv, это делают с нами" },
+    tip: { blocks: [["werden im Präsens", "verb"], ["Partizip II", "part"]], means: { en: "someone does it to us", ru: "это делают с нами" } }
   },
 
   // ---- lassen ----

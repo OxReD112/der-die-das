@@ -292,7 +292,7 @@ function checkAnswer() {
     `<span class="right">${esc(shown)}</span>` + (ok ? "" : `<span class="wrong-answer">${esc(typed)}</span>`);
   $("formKind").textContent = item.form;
   // the explanation = the table's card for this meaning (fallback: the sentence's own rule line)
-  const meaning = meaningFor(item);
+  const meaning = item.tip || meaningFor(item); // the sentence's own tip first (its tense), else the table's card
   if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false);
   else $("explanation").textContent = pick(item.rule);
   const hint = ok ? "" : hintHtml(item, typed);
@@ -593,12 +593,35 @@ function revealRecipe() {
   body.scrollTo({ top: body.scrollTop + delta, behavior: reduce ? "auto" : "smooth" });
 }
 
+/* Full table: one steady window height for every tab (2026-09-28). The window takes the height of its tallest
+   verb (no tag chosen; bekommen with its many tags), so switching tabs never makes it jump - shorter verbs leave
+   empty space at the bottom. The 82vh cap still applies; what doesn't fit (a tag's building blocks) scrolls.
+   During a round (one verb) the window keeps its natural height. */
+function lockFormsHeight() {
+  const card = document.querySelector(".forms-modal-card");
+  card.style.height = "";
+  if (formsMode !== "full") return;
+  const keepVerb = formsVerb,
+    keepTag = formsTag;
+  formsTag = null;
+  let tallest = 0;
+  for (const v of Object.keys(VV_TABLE)) {
+    formsVerb = v;
+    renderFormsTable();
+    tallest = Math.max(tallest, card.offsetHeight);
+  }
+  formsVerb = keepVerb;
+  formsTag = keepTag;
+  renderFormsTable();
+  card.style.height = tallest + "px";
+}
+
 function openFormsTable(mode) {
   if (mode === "verb" && !(inRound() && checked)) return; // off until Prüfen
   formsMode = mode;
   formsTag = null;
   if (mode === "verb") formsVerb = deck[index].verb;
-  renderFormsTable();
+  lockFormsHeight();
   $("formsModalBody").scrollTop = 0;
   const modal = $("formsModal");
   modal.classList.add("open");
@@ -620,6 +643,19 @@ $("formsClose").onclick = closeFormsTable;
 $("formsModal").onclick = e => {
   if (e.target === $("formsModal")) closeFormsTable();
 };
+
+// new width (phone turned, window resized): tags wrap differently - measure the tallest verb again
+let formsResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(formsResizeTimer);
+  formsResizeTimer = setTimeout(() => {
+    if (!tableIsOpen() || formsMode !== "full") return;
+    const body = $("formsModalBody"),
+      keep = body.scrollTop;
+    lockFormsHeight();
+    body.scrollTop = keep;
+  }, 150);
+});
 
 $("formsTabs").addEventListener("click", e => {
   const tab = e.target.closest("[data-forms-verb]");
