@@ -408,26 +408,138 @@ const MODAL_FORM_SCHEME = {
 const MODAL_FORM_NO_FRAME = ["sollen"];
 
 let modalFormMode = "scheme";
+let modalFormTag = null; // index of the lit meaning tag of the chosen verb
 let modalSpecialOpen = { werden: false };
 
 function umlautGlyph() {
   return '<span class="umlaut-remove">ø</span>';
 }
 
+/* ===== Meaning: symbols over the tense names + „What do you want to say?“ tags =====
+   Group table only (werden stays as it is). The symbols and their legend show in the scheme too;
+   the tags come with a chosen verb. A tag lights up its column and shows one German example.
+   Tags, question and legend are explanations → in the language from Settings (EN / RU), like „Worum geht's?“;
+   forms and examples stay German. */
+const MODAL_FORM_COLUMNS = [
+  { key: "present", name: "Präsens", symbol: "now" },
+  { key: "preterite", name: "Präteritum", symbol: "past" },
+  { key: "k2", name: "Konjunktiv II", symbol: "unreal" }
+];
+
+const MODAL_FORM_SYMBOLS = {
+  now: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" /></svg>',
+  past: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6" /><path d="M11 7l-5 5 5 5" /></svg>',
+  unreal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" stroke-dasharray="2.6 2.6" /></svg>'
+};
+
+const MODAL_FORM_TEXT = {
+  question: { en: "What do you want to say?", ru: "Что ты хочешь сказать?" },
+  now: { en: "now", ru: "сейчас" },
+  past: { en: "past", ru: "раньше" },
+  unreal: { en: "not real: polite, maybe, advice", ru: "не на самом деле: вежливо, может быть, совет" },
+  same: {
+    en: "Präteritum and Konjunktiv II look the same - the sentence decides.",
+    ru: "Präteritum и Konjunktiv II совпадают - решает предложение."
+  }
+};
+
+/* column: 0 Präsens · 1 Präteritum · 2 Konjunktiv II; the form in the example is wrapped in *…* */
+const MODAL_FORM_MEANINGS = {
+  können: [
+    { label: { en: "I'm able to", ru: "я умею, могу" }, column: 0, example: "Ich *kann* schwimmen." },
+    { label: { en: "asking politely", ru: "вежливо попросить" }, column: 2, example: "*Könnten* Sie mir helfen?" },
+    { label: { en: "maybe, possibly", ru: "может быть" }, column: 2, example: "Das *könnte* klappen." }
+  ],
+  müssen: [
+    { label: { en: "I have to", ru: "надо, нужно" }, column: 0, example: "Ich *muss* jetzt los." },
+    { label: { en: "I really should (but …)", ru: "по-хорошему надо бы" }, column: 2, example: "Ich *müsste* mehr schlafen." }
+  ],
+  dürfen: [
+    { label: { en: "it's allowed", ru: "можно, разрешено" }, column: 0, example: "Hier *darf* man parken." },
+    { label: { en: "asking very politely", ru: "очень вежливо спросить" }, column: 2, example: "*Dürfte* ich kurz stören?" }
+  ],
+  mögen: [
+    { label: { en: "I like it", ru: "мне нравится" }, column: 0, example: "Ich *mag* Kaffee." },
+    { label: { en: "I'd like (polite wish)", ru: "я бы хотел(а)" }, column: 2, example: "Ich *möchte* einen Kaffee." }
+  ],
+  sollen: [
+    { label: { en: "someone wants me to", ru: "кто-то хочет, чтобы я" }, column: 0, example: "Ich *soll* dich grüßen." },
+    { label: { en: "giving advice", ru: "дать совет" }, column: 2, example: "Du *solltest* mehr trinken." }
+  ],
+  wollen: [
+    { label: { en: "I want to, I plan to", ru: "хочу, собираюсь" }, column: 0, example: "Ich *will* Deutsch lernen." },
+    { label: { en: "starting politely", ru: "вежливо начать" }, column: 1, example: "Ich *wollte* fragen, ob …" }
+  ]
+};
+
+const modalText = value =>
+  window.DeutschTranslation ? window.DeutschTranslation.pick(value) : value.en || "";
+
+function renderFormsLegend() {
+  const item = symbol => `<span>${MODAL_FORM_SYMBOLS[symbol]}${modalText(MODAL_FORM_TEXT[symbol])}</span>`;
+  return `<div class="forms-legend">${item("now")}${item("past")}${item("unreal")}</div>`;
+}
+
+function renderFormsMeanings(verb) {
+  const meanings = MODAL_FORM_MEANINGS[verb];
+  if (!meanings) return "";
+  const tags = meanings
+    .map(
+      (m, k) => `
+      <button class="meaning-tag${k === modalFormTag ? " on" : ""}" type="button" data-meaning="${k}"
+        aria-pressed="${k === modalFormTag}">${MODAL_FORM_SYMBOLS[MODAL_FORM_COLUMNS[m.column].symbol]}${modalText(m.label)}</button>`
+    )
+    .join("");
+
+  let example = "";
+  const chosen = meanings[modalFormTag];
+  if (chosen) {
+    const forms = MODAL_FORM_GROUP.forms[verb];
+    const same = forms.preterite[0] === forms.k2[0] && chosen.column > 0;
+    example =
+      `<div class="meaning-example" lang="de">${chosen.example.replace(/\*(.+?)\*/, "<b>$1</b>")}</div>` +
+      (same ? `<div class="meaning-same">${forms.preterite[0]}: ${modalText(MODAL_FORM_TEXT.same)}</div>` : "");
+  }
+
+  return `
+    <div class="forms-meanings">
+      <div class="meaning-question">${modalText(MODAL_FORM_TEXT.question)}</div>
+      <div class="meaning-tags">${tags}</div>
+      <div class="meaning-answer">${example}</div>
+    </div>`;
+}
+
 function renderFormsDetail(verb, scheme = false) {
   const forms = scheme ? MODAL_FORM_SCHEME : MODAL_FORM_GROUP.forms[verb] || MODAL_FORM_SPECIAL[verb];
+  const inGroup = scheme || MODAL_FORM_GROUP.verbs.includes(verb); // symbols, legend, tags: not for werden
+  const meanings = !scheme && MODAL_FORM_MEANINGS[verb];
+  const litColumn = meanings && meanings[modalFormTag] ? meanings[modalFormTag].column : -1;
 
   const framed = !scheme && !MODAL_FORM_NO_FRAME.includes(verb);
   const frameClass = i => (framed && i < 3 ? ` stem-frame stem-frame-${["top", "mid", "bottom"][i]}` : "");
+  const cellClass = (c, i) =>
+    (scheme ? "forms-scheme" : "forms-form") + (c === 0 ? frameClass(i) : "") + (c === litColumn ? " lit" : "");
+
+  const cellText = (c, i) => {
+    const form = forms[MODAL_FORM_COLUMNS[c].key][i];
+    if (!scheme || c === 2) return form;
+    const slot = c === 1 || i < 3 ? `${umlautGlyph()} ` : "&nbsp;&nbsp;&nbsp;";
+    return `<span class="umlaut-slot">${slot}</span>${form}`;
+  };
 
   const rows = MODAL_FORM_PERSONS.map(
     (person, i) => `
     <tr>
       <td class="forms-person">${person}</td>
-      <td class="${scheme ? "forms-scheme" : "forms-form"}${frameClass(i)}">${scheme && i < 3 ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.present[i]}` : scheme ? `<span class="umlaut-slot">&nbsp;&nbsp;&nbsp;</span>${forms.present[i]}` : forms.present[i]}</td>
-      <td class="${scheme ? "forms-scheme" : "forms-form"}">${scheme ? `<span class="umlaut-slot">${umlautGlyph()} </span>${forms.preterite[i]}` : forms.preterite[i]}</td>
-      <td class="${scheme ? "forms-scheme" : "forms-form"}">${forms.k2[i]}</td>
+      ${[0, 1, 2].map(c => `<td class="${cellClass(c, i)}">${cellText(c, i)}</td>`).join("")}
     </tr>`
+  ).join("");
+
+  const heads = MODAL_FORM_COLUMNS.map(
+    (col, c) =>
+      `<th class="${c === litColumn ? "lit" : ""}">${
+        inGroup ? `<span class="forms-symbol">${MODAL_FORM_SYMBOLS[col.symbol]}</span>` : ""
+      }${col.name}</th>`
   ).join("");
 
   const note = scheme ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>` : "";
@@ -441,14 +553,12 @@ function renderFormsDetail(verb, scheme = false) {
         <thead>
           <tr>
             <th>Person</th>
-            <th>Präsens</th>
-            <th>Präteritum</th>
-            <th>Konjunktiv II</th>
+            ${heads}
           </tr>
         </thead>
         <tbody>${rows}</tbody>
       </table>
-      ${note}${participle}
+      ${inGroup ? renderFormsLegend() : ""}${note}${participle}${meanings ? renderFormsMeanings(verb) : ""}
     </div>`;
 }
 
@@ -513,11 +623,13 @@ function renderFormsTable() {
 
 function setFormsMode(mode) {
   modalFormMode = mode;
+  modalFormTag = null;
   renderFormsTable();
 }
 
 function openFormsTable() {
   modalFormMode = "scheme";
+  modalFormTag = null;
   modalSpecialOpen = { werden: false };
   renderFormsTable();
   const modal = $("formsModal");
@@ -545,7 +657,15 @@ $("formsModalBody").addEventListener("click", e => {
   const reset = e.target.closest("[data-reset-forms]");
   if (reset) {
     e.stopPropagation();
-    modalFormMode = "scheme";
+    setFormsMode("scheme");
+    return;
+  }
+
+  const meaningTag = e.target.closest("[data-meaning]");
+  if (meaningTag) {
+    e.stopPropagation();
+    const k = Number(meaningTag.dataset.meaning);
+    modalFormTag = modalFormTag === k ? null : k; // a second tap turns it off
     renderFormsTable();
     return;
   }

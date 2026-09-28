@@ -28,6 +28,10 @@
   --forms-scheme: #aaa7a1;
   --forms-sep: #686967;
   --forms-frame: rgba(255, 255, 255, 0.22); /* frame around ich / du / er Präsens */
+  --forms-lit-bg: rgba(232, 196, 120, 0.13); /* column of the chosen meaning tag */
+  --forms-lit-line: rgba(232, 196, 120, 0.55);
+  --forms-lit-text: #e8c478;
+  --forms-lit-form: #efe6d4;
   --cell-line: rgba(255, 255, 255, 0.07); /* table rows */
   --detail-line: rgba(255, 255, 255, 0.045); /* rows of a verb's forms */
   --cell-bg: rgba(255, 255, 255, 0.025); /* row under the pointer, „Zurücksetzen“ */
@@ -60,6 +64,10 @@
   --forms-scheme: #7a766f;
   --forms-sep: #a7a49d;
   --forms-frame: rgba(0, 0, 0, 0.2); /* frame around ich / du / er Präsens */
+  --forms-lit-bg: rgba(196, 146, 40, 0.13);
+  --forms-lit-line: rgba(160, 112, 20, 0.5);
+  --forms-lit-text: #97680f;
+  --forms-lit-form: #3a3326;
   --cell-line: rgba(0, 0, 0, 0.09);
   --detail-line: rgba(0, 0, 0, 0.07);
   --cell-bg: rgba(0, 0, 0, 0.035);
@@ -859,6 +867,119 @@ body:has(#study:not(.hidden)) .version-mark {
   font-size: 16px;
   font-weight: 400;
 }
+/* ===== Meaning: symbols over the tense names, legend, „What do you want to say?“ tags ===== */
+.forms-detail-table th {
+  vertical-align: bottom;
+}
+.forms-symbol {
+  display: block;
+  height: 18px;
+  margin-bottom: 5px;
+  color: var(--forms-text);
+}
+.forms-symbol svg,
+.forms-legend svg,
+.meaning-tag svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.forms-symbol svg {
+  width: 17px;
+  height: 17px;
+}
+.forms-detail-table th.lit,
+.forms-detail-table th.lit .forms-symbol {
+  color: var(--forms-lit-text);
+}
+.forms-detail-table td.lit {
+  background: var(--forms-lit-bg);
+  color: var(--forms-lit-form);
+  transition: background-color 0.2s ease;
+}
+.forms-legend {
+  margin-top: 9px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--forms-dim);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.forms-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.forms-legend svg {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+}
+.forms-meanings {
+  margin-top: 16px;
+}
+.meaning-question {
+  color: var(--forms-dim);
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+.meaning-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.meaning-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--hairline);
+  background: var(--cell-bg);
+  color: var(--forms-text);
+  border-radius: 999px;
+  padding: 6px 11px 6px 9px;
+  font-family: var(--font);
+  font-size: 13px;
+  cursor: pointer;
+}
+.meaning-tag svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0.75;
+}
+.meaning-tag.on {
+  border-color: var(--forms-lit-line);
+  background: var(--forms-lit-bg);
+  color: var(--forms-lit-text);
+}
+.meaning-tag:active {
+  transform: scale(0.97);
+}
+.meaning-answer {
+  margin-top: 10px;
+}
+.meaning-answer:empty {
+  display: none; /* no gap under the tags until one is tapped */
+}
+.meaning-example {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--forms-text);
+  line-height: 1.4;
+}
+.meaning-example b {
+  font-weight: 400;
+  color: var(--forms-lit-text);
+}
+.meaning-same {
+  margin-top: 3px;
+  color: var(--forms-dim);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 /* ø = „remove the umlaut“ in the ending scheme; the slot keeps the endings in one column */
 .umlaut-remove {
   font: inherit;
