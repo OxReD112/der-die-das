@@ -23,6 +23,9 @@
   --focus: rgba(255, 255, 255, 0.18);
   --overlay-scrim: rgba(0, 0, 0, 0.34);
   --mark-strength: 15%; /* mistake marker in the table */
+  --lit-bg: rgba(232, 196, 120, 0.13); /* the place's group in the table after the card (gold, like Verbformen) */
+  --lit-text: #e8c478;
+  --lit-form: #efe6d4;
   --top-good-glow: radial-gradient(
     farthest-side at 50% 0%,
     rgba(91, 200, 164, 0.34) 0%,
@@ -62,6 +65,9 @@
   --focus: rgba(0, 0, 0, 0.18);
   --overlay-scrim: rgba(0, 0, 0, 0.2);
   --mark-strength: 12%;
+  --lit-bg: rgba(196, 146, 40, 0.13);
+  --lit-text: #97680f;
+  --lit-form: #3a3326;
   --top-good-glow: radial-gradient(
     farthest-side at 50% 0%,
     rgba(63, 166, 138, 0.26) 0%,
@@ -241,6 +247,15 @@ button {
   justify-content: center;
   z-index: 20;
   pointer-events: none;
+}
+/* during a round: off until the card is done - greyed out, does nothing (no note) */
+.table-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.table-btn:disabled:active {
+  transform: none;
+  filter: none;
 }
 .in-session-table .table-btn {
   pointer-events: auto;
@@ -835,6 +850,21 @@ body:has(#game:not(.hidden)) .version-mark {
   background-size: 100% 78%;
   background-position: 0 70%;
   background-repeat: no-repeat;
+}
+/* The place's group after the card (during a round): gold, like the Verbformen tables */
+.otbl2 .lit,
+.ofoot .lit {
+  padding: 1px 5px;
+  margin: -1px -5px;
+  border-radius: 4px;
+  background: var(--lit-bg);
+  color: var(--lit-form);
+}
+.otbl2 .same:has(.lit) {
+  opacity: 1; /* the lit group's Wohin is not dimmed */
+}
+.otbl2 .lit-label {
+  color: var(--lit-text);
 }
 .mk-legend {
   display: block;

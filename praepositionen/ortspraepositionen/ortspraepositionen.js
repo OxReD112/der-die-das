@@ -187,6 +187,7 @@ function buildSession(size) {
 }
 
 const els = {
+  roundTableBtn: document.getElementById("roundTableBtn"),
   session: document.getElementById("sessionScreen"),
   game: document.getElementById("game"),
   end: document.getElementById("endScreen"),
@@ -285,6 +286,7 @@ function render() {
   els.ruleNote.innerHTML = "";
   els.next.classList.add("hidden");
   els.choices.classList.remove("hidden");
+  els.roundTableBtn.disabled = true; // no peeking: the table opens only when all three lines are answered
   renderChoices();
   fitToCard(els.place);
 }
@@ -377,6 +379,7 @@ function finishCard() {
   els.choices.classList.add("hidden");
   els.next.textContent = index === session.length - 1 ? "Fertig" : "Weiter";
   els.next.classList.remove("hidden");
+  els.roundTableBtn.disabled = false;
   els.bar.style.width = ((index + 1) / session.length) * 100 + "%";
 }
 
@@ -431,7 +434,11 @@ window.addEventListener("resize", () => {
    One row per group with two examples. Wohin is dimmed when it repeats the Wo word (then it's Akkusativ);
    when the word changes (nach / zu) it stays in full colour and is marked „Dativ“ — the exception to
    „movement = Akkusativ“. Groups with a recent mistake get a faint red marker under their name
-   (a line with difficulty ≥ 2 — the same data that makes cards come back). */
+   (a line with difficulty ≥ 2 — the same data that makes cards come back).
+   During a round (2026-09-28, like Vielseitige Verben): the button is off until all three lines are answered; then
+   the table opens with the place's group lit - its three prepositions and its name (Kino → Raum only, not „Land
+   mit Artikel“); the Ausnahme places light „immer in:“. The Straße-als-Adresse card has no row → nothing lit.
+   No „zuletzt Fehler“ marks there (one kind of highlight at a time); the start screen keeps them. */
 const TABLE_ROWS = [
   // Kino + Schweiz share one row: same pattern in · in · aus.
   {
@@ -460,10 +467,12 @@ function weakCats() {
   });
   return out;
 }
-function tableHtml() {
-  const weak = weakCats(),
+function tableHtml(litCat = null) {
+  const weak = litCat ? new Set() : weakCats(),
     h = escapeHtml,
-    mk = t => '<span class="mk">' + h(t) + "</span>";
+    mk = t => '<span class="mk">' + h(t) + "</span>",
+    lit = t => '<span class="lit">' + t + "</span>",
+    litLabel = t => '<span class="lit-label">' + t + "</span>";
   // The explanation of the marker sits in the empty top-left header cell and only shows when something is marked.
   const anyMark = [...weak].some(c => c === "ausnahme" || TABLE_ROWS.some(r => r.cats.includes(c)));
   let html =
@@ -473,26 +482,30 @@ function tableHtml() {
     '<div class="h">Woher?<small>Dativ</small></div><div class="hl"></div>';
   TABLE_ROWS.forEach(r => {
     const same = r.wohin === r.wo;
+    const on = r.cats.includes(litCat),
+      p = t => (on ? lit(h(t)) : h(t));
     const label = r.parts
-      ? r.parts.map(([c, t]) => (weak.has(c) ? mk(t) : h(t))).join(" · ")
-      : weak.has(r.cats[0])
-        ? mk(r.label)
-        : h(r.label);
+      ? r.parts.map(([c, t]) => (c === litCat ? litLabel(h(t)) : weak.has(c) ? mk(t) : h(t))).join(" · ")
+      : on
+        ? litLabel(h(r.label))
+        : weak.has(r.cats[0])
+          ? mk(r.label)
+          : h(r.label);
     html +=
       '<div class="ex">' +
       h(r.ex) +
       "</div>" +
       '<div class="p">' +
-      h(r.wo) +
+      p(r.wo) +
       "</div>" +
       '<div class="p' +
       (same ? " same" : "") +
       '"><span class="w">' +
-      h(r.wohin) +
+      p(r.wohin) +
       (same ? "" : '<span class="d">Dativ</span>') +
       "</span></div>" +
       '<div class="p">' +
-      h(r.woher) +
+      p(r.woher) +
       "</div>" +
       '<div class="cat">' +
       label +
@@ -500,15 +513,16 @@ function tableHtml() {
   });
   html +=
     '</div><div class="ofoot"><b>' +
-    (weak.has("ausnahme") ? mk("immer in:") : "immer in:") +
+    (litCat === "ausnahme" ? lit("immer in:") : weak.has("ausnahme") ? mk("immer in:") : "immer in:") +
     "</b> <span>Wald · Park · Garten · Schwimmbad · Berge</span></div>";
   return html;
 }
 
 const omodal = document.getElementById("omodal");
 const tableIsOpen = () => omodal.classList.contains("open");
-function openTable() {
-  document.getElementById("otable").innerHTML = tableHtml();
+function openTable(round) {
+  if (round && !(inRound() && cardDone)) return; // off until the card is done
+  document.getElementById("otable").innerHTML = tableHtml(round ? session[index].cat : null);
   omodal.classList.add("open");
   omodal.setAttribute("aria-hidden", "false");
 }
@@ -555,7 +569,9 @@ els.playAgain.addEventListener("click", () => {
   scrollToTop();
 });
 els.homeBack.addEventListener("click", goBackToHome);
-document.querySelectorAll("[data-otable]").forEach(b => b.addEventListener("click", openTable));
+document
+  .querySelectorAll("[data-otable]")
+  .forEach(b => b.addEventListener("click", () => openTable(b.dataset.otable === "round")));
 document.getElementById("oclose").addEventListener("click", closeTable);
 omodal.addEventListener("click", e => {
   if (e.target === omodal) closeTable();
