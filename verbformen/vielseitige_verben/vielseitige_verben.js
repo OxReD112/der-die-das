@@ -146,6 +146,17 @@ window.addEventListener("resize", () => {
   if (inRound() && !checked) fitCard();
 });
 
+/* Weiter bar (see the CSS): page colour + fade only while the question card scrolls under the pinned bar */
+function updateNextBar() {
+  const bar = $("nextBar"),
+    covering =
+      $("next").classList.contains("show") &&
+      document.querySelector("#study .card").getBoundingClientRect().bottom > bar.getBoundingClientRect().top + 0.5;
+  bar.classList.toggle("is-covering", covering);
+}
+document.querySelector(".app").addEventListener("scroll", updateNextBar, { passive: true });
+window.addEventListener("resize", updateNextBar);
+
 function syncKeyboardAndFocus() {
   if (window.deutschKeyboardReady && !checked) $("keyboard").classList.add("show");
   fitCard();
@@ -192,6 +203,7 @@ function render() {
   $("result").className = "result";
   $("hint").classList.add("hidden");
   $("next").classList.remove("show");
+  updateNextBar();
   $("check").style.display = isTouchDevice ? "none" : "";
   $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("count").textContent = index + 1 + " / " + deck.length;
@@ -342,6 +354,7 @@ function checkAnswer() {
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
   $("roundTableBtn").disabled = false;
+  updateNextBar();
 }
 
 function next() {

@@ -523,13 +523,54 @@ body:has(#study:not(.hidden)) .version-mark {
 }
 #next {
   display: none;
-  margin-top: 15px;
+  margin: 0;
   border: 1px solid var(--hairline);
   background: var(--field-bg);
   color: var(--text);
 }
 #next.show {
   display: block;
+}
+
+/* ===== WEITER BAR (2026-09-29) ===== a long explanation pushed Weiter under the Home button and the table pill.
+   Weiter sits in its own bar under the question card and never goes below the Home row: its bottom edge stays
+   72px above the bottom edge (+ home indicator) — where the on-screen keyboard's last row ends.
+   - Phones and tablets (on-screen keyboard): the bar is pushed to that place, same spot for every sentence.
+   - Computers: the bar follows the explanation (15px under it, as before).
+   - Both: when the explanation is too long for the screen, the bar stays pinned (sticky) and the question card
+     scrolls under it; only then does the bar get the page colour with a short fade above it (.is-covering, set by
+     the script), so nothing shows through behind Weiter, Home or the table pill.
+   The scroll panel has no bottom padding while Weiter is shown: the bar's own padding is the space to the edge
+   (sticky offsets are measured differently by Safari and Chrome when the scroller has padding — see the page shell). */
+.next-bar {
+  display: none;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  margin: 0 -24px;
+  padding: 15px 24px calc(env(safe-area-inset-bottom) + 72px);
+}
+.next-bar:has(#next.show) {
+  display: block;
+}
+.next-bar.is-covering {
+  background: var(--bg);
+}
+.next-bar.is-covering::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 28px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+.app:has(#study:not(.hidden) #next.show) {
+  padding-bottom: 0;
+}
+#study:has(#next.show) .card {
+  padding-bottom: 0; /* the bar's 15px is the gap explanation → Weiter */
 }
 #check:active,
 #next:active {
@@ -1078,6 +1119,11 @@ body:has(#study:not(.hidden)) .version-mark {
     margin-top: 20px;
     padding: 20px 16px 16px;
   }
+  .next-bar {
+    margin: 0 -18px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
 }
 
 /* ===== KEYBOARD ABOVE THE HOME BUTTON (phones and tablets, 2026-09-27) =====
@@ -1097,6 +1143,14 @@ body:has(#study:not(.hidden)) .version-mark {
 }
 #keyboardMount .keyboard {
   margin-top: 0; /* minimum gap field → keys = card padding 26px + keyboard padding 12px */
+}
+/* after Prüfen the keyboard is hidden: the Weiter bar takes its place */
+#study:has(.keyboard.is-touch) .next-bar {
+  margin-top: auto;
+}
+#study:has(#next.show) #keyboardMount {
+  margin-top: 0;
+  padding-bottom: 0;
 }
 
 /* ===== SHORT SCREENS (small phones, phone sideways, large text) =====
@@ -1125,6 +1179,16 @@ body:has(#study:not(.hidden)) .version-mark {
   }
   #keyboardMount .keyboard {
     margin-top: 20px;
+  }
+  /* Weiter follows the content too (the table pill comes after it); pinned only while the card scrolls under it */
+  #study:has(.keyboard.is-touch) .next-bar {
+    margin-top: 0;
+  }
+  .next-bar {
+    padding-bottom: 12px;
+  }
+  #study:has(#next.show) {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
   }
 }
 
