@@ -210,7 +210,7 @@ window.VV_SENTENCES = [
   {
     verb: "lassen", form: "Infinitiv", job: "leave",
     situation: { en: "You're home and your key isn't in your bag. You forgot it at the office.", ru: "Ты дома, а ключа в сумке нет. Ты забыла его в офисе." },
-    sentence: "Ich habe meinen Schlüssel im Büro liegen ___.", answer: "lassen", marks: ["habe", "liegen"],
+    sentence: "Ich habe meinen Schlüssel im Büro liegen ___.", answer: "lassen", also: ["gelassen"], marks: ["habe", "liegen"],
     rule: { en: "haben im Präsens + liegen + lassen im Infinitiv = left (forgot) something", ru: "haben im Präsens + liegen + lassen im Infinitiv = забыла, оставила" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "place", ru: "место" }, "plain"], [{ en: "infinitive", ru: "Infinitiv" }, "part"], ["lassen", "verb"]], means: { en: "left behind (forgot)", ru: "забыла" } }
   },
@@ -337,14 +337,14 @@ window.VV_SENTENCES = [
     verb: "bekommen", form: "Partizip II", job: "getDone",
     situation: { en: "A police officer stops you: “Is this bike really yours?” Explain.", ru: "Полицейский останавливает тебя: «Это точно ваш велосипед?» Объясни." },
     sentence: "Ich habe ein Fahrrad geschenkt ___.", answer: "bekommen", also: ["gekriegt"], marks: ["habe", "geschenkt"],
-    rule: { en: "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = someone did it for you", ru: "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = кто-то сделал это для тебя" },
+    rule: { en: "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = given / sent to you", ru: "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = тебе подарили / прислали" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], ["Partizip II", "part"], ["bekommen", "verb"]], means: { en: "was given", ru: "мне подарили" } }
   },
   {
     verb: "bekommen", form: "Präteritum", job: "getDone",
     situation: { en: "Write your memoirs: explain why you still hate socks.", ru: "Пишешь мемуары: объясни, почему до сих пор терпеть не можешь носки." },
     sentence: "Als Kind ___ ich jedes Jahr Socken geschenkt.", answer: "bekam", marks: ["Als Kind", "geschenkt"],
-    rule: { en: "time in the past + bekommen im Präteritum + thing + Partizip II = someone did it for you", ru: "время в прошлом + bekommen im Präteritum + вещь + Partizip II = кто-то делал это для тебя" }
+    rule: { en: "time in the past + bekommen im Präteritum + thing + Partizip II = given / sent to you", ru: "время в прошлом + bekommen im Präteritum + вещь + Partizip II = тебе дарили" }
   },
   {
     verb: "bekommen", form: "Präsens", job: "catch",
@@ -384,9 +384,9 @@ window.VV_SENTENCES = [
   },
   {
     verb: "bekommen", form: "Partizip II", job: "getDone",
-    situation: { en: "Your parcel to a friend has been travelling for a week. Ask her.", ru: "Посылка подруге идёт уже неделю. Спроси, дошла ли." },
-    sentence: "Hast du das Paket schon geschickt ___?", answer: "bekommen", also: ["gekriegt"], marks: ["Hast", "geschickt"],
-    rule: { en: "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = someone did it for you", ru: "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = кто-то сделал это для тебя" },
+    situation: { en: "The meeting starts in five minutes. Ask your colleague if they got the link.", ru: "Встреча через пять минут. Спроси коллегу, прислали ли ему ссылку." },
+    sentence: "Hast du den Link schon geschickt ___?", answer: "bekommen", also: ["gekriegt"], marks: ["Hast", "geschickt"],
+    rule: { en: "person + haben im Präsens + thing + Partizip II + Partizip II von bekommen = given / sent to you", ru: "человек + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = тебе подарили / прислали" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], ["Partizip II", "part"], ["bekommen", "verb"]], means: { en: "was sent to you", ru: "тебе прислали" } }
   }
 ];
@@ -409,13 +409,25 @@ window.VV_JOBS = {
   catchTrain: { de: "den Zug bekommen", en: "catch (a train)", ru: "успеть (на поезд)" },
   feel: { de: "Angst haben", en: "feel (already)", ru: "испытывать (чувство)" },
   canBeDone: { de: "machbar", en: "can be done", ru: "можно сделать" },
-  state: { de: "Zustand", en: "already done (state)", ru: "уже сделано (состояние)" },
+  state: { de: "Zustand", en: "a state", ru: "состояние" },
   pastHelper: { de: "Perfekt", en: "Perfekt helper", ru: "вспомогательный в Perfekt" },
   mustDo: { de: "zu tun haben", en: "have to", ru: "нужно" },
   phrase: { de: "feste Ausdrücke", en: "fixed phrases", ru: "устойчивые выражения" },
   receive: { de: "erhalten", en: "get, receive", ru: "получать" },
-  getDone: { de: "geschenkt bekommen", en: "someone does it for you", ru: "кто-то делает для тебя" },
+  getDone: { de: "geschenkt bekommen", en: "given to you", ru: "тебе подарили / прислали" },
   catch: { de: "Angst bekommen", en: "start to feel", ru: "начать чувствовать" }
+};
+
+/* What each form name means, shown after it in brackets: „Präteritum (прошлое)“ — under the answer and in the yellow
+   rows. Names the form, not the moment: Präsens is also the Perfekt helper (*bin gegangen*) and the future
+   (*werde anrufen*), so „настоящее время“, not „сейчас“. */
+window.VV_FORM_MEANINGS = {
+  Präsens: { en: "present tense", ru: "настоящее время" },
+  Präteritum: { en: "past", ru: "прошлое" },
+  "Partizip II": { en: "for Perfekt and passive", ru: "для Perfekt и пассива" },
+  "Konjunktiv II": { en: "would", ru: "бы" },
+  Infinitiv: { en: "basic form", ru: "начальная форма" },
+  Imperativ: { en: "request, command", ru: "просьба, приказ" }
 };
 
 /* All forms of the five verbs, to name what was typed („yours“ row). Several labels: „ · “. */
@@ -484,10 +496,12 @@ window.VV_USE_PAIRS = {
     wer: { en: "werden = become", ru: "werden = становиться" },
     werdenBec: { en: "werden = a change — *wird Arzt, wurden müde*", ru: "werden = изменение — *wird Arzt, wurden müde*" },
     seinState: { en: "sein = a state — *ist Arzt, waren müde*", ru: "sein = состояние — *ist Arzt, waren müde*" },
-    seinPerf: { en: "sein: movement or change", ru: "sein: движение или изменение" },
+    seinPerf: { en: "sein: movement, change + *sein, bleiben, passieren*", ru: "sein: движение, изменение + *sein, bleiben, passieren*" },
     seinZuCan: { en: "sein + zu = can be done — *ist zu lesen*", ru: "sein + zu = можно сделать — *ist zu lesen*" },
     habenZuMust: { en: "haben + zu = must, have to — *hat zu tun*", ru: "haben + zu = нужно, надо — *hat zu tun*" },
-    habenPerf: { en: "haben: everything else", ru: "haben: всё остальное" }
+    lassArr: { en: "lassen = you arrange it yourself", ru: "lassen = ты сам(а) это устраиваешь" },
+    bekGet: { en: "bekommen = it's given to you, you just receive it", ru: "bekommen = тебе это дают, ты только получаешь" },
+    habenPerf: { en: "haben: most verbs", ru: "haben: большинство глаголов" }
   };
   /* A typed word that is none of the five verbs, but a known trap: key = the typed word (lower case). */
   const WANT = {
@@ -510,11 +524,13 @@ window.VV_USE_PAIRS = {
   /* A right answer in another word („also“ in the sentence): one line in the yellow box after Prüfen. */
   const KRIEGEN = { en: "*kriegen* = spoken *bekommen*. Right! In writing: *bekommen*.", ru: "*kriegen* — разговорный вариант *bekommen*. Верно! Письменно — *bekommen*." };
   const ERHALTEN = { en: "*erhalten* = formal *bekommen*. Right! In everyday speech: *bekommen*.", ru: "*erhalten* — официальный вариант *bekommen*. Верно! В обычной речи — *bekommen*." };
+  const GELASSEN = { en: "*liegen gelassen* is right too! More common: *liegen lassen*.", ru: "*liegen gelassen* — тоже верно! Но чаще: *liegen lassen*." };
   const TRAIN = { en: "*erreichen* / *schaffen* work too! Here we practise *bekommen*.", ru: "*erreichen* / *schaffen* — тоже верно! Здесь тренируем *bekommen*." };
   window.VV_ALSO_NOTES = {
     kriege: KRIEGEN, kriegst: KRIEGEN, kriegt: KRIEGEN, kriegen: KRIEGEN, gekriegt: KRIEGEN, kriegte: KRIEGEN,
     erhalte: ERHALTEN, erhalten: ERHALTEN,
-    erreichen: TRAIN, schaffen: TRAIN
+    erreichen: TRAIN, schaffen: TRAIN,
+    gelassen: GELASSEN // only accepted in „liegen ___“
   };
   /* Past tense, the right verb in the wrong past form (wurde ↔ worden, bekam ↔ bekommen, ließ ↔ gelassen): under the
      „yours / needed“ rows, where each past form is used — speaking: Perfekt, writing: Präteritum. Only where that is
@@ -567,6 +583,8 @@ window.VV_USE_PAIRS = {
     "bekommen>werden": { only: ["catch"], lines: [L.bekNoun, L.werdenAdj] },
     "haben>bekommen": { only: ["feel"], lines: [L.angstHab, L.angstBek] },
     "bekommen>haben": { only: ["catch"], lines: [L.angstBek, L.angstHab] },
+    "lassen>bekommen": { only: ["haveDone"], lines: [L.lassArr, L.bekGet] },
+    "bekommen>lassen": { only: ["getDone"], lines: [L.bekGet, L.lassArr] },
     "lassen>haben": { only: ["haveDone"], lines: [{ en: "*have* something done = **lassen**, not haben", ru: "англ. *have* something done = **lassen**, не haben" }] },
     "sein>haben": [
       { only: ["pastHelper"], lines: [L.seinPerf, L.habenPerf] },

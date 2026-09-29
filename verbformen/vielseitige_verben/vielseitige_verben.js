@@ -236,7 +236,7 @@ const rich = text =>
 /* Yellow box, only after a wrong answer:
    - another verb, known mix-up → a contrast, one line per verb (VV_HINTS)
    - another verb, no known mix-up (a fixed phrase…) → nothing, the rule line is enough
-   - the right verb in the wrong form → „yours / needed“ rows with the form names
+   - the right verb in the wrong form → two rows (yours red, needed green) with the form names + meaning
      (geworden / worden, gelassen / lassen: the use instead of the same form name)
      + in the past: where each past form is used (VV_PAST_NOTES) */
 function hintHtml(item, typed) {
@@ -266,8 +266,6 @@ function hintMain(item, typed, hit) {
     if (!h) return "";
     return h.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
   }
-  const yoursTag = pick({ en: "yours", ru: "твой" }),
-    neededTag = pick({ en: "needed", ru: "нужно" });
   const t = norm(typed),
     a = norm(item.answer);
   for (const key in VV_USE_PAIRS) {
@@ -276,18 +274,31 @@ function hintMain(item, typed, hit) {
       const P = VV_USE_PAIRS[key];
       if (P.forms && !P.forms.includes(item.form)) break; // this pair only in these sentences: else the plain rows
       if (P.lines) return P.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
-      const row = (cls, tag, w) =>
-        `<span class="tag">${tag}</span><span class="w ${cls}">${esc(w)}</span>` +
-        `<span class="lbl">${esc(pick(P[w]))}</span>`;
-      return `<div class="hint-rows">${row("yours", yoursTag, t)}${row("needed", neededTag, a)}</div>`;
+      const row = (cls, w) => `<span class="w ${cls}">${esc(w)}</span><span class="lbl">${esc(pick(P[w]))}</span>`;
+      return `<div class="hint-rows">${row("yours", t)}${row("needed", a)}</div>`;
     }
   }
+  // red = yours, green = needed (no tags: the colours and the crossed-out word above say it).
+  // Another tense → the name + its meaning; the same tense → the name + the person (that is the mistake).
+  // A word that is several forms (bekommen: Partizip II · Infinitiv · Präsens) → only the names, else too long.
+  const parts = hit.label.split(" · ");
+  const need = neededLabel(item),
+    needBase = formBase(need);
+  const sameTense = parts.some(p => formBase(p) === needBase);
+  const yours = sameTense ? hit.label : parts.length > 1 ? parts.map(formBase).join(" · ") : withMeaning(formBase(hit.label));
   return (
     `<div class="hint-rows">` +
-    `<span class="tag">${yoursTag}</span><span class="w yours">${esc(typed)}</span><span class="lbl">${esc(hit.label)}</span>` +
-    `<span class="tag">${neededTag}</span><span class="w needed">${esc(item.answer)}</span><span class="lbl">${esc(neededLabel(item))}</span>` +
+    `<span class="w yours">${esc(typed)}</span><span class="lbl">${esc(yours)}</span>` +
+    `<span class="w needed">${esc(item.answer)}</span><span class="lbl">${esc(sameTense ? need : withMeaning(needBase))}</span>` +
     `</div>`
   );
+}
+
+// „Präteritum (ich, er)“ → „Präteritum“ · „Präteritum“ → „Präteritum (прошлое)“
+const formBase = label => label.replace(/\s*\(.*\)$/, "");
+function withMeaning(base) {
+  const m = (window.VV_FORM_MEANINGS || {})[base];
+  return m ? `${base} (${pick(m)})` : base;
 }
 
 function checkAnswer() {
@@ -315,7 +326,11 @@ function checkAnswer() {
   // the right word in green; after a mistake the typed word in red, crossed out
   $("formLine").innerHTML =
     `<span class="right">${esc(shown)}</span>` + (ok ? "" : `<span class="wrong-answer">${esc(typed)}</span>`);
-  $("formKind").textContent = item.form;
+  // the form name + what it means: „Konjunktiv II (бы)“ (the meaning not in capitals)
+  const kind = formBase(item.form),
+    kindMeaning = (window.VV_FORM_MEANINGS || {})[kind];
+  $("formKind").innerHTML =
+    esc(kind) + (kindMeaning ? ` <span class="form-meaning">(${esc(pick(kindMeaning))})</span>` : "");
   // the explanation = the table's card for this meaning (fallback: the sentence's own rule line)
   const meaning = item.tip || meaningFor(item); // the sentence's own tip first (its tense), else the table's card
   if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false, false); // no example, no small extra line: those are for the table

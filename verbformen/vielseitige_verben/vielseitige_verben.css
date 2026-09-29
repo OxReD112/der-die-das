@@ -613,6 +613,11 @@ body:has(#study:not(.hidden)) .version-mark {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
+.form-kind .form-meaning {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 13px;
+}
 .explanation {
   color: var(--muted);
   font-size: 14px;
@@ -660,14 +665,9 @@ body:has(#study:not(.hidden)) .version-mark {
 }
 .hint-rows {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 1fr;
   gap: 6px 12px;
   align-items: baseline;
-}
-.hint-rows .tag {
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 .hint-rows .w {
   font: 600 16px var(--font);

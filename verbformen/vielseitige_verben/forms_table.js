@@ -60,7 +60,11 @@ window.VV_TABLE = {
         lit: { cols: [0] },
         blocks: [["werden", "verb"], [T.inf, "part"]],
         means: { en: "will", ru: "будет (делать)" },
-        ex: "Ich *werde* dich morgen _anrufen_."
+        ex: "Ich *werde* dich morgen _anrufen_.",
+        also: [
+          { en: "Usually just Präsens: *Ich rufe dich morgen an.*", ru: "Чаще просто Präsens: *Ich rufe dich morgen an.*" },
+          { en: "werden — when you promise or are sure.", ru: "werden — когда обещаешь или уверен(а)." }
+        ]
       },
       {
         tag: { en: "a guess", ru: "предположение" },
@@ -181,7 +185,7 @@ window.VV_TABLE = {
     p2: [["gewesen", ""]],
     meanings: [
       {
-        tag: { en: "already done (state)", ru: "уже сделано (состояние)" },
+        tag: { en: "a state", ru: "состояние" },
         job: "state",
         lit: { cols: [0, 1] },
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
@@ -198,15 +202,23 @@ window.VV_TABLE = {
         lit: { cols: [0, 1] },
         blocks: [["sein", "verb"], [T.zuInf, "part"]],
         means: { en: "it can / could be done", ru: "это можно / можно было сделать" },
-        ex: "Die Aufgabe *ist* leicht _zu lösen_."
+        ex: "Die Aufgabe *ist* leicht _zu lösen_.",
+        also: {
+          en: "Sometimes = must: *Die Rechnung ist bis Freitag zu bezahlen.*",
+          ru: "Иногда = нужно: *Die Rechnung ist bis Freitag zu bezahlen.*"
+        }
       },
       {
-        tag: { en: "Perfekt (going A → B)", ru: "Perfekt (из A в B)" },
+        tag: { en: "Perfekt (movement, change)", ru: "Perfekt (движение, изменение)" },
         job: "pastHelper",
         lit: { cols: [0] },
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
         means: { en: "past, with movement or change", ru: "прошлое: движение или изменение" },
-        ex: "Wir *sind* nach Berlin _gefahren_."
+        ex: "Wir *sind* nach Berlin _gefahren_.",
+        also: {
+          en: "Also *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+          ru: "Ещё *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*"
+        }
       }
     ]
   },
@@ -312,11 +324,11 @@ window.VV_TABLE = {
         ex: "Wir *bekommen* _den Zug_ noch."
       },
       {
-        tag: { en: "someone does it for you", ru: "кто-то делает для тебя" },
+        tag: { en: "given to you", ru: "тебе подарили / прислали" },
         job: "getDone",
         lit: { cols: [1] },
         blocks: [["bekommen", "verb"], [T.thing, "plain"], ["Partizip II", "part"]],
-        means: { en: "given, done for you", ru: "тебе подарили, сделали" },
+        means: { en: "you receive it: given, sent", ru: "ты получаешь: подарили, прислали" },
         ex: "Sie *bekam* das Buch _geschenkt_."
       }
     ]
