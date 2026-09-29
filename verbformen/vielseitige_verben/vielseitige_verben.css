@@ -681,6 +681,10 @@ body:has(#study:not(.hidden)) .version-mark {
 .hint-rows .lbl {
   font-size: 13.5px;
 }
+/* under the rows: where each past form is used (speaking / writing) */
+.hint-past {
+  margin-top: 10px;
+}
 
 /* Summary: which jobs slipped this round (headline German, rows in the user's language) */
 .slipped {
@@ -1012,6 +1016,9 @@ body:has(#study:not(.hidden)) .version-mark {
   font-size: 11.5px;
   line-height: 1.45;
   color: var(--forms-dim);
+}
+.vv-also-line + .vv-also-line {
+  margin-top: 2px;
 }
 .vv-also i {
   font-style: normal;

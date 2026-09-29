@@ -67,14 +67,14 @@ window.VV_SENTENCES = [
   },
   {
     verb: "werden", form: "Präteritum", job: "passive",
-    situation: { en: "A history fact: the Berlin Wall, 1961.", ru: "Исторический факт: Берлинская стена, 1961 год." },
+    situation: { en: "Like in a history book: the Berlin Wall, 1961.", ru: "Как в учебнике истории: Берлинская стена, 1961." },
     sentence: "Die Mauer ___ 1961 gebaut.", answer: "wurde", marks: ["1961", "gebaut"],
     rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
   },
   {
     verb: "werden", form: "Präteritum", job: "passive",
-    situation: { en: "Talk about your kitchen: workers renovated it last week.", ru: "Расскажи о кухне: на прошлой неделе там сделали ремонт." },
-    sentence: "Die Küche ___ letzte Woche renoviert.", answer: "wurde", marks: ["letzte Woche", "renoviert"],
+    situation: { en: "Write a flat listing: new kitchen since last year.", ru: "Напиши объявление о квартире: кухню отремонтировали в прошлом году." },
+    sentence: "Die Küche ___ letztes Jahr renoviert.", answer: "wurde", marks: ["letztes Jahr", "renoviert"],
     rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
   },
   {
@@ -516,6 +516,37 @@ window.VV_USE_PAIRS = {
     erhalte: ERHALTEN, erhalten: ERHALTEN,
     erreichen: TRAIN, schaffen: TRAIN
   };
+  /* Past tense, the right verb in the wrong past form (wurde ↔ worden, bekam ↔ bekommen, ließ ↔ gelassen): under the
+     „yours / needed“ rows, where each past form is used — speaking: Perfekt, writing: Präteritum. Only where that is
+     true: sentences of this verb + job whose answer is a Präteritum or Partizip II (not werden = become, sein, haben:
+     their Präteritum is normal when speaking too), and only when the typed word is a Präteritum or Partizip II.
+     skip = typed words that are another mix-up, not the tense (geworden: the geworden / worden pair). */
+  window.VV_PAST_NOTES = [
+    {
+      verb: "werden", only: ["passive"], forms: ["Präteritum", "Partizip II"], skip: ["geworden"],
+      lines: [
+        { en: "Past tense, passive:", ru: "Прошлое в пассиве:" },
+        { en: "speaking: sein + Partizip II + *worden* (Perfekt)", ru: "в разговоре: sein + Partizip II + *worden* (Perfekt)" },
+        { en: "writing: *wurde* + Partizip II (Präteritum)", ru: "в тексте: *wurde* + Partizip II (Präteritum)" }
+      ]
+    },
+    {
+      verb: "bekommen", forms: ["Präteritum", "Partizip II"],
+      lines: [
+        { en: "Past tense:", ru: "Прошлое:" },
+        { en: "speaking: haben + *bekommen* (Perfekt)", ru: "в разговоре: haben + *bekommen* (Perfekt)" },
+        { en: "writing: *bekam* (Präteritum)", ru: "в тексте: *bekam* (Präteritum)" }
+      ]
+    },
+    {
+      verb: "lassen", only: ["leave"], forms: ["Präteritum", "Partizip II"],
+      lines: [
+        { en: "Past tense:", ru: "Прошлое:" },
+        { en: "speaking: haben + *gelassen* (Perfekt)", ru: "в разговоре: haben + *gelassen* (Perfekt)" },
+        { en: "writing: *ließ* (Präteritum)", ru: "в тексте: *ließ* (Präteritum)" }
+      ]
+    }
+  ];
   window.VV_HINTS = {
     "lassen>werden": {
       only: ["haveDone"],

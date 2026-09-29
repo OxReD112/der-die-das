@@ -237,9 +237,24 @@ const rich = text =>
    - another verb, known mix-up → a contrast, one line per verb (VV_HINTS)
    - another verb, no known mix-up (a fixed phrase…) → nothing, the rule line is enough
    - the right verb in the wrong form → „yours / needed“ rows with the form names
-     (geworden / worden, gelassen / lassen: the use instead of the same form name) */
+     (geworden / worden, gelassen / lassen: the use instead of the same form name)
+     + in the past: where each past form is used (VV_PAST_NOTES) */
 function hintHtml(item, typed) {
   const hit = lookupForm(typed);
+  const html = hintMain(item, typed, hit);
+  return hit && hit.verb === item.verb ? html + pastNote(item, typed, hit) : html;
+}
+
+// speaking: Perfekt · writing: Präteritum — only for this verb + job + needed form, and a typed past form
+function pastNote(item, typed, hit) {
+  const n = (window.VV_PAST_NOTES || []).find(
+    e => e.verb === item.verb && (!e.only || e.only.includes(item.job)) && e.forms.includes(item.form)
+  );
+  if (!n || (n.skip || []).includes(norm(typed)) || !/Präteritum|Partizip II/.test(hit.label)) return "";
+  return `<div class="hint-past">${n.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("")}</div>`;
+}
+
+function hintMain(item, typed, hit) {
   if (!hit) {
     const o = (window.VV_OTHER_WORDS || {})[norm(typed)]; // a known trap outside the five verbs (will …)
     if (!o || (o.only && !o.only.includes(item.job)) || (o.verb && o.verb !== item.verb)) return "";
@@ -543,7 +558,14 @@ function recipeHtml(m, withExample = true, withAlso = true) {
     <div class="vv-recipe">
       <div class="vv-blocks">${blocks}<span class="vv-means">= <b>${esc(formsText(m.means))}</b></span></div>
       ${!withExample ? "" : `<div class="vv-example" lang="de">${formsExample(m.ex)}</div>`}
-      ${withAlso && m.also ? `<div class="vv-also">${formsAlso(formsText(m.also))}</div>` : ""}
+      ${
+        withAlso && m.also
+          ? `<div class="vv-also">${[]
+              .concat(m.also)
+              .map(l => `<div class="vv-also-line">${formsAlso(formsText(l))}</div>`)
+              .join("")}</div>`
+          : ""
+      }
     </div>`;
 }
 

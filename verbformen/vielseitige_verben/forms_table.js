@@ -18,7 +18,7 @@
 //              (no „+“ around it). text is a string or { en, ru }.
 //     means    what it says
 //     ex       German example: *the verb form* (gold) · _the partner_ (dashed underline)
-//     also     optional small line; *German* in italics
+//     also     optional small line, or a list of lines (one under the other); *German* in italics
 
 (function () {
 // short names for repeated block texts (inside a function: no global names)
@@ -77,10 +77,15 @@ window.VV_TABLE = {
         blocks: [["werden", "verb"], ["Partizip II", "part"]],
         means: { en: "it is being done / was done", ru: "это делают / сделали" },
         ex: "Die Fenster *werden* gerade _geputzt_.",
-        also: {
-          en: "Perfekt: sein + Partizip II + *worden* — *Mein Fahrrad ist gestohlen worden.* Not *geworden*: that one means „became“.",
-          ru: "Perfekt: sein + Partizip II + *worden* — *Mein Fahrrad ist gestohlen worden.* Не *geworden*: это «стал»."
-        }
+        // the three tenses side by side: the two past forms mean the same — writing vs speaking
+        also: [
+          { en: "now: *Die Fenster werden geputzt.*", ru: "сейчас: *Die Fenster werden geputzt.*" },
+          { en: "past, writing: *Die Fenster wurden geputzt.*", ru: "было, в тексте: *Die Fenster wurden geputzt.*" },
+          {
+            en: "past, speaking: *Die Fenster sind geputzt worden.* (sein + Partizip II + worden)",
+            ru: "было, в разговоре: *Die Fenster sind geputzt worden.* (sein + Partizip II + worden)"
+          }
+        ]
       },
       {
         tag: { en: "would", ru: "бы" },
