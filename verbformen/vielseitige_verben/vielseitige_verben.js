@@ -521,6 +521,12 @@ function answerCells(item) {
   const a = bareForm(item.answer);
   const col = FORMS_COLUMNS.indexOf(item.form);
   if (col >= 0) {
+    // Syncretic forms (e.g. „wurde“ for ich and er/sie/es) need the
+    // sentence's explicit person to highlight the intended table cell.
+    if (item.person) {
+      const row = FORMS_PERSONS.indexOf(item.person);
+      return { cells: row >= 0 && norm(V.rows[row][col]) === a ? [[row, col]] : [] };
+    }
     const cells = [];
     V.rows.forEach((r, i) => norm(r[col]) === a && cells.push([i, col]));
     return { cells };
