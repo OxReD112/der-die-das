@@ -5,6 +5,8 @@
   const results = document.getElementById("dictionaryResults");
   const clear = document.getElementById("dictionarySearchClear");
   const intro = document.getElementById("dictionaryIntro");
+  const entryBackbar = document.getElementById("dictionaryEntryBackbar");
+  const backButton = document.getElementById("dictionaryBack");
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
 
@@ -93,6 +95,7 @@
   }
 
   function showMatches(matches) {
+    if (entryBackbar) entryBackbar.hidden = true;
     const list = node("div", "dictionary-matches");
     matches.slice(0, 12).forEach(item => {
       const button = node("button", "dictionary-match");
@@ -124,9 +127,11 @@
     // "Handy"), so showing that selected entry must not depend on an exact
     // match with the current search text.
     if (selected) {
+      if (entryBackbar) entryBackbar.hidden = false;
       results.replaceChildren(makeEntry(selected));
       return;
     }
+    if (entryBackbar) entryBackbar.hidden = true;
     selected = null;
     if (!query.trim()) {
       results.replaceChildren();
@@ -140,6 +145,7 @@
     const exact = matches.filter(item => normalized(item.word) === normalized(query));
     if (exact.length === 1) {
       selected = exact[0];
+      if (entryBackbar) entryBackbar.hidden = false;
       results.replaceChildren(makeEntry(selected));
     } else if (matches.length) {
       showMatches(matches);
@@ -151,6 +157,12 @@
   input.addEventListener("input", () => {
     selected = null;
     render();
+  });
+  backButton?.addEventListener("click", () => {
+    selected = null;
+    const matches = findMatches(input.value);
+    if (matches.length) showMatches(matches);
+    else render();
   });
   clear?.addEventListener("click", () => {
     input.value = "";
