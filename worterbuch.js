@@ -98,9 +98,23 @@
     const pluralNote = translated(item.plural_note_ru, item.plural_note_en);
     if (pluralNote) entry.append(node("p", "dictionary-entry-note", pluralNote));
     const usageNote = translated(item.usage_note_ru, item.usage_note_en);
-    if (usageNote) entry.append(node("p", "dictionary-entry-note", usageNote));
+    if (usageNote && item.type !== "adverb") entry.append(node("p", "dictionary-entry-note", usageNote));
 
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
+    if (usageNote && item.type === "adverb") entry.append(node("p", "dictionary-entry-note", usageNote));
+
+    if (item.type === "verb" && item.complements?.length) {
+      const section = node("section", "dictionary-entry-section dictionary-verb-complements");
+      section.append(node("h4", "dictionary-entry-label", "Ergänzungen"));
+      item.complements.forEach(complement => {
+        const line = node("p", "dictionary-entry-detail");
+        line.append(node("strong", "", complement.pattern || ""));
+        const note = translated(complement.note_ru, complement.note_en);
+        if (note) line.append(document.createTextNode(" — " + note));
+        section.append(line);
+      });
+      entry.append(section);
+    }
 
     const example = node("section", "dictionary-entry-section");
     example.append(node("h4", "dictionary-entry-label", "Beispiel"));
