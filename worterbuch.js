@@ -1,4 +1,4 @@
-/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json) */
+/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json, german-adjectives.json) */
 (function initHomeWorterbuch() {
   const input = document.getElementById("dictionarySearchInput");
   const form = document.getElementById("dictionarySearchForm");
@@ -44,12 +44,14 @@
     });
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json"),
-      loadJson("worterbuch/german-verbs.json")
-    ]).then(([nouns, verbs]) => {
-      if (!Array.isArray(nouns) || !Array.isArray(verbs)) throw new Error("Invalid dictionary database");
+      loadJson("worterbuch/german-verbs.json"),
+      loadJson("worterbuch/german-adjectives.json")
+    ]).then(([nouns, verbs, adjectives]) => {
+      if (!Array.isArray(nouns) || !Array.isArray(verbs) || !Array.isArray(adjectives)) throw new Error("Invalid dictionary database");
       entries = [
         ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
-        ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" }))
+        ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" })),
+        ...adjectives.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" }))
       ];
       render();
       return entries;
@@ -83,6 +85,11 @@
 
     if (item.type === "verb") {
       if (item.perfect_form) entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Perfekt: " + item.perfect_form));
+    }
+
+    if (item.type === "adjective" && (item.comparative || item.superlative)) {
+      const forms = [item.comparative, item.superlative].filter(Boolean);
+      entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Steigerung: " + forms.join(" · ")));
     }
 
     if (item.plural) entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Plural: " + item.plural));
