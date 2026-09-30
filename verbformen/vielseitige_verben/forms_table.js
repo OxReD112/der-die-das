@@ -135,12 +135,13 @@ window.VV_TABLE = {
         perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Ich habe mein Auto _reparieren_ *lassen*." }
       },
       {
-        tag: { en: "let someone", ru: "позволить" },
+        tag: { en: "allow someone", ru: "разрешить" },
         job: "allow",
-        lit: { imp: [0, 1, 2] },
-        blocks: [["lassen im Imperativ", "verb"], [T.person, "plain"], [T.inf, "part"]],
-        means: { en: "allow", ru: "разрешить" },
-        ex: "*Lass* mich das _machen_!"
+        lit: { cols: [0, 1], p2: [1] },
+        blocks: [["lassen", "verb"], [T.person, "plain"], [T.inf, "part"]],
+        means: { en: "allow someone to do something", ru: "разрешить кому-то что-то сделать" },
+        ex: "Ich *lasse* mein Kind nicht _fernsehen_.",
+        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Ich habe mein Kind nicht _fernsehen_ *lassen*." }
       },
       {
         tag: { en: "let's", ru: "давай" },
@@ -156,6 +157,14 @@ window.VV_TABLE = {
         }
       },
       {
+        tag: { en: "offer to help", ru: "предложить помощь" },
+        job: "offerHelp",
+        lit: { imp: [0] },
+        blocks: [["lassen im Imperativ", "verb"], [T.person, "plain"], [T.inf, "part"]],
+        means: { en: "offer to do something for someone", ru: "предложить что-то сделать за кого-то" },
+        ex: "Der Koffer ist zu schwer für dich. *Lass* mich ihn _tragen_!"
+      },
+      {
         tag: { en: "can be done", ru: "можно сделать" },
         job: "canBeDone",
         lit: { cols: [0] },
@@ -165,12 +174,27 @@ window.VV_TABLE = {
         perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Das Fenster hat sich leicht _öffnen_ *lassen*." }
       },
       {
-        tag: { en: "stop it", ru: "прекрати" },
+        tag: { en: "stop / can't give it up", ru: "прекратить / не мочь бросить" },
         job: "stop",
-        lit: { imp: [0] },
-        blocks: [["Lass das!", "verb"]],
-        means: { en: "stop it", ru: "прекрати" },
-        ex: "*Lass* das!"
+        lit: { cols: [0, 1], p2: [0], imp: [0] },
+        blocks: [[{ en: "activity", ru: "занятие" }, "plain"], ["nicht", "part"], ["lassen", "verb"]],
+        means: { en: "not stop doing something; can't give it up", ru: "не прекращать занятие; не мочь бросить" },
+        ex: "Viele Leute können _das Rauchen_ nicht *lassen*.",
+        perfekt: { pattern: "haben + gelassen", ex: "Er hat _das Rauchen_ nicht *gelassen*." },
+        also: {
+          label: { en: "Command", ru: "Команда" },
+          en: "*Lass das!*",
+          ru: "*Lass das!*"
+        }
+      },
+      {
+        tag: { en: "cause something", ru: "быть причиной" },
+        job: "cause",
+        lit: { cols: [0, 1], p2: [1] },
+        blocks: [["lassen", "verb"], [{ en: "person / thing", ru: "человек / предмет" }, "plain"], [T.inf, "part"]],
+        means: { en: "cause someone/something to …", ru: "привести к тому, что кто-то/что-то …" },
+        ex: "Das schlechte Wetter *ließ* sie depressiv _werden_.",
+        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Es hat sie depressiv _werden_ *lassen*." }
       }
     ]
   },
