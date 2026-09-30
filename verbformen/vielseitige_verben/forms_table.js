@@ -18,7 +18,8 @@
 //              (no „+“ around it). text is a string or { en, ru }.
 //     means    what it says
 //     ex       German example: *the verb form* (gold) · _the partner_ (dashed underline)
-//     also     optional small line, or a list of lines (one under the other); *German* in italics
+//     perfekt  optional Perfekt pattern and example, shown with this meaning
+//     also     optional extra note(s); an optional label { en, ru } names the note's purpose
 
 (function () {
 // short names for repeated block texts (inside a function: no global names)
@@ -52,7 +53,7 @@ window.VV_TABLE = {
         blocks: [["werden", "verb"], [{ en: "adjective / noun", ru: "прилагательное / существительное" }, "part"]],
         means: { en: "becomes, became", ru: "становится, стал(а)" },
         ex: "Nach dem Ausflug *wurden* die Kinder schnell _müde_.",
-        also: { en: "Perfekt: *Sie ist Lehrerin geworden.*", ru: "Perfekt: *Sie ist Lehrerin geworden.*" }
+        perfekt: { pattern: "sein + geworden", ex: "Meine Schwester ist Lehrerin *geworden*." }
       },
       {
         tag: { en: "future", ru: "будущее" },
@@ -61,10 +62,11 @@ window.VV_TABLE = {
         blocks: [["werden", "verb"], [T.inf, "part"]],
         means: { en: "will", ru: "будет (делать)" },
         ex: "Ich *werde* dich morgen _anrufen_.",
-        also: [
-          { en: "Usually just Präsens: *Ich rufe dich morgen an.*", ru: "Чаще просто Präsens: *Ich rufe dich morgen an.*" },
-          { en: "werden — when you promise or are sure.", ru: "werden — когда обещаешь или уверен(а)." }
-        ]
+        also: {
+          label: { en: "Usage", ru: "Употребление" },
+          en: "For plans, Präsens is often enough: *Ich rufe dich morgen an.* Use werden for a promise or forecast.",
+          ru: "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или предположения."
+        }
       },
       {
         tag: { en: "a guess", ru: "предположение" },
@@ -81,15 +83,7 @@ window.VV_TABLE = {
         blocks: [["werden", "verb"], ["Partizip II", "part"]],
         means: { en: "it is being done / was done", ru: "это делают / сделали" },
         ex: "Die Fenster *werden* gerade _geputzt_.",
-        // the three tenses side by side: the two past forms mean the same — writing vs speaking
-        also: [
-          { en: "now: *Die Fenster werden geputzt.*", ru: "сейчас: *Die Fenster werden geputzt.*" },
-          { en: "past, writing: *Die Fenster wurden geputzt.*", ru: "было, в тексте: *Die Fenster wurden geputzt.*" },
-          {
-            en: "past, speaking: *Die Fenster sind geputzt worden.* (sein + Partizip II + worden)",
-            ru: "было, в разговоре: *Die Fenster sind geputzt worden.* (sein + Partizip II + worden)"
-          }
-        ]
+        perfekt: { pattern: "sein + Partizip II + worden", ex: "Die Fenster sind _geputzt_ *worden*." }
       },
       {
         tag: { en: "would", ru: "бы" },
@@ -97,7 +91,12 @@ window.VV_TABLE = {
         lit: { cols: [2] },
         blocks: [["werden im Konjunktiv II", "verb"], [T.inf, "part"]],
         means: { en: "would: polite, or not real", ru: "бы: вежливо или не на самом деле" },
-        ex: "*Würdest* du mir kurz _helfen_?"
+        ex: "Wenn ich mehr Geld hätte, *würde* ich gern mehr _reisen_.",
+        also: {
+          label: { en: "Polite request", ru: "Вежливая просьба" },
+          en: "*Würdest du mir kurz helfen?*",
+          ru: "*Würdest du mir kurz helfen?*"
+        }
       }
     ]
   },
@@ -123,7 +122,8 @@ window.VV_TABLE = {
         lit: { cols: [0, 1], p2: [0] },
         blocks: [["lassen", "verb"], [T.thing, "plain"], [{ en: "place", ru: "место" }, "part"]],
         means: { en: "leave (somewhere)", ru: "оставить (где-то)" },
-        ex: "Ich *lasse* den Schlüssel _auf dem Tisch_."
+        ex: "Ich *lasse* den Schlüssel _auf dem Tisch_.",
+        perfekt: { pattern: "haben + gelassen", ex: "Ich habe den Schlüssel auf dem Tisch *gelassen*." }
       },
       {
         tag: { en: "have someone do it", ru: "поручить сделать" },
@@ -132,10 +132,7 @@ window.VV_TABLE = {
         blocks: [["lassen", "verb"], [T.thing, "plain"], [T.inf, "part"]],
         means: { en: "someone else does it for you", ru: "делает кто-то другой" },
         ex: "Ich *lasse* mein Auto _reparieren_.",
-        also: {
-          en: "Perfekt with two infinitives, no gelassen: *Ich habe mein Auto reparieren lassen.*",
-          ru: "Perfekt с двумя Infinitiv, без gelassen: *Ich habe mein Auto reparieren lassen.*"
-        }
+        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Ich habe mein Auto _reparieren_ *lassen*." }
       },
       {
         tag: { en: "let someone", ru: "позволить" },
@@ -152,7 +149,11 @@ window.VV_TABLE = {
         blocks: [["lass / lasst", "verb"], ["uns", "plain"], [T.inf, "part"]],
         means: { en: "let's", ru: "давай(те)" },
         ex: "*Lasst* uns _gehen_!",
-        also: { en: "*lass uns* to one person · *lasst uns* to several", ru: "*lass uns* — одному · *lasst uns* — нескольким" }
+        also: {
+          label: { en: "Two forms", ru: "Две формы" },
+          en: "*lass uns* to one person · *lasst uns* to several",
+          ru: "*lass uns* — одному · *lasst uns* — нескольким"
+        }
       },
       {
         tag: { en: "can be done", ru: "можно сделать" },
@@ -160,7 +161,8 @@ window.VV_TABLE = {
         lit: { cols: [0] },
         blocks: [["lassen", "verb"], ["sich", "part"], [T.inf, "part"]],
         means: { en: "it can be done", ru: "это можно сделать" },
-        ex: "Das Fenster *lässt* sich nicht _öffnen_."
+        ex: "Das Fenster *lässt* sich leicht _öffnen_.",
+        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Das Fenster hat sich leicht _öffnen_ *lassen*." }
       },
       {
         tag: { en: "stop it", ru: "прекрати" },
@@ -191,7 +193,9 @@ window.VV_TABLE = {
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
         means: { en: "a state at that moment, no action", ru: "состояние в тот момент, без действия" },
         ex: "Die Tür *ist* schon _geschlossen_.",
+        perfekt: { pattern: "sein + gewesen", ex: "Die Tür ist schon geschlossen *gewesen*." },
         also: {
+          label: { en: "Compare", ru: "Сравните" },
           en: "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
           ru: "Делают прямо сейчас → werden: *Die Tür wird gerade geschlossen.*"
         }
@@ -204,6 +208,7 @@ window.VV_TABLE = {
         means: { en: "it can / could be done", ru: "это можно / можно было сделать" },
         ex: "Die Aufgabe *ist* leicht _zu lösen_.",
         also: {
+          label: { en: "Can also mean", ru: "Также может значить" },
           en: "Sometimes = must: *Die Rechnung ist bis Freitag zu bezahlen.*",
           ru: "Иногда = нужно: *Die Rechnung ist bis Freitag zu bezahlen.*"
         }
@@ -216,6 +221,7 @@ window.VV_TABLE = {
         means: { en: "past, with movement or change", ru: "прошлое: движение или изменение" },
         ex: "Wir *sind* nach Berlin _gefahren_.",
         also: {
+          label: { en: "Other common verbs", ru: "Другие частые глаголы" },
           en: "Also *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
           ru: "Ещё *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*"
         }
@@ -248,7 +254,8 @@ window.VV_TABLE = {
         lit: { cols: [0, 1] },
         blocks: [["haben", "verb"], [T.zuInf, "part"]],
         means: { en: "have to / had to", ru: "нужно / нужно было" },
-        ex: "Ich *habe* noch viel _zu tun_."
+        ex: "Ich *habe* noch viel _zu tun_.",
+        perfekt: { pattern: "haben + zu + Infinitiv + gehabt", ex: "Ich habe noch viel zu tun *gehabt*." }
       },
       {
         tag: { en: "feel (already)", ru: "испытывать (чувство)" },
@@ -257,7 +264,12 @@ window.VV_TABLE = {
         blocks: [["haben", "verb"], ["Angst / Lust / Hunger", "part"]],
         means: { en: "a feeling you already have", ru: "чувство уже есть" },
         ex: "Ich *habe* _Angst_.",
-        also: { en: "It starts → bekommen: *Ich bekomme Angst.*", ru: "Только начинается → bekommen: *Ich bekomme Angst.*" }
+        perfekt: { pattern: "haben + gehabt", ex: "Ich habe Angst *gehabt*." },
+        also: {
+          label: { en: "Compare", ru: "Сравните" },
+          en: "When the feeling starts → bekommen: *Ich bekomme Angst.*",
+          ru: "Когда чувство только появляется → bekommen: *Ich bekomme Angst.*"
+        }
       },
       {
         tag: { en: "fixed phrases", ru: "устойчивые выражения" },
@@ -265,7 +277,7 @@ window.VV_TABLE = {
         lit: { cols: [0] },
         blocks: [["recht haben", "verb"], ["·", "or"], ["es eilig haben", "verb"]],
         means: { en: "learn them as a whole", ru: "учить целиком" },
-        ex: "Du *hast* _recht_."
+        ex: "Du *hast recht*, aber ich *habe es eilig*."
       }
     ]
   },
@@ -288,7 +300,7 @@ window.VV_TABLE = {
         blocks: [["bekommen", "verb"], [T.thing, "part"]],
         means: { en: "get (not „become“!)", ru: "получать (не «становиться»!)" },
         ex: "Ich *bekomme* _einen Kaffee_, bitte.",
-        also: { en: "Perfekt: *Ich habe einen Brief bekommen.*", ru: "Perfekt: *Ich habe einen Brief bekommen.*" }
+        perfekt: { pattern: "haben + bekommen (no ge-)", ex: "Ich habe einen Brief *bekommen*." }
       },
       {
         tag: { en: "start to feel", ru: "начать чувствовать" },
@@ -297,7 +309,11 @@ window.VV_TABLE = {
         blocks: [["bekommen", "verb"], ["Angst / Hunger", "part"]],
         means: { en: "a feeling starts", ru: "чувство появляется" },
         ex: "Im Dunkeln *bekomme* ich _Angst_.",
-        also: { en: "Already there → haben: *Ich habe Angst.*", ru: "Уже есть → haben: *Ich habe Angst.*" }
+        also: {
+          label: { en: "Compare", ru: "Сравните" },
+          en: "Already there → haben: *Ich habe Angst.*",
+          ru: "Чувство уже есть → haben: *Ich habe Angst.*"
+        }
       },
       {
         tag: { en: "get ill", ru: "заболеть" },
@@ -329,7 +345,8 @@ window.VV_TABLE = {
         lit: { cols: [1] },
         blocks: [["bekommen", "verb"], [T.thing, "plain"], ["Partizip II", "part"]],
         means: { en: "you receive it: given, sent", ru: "ты получаешь: подарили, прислали" },
-        ex: "Sie *bekam* das Buch _geschenkt_."
+        ex: "Sie *bekam* das Buch _geschenkt_.",
+        perfekt: { pattern: "haben + Partizip II + bekommen", ex: "Sie hat das Buch _geschenkt_ *bekommen*." }
       }
     ]
   }

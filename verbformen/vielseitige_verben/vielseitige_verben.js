@@ -595,8 +595,13 @@ function recipeHtml(m, withExample = true, withAlso = true) {
         withAlso && m.also
           ? `<div class="vv-also">${[]
               .concat(m.also)
-              .map(l => `<div class="vv-also-line">${formsAlso(formsText(l))}</div>`)
+              .map(l => `<div class="vv-also-line">${l.label ? `<span class="vv-also-label">${esc(formsText(l.label))}</span>` : ""}${formsAlso(formsText(l))}</div>`)
               .join("")}</div>`
+          : ""
+      }
+      ${
+        withAlso && m.perfekt
+          ? `<div class="vv-perfekt"><div class="vv-also-line"><span class="vv-also-label">Perfekt</span>${esc(m.perfekt.pattern)}</div><div class="vv-perfekt-example" lang="de">${formsExample(m.perfekt.ex)}</div></div>`
           : ""
       }
     </div>`;
