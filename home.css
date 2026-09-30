@@ -1201,6 +1201,9 @@ header h1 {
   font-size: 14px;
   line-height: 1.45;
 }
+.dictionary-verb-complement-note {
+  margin-top: 1px;
+}
 /* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
 .settings-panel,
 .settings-panel button,

@@ -109,9 +109,9 @@
       item.complements.forEach(complement => {
         const line = node("p", "dictionary-entry-detail");
         line.append(node("strong", "", complement.pattern || ""));
-        const note = translated(complement.note_ru, complement.note_en);
-        if (note) line.append(document.createTextNode(" — " + note));
         section.append(line);
+        const note = translated(complement.note_ru, complement.note_en);
+        if (note) section.append(node("p", "dictionary-entry-example-translation dictionary-verb-complement-note", note));
       });
       entry.append(section);
     }
