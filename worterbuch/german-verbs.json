@@ -827,7 +827,14 @@
     "example_ru": "Я записываюсь на курс.",
     "example_en": "I am signing up for the course.",
     "perfect_form": "haben sich angemeldet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "записываться на что-либо",
+        "note_en": "to register for something"
+      }
+    ]
   },
   {
     "id": "verb-026",
@@ -861,7 +868,14 @@
         "ihr": "Ruft an!",
         "Sie": "Rufen Sie an!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "звонить кому-либо",
+        "note_en": "to call someone"
+      }
+    ]
   },
   {
     "id": "verb-027",
@@ -910,7 +924,14 @@
     "example_ru": "Пожалуйста, ответьте на мой вопрос.",
     "example_en": "Please answer my question.",
     "perfect_form": "haben geantwortet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "отвечать кому-либо",
+        "note_en": "to answer someone"
+      }
+    ]
   },
   {
     "id": "verb-029",
@@ -1058,7 +1079,14 @@
     "example_ru": "На выходных мы навестим друзей.",
     "example_en": "We are visiting our friends at the weekend.",
     "perfect_form": "haben besucht",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "посещать кого-либо или что-либо",
+        "note_en": "to visit someone or somewhere"
+      }
+    ]
   },
   {
     "id": "verb-036",
@@ -1223,7 +1251,14 @@
     "example_ru": "Можно тебя кое о чём спросить?",
     "example_en": "Can I ask you something?",
     "perfect_form": "haben gefragt",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "спрашивать кого-либо",
+        "note_en": "to ask someone"
+      }
+    ]
   },
   {
     "id": "verb-043",
@@ -1265,7 +1300,14 @@
         "ihr": "Helft!",
         "Sie": "Helfen Sie!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "помогать кому-либо",
+        "note_en": "to help someone"
+      }
+    ]
   },
   {
     "id": "verb-044",
@@ -1592,7 +1634,19 @@
     "example_ru": "Я с нетерпением жду каникул.",
     "example_en": "I am looking forward to the holidays.",
     "perfect_form": "haben sich gefreut",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "радоваться предстоящему; с нетерпением ждать",
+        "note_en": "to look forward to something"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "радоваться чему-либо уже случившемуся",
+        "note_en": "to be happy about something"
+      }
+    ]
   },
   {
     "id": "verb-061",
@@ -1604,7 +1658,14 @@
     "example_ru": "Она интересуется искусством.",
     "example_en": "She is interested in art.",
     "perfect_form": "haben sich interessiert",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "интересоваться чем-либо",
+        "note_en": "to be interested in something"
+      }
+    ]
   },
   {
     "id": "verb-062",
@@ -1744,7 +1805,14 @@
         "ihr": "dächtet",
         "sie": "dächten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "думать о ком-либо или чём-либо",
+        "note_en": "to think of/about someone or something"
+      }
+    ]
   },
   {
     "id": "verb-068",
@@ -1773,7 +1841,19 @@
         "ihr": "entschiedet euch",
         "sie": "entschieden sich"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "решить в пользу чего-либо",
+        "note_en": "to decide in favor of something"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "решить отказаться от чего-либо",
+        "note_en": "to decide against something"
+      }
+    ]
   },
   {
     "id": "verb-069",
@@ -1809,7 +1889,14 @@
     "example_ru": "Сегодня мне не хватает времени.",
     "example_en": "I do not have enough time today.",
     "perfect_form": "haben gefehlt",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "не хватать кому-либо; быть у кого-либо в недостатке",
+        "note_en": "to be missing or lacking for someone"
+      }
+    ]
   },
   {
     "id": "verb-072",
@@ -1833,7 +1920,14 @@
     "example_ru": "Кому принадлежит эта сумка?",
     "example_en": "Who does this bag belong to?",
     "perfect_form": "haben gehört",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "принадлежать кому-либо",
+        "note_en": "to belong to someone"
+      }
+    ]
   },
   {
     "id": "verb-074",
@@ -1886,7 +1980,14 @@
     "example_ru": "Мы надеемся на хорошую погоду.",
     "example_en": "We are hoping for good weather.",
     "perfect_form": "haben gehofft",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "надеяться на кого-либо или что-либо",
+        "note_en": "to hope for someone or something"
+      }
+    ]
   },
   {
     "id": "verb-077",
@@ -1952,7 +2053,14 @@
         "ihr": "Nehmt teil!",
         "Sie": "Nehmen Sie teil!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "участвовать в чём-либо",
+        "note_en": "to take part in something"
+      }
+    ]
   },
   {
     "id": "verb-080",
@@ -2064,7 +2172,14 @@
     "example_ru": "Я готовлюсь к экзамену.",
     "example_en": "I am preparing for the exam.",
     "perfect_form": "haben sich vorbereitet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "готовиться к чему-либо",
+        "note_en": "to prepare for something"
+      }
+    ]
   },
   {
     "id": "verb-084",
@@ -2207,7 +2322,14 @@
     "example_ru": "Ты помнишь наш первый курс?",
     "example_en": "Do you remember our first class?",
     "perfect_form": "haben sich erinnert",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "вспоминать кого-либо или что-либо",
+        "note_en": "to remember someone or something"
+      }
+    ]
   },
   {
     "id": "verb-092",
@@ -2285,7 +2407,14 @@
     "example_ru": "Мы рассчитываем получить ответ завтра.",
     "example_en": "We expect an answer tomorrow.",
     "perfect_form": "haben gerechnet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "рассчитывать на что-либо; ожидать",
+        "note_en": "to count on or expect something"
+      }
+    ]
   },
   {
     "id": "verb-096",
@@ -2297,7 +2426,19 @@
     "example_ru": "Позже мы поговорим о плане.",
     "example_en": "We will talk about the plan later.",
     "perfect_form": "haben geredet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "разговаривать с кем-либо",
+        "note_en": "to talk with someone"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "говорить о чём-либо",
+        "note_en": "to talk about something"
+      }
+    ]
   },
   {
     "id": "verb-097",
@@ -2388,7 +2529,14 @@
         "ihr": "Bewerbt euch!",
         "Sie": "Bewerben Sie sich!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "подавать заявление на что-либо",
+        "note_en": "to apply for something"
+      }
+    ]
   },
   {
     "id": "verb-100",
