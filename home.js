@@ -1338,9 +1338,13 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
 (function initDeutschSettings() {
   const open = document.getElementById("settingsOpen");
   const panel = document.getElementById("settingsPanel");
-  const title = document.getElementById("settingsPanel")?.querySelector(".settings-title");
-  const ghost = document.getElementById("settingsMorph");
   const close = document.getElementById("settingsClose");
+  const dictionaryOpen = document.getElementById("dictionaryOpen");
+  const dictionaryPanel = document.getElementById("dictionaryPanel");
+  const dictionaryTitle = dictionaryPanel?.querySelector(".settings-title");
+  const dictionaryGhost = document.getElementById("dictionaryMorph");
+  const dictionaryClose = document.getElementById("dictionaryClose");
+  const dictionarySearchInput = document.getElementById("dictionarySearchInput");
   const theme = document.getElementById("themeToggle");
   const limit = document.getElementById("dailyLimitToggle");
   const langToggle = document.getElementById("translationLangToggle");
@@ -1367,88 +1371,87 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     if (nameInput && document.activeElement !== nameInput) nameInput.value = getUserName();
   }
 
-  /* Word-morph animation: the "Settings" launcher word flies up, scales and
-     brightens into the panel's header title (and reverses on close), instead
-     of just appearing/disappearing as the panel slides. Font-size is never
+  /* Word-morph animation: the Wörterbuch launcher flies up, scales and
+     brightens into its panel title (and reverses on close). Settings opens
+     from its corner icon with the panel's ordinary slide. Font-size is never
      animated directly (expensive, can look jerky) — the ghost is rendered at
      the destination's true size and transformed to visually sit at the
      origin, then that transform animates back to identity. */
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const canMorph = !reduceMotion && open && panel && title && ghost;
+  const canMorphDictionary = !reduceMotion && dictionaryOpen && dictionaryPanel && dictionaryTitle && dictionaryGhost;
 
-  function rectAsIfOpen() {
+  function rectAsIfOpen(targetPanel, targetTitle) {
     // While the panel is closed it sits translateY(100%) — i.e. shifted
     // down by exactly its own rendered height — so the title's on-screen
     // position once open is simply its current rect shifted up by that.
-    const r = title.getBoundingClientRect();
-    const h = panel.offsetHeight;
+    const r = targetTitle.getBoundingClientRect();
+    const h = targetPanel.offsetHeight;
     return { left: r.left, top: r.top - h, width: r.width, height: r.height };
   }
 
-  function flyGhost(from, to, fromColor, toColor, onDone) {
-    ghost.style.transition = "none";
-    ghost.style.left = to.left + "px";
-    ghost.style.top = to.top + "px";
-    ghost.style.width = to.width + "px";
-    ghost.style.height = to.height + "px";
-    ghost.style.alignItems = "center";
-    ghost.style.justifyContent = "center";
-    ghost.style.fontSize = getComputedStyle(title).fontSize;
-    ghost.style.fontWeight = getComputedStyle(title).fontWeight;
-    ghost.style.letterSpacing = getComputedStyle(title).letterSpacing;
-    ghost.style.color = fromColor;
-    ghost.style.opacity = "1";
+  function flyGhost(targetGhost, targetTitle, from, to, fromColor, toColor, onDone) {
+    targetGhost.style.transition = "none";
+    targetGhost.style.left = to.left + "px";
+    targetGhost.style.top = to.top + "px";
+    targetGhost.style.width = to.width + "px";
+    targetGhost.style.height = to.height + "px";
+    targetGhost.style.alignItems = "center";
+    targetGhost.style.justifyContent = "center";
+    targetGhost.style.fontSize = getComputedStyle(targetTitle).fontSize;
+    targetGhost.style.fontWeight = getComputedStyle(targetTitle).fontWeight;
+    targetGhost.style.letterSpacing = getComputedStyle(targetTitle).letterSpacing;
+    targetGhost.style.color = fromColor;
+    targetGhost.style.opacity = "1";
 
     const scaleX = from.width / to.width;
     const scaleY = from.height / to.height;
     const dx = from.left + from.width / 2 - (to.left + to.width / 2);
     const dy = from.top + from.height / 2 - (to.top + to.height / 2);
-    ghost.style.transform = `translate(${dx}px,${dy}px) scale(${scaleX},${scaleY})`;
+    targetGhost.style.transform = `translate(${dx}px,${dy}px) scale(${scaleX},${scaleY})`;
 
-    void ghost.offsetWidth; // flush so the start state above actually renders
+    void targetGhost.offsetWidth; // flush so the start state above actually renders
 
-    ghost.style.transition = "transform .42s cubic-bezier(.22,.61,.36,1), color .3s ease";
-    ghost.style.transform = "translate(0,0) scale(1,1)";
-    ghost.style.color = toColor;
+    targetGhost.style.transition = "transform .42s cubic-bezier(.22,.61,.36,1), color .3s ease";
+    targetGhost.style.transform = "translate(0,0) scale(1,1)";
+    targetGhost.style.color = toColor;
 
     let done = false;
     const finish = () => {
       if (done) return;
       done = true;
-      ghost.style.opacity = "0";
+      targetGhost.style.opacity = "0";
       onDone();
     };
-    ghost.addEventListener("transitionend", finish, { once: true });
+    targetGhost.addEventListener("transitionend", finish, { once: true });
     setTimeout(finish, 460); // safety net if transitionend never fires
   }
 
-  function playOpenMorph() {
+  function playOpenMorph(trigger, targetPanel, targetTitle, targetGhost) {
     // Measured while still closed, so the subtraction trick above holds.
-    const from = open.getBoundingClientRect();
-    const to = rectAsIfOpen();
-    const fromColor = getComputedStyle(open).color;
-    const toColor = getComputedStyle(title).color;
-    title.style.visibility = "hidden";
-    flyGhost(from, to, fromColor, toColor, () => {
-      title.style.visibility = "";
+    const from = trigger.getBoundingClientRect();
+    const to = rectAsIfOpen(targetPanel, targetTitle);
+    const fromColor = getComputedStyle(trigger).color;
+    const toColor = getComputedStyle(targetTitle).color;
+    targetTitle.style.visibility = "hidden";
+    flyGhost(targetGhost, targetTitle, from, to, fromColor, toColor, () => {
+      targetTitle.style.visibility = "";
     });
   }
 
-  function playCloseMorph() {
+  function playCloseMorph(trigger, targetTitle, targetGhost) {
     // Measured while still open, so no adjustment is needed here.
-    const from = title.getBoundingClientRect();
-    const to = open.getBoundingClientRect();
-    const fromColor = getComputedStyle(title).color;
-    const toColor = getComputedStyle(open).color;
-    open.style.visibility = "hidden";
-    flyGhost(from, to, fromColor, toColor, () => {
-      open.style.visibility = "";
+    const from = targetTitle.getBoundingClientRect();
+    const to = trigger.getBoundingClientRect();
+    const fromColor = getComputedStyle(targetTitle).color;
+    const toColor = getComputedStyle(trigger).color;
+    trigger.style.visibility = "hidden";
+    flyGhost(targetGhost, targetTitle, from, to, fromColor, toColor, () => {
+      trigger.style.visibility = "";
     });
   }
 
   function openSettings() {
     render();
-    if (canMorph) playOpenMorph();
     document.documentElement.classList.add("home-settings-open");
     panel.classList.add("is-open");
     panel.setAttribute("aria-hidden", "false");
@@ -1458,7 +1461,6 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     nameInput?.blur();
     confirm.classList.remove("is-open");
     confirm.setAttribute("aria-hidden", "true");
-    if (canMorph) playCloseMorph();
     panel.classList.remove("is-open");
     panel.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("home-settings-open");
@@ -1469,6 +1471,30 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     panel.classList.contains("is-open") ? closeSettings() : openSettings();
   });
   close?.addEventListener("click", closeSettings);
+
+  function openDictionary() {
+    if (canMorphDictionary) playOpenMorph(dictionaryOpen, dictionaryPanel, dictionaryTitle, dictionaryGhost);
+    document.documentElement.classList.add("home-dictionary-open");
+    dictionaryPanel.classList.add("is-open");
+    dictionaryPanel.setAttribute("aria-hidden", "false");
+    dictionaryOpen?.setAttribute("aria-expanded", "true");
+    dictionarySearchInput?.focus({ preventScroll: true });
+    // The browser may focus the clicked launcher after its click handlers run.
+    // Reapply focus on the next frame so keyboard input goes to the search box.
+    requestAnimationFrame(() => dictionarySearchInput?.focus({ preventScroll: true }));
+  }
+  function closeDictionary() {
+    dictionarySearchInput?.blur();
+    if (canMorphDictionary) playCloseMorph(dictionaryOpen, dictionaryTitle, dictionaryGhost);
+    dictionaryPanel.classList.remove("is-open");
+    dictionaryPanel.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("home-dictionary-open");
+    dictionaryOpen?.setAttribute("aria-expanded", "false");
+  }
+  dictionaryOpen?.addEventListener("click", () => {
+    dictionaryPanel.classList.contains("is-open") ? closeDictionary() : openDictionary();
+  });
+  dictionaryClose?.addEventListener("click", closeDictionary);
 
   nameInput?.addEventListener("input", () => {
     setUserName(nameInput.value);

@@ -146,7 +146,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 34;
   margin: 0;
   padding: calc(env(safe-area-inset-top) + 22px) 0 0;
   background: var(--bg);
@@ -250,6 +250,11 @@ header h1 {
 }
 
 .home-settings-open .home-screen {
+  transform: translateY(-12vh);
+  opacity: 0;
+  pointer-events: none;
+}
+.home-dictionary-open .home-screen {
   transform: translateY(-12vh);
   opacity: 0;
   pointer-events: none;
@@ -887,7 +892,7 @@ header h1 {
 .settings-layer {
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: 32;
   pointer-events: none;
 }
 .settings-panel {
@@ -911,6 +916,195 @@ header h1 {
   transform: translateY(0);
   pointer-events: auto;
 }
+.dictionary-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 33;
+  pointer-events: none;
+}
+.home-dictionary-open .dictionary-panel {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.dictionary-content {
+  margin-top: 22px;
+  color: var(--text);
+  text-align: left;
+}
+.dictionary-search {
+  margin: 0;
+}
+.dictionary-input-wrap {
+  position: relative;
+}
+.dictionary-search input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 48px;
+  padding: 0 48px 0 15px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  outline: none;
+  background: var(--card-bg-soft);
+  color: var(--text);
+  font: 500 16px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  text-align: left;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.dictionary-search input::-webkit-search-cancel-button,
+.dictionary-search input::-webkit-search-decoration {
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.dictionary-search-clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font: 400 23px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.dictionary-search-clear[hidden] {
+  display: none;
+}
+.dictionary-search-clear:active {
+  color: var(--text);
+}
+.dictionary-search input:focus {
+  border-color: color-mix(in srgb, var(--mint) 65%, var(--hairline));
+}
+.dictionary-search input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.dictionary-results {
+  margin-top: 12px;
+}
+.dictionary-intro {
+  margin: 14px 2px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+}
+.dictionary-intro[hidden] {
+  display: none;
+}
+.dictionary-hint {
+  margin: 14px 2px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+}
+.dictionary-matches {
+  display: grid;
+  gap: 0;
+}
+.dictionary-match {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 12px 3px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.12s ease;
+}
+.dictionary-match + .dictionary-match {
+  border-top: 1px solid var(--hairline);
+}
+.dictionary-match:active {
+  color: var(--mint);
+}
+.dictionary-match-word {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 650;
+}
+.dictionary-match-translation,
+.dictionary-match-plural {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.dictionary-entry {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline);
+  text-align: left;
+}
+.dictionary-entry-headword {
+  margin: 0;
+  color: var(--text);
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+}
+.dictionary-entry-plural {
+  margin: 8px 0 0;
+  color: var(--secondary-text);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.dictionary-entry-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.dictionary-entry-section {
+  margin-top: 18px;
+}
+.dictionary-entry-label {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.dictionary-entry-translation {
+  margin: 0;
+  color: var(--secondary-text);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.dictionary-entry-example {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.dictionary-entry-example-translation {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
 /* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
 .settings-panel,
 .settings-panel button,
@@ -920,12 +1114,19 @@ header h1 {
 /* Part of the page since 5.92 (was pinned to the screen and covered the Keep your progress card / tiles on small
    phones): at the bottom of .page — same place as before when everything fits (page ends 32px + safe area above the
    screen's bottom, the link 28px + safe area), below the last card when the content is taller (then the page scrolls). */
-.settings-launcher {
+.home-actions {
   position: absolute;
-  right: 50%;
-  transform: translateX(50%);
+  left: 0;
+  right: 0;
   bottom: -4px;
-  z-index: 2;
+  z-index: 31; /* stays usable above the daily pause screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+}
+.settings-launcher {
+  position: relative;
   appearance: none;
   -webkit-appearance: none;
   border: 0;
@@ -948,10 +1149,40 @@ header h1 {
     filter 0.12s ease;
 }
 .settings-launcher:active {
-  transform: translateX(50%) scale(0.97);
+  transform: scale(0.97);
   filter: brightness(0.94);
 }
-.home-settings-open .settings-launcher {
+.settings-icon-button {
+  position: absolute;
+  right: max(0px, calc((100% - var(--dashboard-width)) / 2));
+  top: 50%;
+  transform: translateY(-50%);
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.2s ease, filter 0.12s ease, background-color 0.12s ease;
+}
+.settings-icon-button svg {
+  width: 18px;
+  height: 18px;
+}
+.settings-icon-button:active {
+  filter: brightness(0.82);
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+}
+.home-settings-open .home-actions,
+.home-dictionary-open .home-actions {
   opacity: 0;
   pointer-events: none;
 }
@@ -1834,6 +2065,10 @@ header h1 {
 }
 
 @media (max-width: 430px) {
+  .settings-icon-button {
+    right: max(0px, calc((100% - var(--mobile-dashboard-width)) / 2));
+  }
+
   .dashboard.mosaic {
     --tile-gap: 8px;
     --tile-row: 121px;
@@ -1934,6 +2169,7 @@ header h1 {
   .home-back,
   .settings-panel,
   .settings-launcher,
+  .settings-icon-button,
   .settings-action,
   .settings-info,
   .settings-close,

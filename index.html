@@ -51,7 +51,7 @@
   <title>
    Deutsch
   </title>
-  <link href="home.css?v=9" rel="stylesheet"/>
+  <link href="home.css?v=18" rel="stylesheet"/>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
   <link href="manifest.webmanifest" rel="manifest"/>
@@ -210,7 +210,10 @@
      </section>
     </div>
    </div>
-   <button class="settings-launcher" id="settingsOpen" type="button" aria-expanded="false">Settings</button>
+   <div class="home-actions">
+    <button class="settings-launcher" id="dictionaryOpen" type="button" aria-expanded="false">Wörterbuch</button>
+    <button class="settings-icon-button" id="settingsOpen" type="button" aria-label="Settings" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10.5" r="3"/><path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg></button>
+   </div>
    </main>
   <div class="settings-layer" id="settingsLayer">
    <section aria-hidden="true" class="settings-panel" id="settingsPanel">
@@ -233,10 +236,27 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.115</div>
+    <div class="settings-version">Deutsch. version 5.117</div>
    </div>
    </section>
-   <span class="settings-morph" id="settingsMorph" aria-hidden="true">Settings</span>
+  </div>
+  <div class="dictionary-layer" id="dictionaryLayer">
+   <section aria-hidden="true" class="settings-panel dictionary-panel" id="dictionaryPanel">
+    <div class="settings-content">
+     <div class="settings-title-row"><h2 class="settings-title">Wörterbuch</h2><button class="settings-close" id="dictionaryClose" type="button" aria-label="Close Wörterbuch">×</button></div>
+     <div class="dictionary-content">
+      <form class="dictionary-search" id="dictionarySearchForm" role="search">
+       <div class="dictionary-input-wrap">
+        <input id="dictionarySearchInput" type="search" placeholder="Wort suchen …" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Deutsches Wort suchen" aria-controls="dictionaryResults" aria-autocomplete="list" />
+        <button class="dictionary-search-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden>×</button>
+       </div>
+      </form>
+      <p class="dictionary-intro" id="dictionaryIntro"></p>
+      <div class="dictionary-results" id="dictionaryResults" aria-live="polite"></div>
+     </div>
+    </div>
+   </section>
+   <span class="settings-morph" id="dictionaryMorph" aria-hidden="true">Wörterbuch</span>
   </div>
   <div aria-hidden="true" class="about-window" id="keepWindow">
    <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="keepTitle">
@@ -285,7 +305,8 @@
   </script>
   <script src="greetings.js?v=2">
   </script>
-  <script src="home.js?v=14"></script>
+  <script src="home.js?v=16"></script>
  <script src="progress-screen.js?v=19"></script>
+ <script src="worterbuch.js?v=7"></script>
 </body>
 </html>
