@@ -314,10 +314,9 @@ function withMeaning(base) {
 }
 
 function checkAnswer() {
-  if (checked) {
-    next();
-    return;
-  }
+  // Checking is idempotent: duplicate/delayed Check activations must not
+  // advance past the feedback card. Continue (or Enter on feedback) owns that.
+  if (checked) return;
   const item = deck[index];
   const typed = $("answer").value.trim();
   if (!typed) return;
