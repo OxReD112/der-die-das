@@ -6,6 +6,7 @@
   const clear = document.getElementById("dictionarySearchClear");
   const intro = document.getElementById("dictionaryIntro");
   const entryBackbar = document.getElementById("dictionaryEntryBackbar");
+  const entryType = document.getElementById("dictionaryEntryType");
   const backButton = document.getElementById("dictionaryBack");
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
@@ -208,10 +209,12 @@
     }
     if (selected) {
       if (entryBackbar) entryBackbar.hidden = false;
+      if (entryType) entryType.textContent = ({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb" })[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
       return;
     }
     if (entryBackbar) entryBackbar.hidden = true;
+    if (entryType) entryType.textContent = "";
     selected = null;
     if (!query.trim()) {
       results.replaceChildren();
@@ -226,6 +229,7 @@
     if (exact.length === 1) {
       selected = exact[0];
       if (entryBackbar) entryBackbar.hidden = false;
+      if (entryType) entryType.textContent = ({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb" })[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
     } else if (matches.length) {
       showMatches(matches);
