@@ -1,4 +1,4 @@
-/* Home · Wörterbuch noun lookup (data: ./worterbuch/german-nouns.json) */
+/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json) */
 (function initHomeWorterbuch() {
   const input = document.getElementById("dictionarySearchInput");
   const form = document.getElementById("dictionarySearchForm");
@@ -10,7 +10,7 @@
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
 
-  let nouns = null;
+  let entries = null;
   let loadPromise = null;
   let selected = null;
 
@@ -35,20 +35,25 @@
   }
 
   function loadDatabase() {
-    if (nouns) return Promise.resolve(nouns);
+    if (entries) return Promise.resolve(entries);
     if (loadPromise) return loadPromise;
     results.replaceChildren(node("p", "dictionary-hint", "Wörter werden geladen …"));
-    loadPromise = fetch("worterbuch/german-nouns.json")
-      .then(response => {
-        if (!response.ok) throw new Error("HTTP " + response.status);
-        return response.json();
-      })
-      .then(data => {
-        if (!Array.isArray(data)) throw new Error("Invalid noun database");
-        nouns = data.filter(item => item && typeof item.word === "string");
-        render();
-        return nouns;
-      })
+    const loadJson = path => fetch(path).then(response => {
+      if (!response.ok) throw new Error(path + " HTTP " + response.status);
+      return response.json();
+    });
+    loadPromise = Promise.all([
+      loadJson("worterbuch/german-nouns.json"),
+      loadJson("worterbuch/german-verbs.json")
+    ]).then(([nouns, verbs]) => {
+      if (!Array.isArray(nouns) || !Array.isArray(verbs)) throw new Error("Invalid dictionary database");
+      entries = [
+        ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
+        ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" }))
+      ];
+      render();
+      return entries;
+    })
       .catch(error => {
         console.error("Deutsch Wörterbuch:", error);
         loadPromise = null;
@@ -60,15 +65,15 @@
 
   function findMatches(query) {
     const needle = normalized(query);
-    if (!needle || !nouns) return [];
-    const matches = nouns
+    if (!needle || !entries) return [];
+    const matches = entries
       .map(item => {
         const word = normalized(item.word);
         const rank = word === needle ? 0 : word.startsWith(needle) ? 1 : word.includes(needle) ? 2 : -1;
         return { item, rank };
       })
       .filter(match => match.rank >= 0)
-      .sort((a, b) => a.rank - b.rank || a.item.word.localeCompare(b.item.word, "de"));
+      .sort((a, b) => a.rank - b.rank || a.item.word.localeCompare(b.item.word, "de") || (a.item.type === "noun" ? -1 : 1));
     return matches.map(match => match.item);
   }
 
@@ -76,21 +81,74 @@
     const entry = node("article", "dictionary-entry");
     entry.append(node("h3", "dictionary-entry-headword", (item.article ? item.article + " " : "") + item.word));
 
-    if (item.plural) entry.append(node("p", "dictionary-entry-plural", "Plural: " + item.plural));
+    if (item.type === "verb") {
+      if (item.perfect_form) entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Perfekt: " + item.perfect_form));
+    }
+
+    if (item.plural) entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Plural: " + item.plural));
     const pluralNote = translated(item.plural_note_ru, item.plural_note_en);
     if (pluralNote) entry.append(node("p", "dictionary-entry-note", pluralNote));
 
-    const meaning = node("section", "dictionary-entry-section");
-    meaning.append(node("h4", "dictionary-entry-label", "Übersetzung"));
-    meaning.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
-    entry.append(meaning);
+    entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
 
     const example = node("section", "dictionary-entry-section");
     example.append(node("h4", "dictionary-entry-label", "Beispiel"));
     example.append(node("p", "dictionary-entry-example", item.example_de || ""));
     const exampleTranslation = translated(item.example_ru, item.example_en);
     if (exampleTranslation) example.append(node("p", "dictionary-entry-example-translation", exampleTranslation));
-    entry.append(example);
+    if (item.type === "verb") entry.append(example);
+
+    if (item.type === "verb" && item.forms) {
+      const forms = item.forms;
+      const konjunktivII = forms["Konjunktiv II"];
+      const hasSpecialKonjunktivII = konjunktivII && Object.values(konjunktivII).some(value => String(value || "").trim());
+      const columns = [
+        ...(forms["Präsens"] ? [["Präsens", forms["Präsens"]]] : []),
+        ...(forms["Präteritum"] ? [["Präteritum", forms["Präteritum"]]] : []),
+        ...(hasSpecialKonjunktivII ? [["Konjunktiv II", konjunktivII]] : [])
+      ];
+      if (columns.length) {
+        const tableSection = node("section", "dictionary-entry-section dictionary-verb-forms");
+        tableSection.append(node("h4", "dictionary-entry-label", "Formen"));
+        const table = node("table", "dictionary-forms-table");
+        const thead = node("thead");
+        const header = node("tr");
+        header.append(node("th", "dictionary-forms-person", ""));
+        columns.forEach(([label]) => header.append(node("th", "", label)));
+        thead.append(header);
+        const tbody = node("tbody");
+        const persons = ["ich", "du", "er/sie/es", "wir", "ihr", "sie"];
+        persons.forEach(key => {
+          const row = node("tr");
+          row.append(node("th", "dictionary-forms-person", key === "sie" ? "sie/Sie" : key));
+          columns.forEach(([, personForms]) => row.append(node("td", "", personForms?.[key] || "")));
+          tbody.append(row);
+        });
+        table.append(thead, tbody);
+        tableSection.append(table);
+        entry.append(tableSection);
+      }
+    }
+
+    const imperative = item.forms?.Imperativ;
+    if (imperative && Object.values(imperative).some(value => String(value || "").trim())) {
+      const imperativeSection = node("section", "dictionary-entry-section dictionary-verb-imperative");
+      imperativeSection.append(node("h4", "dictionary-entry-label", "Imperativ"));
+      const formsLine = node("p", "dictionary-entry-plural");
+      [["du", "du"], ["ihr", "ihr"], ["Sie", "Sie"]].forEach(([key, label]) => {
+        const form = String(imperative[key] || "").trim();
+        if (!form) return;
+        if (formsLine.childNodes.length) formsLine.append(node("span", "dictionary-entry-imperative-separator", " · "));
+        formsLine.append(node("span", "dictionary-entry-imperative-person", label + ": "));
+        formsLine.append(node("span", "dictionary-entry-imperative-form", form));
+      });
+      imperativeSection.append(formsLine);
+      const imperativeNote = translated(item.imperative_note_ru, item.imperative_note_en);
+      if (imperativeNote) imperativeSection.append(node("p", "dictionary-entry-note", imperativeNote));
+      entry.append(imperativeSection);
+    }
+
+    if (item.type !== "verb") entry.append(example);
     return entry;
   }
 
@@ -123,9 +181,6 @@
         ? "Немецкие слова: краткая грамматическая справка"
         : "Search German words for a brief grammar note";
     }
-    // A result can be selected from a partial query (for example "Hand" →
-    // "Handy"), so showing that selected entry must not depend on an exact
-    // match with the current search text.
     if (selected) {
       if (entryBackbar) entryBackbar.hidden = false;
       results.replaceChildren(makeEntry(selected));
@@ -137,7 +192,7 @@
       results.replaceChildren();
       return;
     }
-    if (!nouns) {
+    if (!entries) {
       loadDatabase();
       return;
     }
