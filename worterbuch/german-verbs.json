@@ -1,0 +1,1585 @@
+[
+  {
+    "id": "verb-001",
+    "infinitive": "sein",
+    "translation_ru": "быть",
+    "translation_en": "to be",
+    "auxiliary": "sein",
+    "example_de": "Wir sind heute zu Hause.",
+    "example_ru": "Сегодня мы дома.",
+    "example_en": "We are at home today.",
+    "perfect_form": "sein gewesen",
+    "forms": {
+      "Präsens": {
+        "ich": "bin",
+        "du": "bist",
+        "er/sie/es": "ist",
+        "wir": "sind",
+        "ihr": "seid",
+        "sie": "sind"
+      },
+      "Präteritum": {
+        "ich": "war",
+        "du": "warst",
+        "er/sie/es": "war",
+        "wir": "waren",
+        "ihr": "wart",
+        "sie": "waren"
+      }
+    }
+  },
+  {
+    "id": "verb-002",
+    "infinitive": "haben",
+    "translation_ru": "иметь; у кого-либо есть",
+    "translation_en": "to have",
+    "auxiliary": "haben",
+    "example_de": "Ich habe heute viel Zeit.",
+    "example_ru": "Сегодня у меня много времени.",
+    "example_en": "I have a lot of time today.",
+    "perfect_form": "haben gehabt",
+    "forms": {
+      "Präsens": {
+        "ich": "habe",
+        "du": "hast",
+        "er/sie/es": "hat",
+        "wir": "haben",
+        "ihr": "habt",
+        "sie": "haben"
+      },
+      "Präteritum": {
+        "ich": "hatte",
+        "du": "hattest",
+        "er/sie/es": "hatte",
+        "wir": "hatten",
+        "ihr": "hattet",
+        "sie": "hatten"
+      }
+    }
+  },
+  {
+    "id": "verb-003",
+    "infinitive": "werden",
+    "translation_ru": "становиться",
+    "translation_en": "to become",
+    "auxiliary": "sein",
+    "example_de": "Sie wird Ärztin.",
+    "example_ru": "Она становится врачом.",
+    "example_en": "She is becoming a doctor.",
+    "perfect_form": "sein geworden",
+    "forms": {
+      "Präsens": {
+        "ich": "werde",
+        "du": "wirst",
+        "er/sie/es": "wird",
+        "wir": "werden",
+        "ihr": "werdet",
+        "sie": "werden"
+      },
+      "Präteritum": {
+        "ich": "wurde",
+        "du": "wurdest",
+        "er/sie/es": "wurde",
+        "wir": "wurden",
+        "ihr": "wurdet",
+        "sie": "wurden"
+      }
+    }
+  },
+  {
+    "id": "verb-004",
+    "infinitive": "gehen",
+    "translation_ru": "идти; ходить",
+    "translation_en": "to go; to walk",
+    "auxiliary": "sein",
+    "example_de": "Die Kinder gehen zu Fuß zur Schule.",
+    "example_ru": "Дети идут в школу пешком.",
+    "example_en": "The children walk to school.",
+    "perfect_form": "sein gegangen",
+    "forms": {
+      "Präsens": {
+        "ich": "gehe",
+        "du": "gehst",
+        "er/sie/es": "geht",
+        "wir": "gehen",
+        "ihr": "geht",
+        "sie": "gehen"
+      },
+      "Präteritum": {
+        "ich": "ging",
+        "du": "gingst",
+        "er/sie/es": "ging",
+        "wir": "gingen",
+        "ihr": "gingt",
+        "sie": "gingen"
+      }
+    }
+  },
+  {
+    "id": "verb-005",
+    "infinitive": "kommen",
+    "translation_ru": "приходить; приезжать",
+    "translation_en": "to come; to arrive",
+    "auxiliary": "sein",
+    "example_de": "Der Zug kommt pünktlich.",
+    "example_ru": "Поезд приходит вовремя.",
+    "example_en": "The train arrives on time.",
+    "perfect_form": "sein gekommen",
+    "forms": {
+      "Präsens": {
+        "ich": "komme",
+        "du": "kommst",
+        "er/sie/es": "kommt",
+        "wir": "kommen",
+        "ihr": "kommt",
+        "sie": "kommen"
+      },
+      "Präteritum": {
+        "ich": "kam",
+        "du": "kamst",
+        "er/sie/es": "kam",
+        "wir": "kamen",
+        "ihr": "kamt",
+        "sie": "kamen"
+      }
+    }
+  },
+  {
+    "id": "verb-006",
+    "infinitive": "machen",
+    "translation_ru": "делать",
+    "translation_en": "to do; to make",
+    "auxiliary": "haben",
+    "example_de": "Ich mache nach der Arbeit einen Spaziergang.",
+    "example_ru": "После работы я гуляю.",
+    "example_en": "I go for a walk after work.",
+    "perfect_form": "haben gemacht"
+  },
+  {
+    "id": "verb-007",
+    "infinitive": "lernen",
+    "translation_ru": "учить; учиться",
+    "translation_en": "to learn; to study",
+    "auxiliary": "haben",
+    "example_de": "Sie lernt jeden Tag Deutsch.",
+    "example_ru": "Она каждый день учит немецкий.",
+    "example_en": "She studies German every day.",
+    "perfect_form": "haben gelernt"
+  },
+  {
+    "id": "verb-008",
+    "infinitive": "arbeiten",
+    "translation_ru": "работать",
+    "translation_en": "to work",
+    "auxiliary": "haben",
+    "example_de": "Er arbeitet heute von zu Hause.",
+    "example_ru": "Сегодня он работает из дома.",
+    "example_en": "He is working from home today.",
+    "perfect_form": "haben gearbeitet"
+  },
+  {
+    "id": "verb-009",
+    "infinitive": "sprechen",
+    "translation_ru": "говорить; разговаривать",
+    "translation_en": "to speak; to talk",
+    "auxiliary": "haben",
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "говорить с кем-либо",
+        "note_en": "to speak with someone"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "говорить о чём-либо",
+        "note_en": "to talk about something"
+      }
+    ],
+    "example_de": "Wir sprechen heute über die Reise.",
+    "example_ru": "Сегодня мы говорим о поездке.",
+    "example_en": "We are talking about the trip today.",
+    "perfect_form": "haben gesprochen",
+    "forms": {
+      "Präsens": {
+        "ich": "spreche",
+        "du": "sprichst",
+        "er/sie/es": "spricht",
+        "wir": "sprechen",
+        "ihr": "sprecht",
+        "sie": "sprechen"
+      },
+      "Präteritum": {
+        "ich": "sprach",
+        "du": "sprachst",
+        "er/sie/es": "sprach",
+        "wir": "sprachen",
+        "ihr": "spracht",
+        "sie": "sprachen"
+      }
+    }
+  },
+  {
+    "id": "verb-010",
+    "infinitive": "lesen",
+    "translation_ru": "читать",
+    "translation_en": "to read",
+    "auxiliary": "haben",
+    "example_de": "Ich lese jeden Abend ein Buch.",
+    "example_ru": "Каждый вечер я читаю книгу.",
+    "example_en": "I read a book every evening.",
+    "perfect_form": "haben gelesen",
+    "forms": {
+      "Präsens": {
+        "ich": "lese",
+        "du": "liest",
+        "er/sie/es": "liest",
+        "wir": "lesen",
+        "ihr": "lest",
+        "sie": "lesen"
+      },
+      "Präteritum": {
+        "ich": "las",
+        "du": "last",
+        "er/sie/es": "las",
+        "wir": "lasen",
+        "ihr": "last",
+        "sie": "lasen"
+      }
+    }
+  },
+  {
+    "id": "verb-011",
+    "infinitive": "sehen",
+    "translation_ru": "видеть; смотреть",
+    "translation_en": "to see; to watch",
+    "auxiliary": "haben",
+    "example_de": "Von hier sehen wir das Meer.",
+    "example_ru": "Отсюда мы видим море.",
+    "example_en": "We can see the sea from here.",
+    "perfect_form": "haben gesehen",
+    "forms": {
+      "Präsens": {
+        "ich": "sehe",
+        "du": "siehst",
+        "er/sie/es": "sieht",
+        "wir": "sehen",
+        "ihr": "seht",
+        "sie": "sehen"
+      },
+      "Präteritum": {
+        "ich": "sah",
+        "du": "sahst",
+        "er/sie/es": "sah",
+        "wir": "sahen",
+        "ihr": "saht",
+        "sie": "sahen"
+      }
+    }
+  },
+  {
+    "id": "verb-012",
+    "infinitive": "fahren",
+    "translation_ru": "ехать; передвигаться на транспорте",
+    "translation_en": "to travel; to go by vehicle",
+    "auxiliary": "sein",
+    "usage_note_ru": "Для перемещения без прямого дополнения в Perfekt обычно используется sein.",
+    "usage_note_en": "For movement without a direct object, the perfect usually takes sein.",
+    "example_de": "Wir fahren morgen nach Berlin.",
+    "example_ru": "Завтра мы едем в Берлин.",
+    "example_en": "We are travelling to Berlin tomorrow.",
+    "perfect_form": "sein gefahren",
+    "forms": {
+      "Präsens": {
+        "ich": "fahre",
+        "du": "fährst",
+        "er/sie/es": "fährt",
+        "wir": "fahren",
+        "ihr": "fahrt",
+        "sie": "fahren"
+      },
+      "Präteritum": {
+        "ich": "fuhr",
+        "du": "fuhrst",
+        "er/sie/es": "fuhr",
+        "wir": "fuhren",
+        "ihr": "fuhrt",
+        "sie": "fuhren"
+      }
+    }
+  },
+  {
+    "id": "verb-013",
+    "infinitive": "fahren",
+    "translation_ru": "водить транспортное средство",
+    "translation_en": "to drive a vehicle",
+    "auxiliary": "haben",
+    "usage_note_ru": "Если fahren употребляется с прямым дополнением в значении «управлять транспортом», в Perfekt используется haben.",
+    "usage_note_en": "When fahren has a direct object meaning “to drive a vehicle,” the perfect takes haben.",
+    "example_de": "Sie fährt den Bus sehr vorsichtig.",
+    "example_ru": "Она очень осторожно водит автобус.",
+    "example_en": "She drives the bus very carefully.",
+    "perfect_form": "haben gefahren",
+    "forms": {
+      "Präsens": {
+        "ich": "fahre",
+        "du": "fährst",
+        "er/sie/es": "fährt",
+        "wir": "fahren",
+        "ihr": "fahrt",
+        "sie": "fahren"
+      },
+      "Präteritum": {
+        "ich": "fuhr",
+        "du": "fuhrst",
+        "er/sie/es": "fuhr",
+        "wir": "fuhren",
+        "ihr": "fuhrt",
+        "sie": "fuhren"
+      }
+    }
+  },
+  {
+    "id": "verb-014",
+    "infinitive": "essen",
+    "translation_ru": "есть; кушать",
+    "translation_en": "to eat",
+    "auxiliary": "haben",
+    "example_de": "Wir essen um halb sieben.",
+    "example_ru": "Мы едим в половине седьмого.",
+    "example_en": "We eat at half past six.",
+    "perfect_form": "haben gegessen",
+    "forms": {
+      "Präsens": {
+        "ich": "esse",
+        "du": "isst",
+        "er/sie/es": "isst",
+        "wir": "essen",
+        "ihr": "esst",
+        "sie": "essen"
+      },
+      "Präteritum": {
+        "ich": "aß",
+        "du": "aßest",
+        "er/sie/es": "aß",
+        "wir": "aßen",
+        "ihr": "aßt",
+        "sie": "aßen"
+      }
+    }
+  },
+  {
+    "id": "verb-015",
+    "infinitive": "nehmen",
+    "translation_ru": "брать",
+    "translation_en": "to take",
+    "auxiliary": "haben",
+    "example_de": "Er nimmt den Zug um acht.",
+    "example_ru": "Он едет на поезде, который отправляется в восемь.",
+    "example_en": "He is taking the eight o’clock train.",
+    "perfect_form": "haben genommen",
+    "forms": {
+      "Präsens": {
+        "ich": "nehme",
+        "du": "nimmst",
+        "er/sie/es": "nimmt",
+        "wir": "nehmen",
+        "ihr": "nehmt",
+        "sie": "nehmen"
+      },
+      "Präteritum": {
+        "ich": "nahm",
+        "du": "nahmst",
+        "er/sie/es": "nahm",
+        "wir": "nahmen",
+        "ihr": "nahmt",
+        "sie": "nahmen"
+      }
+    }
+  },
+  {
+    "id": "verb-016",
+    "infinitive": "geben",
+    "translation_ru": "давать",
+    "translation_en": "to give",
+    "auxiliary": "haben",
+    "example_de": "Kannst du mir das Buch geben?",
+    "example_ru": "Можешь дать мне книгу?",
+    "example_en": "Can you give me the book?",
+    "perfect_form": "haben gegeben",
+    "forms": {
+      "Präsens": {
+        "ich": "gebe",
+        "du": "gibst",
+        "er/sie/es": "gibt",
+        "wir": "geben",
+        "ihr": "gebt",
+        "sie": "geben"
+      },
+      "Präteritum": {
+        "ich": "gab",
+        "du": "gabst",
+        "er/sie/es": "gab",
+        "wir": "gaben",
+        "ihr": "gabt",
+        "sie": "gaben"
+      },
+      "Konjunktiv II": {
+        "ich": "gäbe",
+        "du": "gäbest",
+        "er/sie/es": "gäbe",
+        "wir": "gäben",
+        "ihr": "gäbet",
+        "sie": "gäben"
+      },
+      "Imperativ": {
+        "du": "gib!",
+        "ihr": "gebt!",
+        "Sie": "Geben Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-017",
+    "infinitive": "können",
+    "translation_ru": "мочь; уметь",
+    "translation_en": "can; to be able to",
+    "auxiliary": "haben",
+    "usage_note_ru": "С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe arbeiten können.",
+    "usage_note_en": "With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe arbeiten können.",
+    "example_de": "Sie kann sehr gut schwimmen.",
+    "example_ru": "Она очень хорошо умеет плавать.",
+    "example_en": "She can swim very well.",
+    "perfect_form": "haben gekonnt",
+    "forms": {
+      "Präsens": {
+        "ich": "kann",
+        "du": "kannst",
+        "er/sie/es": "kann",
+        "wir": "können",
+        "ihr": "könnt",
+        "sie": "können"
+      },
+      "Präteritum": {
+        "ich": "konnte",
+        "du": "konntest",
+        "er/sie/es": "konnte",
+        "wir": "konnten",
+        "ihr": "konntet",
+        "sie": "konnten"
+      }
+    }
+  },
+  {
+    "id": "verb-018",
+    "infinitive": "müssen",
+    "translation_ru": "быть должным; быть вынужденным",
+    "translation_en": "must; to have to",
+    "auxiliary": "haben",
+    "usage_note_ru": "С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe länger arbeiten müssen.",
+    "usage_note_en": "With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe länger arbeiten müssen.",
+    "example_de": "Ich muss heute länger arbeiten.",
+    "example_ru": "Сегодня мне нужно работать дольше.",
+    "example_en": "I have to work longer today.",
+    "perfect_form": "haben gemusst",
+    "forms": {
+      "Präsens": {
+        "ich": "muss",
+        "du": "musst",
+        "er/sie/es": "muss",
+        "wir": "müssen",
+        "ihr": "müsst",
+        "sie": "müssen"
+      },
+      "Präteritum": {
+        "ich": "musste",
+        "du": "musstest",
+        "er/sie/es": "musste",
+        "wir": "mussten",
+        "ihr": "musstet",
+        "sie": "mussten"
+      }
+    }
+  },
+  {
+    "id": "verb-019",
+    "infinitive": "warten",
+    "translation_ru": "ждать",
+    "translation_en": "to wait",
+    "auxiliary": "haben",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "ждать кого-либо или чего-либо",
+        "note_en": "to wait for someone or something"
+      }
+    ],
+    "example_de": "Ich warte auf den Bus.",
+    "example_ru": "Я жду автобус.",
+    "example_en": "I am waiting for the bus.",
+    "perfect_form": "haben gewartet"
+  },
+  {
+    "id": "verb-020",
+    "infinitive": "aufstehen",
+    "translation_ru": "вставать; подниматься",
+    "translation_en": "to get up; to stand up",
+    "auxiliary": "sein",
+    "usage_note_ru": "Отделяемая приставка auf- в Präsens и Präteritum стоит в конце; в Partizip II ge- вставляется между приставкой и основой.",
+    "usage_note_en": "The separable prefix auf- goes to the end in the present and simple past; in the past participle, ge- appears between the prefix and the stem.",
+    "example_de": "Ich stehe jeden Tag um sieben Uhr auf.",
+    "example_ru": "Я каждый день встаю в семь часов.",
+    "example_en": "I get up at seven every day.",
+    "perfect_form": "sein aufgestanden",
+    "forms": {
+      "Präsens": {
+        "ich": "stehe auf",
+        "du": "stehst auf",
+        "er/sie/es": "steht auf",
+        "wir": "stehen auf",
+        "ihr": "steht auf",
+        "sie": "stehen auf"
+      },
+      "Präteritum": {
+        "ich": "stand auf",
+        "du": "standest auf",
+        "er/sie/es": "stand auf",
+        "wir": "standen auf",
+        "ihr": "standet auf",
+        "sie": "standen auf"
+      }
+    }
+  },
+  {
+    "id": "verb-021",
+    "infinitive": "brauchen",
+    "translation_ru": "нуждаться; быть нужным",
+    "translation_en": "to need",
+    "auxiliary": "haben",
+    "example_de": "Ich bräuchte noch etwas Zeit.",
+    "example_ru": "Мне бы понадобилось ещё немного времени.",
+    "example_en": "I would need a little more time.",
+    "perfect_form": "haben gebraucht",
+    "forms": {
+      "Konjunktiv II": {
+        "ich": "bräuchte",
+        "du": "bräuchtest",
+        "er/sie/es": "bräuchte",
+        "wir": "bräuchten",
+        "ihr": "bräuchtet",
+        "sie": "bräuchten"
+      }
+    }
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "abholen",
+    "translation_ru": "забирать; встречать",
+    "translation_en": "to pick up",
+    "auxiliary": "haben",
+    "example_de": "Ich hole dich um sechs Uhr ab.",
+    "example_ru": "Я заеду за тобой в шесть.",
+    "example_en": "I will pick you up at six.",
+    "perfect_form": "haben abgeholt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "anfangen",
+    "translation_ru": "начинать",
+    "translation_en": "to begin; to start",
+    "auxiliary": "haben",
+    "example_de": "Der Film fängt um acht Uhr an.",
+    "example_ru": "Фильм начинается в восемь часов.",
+    "example_en": "The film starts at eight.",
+    "perfect_form": "haben angefangen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "ankommen",
+    "translation_ru": "прибывать",
+    "translation_en": "to arrive",
+    "auxiliary": "sein",
+    "example_de": "Der Zug kommt pünktlich an.",
+    "example_ru": "Поезд прибывает вовремя.",
+    "example_en": "The train arrives on time.",
+    "perfect_form": "sein angekommen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich anmelden",
+    "translation_ru": "записываться; регистрироваться",
+    "translation_en": "to register; to sign up",
+    "auxiliary": "haben",
+    "example_de": "Ich melde mich für den Kurs an.",
+    "example_ru": "Я записываюсь на курс.",
+    "example_en": "I am signing up for the course.",
+    "perfect_form": "haben angemeldet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "anrufen",
+    "translation_ru": "звонить (кому-либо)",
+    "translation_en": "to call; to phone",
+    "auxiliary": "haben",
+    "example_de": "Ruf mich bitte heute Abend an.",
+    "example_ru": "Позвони мне, пожалуйста, сегодня вечером.",
+    "example_en": "Please call me this evening.",
+    "perfect_form": "haben angerufen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "ansehen",
+    "translation_ru": "смотреть; рассматривать",
+    "translation_en": "to look at; to watch",
+    "auxiliary": "haben",
+    "example_de": "Wir sehen uns heute einen Film an.",
+    "example_ru": "Сегодня мы посмотрим фильм.",
+    "example_en": "We are watching a film today.",
+    "perfect_form": "haben angesehen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "anziehen",
+    "translation_ru": "одевать(ся); надевать",
+    "translation_en": "to get dressed; to put on",
+    "auxiliary": "haben",
+    "example_de": "Sie zieht ihre Jacke an.",
+    "example_ru": "Она надевает куртку.",
+    "example_en": "She is putting on her jacket.",
+    "perfect_form": "haben angezogen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "antworten",
+    "translation_ru": "отвечать",
+    "translation_en": "to answer; to reply",
+    "auxiliary": "haben",
+    "example_de": "Bitte antworten Sie auf meine Frage.",
+    "example_ru": "Пожалуйста, ответьте на мой вопрос.",
+    "example_en": "Please answer my question.",
+    "perfect_form": "haben geantwortet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "aufhören",
+    "translation_ru": "заканчивать; прекращать",
+    "translation_en": "to stop; to finish",
+    "auxiliary": "haben",
+    "example_de": "Der Unterricht hört um drei Uhr auf.",
+    "example_ru": "Занятия заканчиваются в три часа.",
+    "example_en": "The class finishes at three o’clock.",
+    "perfect_form": "haben aufgehört"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "aufmachen",
+    "translation_ru": "открывать",
+    "translation_en": "to open",
+    "auxiliary": "haben",
+    "example_de": "Mach bitte das Fenster auf.",
+    "example_ru": "Открой, пожалуйста, окно.",
+    "example_en": "Please open the window.",
+    "perfect_form": "haben aufgemacht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "aufräumen",
+    "translation_ru": "прибирать; убирать",
+    "translation_en": "to tidy up",
+    "auxiliary": "haben",
+    "example_de": "Ich räume heute mein Zimmer auf.",
+    "example_ru": "Сегодня я убираю свою комнату.",
+    "example_en": "I am tidying my room today.",
+    "perfect_form": "haben aufgeräumt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "ausfüllen",
+    "translation_ru": "заполнять",
+    "translation_en": "to fill out",
+    "auxiliary": "haben",
+    "example_de": "Füllen Sie bitte dieses Formular aus.",
+    "example_ru": "Пожалуйста, заполните этот бланк.",
+    "example_en": "Please fill out this form.",
+    "perfect_form": "haben ausgefüllt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "ausmachen",
+    "translation_ru": "выключать; договариваться",
+    "translation_en": "to turn off; to arrange",
+    "auxiliary": "haben",
+    "example_de": "Mach bitte das Licht aus.",
+    "example_ru": "Выключи, пожалуйста, свет.",
+    "example_en": "Please turn off the light.",
+    "perfect_form": "haben ausgemacht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "aussehen",
+    "translation_ru": "выглядеть",
+    "translation_en": "to look; to appear",
+    "auxiliary": "haben",
+    "example_de": "Du siehst heute sehr gut aus.",
+    "example_ru": "Ты сегодня очень хорошо выглядишь.",
+    "example_en": "You look very well today.",
+    "perfect_form": "haben ausgesehen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "aussteigen",
+    "translation_ru": "выходить (из транспорта)",
+    "translation_en": "to get off; to get out",
+    "auxiliary": "sein",
+    "example_de": "Wir steigen an der nächsten Haltestelle aus.",
+    "example_ru": "Мы выходим на следующей остановке.",
+    "example_en": "We are getting off at the next stop.",
+    "perfect_form": "sein ausgestiegen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "ausziehen",
+    "translation_ru": "снимать (одежду); съезжать",
+    "translation_en": "to take off; to move out",
+    "auxiliary": "haben",
+    "example_de": "Er zieht seine Schuhe aus.",
+    "example_ru": "Он снимает обувь.",
+    "example_en": "He is taking off his shoes.",
+    "perfect_form": "haben ausgezogen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "baden",
+    "translation_ru": "купаться; принимать ванну",
+    "translation_en": "to bathe; to take a bath",
+    "auxiliary": "haben",
+    "example_de": "Die Kinder baden im See.",
+    "example_ru": "Дети купаются в озере.",
+    "example_en": "The children are swimming in the lake.",
+    "perfect_form": "haben gebadet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "bekommen",
+    "translation_ru": "получать",
+    "translation_en": "to get; to receive",
+    "auxiliary": "haben",
+    "example_de": "Ich bekomme heute einen Brief.",
+    "example_ru": "Сегодня я получаю письмо.",
+    "example_en": "I am getting a letter today.",
+    "perfect_form": "haben bekommen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "benutzen",
+    "translation_ru": "использовать; пользоваться",
+    "translation_en": "to use",
+    "auxiliary": "haben",
+    "example_de": "Darf ich dein Telefon benutzen?",
+    "example_ru": "Можно воспользоваться твоим телефоном?",
+    "example_en": "May I use your phone?",
+    "perfect_form": "haben benutzt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "bezahlen",
+    "translation_ru": "платить; оплачивать",
+    "translation_en": "to pay",
+    "auxiliary": "haben",
+    "example_de": "Kann ich mit Karte bezahlen?",
+    "example_ru": "Можно заплатить картой?",
+    "example_en": "Can I pay by card?",
+    "perfect_form": "haben bezahlt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "besuchen",
+    "translation_ru": "посещать; навещать",
+    "translation_en": "to visit",
+    "auxiliary": "haben",
+    "example_de": "Am Wochenende besuchen wir unsere Freunde.",
+    "example_ru": "На выходных мы навестим друзей.",
+    "example_en": "We are visiting our friends at the weekend.",
+    "perfect_form": "haben besucht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "bestellen",
+    "translation_ru": "заказывать",
+    "translation_en": "to order",
+    "auxiliary": "haben",
+    "example_de": "Wir möchten jetzt bestellen.",
+    "example_ru": "Мы хотели бы сейчас сделать заказ.",
+    "example_en": "We would like to order now.",
+    "perfect_form": "haben bestellt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "bleiben",
+    "translation_ru": "оставаться",
+    "translation_en": "to stay; to remain",
+    "auxiliary": "sein",
+    "example_de": "Ich bleibe heute zu Hause.",
+    "example_ru": "Сегодня я остаюсь дома.",
+    "example_en": "I am staying at home today.",
+    "perfect_form": "sein geblieben"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "bringen",
+    "translation_ru": "приносить; привозить",
+    "translation_en": "to bring",
+    "auxiliary": "haben",
+    "example_de": "Bringst du mir bitte ein Glas Wasser?",
+    "example_ru": "Принесёшь мне, пожалуйста, стакан воды?",
+    "example_en": "Could you bring me a glass of water, please?",
+    "perfect_form": "haben gebracht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "einkaufen",
+    "translation_ru": "покупать; делать покупки",
+    "translation_en": "to shop; to do the shopping",
+    "auxiliary": "haben",
+    "example_de": "Wir kaufen samstags im Supermarkt ein.",
+    "example_ru": "По субботам мы закупаемся в супермаркете.",
+    "example_en": "We do the shopping at the supermarket on Saturdays.",
+    "perfect_form": "haben eingekauft"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "einladen",
+    "translation_ru": "приглашать",
+    "translation_en": "to invite",
+    "auxiliary": "haben",
+    "example_de": "Ich lade meine Nachbarn zum Essen ein.",
+    "example_ru": "Я приглашаю соседей на ужин.",
+    "example_en": "I am inviting my neighbors to dinner.",
+    "perfect_form": "haben eingeladen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "fernsehen",
+    "translation_ru": "смотреть телевизор",
+    "translation_en": "to watch television",
+    "auxiliary": "haben",
+    "example_de": "Abends sehen die Kinder oft fern.",
+    "example_ru": "По вечерам дети часто смотрят телевизор.",
+    "example_en": "The children often watch TV in the evening.",
+    "perfect_form": "haben ferngesehen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "finden",
+    "translation_ru": "находить; считать",
+    "translation_en": "to find; to think",
+    "auxiliary": "haben",
+    "example_de": "Ich finde den Schlüssel nicht.",
+    "example_ru": "Я не могу найти ключ.",
+    "example_en": "I cannot find the key.",
+    "perfect_form": "haben gefunden"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "fragen",
+    "translation_ru": "спрашивать",
+    "translation_en": "to ask",
+    "auxiliary": "haben",
+    "example_de": "Kann ich dich etwas fragen?",
+    "example_ru": "Можно тебя кое о чём спросить?",
+    "example_en": "Can I ask you something?",
+    "perfect_form": "haben gefragt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "fühlen",
+    "translation_ru": "чувствовать",
+    "translation_en": "to feel",
+    "auxiliary": "haben",
+    "example_de": "Ich fühle mich heute besser.",
+    "example_ru": "Сегодня я чувствую себя лучше.",
+    "example_en": "I feel better today.",
+    "perfect_form": "haben gefühlt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "helfen",
+    "translation_ru": "помогать",
+    "translation_en": "to help",
+    "auxiliary": "haben",
+    "example_de": "Kannst du mir bitte helfen?",
+    "example_ru": "Ты можешь мне помочь?",
+    "example_en": "Can you help me, please?",
+    "perfect_form": "haben geholfen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "hören",
+    "translation_ru": "слышать; слушать",
+    "translation_en": "to hear; to listen",
+    "auxiliary": "haben",
+    "example_de": "Ich höre gern Musik.",
+    "example_ru": "Я люблю слушать музыку.",
+    "example_en": "I like listening to music.",
+    "perfect_form": "haben gehört"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "kaufen",
+    "translation_ru": "покупать",
+    "translation_en": "to buy",
+    "auxiliary": "haben",
+    "example_de": "Sie kauft heute frisches Brot.",
+    "example_ru": "Сегодня она покупает свежий хлеб.",
+    "example_en": "She is buying fresh bread today.",
+    "perfect_form": "haben gekauft"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "kennen",
+    "translation_ru": "знать; быть знакомым",
+    "translation_en": "to know; to be familiar with",
+    "auxiliary": "haben",
+    "example_de": "Kennst du diesen Mann?",
+    "example_ru": "Ты знаешь этого мужчину?",
+    "example_en": "Do you know this man?",
+    "perfect_form": "haben gekannt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "kochen",
+    "translation_ru": "готовить; варить",
+    "translation_en": "to cook",
+    "auxiliary": "haben",
+    "example_de": "Mein Vater kocht heute das Abendessen.",
+    "example_ru": "Сегодня мой отец готовит ужин.",
+    "example_en": "My father is cooking dinner today.",
+    "perfect_form": "haben gekocht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "laufen",
+    "translation_ru": "бегать; ходить",
+    "translation_en": "to run; to walk",
+    "auxiliary": "sein",
+    "example_de": "Sie läuft jeden Morgen im Park.",
+    "example_ru": "Она каждое утро бегает в парке.",
+    "example_en": "She runs in the park every morning.",
+    "perfect_form": "sein gelaufen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "leben",
+    "translation_ru": "жить",
+    "translation_en": "to live",
+    "auxiliary": "haben",
+    "example_de": "Meine Großeltern leben in Österreich.",
+    "example_ru": "Мои бабушка и дедушка живут в Австрии.",
+    "example_en": "My grandparents live in Austria.",
+    "perfect_form": "haben gelebt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "öffnen",
+    "translation_ru": "открывать",
+    "translation_en": "to open",
+    "auxiliary": "haben",
+    "example_de": "Das Geschäft öffnet um neun Uhr.",
+    "example_ru": "Магазин открывается в девять часов.",
+    "example_en": "The shop opens at nine.",
+    "perfect_form": "haben geöffnet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "schlafen",
+    "translation_ru": "спать",
+    "translation_en": "to sleep",
+    "auxiliary": "haben",
+    "example_de": "Das Baby schläft schon.",
+    "example_ru": "Ребёнок уже спит.",
+    "example_en": "The baby is already asleep.",
+    "perfect_form": "haben geschlafen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "schließen",
+    "translation_ru": "закрывать",
+    "translation_en": "to close",
+    "auxiliary": "haben",
+    "example_de": "Bitte schließen Sie die Tür.",
+    "example_ru": "Пожалуйста, закройте дверь.",
+    "example_en": "Please close the door.",
+    "perfect_form": "haben geschlossen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "schwimmen",
+    "translation_ru": "плавать",
+    "translation_en": "to swim",
+    "auxiliary": "sein",
+    "example_de": "Im Sommer schwimmen wir oft im See.",
+    "example_ru": "Летом мы часто плаваем в озере.",
+    "example_en": "We often swim in the lake in summer.",
+    "perfect_form": "sein geschwommen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "spielen",
+    "translation_ru": "играть",
+    "translation_en": "to play",
+    "auxiliary": "haben",
+    "example_de": "Die Kinder spielen draußen Fußball.",
+    "example_ru": "Дети играют на улице в футбол.",
+    "example_en": "The children are playing football outside.",
+    "perfect_form": "haben gespielt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "suchen",
+    "translation_ru": "искать",
+    "translation_en": "to look for; to search",
+    "auxiliary": "haben",
+    "example_de": "Ich suche meine Brille.",
+    "example_ru": "Я ищу свои очки.",
+    "example_en": "I am looking for my glasses.",
+    "perfect_form": "haben gesucht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "tanzen",
+    "translation_ru": "танцевать",
+    "translation_en": "to dance",
+    "auxiliary": "haben",
+    "example_de": "Sie tanzt gern mit ihren Freunden.",
+    "example_ru": "Она любит танцевать с друзьями.",
+    "example_en": "She likes dancing with her friends.",
+    "perfect_form": "haben getanzt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "treffen",
+    "translation_ru": "встречать; встречаться",
+    "translation_en": "to meet",
+    "auxiliary": "haben",
+    "example_de": "Wir treffen unsere Freunde im Café.",
+    "example_ru": "Мы встречаемся с друзьями в кафе.",
+    "example_en": "We are meeting our friends at the café.",
+    "perfect_form": "haben getroffen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "trinken",
+    "translation_ru": "пить",
+    "translation_en": "to drink",
+    "auxiliary": "haben",
+    "example_de": "Möchtest du einen Tee trinken?",
+    "example_ru": "Хочешь выпить чаю?",
+    "example_en": "Would you like to have some tea?",
+    "perfect_form": "haben getrunken"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "reisen",
+    "translation_ru": "путешествовать",
+    "translation_en": "to travel",
+    "auxiliary": "sein",
+    "example_de": "Im Sommer reisen wir nach Italien.",
+    "example_ru": "Летом мы едем в Италию.",
+    "example_en": "We are travelling to Italy in the summer.",
+    "perfect_form": "sein gereist"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich freuen",
+    "translation_ru": "радоваться; быть довольным",
+    "translation_en": "to be glad; to look forward to",
+    "auxiliary": "haben",
+    "example_de": "Ich freue mich auf die Ferien.",
+    "example_ru": "Я с нетерпением жду каникул.",
+    "example_en": "I am looking forward to the holidays.",
+    "perfect_form": "haben gefreut"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich interessieren",
+    "translation_ru": "интересоваться",
+    "translation_en": "to be interested in",
+    "auxiliary": "haben",
+    "example_de": "Sie interessiert sich für Kunst.",
+    "example_ru": "Она интересуется искусством.",
+    "example_en": "She is interested in art.",
+    "perfect_form": "haben interessiert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "kennenlernen",
+    "translation_ru": "знакомиться; узнавать",
+    "translation_en": "to get to know; to meet",
+    "auxiliary": "haben",
+    "example_de": "Ich möchte neue Leute kennenlernen.",
+    "example_ru": "Я хочу познакомиться с новыми людьми.",
+    "example_en": "I would like to meet new people.",
+    "perfect_form": "haben kennengelernt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "liegen",
+    "translation_ru": "лежать; находиться",
+    "translation_en": "to lie; to be located",
+    "auxiliary": "haben",
+    "example_de": "Das Buch liegt auf dem Tisch.",
+    "example_ru": "Книга лежит на столе.",
+    "example_en": "The book is on the table.",
+    "perfect_form": "haben gelegen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "schicken",
+    "translation_ru": "посылать; отправлять",
+    "translation_en": "to send",
+    "auxiliary": "haben",
+    "example_de": "Ich schicke dir heute eine Nachricht.",
+    "example_ru": "Сегодня я отправлю тебе сообщение.",
+    "example_en": "I will send you a message today.",
+    "perfect_form": "haben geschickt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "setzen",
+    "translation_ru": "сажать; ставить",
+    "translation_en": "to set; to put",
+    "auxiliary": "haben",
+    "example_de": "Setzen Sie sich bitte hier.",
+    "example_ru": "Садитесь, пожалуйста, сюда.",
+    "example_en": "Please sit here.",
+    "perfect_form": "haben gesetzt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "umziehen",
+    "translation_ru": "переезжать; переодеваться",
+    "translation_en": "to move house; to change clothes",
+    "auxiliary": "sein",
+    "example_de": "Wir ziehen nächsten Monat nach Köln um.",
+    "example_ru": "В следующем месяце мы переезжаем в Кёльн.",
+    "example_en": "We are moving to Cologne next month.",
+    "perfect_form": "sein umgezogen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "unterschreiben",
+    "translation_ru": "подписывать",
+    "translation_en": "to sign",
+    "auxiliary": "haben",
+    "example_de": "Bitte unterschreiben Sie hier.",
+    "example_ru": "Пожалуйста, подпишите здесь.",
+    "example_en": "Please sign here.",
+    "perfect_form": "haben unterschrieben"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "beschreiben",
+    "translation_ru": "описывать",
+    "translation_en": "to describe",
+    "auxiliary": "haben",
+    "example_de": "Kannst du den Weg beschreiben?",
+    "example_ru": "Ты можешь описать дорогу?",
+    "example_en": "Can you describe the way?",
+    "perfect_form": "haben beschrieben"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "denken",
+    "translation_ru": "думать",
+    "translation_en": "to think",
+    "auxiliary": "haben",
+    "example_de": "Ich denke oft an meine Familie.",
+    "example_ru": "Я часто думаю о своей семье.",
+    "example_en": "I often think about my family.",
+    "perfect_form": "haben gedacht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich entscheiden",
+    "translation_ru": "решать; принимать решение",
+    "translation_en": "to decide",
+    "auxiliary": "haben",
+    "example_de": "Wir entscheiden uns morgen.",
+    "example_ru": "Мы примем решение завтра.",
+    "example_en": "We will decide tomorrow.",
+    "perfect_form": "haben entschieden"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erklären",
+    "translation_ru": "объяснять",
+    "translation_en": "to explain",
+    "auxiliary": "haben",
+    "example_de": "Der Lehrer erklärt die Aufgabe.",
+    "example_ru": "Учитель объясняет задание.",
+    "example_en": "The teacher explains the exercise.",
+    "perfect_form": "haben erklärt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erzählen",
+    "translation_ru": "рассказывать",
+    "translation_en": "to tell; to relate",
+    "auxiliary": "haben",
+    "example_de": "Er erzählt eine Geschichte.",
+    "example_ru": "Он рассказывает историю.",
+    "example_en": "He is telling a story.",
+    "perfect_form": "haben erzählt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "fehlen",
+    "translation_ru": "отсутствовать; не хватать",
+    "translation_en": "to be absent; to be missing",
+    "auxiliary": "haben",
+    "example_de": "Mir fehlt heute die Zeit.",
+    "example_ru": "Сегодня мне не хватает времени.",
+    "example_en": "I do not have enough time today.",
+    "perfect_form": "haben gefehlt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "feiern",
+    "translation_ru": "праздновать",
+    "translation_en": "to celebrate",
+    "auxiliary": "haben",
+    "example_de": "Wir feiern heute ihren Geburtstag.",
+    "example_ru": "Сегодня мы празднуем её день рождения.",
+    "example_en": "We are celebrating her birthday today.",
+    "perfect_form": "haben gefeiert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "gehören",
+    "translation_ru": "принадлежать",
+    "translation_en": "to belong",
+    "auxiliary": "haben",
+    "example_de": "Wem gehört diese Tasche?",
+    "example_ru": "Кому принадлежит эта сумка?",
+    "example_en": "Who does this bag belong to?",
+    "perfect_form": "haben gehört"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "gewinnen",
+    "translation_ru": "выигрывать; побеждать",
+    "translation_en": "to win",
+    "auxiliary": "haben",
+    "example_de": "Unsere Mannschaft gewinnt das Spiel.",
+    "example_ru": "Наша команда выигрывает матч.",
+    "example_en": "Our team is winning the match.",
+    "perfect_form": "haben gewonnen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "glauben",
+    "translation_ru": "верить; полагать",
+    "translation_en": "to believe; to think",
+    "auxiliary": "haben",
+    "example_de": "Ich glaube, dass er heute kommt.",
+    "example_ru": "Я думаю, что он придёт сегодня.",
+    "example_en": "I think he is coming today.",
+    "perfect_form": "haben geglaubt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "hoffen",
+    "translation_ru": "надеяться",
+    "translation_en": "to hope",
+    "auxiliary": "haben",
+    "example_de": "Wir hoffen auf gutes Wetter.",
+    "example_ru": "Мы надеемся на хорошую погоду.",
+    "example_en": "We are hoping for good weather.",
+    "perfect_form": "haben gehofft"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "planen",
+    "translation_ru": "планировать",
+    "translation_en": "to plan",
+    "auxiliary": "haben",
+    "example_de": "Sie plant eine Reise nach Wien.",
+    "example_ru": "Она планирует поездку в Вену.",
+    "example_en": "She is planning a trip to Vienna.",
+    "perfect_form": "haben geplant"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "probieren",
+    "translation_ru": "пробовать",
+    "translation_en": "to try; to taste",
+    "auxiliary": "haben",
+    "example_de": "Möchtest du den Kuchen probieren?",
+    "example_ru": "Хочешь попробовать пирог?",
+    "example_en": "Would you like to try the cake?",
+    "perfect_form": "haben probiert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "schmecken",
+    "translation_ru": "быть вкусным; иметь вкус",
+    "translation_en": "to taste",
+    "auxiliary": "haben",
+    "example_de": "Die Suppe schmeckt sehr gut.",
+    "example_ru": "Суп очень вкусный.",
+    "example_en": "The soup tastes very good.",
+    "perfect_form": "haben geschmeckt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "teilnehmen",
+    "translation_ru": "участвовать",
+    "translation_en": "to take part; to participate",
+    "auxiliary": "haben",
+    "example_de": "Nimmst du an dem Kurs teil?",
+    "example_ru": "Ты участвуешь в этом курсе?",
+    "example_en": "Are you taking part in the course?",
+    "perfect_form": "haben teilgenommen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "verlieren",
+    "translation_ru": "терять; проигрывать",
+    "translation_en": "to lose",
+    "auxiliary": "haben",
+    "example_de": "Ich habe meinen Schlüssel verloren.",
+    "example_ru": "Я потерял ключ.",
+    "example_en": "I have lost my key.",
+    "perfect_form": "haben verloren"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "vergessen",
+    "translation_ru": "забывать",
+    "translation_en": "to forget",
+    "auxiliary": "haben",
+    "example_de": "Vergiss bitte deinen Termin nicht.",
+    "example_ru": "Пожалуйста, не забудь о своей встрече.",
+    "example_en": "Please do not forget your appointment.",
+    "perfect_form": "haben vergessen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "verstehen",
+    "translation_ru": "понимать",
+    "translation_en": "to understand",
+    "auxiliary": "haben",
+    "example_de": "Ich verstehe die Frage nicht.",
+    "example_ru": "Я не понимаю вопрос.",
+    "example_en": "I do not understand the question.",
+    "perfect_form": "haben verstanden"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich vorbereiten",
+    "translation_ru": "готовиться",
+    "translation_en": "to prepare",
+    "auxiliary": "haben",
+    "example_de": "Ich bereite mich auf die Prüfung vor.",
+    "example_ru": "Я готовлюсь к экзамену.",
+    "example_en": "I am preparing for the exam.",
+    "perfect_form": "haben vorbereitet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich vorstellen",
+    "translation_ru": "представлять себе; представляться",
+    "translation_en": "to imagine; to introduce oneself",
+    "auxiliary": "haben",
+    "example_de": "Darf ich mich kurz vorstellen?",
+    "example_ru": "Можно мне коротко представиться?",
+    "example_en": "May I briefly introduce myself?",
+    "perfect_form": "haben vorgestellt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "vergleichen",
+    "translation_ru": "сравнивать",
+    "translation_en": "to compare",
+    "auxiliary": "haben",
+    "example_de": "Wir vergleichen die beiden Angebote.",
+    "example_ru": "Мы сравниваем эти два предложения.",
+    "example_en": "We are comparing the two offers.",
+    "perfect_form": "haben verglichen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "verändern",
+    "translation_ru": "изменять",
+    "translation_en": "to change; to alter",
+    "auxiliary": "haben",
+    "example_de": "Die Reise hat mein Leben verändert.",
+    "example_ru": "Эта поездка изменила мою жизнь.",
+    "example_en": "The trip changed my life.",
+    "perfect_form": "haben verändert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "verbessern",
+    "translation_ru": "улучшать; исправлять",
+    "translation_en": "to improve; to correct",
+    "auxiliary": "haben",
+    "example_de": "Ich möchte mein Deutsch verbessern.",
+    "example_ru": "Я хочу улучшить свой немецкий.",
+    "example_en": "I would like to improve my German.",
+    "perfect_form": "haben verbessert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "versuchen",
+    "translation_ru": "пытаться; пробовать",
+    "translation_en": "to try; to attempt",
+    "auxiliary": "haben",
+    "example_de": "Wir versuchen, eine Lösung zu finden.",
+    "example_ru": "Мы пытаемся найти решение.",
+    "example_en": "We are trying to find a solution.",
+    "perfect_form": "haben versucht"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "vorschlagen",
+    "translation_ru": "предлагать",
+    "translation_en": "to suggest; to propose",
+    "auxiliary": "haben",
+    "example_de": "Was schlägst du für das Wochenende vor?",
+    "example_ru": "Что ты предлагаешь на выходные?",
+    "example_en": "What do you suggest for the weekend?",
+    "perfect_form": "haben vorgeschlagen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erwarten",
+    "translation_ru": "ожидать",
+    "translation_en": "to expect",
+    "auxiliary": "haben",
+    "example_de": "Wir erwarten heute Besuch.",
+    "example_ru": "Сегодня мы ждём гостей.",
+    "example_en": "We are expecting visitors today.",
+    "perfect_form": "haben erwartet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich erinnern",
+    "translation_ru": "вспоминать; помнить",
+    "translation_en": "to remember",
+    "auxiliary": "haben",
+    "example_de": "Erinnerst du dich an unseren ersten Kurs?",
+    "example_ru": "Ты помнишь наш первый курс?",
+    "example_en": "Do you remember our first class?",
+    "perfect_form": "haben erinnert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "empfehlen",
+    "translation_ru": "рекомендовать",
+    "translation_en": "to recommend",
+    "auxiliary": "haben",
+    "example_de": "Der Arzt empfiehlt mehr Bewegung.",
+    "example_ru": "Врач рекомендует больше двигаться.",
+    "example_en": "The doctor recommends getting more exercise.",
+    "perfect_form": "haben empfohlen"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erlauben",
+    "translation_ru": "разрешать",
+    "translation_en": "to allow; to permit",
+    "auxiliary": "haben",
+    "example_de": "Meine Eltern erlauben mir die Reise.",
+    "example_ru": "Родители разрешают мне поехать.",
+    "example_en": "My parents allow me to take the trip.",
+    "perfect_form": "haben erlaubt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "passieren",
+    "translation_ru": "происходить; случаться",
+    "translation_en": "to happen",
+    "auxiliary": "sein",
+    "example_de": "Was ist gestern passiert?",
+    "example_ru": "Что случилось вчера?",
+    "example_en": "What happened yesterday?",
+    "perfect_form": "sein passiert"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "rechnen",
+    "translation_ru": "считать; рассчитывать",
+    "translation_en": "to calculate; to expect",
+    "auxiliary": "haben",
+    "example_de": "Wir rechnen mit einer Antwort morgen.",
+    "example_ru": "Мы рассчитываем получить ответ завтра.",
+    "example_en": "We expect an answer tomorrow.",
+    "perfect_form": "haben gerechnet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "reden",
+    "translation_ru": "говорить; разговаривать",
+    "translation_en": "to talk; to speak",
+    "auxiliary": "haben",
+    "example_de": "Wir reden später über den Plan.",
+    "example_ru": "Позже мы поговорим о плане.",
+    "example_en": "We will talk about the plan later.",
+    "perfect_form": "haben geredet"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erhalten",
+    "translation_ru": "получать; сохранять",
+    "translation_en": "to receive; to preserve",
+    "auxiliary": "haben",
+    "example_de": "Sie hat gestern eine Nachricht erhalten.",
+    "example_ru": "Вчера она получила сообщение.",
+    "example_en": "She received a message yesterday.",
+    "perfect_form": "haben erhalten"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "erledigen",
+    "translation_ru": "выполнять; улаживать",
+    "translation_en": "to take care of; to complete",
+    "auxiliary": "haben",
+    "example_de": "Ich erledige die Aufgabe heute.",
+    "example_ru": "Сегодня я выполню это задание.",
+    "example_en": "I will take care of the task today.",
+    "perfect_form": "haben erledigt"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "sich bewerben",
+    "translation_ru": "подавать заявление; претендовать",
+    "translation_en": "to apply",
+    "auxiliary": "haben",
+    "example_de": "Sie bewirbt sich um eine neue Stelle.",
+    "example_ru": "Она подаёт заявление на новую должность.",
+    "example_en": "She is applying for a new position.",
+    "perfect_form": "haben beworben"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "vereinbaren",
+    "translation_ru": "договариваться; согласовывать",
+    "translation_en": "to arrange; to agree on",
+    "auxiliary": "haben",
+    "example_de": "Wir vereinbaren einen Termin für Montag.",
+    "example_ru": "Мы договариваемся о встрече на понедельник.",
+    "example_en": "We are arranging an appointment for Monday.",
+    "perfect_form": "haben vereinbart"
+  },
+  {
+    "id": "verb-022",
+    "infinitive": "behaupten",
+    "translation_ru": "утверждать",
+    "translation_en": "to claim; to assert",
+    "auxiliary": "haben",
+    "example_de": "Er behauptet, alles gesehen zu haben.",
+    "example_ru": "Он утверждает, что всё видел.",
+    "example_en": "He claims to have seen everything.",
+    "perfect_form": "haben behauptet"
+  }
+]
