@@ -955,10 +955,25 @@ body:has(#study:not(.hidden)) .version-mark {
   color: var(--forms-lit-form);
 }
 .vv-note {
-  margin-left: 10px; /* clear of the lit form's background */
+  min-width: 0;
   font-family: var(--font);
   font-size: 11px;
   color: var(--forms-dim);
+}
+.vv-variant-note-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px; /* clear of the lit form's background */
+  max-width: 100%;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+.vv-variant-note-group .vv-variant {
+  flex: 0 0 auto;
+}
+.vv-variant-note-group .vv-note {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 .vv-dot {
   margin: 0 8px;

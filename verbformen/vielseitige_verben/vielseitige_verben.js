@@ -556,12 +556,15 @@ function renderFormsGrid(verb, lit) {
     list
       .map((v, k) => {
         const [form, note] = Array.isArray(v) ? v : [v, ""];
+        const variant = `<span class="vv-variant${litList.includes(k) ? " lit" : ""}">${esc(form)}</span>`;
+        const dot = k ? '<span class="vv-dot">·</span>' : "";
         return (
-          `<span class="vv-variant${litList.includes(k) ? " lit" : ""}">${esc(form)}</span>` +
-          (note ? `<span class="vv-note">${esc(formsText(note))}</span>` : "")
+          note
+            ? `<span class="vv-variant-note-group">${dot}${variant}<span class="vv-note">${esc(formsText(note))}</span></span>`
+            : `${dot}${variant}`
         );
       })
-      .join('<span class="vv-dot">·</span>');
+      .join("");
   const p2 = `<tr class="vv-extra first"><td class="vv-person">Partizip II</td><td colspan="3">${variants(V.p2, lit.p2)}</td></tr>`;
   const imp = V.imp
     ? `<tr class="vv-extra"><td class="vv-person">Imperativ</td><td colspan="3">${variants(V.imp, lit.imp)}</td></tr>`
