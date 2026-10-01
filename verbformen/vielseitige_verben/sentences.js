@@ -24,26 +24,26 @@ window.VV_SENTENCES = [
   // ---- werden ----
   {
     verb: "werden", form: "Präteritum", person: "sie/Sie", job: "become",
-    situation: { en: "Tell how the school trip ended: the children got tired quickly.", ru: "Расскажи, чем закончилась экскурсия: дети быстро устали." },
+    situation: { en: "The kids ran out of steam on the way home. Tell their parents.", ru: "По дороге домой дети совсем выдохлись. Расскажи родителям." },
     sentence: "Nach dem Ausflug gestern ___ die Kinder schnell müde.", answer: "wurden", marks: ["gestern", "müde"],
     rule: { en: "time in the past + werden im Präteritum + adjective = became, got", ru: "время в прошлом + werden im Präteritum + прилагательное = стали" }
   },
   {
     verb: "werden", form: "Präteritum", person: "er/sie/es", job: "become",
-    situation: { en: "Tell his story: he studied medicine and finished in 2015.", ru: "Расскажи его историю: он учился на врача и закончил учёбу в 2015." },
-    sentence: "2015 ___ er Arzt.", answer: "wurde", marks: ["2015", "Arzt"],
+    situation: { en: "Med school: finally conquered. His family can relax.", ru: "Медфак наконец покорён. Родные могут выдохнуть." },
+    sentence: "2026 ___ er Arzt.", answer: "wurde", marks: ["2026", "Arzt"],
     rule: { en: "a year in the past + werden im Präteritum + noun = became", ru: "год в прошлом + werden im Präteritum + существительное = стал" }
   },
   {
     verb: "werden", form: "Partizip II", job: "become",
-    situation: { en: "Your sister finished her studies. Now she's a teacher. Tell a friend.", ru: "Твоя сестра закончила учёбу, теперь она учительница. Расскажи подруге." },
+    situation: { en: "She traded lecture halls for the staff room. Share the news.", ru: "Сменила аудитории на учительскую. Поделись новостью." },
     sentence: "Meine Schwester ist Lehrerin ___.", answer: "geworden", marks: ["ist", "Lehrerin"],
     rule: { en: "sein im Präsens + Partizip II von werden, no second verb = became", ru: "sein im Präsens + Partizip II von werden, без второго глагола = стала" },
     tip: { blocks: [["sein", "plain"], [{ en: "noun", ru: "существительное" }, "part"], ["geworden", "verb"]], means: { en: "became", ru: "стала" } }
   },
   {
     verb: "werden", form: "Partizip II", job: "passive",
-    situation: { en: "Your bike isn't where you left it. Someone stole it.", ru: "Твоего велосипеда нет там, где ты его оставила. Кто-то его украл." },
+    situation: { en: "Bike gone; lock says nothing. Tell a friend.", ru: "Велосипед исчез, замок молчит. Расскажи другу." },
     sentence: "Mein Fahrrad ist gestohlen ___.", answer: "worden", marks: ["ist", "gestohlen"],
     rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" },
     tip: { blocks: [["sein", "plain"], ["Partizip II", "part"], ["worden", "verb"]], means: { en: "it was done", ru: "это сделали" } }
@@ -56,69 +56,69 @@ window.VV_SENTENCES = [
   },
   {
     verb: "werden", form: "Präsens", job: "guess",
-    situation: { en: "Your colleague isn't answering. It's 3 am where he is. Guess why.", ru: "Коллега не отвечает. У него сейчас три часа ночи. Предположи, почему." },
+    situation: { en: "No reply from your colleague at 3 a.m. Shocking. Any guesses?", ru: "Коллега молчит в три ночи. Вот это сюрприз! Есть версии?" },
     sentence: "Er ___ wohl schlafen.", answer: "wird", marks: ["wohl", "schlafen"],
     rule: { en: "werden im Präsens + wohl + infinitive = probably (a guess)", ru: "werden im Präsens + wohl + Infinitiv = наверное (догадка)" }
   },
   {
     verb: "werden", form: "Präsens", person: "sie/Sie", job: "passive",
-    situation: { en: "Right now, as you watch, the cleaners are washing the windows.", ru: "Прямо сейчас у тебя на глазах уборщики моют окна." },
+    situation: { en: "The cleaning crew is racing the clock. Give a live update.", ru: "Уборщики работают на скорость. Доложи маме обстановку." },
     sentence: "Die Fenster ___ gerade geputzt.", answer: "werden", marks: ["gerade", "geputzt"],
     rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" }
   },
   {
     verb: "werden", form: "Präteritum", person: "er/sie/es", job: "passive",
-    situation: { en: "Like in a history book: the Berlin Wall, 1961.", ru: "Как в учебнике истории: Берлинская стена, 1961." },
+    situation: { en: "In a history book:", ru: "В учебнике истории:" },
     sentence: "Die Mauer ___ 1961 gebaut.", answer: "wurde", marks: ["1961", "gebaut"],
     rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
   },
   {
     verb: "werden", form: "Präteritum", person: "er/sie/es", job: "passive",
-    situation: { en: "Write a flat listing: new kitchen since last year.", ru: "Напиши объявление о квартире: кухню отремонтировали в прошлом году." },
+    situation: { en: "Write a flat listing: the kitchen steals the show.", ru: "Напиши объявление о квартире: кухня — главная изюминка." },
     sentence: "Die Küche ___ letztes Jahr renoviert.", answer: "wurde", marks: ["letztes Jahr", "renoviert"],
     rule: { en: "time in the past + werden im Präteritum + Partizip II = Passiv, it was done", ru: "время в прошлом + werden im Präteritum + Partizip II = Passiv, это сделали" }
   },
   {
     verb: "werden", form: "Präsens", job: "passive",
-    situation: { en: "The mechanic is working on your car right now. Talk about the car.", ru: "Механик прямо сейчас чинит твою машину. Скажи про машину." },
+    situation: { en: "The car’s in surgery. Give the family a status update.", ru: "Машина на операции. Доложи родным, как там пациент." },
     sentence: "Mein Auto ___ gerade repariert.", answer: "wird", marks: ["Auto", "gerade", "repariert"],
     rule: { en: "thing + werden im Präsens + Partizip II = Passiv, it's being done right now", ru: "вещь + werden im Präsens + Partizip II = Passiv, это делают прямо сейчас" }
   },
   {
     verb: "werden", form: "Partizip II", job: "passive",
-    situation: { en: "Your car is back from the garage. Talk about the car.", ru: "Машина вернулась из автосервиса. Скажи про машину." },
+    situation: { en: "Your car is up and running again. Share the good news.", ru: "Машина снова на ходу. Поделись хорошей новостью." },
     sentence: "Mein Auto ist gestern repariert ___.", answer: "worden", marks: ["Auto", "ist", "repariert"],
     rule: { en: "thing + sein im Präsens + Partizip II + worden = Passiv, it has been done", ru: "вещь + sein im Präsens + Partizip II + worden = Passiv, это уже сделали" },
     tip: { blocks: [["sein", "plain"], ["Partizip II", "part"], ["worden", "verb"]], means: { en: "it was done", ru: "это сделали" } }
   },
   {
     verb: "werden", form: "Konjunktiv II", person: "er/sie/es", job: "wuerde",
-    situation: { en: "On the train you're cold. Politely ask the person next to you to close the window.", ru: "В электричке тебе холодно. Вежливо попроси соседа закрыть окно." },
+    situation: { en: "On the train, you're cold. Politely ask the person next to you to close the window.", ru: "В электричке как в холодильнике. Вежливо попроси соседа закрыть окно." },
     sentence: "___ es Ihnen etwas ausmachen, das Fenster zu schließen?", answer: "Würde", marks: ["etwas ausmachen"],
     rule: { en: "werden im Konjunktiv II + infinitive = would (a polite request)", ru: "werden im Konjunktiv II + Infinitiv = бы (вежливая просьба)" }
   },
   {
     verb: "werden", form: "Konjunktiv II", person: "er/sie/es", job: "wuerde",
-    situation: { en: "Daydream: if you had more money…", ru: "Помечтай: если бы у тебя было больше денег…" },
+    situation: { en: "Daydream:", ru: "Помечтай:" },
     sentence: "Wenn ich mehr Geld hätte, ___ ich gern mehr reisen.", answer: "würde", marks: ["hätte", "gern"],
     rule: { en: "werden im Konjunktiv II + infinitive = would (not real)", ru: "werden im Konjunktiv II + Infinitiv = бы (нереально)" }
   },
   {
     verb: "werden", form: "Präsens", person: "wir", job: "become",
-    situation: { en: "Before the exam you all get more and more nervous.", ru: "Перед экзаменом вы нервничаете всё сильнее." },
+    situation: { en: "Exam tomorrow. Confidence is leaving the group chat.", ru: "Экзамен завтра. Уверенность уже выходит из чата." },
     sentence: "Vor der Prüfung ___ wir immer nervöser.", answer: "werden", marks: ["immer nervöser"],
     rule: { en: "werden im Präsens + adjective = become, get", ru: "werden im Präsens + прилагательное = становиться" }
   },
 
   {
     verb: "werden", form: "Präsens", job: "future",
-    situation: { en: "Your friends fear the surprise party will fail. Reassure them.", ru: "Друзья боятся, что сюрприз не получится. Успокой их." },
+    situation: { en: "The surprise party is held together with duct tape and optimism. Reassure your friends.", ru: "Подготовка сюрприза держится на скотче и оптимизме. Подбодри друзей." },
     sentence: "Ihr ___ sehen, es klappt!", answer: "werdet", marks: ["sehen"],
     rule: { en: "werden im Präsens + infinitive = future", ru: "werden im Präsens + Infinitiv = будущее" }
   },
   {
     verb: "werden", form: "Präsens", person: "wir", job: "passive",
-    situation: { en: "A taxi is picking your family up tomorrow at eight.", ru: "Завтра в восемь за вашей семьёй приедет такси." },
+    situation: { en: "Your family is always late. Send the taxi reminder.", ru: "Ваша семья вечно опаздывает. Напомни всем про такси." },
     sentence: "Wir ___ morgen um acht abgeholt.", answer: "werden", marks: ["abgeholt"],
     rule: { en: "person + werden im Präsens + Partizip II = Passiv, it's done to us", ru: "человек + werden im Präsens + Partizip II = Passiv, это делают с нами" }
   },
@@ -126,39 +126,39 @@ window.VV_SENTENCES = [
   // ---- lassen ----
   {
     verb: "lassen", form: "Präsens", job: "leave",
-    situation: { en: "The sky is clear. You're not taking the umbrella.", ru: "Небо ясное. Зонт ты не берёшь." },
+    situation: { en: "No rain expected. One less thing to carry.", ru: "Дождя не обещают — одной вещью меньше в сумке." },
     sentence: "Ich ___ den Schirm heute zu Hause.", answer: "lasse", marks: ["zu Hause"],
     rule: { en: "lassen im Präsens + thing + place, no second verb = leave", ru: "lassen im Präsens + вещь + место, без второго глагола = оставить" }
   },
   {
     verb: "lassen", form: "Partizip II", job: "leave",
-    situation: { en: "Your friend is out all night. Her dog is home alone?", ru: "Подруга гуляет всю ночь. А собака одна дома?" },
+    situation: { en: "Your friend is out all night. What about the dog?", ru: "Подруга гуляет всю ночь. А собака?" },
     sentence: "Hast du deinen Hund wirklich allein zu Hause ___?", answer: "gelassen", marks: ["Hast", "zu Hause"],
     rule: { en: "haben im Präsens + Partizip II von lassen, no second verb = left", ru: "haben im Präsens + Partizip II von lassen, без второго глагола = оставила" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "place", ru: "место" }, "part"], ["gelassen", "verb"]], means: { en: "left", ru: "оставила" } }
   },
   {
     verb: "lassen", form: "Infinitiv", job: "haveDone",
-    situation: { en: "Your car broke down. A mechanic fixed it. Tell your friend.", ru: "Машина сломалась, её починил механик. Расскажи подруге." },
+    situation: { en: "You left the car at the repair shop; now it's back.", ru: "Оставила машину в автосервисе — теперь она снова на ходу." },
     sentence: "Ich habe mein Auto reparieren ___.", answer: "lassen", marks: ["Ich", "habe", "reparieren"],
     rule: { en: "person + haben im Präsens + thing + infinitive + lassen im Infinitiv = had it done", ru: "человек + haben im Präsens + вещь + Infinitiv + lassen im Infinitiv = поручила сделать" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "infinitive", ru: "Infinitiv" }, "part"], ["lassen", "verb"]], means: { en: "had it done", ru: "мне это сделали" } }
   },
   {
     verb: "lassen", form: "Präsens", person: "du", job: "haveDone",
-    situation: { en: "Your friend has a hairdresser appointment on Saturday. Ask her about it.", ru: "У подруги в субботу запись к парикмахеру. Спроси её об этом." },
+    situation: { en: "Your friend booked a salon slot. Ask her about it.", ru: "Подруга записалась в салон. Спроси её об этом." },
     sentence: "___ du dir am Samstag die Haare schneiden?", answer: "Lässt", marks: ["du", "schneiden"],
     rule: { en: "person + lassen im Präsens + thing + infinitive = have someone do it", ru: "человек + lassen im Präsens + вещь + Infinitiv = поручить кому-то" }
   },
   {
     verb: "lassen", form: "Präsens", person: "wir", job: "haveDone",
-    situation: { en: "Your family's laptop is broken. Tomorrow you're taking it to a repair shop.", ru: "Семейный ноутбук сломался. Завтра вы несёте его в ремонт." },
+    situation: { en: "Your family’s laptop is broken. Tomorrow you’re taking it to a repair shop.", ru: "Семейный ноутбук сломался. Завтра вы несёте его в ремонт." },
     sentence: "Morgen ___ wir unseren Laptop reparieren.", answer: "lassen", marks: ["wir", "reparieren"],
     rule: { en: "person + lassen im Präsens + thing + infinitive = have someone do it", ru: "человек + lassen im Präsens + вещь + Infinitiv = поручить кому-то" }
   },
   {
     verb: "lassen", form: "Infinitiv", job: "haveDone",
-    situation: { en: "Your friend notices your new haircut. You went to the hairdresser.", ru: "Подруга заметила новую стрижку. Ты ходила к парикмахеру." },
+    situation: { en: "Your friend notices your new haircut.", ru: "Подруга заметила новую стрижку." },
     sentence: "Ich habe mir die Haare schneiden ___.", answer: "lassen", marks: ["Ich", "habe", "schneiden"],
     rule: { en: "person + haben im Präsens + thing + infinitive + lassen im Infinitiv = had it done", ru: "человек + haben im Präsens + вещь + Infinitiv + lassen im Infinitiv = поручила сделать" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "infinitive", ru: "Infinitiv" }, "part"], ["lassen", "verb"]], means: { en: "had it done", ru: "мне это сделали" } }
@@ -195,7 +195,7 @@ window.VV_SENTENCES = [
   },
   {
     verb: "lassen", form: "Präteritum", person: "ich", job: "leave",
-    situation: { en: "Write it like in a book: last night you left the window open.", ru: "Напиши как в рассказе: вчера ты оставила окно открытым." },
+    situation: { en: "Write it like in a book:", ru: "Напиши как в рассказе:" },
     sentence: "Gestern ___ ich das Fenster die ganze Nacht offen.", answer: "ließ", also: ["liess"], marks: ["Gestern", "offen"],
     rule: { en: "the past in a story + lassen im Präteritum + thing + adjective = leave (open)", ru: "прошлое в рассказе + lassen im Präteritum + вещь + прилагательное = оставить (открытым)" },
     tip: { blocks: [["lassen", "verb"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "adjective", ru: "прилагательное" }, "part"]], means: { en: "left (open)", ru: "оставила (открытым)" } }
@@ -210,7 +210,7 @@ window.VV_SENTENCES = [
   },
   {
     verb: "lassen", form: "Infinitiv", job: "leave",
-    situation: { en: "You're home and your key isn't in your bag. You forgot it at the office.", ru: "Ты дома, а ключа в сумке нет. Ты забыла его в офисе." },
+    situation: { en: "You're home, but your key isn't in your bag.", ru: "Ты дома, а ключа нет в сумке." },
     sentence: "Ich habe meinen Schlüssel im Büro liegen ___.", answer: "lassen", also: ["gelassen"], marks: ["habe", "liegen"],
     rule: { en: "haben im Präsens + liegen + lassen im Infinitiv = left (forgot) something", ru: "haben im Präsens + liegen + lassen im Infinitiv = забыла, оставила" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "place", ru: "место" }, "plain"], [{ en: "infinitive", ru: "Infinitiv" }, "part"], ["lassen", "verb"]], means: { en: "left behind (forgot)", ru: "забыла" } }
@@ -225,7 +225,7 @@ window.VV_SENTENCES = [
   },
   {
     verb: "sein", form: "Präteritum", person: "er/sie/es", job: "canBeDone",
-    situation: { en: "Yesterday's exam wasn't that hard. Tell your friend it was doable.", ru: "Вчерашний экзамен был не таким сложным. Скажи подруге, что он был вполне посильным." },
+    situation: { en: "The exam's over. Your friend asks how it went.", ru: "Экзамен позади. Друг спрашивает, как всё прошло." },
     sentence: "Die Prüfung gestern ___ gut zu schaffen.", answer: "war", marks: ["gestern", "zu schaffen"],
     rule: { en: "time in the past + sein im Präteritum + zu + infinitive = could be done", ru: "время в прошлом + sein im Präteritum + zu + Infinitiv = можно было сделать" }
   },
@@ -237,7 +237,7 @@ window.VV_SENTENCES = [
   },
   {
     verb: "sein", form: "Präteritum", person: "er/sie/es", job: "state",
-    situation: { en: "You went to the museum yesterday. Closed.", ru: "Вчера ты пошла в музей. Закрыто." },
+    situation: { en: "Yesterday's museum trip ended at a locked door.", ru: "Вчера поход в музей закончился у закрытой двери." },
     sentence: "Das Museum ___ gestern geschlossen.", answer: "war", marks: ["gestern", "geschlossen"],
     rule: { en: "thing + sein im Präteritum + Partizip II = a state in the past", ru: "вещь + sein im Präteritum + Partizip II = состояние в прошлом" }
   },
@@ -276,19 +276,19 @@ window.VV_SENTENCES = [
   },
   {
     verb: "haben", form: "Präsens", job: "mustDo",
-    situation: { en: "Friends invite you to a bar tonight, but you still have loads of work. Say no.", ru: "Друзья зовут тебя вечером в бар, а у тебя ещё куча работы. Откажись." },
+    situation: { en: "Friends invite you to a bar tonight, but your to-do list has other plans. Say no.", ru: "Друзья зовут тебя вечером в бар, а у тебя ещё куча дел. Откажись." },
     sentence: "Tut mir leid, ich ___ noch viel zu tun.", answer: "habe", marks: ["zu tun"],
     rule: { en: "haben im Präsens + zu + infinitive = have to", ru: "haben im Präsens + zu + Infinitiv = нужно" }
   },
   {
     verb: "haben", form: "Präteritum", person: "ich", job: "mustDo",
-    situation: { en: "Explain why you didn't come yesterday.", ru: "Объясни, почему ты вчера не пришла." },
+    situation: { en: "Explain why you didn't come yesterday: chores had to come first.", ru: "Объясни, почему ты вчера не пришла: пришлось заняться делами." },
     sentence: "Ich ___ gestern noch die Küche aufzuräumen.", answer: "hatte", marks: ["gestern", "aufzuräumen"],
     rule: { en: "time in the past + haben im Präteritum + zu + infinitive = had to", ru: "время в прошлом + haben im Präteritum + zu + Infinitiv = нужно было" }
   },
   {
     verb: "haben", form: "Präsens", job: "phrase",
-    situation: { en: "Your friend said the train leaves at 8. You checked, she's right.", ru: "Подруга сказала, что поезд в 8. Ты проверила — она права." },
+    situation: { en: "Your friend says the train leaves at 8. You check the timetable.", ru: "Подруга говорит, что поезд в восемь. Ты сверяешься с расписанием." },
     sentence: "Du ___ recht.", answer: "hast", marks: ["recht"],
     rule: { en: "recht haben = to be right (fixed phrase)", ru: "recht haben = быть правым (устойчивое выражение)" },
     tip: { blocks: [["recht haben", "verb"]], means: { en: "be right", ru: "быть правым" } }
@@ -303,7 +303,7 @@ window.VV_SENTENCES = [
 
   {
     verb: "haben", form: "Präsens", job: "feel",
-    situation: { en: "Your brother sleeps with five teddy bears. Tell Grandma why.", ru: "Брат спит с пятью мишками. Объясни бабушке почему." },
+    situation: { en: "Your brother insists on a night-light and five teddy bears. Explain to Grandma.", ru: "Брат требует ночник и пять мишек. Объясни бабушке." },
     sentence: "Mein kleiner Bruder ___ Angst vor der Dunkelheit.", answer: "hat", marks: ["Angst vor"],
     rule: { en: "haben im Präsens + Angst = already feel it, a state", ru: "haben im Präsens + Angst = уже чувствовать, состояние" }
   },
