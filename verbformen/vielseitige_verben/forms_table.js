@@ -146,14 +146,14 @@ window.VV_TABLE = {
       {
         tag: { en: "let's", ru: "давай" },
         job: "letsGo",
-        lit: { imp: [0, 1] },
-        blocks: [["lass / lasst", "verb"], ["uns", "plain"], [T.inf, "part"]],
+        lit: { imp: [0, 1, 2] },
+        blocks: [["lass / lasst / lassen Sie", "verb"], ["uns", "plain"], [T.inf, "part"]],
         means: { en: "let's", ru: "давай(те)" },
-        ex: "*Lasst* uns _gehen_!",
+        ex: "*Lassen Sie* uns _anfangen_!",
         also: {
-          label: { en: "Two forms", ru: "Две формы" },
-          en: "*lass uns* to one person · *lasst uns* to several",
-          ru: "*lass uns* — одному · *lasst uns* — нескольким"
+          label: { en: "Forms", ru: "Формы" },
+          en: "One person: *lass uns* · several: *lasst uns* · formal: *Lassen Sie uns*",
+          ru: "Одному: *lass uns* · нескольким: *lasst uns* · вежливо: *Lassen Sie uns*"
         }
       },
       {
@@ -300,7 +300,7 @@ window.VV_TABLE = {
         job: "phrase",
         lit: { cols: [0] },
         blocks: [["recht haben", "verb"], ["·", "or"], ["es eilig haben", "verb"]],
-        means: { en: "learn them as a whole", ru: "учить целиком" },
+        means: { en: "be right · be in a hurry", ru: "быть правым · спешить" },
         ex: "Du *hast recht*, aber ich *habe es eilig*."
       }
     ]

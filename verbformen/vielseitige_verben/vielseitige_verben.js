@@ -552,20 +552,18 @@ function renderFormsGrid(verb, lit) {
         "</tr>"
     )
     .join("");
-  const variants = (list, litList = []) =>
+  const variants = (list, litList = [], stacked = false) =>
     list
       .map((v, k) => {
         const [form, note] = Array.isArray(v) ? v : [v, ""];
         const variant = `<span class="vv-variant${litList.includes(k) ? " lit" : ""}">${esc(form)}</span>`;
+        const noteHtml = note ? `<span class="vv-note">${esc(formsText(note))}</span>` : "";
+        if (stacked) return `<div class="vv-variant-row">${variant}${noteHtml}</div>`;
         const dot = k ? '<span class="vv-dot">·</span>' : "";
-        return (
-          note
-            ? `<span class="vv-variant-note-group">${dot}${variant}<span class="vv-note">${esc(formsText(note))}</span></span>`
-            : `${dot}${variant}`
-        );
+        return `${dot}${variant}${noteHtml}`;
       })
       .join("");
-  const p2 = `<tr class="vv-extra first"><td class="vv-person">Partizip II</td><td colspan="3">${variants(V.p2, lit.p2)}</td></tr>`;
+  const p2 = `<tr class="vv-extra first"><td class="vv-person">Partizip II</td><td colspan="3">${variants(V.p2, lit.p2, true)}</td></tr>`;
   const imp = V.imp
     ? `<tr class="vv-extra"><td class="vv-person">Imperativ</td><td colspan="3">${variants(V.imp, lit.imp)}</td></tr>`
     : "";

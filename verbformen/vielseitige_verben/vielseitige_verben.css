@@ -960,20 +960,13 @@ body:has(#study:not(.hidden)) .version-mark {
   font-size: 11px;
   color: var(--forms-dim);
 }
-.vv-variant-note-group {
-  display: inline-flex;
+.vv-variant-row {
+  display: flex;
   align-items: baseline;
-  gap: 10px; /* clear of the lit form's background */
-  max-width: 100%;
-  vertical-align: baseline;
-  white-space: nowrap;
+  gap: 10px;
 }
-.vv-variant-note-group .vv-variant {
-  flex: 0 0 auto;
-}
-.vv-variant-note-group .vv-note {
-  flex: 0 0 auto;
-  white-space: nowrap;
+.vv-variant-row + .vv-variant-row {
+  margin-top: 4px;
 }
 .vv-dot {
   margin: 0 8px;
