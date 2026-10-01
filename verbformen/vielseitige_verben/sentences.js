@@ -211,7 +211,7 @@ window.VV_SENTENCES = [
   {
     verb: "lassen", form: "Infinitiv", job: "leave",
     situation: { en: "You're home and your key isn't in your bag. You forgot it at the office.", ru: "Ты дома, а ключа в сумке нет. Ты забыла его в офисе." },
-    sentence: "Ich habe meinen Schlüssel im Büro liegen ___.", answer: "lassen", also: ["gelassen"], marks: ["habe", "liegen"],
+    sentence: "Ich habe meinen Schlüssel im Büro liegen ___.", answer: "lassen", marks: ["habe", "liegen"],
     rule: { en: "haben im Präsens + liegen + lassen im Infinitiv = left (forgot) something", ru: "haben im Präsens + liegen + lassen im Infinitiv = забыла, оставила" },
     tip: { blocks: [["haben", "plain"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "place", ru: "место" }, "plain"], [{ en: "infinitive", ru: "Infinitiv" }, "part"], ["lassen", "verb"]], means: { en: "left behind (forgot)", ru: "забыла" } }
   },
@@ -525,13 +525,11 @@ window.VV_USE_PAIRS = {
   /* A right answer in another word („also“ in the sentence): one line in the yellow box after Prüfen. */
   const KRIEGEN = { en: "*kriegen* = spoken *bekommen*. Right! In writing: *bekommen*.", ru: "*kriegen* — разговорный вариант *bekommen*. Верно! Письменно — *bekommen*." };
   const ERHALTEN = { en: "*erhalten* = formal *bekommen*. Right! In everyday speech: *bekommen*.", ru: "*erhalten* — официальный вариант *bekommen*. Верно! В обычной речи — *bekommen*." };
-  const GELASSEN = { en: "*liegen gelassen* is right too! More common: *liegen lassen*.", ru: "*liegen gelassen* — тоже верно! Но чаще: *liegen lassen*." };
   const TRAIN = { en: "*erreichen* / *schaffen* work too! Here we practise *bekommen*.", ru: "*erreichen* / *schaffen* — тоже верно! Здесь тренируем *bekommen*." };
   window.VV_ALSO_NOTES = {
     kriege: KRIEGEN, kriegst: KRIEGEN, kriegt: KRIEGEN, kriegen: KRIEGEN, gekriegt: KRIEGEN, kriegte: KRIEGEN,
     erhalte: ERHALTEN, erhalten: ERHALTEN,
-    erreichen: TRAIN, schaffen: TRAIN,
-    gelassen: GELASSEN // only accepted in „liegen ___“
+    erreichen: TRAIN, schaffen: TRAIN
   };
   /* Past tense, the right verb in the wrong past form (wurde ↔ worden, bekam ↔ bekommen, ließ ↔ gelassen): under the
      „yours / needed“ rows, where each past form is used — speaking: Perfekt, writing: Präteritum. Only where that is
