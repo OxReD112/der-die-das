@@ -1282,8 +1282,8 @@ header h1 {
   transition: opacity 0.2s ease, filter 0.12s ease, background-color 0.12s ease;
 }
 .settings-icon-button svg {
-  width: 18px;
-  height: 18px;
+  width: 16.15px;
+  height: 16.15px;
 }
 .settings-icon-button:active {
   filter: brightness(0.82);
@@ -1603,7 +1603,7 @@ header h1 {
   opacity: 0;
   pointer-events: none;
   white-space: nowrap;
-  transform-origin: top left;
+  transform-origin: center center;
   will-change: transform, opacity, color;
 }
 /* version mark = the rule's version mark (11px, white 24% / text 34%) */

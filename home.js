@@ -1380,26 +1380,37 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canMorphDictionary = !reduceMotion && dictionaryOpen && dictionaryPanel && dictionaryTitle && dictionaryGhost;
 
-  function rectAsIfOpen(targetPanel, targetTitle) {
-    // While the panel is closed it sits translateY(100%) — i.e. shifted
-    // down by exactly its own rendered height — so the title's on-screen
-    // position once open is simply its current rect shifted up by that.
-    const r = targetTitle.getBoundingClientRect();
-    const h = targetPanel.offsetHeight;
-    return { left: r.left, top: r.top - h, width: r.width, height: r.height };
+  function textRect(element) {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const rect = range.getBoundingClientRect();
+    range.detach?.();
+    return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
   }
 
-  function flyGhost(targetGhost, targetTitle, from, to, fromColor, toColor, onDone) {
+  function rectAsIfOpen(targetPanel, targetTitle) {
+    // While closed the panel sits translateY(100%), so shift the title's
+    // actual text bounds up by the panel height to find its open position.
+    const r = textRect(targetTitle);
+    const h = targetPanel.offsetHeight;
+    return { ...r, top: r.top - h };
+  }
+
+  function flyGhost(targetGhost, fontSource, from, to, fromColor, toColor, onDone) {
     targetGhost.style.transition = "none";
+    targetGhost.style.transform = "none";
     targetGhost.style.left = to.left + "px";
     targetGhost.style.top = to.top + "px";
     targetGhost.style.width = to.width + "px";
     targetGhost.style.height = to.height + "px";
     targetGhost.style.alignItems = "center";
     targetGhost.style.justifyContent = "center";
-    targetGhost.style.fontSize = getComputedStyle(targetTitle).fontSize;
-    targetGhost.style.fontWeight = getComputedStyle(targetTitle).fontWeight;
-    targetGhost.style.letterSpacing = getComputedStyle(targetTitle).letterSpacing;
+    const fontStyle = getComputedStyle(fontSource);
+    targetGhost.style.fontFamily = fontStyle.fontFamily;
+    targetGhost.style.fontSize = fontStyle.fontSize;
+    targetGhost.style.fontWeight = fontStyle.fontWeight;
+    targetGhost.style.lineHeight = fontStyle.lineHeight;
+    targetGhost.style.letterSpacing = fontStyle.letterSpacing;
     targetGhost.style.color = fromColor;
     targetGhost.style.opacity = "1";
 
@@ -1416,19 +1427,28 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     targetGhost.style.color = toColor;
 
     let done = false;
+    let fallbackTimer;
+    const onTransitionEnd = (event) => {
+      // The color transition ends before the movement. Keep both real labels
+      // hidden until the ghost has actually reached its destination.
+      if (event.target !== targetGhost || event.propertyName !== "transform") return;
+      finish();
+    };
     const finish = () => {
       if (done) return;
       done = true;
+      targetGhost.removeEventListener("transitionend", onTransitionEnd);
+      clearTimeout(fallbackTimer);
       targetGhost.style.opacity = "0";
       onDone();
     };
-    targetGhost.addEventListener("transitionend", finish, { once: true });
-    setTimeout(finish, 460); // safety net if transitionend never fires
+    targetGhost.addEventListener("transitionend", onTransitionEnd);
+    fallbackTimer = setTimeout(finish, 460); // safety net if transitionend never fires
   }
 
   function playOpenMorph(trigger, targetPanel, targetTitle, targetGhost) {
     // Measured while still closed, so the subtraction trick above holds.
-    const from = trigger.getBoundingClientRect();
+    const from = textRect(trigger);
     const to = rectAsIfOpen(targetPanel, targetTitle);
     const fromColor = getComputedStyle(trigger).color;
     const toColor = getComputedStyle(targetTitle).color;
@@ -1440,13 +1460,15 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
 
   function playCloseMorph(trigger, targetTitle, targetGhost) {
     // Measured while still open, so no adjustment is needed here.
-    const from = targetTitle.getBoundingClientRect();
-    const to = trigger.getBoundingClientRect();
+    const from = textRect(targetTitle);
+    const to = textRect(trigger);
     const fromColor = getComputedStyle(targetTitle).color;
     const toColor = getComputedStyle(trigger).color;
     trigger.style.visibility = "hidden";
-    flyGhost(targetGhost, targetTitle, from, to, fromColor, toColor, () => {
+    targetTitle.style.visibility = "hidden";
+    flyGhost(targetGhost, trigger, from, to, fromColor, toColor, () => {
       trigger.style.visibility = "";
+      targetTitle.style.visibility = "";
     });
   }
 
