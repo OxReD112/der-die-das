@@ -367,8 +367,8 @@ loadKeyboardComponent().catch(e => console.error(e));
    whose vowel stays.
    Two ways in, one window (2026-09-28, like Vielseitige Verben):
    - start screen → the whole group as described above.
-   - during a round → only the verb of the current sentence, the answer's form lit (both cells when a form fits
-     two persons: können = wir / sie). The column comes from the sentence's tense, not from the word (sollte is
+   - during a round → only the verb of the current sentence, the answer's form lit for the sentence's person.
+     The column comes from the sentence's tense, not from the word (sollte is
      Präteritum and Konjunktiv II). Konjunktiv II Vergangenheit („hätte kommen sollen“): the answer is the
      infinitive, not a form in the table - only the Konjunktiv II heading is lit, with a short note.
      The button is off until Prüfen (no peeking). */
@@ -586,9 +586,10 @@ function modalAnswerCells(item) {
   const column = MODAL_FORM_COLUMN_OF[item.form] ?? -1;
   if (!forms || column < 0) return { column: -1, cells: [] };
   const a = item.answer.trim().toLowerCase();
-  const cells = [];
-  forms[MODAL_FORM_COLUMNS[column].key].forEach((f, i) => f === a && cells.push([i, column]));
-  return { column, cells };
+  const row = MODAL_FORM_PERSONS.indexOf(item.person);
+  if (row < 0) return { column, cells: [] };
+  const form = forms[MODAL_FORM_COLUMNS[column].key][row];
+  return { column, cells: form === a ? [[row, column]] : [] };
 }
 
 function renderFormsTable() {

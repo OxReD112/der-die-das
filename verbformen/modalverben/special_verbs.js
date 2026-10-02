@@ -8,6 +8,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präsens",
+    person: "ich",
     sentence: "Ich ___ heute leider nicht kommen.",
     answer: "kann",
     translation: { ru: "Я сегодня, к сожалению, не могу прийти.", en: "Unfortunately I can't come today." },
@@ -19,6 +20,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präsens",
+    person: "du",
     sentence: "___ du mir kurz helfen?",
     answer: "Kannst",
     translation: { ru: "Можешь мне быстро помочь?", en: "Can you help me for a moment?" },
@@ -30,6 +32,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Er ___ sehr gut kochen.",
     answer: "kann",
     translation: { ru: "Он очень хорошо готовит.", en: "He can cook very well." },
@@ -41,6 +44,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präsens",
+    person: "ihr",
     sentence: "___ ihr morgen früher kommen?",
     answer: "Könnt",
     translation: { ru: "Вы можете завтра прийти пораньше?", en: "Can you come earlier tomorrow?" },
@@ -52,6 +56,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "ich",
     sentence: "Gestern ___ ich nicht zur Arbeit kommen.",
     answer: "konnte",
     translation: { ru: "Вчера я не могла прийти на работу.", en: "Yesterday I couldn't come to work." },
@@ -60,6 +65,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "ich",
     sentence: "Als Kind ___ ich sehr schnell laufen.",
     answer: "konnte",
     translation: { ru: "В детстве я могла очень быстро бегать.", en: "As a child I could run very fast." },
@@ -68,6 +74,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ wegen des Wetters nicht draußen bleiben.",
     answer: "konnten",
     translation: {
@@ -79,6 +86,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ die Tür nicht öffnen.",
     answer: "konnte",
     translation: { ru: "Он не мог открыть дверь.", en: "He couldn't open the door." },
@@ -87,6 +95,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "du",
     sentence: "Konntest du gestern gut schlafen?",
     answer: "Konntest",
     translation: { ru: "Ты вчера мог хорошо поспать?", en: "Were you able to sleep well last night?" },
@@ -95,6 +104,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "ihr",
     sentence: "Warum ___ ihr nicht früher kommen?",
     answer: "konntet",
     translation: { ru: "Почему вы не смогли прийти раньше?", en: "Why couldn't you come earlier?" },
@@ -103,6 +113,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Sie ___ die Frage nicht beantworten.",
     answer: "konnte",
     translation: { ru: "Она не могла ответить на вопрос.", en: "She couldn't answer the question." },
@@ -111,6 +122,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Präteritum",
+    person: "sie/Sie",
     sentence: "Am Wochenende ___ die Kinder endlich ausschlafen.",
     answer: "konnten",
     translation: {
@@ -122,6 +134,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "___ Sie mir bitte helfen?",
     answer: "Könnten",
     translation: { ru: "Не могли бы Вы мне помочь?", en: "Could you help me, please?" },
@@ -130,6 +143,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "ihr",
     sentence: "___ ihr bitte etwas leiser sein?",
     answer: "Könntet",
     translation: { ru: "Не могли бы вы быть потише?", en: "Could you be a bit quieter, please?" },
@@ -138,6 +152,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "___ wir morgen darüber sprechen?",
     answer: "Könnten",
     translation: { ru: "Могли бы мы поговорить об этом завтра?", en: "Could we talk about it tomorrow?" },
@@ -146,6 +161,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "du",
     sentence: "___ du mir bitte die Datei schicken?",
     answer: "Könntest",
     translation: { ru: "Не мог(ла) бы ты прислать мне файл?", en: "Could you send me the file, please?" },
@@ -154,6 +170,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ heute länger bleiben, wenn es nötig wäre.",
     answer: "könnte",
     translation: {
@@ -165,6 +182,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "Wir ___ mit dem Auto fahren, aber der Zug ist bequemer.",
     answer: "könnten",
     translation: {
@@ -176,6 +194,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Was ___ ich jetzt machen?",
     answer: "könnte",
     translation: { ru: "Что я могла бы сейчас сделать?", en: "What could I do now?" },
@@ -184,6 +203,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Das ___ eine gute Lösung sein.",
     answer: "könnte",
     translation: { ru: "Это могло бы быть хорошим решением.", en: "That could be a good solution." },
@@ -192,6 +212,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präsens",
+    person: "ich",
     sentence: "Ich ___ jetzt leider los.",
     answer: "muss",
     translation: { ru: "Мне, к сожалению, уже пора идти.", en: "Unfortunately I have to go now." },
@@ -203,6 +224,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präsens",
+    person: "du",
     sentence: "___ du morgen arbeiten?",
     answer: "Musst",
     translation: { ru: "Тебе завтра нужно работать?", en: "Do you have to work tomorrow?" },
@@ -214,6 +236,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Anna ___ heute länger bleiben.",
     answer: "muss",
     translation: { ru: "Анне сегодня нужно задержаться.", en: "Anna has to stay longer today." },
@@ -225,6 +248,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präsens",
+    person: "ihr",
     sentence: "Ihr ___ nicht so früh aufstehen.",
     answer: "müsst",
     translation: { ru: "Вам не обязательно вставать так рано.", en: "You don't have to get up so early." },
@@ -236,6 +260,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Gestern ___ ich lange arbeiten.",
     answer: "musste",
     translation: { ru: "Вчера мне пришлось долго работать.", en: "Yesterday I had to work late." },
@@ -244,6 +269,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ den Termin verschieben.",
     answer: "mussten",
     translation: { ru: "Нам пришлось перенести встречу.", en: "We had to postpone the appointment." },
@@ -252,6 +278,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ früh aufstehen.",
     answer: "musste",
     translation: { ru: "Ему пришлось рано встать.", en: "He had to get up early." },
@@ -260,6 +287,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Früher ___ ich jeden Tag mit dem Bus fahren.",
     answer: "musste",
     translation: {
@@ -271,6 +299,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "ihr",
     sentence: "___ ihr lange auf den Bus warten?",
     answer: "Musstet",
     translation: { ru: "Вам пришлось долго ждать автобус?", en: "Did you have to wait long for the bus?" },
@@ -279,6 +308,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Sie ___ zu Hause bleiben.",
     answer: "musste",
     translation: { ru: "Ей пришлось остаться дома.", en: "She had to stay at home." },
@@ -287,6 +317,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "du",
     sentence: "Musstest du gestern arbeiten?",
     answer: "Musstest",
     translation: { ru: "Тебе вчера пришлось работать?", en: "Did you have to work yesterday?" },
@@ -295,6 +326,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Präteritum",
+    person: "sie/Sie",
     sentence: "Die Gäste ___ lange warten.",
     answer: "mussten",
     translation: { ru: "Гостям пришлось долго ждать.", en: "The guests had to wait a long time." },
@@ -303,6 +335,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ heute eigentlich früher gehen.",
     answer: "müsste",
     translation: {
@@ -314,6 +347,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "du",
     sentence: "Du ___ mehr schlafen.",
     answer: "müsstest",
     translation: { ru: "Тебе стоило бы больше спать.", en: "You ought to sleep more." },
@@ -322,6 +356,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "Wir ___ das Problem zuerst besprechen.",
     answer: "müssten",
     translation: { ru: "Нам стоило бы сначала обсудить проблему.", en: "We would need to discuss the problem first." },
@@ -330,6 +365,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Sie ___ dafür einen Termin vereinbaren.",
     answer: "müsste",
     translation: {
@@ -341,6 +377,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Man ___ vorsichtiger sein.",
     answer: "müsste",
     translation: { ru: "Следовало бы быть осторожнее.", en: "People ought to be more careful." },
@@ -349,6 +386,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "ihr",
     sentence: "Ihr ___ mehr Pausen machen.",
     answer: "müsstet",
     translation: { ru: "Вам стоило бы делать больше перерывов.", en: "You should take more breaks." },
@@ -357,6 +395,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ früher ins Bett gehen.",
     answer: "müssten",
     translation: { ru: "Детям стоило бы раньше ложиться спать.", en: "The children should go to bed earlier." },
@@ -365,6 +404,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ noch einmal nachfragen.",
     answer: "müsste",
     translation: { ru: "Мне стоило бы ещё раз уточнить.", en: "I ought to ask again." },
@@ -373,6 +413,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präsens",
+    person: "ich",
     sentence: "___ ich hier parken?",
     answer: "Darf",
     translation: { ru: "Можно мне здесь припарковаться?", en: "May I park here?" },
@@ -384,6 +425,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präsens",
+    person: "du",
     sentence: "Du ___ hier nicht rauchen.",
     answer: "darfst",
     translation: { ru: "Тебе здесь нельзя курить.", en: "You're not allowed to smoke here." },
@@ -395,6 +437,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Unser Sohn ___ abends nur eine Stunde fernsehen.",
     answer: "darf",
     translation: {
@@ -409,6 +452,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präsens",
+    person: "ihr",
     sentence: "Ihr ___ gern bei uns übernachten.",
     answer: "dürft",
     translation: { ru: "Вы можете переночевать у нас.", en: "You're welcome to stay the night with us." },
@@ -420,6 +464,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Als Kind ___ ich nicht so spät draußen bleiben.",
     answer: "durfte",
     translation: {
@@ -431,6 +476,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ den Raum nicht betreten.",
     answer: "durften",
     translation: { ru: "Нам нельзя было входить в комнату.", en: "We weren't allowed to enter the room." },
@@ -439,6 +485,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ gestern früher nach Hause gehen.",
     answer: "durfte",
     translation: { ru: "Ему вчера разрешили уйти домой раньше.", en: "He was allowed to go home early yesterday." },
@@ -447,6 +494,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Sie ___ das Auto ihrer Eltern benutzen.",
     answer: "durfte",
     translation: { ru: "Ей разрешали пользоваться машиной родителей.", en: "She was allowed to use her parents' car." },
@@ -455,6 +503,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "du",
     sentence: "Durftest du damals allein reisen?",
     answer: "Durftest",
     translation: {
@@ -466,6 +515,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Ich ___ dort nicht fotografieren.",
     answer: "durfte",
     translation: { ru: "Мне там нельзя было фотографировать.", en: "I wasn't allowed to take photos there." },
@@ -474,6 +524,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ noch eine Stunde spielen.",
     answer: "durften",
     translation: { ru: "Детям разрешили играть ещё час.", en: "The children were allowed to play for another hour." },
@@ -482,6 +533,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Präteritum",
+    person: "ihr",
     sentence: "___ ihr als Kinder lange fernsehen?",
     answer: "Durftet",
     translation: {
@@ -493,6 +545,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "___ ich Sie etwas fragen?",
     answer: "Dürfte",
     translation: { ru: "Не позволили бы Вы мне Вас кое о чём спросить?", en: "Might I ask you something?" },
@@ -501,6 +554,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "du",
     sentence: "Du ___ recht haben.",
     answer: "dürftest",
     translation: { ru: "Ты, скорее всего, прав(а).", en: "You're probably right." },
@@ -509,6 +563,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "___ ich Ihnen einen Vorschlag machen?",
     answer: "Dürfte",
     translation: { ru: "Не позволили бы Вы мне сделать Вам одно предложение?", en: "Might I make a suggestion?" },
@@ -517,6 +572,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "___ wir hier kurz warten?",
     answer: "Dürften",
     translation: { ru: "Не позволили бы Вы нам здесь немного подождать?", en: "Might we wait here for a moment?" },
@@ -525,6 +581,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Das ___ kein Problem sein.",
     answer: "dürfte",
     translation: { ru: "Скорее всего, это не будет проблемой.", en: "That probably won't be a problem." },
@@ -533,6 +590,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Er ___ schon zu Hause sein.",
     answer: "dürfte",
     translation: { ru: "Он, наверное, уже дома.", en: "He's probably already at home." },
@@ -541,6 +599,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "ihr",
     sentence: "Ihr ___ nach der langen Reise müde sein.",
     answer: "dürftet",
     translation: {
@@ -552,6 +611,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "Die Gäste ___ bald kommen.",
     answer: "dürften",
     translation: { ru: "Гости, скорее всего, скоро придут.", en: "The guests will probably arrive soon." },
@@ -560,6 +620,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präsens",
+    person: "ich",
     sentence: "Was ___ ich mitbringen?",
     answer: "soll",
     translation: { ru: "Что мне принести?", en: "What should I bring?" },
@@ -571,6 +632,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präsens",
+    person: "du",
     sentence: "Du ___ den Chef zurückrufen.",
     answer: "sollst",
     translation: { ru: "Тебе нужно перезвонить начальнику (он просил).", en: "You're supposed to call the boss back." },
@@ -582,6 +644,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Der Film ___ sehr gut sein.",
     answer: "soll",
     translation: { ru: "Говорят, фильм очень хороший.", en: "The film is supposed to be very good." },
@@ -593,6 +656,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präsens",
+    person: "ihr",
     sentence: "Ihr ___ um acht am Bahnhof sein.",
     answer: "sollt",
     translation: { ru: "Вам нужно быть на вокзале в восемь.", en: "You're supposed to be at the station at eight." },
@@ -604,6 +668,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Ich ___ gestern den Chef anrufen.",
     answer: "sollte",
     translation: { ru: "Вчера мне нужно было позвонить начальнику.", en: "I was supposed to call the boss yesterday." },
@@ -615,6 +680,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ um acht Uhr dort sein.",
     answer: "sollten",
     translation: { ru: "Мы должны были быть там в восемь.", en: "We were supposed to be there at eight." },
@@ -626,6 +692,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ die Unterlagen mitbringen.",
     answer: "sollte",
     translation: { ru: "Он должен был принести документы.", en: "He was supposed to bring the documents." },
@@ -637,6 +704,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "du",
     sentence: "Solltest du ihm Bescheid sagen?",
     answer: "Solltest",
     translation: { ru: "Ты должен был ему сообщить?", en: "Were you supposed to let him know?" },
@@ -648,6 +716,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ vor dem Essen die Hände waschen.",
     answer: "sollten",
     translation: {
@@ -662,6 +731,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Präteritum",
+    person: "ihr",
     sentence: "Ihr ___ doch um acht zu Hause sein!",
     answer: "solltet",
     translation: { ru: "Вы же должны были быть дома в восемь!", en: "You were supposed to be home at eight!" },
@@ -673,6 +743,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "du",
     sentence: "Du ___ besser mit ihm sprechen.",
     answer: "solltest",
     translation: { ru: "Тебе лучше поговорить с ним.", en: "You'd better talk to him." },
@@ -681,6 +752,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "ihr",
     sentence: "Ihr ___ früher Bescheid sagen.",
     answer: "solltet",
     translation: { ru: "Вам стоило бы предупреждать раньше.", en: "You should let us know earlier." },
@@ -689,6 +761,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ das wohl noch einmal prüfen.",
     answer: "sollte",
     translation: { ru: "Мне, пожалуй, стоит ещё раз это проверить.", en: "I should probably check that again." },
@@ -697,6 +770,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "Wir ___ vielleicht einen Arzt fragen.",
     answer: "sollten",
     translation: { ru: "Нам, возможно, стоит спросить врача.", en: "Maybe we should ask a doctor." },
@@ -705,6 +779,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Sie ___ sich etwas mehr Zeit nehmen.",
     answer: "sollte",
     translation: { ru: "Ей стоило бы не торопиться.", en: "She should take a bit more time." },
@@ -713,6 +788,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ mehr draußen spielen.",
     answer: "sollten",
     translation: { ru: "Детям стоило бы больше играть на улице.", en: "The children should play outside more." },
@@ -721,6 +797,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präsens",
+    person: "ich",
     sentence: "Ich ___ nächstes Jahr nach Spanien fahren.",
     answer: "will",
     translation: { ru: "Я хочу в следующем году поехать в Испанию.", en: "I want to go to Spain next year." },
@@ -732,6 +809,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präsens",
+    person: "du",
     sentence: "Was ___ du heute Abend machen?",
     answer: "willst",
     translation: { ru: "Что ты хочешь делать сегодня вечером?", en: "What do you want to do tonight?" },
@@ -743,6 +821,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Er ___ ein neues Auto kaufen.",
     answer: "will",
     translation: { ru: "Он хочет купить новую машину.", en: "He wants to buy a new car." },
@@ -754,6 +833,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präsens",
+    person: "ihr",
     sentence: "___ ihr mitkommen?",
     answer: "Wollt",
     translation: { ru: "Вы хотите пойти с нами?", en: "Do you want to come along?" },
@@ -765,6 +845,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ am Wochenende nach Berlin fahren.",
     answer: "wollten",
     translation: { ru: "Мы хотели на выходных поехать в Берлин.", en: "We wanted to go to Berlin at the weekend." },
@@ -773,6 +854,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ das Problem selbst lösen.",
     answer: "wollte",
     translation: { ru: "Он хотел решить проблему сам.", en: "He wanted to solve the problem himself." },
@@ -781,6 +863,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "du",
     sentence: "Wolltest du wirklich kündigen?",
     answer: "Wolltest",
     translation: { ru: "Ты действительно хотел уволиться?", en: "Did you really want to quit your job?" },
@@ -789,6 +872,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Ich ___ dich gerade anrufen.",
     answer: "wollte",
     translation: { ru: "Я как раз хотела тебе позвонить.", en: "I was just about to call you." },
@@ -797,6 +881,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ noch draußen spielen.",
     answer: "wollten",
     translation: { ru: "Дети хотели ещё поиграть на улице.", en: "The children wanted to keep playing outside." },
@@ -805,6 +890,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum",
+    person: "ihr",
     sentence: "Ihr ___ doch mitkommen!",
     answer: "wolltet",
     translation: { ru: "Вы же хотели пойти с нами!", en: "You wanted to come along!" },
@@ -813,6 +899,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
+    person: "ich",
     sentence: "Ich ___ dich etwas fragen.",
     answer: "wollte",
     translation: { ru: "Я хотела тебя кое о чём спросить.", en: "I wanted to ask you something." },
@@ -824,6 +911,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
+    person: "du",
     sentence: "___ du noch etwas sagen?",
     answer: "Wolltest",
     translation: { ru: "Ты хотел(а) ещё что-то сказать?", en: "Did you want to say something else?" },
@@ -835,6 +923,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
+    person: "sie/Sie",
     sentence: "___ Sie noch etwas bestellen?",
     answer: "Wollten",
     translation: { ru: "Вы хотели ещё что-нибудь заказать?", en: "Did you want to order anything else?" },
@@ -846,6 +935,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
+    person: "ihr",
     sentence: "___ ihr noch einen Kaffee?",
     answer: "Wolltet",
     translation: { ru: "Вы хотели ещё кофе?", en: "Did you want another coffee?" },
@@ -857,6 +947,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präsens",
+    person: "ich",
     sentence: "Ich ___ keinen Fisch.",
     answer: "mag",
     translation: { ru: "Я не люблю рыбу.", en: "I don't like fish." },
@@ -868,6 +959,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präsens",
+    person: "du",
     sentence: "___ du Katzen?",
     answer: "Magst",
     translation: { ru: "Ты любишь кошек?", en: "Do you like cats?" },
@@ -879,6 +971,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präsens",
+    person: "er/sie/es",
     sentence: "Meine Schwester ___ Jazz.",
     answer: "mag",
     translation: { ru: "Моя сестра любит джаз.", en: "My sister likes jazz." },
@@ -890,6 +983,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präsens",
+    person: "ihr",
     sentence: "___ ihr scharfes Essen?",
     answer: "Mögt",
     translation: { ru: "Вы любите острую еду?", en: "Do you like spicy food?" },
@@ -901,6 +995,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Als Kind ___ ich keinen Spinat.",
     answer: "mochte",
     translation: { ru: "В детстве я не любила шпинат.", en: "As a child I didn't like spinach." },
@@ -909,6 +1004,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "ich",
     sentence: "Früher ___ ich diesen Film sehr.",
     answer: "mochte",
     translation: { ru: "Раньше мне очень нравился этот фильм.", en: "I used to really like this film." },
@@ -917,6 +1013,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "wir",
     sentence: "Wir ___ das Restaurant nicht.",
     answer: "mochten",
     translation: { ru: "Нам не нравился этот ресторан.", en: "We didn't like the restaurant." },
@@ -925,6 +1022,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Er ___ klassische Musik.",
     answer: "mochte",
     translation: { ru: "Он любил классическую музыку.", en: "He liked classical music." },
@@ -933,6 +1031,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "du",
     sentence: "Mochtest du als Kind Schokolade?",
     answer: "Mochtest",
     translation: { ru: "Ты любила шоколад в детстве?", en: "Did you like chocolate as a child?" },
@@ -941,6 +1040,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Sie ___ den neuen Kollegen sofort.",
     answer: "mochte",
     translation: { ru: "Он ей сразу понравился.", en: "She liked the new colleague straight away." },
@@ -949,6 +1049,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "ihr",
     sentence: "___ ihr das Essen im Hotel?",
     answer: "Mochtet",
     translation: { ru: "Вам понравилась еда в отеле?", en: "Did you like the food at the hotel?" },
@@ -957,6 +1058,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
+    person: "er/sie/es",
     sentence: "Die Kinder ___ das Spiel sehr.",
     answer: "mochten",
     translation: { ru: "Детям очень нравилась эта игра.", en: "The children really liked the game." },
@@ -965,6 +1067,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ einen Kaffee, bitte.",
     answer: "möchte",
     translation: { ru: "Я хотела бы кофе, пожалуйста.", en: "I'd like a coffee, please." },
@@ -973,6 +1076,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "___ Sie etwas trinken?",
     answer: "Möchten",
     translation: { ru: "Вы хотели бы что-нибудь выпить?", en: "Would you like something to drink?" },
@@ -981,6 +1085,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "ihr",
     sentence: "Was ___ ihr trinken?",
     answer: "möchtet",
     translation: { ru: "Что вы хотели бы выпить?", en: "What would you like to drink?" },
@@ -989,6 +1094,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "du",
     sentence: "Möchtest du mit uns essen?",
     answer: "Möchtest",
     translation: { ru: "Ты хотел(а) бы поесть с нами?", en: "Would you like to eat with us?" },
@@ -997,6 +1103,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "wir",
     sentence: "Wir ___ gern einen Tisch für zwei reservieren.",
     answer: "möchten",
     translation: { ru: "Мы хотели бы забронировать столик на двоих.", en: "We'd like to reserve a table for two." },
@@ -1005,6 +1112,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "er/sie/es",
     sentence: "Er ___ gern einen Termin am Montag.",
     answer: "möchte",
     translation: { ru: "Он хотел бы записаться на понедельник.", en: "He would like an appointment on Monday." },
@@ -1013,6 +1121,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "ich",
     sentence: "Ich ___ gern mehr darüber wissen.",
     answer: "möchte",
     translation: { ru: "Я хотела бы узнать об этом больше.", en: "I'd like to know more about it." },
@@ -1021,6 +1130,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
+    person: "sie/Sie",
     sentence: "Die Kinder ___ ein Eis.",
     answer: "möchten",
     translation: { ru: "Дети хотели бы мороженое.", en: "The children would like an ice cream." },
@@ -1029,6 +1139,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
+    person: "ich",
     sentence: "Ich hätte früher kommen ___.",
     answer: "sollen",
     translation: { ru: "Мне следовало прийти раньше.", en: "I should have come earlier." },
@@ -1040,6 +1151,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
+    person: "du",
     sentence: "Du hättest mir das sagen ___.",
     answer: "sollen",
     translation: { ru: "Тебе следовало сказать мне это.", en: "You should have told me that." },
@@ -1051,6 +1163,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
+    person: "wir",
     sentence: "Wir hätten den Zug nehmen ___.",
     answer: "sollen",
     translation: { ru: "Нам надо было ехать на поезде.", en: "We should have taken the train." },
@@ -1062,6 +1175,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
+    person: "du",
     sentence: "Du hättest mich anrufen ___.",
     answer: "können",
     translation: { ru: "Ты мог(ла) бы мне позвонить.", en: "You could have called me." },
@@ -1073,6 +1187,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
+    person: "er/sie/es",
     sentence: "Das hätte schlimmer sein ___.",
     answer: "können",
     translation: { ru: "Могло быть и хуже.", en: "It could have been worse." },
@@ -1084,6 +1199,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
+    person: "ich",
     sentence: "Ich hätte dir helfen ___.",
     answer: "können",
     translation: { ru: "Я могла бы тебе помочь.", en: "I could have helped you." },
@@ -1095,6 +1211,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II Vergangenheit",
+    person: "wir",
     sentence: "Wir hätten das nicht machen ___.",
     answer: "müssen",
     translation: { ru: "Нам не нужно было это делать.", en: "We needn't have done that." },
@@ -1106,6 +1223,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "müssen",
     form: "Konjunktiv II Vergangenheit",
+    person: "du",
     sentence: "Du hättest nicht so früh kommen ___.",
     answer: "müssen",
     translation: { ru: "Тебе не обязательно было приходить так рано.", en: "You needn't have come so early." },
@@ -1117,6 +1235,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II Vergangenheit",
+    person: "ich",
     sentence: "Das hätte ich nicht sagen ___.",
     answer: "dürfen",
     translation: { ru: "Мне не следовало этого говорить.", en: "I shouldn't have said that." },
@@ -1128,6 +1247,7 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "dürfen",
     form: "Konjunktiv II Vergangenheit",
+    person: "er/sie/es",
     sentence: "Das hätte nicht passieren ___.",
     answer: "dürfen",
     translation: { ru: "Этого не должно было случиться.", en: "That should never have happened." },
