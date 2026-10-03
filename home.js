@@ -274,6 +274,8 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     // the air goes 1× under the tiles, ½× under Heute and ½× above the gear → 2 shares
     const air = Math.min(FIT.maxAir, Math.max(0, (FIT.airHeight * vh / zoom - height) / 2));
     homeTrack.style.setProperty("--wide-scale", String(Math.round(zoom * 1000) / 1000));
+    // the exercises (components/deutsch-wide-v1.js) give their header + keyboard this width
+    window.DEUTSCH_WIDE_BLOCK = Math.round(width * zoom);
     homeTrack.style.setProperty("--wide-extra", Math.round(air) + "px");
     setTop();
   }
@@ -970,6 +972,10 @@ function updateBack() {
     const r = version.getBoundingClientRect();
     rowTop = (r.top + r.bottom) / 2 - 22;
     placeBack("row", W / 2, rowTop);
+  } else if (doc.documentElement.classList.contains("deutsch-wide")) {
+    // wide exercise (components/deutsch-wide-v1.js): its left edge = the header's / keyboard's left edge
+    const block = parseFloat(win.getComputedStyle(doc.documentElement).getPropertyValue("--ex-block")) || 480;
+    placeBack("corner", Math.max(12, (W - block) / 2), rowTop);
   } else placeBack("corner", Math.max(12, (W - 480) / 2 + 12), rowTop); // during a round: bottom left, same height
 }
 /* Window dim (Home 5.69, Home's own windows since 5.92): in the iPhone web app windows don't reach the very bottom
