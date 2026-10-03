@@ -2304,12 +2304,12 @@ header h1 {
   }
 
   .page {
-    width: min(100%, 1540px);
+    width: min(100%, 1360px);
     padding-top: 72px;
   }
 
   header h1 {
-    width: min(calc(100% - 64px), 1540px);
+    width: min(calc(100% - 64px), 1360px);
     margin-inline: auto;
     text-align: left;
     font-size: 34px;
@@ -2327,13 +2327,13 @@ header h1 {
   }
 
   .home-viewport {
-    width: calc(100% + 48px);
+    width: 100%;
     overflow: visible;
   }
 
   .home-track {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(350px, 0.9fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "greeting today"
@@ -2341,7 +2341,7 @@ header h1 {
       "overview dictionary"
       "keep keep";
     align-items: start;
-    gap: 18px clamp(32px, 4vw, 60px);
+    gap: 18px clamp(24px, 3vw, 42px);
     width: 100%;
     transform: none !important;
     transition: none;
@@ -2371,7 +2371,7 @@ header h1 {
 
   .dashboard.mosaic {
     grid-area: exercise;
-    --tile-row: clamp(150px, 20vh, 190px);
+    --tile-row: clamp(100px, 14vh, 140px);
     --tile-gap: 12px;
     width: 100%;
     margin: 0;
@@ -2391,7 +2391,7 @@ header h1 {
     display: grid;
     flex: initial;
     width: 100%;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(2, var(--tile-row));
     grid-auto-rows: var(--tile-row);
     gap: var(--tile-gap);
@@ -2409,7 +2409,7 @@ header h1 {
   }
 
   .mosaic .tile-vocab {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 2;
     grid-row: 1;
     justify-content: center;
   }
@@ -2504,6 +2504,7 @@ header h1 {
     grid-area: dictionary;
     align-self: start;
     min-width: 0;
+    width: 100%;
     padding-top: 0;
   }
 
@@ -2519,8 +2520,11 @@ header h1 {
     position: relative;
     inset: auto;
     display: block;
-    height: min(58vh, 500px);
-    min-height: min(390px, 50vh);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    height: min(52vh, 440px);
+    min-height: min(340px, 44vh);
     overflow: hidden;
     padding: 18px;
     border: 1px solid var(--hairline);
@@ -2572,33 +2576,43 @@ header h1 {
 
   .today-bottom {
     grid-area: today;
-    width: min(100%, 330px);
+    width: min(100%, 340px);
     justify-self: end;
     margin: 0 12px 0 0;
   }
 
   .mosaic .tile-today {
     min-height: 52px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: flex-end;
-    gap: 9px;
-    padding: 7px 12px;
+    justify-content: stretch;
+    row-gap: 6px;
+    padding: 10px 14px;
     border-radius: 14px;
-    background: transparent;
-    box-shadow: none;
+    background: var(--card-bg-soft);
     cursor: default;
     pointer-events: none;
   }
 
-  .mosaic .tile-today::before,
-  .today-progress { display: none; }
+  .mosaic .tile-today::before { display: none; }
+
+  .today-progress {
+    display: block;
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 4px;
+    margin: 0;
+  }
 
   .today-label { font-size: 12px; }
 
   .today-number {
     font-size: 18px;
   }
+
+  .today-score { grid-column: 2; grid-row: 1; }
+  .today-label { grid-column: 1; grid-row: 1; }
 
   .home-progress-overview {
     grid-area: overview;
