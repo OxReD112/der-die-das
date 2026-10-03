@@ -1102,6 +1102,15 @@ header h1 {
   padding: 0 3px 8px;
   border-bottom: 1px solid var(--hairline);
 }
+.dictionary-entry-type-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+  padding: 0 3px;
+}
+.dictionary-entry-type-row[hidden] {
+  display: none;
+}
 .dictionary-entry-type {
   flex: 0 0 auto;
   color: var(--muted);
