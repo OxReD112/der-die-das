@@ -2264,7 +2264,7 @@ header h1 {
 html.home-wide-layout {
   --dashboard-width: 460px;
   --wide-left: 400px;
-  --wide-gap: clamp(56px, 6vw, 84px); /* space between the two columns: 1180px wide → 71px */
+  --wide-gap: 72px; /* space between the two columns (the whole block is scaled to the screen in home.js: fit) */
   --wide-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 html.home-wide-layout body {
@@ -2275,6 +2275,7 @@ html.home-wide-layout body {
   min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   padding: 0;
   justify-content: center;
+  padding-bottom: 4vh; /* optical centre: a little above the middle */
 }
 .home-wide-layout .home-viewport {
   width: 100%;
@@ -2292,7 +2293,8 @@ html.home-wide-layout body {
   justify-content: center;
   column-gap: var(--wide-gap);
   width: 100%;
-  padding: 40px 0 6vh; /* optical centre: a little above the middle */
+  position: relative; /* offsets inside the scaled block are measured from here (home.js) */
+  padding: 0;
   transform: none !important;
   transition: none;
   will-change: auto;
@@ -2405,8 +2407,8 @@ html.home-wide-layout body {
   margin-bottom: 8px;
 }
 .home-wide-layout .dictionary-panel .settings-title {
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--text); /* a chapter heading, like the tile names */
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
   cursor: pointer;
@@ -2460,9 +2462,6 @@ html.home-wide-layout body {
   height: 100%;
   min-height: 0;
 }
-.home-wide-dict-open .dictionary-panel .settings-title {
-  color: var(--secondary-text);
-}
 .home-wide-dict-open .dictionary-panel .settings-close {
   opacity: 1;
   pointer-events: auto;
@@ -2491,7 +2490,7 @@ html.home-wide-layout body {
   grid-area: right;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: calc(14px + var(--wide-extra, 0px)); /* extra air on taller screens (home.js: fit) */
   min-width: 0;
 }
 .home-wide-layout .dashboard.mosaic {
@@ -2532,7 +2531,7 @@ html.home-wide-layout body {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 18px 0 0;
+  padding: calc(18px + var(--wide-extra, 0px) / 2) 0 0; /* Fortschritt belongs to Heute: half the air */
 }
 /* the whole Fortschritt line opens the details, not only „Alle Details →“ */
 .home-wide-layout .home-pg-details::after {
@@ -2597,7 +2596,7 @@ html.home-wide-layout body {
   justify-content: flex-end;
   align-items: flex-start;
   min-height: 0;
-  padding-top: 14px;
+  padding-top: calc(14px + var(--wide-extra, 0px) / 2);
 }
 .home-wide-layout .settings-icon-button {
   position: static;

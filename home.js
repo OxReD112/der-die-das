@@ -149,12 +149,14 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   // Returns where the search field will rest once the slide is done.
   function slide(open) {
     if (isOpen() === open) return null;
-    const before = dictLayer.getBoundingClientRect().top;
+    // offsetTop = layout units inside the scaled composition (see fit), so the slide
+    // distance is right at every scale; getBoundingClientRect = real screen position
+    const before = dictLayer.offsetTop;
     root.classList.toggle("home-wide-dict-open", open);
     dictClose?.setAttribute("tabindex", open ? "0" : "-1");
     const target = dictInput.getBoundingClientRect();
     if (reduceMotion.matches) return target;
-    const after = dictLayer.getBoundingClientRect().top;
+    const after = dictLayer.offsetTop;
     dictLayer.style.transition = "none";
     dictLayer.style.transform = `translateY(${before - after}px)`;
     dictLayer.getBoundingClientRect();
@@ -238,13 +240,47 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
 
   function setTop() {
     // the open Wörterbuch starts right under „Deutsch.“
+    // (offsets: layout units inside the scaled composition, all relative to .home-track)
     if (!columns) return;
-    const h = header.getBoundingClientRect();
-    const c = columns.left.getBoundingClientRect();
-    columns.left.style.setProperty("--wide-dict-top", Math.max(0, Math.round(h.bottom - c.top + 26)) + "px");
+    const left = columns.left, foot = columns.foot;
+    const headerBottom = header.offsetTop + header.offsetHeight;
+    left.style.setProperty("--wide-dict-top", Math.max(0, Math.round(headerBottom - left.offsetTop + 26)) + "px");
     // …and may reach down to the end of the Fortschritt line under the tiles
-    const f = columns.foot.getBoundingClientRect();
-    columns.left.style.setProperty("--wide-dict-bottom", Math.round(Math.min(0, c.bottom - f.bottom)) + "px");
+    const leftBottom = left.offsetTop + left.offsetHeight;
+    const footBottom = foot.offsetTop + foot.offsetHeight;
+    left.style.setProperty("--wide-dict-bottom", Math.round(Math.min(0, leftBottom - footBottom)) + "px");
+  }
+
+  /* ---------- fit the composition to the screen ----------
+     Designed at iPad 11" size (1180 × 820). Every other screen gets the same composition,
+     scaled as a whole (CSS zoom: text and pictures stay sharp, proportions stay the same):
+       · width: the block fills about 82% of the screen width,
+       · it never gets taller than 78% of the screen, and never bigger than 1.32×.
+     Taller screens (e.g. 12.9" iPad, 4:3) also get extra air between tiles · Heute ·
+     Fortschritt (--wide-extra), until the block is about 70% of the screen height.
+     11" iPad ≈ 1.04× and no extra air · 12.9" iPad ≈ 1.2× + ~28px per gap. */
+  const FIT = { width: 0.82, maxHeight: 0.78, airHeight: 0.70, maxZoom: 1.32, minZoom: 0.85, maxAir: 40 };
+  function fit() {
+    if (!columns || isOpen()) return; // never re-fit under an open keyboard
+    homeTrack.style.zoom = "";
+    homeTrack.style.setProperty("--wide-extra", "0px");
+    const left = columns.left, right = columns.right;
+    const width = right.offsetLeft + right.offsetWidth - left.offsetLeft;
+    const height = homeActions.offsetTop + homeActions.offsetHeight - header.offsetTop;
+    if (!width || !height) return;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const zoom = Math.min(FIT.maxZoom, Math.max(FIT.minZoom,
+      Math.min(FIT.width * vw / width, FIT.maxHeight * vh / height)));
+    // the air goes 1× under the tiles, ½× under Heute and ½× above the gear → 2 shares
+    const air = Math.min(FIT.maxAir, Math.max(0, (FIT.airHeight * vh / zoom - height) / 2));
+    homeTrack.style.zoom = String(Math.round(zoom * 1000) / 1000);
+    homeTrack.style.setProperty("--wide-extra", Math.round(air) + "px");
+    setTop();
+  }
+  let fitFrame = 0;
+  function scheduleFit() {
+    cancelAnimationFrame(fitFrame);
+    fitFrame = requestAnimationFrame(fit);
   }
 
   dictInput.addEventListener("focus", () => {
@@ -304,17 +340,24 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     } else {
       root.classList.remove("home-wide-layout", "home-wide-dict-open");
       dictLayer.style.transform = "";
+      homeTrack.style.zoom = "";
+      homeTrack.style.removeProperty("--wide-extra");
       restore();
       phraseScreen.setAttribute("aria-hidden", "true");
       dictPanel.setAttribute("aria-hidden", "true");
       dictClose?.removeAttribute("tabindex");
     }
     document.dispatchEvent(new CustomEvent("deutsch:homelayout", { detail: { wide: enabled } }));
+    if (enabled) scheduleFit();
   }
 
   sync();
   wide.addEventListener("change", sync);
-  window.addEventListener("resize", setTop);
+  window.addEventListener("resize", scheduleFit);
+  window.addEventListener("load", scheduleFit);
+  document.fonts?.ready.then(scheduleFit);
+  // the Fortschritt line is filled in by progress-screen.js: re-fit once it has its height
+  if (overview && "ResizeObserver" in window) new ResizeObserver(scheduleFit).observe(overview);
 })();
 
 const DAILY_STATS_KEY = "deutschDailyStatsV1";
