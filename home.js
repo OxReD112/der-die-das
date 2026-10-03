@@ -1328,10 +1328,11 @@ async function restoreDeutschBackup(file) {
       created && !Number.isNaN(created.getTime())
         ? created.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })
         : "unknown date";
-    const moduleLabel = restorable.map(([name, config]) => config.label || name).join(", ");
-    if (
-      !window.confirm(`Restore backup from ${dateLabel}?\n\n${moduleLabel} will replace the current saved progress.`)
-    ) {
+    /* Short confirm: date + time, and the name if the backup has one. */
+    const profile = restorable.find(([name]) => name === "profile");
+    const backupName =
+      profile && profile[2] && typeof profile[2].name === "string" ? profile[2].name.trim().slice(0, 20) : "";
+    if (!window.confirm(`Restore backup from ${dateLabel}?` + (backupName ? `\nName: ${backupName}` : ""))) {
       if (note) note.textContent = "· Restore cancelled";
       return;
     }
