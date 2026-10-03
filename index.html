@@ -54,7 +54,7 @@
    html[data-theme="light"], html[data-theme="light"] body { background: #f6f4f1; }
    /* Launch splash (Home 5.119). iOS shows splash/launch-*.png the moment the app icon is tapped (before this
       page exists); this splash continues that picture — same colour, same wordmark image, same spot — and then
-      fades into Home. Only when the Home-screen app really starts (or with ?splash=1 for testing). Always dark,
+      fades into Home. Only when the Home-screen app really starts on an iPhone / iPad (or with ?splash=1 for testing). Always dark,
       because the launch picture can't know the light theme. Rules: DECISIONS.md "Launch splash". */
    #launchSplash { display: none; }
    html.is-launching #launchSplash {
@@ -69,8 +69,9 @@
      var MIN_MS = 1000;  // splash stays at least this long, counted from the tap (iOS picture + this splash)
      var MAX_MS = 5000;  // ...and never longer than this, even if a picture on Home never finishes loading
      var FADE_MS = 450;  // = the CSS transition
-     var standalone = navigator.standalone === true ||
-       (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+     // navigator.standalone exists only on iPhone / iPad: there the launch picture comes first and this
+     // continues it. Android draws its own launch screen (icon + name from the manifest), so no splash there.
+     var standalone = navigator.standalone === true;
      var forced = /[?&]splash=1(&|$)/.test(location.search);
      if(!standalone && !forced) return { place: function(){} };
      document.documentElement.classList.add("is-launching");
@@ -107,6 +108,7 @@
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
   <!-- Launch pictures (Home 5.119): iOS shows the one matching the screen while the app starts, instead of white.
+       iPhones upright only (sideways shows „Bitte dreh dein Handy.“); iPads upright + sideways.
        iOS saves them when the app is added to the Home Screen — remove + add again to pick up changes. -->
   <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-640x1136.png"/> <!-- iPhone SE 1st gen -->
   <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-750x1334.png"/> <!-- iPhone 6/7/8, SE 2nd/3rd gen -->
@@ -121,6 +123,24 @@
   <link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1206x2622.png"/> <!-- iPhone 16 Pro, 17, 17 Pro -->
   <link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1320x2868.png"/> <!-- iPhone 16 Pro Max, 17 Pro Max -->
   <link rel="apple-touch-startup-image" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1260x2736.png"/> <!-- iPhone Air -->
+  <link rel="apple-touch-startup-image" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1488x2266.png"/> <!-- iPad mini 6th/7th gen, portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2266x1488.png"/> <!-- iPad mini 6th/7th gen, landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1536x2048.png"/> <!-- iPad 9.7", iPad mini 1-5, iPad Air 1-2, portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2048x1536.png"/> <!-- iPad 9.7", iPad mini 1-5, iPad Air 1-2, landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1620x2160.png"/> <!-- iPad 10.2" (7th-9th gen), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2160x1620.png"/> <!-- iPad 10.2" (7th-9th gen), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1640x2360.png"/> <!-- iPad 10th/11th gen, iPad Air 11", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2360x1640.png"/> <!-- iPad 10th/11th gen, iPad Air 11", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2224.png"/> <!-- iPad Air 3rd gen, iPad Pro 10.5", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2224x1668.png"/> <!-- iPad Air 3rd gen, iPad Pro 10.5", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2388.png"/> <!-- iPad Pro 11" (1st-4th gen), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2388x1668.png"/> <!-- iPad Pro 11" (1st-4th gen), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1210px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2420.png"/> <!-- iPad Pro 11" (M4/M5), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1210px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2420x1668.png"/> <!-- iPad Pro 11" (M4/M5), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-2048x2732.png"/> <!-- iPad Pro 12.9", iPad Air 13", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2732x2048.png"/> <!-- iPad Pro 12.9", iPad Air 13", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1032px) and (device-height: 1376px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-2064x2752.png"/> <!-- iPad Pro 13" (M4/M5), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1032px) and (device-height: 1376px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2752x2064.png"/> <!-- iPad Pro 13" (M4/M5), landscape -->
   <link href="manifest.webmanifest" rel="manifest"/>
   <meta content="yes" name="apple-mobile-web-app-capable"/>
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
