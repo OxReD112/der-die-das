@@ -266,6 +266,11 @@
     selected = null;
     render();
   });
+  // On iPad, tapping a non-focusable area around the inline results may leave
+  // the native keyboard open. Any tap outside the search form dismisses it.
+  document.addEventListener("pointerdown", event => {
+    if (document.activeElement === input && !form.contains(event.target)) input.blur();
+  }, true);
   backButton?.addEventListener("click", () => {
     selected = null;
     const matches = findMatches(input.value);
