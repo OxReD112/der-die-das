@@ -88,13 +88,54 @@
   const homeTrack = document.getElementById("homeTrack");
   const dictionaryLayer = document.getElementById("dictionaryLayer");
   const dictionaryPanel = document.getElementById("dictionaryPanel");
-  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel) return;
+  const phraseContent = phraseScreen && phraseScreen.querySelector(".phrase-screen-content");
+  const homeScreen = document.querySelector(".home-screen");
+  const leftNodes = [
+    document.getElementById("greeting"),
+    document.querySelector(".dashboard.mosaic"),
+    document.getElementById("homeProgressOverview"),
+    document.querySelector(".today-bottom"),
+    document.getElementById("keepCard")
+  ].filter(Boolean);
+  const rightNodes = [phraseContent, dictionaryLayer].filter(Boolean);
+  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel || !homeScreen || !phraseContent) return;
+
+  let leftColumn = null;
+  let rightColumn = null;
+  const homeMarkers = new Map();
+
+  function moveInto(node, column) {
+    const marker = document.createComment("wide-home-position");
+    node.before(marker);
+    homeMarkers.set(node, marker);
+    column.append(node);
+  }
+
+  function restoreFromColumns() {
+    for (const [node, marker] of homeMarkers) {
+      marker.before(node);
+      marker.remove();
+    }
+    homeMarkers.clear();
+    leftColumn?.remove();
+    rightColumn?.remove();
+    leftColumn = rightColumn = null;
+  }
 
   function syncLayout() {
     const enabled = wide.matches;
     document.documentElement.classList.toggle("home-wide-layout", enabled);
-    if (enabled && dictionaryLayer.parentElement !== phraseScreen) phraseScreen.append(dictionaryLayer);
-    if (!enabled && dictionaryLayer.parentElement !== document.body) document.body.append(dictionaryLayer);
+    if (enabled && !leftColumn) {
+      leftColumn = document.createElement("div");
+      leftColumn.className = "home-dashboard-left";
+      rightColumn = document.createElement("div");
+      rightColumn.className = "home-dashboard-right";
+      homeTrack.append(leftColumn, rightColumn);
+      leftNodes.forEach(node => moveInto(node, leftColumn));
+      rightNodes.forEach(node => moveInto(node, rightColumn));
+    } else if (!enabled && leftColumn) {
+      restoreFromColumns();
+    }
     homeTrack.style.transform = "translateX(0)";
     phraseScreen.setAttribute("aria-hidden", enabled ? "false" : "true");
     dictionaryPanel.setAttribute("aria-hidden", enabled ? "false" : "true");

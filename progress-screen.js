@@ -292,43 +292,16 @@
 
     const heading=document.createElement("div");heading.className="home-pg-heading";
     const title=document.createElement("strong");title.textContent="Fortschritt";
-    const period=document.createElement("span");period.textContent=m.sinceStart?"Seit Start":"In 3 Wochen";
-    heading.append(title,period);
+    heading.append(title);
 
     const hero=document.createElement("div");hero.className="home-pg-hero";
     const learned=document.createElement("b");learned.textContent="+"+m.learned;
-    const description=document.createElement("span");description.textContent="Sachen sitzen jetzt · "+round(m.gNow)+"% gesamt";
+    const description=document.createElement("span");description.textContent="Sachen sitzen jetzt · "+round(m.gNow)+"% gesamt · "+(m.sinceStart?"seit Start":"in 3 Wochen");
     hero.append(learned,description);
-
-    const chapters=document.createElement("div");chapters.className="home-pg-chapters";
-    m.chapters.forEach(ch=>{
-      const known=ch.subs?ch.subs.some(e=>e.known):ch.single.known;
-      const row=document.createElement("div");row.className="home-pg-row";
-      const top=document.createElement("div");top.className="home-pg-row-top";
-      const name=document.createElement("strong");name.textContent=ch.name;
-      const delta=round(ch.now)-round(ch.then);
-      const value=document.createElement("span");
-      value.textContent=!known?"noch nicht geübt":(delta>0?"+":delta<0?"−":"±")+Math.abs(delta)+"%";
-      top.append(name,value);
-      const track=document.createElement("div");track.className="home-pg-track";
-      const fill=document.createElement("i");fill.style.width=Math.max(0,Math.min(100,ch.now))+"%";track.append(fill);
-      row.append(top,track);chapters.append(row);
-    });
-
-    const words=document.createElement("div");words.className="home-pg-words";
-    const wordTop=document.createElement("div");wordTop.className="home-pg-words-title";
-    const wordLabel=document.createElement("span");wordLabel.textContent="Wortschatz";
-    const wordValue=document.createElement("span");
-    const W=m.words;
-    wordValue.textContent=W&&W.total?`${W.learned} / ${W.total} gelernt`:"noch offen";
-    wordTop.append(wordLabel,wordValue);
-    const wordTrack=document.createElement("div");wordTrack.className="home-pg-word-track";
-    const wordFill=document.createElement("i");wordFill.style.width=W&&W.total?Math.max(0,Math.min(100,W.learned/W.total*100))+"%":"0%";
-    wordTrack.append(wordFill);words.append(wordTop,wordTrack);
 
     const details=document.createElement("button");details.type="button";details.className="home-pg-details";
     details.textContent="Alle Details anzeigen →";details.addEventListener("click",open);
-    box.replaceChildren(heading,hero,chapters,words,details);
+    box.replaceChildren(heading,hero,details);
   }
 
   /* ---------- screens ---------- */
