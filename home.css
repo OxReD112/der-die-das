@@ -2268,6 +2268,7 @@ html.home-wide-layout {
   --wide-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 html.home-wide-layout body {
+  overflow-x: clip; /* safety: the scaled block may never make the page pan sideways */
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 .home-wide-layout .page {
@@ -2295,7 +2296,10 @@ html.home-wide-layout body {
   width: 100%;
   position: relative; /* offsets inside the scaled block are measured from here (home.js) */
   padding: 0;
-  transform: none !important;
+  width: max-content; /* only as wide as the block itself, so scaling it never widens the page */
+  margin-inline: auto;
+  transform: scale(var(--wide-scale, 1)) !important; /* fitted to the screen in home.js (fit) */
+  transform-origin: 50% 50%;
   transition: none;
   will-change: auto;
 }

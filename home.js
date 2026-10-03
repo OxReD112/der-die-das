@@ -253,7 +253,8 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
 
   /* ---------- fit the composition to the screen ----------
      Designed at iPad 11" size (1180 × 820). Every other screen gets the same composition,
-     scaled as a whole (CSS zoom: text and pictures stay sharp, proportions stay the same):
+     scaled as a whole with transform: scale (--wide-scale), so text, tiles, pictures and gaps
+     all grow together. (CSS zoom was tried first: iPad Safari scaled the boxes but not the text.)
        · width: the block fills about 82% of the screen width,
        · it never gets taller than 78% of the screen, and never bigger than 1.32×.
      Taller screens (e.g. 12.9" iPad, 4:3) also get extra air between tiles · Heute ·
@@ -262,7 +263,6 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   const FIT = { width: 0.82, maxHeight: 0.78, airHeight: 0.70, maxZoom: 1.32, minZoom: 0.85, maxAir: 40 };
   function fit() {
     if (!columns || isOpen()) return; // never re-fit under an open keyboard
-    homeTrack.style.zoom = "";
     homeTrack.style.setProperty("--wide-extra", "0px");
     const left = columns.left, right = columns.right;
     const width = right.offsetLeft + right.offsetWidth - left.offsetLeft;
@@ -273,7 +273,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
       Math.min(FIT.width * vw / width, FIT.maxHeight * vh / height)));
     // the air goes 1× under the tiles, ½× under Heute and ½× above the gear → 2 shares
     const air = Math.min(FIT.maxAir, Math.max(0, (FIT.airHeight * vh / zoom - height) / 2));
-    homeTrack.style.zoom = String(Math.round(zoom * 1000) / 1000);
+    homeTrack.style.setProperty("--wide-scale", String(Math.round(zoom * 1000) / 1000));
     homeTrack.style.setProperty("--wide-extra", Math.round(air) + "px");
     setTop();
   }
@@ -340,7 +340,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     } else {
       root.classList.remove("home-wide-layout", "home-wide-dict-open");
       dictLayer.style.transform = "";
-      homeTrack.style.zoom = "";
+      homeTrack.style.removeProperty("--wide-scale");
       homeTrack.style.removeProperty("--wide-extra");
       restore();
       phraseScreen.setAttribute("aria-hidden", "true");
