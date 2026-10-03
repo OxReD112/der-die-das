@@ -284,7 +284,7 @@
   function renderHomeOverview(){
     const box=document.getElementById("homeProgressOverview");
     if(!box)return;
-    const wide=window.matchMedia("(min-width: 980px) and (orientation: landscape)").matches;
+    const wide=document.documentElement.classList.contains("home-wide-layout"); // set by home.js (initWideHome)
     box.hidden=!wide;
     if(!wide)return;
     let m;
@@ -300,7 +300,7 @@
     hero.append(learned,description);
 
     const details=document.createElement("button");details.type="button";details.className="home-pg-details";
-    details.textContent="Alle Details anzeigen →";details.addEventListener("click",open);
+    details.textContent=wide?"Alle Details →":"Alle Details anzeigen →";details.addEventListener("click",open);
     box.replaceChildren(heading,hero,details);
   }
 
@@ -413,6 +413,7 @@
     window.addEventListener("focus",renderHomeOverview);
     window.addEventListener("pageshow",renderHomeOverview);
     window.addEventListener("resize",renderHomeOverview);
+    document.addEventListener("deutsch:homelayout",renderHomeOverview);
     document.addEventListener("visibilitychange",()=>{if(!document.hidden)renderHomeOverview()});
     scroller=root.querySelector(".pg-body-scroll");inner=root.querySelector(".pg-inner");
     titleEl=root.querySelector("#pgTitle");backEl=root.querySelector(".pg-head-back");

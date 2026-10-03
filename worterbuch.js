@@ -266,9 +266,11 @@
     selected = null;
     render();
   });
-  // On iPad, tapping a non-focusable area around the inline results may leave
-  // the native keyboard open. Any tap outside the search form dismisses it.
+  // Wide home (iPad landscape): tapping a non-focusable area around the inline
+  // results may leave the native keyboard open. Any tap outside the search form
+  // dismisses it. Phones keep their original behaviour.
   document.addEventListener("pointerdown", event => {
+    if (!document.documentElement.classList.contains("home-wide-layout")) return;
     if (document.activeElement === input && !form.contains(event.target)) input.blur();
   }, true);
   backButton?.addEventListener("click", () => {

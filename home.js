@@ -79,71 +79,169 @@
   document.addEventListener("deutsch:translationlang", render);
 })();
 
-/* Wide home dashboard: place the existing dictionary panel beside the full
-   weekly phrase. Moving the same node keeps one search input and one result
-   renderer, while the narrow layout keeps its original overlay behavior. */
-(function initWideHomeDashboard() {
-  const wide = window.matchMedia("(min-width: 980px) and (orientation: landscape)");
-  const phraseScreen = document.getElementById("phraseScreen");
+/* ===== WIDE HOME · iPad landscape + computer (Home 5.119) =====
+   Only when the screen is wide AND in landscape AND tall enough. Phones never match
+   (even sideways they are under 500px tall), so the phone page is never touched.
+   The same nodes are moved into two columns and put back exactly where they were
+   when the screen goes narrow again (rotate, split view, smaller window).
+     left:  Deutsch. · greeting · phrase of the week · Wörterbuch (search field)
+     right: exercise tiles · Heute ;  under it: Fortschritt line (+ keep card)
+   Typing in the Wörterbuch slides it up under „Deutsch.“; the tiles never move.
+   All CSS lives under html.home-wide-layout. */
+window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) and (min-height: 600px)";
+(function initWideHome() {
+  const root = document.documentElement;
+  const wide = window.matchMedia(window.DEUTSCH_WIDE_QUERY);
   const homeTrack = document.getElementById("homeTrack");
-  const dictionaryLayer = document.getElementById("dictionaryLayer");
-  const dictionaryPanel = document.getElementById("dictionaryPanel");
-  const phraseContent = phraseScreen && phraseScreen.querySelector(".phrase-screen-content");
-  const homeScreen = document.querySelector(".home-screen");
+  const header = document.querySelector(".page > header");
   const greeting = document.getElementById("greeting");
-  const leftNodes = [
-    document.querySelector(".dashboard.mosaic"),
-    document.getElementById("homeProgressOverview"),
-    document.querySelector(".today-bottom"),
-    document.getElementById("keepCard")
-  ].filter(Boolean);
-  const rightNodes = [phraseContent, dictionaryLayer].filter(Boolean);
-  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel || !homeScreen || !phraseContent || !greeting) return;
+  const phraseScreen = document.getElementById("phraseScreen");
+  const phraseContent = phraseScreen && phraseScreen.querySelector(".phrase-screen-content");
+  const dictLayer = document.getElementById("dictionaryLayer");
+  const dictPanel = document.getElementById("dictionaryPanel");
+  const dictInput = document.getElementById("dictionarySearchInput");
+  const dictClose = document.getElementById("dictionaryClose");
+  const dictTitle = dictPanel && dictPanel.querySelector(".settings-title");
+  const mosaic = document.querySelector(".dashboard.mosaic");
+  const today = document.querySelector(".today-bottom");
+  const overview = document.getElementById("homeProgressOverview");
+  const keepCard = document.getElementById("keepCard");
+  if (!homeTrack || !header || !greeting || !phraseContent || !dictLayer || !dictPanel || !dictInput || !mosaic || !today) return;
 
-  let leftColumn = null;
-  let rightColumn = null;
-  const homeMarkers = new Map();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const markers = new Map();
+  let columns = null;
 
-  function moveInto(node, column) {
+  function moveInto(node, parent) {
+    if (!node) return;
     const marker = document.createComment("wide-home-position");
     node.before(marker);
-    homeMarkers.set(node, marker);
-    column.append(node);
+    markers.set(node, marker);
+    parent.append(node);
   }
 
-  function restoreFromColumns() {
-    for (const [node, marker] of homeMarkers) {
+  function restore() {
+    for (const [node, marker] of markers) {
       marker.before(node);
       marker.remove();
     }
-    homeMarkers.clear();
-    leftColumn?.remove();
-    rightColumn?.remove();
-    leftColumn = rightColumn = null;
+    markers.clear();
+    if (columns) Object.values(columns).forEach(column => column.remove());
+    columns = null;
   }
 
-  function syncLayout() {
-    const enabled = wide.matches;
-    document.documentElement.classList.toggle("home-wide-layout", enabled);
-    if (enabled && !leftColumn) {
-      leftColumn = document.createElement("div");
-      leftColumn.className = "home-dashboard-left";
-      rightColumn = document.createElement("div");
-      rightColumn.className = "home-dashboard-right";
-      homeTrack.append(leftColumn, rightColumn);
-      moveInto(greeting, homeTrack);
-      leftNodes.forEach(node => moveInto(node, leftColumn));
-      rightNodes.forEach(node => moveInto(node, rightColumn));
-    } else if (!enabled && leftColumn) {
-      restoreFromColumns();
+  function column(className) {
+    const element = document.createElement("div");
+    element.className = className;
+    homeTrack.append(element);
+    return element;
+  }
+
+  /* ---------- Wörterbuch: rest (bottom left) ⇄ open (under „Deutsch.“) ---------- */
+  const isOpen = () => root.classList.contains("home-wide-dict-open");
+
+  function slide(open) {
+    if (isOpen() === open) return;
+    const before = dictLayer.getBoundingClientRect().top;
+    root.classList.toggle("home-wide-dict-open", open);
+    dictClose?.setAttribute("tabindex", open ? "0" : "-1");
+    if (reduceMotion.matches) return;
+    const after = dictLayer.getBoundingClientRect().top;
+    dictLayer.style.transition = "none";
+    dictLayer.style.transform = `translateY(${before - after}px)`;
+    dictLayer.getBoundingClientRect();
+    dictLayer.style.transition = "";
+    dictLayer.style.transform = "";
+  }
+
+  function closeDictionary() {
+    if (!isOpen()) return;
+    if (document.activeElement === dictInput) dictInput.blur();
+    if (dictInput.value) {
+      // back to rest = a clean field (worterbuch.js re-renders on "input")
+      dictInput.value = "";
+      dictInput.dispatchEvent(new Event("input", { bubbles: true }));
     }
-    homeTrack.style.transform = "translateX(0)";
-    phraseScreen.setAttribute("aria-hidden", enabled ? "false" : "true");
-    dictionaryPanel.setAttribute("aria-hidden", enabled ? "false" : "true");
+    slide(false);
   }
 
-  syncLayout();
-  wide.addEventListener("change", syncLayout);
+  function setTop() {
+    // the open Wörterbuch starts right under „Deutsch.“
+    if (!columns) return;
+    const h = header.getBoundingClientRect();
+    const c = columns.left.getBoundingClientRect();
+    columns.left.style.setProperty("--wide-dict-top", Math.round(h.bottom - c.top + 26) + "px");
+    // …and may reach down to the end of the Fortschritt line under the tiles
+    const f = columns.foot.getBoundingClientRect();
+    columns.left.style.setProperty("--wide-dict-bottom", Math.round(Math.min(0, c.bottom - f.bottom)) + "px");
+  }
+
+  dictInput.addEventListener("focus", () => {
+    if (!columns) return;
+    setTop();
+    slide(true);
+  });
+  dictInput.addEventListener("input", () => {
+    if (columns && dictInput.value.trim()) slide(true);
+  });
+  dictClose?.addEventListener("click", () => {
+    if (columns) closeDictionary();
+  });
+  dictTitle?.addEventListener("click", () => {
+    if (!columns) return;
+    if (isOpen()) closeDictionary();
+    else dictInput.focus({ preventScroll: true });
+  });
+  // Tapping elsewhere with nothing typed puts the Wörterbuch back to rest.
+  dictLayer.addEventListener("focusout", () => {
+    setTimeout(() => {
+      if (!columns || !isOpen()) return;
+      if (dictLayer.contains(document.activeElement)) return;
+      if (!dictInput.value.trim()) closeDictionary();
+    }, 160);
+  });
+  document.addEventListener("keydown", event => {
+    if (columns && event.key === "Escape" && isOpen()) closeDictionary();
+  });
+
+  /* ---------- switch layouts ---------- */
+  function sync() {
+    const enabled = wide.matches;
+    if (enabled === !!columns) return;
+    if (enabled) {
+      root.classList.remove("home-dictionary-open");
+      dictPanel.classList.remove("is-open");
+      columns = {
+        left: column("wide-left"),
+        right: column("wide-right"),
+        foot: column("wide-foot")
+      };
+      moveInto(header, columns.left);
+      moveInto(greeting, columns.left);
+      moveInto(phraseContent, columns.left);
+      moveInto(dictLayer, columns.left);
+      moveInto(mosaic, columns.right);
+      moveInto(today, columns.right);
+      moveInto(overview, columns.foot);
+      moveInto(keepCard, columns.foot);
+      phraseScreen.setAttribute("aria-hidden", "false");
+      dictPanel.setAttribute("aria-hidden", "false");
+      dictClose?.setAttribute("tabindex", "-1");
+      root.classList.add("home-wide-layout");
+    } else {
+      root.classList.remove("home-wide-layout", "home-wide-dict-open");
+      dictLayer.style.transform = "";
+      restore();
+      phraseScreen.setAttribute("aria-hidden", "true");
+      dictPanel.setAttribute("aria-hidden", "true");
+      dictClose?.removeAttribute("tabindex");
+    }
+    document.dispatchEvent(new CustomEvent("deutsch:homelayout", { detail: { wide: enabled } }));
+  }
+
+  sync();
+  wide.addEventListener("change", sync);
+  window.addEventListener("resize", setTop);
 })();
 
 const DAILY_STATS_KEY = "deutschDailyStatsV1";
@@ -1578,7 +1676,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   close?.addEventListener("click", closeSettings);
 
   function openDictionary() {
-    if (document.documentElement.classList.contains("home-wide-layout")) return;
+    if (document.documentElement.classList.contains("home-wide-layout")) return; // wide: the Wörterbuch is inline (initWideHome)
     if (canMorphDictionary) playOpenMorph(dictionaryOpen, dictionaryPanel, dictionaryTitle, dictionaryGhost);
     document.documentElement.classList.add("home-dictionary-open");
     dictionaryPanel.classList.add("is-open");
@@ -1590,6 +1688,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     requestAnimationFrame(() => dictionarySearchInput?.focus({ preventScroll: true }));
   }
   function closeDictionary() {
+    if (document.documentElement.classList.contains("home-wide-layout")) return; // wide: initWideHome closes it
     dictionarySearchInput?.blur();
     if (canMorphDictionary) playCloseMorph(dictionaryOpen, dictionaryTitle, dictionaryGhost);
     dictionaryPanel.classList.remove("is-open");
