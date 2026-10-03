@@ -296,6 +296,24 @@ document.querySelectorAll("[data-app]").forEach(button => {
   button.addEventListener("click", () => openApp(button));
 });
 
+// Wörterbuch → Wortschatz: carry the selected entry across the same-origin exercise frame.
+window.openWortschatzForDictionary = item => {
+  const tile = document.querySelector('[data-app^="wortschatz/"]');
+  if (!tile || !item) return;
+  const request = { id: Date.now().toString(36) + Math.random().toString(36).slice(2), item };
+  try {
+    sessionStorage.setItem("deutschWortschatzPendingDictionaryWordV1", JSON.stringify(request));
+  } catch (e) {}
+  const deliver = () => {
+    try {
+      frame.contentWindow?.postMessage({ type: "deutsch:wortschatz-add", request }, location.origin);
+    } catch (e) {}
+  };
+  frame.addEventListener("load", deliver, { once: true });
+  openApp(tile);
+  deliver();
+};
+
 /* Paged tile block: page dots + arrow buttons (arrows on hover devices only). */
 (() => {
   const pager = document.getElementById("tilePages");

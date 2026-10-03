@@ -175,6 +175,12 @@
     }
 
     if (item.type !== "verb") entry.append(example);
+    const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
+    addToWortschatz.type = "button";
+    addToWortschatz.addEventListener("click", () => {
+      if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
+    });
+    entry.append(addToWortschatz);
     return entry;
   }
 

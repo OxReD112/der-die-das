@@ -1210,6 +1210,26 @@ header h1 {
   font-size: 14px;
   line-height: 1.45;
 }
+.dictionary-add-wortschatz {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 20px;
+  padding: 0 16px;
+  border: 1px solid var(--hairline);
+  border-radius: 22px;
+  background: var(--card-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.dictionary-add-wortschatz:active {
+  background: var(--tile-surface);
+}
 .dictionary-verb-complement-note {
   margin-top: 1px;
 }
