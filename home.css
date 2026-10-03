@@ -2334,8 +2334,11 @@ header h1 {
   .home-track {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    grid-template-areas: "left right";
+    grid-template-areas:
+      "greeting greeting"
+      "left right";
     align-items: start;
+    row-gap: 20px;
     column-gap: clamp(24px, 3vw, 42px);
     width: 100%;
     transform: none !important;
@@ -2365,16 +2368,21 @@ header h1 {
     min-width: 0;
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
+    gap: 26px;
   }
 
   .greeting {
-    width: auto;
+    grid-area: greeting;
+    width: 100%;
     min-height: 0;
-    margin: 0 8px 0;
-    align-items: flex-start;
+    margin: 0;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 8px;
     text-align: left;
     font-size: 16px;
+    white-space: nowrap;
   }
 
   .greeting-sub {
@@ -2382,7 +2390,7 @@ header h1 {
   }
 
   .dashboard.mosaic {
-    --tile-row: clamp(100px, 14vh, 140px);
+    --tile-row: clamp(130px, 18vh, 170px);
     --tile-gap: 12px;
     width: 100%;
     margin: 0;
@@ -2488,8 +2496,8 @@ header h1 {
     align-self: stretch;
     width: 100%;
     min-width: 0;
-    margin: 4px 0 0;
-    padding: 8px 10px 14px;
+    margin: 0;
+    padding: 8px 10px 18px;
     text-align: center;
   }
 
@@ -2584,9 +2592,9 @@ header h1 {
   }
 
   .today-bottom {
-    align-self: flex-end;
-    width: min(100%, 340px);
-    margin: 0 8px 0 0;
+    align-self: stretch;
+    width: 100%;
+    margin: 0;
   }
 
   .mosaic .tile-today {
@@ -2668,7 +2676,8 @@ header h1 {
   }
 
   .home-settings-open .home-dashboard-left,
-  .home-settings-open .home-dashboard-right {
+  .home-settings-open .home-dashboard-right,
+  .home-settings-open .greeting {
     transform: translateY(-12vh);
     opacity: 0;
     pointer-events: none;

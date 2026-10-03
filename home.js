@@ -90,15 +90,15 @@
   const dictionaryPanel = document.getElementById("dictionaryPanel");
   const phraseContent = phraseScreen && phraseScreen.querySelector(".phrase-screen-content");
   const homeScreen = document.querySelector(".home-screen");
+  const greeting = document.getElementById("greeting");
   const leftNodes = [
-    document.getElementById("greeting"),
     document.querySelector(".dashboard.mosaic"),
     document.getElementById("homeProgressOverview"),
     document.querySelector(".today-bottom"),
     document.getElementById("keepCard")
   ].filter(Boolean);
   const rightNodes = [phraseContent, dictionaryLayer].filter(Boolean);
-  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel || !homeScreen || !phraseContent) return;
+  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel || !homeScreen || !phraseContent || !greeting) return;
 
   let leftColumn = null;
   let rightColumn = null;
@@ -131,6 +131,7 @@
       rightColumn = document.createElement("div");
       rightColumn.className = "home-dashboard-right";
       homeTrack.append(leftColumn, rightColumn);
+      moveInto(greeting, homeTrack);
       leftNodes.forEach(node => moveInto(node, leftColumn));
       rightNodes.forEach(node => moveInto(node, rightColumn));
     } else if (!enabled && leftColumn) {
