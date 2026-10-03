@@ -1089,7 +1089,7 @@ header h1 {
   line-height: 1.35;
 }
 .dictionary-entry {
-  margin-top: 8px;
+  margin-top: 20px;
   text-align: left;
 }
 .dictionary-entry-backbar {
@@ -1102,17 +1102,8 @@ header h1 {
   padding: 0 3px 8px;
   border-bottom: 1px solid var(--hairline);
 }
-.dictionary-entry-type-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 6px;
-  padding: 0 3px;
-}
-.dictionary-entry-type-row[hidden] {
-  display: none;
-}
 .dictionary-entry-type {
-  flex: 0 0 auto;
+  margin: 0 3px 6px;
   color: var(--muted);
   font-size: 10px;
   line-height: 1.3;
