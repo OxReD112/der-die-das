@@ -2295,9 +2295,9 @@ header h1 {
   }
 }
 
-/* iPad landscape and desktop: one dashboard grid, using the two existing
-   screens as columns. The phrase and dictionary share a quiet, borderless
-   side area; the exercise tile group remains the main visual anchor. */
+/* iPad landscape and desktop: a three-region workspace. Exercises become a
+   compact launcher rail, with the weekly phrase and dictionary as separate
+   full-height work areas. The central app remains the visual center. */
 @media (min-width: 980px) and (orientation: landscape) {
   body {
     padding: calc(env(safe-area-inset-top) + 28px) max(32px, env(safe-area-inset-right))
@@ -2305,12 +2305,26 @@ header h1 {
   }
 
   .page {
-    width: min(100%, 1480px);
+    width: min(100%, 1540px);
     padding-top: 72px;
   }
 
   header h1 {
+    width: min(calc(100% - 64px), 1540px);
+    margin-inline: auto;
+    text-align: left;
     font-size: 34px;
+  }
+
+  .home-actions {
+    left: auto;
+    right: 36px;
+    bottom: 22px;
+    width: 44px;
+  }
+
+  .settings-icon-button {
+    right: 0;
   }
 
   .home-viewport {
@@ -2320,49 +2334,152 @@ header h1 {
 
   .home-track {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
-    align-items: start;
-    gap: clamp(32px, 5vw, 76px);
+    grid-template-columns: minmax(176px, 0.72fr) minmax(360px, 1.45fr) minmax(260px, 1fr);
+    grid-template-rows: auto auto minmax(320px, auto) auto auto;
+    grid-template-areas:
+      "greeting greeting greeting"
+      "overview overview overview"
+      "exercise phrase dictionary"
+      "today today today"
+      "keep keep keep";
+    align-items: stretch;
+    gap: 22px clamp(28px, 3vw, 48px);
     width: 100%;
     transform: none !important;
     transition: none;
     will-change: auto;
   }
 
+  /* Promote the current screen contents into named dashboard regions. This
+     keeps one copy of each control and leaves the phone DOM and behavior intact. */
   .home-screen,
   .phrase-screen {
+    display: contents;
+  }
+
+  .greeting {
+    grid-area: greeting;
     width: auto;
-    min-width: 0;
     min-height: 0;
-    flex: initial;
-    padding-inline: 24px;
+    margin: 0 24px 8px;
+    align-items: flex-start;
+    text-align: left;
+    font-size: 16px;
   }
 
-  .home-screen {
-    padding-bottom: 48px;
-  }
-
-  .home-screen .greeting {
-    width: min(100%, 360px);
-    min-height: 48px;
-    margin-bottom: 26px;
-    font-size: 17px;
+  .greeting-sub {
+    font-size: 14px;
   }
 
   .dashboard.mosaic {
-    --tile-row: clamp(154px, 22vh, 210px);
-    --tile-gap: 14px;
-    width: min(100%, 760px);
+    grid-area: exercise;
+    --tile-row: 62px;
+    --tile-gap: 9px;
+    width: 100%;
+    margin: 0;
+    align-self: start;
   }
 
   .tile-pages {
+    display: grid;
+    gap: var(--tile-gap);
     overflow: visible;
     scroll-snap-type: none;
-    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .tile-page {
-    flex: 0 0 100%;
+    display: grid;
+    flex: initial;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: var(--tile-row);
+    gap: var(--tile-gap);
+  }
+
+  .mosaic .tile {
+    height: var(--tile-row);
+    min-height: var(--tile-row);
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 11px;
+    border-radius: 18px;
+    text-align: left;
+  }
+
+  .mosaic .tile-vocab {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .mosaic .tile-vocab .tile-art {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+  }
+
+  .mosaic .tile-vocab .tile-art img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+  }
+
+  .mosaic .tile-vocab .tile-copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    margin-left: 10px;
+    transform: none;
+  }
+
+  .mosaic .tile-vocab .name {
+    font-size: 14px;
+  }
+
+  .mosaic .tile-vocab .status {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .mosaic .tile-small .tile-art {
+    position: relative;
+    inset: auto;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .mosaic .tile-small .tile-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mosaic .tile-small .tile-copy {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-left: 10px;
+    padding: 0;
+    background: none;
+    text-align: left;
+  }
+
+  .mosaic .tile-small .name {
+    font-size: 13px;
+  }
+
+  .mosaic .tile-small .status {
+    margin-top: 3px;
+    font-size: 11px;
   }
 
   .page-dots,
@@ -2371,27 +2488,13 @@ header h1 {
     display: none !important;
   }
 
-  .today-bottom {
-    width: min(100%, 760px);
-  }
-
-  .phrase-screen {
-    display: block;
-    overflow: visible;
-    padding: 10px 28px 36px;
-    border-radius: 30px;
-    background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--mint) 8%, transparent), transparent 70%);
-  }
-
-  .phrase-screen::before,
-  .phrase-screen::after,
-  .phrase-screen-back {
-    display: none;
-  }
-
   .phrase-screen-content {
+    grid-area: phrase;
+    align-self: start;
     width: 100%;
-    padding: 22px 8px 26px;
+    min-width: 0;
+    margin: 0;
+    padding: 14px clamp(18px, 2vw, 30px) 24px 0;
     text-align: left;
   }
 
@@ -2401,11 +2504,22 @@ header h1 {
   }
 
   .phrase-week-title {
-    font-size: clamp(28px, 3vw, 38px);
+    font-size: clamp(24px, 2.3vw, 30px);
   }
 
   .phrase-week-meaning {
     margin-top: 22px;
+  }
+
+  .phrase-screen-back {
+    display: none;
+  }
+
+  #dictionaryLayer {
+    grid-area: dictionary;
+    align-self: stretch;
+    min-width: 0;
+    padding-top: 14px;
   }
 
   .dictionary-layer {
@@ -2420,20 +2534,23 @@ header h1 {
     position: relative;
     inset: auto;
     display: block;
-    height: auto;
+    height: min(42vh, 370px);
     min-height: 0;
-    overflow: visible;
-    padding: 0 8px 16px;
-    background: transparent;
+    overflow: hidden;
+    padding: 18px;
+    border: 1px solid var(--hairline);
+    border-radius: 24px;
+    background: color-mix(in srgb, var(--tile-surface) 48%, var(--bg));
     transform: none;
     transition: none;
     pointer-events: auto;
   }
 
   .dictionary-panel .settings-content {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: auto;
+    height: 100%;
     padding-top: 0;
   }
 
@@ -2445,8 +2562,8 @@ header h1 {
   .dictionary-panel .settings-title {
     font-size: 15px;
     letter-spacing: 0;
-    color: var(--muted);
-    font-weight: 600;
+    color: var(--secondary-text);
+    font-weight: 650;
   }
 
   .dictionary-panel .settings-close,
@@ -2456,29 +2573,101 @@ header h1 {
   }
 
   .dictionary-content {
-    height: min(38vh, 330px);
-    min-height: 180px;
+    height: auto;
+    min-height: 0;
     margin-top: 0;
   }
 
-  .dictionary-intro {
-    margin-top: 10px;
-  }
-
   .dictionary-results {
-    max-height: min(34vh, 280px);
+    max-height: min(46vh, 420px);
   }
 
-  .home-actions {
-    left: auto;
-    right: 36px;
-    bottom: 22px;
-    width: 44px;
+  .today-bottom {
+    grid-area: today;
+    width: min(100%, 760px);
+    margin: 0 auto;
   }
 
-  .settings-icon-button {
-    right: 0;
+  .mosaic .tile-today {
+    padding: 14px 18px 16px;
+    border-radius: 18px;
+    row-gap: 8px;
   }
+
+  .today-number {
+    font-size: 23px;
+  }
+
+  .home-progress-overview {
+    grid-area: overview;
+    display: grid;
+    grid-template-columns: minmax(155px, 0.8fr) minmax(0, 1.8fr) minmax(150px, 0.8fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: clamp(16px, 2vw, 30px);
+    min-width: 0;
+    padding: 14px 20px 16px;
+    border: 1px solid var(--hairline);
+    border-radius: 24px;
+    background: var(--card-bg-soft);
+  }
+
+  .home-progress-overview[hidden] {
+    display: none;
+  }
+
+  .home-pg-heading {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 8px;
+  }
+
+  .home-pg-hero {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  .home-pg-chapters {
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 18px;
+  }
+
+  .home-pg-words {
+    grid-column: 3;
+    grid-row: 2;
+    margin: 0;
+    padding: 0 0 0 18px;
+    border-top: 0;
+    border-left: 1px solid var(--hairline);
+  }
+
+  .home-pg-details {
+    grid-column: 4;
+    grid-row: 2;
+    margin: 0;
+    padding: 10px 0 10px 12px;
+    white-space: nowrap;
+  }
+
+  .home-screen > .keep-card {
+    grid-area: keep;
+  }
+
+  .home-settings-open .home-screen > *,
+  .home-dictionary-open .home-screen > * {
+    transform: translateY(-12vh);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .home-dictionary-open .phrase-screen-content {
+    transform: translateY(-12vh);
+    opacity: 0;
+  }
+
 }
 
 /* ===== PHONE SIDEWAYS · „Bitte dreh dein Handy.“ (Home 5.96) =====

@@ -127,6 +127,27 @@
 .pg-items li:last-child{border-bottom:0}
 .pg-more{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:13px;padding:10px 2px;cursor:pointer}
 .pg-empty{color:var(--muted);font-size:14px;padding:6px 2px}
+.home-progress-overview{color:var(--text);text-align:left}
+.home-pg-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.home-pg-heading strong{font-size:14px;font-weight:650}
+.home-pg-heading span,.home-pg-note{color:var(--muted);font-size:12px}
+.home-pg-hero{display:flex;align-items:baseline;gap:10px;margin:0 0 16px}
+.home-pg-hero b{color:var(--mint);font-size:clamp(27px,2.4vw,31px);line-height:1;font-weight:700;letter-spacing:-.8px}
+.home-pg-hero span{font-size:14px;color:var(--secondary-text);line-height:1.3}
+.home-pg-chapters{display:grid;gap:11px}
+.home-pg-row{min-width:0}
+.home-pg-row-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:5px}
+.home-pg-row-top strong{font-size:13px;font-weight:550}
+.home-pg-row-top span{font-size:12px;color:var(--muted);white-space:nowrap}
+.home-pg-track{height:4px;overflow:hidden;border-radius:4px;background:var(--hairline)}
+.home-pg-track i{display:block;height:100%;border-radius:inherit;background:var(--mint)}
+.home-pg-words{margin-top:16px;padding-top:13px;border-top:1px solid var(--hairline)}
+.home-pg-words-title{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:600}
+.home-pg-words-title span:last-child{color:var(--secondary-text);font-weight:500}
+.home-pg-word-track{height:4px;margin-top:8px;overflow:hidden;border-radius:4px;background:var(--hairline)}
+.home-pg-word-track i{display:block;height:100%;border-radius:inherit;background:var(--mint)}
+.home-pg-details{align-self:flex-start;margin-top:auto;padding:14px 0 0;border:0;background:none;color:var(--mint);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;cursor:pointer}
+.home-pg-details:active{opacity:.75}
 .pg-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
 .pg-row.open .pg-expand{grid-template-rows:1fr}
 .pg-expand>div{overflow:hidden}
@@ -260,6 +281,56 @@
     return (W.learned>0?`<span class="pg-wl">${W.learned}</span>${sep}`:"")+(W.sitzt>0?`<span class="pg-wz">${W.sitzt}</span>${sep}`:"")+`<span class="pg-ws">${W.started}</span>`;
   }
 
+  function renderHomeOverview(){
+    const box=document.getElementById("homeProgressOverview");
+    if(!box)return;
+    const wide=window.matchMedia("(min-width: 980px) and (orientation: landscape)").matches;
+    box.hidden=!wide;
+    if(!wide)return;
+    let m;
+    try{m=buildModel()}catch(e){console.error("Deutsch progress overview:",e);return}
+
+    const heading=document.createElement("div");heading.className="home-pg-heading";
+    const title=document.createElement("strong");title.textContent="Fortschritt";
+    const period=document.createElement("span");period.textContent=m.sinceStart?"Seit Start":"In 3 Wochen";
+    heading.append(title,period);
+
+    const hero=document.createElement("div");hero.className="home-pg-hero";
+    const learned=document.createElement("b");learned.textContent="+"+m.learned;
+    const description=document.createElement("span");description.textContent="Sachen sitzen jetzt · "+round(m.gNow)+"% gesamt";
+    hero.append(learned,description);
+
+    const chapters=document.createElement("div");chapters.className="home-pg-chapters";
+    m.chapters.forEach(ch=>{
+      const known=ch.subs?ch.subs.some(e=>e.known):ch.single.known;
+      const row=document.createElement("div");row.className="home-pg-row";
+      const top=document.createElement("div");top.className="home-pg-row-top";
+      const name=document.createElement("strong");name.textContent=ch.name;
+      const delta=round(ch.now)-round(ch.then);
+      const value=document.createElement("span");
+      value.textContent=!known?"noch nicht geübt":(delta>0?"+":delta<0?"−":"±")+Math.abs(delta)+"%";
+      top.append(name,value);
+      const track=document.createElement("div");track.className="home-pg-track";
+      const fill=document.createElement("i");fill.style.width=Math.max(0,Math.min(100,ch.now))+"%";track.append(fill);
+      row.append(top,track);chapters.append(row);
+    });
+
+    const words=document.createElement("div");words.className="home-pg-words";
+    const wordTop=document.createElement("div");wordTop.className="home-pg-words-title";
+    const wordLabel=document.createElement("span");wordLabel.textContent="Wortschatz";
+    const wordValue=document.createElement("span");
+    const W=m.words;
+    wordValue.textContent=W&&W.total?`${W.learned} / ${W.total} gelernt`:"noch offen";
+    wordTop.append(wordLabel,wordValue);
+    const wordTrack=document.createElement("div");wordTrack.className="home-pg-word-track";
+    const wordFill=document.createElement("i");wordFill.style.width=W&&W.total?Math.max(0,Math.min(100,W.learned/W.total*100))+"%":"0%";
+    wordTrack.append(wordFill);words.append(wordTop,wordTrack);
+
+    const details=document.createElement("button");details.type="button";details.className="home-pg-details";
+    details.textContent="Alle Details anzeigen →";details.addEventListener("click",open);
+    box.replaceChildren(heading,hero,chapters,words,details);
+  }
+
   /* ---------- screens ---------- */
   let root,scroller,inner,titleEl,backEl,current=null,model=null;
   function setHead(title,back){
@@ -364,6 +435,12 @@
       +'<button class="pg-x" type="button" aria-label="Schließen">×</button></div>'
       +'<div class="pg-body-scroll"><div class="pg-inner"></div></div></div>';
     document.body.append(root);
+    renderHomeOverview();
+    window.addEventListener("storage",renderHomeOverview);
+    window.addEventListener("focus",renderHomeOverview);
+    window.addEventListener("pageshow",renderHomeOverview);
+    window.addEventListener("resize",renderHomeOverview);
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden)renderHomeOverview()});
     scroller=root.querySelector(".pg-body-scroll");inner=root.querySelector(".pg-inner");
     titleEl=root.querySelector("#pgTitle");backEl=root.querySelector(".pg-head-back");
     root.querySelector(".pg-x").addEventListener("click",close);
