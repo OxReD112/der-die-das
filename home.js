@@ -144,29 +144,96 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   /* ---------- Wörterbuch: rest (bottom left) ⇄ open (under „Deutsch.“) ---------- */
   const isOpen = () => root.classList.contains("home-wide-dict-open");
 
+  const SLIDE_MS = 480; // = the #dictionaryLayer transform transition in home.css
+
+  // Returns where the search field will rest once the slide is done.
   function slide(open) {
-    if (isOpen() === open) return;
+    if (isOpen() === open) return null;
     const before = dictLayer.getBoundingClientRect().top;
     root.classList.toggle("home-wide-dict-open", open);
     dictClose?.setAttribute("tabindex", open ? "0" : "-1");
-    if (reduceMotion.matches) return;
+    const target = dictInput.getBoundingClientRect();
+    if (reduceMotion.matches) return target;
     const after = dictLayer.getBoundingClientRect().top;
     dictLayer.style.transition = "none";
     dictLayer.style.transform = `translateY(${before - after}px)`;
     dictLayer.getBoundingClientRect();
     dictLayer.style.transition = "";
     dictLayer.style.transform = "";
+    return target;
   }
+
+  /* iPad: Safari only opens the keyboard when a field is focused inside the tap itself,
+     and then scrolls the page so that field sits above the keyboard. Focusing the real
+     field at its resting place (low on the screen) made Safari scroll, and the slide-up
+     then carried the field off the top. So on a tap:
+       1. the tap itself never focuses the resting field;
+       2. the slide-up starts, and an invisible stand-in field is focused exactly where the
+          search field will end up — the keyboard opens there, already above it, no scroll;
+       3. when the slide is done, focus moves to the real field (the keyboard stays open). */
+  let keyboardProxy = null;
+  let handOver = 0;
+  function openWithKeyboard() {
+    setTop();
+    const target = slide(true) || dictInput.getBoundingClientRect();
+    if (!keyboardProxy) {
+      keyboardProxy = document.createElement("input");
+      keyboardProxy.type = "search";
+      keyboardProxy.tabIndex = -1;
+      keyboardProxy.setAttribute("aria-hidden", "true");
+      keyboardProxy.setAttribute("autocomplete", "off");
+      keyboardProxy.setAttribute("autocapitalize", "none");
+      keyboardProxy.setAttribute("spellcheck", "false");
+      keyboardProxy.style.cssText =
+        "position:fixed;margin:0;padding:0;border:0;opacity:0;pointer-events:none;" +
+        "font-size:16px;background:transparent;color:transparent;caret-color:transparent;z-index:-1";
+      document.body.append(keyboardProxy);
+    }
+    Object.assign(keyboardProxy.style, {
+      left: target.left + "px",
+      top: target.top + "px",
+      width: target.width + "px",
+      height: target.height + "px"
+    });
+    keyboardProxy.value = "";
+    keyboardProxy.focus({ preventScroll: true });
+    clearTimeout(handOver);
+    handOver = setTimeout(() => {
+      // letters typed during the slide are carried over
+      const early = keyboardProxy.value;
+      dictInput.focus({ preventScroll: true });
+      if (early) {
+        dictInput.value += early;
+        keyboardProxy.value = "";
+        dictInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (window.scrollY || window.scrollX) window.scrollTo(0, 0);
+    }, reduceMotion.matches ? 0 : SLIDE_MS + 20);
+  }
+
+  // touch only: a mouse click on a computer focuses the field directly (no keyboard involved)
+  dictInput.addEventListener("touchstart", event => {
+    if (!columns || isOpen()) return;
+    event.preventDefault();
+  }, { passive: false });
+  dictInput.addEventListener("touchend", event => {
+    if (!columns || isOpen()) return;
+    event.preventDefault();
+    openWithKeyboard();
+  }, { passive: false });
 
   function closeDictionary() {
     if (!isOpen()) return;
-    if (document.activeElement === dictInput) dictInput.blur();
+    clearTimeout(handOver);
+    if (keyboardProxy && document.activeElement === keyboardProxy) keyboardProxy.blur();
+    if (dictLayer.contains(document.activeElement)) document.activeElement.blur(); // field or the × (hidden at rest)
     if (dictInput.value) {
       // back to rest = a clean field (worterbuch.js re-renders on "input")
       dictInput.value = "";
       dictInput.dispatchEvent(new Event("input", { bubbles: true }));
     }
     slide(false);
+    if (window.scrollY || window.scrollX) window.scrollTo(0, 0);
   }
 
   function setTop() {
@@ -194,13 +261,14 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   dictTitle?.addEventListener("click", () => {
     if (!columns) return;
     if (isOpen()) closeDictionary();
-    else dictInput.focus({ preventScroll: true });
+    else openWithKeyboard();
   });
   // Tapping elsewhere with nothing typed puts the Wörterbuch back to rest.
   dictLayer.addEventListener("focusout", () => {
     setTimeout(() => {
       if (!columns || !isOpen()) return;
       if (dictLayer.contains(document.activeElement)) return;
+      if (keyboardProxy && document.activeElement === keyboardProxy) return; // iPad: mid hand-over
       if (!dictInput.value.trim()) closeDictionary();
     }, 160);
   });
