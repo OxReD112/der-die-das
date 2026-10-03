@@ -478,7 +478,8 @@
     const word = String(item.word || item.infinitive || "").trim();
     const base = item.type === "noun" ? [item.article, word].filter(Boolean).join(" ") : word;
     let grammar = "";
-    if (item.type === "noun" && item.plural) grammar = item.plural;
+    if (item.type === "noun" && item.plural)
+      grammar = base + " ⋅ die " + String(item.plural).replace(/^(?:der|die|das)\s+/i, "");
     else if (item.type === "verb" && item.perfect_form) grammar = item.perfect_form;
     else if (item.type === "adjective" && (item.comparative || item.superlative))
       grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
