@@ -87,6 +87,7 @@
      top:   Deutsch.
      left:  greeting · phrase of the week · Wörterbuch (search field)
      right: exercise tiles · Heute ;  under it: Fortschritt line (+ keep card)
+     under the left column: the settings gear
    „Deutsch.“ sits above both columns. Typing in the Wörterbuch slides it up to the
    top of the left column (where the greeting is); the tiles never move.
    All CSS lives under html.home-wide-layout. */
@@ -108,6 +109,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   const today = document.querySelector(".today-bottom");
   const overview = document.getElementById("homeProgressOverview");
   const keepCard = document.getElementById("keepCard");
+  const homeActions = document.querySelector(".home-actions");
   if (!homeTrack || !header || !greeting || !phraseContent || !dictLayer || !dictPanel || !dictInput || !mosaic || !today) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -226,6 +228,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
       moveInto(today, columns.right);
       moveInto(overview, columns.foot);
       moveInto(keepCard, columns.foot);
+      moveInto(homeActions, homeTrack);
       phraseScreen.setAttribute("aria-hidden", "false");
       dictPanel.setAttribute("aria-hidden", "false");
       dictClose?.setAttribute("tabindex", "-1");

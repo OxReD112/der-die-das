@@ -421,7 +421,7 @@
     root.addEventListener("click",e=>{if(e.target===root)close()});
     const tile=document.querySelector(".tile-today");
     if(tile){
-      const wide=window.matchMedia("(min-width: 980px) and (orientation: landscape)");
+      const wide=window.matchMedia(window.DEUTSCH_WIDE_QUERY||"(orientation: landscape) and (min-width: 1024px) and (min-height: 600px)"); // same switch as home.js (initWideHome)
       const syncTodayInteraction=()=>{
         if(wide.matches){tile.removeAttribute("role");tile.removeAttribute("tabindex");}
         else{tile.setAttribute("role","button");tile.setAttribute("tabindex","0");}

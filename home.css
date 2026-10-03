@@ -2263,8 +2263,8 @@ header h1 {
    Typing in the Wörterbuch slides it up to the top of the left column (.home-wide-dict-open); the right side stays. */
 html.home-wide-layout {
   --dashboard-width: 460px;
-  --wide-left: 360px;
-  --wide-gap: clamp(80px, 9vw, 132px);
+  --wide-left: 400px;
+  --wide-gap: clamp(56px, 6vw, 84px); /* space between the two columns: 1180px wide → 71px */
   --wide-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 html.home-wide-layout body {
@@ -2287,7 +2287,8 @@ html.home-wide-layout body {
   grid-template-areas:
     "head head"
     "left right"
-    ".    foot";
+    "left foot"
+    ".    gear"; /* the left column reaches down to the Fortschritt line: the search field ends level with it */
   justify-content: center;
   column-gap: var(--wide-gap);
   width: 100%;
@@ -2318,7 +2319,7 @@ html.home-wide-layout body {
 .home-wide-layout .home-track > header {
   grid-area: head;
   position: static;
-  margin: 0 0 40px;
+  margin: 0 0 20px;
   padding: 0;
   background: transparent;
 }
@@ -2499,9 +2500,26 @@ html.home-wide-layout body {
   width: 100%;
   margin: 0;
 }
+.home-wide-layout .page-dots,
+.home-wide-layout .rail-arrow {
+  display: none !important; /* one page of tiles: no pager, no empty row under the tiles */
+}
 .home-wide-layout .today-bottom {
   width: 100%;
   margin: 0;
+}
+/* Heute only shows the day's points here: no card, no press effect, no pointer.
+   Only the tiles are boxes; Heute and Fortschritt below are quiet text, like the left column. */
+.home-wide-layout .mosaic .tile-today {
+  padding: 18px 0 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+.home-wide-layout .mosaic .tile-today::before {
+  display: none;
 }
 
 /* ---------- under the right column: one quiet Fortschritt line ---------- */
@@ -2510,10 +2528,23 @@ html.home-wide-layout body {
   min-width: 0;
 }
 .home-wide-layout .home-progress-overview:not([hidden]) {
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 16px 20px 0;
+  padding: 18px 0 0;
+}
+/* the whole Fortschritt line opens the details, not only „Alle Details →“ */
+.home-wide-layout .home-pg-details::after {
+  content: "";
+  position: absolute;
+  inset: 8px -8px -8px;
+  border-radius: 10px;
+}
+@media (hover: hover) {
+  .home-wide-layout .home-progress-overview:hover .home-pg-details {
+    color: var(--secondary-text);
+  }
 }
 .home-wide-layout .home-pg-heading {
   display: none;
@@ -2548,16 +2579,30 @@ html.home-wide-layout body {
   margin-top: 16px;
 }
 
-/* ---------- settings: the gear rests in the bottom-right corner ---------- */
+/* Settings open: the whole composition steps back (on the phone „Deutsch.“ stays above Settings;
+   here it would sit beside it) */
+.home-wide-layout .home-track > * {
+  transition: opacity 0.3s ease;
+}
+.home-wide-layout.home-settings-open .home-track > * {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- settings: the gear sits under the right column, on its right edge ---------- */
 .home-wide-layout .home-actions {
-  position: fixed;
-  left: auto;
-  right: max(28px, env(safe-area-inset-right));
-  bottom: max(22px, env(safe-area-inset-bottom));
-  width: 44px;
+  grid-area: gear;
+  position: relative;
+  inset: auto;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-height: 0;
+  padding-top: 14px;
 }
 .home-wide-layout .settings-icon-button {
-  right: 0;
+  position: static;
+  margin-right: -14px; /* the 16px icon, not its 44px tap area, lines up with the column */
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
