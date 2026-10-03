@@ -79,6 +79,31 @@
   document.addEventListener("deutsch:translationlang", render);
 })();
 
+/* Wide home dashboard: place the existing dictionary panel beside the full
+   weekly phrase. Moving the same node keeps one search input and one result
+   renderer, while the narrow layout keeps its original overlay behavior. */
+(function initWideHomeDashboard() {
+  const wide = window.matchMedia("(min-width: 980px) and (orientation: landscape)");
+  const phraseScreen = document.getElementById("phraseScreen");
+  const homeTrack = document.getElementById("homeTrack");
+  const dictionaryLayer = document.getElementById("dictionaryLayer");
+  const dictionaryPanel = document.getElementById("dictionaryPanel");
+  if (!phraseScreen || !homeTrack || !dictionaryLayer || !dictionaryPanel) return;
+
+  function syncLayout() {
+    const enabled = wide.matches;
+    document.documentElement.classList.toggle("home-wide-layout", enabled);
+    if (enabled && dictionaryLayer.parentElement !== phraseScreen) phraseScreen.append(dictionaryLayer);
+    if (!enabled && dictionaryLayer.parentElement !== document.body) document.body.append(dictionaryLayer);
+    homeTrack.style.transform = "translateX(0)";
+    phraseScreen.setAttribute("aria-hidden", enabled ? "false" : "true");
+    dictionaryPanel.setAttribute("aria-hidden", enabled ? "false" : "true");
+  }
+
+  syncLayout();
+  wide.addEventListener("change", syncLayout);
+})();
+
 const DAILY_STATS_KEY = "deutschDailyStatsV1";
 
 const DAILY_LIMIT_OFF_DATE_KEY = "deutschDailyLimitOffDateV1";
@@ -1511,6 +1536,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   close?.addEventListener("click", closeSettings);
 
   function openDictionary() {
+    if (document.documentElement.classList.contains("home-wide-layout")) return;
     if (canMorphDictionary) playOpenMorph(dictionaryOpen, dictionaryPanel, dictionaryTitle, dictionaryGhost);
     document.documentElement.classList.add("home-dictionary-open");
     dictionaryPanel.classList.add("is-open");
