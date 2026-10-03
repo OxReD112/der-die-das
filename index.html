@@ -52,42 +52,52 @@
    /* Keep the browser's first canvas on the selected app colour before home.css arrives. */
    html, body { background: #1b1b1d; }
    html[data-theme="light"], html[data-theme="light"] body { background: #f6f4f1; }
-   #launchSplash {
-     position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
-     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-     background: #1b1b1d; color: #f2f0ed; opacity: 0; visibility: hidden; pointer-events: none;
-     transition: opacity 220ms ease, visibility 220ms ease;
+   /* Launch splash (Home 5.119). iOS shows splash/launch-*.png the moment the app icon is tapped (before this
+      page exists); this splash continues that picture — same colour, same wordmark image, same spot — and then
+      fades into Home. Only when the Home-screen app really starts (or with ?splash=1 for testing). Always dark,
+      because the launch picture can't know the light theme. Rules: DECISIONS.md "Launch splash". */
+   #launchSplash { display: none; }
+   html.is-launching #launchSplash {
+     display: block; position: fixed; inset: 0; z-index: 1000; background: #1b1b1d;
+     transition: opacity 450ms ease;
    }
-   html[data-theme="light"] #launchSplash { background: #f6f4f1; color: #242426; }
-   #launchSplash.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
-   #launchSplash h1 { margin: 0; font: 750 32px/1 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif; letter-spacing: -0.7px; }
-   @media (prefers-reduced-motion: reduce) { #launchSplash { transition: none; } }
+   html.is-launching #launchSplash.is-leaving { opacity: 0; pointer-events: none; }
+   #launchSplash img { position: absolute; left: calc(50% - 63px); top: calc(50% - 12px); width: 126px; height: 24px; }
   </style>
   <script>
    window.DeutschLaunchSplash = (function(){
-     var DELAY_MS = 300, MIN_VISIBLE_MS = 400, shownAt = 0;
-     var ready = false, pendingShow = false, hideTimer = 0;
+     var MIN_MS = 1000;  // splash stays at least this long, counted from the tap (iOS picture + this splash)
+     var MAX_MS = 5000;  // ...and never longer than this, even if a picture on Home never finishes loading
+     var FADE_MS = 450;  // = the CSS transition
+     var standalone = navigator.standalone === true ||
+       (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+     var forced = /[?&]splash=1(&|$)/.test(location.search);
+     if(!standalone && !forced) return { place: function(){} };
+     document.documentElement.classList.add("is-launching");
+
      function splash(){ return document.getElementById("launchSplash"); }
-     function show(){
-       if(ready) return;
-       var el = splash();
-       if(!el){ pendingShow = true; return; }
-       pendingShow = false;
-       shownAt = performance.now();
-       el.classList.add("is-visible");
+     // The launch pictures put the 126 x 24 wordmark box at the centre, rounded to whole points — same here,
+     // so the hand-over from the iOS picture to this page doesn't move by half a point.
+     function place(){
+       var el = splash(); if(!el) return;
+       var img = el.querySelector("img");
+       img.style.left = Math.round((el.clientWidth - 126) / 2) + "px";
+       img.style.top = Math.round((el.clientHeight - 24) / 2) + "px";
      }
-     function hide(){
-       ready = true;
-       clearTimeout(hideTimer);
+     var done = false;
+     function finish(){
+       if(done) return;
+       done = true;
        var el = splash();
-       if(!el) return;
-       if(!shownAt){ el.classList.remove("is-visible"); return; }
-       var remaining = Math.max(0, MIN_VISIBLE_MS - (performance.now() - shownAt));
-       hideTimer = setTimeout(function(){ el.classList.remove("is-visible"); }, remaining);
+       if(el) el.classList.add("is-leaving");
+       setTimeout(function(){ document.documentElement.classList.remove("is-launching"); }, el ? FADE_MS + 50 : 0);
      }
-     setTimeout(show, DELAY_MS);
-     window.addEventListener("load", hide, { once: true });
-     return { mount: function(){ if(pendingShow && !ready) show(); if(ready) hide(); } };
+     function pageReady(){ setTimeout(finish, Math.max(0, MIN_MS - performance.now())); }
+     if(document.readyState === "complete") pageReady();
+     else window.addEventListener("load", pageReady, { once: true });
+     setTimeout(finish, MAX_MS);
+     window.addEventListener("resize", place);
+     return { place: place };
    })();
   </script>
   <title>
@@ -96,13 +106,28 @@
   <link href="home.css?v=41" rel="stylesheet"/>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+  <!-- Launch pictures (Home 5.119): iOS shows the one matching the screen while the app starts, instead of white.
+       iOS saves them when the app is added to the Home Screen — remove + add again to pick up changes. -->
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-640x1136.png"/> <!-- iPhone SE 1st gen -->
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-750x1334.png"/> <!-- iPhone 6/7/8, SE 2nd/3rd gen -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2208.png"/> <!-- iPhone 6/7/8 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1125x2436.png"/> <!-- iPhone X, XS, 11 Pro, 12 mini, 13 mini -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-828x1792.png"/> <!-- iPhone XR, 11 -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2688.png"/> <!-- iPhone XS Max, 11 Pro Max -->
+  <link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1170x2532.png"/> <!-- iPhone 12, 13, 14, 16e -->
+  <link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1284x2778.png"/> <!-- iPhone 12/13 Pro Max, 14 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1179x2556.png"/> <!-- iPhone 14 Pro, 15, 15 Pro, 16 -->
+  <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1290x2796.png"/> <!-- iPhone 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1206x2622.png"/> <!-- iPhone 16 Pro, 17, 17 Pro -->
+  <link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1320x2868.png"/> <!-- iPhone 16 Pro Max, 17 Pro Max -->
+  <link rel="apple-touch-startup-image" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1260x2736.png"/> <!-- iPhone Air -->
   <link href="manifest.webmanifest" rel="manifest"/>
   <meta content="yes" name="apple-mobile-web-app-capable"/>
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
  </head>
  <body>
-  <div id="launchSplash" aria-hidden="true"><h1>Deutsch.</h1></div>
-  <script>window.DeutschLaunchSplash.mount();</script>
+  <div id="launchSplash" aria-hidden="true"><img alt="" src="splash/wordmark@3x.png" srcset="splash/wordmark@2x.png 2x, splash/wordmark@3x.png 3x"/></div>
+  <script>window.DeutschLaunchSplash.place();</script>
   <main class="page">
    <header>
     <h1>
@@ -284,7 +309,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.118</div>
+    <div class="settings-version">Deutsch. version 5.119</div>
    </div>
    </section>
   </div>
