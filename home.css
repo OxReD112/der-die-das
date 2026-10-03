@@ -2258,9 +2258,9 @@ header h1 {
    Everything here is scoped to html.home-wide-layout, which home.js (initWideHome) sets only when
    window.DEUTSCH_WIDE_QUERY matches: landscape, ≥ 1024px wide, ≥ 600px tall. Phones never get it.
    One calm, centred composition — the tiles keep their phone size, the width becomes margin:
-     left (text only): Deutsch. · greeting · phrase of the week · Wörterbuch field
+     top: Deutsch.   left (text only): greeting · phrase of the week · Wörterbuch field
      right: the tile mosaic · Heute ;  under it: one quiet Fortschritt line
-   Typing in the Wörterbuch slides it up under „Deutsch.“ (.home-wide-dict-open); the right side stays. */
+   Typing in the Wörterbuch slides it up to the top of the left column (.home-wide-dict-open); the right side stays. */
 html.home-wide-layout {
   --dashboard-width: 460px;
   --wide-left: 360px;
@@ -2285,6 +2285,7 @@ html.home-wide-layout body {
   display: grid;
   grid-template-columns: var(--wide-left) var(--dashboard-width);
   grid-template-areas:
+    "head head"
     "left right"
     ".    foot";
   justify-content: center;
@@ -2314,23 +2315,24 @@ html.home-wide-layout body {
   flex-direction: column;
   min-width: 0;
 }
-.home-wide-layout .wide-left > header {
+.home-wide-layout .home-track > header {
+  grid-area: head;
   position: static;
-  margin: 0;
+  margin: 0 0 40px;
   padding: 0;
   background: transparent;
 }
-.home-wide-layout .wide-left > header::after {
+.home-wide-layout .home-track > header::after {
   display: none;
 }
-.home-wide-layout .wide-left > header h1 {
+.home-wide-layout .home-track > header h1 {
   text-align: left;
   font-size: 34px;
 }
 .home-wide-layout .greeting {
   width: auto;
   min-height: 0;
-  margin: 16px 0 0;
+  margin: 0;
   align-items: flex-start;
   text-align: left;
 }
@@ -2348,19 +2350,20 @@ html.home-wide-layout body {
   margin-bottom: 14px;
 }
 .home-wide-layout .phrase-week-title {
-  font-size: 26px;
+  font-size: 21px;
+  letter-spacing: -0.2px;
 }
 .home-wide-layout .phrase-week-literal {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .home-wide-layout .phrase-week-meaning {
-  margin-top: 18px;
-  font-size: 16px;
+  margin-top: 16px;
+  font-size: 14.5px;
 }
 .home-wide-layout .phrase-week-example {
-  margin-top: 8px;
-  font-size: 15px;
+  margin-top: 6px;
+  font-size: 14px;
 }
 .home-wide-layout .greeting,
 .home-wide-layout .phrase-screen-content {

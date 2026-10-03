@@ -84,9 +84,11 @@
    (even sideways they are under 500px tall), so the phone page is never touched.
    The same nodes are moved into two columns and put back exactly where they were
    when the screen goes narrow again (rotate, split view, smaller window).
-     left:  Deutsch. · greeting · phrase of the week · Wörterbuch (search field)
+     top:   Deutsch.
+     left:  greeting · phrase of the week · Wörterbuch (search field)
      right: exercise tiles · Heute ;  under it: Fortschritt line (+ keep card)
-   Typing in the Wörterbuch slides it up under „Deutsch.“; the tiles never move.
+   „Deutsch.“ sits above both columns. Typing in the Wörterbuch slides it up to the
+   top of the left column (where the greeting is); the tiles never move.
    All CSS lives under html.home-wide-layout. */
 window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) and (min-height: 600px)";
 (function initWideHome() {
@@ -170,7 +172,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     if (!columns) return;
     const h = header.getBoundingClientRect();
     const c = columns.left.getBoundingClientRect();
-    columns.left.style.setProperty("--wide-dict-top", Math.round(h.bottom - c.top + 26) + "px");
+    columns.left.style.setProperty("--wide-dict-top", Math.max(0, Math.round(h.bottom - c.top + 26)) + "px");
     // …and may reach down to the end of the Fortschritt line under the tiles
     const f = columns.foot.getBoundingClientRect();
     columns.left.style.setProperty("--wide-dict-bottom", Math.round(Math.min(0, c.bottom - f.bottom)) + "px");
@@ -216,7 +218,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
         right: column("wide-right"),
         foot: column("wide-foot")
       };
-      moveInto(header, columns.left);
+      moveInto(header, homeTrack);
       moveInto(greeting, columns.left);
       moveInto(phraseContent, columns.left);
       moveInto(dictLayer, columns.left);
