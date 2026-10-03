@@ -95,7 +95,16 @@
       entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Steigerung: " + forms.join(" · ")));
     }
 
-    if (item.plural) entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", "Plural: " + item.plural));
+    if (item.type === "noun" && item.plural) {
+      // Plural forms are stored without the article; every form is shown with „die“.
+      // No plural („—“) → „ohne Plural“; plural-only nouns (plural_only) → „nur im Plural“.
+      const text = item.plural_only
+        ? "nur im Plural"
+        : item.plural.trim() === "—"
+          ? "ohne Plural"
+          : "Plural: " + item.plural.split(/\s*,\s*/).map(form => "die " + form).join(", ");
+      entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", text));
+    }
     const pluralNote = translated(item.plural_note_ru, item.plural_note_en);
     if (pluralNote) entry.append(node("p", "dictionary-entry-note", pluralNote));
     const usageNote = translated(item.usage_note_ru, item.usage_note_en);
@@ -103,6 +112,15 @@
 
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
     if (usageNote && item.type === "adverb") entry.append(node("p", "dictionary-entry-note", usageNote));
+
+    const declensionNote = translated(item.declension_note_ru, item.declension_note_en);
+    if (item.type === "noun" && (item.declension_forms || declensionNote)) {
+      const section = node("section", "dictionary-entry-section dictionary-noun-declension");
+      section.append(node("h4", "dictionary-entry-label", "Deklination"));
+      if (item.declension_forms) section.append(node("p", "dictionary-entry-plural dictionary-entry-detail", item.declension_forms));
+      if (declensionNote) section.append(node("p", "dictionary-entry-note", declensionNote));
+      entry.append(section);
+    }
 
     if (item.type === "verb" && item.complements?.length) {
       const section = node("section", "dictionary-entry-section dictionary-verb-complements");
