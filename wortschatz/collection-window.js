@@ -284,7 +284,8 @@
     const sc = el("div", "coll-scroll");
     card.appendChild(sc);
 
-    let toks = editing ? tokensFromCloze(w.sentence) : [];
+    const prefill = !editing && opts.prefill ? opts.prefill : null;
+    let toks = editing ? tokensFromCloze(w.sentence) : prefill ? tokensFromCloze(prefill.sentence || "") : [];
     const [fS, fSentence] = field("Sentence", false, "textarea", {
       id: "cfSentence",
       rows: "2",
@@ -304,31 +305,31 @@
       type: "text",
       placeholder: "to suggest"
     });
-    fMeaning.value = editing ? plainValue(w.translation) : "";
+    fMeaning.value = editing ? plainValue(w.translation) : prefill ? plainValue(prefill.translation) : "";
     sc.appendChild(fM);
     const [fT, fTrans] = field("Sentence Translation", true, "input", {
       id: "cfTrans",
       type: "text",
       placeholder: "I suggest Saturday."
     });
-    fTrans.value = editing ? plainValue(w.sentenceTranslation) : "";
+    fTrans.value = editing ? plainValue(w.sentenceTranslation) : prefill ? plainValue(prefill.sentenceTranslation) : "";
     sc.appendChild(fT);
     const [fB, fBase] = field("Base Form", true, "input", { id: "cfBase", type: "text" });
     const autoBase = () => hiddenWords(toks);
-    fBase.value = editing && w.base && w.base !== autoBase() ? w.base : "";
+    fBase.value = editing && w.base && w.base !== autoBase() ? w.base : prefill ? prefill.base || "" : "";
     sc.appendChild(fB);
     const [fG, fGram] = field("Grammar", true, "input", {
       id: "cfGram",
       type: "text",
       placeholder: "schlug vor · hat vorgeschlagen"
     });
-    fGram.value = editing ? plainValue(w.grammar) : "";
+    fGram.value = editing ? plainValue(w.grammar) : prefill ? plainValue(prefill.grammar) : "";
     sc.appendChild(fG);
 
     sc.appendChild(el("span", "coll-label", "Word Class")).appendChild(el("span", "opt", " · optional"));
     const posBox = el("div", "coll-chips");
     sc.appendChild(posBox);
-    let pos = editing ? w.pos || "" : "";
+    let pos = editing ? w.pos || "" : prefill ? prefill.pos || "" : "";
     const posChip = p => (POS.slice(0, 3).includes(pos) ? pos === p : p === "Andere" && !!pos);
     function drawPos() {
       posBox.textContent = "";
@@ -460,6 +461,59 @@
     if (editing && !session) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w)));
     sc.appendChild(b); // Save at the very END of the form (v2.100): you pass every field first
     if (!editing) setTimeout(() => fSentence.focus(), 60);
+  }
+
+  function viewDictionaryConfirm(prefill) {
+    card.textContent = "";
+    card.appendChild(head("Your Own Words", viewMain));
+    card.appendChild(el("p", "coll-text", "Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
+    card.appendChild(el("p", "coll-text", "Continue to add this word to your own collection?"));
+    const b = el("div", "coll-form-buttons");
+    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill })));
+    b.appendChild(button("coll-link", "Cancel", close));
+    card.appendChild(b);
+  }
+
+  function dictionaryPrefill(item) {
+    const word = String(item.word || item.infinitive || "").trim();
+    const base = item.type === "noun" ? [item.article, word].filter(Boolean).join(" ") : word;
+    let grammar = "";
+    if (item.type === "noun" && item.plural) grammar = item.plural;
+    else if (item.type === "verb" && item.perfect_form) grammar = item.perfect_form;
+    else if (item.type === "adjective" && (item.comparative || item.superlative))
+      grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
+    const pos = ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
+    const candidates = new Set([word.toLocaleLowerCase("de-DE")]);
+    const addForms = value => {
+      if (typeof value === "string") value.split(/[\s,;·!]+/).filter(Boolean).forEach(part => candidates.add(part.toLocaleLowerCase("de-DE")));
+      else if (value && typeof value === "object") Object.values(value).forEach(addForms);
+    };
+    addForms(item.forms);
+    const sentence = String(item.example_de || "");
+    const marked = sentence.replace(/[\p{L}\p{N}]+(?:[-'][\p{L}\p{N}]+)*/gu, token => {
+      const key = token.toLocaleLowerCase("de-DE");
+      if (!candidates.has(key)) return token;
+      candidates.delete(key);
+      return "{{c1::" + token + "}}";
+    });
+    const lang = window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en";
+    const translatedValue = (ru, en) => lang === "ru" ? ru || en || "" : en || ru || "";
+    return {
+      sentence: marked,
+      translation: translatedValue(item.translation_ru, item.translation_en),
+      sentenceTranslation: translatedValue(item.example_ru, item.example_en),
+      base,
+      grammar,
+      pos
+    };
+  }
+
+  let lastDictionaryRequest = "";
+  function addDictionaryWord(request) {
+    if (!request || !request.id || request.id === lastDictionaryRequest || !request.item) return;
+    lastDictionaryRequest = request.id;
+    const prefill = dictionaryPrefill(request.item);
+    open(() => own() ? viewForm(null, { prefill }) : viewDictionaryConfirm(prefill));
   }
 
   function viewRemove(w) {
@@ -827,5 +881,20 @@ Rules:
   function editInSession(w, onSaved) {
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
   }
-  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession };
+  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord };
+  window.addEventListener("message", event => {
+    if (event.origin !== location.origin || event.data?.type !== "deutsch:wortschatz-add") return;
+    try {
+      const pending = JSON.parse(sessionStorage.getItem("deutschWortschatzPendingDictionaryWordV1") || "null");
+      if (pending && pending.id === event.data.request?.id) sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
+    } catch (e) {}
+    addDictionaryWord(event.data.request);
+  });
+  try {
+    const pending = sessionStorage.getItem("deutschWortschatzPendingDictionaryWordV1");
+    if (pending) {
+      sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
+      addDictionaryWord(JSON.parse(pending));
+    }
+  } catch (e) {}
 })();
