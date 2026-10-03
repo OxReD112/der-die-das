@@ -223,7 +223,19 @@
     "example_ru": "Сегодня он работает из дома.",
     "example_en": "He is working from home today.",
     "perfect_form": "haben gearbeitet",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "работать над чем-либо",
+        "note_en": "to work on something"
+      },
+      {
+        "pattern": "als + Nominativ",
+        "note_ru": "работать в качестве кого-либо",
+        "note_en": "to work as someone"
+      }
+    ]
   },
   {
     "id": "verb-009",
@@ -786,7 +798,14 @@
         "ihr": "Fangt an!",
         "Sie": "Fangen Sie an!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "начинать с чего-либо",
+        "note_en": "to start with something"
+      }
+    ]
   },
   {
     "id": "verb-024",
@@ -930,6 +949,11 @@
         "pattern": "Dativ",
         "note_ru": "отвечать кому-либо",
         "note_en": "to answer someone"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "отвечать на вопрос или сообщение",
+        "note_en": "to respond to a question or message"
       }
     ]
   },
@@ -943,7 +967,14 @@
     "example_ru": "Занятия заканчиваются в три часа.",
     "example_en": "The class finishes at three o’clock.",
     "perfect_form": "haben aufgehört",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "переставать делать что-либо",
+        "note_en": "to stop doing something"
+      }
+    ]
   },
   {
     "id": "verb-030",
@@ -1210,7 +1241,14 @@
         "ihr": "Ladet ein!",
         "Sie": "Laden Sie ein!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "приглашать на мероприятие или занятие",
+        "note_en": "to invite someone to an event or activity"
+      }
+    ]
   },
   {
     "id": "verb-041",
@@ -1257,6 +1295,11 @@
         "pattern": "Akkusativ",
         "note_ru": "спрашивать кого-либо",
         "note_en": "to ask someone"
+      },
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "спрашивать о ком-либо или чём-либо",
+        "note_en": "to ask about someone or something"
       }
     ]
   },
@@ -1306,6 +1349,11 @@
         "pattern": "Dativ",
         "note_ru": "помогать кому-либо",
         "note_en": "to help someone"
+      },
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "помогать в каком-либо деле",
+        "note_en": "to help with a task"
       }
     ]
   },
@@ -1527,7 +1575,14 @@
     "example_ru": "Я ищу свои очки.",
     "example_en": "I am looking for my glasses.",
     "perfect_form": "haben gesucht",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "искать кого-либо или что-либо",
+        "note_en": "to search for someone or something"
+      }
+    ]
   },
   {
     "id": "verb-056",
@@ -1811,6 +1866,11 @@
         "pattern": "an + Akkusativ",
         "note_ru": "думать о ком-либо или чём-либо",
         "note_en": "to think of/about someone or something"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "высказывать мнение о ком-либо или чём-либо",
+        "note_en": "to have or express an opinion about someone or something"
       }
     ]
   },
@@ -1877,7 +1937,14 @@
     "example_ru": "Он рассказывает историю.",
     "example_en": "He is telling a story.",
     "perfect_form": "haben erzählt",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "рассказывать о ком-либо или чём-либо",
+        "note_en": "to tell about someone or something"
+      }
+    ]
   },
   {
     "id": "verb-071",
@@ -1926,6 +1993,11 @@
         "pattern": "Dativ",
         "note_ru": "принадлежать кому-либо",
         "note_en": "to belong to someone"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "относиться к чему-либо, быть частью чего-либо",
+        "note_en": "to belong to or be part of something"
       }
     ]
   },
@@ -1968,7 +2040,14 @@
     "example_ru": "Я думаю, что он придёт сегодня.",
     "example_en": "I think he is coming today.",
     "perfect_form": "haben geglaubt",
-    "forms": null
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "верить в кого-либо или что-либо",
+        "note_en": "to believe in someone or something"
+      }
+    ]
   },
   {
     "id": "verb-076",
