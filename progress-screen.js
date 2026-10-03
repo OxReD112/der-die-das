@@ -447,9 +447,15 @@
     root.addEventListener("click",e=>{if(e.target===root)close()});
     const tile=document.querySelector(".tile-today");
     if(tile){
-      tile.setAttribute("role","button");tile.setAttribute("tabindex","0");
-      tile.addEventListener("click",open);
-      tile.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
+      const wide=window.matchMedia("(min-width: 980px) and (orientation: landscape)");
+      const syncTodayInteraction=()=>{
+        if(wide.matches){tile.removeAttribute("role");tile.removeAttribute("tabindex");}
+        else{tile.setAttribute("role","button");tile.setAttribute("tabindex","0");}
+      };
+      syncTodayInteraction();
+      wide.addEventListener("change",syncTodayInteraction);
+      tile.addEventListener("click",()=>{if(!wide.matches)open()});
+      tile.addEventListener("keydown",e=>{if(!wide.matches&&(e.key==="Enter"||e.key===" ")){e.preventDefault();open()}});
     }
     window.addEventListener("keydown",e=>{if(e.key==="Escape"&&root.classList.contains("open"))close()});
   }
