@@ -373,7 +373,7 @@ window.openWortschatzForDictionary = item => {
    (5.87 unloaded it just as Home appeared, 5.88 under the cover — both showed as a jump / blink on the iPhone).
    Only scale and fade are animated — what a phone does smoothly.
    The page starts loading when the finger touches the tile (invisibly), so the empty page colour rarely shows.
-   Tablets, computers and Reduce Motion: no animation.
+   All screen sizes use this transition; Reduce Motion disables it.
    Exercises call closeApp() for their own "Zur Startseite", so every way back goes through here. */
 const LAYER_FADE_MS = 220;
 // the content arriving (5.93, calmer): a gentle fade and, separately, a longer zoom that still moves in its second
@@ -407,9 +407,7 @@ function setFrameSrc(url) {
 }
 
 function useAnimation() {
-  return (
-    window.matchMedia("(max-width: 600px)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 // the new page can be drawn: its layout and styles are there (the moment the page used to appear before 5.84).
 // Data files and scripts at the end of the page may still be coming — the zoom doesn't wait for them.
@@ -515,7 +513,7 @@ function zoomContentIn(earliest, withButton, onSettled) {
 /* A card on a chapter page (Verbformen, Präpositionen) opens its exercise (Home 5.94). Phones: the chapter page
    goes at once and the exercise arrives with the same fade + zoom as from Home — before, it simply appeared, which
    felt broken right after the zoom into the chapter. The Home button stays where it is (same spot on both screens).
-   Tablets, computers, Reduce Motion: plain page change. Called by the chapter pages (verbformen.js,
+   Reduce Motion: plain page change. Called by the chapter pages (verbformen.js,
    praepositionen.js); url is absolute. */
 function openChapterExercise(url) {
   if (animBusy) return;
