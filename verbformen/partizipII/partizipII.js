@@ -15,6 +15,13 @@ const START_ABOUT = {
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
 
 const $ = id => document.getElementById(id);
+let ignoreNextClickUntil = 0;
+$("next").addEventListener("pointerdown", () => { ignoreNextClickUntil = 0; }, true);
+document.addEventListener("click", e => {
+  if (isTouchDevice && Date.now() < ignoreNextClickUntil && e.target.closest("#next")) {
+    e.preventDefault(); e.stopImmediatePropagation(); ignoreNextClickUntil = 0;
+  }
+}, true);
 const key = v => v.infinitive.toLowerCase();
 
 /* Phones and tablets type on the app's own keyboard (components/deutsch-keyboard): the field is read-only
@@ -299,7 +306,10 @@ document.addEventListener("deutsch-keyboard-input", e => {
   if (!inRound() || checked || tableIsOpen()) return;
   const field = $("answer");
   if (k === "BACK") field.value = field.value.slice(0, -1);
-  else if (k === "OK") checkAnswer();
+  else if (k === "OK") {
+    if ($("answer").value.trim()) ignoreNextClickUntil = Date.now() + 1000;
+    checkAnswer();
+  }
   else if (k === "SPACE") {
     if (field.value.length && !field.value.endsWith(" ")) field.value += " ";
   } else if (k) field.value += k;
