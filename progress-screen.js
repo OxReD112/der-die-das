@@ -191,14 +191,16 @@
       if(sinceStart)series.push(0);
       for(let d=startDay;d<today;d=DeutschDay.add(d,1)){const v=snapAt(id,d);series.push(v?pct(v.s,v.t):0)}
       series.push(now);
-      E[id]={id,name:EX_NAMES[id],known:t>0,s,t,now,then,series,recent:(sm&&Array.isArray(sm.recent))?sm.recent:[]};
+      E[id]={id,name:EX_NAMES[id],known:t>0,s,t,now,then,series,
+        recent:(sm&&Array.isArray(sm.recent))?sm.recent:[],
+        practice:(sm&&Array.isArray(sm.practice))?sm.practice:[]};
     });
     const chapters=CHAPTERS.map(c=>{
       const list=c.ex.map(id=>E[id]);
       const avg=f=>list.reduce((a,e)=>a+f(e),0)/list.length;
       const series=list[0].series.map((_,i)=>avg(e=>e.series[i]??e.now));
       return {name:c.name,subs:c.ex.length>1?list:null,single:c.ex.length===1?list[0]:null,
-        now:avg(e=>e.now),then:avg(e=>e.then),series,recent:list.flatMap(e=>e.recent)};
+        now:avg(e=>e.now),then:avg(e=>e.then),series,recent:list.flatMap(e=>e.recent),practice:list.flatMap(e=>e.practice)};
     });
     // grammar line: Σ sicher ÷ Σ total (weighted), per day
     function grammarAt(day){let s=0,t=0;GRAMMAR.forEach(id=>{const v=snapAt(id,day);if(v){s+=v.s;t+=v.t}});return pct(s,t)}
@@ -264,13 +266,21 @@
   function detail(o,{line=false}={}){
     const d=document.createElement("div");
     const items=[...o.recent].sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0);
+    const practice=[...o.practice].sort((a,b)=>b.w-a.w||(a.d<b.d?1:a.d>b.d?-1:0));
     if(line)d.insertAdjacentHTML("beforeend",change(o));
     if(o.series.length>=MIN_GRAPH_POINTS){const g=document.createElement("div");g.className="pg-spark";g.append(spark(o.series));d.append(g)}
     d.insertAdjacentHTML("beforeend",`<h3 style="margin-top:16px">Neu gelernt</h3>`);
-    if(!items.length){d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Noch nichts – das kommt!</div>');return d}
-    const ul=document.createElement("ul");ul.className="pg-items";
-    ul.innerHTML=items.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
-    d.append(ul);
+    if(!items.length)d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Noch nichts – das kommt!</div>');
+    else{
+      const ul=document.createElement("ul");ul.className="pg-items";
+      ul.innerHTML=items.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
+      d.append(ul);
+    }
+    d.insertAdjacentHTML("beforeend",'<h3 style="margin-top:16px">Noch üben</h3>');
+    if(!practice.length){d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Alles im grünen Bereich!</div>');return d}
+    const practiceList=document.createElement("ul");practiceList.className="pg-items";
+    practiceList.innerHTML=practice.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
+    d.append(practiceList);
     return d;
   }
 
