@@ -1,6 +1,13 @@
 /* Wortschatz · game logic (v2.108). Styles: wortschatz.css. Word collection: collection.js + collection-window.js.
    Loaded last, after the components, words.js and the collection files. */
 // App-side keyboard bridge: the reusable component only emits intent.
+let ignoreContinueClickUntil = 0;
+document.getElementById("continue")?.addEventListener("pointerdown", () => { ignoreContinueClickUntil = 0; }, true);
+document.addEventListener("click", e => {
+  if (isTouchDevice() && Date.now() < ignoreContinueClickUntil && e.target.closest("#continue")) {
+    e.preventDefault(); e.stopImmediatePropagation(); ignoreContinueClickUntil = 0;
+  }
+}, true);
 document.addEventListener("deutsch-keyboard-input", e => {
   const k = e.detail?.key || "",
     input = document.getElementById("answerInput");
@@ -10,6 +17,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
     return;
   }
   if (k === "OK") {
+    if (input.value.trim()) ignoreContinueClickUntil = Date.now() + 1000;
     check();
     return;
   }
