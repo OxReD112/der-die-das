@@ -1,4 +1,4 @@
-/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json, german-adjectives.json, german-adverbs.json) */
+/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json, german-adjectives.json, german-adverbs.json, german-conjunctions.json) */
 (function initHomeWorterbuch() {
   const input = document.getElementById("dictionarySearchInput");
   const form = document.getElementById("dictionarySearchForm");
@@ -11,6 +11,7 @@
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
 
+  const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion" };
   let entries = null;
   let loadPromise = null;
   let selected = null;
@@ -47,14 +48,16 @@
       loadJson("worterbuch/german-nouns.json"),
       loadJson("worterbuch/german-verbs.json"),
       loadJson("worterbuch/german-adjectives.json"),
-      loadJson("worterbuch/german-adverbs.json")
-    ]).then(([nouns, verbs, adjectives, adverbs]) => {
-      if (![nouns, verbs, adjectives, adverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
+      loadJson("worterbuch/german-adverbs.json"),
+      loadJson("worterbuch/german-conjunctions.json")
+    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions]) => {
+      if (![nouns, verbs, adjectives, adverbs, conjunctions].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
         ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
         ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" })),
         ...adjectives.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" })),
-        ...adverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adverb" }))
+        ...adverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adverb" })),
+        ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" }))
       ];
       render();
       return entries;
@@ -108,10 +111,42 @@
     const pluralNote = translated(item.plural_note_ru, item.plural_note_en);
     if (pluralNote) entry.append(node("p", "dictionary-entry-note", pluralNote));
     const usageNote = translated(item.usage_note_ru, item.usage_note_en);
-    if (usageNote && item.type !== "adverb") entry.append(node("p", "dictionary-entry-note", usageNote));
+    // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
+    const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
+    const noteAfterTranslation = ["adverb", "conjunction"].includes(item.type);
+    if (usageNote && !noteAfterTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
 
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
-    if (usageNote && item.type === "adverb") entry.append(node("p", "dictionary-entry-note", usageNote));
+    if (hasWordOrder) {
+      const section = node("section", "dictionary-entry-section dictionary-word-order");
+      section.append(node("h4", "dictionary-entry-label", "Wortstellung"));
+      // A line break („\n“) in the rule or pattern starts a new line (je … / desto …).
+      String(item.word_order_rule || "").split("\n").filter(Boolean).forEach(line =>
+        section.append(node("p", "dictionary-entry-plural dictionary-entry-detail", line)));
+      String(item.word_order_pattern || "").split("\n").filter(Boolean).forEach(line => {
+        // „**Verb**“ in the pattern is shown in bold.
+        const pattern = node("p", "dictionary-entry-plural dictionary-entry-detail dictionary-word-order-pattern");
+        line.split(/\*\*(.+?)\*\*/).forEach((part, index) => {
+          if (part) pattern.append(index % 2 ? node("strong", "", part) : document.createTextNode(part));
+        });
+        section.append(pattern);
+      });
+      entry.append(section);
+      const orderExample = node("section", "dictionary-entry-section");
+      orderExample.append(node("h4", "dictionary-entry-label", "Beispiel"));
+      orderExample.append(node("p", "dictionary-entry-example", item.example_de || ""));
+      const orderExampleTranslation = translated(item.example_ru, item.example_en);
+      if (orderExampleTranslation) orderExample.append(node("p", "dictionary-entry-example-translation", orderExampleTranslation));
+      entry.append(orderExample);
+      const lines = language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
+      if (Array.isArray(lines) && lines.length) {
+        const notes = node("section", "dictionary-entry-section dictionary-entry-hints");
+        notes.append(node("h4", "dictionary-entry-label", "Hinweise"));
+        lines.forEach(line => notes.append(node("p", "dictionary-entry-note", line)));
+        entry.append(notes);
+      }
+    }
+    if (usageNote && noteAfterTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
 
     const declensionNote = translated(item.declension_note_ru, item.declension_note_en);
     if (item.type === "noun" && (item.declension_forms || declensionNote)) {
@@ -192,7 +227,7 @@
       entry.append(imperativeSection);
     }
 
-    if (item.type !== "verb") entry.append(example);
+    if (item.type !== "verb" && !hasWordOrder) entry.append(example);
     const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
     addToWortschatz.type = "button";
     addToWortschatz.addEventListener("click", () => {
@@ -233,7 +268,7 @@
     }
     if (selected) {
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = ({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb" })[selected.type] || "";
+      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
       return;
     }
@@ -253,7 +288,7 @@
     if (exact.length === 1) {
       selected = exact[0];
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = ({ noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb" })[selected.type] || "";
+      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
     } else if (matches.length) {
       showMatches(matches);

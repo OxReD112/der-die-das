@@ -2684,3 +2684,10 @@ html.home-wide-layout body {
     transition: none;
   }
 }
+
+/* Wörterbuch · „Wortstellung“ (conjunctions, linking adverbs): pattern line + example inside the section; „Hinweise“ lines */
+.dictionary-word-order-pattern { color: var(--text); }
+.dictionary-word-order-pattern + .dictionary-word-order-pattern { margin-top: 0; }
+.dictionary-word-order-pattern strong { font-weight: 700; }
+.dictionary-entry-hints .dictionary-entry-note { margin-top: 4px; }
+.dictionary-entry-hints .dictionary-entry-label + .dictionary-entry-note { margin-top: 0; }

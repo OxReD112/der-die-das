@@ -131,8 +131,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=42" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=42" rel="stylesheet"/>');
+     ? '<link href="home.css?v=43" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=43" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -359,7 +359,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
     </div>
-    <div class="settings-version">Deutsch. version 5.119</div>
+    <div class="settings-version">Deutsch. version 5.120</div>
    </div>
    </section>
   </div>
@@ -434,6 +434,6 @@
   </script>
  <script src="home.js?v=29"></script>
  <script src="progress-screen.js?v=26"></script>
- <script src="worterbuch.js?v=26"></script>
+ <script src="worterbuch.js?v=27"></script>
 </body>
 </html>
