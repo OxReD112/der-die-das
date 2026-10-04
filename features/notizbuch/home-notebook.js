@@ -39,13 +39,14 @@
   const delYes = document.getElementById("notebookDeleteYes");
   const delTitle = document.getElementById("notebookDeleteTitle");
   const delText = delWin?.querySelector(".settings-confirm-text");
-  const defaultTitle = delTitle?.textContent || "", defaultText = delText?.innerHTML || "";
+  const defaultTitle = delTitle?.textContent || "", defaultText = delText?.innerHTML || "", defaultYes = delYes?.textContent || "";
   let delOpen = false, delKeyboard = false;
-  function askDelete(keyboard, title, text) { // title/text: "Thema löschen?" (Notizbuch v19); none = Home's own "Notiz löschen?"
+  function askDelete(keyboard, title, text, confirmLabel) { // title/text: "Thema löschen?" (Notizbuch v19); none = Home's own "Notiz löschen?"
     if (!delWin || delOpen) return;
     delOpen = true; delKeyboard = keyboard;
     if (delTitle) delTitle.textContent = title || defaultTitle;
     if (delText) { if (text) delText.textContent = text; else delText.innerHTML = defaultText; }
+    if (delYes) delYes.textContent = confirmLabel || defaultYes; // "Zusammenführen" for merging topics (Notizbuch v20)
     delWin.classList.add("is-open");
     delWin.setAttribute("aria-hidden", "false");
     delNo?.focus({ preventScroll:true }); // keys now go to Home's window, not the notebook behind it
@@ -68,7 +69,7 @@
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
     if (event.data?.type === "deutsch-notebook-close") closeNotebook();
-    else if (event.data?.type === "deutsch-notebook-delete-ask" && opened) askDelete(!!event.data.keyboard, typeof event.data.title === "string" ? event.data.title : "", typeof event.data.text === "string" ? event.data.text : "");
+    else if (event.data?.type === "deutsch-notebook-delete-ask" && opened) askDelete(!!event.data.keyboard, typeof event.data.title === "string" ? event.data.title : "", typeof event.data.text === "string" ? event.data.text : "", typeof event.data.confirmLabel === "string" ? event.data.confirmLabel : "");
   });
   window.addEventListener("keydown", event => { if (event.key === "Escape" && opened && !delOpen) closeNotebook(); });
   window.addEventListener("storage", event => {

@@ -74,7 +74,7 @@
 #notebook[data-screen="detail"] #list-content,#notebook[data-screen="edit"] #list-content { display:none !important; }
 #notebook[data-screen="detail"] .nb-tabs,#notebook[data-screen="edit"] .nb-tabs { display:none !important; }
 #notebook[data-screen="detail"] #list-toolbar,#notebook[data-screen="edit"] #list-toolbar { display:none !important; }
-.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-chip:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-chip:focus-visible,.nb-topic-tools .nb-icon-action:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
 
 /* Topic pills (Notizbuch v18) */
 .nb-topic-field { padding-bottom:13px; }
@@ -88,7 +88,24 @@
 .nb-chip.is-input input::placeholder { color:var(--muted); }
 
 /* Delete a topic + undo (Notizbuch v19) */
-.nb-topic-actions { display:flex; margin-top:18px; }
 .nb-status.has-action { display:flex; align-items:center; gap:4px; padding:4px 6px 4px 15px; pointer-events:auto; }
 .nb-status-action { min-height:32px; border:0; border-radius:999px; padding:0 10px; background:transparent; color:var(--mint); font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .nb-status-action:focus-visible { outline:2px solid var(--mint); outline-offset:1px; }
+
+/* Topic heading row (Notizbuch v20): "‹ Grammatik 2" left, pencil + trash right; pinned while the notes scroll under it */
+#notebook.in-topic .nb-scroll { padding-top:0; }
+.nb-topic-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:19px 0 8px; background:var(--bg); }
+.nb-topic-head::after { content:""; position:absolute; left:0; right:0; top:100%; height:14px; background:linear-gradient(to bottom,var(--bg),color-mix(in srgb,var(--bg) 0%,transparent)); pointer-events:none; }
+.nb-topic-head + .nb-row, .nb-topic-head + .nb-empty { margin-top:16px; }
+.nb-topic-title { display:flex; align-items:baseline; gap:8px; min-width:0; flex:1 1 auto; min-height:44px; border:0; padding:0; background:transparent; color:var(--text); text-align:left; cursor:pointer; -webkit-tap-highlight-color:transparent; align-self:center; }
+button.nb-topic-title { align-items:center; }
+.nb-topic-chevron { flex:0 0 auto; color:var(--text); font:400 26px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; transform:translateY(-1px); }
+.nb-topic-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:22px; line-height:1.18; font-weight:650; }
+.nb-topic-count { flex:0 0 auto; color:var(--muted); font-size:15px; font-weight:500; }
+.nb-topic-tools { flex:0 0 auto; display:flex; gap:10px; }
+.nb-topic-tools .nb-icon-action { width:44px; height:44px; }
+.nb-topic-title.is-editing { cursor:text; }
+.nb-topic-title.is-editing input { width:100%; min-width:0; height:44px; border:0; border-bottom:2px solid var(--mint); outline:0; padding:0 2px; background:transparent; color:var(--text); font:650 22px/1.18 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
+.nb-topic-head.is-renaming #delete-topic { display:none; }
+.nb-delete-confirm.is-neutral { background:var(--mint); }
+.nb-topic-title:focus-visible { outline:2px solid var(--mint); outline-offset:3px; border-radius:8px; }

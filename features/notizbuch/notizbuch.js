@@ -11,7 +11,7 @@
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
     chips: $("topic-chips"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
   };
-  let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, pendingTopic = null, statusTimer = 0, searchOpen = false;
+  let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, pendingTopic = null, pendingMerge = null, statusTimer = 0, searchOpen = false;
   function readState() {
     try {
       const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -67,17 +67,23 @@
     els.list.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => { selectedTopic = button.dataset.topic; renderList("forward"); }));
   }
   function renderList(direction = "none") {
-    if (view === "topics" && !selectedTopic && !query) { renderCategories(); animateContent(direction, direction === "forward" ? els.list : null); return; }
+    if (view === "topics" && !selectedTopic && !query) { app.classList.remove("in-topic"); renderCategories(); animateContent(direction, direction === "forward" ? els.list : null); return; }
     let entries = allEntries();
     if (view === "topics" && selectedTopic) entries = entries.filter(entry => entry.category === selectedTopic);
     if (query) { const q = query.toLocaleLowerCase(); entries = entries.filter(entry => [entry.title, entry.sub, entry.body, entry.category].join(" ").toLocaleLowerCase().includes(q)); }
-    const back = selectedTopic ? '<button class="nb-row nb-topic-back" type="button" id="topic-back"><span class="nb-row-copy"><strong>‹ Alle Themen</strong></span></button>' : "";
-    const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow" aria-hidden="true">›</span></button>`).join("");
-    const topicActions = view === "topics" && selectedTopic && !query
-      ? `<div class="nb-topic-actions"><button class="nb-icon-action" id="delete-topic" type="button" aria-label="Thema „${esc(selectedTopic)}“ löschen">${trashSvg}</button></div>` : "";
-    els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>') + topicActions;
+    const inTopic = view === "topics" && !!selectedTopic && !query;
+    app.classList.toggle("in-topic", inTopic);
+    /* Topic heading (Notizbuch v20): "‹ Grammatik 2" = back to all topics; pencil = rename, trash = delete. Pinned like the
+       edit screen's heading. Inside a topic the rows don't repeat the topic name. */
+    const back = inTopic ? `<div class="nb-topic-head" id="topic-head">
+        <button class="nb-topic-title" type="button" id="topic-back" aria-label="Zurück zu allen Themen"><span class="nb-topic-chevron" aria-hidden="true">‹</span><span class="nb-topic-name">${esc(selectedTopic)}</span><span class="nb-topic-count" aria-label="${entries.length} ${entries.length === 1 ? "Notiz" : "Notizen"}">${entries.length}</span></button>
+        <div class="nb-topic-tools"><button class="nb-icon-action" id="rename-topic" type="button" aria-label="Thema umbenennen">${pencilSvg}</button><button class="nb-icon-action" id="delete-topic" type="button" aria-label="Thema „${esc(selectedTopic)}“ löschen">${trashSvg}</button></div>
+      </div>` : "";
+    const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category && !inTopic ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow" aria-hidden="true">›</span></button>`).join("");
+    els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>');
     $("topic-back")?.addEventListener("click", () => { selectedTopic = ""; renderList("back"); });
     $("delete-topic")?.addEventListener("click", event => askDeleteTopic(selectedTopic, event.detail === 0));
+    $("rename-topic")?.addEventListener("click", startRenameTopic);
     els.list.querySelectorAll("[data-entry]").forEach(button => button.addEventListener("click", () => openEntry(button.dataset.entry)));
     animateContent(direction, direction === "forward" && view === "topics" && selectedTopic ? els.list : null);
   }
@@ -91,15 +97,16 @@
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
     $("delete-entry")?.addEventListener("click", event => {
-      pendingDeleteId = id; pendingTopic = null;
+      pendingDeleteId = id; pendingTopic = null; pendingMerge = null;
       showDeleteConfirm("Notiz löschen?", "Diese Notiz wird von diesem Gerät entfernt.", event.detail === 0, true);
     });
   }
   /* One confirm window for both deletes. Inside Home, Home draws it (5.94) — it gets the title + text to show;
      isDefault = the plain "Notiz löschen?" (Home then keeps its own wording). */
-  function showDeleteConfirm(title, text, keyboard, isDefault = false) {
-    if (EMBEDDED) { parent.postMessage({ type:"deutsch-notebook-delete-ask", keyboard, ...(isDefault ? {} : { title, text }) }, location.origin); return; }
+  function showDeleteConfirm(title, text, keyboard, isDefault = false, confirmLabel = "") {
+    if (EMBEDDED) { parent.postMessage({ type:"deutsch-notebook-delete-ask", keyboard, ...(isDefault ? {} : { title, text, confirmLabel }) }, location.origin); return; }
     $("delete-confirm-title").textContent = title; $("delete-confirm-text").textContent = text;
+    $("confirm-delete").textContent = confirmLabel || "Löschen"; $("confirm-delete").classList.toggle("is-neutral", !!confirmLabel);
     $("delete-confirm").hidden = false;
     $("cancel-delete").focus({ preventScroll:true });
   }
@@ -108,9 +115,53 @@
   function askDeleteTopic(name, keyboard) {
     if (!name) return;
     const count = state.notes.filter(note => note.category === name).length;
-    pendingTopic = name; pendingDeleteId = null;
+    pendingTopic = name; pendingDeleteId = null; pendingMerge = null;
     const text = count ? `„${name}“ und ${count === 1 ? "die Notiz" : `die ${count} Notizen`} darin werden von diesem Gerät entfernt.` : `Das Thema „${name}“ wird von diesem Gerät entfernt.`;
     showDeleteConfirm("Thema löschen?", text, keyboard);
+  }
+  /* Rename a topic in place (Notizbuch v20): pencil → the name becomes a text field, the pencil a mint tick, the trash
+     hides. Fertig / tick / tapping elsewhere saves, Escape or empty cancels. A name that already exists (any capitals)
+     asks first and then merges the two topics. */
+  function startRenameTopic() {
+    const head = $("topic-head"); if (!head || head.classList.contains("is-renaming")) return;
+    const old = selectedTopic; head.classList.add("is-renaming");
+    const field = document.createElement("span"); field.className = "nb-topic-title is-editing";
+    field.innerHTML = '<input type="text" maxlength="40" aria-label="Neuer Name für das Thema" autocomplete="off" autocapitalize="sentences" enterkeyhint="done">';
+    const input = field.firstChild; input.value = old;
+    const tick = document.createElement("button"); tick.type = "button"; tick.className = "nb-save-tick"; tick.setAttribute("aria-label", "Namen speichern");
+    tick.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+    $("topic-back").replaceWith(field); $("rename-topic").replaceWith(tick);
+    let done = false;
+    const finish = keep => {
+      if (done) return; done = true;
+      const name = keep ? input.value.trim().replace(/\s+/g, " ") : "";
+      if (!name || name === old) { renderList(); return; }
+      const others = [...new Set(state.topics.concat(state.notes.map(note => note.category).filter(Boolean)))].filter(topic => topic !== old);
+      const existing = others.find(topic => topic.toLocaleLowerCase() === name.toLocaleLowerCase());
+      renderList();
+      if (existing) {
+        pendingMerge = { from: old, to: existing }; pendingTopic = null; pendingDeleteId = null;
+        showDeleteConfirm("Themen zusammenführen?", `„${existing}“ gibt es schon. Die Notizen aus „${old}“ werden dorthin verschoben.`, false, false, "Zusammenführen");
+      } else renameTopic(old, name, false);
+    };
+    tick.addEventListener("pointerdown", event => event.preventDefault()); // keep the field focused: the tick saves, not the blur
+    tick.addEventListener("click", () => finish(true));
+    input.addEventListener("keydown", event => {
+      if (event.key === "Enter") { event.preventDefault(); finish(true); }
+      else if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); finish(false); }
+    });
+    input.addEventListener("blur", () => finish(true));
+    input.focus(); input.select();
+  }
+  function renameTopic(from, to, merge) {
+    const before = { notes: state.notes, topics: state.topics };
+    state.notes = state.notes.map(note => note.category === from ? { ...note, category: to } : note);
+    const index = state.topics.indexOf(from);
+    if (merge) state.topics = state.topics.filter(topic => topic !== from);
+    else if (index >= 0) { state.topics = [...state.topics]; state.topics[index] = to; }
+    if (!state.topics.includes(to) && !state.notes.some(note => note.category === to)) state.topics = [...state.topics, to]; // empty topic keeps existing
+    if (!persist()) { state.notes = before.notes; state.topics = before.topics; renderList(); return; }
+    selectedTopic = to; renderList(); notify(merge ? "Zusammengeführt." : "Umbenannt.");
   }
   function deleteTopic() {
     const name = pendingTopic; if (!name) return;
@@ -161,7 +212,7 @@
     input.addEventListener("input", fit);
     input.addEventListener("keydown", event => {
       if (event.key === "Enter") { event.preventDefault(); finish(true); }
-      else if (event.key === "Escape") { event.preventDefault(); finish(false); }
+      else if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); finish(false); }
     });
     input.addEventListener("blur", () => finish(true));
     fit(); pill.replaceWith(box); input.focus(); // same tap → the iPhone keyboard opens
@@ -204,9 +255,12 @@
   $("create-note").addEventListener("click", () => openEditor());
   $("close-notebook").addEventListener("click", closeNotebook);
   els.headerBack.addEventListener("click", goBack);
-  function closeDeleteConfirm() { pendingDeleteId = null; pendingTopic = null; $("delete-confirm").hidden = true; }
-  function confirmDelete() { if (pendingTopic) deleteTopic(); else deletePending(); }
-  function deleteButtonFocus() { (pendingTopic ? $("delete-topic") : $("delete-entry"))?.focus({ preventScroll:true }); }
+  function closeDeleteConfirm() { pendingDeleteId = null; pendingTopic = null; pendingMerge = null; $("delete-confirm").hidden = true; }
+  function confirmDelete() {
+    if (pendingMerge) { const { from, to } = pendingMerge; closeDeleteConfirm(); renameTopic(from, to, true); }
+    else if (pendingTopic) deleteTopic(); else deletePending();
+  }
+  function deleteButtonFocus() { (pendingMerge ? $("rename-topic") : pendingTopic ? $("delete-topic") : $("delete-entry"))?.focus({ preventScroll:true }); }
   $("cancel-delete").addEventListener("click", () => { deleteButtonFocus(); closeDeleteConfirm(); });
   $("confirm-delete").addEventListener("click", confirmDelete);
   function deletePending() {
@@ -241,7 +295,7 @@
   window.addEventListener("message", event => {
     if (event.origin === location.origin && event.data?.type === "deutsch-notebook-delete-answer") {
       if (event.data.confirmed) confirmDelete();
-      else { if (event.data.keyboard) deleteButtonFocus(); pendingDeleteId = null; pendingTopic = null; }
+      else { if (event.data.keyboard) deleteButtonFocus(); pendingDeleteId = null; pendingTopic = null; pendingMerge = null; }
       return;
     }
     if (event.origin !== location.origin || event.data?.type !== "deutsch-notebook-open") return;
@@ -254,6 +308,7 @@
     if (event.key !== "Escape") return;
     if (!$ ("delete-confirm").hidden) { deleteButtonFocus(); closeDeleteConfirm(); }
     else if (searchOpen) closeSearch();
+    else if (app.dataset.screen === "list" && view === "topics" && selectedTopic) { selectedTopic = ""; renderList("back"); }
     else goBack();
   });
   renderList();
