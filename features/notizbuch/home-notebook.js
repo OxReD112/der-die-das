@@ -31,10 +31,41 @@
     restoreFocusOnClose = event.detail === 0;
     openNotebook();
   });
+  /* "Notiz löschen?" (Home 5.94) — Home's own window (.settings-confirm), so it sits above the "Deutsch." header and
+     home.js dims the status bar + bottom strip for it, exactly like "Are you sure?". The notebook asks with
+     deutsch-notebook-delete-ask and gets deutsch-notebook-delete-answer { confirmed } back. */
+  const delWin = document.getElementById("notebookDeleteConfirm");
+  const delNo = document.getElementById("notebookDeleteNo");
+  const delYes = document.getElementById("notebookDeleteYes");
+  let delOpen = false, delKeyboard = false;
+  function askDelete(keyboard) {
+    if (!delWin || delOpen) return;
+    delOpen = true; delKeyboard = keyboard;
+    delWin.classList.add("is-open");
+    delWin.setAttribute("aria-hidden", "false");
+    delNo?.focus({ preventScroll:true }); // keys now go to Home's window, not the notebook behind it
+  }
+  function answerDelete(confirmed) {
+    if (!delOpen) return;
+    delOpen = false;
+    delWin.classList.remove("is-open");
+    delWin.setAttribute("aria-hidden", "true");
+    delNo?.blur(); delYes?.blur();
+    frame.contentWindow?.postMessage({ type:"deutsch-notebook-delete-answer", confirmed, keyboard:delKeyboard }, location.origin);
+    if (!confirmed || delKeyboard) frame.focus();
+  }
+  delNo?.addEventListener("click", () => answerDelete(false));
+  delYes?.addEventListener("click", () => answerDelete(true));
+  delWin?.addEventListener("click", event => { if (event.target === delWin) answerDelete(false); }); // tap outside = Abbrechen
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && delOpen) { event.stopPropagation(); answerDelete(false); } // Esc = Abbrechen, notebook stays open
+  }, true);
   window.addEventListener("message", event => {
-    if (event.origin === location.origin && event.source === frame.contentWindow && event.data?.type === "deutsch-notebook-close") closeNotebook();
+    if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
+    if (event.data?.type === "deutsch-notebook-close") closeNotebook();
+    else if (event.data?.type === "deutsch-notebook-delete-ask" && opened) askDelete(!!event.data.keyboard);
   });
-  window.addEventListener("keydown", event => { if (event.key === "Escape" && opened) closeNotebook(); });
+  window.addEventListener("keydown", event => { if (event.key === "Escape" && opened && !delOpen) closeNotebook(); });
   window.addEventListener("storage", event => {
     if (opened && (event.key === "deutschThemeV1" || event.key === "deutschTranslationLangV1")) {
       frame.contentWindow?.postMessage({ type:"deutsch-notebook-open", theme:currentTheme(), lang:localStorage.getItem("deutschTranslationLangV1") || "en" }, location.origin);

@@ -3,9 +3,10 @@
   const $ = id => document.getElementById(id);
   const app = $("notebook");
   if (!app) return;
+  const EMBEDDED = new URLSearchParams(location.search).has("embedded") && parent !== window; // inside Home: Home shows the delete window
   const els = {
     list: $("list-content"), status: $("status"), searchBox: $("search-box"), search: $("search-input"),
-    headerBack: $("header-back"), headerSave: $("header-save"),
+    headerBack: $("header-back"),
     tabs: [...document.querySelectorAll(".nb-tab")], detail: $("detail-screen"), edit: $("edit-screen"),
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
     topicInput: $("new-topic-input"), saveTopic: $("save-topic"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
@@ -40,8 +41,6 @@
     document.querySelector(".nb-tabs").hidden = !list;
     $("search-toggle").hidden = !list || searchOpen;
     els.headerBack.hidden = list;
-    els.headerSave.hidden = screen !== "edit";
-    $("close-notebook").hidden = screen === "edit";
     els.searchBox.hidden = !list || !searchOpen;
     els.list.hidden = !list; els.listToolbar.hidden = !list;
     els.scroll.scrollTop = 0;
@@ -77,8 +76,9 @@
     $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
-    $("delete-entry")?.addEventListener("click", () => {
+    $("delete-entry")?.addEventListener("click", event => {
       pendingDeleteId = id;
+      if (EMBEDDED) { parent.postMessage({ type:"deutsch-notebook-delete-ask", keyboard:event.detail === 0 }, location.origin); return; } // Home shows the window (5.94)
       $("delete-confirm").hidden = false;
       $("cancel-delete").focus({ preventScroll:true });
     });
@@ -98,7 +98,7 @@
     else closeNotebook();
   }
   function closeNotebook() {
-    if (new URLSearchParams(location.search).has("embedded")) parent.postMessage({ type:"deutsch-notebook-close" }, location.origin);
+    if (EMBEDDED) parent.postMessage({ type:"deutsch-notebook-close" }, location.origin);
     else location.href = "../../";
   }
   els.tabs.forEach(tab => tab.addEventListener("click", () => { view = tab.dataset.view; selectedTopic = ""; els.tabs.forEach(button => button.setAttribute("aria-selected", String(button === tab))); renderList(); }));
@@ -127,7 +127,8 @@
   els.headerBack.addEventListener("click", goBack);
   function closeDeleteConfirm() { pendingDeleteId = null; $("delete-confirm").hidden = true; }
   $("cancel-delete").addEventListener("click", closeDeleteConfirm);
-  $("confirm-delete").addEventListener("click", () => {
+  $("confirm-delete").addEventListener("click", deletePending);
+  function deletePending() {
     if (!pendingDeleteId) return;
     const previous = state.notes;
     const previousTopics = state.topics;
@@ -138,8 +139,7 @@
     }
     if (!persist()) { state.notes = previous; state.topics = previousTopics; closeDeleteConfirm(); return; }
     closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
-  });
-  els.headerSave.addEventListener("click", () => els.form.requestSubmit());
+  }
   $("add-topic").addEventListener("click", () => { els.topicInput.hidden = false; els.saveTopic.hidden = false; $("add-topic").hidden = true; els.topicInput.focus({ preventScroll:true }); });
   function saveTopic() {
     const name = els.topicInput.value.trim(); if (!name) { els.topicInput.focus({ preventScroll:true }); return; }
@@ -169,6 +169,11 @@
     else { state.notes = previousNotes; state.topics = previousTopics; }
   });
   window.addEventListener("message", event => {
+    if (event.origin === location.origin && event.data?.type === "deutsch-notebook-delete-answer") {
+      if (event.data.confirmed) deletePending();
+      else { pendingDeleteId = null; if (event.data.keyboard) $("delete-entry")?.focus({ preventScroll:true }); }
+      return;
+    }
     if (event.origin !== location.origin || event.data?.type !== "deutsch-notebook-open") return;
     if (event.data.theme === "light") document.documentElement.setAttribute("data-theme","light"); else document.documentElement.removeAttribute("data-theme");
     if (event.data.lang) localStorage.setItem("deutschTranslationLangV1", event.data.lang);
