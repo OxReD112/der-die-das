@@ -13,7 +13,7 @@
   <title>Notizbuch · Deutsch.</title>
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../../home.css?v=46">
-  <link rel="stylesheet" href="notizbuch.css?v=13">
+  <link rel="stylesheet" href="notizbuch.css?v=14">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -22,6 +22,7 @@
         <button class="nb-search-toggle" id="search-toggle" type="button" aria-label="Suche öffnen" aria-expanded="false">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 4.2 4.2"/></svg>
         </button>
+        <button class="nb-header-back" id="header-back" type="button" hidden>Zurück</button>
         <h1>Notizbuch</h1>
         <button class="nb-close" id="close-notebook" type="button" aria-label="Notizbuch schließen">×</button>
       </div>
@@ -38,7 +39,6 @@
     <div class="nb-scroll" id="notebook-scroll">
       <div id="list-content" class="nb-list"></div>
       <section class="nb-screen" id="detail-screen" hidden>
-        <button class="nb-screen-back" id="detail-back" type="button">‹ Notizbuch</button>
         <div class="nb-detail-topic" id="detail-topic"></div>
         <h2 class="nb-detail-title" id="detail-title"></h2>
         <p class="nb-detail-sub" id="detail-sub" hidden></p>
@@ -46,7 +46,6 @@
         <div class="nb-detail-actions" id="detail-actions"></div>
       </section>
       <section class="nb-screen" id="edit-screen" hidden>
-        <button class="nb-screen-back" id="edit-back" type="button">‹ Notizbuch</button>
         <h2 class="nb-form-title" id="form-title">Neue Notiz</h2>
         <form class="nb-form" id="note-form">
           <label class="nb-field"><span>Titel</span><input id="entry-title" maxlength="100" required placeholder="Titel"></label>
@@ -82,6 +81,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=13"></script>
+  <script src="notizbuch.js?v=14"></script>
 </body>
 </html>

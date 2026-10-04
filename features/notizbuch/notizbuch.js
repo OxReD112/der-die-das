@@ -5,6 +5,7 @@
   if (!app) return;
   const els = {
     list: $("list-content"), status: $("status"), searchBox: $("search-box"), search: $("search-input"),
+    headerBack: $("header-back"),
     tabs: [...document.querySelectorAll(".nb-tab")], detail: $("detail-screen"), edit: $("edit-screen"),
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
     topicInput: $("new-topic-input"), saveTopic: $("save-topic"), listToolbar: $("list-toolbar"), editToolbar: $("edit-toolbar"), scroll: $("notebook-scroll"),
@@ -38,6 +39,7 @@
     els.detail.hidden = screen !== "detail"; els.edit.hidden = screen !== "edit";
     document.querySelector(".nb-tabs").hidden = !list;
     $("search-toggle").hidden = !list || searchOpen;
+    els.headerBack.hidden = list;
     els.searchBox.hidden = !list || !searchOpen;
     els.list.hidden = !list; els.listToolbar.hidden = !list; els.editToolbar.hidden = screen !== "edit";
     els.scroll.scrollTop = 0;
@@ -120,14 +122,19 @@
   els.search.addEventListener("input", () => { query = els.search.value.trim(); selectedTopic = ""; renderList(); });
   $("create-note").addEventListener("click", () => openEditor());
   $("close-notebook").addEventListener("click", closeNotebook);
-  $("detail-back").addEventListener("click", goBack); $("edit-back").addEventListener("click", goBack);
+  els.headerBack.addEventListener("click", goBack);
   function closeDeleteConfirm() { pendingDeleteId = null; $("delete-confirm").hidden = true; }
   $("cancel-delete").addEventListener("click", closeDeleteConfirm);
   $("confirm-delete").addEventListener("click", () => {
     if (!pendingDeleteId) return;
     const previous = state.notes;
+    const previousTopics = state.topics;
+    const deletedNote = state.notes.find(note => note.id === pendingDeleteId);
     state.notes = previous.filter(note => note.id !== pendingDeleteId);
-    if (!persist()) { state.notes = previous; closeDeleteConfirm(); return; }
+    if (deletedNote?.category && !state.notes.some(note => note.category === deletedNote.category)) {
+      state.topics = state.topics.filter(topic => topic !== deletedNote.category);
+    }
+    if (!persist()) { state.notes = previous; state.topics = previousTopics; closeDeleteConfirm(); return; }
     closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
   });
   $("cancel-edit-bottom").addEventListener("click", goBack);
@@ -146,10 +153,26 @@
   els.form.addEventListener("submit", event => {
     event.preventDefault(); const note = { title:els.title.value.trim(), sub:els.sub.value.trim(), body:els.body.value.trim(), category:els.category.value };
     if (!note.title) { els.title.focus(); return; }
-    if (editingId) { const existing = state.notes.find(item => item.id === editingId); if (existing) Object.assign(existing, note, { updatedAt:Date.now() }); }
+    const previousNotes = state.notes.map(item => ({ ...item }));
+    const previousTopics = [...state.topics];
+    if (editingId) {
+      const existing = state.notes.find(item => item.id === editingId);
+      const previousCategory = existing?.category;
+      if (existing) Object.assign(existing, note, { updatedAt:Date.now() });
+      if (previousCategory && previousCategory !== note.category && !state.notes.some(item => item.category === previousCategory)) {
+        state.topics = state.topics.filter(topic => topic !== previousCategory);
+      }
+    }
     else state.notes.unshift({ id:`note-${Date.now()}-${Math.random().toString(36).slice(2,7)}`, ...note, updatedAt:Date.now() });
     if (persist()) { openedId = null; setScreen("list", "back"); renderList(); notify("Gespeichert."); }
+    else { state.notes = previousNotes; state.topics = previousTopics; }
   });
+  app.addEventListener("focusin", event => {
+    if (event.target.matches("input:not([type=hidden]), textarea")) app.dataset.keyboardOpen = "true";
+  });
+  app.addEventListener("focusout", () => requestAnimationFrame(() => {
+    if (!app.querySelector("input:not([type=hidden]):focus, textarea:focus")) delete app.dataset.keyboardOpen;
+  }));
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.data?.type !== "deutsch-notebook-open") return;
     if (event.data.theme === "light") document.documentElement.setAttribute("data-theme","light"); else document.documentElement.removeAttribute("data-theme");

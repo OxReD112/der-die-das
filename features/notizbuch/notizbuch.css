@@ -39,7 +39,7 @@
 .nb-detail-actions { display:flex; gap:12px; margin-top:18px; }
 .nb-icon-action { display:grid; place-items:center; width:46px; height:46px; border:0; border-radius:50%; background:var(--tile-surface); color:var(--text); cursor:pointer; }
 .nb-icon-action svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-.nb-screen-back { display:inline-flex; align-items:center; min-height:40px; margin:0 0 12px; border:0; padding:4px 0; background:transparent; color:var(--muted); font:500 15px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
+.nb-header-back { position:absolute; left:0; display:inline-flex; align-items:center; min-height:40px; border:0; padding:4px 0; background:transparent; color:var(--muted); font:500 15px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .nb-form-title { margin:0 0 15px; color:var(--text); font-size:22px; line-height:1.18; font-weight:650; }
 .nb-form { display:grid; gap:10px; }
 .nb-field { display:block; border-radius:14px; padding:10px 13px; background:var(--tile-surface); }
@@ -68,4 +68,8 @@
 #notebook[data-screen="detail"] #list-toolbar,#notebook[data-screen="edit"] #list-toolbar { display:none !important; }
 #notebook[data-screen="list"] #edit-toolbar,#notebook[data-screen="detail"] #edit-toolbar { display:none !important; }
 #notebook[data-screen="edit"] #edit-toolbar { display:flex !important; }
-.nb-search-toggle:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-screen-back:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+#notebook[data-keyboard-open="true"] .nb-scroll { padding-bottom:76px; }
+#notebook[data-keyboard-open="true"] .nb-bottom { bottom:max(4px,env(safe-area-inset-bottom)); }
+#notebook[data-keyboard-open="true"] .nb-edit-toolbar { gap:8px; }
+#notebook[data-keyboard-open="true"] .nb-edit-toolbar .nb-primary,#notebook[data-keyboard-open="true"] .nb-edit-toolbar .nb-cancel { min-height:40px; }
