@@ -99,6 +99,22 @@ let deck = [],
   checked = false,
   correctCount = 0;
 
+// On touch devices, the keyboard handles a key on touchend. Checking hides it
+// immediately; some browsers then retarget that tap's synthetic click to the
+// newly revealed Weiter button underneath it. Ignore that click, but allow a
+// separate tap as soon as its pointerdown begins.
+let ignoreNextClickUntil = 0;
+$("next").addEventListener("pointerdown", () => {
+  ignoreNextClickUntil = 0;
+}, true);
+document.addEventListener("click", e => {
+  if (isTouchDevice && Date.now() < ignoreNextClickUntil && e.target.closest("#next")) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    ignoreNextClickUntil = 0;
+  }
+}, true);
+
 function buildDeck(size) {
   return SENTENCES.map(item => ({ item, randomKey: -Math.log(Math.max(Math.random(), 1e-12)) / weightFor(item) }))
     .sort((a, b) => a.randomKey - b.randomKey)
@@ -454,7 +470,10 @@ document.addEventListener("deutsch-keyboard-input", e => {
   if (!inRound() || checked || tableIsOpen()) return;
   const field = $("answer");
   if (k === "BACK") field.value = field.value.slice(0, -1);
-  else if (k === "OK") checkAnswer();
+  else if (k === "OK") {
+    ignoreNextClickUntil = Date.now() + 1000;
+    checkAnswer();
+  }
   else if (k === "SPACE") {
     if (field.value.length && !field.value.endsWith(" ")) field.value += " ";
   } else if (k) field.value += k;
