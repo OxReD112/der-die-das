@@ -343,7 +343,7 @@
    </main>
   <div class="notebook-layer" id="notebookLayer" aria-hidden="true">
    <section class="notebook-panel" id="notebookPanel" aria-label="Notizbuch">
-    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=17" loading="eager"></iframe>
+    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=18" loading="eager"></iframe>
    </section>
   </div>
   <div class="settings-layer" id="settingsLayer">
@@ -422,6 +422,16 @@
    </div>
   </div>
 
+  <!-- Notizbuch "Notiz löschen?" (Home 5.94): shown by Home, not inside the notebook frame, so it covers the "Deutsch."
+       header too and dims the strips like every other window — see features/notizbuch/home-notebook.js -->
+  <div aria-hidden="true" class="settings-confirm" id="notebookDeleteConfirm">
+   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="notebookDeleteTitle">
+    <div class="settings-confirm-title" id="notebookDeleteTitle">Notiz löschen?</div>
+    <div class="settings-confirm-text">Diese Notiz wird von diesem Gerät&nbsp;entfernt.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="notebookDeleteNo" type="button">Abbrechen</button><button class="settings-confirm-button is-quiet" id="notebookDeleteYes" type="button">Löschen</button></div>
+   </div>
+  </div>
+
   <section aria-hidden="true" class="app-shell" id="appShell">
    <button aria-label="Zur Startseite" class="home-back" id="homeBack" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5 12 4.5l7.5 6"/><path d="M6.5 9v9.5a1 1 0 0 0 1 1H10v-5h4v5h2.5a1 1 0 0 0 1-1V9"/></svg></button>
    <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
@@ -441,7 +451,7 @@
   <script src="greetings.js?v=2">
   </script>
  <script src="home.js?v=30"></script>
- <script src="features/notizbuch/home-notebook.js?v=3"></script>
+ <script src="features/notizbuch/home-notebook.js?v=4"></script>
  <script src="progress-screen.js?v=26"></script>
  <script src="worterbuch.js?v=27"></script>
 </body>
