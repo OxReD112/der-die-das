@@ -471,7 +471,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
   const field = $("answer");
   if (k === "BACK") field.value = field.value.slice(0, -1);
   else if (k === "OK") {
-    ignoreNextClickUntil = Date.now() + 1000;
+    if (field.value.trim()) ignoreNextClickUntil = Date.now() + 1000;
     checkAnswer();
   }
   else if (k === "SPACE") {
