@@ -11,7 +11,7 @@
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
     chips: $("topic-chips"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
   };
-  let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, statusTimer = 0, searchOpen = false;
+  let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, pendingTopic = null, statusTimer = 0, searchOpen = false;
   function readState() {
     try {
       const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -23,7 +23,18 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
     catch (_) { notify("Speichern nicht möglich. Bitte prüfe den Speicherplatz auf diesem Gerät."); return false; }
   }
-  function notify(message) { clearTimeout(statusTimer); els.status.textContent = message; els.status.hidden = false; statusTimer = setTimeout(() => { els.status.hidden = true; }, 3000); }
+  /* notify(message) — short status line (3 s). With an action ({ label, run }) it gets a tappable button and stays 5 s
+     (Notizbuch v19: "Thema gelöscht · Rückgängig"). */
+  function notify(message, action = null) {
+    clearTimeout(statusTimer); els.status.textContent = message; els.status.classList.toggle("has-action", !!action);
+    if (action) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "nb-status-action"; button.textContent = action.label;
+      button.addEventListener("click", () => { clearTimeout(statusTimer); els.status.hidden = true; els.status.classList.remove("has-action"); action.run(); });
+      els.status.append(" ", button);
+    }
+    els.status.hidden = false;
+    statusTimer = setTimeout(() => { els.status.hidden = true; els.status.classList.remove("has-action"); }, action ? 5000 : 3000);
+  }
   function esc(value = "") { return String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
   function allEntries() { return state.notes; }
   function animateContent(direction, target) {
@@ -62,8 +73,11 @@
     if (query) { const q = query.toLocaleLowerCase(); entries = entries.filter(entry => [entry.title, entry.sub, entry.body, entry.category].join(" ").toLocaleLowerCase().includes(q)); }
     const back = selectedTopic ? '<button class="nb-row nb-topic-back" type="button" id="topic-back"><span class="nb-row-copy"><strong>‹ Alle Themen</strong></span></button>' : "";
     const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow" aria-hidden="true">›</span></button>`).join("");
-    els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>');
+    const topicActions = view === "topics" && selectedTopic && !query
+      ? `<div class="nb-topic-actions"><button class="nb-icon-action" id="delete-topic" type="button" aria-label="Thema „${esc(selectedTopic)}“ löschen">${trashSvg}</button></div>` : "";
+    els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>') + topicActions;
     $("topic-back")?.addEventListener("click", () => { selectedTopic = ""; renderList("back"); });
+    $("delete-topic")?.addEventListener("click", event => askDeleteTopic(selectedTopic, event.detail === 0));
     els.list.querySelectorAll("[data-entry]").forEach(button => button.addEventListener("click", () => openEntry(button.dataset.entry)));
     animateContent(direction, direction === "forward" && view === "topics" && selectedTopic ? els.list : null);
   }
@@ -77,11 +91,44 @@
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
     $("delete-entry")?.addEventListener("click", event => {
-      pendingDeleteId = id;
-      if (EMBEDDED) { parent.postMessage({ type:"deutsch-notebook-delete-ask", keyboard:event.detail === 0 }, location.origin); return; } // Home shows the window (5.94)
-      $("delete-confirm").hidden = false;
-      $("cancel-delete").focus({ preventScroll:true });
+      pendingDeleteId = id; pendingTopic = null;
+      showDeleteConfirm("Notiz löschen?", "Diese Notiz wird von diesem Gerät entfernt.", event.detail === 0, true);
     });
+  }
+  /* One confirm window for both deletes. Inside Home, Home draws it (5.94) — it gets the title + text to show;
+     isDefault = the plain "Notiz löschen?" (Home then keeps its own wording). */
+  function showDeleteConfirm(title, text, keyboard, isDefault = false) {
+    if (EMBEDDED) { parent.postMessage({ type:"deutsch-notebook-delete-ask", keyboard, ...(isDefault ? {} : { title, text }) }, location.origin); return; }
+    $("delete-confirm-title").textContent = title; $("delete-confirm-text").textContent = text;
+    $("delete-confirm").hidden = false;
+    $("cancel-delete").focus({ preventScroll:true });
+  }
+  /* Delete a whole topic with its notes (Notizbuch v19): trash button on the topic's screen → confirm → gone,
+     with "Rückgängig" for 5 s. Undo puts the topic and exactly those notes back, keeping anything added meanwhile. */
+  function askDeleteTopic(name, keyboard) {
+    if (!name) return;
+    const count = state.notes.filter(note => note.category === name).length;
+    pendingTopic = name; pendingDeleteId = null;
+    const text = count ? `„${name}“ und ${count === 1 ? "die Notiz" : `die ${count} Notizen`} darin werden von diesem Gerät entfernt.` : `Das Thema „${name}“ wird von diesem Gerät entfernt.`;
+    showDeleteConfirm("Thema löschen?", text, keyboard);
+  }
+  function deleteTopic() {
+    const name = pendingTopic; if (!name) return;
+    const before = { notes: state.notes, topics: state.topics };
+    const removed = state.notes.filter(note => note.category === name), removedIds = new Set(removed.map(note => note.id));
+    const topicIndex = state.topics.indexOf(name);
+    state.notes = state.notes.filter(note => !removedIds.has(note.id)); state.topics = state.topics.filter(topic => topic !== name);
+    if (!persist()) { state.notes = before.notes; state.topics = before.topics; closeDeleteConfirm(); return; }
+    closeDeleteConfirm(); selectedTopic = ""; renderList("back");
+    notify("Thema gelöscht.", { label:"Rückgängig", run: () => {
+      const order = new Map(before.notes.map((note, i) => [note.id, i]));
+      const prevNotes = state.notes, prevTopics = state.topics;
+      state.notes = state.notes.concat(removed.filter(note => !state.notes.some(item => item.id === note.id)))
+        .sort((a, b) => (order.has(a.id) ? order.get(a.id) : -1) - (order.has(b.id) ? order.get(b.id) : -1));
+      if (!state.topics.includes(name)) { state.topics = [...state.topics]; state.topics.splice(topicIndex < 0 ? state.topics.length : Math.min(topicIndex, state.topics.length), 0, name); }
+      if (!persist()) { state.notes = prevNotes; state.topics = prevTopics; return; }
+      renderList(); notify("Wiederhergestellt.");
+    } });
   }
   function fillCategories(selected = "") {
     const categories = [...new Set(state.topics.concat(state.notes.map(note => note.category).filter(Boolean)))];
@@ -157,9 +204,11 @@
   $("create-note").addEventListener("click", () => openEditor());
   $("close-notebook").addEventListener("click", closeNotebook);
   els.headerBack.addEventListener("click", goBack);
-  function closeDeleteConfirm() { pendingDeleteId = null; $("delete-confirm").hidden = true; }
-  $("cancel-delete").addEventListener("click", closeDeleteConfirm);
-  $("confirm-delete").addEventListener("click", deletePending);
+  function closeDeleteConfirm() { pendingDeleteId = null; pendingTopic = null; $("delete-confirm").hidden = true; }
+  function confirmDelete() { if (pendingTopic) deleteTopic(); else deletePending(); }
+  function deleteButtonFocus() { (pendingTopic ? $("delete-topic") : $("delete-entry"))?.focus({ preventScroll:true }); }
+  $("cancel-delete").addEventListener("click", () => { deleteButtonFocus(); closeDeleteConfirm(); });
+  $("confirm-delete").addEventListener("click", confirmDelete);
   function deletePending() {
     if (!pendingDeleteId) return;
     const previous = state.notes;
@@ -191,8 +240,8 @@
   });
   window.addEventListener("message", event => {
     if (event.origin === location.origin && event.data?.type === "deutsch-notebook-delete-answer") {
-      if (event.data.confirmed) deletePending();
-      else { pendingDeleteId = null; if (event.data.keyboard) $("delete-entry")?.focus({ preventScroll:true }); }
+      if (event.data.confirmed) confirmDelete();
+      else { if (event.data.keyboard) deleteButtonFocus(); pendingDeleteId = null; pendingTopic = null; }
       return;
     }
     if (event.origin !== location.origin || event.data?.type !== "deutsch-notebook-open") return;
@@ -203,7 +252,7 @@
   window.addEventListener("storage", event => { if (event.key === STORAGE_KEY) { state = readState(); renderList(); } });
   window.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
-    if (!$ ("delete-confirm").hidden) { closeDeleteConfirm(); $("delete-entry")?.focus({ preventScroll:true }); }
+    if (!$ ("delete-confirm").hidden) { deleteButtonFocus(); closeDeleteConfirm(); }
     else if (searchOpen) closeSearch();
     else goBack();
   });

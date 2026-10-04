@@ -86,3 +86,9 @@
 .nb-chip.is-input { border-style:solid; border-color:var(--mint); padding:0 12px; cursor:text; }
 .nb-chip.is-input input { min-width:9ch; max-width:100%; height:32px; border:0; outline:0; padding:0; background:transparent; color:var(--text); font:400 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
 .nb-chip.is-input input::placeholder { color:var(--muted); }
+
+/* Delete a topic + undo (Notizbuch v19) */
+.nb-topic-actions { display:flex; margin-top:18px; }
+.nb-status.has-action { display:flex; align-items:center; gap:4px; padding:4px 6px 4px 15px; pointer-events:auto; }
+.nb-status-action { min-height:32px; border:0; border-radius:999px; padding:0 10px; background:transparent; color:var(--mint); font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.nb-status-action:focus-visible { outline:2px solid var(--mint); outline-offset:1px; }
