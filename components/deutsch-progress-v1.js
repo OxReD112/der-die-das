@@ -10,7 +10,8 @@
    - 3 correct in a row → "sicher". Any mistake → streak 0, no longer sicher.
    - An item with no entry = "neu" (never answered); entry below 3 = "wackelig".
    - sicherSince (d) = date the item became sicher; removed when it falls back.
-   - Each exercise also keeps a summary for Home: total, sicher, recent (learned in the last 22 days).
+   - Each exercise also keeps a summary for Home: total, sicher, recent (learned in the last 22 days),
+     and practice (items with 3 consecutive wrong answers).
    - An item can be a single question or a group (e.g. an Artikel rule, a Pronomen category):
      the exercise decides which key it reports.
    - init() drops stored entries whose key no longer exists in the exercise.
@@ -22,11 +23,12 @@
      format: 1,
      exercises: {
        <exercise>: {
-         items:   { <itemKey>: { s: <streak>, d: "YYYY-MM-DD" (only while sicher) } },
+         items:   { <itemKey>: { s: <correct streak>, w: <wrong streak>, d: "YYYY-MM-DD" (only while sicher), wd: "YYYY-MM-DD" (last wrong answer) } },
          summary: { total, sicher,            // weighted → bar % = sicher / total
                     items, itemsSicher,       // unweighted counts
                     updated: "YYYY-MM-DD",
-                    recent: [ { l: <label>, d: "YYYY-MM-DD" } ]  // newest first }
+                    recent: [ { l: <label>, d: "YYYY-MM-DD" } ], // newest first
+                    practice: [ { l: <label>, w: <wrong streak>, d: "YYYY-MM-DD" } ] // 3+ wrong in a row }
        }
      }
    }
@@ -66,7 +68,7 @@
     const list=catalog[exercise];
     if(!list) return;
     const since=daysAgo(RECENT_DAYS-1);
-    let total=0, sicher=0, itemsSicher=0; const recent=[];
+    let total=0, sicher=0, itemsSicher=0; const recent=[], practice=[];
     list.forEach((info,key)=>{
       total+=info.weight;
       const it=ex.items[key];
@@ -74,9 +76,11 @@
         sicher+=info.weight; itemsSicher++;
         if(it.d&&it.d>=since) recent.push({l:info.label,d:it.d});
       }
+      if(it&&it.w>=SICHER_STREAK) practice.push({l:info.label,w:it.w,d:it.wd||""});
     });
     recent.sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0);
-    ex.summary={total,sicher,items:list.size,itemsSicher,updated:today(),recent};
+    practice.sort((a,b)=>b.w-a.w||(a.d<b.d?1:a.d>b.d?-1:0));
+    ex.summary={total,sicher,items:list.size,itemsSicher,updated:today(),recent,practice};
   }
 
   function init(exercise,items){
@@ -97,9 +101,11 @@
     const it=ex.items[key]||{s:0};
     if(ok){
       it.s=(it.s||0)+1;
+      it.w=0; delete it.wd;
       if(it.s>=SICHER_STREAK&&!it.d) it.d=today();
     }else{
       it.s=0; delete it.d;
+      it.w=(it.w||0)+1; it.wd=today();
     }
     ex.items[key]=it;
     summarize(ex,exercise);
