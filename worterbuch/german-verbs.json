@@ -918,7 +918,7 @@
       "Präteritum": {
         "ich": "zog an",
         "du": "zogst an",
-        "er/sie/es": "zog",
+        "er/sie/es": "zog an",
         "wir": "zogen an",
         "ihr": "zogt an",
         "sie": "zogen an"
@@ -2592,7 +2592,7 @@
         "du": "bewarbst dich",
         "er/sie/es": "bewarb sich",
         "wir": "bewarben uns",
-        "ihr": "bewerbt euch",
+        "ihr": "bewarbt euch",
         "sie": "bewarben sich"
       },
       "Konjunktiv II": {
@@ -2640,5 +2640,2558 @@
     "example_en": "He claims to have seen everything.",
     "perfect_form": "haben behauptet",
     "forms": null
+  },
+  {
+    "id": "verb-102",
+    "infinitive": "abfahren",
+    "translation_ru": "отправляться; уезжать",
+    "translation_en": "to depart; to leave",
+    "auxiliary": "sein",
+    "example_de": "Der Zug fährt um acht Uhr ab.",
+    "example_ru": "Поезд отправляется в восемь часов.",
+    "example_en": "The train departs at eight o'clock.",
+    "perfect_form": "sein abgefahren",
+    "forms": {
+      "Präsens": {
+        "ich": "fahre ab",
+        "du": "fährst ab",
+        "er/sie/es": "fährt ab",
+        "wir": "fahren ab",
+        "ihr": "fahrt ab",
+        "sie": "fahren ab"
+      },
+      "Präteritum": {
+        "ich": "fuhr ab",
+        "du": "fuhrst ab",
+        "er/sie/es": "fuhr ab",
+        "wir": "fuhren ab",
+        "ihr": "fuhrt ab",
+        "sie": "fuhren ab"
+      },
+      "Konjunktiv II": {
+        "ich": "führe ab",
+        "du": "führest ab",
+        "er/sie/es": "führe ab",
+        "wir": "führen ab",
+        "ihr": "führet ab",
+        "sie": "führen ab"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "отправляться откуда-либо (вокзал, путь)",
+        "note_en": "to leave from somewhere (station, platform)"
+      }
+    ]
+  },
+  {
+    "id": "verb-103",
+    "infinitive": "abfliegen",
+    "translation_ru": "вылетать; улетать",
+    "translation_en": "to take off; to fly out",
+    "auxiliary": "sein",
+    "example_de": "Wir fliegen morgen um sechs Uhr ab.",
+    "example_ru": "Мы вылетаем завтра в шесть утра.",
+    "example_en": "We fly out tomorrow at six a.m.",
+    "perfect_form": "sein abgeflogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "flog ab",
+        "du": "flogst ab",
+        "er/sie/es": "flog ab",
+        "wir": "flogen ab",
+        "ihr": "flogt ab",
+        "sie": "flogen ab"
+      },
+      "Konjunktiv II": {
+        "ich": "flöge ab",
+        "du": "flögest ab",
+        "er/sie/es": "flöge ab",
+        "wir": "flögen ab",
+        "ihr": "flöget ab",
+        "sie": "flögen ab"
+      }
+    }
+  },
+  {
+    "id": "verb-104",
+    "infinitive": "abgeben",
+    "translation_ru": "сдавать; отдавать",
+    "translation_en": "to hand in; to give away",
+    "auxiliary": "haben",
+    "example_de": "Ich gebe den Schlüssel an der Rezeption ab.",
+    "example_ru": "Я сдаю ключ на ресепшене.",
+    "example_en": "I'm handing in the key at reception.",
+    "perfect_form": "haben abgegeben",
+    "forms": {
+      "Präsens": {
+        "ich": "gebe ab",
+        "du": "gibst ab",
+        "er/sie/es": "gibt ab",
+        "wir": "geben ab",
+        "ihr": "gebt ab",
+        "sie": "geben ab"
+      },
+      "Präteritum": {
+        "ich": "gab ab",
+        "du": "gabst ab",
+        "er/sie/es": "gab ab",
+        "wir": "gaben ab",
+        "ihr": "gabt ab",
+        "sie": "gaben ab"
+      },
+      "Konjunktiv II": {
+        "ich": "gäbe ab",
+        "du": "gäbest ab",
+        "er/sie/es": "gäbe ab",
+        "wir": "gäben ab",
+        "ihr": "gäbet ab",
+        "sie": "gäben ab"
+      },
+      "Imperativ": {
+        "du": "Gib ab!",
+        "ihr": "Gebt ab!",
+        "Sie": "Geben Sie ab!"
+      }
+    }
+  },
+  {
+    "id": "verb-105",
+    "infinitive": "anbieten",
+    "translation_ru": "предлагать",
+    "translation_en": "to offer",
+    "auxiliary": "haben",
+    "example_de": "Darf ich Ihnen einen Kaffee anbieten?",
+    "example_ru": "Можно предложить вам кофе?",
+    "example_en": "May I offer you a coffee?",
+    "perfect_form": "haben angeboten",
+    "forms": {
+      "Präteritum": {
+        "ich": "bot an",
+        "du": "botest an",
+        "er/sie/es": "bot an",
+        "wir": "boten an",
+        "ihr": "botet an",
+        "sie": "boten an"
+      },
+      "Konjunktiv II": {
+        "ich": "böte an",
+        "du": "bötest an",
+        "er/sie/es": "böte an",
+        "wir": "böten an",
+        "ihr": "bötet an",
+        "sie": "böten an"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "предлагать что-либо кому-либо",
+        "note_en": "to offer something to someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-106",
+    "infinitive": "anklicken",
+    "translation_ru": "щёлкать (мышью); нажимать (на ссылку, значок)",
+    "translation_en": "to click (on)",
+    "auxiliary": "haben",
+    "example_de": "Klick den Link an, dann öffnet sich das Formular.",
+    "example_ru": "Нажми на ссылку — тогда откроется форма.",
+    "example_en": "Click the link and the form will open.",
+    "perfect_form": "haben angeklickt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "щёлкать по чему-либо (без предлога)",
+        "note_en": "to click on something (no preposition)"
+      }
+    ]
+  },
+  {
+    "id": "verb-107",
+    "infinitive": "ankreuzen",
+    "translation_ru": "отмечать крестиком",
+    "translation_en": "to tick; to mark with a cross",
+    "auxiliary": "haben",
+    "example_de": "Kreuzen Sie bitte die richtige Antwort an.",
+    "example_ru": "Отметьте, пожалуйста, крестиком правильный ответ.",
+    "example_en": "Please tick the correct answer.",
+    "perfect_form": "haben angekreuzt",
+    "forms": null
+  },
+  {
+    "id": "verb-108",
+    "infinitive": "anmachen",
+    "translation_ru": "включать (свет, прибор)",
+    "translation_en": "to switch on; to turn on",
+    "auxiliary": "haben",
+    "usage_note_ru": "Разговорное слово; нейтральный вариант — einschalten.",
+    "usage_note_en": "Colloquial; the neutral word is einschalten.",
+    "example_de": "Kannst du bitte das Licht anmachen?",
+    "example_ru": "Можешь, пожалуйста, включить свет?",
+    "example_en": "Can you turn on the light, please?",
+    "perfect_form": "haben angemacht",
+    "forms": null
+  },
+  {
+    "id": "verb-109",
+    "infinitive": "aufmachen",
+    "translation_ru": "открывать",
+    "translation_en": "to open",
+    "auxiliary": "haben",
+    "usage_note_ru": "В разговорной речи часто вместо öffnen.",
+    "usage_note_en": "Often used instead of öffnen in everyday speech.",
+    "example_de": "Mach bitte das Fenster auf, es ist so warm hier.",
+    "example_ru": "Открой, пожалуйста, окно, здесь так жарко.",
+    "example_en": "Please open the window, it's so warm in here.",
+    "perfect_form": "haben aufgemacht",
+    "forms": null
+  },
+  {
+    "id": "verb-110",
+    "infinitive": "aufpassen",
+    "translation_ru": "присматривать; быть внимательным",
+    "translation_en": "to look after; to pay attention",
+    "auxiliary": "haben",
+    "example_de": "Kannst du kurz auf meine Tasche aufpassen?",
+    "example_ru": "Можешь минутку присмотреть за моей сумкой?",
+    "example_en": "Can you keep an eye on my bag for a moment?",
+    "perfect_form": "haben aufgepasst",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "присматривать за кем-либо или чем-либо",
+        "note_en": "to look after someone or something"
+      }
+    ]
+  },
+  {
+    "id": "verb-111",
+    "infinitive": "aufräumen",
+    "translation_ru": "убирать; наводить порядок",
+    "translation_en": "to tidy up",
+    "auxiliary": "haben",
+    "example_de": "Am Samstag räume ich meine Wohnung auf.",
+    "example_ru": "В субботу я убираю квартиру.",
+    "example_en": "On Saturday I tidy up my flat.",
+    "perfect_form": "haben aufgeräumt",
+    "forms": null
+  },
+  {
+    "id": "verb-112",
+    "infinitive": "aufwachen",
+    "translation_ru": "просыпаться",
+    "translation_en": "to wake up",
+    "auxiliary": "sein",
+    "usage_note_ru": "Будить кого-либо — wecken.",
+    "usage_note_en": "To wake someone else up is wecken.",
+    "example_de": "Wir sind heute erst um zehn aufgewacht.",
+    "example_ru": "Сегодня мы проснулись только в десять.",
+    "example_en": "We didn't wake up until ten today.",
+    "perfect_form": "sein aufgewacht",
+    "forms": null
+  },
+  {
+    "id": "verb-113",
+    "infinitive": "ausgehen",
+    "translation_ru": "ходить куда-нибудь (развлекаться); гаснуть (о свете)",
+    "translation_en": "to go out; to go off (of a light)",
+    "auxiliary": "sein",
+    "example_de": "Am Freitagabend gehen wir oft aus.",
+    "example_ru": "В пятницу вечером мы часто куда-нибудь ходим.",
+    "example_en": "We often go out on Friday evenings.",
+    "perfect_form": "sein ausgegangen",
+    "forms": {
+      "Präteritum": {
+        "ich": "ging aus",
+        "du": "gingst aus",
+        "er/sie/es": "ging aus",
+        "wir": "gingen aus",
+        "ihr": "gingt aus",
+        "sie": "gingen aus"
+      },
+      "Konjunktiv II": {
+        "ich": "ginge aus",
+        "du": "gingest aus",
+        "er/sie/es": "ginge aus",
+        "wir": "gingen aus",
+        "ihr": "ginget aus",
+        "sie": "gingen aus"
+      }
+    }
+  },
+  {
+    "id": "verb-114",
+    "infinitive": "ausmachen",
+    "translation_ru": "выключать; договариваться (о встрече)",
+    "translation_en": "to switch off; to arrange (a meeting)",
+    "auxiliary": "haben",
+    "usage_note_ru": "В значении «выключать» разговорное; нейтрально — ausschalten.",
+    "usage_note_en": "Colloquial in the sense “switch off”; the neutral word is ausschalten.",
+    "example_de": "Mach bitte den Fernseher aus.",
+    "example_ru": "Выключи, пожалуйста, телевизор.",
+    "example_en": "Please turn off the TV.",
+    "perfect_form": "haben ausgemacht",
+    "forms": null
+  },
+  {
+    "id": "verb-115",
+    "infinitive": "ausziehen",
+    "translation_ru": "снимать (одежду); раздевать(ся)",
+    "translation_en": "to take off (clothes); to undress",
+    "auxiliary": "haben",
+    "usage_note_ru": "Раздеваться — sich ausziehen. В значении «съезжать с квартиры» Perfekt с sein — см. вторую карточку.",
+    "usage_note_en": "To get undressed is sich ausziehen. In the sense “move out”, the perfect takes sein — see the second card.",
+    "example_de": "Zieh bitte die Schuhe aus.",
+    "example_ru": "Сними, пожалуйста, обувь.",
+    "example_en": "Please take your shoes off.",
+    "perfect_form": "haben ausgezogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "zog aus",
+        "du": "zogst aus",
+        "er/sie/es": "zog aus",
+        "wir": "zogen aus",
+        "ihr": "zogt aus",
+        "sie": "zogen aus"
+      },
+      "Konjunktiv II": {
+        "ich": "zöge aus",
+        "du": "zögest aus",
+        "er/sie/es": "zöge aus",
+        "wir": "zögen aus",
+        "ihr": "zöget aus",
+        "sie": "zögen aus"
+      }
+    }
+  },
+  {
+    "id": "verb-116",
+    "infinitive": "ausziehen",
+    "translation_ru": "съезжать (с квартиры)",
+    "translation_en": "to move out",
+    "auxiliary": "sein",
+    "usage_note_ru": "В значении «съезжать» Perfekt с sein: Wir sind ausgezogen.",
+    "usage_note_en": "In the sense “move out”, the perfect takes sein: Wir sind ausgezogen.",
+    "example_de": "Nächsten Monat ziehen wir aus der Wohnung aus.",
+    "example_ru": "В следующем месяце мы съезжаем с квартиры.",
+    "example_en": "We're moving out of the flat next month.",
+    "perfect_form": "sein ausgezogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "zog aus",
+        "du": "zogst aus",
+        "er/sie/es": "zog aus",
+        "wir": "zogen aus",
+        "ihr": "zogt aus",
+        "sie": "zogen aus"
+      },
+      "Konjunktiv II": {
+        "ich": "zöge aus",
+        "du": "zögest aus",
+        "er/sie/es": "zöge aus",
+        "wir": "zögen aus",
+        "ihr": "zöget aus",
+        "sie": "zögen aus"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "aus + Dativ",
+        "note_ru": "съезжать откуда-либо",
+        "note_en": "to move out of somewhere"
+      }
+    ]
+  },
+  {
+    "id": "verb-117",
+    "infinitive": "backen",
+    "translation_ru": "печь",
+    "translation_en": "to bake",
+    "auxiliary": "haben",
+    "usage_note_ru": "Präsens: du backst / bäckst, er backt / bäckt — правильны обе формы. Präteritum обычно backte (устаревающее: buk).",
+    "usage_note_en": "Present: du backst / bäckst, er backt / bäckt — both are correct. The simple past is usually backte (dated: buk).",
+    "example_de": "Am Sonntag backe ich einen Apfelkuchen.",
+    "example_ru": "В воскресенье я пеку яблочный пирог.",
+    "example_en": "On Sunday I'm baking an apple cake.",
+    "perfect_form": "haben gebacken",
+    "forms": null
+  },
+  {
+    "id": "verb-118",
+    "infinitive": "baden",
+    "translation_ru": "купаться; принимать ванну",
+    "translation_en": "to bathe; to have a bath; to swim",
+    "auxiliary": "haben",
+    "example_de": "Im Sommer baden wir oft im See.",
+    "example_ru": "Летом мы часто купаемся в озере.",
+    "example_en": "In summer we often swim in the lake.",
+    "perfect_form": "haben gebadet",
+    "forms": null
+  },
+  {
+    "id": "verb-119",
+    "infinitive": "basteln",
+    "translation_ru": "мастерить",
+    "translation_en": "to make (crafts); to do handicrafts",
+    "auxiliary": "haben",
+    "example_de": "Die Kinder basteln Laternen für das Fest.",
+    "example_ru": "Дети мастерят фонарики к празднику.",
+    "example_en": "The children are making lanterns for the festival.",
+    "perfect_form": "haben gebastelt",
+    "forms": null
+  },
+  {
+    "id": "verb-120",
+    "infinitive": "bedeuten",
+    "translation_ru": "означать; значить",
+    "translation_en": "to mean",
+    "auxiliary": "haben",
+    "example_de": "Was bedeutet dieses Wort?",
+    "example_ru": "Что означает это слово?",
+    "example_en": "What does this word mean?",
+    "perfect_form": "haben bedeutet",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "значить что-либо для кого-либо: Du bedeutest mir viel.",
+        "note_en": "to mean something to someone: Du bedeutest mir viel."
+      }
+    ]
+  },
+  {
+    "id": "verb-121",
+    "infinitive": "beginnen",
+    "translation_ru": "начинать(ся)",
+    "translation_en": "to begin; to start",
+    "auxiliary": "haben",
+    "usage_note_ru": "Konjunktiv II также: begönne.",
+    "usage_note_en": "Konjunktiv II also: begönne.",
+    "example_de": "Der Kurs beginnt um neun Uhr.",
+    "example_ru": "Курс начинается в девять часов.",
+    "example_en": "The course starts at nine o'clock.",
+    "perfect_form": "haben begonnen",
+    "forms": {
+      "Präteritum": {
+        "ich": "begann",
+        "du": "begannst",
+        "er/sie/es": "begann",
+        "wir": "begannen",
+        "ihr": "begannt",
+        "sie": "begannen"
+      },
+      "Konjunktiv II": {
+        "ich": "begänne",
+        "du": "begännest",
+        "er/sie/es": "begänne",
+        "wir": "begännen",
+        "ihr": "begännet",
+        "sie": "begännen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "начинать что-либо, начинать с чего-либо",
+        "note_en": "to start (with) something"
+      }
+    ]
+  },
+  {
+    "id": "verb-122",
+    "infinitive": "benutzen",
+    "translation_ru": "пользоваться; использовать",
+    "translation_en": "to use",
+    "auxiliary": "haben",
+    "usage_note_ru": "На юге Германии и в Австрии часто: benützen.",
+    "usage_note_en": "In southern Germany and Austria often: benützen.",
+    "example_de": "Darf ich kurz dein Handy benutzen?",
+    "example_ru": "Можно я ненадолго воспользуюсь твоим телефоном?",
+    "example_en": "Can I use your phone for a moment?",
+    "perfect_form": "haben benutzt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "пользоваться чем-либо (без предлога)",
+        "note_en": "to use something (no preposition)"
+      }
+    ]
+  },
+  {
+    "id": "verb-123",
+    "infinitive": "besichtigen",
+    "translation_ru": "осматривать (достопримечательность, квартиру)",
+    "translation_en": "to visit; to view; to look round",
+    "auxiliary": "haben",
+    "example_de": "Morgen besichtigen wir den Kölner Dom.",
+    "example_ru": "Завтра мы осматриваем Кёльнский собор.",
+    "example_en": "Tomorrow we're visiting Cologne Cathedral.",
+    "perfect_form": "haben besichtigt",
+    "forms": null
+  },
+  {
+    "id": "verb-124",
+    "infinitive": "bitten",
+    "translation_ru": "просить",
+    "translation_en": "to ask; to request",
+    "auxiliary": "haben",
+    "example_de": "Ich bitte dich um einen Gefallen.",
+    "example_ru": "Я прошу тебя об одолжении.",
+    "example_en": "I'm asking you for a favour.",
+    "perfect_form": "haben gebeten",
+    "forms": {
+      "Präteritum": {
+        "ich": "bat",
+        "du": "batest",
+        "er/sie/es": "bat",
+        "wir": "baten",
+        "ihr": "batet",
+        "sie": "baten"
+      },
+      "Konjunktiv II": {
+        "ich": "bäte",
+        "du": "bätest",
+        "er/sie/es": "bäte",
+        "wir": "bäten",
+        "ihr": "bätet",
+        "sie": "bäten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "просить кого-либо",
+        "note_en": "to ask someone"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "просить о чём-либо",
+        "note_en": "to ask for something"
+      }
+    ]
+  },
+  {
+    "id": "verb-125",
+    "infinitive": "buchen",
+    "translation_ru": "бронировать",
+    "translation_en": "to book",
+    "auxiliary": "haben",
+    "example_de": "Wir haben schon ein Hotel in Wien gebucht.",
+    "example_ru": "Мы уже забронировали отель в Вене.",
+    "example_en": "We've already booked a hotel in Vienna.",
+    "perfect_form": "haben gebucht",
+    "forms": null
+  },
+  {
+    "id": "verb-126",
+    "infinitive": "buchstabieren",
+    "translation_ru": "произносить по буквам",
+    "translation_en": "to spell",
+    "auxiliary": "haben",
+    "example_de": "Können Sie Ihren Namen bitte buchstabieren?",
+    "example_ru": "Можете, пожалуйста, продиктовать ваше имя по буквам?",
+    "example_en": "Could you spell your name, please?",
+    "perfect_form": "haben buchstabiert",
+    "forms": null
+  },
+  {
+    "id": "verb-127",
+    "infinitive": "danken",
+    "translation_ru": "благодарить",
+    "translation_en": "to thank",
+    "auxiliary": "haben",
+    "usage_note_ru": "В разговоре чаще: sich bedanken bei + Dativ.",
+    "usage_note_en": "In conversation more often: sich bedanken bei + dative.",
+    "example_de": "Ich danke dir für deine Hilfe.",
+    "example_ru": "Благодарю тебя за помощь.",
+    "example_en": "Thank you for your help.",
+    "perfect_form": "haben gedankt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "благодарить кого-либо (в отличие от русского — Dativ)",
+        "note_en": "to thank someone"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "благодарить за что-либо",
+        "note_en": "to thank for something"
+      }
+    ]
+  },
+  {
+    "id": "verb-128",
+    "infinitive": "dauern",
+    "translation_ru": "длиться; продолжаться",
+    "translation_en": "to last; to take (time)",
+    "auxiliary": "haben",
+    "example_de": "Wie lange dauert der Film?",
+    "example_ru": "Сколько длится фильм?",
+    "example_en": "How long is the film?",
+    "perfect_form": "haben gedauert",
+    "forms": null
+  },
+  {
+    "id": "verb-129",
+    "infinitive": "drucken",
+    "translation_ru": "печатать",
+    "translation_en": "to print",
+    "auxiliary": "haben",
+    "usage_note_ru": "Не путать с drücken — нажимать.",
+    "usage_note_en": "Not to be confused with drücken — to press.",
+    "example_de": "Kannst du die Einladungen für mich drucken?",
+    "example_ru": "Можешь напечатать для меня приглашения?",
+    "example_en": "Can you print the invitations for me?",
+    "perfect_form": "haben gedruckt",
+    "forms": null
+  },
+  {
+    "id": "verb-130",
+    "infinitive": "drücken",
+    "translation_ru": "нажимать; давить; жать (об обуви)",
+    "translation_en": "to press; to push; to pinch",
+    "auxiliary": "haben",
+    "usage_note_ru": "Не путать с drucken — печатать.",
+    "usage_note_en": "Not to be confused with drucken — to print.",
+    "example_de": "Drücken Sie bitte den grünen Knopf.",
+    "example_ru": "Нажмите, пожалуйста, зелёную кнопку.",
+    "example_en": "Please press the green button.",
+    "perfect_form": "haben gedrückt",
+    "forms": null
+  },
+  {
+    "id": "verb-131",
+    "infinitive": "dürfen",
+    "translation_ru": "мочь (иметь разрешение); можно",
+    "translation_en": "may; to be allowed to",
+    "auxiliary": "haben",
+    "usage_note_ru": "nicht dürfen — «нельзя»: Hier darf man nicht parken. С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe nicht mitkommen dürfen.",
+    "usage_note_en": "nicht dürfen means “must not”: Hier darf man nicht parken. With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe nicht mitkommen dürfen.",
+    "example_de": "Darf ich das Fenster öffnen?",
+    "example_ru": "Можно мне открыть окно?",
+    "example_en": "May I open the window?",
+    "perfect_form": "haben gedurft",
+    "forms": {
+      "Präsens": {
+        "ich": "darf",
+        "du": "darfst",
+        "er/sie/es": "darf",
+        "wir": "dürfen",
+        "ihr": "dürft",
+        "sie": "dürfen"
+      },
+      "Präteritum": {
+        "ich": "durfte",
+        "du": "durftest",
+        "er/sie/es": "durfte",
+        "wir": "durften",
+        "ihr": "durftet",
+        "sie": "durften"
+      },
+      "Konjunktiv II": {
+        "ich": "dürfte",
+        "du": "dürftest",
+        "er/sie/es": "dürfte",
+        "wir": "dürften",
+        "ihr": "dürftet",
+        "sie": "dürften"
+      }
+    }
+  },
+  {
+    "id": "verb-132",
+    "infinitive": "duschen",
+    "translation_ru": "принимать душ",
+    "translation_en": "to shower; to take a shower",
+    "auxiliary": "haben",
+    "usage_note_ru": "Также возвратно: sich duschen.",
+    "usage_note_en": "Also reflexive: sich duschen.",
+    "example_de": "Ich dusche jeden Morgen kalt.",
+    "example_ru": "Каждое утро я принимаю холодный душ.",
+    "example_en": "I take a cold shower every morning.",
+    "perfect_form": "haben geduscht",
+    "forms": null
+  },
+  {
+    "id": "verb-133",
+    "infinitive": "einsteigen",
+    "translation_ru": "садиться (в транспорт)",
+    "translation_en": "to get on; to get in",
+    "auxiliary": "sein",
+    "example_de": "Steigen Sie bitte schnell ein, der Zug fährt gleich ab.",
+    "example_ru": "Садитесь, пожалуйста, быстрее, поезд сейчас отправляется.",
+    "example_en": "Please get on quickly, the train is about to leave.",
+    "perfect_form": "sein eingestiegen",
+    "forms": {
+      "Präteritum": {
+        "ich": "stieg ein",
+        "du": "stiegst ein",
+        "er/sie/es": "stieg ein",
+        "wir": "stiegen ein",
+        "ihr": "stiegt ein",
+        "sie": "stiegen ein"
+      },
+      "Konjunktiv II": {
+        "ich": "stiege ein",
+        "du": "stiegest ein",
+        "er/sie/es": "stiege ein",
+        "wir": "stiegen ein",
+        "ihr": "stieget ein",
+        "sie": "stiegen ein"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "садиться во что-либо (в автобус, в машину)",
+        "note_en": "to get into something (a bus, a car)"
+      }
+    ]
+  },
+  {
+    "id": "verb-134",
+    "infinitive": "enden",
+    "translation_ru": "заканчиваться; кончаться",
+    "translation_en": "to end; to finish",
+    "auxiliary": "haben",
+    "example_de": "Der Unterricht endet um halb vier.",
+    "example_ru": "Занятия заканчиваются в половине четвёртого.",
+    "example_en": "Lessons end at half past three.",
+    "perfect_form": "haben geendet",
+    "forms": null
+  },
+  {
+    "id": "verb-135",
+    "infinitive": "entschuldigen",
+    "translation_ru": "извинять; прощать",
+    "translation_en": "to excuse; to forgive",
+    "auxiliary": "haben",
+    "usage_note_ru": "Entschuldigen Sie! / Entschuldigung! — вежливое обращение или извинение. Извиняться — sich entschuldigen (отдельная карточка).",
+    "usage_note_en": "Entschuldigen Sie! / Entschuldigung! is a polite way to address someone or apologize. To apologize is sich entschuldigen (separate card).",
+    "example_de": "Entschuldigen Sie, wo ist der Bahnhof?",
+    "example_ru": "Извините, где вокзал?",
+    "example_en": "Excuse me, where is the station?",
+    "perfect_form": "haben entschuldigt",
+    "forms": null
+  },
+  {
+    "id": "verb-136",
+    "infinitive": "sich entschuldigen",
+    "translation_ru": "извиняться",
+    "translation_en": "to apologize",
+    "auxiliary": "haben",
+    "example_de": "Ich möchte mich bei dir für gestern entschuldigen.",
+    "example_ru": "Я хочу извиниться перед тобой за вчерашнее.",
+    "example_en": "I'd like to apologize to you for yesterday.",
+    "perfect_form": "haben sich entschuldigt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "извиняться перед кем-либо",
+        "note_en": "to apologize to someone"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "извиняться за что-либо",
+        "note_en": "to apologize for something"
+      }
+    ]
+  },
+  {
+    "id": "verb-137",
+    "infinitive": "sich entspannen",
+    "translation_ru": "расслабляться; отдыхать",
+    "translation_en": "to relax",
+    "auxiliary": "haben",
+    "example_de": "Am Wochenende will ich mich einfach entspannen.",
+    "example_ru": "На выходных я хочу просто расслабиться.",
+    "example_en": "At the weekend I just want to relax.",
+    "perfect_form": "haben sich entspannt",
+    "forms": null
+  },
+  {
+    "id": "verb-138",
+    "infinitive": "fallen",
+    "translation_ru": "падать",
+    "translation_en": "to fall",
+    "auxiliary": "sein",
+    "example_de": "Im Herbst fallen die Blätter von den Bäumen.",
+    "example_ru": "Осенью с деревьев падают листья.",
+    "example_en": "In autumn the leaves fall from the trees.",
+    "perfect_form": "sein gefallen",
+    "forms": {
+      "Präsens": {
+        "ich": "falle",
+        "du": "fällst",
+        "er/sie/es": "fällt",
+        "wir": "fallen",
+        "ihr": "fallt",
+        "sie": "fallen"
+      },
+      "Präteritum": {
+        "ich": "fiel",
+        "du": "fielst",
+        "er/sie/es": "fiel",
+        "wir": "fielen",
+        "ihr": "fielt",
+        "sie": "fielen"
+      },
+      "Konjunktiv II": {
+        "ich": "fiele",
+        "du": "fielest",
+        "er/sie/es": "fiele",
+        "wir": "fielen",
+        "ihr": "fielet",
+        "sie": "fielen"
+      }
+    }
+  },
+  {
+    "id": "verb-139",
+    "infinitive": "fernsehen",
+    "translation_ru": "смотреть телевизор",
+    "translation_en": "to watch TV",
+    "auxiliary": "haben",
+    "example_de": "Abends sehen wir oft zusammen fern.",
+    "example_ru": "По вечерам мы часто вместе смотрим телевизор.",
+    "example_en": "We often watch TV together in the evenings.",
+    "perfect_form": "haben ferngesehen",
+    "forms": {
+      "Präsens": {
+        "ich": "sehe fern",
+        "du": "siehst fern",
+        "er/sie/es": "sieht fern",
+        "wir": "sehen fern",
+        "ihr": "seht fern",
+        "sie": "sehen fern"
+      },
+      "Präteritum": {
+        "ich": "sah fern",
+        "du": "sahst fern",
+        "er/sie/es": "sah fern",
+        "wir": "sahen fern",
+        "ihr": "saht fern",
+        "sie": "sahen fern"
+      },
+      "Konjunktiv II": {
+        "ich": "sähe fern",
+        "du": "sähest fern",
+        "er/sie/es": "sähe fern",
+        "wir": "sähen fern",
+        "ihr": "sähet fern",
+        "sie": "sähen fern"
+      },
+      "Imperativ": {
+        "du": "Sieh fern!",
+        "ihr": "Seht fern!",
+        "Sie": "Sehen Sie fern!"
+      }
+    }
+  },
+  {
+    "id": "verb-140",
+    "infinitive": "fliegen",
+    "translation_ru": "летать; лететь",
+    "translation_en": "to fly",
+    "auxiliary": "sein",
+    "usage_note_ru": "Если fliegen с прямым дополнением (ein Flugzeug fliegen — управлять самолётом), в Perfekt используется haben.",
+    "usage_note_en": "When fliegen has a direct object (ein Flugzeug fliegen — to pilot a plane), the perfect takes haben.",
+    "example_de": "Im Sommer fliegen wir nach Spanien.",
+    "example_ru": "Летом мы летим в Испанию.",
+    "example_en": "In summer we're flying to Spain.",
+    "perfect_form": "sein geflogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "flog",
+        "du": "flogst",
+        "er/sie/es": "flog",
+        "wir": "flogen",
+        "ihr": "flogt",
+        "sie": "flogen"
+      },
+      "Konjunktiv II": {
+        "ich": "flöge",
+        "du": "flögest",
+        "er/sie/es": "flöge",
+        "wir": "flögen",
+        "ihr": "flöget",
+        "sie": "flögen"
+      }
+    }
+  },
+  {
+    "id": "verb-141",
+    "infinitive": "frühstücken",
+    "translation_ru": "завтракать",
+    "translation_en": "to have breakfast",
+    "auxiliary": "haben",
+    "example_de": "Am Wochenende frühstücken wir lange.",
+    "example_ru": "По выходным мы долго завтракаем.",
+    "example_en": "At the weekend we have a long breakfast.",
+    "perfect_form": "haben gefrühstückt",
+    "forms": null
+  },
+  {
+    "id": "verb-142",
+    "infinitive": "gefallen",
+    "translation_ru": "нравиться",
+    "translation_en": "to please; to like",
+    "auxiliary": "haben",
+    "usage_note_ru": "Как в русском «нравиться»: то, что нравится, — подлежащее; тот, кому нравится, — в Dativ.",
+    "usage_note_en": "The thing liked is the subject; the person who likes it is in the dative.",
+    "example_de": "Die Stadt gefällt mir sehr.",
+    "example_ru": "Мне очень нравится этот город.",
+    "example_en": "I really like the city.",
+    "perfect_form": "haben gefallen",
+    "forms": {
+      "Präsens": {
+        "ich": "gefalle",
+        "du": "gefällst",
+        "er/sie/es": "gefällt",
+        "wir": "gefallen",
+        "ihr": "gefallt",
+        "sie": "gefallen"
+      },
+      "Präteritum": {
+        "ich": "gefiel",
+        "du": "gefielst",
+        "er/sie/es": "gefiel",
+        "wir": "gefielen",
+        "ihr": "gefielt",
+        "sie": "gefielen"
+      },
+      "Konjunktiv II": {
+        "ich": "gefiele",
+        "du": "gefielest",
+        "er/sie/es": "gefiele",
+        "wir": "gefielen",
+        "ihr": "gefielet",
+        "sie": "gefielen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "кому-либо нравится (как по-русски: мне нравится)",
+        "note_en": "someone likes it (the person is in the dative)"
+      }
+    ]
+  },
+  {
+    "id": "verb-143",
+    "infinitive": "genießen",
+    "translation_ru": "наслаждаться",
+    "translation_en": "to enjoy",
+    "auxiliary": "haben",
+    "example_de": "Im Urlaub genieße ich die Ruhe.",
+    "example_ru": "В отпуске я наслаждаюсь тишиной.",
+    "example_en": "On holiday I enjoy the peace and quiet.",
+    "perfect_form": "haben genossen",
+    "forms": {
+      "Präteritum": {
+        "ich": "genoss",
+        "du": "genossest",
+        "er/sie/es": "genoss",
+        "wir": "genossen",
+        "ihr": "genosst",
+        "sie": "genossen"
+      },
+      "Konjunktiv II": {
+        "ich": "genösse",
+        "du": "genössest",
+        "er/sie/es": "genösse",
+        "wir": "genössen",
+        "ihr": "genösset",
+        "sie": "genössen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "наслаждаться чем-либо (без предлога)",
+        "note_en": "to enjoy something"
+      }
+    ]
+  },
+  {
+    "id": "verb-144",
+    "infinitive": "gratulieren",
+    "translation_ru": "поздравлять",
+    "translation_en": "to congratulate",
+    "auxiliary": "haben",
+    "example_de": "Wir gratulieren dir herzlich zum Geburtstag!",
+    "example_ru": "Сердечно поздравляем тебя с днём рождения!",
+    "example_en": "We wish you a very happy birthday!",
+    "perfect_form": "haben gratuliert",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "поздравлять кого-либо (в отличие от русского — Dativ)",
+        "note_en": "to congratulate someone"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "поздравлять с чем-либо",
+        "note_en": "to congratulate on something"
+      }
+    ]
+  },
+  {
+    "id": "verb-145",
+    "infinitive": "grillen",
+    "translation_ru": "жарить на гриле; устраивать барбекю",
+    "translation_en": "to grill; to have a barbecue",
+    "auxiliary": "haben",
+    "example_de": "Am Samstag grillen wir im Garten.",
+    "example_ru": "В субботу мы устраиваем барбекю в саду.",
+    "example_en": "On Saturday we're having a barbecue in the garden.",
+    "perfect_form": "haben gegrillt",
+    "forms": null
+  },
+  {
+    "id": "verb-146",
+    "infinitive": "halten",
+    "translation_ru": "держать; останавливаться",
+    "translation_en": "to hold; to stop",
+    "auxiliary": "haben",
+    "usage_note_ru": "Останавливаться (о транспорте): Der Bus hält vor dem Haus.",
+    "usage_note_en": "To stop (of a vehicle): Der Bus hält vor dem Haus.",
+    "example_de": "Kannst du kurz meine Tasche halten?",
+    "example_ru": "Можешь минутку подержать мою сумку?",
+    "example_en": "Can you hold my bag for a moment?",
+    "perfect_form": "haben gehalten",
+    "forms": {
+      "Präsens": {
+        "ich": "halte",
+        "du": "hältst",
+        "er/sie/es": "hält",
+        "wir": "halten",
+        "ihr": "haltet",
+        "sie": "halten"
+      },
+      "Präteritum": {
+        "ich": "hielt",
+        "du": "hieltest",
+        "er/sie/es": "hielt",
+        "wir": "hielten",
+        "ihr": "hieltet",
+        "sie": "hielten"
+      },
+      "Konjunktiv II": {
+        "ich": "hielte",
+        "du": "hieltest",
+        "er/sie/es": "hielte",
+        "wir": "hielten",
+        "ihr": "hieltet",
+        "sie": "hielten"
+      },
+      "Imperativ": {
+        "du": "Halt!",
+        "ihr": "Haltet!",
+        "Sie": "Halten Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-147",
+    "infinitive": "halten",
+    "translation_ru": "считать (кем-либо, чем-либо); быть (какого-либо) мнения",
+    "translation_en": "to consider; to think of",
+    "auxiliary": "haben",
+    "example_de": "Was hältst du von meiner Idee?",
+    "example_ru": "Что ты думаешь о моей идее?",
+    "example_en": "What do you think of my idea?",
+    "perfect_form": "haben gehalten",
+    "forms": {
+      "Präsens": {
+        "ich": "halte",
+        "du": "hältst",
+        "er/sie/es": "hält",
+        "wir": "halten",
+        "ihr": "haltet",
+        "sie": "halten"
+      },
+      "Präteritum": {
+        "ich": "hielt",
+        "du": "hieltest",
+        "er/sie/es": "hielt",
+        "wir": "hielten",
+        "ihr": "hieltet",
+        "sie": "hielten"
+      },
+      "Konjunktiv II": {
+        "ich": "hielte",
+        "du": "hieltest",
+        "er/sie/es": "hielte",
+        "wir": "hielten",
+        "ihr": "hieltet",
+        "sie": "hielten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "быть какого-либо мнения о ком-либо или чём-либо",
+        "note_en": "to think (highly / little) of someone or something"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "считать кого-либо или что-либо кем-либо или чем-либо",
+        "note_en": "to consider someone or something (to be) …"
+      }
+    ]
+  },
+  {
+    "id": "verb-148",
+    "infinitive": "heiraten",
+    "translation_ru": "жениться; выходить замуж",
+    "translation_en": "to marry; to get married",
+    "auxiliary": "haben",
+    "example_de": "Meine Schwester heiratet im Mai.",
+    "example_ru": "Моя сестра выходит замуж в мае.",
+    "example_en": "My sister is getting married in May.",
+    "perfect_form": "haben geheiratet",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "жениться на ком-либо, выходить замуж за кого-либо (без предлога)",
+        "note_en": "to marry someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-149",
+    "infinitive": "heißen",
+    "translation_ru": "называться; зваться; означать",
+    "translation_en": "to be called; to mean",
+    "auxiliary": "haben",
+    "example_de": "Wie heißt das auf Deutsch?",
+    "example_ru": "Как это называется по-немецки?",
+    "example_en": "What's that called in German?",
+    "perfect_form": "haben geheißen",
+    "forms": {
+      "Präteritum": {
+        "ich": "hieß",
+        "du": "hießest",
+        "er/sie/es": "hieß",
+        "wir": "hießen",
+        "ihr": "hießt",
+        "sie": "hießen"
+      },
+      "Konjunktiv II": {
+        "ich": "hieße",
+        "du": "hießest",
+        "er/sie/es": "hieße",
+        "wir": "hießen",
+        "ihr": "hießet",
+        "sie": "hießen"
+      }
+    }
+  },
+  {
+    "id": "verb-150",
+    "infinitive": "holen",
+    "translation_ru": "сходить (за чем-либо); забирать; приносить",
+    "translation_en": "to fetch; to get; to pick up",
+    "auxiliary": "haben",
+    "example_de": "Ich hole schnell Brötchen vom Bäcker.",
+    "example_ru": "Я быстро схожу в пекарню за булочками.",
+    "example_en": "I'll quickly get some rolls from the bakery.",
+    "perfect_form": "haben geholt",
+    "forms": null
+  },
+  {
+    "id": "verb-151",
+    "infinitive": "klettern",
+    "translation_ru": "лазить; карабкаться; заниматься скалолазанием",
+    "translation_en": "to climb",
+    "auxiliary": "sein",
+    "usage_note_ru": "В значении «заниматься скалолазанием» Perfekt иногда и с haben.",
+    "usage_note_en": "In the sense “to go climbing (as a sport)” the perfect sometimes takes haben.",
+    "example_de": "Die Kinder klettern auf den Baum.",
+    "example_ru": "Дети залезают на дерево.",
+    "example_en": "The children are climbing the tree.",
+    "perfect_form": "sein geklettert",
+    "forms": null
+  },
+  {
+    "id": "verb-152",
+    "infinitive": "klicken",
+    "translation_ru": "щёлкать; кликать",
+    "translation_en": "to click",
+    "auxiliary": "haben",
+    "example_de": "Klicken Sie auf „Senden“.",
+    "example_ru": "Нажмите «Отправить».",
+    "example_en": "Click on “Send”.",
+    "perfect_form": "haben geklickt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "кликать на что-либо",
+        "note_en": "to click on something"
+      }
+    ]
+  },
+  {
+    "id": "verb-153",
+    "infinitive": "kosten",
+    "translation_ru": "стоить",
+    "translation_en": "to cost",
+    "auxiliary": "haben",
+    "example_de": "Wie viel kostet das T-Shirt?",
+    "example_ru": "Сколько стоит эта футболка?",
+    "example_en": "How much is this T-shirt?",
+    "perfect_form": "haben gekostet",
+    "forms": null
+  },
+  {
+    "id": "verb-154",
+    "infinitive": "kriegen",
+    "translation_ru": "получать",
+    "translation_en": "to get; to receive",
+    "auxiliary": "haben",
+    "usage_note_ru": "Разговорное слово; нейтральный вариант — bekommen.",
+    "usage_note_en": "Colloquial; the neutral word is bekommen.",
+    "example_de": "Ich habe heute einen Brief von Oma gekriegt.",
+    "example_ru": "Сегодня мне пришло письмо от бабушки.",
+    "example_en": "I got a letter from Grandma today.",
+    "perfect_form": "haben gekriegt",
+    "forms": null
+  },
+  {
+    "id": "verb-155",
+    "infinitive": "sich kümmern",
+    "translation_ru": "заботиться; заниматься (чем-либо)",
+    "translation_en": "to take care of; to look after",
+    "auxiliary": "haben",
+    "example_de": "Wer kümmert sich um den Hund, wenn ihr im Urlaub seid?",
+    "example_ru": "Кто будет заботиться о собаке, пока вы в отпуске?",
+    "example_en": "Who will look after the dog while you're on holiday?",
+    "perfect_form": "haben sich gekümmert",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "заботиться о ком-либо или чём-либо; заниматься чем-либо",
+        "note_en": "to take care of someone or something; to deal with something"
+      }
+    ]
+  },
+  {
+    "id": "verb-156",
+    "infinitive": "lachen",
+    "translation_ru": "смеяться",
+    "translation_en": "to laugh",
+    "auxiliary": "haben",
+    "example_de": "Wir haben den ganzen Abend gelacht.",
+    "example_ru": "Мы смеялись весь вечер.",
+    "example_en": "We laughed all evening.",
+    "perfect_form": "haben gelacht",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "смеяться над кем-либо или чем-либо",
+        "note_en": "to laugh at / about someone or something"
+      }
+    ]
+  },
+  {
+    "id": "verb-157",
+    "infinitive": "lassen",
+    "translation_ru": "оставлять; позволять; поручать (сделать)",
+    "translation_en": "to leave; to let; to have (something done)",
+    "auxiliary": "haben",
+    "usage_note_ru": "С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe mir die Haare schneiden lassen.",
+    "usage_note_en": "With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe mir die Haare schneiden lassen.",
+    "example_de": "Lass das Fenster bitte offen.",
+    "example_ru": "Оставь, пожалуйста, окно открытым.",
+    "example_en": "Please leave the window open.",
+    "perfect_form": "haben gelassen",
+    "forms": {
+      "Präsens": {
+        "ich": "lasse",
+        "du": "lässt",
+        "er/sie/es": "lässt",
+        "wir": "lassen",
+        "ihr": "lasst",
+        "sie": "lassen"
+      },
+      "Präteritum": {
+        "ich": "ließ",
+        "du": "ließest",
+        "er/sie/es": "ließ",
+        "wir": "ließen",
+        "ihr": "ließt",
+        "sie": "ließen"
+      },
+      "Konjunktiv II": {
+        "ich": "ließe",
+        "du": "ließest",
+        "er/sie/es": "ließe",
+        "wir": "ließen",
+        "ihr": "ließet",
+        "sie": "ließen"
+      },
+      "Imperativ": {
+        "du": "Lass!",
+        "ihr": "Lasst!",
+        "Sie": "Lassen Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-158",
+    "infinitive": "laufen",
+    "translation_ru": "бегать; бежать; идти пешком; работать (о приборе)",
+    "translation_en": "to run; to walk; to be on (of a machine)",
+    "auxiliary": "sein",
+    "example_de": "Ich laufe jeden Morgen fünf Kilometer.",
+    "example_ru": "Каждое утро я бегаю пять километров.",
+    "example_en": "I run five kilometres every morning.",
+    "perfect_form": "sein gelaufen",
+    "forms": {
+      "Präsens": {
+        "ich": "laufe",
+        "du": "läufst",
+        "er/sie/es": "läuft",
+        "wir": "laufen",
+        "ihr": "lauft",
+        "sie": "laufen"
+      },
+      "Präteritum": {
+        "ich": "lief",
+        "du": "liefst",
+        "er/sie/es": "lief",
+        "wir": "liefen",
+        "ihr": "lieft",
+        "sie": "liefen"
+      },
+      "Konjunktiv II": {
+        "ich": "liefe",
+        "du": "liefest",
+        "er/sie/es": "liefe",
+        "wir": "liefen",
+        "ihr": "liefet",
+        "sie": "liefen"
+      },
+      "Imperativ": {
+        "du": "Lauf!",
+        "ihr": "Lauft!",
+        "Sie": "Laufen Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-159",
+    "infinitive": "legen",
+    "translation_ru": "класть; положить",
+    "translation_en": "to put; to lay (down)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Класть горизонтально; ставить вертикально — stellen. Результат: etwas liegt.",
+    "usage_note_en": "To put something down flat; to put something upright is stellen. The result: etwas liegt.",
+    "example_de": "Leg die Schlüssel bitte auf den Tisch.",
+    "example_ru": "Положи, пожалуйста, ключи на стол.",
+    "example_en": "Please put the keys on the table.",
+    "perfect_form": "haben gelegt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "in / auf / an … + Akkusativ",
+        "note_ru": "куда? — направление: Wechselpräposition с Akkusativ",
+        "note_en": "where to? — direction: two-way preposition + accusative"
+      }
+    ]
+  },
+  {
+    "id": "verb-160",
+    "infinitive": "lieben",
+    "translation_ru": "любить",
+    "translation_en": "to love",
+    "auxiliary": "haben",
+    "example_de": "Meine Kinder lieben Pizza.",
+    "example_ru": "Мои дети обожают пиццу.",
+    "example_en": "My kids love pizza.",
+    "perfect_form": "haben geliebt",
+    "forms": null
+  },
+  {
+    "id": "verb-161",
+    "infinitive": "liegen",
+    "translation_ru": "лежать; находиться",
+    "translation_en": "to lie; to be (located)",
+    "auxiliary": "haben",
+    "usage_note_ru": "На юге Германии, в Австрии и Швейцарии Perfekt с sein: ist gelegen.",
+    "usage_note_en": "In southern Germany, Austria and Switzerland the perfect takes sein: ist gelegen.",
+    "example_de": "Das Handy liegt auf dem Tisch.",
+    "example_ru": "Телефон лежит на столе.",
+    "example_en": "The phone is on the table.",
+    "perfect_form": "haben gelegen",
+    "forms": {
+      "Präteritum": {
+        "ich": "lag",
+        "du": "lagst",
+        "er/sie/es": "lag",
+        "wir": "lagen",
+        "ihr": "lagt",
+        "sie": "lagen"
+      },
+      "Konjunktiv II": {
+        "ich": "läge",
+        "du": "lägest",
+        "er/sie/es": "läge",
+        "wir": "lägen",
+        "ihr": "läget",
+        "sie": "lägen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "in / auf / an … + Dativ",
+        "note_ru": "где? — место: Wechselpräposition с Dativ",
+        "note_en": "where? — location: two-way preposition + dative"
+      }
+    ]
+  },
+  {
+    "id": "verb-162",
+    "infinitive": "mieten",
+    "translation_ru": "снимать; арендовать",
+    "translation_en": "to rent",
+    "auxiliary": "haben",
+    "usage_note_ru": "Сдавать в аренду — vermieten.",
+    "usage_note_en": "To rent out is vermieten.",
+    "example_de": "Wir mieten eine kleine Wohnung in der Altstadt.",
+    "example_ru": "Мы снимаем небольшую квартиру в старом городе.",
+    "example_en": "We're renting a small flat in the old town.",
+    "perfect_form": "haben gemietet",
+    "forms": null
+  },
+  {
+    "id": "verb-163",
+    "infinitive": "mitbringen",
+    "translation_ru": "приносить (с собой); привозить",
+    "translation_en": "to bring (along)",
+    "auxiliary": "haben",
+    "example_de": "Soll ich etwas zum Essen mitbringen?",
+    "example_ru": "Мне принести что-нибудь поесть?",
+    "example_en": "Shall I bring something to eat?",
+    "perfect_form": "haben mitgebracht",
+    "forms": {
+      "Präteritum": {
+        "ich": "brachte mit",
+        "du": "brachtest mit",
+        "er/sie/es": "brachte mit",
+        "wir": "brachten mit",
+        "ihr": "brachtet mit",
+        "sie": "brachten mit"
+      },
+      "Konjunktiv II": {
+        "ich": "brächte mit",
+        "du": "brächtest mit",
+        "er/sie/es": "brächte mit",
+        "wir": "brächten mit",
+        "ihr": "brächtet mit",
+        "sie": "brächten mit"
+      }
+    }
+  },
+  {
+    "id": "verb-164",
+    "infinitive": "mitkommen",
+    "translation_ru": "идти вместе; присоединяться",
+    "translation_en": "to come along",
+    "auxiliary": "sein",
+    "example_de": "Wir gehen ins Kino. Kommst du mit?",
+    "example_ru": "Мы идём в кино. Пойдёшь с нами?",
+    "example_en": "We're going to the cinema. Are you coming?",
+    "perfect_form": "sein mitgekommen",
+    "forms": {
+      "Präteritum": {
+        "ich": "kam mit",
+        "du": "kamst mit",
+        "er/sie/es": "kam mit",
+        "wir": "kamen mit",
+        "ihr": "kamt mit",
+        "sie": "kamen mit"
+      },
+      "Konjunktiv II": {
+        "ich": "käme mit",
+        "du": "kämest mit",
+        "er/sie/es": "käme mit",
+        "wir": "kämen mit",
+        "ihr": "kämet mit",
+        "sie": "kämen mit"
+      }
+    }
+  },
+  {
+    "id": "verb-165",
+    "infinitive": "mitmachen",
+    "translation_ru": "участвовать; присоединяться",
+    "translation_en": "to take part; to join in",
+    "auxiliary": "haben",
+    "example_de": "Machst du beim Stadtlauf mit?",
+    "example_ru": "Ты участвуешь в городском забеге?",
+    "example_en": "Are you taking part in the city run?",
+    "perfect_form": "haben mitgemacht",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "bei + Dativ",
+        "note_ru": "участвовать в чём-либо",
+        "note_en": "to take part in something"
+      }
+    ]
+  },
+  {
+    "id": "verb-166",
+    "infinitive": "mitnehmen",
+    "translation_ru": "брать с собой",
+    "translation_en": "to take (along)",
+    "auxiliary": "haben",
+    "example_de": "Nimm einen Regenschirm mit, es soll regnen.",
+    "example_ru": "Возьми с собой зонт, обещают дождь.",
+    "example_en": "Take an umbrella, it's supposed to rain.",
+    "perfect_form": "haben mitgenommen",
+    "forms": {
+      "Präsens": {
+        "ich": "nehme mit",
+        "du": "nimmst mit",
+        "er/sie/es": "nimmt mit",
+        "wir": "nehmen mit",
+        "ihr": "nehmt mit",
+        "sie": "nehmen mit"
+      },
+      "Präteritum": {
+        "ich": "nahm mit",
+        "du": "nahmst mit",
+        "er/sie/es": "nahm mit",
+        "wir": "nahmen mit",
+        "ihr": "nahmt mit",
+        "sie": "nahmen mit"
+      },
+      "Konjunktiv II": {
+        "ich": "nähme mit",
+        "du": "nähmest mit",
+        "er/sie/es": "nähme mit",
+        "wir": "nähmen mit",
+        "ihr": "nähmet mit",
+        "sie": "nähmen mit"
+      },
+      "Imperativ": {
+        "du": "Nimm mit!",
+        "ihr": "Nehmt mit!",
+        "Sie": "Nehmen Sie mit!"
+      }
+    }
+  },
+  {
+    "id": "verb-167",
+    "infinitive": "möchten",
+    "translation_ru": "хотеть (вежливо); хотелось бы",
+    "translation_en": "would like",
+    "auxiliary": "haben",
+    "usage_note_ru": "möchte — форма Konjunktiv II от mögen, которая употребляется как отдельный глагол. Своего Präteritum и Perfekt нет: в прошедшем времени используется wollen (Ich wollte …, Ich habe … gewollt).",
+    "usage_note_en": "möchte is the Konjunktiv II of mögen, used as a verb of its own. It has no simple past or perfect: in the past, wollen is used (Ich wollte …, Ich habe … gewollt).",
+    "example_de": "Ich möchte einen Kaffee, bitte.",
+    "example_ru": "Мне кофе, пожалуйста.",
+    "example_en": "I'd like a coffee, please.",
+    "perfect_form": "haben gewollt (von wollen)",
+    "forms": {
+      "Präsens": {
+        "ich": "möchte",
+        "du": "möchtest",
+        "er/sie/es": "möchte",
+        "wir": "möchten",
+        "ihr": "möchtet",
+        "sie": "möchten"
+      }
+    }
+  },
+  {
+    "id": "verb-168",
+    "infinitive": "mögen",
+    "translation_ru": "любить; нравиться",
+    "translation_en": "to like",
+    "auxiliary": "haben",
+    "usage_note_ru": "Konjunktiv II möchte («хотел(а) бы») — см. карточку möchten.",
+    "usage_note_en": "The Konjunktiv II möchte (“would like”) has its own card: möchten.",
+    "example_de": "Ich mag keinen Fisch.",
+    "example_ru": "Я не люблю рыбу.",
+    "example_en": "I don't like fish.",
+    "perfect_form": "haben gemocht",
+    "forms": {
+      "Präsens": {
+        "ich": "mag",
+        "du": "magst",
+        "er/sie/es": "mag",
+        "wir": "mögen",
+        "ihr": "mögt",
+        "sie": "mögen"
+      },
+      "Präteritum": {
+        "ich": "mochte",
+        "du": "mochtest",
+        "er/sie/es": "mochte",
+        "wir": "mochten",
+        "ihr": "mochtet",
+        "sie": "mochten"
+      },
+      "Konjunktiv II": {
+        "ich": "möchte",
+        "du": "möchtest",
+        "er/sie/es": "möchte",
+        "wir": "möchten",
+        "ihr": "möchtet",
+        "sie": "möchten"
+      }
+    }
+  },
+  {
+    "id": "verb-169",
+    "infinitive": "passen",
+    "translation_ru": "подходить; быть впору",
+    "translation_en": "to fit; to suit",
+    "auxiliary": "haben",
+    "example_de": "Die Hose passt mir nicht mehr.",
+    "example_ru": "Эти брюки мне больше не впору.",
+    "example_en": "These trousers don't fit me any more.",
+    "perfect_form": "haben gepasst",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "подходить кому-либо (по размеру, по времени)",
+        "note_en": "to fit / suit someone (size, time)"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "подходить к чему-либо, сочетаться с чем-либо",
+        "note_en": "to go with something"
+      }
+    ]
+  },
+  {
+    "id": "verb-170",
+    "infinitive": "putzen",
+    "translation_ru": "чистить; убирать",
+    "translation_en": "to clean",
+    "auxiliary": "haben",
+    "example_de": "Vergiss nicht, dir die Zähne zu putzen!",
+    "example_ru": "Не забудь почистить зубы!",
+    "example_en": "Don't forget to brush your teeth!",
+    "perfect_form": "haben geputzt",
+    "forms": null
+  },
+  {
+    "id": "verb-171",
+    "infinitive": "raten",
+    "translation_ru": "советовать; угадывать",
+    "translation_en": "to advise; to guess",
+    "auxiliary": "haben",
+    "usage_note_ru": "Rat mal! — «Угадай!»",
+    "usage_note_en": "Rat mal! — “Guess!”",
+    "example_de": "Ich rate dir, früher loszufahren.",
+    "example_ru": "Советую тебе выехать пораньше.",
+    "example_en": "I'd advise you to set off earlier.",
+    "perfect_form": "haben geraten",
+    "forms": {
+      "Präsens": {
+        "ich": "rate",
+        "du": "rätst",
+        "er/sie/es": "rät",
+        "wir": "raten",
+        "ihr": "ratet",
+        "sie": "raten"
+      },
+      "Präteritum": {
+        "ich": "riet",
+        "du": "rietest",
+        "er/sie/es": "riet",
+        "wir": "rieten",
+        "ihr": "rietet",
+        "sie": "rieten"
+      },
+      "Konjunktiv II": {
+        "ich": "riete",
+        "du": "rietest",
+        "er/sie/es": "riete",
+        "wir": "rieten",
+        "ihr": "rietet",
+        "sie": "rieten"
+      },
+      "Imperativ": {
+        "du": "Rat!",
+        "ihr": "Ratet!",
+        "Sie": "Raten Sie!"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "советовать кому-либо",
+        "note_en": "to advise someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-172",
+    "infinitive": "rauchen",
+    "translation_ru": "курить",
+    "translation_en": "to smoke",
+    "auxiliary": "haben",
+    "example_de": "Mein Vater raucht seit zehn Jahren nicht mehr.",
+    "example_ru": "Мой отец не курит уже десять лет.",
+    "example_en": "My father hasn't smoked for ten years.",
+    "perfect_form": "haben geraucht",
+    "forms": null
+  },
+  {
+    "id": "verb-173",
+    "infinitive": "regnen",
+    "translation_ru": "идти (о дожде)",
+    "translation_en": "to rain",
+    "auxiliary": "haben",
+    "usage_note_ru": "Безличный глагол: es regnet.",
+    "usage_note_en": "Impersonal verb: es regnet.",
+    "example_de": "Es regnet schon den ganzen Tag.",
+    "example_ru": "Дождь идёт уже весь день.",
+    "example_en": "It's been raining all day.",
+    "perfect_form": "haben geregnet",
+    "forms": null
+  },
+  {
+    "id": "verb-174",
+    "infinitive": "reiten",
+    "translation_ru": "ездить верхом",
+    "translation_en": "to ride (a horse)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt обычно с sein (Ich bin geritten), реже с haben; с прямым дополнением (ein Pferd reiten) — haben.",
+    "usage_note_en": "The perfect usually takes sein (Ich bin geritten), less often haben; with a direct object (ein Pferd reiten) it takes haben.",
+    "example_de": "Meine Tochter reitet zweimal pro Woche.",
+    "example_ru": "Моя дочь ездит верхом два раза в неделю.",
+    "example_en": "My daughter goes riding twice a week.",
+    "perfect_form": "sein geritten",
+    "forms": {
+      "Präteritum": {
+        "ich": "ritt",
+        "du": "rittest",
+        "er/sie/es": "ritt",
+        "wir": "ritten",
+        "ihr": "rittet",
+        "sie": "ritten"
+      },
+      "Konjunktiv II": {
+        "ich": "ritte",
+        "du": "rittest",
+        "er/sie/es": "ritte",
+        "wir": "ritten",
+        "ihr": "rittet",
+        "sie": "ritten"
+      }
+    }
+  },
+  {
+    "id": "verb-175",
+    "infinitive": "reparieren",
+    "translation_ru": "ремонтировать; чинить",
+    "translation_en": "to repair; to fix",
+    "auxiliary": "haben",
+    "example_de": "Kannst du mein Fahrrad reparieren?",
+    "example_ru": "Ты можешь починить мой велосипед?",
+    "example_en": "Can you fix my bike?",
+    "perfect_form": "haben repariert",
+    "forms": null
+  },
+  {
+    "id": "verb-176",
+    "infinitive": "riechen",
+    "translation_ru": "пахнуть; нюхать",
+    "translation_en": "to smell",
+    "auxiliary": "haben",
+    "example_de": "Hier riecht es nach frischem Kaffee.",
+    "example_ru": "Здесь пахнет свежим кофе.",
+    "example_en": "It smells of fresh coffee here.",
+    "perfect_form": "haben gerochen",
+    "forms": {
+      "Präteritum": {
+        "ich": "roch",
+        "du": "rochst",
+        "er/sie/es": "roch",
+        "wir": "rochen",
+        "ihr": "rocht",
+        "sie": "rochen"
+      },
+      "Konjunktiv II": {
+        "ich": "röche",
+        "du": "röchest",
+        "er/sie/es": "röche",
+        "wir": "röchen",
+        "ihr": "röchet",
+        "sie": "röchen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "пахнуть чем-либо",
+        "note_en": "to smell of something"
+      }
+    ]
+  },
+  {
+    "id": "verb-177",
+    "infinitive": "sagen",
+    "translation_ru": "сказать; говорить",
+    "translation_en": "to say; to tell",
+    "auxiliary": "haben",
+    "example_de": "Kannst du mir sagen, wie spät es ist?",
+    "example_ru": "Можешь сказать мне, который час?",
+    "example_en": "Can you tell me what time it is?",
+    "perfect_form": "haben gesagt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "говорить кому-либо",
+        "note_en": "to tell someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-178",
+    "infinitive": "sammeln",
+    "translation_ru": "собирать; коллекционировать",
+    "translation_en": "to collect; to gather",
+    "auxiliary": "haben",
+    "example_de": "Mein Sohn sammelt Briefmarken.",
+    "example_ru": "Мой сын собирает марки.",
+    "example_en": "My son collects stamps.",
+    "perfect_form": "haben gesammelt",
+    "forms": null
+  },
+  {
+    "id": "verb-179",
+    "infinitive": "scheinen",
+    "translation_ru": "светить; казаться",
+    "translation_en": "to shine; to seem",
+    "auxiliary": "haben",
+    "example_de": "Heute scheint endlich wieder die Sonne.",
+    "example_ru": "Сегодня наконец снова светит солнце.",
+    "example_en": "The sun is finally shining again today.",
+    "perfect_form": "haben geschienen",
+    "forms": {
+      "Präteritum": {
+        "ich": "schien",
+        "du": "schienst",
+        "er/sie/es": "schien",
+        "wir": "schienen",
+        "ihr": "schient",
+        "sie": "schienen"
+      },
+      "Konjunktiv II": {
+        "ich": "schiene",
+        "du": "schienest",
+        "er/sie/es": "schiene",
+        "wir": "schienen",
+        "ihr": "schienet",
+        "sie": "schienen"
+      }
+    }
+  },
+  {
+    "id": "verb-180",
+    "infinitive": "schenken",
+    "translation_ru": "дарить",
+    "translation_en": "to give (as a present)",
+    "auxiliary": "haben",
+    "example_de": "Was schenkst du deiner Mutter zum Geburtstag?",
+    "example_ru": "Что ты подаришь маме на день рождения?",
+    "example_en": "What are you giving your mother for her birthday?",
+    "perfect_form": "haben geschenkt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "дарить кому-либо",
+        "note_en": "to give someone a present"
+      }
+    ]
+  },
+  {
+    "id": "verb-181",
+    "infinitive": "schmecken",
+    "translation_ru": "быть вкусным; иметь вкус",
+    "translation_en": "to taste (good)",
+    "auxiliary": "haben",
+    "example_de": "Die Suppe schmeckt sehr gut!",
+    "example_ru": "Суп очень вкусный!",
+    "example_en": "The soup tastes really good!",
+    "perfect_form": "haben geschmeckt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "нравиться кому-либо на вкус: Das schmeckt mir.",
+        "note_en": "someone likes the taste: Das schmeckt mir."
+      },
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "иметь вкус чего-либо",
+        "note_en": "to taste of something"
+      }
+    ]
+  },
+  {
+    "id": "verb-182",
+    "infinitive": "schneiden",
+    "translation_ru": "резать; стричь",
+    "translation_en": "to cut",
+    "auxiliary": "haben",
+    "usage_note_ru": "sich schneiden — порезаться: Ich habe mich in den Finger geschnitten.",
+    "usage_note_en": "sich schneiden — to cut oneself: Ich habe mich in den Finger geschnitten.",
+    "example_de": "Kannst du bitte das Brot schneiden?",
+    "example_ru": "Можешь, пожалуйста, нарезать хлеб?",
+    "example_en": "Can you slice the bread, please?",
+    "perfect_form": "haben geschnitten",
+    "forms": {
+      "Präteritum": {
+        "ich": "schnitt",
+        "du": "schnittest",
+        "er/sie/es": "schnitt",
+        "wir": "schnitten",
+        "ihr": "schnittet",
+        "sie": "schnitten"
+      },
+      "Konjunktiv II": {
+        "ich": "schnitte",
+        "du": "schnittest",
+        "er/sie/es": "schnitte",
+        "wir": "schnitten",
+        "ihr": "schnittet",
+        "sie": "schnitten"
+      }
+    }
+  },
+  {
+    "id": "verb-183",
+    "infinitive": "schneien",
+    "translation_ru": "идти (о снеге)",
+    "translation_en": "to snow",
+    "auxiliary": "haben",
+    "usage_note_ru": "Безличный глагол: es schneit.",
+    "usage_note_en": "Impersonal verb: es schneit.",
+    "example_de": "In den Bergen schneit es schon.",
+    "example_ru": "В горах уже идёт снег.",
+    "example_en": "It's already snowing in the mountains.",
+    "perfect_form": "haben geschneit",
+    "forms": null
+  },
+  {
+    "id": "verb-184",
+    "infinitive": "schreiben",
+    "translation_ru": "писать",
+    "translation_en": "to write",
+    "auxiliary": "haben",
+    "example_de": "Ich schreibe dir morgen eine E-Mail.",
+    "example_ru": "Завтра я напишу тебе по электронной почте.",
+    "example_en": "I'll write you an email tomorrow.",
+    "perfect_form": "haben geschrieben",
+    "forms": {
+      "Präteritum": {
+        "ich": "schrieb",
+        "du": "schriebst",
+        "er/sie/es": "schrieb",
+        "wir": "schrieben",
+        "ihr": "schriebt",
+        "sie": "schrieben"
+      },
+      "Konjunktiv II": {
+        "ich": "schriebe",
+        "du": "schriebest",
+        "er/sie/es": "schriebe",
+        "wir": "schrieben",
+        "ihr": "schriebet",
+        "sie": "schrieben"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "писать кому-либо",
+        "note_en": "to write to someone"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "писать кому-либо (письмо, e-mail)",
+        "note_en": "to write to someone (a letter, an email)"
+      }
+    ]
+  },
+  {
+    "id": "verb-185",
+    "infinitive": "schwimmen",
+    "translation_ru": "плавать; плыть",
+    "translation_en": "to swim",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt обычно с sein; для плавания как занятия Duden допускает и haben. Konjunktiv II также: schwömme.",
+    "usage_note_en": "The perfect usually takes sein; for swimming as an activity Duden also allows haben. Konjunktiv II also: schwömme.",
+    "example_de": "Im Sommer schwimmen wir jeden Tag im Meer.",
+    "example_ru": "Летом мы каждый день плаваем в море.",
+    "example_en": "In summer we swim in the sea every day.",
+    "perfect_form": "sein geschwommen",
+    "forms": {
+      "Präteritum": {
+        "ich": "schwamm",
+        "du": "schwammst",
+        "er/sie/es": "schwamm",
+        "wir": "schwammen",
+        "ihr": "schwammt",
+        "sie": "schwammen"
+      },
+      "Konjunktiv II": {
+        "ich": "schwämme",
+        "du": "schwämmest",
+        "er/sie/es": "schwämme",
+        "wir": "schwämmen",
+        "ihr": "schwämmet",
+        "sie": "schwämmen"
+      }
+    }
+  },
+  {
+    "id": "verb-186",
+    "infinitive": "sitzen",
+    "translation_ru": "сидеть",
+    "translation_en": "to sit; to be sitting",
+    "auxiliary": "haben",
+    "usage_note_ru": "Садиться — sich setzen. Präteritum ihr также: saßt. На юге Германии, в Австрии и Швейцарии Perfekt с sein: ist gesessen.",
+    "usage_note_en": "To sit down is sich setzen. Simple past ihr also: saßt. In southern Germany, Austria and Switzerland the perfect takes sein: ist gesessen.",
+    "example_de": "Wir sitzen im Garten und trinken Tee.",
+    "example_ru": "Мы сидим в саду и пьём чай.",
+    "example_en": "We're sitting in the garden drinking tea.",
+    "perfect_form": "haben gesessen",
+    "forms": {
+      "Präteritum": {
+        "ich": "saß",
+        "du": "saßest",
+        "er/sie/es": "saß",
+        "wir": "saßen",
+        "ihr": "saßet",
+        "sie": "saßen"
+      },
+      "Konjunktiv II": {
+        "ich": "säße",
+        "du": "säßest",
+        "er/sie/es": "säße",
+        "wir": "säßen",
+        "ihr": "säßet",
+        "sie": "säßen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "in / auf / an … + Dativ",
+        "note_ru": "где? — место: Wechselpräposition с Dativ",
+        "note_en": "where? — location: two-way preposition + dative"
+      }
+    ]
+  },
+  {
+    "id": "verb-187",
+    "infinitive": "sollen",
+    "translation_ru": "быть должным; следует",
+    "translation_en": "should; to be supposed to",
+    "auxiliary": "haben",
+    "usage_note_ru": "С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe früher kommen sollen.",
+    "usage_note_en": "With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe früher kommen sollen.",
+    "example_de": "Der Arzt sagt, ich soll mehr Wasser trinken.",
+    "example_ru": "Врач говорит, что мне нужно пить больше воды.",
+    "example_en": "The doctor says I should drink more water.",
+    "perfect_form": "haben gesollt",
+    "forms": {
+      "Präsens": {
+        "ich": "soll",
+        "du": "sollst",
+        "er/sie/es": "soll",
+        "wir": "sollen",
+        "ihr": "sollt",
+        "sie": "sollen"
+      },
+      "Präteritum": {
+        "ich": "sollte",
+        "du": "solltest",
+        "er/sie/es": "sollte",
+        "wir": "sollten",
+        "ihr": "solltet",
+        "sie": "sollten"
+      },
+      "Konjunktiv II": {
+        "ich": "sollte",
+        "du": "solltest",
+        "er/sie/es": "sollte",
+        "wir": "sollten",
+        "ihr": "solltet",
+        "sie": "sollten"
+      }
+    }
+  },
+  {
+    "id": "verb-188",
+    "infinitive": "stehen",
+    "translation_ru": "стоять; быть написанным",
+    "translation_en": "to stand; to be (written)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Konjunktiv II также: stünde. На юге Германии, в Австрии и Швейцарии Perfekt с sein: ist gestanden.",
+    "usage_note_en": "Konjunktiv II also: stünde. In southern Germany, Austria and Switzerland the perfect takes sein: ist gestanden.",
+    "example_de": "Die Vase steht auf dem Regal.",
+    "example_ru": "Ваза стоит на полке.",
+    "example_en": "The vase is on the shelf.",
+    "perfect_form": "haben gestanden",
+    "forms": {
+      "Präteritum": {
+        "ich": "stand",
+        "du": "standest",
+        "er/sie/es": "stand",
+        "wir": "standen",
+        "ihr": "standet",
+        "sie": "standen"
+      },
+      "Konjunktiv II": {
+        "ich": "stände",
+        "du": "ständest",
+        "er/sie/es": "stände",
+        "wir": "ständen",
+        "ihr": "ständet",
+        "sie": "ständen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "in / auf / an … + Dativ",
+        "note_ru": "где? — место: Wechselpräposition с Dativ",
+        "note_en": "where? — location: two-way preposition + dative"
+      }
+    ]
+  },
+  {
+    "id": "verb-189",
+    "infinitive": "stellen",
+    "translation_ru": "ставить",
+    "translation_en": "to put; to place (upright)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Ставить вертикально; результат: etwas steht. eine Frage stellen — задать вопрос.",
+    "usage_note_en": "To put something upright; the result: etwas steht. eine Frage stellen — to ask a question.",
+    "example_de": "Stell die Flaschen bitte in den Kühlschrank.",
+    "example_ru": "Поставь, пожалуйста, бутылки в холодильник.",
+    "example_en": "Please put the bottles in the fridge.",
+    "perfect_form": "haben gestellt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "in / auf / an … + Akkusativ",
+        "note_ru": "куда? — направление: Wechselpräposition с Akkusativ",
+        "note_en": "where to? — direction: two-way preposition + accusative"
+      }
+    ]
+  },
+  {
+    "id": "verb-190",
+    "infinitive": "studieren",
+    "translation_ru": "учиться (в вузе); изучать",
+    "translation_en": "to study (at university)",
+    "auxiliary": "haben",
+    "usage_note_ru": "В значении «учиться» — только о вузе; учить(ся) вообще — lernen.",
+    "usage_note_en": "In the sense “to be a student”, only for university; to learn in general is lernen.",
+    "example_de": "Meine Cousine studiert Medizin in Leipzig.",
+    "example_ru": "Моя двоюродная сестра изучает медицину в Лейпциге.",
+    "example_en": "My cousin is studying medicine in Leipzig.",
+    "perfect_form": "haben studiert",
+    "forms": null
+  },
+  {
+    "id": "verb-191",
+    "infinitive": "telefonieren",
+    "translation_ru": "говорить по телефону",
+    "translation_en": "to phone; to be on the phone",
+    "auxiliary": "haben",
+    "example_de": "Ich telefoniere jeden Sonntag mit meinen Eltern.",
+    "example_ru": "Каждое воскресенье я созваниваюсь с родителями.",
+    "example_en": "I talk to my parents on the phone every Sunday.",
+    "perfect_form": "haben telefoniert",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "говорить по телефону с кем-либо",
+        "note_en": "to be on the phone with someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-192",
+    "infinitive": "tragen",
+    "translation_ru": "носить; нести",
+    "translation_en": "to wear; to carry",
+    "auxiliary": "haben",
+    "example_de": "Sie trägt heute ein rotes Kleid.",
+    "example_ru": "Сегодня на ней красное платье.",
+    "example_en": "She's wearing a red dress today.",
+    "perfect_form": "haben getragen",
+    "forms": {
+      "Präsens": {
+        "ich": "trage",
+        "du": "trägst",
+        "er/sie/es": "trägt",
+        "wir": "tragen",
+        "ihr": "tragt",
+        "sie": "tragen"
+      },
+      "Präteritum": {
+        "ich": "trug",
+        "du": "trugst",
+        "er/sie/es": "trug",
+        "wir": "trugen",
+        "ihr": "trugt",
+        "sie": "trugen"
+      },
+      "Konjunktiv II": {
+        "ich": "trüge",
+        "du": "trügest",
+        "er/sie/es": "trüge",
+        "wir": "trügen",
+        "ihr": "trüget",
+        "sie": "trügen"
+      },
+      "Imperativ": {
+        "du": "Trag!",
+        "ihr": "Tragt!",
+        "Sie": "Tragen Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-193",
+    "infinitive": "trainieren",
+    "translation_ru": "тренироваться; тренировать",
+    "translation_en": "to train; to work out",
+    "auxiliary": "haben",
+    "example_de": "Ich trainiere dreimal pro Woche im Fitnessstudio.",
+    "example_ru": "Я тренируюсь в спортзале три раза в неделю.",
+    "example_en": "I work out at the gym three times a week.",
+    "perfect_form": "haben trainiert",
+    "forms": null
+  },
+  {
+    "id": "verb-194",
+    "infinitive": "tun",
+    "translation_ru": "делать",
+    "translation_en": "to do",
+    "auxiliary": "haben",
+    "usage_note_ru": "Часто в выражениях: Es tut mir leid. Das tut weh.",
+    "usage_note_en": "Common in set phrases: Es tut mir leid. Das tut weh.",
+    "example_de": "Was kann ich für Sie tun?",
+    "example_ru": "Чем могу вам помочь?",
+    "example_en": "What can I do for you?",
+    "perfect_form": "haben getan",
+    "forms": {
+      "Präsens": {
+        "ich": "tue",
+        "du": "tust",
+        "er/sie/es": "tut",
+        "wir": "tun",
+        "ihr": "tut",
+        "sie": "tun"
+      },
+      "Präteritum": {
+        "ich": "tat",
+        "du": "tatest",
+        "er/sie/es": "tat",
+        "wir": "taten",
+        "ihr": "tatet",
+        "sie": "taten"
+      },
+      "Konjunktiv II": {
+        "ich": "täte",
+        "du": "tätest",
+        "er/sie/es": "täte",
+        "wir": "täten",
+        "ihr": "tätet",
+        "sie": "täten"
+      },
+      "Imperativ": {
+        "du": "Tu!",
+        "ihr": "Tut!",
+        "Sie": "Tun Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-195",
+    "infinitive": "üben",
+    "translation_ru": "упражняться; тренировать",
+    "translation_en": "to practise",
+    "auxiliary": "haben",
+    "example_de": "Ich übe jeden Tag zwanzig Minuten Klavier.",
+    "example_ru": "Я каждый день по двадцать минут занимаюсь на пианино.",
+    "example_en": "I practise the piano for twenty minutes every day.",
+    "perfect_form": "haben geübt",
+    "forms": null
+  },
+  {
+    "id": "verb-196",
+    "infinitive": "übernachten",
+    "translation_ru": "ночевать",
+    "translation_en": "to stay overnight; to spend the night",
+    "auxiliary": "haben",
+    "usage_note_ru": "Неотделяемая приставка über-: ich übernachte, Partizip II übernachtet (без ge-).",
+    "usage_note_en": "Inseparable prefix über-: ich übernachte, past participle übernachtet (no ge-).",
+    "example_de": "Wir übernachten bei Freunden in Hamburg.",
+    "example_ru": "Мы ночуем у друзей в Гамбурге.",
+    "example_en": "We're staying overnight with friends in Hamburg.",
+    "perfect_form": "haben übernachtet",
+    "forms": null
+  },
+  {
+    "id": "verb-197",
+    "infinitive": "überweisen",
+    "translation_ru": "переводить (деньги)",
+    "translation_en": "to transfer (money)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Неотделяемая приставка über-: Partizip II überwiesen (без ge-).",
+    "usage_note_en": "Inseparable prefix über-: past participle überwiesen (no ge-).",
+    "example_de": "Ich überweise dir das Geld morgen.",
+    "example_ru": "Я переведу тебе деньги завтра.",
+    "example_en": "I'll transfer the money to you tomorrow.",
+    "perfect_form": "haben überwiesen",
+    "forms": {
+      "Präteritum": {
+        "ich": "überwies",
+        "du": "überwiesest",
+        "er/sie/es": "überwies",
+        "wir": "überwiesen",
+        "ihr": "überwiest",
+        "sie": "überwiesen"
+      },
+      "Konjunktiv II": {
+        "ich": "überwiese",
+        "du": "überwiesest",
+        "er/sie/es": "überwiese",
+        "wir": "überwiesen",
+        "ihr": "überwieset",
+        "sie": "überwiesen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "note_ru": "переводить кому-либо",
+        "note_en": "to transfer to someone"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "переводить на (счёт)",
+        "note_en": "to transfer to (an account)"
+      }
+    ]
+  },
+  {
+    "id": "verb-198",
+    "infinitive": "verdienen",
+    "translation_ru": "зарабатывать; заслуживать",
+    "translation_en": "to earn; to deserve",
+    "auxiliary": "haben",
+    "example_de": "In diesem Job verdient man nicht viel.",
+    "example_ru": "На этой работе много не заработаешь.",
+    "example_en": "You don't earn much in this job.",
+    "perfect_form": "haben verdient",
+    "forms": null
+  },
+  {
+    "id": "verb-199",
+    "infinitive": "verkaufen",
+    "translation_ru": "продавать",
+    "translation_en": "to sell",
+    "auxiliary": "haben",
+    "example_de": "Wir verkaufen unser altes Auto.",
+    "example_ru": "Мы продаём нашу старую машину.",
+    "example_en": "We're selling our old car.",
+    "perfect_form": "haben verkauft",
+    "forms": null
+  },
+  {
+    "id": "verb-200",
+    "infinitive": "vermieten",
+    "translation_ru": "сдавать (в аренду)",
+    "translation_en": "to rent out; to let",
+    "auxiliary": "haben",
+    "usage_note_ru": "Снимать, арендовать — mieten.",
+    "usage_note_en": "To rent (as a tenant) is mieten.",
+    "example_de": "Sie vermietet ein Zimmer an Studenten.",
+    "example_ru": "Она сдаёт комнату студентам.",
+    "example_en": "She rents out a room to students.",
+    "perfect_form": "haben vermietet",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "an + Akkusativ",
+        "note_ru": "сдавать кому-либо",
+        "note_en": "to rent out to someone"
+      }
+    ]
+  },
+  {
+    "id": "verb-201",
+    "infinitive": "wandern",
+    "translation_ru": "ходить в походы; путешествовать пешком",
+    "translation_en": "to hike; to go hiking",
+    "auxiliary": "sein",
+    "example_de": "Im Urlaub wandern wir gern in den Alpen.",
+    "example_ru": "В отпуске мы любим ходить в походы по Альпам.",
+    "example_en": "On holiday we like hiking in the Alps.",
+    "perfect_form": "sein gewandert",
+    "forms": null
+  },
+  {
+    "id": "verb-202",
+    "infinitive": "waschen",
+    "translation_ru": "стирать; мыть",
+    "translation_en": "to wash",
+    "auxiliary": "haben",
+    "usage_note_ru": "Мыть себе руки: Ich wasche mir die Hände. Мыться, умываться — sich waschen (отдельная карточка).",
+    "usage_note_en": "To wash your hands: Ich wasche mir die Hände. To wash (oneself) is sich waschen (separate card).",
+    "example_de": "Ich muss heute noch Wäsche waschen.",
+    "example_ru": "Сегодня мне ещё нужно постирать бельё.",
+    "example_en": "I still have to do the washing today.",
+    "perfect_form": "haben gewaschen",
+    "forms": {
+      "Präsens": {
+        "ich": "wasche",
+        "du": "wäschst",
+        "er/sie/es": "wäscht",
+        "wir": "waschen",
+        "ihr": "wascht",
+        "sie": "waschen"
+      },
+      "Präteritum": {
+        "ich": "wusch",
+        "du": "wuschst",
+        "er/sie/es": "wusch",
+        "wir": "wuschen",
+        "ihr": "wuscht",
+        "sie": "wuschen"
+      },
+      "Konjunktiv II": {
+        "ich": "wüsche",
+        "du": "wüschest",
+        "er/sie/es": "wüsche",
+        "wir": "wüschen",
+        "ihr": "wüschet",
+        "sie": "wüschen"
+      },
+      "Imperativ": {
+        "du": "Wasch!",
+        "ihr": "Wascht!",
+        "Sie": "Waschen Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-203",
+    "infinitive": "sich waschen",
+    "translation_ru": "мыться; умываться",
+    "translation_en": "to wash (oneself); to have a wash",
+    "auxiliary": "haben",
+    "example_de": "Die Katze wäscht sich stundenlang.",
+    "example_ru": "Кошка часами умывается.",
+    "example_en": "The cat washes itself for hours.",
+    "perfect_form": "haben sich gewaschen",
+    "forms": {
+      "Präsens": {
+        "ich": "wasche mich",
+        "du": "wäschst dich",
+        "er/sie/es": "wäscht sich",
+        "wir": "waschen uns",
+        "ihr": "wascht euch",
+        "sie": "waschen sich"
+      },
+      "Präteritum": {
+        "ich": "wusch mich",
+        "du": "wuschst dich",
+        "er/sie/es": "wusch sich",
+        "wir": "wuschen uns",
+        "ihr": "wuscht euch",
+        "sie": "wuschen sich"
+      },
+      "Konjunktiv II": {
+        "ich": "wüsche mich",
+        "du": "wüschest dich",
+        "er/sie/es": "wüsche sich",
+        "wir": "wüschen uns",
+        "ihr": "wüschet euch",
+        "sie": "wüschen sich"
+      },
+      "Imperativ": {
+        "du": "Wasch dich!",
+        "ihr": "Wascht euch!",
+        "Sie": "Waschen Sie sich!"
+      }
+    }
+  },
+  {
+    "id": "verb-204",
+    "infinitive": "wecken",
+    "translation_ru": "будить",
+    "translation_en": "to wake (someone) up",
+    "auxiliary": "haben",
+    "usage_note_ru": "Просыпаться самому — aufwachen.",
+    "usage_note_en": "To wake up yourself is aufwachen.",
+    "example_de": "Kannst du mich morgen um sechs wecken?",
+    "example_ru": "Можешь разбудить меня завтра в шесть?",
+    "example_en": "Can you wake me up at six tomorrow?",
+    "perfect_form": "haben geweckt",
+    "forms": null
+  },
+  {
+    "id": "verb-205",
+    "infinitive": "weggehen",
+    "translation_ru": "уходить",
+    "translation_en": "to leave; to go away",
+    "auxiliary": "sein",
+    "example_de": "Ich muss jetzt leider weggehen.",
+    "example_ru": "К сожалению, мне сейчас нужно уйти.",
+    "example_en": "Unfortunately I have to leave now.",
+    "perfect_form": "sein weggegangen",
+    "forms": {
+      "Präteritum": {
+        "ich": "ging weg",
+        "du": "gingst weg",
+        "er/sie/es": "ging weg",
+        "wir": "gingen weg",
+        "ihr": "gingt weg",
+        "sie": "gingen weg"
+      },
+      "Konjunktiv II": {
+        "ich": "ginge weg",
+        "du": "gingest weg",
+        "er/sie/es": "ginge weg",
+        "wir": "gingen weg",
+        "ihr": "ginget weg",
+        "sie": "gingen weg"
+      }
+    }
   }
 ]
