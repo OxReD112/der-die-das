@@ -11,100 +11,36 @@
         } catch (e) {}
       })();
     </script>
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Verben + Präp." />
-    <title>Verben mit Präpositionen</title>
-    <link rel="stylesheet" href="verben_mit_praepositionen.css?v=3" />
+    <meta name="apple-mobile-web-app-title" content="Präpositionen" />
+    <meta name="theme-color" content="#1b1b1d" />
+    <title>Präpositionen</title>
+    <link rel="stylesheet" href="praepositionen.css?v=1" />
   </head>
   <body>
     <main class="app">
-      <section id="start">
-        <h1 class="start-title">Verben mit Präpositionen</h1>
-        <div class="start-sub">Wie viele Übungen?</div>
-        <p class="start-hint">Schreib die Präposition, dann wähle den Kasus.</p>
-        <div class="session-options">
-          <button class="session-option" data-size="10">10</button>
-          <button class="session-option" data-size="20">20</button>
-          <button class="session-option" data-size="30">30</button>
-        </div>
+      <header>
+        <h1>Präpositionen</h1>
+        <p class="intro">Was möchtest du üben?</p>
+      </header>
+      <section class="choices" aria-label="Übungen">
+        <button class="choice" type="button" data-target="kasus/index.html?v=24">
+          <span class="choice-title">Fester Kasus</span>
+          <span class="choice-subtitle">Präposition → Kasus</span>
+        </button>
+        <button class="choice" type="button" data-target="verben_mit_praepositionen/index.html?v=18">
+          <span class="choice-title">Verben mit Präpositionen</span>
+          <span class="choice-subtitle">Verb → Präposition + Kasus</span>
+        </button>
+        <button class="choice" type="button" data-target="ortspraepositionen/index.html?v=31">
+          <span class="choice-title">Ortspräpositionen</span>
+          <span class="choice-subtitle">Wo · Wohin · Woher</span>
+        </button>
       </section>
-
-      <section id="game" class="hidden">
-        <div class="top">
-          <div>
-            <div class="top-title">Verben mit Präpositionen</div>
-            <div class="progress"><i id="bar"></i></div>
-          </div>
-          <div class="counter" id="counter">1 / 10</div>
-        </div>
-
-        <div class="exercise">
-          <div class="qzone">
-            <div class="anchor">
-              <div class="prompt" id="prompt">
-                <div class="meaning" id="meaning"></div>
-                <div class="sentence" id="sentence">
-                  <span id="verb"></span> <span class="gap typing" id="gap"></span>
-                </div>
-                <!-- One slot under the verb: „Welcher Kasus?“ during the case step, then „+ Kasus“ after the
-                     answer. Its height is reserved from the start, so the line below never moves. -->
-                <div class="above-slot">
-                  <div class="case-line off" id="caseLine" aria-hidden="true">&nbsp;</div>
-                  <div class="case-question off" id="caseQuestion">Welcher Kasus?</div>
-                </div>
-              </div>
-              <button id="check">Prüfen</button>
-
-              <div id="feedback" class="feedback hidden">
-                <div class="glow l"></div>
-                <div class="glow r"></div>
-                <div class="divider"><i class="sl"></i><i class="sr"></i><i class="line"></i></div>
-                <div id="prepFeedback">
-                  <div class="given" id="given"></div>
-                  <div class="case-step hidden" id="caseStep">
-                    <div class="choices" id="choices"></div>
-                  </div>
-                </div>
-                <div id="finalFeedback" class="hidden">
-                  <div class="chips" id="chips"></div>
-                  <div class="example" id="example"></div>
-                  <div class="example-tr" id="exampleTr"></div>
-                  <button id="continue">Weiter</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="kbzone" id="kbZone"><div id="keyboardMount"></div></div>
-        </div>
-      </section>
-
-      <section id="done" class="hidden">
-        <h1 class="done-title">Fertig.</h1>
-        <div class="done-score" id="score">0 / 10</div>
-        <div class="done-score-label">komplett richtig</div>
-        <div class="done-parts" id="parts"></div>
-        <div class="weak hidden" id="weak"></div>
-        <div class="done-note">Was schwierig war, kommt öfter wieder.</div>
-        <div class="done-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
-        </div>
-      </section>
-
-      <div class="start-about" id="startAbout">
-        <h2>Worum geht's?</h2>
-        <p class="about-de" id="aboutText"></p>
-      </div>
-      <div class="version-mark">v3.14</div>
+      <p class="version-mark">v18</p>
     </main>
-
-    <script src="../../components/deutsch-translation-v1.js?v=2"></script>
-    <script src="../../components/deutsch-day-v1.js?v=1"></script>
-    <script src="verbs.js?v=5"></script>
-    <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="verben_mit_praepositionen.js?v=2"></script>
-    <script src="../../components/deutsch-wide-v1.js?v=2"></script>
-</body>
+    <script src="praepositionen.js?v=2"></script>
+  </body>
 </html>
