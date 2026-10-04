@@ -5,7 +5,7 @@
   const frame = document.getElementById("notebookFrame");
   if (!openButton || !layer || !panel || !frame) return;
   const root = document.documentElement;
-  let opened = false;
+  let opened = false, restoreFocusOnClose = false;
   function currentTheme() { return root.getAttribute("data-theme") === "light" ? "light" : "dark"; }
   function openNotebook() {
     if (opened) return;
@@ -23,10 +23,14 @@
     layer.setAttribute("aria-hidden", "true");
     openButton.setAttribute("aria-expanded", "false");
     root.classList.remove("home-notebook-open");
-    openButton.focus({ preventScroll:true });
+    if (restoreFocusOnClose) openButton.focus({ preventScroll:true });
+    else openButton.blur();
   }
   openButton.setAttribute("aria-expanded", "false");
-  openButton.addEventListener("click", openNotebook);
+  openButton.addEventListener("click", event => {
+    restoreFocusOnClose = event.detail === 0;
+    openNotebook();
+  });
   window.addEventListener("message", event => {
     if (event.origin === location.origin && event.source === frame.contentWindow && event.data?.type === "deutsch-notebook-close") closeNotebook();
   });
