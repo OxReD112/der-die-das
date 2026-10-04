@@ -176,7 +176,8 @@
     return { cards: ok, skipped, duplicates };
   }
   function withIds(c, list) {
-    return list.map(card => Object.assign({ id: "u" + c.nextId++ }, card));
+    const addedAt = new Date().toISOString();
+    return list.map(card => Object.assign({ id: "u" + c.nextId++, addedAt }, card));
   }
   const summary = (p, extra) =>
     Object.assign({ added: p.cards.length, skipped: p.skipped, duplicates: p.duplicates }, extra || {});
@@ -230,7 +231,7 @@
     const ks = germanKeys(r.card);
     if (c.cards.some((x, j) => j !== i && germanKeys(x).some(k => ks.includes(k))))
       return { reason: "This word is already in your collection" };
-    c.cards[i] = Object.assign({ id }, r.card);
+    c.cards[i] = Object.assign({ id, addedAt: c.cards[i].addedAt }, r.card);
     write(KEY, c);
     return { card: c.cards[i] };
   }

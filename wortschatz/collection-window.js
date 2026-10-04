@@ -140,17 +140,13 @@
     const box = el("div", "coll-list coll-list-below");
     words.forEach(w => {
       const row = own() ? button("coll-word is-btn", "", () => viewForm(w)) : el("div", "coll-word");
-      row.appendChild(
-        el(
-          "span",
-          "coll-de",
-          w.base ||
-            String(w.target || "")
-              .split(" / ")
-              .join(" "),
-          { lang: "de" } // v2.112: German hyphenation for the rare word that is too long for its column
-        )
-      );
+      const german = el("span", "coll-de", undefined, { lang: "de" });
+      const addedAt = Date.parse(w.addedAt || "");
+      if (own() && Number.isFinite(addedAt) && Date.now() - addedAt < 24 * 60 * 60 * 1000 && Date.now() >= addedAt) {
+        german.appendChild(el("span", "coll-new", "New", { "aria-label": "Added within the last 24 hours" }));
+      }
+      german.appendChild(document.createTextNode(w.base || String(w.target || "").split(" / ").join(" ")));
+      row.appendChild(german);
       row.appendChild(el("span", "coll-tr", tr(w, "translation")));
       box.appendChild(row);
     });
