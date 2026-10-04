@@ -5,10 +5,10 @@
   if (!app) return;
   const els = {
     list: $("list-content"), status: $("status"), searchBox: $("search-box"), search: $("search-input"),
-    headerBack: $("header-back"),
+    headerBack: $("header-back"), headerSave: $("header-save"),
     tabs: [...document.querySelectorAll(".nb-tab")], detail: $("detail-screen"), edit: $("edit-screen"),
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
-    topicInput: $("new-topic-input"), saveTopic: $("save-topic"), listToolbar: $("list-toolbar"), editToolbar: $("edit-toolbar"), scroll: $("notebook-scroll"),
+    topicInput: $("new-topic-input"), saveTopic: $("save-topic"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
   };
   let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, statusTimer = 0, searchOpen = false;
   function readState() {
@@ -40,8 +40,10 @@
     document.querySelector(".nb-tabs").hidden = !list;
     $("search-toggle").hidden = !list || searchOpen;
     els.headerBack.hidden = list;
+    els.headerSave.hidden = screen !== "edit";
+    $("close-notebook").hidden = screen === "edit";
     els.searchBox.hidden = !list || !searchOpen;
-    els.list.hidden = !list; els.listToolbar.hidden = !list; els.editToolbar.hidden = screen !== "edit";
+    els.list.hidden = !list; els.listToolbar.hidden = !list;
     els.scroll.scrollTop = 0;
     animateContent(direction, screen === "detail" ? els.detail : screen === "edit" ? els.edit : null);
   }
@@ -137,8 +139,7 @@
     if (!persist()) { state.notes = previous; state.topics = previousTopics; closeDeleteConfirm(); return; }
     closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
   });
-  $("cancel-edit-bottom").addEventListener("click", goBack);
-  $("save-note-bottom").addEventListener("click", () => els.form.requestSubmit());
+  els.headerSave.addEventListener("click", () => els.form.requestSubmit());
   $("add-topic").addEventListener("click", () => { els.topicInput.hidden = false; els.saveTopic.hidden = false; $("add-topic").hidden = true; els.topicInput.focus({ preventScroll:true }); });
   function saveTopic() {
     const name = els.topicInput.value.trim(); if (!name) { els.topicInput.focus({ preventScroll:true }); return; }
@@ -167,12 +168,6 @@
     if (persist()) { openedId = null; setScreen("list", "back"); renderList(); notify("Gespeichert."); }
     else { state.notes = previousNotes; state.topics = previousTopics; }
   });
-  app.addEventListener("focusin", event => {
-    if (event.target.matches("input:not([type=hidden]), textarea")) app.dataset.keyboardOpen = "true";
-  });
-  app.addEventListener("focusout", () => requestAnimationFrame(() => {
-    if (!app.querySelector("input:not([type=hidden]):focus, textarea:focus")) delete app.dataset.keyboardOpen;
-  }));
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.data?.type !== "deutsch-notebook-open") return;
     if (event.data.theme === "light") document.documentElement.setAttribute("data-theme","light"); else document.documentElement.removeAttribute("data-theme");

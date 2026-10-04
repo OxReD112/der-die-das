@@ -13,7 +13,7 @@
   <title>Notizbuch · Deutsch.</title>
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../../home.css?v=46">
-  <link rel="stylesheet" href="notizbuch.css?v=15">
+  <link rel="stylesheet" href="notizbuch.css?v=16">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -22,8 +22,9 @@
         <button class="nb-search-toggle" id="search-toggle" type="button" aria-label="Suche öffnen" aria-expanded="false">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 4.2 4.2"/></svg>
         </button>
-        <button class="nb-header-back" id="header-back" type="button" hidden>Zurück</button>
+        <button class="nb-header-back" id="header-back" type="button" hidden>&lt; Zurück</button>
         <h1>Notizbuch</h1>
+        <button class="nb-header-save" id="header-save" type="button" hidden>Speichern</button>
         <button class="nb-close" id="close-notebook" type="button" aria-label="Notizbuch schließen">×</button>
       </div>
       <nav class="nb-tabs" role="tablist" aria-label="Notizbuch">
@@ -65,10 +66,6 @@
       <div class="nb-toolbar" id="list-toolbar">
         <button class="nb-primary" id="create-note" type="button">＋ Neue Notiz</button>
       </div>
-      <div class="nb-toolbar nb-edit-toolbar" id="edit-toolbar" hidden>
-        <button class="nb-cancel" id="cancel-edit-bottom" type="button">Abbrechen</button>
-        <button class="nb-primary" id="save-note-bottom" type="button">Speichern</button>
-      </div>
     </div>
     <div class="nb-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" hidden>
       <div class="nb-confirm-card">
@@ -81,6 +78,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=14"></script>
+  <script src="notizbuch.js?v=15"></script>
 </body>
 </html>
