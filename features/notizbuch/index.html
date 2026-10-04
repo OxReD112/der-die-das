@@ -13,7 +13,7 @@
   <title>Notizbuch · Deutsch.</title>
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../../home.css?v=46">
-  <link rel="stylesheet" href="notizbuch.css?v=18">
+  <link rel="stylesheet" href="notizbuch.css?v=20">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -57,11 +57,10 @@
           <label class="nb-field"><span>Titel</span><input id="entry-title" maxlength="100" required placeholder="Titel"></label>
           <label class="nb-field"><span>Kurzzeile (optional)</span><input id="entry-subline" maxlength="100" placeholder="Ein hilfreicher Hinweis"></label>
           <label class="nb-field"><span>Notiz</span><textarea id="entry-body" rows="7" placeholder="Was möchtest du dir merken?"></textarea></label>
-          <label class="nb-field"><span>Thema</span><select id="category-select"></select></label>
-          <div class="nb-new-topic-row">
-            <button class="nb-link" id="add-topic" type="button">＋ Eigenes Thema anlegen</button>
-            <input id="new-topic-input" type="text" maxlength="40" placeholder="Themenname" autocomplete="off" enterkeyhint="done" hidden>
-            <button class="nb-link" id="save-topic" type="button" hidden>Hinzufügen</button>
+          <div class="nb-field nb-topic-field">
+            <span id="topic-label">Thema</span>
+            <input type="hidden" id="category-select" value="">
+            <div class="nb-chips" id="topic-chips" role="radiogroup" aria-labelledby="topic-label"></div>
           </div>
         </form>
       </section>
@@ -82,6 +81,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=17"></script>
+  <script src="notizbuch.js?v=18"></script>
 </body>
 </html>

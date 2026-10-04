@@ -45,13 +45,14 @@
 /* Edit screen heading row (Notizbuch v18): "Neue Notiz" left, grey round save tick right; pinned while the fields scroll under it */
 #notebook[data-screen="edit"] .nb-scroll { padding-top:0; }
 #edit-screen { padding-top:0; }
-.nb-form-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:19px 0 15px; background:var(--bg); }
+.nb-form-head { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:19px 0 8px; background:var(--bg); }
 .nb-form-head::after { content:""; position:absolute; left:0; right:0; top:100%; height:14px; background:linear-gradient(to bottom,var(--bg),color-mix(in srgb,var(--bg) 0%,transparent)); pointer-events:none; }
 .nb-form-title { min-width:0; margin:0; overflow:hidden; color:var(--text); font-size:22px; line-height:1.18; font-weight:650; text-overflow:ellipsis; white-space:nowrap; }
 .nb-save-tick { flex:0 0 auto; display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:50%; padding:0; background:var(--tile-surface); color:var(--mint); cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; transition:transform .12s ease,filter .12s ease; }
 .nb-save-tick svg { width:22px; height:22px; }
 .nb-save-tick:active { transform:scale(.97); filter:brightness(.94); }
 .nb-form { display:grid; gap:10px; }
+#edit-screen .nb-form { margin-top:16px; } /* starts below the heading row's 14px fade, so nothing sits under it until you scroll */
 .nb-field { display:block; border-radius:14px; padding:10px 13px; background:var(--tile-surface); }
 .nb-field span { display:block; margin-bottom:5px; color:var(--muted); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
 .nb-field input,.nb-field textarea,.nb-field select { display:block; width:100%; border:0; outline:0; background:transparent; color:var(--text); font:400 16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
@@ -59,9 +60,6 @@
 .nb-field select { min-height:28px; }
 :root:not([data-theme="light"]) .nb-field select { color-scheme:dark; }
 .nb-field input::placeholder,.nb-field textarea::placeholder,.nb-search input::placeholder { color:var(--muted); }
-.nb-new-topic-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
-.nb-link { min-height:40px; border:0; padding:6px 0; background:transparent; color:var(--mint); font:500 14px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
-#new-topic-input { width:100%; min-height:44px; border:1px solid var(--hairline); border-radius:12px; padding:0 12px; background:transparent; color:var(--text); font:400 16px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
 .nb-cancel { min-height:48px; border:0; padding:0 8px; background:transparent; color:var(--muted); font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
 .nb-confirm { position:fixed; inset:0; z-index:8; display:grid; place-items:center; padding:24px; background:var(--confirm-scrim); }
 .nb-confirm[hidden] { display:none !important; }
@@ -76,4 +74,15 @@
 #notebook[data-screen="detail"] #list-content,#notebook[data-screen="edit"] #list-content { display:none !important; }
 #notebook[data-screen="detail"] .nb-tabs,#notebook[data-screen="edit"] .nb-tabs { display:none !important; }
 #notebook[data-screen="detail"] #list-toolbar,#notebook[data-screen="edit"] #list-toolbar { display:none !important; }
-.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-chip:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+
+/* Topic pills (Notizbuch v18) */
+.nb-topic-field { padding-bottom:13px; }
+.nb-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.nb-chip { display:inline-flex; align-items:center; max-width:100%; min-height:34px; border:1px solid var(--hairline); border-radius:999px; padding:0 13px; background:transparent; color:var(--text); font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; transition:background-color .15s ease,border-color .15s ease,color .15s ease,transform .12s ease; }
+.nb-chip:active { transform:scale(.97); }
+.nb-chip[aria-checked="true"] { border-color:var(--mint); background:color-mix(in srgb,var(--mint) 16%,transparent); color:var(--mint); }
+.nb-chip-new { border-style:dashed; color:var(--muted); }
+.nb-chip.is-input { border-style:solid; border-color:var(--mint); padding:0 12px; cursor:text; }
+.nb-chip.is-input input { min-width:9ch; max-width:100%; height:32px; border:0; outline:0; padding:0; background:transparent; color:var(--text); font:400 16px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
+.nb-chip.is-input input::placeholder { color:var(--muted); }

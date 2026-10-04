@@ -9,7 +9,7 @@
     headerBack: $("header-back"),
     tabs: [...document.querySelectorAll(".nb-tab")], detail: $("detail-screen"), edit: $("edit-screen"),
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
-    topicInput: $("new-topic-input"), saveTopic: $("save-topic"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
+    chips: $("topic-chips"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
   };
   let state = readState(), view = "all", selectedTopic = "", query = "", editingId = null, openedId = null, pendingDeleteId = null, statusTimer = 0, searchOpen = false;
   function readState() {
@@ -85,12 +85,44 @@
   }
   function fillCategories(selected = "") {
     const categories = [...new Set(state.topics.concat(state.notes.map(note => note.category).filter(Boolean)))];
-    els.category.innerHTML = '<option value="">Ohne Thema</option>' + categories.map(name => `<option value="${esc(name)}">${esc(name)}</option>`).join(""); els.category.value = selected;
+    els.category.value = categories.includes(selected) ? selected : "";
+    const chip = (name, label) => `<button class="nb-chip" type="button" role="radio" aria-checked="${els.category.value === name}" data-topic="${esc(name)}">${esc(label)}</button>`;
+    els.chips.innerHTML = chip("", "Ohne Thema") + categories.map(name => chip(name, name)).join("")
+      + '<button class="nb-chip nb-chip-new" type="button" id="topic-new">＋ Neu</button>';
+  }
+  /* Topic pills (Notizbuch v18): tap a pill to choose it; "+ Neu" turns into a small text box in place —
+     Fertig / Enter or tapping elsewhere adds the topic and selects it, Escape or an empty box cancels. */
+  els.chips.addEventListener("click", event => {
+    const pill = event.target.closest(".nb-chip"); if (!pill || pill.classList.contains("is-input")) return;
+    if (pill.id === "topic-new") { startNewTopic(pill); return; }
+    els.category.value = pill.dataset.topic;
+    els.chips.querySelectorAll("[role=radio]").forEach(button => button.setAttribute("aria-checked", String(button === pill)));
+  });
+  function startNewTopic(pill) {
+    const box = document.createElement("span"); box.className = "nb-chip nb-chip-new is-input";
+    box.innerHTML = '<input type="text" maxlength="40" placeholder="Neues Thema" aria-label="Neues Thema" autocomplete="off" autocapitalize="sentences" enterkeyhint="done">';
+    const input = box.firstChild; let done = false;
+    const fit = () => { input.style.width = `${Math.max(9, input.value.length + 1)}ch`; };
+    const finish = keep => {
+      if (done) return; done = true;
+      const name = keep ? input.value.trim() : "";
+      if (!name) { fillCategories(els.category.value); return; }
+      const existing = state.topics.concat(state.notes.map(note => note.category).filter(Boolean)).find(topic => topic.toLocaleLowerCase() === name.toLocaleLowerCase());
+      if (!existing) { state.topics.push(name); if (!persist()) { state.topics.pop(); fillCategories(els.category.value); return; } }
+      fillCategories(existing || name);
+    };
+    input.addEventListener("input", fit);
+    input.addEventListener("keydown", event => {
+      if (event.key === "Enter") { event.preventDefault(); finish(true); }
+      else if (event.key === "Escape") { event.preventDefault(); finish(false); }
+    });
+    input.addEventListener("blur", () => finish(true));
+    fit(); pill.replaceWith(box); input.focus(); // same tap → the iPhone keyboard opens
   }
   function openEditor(note = null) {
     editingId = note?.id || null; $("form-title").textContent = note ? "Notiz bearbeiten" : "Neue Notiz";
     els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; els.body.value = note?.body || ""; fillCategories(note?.category || "");
-    els.topicInput.hidden = true; els.saveTopic.hidden = true; $("add-topic").hidden = false; setScreen("edit", "forward");
+    setScreen("edit", "forward");
   }
   function goBack() {
     if (!els.detail.hidden) { setScreen("list", "back"); renderList(); }
@@ -140,17 +172,6 @@
     if (!persist()) { state.notes = previous; state.topics = previousTopics; closeDeleteConfirm(); return; }
     closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
   }
-  $("add-topic").addEventListener("click", () => { els.topicInput.hidden = false; els.saveTopic.hidden = false; $("add-topic").hidden = true; els.topicInput.focus({ preventScroll:true }); });
-  function saveTopic() {
-    const name = els.topicInput.value.trim(); if (!name) { els.topicInput.focus({ preventScroll:true }); return; }
-    const existing = state.topics.find(topic => topic.toLocaleLowerCase() === name.toLocaleLowerCase()); if (!existing) state.topics.push(name);
-    if (!persist()) return;
-    fillCategories(existing || name); els.topicInput.value = ""; els.topicInput.hidden = true; els.saveTopic.hidden = true; $("add-topic").hidden = false;
-  }
-  els.saveTopic.addEventListener("click", saveTopic);
-  els.topicInput.addEventListener("keydown", event => {
-    if (event.key === "Enter") { event.preventDefault(); saveTopic(); }
-  });
   els.form.addEventListener("submit", event => {
     event.preventDefault(); const note = { title:els.title.value.trim(), sub:els.sub.value.trim(), body:els.body.value.trim(), category:els.category.value };
     if (!note.title) { els.title.focus(); return; }
