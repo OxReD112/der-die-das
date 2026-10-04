@@ -13,7 +13,7 @@
   <title>Notizbuch · Deutsch.</title>
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../../home.css?v=46">
-  <link rel="stylesheet" href="notizbuch.css?v=16">
+  <link rel="stylesheet" href="notizbuch.css?v=17">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -36,6 +36,7 @@
         <input id="search-input" type="search" placeholder="Suchen" aria-label="Notizbuch durchsuchen" autocomplete="off">
         <button class="nb-search-close" id="search-close" type="button" aria-label="Suche schließen">×</button>
       </div>
+      <div class="nb-status" id="status" role="status" aria-live="polite" hidden></div>
     </div>
     <div class="nb-scroll" id="notebook-scroll">
       <div id="list-content" class="nb-list"></div>
@@ -62,7 +63,6 @@
       </section>
     </div>
     <div class="nb-bottom">
-      <div class="nb-status" id="status" role="status" aria-live="polite" hidden></div>
       <div class="nb-toolbar" id="list-toolbar">
         <button class="nb-primary" id="create-note" type="button">＋ Neue Notiz</button>
       </div>
