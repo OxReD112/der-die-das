@@ -1,1 +1,87 @@
-
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b1b1d">
+  <script>
+    if (localStorage.getItem("deutschThemeV1") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#f6f4f1");
+    }
+  </script>
+  <title>Notizbuch · Deutsch.</title>
+  <link rel="icon" href="../../icon.webp" type="image/webp">
+  <link rel="stylesheet" href="../../home.css?v=46">
+  <link rel="stylesheet" href="notizbuch.css?v=13">
+</head>
+<body class="notebook-body">
+  <main class="notebook-page" id="notebook" data-screen="list">
+    <div class="nb-fixed-header">
+      <div class="nb-title-row">
+        <button class="nb-search-toggle" id="search-toggle" type="button" aria-label="Suche öffnen" aria-expanded="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 4.2 4.2"/></svg>
+        </button>
+        <h1>Notizbuch</h1>
+        <button class="nb-close" id="close-notebook" type="button" aria-label="Notizbuch schließen">×</button>
+      </div>
+      <nav class="nb-tabs" role="tablist" aria-label="Notizbuch">
+        <button class="nb-tab" role="tab" aria-selected="true" data-view="all">Alles</button>
+        <button class="nb-tab" role="tab" aria-selected="false" data-view="topics">Themen</button>
+      </nav>
+      <div class="nb-search" id="search-box" hidden>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 4.2 4.2"/></svg>
+        <input id="search-input" type="search" placeholder="Suchen" aria-label="Notizbuch durchsuchen" autocomplete="off">
+        <button class="nb-search-close" id="search-close" type="button" aria-label="Suche schließen">×</button>
+      </div>
+    </div>
+    <div class="nb-scroll" id="notebook-scroll">
+      <div id="list-content" class="nb-list"></div>
+      <section class="nb-screen" id="detail-screen" hidden>
+        <button class="nb-screen-back" id="detail-back" type="button">‹ Notizbuch</button>
+        <div class="nb-detail-topic" id="detail-topic"></div>
+        <h2 class="nb-detail-title" id="detail-title"></h2>
+        <p class="nb-detail-sub" id="detail-sub" hidden></p>
+        <div class="nb-detail-body" id="detail-body"></div>
+        <div class="nb-detail-actions" id="detail-actions"></div>
+      </section>
+      <section class="nb-screen" id="edit-screen" hidden>
+        <button class="nb-screen-back" id="edit-back" type="button">‹ Notizbuch</button>
+        <h2 class="nb-form-title" id="form-title">Neue Notiz</h2>
+        <form class="nb-form" id="note-form">
+          <label class="nb-field"><span>Titel</span><input id="entry-title" maxlength="100" required placeholder="Titel"></label>
+          <label class="nb-field"><span>Kurzzeile (optional)</span><input id="entry-subline" maxlength="100" placeholder="Ein hilfreicher Hinweis"></label>
+          <label class="nb-field"><span>Notiz</span><textarea id="entry-body" rows="7" placeholder="Was möchtest du dir merken?"></textarea></label>
+          <label class="nb-field"><span>Thema</span><select id="category-select"></select></label>
+          <div class="nb-new-topic-row">
+            <button class="nb-link" id="add-topic" type="button">＋ Eigenes Thema anlegen</button>
+            <input id="new-topic-input" type="text" maxlength="40" placeholder="Themenname" autocomplete="off" enterkeyhint="done" hidden>
+            <button class="nb-link" id="save-topic" type="button" hidden>Hinzufügen</button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="nb-bottom">
+      <div class="nb-status" id="status" role="status" aria-live="polite" hidden></div>
+      <div class="nb-toolbar" id="list-toolbar">
+        <button class="nb-primary" id="create-note" type="button">＋ Neue Notiz</button>
+      </div>
+      <div class="nb-toolbar nb-edit-toolbar" id="edit-toolbar" hidden>
+        <button class="nb-cancel" id="cancel-edit-bottom" type="button">Abbrechen</button>
+        <button class="nb-primary" id="save-note-bottom" type="button">Speichern</button>
+      </div>
+    </div>
+    <div class="nb-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" hidden>
+      <div class="nb-confirm-card">
+        <h2 id="delete-confirm-title">Notiz löschen?</h2>
+        <p>Diese Notiz wird von diesem Gerät entfernt.</p>
+        <div class="nb-confirm-actions">
+          <button class="nb-cancel" id="cancel-delete" type="button">Abbrechen</button>
+          <button class="nb-delete-confirm" id="confirm-delete" type="button">Löschen</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="notizbuch.js?v=13"></script>
+</body>
+</html>
