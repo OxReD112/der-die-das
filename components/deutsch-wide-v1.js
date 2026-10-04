@@ -8,9 +8,8 @@
        .progress right after it) spans the width of
        the Home block, so opening an exercise keeps the same frame as Home;
      · the on-screen keyboard (#keyboardMount) has that same width, with taller keys;
-     · everything else (question, cards, answer field, buttons) keeps exactly its
-       current width: the page column (.app) gets wider, but its side padding grows
-       by the same amount.
+     · everything in between (question, cards, answer field, answer buttons, answer
+       cards) is 600px wide in every exercise (CONTENT / PAGE_EXTRA below).
    The Home page tells us its block width (window.DEUTSCH_WIDE_BLOCK, home.js → fit);
    opened on its own, the page uses the same rule of thumb as Home (82% of the width). */
 (function () {
@@ -23,9 +22,25 @@ html.deutsch-wide .app {
   box-sizing: border-box !important;
   width: var(--ex-block) !important;
   max-width: none !important;
-  padding-left: calc((var(--ex-block) - var(--ex-col)) / 2 + var(--ex-pad-l)) !important;
-  padding-right: calc((var(--ex-block) - var(--ex-col)) / 2 + var(--ex-pad-r)) !important;
+  padding-left: calc((var(--ex-block) - var(--ex-inner)) / 2) !important;
+  padding-right: calc((var(--ex-block) - var(--ex-inner)) / 2) !important;
 }
+/* the few boxes that had their own, narrower limit (see CONTENT below) */
+html[data-ex="wortschatz"].deutsch-wide #question { width: 100% !important; }
+html[data-ex="modalverben"].deutsch-wide .sentence { max-width: none !important; }
+/* Modalverben + Vielseitige Verben: the German sentence 26px → 36px on wide screens (2026-10-04),
+   closer to the other exercises' questions; the answer gap (3.6em) grows with it.
+   The longest sentences still fit in two lines within the 600px column. */
+html[data-ex="modalverben"].deutsch-wide .sentence,
+html[data-ex="vielseitige_verben"].deutsch-wide .sentence { font-size: 36px !important; }
+/* a question that needs two lines gets two even lines (no single word alone on the second line) */
+html.deutsch-wide .sentence,
+html.deutsch-wide .context,
+html.deutsch-wide .translation,
+html.deutsch-wide .meaning,
+html.deutsch-wide #word,
+html.deutsch-wide .preposition,
+html.deutsch-wide .scene { text-wrap: balance; }
 html.deutsch-wide .top,
 html.deutsch-wide .top + .progress,
 html.deutsch-wide #keyboardMount {
@@ -62,6 +77,29 @@ html.deutsch-wide .keyboard .row.special .ok {
     document.head.append(style);
   }
 
+  /* CONTENT WIDTH: on wide screens every exercise's question, cards, answer field, answer
+     buttons and answer cards are 600px wide (the Pronomen answer field = the reference,
+     2026-10-03). Pages wrap that content differently, so each page says how much its own
+     wrapping adds around the 600px (screen padding, card padding). A page that isn't listed
+     keeps its own column width. */
+  const CONTENT = 600;
+  const PAGE_EXTRA = {
+    artikel: 0,
+    pronomen: 28,                  // .screen: 14px each side
+    wortschatz: 0,
+    partizipii: 40,                // .card: 20px each side
+    modalverben: 40,               // .card: 20px each side
+    vielseitige_verben: 0,
+    kasus: 0,
+    verben_mit_praepositionen: 28, // .screen: 14px each side
+    ortspraepositionen: 0
+  };
+  const page = (() => {
+    const parts = location.pathname.toLowerCase().split("/").filter(p => p && !p.endsWith(".html"));
+    return parts[parts.length - 1] || "";
+  })();
+  if (page in PAGE_EXTRA) root.dataset.ex = page;
+
   function blockWidth() {
     let fromHome = 0;
     try {
@@ -78,9 +116,9 @@ html.deutsch-wide .keyboard .row.special .ok {
     root.classList.remove("deutsch-wide");
     if (!wide.matches) return;
     const style = getComputedStyle(app);
-    root.style.setProperty("--ex-col", app.offsetWidth + "px");
-    root.style.setProperty("--ex-pad-l", style.paddingLeft);
-    root.style.setProperty("--ex-pad-r", style.paddingRight);
+    const own = app.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const inner = page in PAGE_EXTRA ? CONTENT + PAGE_EXTRA[page] : own;
+    root.style.setProperty("--ex-inner", inner + "px");
     root.style.setProperty("--ex-block", blockWidth() + "px");
     // …then widen the frame around it
     addStyle();
