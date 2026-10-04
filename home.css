@@ -1286,6 +1286,29 @@ header h1 {
   transform: scale(0.97);
   filter: brightness(0.94);
 }
+.notebook-icon-button {
+  position: absolute;
+  left: max(0px, calc((100% - var(--dashboard-width)) / 2));
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  transform: translateY(-50%);
+  border-radius: 12px;
+  color: var(--muted);
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.2s ease, filter 0.12s ease, background-color 0.12s ease;
+}
+.notebook-icon-button svg {
+  width: 18px;
+  height: 18px;
+}
+.notebook-icon-button:active {
+  filter: brightness(0.82);
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+}
 .settings-icon-button {
   position: absolute;
   right: max(0px, calc((100% - var(--dashboard-width)) / 2));
@@ -2607,6 +2630,11 @@ html.home-wide-layout body {
   margin-right: -14px; /* the 16px icon, not its 44px tap area, lines up with the column */
   transform: none;
 }
+.home-wide-layout .notebook-icon-button {
+  left: calc(-1 * (var(--wide-left) + var(--wide-gap)));
+  top: calc(14px + var(--wide-extra, 0px) / 2);
+  transform: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .home-wide-layout #dictionaryLayer,
@@ -2691,3 +2719,13 @@ html.home-wide-layout body {
 .dictionary-word-order-pattern strong { font-weight: 700; }
 .dictionary-entry-hints .dictionary-entry-note { margin-top: 4px; }
 .dictionary-entry-hints .dictionary-entry-label + .dictionary-entry-note { margin-top: 0; }
+
+/* Notizbuch: same full-screen slide-up motion as Settings. */
+.notebook-layer { position:fixed; inset:0; z-index:33; pointer-events:none; }
+.notebook-panel { position:absolute; inset:0; display:flex; background:var(--bg); transform:translateY(100%); transition:transform .42s cubic-bezier(.22,.61,.36,1); will-change:transform; overflow:hidden; pointer-events:none; }
+.notebook-panel.is-open { transform:translateY(0); pointer-events:auto; }
+.notebook-panel iframe { display:block; width:100%; height:100%; border:0; background:var(--bg); }
+.notebook-icon-button { appearance:none; -webkit-appearance:none; padding:0; background:transparent; border:0; cursor:pointer; }
+.notebook-icon-button svg { width:16px; height:16px; }
+.home-notebook-open { overflow:hidden; }
+.home-notebook-open .notebook-layer { pointer-events:auto; }
