@@ -15,6 +15,13 @@ const START_ABOUT = {
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
 
 const $ = id => document.getElementById(id);
+let ignoreContinueClickUntil = 0;
+$("continue").addEventListener("pointerdown", () => { ignoreContinueClickUntil = 0; }, true);
+document.addEventListener("click", e => {
+  if (isTouchDevice() && Date.now() < ignoreContinueClickUntil && e.target.closest("#continue")) {
+    e.preventDefault(); e.stopImmediatePropagation(); ignoreContinueClickUntil = 0;
+  }
+}, true);
 const data = window.PRONOUN_EXERCISES || [];
 
 function isTouchDevice() {
@@ -393,6 +400,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
     return;
   }
   if (k === "OK") {
+    if (answer.trim()) ignoreContinueClickUntil = Date.now() + 1000;
     submit();
     return;
   }
