@@ -1157,6 +1157,17 @@ header h1 {
 .dictionary-verb-forms {
   overflow-x: auto;
 }
+.dictionary-pronoun-forms {
+  min-width: 0;
+}
+.dictionary-pronoun-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.dictionary-pronoun-forms .dictionary-forms-table td {
+  white-space: nowrap;
+}
 .dictionary-forms-table {
   width: 100%;
   border-collapse: collapse;

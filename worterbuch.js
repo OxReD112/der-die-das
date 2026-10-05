@@ -1,4 +1,4 @@
-/* Home · Wörterbuch lookup (data: ./worterbuch/german-nouns.json, german-verbs.json, german-adjectives.json, german-adverbs.json, german-conjunctions.json) */
+/* Home · Wörterbuch lookup (data: ./worterbuch/german-*.json) */
 (function initHomeWorterbuch() {
   const input = document.getElementById("dictionarySearchInput");
   const form = document.getElementById("dictionarySearchForm");
@@ -11,7 +11,7 @@
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
 
-  const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion" };
+  const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen" };
   let entries = null;
   let loadPromise = null;
   let selected = null;
@@ -36,6 +36,12 @@
     return String(value || "").trim().normalize("NFC").toLocaleLowerCase("de-DE");
   }
 
+  function isExactMatch(item, query) {
+    const needle = normalized(query);
+    return normalized(item.word) === needle
+      || Boolean(item.search_forms?.some(form => normalized(form) === needle));
+  }
+
   function loadDatabase() {
     if (entries) return Promise.resolve(entries);
     if (loadPromise) return loadPromise;
@@ -49,15 +55,17 @@
       loadJson("worterbuch/german-verbs.json"),
       loadJson("worterbuch/german-adjectives.json"),
       loadJson("worterbuch/german-adverbs.json"),
-      loadJson("worterbuch/german-conjunctions.json")
-    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions]) => {
-      if (![nouns, verbs, adjectives, adverbs, conjunctions].every(Array.isArray)) throw new Error("Invalid dictionary database");
+      loadJson("worterbuch/german-conjunctions.json"),
+      loadJson("worterbuch/german-pronouns.json")
+    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns]) => {
+      if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
         ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
         ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" })),
         ...adjectives.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" })),
         ...adverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adverb" })),
-        ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" }))
+        ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" })),
+        ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" }))
       ];
       render();
       return entries;
@@ -77,7 +85,7 @@
     const matches = entries
       .map(item => {
         const word = normalized(item.word);
-        const rank = word === needle ? 0 : word.startsWith(needle) ? 1 : word.includes(needle) ? 2 : -1;
+        const rank = isExactMatch(item, needle) ? 0 : word.startsWith(needle) ? 1 : word.includes(needle) ? 2 : -1;
         return { item, rank };
       })
       .filter(match => match.rank >= 0)
@@ -113,7 +121,7 @@
     const usageNote = translated(item.usage_note_ru, item.usage_note_en);
     // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
     const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
-    const noteAfterTranslation = ["adverb", "conjunction"].includes(item.type);
+    const noteAfterTranslation = ["adverb", "conjunction", "pronoun"].includes(item.type);
     if (usageNote && !noteAfterTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
 
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
@@ -146,7 +154,46 @@
         entry.append(notes);
       }
     }
-    if (usageNote && noteAfterTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
+    if (usageNote && noteAfterTranslation && item.type !== "pronoun") entry.append(node("p", "dictionary-entry-note", usageNote));
+
+    if (item.type === "pronoun") {
+      (item.forms || []).forEach(group => {
+        const section = node("section", "dictionary-entry-section dictionary-pronoun-forms");
+        section.append(node("h4", "dictionary-entry-label", group.label || "Deklination"));
+        const scroll = node("div", "dictionary-pronoun-table-scroll");
+        scroll.tabIndex = 0;
+        scroll.setAttribute("role", "region");
+        scroll.setAttribute("aria-label", group.label || "Deklination");
+        const table = node("table", "dictionary-forms-table");
+        const thead = node("thead");
+        const header = node("tr");
+        const corner = node("th", "dictionary-forms-person", "Kasus");
+        corner.scope = "col";
+        header.append(corner);
+        group.columns.forEach(label => {
+          const cell = node("th", "", label);
+          cell.scope = "col";
+          header.append(cell);
+        });
+        thead.append(header);
+        const tbody = node("tbody");
+        Object.entries(group.rows).forEach(([label, values]) => {
+          const row = node("tr");
+          const heading = node("th", "dictionary-forms-person", label);
+          heading.scope = "row";
+          row.append(heading);
+          values.forEach(value => row.append(node("td", "", value)));
+          tbody.append(row);
+        });
+        table.append(thead, tbody);
+        scroll.append(table);
+        section.append(scroll);
+        entry.append(section);
+      });
+      const formsNote = translated(item.forms_note_ru, item.forms_note_en);
+      if (formsNote) entry.append(node("p", "dictionary-entry-note", formsNote));
+      if (usageNote) entry.append(node("p", "dictionary-entry-note", usageNote));
+    }
 
     const declensionNote = translated(item.declension_note_ru, item.declension_note_en);
     if (item.type === "noun" && (item.declension_forms || declensionNote)) {
@@ -284,7 +331,7 @@
       return;
     }
     const matches = findMatches(query);
-    const exact = matches.filter(item => normalized(item.word) === normalized(query));
+    const exact = matches.filter(item => isExactMatch(item, query));
     if (exact.length === 1) {
       selected = exact[0];
       if (entryBackbar) entryBackbar.hidden = false;
@@ -323,7 +370,7 @@
   form.addEventListener("submit", event => {
     event.preventDefault();
     const matches = findMatches(input.value);
-    const exact = matches.filter(item => normalized(item.word) === normalized(input.value));
+    const exact = matches.filter(item => isExactMatch(item, input.value));
     if (exact.length === 1) selected = exact[0];
     else if (matches.length === 1) selected = matches[0];
     render();

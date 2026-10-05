@@ -1950,7 +1950,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     true
   );
 })();
-/* ===== VERSIONS window (Settings → „Deutsch. version …“, Home 5.121) =====
+/* ===== VERSIONS window (Settings → „Deutsch. version …“, Home 5.122) =====
    The pages no longer show their version number (it's transparent there, see each page's .version-mark).
    Each page stays the only place its number is written: this window opens every page's index.html in the
    background (no-store: always the live file), reads its .version-mark and lists them in the order of the Home
