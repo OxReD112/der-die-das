@@ -251,6 +251,9 @@ body:has(#start.hidden) .start-about {
 }
 
 /* Version number: only on the start and summary screens */
+/* Hidden since 2026-10-05 (Home 5.121): the number is shown in Home → Settings → Versions, which reads it from
+   this element. Transparent, not visibility:hidden / display:none — it keeps its place, and Home's round Home
+   button lines up with it (home.js → updateBack). */
 .version-mark {
   position: fixed;
   left: 0;
@@ -261,7 +264,9 @@ body:has(#start.hidden) .start-about {
   text-align: center;
   font: 400 11px/1 var(--font);
   letter-spacing: 0.04em;
-  color: var(--start-version);
+  color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
   pointer-events: none;
   z-index: 5;
 }
