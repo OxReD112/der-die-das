@@ -5,11 +5,31 @@
   const STORE = "books";
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
-  let dbPromise, currentBook = null, selectedEntry = null, longPressTimer = null, toastTimer = null;
+  let dbPromise, currentBook = null, selectedEntry = null, longPressTimer = null, toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
+  let pendingDelete = null, deleteTrigger = null, deleting = false;
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || item.translation_ru;
+
+  function updateExplainerLanguage() {
+    const lang = locale();
+    const intro = $("reader-intro");
+    intro.lang = lang;
+    const sentences = lang === "ru"
+      ? ["Читайте в своём темпе.", "Нажмите и удерживайте слово, чтобы узнать его значение."]
+      : ["Read at your own pace.", "Long-press a word to see its meaning."];
+    const sentenceBreak = document.createElement("span");
+    sentenceBreak.className = "intro-break";
+    sentenceBreak.append(document.createElement("br"));
+    intro.replaceChildren(document.createTextNode(sentences[0]), sentenceBreak, document.createTextNode(` ${sentences[1]}`));
+  }
+  window.addEventListener("storage", event => {
+    if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateExplainerLanguage();
+  });
+  window.addEventListener("pageshow", updateExplainerLanguage);
+  window.addEventListener("focus", updateExplainerLanguage);
+  updateExplainerLanguage();
 
   function openDb() {
     if (dbPromise) return dbPromise;
@@ -25,9 +45,22 @@
   async function allBooks() {
     const db = await openDb();
     return new Promise((resolve, reject) => {
-      const req = db.transaction(STORE, "readonly").objectStore(STORE).getAll();
-      req.onsuccess = () => resolve(req.result.sort((a,b) => b.updatedAt - a.updatedAt));
-      req.onerror = () => reject(req.error);
+      const tx = db.transaction(STORE, "readwrite");
+      const store = tx.objectStore(STORE);
+      const req = store.getAll();
+      let books = [];
+      req.onsuccess = () => {
+        books = req.result;
+        // Older books have no upload date. Freeze their current order once.
+        books.forEach(book => {
+          if (!Number.isFinite(book.createdAt)) {
+            book.createdAt = Number(book.updatedAt) || 0;
+            store.put(book);
+          }
+        });
+      };
+      tx.oncomplete = () => resolve(books.sort((a,b) => b.createdAt - a.createdAt || String(a.id).localeCompare(String(b.id))));
+      tx.onerror = tx.onabort = () => reject(tx.error || req.error);
     });
   }
   async function saveBook(book) {
@@ -42,6 +75,7 @@
   }
   async function updateProgress(book, paragraph) {
     book.position = paragraph;
+    updateBookmarkStatus(book, paragraph);
     book.updatedAt = Date.now();
     try { await saveBook(book); } catch (error) { showToast("Reading position could not be saved."); }
     setProgress();
@@ -62,19 +96,51 @@
   }
   function titleFromFilename(name) { return String(name || "").replace(/\.txt$/i, "").replace(/[_-]+/g, " ").trim() || "Untitled text"; }
 
+  function coverInitials(title) {
+    const words = String(title || "").normalize("NFC").match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}]*/gu) || [];
+    return words.slice(0, 2).map((word, index) => index === 0
+      ? Array.from(word)[0].toLocaleUpperCase("de-DE")
+      : Array.from(word)[0].toLocaleLowerCase("de-DE")).join("") || "?";
+  }
+
   function renderBooks(books) {
     $bookList.replaceChildren();
     $("empty-library").hidden = books.length > 0;
     books.forEach(book => {
+      const row = document.createElement("div");
+      row.className = "book-row";
       const button = document.createElement("button");
-      button.className = "book-row";
+      button.className = "book-open";
       button.type = "button";
-      button.innerHTML = `<span class="book-icon" aria-hidden="true">Aa</span><span class="book-meta"><span class="book-title"></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
+      button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
+      const hasSecondPage = splitParagraphs(book.content).length > 1;
+      const started = hasSecondPage && Boolean(book.readingStarted || Number(book.position) > 0);
+      const completed = started && Boolean(book.completed);
+      button.querySelector(".book-icon").textContent = coverInitials(book.title);
+      button.querySelector(".book-icon").classList.toggle("is-started", started);
+      button.querySelector(".book-icon").classList.toggle("is-completed", completed);
+      button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
       button.querySelector(".book-title").textContent = book.title;
       const words = (book.content.match(/[\p{L}\p{M}]+/gu) || []).length;
       button.querySelector(".book-subtitle").textContent = `${words.toLocaleString()} words · ${book.name || "Pasted text"}`;
       button.addEventListener("click", () => openBook(book));
-      $bookList.append(button);
+      const remove = document.createElement("button");
+      remove.className = "book-delete";
+      remove.type = "button";
+      remove.setAttribute("aria-label", `Delete “${book.title}”`);
+      remove.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
+      remove.addEventListener("click", () => {
+        pendingDelete = book;
+        deleteTrigger = remove;
+        $("delete-confirm-title").textContent = `Delete “${book.title}”?`;
+        $("delete-confirm").hidden = false;
+        $library.inert = true;
+        $("library-actions").inert = true;
+        $("reader").querySelector(".reader-header").inert = true;
+        $("cancel-delete").focus({ preventScroll:true });
+      });
+      row.append(button, remove);
+      $bookList.append(row);
     });
   }
   async function refreshBooks() {
@@ -87,6 +153,57 @@
       $("empty-library").hidden = false;
     }
   }
+  function closeDeleteConfirm(restoreFocus = true) {
+    if (deleting) return;
+    $("delete-confirm").hidden = true;
+    $library.inert = false;
+    $("library-actions").inert = false;
+    $("reader").querySelector(".reader-header").inert = false;
+    pendingDelete = null;
+    if (restoreFocus && deleteTrigger?.isConnected) deleteTrigger.focus({ preventScroll:true });
+    deleteTrigger = null;
+  }
+  $("cancel-delete").addEventListener("click", () => closeDeleteConfirm());
+  $("confirm-delete").addEventListener("click", async () => {
+    if (!pendingDelete || deleting) return;
+    const id = pendingDelete.id;
+    deleting = true;
+    $("confirm-delete").disabled = true;
+    $("cancel-delete").disabled = true;
+    try {
+      const db = await openDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE, "readwrite");
+        tx.objectStore(STORE).delete(id);
+        tx.oncomplete = resolve;
+        tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not delete this book"));
+      });
+      // Release the previous reader content as well as the persisted record.
+      clearTimeout(window.__readingSaveTimer);
+      currentBook = null;
+      $text.replaceChildren();
+      selectedWord = "";
+      deleting = false;
+      closeDeleteConfirm(false);
+      await refreshBooks();
+      ($bookList.querySelector(".book-open") || $("add-book")).focus({ preventScroll:true });
+      showToast("Deleted from this device.");
+    } catch (error) {
+      deleting = false;
+      closeDeleteConfirm();
+      showToast("The text could not be deleted. Please try again.");
+    } finally {
+      $("confirm-delete").disabled = false;
+      $("cancel-delete").disabled = false;
+    }
+  });
+  $("delete-confirm").addEventListener("keydown", event => {
+    if (event.key === "Escape") { event.preventDefault(); closeDeleteConfirm(); }
+    if (event.key === "Tab") {
+      event.preventDefault();
+      if (!deleting) (document.activeElement === $("cancel-delete") ? $("confirm-delete") : $("cancel-delete")).focus();
+    }
+  });
   function splitParagraphs(content) { return String(content || "").replace(/\r\n?/g, "\n").split(/\n\s*\n/).map(p => p.trim()).filter(Boolean); }
   function wrapParagraph(paragraph) {
     const fragment = document.createDocumentFragment();
@@ -114,14 +231,28 @@
       $text.append(p);
     });
     currentBook = book;
-    $("page-title").textContent = book.title;
-    $("page-title").title = book.title;
-    $("page-title").closest(".reader-heading").querySelector(".reader-kicker").textContent = "DEUTSCH · BIBLIOTHEK";
+    $("book-headline").textContent = book.title;
+    $("toolbar-title").textContent = book.title;
+    $("toolbar-title").title = book.title;
+    $("reader").querySelector(".reader-header").hidden = true;
     $library.hidden = true;
+    $("library-actions").hidden = true;
+    document.body.classList.remove("library-screen");
     $reading.hidden = false;
     setProgress();
-    const target = $text.querySelector(`[data-paragraph="${Math.max(0, Number(book.position) || 0)}"]`);
-    requestAnimationFrame(() => target?.scrollIntoView({ block:"start" }));
+    const position = Math.max(0, Number(book.position) || 0);
+    const target = $text.querySelector(`[data-paragraph="${position}"]`);
+    restoringPosition = true;
+    window.scrollTo({ top:0, behavior:"instant" });
+    requestAnimationFrame(() => {
+      // The beginning includes the book header, not just the first paragraph.
+      if (position > 0 && target) {
+        const toolbarHeight = $("back-library").parentElement.getBoundingClientRect().height;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - toolbarHeight - 8;
+        window.scrollTo({ top:Math.max(0, targetTop), behavior:"instant" });
+      }
+      requestAnimationFrame(() => { restoringPosition = false; });
+    });
   }
   function setProgress() {
     if (!currentBook) return;
@@ -133,20 +264,22 @@
     closePopups();
     renderBookText(book);
     document.title = `${book.title} · Bibliothek`;
+
   }
   let formIndex = null;
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
     const get = path => fetch(`../worterbuch/${path}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json")])
-      .then(([nouns,verbs,adjectives,adverbs,conjunctions]) => {
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
+      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
           ...verbs.map(x => ({ ...x, word:x.infinitive, type:"Verb" })),
           ...adjectives.map(x => ({ ...x, type:"Adjektiv" })),
           ...adverbs.map(x => ({ ...x, type:"Adverb" })),
-          ...conjunctions.map(x => ({ ...x, type:"Konjunktion" }))
+          ...conjunctions.map(x => ({ ...x, type:"Konjunktion" })),
+          ...pronouns.map(x => ({ ...x, type:"Pronomen" }))
         ];
         formIndex = new Map();
         const addForm = (form, item) => {
@@ -158,6 +291,7 @@
         };
         dictionary.forEach(item => {
           addForm(item.word, item);
+          (item.search_forms || []).forEach(form => addForm(form, item));
           if (item.article) addForm(`${item.article} ${item.word}`, item);
           if (item.type === "Nomen" && item.plural && item.plural !== "—") {
             item.plural.split(/\s*,\s*/).forEach(form => {
@@ -195,7 +329,15 @@
     $("popover-translation").textContent = results.length ? results.map(translation).filter(Boolean).join(" · ") : "Not in Wörterbuch yet";
     $("popover-more").hidden = !results.length;
     $popover.hidden = false;
-    if (anchor) $popover.style.setProperty("--tap-x", `${anchor.left + anchor.width / 2}px`);
+    if (anchor) {
+      const box = $popover.getBoundingClientRect();
+      const gap = 8, edge = 12;
+      const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
+      const above = anchor.top - box.height - gap;
+      const top = above >= edge ? above : Math.min(window.innerHeight - box.height - edge, anchor.bottom + gap);
+      $popover.style.left = `${left}px`;
+      $popover.style.top = `${Math.max(edge, top)}px`;
+    }
   }
   function renderDictionaryCard(item) {
     const root = $("dictionary-card");
@@ -217,7 +359,37 @@
       const parts = item.complements.map(value => `${value.pattern}${(locale() === "ru" ? value.note_ru : value.note_en) ? ` — ${locale() === "ru" ? value.note_ru : value.note_en}` : ""}`);
       addInfo("p","dictionary-detail",`Ergänzungen: ${parts.join(" · ")}`);
     }
-    if (item.forms && typeof item.forms === "object") {
+    if (item.type === "Pronomen") {
+      (item.forms || []).forEach(group => {
+        const section = document.createElement("section");
+        section.className = "dictionary-pronoun-forms";
+        const title = document.createElement("h3");
+        title.textContent = group.label;
+        section.append(title);
+        const scroll = document.createElement("div");
+        scroll.style.overflowX = "auto";
+        scroll.tabIndex = 0;
+        scroll.setAttribute("role", "region");
+        scroll.setAttribute("aria-label", group.label);
+        const table = document.createElement("table");
+        table.className = "dictionary-table";
+        const thead = document.createElement("thead");
+        const header = document.createElement("tr");
+        ["Kasus", ...group.columns].forEach(label => {
+          const cell = document.createElement("th"); cell.scope = "col"; cell.textContent = label; header.append(cell);
+        });
+        thead.append(header);
+        const tbody = document.createElement("tbody");
+        Object.entries(group.rows).forEach(([label, values]) => {
+          const row = document.createElement("tr");
+          const heading = document.createElement("th"); heading.scope = "row"; heading.textContent = label; row.append(heading);
+          values.forEach(value => { const cell = document.createElement("td"); cell.textContent = value; row.append(cell); });
+          tbody.append(row);
+        });
+        table.append(thead, tbody); scroll.append(table); section.append(scroll); root.append(section);
+      });
+      addInfo("p","dictionary-detail",locale() === "ru" ? item.forms_note_ru : item.forms_note_en);
+    } else if (item.forms && typeof item.forms === "object") {
       Object.entries(item.forms).forEach(([tense, forms]) => {
         const values = Object.entries(forms || {}).map(([person, form]) => `${person}: ${form}`).join(" · ");
         if (values) addInfo("p","dictionary-detail",`${tense}: ${values}`);
@@ -263,38 +435,43 @@
   }
 
   $("add-book").addEventListener("click", () => $file.click());
-  $("empty-add").addEventListener("click", () => $file.click());
   $file.addEventListener("change", async () => {
     const file = $file.files?.[0];
     if (!file) return;
     try {
       const content = (await file.text()).replace(/^\uFEFF/, "");
       if (!content.trim()) { showToast("This file is empty."); return; }
-      const book = { id:crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, name:file.name, title:titleFromFilename(file.name), content, position:0, updatedAt:Date.now() };
+      const book = { id:crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, name:file.name, title:titleFromFilename(file.name), content, position:0, createdAt:Date.now(), updatedAt:Date.now() };
       await saveBook(book);
       await refreshBooks();
       showToast("Saved on this device.");
     } catch (error) { showToast("The book could not be saved. Check available browser storage."); }
     $file.value = "";
   });
-  $("paste-toggle").addEventListener("click", () => $("paste-form").hidden = !$("paste-form").hidden);
+  $("paste-toggle").addEventListener("click", () => {
+    const form = $("paste-form");
+    form.hidden = !form.hidden;
+    $("paste-toggle").setAttribute("aria-expanded", String(!form.hidden));
+    if (!form.hidden) $("paste-title").focus();
+  });
   $("paste-form").addEventListener("submit", async event => {
     event.preventDefault();
     const title = $("paste-title").value.trim(); const content = $("paste-content").value.trim();
     if (!title || !content) return;
     try {
-      await saveBook({ id:crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, name:"Pasted text", title, content, position:0, updatedAt:Date.now() });
-      $("paste-form").reset(); $("paste-form").hidden = true; await refreshBooks(); showToast("Text saved on this device.");
+      await saveBook({ id:crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`, name:"Pasted text", title, content, position:0, createdAt:Date.now(), updatedAt:Date.now() });
+      $("paste-form").reset(); $("paste-form").hidden = true; $("paste-toggle").setAttribute("aria-expanded", "false"); await refreshBooks(); showToast("Text saved on this device.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
   $("back-library").addEventListener("click", async () => {
     closePopups();
     if (currentBook) {
+      clearTimeout(window.__readingSaveTimer);
       const paragraphs = [...$text.querySelectorAll("p")];
-      const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > 110);
+      const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > $("back-library").parentElement.getBoundingClientRect().bottom + 8);
       await updateProgress(currentBook, Math.max(0, visible));
     }
-    currentBook = null; $reading.hidden = true; $library.hidden = false; $("page-title").textContent = "Your books"; $("page-title").closest(".reader-heading").querySelector(".reader-kicker").textContent = "DEUTSCH · BIBLIOTHEK"; document.title = "Bibliothek · Deutsch.";
+    currentBook = null; $reading.hidden = true; $library.hidden = false; $("library-actions").hidden = false; document.body.classList.add("library-screen"); $("reader").querySelector(".reader-header").hidden = false; window.scrollTo({ top:0, behavior:"instant" }); document.title = "Bibliothek · Deutsch.";
     refreshBooks();
   });
   $text.addEventListener("pointerdown", event => {
@@ -308,9 +485,37 @@
     const cleanup = () => { window.removeEventListener("pointermove", cancel); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
     window.addEventListener("pointermove", cancel, { passive:true }); window.addEventListener("pointerup", up, { once:true }); window.addEventListener("pointercancel", up, { once:true });
   });
-  $text.addEventListener("dblclick", event => { const span = event.target.closest(".reading-word"); if (span) chooseWord(span); });
+  $text.addEventListener("click", event => { const span = event.target.closest(".reading-word"); if (span && event.pointerType === "mouse") chooseWord(span); });
   $text.addEventListener("keydown", event => { if ((event.key === "Enter" || event.key === " ") && event.target.matches(".reading-word")) { event.preventDefault(); chooseWord(event.target); } });
-  window.addEventListener("scroll", () => { if (!currentBook || $reading.hidden) return; const paragraphs = [...$text.querySelectorAll("p")]; const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > 110); if (visible >= 0 && visible !== Number(currentBook.position)) { currentBook.position = visible; setProgress(); clearTimeout(window.__readingSaveTimer); window.__readingSaveTimer = setTimeout(() => updateProgress(currentBook, visible), 700); } }, { passive:true });
+  function updateBookmarkStatus(book, paragraph) {
+    const paragraphs = [...$text.querySelectorAll("p")];
+    if (paragraphs.length < 2) return false;
+    let changed = false;
+    if (paragraph >= 1 && !book.readingStarted) {
+      book.readingStarted = true;
+      changed = true;
+    }
+    const last = paragraphs[paragraphs.length - 1];
+    if (book.readingStarted && !book.completed && window.scrollY > 0 && last.getBoundingClientRect().bottom <= window.innerHeight) {
+      book.completed = true;
+      changed = true;
+    }
+    return changed;
+  }
+  window.addEventListener("scroll", () => {
+    if (restoringPosition || !currentBook || $reading.hidden) return;
+    const paragraphs = [...$text.querySelectorAll("p")];
+    const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > $("back-library").parentElement.getBoundingClientRect().bottom + 8);
+    if (visible < 0) return;
+    const statusChanged = updateBookmarkStatus(currentBook, visible);
+    if (visible !== Number(currentBook.position) || statusChanged) {
+      currentBook.position = visible;
+      setProgress();
+      clearTimeout(window.__readingSaveTimer);
+      const book = currentBook;
+      window.__readingSaveTimer = setTimeout(() => updateProgress(book, visible), 700);
+    }
+  }, { passive:true });
   $("popover-close").addEventListener("click", () => $popover.hidden = true);
   $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryCard(selectedEntry); $popover.hidden = true; $sheet.hidden = false; });
   $("sheet-close").addEventListener("click", () => $sheet.hidden = true);

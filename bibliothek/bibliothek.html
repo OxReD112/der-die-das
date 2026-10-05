@@ -14,22 +14,21 @@
   </script>
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
-  <link rel="stylesheet" href="../home.css?v=47">
-  <link rel="stylesheet" href="bibliothek.css?v=1">
+  <link rel="stylesheet" href="../home.css?v=49">
+  <link rel="stylesheet" href="bibliothek.css?v=20">
 </head>
-<body class="reading-body">
+<body class="reading-body library-screen">
   <main class="reader" id="reader">
     <header class="reader-header">
-      <a class="reader-back" href="../index.html" aria-label="Back to Deutsch">‹</a>
-      <div class="reader-heading"><p class="reader-kicker">DEUTSCH · BIBLIOTHEK</p><h1 id="page-title">Your books</h1></div>
-      <button class="reader-add" id="add-book" type="button" aria-label="Add a book">＋</button>
-      <input id="book-file" type="file" accept=".txt,text/plain" hidden>
+      <div class="reader-heading"><h1 id="page-title">Bibliothek.</h1></div>
     </header>
 
     <section class="library" id="library" aria-label="Your books">
-      <p class="reader-intro">Read at your own pace. Long-press a word to see its meaning.</p>
       <p class="storage-note">Books you add are saved on this device for convenience. Browser storage can be cleared, so keep your original files as a backup.</p>
-      <button class="paste-toggle" id="paste-toggle" type="button">Paste text instead</button>
+      <p class="reader-intro" id="reader-intro" lang="en">Read at your own pace.<span class="intro-break"><br></span> Long-press a word to see its meaning.</p>
+      <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
+      <div class="book-list" id="book-list"></div>
+      <div class="empty-library" id="empty-library"><div class="empty-mark" aria-hidden="true">Aa</div><h2>Your reading space</h2><p>Add a TXT file or paste a German text to get started.</p></div>
       <form class="paste-form" id="paste-form" hidden>
         <label for="paste-title">Title</label>
         <input id="paste-title" maxlength="120" placeholder="My text" required>
@@ -37,19 +36,33 @@
         <textarea id="paste-content" rows="8" required placeholder="Paste a text to read…"></textarea>
         <button class="primary-action" type="submit">Save text</button>
       </form>
-      <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
-      <div class="book-list" id="book-list"></div>
-      <div class="empty-library" id="empty-library"><div class="empty-mark" aria-hidden="true">Aa</div><h2>Your reading space</h2><p>Add a TXT file or paste a German text to get started.</p><button class="primary-action" id="empty-add" type="button">＋ Add a TXT file</button></div>
+      <input id="book-file" type="file" accept=".txt,text/plain" hidden>
     </section>
+
+      <div id="library-actions" class="library-actions" aria-label="Add a book">
+        <button class="primary-action" id="add-book" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M5 15v5h14v-5"/></svg><span>Upload TXT</span></button>
+        <button class="primary-action" id="paste-toggle" type="button" aria-expanded="false" aria-controls="paste-form"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5H6v15h12V5h-3M9 3h6v4H9zM9 12h6m-6 4h6"/></svg><span>Paste text</span></button>
+      </div>
 
     <section class="reading-view" id="reading-view" hidden>
       <div class="reading-toolbar">
-        <button class="toolbar-back" id="back-library" type="button">‹ All books</button>
+        <button class="toolbar-back" id="back-library" type="button" aria-label="Back to Bibliothek"><span class="toolbar-arrow" aria-hidden="true">‹</span><span class="toolbar-title" id="toolbar-title"></span></button>
         <span class="reading-progress" id="reading-progress"></span>
       </div>
+      <h1 class="book-headline" id="book-headline"></h1>
       <article class="reading-text" id="reading-text" lang="de" aria-label="Book text"></article>
     </section>
 
+    <div class="book-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-text" hidden>
+      <div class="book-confirm-card">
+        <h2 id="delete-confirm-title">Delete text?</h2>
+        <p id="delete-confirm-text">This removes the text and reading position from this device.</p>
+        <div class="book-confirm-actions">
+          <button class="book-cancel" id="cancel-delete" type="button">Cancel</button>
+          <button class="book-delete-confirm" id="confirm-delete" type="button">Delete</button>
+        </div>
+      </div>
+    </div>
     <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
     <div class="word-popover" id="word-popover" role="dialog" aria-label="Word translation" hidden>
       <button class="popover-close" id="popover-close" type="button" aria-label="Close">×</button>
@@ -60,7 +73,6 @@
     <div class="dictionary-sheet" id="dictionary-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-word" hidden>
       <button class="sheet-scrim" id="sheet-scrim" type="button" aria-label="Close details"></button>
       <section class="sheet-card">
-        <div class="sheet-grabber" aria-hidden="true"></div>
         <button class="sheet-close" id="sheet-close" type="button" aria-label="Close">×</button>
         <div id="dictionary-card"></div>
       </section>
@@ -68,6 +80,6 @@
   </main>
   <script src="../components/deutsch-translation-v1.js"></script>
   <script src="../wortschatz/collection.js"></script>
-  <script src="bibliothek.js?v=1"></script>
+  <script src="bibliothek.js?v=14"></script>
 </body>
 </html>

@@ -1,25 +1,54 @@
 .reading-body { min-height:100dvh; padding:calc(env(safe-area-inset-top) + 20px) max(22px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 28px) max(22px,env(safe-area-inset-left)); }
-.reader { width:min(100%,720px); min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 48px); margin:0 auto; position:relative; }
+.reader { --bibliothek-primary:#ece6dc; --bibliothek-primary-text:#1b1b1d; width:min(100%,720px); min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 48px); margin:0 auto; position:relative; }
+[data-theme="light"] .reader { --bibliothek-primary:#242426; --bibliothek-primary-text:#f6f4f1; }
 .reader [hidden] { display:none !important; }
-.reader-header { display:grid; grid-template-columns:40px minmax(0,1fr) 44px; gap:12px; align-items:center; padding:12px 0 22px; border-bottom:1px solid var(--hairline); }
-.reader-back,.reader-add,.toolbar-back,.popover-close,.sheet-close { border:0; background:transparent; color:var(--text); cursor:pointer; -webkit-tap-highlight-color:transparent; }
-.reader-back { display:grid; place-items:center; width:40px; height:44px; text-decoration:none; font:400 34px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
+.reader-header { position:relative; inset:auto; z-index:2; margin:0; display:grid; grid-template-columns:minmax(0,1fr); gap:12px; align-items:center; padding:12px 0 22px; border-bottom:1px solid var(--hairline); }
+.toolbar-back,.popover-close,.sheet-close { border:0; background:transparent; color:var(--text); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.reader-header::after { content:none; }
 .reader-heading { min-width:0; }
-.reader-kicker { margin:0 0 3px; color:var(--muted); font-size:10px; font-weight:650; letter-spacing:.13em; }
+.reader-heading h1 { text-align:center; }
+/* Library uses the same fixed frame and inner scrolling as Notizbuch. */
+.reading-body.library-screen { height:100dvh; min-height:0; overflow:hidden; padding-bottom:0; }
+.library-screen .reader { height:calc(100dvh - env(safe-area-inset-top) - 20px); min-height:0; display:flex; flex-direction:column; isolation:isolate; }
+.library-screen .reader-header { flex:0 0 auto; background:var(--bg); }
+.library { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:20px 0 112px; scrollbar-width:none; }
+.library::-webkit-scrollbar { display:none; }
+.library-actions { position:absolute; z-index:3; left:0; right:0; bottom:max(10px,env(safe-area-inset-bottom)); display:flex; justify-content:center; gap:10px; pointer-events:none; }
+.library-actions .primary-action { display:flex; align-items:center; justify-content:center; gap:9px; width:148px; min-width:0; min-height:48px; border-radius:17px; padding:0 14px; background:var(--tile-surface); color:var(--secondary-text); font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; box-shadow:var(--lift-highlight),var(--lift-shadow); white-space:nowrap; pointer-events:auto; }
+.library-actions .primary-action svg { flex:none; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.library-actions .primary-action:active { transform:scale(.97); filter:brightness(.94); }
+[data-theme="light"] .library-actions .primary-action { box-shadow:var(--lift-shadow); }
+.library-actions .primary-action:focus-visible { outline:2px solid var(--mint); outline-offset:3px; }
 .reader-heading h1 { margin:0; color:var(--text); font-size:25px; line-height:1.15; font-weight:700; letter-spacing:-.5px; }
-.reader-add { width:44px; height:44px; border-radius:50%; background:var(--tile-surface); color:var(--mint); font-size:28px; line-height:1; }
-.reader-intro { margin:23px 0 12px; color:var(--secondary-text); font-size:15px; line-height:1.45; }
+.reader-intro { margin:20px 0 12px; text-align:center; color:var(--secondary-text); font-size:15px; line-height:1.45; }
 .storage-note { margin:0; padding:12px 14px; border-radius:13px; background:var(--card-bg); color:var(--muted); font-size:12px; line-height:1.45; }
-.paste-toggle { min-height:42px; margin:10px 0 0; border:0; padding:0; background:transparent; color:var(--mint); font:600 14px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
-.paste-form { display:grid; gap:8px; margin:10px 0 16px; }
+.paste-form { scroll-margin-bottom:100px; display:grid; gap:8px; margin:10px 0 16px; }
 .paste-form label { margin-top:7px; color:var(--muted); font-size:12px; }
 .paste-form input,.paste-form textarea { width:100%; border:1px solid var(--hairline); border-radius:13px; padding:12px 14px; background:var(--card-bg); color:var(--text); font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif; outline:none; }
 .paste-form textarea { resize:vertical; }
 .paste-form input:focus,.paste-form textarea:focus { border-color:var(--mint); }
-.primary-action { min-height:46px; border:0; border-radius:14px; padding:0 18px; background:var(--mint); color:#14251f; font:650 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
-.book-list { display:grid; gap:9px; margin-top:20px; }
-.book-row { display:grid; grid-template-columns:42px minmax(0,1fr) 36px; gap:12px; align-items:center; width:100%; min-height:72px; border:1px solid var(--hairline); border-radius:16px; padding:10px 12px; background:var(--card-bg); color:var(--text); text-align:left; cursor:pointer; }
-.book-icon { display:grid; place-items:center; width:40px; height:48px; border-radius:8px 11px 11px 8px; background:var(--tile-surface); color:var(--mint); font:600 17px/1 Georgia,serif; box-shadow:inset 3px 0 color-mix(in srgb,var(--mint) 40%,transparent); }
+.primary-action { min-height:56px; border:0; border-radius:17px; padding:0 20px; background:var(--bibliothek-primary); color:var(--bibliothek-primary-text); font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; box-shadow:var(--lift-shadow); cursor:pointer; transition:transform .12s ease,filter .12s ease; }
+.primary-action:active,.dictionary-add:active { transform:scale(.98); filter:brightness(.96); }
+.book-list { display:grid; gap:0; margin-top:20px; }
+.book-row { display:flex; gap:8px; align-items:center; width:100%; min-height:76px; border:0; border-bottom:1px solid var(--hairline); padding:14px 1px; background:transparent; }
+.book-row:last-child { border-bottom:0; }
+.book-open { display:grid; grid-template-columns:42px minmax(0,1fr) 20px; gap:12px; align-items:center; flex:1; min-width:0; min-height:50px; border:0; padding:0; background:transparent; color:var(--text); text-align:left; font:inherit; cursor:pointer; }
+.book-delete { position:relative; display:grid; place-items:center; flex:none; width:44px; height:44px; border:0; padding:0; background:transparent; color:var(--muted); cursor:pointer; }
+.book-delete svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.book-open:focus-visible,.book-delete:focus-visible,.book-cancel:focus-visible,.book-delete-confirm:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+.book-confirm { position:fixed; inset:0; z-index:30; display:grid; place-items:center; padding:24px; background:var(--confirm-scrim); }
+.book-confirm-card { width:min(100%,360px); border:1px solid var(--window-line); border-radius:20px; padding:22px; background:var(--window-card); box-shadow:0 12px 36px rgba(0,0,0,.22); }
+.book-confirm-card h2 { margin:0; color:var(--text); font-size:19px; line-height:1.25; overflow-wrap:anywhere; }
+.book-confirm-card p { margin:8px 0 18px; color:var(--muted); font-size:14px; line-height:1.45; }
+.book-confirm-actions { display:flex; justify-content:flex-end; align-items:center; gap:16px; }
+.book-cancel { min-height:48px; border:0; padding:0 8px; background:transparent; color:var(--muted); font:500 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
+.book-delete-confirm { min-height:44px; border:0; border-radius:999px; padding:0 17px; background:var(--error); color:#242426; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
+.book-confirm-actions button:disabled { opacity:.5; cursor:wait; }
+.book-icon { position:relative; display:grid; place-items:center; width:40px; height:48px; border-radius:5px; padding-left:3px; background:var(--tile-surface); color:var(--bibliothek-primary); font:600 16px/1 Georgia,serif; box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 2px 4px rgba(0,0,0,.12); }
+.book-icon::before { content:""; position:absolute; top:0; bottom:0; left:0; width:5px; border-radius:5px 0 0 5px; background:var(--hairline); }
+.book-icon.is-started::after { content:""; position:absolute; top:0; right:5px; width:7px; height:12px; background:var(--mint); clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%); }
+.book-icon.is-completed::after { background:var(--secondary-text); }
+[data-theme="light"] .book-icon { box-shadow:var(--lift-shadow); }
 .book-meta { min-width:0; }
 .book-title { display:block; overflow:hidden; color:var(--text); font-size:15px; line-height:1.25; font-weight:650; text-overflow:ellipsis; white-space:nowrap; }
 .book-subtitle { display:block; margin-top:4px; color:var(--muted); font-size:12px; }
@@ -28,35 +57,45 @@
 .empty-mark { display:grid; place-items:center; width:66px; height:66px; margin-bottom:16px; border:1px solid var(--hairline); border-radius:19px; color:var(--mint); font:28px/1 Georgia,serif; }
 .empty-library h2 { margin:0; color:var(--text); font-size:19px; }
 .empty-library p { max-width:300px; margin:8px 0 18px; color:var(--muted); font-size:14px; line-height:1.45; }
+.reader-status:empty { display:none; }
 .reader-status { min-height:18px; margin:8px 0 0; color:var(--muted); font-size:13px; }
-.reading-toolbar { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; align-items:center; min-height:55px; background:var(--bg); }
-.toolbar-back { min-height:44px; padding:0 8px 0 0; color:var(--mint); font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
-.reading-progress { color:var(--muted); font-size:12px; }
+.reading-toolbar { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:55px; background:var(--bg); }
+.toolbar-back { display:flex; align-items:center; gap:8px; flex:1; min-width:0; min-height:44px; padding:0; color:var(--secondary-text); text-align:left; font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
+.toolbar-arrow { flex:none; font:400 30px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
+.toolbar-title { display:block; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.book-headline { margin:24px 0 0; color:var(--text); font-size:25px; line-height:1.25; font-weight:700; letter-spacing:-.5px; overflow-wrap:anywhere; }
+.reading-progress { flex:none; white-space:nowrap; color:var(--muted); font-size:12px; }
 .reading-text { padding:17px 0 45vh; color:var(--text); font:400 clamp(18px,4.8vw,21px)/1.82 Georgia,"Times New Roman",serif; letter-spacing:.005em; overflow-wrap:anywhere; }
 .reading-text p { margin:0 0 1.15em; }
 .reading-word { border-radius:2px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .reading-word:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
-.reader-toast { position:fixed; z-index:12; left:50%; bottom:calc(env(safe-area-inset-bottom) + 25px); transform:translateX(-50%); max-width:min(90vw,440px); padding:11px 16px; border:1px solid var(--hairline); border-radius:999px; background:var(--window-card); color:var(--text); font-size:13px; box-shadow:var(--lift-shadow); }
+.reader-toast { position:fixed; z-index:12; left:50%; bottom:calc(env(safe-area-inset-bottom) + 80px); transform:translateX(-50%); max-width:min(90vw,440px); padding:11px 16px; border:1px solid var(--hairline); border-radius:999px; background:var(--window-card); color:var(--text); font-size:13px; box-shadow:var(--lift-shadow); }
 .toast-action { display:inline-block; margin-left:10px; color:var(--mint); font-weight:650; text-decoration:none; white-space:nowrap; }
-.word-popover { position:fixed; z-index:20; left:50%; bottom:calc(env(safe-area-inset-bottom) + 20px); transform:translateX(-50%); width:min(440px,calc(100vw - 28px)); padding:21px 22px 17px; border:1px solid var(--window-line); border-radius:22px; background:var(--window-card); color:var(--text); box-shadow:0 12px 45px rgba(0,0,0,.24); animation:reader-pop .16s ease-out; }
+.word-popover { position:fixed; z-index:20; top:12px; left:12px; width:min(320px,calc(100vw - 24px)); padding:17px 18px 14px; border:1px solid var(--window-line); border-radius:20px; background:var(--window-card); color:var(--text); box-shadow:0 12px 38px rgba(0,0,0,.22); animation:reader-pop .14s ease-out; }
 .popover-close,.sheet-close { position:absolute; top:10px; right:12px; width:38px; height:38px; color:var(--muted); font-size:28px; line-height:1; }
 .popover-word { margin:1px 38px 5px 0; color:var(--text); font-size:21px; line-height:1.2; font-weight:700; }
 .popover-translation { margin:0 0 15px; color:var(--secondary-text); font-size:16px; line-height:1.4; }
-.popover-more { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:42px; border:0; border-top:1px solid var(--hairline); padding:10px 0 0; background:transparent; color:var(--mint); text-align:left; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
+.popover-more { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:42px; border:0; border-top:1px solid var(--hairline); padding:10px 0 0; background:transparent; color:var(--text); text-align:left; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
 .popover-more span { font-size:22px; }
 .dictionary-sheet { position:fixed; z-index:25; inset:0; display:flex; align-items:flex-end; justify-content:center; }
 .sheet-scrim { position:absolute; inset:0; border:0; background:var(--confirm-scrim); cursor:pointer; }
 .sheet-card { position:relative; width:min(100%,620px); max-height:min(82dvh,760px); overflow:auto; padding:12px 24px calc(env(safe-area-inset-bottom) + 28px); border:1px solid var(--window-line); border-bottom:0; border-radius:24px 24px 0 0; background:var(--window-card); color:var(--text); box-shadow:0 -10px 40px rgba(0,0,0,.15); animation:reader-sheet .2s ease-out; }
-.sheet-grabber { width:38px; height:4px; margin:0 auto 18px; border-radius:9px; background:var(--muted); opacity:.45; }
 .sheet-close { position:sticky; float:right; top:0; margin-top:-8px; margin-right:-13px; }
 .dictionary-headword { margin:0 44px 5px 0; color:var(--text); font-size:25px; line-height:1.2; }
 .dictionary-pos { margin:0 0 13px; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
 .dictionary-translation { margin:0 0 15px; color:var(--secondary-text); font-size:18px; line-height:1.4; }
 .dictionary-detail { margin:0 0 10px; color:var(--secondary-text); font-size:14px; line-height:1.5; }
+.dictionary-pronoun-forms { margin:16px 0; min-width:0; }
+.dictionary-pronoun-forms h3 { margin:0 0 8px; color:var(--muted); font-size:13px; }
+.dictionary-table { width:100%; border-collapse:collapse; text-align:left; font-size:13px; }
+.dictionary-table th,.dictionary-table td { padding:8px 7px; border-bottom:1px solid var(--hairline); white-space:nowrap; vertical-align:top; }
+.dictionary-table thead th { color:var(--muted); font-size:11px; }
 .dictionary-example { margin:15px 0; padding:13px 15px; border-radius:14px; background:var(--card-bg); color:var(--secondary-text); font:16px/1.5 Georgia,"Times New Roman",serif; }
 .dictionary-example-translation { display:block; margin-top:6px; color:var(--muted); font:13px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif; }
-.dictionary-add { width:100%; min-height:48px; margin-top:6px; border:0; border-radius:14px; background:var(--mint); color:#14251f; font:650 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
-@keyframes reader-pop { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
+.dictionary-add { width:100%; min-height:56px; margin-top:6px; border:0; border-radius:17px; background:var(--bibliothek-primary); color:var(--bibliothek-primary-text); font:650 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; box-shadow:var(--lift-shadow); cursor:pointer; transition:transform .12s ease,filter .12s ease; }
+@keyframes reader-pop { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 @keyframes reader-sheet { from { transform:translateY(40px); opacity:.8; } to { transform:translateY(0); opacity:1; } }
-@media (min-width:700px) { .word-popover { bottom:35px; } .sheet-card { margin-bottom:20px; border-bottom:1px solid var(--window-line); border-radius:24px; } }
+@media (min-width:700px) { .sheet-card { margin-bottom:20px; border-bottom:1px solid var(--window-line); border-radius:24px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; } }
+
+@media (min-width:700px) { .intro-break { display:none; } }
