@@ -1657,10 +1657,17 @@ header h1 {
   transform-origin: center center;
   will-change: transform, opacity, color;
 }
-/* version mark = the rule's version mark (11px, white 24% / text 34%) */
+/* version mark = the rule's version mark (11px, white 24% / text 34%).
+   Since Home 5.121 a button: opens the Versions window (all pages' version numbers) */
 .settings-version {
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
   margin-top: 42px;
   margin-bottom: 26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--version-mark);
   font:
     400 11px/1.2 -apple-system,
@@ -1669,6 +1676,53 @@ header h1 {
     "Helvetica Neue",
     sans-serif;
   text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform-origin: left center;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.settings-version:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+/* Versions window (Settings → version line, Home 5.121): the Home tiles in order, chapters with their exercises */
+.versions-list {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+.versions-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  color: var(--muted);
+  font:
+    400 15px/1.3 -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+}
+.versions-list li.is-main {
+  color: var(--text);
+  font-weight: 600;
+}
+.versions-list li.is-main + li.is-main,
+.versions-list li.is-sub + li.is-main {
+  margin-top: 6px;
+}
+.versions-list li.is-sub {
+  padding-left: 16px;
+}
+.versions-list .versions-number {
+  flex: none;
+  color: var(--muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ===== Windows: About, Keep your progress, "Are you sure?" =====
@@ -2711,7 +2765,8 @@ html.home-wide-layout body {
   .settings-confirm-button,
   .about-window,
   .about-window.open,
-  .about-card {
+  .about-card,
+  .settings-version {
     transition: none;
   }
 }

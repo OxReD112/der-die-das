@@ -1152,6 +1152,11 @@ const DEUTSCH_BACKUP_VERSION = 1;
    "Last backup …" note in Settings. Per device, so NOT part of the backup. */
 const DEUTSCH_LAST_BACKUP_KEY = "deutschLastBackupV1";
 const BACKUP_MODULES = {
+  notebook: {
+    label: "Notizbuch",
+    storageKey: "deutschNotebookV1",
+    storageVersion: "deutschNotebookV1"
+  },
   wortschatz: {
     label: "Wortschatz",
     storageKey: "wortsternSRSv03",
@@ -1931,6 +1936,144 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
+  win.addEventListener("click", e => {
+    if (e.target === win) close();
+  });
+  document.addEventListener(
+    "keydown",
+    e => {
+      if (e.key === "Escape" && win.classList.contains("open")) {
+        e.stopPropagation();
+        close();
+      }
+    },
+    true
+  );
+})();
+/* ===== VERSIONS window (Settings → „Deutsch. version …“, Home 5.121) =====
+   The pages no longer show their version number (it's transparent there, see each page's .version-mark).
+   Each page stays the only place its number is written: this window opens every page's index.html in the
+   background (no-store: always the live file), reads its .version-mark and lists them in the order of the Home
+   tiles, chapters with their exercises. Home's own number comes from the Settings line itself.
+   New exercise → add it to PAGES (same path as its Home tile / chapter card). A page that can't be read
+   (offline, error) shows „–“. Copy puts the whole list on the clipboard, e.g. for a friend reporting a problem. */
+(function () {
+  const PAGES = [
+    { name: "Wortschatz", path: "wortschatz/" },
+    { name: "Artikel", path: "artikel/" },
+    {
+      name: "Verbformen",
+      path: "verbformen/",
+      sub: [
+        { name: "Partizip II", path: "verbformen/partizipII/" },
+        { name: "Modalverben", path: "verbformen/modalverben/" },
+        { name: "Vielseitige Verben", path: "verbformen/vielseitige_verben/" }
+      ]
+    },
+    { name: "Pronomen", path: "pronomen/" },
+    {
+      name: "Präpositionen",
+      path: "praepositionen/",
+      sub: [
+        { name: "Fester Kasus", path: "praepositionen/kasus/" },
+        { name: "Verben mit Präpositionen", path: "praepositionen/verben_mit_praepositionen/" },
+        { name: "Ortspräpositionen", path: "praepositionen/ortspraepositionen/" }
+      ]
+    }
+  ];
+  const win = document.getElementById("versionsWindow"),
+    openBtn = document.getElementById("versionsOpen"),
+    closeBtn = document.getElementById("versionsClose"),
+    list = document.getElementById("versionsList"),
+    copyBtn = document.getElementById("versionsCopy");
+  if (!win || !openBtn || !list) return;
+  let rows = []; // [{ name, level: "main" | "sub", el }] in list order — also the Copy text
+  let copyTimer = 0;
+
+  function homeVersion() {
+    const m = openBtn.textContent.match(/version\s+([\d.]+)/);
+    return m ? m[1] : "–";
+  }
+  async function readVersion(path) {
+    const r = await fetch(new URL(path + "index.html", location.href), { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+    const mark = doc.querySelector(".version-mark");
+    const v = mark && mark.textContent.trim();
+    if (!v) throw new Error("no version mark");
+    return v;
+  }
+  function addRow(name, level, number) {
+    const li = document.createElement("li");
+    li.className = "is-" + level;
+    const label = document.createElement("span");
+    label.textContent = name;
+    const num = document.createElement("span");
+    num.className = "versions-number";
+    num.textContent = number;
+    li.append(label, num);
+    list.appendChild(li);
+    rows.push({ name, level, el: num });
+    return num;
+  }
+  function fill() {
+    list.textContent = "";
+    rows = [];
+    addRow("Deutsch.", "main", homeVersion());
+    const all = [];
+    PAGES.forEach(page => {
+      all.push([page, "main"]);
+      (page.sub || []).forEach(sub => all.push([sub, "sub"]));
+    });
+    all.forEach(([page, level]) => {
+      const num = addRow(page.name, level, "…");
+      readVersion(page.path).then(
+        v => (num.textContent = v),
+        () => (num.textContent = "–")
+      );
+    });
+  }
+  function copyText() {
+    return rows.map(r => (r.level === "sub" ? "  " : "") + r.name + " " + r.el.textContent).join("\n");
+  }
+  function copied(ok) {
+    copyBtn.textContent = ok ? "✓ Copied" : "Copy failed";
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => (copyBtn.textContent = "Copy"), 1600);
+  }
+  function copy() {
+    const text = copyText();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => copied(true), () => copied(fallbackCopy(text)));
+    } else copied(fallbackCopy(text));
+  }
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch (e) {}
+    ta.remove();
+    return ok;
+  }
+  function open() {
+    fill();
+    copyBtn.textContent = "Copy";
+    win.classList.add("open");
+    win.setAttribute("aria-hidden", "false");
+  }
+  function close() {
+    win.classList.remove("open");
+    win.setAttribute("aria-hidden", "true");
+  }
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  if (copyBtn) copyBtn.addEventListener("click", copy);
   win.addEventListener("click", e => {
     if (e.target === win) close();
   });
