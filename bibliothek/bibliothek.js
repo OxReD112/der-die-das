@@ -5,7 +5,7 @@
   const STORE = "books";
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
-  let dbPromise, currentBook = null, selectedEntry = null, longPressTimer = null, toastTimer = null, restoringPosition = false;
+  let dbPromise, currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
@@ -17,8 +17,8 @@
     const intro = $("reader-intro");
     intro.lang = lang;
     const sentences = lang === "ru"
-      ? ["Читайте в своём темпе.", "Нажмите и удерживайте слово, чтобы узнать его значение."]
-      : ["Read at your own pace.", "Long-press a word to see its meaning."];
+      ? ["Читайте в своём темпе.", "Нажмите на слово, чтобы узнать его значение."]
+      : ["Read at your own pace.", "Tap a word to see its meaning."];
     const sentenceBreak = document.createElement("span");
     sentenceBreak.className = "intro-break";
     sentenceBreak.append(document.createElement("br"));
@@ -215,7 +215,7 @@
         span.textContent = token;
         span.tabIndex = 0;
         span.setAttribute("role", "button");
-        span.setAttribute("aria-label", `${token}, long-press for translation`);
+        span.setAttribute("aria-label", `${token}, tap for translation`);
         fragment.append(span);
       } else fragment.append(document.createTextNode(token));
     });
@@ -320,14 +320,43 @@
     const stripped = [query.replace(/(e|en|n|s|er|es)$/u, ""), query.replace(/(te|test|ten|tet)$/u, "")].filter(x => x.length >= 3);
     return dictionary.filter(item => stripped.includes(norm(item.word))).slice(0, 6);
   }
+  let lookupRequest = 0;
   async function openWordPopup(word, anchor) {
+    const request = ++lookupRequest;
     try { await loadDictionary(); }
     catch (error) { showToast("The Wörterbuch could not be loaded."); return; }
+    if (request !== lookupRequest) return;
     const results = findEntry(word);
     selectedEntry = results[0] || null;
     $("popover-word").textContent = results.length ? results.map(item => `${item.article ? item.article + " " : ""}${item.word}`).join(" · ") : word;
     $("popover-translation").textContent = results.length ? results.map(translation).filter(Boolean).join(" · ") : "Not in Wörterbuch yet";
     $("popover-more").hidden = !results.length;
+    $("popover-source").hidden = true;
+    if (!results.length) {
+      $popover.hidden = true;
+      try {
+        const groups = await window.DeutschFallbackDictionary.lookup(word);
+        if (request !== lookupRequest) return;
+        const content = $("popover-translation");
+        content.replaceChildren();
+        if (!groups.length) content.textContent = "No dictionary meaning found.";
+        groups.forEach(group => {
+          const section = document.createElement("span");
+          section.className = "fallback-meaning-group";
+          if (groups.length > 1 || norm(group.word) !== norm(word)) {
+            const label = document.createElement("strong");
+            label.textContent = group.word;
+            section.append(label, document.createElement("br"));
+          }
+          section.append(document.createTextNode(group.meanings.join("; ")));
+          content.append(section);
+        });
+        $("popover-source").hidden = !groups.length;
+      } catch (error) {
+        if (request !== lookupRequest) return;
+        $("popover-translation").textContent = "The fallback dictionary could not be loaded. Please try again.";
+      }
+    }
     $popover.hidden = false;
     if (anchor) {
       const box = $popover.getBoundingClientRect();
@@ -427,7 +456,7 @@
     } catch (error) { showToast("Could not add this word. Please check your Wortschatz collection."); }
   }
   let selectedWord = "";
-  function closePopups() { $popover.hidden = true; $sheet.hidden = true; }
+  function closePopups() { lookupRequest++; $popover.hidden = true; $sheet.hidden = true; }
   function chooseWord(span) {
     if (!span || !span.isConnected) return;
     selectedWord = span.textContent;
@@ -474,18 +503,18 @@
     currentBook = null; $reading.hidden = true; $library.hidden = false; $("library-actions").hidden = false; document.body.classList.add("library-screen"); $("reader").querySelector(".reader-header").hidden = false; window.scrollTo({ top:0, behavior:"instant" }); document.title = "Bibliothek · Deutsch.";
     refreshBooks();
   });
-  $text.addEventListener("pointerdown", event => {
-    const span = event.target.closest(".reading-word");
-    if (!span || event.pointerType === "mouse") return;
-    clearTimeout(longPressTimer);
-    const x = event.clientX, y = event.clientY;
-    longPressTimer = setTimeout(() => { chooseWord(span); longPressTimer = null; }, 430);
-    const cancel = move => { if (Math.hypot(move.clientX - x, move.clientY - y) > 11) { clearTimeout(longPressTimer); longPressTimer = null; cleanup(); } };
-    const up = () => { clearTimeout(longPressTimer); longPressTimer = null; cleanup(); };
-    const cleanup = () => { window.removeEventListener("pointermove", cancel); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
-    window.addEventListener("pointermove", cancel, { passive:true }); window.addEventListener("pointerup", up, { once:true }); window.addEventListener("pointercancel", up, { once:true });
-  });
-  $text.addEventListener("click", event => { const span = event.target.closest(".reading-word"); if (span && event.pointerType === "mouse") chooseWord(span); });
+  let lastPointerType = "mouse";
+  document.addEventListener("pointerdown", event => { lastPointerType = event.pointerType; }, true);
+  // Capture the dismissal tap before word and navigation click handlers run.
+  // Older Safari click events omit pointerType, so use the preceding pointerdown.
+  document.addEventListener("click", event => {
+    const pointerType = event.pointerType || lastPointerType;
+    if (event.detail === 0 || pointerType === "mouse" || $popover.hidden || sourcesDialog.open || event.target.closest("#word-popover")) return;
+    closePopups();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+  $text.addEventListener("click", event => { const span = event.target.closest(".reading-word"); if (span) chooseWord(span); });
   $text.addEventListener("keydown", event => { if ((event.key === "Enter" || event.key === " ") && event.target.matches(".reading-word")) { event.preventDefault(); chooseWord(event.target); } });
   function updateBookmarkStatus(book, paragraph) {
     const paragraphs = [...$text.querySelectorAll("p")];
@@ -516,12 +545,19 @@
       window.__readingSaveTimer = setTimeout(() => updateProgress(book, visible), 700);
     }
   }, { passive:true });
-  $("popover-close").addEventListener("click", () => $popover.hidden = true);
+  $("popover-close").addEventListener("click", closePopups);
+  const sourcesDialog = $("data-sources");
+  $("popover-source").addEventListener("click", () => sourcesDialog.showModal());
+  $("sources-close").addEventListener("click", () => sourcesDialog.close());
+  sourcesDialog.addEventListener("click", event => {
+    const bounds = sourcesDialog.getBoundingClientRect();
+    if (event.target === sourcesDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) sourcesDialog.close();
+  });
   $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryCard(selectedEntry); $popover.hidden = true; $sheet.hidden = false; });
   $("sheet-close").addEventListener("click", () => $sheet.hidden = true);
   $("sheet-scrim").addEventListener("click", () => $sheet.hidden = true);
-  document.addEventListener("pointerdown", event => { if (!$popover.hidden && !event.target.closest("#word-popover") && !event.target.closest(".reading-word")) $popover.hidden = true; });
-  document.addEventListener("keydown", event => { if (event.key === "Escape") closePopups(); });
+  document.addEventListener("pointerdown", event => { if (event.pointerType === "mouse" && !sourcesDialog.open && !event.target.closest("#word-popover") && !event.target.closest(".reading-word")) { lookupRequest++; $popover.hidden = true; } });
+  document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });
   loadDictionary().catch(error => console.warn("Bibliothek dictionary unavailable", error));
   refreshBooks();
 })();

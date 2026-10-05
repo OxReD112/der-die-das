@@ -71,7 +71,18 @@
 .reading-word:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
 .reader-toast { position:fixed; z-index:12; left:50%; bottom:calc(env(safe-area-inset-bottom) + 80px); transform:translateX(-50%); max-width:min(90vw,440px); padding:11px 16px; border:1px solid var(--hairline); border-radius:999px; background:var(--window-card); color:var(--text); font-size:13px; box-shadow:var(--lift-shadow); }
 .toast-action { display:inline-block; margin-left:10px; color:var(--mint); font-weight:650; text-decoration:none; white-space:nowrap; }
-.word-popover { position:fixed; z-index:20; top:12px; left:12px; width:min(320px,calc(100vw - 24px)); padding:17px 18px 14px; border:1px solid var(--window-line); border-radius:20px; background:var(--window-card); color:var(--text); box-shadow:0 12px 38px rgba(0,0,0,.22); animation:reader-pop .14s ease-out; }
+.word-popover { position:fixed; z-index:20; top:12px; left:12px; width:min(320px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); overflow-y:auto; padding:17px 18px 14px; border:1px solid var(--window-line); border-radius:20px; background:var(--window-card); color:var(--text); box-shadow:0 12px 38px rgba(0,0,0,.22); animation:reader-pop .14s ease-out; }
+.fallback-meaning-group { display:block; margin-bottom:10px; }
+.popover-source { display:block; border:0; padding:0; background:transparent; color:var(--muted); font:inherit; font-size:12px; line-height:1.4; text-align:left; text-decoration:underline; cursor:pointer; }
+.popover-source[hidden] { display:none; }
+.data-sources { box-sizing:border-box; width:min(560px,calc(100vw - 32px)); max-height:calc(100dvh - 48px); overflow-y:auto; padding:24px; border:1px solid var(--window-line); border-radius:24px; background:var(--window-card); color:var(--text); box-shadow:0 12px 38px rgba(0,0,0,.22); }
+.data-sources::backdrop { background:rgba(0,0,0,.5); }
+.data-sources h2 { margin:0 40px 22px 0; font-size:22px; line-height:1.25; }
+.data-sources h3 { margin:22px 0 10px; font-size:16px; }
+.data-sources p,.data-sources li { color:var(--secondary-text); font-size:14px; line-height:1.6; }
+.data-sources a { color:var(--text); text-underline-offset:3px; }
+.data-sources li { margin:8px 0; }
+.sources-close { float:right; width:36px; height:36px; margin:-8px -8px 0 0; border:0; background:transparent; color:var(--muted); font-size:28px; cursor:pointer; }
 .popover-close,.sheet-close { position:absolute; top:10px; right:12px; width:38px; height:38px; color:var(--muted); font-size:28px; line-height:1; }
 .popover-word { margin:1px 38px 5px 0; color:var(--text); font-size:21px; line-height:1.2; font-weight:700; }
 .popover-translation { margin:0 0 15px; color:var(--secondary-text); font-size:16px; line-height:1.4; }

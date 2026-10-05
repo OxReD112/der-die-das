@@ -15,6 +15,34 @@
   let entries = null;
   let loadPromise = null;
   let selected = null;
+  let ownWords = new Set();
+  let importedState = "idle";
+
+  function loadImported() {
+    if (importedState === "loading" || importedState === "ready") return;
+    importedState = "loading";
+    window.DeutschImportedSearch.load().then(() => {
+      importedState = "ready";
+      render();
+    }).catch(() => {
+      importedState = "error";
+      render();
+    });
+  }
+
+  function selectEntry(item) {
+    selected = item;
+    if (item.type === "imported" && !item.meanings && !item.loading) {
+      item.loading = true;
+      item.error = false;
+      window.DeutschFallbackDictionary.lookupEntry(item.word).then(meanings => {
+        item.meanings = meanings;
+      }).catch(() => { item.error = true; }).finally(() => {
+        item.loading = false;
+        if (selected === item) render();
+      });
+    }
+  }
 
   function node(tag, className, value) {
     const element = document.createElement(tag);
@@ -67,6 +95,8 @@
         ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" })),
         ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" }))
       ];
+      ownWords = new Set(entries.flatMap(item => [item.word, ...(item.search_forms || [])]).map(normalized));
+      loadImported();
       render();
       return entries;
     })
@@ -90,10 +120,41 @@
       })
       .filter(match => match.rank >= 0)
       .sort((a, b) => a.rank - b.rank || a.item.word.localeCompare(b.item.word, "de") || (a.item.type === "noun" ? -1 : 1));
-    return matches.map(match => match.item);
+    const own = matches.map(match => match.item);
+    const imported = window.DeutschImportedSearch.search(query, ownWords, 12);
+    return [...own, ...imported];
+  }
+
+  function makeImportedEntry(item) {
+    const entry = node("article", "dictionary-entry");
+    entry.append(node("h3", "dictionary-entry-headword", item.word));
+    entry.append(node("p", "dictionary-entry-note", "English meanings"));
+    if (item.loading) entry.append(node("p", "dictionary-hint", "Bedeutungen werden geladen …"));
+    else if (item.error) {
+      entry.append(node("p", "dictionary-hint", "Die Bedeutungen konnten nicht geladen werden."));
+      const retry = node("button", "dictionary-back", "Erneut versuchen");
+      retry.type = "button";
+      retry.addEventListener("click", () => { selectEntry(item); render(); });
+      entry.append(retry);
+    } else if (item.meanings?.length) {
+      const list = node("ol", "dictionary-imported-meanings");
+      item.meanings.forEach(meaning => list.append(node("li", "dictionary-entry-translation", meaning)));
+      entry.append(list);
+    } else entry.append(node("p", "dictionary-hint", "Keine englische Bedeutung vorhanden."));
+    const notice = node("details", "dictionary-imported-notice");
+    notice.append(node("summary", "dictionary-entry-note", "Wiktionary · CC BY-SA 4.0"));
+    notice.append(node("p", "dictionary-entry-note", "Dictionary data by Wiktionary contributors, extracted via Kaikki.org and packaged by Lector. The SQLite dataset was converted losslessly into partitioned JSON; entry words were extracted into a separate autocomplete index. English meanings are displayed in source order, with repeated identical meanings shown once."));
+    [["Wiktionary", "https://en.wiktionary.org/"], ["Kaikki.org", "https://kaikki.org/dictionary/German/"], ["Lector", "https://lector.dev/free/german-dictionary/"], ["CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/"], ["Data and notices", "open%20data/dictionary-de-json/NOTICE.md"]].forEach(([label, url]) => {
+      const link = node("a", "dictionary-source-link", label);
+      link.href = url; link.target = "_blank"; link.rel = "noopener";
+      notice.append(link);
+    });
+    entry.append(notice);
+    return entry;
   }
 
   function makeEntry(item) {
+    if (item.type === "imported") return makeImportedEntry(item);
     const entry = node("article", "dictionary-entry");
     entry.append(node("h3", "dictionary-entry-headword", (item.article ? item.article + " " : "") + item.word));
 
@@ -291,11 +352,11 @@
       const button = node("button", "dictionary-match");
       button.type = "button";
       button.append(node("span", "dictionary-match-word", (item.article ? item.article + " " : "") + item.word));
-      button.append(node("span", "dictionary-match-translation", translated(item.translation_ru, item.translation_en)));
+      button.append(node("span", "dictionary-match-translation", (item.type === "imported" ? "Wiktionary · EN" : translated(item.translation_ru, item.translation_en))));
       button.addEventListener("click", event => {
         event.preventDefault();
         input.blur();
-        selected = item;
+        selectEntry(item);
         render();
       });
       list.append(button);
@@ -315,7 +376,7 @@
     }
     if (selected) {
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
+      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || (selected.type === "imported" ? "Wiktionary · EN" : "");
       results.replaceChildren(makeEntry(selected));
       return;
     }
@@ -333,14 +394,21 @@
     const matches = findMatches(query);
     const exact = matches.filter(item => isExactMatch(item, query));
     if (exact.length === 1) {
-      selected = exact[0];
+      selectEntry(exact[0]);
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
+      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || (selected.type === "imported" ? "Wiktionary · EN" : "");
       results.replaceChildren(makeEntry(selected));
     } else if (matches.length) {
       showMatches(matches);
     } else {
       results.replaceChildren(node("p", "dictionary-hint", "Kein Wort gefunden."));
+    }
+    if (importedState === "loading") results.append(node("p", "dictionary-hint", "Weitere Wörter werden geladen …"));
+    if (importedState === "error") {
+      const retry = node("button", "dictionary-back", "Weitere Wörter laden · Erneut versuchen");
+      retry.type = "button";
+      retry.addEventListener("click", () => { loadImported(); render(); });
+      results.append(retry);
     }
   }
 
@@ -371,11 +439,11 @@
     event.preventDefault();
     const matches = findMatches(input.value);
     const exact = matches.filter(item => isExactMatch(item, input.value));
-    if (exact.length === 1) selected = exact[0];
-    else if (matches.length === 1) selected = matches[0];
+    if (exact.length === 1) selectEntry(exact[0]);
+    else if (matches.length === 1) selectEntry(matches[0]);
     render();
   });
   document.addEventListener("deutsch:translationlang", render);
-  open.addEventListener("click", loadDatabase);
+  open.addEventListener("click", () => { loadDatabase(); loadImported(); });
   render();
 })();
