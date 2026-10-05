@@ -10,10 +10,10 @@
   function openNotebook() {
     if (opened) return;
     opened = true;
-    root.classList.add("home-notebook-open");
     layer.setAttribute("aria-hidden", "false");
     openButton.setAttribute("aria-expanded", "true");
-    requestAnimationFrame(() => panel.classList.add("is-open"));
+    // Home steps back (home.css .home-notebook-open .home-screen) in the same frame the panel starts sliding — like Settings.
+    requestAnimationFrame(() => { root.classList.add("home-notebook-open"); panel.classList.add("is-open"); });
     frame.contentWindow?.postMessage({ type:"deutsch-notebook-open", theme:currentTheme(), lang:localStorage.getItem("deutschTranslationLangV1") || "en" }, location.origin);
   }
   function closeNotebook() {
