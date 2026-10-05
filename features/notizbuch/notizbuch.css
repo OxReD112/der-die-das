@@ -33,15 +33,8 @@
 .nb-primary:active { transform:scale(.98); }
 .nb-status { position:absolute; top:calc(100% + 10px); left:50%; z-index:4; width:max-content; max-width:calc(100vw - 48px); transform:translateX(-50%); border:1px solid var(--hairline); border-radius:999px; padding:8px 15px; background:var(--tile-surface); color:var(--text); box-shadow:0 5px 18px rgba(0,0,0,.14); text-align:center; font-size:13px; line-height:1.25; pointer-events:none; }
 .nb-screen { padding:10px 1px 24px; }
-.nb-detail-topic { color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
-.nb-detail-title { margin:6px 0 0; color:var(--text); font-size:26px; line-height:1.18; letter-spacing:-.45px; }
-.nb-detail-sub { margin:5px 0 0; color:var(--muted); font-size:15px; line-height:1.4; }
-.nb-detail-body { margin-top:22px; border-top:1px solid var(--hairline); padding-top:17px; color:var(--secondary-text); font-size:16px; line-height:1.6; white-space:pre-wrap; }
-.nb-detail-actions { display:flex; gap:12px; margin-top:18px; }
 .nb-icon-action { display:grid; place-items:center; width:46px; height:46px; border:0; border-radius:50%; background:var(--tile-surface); color:var(--text); cursor:pointer; }
 .nb-icon-action svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-.nb-header-back { position:absolute; left:0; display:inline-flex; align-items:center; min-height:40px; border:0; padding:4px 0; background:transparent; color:var(--muted); font:500 15px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-#notebook[data-screen="edit"] .nb-title-row h1 { max-width:calc(100% - 160px); }
 /* Edit screen heading row (Notizbuch v18): "Neue Notiz" left, grey round save tick right; pinned while the fields scroll under it */
 #notebook[data-screen="edit"] .nb-scroll { padding-top:0; }
 #edit-screen { padding-top:0; }
@@ -74,7 +67,7 @@
 #notebook[data-screen="detail"] #list-content,#notebook[data-screen="edit"] #list-content { display:none !important; }
 #notebook[data-screen="detail"] .nb-tabs,#notebook[data-screen="edit"] .nb-tabs { display:none !important; }
 #notebook[data-screen="detail"] #list-toolbar,#notebook[data-screen="edit"] #list-toolbar { display:none !important; }
-.nb-search-toggle:focus-visible,.nb-header-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-chip:focus-visible,.nb-topic-tools .nb-icon-action:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+.nb-search-toggle:focus-visible,.nb-detail-back:focus-visible,.nb-save-tick:focus-visible,.nb-close:focus-visible,.nb-search-close:focus-visible,.nb-chip:focus-visible,.nb-topic-tools .nb-icon-action:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
 
 /* Topic pills (Notizbuch v18) */
 .nb-topic-field { padding-bottom:13px; }
@@ -109,3 +102,24 @@ button.nb-topic-title { align-items:center; }
 .nb-topic-head.is-renaming #delete-topic { display:none; }
 .nb-delete-confirm.is-neutral { background:var(--mint); }
 .nb-topic-title:focus-visible { outline:2px solid var(--mint); outline-offset:3px; border-radius:8px; }
+
+/* Note screen heading (Notizbuch v21): "‹" back + topic / title / Kurzzeile pinned above the separator line; only the
+   note text (and the pencil + trash under it, now on the right) scrolls. Title 22px like "Notizbuch". */
+#notebook[data-screen="detail"] .nb-scroll { padding-top:0; }
+#detail-screen { padding-top:0; }
+.nb-detail-head { position:sticky; top:0; z-index:1; display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:8px; padding:19px 0 13px; border-bottom:1px solid var(--hairline); background:var(--bg); }
+.nb-detail-head::after { content:""; position:absolute; left:0; right:0; top:calc(100% + 1px); height:14px; background:linear-gradient(to bottom,var(--bg),color-mix(in srgb,var(--bg) 0%,transparent)); pointer-events:none; }
+.nb-detail-topic { grid-column:2; grid-row:1; margin-bottom:4px; color:var(--muted); font-size:12px; line-height:1.2; letter-spacing:.08em; text-transform:uppercase; }
+.nb-detail-topic:empty { display:none; }
+.nb-detail-back { position:relative; grid-column:1; grid-row:2; align-self:start; display:flex; align-items:center; height:26px; border:0; padding:0; background:transparent; color:var(--text); font:400 26px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.nb-detail-back span { transform:translateY(-1px); }
+.nb-detail-back::before { content:""; position:absolute; left:-10px; right:-10px; top:-9px; bottom:-9px; } /* 44px tap area */
+.nb-detail-title { grid-column:2; grid-row:2; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; margin:0; color:var(--text); font-size:22px; line-height:1.18; font-weight:700; letter-spacing:-.45px; overflow-wrap:anywhere; }
+.nb-detail-sub { grid-column:2; grid-row:3; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; margin:5px 0 0; color:var(--muted); font-size:15px; line-height:1.4; }
+.nb-detail-sub[hidden] { display:none !important; }
+.nb-detail-body { padding-top:17px; color:var(--secondary-text); font-size:16px; line-height:1.6; white-space:pre-wrap; overflow-wrap:anywhere; }
+.nb-detail-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:18px; }
+
+/* Edit screen (Notizbuch v21): grey round × left of the save tick replaces "< Zurück" — same as Zurück: back without saving */
+.nb-form-buttons { flex:0 0 auto; display:flex; gap:10px; }
+.nb-save-tick.nb-cancel-x { color:var(--muted); }

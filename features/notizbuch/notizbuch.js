@@ -6,7 +6,6 @@
   const EMBEDDED = new URLSearchParams(location.search).has("embedded") && parent !== window; // inside Home: Home shows the delete window
   const els = {
     list: $("list-content"), status: $("status"), searchBox: $("search-box"), search: $("search-input"),
-    headerBack: $("header-back"),
     tabs: [...document.querySelectorAll(".nb-tab")], detail: $("detail-screen"), edit: $("edit-screen"),
     form: $("note-form"), title: $("entry-title"), sub: $("entry-subline"), body: $("entry-body"), category: $("category-select"),
     chips: $("topic-chips"), listToolbar: $("list-toolbar"), scroll: $("notebook-scroll"),
@@ -51,7 +50,6 @@
     els.detail.hidden = screen !== "detail"; els.edit.hidden = screen !== "edit";
     document.querySelector(".nb-tabs").hidden = !list;
     $("search-toggle").hidden = !list || searchOpen;
-    els.headerBack.hidden = list;
     els.searchBox.hidden = !list || !searchOpen;
     els.list.hidden = !list; els.listToolbar.hidden = !list;
     els.scroll.scrollTop = 0;
@@ -223,7 +221,7 @@
     setScreen("edit", "forward");
   }
   function goBack() {
-    if (!els.detail.hidden) { setScreen("list", "back"); renderList(); }
+    if (!els.detail.hidden) { openedId = null; setScreen("list", "back"); renderList(); } // forget the note, so "＋ Neue Notiz" → × returns to the list
     else if (!els.edit.hidden) { setScreen(openedId ? "detail" : "list", "back"); if (!openedId) renderList(); }
     else closeNotebook();
   }
@@ -254,7 +252,8 @@
   els.search.addEventListener("input", () => { query = els.search.value.trim(); selectedTopic = ""; renderList(); });
   $("create-note").addEventListener("click", () => openEditor());
   $("close-notebook").addEventListener("click", closeNotebook);
-  els.headerBack.addEventListener("click", goBack);
+  $("detail-back").addEventListener("click", goBack);
+  $("cancel-edit").addEventListener("click", goBack);
   function closeDeleteConfirm() { pendingDeleteId = null; pendingTopic = null; pendingMerge = null; $("delete-confirm").hidden = true; }
   function confirmDelete() {
     if (pendingMerge) { const { from, to } = pendingMerge; closeDeleteConfirm(); renameTopic(from, to, true); }
