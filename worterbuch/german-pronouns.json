@@ -1,0 +1,2651 @@
+[
+  {
+    "id": "pronoun-001",
+    "word": "ich",
+    "translation_ru": "я",
+    "translation_en": "I",
+    "example_de": "Ich wohne in Berlin.",
+    "example_ru": "Я живу в Берлине.",
+    "example_en": "I live in Berlin.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ich"
+          ],
+          "Akkusativ": [
+            "mich"
+          ],
+          "Dativ": [
+            "mir"
+          ],
+          "Genitiv": [
+            "meiner"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "ich",
+      "mich",
+      "mir",
+      "meiner"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ich"
+  },
+  {
+    "id": "pronoun-002",
+    "word": "du",
+    "translation_ru": "ты",
+    "translation_en": "you (informal, singular)",
+    "example_de": "Du kannst mir helfen.",
+    "example_ru": "Ты можешь мне помочь.",
+    "example_en": "You can help me.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "du"
+          ],
+          "Akkusativ": [
+            "dich"
+          ],
+          "Dativ": [
+            "dir"
+          ],
+          "Genitiv": [
+            "deiner"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Dich и dir также употребляются возвратно: Du wäschst dich. Du wäschst dir die Hände.",
+    "usage_note_en": "Dich and dir are also used reflexively: Du wäschst dich. Du wäschst dir die Hände.",
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "du",
+      "dich",
+      "dir",
+      "deiner"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/du"
+  },
+  {
+    "id": "pronoun-003",
+    "word": "er",
+    "translation_ru": "он",
+    "translation_en": "he; it (for a masculine noun)",
+    "example_de": "Mein Bruder ist hier. Er wartet draußen.",
+    "example_ru": "Мой брат здесь. Он ждёт снаружи.",
+    "example_en": "My brother is here. He is waiting outside.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "er"
+          ],
+          "Akkusativ": [
+            "ihn"
+          ],
+          "Dativ": [
+            "ihm"
+          ],
+          "Genitiv": [
+            "seiner"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "er",
+      "ihn",
+      "ihm",
+      "seiner"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/er"
+  },
+  {
+    "id": "pronoun-004",
+    "word": "sie",
+    "translation_ru": "она",
+    "translation_en": "she; it (for a feminine noun)",
+    "example_de": "Anna ist müde. Sie geht ins Bett.",
+    "example_ru": "Анна устала. Она идёт спать.",
+    "example_en": "Anna is tired. She is going to bed.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "sie"
+          ],
+          "Akkusativ": [
+            "sie"
+          ],
+          "Dativ": [
+            "ihr"
+          ],
+          "Genitiv": [
+            "ihrer"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "sie",
+      "ihr",
+      "ihrer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sie"
+  },
+  {
+    "id": "pronoun-005",
+    "word": "es",
+    "translation_ru": "оно",
+    "translation_en": "it (for a neuter noun)",
+    "example_de": "Das Handy ist neu. Es funktioniert gut.",
+    "example_ru": "Телефон новый. Он хорошо работает.",
+    "example_en": "The phone is new. It works well.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "es"
+          ],
+          "Akkusativ": [
+            "es"
+          ],
+          "Dativ": [
+            "ihm"
+          ],
+          "Genitiv": [
+            "seiner"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "es",
+      "ihm",
+      "seiner"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/es_das_man"
+  },
+  {
+    "id": "pronoun-006",
+    "word": "wir",
+    "translation_ru": "мы",
+    "translation_en": "we",
+    "example_de": "Wir fahren morgen nach Hamburg.",
+    "example_ru": "Мы завтра едем в Гамбург.",
+    "example_en": "We are going to Hamburg tomorrow.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "wir"
+          ],
+          "Akkusativ": [
+            "uns"
+          ],
+          "Dativ": [
+            "uns"
+          ],
+          "Genitiv": [
+            "unser"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "wir",
+      "uns",
+      "unser"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wir"
+  },
+  {
+    "id": "pronoun-007",
+    "word": "ihr",
+    "translation_ru": "вы (к нескольким людям на «ты»)",
+    "translation_en": "you (informal, plural)",
+    "example_de": "Kommt ihr morgen auch?",
+    "example_ru": "Вы завтра тоже придёте?",
+    "example_en": "Are you coming tomorrow too?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ihr"
+          ],
+          "Akkusativ": [
+            "euch"
+          ],
+          "Dativ": [
+            "euch"
+          ],
+          "Genitiv": [
+            "euer"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "ihr",
+      "euch",
+      "euer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_Anrede_2_Person"
+  },
+  {
+    "id": "pronoun-008",
+    "word": "sie",
+    "translation_ru": "они",
+    "translation_en": "they",
+    "example_de": "Meine Eltern sind zu Hause. Sie kochen zusammen.",
+    "example_ru": "Мои родители дома. Они готовят вместе.",
+    "example_en": "My parents are at home. They are cooking together.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "sie"
+          ],
+          "Akkusativ": [
+            "sie"
+          ],
+          "Dativ": [
+            "ihnen"
+          ],
+          "Genitiv": [
+            "ihrer"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "sie",
+      "ihnen",
+      "ihrer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sie"
+  },
+  {
+    "id": "pronoun-009",
+    "word": "Sie",
+    "translation_ru": "Вы (вежливое обращение)",
+    "translation_en": "you (formal, singular or plural)",
+    "example_de": "Kann ich Ihnen helfen?",
+    "example_ru": "Могу я Вам помочь?",
+    "example_en": "Can I help you?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "Sie"
+          ],
+          "Akkusativ": [
+            "Sie"
+          ],
+          "Dativ": [
+            "Ihnen"
+          ],
+          "Genitiv": [
+            "Ihrer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Вежливое обращение к одному или нескольким людям. Sie, Ihnen и Ihrer пишутся с большой буквы; глагол имеет форму множественного числа.",
+    "usage_note_en": "Formal address to one or more people. Sie, Ihnen and Ihrer are capitalized; the verb uses the plural form.",
+    "forms_note_ru": "Genitiv употребляется редко; в повседневной речи обычно нужны Nominativ, Akkusativ и Dativ.",
+    "forms_note_en": "The genitive is rare; everyday use mainly needs the nominative, accusative and dative.",
+    "search_forms": [
+      "Sie",
+      "Ihnen",
+      "Ihrer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sie"
+  },
+  {
+    "id": "pronoun-010",
+    "word": "es",
+    "translation_ru": "безличное «es» (часто не переводится)",
+    "translation_en": "impersonal or introductory it",
+    "example_de": "Es regnet heute.",
+    "example_ru": "Сегодня идёт дождь.",
+    "example_en": "It is raining today.",
+    "forms": null,
+    "usage_note_ru": "Используется, например, для погоды (es regnet) и в es gibt + Akkusativ («есть, имеется»). Это не замена конкретного существительного.",
+    "usage_note_en": "Used, for example, for weather (es regnet) and in es gibt + accusative (there is/are). It does not replace a particular noun.",
+    "search_forms": [
+      "es"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/es_das_man"
+  },
+  {
+    "id": "pronoun-011",
+    "word": "mein",
+    "translation_ru": "мой",
+    "translation_en": "my; mine",
+    "example_de": "Das ist mein Buch.",
+    "example_ru": "Это моя книга.",
+    "example_en": "This is my book.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "mein",
+            "meine",
+            "mein",
+            "meine"
+          ],
+          "Akkusativ": [
+            "meinen",
+            "meine",
+            "mein",
+            "meine"
+          ],
+          "Dativ": [
+            "meinem",
+            "meiner",
+            "meinem",
+            "meinen"
+          ],
+          "Genitiv": [
+            "meines",
+            "meiner",
+            "meines",
+            "meiner"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "meiner",
+            "meine",
+            "meins / meines",
+            "meine"
+          ],
+          "Akkusativ": [
+            "meinen",
+            "meine",
+            "meins / meines",
+            "meine"
+          ],
+          "Dativ": [
+            "meinem",
+            "meiner",
+            "meinem",
+            "meinen"
+          ],
+          "Genitiv": [
+            "meines",
+            "meiner",
+            "meines",
+            "meiner"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: mein Buch — Das ist meins. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: mein Buch — Das ist meins. The columns describe that thing or person.",
+    "search_forms": [
+      "mein",
+      "meine",
+      "meinen",
+      "meinem",
+      "meiner",
+      "meines",
+      "meins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/mein_Possessivpronomen"
+  },
+  {
+    "id": "pronoun-012",
+    "word": "dein",
+    "translation_ru": "твой",
+    "translation_en": "your; yours (informal, singular)",
+    "example_de": "Ist das dein Fahrrad?",
+    "example_ru": "Это твой велосипед?",
+    "example_en": "Is that your bicycle?",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "dein",
+            "deine",
+            "dein",
+            "deine"
+          ],
+          "Akkusativ": [
+            "deinen",
+            "deine",
+            "dein",
+            "deine"
+          ],
+          "Dativ": [
+            "deinem",
+            "deiner",
+            "deinem",
+            "deinen"
+          ],
+          "Genitiv": [
+            "deines",
+            "deiner",
+            "deines",
+            "deiner"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "deiner",
+            "deine",
+            "deins / deines",
+            "deine"
+          ],
+          "Akkusativ": [
+            "deinen",
+            "deine",
+            "deins / deines",
+            "deine"
+          ],
+          "Dativ": [
+            "deinem",
+            "deiner",
+            "deinem",
+            "deinen"
+          ],
+          "Genitiv": [
+            "deines",
+            "deiner",
+            "deines",
+            "deiner"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: dein Buch — Das ist deins. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: dein Buch — Das ist deins. The columns describe that thing or person.",
+    "search_forms": [
+      "dein",
+      "deine",
+      "deinen",
+      "deinem",
+      "deiner",
+      "deines",
+      "deins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dein_Possessivpronomen"
+  },
+  {
+    "id": "pronoun-013",
+    "word": "sein",
+    "translation_ru": "его (о нём или о предмете среднего рода)",
+    "translation_en": "his; its",
+    "example_de": "Paul sucht seinen Schlüssel.",
+    "example_ru": "Пауль ищет свой ключ.",
+    "example_en": "Paul is looking for his key.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "sein",
+            "seine",
+            "sein",
+            "seine"
+          ],
+          "Akkusativ": [
+            "seinen",
+            "seine",
+            "sein",
+            "seine"
+          ],
+          "Dativ": [
+            "seinem",
+            "seiner",
+            "seinem",
+            "seinen"
+          ],
+          "Genitiv": [
+            "seines",
+            "seiner",
+            "seines",
+            "seiner"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "seiner",
+            "seine",
+            "seins / seines",
+            "seine"
+          ],
+          "Akkusativ": [
+            "seinen",
+            "seine",
+            "seins / seines",
+            "seine"
+          ],
+          "Dativ": [
+            "seinem",
+            "seiner",
+            "seinem",
+            "seinen"
+          ],
+          "Genitiv": [
+            "seines",
+            "seiner",
+            "seines",
+            "seiner"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: sein Buch — Das ist seins. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: sein Buch — Das ist seins. The columns describe that thing or person.",
+    "search_forms": [
+      "sein",
+      "seine",
+      "seinen",
+      "seinem",
+      "seiner",
+      "seines",
+      "seins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sein_Pronomen"
+  },
+  {
+    "id": "pronoun-014",
+    "word": "ihr",
+    "translation_ru": "её",
+    "translation_en": "her; hers",
+    "example_de": "Anna hat ihr Handy vergessen.",
+    "example_ru": "Анна забыла свой телефон.",
+    "example_en": "Anna has forgotten her phone.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ihr",
+            "ihre",
+            "ihr",
+            "ihre"
+          ],
+          "Akkusativ": [
+            "ihren",
+            "ihre",
+            "ihr",
+            "ihre"
+          ],
+          "Dativ": [
+            "ihrem",
+            "ihrer",
+            "ihrem",
+            "ihren"
+          ],
+          "Genitiv": [
+            "ihres",
+            "ihrer",
+            "ihres",
+            "ihrer"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ihrer",
+            "ihre",
+            "ihrs / ihres",
+            "ihre"
+          ],
+          "Akkusativ": [
+            "ihren",
+            "ihre",
+            "ihrs / ihres",
+            "ihre"
+          ],
+          "Dativ": [
+            "ihrem",
+            "ihrer",
+            "ihrem",
+            "ihren"
+          ],
+          "Genitiv": [
+            "ihres",
+            "ihrer",
+            "ihres",
+            "ihrer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: ihr Buch — Das ist ihrs. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: ihr Buch — Das ist ihrs. The columns describe that thing or person.",
+    "search_forms": [
+      "ihr",
+      "ihre",
+      "ihren",
+      "ihrem",
+      "ihrer",
+      "ihres",
+      "ihrs"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+  },
+  {
+    "id": "pronoun-015",
+    "word": "ihr",
+    "translation_ru": "их",
+    "translation_en": "their; theirs",
+    "example_de": "Die Kinder suchen ihren Ball.",
+    "example_ru": "Дети ищут свой мяч.",
+    "example_en": "The children are looking for their ball.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ihr",
+            "ihre",
+            "ihr",
+            "ihre"
+          ],
+          "Akkusativ": [
+            "ihren",
+            "ihre",
+            "ihr",
+            "ihre"
+          ],
+          "Dativ": [
+            "ihrem",
+            "ihrer",
+            "ihrem",
+            "ihren"
+          ],
+          "Genitiv": [
+            "ihres",
+            "ihrer",
+            "ihres",
+            "ihrer"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ihrer",
+            "ihre",
+            "ihrs / ihres",
+            "ihre"
+          ],
+          "Akkusativ": [
+            "ihren",
+            "ihre",
+            "ihrs / ihres",
+            "ihre"
+          ],
+          "Dativ": [
+            "ihrem",
+            "ihrer",
+            "ihrem",
+            "ihren"
+          ],
+          "Genitiv": [
+            "ihres",
+            "ihrer",
+            "ihres",
+            "ihrer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: ihr Buch — Das ist ihrs. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: ihr Buch — Das ist ihrs. The columns describe that thing or person.",
+    "search_forms": [
+      "ihr",
+      "ihre",
+      "ihren",
+      "ihrem",
+      "ihrer",
+      "ihres",
+      "ihrs"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+  },
+  {
+    "id": "pronoun-016",
+    "word": "unser",
+    "translation_ru": "наш",
+    "translation_en": "our; ours",
+    "example_de": "Unser Zug fährt um acht Uhr ab.",
+    "example_ru": "Наш поезд отправляется в восемь часов.",
+    "example_en": "Our train leaves at eight o’clock.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "unser",
+            "unsere",
+            "unser",
+            "unsere"
+          ],
+          "Akkusativ": [
+            "unseren",
+            "unsere",
+            "unser",
+            "unsere"
+          ],
+          "Dativ": [
+            "unserem",
+            "unserer",
+            "unserem",
+            "unseren"
+          ],
+          "Genitiv": [
+            "unseres",
+            "unserer",
+            "unseres",
+            "unserer"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "unserer",
+            "unsere",
+            "unseres / unsres",
+            "unsere"
+          ],
+          "Akkusativ": [
+            "unseren",
+            "unsere",
+            "unseres / unsres",
+            "unsere"
+          ],
+          "Dativ": [
+            "unserem",
+            "unserer",
+            "unserem",
+            "unseren"
+          ],
+          "Genitiv": [
+            "unseres",
+            "unserer",
+            "unseres",
+            "unserer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: unser Buch — Das ist unseres. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: unser Buch — Das ist unseres. The columns describe that thing or person.",
+    "forms_note_ru": "Возможны сокращённые формы: unsre, unsren, unsrem, unsrer, unsres; также unserm.",
+    "forms_note_en": "Contracted forms are also possible: unsre, unsren, unsrem, unsrer, unsres; also unserm.",
+    "search_forms": [
+      "unser",
+      "unsre",
+      "unsren",
+      "unsrem",
+      "unsrer",
+      "unsres",
+      "unserm",
+      "unsere",
+      "unseren",
+      "unserem",
+      "unserer",
+      "unseres"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/unser_Possessivpronomen"
+  },
+  {
+    "id": "pronoun-017",
+    "word": "euer",
+    "translation_ru": "ваш (к нескольким людям на «ты»)",
+    "translation_en": "your; yours (informal, plural)",
+    "example_de": "Ist das euer Auto?",
+    "example_ru": "Это ваша машина?",
+    "example_en": "Is that your car?",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "euer",
+            "eure",
+            "euer",
+            "eure"
+          ],
+          "Akkusativ": [
+            "euren",
+            "eure",
+            "euer",
+            "eure"
+          ],
+          "Dativ": [
+            "eurem",
+            "eurer",
+            "eurem",
+            "euren"
+          ],
+          "Genitiv": [
+            "eures",
+            "eurer",
+            "eures",
+            "eurer"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "eurer",
+            "eure",
+            "eures / euers",
+            "eure"
+          ],
+          "Akkusativ": [
+            "euren",
+            "eure",
+            "eures / euers",
+            "eure"
+          ],
+          "Dativ": [
+            "eurem",
+            "eurer",
+            "eurem",
+            "euren"
+          ],
+          "Genitiv": [
+            "eures",
+            "eurer",
+            "eures",
+            "eurer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: euer Buch — Das ist eures. Колонки таблицы относятся к этому предмету или человеку.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: euer Buch — Das ist eures. The columns describe that thing or person.",
+    "forms_note_ru": "Обычно eure, euren, eurem, eurer, eures; также возможны формы с euer-, например euere, euerem; также euern, euerm.",
+    "forms_note_en": "Usually eure, euren, eurem, eurer, eures; forms with euer-, such as euere and euerem, are also possible, as are euern and euerm.",
+    "search_forms": [
+      "euer",
+      "euere",
+      "eueren",
+      "euerem",
+      "euerer",
+      "eueres",
+      "euern",
+      "euerm",
+      "eure",
+      "euren",
+      "eurem",
+      "eurer",
+      "eures",
+      "euers"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/euer_Anrede_wessen"
+  },
+  {
+    "id": "pronoun-018",
+    "word": "Ihr",
+    "translation_ru": "Ваш (вежливое обращение)",
+    "translation_en": "your; yours (formal)",
+    "example_de": "Ist das Ihr Koffer?",
+    "example_ru": "Это Ваш чемодан?",
+    "example_en": "Is that your suitcase?",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "Ihr",
+            "Ihre",
+            "Ihr",
+            "Ihre"
+          ],
+          "Akkusativ": [
+            "Ihren",
+            "Ihre",
+            "Ihr",
+            "Ihre"
+          ],
+          "Dativ": [
+            "Ihrem",
+            "Ihrer",
+            "Ihrem",
+            "Ihren"
+          ],
+          "Genitiv": [
+            "Ihres",
+            "Ihrer",
+            "Ihres",
+            "Ihrer"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "Ihrer",
+            "Ihre",
+            "Ihrs / Ihres",
+            "Ihre"
+          ],
+          "Akkusativ": [
+            "Ihren",
+            "Ihre",
+            "Ihrs / Ihres",
+            "Ihre"
+          ],
+          "Dativ": [
+            "Ihrem",
+            "Ihrer",
+            "Ihrem",
+            "Ihren"
+          ],
+          "Genitiv": [
+            "Ihres",
+            "Ihrer",
+            "Ihres",
+            "Ihrer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от рода, числа и падежа того, что принадлежит кому-либо: Ihr Buch — Das ist Ihrs. Колонки таблицы относятся к этому предмету или человеку. При вежливом обращении Ihr и все его формы пишутся с большой буквы.",
+    "usage_note_en": "The ending depends on the gender, number and case of what is possessed: Ihr Buch — Das ist Ihrs. The columns describe that thing or person. In formal address, Ihr and all its forms are capitalized.",
+    "search_forms": [
+      "Ihr",
+      "Ihre",
+      "Ihren",
+      "Ihrem",
+      "Ihrer",
+      "Ihres",
+      "Ihrs"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+  },
+  {
+    "id": "pronoun-019",
+    "word": "sich",
+    "translation_ru": "себе; себя (возвратное местоимение)",
+    "translation_en": "oneself; himself; herself; itself; themselves; yourself/yourselves (formal)",
+    "example_de": "Anna wäscht sich die Hände.",
+    "example_ru": "Анна моет руки.",
+    "example_en": "Anna is washing her hands.",
+    "forms": [
+      {
+        "label": "Reflexivpronomen",
+        "columns": [
+          "ich",
+          "du",
+          "er/sie/es",
+          "wir",
+          "ihr",
+          "sie/Sie"
+        ],
+        "rows": {
+          "Akkusativ": [
+            "mich",
+            "dich",
+            "sich",
+            "uns",
+            "euch",
+            "sich"
+          ],
+          "Dativ": [
+            "mir",
+            "dir",
+            "sich",
+            "uns",
+            "euch",
+            "sich"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Местоимение относится к подлежащему: Ich wasche mich (Akkusativ), но Ich wasche mir die Hände (Dativ). Sich пишется с маленькой буквы и при обращении Sie.",
+    "usage_note_en": "The pronoun refers back to the subject: Ich wasche mich (accusative), but Ich wasche mir die Hände (dative). Sich stays lowercase even with formal Sie.",
+    "search_forms": [
+      "sich",
+      "mich",
+      "dich",
+      "uns",
+      "euch",
+      "mir",
+      "dir"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sich"
+  },
+  {
+    "id": "pronoun-020",
+    "word": "man",
+    "translation_ru": "люди; неопределённое лицо (часто передаётся безличной конструкцией)",
+    "translation_en": "one; people; you (in general)",
+    "example_de": "Hier darf man nicht rauchen.",
+    "example_ru": "Здесь нельзя курить.",
+    "example_en": "Smoking is not allowed here.",
+    "forms": [
+      {
+        "label": "Man und Ersatzformen",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "man"
+          ],
+          "Akkusativ": [
+            "einen"
+          ],
+          "Dativ": [
+            "einem"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Man используется как подлежащее с глаголом в 3-м лице единственного числа. Для других падежей используются einen и einem: Das kann einem passieren. Не путать с der Mann («мужчина»).",
+    "usage_note_en": "Man is a subject with a third-person singular verb. Other cases use einen and einem: Das kann einem passieren. Do not confuse it with der Mann (man).",
+    "search_forms": [
+      "man",
+      "einen",
+      "einem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/man_jemand"
+  },
+  {
+    "id": "pronoun-021",
+    "word": "jemand",
+    "translation_ru": "кто-то; кто-нибудь",
+    "translation_en": "someone; somebody",
+    "example_de": "Ist jemand zu Hause?",
+    "example_ru": "Кто-нибудь дома?",
+    "example_en": "Is anyone at home?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "jemand"
+          ],
+          "Akkusativ": [
+            "jemanden / jemand"
+          ],
+          "Dativ": [
+            "jemandem / jemand"
+          ],
+          "Genitiv": [
+            "jemandes / jemands"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "В Akkusativ и Dativ возможны формы с окончанием и без него.",
+    "forms_note_en": "Both inflected and uninflected forms are possible in the accusative and dative.",
+    "search_forms": [
+      "jemand",
+      "jemanden",
+      "jemandem",
+      "jemandes",
+      "jemands"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/jemand"
+  },
+  {
+    "id": "pronoun-022",
+    "word": "niemand",
+    "translation_ru": "никто",
+    "translation_en": "nobody; no one",
+    "example_de": "Ich kenne hier niemanden.",
+    "example_ru": "Я здесь никого не знаю.",
+    "example_en": "I do not know anyone here.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "niemand"
+          ],
+          "Akkusativ": [
+            "niemanden / niemand"
+          ],
+          "Dativ": [
+            "niemandem / niemand"
+          ],
+          "Genitiv": [
+            "niemandes / niemands"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "В Akkusativ и Dativ возможны формы с окончанием и без него.",
+    "forms_note_en": "Both inflected and uninflected forms are possible in the accusative and dative.",
+    "search_forms": [
+      "niemand",
+      "niemanden",
+      "niemandem",
+      "niemandes",
+      "niemands"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/niemand"
+  },
+  {
+    "id": "pronoun-023",
+    "word": "etwas",
+    "translation_ru": "что-нибудь; что-то; немного",
+    "translation_en": "something; anything; a little",
+    "example_de": "Möchtest du etwas trinken?",
+    "example_ru": "Хочешь что-нибудь выпить?",
+    "example_en": "Would you like something to drink?",
+    "forms": null,
+    "usage_note_ru": "Не изменяется. Перед прилагательным: etwas Neues («что-то новое»). Для небольшого количества: etwas Wasser.",
+    "usage_note_en": "Invariable. Before an adjective: etwas Neues (something new). For a small amount: etwas Wasser.",
+    "search_forms": [
+      "etwas"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/etwas"
+  },
+  {
+    "id": "pronoun-024",
+    "word": "nichts",
+    "translation_ru": "ничего; ничто",
+    "translation_en": "nothing",
+    "example_de": "Ich habe nichts gehört.",
+    "example_ru": "Я ничего не слышал.",
+    "example_en": "I did not hear anything.",
+    "forms": null,
+    "usage_note_ru": "Не изменяется. Перед прилагательным: nichts Neues («ничего нового»).",
+    "usage_note_en": "Invariable. Before an adjective: nichts Neues (nothing new).",
+    "search_forms": [
+      "nichts"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/nichts"
+  },
+  {
+    "id": "pronoun-025",
+    "word": "alle",
+    "translation_ru": "все",
+    "translation_en": "all; everyone",
+    "example_de": "Alle sind schon da.",
+    "example_ru": "Все уже здесь.",
+    "example_en": "Everyone is already here.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "alle"
+          ],
+          "Akkusativ": [
+            "alle"
+          ],
+          "Dativ": [
+            "allen"
+          ],
+          "Genitiv": [
+            "aller"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "В таблице — множественное число. Alles означает «всё»: Alles ist gut. Перед артиклем или притяжательным словом возможно all: all die Bücher, all meine Freunde.",
+    "usage_note_en": "The table shows plural forms. Alles means everything: Alles ist gut. Before an article or possessive, all is also possible: all die Bücher, all meine Freunde.",
+    "search_forms": [
+      "alle",
+      "all",
+      "alles",
+      "allem",
+      "allen",
+      "aller"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/all"
+  },
+  {
+    "id": "pronoun-026",
+    "word": "andere",
+    "translation_ru": "остальные; другие; другой",
+    "translation_en": "others; other; another",
+    "example_de": "Die anderen kommen später.",
+    "example_ru": "Остальные придут позже.",
+    "example_en": "The others are coming later.",
+    "forms": [
+      {
+        "label": "Ohne Artikel · Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "andere"
+          ],
+          "Akkusativ": [
+            "andere"
+          ],
+          "Dativ": [
+            "anderen"
+          ],
+          "Genitiv": [
+            "anderer"
+          ]
+        }
+      },
+      {
+        "label": "Mit Artikel · Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "die anderen"
+          ],
+          "Akkusativ": [
+            "die anderen"
+          ],
+          "Dativ": [
+            "den anderen"
+          ],
+          "Genitiv": [
+            "der anderen"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Окончание зависит от артикля: andere — die anderen. Единственное число: ein anderer Mann, eine andere Frau, ein anderes Kind. Ohne Nomen: jemand anderes («кто-то другой»).",
+    "usage_note_en": "The ending depends on the article: andere — die anderen. Singular: ein anderer Mann, eine andere Frau, ein anderes Kind. Without a noun: jemand anderes (someone else).",
+    "search_forms": [
+      "andere",
+      "anderer",
+      "anderes",
+      "anderem",
+      "anderen",
+      "die anderen",
+      "den anderen",
+      "der anderen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/andere"
+  },
+  {
+    "id": "pronoun-027",
+    "word": "beide",
+    "translation_ru": "оба; обе",
+    "translation_en": "both",
+    "example_de": "Wir nehmen beide.",
+    "example_ru": "Мы возьмём оба.",
+    "example_en": "We will take both.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "beide"
+          ],
+          "Akkusativ": [
+            "beide"
+          ],
+          "Dativ": [
+            "beiden"
+          ],
+          "Genitiv": [
+            "beider"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Обычно множественное число: beide Kinder, die beiden Kinder. После die окончания как у прилагательного: die beiden, der beiden, den beiden. Beides («и то и другое») имеет единственное число: beides в Nominativ/Akkusativ, beidem в Dativ; Genitiv нет.",
+    "usage_note_en": "Usually plural: beide Kinder, die beiden Kinder. After die the endings are adjectival: die beiden, der beiden, den beiden. Beides (both things) is singular: beides in the nominative/accusative, beidem in the dative; no genitive.",
+    "search_forms": [
+      "beide",
+      "beides",
+      "beidem",
+      "beiden",
+      "beider"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/beide"
+  },
+  {
+    "id": "pronoun-028",
+    "word": "jeder",
+    "translation_ru": "каждый; любой",
+    "translation_en": "each; every; everyone",
+    "example_de": "Jeder bekommt ein Stück Kuchen.",
+    "example_ru": "Каждый получит кусок пирога.",
+    "example_en": "Everyone will get a piece of cake.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum"
+        ],
+        "rows": {
+          "Nominativ": [
+            "jeder",
+            "jede",
+            "jedes"
+          ],
+          "Akkusativ": [
+            "jeden",
+            "jede",
+            "jedes"
+          ],
+          "Dativ": [
+            "jedem",
+            "jeder",
+            "jedem"
+          ],
+          "Genitiv": [
+            "jedes",
+            "jeder",
+            "jedes"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Употребляется в единственном числе: jeder Tag, jede Woche, jedes Kind. Для «все» во множественном числе обычно используется alle.",
+    "usage_note_en": "Used in the singular: jeder Tag, jede Woche, jedes Kind. For all in the plural, usually use alle.",
+    "search_forms": [
+      "jeder",
+      "jede",
+      "jedes",
+      "jeden",
+      "jedem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/jeder",
+    "forms_note_ru": "В Genitiv перед существительным мужского или среднего рода также возможно jeden: jedes/jeden Jahres.",
+    "forms_note_en": "In the genitive before a masculine or neuter noun, jeden is also possible: jedes/jeden Jahres."
+  },
+  {
+    "id": "pronoun-029",
+    "word": "einige",
+    "translation_ru": "некоторые; несколько",
+    "translation_en": "some; several",
+    "example_de": "Einige bleiben heute zu Hause.",
+    "example_ru": "Некоторые сегодня останутся дома.",
+    "example_en": "Some people are staying at home today.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "einige"
+          ],
+          "Akkusativ": [
+            "einige"
+          ],
+          "Dativ": [
+            "einigen"
+          ],
+          "Genitiv": [
+            "einiger"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Таблица показывает множественное число. Для количества в единственном числе: einige Zeit («некоторое время»), einiges Geld («довольно много денег»).",
+    "usage_note_en": "The table shows plural forms. Singular quantity uses include einige Zeit (some time) and einiges Geld (quite a lot of money).",
+    "search_forms": [
+      "einige",
+      "einiges",
+      "einigem",
+      "einigen",
+      "einiger"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/einige"
+  },
+  {
+    "id": "pronoun-030",
+    "word": "mehrere",
+    "translation_ru": "несколько",
+    "translation_en": "several",
+    "example_de": "Mehrere haben schon geantwortet.",
+    "example_ru": "Несколько человек уже ответили.",
+    "example_en": "Several people have already replied.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "mehrere"
+          ],
+          "Akkusativ": [
+            "mehrere"
+          ],
+          "Dativ": [
+            "mehreren"
+          ],
+          "Genitiv": [
+            "mehrerer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Употребляется во множественном числе: mehrere Personen.",
+    "usage_note_en": "Used in the plural: mehrere Personen.",
+    "search_forms": [
+      "mehrere",
+      "mehreren",
+      "mehrerer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/mehrere"
+  },
+  {
+    "id": "pronoun-031",
+    "word": "sämtliche",
+    "translation_ru": "все без исключения",
+    "translation_en": "all; every single one",
+    "example_de": "Sämtliche Unterlagen liegen auf dem Tisch.",
+    "example_ru": "Все документы лежат на столе.",
+    "example_en": "All the documents are on the table.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "sämtliche"
+          ],
+          "Akkusativ": [
+            "sämtliche"
+          ],
+          "Dativ": [
+            "sämtlichen"
+          ],
+          "Genitiv": [
+            "sämtlicher"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Таблица показывает обычное употребление во множественном числе. Sämtliche подчёркивает, что речь обо всех без исключения.",
+    "usage_note_en": "The table shows the usual plural use. Sämtliche emphasizes that none are excluded.",
+    "search_forms": [
+      "sämtliche",
+      "sämtlichen",
+      "sämtlicher",
+      "sämtlich",
+      "sämtliches",
+      "sämtlichem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/saemtlich"
+  },
+  {
+    "id": "pronoun-032",
+    "word": "mancher",
+    "translation_ru": "некоторый; иной; кое-кто",
+    "translation_en": "some; many a",
+    "example_de": "Manche fahren lieber mit dem Zug.",
+    "example_ru": "Некоторые предпочитают ездить на поезде.",
+    "example_en": "Some people prefer travelling by train.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "mancher",
+            "manche",
+            "manches",
+            "manche"
+          ],
+          "Akkusativ": [
+            "manchen",
+            "manche",
+            "manches",
+            "manche"
+          ],
+          "Dativ": [
+            "manchem",
+            "mancher",
+            "manchem",
+            "manchen"
+          ],
+          "Genitiv": [
+            "manchen / manches",
+            "mancher",
+            "manchen / manches",
+            "mancher"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Употребляется в единственном и множественном числе: mancher Mensch, manche Menschen; также manch ein Mensch.",
+    "usage_note_en": "Used in the singular and plural: mancher Mensch, manche Menschen; also manch ein Mensch.",
+    "search_forms": [
+      "mancher",
+      "manche",
+      "manches",
+      "manchen",
+      "manchem",
+      "manch"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/manch",
+    "forms_note_ru": "Genitiv единственного числа мужского и среднего рода употребляется перед существительным: manchen (реже manches) Missverständnisses.",
+    "forms_note_en": "The masculine and neuter singular genitive is used before a noun: manchen (less often manches) Missverständnisses."
+  },
+  {
+    "id": "pronoun-033",
+    "word": "dieser",
+    "translation_ru": "этот",
+    "translation_en": "this; these",
+    "example_de": "Dieses Buch gefällt mir.",
+    "example_ru": "Мне нравится эта книга.",
+    "example_en": "I like this book.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "dieser",
+            "diese",
+            "dieses",
+            "diese"
+          ],
+          "Akkusativ": [
+            "diesen",
+            "diese",
+            "dieses",
+            "diese"
+          ],
+          "Dativ": [
+            "diesem",
+            "dieser",
+            "diesem",
+            "diesen"
+          ],
+          "Genitiv": [
+            "dieses",
+            "dieser",
+            "dieses",
+            "dieser"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Указывает на человека или предмет: dieser Mann, diese Frau, dieses Kind, diese Bücher. Может употребляться без существительного: Ich nehme dieses.",
+    "usage_note_en": "Points to a person or thing: dieser Mann, diese Frau, dieses Kind, diese Bücher. Can stand without a noun: Ich nehme dieses.",
+    "search_forms": [
+      "dieser",
+      "dies",
+      "diese",
+      "dieses",
+      "diesen",
+      "diesem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dieser"
+  },
+  {
+    "id": "pronoun-034",
+    "word": "derselbe",
+    "translation_ru": "тот же самый",
+    "translation_en": "the same (identical person or thing)",
+    "example_de": "Wir fahren mit demselben Bus.",
+    "example_ru": "Мы едем на том же самом автобусе.",
+    "example_en": "We are taking the same bus.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "derselbe",
+            "dieselbe",
+            "dasselbe",
+            "dieselben"
+          ],
+          "Akkusativ": [
+            "denselben",
+            "dieselbe",
+            "dasselbe",
+            "dieselben"
+          ],
+          "Dativ": [
+            "demselben",
+            "derselben",
+            "demselben",
+            "denselben"
+          ],
+          "Genitiv": [
+            "desselben",
+            "derselben",
+            "desselben",
+            "derselben"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Пишется слитно: derselbe, dieselbe, dasselbe. Подчёркивает, что это один и тот же человек или предмет; der gleiche может означать другой, но такой же.",
+    "usage_note_en": "Written as one word: derselbe, dieselbe, dasselbe. Emphasizes the identical person or thing; der gleiche can mean a different but similar one.",
+    "search_forms": [
+      "derselbe",
+      "dieselbe",
+      "dasselbe",
+      "dieselben",
+      "denselben",
+      "demselben",
+      "derselben",
+      "desselben"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/derselbe"
+  },
+  {
+    "id": "pronoun-035",
+    "word": "selbe",
+    "translation_ru": "тот же самый (в am selben, zur selben и т. п.)",
+    "translation_en": "same (in am selben, zur selben, etc.)",
+    "example_de": "Wir haben am selben Tag Geburtstag.",
+    "example_ru": "У нас день рождения в один и тот же день.",
+    "example_en": "Our birthdays are on the same day.",
+    "forms": null,
+    "usage_note_ru": "Обычное употребление — после слитного предлога с артиклем: am selben Tag, beim selben Arzt, zur selben Zeit. Без такого сокращения: an demselben Tag. Не путать с обычным усилительным selber («сам»); такая же форма может редко относиться к selbe.",
+    "usage_note_en": "Common after a fused preposition and article: am selben Tag, beim selben Arzt, zur selben Zeit. Without that contraction: an demselben Tag. Distinguish it from the common intensifier selber (oneself); the same spelling can rarely be a form of selbe.",
+    "forms_note_ru": "Основные сочетания: am selben · beim selben · zum selben · zur selben · im selben · ins selbe.",
+    "forms_note_en": "Key combinations: am selben · beim selben · zum selben · zur selben · im selben · ins selbe.",
+    "search_forms": [
+      "selbe",
+      "selben",
+      "selbes",
+      "selber"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/selbe"
+  },
+  {
+    "id": "pronoun-036",
+    "word": "solcher",
+    "translation_ru": "такой; подобный",
+    "translation_en": "such; of that kind",
+    "example_de": "Solche Fragen höre ich oft.",
+    "example_ru": "Я часто слышу такие вопросы.",
+    "example_en": "I often hear questions like that.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "solcher",
+            "solche",
+            "solches",
+            "solche"
+          ],
+          "Akkusativ": [
+            "solchen",
+            "solche",
+            "solches",
+            "solche"
+          ],
+          "Dativ": [
+            "solchem",
+            "solcher",
+            "solchem",
+            "solchen"
+          ],
+          "Genitiv": [
+            "solches",
+            "solcher",
+            "solches",
+            "solcher"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Таблица — формы без артикля. Также: solch ein Tag, ein solcher Tag. После ein окончания зависят от артикля.",
+    "usage_note_en": "The table shows forms without an article. Also: solch ein Tag, ein solcher Tag. After ein, endings depend on the article.",
+    "search_forms": [
+      "solcher",
+      "solch",
+      "solche",
+      "solches",
+      "solchen",
+      "solchem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/solcher"
+  },
+  {
+    "id": "pronoun-037",
+    "word": "der",
+    "translation_ru": "тот; та; то",
+    "translation_en": "that one; those",
+    "example_de": "Welchen Mantel meinst du? — Den dort.",
+    "example_ru": "Какое пальто ты имеешь в виду? — То, вон там.",
+    "example_en": "Which coat do you mean? — That one over there.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "der",
+            "die",
+            "das",
+            "die"
+          ],
+          "Akkusativ": [
+            "den",
+            "die",
+            "das",
+            "die"
+          ],
+          "Dativ": [
+            "dem",
+            "der",
+            "dem",
+            "denen"
+          ],
+          "Genitiv": [
+            "dessen",
+            "deren / derer",
+            "dessen",
+            "deren / derer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Указательное местоимение der/die/das заменяет существительное и обычно выделяется ударением. Это не артикль. Dativ Plural: denen.",
+    "usage_note_en": "The demonstrative der/die/das replaces a noun and is usually stressed. It is not an article. Dative plural: denen.",
+    "search_forms": [
+      "der",
+      "die",
+      "das",
+      "den",
+      "dem",
+      "denen",
+      "dessen",
+      "deren",
+      "derer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/der_Demonstrativpronomen"
+  },
+  {
+    "id": "pronoun-038",
+    "word": "der",
+    "translation_ru": "который; которая; которое; которые",
+    "translation_en": "who; which; that (relative pronoun)",
+    "example_de": "Das ist der Mann, dem ich geholfen habe.",
+    "example_ru": "Это мужчина, которому я помог.",
+    "example_en": "That is the man I helped.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "der",
+            "die",
+            "das",
+            "die"
+          ],
+          "Akkusativ": [
+            "den",
+            "die",
+            "das",
+            "die"
+          ],
+          "Dativ": [
+            "dem",
+            "der",
+            "dem",
+            "denen"
+          ],
+          "Genitiv": [
+            "dessen",
+            "deren / derer",
+            "dessen",
+            "deren / derer"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Род и число определяются словом, к которому относится местоимение; падеж — его ролью в придаточном предложении. Обычные Genitiv: dessen, deren; derer встречается в особых конструкциях. Глагол в конце придаточного.",
+    "usage_note_en": "Gender and number come from the noun referred to; case comes from the role in the relative clause. Usual genitives: dessen, deren; derer occurs in particular constructions. The verb goes at the end of the clause.",
+    "search_forms": [
+      "der",
+      "die",
+      "das",
+      "den",
+      "dem",
+      "denen",
+      "dessen",
+      "deren",
+      "derer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/der_Relativpronomen"
+  },
+  {
+    "id": "pronoun-039",
+    "word": "welcher",
+    "translation_ru": "какой; который (из нескольких)",
+    "translation_en": "which; which one",
+    "example_de": "Welches möchtest du nehmen?",
+    "example_ru": "Какое ты хочешь взять?",
+    "example_en": "Which one would you like to take?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "welcher",
+            "welche",
+            "welches",
+            "welche"
+          ],
+          "Akkusativ": [
+            "welchen",
+            "welche",
+            "welches",
+            "welche"
+          ],
+          "Dativ": [
+            "welchem",
+            "welcher",
+            "welchem",
+            "welchen"
+          ],
+          "Genitiv": [
+            "welches",
+            "welcher",
+            "welches",
+            "welcher"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Вопрос о выборе: Welcher Zug? Welches von diesen Büchern? В Genitiv перед существительным мужского или среднего рода также возможно welchen: welchen Tages.",
+    "usage_note_en": "Asks about a choice: Welcher Zug? Welches von diesen Büchern? In the genitive before a masculine or neuter noun, welchen is also possible: welchen Tages.",
+    "search_forms": [
+      "welcher",
+      "welche",
+      "welches",
+      "welchen",
+      "welchem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/welcher_Interrogativpronomen"
+  },
+  {
+    "id": "pronoun-040",
+    "word": "welcher",
+    "translation_ru": "который; которая; которое; которые (относительное)",
+    "translation_en": "who; which; that (formal relative pronoun)",
+    "example_de": "Das ist die Straße, welche zum Bahnhof führt.",
+    "example_ru": "Это улица, которая ведёт к вокзалу.",
+    "example_en": "That is the street which leads to the station.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "welcher",
+            "welche",
+            "welches",
+            "welche"
+          ],
+          "Akkusativ": [
+            "welchen",
+            "welche",
+            "welches",
+            "welche"
+          ],
+          "Dativ": [
+            "welchem",
+            "welcher",
+            "welchem",
+            "welchen"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Более книжный вариант der/die/das в относительном предложении. Для притяжательного Genitiv обычно используются dessen или deren вместо форм welcher.",
+    "usage_note_en": "A more formal alternative to der/die/das in a relative clause. For a possessive genitive, dessen or deren is normally used instead of forms of welcher.",
+    "search_forms": [
+      "welcher",
+      "welche",
+      "welches",
+      "welchen",
+      "welchem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/welcher_Relativpronomen"
+  },
+  {
+    "id": "pronoun-041",
+    "word": "wer",
+    "translation_ru": "кто",
+    "translation_en": "who",
+    "example_de": "Wem gehört diese Tasche?",
+    "example_ru": "Кому принадлежит эта сумка?",
+    "example_en": "Who does this bag belong to?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "wer"
+          ],
+          "Akkusativ": [
+            "wen"
+          ],
+          "Dativ": [
+            "wem"
+          ],
+          "Genitiv": [
+            "wessen"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Вопрос о человеке: wer (кто), wen (кого), wem (кому), wessen (чей). Также вводит предложение без отдельного существительного: Wer möchte, kann mitkommen.",
+    "usage_note_en": "Asks about a person: wer (who), wen (whom), wem (to whom), wessen (whose). Also introduces a clause without a separate noun: Wer möchte, kann mitkommen.",
+    "search_forms": [
+      "wer",
+      "wen",
+      "wem",
+      "wessen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wer_Interrogativpronomen"
+  },
+  {
+    "id": "pronoun-042",
+    "word": "was",
+    "translation_ru": "что",
+    "translation_en": "what",
+    "example_de": "Was möchtest du essen?",
+    "example_ru": "Что ты хочешь съесть?",
+    "example_en": "What would you like to eat?",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "was"
+          ],
+          "Akkusativ": [
+            "was"
+          ],
+          "Genitiv": [
+            "wessen"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Вопрос о предмете или содержании. С предлогом обычно используются wo(r)-формы: womit, worüber. Wessen — редкий Genitiv; отдельной обычной формы Dativ нет.",
+    "usage_note_en": "Asks about a thing or content. With a preposition, usually use wo(r)-forms: womit, worüber. Wessen is a rare genitive; there is no ordinary separate dative form.",
+    "search_forms": [
+      "was",
+      "wessen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen"
+  },
+  {
+    "id": "pronoun-043",
+    "word": "was",
+    "translation_ru": "что (в относительном предложении)",
+    "translation_en": "what; that (relative pronoun)",
+    "example_de": "Das ist alles, was ich weiß.",
+    "example_ru": "Это всё, что я знаю.",
+    "example_en": "That is everything I know.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "was"
+          ],
+          "Akkusativ": [
+            "was"
+          ],
+          "Genitiv": [
+            "wessen"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Относительное was используется, например, после alles, nichts и das или относится ко всему предложению. Глагол стоит в конце придаточного.",
+    "usage_note_en": "Relative was is used, for example, after alles, nichts and das, or refers to a whole clause. The verb goes at the end of the relative clause.",
+    "search_forms": [
+      "was",
+      "wessen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/was_Relativpronomen",
+    "forms_note_ru": "Wessen — редкий Genitiv. С предлогом обычно используются wo(r)-формы, например worüber. Отдельной обычной формы Dativ нет.",
+    "forms_note_en": "Wessen is a rare genitive. With a preposition, wo(r)-forms such as worüber are usual. There is no ordinary separate dative form."
+  },
+  {
+    "id": "pronoun-044",
+    "word": "ein",
+    "translation_ru": "один; кто-то; какой-то (без существительного)",
+    "translation_en": "one; someone; a certain one",
+    "example_de": "Ich brauche einen Stift. Hast du einen?",
+    "example_ru": "Мне нужна ручка. У тебя есть одна?",
+    "example_en": "I need a pen. Do you have one?",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ein",
+            "eine",
+            "ein"
+          ],
+          "Akkusativ": [
+            "einen",
+            "eine",
+            "ein"
+          ],
+          "Dativ": [
+            "einem",
+            "einer",
+            "einem"
+          ],
+          "Genitiv": [
+            "eines",
+            "einer",
+            "eines"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum"
+        ],
+        "rows": {
+          "Nominativ": [
+            "einer",
+            "eine",
+            "eines / eins"
+          ],
+          "Akkusativ": [
+            "einen",
+            "eine",
+            "eines / eins"
+          ],
+          "Dativ": [
+            "einem",
+            "einer",
+            "einem"
+          ],
+          "Genitiv": [
+            "eines",
+            "einer",
+            "eines"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Перед существительным ein — неопределённый артикль. Без существительного: einer, eine, eines/eins. В обычном неопределённом множественном числе используется, например, welche. Die einen … die anderen означает «одни … другие».",
+    "usage_note_en": "Before a noun, ein is an indefinite article. Without a noun: einer, eine, eines/eins. For an ordinary unspecified plural, use, for example, welche. Die einen … die anderen means some … others.",
+    "search_forms": [
+      "ein",
+      "eine",
+      "einen",
+      "einem",
+      "einer",
+      "eines",
+      "eins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ein_Pronomen"
+  },
+  {
+    "id": "pronoun-045",
+    "word": "kein",
+    "translation_ru": "никакой; ни один",
+    "translation_en": "no; none; not any",
+    "example_de": "Ich habe keinen Stift.",
+    "example_ru": "У меня нет ручки.",
+    "example_en": "I do not have a pen.",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "kein",
+            "keine",
+            "kein",
+            "keine"
+          ],
+          "Akkusativ": [
+            "keinen",
+            "keine",
+            "kein",
+            "keine"
+          ],
+          "Dativ": [
+            "keinem",
+            "keiner",
+            "keinem",
+            "keinen"
+          ],
+          "Genitiv": [
+            "keines",
+            "keiner",
+            "keines",
+            "keiner"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "keiner",
+            "keine",
+            "keines / keins",
+            "keine"
+          ],
+          "Akkusativ": [
+            "keinen",
+            "keine",
+            "keines / keins",
+            "keine"
+          ],
+          "Dativ": [
+            "keinem",
+            "keiner",
+            "keinem",
+            "keinen"
+          ],
+          "Genitiv": [
+            "keines",
+            "keiner",
+            "keines",
+            "keiner"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Перед существительным: kein Buch. Без существительного: keiner, keine, keines/keins. Не путать с nicht для отрицания глагола или признака.",
+    "usage_note_en": "Before a noun: kein Buch. Without a noun: keiner, keine, keines/keins. Distinguish it from nicht, which negates a verb or a property.",
+    "search_forms": [
+      "kein",
+      "keine",
+      "keinen",
+      "keinem",
+      "keiner",
+      "keines",
+      "keins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/kein"
+  },
+  {
+    "id": "pronoun-046",
+    "word": "irgendein",
+    "translation_ru": "какой-то; любой (неважно какой)",
+    "translation_en": "some; any (unspecified)",
+    "example_de": "Hast du irgendeinen Vorschlag?",
+    "example_ru": "У тебя есть какое-нибудь предложение?",
+    "example_en": "Do you have any suggestions?",
+    "forms": [
+      {
+        "label": "Vor einem Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum"
+        ],
+        "rows": {
+          "Nominativ": [
+            "irgendein",
+            "irgendeine",
+            "irgendein"
+          ],
+          "Akkusativ": [
+            "irgendeinen",
+            "irgendeine",
+            "irgendein"
+          ],
+          "Dativ": [
+            "irgendeinem",
+            "irgendeiner",
+            "irgendeinem"
+          ],
+          "Genitiv": [
+            "irgendeines",
+            "irgendeiner",
+            "irgendeines"
+          ]
+        }
+      },
+      {
+        "label": "Ohne Nomen",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum"
+        ],
+        "rows": {
+          "Nominativ": [
+            "irgendeiner",
+            "irgendeine",
+            "irgendeines / irgendeins"
+          ],
+          "Akkusativ": [
+            "irgendeinen",
+            "irgendeine",
+            "irgendeines / irgendeins"
+          ],
+          "Dativ": [
+            "irgendeinem",
+            "irgendeiner",
+            "irgendeinem"
+          ],
+          "Genitiv": [
+            "irgendeines",
+            "irgendeiner",
+            "irgendeines"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Перед существительным: irgendein Buch. Без существительного: irgendeiner, irgendeine, irgendeines/irgendeins. Во множественном числе — irgendwelche.",
+    "usage_note_en": "Before a noun: irgendein Buch. Without a noun: irgendeiner, irgendeine, irgendeines/irgendeins. In the plural, use irgendwelche.",
+    "search_forms": [
+      "irgendein",
+      "irgendwelche",
+      "irgendwelchen",
+      "irgendwelcher",
+      "irgendeine",
+      "irgendeinen",
+      "irgendeinem",
+      "irgendeiner",
+      "irgendeines",
+      "irgendeins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/irgendein"
+  },
+  {
+    "id": "pronoun-047",
+    "word": "was für ein",
+    "translation_ru": "что за; какой (о виде или свойствах)",
+    "translation_en": "what kind of",
+    "example_de": "Was für ein Buch liest du?",
+    "example_ru": "Что за книгу ты читаешь?",
+    "example_en": "What kind of book are you reading?",
+    "forms": null,
+    "usage_note_ru": "Für здесь не требует Akkusativ: Was für ein Mann kommt? (Nominativ). Падеж определяется ролью всего сочетания: Mit was für einem Auto fährst du? Во множественном числе: was für Bücher; без существительного: was für einer/eine/eins.",
+    "usage_note_en": "Für here does not require the accusative: Was für ein Mann kommt? (nominative). Case depends on the role of the whole phrase: Mit was für einem Auto fährst du? Plural: was für Bücher; without a noun: was für einer/eine/eins.",
+    "search_forms": [
+      "was für ein",
+      "was für einer",
+      "was für eine",
+      "was für eins",
+      "was für eines",
+      "was für einen",
+      "was für einem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen"
+  },
+  {
+    "id": "pronoun-048",
+    "word": "viel",
+    "translation_ru": "много",
+    "translation_en": "much; a lot",
+    "example_de": "Ich habe heute viel zu tun.",
+    "example_ru": "У меня сегодня много дел.",
+    "example_en": "I have a lot to do today.",
+    "forms": null,
+    "usage_note_ru": "Обычно без окончания с неисчисляемым: viel Zeit. Без существительного: vieles («многое»), например Ich habe vieles gelernt; in vielem («во многом»). Для счётных предметов — viele.",
+    "usage_note_en": "Usually uninflected with an uncountable noun: viel Zeit. Without a noun: vieles (many things), as in Ich habe vieles gelernt; in vielem (in many respects). For countable things, use viele.",
+    "search_forms": [
+      "viel",
+      "vieles",
+      "vielem",
+      "vielen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei"
+  },
+  {
+    "id": "pronoun-049",
+    "word": "viele",
+    "translation_ru": "многие; много (счётных предметов)",
+    "translation_en": "many; many people/things",
+    "example_de": "Viele fahren mit dem Fahrrad zur Arbeit.",
+    "example_ru": "Многие ездят на работу на велосипеде.",
+    "example_en": "Many people cycle to work.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "viele"
+          ],
+          "Akkusativ": [
+            "viele"
+          ],
+          "Dativ": [
+            "vielen"
+          ],
+          "Genitiv": [
+            "vieler"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Множественное число для счётных предметов: viele Bücher. После die: die vielen Bücher, den vielen Büchern.",
+    "usage_note_en": "Plural for countable things: viele Bücher. After die: die vielen Bücher, den vielen Büchern.",
+    "search_forms": [
+      "viele",
+      "vielen",
+      "vieler"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei"
+  },
+  {
+    "id": "pronoun-050",
+    "word": "wenig",
+    "translation_ru": "мало",
+    "translation_en": "little; not much",
+    "example_de": "Ich habe heute wenig Zeit.",
+    "example_ru": "У меня сегодня мало времени.",
+    "example_en": "I have little time today.",
+    "forms": null,
+    "usage_note_ru": "Обычно без окончания с неисчисляемым: wenig Geld. Без существительного: weniges («немногое»), например Ich weiß nur weniges; mit wenigem («с немногим»). Для счётных предметов — wenige.",
+    "usage_note_en": "Usually uninflected with an uncountable noun: wenig Geld. Without a noun: weniges (a few things), as in Ich weiß nur weniges; mit wenigem (with little). For countable things, use wenige.",
+    "search_forms": [
+      "wenig",
+      "weniges",
+      "wenigem",
+      "wenigen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel"
+  },
+  {
+    "id": "pronoun-051",
+    "word": "wenige",
+    "translation_ru": "немногие; мало (счётных предметов)",
+    "translation_en": "few; few people/things",
+    "example_de": "Nur wenige haben die Frage richtig beantwortet.",
+    "example_ru": "Лишь немногие правильно ответили на вопрос.",
+    "example_en": "Only a few people answered the question correctly.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "wenige"
+          ],
+          "Akkusativ": [
+            "wenige"
+          ],
+          "Dativ": [
+            "wenigen"
+          ],
+          "Genitiv": [
+            "weniger"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Множественное число для счётных предметов: wenige Bücher. После die: die wenigen Bücher, den wenigen Büchern.",
+    "usage_note_en": "Plural for countable things: wenige Bücher. After die: die wenigen Bücher, den wenigen Büchern.",
+    "search_forms": [
+      "wenige",
+      "wenigen",
+      "weniger"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel"
+  }
+]
