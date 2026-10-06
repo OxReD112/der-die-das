@@ -43,7 +43,7 @@
       // Punctuation blocks clues: do not join separate clauses or quoted phrases.
       const adjacent = (a,b) => !/[,;:.!?“”„"()]/u.test(context.sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
       const next = index + 1, previous = index - 1;
-      const boundaryWords = new Set(["und","oder","aber","denn","sondern","weil","dass","wenn","ob"]);
+      const boundaryWords = new Set(["und","oder","aber","denn","sondern","weil","dass","wenn","ob","doch"]);
       let start = index, end = index;
       while (start > 0 && adjacent(start-1,start) && !boundaryWords.has(norm(tokens[start-1][0]))) start--;
       while (end + 1 < tokens.length && adjacent(end,end+1) && !boundaryWords.has(norm(tokens[end+1][0]))) end++;
@@ -65,7 +65,26 @@
       const clauseIndices = Array.from({length:end-start+1},(_,i)=>start+i);
       const modalInClause = clauseIndices.some(i => i !== index && matches(i).some(e => e.type === "Verb" && modalLemmas.includes(e.word) && finiteForm(e,i)));
       const dativeLemmas = ["helfen","danken","gefallen","gehören","vertrauen","antworten"];
-      const perfectDative = clauseIndices.some(i => i > index && matches(i).some(e => e.type === "Verb" && dativeLemmas.includes(e.word) &&
+      const hasDativeComplement = e => dativeLemmas.includes(e.word) || (e.complements || []).some(c => c.pattern === "Dativ");
+      const dativePrepositions = ["mit","bei","von","zu","aus","nach","seit","gegenüber","neben","an","auf","hinter","in","über","unter","vor","zwischen"];
+      const personalSubjects = new Set(["ich","du","er","sie","es","wir","ihr"]);
+      const hasSubjectBefore = verbIndex => clauseIndices.some(i => i !== index && i < verbIndex && personalSubjects.has(norm(tokens[i][0])) && !(i > start && dativePrepositions.includes(norm(tokens[i-1][0])))) ||
+        // A name directly before the finite verb is useful evidence, but a
+        // dictionary noun may be a fronted object and must not settle the role.
+        verbIndex > start && /^[A-ZÄÖÜ]/u.test(tokens[verbIndex-1][0]) && !matches(verbIndex-1).length;
+      let coordinatedStart = Math.max(0,start-2);
+      while (coordinatedStart > 0 && adjacent(coordinatedStart-1,coordinatedStart) && !boundaryWords.has(norm(tokens[coordinatedStart-1][0]))) coordinatedStart--;
+      const coordinatedFirst = tokens[coordinatedStart]?.[0] || "";
+      const inheritedSubject = previous === start && start > 0 && norm(tokens[start-1][0]) === "und" &&
+        (personalSubjects.has(norm(coordinatedFirst)) || coordinatedStart < start-2 && /^[A-ZÄÖÜ]/u.test(coordinatedFirst) && !matches(coordinatedStart).length);
+      const dativeFinite = clauseIndices.some(i => i < index && index-i <= 3 &&
+        matches(i).some(e => e.type === "Verb" && hasDativeComplement(e) && finiteForm(e,i)) &&
+        tokens.slice(i+1,index).every(t => ["nicht","auch","noch","schon","wirklich","mehr"].includes(norm(t[0]))) &&
+        (hasSubjectBefore(i) || inheritedSubject || !matches(i).some(e => e.type === "Verb" && finiteForm(e,i,"ihr"))));
+      const dativeFollowing = next <= end && hasSubjectBefore(next) && matches(next).some(e =>
+        e.type === "Verb" && hasDativeComplement(e) && finiteForm(e,next));
+      const dativePreposition = previous >= start && dativePrepositions.includes(norm(tokens[previous][0]));
+      const perfectDative = clauseIndices.some(i => i > index && matches(i).some(e => e.type === "Verb" && hasDativeComplement(e) &&
         norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[i][0]))) &&
         clauseIndices.some(i => i < index && matches(i).some(e => e.type === "Verb" && ["haben","sein"].includes(e.word) && finiteForm(e,i)));
       let ids = [], evidence = null;
@@ -80,6 +99,8 @@
       } else if (norm(word) === "sein" && modalInClause && index === end) {
         ids = candidates.filter(c => c.pos === "Verb" && c.lemma === "sein").map(c => c.dictionaryId);
         evidence = "sein-clause-final-after-modal";
+      } else if (norm(word) === "ihr" && (dativePreposition || dativeFinite || dativeFollowing)) {
+        ids = ["pronoun-004"]; evidence = dativePreposition ? "ihr-after-preposition" : "ihr-with-dative-finite-verb";
       } else if (norm(word) === "ihr" && [previous,next].some(i => i >= start && i <= end &&
         matches(i).some(e => e.type === "Verb" && finiteForm(e,i,"ihr")))) {
         ids = ["pronoun-007"]; evidence = "ihr-next-to-plural-verb";
