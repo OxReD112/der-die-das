@@ -503,13 +503,10 @@
     currentBook = null; $reading.hidden = true; $library.hidden = false; $("library-actions").hidden = false; document.body.classList.add("library-screen"); $("reader").querySelector(".reader-header").hidden = false; window.scrollTo({ top:0, behavior:"instant" }); document.title = "Bibliothek · Deutsch.";
     refreshBooks();
   });
-  let lastPointerType = "mouse";
-  document.addEventListener("pointerdown", event => { lastPointerType = event.pointerType; }, true);
-  // Capture the dismissal tap before word and navigation click handlers run.
-  // Older Safari click events omit pointerType, so use the preceding pointerdown.
+  // Consume outside clicks before word and navigation handlers run. Safari and
+  // accessibility clicks do not reliably report pointerType or a click count.
   document.addEventListener("click", event => {
-    const pointerType = event.pointerType || lastPointerType;
-    if (event.detail === 0 || pointerType === "mouse" || $popover.hidden || sourcesDialog.open || event.target.closest("#word-popover")) return;
+    if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover")) return;
     closePopups();
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -556,7 +553,6 @@
   $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryCard(selectedEntry); $popover.hidden = true; $sheet.hidden = false; });
   $("sheet-close").addEventListener("click", () => $sheet.hidden = true);
   $("sheet-scrim").addEventListener("click", () => $sheet.hidden = true);
-  document.addEventListener("pointerdown", event => { if (event.pointerType === "mouse" && !sourcesDialog.open && !event.target.closest("#word-popover") && !event.target.closest(".reading-word")) { lookupRequest++; $popover.hidden = true; } });
   document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });
   loadDictionary().catch(error => console.warn("Bibliothek dictionary unavailable", error));
   refreshBooks();
