@@ -492,6 +492,12 @@
     content.replaceChildren();
     $("popover-more").hidden = !selectedEntry;
     $("popover-source").hidden = !resolution.candidates.some(candidate => candidate.source === "fallback");
+    const notes = $("popover-form-notes"), noteText = $("popover-form-note-text");
+    notes.hidden = !resolution.formNotes?.length; notes.open = false;
+    noteText.replaceChildren();
+    for (const note of resolution.formNotes || []) {
+      const text = document.createElement("p"); text.textContent = note.meanings.join(" · "); noteText.append(text);
+    }
     const alternatives = $("popover-alternatives"), choices = $("popover-choices");
     alternatives.hidden = resolution.candidates.length < 2;
     alternatives.open = !resolution.selected;
@@ -502,7 +508,7 @@
       if (candidate.construction?.id === "separable-verb") return locale() === "ru" ? "отделяемый глагол" : "separable verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
-      return candidate.pos;
+      return candidate.additional ? `${candidate.posLabel || candidate.pos} · Wiktionary` : candidate.posLabel || candidate.pos;
     };
     const renderSelection = () => {
       const candidate = selectedResolution;
@@ -517,6 +523,7 @@
       $("popover-word").textContent = candidate ? `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}` : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
+      if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       choices.querySelectorAll("button").forEach((button,i) => button.setAttribute("aria-pressed", String(resolution.candidates[i] === candidate)));
     };
     resolution.candidates.forEach(candidate => {
@@ -544,6 +551,7 @@
       });
       choices.append(button);
     });
+    notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     renderSelection();
     await refreshBookmark(request);
     if (request !== lookupRequest) return;

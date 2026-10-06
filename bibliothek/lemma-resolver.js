@@ -3,7 +3,7 @@
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const formsOf = entry => ({...(entry?.lookup_forms || {}),...(entry?.forms || {})});
-  const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
+  const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", det:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
   function create(entries, fallback) {
     const forms = new Map(), lemmas = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
     function add(map, form, entry) {
@@ -185,7 +185,7 @@
       });
       const choose = (favoured,evidence) => favoured.length ? {
         candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
-        preferred:favoured.length === 1 ? favoured[0] : null,evidence
+        preferred:favoured.length === 1 ? favoured[0] : favoured.filter(c => c.source === "main").length === 1 ? favoured.find(c => c.source === "main") : null,evidence
       } : unchanged;
       const adjective = i => matches(i).some(e => e.type === "Adjektiv") ||
         ["e","en","em","er","es"].some(ending => norm(tokens[i]?.[0]).endsWith(ending) &&
@@ -247,32 +247,50 @@
       if (finiteOnly.length && !nouns.length) return choose(finiteOnly,"stored-finite-form");
       return unchanged;
     }
+    function coveredMeaning(meaning, items) {
+      const clean = value => norm(value).replace(/^to\s+/u, "").replace(/[.!:]+$/u, "").replace(/\s+/gu," ");
+      const own = new Set(items.flatMap(item => String(item.translation_en || "").split(/[;,]/u).map(clean)).filter(Boolean));
+      const parts = String(meaning).split(/[;,]/u).map(clean).filter(Boolean);
+      if (parts.length && parts.every(part => own.has(part))) return true;
+      // A short synonym bundle with an exact own gloss is one interpretation;
+      // qualifiers or longer explanations are retained conservatively.
+      return parts.length > 1 && parts.some(part => own.has(part)) &&
+        parts.every(part => /^[\p{L}\p{M}-]+(?: [\p{L}\p{M}-]+)?$/u.test(part)) &&
+        !parts.some(part => /\b(?:for|with|of|in|on|by|from|someone|something)\b/u.test(part));
+    }
     async function resolve(word, context) {
       const exact = forms.get(norm(word)) || [];
       const separated = separableCandidates(word, context);
-      let candidates = [...separated,...exact.map(mainCandidate)], error = null, unresolvedMeanings = [];
-      if (!exact.length) {
+      let candidates = [...separated,...exact.map(mainCandidate)], error = null, unresolvedMeanings = [], formNotes = [];
+      // Interactive lookup checks additional senses; bulk word-only callers keep
+      // their existing main-first behaviour and avoid unnecessary downloads.
+      if (!exact.length || context) {
         try {
           for (const group of await fallback.lookup(word)) {
+            if (group.kind === "form-note") { formNotes.push(group); continue; }
             if (group.unresolved) { unresolvedMeanings.push(...group.meanings); continue; }
-            const main = (lemmas.get(norm(group.word)) || []).filter(item => !group.pos || item.type === (posMap[group.pos] || group.pos));
-            if (main.length) candidates.push(...main.map(mainCandidate));
-            else candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",translation:{en:group.meanings.join("; "),ru:""},meanings:group.meanings});
+            const canonicalPos = posMap[group.pos] || group.pos || "";
+            const main = (lemmas.get(norm(group.word)) || []).filter(item => canonicalPos && item.type === canonicalPos);
+            candidates.push(...main.map(mainCandidate));
+            const extra = main.length ? group.meanings.filter(meaning => !coveredMeaning(meaning,main)) : group.meanings;
+            if (extra.length) candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",posLabel:canonicalPos,
+              translation:{en:extra.join("; "),ru:""},meanings:extra,additional:main.length > 0});
           }
         } catch (e) { error = e; }
       }
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
-      const grammatical = grammarRank(word, context, candidates);
+      const additional = candidates.filter(c => c.additional);
+      const grammatical = grammarRank(word, context, candidates.filter(c => !c.additional));
       const ranked = contextualRank(word, context, grammatical.candidates);
-      candidates = ranked.candidates;
+      candidates = [...ranked.candidates,...additional];
       // The feminine personal pronoun's dative form means her, not she.
       if (norm(word) === "ihr") {
         const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
         if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
       }
-      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null) || grammatical.preferred;
+      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => c.dictionaryId === exact[0].id) : null);
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
-      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
+      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
     }
     return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }

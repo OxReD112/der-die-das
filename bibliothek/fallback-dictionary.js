@@ -30,27 +30,58 @@
   }
   function groupsFor(word, data) {
     const byPos = new Map();
-    for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0))) {
+    for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0]-b[0])) {
       const pos = row[2] || "";
-      if (!byPos.has(pos)) byPos.set(pos, new Set());
-      byPos.get(pos).add(row[3]);
+      if (!byPos.has(pos)) byPos.set(pos, []);
+      byPos.get(pos).push(row[3]);
     }
-    return [...byPos].map(([pos, values]) => ({ word, pos, meanings:[...values] }));
+    const mappedLemmas = (data?.inflections || []).map(row => row[1]);
+    return [...byPos].map(([pos, values]) => {
+      const reference = value => /^inflection of\b/iu.test(value) || mappedLemmas.some(lemma =>
+        value.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`) &&
+        /\b(?:present|past|preterite|participle|imperative|singular|plural|dative|accusative|genitive|nominative|infinitive|comparative|superlative)\b/iu.test(value));
+      const hasReference = values.some(reference);
+      const grammarTokens = new Set(["first","second","third","person","singular","plural","present","past","preterite","perfect","imperfect","imperative","indicative","subjunctive","participle","nominative","accusative","dative","genitive","infinitive","positive","comparative","superlative","masculine","feminine","neuter","definite","indefinite","weak","strong","dependent","independent","subordinate","clause","zu"]);
+      const continuation = value => {
+        const tokens = value.toLowerCase().split(/[\s,;:/().-]+/u).filter(Boolean);
+        return hasReference && tokens.length > 0 && tokens.every(token => grammarTokens.has(token));
+      };
+      const notes = [...new Set(values.filter(value => reference(value) || continuation(value)))];
+      return {word,pos,meanings:[...new Set(values.filter(value => !notes.includes(value)))],formNotes:notes};
+    });
   }
   async function lookup(word) {
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
     for (const candidate of candidates) {
       const data = await record(candidate);
       if (!data) continue;
-      const lemmas = [...new Set((data.inflections || []).map(row => row[1]))];
-      const groups = (await Promise.all(lemmas.map(async lemma => groupsFor(lemma, await record(lemma))))).flat();
-      // Keep direct lexical meanings too; a spelling may also be an inflected form.
-      const direct = groupsFor(candidate, data).filter(group => !lemmas.length ||
-        (data.senses || []).some(row => (row[2] || "") === group.pos && !lemmas.some(lemma => row[3].includes(` of ${lemma}`))));
-      const usable = [...groups, ...direct];
-      if (usable.length) return usable.filter((g,i,all) => all.findIndex(x => x.word === g.word && x.pos === g.pos) === i);
-      // Definitions of a form are useful for lookup but cannot establish a lemma.
-      if (meanings(data).length) return [{word:candidate, pos:"", meanings:meanings(data), unresolved:true}];
+      const direct = groupsFor(candidate,data);
+      // The export also contains auxiliary relations and malformed form mappings.
+      // Only grammatical references support resolving this spelling to another lemma.
+      const mappings = (data.inflections || []).filter(row =>
+        !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
+        direct.some(group => group.formNotes.some(note =>
+          note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`))));
+      const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
+      const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
+        const mapped = groupsFor(lemma,await record(lemma));
+        // A verb inflection must not inherit unrelated noun senses of its lemma.
+        return mapped.filter(group => !describedPositions.size || describedPositions.has(group.pos));
+      }))).flat();
+      const usable = [...groups,...direct].filter(group => group.meanings.length);
+      const notes = direct.filter(group => group.formNotes.length).map(group => ({
+        kind:"form-note",word:candidate,pos:group.pos,meanings:group.formNotes,
+        lemmas:[...new Set(mappings.map(row => row[1]))]
+      }));
+      const merged = new Map();
+      for (const group of usable) {
+        const key = JSON.stringify([group.word,group.pos]);
+        if (!merged.has(key)) merged.set(key,{word:group.word,pos:group.pos,meanings:[]});
+        const target = merged.get(key);
+        target.meanings = [...new Set([...target.meanings,...group.meanings])];
+      }
+      if (merged.size || notes.length) return [...merged.values(),...notes];
+      if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
     }
     return [];
   }
