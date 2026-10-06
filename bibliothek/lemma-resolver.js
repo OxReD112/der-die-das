@@ -653,6 +653,14 @@
       while (determinerIndex >= start && index-determinerIndex <= 3 && adjective(determinerIndex)) determinerIndex--;
       const determiner = norm(tokens[determinerIndex]?.[0]);
       const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
+      // After stronger contextual rules, lowercase spelling favours an adjective
+      // over a noun. Keep every candidate available for manual correction.
+      // Sentence-initial capitals provide no evidence between these two roles.
+      if (adjectives.length && nouns.length && candidates.every(c =>
+          ["Adjektiv","Nomen"].includes(canonicalPos(c.pos)))) {
+        if (/^[a-zäöüß]/u.test(word)) return choose(adjectives,"lowercase-adjective-over-noun");
+        if (index === 0) return {...unchanged,blocked:true,evidence:"sentence-initial-adjective-noun-ambiguity"};
+      }
       // A dictionary noun after a determiner is useful evidence even when the
       // reader's text omits capitals (mein buch, ein gutes essen).
       if (nouns.length && determinerIndex >= start && (determiners.has(determiner) || inflectedDeterminer)) {
