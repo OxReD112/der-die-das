@@ -1,8 +1,5 @@
 (() => {
   "use strict";
-  // TEMP COVER DIAGNOSTICS: remove with cover-debug.js after the phone check.
-  window.BibliothekCoverImporterVersion = "cover-debug-2026-10-06-1";
-  const trace = (stage, details) => window.BibliothekCoverDebug?.log(stage, details);
   const { ImportError, registerParser } = window.BibliothekImport;
   const fail = message => { throw new ImportError("epub", message); };
   const elements = (node, name) => [...node.getElementsByTagNameNS("*", name)];
@@ -60,21 +57,20 @@
         image.onerror = reject;
         image.src = url;
       });
-      trace("Изображение открыто", { width: image.naturalWidth, height: image.naturalHeight });
       if (!image.naturalWidth || !image.naturalHeight) return null;
       const scale = Math.min(1, 160 / image.naturalWidth, 240 / image.naturalHeight);
       const canvas = document.createElement("canvas");
       canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
       canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
       const context = canvas.getContext("2d");
+      context.fillStyle = "#fff";
+      context.fillRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      const result = canvas.toDataURL("image/webp", .8);
-      trace("Миниатюра создана", { type: result.slice(0, result.indexOf(";")), characters: result.length, accepted: result.length <= 100000 });
+      const result = canvas.toDataURL("image/jpeg", .8);
       return result.length <= 100000 ? result : null;
     } finally { URL.revokeObjectURL(url); }
   }
   registerParser("epub", async file => {
-    trace("Импорт EPUB начат", { bytes: file.size });
     if (file.size > 50 * 1024 * 1024) fail("This EPUB is too large. Choose a file smaller than 50 MB.");
     let zip;
     try { zip = await window.JSZip.loadAsync(await file.arrayBuffer()); }
@@ -135,18 +131,15 @@
           }
         }
       }
-      trace("Обложка найдена", { path: coverPath || null, type: coverType || null, encrypted: encrypted.has(coverPath) });
       // Raster input only: SVG covers may depend on external resources.
       if (coverPath && !encrypted.has(coverPath) && /^image\/(jpeg|png|webp|gif)$/i.test(coverType || "")) {
         const entry = zip.file(coverPath);
-        trace("Файл обложки", { exists: Boolean(entry), bytes: entry?._data?.uncompressedSize, limit: 10 * 1024 * 1024 });
         if (entry && (entry._data?.uncompressedSize || 0) <= 10 * 1024 * 1024) {
           const bytes = await entry.async("uint8array");
           if (bytes.length <= 10 * 1024 * 1024) coverThumbnail = await thumbnail(bytes, coverType);
         }
       }
-    } catch (error) { trace("Ошибка обработки обложки", { name: error?.name, message: error?.message || String(error) }); }
-    trace("Результат обработки обложки", { thumbnail: Boolean(coverThumbnail) });
+    } catch (_) { /* Keep the standard cover when artwork is missing or damaged. */ }
     const chapters = [];
     for (const ref of elements(spine, "itemref")) {
       const item = items.get(ref.getAttribute("idref"));
