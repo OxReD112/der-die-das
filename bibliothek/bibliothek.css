@@ -60,6 +60,11 @@
 .reader-status:empty { display:none; }
 .reader-status { min-height:18px; margin:8px 0 0; color:var(--muted); font-size:13px; }
 .reading-toolbar { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:55px; background:var(--bg); }
+.chapter-navigation { position:sticky; top:55px; z-index:2; display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--hairline); background:var(--bg); }
+.chapter-navigation button { flex:none; width:44px; height:44px; border:1px solid var(--hairline); border-radius:12px; background:var(--tile-surface); color:var(--text); font-size:26px; cursor:pointer; }
+.chapter-navigation button:disabled { opacity:.35; cursor:default; }
+.chapter-choice { flex:1; min-width:0; color:var(--muted); font-size:12px; }
+.chapter-choice select { display:block; width:100%; min-height:44px; margin-top:4px; padding:8px; border:1px solid var(--hairline); border-radius:10px; background:var(--bg); color:var(--text); font:inherit; font-size:15px; }
 .toolbar-back { display:flex; align-items:center; gap:8px; flex:1; min-width:0; min-height:44px; padding:0; color:var(--secondary-text); text-align:left; font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
 .toolbar-arrow { flex:none; font:400 30px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; }
 .toolbar-title { display:block; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
