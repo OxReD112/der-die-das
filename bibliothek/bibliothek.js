@@ -194,7 +194,7 @@
         image.decoding = "async";
         image.addEventListener("load", () => {
           // Narrow artwork fills the front without extending over the separate spine.
-          icon.classList.toggle("has-narrow-cover", image.naturalWidth / image.naturalHeight < 40 / 48);
+          icon.classList.toggle("has-narrow-cover", image.naturalWidth / image.naturalHeight < 40 / 54);
         }, { once: true });
         image.addEventListener("error", () => {
           icon.classList.remove("has-narrow-cover");
