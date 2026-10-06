@@ -15,7 +15,7 @@
       closing=true;menu(false);dialog.classList.remove('is-opening');
       if(matchMedia('(max-width:600px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
         dialog.classList.add('is-closing');
-        await Promise.all(dialog.getAnimations().map(a=>a.finished.catch(()=>{})));
+        await Promise.all(dialog.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{})));
       }
       dialog.close();dialog.classList.remove('is-closing');closing=false;
     }

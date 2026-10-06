@@ -1,6 +1,12 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
+  function updateDrawerTop() {
+    const toolbar=document.querySelector('.reading-toolbar');
+    if(toolbar?.getClientRects().length)document.documentElement.style.setProperty('--reader-header-bottom', `${toolbar.getBoundingClientRect().bottom}px`);
+  }
+  new ResizeObserver(updateDrawerTop).observe(document.querySelector('.reading-toolbar'));
+  window.addEventListener('resize',updateDrawerTop);
   const STORE = "books";
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
@@ -370,18 +376,17 @@
     contentsDialog.classList.remove("is-opening");
     if (matchMedia("(max-width:600px)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
       contentsDialog.classList.add("is-closing");
-      await Promise.all(contentsDialog.getAnimations().map(animation => animation.finished.catch(() => {})));
+      await Promise.all(contentsDialog.getAnimations({subtree:true}).map(animation => animation.finished.catch(() => {})));
     }
     contentsDialog.close();
     contentsDialog.classList.remove("is-closing");
     contentsClosing = false;
   }
   function renderContents() {
-    const query = norm($("contents-search").value), active = activeEntry(currentBook);
+    const active = activeEntry(currentBook);
     const counts = wordCountsFor(currentBook);
     const list = $("contents-list"); list.replaceChildren();
     for (const entry of contentsFor(currentBook)) {
-      if (query && !norm([...(entry.parentTitles || []), entry.title].join(" ")).includes(query)) continue;
       const row = document.createElement(entry.navigable ? "button" : "div");
       row.className = "contents-entry"; row.style.setProperty("--depth", Math.min(entry.depth || 0, 4));
       const title = document.createElement("span"); title.textContent = entry.title; row.append(title);
@@ -392,9 +397,6 @@
         words.textContent = count.toLocaleString("de-DE").replace(/\./g, "\u202f");
         words.setAttribute("aria-label", `${count} Wörter`);
         row.append(words);
-      }
-      if (query && entry.parentTitles?.length) {
-        const context = document.createElement("small"); context.textContent = entry.parentTitles.join(" › "); row.append(context);
       }
       if (entry.navigable) {
         row.type = "button";
@@ -408,12 +410,11 @@
     $("contents-empty").hidden = Boolean(list.children.length);
   }
   $("contents-toggle").addEventListener("click", () => {
-    closePopups(); $("contents-search").value = "";
+    closePopups();
     $("contents-book-title").textContent = currentBook.title;
-    $("contents-search-label").hidden = contentsFor(currentBook).length < 15;
-    renderContents(); contentsDialog.showModal(); contentsDialog.classList.add("is-opening");
+    updateDrawerTop(); renderContents(); contentsDialog.showModal(); contentsDialog.classList.add("is-opening");
     const active = $("contents-list").querySelector('[aria-current]');
-    if (active) { active.scrollIntoView({ block: "center" }); active.focus({ preventScroll: true }); }
+    if (active) { active.scrollIntoView({ block: "center" }); }
   });
   $("contents-close").addEventListener("click", closeContents);
   contentsDialog.addEventListener("cancel", event => { event.preventDefault(); closeContents(); });
@@ -422,7 +423,6 @@
     const bounds = contentsDialog.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeContents();
   } });
-  $("contents-search").addEventListener("input", renderContents);
   function renderChapterNavigation(book) {
     $("contents-toggle").hidden = !hasChapters(book);
     $("chapter-progress-track").hidden = !hasChapters(book);
@@ -485,8 +485,8 @@
     renderChapterNavigation(book);
     vocabularyPanel.updateCount();
     $("book-headline").textContent = active?.title || (hasChapters(book) ? book.chapters[book.chapterIndex].title : book.title);
-    const first = $text.firstElementChild;
-    $("book-headline").hidden = Boolean(first && /^H[1-6]$/.test(first.tagName) && norm(first.textContent).replace(/[.!?:;]+$/u, "") === norm($("book-headline").textContent).replace(/[.!?:;]+$/u, ""));
+    // EPUB chapter titles belong to the book text, where words remain interactive.
+    $("book-headline").hidden = hasChapters(book);
     $("toolbar-title").textContent = book.title;
     $("toolbar-title").title = book.title;
     $("reader").querySelector(".reader-header").hidden = true;
