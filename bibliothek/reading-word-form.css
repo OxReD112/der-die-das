@@ -9,6 +9,7 @@
   --quiet-text: var(--secondary-text, #c8c7c4);
   --overlay-scrim: rgba(0,0,0,.34);
   --error: #ff7770;
+  --accent: var(--mint);
   --blank-line: var(--text);
   z-index: 100;
   box-sizing: border-box;

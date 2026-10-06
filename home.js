@@ -1291,10 +1291,12 @@ function buildDeutschBackup() {
   };
 }
 
-function saveDeutschBackup() {
+async function saveDeutschBackup() {
   const note = document.getElementById("backupNote");
   try {
     const backup = buildDeutschBackup();
+    const reading = await window.BibliothekReadingData.exportData();
+    if (reading.states.length) backup.modules.bibliothek = {storageVersion:'deutschReadingDataV1',state:reading};
     if (!Object.keys(backup.modules).some(name => !BACKUP_MODULES[name]?.setting)) {
       if (note) note.textContent = "· No progress found";
       return;
@@ -1334,6 +1336,11 @@ function validateDeutschBackup(backup) {
     if (moduleBackup.state === undefined || moduleBackup.state === null) return;
     restorable.push([moduleName, config, moduleBackup.state]);
   });
+  const reading = backup.modules.bibliothek;
+  if (reading?.storageVersion === 'deutschReadingDataV1') {
+    window.BibliothekReadingData.validate(reading.state);
+    restorable.push(['bibliothek', {storageVersion:'deutschReadingDataV1'}, reading.state]);
+  }
   if (restorable.length === 0) throw new Error("nothing");
   return restorable;
 }
@@ -1361,8 +1368,11 @@ async function restoreDeutschBackup(file) {
       const last = Date.parse(localStorage.getItem(DEUTSCH_LAST_BACKUP_KEY) || "");
       if (!last || created.getTime() > last) localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY, created.toISOString());
     }
+    const reading = restorable.find(([name]) => name === 'bibliothek');
+    if (reading) await window.BibliothekReadingData.restore(reading[2]);
     const previousNotificationUser = localStorage.getItem("deutschNotificationUserIdV1");
-    restorable.forEach(([, config, state]) => {
+    restorable.forEach(([name, config, state]) => {
+      if(name === "bibliothek") return;
       localStorage.setItem(
         config.storageKey,
         config.plain && typeof state === "string" ? state : JSON.stringify(state)
@@ -2185,10 +2195,15 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   function atRisk() {
     return !isStandalone() && (isIOS() || isMacSafari());
   }
+  let readingHasProgress = false;
+  async function refreshReadingProgress() {
+    try { readingHasProgress = (await window.BibliothekReadingData.list()).length > 0; } catch (_) {}
+    renderAll();
+  }
   function hasProgress() {
     try {
       const b = buildDeutschBackup();
-      return Object.keys(b.modules).some(n => !BACKUP_MODULES[n]?.setting);
+      return readingHasProgress || Object.keys(b.modules).some(n => !BACKUP_MODULES[n]?.setting);
     } catch (e) {
       return false;
     }
@@ -2385,10 +2400,11 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     renderCard();
     renderBackupNote();
   }
-  $("settingsOpen")?.addEventListener("click", () => setTimeout(renderBackupNote, 0));
+  $("settingsOpen")?.addEventListener("click", refreshReadingProgress);
   $("translationLangToggle")?.addEventListener("click", () => setTimeout(renderAll, 0));
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) renderCard();
+    if (!document.hidden) refreshReadingProgress();
   });
   renderAll();
+  refreshReadingProgress();
 })();

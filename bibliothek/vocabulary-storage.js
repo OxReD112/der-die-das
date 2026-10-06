@@ -43,7 +43,7 @@
     const loc = input.location;
     if (!loc || !Number.isInteger(loc.chapterIndex) || loc.chapterIndex < 0 || !Number.isInteger(loc.paragraphIndex) || loc.paragraphIndex < 0 || !Number.isInteger(loc.tokenOffset) || loc.tokenOffset < 0)
       throw new TypeError("A chapter index, paragraph index and token offset are required.");
-    const db = await openDb(), key = identity(input);
+    const db = await window.BibliothekReadingData.open(), key = identity(input);
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readwrite"), store = tx.objectStore(STORE);
       const request = store.get([input.bookId, key]);
@@ -73,7 +73,7 @@
   async function resolveOccurrence(bookId, oldKey, location, candidate) {
     if (!norm(candidate.lemma) || !(candidate.dictionaryId != null || candidate.source === "fallback"))
       throw new TypeError("Choose a resolved dictionary candidate.");
-    const db = await openDb(), key = identity(candidate);
+    const db = await window.BibliothekReadingData.open(), key = identity(candidate);
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readwrite"), store = tx.objectStore(STORE);
       let result = null;
@@ -107,7 +107,7 @@
     });
   }
   async function list(bookId, chapterIndex) {
-    const db = await openDb();
+    const db = await window.BibliothekReadingData.open();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readonly");
       const request = tx.objectStore(STORE).index("bookId").getAll(bookId);
@@ -126,7 +126,7 @@
     request.onsuccess = () => { const cursor = request.result; if (cursor) { cursor.delete(); cursor.continue(); } };
   }
   async function clear(bookId, chapterIndex, key) {
-    const db = await openDb();
+    const db = await window.BibliothekReadingData.open();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readwrite");
       const request = tx.objectStore(STORE).index("bookId").openCursor(IDBKeyRange.only(bookId));
@@ -152,7 +152,7 @@
   async function clearScope(bookId, range = null, keys = null) {
     if (range && (!Number.isInteger(range.chapterIndex) || !Number.isInteger(range.start) || !Number.isInteger(range.end) || range.chapterIndex < 0 || range.start < 0 || range.end < range.start))
       throw new TypeError("Invalid chapter range.");
-    const selected = keys == null ? null : new Set(keys), db = await openDb();
+    const selected = keys == null ? null : new Set(keys), db = await window.BibliothekReadingData.open();
     return new Promise((resolve,reject) => {
       const tx=db.transaction(STORE,"readwrite"), store=tx.objectStore(STORE);
       const request=store.index("bookId").openCursor(IDBKeyRange.only(bookId));

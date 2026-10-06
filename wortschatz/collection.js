@@ -202,6 +202,8 @@
     if (!c) throw new Error("no-collection");
     const p = prepare(items, c.cards);
     if (!p.cards.length) return summary(p);
+    // Resolve dependencies before persisting cards: a failure must not look like a failed save after writing.
+    const due = activateNow ? today() : null;
     const fresh = withIds(c, p.cards);
     if (placement === "next") {
       const active = new Set((read(PROGRESS_KEY)?.activeIds || []).map(String));
@@ -214,7 +216,7 @@
       st.activeIds = st.activeIds || [];
       fresh.forEach(card => {
         st.activeIds.push(card.id);
-        st.cards[card.id] = { level: 0, due: today() };
+        st.cards[card.id] = { level: 0, due };
       });
       write(PROGRESS_KEY, st);
     }

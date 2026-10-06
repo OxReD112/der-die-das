@@ -1,16 +1,7 @@
 /* Occurrence-specific corrections, independent of vocabulary marks. */
 (() => {
   "use strict";
-  let connection;
-  function open() {
-    if (!connection) connection = new Promise((resolve,reject) => {
-      const request = indexedDB.open("deutschReadingMeaningsV1",1);
-      request.onupgradeneeded = () => request.result.createObjectStore("selections");
-      request.onsuccess = () => { request.result.onversionchange = () => { request.result.close(); connection = null; }; resolve(request.result); };
-      request.onerror = () => { connection = null; reject(request.error); };
-    });
-    return connection;
-  }
+  const open = () => window.BibliothekReadingData.open();
   const key = context => JSON.stringify([context.bookId,context.location.chapterIndex,context.location.paragraphIndex,context.location.tokenOffset]);
   async function access(context, value) {
     const db = await open();

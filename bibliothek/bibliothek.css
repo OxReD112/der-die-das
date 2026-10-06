@@ -53,8 +53,8 @@
 .book-icon.is-completed .book-marker::before { background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.08) 1px,transparent 2.5px),var(--secondary-text); }
 [data-theme="light"] .book-icon { box-shadow:var(--lift-shadow); }
 .book-meta { min-width:0; }
-.book-title { display:block; overflow:hidden; color:var(--text); font-size:15px; line-height:1.25; font-weight:650; text-overflow:ellipsis; white-space:nowrap; }
-.book-subtitle { display:block; margin-top:4px; color:var(--muted); font-size:12px; }
+.book-title { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; overflow-wrap:anywhere; color:var(--text); font-size:15px; line-height:18px; font-weight:650; }
+.book-subtitle { display:block; overflow:hidden; margin-top:4px; color:var(--muted); font-size:12px; line-height:14px; text-overflow:ellipsis; white-space:nowrap; }
 .book-arrow { color:var(--muted); font-size:24px; text-align:center; }
 .empty-library { display:grid; justify-items:center; padding:54px 20px 36px; text-align:center; }
 .empty-mark { display:grid; place-items:center; width:66px; height:66px; margin-bottom:16px; border:1px solid var(--hairline); border-radius:19px; color:var(--mint); font:28px/1 Georgia,serif; }
@@ -383,3 +383,6 @@
 .page-controls button { display:none; }
 #page-status { text-align:right; }
 @media (prefers-reduced-motion:reduce) { .storage-notice { transition:none; } }
+
+.book-row.is-missing .book-open { opacity:.5; }
+.book-row.is-missing .book-open:hover,.book-row.is-missing .book-open:focus-visible { opacity:.8; }

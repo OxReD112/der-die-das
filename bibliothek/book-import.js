@@ -35,10 +35,18 @@
       if (error instanceof ImportError) throw error;
       throw new ImportError("read", "This file could not be read. Try selecting it again.");
     }
-    return createBook(parsed, { name: file.name, format });
+    const book = createBook(parsed, { name: file.name, format });
+    book.id = await fingerprint(await file.arrayBuffer());
+    return book;
   }
-  function fromText(title, content) {
-    return createBook({ title, content: String(content || "").trim() }, { name: "Pasted text", format: "txt" });
+  async function fingerprint(bytes) {
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return "sha256:" + Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2,"0")).join("");
+  }
+  async function fromText(title, content) {
+    const book = createBook({ title, content: String(content || "").trim() }, { name: "Pasted text", format: "txt" });
+    book.id = await fingerprint(new TextEncoder().encode(book.content));
+    return book;
   }
   registerParser("txt", async file => ({ content: await file.text() }));
   window.BibliothekImport = Object.freeze({ fromFile, fromText, registerParser, ImportError });

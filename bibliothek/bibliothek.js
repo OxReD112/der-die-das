@@ -27,7 +27,7 @@
       return true;
     },
     onChange:(location, page, count) => {
-      if (!currentBook || !location) return;
+      if (!currentBook || !location || deleting) return;
       const book = currentBook;
       book.position = location.paragraph;
       book.tokenOffset = location.tokenOffset;
@@ -109,36 +109,37 @@
   document.addEventListener("visibilitychange", () => { if (!document.hidden) updateReaderLanguage(); });
 
   const openDb = () => window.BibliothekVocabulary.openDb();
+  let reloadBookId = null;
   async function allBooks() {
     const db = await openDb();
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE, "readwrite");
-      const store = tx.objectStore(STORE);
-      const req = store.getAll();
-      let books = [];
-      req.onsuccess = () => {
-        books = req.result;
-        // Older books have no upload date. Freeze their current order once.
-        books.forEach(book => {
-          if (!Number.isFinite(book.createdAt)) {
-            book.createdAt = Number(book.updatedAt) || 0;
-            store.put(book);
-          }
-        });
-      };
-      tx.oncomplete = () => resolve(books.sort((a,b) => b.createdAt - a.createdAt || String(a.id).localeCompare(String(b.id))));
-      tx.onerror = tx.onabort = () => reject(tx.error || req.error);
+    const content = await new Promise((resolve,reject) => {
+      const tx=db.transaction(STORE,'readonly'), request=tx.objectStore(STORE).getAll();
+      tx.oncomplete=()=>resolve(request.result);tx.onerror=tx.onabort=()=>reject(tx.error);
     });
+    const states=await window.BibliothekReadingData.list(), byId=new Map(content.map(book=>[book.id,book]));
+    for(const state of states) byId.set(state.id,{...byId.get(state.id),...state,missingContent:!byId.has(state.id)});
+    return [...byId.values()].sort((a,b)=>(b.createdAt || 0)-(a.createdAt || 0)||String(a.id).localeCompare(String(b.id)));
   }
-  async function saveBook(book) {
-    const db = await openDb();
-    await new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE, "readwrite");
-      tx.objectStore(STORE).put(book);
-      tx.oncomplete = resolve;
-      tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not save this book"));
-    });
-    try { if (navigator.storage?.persist) await navigator.storage.persist(); } catch (e) {}
+  async function saveBook(book, saveContent = false) {
+    book.wordCount ??= (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
+    await window.BibliothekReadingData.save(book);
+    if (saveContent) {
+      const db = await openDb();
+      const content={...book};
+      for(const field of window.BibliothekReadingData.fields) delete content[field];
+      delete content.missingContent;
+      await new Promise((resolve,reject)=>{
+        const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(content);
+        tx.oncomplete=resolve;tx.onerror=tx.onabort=()=>reject(tx.error || new Error('Could not save this book'));
+      });
+      try { if (navigator.storage?.persist) await navigator.storage.persist(); } catch (_) {}
+    }
+  }
+  async function importBook(book) {
+    if(reloadBookId && book.id !== reloadBookId) throw new window.BibliothekImport.ImportError('different','This is a different book. Choose the original file.');
+    const state=await window.BibliothekReadingData.get(book.id);
+    if(state) Object.assign(book,state);
+    await saveBook(book,true);
   }
   async function updateProgress(book, paragraph) {
     book.position = paragraph;
@@ -181,7 +182,7 @@
       button.className = "book-open";
       button.type = "button";
       button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
-      const hasSecondPage = splitParagraphs(book.content).length > 1;
+      const hasSecondPage = book.missingContent || splitParagraphs(book.content).length > 1;
       const started = hasSecondPage && Boolean(book.readingStarted || Number(book.position) > 0 || Number(book.chapterIndex) > 0);
       const completed = started && Boolean(book.completed);
       const icon = button.querySelector(".book-icon");
@@ -210,10 +211,21 @@
       button.querySelector(".book-icon").classList.toggle("is-completed", completed);
       button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
       button.querySelector(".book-title").textContent = book.title;
-      const words = (book.content.match(/[\p{L}\p{M}]+/gu) || []).length;
+      const words = (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
+      const fileFormat = String(book.format || "txt").toUpperCase();
       const resume = hasChapters(book) && started ? activeEntry({ ...book, chapterIndex: book.chapterIndex || 0, position: book.position || 0 }) : null;
-      button.querySelector(".book-subtitle").textContent = completed ? "Finished" : resume ? `Continue · ${resume.title}` : `${words.toLocaleString()} words · ${book.name || "Pasted text"}`;
-      button.addEventListener("click", () => openBook(book));
+      button.querySelector(".book-subtitle").textContent = completed ? "Finished" : resume ? `Continue · ${resume.title}` : `${words.toLocaleString()} words · ${fileFormat}`;
+      if(book.missingContent) {
+        row.classList.add('is-missing');
+        button.querySelector('.book-arrow').textContent = '↻';
+        button.querySelector('.book-subtitle').textContent = 'Reload file · ' + fileFormat;
+        button.setAttribute('aria-label', `Reload file for “${book.title}”`);
+        button.title = 'Reload the original file to continue reading';
+      }
+      button.addEventListener("click", () => {
+        if(book.missingContent) { reloadBookId=book.id; $file.click(); }
+        else openBook(book);
+      });
       const remove = document.createElement("button");
       remove.className = "book-delete";
       remove.type = "button";
@@ -258,17 +270,19 @@
     if (!pendingDelete || deleting) return;
     const id = pendingDelete.id;
     deleting = true;
+    clearTimeout(window.__readingSaveTimer);
     $("confirm-delete").disabled = true;
     $("cancel-delete").disabled = true;
     try {
       const db = await openDb();
       await new Promise((resolve, reject) => {
-        const tx = db.transaction([STORE, window.BibliothekVocabulary.STORE], "readwrite");
+        const tx = db.transaction(STORE, "readwrite");
         tx.objectStore(STORE).delete(id);
-        window.BibliothekVocabulary.deleteBookMarks(tx, id);
+
         tx.oncomplete = resolve;
         tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not delete this book"));
       });
+      await window.BibliothekReadingData.remove(id);
       // Release the previous reader content as well as the persisted record.
       clearTimeout(window.__readingSaveTimer);
       currentBook = null;
@@ -966,18 +980,18 @@
     openWordPopup(selectedWord, span.getBoundingClientRect());
   }
 
-  $("add-book").addEventListener("click", () => $file.click());
+  $("add-book").addEventListener("click", () => { reloadBookId=null; $file.click(); });
   $file.addEventListener("change", async () => {
     const file = $file.files?.[0];
     if (!file) return;
     try {
       const book = await window.BibliothekImport.fromFile(file);
-      await saveBook(book);
+      await importBook(book);
       await refreshBooks();
       showToast("Saved on this device.");
     } catch (error) {
       showToast(error instanceof window.BibliothekImport.ImportError ? error.message : "The book could not be saved. Check available browser storage.");
-    } finally { $file.value = ""; }
+    } finally { $file.value = ""; reloadBookId=null; }
   });
   $("paste-toggle").addEventListener("click", () => {
     const form = $("paste-form");
@@ -990,7 +1004,8 @@
     const title = $("paste-title").value.trim(); const content = $("paste-content").value.trim();
     if (!title || !content) return;
     try {
-      await saveBook(window.BibliothekImport.fromText(title, content));
+      reloadBookId=null;
+      await importBook(await window.BibliothekImport.fromText(title, content));
       $("paste-form").reset(); $("paste-form").hidden = true; $("paste-toggle").setAttribute("aria-expanded", "false"); await refreshBooks(); showToast("Text saved on this device.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
@@ -1031,7 +1046,7 @@
     return changed;
   }
   function flushReadingPosition() {
-    if (!currentBook || $reading.hidden || switchingChapter) return;
+    if (!currentBook || $reading.hidden || switchingChapter || deleting) return;
     clearTimeout(window.__readingSaveTimer);
     updateProgress(currentBook, restoringPosition ? currentBook.position : visibleParagraph());
   }
