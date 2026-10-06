@@ -982,6 +982,7 @@
       const book = await window.BibliothekImport.fromFile(file);
       await saveBook(book);
       await refreshBooks();
+      window.BibliothekCoverDebug?.saved(book);
       showToast("Saved on this device.");
     } catch (error) {
       showToast(error instanceof window.BibliothekImport.ImportError ? error.message : "The book could not be saved. Check available browser storage.");
