@@ -889,7 +889,6 @@
   document.addEventListener("click", event => {
     if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover, #reader-toast")) return;
     closePopups();
-    if (event.target.closest("#reading-text .reading-word, .page-controls")) return;
     event.preventDefault();
     event.stopImmediatePropagation();
   }, true);
