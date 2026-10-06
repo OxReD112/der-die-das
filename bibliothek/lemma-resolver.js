@@ -1,10 +1,10 @@
-/* Dictionary-backed candidates with conservative sentence clues for sein/ihr. */
+/* Dictionary-backed candidates, pronoun clues and separable verb groups. */
 (() => {
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
   function create(entries, fallback) {
-    const forms = new Map(), lemmas = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    const forms = new Map(), lemmas = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
     function add(map, form, entry) {
       const key = norm(form);
       if (!key) return;
@@ -22,18 +22,65 @@
         }
       }
       if (entry.type === "Verb") {
-        for (const group of Object.values(entry.forms || {})) {
+        const provenPrefixes = new Set(entry.separable_prefix ? [entry.separable_prefix] : []);
+        for (const [tense,group] of Object.entries(entry.forms || {})) {
           for (const form of Object.values(group || {})) {
             // Do not index a separated verb's stem as the whole verb.
             const clean = String(form).replace(/[.!?]+$/g, "").trim();
             if (/^[\p{L}\p{M}]+$/u.test(clean)) add(forms, clean, entry);
+            const parts = clean.split(/\s+/);
+            if (parts.length === 2 && parts.every(part => /^[\p{L}\p{M}]+$/u.test(part)) &&
+              !entry.word.includes(" ") && norm(entry.word).startsWith(norm(parts[1]))) {
+              const stem = norm(parts[0]), prefix = norm(parts[1]);
+              provenPrefixes.add(prefix);
+              const pairs = separatedForms.get(stem) || [];
+              if (!pairs.some(pair => pair.entry.id === entry.id && pair.prefix === prefix)) pairs.push({entry,prefix});
+              separatedForms.set(stem,pairs);
+              if (tense !== "Imperativ") add(forms,prefix + stem,entry);
+            }
           }
+        }
+        for (const prefix of provenPrefixes) {
+          if (norm(entry.word).startsWith(prefix)) add(forms,prefix + "zu" + norm(entry.word).slice(prefix.length),entry);
         }
         const participle = String(entry.perfect_form || "").trim().split(/\s+/).pop();
         if (participle) add(forms, participle, entry);
       }
     }
     const mainCandidate = item => ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    function separableCandidates(word, context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return [];
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (selected < 0) return [];
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
+      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index));
+      let start = selected, end = selected;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const prefix = norm(tokens[end][0]), results = [];
+      for (let i = start; i < end; i++) {
+        if (selected !== i && selected !== end) continue;
+        const pairs = (separatedForms.get(norm(tokens[i][0])) || []).filter(pair => pair.prefix === prefix);
+        if (!pairs.length) continue;
+        // A capitalised noun inside a clause must not become a verb stem.
+        if (i > start && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Nomen")) continue;
+        // Avoid attaching a particle across another verb group.
+        if (tokens.slice(i+1,end).some(t => {
+          const entries = forms.get(norm(t[0])) || [];
+          if (norm(t[0]) === "bitte" || /^[A-ZÄÖÜ]/u.test(t[0]) && entries.some(e => e.type === "Nomen")) return false;
+          return entries.some(e => e.type === "Verb") || separatedForms.has(norm(t[0]));
+        })) continue;
+        const earlierAuxiliary = tokens.slice(start,i).some(t => (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" &&
+          ["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten","lassen"].includes(e.word)));
+        if (earlierAuxiliary) continue;
+        for (const pair of pairs) {
+          const spans = [i,end].map(j => ({text:tokens[j][0],start:tokens[j].index,end:tokens[j].index + tokens[j][0].length}));
+          results.push({...mainCandidate(pair.entry),construction:{id:"separable-verb",spans}});
+        }
+      }
+      return results;
+    }
     function contextualRank(word, context, candidates) {
       if (!context || !Number.isInteger(context.tokenOffset)) return {candidates, preferred:null, evidence:null};
       const tokens = [...String(context.sentence || "").matchAll(/[\p{L}\p{M}]+/gu)];
@@ -115,7 +162,8 @@
     }
     async function resolve(word, context) {
       const exact = forms.get(norm(word)) || [];
-      let candidates = exact.map(mainCandidate), error = null, unresolvedMeanings = [];
+      const separated = separableCandidates(word, context);
+      let candidates = [...separated,...exact.map(mainCandidate)], error = null, unresolvedMeanings = [];
       if (!exact.length) {
         try {
           for (const group of await fallback.lookup(word)) {
@@ -134,7 +182,8 @@
         const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
         if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
       }
-      return { preferred:ranked.preferred, evidence:ranked.evidence, form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : ranked.preferred, unresolvedMeanings, error };
+      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null);
+      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : null), form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
     }
     return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }

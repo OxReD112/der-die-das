@@ -234,3 +234,5 @@
 .popover-alternatives summary { cursor:pointer; padding:8px 0; color:var(--secondary-text); }
 .lemma-choice[aria-pressed="true"] { border-color:var(--mint); }
 .word-popover { max-height:calc(100dvh - 24px); overflow-y:auto; }
+
+.popover-construction { display:block; margin-top:6px; color:var(--muted); font-size:14px; }

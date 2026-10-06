@@ -499,6 +499,7 @@
     const candidateText = candidate => locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru;
     const candidateLabel = candidate => {
       const id = candidate.dictionaryId;
+      if (candidate.construction?.id === "separable-verb") return locale() === "ru" ? "отделяемый глагол" : "separable verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
       return candidate.pos;
@@ -508,6 +509,11 @@
       content.textContent = candidate ? `${candidateLabel(candidate)} · ${candidateText(candidate)}` :
         resolution.candidates.length ? "Choose the meaning used here:" :
         resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
+      if (candidate?.construction?.id === "separable-verb") {
+        const group = document.createElement("small"); group.className = "popover-construction";
+        group.textContent = candidate.construction.spans.map(span => span.text).join(" … ");
+        content.append(group);
+      }
       $("popover-word").textContent = candidate ? `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}` : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
