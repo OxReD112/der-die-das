@@ -579,6 +579,21 @@
       const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale());
       alternatives.hidden = !displayed.length;
       const source = $("popover-source");
+      const russianArticles = $("russian-source-articles");
+      russianArticles.replaceChildren();
+      if (locale() === "ru") {
+        const entries = [selectedResolution,...displayed.map(row => row.candidate)]
+          .flatMap(candidate => candidate?.russianTranslation?.entries || []);
+        const urls = new Set();
+        for (const entry of entries) {
+          if (urls.has(entry.sourceUrl)) continue;
+          urls.add(entry.sourceUrl);
+          const link = document.createElement("a");
+          link.href = entry.sourceUrl; link.target = "_blank"; link.rel = "noopener";
+          link.textContent = `${entry.word} · Русский Викисловарь ↗`;
+          const paragraph = document.createElement("p"); paragraph.append(link); russianArticles.append(paragraph);
+        }
+      }
       const mainUsesExternal = selectedResolution?.source === "fallback" ||
         !selectedResolution && !resolution.candidates.length && !!resolution.unresolvedMeanings.length ||
         notes.open && !notes.hidden;
