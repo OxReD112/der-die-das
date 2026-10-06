@@ -449,8 +449,8 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
+    const get = (path, revision) => fetch(`../worterbuch/${path}${revision ? `?v=${revision}` : ""}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json", "20261006-4"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
       .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),

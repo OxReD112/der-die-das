@@ -2,6 +2,7 @@
 (() => {
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+  const formsOf = entry => ({...(entry?.lookup_forms || {}),...(entry?.forms || {})});
   const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
   function create(entries, fallback) {
     const forms = new Map(), lemmas = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
@@ -23,7 +24,7 @@
       }
       if (entry.type === "Verb") {
         const provenPrefixes = new Set(entry.separable_prefix ? [entry.separable_prefix] : []);
-        for (const [tense,group] of Object.entries(entry.forms || {})) {
+        for (const [tense,group] of Object.entries(formsOf(entry))) {
           for (const form of Object.values(group || {})) {
             // Do not index a separated verb's stem as the whole verb.
             const clean = String(form).replace(/[.!?]+$/g, "").trim();
@@ -106,7 +107,7 @@
       }
       const modalLemmas = ["können","müssen","dürfen","sollen","wollen","mögen","möchten","werden"];
       const finiteForm = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II"].some(tense => {
-        const group = entry.forms?.[tense] || {};
+        const group = formsOf(entry)[tense] || {};
         return (person ? [group[person]] : Object.values(group)).some(form => form && norm(form) === norm(tokens[i][0]));
       });
       const clauseIndices = Array.from({length:end-start+1},(_,i)=>start+i);
@@ -160,6 +161,92 @@
       return {candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
         preferred:favoured.length === 1 ? favoured[0] : null, evidence};
     }
+    function grammarRank(word, context, candidates) {
+      const unchanged = {candidates,preferred:null,evidence:null};
+      if (!context || !Number.isInteger(context.tokenOffset)) return unchanged;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (index < 0) return unchanged;
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
+      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index));
+      let start = index, end = index;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
+      const verbs = candidates.filter(isVerb), nouns = candidates.filter(c => (posMap[c.pos] || c.pos) === "Nomen");
+      const finite = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II"].some(tense => {
+        const group = formsOf(entry)[tense] || {};
+        return (person ? [group[person]] : Object.values(group)).some(form => {
+          if (!form) return false;
+          const parts = norm(form).split(/\s+/);
+          return norm(tokens[i][0]) === (parts.length === 2 ? parts[1]+parts[0] : norm(form));
+        });
+      });
+      const choose = (favoured,evidence) => favoured.length ? {
+        candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
+        preferred:favoured.length === 1 ? favoured[0] : null,evidence
+      } : unchanged;
+      const adjective = i => matches(i).some(e => e.type === "Adjektiv") ||
+        ["e","en","em","er","es"].some(ending => norm(tokens[i]?.[0]).endsWith(ending) &&
+          (lemmas.get(norm(tokens[i][0]).slice(0,-ending.length)) || []).some(e => e.type === "Adjektiv"));
+      const determiners = new Set(["der","die","das","dem","den","des","ein","eine","einem","einen","einer","eines","mein","dein","sein","ihr","unser","euer","kein","keine","dieses","dieser","diese"]);
+      let determinerIndex = index-1;
+      while (determinerIndex >= start && index-determinerIndex <= 3 && adjective(determinerIndex)) determinerIndex--;
+      const determiner = norm(tokens[determinerIndex]?.[0]);
+      const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
+      if (nouns.length && /^[A-ZÄÖÜ]/u.test(word) && determinerIndex >= start && (determiners.has(determiner) || inflectedDeterminer)) {
+        const compatible = nouns.filter(c => {
+          if (!c.item?.article) return true;
+          const plural = String(c.item.plural || "").split(/\s*,\s*/).some(p => norm(p) === norm(word) || norm(p)+"n" === norm(word));
+          if (plural && (["die","der","den"].includes(determiner) || /(?:e|en|er)$/u.test(determiner) && inflectedDeterminer)) return true;
+          if (norm(c.item.word) !== norm(word)) return false;
+          const articles = {der:["der","den","dem","des","ein","einen","einem","eines"],die:["die","der","eine","einer"],das:["das","dem","des","ein","einem","eines"]};
+          return inflectedDeterminer || (articles[c.item.article] || []).includes(determiner);
+        });
+        if (compatible.length) return choose(compatible,"noun-after-determiner");
+      }
+      const clauseIndices = Array.from({length:end-start+1},(_,i)=>start+i);
+      const modal = clauseIndices.some(i => i < index && matches(i).some(e => e.type === "Verb" &&
+        ["können","müssen","dürfen","sollen","wollen","mögen","möchten","werden","lassen"].includes(e.word) && finite(e,i)));
+      if (modal && /^[a-zäöü]/u.test(word)) {
+        const infinitives = verbs.filter(c => norm(c.lemma) === norm(word));
+        if (infinitives.length) return choose(infinitives,"infinitive-in-modal-group");
+      }
+      const auxiliaries = clauseIndices.flatMap(i => matches(i).filter(e => e.type === "Verb" && ["haben","sein"].includes(e.word) && finite(e,i)));
+      const participles = verbs.filter(c => c.item && auxiliaries.some(e => e.word === c.item.auxiliary) &&
+        norm(String(c.item.perfect_form || "").split(/\s+/).pop()) === norm(word));
+      if (participles.length) {
+        const prepositions = new Set(["in","an","auf","über","unter","vor","hinter","neben","zwischen","für","durch","gegen","ohne","um","mit","bei","von","zu","aus","nach","seit"]);
+        const accusativePronouns = new Set(["mich","dich","ihn","etwas","nichts"]);
+        const accusativeDeterminers = new Set(["den","einen","meinen","deinen","seinen","ihren","unseren","euren","keinen","diesen","jenen"]);
+        const accusative = clauseIndices.some(i => i !== index && !(i > start && prepositions.has(norm(tokens[i-1][0]))) &&
+          (accusativePronouns.has(norm(tokens[i][0])) || accusativeDeterminers.has(norm(tokens[i][0])) && (() => {
+            let nounIndex = i+1;
+            while (nounIndex < index && nounIndex-i <= 3 && adjective(nounIndex)) nounIndex++;
+            // den Kindern / den Autos may be dative plurals; do not use them
+            // as evidence for an accusative verb. This clue is deliberately narrow.
+            return nounIndex < index && /^[A-ZÄÖÜ]/u.test(tokens[nounIndex][0]) && !/[ns]$/iu.test(tokens[nounIndex][0]);
+          })()));
+        const dative = clauseIndices.some(i => ["mir","dir","ihm","ihr","uns","euch","ihnen"].includes(norm(tokens[i][0])));
+        if (accusative) {
+          const transitive = participles.filter(c => (c.item.complements || []).some(comp => comp.pattern === "Akkusativ"));
+          if (transitive.length) return choose(transitive,"participle-with-accusative-object");
+        } else if (dative) {
+          const recipients = participles.filter(c => (c.item.complements || []).some(comp => comp.pattern === "Dativ"));
+          if (recipients.length) return choose(recipients,"participle-with-dative-complement");
+        }
+        // An auxiliary does not settle hören vs gehören: both can use gehört.
+        return choose(participles,"auxiliary-and-participle");
+      }
+      const subjectPersons = {ich:["ich"],du:["du"],er:["er/sie/es"],sie:["er/sie/es","sie"],es:["er/sie/es"],wir:["wir"],ihr:["ihr"]};
+      const finiteCandidates = verbs.filter(c => c.item && [index-1,index+1].some(i => i >= start && i <= end &&
+        (subjectPersons[norm(tokens[i][0])] || []).some(person => finite(c.item,index,person))));
+      if (finiteCandidates.length) return choose(finiteCandidates,"finite-verb-with-subject");
+      const finiteOnly = verbs.filter(c => c.item && finite(c.item,index));
+      if (finiteOnly.length && !nouns.length) return choose(finiteOnly,"stored-finite-form");
+      return unchanged;
+    }
     async function resolve(word, context) {
       const exact = forms.get(norm(word)) || [];
       const separated = separableCandidates(word, context);
@@ -175,15 +262,17 @@
         } catch (e) { error = e; }
       }
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
-      const ranked = contextualRank(word, context, candidates);
+      const grammatical = grammarRank(word, context, candidates);
+      const ranked = contextualRank(word, context, grammatical.candidates);
       candidates = ranked.candidates;
       // The feminine personal pronoun's dative form means her, not she.
       if (norm(word) === "ihr") {
         const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
         if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
       }
-      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null);
-      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : null), form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
+      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null) || grammatical.preferred;
+      if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
+      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
     }
     return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }
