@@ -69,7 +69,7 @@
 .reading-text p { margin:0 0 1.15em; }
 .reading-word { border-radius:2px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .reading-word:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
-.reader-toast { position:fixed; z-index:12; left:50%; bottom:calc(env(safe-area-inset-bottom) + 80px); transform:translateX(-50%); max-width:min(90vw,440px); padding:11px 16px; border:1px solid var(--hairline); border-radius:999px; background:var(--window-card); color:var(--text); font-size:13px; box-shadow:var(--lift-shadow); }
+.reader-toast { position:fixed; z-index:30; left:50%; bottom:calc(env(safe-area-inset-bottom) + 80px); transform:translateX(-50%); max-width:min(90vw,440px); padding:11px 16px; border:1px solid var(--hairline); border-radius:999px; background:var(--window-card); color:var(--text); font-size:13px; box-shadow:var(--lift-shadow); }
 .toast-action { display:inline-block; margin-left:10px; color:var(--mint); font-weight:650; text-decoration:none; white-space:nowrap; }
 .word-popover { position:fixed; z-index:20; top:12px; left:12px; width:min(320px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); overflow-y:auto; padding:17px 18px 14px; border:1px solid var(--window-line); border-radius:20px; background:var(--window-card); color:var(--text); box-shadow:0 12px 38px rgba(0,0,0,.22); animation:reader-pop .14s ease-out; }
 .fallback-meaning-group { display:block; margin-bottom:10px; }
@@ -84,7 +84,7 @@
 .data-sources li { margin:8px 0; }
 .sources-close { float:right; width:36px; height:36px; margin:-8px -8px 0 0; border:0; background:transparent; color:var(--muted); font-size:28px; cursor:pointer; }
 .popover-close,.sheet-close { position:absolute; top:10px; right:12px; width:38px; height:38px; color:var(--muted); font-size:28px; line-height:1; }
-.popover-word { margin:1px 38px 5px 0; color:var(--text); font-size:21px; line-height:1.2; font-weight:700; }
+.popover-word { margin:1px 0 5px; color:var(--text); font-size:21px; line-height:1.2; font-weight:700; }
 .popover-translation { margin:0 0 15px; color:var(--secondary-text); font-size:16px; line-height:1.4; }
 .popover-more { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:42px; border:0; border-top:1px solid var(--hairline); padding:10px 0 0; background:transparent; color:var(--text); text-align:left; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
 .popover-more span { font-size:22px; }
@@ -146,3 +146,19 @@
 @media (max-width:600px) {
   .contents-dialog { inset:auto 0 0; width:100%; height:82dvh; max-height:calc(100dvh - env(safe-area-inset-top) - 20px); border-left:0; border-radius:24px 24px 0 0; padding:22px 18px calc(18px + env(safe-area-inset-bottom)); }
 }
+
+.lemma-choice { display:block; width:100%; margin-top:10px; padding:10px; border:1px solid var(--window-line); border-radius:10px; background:var(--window-card); color:var(--text); text-align:left; font:inherit; cursor:pointer; }
+
+.popover-heading { display:flex; align-items:flex-start; gap:8px; padding-right:38px; }
+.popover-heading .popover-word { flex:1; min-width:0; overflow-wrap:anywhere; }
+.popover-bookmark { flex:none; width:44px; height:44px; margin-top:-7px; padding:10px; border:0; background:transparent; color:var(--secondary-text); cursor:pointer; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; transition:transform .12s ease,filter .12s ease; -webkit-tap-highlight-color:transparent; }
+.popover-bookmark svg { display:block; width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.popover-bookmark[aria-pressed="true"] { color:var(--mint); }
+.popover-bookmark[aria-pressed="true"] svg { fill:currentColor; }
+.popover-bookmark:disabled { opacity:.45; cursor:default; }
+.popover-bookmark:active:not(:disabled),.toast-undo:active { transform:scale(.97); filter:brightness(.94); }
+.popover-bookmark:focus-visible,.toast-undo:focus-visible { outline:2px solid var(--text); outline-offset:2px; border-radius:8px; }
+.bookmark-hint { margin:2px 0 12px; font:13px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; color:var(--muted); }
+.reader-toast.has-undo { display:flex; align-items:center; gap:12px; width:max-content; }
+.toast-undo { min-height:44px; margin:-8px 0; padding:0 4px; border:0; background:transparent; color:var(--text); font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; transition:transform .12s ease,filter .12s ease; }
+@media (prefers-reduced-motion:reduce) { .popover-bookmark,.toast-undo { transition:none; } }

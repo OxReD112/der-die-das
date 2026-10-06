@@ -14,8 +14,8 @@
   </script>
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
-  <link rel="stylesheet" href="../home.css?v=51">
-  <link rel="stylesheet" href="bibliothek.css?v=24">
+  <link rel="stylesheet" href="../home.css?v=49">
+  <link rel="stylesheet" href="bibliothek.css?v=25">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -69,7 +69,8 @@
     <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
     <div class="word-popover" id="word-popover" role="dialog" aria-label="Word translation" hidden>
       <button class="popover-close" id="popover-close" type="button" aria-label="Close">×</button>
-      <p class="popover-word" id="popover-word"></p>
+      <div class="popover-heading"><p class="popover-word" id="popover-word"></p><button class="popover-bookmark" id="popover-bookmark" type="button" aria-label="Mark as unknown" title="Mark as unknown" aria-pressed="false" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg></button></div>
+      <p class="bookmark-hint" id="bookmark-hint" hidden>Bookmark unfamiliar words. Choose what to learn later.</p>
       <p class="popover-translation" id="popover-translation"></p>
       <button class="popover-source" id="popover-source" type="button" aria-haspopup="dialog" aria-controls="data-sources" hidden>Wiktionary · CC BY-SA 4.0</button>
       <button class="popover-more" id="popover-more" type="button">Dictionary details <span aria-hidden="true">›</span></button>
@@ -106,10 +107,12 @@
   </dialog>
   <script src="../components/deutsch-translation-v1.js"></script>
   <script src="../wortschatz/collection.js"></script>
-  <script src="fallback-dictionary.js?v=1"></script>
+  <script src="fallback-dictionary.js?v=2"></script>
   <script src="jszip-3.10.1.min.js"></script>
   <script src="book-import.js?v=3"></script>
   <script src="epub-import.js?v=2"></script>
-  <script src="bibliothek.js?v=21"></script>
+  <script src="vocabulary-storage.js?v=1"></script>
+  <script src="lemma-resolver.js?v=1"></script>
+  <script src="bibliothek.js?v=24"></script>
 </body>
 </html>

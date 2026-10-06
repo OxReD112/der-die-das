@@ -1,11 +1,10 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
-  const DB_NAME = "deutschReadingModeV1";
   const STORE = "books";
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
-  let dbPromise, currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
+  let currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
   let switchingChapter = false, renderRequest = 0, renderedWordLengths = [];
@@ -32,17 +31,7 @@
   window.addEventListener("focus", updateExplainerLanguage);
   updateExplainerLanguage();
 
-  function openDb() {
-    if (dbPromise) return dbPromise;
-    dbPromise = new Promise((resolve, reject) => {
-      if (!("indexedDB" in window)) return reject(new Error("IndexedDB is unavailable"));
-      const request = indexedDB.open(DB_NAME, 1);
-      request.onupgradeneeded = () => request.result.createObjectStore(STORE, { keyPath: "id" });
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error || new Error("Could not open local storage"));
-    });
-    return dbPromise;
-  }
+  const openDb = () => window.BibliothekVocabulary.openDb();
   async function allBooks() {
     const db = await openDb();
     return new Promise((resolve, reject) => {
@@ -84,6 +73,7 @@
   }
   function showToast(message, actionLabel) {
     const toast = $("reader-toast");
+    toast.classList.remove("has-undo");
     toast.replaceChildren(document.createTextNode(message));
     if (actionLabel) {
       const action = document.createElement("a");
@@ -175,8 +165,9 @@
     try {
       const db = await openDb();
       await new Promise((resolve, reject) => {
-        const tx = db.transaction(STORE, "readwrite");
+        const tx = db.transaction([STORE, window.BibliothekVocabulary.STORE], "readwrite");
         tx.objectStore(STORE).delete(id);
+        window.BibliothekVocabulary.deleteBookMarks(tx, id);
         tx.oncomplete = resolve;
         tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not delete this book"));
       });
@@ -336,16 +327,19 @@
   function wrapParagraph(paragraph) {
     const fragment = document.createDocumentFragment();
     const tokens = paragraph.match(/[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)*|[^\p{L}\p{M}]+/gu) || [paragraph];
+    let tokenOffset = 0;
     tokens.forEach(token => {
       if (/^[\p{L}\p{M}]/u.test(token)) {
         const span = document.createElement("span");
         span.className = "reading-word";
+        span.dataset.tokenOffset = String(tokenOffset);
         span.textContent = token;
         span.tabIndex = 0;
         span.setAttribute("role", "button");
         span.setAttribute("aria-label", `${token}, tap for translation`);
         fragment.append(span);
       } else fragment.append(document.createTextNode(token));
+      tokenOffset += token.length;
     });
     return fragment;
   }
@@ -417,7 +411,7 @@
     document.title = `${book.title} · Bibliothek`;
 
   }
-  let formIndex = null;
+  let lemmaResolver = null, selectedResolution = null;
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
@@ -432,82 +426,62 @@
           ...conjunctions.map(x => ({ ...x, type:"Konjunktion" })),
           ...pronouns.map(x => ({ ...x, type:"Pronomen" }))
         ];
-        formIndex = new Map();
-        const addForm = (form, item) => {
-          const key = norm(form);
-          if (!key) return;
-          const forms = formIndex.get(key) || [];
-          if (!forms.some(entry => entry.id === item.id)) forms.push(item);
-          formIndex.set(key, forms);
-        };
-        dictionary.forEach(item => {
-          addForm(item.word, item);
-          (item.search_forms || []).forEach(form => addForm(form, item));
-          if (item.article) addForm(`${item.article} ${item.word}`, item);
-          if (item.type === "Nomen" && item.plural && item.plural !== "—") {
-            item.plural.split(/\s*,\s*/).forEach(form => {
-              addForm(form, item);
-              addForm(`die ${form}`, item);
-              if (!/[ns]$/iu.test(form)) addForm(`${form}n`, item);
-            });
-            if (!/[sßxzo]$/iu.test(item.word)) addForm(`${item.word}s`, item);
-            if (/[sßxzo]$/iu.test(item.word)) addForm(`${item.word}es`, item);
-          }
-          if (item.type === "Verb") {
-            Object.values(item.forms || {}).forEach(group => Object.values(group || {}).forEach(form => addForm(String(form).replace(/[.!?]+$/g, ""), item)));
-            addForm(String(item.perfect_form || "").trim().split(/\s+/).pop(), item);
-          }
-        });
+        lemmaResolver = window.BibliothekLemmaResolver.create(dictionary, window.DeutschFallbackDictionary);
         return dictionary;
       }).catch(error => { dictionaryPromise = null; throw error; });
     return dictionaryPromise;
   }
-  function findEntry(word) {
-    if (!dictionary) return [];
-    const query = norm(word);
-    const exact = formIndex?.get(query);
-    if (exact?.length) return exact;
-    // Prototype fallback: common inflection endings against dictionary lemmas.
-    const stripped = [query.replace(/(e|en|n|s|er|es)$/u, ""), query.replace(/(te|test|ten|tet)$/u, "")].filter(x => x.length >= 3);
-    return dictionary.filter(item => stripped.includes(norm(item.word))).slice(0, 6);
-  }
   let lookupRequest = 0;
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;
+    $("popover-bookmark").disabled = true;
+    $("popover-bookmark").setAttribute("aria-pressed", "false");
+    selectedEntry = null;
+    selectedResolution = null;
     try { await loadDictionary(); }
-    catch (error) { showToast("The Wörterbuch could not be loaded."); return; }
-    if (request !== lookupRequest) return;
-    const results = findEntry(word);
-    selectedEntry = results[0] || null;
-    $("popover-word").textContent = results.length ? results.map(item => `${item.article ? item.article + " " : ""}${item.word}`).join(" · ") : word;
-    $("popover-translation").textContent = results.length ? results.map(translation).filter(Boolean).join(" · ") : "Not in Wörterbuch yet";
-    $("popover-more").hidden = !results.length;
-    $("popover-source").hidden = true;
-    if (!results.length) {
-      $popover.hidden = true;
-      try {
-        const groups = await window.DeutschFallbackDictionary.lookup(word);
-        if (request !== lookupRequest) return;
-        const content = $("popover-translation");
-        content.replaceChildren();
-        if (!groups.length) content.textContent = "No dictionary meaning found.";
-        groups.forEach(group => {
-          const section = document.createElement("span");
-          section.className = "fallback-meaning-group";
-          if (groups.length > 1 || norm(group.word) !== norm(word)) {
-            const label = document.createElement("strong");
-            label.textContent = group.word;
-            section.append(label, document.createElement("br"));
-          }
-          section.append(document.createTextNode(group.meanings.join("; ")));
-          content.append(section);
-        });
-        $("popover-source").hidden = !groups.length;
-      } catch (error) {
-        if (request !== lookupRequest) return;
-        $("popover-translation").textContent = "The fallback dictionary could not be loaded. Please try again.";
-      }
+    catch (error) {
+      // Fallback lookup remains usable when the main database fails to load.
+      lemmaResolver = window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary);
     }
+    const resolution = await lemmaResolver.resolve(word);
+    if (request !== lookupRequest) return;
+    popupAmbiguous = resolution.status === "ambiguous";
+    selectedResolution = resolution.selected;
+    selectedEntry = resolution.selected?.item || null;
+    $("popover-word").textContent = resolution.selected
+      ? `${selectedEntry?.article ? selectedEntry.article + " " : ""}${resolution.selected.lemma}` : word;
+    const content = $("popover-translation");
+    content.replaceChildren();
+    $("popover-more").hidden = !selectedEntry;
+    $("popover-source").hidden = !resolution.candidates.some(candidate => candidate.source === "fallback");
+    if (resolution.status === "ambiguous") {
+      content.append(document.createTextNode("Choose the meaning used here:"));
+      resolution.candidates.forEach(candidate => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "lemma-choice";
+        button.textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma} · ${candidate.pos} — ${locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru}`;
+        button.addEventListener("click", () => {
+          if (request !== lookupRequest) return;
+          popupAmbiguous = false;
+          selectedResolution = candidate;
+          selectedEntry = candidate.item || null;
+          $("popover-word").textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}`;
+          content.textContent = locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru;
+          $("popover-more").hidden = !selectedEntry;
+          $("popover-source").hidden = candidate.source !== "fallback";
+          refreshBookmark(request);
+        });
+        content.append(button);
+      });
+    } else if (resolution.selected) {
+      content.textContent = locale() === "ru" ? resolution.selected.translation.ru || resolution.selected.translation.en : resolution.selected.translation.en || resolution.selected.translation.ru;
+    } else {
+      content.textContent = resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
+      $("popover-source").hidden = !resolution.unresolvedMeanings.length;
+    }
+    await refreshBookmark(request);
+    if (request !== lookupRequest) return;
     $popover.hidden = false;
     if (anchor) {
       const box = $popover.getBoundingClientRect();
@@ -606,11 +580,76 @@
       showToast(added.added ? "Added to Wortschatz." : "This word is already in your Wortschatz.");
     } catch (error) { showToast("Could not add this word. Please check your Wortschatz collection."); }
   }
-  let selectedWord = "";
+  let selectedWord = "", selectedContext = null, popupAmbiguous = false, bookmarkBusy = false;
+  const BOOKMARK_HINT = "deutschReadingBookmarkHintV1";
+  function bookmarkInput() {
+    return selectedContext ? { ...selectedContext, ...(selectedResolution || {}), form:selectedWord } : null;
+  }
+  async function refreshBookmark(request = lookupRequest) {
+    const button = $("popover-bookmark"), input = bookmarkInput();
+    if (!input || popupAmbiguous) { button.disabled = true; return; }
+    try {
+      const records = await window.BibliothekVocabulary.list(input.bookId);
+      if (request !== lookupRequest) return;
+      const marked = records.some(record => record.key === window.BibliothekVocabulary.identity(input));
+      const label = marked ? "Remove mark" : "Mark as unknown";
+      button.setAttribute("aria-pressed", String(marked));
+      button.setAttribute("aria-label", label); button.title = label;
+      button.disabled = bookmarkBusy;
+      let seen = false;
+      try { seen = localStorage.getItem(BOOKMARK_HINT) === "1"; } catch (_) {}
+      $("bookmark-hint").textContent = locale() === "ru" ? "Отмечайте незнакомые слова. После чтения выберите, что учить." : "Bookmark unfamiliar words. Choose what to learn later.";
+      $("bookmark-hint").hidden = seen;
+    } catch (_) {
+      if (request === lookupRequest) { button.disabled = true; showToast("Vocabulary could not be loaded. Try reopening this word."); }
+    }
+  }
+  function bookmarkToast(message, undo) {
+    showToast(message);
+    if (!undo) return;
+    $("reader-toast").classList.add("has-undo");
+    const button = document.createElement("button"); button.type = "button"; button.className = "toast-undo"; button.textContent = "Undo";
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      try { await undo(); showToast("Mark removed."); await refreshBookmark(); }
+      catch (_) { button.disabled = false; showToast("Could not undo the mark. Please try again."); }
+    });
+    $("reader-toast").append(button);
+  }
+  $("popover-bookmark").addEventListener("click", async () => {
+    if (bookmarkBusy || popupAmbiguous) return;
+    const input = bookmarkInput(); if (!input) return;
+    const V = window.BibliothekVocabulary, key = V.identity(input);
+    bookmarkBusy = true; $("popover-bookmark").disabled = true;
+    try {
+      const records = await V.list(input.bookId);
+      if (records.some(record => record.key === key)) {
+        await V.clear(input.bookId, undefined, key);
+        bookmarkToast("Mark removed.");
+      } else {
+        await V.mark(input);
+        try { localStorage.setItem(BOOKMARK_HINT, "1"); } catch (_) {}
+        bookmarkToast("Marked for vocabulary", () => V.clear(input.bookId, undefined, key));
+      }
+    } catch (_) { showToast("The mark could not be saved. Please try again."); }
+    finally { bookmarkBusy = false; await refreshBookmark(); }
+  });
   function closePopups() { lookupRequest++; $popover.hidden = true; $sheet.hidden = true; }
   function chooseWord(span) {
     if (!span || !span.isConnected) return;
     selectedWord = span.textContent;
+    const paragraph = span.closest("[data-paragraph]");
+    let sentence = paragraph?.textContent || "";
+    if (typeof Intl.Segmenter === "function") {
+      const offset = Number(span.dataset.tokenOffset);
+      for (const part of new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)) {
+        if (part.index <= offset && offset < part.index + part.segment.length) { sentence = part.segment.trim(); break; }
+      }
+    }
+    selectedContext = currentBook && paragraph ? {
+      bookId:currentBook.id, sentence,
+      location:{chapterIndex:hasChapters(currentBook) ? currentBook.chapterIndex : 0, paragraphIndex:Number(paragraph.dataset.paragraph), tokenOffset:Number(span.dataset.tokenOffset)}
+    } : null;
     openWordPopup(selectedWord, span.getBoundingClientRect());
   }
 
@@ -655,7 +694,7 @@
   // Consume outside clicks before word and navigation handlers run. Safari and
   // accessibility clicks do not reliably report pointerType or a click count.
   document.addEventListener("click", event => {
-    if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover")) return;
+    if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover, #reader-toast")) return;
     closePopups();
     event.preventDefault();
     event.stopImmediatePropagation();

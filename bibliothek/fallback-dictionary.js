@@ -28,19 +28,29 @@
     const ordered = [...(data?.senses || [])].sort((a, b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0] - b[0]);
     return [...new Set(ordered.map(row => row[3]))];
   }
+  function groupsFor(word, data) {
+    const byPos = new Map();
+    for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0))) {
+      const pos = row[2] || "";
+      if (!byPos.has(pos)) byPos.set(pos, new Set());
+      byPos.get(pos).add(row[3]);
+    }
+    return [...byPos].map(([pos, values]) => ({ word, pos, meanings:[...values] }));
+  }
   async function lookup(word) {
-    // Exact stored key first, then the reader's normalized lowercase candidate.
-    const candidates = [...new Set([String(word).trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
+    const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
     for (const candidate of candidates) {
       const data = await record(candidate);
       if (!data) continue;
       const lemmas = [...new Set((data.inflections || []).map(row => row[1]))];
-      const groups = await Promise.all(lemmas.map(async lemma => ({word: lemma, meanings: meanings(await record(lemma))})));
-      const usable = groups.filter(group => group.meanings.length);
-      // Preserve direct senses when mappings have no usable lemma definitions.
-      if (usable.length) return usable;
-      const direct = meanings(data);
-      if (direct.length) return [{word: candidate, meanings: direct}];
+      const groups = (await Promise.all(lemmas.map(async lemma => groupsFor(lemma, await record(lemma))))).flat();
+      // Keep direct lexical meanings too; a spelling may also be an inflected form.
+      const direct = groupsFor(candidate, data).filter(group => !lemmas.length ||
+        (data.senses || []).some(row => (row[2] || "") === group.pos && !lemmas.some(lemma => row[3].includes(` of ${lemma}`))));
+      const usable = [...groups, ...direct];
+      if (usable.length) return usable.filter((g,i,all) => all.findIndex(x => x.word === g.word && x.pos === g.pos) === i);
+      // Definitions of a form are useful for lookup but cannot establish a lemma.
+      if (meanings(data).length) return [{word:candidate, pos:"", meanings:meanings(data), unresolved:true}];
     }
     return [];
   }
