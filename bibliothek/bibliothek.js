@@ -8,7 +8,7 @@
   let dbPromise, currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
-  let switchingChapter = false, renderRequest = 0;
+  let switchingChapter = false, renderRequest = 0, renderedWordLengths = [];
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || item.translation_ru;
@@ -123,7 +123,8 @@
       button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
       button.querySelector(".book-title").textContent = book.title;
       const words = (book.content.match(/[\p{L}\p{M}]+/gu) || []).length;
-      button.querySelector(".book-subtitle").textContent = `${words.toLocaleString()} words · ${book.name || "Pasted text"}`;
+      const resume = hasChapters(book) && started ? activeEntry({ ...book, chapterIndex: book.chapterIndex || 0, position: book.position || 0 }) : null;
+      button.querySelector(".book-subtitle").textContent = completed ? "Finished" : resume ? `Continue · ${resume.title}` : `${words.toLocaleString()} words · ${book.name || "Pasted text"}`;
       button.addEventListener("click", () => openBook(book));
       const remove = document.createElement("button");
       remove.className = "book-delete";
@@ -221,42 +222,117 @@
     book.position = Math.max(0, Math.min(Number(book.chapterPositions[book.chapterIndex]) || 0, book.chapters[book.chapterIndex].paragraphs.length - 1));
   }
   function visibleParagraph() {
-    const paragraphs = [...$text.querySelectorAll("p")];
+    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
     const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > readingTop());
-    return visible < 0 ? Math.max(0, paragraphs.length - 1) : visible;
+    return Number(paragraphs[visible < 0 ? Math.max(0, paragraphs.length - 1) : visible]?.dataset.paragraph) || 0;
   }
   function readingTop() {
-    return Math.max($("back-library").parentElement.getBoundingClientRect().bottom, $("chapter-navigation").hidden ? 0 : $("chapter-navigation").getBoundingClientRect().bottom) + 8;
+    return $("back-library").parentElement.getBoundingClientRect().bottom + 8;
   }
-  function renderChapterNavigation(book) {
-    $("chapter-navigation").hidden = !hasChapters(book);
+  function contentsFor(book) {
+    return book.contents?.length ? book.contents : book.chapters.map((chapter, chapterIndex) => ({ title: chapter.title, chapterIndex, paragraph: 0, depth: 0, navigable: true }));
+  }
+  function readingEntries(book) {
+    const seen = new Set();
+    return contentsFor(book).filter(entry => {
+      const key = `${entry.chapterIndex}:${entry.paragraph}`;
+      if (!entry.navigable || seen.has(key)) return false;
+      seen.add(key); return true;
+    }).sort((a, b) => a.chapterIndex - b.chapterIndex || a.paragraph - b.paragraph);
+  }
+  function activeEntry(book) {
+    return readingEntries(book).filter(entry => entry.chapterIndex < book.chapterIndex || (entry.chapterIndex === book.chapterIndex && entry.paragraph <= book.position)).at(-1);
+  }
+  function entryKey(entry) { return `${entry.chapterIndex}:${entry.paragraph}`; }
+  function rememberEntry(book, position) {
     if (!hasChapters(book)) return;
-    const select = $("chapter-select");
-    select.replaceChildren();
-    book.chapters.forEach((chapter, index) => {
-      const option = document.createElement("option");
-      option.value = String(index); option.textContent = `${index + 1}. ${chapter.title}`;
-      select.append(option);
-    });
-    select.value = String(book.chapterIndex);
-    $("previous-chapter").disabled = book.chapterIndex === 0;
-    $("next-chapter").disabled = book.chapterIndex === book.chapters.length - 1;
+    const entry = activeEntry(book);
+    if (entry) { book.contentsPositions ||= {}; book.contentsPositions[entryKey(entry)] = position; }
   }
-  async function changeChapter(index) {
+  async function navigateTo(entry, restore = false) {
     const book = currentBook;
-    if (switchingChapter || !hasChapters(book) || index < 0 || index >= book.chapters.length || index === book.chapterIndex) return;
+    if (switchingChapter || !entry?.navigable) return;
     switchingChapter = true;
-    closePopups(); clearTimeout(window.__readingSaveTimer);
-    await updateProgress(book, restoringPosition ? book.position : visibleParagraph());
-    book.chapterIndex = index;
-    prepareChapterPosition(book);
-    renderBookText(book);
-    await updateProgress(book, book.position);
-    switchingChapter = false;
+    try {
+      closePopups(); clearTimeout(window.__readingSaveTimer);
+      const position = restoringPosition ? book.position : visibleParagraph();
+      rememberEntry(book, position);
+      await updateProgress(book, position);
+      book.chapterIndex = entry.chapterIndex;
+      book.chapterPositions ||= {};
+      const entries = readingEntries(book), next = entries[entries.findIndex(item => entryKey(item) === entryKey(entry)) + 1];
+      const end = next?.chapterIndex === entry.chapterIndex ? next.paragraph : book.chapters[entry.chapterIndex].paragraphs.length;
+      const saved = book.contentsPositions?.[entryKey(entry)];
+      const legacySaved = !book.contents ? book.chapterPositions[entry.chapterIndex] : undefined;
+      book.position = restore ? Math.max(entry.paragraph, Math.min(Number(saved ?? legacySaved ?? entry.paragraph), end - 1)) : entry.paragraph;
+      book.chapterPositions[book.chapterIndex] = book.position;
+      renderBookText(book);
+      const heading = $("book-headline").hidden ? $text.firstElementChild : $("book-headline");
+      if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
+      await updateProgress(book, book.position);
+    } finally { switchingChapter = false; }
   }
-  $("previous-chapter").addEventListener("click", () => changeChapter(currentBook.chapterIndex - 1));
-  $("next-chapter").addEventListener("click", () => changeChapter(currentBook.chapterIndex + 1));
-  $("chapter-select").addEventListener("change", event => changeChapter(Number(event.target.value)));
+  const contentsDialog = $("contents-dialog");
+  function renderContents() {
+    const query = norm($("contents-search").value), active = activeEntry(currentBook);
+    const list = $("contents-list"); list.replaceChildren();
+    for (const entry of contentsFor(currentBook)) {
+      if (query && !norm([...(entry.parentTitles || []), entry.title].join(" ")).includes(query)) continue;
+      const row = document.createElement(entry.navigable ? "button" : "div");
+      row.className = "contents-entry"; row.style.setProperty("--depth", Math.min(entry.depth || 0, 4));
+      const title = document.createElement("span"); title.textContent = entry.title; row.append(title);
+      if (query && entry.parentTitles?.length) {
+        const context = document.createElement("small"); context.textContent = entry.parentTitles.join(" › "); row.append(context);
+      }
+      if (entry.navigable) {
+        row.type = "button";
+        if (active && entryKey(entry) === entryKey(active)) {
+          row.setAttribute("aria-current", "location");
+          const marker = document.createElement("small"); marker.textContent = "Currently reading"; row.append(marker);
+        }
+        row.addEventListener("click", async () => { contentsDialog.close(); await navigateTo(entry, true); });
+      } else row.classList.add("contents-group");
+      list.append(row);
+    }
+    $("contents-empty").hidden = Boolean(list.children.length);
+  }
+  $("contents-toggle").addEventListener("click", () => {
+    closePopups(); $("contents-search").value = "";
+    $("contents-book-title").textContent = currentBook.title;
+    $("contents-search-label").hidden = contentsFor(currentBook).length < 15;
+    renderContents(); contentsDialog.showModal();
+    const active = $("contents-list").querySelector('[aria-current]');
+    if (active) { active.scrollIntoView({ block: "center" }); active.focus({ preventScroll: true }); }
+  });
+  $("contents-close").addEventListener("click", () => contentsDialog.close());
+  contentsDialog.addEventListener("close", () => $("contents-toggle").focus({ preventScroll: true }));
+  contentsDialog.addEventListener("click", event => { if (event.target === contentsDialog) {
+    const bounds = contentsDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) contentsDialog.close();
+  } });
+  $("contents-search").addEventListener("input", renderContents);
+  function renderChapterNavigation(book) {
+    $("contents-toggle").hidden = !hasChapters(book);
+    $("chapter-progress-track").hidden = !hasChapters(book);
+    const end = $("chapter-end"); end.replaceChildren(); end.hidden = !hasChapters(book);
+    if (!hasChapters(book)) return;
+    const entries = readingEntries(book), active = activeEntry(book), index = entries.indexOf(active);
+    if (entries[index + 1]) {
+      const next = document.createElement("button"); next.id = "next-chapter"; next.className = "next-chapter-card"; next.type = "button";
+      const label = document.createElement("small"); label.textContent = "Next chapter";
+      const title = document.createElement("span"); title.textContent = entries[index + 1].title + " →";
+      next.append(label, title); next.addEventListener("click", () => navigateTo(entries[index + 1])); end.append(next);
+    } else {
+      const finish = document.createElement("button"); finish.className = "next-chapter-card"; finish.type = "button";
+      finish.textContent = book.completed ? "Book finished ✓" : "Finish book ✓"; finish.disabled = Boolean(book.completed);
+      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); showToast("Book finished."); }); end.append(finish);
+    }
+    if (entries[index - 1]) {
+      const previous = document.createElement("button"); previous.id = "previous-chapter"; previous.className = "previous-chapter-link"; previous.type = "button";
+      previous.textContent = "← " + entries[index - 1].title;
+      previous.addEventListener("click", () => navigateTo(entries[index - 1])); end.append(previous);
+    }
+  }
   function wrapParagraph(paragraph) {
     const fragment = document.createDocumentFragment();
     const tokens = paragraph.match(/[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)*|[^\p{L}\p{M}]+/gu) || [paragraph];
@@ -278,15 +354,24 @@
     const request = ++renderRequest;
     const paragraphs = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphs : splitParagraphs(book.content);
     $text.replaceChildren();
+    const entries = hasChapters(book) ? readingEntries(book) : [], active = hasChapters(book) ? activeEntry(book) : null;
+    const next = active ? entries[entries.indexOf(active) + 1] : null;
+    const start = active && active.chapterIndex === book.chapterIndex ? active.paragraph : 0;
+    const end = next && next.chapterIndex === book.chapterIndex ? next.paragraph : paragraphs.length;
     paragraphs.forEach((paragraph, i) => {
-      const p = document.createElement("p");
+      if (i < start || i >= end) return;
+      const kind = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphKinds?.[i] : "p";
+      const p = document.createElement(/^h[1-6]$/.test(kind || "") ? kind : "p");
       p.dataset.paragraph = String(i);
       p.append(wrapParagraph(paragraph));
       $text.append(p);
     });
+    renderedWordLengths = [...$text.querySelectorAll("[data-paragraph]")].map(p => (p.textContent.match(/[\p{L}\p{M}]+/gu) || []).length);
     currentBook = book;
     renderChapterNavigation(book);
-    $("book-headline").textContent = hasChapters(book) ? book.chapters[book.chapterIndex].title : book.title;
+    $("book-headline").textContent = active?.title || (hasChapters(book) ? book.chapters[book.chapterIndex].title : book.title);
+    const first = $text.firstElementChild;
+    $("book-headline").hidden = Boolean(first && /^H[1-6]$/.test(first.tagName) && norm(first.textContent).replace(/[.!?:;]+$/u, "") === norm($("book-headline").textContent).replace(/[.!?:;]+$/u, ""));
     $("toolbar-title").textContent = book.title;
     $("toolbar-title").title = book.title;
     $("reader").querySelector(".reader-header").hidden = true;
@@ -302,8 +387,8 @@
     requestAnimationFrame(() => {
       if (request !== renderRequest || currentBook !== book) return;
       // The beginning includes the book header, not just the first paragraph.
-      if (position > 0 && target) {
-        const toolbarHeight = $("back-library").parentElement.getBoundingClientRect().height + ($("chapter-navigation").hidden ? 0 : $("chapter-navigation").getBoundingClientRect().height);
+      if (position > start && target) {
+        const toolbarHeight = $("back-library").parentElement.getBoundingClientRect().height;
         const targetTop = target.getBoundingClientRect().top + window.scrollY - toolbarHeight - 8;
         window.scrollTo({ top:Math.max(0, targetTop), behavior:"instant" });
       }
@@ -312,9 +397,19 @@
   }
   function setProgress() {
     if (!currentBook) return;
-    const paragraphs = [...$text.querySelectorAll("p")];
+    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
     const index = Math.max(0, Number(currentBook.position) || 0);
-    $("reading-progress").textContent = paragraphs.length ? `${hasChapters(currentBook) ? `${currentBook.chapterIndex + 1}/${currentBook.chapters.length} · ` : ""}${Math.min(index + 1, paragraphs.length)} / ${paragraphs.length}` : "";
+    if (!hasChapters(currentBook)) {
+      $("reading-progress").textContent = paragraphs.length ? `${Math.min(index + 1, paragraphs.length)} / ${paragraphs.length}` : ""; return;
+    }
+    const active = activeEntry(currentBook), chapters = readingEntries(currentBook).filter(entry => !entry.frontMatter);
+    const number = chapters.findIndex(entry => entryKey(entry) === entryKey(active));
+    $("reading-progress").textContent = number >= 0 ? `Chapter ${number + 1} of ${chapters.length}` : (active?.title || "Reading");
+    const lengths = renderedWordLengths;
+    const passed = paragraphs.reduce((sum, p, i) => sum + (Number(p.dataset.paragraph) < index ? lengths[i] : 0), 0);
+    const total = lengths.reduce((sum, length) => sum + length, 0);
+    const last = paragraphs.at(-1), atEnd = last && window.scrollY > 0 && last.getBoundingClientRect().bottom <= innerHeight;
+    $("chapter-progress-fill").style.width = `${atEnd ? 100 : total ? passed / total * 100 : 0}%`;
   }
   async function openBook(book) {
     closePopups();
@@ -568,7 +663,7 @@
   $text.addEventListener("click", event => { const span = event.target.closest(".reading-word"); if (span) chooseWord(span); });
   $text.addEventListener("keydown", event => { if ((event.key === "Enter" || event.key === " ") && event.target.matches(".reading-word")) { event.preventDefault(); chooseWord(event.target); } });
   function updateBookmarkStatus(book, paragraph) {
-    const paragraphs = [...$text.querySelectorAll("p")];
+    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
     if (!paragraphs.length) return false;
     let changed = false;
     if ((paragraph >= 1 || (hasChapters(book) && book.chapterIndex > 0)) && !book.readingStarted) {
@@ -576,7 +671,7 @@
       changed = true;
     }
     const last = paragraphs[paragraphs.length - 1];
-    if (book.readingStarted && !book.completed && (!hasChapters(book) || book.chapterIndex === book.chapters.length - 1) && window.scrollY > 0 && last.getBoundingClientRect().bottom <= window.innerHeight) {
+    if (book.readingStarted && !book.completed && !hasChapters(book) && window.scrollY > 0 && last.getBoundingClientRect().bottom <= window.innerHeight) {
       book.completed = true;
       changed = true;
     }
@@ -584,10 +679,12 @@
   }
   window.addEventListener("scroll", () => {
     if (restoringPosition || switchingChapter || !currentBook || $reading.hidden) return;
-    const paragraphs = [...$text.querySelectorAll("p")];
-    const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > readingTop());
-    if (visible < 0) return;
+    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
+    const visibleNode = paragraphs.find(p => p.getBoundingClientRect().bottom > readingTop());
+    if (!visibleNode) return;
+    const visible = Number(visibleNode.dataset.paragraph);
     const statusChanged = updateBookmarkStatus(currentBook, visible);
+    rememberEntry(currentBook, visible);
     if (visible !== Number(currentBook.position) || statusChanged) {
       currentBook.position = visible;
       if (hasChapters(currentBook)) currentBook.chapterPositions[currentBook.chapterIndex] = visible;
@@ -595,7 +692,7 @@
       clearTimeout(window.__readingSaveTimer);
       const book = currentBook;
       window.__readingSaveTimer = setTimeout(() => updateProgress(book, visible), 700);
-    }
+    } else setProgress();
   }, { passive:true });
   function flushReadingPosition() {
     if (!currentBook || $reading.hidden || switchingChapter) return;

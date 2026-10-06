@@ -15,7 +15,7 @@
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=49">
-  <link rel="stylesheet" href="bibliothek.css?v=23">
+  <link rel="stylesheet" href="bibliothek.css?v=24">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -47,15 +47,13 @@
     <section class="reading-view" id="reading-view" hidden>
       <div class="reading-toolbar">
         <button class="toolbar-back" id="back-library" type="button" aria-label="Back to Bibliothek"><span class="toolbar-arrow" aria-hidden="true">‹</span><span class="toolbar-title" id="toolbar-title"></span></button>
-        <span class="reading-progress" id="reading-progress"></span>
+        <button class="contents-toggle" id="contents-toggle" type="button" aria-label="Open contents" aria-haspopup="dialog" aria-controls="contents-dialog" hidden>☰</button>
       </div>
-      <nav class="chapter-navigation" id="chapter-navigation" aria-label="Book chapters" hidden>
-        <button id="previous-chapter" type="button" aria-label="Previous chapter">‹</button>
-        <label class="chapter-choice" for="chapter-select">Chapter<select id="chapter-select"></select></label>
-        <button id="next-chapter" type="button" aria-label="Next chapter">›</button>
-      </nav>
+      <div class="chapter-progress-track" id="chapter-progress-track" hidden><span id="chapter-progress-fill"></span></div>
       <h1 class="book-headline" id="book-headline"></h1>
+      <div class="reading-progress" id="reading-progress" aria-live="polite"></div>
       <article class="reading-text" id="reading-text" lang="de" aria-label="Book text"></article>
+      <nav class="chapter-end" id="chapter-end" aria-label="Continue reading" hidden></nav>
     </section>
 
     <div class="book-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-text" hidden>
@@ -84,6 +82,12 @@
       </section>
     </div>
   </main>
+  <dialog class="contents-dialog" id="contents-dialog" aria-labelledby="contents-heading">
+    <div class="contents-header"><div><h2 id="contents-heading">Contents</h2><p id="contents-book-title"></p></div><button id="contents-close" type="button" aria-label="Close contents">×</button></div>
+    <label class="contents-search" id="contents-search-label" hidden>Find a chapter<input id="contents-search" type="search" placeholder="Search titles…" autocomplete="off"></label>
+    <div class="contents-list" id="contents-list"></div>
+    <p id="contents-empty" role="status" hidden>No chapters found.</p>
+  </dialog>
   <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
     <button class="sources-close" id="sources-close" type="button" aria-label="Close data sources and licenses" autofocus>×</button>
     <h2 id="data-sources-title">Data sources &amp; licenses</h2>
@@ -104,8 +108,8 @@
   <script src="../wortschatz/collection.js"></script>
   <script src="fallback-dictionary.js?v=1"></script>
   <script src="jszip-3.10.1.min.js"></script>
-  <script src="book-import.js?v=2"></script>
-  <script src="epub-import.js?v=1"></script>
-  <script src="bibliothek.js?v=20"></script>
+  <script src="book-import.js?v=3"></script>
+  <script src="epub-import.js?v=2"></script>
+  <script src="bibliothek.js?v=21"></script>
 </body>
 </html>
