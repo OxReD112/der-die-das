@@ -139,8 +139,13 @@
 .contents-header button { position:absolute; top:-8px; right:-8px; width:44px; height:44px; border:0; background:transparent; color:var(--text); font-size:30px; cursor:pointer; }
 .contents-search { flex:none; color:var(--muted); font-size:12px; margin-bottom:12px; }
 .contents-search input { box-sizing:border-box; display:block; width:100%; min-height:44px; margin-top:6px; padding:10px 12px; border:1px solid var(--hairline); border-radius:12px; background:var(--tile-surface); color:var(--text); font:16px/1.4 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; }
+.contents-columns { flex:none; padding:4px 12px 0; text-align:right; }
+.contents-columns,.contents-word-count { color:var(--muted); font:400 12px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; }
+.contents-word-count { grid-column:2; grid-row:1; text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.contents-entry > span:first-child { min-width:0; }
+.contents-entry > small { grid-column:1; }
 .contents-list { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:16px 2px 24px; -webkit-mask-image:linear-gradient(to bottom,transparent,#000 14px); mask-image:linear-gradient(to bottom,transparent,#000 14px); }
-.contents-entry { position:relative; box-sizing:border-box; display:grid; gap:5px; width:100%; min-height:58px; padding:18px 10px 18px calc(10px + var(--depth)*12px); border:0; border-bottom:1px solid var(--hairline); border-radius:0; background:transparent; color:var(--text); text-align:left; font:14px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; overflow-wrap:anywhere; cursor:pointer; }
+.contents-entry { position:relative; box-sizing:border-box; display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:16px; row-gap:5px; align-items:baseline; width:100%; min-height:58px; padding:18px 10px 18px calc(10px + var(--depth)*12px); border:0; border-bottom:1px solid var(--hairline); border-radius:0; background:transparent; color:var(--text); text-align:left; font:14px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; overflow-wrap:anywhere; cursor:pointer; }
 .contents-entry small { color:var(--muted); font-size:12px; }
 .contents-entry[aria-current] { color:var(--mint); padding-left:calc(42px + var(--depth)*12px); }
 .contents-entry[aria-current]::before { content:""; position:absolute; top:-3px; left:calc(10px + var(--depth)*12px); width:14px; height:29px; border-radius:1px 1px 0 0; background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.08) 1px,transparent 2.5px),var(--mint); clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%); }

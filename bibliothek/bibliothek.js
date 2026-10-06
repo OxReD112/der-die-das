@@ -337,6 +337,32 @@
     } finally { switchingChapter = false; }
   }
   const contentsDialog = $("contents-dialog");
+  // Prefix totals make chapter boundaries cheap to count, including shared EPUB files.
+  const contentsWordCounts = new WeakMap();
+  function wordCountsFor(book) {
+    if (contentsWordCounts.has(book)) return contentsWordCounts.get(book);
+    const prefixes = book.chapters.map(chapter => {
+      const sums = [0];
+      for (const paragraph of chapter.paragraphs) {
+        sums.push(sums.at(-1) + (paragraph.match(/[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)*/gu) || []).length);
+      }
+      return sums;
+    });
+    const entries = readingEntries(book), counts = new Map();
+    entries.forEach((entry, index) => {
+      const next = entries[index + 1];
+      let count = 0;
+      for (let file = entry.chapterIndex; file <= (next?.chapterIndex ?? prefixes.length - 1); file++) {
+        const sums = prefixes[file];
+        const start = file === entry.chapterIndex ? entry.paragraph : 0;
+        const end = next?.chapterIndex === file ? next.paragraph : sums.length - 1;
+        count += (sums[end] ?? sums.at(-1)) - (sums[start] ?? 0);
+      }
+      counts.set(entryKey(entry), count);
+    });
+    contentsWordCounts.set(book, counts);
+    return counts;
+  }
   let contentsClosing = false;
   async function closeContents() {
     if (!contentsDialog.open || contentsClosing) return;
@@ -352,12 +378,21 @@
   }
   function renderContents() {
     const query = norm($("contents-search").value), active = activeEntry(currentBook);
+    const counts = wordCountsFor(currentBook);
     const list = $("contents-list"); list.replaceChildren();
     for (const entry of contentsFor(currentBook)) {
       if (query && !norm([...(entry.parentTitles || []), entry.title].join(" ")).includes(query)) continue;
       const row = document.createElement(entry.navigable ? "button" : "div");
       row.className = "contents-entry"; row.style.setProperty("--depth", Math.min(entry.depth || 0, 4));
       const title = document.createElement("span"); title.textContent = entry.title; row.append(title);
+      const count = entry.navigable ? counts.get(entryKey(entry)) : 0;
+      if (count) {
+        const words = document.createElement("span");
+        words.className = "contents-word-count";
+        words.textContent = count.toLocaleString("de-DE").replace(/\./g, "\u202f");
+        words.setAttribute("aria-label", `${count} Wörter`);
+        row.append(words);
+      }
       if (query && entry.parentTitles?.length) {
         const context = document.createElement("small"); context.textContent = entry.parentTitles.join(" › "); row.append(context);
       }
