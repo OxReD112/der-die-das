@@ -1,0 +1,534 @@
+/* ===== COLLECTION WINDOW (v2.87–v2.107) — Documentation/WORTSCHATZ_COLLECTIONS.md =====
+   The table-window rule: blur 8px + 34% / 20% darkening, card colour, 10% outline, 24px corners, fade + zoom-in,
+   × top right, tap outside / Esc closes. The layer fills the screen exactly (inset:0, v2.107).
+   Confirm buttons = the „Are you sure?“ rule: the safe choice is the main button, the risky one the quiet button. */
+.coll-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  padding-top: max(64px, env(safe-area-inset-top) + 20px);
+  padding-bottom: max(40px, env(safe-area-inset-bottom) + 20px);
+  z-index: 30;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+  font-family: var(--font);
+}
+.coll-modal.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.coll-card {
+  width: min(520px, 100%);
+  max-height: min(640px, 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 6px 22px 14px;
+  text-align: left;
+  color: var(--text);
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.coll-modal.open .coll-card {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+.coll-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-height: 52px;
+}
+.coll-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.coll-close {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 400 28px/1 var(--font);
+  padding: 8px;
+  margin-right: -8px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-back {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 300 34px/1 var(--font);
+  padding: 4px 10px 8px 0;
+  margin-left: -4px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-text {
+  margin: 0 0 22px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sec-text);
+}
+.coll-meta {
+  flex: 0 0 auto;
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.coll-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: var(--sec-text);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-text .coll-link {
+  font-size: inherit;
+}
+.coll-note {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* main (cream) and quiet (outlined) buttons */
+.coll-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.coll-buttons .coll-link {
+  align-self: center;
+  margin-top: 6px;
+  padding: 8px;
+}
+.coll-main,
+.coll-quiet {
+  width: 100%;
+  height: 56px;
+  border-radius: 17px;
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-main {
+  border: 0;
+  background: var(--main-bg);
+  color: var(--main-text);
+}
+.coll-quiet {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--quiet-text);
+}
+/* „Type the First Word“ (v2.110), „Import List“ in an own collection (v2.111) = the „＋ Use your own words“ look (raised card, full text colour, soft shadow)
+   in the window's button shape. The outlined quiet button looked disabled here. On the card itself the surface
+   is lifted one step (dark) / given the 10% outline (light), so it doesn't melt into the card. */
+.coll-raised {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--card-bg) 92%, #fff);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+[data-theme="light"] .coll-raised {
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline), var(--card-shadow);
+}
+.coll-form-buttons .coll-main + .coll-raised {
+  margin-top: 6px; /* 10px between the two buttons, like the other button pairs */
+}
+/* own collection (v2.104): ＋ Add Word (cream) and Import List (raised since v2.111) side by side, same shape */
+.coll-pair {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  padding: 2px 0 14px;
+}
+.coll-pair .coll-main,
+.coll-pair .coll-quiet,
+.coll-pair .coll-raised {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* word list */
+.coll-list {
+  flex: 1 1 auto;
+  min-height: 60px;
+  overflow: auto;
+  margin: 0 -22px;
+  padding: 0 22px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  -webkit-overflow-scrolling: touch;
+}
+.coll-list-below {
+  margin-top: 6px;
+  border-bottom: 0;
+}
+.coll-word {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.coll-word:last-child {
+  border-bottom: 0;
+}
+.coll-word.is-btn {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-word.is-btn:last-child {
+  border-bottom: 0;
+}
+.coll-word.is-btn:active {
+  transform: scale(0.99);
+  filter: brightness(0.94);
+}
+/* v2.112 line breaks: the German keeps its natural width (up to 62% of the row) and only wraps between words;
+   the translation takes the rest and wraps between words, never inside one (its longest word is its minimum).
+   Before, both sides shrank together and „overflow-wrap: anywhere“ let the browser cut a word anywhere
+   (das Fernwe|h) even when it would fit. Only a German word too long for its column is split — hyphenated
+   (lang="de", Safari), cut only if no hyphen point fits. */
+.coll-de {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 62%;
+  font-size: 16px;
+  color: var(--text);
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.coll-new {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  vertical-align: 2px;
+  white-space: nowrap;
+}
+.coll-tr {
+  flex: 1 1 0;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: right;
+  overflow-wrap: break-word;
+}
+/* own collection: Export · Delete as quiet links at the bottom */
+.coll-bottom {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 4px;
+  margin: 0 -22px;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+}
+.coll-bottom .coll-link {
+  padding: 6px 4px;
+}
+.coll-dot {
+  color: var(--muted);
+}
+/* Starter-Set window (v2.101): fold-out line like the Pronomen table (▸ → ▾), main button always at the bottom */
+.coll-fold {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: -8px 0 14px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: 600 15px var(--font);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.coll-fold::before {
+  content: "▸";
+  display: inline-block;
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+.coll-fold.open::before {
+  transform: rotate(90deg);
+}
+.coll-fold:active {
+  filter: brightness(0.94);
+}
+.coll-bottom-main {
+  padding-top: 14px;
+}
+/* rename */
+.coll-name-input {
+  width: 100%;
+  height: 44px;
+  margin: 4px 0 0;
+  padding: 0 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: 600 18px var(--font);
+  outline: none;
+}
+
+/* word form (add / edit one word, v2.88): typing-field look, 16px text (no iPhone zoom). Word chips: tap = hide
+   this word; a chosen chip uses the main-button colours. Error line in the palette red. */
+.coll-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  margin: 0 -22px;
+  padding: 0 22px 4px;
+  -webkit-overflow-scrolling: touch;
+}
+.coll-label {
+  display: block;
+  margin: 16px 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.coll-label .opt {
+  font-weight: 400;
+}
+.coll-field {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: 400 16px/1.35 var(--font);
+  outline: none;
+  resize: none;
+}
+.coll-field:focus {
+  border-color: color-mix(in srgb, var(--text) 28%, transparent);
+}
+.coll-field::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+textarea.coll-field {
+  min-height: 68px;
+}
+.coll-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.coll-chips:empty {
+  display: none;
+}
+.coll-chip {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--sec-text);
+  border-radius: 12px;
+  padding: 7px 11px;
+  font: 400 15px/1.2 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-chip.on {
+  background: var(--main-bg);
+  color: var(--main-text);
+  border-color: transparent;
+  font-weight: 600;
+}
+.coll-preview {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: var(--sec-text);
+  min-height: 20px;
+}
+.coll-preview .blank {
+  width: 1.6em;
+}
+.coll-hint {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.coll-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0 4px;
+  font-size: 16px;
+  color: var(--sec-text);
+  cursor: pointer;
+}
+.coll-switch input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--hairline);
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.coll-switch input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s;
+}
+.coll-switch input:checked {
+  background: var(--accent); /* green = „enabled“ outside the exercises (Settings rule) */
+}
+.coll-switch input:checked::after {
+  transform: translateX(20px);
+}
+.coll-error {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--error);
+}
+.coll-error:empty {
+  display: none;
+}
+.coll-form-buttons {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding-top: 12px;
+}
+.coll-scroll .coll-form-buttons {
+  padding-top: 18px; /* Save at the end of the scrolling form */
+  padding-bottom: 6px;
+}
+.coll-form-buttons .coll-link {
+  align-self: center;
+  padding: 10px 12px;
+}
+/* import (v2.90): paste box + the format block for the AI */
+textarea.coll-paste {
+  min-height: 150px;
+  font:
+    400 13px/1.4 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+.coll-pre {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    400 12px/1.45 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  color: var(--sec-text);
+  -webkit-user-select: text;
+  user-select: text;
+}
+

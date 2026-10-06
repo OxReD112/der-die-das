@@ -15,6 +15,8 @@
   const modal = $("collModal"),
     card = $("collCard");
   if (!C || !modal || !card) return;
+  const embedded = modal.dataset.host === "reader";
+  let dictionarySaved = null;
   const BUILTIN_NAME = "Starter-Set";
 
   const own = () => C.isOwn();
@@ -69,20 +71,25 @@
 
   /* ---------- open / close (same timing as the table windows) ---------- */
   let lastFocus = null,
-    dirty = false;
+    dirty = false,
+    closeTimer = null;
   function open(firstView) {
+    clearTimeout(closeTimer);
     lastFocus = document.activeElement;
     dirty = false;
     (typeof firstView === "function" ? firstView : viewMain)();
     modal.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add("open")));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      modal.classList.add("open");
+      card.querySelector("button, input, textarea")?.focus({ preventScroll: true });
+    }));
   }
   function close() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
-    setTimeout(() => {
+    closeTimer = setTimeout(() => {
       card.textContent = "";
-      if (dirty) location.reload();
+      if (dirty && !embedded) location.reload();
     }, 220);
     if (lastFocus && lastFocus.focus)
       try {
@@ -95,6 +102,14 @@
   document.addEventListener(
     "keydown",
     e => {
+      if (e.key === "Tab" && modal.classList.contains("open")) {
+        const controls = [...card.querySelectorAll("button, input, textarea, select, a[href]")].filter(el => !el.disabled && el.getClientRects().length);
+        const first = controls[0], last = controls[controls.length - 1];
+        if (first && ((!card.contains(document.activeElement)) || (e.shiftKey ? document.activeElement === first : document.activeElement === last))) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        }
+      }
       if (e.key === "Escape" && modal.classList.contains("open")) {
         e.preventDefault();
         e.stopPropagation();
@@ -454,6 +469,7 @@
       }
       dirty = true;
       refreshButtons();
+      if (embedded) { close(); dictionarySaved?.(); return; }
       viewMain();
     }
 
@@ -467,11 +483,11 @@
 
   function viewDictionaryConfirm(prefill) {
     card.textContent = "";
-    card.appendChild(head("Your Own Words", viewMain));
+    card.appendChild(head("Your Own Words", embedded ? close : viewMain));
     card.appendChild(el("p", "coll-text", "Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
     card.appendChild(el("p", "coll-text", "Continue to add this word to your own collection?"));
     const b = el("div", "coll-form-buttons");
-    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill })));
+    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill, cancel: embedded ? close : viewMain })));
     b.appendChild(button("coll-link", "Cancel", close));
     card.appendChild(b);
   }
@@ -479,11 +495,12 @@
   const dictionaryPrefill = item => window.WortschatzDictionaryCard.create(item);
 
   let lastDictionaryRequest = "";
-  function addDictionaryWord(request) {
+  function addDictionaryWord(request, onSaved) {
     if (!request || !request.id || request.id === lastDictionaryRequest || !request.item) return;
     lastDictionaryRequest = request.id;
+    dictionarySaved = onSaved;
     const prefill = dictionaryPrefill(request.item);
-    open(() => own() ? viewForm(null, { prefill }) : viewDictionaryConfirm(prefill));
+    open(() => own() ? viewForm(null, { prefill, cancel: embedded ? close : viewMain }) : viewDictionaryConfirm(prefill));
   }
 
   const READING_PENDING = "deutschWortschatzPendingReadingWordsV1";
@@ -933,6 +950,7 @@ Rules:
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
   }
   window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord };
+  if (embedded) return; // Reader opens explicitly; pending imports belong to Wortschatz.
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.data?.type !== "deutsch:wortschatz-add") return;
     try {

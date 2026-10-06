@@ -862,30 +862,15 @@
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
   function addToWortschatz(item) {
-    const C = window.WortschatzCollection;
-    if (!C) { showToast("Open Wortschatz to add this word to your collection."); return; }
-    if (!C.isOwn()) {
-      const request = { id:Date.now().toString(36) + Math.random().toString(36).slice(2), item };
-      try {
-        sessionStorage.setItem("deutschWortschatzPendingDictionaryWordV1", JSON.stringify(request));
-        showToast("Continue in Wortschatz to add this word.", "Open Wortschatz");
-      } catch (error) { showToast("Open Wortschatz to add this word.", "Open Wortschatz"); }
-      return;
-    }
-    const paragraphs = hasChapters(currentBook) ? currentBook.chapters[currentBook.chapterIndex].paragraphs : splitParagraphs(currentBook?.content || "");
-    const pIndex = Math.max(0, Number(currentBook?.position) || 0);
-    const sentence = selectedContext?.sentence || paragraphs[pIndex] || "";
-    const token = selectedWord || item.word;
-    const escapedToken = token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const match = new RegExp(`(^|[^\\p{L}\\p{M}])(${escapedToken})(?=$|[^\\p{L}\\p{M}])`, "iu").exec(sentence);
-    const exactOffset = selectedContext?.tokenOffset;
-    const exactOccurrence = Number.isInteger(exactOffset) && sentence.slice(exactOffset, exactOffset + token.length) === token;
-    const markedSentence = exactOccurrence ? sentence.slice(0,exactOffset) + `{{c1::${token}}}` + sentence.slice(exactOffset + token.length) : match ? sentence.slice(0, match.index) + match[1] + `{{c1::${match[2]}}}` + sentence.slice(match.index + match[0].length) : `{{c1::${token}}}`;
-    try {
-      const added = C.add([{ sentence:markedSentence, translation:selectedResolution?.translation || { en:item.translation_en || "", ru:item.translation_ru || "" }, sentenceTranslation:"", pos:item.type, base:`${item.article ? item.article + " " : ""}${item.word}` }]);
-      showToast(added.added ? "Added to Wortschatz." : "This word is already in your Wortschatz.");
-    } catch (error) { showToast("Could not add this word. Please check your Wortschatz collection."); }
+    const form = window.WortschatzCollectionWindow;
+    if (!form) { showToast("The word form is unavailable. Please reload and try again."); return; }
+    closePopups();
+    form.addDictionaryWord({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+      item
+    }, () => showToast("Added to Wortschatz."));
   }
+
   let selectedWord = "", selectedContext = null, popupAmbiguous = false, bookmarkBusy = false;
   const BOOKMARK_HINT = "deutschReadingBookmarkHintV1";
   function bookmarkInput() {

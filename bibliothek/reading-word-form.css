@@ -1,0 +1,29 @@
+/* Palette aliases scoped to the shared word form in the reader. */
+.coll-modal {
+  --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --sec-text: var(--secondary-text, #c8c7c4);
+  --card-bg: var(--window-card, #2a2a2d);
+  --field-bg: rgba(255,255,255,.03);
+  --main-bg: #ece6dc;
+  --main-text: #1b1b1d;
+  --quiet-text: var(--secondary-text, #c8c7c4);
+  --overlay-scrim: rgba(0,0,0,.34);
+  --error: #ff7770;
+  --blank-line: var(--text);
+  z-index: 100;
+  box-sizing: border-box;
+}
+.coll-modal *, .coll-modal *::before, .coll-modal *::after { box-sizing: border-box; }
+[data-theme="light"] .coll-modal {
+  --sec-text: #55565b;
+  --card-bg: #fff;
+  --field-bg: #fff;
+  --main-bg: #242426;
+  --main-text: #f6f4f1;
+  --quiet-text: #727278;
+  --overlay-scrim: rgba(0,0,0,.2);
+  --error: #e95e66;
+}
+@media (prefers-reduced-motion: reduce) {
+  .coll-modal, .coll-card { transition: none; }
+}

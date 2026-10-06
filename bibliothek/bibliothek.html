@@ -16,6 +16,8 @@
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=50">
   <link rel="stylesheet" href="bibliothek.css?v=20261006-cover-shape-1">
+  <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1">
+  <link rel="stylesheet" href="reading-word-form.css?v=1">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -132,6 +134,9 @@
     <h3>License</h3>
     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 International ↗</a></p>
   </dialog>
+  <div class="coll-modal" id="collModal" data-host="reader" aria-hidden="true">
+    <div class="coll-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div>
+  </div>
   <script src="../components/deutsch-translation-v1.js?v=2"></script>
   <script src="../wortschatz/collection.js"></script>
   <script src="fallback-dictionary.js?v=8"></script>
@@ -145,11 +150,12 @@
   <script src="vocabulary-highlights.js?v=3"></script>
   <script src="vocabulary-list.js?v=1"></script>
   <script src="../wortschatz/dictionary-card.js?v=1"></script>
+  <script src="../wortschatz/collection-window.js?v=29"></script>
   <script src="vocabulary-actions.js?v=3"></script>
   <script src="vocabulary-panel.js?v=7"></script>
   <script src="meaning-display.js?v=6"></script>
   <script src="reader-pagination.js?v=3"></script>
-  <script src="bibliothek.js?v=20261006-cover-shape-1"></script>
+  <script src="bibliothek.js?v=20261006-word-form-1"></script>
   <div class="version-mark" aria-hidden="true">v1</div>
 </body>
 </html>
