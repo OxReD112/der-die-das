@@ -131,8 +131,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=50" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=50" rel="stylesheet"/>');
+     ? '<link href="home.css?v=51" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=51" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -278,7 +278,7 @@
      <div class="tile-page">
       <button class="tile tile-library module" data-app="bibliothek/bibliothek.html?v=1" type="button">
        <div class="tile-art"><img alt="" src="bibliothek/icon.webp"/></div>
-       <div class="tile-copy"><div class="name">Bibliothek</div></div>
+       <div class="tile-copy"><div class="name">Bibliothek</div><div class="status">Noch in Entwicklung</div></div>
       </button>
      </div>
     </div>

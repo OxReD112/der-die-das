@@ -192,7 +192,14 @@
         image.alt = "";
         image.loading = "lazy";
         image.decoding = "async";
-        image.addEventListener("error", () => image.remove(), { once: true });
+        image.addEventListener("load", () => {
+          // Narrow artwork fills the front without extending over the separate spine.
+          icon.classList.toggle("has-narrow-cover", image.naturalWidth / image.naturalHeight < 40 / 48);
+        }, { once: true });
+        image.addEventListener("error", () => {
+          icon.classList.remove("has-narrow-cover");
+          image.remove();
+        }, { once: true });
         image.src = book.coverThumbnail;
         icon.append(image);
       }

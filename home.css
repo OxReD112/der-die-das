@@ -2805,3 +2805,4 @@ html.home-wide-layout body {
 .mosaic .tile-library .tile-art img { display:block; width:100%; height:100%; object-fit:cover; object-position:left center; }
 .mosaic .tile-library .tile-copy { position:absolute; left:62%; right:12px; top:50%; transform:translateY(-50%); text-align:left; }
 .mosaic .tile-library .name { font-size:clamp(17px,3vw,24px); font-weight:650; }
+.mosaic .tile-library .status { min-height:14px; margin-top:4px; color:var(--muted); font-size:11px; line-height:1.15; }
