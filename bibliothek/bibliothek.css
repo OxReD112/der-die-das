@@ -272,3 +272,6 @@
 .page-controls button:disabled { opacity:.3; cursor:default; }
 .page-controls button:focus-visible { outline:2px solid var(--mint); outline-offset:-2px; }
 #page-status { color:var(--muted); font-size:12px; text-align:center; }
+
+/* Selection stays available until a horizontal page drag is established. */
+.page-viewport.is-page-dragging { user-select:none; -webkit-user-select:none; cursor:grabbing; }
