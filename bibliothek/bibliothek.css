@@ -334,8 +334,8 @@
  .contents-dialog,.vocabulary-dialog { top:var(--reader-header-bottom,55px); bottom:0; height:calc(100dvh - var(--reader-header-bottom,55px)); max-height:calc(100dvh - var(--reader-header-bottom,55px)); padding-top:22px; clip-path:inset(0); }
  .contents-dialog::backdrop,.vocabulary-dialog::backdrop { background:linear-gradient(to bottom,transparent 0 var(--reader-header-bottom,55px),rgba(0,0,0,.4) var(--reader-header-bottom,55px)); }
  .contents-dialog.is-opening,.contents-dialog.is-closing,.vocabulary-dialog.is-opening,.vocabulary-dialog.is-closing { animation:none; }
- .contents-dialog.is-opening .reader-drawer-content,.vocabulary-dialog.is-opening .reader-drawer-content { animation:reader-drawer-down .24s ease-out; }
- .contents-dialog.is-closing .reader-drawer-content,.vocabulary-dialog.is-closing .reader-drawer-content { animation:reader-drawer-up .22s ease-in forwards; }
+ .contents-dialog.is-opening .reader-drawer-content,.vocabulary-dialog.is-opening .reader-drawer-content { animation:reader-drawer-down .5s cubic-bezier(.22,1,.36,1); }
+ .contents-dialog.is-closing .reader-drawer-content,.vocabulary-dialog.is-closing .reader-drawer-content { animation:reader-drawer-up .45s cubic-bezier(.4,0,.2,1) forwards; }
  .drawer-side-arrow { display:none; }
  .drawer-up-arrow { display:block; }
 }
@@ -344,3 +344,15 @@
 @media (prefers-reduced-motion:reduce) { .contents-dialog .reader-drawer-content,.vocabulary-dialog .reader-drawer-content { animation:none!important; } }
 .reader-drawer-content { flex:1; height:auto; }
 .vocabulary-footer { flex:0 1 auto; min-height:0; }
+
+/* Initial dialog focus announces the title without outlining a control. */
+#contents-heading:focus,#vocabulary-heading:focus { outline:none; }
+@media (min-width:601px) {
+ .contents-dialog.is-opening,.vocabulary-dialog.is-opening { animation:reader-drawer-right-in .5s cubic-bezier(.22,1,.36,1); }
+ .contents-dialog.is-closing,.vocabulary-dialog.is-closing { animation:reader-drawer-right-out .45s cubic-bezier(.4,0,.2,1) forwards; }
+}
+@keyframes reader-drawer-right-in { from { transform:translateX(100%); } to { transform:translateX(0); } }
+@keyframes reader-drawer-right-out { from { transform:translateX(0); } to { transform:translateX(100%); } }
+@media (prefers-reduced-motion:reduce) {
+ .contents-dialog.is-opening,.contents-dialog.is-closing,.vocabulary-dialog.is-opening,.vocabulary-dialog.is-closing { animation:none; }
+}

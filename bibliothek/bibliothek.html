@@ -15,7 +15,7 @@
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=49">
-  <link rel="stylesheet" href="bibliothek.css?v=49">
+  <link rel="stylesheet" href="bibliothek.css?v=50">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -90,7 +90,7 @@
   </main>
   <dialog class="contents-dialog" id="contents-dialog" aria-labelledby="contents-heading">
     <div class="reader-drawer-content">
-    <div class="contents-header"><div><p id="contents-book-title"></p><h2 id="contents-heading">Inhalt</h2></div><button id="contents-close" type="button" aria-label="Close contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
+    <div class="contents-header"><div><p id="contents-book-title"></p><h2 id="contents-heading" tabindex="-1" autofocus>Inhalt</h2></div><button id="contents-close" type="button" aria-label="Close contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
     <div class="contents-columns" aria-hidden="true">Wörter</div>
     <div class="contents-list" id="contents-list"></div>
     <p id="contents-empty" role="status" hidden>No chapters found.</p>
@@ -98,7 +98,7 @@
   </dialog>
   <dialog class="vocabulary-dialog" id="vocabulary-dialog" aria-labelledby="vocabulary-heading">
     <div class="reader-drawer-content">
-    <div class="vocabulary-header"><div><p id="vocabulary-subtitle"></p><h2 id="vocabulary-heading">Vocabulary</h2></div><button id="vocabulary-menu-toggle" type="button" aria-label="Vocabulary actions" aria-expanded="false" aria-controls="vocabulary-menu">⋯</button><div class="vocabulary-menu" id="vocabulary-menu" hidden><button class="vocabulary-quiet" id="vocabulary-copy" type="button" disabled>Copy Vocabulary</button><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
+    <div class="vocabulary-header"><div><p id="vocabulary-subtitle"></p><h2 id="vocabulary-heading" tabindex="-1" autofocus>Vocabulary</h2></div><button id="vocabulary-menu-toggle" type="button" aria-label="Vocabulary actions" aria-expanded="false" aria-controls="vocabulary-menu">⋯</button><div class="vocabulary-menu" id="vocabulary-menu" hidden><button class="vocabulary-quiet" id="vocabulary-copy" type="button" disabled>Copy Vocabulary</button><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
     <div class="vocabulary-controls"><label>From<select id="vocabulary-scope"><option value="chapter">This chapter</option><option value="book">Whole book</option></select></label><label class="vocabulary-select-all"><input id="vocabulary-select-all" type="checkbox"> Select all</label></div>
     <p class="vocabulary-status" id="vocabulary-status" role="status"></p>
     <div class="vocabulary-list" id="vocabulary-list"></div>
@@ -146,9 +146,9 @@
   <script src="vocabulary-highlights.js?v=3"></script>
   <script src="vocabulary-list.js?v=1"></script>
   <script src="vocabulary-actions.js?v=2"></script>
-  <script src="vocabulary-panel.js?v=5"></script>
+  <script src="vocabulary-panel.js?v=6"></script>
   <script src="meaning-display.js?v=6"></script>
   <script src="reader-pagination.js?v=2"></script>
-  <script src="bibliothek.js?v=57"></script>
+  <script src="bibliothek.js?v=58"></script>
 </body>
 </html>

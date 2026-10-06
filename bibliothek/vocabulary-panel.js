@@ -13,7 +13,7 @@
     async function close() {
       if(!dialog.open||closing||busy)return;
       closing=true;menu(false);dialog.classList.remove('is-opening');
-      if(matchMedia('(max-width:600px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+      if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
         dialog.classList.add('is-closing');
         await Promise.all(dialog.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{})));
       }
@@ -84,7 +84,7 @@
       const hasChapters=!!getBook().chapters?.length;
       $("vocabulary-scope").options[0].textContent=hasChapters?'This chapter':'This text';
       $("vocabulary-scope").value='chapter';$("vocabulary-scope").disabled=!hasChapters;
-      if(!dialog.open){dialog.showModal();dialog.classList.add('is-opening');}render();$("vocabulary-close").focus();
+      if(!dialog.open){dialog.showModal();dialog.classList.add('is-opening');}render();$("vocabulary-heading").focus({preventScroll:true});
     }
     async function updateCount() {
       const request=++countRun,book=getBook();if(!book)return;

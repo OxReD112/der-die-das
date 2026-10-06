@@ -374,7 +374,7 @@
     if (!contentsDialog.open || contentsClosing) return;
     contentsClosing = true;
     contentsDialog.classList.remove("is-opening");
-    if (matchMedia("(max-width:600px)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
+    if (!matchMedia("(prefers-reduced-motion:reduce)").matches) {
       contentsDialog.classList.add("is-closing");
       await Promise.all(contentsDialog.getAnimations({subtree:true}).map(animation => animation.finished.catch(() => {})));
     }
