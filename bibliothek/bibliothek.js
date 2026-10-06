@@ -79,17 +79,26 @@
     }
   });
 
-  function updateExplainerLanguage() {
-    const lang = locale();
-    const intro = $("reader-intro");
-    intro.lang = lang;
-    const sentences = lang === "ru"
-      ? ["Читайте в своём темпе.", "Нажмите на слово, чтобы узнать его значение."]
-      : ["Read at your own pace.", "Tap a word to see its meaning."];
-    const sentenceBreak = document.createElement("span");
-    sentenceBreak.className = "intro-break";
-    sentenceBreak.append(document.createElement("br"));
-    intro.replaceChildren(document.createTextNode(sentences[0]), sentenceBreak, document.createTextNode(` ${sentences[1]}`));
+  const storageInfo = $("storage-info"), storageNotice = $("storage-notice");
+  const STORAGE_NOTICE_KEY = "deutschLibraryStorageNoticeV1";
+  let storageNoticeTimer;
+  function setStorageNotice(open) {
+    clearTimeout(storageNoticeTimer);
+    storageNotice.classList.toggle("is-open", open);
+    storageNotice.setAttribute("aria-hidden", String(!open));
+    storageInfo.setAttribute("aria-expanded", String(open));
+  }
+  storageInfo.addEventListener("click", () => {
+    setStorageNotice(storageInfo.getAttribute("aria-expanded") !== "true");
+  });
+  let storageNoticeSeen = false;
+  try { storageNoticeSeen = localStorage.getItem(STORAGE_NOTICE_KEY) === "seen"; } catch (_) {}
+  setStorageNotice(!storageNoticeSeen);
+  if (!storageNoticeSeen) {
+    storageNoticeTimer = setTimeout(() => {
+      setStorageNotice(false);
+      try { localStorage.setItem(STORAGE_NOTICE_KEY, "seen"); } catch (_) {}
+    }, 6000);
   }
   window.addEventListener("storage", event => {
     if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateReaderLanguage();
@@ -98,7 +107,6 @@
   window.addEventListener("focus", updateReaderLanguage);
   window.addEventListener("deutschtranslationchange", updateReaderLanguage);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) updateReaderLanguage(); });
-  updateExplainerLanguage();
 
   const openDb = () => window.BibliothekVocabulary.openDb();
   async function allBooks() {
@@ -563,8 +571,7 @@
   }
   let lookupRequest = 0, refreshPopupLanguage = null;
   function updateReaderLanguage() {
-    updateExplainerLanguage();
-    refreshPopupLanguage?.();
+      refreshPopupLanguage?.();
   }
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;

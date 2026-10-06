@@ -15,12 +15,10 @@
 .library::-webkit-scrollbar { display:none; }
 .library-actions { position:absolute; z-index:3; left:0; right:0; bottom:max(10px,env(safe-area-inset-bottom)); display:flex; justify-content:center; gap:10px; pointer-events:none; }
 .library-actions .primary-action { display:flex; align-items:center; justify-content:center; gap:9px; width:148px; min-width:0; min-height:48px; border-radius:17px; padding:0 14px; background:var(--tile-surface); color:var(--secondary-text); font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; box-shadow:var(--lift-highlight),var(--lift-shadow); white-space:nowrap; pointer-events:auto; }
-.library-actions .primary-action svg { flex:none; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
 .library-actions .primary-action:active { transform:scale(.97); filter:brightness(.94); }
 [data-theme="light"] .library-actions .primary-action { box-shadow:var(--lift-shadow); }
 .library-actions .primary-action:focus-visible { outline:2px solid var(--mint); outline-offset:3px; }
 .reader-heading h1 { margin:0; color:var(--text); font-size:25px; line-height:1.15; font-weight:700; letter-spacing:-.5px; }
-.reader-intro { margin:20px 0 12px; text-align:center; color:var(--secondary-text); font-size:15px; line-height:1.45; }
 .storage-note { margin:0; padding:12px 14px; border-radius:13px; background:var(--card-bg); color:var(--muted); font-size:12px; line-height:1.45; }
 .paste-form { scroll-margin-bottom:100px; display:grid; gap:8px; margin:10px 0 16px; }
 .paste-form label { margin-top:7px; color:var(--muted); font-size:12px; }
@@ -112,7 +110,6 @@
 @media (min-width:700px) { .sheet-card { margin-bottom:20px; border-bottom:1px solid var(--window-line); border-radius:24px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; } }
 
-@media (min-width:700px) { .intro-break { display:none; } }
 
 .contents-toggle { display:grid; place-items:center; flex:none; width:44px; height:44px; border:0; border-radius:12px; background:transparent; color:var(--text); font-size:23px; cursor:pointer; }
 .contents-toggle:hover { background:var(--tile-surface); }
@@ -373,3 +370,14 @@
 @media (hover:none) and (pointer:coarse) {
  .page-controls button { display:none; }
 }
+
+/* Storage information collapses with the library content. */
+.storage-info { position:absolute; right:0; top:4px; display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:0; background:transparent; color:var(--muted); cursor:pointer; }
+.storage-info:focus-visible { outline:2px solid var(--mint); border-radius:50%; }
+.storage-notice { display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden; transition:grid-template-rows .4s ease,opacity .4s ease,visibility .4s; }
+.storage-notice.is-open { grid-template-rows:1fr; opacity:1; visibility:visible; }
+.storage-notice-inner { min-height:0; overflow:hidden; }
+.page-controls { justify-content:flex-end; padding-inline:0; }
+.page-controls button { display:none; }
+#page-status { text-align:right; }
+@media (prefers-reduced-motion:reduce) { .storage-notice { transition:none; } }

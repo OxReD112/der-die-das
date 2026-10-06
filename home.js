@@ -960,11 +960,11 @@ function updateBack() {
   const short = win.matchMedia(SHORT_SCREEN).matches;
   doc.documentElement.classList.remove("deutsch-home-in-bar");
 
-  // Bibliothek keeps the same bottom-left button throughout, even on short screens.
+  // Bibliothek keeps Home centred throughout, even on short screens.
   // The fixed, transparent version remains measurable while books and drawers change.
   if (libraryPage) {
     rowTop = version ? version.getBoundingClientRect().top + version.getBoundingClientRect().height / 2 - 22 : null;
-    placeBack("corner", Math.max(12, parseFloat(win.getComputedStyle(doc.body).paddingLeft) || 0), rowTop);
+    placeBack("row", W / 2, rowTop ?? win.innerHeight - 56);
     return;
   }
   if (short) {

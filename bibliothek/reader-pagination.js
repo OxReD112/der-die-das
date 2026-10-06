@@ -65,8 +65,7 @@
       controls.forEach(node => { node.tabIndex = pageFor(node) === page ? 0 : -1; });
       const first = words.find((word, i) => wordPages[i] === page);
       anchor = location(first) || anchor;
-      const ru = window.DeutschTranslation?.getLang?.() === 'ru';
-      status.textContent = ru ? `Страница ${page + 1} из ${count}` : `Page ${page + 1} of ${count}`;
+      status.textContent = `${page + 1} / ${count}`;
       previous.disabled = page === 0 && !onBoundary(-1, true);
       next.disabled = page === count - 1 && !onBoundary(1, true);
       if (notify) onChange(anchor, page, count);
