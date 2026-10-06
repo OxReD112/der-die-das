@@ -7,7 +7,36 @@
   let currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
-  let switchingChapter = false, renderRequest = 0, renderedWordLengths = [];
+  let switchingChapter = false, renderRequest = 0;
+  let restoreLastPage = false;
+  const pagination = window.BibliothekPagination.create({
+    closePopups,
+    isBlocked:() => switchingChapter || !$sheet.hidden || !!document.querySelector('dialog[open]') || !$("delete-confirm").hidden,
+    onBoundary:(direction, checkOnly) => {
+      if (!hasChapters(currentBook)) return false;
+      const entries = readingEntries(currentBook), index = entries.indexOf(activeEntry(currentBook));
+      const entry = entries[index + direction];
+      if (!entry) return false;
+      if (!checkOnly) { restoreLastPage = direction < 0; navigateTo(entry); }
+      return true;
+    },
+    onChange:(location, page, count) => {
+      if (!currentBook || !location) return;
+      const book = currentBook;
+      book.position = location.paragraph;
+      book.tokenOffset = location.tokenOffset;
+      if (hasChapters(book)) {
+        book.chapterPositions[book.chapterIndex] = book.position;
+        const entry = activeEntry(book);
+        if (entry) { book.contentsOffsets ||= {}; book.contentsOffsets[entryKey(entry)] = book.tokenOffset; }
+      }
+      rememberEntry(book, book.position);
+      if (page > 0 || (hasChapters(book) && book.chapterIndex > 0)) book.readingStarted = true;
+      setProgress();
+      clearTimeout(window.__readingSaveTimer);
+      window.__readingSaveTimer = setTimeout(() => updateProgress(book, book.position), 250);
+    }
+  });
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || item.translation_ru;
@@ -39,7 +68,7 @@
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       const paragraph = $text.querySelector(`[data-paragraph="${occurrence.paragraphIndex}"]`);
       const target = paragraph?.querySelector(`[data-token-offset="${occurrence.tokenOffset}"]`) || paragraph;
-      if (target) { target.scrollIntoView({block:"center",behavior:"instant"}); target.focus({preventScroll:true}); await updateProgress(currentBook,occurrence.paragraphIndex); }
+      if (target) { pagination.reveal(target); target.focus({preventScroll:true}); await updateProgress(currentBook,pagination.location?.paragraph ?? occurrence.paragraphIndex); }
     }
   });
 
@@ -245,12 +274,7 @@
     book.position = Math.max(0, Math.min(Number(book.chapterPositions[book.chapterIndex]) || 0, book.chapters[book.chapterIndex].paragraphs.length - 1));
   }
   function visibleParagraph() {
-    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
-    const visible = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > readingTop());
-    return Number(paragraphs[visible < 0 ? Math.max(0, paragraphs.length - 1) : visible]?.dataset.paragraph) || 0;
-  }
-  function readingTop() {
-    return $("back-library").parentElement.getBoundingClientRect().bottom + 8;
+    return pagination.location?.paragraph ?? (Number(currentBook?.position) || 0);
   }
   function contentsFor(book) {
     return book.contents?.length ? book.contents : book.chapters.map((chapter, chapterIndex) => ({ title: chapter.title, chapterIndex, paragraph: 0, depth: 0, navigable: true }));
@@ -289,6 +313,7 @@
       const legacySaved = !book.contents ? book.chapterPositions[entry.chapterIndex] : undefined;
       book.position = restore ? Math.max(entry.paragraph, Math.min(Number(saved ?? legacySaved ?? entry.paragraph), end - 1)) : entry.paragraph;
       book.chapterPositions[book.chapterIndex] = book.position;
+      book.tokenOffset = restore ? Number(book.contentsOffsets?.[entryKey(entry)]) || 0 : 0;
       renderBookText(book);
       const heading = $("book-headline").hidden ? $text.firstElementChild : $("book-headline");
       if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
@@ -337,9 +362,8 @@
   function renderChapterNavigation(book) {
     $("contents-toggle").hidden = !hasChapters(book);
     $("chapter-progress-track").hidden = !hasChapters(book);
-    const end = $("chapter-end"); end.replaceChildren(); end.hidden = !hasChapters(book);
-    if (!hasChapters(book)) return;
-    const entries = readingEntries(book), active = activeEntry(book), index = entries.indexOf(active);
+    const end = $("chapter-end"); end.replaceChildren(); end.hidden = false;
+    const entries = hasChapters(book) ? readingEntries(book) : [], active = hasChapters(book) ? activeEntry(book) : null, index = entries.indexOf(active);
     if (entries[index + 1]) {
       const next = document.createElement("button"); next.id = "next-chapter"; next.className = "next-chapter-card"; next.type = "button";
       const label = document.createElement("small"); label.textContent = "Next chapter";
@@ -392,7 +416,6 @@
       p.append(wrapParagraph(paragraph));
       $text.append(p);
     });
-    renderedWordLengths = [...$text.querySelectorAll("[data-paragraph]")].map(p => (p.textContent.match(/[\p{L}\p{M}]+/gu) || []).length);
     currentBook = book;
     refreshHighlights();
     renderChapterNavigation(book);
@@ -408,36 +431,30 @@
     document.body.classList.remove("library-screen");
     $reading.hidden = false;
     setProgress();
-    const position = Math.max(0, Number(book.position) || 0);
-    const target = $text.querySelector(`[data-paragraph="${position}"]`);
+    const saved = {paragraph:Math.max(0, Number(book.position) || 0), tokenOffset:Number(book.tokenOffset) || 0, end:restoreLastPage};
+    restoreLastPage = false;
     restoringPosition = true;
     window.scrollTo({ top:0, behavior:"instant" });
+    pagination.layout(saved);
     requestAnimationFrame(() => {
       if (request !== renderRequest || currentBook !== book) return;
-      // The beginning includes the book header, not just the first paragraph.
-      if (position > start && target) {
-        const toolbarHeight = $("back-library").parentElement.getBoundingClientRect().height;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - toolbarHeight - 8;
-        window.scrollTo({ top:Math.max(0, targetTop), behavior:"instant" });
-      }
-      requestAnimationFrame(() => { if (request === renderRequest) restoringPosition = false; });
+      pagination.layout(saved);
+      restoringPosition = false;
     });
   }
   function setProgress() {
     if (!currentBook) return;
     const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
     const index = Math.max(0, Number(currentBook.position) || 0);
+    $("reading-progress").hidden = !hasChapters(currentBook);
     if (!hasChapters(currentBook)) {
       $("reading-progress").textContent = paragraphs.length ? `${Math.min(index + 1, paragraphs.length)} / ${paragraphs.length}` : ""; return;
     }
     const active = activeEntry(currentBook), chapters = readingEntries(currentBook).filter(entry => !entry.frontMatter);
     const number = chapters.findIndex(entry => entryKey(entry) === entryKey(active));
     $("reading-progress").textContent = number >= 0 ? `Chapter ${number + 1} of ${chapters.length}` : (active?.title || "Reading");
-    const lengths = renderedWordLengths;
-    const passed = paragraphs.reduce((sum, p, i) => sum + (Number(p.dataset.paragraph) < index ? lengths[i] : 0), 0);
-    const total = lengths.reduce((sum, length) => sum + length, 0);
-    const last = paragraphs.at(-1), atEnd = last && window.scrollY > 0 && last.getBoundingClientRect().bottom <= innerHeight;
-    $("chapter-progress-fill").style.width = `${atEnd ? 100 : total ? passed / total * 100 : 0}%`;
+    const atEnd = pagination.page === pagination.count - 1;
+    $("chapter-progress-fill").style.width = `${atEnd ? 100 : pagination.count > 1 ? pagination.page / pagination.count * 100 : 0}%`;
   }
   async function openBook(book) {
     closePopups();
@@ -446,11 +463,13 @@
 
   }
   let lemmaResolver = null, selectedResolution = null;
+  const usageNote = candidate => candidate?.usage?.role === "attributive"
+    ? `${candidate.usage.form} · ${candidate.usage.kind === "participle-I" ? "Partizip I" : "Partizip II"} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
     const get = (path, revision) => fetch(`../worterbuch/${path}${revision ? `?v=${revision}` : ""}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json", "20261006-4"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json", "20261006-7"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
       .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
@@ -481,7 +500,7 @@
     const resolution = await lemmaResolver.resolve(word, context);
     let saved = null;
     try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
-    if (saved) resolution.selected = resolution.candidates.find(c => window.BibliothekVocabulary.identity(c) === saved) || resolution.selected;
+    if (saved) resolution.selected = window.BibliothekLemmaResolver.savedCandidate(saved, resolution) || resolution.selected;
     if (request !== lookupRequest) return;
     popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
@@ -493,43 +512,65 @@
     $("popover-more").hidden = !selectedEntry;
     $("popover-source").hidden = !resolution.candidates.some(candidate => candidate.source === "fallback");
     const notes = $("popover-form-notes"), noteText = $("popover-form-note-text");
-    notes.hidden = !resolution.formNotes?.length; notes.open = false;
+    const visibleNotes = []; // Word-form records stay out of the compact popup.
+    notes.hidden = !visibleNotes.length; notes.open = false;
     noteText.replaceChildren();
-    for (const note of resolution.formNotes || []) {
+    for (const note of visibleNotes) {
       const text = document.createElement("p"); text.textContent = note.meanings.join(" · "); noteText.append(text);
     }
     const alternatives = $("popover-alternatives"), choices = $("popover-choices");
-    alternatives.hidden = resolution.candidates.length < 2;
+    alternatives.hidden = true;
     alternatives.open = !resolution.selected;
     choices.replaceChildren();
-    const candidateText = candidate => locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru;
+    const candidateText = candidate => window.BibliothekMeaningDisplay.brief(candidate, locale()) || window.BibliothekMeaningDisplay.brief(candidate, "en");
     const candidateLabel = candidate => {
       const id = candidate.dictionaryId;
       if (candidate.construction?.id === "separable-verb") return locale() === "ru" ? "отделяемый глагол" : "separable verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
-      return candidate.additional ? `${candidate.posLabel || candidate.pos} · Wiktionary` : candidate.posLabel || candidate.pos;
+      const type = window.BibliothekMeaningDisplay.pos(candidate);
+      const label = locale() === "ru" ? ({Verb:"Глагол",Nomen:"Существительное",Pronomen:"Местоимение",Adjektiv:"Прилагательное",Adverb:"Наречие",Konjunktion:"Союз"}[type] || type) : ({Nomen:"Noun",Pronomen:"Pronoun",Adjektiv:"Adjective",Adverb:"Adverb",Konjunktion:"Conjunction"}[type] || type);
+      return locale() === "ru" && !candidate.translation.ru ? `${label} · английский` : label;
     };
     const renderSelection = () => {
       const candidate = selectedResolution;
       content.textContent = candidate ? `${candidateLabel(candidate)} · ${candidateText(candidate)}` :
         resolution.candidates.length ? "Choose the meaning used here:" :
         resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
-      if (candidate?.construction?.id === "separable-verb") {
+      if (usageNote(candidate)) {
+        const note = document.createElement("small"); note.className = "popover-construction";
+        note.textContent = usageNote(candidate); content.append(note);
+      }
+      if (candidate?.construction) {
         const group = document.createElement("small"); group.className = "popover-construction";
-        group.textContent = candidate.construction.spans.map(span => span.text).join(" … ");
+        group.textContent = candidate.construction.id === "separable-verb"
+          ? candidate.construction.spans.map(span => span.text).join(" … ")
+          : candidate.construction.note?.[locale()] || `${candidate.construction.label} ${locale() === "ru" ? "с" : "with"} ${candidate.construction.lemma}`;
         content.append(group);
       }
-      $("popover-word").textContent = candidate ? `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}` : word;
+      $("popover-word").textContent = candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
-      choices.querySelectorAll("button").forEach((button,i) => button.setAttribute("aria-pressed", String(resolution.candidates[i] === candidate)));
+      paintActiveWord(candidate);
+      renderChoices();
     };
-    resolution.candidates.forEach(candidate => {
+    const renderChoices = () => {
+      choices.replaceChildren();
+      const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale());
+      alternatives.hidden = !displayed.length;
+      const source = $("popover-source");
+      const mainUsesExternal = selectedResolution?.source === "fallback" ||
+        !selectedResolution && !resolution.candidates.length && !!resolution.unresolvedMeanings.length ||
+        notes.open && !notes.hidden;
+      const alternativesUseExternal = displayed.some(row => row.candidate.source === "fallback");
+      source.hidden = !mainUsesExternal && !alternativesUseExternal;
+      if (mainUsesExternal) $popover.insertBefore(source, $("popover-more"));
+      else alternatives.append(source);
+      displayed.forEach(({candidate, text}) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "lemma-choice";
-      button.textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma} · ${candidateLabel(candidate)} — ${candidateText(candidate)}`;
+      button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateLabel(candidate)} — ${text}`;
       button.addEventListener("click", async () => {
         if (request !== lookupRequest) return;
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
@@ -550,7 +591,8 @@
         if (request === lookupRequest) refreshBookmark(request);
       });
       choices.append(button);
-    });
+      });
+    };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     renderSelection();
     await refreshBookmark(request);
@@ -570,15 +612,42 @@
     const root = $("dictionary-card");
     root.replaceChildren();
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
+    const formKey = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+    const clickedForm = formKey(selectedWord);
+    const construction = selectedResolution?.construction?.id === "separable-verb"
+      ? selectedResolution.construction.spans.map(span => formKey(span.text)).join(" ") : "";
+    const markForm = (element, value, whole = false) => {
+      const key = formKey(value);
+      const split = key.split(/\s+/u);
+      const joined = item.separable_prefix && split.length === 2 ? split[1] + split[0] : "";
+      if (whole && clickedForm && (construction ? key === construction : key === clickedForm || joined === clickedForm)) {
+        const mark = document.createElement("mark"); mark.className = "dictionary-form-match"; mark.textContent = value;
+        element.replaceChildren(mark); return;
+      }
+      // Match the clicked token within Perfekt and reflexive forms as well.
+      if (!clickedForm || whole && construction) { element.textContent = value; return; }
+      element.replaceChildren();
+      for (const part of String(value).split(/([\p{L}\p{M}]+)/gu)) {
+        if (formKey(part) === clickedForm) {
+          const mark = document.createElement("mark"); mark.className = "dictionary-form-match"; mark.textContent = part; element.append(mark);
+        } else element.append(document.createTextNode(part));
+      }
+    };
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
     addInfo("p","dictionary-pos",item.type);
+    if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || selectedResolution.translation.ru) : translation(item));
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.plural_note_ru : item.plural_note_en);
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.declension_note_ru : item.declension_note_en);
-    if (item.perfect_form) addInfo("p","dictionary-detail",`Perfekt: ${item.perfect_form}`);
+    if (item.perfect_form) {
+      const perfect = document.createElement("p"); perfect.className = "dictionary-detail dictionary-perfect";
+      if (item.type === "Verb") markForm(perfect, `Perfekt: ${item.perfect_form}`);
+      else perfect.textContent = `Perfekt: ${item.perfect_form}`;
+      root.append(perfect);
+    }
     if (item.comparative || item.superlative) addInfo("p","dictionary-detail",`Steigerung: ${[item.comparative,item.superlative].filter(Boolean).join(" · ")}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en);
     if (item.word_order_rule) addInfo("p","dictionary-detail",`Wortstellung: ${item.word_order_rule}`);
@@ -617,11 +686,36 @@
         table.append(thead, tbody); scroll.append(table); section.append(scroll); root.append(section);
       });
       addInfo("p","dictionary-detail",locale() === "ru" ? item.forms_note_ru : item.forms_note_en);
-    } else if (item.forms && typeof item.forms === "object") {
-      Object.entries(item.forms).forEach(([tense, forms]) => {
-        const values = Object.entries(forms || {}).map(([person, form]) => `${person}: ${form}`).join(" · ");
-        if (values) addInfo("p","dictionary-detail",`${tense}: ${values}`);
-      });
+    } else if (item.type === "Verb" && (item.forms || item.lookup_forms)) {
+      const verbForms = {...(item.lookup_forms || {}), ...(item.forms || {})};
+      const columns = Object.entries(verbForms).filter(([tense, forms]) =>
+        tense !== "Imperativ" && forms && Object.values(forms).some(Boolean));
+      if (columns.length) {
+        const section = document.createElement("section"); section.className = "dictionary-verb-forms";
+        const title = document.createElement("h3"); title.textContent = "Formen"; section.append(title);
+        const scroll = document.createElement("div"); scroll.style.overflowX = "auto";
+        scroll.tabIndex = 0; scroll.setAttribute("role", "region"); scroll.setAttribute("aria-label", "Verbformen");
+        const table = document.createElement("table"); table.className = "dictionary-table";
+        const thead = document.createElement("thead"), header = document.createElement("tr");
+        ["", ...columns.map(([tense]) => tense)].forEach(label => {
+          const cell = document.createElement("th"); cell.scope = "col"; cell.textContent = label; header.append(cell);
+        });
+        thead.append(header);
+        const tbody = document.createElement("tbody");
+        ["ich", "du", "er/sie/es", "wir", "ihr", "sie"].forEach(person => {
+          const row = document.createElement("tr"), heading = document.createElement("th");
+          heading.scope = "row"; heading.textContent = person === "sie" ? "sie/Sie" : person; row.append(heading);
+          columns.forEach(([, forms]) => {
+            const cell = document.createElement("td"); markForm(cell, forms[person] || "", true); row.append(cell);
+          });
+          tbody.append(row);
+        });
+        table.append(thead, tbody); scroll.append(table); section.append(scroll); root.append(section);
+      }
+      const imperative = Object.entries(verbForms.Imperativ || {}).map(([person, form]) => `${person}: ${form}`).join(" · ");
+      if (imperative) {
+        const line = document.createElement("p"); line.className = "dictionary-detail"; markForm(line, `Imperativ: ${imperative}`); root.append(line);
+      }
     }
     const example = item.example_de;
     if (example) {
@@ -711,9 +805,29 @@
     } catch (_) { showToast("The mark could not be saved. Please try again."); }
     finally { bookmarkBusy = false; refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
   });
-  function closePopups() { lookupRequest++; $popover.hidden = true; $sheet.hidden = true; }
+  let activeWordSpan = null;
+  function paintActiveWord(candidate) {
+    $text.querySelectorAll(".is-active-word").forEach(span => span.classList.remove("is-active-word"));
+    if (!activeWordSpan?.isConnected) return;
+    activeWordSpan.classList.add("is-active-word");
+    const context = selectedContext, construction = candidate?.construction;
+    if (!context || !construction) return;
+    const origin = context.location.tokenOffset - context.tokenOffset;
+    const paragraph = activeWordSpan.closest("[data-paragraph]");
+    paragraph?.querySelectorAll(".reading-word").forEach(span => {
+      const offset = Number(span.dataset.tokenOffset) - origin;
+      if (construction.spans.some(part => part.start === offset && part.text === span.textContent)) span.classList.add("is-active-word");
+    });
+  }
+  function closePopups() {
+    lookupRequest++; $popover.hidden = true; $sheet.hidden = true;
+    activeWordSpan = null; paintActiveWord(null);
+  }
   function chooseWord(span) {
     if (!span || !span.isConnected) return;
+    activeWordSpan = span;
+    paintActiveWord(null);
+    $popover.hidden = true; $sheet.hidden = true;
     selectedWord = span.textContent;
     const paragraph = span.closest("[data-paragraph]");
     let sentence = paragraph?.textContent || "";
@@ -775,6 +889,7 @@
   document.addEventListener("click", event => {
     if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover, #reader-toast")) return;
     closePopups();
+    if (event.target.closest("#reading-text .reading-word, .page-controls")) return;
     event.preventDefault();
     event.stopImmediatePropagation();
   }, true);
@@ -789,29 +904,12 @@
       changed = true;
     }
     const last = paragraphs[paragraphs.length - 1];
-    if (book.readingStarted && !book.completed && !hasChapters(book) && window.scrollY > 0 && last.getBoundingClientRect().bottom <= window.innerHeight) {
+    if (book.readingStarted && !book.completed && !hasChapters(book) && pagination.page > 0 && pagination.page === pagination.count - 1) {
       book.completed = true;
       changed = true;
     }
     return changed;
   }
-  window.addEventListener("scroll", () => {
-    if (restoringPosition || switchingChapter || !currentBook || $reading.hidden) return;
-    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
-    const visibleNode = paragraphs.find(p => p.getBoundingClientRect().bottom > readingTop());
-    if (!visibleNode) return;
-    const visible = Number(visibleNode.dataset.paragraph);
-    const statusChanged = updateBookmarkStatus(currentBook, visible);
-    rememberEntry(currentBook, visible);
-    if (visible !== Number(currentBook.position) || statusChanged) {
-      currentBook.position = visible;
-      if (hasChapters(currentBook)) currentBook.chapterPositions[currentBook.chapterIndex] = visible;
-      setProgress();
-      clearTimeout(window.__readingSaveTimer);
-      const book = currentBook;
-      window.__readingSaveTimer = setTimeout(() => updateProgress(book, visible), 700);
-    } else setProgress();
-  }, { passive:true });
   function flushReadingPosition() {
     if (!currentBook || $reading.hidden || switchingChapter) return;
     clearTimeout(window.__readingSaveTimer);
@@ -828,8 +926,8 @@
     if (event.target === sourcesDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) sourcesDialog.close();
   });
   $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryCard(selectedEntry); $popover.hidden = true; $sheet.hidden = false; });
-  $("sheet-close").addEventListener("click", () => $sheet.hidden = true);
-  $("sheet-scrim").addEventListener("click", () => $sheet.hidden = true);
+  $("sheet-close").addEventListener("click", closePopups);
+  $("sheet-scrim").addEventListener("click", closePopups);
   document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });
   loadDictionary().catch(error => console.warn("Bibliothek dictionary unavailable", error));
   refreshBooks();

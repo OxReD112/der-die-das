@@ -3,6 +3,18 @@
   "use strict";
   const base = new URL("../open%20data/dictionary-de-json/", document.currentScript.src);
   const cache = new Map();
+  const separableUrl = new URL("separable-index.json?v=1", document.currentScript.src);
+  let separablePromise = null;
+  function separableEntries() {
+    if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
+      if (!response.ok) throw new Error("Separable index unavailable");
+      return response.json();
+    }).then(data => {
+      if (data.format_version !== 1 || !Array.isArray(data.entries)) throw new Error("Invalid separable index");
+      return data.entries;
+    }).catch(error => { separablePromise = null; throw error; });
+    return separablePromise;
+  }
   const partition = word => {
     let hash = 2166136261;
     for (const byte of new TextEncoder().encode(word)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
@@ -41,14 +53,44 @@
         value.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`) &&
         /\b(?:present|past|preterite|participle|imperative|singular|plural|dative|accusative|genitive|nominative|infinitive|comparative|superlative)\b/iu.test(value));
       const hasReference = values.some(reference);
-      const grammarTokens = new Set(["first","second","third","person","singular","plural","present","past","preterite","perfect","imperfect","imperative","indicative","subjunctive","participle","nominative","accusative","dative","genitive","infinitive","positive","comparative","superlative","masculine","feminine","neuter","definite","indefinite","weak","strong","dependent","independent","subordinate","clause","zu"]);
+      const grammarTokens = new Set(["first","second","third","person","singular","plural","present","past","preterite","perfect","imperfect","imperative","indicative","subjunctive","participle","nominative","accusative","dative","genitive","infinitive","positive","comparative","superlative","masculine","feminine","neuter","definite","indefinite","weak","strong","mixed","all","gender","dependent","independent","subordinate","clause","zu"]);
       const continuation = value => {
-        const tokens = value.toLowerCase().split(/[\s,;:/().-]+/u).filter(Boolean);
+        const tokens = value.toLowerCase().replace(/\bsubjunctive\s+(?:ii|i)\b/gu, "subjunctive").split(/[\s,;:/().-]+/u).filter(Boolean);
         return hasReference && tokens.length > 0 && tokens.every(token => grammarTokens.has(token));
       };
       const notes = [...new Set(values.filter(value => reference(value) || continuation(value)))];
       return {word,pos,meanings:[...new Set(values.filter(value => !notes.includes(value)))],formNotes:notes};
     });
+  }
+  // Evidence belongs to the clicked spelling, not to permanent dictionary cards.
+  function inflectionEvidence(form, mappings, groups) {
+    const result = [];
+    for (const [spelling, lemma, rawTags] of mappings) {
+      if (spelling.normalize("NFC").toLocaleLowerCase("de-DE") !== form.toLocaleLowerCase("de-DE")) continue;
+      const positions = groups.filter(group => group.formNotes.some(note =>
+        note.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`)));
+      for (const group of positions) {
+        const analyses = [String(rawTags || "").split(",").filter(Boolean)];
+        // Some exports store only one analysis in the mapping, with the others
+        // in continuation notes. Only attach those when the lemma is unambiguous.
+        if (new Set(mappings.map(row => row[1])).size === 1) {
+          for (const note of group.formNotes) {
+            if (/\bof\b/iu.test(note)) continue;
+            const tags = note.toLowerCase().match(/(?:first|second|third)-person|singular|plural|present|past|preterite|imperative|indicative|infinitive|participle|subjunctive(?:\s+(?:ii|i))?/gu) || [];
+            analyses.push(tags.map(tag => tag.replace(/\s+/gu,"-")));
+          }
+        }
+        for (const tags of analyses) {
+          const person = tags.find(tag => /^(?:first|second|third)-person$/u.test(tag)) || null;
+          const number = tags.find(tag => ["singular","plural"].includes(tag)) || null;
+          const tense = tags.find(tag => ["present","past","preterite"].includes(tag)) || null;
+          const mood = tags.find(tag => /^(?:indicative|imperative|subjunctive(?:-i|-ii)?)$/u.test(tag)) || null;
+          const evidence = {form,lemma,pos:group.pos,tags,person,number,tense,mood,source:"Wiktionary"};
+          if (tags.length && !result.some(row => JSON.stringify(row) === JSON.stringify(evidence))) result.push(evidence);
+        }
+      }
+    }
+    return result;
   }
   async function lookup(word) {
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
@@ -62,6 +104,7 @@
         !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
         direct.some(group => group.formNotes.some(note =>
           note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`))));
+      const evidence = inflectionEvidence(candidate,mappings,direct);
       const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
         const mapped = groupsFor(lemma,await record(lemma));
@@ -71,7 +114,8 @@
       const usable = [...groups,...direct].filter(group => group.meanings.length);
       const notes = direct.filter(group => group.formNotes.length).map(group => ({
         kind:"form-note",word:candidate,pos:group.pos,meanings:group.formNotes,
-        lemmas:[...new Set(mappings.map(row => row[1]))]
+        lemmas:[...new Set(mappings.map(row => row[1]))],
+        inflections:evidence.filter(row => row.pos === group.pos)
       }));
       const merged = new Map();
       for (const group of usable) {
@@ -87,5 +131,5 @@
   }
   // Wörterbuch cards retain the selected entry word and its direct senses.
   async function lookupEntry(word) { return meanings(await record(word)); }
-  window.DeutschFallbackDictionary = {lookup, lookupEntry};
+  window.DeutschFallbackDictionary = {lookup, lookupEntry, separableEntries};
 })();

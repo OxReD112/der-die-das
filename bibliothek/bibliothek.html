@@ -15,7 +15,7 @@
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=49">
-  <link rel="stylesheet" href="bibliothek.css?v=30">
+  <link rel="stylesheet" href="bibliothek.css?v=38">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -50,10 +50,13 @@
         <div class="reader-tools"><button class="vocabulary-toggle" id="vocabulary-toggle" type="button" aria-label="Open chapter vocabulary" aria-haspopup="dialog" aria-controls="vocabulary-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg><span id="vocabulary-count">0</span></button><button class="highlights-toggle" id="highlights-toggle" type="button" aria-label="Hide vocabulary highlights" title="Hide vocabulary highlights" aria-pressed="true" aria-controls="reading-text"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="M3 3l18 18"/></svg></button><button class="contents-toggle" id="contents-toggle" type="button" aria-label="Open contents" aria-haspopup="dialog" aria-controls="contents-dialog" hidden>☰</button></div>
       </div>
       <div class="chapter-progress-track" id="chapter-progress-track" hidden><span id="chapter-progress-fill"></span></div>
+      <div class="page-viewport" id="page-viewport"><div class="page-flow" id="page-flow">
       <h1 class="book-headline" id="book-headline"></h1>
       <div class="reading-progress" id="reading-progress" aria-live="polite"></div>
       <article class="reading-text" id="reading-text" lang="de" aria-label="Book text"></article>
       <nav class="chapter-end" id="chapter-end" aria-label="Continue reading" hidden></nav>
+      </div></div>
+      <nav class="page-controls" aria-label="Reading pages"><button id="page-previous" type="button" aria-label="Previous page">←</button><span id="page-status" role="status" aria-live="polite"></span><button id="page-next" type="button" aria-label="Next page">→</button></nav>
     </section>
 
     <div class="book-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-text" hidden>
@@ -122,17 +125,19 @@
   </dialog>
   <script src="../components/deutsch-translation-v1.js"></script>
   <script src="../wortschatz/collection.js"></script>
-  <script src="fallback-dictionary.js?v=4"></script>
+  <script src="fallback-dictionary.js?v=7"></script>
   <script src="jszip-3.10.1.min.js"></script>
   <script src="book-import.js?v=3"></script>
   <script src="epub-import.js?v=2"></script>
   <script src="vocabulary-storage.js?v=2"></script>
   <script src="meaning-selections.js?v=1"></script>
-  <script src="lemma-resolver.js?v=8"></script>
-  <script src="vocabulary-highlights.js?v=1"></script>
+  <script src="lemma-resolver.js?v=23"></script>
+  <script src="vocabulary-highlights.js?v=3"></script>
   <script src="vocabulary-list.js?v=1"></script>
   <script src="vocabulary-actions.js?v=1"></script>
   <script src="vocabulary-panel.js?v=2"></script>
-  <script src="bibliothek.js?v=31"></script>
+  <script src="meaning-display.js?v=4"></script>
+  <script src="reader-pagination.js?v=1"></script>
+  <script src="bibliothek.js?v=44"></script>
 </body>
 </html>

@@ -3,9 +3,36 @@
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const formsOf = entry => ({...(entry?.lookup_forms || {}),...(entry?.forms || {})});
-  const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", det:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
+  const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", det:"Pronomen", noun:"Nomen", name:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
+  const ownOnlyVerbs = new Set(["haben","sein"]);
+  const canonicalPos = value => posMap[value] || value || "";
+  // Only identified grammatical classes may supplement an existing own match.
+  const knownPartsOfSpeech = new Set(["Verb","Nomen","Pronomen","Adjektiv","Adverb","Konjunktion",
+    "prep","num","intj","particle","article"]);
+  function savedCandidate(saved, resolution) {
+    const exact = resolution.candidates.find(c => window.BibliothekVocabulary.identity(c) === saved);
+    if (exact) return exact;
+    let identity;
+    try { identity = JSON.parse(saved); } catch (_) { return null; }
+    if (!Array.isArray(identity) || identity[0] !== "fallback") return null;
+    const own = resolution.candidates.filter(c => c.source === "main" &&
+      norm(c.lemma) === norm(identity[1]) && canonicalPos(c.pos) === canonicalPos(identity[2]));
+    return own.length === 1 ? own[0] : null;
+  }
   function create(entries, fallback) {
-    const forms = new Map(), lemmas = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    const forms = new Map(), lemmas = new Map(), zuForms = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    // Derived modifiers are not exact verb forms: keep their role separate from
+    // the dictionary identity, and require nominal context before choosing them.
+    const modifiers = new Map(), endings = ["e","en","em","er","es"];
+    function addModifier(stem, entry, kind) {
+      if (!/^[\p{L}\p{M}]+$/u.test(stem)) return;
+      for (const ending of endings) {
+        const key = norm(stem + ending), rows = modifiers.get(key) || [];
+        if (!rows.some(row => row.entry.id === entry.id && row.kind === kind && row.ending === ending))
+          rows.push({entry,kind,ending,base:stem});
+        modifiers.set(key,rows);
+      }
+    }
     function add(map, form, entry) {
       const key = norm(form);
       if (!key) return;
@@ -16,6 +43,18 @@
     for (const entry of entries) {
       add(lemmas, entry.word, entry); add(forms, entry.word, entry);
       for (const form of entry.search_forms || []) add(forms, form, entry);
+      if (entry.type === "Adjektiv") {
+        const word = norm(entry.word);
+        // Invariant colour/loan adjectives do not acquire regular endings.
+        if (!new Set(["rosa","lila","prima","extra","super","gratis","klasse"]).has(word)) {
+          const stem = word === "hoch" ? "hoh" : word.endsWith("e") ? word.slice(0,-1) : word;
+          addModifier(stem,entry,"adjective");
+          if (word.endsWith("el")) addModifier(word.slice(0,-2)+"l",entry,"adjective");
+          if (["teuer","sauer"].includes(word)) addModifier(word.slice(0,-2)+"r",entry,"adjective");
+        }
+        if (entry.comparative) addModifier(norm(entry.comparative),entry,"comparative");
+        if (entry.superlative) addModifier(norm(entry.superlative).replace(/^am /u,"").replace(/en$/u,""),entry,"superlative");
+      }
       if (entry.type === "Nomen" && entry.plural && entry.plural !== "—") {
         for (const plural of entry.plural.split(/\s*,\s*/)) {
           add(forms, plural, entry);
@@ -42,13 +81,48 @@
           }
         }
         for (const prefix of provenPrefixes) {
-          if (norm(entry.word).startsWith(prefix)) add(forms,prefix + "zu" + norm(entry.word).slice(prefix.length),entry);
+          if (norm(entry.word).startsWith(prefix)) {
+            const zuForm = prefix + "zu" + norm(entry.word).slice(prefix.length);
+            add(forms,zuForm,entry); add(zuForms,zuForm,entry);
+          }
         }
+        // Reviewed form from the Vielseitige Verben table: passive uses
+        // worden; ordinary becoming retains geworden.
+        if (norm(entry.word) === "werden") add(forms,"worden",entry);
         const participle = String(entry.perfect_form || "").trim().split(/\s+/).pop();
         if (participle) add(forms, participle, entry);
+        if (participle) addModifier(participle,entry,"participle-II");
+        const infinitive = norm(entry.word);
+        if (/^[\p{L}\p{M}]+(?:en|eln|ern)$/u.test(infinitive) || ["sein","tun"].includes(infinitive))
+          addModifier(({sein:"seiend",tun:"tuend"})[infinitive] || infinitive+"d",entry,"participle-I");
       }
     }
-    const mainCandidate = item => ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    const mainCandidate = item => item.importedSeparable ? {
+      source:"fallback",lemma:item.word,pos:"verb",posLabel:"Verb",meanings:item.meanings,
+      translation:{en:item.meanings.join("; "),ru:""}
+    } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    let preparation = null;
+    function prepareSeparable() {
+      if (!fallback.separableEntries) return Promise.resolve();
+      if (!preparation) preparation = fallback.separableEntries().then(rows => {
+        for (const [word,prefix,stems,meanings] of rows) {
+          const own = (lemmas.get(norm(word)) || []).filter(e => e.type === "Verb");
+          const items = own.length ? own : [{id:`imported:${word}`,word,type:"Verb",importedSeparable:true,meanings}];
+          for (const item of items) {
+            add(forms,word,item);
+            add(forms,prefix+"zu"+word.slice(prefix.length),item);
+            add(zuForms,prefix+"zu"+word.slice(prefix.length),item);
+            for (const stem of stems) {
+              add(forms,prefix+stem,item);
+              const pairs = separatedForms.get(stem) || [];
+              if (!pairs.some(p=>p.entry.id===item.id && p.prefix===prefix)) pairs.push({entry:item,prefix});
+              separatedForms.set(stem,pairs);
+            }
+          }
+        }
+      }).catch(error => { preparation = null; throw error; });
+      return preparation;
+    }
     function separableCandidates(word, context) {
       if (!context || !Number.isInteger(context.tokenOffset)) return [];
       const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
@@ -81,6 +155,181 @@
         }
       }
       return results;
+    }
+    function zuGroup(word, context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const selected = tokens.findIndex(t=>t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (selected < 0) return null;
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit","um","ohne","statt","anstatt"]);
+      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      let start = selected, end = selected;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      const verbs = i => matches(i).filter(e=>e.type === "Verb");
+      const finite = (e,i) => ["Präsens","Präteritum","Konjunktiv II"].some(t=>Object.values(formsOf(e)[t] || {}).some(f=>norm(f) === norm(tokens[i][0])));
+      const indices = Array.from({length:end-start+1},(_,i)=>start+i);
+      if (["und","oder"].includes(norm(tokens[end+1]?.[0])) && (verbs(end+2).length || norm(tokens[end+2]?.[0]) === "zu")) return null;
+      const heads = indices.flatMap(i=>verbs(i).filter(e=>["haben","sein"].includes(e.word) && finite(e,i)).map(e=>({i,e})));
+      const nounComplements = new Set(["lust","zeit","angst","gelegenheit","möglichkeit","recht","grund","chance","mut","erlaubnis","plan","absicht","wunsch","interesse","freude","problem","schwierigkeit","geld"]);
+      const mannerWords = new Set(["leicht","schwer","einfach","gut","schlecht","kaum","unmöglich"]);
+      const result = [];
+      for (const head of heads) {
+        let tail = head.i === end ? end-1 : end;
+        let lexical = head.e, participleIndex = null;
+        const past = verbs(tail).filter(e=>["haben","sein"].includes(e.word) && norm(e.auxiliary) === head.e.word && norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[tail][0]));
+        if (past.length === 1) {
+          // Conditional past is not labelled as ordinary Perfekt.
+          if (!["Präsens","Präteritum"].some(t=>Object.values(formsOf(head.e)[t] || {}).some(f=>norm(f) === norm(tokens[head.i][0])))) continue;
+          lexical = past[0]; participleIndex = tail; tail--;
+        }
+        if (tail <= start || tail === head.i || !/^[a-zäöü]/u.test(tokens[tail][0])) continue;
+        const joined = zuForms.get(norm(tokens[tail][0])) || [];
+        const marker = norm(tokens[tail-1]?.[0]) === "zu" && tail-1 !== head.i ? tail-1 : null;
+        const main = joined.length ? joined : marker !== null ? verbs(tail).filter(e=>norm(e.word) === norm(tokens[tail][0])) : [];
+        if (!main.length || new Set(main.map(e=>norm(e.word))).size !== 1) continue;
+        const linked = [head.i,tail,...(marker !== null ? [marker] : []),...(participleIndex !== null ? [participleIndex] : [])];
+        if (!linked.includes(selected)) continue;
+        const other = indices.filter(i=>!linked.includes(i));
+        // A noun/adjective with its own infinitive complement is a different
+        // construction: Lust/Zeit zu lesen, bereit/froh zu gehen, etc.
+        if (lexical.word === "haben" && other.some(i=>nounComplements.has(norm(tokens[i][0])) || norm(tokens[i][0]) === "vor")) continue;
+        if (lexical.word === "sein" && other.some(i=>!mannerWords.has(norm(tokens[i][0])) &&
+          (matches(i).some(e=>e.type === "Adjektiv") || ["bereit","fähig","willig","entschlossen","froh","stolz"].includes(norm(tokens[i][0]))))) continue;
+        const possessiveBeforeNoun = i => /^(?:mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[i][0])) &&
+          i+1 <= end && /^[A-ZÄÖÜ]/u.test(tokens[i+1][0]) && matches(i+1).some(e=>e.type === "Nomen");
+        if (other.some(i=>(verbs(i).length || separatedForms.has(norm(tokens[i][0]))) && !possessiveBeforeNoun(i) &&
+          !(/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && matches(i).some(e=>e.type === "Nomen")))) continue;
+        const modal = lexical.word === "haben";
+        const tense = participleIndex !== null ? ["Präteritum"].some(t=>Object.values(formsOf(head.e)[t] || {}).some(f=>norm(f) === norm(tokens[head.i][0]))) ? "Plusquamperfekt · " : "Perfekt · " : "";
+        // A recognised connection does not establish obligation (e.g. nichts zu tun).
+        const note = modal ? {en:`${tense}haben + zu + infinitive`,ru:`${tense}haben + zu + инфинитив`} :
+          {en:`${tense}sein + zu · possibility / necessity`,ru:`${tense}sein + zu · возможность / необходимость`};
+        result.push({id:modal ? "haben-zu" : "sein-zu",note,lemma:main[0].word,
+          meaningLemma:lexical.word,meaning:modal || selected !== (participleIndex ?? head.i) ? null : {en:"can / must be",ru:"можно / нужно"},
+          marker:selected === marker,main:main[0],roles:[head.e,lexical,...main],
+          spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
+      }
+      return result.length === 1 ? result[0] : null;
+    }
+    function werdenGroup(word, context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (selected < 0) return null;
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit"]);
+      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      let start = selected, end = selected;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      const verbs = i => matches(i).filter(e=>e.type === "Verb");
+      const finite = (e,i,tense) => Object.values(formsOf(e)[tense] || {}).some(f => norm(f) === norm(tokens[i][0]));
+      const tenses = (e,i) => ["Präsens","Präteritum","Konjunktiv II"].filter(t=>finite(e,i,t));
+      const predicate = i => matches(i).filter(e=>e.type === "Adjektiv" || e.type === "Nomen" && /^[A-ZÄÖÜ]/u.test(tokens[i][0]));
+      const participles = i => verbs(i).filter(e=>norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[i][0]));
+      const infinitives = i => verbs(i).filter(e=>norm(e.word) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
+      const indices = Array.from({length:end-start+1},(_,i)=>start+i);
+      if (["und","oder"].includes(norm(tokens[end+1]?.[0])) && verbs(end+2).length) return null;
+      const heads = indices.flatMap(i=>verbs(i).filter(e=>["werden","sein"].includes(e.word) && tenses(e,i).length).map(e=>({i,e})));
+      const result = [];
+      for (const head of heads) {
+        const tail = head.i === end ? end-1 : end;
+        if (tail <= start || tail === head.i) continue;
+        let main = [], linked = [], roles = [], id, note, meaning;
+        if (head.e.word === "werden") {
+          const tense = tenses(head.e,head.i);
+          if (tense.includes("Konjunktiv II")) {
+            main = infinitives(tail); id = "werden-conditional";
+            note = {en:"Konjunktiv II",ru:"Konjunktiv II"};
+            meaning = {en:"would",ru:"бы"};
+          } else if (tense.includes("Präsens") && infinitives(tail).length) {
+            main = infinitives(tail); id = "werden-future";
+            // wohl supports inference; without it, both readings stay possible.
+            const guess = indices.some(i=>norm(tokens[i][0]) === "wohl");
+            note = guess ? {en:"Inference",ru:"Предположение"} : {en:"Future / inference",ru:"Будущее / предположение"};
+            meaning = guess ? {en:"probably",ru:"вероятно"} : {en:"will / probably",ru:"будет / вероятно"};
+          } else if (participles(tail).length) {
+            main = participles(tail); id = "werden-passive";
+            note = {en:`Passiv · ${tense.includes("Präteritum") ? "Präteritum" : "Präsens"}`,ru:`Passiv · ${tense.includes("Präteritum") ? "Präteritum" : "Präsens"}`};
+            meaning = {en:"passive auxiliary",ru:"вспомогательный глагол пассива"};
+          } else if (!verbs(tail).length) {
+            main = predicate(tail); id = "werden-become";
+            note = {en:"Becoming",ru:"Становление"};
+          }
+          linked = [head.i,tail]; roles = [head.e,...main];
+        } else if (!tenses(head.e,head.i).includes("Konjunktiv II")) {
+          const tailWord = norm(tokens[tail][0]);
+          const werden = verbs(tail).filter(e=>e.word === "werden");
+          if (werden.length !== 1 || tail-1 === head.i) continue;
+          const tense = finite(head.e,head.i,"Präteritum") ? "Plusquamperfekt" : "Perfekt";
+          if (tailWord === "worden") {
+            main = participles(tail-1); id = "werden-passive-perfect";
+            note = {en:`Passiv · ${tense}`,ru:`Passiv · ${tense}`};
+            meaning = {en:"passive auxiliary",ru:"вспомогательный глагол пассива"};
+          } else if (tailWord === "geworden" && !verbs(tail-1).length) {
+            main = predicate(tail-1); id = "werden-become-perfect";
+            note = {en:`${tense} · becoming`,ru:`${tense} · становление`};
+          }
+          linked = [head.i,tail-1,tail]; roles = [head.e,...main,...werden];
+        }
+        if (!main.length || new Set(main.map(e=>norm(e.word))).size !== 1 || !linked.includes(selected)) continue;
+        const possessiveBeforeNoun = i => /^(?:mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[i][0])) &&
+          i+1 <= end && /^[A-ZÄÖÜ]/u.test(tokens[i+1][0]) && matches(i+1).some(e=>e.type === "Nomen");
+        if (indices.some(i=>!linked.includes(i) && (verbs(i).length || separatedForms.has(norm(tokens[i][0]))) &&
+          !possessiveBeforeNoun(i) && !(/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && matches(i).some(e=>e.type === "Nomen")))) continue;
+        result.push({id,note,meaning:head.e.word === "werden" && selected !== head.i ? null : meaning,lemma:main[0].word,roles,spans:[...linked].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
+      }
+      return result.length === 1 ? result[0] : null;
+    }
+    // Deliberately small clause-local patterns. No proximity-only attachment.
+    function verbGroup(word, context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (selected < 0) return null;
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
+      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      let start = selected, end = selected;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const matches = i => (forms.get(norm(tokens[i]?.[0])) || []).filter(e => e.type === "Verb");
+      const finiteTenses = (e,i) => ["Präsens","Präteritum"].filter(tense => Object.values(formsOf(e)[tense] || {}).some(f => norm(f) === norm(tokens[i][0])));
+      const infinitives = i => matches(i).filter(e => norm(e.word) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
+      const modals = new Set(["können","müssen","dürfen","sollen","wollen","mögen","möchten"]);
+      const indices = Array.from({length:end-start+1},(_,i)=>start+i);
+      const heads = indices.flatMap(i => matches(i).filter(e => (["haben","sein"].includes(e.word) || modals.has(e.word)) && finiteTenses(e,i).length).map(e=>({i,e})));
+      // Shared auxiliaries across coordination need a broader analysis.
+      if (["und","oder"].includes(norm(tokens[end+1]?.[0])) && matches(end+2).length) return null;
+      const groups = [];
+      for (const head of heads) {
+        const tail = head.i === end ? end-1 : end;
+        if (tail <= start || tail === head.i) continue;
+        let linked = [], roles = [], id, label, main;
+        if (modals.has(head.e.word)) {
+          main = infinitives(tail);
+          id = "modal-group"; label = "Modal";
+          linked = [head.i,tail]; roles = [head.e,...main];
+        } else {
+          const modal = infinitives(tail).filter(e=>modals.has(e.word));
+          const base = tail-1 !== head.i ? infinitives(tail-1) : [];
+          if (head.e.word === "haben" && modal.length === 1 && base.length === 1) {
+            main = base; id = "modal-perfect";
+            linked = [head.i,tail-1,tail]; roles = [head.e,...base,...modal];
+          } else {
+            main = matches(tail).filter(e => norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[tail][0]) && norm(e.auxiliary) === head.e.word);
+            id = "perfect-group"; linked = [head.i,tail]; roles = [head.e,...main];
+          }
+          label = finiteTenses(head.e,head.i).includes("Präteritum") ? "Plusquamperfekt" : "Perfekt";
+        }
+        if (!main.length || new Set(main.map(e=>norm(e.word))).size !== 1 || !linked.includes(selected)) continue;
+        // A second possible verb outside the group makes attachment uncertain.
+        if (indices.some(i => !linked.includes(i) && (matches(i).length || separatedForms.has(norm(tokens[i][0]))) &&
+          !(/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e=>e.type === "Nomen")))) continue;
+        groups.push({id,label,lemma:main[0].word,roles,spans:[...linked].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
+      }
+      return groups.length === 1 ? groups[0] : null;
     }
     function contextualRank(word, context, candidates) {
       if (!context || !Number.isInteger(context.tokenOffset)) return {candidates, preferred:null, evidence:null};
@@ -161,7 +410,80 @@
       return {candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
         preferred:favoured.length === 1 ? favoured[0] : null, evidence};
     }
-    function grammarRank(word, context, candidates) {
+    function nominalRank(word, tokens, index, start, end, matches, candidates) {
+      const unchanged = {candidates,preferred:null,evidence:null};
+      // Capitals inside a clause can signal nominalisation. Sentence-initial
+      // capitals alone are not evidence for or against an attributive use.
+      if (/^[A-ZÄÖÜ]/u.test(word) && index !== start) return unchanged;
+      const rows = modifiers.get(norm(word)) || [];
+      const analyses = candidates.flatMap(candidate => {
+        const own = rows.filter(row => row.entry.id === candidate.dictionaryId);
+        if (own.length) return own.map(row => ({candidate,...row}));
+        if (canonicalPos(candidate.pos) !== "Adjektiv") return [];
+        return endings.filter(ending => [norm(candidate.lemma),norm(candidate.lemma)+"er"]
+          .some(stem => norm(word) === stem+ending)).map(ending => ({candidate,ending,kind:"adjective"}));
+      });
+      if (!analyses.length) return unchanged;
+      const modifierAt = i => (modifiers.get(norm(tokens[i]?.[0])) || []).length > 0;
+      let head = index+1;
+      while (head <= end && head-index <= 3 && !matches(head).some(e => e.type === "Nomen") && modifierAt(head)) head++;
+      if (head > end || head-index > 3) return unchanged;
+      const nouns = matches(head).filter(e => e.type === "Nomen");
+      if (!nouns.length) return unchanged;
+      let left = index-1;
+      while (left >= start && index-left <= 3 && modifierAt(left)) left--;
+      const determiner = left >= start ? norm(tokens[left][0]) : "";
+      const definite = ["der","die","das","den","dem","des"].includes(determiner);
+      const ein = /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(determiner);
+      const demonstrative = /^(?:dies|jen)(?:e|en|em|er|es)$/u.test(determiner);
+      const articleKind = definite || demonstrative ? "weak" : ein ? "mixed" : "strong";
+      const determinerEnding = ein ? determiner.replace(/^(?:kein|mein|dein|sein|ihr|unser|euer|eur|ein)/u,"") :
+        demonstrative ? determiner.replace(/^(?:dies|jen)/u,"") : "";
+      // Each row describes N/A/D/G, without claiming a unique case when the
+      // local phrase permits several. Genitive masculine/neuter uses -en.
+      const table = {
+        der:[["der","","er","e"],["den","en","en","en"],["dem","em","em","en"],["des","es","en","en"]],
+        die:[["die","e","e","e"],["die","e","e","e"],["der","er","er","en"],["der","er","er","en"]],
+        das:[["das","","es","e"],["das","","es","e"],["dem","em","em","en"],["des","es","en","en"]],
+        plural:[["die",null,"e","en"],["die",null,"e","en"],["den",null,"en","en"],["der",null,"er","en"]]
+      };
+      const caseByPrep = {mit:2,bei:2,von:2,zu:2,aus:2,nach:2,für:1,durch:1,gegen:1,ohne:1,um:1};
+      const prepIndex = articleKind === "strong" ? left : left-1;
+      const governedCase = prepIndex >= start ? caseByPrep[norm(tokens[prepIndex][0])] : undefined;
+      const allowed = new Set();
+      for (const noun of nouns) {
+        const pluralForms = String(noun.plural || "").split(/\s*,\s*/).filter(p => p && p !== "—");
+        const isPlural = pluralForms.some(p => norm(p) === norm(tokens[head][0]) || !/[ns]$/iu.test(p) && norm(p)+"n" === norm(tokens[head][0]));
+        const isSingular = norm(noun.word) === norm(tokens[head][0]) || !isPlural;
+        const genders = ["der","die","das"].includes(noun.article) ? [noun.article] : ["der","die","das"];
+        for (const key of [...(isSingular ? genders : []),...(isPlural ? ["plural"] : [])]) {
+          table[key].forEach(([article,einEnding,strong,weak],caseIndex) => {
+            if (governedCase !== undefined && governedCase !== caseIndex) return;
+            if (definite && article !== determiner) return;
+            if (demonstrative && determinerEnding !== ({der:"er",die:"e",das:"es",den:"en",dem:"em",des:"es"})[article]) return;
+            if (ein && determinerEnding !== (key === "plural" ? ({die:"e",den:"en",der:"er"})[article] : einEnding)) return;
+            const expected = articleKind === "strong" || articleKind === "mixed" && !determinerEnding ? strong : weak;
+            // All modifiers must admit the same analysis, not independently
+            // borrow incompatible cases from an ambiguous article.
+            for (let i = left+1; i < head; i++) {
+              const options = i === index ? analyses : modifiers.get(norm(tokens[i]?.[0])) || [];
+              if (!options.some(row => row.ending === expected)) return;
+            }
+            allowed.add(expected);
+          });
+        }
+      }
+      const compatible = analyses.filter(row => allowed.has(row.ending));
+      if (!compatible.length) return unchanged;
+      const favoured = [...new Set(compatible.map(row => row.candidate))];
+      const marked = candidates.map(candidate => {
+        const row = compatible.find(row => row.candidate === candidate && row.kind.startsWith("participle-"));
+        return row ? {...candidate,usage:{kind:row.kind,role:"attributive",form:word,base:row.base,head:tokens[head][0]}} : candidate;
+      });
+      const preferred = favoured.length === 1 ? marked[candidates.indexOf(favoured[0])] : null;
+      return {candidates:marked,preferred,evidence:preferred ? "attributive-modifier-agreement" : "ambiguous-attributive-modifier",blocked:!preferred};
+    }
+    function grammarRank(word, context, candidates, inflections = []) {
       const unchanged = {candidates,preferred:null,evidence:null};
       if (!context || !Number.isInteger(context.tokenOffset)) return unchanged;
       const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
@@ -173,6 +495,8 @@
       while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
       while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
       const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      const nominal = nominalRank(word,tokens,index,start,end,matches,candidates);
+      if (nominal.evidence) return nominal;
       const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
       const verbs = candidates.filter(isVerb), nouns = candidates.filter(c => (posMap[c.pos] || c.pos) === "Nomen");
       const finite = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II"].some(tense => {
@@ -183,19 +507,64 @@
           return norm(tokens[i][0]) === (parts.length === 2 ? parts[1]+parts[0] : norm(form));
         });
       });
+      const importedFinite = (candidate,person) => inflections.some(row =>
+        norm(row.form) === norm(word) && norm(row.lemma) === norm(candidate.lemma) &&
+        (posMap[row.pos] || row.pos) === "Verb" &&
+        !row.tags.some(tag => ["infinitive","participle","imperative"].includes(tag)) &&
+        row.person && row.number && (row.tense || /^subjunctive/u.test(row.mood || "")) &&
+        (!person || ({ich:"first-person:singular",du:"second-person:singular","er/sie/es":"third-person:singular",wir:"first-person:plural",ihr:"second-person:plural",sie:"third-person:plural"})[person] === `${row.person}:${row.number}`));
+      const candidateFinite = (candidate,person) => candidate.item && finite(candidate.item,index,person) || importedFinite(candidate,person);
       const choose = (favoured,evidence) => favoured.length ? {
         candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
         preferred:favoured.length === 1 ? favoured[0] : favoured.filter(c => c.source === "main").length === 1 ? favoured.find(c => c.source === "main") : null,evidence
       } : unchanged;
-      const adjective = i => matches(i).some(e => e.type === "Adjektiv") ||
+      // Our dictionary stores separate exercise cards for adjectives and
+      // adverbs. Prefer a card only when local syntax supports its use; retain
+      // all alternatives so a reader can correct the inference.
+      const adjectives = candidates.filter(c => canonicalPos(c.pos) === "Adjektiv");
+      const adverbs = candidates.filter(c => canonicalPos(c.pos) === "Adverb");
+      const clauseVerbs = tokens.slice(start,end+1).flatMap((_,offset) =>
+        matches(start+offset).filter(e => e.type === "Verb"));
+      // In findet das schön, das is the object pronoun, not an article
+      // introducing a noun or surname. Resolve the adjective before noun clues.
+      if (adjectives.length && index > start &&
+          ["das","es","ihn","sie","mich","dich","uns","euch"].includes(norm(tokens[index-1][0])) &&
+          clauseVerbs.some(e => norm(e.word) === "finden"))
+        return choose(adjectives,"object-predicative-adjective");
+      if (adjectives.length && adverbs.length &&
+          new Set([...adjectives,...adverbs].map(c => norm(c.lemma))).size === 1 &&
+          candidates.every(c => ["Adjektiv","Adverb"].includes(canonicalPos(c.pos)) ||
+            c.source === "fallback" && canonicalPos(c.pos) === "Nomen")) {
+        const nounAfter = index < end && matches(index+1).some(e => e.type === "Nomen");
+        const copulas = new Set(["sein","werden","bleiben"]);
+        const auxiliaries = new Set(["sein","haben","werden","können","müssen","dürfen","sollen","wollen","mögen"]);
+        // A lexical verb (including a dictionary-backed participle) is stronger
+        // evidence than an auxiliary: ist spät aufgestanden -> adverb.
+        // These verbs can take a predicative adjective (findet es schön,
+        // macht ihn glücklich). Leave that distinction to the reader.
+        const predicateComplements = new Set(["finden","machen","halten","nennen","fühlen","wirken","scheinen","aussehen"]);
+        if (clauseVerbs.some(e => predicateComplements.has(norm(e.word)))) return unchanged;
+        if (["spät","früh"].includes(norm(word)) &&
+            tokens.slice(start,index).some(t => norm(t[0]) === "es") &&
+            clauseVerbs.some(e => norm(e.word) === "sein"))
+          return choose(adverbs,"temporal-adverb");
+        const lexicalVerb = clauseVerbs.some(e => !auxiliaries.has(norm(e.word)) && !copulas.has(norm(e.word)));
+        if (!nounAfter && lexicalVerb) return choose(adverbs,"adverbial-verb-modifier");
+        if (!nounAfter && clauseVerbs.some(e => copulas.has(norm(e.word))) &&
+            !clauseVerbs.some(e => !copulas.has(norm(e.word))))
+          return choose(adjectives,"predicative-adjective");
+      }
+      const adjective = i => modifiers.has(norm(tokens[i]?.[0])) || matches(i).some(e => e.type === "Adjektiv") ||
         ["e","en","em","er","es"].some(ending => norm(tokens[i]?.[0]).endsWith(ending) &&
           (lemmas.get(norm(tokens[i][0]).slice(0,-ending.length)) || []).some(e => e.type === "Adjektiv"));
       const determiners = new Set(["der","die","das","dem","den","des","ein","eine","einem","einen","einer","eines","mein","dein","sein","ihr","unser","euer","kein","keine","dieses","dieser","diese"]);
       let determinerIndex = index-1;
       while (determinerIndex >= start && index-determinerIndex <= 3 && adjective(determinerIndex)) determinerIndex--;
       const determiner = norm(tokens[determinerIndex]?.[0]);
-      const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
-      if (nouns.length && /^[A-ZÄÖÜ]/u.test(word) && determinerIndex >= start && (determiners.has(determiner) || inflectedDeterminer)) {
+      const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
+      // A dictionary noun after a determiner is useful evidence even when the
+      // reader's text omits capitals (mein buch, ein gutes essen).
+      if (nouns.length && determinerIndex >= start && (determiners.has(determiner) || inflectedDeterminer)) {
         const compatible = nouns.filter(c => {
           if (!c.item?.article) return true;
           const plural = String(c.item.plural || "").split(/\s*,\s*/).some(p => norm(p) === norm(word) || norm(p)+"n" === norm(word));
@@ -240,59 +609,84 @@
         return choose(participles,"auxiliary-and-participle");
       }
       const subjectPersons = {ich:["ich"],du:["du"],er:["er/sie/es"],sie:["er/sie/es","sie"],es:["er/sie/es"],wir:["wir"],ihr:["ihr"]};
-      const finiteCandidates = verbs.filter(c => c.item && [index-1,index+1].some(i => i >= start && i <= end &&
-        (subjectPersons[norm(tokens[i][0])] || []).some(person => finite(c.item,index,person))));
+      const finiteCandidates = verbs.filter(c => [index-1,index+1].some(i => i >= start && i <= end &&
+        (subjectPersons[norm(tokens[i][0])] || []).some(person => candidateFinite(c,person))));
       if (finiteCandidates.length) return choose(finiteCandidates,"finite-verb-with-subject");
-      const finiteOnly = verbs.filter(c => c.item && finite(c.item,index));
-      if (finiteOnly.length && !nouns.length) return choose(finiteOnly,"stored-finite-form");
+      const finiteOnly = verbs.filter(c => candidateFinite(c));
+      if (finiteOnly.length && !nouns.length) return choose(finiteOnly,"validated-finite-form");
       return unchanged;
     }
-    function coveredMeaning(meaning, items) {
-      const clean = value => norm(value).replace(/^to\s+/u, "").replace(/[.!:]+$/u, "").replace(/\s+/gu," ");
-      const own = new Set(items.flatMap(item => String(item.translation_en || "").split(/[;,]/u).map(clean)).filter(Boolean));
-      const parts = String(meaning).split(/[;,]/u).map(clean).filter(Boolean);
-      if (parts.length && parts.every(part => own.has(part))) return true;
-      // A short synonym bundle with an exact own gloss is one interpretation;
-      // qualifiers or longer explanations are retained conservatively.
-      return parts.length > 1 && parts.some(part => own.has(part)) &&
-        parts.every(part => /^[\p{L}\p{M}-]+(?: [\p{L}\p{M}-]+)?$/u.test(part)) &&
-        !parts.some(part => /\b(?:for|with|of|in|on|by|from|someone|something)\b/u.test(part));
-    }
     async function resolve(word, context) {
+      let preparationError = null;
+      if (context) try { await prepareSeparable(); } catch (e) { preparationError = e; }
       const exact = forms.get(norm(word)) || [];
+      const derived = (modifiers.get(norm(word)) || []).map(row => row.entry);
+      const dictionaryForms = new Set(exact.map(e => e.id));
+      const ownOnlyVerb = ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word)));
       const separated = separableCandidates(word, context);
-      let candidates = [...separated,...exact.map(mainCandidate)], error = null, unresolvedMeanings = [], formNotes = [];
-      // Interactive lookup checks additional senses; bulk word-only callers keep
+      let candidates = [...separated,...exact.map(mainCandidate),...derived.map(mainCandidate)], error = preparationError, unresolvedMeanings = [], formNotes = [], inflections = [];
+      // Interactive lookup checks missing parts of speech; word-only callers keep
       // their existing main-first behaviour and avoid unnecessary downloads.
-      if (!exact.length || context) {
+      if (!ownOnlyVerb && (!exact.length || context)) {
         try {
           for (const group of await fallback.lookup(word)) {
-            if (group.kind === "form-note") { formNotes.push(group); continue; }
+            if (ownOnlyVerbs.has(norm(group.word)) || group.kind === "form-note" && group.inflections?.some(row => ownOnlyVerbs.has(norm(row.lemma)))) continue;
+            if (group.kind === "form-note") { formNotes.push(group); inflections.push(...(group.inflections || [])); continue; }
+            const partOfSpeech = canonicalPos(group.pos);
             if (group.unresolved) { unresolvedMeanings.push(...group.meanings); continue; }
-            const canonicalPos = posMap[group.pos] || group.pos || "";
-            const main = (lemmas.get(norm(group.word)) || []).filter(item => canonicalPos && item.type === canonicalPos);
+            const main = (lemmas.get(norm(group.word)) || []).filter(item => partOfSpeech && item.type === partOfSpeech);
+            for (const item of main) dictionaryForms.add(item.id);
             candidates.push(...main.map(mainCandidate));
-            const extra = main.length ? group.meanings.filter(meaning => !coveredMeaning(meaning,main)) : group.meanings;
-            if (extra.length) candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",posLabel:canonicalPos,
-              translation:{en:extra.join("; "),ru:""},meanings:extra,additional:main.length > 0});
+            if (group.meanings.length) candidates.push({source:"fallback",lemma:group.word,pos:group.pos || "",posLabel:partOfSpeech,
+              translation:{en:group.meanings.join("; "),ru:""},meanings:group.meanings});
           }
         } catch (e) { error = e; }
       }
+      // Resolve all forms/mapped lemmas first; own coverage is occurrence-wide,
+      // not a comparison between differently worded translation strings.
+      const coveredParts = new Set(candidates.filter(c => c.source === "main").map(c => canonicalPos(c.pos)));
+      if (coveredParts.size) {
+        // A known base verb does not cover a reconstructed complete verb
+        // missing from ours (stellt … bereit -> bereitstellen, not stellen).
+        const uncoveredCompleteVerb = separated.length === 1 && separated[0].source === "fallback" ? separated[0] : null;
+        candidates = candidates.filter(c => c.source === "main" || c === uncoveredCompleteVerb ||
+          knownPartsOfSpeech.has(canonicalPos(c.pos)) && !coveredParts.has(canonicalPos(c.pos)));
+        unresolvedMeanings = [];
+      }
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
-      const additional = candidates.filter(c => c.additional);
-      const grammatical = grammarRank(word, context, candidates.filter(c => !c.additional));
+      const group = zuGroup(word,context) || werdenGroup(word,context) || verbGroup(word,context);
+      // Joined zu forms can belong to a complete verb missing from ours;
+      // keep that recognised target rather than guessing from its stem.
+      if (group?.main?.importedSeparable && !candidates.some(c=>norm(c.lemma) === norm(group.main.word) && canonicalPos(c.pos) === "Verb"))
+        candidates.push(mainCandidate(group.main));
+      if (group) {
+        const {roles,main,marker,meaning,meaningLemma,...construction} = group;
+        candidates = candidates.map(c => {
+          if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
+            return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
+          return roles.some(e => norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos))
+            ? {...c,construction,...(c.lemma === (group.meaningLemma || "werden") && group.meaning ? {translation:group.meaning} : {})} : c;
+        });
+      }
+      const grammatical = grammarRank(word, context, candidates, inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
-      candidates = [...ranked.candidates,...additional];
+      candidates = ranked.candidates;
       // The feminine personal pronoun's dative form means her, not she.
       if (norm(word) === "ihr") {
         const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
         if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
       }
-      const preferred = ranked.preferred || (separated.length === 1 ? candidates.find(c => c.dictionaryId === separated[0].dictionaryId) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => c.dictionaryId === exact[0].id) : null);
+      const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
+      const grouped = candidates.filter(c => c.construction && c.construction.id !== "separable-verb");
+      const preferred = grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null);
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
-      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : preferred, unresolvedMeanings, error };
+      const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
+      const selected = grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0] : preferred;
+      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
     }
-    return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
+    return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
+      matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
+      match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }
-  window.BibliothekLemmaResolver = Object.freeze({ create });
+  window.BibliothekLemmaResolver = Object.freeze({ create, savedCandidate });
 })();

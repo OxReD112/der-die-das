@@ -39,11 +39,25 @@
       if (!book) return;
       const records = await window.BibliothekVocabulary.list(book.id);
       const resolver = await getResolver();
+      const hasMarkedVerb = records.some(r => (r.dictionaryId != null && resolver.entry(r.dictionaryId)?.type === "Verb") || r.source === "fallback" && /^(verb|Verb)$/u.test(r.pos));
+      if (hasMarkedVerb && resolver.prepareSeparable) try { await resolver.prepareSeparable(); } catch (_) { /* Own dictionary groups remain usable. */ }
       if (run !== generation) return;
       const keys = new Set(records.map(record => record.key));
       const unresolved = new Set(records.filter(r => r.source === "unresolved").flatMap(r => r.occurrences.map(o => norm(o.form))));
       const locations = new Set(records.flatMap(r => r.occurrences.filter(o => o.chapterIndex === (book.chapterIndex || 0)).map(o => `${o.paragraphIndex}:${o.tokenOffset}`)));
       const hasResolved = records.some(r => r.source !== "unresolved");
+      // Use the same dictionary-backed groups as lookup, without fallback downloads.
+      const groupLocations = new Set();
+      if (resolver.matchSeparable && hasMarkedVerb) {
+        for (const paragraph of text.querySelectorAll("[data-paragraph]")) {
+          const sentence = paragraph.textContent;
+          for (const span of paragraph.querySelectorAll(".reading-word")) {
+            const groups = resolver.matchSeparable(span.textContent, {sentence,tokenOffset:Number(span.dataset.tokenOffset)});
+            if (groups.length !== 1 || !keys.has(window.BibliothekVocabulary.identity(groups[0]))) continue;
+            for (const part of groups[0].construction.spans) groupLocations.add(`${paragraph.dataset.paragraph}:${part.start}`);
+          }
+        }
+      }
       const pending = new Map();
       function apply(span, marked) {
         span.classList.toggle("is-unknown",marked);
@@ -53,7 +67,7 @@
         const paragraph = span.closest("[data-paragraph]");
         const exactLocation = locations.has(`${paragraph.dataset.paragraph}:${span.dataset.tokenOffset}`);
         const matches = resolver.match(span.textContent);
-        const marked = exactLocation || unresolved.has(norm(span.textContent)) || (matches.length === 1 && keys.has(window.BibliothekVocabulary.identity(matches[0])));
+        const marked = exactLocation || groupLocations.has(`${paragraph.dataset.paragraph}:${span.dataset.tokenOffset}`) || unresolved.has(norm(span.textContent)) || (matches.length === 1 && keys.has(window.BibliothekVocabulary.identity(matches[0])));
         apply(span,marked);
         if (!marked && !matches.length && hasResolved) {
           if (!pending.has(paragraph)) pending.set(paragraph,[]);
