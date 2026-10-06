@@ -948,7 +948,9 @@ function updateBack() {
     rowTop = null;
     win.dispatchEvent(new Event("resize")); // pages that measure their own layout (Wortschatz) do it again
   }
-  const windowOpen = [...doc.querySelectorAll(WINDOW_SEL)].some(el => isShown(el, win, true));
+  const libraryPage = framePath() === "bibliothek/bibliothek.html";
+  const windows = libraryPage ? WINDOW_SEL + ',dialog[open],.book-confirm,.word-popover,.dictionary-sheet' : WINDOW_SEL;
+  const windowOpen = [...doc.querySelectorAll(windows)].some(el => isShown(el, win, true));
   back.classList.toggle("is-hidden", windowOpen);
   setFrameWindow(windowOpen);
   if (windowOpen) return;
@@ -958,6 +960,13 @@ function updateBack() {
   const short = win.matchMedia(SHORT_SCREEN).matches;
   doc.documentElement.classList.remove("deutsch-home-in-bar");
 
+  // Bibliothek keeps the same bottom-left button throughout, even on short screens.
+  // The fixed, transparent version remains measurable while books and drawers change.
+  if (libraryPage) {
+    rowTop = version ? version.getBoundingClientRect().top + version.getBoundingClientRect().height / 2 - 22 : null;
+    placeBack("corner", Math.max(12, parseFloat(win.getComputedStyle(doc.body).paddingLeft) || 0), rowTop);
+    return;
+  }
   if (short) {
     const title = !version && [...doc.querySelectorAll(TITLE_SEL)].find(el => isShown(el, win) && el.getBoundingClientRect().top < 80);
     if (title) {
@@ -1023,7 +1032,7 @@ frame.addEventListener("load", () => {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ["class", "style", "hidden", "aria-hidden", "aria-expanded"]
+      attributeFilter: ["class", "style", "hidden", "aria-hidden", "aria-expanded", "open"]
     });
     frame.contentWindow.addEventListener("resize", scheduleBack);
     frame.contentWindow.addEventListener("scroll", scheduleBack, { passive: true, capture: true }); // capture: also scrolling inside the exercise's panel (.app)
@@ -1979,7 +1988,8 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
         { name: "Verben mit Präpositionen", path: "praepositionen/verben_mit_praepositionen/" },
         { name: "Ortspräpositionen", path: "praepositionen/ortspraepositionen/" }
       ]
-    }
+    },
+    { name: "Bibliothek", path: "bibliothek/bibliothek.html" }
   ];
   const win = document.getElementById("versionsWindow"),
     openBtn = document.getElementById("versionsOpen"),

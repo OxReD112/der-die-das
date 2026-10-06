@@ -364,3 +364,12 @@
 .contents-dialog.is-closing::backdrop,.vocabulary-dialog.is-closing::backdrop { animation:reader-drawer-scrim-out .45s ease-out forwards; }
 @keyframes reader-drawer-scrim-out { to { opacity:0; } }
 @media (prefers-reduced-motion:reduce) { .contents-dialog::backdrop,.vocabulary-dialog::backdrop { animation:none!important; } }
+
+/* Reserve the shared Home row, anchored by the same transparent version as exercises. */
+.reading-body .version-mark { position:fixed; left:0; right:0; bottom:calc(env(safe-area-inset-bottom) + 28px); margin:0; padding:0; text-align:right; font-size:11px; font-weight:400; line-height:1; letter-spacing:.04em; color:transparent; pointer-events:none; user-select:none; }
+.library-actions { bottom:calc(env(safe-area-inset-bottom) + 76px); }
+.library { padding-bottom:178px; }
+.page-controls { justify-content:center; padding-inline:52px; }
+@media (hover:none) and (pointer:coarse) {
+ .page-controls button { display:none; }
+}
