@@ -43,6 +43,10 @@
       // Punctuation blocks clues: do not join separate clauses or quoted phrases.
       const adjacent = (a,b) => !/[,;:.!?“”„"()]/u.test(context.sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
       const next = index + 1, previous = index - 1;
+      const boundaryWords = new Set(["und","oder","aber","denn","sondern","weil","dass","wenn","ob"]);
+      let start = index, end = index;
+      while (start > 0 && adjacent(start-1,start) && !boundaryWords.has(norm(tokens[start-1][0]))) start--;
+      while (end + 1 < tokens.length && adjacent(end,end+1) && !boundaryWords.has(norm(tokens[end+1][0]))) end++;
       const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
       const isAdjective = i => matches(i).some(e => e.type === "Adjektiv") ||
         ["e","en","em","er","es"].some(ending => norm(tokens[i]?.[0]).endsWith(ending) &&
@@ -53,21 +57,35 @@
         if (matches(i).some(e => e.type === "Nomen") && /^[A-ZÄÖÜ]/u.test(tokens[i][0])) { nounPhrase = true; break; }
         if (!isAdjective(i)) break;
       }
+      const modalLemmas = ["können","müssen","dürfen","sollen","wollen","mögen","möchten","werden"];
+      const finiteForm = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II"].some(tense => {
+        const group = entry.forms?.[tense] || {};
+        return (person ? [group[person]] : Object.values(group)).some(form => form && norm(form) === norm(tokens[i][0]));
+      });
+      const clauseIndices = Array.from({length:end-start+1},(_,i)=>start+i);
+      const modalInClause = clauseIndices.some(i => i !== index && matches(i).some(e => e.type === "Verb" && modalLemmas.includes(e.word) && finiteForm(e,i)));
+      const dativeLemmas = ["helfen","danken","gefallen","gehören","vertrauen","antworten"];
+      const perfectDative = clauseIndices.some(i => i > index && matches(i).some(e => e.type === "Verb" && dativeLemmas.includes(e.word) &&
+        norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[i][0]))) &&
+        clauseIndices.some(i => i < index && matches(i).some(e => e.type === "Verb" && ["haben","sein"].includes(e.word) && finiteForm(e,i)));
       let ids = [], evidence = null;
       if (nounPhrase) {
         ids = norm(word).startsWith("sein") ? ["pronoun-013"] : ["pronoun-014","pronoun-015"];
         evidence = "possessive-before-noun";
       } else if (norm(word) === "sein" && previous >= 0 && adjacent(previous,index) &&
         (isAdjective(previous) || matches(previous).some(e => e.type === "Verb" &&
-          ["können","müssen","dürfen","sollen","wollen","mögen","werden"].includes(e.word)))) {
+          modalLemmas.includes(e.word)))) {
         ids = candidates.filter(c => c.pos === "Verb" && c.lemma === "sein").map(c => c.dictionaryId);
         evidence = "sein-after-predicate-or-modal";
-      } else if (norm(word) === "ihr" && next < tokens.length && adjacent(index,next) && matches(next).some(e => e.type === "Verb" &&
-        ["Präsens","Präteritum","Konjunktiv II"].some(tense => norm(e.forms?.[tense]?.ihr) === norm(tokens[next][0])))) {
-        ids = ["pronoun-007"]; evidence = "ihr-before-plural-verb";
-      } else if (norm(word) === "ihr" && previous >= 0 && adjacent(previous,index) && matches(previous).some(e => e.type === "Verb" &&
-        ["helfen","danken","gefallen","gehören","vertrauen","antworten"].includes(e.word))) {
-        ids = ["pronoun-004"]; evidence = "ihr-after-dative-verb";
+      } else if (norm(word) === "sein" && modalInClause && index === end) {
+        ids = candidates.filter(c => c.pos === "Verb" && c.lemma === "sein").map(c => c.dictionaryId);
+        evidence = "sein-clause-final-after-modal";
+      } else if (norm(word) === "ihr" && [previous,next].some(i => i >= start && i <= end &&
+        matches(i).some(e => e.type === "Verb" && finiteForm(e,i,"ihr")))) {
+        ids = ["pronoun-007"]; evidence = "ihr-next-to-plural-verb";
+      } else if (norm(word) === "ihr" && (perfectDative || previous >= start && previous >= 0 &&
+        matches(previous).some(e => e.type === "Verb" && dativeLemmas.includes(e.word)))) {
+        ids = ["pronoun-004"]; evidence = perfectDative ? "ihr-in-dative-perfect-group" : "ihr-after-dative-verb";
       }
       const favoured = candidates.filter(c => ids.includes(c.dictionaryId));
       if (!favoured.length) return {candidates, preferred:null, evidence:null};
