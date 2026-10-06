@@ -2798,10 +2798,3 @@ html.home-wide-layout body {
 .notebook-icon-button svg { width:20.8px; height:16px; }
 .home-notebook-open { overflow:hidden; }
 .home-notebook-open .notebook-layer { pointer-events:auto; }
-
-/* Imported dictionary cards */
-.dictionary-imported-meanings { padding-inline-start: 1.4em; margin: 0; }
-.dictionary-imported-meanings li + li { margin-top: 10px; }
-.dictionary-imported-notice { margin-top: 22px; }
-.dictionary-imported-notice summary { cursor: pointer; }
-.dictionary-source-link { display: inline-block; margin: 8px 14px 0 0; color: inherit; font-size: 12px; }
