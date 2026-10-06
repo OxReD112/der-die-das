@@ -1,4 +1,4 @@
-/* Convert curated entries to source-context learning cards; fallback words stay collected. */
+/* Convert curated entries using the shared Wörterbuch card builder; fallback words stay collected. */
 (() => {
   "use strict";
   const PENDING = "deutschWortschatzPendingReadingWordsV1";
@@ -19,13 +19,7 @@
     for (const record of records) {
       const item=record.source==='main'?resolver.entry(record.dictionaryId):null;
       if(!item){unavailable.push(record);continue;}
-      const occurrence=record.occurrences[0], form=occurrence.form;
-      const raw=String(occurrence.sentence || '').replace(/\{\{[\s\S]*?\}\}/g,'');
-      const escaped=form.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-      const match=new RegExp(`(^|[^\\p{L}\\p{M}])(${escaped})(?=$|[^\\p{L}\\p{M}])`,'iu').exec(raw);
-      const sentence=match ? raw.slice(0,match.index)+match[1]+`{{c1::${match[2]}}}`+raw.slice(match.index+match[0].length) : `{{c1::${form}}}`;
-      const grammar=[item.plural?`Plural: ${item.plural}`:'',item.perfect_form?`Perfekt: ${item.perfect_form}`:'',item.comparative?`Komparativ: ${item.comparative}`:'',item.superlative?`Superlativ: ${item.superlative}`:''].filter(Boolean).join(' · ');
-      cards.push({sentence,translation:{en:item.translation_en || record.translation.en || '',ru:item.translation_ru || record.translation.ru || ''},sentenceTranslation:'',base:display(record,resolver),grammar,pos:item.type});
+      cards.push(window.WortschatzDictionaryCard.create(item));
     }
     return {cards,unavailable};
   }

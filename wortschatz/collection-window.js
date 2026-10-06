@@ -476,42 +476,7 @@
     card.appendChild(b);
   }
 
-  function dictionaryPrefill(item) {
-    const word = String(item.word || item.infinitive || "").trim();
-    const base = item.type === "noun" ? [item.article, word].filter(Boolean).join(" ") : word;
-    let grammar = "";
-    if (item.type === "noun" && item.plural_only) grammar = base + " ⋅ nur im Plural";
-    else if (item.type === "noun" && (!item.plural || String(item.plural).trim() === "—")) grammar = base + " ⋅ ohne Plural";
-    else if (item.type === "noun")
-      grammar = base + " ⋅ " + String(item.plural).split(/\s*,\s*/).map(form => "die " + form.replace(/^(?:der|die|das)\s+/i, "")).join(", ");
-    else if (item.type === "verb" && item.perfect_form) grammar = item.perfect_form;
-    else if (item.type === "adjective" && (item.comparative || item.superlative))
-      grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
-    const pos = ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
-    const candidates = new Set([word.toLocaleLowerCase("de-DE")]);
-    const addForms = value => {
-      if (typeof value === "string") value.split(/[\s,;·!]+/).filter(Boolean).forEach(part => candidates.add(part.toLocaleLowerCase("de-DE")));
-      else if (value && typeof value === "object") Object.values(value).forEach(addForms);
-    };
-    addForms(item.type === "pronoun" ? item.search_forms : item.forms);
-    const sentence = String(item.example_de || "");
-    const marked = sentence.replace(/[\p{L}\p{N}]+(?:[-'][\p{L}\p{N}]+)*/gu, token => {
-      const key = token.toLocaleLowerCase("de-DE");
-      if (!candidates.has(key)) return token;
-      candidates.delete(key);
-      return "{{c1::" + token + "}}";
-    });
-    const lang = window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en";
-    const translatedValue = (ru, en) => lang === "ru" ? ru || en || "" : en || ru || "";
-    return {
-      sentence: marked,
-      translation: translatedValue(item.translation_ru, item.translation_en),
-      sentenceTranslation: translatedValue(item.example_ru, item.example_en),
-      base,
-      grammar,
-      pos
-    };
-  }
+  const dictionaryPrefill = item => window.WortschatzDictionaryCard.create(item);
 
   let lastDictionaryRequest = "";
   function addDictionaryWord(request) {
