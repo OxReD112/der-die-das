@@ -12,6 +12,37 @@
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || item.translation_ru;
 
+  const vocabularyHighlights = window.BibliothekHighlights.create($text, $("highlights-toggle"), async () => {
+    try { await loadDictionary(); return lemmaResolver; }
+    catch (_) { return window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary); }
+  });
+  function refreshHighlights() {
+    vocabularyHighlights.update(currentBook).catch(error => console.warn("Vocabulary highlights unavailable", error));
+  }
+
+  function vocabularyRange() {
+    if (!hasChapters(currentBook)) return null;
+    const entries = readingEntries(currentBook), entry = activeEntry(currentBook);
+    const next = entries[entries.indexOf(entry) + 1];
+    return {chapterIndex:currentBook.chapterIndex,start:entry?.paragraph || 0,end:next?.chapterIndex === currentBook.chapterIndex ? next.paragraph : currentBook.chapters[currentBook.chapterIndex].paragraphs.length,title:entry?.title || currentBook.title};
+  }
+  const vocabularyPanel = window.BibliothekVocabularyPanel.create({
+    getBook:() => currentBook, getRange:vocabularyRange, language:locale,
+    onChanged:() => { refreshHighlights(); return vocabularyPanel.updateCount(); },
+    getResolver:async () => { try { await loadDictionary(); return lemmaResolver; } catch (_) { return window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary); } },
+    goTo:async occurrence => {
+      if (!currentBook) return;
+      if (hasChapters(currentBook)) {
+        const entry = readingEntries(currentBook).filter(e => e.chapterIndex < occurrence.chapterIndex || (e.chapterIndex === occurrence.chapterIndex && e.paragraph <= occurrence.paragraphIndex)).at(-1);
+        if (entry) await navigateTo(entry);
+      }
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      const paragraph = $text.querySelector(`[data-paragraph="${occurrence.paragraphIndex}"]`);
+      const target = paragraph?.querySelector(`[data-token-offset="${occurrence.tokenOffset}"]`) || paragraph;
+      if (target) { target.scrollIntoView({block:"center",behavior:"instant"}); target.focus({preventScroll:true}); await updateProgress(currentBook,occurrence.paragraphIndex); }
+    }
+  });
+
   function updateExplainerLanguage() {
     const lang = locale();
     const intro = $("reader-intro");
@@ -174,6 +205,7 @@
       // Release the previous reader content as well as the persisted record.
       clearTimeout(window.__readingSaveTimer);
       currentBook = null;
+      vocabularyHighlights.cancel();
       $text.replaceChildren();
       selectedWord = "";
       deleting = false;
@@ -316,7 +348,7 @@
     } else {
       const finish = document.createElement("button"); finish.className = "next-chapter-card"; finish.type = "button";
       finish.textContent = book.completed ? "Book finished ✓" : "Finish book ✓"; finish.disabled = Boolean(book.completed);
-      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); showToast("Book finished."); }); end.append(finish);
+      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); vocabularyPanel.updateCount(); showToast("Book finished."); }); end.append(finish);
     }
     if (entries[index - 1]) {
       const previous = document.createElement("button"); previous.id = "previous-chapter"; previous.className = "previous-chapter-link"; previous.type = "button";
@@ -362,7 +394,9 @@
     });
     renderedWordLengths = [...$text.querySelectorAll("[data-paragraph]")].map(p => (p.textContent.match(/[\p{L}\p{M}]+/gu) || []).length);
     currentBook = book;
+    refreshHighlights();
     renderChapterNavigation(book);
+    vocabularyPanel.updateCount();
     $("book-headline").textContent = active?.title || (hasChapters(book) ? book.chapters[book.chapterIndex].title : book.title);
     const first = $text.firstElementChild;
     $("book-headline").hidden = Boolean(first && /^H[1-6]$/.test(first.tagName) && norm(first.textContent).replace(/[.!?:;]+$/u, "") === norm($("book-headline").textContent).replace(/[.!?:;]+$/u, ""));
@@ -611,7 +645,7 @@
     const button = document.createElement("button"); button.type = "button"; button.className = "toast-undo"; button.textContent = "Undo";
     button.addEventListener("click", async () => {
       button.disabled = true;
-      try { await undo(); showToast("Mark removed."); await refreshBookmark(); }
+      try { await undo(); showToast("Mark removed."); refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
       catch (_) { button.disabled = false; showToast("Could not undo the mark. Please try again."); }
     });
     $("reader-toast").append(button);
@@ -632,7 +666,7 @@
         bookmarkToast("Marked for vocabulary", () => V.clear(input.bookId, undefined, key));
       }
     } catch (_) { showToast("The mark could not be saved. Please try again."); }
-    finally { bookmarkBusy = false; await refreshBookmark(); }
+    finally { bookmarkBusy = false; refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
   });
   function closePopups() { lookupRequest++; $popover.hidden = true; $sheet.hidden = true; }
   function chooseWord(span) {
@@ -688,6 +722,7 @@
       clearTimeout(window.__readingSaveTimer);
       await updateProgress(currentBook, restoringPosition ? currentBook.position : visibleParagraph());
     }
+    vocabularyHighlights.cancel();
     currentBook = null; $reading.hidden = true; $library.hidden = false; $("library-actions").hidden = false; document.body.classList.add("library-screen"); $("reader").querySelector(".reader-header").hidden = false; window.scrollTo({ top:0, behavior:"instant" }); document.title = "Bibliothek · Deutsch.";
     refreshBooks();
   });

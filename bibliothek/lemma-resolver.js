@@ -2,9 +2,9 @@
 (() => {
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
-  const posMap = { noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
+  const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", noun:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen" };
   function create(entries, fallback) {
-    const forms = new Map(), lemmas = new Map();
+    const forms = new Map(), lemmas = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
     function add(map, form, entry) {
       const key = norm(form);
       if (!key) return;
@@ -50,7 +50,7 @@
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
       return { form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : null, unresolvedMeanings, error };
     }
-    return Object.freeze({ resolve });
+    return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }
   window.BibliothekLemmaResolver = Object.freeze({ create });
 })();

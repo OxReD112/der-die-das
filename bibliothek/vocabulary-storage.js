@@ -137,5 +137,30 @@
       tx.onerror = tx.onabort = () => reject(tx.error);
     });
   }
-  window.BibliothekVocabulary = Object.freeze({ openDb, identity, mark, resolveOccurrence, list, clear, deleteBookMarks, STORE });
+  // Clear only selected identities and original paragraph ranges in one transaction.
+  async function clearScope(bookId, range = null, keys = null) {
+    if (range && (!Number.isInteger(range.chapterIndex) || !Number.isInteger(range.start) || !Number.isInteger(range.end) || range.chapterIndex < 0 || range.start < 0 || range.end < range.start))
+      throw new TypeError("Invalid chapter range.");
+    const selected = keys == null ? null : new Set(keys), db = await openDb();
+    return new Promise((resolve,reject) => {
+      const tx=db.transaction(STORE,"readwrite"), store=tx.objectStore(STORE);
+      const request=store.index("bookId").openCursor(IDBKeyRange.only(bookId));
+      let removed=0;
+      request.onsuccess=()=>{
+        const cursor=request.result;if(!cursor)return;
+        const record=cursor.value;
+        if (!selected || selected.has(record.key)) {
+          const retained=record.occurrences.filter(o => range && !(o.chapterIndex===range.chapterIndex && o.paragraphIndex>=range.start && o.paragraphIndex<range.end));
+          if(retained.length!==record.occurrences.length){
+            removed++;
+            if(retained.length){record.occurrences=retained;record.updatedAt=Date.now();cursor.update(record);}else cursor.delete();
+          }
+        }
+        cursor.continue();
+      };
+      tx.oncomplete=()=>resolve({removed});
+      tx.onerror=tx.onabort=()=>reject(tx.error || new Error("Could not clear vocabulary marks."));
+    });
+  }
+  window.BibliothekVocabulary = Object.freeze({ openDb, identity, mark, resolveOccurrence, list, clear, clearScope, deleteBookMarks, STORE });
 })();
