@@ -228,3 +228,9 @@
 .vocabulary-clear-confirm .vocabulary-quiet { margin-top:8px; }
 @media (prefers-reduced-motion:reduce) { .vocabulary-main,.vocabulary-quiet { transition:none; } }
 @media (max-height:640px) { .vocabulary-dialog { overflow-y:auto; } .vocabulary-list { flex-shrink:0; min-height:100px; } }
+
+.popover-alternatives { margin:0 0 14px; }
+.popover-alternatives[hidden] { display:none; }
+.popover-alternatives summary { cursor:pointer; padding:8px 0; color:var(--secondary-text); }
+.lemma-choice[aria-pressed="true"] { border-color:var(--mint); }
+.word-popover { max-height:calc(100dvh - 24px); overflow-y:auto; }

@@ -477,9 +477,13 @@
       // Fallback lookup remains usable when the main database fails to load.
       lemmaResolver = window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary);
     }
-    const resolution = await lemmaResolver.resolve(word);
+    const context = selectedContext;
+    const resolution = await lemmaResolver.resolve(word, context);
+    let saved = null;
+    try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
+    if (saved) resolution.selected = resolution.candidates.find(c => window.BibliothekVocabulary.identity(c) === saved) || resolution.selected;
     if (request !== lookupRequest) return;
-    popupAmbiguous = resolution.status === "ambiguous";
+    popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
     selectedEntry = resolution.selected?.item || null;
     $("popover-word").textContent = resolution.selected
@@ -488,32 +492,53 @@
     content.replaceChildren();
     $("popover-more").hidden = !selectedEntry;
     $("popover-source").hidden = !resolution.candidates.some(candidate => candidate.source === "fallback");
-    if (resolution.status === "ambiguous") {
-      content.append(document.createTextNode("Choose the meaning used here:"));
-      resolution.candidates.forEach(candidate => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "lemma-choice";
-        button.textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma} · ${candidate.pos} — ${locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru}`;
-        button.addEventListener("click", () => {
-          if (request !== lookupRequest) return;
-          popupAmbiguous = false;
-          selectedResolution = candidate;
-          selectedEntry = candidate.item || null;
-          $("popover-word").textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}`;
-          content.textContent = locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru;
-          $("popover-more").hidden = !selectedEntry;
-          $("popover-source").hidden = candidate.source !== "fallback";
-          refreshBookmark(request);
-        });
-        content.append(button);
+    const alternatives = $("popover-alternatives"), choices = $("popover-choices");
+    alternatives.hidden = resolution.candidates.length < 2;
+    alternatives.open = !resolution.selected;
+    choices.replaceChildren();
+    const candidateText = candidate => locale() === "ru" ? candidate.translation.ru || candidate.translation.en : candidate.translation.en || candidate.translation.ru;
+    const candidateLabel = candidate => {
+      const id = candidate.dictionaryId;
+      if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
+      if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
+      return candidate.pos;
+    };
+    const renderSelection = () => {
+      const candidate = selectedResolution;
+      content.textContent = candidate ? `${candidateLabel(candidate)} · ${candidateText(candidate)}` :
+        resolution.candidates.length ? "Choose the meaning used here:" :
+        resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
+      $("popover-word").textContent = candidate ? `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma}` : word;
+      $("popover-more").hidden = !selectedEntry;
+      $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
+      choices.querySelectorAll("button").forEach((button,i) => button.setAttribute("aria-pressed", String(resolution.candidates[i] === candidate)));
+    };
+    resolution.candidates.forEach(candidate => {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "lemma-choice";
+      button.textContent = `${candidate.item?.article ? candidate.item.article + " " : ""}${candidate.lemma} · ${candidateLabel(candidate)} — ${candidateText(candidate)}`;
+      button.addEventListener("click", async () => {
+        if (request !== lookupRequest) return;
+        popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
+        $("popover-bookmark").disabled = true;
+        renderSelection();
+        // Keep choices reachable after selection; remember only this occurrence.
+        try {
+          if (context) {
+            await window.BibliothekMeaningSelections.set(context, window.BibliothekVocabulary.identity(candidate));
+            const records = await window.BibliothekVocabulary.list(context.bookId);
+            for (const record of records) {
+              if (record.occurrences.some(o => o.chapterIndex === context.location.chapterIndex && o.paragraphIndex === context.location.paragraphIndex && o.tokenOffset === context.location.tokenOffset))
+                await window.BibliothekVocabulary.resolveOccurrence(context.bookId, record.key, context.location, candidate);
+            }
+            refreshHighlights(); vocabularyPanel.updateCount();
+          }
+        } catch (_) { if (request === lookupRequest) showToast("Meaning selected, but the correction could not be saved."); }
+        if (request === lookupRequest) refreshBookmark(request);
       });
-    } else if (resolution.selected) {
-      content.textContent = locale() === "ru" ? resolution.selected.translation.ru || resolution.selected.translation.en : resolution.selected.translation.en || resolution.selected.translation.ru;
-    } else {
-      content.textContent = resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
-      $("popover-source").hidden = !resolution.unresolvedMeanings.length;
-    }
+      choices.append(button);
+    });
+    renderSelection();
     await refreshBookmark(request);
     if (request !== lookupRequest) return;
     $popover.hidden = false;
@@ -533,7 +558,8 @@
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
     addInfo("p","dictionary-pos",item.type);
-    addInfo("p","dictionary-translation",translation(item));
+    addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
+      (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || selectedResolution.translation.ru) : translation(item));
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.plural_note_ru : item.plural_note_en);
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
@@ -604,13 +630,15 @@
     }
     const paragraphs = hasChapters(currentBook) ? currentBook.chapters[currentBook.chapterIndex].paragraphs : splitParagraphs(currentBook?.content || "");
     const pIndex = Math.max(0, Number(currentBook?.position) || 0);
-    const sentence = paragraphs[pIndex] || "";
+    const sentence = selectedContext?.sentence || paragraphs[pIndex] || "";
     const token = selectedWord || item.word;
     const escapedToken = token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const match = new RegExp(`(^|[^\\p{L}\\p{M}])(${escapedToken})(?=$|[^\\p{L}\\p{M}])`, "iu").exec(sentence);
-    const markedSentence = match ? sentence.slice(0, match.index) + match[1] + `{{c1::${match[2]}}}` + sentence.slice(match.index + match[0].length) : `{{c1::${token}}}`;
+    const exactOffset = selectedContext?.tokenOffset;
+    const exactOccurrence = Number.isInteger(exactOffset) && sentence.slice(exactOffset, exactOffset + token.length) === token;
+    const markedSentence = exactOccurrence ? sentence.slice(0,exactOffset) + `{{c1::${token}}}` + sentence.slice(exactOffset + token.length) : match ? sentence.slice(0, match.index) + match[1] + `{{c1::${match[2]}}}` + sentence.slice(match.index + match[0].length) : `{{c1::${token}}}`;
     try {
-      const added = C.add([{ sentence:markedSentence, translation:{ en:item.translation_en || "", ru:item.translation_ru || "" }, sentenceTranslation:"", pos:item.type, base:`${item.article ? item.article + " " : ""}${item.word}` }]);
+      const added = C.add([{ sentence:markedSentence, translation:selectedResolution?.translation || { en:item.translation_en || "", ru:item.translation_ru || "" }, sentenceTranslation:"", pos:item.type, base:`${item.article ? item.article + " " : ""}${item.word}` }]);
       showToast(added.added ? "Added to Wortschatz." : "This word is already in your Wortschatz.");
     } catch (error) { showToast("Could not add this word. Please check your Wortschatz collection."); }
   }
@@ -625,6 +653,7 @@
     try {
       const records = await window.BibliothekVocabulary.list(input.bookId);
       if (request !== lookupRequest) return;
+      if (window.BibliothekVocabulary.identity(input) !== window.BibliothekVocabulary.identity(bookmarkInput() || {})) return;
       const marked = records.some(record => record.key === window.BibliothekVocabulary.identity(input));
       const label = marked ? "Remove mark" : "Mark as unknown";
       button.setAttribute("aria-pressed", String(marked));
@@ -674,14 +703,15 @@
     selectedWord = span.textContent;
     const paragraph = span.closest("[data-paragraph]");
     let sentence = paragraph?.textContent || "";
+    let tokenOffset = Number(span.dataset.tokenOffset);
     if (typeof Intl.Segmenter === "function") {
       const offset = Number(span.dataset.tokenOffset);
       for (const part of new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)) {
-        if (part.index <= offset && offset < part.index + part.segment.length) { sentence = part.segment.trim(); break; }
+        if (part.index <= offset && offset < part.index + part.segment.length) { sentence = part.segment.trim(); tokenOffset = offset - part.index - (part.segment.length - part.segment.trimStart().length); break; }
       }
     }
     selectedContext = currentBook && paragraph ? {
-      bookId:currentBook.id, sentence,
+      bookId:currentBook.id, sentence, tokenOffset,
       location:{chapterIndex:hasChapters(currentBook) ? currentBook.chapterIndex : 0, paragraphIndex:Number(paragraph.dataset.paragraph), tokenOffset:Number(span.dataset.tokenOffset)}
     } : null;
     openWordPopup(selectedWord, span.getBoundingClientRect());

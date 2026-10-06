@@ -1,4 +1,4 @@
-/* Resolve only dictionary-backed forms. No suffix stripping or context guesses. */
+/* Dictionary-backed candidates with conservative sentence clues for sein/ihr. */
 (() => {
   "use strict";
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
@@ -34,7 +34,47 @@
       }
     }
     const mainCandidate = item => ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
-    async function resolve(word) {
+    function contextualRank(word, context, candidates) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return {candidates, preferred:null, evidence:null};
+      const tokens = [...String(context.sentence || "").matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (index < 0 || !/^(sein|seine|seinen|seinem|seiner|seines|seins|ihr|ihre|ihren|ihrem|ihrer|ihres|ihrs)$/u.test(norm(word)))
+        return {candidates, preferred:null, evidence:null};
+      // Punctuation blocks clues: do not join separate clauses or quoted phrases.
+      const adjacent = (a,b) => !/[,;:.!?“”„"()]/u.test(context.sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
+      const next = index + 1, previous = index - 1;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      const isAdjective = i => matches(i).some(e => e.type === "Adjektiv") ||
+        ["e","en","em","er","es"].some(ending => norm(tokens[i]?.[0]).endsWith(ending) &&
+          (lemmas.get(norm(tokens[i][0]).slice(0,-ending.length)) || []).some(e => e.type === "Adjektiv"));
+      let nounPhrase = false;
+      for (let i = next; i < tokens.length && i <= next + 2; i++) {
+        if (!adjacent(i-1,i)) break;
+        if (matches(i).some(e => e.type === "Nomen") && /^[A-ZÄÖÜ]/u.test(tokens[i][0])) { nounPhrase = true; break; }
+        if (!isAdjective(i)) break;
+      }
+      let ids = [], evidence = null;
+      if (nounPhrase) {
+        ids = norm(word).startsWith("sein") ? ["pronoun-013"] : ["pronoun-014","pronoun-015"];
+        evidence = "possessive-before-noun";
+      } else if (norm(word) === "sein" && previous >= 0 && adjacent(previous,index) &&
+        (isAdjective(previous) || matches(previous).some(e => e.type === "Verb" &&
+          ["können","müssen","dürfen","sollen","wollen","mögen","werden"].includes(e.word)))) {
+        ids = candidates.filter(c => c.pos === "Verb" && c.lemma === "sein").map(c => c.dictionaryId);
+        evidence = "sein-after-predicate-or-modal";
+      } else if (norm(word) === "ihr" && next < tokens.length && adjacent(index,next) && matches(next).some(e => e.type === "Verb" &&
+        ["Präsens","Präteritum","Konjunktiv II"].some(tense => norm(e.forms?.[tense]?.ihr) === norm(tokens[next][0])))) {
+        ids = ["pronoun-007"]; evidence = "ihr-before-plural-verb";
+      } else if (norm(word) === "ihr" && previous >= 0 && adjacent(previous,index) && matches(previous).some(e => e.type === "Verb" &&
+        ["helfen","danken","gefallen","gehören","vertrauen","antworten"].includes(e.word))) {
+        ids = ["pronoun-004"]; evidence = "ihr-after-dative-verb";
+      }
+      const favoured = candidates.filter(c => ids.includes(c.dictionaryId));
+      if (!favoured.length) return {candidates, preferred:null, evidence:null};
+      return {candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
+        preferred:favoured.length === 1 ? favoured[0] : null, evidence};
+    }
+    async function resolve(word, context) {
       const exact = forms.get(norm(word)) || [];
       let candidates = exact.map(mainCandidate), error = null, unresolvedMeanings = [];
       if (!exact.length) {
@@ -48,7 +88,14 @@
         } catch (e) { error = e; }
       }
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
-      return { form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : null, unresolvedMeanings, error };
+      const ranked = contextualRank(word, context, candidates);
+      candidates = ranked.candidates;
+      // The feminine personal pronoun's dative form means her, not she.
+      if (norm(word) === "ihr") {
+        const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
+        if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
+      }
+      return { preferred:ranked.preferred, evidence:ranked.evidence, form:word, status:candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected:candidates.length === 1 ? candidates[0] : ranked.preferred, unresolvedMeanings, error };
     }
     return Object.freeze({ resolve, entry:id => byId.get(String(id)) || null, match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
   }
