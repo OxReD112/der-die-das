@@ -44,11 +44,13 @@
         const translated = compact(extraText(group.rows, selected, language));
         const displayLanguage = translated ? language : 'en';
         const text = translated || compact(extraText(group.rows, selected, displayLanguage));
-        return text ? [{candidate:group.rows.find(c => c !== selected && c.translation?.[displayLanguage]), text}] : [];
+        return text ? [{candidate:group.rows.find(c => c !== selected && c.translation?.[displayLanguage]), text, language:displayLanguage}] : [];
       }
-      const text = brief(base, language) || brief(base, 'en');
+      const translated = brief(base, language);
+      const displayLanguage = translated ? language : 'en';
+      const text = translated || brief(base, 'en');
       if (!text) return [];
-      return [{candidate:base, text}];
+      return [{candidate:base, text, language:displayLanguage}];
     });
   }
   window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact});

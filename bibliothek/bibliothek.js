@@ -85,10 +85,12 @@
     intro.replaceChildren(document.createTextNode(sentences[0]), sentenceBreak, document.createTextNode(` ${sentences[1]}`));
   }
   window.addEventListener("storage", event => {
-    if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateExplainerLanguage();
+    if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateReaderLanguage();
   });
-  window.addEventListener("pageshow", updateExplainerLanguage);
-  window.addEventListener("focus", updateExplainerLanguage);
+  window.addEventListener("pageshow", updateReaderLanguage);
+  window.addEventListener("focus", updateReaderLanguage);
+  window.addEventListener("deutschtranslationchange", updateReaderLanguage);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) updateReaderLanguage(); });
   updateExplainerLanguage();
 
   const openDb = () => window.BibliothekVocabulary.openDb();
@@ -503,9 +505,14 @@
       }).catch(error => { dictionaryPromise = null; throw error; });
     return dictionaryPromise;
   }
-  let lookupRequest = 0;
+  let lookupRequest = 0, refreshPopupLanguage = null;
+  function updateReaderLanguage() {
+    updateExplainerLanguage();
+    refreshPopupLanguage?.();
+  }
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;
+    refreshPopupLanguage = null;
     $("popover-bookmark").disabled = true;
     $("popover-bookmark").setAttribute("aria-pressed", "false");
     selectedEntry = null;
@@ -549,13 +556,23 @@
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
       const type = window.BibliothekMeaningDisplay.pos(candidate);
       const label = locale() === "ru" ? ({Verb:"Глагол",Nomen:"Существительное",Pronomen:"Местоимение",Adjektiv:"Прилагательное",Adverb:"Наречие",Konjunktion:"Союз"}[type] || type) : ({Nomen:"Noun",Pronomen:"Pronoun",Adjektiv:"Adjective",Adverb:"Adverb",Konjunktion:"Conjunction"}[type] || type);
-      return locale() === "ru" && !candidate.translation.ru ? `${label} · английский` : label;
+      return label;
+    };
+    const candidateMeaning = (candidate, text, displayLanguage, separator) => {
+      const englishFallback = locale() === "ru" && displayLanguage === "en";
+      return `${candidateLabel(candidate)}${englishFallback ? " · английский: " : separator}${text}`;
     };
     const renderSelection = () => {
       const candidate = selectedResolution;
-      content.textContent = candidate ? `${candidateLabel(candidate)} · ${candidateText(candidate)}` :
-        resolution.candidates.length ? "Choose the meaning used here:" :
-        resolution.error ? "The dictionary could not be loaded. Please try again." : resolution.unresolvedMeanings.join("; ") || "No dictionary meaning found.";
+      const ru = locale() === "ru";
+      content.textContent = candidate ? candidateMeaning(candidate,candidateText(candidate),
+        ru && window.BibliothekMeaningDisplay.brief(candidate,"ru") ? "ru" : "en"," · ") :
+        resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
+        resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
+        resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` :
+        ru ? "Значение слова не найдено." : "No dictionary meaning found.";
+      content.lang = ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
+      $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
       if (usageNote(candidate)) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = usageNote(candidate); content.append(note);
@@ -601,10 +618,10 @@
       source.hidden = !mainUsesExternal && !alternativesUseExternal;
       if (mainUsesExternal) $popover.insertBefore(source, $("popover-more"));
       else alternatives.append(source);
-      displayed.forEach(({candidate, text}) => {
+      displayed.forEach(({candidate, text, language}) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "lemma-choice";
-      button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateLabel(candidate)} — ${text}`;
+      button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateMeaning(candidate,text,language," — ")}`;
       button.addEventListener("click", async () => {
         if (request !== lookupRequest) return;
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
@@ -626,6 +643,21 @@
       });
       choices.append(button);
       });
+    };
+    let renderedLanguage = locale(), languageRevision = 0;
+    refreshPopupLanguage = async () => {
+      const language = locale();
+      if (request !== lookupRequest || language === renderedLanguage) return;
+      renderedLanguage = language;
+      const revision = ++languageRevision;
+      // Repaint immediately; fetching Russian values must not keep English UI
+      // frozen or recompute the user's chosen lemma.
+      renderSelection();
+      if (!$sheet.hidden && selectedEntry) renderDictionaryCard(selectedEntry);
+      await window.BibliothekRussianTranslations?.enrich(resolution,language);
+      if (request !== lookupRequest || revision !== languageRevision || locale() !== language) return;
+      renderSelection();
+      if (!$sheet.hidden && selectedEntry) renderDictionaryCard(selectedEntry);
     };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     renderSelection();
@@ -854,7 +886,7 @@
     });
   }
   function closePopups() {
-    lookupRequest++; $popover.hidden = true; $sheet.hidden = true;
+    lookupRequest++; refreshPopupLanguage = null; $popover.hidden = true; $sheet.hidden = true;
     activeWordSpan = null; paintActiveWord(null);
   }
   function chooseWord(span) {
