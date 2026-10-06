@@ -179,6 +179,9 @@
         image.src = book.coverThumbnail;
         icon.append(image);
       }
+      const marker = document.createElement("span");
+      marker.className = "book-marker";
+      icon.append(marker);
       button.querySelector(".book-icon").classList.toggle("is-started", started);
       button.querySelector(".book-icon").classList.toggle("is-completed", completed);
       button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
