@@ -333,7 +333,8 @@
 @media (max-width:600px) {
  .contents-dialog,.vocabulary-dialog { top:var(--reader-header-bottom,55px); bottom:0; height:calc(100dvh - var(--reader-header-bottom,55px)); max-height:calc(100dvh - var(--reader-header-bottom,55px)); padding-top:22px; clip-path:inset(0); }
  .contents-dialog::backdrop,.vocabulary-dialog::backdrop { background:linear-gradient(to bottom,transparent 0 var(--reader-header-bottom,55px),rgba(0,0,0,.4) var(--reader-header-bottom,55px)); }
- .contents-dialog.is-opening,.contents-dialog.is-closing,.vocabulary-dialog.is-opening,.vocabulary-dialog.is-closing { animation:none; }
+ .contents-dialog.is-opening,.vocabulary-dialog.is-opening { animation:reader-drawer-reveal .5s cubic-bezier(.22,1,.36,1); }
+ .contents-dialog.is-closing,.vocabulary-dialog.is-closing { animation:reader-drawer-conceal .45s cubic-bezier(.4,0,.2,1) forwards; }
  .contents-dialog.is-opening .reader-drawer-content,.vocabulary-dialog.is-opening .reader-drawer-content { animation:reader-drawer-down .5s cubic-bezier(.22,1,.36,1); }
  .contents-dialog.is-closing .reader-drawer-content,.vocabulary-dialog.is-closing .reader-drawer-content { animation:reader-drawer-up .45s cubic-bezier(.4,0,.2,1) forwards; }
  .drawer-side-arrow { display:none; }
@@ -356,3 +357,10 @@
 @media (prefers-reduced-motion:reduce) {
  .contents-dialog.is-opening,.contents-dialog.is-closing,.vocabulary-dialog.is-opening,.vocabulary-dialog.is-closing { animation:none; }
 }
+
+/* Reveal the book as the panel's content and opaque background retreat together. */
+@keyframes reader-drawer-reveal { from { clip-path:inset(0 0 100% 0); } to { clip-path:inset(0); } }
+@keyframes reader-drawer-conceal { from { clip-path:inset(0); } to { clip-path:inset(0 0 100% 0); } }
+.contents-dialog.is-closing::backdrop,.vocabulary-dialog.is-closing::backdrop { animation:reader-drawer-scrim-out .45s ease-out forwards; }
+@keyframes reader-drawer-scrim-out { to { opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .contents-dialog::backdrop,.vocabulary-dialog::backdrop { animation:none!important; } }

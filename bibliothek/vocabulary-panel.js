@@ -10,14 +10,17 @@
       $("vocabulary-menu").hidden=!show;
       $("vocabulary-menu-toggle").setAttribute('aria-expanded',String(show));
     }
-    async function close() {
+    async function close(prepare) {
       if(!dialog.open||closing||busy)return;
       closing=true;menu(false);dialog.classList.remove('is-opening');
+      const preparation=typeof prepare==='function'?prepare():Promise.resolve();
       if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
         dialog.classList.add('is-closing');
-        await Promise.all(dialog.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{})));
+        await Promise.all([preparation,...dialog.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{}))]);
       }
-      dialog.close();dialog.classList.remove('is-closing');closing=false;
+      await preparation;
+      await new Promise(resolve=>{dialog.addEventListener('close',resolve,{once:true});dialog.close();});
+      dialog.classList.remove('is-closing');closing=false;
     }
     $("vocabulary-menu-toggle").addEventListener('click',()=>menu($("vocabulary-menu").hidden));
     dialog.addEventListener('click',event=>{if(!event.target.closest('#vocabulary-menu,#vocabulary-menu-toggle'))menu(false);});
@@ -67,8 +70,9 @@
           const occurrence=record.occurrences[0];
           const link=text('button','vocabulary-passage',`${occurrence.form} · Show in text ›`);link.type='button';
           link.addEventListener('click',async()=>{
+            if(closing||navigating)return;
             link.disabled=true;navigating=true;
-            try{await close();await goTo(occurrence);}
+            try{let focus;await close(async()=>{focus=await goTo(occurrence);});focus?.();}
             catch(error){console.warn('Could not open vocabulary passage',error);}
             finally{navigating=false;}
           });row.append(link);list.append(row);

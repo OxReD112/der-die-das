@@ -69,12 +69,13 @@
       if (!currentBook) return;
       if (hasChapters(currentBook)) {
         const entry = readingEntries(currentBook).filter(e => e.chapterIndex < occurrence.chapterIndex || (e.chapterIndex === occurrence.chapterIndex && e.paragraph <= occurrence.paragraphIndex)).at(-1);
-        if (entry) await navigateTo(entry);
+        if (entry) await navigateTo(entry, false, false);
       }
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       const paragraph = $text.querySelector(`[data-paragraph="${occurrence.paragraphIndex}"]`);
       const target = paragraph?.querySelector(`[data-token-offset="${occurrence.tokenOffset}"]`) || paragraph;
-      if (target) { pagination.reveal(target); target.focus({preventScroll:true}); await updateProgress(currentBook,pagination.location?.paragraph ?? occurrence.paragraphIndex); }
+      if (target) { pagination.reveal(target); await updateProgress(currentBook,pagination.location?.paragraph ?? occurrence.paragraphIndex); }
+      return () => target?.isConnected && target.focus({preventScroll:true});
     }
   });
 
@@ -318,7 +319,7 @@
     const entry = activeEntry(book);
     if (entry) { book.contentsPositions ||= {}; book.contentsPositions[entryKey(entry)] = position; }
   }
-  async function navigateTo(entry, restore = false) {
+  async function navigateTo(entry, restore = false, focus = true) {
     const book = currentBook;
     if (switchingChapter || !entry?.navigable) return;
     switchingChapter = true;
@@ -338,7 +339,7 @@
       book.tokenOffset = restore ? Number(book.contentsOffsets?.[entryKey(entry)]) || 0 : 0;
       renderBookText(book);
       const heading = $("book-headline").hidden ? $text.firstElementChild : $("book-headline");
-      if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
+      if (focus && heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
       await updateProgress(book, book.position);
     } finally { switchingChapter = false; }
   }
@@ -370,15 +371,17 @@
     return counts;
   }
   let contentsClosing = false;
-  async function closeContents() {
+  async function closeContents(prepare) {
     if (!contentsDialog.open || contentsClosing) return;
     contentsClosing = true;
     contentsDialog.classList.remove("is-opening");
+    const preparation = typeof prepare === "function" ? prepare() : Promise.resolve();
     if (!matchMedia("(prefers-reduced-motion:reduce)").matches) {
       contentsDialog.classList.add("is-closing");
-      await Promise.all(contentsDialog.getAnimations({subtree:true}).map(animation => animation.finished.catch(() => {})));
+      await Promise.all([preparation, ...contentsDialog.getAnimations({subtree:true}).map(animation => animation.finished.catch(() => {}))]);
     }
-    contentsDialog.close();
+    await preparation;
+    await new Promise(resolve => { contentsDialog.addEventListener("close", resolve, {once:true}); contentsDialog.close(); });
     contentsDialog.classList.remove("is-closing");
     contentsClosing = false;
   }
@@ -403,7 +406,12 @@
         if (active && entryKey(entry) === entryKey(active)) {
           row.setAttribute("aria-current", "location");
         }
-        row.addEventListener("click", async () => { await closeContents(); await navigateTo(entry, true); });
+        row.addEventListener("click", async () => {
+          if (contentsClosing) return;
+          await closeContents(() => navigateTo(entry, true, false));
+          const heading = $("book-headline").hidden ? $text.firstElementChild : $("book-headline");
+          if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
+        });
       } else row.classList.add("contents-group");
       list.append(row);
     }
