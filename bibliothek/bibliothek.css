@@ -342,3 +342,5 @@
 @keyframes reader-drawer-down { from { transform:translateY(-100%); } to { transform:translateY(0); } }
 @keyframes reader-drawer-up { from { transform:translateY(0); } to { transform:translateY(-100%); } }
 @media (prefers-reduced-motion:reduce) { .contents-dialog .reader-drawer-content,.vocabulary-dialog .reader-drawer-content { animation:none!important; } }
+.reader-drawer-content { flex:1; height:auto; }
+.vocabulary-footer { flex:0 1 auto; min-height:0; }

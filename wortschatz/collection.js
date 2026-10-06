@@ -197,13 +197,16 @@
   }
 
   // Add more words to the own collection. activateNow: cards become active right away (due today).
-  function add(items, { activateNow = false } = {}) {
+  function add(items, { activateNow = false, placement = "end" } = {}) {
     const c = get();
     if (!c) throw new Error("no-collection");
     const p = prepare(items, c.cards);
     if (!p.cards.length) return summary(p);
     const fresh = withIds(c, p.cards);
-    c.cards = c.cards.concat(fresh);
+    if (placement === "next") {
+      const active = new Set((read(PROGRESS_KEY)?.activeIds || []).map(String));
+      c.cards = c.cards.filter(card => active.has(String(card.id))).concat(fresh, c.cards.filter(card => !active.has(String(card.id))));
+    } else c.cards = c.cards.concat(fresh);
     write(KEY, c);
     if (activateNow) {
       const st = read(PROGRESS_KEY) || { cards: {}, activeIds: [] };

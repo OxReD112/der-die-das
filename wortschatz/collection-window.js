@@ -341,7 +341,7 @@
     drawPos();
 
     let now = null;
-    if (!editing && !creating) {
+    if (!editing && !creating && !opts.draft) {
       const sw = el("label", "coll-switch");
       sw.appendChild(el("span", null, "Learn Now"));
       now = el("input", null, null, { type: "checkbox", "aria-label": "Learn now" });
@@ -419,6 +419,12 @@
         return;
       }
       try {
+        if (opts.draft) {
+          const normalized = C.normalize(fields);
+          if (normalized.reason) { err.textContent=normalized.reason; return; }
+          opts.onSaved(normalized.card);
+          return;
+        }
         if (editing) {
           const r = C.update(w.id, fields);
           if (r.reason) {
@@ -454,7 +460,7 @@
     const b = el("div", "coll-form-buttons");
     if (creating) opts.cancel = opts.cancel || viewMain;
     b.appendChild(button("coll-main", "Save", save));
-    if (editing && !session) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w)));
+    if (editing && !session && !opts.draft) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w)));
     sc.appendChild(b); // Save at the very END of the form (v2.100): you pass every field first
     if (!editing) setTimeout(() => fSentence.focus(), 60);
   }
@@ -487,7 +493,7 @@
       if (typeof value === "string") value.split(/[\s,;·!]+/).filter(Boolean).forEach(part => candidates.add(part.toLocaleLowerCase("de-DE")));
       else if (value && typeof value === "object") Object.values(value).forEach(addForms);
     };
-    addForms(item.forms);
+    addForms(item.type === "pronoun" ? item.search_forms : item.forms);
     const sentence = String(item.example_de || "");
     const marked = sentence.replace(/[\p{L}\p{N}]+(?:[-'][\p{L}\p{N}]+)*/gu, token => {
       const key = token.toLocaleLowerCase("de-DE");
@@ -513,6 +519,87 @@
     lastDictionaryRequest = request.id;
     const prefill = dictionaryPrefill(request.item);
     open(() => own() ? viewForm(null, { prefill }) : viewDictionaryConfirm(prefill));
+  }
+
+  const READING_PENDING = "deutschWortschatzPendingReadingWordsV1";
+  function addReadingWords(request) {
+    if (!request?.id || !Array.isArray(request.cards) || !request.cards.length) return;
+    request.excluded ||= [];
+    request.placement ||= "end";
+    request.name ||= "My Words";
+    const persist = () => sessionStorage.setItem(READING_PENDING, JSON.stringify(request));
+    function review(message = "") {
+      card.textContent = "";
+      card.appendChild(head("Words from Reading"));
+      const sc=el("div","coll-scroll");card.appendChild(sc);
+      sc.appendChild(el("p","coll-text",`Review words from „${String(request.title || "Bibliothek")}“. Tap any word to edit it before adding.`));
+      if (request.unavailable) sc.appendChild(el("p","coll-hint",`${request.unavailable} words without learning cards remain saved in Bibliothek.`));
+      if (!own()) {
+        sc.appendChild(el("p","coll-text","Your own words replace the Starter-Set. Its progress is kept so you can return later."));
+        sc.appendChild(el("label","coll-label","Collection Name",{for:"readingCollectionName"}));
+        const nameInput=el("input","coll-field",null,{id:"readingCollectionName",type:"text",maxlength:"40",value:request.name});
+        nameInput.addEventListener("input",()=>{request.name=nameInput.value;persist();});sc.appendChild(nameInput);
+      }
+      const box=el("div","coll-list");sc.appendChild(box);
+      const selected=()=>request.cards.filter((_,index)=>!request.excluded.includes(index));
+      const confirmationLabel=()=>`${own()?"Add":"Create Collection with"} ${selected().length} ${selected().length===1?"Word":"Words"}`;
+      let confirm;
+      request.cards.forEach((word,index)=>{
+        const row=el("div","coll-word reading-review-row");
+        const check=el("input",null,null,{type:"checkbox","aria-label":`Include ${word.base || "word"}`});
+        check.checked=!request.excluded.includes(index);
+        check.addEventListener("change",()=>{
+          request.excluded=request.excluded.filter(i=>i!==index);
+          if(!check.checked)request.excluded.push(index);
+          persist();confirm.textContent=confirmationLabel();confirm.disabled=!selected().length;
+        });
+        const edit=button("coll-word is-btn","",()=>viewForm(word,{draft:true,cancel:()=>review(),onSaved:fields=>{
+          request.cards[index]=fields;persist();review();
+        }}));
+        edit.appendChild(el("span","coll-de",word.base || word.target || "Word"));
+        edit.appendChild(el("span","coll-tr",plainValue(word.translation)));
+        row.appendChild(check);row.appendChild(edit);box.appendChild(row);
+      });
+      if(own()) {
+        sc.appendChild(el("label","coll-label","Add New Words",{for:"readingPlacement"}));
+        const placement=el("select","coll-field",null,{id:"readingPlacement"});
+        placement.appendChild(el("option",null,"At the End of the List",{value:"end"}));
+        placement.appendChild(el("option",null,"As the Next New Words",{value:"next"}));
+        placement.value=request.placement;
+        placement.addEventListener("change",()=>{request.placement=placement.value;persist();});sc.appendChild(placement);
+        sc.appendChild(el("p","coll-hint","Next new words: before the words you haven't started. Your current reviews stay unchanged."));
+      }
+      const error=el("p","coll-error",message);sc.appendChild(error);
+      const buttons=el("div","coll-form-buttons");sc.appendChild(buttons);
+      confirm=button("coll-main",confirmationLabel(),()=>{
+        confirm.disabled=true;
+        try {
+          const items=selected(),prepared=C.prepare(items,own()?C.cards():[]);
+          if(prepared.skipped.length){error.textContent="Some words need a sentence, a marked answer or a meaning. Edit them before adding.";return;}
+          if(!prepared.cards.length){error.textContent="These words are already in your collection.";return;}
+          const result=own()?C.add(items,{placement:request.placement}):C.create(request.name.trim() || "My Words",items);
+          if(!result.added){error.textContent="No words were added.";return;}
+          dirty=true;
+          sessionStorage.removeItem(READING_PENDING);
+          refreshButtons();viewMain();
+          const notice=el("p","coll-text",`${result.added} words added${request.placement==="next"?" as the next new words":""}.${result.duplicates?` ${result.duplicates} already in your collection.`:""}`);
+          card.insertBefore(notice,card.children[1]);notice.setAttribute("role","status");
+          const rows=card.querySelectorAll('.coll-list .coll-word');
+          const added=new Set(result.ids || C.cards().map(word=>word.id));
+          const index=C.cards().findIndex(word=>added.has(word.id));
+          if(index>=0)requestAnimationFrame(()=>rows[index]?.scrollIntoView({block:"center"}));
+        }catch(e){error.textContent="The words could not be saved. Your review is kept; please try again.";}
+        finally{confirm.disabled=!selected().length;}
+      });
+      confirm.disabled=!selected().length;buttons.appendChild(confirm);
+      buttons.appendChild(button("coll-link","Discard This Batch",()=>{
+        card.textContent="";card.appendChild(head("Discard these words?",()=>review()));
+        card.appendChild(el("p","coll-text","Nothing has been added. The words remain saved in Bibliothek."));
+        card.appendChild(button("coll-main","Keep Reviewing",()=>review()));
+        card.appendChild(button("coll-link","Discard Batch",()=>{sessionStorage.removeItem(READING_PENDING);viewMain();}));
+      }));
+    }
+    persist();open(()=>review());
   }
 
   function viewRemove(w) {
@@ -894,6 +981,12 @@ Rules:
     if (pending) {
       sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
       addDictionaryWord(JSON.parse(pending));
+    }
+  } catch (e) {}
+  try {
+    const pending = sessionStorage.getItem("deutschWortschatzPendingReadingWordsV1");
+    if (pending) {
+      addReadingWords(JSON.parse(pending));
     }
   } catch (e) {}
 })();

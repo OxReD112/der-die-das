@@ -1612,3 +1612,10 @@ textarea.coll-paste {
     padding-bottom: 0;
   }
 }
+
+.reading-review-row { display:flex; align-items:center; gap:12px; }
+.reading-review-row > input { flex:none; width:18px; height:18px; accent-color:var(--mint); }
+.reading-review-row > button { flex:1; min-width:0; border:0; }
+.reading-review-row > input { appearance:none; position:relative; border:1.5px solid var(--muted); border-radius:50%; background:transparent; }
+.reading-review-row > input:checked { border-color:transparent; }
+.reading-review-row > input:checked::after { content:""; position:absolute; inset:1px; border-radius:50%; background:var(--mint,#55c9ab); }

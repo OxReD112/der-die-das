@@ -126,8 +126,11 @@
       try{
         const result=window.BibliothekVocabularyActions.add(chosen(),currentResolver,getBook().title);
         const unavailable=result.unavailable.length ? ` ${result.unavailable.length} without learning cards kept in vocabulary.` : '';
-        if(result.pending){$("vocabulary-action-status").textContent=`${result.cards.length} words ready. Continue in Wortschatz to choose your collection.${unavailable}`;$("vocabulary-continue").hidden=false;}
-        else $("vocabulary-action-status").textContent=`${result.added} added to Wortschatz.${result.duplicates ? ` ${result.duplicates} already in your collection.` : ''}${result.skipped.length ? ` ${result.skipped.length} could not be added.` : ''}${unavailable}`;
+        if(result.pending){
+          $("vocabulary-action-status").textContent=`${result.cards.length} words ready to review.${unavailable}`;
+          $("vocabulary-continue").hidden=false;
+          location.assign($("vocabulary-continue").href);
+        } else $("vocabulary-action-status").textContent=`No learning cards available.${unavailable}`;
       }catch(error){$("vocabulary-action-status").textContent='Words could not be added. Please try again.';}
       finally{busy=false;selection();}
     });

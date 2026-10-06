@@ -33,9 +33,9 @@
     const batch=learningCards(records,resolver),collection=window.WortschatzCollection;
     if(!collection)throw new Error('Wortschatz unavailable');
     if(!batch.cards.length)return {...batch,added:0,duplicates:0,skipped:[]};
-    if(collection.isOwn())return {...batch,...collection.add(batch.cards)};
+
     // Continue through Wortschatz's explicit Starter-Set/own-collection flow.
-    sessionStorage.setItem(PENDING,JSON.stringify({id:Date.now().toString(36)+Math.random().toString(36).slice(2),title,cards:batch.cards}));
+    sessionStorage.setItem(PENDING,JSON.stringify({id:Date.now().toString(36)+Math.random().toString(36).slice(2),title,cards:batch.cards,unavailable:batch.unavailable.length,placement:"end"}));
     return {...batch,pending:true,added:0,duplicates:0,skipped:[]};
   }
   window.BibliothekVocabularyActions=Object.freeze({copyText,learningCards,add,PENDING});
