@@ -15,7 +15,7 @@
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=49">
-  <link rel="stylesheet" href="bibliothek.css?v=45">
+  <link rel="stylesheet" href="bibliothek.css?v=46">
 </head>
 <body class="reading-body library-screen">
   <main class="reader" id="reader">
@@ -96,17 +96,19 @@
     <p id="contents-empty" role="status" hidden>No chapters found.</p>
   </dialog>
   <dialog class="vocabulary-dialog" id="vocabulary-dialog" aria-labelledby="vocabulary-heading">
-    <div class="vocabulary-header"><div><h2 id="vocabulary-heading">Vocabulary</h2><p id="vocabulary-subtitle"></p></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary">×</button></div>
+    <div class="vocabulary-header"><div><p id="vocabulary-subtitle"></p><h2 id="vocabulary-heading">Vocabulary</h2></div><button id="vocabulary-menu-toggle" type="button" aria-label="Vocabulary actions" aria-expanded="false" aria-controls="vocabulary-menu">⋯</button><div class="vocabulary-menu" id="vocabulary-menu" hidden><button class="vocabulary-quiet" id="vocabulary-copy" type="button" disabled>Copy Vocabulary</button><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary">×</button></div>
     <div class="vocabulary-controls"><label>From<select id="vocabulary-scope"><option value="chapter">This chapter</option><option value="book">Whole book</option></select></label><label class="vocabulary-select-all"><input id="vocabulary-select-all" type="checkbox"> Select all</label></div>
     <p class="vocabulary-status" id="vocabulary-status" role="status"></p>
     <div class="vocabulary-list" id="vocabulary-list"></div>
     <p class="vocabulary-empty" id="vocabulary-empty" hidden>No marked words yet. Bookmark unfamiliar words while reading.</p>
+    <div class="vocabulary-footer">
     <p class="vocabulary-selection" id="vocabulary-selection" role="status"></p>
-    <div class="vocabulary-actions" id="vocabulary-actions"><button class="vocabulary-main" id="vocabulary-add" type="button" disabled>Add Selected to Wortschatz</button><div class="vocabulary-secondary-actions"><button class="vocabulary-quiet" id="vocabulary-copy" type="button" disabled>Copy Vocabulary</button><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div></div>
+    <div class="vocabulary-actions" id="vocabulary-actions"><button class="vocabulary-main" id="vocabulary-add" type="button" disabled>Add Selected to Wortschatz</button></div>
     <p class="vocabulary-action-status" id="vocabulary-action-status" role="status"></p>
     <a class="vocabulary-continue" id="vocabulary-continue" href="../wortschatz/index.html" hidden>Continue in Wortschatz ›</a>
     <label class="vocabulary-manual-copy" id="vocabulary-manual-copy" hidden>Copy this vocabulary<textarea id="vocabulary-copy-text" readonly rows="4"></textarea></label>
     <section class="vocabulary-clear-confirm" id="vocabulary-clear-confirm" aria-labelledby="vocabulary-clear-heading" hidden><h3 id="vocabulary-clear-heading">Clear marks?</h3><p id="vocabulary-clear-description"></p><button class="vocabulary-main" id="vocabulary-clear-keep" type="button">Keep Marks</button><button class="vocabulary-quiet" id="vocabulary-clear-confirm-button" type="button">Clear Marks</button></section>
+    </div>
   </dialog>
   <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
     <button class="sources-close" id="sources-close" type="button" aria-label="Close data sources and licenses" autofocus>×</button>
@@ -141,7 +143,7 @@
   <script src="vocabulary-highlights.js?v=3"></script>
   <script src="vocabulary-list.js?v=1"></script>
   <script src="vocabulary-actions.js?v=1"></script>
-  <script src="vocabulary-panel.js?v=2"></script>
+  <script src="vocabulary-panel.js?v=3"></script>
   <script src="meaning-display.js?v=6"></script>
   <script src="reader-pagination.js?v=2"></script>
   <script src="bibliothek.js?v=54"></script>

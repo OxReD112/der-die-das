@@ -288,3 +288,33 @@
 
 /* Selection stays available until a horizontal page drag is established. */
 .page-viewport.is-page-dragging { user-select:none; -webkit-user-select:none; cursor:grabbing; }
+
+/* Compact saved-word drawer, matching the contents panel. */
+.vocabulary-dialog { width:min(420px,100vw); border:0; border-left:1px solid var(--hairline); background:var(--bg); }
+.vocabulary-dialog::backdrop { background:rgba(0,0,0,.4); backdrop-filter:none; }
+.vocabulary-header { position:relative; display:block; flex:none; padding:0 44px 24px; text-align:center; }
+.vocabulary-header h2 { margin:22px 0 0; font-size:22px; line-height:1.3; }
+.vocabulary-header p { margin:0; font-size:16px; line-height:1.45; }
+.vocabulary-header > button { position:absolute; top:-8px; right:-8px; margin:0; font-size:30px; }
+.vocabulary-header #vocabulary-menu-toggle { right:auto; left:-8px; }
+.vocabulary-menu { position:absolute; top:38px; left:0; z-index:3; width:210px; padding:6px; border:1px solid var(--hairline); border-radius:12px; background:var(--bg); box-shadow:var(--lift-shadow); text-align:left; }
+.vocabulary-menu[hidden] { display:none; }
+.vocabulary-menu .vocabulary-quiet { border:0; border-radius:8px; text-align:left; font-weight:400; }
+.vocabulary-controls select { background:var(--bg); }
+.vocabulary-dialog input[type="checkbox"] { border-radius:50%; width:18px; height:18px; }
+.vocabulary-row-heading label { flex-direction:row-reverse; justify-content:flex-end; gap:12px; min-height:44px; }
+.vocabulary-row-heading label input { margin:0 0 0 2px; }
+.vocabulary-row { padding:10px 0 12px; }
+.vocabulary-row p { margin:3px 0 0; }
+.vocabulary-passage { margin:3px 0 0; font-size:12px; color:var(--muted); }
+.vocabulary-list { padding-top:14px; -webkit-mask-image:linear-gradient(to bottom,transparent,#000 14px); mask-image:linear-gradient(to bottom,transparent,#000 14px); }
+.vocabulary-selection:empty { display:none; }
+.vocabulary-status { margin:8px 0; }
+@media (max-width:600px) {
+ .vocabulary-dialog { inset:0; width:100%; height:100dvh; max-height:100dvh; border:0; border-radius:0; padding:calc(24px + env(safe-area-inset-top)) 22px calc(18px + env(safe-area-inset-bottom)); }
+ .vocabulary-dialog.is-opening { animation:contents-enter .24s ease-out; }
+ .vocabulary-dialog.is-closing { animation:contents-exit .22s ease-in forwards; }
+}
+@media (prefers-reduced-motion:reduce) { .vocabulary-dialog.is-opening,.vocabulary-dialog.is-closing { animation:none; } }
+
+.vocabulary-footer { flex:none; max-height:45%; overflow-y:auto; overscroll-behavior:contain; padding:2px; }
