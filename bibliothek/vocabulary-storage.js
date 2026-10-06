@@ -5,6 +5,11 @@
   const STORE = "vocabulary";
   let connection;
   const norm = value => String(value || "").normalize("NFC").trim();
+  const nominalUsage = usage => {
+    if (usage?.role !== "nominalized") return null;
+    const {form,number,marker,...identityUsage} = usage;
+    return identityUsage;
+  };
   function openDb() {
     if (connection) return connection;
     connection = new Promise((resolve, reject) => {
@@ -50,9 +55,11 @@
           dictionaryId:input.dictionaryId == null ? null : String(input.dictionaryId),
           source:input.dictionaryId != null ? "main" : input.source === "fallback" && norm(input.lemma) ? "fallback" : "unresolved",
           pos:norm(input.pos), translation:{ en:norm(input.translation?.en), ru:norm(input.translation?.ru) },
+          ...(nominalUsage(input.usage) ? {usage:nominalUsage(input.usage)} : {}),
           createdAt:now, occurrences:[]
         };
-        const occurrence = { chapterIndex:loc.chapterIndex, paragraphIndex:loc.paragraphIndex, tokenOffset:loc.tokenOffset, form:norm(input.form), sentence:String(input.sentence || "") };
+        const occurrence = { chapterIndex:loc.chapterIndex, paragraphIndex:loc.paragraphIndex, tokenOffset:loc.tokenOffset, form:norm(input.form), sentence:String(input.sentence || ""),
+          ...(nominalUsage(input.usage) ? {usage:{...input.usage}} : {}) };
         const existing = record.occurrences.findIndex(o => o.chapterIndex === loc.chapterIndex && o.paragraphIndex === loc.paragraphIndex && o.tokenOffset === loc.tokenOffset);
         if (existing < 0) record.occurrences.push(occurrence);
         else record.occurrences[existing] = occurrence;
@@ -76,11 +83,15 @@
         if (!original) return;
         const index = original.occurrences.findIndex(o => o.chapterIndex === location.chapterIndex && o.paragraphIndex === location.paragraphIndex && o.tokenOffset === location.tokenOffset);
         if (index < 0) return;
-        const occurrence = original.occurrences[index];
+        const occurrence = {...original.occurrences[index]};
+        if (nominalUsage(candidate.usage)) occurrence.usage = {...candidate.usage};
+        else delete occurrence.usage;
         const targetRequest = store.get([bookId, key]);
         targetRequest.onsuccess = () => {
           const target = targetRequest.result || {schemaVersion:1,bookId,key,createdAt:original.createdAt,occurrences:[]};
           Object.assign(target, {lemma:norm(candidate.lemma),dictionaryId:candidate.dictionaryId == null ? null : String(candidate.dictionaryId),source:candidate.dictionaryId != null ? "main" : "fallback",pos:norm(candidate.pos),translation:{en:norm(candidate.translation?.en),ru:norm(candidate.translation?.ru)},updatedAt:Date.now()});
+          if (nominalUsage(candidate.usage)) target.usage = nominalUsage(candidate.usage);
+          else delete target.usage;
           if (!target.occurrences.some(o => o.chapterIndex === location.chapterIndex && o.paragraphIndex === location.paragraphIndex && o.tokenOffset === location.tokenOffset)) target.occurrences.push(occurrence);
           if (oldKey !== key) {
             original.occurrences.splice(index,1);

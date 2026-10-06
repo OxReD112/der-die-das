@@ -167,7 +167,18 @@
       const hasSecondPage = splitParagraphs(book.content).length > 1;
       const started = hasSecondPage && Boolean(book.readingStarted || Number(book.position) > 0 || Number(book.chapterIndex) > 0);
       const completed = started && Boolean(book.completed);
-      button.querySelector(".book-icon").textContent = coverInitials(book.title);
+      const icon = button.querySelector(".book-icon");
+      icon.textContent = coverInitials(book.title);
+      if (/^data:image\/(webp|png|jpeg);base64,/.test(book.coverThumbnail || "")) {
+        const image = document.createElement("img");
+        image.className = "book-cover";
+        image.alt = "";
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.addEventListener("error", () => image.remove(), { once: true });
+        image.src = book.coverThumbnail;
+        icon.append(image);
+      }
       button.querySelector(".book-icon").classList.toggle("is-started", started);
       button.querySelector(".book-icon").classList.toggle("is-completed", completed);
       button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
@@ -463,7 +474,12 @@
 
   }
   let lemmaResolver = null, selectedResolution = null;
-  const usageNote = candidate => candidate?.usage?.role === "attributive"
+  const usageNote = candidate => candidate?.usage?.role === "nominalized"
+    ? `${candidate.usage.kind === "person"
+      ? locale() === "ru" ? "Субстантивация · обозначение человека" : "Nominalization · person"
+      : candidate.usage.kind === "adjective" ? locale() === "ru" ? "Субстантивированное прилагательное" : "Nominalized adjective"
+      : locale() === "ru" ? "Субстантивированный инфинитив" : "Nominalized infinitive"} · ${candidate.usage.base}${candidate.usage.number === "plural" ? locale() === "ru" ? " · множественное число" : " · plural" : ""}`
+    : candidate?.usage?.role === "attributive"
     ? `${candidate.usage.form} · ${candidate.usage.kind === "participle-I" ? "Partizip I" : "Partizip II"} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
   async function loadDictionary() {
     if (dictionary) return dictionary;

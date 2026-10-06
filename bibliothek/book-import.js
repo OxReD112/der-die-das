@@ -18,7 +18,7 @@
     return {
       id: globalThis.crypto?.randomUUID?.() || `${now}-${Math.random()}`,
       name, title: String(parsed.title || titleFromFilename(name)).trim() || titleFromFilename(name),
-      format, content, ...(parsed.chapters ? { chapters: parsed.chapters } : {}),
+      format, content, ...(parsed.coverThumbnail ? { coverThumbnail: parsed.coverThumbnail } : {}), ...(parsed.chapters ? { chapters: parsed.chapters } : {}),
       ...(parsed.contents ? { contents: parsed.contents, structureVersion: 2 } : {}),
       position: 0, createdAt: now, updatedAt: now
     };

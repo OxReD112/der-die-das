@@ -48,6 +48,26 @@
     const heading = ["h1", "h2", "h3"].map(tag => elements(body, tag)[0]).find(Boolean);
     return { title: clean(heading?.textContent || elements(doc, "title")[0]?.textContent), paragraphs, paragraphKinds, anchors };
   }
+  async function thumbnail(bytes, type) {
+    const url = URL.createObjectURL(new Blob([bytes], { type }));
+    try {
+      const image = new Image();
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+        image.src = url;
+      });
+      if (!image.naturalWidth || !image.naturalHeight) return null;
+      const scale = Math.min(1, 160 / image.naturalWidth, 240 / image.naturalHeight);
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const context = canvas.getContext("2d");
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const result = canvas.toDataURL("image/webp", .8);
+      return result.length <= 100000 ? result : null;
+    } finally { URL.revokeObjectURL(url); }
+  }
   registerParser("epub", async file => {
     if (file.size > 50 * 1024 * 1024) fail("This EPUB is too large. Choose a file smaller than 50 MB.");
     let zip;
@@ -86,6 +106,38 @@
       for (const reference of elements(encryption, "CipherReference")) encrypted.add(resolvePath("", reference.getAttribute("URI")));
     }
     if (encrypted.has(packagePath)) fail("This EPUB is DRM-protected. Choose a DRM-free book.");
+    // Cover artwork is optional; never fail a readable book because of its cover.
+    let coverThumbnail = null;
+    try {
+      const metadata = elements(pkg, "metadata")[0];
+      const coverId = metadata && elements(metadata, "meta").find(node => node.getAttribute("name") === "cover")?.getAttribute("content");
+      const coverItem = [...items.values()].find(item => (item.getAttribute("properties") || "").split(/\s+/).includes("cover-image")) || items.get(coverId);
+      let coverPath = coverItem && resolvePath(packagePath, coverItem.getAttribute("href"));
+      let coverType = coverItem?.getAttribute("media-type");
+      if (!coverPath) {
+        const guideCover = elements(pkg, "reference").find(node => (node.getAttribute("type") || "").split(/\s+/).includes("cover"));
+        if (guideCover) {
+          const pagePath = resolvePath(packagePath, guideCover.getAttribute("href"));
+          if (!encrypted.has(pagePath)) {
+            const doc = xml(await read(pagePath));
+            const image = elements(doc, "img")[0] || elements(doc, "image")[0];
+            const href = image?.getAttribute("src") || image?.getAttribute("href") || image?.getAttributeNS("http://www.w3.org/1999/xlink", "href");
+            if (href) {
+              coverPath = resolvePath(pagePath, href);
+              coverType = [...items.values()].find(item => resolvePath(packagePath, item.getAttribute("href")) === coverPath)?.getAttribute("media-type");
+            }
+          }
+        }
+      }
+      // Raster input only: SVG covers may depend on external resources.
+      if (coverPath && !encrypted.has(coverPath) && /^image\/(jpeg|png|webp|gif)$/i.test(coverType || "")) {
+        const entry = zip.file(coverPath);
+        if (entry && (entry._data?.uncompressedSize || 0) <= 10 * 1024 * 1024) {
+          const bytes = await entry.async("uint8array");
+          if (bytes.length <= 10 * 1024 * 1024) coverThumbnail = await thumbnail(bytes, coverType);
+        }
+      }
+    } catch (_) { /* Keep the standard cover when artwork is missing or damaged. */ }
     const chapters = [];
     for (const ref of elements(spine, "itemref")) {
       const item = items.get(ref.getAttribute("idref"));
@@ -166,6 +218,6 @@
       }
     });
     const metadata = elements(pkg, "metadata")[0];
-    return { title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
+    return { ...(coverThumbnail ? { coverThumbnail } : {}), title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
   });
 })();

@@ -45,8 +45,9 @@
 .book-delete-confirm { min-height:44px; border:0; border-radius:999px; padding:0 17px; background:var(--error); color:#242426; font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
 .book-confirm-actions button:disabled { opacity:.5; cursor:wait; }
 .book-icon { position:relative; display:grid; place-items:center; width:40px; height:48px; border-radius:5px; padding-left:3px; background:var(--tile-surface); color:var(--bibliothek-primary); font:600 16px/1 Georgia,serif; box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 2px 4px rgba(0,0,0,.12); }
-.book-icon::before { content:""; position:absolute; top:0; bottom:0; left:0; width:5px; border-radius:5px 0 0 5px; background:var(--hairline); }
-.book-icon.is-started::after { content:""; position:absolute; top:0; right:5px; width:7px; height:12px; background:var(--mint); clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%); }
+.book-cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; z-index:0; }
+.book-icon::before { z-index:1; content:""; position:absolute; top:0; bottom:0; left:0; width:5px; border-radius:5px 0 0 5px; background:var(--hairline); }
+.book-icon.is-started::after { z-index:2; content:""; position:absolute; top:0; right:5px; width:7px; height:12px; background:var(--mint); clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%); }
 .book-icon.is-completed::after { background:var(--secondary-text); }
 [data-theme="light"] .book-icon { box-shadow:var(--lift-shadow); }
 .book-meta { min-width:0; }

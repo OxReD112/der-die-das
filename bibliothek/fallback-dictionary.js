@@ -53,10 +53,11 @@
         value.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`) &&
         /\b(?:present|past|preterite|participle|imperative|singular|plural|dative|accusative|genitive|nominative|infinitive|comparative|superlative)\b/iu.test(value));
       const hasReference = values.some(reference);
-      const grammarTokens = new Set(["first","second","third","person","singular","plural","present","past","preterite","perfect","imperfect","imperative","indicative","subjunctive","participle","nominative","accusative","dative","genitive","infinitive","positive","comparative","superlative","masculine","feminine","neuter","definite","indefinite","weak","strong","mixed","all","gender","dependent","independent","subordinate","clause","zu"]);
+      const grammarTokens = new Set(["first","second","third","person","singular","plural","present","past","preterite","perfect","imperfect","imperative","indicative","subjunctive","participle","nominative","accusative","dative","genitive","infinitive","positive","comparative","superlative","masculine","feminine","neuter","definite","indefinite","weak","strong","mixed","all","case","gender","dependent","independent","subordinate","clause","zu"]);
       const continuation = value => {
         const tokens = value.toLowerCase().replace(/\bsubjunctive\s+(?:ii|i)\b/gu, "subjunctive").split(/[\s,;:/().-]+/u).filter(Boolean);
-        return hasReference && tokens.length > 0 && tokens.every(token => grammarTokens.has(token));
+        const declensionNote = /^(?:weak|strong|mixed)(?:[\s/-]|$)/iu.test(value.trim()) && tokens.length > 1;
+        return (hasReference || declensionNote) && tokens.length > 0 && tokens.every(token => grammarTokens.has(token));
       };
       const notes = [...new Set(values.filter(value => reference(value) || continuation(value)))];
       return {word,pos,meanings:[...new Set(values.filter(value => !notes.includes(value)))],formNotes:notes};

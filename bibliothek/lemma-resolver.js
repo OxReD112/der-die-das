@@ -101,6 +101,97 @@
       source:"fallback",lemma:item.word,pos:"verb",posLabel:"Verb",meanings:item.meanings,
       translation:{en:item.meanings.join("; "),ru:""}
     } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    // Reviewed action nouns have their own identity; never borrow a verb ID.
+    const infinitiveNouns = {
+      lesen:{en:"reading (the act of reading)",ru:"чтение"},
+      schreiben:{en:"writing (the act of writing)",ru:"написание; процесс письма"},
+      warten:{en:"waiting (the act of waiting)",ru:"ожидание"},
+      anrufen:{en:"calling (the act of making a phone call)",ru:"действие: звонить по телефону"}
+    };
+    function infinitiveNoun(word, context) {
+      const base = norm(word), translation = infinitiveNouns[base];
+      if (!translation || !/^[A-ZÄÖÜ]/u.test(word) || !context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && t[0] === word);
+      if (index < 1 || norm(tokens[index-1][0]) !== "das" ||
+        !/^\s+$/u.test(sentence.slice(tokens[index-1].index+tokens[index-1][0].length,tokens[index].index))) return null;
+      // Do not select an action noun as a modifier of a following known noun.
+      const next = tokens[index+1];
+      if (next && /^\s+$/u.test(sentence.slice(tokens[index].index+word.length,next.index)) &&
+        (forms.get(norm(next[0])) || []).some(e => e.type === "Nomen")) return null;
+      const lemma = base.charAt(0).toLocaleUpperCase("de-DE")+base.slice(1);
+      const verb = (lemmas.get(base) || []).find(e => e.type === "Verb");
+      const usage = {role:"nominalized",kind:"infinitive",base,form:word,baseDictionaryId:verb?.id || null};
+      return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation:{...translation},usage,
+        item:{word:lemma,article:"das",type:"Nomen",translation_en:translation.en,translation_ru:translation.ru,
+          usage_note_en:`Nominalized infinitive of ${base}.`,usage_note_ru:`Субстантивированный инфинитив ${base}.`}};
+    }
+    function adjectiveNoun(word, context) {
+      const definitions = {
+        Neues:{marker:"etwas",base:"neu",en:"something new",ru:"что-то новое"},
+        Besonderes:{marker:"nichts",base:"besondere",en:"nothing special",ru:"ничего особенного"}
+      };
+      const definition = definitions[word];
+      if (!definition || !context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && t[0] === word);
+      const joined = (a,b) => /^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      if (index < 1 || norm(tokens[index-1][0]) !== definition.marker || !joined(index-1,index)) return null;
+      const next = tokens[index+1];
+      if (next && joined(index,index+1) && ((forms.get(norm(next[0])) || []).some(e => e.type === "Nomen") || modifiers.has(norm(next[0])))) return null;
+      const ownBase = (lemmas.get(definition.base) || []).find(e => e.type === "Adjektiv");
+      const translation = {en:definition.en,ru:definition.ru};
+      return {source:"fallback",lemma:word,pos:"noun",posLabel:"Nomen",translation,
+        usage:{role:"nominalized",kind:"adjective",base:definition.base,baseDictionaryId:ownBase?.id || null,form:word,marker:definition.marker},
+        item:{word,type:"Nomen",translation_en:translation.en,translation_ru:translation.ru}};
+    }
+    function personNouns(word, context) {
+      const match = /^(reisend|arbeitslos|bekannt)(e|en|er|em|es)$/u.exec(norm(word));
+      if (!match || !/^[A-ZÄÖÜ]/u.test(word) || !context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && t[0] === word);
+      const joined = (a,b) => /^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      if (index < 1 || !joined(index-1,index)) return null;
+      const next = tokens[index+1];
+      if (next && joined(index,index+1) && ((forms.get(norm(next[0])) || []).some(e => e.type === "Nomen") || modifiers.has(norm(next[0])))) return null;
+      const determiner = norm(tokens[index-1][0]);
+      const definite = ["der","die","den","dem","des"].includes(determiner);
+      const mixed = /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(e|en|em|er|es)?$/u.exec(determiner);
+      if (!definite && !mixed) return null;
+      const tail = mixed?.[1] || "";
+      const table = {
+        male:[["der","","er","e"],["den","en","en","en"],["dem","em","em","en"],["des","es","en","en"]],
+        female:[["die","e","e","e"],["die","e","e","e"],["der","er","er","en"],["der","er","er","en"]],
+        plural:[["die","e","e","en"],["die","e","e","en"],["den","en","en","en"],["der","er","er","en"]]
+      };
+      const prep = index > 1 && joined(index-2,index-1) ? norm(tokens[index-2][0]) : "";
+      const governed = {mit:2,bei:2,von:2,zu:2,aus:2,nach:2,für:1,durch:1,gegen:1,ohne:1,um:1}[prep];
+      const analyses = [];
+      for (const [gender,rows] of Object.entries(table)) rows.forEach(([article,mixedTail,strong,weak],caseIndex) => {
+        if (governed !== undefined && governed !== caseIndex || definite && article !== determiner || mixed && mixedTail !== tail) return;
+        if (gender === "plural" && mixed && determiner.startsWith("ein")) return;
+        const ending = definite || mixed && tail ? weak : strong;
+        if (match[2] === ending) analyses.push({gender,caseIndex});
+      });
+      if (!analyses.length) return null;
+      const definitions = {
+        reisend:{male:["Reisender","traveller","путешественник"],female:["Reisende","female traveller","путешественница"],base:"reisen"},
+        arbeitslos:{male:["Arbeitsloser","unemployed person","безработный"],female:["Arbeitslose","unemployed woman","безработная"],base:"arbeitslos"},
+        bekannt:{male:["Bekannte","acquaintance","знакомый"],female:["Bekannte","female acquaintance","знакомая"],base:"bekannt"}
+      };
+      const definition = definitions[match[1]];
+      return ["male","female"].flatMap(gender => {
+        const compatible = analyses.filter(a => a.gender === gender || a.gender === "plural");
+        if (!compatible.length) return [];
+        const [lemma,en,ru] = definition[gender], article = gender === "male" ? "der" : "die";
+        const own = (lemmas.get(norm(lemma)) || []).find(e => e.type === "Nomen" && e.article === article);
+        const usage = {role:"nominalized",kind:"person",base:definition.base,form:word,
+          number:compatible.every(a=>a.gender === "plural") ? "plural" : compatible.every(a=>a.gender !== "plural") ? "singular" : "ambiguous"};
+        const candidate = own ? mainCandidate(own) : {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation:{en,ru},
+          item:{word:lemma,article,type:"Nomen",translation_en:en,translation_ru:ru}};
+        return [{...candidate,usage}];
+      });
+    }
     let preparation = null;
     function prepareSeparable() {
       if (!fallback.separableEntries) return Promise.resolve();
@@ -654,6 +745,16 @@
         unresolvedMeanings = [];
       }
       candidates = candidates.filter((c,i,all) => all.findIndex(x => window.BibliothekVocabulary.identity(x) === window.BibliothekVocabulary.identity(c)) === i);
+      const nominalizedNoun = infinitiveNoun(word,context) || adjectiveNoun(word,context);
+      if (nominalizedNoun) {
+        const identity = window.BibliothekVocabulary.identity(nominalizedNoun);
+        candidates = [nominalizedNoun,...candidates.filter(c => window.BibliothekVocabulary.identity(c) !== identity)];
+      }
+      const people = personNouns(word,context);
+      if (people) {
+        const identities = new Set(people.map(c => window.BibliothekVocabulary.identity(c)));
+        candidates = [...people,...candidates.filter(c => !identities.has(window.BibliothekVocabulary.identity(c)))];
+      }
       const group = zuGroup(word,context) || werdenGroup(word,context) || verbGroup(word,context);
       // Joined zu forms can belong to a complete verb missing from ours;
       // keep that recognised target rather than guessing from its stem.
@@ -678,11 +779,11 @@
       }
       const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
       const grouped = candidates.filter(c => c.construction && c.construction.id !== "separable-verb");
-      const preferred = grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null);
+      const preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
       const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
-      const selected = grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0] : preferred;
-      return { preferred, evidence:ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0] : preferred);
+      return { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
     }
     return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
