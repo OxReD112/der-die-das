@@ -337,6 +337,19 @@
     } finally { switchingChapter = false; }
   }
   const contentsDialog = $("contents-dialog");
+  let contentsClosing = false;
+  async function closeContents() {
+    if (!contentsDialog.open || contentsClosing) return;
+    contentsClosing = true;
+    contentsDialog.classList.remove("is-opening");
+    if (matchMedia("(max-width:600px)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
+      contentsDialog.classList.add("is-closing");
+      await Promise.all(contentsDialog.getAnimations().map(animation => animation.finished.catch(() => {})));
+    }
+    contentsDialog.close();
+    contentsDialog.classList.remove("is-closing");
+    contentsClosing = false;
+  }
   function renderContents() {
     const query = norm($("contents-search").value), active = activeEntry(currentBook);
     const list = $("contents-list"); list.replaceChildren();
@@ -352,9 +365,8 @@
         row.type = "button";
         if (active && entryKey(entry) === entryKey(active)) {
           row.setAttribute("aria-current", "location");
-          const marker = document.createElement("small"); marker.textContent = "Currently reading"; row.append(marker);
         }
-        row.addEventListener("click", async () => { contentsDialog.close(); await navigateTo(entry, true); });
+        row.addEventListener("click", async () => { await closeContents(); await navigateTo(entry, true); });
       } else row.classList.add("contents-group");
       list.append(row);
     }
@@ -364,15 +376,16 @@
     closePopups(); $("contents-search").value = "";
     $("contents-book-title").textContent = currentBook.title;
     $("contents-search-label").hidden = contentsFor(currentBook).length < 15;
-    renderContents(); contentsDialog.showModal();
+    renderContents(); contentsDialog.showModal(); contentsDialog.classList.add("is-opening");
     const active = $("contents-list").querySelector('[aria-current]');
     if (active) { active.scrollIntoView({ block: "center" }); active.focus({ preventScroll: true }); }
   });
-  $("contents-close").addEventListener("click", () => contentsDialog.close());
+  $("contents-close").addEventListener("click", closeContents);
+  contentsDialog.addEventListener("cancel", event => { event.preventDefault(); closeContents(); });
   contentsDialog.addEventListener("close", () => $("contents-toggle").focus({ preventScroll: true }));
   contentsDialog.addEventListener("click", event => { if (event.target === contentsDialog) {
     const bounds = contentsDialog.getBoundingClientRect();
-    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) contentsDialog.close();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeContents();
   } });
   $("contents-search").addEventListener("input", renderContents);
   function renderChapterNavigation(book) {
