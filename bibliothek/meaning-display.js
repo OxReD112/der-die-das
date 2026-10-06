@@ -41,10 +41,12 @@
       const base = group.candidate;
       const isSelected = selected && key(base) === key(selected);
       if (isSelected) {
-        const text = compact(extraText(group.rows, selected, language));
-        return text ? [{candidate:group.rows.find(c => c !== selected && c.translation?.[language]), text}] : [];
+        const translated = compact(extraText(group.rows, selected, language));
+        const displayLanguage = translated ? language : 'en';
+        const text = translated || compact(extraText(group.rows, selected, displayLanguage));
+        return text ? [{candidate:group.rows.find(c => c !== selected && c.translation?.[displayLanguage]), text}] : [];
       }
-      const text = brief(base, language);
+      const text = brief(base, language) || brief(base, 'en');
       if (!text) return [];
       return [{candidate:base, text}];
     });
