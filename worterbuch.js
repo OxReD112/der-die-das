@@ -51,12 +51,12 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json"),
-      loadJson("worterbuch/german-verbs.json"),
-      loadJson("worterbuch/german-adjectives.json"),
-      loadJson("worterbuch/german-adverbs.json"),
-      loadJson("worterbuch/german-conjunctions.json"),
-      loadJson("worterbuch/german-pronouns.json")
+      loadJson("worterbuch/german-nouns.json?v=20261007-import-final-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261007-import-final-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261007-import-final-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261007-import-final-1"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261007-import-final-1"),
+      loadJson("worterbuch/german-pronouns.json?v=20261007-import-final-1")
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
@@ -229,7 +229,7 @@
       const konjunktivII = forms["Konjunktiv II"];
       const hasSpecialKonjunktivII = konjunktivII && Object.values(konjunktivII).some(value => String(value || "").trim());
       const columns = [
-        ...(forms["Präsens"] ? [["Präsens", forms["Präsens"]]] : []),
+        ...(forms["Präsens"] && !item.generated_forms?.includes("Präsens") ? [["Präsens", forms["Präsens"]]] : []),
         ...(forms["Präteritum"] ? [["Präteritum", forms["Präteritum"]]] : []),
         ...(hasSpecialKonjunktivII ? [["Konjunktiv II", konjunktivII]] : [])
       ];
@@ -275,12 +275,14 @@
     }
 
     if (item.type !== "verb" && !hasWordOrder) entry.append(example);
-    const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
-    addToWortschatz.type = "button";
-    addToWortschatz.addEventListener("click", () => {
-      if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
-    });
-    entry.append(addToWortschatz);
+    if (item.wortschatz_excluded !== true) {
+      const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
+      addToWortschatz.type = "button";
+      addToWortschatz.addEventListener("click", () => {
+        if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
+      });
+      entry.append(addToWortschatz);
+    }
     return entry;
   }
 

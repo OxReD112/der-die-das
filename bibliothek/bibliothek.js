@@ -156,7 +156,7 @@
     if (actionLabel) {
       const action = document.createElement("a");
       action.className = "toast-action";
-      action.href = "../wortschatz/index.html";
+      action.href = "../wortschatz/index.html?v=20261007-import-final-1";
       action.textContent = actionLabel;
       toast.append(action);
     }
@@ -574,8 +574,8 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = (path, revision) => fetch(`../worterbuch/${path}${revision ? `?v=${revision}` : ""}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json", "20261006-7"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
+    const get = path => fetch(`../worterbuch/${path}?v=20261007-import-final-1`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
       .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
@@ -649,26 +649,27 @@
     const renderSelection = () => {
       const candidate = selectedResolution;
       const ru = locale() === "ru";
-      content.textContent = candidate ? candidateMeaning(candidate,candidateText(candidate),
+      const referencePronoun = window.BibliothekPronounReference.excluded(selectedEntry);
+      content.textContent = referencePronoun ? (ru ? "местоимение" : "pronoun") : candidate ? candidateMeaning(candidate,candidateText(candidate),
         ru && window.BibliothekMeaningDisplay.brief(candidate,"ru") ? "ru" : "en"," · ") :
         resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
         resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
         resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` :
         ru ? "Значение слова не найдено." : "No dictionary meaning found.";
-      content.lang = ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
+      content.lang = referencePronoun ? locale() : ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
-      if (usageNote(candidate)) {
+      if (!referencePronoun && usageNote(candidate)) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = usageNote(candidate); content.append(note);
       }
-      if (candidate?.construction) {
+      if (!referencePronoun && candidate?.construction) {
         const group = document.createElement("small"); group.className = "popover-construction";
         group.textContent = candidate.construction.id === "separable-verb"
           ? candidate.construction.spans.map(span => span.text).join(" … ")
           : candidate.construction.note?.[locale()] || `${candidate.construction.label} ${locale() === "ru" ? "с" : "with"} ${candidate.construction.lemma}`;
         content.append(group);
       }
-      $("popover-word").textContent = candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
+      $("popover-word").textContent = referencePronoun ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
@@ -705,6 +706,7 @@
       displayed.forEach(({candidate, text, language}) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "lemma-choice";
+      if(candidate.dictionaryId)button.dataset.dictionaryId=candidate.dictionaryId;
       button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateMeaning(candidate,text,language," — ")}`;
       button.addEventListener("click", async () => {
         if (request !== lookupRequest) return;
@@ -761,6 +763,11 @@
   function renderDictionaryCard(item) {
     const root = $("dictionary-card");
     root.replaceChildren();
+    delete root.dataset.pronounReference;
+    if(window.BibliothekPronounReference.excluded(item)){
+      window.BibliothekPronounReference.render(root,item,locale(),selectedWord);
+      return;
+    }
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
     const formKey = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
     const clickedForm = formKey(selectedWord);
@@ -881,7 +888,7 @@
     closePopups();
     form.addDictionaryWord({
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
-      item
+      version:2, dictionaryId:item.id, lang:locale()
     }, () => showToast("Added to Wortschatz."));
   }
 

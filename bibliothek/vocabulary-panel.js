@@ -24,18 +24,21 @@
     }
     $("vocabulary-menu-toggle").addEventListener('click',()=>menu($("vocabulary-menu").hidden));
     dialog.addEventListener('click',event=>{if(!event.target.closest('#vocabulary-menu,#vocabulary-menu-toggle'))menu(false);});
+    const availability=record=>window.BibliothekVocabularyActions.availability(record,currentResolver);
+    const issueLabel=error=>`${error.base || "Unknown word"}${error.dictionaryId ? " ("+error.dictionaryId+")" : ""}: ${error.code==='DICTIONARY_ENTRY_EXCLUDED' ? 'excluded from Wortschatz' : error.code==='DICTIONARY_ENTRY_MISSING' ? 'dictionary entry missing' : 'dictionary example needs correction'}`;
     function selection() {
       const locked=busy || !!clearRequest;
-      const n=selected.size,eligible=entries.filter(e=>selected.has(e.key)&&e.source==='main'&&currentResolver?.entry(e.dictionaryId)).length;
-      $("vocabulary-selection").textContent=n ? `${n} selected · ${eligible} with learning cards` : '';
+      const n=selected.size,chosenEntries=entries.filter(e=>selected.has(e.key)),eligible=chosenEntries.filter(e=>availability(e).available).length;
+      const issues=chosenEntries.map(availability).filter(result=>!result.available).map(result=>issueLabel(result.error));
+      $("vocabulary-selection").textContent=n ? `${n} selected · ${eligible} with learning cards${issues.length ? ' · '+issues.join('; ') : ''}` : '';
       $("vocabulary-select-all").checked=entries.length>0&&n===entries.length;
       $("vocabulary-select-all").indeterminate=n>0&&n<entries.length;
       $("vocabulary-select-all").disabled=!entries.length || locked;
       $("vocabulary-copy").textContent=n ? 'Copy Selected' : 'Copy Vocabulary';
       $("vocabulary-clear").textContent=n ? 'Clear Selected' : 'Clear Marks';
-      $("vocabulary-add").textContent=n ? `Add Selected to Wortschatz (${n})` : 'Add Selected to Wortschatz';
+      $("vocabulary-add").textContent=n ? `Add Selected to Wortschatz (${eligible})` : 'Add Selected to Wortschatz';
       $("vocabulary-menu-toggle").disabled=locked;
-      $("vocabulary-add").disabled=busy || !entries.some(e=>selected.has(e.key)&&e.source==='main'&&currentResolver?.entry(e.dictionaryId));
+      $("vocabulary-add").disabled=busy || !entries.some(e=>selected.has(e.key)&&availability(e).available);
       $("vocabulary-copy").disabled=busy || !entries.length || !currentResolver;
       $("vocabulary-clear").disabled=busy || !entries.length;
       $("vocabulary-scope").disabled=locked || !getBook()?.chapters?.length;
@@ -66,7 +69,7 @@
           heading.append(label);row.append(heading);
           const translation=language()==='ru'?record.translation.ru || record.translation.en:record.translation.en || record.translation.ru;
           row.append(text('p','',translation || 'Meaning not available yet'));
-          row.append(text('p','vocabulary-availability',[({adj:'Adjektiv',adv:'Adverb',noun:'Nomen',verb:'Verb',conj:'Konjunktion',pron:'Pronomen'})[record.pos] || record.pos,record.source==='main'?(item?'Can add to Wortschatz':'No learning card'):record.source==='fallback'?'Translation only':'Saved word'].filter(Boolean).join(' · ')));
+          row.append(text('p','vocabulary-availability',[({adj:'Adjektiv',adv:'Adverb',noun:'Nomen',verb:'Verb',conj:'Konjunktion',pron:'Pronomen'})[record.pos] || record.pos,record.source==='main'?(availability(record).available?'Can add to Wortschatz':issueLabel(availability(record).error)):record.source==='fallback'?'Translation only':'Saved word'].filter(Boolean).join(' · ')));
           const occurrence=record.occurrences[0];
           const link=text('button','vocabulary-passage',`${occurrence.form} · Show in text ›`);link.type='button';
           link.addEventListener('click',async()=>{
@@ -129,12 +132,13 @@
       busy=true;selection();$("vocabulary-continue").hidden=true;
       try{
         const result=window.BibliothekVocabularyActions.add(chosen(),currentResolver,getBook().title);
+        const details=[...result.excluded,...result.problems].map(issueLabel).join('; ');
         const unavailable=result.unavailable.length ? ` ${result.unavailable.length} without learning cards kept in vocabulary.` : '';
         if(result.pending){
-          $("vocabulary-action-status").textContent=`${result.cards.length} words ready to review.${unavailable}`;
+          $("vocabulary-action-status").textContent=`${result.cards.length} words ready to review.${unavailable}${details ? " "+details : ""}`;
           $("vocabulary-continue").hidden=false;
           location.assign($("vocabulary-continue").href);
-        } else $("vocabulary-action-status").textContent=`No learning cards available.${unavailable}`;
+        } else $("vocabulary-action-status").textContent=`No learning cards available.${unavailable}${details ? " "+details : ""}`;
       }catch(error){$("vocabulary-action-status").textContent='Words could not be added. Please try again.';}
       finally{busy=false;selection();}
     });

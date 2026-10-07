@@ -386,3 +386,7 @@
 
 .book-row.is-missing .book-open { opacity:.5; }
 .book-row.is-missing .book-open:hover,.book-row.is-missing .book-open:focus-visible { opacity:.8; }
+
+/* Reader-only pronoun reference; all rows, including formal Sie, remain visible. */
+.pronoun-reference-title { margin:12px 0; color:var(--text); font-size:17px; line-height:1.4; }
+.pronoun-reference-scroll { overflow-x:auto; max-width:100%; }

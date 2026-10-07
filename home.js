@@ -582,10 +582,10 @@ document.querySelectorAll("[data-app]").forEach(button => {
 // Wörterbuch → Wortschatz: carry the selected entry across the same-origin exercise frame.
 window.openWortschatzForDictionary = item => {
   const tile = document.querySelector('[data-app^="wortschatz/"]');
-  if (!tile || !item) return;
-  const request = { id: Date.now().toString(36) + Math.random().toString(36).slice(2), item };
+  if (!tile || !item || item.wortschatz_excluded === true) return;
+  const request = { version:2, id: Date.now().toString(36) + Math.random().toString(36).slice(2), dictionaryId:item.id, lang:window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en" };
   try {
-    sessionStorage.setItem("deutschWortschatzPendingDictionaryWordV1", JSON.stringify(request));
+    sessionStorage.setItem("deutschWortschatzPendingDictionaryWordV2", JSON.stringify(request));
   } catch (e) {}
   const deliver = () => {
     try {

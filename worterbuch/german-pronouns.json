@@ -37,7 +37,8 @@
       "mir",
       "meiner"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ich"
+    "source_url": "https://www.duden.de/rechtschreibung/ich",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-002",
@@ -79,7 +80,8 @@
       "dir",
       "deiner"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/du"
+    "source_url": "https://www.duden.de/rechtschreibung/du",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-003",
@@ -119,7 +121,8 @@
       "ihm",
       "seiner"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/er"
+    "source_url": "https://www.duden.de/rechtschreibung/er",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-004",
@@ -158,7 +161,8 @@
       "ihr",
       "ihrer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/sie"
+    "source_url": "https://www.duden.de/rechtschreibung/sie",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-005",
@@ -197,7 +201,8 @@
       "ihm",
       "seiner"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/es_das_man"
+    "source_url": "https://www.duden.de/rechtschreibung/es_das_man",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-006",
@@ -236,7 +241,8 @@
       "uns",
       "unser"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/wir"
+    "source_url": "https://www.duden.de/rechtschreibung/wir",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-007",
@@ -275,7 +281,8 @@
       "euch",
       "euer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ihr_Anrede_2_Person"
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_Anrede_2_Person",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-008",
@@ -314,7 +321,8 @@
       "ihnen",
       "ihrer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/sie"
+    "source_url": "https://www.duden.de/rechtschreibung/sie",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-009",
@@ -355,7 +363,8 @@
       "Ihnen",
       "Ihrer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/sie"
+    "source_url": "https://www.duden.de/rechtschreibung/sie",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-010",
@@ -371,7 +380,8 @@
     "search_forms": [
       "es"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/es_das_man"
+    "source_url": "https://www.duden.de/rechtschreibung/es_das_man",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-011",
@@ -464,7 +474,8 @@
       "meines",
       "meins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/mein_Possessivpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/mein_Possessivpronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-012",
@@ -557,7 +568,8 @@
       "deines",
       "deins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/dein_Possessivpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/dein_Possessivpronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-013",
@@ -650,7 +662,8 @@
       "seines",
       "seins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/sein_Pronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/sein_Pronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-014",
@@ -743,7 +756,8 @@
       "ihres",
       "ihrs"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-015",
@@ -836,7 +850,8 @@
       "ihres",
       "ihrs"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-016",
@@ -936,7 +951,8 @@
       "unserer",
       "unseres"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/unser_Possessivpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/unser_Possessivpronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-017",
@@ -1038,7 +1054,8 @@
       "eures",
       "euers"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/euer_Anrede_wessen"
+    "source_url": "https://www.duden.de/rechtschreibung/euer_Anrede_wessen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-018",
@@ -1131,7 +1148,8 @@
       "Ihres",
       "Ihrs"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre"
+    "source_url": "https://www.duden.de/rechtschreibung/ihr_sie_ihre",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-019",
@@ -1183,7 +1201,8 @@
       "mir",
       "dir"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/sich"
+    "source_url": "https://www.duden.de/rechtschreibung/sich",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-020",
@@ -1219,7 +1238,8 @@
       "einen",
       "einem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/man_jemand"
+    "source_url": "https://www.duden.de/rechtschreibung/man_jemand",
+    "example_cloze": "Hier darf {{c1::man}} nicht rauchen."
   },
   {
     "id": "pronoun-021",
@@ -1260,7 +1280,8 @@
       "jemandes",
       "jemands"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/jemand"
+    "source_url": "https://www.duden.de/rechtschreibung/jemand",
+    "example_cloze": "Ist {{c1::jemand}} zu Hause?"
   },
   {
     "id": "pronoun-022",
@@ -1301,7 +1322,8 @@
       "niemandes",
       "niemands"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/niemand"
+    "source_url": "https://www.duden.de/rechtschreibung/niemand",
+    "example_cloze": "Ich kenne hier {{c1::niemanden}}."
   },
   {
     "id": "pronoun-023",
@@ -1317,7 +1339,8 @@
     "search_forms": [
       "etwas"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/etwas"
+    "source_url": "https://www.duden.de/rechtschreibung/etwas",
+    "example_cloze": "Möchtest du {{c1::etwas}} trinken?"
   },
   {
     "id": "pronoun-024",
@@ -1333,7 +1356,8 @@
     "search_forms": [
       "nichts"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/nichts"
+    "source_url": "https://www.duden.de/rechtschreibung/nichts",
+    "example_cloze": "Ich habe {{c1::nichts}} gehört."
   },
   {
     "id": "pronoun-025",
@@ -1375,7 +1399,8 @@
       "allen",
       "aller"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/all"
+    "source_url": "https://www.duden.de/rechtschreibung/all",
+    "example_cloze": "{{c1::Alle}} sind schon da."
   },
   {
     "id": "pronoun-026",
@@ -1439,7 +1464,8 @@
       "den anderen",
       "der anderen"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/andere"
+    "source_url": "https://www.duden.de/rechtschreibung/andere",
+    "example_cloze": "Die {{c1::anderen}} kommen später."
   },
   {
     "id": "pronoun-027",
@@ -1480,7 +1506,8 @@
       "beiden",
       "beider"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/beide"
+    "source_url": "https://www.duden.de/rechtschreibung/beide",
+    "example_cloze": "Wir nehmen {{c1::beide}}."
   },
   {
     "id": "pronoun-028",
@@ -1533,7 +1560,8 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/jeder",
     "forms_note_ru": "В Genitiv перед существительным мужского или среднего рода также возможно jeden: jedes/jeden Jahres.",
-    "forms_note_en": "In the genitive before a masculine or neuter noun, jeden is also possible: jedes/jeden Jahres."
+    "forms_note_en": "In the genitive before a masculine or neuter noun, jeden is also possible: jedes/jeden Jahres.",
+    "example_cloze": "{{c1::Jeder}} bekommt ein Stück Kuchen."
   },
   {
     "id": "pronoun-029",
@@ -1574,7 +1602,8 @@
       "einigen",
       "einiger"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/einige"
+    "source_url": "https://www.duden.de/rechtschreibung/einige",
+    "example_cloze": "{{c1::Einige}} bleiben heute zu Hause."
   },
   {
     "id": "pronoun-030",
@@ -1613,7 +1642,8 @@
       "mehreren",
       "mehrerer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/mehrere"
+    "source_url": "https://www.duden.de/rechtschreibung/mehrere",
+    "example_cloze": "{{c1::Mehrere}} haben schon geantwortet."
   },
   {
     "id": "pronoun-031",
@@ -1655,7 +1685,8 @@
       "sämtliches",
       "sämtlichem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/saemtlich"
+    "source_url": "https://www.duden.de/rechtschreibung/saemtlich",
+    "example_cloze": "{{c1::Sämtliche}} Unterlagen liegen auf dem Tisch."
   },
   {
     "id": "pronoun-032",
@@ -1714,7 +1745,8 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/manch",
     "forms_note_ru": "Genitiv единственного числа мужского и среднего рода употребляется перед существительным: manchen (реже manches) Missverständnisses.",
-    "forms_note_en": "The masculine and neuter singular genitive is used before a noun: manchen (less often manches) Missverständnisses."
+    "forms_note_en": "The masculine and neuter singular genitive is used before a noun: manchen (less often manches) Missverständnisses.",
+    "example_cloze": "{{c1::Manche}} fahren lieber mit dem Zug."
   },
   {
     "id": "pronoun-033",
@@ -1771,7 +1803,8 @@
       "diesen",
       "diesem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/dieser"
+    "source_url": "https://www.duden.de/rechtschreibung/dieser",
+    "example_cloze": "{{c1::Dieses}} Buch gefällt mir."
   },
   {
     "id": "pronoun-034",
@@ -1830,7 +1863,8 @@
       "derselben",
       "desselben"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/derselbe"
+    "source_url": "https://www.duden.de/rechtschreibung/derselbe",
+    "example_cloze": "Wir fahren mit {{c1::demselben}} Bus."
   },
   {
     "id": "pronoun-035",
@@ -1851,7 +1885,8 @@
       "selbes",
       "selber"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/selbe"
+    "source_url": "https://www.duden.de/rechtschreibung/selbe",
+    "example_cloze": "Wir haben am {{c1::selben}} Tag Geburtstag."
   },
   {
     "id": "pronoun-036",
@@ -1908,7 +1943,8 @@
       "solchen",
       "solchem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/solcher"
+    "source_url": "https://www.duden.de/rechtschreibung/solcher",
+    "example_cloze": "{{c1::Solche}} Fragen höre ich oft."
   },
   {
     "id": "pronoun-037",
@@ -1968,7 +2004,8 @@
       "deren",
       "derer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/der_Demonstrativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/der_Demonstrativpronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-038",
@@ -2028,7 +2065,8 @@
       "deren",
       "derer"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/der_Relativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/der_Relativpronomen",
+    "wortschatz_excluded": true
   },
   {
     "id": "pronoun-039",
@@ -2084,7 +2122,8 @@
       "welchen",
       "welchem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/welcher_Interrogativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/welcher_Interrogativpronomen",
+    "example_cloze": "{{c1::Welches}} möchtest du nehmen?"
   },
   {
     "id": "pronoun-040",
@@ -2134,16 +2173,17 @@
       "welchen",
       "welchem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/welcher_Relativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/welcher_Relativpronomen",
+    "example_cloze": "Das ist die Straße, {{c1::welche}} zum Bahnhof führt."
   },
   {
     "id": "pronoun-041",
     "word": "wer",
     "translation_ru": "кто",
     "translation_en": "who",
-    "example_de": "Wem gehört diese Tasche?",
-    "example_ru": "Кому принадлежит эта сумка?",
-    "example_en": "Who does this bag belong to?",
+    "example_de": "Wer kommt heute?",
+    "example_ru": "Кто придёт сегодня?",
+    "example_en": "Who is coming today?",
     "forms": [
       {
         "label": "Deklination",
@@ -2174,7 +2214,8 @@
       "wem",
       "wessen"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/wer_Interrogativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/wer_Interrogativpronomen",
+    "example_cloze": "{{c1::Wer}} kommt heute?"
   },
   {
     "id": "pronoun-042",
@@ -2209,7 +2250,8 @@
       "was",
       "wessen"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen",
+    "example_cloze": "{{c1::Was}} möchtest du essen?"
   },
   {
     "id": "pronoun-043",
@@ -2246,7 +2288,8 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/was_Relativpronomen",
     "forms_note_ru": "Wessen — редкий Genitiv. С предлогом обычно используются wo(r)-формы, например worüber. Отдельной обычной формы Dativ нет.",
-    "forms_note_en": "Wessen is a rare genitive. With a preposition, wo(r)-forms such as worüber are usual. There is no ordinary separate dative form."
+    "forms_note_en": "Wessen is a rare genitive. With a preposition, wo(r)-forms such as worüber are usual. There is no ordinary separate dative form.",
+    "example_cloze": "Das ist alles, {{c1::was}} ich weiß."
   },
   {
     "id": "pronoun-044",
@@ -2329,7 +2372,8 @@
       "eines",
       "eins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/ein_Pronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/ein_Pronomen",
+    "example_cloze": "Ich brauche einen Stift. Hast du {{c1::einen}}?"
   },
   {
     "id": "pronoun-045",
@@ -2422,7 +2466,8 @@
       "keines",
       "keins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/kein"
+    "source_url": "https://www.duden.de/rechtschreibung/kein",
+    "example_cloze": "Ich habe {{c1::keinen}} Stift."
   },
   {
     "id": "pronoun-046",
@@ -2508,7 +2553,8 @@
       "irgendeines",
       "irgendeins"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/irgendein"
+    "source_url": "https://www.duden.de/rechtschreibung/irgendein",
+    "example_cloze": "Hast du {{c1::irgendeinen}} Vorschlag?"
   },
   {
     "id": "pronoun-047",
@@ -2530,16 +2576,17 @@
       "was für einen",
       "was für einem"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen"
+    "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen",
+    "example_cloze": "{{c1::Was für ein}} Buch liest du?"
   },
   {
     "id": "pronoun-048",
     "word": "viel",
     "translation_ru": "много",
     "translation_en": "much; a lot",
-    "example_de": "Ich habe heute viel zu tun.",
-    "example_ru": "У меня сегодня много дел.",
-    "example_en": "I have a lot to do today.",
+    "example_de": "Ich habe vieles gelernt.",
+    "example_ru": "Я многому научился.",
+    "example_en": "I have learned many things.",
     "forms": null,
     "usage_note_ru": "Обычно без окончания с неисчисляемым: viel Zeit. Без существительного: vieles («многое»), например Ich habe vieles gelernt; in vielem («во многом»). Для счётных предметов — viele.",
     "usage_note_en": "Usually uninflected with an uncountable noun: viel Zeit. Without a noun: vieles (many things), as in Ich habe vieles gelernt; in vielem (in many respects). For countable things, use viele.",
@@ -2549,7 +2596,8 @@
       "vielem",
       "vielen"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei"
+    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei",
+    "example_cloze": "Ich habe {{c1::vieles}} gelernt."
   },
   {
     "id": "pronoun-049",
@@ -2588,16 +2636,17 @@
       "vielen",
       "vieler"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei"
+    "source_url": "https://www.duden.de/rechtschreibung/viel_zahlreich_vielerlei",
+    "example_cloze": "{{c1::Viele}} fahren mit dem Fahrrad zur Arbeit."
   },
   {
     "id": "pronoun-050",
     "word": "wenig",
     "translation_ru": "мало",
     "translation_en": "little; not much",
-    "example_de": "Ich habe heute wenig Zeit.",
-    "example_ru": "У меня сегодня мало времени.",
-    "example_en": "I have little time today.",
+    "example_de": "Ich weiß nur weniges.",
+    "example_ru": "Я знаю лишь немногое.",
+    "example_en": "I know only a few things.",
     "forms": null,
     "usage_note_ru": "Обычно без окончания с неисчисляемым: wenig Geld. Без существительного: weniges («немногое»), например Ich weiß nur weniges; mit wenigem («с немногим»). Для счётных предметов — wenige.",
     "usage_note_en": "Usually uninflected with an uncountable noun: wenig Geld. Without a noun: weniges (a few things), as in Ich weiß nur weniges; mit wenigem (with little). For countable things, use wenige.",
@@ -2607,7 +2656,8 @@
       "wenigem",
       "wenigen"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel"
+    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel",
+    "example_cloze": "Ich weiß nur {{c1::weniges}}."
   },
   {
     "id": "pronoun-051",
@@ -2646,6 +2696,7 @@
       "wenigen",
       "weniger"
     ],
-    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel"
+    "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel",
+    "example_cloze": "Nur {{c1::wenige}} haben die Frage richtig beantwortet."
   }
 ]

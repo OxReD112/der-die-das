@@ -409,7 +409,9 @@
     });
     drawChips();
 
-    function save() {
+    let validatingSave=false;
+    async function save() {
+      if(validatingSave)return;
       err.textContent = "";
       const fields = {
         sentence: clozeText(toks),
@@ -434,6 +436,12 @@
         return;
       }
       try {
+        if (opts.validate) {
+          validatingSave=true;
+          let problems;
+          try { problems=await opts.validate(); } finally { validatingSave=false; }
+          if(problems.length){err.textContent=problems.map(I.describe).join("; ");return;}
+        }
         if (opts.draft) {
           const normalized = C.normalize(fields);
           if (normalized.reason) { err.textContent=normalized.reason; return; }
@@ -481,31 +489,72 @@
     if (!editing) setTimeout(() => fSentence.focus(), 60);
   }
 
-  function viewDictionaryConfirm(prefill) {
+  function viewDictionaryConfirm(prefill, validate) {
     card.textContent = "";
     card.appendChild(head("Your Own Words", embedded ? close : viewMain));
     card.appendChild(el("p", "coll-text", "Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
     card.appendChild(el("p", "coll-text", "Continue to add this word to your own collection?"));
     const b = el("div", "coll-form-buttons");
-    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill, cancel: embedded ? close : viewMain })));
+    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill, validate, cancel: embedded ? close : viewMain })));
     b.appendChild(button("coll-link", "Cancel", close));
     card.appendChild(b);
   }
 
-  const dictionaryPrefill = item => window.WortschatzDictionaryCard.create(item);
+  const dictionaryPrefill = (item, lang) => window.WortschatzDictionaryCard.create(item, lang);
 
+  const I = window.WortschatzDictionaryImport;
+  const DICTIONARY_PENDING = I.DIRECT;
+  const processingDictionaryRequests = new Set();
   let lastDictionaryRequest = "";
-  function addDictionaryWord(request, onSaved) {
-    if (!request || !request.id || request.id === lastDictionaryRequest || !request.item) return;
-    lastDictionaryRequest = request.id;
-    dictionarySaved = onSaved;
-    const prefill = dictionaryPrefill(request.item);
-    open(() => own() ? viewForm(null, { prefill, cancel: embedded ? close : viewMain }) : viewDictionaryConfirm(prefill));
+  function clearDictionaryPending(id) {
+    if (embedded) return;
+    try {
+      const pending = JSON.parse(sessionStorage.getItem(DICTIONARY_PENDING) || "null");
+      if (pending?.id === id) sessionStorage.removeItem(DICTIONARY_PENDING);
+    } catch (error) {
+      console.error("Could not clear the dictionary request", error);
+    }
+  }
+  function viewDictionaryError(error) {
+    card.textContent = "";
+    card.appendChild(head("Word Cannot Be Added", embedded ? close : viewMain));
+    const reasons = {
+      DICTIONARY_ENTRY_MISSING: "The dictionary entry is missing.",
+      DICTIONARY_ENTRY_EXCLUDED: "This pronoun is excluded from Wortschatz.",
+      DICTIONARY_CLOZE_INVALID: "The dictionary example has invalid answer markup and needs correction."
+    };
+    const label = [error.base, error.dictionaryId].filter(Boolean).join(" · ") || "Unknown word";
+    card.appendChild(el("p", "coll-text", label));
+    card.appendChild(el("p", "coll-error", reasons[error.code] || "The word could not be prepared. Please try again.", {role: "alert"}));
+    if (error.code === "DICTIONARY_CLOZE_INVALID") card.appendChild(el("p", "coll-hint", error.reason));
+    card.appendChild(button("coll-main", "Close", close));
+  }
+  async function addDictionaryWord(request, onSaved) {
+    if (!request?.id || request.version !== I.VERSION || request.id === lastDictionaryRequest || processingDictionaryRequests.has(request.id)) return;
+    processingDictionaryRequests.add(request.id);
+    try {
+      const dictionary=await I.load(),item=dictionary.get(request.dictionaryId);
+      const check=window.WortschatzDictionaryCard.check(item);
+      if(!check.available) {
+        open(()=>viewDictionaryError({...check.error,dictionaryId:request.dictionaryId}));
+        lastDictionaryRequest=request.id;clearDictionaryPending(request.id);return;
+      }
+      const row=I.row(item,request.lang,dictionaryPrefill(item,request.lang));
+      const issues=I.validate([row],dictionary);
+      if(issues.length){open(()=>viewDictionaryError({...issues[0],code:'DICTIONARY_CLOZE_INVALID'}));lastDictionaryRequest=request.id;clearDictionaryPending(request.id);return;}
+      const validate=async()=>I.validate([row],await I.load());
+      dictionarySaved=onSaved;
+      open(()=>own() ? viewForm(null,{prefill:row.card,validate,cancel:embedded ? close : viewMain}) : viewDictionaryConfirm(row.card,validate));
+      lastDictionaryRequest=request.id;clearDictionaryPending(request.id);
+    } catch(error) {
+      console.error("Could not prepare the dictionary word",error);
+      open(()=>viewDictionaryError(error));
+    } finally {processingDictionaryRequests.delete(request.id);}
   }
 
-  const READING_PENDING = "deutschWortschatzPendingReadingWordsV1";
-  function addReadingWords(request) {
-    if (!request?.id || !Array.isArray(request.cards) || !request.cards.length) return;
+  const READING_PENDING = I.READING;
+  async function addReadingWords(request) {
+    if (!request?.id || request.version !== I.VERSION || !Array.isArray(request.rows) || !request.rows.length) return;
     request.excluded ||= [];
     request.placement ||= "end";
     request.name ||= "My Words";
@@ -516,6 +565,10 @@
       const sc=el("div","coll-scroll");card.appendChild(sc);
       sc.appendChild(el("p","coll-text",`Review words from „${String(request.title || "Bibliothek")}“. Tap any word to edit it before adding.`));
       if (request.unavailable) sc.appendChild(el("p","coll-hint",`${request.unavailable} words without learning cards remain saved in Bibliothek.`));
+      for (const issue of request.diagnostics || []) {
+        const reason=issue.code === "DICTIONARY_ENTRY_EXCLUDED" ? "excluded from Wortschatz" : issue.code === "DICTIONARY_ENTRY_MISSING" ? "dictionary entry missing" : "dictionary example needs correction";
+        sc.appendChild(el("p", "coll-hint", `${issue.base || "Unknown word"}${issue.dictionaryId ? " ("+issue.dictionaryId+")" : ""}: ${reason}.`));
+      }
       if (!own()) {
         sc.appendChild(el("p","coll-text","Your own words replace the Starter-Set. Its progress is kept so you can return later."));
         sc.appendChild(el("label","coll-label","Collection Name",{for:"readingCollectionName"}));
@@ -523,10 +576,11 @@
         nameInput.addEventListener("input",()=>{request.name=nameInput.value;persist();});sc.appendChild(nameInput);
       }
       const box=el("div","coll-list");sc.appendChild(box);
-      const selected=()=>request.cards.filter((_,index)=>!request.excluded.includes(index));
+      const selected=()=>request.rows.map((row,index)=>({row,index})).filter(({index})=>!request.excluded.includes(index));
       const confirmationLabel=()=>`${own()?"Add":"Create Collection with"} ${selected().length} ${selected().length===1?"Word":"Words"}`;
-      let confirm;
-      request.cards.forEach((word,index)=>{
+      let confirm, confirming=false;
+      request.rows.forEach((draftRow,index)=>{
+        const word=draftRow.card || {};
         const row=el("div","coll-word reading-review-row");
         const check=el("input",null,null,{type:"checkbox","aria-label":`Include ${word.base || "word"}`});
         check.checked=!request.excluded.includes(index);
@@ -536,7 +590,7 @@
           persist();confirm.textContent=confirmationLabel();confirm.disabled=!selected().length;
         });
         const edit=button("coll-word is-btn","",()=>viewForm(word,{draft:true,cancel:()=>review(),onSaved:fields=>{
-          request.cards[index]=fields;persist();review();
+          draftRow.card=fields;draftRow.edited=true;persist();review();
         }}));
         edit.appendChild(el("span","coll-de",word.base || word.target || "Word"));
         edit.appendChild(el("span","coll-tr",plainValue(word.translation)));
@@ -553,11 +607,17 @@
       }
       const error=el("p","coll-error",message);sc.appendChild(error);
       const buttons=el("div","coll-form-buttons");sc.appendChild(buttons);
-      confirm=button("coll-main",confirmationLabel(),()=>{
-        confirm.disabled=true;
+      confirm=button("coll-main",confirmationLabel(),async()=>{
+        if(confirming)return;
+        confirming=true;
+        for(const control of sc.querySelectorAll("input,button,select"))control.disabled=true;
         try {
-          const items=selected(),prepared=C.prepare(items,own()?C.cards():[]);
-          if(prepared.skipped.length){error.textContent="Some words need a sentence, a marked answer or a meaning. Edit them before adding.";return;}
+          const selection=selected(),rows=selection.map(({row})=>row);
+          const issues=I.validate(rows,await I.load());
+          if(issues.length){error.textContent=issues.map(issue=>I.describe({...issue,n:selection[issue.n-1].index+1})).join("; ");return;}
+          persist();
+          const items=rows.map(row=>row.card),prepared=C.prepare(items,own()?C.cards():[]);
+          if(prepared.skipped.length){error.textContent=prepared.skipped.map(issue=>I.describe({...issue,n:selection[issue.n-1].index+1,dictionaryId:rows[issue.n-1].dictionaryId,base:rows[issue.n-1].card.base})).join("; ");return;}
           if(!prepared.cards.length){error.textContent="These words are already in your collection.";return;}
           const result=own()?C.add(items,{placement:request.placement}):C.create(request.name.trim() || "My Words",items);
           if(!result.added){error.textContent="No words were added.";return;}
@@ -566,12 +626,12 @@
           refreshButtons();viewMain();
           const notice=el("p","coll-text",`${result.added} words added${request.placement==="next"?" as the next new words":""}.${result.duplicates?` ${result.duplicates} already in your collection.`:""}`);
           card.insertBefore(notice,card.children[1]);notice.setAttribute("role","status");
-          const rows=card.querySelectorAll('.coll-list .coll-word');
+          const listRows=card.querySelectorAll('.coll-list .coll-word');
           const added=new Set(result.ids || C.cards().map(word=>word.id));
           const index=C.cards().findIndex(word=>added.has(word.id));
-          if(index>=0)requestAnimationFrame(()=>rows[index]?.scrollIntoView({block:"center"}));
+          if(index>=0)requestAnimationFrame(()=>listRows[index]?.scrollIntoView({block:"center"}));
         }catch(e){error.textContent="The words could not be saved. Your review is kept; please try again.";}
-        finally{confirm.disabled=!selected().length;}
+        finally{confirming=false;for(const control of sc.querySelectorAll("input,button,select"))control.disabled=false;confirm.disabled=!selected().length;}
       });
       confirm.disabled=!selected().length;buttons.appendChild(confirm);
       buttons.appendChild(button("coll-link","Discard This Batch",()=>{
@@ -581,7 +641,13 @@
         card.appendChild(button("coll-link","Discard Batch",()=>{sessionStorage.removeItem(READING_PENDING);viewMain();}));
       }));
     }
-    persist();open(()=>review());
+    try {
+      const issues=I.validate(request.rows,await I.load());
+      persist();open(()=>review(issues.map(I.describe).join("; ")));
+    } catch(error) {
+      console.error("Could not restore the reading draft",error);
+      open(()=>review("The draft could not be prepared. It is kept; please try again."));
+    }
   }
 
   function viewRemove(w) {
@@ -950,26 +1016,37 @@ Rules:
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
   }
   window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord };
+  // Only unfinished legacy imports are discarded; localStorage is untouched.
+  if (!embedded) {
+    try {
+      sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
+      sessionStorage.removeItem("deutschWortschatzPendingReadingWordsV1");
+    } catch(error) { console.error("Could not discard legacy imports",error); }
+  }
   if (embedded) return; // Reader opens explicitly; pending imports belong to Wortschatz.
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.data?.type !== "deutsch:wortschatz-add") return;
-    try {
-      const pending = JSON.parse(sessionStorage.getItem("deutschWortschatzPendingDictionaryWordV1") || "null");
-      if (pending && pending.id === event.data.request?.id) sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
-    } catch (e) {}
     addDictionaryWord(event.data.request);
   });
   try {
-    const pending = sessionStorage.getItem("deutschWortschatzPendingDictionaryWordV1");
-    if (pending) {
-      sessionStorage.removeItem("deutschWortschatzPendingDictionaryWordV1");
-      addDictionaryWord(JSON.parse(pending));
-    }
-  } catch (e) {}
+    const pending = sessionStorage.getItem(DICTIONARY_PENDING);
+    if (pending) addDictionaryWord(JSON.parse(pending));
+  } catch (error) {
+    console.error("Could not restore the dictionary request", error);
+    open(() => viewDictionaryError(error));
+  }
   try {
-    const pending = sessionStorage.getItem("deutschWortschatzPendingReadingWordsV1");
+    const pending = sessionStorage.getItem(READING_PENDING);
     if (pending) {
       addReadingWords(JSON.parse(pending));
     }
-  } catch (e) {}
+  } catch (error) {
+    console.error("Could not read the reading draft",error);
+    open(()=>{
+      card.textContent="";
+      card.appendChild(head("Draft Could Not Be Restored",close));
+      card.appendChild(el("p","coll-error","Your draft is kept. Please try again.",{role:"alert"}));
+      card.appendChild(button("coll-main","Close",close));
+    });
+  }
 })();
