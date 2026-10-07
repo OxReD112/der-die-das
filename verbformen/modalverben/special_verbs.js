@@ -1,7 +1,7 @@
 // Modalverben — the sentences of the exercise (können, müssen, dürfen, sollen, wollen, mögen).
 // Fields: infinitive, form (e.g. "Präteritum" — the progress item is infinitive + form), sentence with „___“
 // for the gap (a sentence that starts with the verb may leave it out: then the answer is found in the sentence),
-// answer, translation and explanation ({ ru, en }).
+// answer, intention (short meaning cue), meaning, meaningContrast, translation and explanation ({ ru, en }).
 // Each sentence's difficulty is stored under infinitive|form|sentence, so a sentence changed here starts
 // again at difficulty 1. Changing an infinitive or form name resets that item's progress.
 window.SPECIAL_VERB_EXERCISES = [
@@ -9,1251 +9,1719 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "können",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"könnte","meaning":{"ru":"könnte — условная возможность или более мягкая просьба.","en":"könnte — a conditional possibility or a more tentative request."}}],
+    meaning: {"ru":"kann — сегодня прийти не получается.","en":"kann — coming today is not possible."},
+    meaningContrast: {"ru":"konnte — возможность в прошлом; kann — возможность сейчас.","en":"konnte — ability or possibility in the past; kann — ability or possibility now."},
     sentence: "Ich ___ heute leider nicht kommen.",
     answer: "kann",
     translation: { ru: "Я сегодня, к сожалению, не могу прийти.", en: "Unfortunately I can't come today." },
-    explanation: {
-      ru: "настоящее время: ich / er kann — без -t; в ед. ч. без умлаута: kann, но ihr könnt.",
-      en: "present: ich / er kann — no -t; no umlaut in the singular: kann, but ihr könnt."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"können → ich kann","en":"können → ich kann"}
   },
   {
     infinitive: "können",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"könntest","meaning":{"ru":"könntest — условная возможность или более мягкая просьба.","en":"könntest — a conditional possibility or a more tentative request."}}],
+    meaning: {"ru":"kannst — прямая просьба о помощи.","en":"kannst — a direct request for help."},
+    meaningContrast: {"ru":"könntest — более мягкая просьба; kannst — прямая, тоже может быть вежливой.","en":"könntest — a more tentative request; kannst — direct, and can also be polite."},
     sentence: "___ du mir kurz helfen?",
     answer: "Kannst",
     translation: { ru: "Можешь мне быстро помочь?", en: "Can you help me for a moment?" },
-    explanation: {
-      ru: "настоящее время: ich / er kann — без -t; в ед. ч. без умлаута: kann, но ihr könnt.",
-      en: "present: ich / er kann — no -t; no umlaut in the singular: kann, but ihr könnt."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"können → du kannst","en":"können → du kannst"}
   },
   {
     infinitive: "können",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"konnte","meaning":{"ru":"konnte — возможность в прошлом.","en":"konnte — ability or possibility in the past."}}],
+    meaning: {"ru":"kann — он умеет хорошо готовить.","en":"kann — he has good cooking skills."},
+    meaningContrast: {"ru":"konnte — возможность в прошлом; kann — возможность сейчас.","en":"konnte — ability or possibility in the past; kann — ability or possibility now."},
     sentence: "Er ___ sehr gut kochen.",
     answer: "kann",
     translation: { ru: "Он очень хорошо готовит.", en: "He can cook very well." },
-    explanation: {
-      ru: "настоящее время: ich / er kann — без -t; в ед. ч. без умлаута: kann, но ihr könnt.",
-      en: "present: ich / er kann — no -t; no umlaut in the singular: kann, but ihr könnt."
-    }
+    grammarPerson: "er",
+    explanation: {"ru":"können → er kann","en":"können → er kann"}
   },
   {
     infinitive: "können",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"könntet","meaning":{"ru":"könntet — условная возможность или более мягкая просьба.","en":"könntet — a conditional possibility or a more tentative request."}}],
+    meaning: {"ru":"könnt — прямой вопрос о возможности прийти завтра.","en":"könnt — a direct question about coming tomorrow."},
+    meaningContrast: {"ru":"könntet — более мягкая просьба; könnt — прямая, тоже может быть вежливой.","en":"könntet — a more tentative request; könnt — direct, and can also be polite."},
     sentence: "___ ihr morgen früher kommen?",
     answer: "Könnt",
     translation: { ru: "Вы можете завтра прийти пораньше?", en: "Can you come earlier tomorrow?" },
-    explanation: {
-      ru: "настоящее время: ich / er kann — без -t; в ед. ч. без умлаута: kann, но ihr könnt.",
-      en: "present: ich / er kann — no -t; no umlaut in the singular: kann, but ihr könnt."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"können → ihr könnt","en":"können → ihr könnt"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"konnte — вчера прийти не получилось.","en":"konnte — coming yesterday was not possible."},
+    meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Gestern ___ ich nicht zur Arbeit kommen.",
     answer: "konnte",
     translation: { ru: "Вчера я не могла прийти на работу.", en: "Yesterday I couldn't come to work." },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"können → konnte → ich konnte","en":"können → konnte → ich konnte"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"konnte — в детстве умела быстро бегать.","en":"konnte — had the ability to run fast as a child."},
+    meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Als Kind ___ ich sehr schnell laufen.",
     answer: "konnte",
     translation: { ru: "В детстве я могла очень быстро бегать.", en: "As a child I could run very fast." },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"können → konnte → ich konnte","en":"können → konnte → ich konnte"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"konnten — погода не позволила остаться на улице.","en":"konnten — the weather prevented staying outside."},
+    meaningContrast: {"ru":"können — возможность сейчас; konnten — возможность в прошлом.","en":"können — ability or possibility now; konnten — ability or possibility in the past."},
     sentence: "Wir ___ wegen des Wetters nicht draußen bleiben.",
     answer: "konnten",
     translation: {
       ru: "Мы не могли оставаться на улице из-за погоды.",
       en: "We couldn't stay outside because of the weather."
     },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "wir",
+    explanation: {"ru":"können → konnte → wir konnten","en":"können → konnte → wir konnten"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"konnte — открыть дверь не удалось.","en":"konnte — opening the door was not possible."},
+    meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Er ___ die Tür nicht öffnen.",
     answer: "konnte",
     translation: { ru: "Он не мог открыть дверь.", en: "He couldn't open the door." },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"können → konnte → er konnte","en":"können → konnte → er konnte"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"konntest — вопрос о возможности выспаться вчера.","en":"konntest — a question about being able to sleep well yesterday."},
+    meaningContrast: {"ru":"kannst — возможность сейчас; konntest — возможность в прошлом.","en":"kannst — ability or possibility now; konntest — ability or possibility in the past."},
     sentence: "Konntest du gestern gut schlafen?",
     answer: "Konntest",
     translation: { ru: "Ты вчера мог хорошо поспать?", en: "Were you able to sleep well last night?" },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "du",
+    explanation: {"ru":"können → konnte → du konntest","en":"können → konnte → du konntest"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"könnt","meaning":{"ru":"könnt — возможность выражена прямо; вопрос может оставаться вежливым.","en":"könnt — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"konntet — вопрос о причине прошлой невозможности.","en":"konntet — a question about why coming earlier was not possible."},
+    meaningContrast: {"ru":"könnt — возможность сейчас; konntet — возможность в прошлом.","en":"könnt — ability or possibility now; konntet — ability or possibility in the past."},
     sentence: "Warum ___ ihr nicht früher kommen?",
     answer: "konntet",
     translation: { ru: "Почему вы не смогли прийти раньше?", en: "Why couldn't you come earlier?" },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"können → konnte → ihr konntet","en":"können → konnte → ihr konntet"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"konnte — ответить на вопрос не удалось.","en":"konnte — answering the question was not possible."},
+    meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Sie ___ die Frage nicht beantworten.",
     answer: "konnte",
     translation: { ru: "Она не могла ответить на вопрос.", en: "She couldn't answer the question." },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"können → konnte → sie konnte","en":"können → konnte → sie konnte"}
   },
   {
     infinitive: "können",
     form: "Präteritum",
     person: "sie/Sie",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"konnten — в те выходные появилась возможность выспаться.","en":"konnten — those days off allowed the children to sleep in."},
+    meaningContrast: {"ru":"können — возможность сейчас; konnten — возможность в прошлом.","en":"können — ability or possibility now; konnten — ability or possibility in the past."},
     sentence: "Am Wochenende ___ die Kinder endlich ausschlafen.",
     answer: "konnten",
     translation: {
       ru: "На выходных дети наконец смогли выспаться.",
       en: "At the weekend the children could finally sleep in."
     },
-    explanation: { ru: "возможность или способность в прошлом.", en: "ability or possibility in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"können → konnte → sie konnten","en":"können → konnte → sie konnten"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könnten — смягчённая просьба о помощи.","en":"könnten — a tentative request for help."},
+    meaningContrast: {"ru":"können — более прямой вопрос или просьба; könnten — мягче.","en":"können — a more direct question or request; könnten — more tentative."},
     sentence: "___ Sie mir bitte helfen?",
     answer: "Könnten",
     translation: { ru: "Не могли бы Вы мне помочь?", en: "Could you help me, please?" },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "Sie",
+    explanation: {"ru":"konnte → könnte → Sie könnten","en":"konnte → könnte → Sie könnten"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "ihr",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"könnt","meaning":{"ru":"könnt — возможность выражена прямо; вопрос может оставаться вежливым.","en":"könnt — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könntet — смягчённая просьба говорить тише.","en":"könntet — a tentative request to be quieter."},
+    meaningContrast: {"ru":"könnt — более прямой вопрос или просьба; könntet — мягче.","en":"könnt — a more direct question or request; könntet — more tentative."},
     sentence: "___ ihr bitte etwas leiser sein?",
     answer: "Könntet",
     translation: { ru: "Не могли бы вы быть потише?", en: "Could you be a bit quieter, please?" },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"konnte → könnte → ihr könntet","en":"konnte → könnte → ihr könntet"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könnten — мягкое предложение поговорить завтра.","en":"könnten — a tentative suggestion to talk tomorrow."},
+    meaningContrast: {"ru":"können — более прямой вопрос или просьба; könnten — мягче.","en":"können — a more direct question or request; könnten — more tentative."},
     sentence: "___ wir morgen darüber sprechen?",
     answer: "Könnten",
     translation: { ru: "Могли бы мы поговорить об этом завтра?", en: "Could we talk about it tomorrow?" },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "wir",
+    explanation: {"ru":"konnte → könnte → wir könnten","en":"konnte → könnte → wir könnten"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "du",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"kannst","meaning":{"ru":"kannst — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kannst — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könntest — смягчённая просьба прислать файл.","en":"könntest — a tentative request to send the file."},
+    meaningContrast: {"ru":"kannst — более прямой вопрос или просьба; könntest — мягче.","en":"kannst — a more direct question or request; könntest — more tentative."},
     sentence: "___ du mir bitte die Datei schicken?",
     answer: "Könntest",
     translation: { ru: "Не мог(ла) бы ты прислать мне файл?", en: "Could you send me the file, please?" },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "du",
+    explanation: {"ru":"konnte → könnte → du könntest","en":"konnte → könnte → du könntest"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [],
+    meaning: {"ru":"könnte — можно было бы остаться, если понадобится.","en":"könnte — staying longer would be possible if needed."},
+    meaningContrast: {"ru":"kann — возможность утверждается прямо; könnte — рассматривается как вариант или зависит от условия.","en":"kann — states possibility directly; könnte — considers an option or depends on a condition."},
     sentence: "Ich ___ heute länger bleiben, wenn es nötig wäre.",
     answer: "könnte",
     translation: {
       ru: "Я могла бы сегодня остаться дольше, если бы это было необходимо.",
       en: "I could stay longer today if it were necessary."
     },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "ich",
+    explanation: {"ru":"konnte → könnte → ich könnte","en":"konnte → könnte → ich könnte"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könnten — поездка на машине — один из вариантов.","en":"könnten — travelling by car is one possible option."},
+    meaningContrast: {"ru":"können — возможность утверждается прямо; könnten — рассматривается как вариант или зависит от условия.","en":"können — states possibility directly; könnten — considers an option or depends on a condition."},
     sentence: "Wir ___ mit dem Auto fahren, aber der Zug ist bequemer.",
     answer: "könnten",
     translation: {
       ru: "Мы могли бы поехать на машине, но поезд удобнее.",
       en: "We could go by car, but the train is more comfortable."
     },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "wir",
+    explanation: {"ru":"konnte → könnte → wir könnten","en":"konnte → könnte → wir könnten"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könnte — поиск возможного действия сейчас.","en":"könnte — considering a possible action now."},
+    meaningContrast: {"ru":"kann — возможность утверждается прямо; könnte — рассматривается как вариант или зависит от условия.","en":"kann — states possibility directly; könnte — considers an option or depends on a condition."},
     sentence: "Was ___ ich jetzt machen?",
     answer: "könnte",
     translation: { ru: "Что я могла бы сейчас сделать?", en: "What could I do now?" },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "ich",
+    explanation: {"ru":"konnte → könnte → ich könnte","en":"konnte → könnte → ich könnte"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"предположение: возможно","en":"possibility"},
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    meaning: {"ru":"könnte — предположение: это может оказаться решением.","en":"könnte — a possibility: this might be a good solution."},
+    meaningContrast: {"ru":"kann — тоже выражает возможность; könnte делает предположение осторожнее.","en":"kann — also expresses possibility; könnte makes the assumption more tentative."},
     sentence: "Das ___ eine gute Lösung sein.",
     answer: "könnte",
     translation: { ru: "Это могло бы быть хорошим решением.", en: "That could be a good solution." },
-    explanation: { ru: "вежливая просьба или возможность.", en: "polite request or possibility." }
+    grammarPerson: "es",
+    explanation: {"ru":"konnte → könnte → es könnte","en":"konnte → könnte → es könnte"}
   },
   {
     infinitive: "müssen",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"müsste","meaning":{"ru":"müsste — менее категоричная или условная необходимость.","en":"müsste — a less categorical or conditional necessity."}}],
+    meaning: {"ru":"muss — сейчас необходимо уходить.","en":"muss — leaving now is necessary."},
+    meaningContrast: {"ru":"müsste — менее категоричная или условная необходимость; muss — прямая необходимость.","en":"müsste — less categorical or conditional necessity; muss — direct necessity."},
     sentence: "Ich ___ jetzt leider los.",
     answer: "muss",
     translation: { ru: "Мне, к сожалению, уже пора идти.", en: "Unfortunately I have to go now." },
-    explanation: {
-      ru: "настоящее время: ich / er muss — без окончания; в ед. ч. без умлаута: muss, но ihr müsst.",
-      en: "present: ich / er muss — no ending; no umlaut in the singular: muss, but ihr müsst."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"müssen → ich muss","en":"müssen → ich muss"}
   },
   {
     infinitive: "müssen",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"müsstest","meaning":{"ru":"müsstest — менее категоричная или условная необходимость.","en":"müsstest — a less categorical or conditional necessity."}}],
+    meaning: {"ru":"musst — вопрос о необходимости работать завтра.","en":"musst — a question about needing to work tomorrow."},
+    meaningContrast: {"ru":"müsstest — менее категоричная или условная необходимость; musst — прямая необходимость.","en":"müsstest — less categorical or conditional necessity; musst — direct necessity."},
     sentence: "___ du morgen arbeiten?",
     answer: "Musst",
     translation: { ru: "Тебе завтра нужно работать?", en: "Do you have to work tomorrow?" },
-    explanation: {
-      ru: "настоящее время: ich / er muss — без окончания; в ед. ч. без умлаута: muss, но ihr müsst.",
-      en: "present: ich / er muss — no ending; no umlaut in the singular: muss, but ihr müsst."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"müssen → du musst","en":"müssen → du musst"}
   },
   {
     infinitive: "müssen",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"müsste","meaning":{"ru":"müsste — менее категоричная или условная необходимость.","en":"müsste — a less categorical or conditional necessity."}}],
+    meaning: {"ru":"muss — сегодня необходимо остаться дольше.","en":"muss — staying longer today is necessary."},
+    meaningContrast: {"ru":"müsste — менее категоричная или условная необходимость; muss — прямая необходимость.","en":"müsste — less categorical or conditional necessity; muss — direct necessity."},
     sentence: "Anna ___ heute länger bleiben.",
     answer: "muss",
     translation: { ru: "Анне сегодня нужно задержаться.", en: "Anna has to stay longer today." },
-    explanation: {
-      ru: "настоящее время: ich / er muss — без окончания; в ед. ч. без умлаута: muss, но ihr müsst.",
-      en: "present: ich / er muss — no ending; no umlaut in the singular: muss, but ihr müsst."
-    }
+    grammarPerson: "sie",
+    explanation: {"ru":"müssen → sie muss","en":"müssen → sie muss"}
   },
   {
     infinitive: "müssen",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"müsstet","meaning":{"ru":"müsstet — условное отсутствие необходимости вставать рано.","en":"müsstet — a conditional absence of a need to get up early."}}],
+    meaning: {"ru":"müsst — вставать так рано необязательно.","en":"müsst — getting up so early is not necessary."},
+    meaningContrast: {"ru":"Ihr dürft nicht so früh aufstehen — запрещено вставать рано; müsst nicht — это необязательно.","en":"Ihr dürft nicht so früh aufstehen — getting up early is forbidden; müsst nicht — it is optional."},
     sentence: "Ihr ___ nicht so früh aufstehen.",
     answer: "müsst",
     translation: { ru: "Вам не обязательно вставать так рано.", en: "You don't have to get up so early." },
-    explanation: {
-      ru: "настоящее время: ich / er muss — без окончания; в ед. ч. без умлаута: muss, но ihr müsst.",
-      en: "present: ich / er muss — no ending; no umlaut in the singular: muss, but ihr müsst."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"müssen → ihr müsst","en":"müssen → ihr müsst"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"musste — вчера пришлось долго работать.","en":"musste — working long hours yesterday was necessary."},
+    meaningContrast: {"ru":"muss — необходимость сейчас; musste — необходимость в прошлом.","en":"muss — necessity now; musste — necessity in the past."},
     sentence: "Gestern ___ ich lange arbeiten.",
     answer: "musste",
     translation: { ru: "Вчера мне пришлось долго работать.", en: "Yesterday I had to work late." },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"müssen → musste → ich musste","en":"müssen → musste → ich musste"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
+    meaning: {"ru":"mussten — перенести встречу было необходимо.","en":"mussten — rescheduling the appointment was necessary."},
+    meaningContrast: {"ru":"müssen — необходимость сейчас; mussten — необходимость в прошлом.","en":"müssen — necessity now; mussten — necessity in the past."},
     sentence: "Wir ___ den Termin verschieben.",
     answer: "mussten",
     translation: { ru: "Нам пришлось перенести встречу.", en: "We had to postpone the appointment." },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "wir",
+    explanation: {"ru":"müssen → musste → wir mussten","en":"müssen → musste → wir mussten"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"musste — ему пришлось рано встать.","en":"musste — he had to get up early."},
+    meaningContrast: {"ru":"muss — необходимость сейчас; musste — необходимость в прошлом.","en":"muss — necessity now; musste — necessity in the past."},
     sentence: "Er ___ früh aufstehen.",
     answer: "musste",
     translation: { ru: "Ему пришлось рано встать.", en: "He had to get up early." },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"müssen → musste → er musste","en":"müssen → musste → er musste"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"musste — раньше приходилось ездить на автобусе.","en":"musste — taking the bus used to be necessary."},
+    meaningContrast: {"ru":"muss — необходимость сейчас; musste — необходимость в прошлом.","en":"muss — necessity now; musste — necessity in the past."},
     sentence: "Früher ___ ich jeden Tag mit dem Bus fahren.",
     answer: "musste",
     translation: {
       ru: "Раньше мне приходилось каждый день ездить на автобусе.",
       en: "I used to have to take the bus every day."
     },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"müssen → musste → ich musste","en":"müssen → musste → ich musste"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"müsst","meaning":{"ru":"müsst — необходимость сейчас.","en":"müsst — necessity now."}}],
+    meaning: {"ru":"musstet — вопрос о том, пришлось ли долго ждать.","en":"musstet — a question about whether waiting long was necessary."},
+    meaningContrast: {"ru":"müsst — необходимость сейчас; musstet — необходимость в прошлом.","en":"müsst — necessity now; musstet — necessity in the past."},
     sentence: "___ ihr lange auf den Bus warten?",
     answer: "Musstet",
     translation: { ru: "Вам пришлось долго ждать автобус?", en: "Did you have to wait long for the bus?" },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"müssen → musste → ihr musstet","en":"müssen → musste → ihr musstet"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"musste — ей пришлось остаться дома.","en":"musste — she had to stay at home."},
+    meaningContrast: {"ru":"muss — необходимость сейчас; musste — необходимость в прошлом.","en":"muss — necessity now; musste — necessity in the past."},
     sentence: "Sie ___ zu Hause bleiben.",
     answer: "musste",
     translation: { ru: "Ей пришлось остаться дома.", en: "She had to stay at home." },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"müssen → musste → sie musste","en":"müssen → musste → sie musste"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"musstest — вопрос о необходимости работать вчера.","en":"musstest — a question about needing to work yesterday."},
+    meaningContrast: {"ru":"musst — необходимость сейчас; musstest — необходимость в прошлом.","en":"musst — necessity now; musstest — necessity in the past."},
     sentence: "Musstest du gestern arbeiten?",
     answer: "Musstest",
     translation: { ru: "Тебе вчера пришлось работать?", en: "Did you have to work yesterday?" },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "du",
+    explanation: {"ru":"müssen → musste → du musstest","en":"müssen → musste → du musstest"}
   },
   {
     infinitive: "müssen",
     form: "Präteritum",
     person: "sie/Sie",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
+    meaning: {"ru":"mussten — гостям пришлось долго ждать.","en":"mussten — the guests had to wait a long time."},
+    meaningContrast: {"ru":"müssen — необходимость сейчас; mussten — необходимость в прошлом.","en":"müssen — necessity now; mussten — necessity in the past."},
     sentence: "Die Gäste ___ lange warten.",
     answer: "mussten",
     translation: { ru: "Гостям пришлось долго ждать.", en: "The guests had to wait a long time." },
-    explanation: { ru: "необходимость или обязанность в прошлом.", en: "necessity or obligation in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"müssen → musste → sie mussten","en":"müssen → musste → sie mussten"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"müsste — уйти раньше было бы нужно, но это не решено.","en":"müsste — leaving earlier would be necessary, but is not settled."},
+    meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
     sentence: "Ich ___ heute eigentlich früher gehen.",
     answer: "müsste",
     translation: {
       ru: "Мне вообще-то стоило бы сегодня уйти раньше.",
       en: "Actually, I ought to leave earlier today."
     },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "ich",
+    explanation: {"ru":"musste → müsste → ich müsste","en":"musste → müsste → ich müsste"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "du",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"musst","meaning":{"ru":"musst — необходимость сейчас.","en":"musst — necessity now."}}],
+    meaning: {"ru":"müsstest — больше сна было бы необходимо.","en":"müsstest — more sleep would be necessary."},
+    meaningContrast: {"ru":"musst — необходимость выражена прямо; müsstest — менее категорично или при некотором условии.","en":"musst — states necessity directly; müsstest — less categorical or conditional."},
     sentence: "Du ___ mehr schlafen.",
     answer: "müsstest",
     translation: { ru: "Тебе стоило бы больше спать.", en: "You ought to sleep more." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "du",
+    explanation: {"ru":"musste → müsste → du müsstest","en":"musste → müsste → du müsstest"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
+    meaning: {"ru":"müssten — сначала было бы нужно обсудить проблему.","en":"müssten — discussing the problem first would be necessary."},
+    meaningContrast: {"ru":"müssen — необходимость выражена прямо; müssten — менее категорично или при некотором условии.","en":"müssen — states necessity directly; müssten — less categorical or conditional."},
     sentence: "Wir ___ das Problem zuerst besprechen.",
     answer: "müssten",
     translation: { ru: "Нам стоило бы сначала обсудить проблему.", en: "We would need to discuss the problem first." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "wir",
+    explanation: {"ru":"musste → müsste → wir müssten","en":"musste → müsste → wir müssten"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"müsste — для этого понадобилось бы записаться.","en":"müsste — making an appointment would be necessary for this."},
+    meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
     sentence: "Sie ___ dafür einen Termin vereinbaren.",
     answer: "müsste",
     translation: {
       ru: "Ей стоило бы для этого записаться на приём.",
       en: "She would need to make an appointment for that."
     },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "sie",
+    explanation: {"ru":"musste → müsste → sie müsste","en":"musste → müsste → sie müsste"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"müsste — следовало бы проявлять больше осторожности.","en":"müsste — being more careful would be necessary."},
+    meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
     sentence: "Man ___ vorsichtiger sein.",
     answer: "müsste",
     translation: { ru: "Следовало бы быть осторожнее.", en: "People ought to be more careful." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "man",
+    explanation: {"ru":"musste → müsste → man müsste","en":"musste → müsste → man müsste"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ihr",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"müsst","meaning":{"ru":"müsst — необходимость сейчас.","en":"müsst — necessity now."}}],
+    meaning: {"ru":"müsstet — потребовалось бы делать больше перерывов.","en":"müsstet — taking more breaks would be necessary."},
+    meaningContrast: {"ru":"müsst — необходимость выражена прямо; müsstet — менее категорично или при некотором условии.","en":"müsst — states necessity directly; müsstet — less categorical or conditional."},
     sentence: "Ihr ___ mehr Pausen machen.",
     answer: "müsstet",
     translation: { ru: "Вам стоило бы делать больше перерывов.", en: "You should take more breaks." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"musste → müsste → ihr müsstet","en":"musste → müsste → ihr müsstet"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
+    meaning: {"ru":"müssten — детям следовало бы ложиться раньше.","en":"müssten — the children would need to go to bed earlier."},
+    meaningContrast: {"ru":"müssen — необходимость выражена прямо; müssten — менее категорично или при некотором условии.","en":"müssen — states necessity directly; müssten — less categorical or conditional."},
     sentence: "Die Kinder ___ früher ins Bett gehen.",
     answer: "müssten",
     translation: { ru: "Детям стоило бы раньше ложиться спать.", en: "The children should go to bed earlier." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "sie",
+    explanation: {"ru":"musste → müsste → sie müssten","en":"musste → müsste → sie müssten"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"гипотетически","en":"hypothetical"},
+    alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
+    meaning: {"ru":"müsste — потребовалось бы уточнить ещё раз.","en":"müsste — asking again would be necessary."},
+    meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
     sentence: "Ich ___ noch einmal nachfragen.",
     answer: "müsste",
     translation: { ru: "Мне стоило бы ещё раз уточнить.", en: "I ought to ask again." },
-    explanation: { ru: "необходимость в предполагаемой ситуации.", en: "necessity in a hypothetical situation." }
+    grammarPerson: "ich",
+    explanation: {"ru":"musste → müsste → ich müsste","en":"musste → müsste → ich müsste"}
   },
   {
     infinitive: "dürfen",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"dürfte","meaning":{"ru":"dürfte — более мягкий вопрос о разрешении.","en":"dürfte — a more tentative request for permission."}}],
+    meaning: {"ru":"darf — прямой вопрос о разрешении парковаться.","en":"darf — a direct question about permission to park."},
+    meaningContrast: {"ru":"dürfte — более мягкий вопрос о разрешении; darf — прямой вопрос.","en":"dürfte — a more tentative permission request; darf — a direct question."},
     sentence: "___ ich hier parken?",
     answer: "Darf",
     translation: { ru: "Можно мне здесь припарковаться?", en: "May I park here?" },
-    explanation: {
-      ru: "настоящее время: ich / er darf — смена гласной ü → a в ед. ч., ihr dürft.",
-      en: "present: ich / er darf — vowel change ü → a in the singular, ihr dürft."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"dürfen → ich darf","en":"dürfen → ich darf"}
   },
   {
     infinitive: "dürfen",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"durftest","meaning":{"ru":"durftest — разрешение или запрет в прошлом.","en":"durftest — permission or prohibition in the past."}}],
+    meaning: {"ru":"darfst — курить здесь запрещено.","en":"darfst — smoking here is prohibited."},
+    meaningContrast: {"ru":"Du musst hier nicht rauchen — курить необязательно; darfst nicht — курить запрещено.","en":"Du musst hier nicht rauchen — smoking is not necessary; darfst nicht — smoking is forbidden."},
     sentence: "Du ___ hier nicht rauchen.",
     answer: "darfst",
     translation: { ru: "Тебе здесь нельзя курить.", en: "You're not allowed to smoke here." },
-    explanation: {
-      ru: "настоящее время: ich / er darf — смена гласной ü → a в ед. ч., ihr dürft.",
-      en: "present: ich / er darf — vowel change ü → a in the singular, ihr dürft."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"dürfen → du darfst","en":"dürfen → du darfst"}
   },
   {
     infinitive: "dürfen",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"durfte","meaning":{"ru":"durfte — разрешение или запрет в прошлом.","en":"durfte — permission or prohibition in the past."}}],
+    meaning: {"ru":"darf — сыну разрешён только час телевизора вечером.","en":"darf — the son is allowed only an hour of TV in the evening."},
+    meaningContrast: {"ru":"durfte — разрешение или запрет в прошлом; darf — сейчас.","en":"durfte — permission or prohibition in the past; darf — now."},
     sentence: "Unser Sohn ___ abends nur eine Stunde fernsehen.",
     answer: "darf",
     translation: {
       ru: "Нашему сыну вечером можно смотреть телевизор только час.",
       en: "Our son is only allowed to watch TV for an hour in the evening."
     },
-    explanation: {
-      ru: "настоящее время: ich / er darf — смена гласной ü → a в ед. ч., ihr dürft.",
-      en: "present: ich / er darf — vowel change ü → a in the singular, ihr dürft."
-    }
+    grammarPerson: "er",
+    explanation: {"ru":"dürfen → er darf","en":"dürfen → er darf"}
   },
   {
     infinitive: "dürfen",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"dürftet","meaning":{"ru":"dürftet — условное предложение возможности остаться на ночь.","en":"dürftet — a conditional offer of an overnight stay."}}],
+    meaning: {"ru":"dürft — вам разрешают остаться на ночь.","en":"dürft — you are welcome to stay overnight."},
+    meaningContrast: {"ru":"durftet — разрешение или запрет в прошлом; dürft — сейчас.","en":"durftet — permission or prohibition in the past; dürft — now."},
     sentence: "Ihr ___ gern bei uns übernachten.",
     answer: "dürft",
     translation: { ru: "Вы можете переночевать у нас.", en: "You're welcome to stay the night with us." },
-    explanation: {
-      ru: "настоящее время: ich / er darf — смена гласной ü → a в ед. ч., ihr dürft.",
-      en: "present: ich / er darf — vowel change ü → a in the singular, ihr dürft."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"dürfen → ihr dürft","en":"dürfen → ihr dürft"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"durfte — в детстве поздно гулять было запрещено.","en":"durfte — staying out late was forbidden as a child."},
+    meaningContrast: {"ru":"darf — разрешение или запрет сейчас; durfte — в прошлом.","en":"darf — permission or prohibition now; durfte — in the past."},
     sentence: "Als Kind ___ ich nicht so spät draußen bleiben.",
     answer: "durfte",
     translation: {
       ru: "В детстве мне нельзя было так поздно оставаться на улице.",
       en: "As a child I wasn't allowed to stay out so late."
     },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"dürfen → durfte → ich durfte","en":"dürfen → durfte → ich durfte"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"dürfen","meaning":{"ru":"dürfen — разрешение или запрет сейчас; вопрос задан прямо.","en":"dürfen — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"durften — входить в комнату было запрещено.","en":"durften — entering the room was forbidden."},
+    meaningContrast: {"ru":"dürfen — разрешение или запрет сейчас; durften — в прошлом.","en":"dürfen — permission or prohibition now; durften — in the past."},
     sentence: "Wir ___ den Raum nicht betreten.",
     answer: "durften",
     translation: { ru: "Нам нельзя было входить в комнату.", en: "We weren't allowed to enter the room." },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "wir",
+    explanation: {"ru":"dürfen → durfte → wir durften","en":"dürfen → durfte → wir durften"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"durfte — вчера ему разрешили уйти раньше.","en":"durfte — he was allowed to leave earlier yesterday."},
+    meaningContrast: {"ru":"darf — разрешение или запрет сейчас; durfte — в прошлом.","en":"darf — permission or prohibition now; durfte — in the past."},
     sentence: "Er ___ gestern früher nach Hause gehen.",
     answer: "durfte",
     translation: { ru: "Ему вчера разрешили уйти домой раньше.", en: "He was allowed to go home early yesterday." },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"dürfen → durfte → er durfte","en":"dürfen → durfte → er durfte"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"darf","meaning":{"ru":"darf — разрешение или запрет сейчас; вопрос задан прямо.","en":"darf — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"durfte — ей разрешали пользоваться машиной родителей.","en":"durfte — she was allowed to use her parents’ car."},
+    meaningContrast: {"ru":"darf — разрешение или запрет сейчас; durfte — в прошлом.","en":"darf — permission or prohibition now; durfte — in the past."},
     sentence: "Sie ___ das Auto ihrer Eltern benutzen.",
     answer: "durfte",
     translation: { ru: "Ей разрешали пользоваться машиной родителей.", en: "She was allowed to use her parents' car." },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"dürfen → durfte → sie durfte","en":"dürfen → durfte → sie durfte"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"durftest — вопрос о разрешении путешествовать тогда.","en":"durftest — a question about permission to travel at that time."},
+    meaningContrast: {"ru":"darfst — разрешение или запрет сейчас; durftest — в прошлом.","en":"darfst — permission or prohibition now; durftest — in the past."},
     sentence: "Durftest du damals allein reisen?",
     answer: "Durftest",
     translation: {
       ru: "Тебе тогда разрешали путешествовать одному?",
       en: "Were you allowed to travel alone back then?"
     },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "du",
+    explanation: {"ru":"dürfen → durfte → du durftest","en":"dürfen → durfte → du durftest"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"darf","meaning":{"ru":"darf — разрешение или запрет сейчас; вопрос задан прямо.","en":"darf — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"durfte — фотографировать там было запрещено.","en":"durfte — taking photos there was forbidden."},
+    meaningContrast: {"ru":"darf — разрешение или запрет сейчас; durfte — в прошлом.","en":"darf — permission or prohibition now; durfte — in the past."},
     sentence: "Ich ___ dort nicht fotografieren.",
     answer: "durfte",
     translation: { ru: "Мне там нельзя было фотографировать.", en: "I wasn't allowed to take photos there." },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"dürfen → durfte → ich durfte","en":"dürfen → durfte → ich durfte"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "sie/Sie",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"dürfen","meaning":{"ru":"dürfen — разрешение или запрет сейчас; вопрос задан прямо.","en":"dürfen — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"durften — детям разрешили играть ещё час.","en":"durften — the children were allowed another hour of play."},
+    meaningContrast: {"ru":"dürfen — разрешение или запрет сейчас; durften — в прошлом.","en":"dürfen — permission or prohibition now; durften — in the past."},
     sentence: "Die Kinder ___ noch eine Stunde spielen.",
     answer: "durften",
     translation: { ru: "Детям разрешили играть ещё час.", en: "The children were allowed to play for another hour." },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"dürfen → durfte → sie durften","en":"dürfen → durfte → sie durften"}
   },
   {
     infinitive: "dürfen",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"durftet — вопрос о разрешении смотреть телевизор в детстве.","en":"durftet — a question about permission to watch TV as children."},
+    meaningContrast: {"ru":"dürft — разрешение или запрет сейчас; durftet — в прошлом.","en":"dürft — permission or prohibition now; durftet — in the past."},
     sentence: "___ ihr als Kinder lange fernsehen?",
     answer: "Durftet",
     translation: {
       ru: "Вам в детстве разрешали долго смотреть телевизор?",
       en: "Were you allowed to watch TV for long as children?"
     },
-    explanation: { ru: "разрешение или запрет в прошлом.", en: "permission or prohibition in the past." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"dürfen → durfte → ihr durftet","en":"dürfen → durfte → ihr durftet"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"darf","meaning":{"ru":"darf — разрешение или запрет сейчас; вопрос задан прямо.","en":"darf — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"dürfte — мягкий вопрос о разрешении задать вопрос.","en":"dürfte — a tentative request for permission to ask a question."},
+    meaningContrast: {"ru":"darf — прямой вопрос о разрешении; dürfte — более мягкий.","en":"darf — a direct permission request; dürfte — more tentative."},
     sentence: "___ ich Sie etwas fragen?",
     answer: "Dürfte",
     translation: { ru: "Не позволили бы Вы мне Вас кое о чём спросить?", en: "Might I ask you something?" },
-    explanation: { ru: "вежливая просьба о разрешении.", en: "polite request for permission." }
+    grammarPerson: "ich",
+    explanation: {"ru":"durfte → dürfte → ich dürfte","en":"durfte → dürfte → ich dürfte"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "du",
+    intention: {"ru":"предположение: вероятно","en":"probability"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürftest — предположение: ты, скорее всего, прав(а).","en":"dürftest — a probability: you are likely to be right."},
+    meaningContrast: {"ru":"könntest — лишь возможное предположение; dürftest здесь означает «скорее всего».","en":"könntest — only a possibility; dürftest here means “likely”."},
     sentence: "Du ___ recht haben.",
     answer: "dürftest",
     translation: { ru: "Ты, скорее всего, прав(а).", en: "You're probably right." },
-    explanation: { ru: "вероятность, предположение: «скорее всего».", en: "probability, assumption: “most likely”." }
+    grammarPerson: "du",
+    explanation: {"ru":"durfte → dürfte → du dürftest","en":"durfte → dürfte → du dürftest"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"darf","meaning":{"ru":"darf — разрешение или запрет сейчас; вопрос задан прямо.","en":"darf — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"dürfte — мягкий вопрос о разрешении предложить идею.","en":"dürfte — a tentative request for permission to make a suggestion."},
+    meaningContrast: {"ru":"darf — прямой вопрос о разрешении; dürfte — более мягкий.","en":"darf — a direct permission request; dürfte — more tentative."},
     sentence: "___ ich Ihnen einen Vorschlag machen?",
     answer: "Dürfte",
     translation: { ru: "Не позволили бы Вы мне сделать Вам одно предложение?", en: "Might I make a suggestion?" },
-    explanation: { ru: "вежливая просьба о разрешении.", en: "polite request for permission." }
+    grammarPerson: "ich",
+    explanation: {"ru":"durfte → dürfte → ich dürfte","en":"durfte → dürfte → ich dürfte"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"dürfen","meaning":{"ru":"dürfen — разрешение или запрет сейчас; вопрос задан прямо.","en":"dürfen — permission or prohibition now; a directly asked question."}}],
+    meaning: {"ru":"dürften — мягкий вопрос о разрешении подождать здесь.","en":"dürften — a tentative request for permission to wait here."},
+    meaningContrast: {"ru":"dürfen — прямой вопрос о разрешении; dürften — более мягкий.","en":"dürfen — a direct permission request; dürften — more tentative."},
     sentence: "___ wir hier kurz warten?",
     answer: "Dürften",
     translation: { ru: "Не позволили бы Вы нам здесь немного подождать?", en: "Might we wait here for a moment?" },
-    explanation: { ru: "вежливая просьба о разрешении.", en: "polite request for permission." }
+    grammarPerson: "wir",
+    explanation: {"ru":"durfte → dürfte → wir dürften","en":"durfte → dürfte → wir dürften"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"предположение: вероятно","en":"probability"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürfte — предположение: проблемы, скорее всего, не будет.","en":"dürfte — a probability: this is unlikely to be a problem."},
+    meaningContrast: {"ru":"könnte — лишь возможное предположение; dürfte здесь означает «скорее всего».","en":"könnte — only a possibility; dürfte here means “likely”."},
     sentence: "Das ___ kein Problem sein.",
     answer: "dürfte",
     translation: { ru: "Скорее всего, это не будет проблемой.", en: "That probably won't be a problem." },
-    explanation: { ru: "вероятность, предположение: «скорее всего».", en: "probability, assumption: “most likely”." }
+    grammarPerson: "es",
+    explanation: {"ru":"durfte → dürfte → es dürfte","en":"durfte → dürfte → es dürfte"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"предположение: вероятно","en":"probability"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürfte — предположение: он, скорее всего, уже дома.","en":"dürfte — a probability: he is likely to be home already."},
+    meaningContrast: {"ru":"könnte — лишь возможное предположение; dürfte здесь означает «скорее всего».","en":"könnte — only a possibility; dürfte here means “likely”."},
     sentence: "Er ___ schon zu Hause sein.",
     answer: "dürfte",
     translation: { ru: "Он, наверное, уже дома.", en: "He's probably already at home." },
-    explanation: { ru: "вероятность, предположение: «скорее всего».", en: "probability, assumption: “most likely”." }
+    grammarPerson: "er",
+    explanation: {"ru":"durfte → dürfte → er dürfte","en":"durfte → dürfte → er dürfte"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "ihr",
+    intention: {"ru":"предположение: вероятно","en":"probability"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürftet — предположение: вы, скорее всего, устали.","en":"dürftet — a probability: you are likely to be tired."},
+    meaningContrast: {"ru":"könntet — лишь возможное предположение; dürftet здесь означает «скорее всего».","en":"könntet — only a possibility; dürftet here means “likely”."},
     sentence: "Ihr ___ nach der langen Reise müde sein.",
     answer: "dürftet",
     translation: {
       ru: "После долгой поездки вы, наверное, устали.",
       en: "You're probably tired after the long journey."
     },
-    explanation: { ru: "вероятность, предположение: «скорее всего».", en: "probability, assumption: “most likely”." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"durfte → dürfte → ihr dürftet","en":"durfte → dürfte → ihr dürftet"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"предположение: вероятно","en":"probability"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürften — предположение: гости, скорее всего, скоро придут.","en":"dürften — a probability: the guests are likely to arrive soon."},
+    meaningContrast: {"ru":"könnten — лишь возможное предположение; dürften здесь означает «скорее всего».","en":"könnten — only a possibility; dürften here means “likely”."},
     sentence: "Die Gäste ___ bald kommen.",
     answer: "dürften",
     translation: { ru: "Гости, скорее всего, скоро придут.", en: "The guests will probably arrive soon." },
-    explanation: { ru: "вероятность, предположение: «скорее всего».", en: "probability, assumption: “most likely”." }
+    grammarPerson: "sie",
+    explanation: {"ru":"durfte → dürfte → sie dürften","en":"durfte → dürfte → sie dürften"}
   },
   {
     infinitive: "sollen",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"sollte","meaning":{"ru":"sollte — совет или поручение в прошлом.","en":"sollte — advice or an earlier instruction."}}],
+    meaning: {"ru":"soll — вопрос о том, что от меня ожидают.","en":"soll — a question about what I am expected to bring."},
+    meaningContrast: {"ru":"sollte — совет либо прошлое поручение; soll здесь — текущее поручение.","en":"sollte — advice or an earlier instruction; soll here — a current instruction."},
     sentence: "Was ___ ich mitbringen?",
     answer: "soll",
     translation: { ru: "Что мне принести?", en: "What should I bring?" },
-    explanation: {
-      ru: "настоящее время: ich / er soll — без окончания; поручение, совет или «говорят, что…».",
-      en: "present: ich / er soll — no ending; an instruction, advice or „people say that …“."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"sollen → ich soll","en":"sollen → ich soll"}
   },
   {
     infinitive: "sollen",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"solltest","meaning":{"ru":"solltest — совет или поручение в прошлом.","en":"solltest — advice or an earlier instruction."}}],
+    meaning: {"ru":"sollst — вам поручено перезвонить начальнику.","en":"sollst — you have been instructed to call the boss back."},
+    meaningContrast: {"ru":"solltest — совет либо прошлое поручение; sollst здесь — текущее поручение.","en":"solltest — advice or an earlier instruction; sollst here — a current instruction."},
     sentence: "Du ___ den Chef zurückrufen.",
     answer: "sollst",
     translation: { ru: "Тебе нужно перезвонить начальнику (он просил).", en: "You're supposed to call the boss back." },
-    explanation: {
-      ru: "настоящее время: ich / er soll — без окончания; поручение, совет или «говорят, что…».",
-      en: "present: ich / er soll — no ending; an instruction, advice or „people say that …“."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"sollen → du sollst","en":"sollen → du sollst"}
   },
   {
     infinitive: "sollen",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"говорят, что","en":"reportedly"},
+    alternativeAnswers: [{"answer":"sollte","meaning":{"ru":"sollte — ожидание или предположение о качестве фильма.","en":"sollte — an expectation or assumption about the film."}}],
+    meaning: {"ru":"soll — передача чужого мнения о фильме.","en":"soll — reporting what others say about the film."},
+    meaningContrast: {"ru":"sollte — ожидание или предположение; soll здесь передаёт чужое мнение.","en":"sollte — an expectation or assumption; soll here reports what others say."},
     sentence: "Der Film ___ sehr gut sein.",
     answer: "soll",
     translation: { ru: "Говорят, фильм очень хороший.", en: "The film is supposed to be very good." },
-    explanation: {
-      ru: "настоящее время: ich / er soll — без окончания; поручение, совет или «говорят, что…».",
-      en: "present: ich / er soll — no ending; an instruction, advice or „people say that …“."
-    }
+    grammarPerson: "er",
+    explanation: {"ru":"sollen → er soll","en":"sollen → er soll"}
   },
   {
     infinitive: "sollen",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"solltet","meaning":{"ru":"solltet — совет или поручение в прошлом.","en":"solltet — advice or an earlier instruction."}}],
+    meaning: {"ru":"sollt — от вас ожидают прибытия к восьми.","en":"sollt — you are expected at the station at eight."},
+    meaningContrast: {"ru":"solltet — совет либо прошлое поручение; sollt здесь — текущее поручение.","en":"solltet — advice or an earlier instruction; sollt here — a current instruction."},
     sentence: "Ihr ___ um acht am Bahnhof sein.",
     answer: "sollt",
     translation: { ru: "Вам нужно быть на вокзале в восемь.", en: "You're supposed to be at the station at eight." },
-    explanation: {
-      ru: "настоящее время: ich / er soll — без окончания; поручение, совет или «говорят, что…».",
-      en: "present: ich / er soll — no ending; an instruction, advice or „people say that …“."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"sollen → ihr sollt","en":"sollen → ihr sollt"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"sollte — вчера мне было поручено позвонить начальнику.","en":"sollte — I was instructed to call the boss yesterday."},
+    meaningContrast: {"ru":"Без gestern: sollte может выражать совет сейчас. Здесь gestern задаёт прошлое поручение; soll — текущее поручение.","en":"Without gestern, sollte can express advice now. Here gestern indicates an earlier instruction; soll — a current instruction."},
     sentence: "Ich ___ gestern den Chef anrufen.",
     answer: "sollte",
     translation: { ru: "Вчера мне нужно было позвонить начальнику.", en: "I was supposed to call the boss yesterday." },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"sollen → sollte → ich sollte","en":"sollen → sollte → ich sollte"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"sollen","meaning":{"ru":"sollen — текущее поручение или ожидание.","en":"sollen — a current instruction or expectation."}}],
+    meaning: {"ru":"sollten — от нас ожидали прибытия к восьми.","en":"sollten — we were expected there at eight."},
+    meaningContrast: {"ru":"sollten также может выражать совет сейчас; sollen — текущее поручение.","en":"sollten can also express advice now; sollen — a current instruction."},
     sentence: "Wir ___ um acht Uhr dort sein.",
     answer: "sollten",
     translation: { ru: "Мы должны были быть там в восемь.", en: "We were supposed to be there at eight." },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "wir",
+    explanation: {"ru":"sollen → sollte → wir sollten","en":"sollen → sollte → wir sollten"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"soll","meaning":{"ru":"soll — текущее поручение или ожидание.","en":"soll — a current instruction or expectation."}}],
+    meaning: {"ru":"sollte — ему было поручено принести документы.","en":"sollte — he was instructed to bring the documents."},
+    meaningContrast: {"ru":"sollte также может выражать совет сейчас; soll — текущее поручение.","en":"sollte can also express advice now; soll — a current instruction."},
     sentence: "Er ___ die Unterlagen mitbringen.",
     answer: "sollte",
     translation: { ru: "Он должен был принести документы.", en: "He was supposed to bring the documents." },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "er",
+    explanation: {"ru":"sollen → sollte → er sollte","en":"sollen → sollte → er sollte"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"sollst","meaning":{"ru":"sollst — текущее поручение или ожидание.","en":"sollst — a current instruction or expectation."}}],
+    meaning: {"ru":"solltest — вопрос о том, было ли поручено сообщить ему.","en":"solltest — a question about whether you were instructed to tell him."},
+    meaningContrast: {"ru":"solltest также может выражать совет сейчас; sollst — текущее поручение.","en":"solltest can also express advice now; sollst — a current instruction."},
     sentence: "Solltest du ihm Bescheid sagen?",
     answer: "Solltest",
     translation: { ru: "Ты должен был ему сообщить?", en: "Were you supposed to let him know?" },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"sollen → sollte → du solltest","en":"sollen → sollte → du solltest"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "sie/Sie",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"sollen","meaning":{"ru":"sollen — текущее поручение или ожидание.","en":"sollen — a current instruction or expectation."}}],
+    meaning: {"ru":"sollten — от детей ожидали мытья рук перед едой.","en":"sollten — the children were expected to wash their hands before eating."},
+    meaningContrast: {"ru":"sollten также может выражать совет сейчас; sollen — текущее поручение.","en":"sollten can also express advice now; sollen — a current instruction."},
     sentence: "Die Kinder ___ vor dem Essen die Hände waschen.",
     answer: "sollten",
     translation: {
       ru: "Дети должны были помыть руки перед едой.",
       en: "The children were supposed to wash their hands before eating."
     },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "sie",
+    explanation: {"ru":"sollen → sollte → sie sollten","en":"sollen → sollte → sie sollten"}
   },
   {
     infinitive: "sollen",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"sollt","meaning":{"ru":"sollt — текущее поручение или ожидание.","en":"sollt — a current instruction or expectation."}}],
+    meaning: {"ru":"solltet — напоминание о прежней договорённости.","en":"solltet — a reminder of an earlier arrangement."},
+    meaningContrast: {"ru":"solltet также может выражать совет сейчас; sollt — текущее поручение.","en":"solltet can also express advice now; sollt — a current instruction."},
     sentence: "Ihr ___ doch um acht zu Hause sein!",
     answer: "solltet",
     translation: { ru: "Вы же должны были быть дома в восемь!", en: "You were supposed to be home at eight!" },
-    explanation: {
-      ru: "указание, обязанность или ожидание в прошлом.",
-      en: "instruction, duty or expectation in the past."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"sollen → sollte → ihr solltet","en":"sollen → sollte → ihr solltet"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "du",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"sollst","meaning":{"ru":"sollst — текущее поручение или ожидание.","en":"sollst — a current instruction or expectation."}}],
+    meaning: {"ru":"solltest — совет поговорить с ним.","en":"solltest — advice to talk to him."},
+    meaningContrast: {"ru":"sollst — поручение или ожидание; solltest здесь — совет.","en":"sollst — an instruction or expectation; solltest here — advice."},
     sentence: "Du ___ besser mit ihm sprechen.",
     answer: "solltest",
     translation: { ru: "Тебе лучше поговорить с ним.", en: "You'd better talk to him." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "du",
+    explanation: {"ru":"sollte → du solltest","en":"sollte → du solltest"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "ihr",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"sollt","meaning":{"ru":"sollt — текущее поручение или ожидание.","en":"sollt — a current instruction or expectation."}}],
+    meaning: {"ru":"solltet — совет сообщать заранее.","en":"solltet — advice to give notice earlier."},
+    meaningContrast: {"ru":"sollt — поручение или ожидание; solltet здесь — совет.","en":"sollt — an instruction or expectation; solltet here — advice."},
     sentence: "Ihr ___ früher Bescheid sagen.",
     answer: "solltet",
     translation: { ru: "Вам стоило бы предупреждать раньше.", en: "You should let us know earlier." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"sollte → ihr solltet","en":"sollte → ihr solltet"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"soll","meaning":{"ru":"soll — текущее поручение или ожидание.","en":"soll — a current instruction or expectation."}}],
+    meaning: {"ru":"sollte — мысль: стоит проверить ещё раз.","en":"sollte — a thought: checking again would be advisable."},
+    meaningContrast: {"ru":"soll — поручение или ожидание; sollte здесь — совет.","en":"soll — an instruction or expectation; sollte here — advice."},
     sentence: "Ich ___ das wohl noch einmal prüfen.",
     answer: "sollte",
     translation: { ru: "Мне, пожалуй, стоит ещё раз это проверить.", en: "I should probably check that again." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "ich",
+    explanation: {"ru":"sollte → ich sollte","en":"sollte → ich sollte"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"sollen","meaning":{"ru":"sollen — текущее поручение или ожидание.","en":"sollen — a current instruction or expectation."}}],
+    meaning: {"ru":"sollten — предложение обратиться к врачу за советом.","en":"sollten — a suggestion to ask a doctor."},
+    meaningContrast: {"ru":"sollen — поручение или ожидание; sollten здесь — совет.","en":"sollen — an instruction or expectation; sollten here — advice."},
     sentence: "Wir ___ vielleicht einen Arzt fragen.",
     answer: "sollten",
     translation: { ru: "Нам, возможно, стоит спросить врача.", en: "Maybe we should ask a doctor." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "wir",
+    explanation: {"ru":"sollte → wir sollten","en":"sollte → wir sollten"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"soll","meaning":{"ru":"soll — текущее поручение или ожидание.","en":"soll — a current instruction or expectation."}}],
+    meaning: {"ru":"sollte — совет не торопиться.","en":"sollte — advice to take a little more time."},
+    meaningContrast: {"ru":"soll — поручение или ожидание; sollte здесь — совет.","en":"soll — an instruction or expectation; sollte here — advice."},
     sentence: "Sie ___ sich etwas mehr Zeit nehmen.",
     answer: "sollte",
     translation: { ru: "Ей стоило бы не торопиться.", en: "She should take a bit more time." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "sie",
+    explanation: {"ru":"sollte → sie sollte","en":"sollte → sie sollte"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"совет","en":"advice"},
+    alternativeAnswers: [{"answer":"sollen","meaning":{"ru":"sollen — текущее поручение или ожидание.","en":"sollen — a current instruction or expectation."}}],
+    meaning: {"ru":"sollten — совет детям больше играть на улице.","en":"sollten — advice for the children to play outside more."},
+    meaningContrast: {"ru":"sollen — поручение или ожидание; sollten здесь — совет.","en":"sollen — an instruction or expectation; sollten here — advice."},
     sentence: "Die Kinder ___ mehr draußen spielen.",
     answer: "sollten",
     translation: { ru: "Детям стоило бы больше играть на улице.", en: "The children should play outside more." },
-    explanation: { ru: "совет или рекомендация.", en: "advice or recommendation." }
+    grammarPerson: "sie",
+    explanation: {"ru":"sollte → sie sollten","en":"sollte → sie sollten"}
   },
   {
     infinitive: "wollen",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"wollte","meaning":{"ru":"wollte — прошлое намерение; в подходящем контексте — смягчённое желание.","en":"wollte — an earlier intention; in a suitable context, a tentative wish."}}],
+    meaning: {"ru":"will — сейчас есть намерение поехать в следующем году.","en":"will — a current intention to travel next year."},
+    meaningContrast: {"ru":"wollte — прошлое намерение, иногда смягчение; will — прямое намерение сейчас.","en":"wollte — an earlier intention, sometimes a softener; will — direct intention now."},
     sentence: "Ich ___ nächstes Jahr nach Spanien fahren.",
     answer: "will",
     translation: { ru: "Я хочу в следующем году поехать в Испанию.", en: "I want to go to Spain next year." },
-    explanation: {
-      ru: "настоящее время: ich / er will — смена гласной o → i в ед. ч., du willst, ihr wollt.",
-      en: "present: ich / er will — vowel change o → i in the singular, du willst, ihr wollt."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"wollen → ich will","en":"wollen → ich will"}
   },
   {
     infinitive: "wollen",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"wolltest","meaning":{"ru":"wolltest — прошлое намерение; в подходящем контексте — смягчённое желание.","en":"wolltest — an earlier intention; in a suitable context, a tentative wish."}}],
+    meaning: {"ru":"willst — вопрос о планах на сегодняшний вечер.","en":"willst — a question about plans for this evening."},
+    meaningContrast: {"ru":"wolltest — прошлое намерение, иногда смягчение; willst — прямое намерение сейчас.","en":"wolltest — an earlier intention, sometimes a softener; willst — direct intention now."},
     sentence: "Was ___ du heute Abend machen?",
     answer: "willst",
     translation: { ru: "Что ты хочешь делать сегодня вечером?", en: "What do you want to do tonight?" },
-    explanation: {
-      ru: "настоящее время: ich / er will — смена гласной o → i в ед. ч., du willst, ihr wollt.",
-      en: "present: ich / er will — vowel change o → i in the singular, du willst, ihr wollt."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"wollen → du willst","en":"wollen → du willst"}
   },
   {
     infinitive: "wollen",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"wollte","meaning":{"ru":"wollte — прошлое намерение; в подходящем контексте — смягчённое желание.","en":"wollte — an earlier intention; in a suitable context, a tentative wish."}}],
+    meaning: {"ru":"will — он намерен купить новую машину.","en":"will — he intends to buy a new car."},
+    meaningContrast: {"ru":"wollte — прошлое намерение, иногда смягчение; will — прямое намерение сейчас.","en":"wollte — an earlier intention, sometimes a softener; will — direct intention now."},
     sentence: "Er ___ ein neues Auto kaufen.",
     answer: "will",
     translation: { ru: "Он хочет купить новую машину.", en: "He wants to buy a new car." },
-    explanation: {
-      ru: "настоящее время: ich / er will — смена гласной o → i в ед. ч., du willst, ihr wollt.",
-      en: "present: ich / er will — vowel change o → i in the singular, du willst, ihr wollt."
-    }
+    grammarPerson: "er",
+    explanation: {"ru":"wollen → er will","en":"wollen → er will"}
   },
   {
     infinitive: "wollen",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"wolltet","meaning":{"ru":"wolltet — прошлое намерение; в подходящем контексте — смягчённое желание.","en":"wolltet — an earlier intention; in a suitable context, a tentative wish."}}],
+    meaning: {"ru":"wollt — вопрос о желании пойти вместе.","en":"wollt — a question about wanting to come along."},
+    meaningContrast: {"ru":"wolltet — прошлое намерение, иногда смягчение; wollt — прямое намерение сейчас.","en":"wolltet — an earlier intention, sometimes a softener; wollt — direct intention now."},
     sentence: "___ ihr mitkommen?",
     answer: "Wollt",
     translation: { ru: "Вы хотите пойти с нами?", en: "Do you want to come along?" },
-    explanation: {
-      ru: "настоящее время: ich / er will — смена гласной o → i в ед. ч., du willst, ihr wollt.",
-      en: "present: ich / er will — vowel change o → i in the singular, du willst, ihr wollt."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"wollen → ihr wollt","en":"wollen → ihr wollt"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"wollen","meaning":{"ru":"wollen — прямо выраженное намерение сейчас.","en":"wollen — a directly expressed current intention."}}],
+    meaning: {"ru":"wollten — раньше планировали поездку на выходных.","en":"wollten — there was an earlier plan to travel at the weekend."},
+    meaningContrast: {"ru":"wollen — намерение сейчас; wollten здесь — намерение в прошлом.","en":"wollen — intention now; wollten here — intention in the past."},
     sentence: "Wir ___ am Wochenende nach Berlin fahren.",
     answer: "wollten",
     translation: { ru: "Мы хотели на выходных поехать в Берлин.", en: "We wanted to go to Berlin at the weekend." },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "wir",
+    explanation: {"ru":"wollen → wollte → wir wollten","en":"wollen → wollte → wir wollten"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"will","meaning":{"ru":"will — прямо выраженное намерение сейчас.","en":"will — a directly expressed current intention."}}],
+    meaning: {"ru":"wollte — он хотел решить проблему самостоятельно.","en":"wollte — he intended to solve the problem himself."},
+    meaningContrast: {"ru":"will — намерение сейчас; wollte здесь — намерение в прошлом.","en":"will — intention now; wollte here — intention in the past."},
     sentence: "Er ___ das Problem selbst lösen.",
     answer: "wollte",
     translation: { ru: "Он хотел решить проблему сам.", en: "He wanted to solve the problem himself." },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"wollen → wollte → er wollte","en":"wollen → wollte → er wollte"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"willst","meaning":{"ru":"willst — прямо выраженное намерение сейчас.","en":"willst — a directly expressed current intention."}}],
+    meaning: {"ru":"wolltest — вопрос о прошлом намерении уволиться.","en":"wolltest — a question about an earlier intention to resign."},
+    meaningContrast: {"ru":"willst — намерение сейчас; wolltest здесь — намерение в прошлом.","en":"willst — intention now; wolltest here — intention in the past."},
     sentence: "Wolltest du wirklich kündigen?",
     answer: "Wolltest",
     translation: { ru: "Ты действительно хотел уволиться?", en: "Did you really want to quit your job?" },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "du",
+    explanation: {"ru":"wollen → wollte → du wolltest","en":"wollen → wollte → du wolltest"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"will","meaning":{"ru":"will — прямо выраженное намерение сейчас.","en":"will — a directly expressed current intention."}}],
+    meaning: {"ru":"wollte — намерение позвонить возникло перед этим моментом.","en":"wollte — there was an intention to call just before this moment."},
+    meaningContrast: {"ru":"will — намерение сейчас; wollte здесь — намерение в прошлом.","en":"will — intention now; wollte here — intention in the past."},
     sentence: "Ich ___ dich gerade anrufen.",
     answer: "wollte",
     translation: { ru: "Я как раз хотела тебе позвонить.", en: "I was just about to call you." },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"wollen → wollte → ich wollte","en":"wollen → wollte → ich wollte"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "sie/Sie",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"wollen","meaning":{"ru":"wollen — прямо выраженное намерение сейчас.","en":"wollen — a directly expressed current intention."}}],
+    meaning: {"ru":"wollten — дети хотели продолжить играть на улице.","en":"wollten — the children wanted to keep playing outside."},
+    meaningContrast: {"ru":"wollen — намерение сейчас; wollten здесь — намерение в прошлом.","en":"wollen — intention now; wollten here — intention in the past."},
     sentence: "Die Kinder ___ noch draußen spielen.",
     answer: "wollten",
     translation: { ru: "Дети хотели ещё поиграть на улице.", en: "The children wanted to keep playing outside." },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"wollen → wollte → sie wollten","en":"wollen → wollte → sie wollten"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"wollt","meaning":{"ru":"wollt — прямо выраженное намерение сейчас.","en":"wollt — a directly expressed current intention."}}],
+    meaning: {"ru":"wolltet — напоминание о прежнем желании пойти вместе.","en":"wolltet — a reminder of an earlier wish to come along."},
+    meaningContrast: {"ru":"wollt — намерение сейчас; wolltet здесь — намерение в прошлом.","en":"wollt — intention now; wolltet here — intention in the past."},
     sentence: "Ihr ___ doch mitkommen!",
     answer: "wolltet",
     translation: { ru: "Вы же хотели пойти с нами!", en: "You wanted to come along!" },
-    explanation: { ru: "намерение или желание в прошлом.", en: "intention or wish in the past." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"wollen → wollte → ihr wolltet","en":"wollen → wollte → ihr wolltet"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
     person: "ich",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"will","meaning":{"ru":"will — прямо выраженное намерение сейчас.","en":"will — a directly expressed current intention."}}],
+    meaning: {"ru":"wollte — мягкое вступление к вопросу сейчас.","en":"wollte — a tentative way to introduce a question now."},
+    meaningContrast: {"ru":"will — текущее желание выражено прямо; wollte смягчает вопрос, но может означать и прошлое желание.","en":"will — expresses a current wish directly; wollte softens the question but can also mean an earlier wish."},
     sentence: "Ich ___ dich etwas fragen.",
     answer: "wollte",
     translation: { ru: "Я хотела тебя кое о чём спросить.", en: "I wanted to ask you something." },
-    explanation: {
-      ru: "вежливое вступление: «Ich wollte fragen …» звучит мягче, чем «Ich will fragen».",
-      en: "polite opener: „Ich wollte fragen …“ sounds softer than „Ich will fragen“."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"wollen → wollte → ich wollte","en":"wollen → wollte → ich wollte"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
     person: "du",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"willst","meaning":{"ru":"willst — прямо выраженное намерение сейчас.","en":"willst — a directly expressed current intention."}}],
+    meaning: {"ru":"wolltest — мягкий вопрос о желании что-то добавить.","en":"wolltest — a tentative question about wanting to add something."},
+    meaningContrast: {"ru":"willst — текущее желание выражено прямо; wolltest смягчает вопрос, но может означать и прошлое желание.","en":"willst — expresses a current wish directly; wolltest softens the question but can also mean an earlier wish."},
     sentence: "___ du noch etwas sagen?",
     answer: "Wolltest",
     translation: { ru: "Ты хотел(а) ещё что-то сказать?", en: "Did you want to say something else?" },
-    explanation: {
-      ru: "вежливость: прошедшее время звучит мягче, чем настоящее — «Wollten Sie …?» мягче, чем «Wollen Sie …?».",
-      en: "politeness: the past sounds softer than the present — „Wollten Sie …?“ is softer than „Wollen Sie …?“."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"wollen → wollte → du wolltest","en":"wollen → wollte → du wolltest"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
     person: "sie/Sie",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"wollen","meaning":{"ru":"wollen — прямо выраженное намерение сейчас.","en":"wollen — a directly expressed current intention."}}],
+    meaning: {"ru":"wollten — мягкое предложение заказать ещё что-нибудь.","en":"wollten — a tentative offer to order something else."},
+    meaningContrast: {"ru":"wollen — текущее желание выражено прямо; wollten смягчает вопрос, но может означать и прошлое желание.","en":"wollen — expresses a current wish directly; wollten softens the question but can also mean an earlier wish."},
     sentence: "___ Sie noch etwas bestellen?",
     answer: "Wollten",
     translation: { ru: "Вы хотели ещё что-нибудь заказать?", en: "Did you want to order anything else?" },
-    explanation: {
-      ru: "вежливость: прошедшее время звучит мягче, чем настоящее — «Wollten Sie …?» мягче, чем «Wollen Sie …?».",
-      en: "politeness: the past sounds softer than the present — „Wollten Sie …?“ is softer than „Wollen Sie …?“."
-    }
+    grammarPerson: "Sie",
+    explanation: {"ru":"wollen → wollte → Sie wollten","en":"wollen → wollte → Sie wollten"}
   },
   {
     infinitive: "wollen",
     form: "Präteritum · höflich",
     person: "ihr",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"wollt","meaning":{"ru":"wollt — прямо выраженное намерение сейчас.","en":"wollt — a directly expressed current intention."}}],
+    meaning: {"ru":"wolltet — мягкое предложение ещё одного кофе.","en":"wolltet — a tentative offer of another coffee."},
+    meaningContrast: {"ru":"wollt — текущее желание выражено прямо; wolltet смягчает вопрос, но может означать и прошлое желание.","en":"wollt — expresses a current wish directly; wolltet softens the question but can also mean an earlier wish."},
     sentence: "___ ihr noch einen Kaffee?",
     answer: "Wolltet",
     translation: { ru: "Вы хотели ещё кофе?", en: "Did you want another coffee?" },
-    explanation: {
-      ru: "вежливость: прошедшее время звучит мягче, чем настоящее — «Wollten Sie …?» мягче, чем «Wollen Sie …?».",
-      en: "politeness: the past sounds softer than the present — „Wollten Sie …?“ is softer than „Wollen Sie …?“."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"wollen → wollte → ihr wolltet","en":"wollen → wollte → ihr wolltet"}
   },
   {
     infinitive: "mögen",
     form: "Präsens",
     person: "ich",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"mochte","meaning":{"ru":"mochte — предпочтение в прошлом.","en":"mochte — a preference in the past."}}],
+    meaning: {"ru":"mag — рыба сейчас не нравится.","en":"mag — fish is not liked now."},
+    meaningContrast: {"ru":"mochte — нравилось раньше; mag — нравится сейчас.","en":"mochte — liking in the past; mag — liking now."},
     sentence: "Ich ___ keinen Fisch.",
     answer: "mag",
     translation: { ru: "Я не люблю рыбу.", en: "I don't like fish." },
-    explanation: {
-      ru: "настоящее время: ich / er mag — смена гласной ö → a в ед. ч., ihr mögt. Не путать с möchte (хотел(а) бы).",
-      en: "present: ich / er mag — vowel change ö → a in the singular, ihr mögt. Not the same as möchte (would like)."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"mögen → ich mag","en":"mögen → ich mag"}
   },
   {
     infinitive: "mögen",
     form: "Präsens",
     person: "du",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"mochtest","meaning":{"ru":"mochtest — предпочтение в прошлом.","en":"mochtest — a preference in the past."}}],
+    meaning: {"ru":"magst — вопрос о нынешней симпатии к кошкам.","en":"magst — a question about liking cats now."},
+    meaningContrast: {"ru":"mochtest — нравилось раньше; magst — нравится сейчас.","en":"mochtest — liking in the past; magst — liking now."},
     sentence: "___ du Katzen?",
     answer: "Magst",
     translation: { ru: "Ты любишь кошек?", en: "Do you like cats?" },
-    explanation: {
-      ru: "настоящее время: ich / er mag — смена гласной ö → a в ед. ч., ihr mögt. Не путать с möchte (хотел(а) бы).",
-      en: "present: ich / er mag — vowel change ö → a in the singular, ihr mögt. Not the same as möchte (would like)."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"mögen → du magst","en":"mögen → du magst"}
   },
   {
     infinitive: "mögen",
     form: "Präsens",
     person: "er/sie/es",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"mochte","meaning":{"ru":"mochte — предпочтение в прошлом.","en":"mochte — a preference in the past."}}],
+    meaning: {"ru":"mag — сестре нравится джаз.","en":"mag — the sister likes jazz."},
+    meaningContrast: {"ru":"mochte — нравилось раньше; mag — нравится сейчас.","en":"mochte — liking in the past; mag — liking now."},
     sentence: "Meine Schwester ___ Jazz.",
     answer: "mag",
     translation: { ru: "Моя сестра любит джаз.", en: "My sister likes jazz." },
-    explanation: {
-      ru: "настоящее время: ich / er mag — смена гласной ö → a в ед. ч., ihr mögt. Не путать с möchte (хотел(а) бы).",
-      en: "present: ich / er mag — vowel change ö → a in the singular, ihr mögt. Not the same as möchte (would like)."
-    }
+    grammarPerson: "sie",
+    explanation: {"ru":"mögen → sie mag","en":"mögen → sie mag"}
   },
   {
     infinitive: "mögen",
     form: "Präsens",
     person: "ihr",
+    intention: {"ru":"настоящее","en":"present"},
+    alternativeAnswers: [{"answer":"mochtet","meaning":{"ru":"mochtet — предпочтение в прошлом.","en":"mochtet — a preference in the past."}}],
+    meaning: {"ru":"mögt — вопрос о нынешнем вкусе к острой еде.","en":"mögt — a question about liking spicy food now."},
+    meaningContrast: {"ru":"mochtet — нравилось раньше; mögt — нравится сейчас.","en":"mochtet — liking in the past; mögt — liking now."},
     sentence: "___ ihr scharfes Essen?",
     answer: "Mögt",
     translation: { ru: "Вы любите острую еду?", en: "Do you like spicy food?" },
-    explanation: {
-      ru: "настоящее время: ich / er mag — смена гласной ö → a в ед. ч., ihr mögt. Не путать с möchte (хотел(а) бы).",
-      en: "present: ich / er mag — vowel change ö → a in the singular, ihr mögt. Not the same as möchte (would like)."
-    }
+    grammarPerson: "ihr",
+    explanation: {"ru":"mögen → ihr mögt","en":"mögen → ihr mögt"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"mochte — в детстве шпинат не нравился.","en":"mochte — spinach was not liked in childhood."},
+    meaningContrast: {"ru":"mag — нравится сейчас; mochte — нравилось в прошлом.","en":"mag — liking now; mochte — liking in the past."},
     sentence: "Als Kind ___ ich keinen Spinat.",
     answer: "mochte",
     translation: { ru: "В детстве я не любила шпинат.", en: "As a child I didn't like spinach." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"mögen → mochte → ich mochte","en":"mögen → mochte → ich mochte"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "ich",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"mochte — раньше фильм очень нравился.","en":"mochte — the film was liked very much in the past."},
+    meaningContrast: {"ru":"mag — нравится сейчас; mochte — нравилось в прошлом.","en":"mag — liking now; mochte — liking in the past."},
     sentence: "Früher ___ ich diesen Film sehr.",
     answer: "mochte",
     translation: { ru: "Раньше мне очень нравился этот фильм.", en: "I used to really like this film." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "ich",
+    explanation: {"ru":"mögen → mochte → ich mochte","en":"mögen → mochte → ich mochte"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "wir",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"mögen","meaning":{"ru":"mögen — предпочтение сейчас.","en":"mögen — a preference now."}}],
+    meaning: {"ru":"mochten — ресторан тогда не понравился.","en":"mochten — the restaurant was not liked at that time."},
+    meaningContrast: {"ru":"mögen — нравится сейчас; mochten — нравилось в прошлом.","en":"mögen — liking now; mochten — liking in the past."},
     sentence: "Wir ___ das Restaurant nicht.",
     answer: "mochten",
     translation: { ru: "Нам не нравился этот ресторан.", en: "We didn't like the restaurant." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "wir",
+    explanation: {"ru":"mögen → mochte → wir mochten","en":"mögen → mochte → wir mochten"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"mag","meaning":{"ru":"mag — предпочтение сейчас.","en":"mag — a preference now."}}],
+    meaning: {"ru":"mochte — ему нравилась классическая музыка.","en":"mochte — he liked classical music."},
+    meaningContrast: {"ru":"mag — нравится сейчас; mochte — нравилось в прошлом.","en":"mag — liking now; mochte — liking in the past."},
     sentence: "Er ___ klassische Musik.",
     answer: "mochte",
     translation: { ru: "Он любил классическую музыку.", en: "He liked classical music." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"mögen → mochte → er mochte","en":"mögen → mochte → er mochte"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "du",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"mochtest — вопрос о любви к шоколаду в детстве.","en":"mochtest — a question about liking chocolate in childhood."},
+    meaningContrast: {"ru":"magst — нравится сейчас; mochtest — нравилось в прошлом.","en":"magst — liking now; mochtest — liking in the past."},
     sentence: "Mochtest du als Kind Schokolade?",
     answer: "Mochtest",
     translation: { ru: "Ты любила шоколад в детстве?", en: "Did you like chocolate as a child?" },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "du",
+    explanation: {"ru":"mögen → mochte → du mochtest","en":"mögen → mochte → du mochtest"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"mag","meaning":{"ru":"mag — предпочтение сейчас.","en":"mag — a preference now."}}],
+    meaning: {"ru":"mochte — новый коллега сразу ей понравился.","en":"mochte — she liked the new colleague straight away."},
+    meaningContrast: {"ru":"mag — нравится сейчас; mochte — нравилось в прошлом.","en":"mag — liking now; mochte — liking in the past."},
     sentence: "Sie ___ den neuen Kollegen sofort.",
     answer: "mochte",
     translation: { ru: "Он ей сразу понравился.", en: "She liked the new colleague straight away." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "sie",
+    explanation: {"ru":"mögen → mochte → sie mochte","en":"mögen → mochte → sie mochte"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "ihr",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"mögt","meaning":{"ru":"mögt — предпочтение сейчас.","en":"mögt — a preference now."}}],
+    meaning: {"ru":"mochtet — вопрос о впечатлении от еды в гостинице.","en":"mochtet — a question about liking the hotel food during that stay."},
+    meaningContrast: {"ru":"mögt — нравится сейчас; mochtet — нравилось в прошлом.","en":"mögt — liking now; mochtet — liking in the past."},
     sentence: "___ ihr das Essen im Hotel?",
     answer: "Mochtet",
     translation: { ru: "Вам понравилась еда в отеле?", en: "Did you like the food at the hotel?" },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"mögen → mochte → ihr mochtet","en":"mögen → mochte → ihr mochtet"}
   },
   {
     infinitive: "mögen",
     form: "Präteritum",
     person: "er/sie/es",
+    intention: {"ru":"прошлое","en":"past"},
+    alternativeAnswers: [{"answer":"mögen","meaning":{"ru":"mögen — предпочтение сейчас.","en":"mögen — a preference now."}}],
+    meaning: {"ru":"mochten — детям очень нравилась эта игра.","en":"mochten — the children liked the game very much."},
+    meaningContrast: {"ru":"mag — нравится сейчас; mochten — нравилось в прошлом.","en":"mag — liking now; mochten — liking in the past."},
     sentence: "Die Kinder ___ das Spiel sehr.",
     answer: "mochten",
     translation: { ru: "Детям очень нравилась эта игра.", en: "The children really liked the game." },
-    explanation: { ru: "предпочтение или симпатия в прошлом.", en: "liking or preference in the past." }
+    grammarPerson: "er",
+    explanation: {"ru":"mögen → mochte → er mochten","en":"mögen → mochte → er mochten"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [],
+    meaning: {"ru":"möchte — вежливый заказ кофе.","en":"möchte — a polite request for a coffee."},
+    meaningContrast: {"ru":"will — то же желание выражено прямее; möchte — вежливо и мягко.","en":"will — expresses the wish more directly; möchte — polite and tentative."},
     sentence: "Ich ___ einen Kaffee, bitte.",
     answer: "möchte",
     translation: { ru: "Я хотела бы кофе, пожалуйста.", en: "I'd like a coffee, please." },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "ich",
+    explanation: {"ru":"mochte → möchte → ich möchte","en":"mochte → möchte → ich möchte"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"mögen","meaning":{"ru":"mögen — прямой вопрос о желании; такое употребление mögen зависит от речевой ситуации.","en":"mögen — a direct question about a wish; this use of mögen depends on the speaking situation."}}],
+    meaning: {"ru":"möchten — вежливое предложение что-нибудь выпить.","en":"möchten — a polite offer of something to drink."},
+    meaningContrast: {"ru":"wollen — то же желание выражено прямее; möchten — вежливо и мягко.","en":"wollen — expresses the wish more directly; möchten — polite and tentative."},
     sentence: "___ Sie etwas trinken?",
     answer: "Möchten",
     translation: { ru: "Вы хотели бы что-нибудь выпить?", en: "Would you like something to drink?" },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "Sie",
+    explanation: {"ru":"mochte → möchte → Sie möchten","en":"mochte → möchte → Sie möchten"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "ihr",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"mögt","meaning":{"ru":"mögt — прямой вопрос о желании; такое употребление mögen зависит от речевой ситуации.","en":"mögt — a direct question about a wish; this use of mögen depends on the speaking situation."}}],
+    meaning: {"ru":"möchtet — вежливый вопрос о выборе напитка.","en":"möchtet — a polite question about the choice of drink."},
+    meaningContrast: {"ru":"wollt — то же желание выражено прямее; möchtet — вежливо и мягко.","en":"wollt — expresses the wish more directly; möchtet — polite and tentative."},
     sentence: "Was ___ ihr trinken?",
     answer: "möchtet",
     translation: { ru: "Что вы хотели бы выпить?", en: "What would you like to drink?" },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "ihr",
+    explanation: {"ru":"mochte → möchte → ihr möchtet","en":"mochte → möchte → ihr möchtet"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "du",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"magst","meaning":{"ru":"magst — прямой вопрос о желании; такое употребление mögen зависит от речевой ситуации.","en":"magst — a direct question about a wish; this use of mögen depends on the speaking situation."}}],
+    meaning: {"ru":"möchtest — вежливое приглашение поесть вместе.","en":"möchtest — a polite invitation to eat together."},
+    meaningContrast: {"ru":"willst — то же желание выражено прямее; möchtest — вежливо и мягко.","en":"willst — expresses the wish more directly; möchtest — polite and tentative."},
     sentence: "Möchtest du mit uns essen?",
     answer: "Möchtest",
     translation: { ru: "Ты хотел(а) бы поесть с нами?", en: "Would you like to eat with us?" },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "du",
+    explanation: {"ru":"mochte → möchte → du möchtest","en":"mochte → möchte → du möchtest"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "wir",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [],
+    meaning: {"ru":"möchten — вежливая просьба забронировать столик.","en":"möchten — a polite request to reserve a table."},
+    meaningContrast: {"ru":"wollen — то же желание выражено прямее; möchten — вежливо и мягко.","en":"wollen — expresses the wish more directly; möchten — polite and tentative."},
     sentence: "Wir ___ gern einen Tisch für zwei reservieren.",
     answer: "möchten",
     translation: { ru: "Мы хотели бы забронировать столик на двоих.", en: "We'd like to reserve a table for two." },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "wir",
+    explanation: {"ru":"mochte → möchte → wir möchten","en":"mochte → möchte → wir möchten"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "er/sie/es",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [],
+    meaning: {"ru":"möchte — мягко выраженное желание записаться на понедельник.","en":"möchte — a tentative wish for an appointment on Monday."},
+    meaningContrast: {"ru":"will — то же желание выражено прямее; möchte — вежливо и мягко.","en":"will — expresses the wish more directly; möchte — polite and tentative."},
     sentence: "Er ___ gern einen Termin am Montag.",
     answer: "möchte",
     translation: { ru: "Он хотел бы записаться на понедельник.", en: "He would like an appointment on Monday." },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "er",
+    explanation: {"ru":"mochte → möchte → er möchte","en":"mochte → möchte → er möchte"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "ich",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [],
+    meaning: {"ru":"möchte — мягко выраженное желание узнать больше.","en":"möchte — a tentative wish to learn more."},
+    meaningContrast: {"ru":"will — то же желание выражено прямее; möchte — вежливо и мягко.","en":"will — expresses the wish more directly; möchte — polite and tentative."},
     sentence: "Ich ___ gern mehr darüber wissen.",
     answer: "möchte",
     translation: { ru: "Я хотела бы узнать об этом больше.", en: "I'd like to know more about it." },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "ich",
+    explanation: {"ru":"mochte → möchte → ich möchte","en":"mochte → möchte → ich möchte"}
   },
   {
     infinitive: "mögen",
     form: "Konjunktiv II",
     person: "sie/Sie",
+    intention: {"ru":"вежливо и мягко","en":"polite and tentative"},
+    alternativeAnswers: [{"answer":"mögen","meaning":{"ru":"mögen — детям нравится мороженое, а не просьба получить его.","en":"mögen — the children like ice cream, rather than a request to have some."}}],
+    meaning: {"ru":"möchten — дети хотели бы получить мороженое.","en":"möchten — the children would like some ice cream."},
+    meaningContrast: {"ru":"wollen — то же желание выражено прямее; möchten — вежливо и мягко.","en":"wollen — expresses the wish more directly; möchten — polite and tentative."},
     sentence: "Die Kinder ___ ein Eis.",
     answer: "möchten",
     translation: { ru: "Дети хотели бы мороженое.", en: "The children would like an ice cream." },
-    explanation: { ru: "желание или вежливая просьба.", en: "wish or polite request." }
+    grammarPerson: "sie",
+    explanation: {"ru":"mochte → möchte → sie möchten","en":"mochte → möchte → sie möchten"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
     person: "ich",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"sollen — сожаление: лучше было прийти раньше.","en":"sollen — regret: coming earlier would have been better."},
+    meaningContrast: {"ru":"Ich sollte früher kommen — прошлое поручение или нынешний совет; hätte … sollen — оценка несделанного.","en":"Ich sollte früher kommen — an earlier instruction or current advice; hätte … sollen evaluates what was not done."},
     sentence: "Ich hätte früher kommen ___.",
     answer: "sollen",
     translation: { ru: "Мне следовало прийти раньше.", en: "I should have come earlier." },
-    explanation: {
-      ru: "hätte + … + sollen: следовало бы (но не сделали) — сожаление или упрёк. Инфинитив, не «gesollt».",
-      en: "hätte + … + sollen: should have (but didn't) — regret or reproach. Infinitive, not „gesollt“."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"ich hätte + kommen + sollen — два инфинитива","en":"ich hätte + kommen + sollen — two infinitives"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
     person: "du",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"sollen — упрёк: стоило сообщить мне об этом.","en":"sollen — reproach: telling me would have been the right thing to do."},
+    meaningContrast: {"ru":"Du solltest mir das sagen — поручение или совет; hättest … sollen — упрёк о прошлом.","en":"Du solltest mir das sagen — an instruction or advice; hättest … sollen is reproach about the past."},
     sentence: "Du hättest mir das sagen ___.",
     answer: "sollen",
     translation: { ru: "Тебе следовало сказать мне это.", en: "You should have told me that." },
-    explanation: {
-      ru: "hätte + … + sollen: следовало бы (но не сделали) — сожаление или упрёк. Инфинитив, не «gesollt».",
-      en: "hätte + … + sollen: should have (but didn't) — regret or reproach. Infinitive, not „gesollt“."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"du hättest + sagen + sollen — два инфинитива","en":"du hättest + sagen + sollen — two infinitives"}
   },
   {
     infinitive: "sollen",
     form: "Konjunktiv II Vergangenheit",
     person: "wir",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"sollen — сожаление: лучше было ехать на поезде.","en":"sollen — regret: taking the train would have been better."},
+    meaningContrast: {"ru":"Wir sollten den Zug nehmen — поручение или совет; hätten … sollen — сожаление о прошлом выборе.","en":"Wir sollten den Zug nehmen — an instruction or advice; hätten … sollen regrets a past choice."},
     sentence: "Wir hätten den Zug nehmen ___.",
     answer: "sollen",
     translation: { ru: "Нам надо было ехать на поезде.", en: "We should have taken the train." },
-    explanation: {
-      ru: "hätte + … + sollen: следовало бы (но не сделали) — сожаление или упрёк. Инфинитив, не «gesollt».",
-      en: "hätte + … + sollen: should have (but didn't) — regret or reproach. Infinitive, not „gesollt“."
-    }
+    grammarPerson: "wir",
+    explanation: {"ru":"wir hätten + nehmen + sollen — два инфинитива","en":"wir hätten + nehmen + sollen — two infinitives"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
     person: "du",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"können — была возможность позвонить, но ею не воспользовались.","en":"können — there was a chance to call, but it was not taken."},
+    meaningContrast: {"ru":"Du konntest mich anrufen — возможность была; hättest … können здесь подчёркивает упущенную возможность.","en":"Du konntest mich anrufen — the chance existed; hättest … können here highlights a missed chance."},
     sentence: "Du hättest mich anrufen ___.",
     answer: "können",
     translation: { ru: "Ты мог(ла) бы мне позвонить.", en: "You could have called me." },
-    explanation: {
-      ru: "hätte + … + können: мог бы (но не сделал) — упущенная возможность. Инфинитив, не «gekonnt».",
-      en: "hätte + … + können: could have (but didn't) — a missed chance. Infinitive, not „gekonnt“."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"du hättest + anrufen + können — два инфинитива","en":"du hättest + anrufen + können — two infinitives"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
     person: "er/sie/es",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"können — допустимый худший исход, который не наступил.","en":"können — a worse outcome was possible, but did not happen."},
+    meaningContrast: {"ru":"Das könnte schlimmer sein — возможный исход сейчас; hätte … können — возможный исход в прошлом.","en":"Das könnte schlimmer sein — a possible outcome now; hätte … können — a possible outcome in the past."},
     sentence: "Das hätte schlimmer sein ___.",
     answer: "können",
     translation: { ru: "Могло быть и хуже.", en: "It could have been worse." },
-    explanation: {
-      ru: "hätte + … + können: мог бы (но не сделал) — упущенная возможность. Инфинитив, не «gekonnt».",
-      en: "hätte + … + können: could have (but didn't) — a missed chance. Infinitive, not „gekonnt“."
-    }
+    grammarPerson: "es",
+    explanation: {"ru":"es hätte + sein + können — два инфинитива","en":"es hätte + sein + können — two infinitives"}
   },
   {
     infinitive: "können",
     form: "Konjunktiv II Vergangenheit",
     person: "ich",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"können — была возможность помочь, но ею не воспользовались.","en":"können — there was a chance to help, but it was not taken."},
+    meaningContrast: {"ru":"Ich konnte dir helfen — помощь была возможна; hätte … können здесь означает, что возможность осталась неиспользованной.","en":"Ich konnte dir helfen — help was possible; hätte … können here means the opportunity was not used."},
     sentence: "Ich hätte dir helfen ___.",
     answer: "können",
     translation: { ru: "Я могла бы тебе помочь.", en: "I could have helped you." },
-    explanation: {
-      ru: "hätte + … + können: мог бы (но не сделал) — упущенная возможность. Инфинитив, не «gekonnt».",
-      en: "hätte + … + können: could have (but didn't) — a missed chance. Infinitive, not „gekonnt“."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"ich hätte + helfen + können — два инфинитива","en":"ich hätte + helfen + können — two infinitives"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II Vergangenheit",
     person: "wir",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"müssen — это сделали, хотя необходимости не было.","en":"müssen — it was done although it was not necessary."},
+    meaningContrast: {"ru":"Wir mussten das nicht machen — необходимости не было; hätten … nicht … müssen здесь добавляет: всё же сделали.","en":"Wir mussten das nicht machen — it was not necessary; hätten … nicht … müssen here adds: it was done anyway."},
     sentence: "Wir hätten das nicht machen ___.",
     answer: "müssen",
     translation: { ru: "Нам не нужно было это делать.", en: "We needn't have done that." },
-    explanation: {
-      ru: "hätte + nicht + … + müssen: не нужно было (но сделали). Инфинитив, не «gemusst».",
-      en: "hätte + nicht + … + müssen: needn't have (but did). Infinitive, not „gemusst“."
-    }
+    grammarPerson: "wir",
+    explanation: {"ru":"wir hätten + machen + müssen — два инфинитива","en":"wir hätten + machen + müssen — two infinitives"}
   },
   {
     infinitive: "müssen",
     form: "Konjunktiv II Vergangenheit",
     person: "du",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"müssen — вы пришли рано, хотя это было необязательно.","en":"müssen — you came early although it was not necessary."},
+    meaningContrast: {"ru":"Du musstest nicht so früh kommen — ранний приход не требовался; hättest … nicht … müssen здесь добавляет: всё же пришли.","en":"Du musstest nicht so früh kommen — coming early was not required; hättest … nicht … müssen here adds: you came anyway."},
     sentence: "Du hättest nicht so früh kommen ___.",
     answer: "müssen",
     translation: { ru: "Тебе не обязательно было приходить так рано.", en: "You needn't have come so early." },
-    explanation: {
-      ru: "hätte + nicht + … + müssen: не нужно было (но сделали). Инфинитив, не «gemusst».",
-      en: "hätte + nicht + … + müssen: needn't have (but did). Infinitive, not „gemusst“."
-    }
+    grammarPerson: "du",
+    explanation: {"ru":"du hättest + kommen + müssen — два инфинитива","en":"du hättest + kommen + müssen — two infinitives"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II Vergangenheit",
     person: "ich",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürfen — сожаление: эти слова не следовало произносить.","en":"dürfen — regret: those words should not have been said."},
+    meaningContrast: {"ru":"Das durfte ich nicht sagen — это было запрещено; hätte … nicht … dürfen — сожаление о сказанном.","en":"Das durfte ich nicht sagen — it was forbidden; hätte … nicht … dürfen — regret about having said it."},
     sentence: "Das hätte ich nicht sagen ___.",
     answer: "dürfen",
     translation: { ru: "Мне не следовало этого говорить.", en: "I shouldn't have said that." },
-    explanation: {
-      ru: "hätte + nicht + … + dürfen: нельзя было (но сделали) — сожаление, извинение. Инфинитив, не «gedurft».",
-      en: "hätte + nicht + … + dürfen: shouldn't have (but did) — regret, apology. Infinitive, not „gedurft“."
-    }
+    grammarPerson: "ich",
+    explanation: {"ru":"ich hätte + sagen + dürfen — два инфинитива","en":"ich hätte + sagen + dürfen — two infinitives"}
   },
   {
     infinitive: "dürfen",
     form: "Konjunktiv II Vergangenheit",
     person: "er/sie/es",
+    intention: {"ru":"гипотетически: прошлое","en":"hypothetical past"},
+    alternativeAnswers: [],
+    meaning: {"ru":"dürfen — оценка прошлого: это не должно было случиться.","en":"dürfen — a judgment about the past: this should not have happened."},
+    meaningContrast: {"ru":"Das darf nicht passieren — недопустимо сейчас или в будущем; hätte … nicht … dürfen — оценка случившегося.","en":"Das darf nicht passieren — unacceptable now or in the future; hätte … nicht … dürfen — a judgment about what happened."},
     sentence: "Das hätte nicht passieren ___.",
     answer: "dürfen",
     translation: { ru: "Этого не должно было случиться.", en: "That should never have happened." },
-    explanation: {
-      ru: "hätte + nicht + … + dürfen: нельзя было (но сделали) — сожаление, извинение. Инфинитив, не «gedurft».",
-      en: "hätte + nicht + … + dürfen: shouldn't have (but did) — regret, apology. Infinitive, not „gedurft“."
-    }
+    grammarPerson: "es",
+    explanation: {"ru":"es hätte + passieren + dürfen — два инфинитива","en":"es hätte + passieren + dürfen — two infinitives"}
   }
 ];

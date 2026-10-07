@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Modalverben" />
-    <link rel="stylesheet" href="modalverben.css?v=10" />
+    <link rel="stylesheet" href="modalverben.css?v=13" />
   </head>
   <body>
     <div id="formsModal" class="forms-modal" aria-hidden="true">
@@ -44,6 +44,7 @@
         <div class="progress"><i id="bar"></i></div>
         <section class="card">
           <div id="verb"></div>
+          <div class="intention" id="intention"></div>
           <div class="sentence" id="sentence"></div>
           <div class="translation" id="translation"></div>
           <div class="answer-area" id="answer-area">
@@ -61,7 +62,10 @@
           </div>
           <div class="result" id="result">
             <div class="state" id="state"></div>
+            <div class="answer-feedback" id="answerFeedback" hidden></div>
             <div class="form-line" id="formLine"></div>
+            <div class="meaning" id="meaning"></div>
+            <div class="meaning-contrast" id="meaningContrast"></div>
             <div class="form-kind" id="formKind"></div>
             <div class="explanation" id="explanation"></div>
           </div>
@@ -88,13 +92,14 @@
         <h2>Worum geht's?</h2>
         <p class="about-de" id="aboutText"></p>
       </div>
-      <div class="version-mark" aria-hidden="true">v22</div>
+      <div class="version-mark" aria-hidden="true">v28</div>
     </main>
 
     <script src="../../components/deutsch-translation-v1.js?v=2"></script>
-    <script src="special_verbs.js?v=6"></script>
+    <script src="special_verbs.js?v=12"></script>
+    <script src="answer-rules.js?v=1"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="modalverben.js?v=10"></script>
+    <script src="modalverben.js?v=14"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

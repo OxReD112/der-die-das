@@ -206,6 +206,7 @@ function render() {
   const item = deck[index];
   checked = false;
   $("verb").textContent = item.infinitive;
+  $("intention").textContent = "(" + getTranslation(item, "intention") + ")";
   $("sentence").innerHTML = sentenceWithGap(item);
   $("translation").textContent = getTranslation(item, "translation");
   $("answer").value = "";
@@ -222,35 +223,51 @@ function render() {
 }
 
 /* ===== ANSWER ===== */
+const ANSWER_FEEDBACK = {
+  expected: { ru: "Верно", en: "Correct" },
+  alternative: { ru: "Корректно, но другой смысл или оттенок", en: "Valid, but a different meaning or tone" },
+  incorrect: { ru: "Ответ не подходит к заданию", en: "The answer does not fit the task" },
+  target: { ru: "Здесь нужно выразить: ", en: "The intended meaning is: " },
+  entered: { ru: "Ваш вариант: ", en: "Your version: " }
+};
 function checkAnswer() {
   if (checked) {
     next();
     return;
   }
   const item = deck[index];
-  const a = $("answer").value.trim().toLowerCase();
-  if (!a) return;
+  const a = window.ModalAnswerRules.normalize($("answer").value);
+  const assessment = window.ModalAnswerRules.assess(item, a);
+  if (assessment.kind === "empty") return;
 
   checked = true;
-  const ok = a === item.answer.trim().toLowerCase();
+  const ok = assessment.kind === "expected";
+  const alternative = assessment.kind === "alternative";
   if (ok) correctCount++;
   updateDifficulty(item, ok);
   recordProgress(item, ok);
 
-  $("result").className = "result show " + (ok ? "good" : "bad");
+  $("result").className = "result show " + (ok ? "good" : alternative ? "alternative" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
-  $("sentence").innerHTML = sentenceWithGap(item, true, !ok);
-  $("state").textContent = ok ? "Richtig" : "Nicht ganz";
-  $("formKind").textContent = item.form;
-  // the typed answer is shown as plain text, crossed out
+  $("sentence").innerHTML = sentenceWithGap(item, true, !ok && !alternative);
+  $("state").textContent = getTranslation(ANSWER_FEEDBACK, assessment.kind);
+  $("answerFeedback").textContent = alternative
+    ? getTranslation(ANSWER_FEEDBACK, "target") + getTranslation(item, "intention") + ". "
+      + getTranslation(ANSWER_FEEDBACK, "entered") + getTranslation(assessment.alternative, "meaning")
+    : "";
+  $("answerFeedback").hidden = !alternative;
+  $("formKind").textContent = item.form + " · " + item.grammarPerson;
+  // Valid alternatives are explained separately and are not crossed out.
   const line = [item.infinitive + " → " + item.answer];
-  if (!ok) {
+  if (!ok && !alternative) {
     const wrong = document.createElement("span");
     wrong.className = "wrong-answer";
     wrong.textContent = a;
     line.push(" → ", wrong);
   }
   $("formLine").replaceChildren(...line);
+  $("meaning").textContent = getTranslation(item, "meaning");
+  $("meaningContrast").textContent = getTranslation(item, "meaningContrast");
   $("explanation").textContent = getTranslation(item, "explanation");
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
