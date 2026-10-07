@@ -23,7 +23,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "können",
     form: "Präsens",
     person: "du",
-    intention: {"ru":"настоящее","en":"present"},
+    intention: {"ru":"прямой вопрос","en":"direct question"},
     alternativeAnswers: [{"answer":"könntest","meaning":{"ru":"könntest — условная возможность или более мягкая просьба.","en":"könntest — a conditional possibility or a more tentative request."}}],
     meaning: {"ru":"kannst — прямая просьба о помощи.","en":"kannst — a direct request for help."},
     meaningContrast: {"ru":"könntest — более мягкая просьба; kannst — прямая, тоже может быть вежливой.","en":"könntest — a more tentative request; kannst — direct, and can also be polite."},
@@ -51,7 +51,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "können",
     form: "Präsens",
     person: "ihr",
-    intention: {"ru":"настоящее","en":"present"},
+    intention: {"ru":"прямой вопрос","en":"direct question"},
     alternativeAnswers: [{"answer":"könntet","meaning":{"ru":"könntet — условная возможность или более мягкая просьба.","en":"könntet — a conditional possibility or a more tentative request."}}],
     meaning: {"ru":"könnt — прямой вопрос о возможности прийти завтра.","en":"könnt — a direct question about coming tomorrow."},
     meaningContrast: {"ru":"könntet — более мягкая просьба; könnt — прямая, тоже может быть вежливой.","en":"könntet — a more tentative request; könnt — direct, and can also be polite."},
@@ -94,7 +94,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Präteritum",
     person: "wir",
     intention: {"ru":"прошлое","en":"past"},
-    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность сейчас, выраженная прямо.","en":"können — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"konnten — погода не позволила остаться на улице.","en":"konnten — the weather prevented staying outside."},
     meaningContrast: {"ru":"können — возможность сейчас; konnten — возможность в прошлом.","en":"können — ability or possibility now; konnten — ability or possibility in the past."},
     sentence: "Wir ___ wegen des Wetters nicht draußen bleiben.",
@@ -111,7 +111,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Präteritum",
     person: "er/sie/es",
     intention: {"ru":"прошлое","en":"past"},
-    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность сейчас, выраженная прямо.","en":"kann — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"konnte — открыть дверь не удалось.","en":"konnte — opening the door was not possible."},
     meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Er ___ die Tür nicht öffnen.",
@@ -139,7 +139,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Präteritum",
     person: "ihr",
     intention: {"ru":"прошлое","en":"past"},
-    alternativeAnswers: [{"answer":"könnt","meaning":{"ru":"könnt — возможность выражена прямо; вопрос может оставаться вежливым.","en":"könnt — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"könnt","meaning":{"ru":"könnt — возможность сейчас, выраженная прямо.","en":"könnt — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"konntet — вопрос о причине прошлой невозможности.","en":"konntet — a question about why coming earlier was not possible."},
     meaningContrast: {"ru":"könnt — возможность сейчас; konntet — возможность в прошлом.","en":"könnt — ability or possibility now; konntet — ability or possibility in the past."},
     sentence: "Warum ___ ihr nicht früher kommen?",
@@ -153,7 +153,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Präteritum",
     person: "er/sie/es",
     intention: {"ru":"прошлое","en":"past"},
-    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность сейчас, выраженная прямо.","en":"kann — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"konnte — ответить на вопрос не удалось.","en":"konnte — answering the question was not possible."},
     meaningContrast: {"ru":"kann — возможность сейчас; konnte — возможность в прошлом.","en":"kann — ability or possibility now; konnte — ability or possibility in the past."},
     sentence: "Sie ___ die Frage nicht beantworten.",
@@ -167,7 +167,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Präteritum",
     person: "sie/Sie",
     intention: {"ru":"прошлое","en":"past"},
-    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность сейчас, выраженная прямо.","en":"können — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"konnten — в те выходные появилась возможность выспаться.","en":"konnten — those days off allowed the children to sleep in."},
     meaningContrast: {"ru":"können — возможность сейчас; konnten — возможность в прошлом.","en":"können — ability or possibility now; konnten — ability or possibility in the past."},
     sentence: "Am Wochenende ___ die Kinder endlich ausschlafen.",
@@ -257,7 +257,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Konjunktiv II",
     person: "wir",
     intention: {"ru":"гипотетически","en":"hypothetical"},
-    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность выражена прямо; вопрос может оставаться вежливым.","en":"können — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"können","meaning":{"ru":"können — возможность сейчас, выраженная прямо.","en":"können — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"könnten — поездка на машине — один из вариантов.","en":"könnten — travelling by car is one possible option."},
     meaningContrast: {"ru":"können — возможность утверждается прямо; könnten — рассматривается как вариант или зависит от условия.","en":"können — states possibility directly; könnten — considers an option or depends on a condition."},
     sentence: "Wir ___ mit dem Auto fahren, aber der Zug ist bequemer.",
@@ -274,7 +274,7 @@ window.SPECIAL_VERB_EXERCISES = [
     form: "Konjunktiv II",
     person: "ich",
     intention: {"ru":"гипотетически","en":"hypothetical"},
-    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность сейчас, выраженная прямо.","en":"kann — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"könnte — поиск возможного действия сейчас.","en":"könnte — considering a possible action now."},
     meaningContrast: {"ru":"kann — возможность утверждается прямо; könnte — рассматривается как вариант или зависит от условия.","en":"kann — states possibility directly; könnte — considers an option or depends on a condition."},
     sentence: "Was ___ ich jetzt machen?",
@@ -287,8 +287,8 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "können",
     form: "Konjunktiv II",
     person: "er/sie/es",
-    intention: {"ru":"предположение: возможно","en":"possibility"},
-    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность выражена прямо; вопрос может оставаться вежливым.","en":"kann — a directly expressed possibility; the question can still be polite."}}],
+    intention: {"ru":"осторожное предположение","en":"tentative possibility"},
+    alternativeAnswers: [{"answer":"kann","meaning":{"ru":"kann — возможность сейчас, выраженная прямо.","en":"kann — ability or possibility stated directly in the present."}}],
     meaning: {"ru":"könnte — предположение: это может оказаться решением.","en":"könnte — a possibility: this might be a good solution."},
     meaningContrast: {"ru":"kann — тоже выражает возможность; könnte делает предположение осторожнее.","en":"kann — also expresses possibility; könnte makes the assumption more tentative."},
     sentence: "Das ___ eine gute Lösung sein.",
@@ -472,7 +472,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ich",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
     meaning: {"ru":"müsste — уйти раньше было бы нужно, но это не решено.","en":"müsste — leaving earlier would be necessary, but is not settled."},
     meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
@@ -489,7 +489,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "du",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"musst","meaning":{"ru":"musst — необходимость сейчас.","en":"musst — necessity now."}}],
     meaning: {"ru":"müsstest — больше сна было бы необходимо.","en":"müsstest — more sleep would be necessary."},
     meaningContrast: {"ru":"musst — необходимость выражена прямо; müsstest — менее категорично или при некотором условии.","en":"musst — states necessity directly; müsstest — less categorical or conditional."},
@@ -503,7 +503,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "wir",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
     meaning: {"ru":"müssten — сначала было бы нужно обсудить проблему.","en":"müssten — discussing the problem first would be necessary."},
     meaningContrast: {"ru":"müssen — необходимость выражена прямо; müssten — менее категорично или при некотором условии.","en":"müssen — states necessity directly; müssten — less categorical or conditional."},
@@ -517,7 +517,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "er/sie/es",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
     meaning: {"ru":"müsste — для этого понадобилось бы записаться.","en":"müsste — making an appointment would be necessary for this."},
     meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
@@ -534,7 +534,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "er/sie/es",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
     meaning: {"ru":"müsste — следовало бы проявлять больше осторожности.","en":"müsste — being more careful would be necessary."},
     meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
@@ -548,7 +548,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ihr",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"müsst","meaning":{"ru":"müsst — необходимость сейчас.","en":"müsst — necessity now."}}],
     meaning: {"ru":"müsstet — потребовалось бы делать больше перерывов.","en":"müsstet — taking more breaks would be necessary."},
     meaningContrast: {"ru":"müsst — необходимость выражена прямо; müsstet — менее категорично или при некотором условии.","en":"müsst — states necessity directly; müsstet — less categorical or conditional."},
@@ -562,7 +562,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "sie/Sie",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"müssen","meaning":{"ru":"müssen — необходимость сейчас.","en":"müssen — necessity now."}}],
     meaning: {"ru":"müssten — детям следовало бы ложиться раньше.","en":"müssten — the children would need to go to bed earlier."},
     meaningContrast: {"ru":"müssen — необходимость выражена прямо; müssten — менее категорично или при некотором условии.","en":"müssen — states necessity directly; müssten — less categorical or conditional."},
@@ -576,7 +576,7 @@ window.SPECIAL_VERB_EXERCISES = [
     infinitive: "müssen",
     form: "Konjunktiv II",
     person: "ich",
-    intention: {"ru":"гипотетически","en":"hypothetical"},
+    intention: {"ru":"надо бы","en":"would need to"},
     alternativeAnswers: [{"answer":"muss","meaning":{"ru":"muss — необходимость сейчас.","en":"muss — necessity now."}}],
     meaning: {"ru":"müsste — потребовалось бы уточнить ещё раз.","en":"müsste — asking again would be necessary."},
     meaningContrast: {"ru":"muss — необходимость выражена прямо; müsste — менее категорично или при некотором условии.","en":"muss — states necessity directly; müsste — less categorical or conditional."},
@@ -1461,16 +1461,16 @@ window.SPECIAL_VERB_EXERCISES = [
   {
     infinitive: "mögen",
     form: "Präteritum",
-    person: "er/sie/es",
+    person: "sie/Sie",
     intention: {"ru":"прошлое","en":"past"},
     alternativeAnswers: [{"answer":"mögen","meaning":{"ru":"mögen — предпочтение сейчас.","en":"mögen — a preference now."}}],
     meaning: {"ru":"mochten — детям очень нравилась эта игра.","en":"mochten — the children liked the game very much."},
-    meaningContrast: {"ru":"mag — нравится сейчас; mochten — нравилось в прошлом.","en":"mag — liking now; mochten — liking in the past."},
+    meaningContrast: {"ru":"mögen — нравится сейчас; mochten — нравилось в прошлом.","en":"mögen — liking now; mochten — liking in the past."},
     sentence: "Die Kinder ___ das Spiel sehr.",
     answer: "mochten",
     translation: { ru: "Детям очень нравилась эта игра.", en: "The children really liked the game." },
-    grammarPerson: "er",
-    explanation: {"ru":"mögen → mochte → er mochten","en":"mögen → mochte → er mochten"}
+    grammarPerson: "sie",
+    explanation: {"ru":"mögen → mochte → sie mochten","en":"mögen → mochte → sie mochten"}
   },
   {
     infinitive: "mögen",
@@ -1596,7 +1596,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "sollen",
     translation: { ru: "Мне следовало прийти раньше.", en: "I should have come earlier." },
     grammarPerson: "ich",
-    explanation: {"ru":"ich hätte + kommen + sollen — два инфинитива","en":"ich hätte + kommen + sollen — two infinitives"}
+    explanation: {"ru":"ich hätte + kommen + sollen — модальный глагол в инфинитиве","en":"ich hätte + kommen + sollen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "sollen",
@@ -1610,7 +1610,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "sollen",
     translation: { ru: "Тебе следовало сказать мне это.", en: "You should have told me that." },
     grammarPerson: "du",
-    explanation: {"ru":"du hättest + sagen + sollen — два инфинитива","en":"du hättest + sagen + sollen — two infinitives"}
+    explanation: {"ru":"du hättest + sagen + sollen — модальный глагол в инфинитиве","en":"du hättest + sagen + sollen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "sollen",
@@ -1624,7 +1624,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "sollen",
     translation: { ru: "Нам надо было ехать на поезде.", en: "We should have taken the train." },
     grammarPerson: "wir",
-    explanation: {"ru":"wir hätten + nehmen + sollen — два инфинитива","en":"wir hätten + nehmen + sollen — two infinitives"}
+    explanation: {"ru":"wir hätten + nehmen + sollen — модальный глагол в инфинитиве","en":"wir hätten + nehmen + sollen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "können",
@@ -1638,7 +1638,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "können",
     translation: { ru: "Ты мог(ла) бы мне позвонить.", en: "You could have called me." },
     grammarPerson: "du",
-    explanation: {"ru":"du hättest + anrufen + können — два инфинитива","en":"du hättest + anrufen + können — two infinitives"}
+    explanation: {"ru":"du hättest + anrufen + können — модальный глагол в инфинитиве","en":"du hättest + anrufen + können — modal verb stays in the infinitive"}
   },
   {
     infinitive: "können",
@@ -1652,7 +1652,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "können",
     translation: { ru: "Могло быть и хуже.", en: "It could have been worse." },
     grammarPerson: "es",
-    explanation: {"ru":"es hätte + sein + können — два инфинитива","en":"es hätte + sein + können — two infinitives"}
+    explanation: {"ru":"es hätte + sein + können — модальный глагол в инфинитиве","en":"es hätte + sein + können — modal verb stays in the infinitive"}
   },
   {
     infinitive: "können",
@@ -1666,7 +1666,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "können",
     translation: { ru: "Я могла бы тебе помочь.", en: "I could have helped you." },
     grammarPerson: "ich",
-    explanation: {"ru":"ich hätte + helfen + können — два инфинитива","en":"ich hätte + helfen + können — two infinitives"}
+    explanation: {"ru":"ich hätte + helfen + können — модальный глагол в инфинитиве","en":"ich hätte + helfen + können — modal verb stays in the infinitive"}
   },
   {
     infinitive: "müssen",
@@ -1680,7 +1680,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "müssen",
     translation: { ru: "Нам не нужно было это делать.", en: "We needn't have done that." },
     grammarPerson: "wir",
-    explanation: {"ru":"wir hätten + machen + müssen — два инфинитива","en":"wir hätten + machen + müssen — two infinitives"}
+    explanation: {"ru":"wir hätten + machen + müssen — модальный глагол в инфинитиве","en":"wir hätten + machen + müssen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "müssen",
@@ -1694,7 +1694,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "müssen",
     translation: { ru: "Тебе не обязательно было приходить так рано.", en: "You needn't have come so early." },
     grammarPerson: "du",
-    explanation: {"ru":"du hättest + kommen + müssen — два инфинитива","en":"du hättest + kommen + müssen — two infinitives"}
+    explanation: {"ru":"du hättest + kommen + müssen — модальный глагол в инфинитиве","en":"du hättest + kommen + müssen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "dürfen",
@@ -1708,7 +1708,7 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "dürfen",
     translation: { ru: "Мне не следовало этого говорить.", en: "I shouldn't have said that." },
     grammarPerson: "ich",
-    explanation: {"ru":"ich hätte + sagen + dürfen — два инфинитива","en":"ich hätte + sagen + dürfen — two infinitives"}
+    explanation: {"ru":"ich hätte + sagen + dürfen — модальный глагол в инфинитиве","en":"ich hätte + sagen + dürfen — modal verb stays in the infinitive"}
   },
   {
     infinitive: "dürfen",
@@ -1722,6 +1722,6 @@ window.SPECIAL_VERB_EXERCISES = [
     answer: "dürfen",
     translation: { ru: "Этого не должно было случиться.", en: "That should never have happened." },
     grammarPerson: "es",
-    explanation: {"ru":"es hätte + passieren + dürfen — два инфинитива","en":"es hätte + passieren + dürfen — two infinitives"}
+    explanation: {"ru":"es hätte + passieren + dürfen — модальный глагол в инфинитиве","en":"es hätte + passieren + dürfen — modal verb stays in the infinitive"}
   }
 ];

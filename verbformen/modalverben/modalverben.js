@@ -476,7 +476,7 @@ const MODAL_FORM_TEXT = {
   question: { en: "What do you want to say?", ru: "Что ты хочешь сказать?" },
   now: { en: "now", ru: "сейчас" },
   past: { en: "past", ru: "раньше" },
-  unreal: { en: "not real: polite, maybe, advice", ru: "не на самом деле: вежливо, может быть, совет" },
+  unreal: { en: "hypothetical, tentative, advice", ru: "условно, мягко, совет" },
   same: {
     en: "Präteritum and Konjunktiv II look the same - the sentence decides.",
     ru: "Präteritum и Konjunktiv II совпадают - решает предложение."
@@ -496,7 +496,8 @@ const MODAL_FORM_MEANINGS = {
   ],
   dürfen: [
     { label: { en: "it's allowed", ru: "можно, разрешено" }, column: 0, example: "Hier *darf* man parken." },
-    { label: { en: "asking very politely", ru: "очень вежливо спросить" }, column: 2, example: "*Dürfte* ich kurz stören?" }
+    { label: { en: "asking very politely", ru: "очень вежливо спросить" }, column: 2, example: "*Dürfte* ich kurz stören?" },
+    { label: { en: "probably, likely", ru: "скорее всего" }, column: 2, example: "Er *dürfte* schon zu Hause sein." }
   ],
   mögen: [
     { label: { en: "I like it", ru: "мне нравится" }, column: 0, example: "Ich *mag* Kaffee." },
