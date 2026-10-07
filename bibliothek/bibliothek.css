@@ -269,11 +269,11 @@
 .reading-view { height:100%; display:flex; flex-direction:column; min-height:0; }
 .reading-view > .reading-toolbar { position:relative; flex:none; }
 .reading-view > .chapter-progress-track { position:relative; top:auto; flex:none; }
-.page-viewport { flex:1; min-height:0; overflow:hidden; touch-action:pan-y pinch-zoom; overscroll-behavior-x:contain; }
+.page-viewport { flex:1; min-height:0; margin-top:20px; overflow:hidden; touch-action:pan-y pinch-zoom; overscroll-behavior-x:contain; }
 .page-flow { width:100%; height:100%; column-width:var(--page-width); column-gap:32px; column-fill:auto; }
 .page-flow .book-headline { margin:16px 0 0; }
 .page-flow .reading-progress { margin:8px 0 0; }
-.page-flow .reading-text { padding:12px 0 0; }
+.page-flow .reading-text { padding:0; }
 .page-flow .reading-text p { orphans:2; widows:2; }
 .page-flow .reading-text h1,.page-flow .reading-text h2,.page-flow .reading-text h3,.page-flow .reading-text h4,.page-flow .reading-text h5,.page-flow .reading-text h6 { break-after:avoid; }
 .page-flow .chapter-end { break-inside:avoid; padding:12px 0; }
