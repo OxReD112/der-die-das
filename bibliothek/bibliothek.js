@@ -156,7 +156,7 @@
     if (actionLabel) {
       const action = document.createElement("a");
       action.className = "toast-action";
-      action.href = "../wortschatz/index.html?v=20261007-import-final-1";
+      action.href = "../wortschatz/index.html?v=20261007-import-final-2";
       action.textContent = actionLabel;
       toast.append(action);
     }
@@ -574,7 +574,7 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=20261007-import-final-1`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=20261007-import-final-2`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
       .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
         dictionary = [

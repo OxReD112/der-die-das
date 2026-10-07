@@ -51,12 +51,12 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261007-import-final-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261007-import-final-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261007-import-final-1"),
-      loadJson("worterbuch/german-adverbs.json?v=20261007-import-final-1"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261007-import-final-1"),
-      loadJson("worterbuch/german-pronouns.json?v=20261007-import-final-1")
+      loadJson("worterbuch/german-nouns.json?v=20261007-import-final-2"),
+      loadJson("worterbuch/german-verbs.json?v=20261007-import-final-2"),
+      loadJson("worterbuch/german-adjectives.json?v=20261007-import-final-2"),
+      loadJson("worterbuch/german-adverbs.json?v=20261007-import-final-2"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261007-import-final-2"),
+      loadJson("worterbuch/german-pronouns.json?v=20261007-import-final-2")
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [

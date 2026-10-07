@@ -6,7 +6,7 @@
   const files=[['nouns','noun'],['verbs','verb'],['adjectives','adjective'],['adverbs','adverb'],['conjunctions','conjunction'],['pronouns','pronoun']];
   async function load() {
     const groups=await Promise.all(files.map(async([file,type])=>{
-      const response=await fetch(new URL(`german-${file}.json?v=20261007-import-final-1`,root),{cache:'no-store'});
+      const response=await fetch(new URL(`german-${file}.json?v=20261007-import-final-2`,root),{cache:'no-store'});
       if(!response.ok)throw new Error('The dictionary could not be loaded. Your draft is kept; please try again.');
       return (await response.json()).map(item=>({...item,type}));
     }));
