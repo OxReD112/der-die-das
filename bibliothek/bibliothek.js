@@ -10,7 +10,7 @@
   const STORE = "books";
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
-  let currentBook = null, selectedEntry = null, toastTimer = null, restoringPosition = false;
+  let currentBook = null, selectedEntry = null, activePronouns = [], toastTimer = null, restoringPosition = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
   let switchingChapter = false, renderRequest = 0;
@@ -612,6 +612,10 @@
     try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
     if (saved) resolution.selected = window.BibliothekLemmaResolver.savedCandidate(saved, resolution) || resolution.selected;
     if (request !== lookupRequest) return;
+    const reference=window.BibliothekPronounReference;
+    const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
+    let showPronounSummary=pronounCandidates.length>0 && !(saved && resolution.selected && !reference.isPronoun(resolution.selected));
+    if(showPronounSummary && !reference.isPronoun(resolution.selected))resolution.selected=pronounCandidates[0];
     popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
     selectedEntry = resolution.selected?.item || null;
@@ -649,8 +653,9 @@
     const renderSelection = () => {
       const candidate = selectedResolution;
       const ru = locale() === "ru";
-      const referencePronoun = window.BibliothekPronounReference.excluded(selectedEntry);
-      content.textContent = referencePronoun ? (ru ? "местоимение" : "pronoun") : candidate ? candidateMeaning(candidate,candidateText(candidate),
+      activePronouns=showPronounSummary ? pronounCandidates : [];
+      const referencePronoun = showPronounSummary;
+      content.textContent = referencePronoun ? reference.brief(pronounCandidates,word,locale()) : candidate ? candidateMeaning(candidate,candidateText(candidate),
         ru && window.BibliothekMeaningDisplay.brief(candidate,"ru") ? "ru" : "en"," · ") :
         resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
         resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
@@ -671,14 +676,17 @@
       }
       $("popover-word").textContent = referencePronoun ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
+      $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : "Dictionary details ";
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       paintActiveWord(candidate);
+      if(showPronounSummary)popupAmbiguous=false;
       renderChoices();
     };
     const renderChoices = () => {
       choices.replaceChildren();
-      const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale());
+      const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale()).filter(row=>!showPronounSummary || !reference.isPronoun(row.candidate));
+      if(showPronounSummary)alternatives.open=false;
       alternatives.hidden = !displayed.length;
       const source = $("popover-source");
       const russianArticles = $("russian-source-articles");
@@ -710,6 +718,7 @@
       button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateMeaning(candidate,text,language," — ")}`;
       button.addEventListener("click", async () => {
         if (request !== lookupRequest) return;
+        showPronounSummary=reference.isPronoun(candidate);
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
         $("popover-bookmark").disabled = true;
         renderSelection();
@@ -739,11 +748,11 @@
       // Repaint immediately; fetching Russian values must not keep English UI
       // frozen or recompute the user's chosen lemma.
       renderSelection();
-      if (!$sheet.hidden && selectedEntry) renderDictionaryCard(selectedEntry);
+      if (!$sheet.hidden && selectedEntry) renderDictionaryDetails();
       await window.BibliothekRussianTranslations?.enrich(resolution,language);
       if (request !== lookupRequest || revision !== languageRevision || locale() !== language) return;
       renderSelection();
-      if (!$sheet.hidden && selectedEntry) renderDictionaryCard(selectedEntry);
+      if (!$sheet.hidden && selectedEntry) renderDictionaryDetails();
     };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     renderSelection();
@@ -759,6 +768,20 @@
       $popover.style.left = `${left}px`;
       $popover.style.top = `${Math.max(edge, top)}px`;
     }
+  }
+  function renderDictionaryDetails() {
+    if(!activePronouns.length){if(selectedEntry)renderDictionaryCard(selectedEntry);return;}
+    const root=$("dictionary-card"),sections=[],seen=new Set();
+    for(const candidate of activePronouns){
+      const item=candidate.item,key=item.wortschatz_excluded ? window.BibliothekPronounReference.group(item) : item.id;
+      if(seen.has(key))continue;seen.add(key);
+      renderDictionaryCard(item);
+      const section=document.createElement('section');section.dataset.pronounGroup=key;
+      while(root.firstChild)section.append(root.firstChild);
+      if(sections.length)section.querySelector('#sheet-word')?.removeAttribute('id');
+      sections.push(section);
+    }
+    root.replaceChildren(...sections);delete root.dataset.pronounReference;
   }
   function renderDictionaryCard(item) {
     const root = $("dictionary-card");
@@ -1067,7 +1090,7 @@
     const bounds = sourcesDialog.getBoundingClientRect();
     if (event.target === sourcesDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) sourcesDialog.close();
   });
-  $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryCard(selectedEntry); $popover.hidden = true; $sheet.hidden = false; });
+  $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryDetails(); $popover.hidden = true; $sheet.hidden = false; });
   $("sheet-close").addEventListener("click", closePopups);
   $("sheet-scrim").addEventListener("click", closePopups);
   document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });
