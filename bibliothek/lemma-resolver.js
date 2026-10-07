@@ -223,29 +223,40 @@
       const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
       if (selected < 0) return [];
       const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
-      const connected = (a,b) => !/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index));
-      let start = selected, end = selected;
-      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
-      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
-      const prefix = norm(tokens[end][0]), results = [];
-      for (let i = start; i < end; i++) {
-        if (selected !== i && selected !== end) continue;
-        const pairs = (separatedForms.get(norm(tokens[i][0])) || []).filter(pair => pair.prefix === prefix);
-        if (!pairs.length) continue;
-        // A capitalised noun inside a clause must not become a verb stem.
+      const gap = (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index);
+      const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(gap(a,b)) || boundaries.has(norm(tokens[b][0]));
+      const soft = (a,b) => /,/u.test(gap(a,b)) || /\s[–—]\s/u.test(gap(a,b));
+      const competingVerb = i => {
+        const entries = forms.get(norm(tokens[i][0])) || [];
+        if (norm(tokens[i][0]) === "bitte" || /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && entries.some(e => e.type === "Nomen")) return false;
+        return entries.some(e => e.type === "Verb") || separatedForms.has(norm(tokens[i][0]));
+      };
+      const results = [];
+      for (let i = 0; i < tokens.length-1; i++) {
+        const possible = separatedForms.get(norm(tokens[i][0])) || [];
+        if (!possible.length) continue;
+        let start = i;
+        while (start > 0 && !hard(start-1,start) && !soft(start-1,start)) start--;
         if (i > start && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Nomen")) continue;
-        // Avoid attaching a particle across another verb group.
-        if (tokens.slice(i+1,end).some(t => {
-          const entries = forms.get(norm(t[0])) || [];
-          if (norm(t[0]) === "bitte" || /^[A-ZÄÖÜ]/u.test(t[0]) && entries.some(e => e.type === "Nomen")) return false;
-          return entries.some(e => e.type === "Verb") || separatedForms.has(norm(t[0]));
-        })) continue;
-        const earlierAuxiliary = tokens.slice(start,i).some(t => (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" &&
-          ["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten","lassen"].includes(e.word)));
-        if (earlierAuxiliary) continue;
-        for (const pair of pairs) {
-          const spans = [i,end].map(j => ({text:tokens[j][0],start:tokens[j].index,end:tokens[j].index + tokens[j][0].length}));
-          results.push({...mainCandidate(pair.entry),construction:{id:"separable-verb",spans}});
+        if (tokens.slice(start,i).some(t => (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" &&
+          ["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten","lassen"].includes(e.word)))) continue;
+        let crossed = false;
+        for (let j = i+1; j < tokens.length; j++) {
+          if (hard(j-1,j)) break;
+          if (soft(j-1,j)) crossed = true;
+          // A particle must close its local segment; otherwise it may be a preposition.
+          const closes = j === tokens.length-1 || hard(j,j+1) || soft(j,j+1);
+          const pairs = closes ? possible.filter(pair => pair.prefix === norm(tokens[j][0])) : [];
+          if (pairs.length) {
+            if (selected === i || selected === j) for (const pair of pairs) {
+              const spans = [i,j].map(k => ({text:tokens[k][0],start:tokens[k].index,end:tokens[k].index + tokens[k][0].length}));
+              results.push({...mainCandidate(pair.entry),construction:{id:"separable-verb",spans,
+                ...(crossed ? {confidence:"tentative"} : {})}});
+            }
+            // A completed primary bracket must not consume a later particle.
+            if (!crossed) break;
+          }
+          if (competingVerb(j)) break;
         }
       }
       return results;
@@ -787,7 +798,7 @@
         // A known base verb does not cover a reconstructed complete verb
         // missing from ours (stellt … bereit -> bereitstellen, not stellen).
         const uncoveredCompleteVerb = separated.length === 1 && separated[0].source === "fallback" ? separated[0] : null;
-        candidates = candidates.filter(c => c.source === "main" || c === uncoveredCompleteVerb ||
+        candidates = candidates.filter(c => c.source === "main" || c === uncoveredCompleteVerb || separated.some(pair => pair.source === "fallback" && window.BibliothekVocabulary.identity(pair) === window.BibliothekVocabulary.identity(c)) ||
           knownPartsOfSpeech.has(canonicalPos(c.pos)) && !coveredParts.has(canonicalPos(c.pos)));
         unresolvedMeanings = [];
       }
@@ -826,11 +837,12 @@
       }
       const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
       const grouped = candidates.filter(c => c.construction && c.construction.id !== "separable-verb");
-      const preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
+      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
+      if (preferred?.construction?.confidence === "tentative") preferred = null;
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
       const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
-      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0] : preferred);
-      const resolution = { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : ranked.evidence || (separated.length ? "separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
+      const resolution = { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
       // Enrich only after all morphology, ranking and selection are complete.
       if (window.BibliothekRussianTranslations)
         await window.BibliothekRussianTranslations.enrich(resolution,window.DeutschTranslation?.getLang?.() || "en");

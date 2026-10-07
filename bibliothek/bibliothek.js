@@ -640,7 +640,9 @@
     const candidateText = candidate => window.BibliothekMeaningDisplay.brief(candidate, locale()) || window.BibliothekMeaningDisplay.brief(candidate, "en");
     const candidateLabel = candidate => {
       const id = candidate.dictionaryId;
-      if (candidate.construction?.id === "separable-verb") return locale() === "ru" ? "отделяемый глагол" : "separable verb";
+      if (candidate.construction?.id === "separable-verb") return candidate.construction.confidence === "tentative"
+        ? locale() === "ru" ? "возможный отделяемый глагол" : "possible separable verb"
+        : locale() === "ru" ? "отделяемый глагол" : "separable verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
       const type = window.BibliothekMeaningDisplay.pos(candidate);
