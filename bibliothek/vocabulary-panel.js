@@ -28,7 +28,7 @@
       $("vocabulary-select-all").checked=entries.length>0&&n===entries.length;
       $("vocabulary-select-all").indeterminate=n>0&&n<entries.length;
       $("vocabulary-select-all").disabled=!entries.length || locked;
-      $("vocabulary-copy").setAttribute("aria-label", "Copy selected words");
+      $("vocabulary-copy").setAttribute("aria-label", "Ausgewählte Wörter kopieren");
       $("vocabulary-clear").textContent=n ? 'Clear Selected' : 'Clear Marks';
       $("vocabulary-add").textContent=`+ ${eligible} zum Wortschatz`;
       $("vocabulary-add").hidden=!eligible || !!clearRequest;
@@ -87,10 +87,10 @@
           check.addEventListener('change',()=>{if(check.checked)selected.add(record.key);else selected.delete(record.key);selection();});
           heading.append(label);row.append(heading);
           const translation=language()==='ru'?record.translation.ru || record.translation.en:record.translation.en || record.translation.ru;
-          row.append(text('p','vocabulary-availability',[({adj:'Adjektiv',adv:'Adverb',noun:'Nomen',verb:'Verb',conj:'Konjunktion',pron:'Pronomen'})[record.pos] || record.pos,record.source==='main'?(availability(record).available?'Can add to Wortschatz':issueLabel(availability(record).error)):record.source==='fallback'?'Translation only':'Saved word'].filter(Boolean).join(' · ')));
+          row.append(text('p','vocabulary-availability',[({adj:'Adjektiv',adv:'Adverb',noun:'Nomen',verb:'Verb',conj:'Konjunktion',pron:'Pronomen'})[record.pos] || record.pos,record.source==='main'?(availability(record).available?'Lernkarte verfügbar':issueLabel(availability(record).error)):record.source==='fallback'?'Nur Übersetzung':'Saved word'].filter(Boolean).join(' · ')));
           row.append(text('p','',translation || 'Meaning not available yet'));
           const occurrence=record.occurrences[0];
-          const link=text('button','vocabulary-passage',`${occurrence.form} · Show in text ›`);link.type='button';
+          const link=text('button','vocabulary-passage',`${occurrence.form} · Im Text zeigen ›`);link.type='button';
           link.addEventListener('click',async()=>{
             if(closing||navigating)return;
             link.disabled=true;navigating=true;
@@ -99,7 +99,7 @@
             finally{navigating=false;}
           });row.append(link);list.append(row);
         }
-        $("vocabulary-status").textContent=`${entries.length} saved ${entries.length===1?'word':'words'}`;
+        $("vocabulary-status").textContent=`${entries.length} ${entries.length===1?'Wort':'Wörter'}`;
       }catch(error){if(request===run)$("vocabulary-status").textContent='Vocabulary could not be loaded. Reopen the list to try again.';}
     }
     function open(from) {
