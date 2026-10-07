@@ -15,7 +15,7 @@
   <title>Bibliothek · Deutsch.</title>
   <link rel="icon" href="../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../home.css?v=50">
-  <link rel="stylesheet" href="bibliothek.css?v=20261007-adjadv-1">
+  <link rel="stylesheet" href="bibliothek.css?v=20261008-drawer-3">
   <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1">
   <link rel="stylesheet" href="reading-word-form.css?v=2">
 </head>
@@ -98,15 +98,15 @@
     </div>
   </dialog>
   <dialog class="vocabulary-dialog" id="vocabulary-dialog" aria-labelledby="vocabulary-heading">
+    <div class="vocabulary-progress" aria-hidden="true"><span id="vocabulary-progress-fill"></span></div>
     <div class="reader-drawer-content">
-    <div class="vocabulary-header"><div><p id="vocabulary-subtitle"></p><h2 id="vocabulary-heading" tabindex="-1" autofocus>Vocabulary</h2></div><button id="vocabulary-menu-toggle" type="button" aria-label="Vocabulary actions" aria-expanded="false" aria-controls="vocabulary-menu">⋯</button><div class="vocabulary-menu" id="vocabulary-menu" hidden><button class="vocabulary-quiet" id="vocabulary-copy" type="button" disabled>Copy Vocabulary</button><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
-    <div class="vocabulary-controls"><label>From<select id="vocabulary-scope"><option value="chapter">This chapter</option><option value="book">Whole book</option></select></label><label class="vocabulary-select-all"><input id="vocabulary-select-all" type="checkbox"> Select all</label></div>
-    <p class="vocabulary-status" id="vocabulary-status" role="status"></p>
+    <div class="vocabulary-header"><div><label class="vocabulary-scope-label"><select id="vocabulary-scope" aria-label="Wörter aus Kapitel oder Buch"><option value="chapter">Kapitel</option><option value="book">Buch</option></select></label><p id="vocabulary-subtitle"></p><h2 id="vocabulary-heading" tabindex="-1" autofocus>Meine Wörter</h2></div><button id="vocabulary-menu-toggle" type="button" aria-label="Vocabulary actions" aria-expanded="false" aria-controls="vocabulary-menu">⋯</button><div class="vocabulary-menu" id="vocabulary-menu" hidden><button class="vocabulary-quiet" id="vocabulary-clear" type="button" disabled>Clear Marks</button></div><button id="vocabulary-close" type="button" aria-label="Close vocabulary"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6"/><path class="drawer-up-arrow" d="M6 15l6-6 6 6"/></svg></button></div>
+    <div class="vocabulary-controls"><div class="vocabulary-selection-tools"><label class="vocabulary-select-all"><input id="vocabulary-select-all" type="checkbox"> Select all</label><button class="vocabulary-copy" id="vocabulary-copy" type="button" aria-label="Copy selected words" title="Copy selected words" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="7" width="13" height="15" rx="3"/><path d="M9 7V5a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-1"/></svg></button></div><p class="vocabulary-status" id="vocabulary-status" role="status"></p></div>
     <div class="vocabulary-list" id="vocabulary-list"></div>
     <p class="vocabulary-empty" id="vocabulary-empty" hidden>No marked words yet. Bookmark unfamiliar words while reading.</p>
     <div class="vocabulary-footer">
     <p class="vocabulary-selection" id="vocabulary-selection" role="status"></p>
-    <div class="vocabulary-actions" id="vocabulary-actions"><button class="vocabulary-main" id="vocabulary-add" type="button" disabled>Add Selected to Wortschatz</button></div>
+    <div class="vocabulary-actions" id="vocabulary-actions"><button class="vocabulary-main" id="vocabulary-add" type="button" disabled hidden>+ 0 zum Wortschatz</button></div>
     <p class="vocabulary-action-status" id="vocabulary-action-status" role="status"></p>
     <a class="vocabulary-continue" id="vocabulary-continue" href="../wortschatz/index.html?v=20261007-adjadv-1" hidden>Continue in Wortschatz ›</a>
     <label class="vocabulary-manual-copy" id="vocabulary-manual-copy" hidden>Copy this vocabulary<textarea id="vocabulary-copy-text" readonly rows="4"></textarea></label>
@@ -155,11 +155,11 @@
   <script src="../wortschatz/dictionary-import.js?v=20261007-adjadv-1"></script>
   <script src="../wortschatz/collection-window.js?v=20261007-adjadv-1"></script>
   <script src="vocabulary-actions.js?v=20261007-adjadv-1"></script>
-  <script src="vocabulary-panel.js?v=20261007-form-link-1"></script>
+  <script src="vocabulary-panel.js?v=20261008-words-1"></script>
   <script src="meaning-display.js?v=6"></script>
   <script src="reader-pagination.js?v=3"></script>
   <script src="pronoun-reference.js?v=20261007-pronoun-popup-1"></script>
-  <script src="bibliothek.js?v=20261008-separable-boundaries-1"></script>
+  <script src="bibliothek.js?v=20261008-drawer-2"></script>
   <div class="version-mark" aria-hidden="true">v1</div>
 </body>
 </html>

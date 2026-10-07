@@ -34,12 +34,13 @@
       $("vocabulary-select-all").checked=entries.length>0&&n===entries.length;
       $("vocabulary-select-all").indeterminate=n>0&&n<entries.length;
       $("vocabulary-select-all").disabled=!entries.length || locked;
-      $("vocabulary-copy").textContent=n ? 'Copy Selected' : 'Copy Vocabulary';
+      $("vocabulary-copy").setAttribute("aria-label", "Copy selected words");
       $("vocabulary-clear").textContent=n ? 'Clear Selected' : 'Clear Marks';
-      $("vocabulary-add").textContent=n ? `Add Selected to Wortschatz (${eligible})` : 'Add Selected to Wortschatz';
+      $("vocabulary-add").textContent=`+ ${eligible} zum Wortschatz`;
+      $("vocabulary-add").hidden=!eligible || !!clearRequest;
       $("vocabulary-menu-toggle").disabled=locked;
-      $("vocabulary-add").disabled=busy || !entries.some(e=>selected.has(e.key)&&availability(e).available);
-      $("vocabulary-copy").disabled=busy || !entries.length || !currentResolver;
+      $("vocabulary-add").disabled=locked || !entries.some(e=>selected.has(e.key)&&availability(e).available);
+      $("vocabulary-copy").disabled=locked || !n || !currentResolver;
       $("vocabulary-clear").disabled=busy || !entries.length;
       $("vocabulary-scope").disabled=locked || !getBook()?.chapters?.length;
       $("vocabulary-close").disabled=busy;
@@ -47,7 +48,7 @@
     }
     async function render() {
       const request=++run,book=getBook();if(!book)return;
-      selected.clear();entries=[];currentResolver=null;list.replaceChildren();cancelClear();selection();
+      selected.clear();entries=[];currentResolver=null;list.replaceChildren();list.scrollTop=0;cancelClear();selection();
       $("vocabulary-empty").hidden=true;$("vocabulary-status").textContent='Loading vocabulary…';
       const range=$("vocabulary-scope").value==='book'?null:getRange();
       $("vocabulary-subtitle").textContent=$("vocabulary-scope").value==='book'?book.title:(range?.title || book.title);
@@ -93,8 +94,8 @@
           check.addEventListener('change',()=>{if(check.checked)selected.add(record.key);else selected.delete(record.key);selection();});
           heading.append(label);row.append(heading);
           const translation=language()==='ru'?record.translation.ru || record.translation.en:record.translation.en || record.translation.ru;
-          row.append(text('p','',translation || 'Meaning not available yet'));
           row.append(text('p','vocabulary-availability',[({adj:'Adjektiv',adv:'Adverb',noun:'Nomen',verb:'Verb',conj:'Konjunktion',pron:'Pronomen'})[record.pos] || record.pos,record.source==='main'?(availability(record).available?'Can add to Wortschatz':issueLabel(availability(record).error)):record.source==='fallback'?'Translation only':'Saved word'].filter(Boolean).join(' · ')));
+          row.append(text('p','',translation || 'Meaning not available yet'));
           const occurrence=record.occurrences[0];
           const link=text('button','vocabulary-passage',`${occurrence.form} · Show in text ›`);link.type='button';
           link.addEventListener('click',async()=>{
@@ -105,16 +106,17 @@
             finally{navigating=false;}
           });row.append(link);list.append(row);
         }
-        $("vocabulary-status").textContent=entries.length ? `${entries.length} saved ${entries.length===1?'word':'words'}` : '';
+        $("vocabulary-status").textContent=`${entries.length} saved ${entries.length===1?'word':'words'}`;
       }catch(error){if(request===run)$("vocabulary-status").textContent='Vocabulary could not be loaded. Reopen the list to try again.';}
     }
     function open(from) {
       if(!getBook())return;
       menu(false);
+      $("vocabulary-progress-fill").style.width=$("chapter-progress-fill").style.width;
       trigger=from || $("vocabulary-toggle");selected.clear();
       $("vocabulary-action-status").textContent='';$("vocabulary-continue").hidden=true;$("vocabulary-manual-copy").hidden=true;
       const hasChapters=!!getBook().chapters?.length;
-      $("vocabulary-scope").options[0].textContent=hasChapters?'This chapter':'This text';
+      $("vocabulary-scope").options[0].textContent=hasChapters?'Kapitel':'Text';
       $("vocabulary-scope").value='chapter';$("vocabulary-scope").disabled=!hasChapters;
       if(!dialog.open){dialog.showModal();dialog.classList.add('is-opening');}render();$("vocabulary-heading").focus({preventScroll:true});
     }
@@ -138,7 +140,7 @@
       clearRequest=null;$("vocabulary-clear-confirm").hidden=true;$("vocabulary-actions").hidden=false;
     }
     $("vocabulary-copy").addEventListener('click',async()=>{
-      if(busy||!currentResolver)return;menu(false);
+      if(busy||!currentResolver||!selected.size)return;menu(false);
       const subtitle=$("vocabulary-subtitle").textContent;
       const title=subtitle===getBook().title?subtitle:`${getBook().title} · ${subtitle}`;
       const value=window.BibliothekVocabularyActions.copyText(chosen(),currentResolver,language(),title);
