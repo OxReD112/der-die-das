@@ -631,6 +631,17 @@
         const auxiliaries = new Set(["sein","haben","werden","können","müssen","dürfen","sollen","wollen","mögen"]);
         // A lexical verb (including a dictionary-backed participle) is stronger
         // evidence than an auxiliary: ist spät aufgestanden -> adverb.
+        // Lexical readings precede copula clues. These rules apply only to
+        // dictionary-backed ADJ/ADV alternatives; nominal agreement ran above.
+        const next = norm(tokens[index+1]?.[0]);
+        let following = index+1;
+        while (following <= end && ["sehr","so","zu","ganz","besonders"].includes(norm(tokens[following][0]))) following++;
+        const modifiesAdjective = following <= end &&
+          matches(following).some(e => e.type === "Adjektiv");
+        if (norm(word) === "eigentlich" ||
+            norm(word) === "gar" && (/^(?:nicht|nichts|kein(?:e|en|em|er|es)?)$/u.test(next) || modifiesAdjective || next === "normal") ||
+            norm(word) === "wirklich" && (modifiesAdjective || next === "sehr" || next === "willkommen"))
+          return choose(adverbs,"lexical-adverb-modifier");
         // These verbs can take a predicative adjective (findet es schön,
         // macht ihn glücklich). Leave that distinction to the reader.
         const predicateComplements = new Set(["finden","machen","halten","nennen","fühlen","wirken","scheinen","aussehen"]);
