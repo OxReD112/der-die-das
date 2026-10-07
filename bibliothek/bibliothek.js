@@ -214,7 +214,7 @@
       const words = (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
       const fileFormat = String(book.format || "txt").toUpperCase();
       const resume = hasChapters(book) && started ? activeEntry({ ...book, chapterIndex: book.chapterIndex || 0, position: book.position || 0 }) : null;
-      button.querySelector(".book-subtitle").textContent = completed ? "Finished" : resume ? `Continue · ${resume.title}` : `${words.toLocaleString()} words · ${fileFormat}`;
+      button.querySelector(".book-subtitle").textContent = completed ? "Gelesen" : resume ? `Weiterlesen · ${resume.title}` : `${words.toLocaleString("de-DE")} ${words === 1 ? "Wort" : "Wörter"} · ${fileFormat}`;
       if(book.missingContent) {
         row.classList.add('is-missing');
         button.querySelector('.book-arrow').textContent = '↻';
@@ -597,6 +597,13 @@
   function updateReaderLanguage() {
       refreshPopupLanguage?.();
   }
+  function reflexiveAnchor(candidate, context) {
+    const group = candidate?.construction;
+    if (!context || group?.id !== "reflexive-verb") return context;
+    const offset = group.spans[0].start;
+    return {...context,tokenOffset:offset,location:{...context.location,
+      tokenOffset:context.location.tokenOffset-context.tokenOffset+offset}};
+  }
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;
     refreshPopupLanguage = null;
@@ -611,8 +618,13 @@
     }
     const context = selectedContext;
     const resolution = await lemmaResolver.resolve(word, context);
+    const linkedReflexive = resolution.candidates.find(c=>c.construction?.id === "reflexive-verb");
     let saved = null;
     try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
+    if (context && linkedReflexive) {
+      const groupSaved = await window.BibliothekMeaningSelections.get(reflexiveAnchor(linkedReflexive,context)).catch(()=>null);
+      if (saved === window.BibliothekVocabulary.identity(linkedReflexive) && groupSaved && groupSaved !== saved) saved = null;
+    }
     if (saved) resolution.selected = window.BibliothekLemmaResolver.savedCandidate(saved, resolution) || resolution.selected;
     if (request !== lookupRequest) return;
     const reference=window.BibliothekPronounReference;
@@ -645,6 +657,7 @@
       if (candidate.construction?.id === "separable-verb") return candidate.construction.confidence === "tentative"
         ? locale() === "ru" ? "возможный отделяемый глагол" : "possible separable verb"
         : locale() === "ru" ? "отделяемый глагол" : "separable verb";
+      if (candidate.construction?.id === "reflexive-verb") return locale() === "ru" ? "Возвратный глагол" : "Reflexive verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
       const type = window.BibliothekMeaningDisplay.pos(candidate);
@@ -678,6 +691,20 @@
           ? candidate.construction.spans.map(span => span.text).join(" … ")
           : candidate.construction.note?.[locale()] || `${candidate.construction.label} ${locale() === "ru" ? "с" : "with"} ${candidate.construction.lemma}`;
         content.append(group);
+        if (candidate.construction.id === "reflexive-verb") {
+          group.textContent = candidate.construction.spans.map(s=>s.text).join(" … ");
+          const complement = candidate.construction.complement;
+          if (complement) {
+            const note = document.createElement("small"); note.className = "popover-construction";
+            note.textContent = `${complement.pattern} — ${ru ? complement.note_ru : complement.note_en}`;
+            content.append(note);
+          }
+        }
+      }
+      if (referencePronoun && linkedReflexive) {
+        const link = document.createElement("button"); link.type = "button"; link.className = "lemma-choice reflexive-link";
+        link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
+        link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
       $("popover-word").textContent = referencePronoun ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
@@ -687,6 +714,29 @@
       paintActiveWord(candidate);
       if(showPronounSummary)popupAmbiguous=false;
       renderChoices();
+    };
+    const chooseCandidate = async candidate => {
+        if (request !== lookupRequest) return;
+        showPronounSummary=reference.isPronoun(candidate);
+        popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
+        $("popover-bookmark").disabled = true;
+        renderSelection();
+        // Keep choices reachable after selection; remember only this occurrence.
+        try {
+          if (context) {
+            await window.BibliothekMeaningSelections.set(context, window.BibliothekVocabulary.identity(candidate));
+            const logical = reflexiveAnchor(linkedReflexive,context);
+            if (linkedReflexive) await window.BibliothekMeaningSelections.set(logical, window.BibliothekVocabulary.identity(candidate));
+            const records = await window.BibliothekVocabulary.list(context.bookId);
+            for (const record of records) {
+              const found = record.occurrences.find(o => o.chapterIndex === context.location.chapterIndex && o.paragraphIndex === context.location.paragraphIndex &&
+                (o.tokenOffset === context.location.tokenOffset || linkedReflexive && o.tokenOffset === logical.location.tokenOffset));
+              if (found) await window.BibliothekVocabulary.resolveOccurrence(context.bookId, record.key, found, candidate, {...context,form:word});
+            }
+            refreshHighlights(); vocabularyPanel.updateCount();
+          }
+        } catch (_) { if (request === lookupRequest) showToast("Meaning selected, but the correction could not be saved."); }
+        if (request === lookupRequest) refreshBookmark(request);
     };
     const renderChoices = () => {
       choices.replaceChildren();
@@ -721,26 +771,7 @@
       button.type = "button"; button.className = "lemma-choice";
       if(candidate.dictionaryId)button.dataset.dictionaryId=candidate.dictionaryId;
       button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateMeaning(candidate,text,language," — ")}`;
-      button.addEventListener("click", async () => {
-        if (request !== lookupRequest) return;
-        showPronounSummary=reference.isPronoun(candidate);
-        popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
-        $("popover-bookmark").disabled = true;
-        renderSelection();
-        // Keep choices reachable after selection; remember only this occurrence.
-        try {
-          if (context) {
-            await window.BibliothekMeaningSelections.set(context, window.BibliothekVocabulary.identity(candidate));
-            const records = await window.BibliothekVocabulary.list(context.bookId);
-            for (const record of records) {
-              if (record.occurrences.some(o => o.chapterIndex === context.location.chapterIndex && o.paragraphIndex === context.location.paragraphIndex && o.tokenOffset === context.location.tokenOffset))
-                await window.BibliothekVocabulary.resolveOccurrence(context.bookId, record.key, context.location, candidate);
-            }
-            refreshHighlights(); vocabularyPanel.updateCount();
-          }
-        } catch (_) { if (request === lookupRequest) showToast("Meaning selected, but the correction could not be saved."); }
-        if (request === lookupRequest) refreshBookmark(request);
-      });
+      button.addEventListener("click",()=>chooseCandidate(candidate));
       choices.append(button);
       });
     };
@@ -799,8 +830,8 @@
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
     const formKey = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
     const clickedForm = formKey(selectedWord);
-    const construction = selectedResolution?.construction?.id === "separable-verb"
-      ? selectedResolution.construction.spans.map(span => formKey(span.text)).join(" ") : "";
+    const construction = ["separable-verb","reflexive-verb"].includes(selectedResolution?.construction?.id)
+      ? (selectedResolution.construction.id === "reflexive-verb" ? selectedResolution.construction.spans.slice(0,2) : selectedResolution.construction.spans).map(span => formKey(span.text)).join(" ") : "";
     const markForm = (element, value, whole = false) => {
       const key = formKey(value);
       const split = key.split(/\s+/u);
