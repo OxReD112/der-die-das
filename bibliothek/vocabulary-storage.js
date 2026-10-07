@@ -38,11 +38,31 @@
     const resolved = entry.source === "fallback" && norm(entry.lemma);
     return JSON.stringify([resolved ? "fallback" : "unresolved", norm(resolved || entry.form).toLocaleLowerCase("de-DE"), norm(entry.pos)]);
   }
+  function occurrence(input) {
+    const loc = input.location;
+    const row = {...loc,form:norm(input.form),sentence:String(input.sentence || ""),
+      ...(nominalUsage(input.usage) ? {usage:{...input.usage}} : {})};
+    const c = input.construction;
+    if (c?.id === "reflexive-verb") {
+      if (!Number.isInteger(input.tokenOffset) || !Array.isArray(c.spans) || c.spans.length < 2 ||
+        !c.spans.every(s=>Number.isInteger(s.start)&&Number.isInteger(s.end)&&s.start>=0&&s.end>s.start&&row.sentence.slice(s.start,s.end)===s.text))
+        throw new TypeError("Invalid reflexive occurrence spans.");
+      const origin = loc.tokenOffset-input.tokenOffset;
+      if (origin < 0) throw new TypeError("Invalid sentence offset.");
+      row.tokenOffset = origin+c.spans[0].start;
+      row.encounteredTokenOffset = loc.tokenOffset;
+      row.construction = {id:c.id,lemma:norm(c.lemma),sentenceOffset:origin,
+        spans:c.spans.map(s=>({text:s.text,start:s.start,end:s.end})),
+        ...(c.complement ? {complement:{pattern:norm(c.complement.pattern),note_ru:norm(c.complement.note_ru),note_en:norm(c.complement.note_en)}} : {})};
+    }
+    return row;
+  }
   async function mark(input) {
     if (!norm(input.bookId) || !norm(input.form)) throw new TypeError("A book ID and encountered form are required.");
     const loc = input.location;
     if (!loc || !Number.isInteger(loc.chapterIndex) || loc.chapterIndex < 0 || !Number.isInteger(loc.paragraphIndex) || loc.paragraphIndex < 0 || !Number.isInteger(loc.tokenOffset) || loc.tokenOffset < 0)
       throw new TypeError("A chapter index, paragraph index and token offset are required.");
+    const encountered = occurrence(input);
     const db = await window.BibliothekReadingData.open(), key = identity(input);
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readwrite"), store = tx.objectStore(STORE);
@@ -58,11 +78,9 @@
           ...(nominalUsage(input.usage) ? {usage:nominalUsage(input.usage)} : {}),
           createdAt:now, occurrences:[]
         };
-        const occurrence = { chapterIndex:loc.chapterIndex, paragraphIndex:loc.paragraphIndex, tokenOffset:loc.tokenOffset, form:norm(input.form), sentence:String(input.sentence || ""),
-          ...(nominalUsage(input.usage) ? {usage:{...input.usage}} : {}) };
-        const existing = record.occurrences.findIndex(o => o.chapterIndex === loc.chapterIndex && o.paragraphIndex === loc.paragraphIndex && o.tokenOffset === loc.tokenOffset);
-        if (existing < 0) record.occurrences.push(occurrence);
-        else record.occurrences[existing] = occurrence;
+        const existing = record.occurrences.findIndex(o => o.chapterIndex === encountered.chapterIndex && o.paragraphIndex === encountered.paragraphIndex && o.tokenOffset === encountered.tokenOffset);
+        if (existing < 0) record.occurrences.push(encountered);
+        else record.occurrences[existing] = encountered;
         record.updatedAt = now;
         store.put(record);
       };
@@ -70,9 +88,10 @@
       tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not save vocabulary."));
     });
   }
-  async function resolveOccurrence(bookId, oldKey, location, candidate) {
+  async function resolveOccurrence(bookId, oldKey, location, candidate, context) {
     if (!norm(candidate.lemma) || !(candidate.dictionaryId != null || candidate.source === "fallback"))
       throw new TypeError("Choose a resolved dictionary candidate.");
+    const replacement = context ? occurrence({...context,...candidate}) : null;
     const db = await window.BibliothekReadingData.open(), key = identity(candidate);
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, "readwrite"), store = tx.objectStore(STORE);
@@ -83,16 +102,21 @@
         if (!original) return;
         const index = original.occurrences.findIndex(o => o.chapterIndex === location.chapterIndex && o.paragraphIndex === location.paragraphIndex && o.tokenOffset === location.tokenOffset);
         if (index < 0) return;
-        const occurrence = {...original.occurrences[index]};
-        if (nominalUsage(candidate.usage)) occurrence.usage = {...candidate.usage};
-        else delete occurrence.usage;
+        const updated = replacement ? {...replacement} : {...original.occurrences[index]};
+        if (nominalUsage(candidate.usage)) updated.usage = {...candidate.usage};
+        else delete updated.usage;
+        if (candidate.construction?.id !== "reflexive-verb") { delete updated.construction; delete updated.encounteredTokenOffset; }
         const targetRequest = store.get([bookId, key]);
         targetRequest.onsuccess = () => {
           const target = targetRequest.result || {schemaVersion:1,bookId,key,createdAt:original.createdAt,occurrences:[]};
           Object.assign(target, {lemma:norm(candidate.lemma),dictionaryId:candidate.dictionaryId == null ? null : String(candidate.dictionaryId),source:candidate.dictionaryId != null ? "main" : "fallback",pos:norm(candidate.pos),translation:{en:norm(candidate.translation?.en),ru:norm(candidate.translation?.ru)},updatedAt:Date.now()});
           if (nominalUsage(candidate.usage)) target.usage = nominalUsage(candidate.usage);
           else delete target.usage;
-          if (!target.occurrences.some(o => o.chapterIndex === location.chapterIndex && o.paragraphIndex === location.paragraphIndex && o.tokenOffset === location.tokenOffset)) target.occurrences.push(occurrence);
+          if (oldKey === key && updated.tokenOffset !== location.tokenOffset)
+            target.occurrences = target.occurrences.filter(o=>!(o.chapterIndex===location.chapterIndex && o.paragraphIndex===location.paragraphIndex && o.tokenOffset===location.tokenOffset));
+          const existing = target.occurrences.findIndex(o => o.chapterIndex === updated.chapterIndex && o.paragraphIndex === updated.paragraphIndex && o.tokenOffset === updated.tokenOffset);
+          if (existing < 0) target.occurrences.push(updated);
+          else target.occurrences[existing] = updated;
           if (oldKey !== key) {
             original.occurrences.splice(index,1);
             if (original.occurrences.length) { original.updatedAt = Date.now(); store.put(original); }

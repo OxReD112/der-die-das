@@ -23,6 +23,17 @@
   }
   function create(entries, fallback) {
     const forms = new Map(), lemmas = new Map(), zuForms = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    // Reviewed L04 pilot. These forms are conditional lexical candidates,
+    // never unconditional matches just because their participle is one token.
+    const reflexivePilot = {"verb-060":"sich freuen","verb-061":"sich interessieren",
+      "verb-068":"sich entscheiden","verb-091":"sich erinnern","verb-155":"sich kümmern","verb-235":"sich beeilen"};
+    const reflexiveEntries = new Set(entries.filter(e => e.type === "Verb" && reflexivePilot[e.id] === e.word));
+    const reflexiveForms = new Map();
+    function addReflexive(form,row) {
+      const key = norm(form), rows = reflexiveForms.get(key) || [];
+      if (!rows.some(r => r.entry === row.entry && r.person === row.person && r.pronoun === row.pronoun && r.tense === row.tense)) rows.push(row);
+      reflexiveForms.set(key,rows);
+    }
     // Derived modifiers are not exact verb forms: keep their role separate from
     // the dictionary identity, and require nominal context before choosing them.
     const modifiers = new Map(), endings = ["e","en","em","er","es"];
@@ -65,6 +76,16 @@
         }
       }
       if (entry.type === "Verb") {
+        if (reflexiveEntries.has(entry)) {
+          for (const [tense,group] of Object.entries(formsOf(entry))) for (const [person,form] of Object.entries(group || {})) {
+            const parts = norm(form).split(/\s+/u);
+            if (parts.length === 2 && /^[\p{L}\p{M}]+$/u.test(parts[0]) && ["mich","dich","sich","uns","euch"].includes(parts[1]))
+              addReflexive(parts[0],{entry,tense,person,pronoun:parts[1]});
+          }
+          addReflexive(entry.word.slice(5),{entry,tense:"Infinitiv"});
+          const participle = String(entry.perfect_form || "").trim().split(/\s+/u).pop();
+          if (participle) addReflexive(participle,{entry,tense:"Partizip II"});
+        }
         const provenPrefixes = new Set(entry.separable_prefix ? [entry.separable_prefix] : []);
         for (const [tense,group] of Object.entries(formsOf(entry))) {
           for (const form of Object.values(group || {})) {
@@ -104,6 +125,47 @@
       source:"fallback",lemma:item.word,pos:"verb",posLabel:"Verb",meanings:item.meanings,
       translation:{en:item.meanings.join("; "),ru:""}
     } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, posLabel:item.parts_of_speech?.join(" / ") || item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    function reflexiveCandidates(word,context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return [];
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const clicked = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (clicked < 0) return [];
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
+      const connected = (a,b) => /^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      let start = clicked, end = clicked;
+      while (start > 0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while (end+1 < tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const subjects = {ich:["ich"],du:["du"],er:["er/sie/es"],sie:["er/sie/es","sie"],es:["er/sie/es"],wir:["wir"],ihr:["ihr"]};
+      const results = [];
+      for (let v = start; v <= end; v++) for (const row of reflexiveForms.get(norm(tokens[v][0])) || []) {
+        if (!["Präsens","Präteritum","Konjunktiv II"].includes(row.tense)) continue;
+        for (const subject of [v-1,v+1]) {
+          if (subject < start || subject > end || !(subjects[norm(tokens[subject][0])] || []).includes(row.person)) continue;
+          const pronoun = subject === v-1 ? v+1 : v+2;
+          if (pronoun > end || norm(tokens[pronoun][0]) !== row.pronoun) continue;
+          // A preceding preposition or another personal subject means this
+          // is not the simple subject/finite/reflexive layout of the pilot.
+          if (subject === v-1 && subject > start &&
+            (["mit","für","von","an","auf","bei","zu","ohne","gegen","um","über","unter","neben","zwischen","nach","aus"].includes(norm(tokens[subject-1][0])) || subjects[norm(tokens[subject-1][0])])) continue;
+          let competing = false;
+          for (let i = start; i <= end; i++) if (![v,subject,pronoun].includes(i) &&
+            ((forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Verb") || reflexiveForms.has(norm(tokens[i][0])))) competing = true;
+          if (competing) continue;
+          const indices = [v,pronoun];
+          const complement = (row.entry.complements || []).find(c => norm(c.pattern.split(/\s+/u)[0]) === norm(tokens[pronoun+1]?.[0]));
+          // Only attach a directly following, documented preposition with a
+          // following complement token. The preposition alone proves no case.
+          if (complement && pronoun+2 <= end) indices.push(pronoun+1);
+          if (!indices.slice(0,2).includes(clicked)) continue;
+          const spans = indices.sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));
+          if (!results.some(c => c.dictionaryId === row.entry.id && JSON.stringify(c.construction.spans) === JSON.stringify(spans)))
+            results.push({...mainCandidate(row.entry),construction:{id:"reflexive-verb",lemma:row.entry.word,label:"Reflexiv",
+              note:{ru:"Возвратная конструкция",en:"Reflexive construction"},spans,
+              ...(complement && indices.length === 3 ? {complement:{...complement}} : {})}});
+        }
+      }
+      return results;
+    }
     // Reviewed action nouns have their own identity; never borrow a verb ID.
     const infinitiveNouns = {
       lesen:{en:"reading (the act of reading)",ru:"чтение"},
@@ -768,10 +830,11 @@
       const dictionaryForms = new Set(exact.map(e => e.id));
       const ownOnlyVerb = ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word)));
       const separated = separableCandidates(word, context);
+      const reflexive = reflexiveCandidates(word,context);
       let candidates = [...separated,...exact.map(mainCandidate),...derived.map(mainCandidate)], error = preparationError, unresolvedMeanings = [], formNotes = [], inflections = [];
       // Interactive lookup checks missing parts of speech; word-only callers keep
       // their existing main-first behaviour and avoid unnecessary downloads.
-      if (!ownOnlyVerb && (!exact.length || context)) {
+      if (!ownOnlyVerb && (!exact.length || context || reflexiveForms.has(norm(word)))) {
         try {
           for (const group of await fallback.lookup(word)) {
             if (ownOnlyVerbs.has(norm(group.word)) || group.kind === "form-note" && group.inflections?.some(row => ownOnlyVerbs.has(norm(row.lemma)))) continue;
@@ -786,6 +849,18 @@
           }
         } catch (e) { error = e; }
       }
+      // Replace only the reviewed pilot entries before POS coverage can hide
+      // their non-reflexive counterparts. Unconfirmed senses remain available
+      // for manual selection but cannot rank or resolve themselves.
+      // L01 attributive participles have independent noun-phrase evidence;
+      // they must not require an explicit reflexive pronoun in the text.
+      const attributed = derived.some(e=>reflexiveEntries.has(e))
+        ? grammarRank(word,context,candidates,inflections).candidates.filter(c=>reflexiveEntries.has(c.item) && c.usage?.role === "attributive") : [];
+      candidates = candidates.filter(c => !reflexiveEntries.has(c.item) || norm(word) === norm(c.lemma));
+      const conditional = [...new Set((reflexiveForms.get(norm(word)) || []).map(row=>row.entry))]
+        .filter(entry => ![...reflexive,...attributed].some(c=>c.dictionaryId === entry.id))
+        .map(entry=>({...mainCandidate(entry),reflexiveUnconfirmed:true}));
+      candidates.push(...reflexive,...attributed,...conditional);
       // Resolve all forms/mapped lemmas first; own coverage is occurrence-wide,
       // not a comparison between differently worded translation strings.
       // A recognised merged lexical card covers both modifier POS headers.
@@ -793,7 +868,7 @@
       const merged = candidates.filter(c => c.source === "main" && c.item.reading_policy === "merged");
       candidates = candidates.filter(c => c.source !== "fallback" || !["Adjektiv","Adverb"].includes(canonicalPos(c.pos)) ||
         !merged.some(m => [m.lemma,...(m.item.search_forms || [])].some(lemma => norm(lemma) === norm(c.lemma))));
-      const coveredParts = new Set(candidates.filter(c => c.source === "main").map(c => canonicalPos(c.pos)));
+      const coveredParts = new Set(candidates.filter(c => c.source === "main" && !reflexiveEntries.has(c.item)).map(c => canonicalPos(c.pos)));
       if (coveredParts.size) {
         // A known base verb does not cover a reconstructed complete verb
         // missing from ours (stellt … bereit -> bereitstellen, not stellen).
@@ -821,28 +896,32 @@
       if (group) {
         const {roles,main,marker,meaning,meaningLemma,...construction} = group;
         candidates = candidates.map(c => {
+          if (c.reflexiveUnconfirmed) return c;
           if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
             return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
           return roles.some(e => norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos))
             ? {...c,construction,...(c.lemma === (group.meaningLemma || "werden") && group.meaning ? {translation:group.meaning} : {})} : c;
         });
       }
-      const grammatical = grammarRank(word, context, candidates, inflections);
+      const unconfirmed = candidates.filter(c => c.reflexiveUnconfirmed);
+      const grammatical = grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
-      candidates = ranked.candidates;
+      candidates = [...ranked.candidates,...unconfirmed];
       // The feminine personal pronoun's dative form means her, not she.
       if (norm(word) === "ihr") {
         const candidate = candidates.find(c => c.dictionaryId === "pronoun-004");
         if (candidate) candidate.translation = {en:"her (dative)",ru:"ей (дательный падеж)"};
       }
       const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
-      const grouped = candidates.filter(c => c.construction && c.construction.id !== "separable-verb");
-      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
+      const reflexiveVerb = reflexive.length === 1 && !["mich","dich","sich","uns","euch"].includes(norm(word))
+        ? candidates.find(c=>same(c,reflexive[0])) : null;
+      const grouped = candidates.filter(c => c.construction && !["separable-verb","reflexive-verb"].includes(c.construction.id));
+      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : reflexiveVerb || ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 && !reflexiveEntries.has(exact[0]) ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
       if (preferred?.construction?.confidence === "tentative") preferred = null;
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
       const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
-      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
-      const resolution = { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].reflexiveUnconfirmed || candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
+      const resolution = { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : reflexiveVerb ? "reflexive-subject-agreement" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
       // Enrich only after all morphology, ranking and selection are complete.
       if (window.BibliothekRussianTranslations)
         await window.BibliothekRussianTranslations.enrich(resolution,window.DeutschTranslation?.getLang?.() || "en");
@@ -850,7 +929,9 @@
     }
     return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
-      match:word => (forms.get(norm(word)) || []).map(mainCandidate) });
+      matchReflexive:reflexiveCandidates,
+      match:word => (forms.get(norm(word)) || []).map(entry=>({...mainCandidate(entry),
+        ...(reflexiveEntries.has(entry) && norm(word) !== norm(entry.word) ? {reflexiveUnconfirmed:true} : {})})) });
   }
   window.BibliothekLemmaResolver = Object.freeze({ create, savedCandidate });
 })();

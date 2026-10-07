@@ -206,7 +206,7 @@
 .vocabulary-row .vocabulary-availability { margin-top:0; color:var(--muted); font-size:12px; }
 .vocabulary-row blockquote { margin:12px 0 0 28px; padding-left:12px; border-left:2px solid var(--hairline); color:var(--secondary-text); font:15px/1.5 Georgia,serif; overflow-wrap:anywhere; }
 .vocabulary-passage { display:block; width:calc(100% - 24px); margin-left:24px; min-height:22px; padding:1px 0; border:0; background:transparent; color:var(--muted); text-align:right; font:12px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
-.vocabulary-empty { color:var(--secondary-text); font-size:14px; line-height:1.6; }
+.vocabulary-empty { color:var(--muted); font:400 12px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; text-align:center; }
 .chapter-vocabulary-review { min-height:44px; padding:10px 4px; border:0; background:transparent; color:var(--secondary-text); text-align:left; font:14px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; cursor:pointer; }
 .vocabulary-toggle:focus-visible,.vocabulary-dialog :focus-visible,.chapter-vocabulary-review:focus-visible { outline:2px solid var(--text); outline-offset:2px; border-radius:5px; }
 @media (max-width:600px) { .vocabulary-dialog { inset:auto 0 0; width:100%; height:85dvh; max-height:calc(100dvh - env(safe-area-inset-top) - 20px); padding:22px 18px calc(18px + env(safe-area-inset-bottom)); border-radius:24px 24px 0 0; } .reading-toolbar { gap:8px; } .reader-tools { gap:0; } }

@@ -48,6 +48,20 @@
       const hasResolved = records.some(r => r.source !== "unresolved");
       // Use the same dictionary-backed groups as lookup, without fallback downloads.
       const groupLocations = new Set();
+      if (resolver.matchReflexive && hasMarkedVerb) {
+        for (const paragraph of text.querySelectorAll("[data-paragraph]")) {
+          for (const span of paragraph.querySelectorAll(".reading-word")) {
+            const groups = resolver.matchReflexive(span.textContent,{sentence:paragraph.textContent,tokenOffset:Number(span.dataset.tokenOffset)});
+            if (groups.length !== 1 || !keys.has(window.BibliothekVocabulary.identity(groups[0]))) continue;
+            const group = groups[0], context = {bookId:book.id,location:{chapterIndex:book.chapterIndex || 0,
+              paragraphIndex:Number(paragraph.dataset.paragraph),tokenOffset:group.construction.spans[0].start}};
+            const selected = await window.BibliothekMeaningSelections.get(context).catch(()=>null);
+            if (run !== generation) return;
+            if (selected && selected !== window.BibliothekVocabulary.identity(group)) continue;
+            for (const part of group.construction.spans) groupLocations.add(`${paragraph.dataset.paragraph}:${part.start}`);
+          }
+        }
+      }
       if (resolver.matchSeparable && hasMarkedVerb) {
         for (const paragraph of text.querySelectorAll("[data-paragraph]")) {
           const sentence = paragraph.textContent;
@@ -66,7 +80,7 @@
       for (const span of text.querySelectorAll(".reading-word")) {
         const paragraph = span.closest("[data-paragraph]");
         const exactLocation = locations.has(`${paragraph.dataset.paragraph}:${span.dataset.tokenOffset}`);
-        const matches = resolver.match(span.textContent);
+        const matches = resolver.match(span.textContent).filter(c=>!c.reflexiveUnconfirmed);
         const marked = exactLocation || groupLocations.has(`${paragraph.dataset.paragraph}:${span.dataset.tokenOffset}`) || unresolved.has(norm(span.textContent)) || (matches.length === 1 && keys.has(window.BibliothekVocabulary.identity(matches[0])));
         apply(span,marked);
         if (!marked && !matches.length && hasResolved) {
