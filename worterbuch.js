@@ -51,19 +51,21 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261007-import-final-2"),
-      loadJson("worterbuch/german-verbs.json?v=20261007-import-final-2"),
-      loadJson("worterbuch/german-adjectives.json?v=20261007-import-final-2"),
-      loadJson("worterbuch/german-adverbs.json?v=20261007-import-final-2"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261007-import-final-2"),
-      loadJson("worterbuch/german-pronouns.json?v=20261007-import-final-2")
-    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns]) => {
-      if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns].every(Array.isArray)) throw new Error("Invalid dictionary database");
+      loadJson("worterbuch/german-nouns.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-pronouns.json?v=20261007-adjadv-1"),
+      loadJson("worterbuch/german-adjective-adverbs.json?v=20261007-adjadv-1")
+    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs]) => {
+      if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
         ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
         ...verbs.filter(item => item && typeof item.infinitive === "string").map(item => ({ ...item, word: item.infinitive, type: "verb" })),
         ...adjectives.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" })),
         ...adverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adverb" })),
+        ...adjectiveAdverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" })),
         ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" })),
         ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" }))
       ];
@@ -127,7 +129,7 @@
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
     if (hasWordOrder) {
       const section = node("section", "dictionary-entry-section dictionary-word-order");
-      section.append(node("h4", "dictionary-entry-label", "Wortstellung"));
+      section.append(node("h4", "dictionary-entry-label", item.parts_of_speech ? "Wortstellung · Adverbial" : "Wortstellung"));
       // A line break („\n“) in the rule or pattern starts a new line (je … / desto …).
       String(item.word_order_rule || "").split("\n").filter(Boolean).forEach(line =>
         section.append(node("p", "dictionary-entry-plural dictionary-entry-detail", line)));
@@ -141,7 +143,7 @@
       });
       entry.append(section);
       const orderExample = node("section", "dictionary-entry-section");
-      orderExample.append(node("h4", "dictionary-entry-label", "Beispiel"));
+      orderExample.append(node("h4", "dictionary-entry-label", item.example_usage ? "Beispiel · " + item.example_usage : "Beispiel"));
       orderExample.append(node("p", "dictionary-entry-example", item.example_de || ""));
       const orderExampleTranslation = translated(item.example_ru, item.example_en);
       if (orderExampleTranslation) orderExample.append(node("p", "dictionary-entry-example-translation", orderExampleTranslation));
@@ -218,7 +220,7 @@
     }
 
     const example = node("section", "dictionary-entry-section");
-    example.append(node("h4", "dictionary-entry-label", "Beispiel"));
+    example.append(node("h4", "dictionary-entry-label", item.example_usage ? "Beispiel · " + item.example_usage : "Beispiel"));
     example.append(node("p", "dictionary-entry-example", item.example_de || ""));
     const exampleTranslation = translated(item.example_ru, item.example_en);
     if (exampleTranslation) example.append(node("p", "dictionary-entry-example-translation", exampleTranslation));
@@ -275,6 +277,13 @@
     }
 
     if (item.type !== "verb" && !hasWordOrder) entry.append(example);
+    for (const extra of item.additional_examples || []) {
+      const section = node("section", "dictionary-entry-section");
+      section.append(node("h4", "dictionary-entry-label", "Beispiel · " + (extra.example_usage || "")));
+      section.append(node("p", "dictionary-entry-example", extra.example_de));
+      section.append(node("p", "dictionary-entry-example-translation", translated(extra.example_ru, extra.example_en)));
+      entry.append(section);
+    }
     if (item.wortschatz_excluded !== true) {
       const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
       addToWortschatz.type = "button";
@@ -317,7 +326,7 @@
     }
     if (selected) {
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
+      if (entryType) entryType.textContent = selected.parts_of_speech?.join(" / ") || TYPE_LABEL[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
       return;
     }
@@ -337,7 +346,7 @@
     if (exact.length === 1) {
       selected = exact[0];
       if (entryBackbar) entryBackbar.hidden = false;
-      if (entryType) entryType.textContent = TYPE_LABEL[selected.type] || "";
+      if (entryType) entryType.textContent = selected.parts_of_speech?.join(" / ") || TYPE_LABEL[selected.type] || "";
       results.replaceChildren(makeEntry(selected));
     } else if (matches.length) {
       showMatches(matches);

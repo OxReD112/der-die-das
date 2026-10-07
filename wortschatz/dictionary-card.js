@@ -55,7 +55,7 @@
     else if (item.type === "verb" && item.perfect_form) grammar = item.perfect_form;
     else if (item.type === "adjective" && (item.comparative || item.superlative))
       grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
-    const pos = ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
+    const pos = item.parts_of_speech?.join(" / ") || ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
     const translatedValue = (ru, en) => lang === "ru" ? ru || en || "" : en || ru || "";
     return {
       sentence: item.example_cloze,

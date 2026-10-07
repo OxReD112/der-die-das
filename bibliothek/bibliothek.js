@@ -156,7 +156,7 @@
     if (actionLabel) {
       const action = document.createElement("a");
       action.className = "toast-action";
-      action.href = "../wortschatz/index.html?v=20261007-import-final-2";
+      action.href = "../wortschatz/index.html?v=20261007-adjadv-1";
       action.textContent = actionLabel;
       toast.append(action);
     }
@@ -574,14 +574,15 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=20261007-import-final-2`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json")])
-      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns]) => {
+    const get = path => fetch(`../worterbuch/${path}?v=20261007-adjadv-1`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json"),get("german-adjective-adverbs.json")])
+      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
           ...verbs.map(x => ({ ...x, word:x.infinitive, type:"Verb" })),
           ...adjectives.map(x => ({ ...x, type:"Adjektiv" })),
           ...adverbs.map(x => ({ ...x, type:"Adverb" })),
+          ...adjectiveAdverbs.map(x => ({ ...x, type:"Adjektiv" })),
           ...conjunctions.map(x => ({ ...x, type:"Konjunktion" })),
           ...pronouns.map(x => ({ ...x, type:"Pronomen" }))
         ];
@@ -814,7 +815,7 @@
       }
     };
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
-    addInfo("p","dictionary-pos",item.type);
+    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || selectedResolution.translation.ru) : translation(item));
@@ -897,10 +898,11 @@
         const line = document.createElement("p"); line.className = "dictionary-detail"; markForm(line, `Imperativ: ${imperative}`); root.append(line);
       }
     }
-    const example = item.example_de;
-    if (example) {
-      const block = document.createElement("p"); block.className = "dictionary-example"; block.textContent = example;
-      const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = locale() === "ru" ? item.example_ru || item.example_en || "" : item.example_en || item.example_ru || ""; block.append(tr); root.append(block);
+    for (const example of [item,...(item.additional_examples || [])]) {
+      if (!example.example_de) continue;
+      if (example.example_usage) addInfo("p","dictionary-label","Beispiel · " + example.example_usage);
+      const block = document.createElement("p"); block.className = "dictionary-example"; block.textContent = example.example_de;
+      const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || ""; block.append(tr); root.append(block);
     }
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Add to Wortschatz";
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);

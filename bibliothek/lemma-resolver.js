@@ -14,7 +14,9 @@
     if (exact) return exact;
     let identity;
     try { identity = JSON.parse(saved); } catch (_) { return null; }
-    if (!Array.isArray(identity) || identity[0] !== "fallback") return null;
+    if (!Array.isArray(identity)) return null;
+    if (identity[0] === "main") return resolution.candidates.find(c => c.item?.alias_ids?.includes(identity[1])) || null;
+    if (identity[0] !== "fallback") return null;
     const own = resolution.candidates.filter(c => c.source === "main" &&
       norm(c.lemma) === norm(identity[1]) && canonicalPos(c.pos) === canonicalPos(identity[2]));
     return own.length === 1 ? own[0] : null;
@@ -41,6 +43,7 @@
       map.set(key, matches);
     }
     for (const entry of entries) {
+      for (const id of entry.alias_ids || []) byId.set(String(id),entry);
       add(lemmas, entry.word, entry); add(forms, entry.word, entry);
       for (const form of entry.search_forms || []) add(forms, form, entry);
       if (entry.type === "Adjektiv") {
@@ -100,7 +103,7 @@
     const mainCandidate = item => item.importedSeparable ? {
       source:"fallback",lemma:item.word,pos:"verb",posLabel:"Verb",meanings:item.meanings,
       translation:{en:item.meanings.join("; "),ru:""}
-    } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
+    } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, posLabel:item.parts_of_speech?.join(" / ") || item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item });
     // Reviewed action nouns have their own identity; never borrow a verb ID.
     const infinitiveNouns = {
       lesen:{en:"reading (the act of reading)",ru:"чтение"},
@@ -588,6 +591,9 @@
       const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
       const nominal = nominalRank(word,tokens,index,start,end,matches,candidates);
       if (nominal.evidence) return nominal;
+      // These are different learning senses. Generic syntax is not sufficient
+      // to silently choose between them; retain the reader's meaning choice.
+      if (candidates.filter(c => c.item?.reading_policy === "separate").length > 1) return unchanged;
       const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
       const verbs = candidates.filter(isVerb), nouns = candidates.filter(c => (posMap[c.pos] || c.pos) === "Nomen");
       const finite = (entry,i,person) => ["Präsens","Präteritum","Konjunktiv II"].some(tense => {
@@ -609,6 +615,14 @@
         candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
         preferred:favoured.length === 1 ? favoured[0] : favoured.filter(c => c.source === "main").length === 1 ? favoured.find(c => c.source === "main") : null,evidence
       } : unchanged;
+      // Internal capitals favour a noun, but sentence/quotation starts do not.
+      // Keep homographic verbs/adjectives available for manual correction.
+      const prefix = sentence.slice(0,tokens[index].index);
+      const startsUtterance = index === 0 || /[.!?…]\s*[«„“"‘»”]*\s*$/u.test(prefix) ||
+        /[«„“"‘]\s*$/u.test(prefix);
+      if (nouns.length && /^[A-ZÄÖÜ]/u.test(word) && !startsUtterance)
+        return {...choose(nouns,"internal-capital-noun"),blocked:nouns.length > 1 &&
+          nouns.filter(c => c.source === "main").length !== 1};
       // Our dictionary stores separate exercise cards for adjectives and
       // adverbs. Prefer a card only when local syntax supports its use; retain
       // all alternatives so a reader can correct the inference.
@@ -662,7 +676,9 @@
       const determiners = new Set(["der","die","das","dem","den","des","ein","eine","einem","einen","einer","eines","mein","dein","sein","ihr","unser","euer","kein","keine","dieses","dieser","diese"]);
       let determinerIndex = index-1;
       while (determinerIndex >= start && index-determinerIndex <= 3 && adjective(determinerIndex)) determinerIndex--;
-      const determiner = norm(tokens[determinerIndex]?.[0]);
+      const rawDeterminer = norm(tokens[determinerIndex]?.[0]);
+      const contractions = {im:"dem",am:"dem",beim:"dem",vom:"dem",zum:"dem",zur:"der",ins:"das",ans:"das",aufs:"das",durchs:"das",fürs:"das",ums:"das",übers:"das",unters:"das",hinterm:"dem",überm:"dem",unterm:"dem"};
+      const determiner = contractions[rawDeterminer] || rawDeterminer;
       const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
       // After stronger contextual rules, lowercase spelling favours an adjective
       // over a noun. Keep every candidate available for manual correction.
@@ -729,7 +745,14 @@
     async function resolve(word, context) {
       let preparationError = null;
       if (context) try { await prepareSeparable(); } catch (e) { preparationError = e; }
-      const exact = forms.get(norm(word)) || [];
+      const exact = [...(forms.get(norm(word)) || [])];
+      // The age entry is a bound suffix, never the archaic standalone jährig.
+      // Accept numeric and common spelled-out number compounds, including endings.
+      const ageEntry = entries.find(e => e.word === "-jährig");
+      const unit = "(?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)";
+      const tens = "(?:zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)";
+      const number = `(?:${unit}(?:hundert|tausend))?(?:${unit}und${tens}|${unit}|zehn|elf|zwölf|dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn|${tens})`;
+      if (ageEntry && new RegExp(`^(?:[1-9][0-9]*-|${number})jährig(?:e|en|em|er|es)?$`,"u").test(norm(word)) && !exact.some(e=>e.id===ageEntry.id)) exact.push(ageEntry);
       const derived = (modifiers.get(norm(word)) || []).map(row => row.entry);
       const dictionaryForms = new Set(exact.map(e => e.id));
       const ownOnlyVerb = ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word)));
@@ -754,6 +777,11 @@
       }
       // Resolve all forms/mapped lemmas first; own coverage is occurrence-wide,
       // not a comparison between differently worded translation strings.
+      // A recognised merged lexical card covers both modifier POS headers.
+      // Coverage is lemma-scoped: a homographic verb or another lemma survives.
+      const merged = candidates.filter(c => c.source === "main" && c.item.reading_policy === "merged");
+      candidates = candidates.filter(c => c.source !== "fallback" || !["Adjektiv","Adverb"].includes(canonicalPos(c.pos)) ||
+        !merged.some(m => [m.lemma,...(m.item.search_forms || [])].some(lemma => norm(lemma) === norm(c.lemma))));
       const coveredParts = new Set(candidates.filter(c => c.source === "main").map(c => canonicalPos(c.pos)));
       if (coveredParts.size) {
         // A known base verb does not cover a reconstructed complete verb

@@ -3,14 +3,16 @@
   "use strict";
   const VERSION=2, READING="deutschWortschatzPendingReadingWordsV2", DIRECT="deutschWortschatzPendingDictionaryWordV2";
   const root=new URL('../worterbuch/',document.currentScript.src);
-  const files=[['nouns','noun'],['verbs','verb'],['adjectives','adjective'],['adverbs','adverb'],['conjunctions','conjunction'],['pronouns','pronoun']];
+  const files=[['nouns','noun'],['verbs','verb'],['adjectives','adjective'],['adverbs','adverb'],['adjective-adverbs','adjective'],['conjunctions','conjunction'],['pronouns','pronoun']];
   async function load() {
     const groups=await Promise.all(files.map(async([file,type])=>{
-      const response=await fetch(new URL(`german-${file}.json?v=20261007-import-final-2`,root),{cache:'no-store'});
+      const response=await fetch(new URL(`german-${file}.json?v=20261007-adjadv-1`,root),{cache:'no-store'});
       if(!response.ok)throw new Error('The dictionary could not be loaded. Your draft is kept; please try again.');
       return (await response.json()).map(item=>({...item,type}));
     }));
-    return new Map(groups.flat().map(item=>[item.id,item]));
+    const dictionary=new Map(groups.flat().map(item=>[item.id,item]));
+    for(const item of groups.flat())for(const id of item.alias_ids || [])dictionary.set(id,item);
+    return dictionary;
   }
   function row(item,lang,card) { return {dictionaryId:item.id,lang:lang==='ru'?'ru':'en',edited:false,card}; }
   function validate(rows,dictionary) {
