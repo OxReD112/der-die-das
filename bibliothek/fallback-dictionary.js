@@ -40,6 +40,16 @@
     const ordered = [...(data?.senses || [])].sort((a, b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0] - b[0]);
     return [...new Set(ordered.map(row => row[3]))];
   }
+  function referenceLemma(value) {
+    const match = /^(.*?) of ([\p{L}\p{M}]+(?:[- ][\p{L}\p{M}]+)*):?$/iu.exec(value.trim());
+    if (!match) return null;
+    const prefix = match[1].toLowerCase();
+    const grammar = new Set(["strong","weak","mixed","nominative","accusative","genitive","dative","masculine","feminine","neuter","singular","plural","all","case","gender","comparative","superlative","degree","first","second","third","person","present","past","preterite","participle","imperative","indicative","subjunctive","i","ii","dependent","independent","subordinate","clause","infinitive","positive","definite","indefinite"]);
+    const tokens = prefix.split(/[\s/-]+/u).filter(Boolean);
+    if (prefix !== "inflection" && !(tokens.length >= 2 && tokens.every(token => grammar.has(token)) &&
+      /\b(?:singular|plural|participle|imperative|infinitive|degree)\b/u.test(prefix))) return null;
+    return match[2].normalize("NFC").toLocaleLowerCase("de-DE");
+  }
   function groupsFor(word, data) {
     const byPos = new Map();
     for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0]-b[0])) {
@@ -49,7 +59,7 @@
     }
     const mappedLemmas = (data?.inflections || []).map(row => row[1]);
     return [...byPos].map(([pos, values]) => {
-      const reference = value => /^inflection of\b/iu.test(value) || mappedLemmas.some(lemma =>
+      const reference = value => !!referenceLemma(value) || /^inflection of\b/iu.test(value) || mappedLemmas.some(lemma =>
         value.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`) &&
         /\b(?:present|past|preterite|participle|imperative|singular|plural|dative|accusative|genitive|nominative|infinitive|comparative|superlative)\b/iu.test(value));
       const hasReference = values.some(reference);
@@ -93,6 +103,29 @@
     }
     return result;
   }
+  function formMappings(word, data, direct) {
+    const mappings = (data?.inflections || []).filter(row =>
+      !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
+      direct.some(group => group.formNotes.some(note =>
+        note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`))));
+    // Only an explicit, whole grammatical reference can supply a missing link.
+    // No stemming, prose references, or replacement of structured mappings.
+    if (!mappings.length && !(data?.inflections || []).length) {
+      for (const group of direct) for (const note of group.formNotes) {
+        const lemma = referenceLemma(note);
+        if (lemma) mappings.push([word,lemma,""]);
+      }
+    }
+    return mappings;
+  }
+  async function lexicalGroups(word, visited = new Set()) {
+    if (visited.has(word) || visited.size >= 4) return [];
+    const next = new Set([...visited,word]), data = await record(word);
+    const direct = groupsFor(word,data), mappings = formMappings(word,data,direct);
+    const positions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
+    const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next)))).flat();
+    return [...direct.filter(group => group.meanings.length),...mapped.filter(group => !positions.size || positions.has(group.pos))];
+  }
   async function lookup(word) {
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
     for (const candidate of candidates) {
@@ -101,14 +134,11 @@
       const direct = groupsFor(candidate,data);
       // The export also contains auxiliary relations and malformed form mappings.
       // Only grammatical references support resolving this spelling to another lemma.
-      const mappings = (data.inflections || []).filter(row =>
-        !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
-        direct.some(group => group.formNotes.some(note =>
-          note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`))));
+      const mappings = formMappings(candidate,data,direct);
       const evidence = inflectionEvidence(candidate,mappings,direct);
       const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
-        const mapped = groupsFor(lemma,await record(lemma));
+        const mapped = await lexicalGroups(lemma,new Set([candidate]));
         // A verb inflection must not inherit unrelated noun senses of its lemma.
         return mapped.filter(group => !describedPositions.size || describedPositions.has(group.pos));
       }))).flat();

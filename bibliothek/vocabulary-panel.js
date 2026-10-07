@@ -58,6 +58,31 @@
         $("vocabulary-empty").hidden=!!entries.length;selection();
         const resolver=await getResolver();
         if(request!==run||!dialog.open)return;
+        // Repair only missing translations with an unambiguous fallback form link.
+        // Existing resolved/manual choices and their translations are untouched.
+        let recovered=false;
+        for(const record of entries) {
+          if(record.source!=="unresolved" || record.translation.en || record.translation.ru)continue;
+          for(const occurrence of record.occurrences) {
+            if(request!==run||!dialog.open||getBook()!==book)return;
+            try {
+              const resolution=await resolver.resolve(occurrence.form,{sentence:occurrence.sentence,tokenOffset:occurrence.tokenOffset});
+              const candidate=resolution.selected;
+              if(candidate?.source!=="fallback" || resolution.candidates.length!==1 ||
+                !resolution.formNotes.some(note=>note.lemmas?.length) ||
+                !(candidate.translation?.en || candidate.translation?.ru))continue;
+              if(request!==run||!dialog.open||getBook()!==book)return;
+              await window.BibliothekVocabulary.resolveOccurrence(book.id,record.key,occurrence,candidate);
+              recovered=true;
+            } catch(_) { /* A failed lookup leaves the original bookmark intact. */ }
+          }
+        }
+        if(recovered) {
+          const refreshed=await window.BibliothekVocabulary.list(book.id);
+          if(request!==run||!dialog.open||getBook()!==book)return;
+          entries=window.BibliothekVocabularyList.scoped(refreshed,range);
+          await onChanged();
+        }
         currentResolver=resolver;selection();
 
         for(const record of entries) {
