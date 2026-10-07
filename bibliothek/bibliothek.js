@@ -373,9 +373,6 @@
     } finally { switchingChapter = false; }
   }
   const contentsDialog = $("contents-dialog");
-  const progressSpace = document.createElement("div");
-  progressSpace.className = "chapter-progress-space";
-  progressSpace.setAttribute("aria-hidden", "true");
   // Prefix totals make chapter boundaries cheap to count, including shared EPUB files.
   const contentsWordCounts = new WeakMap();
   function wordCountsFor(book) {
@@ -452,11 +449,6 @@
   $("contents-toggle").addEventListener("click", () => {
     closePopups();
     $("contents-book-title").textContent = currentBook.title;
-    // Native dialogs occupy the top layer; bring the existing track into it.
-    const track = $("chapter-progress-track");
-    progressSpace.hidden = track.hidden;
-    track.replaceWith(progressSpace);
-    contentsDialog.prepend(track);
     updateDrawerTop(); renderContents(); contentsDialog.showModal(); contentsDialog.classList.add("is-opening");
     const active = $("contents-list").querySelector('[aria-current]');
     if (active) { active.scrollIntoView({ block: "center" }); }
@@ -464,7 +456,6 @@
   $("contents-close").addEventListener("click", closeContents);
   contentsDialog.addEventListener("cancel", event => { event.preventDefault(); closeContents(); });
   contentsDialog.addEventListener("close", () => {
-    progressSpace.replaceWith($("chapter-progress-track"));
     $("contents-toggle").focus({ preventScroll: true });
   });
   contentsDialog.addEventListener("click", event => { if (event.target === contentsDialog) {

@@ -6,13 +6,9 @@
     let run=0, countRun=0, entries=[], trigger=null, navigating=false, busy=false, clearRequest=null, currentResolver=null;
     const text=(tag,cls,value)=>{const element=document.createElement(tag);element.className=cls;element.textContent=value;return element;};
     let closing=false;
-    function menu(show) {
-      $("vocabulary-menu").hidden=!show;
-      $("vocabulary-menu-toggle").setAttribute('aria-expanded',String(show));
-    }
     async function close(prepare) {
       if(!dialog.open||closing||busy)return;
-      closing=true;menu(false);dialog.classList.remove('is-opening');
+      closing=true;dialog.classList.remove('is-opening');
       const preparation=typeof prepare==='function'?prepare():Promise.resolve();
       if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
         dialog.classList.add('is-closing');
@@ -22,8 +18,6 @@
       await new Promise(resolve=>{dialog.addEventListener('close',resolve,{once:true});dialog.close();});
       dialog.classList.remove('is-closing');closing=false;
     }
-    $("vocabulary-menu-toggle").addEventListener('click',()=>menu($("vocabulary-menu").hidden));
-    dialog.addEventListener('click',event=>{if(!event.target.closest('#vocabulary-menu,#vocabulary-menu-toggle'))menu(false);});
     const availability=record=>window.BibliothekVocabularyActions.availability(record,currentResolver);
     const issueLabel=error=>`${error.base || "Unknown word"}${error.dictionaryId ? " ("+error.dictionaryId+")" : ""}: ${error.code==='DICTIONARY_ENTRY_EXCLUDED' ? 'excluded from Wortschatz' : error.code==='DICTIONARY_ENTRY_MISSING' ? 'dictionary entry missing' : 'dictionary example needs correction'}`;
     function selection() {
@@ -38,7 +32,6 @@
       $("vocabulary-clear").textContent=n ? 'Clear Selected' : 'Clear Marks';
       $("vocabulary-add").textContent=`+ ${eligible} zum Wortschatz`;
       $("vocabulary-add").hidden=!eligible || !!clearRequest;
-      $("vocabulary-menu-toggle").disabled=locked;
       $("vocabulary-add").disabled=locked || !entries.some(e=>selected.has(e.key)&&availability(e).available);
       $("vocabulary-copy").disabled=locked || !n || !currentResolver;
       $("vocabulary-clear").disabled=busy || !entries.length;
@@ -111,8 +104,7 @@
     }
     function open(from) {
       if(!getBook())return;
-      menu(false);
-      $("vocabulary-progress-fill").style.width=$("chapter-progress-fill").style.width;
+      
       trigger=from || $("vocabulary-toggle");selected.clear();
       $("vocabulary-action-status").textContent='';$("vocabulary-continue").hidden=true;$("vocabulary-manual-copy").hidden=true;
       const hasChapters=!!getBook().chapters?.length;
@@ -140,7 +132,7 @@
       clearRequest=null;$("vocabulary-clear-confirm").hidden=true;$("vocabulary-actions").hidden=false;
     }
     $("vocabulary-copy").addEventListener('click',async()=>{
-      if(busy||!currentResolver||!selected.size)return;menu(false);
+      if(busy||!currentResolver||!selected.size)return;
       const subtitle=$("vocabulary-subtitle").textContent;
       const title=subtitle===getBook().title?subtitle:`${getBook().title} · ${subtitle}`;
       const value=window.BibliothekVocabularyActions.copyText(chosen(),currentResolver,language(),title);
@@ -170,7 +162,7 @@
       finally{busy=false;selection();}
     });
     $("vocabulary-clear").addEventListener('click',()=>{
-      if(busy||!entries.length)return;menu(false);
+      if(busy||!entries.length)return;
       const book=getBook(),range=$("vocabulary-scope").value==='book'?null:getRange();
       clearRequest={bookId:book.id,range,keys:selected.size?[...selected]:null};
       $("vocabulary-manual-copy").hidden=true;$("vocabulary-continue").hidden=true;$("vocabulary-action-status").textContent='';
@@ -178,7 +170,7 @@
       $("vocabulary-clear-description").textContent='Marks in this scope will be removed. Words already added to Wortschatz and their learning progress will stay.';
       $("vocabulary-actions").hidden=true;$("vocabulary-clear-confirm").hidden=false;selection();$("vocabulary-clear-keep").focus();
     });
-    $("vocabulary-clear-keep").addEventListener('click',()=>{if(!busy){cancelClear();selection();$("vocabulary-menu-toggle").focus();}});
+    $("vocabulary-clear-keep").addEventListener('click',()=>{if(!busy){cancelClear();selection();$("vocabulary-close").focus();}});
     $("vocabulary-clear-confirm-button").addEventListener('click',async()=>{
       if(busy||!clearRequest)return;
       const request=clearRequest;busy=true;selection();$("vocabulary-clear-confirm-button").disabled=true;$("vocabulary-clear-keep").disabled=true;
@@ -191,8 +183,7 @@
     });
     dialog.addEventListener('cancel',event=>{
       event.preventDefault();if(busy)return;
-      if(clearRequest){cancelClear();selection();$("vocabulary-menu-toggle").focus();}
-      else if(!$("vocabulary-menu").hidden){menu(false);$("vocabulary-menu-toggle").focus();}
+      if(clearRequest){cancelClear();selection();$("vocabulary-close").focus();}
       else close();
     });
     $("vocabulary-toggle").addEventListener('click',()=>open($("vocabulary-toggle")));
