@@ -614,7 +614,7 @@
     if (request !== lookupRequest) return;
     const reference=window.BibliothekPronounReference;
     const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
-    let showPronounSummary=pronounCandidates.length>0 && !(saved && resolution.selected && !reference.isPronoun(resolution.selected));
+    let showPronounSummary=pronounCandidates.length>0 && (!resolution.selected || reference.isPronoun(resolution.selected));
     if(showPronounSummary && !reference.isPronoun(resolution.selected))resolution.selected=pronounCandidates[0];
     popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
