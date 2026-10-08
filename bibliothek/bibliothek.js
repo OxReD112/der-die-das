@@ -604,6 +604,17 @@
     return {...context,tokenOffset:offset,location:{...context.location,
       tokenOffset:context.location.tokenOffset-context.tokenOffset+offset}};
   }
+  function positionWordPopup(anchor) {
+    if (anchor) {
+      const box = $popover.getBoundingClientRect();
+      const gap = 8, edge = 12;
+      const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
+      const above = anchor.top - box.height - gap;
+      const top = above >= edge ? above : Math.min(window.innerHeight - box.height - edge, anchor.bottom + gap);
+      $popover.style.left = `${left}px`;
+      $popover.style.top = `${Math.max(edge, top)}px`;
+    }
+  }
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;
     refreshPopupLanguage = null;
@@ -611,13 +622,38 @@
     $("popover-bookmark").setAttribute("aria-pressed", "false");
     selectedEntry = null;
     selectedResolution = null;
+    activePronouns = [];
+    popupAmbiguous = true;
+    const context = selectedContext;
+    $("popover-word").textContent = word;
+    const loading = document.createElement("span");
+    loading.className = "popover-loading";
+    loading.setAttribute("role", "status");
+    const renderLoading = () => loading.setAttribute("aria-label", locale() === "ru" ? "Ищем значение слова" : "Looking up word");
+    renderLoading();
+    refreshPopupLanguage = renderLoading;
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement("span");
+      dot.setAttribute("aria-hidden", "true");
+      loading.append(dot);
+    }
+    $("popover-translation").replaceChildren(loading);
+    for (const id of ["popover-more", "popover-source", "popover-form-notes", "popover-alternatives"]) $(id).hidden = true;
+    $("popover-form-notes").ontoggle = null;
+    $("popover-choices").replaceChildren();
+    $popover.setAttribute("aria-busy", "true");
+    $popover.hidden = false;
+    positionWordPopup(anchor);
     try { await loadDictionary(); }
     catch (error) {
       // Fallback lookup remains usable when the main database fails to load.
       lemmaResolver = window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary);
     }
-    const context = selectedContext;
-    const resolution = await lemmaResolver.resolve(word, context);
+    if (request !== lookupRequest) return;
+    let resolution;
+    try { resolution = await lemmaResolver.resolve(word, context); }
+    catch (error) { resolution = {candidates:[], selected:null, status:"unresolved", unresolvedMeanings:[], error}; }
+    if (request !== lookupRequest) return;
     const linkedReflexive = resolution.candidates.find(c=>c.construction?.id === "reflexive-verb");
     let saved = null;
     try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
@@ -792,18 +828,10 @@
     };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     renderSelection();
+    $popover.setAttribute("aria-busy", "false");
+    positionWordPopup(anchor);
     await refreshBookmark(request);
-    if (request !== lookupRequest) return;
-    $popover.hidden = false;
-    if (anchor) {
-      const box = $popover.getBoundingClientRect();
-      const gap = 8, edge = 12;
-      const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
-      const above = anchor.top - box.height - gap;
-      const top = above >= edge ? above : Math.min(window.innerHeight - box.height - edge, anchor.bottom + gap);
-      $popover.style.left = `${left}px`;
-      $popover.style.top = `${Math.max(edge, top)}px`;
-    }
+
   }
   function renderDictionaryDetails() {
     if(!activePronouns.length){if(selectedEntry)renderDictionaryCard(selectedEntry);return;}

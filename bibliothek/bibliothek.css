@@ -382,3 +382,10 @@
 /* Reader-only pronoun reference; all rows, including formal Sie, remain visible. */
 .pronoun-reference-title { margin:12px 0; color:var(--text); font-size:17px; line-height:1.4; }
 .pronoun-reference-scroll { overflow-x:auto; max-width:100%; }
+
+.popover-loading { display:flex; align-items:center; gap:5px; min-height:24px; }
+.popover-loading span { width:6px; height:6px; border-radius:50%; background:currentColor; animation:lookup-dot .9s ease-in-out infinite; }
+.popover-loading span:nth-child(2) { animation-delay:.15s; }
+.popover-loading span:nth-child(3) { animation-delay:.3s; }
+@keyframes lookup-dot { 0%,60%,100% { transform:translateY(0); opacity:.45; } 30% { transform:translateY(-4px); opacity:1; } }
+@media (prefers-reduced-motion:reduce) { .popover-loading span { animation:none; opacity:.65; } }

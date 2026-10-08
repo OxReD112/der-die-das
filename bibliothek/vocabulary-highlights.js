@@ -4,7 +4,7 @@
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   function create(text, toggle, getResolver) {
     const PREF = "deutschReadingHighlightsV1", cache = new Map();
-    let visible = true, generation = 0, observer = null, active = 0;
+    let visible = true, generation = 0, observer = null, reflexiveObserver = null, active = 0;
     const queue = [];
     try { visible = localStorage.getItem(PREF) !== "0"; } catch (_) {}
     function labelWords() {
@@ -35,7 +35,7 @@
     }
     async function update(book) {
       const run = ++generation;
-      observer?.disconnect(); observer = null; queue.length = 0;
+      observer?.disconnect(); observer = null; reflexiveObserver?.disconnect(); reflexiveObserver = null; queue.length = 0;
       if (!book) return;
       const records = await window.BibliothekVocabulary.list(book.id);
       const resolver = await getResolver();
@@ -46,21 +46,13 @@
       const unresolved = new Set(records.filter(r => r.source === "unresolved").flatMap(r => r.occurrences.map(o => norm(o.form))));
       const locations = new Set(records.flatMap(r => r.occurrences.filter(o => o.chapterIndex === (book.chapterIndex || 0)).map(o => `${o.paragraphIndex}:${o.tokenOffset}`)));
       const hasResolved = records.some(r => r.source !== "unresolved");
-      // Use the same dictionary-backed groups as lookup, without fallback downloads.
+      // Use the same cached grammatical groups as lookup, including fallback verbs.
       const groupLocations = new Set();
-      if (resolver.matchReflexive && hasMarkedVerb) {
-        for (const paragraph of text.querySelectorAll("[data-paragraph]")) {
-          for (const span of paragraph.querySelectorAll(".reading-word")) {
-            const groups = resolver.matchReflexive(span.textContent,{sentence:paragraph.textContent,tokenOffset:Number(span.dataset.tokenOffset)});
-            if (groups.length !== 1 || !keys.has(window.BibliothekVocabulary.identity(groups[0]))) continue;
-            const group = groups[0], context = {bookId:book.id,location:{chapterIndex:book.chapterIndex || 0,
-              paragraphIndex:Number(paragraph.dataset.paragraph),tokenOffset:group.construction.spans[0].start}};
-            const selected = await window.BibliothekMeaningSelections.get(context).catch(()=>null);
-            if (run !== generation) return;
-            if (selected && selected !== window.BibliothekVocabulary.identity(group)) continue;
-            for (const part of group.construction.spans) groupLocations.add(`${paragraph.dataset.paragraph}:${part.start}`);
-          }
-        }
+      // Stored occurrence spans paint immediately, without grammatical downloads.
+      for(const record of records)for(const occurrence of record.occurrences){
+        const group=occurrence.construction;
+        if(occurrence.chapterIndex!==(book.chapterIndex||0)||group?.id!=='reflexive-verb')continue;
+        for(const span of group.spans)groupLocations.add(`${occurrence.paragraphIndex}:${group.sentenceOffset+span.start}`);
       }
       if (resolver.matchSeparable && hasMarkedVerb) {
         for (const paragraph of text.querySelectorAll("[data-paragraph]")) {
@@ -88,6 +80,32 @@
           pending.get(paragraph).push(span);
         }
       }
+      // Discover additional reflexive occurrences only near the reading viewport.
+      // Checking pronouns once per paragraph replaces a lookup on every word
+      // of the entire chapter after each bookmark change.
+      if(resolver.matchReflexive&&hasMarkedVerb){
+        reflexiveObserver=new IntersectionObserver(entries=>{
+          for(const entry of entries){if(!entry.isIntersecting)continue;reflexiveObserver?.unobserve(entry.target);
+            schedule(async()=>{
+              const paragraph=entry.target,seen=new Set();
+              for(const span of paragraph.querySelectorAll('.reading-word')){
+                if(!/^(?:mich|mir|dich|dir|sich|uns|euch)$/u.test(norm(span.textContent)))continue;
+                if(run!==generation||!paragraph.isConnected)return;
+                const groups=await resolver.matchReflexive(span.textContent,{sentence:paragraph.textContent,tokenOffset:Number(span.dataset.tokenOffset)});
+                if(run!==generation)return;
+                for(const group of groups){const key=window.BibliothekVocabulary.identity(group);if(!keys.has(key))continue;
+                  const anchor=group.construction.spans[0].start,unique=key+':'+anchor;if(seen.has(unique))continue;seen.add(unique);
+                  const selected=await window.BibliothekMeaningSelections.get({bookId:book.id,location:{chapterIndex:book.chapterIndex||0,paragraphIndex:Number(paragraph.dataset.paragraph),tokenOffset:anchor}}).catch(()=>null);
+                  if(run!==generation)return;if(selected&&selected!==key)continue;
+                  const starts=new Set(group.construction.spans.map(s=>s.start));
+                  for(const token of paragraph.querySelectorAll('.reading-word'))if(starts.has(Number(token.dataset.tokenOffset)))apply(token,true);
+                }
+              }
+            });
+          }
+        },{rootMargin:'600px 0px'});
+        for(const paragraph of text.querySelectorAll('[data-paragraph]'))if(/\b(?:mich|mir|dich|dir|sich|uns|euch)\b/iu.test(paragraph.textContent))reflexiveObserver.observe(paragraph);
+      }
       if (!pending.size) return;
       observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
@@ -104,7 +122,7 @@
       }, {rootMargin:"600px 0px"});
       for (const paragraph of pending.keys()) observer.observe(paragraph);
     }
-    function cancel() { generation++; observer?.disconnect(); observer = null; queue.length = 0; }
+    function cancel() { generation++; observer?.disconnect(); observer = null; reflexiveObserver?.disconnect(); reflexiveObserver = null; queue.length = 0; }
     return Object.freeze({update,cancel});
   }
   window.BibliothekHighlights = Object.freeze({create});

@@ -190,9 +190,10 @@
     async function tokenAnalyses(word) {
       const key = norm(word), result = [...(verbAnalyses.get(key) || [])];
       for(const entry of zuForms.get(key)||[])result.push({entry,base:norm(entry.word).replace(/^sich\s+/u,''),compound:[],kind:'infinitive',tense:'Infinitiv',zu:true,detached:false});
-      if (grammaticalWords.has(key) || prepositions.has(key)) return result;
+      if (grammaticalWords.has(key) || prepositions.has(key) || result.some(a=>a.entry&&!a.detached&&ownOnlyVerbs.has(a.base))) return result;
       // Capitalised dictionary nouns are not silently reinterpreted as predicates.
       if (!result.length && word[0] !== key[0] && (forms.get(key) || []).some(e=>e.type === 'Nomen')) return result;
+      if(!result.length && fallback.mayBeVerb && !lookupCache.has(key) && !await fallback.mayBeVerb(word))return result;
       let groups;
       try { groups = await lexicalLookup(word); } catch (_) { return result; }
       const evidence = groups.filter(g=>g.kind === 'form-note').flatMap(g=>g.inflections || []);
@@ -248,17 +249,39 @@
           if(nominal&&d>=0&&i-d<=3&&(/^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|euer\w*)$/u.test(words[d])||prepositions.has(words[d]))) {analyses[i]=[];if(!prepositions.has(words[d]))analyses[d]=[];for(let j=d+1;j<i;j++)analyses[j]=[];}
         }
       }
+      // Verified adjective/adverb modifiers inside a determiner+noun phrase
+      // retain their nominal role even when their spelling is also a verb form.
+      for(let i=0;i<tokens.length;i++)if(tokens[i][0][0]!==words[i][0]&&(forms.get(words[i])||[]).some(e=>e.type==='Nomen')){
+        let d=i-1;while(d>=0&&i-d<=8&&(modifiers.has(words[d])||(forms.get(words[d])||[]).some(e=>['Adjektiv','Adverb'].includes(e.type))))d--;
+        if(d>=0&&determiners.test(words[d])&&i-d<=8&&!/[,;:.!?]/u.test(sentence.slice(tokens[d].index,tokens[i].index)))for(let j=d+1;j<i;j++)analyses[j]=[];
+      }
       const subordinators = new Set(['weil','dass','wenn','ob','als','bevor','nachdem','obwohl','während','sobald','damit','bis']);
       const coordinators = new Set(['und','oder','aber','denn','sondern']);
       const clauses = [];let start = 0, relation = 'root';
       for (let i=1;i<tokens.length;i++) {
         const gap = sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index);
-        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i]) || coordinators.has(words[i])) {
+        const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])||coordinators.has(words[j])));
+        const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
+        const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
+        const nominalCoord=words[i]==='und'&&!/[,;:.!?]/u.test(gap)&&(!leftFinite||!rightFinite)&&
+          (tokens[i-1][0][0]!==words[i-1][0]||subjectPersons[words[i-1]])&&
+          (tokens[i+1]?.[0][0]!==words[i+1]?.[0]||subjectPersons[words[i+1]]);
+        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i]) || coordinators.has(words[i])&&!nominalCoord) {
           clauses.push({start,end:i-1,relation});
           start=i;relation=/[;:.!?…]/u.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
         }
       }
       clauses.push({start,end:tokens.length-1,relation});
+      // A comma-delimited nominal apposition without a predicate does not
+      // sever an unfinished subject from its following finite predicate.
+      for(let i=1;i+1<clauses.length;i++){
+        const prior=clauses[i-1],aside=clauses[i],next=clauses[i+1];
+        const verbal=c=>analyses.slice(c.start,c.end+1).some(rows=>rows.some(a=>['finite','participle','infinitive'].includes(a.kind)));
+        if(aside.relation==='comma'&&next.relation==='comma'&&!verbal(prior)&&!verbal(aside)&&verbal(next)&&
+          tokens[aside.start][0][0]!==words[aside.start][0]&&!subjectPersons[words[aside.start]]&&!['der','die','das'].includes(words[aside.start])){
+          prior.insertions=[...(prior.insertions||[]),{start:aside.start,end:aside.end}];prior.end=next.end;clauses.splice(i,2);i--;
+        }
+      }
       for(const c of clauses)c.relative=c.relation==='comma'&&['der','die','das','den','dem','dessen','deren'].includes(words[c.start])&&
         (!(forms.get(words[c.start+1])||[]).some(e=>e.type==='Nomen')||['dessen','deren'].includes(words[c.start]));
       // A detached spelling may lack its own record while the proven joined
@@ -273,10 +296,19 @@
       }
       if(diagnostic){diagnostic.tokens=tokens.map((t,i)=>({text:t[0],start:t.index,analyses:analyses[i].map(a=>({base:a.base,kind:a.kind,person:a.person,tense:a.tense}))}));diagnostic.clauses=clauses;diagnostic.attempts=[];}
       const beforePrep = i=>i>0&&prepositions.has(words[i-1]);
-      function subjects(clause,person) {
+      function subjects(clause,person,inherit=true) {
+        const firstFinite=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).find(i=>analyses[i].some(a=>a.kind==='finite'));
+        const conjunction=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).find(i=>i>clause.start&&i<clause.end&&words[i]==='und'&&(firstFinite===undefined||i<firstFinite));
+        if(conjunction!==undefined){
+          const left={start:clause.start,end:conjunction-1},right={start:conjunction+1,end:firstFinite===undefined?clause.end:firstFinite-1};
+          const l=['ich','du','wir','ihr','er/sie/es','sie'].flatMap(p=>subjects(left,p,false));
+          const r=['ich','du','wir','ihr','er/sie/es','sie'].flatMap(p=>subjects(right,p,false));
+          if(l.length===1&&r.length===1){const collective=[l[0].person,r[0].person].some(p=>['ich','wir'].includes(p))?'wir':[l[0].person,r[0].person].some(p=>['du','ihr'].includes(p))?'ihr':'sie';return collective===person?[{index:l[0].index,person,coordinated:true}]:[];}
+          return [];
+        }
         const found=[];let personal=false;
         for(let i=clause.start;i<=clause.end;i++) {
-          if(beforePrep(i))continue;
+          if(clause.insertions?.some(r=>i>=r.start&&i<=r.end)||beforePrep(i))continue;
           if(words[i]==='ihr' && (forms.get(words[i+1])||[]).some(e=>e.type==='Nomen'))continue;
           if(subjectPersons[words[i]])personal=true;
           if((subjectPersons[words[i]] || []).includes(person)) {
@@ -294,9 +326,13 @@
         }
         if(clause.relative&&['der','die','das'].includes(words[clause.start])&&
           (person==='er/sie/es'||person==='sie'&&words[clause.start]==='die'))return [{index:clause.start,person}];
-        if(!['er/sie/es','sie'].includes(person))return [];
+        if(!['er/sie/es','sie'].includes(person)){
+          const ci=clauses.indexOf(clause),prior=clauses[ci-1];
+          if(inherit&&prior&&clause.relation==='coordinate'&&words[clause.start]==='und'&&!subjects(clause,'er/sie/es',false).length&&!subjects(clause,'sie',false).length)return subjects(prior,person);
+          return [];
+        }
         for(let i=clause.start;i<=clause.end;i++) {
-          if(beforePrep(i))continue;
+          if(clause.insertions?.some(r=>i>=r.start&&i<=r.end)||beforePrep(i))continue;
           // Nouns within a prepositional/genitive phrase cannot become a
           // second subject merely because their article also has nominative uses.
           let embedded=false;
@@ -305,9 +341,9 @@
             if(prepositions.has(words[j])&&!(words[j]==='vor'&&words[j+1]==='allem')){embedded=true;break;}
           }
           if(embedded)continue;
-          if(tokens[i+1]?.[0][0]!==words[i+1]?.[0]&&!analyses[i+1]?.length&&!determiners.test(words[i+1])&&!prepositions.has(words[i+1]))continue;
+          if(!clause.insertions?.some(r=>i+1>=r.start&&i+1<=r.end)&&tokens[i+1]?.[0][0]!==words[i+1]?.[0]&&!analyses[i+1]?.length&&!determiners.test(words[i+1])&&!prepositions.has(words[i+1]))continue;
           const nounEntries=(forms.get(words[i])||[]).filter(e=>e.type==='Nomen');
-          let det=i-1;while(det>=clause.start&&i-det<=3&&!determiners.test(words[det])&&!(analyses[det]||[]).length)det--;
+          let det=i-1;while(det>=clause.start&&i-det<=8&&!prepositions.has(words[det])&&!reflexivePronouns.has(words[det])&&!determiners.test(words[det])&&!(analyses[det]||[]).length)det--;
           const hasDeterminer=det>=clause.start&&determiners.test(words[det]);
           if(hasDeterminer&&beforePrep(det))continue;
           if(hasDeterminer) {
@@ -325,6 +361,11 @@
           } else if(nounEntries.some(e=>String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words[i])&&(norm(e.word)!==words[i]||e.plural_only))&&person==='sie')found.push({index:i,person});
           else if(!nounEntries.length && tokens[i][0][0]!==words[i][0] && !analyses[i].length && !grammaticalWords.has(words[i]) && !prepositions.has(words[i]) && !determiners.test(words[i]) &&
             !(forms.get(words[i])||[]).some(e=>['Adverb','Adjektiv','Pronomen'].includes(e.type)) && (i===clause.start||i>clause.start&&tokens[i-1][0][0]!==words[i-1][0]||analyses[i+1]?.some(a=>a.kind==='finite')||analyses[i-1]?.some(a=>a.kind==='finite')) && person==='er/sie/es') found.push({index:i,person});
+        }
+        if(!found.length&&inherit&&clause.relation==='coordinate'&&words[clause.start]==='und'){
+          const ci=clauses.indexOf(clause),prior=clauses[ci-1];
+          const explicitNominal=subjects(clause,'er/sie/es',false).length||subjects(clause,'sie',false).length;
+          if(prior&&!explicitNominal){const previousSubjects=subjects(prior,person);if(previousSubjects.length===1)return previousSubjects;}
         }
         return found;
       }
@@ -420,7 +461,19 @@
             const pronoun=pronouns[0];
             // The predicate, its auxiliary/modal and documented compound pieces
             // form one group. Any other verbal head makes the attachment unsafe.
+            let unresolvedLassen=false;
             const allowed=new Set([...componentIndices,controller]);if(zuIndex!==null)allowed.add(zuIndex);
+            // In a modal + bare infinitive + lassen bracket, the inner
+            // infinitive is part of the same predicate, not a second clause.
+            // Keep lassen as the construction head; do not relabel the inner
+            // verb as a lexical 'sich …' sense or infer its semantic controller.
+            if(a.base==='lassen'&&a.kind==='infinitive'&&modalLemmas.has(control.base)&&!a.compound?.length){
+              const inner=[];
+              for(let i=clause.start;i<v;i++)if(i!==controller&&analyses[i].some(r=>r.kind==='infinitive'&&!r.zu&&r.base===words[i])&&words[i-1]!=='zu')inner.push(i);
+              if(inner.length!==1)continue;
+              componentIndices.push(inner[0]);allowed.add(inner[0]);unresolvedLassen=true;
+            }
+
             let competing=false;
             for(let i=clause.start;i<=clause.end;i++)if(!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length))competing=true;
             if(attempt)attempt.competing=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length)).map(i=>tokens[i][0]);
@@ -438,8 +491,8 @@
             const caseName=['mir','dir'].includes(words[pronoun])?'Dativ':['mich','dich'].includes(words[pronoun])?'Akkusativ':'Akkusativ/Dativ';
             const tokenSpan=i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
             if(attempt)attempt.stage='linked';
-            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:'Reflexiv',
-              note:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
+            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(unresolvedLassen?{confidence:'tentative'}:{}),
+              note:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
               ...(a.detached?{prefix:tokenSpan(componentIndices.find(i=>i!==v&&words[i]===a.prefix))}:{}),
               subject:subject.index===null?null:{text:tokens[subject.index][0],start:tokens[subject.index].index,end:tokens[subject.index].index+tokens[subject.index][0].length},
@@ -458,7 +511,11 @@
     async function reflexiveCandidates(word,context) {
       if(!context||!Number.isInteger(context.tokenOffset))return [];
       try { await prepareSeparable(); } catch (_) { /* Own evidence remains usable offline. */ }
-      const sentence=String(context.sentence||'');
+      const sentence=String(context.sentence||''),key=norm(word);
+      if(!reflexivePronouns.has(key)&&!verbAnalyses.has(key)&&!zuForms.has(key)&&!separatedForms.has(key)){
+        if(word[0]!==key[0]&&(forms.get(key)||[]).some(e=>e.type==='Nomen'))return [];
+        if(fallback.mayBeVerb&&!await fallback.mayBeVerb(word))return [];
+      }
       if(!grammarCache.has(sentence)) {
         if(grammarCache.size>=64)grammarCache.delete(grammarCache.keys().next().value);
         const failures=lookupFailures,pending=analyseReflexiveSentence(sentence);
@@ -1121,6 +1178,10 @@
       return unchanged;
     }
     async function resolve(word, context) {
+      if(context){
+        if(fallback.mayBeVerb)fallback.mayBeVerb(word);
+        if(!ownOnlyVerbs.has(norm(word))&&!(forms.get(norm(word))||[]).some(e=>e.type==='Verb'&&ownOnlyVerbs.has(norm(e.word))))lexicalLookup(word).catch(()=>{});
+      }
       let preparationError = null;
       if (context) try { await prepareSeparable(); } catch (e) { preparationError = e; }
       const exact = [...(forms.get(norm(word)) || [])];
@@ -1135,13 +1196,17 @@
       const dictionaryForms = new Set(exact.map(e => e.id));
       const ownOnlyVerb = ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word)));
       const separated = separableCandidates(word, context);
+      // Independent clicked-word lookup overlaps sentence morphology; reuse
+      // the same promise in both paths instead of serial network round trips.
+      const directLookup=!ownOnlyVerb&&(!exact.length||context||reflexiveForms.has(norm(word)))?lexicalLookup(word):null;
+      directLookup?.catch(()=>{});
       const reflexive = await reflexiveCandidates(word,context);
       let candidates = [...separated,...exact.map(mainCandidate),...derived.map(mainCandidate)], error = preparationError, unresolvedMeanings = [], formNotes = [], inflections = [];
       // Interactive lookup checks missing parts of speech; word-only callers keep
       // their existing main-first behaviour and avoid unnecessary downloads.
       if (!ownOnlyVerb && (!exact.length || context || reflexiveForms.has(norm(word)))) {
         try {
-          for (const group of await lexicalLookup(word)) {
+          for (const group of await directLookup) {
             if (ownOnlyVerbs.has(norm(group.word)) || group.kind === "form-note" && group.inflections?.some(row => ownOnlyVerbs.has(norm(row.lemma)))) continue;
             if (group.kind === "form-note") { formNotes.push(group); inflections.push(...(group.inflections || [])); continue; }
             const partOfSpeech = canonicalPos(group.pos);

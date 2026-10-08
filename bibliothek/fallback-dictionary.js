@@ -6,7 +6,7 @@
   const verbFormCache = new Map();
   const verbFormsBase = new URL("fallback-verb-forms/", document.currentScript.src);
   const separableUrl = new URL("separable-index.json?v=1", document.currentScript.src);
-  let separablePromise = null;
+  let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
       if (!response.ok) throw new Error("Separable index unavailable");
@@ -22,6 +22,15 @@
     for (const byte of new TextEncoder().encode(word)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
     return hash & 1023;
   };
+  async function mayBeVerb(word) {
+    try {
+      if(!verbMembershipPromise)verbMembershipPromise=fetch(new URL('manifest.json',verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
+      const m=await verbMembershipPromise,key=String(word).normalize('NFC').toLocaleLowerCase('de-DE');let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
+      const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;
+      for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
+      return true;
+    } catch (_) { return true; } // Missing filter preserves the full lookup path.
+  }
   async function verbFormLinks(word) {
     const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
     if (!verbFormCache.has(index)) {
@@ -196,5 +205,5 @@
   }
   // Wörterbuch cards retain the selected entry word and its direct senses.
   async function lookupEntry(word) { return meanings(await record(word)); }
-  window.DeutschFallbackDictionary = {lookup, lookupEntry, separableEntries};
+  window.DeutschFallbackDictionary = {lookup, lookupEntry, separableEntries, mayBeVerb};
 })();
