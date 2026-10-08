@@ -226,10 +226,10 @@
       }
       return result;
     }
-    const subjectPersons = {ich:['ich'],du:['du'],er:['er/sie/es'],sie:['er/sie/es','sie'],es:['er/sie/es'],wir:['wir'],ihr:['ihr'],man:['er/sie/es'],wer:['er/sie/es']};
+    const subjectPersons = {ich:['ich'],du:['du'],er:['er/sie/es'],sie:['er/sie/es','sie'],es:['er/sie/es'],wir:['wir'],ihr:['ihr'],man:['er/sie/es'],wer:['er/sie/es'],was:['er/sie/es']};
     const pronounPersons = {mich:'ich',mir:'ich',dich:'du',dir:'du',sich:'third',uns:'wir',euch:'ihr'};
-    const determiners = /^(?:der|die|das|ein|eine|mein(?:e)?|dein(?:e)?|sein(?:e)?|ihr(?:e)?|unser(?:e)?|euer(?:e)?|viele|beide|alle|einige|mehrere|etliche|diese|dieser|dieses|dessen|deren)$/u;
-    async function analyseReflexiveSentence(sentence) {
+    const determiners = /^(?:der|die|das|ein|eine|kein|keine|mein(?:e)?|dein(?:e)?|sein(?:e)?|ihr(?:e)?|unser(?:e)?|euer(?:e)?|viele|beide|alle|einige|mehrere|etliche|diese|dieser|dieses|dessen|deren)$/u;
+    async function analyseReflexiveSentence(sentence,diagnostic=null) {
       const tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)], words = tokens.map(t=>norm(t[0]));
       if (!words.some(w=>reflexivePronouns.has(w))) return [];
       const analyses = await Promise.all(tokens.map(t=>tokenAnalyses(t[0])));
@@ -271,6 +271,7 @@
             analyses[i].push({...row,prefix:pair.prefix,detached:true});
         }
       }
+      if(diagnostic){diagnostic.tokens=tokens.map((t,i)=>({text:t[0],start:t.index,analyses:analyses[i].map(a=>({base:a.base,kind:a.kind,person:a.person,tense:a.tense}))}));diagnostic.clauses=clauses;diagnostic.attempts=[];}
       const beforePrep = i=>i>0&&prepositions.has(words[i-1]);
       function subjects(clause,person) {
         const found=[];let personal=false;
@@ -296,6 +297,15 @@
         if(!['er/sie/es','sie'].includes(person))return [];
         for(let i=clause.start;i<=clause.end;i++) {
           if(beforePrep(i))continue;
+          // Nouns within a prepositional/genitive phrase cannot become a
+          // second subject merely because their article also has nominative uses.
+          let embedded=false;
+          for(let j=i-1;j>=clause.start;j--){
+            if(analyses[j].some(a=>a.kind==='finite'))break;
+            if(prepositions.has(words[j])&&!(words[j]==='vor'&&words[j+1]==='allem')){embedded=true;break;}
+          }
+          if(embedded)continue;
+          if(tokens[i+1]?.[0][0]!==words[i+1]?.[0]&&!analyses[i+1]?.length&&!determiners.test(words[i+1])&&!prepositions.has(words[i+1]))continue;
           const nounEntries=(forms.get(words[i])||[]).filter(e=>e.type==='Nomen');
           let det=i-1;while(det>=clause.start&&i-det<=3&&!determiners.test(words[det])&&!(analyses[det]||[]).length)det--;
           const hasDeterminer=det>=clause.start&&determiners.test(words[det]);
@@ -312,8 +322,9 @@
               return plural?person==='sie':norm(e.word)===words[i]&&(person==='er/sie/es'||e.article==='die'&&!e.plural);
             });
             if(eligible.length||!nounEntries.length&&tokens[i][0][0]!==words[i][0]&&!analyses[i].length)found.push({index:i,person});
-          } else if(!nounEntries.length && tokens[i][0][0]!==words[i][0] && !analyses[i].length && !grammaticalWords.has(words[i]) && !prepositions.has(words[i]) && !determiners.test(words[i]) &&
-            !(forms.get(words[i])||[]).some(e=>['Adverb','Adjektiv','Pronomen'].includes(e.type)) && (i===clause.start||analyses[i+1]?.some(a=>a.kind==='finite')||analyses[i-1]?.some(a=>a.kind==='finite')) && person==='er/sie/es') found.push({index:i,person});
+          } else if(nounEntries.some(e=>String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words[i])&&(norm(e.word)!==words[i]||e.plural_only))&&person==='sie')found.push({index:i,person});
+          else if(!nounEntries.length && tokens[i][0][0]!==words[i][0] && !analyses[i].length && !grammaticalWords.has(words[i]) && !prepositions.has(words[i]) && !determiners.test(words[i]) &&
+            !(forms.get(words[i])||[]).some(e=>['Adverb','Adjektiv','Pronomen'].includes(e.type)) && (i===clause.start||i>clause.start&&tokens[i-1][0][0]!==words[i-1][0]||analyses[i+1]?.some(a=>a.kind==='finite')||analyses[i-1]?.some(a=>a.kind==='finite')) && person==='er/sie/es') found.push({index:i,person});
         }
         return found;
       }
@@ -345,6 +356,9 @@
           helpers=helpers.filter((h,i,all)=>all.findIndex(x=>x.index===h.index&&x.analysis.base===h.analysis.base&&x.analysis.person===h.analysis.person)===i);
           helpers=helpers.filter(h=>subjects(clause,h.analysis.person).length===1||inherited&&subjects(inherited,h.analysis.person).length===1);
           for(const a of rows) {
+            // Copulas/auxiliaries alone do not establish a lexical reflexive verb.
+            if((['haben','sein','werden'].includes(a.base)||modalLemmas.has(a.base))&&!a.compound?.length)continue;
+            const attempt=diagnostic?{verbStart:tokens[v].index,base:a.base,kind:a.kind,stage:'components'}:null;if(attempt)diagnostic.attempts.push(attempt);
             const componentIndices=[v];
             if(a.detached) {
               const p=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>i>v&&words[i]===a.prefix&&i===clause.end);
@@ -356,6 +370,7 @@
               if(matches.length!==1){complete=false;break;}componentIndices.push(matches[0]);
             }
             if(!complete)continue;
+            if(attempt)attempt.stage='controller';
             let controller=v,control=a,subjectClause=inherited&&!subjects(clause,a.person).length?inherited:clause,tense=a.tense,zuIndex=null;
             if(a.kind==='participle') {
               const auxiliary=norm(a.entry?.auxiliary || '').split(/\s+/u)[0];
@@ -382,6 +397,7 @@
               } else continue;
             } else if(a.kind!=='finite'&&a.kind!=='imperative')continue;
             if(!control.person)continue;
+            if(attempt){attempt.stage='subject';attempt.person=control.person;attempt.subjectCandidates=subjects(subjectClause,control.person);}
             let subject=subjectFor(subjectClause,control,controller,true);
             if(!subject)continue;
             // An infinitival comma clause can have an explicit accusative
@@ -392,18 +408,22 @@
               else if(objects.length>1)continue;
               else if(Array.from({length:subjectClause.end-subjectClause.start+1},(_,k)=>words[subjectClause.start+k]).some(w=>['den','dem','einen','einem','ihn','ihm','ihr'].includes(w)))continue;
             }
+            if(attempt)attempt.stage='pronoun';
             const pronouns=[];
             for(let p=clause.start;p<=clause.end;p++)if(reflexivePronouns.has(words[p])&&!beforePrep(p)) {
               const per=pronounPersons[words[p]];
               if(per===subject.person||per==='third'&&['er/sie/es','sie'].includes(subject.person))pronouns.push(p);
             }
+            if(attempt)attempt.pronounStarts=pronouns.map(i=>tokens[i].index);
             if(pronouns.length!==1)continue;
+            if(attempt)attempt.stage='competing-predicate';
             const pronoun=pronouns[0];
             // The predicate, its auxiliary/modal and documented compound pieces
             // form one group. Any other verbal head makes the attachment unsafe.
             const allowed=new Set([...componentIndices,controller]);if(zuIndex!==null)allowed.add(zuIndex);
             let competing=false;
             for(let i=clause.start;i<=clause.end;i++)if(!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length))competing=true;
+            if(attempt)attempt.competing=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length)).map(i=>tokens[i][0]);
             if(competing)continue;
             if(a.kind==='finite'&&helpers.some(h=>['haben','sein'].includes(h.analysis.base))&&rows.some(r=>r.kind==='participle'))continue;
             const candidate=a.entry?mainCandidate(a.entry):a.candidate;if(!candidate)continue;
@@ -417,6 +437,7 @@
             const spans=[...new Set(indices)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));
             const caseName=['mir','dir'].includes(words[pronoun])?'Dativ':['mich','dich'].includes(words[pronoun])?'Akkusativ':'Akkusativ/Dativ';
             const tokenSpan=i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
+            if(attempt)attempt.stage='linked';
             relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:'Reflexiv',
               note:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
@@ -1230,6 +1251,7 @@
     return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
       matchReflexive:reflexiveCandidates,
+      diagnoseReflexive:async sentence=>{await prepareSeparable();const diagnostic={};await analyseReflexiveSentence(sentence,diagnostic);return diagnostic;},
       reflexiveMorphology:async word => (await tokenAnalyses(word)).map(({entry,candidate,...a})=>({...a,lemma:entry?.word||candidate?.lemma})),
       // Read-only discovery diagnostics, including unsupported/missing data.
       reflexiveInventory:() => [...reflexiveEntries].map(entry => ({dictionaryId:entry.id,lemma:entry.word,
