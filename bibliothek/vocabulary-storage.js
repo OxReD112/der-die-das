@@ -53,6 +53,8 @@
       row.encounteredTokenOffset = loc.tokenOffset;
       row.construction = {id:c.id,lemma:norm(c.lemma),sentenceOffset:origin,
         spans:c.spans.map(s=>({text:s.text,start:s.start,end:s.end})),
+        ...(["Präsens","Präteritum","Perfekt","Plusquamperfekt","Konjunktiv II","Imperativ","zu-Infinitiv"].includes(c.tense)?{tense:c.tense}:{}),
+        ...(["Akkusativ","Dativ","Akkusativ/Dativ"].includes(c.reflexiveCase)?{reflexiveCase:c.reflexiveCase}:{}),
         ...(c.complement ? {complement:{pattern:norm(c.complement.pattern),note_ru:norm(c.complement.note_ru),note_en:norm(c.complement.note_en)}} : {})};
     }
     return row;

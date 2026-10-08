@@ -1,0 +1,9 @@
+{
+  "format_version": 1,
+  "partition_count": 1024,
+  "forms": 106773,
+  "analyses": 107816,
+  "bytes": 8508319,
+  "source_sha256": "e1cdbf36c99dfb5c4d71e28496baecea6bdef2cff5755d028a439b5a8c4f3f9e",
+  "policy": "Explicit typed verb inflections only; excludes auxiliary/error relations; no guessed forms."
+}

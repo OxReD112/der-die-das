@@ -830,8 +830,13 @@
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
     const formKey = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
     const clickedForm = formKey(selectedWord);
-    const construction = ["separable-verb","reflexive-verb"].includes(selectedResolution?.construction?.id)
-      ? (selectedResolution.construction.id === "reflexive-verb" ? selectedResolution.construction.spans.slice(0,2) : selectedResolution.construction.spans).map(span => formKey(span.text)).join(" ") : "";
+    const reflexiveGroup = selectedResolution?.construction?.id === "reflexive-verb" ? selectedResolution.construction : null;
+    const compoundTense = reflexiveGroup && ["Perfekt","Plusquamperfekt"].includes(reflexiveGroup.tense);
+    const construction = reflexiveGroup
+      ? compoundTense ? "" : reflexiveGroup.verb && reflexiveGroup.pronoun
+        ? [reflexiveGroup.verb,reflexiveGroup.pronoun,...(reflexiveGroup.prefix?[reflexiveGroup.prefix]:[])].map(span=>formKey(span.text)).join(" ")
+        : reflexiveGroup.spans.slice(0,2).map(span=>formKey(span.text)).join(" ")
+      : selectedResolution?.construction?.id === "separable-verb" ? selectedResolution.construction.spans.map(span=>formKey(span.text)).join(" ") : "";
     const markForm = (element, value, whole = false) => {
       const key = formKey(value);
       const split = key.split(/\s+/u);

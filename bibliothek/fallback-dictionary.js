@@ -3,6 +3,8 @@
   "use strict";
   const base = new URL("../open%20data/dictionary-de-json/", document.currentScript.src);
   const cache = new Map();
+  const verbFormCache = new Map();
+  const verbFormsBase = new URL("fallback-verb-forms/", document.currentScript.src);
   const separableUrl = new URL("separable-index.json?v=1", document.currentScript.src);
   let separablePromise = null;
   function separableEntries() {
@@ -20,6 +22,34 @@
     for (const byte of new TextEncoder().encode(word)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
     return hash & 1023;
   };
+  async function verbFormLinks(word) {
+    const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
+    if (!verbFormCache.has(index)) {
+      const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
+        if (!response.ok) throw new Error("Fallback verb morphology unavailable");
+        return response.json();
+      }).then(data => {
+        if(data.format_version !== 1 || data.partition !== index)throw new Error("Invalid fallback verb morphology partition");
+        return data.records;
+      }).catch(error=>{verbFormCache.delete(index);throw error;});
+      verbFormCache.set(index,pending);
+    }
+    const rows = (await verbFormCache.get(index))[spelling] || [];
+    return rows.map(([lemma,tags])=>[spelling,lemma,tags]);
+  }
+  async function derivedVerbGroups(word) {
+    let links;
+    try { links = await verbFormLinks(word); } catch (_) { return []; }
+    const groups = [];
+    for(const lemma of [...new Set(links.map(row=>row[1]))]) {
+      const lexical = (await lexicalGroups(lemma)).filter(g=>g.pos === "verb" && g.meanings.length);
+      groups.push(...lexical);
+      const data = {inflections:links.filter(row=>row[1] === lemma),senses:[[0,word,"verb",`inflection of ${lemma}:`,0]]};
+      groups.push({kind:"form-note",word,pos:"verb",meanings:[`inflection of ${lemma}:`],lemmas:[lemma],
+        inflections:inflectionEvidence(word,data.inflections,groupsFor(word,data))});
+    }
+    return groups;
+  }
   async function record(word) {
     const index = partition(word);
     if (!cache.has(index)) {
@@ -86,9 +116,13 @@
         // in continuation notes. Only attach those when the lemma is unambiguous.
         if (new Set(mappings.map(row => row[1])).size === 1) {
           for (const note of group.formNotes) {
-            if (/\bof\b/iu.test(note)) continue;
-            const tags = note.toLowerCase().match(/(?:first|second|third)-person|singular|plural|present|past|preterite|imperative|indicative|infinitive|participle|subjunctive(?:\s+(?:ii|i))?/gu) || [];
-            analyses.push(tags.map(tag => tag.replace(/\s+/gu,"-")));
+            // A second explicit analysis (e.g. past participle) may coexist
+            // with a finite structured mapping of the same spelling.
+            if (/\bof\b/iu.test(note) && referenceLemma(note) !== lemma.toLocaleLowerCase("de-DE")) continue;
+            const tags = note.toLowerCase().match(/(?:first|second|third)(?:\/(?:first|second|third))*-person|singular|plural|present|past|preterite|imperative|indicative|infinitive|participle|subjunctive(?:\s+(?:ii|i))?/gu) || [];
+            const combined = tags.find(tag => tag.includes("/"));
+            const alternatives = combined ? combined.replace(/-person$/u,"").split("/").map(person=>person+"-person") : [null];
+            for (const person of alternatives) analyses.push(tags.map(tag => (tag === combined ? person : tag).replace(/\s+/gu,"-")));
           }
         }
         for (const tags of analyses) {
@@ -158,7 +192,7 @@
       if (merged.size || notes.length) return [...merged.values(),...notes];
       if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
     }
-    return [];
+    return derivedVerbGroups(String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE"));
   }
   // Wörterbuch cards retain the selected entry word and its direct senses.
   async function lookupEntry(word) { return meanings(await record(word)); }
