@@ -604,19 +604,38 @@
     return {...context,tokenOffset:offset,location:{...context.location,
       tokenOffset:context.location.tokenOffset-context.tokenOffset+offset}};
   }
+  let popupPlacement = null, popupAnchor = null, popupExpansion = null;
   function positionWordPopup(anchor) {
-    if (anchor) {
-      const box = $popover.getBoundingClientRect();
-      const gap = 8, edge = 12;
-      const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
-      const above = anchor.top - box.height - gap;
-      const top = above >= edge ? above : Math.min(window.innerHeight - box.height - edge, anchor.bottom + gap);
-      $popover.style.left = `${left}px`;
-      $popover.style.top = `${Math.max(edge, top)}px`;
+    if (!anchor || $popover.hidden) return;
+    const gap = 8, edge = 12;
+    const viewportHeight = window.innerHeight;
+    const spaceAbove = Math.max(0, anchor.top - gap - edge);
+    const spaceBelow = Math.max(0, viewportHeight - anchor.bottom - gap - edge);
+    if (!popupPlacement) {
+      // Estimate the finished card without delaying lookup or enlarging the loader.
+      const expectedHeight = Math.min(320, viewportHeight - edge * 2);
+      popupPlacement = spaceAbove >= expectedHeight ? "above" : "below";
+      // Near the bottom, use the larger side if neither fits the expected card.
+      if (spaceAbove < expectedHeight && spaceBelow < expectedHeight && spaceAbove > spaceBelow) popupPlacement = "above";
     }
+    popupAnchor = anchor;
+    const availableHeight = popupPlacement === "above" ? spaceAbove : spaceBelow;
+    $popover.style.maxHeight = `${availableHeight}px`;
+    const box = $popover.getBoundingClientRect();
+    const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
+    const top = popupPlacement === "above" ? anchor.top - box.height - gap : anchor.bottom + gap;
+    $popover.style.left = `${left}px`;
+    $popover.style.top = `${Math.max(edge, top)}px`;
+    $popover.dataset.placement = popupPlacement;
   }
+  // Keep the same word-facing edge when translations or expanded notes resize it.
+  new ResizeObserver(() => { if (!popupExpansion) positionWordPopup(popupAnchor); }).observe($popover);
   async function openWordPopup(word, anchor) {
     const request = ++lookupRequest;
+    popupExpansion?.cancel();
+    popupExpansion = null;
+    popupPlacement = null;
+    popupAnchor = anchor;
     refreshPopupLanguage = null;
     $("popover-bookmark").disabled = true;
     $("popover-bookmark").setAttribute("aria-pressed", "false");
@@ -827,9 +846,24 @@
       if (!$sheet.hidden && selectedEntry) renderDictionaryDetails();
     };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
+    const loadingHeight = $popover.getBoundingClientRect().height;
     renderSelection();
     $popover.setAttribute("aria-busy", "false");
     positionWordPopup(anchor);
+    const readyBox = $popover.getBoundingClientRect();
+    if (readyBox.height > loadingHeight && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const loadingTop = popupPlacement === "above" ? anchor.top - loadingHeight - 8 : readyBox.top;
+      popupExpansion = $popover.animate([
+        {height:`${loadingHeight}px`, top:`${loadingTop}px`, overflow:"hidden"},
+        {height:`${readyBox.height}px`, top:`${readyBox.top}px`, overflow:"hidden"}
+      ], {duration:180, easing:"ease-out"});
+      const expansion = popupExpansion;
+      expansion.finished.then(() => {
+        if (popupExpansion !== expansion) return;
+        popupExpansion = null;
+        positionWordPopup(popupAnchor);
+      }).catch(() => {});
+    }
     await refreshBookmark(request);
 
   }

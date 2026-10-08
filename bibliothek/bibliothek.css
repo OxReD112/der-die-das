@@ -389,3 +389,24 @@
 .popover-loading span:nth-child(3) { animation-delay:.3s; }
 @keyframes lookup-dot { 0%,60%,100% { transform:translateY(0); opacity:.45; } 30% { transform:translateY(-4px); opacity:1; } }
 @media (prefers-reduced-motion:reduce) { .popover-loading span { animation:none; opacity:.65; } }
+
+/* A dense, lightly frosted word card; opaque fallback remains above. */
+@supports ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))) {
+  .word-popover { background:color-mix(in srgb,var(--window-card) 92%,transparent); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
+}
+.word-popover { box-sizing:border-box; }
+@media (max-width:699px) {
+  .word-popover { width:min(300px,calc(100vw - 24px)); padding:12px 14px 10px; border-radius:16px; }
+  .popover-heading { gap:4px; padding-right:34px; }
+  .popover-word { margin:1px 0 4px; font-size:19px; line-height:1.2; }
+  .popover-translation { margin-bottom:9px; font-size:15px; line-height:1.32; }
+  .word-popover .fallback-meaning-group { margin-bottom:6px; }
+  .word-popover .popover-construction { margin-top:4px; font-size:13px; line-height:1.3; }
+  .word-popover .lemma-choice { margin-top:6px; padding:8px; font-size:14px; line-height:1.3; }
+  .word-popover .bookmark-hint { margin:2px 0 8px; font-size:12px; line-height:1.3; }
+  .popover-alternatives { margin-bottom:3px; }
+  .popover-alternatives summary { min-height:32px; padding:2px 0; font-size:12px; line-height:1.3; }
+  .popover-more { min-height:44px; padding-top:7px; font-size:13px; }
+  .popover-close { top:3px; right:4px; width:44px; height:44px; font-size:26px; }
+  .popover-bookmark { margin-top:-6px; }
+}

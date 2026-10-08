@@ -508,10 +508,18 @@
           x.construction.lexicalSenseConfirmed&&!r.construction.lexicalSenseConfirmed ||
           x.source==='main'&&r.source==='fallback'&&norm(x.lemma)===norm(r.lemma))));
     }
+    function hasReflexivePronoun(sentence) {
+      for (const token of String(sentence || '').matchAll(/[\p{L}\p{M}]+/gu))
+        if (reflexivePronouns.has(norm(token[0]))) return true;
+      return false;
+    }
     async function reflexiveCandidates(word,context) {
       if(!context||!Number.isInteger(context.tokenOffset))return [];
-      try { await prepareSeparable(); } catch (_) { /* Own evidence remains usable offline. */ }
       const sentence=String(context.sentence||''),key=norm(word);
+      // Sentence analysis cannot produce a reflexive group without a pronoun.
+      // Check before importing forms or downloading the verb membership filter.
+      if (!hasReflexivePronoun(sentence)) return [];
+      try { await prepareSeparable(); } catch (_) { /* Own evidence remains usable offline. */ }
       if(!reflexivePronouns.has(key)&&!verbAnalyses.has(key)&&!zuForms.has(key)&&!separatedForms.has(key)){
         if(word[0]!==key[0]&&(forms.get(key)||[]).some(e=>e.type==='Nomen'))return [];
         if(fallback.mayBeVerb&&!await fallback.mayBeVerb(word))return [];
@@ -1179,7 +1187,7 @@
     }
     async function resolve(word, context) {
       if(context){
-        if(fallback.mayBeVerb)fallback.mayBeVerb(word);
+        if(fallback.mayBeVerb && hasReflexivePronoun(context.sentence))fallback.mayBeVerb(word);
         if(!ownOnlyVerbs.has(norm(word))&&!(forms.get(norm(word))||[]).some(e=>e.type==='Verb'&&ownOnlyVerbs.has(norm(e.word))))lexicalLookup(word).catch(()=>{});
       }
       let preparationError = null;
