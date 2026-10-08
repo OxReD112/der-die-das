@@ -154,6 +154,7 @@
     setProgress();
   }
   function showToast(message, actionLabel, duration = 3200) {
+    dismissMeaningThanks();
     const toast = $("reader-toast");
     toast.classList.remove("has-undo");
     toast.replaceChildren(document.createTextNode(message));
@@ -609,6 +610,50 @@
       tokenOffset:context.location.tokenOffset-context.tokenOffset+offset}};
   }
   let popupPlacement = null, popupAnchor = null, popupExpansion = null;
+  let thanksBox = null, thanksTimeout = null;
+  function dismissMeaningThanks() {
+    clearTimeout(thanksTimeout);
+    thanksTimeout = null;
+    if (thanksBox) {
+      thanksBox.getAnimations().forEach(animation => animation.cancel());
+      thanksBox.remove();
+      thanksBox = null;
+    }
+  }
+  function showMeaningThanks(message, origin) {
+    dismissMeaningThanks();
+    const box = document.createElement("div"), phrase = document.createElement("span");
+    box.className = "word-popover meaning-thanks";
+    box.setAttribute("role", "status");
+    box.setAttribute("aria-live", "polite");
+    box.lang = "de";
+    phrase.textContent = message;
+    box.append(phrase);
+    // Measure the final box within the area already covered by the popup.
+    box.style.maxWidth = `${origin.width}px`;
+    box.style.visibility = "hidden";
+    $popover.parentElement.append(box);
+    const target = box.getBoundingClientRect();
+    const left = origin.left + (origin.width - target.width) / 2;
+    const top = origin.top + (origin.height - target.height) / 2;
+    Object.assign(box.style, {visibility:"visible", left:`${left}px`, top:`${top}px`});
+    thanksBox = box;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shrink = box.animate([
+      {left:`${origin.left}px`, top:`${origin.top}px`, width:`${origin.width}px`, height:`${origin.height}px`, borderRadius:"20px"},
+      {left:`${left}px`, top:`${top}px`, width:`${target.width}px`, height:`${target.height}px`, borderRadius:"20px"}
+    ], {duration:reduced ? 0 : 260, easing:"cubic-bezier(.22,1,.36,1)"});
+    phrase.animate([{opacity:0}, {opacity:1}], {duration:reduced ? 0 : 180, easing:"ease-out"});
+    shrink.finished.then(() => {
+      if (thanksBox !== box) return;
+      thanksTimeout = setTimeout(() => {
+        if (thanksBox !== box) return;
+        const fade = box.animate([{opacity:1, transform:"translateY(0)"}, {opacity:0, transform:`translateY(${reduced ? 0 : -10}px)`}],
+          {duration:reduced ? 0 : 220, easing:"ease-out", fill:"forwards"});
+        fade.finished.then(() => { if (thanksBox === box) dismissMeaningThanks(); }).catch(() => {});
+      }, 2000);
+    }).catch(() => {});
+  }
   function positionWordPopup(anchor) {
     if (!anchor || $popover.hidden) return;
     const gap = 8, edge = 12;
@@ -635,6 +680,7 @@
   // Keep the same word-facing edge when translations or expanded notes resize it.
   new ResizeObserver(() => { if (!popupExpansion) positionWordPopup(popupAnchor); }).observe($popover);
   async function openWordPopup(word, anchor) {
+    dismissMeaningThanks();
     const request = ++lookupRequest;
     popupExpansion?.cancel();
     popupExpansion = null;
@@ -1107,16 +1153,20 @@
     });
   }
   function closePopups() {
+    dismissMeaningThanks();
+    const origin = !$popover.hidden ? $popover.getBoundingClientRect() : null;
+    popupExpansion?.cancel(); popupExpansion = null;
     lookupRequest++; refreshPopupLanguage = null; $popover.hidden = true; $sheet.hidden = true;
     activeWordSpan = null; paintActiveWord(null);
     if (meaningChosenInPopup) {
       meaningChosenInPopup = false;
-      const message = meaningThanks.message($("reader-toast").hidden && !$reading.hidden && !document.querySelector('dialog[open]'));
-      if (message) showToast(message, undefined, 2000);
+      const message = meaningThanks.message(!!origin && $("reader-toast").hidden && !$reading.hidden && !document.querySelector('dialog[open]'));
+      if (message) showMeaningThanks(message, origin);
     }
   }
   function chooseWord(span) {
     if (!span || !span.isConnected) return;
+    dismissMeaningThanks();
     if (!$popover.hidden || !$sheet.hidden) closePopups();
     meaningChosenInPopup = false;
     activeWordSpan = span;
