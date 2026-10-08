@@ -51,7 +51,7 @@
       // Stored occurrence spans paint immediately, without grammatical downloads.
       for(const record of records)for(const occurrence of record.occurrences){
         const group=occurrence.construction;
-        if(occurrence.chapterIndex!==(book.chapterIndex||0)||group?.id!=='reflexive-verb')continue;
+        if(occurrence.chapterIndex!==(book.chapterIndex||0)||!['reflexive-verb','am-superlative'].includes(group?.id))continue;
         for(const span of group.spans)groupLocations.add(`${occurrence.paragraphIndex}:${group.sentenceOffset+span.start}`);
       }
       if (resolver.matchSeparable && hasMarkedVerb) {

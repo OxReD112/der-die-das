@@ -5,7 +5,7 @@
   const cache = new Map();
   const verbFormCache = new Map();
   const verbFormsBase = new URL("fallback-verb-forms/", document.currentScript.src);
-  const separableUrl = new URL("separable-index.json?v=1", document.currentScript.src);
+  const separableUrl = new URL("separable-index.json?v=20261008-reviewed-forms-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
@@ -16,6 +16,18 @@
       return data.entries;
     }).catch(error => { separablePromise = null; throw error; });
     return separablePromise;
+  }
+  const superlativeUrl=new URL('superlative-index.json?v=20261008-l07-1',document.currentScript.src);
+  let superlativePromise=null;
+  async function superlativeEntries(word) {
+    if(!superlativePromise)superlativePromise=fetch(superlativeUrl).then(r=>{
+      if(!r.ok)throw Error('Superlative index unavailable');return r.json();
+    }).then(d=>{
+      if(d.format_version!==1||!d.records||typeof d.records!=='object')throw Error('Invalid superlative index');
+      for(const rows of Object.values(d.records))if(!Array.isArray(rows)||rows.some(r=>!Array.isArray(r)||typeof r[0]!=='string'||!['adj','adv'].includes(r[1])||!Array.isArray(r[2])||r[2].some(m=>typeof m!=='string')))throw Error('Invalid superlative evidence');
+      return d.records;
+    }).catch(e=>{superlativePromise=null;throw e;});
+    return (await superlativePromise)[String(word).normalize('NFC').toLocaleLowerCase('de-DE')]||[];
   }
   const partition = word => {
     let hash = 2166136261;
@@ -30,6 +42,15 @@
       for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
       return true;
     } catch (_) { return true; } // Missing filter preserves the full lookup path.
+  }
+  const auxiliaryFormsUrl=new URL('auxiliary-verb-forms.json?v=20261008-f4-1',document.currentScript.src);
+  let auxiliaryFormsPromise=null;
+  async function auxiliaryInflections(word) {
+    if(!auxiliaryFormsPromise)auxiliaryFormsPromise=fetch(auxiliaryFormsUrl).then(r=>{
+      if(!r.ok)throw Error('Auxiliary morphology unavailable');return r.json();
+    }).then(d=>{if(d.format_version!==1||!d.records)throw Error('Invalid auxiliary morphology');return d.records;}).catch(e=>{auxiliaryFormsPromise=null;throw e;});
+    const rows=(await auxiliaryFormsPromise)[String(word).normalize('NFC').toLocaleLowerCase('de-DE')]||[];
+    return rows.map(([lemma,person,number,tense,mood])=>({lemma,person,number,tense,mood}));
   }
   async function verbFormLinks(word) {
     const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
@@ -106,24 +127,29 @@
       const continuation = value => {
         const tokens = value.toLowerCase().replace(/\bsubjunctive\s+(?:ii|i)\b/gu, "subjunctive").split(/[\s,;:/().-]+/u).filter(Boolean);
         const declensionNote = /^(?:weak|strong|mixed)(?:[\s/-]|$)/iu.test(value.trim()) && tokens.length > 1;
-        return (hasReference || declensionNote) && tokens.length > 0 && tokens.every(token => grammarTokens.has(token));
+        return (hasReference || declensionNote) && tokens.length > 0 && tokens.every(token => token === "degree" || grammarTokens.has(token));
       };
       const notes = [...new Set(values.filter(value => reference(value) || continuation(value)))];
       return {word,pos,meanings:[...new Set(values.filter(value => !notes.includes(value)))],formNotes:notes};
     });
   }
   // Evidence belongs to the clicked spelling, not to permanent dictionary cards.
+  function noteReferencesLemma(note,lemma) {
+    const text=note.toLocaleLowerCase('de-DE'),marker=` of ${lemma.toLocaleLowerCase('de-DE')}`,index=text.indexOf(marker);
+    return index>=0&&/^(?:$|[\s:(“"])/u.test(text.slice(index+marker.length));
+  }
   function inflectionEvidence(form, mappings, groups) {
     const result = [];
     for (const [spelling, lemma, rawTags] of mappings) {
       if (spelling.normalize("NFC").toLocaleLowerCase("de-DE") !== form.toLocaleLowerCase("de-DE")) continue;
       const positions = groups.filter(group => group.formNotes.some(note =>
-        note.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`)));
+        group.pos==='verb'?noteReferencesLemma(note,lemma):
+          note.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`)));
       for (const group of positions) {
         const analyses = [String(rawTags || "").split(",").filter(Boolean)];
         // Some exports store only one analysis in the mapping, with the others
         // in continuation notes. Only attach those when the lemma is unambiguous.
-        if (new Set(mappings.map(row => row[1])).size === 1) {
+        if (group.pos==='verb'?new Set(group.formNotes.map(referenceLemma).filter(Boolean)).size === 1:new Set(mappings.map(row=>row[1])).size === 1) {
           for (const note of group.formNotes) {
             // A second explicit analysis (e.g. past participle) may coexist
             // with a finite structured mapping of the same spelling.
@@ -147,10 +173,23 @@
     return result;
   }
   function formMappings(word, data, direct) {
+    // Some lossless export rows contain only a structured noun inflection,
+    // with no textual sense to repeat that link. Case/number tags establish
+    // a nominal relation; target lexical groups must still explicitly be nouns.
+    const nounOnly = !(data?.senses || []).length;
+    const nounTags = new Set(['nominative','accusative','genitive','dative','singular','plural',
+      'definite','indefinite','strong','weak','mixed','masculine','feminine','neuter']);
+    const nounMapping = row => {
+      const tags = String(row[2] || '').split(',').filter(Boolean);
+      return nounOnly && String(row[0]).normalize('NFC').toLocaleLowerCase('de-DE') === word.toLocaleLowerCase('de-DE') &&
+        tags.some(tag => ['nominative','accusative','genitive','dative','singular','plural'].includes(tag)) &&
+        tags.every(tag => nounTags.has(tag));
+    };
     const mappings = (data?.inflections || []).filter(row =>
       !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
-      direct.some(group => group.formNotes.some(note =>
-        note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`))));
+      (nounMapping(row) || direct.some(group => group.formNotes.some(note =>
+        group.pos==='verb'?noteReferencesLemma(note,String(row[1])):
+          note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`)))));
     // Only an explicit, whole grammatical reference can supply a missing link.
     // No stemming, prose references, or replacement of structured mappings.
     if (!mappings.length && !(data?.inflections || []).length) {
@@ -166,6 +205,7 @@
     const next = new Set([...visited,word]), data = await record(word);
     const direct = groupsFor(word,data), mappings = formMappings(word,data,direct);
     const positions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
+    if (!(data?.senses || []).length && mappings.length) positions.add('noun');
     const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next)))).flat();
     return [...direct.filter(group => group.meanings.length),...mapped.filter(group => !positions.size || positions.has(group.pos))];
   }
@@ -180,6 +220,7 @@
       const mappings = formMappings(candidate,data,direct);
       const evidence = inflectionEvidence(candidate,mappings,direct);
       const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
+      if (!(data?.senses || []).length && mappings.length) describedPositions.add('noun');
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
         const mapped = await lexicalGroups(lemma,new Set([candidate]));
         // A verb inflection must not inherit unrelated noun senses of its lemma.
@@ -205,5 +246,37 @@
   }
   // Wörterbuch cards retain the selected entry word and its direct senses.
   async function lookupEntry(word) { return meanings(await record(word)); }
-  window.DeutschFallbackDictionary = {lookup, lookupEntry, separableEntries, mayBeVerb};
+  function spellingReference(value) {
+    const text = String(value || '').trim();
+    const direct = /^(?:(?:Switzerland and Liechtenstein )?standard|alternative|obsolete|archaic|dated) spelling of ([\p{L}\p{M}]+(?:[- ][\p{L}\p{M}]+)*)\.?$/iu.exec(text);
+    const former = /^Formerly standard spelling of ([\p{L}\p{M}]+(?:[- ][\p{L}\p{M}]+)*) which was deprecated in the spelling reform \(Rechtschreibreform\) of \d{4}\.?$/iu.exec(text);
+    return (direct || former)?.[1] || null;
+  }
+  // Display enrichment only: keep the original lemma, POS, identity and rank.
+  async function spellingTranslation(word, pos, values) {
+    const references = [], unresolved = [];
+    async function expand(meanings, visited) {
+      const result = [];
+      for (const value of meanings) {
+        const target = spellingReference(value);
+        if (!target) { result.push(value); continue; }
+        references.push({note:value,target});
+        const key = target.normalize('NFC').toLocaleLowerCase('de-DE');
+        if (visited.has(key) || visited.size >= 4) { unresolved.push(target); continue; }
+        const next = new Set([...visited,key]);
+        let groups = [];
+        for (const spelling of [...new Set([target,key])]) {
+          groups = (await lexicalGroups(spelling)).filter(group => group.pos === pos);
+          if (groups.length) break;
+        }
+        const translated = await expand(groups.flatMap(group => group.meanings),next);
+        if (!translated.length) unresolved.push(target);
+        result.push(...translated);
+      }
+      return [...new Set(result)];
+    }
+    if (!values.some(spellingReference)) return null;
+    return {meanings:await expand(values,new Set([String(word).normalize('NFC').toLocaleLowerCase('de-DE')])),references,unresolved};
+  }
+  window.DeutschFallbackDictionary = {auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

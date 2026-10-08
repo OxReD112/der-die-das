@@ -21,6 +21,13 @@
       norm(c.lemma) === norm(identity[1]) && canonicalPos(c.pos) === canonicalPos(identity[2]));
     return own.length === 1 ? own[0] : null;
   }
+  function calendarDateLength(word,tail) {
+    if(!['am','zum'].includes(norm(word)))return 0;
+    const date=String(tail).match(/^[ \t]+([1-9]|[12][0-9]|3[01])\.[ \t]+(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)(?=$|[^\p{L}\p{M}])/u);
+    if(!date)return 0;
+    const limit={Februar:29,April:30,Juni:30,September:30,November:30}[date[2]]||31;
+    return Number(date[1])<=limit?date[0].length:0;
+  }
   function create(entries, fallback) {
     const forms = new Map(), lemmas = new Map(), zuForms = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
     // Lexical discovery is dictionary-driven; contextual confirmation is separate.
@@ -190,7 +197,23 @@
     async function tokenAnalyses(word) {
       const key = norm(word), result = [...(verbAnalyses.get(key) || [])];
       for(const entry of zuForms.get(key)||[])result.push({entry,base:norm(entry.word).replace(/^sich\s+/u,''),compound:[],kind:'infinitive',tense:'Infinitiv',zu:true,detached:false});
-      if (grammaticalWords.has(key) || prepositions.has(key) || result.some(a=>a.entry&&!a.detached&&ownOnlyVerbs.has(a.base))) return result;
+      // Own-only display policy does not imply complete grammatical morphology.
+      // Keep fallback person/mood evidence for auxiliaries out of UI candidates,
+      // while allowing it to control a confirmed lexical participle.
+      if (grammaticalWords.has(key) || prepositions.has(key)) return result;
+      const ownAuxiliary=result.find(a=>a.entry&&!a.detached&&ownOnlyVerbs.has(a.base));
+      if(ownAuxiliary) {
+        try {
+          const evidence=fallback.auxiliaryInflections?await fallback.auxiliaryInflections(word):[];
+          for(const a of evidence.filter(a=>a.lemma===ownAuxiliary.base)) {
+            const person=({'first-person':a.number==='plural'?'wir':'ich','second-person':a.number==='plural'?'ihr':'du','third-person':a.number==='plural'?'sie':'er/sie/es'})[a.person];
+            const tense=/^subjunctive/u.test(a.mood||'')?a.mood==='subjunctive-ii'||a.tense==='past'||a.tense==='preterite'?'Konjunktiv II':'Konjunktiv I':a.tense==='past'||a.tense==='preterite'?'Präteritum':'Präsens';
+            if(person&&!result.some(r=>r.base===a.lemma&&r.kind==='finite'&&r.person===person&&r.tense===tense))result.push({...ownAuxiliary,kind:'finite',person,tense,mood:a.mood});
+          }
+        } catch (_) { /* Own morphology remains usable when the supplement is unavailable. */ }
+        return result;
+      }
+
       // Capitalised dictionary nouns are not silently reinterpreted as predicates.
       if (!result.length && word[0] !== key[0] && (forms.get(key) || []).some(e=>e.type === 'Nomen')) return result;
       if(!result.length && fallback.mayBeVerb && !lookupCache.has(key) && !await fallback.mayBeVerb(word))return result;
@@ -205,7 +228,7 @@
           const person = a.person && a.number ? ({'first-person':a.number === 'plural'?'wir':'ich','second-person':a.number === 'plural'?'ihr':'du','third-person':a.number === 'plural'?'sie':'er/sie/es'})[a.person] : null;
           const kind = a.tags.includes('participle') ? 'participle' : a.mood === 'imperative' ? 'imperative' : a.tags.includes('infinitive')||a.tags.includes('infinitive-zu') ? 'infinitive' : person ? 'finite' : null;
           if (kind) {
-            const row={...common,kind,person:person || (kind === 'imperative' ? a.number === 'plural'?'ihr':'du' : null),tense:a.tense === 'past'||a.tense === 'preterite'?'Präteritum':'Präsens',zu:a.tags.includes('infinitive-zu'),detached:false};
+            const row={...common,kind,person:person || (kind === 'imperative' ? a.number === 'plural'?'ihr':'du' : null),tense:/^subjunctive/u.test(a.mood || '') ? a.mood === 'subjunctive-ii' || a.tense === 'past' || a.tense === 'preterite' ? 'Konjunktiv II' : 'Konjunktiv I' : a.tense === 'past'||a.tense === 'preterite'?'Präteritum':'Präsens',mood:a.mood,zu:a.tags.includes('infinitive-zu'),detached:false};
             result.push(row);
             // Explicit regular second-person evidence can disambiguate a
             // syncretic third-person spelling omitted from the export tags.
@@ -248,6 +271,15 @@
             /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|euer\w*)$/u.test(words[d]);
           if(nominal&&d>=0&&i-d<=3&&(/^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|euer\w*)$/u.test(words[d])||prepositions.has(words[d]))) {analyses[i]=[];if(!prepositions.has(words[d]))analyses[d]=[];for(let j=d+1;j<i;j++)analyses[j]=[];}
         }
+      }
+      // A dictionary noun at the end of a written hyphen compound retains
+      // its nominal role even when its spelling has a verbal continuation.
+      for(let i=1;i<tokens.length;i++)if(tokens[i][0][0]!==words[i][0]&&
+        tokens[i-1][0][0]!==words[i-1][0]&&
+        /^\s*-\s*$/u.test(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index))) {
+        const nominal=(forms.get(words[i])||[]).some(e=>e.type==='Nomen')||
+          (await lexicalLookup(tokens[i][0]).catch(()=>[])).some(g=>!g.kind&&!g.unresolved&&canonicalPos(g.pos)==='Nomen');
+        if(nominal)analyses[i]=[];
       }
       // Verified adjective/adverb modifiers inside a determiner+noun phrase
       // retain their nominal role even when their spelling is also a verb form.
@@ -421,9 +453,19 @@
             } else if(a.kind==='infinitive') {
               const marker=a.zu||words[v-1]==='zu';
               const modal=helpers.filter(h=>modalLemmas.has(h.analysis.base));
+              // Werden controls a bare lexical infinitive, never a participle
+              // (passive) or a zu-infinitive. Forms must come from the dictionary.
+              const future=marker?[]:helpers.filter(h=>h.analysis.base==='werden'&&
+                ['Präsens','Konjunktiv I','Konjunktiv II'].includes(h.analysis.tense));
+              if(marker&&helpers.some(h=>h.analysis.base==='werden'))continue;
+              if(future.length&&v>clause.start&&tokens[v][0][0]!==words[v][0]) {
+                const nominal=(forms.get(words[v])||[]).some(e=>e.type==='Nomen')||
+                  (await lexicalLookup(tokens[v][0])).some(g=>!g.kind&&!g.unresolved&&canonicalPos(g.pos)==='Nomen');
+                if(nominal)continue;
+              }
               const replacement=a.compound?.length?helpers.filter(h=>h.analysis.base==='haben'):[];
-              if(modal.length===1||replacement.length===1) {
-                const h=modal[0]||replacement[0];controller=h.index;control=h.analysis;componentIndices.push(controller);tense=replacement.length?(control.tense==='Präteritum'?'Plusquamperfekt':'Perfekt'):control.tense;
+              if(modal.length+future.length===1||replacement.length===1) {
+                const h=modal[0]||future[0]||replacement[0];controller=h.index;control=h.analysis;componentIndices.push(controller);tense=replacement.length?(control.tense==='Präteritum'?'Plusquamperfekt':'Perfekt'):future.length?control.tense==='Konjunktiv II'?'Konjunktiv II':control.tense==='Konjunktiv I'?'Futur I (Konjunktiv I)':'Futur I':control.tense;
               } else if(marker) {
                 let host=helpers.filter(h=>!componentIndices.includes(h.index));
                 if(!host.length&&previous&&clause.relation==='comma') {
@@ -501,16 +543,32 @@
               if(c){complement=c;indices.push(i);break;}
               if(prepositions.has(words[i])||analyses[i].length)break;
             }
+            // Agreement establishes attachment, not the meaning 'oneself'.
+            // A bare plural object of a base verb also permits 'each other'.
+            // Restrict this safeguard to the local bare-object pattern; richer
+            // complements and lexical reflexive entries retain existing analysis.
+            const lexicalSenseConfirmed=reflexiveEntries.has(a.entry)||/^sich\s+/u.test(norm(candidate.lemma));
+            const pluralSubject=['wir','ihr','sie'].includes(subject.person);
+            const selfMarker=['selbst','selber'].includes(words[pronoun+1])?pronoun+1:null;
+            const mutualMarker=words[pronoun+1]==='gegenseitig'?pronoun+1:null;
+            const clauseClosed=clause.end===words.length-1||/[,.!?;:]/u.test(sentence.slice(tokens[clause.end].index+tokens[clause.end][0].length,tokens[clause.end+1].index));
+            const bareObject=clauseClosed&&Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k)
+              .every(i=>allowed.has(i)||i===pronoun||i===subject.index||i===selfMarker||i===mutualMarker);
+            const reflexiveAmbiguity=pluralSubject&&(mutualMarker!==null||
+              !lexicalSenseConfirmed&&selfMarker===null&&bareObject);
+            if(selfMarker!==null)indices.push(selfMarker);
+            if(mutualMarker!==null)indices.push(mutualMarker);
+            const tentative=unresolvedLassen||reflexiveAmbiguity;
             const spans=[...new Set(indices)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));
             const caseName=['mir','dir'].includes(words[pronoun])?'Dativ':['mich','dich'].includes(words[pronoun])?'Akkusativ':'Akkusativ/Dativ';
             const tokenSpan=i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
             if(attempt)attempt.stage='linked';
-            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(unresolvedLassen?{confidence:'tentative'}:{}),
-              note:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
+            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:reflexiveAmbiguity?'Reflexiv / reziprok':unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(reflexiveAmbiguity?{interpretation:mutualMarker!==null?'reciprocal':'reflexive-or-reciprocal'}:{}),
+              note:reflexiveAmbiguity?{ru:mutualMarker!==null?'Взаимное употребление: друг друга; возвратное значение не подтверждено':'Возможно «себя» или «друг друга»; требуется выбор',en:mutualMarker!==null?'Reciprocal use: each other; reflexive sense unconfirmed':'May mean oneself or each other; selection required'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
               ...(a.detached?{prefix:tokenSpan(componentIndices.find(i=>i!==v&&words[i]===a.prefix))}:{}),
               subject:subject.index===null?null:{text:tokens[subject.index][0],start:tokens[subject.index].index,end:tokens[subject.index].index+tokens[subject.index][0].length},
-              lexicalSenseConfirmed:reflexiveEntries.has(a.entry)||/^sich\s+/u.test(norm(candidate.lemma)),
+              lexicalSenseConfirmed:lexicalSenseConfirmed&&!reflexiveAmbiguity,
               ...(complement?{complement:{...complement}}:{})},_lexicalIndices:[v,...componentIndices.filter(i=>i!==controller)],_pronounIndex:pronoun});
           }
         }
@@ -663,36 +721,61 @@
       }).catch(error => { preparation = null; throw error; });
       return preparation;
     }
-    function separableCandidates(word, context) {
+    const separableNounEvidence = new Map();
+    function scanSeparableCandidates(word, context, secondary = false, pendingNouns = new Set(), nounEvidence = separableNounEvidence) {
       if (!context || !Number.isInteger(context.tokenOffset)) return [];
       const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
       const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
       if (selected < 0) return [];
       const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
+      const passable = new Set(["und","oder","aber","als"]);
       const gap = (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length,tokens[b].index);
       const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(gap(a,b)) || boundaries.has(norm(tokens[b][0]));
-      const soft = (a,b) => /,/u.test(gap(a,b)) || /\s[–—]\s/u.test(gap(a,b));
+      const soft = (a,b) => /,/u.test(gap(a,b)) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
+      const stops = (a,b) => hard(a,b) && !(secondary && passable.has(norm(tokens[b][0])) &&
+        !/[;:.!?…“”„"«»()]/u.test(gap(a,b)));
+      const nominalParticle = (i,j) => norm(tokens[j][0]) === "vorbei" &&
+        /\bkein weg(?: daran)?$/u.test(tokens.slice(i+1,j).map(t => norm(t[0])).join(" "));
       const competingVerb = i => {
         const entries = forms.get(norm(tokens[i][0])) || [];
         if (norm(tokens[i][0]) === "bitte" || /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && entries.some(e => e.type === "Nomen")) return false;
-        return entries.some(e => e.type === "Verb") || separatedForms.has(norm(tokens[i][0]));
+        const possibleVerb = entries.some(e => e.type === "Verb") || separatedForms.has(norm(tokens[i][0]));
+        if (!secondary || !possibleVerb) return possibleVerb;
+        // Lexical ambiguity is only bypassed in the tentative second pass.
+        if (!entries.some(e => e.type === "Verb") && entries.some(e => ["Adjektiv","Adverb"].includes(e.type))) return false;
+        if (/^[A-ZÄÖÜ]/u.test(tokens[i][0])) {
+          const key = norm(tokens[i][0]);
+          if (!nounEvidence.has(key)) pendingNouns.add(tokens[i][0]);
+          if (nounEvidence.get(key)) return false;
+        }
+        return true;
       };
       const results = [];
       for (let i = 0; i < tokens.length-1; i++) {
         const possible = separatedForms.get(norm(tokens[i][0])) || [];
         if (!possible.length) continue;
+        // Only inspect paths that can contribute to this clicked occurrence.
+        if (secondary && selected !== i && (i >= selected || !possible.some(pair => pair.prefix === norm(tokens[selected][0])))) continue;
+        if (secondary && !tokens.some((t,j) => j > i &&
+          (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1)) &&
+          possible.some(pair => pair.prefix === norm(t[0])) && !nominalParticle(i,j))) continue;
         let start = i;
         while (start > 0 && !hard(start-1,start) && !soft(start-1,start)) start--;
-        if (i > start && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Nomen")) continue;
+        // Internal capitals belong to a nominal phrase even when the noun is
+        // only in fallback (Sparten ... aus). A quoted noun after an article
+        // remains nominal although the quote starts a new local segment.
+        if (/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (i > start || i > 0 &&
+          /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines)$/u.test(norm(tokens[i-1][0])))) continue;
         if (tokens.slice(start,i).some(t => (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" &&
           ["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten","lassen"].includes(e.word)))) continue;
-        let crossed = false;
+        let crossed = secondary;
         for (let j = i+1; j < tokens.length; j++) {
-          if (hard(j-1,j)) break;
+          if (stops(j-1,j)) break;
           if (soft(j-1,j)) crossed = true;
           // A particle must close its local segment; otherwise it may be a preposition.
           const closes = j === tokens.length-1 || hard(j,j+1) || soft(j,j+1);
-          const pairs = closes ? possible.filter(pair => pair.prefix === norm(tokens[j][0])) : [];
+          // "kein Weg (daran) vorbei" belongs to führen, not vorbeifahren.
+          const pairs = closes && !nominalParticle(i,j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) ? possible.filter(pair => pair.prefix === norm(tokens[j][0])) : [];
           if (pairs.length) {
             if (selected === i || selected === j) for (const pair of pairs) {
               const spans = [i,j].map(k => ({text:tokens[k][0],start:tokens[k].index,end:tokens[k].index + tokens[k][0].length}));
@@ -706,6 +789,28 @@
         }
       }
       return results;
+    }
+    function separableCandidates(word, context) {
+      const primary = scanSeparableCandidates(word,context);
+      return primary.length ? primary : scanSeparableCandidates(word,context,true);
+    }
+    async function resolveSeparableCandidates(word, context) {
+      const primary = scanSeparableCandidates(word,context);
+      if (primary.length || !context) return primary;
+      const nounEvidence = new Map(separableNounEvidence);
+      // Fetch only capitalised possible blockers on relevant paths. Reuse the
+      // shared lexical cache; do not load every noun in the sentence/corpus.
+      for (;;) {
+        const pending = new Set(), candidates = scanSeparableCandidates(word,context,true,pending,nounEvidence);
+        if (!pending.size) return candidates;
+        await Promise.all([...pending].map(async form => {
+          const groups = await lexicalLookup(form);
+          if (separableNounEvidence.size >= 512) separableNounEvidence.delete(separableNounEvidence.keys().next().value);
+          const isNoun = groups.some(g => canonicalPos(g.pos) === "Nomen" && g.kind !== "form-note" && !g.unresolved);
+          nounEvidence.set(norm(form),isNoun);
+          separableNounEvidence.set(norm(form),isNoun);
+        }));
+      }
     }
     function zuGroup(word, context) {
       if (!context || !Number.isInteger(context.tokenOffset)) return null;
@@ -1070,7 +1175,9 @@
       const candidateFinite = (candidate,person) => candidate.item && finite(candidate.item,index,person) || importedFinite(candidate,person);
       const choose = (favoured,evidence) => favoured.length ? {
         candidates:[...favoured,...candidates.filter(c => !favoured.includes(c))],
-        preferred:favoured.length === 1 ? favoured[0] : favoured.filter(c => c.source === "main").length === 1 ? favoured.find(c => c.source === "main") : null,evidence
+        preferred:favoured.length === 1 ? favoured[0] :
+          new Set(favoured.map(c => `${norm(c.lemma)}:${canonicalPos(c.pos)}`)).size === 1 && favoured.filter(c => c.source === "main").length === 1
+            ? favoured.find(c => c.source === "main") : null,evidence
       } : unchanged;
       // Internal capitals favour a noun, but sentence/quotation starts do not.
       // Keep homographic verbs/adjectives available for manual correction.
@@ -1078,8 +1185,8 @@
       const startsUtterance = index === 0 || /[.!?…]\s*[«„“"‘»”]*\s*$/u.test(prefix) ||
         /[«„“"‘]\s*$/u.test(prefix);
       if (nouns.length && /^[A-ZÄÖÜ]/u.test(word) && !startsUtterance)
-        return {...choose(nouns,"internal-capital-noun"),blocked:nouns.length > 1 &&
-          nouns.filter(c => c.source === "main").length !== 1};
+        return {...choose(nouns,"internal-capital-noun"),blocked:new Set(nouns.map(c => norm(c.lemma))).size > 1 ||
+          nouns.length > 1 && nouns.filter(c => c.source === "main").length !== 1};
       // Our dictionary stores separate exercise cards for adjectives and
       // adverbs. Prefer a card only when local syntax supports its use; retain
       // all alternatives so a reader can correct the inference.
@@ -1195,9 +1302,162 @@
       const finiteCandidates = verbs.filter(c => [index-1,index+1].some(i => i >= start && i <= end &&
         (subjectPersons[norm(tokens[i][0])] || []).some(person => candidateFinite(c,person))));
       if (finiteCandidates.length) return choose(finiteCandidates,"finite-verb-with-subject");
+      // A local article + dictionary noun can establish third-person agreement.
+      // Keep distant/competing subjects and any auxiliary bracket unresolved here.
+      const nounSubjects = [];
+      for (let i=start+1;i<=end;i++) {
+        const article=norm(tokens[i-1][0]), surface=norm(tokens[i][0]);
+        if (!['der','die','das'].includes(article) || !/^[A-ZÄÖÜ]/u.test(tokens[i][0])) continue;
+        const readings=matches(i).filter(e=>e.type==='Nomen').flatMap(e=>{
+          const singular=surface===norm(e.word)&&article===norm(e.article);
+          const plural=surface===norm(e.plural)&&article==='die';
+          return [...(singular?['er/sie/es']:[]),...(plural?['sie']:[])];
+        });
+        const persons=[...new Set(readings)];
+        if(persons.length===1)nounSubjects.push({index:i,person:persons[0]});
+      }
+      const otherSubject=Array.from({length:end-start+1},(_,k)=>start+k).some(i=>
+        i!==index && subjectPersons[norm(tokens[i][0])] && norm(tokens[i][0])!=='sie' &&
+        !['der','die','das'].includes(norm(tokens[i][0])));
+      const otherVerb=Array.from({length:end-start+1},(_,k)=>start+k).some(i=>i!==index&&
+        matches(i).some(e=>e.type==='Verb'));
+      if(nounSubjects.length===1&&!otherSubject&&!otherVerb&&
+        !['und','oder','aber','sondern','doch'].includes(norm(tokens[start-1]?.[0]))) {
+        const subject=nounSubjects[0];
+        const before=subject.index===index-1&&subject.index-1===start;
+        const after=subject.index===index+2&&index===start;
+        if(before||after) {
+          const agreed=verbs.filter(c=>candidateFinite(c,subject.person));
+          if(agreed.length)return choose(agreed,'finite-verb-with-noun-subject');
+        }
+      }
       const finiteOnly = verbs.filter(c => candidateFinite(c));
-      if (finiteOnly.length && !nouns.length) return choose(finiteOnly,"validated-finite-form");
+      const participleAlternative = verbs.some(c =>
+        c.item && norm(String(c.item.perfect_form || "").split(/\s+/u).at(-1)) === norm(word) ||
+        inflections.some(row => norm(row.lemma) === norm(c.lemma) && row.tags.includes("participle")));
+      // Restored homographs may be finite verbs AND participles of another
+      // lemma. Without the subject evidence above, keep that ambiguity even
+      // when a parenthesis separates the participle from its auxiliary.
+      if (finiteOnly.length && !nouns.length && !participleAlternative)
+        return choose(finiteOnly,"validated-finite-form");
       return unchanged;
+    }
+    const contractionForms = {im:['in','dem'],am:['an','dem'],ans:['an','das'],ins:['in','das'],beim:['bei','dem'],zum:['zu','dem'],zur:['zu','der'],vom:['von','dem']};
+    const superlatives = new Map();
+    for (const entry of entries) {
+      const explicit=norm(entry.superlative).replace(/^am /u,'');
+      const forms=entry.search_forms||[];
+      const verified=[explicit,...forms.filter(f=>/sten$/u.test(f)&&forms.includes(f.slice(0,-1)))].filter(f=>/^[\p{L}\p{M}]+$/u.test(f));
+      if(!['Adjektiv','Adverb'].includes(entry.type))continue;
+      for(const form of new Set(verified)){const rows=superlatives.get(form)||[];rows.push(entry);superlatives.set(form,rows);}
+    }
+    function contractionExtraContext(word,tail) {
+      if(calendarDateLength(word,tail))return 'calendar-date';
+      const opener=tail.match(/^[ \t]+("|„|“|«|»|``)/u);
+      if(!opener)return null;
+      const closer={'"':'"','„':'“','“':'”','«':'»','»':'«','``':"''"}[opener[1]];
+      const start=opener[0].length,close=tail.indexOf(closer,start);
+      if(close<0||close-start>160)return null;
+      const content=tail.slice(start,close);
+      if(/[.!?;:\n\r]/u.test(content))return null;
+      // Quoted noun phrases, not arbitrary quoted sentences or superlatives.
+      const tokens=[...content.matchAll(/[\p{L}\p{M}]+(?:[0-9]+)?(?:-[\p{L}\p{M}]+)*/gu)].slice(0,4);
+      let end=0;
+      for(const t of tokens) {
+        if(/[^\s]/u.test(content.slice(end,t.index)))return null;
+        end=t.index+t[0].length;
+        const rows=forms.get(norm(t[0]))||[];
+        if(/^[A-ZÄÖÜ]/u.test(t[0]))return !rows.length||rows.some(e=>e.type==='Nomen')?'quoted-noun-phrase':null;
+        if(grammaticalWords.has(norm(t[0]))||rows.some(e=>e.type==='Verb')&&!modifiers.has(norm(t[0])))return null;
+        if(!rows.some(e=>['Adjektiv','Adverb'].includes(e.type))&&!modifiers.has(norm(t[0]))&&!/en$/u.test(t[0]))return null;
+      }
+      return null;
+    }
+    async function contractionRule(word,context,candidates) {
+      const parts=contractionForms[norm(word)];
+      if (!parts) return null;
+      const sentence=String(context?.sentence||''), offset=context?.tokenOffset;
+      const tail=Number.isInteger(offset)?sentence.slice(offset+word.length):'';
+      const extraContext=contractionExtraContext(word,tail);
+      const nearby=[...tail.matchAll(/[\p{L}\p{M}]+/gu)].slice(0,4);
+      const local=[];let end=0;
+      for(const t of nearby){if(/[^\s]/u.test(tail.slice(end,t.index)))break;local.push(t);end=t.index+t[0].length;}
+      const next=local[0];
+      let bases=norm(word)==='am'&&next?superlatives.get(norm(next[0]))||[]:[];
+      // Already available lexical data only; no neighbour lookup or recursive resolution.
+      let nominal=false,windowExhausted=false;
+      for(const t of local){
+        const rows=forms.get(norm(t[0]))||[];
+        if(/^[A-ZÄÖÜ]/u.test(t[0])){nominal=!rows.length||rows.some(e=>e.type==='Nomen');break;}
+        if(grammaticalWords.has(norm(t[0]))||rows.some(e=>e.type==='Verb')&&!modifiers.has(norm(t[0]))||
+          !rows.some(e=>['Adjektiv','Adverb'].includes(e.type))&&!modifiers.has(norm(t[0]))&&!/en$/u.test(t[0]))break;
+        if(t===local[3])windowExhausted=true;
+      }
+      // Expand missing own evidence only; retain all established own decisions.
+      // One shared compact-index fetch, never a lexical lookup of the neighbour.
+      if(norm(word)==='am'&&next&&!nominal&&!bases.length&&/^[a-zäöüß].*sten$/u.test(next[0])&&fallback.superlativeEntries) {
+        try {
+          const rows=await fallback.superlativeEntries(next[0]);
+          const unique=new Map();
+          for(const [lemma,pos,meanings]of rows) {
+            if(!unique.has(norm(lemma)))unique.set(norm(lemma),{word:lemma,type:pos==='adj'?'Adjektiv':'Adverb',translation_en:meanings.join('; '),translation_ru:'',fallbackSuperlative:true});
+          }
+          bases=[...unique.values()];
+        } catch (_) { /* Missing optional evidence preserves the old explicit choice. */ }
+      }
+      const component=(lemmas.get(parts[0])||[]).map(mainCandidate).find(c=>c.pos==='prep') || null;
+      let translation={en:'',ru:''};
+      if(component)translation={...component.translation};
+      else if(lookupCache.has(norm(parts[0]))) {
+        try {const g=(await lookupCache.get(norm(parts[0]))).find(g=>g.pos==='prep'&&!g.unresolved&&g.kind!=='form-note');if(g)translation.en=g.meanings.join('; ');}catch(_){}
+      }
+      const contraction={source:'fallback',lemma:norm(word),pos:'contraction',posLabel:'contraction',translation,
+        explanation:{kind:'contraction',expansion:parts.join(' '),componentLemma:parts[0],componentId:component?.dictionaryId||null},
+        construction:{id:'preposition-article',lemma:norm(word),label:'Preposition + article',note:{ru:`${norm(word)} = ${parts.join(' ')}`,en:`${norm(word)} = ${parts.join(' ')}`},spans:Number.isInteger(offset)?[{text:word,start:offset,end:offset+word.length}]:[]}};
+      const supers=bases.map(e=>({...mainCandidate(e),source:'fallback',dictionaryId:undefined,item:e.fallbackSuperlative?undefined:e,lemma:`am ${next[0]}`,pos:'superlative-construction',posLabel:'Superlative',
+        explanation:{kind:'superlative',baseLemma:e.word,baseId:e.id,...(e.fallbackSuperlative?{evidence:"fallback-structured-superlative"}:{})},
+        construction:{id:'am-superlative',lemma:e.word,label:'Superlative',note:{ru:'Превосходная степень',en:'Superlative'},spans:[{text:word,start:offset,end:offset+word.length},{text:next[0],start:offset+word.length+next.index,end:offset+word.length+next.index+next[0].length}]}}));
+      const competitors=candidates.filter(c=>c.pos!=='contraction'&&!(norm(c.lemma)===norm(word)&&['prep','particle'].includes(c.pos)) &&
+        !(['noun','name'].includes(c.pos)&&/\b(?:acronym|initialism) of\b/iu.test(c.translation?.en||'')&&word!==word.toUpperCase()));
+      const uncertainSuper=norm(word)==='am'&&next&&!nominal&&!bases.length&&/sten$/u.test(norm(next[0]));
+      const confidentSuper=bases.length===1&&!nominal&&/^[a-zäöüß]/u.test(next[0]);
+      const choice=!context||!local.length&&!extraContext||competitors.length>0||uncertainSuper||bases.length>1||bases.length>0&&!nominal&&windowExhausted;
+      const result=confidentSuper?[...supers,...competitors]:[contraction,...(!nominal?supers:[]),...competitors];
+      return {candidates:result,selected:choice?null:confidentSuper?supers[0]:contraction,evidence:choice?'contraction-choice':confidentSuper?bases[0].fallbackSuperlative?'fallback-am-superlative':'dictionary-am-superlative':extraContext||'preposition-article'};
+    }
+    function withoutSuperlativeFormRecord(word,context,candidates,inflections) {
+      // Lowercase attributive use only; nominalized forms are a separate task.
+      if(!context||!Number.isInteger(context.tokenOffset)||!/^[a-zäöüß]/u.test(word))return candidates;
+      const next=String(context.sentence||'').slice(context.tokenOffset+word.length).match(/^[ \t]+([\p{L}\p{M}]+)/u);
+      if(!next||!/^[A-ZÄÖÜ]/u.test(next[1]))return candidates;
+      const known=forms.get(norm(next[1]))||[];
+      const compound=/^[ \t]+-[ \t]+[A-ZÄÖÜ][\p{L}\p{M}]+/u.test(String(context.sentence).slice(context.tokenOffset+word.length+next[0].length));
+      if(known.length&&!known.some(e=>e.type==='Nomen')&&!compound)return candidates;
+      const bases=new Set(inflections.filter(a=>norm(a.form)===norm(word)&&canonicalPos(a.pos)==='Adjektiv'&&a.tags?.includes('superlative')).map(a=>norm(a.lemma)));
+      if(bases.size!==1)return candidates;
+      const base=[...bases][0];
+      if(!candidates.some(c=>canonicalPos(c.pos)==='Adjektiv'&&norm(c.lemma)===base&&norm(c.lemma)!==norm(word)))return candidates;
+      const grammar=new Set(['strong','weak','mixed','nominative','accusative','genitive','dative','masculine','feminine','neuter','singular','plural','all','case','gender','superlative','degree']);
+      return candidates.filter(c=>{
+        if(c.source!=='fallback'||canonicalPos(c.pos)!=='Adjektiv'||norm(c.lemma)!==norm(word))return true;
+        const meanings=c.meanings||[c.translation?.en||''];
+        const pure=meanings.length>0&&meanings.every(m=>{
+          const tokens=norm(m).split(/[\s,;\/-]+/u).filter(Boolean);
+          return tokens.includes('superlative')&&tokens.includes('degree')&&tokens.every(t=>grammar.has(t));
+        });
+        return !pure;
+      });
+    }
+    async function reverseSuperlative(word,context) {
+      if(!context||!/sten$/u.test(norm(word))||!Number.isInteger(context.tokenOffset))return null;
+      const prefix=String(context.sentence||'').slice(0,context.tokenOffset);
+      const previous=prefix.match(/(?:^|[^\p{L}\p{M}])(am|Am)[ \t]+$/u);
+      if(!previous)return null;
+      const offset=prefix.length-previous[1].length-previous[0].match(/[ \t]+$/u)[0].length;
+      const result=await contractionRule(previous[1],{...context,tokenOffset:offset},[]);
+      if(!result?.candidates.some(c=>c.construction?.id==='am-superlative'))return null;
+      if(result.selected?.construction?.id!=='am-superlative'&&result.selected)return null;
+      return {...result,candidates:result.candidates.filter(c=>c.construction?.id==='am-superlative')};
     }
     async function resolve(word, context) {
       if(context){
@@ -1217,7 +1477,8 @@
       const derived = (modifiers.get(norm(word)) || []).map(row => row.entry);
       const dictionaryForms = new Set(exact.map(e => e.id));
       const ownOnlyVerb = ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word)));
-      const separated = separableCandidates(word, context);
+      let separated = [];
+      try { separated = await resolveSeparableCandidates(word,context); } catch (e) { preparationError ||= e; }
       // Independent clicked-word lookup overlaps sentence morphology; reuse
       // the same promise in both paths instead of serial network round trips.
       const directLookup=!ownOnlyVerb&&(!exact.length||context||reflexiveForms.has(norm(word)))?lexicalLookup(word):null;
@@ -1262,20 +1523,20 @@
         .filter(entry => ![...reflexive,...attributed].some(c=>c.dictionaryId === entry.id))
         .map(entry=>({...mainCandidate(entry),reflexiveUnconfirmed:true}));
       candidates.push(...reflexive,...attributed,...conditional);
-      // Resolve all forms/mapped lemmas first; own coverage is occurrence-wide,
-      // not a comparison between differently worded translation strings.
+      // Own coverage applies to a lexical lemma/POS, never an entire POS.
       // A recognised merged lexical card covers both modifier POS headers.
       // Coverage is lemma-scoped: a homographic verb or another lemma survives.
       const merged = candidates.filter(c => c.source === "main" && c.item.reading_policy === "merged");
       candidates = candidates.filter(c => c.source !== "fallback" || !["Adjektiv","Adverb"].includes(canonicalPos(c.pos)) ||
         !merged.some(m => [m.lemma,...(m.item.search_forms || [])].some(lemma => norm(lemma) === norm(c.lemma))));
-      const coveredParts = new Set(candidates.filter(c => c.source === "main" && !reflexiveEntries.has(c.item)).map(c => canonicalPos(c.pos)));
-      if (coveredParts.size) {
+      const lexicalKey = c => `${norm(c.lemma)}:${canonicalPos(c.pos)}`;
+      const coveredLexemes = new Set(candidates.filter(c => c.source === "main" && !reflexiveEntries.has(c.item)).map(lexicalKey));
+      if (coveredLexemes.size) {
         // A known base verb does not cover a reconstructed complete verb
         // missing from ours (stellt … bereit -> bereitstellen, not stellen).
         const uncoveredCompleteVerb = separated.length === 1 && separated[0].source === "fallback" ? separated[0] : null;
         candidates = candidates.filter(c => c.source === "main" || c.reflexiveUnconfirmed || c.construction?.id === "reflexive-verb" || c === uncoveredCompleteVerb || separated.some(pair => pair.source === "fallback" && window.BibliothekVocabulary.identity(pair) === window.BibliothekVocabulary.identity(c)) ||
-          knownPartsOfSpeech.has(canonicalPos(c.pos)) && !coveredParts.has(canonicalPos(c.pos)));
+          knownPartsOfSpeech.has(canonicalPos(c.pos)) && !coveredLexemes.has(lexicalKey(c)));
         unresolvedMeanings = [];
       }
       candidates = [...reflexive,...candidates.filter(c=>!reflexive.some(r=>window.BibliothekVocabulary.identity(r)===window.BibliothekVocabulary.identity(c)))];
@@ -1311,6 +1572,17 @@
         ? {...c,reflexiveLexical:{baseLemma:norm(c.lemma).replace(/^sich\s+/u,""),
           evidence:/^sich\s+/u.test(norm(c.lemma)) ? "dictionary-reflexive-lemma" : "base-verb-only"}}
         : c);
+      // A verb-form link must not import its target's nominalized noun sense.
+      // Keep direct homographs and targets explicitly linked by a noun form note.
+      candidates = candidates.filter(c => {
+        if (c.source !== "fallback" || canonicalPos(c.pos) !== "Nomen" ||
+            !/^gerund of /i.test(c.translation?.en || "") || norm(c.lemma) === norm(word)) return true;
+        const lemma = norm(c.lemma).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const reference = new RegExp('\\bof\\s+' + lemma + '(?=$|[\\s:(“"])', 'u');
+        return formNotes.some(g => canonicalPos(g.pos) === "Nomen" &&
+          g.meanings.some(note => reference.test(norm(note))));
+      });
+      candidates=withoutSuperlativeFormRecord(word,context,candidates,inflections);
       const unconfirmed = candidates.filter(c => c.reflexiveUnconfirmed);
       const grammatical = grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
@@ -1324,15 +1596,35 @@
       const reflexiveVerb = reflexive.length === 1 && !reflexivePronouns.has(norm(word))
         ? candidates.find(c=>same(c,reflexive[0])) : null;
       const grouped = candidates.filter(c => c.construction && !["separable-verb","reflexive-verb"].includes(c.construction.id));
-      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : reflexiveVerb || ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (exact.length === 1 && !reflexiveEntries.has(exact[0]) ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null));
-      if (preferred?.construction?.confidence === "tentative") preferred = null;
+      const exactChoice = exact.length === 1 && !reflexiveEntries.has(exact[0]) ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null;
+      const competingLexeme = exactChoice && candidates.some(c => canonicalPos(c.pos) === canonicalPos(exactChoice.pos) && norm(c.lemma) !== norm(exactChoice.lemma));
+      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : reflexiveVerb || ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (!competingLexeme ? exactChoice : null));
+      const needsReflexiveChoice = !reflexivePronouns.has(norm(word)) && candidates.some(c=>c.construction?.id === "reflexive-verb" && c.construction.interpretation && c.construction.confidence === "tentative");
+      const needsSeparableChoice = candidates.some(c => c.construction?.id === "separable-verb" && c.construction.confidence === "tentative");
+      // A plausible detached particle makes the base meaning uncertain too.
+      // Saved occurrence choices are restored by the reader after resolution.
+      if (preferred?.construction?.confidence === "tentative" || needsSeparableChoice || needsReflexiveChoice) preferred = null;
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
       const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
-      const selected = people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].reflexiveUnconfirmed || candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
-      const resolution = { preferred, evidence:people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : reflexiveVerb ? "reflexive-subject-agreement" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      const selected = needsSeparableChoice || needsReflexiveChoice ? null : people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].reflexiveUnconfirmed || candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
+      const resolution = { preferred, evidence:needsReflexiveChoice ? "reflexive-reciprocal-choice" : people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : reflexiveVerb ? "reflexive-subject-agreement" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      if (fallback.spellingTranslation) await Promise.all(candidates.filter(c => c.source === "fallback").map(async c => {
+        try {
+          const display = await fallback.spellingTranslation(c.lemma,c.pos,c.meanings || [c.translation?.en || '']);
+          if (!display) return;
+          c.spellingReferences = display.references;
+          c.translation = {...c.translation,en:display.meanings.join('; ')};
+          if (display.unresolved.length) c.spellingTranslationUnavailable = true;
+        } catch (_) {
+          c.translation = {...c.translation,en:''};
+          c.spellingTranslationUnavailable = true;
+        }
+      }));
+      const contractionResult=await contractionRule(word,context,candidates)||await reverseSuperlative(word,context);
+      if(contractionResult)Object.assign(resolution,contractionResult,{preferred:contractionResult.selected,status:contractionResult.selected?'resolved':'ambiguous'});
       // Enrich only after all morphology, ranking and selection are complete.
       if (window.BibliothekRussianTranslations)
-        await window.BibliothekRussianTranslations.enrich(resolution,window.DeutschTranslation?.getLang?.() || "en");
+        await window.BibliothekRussianTranslations.enrich({...resolution,candidates:resolution.candidates.filter(c=>!c.explanation)},window.DeutschTranslation?.getLang?.() || "en");
       return resolution;
     }
     return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
@@ -1350,5 +1642,5 @@
       match:word => (forms.get(norm(word)) || []).map(entry=>({...mainCandidate(entry),
         ...(reflexiveEntries.has(entry) && norm(word) !== norm(entry.word) ? {reflexiveUnconfirmed:true} : {})})) });
   }
-  window.BibliothekLemmaResolver = Object.freeze({ create, savedCandidate });
+  window.BibliothekLemmaResolver = Object.freeze({ create, savedCandidate, calendarDateLength });
 })();

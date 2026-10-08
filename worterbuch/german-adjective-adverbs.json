@@ -437,8 +437,8 @@
   {
     "id": "adjective-066",
     "word": "nah",
-    "translation_ru": "близкий; близко",
-    "translation_en": "near; close; nearby",
+    "translation_ru": "близкий; близко; следующий (nächste…)",
+    "translation_en": "near; close; nearby; next (nächste…)",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -479,7 +479,9 @@
         "example_cloze": "Wir suchen einen {{c1::nahen}} Parkplatz.",
         "example_usage": "Adjektiv"
       }
-    ]
+    ],
+    "usage_note_ru": "Формы nächste/nächsten/nächstem/nächster/nächstes также означают «следующий»: das nächste Mal — в следующий раз. В am nächsten значение зависит от контекста: например, ближе всего.",
+    "usage_note_en": "The forms nächste/nächsten/nächstem/nächster/nächstes also mean “next”: das nächste Mal — next time. In am nächsten, the meaning depends on context, for example “nearest”."
   },
   {
     "id": "adjective-adverb-012",

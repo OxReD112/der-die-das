@@ -33,6 +33,25 @@ for (const [lemma,rows] of links) {
   ).map(([form])=>form.slice(prefix.length)))].sort();
   if (finite.length) entries.push([lemma,prefix,finite,meanings]);
 }
+// Reviewed gaps from UD GSD. Keep these additions scoped: a new detached
+// stem also becomes a possible competing verb in the reader's boundary guard.
+// Each present-plural form equals the infinitive after the independently
+// proven prefix; require existing finite evidence before adding it.
+const reviewedPlural = ['hinfahren','vorrücken','anheben','darstellen','abschnüren'];
+for (const lemma of reviewedPlural) {
+  const row = entries.find(entry => entry[0] === lemma);
+  if (!row) throw new Error(`Missing verified separable entry: ${lemma}`);
+  const base = lemma.slice(row[1].length);
+  if (!base.endsWith('en') || !row[2].length) throw new Error(`Invalid reviewed plural: ${lemma}`);
+  if (!row[2].includes(base)) row[2].push(base);
+  row[2].sort();
+}
+// Exact historical spelling, reviewed in test-s673. Never normalize ß/ss
+// globally: this alias is only for the detached preterite of ausschließen.
+const historical = entries.find(entry => entry[0] === 'ausschließen');
+if (!historical || !historical[2].includes('schloss')) throw new Error('Missing ausschließen/schloss evidence');
+if (!historical[2].includes('schloß')) historical[2].push('schloß');
+historical[2].sort();
 entries.sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:0);
 const output = path.resolve(__dirname,'../separable-index.json');
 fs.writeFileSync(output,JSON.stringify({format_version:1,entries})+'\n');

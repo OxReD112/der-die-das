@@ -19,6 +19,7 @@
     return [...new Set(parts)].slice(0, 2).join('; ');
   }
   function heading(candidate) {
+    if (candidate.explanation?.kind === 'contraction') return `${candidate.lemma} = ${candidate.explanation.expansion}`;
     const gerund = pos(candidate) === 'Nomen' && /^gerund of /i.test(candidate.translation?.en || '');
     return `${candidate.item?.article || (gerund ? 'das' : '')} ${gerund ? candidate.lemma.charAt(0).toLocaleUpperCase('de-DE') + candidate.lemma.slice(1) : candidate.lemma}`.trim();
   }
@@ -49,9 +50,20 @@
       const translated = brief(base, language);
       const displayLanguage = translated ? language : 'en';
       const text = translated || brief(base, 'en');
-      if (!text) return [];
+      if (!text && !base.explanation) return [];
+      if (!text) return [{candidate:base,text:base.explanation.kind === 'contraction' ? `${base.lemma} = ${base.explanation.expansion}` : base.lemma,language}];
       return [{candidate:base, text, language:displayLanguage}];
     });
   }
-  window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact});
+  function formComment(resolution, candidate, language) {
+    if (!candidate || candidate.explanation || norm(resolution.form) === norm(candidate.lemma)) return '';
+    const grammarPos = value => ({verb:'Verb',noun:'Nomen',pron:'Pronomen',adj:'Adjektiv',adv:'Adverb'})[value.pos] || value.pos;
+    const notes = (resolution.formNotes || []).filter(note => grammarPos(note) === grammarPos(candidate) &&
+      (note.inflections || []).some(row => norm(row.lemma) === norm(candidate.lemma)));
+    if (!notes.length) return '';
+    const superlative = notes.some(note => (note.inflections || []).some(row =>
+      norm(row.lemma) === norm(candidate.lemma) && row.tags?.includes('superlative')));
+    return `${language === 'ru' ? superlative ? 'Форма превосходной степени' : 'Грамматическая форма' : superlative ? 'Superlative form' : 'Grammatical form'}: ${resolution.form} → ${candidate.lemma}`;
+  }
+  window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact, formComment});
 })();

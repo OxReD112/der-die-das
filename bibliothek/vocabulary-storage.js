@@ -53,10 +53,13 @@
       row.encounteredTokenOffset = loc.tokenOffset;
       row.construction = {id:c.id,lemma:norm(c.lemma),sentenceOffset:origin,
         spans:c.spans.map(s=>({text:s.text,start:s.start,end:s.end})),
+        ...(["reflexive-or-reciprocal","reciprocal"].includes(c.interpretation)?{interpretation:c.interpretation,confidence:"tentative"}:{}),
         ...(["Präsens","Präteritum","Perfekt","Plusquamperfekt","Konjunktiv II","Imperativ","zu-Infinitiv"].includes(c.tense)?{tense:c.tense}:{}),
         ...(["Akkusativ","Dativ","Akkusativ/Dativ"].includes(c.reflexiveCase)?{reflexiveCase:c.reflexiveCase}:{}),
         ...(c.complement ? {complement:{pattern:norm(c.complement.pattern),note_ru:norm(c.complement.note_ru),note_en:norm(c.complement.note_en)}} : {})};
     }
+    if (input.explanation) row.explanation = {...input.explanation};
+    if (['preposition-article','am-superlative'].includes(c?.id)) row.construction = {...c,sentenceOffset:loc.tokenOffset-input.tokenOffset,spans:c.spans.map(s=>({...s}))};
     return row;
   }
   async function mark(input) {
@@ -107,7 +110,7 @@
         const updated = replacement ? {...replacement} : {...original.occurrences[index]};
         if (nominalUsage(candidate.usage)) updated.usage = {...candidate.usage};
         else delete updated.usage;
-        if (candidate.construction?.id !== "reflexive-verb") { delete updated.construction; delete updated.encounteredTokenOffset; }
+        if (!["reflexive-verb","preposition-article","am-superlative"].includes(candidate.construction?.id)) { delete updated.construction; delete updated.encounteredTokenOffset; }
         const targetRequest = store.get([bookId, key]);
         targetRequest.onsuccess = () => {
           const target = targetRequest.result || {schemaVersion:1,bookId,key,createdAt:original.createdAt,occurrences:[]};

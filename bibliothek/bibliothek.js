@@ -11,6 +11,10 @@
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
   let currentBook = null, selectedEntry = null, activePronouns = [], toastTimer = null, restoringPosition = false;
+  let thanksStorage;
+  try { thanksStorage = window.localStorage; } catch (_) {}
+  const meaningThanks = window.BibliothekMeaningThanks.create({storage:thanksStorage});
+  let meaningChosenInPopup = false;
   let dictionary = null, dictionaryPromise = null;
   let pendingDelete = null, deleteTrigger = null, deleting = false;
   let switchingChapter = false, renderRequest = 0;
@@ -45,7 +49,7 @@
   });
   const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
-  const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || item.translation_ru;
+  const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || "";
 
   const vocabularyHighlights = window.BibliothekHighlights.create($text, $("highlights-toggle"), async () => {
     try { await loadDictionary(); return lemmaResolver; }
@@ -149,7 +153,7 @@
     try { await saveBook(book); } catch (error) { showToast("Reading position could not be saved."); }
     setProgress();
   }
-  function showToast(message, actionLabel) {
+  function showToast(message, actionLabel, duration = 3200) {
     const toast = $("reader-toast");
     toast.classList.remove("has-undo");
     toast.replaceChildren(document.createTextNode(message));
@@ -162,7 +166,7 @@
     }
     toast.hidden = false;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.hidden = true, 3200);
+    toastTimer = setTimeout(() => toast.hidden = true, duration);
   }
 
   function coverInitials(title) {
@@ -706,12 +710,16 @@
     alternatives.hidden = true;
     alternatives.open = !resolution.selected;
     choices.replaceChildren();
-    const candidateText = candidate => window.BibliothekMeaningDisplay.brief(candidate, locale()) || window.BibliothekMeaningDisplay.brief(candidate, "en");
+    const candidateText = candidate => window.BibliothekMeaningDisplay.brief(candidate, locale()) || window.BibliothekMeaningDisplay.brief(candidate, "en") ||
+      (locale() === "ru" ? "Перевод не найден." : "Translation unavailable.");
     const candidateLabel = candidate => {
+      if (candidate.explanation?.kind === 'contraction') return `${locale() === 'ru' ? 'Предлог' : 'Preposition'} ${candidate.explanation.componentLemma}`;
+      if (candidate.explanation?.kind === 'superlative') return `${locale() === 'ru' ? 'Значение основы' : 'Base meaning'} ${candidate.explanation.baseLemma}`;
       const id = candidate.dictionaryId;
       if (candidate.construction?.id === "separable-verb") return candidate.construction.confidence === "tentative"
         ? locale() === "ru" ? "возможный отделяемый глагол" : "possible separable verb"
         : locale() === "ru" ? "отделяемый глагол" : "separable verb";
+      if (candidate.construction?.id === "reflexive-verb" && candidate.construction.interpretation) return locale() === "ru" ? "Возвратное / взаимное употребление" : "Reflexive / reciprocal use";
       if (candidate.construction?.id === "reflexive-verb") return locale() === "ru" ? "Возвратный глагол" : "Reflexive verb";
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
@@ -736,6 +744,11 @@
         ru ? "Значение слова не найдено." : "No dictionary meaning found.";
       content.lang = referencePronoun ? locale() : ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
+      const formComment = window.BibliothekMeaningDisplay.formComment(resolution, candidate, locale());
+      if (!referencePronoun && formComment) {
+        const note = document.createElement("small"); note.className = "popover-construction";
+        note.textContent = formComment; content.append(note);
+      }
       if (!referencePronoun && usageNote(candidate)) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = usageNote(candidate); content.append(note);
@@ -747,7 +760,8 @@
           : candidate.construction.note?.[locale()] || `${candidate.construction.label} ${locale() === "ru" ? "с" : "with"} ${candidate.construction.lemma}`;
         content.append(group);
         if (candidate.construction.id === "reflexive-verb") {
-          group.textContent = candidate.construction.spans.map(s=>s.text).join(" … ");
+          group.textContent = candidate.construction.spans.map(s=>s.text).join(" … ") +
+            (candidate.construction.interpretation ? " — " + candidate.construction.note[locale()] : "");
           const complement = candidate.construction.complement;
           if (complement) {
             const note = document.createElement("small"); note.className = "popover-construction";
@@ -761,7 +775,7 @@
         link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
         link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
-      $("popover-word").textContent = referencePronoun ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
+      $("popover-word").textContent = referencePronoun ? word : candidate?.explanation?.kind === 'contraction' ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : "Dictionary details ";
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
@@ -772,6 +786,10 @@
     };
     const chooseCandidate = async candidate => {
         if (request !== lookupRequest) return;
+        if (popupAmbiguous && !showPronounSummary && !meaningChosenInPopup) {
+          meaningThanks.selected();
+          meaningChosenInPopup = true;
+        }
         showPronounSummary=reference.isPronoun(candidate);
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
         $("popover-bookmark").disabled = true;
@@ -920,7 +938,7 @@
     addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
-      (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || selectedResolution.translation.ru) : translation(item));
+      (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.plural_note_ru : item.plural_note_en);
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
@@ -1091,9 +1109,16 @@
   function closePopups() {
     lookupRequest++; refreshPopupLanguage = null; $popover.hidden = true; $sheet.hidden = true;
     activeWordSpan = null; paintActiveWord(null);
+    if (meaningChosenInPopup) {
+      meaningChosenInPopup = false;
+      const message = meaningThanks.message($("reader-toast").hidden && !$reading.hidden && !document.querySelector('dialog[open]'));
+      if (message) showToast(message, undefined, 2000);
+    }
   }
   function chooseWord(span) {
     if (!span || !span.isConnected) return;
+    if (!$popover.hidden || !$sheet.hidden) closePopups();
+    meaningChosenInPopup = false;
     activeWordSpan = span;
     paintActiveWord(null);
     $popover.hidden = true; $sheet.hidden = true;
@@ -1103,8 +1128,17 @@
     let tokenOffset = Number(span.dataset.tokenOffset);
     if (typeof Intl.Segmenter === "function") {
       const offset = Number(span.dataset.tokenOffset);
-      for (const part of new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)) {
-        if (part.index <= offset && offset < part.index + part.segment.length) { sentence = part.segment.trim(); tokenOffset = offset - part.index - (part.segment.length - part.segment.trimStart().length); break; }
+      const segments=[...new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)];
+      for (const [index,part] of segments.entries()) {
+        if (part.index <= offset && offset < part.index + part.segment.length) {
+          let text=part.segment;
+          // A calendar ordinal may split "zum 1. Januar" at its dot.
+          // Extend only this clicked contraction and a confirmed local date.
+          const dateLength=window.BibliothekLemmaResolver.calendarDateLength(selectedWord,sentence.slice(offset+selectedWord.length));
+          const dateEnd=offset+selectedWord.length+dateLength;
+          if(dateLength)for(let next=index+1;next<segments.length&&part.index+text.length<dateEnd;next++)text+=segments[next].segment;
+          sentence=text.trim();tokenOffset=offset-part.index-(text.length-text.trimStart().length);break;
+        }
       }
     }
     selectedContext = currentBook && paragraph ? {

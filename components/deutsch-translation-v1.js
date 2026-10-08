@@ -30,7 +30,9 @@
 
   function setLang(lang){
     if(LANGS.indexOf(lang) === -1) return;
+    var previous = getLang();
     try{ localStorage.setItem(KEY, lang); }catch(e){}
+    if(getLang() !== previous) window.dispatchEvent(new CustomEvent("deutschtranslationchange"));
   }
 
   /* pick(value): value is a string, an {ru, en} object, or empty. */

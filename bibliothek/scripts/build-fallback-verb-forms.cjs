@@ -19,5 +19,10 @@ for(const r of records)for(const [rawForm,rawLemma,rawTags] of r.inflections||[]
 }
 const out=path.join(root,'fallback-verb-forms');fs.mkdirSync(out,{recursive:true});
 let bytes=0;for(let i=0;i<1024;i++){const text=JSON.stringify({format_version:1,partition:i,records:partitions[i]})+'\n';bytes+=Buffer.byteLength(text);fs.writeFileSync(path.join(out,String(i).padStart(4,'0')+'.json'),text);}
-fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({format_version:1,partition_count:1024,forms,analyses,bytes,source_sha256:sourceHash.digest('hex'),policy:'Explicit typed verb inflections only; excludes auxiliary/error relations; no guessed forms.'},null,2)+'\n');
+// A fail-open membership filter prevents downloads for unrelated sentence words.
+const membershipBits=1<<20,bitmap=Buffer.alloc(membershipBits/8),membership=new Set(heads);
+for(const bucket of partitions)for(const word of Object.keys(bucket))membership.add(word);
+function hashes(word){let h=2166136261;for(const b of Buffer.from(word))h=Math.imul(h^b,16777619)>>>0;return [h,(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1];}
+for(const word of membership){const [h,step]=hashes(word);for(let k=0;k<4;k++){const bit=(h+k*step)&(membershipBits-1);bitmap[bit>>>3]|=1<<(bit&7);}}
+fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify({format_version:1,partition_count:1024,forms,analyses,bytes,membership:{format:'bloom-fnv1a-v1',bits:membershipBits,hashes:4,words:membership.size,bitmap:bitmap.toString('hex')},source_sha256:sourceHash.digest('hex'),policy:'Explicit typed verb inflections only; excludes auxiliary/error relations; no guessed forms.'},null,2)+'\n');
 console.log(JSON.stringify({forms,analyses,bytes}));
