@@ -474,9 +474,23 @@
               componentIndices.push(inner[0]);allowed.add(inner[0]);unresolvedLassen=true;
             }
 
-            let competing=false;
-            for(let i=clause.start;i<=clause.end;i++)if(!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length))competing=true;
-            if(attempt)attempt.competing=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>!allowed.has(i)&&analyses[i].some(r=>['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length)).map(i=>tokens[i][0]);
+            // A dictionary-proven participle after a graded state description
+            // (mich sehr gut beraten) is a complement, not an independent verb.
+            // Require the local right edge and an uninterrupted modifier phrase;
+            // a bare infinitive, object, preposition or coordination is insufficient.
+            const predicativeParticiple=i=>a.base!=='lassen'&&i>pronoun+1&&
+              Array.from({length:clause.end-i},(_,k)=>i+1+k).every(j=>allowed.has(j))&&
+              analyses[i].some(r=>r.kind==='participle')&&
+              ['gut','schlecht','sehr','besonders','völlig','vollkommen','ausreichend'].includes(words[i-1])&&
+              Array.from({length:i-pronoun-1},(_,k)=>pronoun+1+k).every(j=>
+                !analyses[j].length&&!prepositions.has(words[j])&&
+                (forms.get(words[j])||[]).some(e=>['Adjektiv','Adverb'].includes(e.type)))&&
+              !helpers.some(h=>h.index!==i&&!allowed.has(h.index));
+            const competingIndices=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>
+              !allowed.has(i)&&!predicativeParticiple(i)&&analyses[i].some(r=>
+                ['infinitive','participle'].includes(r.kind)||r.kind==='finite'&&subjects(clause,r.person).length));
+            const competing=competingIndices.length>0;
+            if(attempt)attempt.competing=competingIndices.map(i=>tokens[i][0]);
             if(competing)continue;
             if(a.kind==='finite'&&helpers.some(h=>['haben','sein'].includes(h.analysis.base))&&rows.some(r=>r.kind==='participle'))continue;
             const candidate=a.entry?mainCandidate(a.entry):a.candidate;if(!candidate)continue;
