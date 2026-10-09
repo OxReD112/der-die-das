@@ -37,7 +37,7 @@ for (const [lemma,rows] of links) {
 // stem also becomes a possible competing verb in the reader's boundary guard.
 // Each present-plural form equals the infinitive after the independently
 // proven prefix; require existing finite evidence before adding it.
-const reviewedPlural = ['hinfahren','vorrücken','anheben','darstellen','abschnüren'];
+const reviewedPlural = ['hinfahren','vorrücken','anheben','darstellen','abschnüren','innehaben'];
 for (const lemma of reviewedPlural) {
   const row = entries.find(entry => entry[0] === lemma);
   if (!row) throw new Error(`Missing verified separable entry: ${lemma}`);
@@ -46,6 +46,14 @@ for (const lemma of reviewedPlural) {
   if (!row[2].includes(base)) row[2].push(base);
   row[2].sort();
 }
+// Reviewed detached usage in test-s405: hielt ... aufrecht. Keep this
+// spelling scoped to the existing lexical entry; do not rewrite halten forms.
+const maintained = entries.find(entry => entry[0] === 'aufrechterhalten');
+if (!maintained || maintained[1] !== 'aufrecht' || !maintained[2].includes('erhielt')) {
+  throw new Error('Missing aufrechterhalten/erhielt evidence');
+}
+if (!maintained[2].includes('hielt')) maintained[2].push('hielt');
+maintained[2].sort();
 // Exact historical spelling, reviewed in test-s673. Never normalize ß/ss
 // globally: this alias is only for the detached preterite of ausschließen.
 const historical = entries.find(entry => entry[0] === 'ausschließen');

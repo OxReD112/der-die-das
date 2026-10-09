@@ -27,6 +27,9 @@
     const text = candidate.translation?.[language] || '';
     if (language === 'en' && /^gerund of anrufen$/i.test(text.trim())) return 'the act of calling';
     if (language === 'en' && /^gerund of /i.test(text.trim())) return 'verbal noun';
+    // A confirmed lassen bracket does not pick permission versus causation.
+    // Keep every sense of its existing card visible instead of clipping to two.
+    if (candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return text.trim();
     return compact(text);
   }
   function extraText(rows, own, language) {
@@ -65,5 +68,21 @@
       norm(row.lemma) === norm(candidate.lemma) && row.tags?.includes('superlative')));
     return `${language === 'ru' ? superlative ? 'Форма превосходной степени' : 'Грамматическая форма' : superlative ? 'Superlative form' : 'Grammatical form'}: ${resolution.form} → ${candidate.lemma}`;
   }
-  window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact, formComment});
+  function nounPhraseComment(candidate, language) {
+    if (pos(candidate || {}) === 'Nomen') return '';
+    const phrases = candidate?.nounPhrase;
+    if (!phrases?.length) return '';
+    const ru = language === 'ru';
+    const cases = [...new Set(phrases.flatMap(p => p.cases))];
+    const names = ru ? {nominative:'Ном.',accusative:'Акк.',dative:'Датив',genitive:'Ген.'} :
+      {nominative:'Nom.',accusative:'Acc.',dative:'Dative',genitive:'Gen.'};
+    const numbers = [...new Set(phrases.map(p => p.number))];
+    const gender = ({masculine:ru?'мужской род':'masculine',feminine:ru?'женский род':'feminine',neuter:ru?'средний род':'neuter'})[phrases[0].gender];
+    const number = numbers.length > 1 ? ru?'единственное или множественное число':'singular or plural' :
+      numbers[0] === 'plural' ? ru?'множественное число':'plural' : gender;
+    const first = phrases[0];
+    const grammar = `${cases.map(c => names[c]).join(ru?' или ':' or ')} · ${number}.`;
+    return `${grammar} ${ru?'Начальная форма':'Base form'}: ${first.baseArticle} ${first.lemma}.`;
+  }
+  window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact, formComment, nounPhraseComment});
 })();

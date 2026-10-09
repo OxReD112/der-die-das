@@ -5,7 +5,7 @@
   const cache = new Map();
   const verbFormCache = new Map();
   const verbFormsBase = new URL("fallback-verb-forms/", document.currentScript.src);
-  const separableUrl = new URL("separable-index.json?v=20261008-reviewed-forms-1", document.currentScript.src);
+  const separableUrl = new URL("separable-index.json?v=20261009-reviewed-forms-2", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {

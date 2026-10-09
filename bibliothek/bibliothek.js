@@ -734,7 +734,8 @@
     if (request !== lookupRequest) return;
     const reference=window.BibliothekPronounReference;
     const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
-    let showPronounSummary=pronounCandidates.length>0 && (!resolution.selected || reference.isPronoun(resolution.selected));
+    let showPronounSummary=pronounCandidates.length>0 && (reference.isPronoun(resolution.selected) ||
+      !resolution.selected && !resolution.candidates.some(c=>c.pos==='article'));
     if(showPronounSummary && !reference.isPronoun(resolution.selected))resolution.selected=pronounCandidates[0];
     popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
@@ -770,10 +771,11 @@
       if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
       if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
       const type = window.BibliothekMeaningDisplay.pos(candidate);
-      const label = locale() === "ru" ? ({Verb:"Глагол",Nomen:"Существительное",Pronomen:"Местоимение",Adjektiv:"Прилагательное",Adverb:"Наречие",Konjunktion:"Союз"}[type] || type) : ({Nomen:"Noun",Pronomen:"Pronoun",Adjektiv:"Adjective",Adverb:"Adverb",Konjunktion:"Conjunction"}[type] || type);
+      const label = locale() === "ru" ? ({article:"Артикль",Verb:"Глагол",Nomen:"Существительное",Pronomen:"Местоимение",Adjektiv:"Прилагательное",Adverb:"Наречие",Konjunktion:"Союз"}[type] || type) : ({article:"Article",Nomen:"Noun",Pronomen:"Pronoun",Adjektiv:"Adjective",Adverb:"Adverb",Konjunktion:"Conjunction"}[type] || type);
       return label;
     };
     const candidateMeaning = (candidate, text, displayLanguage, separator) => {
+      if (candidate.pos === 'article' && candidate.nounPhrase) return locale() === 'ru' ? 'Определённый артикль' : 'Definite article';
       const englishFallback = locale() === "ru" && displayLanguage === "en";
       return `${candidateLabel(candidate)}${englishFallback ? " · английский: " : separator}${text}`;
     };
@@ -791,6 +793,11 @@
       content.lang = referencePronoun ? locale() : ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
       const formComment = window.BibliothekMeaningDisplay.formComment(resolution, candidate, locale());
+      const nounPhraseComment = window.BibliothekMeaningDisplay.nounPhraseComment(candidate, locale());
+      if (!referencePronoun && nounPhraseComment) {
+        const note = document.createElement('small'); note.className = 'popover-construction';
+        note.textContent = nounPhraseComment; content.append(note);
+      }
       if (!referencePronoun && formComment) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = formComment; content.append(note);
@@ -821,7 +828,7 @@
         link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
         link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
-      $("popover-word").textContent = referencePronoun ? word : candidate?.explanation?.kind === 'contraction' ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
+      $("popover-word").textContent = referencePronoun || candidate?.pos === 'article' || candidate?.explanation?.kind === 'contraction' ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : "Dictionary details ";
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
@@ -983,6 +990,7 @@
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
     addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
+    if (selectedResolution?.dictionaryId === item.id) addInfo('p','dictionary-detail',window.BibliothekMeaningDisplay.nounPhraseComment(selectedResolution,locale()));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
@@ -1143,13 +1151,14 @@
     $text.querySelectorAll(".is-active-word").forEach(span => span.classList.remove("is-active-word"));
     if (!activeWordSpan?.isConnected) return;
     activeWordSpan.classList.add("is-active-word");
-    const context = selectedContext, construction = candidate?.construction;
-    if (!context || !construction) return;
+    const context = selectedContext;
+    const spans = candidate?.construction?.spans || candidate?.nounPhrase?.[0]?.spans || candidate?.nounArticleLink?.spans;
+    if (!context || !spans) return;
     const origin = context.location.tokenOffset - context.tokenOffset;
     const paragraph = activeWordSpan.closest("[data-paragraph]");
     paragraph?.querySelectorAll(".reading-word").forEach(span => {
       const offset = Number(span.dataset.tokenOffset) - origin;
-      if (construction.spans.some(part => part.start === offset && part.text === span.textContent)) span.classList.add("is-active-word");
+      if (spans.some(part => part.start === offset && part.text === span.textContent)) span.classList.add("is-active-word");
     });
   }
   function closePopups() {

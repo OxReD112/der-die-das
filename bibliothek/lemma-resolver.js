@@ -194,7 +194,94 @@
       }
       return lookupCache.get(key);
     }
-    async function tokenAnalyses(word) {
+    // Shared morphology inventory. Discovery never implies a syntactic role or
+    // an automatic sense choice. IDs remain those of the underlying dictionary.
+    async function collectMorphology(word, {discoverModifiers = false, external = true} = {}) {
+      const key = norm(word), analyses = [], candidates = [], errors = [];
+      const addCandidate = candidate => {
+        const id = window.BibliothekVocabulary.identity(candidate);
+        if (!candidates.some(c => window.BibliothekVocabulary.identity(c) === id)) candidates.push(candidate);
+      };
+      const addRow = row => {
+        if (!analyses.some(a => JSON.stringify(a) === JSON.stringify(row))) analyses.push(row);
+      };
+      for (const entry of forms.get(key) || []) {
+        addCandidate(mainCandidate(entry));
+        addRow({form:word,lemma:entry.word,pos:entry.type,dictionaryId:entry.id,
+          source:'main',kind:key === norm(entry.word) ? 'lemma' : 'dictionary-form',evidence:'dictionary-index'});
+      }
+      for (const {entry,base,kind,person,tense,zu,detached} of verbAnalyses.get(key) || [])
+        addRow({form:word,lemma:entry.word,pos:'Verb',dictionaryId:entry.id,source:'main',
+          kind,base,person,tense,zu,detached,evidence:'dictionary-verb-table'});
+      for (const {entry,base,kind,ending} of modifiers.get(key) || []) {
+        addCandidate(mainCandidate(entry));
+        addRow({form:word,lemma:entry.word,pos:entry.type,dictionaryId:entry.id,source:'main',
+          kind,base,ending,evidence:'dictionary-derived-modifier'});
+      }
+      const read = async form => {
+        try { return await lexicalLookup(form); }
+        catch (error) { errors.push({form,message:String(error.message || error)}); return []; }
+      };
+      const groups = external ? await read(word) : [];
+      const lexical = groups.filter(g => !g.kind && !g.unresolved && g.meanings?.length);
+      const candidateFor = group => {
+        const own = (lemmas.get(norm(group.word)) || []).filter(e => e.type === canonicalPos(group.pos));
+        const found = own.length ? own.map(mainCandidate) : [{source:'fallback',lemma:group.word,
+          pos:group.pos,posLabel:canonicalPos(group.pos),meanings:[...group.meanings],
+          translation:{en:group.meanings.join('; '),ru:''}}];
+        for (const candidate of found) addCandidate(candidate);
+        return found;
+      };
+      for (const group of lexical) {
+        candidateFor(group);
+        if (norm(group.word) === key) addRow({form:word,lemma:group.word,pos:canonicalPos(group.pos),
+          source:'fallback',kind:'lemma',evidence:'dictionary-lexeme'});
+      }
+      const inflections = groups.filter(g => g.kind === 'form-note').flatMap(g => g.inflections || []);
+      for (const row of inflections) {
+        // An explicit form relation and a lexical target must agree on POS.
+        if (norm(row.form) !== key || !lexical.some(g => norm(g.word) === norm(row.lemma) && canonicalPos(g.pos) === canonicalPos(row.pos))) continue;
+        addRow({...row,form:word,pos:canonicalPos(row.pos),tags:[...(row.tags || [])],
+          kind:'inflection',evidence:'dictionary-inflection-link'});
+      }
+      if (discoverModifiers && external && /^[\p{L}\p{M}]+$/u.test(key)) {
+        // Suffix removal generates bounded lookup hypotheses only. A lexical
+        // adjective or an explicit participle link must confirm each result.
+        const hypotheses = new Map();
+        for (const ending of endings) if (key.endsWith(ending) && key.length > ending.length+1) {
+          const stem = key.slice(0,-ending.length);
+          for (const base of [stem,stem+'e']) {
+            const rows = hypotheses.get(base) || []; rows.push({stem,ending}); hypotheses.set(base,rows);
+          }
+        }
+        for (const [base,relations] of hypotheses) {
+          const discovered = await read(base);
+          for (const group of discovered.filter(g => !g.kind && !g.unresolved && g.meanings?.length &&
+            canonicalPos(g.pos) === 'Adjektiv' && norm(g.word) === base)) {
+            // Keep the same invariant-adjective policy as the own index.
+            if (new Set(['rosa','lila','prima','extra','super','gratis','klasse']).has(base)) continue;
+            const stem = base === 'hoch' ? 'hoh' : base.endsWith('e') ? base.slice(0,-1) : base;
+            for (const relation of relations.filter(r => r.stem === stem)) {
+              const targets = candidateFor(group);
+              for (const target of targets) addRow({form:word,lemma:target.lemma,pos:'Adjektiv',
+                source:target.source,...(target.dictionaryId ? {dictionaryId:target.dictionaryId} : {}),
+                kind:'adjective',base:stem,ending:relation.ending,evidence:'verified-lexeme-regular-ending'});
+            }
+          }
+          const links = discovered.filter(g => g.kind === 'form-note').flatMap(g => g.inflections || [])
+            .filter(r => norm(r.form) === base && canonicalPos(r.pos) === 'Verb' && r.tags?.includes('participle'));
+          for (const link of links) for (const group of discovered.filter(g => !g.kind && !g.unresolved &&
+            g.meanings?.length && canonicalPos(g.pos) === 'Verb' && norm(g.word) === norm(link.lemma)))
+            for (const relation of relations.filter(r => r.stem === base))
+              for (const target of candidateFor(group)) addRow({form:word,lemma:target.lemma,pos:'Verb',
+                source:target.source,...(target.dictionaryId ? {dictionaryId:target.dictionaryId} : {}),
+                kind:'participle-declined',base,ending:relation.ending,tags:[...link.tags],
+                evidence:'verified-participle-link-regular-ending'});
+        }
+      }
+      return {form:word,analyses,candidates,groups,inflections,errors};
+    }
+    async function tokenAnalyses(word, lookup = lexicalLookup) {
       const key = norm(word), result = [...(verbAnalyses.get(key) || [])];
       for(const entry of zuForms.get(key)||[])result.push({entry,base:norm(entry.word).replace(/^sich\s+/u,''),compound:[],kind:'infinitive',tense:'Infinitiv',zu:true,detached:false});
       // Own-only display policy does not imply complete grammatical morphology.
@@ -218,7 +305,7 @@
       if (!result.length && word[0] !== key[0] && (forms.get(key) || []).some(e=>e.type === 'Nomen')) return result;
       if(!result.length && fallback.mayBeVerb && !lookupCache.has(key) && !await fallback.mayBeVerb(word))return result;
       let groups;
-      try { groups = await lexicalLookup(word); } catch (_) { return result; }
+      try { groups = await lookup(word); } catch (_) { return result; }
       const evidence = groups.filter(g=>g.kind === 'form-note').flatMap(g=>g.inflections || []);
       for (const g of groups.filter(g=>!g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb' && g.meanings?.length)) {
         const base = norm(g.word).replace(/^sich\s+/u,''), candidate = {source:'fallback',lemma:g.word,pos:g.pos,posLabel:'Verb',meanings:g.meanings,
@@ -236,7 +323,7 @@
             if(kind==='finite'&&a.tense==='present'&&a.mood==='indicative'&&key===stem+'t') {
               let proven=person==='du'&&key===second;
               if(!proven&&person==='ihr')try {
-                const secondGroups=await lexicalLookup(second);
+                const secondGroups=await lookup(second);
                 proven=secondGroups.filter(g=>g.kind==='form-note').flatMap(g=>g.inflections||[]).some(r=>norm(r.lemma)===base&&r.person==='second-person'&&r.number==='singular'&&r.tense==='present'&&r.mood==='indicative');
               } catch (_) { /* Missing evidence does not imply regularity. */ }
               if(proven)result.push({...row,person:'er/sie/es'});
@@ -563,13 +650,13 @@
             const caseName=['mir','dir'].includes(words[pronoun])?'Dativ':['mich','dich'].includes(words[pronoun])?'Akkusativ':'Akkusativ/Dativ';
             const tokenSpan=i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
             if(attempt)attempt.stage='linked';
-            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:reflexiveAmbiguity?'Reflexiv / reziprok':unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(reflexiveAmbiguity?{interpretation:mutualMarker!==null?'reciprocal':'reflexive-or-reciprocal'}:{}),
+            relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:reflexiveAmbiguity?'Reflexiv / reziprok':unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(unresolvedLassen?{attachmentOnly:true}:{}),...(reflexiveAmbiguity?{interpretation:mutualMarker!==null?'reciprocal':'reflexive-or-reciprocal'}:{}),
               note:reflexiveAmbiguity?{ru:mutualMarker!==null?'Взаимное употребление: друг друга; возвратное значение не подтверждено':'Возможно «себя» или «друг друга»; требуется выбор',en:mutualMarker!==null?'Reciprocal use: each other; reflexive sense unconfirmed':'May mean oneself or each other; selection required'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,reflexiveCase:caseName,
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
               ...(a.detached?{prefix:tokenSpan(componentIndices.find(i=>i!==v&&words[i]===a.prefix))}:{}),
               subject:subject.index===null?null:{text:tokens[subject.index][0],start:tokens[subject.index].index,end:tokens[subject.index].index+tokens[subject.index][0].length},
               lexicalSenseConfirmed:lexicalSenseConfirmed&&!reflexiveAmbiguity,
-              ...(complement?{complement:{...complement}}:{})},_lexicalIndices:[v,...componentIndices.filter(i=>i!==controller)],_pronounIndex:pronoun});
+              ...(complement?{complement:{...complement}}:{})},_lexicalIndices:[v,...componentIndices.filter(i=>i!==controller&&(!unresolvedLassen||i===v))],_pronounIndex:pronoun});
           }
         }
       }
@@ -724,7 +811,7 @@
     const separableNounEvidence = new Map();
     function scanSeparableCandidates(word, context, secondary = false, pendingNouns = new Set(), nounEvidence = separableNounEvidence) {
       if (!context || !Number.isInteger(context.tokenOffset)) return [];
-      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const sentence = String(context.separableSentence || context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
       const selected = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
       if (selected < 0) return [];
       const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","wenn","ob","als","bevor","nachdem"]);
@@ -737,6 +824,7 @@
       const nominalParticle = (i,j) => norm(tokens[j][0]) === "vorbei" &&
         /\bkein weg(?: daran)?$/u.test(tokens.slice(i+1,j).map(t => norm(t[0])).join(" "));
       const competingVerb = i => {
+        if (context.separableNominalOffsets?.has(tokens[i].index)) return false;
         const entries = forms.get(norm(tokens[i][0])) || [];
         if (norm(tokens[i][0]) === "bitte" || /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && entries.some(e => e.type === "Nomen")) return false;
         const possibleVerb = entries.some(e => e.type === "Verb") || separatedForms.has(norm(tokens[i][0]));
@@ -750,6 +838,42 @@
         }
         return true;
       };
+      // A non-final particle can close the verbal bracket before a proven
+      // adverbial continuation. Bare determiners/nouns remain preposition uses.
+      const trailingAdverbial = j => {
+        // A lexical adverb can itself modify the following adverb (weiter abwärts).
+        if ((forms.get(norm(tokens[j][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type))) return false;
+        let end = j + 1;
+        while (end < tokens.length && !hard(end-1,end) && !soft(end-1,end)) end++;
+        const entriesAt = k => forms.get(norm(tokens[k][0])) || [];
+        // Temporal prepositions also take bare adverbs: ab morgen, vor heute.
+        if (["ab","vor","nach","seit","von","bis","über","auf","für","zu"].includes(norm(tokens[j][0])) &&
+            !prepositions.has(norm(tokens[j+1][0])) && !["wegen","trotz","während","innerhalb","außerhalb"].includes(norm(tokens[j+1][0]))) return false;
+        const tailPreps = new Set([...prepositions,"wegen","trotz","während","innerhalb","außerhalb"]);
+        const det = /^(?:der|die|das|den|dem|des|(?:ein|kein|mein|dein|sein|ihr|unser|euer)(?:e|en|em|er|es)?|(?:dies|jen)(?:e|en|em|er|es))$/u;
+        let k = j + 1;
+        while (k < end) {
+          if (!/^\s+$/u.test(gap(k-1,k))) return false;
+          const key = norm(tokens[k][0]), entries = entriesAt(k);
+          if (tailPreps.has(key)) {
+            let head = k + 1;
+            if (head < end && det.test(norm(tokens[head][0]))) head++;
+            const first = head;
+            while (head < end && head-first < 2 && !/^[A-ZÄÖÜ]/u.test(tokens[head][0]) &&
+              (modifiers.get(norm(tokens[head][0])) || []).length) head++;
+            if (head >= end || !/^[A-ZÄÖÜ]/u.test(tokens[head][0]) ||
+                !entriesAt(head).some(e => e.type === "Nomen")) return false;
+            for (let h = k; h < head; h++) if (!/^\s+$/u.test(gap(h,h+1))) return false;
+            k = head + 1;
+          } else {
+            if (/^[A-ZÄÖÜ]/u.test(tokens[k][0]) || det.test(key) ||
+                !entries.some(e => e.type === "Adverb") || entries.some(e => e.type === "Verb") ||
+                (verbAnalyses.get(key) || []).some(a => ["finite","infinitive","participle"].includes(a.kind))) return false;
+            k++;
+          }
+        }
+        return end > j+1;
+      };
       const results = [];
       for (let i = 0; i < tokens.length-1; i++) {
         const possible = separatedForms.get(norm(tokens[i][0])) || [];
@@ -757,7 +881,7 @@
         // Only inspect paths that can contribute to this clicked occurrence.
         if (secondary && selected !== i && (i >= selected || !possible.some(pair => pair.prefix === norm(tokens[selected][0])))) continue;
         if (secondary && !tokens.some((t,j) => j > i &&
-          (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1)) &&
+          (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1) || trailingAdverbial(j)) &&
           possible.some(pair => pair.prefix === norm(t[0])) && !nominalParticle(i,j))) continue;
         let start = i;
         while (start > 0 && !hard(start-1,start) && !soft(start-1,start)) start--;
@@ -766,6 +890,15 @@
         // remains nominal although the quote starts a new local segment.
         if (/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && (i > start || i > 0 &&
           /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines)$/u.test(norm(tokens[i-1][0])))) continue;
+        // Short imperatives can be adjective homographs (besser). They must
+        // not steal a particle from an earlier finite predicate in the segment.
+        const stemEntries = forms.get(norm(tokens[i][0])) || [];
+        if (stemEntries.some(e => ["Adjektiv","Adverb"].includes(e.type)) &&
+            !(verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite") &&
+            tokens.slice(start,i).some(t => (verbAnalyses.get(norm(t[0])) || []).some(a => a.kind === "finite"))) {
+          if (selected === i) results.shortImperativeConflict = true;
+          continue;
+        }
         if (tokens.slice(start,i).some(t => (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" &&
           ["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten","lassen"].includes(e.word)))) continue;
         let crossed = secondary;
@@ -774,8 +907,9 @@
           if (soft(j-1,j)) crossed = true;
           // A particle must close its local segment; otherwise it may be a preposition.
           const closes = j === tokens.length-1 || hard(j,j+1) || soft(j,j+1);
+          const trailing = !closes && possible.some(pair => pair.prefix === norm(tokens[j][0])) && trailingAdverbial(j);
           // "kein Weg (daran) vorbei" belongs to führen, not vorbeifahren.
-          const pairs = closes && !nominalParticle(i,j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) ? possible.filter(pair => pair.prefix === norm(tokens[j][0])) : [];
+          const pairs = (closes || trailing) && !nominalParticle(i,j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) ? possible.filter(pair => pair.prefix === norm(tokens[j][0])) : [];
           if (pairs.length) {
             if (selected === i || selected === j) for (const pair of pairs) {
               const spans = [i,j].map(k => ({text:tokens[k][0],start:tokens[k].index,end:tokens[k].index + tokens[k][0].length}));
@@ -795,6 +929,7 @@
       return primary.length ? primary : scanSeparableCandidates(word,context,true);
     }
     async function resolveSeparableCandidates(word, context) {
+      context = await separableScope(context);
       const primary = scanSeparableCandidates(word,context);
       if (primary.length || !context) return primary;
       const nounEvidence = new Map(separableNounEvidence);
@@ -811,6 +946,102 @@
           separableNounEvidence.set(norm(form),isNoun);
         }));
       }
+    }
+    async function separableScope(context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return context;
+      const original = String(context.sentence || '');
+      const ranges = [], nominal = new Set();
+      const hasPredicate = async text => {
+        for (const t of text.matchAll(/[\p{L}\p{M}]+/gu)) {
+          if ((await tokenAnalyses(t[0])).some(a => ['finite','infinitive','imperative'].includes(a.kind))) return true;
+        }
+        return false;
+      };
+      // Only balanced, non-predicative parenthetical fragments are transparent.
+      for (const match of original.matchAll(/\([^()]*\)/gu)) {
+        if (!await hasPredicate(match[0]) && !/[;:.!?]/u.test(match[0])) ranges.push([match.index,match.index+match[0].length]);
+      }
+      // A closed subordinate insertion owns its predicates and particles.
+      // Unmarked comma clauses and unfinished insertions retain the old guards.
+      for (const match of original.matchAll(/,\s*(?:wie|während|obwohl)\b[^,;:.!?]*,/gu)) {
+        const inner=[...match[0].matchAll(/[\p{L}\p{M}]+/gu)];
+        const tail=inner.at(-1);
+        const finite=tail&&(await tokenAnalyses(tail[0])).some(a=>a.kind==='finite');
+        if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
+      }
+      let chars = original.split('');
+      const containing = ranges.find(([a,b])=>context.tokenOffset>=a&&context.tokenOffset<b);
+      if (containing) {
+        const [a,b]=containing;
+        chars=chars.map((c,i)=>i>a&&i<b-1?c:' ');
+      } else for (const [a,b] of ranges) for(let i=a;i<b;i++) chars[i]=' ';
+      const sentence=chars.join(''), scoped=[...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const morphologyCache=new Map();
+      const morphologyAt=i=>{
+        if(!morphologyCache.has(i)) morphologyCache.set(i,collectMorphology(scoped[i][0],{discoverModifiers:true}));
+        return morphologyCache.get(i);
+      };
+      // A homographic verb spelling is not a predicate when a nominal frame
+      // confirms its noun role. Require both lexical noun evidence and an
+      // immediately preceding determiner or verified declined adjective.
+      for(let i=1;i<scoped.length;i++) {
+        const t=scoped[i], key=norm(t[0]);
+        if(!/^[A-ZÄÖÜ]/u.test(t[0]) || !separatedForms.has(key) &&
+          !(forms.get(key)||[]).some(e=>e.type==='Verb')) continue;
+        if(!/^\s+$/u.test(sentence.slice(scoped[i-1].index+scoped[i-1][0].length,t.index))) continue;
+        const previous=scoped[i-1][0];
+        const frame=determiners.test(norm(previous)) ||
+          !/^[A-ZÄÖÜ]/u.test(previous) && (await morphologyAt(i-1)).analyses.some(a=>
+            canonicalPos(a.pos)==='Adjektiv' && ['adjective','participle-declined'].includes(a.kind));
+        if(!frame) continue;
+        if((await morphologyAt(i)).candidates.some(c=>canonicalPos(c.pos)==='Nomen' &&
+          !/^gerund of /iu.test(c.translation?.en||''))) nominal.add(t.index);
+      }
+      // A verified comparative after a finite predicate in the same clause
+      // is a modifier, not a second unintroduced finite verb or imperative.
+      // Clause-initial comparisons and forms after auxiliaries stay ambiguous.
+      const clauseWords=new Set(['und','oder','aber','denn','sondern','doch','weil','dass','wenn','ob','als','bevor','nachdem']);
+      const auxiliaries=new Set(['haben','sein','werden','können','müssen','dürfen','sollen','wollen','mögen','möchten','lassen']);
+      for(let i=1;i<scoped.length;i++) {
+        const t=scoped[i],key=norm(t[0]);
+        if(/^[A-ZÄÖÜ]/u.test(t[0]) || !separatedForms.has(key) &&
+          !(forms.get(key)||[]).some(e=>e.type==='Verb')) continue;
+        if(!(await morphologyAt(i)).analyses.some(a=>canonicalPos(a.pos)==='Adjektiv' && a.tags?.includes('comparative'))) continue;
+        for(let j=i-1;j>=0;j--) {
+          if(/[,;:.!?…“”„"«»()]/u.test(sentence.slice(scoped[j].index+scoped[j][0].length,t.index)) ||
+            clauseWords.has(norm(scoped[j][0]))) break;
+          const finite=(await tokenAnalyses(scoped[j][0])).filter(a=>a.kind==='finite');
+          if(finite.length) {
+            if(finite.every(a=>!auxiliaries.has(a.base)) && !nominal.has(scoped[j].index)) nominal.add(t.index);
+            break;
+          }
+        }
+      }
+      // Declined participles are transparent only with lexical morphology and
+      // a following verified noun head in the same nominal segment.
+      for (let i=0;i<scoped.length;i++) {
+        const t=scoped[i], entries=forms.get(norm(t[0]))||[];
+        if (!entries.some(e=>e.type==='Verb') && !separatedForms.has(norm(t[0]))) continue;
+        if (!/(?:e|en|em|er|es)$/u.test(norm(t[0])) || /^[A-ZÄÖÜ]/u.test(t[0])) continue;
+        const morphology=await morphologyAt(i);
+        if (!morphology.analyses.some(a=>a.kind==='participle-declined')) continue;
+        let determined=false;
+        for(let j=i-1;j>=0&&i-j<=6;j--) {
+          if (/[,;:.!?]/u.test(sentence.slice(scoped[j].index,t.index))) break;
+          if (determiners.test(norm(scoped[j][0]))) {determined=true;break;}
+          // A completed noun head before the word indicates a predicate,
+          // not a modifier of the later object (der Mann besetzte das Haus).
+          if (/^[A-ZÄÖÜ]/u.test(scoped[j][0])) break;
+        }
+        if (!determined) continue;
+        for(let j=i+1;j<scoped.length&&j-i<=35;j++) {
+          if (/[,;:.!?]/u.test(sentence.slice(t.index,scoped[j].index))) break;
+          if (!/^[A-ZÄÖÜ]/u.test(scoped[j][0])) continue;
+          const groups=await lexicalLookup(scoped[j][0]);
+          if (groups.some(g=>!g.kind&&!g.unresolved&&canonicalPos(g.pos)==='Nomen')) {nominal.add(t.index);break;}
+        }
+      }
+      return {...context,separableSentence:sentence,separableNominalOffsets:nominal};
     }
     function zuGroup(word, context) {
       if (!context || !Number.isInteger(context.tokenOffset)) return null;
@@ -938,6 +1169,205 @@
         result.push({id,note,meaning:head.e.word === "werden" && selected !== head.i ? null : meaning,lemma:main[0].word,roles,spans:[...linked].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
       }
       return result.length === 1 ? result[0] : null;
+    }
+    // Grammar probes must not evict the reader's lexical/display cache.
+    const lassenLookupCache=new Map();
+    function lassenLexicalLookup(word) {
+      const key=norm(word);
+      if(!lassenLookupCache.has(key)) {
+        if(lassenLookupCache.size>=128)lassenLookupCache.delete(lassenLookupCache.keys().next().value);
+        const pending=Promise.resolve().then(()=>fallback.lookup(word));lassenLookupCache.set(key,pending);
+        pending.catch(()=>{if(lassenLookupCache.get(key)===pending)lassenLookupCache.delete(key);});
+      }
+      return lassenLookupCache.get(key);
+    }
+    // Lassen selects a bare infinitive. Structure does not decide permission,
+    // causation or the controller of an accompanying personal pronoun.
+    // Reviewed historical spellings, scoped to proven lassen chains. This is
+    // not a global ss/ß rewrite and never corrects arbitrary input typos.
+    const lassenHistoricalForms = new Map([['läßt','lässt'],['laß','lass'],['mußten','mussten']]);
+    const lassenForm = word => lassenHistoricalForms.get(norm(word)) || word;
+    async function lassenGroup(word, context, candidates) {
+      if (!context || !Number.isInteger(context.tokenOffset) || (!candidates.some(c=>canonicalPos(c.pos)==='Verb') && !lassenHistoricalForms.has(norm(word)))) return null;
+      const sentence=String(context.sentence || ""),tokens=[...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      if(!tokens.some(t=>(forms.get(norm(lassenForm(t[0])))||[]).some(e=>e.type==='Verb'&&e.word==='lassen')))return null;
+      const clicked=tokens.findIndex(t=>t.index===context.tokenOffset&&norm(t[0])===norm(word));
+      if(clicked<0)return null;
+      const boundaries=new Set(['und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','bevor','nachdem','obwohl','während','falls','damit','sobald']);
+      // A comma introducing an additive phrase need not close the verbal
+      // bracket. But auch wenn introduces a separate subordinate clause;
+      // its initial auch must not be pulled into the preceding verbal bracket.
+      // Other finite predicates below still block attachment.
+      const connected=(a,b)=>!/[;:.!?…“”„"«»()–—]/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index)) && (!/,/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index)) || ['auch','noch'].includes(norm(tokens[b][0])) && !(norm(tokens[b][0])==='auch'&&norm(tokens[b+1]?.[0])==='wenn'));
+      const nominalAls=i=>norm(tokens[i]?.[0])==='als' &&
+        [i+1,i+2].some(j=>tokens[j] && /^[A-ZÄÖÜ]/u.test(tokens[j][0]) &&
+          (forms.get(norm(tokens[j][0]))||[]).some(e=>e.type==='Nomen')) &&
+        (i+1===tokens.length-1 || !subjectPersons[norm(tokens[i+1]?.[0])]);
+      const boundary=i=>boundaries.has(norm(tokens[i]?.[0])) || norm(tokens[i]?.[0])==='als'&&!nominalAls(i);
+      let start=clicked,end=clicked;
+      while(start>0&&connected(start-1,start)&&!boundary(start-1))start--;
+      while(end+1<tokens.length&&connected(end,end+1)&&!boundary(end+1))end++;
+      const indices=Array.from({length:end-start+1},(_,i)=>start+i),analyses=await Promise.all(indices.map(i=>tokenAnalyses(lassenForm(tokens[i][0]),lassenLexicalLookup)));
+      const rows=i=>analyses[i-start]||[], words=i=>norm(lassenForm(tokens[i]?.[0] || ""));
+      const finite=i=>rows(i).filter(a=>['finite','imperative'].includes(a.kind)&&!a.detached);
+      const infinitives=i=>rows(i).filter(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(i)&&words(i-1)!=='zu'&&/^[a-zäöü]/u.test(tokens[i]?.[0]||''));
+      const outerBases=new Set(['haben','werden','können','müssen','dürfen','sollen','wollen','mögen','möchten']);
+      const groups=[];
+      for(const l of indices.filter(i=>rows(i).some(a=>a.base==='lassen'))) {
+        let part,outer=null,headRows=[],tense;
+        // End-position finite modal/werden controls the replacement bracket.
+        if(l===end-1&&words(l)==='lassen'&&finite(end).some(a=>outerBases.has(a.base)&&a.base!=='haben')) {
+          part=l-1;outer=end;headRows=finite(end).filter(a=>outerBases.has(a.base)&&a.base!=='haben');
+        } else if(l===end&&words(l)==='lassen'&&infinitives(l).some(a=>a.base==='lassen')) {
+          const helpers=indices.filter(i=>i!==l&&i!==l-1&&finite(i).some(a=>outerBases.has(a.base)));
+          if(helpers.length===1){outer=helpers[0];headRows=finite(outer).filter(a=>outerBases.has(a.base));part=l-1;}
+          else {headRows=finite(l).filter(a=>a.base==='lassen');part=l-1;}
+        } else {headRows=finite(l).filter(a=>a.base==='lassen');part=l===end?l-1:end;}
+        // Clause-final lassen is also an infinitive. A finite reading needs
+        // its own agreeing plural subject; do not invent an omitted helper
+        // after a comma or borrow a subject from an earlier clause.
+        if(outer===null && l===end && words(l)==='lassen') {
+          const pluralSubject=indices.some(i=>i!==l && ['wir','sie'].includes(words(i))) ||
+            indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && ['die','diese','jene'].includes(words(i-1)) &&
+              (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i))));
+          if(!pluralSubject)continue;
+        }
+        if(part<start||part===outer||part===l||!headRows.length)continue;
+        const inner=infinitives(part),bases=new Set(inner.map(a=>a.base));
+        if(!inner.length||bases.size!==1)continue;
+        // The own möchten card and the Konjunktiv II of mögen describe
+        // the same finite paradigm. Share structural proof, retaining both
+        // dictionary identities and the formal Konjunktiv II analysis.
+        const moechteHead=outer!==null && headRows.some(a=>a.base==='möchten'&&a.entry&&a.tense==='Präsens') &&
+          headRows.some(a=>a.base==='mögen'&&a.entry&&a.tense==='Konjunktiv II') &&
+          headRows.every(a=>['möchten','mögen'].includes(a.base));
+        // Generic fallback "subjunctive" tags are not evidence for Konjunktiv I
+        // here. Our paired form tables prove the finite present/KII readings;
+        // mechanically generated imperative readings do not control this bracket.
+        if(moechteHead)headRows=headRows.filter(a=>a.kind==='finite'&&a.entry&&
+          (a.base==='möchten'&&a.tense==='Präsens'||a.base==='mögen'&&a.tense==='Konjunktiv II'));
+        const headBases=new Set(headRows.map(a=>moechteHead?'mögen':a.base));if(headBases.size!==1)continue;
+        if(moechteHead&&subjectPersons[words(start)]&&!headRows.some(a=>subjectPersons[words(start)].includes(a.person)))continue;
+        const head=moechteHead?headRows.find(a=>a.base==='mögen'):headRows[0],linked=[l,part,...(outer!==null?[outer]:[])];
+        // Conditional/reported perfect replacement needs its own tense label.
+        if(outer!==null&&head.base==='haben'&&!headRows.some(a=>['Präsens','Präteritum'].includes(a.tense)))continue;
+        if(!linked.includes(clicked))continue;
+        const ownNoun=i=>/^[A-ZÄÖÜ]/u.test(tokens[i][0])&&(forms.get(words(i))||[]).some(e=>e.type==='Nomen');
+        const possessive=i=>/^(?:mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(words(i))&&i+1<=end&&ownNoun(i+1);
+        const attributive=async i=>{
+          if(!(modifiers.get(words(i))||[]).some(a=>a.kind.startsWith('participle-')))return false;
+          let noun=i+1;
+          // The final component supplies the gender of a hyphenated noun.
+          if(noun+1<=end && /^-$/u.test(sentence.slice(tokens[noun].index+tokens[noun][0].length,tokens[noun+1].index)))noun++;
+          if(!tokens[noun] || !/^[A-ZÄÖÜ]/u.test(tokens[noun][0]))return false;
+          const own=(forms.get(words(noun))||[]).filter(e=>e.type==='Nomen');
+          let imported=[];
+          if(!own.length)try{imported=await lassenLexicalLookup(tokens[noun][0]);}catch(_){return false;}
+          if(!own.length&&!imported.some(g=>!g.kind&&!g.unresolved&&g.meanings?.length&&canonicalPos(g.pos)==='Nomen'))return false;
+          const gender=own.map(e=>e.article);
+          for(let j=i-1;j>=start&&i-j<=8;j--){
+            if(subjectPersons[words(j)] || !ownNoun(j)&&finite(j).length)return false;
+            if(['der','die','das','den','dem','des'].includes(words(j)))return (words(i).endsWith('e')&&(!own.length||gender.includes(words(j)))) ||
+              (words(i).endsWith('en')&&['den','dem','des'].includes(words(j)));
+          }
+          return false;
+        };
+        // In an imperative, mal between its head and object is a modal particle;
+        // it is not a second imperative of malen.
+        const modalParticle=i=>words(i)==='mal'&&head.kind==='imperative'&&l<i&&i<part;
+        let competing=false;
+        for(const i of indices)if(!linked.includes(i)&&rows(i).some(a=>['finite','imperative','infinitive','participle'].includes(a.kind))&&
+          !ownNoun(i)&&!possessive(i)&&!modalParticle(i)&&!await attributive(i)){competing=true;break;}
+        if(competing)continue;
+        if(['und','oder'].includes(words(end+1))) {
+          let independent=words(end+2)==='zwar';
+          const next=end+2,subject=words(next);
+          if(!independent && next<tokens.length) {
+            let headIndex=next+1,persons=subjectPersons[subject];
+            if(!persons && ['der','die','das','ein','eine'].includes(subject) && tokens[headIndex] &&
+              /^[A-ZÄÖÜ]/u.test(tokens[headIndex][0]) && (forms.get(words(headIndex))||[]).some(e=>e.type==='Nomen')) {
+              persons=['er/sie/es','sie'];headIndex++;
+            }
+            if(persons && headIndex<tokens.length && connected(next,headIndex)) {
+              const nextRows=await tokenAnalyses(lassenForm(tokens[headIndex][0]),lassenLexicalLookup);
+              independent=!nextRows.some(a=>a.kind==='infinitive') && nextRows.some(a=>a.kind==='finite'&&!a.detached&&persons.includes(a.person));
+            }
+          }
+          // A second finite predicate can reuse an explicit personal subject.
+          // Require agreement with both heads and exclude infinitive homographs.
+          if(!independent && next<tokens.length && words(end+1)==='und' && subjectPersons[words(start)] && start<(outer??l)) {
+            const nextRows=await tokenAnalyses(lassenForm(tokens[next][0]),lassenLexicalLookup);
+            independent=connected(end+1,next) && !nextRows.some(a=>a.kind==='infinitive') &&
+              nextRows.some(a=>a.kind==='finite'&&!a.detached&&headRows.some(h=>h.person===a.person)&&subjectPersons[words(start)].includes(a.person));
+          }
+          // A modal can govern a separate coordinated infinitive. Keep the
+          // lassen spans local; the other infinitive is not a lassen complement.
+          // Only a single bare infinitive, optionally preceded by dictionary
+          // adverbs, proves this narrow continuation. Extra verbs remain blocked.
+          if(!independent && next<tokens.length && outer!==null && modalLemmas.has(head.base) && words(end+1)==='und') {
+            let tail=next;
+            while(tail+1<tokens.length&&connected(tail,tail+1)&&!boundary(tail+1))tail++;
+            const tailRows=await Promise.all(Array.from({length:tail-next+1},(_,k)=>tokenAnalyses(lassenForm(tokens[next+k][0]),lassenLexicalLookup)));
+            const last=tailRows[tail-next]||[];
+            independent=connected(end+1,next) && last.some(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(tail)&&a.base!=='lassen') &&
+              /^[a-zäöü]/u.test(tokens[tail][0]) && words(tail-1)!=='zu' &&
+              tailRows.slice(0,-1).every((rs,k)=>!rs.length&&(forms.get(words(next+k))||[]).some(e=>e.type==='Adverb'));
+          }
+          if(!independent)continue;
+        }
+        const lexical=[...new Map(inner.map(a=>[a.entry?.id||a.base,a.entry||{word:a.base,type:'Verb'}])).values()];
+        const lassen=(forms.get(words(l))||[]).filter(e=>e.type==='Verb'&&e.word==='lassen');
+        if(!lassen.length)continue;
+        const helpers=headRows.map(a=>a.entry).filter(Boolean);
+        tense=outer===null?head.tense:head.base==='haben'?headRows.some(a=>a.tense==='Präteritum')?'Plusquamperfekt':'Perfekt':head.base==='werden'?headRows.some(a=>a.tense==='Konjunktiv II')?'Konjunktiv II':'Futur I':head.tense;
+        const replacement=outer!==null&&head.base==='haben';
+        groups.push({id:'lassen-infinitive',label:replacement?tense+' · lassen':tense==='Futur I'||tense==='Konjunktiv II'?tense+' · lassen':'lassen + Infinitiv',tense,lemma:inner[0].base,roles:[...lassen,...lexical,...helpers],
+          note:{ru:(replacement?tense+' · haben + Infinitiv + lassen':outer!==null?tense+' · ':'')+(replacement?'':'lassen + инфинитив')+' · значение определяется контекстом'+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + lassen':outer!==null?tense+' · ':'')+(replacement?'':'lassen + infinitive')+' · meaning depends on context'+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
+          spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
+      }
+      return groups.length===1?groups[0]:null;
+    }
+    // A perfect infinitive belongs to Futur II only when its lexical verb
+    // explicitly licenses the final auxiliary. Never infer this from proximity.
+    function futurePerfectGroup(word, context) {
+      if (!context || !Number.isInteger(context.tokenOffset)) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const clicked = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (clicked < 0) return null;
+      const boundaries = new Set(["und","oder","aber","denn","sondern","doch","weil","dass","daß","wenn","ob","als","bevor","nachdem","obwohl","während","falls","damit","sobald"]);
+      const connected = (a,b) => !/[,;:.!?…“”„"«»()–—]/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      let start=clicked,end=clicked;
+      while(start>0 && connected(start-1,start) && !boundaries.has(norm(tokens[start-1][0]))) start--;
+      while(end+1<tokens.length && connected(end,end+1) && !boundaries.has(norm(tokens[end+1][0]))) end++;
+      const matches=i=>(forms.get(norm(tokens[i]?.[0])) || []);
+      const verbs=i=>matches(i).filter(e=>e.type === "Verb");
+      const indices=Array.from({length:end-start+1},(_,i)=>start+i);
+      const heads=indices.flatMap(i=>verbs(i).filter(e=>e.word === "werden" && Object.values(formsOf(e).Präsens || {}).some(f=>norm(f) === norm(tokens[i][0]))).map(e=>({i,e})));
+      const groups=[];
+      for(const head of heads) {
+        const helper=head.i===end ? end-1 : end, part=helper-1;
+        if(part<start || part===head.i || helper===head.i) continue;
+        const auxiliaries=verbs(helper).filter(e=>["haben","sein"].includes(e.word) && norm(tokens[helper][0])===e.word && /^[a-zäöü]/u.test(tokens[helper][0]));
+        if(auxiliaries.length !== 1) continue;
+        const aux=auxiliaries[0];
+        const main=verbs(part).filter(e=>norm(e.auxiliary)===aux.word &&
+          norm(String(e.perfect_form || "").trim().split(/\s+/u).pop())===norm(tokens[part][0]) && /^[a-zäöü]/u.test(tokens[part][0]));
+        const bases=new Set(main.map(e=>norm(e.word).replace(/^sich\s+/u,"")));
+        if(!main.length || bases.size !== 1) continue;
+        const linked=[head.i,part,helper];
+        if(!linked.includes(clicked)) continue;
+        // Declined modifiers and noun phrases are not competing predicates.
+        // Unclassified verb homographs, coordination and extra verbs block proof.
+        if(indices.some(i=>!linked.includes(i) && (verbs(i).length || separatedForms.has(norm(tokens[i][0]))) &&
+          !(/^[A-ZÄÖÜ]/u.test(tokens[i][0]) && matches(i).some(e=>e.type === "Nomen")) &&
+          !(/^(?:mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[i][0])) && i+1<=end && /^[A-ZÄÖÜ]/u.test(tokens[i+1][0]) && matches(i+1).some(e=>e.type === "Nomen")))) continue;
+        if(["und","oder"].includes(norm(tokens[end+1]?.[0])) && verbs(end+2).length) continue;
+        groups.push({id:"werden-future-perfect",label:"Futur II",tense:"Futur II",lemma:[...bases][0],roles:[head.e,...main,aux],
+          note:{ru:"Futur II · завершённое действие в будущем / предположение о завершённом действии",en:"Futur II · completed future action / inference about a completed event"},
+          meaning:clicked===head.i ? {ru:"вспомогательный глагол Futur II",en:"Futur II auxiliary"} : null,
+          spans:linked.sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
+      }
+      return groups.length===1 ? groups[0] : null;
     }
     // Deliberately small clause-local patterns. No proximity-only attachment.
     function verbGroup(word, context) {
@@ -1137,7 +1567,241 @@
         return row ? {...candidate,usage:{kind:row.kind,role:"attributive",form:word,base:row.base,head:tokens[head][0]}} : candidate;
       });
       const preferred = favoured.length === 1 ? marked[candidates.indexOf(favoured[0])] : null;
-      return {candidates:marked,preferred,evidence:preferred ? "attributive-modifier-agreement" : "ambiguous-attributive-modifier",blocked:!preferred};
+      return {candidates:marked,preferred,compatibleAdjectives:[...new Set(compatible
+        .filter(row => canonicalPos(row.candidate.pos) === "Adjektiv")
+        .map(row => marked[candidates.indexOf(row.candidate)]))],
+        evidence:preferred ? "attributive-modifier-agreement" : "ambiguous-attributive-modifier",blocked:!preferred};
+    }
+    // Positive evidence only: fill an unresolved adjective/participle choice.
+    // Existing finite, reflexive, perfect and passive decisions take precedence.
+    async function unresolvedModifierChoice(word, context, candidates, grammatical) {
+      const adjectives = candidates.filter(c => canonicalPos(c.pos) === "Adjektiv");
+      const verbs = candidates.filter(c => canonicalPos(c.pos) === "Verb");
+      if (!adjectives.length || !verbs.length || !Number.isInteger(context?.tokenOffset)) return null;
+      if (candidates.some(c => c.construction)) return null;
+      const uniqueAdjective = choices => {
+        if (choices.filter(c => c.item?.reading_policy === "separate").length > 1) return null;
+        if (new Set(choices.map(c => norm(c.lemma))).size !== 1) return null;
+        if (choices.length === 1) return choices[0];
+        const own = choices.filter(c => c.source === "main");
+        return own.length === 1 ? own[0] : null;
+      };
+      if (grammatical.evidence === "ambiguous-attributive-modifier") {
+        const candidate = uniqueAdjective(grammatical.compatibleAdjectives || []);
+        if (candidate) return {candidate,evidence:"attributive-lexical-adjective"};
+      }
+      const sentence = String(context.sentence || "");
+      const tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (index < 1 || !["ganz","sehr","ziemlich","völlig"].includes(norm(tokens[index-1][0]))) return null;
+      if (/[,;:.!?“”„"()]/u.test(sentence.slice(tokens[index-1].index+tokens[index-1][0].length,tokens[index].index))) return null;
+      const candidate = uniqueAdjective(adjectives);
+      if (!candidate) return null;
+      const targetAnalyses = await tokenAnalyses(word);
+      // Grading cannot settle an independently possible finite/infinitive verb.
+      if (!targetAnalyses.some(a => a.kind === "participle") ||
+          targetAnalyses.some(a => ["finite","infinitive","imperative"].includes(a.kind))) return null;
+      // Do not infer absence of a construction from a truncated local clause.
+      // Conservatively retain choice when any helper occurs in the sentence;
+      // full coordinated/parenthesised attachment is outside this narrow rule.
+      for (let i = 0; i < tokens.length; i++) {
+        if (i === index) continue;
+        const analyses = await tokenAnalyses(tokens[i][0]);
+        if (analyses.some(a => ["haben","sein","werden"].includes(a.base) &&
+            ["finite","infinitive","participle"].includes(a.kind))) return null;
+      }
+      return {candidate,evidence:"graded-lexical-adjective-without-auxiliary"};
+    }
+    // Add a choice only from an explicit, case-compatible noun phrase.
+    // Existing resolutions and verb/particle constructions remain authoritative.
+    async function unresolvedPrepositionChoice(word, context, candidates) {
+      const caseByPrep = {mit:2,bei:2,von:2,zu:2,aus:2,nach:2,seit:2,für:1,durch:1,gegen:1,ohne:1,um:1};
+      const governedCase = caseByPrep[norm(word)];
+      if (governedCase === undefined || !Number.isInteger(context?.tokenOffset) ||
+          candidates.some(c => c.construction || canonicalPos(c.pos) === "Verb")) return null;
+      const choices = candidates.filter(c => canonicalPos(c.pos) === "prep" && norm(c.lemma) === norm(word));
+      if (choices.length !== 1) return null;
+      const sentence = String(context.sentence || ""), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const index = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (index < 0 || !tokens[index+2]) return null;
+      const det = norm(tokens[index+1][0]);
+      const definite = ["der","die","das","den","dem","des"].includes(det);
+      const ein = det.match(/^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(e|en|em|er|es)?$/u);
+      const demonstrative = det.match(/^(?:dies|jen)(e|en|em|er|es)$/u);
+      if (!definite && !ein && !demonstrative) return null;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      let head = index+2;
+      while (head < tokens.length && head-index <= 4 && !matches(head).some(e => e.type === "Nomen") &&
+          (modifiers.get(norm(tokens[head][0])) || []).length) head++;
+      if (!tokens[head] || head-index > 4 || !/^[A-ZÄÖÜ]/u.test(tokens[head][0])) return null;
+      // Whitespace only: no attachment through punctuation, quotes or hyphens.
+      for (let i=index;i<head;i++)
+        if (!/^\s+$/u.test(sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index))) return null;
+      const table = {
+        der:[["den","en","en"],["dem","em","en"]],
+        die:[["die","e","e"],["der","er","en"]],
+        das:[["das","","es"],["dem","em","en"]],
+        plural:[["die","e","en"],["den","en","en"]]
+      };
+      // A plural spelling may also be a weak singular (Namen, Kollegen).
+      // Require an explicit dictionary form link instead of guessing an ending.
+      let nounForms = [];
+      try {
+        const groups = await lexicalLookup(tokens[head][0]);
+        nounForms = groups.flatMap(g => g.kind === "form-note" ? g.inflections || [] : []);
+      } catch (_) { return null; }
+      const compatible = matches(head).filter(e => e.type === "Nomen").some(noun => {
+        const raw = norm(tokens[head][0]);
+        const plurals = String(noun.plural || "").split(/\s*,\s*/).map(norm);
+        const plural = plurals.some(p => p && p !== "—" && (p === raw || !/[ns]$/u.test(p) && p+"n" === raw));
+        const keys = [...(plural ? ["plural"] : []),...((!plural || nounForms.some(row => canonicalPos(row.pos) === "Nomen" && norm(row.lemma) === norm(noun.word) && row.number === "singular")) && table[noun.article] ? [noun.article] : [])];
+        return keys.some(key => {
+          const [article,einEnding,demEnding] = table[key][governedCase-1];
+          if (definite ? det !== article : ein ? (ein[1] || "") !== einEnding : demonstrative[1] !== demEnding) return false;
+          if (ein && key === "plural" && /^ein(?:e|en)?$/u.test(det)) return false;
+          for (let i=index+2;i<head;i++) {
+            const expected = governedCase === 2 || key === "plural" || key === "der" ? "en" :
+              key === "das" && ein && !ein[1] ? "es" : "e";
+            if (!(modifiers.get(norm(tokens[i][0])) || []).some(row => row.ending === expected)) return false;
+          }
+          return true;
+        });
+      });
+      return compatible ? choices[0] : null;
+    }
+    // Shared, dictionary-backed attachment for taps on either end of a noun phrase.
+    // This is presentation metadata, not a construction or a new vocabulary identity.
+    const attachmentLookupCache = new Map();
+    function attachmentLookup(word) {
+      const key = norm(word);
+      if (!attachmentLookupCache.has(key)) {
+        if (attachmentLookupCache.size >= 128) attachmentLookupCache.delete(attachmentLookupCache.keys().next().value);
+        const pending = Promise.resolve().then(() => fallback.lookup(word));
+        attachmentLookupCache.set(key,pending);
+        pending.catch(() => { if (attachmentLookupCache.get(key) === pending) attachmentLookupCache.delete(key); });
+      }
+      return attachmentLookupCache.get(key);
+    }
+    async function nounPhraseStructure(word, context, candidates, externalModifiers = false) {
+      if (!Number.isInteger(context?.tokenOffset)) return null;
+      const sentence = String(context.sentence || ''), tokens = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      const clicked = tokens.findIndex(t => t.index === context.tokenOffset && norm(t[0]) === norm(word));
+      if (clicked < 0) return null;
+      const definite = new Set(['der','die','das','den','dem','des']);
+      const isArticle = definite.has(norm(word));
+      if (!isArticle && !candidates.some(c => canonicalPos(c.pos) === 'Nomen')) return null;
+      const adjacent = (a,b) => /^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+      const modifier = async i => {
+        if ((modifiers.get(norm(tokens[i]?.[0])) || []).length) return true;
+        if (!externalModifiers || !tokens[i] || !/^[a-zäöüß]/u.test(tokens[i][0])) return false;
+        try {
+          const groups = await attachmentLookup(tokens[i][0]);
+          return groups.some(g => g.kind === 'form-note' && canonicalPos(g.pos) === 'Adjektiv' &&
+            g.inflections?.some(a => canonicalPos(a.pos) === 'Adjektiv' && norm(a.form) === norm(tokens[i][0])));
+        } catch (_) { return false; }
+      };
+      let det = clicked, head = clicked;
+      if (isArticle) {
+        head++;
+        while (tokens[head] && head-det <= 3 && !/^[A-ZÄÖÜ]/u.test(tokens[head][0]) &&
+            (modifiers.get(norm(tokens[head][0])) || []).length) head++;
+      } else {
+        det--;
+        while (det >= 0 && clicked-det <= 3 && !definite.has(norm(tokens[det][0])) &&
+            await modifier(det)) det--;
+      }
+      if (det < 0 || !tokens[head] || head-det > 3 || head <= det ||
+          !definite.has(norm(tokens[det][0])) || !/^[A-ZÄÖÜ]/u.test(tokens[head][0])) return null;
+      // A relative pronoun can precede its own subject (…, die Ämter haben).
+      // Clause-initial attachment after a comma needs a wider syntactic parse.
+      if (det > 0 && /,/u.test(sentence.slice(tokens[det-1].index+tokens[det-1][0].length,tokens[det].index))) return null;
+      // The final component sets the gender of a hyphenated compound;
+      // do not explain März-Gruppe as the masculine noun März.
+      if (/^\s*[-–]\s*[\p{L}\p{M}]/u.test(sentence.slice(tokens[head].index+tokens[head][0].length))) return null;
+      for (let i=det;i<head;i++) if (!adjacent(i,i+1)) return null;
+      const span = i => ({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
+      return {sentence,tokens,det,head,adjacent,span};
+    }
+    async function externalNounArticleLink(word,context,candidate,allCandidates) {
+      if (candidate?.source !== 'fallback' || !['noun','Nomen'].includes(candidate.pos)) return null;
+      const structure = await nounPhraseStructure(word,context,[candidate],true);
+      if (!structure || structure.head !== structure.tokens.findIndex(t => t.index === context.tokenOffset)) return null;
+      const {sentence,tokens,det,head,adjacent,span} = structure;
+      const article = norm(tokens[det][0]);
+      const prep = det > 0 && adjacent(det-1,det) ? norm(tokens[det-1][0]) : '';
+      // A relative clause can begin with a preposition: …, auf den Juden … .
+      if (prep && det > 1 && /,/u.test(sentence.slice(tokens[det-2].index+tokens[det-2][0].length,tokens[det-1].index))) return null;
+      // A nominal homograph before another capitalised word may be a modifier
+      // (der Berliner Zeitung); a previous noun choice does not prove attachment.
+      if (allCandidates.some(c => canonicalPos(c.pos) === 'Adjektiv') &&
+          /^\s+[`'“”„"]*\s*[A-ZÄÖÜ]/u.test(sentence.slice(tokens[head].index+tokens[head][0].length))) return null;
+      // The export can omit the modifier POS (Londoner Finanzministerium).
+      // A following confirmed common noun leaves the clicked head unproven.
+      if (tokens[head+1] && /^[A-ZÄÖÜ]/u.test(tokens[head+1][0]) && adjacent(head,head+1)) {
+        try {
+          const following = await attachmentLookup(tokens[head+1][0]);
+          if ((forms.get(norm(tokens[head+1][0])) || []).some(e => e.type === 'Nomen') ||
+              following.some(g => g.kind !== 'form-note' && g.pos === 'noun')) return null;
+        } catch (_) { return null; }
+      }
+      const dative = new Set(['mit','bei','von','zu','aus','nach','seit']);
+      const accusative = new Set(['für','durch','gegen','ohne','um']);
+      if (dative.has(prep) && !['dem','der','den'].includes(article) ||
+          accusative.has(prep) && !['den','die','das'].includes(article)) return null;
+      const endings = {der:['e','en'],die:['e','en'],das:['e'],den:['en'],dem:['en'],des:['en']};
+      for (let i=det+1;i<head;i++) if (!endings[article].some(e => norm(tokens[i][0]).endsWith(e))) return null;
+      return {article:tokens[det][0],noun:tokens[head][0],spans:[span(det),span(head)]};
+    }
+    async function nounPhrase(word, context, candidates) {
+      const structure = await nounPhraseStructure(word,context,candidates);
+      if (!structure) return [];
+      const {sentence,tokens,det,head,adjacent,span} = structure;
+      const surface = norm(tokens[head][0]);
+      let groups;
+      try { groups = await lexicalLookup(tokens[head][0]); } catch (_) { return []; }
+      const analyses = groups.filter(g => g.kind === 'form-note').flatMap(g => g.inflections || [])
+        .filter(a => canonicalPos(a.pos) === 'Nomen');
+      const nouns = [...(forms.get(surface) || []).filter(e => e.type === 'Nomen'),
+        ...groups.filter(g => g.kind !== 'form-note' && canonicalPos(g.pos) === 'Nomen')
+          .flatMap(g => (lemmas.get(norm(g.word)) || []).filter(e => e.type === 'Nomen'))];
+      const table = {der:['der','den','dem','des'],die:['die','die','der','der'],
+        das:['das','das','dem','des'],plural:['die','die','den','der']};
+      const caseNames = ['nominative','accusative','dative','genitive'];
+      const governed = {mit:2,bei:2,von:2,zu:2,aus:2,nach:2,seit:2,für:1,durch:1,gegen:1,ohne:1,um:1,
+        innerhalb:3,außerhalb:3,aufgrund:3};
+      const prep = det > 0 && adjacent(det-1,det) ? norm(tokens[det-1][0]) : '';
+      const twoWay = new Set(['in','an','auf','unter','über','vor','hinter','neben','zwischen']);
+      const result = [];
+      for (const noun of [...new Map(nouns.map(e => [e.id,e])).values()]) {
+        if (!table[noun.article]) continue;
+        const rows = analyses.filter(a => norm(a.lemma) === norm(noun.word));
+        const plurals = String(noun.plural || '').split(/\s*,\s*/u).map(norm);
+        const plural = plurals.some(p => p && p !== '—' && (p === surface || !/[ns]$/u.test(p) && p+'n' === surface)) || rows.some(a => a.number === 'plural');
+        const singular = !noun.plural_only && (surface === norm(noun.word) || rows.some(a => a.number === 'singular'));
+        for (const key of [...(singular ? [noun.article] : []),...(plural ? ['plural'] : [])]) {
+          let cases = table[key].flatMap((form,i) => form === norm(tokens[det][0]) ? [i] : []);
+          if (governed[prep] !== undefined) cases = cases.filter(i => i === governed[prep]);
+          if (twoWay.has(prep)) cases = cases.filter(i => i === 1 || i === 2);
+          // Structured case tags may be split across rows; only use tags with
+          // a compatible number, and never transfer plural evidence to singular.
+          const tagged = rows.filter(a => !a.number || a.number === (key === 'plural' ? 'plural' : 'singular'))
+            .flatMap(a => a.tags || []).filter(t => caseNames.includes(t));
+          if (tagged.length) cases = cases.filter(i => tagged.includes(caseNames[i]));
+          cases = cases.filter(i => {
+            for (let m=det+1;m<head;m++) {
+              const ending = i >= 2 || key === 'plural' || key === 'der' && i === 1 ? 'en' : 'e';
+              if (!(modifiers.get(norm(tokens[m][0])) || []).some(row => row.ending === ending)) return false;
+            }
+            // Dative plural of a dictionary plural that can acquire -n.
+            if (key === 'plural' && i === 2 && plurals.some(p => p === surface && !/[ns]$/u.test(p))) return false;
+            return true;
+          });
+          if (cases.length) result.push({dictionaryId:noun.id,lemma:noun.word,baseArticle:noun.article,
+            gender:({der:'masculine',die:'feminine',das:'neuter'})[noun.article],number:key === 'plural' ? 'plural' : 'singular',
+            cases:cases.map(i => caseNames[i]),article:tokens[det][0],noun:tokens[head][0],spans:[span(det),span(head)]});
+        }
+      }
+      return result;
     }
     function grammarRank(word, context, candidates, inflections = []) {
       const unchanged = {candidates,preferred:null,evidence:null};
@@ -1408,8 +2072,11 @@
       const component=(lemmas.get(parts[0])||[]).map(mainCandidate).find(c=>c.pos==='prep') || null;
       let translation={en:'',ru:''};
       if(component)translation={...component.translation};
-      else if(lookupCache.has(norm(parts[0]))) {
-        try {const g=(await lookupCache.get(norm(parts[0]))).find(g=>g.pos==='prep'&&!g.unresolved&&g.kind!=='form-note');if(g)translation.en=g.meanings.join('; ');}catch(_){}
+      else {
+        // The contraction's own component must not lose its meaning when
+        // contextual morphology evicts an unrelated entry from the LRU cache.
+        // Lookup the expansion's preposition, never a neighbouring noun.
+        try {const g=(await lexicalLookup(parts[0])).find(g=>g.pos==='prep'&&!g.unresolved&&g.kind!=='form-note');if(g)translation.en=g.meanings.join('; ');}catch(_){}
       }
       const contraction={source:'fallback',lemma:norm(word),pos:'contraction',posLabel:'contraction',translation,
         explanation:{kind:'contraction',expansion:parts.join(' '),componentLemma:parts[0],componentId:component?.dictionaryId||null},
@@ -1489,7 +2156,12 @@
       // their existing main-first behaviour and avoid unnecessary downloads.
       if (!ownOnlyVerb && (!exact.length || context || reflexiveForms.has(norm(word)))) {
         try {
-          for (const group of await directLookup) {
+          // Use the common source collector without enabling new role choices.
+          // The next stage can consume its verified modifier discoveries.
+          await directLookup;
+          const morphology = await collectMorphology(word);
+          if (morphology.errors.length) throw new Error(morphology.errors.map(e=>e.message).join('; '));
+          for (const group of morphology.groups) {
             if (ownOnlyVerbs.has(norm(group.word)) || group.kind === "form-note" && group.inflections?.some(row => ownOnlyVerbs.has(norm(row.lemma)))) continue;
             if (group.kind === "form-note") { formNotes.push(group); inflections.push(...(group.inflections || [])); continue; }
             const partOfSpeech = canonicalPos(group.pos);
@@ -1551,7 +2223,13 @@
         const identities = new Set(people.map(c => window.BibliothekVocabulary.identity(c)));
         candidates = [...people,...candidates.filter(c => !identities.has(window.BibliothekVocabulary.identity(c)))];
       }
-      const group = zuGroup(word,context) || werdenGroup(word,context) || verbGroup(word,context);
+      const group = futurePerfectGroup(word,context) || await lassenGroup(word,context,candidates) || zuGroup(word,context) || werdenGroup(word,context) || verbGroup(word,context);
+      // Historical form aliases enter the UI only after a full chain is proven.
+      // Keep the original token and offsets for highlighting and saved choices.
+      if(group?.id==='lassen-infinitive' && lassenHistoricalForms.has(norm(word))) {
+        for(const entry of group.roles.filter(e=>e.id && (forms.get(norm(lassenForm(word)))||[]).some(f=>f.id===e.id)))
+          if(!candidates.some(c=>c.dictionaryId===entry.id))candidates.push(mainCandidate(entry));
+      }
       // Joined zu forms can belong to a complete verb missing from ours;
       // keep that recognised target rather than guessing from its stem.
       if (group?.main?.importedSeparable && !candidates.some(c=>norm(c.lemma) === norm(group.main.word) && canonicalPos(c.pos) === "Verb"))
@@ -1559,10 +2237,11 @@
       if (group) {
         const {roles,main,marker,meaning,meaningLemma,...construction} = group;
         candidates = candidates.map(c => {
-          if (c.reflexiveUnconfirmed || c.construction?.id === "reflexive-verb") return c;
+          if ((c.reflexiveUnconfirmed && group.id !== "werden-future-perfect") || c.construction?.id === "reflexive-verb" && !(group.id==='lassen-infinitive'&&c.construction.attachmentOnly)) return c;
           if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
             return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
-          return roles.some(e => norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos))
+          return roles.some(e => norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos) &&
+            (!["werden-future-perfect","lassen-infinitive"].includes(group.id) || !c.dictionaryId || e.id === c.dictionaryId))
             ? {...c,construction,...(c.lemma === (group.meaningLemma || "werden") && group.meaning ? {translation:group.meaning} : {})} : c;
         });
       }
@@ -1595,19 +2274,41 @@
       const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
       const reflexiveVerb = reflexive.length === 1 && !reflexivePronouns.has(norm(word))
         ? candidates.find(c=>same(c,reflexive[0])) : null;
-      const grouped = candidates.filter(c => c.construction && !["separable-verb","reflexive-verb"].includes(c.construction.id));
+      const grouped = candidates.filter(c => c.construction && !(c.reflexiveUnconfirmed && c.construction.id === "werden-future-perfect") && !["separable-verb","reflexive-verb"].includes(c.construction.id));
       const exactChoice = exact.length === 1 && !reflexiveEntries.has(exact[0]) ? candidates.find(c => same(c,mainCandidate(exact[0]))) : null;
       const competingLexeme = exactChoice && candidates.some(c => canonicalPos(c.pos) === canonicalPos(exactChoice.pos) && norm(c.lemma) !== norm(exactChoice.lemma));
-      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : reflexiveVerb || ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (!competingLexeme ? exactChoice : null));
+      // Card preference follows our dictionary convention only for a proven
+      // lassen bracket and the paired finite form, not for standalone mögen.
+      const moechteCard=group?.id==='lassen-infinitive'&&group.tense==='Konjunktiv II'&&
+        grouped.some(c=>c.source==='main'&&c.lemma==='mögen') &&
+        (verbAnalyses.get(norm(word))||[]).some(a=>a.base==='mögen'&&a.kind==='finite'&&a.tense==='Konjunktiv II')
+          ? grouped.find(c=>c.source==='main'&&c.lemma==='möchten'&&(verbAnalyses.get(norm(word))||[]).some(a=>a.entry?.id===c.dictionaryId&&a.kind==='finite'&&a.tense==='Präsens')) : null;
+      let preferred = people ? people.length === 1 ? people[0] : null : nominalizedNoun || (grammatical.blocked ? null : moechteCard || reflexiveVerb || ranked.preferred || (grouped.length === 1 ? grouped[0] : null) || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null) || grammatical.preferred || (!competingLexeme ? exactChoice : null));
       const needsReflexiveChoice = !reflexivePronouns.has(norm(word)) && candidates.some(c=>c.construction?.id === "reflexive-verb" && c.construction.interpretation && c.construction.confidence === "tentative");
       const needsSeparableChoice = candidates.some(c => c.construction?.id === "separable-verb" && c.construction.confidence === "tentative");
       // A plausible detached particle makes the base meaning uncertain too.
       // Saved occurrence choices are restored by the reader after resolution.
-      if (preferred?.construction?.confidence === "tentative" || needsSeparableChoice || needsReflexiveChoice) preferred = null;
+      if (preferred?.construction?.confidence === "tentative" || needsSeparableChoice || needsReflexiveChoice || separated.shortImperativeConflict) preferred = null;
       if (preferred) candidates = [preferred,...candidates.filter(c => c !== preferred)];
       const derivedOnly = candidates.length === 1 && derived.some(e => e.id === candidates[0].dictionaryId) && !dictionaryForms.has(candidates[0].dictionaryId);
       const selected = needsSeparableChoice || needsReflexiveChoice ? null : people ? preferred : nominalizedNoun || (grammatical.blocked || derivedOnly && !preferred ? null : candidates.length === 1 ? candidates[0].reflexiveUnconfirmed || candidates[0].construction?.confidence === "tentative" ? null : candidates[0] : preferred);
       const resolution = { preferred, evidence:needsReflexiveChoice ? "reflexive-reciprocal-choice" : people ? people.length === 1 ? "nominalized-person-agreement" : "ambiguous-nominalized-person" : nominalizedNoun ? nominalizedNoun.usage.kind === "adjective" ? "nominalized-adjective-after-indefinite" : "nominalized-infinitive-after-das" : reflexiveVerb ? "reflexive-subject-agreement" : ranked.evidence || (separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : grammatical.evidence), form:word, formNotes, inflections, status:selected && candidates.length === 1 ? "resolved" : candidates.length ? "ambiguous" : "unresolved", candidates, selected, unresolvedMeanings, error };
+      if (!resolution.selected && !people && !nominalizedNoun && !needsReflexiveChoice && !needsSeparableChoice) {
+        const modifierChoice = await unresolvedModifierChoice(word,context,candidates,grammatical);
+        if (modifierChoice) {
+          resolution.selected = resolution.preferred = modifierChoice.candidate;
+          resolution.evidence = modifierChoice.evidence;
+          resolution.candidates = [modifierChoice.candidate,...candidates.filter(c => !same(c,modifierChoice.candidate))];
+        }
+      }
+      if (!resolution.selected && !needsReflexiveChoice && !needsSeparableChoice) {
+        const preposition = await unresolvedPrepositionChoice(word,context,candidates);
+        if (preposition) {
+          resolution.selected = resolution.preferred = preposition;
+          resolution.evidence = "preposition-before-noun-phrase";
+          resolution.candidates = [preposition,...resolution.candidates.filter(c => c !== preposition)];
+        }
+      }
       if (fallback.spellingTranslation) await Promise.all(candidates.filter(c => c.source === "fallback").map(async c => {
         try {
           const display = await fallback.spellingTranslation(c.lemma,c.pos,c.meanings || [c.translation?.en || '']);
@@ -1622,12 +2323,42 @@
       }));
       const contractionResult=await contractionRule(word,context,candidates)||await reverseSuperlative(word,context);
       if(contractionResult)Object.assign(resolution,contractionResult,{preferred:contractionResult.selected,status:contractionResult.selected?'resolved':'ambiguous'});
+      const phrases = await nounPhrase(word,context,resolution.candidates);
+      const articlePhrase = phrases.length && new Set(phrases.map(p => `${p.lemma}:${p.baseArticle}`)).size === 1;
+      resolution.candidates = resolution.candidates.map(c => {
+        const related = canonicalPos(c.pos) === 'Nomen' ? phrases.filter(p => p.dictionaryId === c.dictionaryId) :
+          c.pos === 'article' && articlePhrase ? phrases : [];
+        return related.length ? {...c,nounPhrase:related} : c;
+      });
+      const identity = c => window.BibliothekVocabulary.identity(c);
+      if (resolution.selected) resolution.selected = resolution.candidates.find(c => identity(c) === identity(resolution.selected)) || resolution.selected;
+      if (resolution.preferred) resolution.preferred = resolution.candidates.find(c => identity(c) === identity(resolution.preferred)) || resolution.preferred;
+      if (!resolution.selected && articlePhrase) {
+        const linked = resolution.candidates.filter(c => c.nounPhrase &&
+          (c.pos === 'article' || canonicalPos(c.pos) === 'Nomen'));
+        if (linked.length === 1 && !resolution.candidates.some(c => c.construction?.confidence === 'tentative')) {
+          resolution.selected = resolution.preferred = linked[0];
+          resolution.evidence = linked[0].pos === 'article' ? 'definite-article-noun-agreement' : 'noun-definite-article-agreement';
+          resolution.candidates = [linked[0],...resolution.candidates.filter(c => c !== linked[0])];
+        }
+      }
+      // External attachment is display-only: no new selection, gender or case.
+      const unlinked = resolution.candidates;
+      resolution.candidates = await Promise.all(unlinked.map(async c => {
+        const link = await externalNounArticleLink(word,context,c,unlinked);
+        return link ? {...c,nounArticleLink:link} : c;
+      }));
+      if (resolution.selected) resolution.selected = resolution.candidates.find(c => identity(c) === identity(resolution.selected)) || resolution.selected;
+      if (resolution.preferred) resolution.preferred = resolution.candidates.find(c => identity(c) === identity(resolution.preferred)) || resolution.preferred;
       // Enrich only after all morphology, ranking and selection are complete.
       if (window.BibliothekRussianTranslations)
         await window.BibliothekRussianTranslations.enrich({...resolution,candidates:resolution.candidates.filter(c=>!c.explanation)},window.DeutschTranslation?.getLang?.() || "en");
       return resolution;
     }
-    return Object.freeze({ resolve, prepareSeparable, entry:id => byId.get(String(id)) || null,
+    return Object.freeze({ resolve, prepareSeparable,
+      // Diagnostic consumers must not mutate cached groups or dictionary items.
+      morphology:async (word,options) => JSON.parse(JSON.stringify(await collectMorphology(word,options))),
+      entry:id => byId.get(String(id)) || null,
       matchSeparable:(word,context) => separatedForms.has(norm(word)) ? separableCandidates(word,context) : [],
       matchReflexive:reflexiveCandidates,
       diagnoseReflexive:async sentence=>{await prepareSeparable();const diagnostic={};await analyseReflexiveSentence(sentence,diagnostic);return diagnostic;},
