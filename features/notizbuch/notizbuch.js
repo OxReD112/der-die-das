@@ -93,6 +93,7 @@
     openedId = id; $("detail-topic").textContent = entry.category || ""; $("detail-title").textContent = entry.title;
     $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = cleanNoteHtml(entry.bodyHtml);
     else $("detail-body").textContent = entry.body || "";
+    renderTaskButtons();
     $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
@@ -217,17 +218,20 @@
     input.addEventListener("blur", () => finish(true));
     fit(); pill.replaceWith(box); input.focus(); // same tap → the iPhone keyboard opens
   }
-  // Only text, paragraphs, line breaks, bold and italic may survive storage/rendering.
+  // Only text, paragraphs, line breaks, bold, italic and checklist state survive storage/rendering.
   // Keep body as plain text as well, so existing search and older notes remain compatible.
   function cleanNoteHtml(html) {
     const template = document.createElement("template"); template.innerHTML = String(html);
     const output = document.createElement("div");
     function copy(node, target) {
       if (node.nodeType === Node.TEXT_NODE) { target.append(document.createTextNode(node.textContent)); return; }
-      if (node.nodeType !== Node.ELEMENT_NODE || ["SCRIPT", "STYLE", "IFRAME", "OBJECT", "SVG", "MATH", "IMG"].includes(node.tagName)) return;
-      const tags = { B:"strong", STRONG:"strong", I:"em", EM:"em", BR:"br", DIV:"div", P:"p" };
+      if (node.nodeType !== Node.ELEMENT_NODE || ["SCRIPT", "STYLE", "IFRAME", "OBJECT", "SVG", "MATH", "IMG", "BUTTON", "INPUT"].includes(node.tagName)) return;
+      const tags = { B:"strong", STRONG:"strong", I:"em", EM:"em", BR:"br", DIV:"div", P:"p", UL:"ul", LI:"li" };
       let destination = target;
-      if (tags[node.tagName]) { destination = document.createElement(tags[node.tagName]); target.append(destination); }
+      if (tags[node.tagName]) { destination = document.createElement(tags[node.tagName]); target.append(destination);
+        if (node.tagName === "UL") destination.setAttribute("data-checklist", "");
+        if (node.tagName === "LI") destination.setAttribute("data-checked", node.getAttribute("data-checked") === "true" ? "true" : "false");
+      }
       // Safari may express commands as styled spans; retain only these two marks.
       if (!['B','STRONG'].includes(node.tagName) && (node.style.fontWeight === "bold" || Number(node.style.fontWeight) >= 600)) {
         const bold = document.createElement("strong"); destination.append(bold); destination = bold;
@@ -239,6 +243,47 @@
     }
     for (const child of template.content.childNodes) copy(child, output);
     return output.innerHTML;
+  }
+  function currentTask() {
+    const node = window.getSelection()?.anchorNode;
+    const task = (node?.nodeType === Node.ELEMENT_NODE ? node : node?.parentElement)?.closest("li");
+    return task && els.body.contains(task) ? task : null;
+  }
+  function normalizeTasks() {
+    els.body.querySelectorAll("ul").forEach(list => list.setAttribute("data-checklist", ""));
+    els.body.querySelectorAll("li").forEach(task => {
+      if (task.getAttribute("data-checked") !== "true") task.setAttribute("data-checked", "false");
+    });
+  }
+  let splittingTask = null;
+  els.body.addEventListener("beforeinput", event => {
+    if (event.inputType === "insertParagraph") splittingTask = currentTask();
+  });
+  // In the editor the circle is a CSS marker, so native Enter/Backspace still see
+  // an empty list item as empty. Reading mode uses actual accessible buttons.
+  els.body.addEventListener("pointerdown", event => {
+    const task = event.target.closest("li"); if (!task || !els.body.contains(task)) return;
+    const box = task.getBoundingClientRect();
+    if (event.clientX >= box.left && event.clientX <= box.left + 26 && event.clientY <= box.top + 28) {
+      event.preventDefault(); task.setAttribute("data-checked", String(task.getAttribute("data-checked") !== "true"));
+    }
+  });
+  function renderTaskButtons() {
+    $("detail-body").querySelectorAll("ul[data-checklist] li").forEach(task => {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "nb-task-check"; button.setAttribute("role", "checkbox");
+      button.setAttribute("aria-checked", String(task.getAttribute("data-checked") === "true"));
+      button.setAttribute("aria-label", task.textContent.trim() || "Aufgabe");
+      task.prepend(button);
+      button.addEventListener("click", () => {
+        const note = state.notes.find(item => item.id === openedId); if (!note) return;
+        const before = { ...note }, checked = task.getAttribute("data-checked") === "true";
+        task.setAttribute("data-checked", String(!checked));
+        note.bodyHtml = cleanNoteHtml($("detail-body").innerHTML); note.updatedAt = Date.now();
+        if (!persist()) { Object.assign(note, before); task.setAttribute("data-checked", String(checked)); }
+        button.setAttribute("aria-checked", task.getAttribute("data-checked"));
+      });
+    });
   }
   let savedNoteRange = null;
   const formatToggle = $("format-toggle"), formatMenu = $("format-menu");
@@ -263,14 +308,17 @@
   formatToggle.addEventListener("click", () => {
     if (!formatMenu.hidden) { closeFormatMenu(); return; }
     restoreNoteSelection();
-    for (const button of formatMenu.querySelectorAll("button")) button.setAttribute("aria-pressed", String(document.queryCommandState(button.dataset.format)));
+    for (const button of formatMenu.querySelectorAll("button")) button.setAttribute("aria-pressed", String(button.dataset.format === "checklist" ? !!currentTask() : document.queryCommandState(button.dataset.format)));
     formatMenu.hidden = false; formatToggle.setAttribute("aria-expanded", "true");
   });
   formatMenu.addEventListener("click", event => {
     const button = event.target.closest("[data-format]"); if (!button) return;
     restoreNoteSelection();
     // Native editing commands retain the browser's typing/undo history, including caret-only toggles.
-    document.execCommand(button.dataset.format, false);
+    if (button.dataset.format === "checklist") {
+      document.execCommand("insertUnorderedList", false);
+      normalizeTasks();
+    } else document.execCommand(button.dataset.format, false);
     rememberNoteSelection(); closeFormatMenu();
   });
   document.addEventListener("pointerdown", event => {
@@ -282,13 +330,20 @@
   });
   els.body.addEventListener("drop", event => event.preventDefault());
   els.body.addEventListener("input", () => {
-    if (!els.body.textContent && !els.body.innerText.trim()) els.body.replaceChildren();
+    normalizeTasks();
+    if (splittingTask) {
+      const task = currentTask();
+      if (task && task !== splittingTask) task.setAttribute("data-checked", "false");
+      splittingTask = null;
+    }
+    if (!els.body.querySelector("li") && !els.body.textContent && !els.body.innerText.trim()) els.body.replaceChildren();
     rememberNoteSelection();
   });
   function openEditor(note = null) {
     editingId = note?.id || null; $("form-title").textContent = note ? "Notiz bearbeiten" : "Neue Notiz";
     els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; if (note?.bodyHtml) els.body.innerHTML = cleanNoteHtml(note.bodyHtml);
     else els.body.textContent = note?.body || "";
+    normalizeTasks();
     savedNoteRange = null; fillCategories(note?.category || "");
     setScreen("edit", "forward");
   }

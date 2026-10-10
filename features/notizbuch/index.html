@@ -13,7 +13,7 @@
   <title>Notizbuch · Deutsch.</title>
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <link rel="stylesheet" href="../../home.css?v=47">
-  <link rel="stylesheet" href="notizbuch.css?v=25">
+  <link rel="stylesheet" href="notizbuch.css?v=27">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -67,8 +67,9 @@
             <span id="note-label">Notiz</span>
             <button class="nb-format-toggle" id="format-toggle" type="button" aria-label="Text formatieren" aria-expanded="false" aria-controls="format-menu">Aa</button>
             <div class="nb-format-menu" id="format-menu" role="group" aria-label="Textformatierung" hidden>
-              <button type="button" data-format="bold" aria-pressed="false"><b>B</b> Fett</button>
-              <button type="button" data-format="italic" aria-pressed="false"><i>I</i> Kursiv</button>
+              <button type="button" data-format="bold" aria-label="Fett" aria-pressed="false"><b aria-hidden="true">B</b></button>
+              <button type="button" data-format="italic" aria-label="Kursiv" aria-pressed="false"><i aria-hidden="true">I</i></button>
+              <button type="button" data-format="checklist" aria-label="Checkliste" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6.5"/><path d="m6.5 10 2.3 2.3 4.7-4.7"/></svg></button>
             </div>
             <div id="entry-body" class="nb-note-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="note-label" data-placeholder="Was möchtest du dir merken?"></div>
           </div>
@@ -96,6 +97,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=22"></script>
+  <script src="notizbuch.js?v=23"></script>
 </body>
 </html>

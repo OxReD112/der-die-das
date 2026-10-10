@@ -133,9 +133,22 @@ button.nb-topic-title { align-items:center; }
 .nb-format-toggle::before { content:""; position:absolute; inset:-5px 0; }
 .nb-format-toggle[aria-expanded="true"] { color:var(--text); background:color-mix(in srgb,var(--muted) 10%,transparent); }
 .nb-format-menu { position:absolute; top:32px; right:8px; z-index:4; display:flex; gap:2px; padding:4px; border:1px solid var(--hairline); border-radius:12px; background:var(--tile-surface); box-shadow:0 5px 18px #0002; }
-.nb-format-menu button { display:flex; align-items:center; gap:7px; min-height:38px; border:0; border-radius:8px; padding:0 10px; background:transparent; color:var(--text); font:400 13px/1.2 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; cursor:pointer; touch-action:manipulation; }
+.nb-format-menu button { display:grid; place-items:center; width:34px; height:34px; border:0; border-radius:8px; padding:0; background:transparent; color:var(--text); font:400 13px/1.2 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; cursor:pointer; touch-action:manipulation; }
+.nb-format-menu b { font-size:16px; font-weight:700; }
+.nb-format-menu i { font-family:Georgia,"Times New Roman",serif; font-size:19px; font-style:italic; }
 .nb-format-menu button[aria-pressed="true"] { background:color-mix(in srgb,var(--mint) 15%,transparent); color:var(--mint); }
 .nb-note-editor { min-height:156.8px; outline:0; color:var(--text); font:400 16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; white-space:pre-wrap; overflow-wrap:anywhere; }
 .nb-note-editor:empty::before { content:attr(data-placeholder); color:var(--muted); pointer-events:none; }
 .nb-note-editor p,.nb-detail-body p { margin:0; }
 .nb-format-toggle:focus-visible,.nb-format-menu button:focus-visible { outline:2px solid var(--mint); outline-offset:1px; }
+
+/* Task circles share the text line and turn mint when checked. */
+.nb-format-menu svg { width:19px; height:19px; }
+.nb-note-editor ul[data-checklist],.nb-detail-body ul[data-checklist] { list-style:none; margin:0; padding:0; white-space:normal; }
+.nb-note-editor ul[data-checklist] li,.nb-detail-body ul[data-checklist] li { position:relative; min-height:1.4em; margin:0; padding-left:27px; white-space:pre-wrap; }
+.nb-note-editor ul[data-checklist] li::before,.nb-task-check { position:absolute; left:2px; top:.2em; width:17px; height:17px; box-sizing:border-box; border:1.5px solid var(--muted); border-radius:50%; background:transparent; }
+.nb-note-editor ul[data-checklist] li::before { content:""; cursor:pointer; }
+.nb-note-editor ul[data-checklist] li[data-checked="true"]::before,.nb-task-check[aria-checked="true"] { border-color:var(--mint); background:var(--mint); }
+.nb-task-check { padding:0; cursor:pointer; touch-action:manipulation; }
+.nb-task-check::before { content:""; position:absolute; inset:-6px -4px; border-radius:50%; }
+.nb-task-check:focus-visible { outline:2px solid var(--mint); outline-offset:3px; }
