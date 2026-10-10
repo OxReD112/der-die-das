@@ -45,6 +45,7 @@
     );
   }
   function setScreen(screen, direction = "none") {
+    closeFormatMenu();
     app.dataset.screen = screen;
     const list = screen === "list";
     els.detail.hidden = screen !== "detail"; els.edit.hidden = screen !== "edit";
@@ -90,7 +91,8 @@
   function openEntry(id) {
     const entry = allEntries().find(item => item.id === id); if (!entry) return;
     openedId = id; $("detail-topic").textContent = entry.category || ""; $("detail-title").textContent = entry.title;
-    $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; $("detail-body").textContent = entry.body || "";
+    $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = cleanNoteHtml(entry.bodyHtml);
+    else $("detail-body").textContent = entry.body || "";
     $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
@@ -215,9 +217,79 @@
     input.addEventListener("blur", () => finish(true));
     fit(); pill.replaceWith(box); input.focus(); // same tap → the iPhone keyboard opens
   }
+  // Only text, paragraphs, line breaks, bold and italic may survive storage/rendering.
+  // Keep body as plain text as well, so existing search and older notes remain compatible.
+  function cleanNoteHtml(html) {
+    const template = document.createElement("template"); template.innerHTML = String(html);
+    const output = document.createElement("div");
+    function copy(node, target) {
+      if (node.nodeType === Node.TEXT_NODE) { target.append(document.createTextNode(node.textContent)); return; }
+      if (node.nodeType !== Node.ELEMENT_NODE || ["SCRIPT", "STYLE", "IFRAME", "OBJECT", "SVG", "MATH", "IMG"].includes(node.tagName)) return;
+      const tags = { B:"strong", STRONG:"strong", I:"em", EM:"em", BR:"br", DIV:"div", P:"p" };
+      let destination = target;
+      if (tags[node.tagName]) { destination = document.createElement(tags[node.tagName]); target.append(destination); }
+      // Safari may express commands as styled spans; retain only these two marks.
+      if (!['B','STRONG'].includes(node.tagName) && (node.style.fontWeight === "bold" || Number(node.style.fontWeight) >= 600)) {
+        const bold = document.createElement("strong"); destination.append(bold); destination = bold;
+      }
+      if (!['I','EM'].includes(node.tagName) && node.style.fontStyle === "italic") {
+        const italic = document.createElement("em"); destination.append(italic); destination = italic;
+      }
+      for (const child of node.childNodes) copy(child, destination);
+    }
+    for (const child of template.content.childNodes) copy(child, output);
+    return output.innerHTML;
+  }
+  let savedNoteRange = null;
+  const formatToggle = $("format-toggle"), formatMenu = $("format-menu");
+  function rememberNoteSelection() {
+    const selection = window.getSelection();
+    if (selection?.rangeCount && els.body.contains(selection.anchorNode) && els.body.contains(selection.focusNode)) {
+      savedNoteRange = selection.getRangeAt(0).cloneRange();
+    }
+  }
+  function closeFormatMenu() { formatMenu.hidden = true; formatToggle.setAttribute("aria-expanded", "false"); }
+  function restoreNoteSelection() {
+    els.body.focus({ preventScroll:true });
+    const selection = window.getSelection();
+    const range = savedNoteRange || document.createRange();
+    if (!savedNoteRange) { range.selectNodeContents(els.body); range.collapse(false); }
+    selection.removeAllRanges(); selection.addRange(range);
+  }
+  document.addEventListener("selectionchange", rememberNoteSelection);
+  for (const control of [formatToggle, ...formatMenu.querySelectorAll("button")]) {
+    control.addEventListener("pointerdown", event => { rememberNoteSelection(); event.preventDefault(); });
+  }
+  formatToggle.addEventListener("click", () => {
+    if (!formatMenu.hidden) { closeFormatMenu(); return; }
+    restoreNoteSelection();
+    for (const button of formatMenu.querySelectorAll("button")) button.setAttribute("aria-pressed", String(document.queryCommandState(button.dataset.format)));
+    formatMenu.hidden = false; formatToggle.setAttribute("aria-expanded", "true");
+  });
+  formatMenu.addEventListener("click", event => {
+    const button = event.target.closest("[data-format]"); if (!button) return;
+    restoreNoteSelection();
+    // Native editing commands retain the browser's typing/undo history, including caret-only toggles.
+    document.execCommand(button.dataset.format, false);
+    rememberNoteSelection(); closeFormatMenu();
+  });
+  document.addEventListener("pointerdown", event => {
+    if (!formatMenu.contains(event.target) && !formatToggle.contains(event.target)) closeFormatMenu();
+  });
+  els.body.addEventListener("paste", event => {
+    event.preventDefault();
+    document.execCommand("insertText", false, event.clipboardData?.getData("text/plain") || "");
+  });
+  els.body.addEventListener("drop", event => event.preventDefault());
+  els.body.addEventListener("input", () => {
+    if (!els.body.textContent && !els.body.innerText.trim()) els.body.replaceChildren();
+    rememberNoteSelection();
+  });
   function openEditor(note = null) {
     editingId = note?.id || null; $("form-title").textContent = note ? "Notiz bearbeiten" : "Neue Notiz";
-    els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; els.body.value = note?.body || ""; fillCategories(note?.category || "");
+    els.title.value = note?.title || ""; els.sub.value = note?.sub || ""; if (note?.bodyHtml) els.body.innerHTML = cleanNoteHtml(note.bodyHtml);
+    else els.body.textContent = note?.body || "";
+    savedNoteRange = null; fillCategories(note?.category || "");
     setScreen("edit", "forward");
   }
   function goBack() {
@@ -275,7 +347,7 @@
     closeDeleteConfirm(); openedId = null; setScreen("list", "back"); renderList(); notify("Notiz gelöscht.");
   }
   els.form.addEventListener("submit", event => {
-    event.preventDefault(); const note = { title:els.title.value.trim(), sub:els.sub.value.trim(), body:els.body.value.trim(), category:els.category.value };
+    event.preventDefault(); const note = { title:els.title.value.trim(), sub:els.sub.value.trim(), body:els.body.innerText.trim(), bodyHtml:cleanNoteHtml(els.body.innerHTML), category:els.category.value };
     if (!note.title) { els.title.focus(); return; }
     const previousNotes = state.notes.map(item => ({ ...item }));
     const previousTopics = [...state.topics];
@@ -306,6 +378,7 @@
   window.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
     if (!$ ("delete-confirm").hidden) { deleteButtonFocus(); closeDeleteConfirm(); }
+    else if (!$("format-menu").hidden) closeFormatMenu();
     else if (searchOpen) closeSearch();
     else if (app.dataset.screen === "list" && view === "topics" && selectedTopic) { selectedTopic = ""; renderList("back"); }
     else goBack();

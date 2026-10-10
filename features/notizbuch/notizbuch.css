@@ -125,3 +125,17 @@ button.nb-topic-title { align-items:center; }
 /* Edit screen (Notizbuch v21): grey round × left of the save tick replaces "< Zurück" — same as Zurück: back without saving */
 .nb-form-buttons { flex:0 0 auto; display:flex; gap:10px; }
 .nb-save-tick.nb-cancel-x { color:var(--muted); }
+
+/* Aa sits in the existing label line; its larger hit area does not affect layout. */
+.nb-note-field { position:relative; }
+.nb-note-field > span { padding-right:38px; }
+.nb-format-toggle { position:absolute; top:5px; right:7px; width:34px; height:25px; border:0; border-radius:6px; padding:0; background:transparent; color:var(--muted); font:500 13px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+.nb-format-toggle::before { content:""; position:absolute; inset:-5px 0; }
+.nb-format-toggle[aria-expanded="true"] { color:var(--text); background:color-mix(in srgb,var(--muted) 10%,transparent); }
+.nb-format-menu { position:absolute; top:32px; right:8px; z-index:4; display:flex; gap:2px; padding:4px; border:1px solid var(--hairline); border-radius:12px; background:var(--tile-surface); box-shadow:0 5px 18px #0002; }
+.nb-format-menu button { display:flex; align-items:center; gap:7px; min-height:38px; border:0; border-radius:8px; padding:0 10px; background:transparent; color:var(--text); font:400 13px/1.2 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; cursor:pointer; touch-action:manipulation; }
+.nb-format-menu button[aria-pressed="true"] { background:color-mix(in srgb,var(--mint) 15%,transparent); color:var(--mint); }
+.nb-note-editor { min-height:156.8px; outline:0; color:var(--text); font:400 16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif; white-space:pre-wrap; overflow-wrap:anywhere; }
+.nb-note-editor:empty::before { content:attr(data-placeholder); color:var(--muted); pointer-events:none; }
+.nb-note-editor p,.nb-detail-body p { margin:0; }
+.nb-format-toggle:focus-visible,.nb-format-menu button:focus-visible { outline:2px solid var(--mint); outline-offset:1px; }
