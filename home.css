@@ -11,6 +11,7 @@
   --muted: #8f8f94;
   --mint: #5bc8a4;
   --error: #ff7770; /* palette red: "needs your attention" outside the exercises */
+  --reader-selection-yellow: #e9bc45; /* temporary word and dictionary-form selection in Bibliothek */
 
   /* text roles */
   --secondary-text: #c8c7c4;
@@ -2592,10 +2593,6 @@ html.home-wide-layout body {
   --tile-gap: 12px;
   width: 100%;
   margin: 0;
-}
-.home-wide-layout .page-dots,
-.home-wide-layout .rail-arrow {
-  display: none !important; /* one page of tiles: no pager, no empty row under the tiles */
 }
 .home-wide-layout .today-bottom {
   width: 100%;
