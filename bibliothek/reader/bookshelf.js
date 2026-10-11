@@ -14,7 +14,8 @@
       let selected=Math.max(0,books.findIndex(book=>book.id===selectedId));
       selectedId=books[selected].id;
       const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:root.clientWidth<600?28:56,tilt:0,enlarge:.04,forward:20,duration:520};
-      const palette=['#eeeae0','#b9cad8','#ee744f','#243c50','#d7df99'];
+      const palette=['#e6e4dc','#3c4140','#d5d4ce','#aab4b6','#565d60'];
+      const paletteInk=['#283331','#eeeae0','#293331','#24332f','#efede5'];
       const hashes=books.map(b=>hash(b.id));
       // Balance the palette across this shelf and avoid identical adjacent generated covers.
       const counts=palette.map(()=>0);let previousColor=-1;
@@ -61,13 +62,24 @@
         const started=!b.completed&&Boolean(b.readingStarted||Number(b.position)>0||Number(b.chapterIndex)>0);
         const el=document.createElement('button');el.type='button';el.className='book';el.setAttribute('aria-label',b.title+(started?', begonnen':''));
         const color=colors[i];
-        el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',color===3?'#f2efe5':'#24302e');
+        el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',paletteInk[color]);
         el.style.setProperty('--thickness',thicknesses[i]+'px');el.style.setProperty('--half-thickness',thicknesses[i]/2+'px');
-        el.dataset.art=['plain','round','slash'][hashes[i]%3];el.dataset.long=String(b.title.length>22);el.dataset.mark=['bars','ring','diamond','dot'][hashes[i]%4];
+        const designs=b.title.length<=24?['letter','title','orbits','frame']:['letter','orbits','frame'];
+        el.dataset.coverDesign=designs[hashes[i]%designs.length];
+        const coverFont=b.title.length>60?17:b.title.length>22?19:el.dataset.coverDesign==='title'?33:25;
+        // Keep whole words intact where possible, including within the inset frame.
+        titleProbe.style.whiteSpace='nowrap';titleProbe.style.width='max-content';titleProbe.style.font=`400 ${coverFont}px Georgia`;
+        let widestWord=0;
+        for(const word of b.title.split(/\s+/)){titleProbe.textContent=word;widestWord=Math.max(widestWord,titleProbe.offsetWidth);}
+        titleProbe.style.whiteSpace='normal';
+        const coverSpace=170-(el.dataset.coverDesign==='frame'?45:33);
+        el.style.setProperty('--cover-title-size',Math.max(14,Math.min(coverFont,coverFont*coverSpace/Math.max(1,widestWord)))+'px');
+        el.dataset.long=String(b.title.length>22);el.dataset.extraLong=String(b.title.length>60);el.dataset.mark=['bars','ring','diamond','dot'][hashes[i]%4];
         el.dataset.spine=b.title.length<10?'short':thicknesses[i]>40?'wide':hashes[i]%2?'serif':'regular';
-        el.innerHTML='<div class="volume"><div class="spine"><div class="spine-mark" aria-hidden="true"></div><span class="spine-title"></span></div><div class="page-edge" aria-hidden="true"><span></span><span></span><span></span></div><div class="front"><div class="cover-title"></div><div class="ornament" aria-hidden="true"></div><div class="author"></div></div></div>';
+        el.innerHTML='<div class="volume"><div class="spine"><div class="spine-mark" aria-hidden="true"></div><span class="spine-title"></span></div><div class="page-edge" aria-hidden="true"><span></span><span></span><span></span></div><div class="front"><div class="cover-title"></div><div class="cover-art" aria-hidden="true"><span class="cover-initial"></span><span class="cover-orbit"></span><span class="cover-orbit secondary"></span><span class="cover-sphere"></span><span class="cover-sphere small"></span></div><div class="author"></div></div></div>';
         el.querySelector('.spine-title').textContent=b.title;el.querySelector('.cover-title').textContent=b.title;
         el.querySelector('.author').textContent=b.author||'';
+        el.querySelector('.cover-initial').textContent=Array.from(b.title.trim())[0]?.toLocaleUpperCase('de')||'A';
         if(started){
           el.style.setProperty('--bookmark-angle',(hashes[i]%2?7:-6)+'deg');
           const ribbon=document.createElement('span');ribbon.className='reading-ribbon';ribbon.setAttribute('aria-hidden','true');
@@ -98,7 +110,7 @@
               }
             }catch(_){/* Keep the palette fallback if the cover cannot be sampled. */}
           });
-          listen(image,'error',()=>{image.remove();el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',color===3?'#f2efe5':'#24302e');});el.querySelector('.front').append(image);
+          listen(image,'error',()=>{image.remove();el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',paletteInk[color]);});el.querySelector('.front').append(image);
         }
         listen(el,'click',()=>{if(dragged||performance.now()<suppressClickUntil)return;if(i===selected&&motion===null&&settleTimer===null)onOpen(b);else choose(i);});
         stage.append(el);return el;

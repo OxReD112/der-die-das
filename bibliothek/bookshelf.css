@@ -8,8 +8,6 @@ body.library-screen .reader .library-bookshelf .book { position:absolute; top:58
 .library-bookshelf .spine span { writing-mode:vertical-rl; font:14px Georgia,serif; letter-spacing:.2px; white-space:nowrap; max-height:220px; overflow:hidden; font-family:Arial,sans-serif; font-size:13px; }
 .library-bookshelf .author { font-size:10px; text-transform:none; letter-spacing:0; order:2; margin-top:auto; font:500 11px/1.35 Arial,sans-serif; max-width:120px; }
 .library-bookshelf .cover-title { font:500 calc(28px * var(--book-scale))/1.04 Arial,sans-serif; margin:0; order:0; letter-spacing:calc(-1.2px * var(--book-scale)); }
-.library-bookshelf .ornament { width:calc(140px * var(--book-scale)); height:calc(70px * var(--book-scale)); border:0; border-radius:0; margin:calc(24px * var(--book-scale)) -4px calc(16px * var(--book-scale)); position:relative; order:1; background:var(--cover-ink); transform:rotate(-9deg); opacity:1; }
-.library-bookshelf .ornament::before { content:""; position:absolute; inset:9px; border:1px solid #f5efdc70; transform:rotate(45deg); display:none; }
 .library-bookshelf .caption { text-align:center; padding:12px 16px 0; min-height:96px; }
 .library-bookshelf h2 { margin:0 0 9px; font:600 23px/1.2 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; overflow-wrap:anywhere; }
 .library-bookshelf .caption-author { color:var(--secondary-text); font-size:14px; line-height:1.4; overflow-wrap:anywhere; margin-top:6px; }
@@ -18,11 +16,7 @@ body.library-screen .reader .library-bookshelf .book { position:absolute; top:58
 .library-bookshelf .arrow { width:44px; height:44px; border:0; border-radius:0; background:transparent; color:var(--ink); font-size:22px; cursor:pointer; }
 .library-bookshelf .arrow:disabled { opacity:.3; }
 .library-bookshelf .count { color:var(--quiet); font-size:13px; min-width:45px; text-align:center; font-variant-numeric:tabular-nums; }
-.library-bookshelf .book[data-long="true"] .cover-title { font-size:calc(23px * var(--book-scale)); }
 .library-bookshelf .cover-title, .library-bookshelf .author { position:relative; z-index:2; }
-.library-bookshelf .ornament::after { content:""; position:absolute; width:calc(66px * var(--book-scale)); height:calc(66px * var(--book-scale)); border-radius:50%; background:var(--cover); left:calc(36px * var(--book-scale)); top:2px; }
-.library-bookshelf .book[data-art="round"] .ornament { transform:rotate(9deg); border-radius:50% 0 0 50%; }
-.library-bookshelf .book[data-art="slash"] .ornament { height:calc(48px * var(--book-scale)); transform:rotate(-30deg); margin-top:calc(32px * var(--book-scale)); }
 .library-bookshelf .front::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; z-index:3; background:color-mix(in srgb,var(--cover-ink) 13%,var(--cover)); border:0; }
 .library-bookshelf .spine::before, .library-bookshelf .spine::after { content:""; position:absolute; left:4px; right:4px; height:1px; background:var(--cover-ink); opacity:.25; display:none; }
 .library-bookshelf .spine::before { top:14px; }
@@ -41,7 +35,6 @@ body.library-screen .reader .library-bookshelf .book { position:absolute; top:58
 .library-bookshelf .book[data-spine="short"] .spine-title { font:400 23px Georgia,serif; top:49px; max-height:120px; }
 .library-bookshelf .book[data-spine="serif"] .spine-title { font-family:Georgia,serif; font-size:15px; }
 .library-bookshelf .book[data-spine="wide"] .spine-title { writing-mode:horizontal-tb; width:calc(180px * var(--book-scale)); max-height:none; top:50%; left:50%; transform:translate(-50%,-50%) rotate(90deg); white-space:normal; font:500 max(11px, calc(15px * var(--book-scale)))/1.18 Arial,sans-serif; text-align:left; }
-.library-bookshelf .book[data-spine="short"] .cover-title { font-size:calc(34px * var(--book-scale)); }
 .library-bookshelf { color:var(--text); --ink:var(--text); --quiet:var(--muted); --line:var(--hairline); }
 .library-bookshelf * { box-sizing:border-box; }
 body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:none; filter:none; }
@@ -80,3 +73,39 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
  }
  .library-bookshelf .spine .spine-mark { top:14px; width:8px; height:8px; }
 }
+
+/* Generated editions: silver palette, fine orbital graphics and four stable layouts. */
+.library-bookshelf .front:not(:has(.cover-image)) {
+ background:linear-gradient(115deg,color-mix(in srgb,var(--cover) 96%,white),var(--cover) 60%,color-mix(in srgb,var(--cover) 96%,black));
+}
+.library-bookshelf .front .cover-title {
+ position:absolute; top:calc(23px * var(--book-scale)); left:calc(18px * var(--book-scale)); right:calc(15px * var(--book-scale));
+ font:400 calc(var(--cover-title-size) * var(--book-scale))/1.08 Georgia,serif; letter-spacing:calc(-.5px * var(--book-scale)); overflow-wrap:anywhere;
+}
+.library-bookshelf .front .author {
+ position:absolute; left:calc(18px * var(--book-scale)); right:calc(15px * var(--book-scale)); bottom:calc(17px * var(--book-scale));
+ max-width:none; margin:0; font:400 calc(10px * var(--book-scale))/1.3 Arial,sans-serif; overflow-wrap:anywhere;
+}
+.library-bookshelf .cover-art { position:absolute; left:calc(21px * var(--book-scale)); right:calc(12px * var(--book-scale)); bottom:calc(42px * var(--book-scale)); height:calc(95px * var(--book-scale)); color:var(--cover-ink); }
+.library-bookshelf .cover-initial { position:absolute; inset:calc(-8px * var(--book-scale)) 0 0; display:grid; place-items:center; font:400 calc(90px * var(--book-scale))/1 Georgia,serif; }
+.library-bookshelf .cover-orbit { position:absolute; left:calc(-6px * var(--book-scale)); right:calc(-4px * var(--book-scale)); top:36%; height:39%; border:1px solid currentColor; border-radius:50%; transform:rotate(-26deg); opacity:.45; }
+.library-bookshelf .cover-orbit.secondary { top:17%; left:10%; right:10%; height:68%; transform:rotate(28deg); opacity:.22; }
+.library-bookshelf .cover-sphere { position:absolute; width:calc(10px * var(--book-scale)); height:calc(10px * var(--book-scale)); border-radius:50%; background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--cover-ink) 12%,white),var(--cover-ink) 80%); top:22%; right:0; }
+.library-bookshelf .cover-sphere.small { width:calc(5px * var(--book-scale)); height:calc(5px * var(--book-scale)); top:84%; left:3%; }
+.library-bookshelf .book[data-cover-design="title"] .cover-title { top:calc(38px * var(--book-scale)); }
+.library-bookshelf .book[data-cover-design="title"] .cover-initial { display:none; }
+.library-bookshelf .book[data-cover-design="title"] .cover-art { height:calc(50px * var(--book-scale)); }
+.library-bookshelf .book[data-cover-design="title"] .cover-orbit.secondary { display:none; }
+.library-bookshelf .book[data-cover-design="orbits"] .cover-initial { display:none; }
+.library-bookshelf .book[data-cover-design="orbits"] .cover-orbit { height:63%; top:20%; transform:rotate(-32deg); }
+.library-bookshelf .book[data-cover-design="orbits"] .cover-orbit.secondary { height:95%; top:0; transform:rotate(35deg); }
+.library-bookshelf .book[data-cover-design="orbits"] .cover-sphere { width:calc(28px * var(--book-scale)); height:calc(28px * var(--book-scale)); top:30%; right:24%; }
+.library-bookshelf .book[data-cover-design="orbits"] .cover-sphere.small { width:calc(12px * var(--book-scale)); height:calc(12px * var(--book-scale)); top:72%; left:15%; }
+.library-bookshelf .book[data-cover-design="frame"] .front:not(:has(.cover-image))::after { content:""; position:absolute; inset:calc(12px * var(--book-scale)); border:1px solid color-mix(in srgb,var(--cover-ink) 28%,transparent); pointer-events:none; }
+.library-bookshelf .book[data-cover-design="frame"] .cover-title { top:calc(36px * var(--book-scale)); left:calc(23px * var(--book-scale)); right:calc(22px * var(--book-scale)); }
+.library-bookshelf .book[data-cover-design="frame"] .author { left:calc(23px * var(--book-scale)); bottom:calc(24px * var(--book-scale)); }
+.library-bookshelf .book[data-cover-design="frame"] .cover-initial,.library-bookshelf .book[data-cover-design="frame"] .cover-orbit.secondary { display:none; }
+.library-bookshelf .book[data-cover-design="frame"] .cover-art { left:calc(27px * var(--book-scale)); right:calc(22px * var(--book-scale)); height:calc(45px * var(--book-scale)); bottom:calc(53px * var(--book-scale)); }
+.library-bookshelf .book[data-extra-long="true"] .cover-art { height:calc(60px * var(--book-scale)); }
+.library-bookshelf .book[data-extra-long="true"] .cover-initial { font-size:calc(55px * var(--book-scale)); }
+.library-bookshelf .book[data-extra-long="true"][data-cover-design="frame"] .cover-art { height:calc(30px * var(--book-scale)); }
