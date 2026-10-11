@@ -72,7 +72,7 @@
         image.src = url;
       });
       if (!image.naturalWidth || !image.naturalHeight) return null;
-      const scale = Math.min(1, 160 / image.naturalWidth, 240 / image.naturalHeight);
+      const scale = Math.min(1, 800 / image.naturalWidth, 1200 / image.naturalHeight);
       const canvas = document.createElement("canvas");
       canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
       canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
@@ -80,8 +80,15 @@
       context.fillStyle = "#fff";
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      const result = canvas.toDataURL("image/jpeg", .8);
-      return result.length <= 100000 ? result : null;
+      let result = canvas.toDataURL("image/jpeg", .92);
+      // Keep detailed artwork within a bounded storage budget; noisy covers can be larger.
+      while(result.length>800000 && canvas.width>320){
+        const smaller=document.createElement("canvas");smaller.width=Math.round(canvas.width*.8);smaller.height=Math.round(canvas.height*.8);
+        smaller.getContext("2d").drawImage(canvas,0,0,smaller.width,smaller.height);
+        canvas.width=smaller.width;canvas.height=smaller.height;context.drawImage(smaller,0,0);
+        result=canvas.toDataURL("image/jpeg",.9);
+      }
+      return result.length<=800000?{data:result,aspectRatio:image.naturalWidth/image.naturalHeight}:null;
     } finally { URL.revokeObjectURL(url); }
   }
   registerParser("epub", async file => {
@@ -123,7 +130,7 @@
     }
     if (encrypted.has(packagePath)) fail("This EPUB is DRM-protected. Choose a DRM-free book.");
     // Cover artwork is optional; never fail a readable book because of its cover.
-    let coverThumbnail = null;
+    let coverThumbnail = null, coverAspectRatio = null;
     try {
       const metadata = elements(pkg, "metadata")[0];
       const coverId = metadata && elements(metadata, "meta").find(node => node.getAttribute("name") === "cover")?.getAttribute("content");
@@ -150,7 +157,7 @@
         const entry = zip.file(coverPath);
         if (entry && (entry._data?.uncompressedSize || 0) <= 10 * 1024 * 1024) {
           const bytes = await entry.async("uint8array");
-          if (bytes.length <= 10 * 1024 * 1024) coverThumbnail = await thumbnail(bytes, coverType);
+          if (bytes.length <= 10 * 1024 * 1024) {const cover=await thumbnail(bytes, coverType);if(cover){coverThumbnail=cover.data;coverAspectRatio=cover.aspectRatio;}}
         }
       }
     } catch (_) { /* Keep the standard cover when artwork is missing or damaged. */ }
@@ -235,6 +242,6 @@
     });
     const metadata = elements(pkg, "metadata")[0];
     const author = metadataAuthor(metadata);
-    return { ...(author ? { author } : {}), ...(coverThumbnail ? { coverThumbnail } : {}), title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
+    return { ...(author ? { author } : {}), ...(coverThumbnail ? { coverThumbnail, coverAspectRatio } : {}), title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
   });
 })();

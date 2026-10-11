@@ -1,5 +1,5 @@
 /* Book shelf: isolated from the list and reader styles. */
-.library-bookshelf .shelf-stage { height:340px; position:relative; overflow:hidden; touch-action:pan-y; user-select:none; }
+.library-bookshelf .shelf-stage { height:340px; position:relative; overflow:hidden; touch-action:pan-y; user-select:none; isolation:isolate; }
 .library-bookshelf .shelf-stage::after { content:""; position:absolute; height:1px; background:var(--line); bottom:24px; left:6%; right:6%; }
 body.library-screen .reader .library-bookshelf .book { position:absolute; top:58px; left:50%; width:170px; height:250px; padding:0; background:none; border:0; perspective:1200px; perspective-origin:50% 100%; transform-style:preserve-3d; transition:none; color:var(--cover-ink); outline-offset:8px; transform-origin:50% 100%; cursor:pointer; }
 .library-bookshelf .volume { width:100%; height:100%; position:relative; transform-style:preserve-3d; transform-origin:50% 100%; transform:rotateY(90deg); transition:none; }
@@ -48,7 +48,8 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
 .library-bookshelf .caption-actions { display:flex; justify-content:center; align-items:center; gap:12px; margin-top:10px; }
 .library-bookshelf .shelf-title { border:0; background:transparent; color:var(--text); font:inherit; letter-spacing:inherit; cursor:pointer; padding:0; overflow-wrap:anywhere; max-width:100%; }
 .library-bookshelf .shelf-title:focus-visible { outline:2px solid var(--mint); outline-offset:4px; }
-.library-bookshelf .cover-image { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--cover); }
+.library-bookshelf .cover-image { position:absolute; inset:0; width:100%; height:100%; object-fit:fill; background:transparent; }
+.library-bookshelf .front:has(.cover-image) { border:0; background:transparent; }
 .library-bookshelf .front:has(.cover-image) > :not(.cover-image) { visibility:hidden; }
 .library-bookshelf .front:has(.cover-image)::before { background:rgba(0,0,0,.12); }
 .library-view-toggle { position:absolute; right:0; bottom:calc(env(safe-area-inset-bottom) + 136px); z-index:4; width:44px; height:44px; border:0; background:var(--bg); color:var(--muted); cursor:pointer; font:22px/1 sans-serif; }
@@ -58,3 +59,8 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
  .library-bookshelf h2 { font-size:21px; }
  .library-bookshelf .caption { min-height:112px; }
 }
+
+/* A fabric ribbon belongs to the rotating book, outside the clipped cover image. */
+.library-bookshelf .reading-ribbon { position:absolute; right:calc(18px * var(--book-scale)); top:calc(-10px * var(--book-scale)); width:calc(9px * var(--book-scale)); height:calc(34px * var(--book-scale)); background:#b65b46; clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%); transform:translateZ(calc(var(--half-thickness) + 1px)); backface-visibility:hidden; pointer-events:none; }
+.library-bookshelf .reading-ribbon-tip { position:absolute; left:calc(-1 * var(--half-thickness)); top:calc(-8px * var(--book-scale)); width:var(--thickness); height:calc(9px * var(--book-scale)); transform:rotateY(-90deg); backface-visibility:hidden; pointer-events:none; }
+.library-bookshelf .reading-ribbon-tip::before { content:""; position:absolute; left:50%; width:calc(7px * var(--book-scale)); height:100%; transform:translateX(-50%); background:#b65b46; border-radius:1px 1px 0 0; }

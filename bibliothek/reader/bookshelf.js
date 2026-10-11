@@ -16,15 +16,29 @@
       const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:56,tilt:0,enlarge:.04,forward:20,duration:520};
       const palette=['#eeeae0','#b9cad8','#ee744f','#243c50','#d7df99'];
       const hashes=books.map(b=>hash(b.id));
-      const thicknesses=books.map(b=>Math.round(14+Math.min(b.wordCount||0,140000)/140000*36));
+      // Balance the palette across this shelf and avoid identical adjacent generated covers.
+      const counts=palette.map(()=>0);let previousColor=-1;
+      const colors=hashes.map(h=>{
+        const available=counts.map((count,index)=>({count,index})).filter(c=>c.index!==previousColor);
+        const least=Math.min(...available.map(c=>c.count));
+        const choices=available.filter(c=>c.count===least);
+        const color=choices[h%choices.length].index;counts[color]++;previousColor=color;return color;
+      });
+      const thicknesses=books.map(b=>Math.round(22+Math.min(b.wordCount||0,140000)/140000*28));
       const heightFactors=hashes.map(h=>.88+(h%8)*.03);
+      const coverRatios=books.map(b=>Number.isFinite(b.coverAspectRatio)&&b.coverAspectRatio>0?b.coverAspectRatio:.68);
+      function size(i){
+        const standardHeight=settings.height*heightFactors[i],ratio=coverRatios[i];
+        const height=Math.min(standardHeight*.68/ratio,settings.height*1.09);
+        return {height,width:height*ratio};
+      }
       const leanAngles=hashes.map(h=>h%5===0?-3:h%7===0?2.5:0);
-      const closedWidth=i=>thicknesses[i]+settings.height*heightFactors[i]*Math.abs(Math.sin(leanAngles[i]*Math.PI/180));
+      const closedWidth=i=>thicknesses[i]+size(i).height*Math.abs(Math.sin(leanAngles[i]*Math.PI/180));
       let dragged=false, suppressClickUntil=0;
       const nodes=books.map((b,i)=>{
         const started=!b.completed&&Boolean(b.readingStarted||Number(b.position)>0||Number(b.chapterIndex)>0);
         const el=document.createElement('button');el.type='button';el.className='book';el.setAttribute('aria-label',b.title+(started?', begonnen':''));
-        const color=hashes[i]%palette.length;
+        const color=colors[i];
         el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',color===3?'#f2efe5':'#24302e');
         el.style.setProperty('--thickness',thicknesses[i]+'px');el.style.setProperty('--half-thickness',thicknesses[i]/2+'px');
         el.dataset.art=['plain','round','slash'][hashes[i]%3];el.dataset.long=String(b.title.length>22);el.dataset.mark=['bars','ring','diamond','dot'][hashes[i]%4];
@@ -39,14 +53,37 @@
         }
         if(/^data:image\/(webp|png|jpeg);base64,/.test(b.coverThumbnail||'')){
           const image=document.createElement('img');image.className='cover-image';image.alt='';image.draggable=false;image.src=b.coverThumbnail;
-          listen(image,'error',()=>image.remove());el.querySelector('.front').append(image);
+          listen(image,'load',()=>{
+            // Sample a small image: edge pixels carry more of the cover's background color.
+            try{
+              coverRatios[i]=image.naturalWidth/image.naturalHeight;
+              if(motion===null&&settleTimer===null)positions=restingPositions(selected);render();
+              const canvas=document.createElement('canvas');canvas.width=canvas.height=32;
+              const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(image,0,0,32,32);
+              const pixels=ctx.getImageData(0,0,32,32).data,bins=new Map();
+              for(let n=0;n<pixels.length;n+=4){
+                if(pixels[n+3]<128)continue;
+                const r=pixels[n],g=pixels[n+1],b=pixels[n+2],x=(n/4)%32,y=Math.floor(n/128);
+                const weight=x<6||x>25||y<4||y>27?3:1;
+                const key=[r>>5,g>>5,b>>5].join(',');const bin=bins.get(key)||{weight:0,r:0,g:0,b:0};
+                bin.weight+=weight;bin.r+=r*weight;bin.g+=g*weight;bin.b+=b*weight;bins.set(key,bin);
+              }
+              const dominant=[...bins.values()].sort((a,b)=>b.weight-a.weight)[0];
+              if(dominant){
+                const rgb=['r','g','b'].map(c=>Math.round(dominant[c]/dominant.weight));
+                el.style.setProperty('--cover',`rgb(${rgb.join(',')})`);
+                el.style.setProperty('--cover-ink',rgb[0]*.299+rgb[1]*.587+rgb[2]*.114>150?'#24302e':'#f2efe5');
+              }
+            }catch(_){/* Keep the palette fallback if the cover cannot be sampled. */}
+          });
+          listen(image,'error',()=>{image.remove();el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',color===3?'#f2efe5':'#24302e');});el.querySelector('.front').append(image);
         }
         listen(el,'click',()=>{if(dragged||performance.now()<suppressClickUntil)return;if(i===selected&&motion===null&&settleTimer===null)onOpen(b);else choose(i);});
         stage.append(el);return el;
       });
       let weights=books.map((_,i)=>i===selected?1:0);
     function restingPositions(index){
-      const width=settings.height*heightFactors[index]*.68*(1+settings.enlarge)*1200/(1200-settings.forward);
+      const width=size(index).width*(1+settings.enlarge)*1200/(1200-settings.forward);
       const result=books.map(()=>0);
       let edge=width/2+settings.centerGap;
       for(let i=index+1;i<books.length;i++){result[i]=edge+settings.gap+closedWidth(i)/2;edge=result[i]+closedWidth(i)/2;}
@@ -61,8 +98,7 @@
     function render(){
 
       const geometry=weights.map((weight,i)=>{
-        const height=settings.height*heightFactors[i];
-        const width=height*.68;
+        const {height,width}=size(i);
         const lean=leanAngles[i]*(1-weight);
         const angle=90*(1-weight);
         const scale=1+settings.enlarge*weight;
