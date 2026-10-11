@@ -4,6 +4,20 @@
   const fail = message => { throw new ImportError("epub", message); };
   const elements = (node, name) => [...node.getElementsByTagNameNS("*", name)];
   const clean = value => String(value || "").replace(/\s+/g, " ").trim();
+  function metadataAuthor(metadata) {
+    if (!metadata) return "";
+    const roles = elements(metadata, "meta").filter(node => node.getAttribute("property") === "role");
+    const creators = elements(metadata, "creator").map(node => {
+      const id = node.getAttribute("id");
+      const values = [node.getAttributeNS("http://www.idpf.org/2007/opf", "role") || node.getAttribute("opf:role") || "",
+        ...roles.filter(meta => id && meta.getAttribute("refines") === "#" + id).map(meta => meta.textContent)]
+        .map(value => clean(value).toLowerCase()).filter(Boolean);
+      return { name: clean(node.textContent), roles: values };
+    }).filter(person => person.name);
+    const authors = creators.filter(person => person.roles.includes("aut") || person.roles.includes("author"));
+    const chosen = authors.length ? authors : creators.filter(person => !person.roles.length);
+    return [...new Set(chosen.map(person => person.name))].join(", ");
+  }
   function xml(text) {
     const doc = new DOMParser().parseFromString(text, "application/xml");
     if (elements(doc, "parsererror").length) fail("This EPUB contains invalid XML or chapter markup.");
@@ -220,6 +234,7 @@
       }
     });
     const metadata = elements(pkg, "metadata")[0];
-    return { ...(coverThumbnail ? { coverThumbnail } : {}), title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
+    const author = metadataAuthor(metadata);
+    return { ...(author ? { author } : {}), ...(coverThumbnail ? { coverThumbnail } : {}), title: metadata ? clean(elements(metadata, "title")[0]?.textContent) : "", chapters, contents, content: chapters.map(chapter => chapter.paragraphs.join("\n\n")).join("\n\n") };
   });
 })();

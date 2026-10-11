@@ -183,6 +183,45 @@
     toastTimer = setTimeout(() => toast.hidden = true, duration);
   }
 
+  const shelfRoot=$("library-bookshelf"), viewToggle=$("library-view-toggle");
+  let libraryView=window.matchMedia('(max-width:600px)').matches?'list':'shelf';
+  try { const saved=localStorage.getItem('deutschLibraryViewV1');if(saved==='list'||saved==='shelf')libraryView=saved; } catch (_) {}
+  function openLibraryBook(book) {
+    if(book.missingContent){reloadBookId=book.id;$file.click();}
+    else {bookshelf.pause();openBook(book);}
+  }
+  function requestBookDelete(book,trigger) {
+    pendingDelete=book;deleteTrigger=trigger;
+    $("delete-confirm-title").textContent=`„${book.title}“ löschen?`;
+    $("delete-confirm").hidden=false;$library.inert=true;$("library-actions").inert=true;
+    $("reader").querySelector(".reader-header").inert=true;$("cancel-delete").focus({preventScroll:true});
+  }
+  function describeLibraryBook(book) {
+    if(book.missingContent)return 'Reload file · '+String(book.format||'txt').toUpperCase();
+    if(book.completed)return 'Gelesen';
+    const started=book.readingStarted||Number(book.position)>0||Number(book.chapterIndex)>0;
+    const resume=hasChapters(book)&&started?activeEntry({...book,chapterIndex:book.chapterIndex||0,position:book.position||0}):null;
+    if(resume)return `Weiterlesen · ${resume.title}`;
+    if(started)return 'Weiterlesen';
+    const words=Number(book.wordCount||0);
+    return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
+  }
+  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook});
+  function applyLibraryView() {
+    const populated=$bookList.children.length>0;
+    shelfRoot.hidden=!populated||libraryView!=='shelf';$bookList.hidden=libraryView==='shelf';
+    viewToggle.hidden=!populated;
+    viewToggle.innerHTML=libraryView==='shelf'
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/><path d="M9 6h12M9 12h12M9 18h12"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="5" height="14" rx=".6" transform="rotate(13 4.5 22)"/><rect x="9" y="5" width="5" height="17" rx=".6" transform="rotate(8 11.5 22)"/><rect x="17" y="3" width="5" height="19" rx=".6"/></svg>';
+    viewToggle.setAttribute('aria-label',libraryView==='shelf'?'Switch to list view':'Switch to bookshelf view');
+  }
+  viewToggle.addEventListener('click',()=>{
+    libraryView=libraryView==='shelf'?'list':'shelf';
+    try{localStorage.setItem('deutschLibraryViewV1',libraryView);}catch(_){}
+    applyLibraryView();if(libraryView==='shelf')bookshelf.resume();else bookshelf.pause();
+  });
+
   function coverInitials(title) {
     const words = String(title || "").normalize("NFC").match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}]*/gu) || [];
     return words.slice(0, 2).map((word, index) => index === 0
@@ -194,12 +233,13 @@
     $bookList.replaceChildren();
     $("empty-library").hidden = books.length > 0;
     books.forEach(book => {
+      book.wordCount ??= (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
       const row = document.createElement("div");
       row.className = "book-row";
       const button = document.createElement("button");
       button.className = "book-open";
       button.type = "button";
-      button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
+      button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-author" hidden></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
       const hasSecondPage = book.missingContent || splitParagraphs(book.content).length > 1;
       const started = hasSecondPage && Boolean(book.readingStarted || Number(book.position) > 0 || Number(book.chapterIndex) > 0);
       const completed = started && Boolean(book.completed);
@@ -229,10 +269,10 @@
       button.querySelector(".book-icon").classList.toggle("is-completed", completed);
       button.setAttribute("aria-label", `${book.title}${completed ? ", finished" : started ? ", started" : ""}`);
       button.querySelector(".book-title").textContent = book.title;
-      const words = (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
+      const author=button.querySelector(".book-author");
+      author.textContent=book.author||"";author.hidden=!book.author;
       const fileFormat = String(book.format || "txt").toUpperCase();
-      const resume = hasChapters(book) && started ? activeEntry({ ...book, chapterIndex: book.chapterIndex || 0, position: book.position || 0 }) : null;
-      button.querySelector(".book-subtitle").textContent = completed ? "Gelesen" : resume ? `Weiterlesen · ${resume.title}` : `${words.toLocaleString("de-DE")} ${words === 1 ? "Wort" : "Wörter"} · ${fileFormat}`;
+      button.querySelector(".book-subtitle").textContent = describeLibraryBook(book);
       if(book.missingContent) {
         row.classList.add('is-missing');
         button.querySelector('.book-arrow').textContent = '↻';
@@ -240,28 +280,20 @@
         button.setAttribute('aria-label', `Reload file for “${book.title}”`);
         button.title = 'Reload the original file to continue reading';
       }
-      button.addEventListener("click", () => {
-        if(book.missingContent) { reloadBookId=book.id; $file.click(); }
-        else openBook(book);
-      });
+      button.addEventListener("click", () => openLibraryBook(book));
       const remove = document.createElement("button");
       remove.className = "book-delete";
       remove.type = "button";
       remove.setAttribute("aria-label", `„${book.title}“ löschen`);
       remove.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
-      remove.addEventListener("click", () => {
-        pendingDelete = book;
-        deleteTrigger = remove;
-        $("delete-confirm-title").textContent = `„${book.title}“ löschen?`;
-        $("delete-confirm").hidden = false;
-        $library.inert = true;
-        $("library-actions").inert = true;
-        $("reader").querySelector(".reader-header").inert = true;
-        $("cancel-delete").focus({ preventScroll:true });
-      });
+      remove.addEventListener("click", () => requestBookDelete(book,remove));
       row.append(button, remove);
       $bookList.append(row);
     });
+    applyLibraryView();
+    if(libraryView==='shelf')$library.scrollTop=0;
+    bookshelf.update(books);
+    if(libraryView!=='shelf')bookshelf.pause();
   }
   async function refreshBooks() {
     try {

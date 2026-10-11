@@ -22,7 +22,8 @@
       const closedWidth=i=>thicknesses[i]+settings.height*heightFactors[i]*Math.abs(Math.sin(leanAngles[i]*Math.PI/180));
       let dragged=false, suppressClickUntil=0;
       const nodes=books.map((b,i)=>{
-        const el=document.createElement('button');el.type='button';el.className='book';el.setAttribute('aria-label',b.title);
+        const started=!b.completed&&Boolean(b.readingStarted||Number(b.position)>0||Number(b.chapterIndex)>0);
+        const el=document.createElement('button');el.type='button';el.className='book';el.setAttribute('aria-label',b.title+(started?', begonnen':''));
         const color=hashes[i]%palette.length;
         el.style.setProperty('--cover',palette[color]);el.style.setProperty('--cover-ink',color===3?'#f2efe5':'#24302e');
         el.style.setProperty('--thickness',thicknesses[i]+'px');el.style.setProperty('--half-thickness',thicknesses[i]/2+'px');
@@ -31,6 +32,11 @@
         el.innerHTML='<div class="volume"><div class="spine"><div class="spine-mark" aria-hidden="true"></div><span class="spine-title"></span></div><div class="page-edge" aria-hidden="true"><span></span><span></span><span></span></div><div class="front"><div class="cover-title"></div><div class="ornament" aria-hidden="true"></div><div class="author"></div></div></div>';
         el.querySelector('.spine-title').textContent=b.title;el.querySelector('.cover-title').textContent=b.title;
         el.querySelector('.author').textContent=b.author||'';
+        if(started){
+          const ribbon=document.createElement('span');ribbon.className='reading-ribbon';ribbon.setAttribute('aria-hidden','true');
+          const tip=document.createElement('span');tip.className='reading-ribbon-tip';tip.setAttribute('aria-hidden','true');
+          el.querySelector('.volume').append(ribbon,tip);
+        }
         if(/^data:image\/(webp|png|jpeg);base64,/.test(b.coverThumbnail||'')){
           const image=document.createElement('img');image.className='cover-image';image.alt='';image.draggable=false;image.src=b.coverThumbnail;
           listen(image,'error',()=>image.remove());el.querySelector('.front').append(image);
@@ -77,6 +83,7 @@
         volume.style.width=g.width+'px';volume.style.marginLeft=(g.footprint-g.width)/2+'px';
         volume.style.transform=`translateZ(${g.z}px) rotateX(${settings.tilt*g.weight}deg) rotateY(${g.angle}deg) scale(${g.scale})`;
         node.querySelector('.front').style.visibility=g.weight>.001?'visible':'hidden';
+        const ribbon=node.querySelector('.reading-ribbon');if(ribbon)ribbon.style.visibility=g.weight>.001?'visible':'hidden';
       });
       const book=books[selected];
       if(root.querySelector('.shelf-title').textContent!==book.title)root.querySelector('.shelf-title').textContent=book.title;

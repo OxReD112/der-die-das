@@ -33,6 +33,7 @@
     // Pre-release books have random IDs; migrating those records is intentionally out of scope.
     if (!/^sha256:[a-f0-9]{64}$/.test(book.id)) return;
     const state={id:book.id,title:book.title,name:book.name,format:book.format,createdAt:book.createdAt,updatedAt:book.updatedAt,wordCount:book.wordCount ?? (String(book.content || '').match(/[\p{L}\p{M}]+/gu)||[]).length,structureVersion:book.structureVersion || 1};
+    if(typeof book.author==='string' && book.author.trim())state.author=book.author.trim();
     for(const field of fields) if(book[field]!==undefined) state[field]=book[field];
     await access('states','readwrite',s=>s.put(state));
   }
@@ -64,6 +65,7 @@
     if(!data || !Array.isArray(data.states) || !Array.isArray(data.vocabulary) || !Array.isArray(data.selections)) throw new Error('Invalid reading backup.');
     const ids=new Set();
     for(const s of data.states){if(!/^sha256:[a-f0-9]{64}$/.test(s?.id) || typeof s.title!=='string' || ids.has(s.id))throw new Error('Invalid book identity.');ids.add(s.id);
+      if(s.author!==undefined&&typeof s.author!=='string')throw new Error('Invalid book author.');
       for(const key of ['position','tokenOffset','chapterIndex'])if(s[key]!==undefined&&(!Number.isInteger(s[key])||s[key]<0))throw new Error('Invalid reading position.');
       for(const key of ['chapterPositions','contentsPositions','contentsOffsets'])if(s[key]!==undefined&&(!s[key]||typeof s[key]!=='object'||Array.isArray(s[key])||!Object.values(s[key]).every(n=>Number.isInteger(n)&&n>=0)))throw new Error('Invalid chapter positions.');
       for(const key of ['readingStarted','completed'])if(s[key]!==undefined&&typeof s[key]!=='boolean')throw new Error('Invalid reading status.');
@@ -78,7 +80,7 @@
     return new Promise((resolve,reject)=>{
       const tx=db.transaction(['states','vocabulary','selections'],'readwrite');
       for(const name of ['states','vocabulary','selections'])tx.objectStore(name).clear();
-      for(const state of data.states){const clean={};for(const key of ['id','title','name','format','createdAt','updatedAt','wordCount','structureVersion',...fields])if(state[key]!==undefined)clean[key]=state[key];tx.objectStore('states').put(clean);}
+      for(const state of data.states){const clean={};for(const key of ['id','title','author','name','format','createdAt','updatedAt','wordCount','structureVersion',...fields])if(state[key]!==undefined)clean[key]=state[key];tx.objectStore('states').put(clean);}
       for(const record of data.vocabulary)tx.objectStore('vocabulary').put(record);
       for(const selection of data.selections)tx.objectStore('selections').put(selection.value,selection.key);
       tx.oncomplete=resolve;tx.onerror=tx.onabort=()=>reject(tx.error);
