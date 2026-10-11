@@ -62,9 +62,8 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
 
 /* A paper bookmark peeks out of the book and turns with it. */
 .library-screen .library.is-bookshelf { overflow:hidden; overscroll-behavior:none; touch-action:pinch-zoom; }
-.library-bookshelf .reading-ribbon { position:absolute; right:calc(18px * var(--book-scale)); top:calc(-22px * var(--book-scale)); width:calc(17px * var(--book-scale)); height:calc(27px * var(--book-scale)); background:#e9dcc1; border:1px solid #b5a88f; border-radius:1px; transform:translateZ(calc(var(--half-thickness) - 1px)) rotateZ(var(--bookmark-angle)); transform-origin:50% 100%; backface-visibility:hidden; pointer-events:none; }
-.library-bookshelf .reading-ribbon-tip { position:absolute; left:calc(-1 * var(--half-thickness)); top:calc(-19px * var(--book-scale)); width:var(--thickness); height:calc(21px * var(--book-scale)); transform:rotateY(-90deg); backface-visibility:hidden; pointer-events:none; }
-.library-bookshelf .reading-ribbon-tip::before { content:""; position:absolute; left:50%; width:calc(8px * var(--book-scale)); height:100%; transform:translateX(-50%) rotate(var(--bookmark-angle)); transform-origin:50% 100%; background:#e9dcc1; border:1px solid #b5a88f; border-radius:1px; }
+.library-bookshelf .reading-ribbon { position:absolute; right:calc(18px * var(--book-scale)); top:calc(-22px * var(--book-scale)); width:calc(17px * var(--book-scale)); height:calc(27px * var(--book-scale)); background:#e9dcc1; border:1px solid #b5a88f; border-radius:1px; transform:translateZ(0) rotateZ(var(--bookmark-angle)); transform-origin:50% 100%; transform-style:preserve-3d; pointer-events:none; }
+.library-bookshelf .reading-ribbon::after { content:""; position:absolute; top:-1px; right:-1px; width:1.5px; height:calc(100% + 2px); background:#b5a88f; transform:rotateY(90deg); transform-origin:50% 50%; }
 
 /* Mobile spines have a fixed text box: short-title display type must not spill out. */
 @media(max-width:600px) {

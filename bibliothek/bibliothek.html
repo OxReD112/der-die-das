@@ -15,8 +15,8 @@
     <title>Bibliothek · Deutsch.</title>
     <link rel="icon" href="../icon.webp" type="image/webp" />
     <link rel="stylesheet" href="../home.css?v=50" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261011-author-1" />
-    <link rel="stylesheet" href="bookshelf.css?v=20261011-paper-bookmark-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261011-library-controls-1" />
+    <link rel="stylesheet" href="bookshelf.css?v=20261011-library-controls-1" />
     <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1" />
     <link rel="stylesheet" href="reading-word-form.css?v=2" />
   </head>
@@ -61,27 +61,31 @@
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
         <div class="library-bookshelf" id="library-bookshelf" hidden></div>
         <div class="book-list" id="book-list"></div>
-        <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
         <div class="empty-library" id="empty-library">
           <div class="empty-mark" aria-hidden="true">Aa</div>
           <h2 lang="de">Dein Leseraum</h2>
           <p>Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
         </div>
-        <form class="paste-form" id="paste-form" hidden>
+        <dialog class="paste-dialog" id="paste-dialog" aria-labelledby="paste-dialog-title">
+          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button id="paste-close" type="button" aria-label="Close">×</button></div>
+        <form class="paste-form" id="paste-form">
           <label for="paste-title">Title</label>
           <input id="paste-title" maxlength="120" placeholder="My text" required />
           <label for="paste-content">German text</label>
           <textarea id="paste-content" rows="8" required placeholder="Paste a text to read…"></textarea>
           <button class="primary-action" type="submit">Save text</button>
         </form>
+        </dialog>
         <input id="book-file" type="file" accept=".txt,.epub,text/plain,application/epub+zip" hidden />
       </section>
 
-      <div id="library-actions" class="library-actions" aria-label="Add a book">
-        <button class="primary-action" id="add-book" type="button">Upload</button>
-        <button class="primary-action" id="paste-toggle" type="button" aria-expanded="false" aria-controls="paste-form">
-          Paste Text
-        </button>
+      <div id="library-actions" class="library-actions" aria-label="Library controls">
+        <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
+        <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu">+</button>
+        <div class="library-add-menu" id="library-add-menu" hidden>
+          <button id="add-book" type="button">Datei hochladen <small>EPUB · TXT</small></button>
+          <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog">Text einfügen</button>
+        </div>
       </div>
 
       <section class="reading-view" id="reading-view" hidden>
@@ -439,8 +443,8 @@
     <script src="reader/reader-text-settings.js?v=1"></script>
     <script src="reader/pronoun-reference.js?v=20261007-pronoun-popup-1"></script>
     <script src="reader/meaning-thanks.js?v=1"></script>
-    <script src="reader/bookshelf.js?v=20261011-paper-bookmark-1"></script>
-    <script src="reader/bibliothek.js?v=20261011-paper-bookmark-1"></script>
+    <script src="reader/bookshelf.js?v=20261011-library-controls-1"></script>
+    <script src="reader/bibliothek.js?v=20261011-library-controls-1"></script>
     <div class="version-mark" aria-hidden="true">v8</div>
   </body>
 </html>

@@ -2593,3 +2593,23 @@ body.library-screen .data-sources button:active:not(:disabled) {
   outline: 2px solid var(--text);
   outline-offset: 2px;
 }
+
+/* Library controls share the bottom row with the Home button supplied by the app shell. */
+.library-screen .library { padding-bottom:90px; }
+.library-screen .library-actions { bottom:calc(env(safe-area-inset-bottom) + 8px); height:52px; display:block; }
+.library-screen .library-actions .library-view-toggle { left:0; right:auto; bottom:4px; background:transparent; pointer-events:auto; }
+body.library-screen .reader .library-add-toggle { display:grid; place-items:center; width:52px; height:52px; padding:0; border:1px solid var(--hairline); border-radius:50%; background:var(--tile-surface); color:var(--text); font:300 32px/1 Arial,sans-serif; cursor:pointer; pointer-events:auto; }
+.library-actions .library-add-toggle { position:absolute; right:0; bottom:0; }
+.empty-library .library-add-toggle { margin-top:8px; }
+.library-add-toggle:focus-visible { outline:2px solid var(--mint); outline-offset:3px; }
+.library-add-menu { position:absolute; right:0; bottom:68px; z-index:5; width:220px; padding:6px; background:var(--tile-surface); border:1px solid var(--hairline); border-radius:16px; pointer-events:auto; }
+.empty-library .library-add-menu { position:relative; right:auto; bottom:auto; margin-top:12px; }
+body.library-screen .reader .library-add-menu button { display:block; width:100%; min-height:48px; padding:12px; text-align:left; border:0; background:transparent; color:var(--text); border-radius:10px; font:500 14px/1.35 -apple-system,BlinkMacSystemFont,sans-serif; }
+.library-add-menu button:hover { background:var(--bg); }
+.library-add-menu small { display:block; margin-top:3px; color:var(--muted); font-size:11px; }
+.paste-dialog { width:min(480px,calc(100% - 32px)); max-height:calc(100dvh - 40px); overflow:auto; padding:22px; border:1px solid var(--hairline); border-radius:20px; background:var(--bg); color:var(--text); }
+.paste-dialog::backdrop { background:rgba(0,0,0,.55); }
+.paste-dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.paste-dialog-heading h2 { margin:0; font-size:20px; }
+.paste-dialog-heading button { width:44px; height:44px; padding:0; font-size:26px; color:var(--muted); background:transparent; }
+.paste-dialog .paste-form { margin-top:14px; }

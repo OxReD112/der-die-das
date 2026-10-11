@@ -184,6 +184,16 @@
   }
 
   const shelfRoot=$("library-bookshelf"), viewToggle=$("library-view-toggle");
+  const addToggle=$("library-add-toggle"),addMenu=$("library-add-menu"),pasteDialog=$("paste-dialog");
+  function closeAddMenu(focus=false){addMenu.hidden=true;addToggle.setAttribute('aria-expanded','false');if(focus)addToggle.focus();}
+  addToggle.addEventListener('click',()=>{
+    const opening=addMenu.hidden;addMenu.hidden=!opening;addToggle.setAttribute('aria-expanded',String(opening));
+    if(opening)$("add-book").focus();
+  });
+  document.addEventListener('click',event=>{if(!addMenu.contains(event.target)&&!addToggle.contains(event.target))closeAddMenu();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!addMenu.hidden){event.preventDefault();closeAddMenu(true);}});
+  $("paste-close").addEventListener('click',()=>pasteDialog.close());
+  pasteDialog.addEventListener('close',()=>addToggle.focus());
   let libraryView=window.matchMedia('(max-width:600px)').matches?'list':'shelf';
   try { const saved=localStorage.getItem('deutschLibraryViewV1');if(saved==='list'||saved==='shelf')libraryView=saved; } catch (_) {}
   function openLibraryBook(book) {
@@ -209,6 +219,8 @@
   const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook});
   function applyLibraryView() {
     const populated=$bookList.children.length>0;
+    const addParent=populated?$("library-actions"):$("empty-library");
+    if(addToggle.parentElement!==addParent){closeAddMenu();addParent.append(addToggle,addMenu);}
     $library.classList.toggle('is-bookshelf',libraryView==='shelf');
     if(libraryView==='shelf')$library.scrollTop=0;
     shelfRoot.hidden=!populated||libraryView!=='shelf';$bookList.hidden=libraryView==='shelf';
@@ -344,7 +356,7 @@
       deleting = false;
       closeDeleteConfirm(false);
       await refreshBooks();
-      ($bookList.querySelector(".book-open") || $("add-book")).focus({ preventScroll:true });
+      ($bookList.querySelector(".book-open") || addToggle).focus({ preventScroll:true });
       showToast("Deleted from this device.");
     } catch (error) {
       deleting = false;
@@ -1279,7 +1291,7 @@
     openWordPopup(selectedWord, span.getBoundingClientRect());
   }
 
-  $("add-book").addEventListener("click", () => { reloadBookId=null; $file.click(); });
+  $("add-book").addEventListener("click", () => { closeAddMenu();reloadBookId=null; $file.click(); });
   $file.addEventListener("change", async () => {
     const file = $file.files?.[0];
     if (!file) return;
@@ -1293,10 +1305,7 @@
     } finally { $file.value = ""; reloadBookId=null; }
   });
   $("paste-toggle").addEventListener("click", () => {
-    const form = $("paste-form");
-    form.hidden = !form.hidden;
-    $("paste-toggle").setAttribute("aria-expanded", String(!form.hidden));
-    if (!form.hidden) $("paste-title").focus();
+    closeAddMenu();pasteDialog.showModal();$("paste-title").focus();
   });
   $("paste-form").addEventListener("submit", async event => {
     event.preventDefault();
@@ -1305,7 +1314,7 @@
     try {
       reloadBookId=null;
       await importBook(await window.BibliothekImport.fromText(title, content));
-      $("paste-form").reset(); $("paste-form").hidden = true; $("paste-toggle").setAttribute("aria-expanded", "false"); await refreshBooks(); showToast("Text saved on this device.");
+      $("paste-form").reset();pasteDialog.close(); await refreshBooks(); showToast("Text saved on this device.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
   $("back-library").addEventListener("click", async () => {
