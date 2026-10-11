@@ -58,6 +58,19 @@
   function refreshHighlights() {
     vocabularyHighlights.update(currentBook).catch(error => console.warn("Vocabulary highlights unavailable", error));
   }
+  // Text settings re-flow the pages around the place where the reader was when the panel opened,
+  // so trying several sizes in a row does not drift backwards through the text.
+  let textSettingsAnchor = null;
+  window.BibliothekTextSettings.create({
+    target: $("page-flow"), dialog: $("text-settings"), toggle: $("text-settings-toggle"),
+    onBeforeOpen: () => { closePopups(); textSettingsAnchor = pagination.location; },
+    onChange: () => {
+      if ($reading.hidden || !currentBook) return;
+      closePopups();
+      pagination.layout(textSettingsAnchor || pagination.location);
+    }
+  });
+  $("text-settings").addEventListener("close", () => { textSettingsAnchor = null; });
 
   function vocabularyRange() {
     if (!hasChapters(currentBook)) return null;
@@ -234,12 +247,12 @@
       const remove = document.createElement("button");
       remove.className = "book-delete";
       remove.type = "button";
-      remove.setAttribute("aria-label", `Delete “${book.title}”`);
+      remove.setAttribute("aria-label", `„${book.title}“ löschen`);
       remove.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
       remove.addEventListener("click", () => {
         pendingDelete = book;
         deleteTrigger = remove;
-        $("delete-confirm-title").textContent = `Delete “${book.title}”?`;
+        $("delete-confirm-title").textContent = `„${book.title}“ löschen?`;
         $("delete-confirm").hidden = false;
         $library.inert = true;
         $("library-actions").inert = true;
@@ -490,7 +503,7 @@
   }
   function wrapParagraph(paragraph) {
     const fragment = document.createDocumentFragment();
-    const tokens = paragraph.match(/[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)*|[^\p{L}\p{M}]+/gu) || [paragraph];
+    const tokens = window.BibliothekLemmaResolver.readerSegments(paragraph);
     let tokenOffset = 0;
     tokens.forEach(token => {
       if (/^[\p{L}\p{M}]/u.test(token)) {
@@ -577,13 +590,26 @@
       : candidate.usage.kind === "adjective" ? locale() === "ru" ? "Субстантивированное прилагательное" : "Nominalized adjective"
       : locale() === "ru" ? "Субстантивированный инфинитив" : "Nominalized infinitive"} · ${candidate.usage.base}${candidate.usage.number === "plural" ? locale() === "ru" ? " · множественное число" : " · plural" : ""}`
     : candidate?.usage?.role === "attributive"
-    ? `${candidate.usage.form} · ${candidate.usage.kind === "participle-I" ? "Partizip I" : "Partizip II"} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
+    ? `${candidate.usage.form} · ${candidate.usage.kind === "participle-I" ? "Partizip I" : candidate.usage.kind === "participle-II" ? "Partizip II" : locale() === "ru" ? "прилагательное" : "adjective"} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
+  // Dictionary entry by id, or by word and reader type (help for am + Superlativ, contractions, "From …" lines).
+  function findEntry({id, word, type} = {}) {
+    if (!dictionary) return null;
+    if (id) { const byId = dictionary.find(entry => entry.id === id); if (byId) return byId; }
+    if (!word) return null;
+    const key = String(word).toLocaleLowerCase("de-DE");
+    const types = type === "Adjektiv" ? ["Adjektiv","Adverb"] : [type];
+    return dictionary.find(entry => types.includes(entry.type) && String(entry.word || "").toLocaleLowerCase("de-DE") === key) || null;
+  }
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=20261007-adjadv-1`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
-    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json"),get("german-adjective-adverbs.json")])
-      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs]) => {
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261011-derived-1" : path === "german-adverbs.json" ? "20261010-bitte-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    // Function-word cards (articles, prepositions, numerals, single words) keep
+    // their own types; single words map to the existing reader types.
+    const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
+    dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json"),get("german-adjective-adverbs.json"),
+      get("german-articles.json"),get("german-prepositions.json"),get("german-numerals.json"),get("german-function-words.json")])
+      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs,articles,prepositions,numerals,functionWords]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
           ...verbs.map(x => ({ ...x, word:x.infinitive, type:"Verb" })),
@@ -591,7 +617,11 @@
           ...adverbs.map(x => ({ ...x, type:"Adverb" })),
           ...adjectiveAdverbs.map(x => ({ ...x, type:"Adjektiv" })),
           ...conjunctions.map(x => ({ ...x, type:"Konjunktion" })),
-          ...pronouns.map(x => ({ ...x, type:"Pronomen" }))
+          ...pronouns.map(x => ({ ...x, type:"Pronomen" })),
+          ...articles.map(x => ({ ...x, type:"article" })),
+          ...prepositions.map(x => ({ ...x, type:"preposition" })),
+          ...numerals.map(x => ({ ...x, type:"numeral" })),
+          ...functionWords.map(x => ({ ...x, type:functionWordType[x.type] || x.type }))
         ];
         lemmaResolver = window.BibliothekLemmaResolver.create(dictionary, window.DeutschFallbackDictionary);
         return dictionary;
@@ -695,6 +725,7 @@
     popupAmbiguous = true;
     const context = selectedContext;
     $("popover-word").textContent = word;
+    $("popover-grammar").textContent = ""; $("popover-grammar").hidden = true;
     const loading = document.createElement("span");
     loading.className = "popover-loading";
     loading.setAttribute("role", "status");
@@ -730,7 +761,10 @@
       const groupSaved = await window.BibliothekMeaningSelections.get(reflexiveAnchor(linkedReflexive,context)).catch(()=>null);
       if (saved === window.BibliothekVocabulary.identity(linkedReflexive) && groupSaved && groupSaved !== saved) saved = null;
     }
-    if (saved) resolution.selected = window.BibliothekLemmaResolver.savedCandidate(saved, resolution) || resolution.selected;
+    const restored = saved ? window.BibliothekLemmaResolver.savedCandidate(saved, resolution) : null;
+    if (restored) resolution.selected = restored;
+    // A reading the reader chose (now or earlier) is shown as established, tentative or not.
+    let userConfirmed = !!restored;
     if (request !== lookupRequest) return;
     const reference=window.BibliothekPronounReference;
     const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
@@ -757,83 +791,50 @@
     alternatives.hidden = true;
     alternatives.open = !resolution.selected;
     choices.replaceChildren();
-    const candidateText = candidate => window.BibliothekMeaningDisplay.brief(candidate, locale()) || window.BibliothekMeaningDisplay.brief(candidate, "en") ||
-      (locale() === "ru" ? "Перевод не найден." : "Translation unavailable.");
-    const candidateLabel = candidate => {
-      if (candidate.explanation?.kind === 'contraction') return `${locale() === 'ru' ? 'Предлог' : 'Preposition'} ${candidate.explanation.componentLemma}`;
-      if (candidate.explanation?.kind === 'superlative') return `${locale() === 'ru' ? 'Значение основы' : 'Base meaning'} ${candidate.explanation.baseLemma}`;
-      const id = candidate.dictionaryId;
-      if (candidate.construction?.id === "separable-verb") return candidate.construction.confidence === "tentative"
-        ? locale() === "ru" ? "возможный отделяемый глагол" : "possible separable verb"
-        : locale() === "ru" ? "отделяемый глагол" : "separable verb";
-      if (candidate.construction?.id === "reflexive-verb" && candidate.construction.interpretation) return locale() === "ru" ? "Возвратное / взаимное употребление" : "Reflexive / reciprocal use";
-      if (candidate.construction?.id === "reflexive-verb") return locale() === "ru" ? "Возвратный глагол" : "Reflexive verb";
-      if (["pronoun-013","pronoun-014","pronoun-015"].includes(id)) return locale() === "ru" ? "притяжательное" : "possessive";
-      if (id === "pronoun-004" && word.toLocaleLowerCase("de-DE") === "ihr") return locale() === "ru" ? "местоимение · ей" : "pronoun · to her";
-      const type = window.BibliothekMeaningDisplay.pos(candidate);
-      const label = locale() === "ru" ? ({article:"Артикль",Verb:"Глагол",Nomen:"Существительное",Pronomen:"Местоимение",Adjektiv:"Прилагательное",Adverb:"Наречие",Konjunktion:"Союз"}[type] || type) : ({article:"Article",Nomen:"Noun",Pronomen:"Pronoun",Adjektiv:"Adjective",Adverb:"Adverb",Konjunktion:"Conjunction"}[type] || type);
-      return label;
-    };
-    const candidateMeaning = (candidate, text, displayLanguage, separator) => {
-      if (candidate.pos === 'article' && candidate.nounPhrase) return locale() === 'ru' ? 'Определённый артикль' : 'Definite article';
-      const englishFallback = locale() === "ru" && displayLanguage === "en";
-      return `${candidateLabel(candidate)}${englishFallback ? " · английский: " : separator}${text}`;
-    };
     const renderSelection = () => {
       const candidate = selectedResolution;
-      const ru = locale() === "ru";
+      const ru = locale() === "ru", display = window.BibliothekMeaningDisplay;
       activePronouns=showPronounSummary ? pronounCandidates : [];
       const referencePronoun = showPronounSummary;
-      content.textContent = referencePronoun ? reference.brief(pronounCandidates,word,locale()) : candidate ? candidateMeaning(candidate,candidateText(candidate),
-        ru && window.BibliothekMeaningDisplay.brief(candidate,"ru") ? "ru" : "en"," · ") :
-        resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
-        resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
-        resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` :
-        ru ? "Значение слова не найдено." : "No dictionary meaning found.";
-      content.lang = referencePronoun ? locale() : ru && candidate?.translation.ru ? "ru" : candidate ? "en" : locale();
+      // Reflexive link of the clicked pronoun: shown only when the resolver confirmed it.
+      const pronounLink = referencePronoun && linkedReflexive?.construction && linkedReflexive.construction.confidence !== "tentative" && !linkedReflexive.reflexiveUnconfirmed &&
+        linkedReflexive.construction.verb && linkedReflexive.construction.pronoun ? linkedReflexive.construction : null;
+      let model;
+      if (referencePronoun) {
+        const types = [...new Set((userConfirmed && reference.isPronoun(candidate) ? [candidate] : pronounCandidates).map(c => display.partOfSpeech(c)))];
+        const use = pronounLink ? pronounLink.interpretation === "reciprocal" ? "Reziprok" : pronounLink.interpretation ? "" : "Reflexiv" : "";
+        const values = reference.brief(pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
+        model = {heading:word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
+          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun] : null, helpEntry:selectedEntry};
+      } else if (candidate) {
+        model = display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed});
+      } else {
+        model = {heading:word, grammar:"", spans:null, helpEntry:null, textLanguage:locale(),
+          text:resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
+            resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
+            resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` : display.NO_TRANSLATION[locale()]};
+      }
+      selectedEntry = model.helpEntry || null;
+      $("popover-word").textContent = model.heading;
+      const grammarLine = $("popover-grammar");
+      grammarLine.textContent = model.grammar; grammarLine.hidden = !model.grammar;
+      content.textContent = model.text;
+      if (model.note) {
+        const note = document.createElement("small"); note.className = "popover-construction";
+        note.textContent = model.note; content.append(note);
+      }
+      content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : locale();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
-      const formComment = window.BibliothekMeaningDisplay.formComment(resolution, candidate, locale());
-      const nounPhraseComment = window.BibliothekMeaningDisplay.nounPhraseComment(candidate, locale());
-      if (!referencePronoun && nounPhraseComment) {
-        const note = document.createElement('small'); note.className = 'popover-construction';
-        note.textContent = nounPhraseComment; content.append(note);
-      }
-      if (!referencePronoun && formComment) {
-        const note = document.createElement("small"); note.className = "popover-construction";
-        note.textContent = formComment; content.append(note);
-      }
-      if (!referencePronoun && usageNote(candidate)) {
-        const note = document.createElement("small"); note.className = "popover-construction";
-        note.textContent = usageNote(candidate); content.append(note);
-      }
-      if (!referencePronoun && candidate?.construction) {
-        const group = document.createElement("small"); group.className = "popover-construction";
-        group.textContent = candidate.construction.id === "separable-verb"
-          ? candidate.construction.spans.map(span => span.text).join(" … ")
-          : candidate.construction.note?.[locale()] || `${candidate.construction.label} ${locale() === "ru" ? "с" : "with"} ${candidate.construction.lemma}`;
-        content.append(group);
-        if (candidate.construction.id === "reflexive-verb") {
-          group.textContent = candidate.construction.spans.map(s=>s.text).join(" … ") +
-            (candidate.construction.interpretation ? " — " + candidate.construction.note[locale()] : "");
-          const complement = candidate.construction.complement;
-          if (complement) {
-            const note = document.createElement("small"); note.className = "popover-construction";
-            note.textContent = `${complement.pattern} — ${ru ? complement.note_ru : complement.note_en}`;
-            content.append(note);
-          }
-        }
-      }
       if (referencePronoun && linkedReflexive) {
         const link = document.createElement("button"); link.type = "button"; link.className = "lemma-choice reflexive-link";
         link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
         link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
-      $("popover-word").textContent = referencePronoun || candidate?.pos === 'article' || candidate?.explanation?.kind === 'contraction' ? word : candidate ? window.BibliothekMeaningDisplay.heading(candidate) : word;
       $("popover-more").hidden = !selectedEntry;
-      $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : "Dictionary details ";
+      $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
-      paintActiveWord(candidate);
+      paintActiveWord(candidate, referencePronoun || candidate?.construction ? model.spans : undefined);
       if(showPronounSummary)popupAmbiguous=false;
       renderChoices();
     };
@@ -844,7 +845,7 @@
           meaningChosenInPopup = true;
         }
         showPronounSummary=reference.isPronoun(candidate);
-        popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null;
+        popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null; userConfirmed = true;
         $("popover-bookmark").disabled = true;
         renderSelection();
         // Keep choices reachable after selection; remember only this occurrence.
@@ -896,7 +897,16 @@
       const button = document.createElement("button");
       button.type = "button"; button.className = "lemma-choice";
       if(candidate.dictionaryId)button.dataset.dictionaryId=candidate.dictionaryId;
-      button.textContent = `${window.BibliothekMeaningDisplay.heading(candidate)} · ${candidateMeaning(candidate,text,language," — ")}`;
+      // Each alternative is a small card: heading / grammar line / dictionary meaning.
+      // A variant is shown as it would read once chosen (reference, section 2).
+      const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:true});
+      const marked = altModel.derived ? altModel.text : locale() === "ru" && language === "en" ? `английский: ${text}` : text;
+      for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked]]) {
+        if (!value) continue;
+        // Separators stay in the text (screen readers, copy) but not on screen.
+        if (button.childNodes.length) { const sep = document.createElement("span"); sep.className = "visually-hidden"; sep.textContent = " · "; button.append(sep); }
+        const part = document.createElement("span"); part.className = cls; part.textContent = value; button.append(part);
+      }
       button.addEventListener("click",()=>chooseCandidate(candidate));
       choices.append(button);
       });
@@ -956,7 +966,9 @@
     const root = $("dictionary-card");
     root.replaceChildren();
     delete root.dataset.pronounReference;
-    if(window.BibliothekPronounReference.excluded(item)){
+    // The pronoun reference is only for Pronomen cards; other excluded
+    // function-word cards (articles, prepositions, numerals) render normally.
+    if(item.type==="Pronomen"&&window.BibliothekPronounReference.excluded(item)){
       window.BibliothekPronounReference.render(root,item,locale(),selectedWord);
       return;
     }
@@ -988,9 +1000,8 @@
       }
     };
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
-    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || item.type);
+    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Numerale",particle:"Partikel"})[item.type] || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
-    if (selectedResolution?.dictionaryId === item.id) addInfo('p','dictionary-detail',window.BibliothekMeaningDisplay.nounPhraseComment(selectedResolution,locale()));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
@@ -1004,14 +1015,20 @@
       root.append(perfect);
     }
     if (item.comparative || item.superlative) addInfo("p","dictionary-detail",`Steigerung: ${[item.comparative,item.superlative].filter(Boolean).join(" · ")}`);
-    addInfo("p","dictionary-detail",locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en);
+    // A list of notes (conjunction cards) is one line per note.
+    [].concat((locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en) || []).forEach(note => addInfo("p","dictionary-detail",note));
     if (item.word_order_rule) addInfo("p","dictionary-detail",`Wortstellung: ${item.word_order_rule}`);
-    if (item.word_order_pattern) addInfo("p","dictionary-detail",`Muster: ${item.word_order_pattern}`);
+    // One line per pattern line („\n“); „**Verb**“ is shown in bold, as in the Wörterbuch.
+    String(item.word_order_pattern || "").split("\n").filter(Boolean).forEach((line,index) => {
+      const el = document.createElement("p"); el.className = "dictionary-detail";
+      (index ? line : `Muster: ${line}`).split(/\*\*(.+?)\*\*/).forEach((part,i) => { if (part) el.append(i % 2 ? Object.assign(document.createElement("strong"),{textContent:part}) : document.createTextNode(part)); });
+      root.append(el);
+    });
     if (Array.isArray(item.complements) && item.complements.length) {
       const parts = item.complements.map(value => `${value.pattern}${(locale() === "ru" ? value.note_ru : value.note_en) ? ` — ${locale() === "ru" ? value.note_ru : value.note_en}` : ""}`);
       addInfo("p","dictionary-detail",`Ergänzungen: ${parts.join(" · ")}`);
     }
-    if (item.type === "Pronomen") {
+    if (item.type === "Pronomen" || item.type === "article" && Array.isArray(item.forms)) {
       (item.forms || []).forEach(group => {
         const section = document.createElement("section");
         section.className = "dictionary-pronoun-forms";
@@ -1035,7 +1052,14 @@
         Object.entries(group.rows).forEach(([label, values]) => {
           const row = document.createElement("tr");
           const heading = document.createElement("th"); heading.scope = "row"; heading.textContent = label; row.append(heading);
-          values.forEach(value => { const cell = document.createElement("td"); cell.textContent = value; row.append(cell); });
+          // The clicked form is marked in every cell where it occurs; no single case is claimed.
+          values.forEach(value => {
+            const cell = document.createElement("td");
+            if (clickedForm && String(value).split(/\s*\/\s*/u).some(part => formKey(part) === clickedForm)) {
+              const mark = document.createElement("mark"); mark.className = "dictionary-form-match"; mark.textContent = value; cell.append(mark);
+            } else cell.textContent = value;
+            row.append(cell);
+          });
           tbody.append(row);
         });
         table.append(thead, tbody); scroll.append(table); section.append(scroll); root.append(section);
@@ -1147,12 +1171,13 @@
     finally { bookmarkBusy = false; refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
   });
   let activeWordSpan = null;
-  function paintActiveWord(candidate) {
+  // spans: undefined = the candidate's own links; null = only the clicked word.
+  function paintActiveWord(candidate, override) {
     $text.querySelectorAll(".is-active-word").forEach(span => span.classList.remove("is-active-word"));
     if (!activeWordSpan?.isConnected) return;
     activeWordSpan.classList.add("is-active-word");
     const context = selectedContext;
-    const spans = candidate?.construction?.spans || candidate?.nounPhrase?.[0]?.spans || candidate?.nounArticleLink?.spans;
+    const spans = override !== undefined ? override : candidate?.construction?.spans || candidate?.nounPhrase?.[0]?.spans || candidate?.nounArticleLink?.spans;
     if (!context || !spans) return;
     const origin = context.location.tokenOffset - context.tokenOffset;
     const paragraph = activeWordSpan.closest("[data-paragraph]");

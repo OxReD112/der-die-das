@@ -15,7 +15,7 @@
     <title>Bibliothek · Deutsch.</title>
     <link rel="icon" href="../icon.webp" type="image/webp" />
     <link rel="stylesheet" href="../home.css?v=50" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261010-library-visual-cleanup-3" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261011-text-settings-1" />
     <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1" />
     <link rel="stylesheet" href="reading-word-form.css?v=2" />
   </head>
@@ -99,20 +99,6 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" /></svg
               ><span id="vocabulary-count">0</span></button
             ><button
-              class="highlights-toggle"
-              id="highlights-toggle"
-              type="button"
-              aria-label="Hide vocabulary highlights"
-              title="Hide vocabulary highlights"
-              aria-pressed="true"
-              aria-controls="reading-text"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
-                <circle cx="12" cy="12" r="3" />
-                <path class="eye-slash" d="M3 3l18 18" />
-              </svg></button
-            ><button
               class="contents-toggle"
               id="contents-toggle"
               type="button"
@@ -136,11 +122,39 @@
             <nav class="chapter-end" id="chapter-end" aria-label="Continue reading" hidden></nav>
           </div>
         </div>
-        <nav class="page-controls" aria-label="Reading pages">
+        <div class="page-controls">
           <button id="page-previous" type="button" aria-label="Previous page">←</button
           ><span id="page-status" role="status" aria-live="polite"></span
           ><button id="page-next" type="button" aria-label="Next page">→</button>
-        </nav>
+          <div class="reader-bottom-tools">
+            <button
+              class="text-settings-toggle"
+              id="text-settings-toggle"
+              type="button"
+              aria-label="Text settings"
+              title="Text settings"
+              aria-haspopup="dialog"
+              aria-controls="text-settings"
+              aria-expanded="false"
+            >
+              <span aria-hidden="true">A<small>a</small></span></button
+            ><button
+              class="highlights-toggle"
+              id="highlights-toggle"
+              type="button"
+              aria-label="Hide vocabulary highlights"
+              title="Hide vocabulary highlights"
+              aria-pressed="true"
+              aria-controls="reading-text"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                <circle cx="12" cy="12" r="3" />
+                <path class="eye-slash" d="M3 3l18 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
       </section>
 
       <div
@@ -178,6 +192,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" /></svg>
           </button>
         </div>
+        <p class="popover-grammar" id="popover-grammar" lang="de" hidden></p>
         <p class="bookmark-hint" id="bookmark-hint" hidden>Bookmark unfamiliar words. Choose what to learn later.</p>
         <p class="popover-translation" id="popover-translation"></p>
         <details id="popover-alternatives" class="popover-alternatives" hidden>
@@ -234,6 +249,46 @@
         <div class="contents-columns" aria-hidden="true">Wörter</div>
         <div class="contents-list" id="contents-list"></div>
         <p id="contents-empty" role="status" hidden>No chapters found.</p>
+      </div>
+    </dialog>
+    <dialog class="text-settings" id="text-settings" aria-labelledby="text-settings-heading">
+      <div class="text-settings-header">
+        <h2 id="text-settings-heading" tabindex="-1" autofocus>Text</h2>
+        <button class="text-settings-close" type="button" data-text-close aria-label="Close text settings">×</button>
+      </div>
+      <div class="text-size-row">
+        <button class="text-size-step is-smaller" type="button" data-text-smaller aria-label="Smaller text">A</button>
+        <input type="range" min="0" max="6" step="1" data-text-size aria-label="Text size" />
+        <button class="text-size-step is-larger" type="button" data-text-larger aria-label="Larger text">A</button>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-spacing-label">
+        <span id="text-spacing-label">Line spacing</span>
+        <div class="text-segments">
+          <button type="button" data-setting="spacing" data-value="compact" aria-label="Compact line spacing">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14M5 11h14M5 14h14M5 17h14" /></svg></button
+          ><button type="button" data-setting="spacing" data-value="normal" aria-label="Normal line spacing">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" /></svg></button
+          ><button type="button" data-setting="spacing" data-value="loose" aria-label="Loose line spacing">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14M5 12h14M5 18.5h14" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-align-label">
+        <span id="text-align-label">Alignment</span>
+        <div class="text-segments">
+          <button type="button" data-setting="align" data-value="justify" aria-label="Justified">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg></button
+          ><button type="button" data-setting="align" data-value="left" aria-label="Left aligned">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h11M4 14h14M4 18h9" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-font-label">
+        <span id="text-font-label">Font</span>
+        <div class="text-segments">
+          <button class="is-serif" type="button" data-setting="font" data-value="serif">Serif</button
+          ><button class="is-sans" type="button" data-setting="font" data-value="sans">Sans</button>
+        </div>
       </div>
     </dialog>
     <dialog class="vocabulary-dialog" id="vocabulary-dialog" aria-labelledby="vocabulary-heading">
@@ -368,7 +423,7 @@
     <script src="epub-import.js?v=20261006-jpeg-1"></script>
     <script src="vocabulary-storage.js?v=20261010-remove-clear-marks-1"></script>
     <script src="meaning-selections.js?v=2"></script>
-    <script src="lemma-resolver.js?v=20261010-local-participle-roles-1"></script>
+    <script src="lemma-resolver.js?v=20261011-step3c-1"></script>
     <script src="vocabulary-highlights.js?v=20261008-l07-reverse-1"></script>
     <script src="vocabulary-list.js?v=1"></script>
     <script src="../wortschatz/dictionary-card.js?v=20261007-adjadv-1"></script>
@@ -376,11 +431,12 @@
     <script src="../wortschatz/collection-window.js?v=20261007-adjadv-1"></script>
     <script src="vocabulary-actions.js?v=20261007-adjadv-1"></script>
     <script src="vocabulary-panel.js?v=20261010-remove-clear-marks-1"></script>
-    <script src="meaning-display.js?v=20261009-lassen-6"></script>
+    <script src="meaning-display.js?v=20261011-step3c-1"></script>
     <script src="reader-pagination.js?v=3"></script>
+    <script src="reader-text-settings.js?v=1"></script>
     <script src="pronoun-reference.js?v=20261007-pronoun-popup-1"></script>
     <script src="meaning-thanks.js?v=1"></script>
-    <script src="bibliothek.js?v=20261010-library-delete-ui-1"></script>
-    <div class="version-mark" aria-hidden="true">v1</div>
+    <script src="bibliothek.js?v=20261011-text-settings-1"></script>
+    <div class="version-mark" aria-hidden="true">v8</div>
   </body>
 </html>
