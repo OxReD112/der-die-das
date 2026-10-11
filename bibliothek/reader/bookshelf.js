@@ -24,13 +24,36 @@
         const choices=available.filter(c=>c.count===least);
         const color=choices[h%choices.length].index;counts[color]++;previousColor=color;return color;
       });
-      const thicknesses=books.map(b=>Math.round(22+Math.min(b.wordCount||0,140000)/140000*28));
+      const mobile=root.clientWidth<600;
+      const thicknesses=books.map(b=>Math.round((mobile?28:22)+Math.min(b.wordCount||0,140000)/140000*(mobile?22:28)));
       const heightFactors=hashes.map(h=>.88+(h%8)*.03);
       const coverRatios=books.map(b=>Number.isFinite(b.coverAspectRatio)&&b.coverAspectRatio>0?b.coverAspectRatio:.68);
       function size(i){
         const standardHeight=settings.height*heightFactors[i],ratio=coverRatios[i];
         const height=Math.min(standardHeight*.68/ratio,settings.height*1.09);
         return {height,width:height*ratio};
+      }
+      const titleMeasure=document.createElement('canvas').getContext('2d');
+      function titleThickness(i){
+        const base=Math.round((mobile?28:22)+Math.min(books[i].wordCount||0,140000)/140000*(mobile?22:28));
+        if(!mobile)return base;
+        const available=Math.max(36,size(i).height-52);
+        let lines=1,used=0;
+        for(const word of books[i].title.split(/\s+/)){
+          titleMeasure.font='12px Arial';const sans=titleMeasure.measureText(word+' ').width;
+          titleMeasure.font='12px Georgia';const width=Math.max(sans,titleMeasure.measureText(word+' ').width);
+          if(used&&used+width>available){lines++;used=0;}
+          lines+=Math.max(0,Math.ceil(width/available)-1);used=(used+width)%available;
+        }
+        return Math.max(base,Math.min(lines,6)*12+8);
+      }
+      thicknesses.forEach((_,i)=>thicknesses[i]=titleThickness(i));
+      function refreshThickness(){
+        thicknesses.forEach((_,i)=>{
+          thicknesses[i]=titleThickness(i);
+          nodes[i].style.setProperty('--thickness',thicknesses[i]+'px');
+          nodes[i].style.setProperty('--half-thickness',thicknesses[i]/2+'px');
+        });
       }
       const leanAngles=hashes.map(h=>h%5===0?-3:h%7===0?2.5:0);
       const closedWidth=i=>thicknesses[i]+size(i).height*Math.abs(Math.sin(leanAngles[i]*Math.PI/180));
@@ -47,6 +70,7 @@
         el.querySelector('.spine-title').textContent=b.title;el.querySelector('.cover-title').textContent=b.title;
         el.querySelector('.author').textContent=b.author||'';
         if(started){
+          el.style.setProperty('--bookmark-angle',(hashes[i]%2?7:-6)+'deg');
           const ribbon=document.createElement('span');ribbon.className='reading-ribbon';ribbon.setAttribute('aria-hidden','true');
           const tip=document.createElement('span');tip.className='reading-ribbon-tip';tip.setAttribute('aria-hidden','true');
           el.querySelector('.volume').append(ribbon,tip);
@@ -56,7 +80,7 @@
           listen(image,'load',()=>{
             // Sample a small image: edge pixels carry more of the cover's background color.
             try{
-              coverRatios[i]=image.naturalWidth/image.naturalHeight;
+              coverRatios[i]=image.naturalWidth/image.naturalHeight;refreshThickness();
               if(motion===null&&settleTimer===null)positions=restingPositions(selected);render();
               const canvas=document.createElement('canvas');canvas.width=canvas.height=32;
               const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(image,0,0,32,32);
@@ -202,7 +226,7 @@
         if(!touch||touch.id!==e.pointerId)return;
         const dx=e.clientX-touch.x,dy=e.clientY-touch.y;
         if(!touch.horizontal){if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)){touch=null;return;}if(Math.abs(dx)<10)return;touch.horizontal=true;stage.setPointerCapture(e.pointerId);}
-        dragged=true;scrub(touch.position-dx/150);
+        dragged=true;scrub(touch.position-dx/90);
       });
       const release=()=>{if(touch?.horizontal){choose(selected,true);suppressClickUntil=performance.now()+250;}touch=null;dragged=false;};
       listen(stage,'pointerup',release);listen(stage,'pointercancel',release);
@@ -215,7 +239,7 @@
         stage.style.height=(height+90)+'px';
         const centerGap=root.clientWidth<600?28:56;
         if(Math.abs(settings.height-height)<1&&settings.centerGap===centerGap)return;
-        settings.height=height;settings.centerGap=centerGap;
+        settings.height=height;settings.centerGap=centerGap;refreshThickness();
         if(motion!==null){cancelAnimationFrame(motion);motion=null;}clearTimeout(settleTimer);settleTimer=null;
         weights=books.map((_,i)=>i===selected?1:0);positions=restingPositions(selected);render();
       }

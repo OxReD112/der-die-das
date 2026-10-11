@@ -209,6 +209,8 @@
   const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook});
   function applyLibraryView() {
     const populated=$bookList.children.length>0;
+    $library.classList.toggle('is-bookshelf',libraryView==='shelf');
+    if(libraryView==='shelf')$library.scrollTop=0;
     shelfRoot.hidden=!populated||libraryView!=='shelf';$bookList.hidden=libraryView==='shelf';
     viewToggle.hidden=!populated;
     viewToggle.innerHTML=libraryView==='shelf'
