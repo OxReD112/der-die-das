@@ -74,9 +74,9 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
  .library-bookshelf .book[data-spine="serif"] .spine-title,
  .library-bookshelf .book[data-spine="short"] .spine-title,
  .library-bookshelf .book[data-spine="wide"] .spine-title {
-  top:36px; left:50%; width:min(calc(var(--title-columns,1) * 12px + 2px), calc(var(--thickness) - 6px)); height:calc(100% - 52px); max-height:none;
-  transform:translateX(-50%); writing-mode:vertical-rl; white-space:normal; overflow-wrap:anywhere;
-  font-size:12px; line-height:1; text-align:left; overflow:hidden; text-overflow:clip;
+  top:calc(50% + 10px); left:50%; width:var(--spine-label-length); height:auto; max-height:none;
+  transform:translate(-50%,-50%) rotate(90deg); writing-mode:horizontal-tb; white-space:normal; overflow-wrap:anywhere;
+  font-size:12px; font-weight:400; line-height:14px; text-align:left; overflow:visible; text-overflow:clip;
  }
  .library-bookshelf .spine .spine-mark { top:14px; width:8px; height:8px; }
 }

@@ -33,19 +33,18 @@
         const height=Math.min(standardHeight*.68/ratio,settings.height*1.09);
         return {height,width:height*ratio};
       }
-      const titleMeasure=document.createElement('canvas').getContext('2d');
+      // Measure normal wrapped text before rotating the whole label. Safari's vertical
+      // text column metrics can clip a second line despite the predicted column width.
+      const titleProbe=document.createElement('span');titleProbe.setAttribute('aria-hidden','true');
+      titleProbe.style.cssText='position:absolute;visibility:hidden;pointer-events:none;display:block;white-space:normal;overflow-wrap:anywhere;letter-spacing:.2px;padding:0;border:0;writing-mode:horizontal-tb;box-sizing:content-box;';
+      root.append(titleProbe);
       function titleThickness(i){
         const base=Math.round((mobile?28:22)+Math.min(books[i].wordCount||0,140000)/140000*(mobile?22:28));
         if(!mobile)return base;
-        const available=Math.max(36,size(i).height-52);
-        let lines=1,used=0;
-        for(const word of books[i].title.split(/\s+/)){
-          titleMeasure.font='12px Arial';const sans=titleMeasure.measureText(word+' ').width;
-          titleMeasure.font='12px Georgia';const width=Math.max(sans,titleMeasure.measureText(word+' ').width);
-          if(used&&used+width>available){lines++;used=0;}
-          lines+=Math.max(0,Math.ceil(width/available)-1);used=(used+width)%available;
-        }
-        return Math.max(base,Math.min(lines,6)*12+8);
+        titleProbe.style.width=Math.max(36,size(i).height-52)+'px';titleProbe.textContent=books[i].title;
+        titleProbe.style.font='400 12px/14px Arial';const sans=titleProbe.offsetHeight;
+        titleProbe.style.font='400 12px/14px Georgia';const height=Math.max(sans,titleProbe.offsetHeight);
+        return Math.max(base,height+8);
       }
       thicknesses.forEach((_,i)=>thicknesses[i]=titleThickness(i));
       function refreshThickness(){
@@ -72,8 +71,7 @@
         if(started){
           el.style.setProperty('--bookmark-angle',(hashes[i]%2?7:-6)+'deg');
           const ribbon=document.createElement('span');ribbon.className='reading-ribbon';ribbon.setAttribute('aria-hidden','true');
-          const tip=document.createElement('span');tip.className='reading-ribbon-tip';tip.setAttribute('aria-hidden','true');
-          el.querySelector('.volume').append(ribbon,tip);
+          el.querySelector('.volume').append(ribbon);
         }
         if(/^data:image\/(webp|png|jpeg);base64,/.test(b.coverThumbnail||'')){
           const image=document.createElement('img');image.className='cover-image';image.alt='';image.draggable=false;image.src=b.coverThumbnail;
@@ -135,6 +133,8 @@
       nodes.forEach((node,i)=>{
         const g=geometry[i];
         node.style.setProperty('--book-scale',String(g.height/250));
+        node.style.setProperty('--spine-label-length',Math.max(36,g.height-52)+'px');
+        node.style.setProperty('--bookmark-turn',(-18*(1-g.weight))+'deg');
 
         node.style.width=g.footprint+'px';node.style.height=g.height+'px';node.style.top=(settings.height+58-g.height)+'px';
         node.style.transform=`translateX(${positions[i]-g.footprint/2}px) rotateZ(${g.lean}deg)`;
@@ -143,7 +143,6 @@
         volume.style.width=g.width+'px';volume.style.marginLeft=(g.footprint-g.width)/2+'px';
         volume.style.transform=`translateZ(${g.z}px) rotateX(${settings.tilt*g.weight}deg) rotateY(${g.angle}deg) scale(${g.scale})`;
         node.querySelector('.front').style.visibility=g.weight>.001?'visible':'hidden';
-        const ribbon=node.querySelector('.reading-ribbon');if(ribbon)ribbon.style.visibility=g.weight>.001?'visible':'hidden';
       });
       const book=books[selected];
       if(root.querySelector('.shelf-title').textContent!==book.title)root.querySelector('.shelf-title').textContent=book.title;
