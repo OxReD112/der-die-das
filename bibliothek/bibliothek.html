@@ -15,7 +15,8 @@
     <title>Bibliothek · Deutsch.</title>
     <link rel="icon" href="../icon.webp" type="image/webp" />
     <link rel="stylesheet" href="../home.css?v=50" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261011-text-settings-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261011-author-1" />
+    <link rel="stylesheet" href="bookshelf.css?v=20261011-author-1" />
     <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1" />
     <link rel="stylesheet" href="reading-word-form.css?v=2" />
   </head>
@@ -58,7 +59,9 @@
           </div>
         </div>
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
+        <div class="library-bookshelf" id="library-bookshelf" hidden></div>
         <div class="book-list" id="book-list"></div>
+        <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
         <div class="empty-library" id="empty-library">
           <div class="empty-mark" aria-hidden="true">Aa</div>
           <h2 lang="de">Dein Leseraum</h2>
@@ -418,9 +421,9 @@
     <script src="resolver/fallback-dictionary.js?v=20261011-auxiliary-rows-1"></script>
     <script src="resolver/russian-translations.js?v=1"></script>
     <script src="vendor/jszip-3.10.1.min.js"></script>
-    <script src="reader/reading-data.js?v=1"></script>
-    <script src="reader/book-import.js?v=5"></script>
-    <script src="reader/epub-import.js?v=20261006-jpeg-1"></script>
+    <script src="reader/reading-data.js?v=20261011-author-1"></script>
+    <script src="reader/book-import.js?v=20261011-author-1"></script>
+    <script src="reader/epub-import.js?v=20261011-author-1"></script>
     <script src="resolver/vocabulary-storage.js?v=20261010-remove-clear-marks-1"></script>
     <script src="reader/meaning-selections.js?v=2"></script>
     <script src="resolver/lemma-resolver.js?v=20261011-step3c-1"></script>
@@ -436,7 +439,8 @@
     <script src="reader/reader-text-settings.js?v=1"></script>
     <script src="reader/pronoun-reference.js?v=20261007-pronoun-popup-1"></script>
     <script src="reader/meaning-thanks.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261011-nicht-partikel-1"></script>
+    <script src="reader/bookshelf.js?v=20261011-author-1"></script>
+    <script src="reader/bibliothek.js?v=20261011-author-1"></script>
     <div class="version-mark" aria-hidden="true">v8</div>
   </body>
 </html>

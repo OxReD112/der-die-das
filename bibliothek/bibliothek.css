@@ -438,6 +438,14 @@ body.library-screen .data-sources button:active:not(:disabled) {
   line-height: 18px;
   font-weight: 650;
 }
+.book-author {
+  display: block;
+  margin-top: 4px;
+  color: var(--secondary-text);
+  font-size: 13px;
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
 .book-subtitle {
   display: block;
   overflow: hidden;
@@ -460,17 +468,34 @@ body.library-screen .data-sources button:active:not(:disabled) {
   text-align: center;
 }
 .empty-mark {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 66px;
-  height: 66px;
-  margin-bottom: 16px;
+  height: clamp(160px, 30dvh, 230px);
+  aspect-ratio: 0.68;
+  margin-bottom: 24px;
   border: 1px solid var(--hairline);
-  border-radius: 19px;
-  color: var(--mint);
-  font:
-    28px/1 Georgia,
-    serif;
+  border-radius: 2px 4px 4px 2px;
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
+  font: 40px/1 Georgia, serif;
+}
+.empty-mark::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 1px;
+  background: var(--hairline);
+}
+.empty-mark::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  left: -48px;
+  right: -48px;
+  bottom: -9px;
+  background: var(--hairline);
 }
 .empty-library h2 {
   margin: 0;
