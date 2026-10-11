@@ -611,15 +611,7 @@
   }
   function setProgress() {
     if (!currentBook) return;
-    const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];
-    const index = Math.max(0, Number(currentBook.position) || 0);
-    $("reading-progress").hidden = !hasChapters(currentBook);
-    if (!hasChapters(currentBook)) {
-      $("reading-progress").textContent = paragraphs.length ? `${Math.min(index + 1, paragraphs.length)} / ${paragraphs.length}` : ""; return;
-    }
-    const active = activeEntry(currentBook), chapters = readingEntries(currentBook).filter(entry => !entry.frontMatter);
-    const number = chapters.findIndex(entry => entryKey(entry) === entryKey(active));
-    $("reading-progress").textContent = number >= 0 ? `Chapter ${number + 1} of ${chapters.length}` : (active?.title || "Reading");
+    if (!hasChapters(currentBook)) return;
     const atEnd = pagination.page === pagination.count - 1;
     $("chapter-progress-fill").style.width = `${atEnd ? 100 : pagination.count > 1 ? pagination.page / pagination.count * 100 : 0}%`;
   }

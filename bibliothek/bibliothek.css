@@ -1882,7 +1882,8 @@ body.library-screen .data-sources button:active:not(:disabled) {
   box-shadow: none;
 }
 .contents-dialog::before,
-.vocabulary-dialog::before {
+.vocabulary-dialog::before,
+.library-screen .reader::before {
   content: "";
   position: absolute;
   inset: 2px 22px auto;
@@ -2613,3 +2614,6 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 .paste-dialog-heading h2 { margin:0; font-size:20px; }
 .paste-dialog-heading button { width:44px; height:44px; padding:0; font-size:26px; color:var(--muted); background:transparent; }
 .paste-dialog .paste-form { margin-top:14px; }
+
+/* Keep the shared drawer glow behind either library view and anchored to its frame. */
+.library-screen .reader::before { z-index:-1; }
