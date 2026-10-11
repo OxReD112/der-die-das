@@ -64,3 +64,18 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
 .library-bookshelf .reading-ribbon { position:absolute; right:calc(18px * var(--book-scale)); top:calc(-10px * var(--book-scale)); width:calc(9px * var(--book-scale)); height:calc(34px * var(--book-scale)); background:#b65b46; clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%); transform:translateZ(calc(var(--half-thickness) + 1px)); backface-visibility:hidden; pointer-events:none; }
 .library-bookshelf .reading-ribbon-tip { position:absolute; left:calc(-1 * var(--half-thickness)); top:calc(-8px * var(--book-scale)); width:var(--thickness); height:calc(9px * var(--book-scale)); transform:rotateY(-90deg); backface-visibility:hidden; pointer-events:none; }
 .library-bookshelf .reading-ribbon-tip::before { content:""; position:absolute; left:50%; width:calc(7px * var(--book-scale)); height:100%; transform:translateX(-50%); background:#b65b46; border-radius:1px 1px 0 0; }
+
+/* Mobile spines have a fixed text box: short-title display type must not spill out. */
+@media(max-width:600px) {
+ .library-bookshelf { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+ .library-bookshelf .spine { overflow:hidden; }
+ .library-bookshelf .spine .spine-title,
+ .library-bookshelf .book[data-spine="serif"] .spine-title,
+ .library-bookshelf .book[data-spine="short"] .spine-title,
+ .library-bookshelf .book[data-spine="wide"] .spine-title {
+  top:36px; left:50%; width:calc(var(--thickness) - 8px); height:calc(100% - 52px); max-height:none;
+  transform:translateX(-50%); writing-mode:vertical-rl; white-space:nowrap;
+  font-size:12px; line-height:1.1; text-align:left; overflow:hidden; text-overflow:ellipsis;
+ }
+ .library-bookshelf .spine .spine-mark { top:14px; width:8px; height:8px; }
+}

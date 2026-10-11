@@ -13,7 +13,7 @@
       const stage=root.querySelector('.shelf-stage');
       let selected=Math.max(0,books.findIndex(book=>book.id===selectedId));
       selectedId=books[selected].id;
-      const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:56,tilt:0,enlarge:.04,forward:20,duration:520};
+      const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:root.clientWidth<600?28:56,tilt:0,enlarge:.04,forward:20,duration:520};
       const palette=['#eeeae0','#b9cad8','#ee744f','#243c50','#d7df99'];
       const hashes=books.map(b=>hash(b.id));
       // Balance the palette across this shelf and avoid identical adjacent generated covers.
@@ -213,8 +213,9 @@
         const footer=Math.max(140,root.querySelector('.caption').offsetHeight)+root.querySelector('.navigation').offsetHeight;
         const height=Math.min(root.clientWidth<600?190:250,Math.max(130,root.parentElement.clientHeight-reserved-footer-90));
         stage.style.height=(height+90)+'px';
-        if(Math.abs(settings.height-height)<1)return;
-        settings.height=height;settings.centerGap=56;
+        const centerGap=root.clientWidth<600?28:56;
+        if(Math.abs(settings.height-height)<1&&settings.centerGap===centerGap)return;
+        settings.height=height;settings.centerGap=centerGap;
         if(motion!==null){cancelAnimationFrame(motion);motion=null;}clearTimeout(settleTimer);settleTimer=null;
         weights=books.map((_,i)=>i===selected?1:0);positions=restingPositions(selected);render();
       }
