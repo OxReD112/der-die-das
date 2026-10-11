@@ -1040,50 +1040,34 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin-top: 0;
 }
 .chapter-end {
-  display: grid;
+  display: flex;
+  justify-content: flex-end;
   gap: 12px;
   padding: 12px 0 max(80px, env(safe-area-inset-bottom));
 }
 .next-chapter-card {
-  display: grid;
-  gap: 8px;
-  width: 100%;
-  min-height: 88px;
-  padding: 18px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 11px 16px;
   border: 1px solid var(--hairline);
-  border-radius: 18px;
+  border-radius: 12px;
   background: var(--tile-surface);
   color: var(--text);
-  text-align: left;
+  text-align: center;
   font:
-    600 17px/1.4 -apple-system,
+    500 14px/1.4 -apple-system,
     BlinkMacSystemFont,
     "Helvetica Neue",
     sans-serif;
   cursor: pointer;
-}
-.next-chapter-card small {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 400;
 }
 .next-chapter-card:disabled {
   cursor: default;
   color: var(--muted);
-}
-.previous-chapter-link {
-  min-height: 44px;
-  padding: 8px 4px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  text-align: left;
-  font:
-    14px/1.4 -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    sans-serif;
-  cursor: pointer;
 }
 .contents-dialog,
 .vocabulary-dialog {
@@ -2621,3 +2605,23 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 /* Reserve the left slot for the shared Home button and center the page count. */
 .page-controls { position:relative; justify-content:flex-end; }
 #page-status { position:absolute; left:50%; transform:translateX(-50%); text-align:center; }
+
+/* Reader controls share an optical size and stroke; SVG avoids glyph baseline offsets. */
+.reading-view .contents-toggle,
+.reading-view .vocabulary-toggle,
+.reading-view .highlights-toggle,
+.reading-view .text-settings-toggle { color:var(--secondary-text); }
+.reading-view .contents-toggle,
+.reading-view .highlights-toggle { display:grid; place-items:center; padding:0; }
+.reading-view .contents-toggle svg,
+.reading-view .vocabulary-toggle svg,
+.reading-view .highlights-toggle svg {
+ display:block; flex:none; width:18px; height:18px; fill:none; stroke:currentColor;
+ stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;
+}
+.reading-view .text-settings-toggle { font-size:16px; font-weight:400; }
+.reading-view .text-settings-toggle small { font-size:12px; }
+.reading-view .text-settings-toggle[aria-expanded="true"] { color:var(--text); }
+.reading-view .highlights-toggle[aria-pressed="false"] { color:var(--muted); }
+
+.page-flow .chapter-end.is-book-end { justify-content:center; align-items:center; box-sizing:border-box; }

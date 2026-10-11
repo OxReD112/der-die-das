@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <meta content="#1b1b1d" name="theme-color"/>
+  <script>
+   window.DeutschTheme = (function(){
+     var THEME_KEY = "deutschThemeV1";
+     var DARK_META = "#1b1b1d";
+     var LIGHT_META = "#f6f4f1";
+
+     function isLight(){ return localStorage.getItem(THEME_KEY) === "light"; }
+
+     function setMeta(light){
+       var meta = document.querySelector('meta[name="theme-color"]');
+       if(meta) meta.setAttribute("content", light ? LIGHT_META : DARK_META);
+     }
+
+     // Icons live at the same path as their dark counterpart, named
+     // "icon_light.webp" instead of "icon.webp". The dark path is cached
+     // on first run so repeated theme switches never double-transform it.
+     function applyIcons(light){
+       document.querySelectorAll(".tile-art img").forEach(function(img){
+         if(!img.dataset.iconDark) img.dataset.iconDark = img.getAttribute("src");
+         if(!img.dataset.iconLight) img.dataset.iconLight = img.dataset.iconDark.replace(/icon\.webp$/, "icon_light.webp");
+         img.src = light ? img.dataset.iconLight : img.dataset.iconDark;
+       });
+     }
+
+     function apply(light){
+       if(light) document.documentElement.setAttribute("data-theme", "light");
+       else document.documentElement.removeAttribute("data-theme");
+       setMeta(light);
+       applyIcons(light);
+     }
+
+     function set(light){
+       localStorage.setItem(THEME_KEY, light ? "light" : "dark");
+       apply(light);
+     }
+
+     // Applied immediately so the page never paints the wrong theme.
+     // Icons can't be touched yet (the body hasn't parsed), so applyIcons()
+     // here is a no-op; the settings panel calls apply() again once ready.
+     if(isLight()) document.documentElement.setAttribute("data-theme", "light");
+
+     return {isLight: isLight, apply: apply, set: set};
+   })();
+  </script>
+  <style>
+   /* Keep the browser's first canvas on the selected app colour before home.css arrives. */
+   html, body { background: #1b1b1d; }
+   html[data-theme="light"], html[data-theme="light"] body { background: #f6f4f1; }
+   /* Launch splash (Home 5.119). iOS shows splash/launch-*.png the moment the app icon is tapped (before this
+      page exists); this splash continues that picture — same colour, same wordmark image, same spot — and then
+      fades into Home. Only when the Home-screen app really starts on an iPhone / iPad (or with ?splash=1 for testing). Always dark,
+      because the launch picture can't know the light theme. Rules: DECISIONS.md "Launch splash". */
+   #launchSplash { display: none; }
+   html.is-launching #launchSplash {
+     display: block; position: fixed; inset: 0; z-index: 1000; background: #1b1b1d;
+     transition: opacity 450ms ease;
+   }
+   html.is-launching #launchSplash.is-leaving { opacity: 0; pointer-events: none; }
+   #launchSplash img { position: absolute; left: calc(50% - 63px); top: calc(50% - 12px); width: 126px; height: 24px; }
+  </style>
+  <script>
+   window.DeutschLaunchSplash = (function(){
+     var MIN_MS = 1000;  // splash stays at least this long, counted from the tap (iOS picture + this splash)
+     var MAX_MS = 5000;  // ...and never longer than this, even if a picture on Home never finishes loading
+     var FADE_MS = 450;  // = the CSS transition
+     // navigator.standalone exists only on iPhone / iPad: there the launch picture comes first and this
+     // continues it. Android draws its own launch screen (icon + name from the manifest), so no splash there.
+     var standalone = navigator.standalone === true;
+     var forced = /[?&]splash=1(&|$)/.test(location.search);
+     if(!standalone && !forced) return { place: function(){} };
+     document.documentElement.classList.add("is-launching");
+
+     function splash(){ return document.getElementById("launchSplash"); }
+     // The launch pictures put the 126 x 24 wordmark box at the centre of the SCREEN, rounded to whole points —
+     // same here, so the hand-over from the iOS picture to this page doesn't move. In the Home-screen app iOS
+     // makes the page ~50 pt shorter than the screen (762 instead of 812 on a 375 x 812 iPhone; the page starts
+     // at the top of the screen), so the page's own height would put the word 25 pt too high: use the screen's
+     // size and stretch the splash over the whole screen. Not when the app doesn't fill the screen (iPad Split
+     // View / Stage Manager — no launch picture there anyway) or in a browser tab (?splash=1).
+     function place(){
+       var el = splash(); if(!el) return;
+       var img = el.querySelector("img");
+       // The launch pictures use the 2x wordmark on 2x screens and the 3x one on 3x screens; pick it here
+       // (srcset may choose the other one and scale it, which looks slightly different).
+       if(!img.src) img.src = img.getAttribute((window.devicePixelRatio || 2) > 2.5 ? "data-src-3x" : "data-src-2x");
+       var w = el.clientWidth, h = el.clientHeight;
+       if(standalone && window.screen){
+         var a = screen.width, b = screen.height, sideways = window.innerWidth > window.innerHeight;
+         var sw = sideways ? Math.max(a, b) : Math.min(a, b), sh = sideways ? Math.min(a, b) : Math.max(a, b);
+         if(Math.abs(sw - w) <= 1){ w = sw; h = sh; el.style.bottom = "auto"; el.style.height = sh + "px"; }
+       }
+       img.style.left = Math.round((w - 126) / 2) + "px";
+       img.style.top = Math.round((h - 24) / 2) + "px";
+     }
+     var done = false;
+     function finish(){
+       if(done) return;
+       done = true;
+       var el = splash();
+       if(el) el.classList.add("is-leaving");
+       setTimeout(function(){ document.documentElement.classList.remove("is-launching"); }, el ? FADE_MS + 50 : 0);
+     }
+     // Home's styles must be on before the splash lifts (they load without blocking during the launch).
+     function stylesOn(){
+       var link = document.querySelector('link[href^="home.css"]');
+       return !link || link.media !== "print";
+     }
+     function pageReady(){
+       if(!stylesOn()){ setTimeout(pageReady, 50); return; }
+       setTimeout(finish, Math.max(0, MIN_MS - performance.now()));
+     }
+     if(document.readyState === "complete") pageReady();
+     else window.addEventListener("load", pageReady, { once: true });
+     setTimeout(finish, MAX_MS);
+     window.addEventListener("resize", place);
+     return { place: place };
+   })();
+  </script>
+  <title>
+   Deutsch
+  </title>
+  <script>
+   // Home's styles. Normally a plain stylesheet. During the launch splash it loads without holding back the
+   // first paint — the splash needs only the inline styles above, and iOS fades its launch picture out before
+   // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
+   // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
+   document.write(document.documentElement.classList.contains("is-launching")
+     ? '<link href="home.css?v=52" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=52" rel="stylesheet"/>');
+  </script>
+  <link href="icon.webp" rel="icon" type="image/webp"/>
+  <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+  <!-- Launch pictures (Home 5.119): iOS shows the one matching the screen while the app starts, instead of white.
+       iPhones upright only (sideways shows „Bitte dreh dein Handy.“); iPads upright + sideways.
+       iOS saves them when the app is added to the Home Screen — remove + add again to pick up changes. -->
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-640x1136.png"/> <!-- iPhone SE 1st gen -->
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-750x1334.png"/> <!-- iPhone 6/7/8, SE 2nd/3rd gen -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2208.png"/> <!-- iPhone 6/7/8 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1125x2436.png"/> <!-- iPhone X, XS, 11 Pro, 12 mini, 13 mini -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-828x1792.png"/> <!-- iPhone XR, 11 -->
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2688.png"/> <!-- iPhone XS Max, 11 Pro Max -->
+  <link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1170x2532.png"/> <!-- iPhone 12, 13, 14, 16e -->
+  <link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1284x2778.png"/> <!-- iPhone 12/13 Pro Max, 14 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1179x2556.png"/> <!-- iPhone 14 Pro, 15, 15 Pro, 16 -->
+  <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1290x2796.png"/> <!-- iPhone 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus -->
+  <link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1206x2622.png"/> <!-- iPhone 16 Pro, 17, 17 Pro -->
+  <link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1320x2868.png"/> <!-- iPhone 16 Pro Max, 17 Pro Max -->
+  <link rel="apple-touch-startup-image" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1260x2736.png"/> <!-- iPhone Air -->
+  <link rel="apple-touch-startup-image" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1488x2266.png"/> <!-- iPad mini 6th/7th gen, portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2266x1488.png"/> <!-- iPad mini 6th/7th gen, landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1536x2048.png"/> <!-- iPad 9.7", iPad mini 1-5, iPad Air 1-2, portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2048x1536.png"/> <!-- iPad 9.7", iPad mini 1-5, iPad Air 1-2, landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1620x2160.png"/> <!-- iPad 10.2" (7th-9th gen), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2160x1620.png"/> <!-- iPad 10.2" (7th-9th gen), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1640x2360.png"/> <!-- iPad 10th/11th gen, iPad Air 11", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2360x1640.png"/> <!-- iPad 10th/11th gen, iPad Air 11", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2224.png"/> <!-- iPad Air 3rd gen, iPad Pro 10.5", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2224x1668.png"/> <!-- iPad Air 3rd gen, iPad Pro 10.5", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2388.png"/> <!-- iPad Pro 11" (1st-4th gen), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2388x1668.png"/> <!-- iPad Pro 11" (1st-4th gen), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1210px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-1668x2420.png"/> <!-- iPad Pro 11" (M4/M5), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1210px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2420x1668.png"/> <!-- iPad Pro 11" (M4/M5), landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-2048x2732.png"/> <!-- iPad Pro 12.9", iPad Air 13", portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2732x2048.png"/> <!-- iPad Pro 12.9", iPad Air 13", landscape -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1032px) and (device-height: 1376px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-2064x2752.png"/> <!-- iPad Pro 13" (M4/M5), portrait -->
+  <link rel="apple-touch-startup-image" media="(device-width: 1032px) and (device-height: 1376px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="splash/launch-2752x2064.png"/> <!-- iPad Pro 13" (M4/M5), landscape -->
+  <link href="manifest.webmanifest" rel="manifest"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+ </head>
+ <body>
+  <!-- Wordmark inlined (= splash/wordmark@2x.png / @3x.png; place() picks one) so the splash can be drawn without waiting for a download. -->
+  <div id="launchSplash" aria-hidden="true"><img alt="" data-src-2x="data:image/png;base64,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" data-src-3x="data:image/png;base64,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"/></div>
+  <script>window.DeutschLaunchSplash.place();</script>
+  <main class="page">
+   <header>
+    <h1>
+     Deutsch.
+    </h1>
+   </header>
+   <div class="home-viewport">
+    <div class="home-track" id="homeTrack">
+     <div class="home-screen">
+  <div class="hard-stop-overlay" id="hardStopOverlay" aria-hidden="true">
+    <div class="hard-stop-copy">
+      <div class="hard-stop-title">Das hast du heute richtig gut&nbsp;gemacht.</div>
+      <div class="hard-stop-text">
+        Jetzt ist Zeit für eine Pause.<br>
+        Ruh dich aus, mach etwas Schönes<br>
+        und komm morgen wieder.
+        <span class="hard-stop-warm">
+          <strong>Ich freue mich auf dich.</strong><br>
+          ♡
+        </span>
+      </div>
+    </div>
+  </div>
+   <p class="greeting" id="greeting" aria-live="polite">
+    <span class="greeting-line" id="greetingLine">Was m&ouml;chtest du heute &uuml;ben?</span>
+    <span class="greeting-sub" id="greetingSub"></span>
+   </p>
+   <section aria-label="&Uuml;bungen" class="dashboard mosaic tile-pager">
+    <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
+    <div class="tile-pages" id="tilePages">
+     <div class="tile-page">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261007-adjadv-1" type="button">
+     <div class="tile-art vocab-art">
+      <img alt="" src="wortschatz/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Wortschatz
+      </div>
+      <div class="status" id="wortschatzStatus">
+       noch offen
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.23" type="button">
+     <div class="tile-art">
+      <img alt="" src="artikel/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Artikel
+      </div>
+      <div class="status" id="artikelStatus">
+       0 / 20
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.57" type="button">
+     <div class="tile-art">
+      <img alt="" src="verbformen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Verbformen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-pronouns module" data-app="pronomen/?v=30" type="button">
+     <div class="tile-art">
+      <img alt="" src="pronomen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Pronomen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=30" type="button">
+     <div class="tile-art">
+      <img alt="" src="praepositionen/icon.webp"/>
+     </div>
+     <div class="tile-copy">
+      <div class="name">
+       Präpositionen
+      </div>
+      <div class="status">
+       0 / 10
+      </div>
+     </div>
+    </button>
+     </div>
+     <div class="tile-page">
+      <button class="tile tile-library module" data-app="bibliothek/bibliothek.html?v=20261011-finish-position-1" type="button">
+       <div class="tile-art"><img alt="" src="bibliothek/icon.webp"/></div>
+       <div class="tile-copy"><div class="name">Bibliothek</div><div class="status">Noch in Entwicklung</div></div>
+      </button>
+     </div>
+    </div>
+    <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
+    <div aria-label="Seiten" class="page-dots" id="pageDots"></div>
+   </section>
+       <button aria-label="Redewendung anzeigen" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
+     <div class="phrase-week-home-copy">
+      <div class="phrase-week-label">Redewendung der Woche</div>
+      <div class="phrase-week-home-title" id="phraseWeekHomeTitle"></div>
+      <div class="phrase-week-home-literal" id="phraseWeekHomeLiteral"></div>
+     </div>
+     <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
+    </button>
+
+    <div class="mosaic today-bottom">
+    <div aria-label="Tagesziel" class="tile tile-today">
+     <div class="today-label">
+      Heute
+     </div>
+     <div class="today-score">
+      <div class="today-number" id="todayTotal">
+       0
+      </div>
+      <div class="today-unit">
+       Punkte
+      </div>
+     </div>
+     <div class="today-progress">
+      <div class="today-progress-fill" id="todayProgress">
+      </div>
+     </div>
+    </div>
+    </div>
+
+    <section class="home-progress-overview" id="homeProgressOverview" aria-label="Lernfortschritt" hidden></section>
+
+    <div class="keep-card" id="keepCard" hidden>
+     <div class="keep-label"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/></svg><span id="keepLabel"></span></div>
+     <button class="keep-x" id="keepDismiss" type="button" aria-label="Not now">&times;</button>
+     <div class="keep-text" id="keepText"></div>
+     <button class="keep-link" id="keepHow" type="button"></button>
+    </div>
+     </div>
+     <section aria-label="Redewendung der Woche" class="phrase-screen" id="phraseScreen" aria-hidden="true">
+      <div class="phrase-screen-content">
+       <div class="phrase-week-label">Redewendung der Woche</div>
+       <div class="phrase-week-copy">
+        <div class="phrase-week-title" id="phraseWeekTitle"></div>
+        <div class="phrase-week-literal" id="phraseWeekLiteral"></div>
+        <div class="phrase-week-meaning" id="phraseWeekMeaning"></div>
+        <div class="phrase-week-example" id="phraseWeekExample"></div>
+       </div>
+      <button aria-label="Zur Startseite" class="phrase-screen-back" id="phraseScreenBack" type="button">
+       <span aria-hidden="true" class="phrase-screen-back-arrow">&lsaquo;</span>
+      </button>
+      </div>
+     </section>
+    </div>
+   </div>
+   <div class="home-actions">
+    <button class="notebook-icon-button" id="notebookOpen" type="button" aria-label="Notizbuch öffnen" title="Notizbuch">
+     <svg aria-hidden="true" viewBox="0 0 31.2 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.2 16.5 23 4.7a2.83 2.83 0 0 1 4 0 2.83 2.83 0 0 1 0 4L15.2 20.5l-5 .5 1-4.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m21 6.7 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M21 4.8v0a2 2 0 0 0-2-2H6.1a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h2.4M7.1 6.7h10.5M7.1 10.1h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="settings-launcher" id="dictionaryOpen" type="button" aria-expanded="false">Wörterbuch</button>
+    <button class="settings-icon-button" id="settingsOpen" type="button" aria-label="Settings" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.2672,1.0005 C10.9832,1.0005 11.6792,1.2945 12.1782,1.8055 C12.6762,2.3195 12.9512,3.0245 12.9302,3.7395 C12.9322,3.9005 12.9852,4.0865 13.0812,4.2495 C13.2402,4.5195 13.4912,4.7095 13.7892,4.7875 C14.0872,4.8615 14.3992,4.8215 14.6642,4.6645 C15.9442,3.9335 17.5732,4.3715 18.3042,5.6415 L18.9272,6.7205 C18.9432,6.7495 18.9572,6.7775 18.9692,6.8065 C19.6312,8.0575 19.1892,9.6325 17.9592,10.3515 C17.7802,10.4545 17.6352,10.5985 17.5352,10.7725 C17.3802,11.0415 17.3372,11.3615 17.4152,11.6555 C17.4952,11.9555 17.6862,12.2045 17.9552,12.3585 C18.5622,12.7075 19.0152,13.2955 19.1962,13.9745 C19.3772,14.6525 19.2782,15.3885 18.9252,15.9955 L18.2612,17.1015 C17.5302,18.3575 15.9012,18.7925 14.6342,18.0605 C14.4652,17.9635 14.2702,17.9105 14.0762,17.9055 L14.0702,17.9055 C13.7812,17.9055 13.4842,18.0285 13.2682,18.2435 C13.0492,18.4625 12.9292,18.7545 12.9312,19.0645 C12.9242,20.5335 11.7292,21.7215 10.2672,21.7215 L9.0142,21.7215 C7.5452,21.7215 6.3502,20.5275 6.3502,19.0585 C6.3482,18.8775 6.2962,18.6895 6.1992,18.5265 C6.0422,18.2525 5.7882,18.0565 5.4952,17.9785 C5.2042,17.9005 4.8852,17.9435 4.6232,18.0955 C3.9952,18.4455 3.2562,18.5305 2.5802,18.3405 C1.9052,18.1495 1.3222,17.6855 0.9802,17.0705 L0.3552,15.9935 C-0.3758,14.7255 0.0592,13.1005 1.3252,12.3685 C1.6842,12.1615 1.9072,11.7755 1.9072,11.3615 C1.9072,10.9475 1.6842,10.5605 1.3252,10.3535 C0.0582,9.6175 -0.3758,7.9885 0.3542,6.7205 L1.0322,5.6075 C1.7532,4.3535 3.3832,3.9115 4.6542,4.6415 C4.8272,4.7445 5.0152,4.7965 5.2062,4.7985 C5.8292,4.7985 6.3502,4.2845 6.3602,3.6525 C6.3562,2.9555 6.6312,2.2865 7.1322,1.7815 C7.6352,1.2775 8.3032,1.0005 9.0142,1.0005 L10.2672,1.0005 Z M10.2672,2.5005 L9.0142,2.5005 C8.7042,2.5005 8.4142,2.6215 8.1952,2.8395 C7.9772,3.0585 7.8582,3.3495 7.8602,3.6595 C7.8392,5.1225 6.6442,6.2985 5.1972,6.2985 C4.7332,6.2935 4.2862,6.1685 3.8982,5.9365 C3.3532,5.6265 2.6412,5.8175 2.3222,6.3725 L1.6452,7.4855 C1.3352,8.0235 1.5252,8.7345 2.0772,9.0555 C2.8962,9.5295 3.4072,10.4135 3.4072,11.3615 C3.4072,12.3095 2.8962,13.1925 2.0752,13.6675 C1.5262,13.9855 1.3362,14.6925 1.6542,15.2425 L2.2852,16.3305 C2.4412,16.6115 2.6962,16.8145 2.9912,16.8975 C3.2852,16.9795 3.6092,16.9445 3.8792,16.7945 C4.2762,16.5615 4.7382,16.4405 5.2022,16.4405 C5.4312,16.4405 5.6602,16.4695 5.8842,16.5295 C6.5602,16.7115 7.1472,17.1635 7.4952,17.7705 C7.7212,18.1515 7.8462,18.5965 7.8502,19.0505 C7.8502,19.7005 8.3722,20.2215 9.0142,20.2215 L10.2672,20.2215 C10.9062,20.2215 11.4282,19.7035 11.4312,19.0645 C11.4272,18.3585 11.7032,17.6875 12.2082,17.1825 C12.7062,16.6845 13.4022,16.3855 14.0982,16.4055 C14.5542,16.4165 14.9932,16.5395 15.3802,16.7595 C15.9372,17.0785 16.6482,16.8885 16.9702,16.3385 L17.6342,15.2315 C17.7822,14.9765 17.8252,14.6565 17.7462,14.3615 C17.6682,14.0665 17.4722,13.8105 17.2082,13.6595 C16.5902,13.3035 16.1492,12.7295 15.9662,12.0415 C15.7852,11.3665 15.8842,10.6295 16.2372,10.0225 C16.4672,9.6225 16.8042,9.2855 17.2082,9.0535 C17.7502,8.7365 17.9402,8.0275 17.6252,7.4755 C17.6122,7.4535 17.6002,7.4305 17.5902,7.4065 L17.0042,6.3905 C16.6852,5.8355 15.9752,5.6445 15.4182,5.9615 C14.8162,6.3175 14.1002,6.4195 13.4122,6.2385 C12.7252,6.0605 12.1492,5.6255 11.7902,5.0115 C11.5602,4.6275 11.4352,4.1805 11.4312,3.7255 C11.4402,3.3835 11.3202,3.0765 11.1022,2.8515 C10.8852,2.6275 10.5802,2.5005 10.2672,2.5005 Z M9.6451,7.9746 C11.5121,7.9746 13.0311,9.4946 13.0311,11.3616 C13.0311,13.2286 11.5121,14.7466 9.6451,14.7466 C7.7781,14.7466 6.2591,13.2286 6.2591,11.3616 C6.2591,9.4946 7.7781,7.9746 9.6451,7.9746 Z M9.6451,9.4746 C8.6051,9.4746 7.7591,10.3216 7.7591,11.3616 C7.7591,12.4016 8.6051,13.2466 9.6451,13.2466 C10.6851,13.2466 11.5311,12.4016 11.5311,11.3616 C11.5311,10.3216 10.6851,9.4746 9.6451,9.4746 Z" transform="translate(2 1)" fill="currentColor"/></svg></button>
+   </div>
+   </main>
+  <div class="notebook-layer" id="notebookLayer" aria-hidden="true">
+   <section class="notebook-panel" id="notebookPanel" aria-label="Notizbuch">
+    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=23" loading="eager"></iframe>
+   </section>
+  </div>
+  <div class="settings-layer" id="settingsLayer">
+   <section aria-hidden="true" class="settings-panel" id="settingsPanel">
+   <div class="settings-content">
+    <div class="settings-title-row"><h2 class="settings-title">Settings</h2><button class="settings-close" id="settingsClose" type="button" aria-label="Close settings">×</button></div>
+    <div class="settings-list">
+     <div class="settings-action-row"><button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button><button class="settings-info" id="backupInfoOpen" type="button" aria-label="Where is my progress saved?"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg></button></div>
+     <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Restore</span><span class="settings-action-note" id="restoreNote"></span></span></button>
+     <input accept="application/json,.json" class="backup-file" id="backupFile" type="file"/>
+     <div class="backup-hint" id="backupHint" hidden></div>
+     <div class="settings-gap" aria-hidden="true"></div>
+     <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
+     <div class="settings-row"><span>Your Language</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Your Language: English. Tap to switch."><span class="settings-lang-opt" data-opt="en">ENG</span><span class="settings-lang-opt" data-opt="ru">RUS</span></button></div>
+     <div class="settings-row"><span>Light Theme</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
+     <div class="settings-row"><span>Daily Limit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
+     <div id="notificationSettings" hidden>
+      <div class="settings-row"><span>Notifications</span><button aria-checked="false" class="settings-toggle" id="notificationToggle" role="switch" type="button"><span id="notificationState" hidden>OFF</span></button></div>
+      <div id="notificationNote" class="settings-action-note"></div>
+     </div>
+     <div class="settings-gap" aria-hidden="true"></div>
+     <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>About</span></span></button>
+    </div>
+    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. version 5.130 — show the versions of all pages">Deutsch. version 5.130 <span aria-hidden="true">›</span></button>
+   </div>
+   </section>
+  </div>
+  <div class="dictionary-layer" id="dictionaryLayer">
+   <section aria-hidden="true" class="settings-panel dictionary-panel" id="dictionaryPanel">
+    <div class="settings-content">
+     <div class="settings-title-row"><h2 class="settings-title">Wörterbuch</h2><button class="settings-close" id="dictionaryClose" type="button" aria-label="Close Wörterbuch">×</button></div>
+     <div class="dictionary-content">
+      <form class="dictionary-search" id="dictionarySearchForm" role="search">
+       <div class="dictionary-input-wrap">
+        <input id="dictionarySearchInput" type="search" placeholder="Wort suchen …" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Deutsches Wort suchen" aria-controls="dictionaryResults" aria-autocomplete="list" />
+        <button class="dictionary-search-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden>×</button>
+       </div>
+      </form>
+      <p class="dictionary-intro" id="dictionaryIntro"></p>
+      <div class="dictionary-entry-backbar" id="dictionaryEntryBackbar" hidden>
+       <button class="dictionary-back" id="dictionaryBack" type="button">← Zurück zur Suche</button>
+       <span class="dictionary-entry-type" id="dictionaryEntryType"></span>
+      </div>
+      <div class="dictionary-results" id="dictionaryResults" aria-live="polite"></div>
+     </div>
+    </div>
+   </section>
+   <span class="settings-morph" id="dictionaryMorph" aria-hidden="true">Wörterbuch</span>
+  </div>
+  <div aria-hidden="true" class="about-window" id="keepWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="keepTitle">
+    <div class="about-head"><h2 id="keepTitle"></h2><button class="about-close" id="keepClose" type="button" aria-label="Close">×</button></div>
+    <ol class="howto-steps" id="keepSteps"></ol>
+    <p class="about-text keep-foot" id="keepFoot"></p>
+   </div>
+  </div>
+  <div aria-hidden="true" class="about-window" id="backupInfoWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="backupInfoTitle">
+    <div class="about-head"><h2 id="backupInfoTitle"></h2><button class="about-close" id="backupInfoClose" type="button" aria-label="Close">×</button></div>
+    <p class="about-text" id="backupInfoText"></p>
+    <p class="about-text" id="backupInfoText2"></p>
+    <button class="keep-backup-btn backup-info-btn" id="backupInfoSave" type="button"></button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="about-window" id="aboutWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-head"><h2 id="aboutTitle">About</h2><button class="about-close" id="aboutClose" type="button" aria-label="Close">×</button></div>
+    <p class="about-text" id="aboutText"></p>
+   </div>
+  </div>
+  <div aria-hidden="true" class="about-window" id="versionsWindow">
+   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="versionsTitle">
+    <div class="about-head"><h2 id="versionsTitle">Versions</h2><button class="about-close" id="versionsClose" type="button" aria-label="Close">×</button></div>
+    <ul class="versions-list" id="versionsList"></ul>
+    <button class="keep-backup-btn versions-copy" id="versionsCopy" type="button">Copy</button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
+   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
+    <div class="settings-confirm-title" id="dailyLimitConfirmTitle">Are you sure?</div>
+    <div class="settings-confirm-text">You can keep practising today without a daily limit. It will turn on again automatically&nbsp;tomorrow.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="dailyLimitNo" type="button">No</button><button class="settings-confirm-button is-quiet" id="dailyLimitYes" type="button">Yes</button></div>
+   </div>
+  </div>
+
+  <!-- Notizbuch "Notiz löschen?" (Home 5.94): shown by Home, not inside the notebook frame, so it covers the "Deutsch."
+       header too and dims the strips like every other window — see features/notizbuch/home-notebook.js -->
+  <div aria-hidden="true" class="settings-confirm" id="notebookDeleteConfirm">
+   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="notebookDeleteTitle">
+    <div class="settings-confirm-title" id="notebookDeleteTitle">Notiz löschen?</div>
+    <div class="settings-confirm-text">Diese Notiz wird von diesem Gerät&nbsp;entfernt.</div>
+    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="notebookDeleteNo" type="button">Abbrechen</button><button class="settings-confirm-button is-quiet" id="notebookDeleteYes" type="button">Löschen</button></div>
+   </div>
+  </div>
+
+  <section aria-hidden="true" class="app-shell" id="appShell">
+   <button aria-label="Zur Startseite" class="home-back" id="homeBack" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5 12 4.5l7.5 6"/><path d="M6.5 9v9.5a1 1 0 0 0 1 1H10v-5h4v5h2.5a1 1 0 0 0 1-1V9"/></svg></button>
+   <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
+   </iframe>
+  </section>
+  <!-- Phone sideways: the app only works upright — this covers everything (Home + the exercise frame). CSS: .rotate-hint -->
+  <div class="rotate-hint" aria-live="polite">
+   <svg class="rotate-hint-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="7" width="16" height="28" rx="3"/><path d="M22 31h4"/><path d="M38 20a14 14 0 0 1-8 18.5"/><path d="M33.5 38.8 30 38.5l1-3.4"/></svg>
+   <p class="rotate-hint-title">Bitte dreh dein Handy.</p>
+   <p class="rotate-hint-text">Deutsch. funktioniert nur im Hochformat.</p>
+  </div>
+  <script src="components/deutsch-day-v1.js?v=1"></script>
+  <script src="components/deutsch-translation-v1.js?v=2"></script>
+  <script src="components/deutsch-wortschatz-due-v1.js?v=2"></script>
+  <script src="phrases.js?v=3">
+  </script>
+  <script src="greetings.js?v=2">
+  </script>
+ <script src="bibliothek/reader/reading-data.js?v=1"></script>
+ <script src="home.js?v=20261011-library-home-left-1"></script>
+ <script src="features/notizbuch/home-notebook.js?v=7"></script>
+ <script src="progress-screen.js?v=26"></script>
+ <script src="worterbuch.js?v=20261011-nicht-partikel-1"></script>
+</body>
+</html>

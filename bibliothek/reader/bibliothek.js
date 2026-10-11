@@ -529,23 +529,19 @@
   function renderChapterNavigation(book) {
     $("contents-toggle").hidden = !hasChapters(book);
     $("chapter-progress-track").hidden = !hasChapters(book);
-    const end = $("chapter-end"); end.replaceChildren(); end.hidden = false;
+    const end = $("chapter-end"); end.replaceChildren(); end.hidden = false; end.classList.remove("is-book-end"); end.style.height = "";
     const entries = hasChapters(book) ? readingEntries(book) : [], active = hasChapters(book) ? activeEntry(book) : null, index = entries.indexOf(active);
     if (entries[index + 1]) {
       const next = document.createElement("button"); next.id = "next-chapter"; next.className = "next-chapter-card"; next.type = "button";
-      const label = document.createElement("small"); label.textContent = "Next chapter";
-      const title = document.createElement("span"); title.textContent = entries[index + 1].title + " →";
-      next.append(label, title); next.addEventListener("click", () => navigateTo(entries[index + 1])); end.append(next);
+      next.textContent = "Nächstes Kapitel →";
+      next.setAttribute("aria-label", "Nächstes Kapitel: " + entries[index + 1].title); next.addEventListener("click", () => navigateTo(entries[index + 1])); end.append(next);
     } else {
+      end.classList.add("is-book-end");
       const finish = document.createElement("button"); finish.className = "next-chapter-card"; finish.type = "button";
-      finish.textContent = book.completed ? "Book finished ✓" : "Finish book ✓"; finish.disabled = Boolean(book.completed);
-      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); vocabularyPanel.updateCount(); showToast("Book finished."); }); end.append(finish);
+      finish.textContent = book.completed ? "Buch abgeschlossen ✓" : "Buch abschließen ✓"; finish.disabled = Boolean(book.completed);
+      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); vocabularyPanel.updateCount(); showToast("Buch abgeschlossen."); }); end.append(finish);
     }
-    if (entries[index - 1]) {
-      const previous = document.createElement("button"); previous.id = "previous-chapter"; previous.className = "previous-chapter-link"; previous.type = "button";
-      previous.textContent = "← " + entries[index - 1].title;
-      previous.addEventListener("click", () => navigateTo(entries[index - 1])); end.append(previous);
-    }
+
   }
   function wrapParagraph(paragraph) {
     const fragment = document.createDocumentFragment();
