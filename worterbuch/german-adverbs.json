@@ -740,6 +740,9 @@
   {
     "id": "adverb-068",
     "word": "nicht",
+    "parts_of_speech": [
+      "Partikel"
+    ],
     "translation_ru": "не",
     "translation_en": "not",
     "example_de": "Ich verstehe das nicht.",
@@ -876,14 +879,50 @@
   {
     "id": "adverb-079",
     "word": "wie",
-    "translation_ru": "как",
-    "translation_en": "how; like; as",
+    "translation_ru": "как? (вопрос); как, словно (сравнение)",
+    "translation_en": "how? (question); as, like (comparison)",
+    "parts_of_speech": [
+      "Adverb",
+      "Konjunktion"
+    ],
+    "reading_policy": "merged",
+    "alias_ids": [
+      "conjunction-031"
+    ],
+    "word_order_pattern": "Wie · **Verb** · Subjekt · …?\n…, wie · Subjekt · … · **Verb**\nso · Adjektiv · wie · …",
     "example_de": "Wie heißt du?",
     "example_ru": "Как тебя зовут?",
     "example_en": "What's your name?",
-    "usage_note_ru": "Вопросы: Wie alt …? Wie viel …? Сравнение: so groß wie … — такой же, как … В косвенном вопросе глагол уходит в конец: Ich weiß nicht, wie das geht.",
-    "usage_note_en": "Questions: Wie alt …? Wie viel …? Comparison: so groß wie … — as big as … In an indirect question the verb goes to the end: Ich weiß nicht, wie das geht.",
-    "example_cloze": "{{c1::Wie}} heißt du?"
+    "example_cloze": "{{c1::Wie}} heißt du?",
+    "example_usage": "Frage",
+    "additional_examples": [
+      {
+        "example_de": "Ich weiß nicht, wie das geht.",
+        "example_ru": "Я не знаю, как это делается.",
+        "example_en": "I don't know how that works.",
+        "example_cloze": "Ich weiß nicht, {{c1::wie}} das geht.",
+        "example_usage": "Indirekte Frage"
+      },
+      {
+        "example_de": "Er ist so groß wie sein Vater.",
+        "example_ru": "Он такого же роста, как его отец.",
+        "example_en": "He is as tall as his father.",
+        "example_cloze": "Er ist so groß {{c1::wie}} sein Vater.",
+        "example_usage": "Vergleich"
+      }
+    ],
+    "notes_ru": [
+      "Вопросы: Wie alt …? Wie viel …? Wie lange …?",
+      "В косвенном вопросе и в придаточном с wie глагол в конце: Ich weiß nicht, wie das geht. wie du willst — как хочешь.",
+      "Равенство: so … wie, genauso … wie. wie immer — как всегда.",
+      "После сравнительной степени — als: größer als. größer wie встречается в речи, но это не норма."
+    ],
+    "notes_en": [
+      "Questions: Wie alt …? Wie viel …? Wie lange …?",
+      "In an indirect question and in a clause with wie the verb goes to the end: Ich weiß nicht, wie das geht. wie du willst — as you like.",
+      "Equality: so … wie, genauso … wie. wie immer — as always.",
+      "After a comparative use als: größer als. größer wie is heard in speech but is not standard."
+    ]
   },
   {
     "id": "adverb-080",
@@ -2601,5 +2640,41 @@
     "example_en": "He is exceptionally friendly.",
     "example_cloze": "Er ist {{c1::ausgesprochen}} freundlich.",
     "example_usage": "Adverb"
+  },
+  {
+    "id": "adverb-223",
+    "word": "damit",
+    "translation_ru": "этим, с этим; тем самым",
+    "translation_en": "with it, with that; thereby",
+    "example_de": "Was machst du damit?",
+    "example_ru": "Что ты с этим делаешь?",
+    "example_en": "What are you doing with it?",
+    "usage_note_ru": "Заменяет mit + предмет: mit dem Messer → damit; для людей — mit ihm/ihr, не damit. Тем самым: Damit ist alles gesagt. — Этим всё сказано. Союз damit «чтобы» — отдельная карточка (conjunction-013).",
+    "usage_note_en": "Replaces mit + a thing: mit dem Messer → damit; for people use mit ihm/ihr, not damit. Thereby: Damit ist alles gesagt. — That says it all. The conjunction damit (so that) has a separate card (conjunction-013).",
+    "example_cloze": "Was machst du {{c1::damit}}?"
+  },
+  {
+    "id": "adverb-224",
+    "word": "aber",
+    "translation_ru": "же, ведь (усиление, удивление)",
+    "translation_en": "really, so (emphasis, surprise)",
+    "example_de": "Das ist aber schön!",
+    "example_ru": "Как же это красиво!",
+    "example_en": "That's really beautiful!",
+    "usage_note_ru": "Безударная частица в восклицаниях и ответах: Du spielst aber gut! — Как же ты хорошо играешь! aber gern — с удовольствием. Союз aber «но» — отдельная карточка (conjunction-003).",
+    "usage_note_en": "An unstressed particle in exclamations and replies: Du spielst aber gut! — You play really well! aber gern — gladly. The conjunction aber (but) has a separate card (conjunction-003).",
+    "example_cloze": "Das ist {{c1::aber}} schön!"
+  },
+  {
+    "id": "adverb-225",
+    "word": "bitte",
+    "translation_ru": "пожалуйста; не за что (в ответ на «спасибо»); простите, что? (Wie bitte?)",
+    "translation_en": "please; you're welcome (in reply to thanks); pardon? (Wie bitte?)",
+    "example_de": "Kannst du mir bitte helfen?",
+    "example_ru": "Можешь мне, пожалуйста, помочь?",
+    "example_en": "Can you help me, please?",
+    "usage_note_ru": "Частица вежливости: смягчает просьбу, стоит в начале, середине или конце: Bitte setzen Sie sich! / Setzen Sie sich bitte! В ответ на Danke! — Bitte! или Bitte schön! (не за что). Подавая что-то — Bitte schön / Bitte sehr (вот, пожалуйста). Не путать с глаголом и существительным: ich bitte (dich um …) — я прошу; die Bitte — просьба.",
+    "usage_note_en": "A politeness particle: it softens a request and can stand at the start, in the middle or at the end: Bitte setzen Sie sich! / Setzen Sie sich bitte! In reply to Danke! — Bitte! or Bitte schön! (you're welcome). When handing something over — Bitte schön / Bitte sehr (here you are). Do not confuse with the verb and the noun: ich bitte (dich um …) — I ask; die Bitte — a request.",
+    "example_cloze": "Kannst du mir {{c1::bitte}} helfen?"
   }
 ]

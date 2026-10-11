@@ -51,13 +51,13 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-adverbs.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-pronouns.json?v=20261007-adjadv-1"),
-      loadJson("worterbuch/german-adjective-adverbs.json?v=20261007-adjadv-1")
+      loadJson("worterbuch/german-nouns.json?v=20261011-derived-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261010-wie-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261010-wie-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261011-nicht-partikel-1"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261011-um-zu-en-1"),
+      loadJson("worterbuch/german-pronouns.json?v=20261010-wie-1"),
+      loadJson("worterbuch/german-adjective-adverbs.json?v=20261010-wie-1")
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
@@ -129,7 +129,7 @@
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
     if (hasWordOrder) {
       const section = node("section", "dictionary-entry-section dictionary-word-order");
-      section.append(node("h4", "dictionary-entry-label", item.parts_of_speech ? "Wortstellung · Adverbial" : "Wortstellung"));
+      section.append(node("h4", "dictionary-entry-label", item.parts_of_speech?.includes("Adjektiv") ? "Wortstellung · Adverbial" : "Wortstellung"));
       // A line break („\n“) in the rule or pattern starts a new line (je … / desto …).
       String(item.word_order_rule || "").split("\n").filter(Boolean).forEach(line =>
         section.append(node("p", "dictionary-entry-plural dictionary-entry-detail", line)));

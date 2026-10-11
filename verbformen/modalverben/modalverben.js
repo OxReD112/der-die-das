@@ -474,7 +474,7 @@ const MODAL_FORM_SYMBOLS = {
 
 const MODAL_FORM_TEXT = {
   question: { en: "What do you want to say?", ru: "Что ты хочешь сказать?" },
-  now: { en: "now", ru: "сейчас" },
+  now: { en: "Präsens", ru: "Präsens" },
   past: { en: "past", ru: "раньше" },
   unreal: { en: "hypothetical, tentative, advice", ru: "условно, мягко, совет" },
   same: {

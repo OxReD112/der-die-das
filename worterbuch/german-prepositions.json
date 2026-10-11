@@ -1,0 +1,1390 @@
+[
+  {
+    "id": "preposition-001",
+    "type": "preposition",
+    "word": "aus",
+    "translation_ru": "из; из-за, от (причина)",
+    "translation_en": "from, out of; (made) of; out of (reason)",
+    "example_de": "Sie kommt aus Japan.",
+    "example_ru": "Она из Японии.",
+    "example_en": "She is from Japan.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "aus + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "откуда: из чего-либо",
+        "note_en": "where from: out of something",
+        "example_de": "aus dem Haus"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Отвечает на вопрос Woher?: aus Berlin, aus dem Haus. Материал: aus Holz — из дерева. Причина: aus Angst — из страха. Если aus стоит в конце предложения при глаголе (Er sieht müde aus), это часть глагола aussehen, а не предлог.",
+    "usage_note_en": "Answers Woher? (where from?): aus Berlin, aus dem Haus. Material: aus Holz — made of wood. Reason: aus Angst — out of fear. When aus stands at the end of the clause with a verb (Er sieht müde aus), it is part of the verb aussehen, not a preposition.",
+    "search_forms": [
+      "aus"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/aus_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-002",
+    "type": "preposition",
+    "word": "bei",
+    "translation_ru": "у, при; около; во время",
+    "translation_en": "at, with; near; during",
+    "example_de": "Er wohnt bei seinen Eltern.",
+    "example_ru": "Он живёт у своих родителей.",
+    "example_en": "He lives with his parents.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "bei + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "у кого-либо, где-либо",
+        "note_en": "at someone's place, somewhere",
+        "example_de": "bei meinen Eltern"
+      }
+    ],
+    "contractions": {
+      "beim": "bei dem"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитная форма: beim = bei dem.",
+    "forms_note_en": "Contracted form: beim = bei dem.",
+    "usage_note_ru": "У человека или в организации: bei Oma, bei Siemens. Рядом с местом: Potsdam liegt bei Berlin. Во время действия: beim Essen — за едой. Если bei стоит в конце предложения при глаголе (Sie bringt mir Deutsch bei), это часть глагола beibringen, а не предлог.",
+    "usage_note_en": "At a person's place or an organisation: bei Oma, bei Siemens. Near a place: Potsdam liegt bei Berlin. During an activity: beim Essen — while eating. When bei stands at the end of the clause with a verb (Sie bringt mir Deutsch bei), it is part of the verb beibringen, not a preposition.",
+    "search_forms": [
+      "bei"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bei",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-003",
+    "type": "preposition",
+    "word": "mit",
+    "translation_ru": "с; на (о транспорте); с помощью",
+    "translation_en": "with; by (transport)",
+    "example_de": "Ich gehe mit meiner Schwester ins Kino.",
+    "example_ru": "Я иду в кино с сестрой.",
+    "example_en": "I'm going to the cinema with my sister.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "mit + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "с кем-либо, с чем-либо",
+        "note_en": "with someone or something",
+        "example_de": "mit meiner Schwester"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Транспорт: mit dem Bus — на автобусе. Инструмент: mit dem Messer — ножом. Если mit стоит в конце предложения при глаголе (Kommst du mit?), это часть глагола mitkommen, а не предлог.",
+    "usage_note_en": "Transport: mit dem Bus — by bus. Instrument: mit dem Messer — with a knife. When mit stands at the end of the clause with a verb (Kommst du mit?), it is part of the verb mitkommen, not a preposition.",
+    "search_forms": [
+      "mit"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/mit_inklusive_auch_mitsamt",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-004",
+    "type": "preposition",
+    "word": "nach",
+    "translation_ru": "в, на (направление: города, страны без артикля); после; по, согласно",
+    "translation_en": "to (cities, countries); after; according to",
+    "example_de": "Wir fahren nach Berlin.",
+    "example_ru": "Мы едем в Берлин.",
+    "example_en": "We are going to Berlin.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "nach + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "куда (города, страны без артикля); после чего-либо",
+        "note_en": "where to (cities, countries without an article); after something",
+        "example_de": "nach dem Essen"
+      },
+      {
+        "pattern": "Dativ + nach",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "в значении «по, согласно» может стоять после существительного",
+        "note_en": "meaning according to, it can follow the noun",
+        "example_de": "meiner Meinung nach"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "nach Hause — домой (а zu Hause — дома). Но со странами с артиклем — in (in die Schweiz), с людьми — zu (zum Arzt). Время: nach dem Essen — после еды. Если nach стоит в конце предложения при глаголе (Ich denke darüber nach), это часть глагола nachdenken, а не предлог.",
+    "usage_note_en": "nach Hause — home(wards) (but zu Hause — at home). But countries with an article take in (in die Schweiz), and people take zu (zum Arzt). Time: nach dem Essen — after the meal. When nach stands at the end of the clause with a verb (Ich denke darüber nach), it is part of the verb nachdenken, not a preposition.",
+    "search_forms": [
+      "nach"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/nach_zu_hin_entsprechend",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-005",
+    "type": "preposition",
+    "word": "seit",
+    "translation_ru": "с (какого-то момента); уже (в течение)",
+    "translation_en": "since; for (up to now)",
+    "example_de": "Ich lerne seit drei Jahren Deutsch.",
+    "example_ru": "Я уже три года учу немецкий.",
+    "example_en": "I have been learning German for three years.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "seit + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "с какого-то момента до сейчас",
+        "note_en": "from a point in the past up to now",
+        "example_de": "seit dem Sommer"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Действие началось в прошлом и продолжается сейчас, поэтому глагол обычно стоит в Präsens: Ich wohne seit 2020 hier. Союз seit «с тех пор как» вводит придаточное предложение — это отдельная карточка Konjunktion.",
+    "usage_note_en": "The action began in the past and is still going on, so the verb is usually in the present tense: Ich wohne seit 2020 hier. The conjunction seit (since, introducing a clause) has a separate Konjunktion card.",
+    "search_forms": [
+      "seit"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/seit_von_da_an_spaeter_als",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-006",
+    "type": "preposition",
+    "word": "von",
+    "translation_ru": "от; с, из (откуда); о (erzählen von); принадлежность (вместо Genitiv); кем (в пассиве)",
+    "translation_en": "from; about (erzählen von); of; by (passive)",
+    "example_de": "Das Geschenk ist von meiner Oma.",
+    "example_ru": "Подарок от моей бабушки.",
+    "example_en": "The present is from my grandma.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "от кого-либо, откуда",
+        "note_en": "from someone or somewhere",
+        "example_de": "von meiner Oma"
+      }
+    ],
+    "contractions": {
+      "vom": "von dem"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитная форма: vom = von dem.",
+    "forms_note_en": "Contracted form: vom = von dem.",
+    "usage_note_ru": "Откуда: von der Arbeit, vom Arzt. Время: von 9 bis 17 Uhr. О чём: Er erzählt von seiner Reise. Принадлежность, особенно в разговорной речи: das Auto von meinem Bruder = das Auto meines Bruders. В пассиве указывает, кем сделано действие: Das Buch wurde von Kafka geschrieben.",
+    "usage_note_en": "Where from: von der Arbeit, vom Arzt. Time: von 9 bis 17 Uhr. About: Er erzählt von seiner Reise. Possession, especially in speech: das Auto von meinem Bruder = das Auto meines Bruders. In the passive it names the doer: Das Buch wurde von Kafka geschrieben.",
+    "search_forms": [
+      "von"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/von_aus_ab_durch_per_seitens",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-007",
+    "type": "preposition",
+    "word": "zu",
+    "translation_ru": "к; в, на (направление к человеку, месту, событию)",
+    "translation_en": "to",
+    "example_de": "Ich gehe zum Arzt.",
+    "example_ru": "Я иду к врачу.",
+    "example_en": "I'm going to the doctor's.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "zu + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "куда: к человеку, месту или событию",
+        "note_en": "where to: a person, a place or an event",
+        "example_de": "zum Arzt"
+      }
+    ],
+    "contractions": {
+      "zum": "zu dem",
+      "zur": "zu der"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитные формы: zum = zu dem, zur = zu der.",
+    "forms_note_en": "Contracted forms: zum = zu dem, zur = zu der.",
+    "usage_note_ru": "zu Hause — дома (а nach Hause — домой). zu Fuß — пешком. Цель: zum Lernen — для учёбы. zu перед инфинитивом (Ich habe keine Zeit zu lesen) и zu «слишком» (zu groß) — не предлог, это отдельные карточки. Если zu стоит в конце предложения при глаголе (Mach die Tür zu), это часть глагола zumachen.",
+    "usage_note_en": "zu Hause — at home (but nach Hause — home(wards)). zu Fuß — on foot. Purpose: zum Lernen — for studying. zu before an infinitive (Ich habe keine Zeit zu lesen) and zu meaning too (zu groß) are not the preposition; they have separate cards. When zu stands at the end of the clause with a verb (Mach die Tür zu), it is part of the verb zumachen.",
+    "search_forms": [
+      "zu"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zu_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-008",
+    "type": "preposition",
+    "word": "ab",
+    "translation_ru": "с, начиная с (о времени, месте)",
+    "translation_en": "from, as of, starting",
+    "example_de": "Ab nächster Woche arbeite ich hier.",
+    "example_ru": "Со следующей недели я работаю здесь.",
+    "example_en": "Starting next week, I'll be working here.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "ab + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "начиная с какого-то момента или места",
+        "note_en": "starting from a time or place",
+        "example_de": "ab dem 1. Mai"
+      },
+      {
+        "pattern": "ab + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "о времени без артикля с прилагательным тоже возможен Akkusativ",
+        "note_en": "with time expressions without an article but with an adjective, Akkusativ is also possible",
+        "example_de": "ab nächste Woche"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Часто без артикля: ab Montag, ab 18 Jahren. Отправление: ab Berlin — из Берлина. Если ab стоит в конце предложения при глаголе (Der Zug fährt um acht ab), это часть глагола abfahren, а не предлог.",
+    "usage_note_en": "Often without an article: ab Montag, ab 18 Jahren. Departure point: ab Berlin — from Berlin. When ab stands at the end of the clause with a verb (Der Zug fährt um acht ab), it is part of the verb abfahren, not a preposition.",
+    "search_forms": [
+      "ab"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ab_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-009",
+    "type": "preposition",
+    "word": "gegenüber",
+    "translation_ru": "напротив; по отношению к; по сравнению с",
+    "translation_en": "opposite; towards; compared with",
+    "example_de": "Das Café ist gegenüber dem Bahnhof.",
+    "example_ru": "Кафе находится напротив вокзала.",
+    "example_en": "The café is opposite the station.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "gegenüber + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "перед существительным: напротив чего-либо",
+        "note_en": "before the noun: opposite something",
+        "example_de": "gegenüber dem Bahnhof"
+      },
+      {
+        "pattern": "Dativ + gegenüber",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "может стоять и после существительного; после местоимения — обычно так: mir gegenüber",
+        "note_en": "it can also follow the noun; after a pronoun this is the usual order: mir gegenüber",
+        "example_de": "dem Bahnhof gegenüber"
+      },
+      {
+        "pattern": "gegenüber von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "особенно в разговорной речи и с названиями мест; падеж определяет von",
+        "note_en": "especially in speech and with place names; von decides the case",
+        "example_de": "gegenüber vom Bahnhof",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "По отношению к: Er ist mir gegenüber sehr freundlich. Сравнение: gegenüber dem letzten Jahr — по сравнению с прошлым годом. Без существительного gegenüber — наречие «напротив»: Sie wohnt gegenüber.",
+    "usage_note_en": "Towards: Er ist mir gegenüber sehr freundlich. Comparison: gegenüber dem letzten Jahr — compared with last year. Without a noun, gegenüber is an adverb (opposite): Sie wohnt gegenüber.",
+    "search_forms": [
+      "gegenüber"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/gegenueber_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-010",
+    "type": "preposition",
+    "word": "durch",
+    "translation_ru": "через, сквозь; благодаря, путём (причина, средство)",
+    "translation_en": "through; by (means)",
+    "example_de": "Er geht durch den Park.",
+    "example_ru": "Он идёт через парк.",
+    "example_en": "He is walking through the park.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "durch + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "через пространство; средство или причина",
+        "note_en": "through a space; means or cause",
+        "example_de": "durch den Park"
+      }
+    ],
+    "contractions": {
+      "durchs": "durch das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорная слитная форма: durchs = durch das.",
+    "forms_note_en": "Colloquial contracted form: durchs = durch das.",
+    "usage_note_ru": "Средство или причина: durch Zufall — случайно. В пассиве иногда вместо von: durch einen Sturm zerstört. Если durch стоит в конце предложения при глаголе (Halte durch!), это часть глагола durchhalten, а не предлог.",
+    "usage_note_en": "Means or cause: durch Zufall — by chance. In the passive it sometimes replaces von: durch einen Sturm zerstört. When durch stands at the end of the clause with a verb (Halte durch!), it is part of the verb durchhalten, not a preposition.",
+    "search_forms": [
+      "durch"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/durch_mittels",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-011",
+    "type": "preposition",
+    "word": "für",
+    "translation_ru": "для; за (вместо, в обмен); на (срок)",
+    "translation_en": "for",
+    "example_de": "Das ist ein Geschenk für meinen Vater.",
+    "example_ru": "Это подарок для моего отца.",
+    "example_en": "This is a present for my father.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "für + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "для кого-либо, за что-либо",
+        "note_en": "for someone or something",
+        "example_de": "für meinen Vater"
+      }
+    ],
+    "contractions": {
+      "fürs": "für das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорная слитная форма: fürs = für das.",
+    "forms_note_en": "Colloquial contracted form: fürs = für das.",
+    "usage_note_ru": "Срок: für eine Woche — на неделю. Цена: für 10 Euro — за 10 евро. Мнение: für mich — для меня, по-моему. В вопросе Was für ein …? («какой?») падеж определяет не für, а роль слова в предложении.",
+    "usage_note_en": "Duration: für eine Woche — for a week. Price: für 10 Euro. Opinion: für mich — for me, in my view. In the question Was für ein …? (what kind of?), the case comes from the word's role in the sentence, not from für.",
+    "search_forms": [
+      "für"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/fuer_statt",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-012",
+    "type": "preposition",
+    "word": "gegen",
+    "translation_ru": "против; о, в (при ударе); около (о времени)",
+    "translation_en": "against; into (impact); around (time)",
+    "example_de": "Ich bin gegen diesen Plan.",
+    "example_ru": "Я против этого плана.",
+    "example_en": "I am against this plan.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "gegen + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "против кого-либо, чего-либо",
+        "note_en": "against someone or something",
+        "example_de": "gegen diesen Plan"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Удар: gegen die Wand — о стену, в стену. Приблизительное время: gegen acht Uhr — около восьми. Средство от чего-либо: ein Mittel gegen Kopfschmerzen.",
+    "usage_note_en": "Impact: gegen die Wand — into the wall. Approximate time: gegen acht Uhr — around eight. A remedy for something: ein Mittel gegen Kopfschmerzen.",
+    "search_forms": [
+      "gegen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/gegen_wider",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-013",
+    "type": "preposition",
+    "word": "ohne",
+    "translation_ru": "без",
+    "translation_en": "without",
+    "example_de": "Ich trinke Kaffee ohne Zucker.",
+    "example_ru": "Я пью кофе без сахара.",
+    "example_en": "I drink coffee without sugar.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "ohne + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "без кого-либо, без чего-либо",
+        "note_en": "without someone or something",
+        "example_de": "ohne meinen Bruder"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Часто без артикля: ohne Zucker, ohne Geld. ohne … zu + инфинитив (ohne zu fragen — не спрашивая) — это союз, отдельная карточка.",
+    "usage_note_en": "Often without an article: ohne Zucker, ohne Geld. ohne … zu + infinitive (ohne zu fragen — without asking) is a conjunction with a separate card.",
+    "search_forms": [
+      "ohne"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ohne_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-014",
+    "type": "preposition",
+    "word": "um",
+    "translation_ru": "в (о точном времени); вокруг; о (es geht um …)",
+    "translation_en": "at (clock time); around; about (es geht um …)",
+    "example_de": "Der Film beginnt um acht Uhr.",
+    "example_ru": "Фильм начинается в восемь часов.",
+    "example_en": "The film starts at eight o'clock.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "um + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "время по часам; вокруг чего-либо",
+        "note_en": "clock time; around something",
+        "example_de": "um den Tisch"
+      }
+    ],
+    "contractions": {
+      "ums": "um das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорная слитная форма: ums = um das.",
+    "forms_note_en": "Colloquial contracted form: ums = um das.",
+    "usage_note_ru": "Вокруг: um den Tisch (herum). Приблизительно: um Weihnachten — около Рождества. О чём: Es geht um Geld — речь идёт о деньгах. um … zu + инфинитив («чтобы») — это союз, отдельная карточка. Если um стоит в конце предложения при глаголе (Wir ziehen um), это часть глагола umziehen, а не предлог.",
+    "usage_note_en": "Around: um den Tisch (herum). Approximately: um Weihnachten — around Christmas. About: Es geht um Geld — it is about money. um … zu + infinitive (in order to) is a conjunction with a separate card. When um stands at the end of the clause with a verb (Wir ziehen um), it is part of the verb umziehen, not a preposition.",
+    "search_forms": [
+      "um"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/um_herum_vorbei_fuer",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-015",
+    "type": "preposition",
+    "word": "bis",
+    "translation_ru": "до",
+    "translation_en": "until; up to, as far as",
+    "example_de": "Ich arbeite bis Freitag.",
+    "example_ru": "Я работаю до пятницы.",
+    "example_en": "I'm working until Friday.",
+    "cases": [
+      "Akkusativ",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "bis + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "обычно без артикля: до какого-то времени или места",
+        "note_en": "usually without an article: until a time, as far as a place",
+        "example_de": "bis nächsten Freitag"
+      },
+      {
+        "pattern": "bis zu + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "с zu: падеж определяет zu",
+        "note_en": "with zu: zu decides the case",
+        "example_de": "bis zum Bahnhof",
+        "combined_with": "zu"
+      },
+      {
+        "pattern": "bis an / auf / in + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "с другим предлогом: падеж определяет второй предлог",
+        "note_en": "with another preposition: the second preposition decides the case",
+        "example_de": "bis in die Nacht",
+        "combined_with": "an / auf / in"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "bis bald, bis morgen — до скорого, до завтра. bis auf + Akkusativ — «кроме»: Alle bis auf einen waren da. Союз bis «пока не» вводит придаточное предложение — это отдельная карточка Konjunktion.",
+    "usage_note_en": "bis bald, bis morgen — see you soon, see you tomorrow. bis auf + Akkusativ — except: Alle bis auf einen waren da. The conjunction bis (until, introducing a clause) has a separate Konjunktion card.",
+    "search_forms": [
+      "bis"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bis_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-016",
+    "type": "preposition",
+    "word": "entlang",
+    "translation_ru": "вдоль",
+    "translation_en": "along",
+    "example_de": "Er geht die Straße entlang.",
+    "example_ru": "Он идёт вдоль улицы.",
+    "example_en": "He is walking along the street.",
+    "cases": [
+      "Akkusativ",
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "Akkusativ + entlang",
+        "case": "Akkusativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "после существительного: вдоль чего-либо (так чаще всего)",
+        "note_en": "after the noun: along something (the most common use)",
+        "example_de": "die Straße entlang"
+      },
+      {
+        "pattern": "entlang + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "перед существительным, скорее письменная речь",
+        "note_en": "before the noun, mostly in writing",
+        "example_de": "entlang des Flusses"
+      },
+      {
+        "pattern": "entlang + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "перед существительным, редко",
+        "note_en": "before the noun, rare",
+        "example_de": "entlang dem Fluss"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "В am Fluss entlang падеж задаёт an (Dativ), а entlang — наречие или часть глагола entlanggehen. В Швейцарии после существительного возможен и Dativ.",
+    "usage_note_en": "In am Fluss entlang, an decides the case (Dativ) and entlang is an adverb or part of the verb entlanggehen. In Switzerland Dativ is also possible after the noun.",
+    "search_forms": [
+      "entlang"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/entlang_seitlich_zuseiten",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-017",
+    "type": "preposition",
+    "word": "an",
+    "translation_ru": "на, у (вертикальная поверхность, край, вода); к (направление: an die Tür); в (дни, даты)",
+    "translation_en": "on, at (a vertical surface, an edge, water); to; on (days, dates)",
+    "example_de": "Das Bild hängt an der Wand.",
+    "example_ru": "Картина висит на стене.",
+    "example_en": "The picture is hanging on the wall.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "an + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место); время: am Montag",
+        "note_en": "Wo? — where (location); time: am Montag",
+        "example_de": "an der Wand"
+      },
+      {
+        "pattern": "an + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "an die Wand"
+      }
+    ],
+    "contractions": {
+      "am": "an dem",
+      "ans": "an das"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитные формы: am = an dem, ans = an das.",
+    "forms_note_en": "Contracted forms: am = an dem, ans = an das.",
+    "usage_note_ru": "Время (когда?) — Dativ: am Montag, am Abend, am 3. Mai. У воды, у края, у двери: am Meer, am Rand, an der Tür. Многие глаголы требуют an с определённым падежом: denken an + Akkusativ, teilnehmen an + Dativ. Если an стоит в конце предложения при глаголе (Ich rufe dich an), это часть глагола anrufen, а не предлог.",
+    "usage_note_en": "Time (when?) takes Dativ: am Montag, am Abend, am 3. Mai. By water, edges and doors: am Meer, am Rand, an der Tür. Many verbs require an with a fixed case: denken an + Akkusativ, teilnehmen an + Dativ. When an stands at the end of the clause with a verb (Ich rufe dich an), it is part of the verb anrufen, not a preposition.",
+    "search_forms": [
+      "an"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/an_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-018",
+    "type": "preposition",
+    "word": "auf",
+    "translation_ru": "на (горизонтальная поверхность); на, в (мероприятие, некоторые места); по-(немецки)",
+    "translation_en": "on (a horizontal surface); to, at (events, some places); in (a language)",
+    "example_de": "Das Buch liegt auf dem Tisch.",
+    "example_ru": "Книга лежит на столе.",
+    "example_en": "The book is lying on the table.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "auf + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место)",
+        "note_en": "Wo? — where (location)",
+        "example_de": "auf dem Tisch"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "auf den Tisch"
+      }
+    ],
+    "contractions": {
+      "aufs": "auf das"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитная форма: aufs = auf das.",
+    "forms_note_en": "Contracted form: aufs = auf das.",
+    "usage_note_ru": "Места и события: auf der Post, auf eine Party. Язык: auf Deutsch — по-немецки. Многие глаголы требуют auf + Akkusativ: warten auf, sich freuen auf. Если auf стоит в конце предложения при глаголе (Ich stehe um sieben auf), это часть глагола aufstehen, а не предлог.",
+    "usage_note_en": "Places and events: auf der Post, auf eine Party. Language: auf Deutsch — in German. Many verbs require auf + Akkusativ: warten auf, sich freuen auf. When auf stands at the end of the clause with a verb (Ich stehe um sieben auf), it is part of the verb aufstehen, not a preposition.",
+    "search_forms": [
+      "auf"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auf_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-019",
+    "type": "preposition",
+    "word": "hinter",
+    "translation_ru": "за, позади",
+    "translation_en": "behind",
+    "example_de": "Der Garten liegt hinter dem Haus.",
+    "example_ru": "Сад находится за домом.",
+    "example_en": "The garden is behind the house.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "hinter + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место)",
+        "note_en": "Wo? — where (location)",
+        "example_de": "hinter dem Haus"
+      },
+      {
+        "pattern": "hinter + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "hinter das Haus"
+      }
+    ],
+    "contractions": {
+      "hinterm": "hinter dem",
+      "hinters": "hinter das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорные слитные формы: hinterm = hinter dem, hinters = hinter das.",
+    "forms_note_en": "Colloquial contracted forms: hinterm = hinter dem, hinters = hinter das.",
+    "usage_note_ru": "Переносно: Das liegt hinter uns. — Это уже позади.",
+    "usage_note_en": "Figuratively: Das liegt hinter uns. — That is behind us.",
+    "search_forms": [
+      "hinter"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hinter_nach_rueckwaertig",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-020",
+    "type": "preposition",
+    "word": "in",
+    "translation_ru": "в (внутри, внутрь); через (о времени); в (о месяцах, временах года: im Mai)",
+    "translation_en": "in, inside; into; in (time)",
+    "example_de": "Wir wohnen in Berlin.",
+    "example_ru": "Мы живём в Берлине.",
+    "example_en": "We live in Berlin.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "in + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место); время: im Mai",
+        "note_en": "Wo? — where (location); time: im Mai",
+        "example_de": "in der Stadt"
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "in die Stadt"
+      }
+    ],
+    "contractions": {
+      "im": "in dem",
+      "ins": "in das"
+    },
+    "forms": null,
+    "forms_note_ru": "Слитные формы: im = in dem, ins = in das.",
+    "forms_note_en": "Contracted forms: im = in dem, ins = in das.",
+    "usage_note_ru": "Время (когда?) — Dativ: im Mai, im Sommer; in einer Woche — через неделю. Страны с артиклем: in der Schweiz (где), in die Schweiz (куда).",
+    "usage_note_en": "Time (when?) takes Dativ: im Mai, im Sommer; in einer Woche — in a week's time. Countries with an article: in der Schweiz (where), in die Schweiz (where to).",
+    "search_forms": [
+      "in"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/in_innen",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-021",
+    "type": "preposition",
+    "word": "neben",
+    "translation_ru": "рядом с, возле; помимо, наряду с",
+    "translation_en": "next to, beside; besides",
+    "example_de": "Die Apotheke ist neben der Bank.",
+    "example_ru": "Аптека рядом с банком.",
+    "example_en": "The pharmacy is next to the bank.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "neben + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место)",
+        "note_en": "Wo? — where (location)",
+        "example_de": "neben der Bank"
+      },
+      {
+        "pattern": "neben + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "neben das Fenster"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Помимо, наряду с — Dativ: Neben der Arbeit studiert sie. — Помимо работы она учится.",
+    "usage_note_en": "Besides — Dativ: Neben der Arbeit studiert sie. — Besides working, she studies.",
+    "search_forms": [
+      "neben"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/neben_Praeposition_bei_auszer",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-022",
+    "type": "preposition",
+    "word": "über",
+    "translation_ru": "над; через (пересекая); о, об (тема); более, свыше",
+    "translation_en": "above, over; across; about (a topic); more than",
+    "example_de": "Die Lampe hängt über dem Tisch.",
+    "example_ru": "Лампа висит над столом.",
+    "example_en": "The lamp is hanging above the table.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "über + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место)",
+        "note_en": "Wo? — where (location)",
+        "example_de": "über dem Tisch"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление); через что-либо; тема: о чём",
+        "note_en": "Wohin? — where to (direction); across something; topic: about",
+        "example_de": "über den Tisch"
+      }
+    ],
+    "contractions": {
+      "übers": "über das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорная слитная форма: übers = über das.",
+    "forms_note_en": "Colloquial contracted form: übers = über das.",
+    "usage_note_ru": "Тема — всегда Akkusativ: sprechen über das Wetter. Через: über die Straße gehen. Маршрут: über Köln nach Berlin — через Кёльн. Количество: über 100 Leute — более ста человек.",
+    "usage_note_en": "A topic always takes Akkusativ: sprechen über das Wetter. Across: über die Straße gehen. Route: über Köln nach Berlin — via Cologne. Amount: über 100 Leute — more than a hundred people.",
+    "search_forms": [
+      "über"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ueber_auf_darueber_darauf",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-023",
+    "type": "preposition",
+    "word": "unter",
+    "translation_ru": "под; среди, между; ниже, меньше",
+    "translation_en": "under, below; among; less than",
+    "example_de": "Die Katze schläft unter dem Bett.",
+    "example_ru": "Кошка спит под кроватью.",
+    "example_en": "The cat is sleeping under the bed.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "unter + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место)",
+        "note_en": "Wo? — where (location)",
+        "example_de": "unter dem Bett"
+      },
+      {
+        "pattern": "unter + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "unter das Bett"
+      }
+    ],
+    "contractions": {
+      "unterm": "unter dem",
+      "unters": "unter das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорные слитные формы: unterm = unter dem, unters = unter das.",
+    "forms_note_en": "Colloquial contracted forms: unterm = unter dem, unters = unter das.",
+    "usage_note_ru": "Среди — Dativ: unter Freunden — среди друзей. Меньше: unter 18 Jahren — младше 18 лет. Если unter стоит в конце предложения при глаголе (Die Sonne geht unter), это часть глагола untergehen, а не предлог.",
+    "usage_note_en": "Among — Dativ: unter Freunden — among friends. Less than: unter 18 Jahren — under 18. When unter stands at the end of the clause with a verb (Die Sonne geht unter), it is part of the verb untergehen, not a preposition.",
+    "search_forms": [
+      "unter"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/unter_darunter_abwaerts_tiefer",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-024",
+    "type": "preposition",
+    "word": "vor",
+    "translation_ru": "перед; до, перед (о времени); назад; от (причина)",
+    "translation_en": "in front of; before; ago; with, for (cause)",
+    "example_de": "Das Auto steht vor dem Haus.",
+    "example_ru": "Машина стоит перед домом.",
+    "example_en": "The car is standing in front of the house.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "vor + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место); время: vor dem Essen",
+        "note_en": "Wo? — where (location); time: vor dem Essen",
+        "example_de": "vor dem Haus"
+      },
+      {
+        "pattern": "vor + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "vor das Haus"
+      }
+    ],
+    "contractions": {
+      "vorm": "vor dem",
+      "vors": "vor das"
+    },
+    "forms": null,
+    "forms_note_ru": "Разговорные слитные формы: vorm = vor dem, vors = vor das.",
+    "forms_note_en": "Colloquial contracted forms: vorm = vor dem, vors = vor das.",
+    "usage_note_ru": "Время — всегда Dativ: vor dem Essen — перед едой; vor zwei Jahren — два года назад. Причина — Dativ: vor Angst zittern — дрожать от страха. Если vor стоит в конце предложения при глаголе (Ich stelle mich vor), это часть глагола sich vorstellen, а не предлог.",
+    "usage_note_en": "Time always takes Dativ: vor dem Essen — before the meal; vor zwei Jahren — two years ago. Cause — Dativ: vor Angst zittern — to tremble with fear. When vor stands at the end of the clause with a verb (Ich stelle mich vor), it is part of the verb sich vorstellen, not a preposition.",
+    "search_forms": [
+      "vor"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/vor_bevor_aus_gegen_heraus",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-025",
+    "type": "preposition",
+    "word": "zwischen",
+    "translation_ru": "между",
+    "translation_en": "between; among",
+    "example_de": "Das Café liegt zwischen der Post und der Bank.",
+    "example_ru": "Кафе находится между почтой и банком.",
+    "example_en": "The café is between the post office and the bank.",
+    "cases": [
+      "Dativ",
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "zwischen + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wo? — где (место); время: zwischen 8 und 9 Uhr",
+        "note_en": "Wo? — where (location); time: zwischen 8 und 9 Uhr",
+        "example_de": "zwischen der Post und der Bank"
+      },
+      {
+        "pattern": "zwischen + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "Wohin? — куда (направление)",
+        "note_en": "Wohin? — where to (direction)",
+        "example_de": "zwischen seine Eltern"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Время — Dativ: zwischen 8 und 9 Uhr. Куда — Akkusativ: Er setzt sich zwischen seine Eltern.",
+    "usage_note_en": "Time takes Dativ: zwischen 8 und 9 Uhr. Where to — Akkusativ: Er setzt sich zwischen seine Eltern.",
+    "search_forms": [
+      "zwischen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zwischen_innerhalb_inmitten_binnen",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-026",
+    "type": "preposition",
+    "word": "während",
+    "translation_ru": "во время, в течение",
+    "translation_en": "during",
+    "example_de": "Während des Essens sprachen sie nicht.",
+    "example_ru": "Во время еды они не разговаривали.",
+    "example_en": "They didn't talk during the meal.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "während + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "во время чего-либо",
+        "note_en": "during something",
+        "example_de": "während des Essens"
+      },
+      {
+        "pattern": "während + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "colloquial",
+        "note_ru": "в разговорной речи; в норме — если Genitiv не виден: während fünf Jahren",
+        "note_en": "in speech; standard when the genitive is not visible: während fünf Jahren",
+        "example_de": "während dem Konzert"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Союз während «пока, в то время как; тогда как» вводит придаточное предложение — это отдельная карточка Konjunktion.",
+    "usage_note_en": "The conjunction während (while, whereas, introducing a clause) has a separate Konjunktion card.",
+    "search_forms": [
+      "während"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/waehrend_binnen_inmitten",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-027",
+    "type": "preposition",
+    "word": "wegen",
+    "translation_ru": "из-за, по причине",
+    "translation_en": "because of",
+    "example_de": "Wegen des schlechten Wetters blieben wir zu Hause.",
+    "example_ru": "Из-за плохой погоды мы остались дома.",
+    "example_en": "Because of the bad weather, we stayed at home.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "wegen + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "из-за чего-либо",
+        "note_en": "because of something",
+        "example_de": "wegen des Wetters"
+      },
+      {
+        "pattern": "Genitiv + wegen",
+        "case": "Genitiv",
+        "position": "after",
+        "status": "also_correct",
+        "note_ru": "после существительного — книжный вариант",
+        "note_en": "after the noun — formal style",
+        "example_de": "des Wetters wegen"
+      },
+      {
+        "pattern": "wegen + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "colloquial",
+        "note_ru": "в разговорной речи, особенно с местоимениями: wegen mir",
+        "note_en": "in speech, especially with pronouns: wegen mir",
+        "example_de": "wegen dem Wetter"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "С местоимениями в норме используются слова meinetwegen, deinetwegen, seinetwegen. Существительное без артикля часто без окончания: wegen Umbau geschlossen.",
+    "usage_note_en": "With pronouns, standard German uses meinetwegen, deinetwegen, seinetwegen. A noun without an article often has no ending: wegen Umbau geschlossen.",
+    "search_forms": [
+      "wegen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wegen_infolge_bezueglich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-028",
+    "type": "preposition",
+    "word": "trotz",
+    "translation_ru": "несмотря на",
+    "translation_en": "despite, in spite of",
+    "example_de": "Trotz des Regens gingen wir spazieren.",
+    "example_ru": "Несмотря на дождь, мы пошли гулять.",
+    "example_en": "Despite the rain, we went for a walk.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "trotz + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "несмотря на что-либо",
+        "note_en": "in spite of something",
+        "example_de": "trotz des Regens"
+      },
+      {
+        "pattern": "trotz + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "colloquial",
+        "note_ru": "в разговорной речи, на юге Германии, в Австрии и Швейцарии; в норме — без артикля во множественном: trotz Beweisen",
+        "note_en": "in speech and in southern Germany, Austria and Switzerland; standard with a plural without an article: trotz Beweisen",
+        "example_de": "trotz dem Regen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "trotz allem — несмотря ни на что. Существительное без артикля часто без окончания: trotz Regen. Trotz с большой буквы — существительное «упрямство».",
+    "usage_note_en": "trotz allem — in spite of everything. A noun without an article often has no ending: trotz Regen. Capitalised Trotz is a noun (defiance).",
+    "search_forms": [
+      "trotz"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/trotz",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-029",
+    "type": "preposition",
+    "word": "statt",
+    "translation_ru": "вместо",
+    "translation_en": "instead of",
+    "example_de": "Statt eines Kuchens gab es Eis.",
+    "example_ru": "Вместо торта было мороженое.",
+    "example_en": "Instead of a cake, there was ice cream.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "statt + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вместо чего-либо",
+        "note_en": "instead of something",
+        "example_de": "statt eines Kuchens"
+      },
+      {
+        "pattern": "statt + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "colloquial",
+        "note_ru": "в разговорной речи; в норме — если Genitiv не виден: statt Worten",
+        "note_en": "in speech; standard when the genitive is not visible: statt Worten",
+        "example_de": "statt dem Kuchen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "anstatt значит то же самое и управляет так же. statt … zu + инфинитив (statt zu arbeiten — вместо того чтобы работать) — это союз, отдельная карточка.",
+    "usage_note_en": "anstatt means the same and takes the same cases. statt … zu + infinitive (statt zu arbeiten — instead of working) is a conjunction with a separate card.",
+    "search_forms": [
+      "statt",
+      "anstatt"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/statt_anstelle_vorangestellt",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-030",
+    "type": "preposition",
+    "word": "innerhalb",
+    "translation_ru": "за, в течение (о времени); внутри, в пределах",
+    "translation_en": "within (time); inside, within",
+    "example_de": "Innerhalb einer Woche war alles fertig.",
+    "example_ru": "За неделю всё было готово.",
+    "example_en": "Within a week, everything was ready.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "innerhalb + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в течение, в пределах чего-либо",
+        "note_en": "within something",
+        "example_de": "innerhalb einer Woche"
+      },
+      {
+        "pattern": "innerhalb von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "очень частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "very common, especially when the genitive is not visible; von decides the case",
+        "example_de": "innerhalb von zwei Tagen",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Место: innerhalb der Stadt — в пределах города.",
+    "usage_note_en": "Place: innerhalb der Stadt — within the city.",
+    "search_forms": [
+      "innerhalb"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/innerhalb_innerhalb_einer_Sache",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-031",
+    "type": "preposition",
+    "word": "außerhalb",
+    "translation_ru": "вне, за пределами; за (городом)",
+    "translation_en": "outside",
+    "example_de": "Wir wohnen außerhalb der Stadt.",
+    "example_ru": "Мы живём за городом.",
+    "example_en": "We live outside the city.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "außerhalb + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вне, за пределами чего-либо",
+        "note_en": "outside something",
+        "example_de": "außerhalb der Stadt"
+      },
+      {
+        "pattern": "außerhalb von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "часто в речи, особенно с названиями мест; падеж определяет von",
+        "note_en": "common in speech, especially with place names; von decides the case",
+        "example_de": "außerhalb von Berlin",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Время: außerhalb der Öffnungszeiten — в нерабочее время.",
+    "usage_note_en": "Time: außerhalb der Öffnungszeiten — outside opening hours.",
+    "search_forms": [
+      "außerhalb"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auszerhalb_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-032",
+    "type": "preposition",
+    "word": "laut",
+    "translation_ru": "согласно, по словам, по данным",
+    "translation_en": "according to",
+    "example_de": "Laut einem Bericht ist er zurückgetreten.",
+    "example_ru": "Согласно сообщению, он подал в отставку.",
+    "example_en": "According to a report, he has resigned.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "laut + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "согласно чему-либо",
+        "note_en": "according to something",
+        "example_de": "laut einem Bericht"
+      },
+      {
+        "pattern": "laut + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "редко",
+        "note_en": "rare",
+        "example_de": "laut des Berichts"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Существительное без артикля обычно без окончания: laut Gesetz. Прилагательное laut — «громкий; громко» — отдельная карточка.",
+    "usage_note_en": "A noun without an article usually has no ending: laut Gesetz. The adjective laut (loud; loudly) has a separate card.",
+    "search_forms": [
+      "laut"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/laut_zufolge_bezueglich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-033",
+    "type": "preposition",
+    "word": "dank",
+    "translation_ru": "благодаря",
+    "translation_en": "thanks to",
+    "example_de": "Dank seiner Hilfe haben wir es geschafft.",
+    "example_ru": "Благодаря его помощи мы справились.",
+    "example_en": "Thanks to his help, we managed it.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "dank + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "благодаря чему-либо",
+        "note_en": "thanks to something",
+        "example_de": "dank seiner Hilfe"
+      },
+      {
+        "pattern": "dank + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "реже",
+        "note_en": "less common",
+        "example_de": "dank seinem Fleiß"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Существительное без артикля обычно без окончания: dank Internet. Существительное Dank (с большой буквы) — «благодарность», как в Vielen Dank!, — это отдельная карточка.",
+    "usage_note_en": "A noun without an article usually has no ending: dank Internet. The noun Dank (gratitude, thanks), as in Vielen Dank!, has a separate card.",
+    "search_forms": [
+      "dank"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dank",
+    "wortschatz_excluded": true
+  }
+]

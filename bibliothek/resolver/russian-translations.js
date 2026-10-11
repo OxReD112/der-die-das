@@ -1,7 +1,23 @@
 /* Translation enrichment only: never creates or ranks lemma candidates. */
 (() => {
   "use strict";
-  const base = new URL("../open%20data/dictionary-de-ru-json/", document.currentScript.src);
+  let diagnosticPending = null;
+  function observePending(pending) {
+    if (typeof window.BibliothekAnalysisDiagnostics !== 'function') return;
+    diagnosticPending ||= new WeakSet();
+    diagnosticPending.add(pending);
+    pending.then(() => diagnosticPending.delete(pending), () => diagnosticPending.delete(pending));
+  }
+  const cacheState = (cache, key) => !cache.has(key) ? 'miss'
+    : diagnosticPending?.has(cache.get(key)) ? 'pending' : 'hit';
+  function observe(type, detail = {}) {
+    const sink = window.BibliothekAnalysisDiagnostics;
+    if (typeof sink !== 'function') return;
+    try { sink({component:'russian',type,
+      time:typeof performance !== 'undefined' ? performance.now() : Date.now(),...detail}); } catch (_) {}
+  }
+
+  const base = new URL("../../open%20data/dictionary-de-ru-json/", document.currentScript.src);
   const cache = new Map();
   const posAliases = {Verb:"verb",Nomen:"noun",Adjektiv:"adj",Adverb:"adv",Pronomen:"pron",Konjunktion:"conj",
     adjective:"adj",adverb:"adv",pronoun:"pron",conjunction:"conj"};
@@ -13,6 +29,7 @@
   };
   async function records(word) {
     const index = partition(word);
+    observe('partition-cache', {cache:'russian',key:index,word,state:cacheState(cache,index),size:cache.size});
     if (!cache.has(index)) {
       const request = fetch(new URL(`parts/${String(index).padStart(4,"0")}.json`,base))
         .then(response => {
@@ -23,6 +40,7 @@
             throw new Error("Invalid Russian translation partition");
           return data.records;
         }).catch(error => { cache.delete(index); throw error; });
+      observePending(request);
       cache.set(index,request);
     }
     const data = await cache.get(index);
@@ -48,7 +66,8 @@
     return null;
   }
   async function enrich(resolution, language) {
-    if (language !== "ru") return resolution;
+    observe('enrich-start', {language,candidates:resolution.candidates.length});
+    if (language !== "ru") {observe('enrich-end', {language});return resolution;}
     const pending = new Map();
     await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.translation?.ru).map(async candidate => {
       const key = JSON.stringify([candidate.lemma,posOf(candidate.pos)]);
@@ -65,6 +84,7 @@
         candidate.russianTranslationError = "unavailable";
       }
     }));
+    observe('enrich-end', {language});
     return resolution;
   }
   window.BibliothekRussianTranslations = Object.freeze({lookup,enrich});

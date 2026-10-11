@@ -577,11 +577,24 @@
     const atEnd = pagination.page === pagination.count - 1;
     $("chapter-progress-fill").style.width = `${atEnd ? 100 : pagination.count > 1 ? pagination.page / pagination.count * 100 : 0}%`;
   }
+  // Speed (BIBLIOTHEK_SPEED_TODO_RU.md, item 2): prepare the separable-verb index while the
+  // reader looks at the first page, so the first tap does not wait for it. A tap that comes
+  // earlier simply shares the same preparation inside the resolver; failures stay silent and
+  // the next book opening tries again.
+  let separableWarmup = false;
+  function warmUpLookup() {
+    if (separableWarmup || navigator.connection?.saveData) return;
+    separableWarmup = true;
+    const start = () => loadDictionary().then(() => lemmaResolver?.prepareSeparable?.())
+      .catch(() => { separableWarmup = false; });
+    const idle = window.requestIdleCallback ? fn => window.requestIdleCallback(fn, {timeout:2000}) : fn => setTimeout(fn, 200);
+    setTimeout(() => idle(start), 600);
+  }
   async function openBook(book) {
     closePopups();
     renderBookText(book);
     document.title = `${book.title} · Bibliothek`;
-
+    warmUpLookup();
   }
   let lemmaResolver = null, selectedResolution = null;
   const usageNote = candidate => candidate?.usage?.role === "nominalized"
@@ -603,7 +616,7 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261011-derived-1" : path === "german-adverbs.json" ? "20261010-bitte-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261011-derived-1" : path === "german-adverbs.json" ? "20261011-nicht-partikel-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};

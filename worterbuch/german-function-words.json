@@ -1,0 +1,80 @@
+[
+  {
+    "id": "function-001",
+    "type": "adverb",
+    "word": "auch",
+    "translation_ru": "тоже, также; даже",
+    "translation_en": "also, too; even",
+    "example_de": "Ich trinke auch Kaffee.",
+    "example_ru": "Я тоже пью кофе.",
+    "example_en": "I drink coffee too.",
+    "target_file": "german-adverbs.json",
+    "example_cloze": "Ich trinke {{c1::auch}} Kaffee.",
+    "usage_note_ru": "Даже: Auch ein Kind versteht das. — Даже ребёнок это понимает. nicht nur …, sondern auch — не только …, но и. wenn auch — хотя.",
+    "usage_note_en": "Even: Auch ein Kind versteht das. — Even a child understands that. nicht nur …, sondern auch — not only …, but also. wenn auch — although.",
+    "search_forms": [
+      "auch"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auch_Adverb",
+    "wortschatz_excluded": false
+  },
+  {
+    "id": "function-002",
+    "type": "particle",
+    "word": "zu",
+    "translation_ru": "частица перед инфинитивом (не переводится)",
+    "translation_en": "to (before an infinitive)",
+    "example_de": "Ich habe keine Zeit zu lesen.",
+    "example_ru": "У меня нет времени читать.",
+    "example_en": "I have no time to read.",
+    "target_file": null,
+    "forms": null,
+    "usage_note_ru": "zu + инфинитив стоит после многих глаголов, существительных и прилагательных: Es ist schwer, Deutsch zu lernen. У глаголов с отделяемой приставкой zu стоит внутри слова: anzurufen. После модальных глаголов zu не нужно: Ich muss lesen. Также: um … zu, ohne … zu, statt … zu. Предлог zu («к») и zu «слишком» — отдельные карточки.",
+    "usage_note_en": "zu + infinitive follows many verbs, nouns and adjectives: Es ist schwer, Deutsch zu lernen. With separable verbs zu goes inside the word: anzurufen. After modal verbs there is no zu: Ich muss lesen. Also in um … zu, ohne … zu, statt … zu. The preposition zu (to) and zu meaning too have separate cards.",
+    "search_forms": [
+      "zu"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zu_Konjunktion",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-003",
+    "type": "adverb",
+    "word": "zu",
+    "translation_ru": "слишком",
+    "translation_en": "too",
+    "example_de": "Der Kaffee ist zu heiß.",
+    "example_ru": "Кофе слишком горячий.",
+    "example_en": "The coffee is too hot.",
+    "target_file": "german-adverbs.json",
+    "usage_note_ru": "zu viel, zu spät, zu teuer. Не путать: sehr — очень, zu — слишком (больше, чем нужно). Разговорное zu — «закрыто»: Die Tür ist zu.",
+    "usage_note_en": "zu viel, zu spät, zu teuer. Do not confuse: sehr — very, zu — too (more than is right). Colloquial zu — closed: Die Tür ist zu.",
+    "search_forms": [
+      "zu"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zu_Adverb",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-004",
+    "type": "adjective",
+    "word": "letzte",
+    "translation_ru": "последний; прошлый",
+    "translation_en": "last; previous",
+    "example_de": "Das ist der letzte Bus.",
+    "example_ru": "Это последний автобус.",
+    "example_en": "This is the last bus.",
+    "target_file": "german-adjectives.json",
+    "example_cloze": "Das ist der {{c1::letzte}} Bus.",
+    "usage_note_ru": "О времени — «прошлый»: letzte Woche — на прошлой неделе, letztes Jahr — в прошлом году. Последний оставшийся: mein letztes Geld — мои последние деньги. Формы без окончания нет: всегда letzte, letzter …",
+    "usage_note_en": "With time expressions — last: letzte Woche — last week, letztes Jahr — last year. Remaining: mein letztes Geld — the last of my money. There is no form without an ending: always letzte, letzter …",
+    "search_forms": [
+      "letzten",
+      "letzter",
+      "letztes",
+      "letztem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/letzte",
+    "wortschatz_excluded": false
+  }
+]

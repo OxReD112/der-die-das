@@ -1,11 +1,27 @@
 /* Lossless dictionary export reader. Stored dictionary content is never edited. */
 (() => {
   "use strict";
-  const base = new URL("../open%20data/dictionary-de-json/", document.currentScript.src);
+  let diagnosticPending = null;
+  function observePending(pending) {
+    if (typeof window.BibliothekAnalysisDiagnostics !== 'function') return;
+    diagnosticPending ||= new WeakSet();
+    diagnosticPending.add(pending);
+    pending.then(() => diagnosticPending.delete(pending), () => diagnosticPending.delete(pending));
+  }
+  const cacheState = (cache, key) => !cache.has(key) ? 'miss'
+    : diagnosticPending?.has(cache.get(key)) ? 'pending' : 'hit';
+  function observe(type, detail = {}) {
+    const sink = window.BibliothekAnalysisDiagnostics;
+    if (typeof sink !== 'function') return;
+    try { sink({component:'fallback',type,
+      time:typeof performance !== 'undefined' ? performance.now() : Date.now(),...detail}); } catch (_) {}
+  }
+
+  const base = new URL("../../open%20data/dictionary-de-json/", document.currentScript.src);
   const cache = new Map();
   const verbFormCache = new Map();
-  const verbFormsBase = new URL("fallback-verb-forms/", document.currentScript.src);
-  const separableUrl = new URL("separable-index.json?v=20261009-reviewed-forms-2", document.currentScript.src);
+  const verbFormsBase = new URL("data/fallback-verb-forms/", document.currentScript.src);
+  const separableUrl = new URL("data/separable-index.json?v=20261009-reviewed-forms-2", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
@@ -17,7 +33,7 @@
     }).catch(error => { separablePromise = null; throw error; });
     return separablePromise;
   }
-  const superlativeUrl=new URL('superlative-index.json?v=20261008-l07-1',document.currentScript.src);
+  const superlativeUrl=new URL('data/superlative-index.json?v=20261008-l07-1',document.currentScript.src);
   let superlativePromise=null;
   async function superlativeEntries(word) {
     if(!superlativePromise)superlativePromise=fetch(superlativeUrl).then(r=>{
@@ -43,7 +59,7 @@
       return true;
     } catch (_) { return true; } // Missing filter preserves the full lookup path.
   }
-  const auxiliaryFormsUrl=new URL('auxiliary-verb-forms.json?v=20261008-f4-1',document.currentScript.src);
+  const auxiliaryFormsUrl=new URL('data/auxiliary-verb-forms.json?v=20261008-f4-1',document.currentScript.src);
   let auxiliaryFormsPromise=null;
   async function auxiliaryInflections(word) {
     if(!auxiliaryFormsPromise)auxiliaryFormsPromise=fetch(auxiliaryFormsUrl).then(r=>{
@@ -54,6 +70,7 @@
   }
   async function verbFormLinks(word) {
     const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
+    observe('partition-cache', {cache:'verb-forms',key:index,word:spelling,state:cacheState(verbFormCache,index),size:verbFormCache.size});
     if (!verbFormCache.has(index)) {
       const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
         if (!response.ok) throw new Error("Fallback verb morphology unavailable");
@@ -62,14 +79,15 @@
         if(data.format_version !== 1 || data.partition !== index)throw new Error("Invalid fallback verb morphology partition");
         return data.records;
       }).catch(error=>{verbFormCache.delete(index);throw error;});
+      observePending(pending);
       verbFormCache.set(index,pending);
     }
     const rows = (await verbFormCache.get(index))[spelling] || [];
     return rows.map(([lemma,tags])=>[spelling,lemma,tags]);
   }
-  async function derivedVerbGroups(word) {
+  async function derivedVerbGroups(word, issues = null) {
     let links;
-    try { links = await verbFormLinks(word); } catch (_) { return []; }
+    try { links = await verbFormLinks(word); } catch (error) { issues?.push({source:'verb-forms',message:String(error.message || error)}); return []; }
     const groups = [];
     for(const lemma of [...new Set(links.map(row=>row[1]))]) {
       const lexical = (await lexicalGroups(lemma)).filter(g=>g.pos === "verb" && g.meanings.length);
@@ -82,6 +100,7 @@
   }
   async function record(word) {
     const index = partition(word);
+    observe('partition-cache', {cache:'dictionary',key:index,word,state:cacheState(cache,index),size:cache.size});
     if (!cache.has(index)) {
       const promise = fetch(new URL(`parts/${String(index).padStart(4, "0")}.json`, base))
         .then(response => {
@@ -91,6 +110,7 @@
           if (data.format_version !== 1 || data.partition !== index) throw new Error("Invalid dictionary partition");
           return data.records;
         }).catch(error => { cache.delete(index); throw error; });
+      observePending(promise);
       cache.set(index, promise);
     }
     const records = await cache.get(index);
@@ -111,13 +131,16 @@
     return match[2].normalize("NFC").toLocaleLowerCase("de-DE");
   }
   function groupsFor(word, data) {
+    observe('groups-build', {word});
     const byPos = new Map();
     for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0]-b[0])) {
       const pos = row[2] || "";
       if (!byPos.has(pos)) byPos.set(pos, []);
       byPos.get(pos).push(row[3]);
     }
-    const mappedLemmas = (data?.inflections || []).map(row => row[1]);
+    // Auxiliary rows (haben: ~9 300, sein: ~1 500 "auxiliary of <verb>" links) never name a
+    // lemma inside a sense, and comparing every sense with each of them cost seconds in browsers.
+    const mappedLemmas = (data?.inflections || []).filter(row => !String(row[2] || "").split(",").includes("auxiliary")).map(row => row[1]);
     return [...byPos].map(([pos, values]) => {
       const reference = value => !!referenceLemma(value) || /^inflection of\b/iu.test(value) || mappedLemmas.some(lemma =>
         value.toLocaleLowerCase("de-DE").includes(` of ${lemma.toLocaleLowerCase("de-DE")}`) &&
@@ -209,7 +232,8 @@
     const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next)))).flat();
     return [...direct.filter(group => group.meanings.length),...mapped.filter(group => !positions.size || positions.has(group.pos))];
   }
-  async function lookup(word) {
+  async function lookup(word, issues = null) {
+    observe('lookup', {word});
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
     for (const candidate of candidates) {
       const data = await record(candidate);
@@ -242,7 +266,27 @@
       if (merged.size || notes.length) return [...merged.values(),...notes];
       if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
     }
-    return derivedVerbGroups(String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE"));
+    return derivedVerbGroups(String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE"),issues);
+  }
+  // Verify a hypothesis against lexical and inflection records, without
+  // changing imported records or requiring membership in the derived index.
+  async function separableFormEvidence(form, prefix, lemma) {
+    const simplePrefixes = new Set(['ab','an','auf','aus','ein','mit','nach','vor','weg','zu','zurück','her','hin','fort','los','fest']);
+    if (!lemma.startsWith(prefix) || !/^[\p{L}\p{M}]+$/u.test(form+prefix+lemma)) return null;
+    const lexical=(await lexicalGroups(lemma)).filter(g=>g.pos==='verb'&&g.word===lemma&&g.meanings.length);
+    if (!lexical.length) return null;
+    const joined=await record(prefix+form);
+    const links=(joined?.inflections||[]).filter(([f,l,tags])=>f===prefix+form&&l===lemma&&
+      /(?:^|,)(?:present|past|preterite|imperative|indicative|subjunctive|subjunctive-ii)(?:,|$)/u.test(tags)&&
+      !/(?:^|,)(?:participle|infinitive-zu)(?:,|$)/u.test(tags));
+    if (!links.length) return null;
+    let separation='unambiguous-prefix-and-explicit-inflection';
+    if (!simplePrefixes.has(prefix)) {
+      const zu=await record(prefix+'zu'+lemma.slice(prefix.length));
+      if (!(zu?.inflections||[]).some(([f,l,tags])=>l===lemma&&String(tags).split(',').includes('infinitive-zu'))) return null;
+      separation='explicit-zu-infinitive-and-inflection';
+    }
+    return {lemma,prefix,meanings:[...new Set(lexical.flatMap(g=>g.meanings))],evidence:separation};
   }
   // Wörterbuch cards retain the selected entry word and its direct senses.
   async function lookupEntry(word) { return meanings(await record(word)); }
@@ -278,5 +322,6 @@
     if (!values.some(spellingReference)) return null;
     return {meanings:await expand(values,new Set([String(word).normalize('NFC').toLocaleLowerCase('de-DE')])),references,unresolved};
   }
-  window.DeutschFallbackDictionary = {auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
+  window.DeutschFallbackDictionary = {lookupFacts,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

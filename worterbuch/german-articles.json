@@ -1,0 +1,197 @@
+[
+  {
+    "id": "article-001",
+    "type": "article",
+    "word": "der",
+    "translation_ru": "определённый артикль (на русский обычно не переводится)",
+    "translation_en": "the",
+    "example_de": "Die Frau gibt dem Kind den Ball.",
+    "example_ru": "Женщина даёт ребёнку мяч.",
+    "example_en": "The woman gives the child the ball.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "der",
+            "die",
+            "das",
+            "die"
+          ],
+          "Akkusativ": [
+            "den",
+            "die",
+            "das",
+            "die"
+          ],
+          "Dativ": [
+            "dem",
+            "der",
+            "dem",
+            "den"
+          ],
+          "Genitiv": [
+            "des",
+            "der",
+            "des",
+            "der"
+          ]
+        }
+      }
+    ],
+    "grammar": {
+      "article_kind": "definite",
+      "adjective_declension": "weak"
+    },
+    "forms_note_ru": "Артикль согласуется с существительным в роде, числе и падеже. В Genitiv мужского и среднего рода существительное обычно получает -s/-es (des Mannes), в Dativ Plural — -n, если форма множественного числа не оканчивается на -n или -s (den Kindern, но den Frauen, den Autos). С предлогами артикль часто сливается: im = in dem, zum = zu dem, zur = zu der.",
+    "forms_note_en": "The article agrees with its noun in gender, number and case. In the masculine and neuter genitive the noun usually takes -s/-es (des Mannes); in the dative plural it adds -n unless the plural already ends in -n or -s (den Kindern, but den Frauen, den Autos). With prepositions the article often contracts: im = in dem, zum = zu dem, zur = zu der.",
+    "usage_note_ru": "Артикль стоит перед существительным или перед прилагательным, за которым идёт существительное: der Tisch, der alte Tisch. Если der/die/das заменяет существительное («тот», «который»), это местоимение — см. карточки Pronomen; формы denen, dessen, deren бывают только у местоимения.",
+    "usage_note_en": "The article comes before a noun, or before an adjective followed by a noun: der Tisch, der alte Tisch. When der/die/das replaces a noun (that one, who/which), it is a pronoun — see the Pronomen cards; the forms denen, dessen and deren occur only in the pronoun.",
+    "search_forms": [
+      "der",
+      "die",
+      "das",
+      "den",
+      "dem",
+      "des"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/der__die_das_bestimmte_Artikel",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "article-002",
+    "type": "article",
+    "word": "ein",
+    "translation_ru": "неопределённый артикль (на русский обычно не переводится; иногда «один, некий»)",
+    "translation_en": "a, an",
+    "example_de": "Ich habe eine Frage.",
+    "example_ru": "У меня есть вопрос.",
+    "example_en": "I have a question.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "ein",
+            "eine",
+            "ein",
+            "—"
+          ],
+          "Akkusativ": [
+            "einen",
+            "eine",
+            "ein",
+            "—"
+          ],
+          "Dativ": [
+            "einem",
+            "einer",
+            "einem",
+            "—"
+          ],
+          "Genitiv": [
+            "eines",
+            "einer",
+            "eines",
+            "—"
+          ]
+        }
+      }
+    ],
+    "grammar": {
+      "article_kind": "indefinite",
+      "adjective_declension": "mixed"
+    },
+    "forms_note_ru": "Во множественном числе неопределённого артикля нет: ein Buch — Bücher. В Nominativ мужского рода и в Nominativ/Akkusativ среднего рода — ein без окончания.",
+    "forms_note_en": "The indefinite article has no plural: ein Buch — Bücher. The masculine nominative and the neuter nominative/accusative are ein with no ending.",
+    "usage_note_ru": "Артикль стоит перед существительным или перед прилагательным, за которым идёт существительное: ein Tisch, ein alter Tisch. Если einer/eine/eins (eines) стоит без существительного («один», «кто-то»), это местоимение — см. карточку Pronomen. Под ударением ein может означать число «один».",
+    "usage_note_en": "The article comes before a noun, or before an adjective followed by a noun: ein Tisch, ein alter Tisch. When einer/eine/eins (eines) stands without a noun (one, someone), it is a pronoun — see the Pronomen card. When stressed, ein can mean the number one.",
+    "search_forms": [
+      "ein",
+      "eine",
+      "einen",
+      "einem",
+      "einer",
+      "eines"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ein_Artikel",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "article-003",
+    "type": "article",
+    "word": "kein",
+    "translation_ru": "отрицание при существительном: никакой, ни один; не",
+    "translation_en": "no, not a, not any",
+    "example_de": "Ich habe heute keine Zeit.",
+    "example_ru": "У меня сегодня нет времени.",
+    "example_en": "I have no time today.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "kein",
+            "keine",
+            "kein",
+            "keine"
+          ],
+          "Akkusativ": [
+            "keinen",
+            "keine",
+            "kein",
+            "keine"
+          ],
+          "Dativ": [
+            "keinem",
+            "keiner",
+            "keinem",
+            "keinen"
+          ],
+          "Genitiv": [
+            "keines",
+            "keiner",
+            "keines",
+            "keiner"
+          ]
+        }
+      }
+    ],
+    "grammar": {
+      "article_kind": "negative",
+      "adjective_declension": "mixed"
+    },
+    "forms_note_ru": "В единственном числе kein склоняется как ein. В отличие от ein, у kein есть множественное число: keine Bücher.",
+    "forms_note_en": "In the singular, kein declines like ein. Unlike ein, kein has a plural: keine Bücher.",
+    "usage_note_ru": "kein отрицает существительное, которое без отрицания стояло бы с неопределённым артиклем или без артикля: ein Auto → kein Auto, Zeit → keine Zeit. nicht отрицает глагол, прилагательное, наречие или существительное с определённым или притяжательным артиклем: Ich kenne den Mann nicht. Если keiner/keine/keins стоит без существительного («никто», «ни один»), это местоимение — см. карточку Pronomen.",
+    "usage_note_en": "kein negates a noun that would have an indefinite article or no article: ein Auto → kein Auto, Zeit → keine Zeit. nicht negates a verb, an adjective, an adverb, or a noun with a definite or possessive article: Ich kenne den Mann nicht. When keiner/keine/keins stands without a noun (nobody, not one), it is a pronoun — see the Pronomen card.",
+    "search_forms": [
+      "kein",
+      "keine",
+      "keinen",
+      "keinem",
+      "keiner",
+      "keines"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/kein",
+    "wortschatz_excluded": true
+  }
+]

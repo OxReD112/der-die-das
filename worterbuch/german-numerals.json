@@ -1,0 +1,467 @@
+[
+  {
+    "id": "numeral-001",
+    "type": "numeral",
+    "word": "null",
+    "translation_ru": "ноль",
+    "translation_en": "zero",
+    "example_de": "Draußen sind null Grad.",
+    "example_ru": "На улице ноль градусов.",
+    "example_en": "It is zero degrees outside.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 0
+    },
+    "usage_note_ru": "null Uhr — полночь (00:00). Существительное die Null (с большой буквы) — цифра «ноль».",
+    "usage_note_en": "null Uhr — midnight (00:00). The noun die Null (capitalised) is the digit zero.",
+    "search_forms": [
+      "null"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/null_Zahlwort",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-002",
+    "type": "numeral",
+    "word": "eins",
+    "translation_ru": "один (при счёте, в числах, о времени)",
+    "translation_en": "one (counting, numbers, time)",
+    "example_de": "Der Bus fährt um eins.",
+    "example_ru": "Автобус отходит в час.",
+    "example_en": "The bus leaves at one.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 1
+    },
+    "usage_note_ru": "Перед существительным — не eins, а ein/eine (ein Buch); см. карточки артикля и местоимения. Время: um eins, но um ein Uhr. В составных числах: einundzwanzig (21), hunderteins (101). Номер: Linie eins.",
+    "usage_note_en": "Before a noun it is not eins but ein/eine (ein Buch); see the article and pronoun cards. Time: um eins, but um ein Uhr. In compound numbers: einundzwanzig (21), hunderteins (101). As a number: Linie eins.",
+    "search_forms": [
+      "eins"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/eins_Zahl",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-003",
+    "type": "numeral",
+    "word": "zwei",
+    "translation_ru": "два",
+    "translation_en": "two",
+    "example_de": "Ich habe zwei Kinder.",
+    "example_ru": "У меня двое детей.",
+    "example_en": "I have two children.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 2
+    },
+    "forms_note_ru": "Разговорный вариант: zwo. Редкий Genitiv: zweier (die Mutter zweier Kinder).",
+    "forms_note_en": "Colloquial variant: zwo. Rare genitive: zweier (die Mutter zweier Kinder).",
+    "usage_note_ru": "По телефону и для ясности часто говорят zwo, чтобы не спутать с drei.",
+    "usage_note_en": "On the phone and for clarity people often say zwo, so as not to confuse it with drei.",
+    "search_forms": [
+      "zwei",
+      "zwo",
+      "zweier"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zwei",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-004",
+    "type": "numeral",
+    "word": "drei",
+    "translation_ru": "три",
+    "translation_en": "three",
+    "example_de": "Wir bleiben drei Tage in Wien.",
+    "example_ru": "Мы пробудем в Вене три дня.",
+    "example_en": "We are staying in Vienna for three days.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 3
+    },
+    "forms_note_ru": "Редкий Genitiv: dreier (während dreier Jahre).",
+    "forms_note_en": "Rare genitive: dreier (während dreier Jahre).",
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: dreizehn (13), dreißig (30) — с ß.",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: dreizehn (13), dreißig (30) — with ß.",
+    "search_forms": [
+      "drei",
+      "dreier"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/drei",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-005",
+    "type": "numeral",
+    "word": "vier",
+    "translation_ru": "четыре",
+    "translation_en": "four",
+    "example_de": "Das Zimmer hat vier Fenster.",
+    "example_ru": "В комнате четыре окна.",
+    "example_en": "The room has four windows.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 4
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: vierzehn (14), vierzig (40).",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: vierzehn (14), vierzig (40).",
+    "search_forms": [
+      "vier"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/vier",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-006",
+    "type": "numeral",
+    "word": "fünf",
+    "translation_ru": "пять",
+    "translation_en": "five",
+    "example_de": "Der Unterricht beginnt in fünf Minuten.",
+    "example_ru": "Урок начинается через пять минут.",
+    "example_en": "The lesson starts in five minutes.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 5
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: fünfzehn (15), fünfzig (50).",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: fünfzehn (15), fünfzig (50).",
+    "search_forms": [
+      "fünf"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/fuenf",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-007",
+    "type": "numeral",
+    "word": "sechs",
+    "translation_ru": "шесть",
+    "translation_en": "six",
+    "example_de": "Sie steht um sechs Uhr auf.",
+    "example_ru": "Она встаёт в шесть часов.",
+    "example_en": "She gets up at six o'clock.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 6
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: sechzehn (16), sechzig (60) — без -s.",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: sechzehn (16), sechzig (60) — without -s.",
+    "search_forms": [
+      "sechs"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sechs",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-008",
+    "type": "numeral",
+    "word": "sieben",
+    "translation_ru": "семь",
+    "translation_en": "seven",
+    "example_de": "Die Woche hat sieben Tage.",
+    "example_ru": "В неделе семь дней.",
+    "example_en": "A week has seven days.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 7
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: siebzehn (17), siebzig (70) — без -en. Глагол sieben («просеивать») — другое слово.",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: siebzehn (17), siebzig (70) — without -en. The verb sieben (to sift) is a different word.",
+    "search_forms": [
+      "sieben"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sieben_Zahl",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-009",
+    "type": "numeral",
+    "word": "acht",
+    "translation_ru": "восемь",
+    "translation_en": "eight",
+    "example_de": "Mein Sohn ist acht Jahre alt.",
+    "example_ru": "Моему сыну восемь лет.",
+    "example_en": "My son is eight years old.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 8
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: achtzehn (18), achtzig (80).",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: achtzehn (18), achtzig (80).",
+    "search_forms": [
+      "acht"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/acht_Kardinalzahl",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-010",
+    "type": "numeral",
+    "word": "neun",
+    "translation_ru": "девять",
+    "translation_en": "nine",
+    "example_de": "Das Geschäft öffnet um neun.",
+    "example_ru": "Магазин открывается в девять.",
+    "example_en": "The shop opens at nine.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 9
+    },
+    "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: neunzehn (19), neunzig (90).",
+    "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: neunzehn (19), neunzig (90).",
+    "search_forms": [
+      "neun"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/neun",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-011",
+    "type": "numeral",
+    "word": "zehn",
+    "translation_ru": "десять",
+    "translation_en": "ten",
+    "example_de": "Das kostet zehn Euro.",
+    "example_ru": "Это стоит десять евро.",
+    "example_en": "That costs ten euros.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 10
+    },
+    "usage_note_ru": "Числа 13–19: единицы + zehn — dreizehn, vierzehn; но sechzehn, siebzehn.",
+    "usage_note_en": "13–19: unit + zehn — dreizehn, vierzehn; but sechzehn, siebzehn.",
+    "search_forms": [
+      "zehn"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zehn",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-012",
+    "type": "numeral",
+    "word": "elf",
+    "translation_ru": "одиннадцать",
+    "translation_en": "eleven",
+    "example_de": "Eine Fußballmannschaft hat elf Spieler.",
+    "example_ru": "В футбольной команде одиннадцать игроков.",
+    "example_en": "A football team has eleven players.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 11
+    },
+    "usage_note_ru": "elf и zwölf — особые слова, как eleven и twelve в английском; с 13 числа образуются с -zehn.",
+    "usage_note_en": "elf and zwölf are special words, like eleven and twelve; from 13 the numbers are formed with -zehn.",
+    "search_forms": [
+      "elf"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/elf",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-013",
+    "type": "numeral",
+    "word": "zwölf",
+    "translation_ru": "двенадцать",
+    "translation_en": "twelve",
+    "example_de": "Ein Jahr hat zwölf Monate.",
+    "example_ru": "В году двенадцать месяцев.",
+    "example_en": "A year has twelve months.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 12
+    },
+    "usage_note_ru": "elf и zwölf — особые слова, как eleven и twelve в английском; с 13 числа образуются с -zehn.",
+    "usage_note_en": "elf and zwölf are special words, like eleven and twelve; from 13 the numbers are formed with -zehn.",
+    "search_forms": [
+      "zwölf"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zwoelf",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-014",
+    "type": "numeral",
+    "word": "zwanzig",
+    "translation_ru": "двадцать",
+    "translation_en": "twenty",
+    "example_de": "Sie ist zwanzig Jahre alt.",
+    "example_ru": "Ей двадцать лет.",
+    "example_en": "She is twenty years old.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 20
+    },
+    "usage_note_ru": "Единицы стоят перед десятками и пишутся слитно: einundzwanzig (21), zweiundzwanzig (22).",
+    "usage_note_en": "The units come before the tens and are written as one word: einundzwanzig (21), zweiundzwanzig (22).",
+    "search_forms": [
+      "zwanzig"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zwanzig",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-015",
+    "type": "numeral",
+    "word": "dreißig",
+    "translation_ru": "тридцать",
+    "translation_en": "thirty",
+    "example_de": "Der Juni hat dreißig Tage.",
+    "example_ru": "В июне тридцать дней.",
+    "example_en": "June has thirty days.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 30
+    },
+    "usage_note_ru": "Единственный десяток на -ßig, остальные на -zig: zwanzig, vierzig. 31 — einunddreißig.",
+    "usage_note_en": "The only tens number ending in -ßig; the others end in -zig: zwanzig, vierzig. 31 — einunddreißig.",
+    "search_forms": [
+      "dreißig"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dreiszig",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-016",
+    "type": "numeral",
+    "word": "hundert",
+    "translation_ru": "сто",
+    "translation_en": "hundred",
+    "example_de": "Das Haus ist über hundert Jahre alt.",
+    "example_ru": "Дому больше ста лет.",
+    "example_en": "The house is more than a hundred years old.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 100
+    },
+    "usage_note_ru": "hundert или einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Hunderte (с большой буквы) — существительное «сотни».",
+    "usage_note_en": "hundert or einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Hunderte (capitalised) is a noun: hundreds.",
+    "search_forms": [
+      "hundert"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hundert",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-017",
+    "type": "numeral",
+    "word": "tausend",
+    "translation_ru": "тысяча",
+    "translation_en": "thousand",
+    "example_de": "Das Dorf hat fast tausend Einwohner.",
+    "example_ru": "В деревне почти тысяча жителей.",
+    "example_en": "The village has almost a thousand inhabitants.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "cardinal",
+      "value": 1000
+    },
+    "usage_note_ru": "tausend или eintausend; 2026 — zweitausendsechsundzwanzig. Tausende (с большой буквы) — существительное «тысячи».",
+    "usage_note_en": "tausend or eintausend; 2026 — zweitausendsechsundzwanzig. Tausende (capitalised) is a noun: thousands.",
+    "search_forms": [
+      "tausend"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/tausend",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-018",
+    "type": "numeral",
+    "word": "erste",
+    "translation_ru": "первый",
+    "translation_en": "first",
+    "example_de": "Das ist mein erster Tag hier.",
+    "example_ru": "Это мой первый день здесь.",
+    "example_en": "This is my first day here.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "ordinal",
+      "value": 1
+    },
+    "forms_note_ru": "Склоняется как прилагательное: erste, ersten, erster, erstes, erstem. На письме часто цифрой с точкой: der 1. Mai.",
+    "forms_note_en": "Declines like an adjective: erste, ersten, erster, erstes, erstem. Often written as a figure with a full stop: der 1. Mai.",
+    "usage_note_ru": "Даты: am ersten Mai — первого мая. Остальные порядковые числительные: до 19 прибавляется -te (vierte, fünfte; но siebte, achte), с 20 — -ste (zwanzigste).",
+    "usage_note_en": "Dates: am ersten Mai — on the first of May. Other ordinals: up to 19 add -te (vierte, fünfte; but siebte, achte), from 20 add -ste (zwanzigste).",
+    "search_forms": [
+      "erste",
+      "ersten",
+      "erster",
+      "erstes",
+      "erstem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/erste",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-019",
+    "type": "numeral",
+    "word": "zweite",
+    "translation_ru": "второй",
+    "translation_en": "second",
+    "example_de": "Das ist schon mein zweiter Kaffee.",
+    "example_ru": "Это уже мой второй кофе.",
+    "example_en": "This is already my second coffee.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "ordinal",
+      "value": 2
+    },
+    "forms_note_ru": "Склоняется как прилагательное: zweite, zweiten, zweiter, zweites, zweitem. На письме часто цифрой с точкой: der 2. Mai.",
+    "forms_note_en": "Declines like an adjective: zweite, zweiten, zweiter, zweites, zweitem. Often written as a figure with a full stop: der 2. Mai.",
+    "usage_note_ru": "zum zweiten Mal — во второй раз. Остальные порядковые числительные: до 19 прибавляется -te (vierte, fünfte; но siebte, achte), с 20 — -ste (zwanzigste).",
+    "usage_note_en": "zum zweiten Mal — for the second time. Other ordinals: up to 19 add -te (vierte, fünfte; but siebte, achte), from 20 add -ste (zwanzigste).",
+    "search_forms": [
+      "zweite",
+      "zweiten",
+      "zweiter",
+      "zweites",
+      "zweitem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zweite",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-020",
+    "type": "numeral",
+    "word": "dritte",
+    "translation_ru": "третий",
+    "translation_en": "third",
+    "example_de": "Am dritten Tag wurde das Wetter besser.",
+    "example_ru": "На третий день погода стала лучше.",
+    "example_en": "On the third day the weather got better.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "ordinal",
+      "value": 3
+    },
+    "forms_note_ru": "Склоняется как прилагательное: dritte, dritten, dritter, drittes, drittem. На письме часто цифрой с точкой: der 3. Mai.",
+    "forms_note_en": "Declines like an adjective: dritte, dritten, dritter, drittes, drittem. Often written as a figure with a full stop: der 3. Mai.",
+    "usage_note_ru": "Неправильная форма: dritte, а не dreite. Остальные порядковые числительные: до 19 прибавляется -te (vierte, fünfte; но siebte, achte), с 20 — -ste (zwanzigste).",
+    "usage_note_en": "Irregular form: dritte, not dreite. Other ordinals: up to 19 add -te (vierte, fünfte; but siebte, achte), from 20 add -ste (zwanzigste).",
+    "search_forms": [
+      "dritte",
+      "dritten",
+      "dritter",
+      "drittes",
+      "drittem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dritte",
+    "wortschatz_excluded": true
+  }
+]
