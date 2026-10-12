@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  window.BibliothekBookshelf={create({root,onOpen,onDelete,describe}) {
+  window.BibliothekBookshelf={create({root,onOpen,onDelete,describe,getPreferredId=()=>null}) {
     let dispose=()=>{}, selectedId=null, current=[];
     const hash=value=>Array.from(String(value)).reduce((sum,c)=>(Math.imul(sum,31)+c.codePointAt(0))>>>0,0);
     function update(books) {
@@ -11,7 +11,9 @@
       root.innerHTML='<div class="shelf-stage" aria-label="Bücherregal"></div><div class="caption"><h2><button type="button" class="shelf-title"></button></h2><div class="caption-author" hidden></div><div class="details"></div><div class="caption-actions"><button type="button" class="book-delete" aria-label="Delete book">×</button></div></div><div class="navigation"><button type="button" class="arrow prev" aria-label="Previous book">←</button><span class="count" aria-live="polite"></span><button type="button" class="arrow next" aria-label="Next book">→</button></div>';
       root.querySelector('.book-delete').innerHTML='<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
       const stage=root.querySelector('.shelf-stage');
-      let selected=Math.max(0,books.findIndex(book=>book.id===selectedId));
+      const preferred=getPreferredId();
+      const preferredIndex=books.findIndex(book=>book.id===preferred);
+      let selected=preferredIndex>=0?preferredIndex:Math.max(0,books.findIndex(book=>book.id===selectedId));
       selectedId=books[selected].id;
       const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:root.clientWidth<600?28:56,tilt:0,enlarge:.04,forward:20,duration:520};
       const palette=['#e6e4dc','#3c4140','#d5d4ce','#aab4b6','#565d60'];
@@ -76,7 +78,7 @@
         el.style.setProperty('--cover-title-size',Math.max(14,Math.min(coverFont,coverFont*coverSpace/Math.max(1,widestWord)))+'px');
         el.dataset.long=String(b.title.length>22);el.dataset.extraLong=String(b.title.length>60);el.dataset.mark=['bars','ring','diamond','dot'][hashes[i]%4];
         el.dataset.spine=b.title.length<10?'short':thicknesses[i]>40?'wide':hashes[i]%2?'serif':'regular';
-        el.innerHTML='<div class="volume"><div class="spine"><div class="spine-mark" aria-hidden="true"></div><span class="spine-title"></span></div><div class="page-edge" aria-hidden="true"><span></span><span></span><span></span></div><div class="front"><div class="cover-title"></div><div class="cover-art" aria-hidden="true"><span class="cover-initial"></span><span class="cover-orbit"></span><span class="cover-orbit secondary"></span><span class="cover-sphere"></span><span class="cover-sphere small"></span></div><div class="author"></div></div></div>';
+        el.innerHTML='<div class="volume"><div class="spine"><span class="paper-grain" aria-hidden="true"></span><div class="spine-mark" aria-hidden="true"></div><span class="spine-title"></span></div><div class="page-edge" aria-hidden="true"><span></span><span></span><span></span></div><div class="front"><span class="paper-grain" aria-hidden="true"></span><div class="cover-title"></div><div class="cover-art" aria-hidden="true"><span class="cover-initial"></span><span class="cover-orbit"></span><span class="cover-orbit secondary"></span><span class="cover-sphere"></span><span class="cover-sphere small"></span></div><div class="author"></div></div></div>';
         el.querySelector('.spine-title').textContent=b.title;el.querySelector('.cover-title').textContent=b.title;
         el.querySelector('.author').textContent=b.author||'';
         el.querySelector('.cover-initial').textContent=Array.from(b.title.trim())[0]?.toLocaleUpperCase('de')||'A';

@@ -196,6 +196,8 @@
   pasteDialog.addEventListener('close',()=>addToggle.focus());
   let libraryView=window.matchMedia('(max-width:600px)').matches?'list':'shelf';
   try { const saved=localStorage.getItem('deutschLibraryViewV1');if(saved==='list'||saved==='shelf')libraryView=saved; } catch (_) {}
+  let lastOpenedBookId=null;
+  try { lastOpenedBookId=localStorage.getItem("deutschLibraryLastOpenedV1"); } catch (_) {}
   function openLibraryBook(book) {
     if(book.missingContent){reloadBookId=book.id;$file.click();}
     else {bookshelf.pause();openBook(book);}
@@ -216,7 +218,7 @@
     const words=Number(book.wordCount||0);
     return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
   }
-  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook});
+  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook,getPreferredId:()=>lastOpenedBookId});
   function applyLibraryView() {
     const populated=$bookList.children.length>0;
     const addParent=populated?$("library-actions"):$("empty-library");
@@ -306,7 +308,7 @@
     });
     applyLibraryView();
     if(libraryView==='shelf')$library.scrollTop=0;
-    bookshelf.update(books);
+    bookshelf.update([...books].reverse());
     if(libraryView!=='shelf')bookshelf.pause();
   }
   async function refreshBooks() {
@@ -627,6 +629,8 @@
   async function openBook(book) {
     closePopups();
     renderBookText(book);
+    lastOpenedBookId=book.id;
+    try { localStorage.setItem("deutschLibraryLastOpenedV1",book.id); } catch (_) {}
     document.title = `${book.title} · Bibliothek`;
     warmUpLookup();
   }
@@ -650,7 +654,7 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261011-derived-1" : path === "german-adverbs.json" ? "20261011-nicht-partikel-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261012-nouns-22" : path === "german-adverbs.json" ? "20261011-nicht-partikel-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
