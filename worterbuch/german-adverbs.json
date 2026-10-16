@@ -238,7 +238,10 @@
     "example_de": "Am Wochenende frühstücken wir zusammen.",
     "example_ru": "По выходным мы завтракаем вместе.",
     "example_en": "We have breakfast together at the weekend.",
-    "example_cloze": "Am Wochenende frühstücken wir {{c1::zusammen}}."
+    "example_cloze": "Am Wochenende frühstücken wir {{c1::zusammen}}.",
+    "reading_policy": "single",
+    "usage_note_ru": "zusammen sein — встречаться, быть парой: Sind Anna und Tom noch zusammen?",
+    "usage_note_en": "zusammen sein — to be a couple: Sind Anna und Tom noch zusammen?"
   },
   {
     "id": "adverb-024",
@@ -462,16 +465,6 @@
     "example_cloze": "Früher fuhr er mit dem Bus zur Arbeit, {{c1::mittlerweile}} fährt er mit dem Fahrrad."
   },
   {
-    "id": "adverb-043",
-    "word": "offenbar",
-    "translation_ru": "по-видимому; очевидно",
-    "translation_en": "apparently; evidently",
-    "example_de": "Sie hat offenbar die Nachricht nicht gelesen.",
-    "example_ru": "По-видимому, она не прочитала сообщение.",
-    "example_en": "Apparently, she has not read the message.",
-    "example_cloze": "Sie hat {{c1::offenbar}} die Nachricht nicht gelesen."
-  },
-  {
     "id": "adverb-044",
     "word": "schließlich",
     "translation_ru": "в конце концов; всё-таки",
@@ -510,36 +503,6 @@
     "example_ru": "Сегодня автобус не ходит. Вместо этого мы возьмём такси.",
     "example_en": "The bus is not running today. Instead, we will take a taxi.",
     "example_cloze": "Der Bus fährt heute nicht. {{c1::Stattdessen}} nehmen wir ein Taxi."
-  },
-  {
-    "id": "adverb-047",
-    "word": "tatsächlich",
-    "translation_ru": "действительно; на самом деле",
-    "translation_en": "actually; in fact",
-    "example_de": "Der Zug war tatsächlich pünktlich.",
-    "example_ru": "Поезд действительно пришёл вовремя.",
-    "example_en": "The train was actually on time.",
-    "example_cloze": "Der Zug war {{c1::tatsächlich}} pünktlich."
-  },
-  {
-    "id": "adverb-048",
-    "word": "teilweise",
-    "translation_ru": "частично; отчасти",
-    "translation_en": "partly; partially",
-    "example_de": "Die Straße ist wegen der Bauarbeiten teilweise gesperrt.",
-    "example_ru": "Из-за ремонтных работ дорога частично перекрыта.",
-    "example_en": "The road is partly closed because of construction.",
-    "example_cloze": "Die Straße ist wegen der Bauarbeiten {{c1::teilweise}} gesperrt."
-  },
-  {
-    "id": "adverb-049",
-    "word": "vermutlich",
-    "translation_ru": "вероятно; предположительно",
-    "translation_en": "probably; presumably",
-    "example_de": "Sie wird vermutlich erst am Abend ankommen.",
-    "example_ru": "Вероятно, она приедет только вечером.",
-    "example_en": "She will probably arrive only in the evening.",
-    "example_cloze": "Sie wird {{c1::vermutlich}} erst am Abend ankommen."
   },
   {
     "id": "adverb-051",
@@ -662,9 +625,12 @@
     "example_de": "Ich kann nicht telefonieren, ich koche gerade.",
     "example_ru": "Я не могу говорить по телефону, я как раз готовлю.",
     "example_en": "I can't talk on the phone, I'm cooking right now.",
-    "usage_note_ru": "Немецкий способ сказать «сейчас в процессе» (в немецком нет формы Continuous). gerade eben — только что. Как прилагательное gerade значит «прямой».",
-    "usage_note_en": "The German way to say something is in progress (German has no continuous tense). gerade eben — just now. As an adjective, gerade means “straight”.",
-    "example_cloze": "Ich kann nicht telefonieren, ich koche {{c1::gerade}}."
+    "usage_note_ru": "Немецкий способ сказать «сейчас в процессе» (в немецком нет формы Continuous). gerade eben — только что. nicht gerade — не очень-то: Das ist nicht gerade billig. gerade noch — едва (успеть): Wir haben den Zug gerade noch erreicht.",
+    "usage_note_en": "The German way to say something is in progress (German has no continuous tense). gerade eben — just now. nicht gerade — not exactly: Das ist nicht gerade billig. gerade noch — only just: Wir haben den Zug gerade noch erreicht.",
+    "example_cloze": "Ich kann nicht telefonieren, ich koche {{c1::gerade}}.",
+    "reading_policy": "separate",
+    "sense_id": "gerade:Adverb",
+    "example_usage": "Adverb"
   },
   {
     "id": "adverb-061",
@@ -865,18 +831,6 @@
     "example_cloze": "Bitte lesen Sie {{c1::weiter}}."
   },
   {
-    "id": "adverb-078",
-    "word": "wenig",
-    "translation_ru": "мало",
-    "translation_en": "little; not much",
-    "example_de": "Ich schlafe wenig.",
-    "example_ru": "Я мало сплю.",
-    "example_en": "I sleep little.",
-    "usage_note_ru": "С существительным: wenig Geld (ед. ч.), wenige Leute (мн. ч. — с окончанием). ein wenig = ein bisschen — немного.",
-    "usage_note_en": "With nouns: wenig Geld (singular), wenige Leute (plural — with an ending). ein wenig = ein bisschen — a little.",
-    "example_cloze": "Ich schlafe {{c1::wenig}}."
-  },
-  {
     "id": "adverb-079",
     "word": "wie",
     "translation_ru": "как? (вопрос); как, словно (сравнение)",
@@ -1004,9 +958,10 @@
     "example_de": "Endlich ist Wochenende!",
     "example_ru": "Наконец-то выходные!",
     "example_en": "At last it's the weekend!",
-    "usage_note_ru": "Выражает облегчение или нетерпение. Для перечисления «в конце» лучше zuletzt / schließlich.",
-    "usage_note_en": "Expresses relief or impatience. For the last item in a list, use zuletzt / schließlich.",
-    "example_cloze": "{{c1::Endlich}} ist Wochenende!"
+    "usage_note_ru": "Выражает облегчение или нетерпение. Для перечисления «в конце» лучше zuletzt / schließlich. Как прилагательное (книжн.) — «конечный»: Unsere Ressourcen sind endlich. — Наши ресурсы конечны.",
+    "usage_note_en": "Expresses relief or impatience. For the last item in a list, use zuletzt / schließlich. As an adjective (formal) — “finite”: Unsere Ressourcen sind endlich. — Our resources are finite.",
+    "example_cloze": "{{c1::Endlich}} ist Wochenende!",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-087",
@@ -1018,7 +973,8 @@
     "example_en": "Do you have enough money on you?",
     "usage_note_ru": "Не склоняется. С существительным обычно стоит перед ним (genug Zeit), с прилагательным — после него (alt genug).",
     "usage_note_en": "It never changes its ending. Usually before a noun (genug Zeit), after an adjective (alt genug).",
-    "example_cloze": "Hast du {{c1::genug}} Geld dabei?"
+    "example_cloze": "Hast du {{c1::genug}} Geld dabei?",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-088",
@@ -1188,9 +1144,10 @@
     "example_de": "Wo gehst du hin?",
     "example_ru": "Куда ты идёшь?",
     "example_en": "Where are you going?",
-    "usage_note_ru": "hin — движение от говорящего, her — к говорящему. Часто часть глагола: hingehen, hinfahren. hin und zurück — туда и обратно.",
-    "usage_note_en": "hin — movement away from the speaker, her — towards the speaker. Often part of a verb: hingehen, hinfahren. hin und zurück — there and back.",
-    "example_cloze": "Wo gehst du {{c1::hin}}?"
+    "usage_note_ru": "hin — движение от говорящего, her — к говорящему. Часто часть глагола: hingehen, hinfahren. hin und zurück — туда и обратно. hin sein (разг.) — сломаться, пропасть: Mein Handy ist hin. — Мой телефон накрылся.",
+    "usage_note_en": "hin — movement away from the speaker, her — towards the speaker. Often part of a verb: hingehen, hinfahren. hin und zurück — there and back. hin sein (colloquial) — to be broken, ruined: Mein Handy ist hin. — My phone is done for.",
+    "example_cloze": "Wo gehst du {{c1::hin}}?",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-103",
@@ -1266,30 +1223,6 @@
     "example_cloze": "Beeil dich, {{c1::sonst}} verpassen wir den Zug."
   },
   {
-    "id": "adverb-109",
-    "word": "unbedingt",
-    "translation_ru": "обязательно; непременно",
-    "translation_en": "definitely; absolutely",
-    "example_de": "Diesen Film musst du unbedingt sehen.",
-    "example_ru": "Этот фильм тебе обязательно надо посмотреть.",
-    "example_en": "You absolutely have to see this film.",
-    "usage_note_ru": "nicht unbedingt — «не обязательно»: Das muss nicht unbedingt heute sein.",
-    "usage_note_en": "nicht unbedingt — “not necessarily”: Das muss nicht unbedingt heute sein.",
-    "example_cloze": "Diesen Film musst du {{c1::unbedingt}} sehen."
-  },
-  {
-    "id": "adverb-110",
-    "word": "vorbei",
-    "translation_ru": "мимо; прошло, кончилось",
-    "translation_en": "past; over",
-    "example_de": "Der Sommer ist leider schon vorbei.",
-    "example_ru": "Лето, к сожалению, уже прошло.",
-    "example_en": "Unfortunately, summer is already over.",
-    "usage_note_ru": "Часто часть глагола: vorbeigehen (проходить мимо), vorbeikommen (заглянуть в гости): Komm doch mal vorbei!",
-    "usage_note_en": "Often part of a verb: vorbeigehen (to walk past), vorbeikommen (to drop by): Komm doch mal vorbei!",
-    "example_cloze": "Der Sommer ist leider schon {{c1::vorbei}}."
-  },
-  {
     "id": "adverb-111",
     "word": "vorgestern",
     "translation_ru": "позавчера",
@@ -1336,26 +1269,17 @@
     "example_cloze": "Fahr bitte ein Stück {{c1::vorwärts}}."
   },
   {
-    "id": "adverb-115",
-    "word": "wahrscheinlich",
-    "translation_ru": "вероятно; наверное",
-    "translation_en": "probably",
-    "example_de": "Morgen regnet es wahrscheinlich.",
-    "example_ru": "Завтра, вероятно, будет дождь.",
-    "example_en": "It will probably rain tomorrow.",
-    "example_cloze": "Morgen regnet es {{c1::wahrscheinlich}}."
-  },
-  {
     "id": "adverb-116",
     "word": "weg",
-    "translation_ru": "прочь; нет (ушёл, пропал)",
-    "translation_en": "away; gone",
+    "translation_ru": "нет (пропал, ушёл); прочь",
+    "translation_en": "gone; away",
     "example_de": "Mein Fahrrad ist weg!",
     "example_ru": "Моего велосипеда нет!",
     "example_en": "My bike is gone!",
-    "usage_note_ru": "Часто часть глагола: weggehen, wegfahren, wegwerfen. Не путать с существительным der Weg (дорога).",
-    "usage_note_en": "Often part of a verb: weggehen, wegfahren, wegwerfen. Don't confuse it with the noun der Weg (path, way).",
-    "example_cloze": "Mein Fahrrad ist {{c1::weg}}!"
+    "usage_note_ru": "Часто часть глагола: weggehen, wegfahren, wegwerfen. Не путать с существительным der Weg (дорога). weg sein — пропасть; разг. также «отключиться» (уснуть, потерять сознание).",
+    "usage_note_en": "Often part of a verb: weggehen, wegfahren, wegwerfen. Don't confuse it with the noun der Weg (path, way). weg sein — to be gone; colloquially also “to be out cold” (asleep, unconscious).",
+    "example_cloze": "Mein Fahrrad ist {{c1::weg}}!",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-117",
@@ -1493,14 +1417,17 @@
   {
     "id": "adverb-128",
     "word": "bloß",
-    "translation_ru": "только, лишь",
+    "translation_ru": "только, лишь; просто",
     "translation_en": "only; just",
     "example_de": "Ich möchte nichts kaufen, ich schaue mich bloß um.",
     "example_ru": "Я не хочу ничего покупать, я просто смотрю.",
     "example_en": "I don't want to buy anything, I'm just looking.",
-    "usage_note_ru": "Синоним nur (разговорный). Как частица усиливает предупреждение или желание: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte! Как прилагательное: mit bloßen Händen — голыми руками.",
-    "usage_note_en": "Colloquial synonym of nur. As a particle it strengthens a warning or wish: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte! As an adjective: mit bloßen Händen — with bare hands.",
-    "example_cloze": "Ich möchte nichts kaufen, ich schaue mich {{c1::bloß}} um."
+    "usage_note_ru": "Синоним nur (разговорный). Как частица усиливает предупреждение или желание: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte!",
+    "usage_note_en": "Colloquial synonym of nur. As a particle it strengthens a warning or wish: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte!",
+    "example_cloze": "Ich möchte nichts kaufen, ich schaue mich {{c1::bloß}} um.",
+    "reading_policy": "separate",
+    "sense_id": "bloß:Adverb",
+    "example_usage": "Adverb"
   },
   {
     "id": "adverb-129",
@@ -1556,18 +1483,6 @@
     "example_cloze": "Wir gehen ins Kino und {{c1::danach}} essen wir etwas."
   },
   {
-    "id": "adverb-133",
-    "word": "dauernd",
-    "translation_ru": "постоянно; всё время",
-    "translation_en": "constantly; all the time",
-    "example_de": "Das Telefon klingelt dauernd.",
-    "example_ru": "Телефон постоянно звонит.",
-    "example_en": "The phone keeps ringing.",
-    "usage_note_ru": "Часто с оттенком недовольства. Синоним — ständig.",
-    "usage_note_en": "Often with a note of annoyance. Synonym: ständig.",
-    "example_cloze": "Das Telefon klingelt {{c1::dauernd}}."
-  },
-  {
     "id": "adverb-134",
     "word": "deswegen",
     "translation_ru": "поэтому",
@@ -1607,18 +1522,6 @@
     "example_cloze": "Der Bahnhof ist nicht weit, ich bringe dich {{c1::dorthin}}."
   },
   {
-    "id": "adverb-137",
-    "word": "durcheinander",
-    "translation_ru": "вперемешку; в беспорядке; в растерянности",
-    "translation_en": "in a mess; mixed up; confused",
-    "example_de": "Alle meine Sachen sind durcheinander.",
-    "example_ru": "Все мои вещи в беспорядке.",
-    "example_en": "All my things are in a mess.",
-    "usage_note_ru": "О человеке: Ich bin ganz durcheinander. — Я совсем запутался. Существительное: das Durcheinander — беспорядок.",
-    "usage_note_en": "About a person: Ich bin ganz durcheinander. — I'm totally confused. Noun: das Durcheinander — mess.",
-    "example_cloze": "Alle meine Sachen sind {{c1::durcheinander}}."
-  },
-  {
     "id": "adverb-138",
     "word": "eben",
     "translation_ru": "только что; как раз; просто (так и есть)",
@@ -1626,9 +1529,12 @@
     "example_de": "Ich bin eben erst angekommen.",
     "example_ru": "Я только что приехал.",
     "example_en": "I've only just arrived.",
-    "usage_note_ru": "Как частица — «ну что поделаешь, так уж есть»: Das ist eben so. Как ответ — «вот именно»: Eben! Как прилагательное — «ровный»: eine ebene Straße.",
-    "usage_note_en": "As a particle — “that's just how it is”: Das ist eben so. As a reply — “exactly”: Eben! As an adjective — “flat, level”: eine ebene Straße.",
-    "example_cloze": "Ich bin {{c1::eben}} erst angekommen."
+    "usage_note_ru": "Как частица — «ну что поделаешь, так уж есть»: Das ist eben so. Как ответ — «вот именно»: Eben!",
+    "usage_note_en": "As a particle — “that's just how it is”: Das ist eben so. As a reply — “exactly”: Eben!",
+    "example_cloze": "Ich bin {{c1::eben}} erst angekommen.",
+    "reading_policy": "separate",
+    "sense_id": "eben:Adverb",
+    "example_usage": "Adverb"
   },
   {
     "id": "adverb-139",
@@ -1657,14 +1563,17 @@
   {
     "id": "adverb-141",
     "word": "eigentlich",
-    "translation_ru": "собственно; вообще-то; на самом деле",
-    "translation_en": "actually; really",
+    "translation_ru": "вообще-то; на самом деле; собственно",
+    "translation_en": "actually; really; (in questions) anyway",
     "example_de": "Eigentlich wollte ich heute zu Hause bleiben.",
     "example_ru": "Вообще-то я хотел сегодня остаться дома.",
     "example_en": "Actually, I wanted to stay at home today.",
-    "usage_note_ru": "В вопросе — частица интереса («а вообще…»): Wie alt bist du eigentlich? Как прилагательное: die eigentliche Frage — собственно вопрос.",
-    "usage_note_en": "In a question it's a particle of interest (“by the way”): Wie alt bist du eigentlich? As an adjective: die eigentliche Frage — the real question.",
-    "example_cloze": "{{c1::Eigentlich}} wollte ich heute zu Hause bleiben."
+    "usage_note_ru": "В вопросе — частица интереса («а вообще…, собственно»): Wie alt bist du eigentlich?",
+    "usage_note_en": "In a question it's a particle of interest (“by the way”): Wie alt bist du eigentlich?",
+    "example_cloze": "{{c1::Eigentlich}} wollte ich heute zu Hause bleiben.",
+    "reading_policy": "separate",
+    "sense_id": "eigentlich:Adverb",
+    "example_usage": "Adverb"
   },
   {
     "id": "adverb-142",
@@ -1696,30 +1605,6 @@
     "example_cloze": "Die Fahrt dauert {{c1::etwa}} eine Stunde."
   },
   {
-    "id": "adverb-144",
-    "word": "eventuell",
-    "translation_ru": "возможно; может быть",
-    "translation_en": "possibly; maybe",
-    "example_de": "Ich komme eventuell etwas später.",
-    "example_ru": "Возможно, я приду немного позже.",
-    "example_en": "I may come a bit later.",
-    "usage_note_ru": "Ложный друг: значит «возможно», а не «в конце концов» (= schließlich). Сокращение: evtl.",
-    "usage_note_en": "False friend: it means “possibly”, not “eventually” (= schließlich). Abbreviation: evtl.",
-    "example_cloze": "Ich komme {{c1::eventuell}} etwas später."
-  },
-  {
-    "id": "adverb-145",
-    "word": "extra",
-    "translation_ru": "отдельно, дополнительно; специально",
-    "translation_en": "extra; separately; specially",
-    "example_de": "Die Getränke kosten extra.",
-    "example_ru": "Напитки оплачиваются отдельно.",
-    "example_en": "Drinks cost extra.",
-    "usage_note_ru": "«Специально»: Ich habe extra auf dich gewartet. — Я специально тебя ждал. Не склоняется.",
-    "usage_note_en": "“Specially, on purpose”: Ich habe extra auf dich gewartet. — I waited for you specially. It never changes its ending.",
-    "example_cloze": "Die Getränke kosten {{c1::extra}}."
-  },
-  {
     "id": "adverb-146",
     "word": "gar",
     "translation_ru": "совсем (gar nicht — совсем не)",
@@ -1729,7 +1614,8 @@
     "example_en": "I didn't know that at all.",
     "usage_note_ru": "Усиливает отрицание: gar nicht, gar kein, gar nichts. Как прилагательное gar значит «готовый, сварившийся»: Die Kartoffeln sind gar.",
     "usage_note_en": "Strengthens a negative: gar nicht, gar kein, gar nichts. As an adjective, gar means “cooked, done”: Die Kartoffeln sind gar.",
-    "example_cloze": "Das habe ich {{c1::gar}} nicht gewusst."
+    "example_cloze": "Das habe ich {{c1::gar}} nicht gewusst.",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-147",
@@ -1898,26 +1784,28 @@
   {
     "id": "adverb-162",
     "word": "kürzlich",
-    "translation_ru": "недавно",
+    "translation_ru": "недавно; на днях",
     "translation_en": "recently; the other day",
     "example_de": "Ich habe kürzlich einen alten Freund getroffen.",
     "example_ru": "Недавно я встретил старого друга.",
     "example_en": "I recently met an old friend.",
-    "usage_note_ru": "Синонимы: neulich, vor Kurzem.",
-    "usage_note_en": "Synonyms: neulich, vor Kurzem.",
-    "example_cloze": "Ich habe {{c1::kürzlich}} einen alten Freund getroffen."
+    "usage_note_ru": "Синонимы: neulich, vor Kurzem. Как прилагательное (bei unserem kürzlichen Treffen) встречается редко.",
+    "usage_note_en": "Synonyms: neulich, vor Kurzem. Rarely used as an adjective (bei unserem kürzlichen Treffen).",
+    "example_cloze": "Ich habe {{c1::kürzlich}} einen alten Freund getroffen.",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-163",
     "word": "los",
     "translation_ru": "вперёд!, давай!; (что-то) случилось",
-    "translation_en": "go!; come on!; going on",
+    "translation_en": "go!; come on!; (was ist los) wrong, going on",
     "example_de": "Los, beeilt euch!",
     "example_ru": "Давайте, поторопитесь!",
     "example_en": "Come on, hurry up!",
-    "usage_note_ru": "Was ist los? — Что случилось? Часто часть глагола: losgehen, losfahren (отправляться). loswerden — избавиться.",
-    "usage_note_en": "Was ist los? — What's wrong? / What's going on? Often part of a verb: losgehen, losfahren (to set off). loswerden — to get rid of.",
-    "example_cloze": "{{c1::Los}}, beeilt euch!"
+    "usage_note_ru": "Was ist los? — Что случилось? Часто часть глагола: losgehen, losfahren (отправляться). loswerden — избавиться. Не путать с lose — неплотный, свободный.",
+    "usage_note_en": "Was ist los? — What's wrong? / What's going on? Often part of a verb: losgehen, losfahren (to set off). loswerden — to get rid of. Not to be confused with lose — loose.",
+    "example_cloze": "{{c1::Los}}, beeilt euch!",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-164",
@@ -2067,7 +1955,8 @@
       "Explains the previous sentence.",
       "Also “namely”: zwei Sprachen, nämlich Deutsch und Englisch."
     ],
-    "example_cloze": "Ich kann nicht kommen, ich bin {{c1::nämlich}} krank."
+    "example_cloze": "Ich kann nicht kommen, ich bin {{c1::nämlich}} krank.",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-176",
@@ -2084,14 +1973,15 @@
   {
     "id": "adverb-177",
     "word": "quer",
-    "translation_ru": "поперёк; наискосок, через",
-    "translation_en": "across; crosswise",
+    "translation_ru": "через (quer durch); поперёк; наискосок",
+    "translation_en": "right across; crosswise; diagonally",
     "example_de": "Ich muss quer durch die ganze Stadt fahren.",
     "example_ru": "Мне нужно ехать через весь город.",
     "example_en": "I have to drive right across town.",
-    "usage_note_ru": "Обычно с предлогом: quer durch, quer über.",
-    "usage_note_en": "Usually with a preposition: quer durch, quer über.",
-    "example_cloze": "Ich muss {{c1::quer}} durch die ganze Stadt fahren."
+    "usage_note_ru": "Обычно с предлогом: quer durch, quer über. Как прилагательное почти не встречается; «в поперечную полоску» — quergestreift.",
+    "usage_note_en": "Usually with a preposition: quer durch, quer über. Rarely used as an adjective; “cross-striped” is quergestreift.",
+    "example_cloze": "Ich muss {{c1::quer}} durch die ganze Stadt fahren.",
+    "reading_policy": "single"
   },
   {
     "id": "adverb-178",
@@ -2218,16 +2108,6 @@
     "example_cloze": "Der Eintritt ist für Kinder {{c1::umsonst}}."
   },
   {
-    "id": "adverb-189",
-    "word": "ungefähr",
-    "translation_ru": "приблизительно; примерно",
-    "translation_en": "approximately; about",
-    "example_de": "Bis zum Bahnhof sind es ungefähr zehn Minuten.",
-    "example_ru": "До вокзала примерно десять минут.",
-    "example_en": "It's about ten minutes to the station.",
-    "example_cloze": "Bis zum Bahnhof sind es {{c1::ungefähr}} zehn Minuten."
-  },
-  {
     "id": "adverb-190",
     "word": "unterwegs",
     "translation_ru": "в пути; по дороге",
@@ -2262,18 +2142,6 @@
     "usage_note_ru": "im Voraus — заранее: Vielen Dank im Voraus! Часто часть глагола: vorausgehen, voraussetzen.",
     "usage_note_en": "im Voraus — in advance: Vielen Dank im Voraus! Often part of a verb: vorausgehen, voraussetzen.",
     "example_cloze": "Gehen Sie schon {{c1::voraus}}, ich komme gleich nach."
-  },
-  {
-    "id": "adverb-193",
-    "word": "voraussichtlich",
-    "translation_ru": "предположительно; по прогнозам",
-    "translation_en": "expected to; probably",
-    "example_de": "Der Zug hat voraussichtlich zehn Minuten Verspätung.",
-    "example_ru": "Поезд, предположительно, опоздает на десять минут.",
-    "example_en": "The train is expected to be ten minutes late.",
-    "usage_note_ru": "Официальное слово, часто в объявлениях и прогнозах.",
-    "usage_note_en": "A formal word, common in announcements and forecasts.",
-    "example_cloze": "Der Zug hat {{c1::voraussichtlich}} zehn Minuten Verspätung."
   },
   {
     "id": "adverb-194",
@@ -2346,16 +2214,6 @@
     "usage_note_ru": "worüber = wo + über: вопрос к глаголам с über, о вещах: sich freuen über → Worüber freust du dich? О людях: Über wen …? Ответ: darüber.",
     "usage_note_en": "worüber = wo + über: a question with verbs that take über, about things: sich freuen über → Worüber freust du dich? About people: Über wen …? Answer: darüber.",
     "example_cloze": "{{c1::Worüber}} habt ihr gesprochen?"
-  },
-  {
-    "id": "adverb-200",
-    "word": "ziemlich",
-    "translation_ru": "довольно; достаточно",
-    "translation_en": "quite; rather; fairly",
-    "example_de": "Heute ist es ziemlich kalt.",
-    "example_ru": "Сегодня довольно холодно.",
-    "example_en": "It's quite cold today.",
-    "example_cloze": "Heute ist es {{c1::ziemlich}} kalt."
   },
   {
     "id": "adverb-201",
@@ -2676,5 +2534,46 @@
     "usage_note_ru": "Частица вежливости: смягчает просьбу, стоит в начале, середине или конце: Bitte setzen Sie sich! / Setzen Sie sich bitte! В ответ на Danke! — Bitte! или Bitte schön! (не за что). Подавая что-то — Bitte schön / Bitte sehr (вот, пожалуйста). Не путать с глаголом и существительным: ich bitte (dich um …) — я прошу; die Bitte — просьба.",
     "usage_note_en": "A politeness particle: it softens a request and can stand at the start, in the middle or at the end: Bitte setzen Sie sich! / Setzen Sie sich bitte! In reply to Danke! — Bitte! or Bitte schön! (you're welcome). When handing something over — Bitte schön / Bitte sehr (here you are). Do not confuse with the verb and the noun: ich bitte (dich um …) — I ask; die Bitte — a request.",
     "example_cloze": "Kannst du mir {{c1::bitte}} helfen?"
+  },
+  {
+    "id": "adverb-226",
+    "word": "natürlich",
+    "translation_ru": "конечно; естественно",
+    "translation_en": "of course; naturally",
+    "reading_policy": "separate",
+    "sense_id": "natürlich:Adverb",
+    "example_de": "Kommst du mit? – Natürlich!",
+    "example_ru": "Пойдёшь с нами? – Конечно!",
+    "example_en": "Are you coming? – Of course!",
+    "example_cloze": "Kommst du mit? – {{c1::Natürlich}}!",
+    "example_usage": "Adverb",
+    "usage_note_ru": "Также «естественно, непринуждённо»: Sie lacht ganz natürlich. — Она смеётся совершенно естественно.",
+    "usage_note_en": "Also “naturally, unaffectedly”: Sie lacht ganz natürlich. — She laughs quite naturally."
+  },
+  {
+    "id": "adverb-227",
+    "word": "bestimmt",
+    "translation_ru": "наверняка; точно",
+    "translation_en": "certainly; definitely",
+    "reading_policy": "separate",
+    "sense_id": "bestimmt:Adverb",
+    "example_de": "Er kommt bestimmt gleich.",
+    "example_ru": "Он наверняка сейчас придёт.",
+    "example_en": "He'll certainly be here in a moment.",
+    "example_cloze": "Er kommt {{c1::bestimmt}} gleich.",
+    "example_usage": "Adverb"
+  },
+  {
+    "id": "adverb-228",
+    "word": "förmlich",
+    "translation_ru": "буквально, прямо-таки; официально",
+    "translation_en": "literally, positively; formally",
+    "reading_policy": "separate",
+    "sense_id": "förmlich:Adverb",
+    "example_de": "Er ist vor Freude förmlich in die Luft gesprungen.",
+    "example_ru": "Он от радости буквально подпрыгнул.",
+    "example_en": "He literally jumped for joy.",
+    "example_cloze": "Er ist vor Freude {{c1::förmlich}} in die Luft gesprungen.",
+    "example_usage": "Adverb"
   }
 ]

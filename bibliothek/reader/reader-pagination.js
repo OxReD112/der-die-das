@@ -78,6 +78,15 @@
       flow.style.setProperty('--page-width', `${width}px`);
       stride = width + 32;
       viewport.scrollLeft = 0;
+      const ending = document.getElementById('chapter-end');
+      ending.style.height = '';
+      // Let the finish button occupy the center of the remaining column without
+      // reserving a full extra page or changing the text's column height.
+      if (ending.classList.contains('is-book-end') && !ending.hidden && ending.children.length === 1) {
+        const rect = ending.getBoundingClientRect();
+        const space = Math.floor(viewport.getBoundingClientRect().bottom - rect.top) - 2;
+        if (space >= rect.height) ending.style.height = `${space}px`;
+      }
       count = Math.max(1, Math.ceil((flow.scrollWidth + 32 - 1) / stride));
       words = [...flow.querySelectorAll('.reading-word')];
       wordPages = words.map(pageFor);

@@ -654,7 +654,7 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261012-nouns-22" : path === "german-adverbs.json" ? "20261011-nicht-partikel-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261015-nouns-list2-07" : ["german-adjectives.json","german-adverbs.json","german-adjective-adverbs.json"].includes(path) ? "20261015-c1-1" : path === "german-pronouns.json" ? "20261015-form-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
@@ -852,11 +852,15 @@
         linkedReflexive.construction.verb && linkedReflexive.construction.pronoun ? linkedReflexive.construction : null;
       let model;
       if (referencePronoun) {
-        const types = [...new Set((userConfirmed && reference.isPronoun(candidate) ? [candidate] : pronounCandidates).map(c => display.partOfSpeech(c)))];
-        const use = pronounLink ? pronounLink.interpretation === "reciprocal" ? "Reziprok" : pronounLink.interpretation ? "" : "Reflexiv" : "";
-        const values = reference.brief(pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
-        model = {heading:word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
-          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun] : null, helpEntry:selectedEntry};
+        // A possessive established before its noun (mein Buch) is that card alone (reference 4.3, A4).
+        const shown = (userConfirmed || resolution.evidence === "possessive-before-noun" && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] : pronounCandidates;
+        const types = [...new Set(shown.map(c => display.partOfSpeech(c)))];
+        const use = pronounLink ? "Reflexiv" : "";
+        const values = reference.brief(resolution.evidence === "possessive-before-noun" && shown.length === 1 ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
+        model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
+          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun] : null, helpEntry:selectedEntry,
+          // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
+          note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};
       } else if (candidate) {
         model = display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed});
       } else {
@@ -885,7 +889,7 @@
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
-      paintActiveWord(candidate, referencePronoun || candidate?.construction ? model.spans : undefined);
+      paintActiveWord(candidate, referencePronoun || candidate?.construction || candidate?.prepositionLink || candidate?.compound ? model.spans : undefined);
       if(showPronounSummary)popupAmbiguous=false;
       renderChoices();
     };

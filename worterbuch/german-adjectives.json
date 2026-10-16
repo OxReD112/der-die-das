@@ -72,16 +72,6 @@
     "example_cloze": "Der Film war wirklich {{c1::lustig}}."
   },
   {
-    "id": "adjective-018",
-    "word": "ruhig",
-    "translation_ru": "спокойный; тихий",
-    "translation_en": "calm; quiet",
-    "example_de": "Am Abend ist es hier sehr ruhig.",
-    "example_ru": "Вечером здесь очень тихо.",
-    "example_en": "It's very quiet here in the evening.",
-    "example_cloze": "Am Abend ist es hier sehr {{c1::ruhig}}."
-  },
-  {
     "id": "adjective-020",
     "word": "geduldig",
     "translation_ru": "терпеливый",
@@ -134,16 +124,6 @@
     "example_ru": "Она счастлива из-за хорошей новости.",
     "example_en": "She is happy about the good news.",
     "example_cloze": "Sie ist {{c1::glücklich}} über die gute Nachricht."
-  },
-  {
-    "id": "adjective-025",
-    "word": "traurig",
-    "translation_ru": "грустный; печальный",
-    "translation_en": "sad",
-    "example_de": "Der Abschied war traurig.",
-    "example_ru": "Прощание было грустным.",
-    "example_en": "The farewell was sad.",
-    "example_cloze": "Der Abschied war {{c1::traurig}}."
   },
   {
     "id": "adjective-027",
@@ -204,16 +184,6 @@
     "example_ru": "Подъём был утомительным, зато вид был прекрасный.",
     "example_en": "The climb was arduous, but the view was great.",
     "example_cloze": "Der Aufstieg war {{c1::mühsam}}, aber die Aussicht war toll."
-  },
-  {
-    "id": "adjective-033",
-    "word": "interessant",
-    "translation_ru": "интересный",
-    "translation_en": "interesting",
-    "example_de": "Das Buch über Berlin ist sehr interessant.",
-    "example_ru": "Книга о Берлине очень интересная.",
-    "example_en": "The book about Berlin is very interesting.",
-    "example_cloze": "Das Buch über Berlin ist sehr {{c1::interessant}}."
   },
   {
     "id": "adjective-034",
@@ -478,16 +448,6 @@
     ]
   },
   {
-    "id": "adjective-087",
-    "word": "allein",
-    "translation_ru": "один; в одиночестве",
-    "translation_en": "alone; on one's own",
-    "example_de": "Am Wochenende bin ich oft allein zu Hause.",
-    "example_ru": "По выходным я часто один дома.",
-    "example_en": "I am often home alone at the weekend.",
-    "example_cloze": "Am Wochenende bin ich oft {{c1::allein}} zu Hause."
-  },
-  {
     "id": "adjective-090",
     "word": "bereit",
     "translation_ru": "готовый; готов",
@@ -722,18 +682,6 @@
     "example_cloze": "In unserem Kurs gibt es viele {{c1::ausländische}} Studenten."
   },
   {
-    "id": "adjective-111",
-    "word": "bar",
-    "translation_ru": "наличными; наличный",
-    "translation_en": "in cash; cash",
-    "usage_note_ru": "Не путать с die Bar — бар.",
-    "usage_note_en": "Not to be confused with die Bar (bar).",
-    "example_de": "Kann ich hier bar bezahlen?",
-    "example_ru": "Здесь можно заплатить наличными?",
-    "example_en": "Can I pay in cash here?",
-    "example_cloze": "Kann ich hier {{c1::bar}} bezahlen?"
-  },
-  {
     "id": "adjective-112",
     "word": "braun",
     "translation_ru": "коричневый; загорелый",
@@ -742,18 +690,6 @@
     "example_ru": "На ней коричневая куртка.",
     "example_en": "She is wearing a brown jacket.",
     "example_cloze": "Sie trägt eine {{c1::braune}} Jacke."
-  },
-  {
-    "id": "adjective-113",
-    "word": "böse",
-    "translation_ru": "злой; сердитый",
-    "translation_en": "vicious; evil; angry",
-    "usage_note_ru": "jemandem böse sein — сердиться на кого-то (Dativ).",
-    "usage_note_en": "jemandem böse sein — to be angry with someone (dative).",
-    "example_de": "Der Hund ist nicht böse, er will nur spielen.",
-    "example_ru": "Собака не злая, она просто хочет поиграть.",
-    "example_en": "The dog isn't vicious, it just wants to play.",
-    "example_cloze": "Der Hund ist nicht {{c1::böse}}, er will nur spielen."
   },
   {
     "id": "adjective-114",
@@ -828,16 +764,6 @@
     "example_ru": "Поздравляю с днём рождения!",
     "example_en": "Happy birthday!",
     "example_cloze": "{{c1::Herzlichen}} Glückwunsch zum Geburtstag!"
-  },
-  {
-    "id": "adjective-121",
-    "word": "leise",
-    "translation_ru": "тихий; тихо",
-    "translation_en": "quiet; quietly",
-    "example_de": "Bitte sprich leise, das Baby schläft.",
-    "example_ru": "Пожалуйста, говори тихо, малыш спит.",
-    "example_en": "Please speak quietly, the baby is sleeping.",
-    "example_cloze": "Bitte sprich {{c1::leise}}, das Baby schläft."
   },
   {
     "id": "adjective-122",
@@ -999,16 +925,6 @@
     "example_cloze": "Ist das {{c1::wahr}}?"
   },
   {
-    "id": "adjective-136",
-    "word": "wirklich",
-    "translation_ru": "действительно; настоящий",
-    "translation_en": "really; real",
-    "example_de": "Das Essen war wirklich gut.",
-    "example_ru": "Еда была действительно хорошей.",
-    "example_en": "The food was really good.",
-    "example_cloze": "Das Essen war {{c1::wirklich}} gut."
-  },
-  {
     "id": "adjective-137",
     "word": "aufregend",
     "translation_ru": "волнующий; захватывающий",
@@ -1059,18 +975,6 @@
     "example_cloze": "Ich muss {{c1::dringend}} mit dir sprechen."
   },
   {
-    "id": "adjective-142",
-    "word": "egal",
-    "translation_ru": "всё равно; безразлично",
-    "translation_en": "all the same; it doesn't matter",
-    "usage_note_ru": "В этом значении разговорное и не склоняется: Das ist mir egal.",
-    "usage_note_en": "In this sense colloquial and not inflected: Das ist mir egal.",
-    "example_de": "Das ist mir egal.",
-    "example_ru": "Мне всё равно.",
-    "example_en": "I don't mind either way.",
-    "example_cloze": "Das ist mir {{c1::egal}}."
-  },
-  {
     "id": "adjective-143",
     "word": "fantastisch",
     "translation_ru": "фантастический; потрясающий",
@@ -1101,38 +1005,6 @@
     "example_ru": "Еда для меня слишком жирная.",
     "example_en": "The food is too fatty for me.",
     "example_cloze": "Das Essen ist mir zu {{c1::fett}}."
-  },
-  {
-    "id": "adjective-146",
-    "word": "fleißig",
-    "translation_ru": "прилежный; старательный",
-    "translation_en": "hard-working; diligent",
-    "example_de": "Sie ist eine fleißige Schülerin.",
-    "example_ru": "Она прилежная ученица.",
-    "example_en": "She is a hard-working pupil.",
-    "example_cloze": "Sie ist eine {{c1::fleißige}} Schülerin."
-  },
-  {
-    "id": "adjective-147",
-    "word": "furchtbar",
-    "translation_ru": "ужасный; ужасно",
-    "translation_en": "terrible; terribly",
-    "example_de": "Das Wetter ist heute furchtbar.",
-    "example_ru": "Погода сегодня ужасная.",
-    "example_en": "The weather is terrible today.",
-    "example_cloze": "Das Wetter ist heute {{c1::furchtbar}}."
-  },
-  {
-    "id": "adjective-148",
-    "word": "hart",
-    "translation_ru": "твёрдый; жёсткий; тяжёлый (о работе)",
-    "translation_en": "hard; tough",
-    "comparative": "härter",
-    "superlative": "am härtesten",
-    "example_de": "Das Bett im Hotel war zu hart.",
-    "example_ru": "Кровать в гостинице была слишком жёсткой.",
-    "example_en": "The bed in the hotel was too hard.",
-    "example_cloze": "Das Bett im Hotel war zu {{c1::hart}}."
   },
   {
     "id": "adjective-149",
@@ -1179,12 +1051,22 @@
   {
     "id": "adjective-153",
     "word": "natürlich",
-    "translation_ru": "конечно; естественный; натуральный",
-    "translation_en": "of course; natural",
-    "example_de": "Kommst du mit? – Natürlich!",
-    "example_ru": "Пойдёшь с нами? – Конечно!",
-    "example_en": "Are you coming? – Of course!",
-    "example_cloze": "Kommst du mit? – {{c1::Natürlich}}!"
+    "translation_ru": "натуральный; естественный",
+    "translation_en": "natural",
+    "example_de": "Ich kaufe nur natürliche Kosmetik.",
+    "example_ru": "Я покупаю только натуральную косметику.",
+    "example_en": "I only buy natural cosmetics.",
+    "example_cloze": "Ich kaufe nur {{c1::natürliche}} Kosmetik.",
+    "reading_policy": "separate",
+    "sense_id": "natürlich:Adjektiv",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "natürliche",
+      "natürlichem",
+      "natürlichen",
+      "natürlicher",
+      "natürliches"
+    ]
   },
   {
     "id": "adjective-154",
@@ -1257,26 +1139,6 @@
     "example_cloze": "Bist du {{c1::sauer}} auf mich?"
   },
   {
-    "id": "adjective-160",
-    "word": "schlimm",
-    "translation_ru": "плохой; страшный; серьёзный",
-    "translation_en": "bad; serious",
-    "example_de": "Ist es schlimm, wenn ich etwas später komme?",
-    "example_ru": "Это плохо, если я приду чуть позже?",
-    "example_en": "Is it a problem if I come a bit later?",
-    "example_cloze": "Ist es {{c1::schlimm}}, wenn ich etwas später komme?"
-  },
-  {
-    "id": "adjective-161",
-    "word": "schrecklich",
-    "translation_ru": "ужасный; ужасно",
-    "translation_en": "terrible; awful; terribly",
-    "example_de": "Ich hatte einen schrecklichen Traum.",
-    "example_ru": "Мне приснился ужасный сон.",
-    "example_en": "I had a terrible dream.",
-    "example_cloze": "Ich hatte einen {{c1::schrecklichen}} Traum."
-  },
-  {
     "id": "adjective-162",
     "word": "schwanger",
     "translation_ru": "беременная",
@@ -1327,16 +1189,6 @@
     "example_ru": "Неделя перед экзаменами была напряжённой.",
     "example_en": "The week before the exams was stressful.",
     "example_cloze": "Die Woche vor den Prüfungen war {{c1::stressig}}."
-  },
-  {
-    "id": "adjective-167",
-    "word": "vorsichtig",
-    "translation_ru": "осторожно; осторожный",
-    "translation_en": "carefully; careful",
-    "example_de": "Fahr bitte vorsichtig, die Straße ist glatt.",
-    "example_ru": "Езжай, пожалуйста, осторожно, дорога скользкая.",
-    "example_en": "Please drive carefully, the road is slippery.",
-    "example_cloze": "Fahr bitte {{c1::vorsichtig}}, die Straße ist glatt."
   },
   {
     "id": "adjective-168",
@@ -1451,26 +1303,6 @@
     "example_cloze": "Wir suchen eine {{c1::ausgebildete}} Krankenpflegerin."
   },
   {
-    "id": "adjective-179",
-    "word": "ausgezeichnet",
-    "translation_ru": "отличный; отлично",
-    "translation_en": "excellent",
-    "example_de": "Das Essen war ausgezeichnet.",
-    "example_ru": "Еда была отличной.",
-    "example_en": "The food was excellent.",
-    "example_cloze": "Das Essen war {{c1::ausgezeichnet}}."
-  },
-  {
-    "id": "adjective-180",
-    "word": "ausschließlich",
-    "translation_ru": "исключительно; только; исключительный",
-    "translation_en": "exclusively; only; exclusive",
-    "example_de": "Der Parkplatz ist ausschließlich für Kunden.",
-    "example_ru": "Парковка — исключительно для клиентов.",
-    "example_en": "The car park is exclusively for customers.",
-    "example_cloze": "Der Parkplatz ist {{c1::ausschließlich}} für Kunden."
-  },
-  {
     "id": "adjective-181",
     "word": "befreit",
     "translation_ru": "освобождённый (от чего-то)",
@@ -1538,12 +1370,24 @@
   {
     "id": "adjective-186",
     "word": "bestimmt",
-    "translation_ru": "наверняка; определённый",
-    "translation_en": "certainly; definite; certain",
-    "example_de": "Er kommt bestimmt gleich.",
-    "example_ru": "Он наверняка сейчас придёт.",
-    "example_en": "He'll certainly be here in a moment.",
-    "example_cloze": "Er kommt {{c1::bestimmt}} gleich."
+    "translation_ru": "определённый; предназначенный (für); решительный, твёрдый",
+    "translation_en": "certain, particular; intended (for); firm, decisive",
+    "example_de": "Wir treffen uns immer an einem bestimmten Tag im Monat.",
+    "example_ru": "Мы всегда встречаемся в определённый день месяца.",
+    "example_en": "We always meet on a particular day of the month.",
+    "example_cloze": "Wir treffen uns immer an einem {{c1::bestimmten}} Tag im Monat.",
+    "reading_policy": "separate",
+    "sense_id": "bestimmt:Adjektiv",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "bestimmte",
+      "bestimmtem",
+      "bestimmten",
+      "bestimmter",
+      "bestimmtes"
+    ],
+    "usage_note_ru": "bestimmt sein für — быть предназначенным для: Das Paket ist für dich bestimmt. «Твёрдо»: Er sagte freundlich, aber bestimmt: Nein. — Он сказал вежливо, но твёрдо: нет. Также причастие от bestimmen — определять.",
+    "usage_note_en": "bestimmt sein für — to be meant for: Das Paket ist für dich bestimmt. “Firmly”: Er sagte freundlich, aber bestimmt: Nein. — He said politely but firmly: no. Also the participle of bestimmen — to determine."
   },
   {
     "id": "adjective-187",
@@ -1868,16 +1712,6 @@
     "example_cloze": "Wir treffen uns zur {{c1::gewohnten}} Zeit."
   },
   {
-    "id": "adjective-217",
-    "word": "giftig",
-    "translation_ru": "ядовитый",
-    "translation_en": "poisonous; toxic",
-    "example_de": "Diese Pilze sind giftig.",
-    "example_ru": "Эти грибы ядовитые.",
-    "example_en": "These mushrooms are poisonous.",
-    "example_cloze": "Diese Pilze sind {{c1::giftig}}."
-  },
-  {
     "id": "adjective-218",
     "word": "glatt",
     "translation_ru": "скользкий; гладкий",
@@ -1898,16 +1732,6 @@
     "example_ru": "Мужчины и женщины равноправны.",
     "example_en": "Men and women have equal rights.",
     "example_cloze": "Männer und Frauen sind {{c1::gleichberechtigt}}."
-  },
-  {
-    "id": "adjective-220",
-    "word": "gründlich",
-    "translation_ru": "тщательно; тщательный",
-    "translation_en": "thoroughly; thorough",
-    "example_de": "Lies den Vertrag bitte gründlich, bevor du unterschreibst.",
-    "example_ru": "Прочитай, пожалуйста, договор тщательно, прежде чем подписывать.",
-    "example_en": "Please read the contract thoroughly before you sign.",
-    "example_cloze": "Lies den Vertrag bitte {{c1::gründlich}}, bevor du unterschreibst."
   },
   {
     "id": "adjective-221",
@@ -2114,18 +1938,6 @@
     "example_cloze": "Ich suche ein {{c1::möbliertes}} Zimmer."
   },
   {
-    "id": "adjective-238",
-    "word": "neugierig",
-    "translation_ru": "любопытный",
-    "translation_en": "curious; nosy",
-    "usage_note_ru": "neugierig auf + Akkusativ — любопытно узнать / увидеть что-то.",
-    "usage_note_en": "neugierig auf + accusative — curious to know / see something.",
-    "example_de": "Unsere Nachbarin ist sehr neugierig.",
-    "example_ru": "Наша соседка очень любопытная.",
-    "example_en": "Our neighbour is very curious.",
-    "example_cloze": "Unsere Nachbarin ist sehr {{c1::neugierig}}."
-  },
-  {
     "id": "adjective-239",
     "word": "niedrig",
     "translation_ru": "низкий",
@@ -2162,16 +1974,6 @@
     "example_ru": "Врачи настроены оптимистично.",
     "example_en": "The doctors are optimistic.",
     "example_cloze": "Die Ärzte sind {{c1::optimistisch}}."
-  },
-  {
-    "id": "adjective-242",
-    "word": "passiv",
-    "translation_ru": "пассивный",
-    "translation_en": "passive",
-    "example_de": "Er ist im Unterricht eher passiv.",
-    "example_ru": "На уроках он скорее пассивен.",
-    "example_en": "He is rather passive in class.",
-    "example_cloze": "Er ist im Unterricht eher {{c1::passiv}}."
   },
   {
     "id": "adjective-243",
@@ -2242,16 +2044,6 @@
       "rechten",
       "rechtem"
     ]
-  },
-  {
-    "id": "adjective-249",
-    "word": "rechtzeitig",
-    "translation_ru": "вовремя; своевременный",
-    "translation_en": "in time; timely",
-    "example_de": "Bitte kommt rechtzeitig zum Bahnhof.",
-    "example_ru": "Пожалуйста, приходите на вокзал вовремя.",
-    "example_en": "Please get to the station in good time.",
-    "example_cloze": "Bitte kommt {{c1::rechtzeitig}} zum Bahnhof."
   },
   {
     "id": "adjective-250",
@@ -2328,16 +2120,6 @@
     "example_cloze": "Du siehst heute sehr {{c1::schick}} aus."
   },
   {
-    "id": "adjective-257",
-    "word": "schief",
-    "translation_ru": "криво; кривой; косой",
-    "translation_en": "crooked; askew",
-    "example_de": "Das Bild hängt schief.",
-    "example_ru": "Картина висит криво.",
-    "example_en": "The picture is hanging crooked.",
-    "example_cloze": "Das Bild hängt {{c1::schief}}."
-  },
-  {
     "id": "adjective-258",
     "word": "schlank",
     "translation_ru": "стройный",
@@ -2372,26 +2154,6 @@
     "example_cloze": "Der Angeklagte ist {{c1::schuldig}}."
   },
   {
-    "id": "adjective-261",
-    "word": "selbstverständlich",
-    "translation_ru": "конечно; само собой разумеющийся",
-    "translation_en": "of course; self-evident",
-    "example_de": "Kann ich dein Handy kurz benutzen? – Selbstverständlich!",
-    "example_ru": "Можно мне ненадолго взять твой телефон? – Конечно!",
-    "example_en": "Can I use your phone for a moment? – Of course!",
-    "example_cloze": "Kann ich dein Handy kurz benutzen? – {{c1::Selbstverständlich}}!"
-  },
-  {
-    "id": "adjective-262",
-    "word": "seltsam",
-    "translation_ru": "странный",
-    "translation_en": "strange; odd",
-    "example_de": "Heute ist ein seltsames Paket gekommen.",
-    "example_ru": "Сегодня пришла странная посылка.",
-    "example_en": "A strange parcel arrived today.",
-    "example_cloze": "Heute ist ein {{c1::seltsames}} Paket gekommen."
-  },
-  {
     "id": "adjective-263",
     "word": "sinnlos",
     "translation_ru": "бессмысленный",
@@ -2424,16 +2186,6 @@
     "example_cloze": "Viele Reisende leiden unter dem {{c1::sogenannten}} Jetlag."
   },
   {
-    "id": "adjective-266",
-    "word": "sparsam",
-    "translation_ru": "экономичный (о технике); экономный; бережливый",
-    "translation_en": "economical; thrifty",
-    "example_de": "Mein neues Auto ist sehr sparsam.",
-    "example_ru": "Моя новая машина очень экономичная.",
-    "example_en": "My new car is very economical.",
-    "example_cloze": "Mein neues Auto ist sehr {{c1::sparsam}}."
-  },
-  {
     "id": "adjective-267",
     "word": "speziell",
     "translation_ru": "особый; специальный",
@@ -2452,18 +2204,6 @@
     "example_ru": "В тексте есть несколько стилистических ошибок.",
     "example_en": "The text has a few stylistic errors.",
     "example_cloze": "Der Text hat einige {{c1::stilistische}} Fehler."
-  },
-  {
-    "id": "adjective-269",
-    "word": "still",
-    "translation_ru": "тихий; спокойный; неподвижный",
-    "translation_en": "quiet; still",
-    "usage_note_ru": "Mineralwasser still — негазированная вода.",
-    "usage_note_en": "Mineralwasser still — still (non-sparkling) water.",
-    "example_de": "Im Wald war es ganz still.",
-    "example_ru": "В лесу было совсем тихо.",
-    "example_en": "It was completely quiet in the forest.",
-    "example_cloze": "Im Wald war es ganz {{c1::still}}."
   },
   {
     "id": "adjective-270",
@@ -2520,16 +2260,6 @@
     "example_cloze": "Mein Großvater ist auf einem Ohr {{c1::taub}}."
   },
   {
-    "id": "adjective-275",
-    "word": "theoretisch",
-    "translation_ru": "теоретически; теоретический",
-    "translation_en": "in theory; theoretical",
-    "example_de": "Theoretisch ist das möglich.",
-    "example_ru": "Теоретически это возможно.",
-    "example_en": "In theory that's possible.",
-    "example_cloze": "{{c1::Theoretisch}} ist das möglich."
-  },
-  {
     "id": "adjective-276",
     "word": "tolerant",
     "translation_ru": "терпимый; толерантный",
@@ -2550,16 +2280,6 @@
     "example_cloze": "Unser Hund ist ein {{c1::treuer}} Freund."
   },
   {
-    "id": "adjective-278",
-    "word": "umgekehrt",
-    "translation_ru": "наоборот; обратный",
-    "translation_en": "the other way round; reverse",
-    "example_de": "Es ist genau umgekehrt.",
-    "example_ru": "Всё как раз наоборот.",
-    "example_en": "It's exactly the other way round.",
-    "example_cloze": "Es ist genau {{c1::umgekehrt}}."
-  },
-  {
     "id": "adjective-279",
     "word": "unentschieden",
     "translation_ru": "вничью (в спорте); нерешённый",
@@ -2570,18 +2290,6 @@
     "example_ru": "Игра закончилась вничью.",
     "example_en": "The match ended in a draw.",
     "example_cloze": "Das Spiel endete {{c1::unentschieden}}."
-  },
-  {
-    "id": "adjective-280",
-    "word": "unheimlich",
-    "translation_ru": "жуткий; зловещий",
-    "translation_en": "eerie; creepy",
-    "usage_note_ru": "Разг. как усиление: unheimlich nett — невероятно милый.",
-    "usage_note_en": "Colloquially as an intensifier: unheimlich nett — incredibly nice.",
-    "example_de": "Nachts ist der Park ein bisschen unheimlich.",
-    "example_ru": "Ночью в парке немного жутко.",
-    "example_en": "At night the park is a bit creepy.",
-    "example_cloze": "Nachts ist der Park ein bisschen {{c1::unheimlich}}."
   },
   {
     "id": "adjective-281",
@@ -2747,16 +2455,6 @@
     "example_cloze": "Zeichne eine {{c1::waagerechte}} Linie."
   },
   {
-    "id": "adjective-295",
-    "word": "wahnsinnig",
-    "translation_ru": "невероятно (разг.); безумный",
-    "translation_en": "incredibly (colloquial); mad",
-    "example_de": "Ich habe wahnsinnig viel Arbeit.",
-    "example_ru": "У меня невероятно много работы.",
-    "example_en": "I have an incredible amount of work.",
-    "example_cloze": "Ich habe {{c1::wahnsinnig}} viel Arbeit."
-  },
-  {
     "id": "adjective-296",
     "word": "wert",
     "translation_ru": "стоящий (столько-то); достойный",
@@ -2799,18 +2497,6 @@
     "example_cloze": "Im Wald leben viele {{c1::wilde}} Tiere."
   },
   {
-    "id": "adjective-300",
-    "word": "wütend",
-    "translation_ru": "разъярённый; очень сердитый",
-    "translation_en": "furious; angry",
-    "usage_note_ru": "wütend auf + Akkusativ — злой на кого-то.",
-    "usage_note_en": "wütend auf + accusative — furious with someone.",
-    "example_de": "Der Chef ist wütend auf uns.",
-    "example_ru": "Начальник на нас в ярости.",
-    "example_en": "The boss is furious with us.",
-    "example_cloze": "Der Chef ist {{c1::wütend}} auf uns."
-  },
-  {
     "id": "adjective-301",
     "word": "zugänglich",
     "translation_ru": "доступный",
@@ -2819,16 +2505,6 @@
     "example_ru": "Вокзал доступен и для людей в инвалидных колясках.",
     "example_en": "The station is also accessible to wheelchair users.",
     "example_cloze": "Der Bahnhof ist auch für Rollstuhlfahrer {{c1::zugänglich}}."
-  },
-  {
-    "id": "adjective-302",
-    "word": "zukünftig",
-    "translation_ru": "будущий",
-    "translation_en": "future",
-    "example_de": "Das ist mein zukünftiger Mann.",
-    "example_ru": "Это мой будущий муж.",
-    "example_en": "This is my future husband.",
-    "example_cloze": "Das ist mein {{c1::zukünftiger}} Mann."
   },
   {
     "id": "adjective-303",
@@ -2843,16 +2519,6 @@
     "example_cloze": "Wer ist hier für die Anmeldung {{c1::zuständig}}?"
   },
   {
-    "id": "adjective-304",
-    "word": "zuverlässig",
-    "translation_ru": "надёжный",
-    "translation_en": "reliable",
-    "example_de": "Mein altes Auto ist sehr zuverlässig.",
-    "example_ru": "Моя старая машина очень надёжная.",
-    "example_en": "My old car is very reliable.",
-    "example_cloze": "Mein altes Auto ist sehr {{c1::zuverlässig}}."
-  },
-  {
     "id": "adjective-305",
     "word": "ängstlich",
     "translation_ru": "боязливый; пугливый",
@@ -2861,26 +2527,6 @@
     "example_ru": "Во время грозы наша собака очень боится.",
     "example_en": "Our dog gets very anxious during thunderstorms.",
     "example_cloze": "Unser Hund ist bei Gewitter sehr {{c1::ängstlich}}."
-  },
-  {
-    "id": "adjective-306",
-    "word": "ärgerlich",
-    "translation_ru": "досадный; сердитый",
-    "translation_en": "annoying; annoyed",
-    "example_de": "Es ist ärgerlich, dass der Bus schon wieder Verspätung hat.",
-    "example_ru": "Досадно, что автобус снова опаздывает.",
-    "example_en": "It's annoying that the bus is late again.",
-    "example_cloze": "Es ist {{c1::ärgerlich}}, dass der Bus schon wieder Verspätung hat."
-  },
-  {
-    "id": "adjective-307",
-    "word": "äußerlich",
-    "translation_ru": "наружный; внешний",
-    "translation_en": "external; outward",
-    "example_de": "Die Salbe ist nur zur äußerlichen Anwendung.",
-    "example_ru": "Мазь только для наружного применения.",
-    "example_en": "The ointment is for external use only.",
-    "example_cloze": "Die Salbe ist nur zur {{c1::äußerlichen}} Anwendung."
   },
   {
     "id": "adjective-308",
@@ -2965,16 +2611,6 @@
     "example_ru": "Я люблю слушать классическую музыку.",
     "example_en": "I like listening to classical music.",
     "example_cloze": "Ich höre gern {{c1::klassische}} Musik."
-  },
-  {
-    "id": "adjective-316",
-    "word": "schüchtern",
-    "translation_ru": "застенчивый; робкий",
-    "translation_en": "shy",
-    "example_de": "Das Mädchen ist noch etwas schüchtern.",
-    "example_ru": "Девочка ещё немного стесняется.",
-    "example_en": "The girl is still a little shy.",
-    "example_cloze": "Das Mädchen ist noch etwas {{c1::schüchtern}}."
   },
   {
     "id": "adjective-317",
@@ -3113,16 +2749,6 @@
     "example_cloze": "Unser neues Team ist sehr {{c1::motiviert}}."
   },
   {
-    "id": "adjective-329",
-    "word": "unglücklich",
-    "translation_ru": "несчастный; неудачный",
-    "translation_en": "unhappy; unfortunate",
-    "example_de": "Das Kind sieht unglücklich aus.",
-    "example_ru": "Ребёнок выглядит несчастным.",
-    "example_en": "The child looks unhappy.",
-    "example_cloze": "Das Kind sieht {{c1::unglücklich}} aus."
-  },
-  {
     "id": "adjective-330",
     "word": "unhöflich",
     "translation_ru": "невежливый; грубый",
@@ -3131,16 +2757,6 @@
     "example_ru": "Невежливо разговаривать по телефону во время еды.",
     "example_en": "It's rude to be on the phone during a meal.",
     "example_cloze": "Es ist {{c1::unhöflich}}, beim Essen zu telefonieren."
-  },
-  {
-    "id": "adjective-331",
-    "word": "unmöglich",
-    "translation_ru": "невозможный; невыносимый, возмутительный",
-    "translation_en": "impossible; outrageous",
-    "example_de": "Das ist leider unmöglich.",
-    "example_ru": "К сожалению, это невозможно.",
-    "example_en": "Unfortunately, that's impossible.",
-    "example_cloze": "Das ist leider {{c1::unmöglich}}."
   },
   {
     "id": "adjective-332",
@@ -3270,16 +2886,6 @@
     "example_ru": "Поездка была незабываемой.",
     "example_en": "The trip was unforgettable.",
     "example_cloze": "Die Reise war {{c1::unvergesslich}}."
-  },
-  {
-    "id": "adjective-343",
-    "word": "versehentlich",
-    "translation_ru": "по ошибке, случайно; ошибочный",
-    "translation_en": "by mistake, accidentally; inadvertent",
-    "example_de": "Er hat versehentlich deinen Schirm mitgenommen.",
-    "example_ru": "Он по ошибке взял твой зонт.",
-    "example_en": "He took your umbrella by mistake.",
-    "example_cloze": "Er hat {{c1::versehentlich}} deinen Schirm mitgenommen."
   },
   {
     "id": "adjective-344",
@@ -3553,16 +3159,6 @@
     "example_cloze": "Die Teile werden {{c1::maschinell}} hergestellt."
   },
   {
-    "id": "adjective-369",
-    "word": "moralisch",
-    "translation_ru": "моральный; нравственный",
-    "translation_en": "moral",
-    "example_de": "Das ist eine moralische Frage.",
-    "example_ru": "Это моральный вопрос.",
-    "example_en": "That is a moral question.",
-    "example_cloze": "Das ist eine {{c1::moralische}} Frage."
-  },
-  {
     "id": "adjective-370",
     "word": "motorisch",
     "translation_ru": "двигательный; моторный",
@@ -3630,7 +3226,8 @@
     "example_de": "Diese Diskussion ist überflüssig.",
     "example_ru": "Эта дискуссия излишня.",
     "example_en": "This discussion is unnecessary.",
-    "example_cloze": "Diese Diskussion ist {{c1::überflüssig}}."
+    "example_cloze": "Diese Diskussion ist {{c1::überflüssig}}.",
+    "reading_policy": "single"
   },
   {
     "id": "adjective-377",
@@ -3657,16 +3254,6 @@
     "example_cloze": "Die {{c1::derzeitige}} Lage ist schwierig."
   },
   {
-    "id": "adjective-379",
-    "word": "einzigartig",
-    "translation_ru": "неповторимый; уникальный",
-    "translation_en": "unique",
-    "example_de": "Die Aussicht von hier ist einzigartig.",
-    "example_ru": "Вид отсюда неповторимый.",
-    "example_en": "The view from here is unique.",
-    "example_cloze": "Die Aussicht von hier ist {{c1::einzigartig}}."
-  },
-  {
     "id": "adjective-380",
     "word": "familienfreundlich",
     "translation_ru": "удобный для семей с детьми",
@@ -3689,22 +3276,22 @@
   {
     "id": "adjective-382",
     "word": "förmlich",
-    "translation_ru": "официальный; формальный; буквально, прямо-таки",
-    "translation_en": "formal; literally, positively",
+    "translation_ru": "официальный; формальный",
+    "translation_en": "formal",
     "example_de": "Das ist eine förmliche Einladung.",
     "example_ru": "Это официальное приглашение.",
     "example_en": "This is a formal invitation.",
-    "example_cloze": "Das ist eine {{c1::förmliche}} Einladung."
-  },
-  {
-    "id": "adjective-383",
-    "word": "gelegentlich",
-    "translation_ru": "иногда; эпизодический",
-    "translation_en": "occasionally; occasional",
-    "example_de": "Ich gehe gelegentlich ins Theater.",
-    "example_ru": "Я иногда хожу в театр.",
-    "example_en": "I occasionally go to the theatre.",
-    "example_cloze": "Ich gehe {{c1::gelegentlich}} ins Theater."
+    "example_cloze": "Das ist eine {{c1::förmliche}} Einladung.",
+    "reading_policy": "separate",
+    "sense_id": "förmlich:Adjektiv",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "förmliche",
+      "förmlichem",
+      "förmlichen",
+      "förmlicher",
+      "förmliches"
+    ]
   },
   {
     "id": "adjective-384",
@@ -3735,16 +3322,6 @@
     "example_ru": "Мои бабушка и дедушка довольно консервативны.",
     "example_en": "My grandparents are quite conservative.",
     "example_cloze": "Meine Großeltern sind ziemlich {{c1::konservativ}}."
-  },
-  {
-    "id": "adjective-387",
-    "word": "reibungslos",
-    "translation_ru": "гладко, без проблем; беспроблемный",
-    "translation_en": "smoothly; smooth",
-    "example_de": "Die Reise verlief reibungslos.",
-    "example_ru": "Поездка прошла гладко.",
-    "example_en": "The journey went smoothly.",
-    "example_cloze": "Die Reise verlief {{c1::reibungslos}}."
   },
   {
     "id": "adjective-388",
@@ -3817,16 +3394,6 @@
     "example_cloze": "Die neue Auszubildende ist sehr {{c1::lernbereit}}."
   },
   {
-    "id": "adjective-396",
-    "word": "selbstbewusst",
-    "translation_ru": "уверенный в себе",
-    "translation_en": "self-confident",
-    "example_de": "Sie ist eine selbstbewusste junge Frau.",
-    "example_ru": "Она уверенная в себе молодая женщина.",
-    "example_en": "She is a self-confident young woman.",
-    "example_cloze": "Sie ist eine {{c1::selbstbewusste}} junge Frau."
-  },
-  {
     "id": "adjective-397",
     "word": "teamfähig",
     "translation_ru": "умеющий работать в команде",
@@ -3857,5 +3424,88 @@
     "example_ru": "Она свободно говорит по-английски на деловом уровне.",
     "example_en": "She speaks business-fluent English.",
     "example_cloze": "Sie spricht {{c1::verhandlungssicher}} Englisch."
+  },
+  {
+    "id": "adjective-400",
+    "word": "gerade",
+    "translation_ru": "прямой; чётный",
+    "translation_en": "straight; even (number)",
+    "reading_policy": "separate",
+    "sense_id": "gerade:Adjektiv",
+    "example_de": "Zieh mit dem Lineal eine gerade Linie.",
+    "example_ru": "Проведи по линейке прямую линию.",
+    "example_en": "Draw a straight line with the ruler.",
+    "example_cloze": "Zieh mit dem Lineal eine {{c1::gerade}} Linie.",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "geradem",
+      "geraden",
+      "gerader",
+      "gerades"
+    ],
+    "usage_note_ru": "eine gerade Zahl — чётное число.",
+    "usage_note_en": "eine gerade Zahl — an even number."
+  },
+  {
+    "id": "adjective-401",
+    "word": "eben",
+    "translation_ru": "ровный, плоский",
+    "translation_en": "flat, level",
+    "reading_policy": "separate",
+    "sense_id": "eben:Adjektiv",
+    "example_de": "Das Zelt sollte auf ebenem Boden stehen.",
+    "example_ru": "Палатка должна стоять на ровной земле.",
+    "example_en": "The tent should stand on level ground.",
+    "example_cloze": "Das Zelt sollte auf {{c1::ebenem}} Boden stehen.",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "ebene",
+      "ebenem",
+      "ebenen",
+      "ebener",
+      "ebenes"
+    ]
+  },
+  {
+    "id": "adjective-402",
+    "word": "eigentlich",
+    "translation_ru": "настоящий, истинный; основной",
+    "translation_en": "actual, real; main",
+    "reading_policy": "separate",
+    "sense_id": "eigentlich:Adjektiv",
+    "example_de": "Der eigentliche Grund für seine Kündigung war ein anderer.",
+    "example_ru": "Настоящая причина его ухода с работы была другой.",
+    "example_en": "The real reason he left his job was something else.",
+    "example_cloze": "Der {{c1::eigentliche}} Grund für seine Kündigung war ein anderer.",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "eigentliche",
+      "eigentlichem",
+      "eigentlichen",
+      "eigentlicher",
+      "eigentliches"
+    ]
+  },
+  {
+    "id": "adjective-403",
+    "word": "bloß",
+    "translation_ru": "голый, непокрытый; один лишь",
+    "translation_en": "bare, naked; mere",
+    "reading_policy": "separate",
+    "sense_id": "bloß:Adjektiv",
+    "example_de": "Er hat den Fisch mit bloßen Händen gefangen.",
+    "example_ru": "Он поймал рыбу голыми руками.",
+    "example_en": "He caught the fish with his bare hands.",
+    "example_cloze": "Er hat den Fisch mit {{c1::bloßen}} Händen gefangen.",
+    "example_usage": "Adjektiv",
+    "search_forms": [
+      "bloße",
+      "bloßem",
+      "bloßen",
+      "bloßer",
+      "bloßes"
+    ],
+    "usage_note_ru": "der bloße Gedanke — одна лишь мысль: Schon der bloße Gedanke macht mir Angst.",
+    "usage_note_en": "der bloße Gedanke — the mere thought: Schon der bloße Gedanke macht mir Angst."
   }
 ]

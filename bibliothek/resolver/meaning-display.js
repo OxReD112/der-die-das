@@ -145,6 +145,9 @@
       case 'perfect-group': return {marks:[`${k.label} mit ${name}`], role:isMain ? null : 'auxiliary', spans};
       case 'werden-future': return {marks:[`Futur I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
       case 'werden-passive': return {marks:[`Passiv mit ${name}`], role:isMain ? null : 'passive', spans};
+      // A3 (reference 5.6): gelesen «Passiv mit müssen», muss / werden «Passiv mit lesen».
+      case 'modal-passive': return {marks:[isMain ? `Passiv mit ${k.modal}` : `Passiv mit ${name}`],
+        role:!isMain && own === 'werden' ? 'passive' : null, spans};
       case 'werden-conditional': return {marks:[isMain ? 'Konjunktiv II' : `Konjunktiv II mit ${name}`], role:isMain ? null : 'conditional', spans};
       case 'werden-future-perfect': return {marks:[isMain ? 'Futur II' : `Futur II mit ${name}`],
         role:isMain ? null : own === 'werden' ? 'futurePerfectWill' : 'futurePerfectHave', spans};
@@ -157,8 +160,11 @@
       }
       case 'reflexive-verb': {
         // Undecided "sich / einander" keeps both names so the variants stay distinguishable.
-        const marks = k.interpretation === 'reciprocal' ? ['Reziprok'] : k.interpretation ? ['Reflexiv / Reziprok'] : ['Reflexiv'];
+        // A5 (user decision 15.10): always Reflexiv; «себя / друг друга» is the note under the meaning.
+        const marks = ['Reflexiv'];
         if (['Perfekt','Plusquamperfekt'].includes(k.tense)) marks.push(`${k.tense} mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
+        // A1 (reference 5.2): a modal controls the reflexive infinitive (muss mich beeilen).
+        else if (k.modal) marks.push(`Modal mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
         if (k.complement?.pattern) marks.push(k.complement.pattern);
         return {marks, role:null, spans};
       }
@@ -206,6 +212,9 @@
    * card(resolution, candidate, {word, language, lookup}) -> {heading, grammar, text, textLanguage, missing, spans, helpEntry}
    * lookup({id, word, type}) returns a dictionary entry or null (for help and "From …" lines).
    */
+  function contractionHeading(c) {
+    return c.kind === 'es' ? `${c.form} = ${c.parts[0]} + es` : `${c.form} (= ${c.parts[0]})`;
+  }
   function card(resolution, candidate, options = {}) {
     const language = options.language === 'ru' ? 'ru' : 'en', word = options.word || resolution?.form || '';
     const lookup = options.lookup || (() => null);
@@ -213,7 +222,7 @@
     const confirmed = !!options.confirmed;
     const k = constructionMarks(candidate, confirmed);
     let headingText = heading(candidate), type = partOfSpeech(candidate, confirmed), marks = [...k.marks], text = null, helpEntry = candidate.item || null;
-    const explanation = candidate.explanation, usage = candidate.usage;
+    const explanation = candidate.explanation, usage = candidate.usage, contraction = candidate.contraction;
     if (explanation?.kind === 'superlative') {
       const base = lookup({id:explanation.baseId, word:explanation.baseLemma, type:'Adjektiv'});
       headingText = explanation.baseLemma;
@@ -227,7 +236,7 @@
     }
     if (pos(candidate) === 'article') headingText = word;
     if (k.role === 'infinitiveParticle') type = 'Infinitivpartikel';
-    if (usage?.role === 'attributive') {
+    if (usage?.role === 'attributive' || usage?.role === 'adverbial') {
       const participle = usage.kind === 'participle-I' ? 'Partizip I' : usage.kind === 'participle-II' ? 'Partizip II' : null;
       if (participle && pos(candidate) === 'Verb') {
         // No own participle card: the source verb explains the form.
@@ -269,13 +278,35 @@
       const parts = [meaningText(candidate, language), meaningText({...candidate, translation:pair.translation, item:null}, language)].filter(Boolean);
       if (parts.length) text = {text:[...new Set(parts.map(p => p.text))].join(' / '), language:parts[0].language};
     }
+    // A2 (reference 4.9 / 5.5): an established verb + preposition pair.
+    const link = candidate.prepositionLink;
+    let linkSpans = null;
+    if (link && !k.spans) {
+      marks.push(pos(candidate) === 'Verb' ? link.pattern : `${link.verb} + ${link.pattern}`);
+      linkSpans = link.spans;
+    }
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
     if (features?.number === 'plural' && !pair) marks.push('Plural');
     if (features?.degree && !marks.includes(features.degree)) marks.push(features.degree);
+    // Translation of the clicked form from the own card (alles «всё» on the alle
+    // card): the heading is the form, the help stays the card (alle).
+    const formTranslation = candidate.formTranslation;
+    if (formTranslation && !text) {
+      headingText = formTranslation.form;
+      const own = compact(formTranslation[language]), english = language === 'ru' && !own ? compact(formTranslation.en) : '';
+      if (own) text = {text:own, language};
+      else if (english) text = {text:`английский: ${english}`, language:'en'};
+    }
     const derived = !!text;
     if (!text && k.role) text = {text:ROLE_TEXT[k.role][language], language};
-    if (!text) text = meaningText(candidate, language);
+    if (!text && !contraction?.expression) text = meaningText(candidate, language);
+    // B7: colloquial spellings — «war’s = war + es», «hab (= habe)»; es gibt / es geht
+    // stay without the verb's own translation until the expressions exist (F8).
+    if (contraction) {
+      headingText = contractionHeading(contraction);
+      if (contraction.expression) text = null;
+    }
     const grammar = [type, ...marks].filter(Boolean).join(' · ');
     // Constructions not yet in the reference keep their earlier note under the meaning.
     const unreviewed = ['werden-passive-perfect','werden-become-perfect'];
@@ -283,8 +314,8 @@
     const note = kn && (confirmed || kn.confidence !== 'tentative') && (unreviewed.includes(kn.id) || kn.id === 'reflexive-verb' && kn.interpretation)
       ? kn.note?.[language] || '' : '';
     return {heading:headingText, grammar, text:text ? text.text : NO_TRANSLATION[language], textLanguage:text ? text.language : language,
-      missing:!text, derived, note, spans:k.spans, helpEntry};
+      missing:!text, derived, note, spans:k.spans || linkSpans || candidate.compound?.spans || null, helpEntry};
   }
   window.BibliothekMeaningDisplay = Object.freeze({groups, alternatives, pos, heading, brief, compact, formComment, nounPhraseComment,
-    card, partOfSpeech, pronounType, NO_TRANSLATION});
+    card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION});
 })();

@@ -1391,6 +1391,14 @@
     ],
     "usage_note_ru": "В таблице — множественное число. Alles означает «всё»: Alles ist gut. Перед артиклем или притяжательным словом возможно all: all die Bücher, all meine Freunde.",
     "usage_note_en": "The table shows plural forms. Alles means everything: Alles ist gut. Before an article or possessive, all is also possible: all die Bücher, all meine Freunde.",
+    "form_translations": [
+      {
+        "form": "alles",
+        "ru": "всё",
+        "en": "everything",
+        "without_noun": true
+      }
+    ],
     "search_forms": [
       "alle",
       "all",
@@ -1795,6 +1803,14 @@
     ],
     "usage_note_ru": "Указывает на человека или предмет: dieser Mann, diese Frau, dieses Kind, diese Bücher. Может употребляться без существительного: Ich nehme dieses.",
     "usage_note_en": "Points to a person or thing: dieser Mann, diese Frau, dieses Kind, diese Bücher. Can stand without a noun: Ich nehme dieses.",
+    "form_translations": [
+      {
+        "form": "dies",
+        "ru": "это",
+        "en": "this",
+        "without_noun": true
+      }
+    ],
     "search_forms": [
       "dieser",
       "dies",
@@ -2590,6 +2606,20 @@
     "forms": null,
     "usage_note_ru": "Обычно без окончания с неисчисляемым: viel Zeit. Без существительного: vieles («многое»), например Ich habe vieles gelernt; in vielem («во многом»). Для счётных предметов — viele.",
     "usage_note_en": "Usually uninflected with an uncountable noun: viel Zeit. Without a noun: vieles (many things), as in Ich habe vieles gelernt; in vielem (in many respects). For countable things, use viele.",
+    "form_translations": [
+      {
+        "form": "vieles",
+        "ru": "многое",
+        "en": "many things; a lot",
+        "without_noun": true
+      },
+      {
+        "form": "vielem",
+        "ru": "многое (in vielem — во многом)",
+        "en": "many things (in vielem — in many respects)",
+        "without_noun": true
+      }
+    ],
     "search_forms": [
       "viel",
       "vieles",

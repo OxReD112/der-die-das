@@ -33,6 +33,20 @@
     }).catch(error => { separablePromise = null; throw error; });
     return separablePromise;
   }
+  // A2 (15.10.2026): agreed verb + preposition pairs (exercise list, reference 4.9).
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261015-a2-1", document.currentScript.src);
+  let verbPrepositionPromise = null;
+  function verbPrepositions() {
+    if (!verbPrepositionPromise) verbPrepositionPromise = fetch(verbPrepositionUrl).then(response => {
+      if (!response.ok) throw new Error("Verb preposition list unavailable");
+      return response.json();
+    }).then(data => {
+      if (data.format_version !== 1 || !Array.isArray(data.entries) || data.entries.some(r => !Array.isArray(r) || r.length !== 3 || r.some(v => typeof v !== "string")))
+        throw new Error("Invalid verb preposition list");
+      return data.entries;
+    }).catch(error => { verbPrepositionPromise = null; throw error; });
+    return verbPrepositionPromise;
+  }
   const superlativeUrl=new URL('data/superlative-index.json?v=20261008-l07-1',document.currentScript.src);
   let superlativePromise=null;
   async function superlativeEntries(word) {
@@ -195,6 +209,40 @@
     }
     return result;
   }
+  // B4 (15.10.2026): the export stores most declined adjective forms (warzige,
+  // bilaterale, schlenkerigere, arbeitsfähigster) only as a structured row
+  // without any sense. A row with declension tags (strong/weak/mixed) and only
+  // case, gender, number, degree tags links the spelling to an adjective; the
+  // target must still be an explicit adjective headword.
+  const adjectiveTags = new Set(['nominative','accusative','genitive','dative','singular','plural',
+    'definite','indefinite','strong','weak','mixed','masculine','feminine','neuter','without-article','comparative','superlative']);
+  function adjectiveDeclension(word, data, row) {
+    const tags = String(row[2] || '').split(',').filter(Boolean);
+    return !(data?.senses || []).length && String(row[0]).normalize('NFC').toLocaleLowerCase('de-DE') === word.toLocaleLowerCase('de-DE') &&
+      tags.some(tag => ['strong','weak','mixed'].includes(tag)) && tags.every(tag => adjectiveTags.has(tag));
+  }
+  // Positions a sense-less record may describe through its structured rows.
+  function structuredPositions(word, data, mappings, positions) {
+    if ((data?.senses || []).length || !mappings.length) return positions;
+    if (mappings.some(row => !adjectiveDeclension(word,data,row) ||
+      String(row[2] || '').split(',').every(tag => tag !== 'without-article' && tag !== 'comparative' && tag !== 'superlative'))) positions.add('noun');
+    if (mappings.some(row => adjectiveDeclension(word,data,row))) positions.add('adj');
+    return positions;
+  }
+  function adjectiveNotes(word, data, mappings, groups) {
+    const notes = [];
+    for (const lemma of new Set(mappings.filter(row => adjectiveDeclension(word,data,row)).map(row => row[1]))) {
+      if (!groups.some(group => group.pos === 'adj' && group.word === lemma && group.meanings.length)) continue;
+      const rows = mappings.filter(row => row[1] === lemma && adjectiveDeclension(word,data,row));
+      notes.push({kind:'form-note',word,pos:'adj',meanings:[`inflection of ${lemma}:`],lemmas:[lemma],
+        inflections:rows.map(row => {
+          const tags = String(row[2] || '').split(',').filter(Boolean);
+          return {form:word,lemma,pos:'adj',tags,person:null,number:tags.find(tag => ['singular','plural'].includes(tag)) || null,
+            tense:null,mood:null,source:'Wiktionary'};
+        })});
+    }
+    return notes;
+  }
   function formMappings(word, data, direct) {
     // Some lossless export rows contain only a structured noun inflection,
     // with no textual sense to repeat that link. Case/number tags establish
@@ -210,7 +258,7 @@
     };
     const mappings = (data?.inflections || []).filter(row =>
       !String(row[2] || "").split(",").some(tag => tag === "auxiliary" || tag.startsWith("error-")) &&
-      (nounMapping(row) || direct.some(group => group.formNotes.some(note =>
+      (nounMapping(row) || adjectiveDeclension(word,data,row) || direct.some(group => group.formNotes.some(note =>
         group.pos==='verb'?noteReferencesLemma(note,String(row[1])):
           note.toLocaleLowerCase("de-DE").includes(` of ${String(row[1]).toLocaleLowerCase("de-DE")}`)))));
     // Only an explicit, whole grammatical reference can supply a missing link.
@@ -228,11 +276,106 @@
     const next = new Set([...visited,word]), data = await record(word);
     const direct = groupsFor(word,data), mappings = formMappings(word,data,direct);
     const positions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
-    if (!(data?.senses || []).length && mappings.length) positions.add('noun');
+    structuredPositions(word,data,mappings,positions);
     const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next)))).flat();
     return [...direct.filter(group => group.meanings.length),...mapped.filter(group => !positions.size || positions.has(group.pos))];
   }
+  // B3 (15.10.2026): regular weak forms of an external verb that the export lists
+  // only as an adjective or not at all (betrachtete, erwähnte, verordnete). The
+  // lemma must be an explicit verb headword; only spellings without any verb
+  // reading are derived. Present 3rd sg / 2nd pl in -t is the same spelling as
+  // the participle of verbs without ge- (erwähnt), so both are offered.
+  const inseparablePrefixes = /^(?:be|emp|ent|er|ge|miss|ver|zer|hinter|über|unter|wider)/u;
+  const separablePrefixes = ["zurück","vorbei","herum","heraus","herein","hinaus","hinein","weiter","zusammen","ab","an","auf","aus","bei","dar","ein","fest","fort","her","hin","los","mit","nach","vor","weg","zu"];
+  const weakEndings = [["test",[["second-person","singular","past"]]],["ten",[["first-person","plural","past"],["third-person","plural","past"]]],
+    ["tet",[["second-person","plural","past"]]],["te",[["first-person","singular","past"],["third-person","singular","past"]]]];
+  function weakHypotheses(word) {
+    const w = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), result = [];
+    const lemmas = stem => [stem+"en",...(/(?:el|er)$/u.test(stem) ? [stem+"n"] : [])];
+    const add = (stem,rows,prefix = "") => { if (stem.length >= 2) for (const lemma of lemmas(stem)) result.push({lemma:prefix+lemma,rows}); };
+    for (const [ending,rows] of weakEndings) if (w.endsWith(ending)) {
+      const stem = w.slice(0,-ending.length);
+      add(stem,rows);
+      if (stem.endsWith("e") && /[dt]e$|[^aeiouäöülr][mn]e$/u.test(stem)) add(stem.slice(0,-1),rows);
+    }
+    // Participles only with a visible marker (ge-, an inseparable prefix, -iert);
+    // a bare -t spelling (recht, Furcht) is not derived.
+    if (/t$/u.test(w)) {
+      const participle = [["past","participle"]];
+      const stems = [w.slice(0,-1),...(/[dt]et$/u.test(w) ? [w.slice(0,-2)] : [])];
+      for (const stem of stems) {
+        if (stem.startsWith("ge") && stem.length > 4) add(stem.slice(2),participle);
+        else if (inseparablePrefixes.test(stem) || /ier$/u.test(stem)) add(stem,participle);
+        for (const prefix of separablePrefixes) if (stem.startsWith(prefix+"ge")) add(stem.slice(prefix.length+2),participle,prefix);
+      }
+    }
+    return result;
+  }
+  async function weakVerbGroups(word) {
+    const form = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), groups = [], seen = new Set();
+    for (const {lemma,rows} of weakHypotheses(form)) {
+      const key = lemma+"|"+JSON.stringify(rows);
+      if (seen.has(key)) continue; seen.add(key);
+      const lexical = (await lexicalGroups(lemma)).filter(g => g.pos === "verb" && g.word === lemma && g.meanings.length);
+      if (!lexical.length) continue;
+      if (!groups.some(g => g.word === lemma && !g.kind)) groups.push(...lexical.map(g => ({...g,derived:"regular-weak-form"})));
+      groups.push({kind:"form-note",derived:"regular-weak-form",word,pos:"verb",meanings:[`inflection of ${lemma}:`],lemmas:[lemma],
+        inflections:rows.map(tags => ({form,lemma,pos:"verb",tags:[...tags,...(tags.includes("participle") ? [] : ["indicative"])],
+          person:tags.find(t => /-person$/u.test(t)) || null,number:tags.find(t => ["singular","plural"].includes(t)) || null,
+          tense:tags.find(t => ["present","past"].includes(t) && !tags.includes("participle")) || null,
+          mood:tags.includes("participle") ? null : "indicative",source:"regular-weak-form"}))});
+    }
+    return groups;
+  }
+  async function withWeakVerb(word, groups) {
+    if (groups.some(g => g.pos === "verb")) return groups;
+    try { return [...groups,...await weakVerbGroups(word)]; } catch (_) { return groups; }
+  }
+  // B4 (15.10.2026): a lowercase spelling the export does not know at all
+  // (zypriotischen, warzigeres) may be a regular declined form of an adjective
+  // headword: -e/-en/-em/-er/-es, also after a comparative -er or a superlative
+  // -st/-est. Only an explicit adjective headword confirms a hypothesis; the
+  // stripped word is never offered as a noun or a verb (Rose -> Ros, oben -> ob).
+  const adjectiveEndings = ["en","em","er","es","e"];
+  function adjectiveHypotheses(word) {
+    const w = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), result = [];
+    const add = (base,ending,degree) => {
+      if (base.length < 3) return;
+      result.push({base,ending,degree});
+      // leise -> leisen: the headword keeps its final -e.
+      if (!base.endsWith("e")) result.push({base:base+"e",ending,degree});
+    };
+    for (const ending of adjectiveEndings) if (w.endsWith(ending) && w.length > ending.length+2) {
+      const stem = w.slice(0,-ending.length);
+      add(stem,ending,null);
+      if (stem.endsWith("er")) add(stem.slice(0,-2),ending,"comparative");
+      if (/[^s]est$/u.test(stem)) add(stem.slice(0,-3),ending,"superlative");
+      if (stem.endsWith("st")) add(stem.slice(0,-2),ending,"superlative");
+    }
+    return result;
+  }
+  async function adjectiveEndingGroups(word) {
+    const form = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), groups = [], seen = new Set();
+    for (const {base,ending,degree} of adjectiveHypotheses(form)) {
+      const key = base+"|"+degree;
+      if (seen.has(key)) continue; seen.add(key);
+      const lexical = (await lexicalGroups(base)).filter(g => g.pos === "adj" && g.word === base && g.meanings.length);
+      if (!lexical.length) continue;
+      if (!groups.some(g => g.word === base && !g.kind)) groups.push(...lexical.map(g => ({...g,derived:"regular-adjective-ending"})));
+      groups.push({kind:"form-note",derived:"regular-adjective-ending",word,pos:"adj",meanings:[`inflection of ${base}:`],lemmas:[base],
+        inflections:[{form,lemma:base,pos:"adj",tags:degree ? [degree] : [],ending,person:null,number:null,tense:null,mood:null,source:"regular-adjective-ending"}]});
+    }
+    return groups;
+  }
   async function lookup(word, issues = null) {
+    const groups = await lookupGroups(word,issues);
+    // Lowercase spellings only: a capital inside a sentence is a noun (Fronten, Rechte).
+    if (!/^\p{Ll}/u.test(String(word).normalize("NFC").trim())) return groups;
+    const withVerb = await withWeakVerb(word,groups);
+    if (withVerb.length) return withVerb;
+    try { return await adjectiveEndingGroups(word); } catch (_) { return withVerb; }
+  }
+  async function lookupGroups(word, issues = null) {
     observe('lookup', {word});
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLocaleLowerCase("de-DE")])];
     for (const candidate of candidates) {
@@ -244,18 +387,18 @@
       const mappings = formMappings(candidate,data,direct);
       const evidence = inflectionEvidence(candidate,mappings,direct);
       const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
-      if (!(data?.senses || []).length && mappings.length) describedPositions.add('noun');
+      structuredPositions(candidate,data,mappings,describedPositions);
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
         const mapped = await lexicalGroups(lemma,new Set([candidate]));
         // A verb inflection must not inherit unrelated noun senses of its lemma.
         return mapped.filter(group => !describedPositions.size || describedPositions.has(group.pos));
       }))).flat();
       const usable = [...groups,...direct].filter(group => group.meanings.length);
-      const notes = direct.filter(group => group.formNotes.length).map(group => ({
+      const notes = [...direct.filter(group => group.formNotes.length).map(group => ({
         kind:"form-note",word:candidate,pos:group.pos,meanings:group.formNotes,
         lemmas:[...new Set(mappings.map(row => row[1]))],
         inflections:evidence.filter(row => row.pos === group.pos)
-      }));
+      })),...adjectiveNotes(candidate,data,mappings,groups)];
       const merged = new Map();
       for (const group of usable) {
         const key = JSON.stringify([group.word,group.pos]);
@@ -322,6 +465,19 @@
     if (!values.some(spellingReference)) return null;
     return {meanings:await expand(values,new Set([String(word).normalize('NFC').toLocaleLowerCase('de-DE')])),references,unresolved};
   }
+  // B16 (15.10.2026): verbs whose Perfekt the export forms with haben / sein
+  // (structured "auxiliary" rows of the haben and sein records).
+  const auxiliarySets = new Map();
+  async function perfectAuxiliaries(lemma) {
+    const key = String(lemma).normalize("NFC").toLocaleLowerCase("de-DE"), result = [];
+    for (const auxiliary of ["haben","sein"]) {
+      if (!auxiliarySets.has(auxiliary)) auxiliarySets.set(auxiliary,record(auxiliary).then(data => new Set((data?.inflections || [])
+        .filter(row => String(row[2] || "").split(",").includes("auxiliary") && row[0] === auxiliary)
+        .map(row => String(row[1]).normalize("NFC").toLocaleLowerCase("de-DE")))).catch(error => {auxiliarySets.delete(auxiliary);throw error;}));
+      if ((await auxiliarySets.get(auxiliary)).has(key)) result.push(auxiliary);
+    }
+    return result;
+  }
   async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
-  window.DeutschFallbackDictionary = {lookupFacts,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {lookupFacts,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();
