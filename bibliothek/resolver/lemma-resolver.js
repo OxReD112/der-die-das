@@ -4983,9 +4983,47 @@
       observe('stage', {stage:'enrichment-complete'});
       return resolution;
     }
+    // D4 (16.10.2026): at the first click in a sentence, request the external
+    // dictionary parts of its words at once: the clicked word, verbs of our own
+    // dictionary and words it does not know (with the ending hypotheses the
+    // morphology checks for them). Words that the own dictionary answers by
+    // itself (function words, prepositions, nouns, adverbs) are not requested.
+    // Only the file caches of the fallback are filled; no fact of this resolver
+    // is read or written here, so it changes the order of requests, not results.
+    const warmedSentences = new Set();
+    function warmSentence(sentence, clicked) {
+      if (!fallback.warm || !sentence || warmedSentences.has(sentence)) return;
+      if (warmedSentences.size >= 64) warmedSentences.delete(warmedSentences.values().next().value);
+      warmedSentences.add(sentence);
+      const spellings = [String(clicked || '')], words = sentence.match(/[\p{L}\p{M}]+/gu) || [];
+      // A declined modifier before a capitalised word is checked together with
+      // that noun (noun frames), both with their ending hypotheses.
+      const frames = new Set();
+      words.forEach((word,i) => {
+        if (word[0] === norm(word)[0] && /(?:e|en|em|er|es)$/u.test(word) && words[i+1] && words[i+1][0] !== norm(words[i+1])[0] &&
+          !grammaticalWords.has(norm(word)) && !prepositions.has(norm(word))) frames.add(i).add(i+1);
+      });
+      words.forEach((word,i) => {
+        const key = norm(word), own = forms.get(key) || [];
+        if (grammaticalWords.has(key) || prepositions.has(key)) return;
+        const capital = word[0] !== key[0], wanted = word === clicked || frames.has(i);
+        if (capital && i > 0 && !wanted) return;
+        if (word.length > 1 && word === word.toLocaleUpperCase('de-DE') && word !== clicked) return;
+        const verbal = verbAnalyses.has(key) || separatedForms.has(key) || zuForms.has(key) || own.some(e => e.type === 'Verb');
+        if (own.length && !verbal && !wanted) return;
+        spellings.push(word);
+        if (capital) spellings.push(key);
+        for (const ending of endings) if (key.endsWith(ending) && key.length > ending.length+1) {
+          const stem = key.slice(0,-ending.length);
+          spellings.push(stem,stem+'e');
+        }
+      });
+      try { fallback.warm(spellings.filter(Boolean)).catch(() => {}); } catch (_) {}
+    }
     function resolve(word, context) {
       sourceActivation++;clearPartialSources();
       const sentence=String(context?.sentence || '');
+      warmSentence(sentence,word);
       const shared=sentenceContext(sentence);
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);

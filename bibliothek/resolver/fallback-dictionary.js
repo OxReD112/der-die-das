@@ -10,9 +10,10 @@
   }
   const cacheState = (cache, key) => !cache.has(key) ? 'miss'
     : diagnosticPending?.has(cache.get(key)) ? 'pending' : 'hit';
+  let silent = false;
   function observe(type, detail = {}) {
     const sink = window.BibliothekAnalysisDiagnostics;
-    if (typeof sink !== 'function') return;
+    if (silent || typeof sink !== 'function') return;
     try { sink({component:'fallback',type,
       time:typeof performance !== 'undefined' ? performance.now() : Date.now(),...detail}); } catch (_) {}
   }
@@ -82,9 +83,7 @@
     const rows=(await auxiliaryFormsPromise)[String(word).normalize('NFC').toLocaleLowerCase('de-DE')]||[];
     return rows.map(([lemma,person,number,tense,mood])=>({lemma,person,number,tense,mood}));
   }
-  async function verbFormLinks(word) {
-    const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
-    observe('partition-cache', {cache:'verb-forms',key:index,word:spelling,state:cacheState(verbFormCache,index),size:verbFormCache.size});
+  function verbFormPart(index) {
     if (!verbFormCache.has(index)) {
       const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
         if (!response.ok) throw new Error("Fallback verb morphology unavailable");
@@ -96,7 +95,12 @@
       observePending(pending);
       verbFormCache.set(index,pending);
     }
-    const rows = (await verbFormCache.get(index))[spelling] || [];
+    return verbFormCache.get(index);
+  }
+  async function verbFormLinks(word) {
+    const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
+    observe('partition-cache', {cache:'verb-forms',key:index,word:spelling,state:cacheState(verbFormCache,index),size:verbFormCache.size});
+    const rows = (await verbFormPart(index))[spelling] || [];
     return rows.map(([lemma,tags])=>[spelling,lemma,tags]);
   }
   async function derivedVerbGroups(word, issues = null) {
@@ -112,9 +116,7 @@
     }
     return groups;
   }
-  async function record(word) {
-    const index = partition(word);
-    observe('partition-cache', {cache:'dictionary',key:index,word,state:cacheState(cache,index),size:cache.size});
+  function dictionaryPart(index) {
     if (!cache.has(index)) {
       const promise = fetch(new URL(`parts/${String(index).padStart(4, "0")}.json`, base))
         .then(response => {
@@ -127,7 +129,12 @@
       observePending(promise);
       cache.set(index, promise);
     }
-    const records = await cache.get(index);
+    return cache.get(index);
+  }
+  async function record(word) {
+    const index = partition(word);
+    observe('partition-cache', {cache:'dictionary',key:index,word,state:cacheState(cache,index),size:cache.size});
+    const records = await dictionaryPart(index);
     return Object.prototype.hasOwnProperty.call(records, word) ? records[word] : null;
   }
   function meanings(data) {
@@ -478,6 +485,62 @@
     }
     return result;
   }
+  // D4 (16.10.2026): warm-up for the words of a sentence. Lookups walk the
+  // words and their hypotheses one by one, so on a phone every part file was a
+  // separate wait. The warm-up starts the same part requests at once (the same
+  // promises record() and verbFormLinks() would create later) and follows the
+  // links of the records it finds: the lemma of a form, the lemmas of a verb
+  // form, weak-verb and adjective-ending hypotheses. It returns nothing and no
+  // lookup reads anything from it, so results are those of the lookups alone;
+  // a failed request is dropped from the cache and requested again as before.
+  const lowerSpelling = word => String(word).normalize("NFC").toLocaleLowerCase("de-DE");
+  async function peek(word) {
+    try {
+      const records = await dictionaryPart(partition(word));
+      return Object.prototype.hasOwnProperty.call(records, word) ? records[word] : null;
+    } catch (_) { return null; }
+  }
+  function linkedLemmas(word, data) {
+    silent = true;
+    try { return [...new Set(formMappings(word,data,groupsFor(word,data)).map(row => row[1]))]; }
+    catch (_) { return []; } finally { silent = false; }
+  }
+  async function warmLexical(word, visited) {
+    if (visited.has(word) || visited.size >= 4) return;
+    const data = await peek(word);
+    if (!data) return;
+    const next = new Set([...visited,word]);
+    await Promise.all(linkedLemmas(word,data).map(lemma => warmLexical(lemma,next)));
+  }
+  const warming = new Map();
+  function warmWord(word) {
+    const spelling = String(word).normalize("NFC").trim();
+    if (!spelling) return Promise.resolve();
+    if (warming.has(spelling)) return warming.get(spelling);
+    if (warming.size >= 2048) warming.delete(warming.keys().next().value);
+    const pending = (async () => {
+      const lower = lowerSpelling(spelling), candidates = [...new Set([spelling,lower])];
+      const records = await Promise.all(candidates.map(peek));
+      await Promise.all(candidates.map((candidate,i) => records[i] &&
+        Promise.all(linkedLemmas(candidate,records[i]).map(lemma => warmLexical(lemma,new Set([candidate]))))));
+      let verbLinked = false;
+      if (!records.some(Boolean)) {
+        try {
+          const lemmas = [...new Set(((await verbFormPart(partition(lower)))[lower] || []).map(row => row[0]))];
+          verbLinked = lemmas.length > 0;
+          await Promise.all(lemmas.map(lemma => warmLexical(lemma,new Set())));
+        } catch (_) {}
+      }
+      if (!/^\p{Ll}/u.test(spelling)) return;
+      const verb = verbLinked || records.some(data => (data?.senses || []).some(row => row[2] === "verb"));
+      const hypotheses = [...(verb ? [] : weakHypotheses(spelling).map(h => h.lemma)),
+        ...(records.some(Boolean) || verbLinked ? [] : adjectiveHypotheses(spelling).map(h => h.base))];
+      await Promise.all([...new Set(hypotheses)].map(lemma => warmLexical(lemma,new Set())));
+    })().catch(() => {});
+    warming.set(spelling,pending);
+    return pending;
+  }
+  function warm(words) { return Promise.all([...new Set(words)].map(warmWord)).then(() => {}); }
   async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
-  window.DeutschFallbackDictionary = {lookupFacts,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();
