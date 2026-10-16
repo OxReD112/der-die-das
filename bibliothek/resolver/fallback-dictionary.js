@@ -19,6 +19,17 @@
   }
 
   const base = new URL("../../open%20data/dictionary-de-json/", document.currentScript.src);
+  // D19 (16.10.2026): part caches are bounded. A parsed part takes ~0.19 MB of
+  // memory (a phone tab grew to ~800 MB in half an hour of reading); only the
+  // most recently used parts are kept. An evicted part is requested again when
+  // needed (normally answered by the browser's HTTP cache); the data is the
+  // same file, so results do not change.
+  const partLimit = 160;
+  function keepPart(map, key, value) {
+    map.delete(key); map.set(key, value);
+    while (map.size > partLimit) map.delete(map.keys().next().value);
+    return value;
+  }
   const cache = new Map();
   const verbFormCache = new Map();
   const verbFormsBase = new URL("data/fallback-verb-forms/", document.currentScript.src);
@@ -84,19 +95,18 @@
     return rows.map(([lemma,person,number,tense,mood])=>({lemma,person,number,tense,mood}));
   }
   function verbFormPart(index) {
-    if (!verbFormCache.has(index)) {
-      const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
-        if (!response.ok) throw new Error("Fallback verb morphology unavailable");
-        return response.json();
-      }).then(data => {
-        if(data.format_version !== 1 || data.partition !== index)throw new Error("Invalid fallback verb morphology partition");
-        return data.records;
-      }).catch(error=>{verbFormCache.delete(index);throw error;});
-      observePending(pending);
-      verbFormCache.set(index,pending);
-    }
-    return verbFormCache.get(index);
+    if (verbFormCache.has(index)) return keepPart(verbFormCache,index,verbFormCache.get(index));
+    const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
+      if (!response.ok) throw new Error("Fallback verb morphology unavailable");
+      return response.json();
+    }).then(data => {
+      if(data.format_version !== 1 || data.partition !== index)throw new Error("Invalid fallback verb morphology partition");
+      return data.records;
+    }).catch(error=>{if(verbFormCache.get(index)===pending)verbFormCache.delete(index);throw error;});
+    observePending(pending);
+    return keepPart(verbFormCache,index,pending);
   }
+
   async function verbFormLinks(word) {
     const spelling = String(word).normalize("NFC").toLocaleLowerCase("de-DE"), index = partition(spelling);
     observe('partition-cache', {cache:'verb-forms',key:index,word:spelling,state:cacheState(verbFormCache,index),size:verbFormCache.size});
@@ -117,20 +127,19 @@
     return groups;
   }
   function dictionaryPart(index) {
-    if (!cache.has(index)) {
-      const promise = fetch(new URL(`parts/${String(index).padStart(4, "0")}.json`, base))
-        .then(response => {
-          if (!response.ok) throw new Error("Fallback dictionary unavailable");
-          return response.json();
-        }).then(data => {
-          if (data.format_version !== 1 || data.partition !== index) throw new Error("Invalid dictionary partition");
-          return data.records;
-        }).catch(error => { cache.delete(index); throw error; });
-      observePending(promise);
-      cache.set(index, promise);
-    }
-    return cache.get(index);
+    if (cache.has(index)) return keepPart(cache,index,cache.get(index));
+    const promise = fetch(new URL(`parts/${String(index).padStart(4, "0")}.json`, base))
+      .then(response => {
+        if (!response.ok) throw new Error("Fallback dictionary unavailable");
+        return response.json();
+      }).then(data => {
+        if (data.format_version !== 1 || data.partition !== index) throw new Error("Invalid dictionary partition");
+        return data.records;
+      }).catch(error => { if (cache.get(index) === promise) cache.delete(index); throw error; });
+    observePending(promise);
+    return keepPart(cache,index,promise);
   }
+
   async function record(word) {
     const index = partition(word);
     observe('partition-cache', {cache:'dictionary',key:index,word,state:cacheState(cache,index),size:cache.size});

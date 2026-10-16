@@ -18,6 +18,14 @@
   }
 
   const base = new URL("../../open%20data/dictionary-de-ru-json/", document.currentScript.src);
+  // D19 (16.10.2026): bounded like the parts in fallback-dictionary.js; an
+  // evicted part is requested again when needed (same file, same result).
+  const partLimit = 160;
+  function keepPart(key, value) {
+    cache.delete(key); cache.set(key, value);
+    while (cache.size > partLimit) cache.delete(cache.keys().next().value);
+    return value;
+  }
   const cache = new Map();
   const posAliases = {Verb:"verb",Nomen:"noun",Adjektiv:"adj",Adverb:"adv",Pronomen:"pron",Konjunktion:"conj",
     adjective:"adj",adverb:"adv",pronoun:"pron",conjunction:"conj"};
@@ -39,10 +47,10 @@
           if (data.format_version !== 1 || data.partition !== index || !data.records || typeof data.records !== "object")
             throw new Error("Invalid Russian translation partition");
           return data.records;
-        }).catch(error => { cache.delete(index); throw error; });
+        }).catch(error => { if (cache.get(index) === request) cache.delete(index); throw error; });
       observePending(request);
-      cache.set(index,request);
-    }
+      keepPart(index,request);
+    } else keepPart(index,cache.get(index));
     const data = await cache.get(index);
     return Object.prototype.hasOwnProperty.call(data,word) ? data[word] : [];
   }
