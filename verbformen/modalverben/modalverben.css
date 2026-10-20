@@ -680,7 +680,9 @@ body:has(#study:not(.hidden)) .version-mark {
   background: var(--card-bg);
   border: 1px solid var(--hairline);
   border-radius: 24px;
-  padding: 4px 18px 14px;
+  --card-pad: 18px; /* side padding; the close cross keeps the same distance from the right edge and the top */
+  position: relative;
+  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px; /* title centred on the cross */
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -701,6 +703,8 @@ body:has(#study:not(.hidden)) .version-mark {
   justify-content: space-between;
   align-items: center;
   flex: 0 0 auto;
+  padding-right: 28px; /* room for the cross */
+  margin-bottom: 8px; /* the old 44 px button used to give this air under the title */
 }
 .forms-modal-head h2 {
   margin: 0;
@@ -708,15 +712,29 @@ body:has(#study:not(.hidden)) .version-mark {
   font-size: 20px;
   font-weight: 400;
 }
+/* Light cross: the drawn 14 px sits var(--card-pad) from the right edge and from the top,
+   inside a 40 px tap area (13 px around it). */
 .forms-close {
+  position: absolute;
+  top: calc(var(--card-pad) - 13px);
+  right: calc(var(--card-pad) - 13px);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   border: 0;
+  padding: 0;
   background: transparent;
   color: var(--close-icon);
-  font-family: var(--font);
-  font-size: 28px;
-  line-height: 1;
-  padding: 8px;
   cursor: pointer;
+}
+.forms-close svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
 }
 #formsModalBody {
   overflow-y: auto;
@@ -1107,4 +1125,12 @@ body:has(#study:not(.hidden)) .version-mark {
   #answer:placeholder-shown {
     animation: none;
   }
+}
+
+/* Very narrow phones (320 px): the forms table needs ~280 px — less side padding so nothing is cut off. */
+@media (max-width: 359px) {
+  .forms-modal { padding-left: 10px; padding-right: 10px; }
+  .forms-modal-card { --card-pad: 14px; }
+  .forms-detail-table th,
+  .forms-detail-table td { padding-left: 3px; padding-right: 3px; }
 }

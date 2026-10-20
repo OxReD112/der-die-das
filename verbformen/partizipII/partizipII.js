@@ -175,6 +175,7 @@ function render() {
   $("answer").disabled = false;
   $("result").className = "result";
   $("vowelPattern").textContent = "";
+  $("hint").classList.add("hidden");
   $("next").classList.remove("show");
   $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("check").style.display = isTouchDevice ? "none" : "";
@@ -189,6 +190,105 @@ function render() {
 function partizipPattern(pattern) {
   const parts = String(pattern || "").split(/\s*-\s*/);
   return parts.length >= 3 ? parts[0] + " → " + parts[2] : String(pattern || "");
+}
+
+// „hat angefangen“ / „ist geblieben“; both auxiliaries: the verb's own line, each with its use
+function perfektLine(v) {
+  if (v.perfekt) return v.perfekt;
+  return (v.auxiliary === "sein" ? "ist " : "hat ") + v.participle;
+}
+
+/* ===== HINTS AFTER A MISTAKE =====
+   Shown only after a wrong answer, in the user's language (German forms stay German), at most three lines:
+   1. a known trap (gehängt, gewußt, lassen / sehen after a 2nd verb) · 2. the prefix rule (ver-: no ge- ·
+   an-: ge- inside) · 3. the kind of verb (mixed, special, strong: -en not -t) · 4. the vowel change with
+   other verbs of the same change. */
+const HINTS = {
+  insep: {
+    en: p => `<i>${p}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II`,
+    ru: p => `<i>${p}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>`
+  },
+  insepGe: {
+    en: v => `<i>ge-</i> is an inseparable prefix here (<i>${v.infinitive.replace(/^ge/, "ge·")}</i>): no extra <i>ge-</i>`,
+    ru: v => `<i>ge-</i> здесь — неотделяемая приставка (<i>${v.infinitive.replace(/^ge/, "ge·")}</i>): второго <i>ge-</i> нет`
+  },
+  sep: {
+    en: (p, split) => `<i>${p}</i> is a separable prefix: <i>ge-</i> goes inside — <i>${split}</i>`,
+    ru: (p, split) => `<i>${p}</i> — отделяемая приставка: <i>ge-</i> внутри — <i>${split}</i>`
+  },
+  mixed: {
+    en: v => `mixed verb: the Partizip II ends in <i>-t</i> like a regular verb, and the vowel always changes${v.consonant ? `; here the consonant changes too: <i>${v.consonant}</i>` : ""} — <i>${v.infinitive} → ${v.participle}</i>`,
+    ru: v => `смешанный глагол: Partizip II кончается на <i>-t</i>, как у правильных, а гласная всегда меняется${v.consonant ? `; здесь меняется и согласная: <i>${v.consonant}</i>` : ""} — <i>${v.infinitive} → ${v.participle}</i>`
+  },
+  special: {
+    en: v => `special verb: learn its forms — <i>${v.infinitive} → ${v.preterite} → ${v.participle}</i>`,
+    ru: v => `особый глагол: его формы запоминают — <i>${v.infinitive} → ${v.preterite} → ${v.participle}</i>`
+  },
+  strong: {
+    en: () => "strong verb: the Partizip II ends in <i>-en</i>, not <i>-t</i>",
+    ru: () => "сильный глагол: Partizip II на <i>-en</i>, не на <i>-t</i>"
+  },
+  vowel: {
+    en: (from, to, list, cons, exc) =>
+      (from === to ? `the vowel stays <i>${from}</i>` : `the vowel changes <i>${from} → ${to}</i>`) +
+      (exc ? " (the exception to ie → o)" : "") + (list ? `, like ${list}` : "") +
+      (cons ? `; consonant: <i>${cons}</i>` : ""),
+    ru: (from, to, list, cons, exc) =>
+      (from === to ? `гласная не меняется: <i>${from}</i>` : `гласная меняется: <i>${from} → ${to}</i>`) +
+      (exc ? " (исключение из ie → o)" : "") + (list ? `, как ${list}` : "") +
+      (cons ? `; согласная: <i>${cons}</i>` : "")
+  },
+  ss: {
+    en: () => "after a short vowel: <i>ss</i> — <i>gewusst, geschlossen</i> (ß only after a long vowel or a diphthong)",
+    ru: () => "после краткой гласной — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — только после долгой гласной или дифтонга)"
+  },
+  haengen: {
+    en: () => "hang something up: <i>hängte, gehängt</i> · be hanging: <i>hing, gehangen</i>",
+    ru: () => "вешать: <i>hängte, gehängt</i> · висеть: <i>hing, gehangen</i>"
+  },
+  ersatz: {
+    en: v => `<i>${v.infinitive}</i> as Partizip II only after a second verb: <i>${v.infinitive === "sehen" ? "hat ihn kommen sehen" : "hat das Auto reparieren lassen"}</i>. On its own: <i>${v.participle}</i>`,
+    ru: v => `<i>${v.infinitive}</i> вместо Partizip II — только после второго глагола: <i>${v.infinitive === "sehen" ? "hat ihn kommen sehen" : "hat das Auto reparieren lassen"}</i>. Отдельно: <i>${v.participle}</i>`
+  }
+};
+const lang = () => (window.DeutschTranslation ? DeutschTranslation.getLang() : "en");
+const hint = (name, ...args) => (HINTS[name][lang()] || HINTS[name].en)(...args);
+
+function vowelChange(v) {
+  const parts = String(v.pattern || "").split(/\s*-\s*/);
+  return parts.length >= 3 ? [parts[0], parts[2]] : null;
+}
+
+function hintLines(v, typed) {
+  const lines = [];
+  const p = v.participle.toLowerCase(),
+    inf = v.infinitive.toLowerCase();
+  let trap = false;
+  if (inf === "hängen" && typed.startsWith("gehängt")) (lines.push(hint("haengen")), (trap = true));
+  if ((inf === "lassen" || inf === "sehen") && typed === inf) (lines.push(hint("ersatz", v)), (trap = true));
+  if (typed.includes("ß") && typed.replace(/ß/g, "ss") === p) (lines.push(hint("ss")), (trap = true));
+  if (trap) return lines;
+  if (v.prefix) lines.push(v.prefix === "ge-" ? hint("insepGe", v) : hint("insep", v.prefix));
+  if (v.separable) {
+    const sp = v.separable.replace("-", "");
+    lines.push(hint("sep", v.separable, sp + "·ge·" + v.participle.slice(sp.length + 2)));
+  }
+  if ((v.prefix || v.separable) && typed.slice(-4) === p.slice(-4)) return lines; // only the ge- mistake
+  if (v.kind === "mixed") lines.push(hint("mixed", v));
+  else if (v.kind === "special") lines.push(hint("special", v));
+  else {
+    if (/t$/.test(typed) && /en$/.test(p)) lines.push(hint("strong"));
+    const ch = vowelChange(v);
+    // the vowel line only when the typed word's ending is not already right (gefahrt: yes; gesitzt: yes)
+    if (ch && typed.slice(-4) !== p.slice(-4)) {
+      // compare only with plain verbs of the same change and no consonant change (so the comparison is clean)
+      const same = VERBS.filter(o => o !== v && !o.kind && !o.prefix && !o.separable && !o.consonant && String(vowelChange(o)) === String(ch))
+        .slice(0, 2)
+        .map(o => "<i>" + o.infinitive + " → " + o.participle + "</i>");
+      lines.push(hint("vowel", ch[0], ch[1], same.join(", "), v.consonant, v.infinitive === "liegen"));
+    }
+  }
+  return lines.slice(0, 3);
 }
 
 // sein and haben also show the Präteritum (war, hatte)
@@ -206,7 +306,9 @@ function checkAnswer() {
   if (!a) return;
 
   checked = true;
-  const ok = a === v.participle.toLowerCase();
+  // ss for ß is accepted (no ß key, Swiss spelling: geheissen); ß for ss is not (old spelling: gewußt)
+  const p = v.participle.toLowerCase();
+  const ok = a === p || a === p.replace(/ß/g, "ss");
   if (ok) correctCount++;
   updateDifficulty(v, ok);
   recordProgress(v, ok);
@@ -214,14 +316,24 @@ function checkAnswer() {
   $("result").className = "result show " + (ok ? "good" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   $("state").textContent = ok ? "Richtig" : "Nicht ganz";
-  $("vowelPattern").textContent = partizipPattern(v.pattern);
+  // the vowel change only after a mistake (and not for sein / haben: their forms follow no vowel pattern)
+  $("vowelPattern").textContent = ok || v.kind === "special" ? "" : partizipPattern(v.pattern);
   $("forms").textContent = shouldShowPreterite(v)
     ? v.infinitive + " → " + v.preterite + " → " + v.participle
     : v.infinitive + " → " + v.participle;
   const perfekt = document.createElement("b");
-  perfekt.textContent = v.auxiliary + " " + v.participle;
+  perfekt.textContent = perfektLine(v);
   $("meta").replaceChildren("Perfekt: ", perfekt);
+  if (v.regional) {
+    const reg = document.createElement("span");
+    reg.className = "regional";
+    reg.textContent = "süddt., österr., schweiz.: " + v.regional;
+    $("meta").append(reg);
+  }
   $("example").textContent = v.example;
+  const lines = ok ? [] : hintLines(v, a);
+  $("hint").innerHTML = lines.map(l => '<div class="hint-line">' + l + "</div>").join("");
+  $("hint").classList.toggle("hidden", !lines.length);
   $("answer").disabled = true;
   $("answer").blur();
   $("check").style.display = "none";
@@ -342,41 +454,103 @@ async function loadKeyboardComponent() {
 }
 loadKeyboardComponent().catch(e => console.error(e));
 
-/* ===== TABLE WINDOW „Vokalwechsel“ =====
+/* ===== TABLE WINDOW „Spickzettel“ (2026-10-20: was „Vokalwechsel“; now also prefixes, endings, special verbs, consonants) =====
    Infinitive vowel → the vowels its Partizip II can have in this exercise.
    During a round (2026-09-28, like Vielseitige Verben): the button is off until Prüfen; then the verb's cell is
    lit (its infinitive vowel) with its Partizip II vowel marked - from the verb's pattern („ei - ie - ie“ → ei → ie). */
+// Strong verbs in general (not only this exercise), 2026-10-20:
+//  - cells: vowels with no condition (one or several possible vowels: e → o · a · e)
+//  - rows: only where a condition or an exception decides (ie, i), with examples that show it
+// 3 × 3: top row = the vowels that never change (a, o, u), then the umlauts, then the vowels with several outcomes
+// (au: saufen → gesoffen; ä → o only in rare verbs: gebären → geboren, hence in brackets)
 const VOWEL_CHANGES = [
   ["a", ["a"]],
-  ["ä", ["a"]],
-  ["au", ["au"]],
   ["o", ["o"]],
+  ["u", ["u"]],
+  ["ä", ["a", "(o)"]],
   ["ö", ["o"]],
-  ["u", ["u", "a"]],
-  ["ü", ["ü", "u", "o"]],
-  ["e", ["e", "a", "o"]],
-  ["ie", ["ie", "o", "e"]],
-  ["ei", ["ei", "ie", "i", "e"]],
-  ["i", ["i", "u", "o", "e", "a"]]
+  ["ü", ["o"]],
+  ["au", ["au", "o"]],
+  ["e", ["o", "a", "e"]],
+  ["ei", ["ie", "i", "ei"]]
 ];
+const VOWEL_GROUPS = [
+  { id: "ie", from: "ie", to: "o", en: "", ru: "", ex: "fliegen → geflogen · ziehen → gezogen", note: { en: "(except liegen → gelegen)", ru: "(кроме liegen → gelegen)" } },
+  { id: "i-nk", from: "i + nd, ng, nk", to: "u", ex: "finden → gefunden · trinken → getrunken" },
+  { id: "i-nn", from: "i + nn, mm", to: "o", ex: "beginnen → begonnen · schwimmen → geschwommen" },
+  { id: "i", from: "i", to: "e", ex: "sitzen → gesessen · bitten → gebeten", note: { en: "only sitzen and bitten", ru: "только sitzen и bitten" } },
 
-function patternTableHtml(lit = null) {
+];
+// which cell / group belongs to the verb (none for mixed and special verbs: their own rules)
+function vowelSlot(v) {
+  if (!v || v.kind) return null;
+  const from = String(v.pattern || "").split(/\s*-\s*/)[0];
+  const stem = v.infinitive.slice((v.separable || v.prefix || "").replace("-", "").length);
+  if (from === "i") return /i(nd|ng|nk)/.test(stem) ? "i-nk" : /i(nn|mm)/.test(stem) ? "i-nn" : "i";
+  return from;
+}
+
+/* General rules under the vowels, in the user's language; the verb's rule is lit after Prüfen. */
+const TABLE_RULES = [
+  { id: "insep", section: "Präfixe", en: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — no ge‑", ru: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — без ge‑", ex: "bekommen → bekommen · vergessen → vergessen",
+    note: { en: "don't confuse: geben → gegeben, gehen → gegangen (here ge‑ is not a prefix but part of the stem)", ru: "не путать: geben → gegeben, gehen → gegangen (здесь ge‑ не приставка, а часть корня)" } },
+  { id: "sep", section: "Präfixe", en: "separable prefix — ge- goes inside", ru: "отделяемая приставка — ge- внутри", ex: "an·ge·fangen · ein·ge·laden" },
+  { id: "strong", section: "Endungen", en: "strong verbs: ending -en", ru: "сильные глаголы: окончание -en", ex: "finden → gefunden · schreiben → geschrieben",
+    note: { en: "among irregular verbs, all are strong except the mixed and the special ones", ru: "среди неправильных глаголов все, кроме смешанных и особых, — сильные" } },
+  { id: "mixed", section: "Endungen", en: "mixed verbs: ending -t", ru: "смешанные глаголы: окончание -t", ex: "bringen → gebracht · kennen → gekannt",
+    note: { en: "the vowel always changes; there are only about ten: bringen, brennen, denken, kennen, nennen, rennen, wissen", ru: "гласная всегда меняется; их всего около десяти: bringen, brennen, denken, kennen, nennen, rennen, wissen" },
+    note2: { en: "two forms: senden → gesandt / gesendet, wenden → gewandt / gewendet", ru: "две формы: senden → gesandt / gesendet, wenden → gewandt / gewendet" } },
+  { id: "special", section: "Besondere Verben", en: "their own forms — learn them", ru: "свои формы — запомнить", ex: "sein → gewesen · haben → gehabt · tun → getan",
+    note: { en: "and the modal verbs", ru: "и модальные глаголы" } },
+  { id: "consonant", section: "Konsonanten", en: "the vowel becomes short — the consonant doubles", ru: "гласная становится краткой — согласная удваивается", ex: "streiten → gestritten · nehmen → genommen · schließen → geschlossen",
+    note: { en: "and the other way round: bitten → gebeten", ru: "и наоборот: bitten → gebeten" },
+    note2: { en: "ch never doubles: riechen → gerochen", ru: "ch не удваивается: riechen → gerochen" } },
+  { id: "consonantOwn", section: "Konsonanten", en: "the consonant changes or is added", ru: "согласная меняется или добавляется", ex: "ziehen → gezogen · schneiden → geschnitten · bringen → gebracht · denken → gedacht · gehen → gegangen · stehen → gestanden · essen → gegessen · sitzen → gesessen",
+    note: { en: "these are the most common such verbs", ru: "это самые частые такие глаголы" } }
+];
+function verbRules(v) {
+  if (!v) return [];
+  const r = [v.prefix ? "insep" : v.separable ? "sep" : null, v.kind || "strong"].filter(Boolean);
+  // doubling: hm → mm, t → tt, ß → ss, tt → t (bitten); short vowel before ch: no doubling (riechen, vergleichen)
+  if (v.consonant) r.push(/^(hm|t|ß|tt) → /.test(v.consonant) ? "consonant" : "consonantOwn");
+  else if (/^(riechen|vergleichen)$/.test(v.infinitive)) r.push("consonant");
+  return r;
+}
+
+function patternTableHtml(lit = null, v = null) {
+  const slot = vowelSlot(v);
   const cells = VOWEL_CHANGES.map(([from, to]) => {
-    const on = lit && lit[0] === from;
+    const on = slot === from;
     return (
-      '<div class="pattern-cell' +
-      (on ? " lit" : "") +
-      '"><div class="pattern-source">' +
-      from +
+      '<div class="pattern-cell' + (on ? " lit" : "") + '"><div class="pattern-source">' + from +
       '</div><div class="pattern-options"><span class="arrow">→</span>' +
-      to.map(v => (on && v === lit[1] ? '<span class="lit-vowel">' : "<span>") + v + "</span>").join('<span class="arrow">·</span>') +
+      to.map(t => (on && lit && t === lit[1] ? '<span class="lit-vowel">' : "<span>") + t + "</span>").join('<span class="arrow">·</span>') +
       "</div></div>\n"
     );
   });
+  const groups = VOWEL_GROUPS.map(g => {
+    const on = slot === g.id;
+    const note = g.note ? '<span class="pattern-group-note">' + (g.note[lang()] || g.note.en) + "</span>" : "";
+    return (
+      '<div class="pattern-group' + (on ? " lit" : "") + '"><div class="pattern-group-head"><span class="pattern-source">' + g.from +
+      '</span><span class="arrow">→</span><span class="pattern-to">' + g.to + "</span>" + note +
+      '</div><div class="pattern-rule-ex" lang="de">' + g.ex + "</div></div>"
+    );
+  }).join("\n");
+  const litRules = verbRules(v);
+  let section = "";
+  const rules = TABLE_RULES.map(
+    r =>
+      (r.section !== section ? '</div><h3 class="pattern-section">' + (section = r.section) + '</h3><div class="pattern-rules">' : "") +
+      '<div class="pattern-rule' + (litRules.includes(r.id) ? " lit" : "") + '"><div class="pattern-rule-text">' +
+      (r[lang()] || r.en) + '</div><div class="pattern-rule-ex" lang="de">' + r.ex + "</div>" +
+      [r.note, r.note2].filter(Boolean).map(n => '<div class="pattern-rule-note">' + (n[lang()] || n.en) + "</div>").join("") + "</div>"
+  ).join("\n");
   return (
-    '<p class="pattern-intro">Infinitiv → Partizip II · Vokalwechsel in dieser Übung</p><div class="pattern-grid">\n' +
-    cells.join("") +
-    "</div>"
+    '<h3 class="pattern-section">Vokalwechsel</h3><p class="pattern-intro">Infinitiv → Partizip II · starke Verben</p>' +
+    '<div class="pattern-grid">\n' + cells.join("") + "</div>" +
+    '<div class="pattern-groups">' + groups + "</div>" +
+    '<div class="pattern-rules">' + rules + "</div>"
   );
 }
 const tableIsOpen = () => $("patternModal").classList.contains("open");
@@ -389,7 +563,8 @@ function patternLit(v) {
 
 function openPatternTable(round) {
   if (round && !(inRound() && checked)) return; // off until Prüfen
-  $("patternModalBody").innerHTML = patternTableHtml(round ? patternLit(deck[index]) : null);
+  const v = round ? deck[index] : null;
+  $("patternModalBody").innerHTML = patternTableHtml(v && v.kind !== "special" ? patternLit(v) : null, v);
   const modal = $("patternModal");
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");

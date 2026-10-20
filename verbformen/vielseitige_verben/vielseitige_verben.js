@@ -212,6 +212,8 @@ function render() {
   const item = deck[index];
   checked = false;
   $("situation").textContent = pick(item.situation);
+  // register chip („Situation · Erzählung“): the style the sentence is written in, when it matters for the form
+  $("sceneLabel").textContent = item.register ? "Situation · " + item.register : "Situation";
   $("sentence").innerHTML = sentenceHtml(item);
   $("answer").value = "";
   $("answer").disabled = false;
@@ -338,14 +340,16 @@ function checkAnswer() {
   if (!typed) return;
 
   checked = true;
-  const ok = [item.answer, ...(item.also || [])].some(x => norm(x) === norm(typed));
+  // the accepted spelling the typed word matched (ß/ss, case): shown instead of the raw input
+  const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed));
+  const ok = Boolean(matched);
   if (ok) correctCount++;
   results.push({ item, ok });
   updateDifficulty(item, ok);
   recordProgress(item, ok);
 
   // an accepted other answer (gekriegt, kriegt …) stays as typed; otherwise the main answer is shown
-  const shown = ok ? typed : item.answer;
+  const shown = ok ? matched : item.answer;
   $("result").className = "result show " + (ok ? "good" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   $("sentence").innerHTML = sentenceHtml(item, shown, !ok);

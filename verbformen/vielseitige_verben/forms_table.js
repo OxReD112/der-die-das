@@ -52,7 +52,7 @@ window.VV_TABLE = {
         lit: { cols: [0, 1], p2: [0] },
         blocks: [["werden", "verb"], [{ en: "adjective / noun", ru: "прилагательное / существительное" }, "part"]],
         means: { en: "becomes, became", ru: "становится, стал(а)" },
-        ex: "Nach dem Ausflug *wurden* die Kinder schnell _müde_.",
+        ex: "Auf der Rückfahrt *wurden* die Kinder schnell _müde_.",
         perfekt: { pattern: "sein + geworden", ex: "Meine Schwester ist Lehrerin *geworden*." }
       },
       {
@@ -65,7 +65,7 @@ window.VV_TABLE = {
         also: {
           label: { en: "Usage", ru: "Употребление" },
           en: "For plans, Präsens is often enough: *Ich rufe dich morgen an.* Use werden for a promise or forecast.",
-          ru: "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или предположения."
+          ru: "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или прогноза."
         }
       },
       {
@@ -73,8 +73,13 @@ window.VV_TABLE = {
         job: "guess",
         lit: { cols: [0] },
         blocks: [["werden", "verb"], ["wohl", "part"], [T.inf, "part"]],
-        means: { en: "probably", ru: "наверное" },
-        ex: "Er *wird* wohl _schlafen_."
+        means: { en: "probably; it'll be fine", ru: "наверное; всё будет хорошо" },
+        ex: "Das *wird* schon _klappen_.",
+        also: {
+          label: { en: "Also", ru: "Ещё" },
+          en: "*wohl* = probably: *Er wird wohl schlafen.* · *schon* = don't worry: *Es wird schon nicht so schlimm sein.*",
+          ru: "*wohl* = наверное: *Er wird wohl schlafen.* · *schon* = не волнуйся: *Es wird schon nicht so schlimm sein.*"
+        }
       },
       {
         tag: { en: "Passiv", ru: "пассив" },
@@ -104,7 +109,7 @@ window.VV_TABLE = {
   lassen: {
     rows: [
       ["lasse", "ließ", ""],
-      ["lässt", "ließt", ""],
+      ["lässt", "ließest", ""],
       ["lässt", "ließ", ""],
       ["lassen", "ließen", ""],
       ["lasst", "ließt", ""],
@@ -137,11 +142,16 @@ window.VV_TABLE = {
       {
         tag: { en: "allow someone", ru: "разрешить" },
         job: "allow",
-        lit: { cols: [0, 1], p2: [1] },
+        lit: { cols: [0, 1], p2: [1], imp: [0] },
         blocks: [["lassen", "verb"], [T.person, "plain"], [T.inf, "part"]],
         means: { en: "allow someone to do something", ru: "разрешить кому-то что-то сделать" },
         ex: "Ich *lasse* mein Kind nicht _fernsehen_.",
-        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Ich habe mein Kind nicht _fernsehen_ *lassen*." }
+        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Ich habe mein Kind nicht _fernsehen_ *lassen*." },
+        also: {
+          label: { en: "Offer help", ru: "Предложить помощь" },
+          en: "*Lass mich das tragen!* = let me carry it",
+          ru: "*Lass mich das tragen!* = давай я понесу"
+        }
       },
       {
         tag: { en: "let's", ru: "давай" },
@@ -157,14 +167,6 @@ window.VV_TABLE = {
         }
       },
       {
-        tag: { en: "offer to help", ru: "предложить помощь" },
-        job: "offerHelp",
-        lit: { imp: [0] },
-        blocks: [["lassen im Imperativ", "verb"], [T.person, "plain"], [T.inf, "part"]],
-        means: { en: "offer to do something for someone", ru: "предложить что-то сделать за кого-то" },
-        ex: "Der Koffer ist zu schwer für dich. *Lass* mich ihn _tragen_!"
-      },
-      {
         tag: { en: "can be done", ru: "можно сделать" },
         job: "canBeDone",
         lit: { cols: [0] },
@@ -174,27 +176,21 @@ window.VV_TABLE = {
         perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Das Fenster hat sich leicht _öffnen_ *lassen*." }
       },
       {
-        tag: { en: "stop / can't give it up", ru: "прекратить / не мочь бросить" },
+        tag: { en: "stop it!", ru: "прекрати!" },
+        job: "stopIt",
+        lit: { imp: [0] },
+        blocks: [["Lass", "verb"], ["das", "part"]],
+        means: { en: "stop it! (fixed phrase)", ru: "прекрати! (устойчивое выражение)" },
+        ex: "*Lass* _das_!"
+      },
+      {
+        tag: { en: "can't give it up", ru: "не мочь бросить" },
         job: "stop",
-        lit: { cols: [0, 1], p2: [0], imp: [0] },
+        lit: { cols: [0, 1], p2: [0] },
         blocks: [[{ en: "activity", ru: "занятие" }, "plain"], ["nicht", "part"], ["lassen", "verb"]],
         means: { en: "not stop doing something; can't give it up", ru: "не прекращать занятие; не мочь бросить" },
         ex: "Viele Leute können _das Rauchen_ nicht *lassen*.",
-        perfekt: { pattern: "haben + gelassen", ex: "Er hat _das Rauchen_ nicht *gelassen*." },
-        also: {
-          label: { en: "Command", ru: "Команда" },
-          en: "*Lass das!*",
-          ru: "*Lass das!*"
-        }
-      },
-      {
-        tag: { en: "cause something", ru: "быть причиной" },
-        job: "cause",
-        lit: { cols: [0, 1], p2: [1] },
-        blocks: [["lassen", "verb"], [{ en: "person / thing", ru: "человек / предмет" }, "plain"], [T.inf, "part"]],
-        means: { en: "cause someone/something to …", ru: "привести к тому, что кто-то/что-то …" },
-        ex: "Das schlechte Wetter *ließ* sie depressiv _werden_.",
-        perfekt: { pattern: "haben + Infinitiv + lassen", ex: "Es hat sie depressiv _werden_ *lassen*." }
+        perfekt: { pattern: "haben + gelassen", ex: "Er hat _das Rauchen_ nicht *gelassen*." }
       }
     ]
   },
@@ -215,9 +211,8 @@ window.VV_TABLE = {
         job: "state",
         lit: { cols: [0, 1] },
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
-        means: { en: "a state at that moment, no action", ru: "состояние в тот момент, без действия" },
+        means: { en: "the result of an action: how the thing is now (was then)", ru: "результат действия: какая вещь сейчас (была тогда)" },
         ex: "Die Tür *ist* schon _geschlossen_.",
-        perfekt: { pattern: "sein + gewesen", ex: "Die Tür ist schon geschlossen *gewesen*." },
         also: {
           label: { en: "Compare", ru: "Сравните" },
           en: "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
@@ -242,7 +237,7 @@ window.VV_TABLE = {
         job: "pastHelper",
         lit: { cols: [0] },
         blocks: [["sein", "verb"], ["Partizip II", "part"]],
-        means: { en: "past, with movement or change", ru: "прошлое: движение или изменение" },
+        means: { en: "past of a verb of movement or change (gehen, fahren, werden)", ru: "прошлое глагола движения или изменения (gehen, fahren, werden)" },
         ex: "Wir *sind* nach Berlin _gefahren_.",
         also: {
           label: { en: "Other common verbs", ru: "Другие частые глаголы" },
@@ -278,8 +273,7 @@ window.VV_TABLE = {
         lit: { cols: [0, 1] },
         blocks: [["haben", "verb"], [T.zuInf, "part"]],
         means: { en: "have to / had to", ru: "нужно / нужно было" },
-        ex: "Ich *habe* noch viel _zu tun_.",
-        perfekt: { pattern: "haben + zu + Infinitiv + gehabt", ex: "Ich habe noch viel zu tun *gehabt*." }
+        ex: "Ich *habe* noch viel _zu tun_."
       },
       {
         tag: { en: "feel (already)", ru: "испытывать (чувство)" },
@@ -329,7 +323,7 @@ window.VV_TABLE = {
       {
         tag: { en: "start to feel", ru: "начать чувствовать" },
         job: "catch",
-        lit: { cols: [0] },
+        lit: { cols: [0], p2: [0] },
         blocks: [["bekommen", "verb"], ["Angst / Hunger", "part"]],
         means: { en: "a feeling starts", ru: "чувство появляется" },
         ex: "Im Dunkeln *bekomme* ich _Angst_.",
@@ -366,7 +360,7 @@ window.VV_TABLE = {
       {
         tag: { en: "given to you", ru: "тебе подарили / прислали" },
         job: "getDone",
-        lit: { cols: [1] },
+        lit: { cols: [0, 1], p2: [0] },
         blocks: [["bekommen", "verb"], [T.thing, "plain"], ["Partizip II", "part"]],
         means: { en: "you receive it: given, sent", ru: "ты получаешь: подарили, прислали" },
         ex: "Sie *bekam* das Buch _geschenkt_.",

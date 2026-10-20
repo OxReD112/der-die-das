@@ -18,6 +18,7 @@
   --lit-line: rgba(232, 196, 120, 0.55);
   --lit-text: #e8c478;
   --lit-form: #efe6d4;
+  --hint-line: rgba(232, 196, 120, 0.6); /* the hint after a mistake (like Vielseitige Verben) */
   --mint: #5bc8a4;
   --red: #ff7770;
 
@@ -48,6 +49,7 @@
   --lit-line: rgba(160, 112, 20, 0.5);
   --lit-text: #97680f;
   --lit-form: #3a3326;
+  --hint-line: rgba(160, 112, 20, 0.5);
   --mint: #3fa68a;
   --red: #e95e66;
 
@@ -604,6 +606,34 @@ body:has(.pattern-modal.open) .version-mark {
   font-size: 15px;
   font-style: italic;
 }
+/* south German / Austrian / Swiss Perfekt with sein: small, quiet, on its own line */
+.regional {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  opacity: 0.8;
+}
+/* hint after a mistake (prefix rule, kind of verb, vowel change): gold line on the left, like Vielseitige Verben */
+.hint {
+  margin-top: 14px;
+  padding-left: 12px;
+  border-left: 2px solid var(--hint-line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.hint.hidden {
+  display: none;
+}
+.hint i {
+  font-family: var(--serif);
+  font-style: normal;
+  color: var(--text-secondary);
+}
+.hint-line + .hint-line {
+  margin-top: 6px;
+}
 
 /* ===== TABLE WINDOW „Vokalwechsel“ =====
    The table-window rule: blur 8px + 34% / 20% darkening (like Home's settings dialog), card colour,
@@ -684,6 +714,17 @@ body:has(.pattern-modal.open) .version-mark {
   min-height: 0;
   padding-top: 0;
 }
+/* section titles inside the Tipps window: Vokalwechsel · Präfixe und Endungen */
+.pattern-section {
+  margin: 14px 0 0;
+  color: var(--text-secondary);
+  font: 600 12px/1.3 var(--font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pattern-section:first-child {
+  margin-top: 4px;
+}
 .pattern-intro {
   color: var(--muted);
   font-size: 11px;
@@ -692,8 +733,8 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .pattern-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px 10px;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 × 3: a o u · ä ö ü · au e ei */
+  gap: 8px;
   margin-top: 8px;
 }
 .pattern-cell {
@@ -734,6 +775,81 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .pattern-cell.lit .pattern-source {
   color: var(--lit-text);
+}
+/* general rules under the vowels: the verb's rule gets the same gold outline as its vowel cell */
+.pattern-rules {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+/* vowel groups with a condition (i + nd …) and the „learn them“ vowels, under the simple cells */
+.pattern-groups {
+  display: grid;
+  gap: 7px;
+  margin-top: 9px;
+}
+.pattern-group {
+  padding: 8px 10px;
+  border: 1px solid var(--cell-line);
+  border-radius: 11px;
+  background: var(--cell-bg);
+}
+.pattern-group.lit {
+  border-color: var(--lit-line);
+}
+.pattern-group.lit .pattern-source {
+  color: var(--lit-text);
+}
+.pattern-group-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 4px;
+  color: var(--pattern-text);
+  font-size: 15px;
+}
+.pattern-group-head .arrow {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 2px;
+}
+.pattern-to {
+  color: var(--pattern-text);
+}
+.pattern-group-note {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.pattern-rule {
+  padding: 8px 10px;
+  border: 1px solid var(--cell-line);
+  border-radius: 11px;
+  background: var(--cell-bg);
+}
+.pattern-rule.lit {
+  border-color: var(--lit-line);
+}
+.pattern-rule-text {
+  color: var(--pattern-text);
+  font-size: 13px;
+  line-height: 1.35;
+}
+.pattern-rule.lit .pattern-rule-text {
+  color: var(--lit-text);
+}
+/* a short „don't confuse“ line under a rule's examples */
+.pattern-rule-note {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.pattern-rule-ex {
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 13.5px;
 }
 .lit-vowel {
   padding: 2px 4px;
@@ -905,5 +1021,26 @@ body:has(.pattern-modal.open) .version-mark {
   .pattern-modal,
   .pattern-modal-card {
     transition: none !important;
+  }
+}
+
+/* 3 × 3 vowel grid on the narrowest phones (320–360px): „ei → ie · i · ei“ stays on one line */
+@media (max-width: 360px) {
+  .pattern-grid {
+    gap: 6px;
+  }
+  .pattern-cell {
+    gap: 3px;
+    padding: 7px 6px;
+  }
+  .pattern-source,
+  .pattern-options {
+    font-size: 13px;
+  }
+  .pattern-options {
+    flex-wrap: nowrap;
+  }
+  .pattern-options .arrow {
+    margin: 0 1px;
   }
 }

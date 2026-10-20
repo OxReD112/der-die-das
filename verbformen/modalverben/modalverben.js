@@ -225,7 +225,8 @@ function render() {
 /* ===== ANSWER ===== */
 const ANSWER_FEEDBACK = {
   expected: { ru: "Верно", en: "Correct" },
-  alternative: { ru: "Корректно, но другой смысл или оттенок", en: "Valid, but a different meaning or tone" },
+  alternative: { ru: "Корректно, но другой смысл", en: "Valid, but a different meaning" },
+  alternativeTone: { ru: "Корректно, но другой оттенок", en: "Valid, but a different tone" },
   incorrect: { ru: "Ответ не подходит к заданию", en: "The answer does not fit the task" },
   target: { ru: "Здесь нужно выразить: ", en: "The intended meaning is: " },
   entered: { ru: "Ваш вариант: ", en: "Your version: " }
@@ -250,13 +251,16 @@ function checkAnswer() {
   $("result").className = "result show " + (ok ? "good" : alternative ? "alternative" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   $("sentence").innerHTML = sentenceWithGap(item, true, !ok && !alternative);
-  $("state").textContent = getTranslation(ANSWER_FEEDBACK, assessment.kind);
+  // a valid other form: a different meaning (kann ↔ konnte) or only a different tone (kannst ↔ könntest)
+  $("state").textContent = getTranslation(ANSWER_FEEDBACK, alternative && assessment.alternative.tone ? "alternativeTone" : assessment.kind);
   $("answerFeedback").textContent = alternative
     ? getTranslation(ANSWER_FEEDBACK, "target") + getTranslation(item, "intention") + ". "
       + getTranslation(ANSWER_FEEDBACK, "entered") + getTranslation(assessment.alternative, "meaning")
     : "";
   $("answerFeedback").hidden = !alternative;
-  $("formKind").textContent = item.form + " · " + item.grammarPerson;
+  // „sie“ is she or they: the row says which (sie (Sg.) / sie (Pl.))
+  const personLabel = item.grammarPerson === "sie" ? (item.person === "sie/Sie" ? "sie (Pl.)" : "sie (Sg.)") : item.grammarPerson;
+  $("formKind").textContent = item.form + " · " + personLabel;
   // Valid alternatives are explained separately and are not crossed out.
   const line = [item.infinitive + " → " + item.answer];
   if (!ok && !alternative) {
@@ -474,12 +478,16 @@ const MODAL_FORM_SYMBOLS = {
 
 const MODAL_FORM_TEXT = {
   question: { en: "What do you want to say?", ru: "Что ты хочешь сказать?" },
-  now: { en: "Präsens", ru: "Präsens" },
-  past: { en: "past", ru: "раньше" },
-  unreal: { en: "hypothetical, tentative, advice", ru: "условно, мягко, совет" },
+  now: { en: "now; directly, without softening", ru: "сейчас; прямо, без смягчения" },
+  past: { en: "past", ru: "в прошлом" },
+  unreal: { en: "hypothetical, tentative, probable, advice", ru: "условно, мягко, вероятно, совет" },
+  moechte: {
+    en: "möchte today works as its own verb: a polite 'want'. In the past: wollte, not mochte.",
+    ru: "möchte сегодня — как отдельный глагол: вежливое «хочу». В прошлом — wollte, не mochte."
+  },
   same: {
-    en: "Präteritum and Konjunktiv II look the same - the sentence decides.",
-    ru: "Präteritum и Konjunktiv II совпадают - решает предложение."
+    en: "Präteritum and Konjunktiv II look the same — the sentence decides.",
+    ru: "Präteritum и Konjunktiv II совпадают — решает предложение."
   }
 };
 
@@ -492,10 +500,14 @@ const MODAL_FORM_MEANINGS = {
   ],
   müssen: [
     { label: { en: "I have to", ru: "надо, нужно" }, column: 0, example: "Ich *muss* jetzt los." },
-    { label: { en: "I really should (but …)", ru: "по-хорошему надо бы" }, column: 2, example: "Ich *müsste* mehr schlafen." }
+    { label: { en: "I don't have to", ru: "не обязательно" }, column: 0, example: "Du *musst* nicht kommen." },
+    { label: { en: "I'm sure", ru: "наверняка" }, column: 0, example: "Das *muss* Anna sein." },
+    { label: { en: "I really ought to (but …)", ru: "по-хорошему надо бы" }, column: 2, example: "Ich *müsste* mehr schlafen." },
+    { label: { en: "should (I expect it)", ru: "должно бы" }, column: 2, example: "Der Zug *müsste* gleich kommen." }
   ],
   dürfen: [
     { label: { en: "it's allowed", ru: "можно, разрешено" }, column: 0, example: "Hier *darf* man parken." },
+    { label: { en: "you mustn't", ru: "нельзя" }, column: 0, example: "Hier *darf* man nicht rauchen." },
     { label: { en: "asking very politely", ru: "очень вежливо спросить" }, column: 2, example: "*Dürfte* ich kurz stören?" },
     { label: { en: "probably, likely", ru: "скорее всего" }, column: 2, example: "Er *dürfte* schon zu Hause sein." }
   ],
@@ -505,6 +517,7 @@ const MODAL_FORM_MEANINGS = {
   ],
   sollen: [
     { label: { en: "someone wants me to", ru: "кто-то хочет, чтобы я" }, column: 0, example: "Ich *soll* dich grüßen." },
+    { label: { en: "they say", ru: "говорят" }, column: 0, example: "Der Film *soll* gut sein." },
     { label: { en: "giving advice", ru: "дать совет" }, column: 2, example: "Du *solltest* mehr trinken." }
   ],
   wollen: [
@@ -584,11 +597,16 @@ function renderFormsDetail(verb, scheme = false, answer = null) {
       }${col.name}</th>`
   ).join("");
 
-  const note = scheme
-    ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>`
-    : answer && answer.note
-      ? `<div class="forms-answer-note" lang="de">${answer.note}</div>`
-      : "";
+  const groupForms = MODAL_FORM_GROUP.forms[verb];
+  const sameInRound = answer && groupForms && answer.column > 0 && groupForms.preterite[0] === groupForms.k2[0];
+  const note =
+    (scheme
+      ? `<div class="forms-note">${umlautGlyph()} = Umlaut entfernen</div>`
+      : answer && answer.note
+        ? `<div class="forms-answer-note" lang="de">${answer.note}</div>`
+        : "") +
+    (sameInRound ? `<div class="meaning-same">${groupForms.preterite[0]}: ${modalText(MODAL_FORM_TEXT.same)}</div>` : "") +
+    (!scheme && verb === "mögen" ? `<div class="meaning-same">${modalText(MODAL_FORM_TEXT.moechte)}</div>` : "");
 
   return `
     <div class="forms-detail">

@@ -13,6 +13,12 @@ const START_ABOUT = {
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
 
+/* ===== RULE CARD LABELS (in the user's language, like the rule texts) ===== */
+const CARD_UI = {
+  en: { why: "WHY", headsUp: "Heads up:" },
+  ru: { why: "ПОЧЕМУ", headsUp: "Обратите внимание:" }
+};
+
 /* ===== STATE ===== */
 const words = window.WORDS;
 let deck = [],
@@ -162,10 +168,19 @@ function choose(article) {
   $("answerArticle").textContent = w.article;
   $("answerWord").textContent = w.word;
   $("answerTranslation").textContent = getTranslation(w, "translation");
-  $("ruleLabel").textContent = `WHY ${w.article.toUpperCase()}? (${w.ruleLabel})`;
-  $("ruleTitle").textContent = w.explanation;
-  $("ruleExamples").textContent = Array.isArray(w.examples) ? w.examples.join(", ") : w.examples;
-  $("ruleReliability").innerHTML = `<strong>Heads up:</strong> ${w.reliability}`;
+  // Rule card follows the RU/EN setting (words.js: ruleName / explanation / reliability are {ru, en}).
+  const ui = CARD_UI[DeutschTranslation.getLang()] || CARD_UI.en;
+  const ruleName = getTranslation(w, "ruleName") || w.ruleLabel;
+  $("ruleLabel").textContent = `${ui.why} ${w.article.toUpperCase()}? (${ruleName})`;
+  $("ruleTitle").textContent = getTranslation(w, "explanation");
+  const examples = Array.isArray(w.examples) ? w.examples.join(", ") : w.examples || "";
+  $("ruleExamples").textContent = examples;
+  $("ruleExamples").style.display = examples ? "" : "none";
+  // One line at the bottom: how reliable the rule is + one exception. Hidden when empty ("no rule" cards).
+  const reliability = getTranslation(w, "reliability");
+  $("ruleReliability").innerHTML = reliability ? `<strong>${ui.headsUp}</strong> ` : "";
+  if (reliability) $("ruleReliability").append(reliability);
+  $("ruleReliability").style.display = reliability ? "" : "none";
   $("choices").style.display = "none";
   $("card").style.display = "none";
   fitOneLine(document.querySelector(".answer-word"));

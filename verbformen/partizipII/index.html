@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Verbformen" />
-    <link rel="stylesheet" href="partizipII.css?v=5" />
+    <link rel="stylesheet" href="partizipII.css?v=7" />
   </head>
   <body>
     <main class="app">
@@ -28,7 +28,7 @@
           <button class="choice" data-size="20">20</button>
           <button class="choice" data-size="30">30</button>
         </div>
-        <button class="pattern-table-btn" data-pattern-table>Vokalwechsel · Tabelle</button>
+        <button class="pattern-table-btn" data-pattern-table>Spickzettel</button>
       </section>
       <div class="start-about" id="startAbout">
         <h2>Worum geht's?</h2>
@@ -60,13 +60,14 @@
             <div class="forms" id="forms"></div>
             <div class="meta" id="meta"></div>
             <div class="example" id="example"></div>
+            <div class="hint hidden" id="hint"></div>
           </div>
           <button id="next">Weiter</button>
         </section>
         <div id="keyboardMount"></div>
         <div class="in-session-pattern">
           <button class="pattern-table-btn" type="button" id="roundTableBtn" data-pattern-table="round" disabled>
-            Vokalwechsel · Tabelle
+            Spickzettel
           </button>
         </div>
       </section>
@@ -84,19 +85,19 @@
       <div id="patternModal" class="pattern-modal" aria-hidden="true">
         <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
           <div class="pattern-modal-head">
-            <h2 id="patternModalTitle">Partizip II · Vokalwechsel</h2>
+            <h2 id="patternModalTitle">Partizip II · Spickzettel</h2>
             <button class="pattern-close" id="patternClose" aria-label="Schließen">×</button>
           </div>
           <div id="patternModalBody"></div>
         </div>
       </div>
-      <div class="version-mark" aria-hidden="true">v59</div>
+      <div class="version-mark" aria-hidden="true">v65</div>
     </main>
 
     <script src="../../components/deutsch-translation-v1.js?v=2"></script>
-    <script src="verbs.js?v=5"></script>
+    <script src="verbs.js?v=10"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="partizipII.js?v=4"></script>
+    <script src="partizipII.js?v=11"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>
