@@ -35,12 +35,12 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "personal",
     "skill": "Personal · Dativ · ich → mir",
-    "context": "Mein Kaffee ist leer.",
-    "sentence": "Bringst du ___ noch einen?",
+    "context": "Meine Tasse ist leer.",
+    "sentence": "Bringst du ___ noch einen Kaffee?",
     "answer": "mir",
     "translation": {
-      "ru": "Принесёшь мне ещё один?",
-      "en": "Will you bring me another one?"
+      "ru": "Принесёшь мне ещё кофе?",
+      "en": "Will you bring me another coffee?"
     }
   },
   {
@@ -72,7 +72,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich gebe ___ ein Geschenk.",
     "answer": "dir",
     "translation": {
-      "ru": "Я дарю тебе подарок.",
+      "ru": "Я дам тебе подарок.",
       "en": "I'm giving you a present."
     }
   },
@@ -212,22 +212,22 @@ window.PRONOUN_EXERCISES = [
     "type": "personal",
     "skill": "Personal · Akkusativ · es → es",
     "context": "Das Handy liegt auf dem Tisch.",
-    "sentence": "Ich nehme ___ mit.",
+    "sentence": "Gibst du ___ mir mal?",
     "answer": "es",
     "translation": {
-      "ru": "Я возьму его с собой.",
-      "en": "I'll take it with me."
+      "ru": "Передашь мне его?",
+      "en": "Can you pass it to me?"
     }
   },
   {
     "type": "personal",
     "skill": "Personal · Akkusativ · es → es",
-    "context": "Das Fenster ist offen.",
-    "sentence": "Kannst du ___ schließen?",
+    "context": "Ich habe mir Annas Fahrrad geliehen.",
+    "sentence": "Ich gebe ___ ihr morgen zurück.",
     "answer": "es",
     "translation": {
-      "ru": "Ты можешь его закрыть?",
-      "en": "Can you close it?"
+      "ru": "Я верну ей его завтра.",
+      "en": "I'll give it back to her tomorrow."
     }
   },
   {
@@ -238,7 +238,7 @@ window.PRONOUN_EXERCISES = [
     "answer": "ihm",
     "translation": {
       "ru": "Я сразу ему помогу.",
-      "en": "I'll help him right away."
+      "en": "I'll help the child right away."
     }
   },
   {
@@ -249,7 +249,7 @@ window.PRONOUN_EXERCISES = [
     "answer": "ihm",
     "translation": {
       "ru": "Я ещё немного ему почитаю.",
-      "en": "I'll read to him a little longer."
+      "en": "I'll read to the baby a little longer."
     }
   },
   {
@@ -358,7 +358,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich rufe ___ zum Essen.",
     "answer": "sie",
     "translation": {
-      "ru": "Я зову их есть.",
+      "ru": "Я зову их к столу.",
       "en": "I'm calling them in to eat."
     }
   },
@@ -370,7 +370,7 @@ window.PRONOUN_EXERCISES = [
     "answer": "ihnen",
     "translation": {
       "ru": "Я помогаю им на выходных.",
-      "en": "I'm helping them on the weekend."
+      "en": "I'm helping them at the weekend."
     }
   },
   {
@@ -446,7 +446,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich wünsche ___ alles Gute!",
     "answer": "Ihnen",
     "translation": {
-      "ru": "Желаю Вам всего хорошего!",
+      "ru": "Желаю Вам всего наилучшего!",
       "en": "I wish you all the best!"
     }
   },
@@ -493,7 +493,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich suche ___ Tasche.",
     "answer": "meine",
     "translation": {
-      "ru": "Я ищу мою сумку.",
+      "ru": "Я ищу свою сумку.",
       "en": "I'm looking for my bag."
     },
     "gender": "Feminin"
@@ -505,7 +505,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich spreche mit ___ Chef.",
     "answer": "meinem",
     "translation": {
-      "ru": "Я разговариваю с моим начальником.",
+      "ru": "Я разговариваю со своим начальником.",
       "en": "I'm talking to my boss."
     },
     "gender": "Maskulin"
@@ -517,8 +517,8 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich fahre mit ___ Freundin nach Wien.",
     "answer": "meiner",
     "translation": {
-      "ru": "Я еду с моей подругой в Вену.",
-      "en": "I'm going to Vienna with my girlfriend."
+      "ru": "Я еду со своей подругой в Вену.",
+      "en": "I'm going to Vienna with my friend."
     },
     "gender": "Feminin"
   },
@@ -529,7 +529,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Ich lese ___ Kind eine Geschichte vor.",
     "answer": "meinem",
     "translation": {
-      "ru": "Я читаю моему ребёнку сказку.",
+      "ru": "Я читаю своему ребёнку историю.",
       "en": "I'm reading my child a story."
     },
     "gender": "Neutrum"
@@ -545,6 +545,18 @@ window.PRONOUN_EXERCISES = [
       "en": "This is my brother's car."
     },
     "gender": "Maskulin"
+  },
+  {
+    "type": "possessive",
+    "skill": "Possessiv · ich → mein · Genitiv",
+    "gender": "Plural",
+    "context": "Ich habe zwei Kinder.",
+    "sentence": "Das ist das Zimmer ___ Kinder.",
+    "answer": "meiner",
+    "translation": {
+      "ru": "Это комната моих детей.",
+      "en": "This is my children's room."
+    }
   },
   {
     "type": "possessive",
@@ -573,11 +585,11 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · du → dein · Akkusativ",
-    "context": "Der Termin beim Arzt war heute, oder?",
+    "context": "Du warst heute nicht beim Arzt, oder?",
     "sentence": "Hast du ___ Termin abgesagt?",
     "answer": "deinen",
     "translation": {
-      "ru": "Ты отменил свою встречу?",
+      "ru": "Ты отменил(а) свою запись к врачу?",
       "en": "Did you cancel your appointment?"
     },
     "gender": "Maskulin"
@@ -589,7 +601,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Wo hast du ___ Handy gekauft?",
     "answer": "dein",
     "translation": {
-      "ru": "Где ты купил свой телефон?",
+      "ru": "Где ты купил(а) свой телефон?",
       "en": "Where did you buy your phone?"
     },
     "gender": "Neutrum"
@@ -598,11 +610,11 @@ window.PRONOUN_EXERCISES = [
     "type": "possessive",
     "skill": "Possessiv · du → dein · Akkusativ",
     "context": "Du fährst gleich los.",
-    "sentence": "Hast du ___ Schlüssel dabei?",
+    "sentence": "Hast du ___ Sachen schon gepackt?",
     "answer": "deine",
     "translation": {
-      "ru": "Ты взял(а) свои ключи?",
-      "en": "Have you got your keys with you?"
+      "ru": "Ты уже собрал(а) свои вещи?",
+      "en": "Have you packed your things yet?"
     },
     "gender": "Plural"
   },
@@ -753,7 +765,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Nominativ",
-    "context": "Anna zeigt mir das Zimmer.",
+    "context": "Anna zeigt mir, wo sie wohnt.",
     "sentence": "___ Zimmer ist sehr hell.",
     "answer": "ihr",
     "translation": {
@@ -789,7 +801,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Dativ",
-    "context": "Anna hat einen Vater.",
+    "context": "Annas Vater wohnt in Hamburg.",
     "sentence": "Sie telefoniert mit ___ Vater.",
     "answer": "ihrem",
     "translation": {
@@ -801,7 +813,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie → ihr · Dativ",
-    "context": "Anna hat eine Mutter.",
+    "context": "Anna hat eine Woche Urlaub.",
     "sentence": "Sie fährt mit ___ Mutter ans Meer.",
     "answer": "ihrer",
     "translation": {
@@ -853,7 +865,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Wir treffen ___ Chef morgen.",
     "answer": "unseren",
     "translation": {
-      "ru": "Мы встречаемся с нашим начальником завтра.",
+      "ru": "Завтра мы встречаемся со своим начальником.",
       "en": "We're meeting our boss tomorrow."
     },
     "gender": "Maskulin"
@@ -865,7 +877,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Wir verkaufen ___ Auto.",
     "answer": "unser",
     "translation": {
-      "ru": "Мы продаём нашу машину.",
+      "ru": "Мы продаём свою машину.",
       "en": "We're selling our car."
     },
     "gender": "Neutrum"
@@ -901,7 +913,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Wir wohnen bei ___ Freunden.",
     "answer": "unseren",
     "translation": {
-      "ru": "Мы живём у наших друзей.",
+      "ru": "Мы живём у своих друзей.",
       "en": "We're staying with our friends."
     },
     "gender": "Plural"
@@ -920,13 +932,25 @@ window.PRONOUN_EXERCISES = [
   },
   {
     "type": "possessive",
+    "skill": "Possessiv · wir → unser · Genitiv",
+    "gender": "Plural",
+    "context": "Wir haben sehr nette Nachbarn.",
+    "sentence": "Die Autos ___ Nachbarn stehen vor dem Haus.",
+    "answer": "unserer",
+    "translation": {
+      "ru": "Машины наших соседей стоят перед домом.",
+      "en": "Our neighbours' cars are parked in front of the house."
+    }
+  },
+  {
+    "type": "possessive",
     "skill": "Possessiv · ihr → euer · Nominativ",
     "context": "Ihr habt einen Sohn.",
     "sentence": "___ Sohn ist schon groß.",
     "answer": "euer",
     "translation": {
       "ru": "Ваш сын уже большой.",
-      "en": "Your son is already grown up."
+      "en": "Your son is so big already."
     },
     "gender": "Maskulin"
   },
@@ -969,19 +993,19 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · ihr → euer · Akkusativ",
-    "context": "Die Idee ist gut, aber ich verstehe sie nicht ganz.",
-    "sentence": "Erklärt ihr ___ Idee noch einmal?",
+    "context": "Ihr habt mir gerade etwas vorgeschlagen, aber ich verstehe es noch nicht ganz.",
+    "sentence": "Könnt ihr ___ Idee noch einmal erklären?",
     "answer": "eure",
     "translation": {
-      "ru": "Вы ещё раз объясните свою идею?",
-      "en": "Will you explain your idea again?"
+      "ru": "Вы можете ещё раз объяснить свою идею?",
+      "en": "Can you explain your idea again?"
     },
     "gender": "Feminin"
   },
   {
     "type": "possessive",
     "skill": "Possessiv · ihr → euer · Dativ",
-    "context": "Ihr habt einen Vater.",
+    "context": "Ihr fahrt morgen nach Berlin.",
     "sentence": "Fahrt ihr mit ___ Vater?",
     "answer": "eurem",
     "translation": {
@@ -1089,7 +1113,7 @@ window.PRONOUN_EXERCISES = [
   {
     "type": "possessive",
     "skill": "Possessiv · sie(pl.) → ihr · Dativ",
-    "context": "Die Kinder haben Eltern.",
+    "context": "Die Kinder haben Probleme in der Schule.",
     "sentence": "Ich spreche mit ___ Eltern.",
     "answer": "ihren",
     "translation": {
@@ -1153,7 +1177,7 @@ window.PRONOUN_EXERCISES = [
     "sentence": "Haben Sie ___ Ticket dabei?",
     "answer": "Ihr",
     "translation": {
-      "ru": "У Вас с собой Ваш билет?",
+      "ru": "Вы взяли с собой свой билет?",
       "en": "Do you have your ticket with you?"
     },
     "gender": "Neutrum"

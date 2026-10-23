@@ -527,6 +527,11 @@ html:not(.is-touch) .check {
 .good {
   color: var(--mint);
 }
+.case-note {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
 .skill {
   margin-top: 24px;
   color: var(--muted);
@@ -622,7 +627,9 @@ html:not(.is-touch) .check {
   background: var(--card-bg);
   border: 1px solid var(--hairline);
   border-radius: 24px;
-  padding: 4px 22px 18px;
+  --card-pad: 22px; /* side padding; the close cross keeps the same distance from the right edge and the top */
+  position: relative;
+  padding: calc(var(--card-pad) - 7.5px) var(--card-pad) 18px; /* title centred on the cross */
   opacity: 0;
   transform: scale(0.92);
   filter: blur(8px);
@@ -650,15 +657,34 @@ html:not(.is-touch) .check {
   justify-content: space-between;
   align-items: center;
   flex: 0 0 auto;
+  padding-right: 28px; /* room for the cross */
 }
 .modal-head h2 {
-  margin: 10px 0 2px;
+  margin: 0 0 6px;
 }
+/* Light cross (like Modalverben / Vielseitige Verben): the drawn 14 px sits var(--card-pad) from the right
+   edge and from the top, inside a 40 px tap area (13 px around it). */
 .close {
+  position: absolute;
+  top: calc(var(--card-pad) - 13px);
+  right: calc(var(--card-pad) - 13px);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   border: 0;
+  padding: 0;
   background: transparent;
   color: var(--close-icon);
-  font-size: 28px;
+  cursor: pointer;
+}
+.close svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
 }
 #modalBody {
   overflow: auto;
@@ -825,4 +851,12 @@ html:not(.is-touch) .check {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+/* Very narrow phones (320 px): the tables need more room - less side padding so nothing is cut off. */
+@media (max-width: 359px) {
+  .modal { padding-left: 10px; padding-right: 10px; }
+  .modal-card { --card-pad: 14px; }
+  .tbl th,
+  .tbl td { padding-left: 6px; padding-right: 6px; }
 }

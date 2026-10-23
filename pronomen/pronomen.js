@@ -245,6 +245,15 @@ function feedbackOpen() {
 function tableOpen() {
   return !$("modal").classList.contains("hidden");
 }
+/* An answer that starts the sentence is stored in lower case (mein); it is shown as written there (Mein). */
+const shownAnswer = x => (x.sentence.startsWith("___") ? x.answer.charAt(0).toLocaleUpperCase("de-DE") + x.answer.slice(1) : x.answer);
+/* The on-screen keyboard has no capital letters, so case is not checked. For the formal Sie / Ihnen / Ihr…
+   in mid-sentence the right spelling is shown in green with a short note (decided 2026-10-22). */
+const POLITE_NOTE = {
+  note: { ru: "Вежливая форма - с большой буквы: {w}", en: "Polite form - capitalised: {w}" }
+};
+const politeCaseSlip = (x, typed) =>
+  !x.sentence.startsWith("___") && /^[A-ZÄÖÜ]/.test(x.answer) && typed.trim() !== x.answer && norm(typed) === norm(x.answer);
 function coloured(text, cls) {
   const s = document.createElement("span");
   s.className = cls;
@@ -286,7 +295,10 @@ function submit() {
   if (ok) correct++;
   $("feedback").className = "feedback " + (ok ? "correct" : "wrong");
   $("given").replaceChildren(coloured(answer, ok ? "good" : "bad"));
-  $("correctText").replaceChildren(...(ok ? [] : [coloured("→ " + x.answer, "good")]));
+  const slip = politeCaseSlip(x, answer);
+  $("correctText").replaceChildren(...(ok && !slip ? [] : [coloured("→ " + shownAnswer(x), "good")]));
+  $("caseNote").textContent = slip ? getTranslation(POLITE_NOTE, "note").replace("{w}", x.answer) : "";
+  $("caseNote").hidden = !slip;
   $("skill").textContent = x.skill + (x.type === "possessive" && x.gender ? " · " + x.gender : "");
   $("answerbox").style.display = "none";
   $("check").style.display = "none";
@@ -312,6 +324,13 @@ function finish() {
   $("game").classList.add("hidden");
   $("done").classList.remove("hidden");
   $("score").textContent = `${correct} / ${deck.length}`;
+  // Always kind - praise for taking part (2026-10-22).
+  $("doneNote").textContent =
+    correct === deck.length
+      ? "Perfekt – alles richtig!"
+      : correct * 2 >= deck.length
+        ? "Gut gemacht – Runde geschafft!"
+        : "Schön, dass du geübt hast – bleib dran!";
   const weak = Object.entries(currentStats())
     .filter(([, v]) => v.weak)
     .sort((a, b) => b[1].errorRate - a[1].errorRate)
@@ -467,7 +486,7 @@ const PERSONAL_ROWS = [
   ["es", "es", "es", "ihm", "sein-", "er"],
   ["wir", "wir", "uns", "uns", "unser-", "wir"],
   ["ihr", "ihr", "euch", "euch", "euer / eur-", "ihr"],
-  ["sie", "sie(pl.)", "sie", "ihnen", "ihr-", "sie(pl.)"],
+  ["sie (Pl.)", "sie(pl.)", "sie", "ihnen", "ihr-", "sie(pl.)"],
   ["Sie", "Sie", "Sie", "Ihnen", "Ihr-", "Sie"] // formal row: only shown when it has a recent mistake
 ];
 const CASES = [
@@ -504,7 +523,8 @@ const reference =
       GENDERS.map((g, j) => `<td data-ending="${kasus}|${g}">${ENDINGS[kasus][j]}</td>`).join("") +
       "</tr>"
   ).join("") +
-  "</table></details>";
+  "</table>" +
+  '<p class="tbl-note">— = ohne Endung: mein Hund, mein Auto</p></details>';
 
 // Recent mistakes (the session stats) are marked in the table.
 function markWeakTable() {
