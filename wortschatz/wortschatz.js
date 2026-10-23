@@ -409,14 +409,22 @@ function build(cards = null) {
 function blankHTML(c) {
   return c.blank.replace(/_____/g, "<span class='blank' aria-label='missing word'></span>");
 }
+// The answer's parts are marked in the sentence. They are searched in the plain sentence, left to right, as whole
+// word starts - never inside markup already added (2026-10-23: „an“ of „melde … an“ was found inside „<span“ and broke
+// the line). A part that isn't found (the other alternative of „A / B“) is skipped.
 function revealHTML(c) {
-  let escaped = esc(c.revealed);
-  const ts = targetParts(c);
-  for (const t of ts) {
-    let e = t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    escaped = escaped.replace(new RegExp(e), "<span class='target'>" + t + "</span>");
+  const text = String(c.revealed || "");
+  let out = "",
+    pos = 0;
+  for (const t of targetParts(c)) {
+    const e = t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const m = new RegExp("(^|[^\\p{L}])(" + e + ")", "u").exec(text.slice(pos)); // word start (an ≠ k-an-n); may end inside a word (eigen-e)
+    if (!m) continue;
+    const start = pos + m.index + m[1].length;
+    out += esc(text.slice(pos, start)) + "<span class='target'>" + esc(t) + "</span>";
+    pos = start + t.length;
   }
-  return escaped;
+  return out + esc(text.slice(pos));
 }
 function render() {
   if (idx >= queue.length) {

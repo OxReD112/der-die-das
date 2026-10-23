@@ -8,8 +8,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you learn all forms of the modal verbs - and pick the right one for what you mean.",
-    ru: "Помогает запомнить все формы модальных глаголов - и выбрать нужную по смыслу."
+    en: "Helps you learn the forms of the modal verbs and pick the right form for what you mean.",
+    ru: "Помогает запомнить формы модальных глаголов и выбирать нужную по смыслу."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");

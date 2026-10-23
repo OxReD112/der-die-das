@@ -8,8 +8,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you remember which case comes after prepositions like mit, für or wegen - so you can pick the right article.",
-    ru: "Помогает запомнить, какой падеж идёт после предлогов вроде mit, für или wegen - чтобы правильно выбрать артикль."
+    en: "Helps you remember which case comes after prepositions like mit, für or wegen.",
+    ru: "Помогает запомнить, какой падеж идёт после предлогов вроде mit, für или wegen."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");

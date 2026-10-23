@@ -8,8 +8,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you learn the Partizip II of the most common irregular verbs - with tips and tricks along the way.",
-    ru: "Помогает запомнить Partizip II самых частых неправильных глаголов - с полезными подсказками."
+    en: "Helps you learn the Partizip II of the most common irregular verbs.",
+    ru: "Помогает запомнить Partizip II самых частых неправильных глаголов."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");

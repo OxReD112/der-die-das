@@ -7,8 +7,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you learn the patterns behind German articles and choose the right one - even for words you don't know yet.",
-    ru: "Помогает запомнить закономерности немецких артиклей и выбрать правильный - даже для незнакомых слов."
+    en: "Helps you notice the patterns behind German articles - they often let you guess the article of a new word.",
+    ru: "Помогает заметить закономерности немецких артиклей - по ним артикль часто можно угадать и у незнакомого слова."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
