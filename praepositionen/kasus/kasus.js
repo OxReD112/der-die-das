@@ -8,7 +8,7 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Helps you remember which case comes after prepositions like mit, für or wegen - so the right article follows.",
+    en: "Helps you remember which case comes after prepositions like mit, für or wegen - so you can pick the right article.",
     ru: "Помогает запомнить, какой падеж идёт после предлогов вроде mit, für или wegen - чтобы правильно выбрать артикль."
   }
 };
@@ -105,6 +105,9 @@ const els = {
   rule: document.getElementById("rule"),
   exampleText: document.getElementById("exampleText"),
   exampleTranslation: document.getElementById("exampleTranslation"),
+  exampleText2: document.getElementById("exampleText2"),
+  exampleTranslation2: document.getElementById("exampleTranslation2"),
+  weak: document.getElementById("weak"),
   next: document.getElementById("next"),
   endScore: document.getElementById("endScore"),
   endNote: document.getElementById("endNote"),
@@ -153,6 +156,16 @@ function finish() {
   els.end.classList.remove("hidden");
   els.endScore.textContent = score + " / " + session.length;
   els.endNote.textContent = "Was schwierig war, kommt öfter wieder.";
+  // „Noch üben“: up to 3 prepositions still marked difficult (a recent mistake not yet made up for), hardest first
+  const weak = PREPOSITIONS.filter(e => weightFor(e) >= 2)
+    .sort((a, b) => weightFor(b) - weightFor(a))
+    .slice(0, 3);
+  if (weak.length) {
+    const title = document.createElement("b");
+    title.textContent = "Noch üben";
+    els.weak.replaceChildren(title, ...weak.flatMap(e => [document.createElement("br"), progressLabel(e)]));
+    els.weak.classList.remove("hidden");
+  } else els.weak.classList.add("hidden");
   scrollToTop();
 }
 
@@ -184,8 +197,17 @@ function fitToCard(el) {
     el.style.fontSize = ((parseFloat(getComputedStyle(el).fontSize) * available) / width) * 0.97 + "px";
   }
 }
+// „Dativ / Akkusativ“ stays on one line: smaller only where it is wider than the card (narrow phones)
+function fitCase(el) {
+  el.style.fontSize = "";
+  if (el.scrollWidth > el.clientWidth && el.clientWidth > 0) {
+    el.style.fontSize = ((parseFloat(getComputedStyle(el).fontSize) * el.clientWidth) / el.scrollWidth) * 0.97 + "px";
+  }
+}
 window.addEventListener("resize", () => {
-  if (inRound()) fitToCard(answered ? els.answerPreposition : els.preposition);
+  if (!inRound()) return;
+  fitToCard(answered ? els.answerPreposition : els.preposition);
+  if (answered) fitCase(els.answerCase);
 });
 
 /* ===== ANSWER =====
@@ -226,24 +248,35 @@ function answer(selected) {
   els.answerCardMain.className = "answer-card-main " + (variantLabel ? "special" : !correct ? "wrong" : "");
   els.answerEyebrow.textContent = correct ? (variantLabel ? "Richtig · " + variantLabel : "Richtig") : "Nicht ganz";
   els.answerPreposition.textContent = entry.preposition;
-  els.answerCase.textContent = shownCase;
+  // A preposition with two right cases always shows both, the main one first (author 2026-10-23): „Genitiv / Dativ“
+  els.answerCase.textContent = entry.cases.length > 1 ? [primary, ...entry.cases.filter(c => c !== primary)].map(c => c.case).join(" / ") : shownCase;
   if (correct) {
     els.rule.textContent = variantLabel
       ? getTranslation(entry, "variantNote") || statusMessage(shownStatus, entry)
       : getTranslation(entry, "note");
   } else {
+    // wrong: the picked case crossed out, and the note under it (2026-10-23: it was hidden after a mistake)
     const crossed = document.createElement("span");
     crossed.className = "wrong-choice";
     crossed.textContent = selected;
-    els.rule.replaceChildren(crossed);
+    const note = getTranslation(entry, "note");
+    const noteLine = document.createElement("span");
+    noteLine.className = "wrong-note";
+    noteLine.textContent = note || "";
+    els.rule.replaceChildren(crossed, ...(note ? [noteLine] : []));
   }
 
   els.exampleText.textContent = entry.example || "";
   els.exampleTranslation.textContent = getTranslation(entry, "exampleTranslation");
+  // optional second example (ab: Dativ + Akkusativ; gegenüber: place + towards)
+  els.exampleText2.textContent = entry.example2 || "";
+  els.exampleTranslation2.textContent = entry.example2 ? getTranslation(entry, "exampleTranslation2") : "";
+  els.exampleText2.hidden = els.exampleTranslation2.hidden = !entry.example2;
   els.next.textContent = index === session.length - 1 ? "Fertig" : "Weiter";
   els.bar.style.width = ((index + 1) / session.length) * 100 + "%";
   scrollToTop();
   fitToCard(els.answerPreposition);
+  fitCase(els.answerCase);
   animateReveal(fromRect);
 }
 

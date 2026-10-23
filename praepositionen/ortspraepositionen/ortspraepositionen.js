@@ -8,8 +8,8 @@
    Shown in the user's language so it is surely understood (like a hint). */
 const START_ABOUT = {
   text: {
-    en: "Where? Where to? Where from? Helps you pick the right preposition for every place.",
-    ru: "Где? Куда? Откуда? Помогает подобрать правильный предлог к каждому месту."
+    en: "Where? Where to? Where from? Helps you pick the right preposition for a place.",
+    ru: "Где? Куда? Откуда? Помогает подобрать правильный предлог к месту."
   }
 };
 document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "text");
@@ -67,20 +67,7 @@ const ZU_BOX = { raum: "in", ausnahme: "in", land: "in", adresse: "in", kontakt:
 const ZU_TEXT = window.ORTS_ZU_HINTS || {};
 function zuHint(entry, q, form) {
   const b = s => "<b>" + escapeHtml(s) + "</b>";
-  // Bahnhof-type cards (an · zu · von): here zu IS right — note when an den / an die was picked.
-  if (entry.cat === "anzu" && q === "wohin" && /^an\b/.test(form))
-    return (
-      "<div>" +
-      b(entry.wohin + " " + nounFor(entry, "wohin")) +
-      " — " +
-      getTranslation(ZU_TEXT, "normal") +
-      "</div>" +
-      "<div>" +
-      b(form + " " + nounFor(entry, "wohin")) +
-      " — " +
-      getTranslation(ZU_TEXT, "unueblich") +
-      "</div>"
-    );
+  // (Bahnhof-type cards: „an den Bahnhof“ counts as right since 2026-10-23, so no „unüblich“ note any more.)
   const box = ZU_BOX[entry.cat];
   if (!box) return "";
   if (q === "wohin" && /^zu/.test(form))

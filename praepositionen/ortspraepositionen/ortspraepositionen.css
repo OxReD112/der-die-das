@@ -718,7 +718,9 @@ body:has(#game:not(.hidden)) .version-mark {
   background: var(--card-bg);
   border: 1px solid var(--hairline);
   border-radius: 24px;
-  padding: 18px 18px 16px;
+  --card-pad: 18px; /* side padding; the close cross keeps the same distance from the right edge and the top */
+  position: relative;
+  padding: calc(var(--card-pad) - 3px) var(--card-pad) 16px; /* title centred on the cross */
   opacity: 0;
   transform: scale(0.92);
   filter: blur(8px);
@@ -737,6 +739,7 @@ body:has(#game:not(.hidden)) .version-mark {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  padding-right: 28px; /* room for the cross */
 }
 .ohead h2 {
   margin: 0;
@@ -744,14 +747,29 @@ body:has(#game:not(.hidden)) .version-mark {
   font-weight: 650;
   letter-spacing: -0.01em;
 }
+/* Light cross (like Modalverben / Vielseitige Verben / Pronomen): the drawn 14 px sits var(--card-pad) from the
+   right edge and from the top, inside a 40 px tap area (13 px around it). */
 .oclose {
+  position: absolute;
+  top: calc(var(--card-pad) - 13px);
+  right: calc(var(--card-pad) - 13px);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   border: 0;
+  padding: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 26px;
-  line-height: 1;
   cursor: pointer;
-  padding: 0 2px;
+}
+.oclose svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
 }
 
 /* Table (v21): examples (two, no articles except a country that needs one) and the prepositions on ONE line;
@@ -941,4 +959,13 @@ body:has(#game:not(.hidden)) .version-mark {
   .osheet {
     filter: none;
   }
+}
+
+/* Very narrow phones (320 px): less padding and column gap, so the examples stay on one line
+   and the group name doesn't run into „Dativ“ under nach / zu. */
+@media (max-width: 359px) {
+  .omodal { padding-left: 10px; padding-right: 10px; }
+  .osheet { --card-pad: 14px; }
+  .otbl2 { column-gap: 8px; }
+  .otbl2 .ex { font-size: 15px; }
 }

@@ -12,11 +12,17 @@
 //   id                 - stable unique id
 //   verb               - infinitive as shown on the card (with „sich“ where needed)
 //   preposition        - the one accepted answer (ae / oe / ue are accepted for ä / ö / ü)
-//   case               - Akkusativ / Dativ; Nominativ (arbeiten als) has no case step
+//   case               - Akkusativ / Dativ (a case without a button would skip the case step)
+//   alsoAccepted       - optional: other prepositions that are just as standard for this meaning,
+//                        each with its own case and example ({ preposition, case, example, exampleTranslation });
+//                        they count as fully right, the case step then asks for their case, the answer shows
+//                        their example and the other pair („auch: …“).
+//                        Only for true equals (sprechen über / von, erzählen von / über; author 2026-10-23) -
+//                        a verb with a second preposition that is not equally standard is left out.
 //   meaning            - line above the verb, {ru, en}
 //                        (picked by the Translations setting via components/deutsch-translation-v1.js)
-//                        The English meaning must never contain the English twin of the German
-//                        preposition (e.g. no „with“ for mit, no „as“ for als).
+//                        It may translate with any preposition (a literal twin is a trap, not a hint) -
+//                        but must not lead to another German preposition that is also correct (author 2026-10-23).
 //   example            - German example sentence
 //   exampleTranslation - {ru, en}
 
@@ -54,8 +60,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "an",
     case: "Dativ",
     meaning: { ru: "участвовать в", en: "to take part, to participate" },
-    example: "Ich nehme am Kurs teil.",
-    exampleTranslation: { ru: "Я участвую в курсе.", en: "I'm taking part in the course." }
+    example: "Ich nehme an einem Deutschkurs teil.",
+    exampleTranslation: { ru: "Я хожу на курс немецкого.", en: "I'm taking a German course." }
   },
   {
     id: "vmp_005",
@@ -99,17 +105,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "auf",
     case: "Akkusativ",
     meaning: { ru: "реагировать на", en: "to react, to respond" },
-    example: "Er reagiert schnell auf Kritik.",
-    exampleTranslation: { ru: "Он быстро реагирует на критику.", en: "He reacts quickly to criticism." }
-  },
-  {
-    id: "vmp_010",
-    verb: "sich vorbereiten",
-    preposition: "auf",
-    case: "Akkusativ",
-    meaning: { ru: "готовиться к", en: "to prepare (yourself)" },
-    example: "Ich bereite mich auf die Prüfung vor.",
-    exampleTranslation: { ru: "Я готовлюсь к экзамену.", en: "I'm preparing for the exam." }
+    example: "Er reagiert schnell auf meine Frage.",
+    exampleTranslation: { ru: "Он быстро реагирует на мой вопрос.", en: "He reacts quickly to my question." }
   },
   {
     id: "vmp_011",
@@ -143,7 +140,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sprechen",
     preposition: "mit",
     case: "Dativ",
-    meaning: { ru: "разговаривать, говорить с", en: "to talk, to speak (to someone)" },
+    meaning: { ru: "разговаривать, говорить с", en: "to talk, to speak (with someone)" },
     example: "Ich spreche mit meiner Mutter.",
     exampleTranslation: { ru: "Я разговариваю с мамой.", en: "I'm talking to my mother." }
   },
@@ -188,7 +185,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sich entschuldigen",
     preposition: "für",
     case: "Akkusativ",
-    meaning: { ru: "извиняться за", en: "to apologise, to say sorry" },
+    meaning: { ru: "извиняться за", en: "to apologise (for what you did)" },
     example: "Ich entschuldige mich für meinen Fehler.",
     exampleTranslation: { ru: "Я извиняюсь за свою ошибку.", en: "I apologise for my mistake." }
   },
@@ -197,7 +194,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sich entscheiden",
     preposition: "für",
     case: "Akkusativ",
-    meaning: { ru: "решить выбрать, выбрать в пользу", en: "to decide on, to choose" },
+    meaning: { ru: "выбрать, сделать выбор в пользу", en: "to decide on, to choose" },
     example: "Ich entscheide mich für den blauen Mantel.",
     exampleTranslation: { ru: "Я выбираю синее пальто.", en: "I'm choosing the blue coat." }
   },
@@ -207,8 +204,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "für",
     case: "Akkusativ",
     meaning: { ru: "интересоваться", en: "to be interested in" },
-    example: "Ich interessiere mich für Kunst.",
-    exampleTranslation: { ru: "Я интересуюсь искусством.", en: "I'm interested in art." }
+    example: "Ich interessiere mich für moderne Kunst.",
+    exampleTranslation: { ru: "Я интересуюсь современным искусством.", en: "I'm interested in modern art." }
   },
   {
     id: "vmp_028",
@@ -216,8 +213,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "um",
     case: "Akkusativ",
     meaning: { ru: "просить о", en: "to ask (politely) for" },
-    example: "Ich bitte um deine Hilfe.",
-    exampleTranslation: { ru: "Я прошу о твоей помощи.", en: "I'm asking for your help." }
+    example: "Ich bitte dich um einen Gefallen.",
+    exampleTranslation: { ru: "Я прошу тебя об одолжении.", en: "I'm asking you a favour." }
   },
   {
     id: "vmp_029",
@@ -242,18 +239,12 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sich freuen",
     preposition: "über",
     case: "Akkusativ",
-    meaning: { ru: "радоваться чему-либо, что уже произошло или уже есть", en: "to be pleased with (sth you have)" },
+    meaning: {
+      ru: "радоваться чему-либо (тому, что уже произошло или что получил)",
+      en: "to be happy about (sth that has happened or you've received)"
+    },
     example: "Ich freue mich über das Geschenk.",
-    exampleTranslation: { ru: "Я радуюсь подарку.", en: "I'm really pleased with the present." }
-  },
-  {
-    id: "vmp_032",
-    verb: "denken",
-    preposition: "über",
-    case: "Akkusativ",
-    meaning: { ru: "думать о (какое мнение)", en: "to have thoughts on, to have a view on" },
-    example: "Was denkst du über meinen Plan?",
-    exampleTranslation: { ru: "Что ты думаешь о моём плане?", en: "What do you think of my plan?" }
+    exampleTranslation: { ru: "Я радуюсь подарку.", en: "I'm happy about the present." }
   },
   {
     id: "vmp_033",
@@ -269,6 +260,14 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sprechen",
     preposition: "über",
     case: "Akkusativ",
+    alsoAccepted: [
+      {
+        preposition: "von",
+        case: "Dativ",
+        example: "Er spricht oft von seiner Kindheit.",
+        exampleTranslation: { ru: "Он часто говорит о своём детстве.", en: "He often talks about his childhood." }
+      }
+    ],
     meaning: { ru: "говорить о, разговаривать о", en: "to talk about" },
     example: "Wir sprechen über den Film.",
     exampleTranslation: { ru: "Мы говорим о фильме.", en: "We're talking about the film." }
@@ -280,13 +279,21 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     case: "Akkusativ",
     meaning: { ru: "узнавать информацию о, информироваться о", en: "to find out, to get information" },
     example: "Ich informiere mich über den Kurs.",
-    exampleTranslation: { ru: "Я узнаю информацию о курсе.", en: "I'm finding out about the course." }
+    exampleTranslation: { ru: "Я собираю информацию о курсе.", en: "I'm finding out about the course." }
   },
   {
     id: "vmp_037",
     verb: "erzählen",
     preposition: "von",
     case: "Dativ",
+    alsoAccepted: [
+      {
+        preposition: "über",
+        case: "Akkusativ",
+        example: "Sie hat viel über ihren Urlaub erzählt.",
+        exampleTranslation: { ru: "Она много рассказала о своём отпуске.", en: "She told us a lot about her holiday." }
+      }
+    ],
     meaning: { ru: "рассказывать о", en: "to tell (someone) about" },
     example: "Sie erzählt von ihrer Arbeit.",
     exampleTranslation: { ru: "Она рассказывает о своей работе.", en: "She's telling us about her work." }
@@ -296,7 +303,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "träumen",
     preposition: "von",
     case: "Dativ",
-    meaning: { ru: "мечтать о, сниться", en: "to dream about" },
+    meaning: { ru: "мечтать о; видеть во сне", en: "to dream about" },
     example: "Ich träume von einer Reise.",
     exampleTranslation: { ru: "Я мечтаю о путешествии.", en: "I'm dreaming of a trip." }
   },
@@ -315,17 +322,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "zu",
     case: "Dativ",
     meaning: { ru: "поздравлять с", en: "to congratulate on" },
-    example: "Ich gratuliere dir zum Geburtstag.",
-    exampleTranslation: { ru: "Я поздравляю тебя с днём рождения.", en: "Happy birthday to you!" }
-  },
-  {
-    id: "vmp_041",
-    verb: "einladen",
-    preposition: "zu",
-    case: "Dativ",
-    meaning: { ru: "приглашать на", en: "to invite (for a meal, party…)" },
-    example: "Ich lade dich zum Essen ein.",
-    exampleTranslation: { ru: "Я приглашаю тебя на ужин.", en: "I'm inviting you for a meal." }
+    example: "Ich gratuliere dir zu deinem neuen Job.",
+    exampleTranslation: { ru: "Поздравляю тебя с новой работой.", en: "I'd like to congratulate you on your new job." }
   },
   {
     id: "vmp_042",
@@ -334,7 +332,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     case: "Dativ",
     meaning: { ru: "предупреждать о, предостерегать от", en: "to warn about, to warn against" },
     example: "Ich warne dich vor diesem Mann.",
-    exampleTranslation: { ru: "Я предостерегаю тебя от этого мужчины.", en: "I'm warning you about this man." }
+    exampleTranslation: { ru: "Я предупреждаю тебя насчёт этого человека.", en: "I'm warning you about this man." }
   },
   {
     id: "vmp_043",
@@ -351,17 +349,11 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "aus",
     case: "Dativ",
     meaning: { ru: "состоять из", en: "to consist of, to be made up of" },
-    example: "Der Kurs besteht aus zehn Lektionen.",
-    exampleTranslation: { ru: "Курс состоит из десяти уроков.", en: "The course consists of ten lessons." }
-  },
-  {
-    id: "vmp_045",
-    verb: "arbeiten",
-    preposition: "als",
-    case: "Nominativ",
-    meaning: { ru: "работать кем-либо, в качестве кого-либо", en: "to work (in a job, a role)" },
-    example: "Sie arbeitet als Designerin.",
-    exampleTranslation: { ru: "Она работает дизайнером.", en: "She works as a designer." }
+    example: "Die Wohnung besteht aus einem Zimmer und einer Küche.",
+    exampleTranslation: {
+      ru: "Квартира состоит из комнаты и кухни.",
+      en: "The flat consists of one room and a kitchen."
+    }
   },
   {
     id: "vmp_046",
@@ -432,8 +424,11 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "mit",
     case: "Dativ",
     meaning: { ru: "заниматься чем-то", en: "to spend time on, to study" },
-    example: "Ich beschäftige mich gerade mit Grammatik.",
-    exampleTranslation: { ru: "Сейчас я занимаюсь грамматикой.", en: "I'm working on grammar at the moment." }
+    example: "Ich beschäftige mich gerade mit der deutschen Grammatik.",
+    exampleTranslation: {
+      ru: "Сейчас я занимаюсь немецкой грамматикой.",
+      en: "I'm studying German grammar at the moment."
+    }
   },
   {
     id: "vmp_055",
@@ -476,36 +471,18 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sich ärgern",
     preposition: "über",
     case: "Akkusativ",
-    meaning: { ru: "злиться на, из-за", en: "to be annoyed (by)" },
+    meaning: { ru: "злиться на что-то", en: "to be annoyed (by)" },
     example: "Ich ärgere mich über den Stau.",
-    exampleTranslation: { ru: "Я злюсь из-за пробки.", en: "The traffic jam is annoying me." }
+    exampleTranslation: { ru: "Я злюсь из-за пробки.", en: "I'm annoyed about the traffic jam." }
   },
   {
     id: "vmp_060",
     verb: "sich beschweren",
     preposition: "über",
     case: "Akkusativ",
-    meaning: { ru: "жаловаться на", en: "to complain" },
+    meaning: { ru: "жаловаться на", en: "to complain (about sth)" },
     example: "Er beschwert sich über den Lärm.",
     exampleTranslation: { ru: "Он жалуется на шум.", en: "He's complaining about the noise." }
-  },
-  {
-    id: "vmp_061",
-    verb: "sich bewerben",
-    preposition: "um",
-    case: "Akkusativ",
-    meaning: { ru: "подавать заявку на (работу, место)", en: "to apply for (a job, a place)" },
-    example: "Ich bewerbe mich um eine Stelle als Designerin.",
-    exampleTranslation: { ru: "Я подаю заявку на место дизайнера.", en: "I'm applying for a job as a designer." }
-  },
-  {
-    id: "vmp_062",
-    verb: "sich Sorgen machen",
-    preposition: "um",
-    case: "Akkusativ",
-    meaning: { ru: "беспокоиться о, переживать за", en: "to worry about" },
-    example: "Ich mache mir Sorgen um meine Mutter.",
-    exampleTranslation: { ru: "Я переживаю за маму.", en: "I'm worried about my mother." }
   },
   {
     id: "vmp_063",
@@ -531,8 +508,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "für",
     case: "Akkusativ",
     meaning: { ru: "считать кем-то / чем-то", en: "to consider, to regard as" },
-    example: "Ich halte ihn für sehr klug.",
-    exampleTranslation: { ru: "Я считаю его очень умным.", en: "I consider him very clever." }
+    example: "Ich halte ihn für einen guten Lehrer.",
+    exampleTranslation: { ru: "Я считаю его хорошим учителем.", en: "I consider him a good teacher." }
   },
   {
     id: "vmp_068",
@@ -540,8 +517,8 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     preposition: "vor",
     case: "Dativ",
     meaning: { ru: "бояться кого-то / чего-то", en: "to be afraid of" },
-    example: "Ich habe Angst vor Spinnen.",
-    exampleTranslation: { ru: "Я боюсь пауков.", en: "I'm afraid of spiders." }
+    example: "Ich habe Angst vor großen Hunden.",
+    exampleTranslation: { ru: "Я боюсь больших собак.", en: "I'm afraid of big dogs." }
   },
   {
     id: "vmp_069",
@@ -569,7 +546,7 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "helfen",
     preposition: "bei",
     case: "Dativ",
-    meaning: { ru: "помогать с чем-то (в каком-то деле)", en: "to help (someone) do something" },
+    meaning: { ru: "помогать с чем-то (в каком-то деле)", en: "to help (someone) with sth" },
     example: "Kannst du mir beim Umzug helfen?",
     exampleTranslation: { ru: "Можешь помочь мне с переездом?", en: "Can you help me with the move?" }
   },
@@ -587,18 +564,18 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     verb: "sich unterhalten",
     preposition: "über",
     case: "Akkusativ",
-    meaning: { ru: "беседовать о чём-то (тема разговора)", en: "to chat (on a topic), to discuss" },
-    example: "Wir haben uns über den Film unterhalten.",
-    exampleTranslation: { ru: "Мы поговорили о фильме.", en: "We talked about the film." }
+    meaning: { ru: "беседовать о чём-то (тема разговора)", en: "to talk, to chat (about a topic)" },
+    example: "Wir haben uns über das Konzert unterhalten.",
+    exampleTranslation: { ru: "Мы поговорили о концерте.", en: "We talked about the concert." }
   },
   {
     id: "vmp_074",
     verb: "diskutieren",
     preposition: "über",
     case: "Akkusativ",
-    meaning: { ru: "обсуждать, спорить о", en: "to discuss, to debate" },
-    example: "Wir diskutieren oft über Politik.",
-    exampleTranslation: { ru: "Мы часто спорим о политике.", en: "We often discuss politics." }
+    meaning: { ru: "обсуждать (тему), спорить о чём-то", en: "to discuss, to debate (a topic)" },
+    example: "Wir diskutieren über den neuen Plan.",
+    exampleTranslation: { ru: "Мы обсуждаем новый план.", en: "We're discussing the new plan." }
   },
   {
     id: "vmp_075",
@@ -608,5 +585,116 @@ window.VERBEN_MIT_PRAEPOSITIONEN = [
     meaning: { ru: "обращать внимание на, следить за", en: "to pay attention to, to watch out for" },
     example: "Ich achte auf meine Gesundheit.",
     exampleTranslation: { ru: "Я слежу за своим здоровьем.", en: "I look after my health." }
+  },
+  {
+    id: "vmp_076",
+    verb: "zweifeln",
+    preposition: "an",
+    case: "Dativ",
+    meaning: { ru: "сомневаться в", en: "to doubt" },
+    example: "Ich zweifle an seiner Ehrlichkeit.",
+    exampleTranslation: { ru: "Я сомневаюсь в его честности.", en: "I doubt his honesty." }
+  },
+  {
+    id: "vmp_077",
+    verb: "sich beteiligen",
+    preposition: "an",
+    case: "Dativ",
+    meaning: { ru: "участвовать в, вносить свой вклад", en: "to take part, to contribute" },
+    example: "Alle beteiligen sich an der Diskussion.",
+    exampleTranslation: { ru: "Все участвуют в обсуждении.", en: "Everyone is taking part in the discussion." }
+  },
+  {
+    id: "vmp_078",
+    verb: "erkennen",
+    preposition: "an",
+    case: "Dativ",
+    meaning: { ru: "узнавать (кого-то) по", en: "to recognise (someone) by" },
+    example: "Ich erkenne ihn an seiner Stimme.",
+    exampleTranslation: { ru: "Я узнаю его по голосу.", en: "I recognise him by his voice." }
+  },
+  {
+    id: "vmp_079",
+    verb: "bestehen",
+    preposition: "auf",
+    case: "Dativ",
+    meaning: { ru: "настаивать на", en: "to insist" },
+    example: "Er besteht auf einer Antwort.",
+    exampleTranslation: { ru: "Он настаивает на ответе.", en: "He insists on an answer." }
+  },
+  {
+    id: "vmp_080",
+    verb: "sich fürchten",
+    preposition: "vor",
+    case: "Dativ",
+    meaning: { ru: "бояться", en: "to be scared (of sth)" },
+    example: "Das Kind fürchtet sich vor dem Hund.",
+    exampleTranslation: { ru: "Ребёнок боится собаки.", en: "The child is scared of the dog." }
+  },
+  {
+    id: "vmp_081",
+    verb: "sich verstecken",
+    preposition: "vor",
+    case: "Dativ",
+    meaning: { ru: "прятаться от", en: "to hide (from someone or sth)" },
+    example: "Die Katze versteckt sich vor dem Gewitter.",
+    exampleTranslation: { ru: "Кошка прячется от грозы.", en: "The cat is hiding from the thunderstorm." }
+  },
+  {
+    id: "vmp_082",
+    verb: "sich aufregen",
+    preposition: "über",
+    case: "Akkusativ",
+    meaning: { ru: "возмущаться чем-то, нервничать", en: "to get worked up, to get upset" },
+    example: "Er regt sich über seinen Chef auf.",
+    exampleTranslation: { ru: "Он возмущается из-за своего начальника.", en: "He's getting worked up about his boss." }
+  },
+  {
+    id: "vmp_083",
+    verb: "sich verabreden",
+    preposition: "mit",
+    case: "Dativ",
+    meaning: { ru: "договориться о встрече с", en: "to arrange to meet (someone)" },
+    example: "Ich verabrede mich mit meiner Freundin.",
+    exampleTranslation: { ru: "Я договариваюсь о встрече с подругой.", en: "I'm arranging to meet my friend." }
+  },
+  {
+    id: "vmp_084",
+    verb: "sich erkundigen",
+    preposition: "nach",
+    case: "Dativ",
+    meaning: { ru: "осведомляться о, расспрашивать о", en: "to ask about, to enquire" },
+    example: "Sie erkundigt sich nach dem Weg.",
+    exampleTranslation: { ru: "Она спрашивает дорогу.", en: "She's asking the way." }
+  },
+  {
+    id: "vmp_085",
+    verb: "verzichten",
+    preposition: "auf",
+    case: "Akkusativ",
+    meaning: { ru: "отказываться от", en: "to do without, to give up" },
+    example: "Ich verzichte auf den Nachtisch.",
+    exampleTranslation: { ru: "Я отказываюсь от десерта.", en: "I'll skip dessert." }
+  },
+  {
+    id: "vmp_086",
+    verb: "es handelt sich",
+    preposition: "um",
+    case: "Akkusativ",
+    meaning: { ru: "речь идёт о (книжнее, чем es geht um)", en: "it's a matter of, it concerns" },
+    example: "Es handelt sich um einen Fehler.",
+    exampleTranslation: { ru: "Речь идёт об ошибке.", en: "It's a mistake." }
+  },
+  {
+    id: "vmp_087",
+    verb: "protestieren",
+    preposition: "gegen",
+    case: "Akkusativ",
+    meaning: { ru: "протестовать против", en: "to protest" },
+    example: "Viele protestieren gegen die neuen Regeln.",
+    exampleTranslation: {
+      ru: "Многие протестуют против новых правил.",
+      en: "Many people are protesting against the new rules."
+    }
   }
 ];

@@ -132,7 +132,6 @@ button {
 .coll-line:active,
 .check:active,
 .continue:active,
-#typoBtn:active,
 .finish-actions button:active,
 .coll-close:active,
 .coll-back:active,
@@ -823,59 +822,6 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
   transition:
     transform 0.12s ease,
     filter 0.12s ease;
-}
-
-/* „Nur Tippfehler“ (wrong answer at level 2+): checkbox + label, no frame, secondary text colour;
-   the tick uses the same grey (green = „correct“ only). Tap area bigger than it looks. */
-#typoBtn {
-  display: none;
-  position: relative;
-  align-items: center;
-  gap: 10px;
-  margin: 8px auto 0;
-  padding: 12px 16px;
-  border: 0;
-  background: none;
-  color: var(--sec-text);
-  font: 400 16px/1 var(--font);
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.feedbackShell.canTypo #typoBtn {
-  display: inline-flex;
-}
-#typoBtn::before {
-  content: "";
-  box-sizing: border-box;
-  flex: 0 0 18px;
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid var(--sec-text);
-  border-radius: 5px;
-  opacity: 0.7;
-}
-#typoBtn.done::before {
-  opacity: 1;
-  background: var(--sec-text);
-}
-#typoBtn.done::after {
-  content: "";
-  position: absolute;
-  left: 23px;
-  top: 50%;
-  width: 4px;
-  height: 9px;
-  margin-top: -6px;
-  border: solid var(--bg);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-#typoBtn:disabled {
-  cursor: default;
-  transform: none;
-  filter: none;
 }
 
 /* ===== DONE SCREEN (v2.97–v2.99) · mirrors the start screen =====

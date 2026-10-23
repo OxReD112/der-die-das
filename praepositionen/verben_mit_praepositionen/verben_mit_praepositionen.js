@@ -2,8 +2,8 @@
    Verbs: verbs.js (window.VERBEN_MIT_PRAEPOSITIONEN). When this file changes, raise its ?v= in index.html,
    the Präpositionen page's verben_mit_praepositionen/index.html?v= and the Home tile's praepositionen/?v=
 
-   A card: meaning (Your Language) + verb → type the preposition → pick the case (Akkusativ / Dativ;
-   skipped for arbeiten als + Nominativ) → answer with the example sentence. */
+   A card: meaning (Your Language) + verb → type the preposition → pick the case (Akkusativ / Dativ)
+   → answer with the example sentence. sprechen / erzählen accept two prepositions (verbs.js → alsoAccepted). */
 
 const DATA = window.VERBEN_MIT_PRAEPOSITIONEN || [];
 const $ = id => document.getElementById(id);
@@ -20,18 +20,24 @@ const SHORT_SCREEN = window.matchMedia("(max-height: 559px)");
 /* ===== START-SCREEN DESCRIPTION ===== „Worum geht's?“, in the user's language so it is surely understood */
 const START_ABOUT = {
   text: {
-    en: "Some verbs always come with the same preposition. A little practice helps you remember which one - and the case after it.",
-    ru: "Некоторые глаголы всегда идут с определённым предлогом. Немного практики - и легче запомнить, с каким именно и какой после него падеж."
+    en: "Helps you remember which preposition a verb takes - and the case after it.",
+    ru: "Помогает запомнить, с каким предлогом идёт глагол - и какой после него падеж."
   }
 };
 $("aboutText").textContent = getTranslation(START_ABOUT, "text");
 
 /* ===== CASES =====
    The case buttons are built from the cases that occur in the verbs (currently Akkusativ + Dativ).
-   A verb whose case has no button (arbeiten als + Nominativ) skips the case step. */
+   A verb whose case had no button would skip the case step (arbeiten als + Nominativ, removed 2026-10-23). */
 const CASE_ORDER = ["Akkusativ", "Dativ", "Genitiv"];
 const CHOICE_CASES = CASE_ORDER.filter(c => DATA.some(x => x.case === c));
 const asksCase = x => CHOICE_CASES.includes(x.case);
+/* A verb's accepted pairs: the main preposition + its case, and (alsoAccepted) others that are just as standard
+   (sprechen über / von). Any of them is fully right; the case step then asks for the case of the one typed. */
+const pairsOf = x => [
+  { preposition: x.preposition, case: x.case, example: x.example, exampleTranslation: x.exampleTranslation },
+  ...(x.alsoAccepted || [])
+];
 
 /* ===== STATS (weak spots) =====
    Preposition and case are tracked separately per verb ("<id>|prep", "<id>|case") over the last 5 rounds.
@@ -134,6 +140,7 @@ let session = [],
   phase = "type", // "type" → "case" (if the verb asks for one) → "answer"
   typed = "";
 let prepOK = false,
+  used = null, // the pair the answer goes on with: the typed one if right, else the main one
   caseOK = null,
   chosenCase = null,
   caseShownAt = 0;
@@ -206,6 +213,7 @@ function render() {
   phase = "type";
   typed = "";
   prepOK = false;
+  used = null;
   caseOK = null;
   chosenCase = null;
   $("counter").textContent = index + 1 + " / " + session.length;
@@ -326,13 +334,15 @@ window.addEventListener("resize", () => {
 function submitPrep() {
   if (phase !== "type" || !typed.trim()) return;
   const x = session[index];
-  prepOK = prepMatches(typed, x.preposition);
+  const pairs = pairsOf(x);
+  used = pairs.find(p => prepMatches(typed, p.preposition)) || pairs[0];
+  prepOK = pairs.some(p => prepMatches(typed, p.preposition));
   mark(x.id + "|prep", prepOK);
   if (prepOK) score.prep++;
 
   const gap = $("gap");
   gap.className = "gap filled";
-  gap.textContent = x.preposition;
+  gap.textContent = used.preposition;
   fitSentence();
   $("check").classList.add("hidden");
   // Phone: the keyboard keeps its space (so the question doesn't move), it just hides
@@ -340,11 +350,11 @@ function submitPrep() {
   else if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
 
   const given = $("given");
-  if (prepOK) given.replaceChildren(span("good", x.preposition));
-  else given.replaceChildren(span("bad struck", typed.trim()), span("good", "→ " + x.preposition));
+  if (prepOK) given.replaceChildren(span("good", used.preposition));
+  else given.replaceChildren(span("bad struck", typed.trim()), span("good", "→ " + used.preposition));
   $("feedback").className = "feedback" + (prepOK ? "" : " wrong-l wrong-r");
 
-  if (asksCase(x)) {
+  if (asksCase(used)) {
     phase = "case";
     caseShownAt = performance.now();
     $("caseQuestion").classList.remove("off");
@@ -366,7 +376,7 @@ function chooseCase(c) {
   if (phase !== "case") return;
   const x = session[index];
   chosenCase = c;
-  caseOK = c === x.case;
+  caseOK = c === used.case;
   mark(x.id + "|case", caseOK);
   score.casTotal++;
   if (caseOK) score.cas++;
@@ -392,7 +402,7 @@ function showAnswer() {
 
   // Step 2: the right half fades to the case result (the left half keeps the preposition)
   if (caseOK !== null) $("feedback").classList.toggle("wrong-r", !caseOK);
-  $("caseLine").textContent = "+ " + x.case;
+  $("caseLine").textContent = "+ " + used.case;
   $("caseLine").removeAttribute("aria-hidden");
   $("caseQuestion").classList.add("off");
   $("caseLine").classList.remove("off");
@@ -400,8 +410,13 @@ function showAnswer() {
   const chips = [chip(prepOK, "Präposition", typed.trim())];
   if (caseOK !== null) chips.push(chip(caseOK, "Kasus", chosenCase));
   $("chips").replaceChildren(...chips);
-  $("example").textContent = x.example || "";
-  $("exampleTr").textContent = getTranslation(x, "exampleTranslation");
+  // The other accepted pair(s), without comment (author 2026-10-23): „auch: von + Dativ“
+  const others = pairsOf(x).filter(p => p.preposition !== used.preposition);
+  $("alsoLine").textContent = others.length ? "auch: " + others.map(p => p.preposition + " + " + p.case).join(" · ") : "";
+  $("alsoLine").hidden = !others.length;
+  // the example of the pair the learner went on with (sprechen von → a von sentence)
+  $("example").textContent = used.example || x.example || "";
+  $("exampleTr").textContent = getTranslation(used.exampleTranslation ? used : x, "exampleTranslation");
   $("continue").textContent = index === session.length - 1 ? "Fertig" : "Weiter";
 
   $("prepFeedback").classList.add("hidden");

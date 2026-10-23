@@ -27,12 +27,9 @@ window.ORTS_ZU_HINTS = {
   in: { ru: "hinein · внутрь", en: "hinein · into it, inside" },
   an: { ru: "direkt dran · вплотную", en: "direkt dran · right to the edge" },
   auf: { ru: "drauf · на само место", en: "drauf · onto it" },
-  zu: { ru: "nur bis dorthin · только до", en: "nur bis dorthin · just up to it" },
+  zu: { ru: "nur bis dorthin · только до места, не внутрь и не на него", en: "nur bis dorthin · just up to it, not into or onto it" },
   aus: { ru: "heraus · изнутри", en: "heraus · out of it, from inside" },
-  von: { ru: "nur von dort · просто оттуда", en: "nur von dort · from there, not from inside" },
-  // Bahnhof-type cards (an · zu · von): shown when an den / an die was picked for Wohin
-  normal: { ru: "so sagt man · так говорят", en: "so sagt man · that's how you say it" },
-  unueblich: { ru: "unüblich · так обычно не говорят", en: "unüblich · not usual" }
+  von: { ru: "nur von dort · просто оттуда, не изнутри", en: "nur von dort · from there, not from inside" }
 };
 
 window.ORTS_KATEGORIEN = {
@@ -160,6 +157,62 @@ window.ORTSPRAEPOSITIONEN = [
     wohin: "ins",
     woher: "aus dem"
   },
+  {
+    id: "kueche",
+    noun: "Küche",
+    article: "die",
+    gender: "f",
+    translation: { ru: "кухня", en: "kitchen" },
+    cat: "raum",
+    wo: "in der",
+    wohin: "in die",
+    woher: "aus der"
+  },
+  {
+    id: "stadt",
+    noun: "Stadt",
+    article: "die",
+    gender: "f",
+    translation: { ru: "город (поехать в город, в центр)", en: "town (going into town)" },
+    cat: "raum",
+    wo: "in der",
+    wohin: "in die",
+    woher: "aus der",
+    lead: { wohin: "Ich fahre" },
+    note: {
+      ru: "Не помещение, но так же: in der · in die · aus der.",
+      en: "Not a room, but the same pattern: in der · in die · aus der."
+    }
+  },
+  {
+    id: "urlaub",
+    noun: "Urlaub",
+    article: "der",
+    gender: "m",
+    translation: { ru: "отпуск", en: "holiday, vacation" },
+    cat: "raum",
+    wo: "im",
+    wohin: "in den",
+    woher: "aus dem",
+    lead: { wohin: "Ich fahre" },
+    note: {
+      ru: "Не помещение, но так же: im · in den · aus dem.",
+      en: "Not a room, but the same pattern: im · in den · aus dem."
+    },
+    alt: { woher: ["vom"] }
+  },
+  {
+    id: "bett",
+    noun: "Bett",
+    article: "das",
+    gender: "n",
+    translation: { ru: "кровать (в постели)", en: "bed (in bed)" },
+    cat: "raum",
+    wo: "im",
+    wohin: "ins",
+    woher: "aus dem",
+    lead: { wo: "Ich liege", woher: "Ich springe" }
+  },
 
   // ── Stadt / Land ohne Artikel: in / nach / aus ──
   {
@@ -283,7 +336,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "an den",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "meer",
@@ -294,7 +348,9 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "ans",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] },
+    lead: { wohin: "Ich fahre" }
   },
   {
     id: "see",
@@ -305,7 +361,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "an den",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "fluss",
@@ -316,18 +373,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "an den",
-    woher: "vom"
-  },
-  {
-    id: "kueste",
-    noun: "Küste",
-    article: "die",
-    gender: "f",
-    translation: { ru: "побережье", en: "coast" },
-    cat: "kontakt",
-    wo: "an der",
-    wohin: "an die",
-    woher: "von der"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "fenster",
@@ -338,7 +385,10 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "ans",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] },
+    lead: { wo: "Ich stehe", woher: "Ich gehe" },
+    forms: { woher: "Fenster weg" }
   },
   {
     id: "tisch",
@@ -349,42 +399,22 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "kontakt",
     wo: "am",
     wohin: "an den",
-    woher: "vom"
-  },
-  {
-    id: "atlantik",
-    noun: "Atlantik",
-    article: "der",
-    gender: "m",
-    translation: { ru: "Атлантический океан", en: "Atlantic Ocean" },
-    cat: "kontakt",
-    wo: "am",
-    wohin: "an den",
     woher: "vom",
-    lead: { wohin: "Ich fahre" }
+    lead: { wo: "Ich sitze", wohin: "Ich setze mich", woher: "Ich stehe" },
+    forms: { woher: "Tisch auf" }
   },
   {
     id: "ostsee",
     noun: "Ostsee",
     article: "die",
     gender: "f",
-    translation: { ru: "Балтийское море", en: "the Baltic Sea" },
+    translation: { ru: "Балтийское море (на побережье)", en: "the Baltic Sea (at the seaside)" },
     cat: "kontakt",
     wo: "an der",
     wohin: "an die",
     woher: "von der",
-    lead: { wohin: "Ich fahre" }
-  },
-  {
-    id: "supermarkt-am",
-    noun: "Supermarkt",
-    article: "der",
-    gender: "m",
-    translation: { ru: "супермаркет (прямо у здания)", en: "supermarket (right outside)" },
-    cat: "anzu",
-    wo: "am",
-    wohin: "zum",
-    woher: "vom"
+    lead: { wohin: "Ich fahre" },
+    alt: { wohin: ["zur"] }
   },
 
   // ── Offene Fläche: auf / auf / von ──
@@ -397,7 +427,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "flaeche",
     wo: "auf dem",
     wohin: "auf den",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "spielplatz",
@@ -408,7 +439,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "flaeche",
     wo: "auf dem",
     wohin: "auf den",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "markt",
@@ -419,7 +451,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "flaeche",
     wo: "auf dem",
     wohin: "auf den",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["zum"] }
   },
   {
     id: "balkon",
@@ -437,7 +470,7 @@ window.ORTSPRAEPOSITIONEN = [
     noun: "Straße",
     article: "die",
     gender: "f",
-    translation: { ru: "улица (на улице, снаружи)", en: "street (out on the street)" },
+    translation: { ru: "улица (на дороге, не адрес)", en: "street (on the road, not an address)" },
     cat: "flaeche",
     wo: "auf der",
     wohin: "auf die",
@@ -453,7 +486,8 @@ window.ORTSPRAEPOSITIONEN = [
     wo: "auf der",
     wohin: "auf die",
     woher: "von der",
-    lead: { wohin: "Ich fahre" }
+    lead: { wohin: "Ich fahre" },
+    alt: { wohin: ["zur"] }
   },
   {
     id: "berg",
@@ -582,7 +616,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "person",
     wo: "beim",
     wohin: "zum",
-    woher: "vom"
+    woher: "vom",
+    alt: { wo: ["im"], wohin: ["ins"], woher: ["aus dem"] }
   },
   {
     id: "arbeit",
@@ -601,11 +636,12 @@ window.ORTSPRAEPOSITIONEN = [
     noun: "Supermarkt",
     article: "der",
     gender: "m",
-    translation: { ru: "супермаркет (где-то рядом, в районе)", en: "supermarket (somewhere nearby)" },
+    translation: { ru: "супермаркет (у супермаркета, не внутри)", en: "supermarket (by the supermarket, not inside)" },
     cat: "person",
     wo: "beim",
     wohin: "zum",
-    woher: "vom"
+    woher: "vom",
+    alt: { wo: ["am"] }
   },
   {
     id: "chefin",
@@ -638,7 +674,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "person",
     wo: "bei der",
     wohin: "zur",
-    woher: "von der"
+    woher: "von der",
+    alt: { wo: ["in der"], wohin: ["in die"], woher: ["aus der"] }
   },
   {
     id: "grosseltern",
@@ -661,7 +698,7 @@ window.ORTSPRAEPOSITIONEN = [
     wo: "bei der",
     wohin: "zur",
     woher: "von der",
-    alt: { wo: ["auf der"] }
+    alt: { wo: ["auf der"], wohin: ["auf die"] }
   },
   {
     id: "hochzeit",
@@ -673,7 +710,7 @@ window.ORTSPRAEPOSITIONEN = [
     wo: "bei der",
     wohin: "zur",
     woher: "von der",
-    alt: { wo: ["auf der"] }
+    alt: { wo: ["auf der"], wohin: ["auf die"] }
   },
 
   // ── Ausnahmen: immer in ──
@@ -731,7 +768,8 @@ window.ORTSPRAEPOSITIONEN = [
     wo: "in den",
     wohin: "in die",
     woher: "aus den",
-    forms: { wo: "Bergen", wohin: "Berge", woher: "Bergen" }
+    forms: { wo: "Bergen", wohin: "Berge", woher: "Bergen" },
+    lead: { wohin: "Ich fahre" }
   },
   {
     id: "alpen",
@@ -782,7 +820,21 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "anzu",
     wo: "am",
     wohin: "zum",
-    woher: "vom"
+    woher: "vom",
+    alt: { wohin: ["an den"] }
+  },
+  {
+    id: "flughafen",
+    noun: "Flughafen",
+    article: "der",
+    gender: "m",
+    translation: { ru: "аэропорт (в аэропорту: рейс, встреча)", en: "airport (flight, meeting point)" },
+    cat: "anzu",
+    wo: "am",
+    wohin: "zum",
+    woher: "vom",
+    lead: { wohin: "Ich fahre" },
+    alt: { wo: ["auf dem"] }
   },
   {
     id: "haltestelle",
@@ -793,7 +845,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "anzu",
     wo: "an der",
     wohin: "zur",
-    woher: "von der"
+    woher: "von der",
+    alt: { wohin: ["an die"] }
   },
   {
     id: "tankstelle",
@@ -804,7 +857,8 @@ window.ORTSPRAEPOSITIONEN = [
     cat: "anzu",
     wo: "an der",
     wohin: "zur",
-    woher: "von der"
+    woher: "von der",
+    alt: { wohin: ["an die"] }
   },
   {
     id: "kasse",

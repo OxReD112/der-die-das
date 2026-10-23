@@ -177,8 +177,7 @@ function rec(c) {
   if (!state.cards[c.id]) state.cards[c.id] = { level: 0, due: day() };
   return state.cards[c.id];
 }
-let hintsUsed = 0,
-  typoUndo = null;
+let hintsUsed = 0;
 let queue = [],
   idx = 0,
   current = null,
@@ -196,7 +195,8 @@ function normalize(s) {
 // ===== TYPO TOLERANCE (2026-09-25, see Documentation/DECISIONS.md) =====
 // Only for words at level 2+. Levels 0-1 stay strict (exact answer only).
 // A close answer never counts as right. It gets a hint (red frame + shake, text stays) and up to 2 more tries.
-// After that it is wrong; the "Nur Tippfehler" button keeps the level and brings the word back tomorrow.
+// After that it is wrong and the word starts again from level 0, like any mistake
+// (the "Nur Tippfehler" button that kept the level was removed 2026-10-23, author's decision).
 const TOLERANT_FROM_LEVEL = 2,
   MAX_HINTS = 2;
 // Hint texts: short, informal, kind. One picked at random.
@@ -430,13 +430,9 @@ function render() {
   $("translation").textContent = getTranslation(current, "sentenceTranslation");
   $("answerInput").value = "";
   hintsUsed = 0;
-  typoUndo = null;
   $("answerInput").classList.remove("almost", "nudge");
   $("almostHint").classList.remove("show");
   $("almostHint").textContent = "";
-  $("typoBtn").textContent = "Nur Tippfehler";
-  $("typoBtn").disabled = false;
-  $("typoBtn").classList.remove("done");
   $("question").classList.remove("hidden");
   $("feedback").className = "feedback";
   $("feedbackShell").className = "feedbackShell";
@@ -557,8 +553,6 @@ function check() {
       completed++;
     }
   } else {
-    typoUndo = tolerant ? { id: current.id, level: r.level } : null;
-    if (typoUndo) $("feedbackShell").classList.add("canTypo");
     failedToday.add(current.id);
     r.level = 0;
     r.due = day();
@@ -668,28 +662,6 @@ function next() {
   idx++;
   render();
 }
-// "Nur Tippfehler": undo the reset. The word keeps its level and comes back TOMORROW as a check
-// (not after its level's interval). Tomorrow correct -> it moves up normally.
-function markTypo() {
-  if (!typoUndo || !current || typoUndo.id !== current.id) return;
-  const r = rec(current);
-  r.level = typoUndo.level;
-  r.due = add(1);
-  failedToday.delete(current.id);
-  const j = queue.findIndex((c, k) => k > idx && c.id === current.id);
-  if (j > -1) queue.splice(j, 1);
-  if (!closedToday.has(current.id)) {
-    closedToday.add(current.id);
-    completed++;
-  }
-  typoUndo = null;
-  save();
-  publishWortschatzStatus();
-  $("typoBtn").textContent = "Kommt morgen wieder";
-  $("typoBtn").disabled = true;
-  $("typoBtn").classList.add("done");
-}
-$("typoBtn").onclick = markTypo;
 $("addWords").onclick = () => {
   if (newWordsLeft()) addFive();
   else if (window.WortschatzCollectionWindow) WortschatzCollectionWindow.open();

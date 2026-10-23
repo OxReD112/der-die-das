@@ -738,6 +738,12 @@ html:not(.is-touch) #check {
   text-decoration-color: var(--red);
   text-decoration-thickness: 1.5px;
 }
+/* „auch: von + Dativ“ - the other accepted pair (sprechen, erzählen) */
+.also-line {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
 .example {
   margin-top: 24px;
   font-size: 17px;
