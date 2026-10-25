@@ -906,8 +906,8 @@
   {
     "id": "adjective-081",
     "word": "bekannt",
-    "translation_ru": "известный; общеизвестный",
-    "translation_en": "known; well-known",
+    "translation_ru": "известный; общеизвестный; знакомый",
+    "translation_en": "known; well-known; acquainted, familiar",
     "parts_of_speech": [
       "Adjektiv",
       "Adverb"
@@ -934,10 +934,19 @@
         "example_en": "The news is already known.",
         "example_cloze": "Die Nachricht ist schon {{c1::bekannt}}.",
         "example_usage": "Prädikativ"
+      },
+      {
+        "example_de": "Bist du eigentlich mit unserem neuen Nachbarn bekannt?",
+        "example_ru": "Ты вообще знаком с нашим новым соседом?",
+        "example_en": "Are you actually acquainted with our new neighbour?",
+        "example_cloze": "Bist du eigentlich mit unserem neuen Nachbarn {{c1::bekannt}}?",
+        "example_usage": "Prädikativ"
       }
     ],
-    "usage_note_ru": "Чаще определение или сказуемое. bekanntlich — отдельное слово «как известно».",
-    "usage_note_en": "Usually attributive or predicative. bekanntlich is a separate word meaning “as is known”."
+    "usage_note_ru": "Чаще определение или сказуемое. Устойчиво: mit jemandem bekannt sein — быть знакомым с кем-либо; jemanden mit jemandem bekannt machen — знакомить кого-либо с кем-либо; jemandem bekannt vorkommen — казаться знакомым. bekanntlich — отдельное слово «как известно».",
+    "usage_note_en": "Usually attributive or predicative. Set phrases: mit jemandem bekannt sein — to be acquainted with someone; jemanden mit jemandem bekannt machen — to introduce someone to someone; jemandem bekannt vorkommen — to seem familiar to someone. bekanntlich is a separate word meaning “as is known”.",
+    "participle_of": "bekennen",
+    "von_agent_ok": true
   },
   {
     "id": "adjective-adverb-024",
@@ -17257,7 +17266,10 @@
       }
     ],
     "usage_note_ru": "Также причастие от auszeichnen — наградить: Der Film wurde ausgezeichnet. — Фильм получил награду.",
-    "usage_note_en": "Also the participle of auszeichnen — to award: Der Film wurde ausgezeichnet. — The film won an award."
+    "usage_note_en": "Also the participle of auszeichnen — to award: Der Film wurde ausgezeichnet. — The film won an award.",
+    "participle_of": "auszeichnen",
+    "meaning_differs": true,
+    "participle_default": "adjective"
   },
   {
     "id": "adjective-180",
@@ -18890,6 +18902,3423 @@
         "example_ru": "Это был немалый сюрприз.",
         "example_en": "That was quite a surprise.",
         "example_cloze": "Das war eine {{c1::ziemliche}} Überraschung.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-446",
+    "word": "allergisch",
+    "translation_ru": "аллергический, страдающий аллергией; болезненно, в штыки (реагировать); не выносящий (чего-либо, перен.)",
+    "translation_en": "allergic; (react) badly, touchily; unable to stand (something, fig.)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "allergisch",
+    "default_example": "adj",
+    "search_forms": [
+      "allergische",
+      "allergischem",
+      "allergischen",
+      "allergischer",
+      "allergisches"
+    ],
+    "example_de": "Nach dem Bienenstich hatte mein Sohn eine allergische Reaktion.",
+    "example_ru": "После укуса пчелы у моего сына была аллергическая реакция.",
+    "example_en": "After the bee sting my son had an allergic reaction.",
+    "example_cloze": "Nach dem Bienenstich hatte mein Sohn eine {{c1::allergische}} Reaktion.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Wenn man ihn nach seinem Alter fragt, reagiert er sofort allergisch.",
+        "example_ru": "Когда его спрашивают о возрасте, он сразу реагирует в штыки.",
+        "example_en": "Whenever you ask him about his age, he reacts badly straight away.",
+        "example_cloze": "Wenn man ihn nach seinem Alter fragt, reagiert er sofort {{c1::allergisch}}.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "allergisch gegen etwas sein — иметь аллергию на что-либо; переносно — не выносить чего-либо.",
+    "usage_note_en": "allergisch gegen etwas sein — to be allergic to something; figuratively — to be unable to stand something."
+  },
+  {
+    "id": "adjective-adverb-447",
+    "word": "auffallend",
+    "translation_ru": "поразительно, на редкость; поразительный, примечательный; заметный, броский, бросающийся в глаза, броско",
+    "translation_en": "strikingly, remarkably; striking, remarkable; conspicuous, eye-catching, conspicuously",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "auffallend",
+    "default_example": "adv",
+    "search_forms": [
+      "auffallende",
+      "auffallendem",
+      "auffallenden",
+      "auffallender",
+      "auffallendes"
+    ],
+    "example_de": "Die Kinder waren heute auffallend ruhig.",
+    "example_ru": "Дети сегодня были на редкость спокойными.",
+    "example_en": "The children were remarkably quiet today.",
+    "example_cloze": "Die Kinder waren heute {{c1::auffallend}} ruhig.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Sie trug einen auffallenden roten Mantel.",
+        "example_ru": "На ней было броское красное пальто.",
+        "example_en": "She was wearing a striking red coat.",
+        "example_cloze": "Sie trug einen {{c1::auffallenden}} roten Mantel.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Не путать с формами глагола auffallen: Das ist mir aufgefallen. — Я это заметил.",
+    "usage_note_en": "Not to be confused with forms of the verb auffallen: Das ist mir aufgefallen. — I noticed that."
+  },
+  {
+    "id": "adjective-adverb-448",
+    "word": "beleidigt",
+    "translation_ru": "обиженный; обиженно",
+    "translation_en": "offended, hurt; huffily, in a hurt tone",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "beleidigt",
+    "default_example": "adj",
+    "search_forms": [
+      "beleidigte",
+      "beleidigtem",
+      "beleidigten",
+      "beleidigter",
+      "beleidigtes"
+    ],
+    "example_de": "Sei nicht beleidigt, ich habe es nicht böse gemeint.",
+    "example_ru": "Не обижайся, я не со зла.",
+    "example_en": "Don't be offended, I didn't mean any harm.",
+    "example_cloze": "Sei nicht {{c1::beleidigt}}, ich habe es nicht böse gemeint.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "„Dann eben nicht“, sagte sie beleidigt und ging hinaus.",
+        "example_ru": "«Ну и не надо», — обиженно сказала она и вышла.",
+        "example_en": "‘Fine, then don't,’ she said huffily and went out.",
+        "example_cloze": "„Dann eben nicht“, sagte sie {{c1::beleidigt}} und ging hinaus.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Также форма глагола beleidigen: Er hat mich beleidigt. — Он меня оскорбил.",
+    "usage_note_en": "Also a form of the verb beleidigen: Er hat mich beleidigt. — He insulted me."
+  },
+  {
+    "id": "adjective-adverb-449",
+    "word": "erneut",
+    "translation_ru": "снова, вновь, повторно; повторный, новый",
+    "translation_en": "again, once more; renewed, repeated",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "erneut",
+    "default_example": "adv",
+    "search_forms": [
+      "erneute",
+      "erneutem",
+      "erneuten",
+      "erneuter",
+      "erneutes"
+    ],
+    "example_de": "Der Zug hat heute erneut Verspätung.",
+    "example_ru": "Поезд сегодня снова опаздывает.",
+    "example_en": "The train is late again today.",
+    "example_cloze": "Der Zug hat heute {{c1::erneut}} Verspätung.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach einem erneuten Versuch hat es endlich geklappt.",
+        "example_ru": "После повторной попытки всё наконец получилось.",
+        "example_en": "After another attempt it finally worked.",
+        "example_cloze": "Nach einem {{c1::erneuten}} Versuch hat es endlich geklappt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-450",
+    "word": "fürchterlich",
+    "translation_ru": "ужасный, страшный; ужасно, страшно (очень)",
+    "translation_en": "terrible, awful; terribly, awfully",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "fürchterlich",
+    "default_example": "adv",
+    "search_forms": [
+      "fürchterliche",
+      "fürchterlichem",
+      "fürchterlichen",
+      "fürchterlicher",
+      "fürchterliches"
+    ],
+    "example_de": "Heute ist es draußen fürchterlich kalt.",
+    "example_ru": "Сегодня на улице ужасно холодно.",
+    "example_en": "It's terribly cold outside today.",
+    "example_cloze": "Heute ist es draußen {{c1::fürchterlich}} kalt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Gestern Nacht hatten wir ein fürchterliches Gewitter.",
+        "example_ru": "Вчера ночью у нас была страшная гроза.",
+        "example_en": "Last night we had a terrible thunderstorm.",
+        "example_cloze": "Gestern Nacht hatten wir ein {{c1::fürchterliches}} Gewitter.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Разговорное, кроме значения «ужасный, страшный» о бедствии (ein fürchterliches Unglück). Как усилитель может стоять и при приятном: fürchterlich nett — ужасно милый.",
+    "usage_note_en": "Colloquial, except in the sense “terrible, awful” of a disaster (ein fürchterliches Unglück). As an intensifier it can go with positive words too: fürchterlich nett — awfully nice."
+  },
+  {
+    "id": "adjective-adverb-451",
+    "word": "hauptsächlich",
+    "translation_ru": "главным образом, в основном; главный, основной",
+    "translation_en": "mainly, mostly; main, principal",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "hauptsächlich",
+    "default_example": "adv",
+    "search_forms": [
+      "hauptsächliche",
+      "hauptsächlichem",
+      "hauptsächlichen",
+      "hauptsächlicher",
+      "hauptsächliches"
+    ],
+    "example_de": "Im Sommer essen wir hauptsächlich Salat und Obst.",
+    "example_ru": "Летом мы едим в основном салаты и фрукты.",
+    "example_en": "In summer we mainly eat salad and fruit.",
+    "example_cloze": "Im Sommer essen wir {{c1::hauptsächlich}} Salat und Obst.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der hauptsächliche Grund für unseren Umzug war die neue Arbeitsstelle.",
+        "example_ru": "Основной причиной нашего переезда была новая работа.",
+        "example_en": "The main reason for our move was the new job.",
+        "example_cloze": "Der {{c1::hauptsächliche}} Grund für unseren Umzug war die neue Arbeitsstelle.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-452",
+    "word": "hilflos",
+    "translation_ru": "беспомощный; беспомощно; неловкий, неумелый; неловко",
+    "translation_en": "helpless; helplessly; awkward, clumsy; awkwardly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "hilflos",
+    "default_example": "adj",
+    "search_forms": [
+      "hilflose",
+      "hilflosem",
+      "hilflosen",
+      "hilfloser",
+      "hilfloses"
+    ],
+    "example_de": "Ohne meine Brille bin ich völlig hilflos.",
+    "example_ru": "Без очков я совершенно беспомощен.",
+    "example_en": "Without my glasses I'm completely helpless.",
+    "example_cloze": "Ohne meine Brille bin ich völlig {{c1::hilflos}}.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Sie sah sich hilflos um, weil niemand Englisch sprach.",
+        "example_ru": "Она беспомощно огляделась: никто не говорил по-английски.",
+        "example_en": "She looked around helplessly because nobody spoke English.",
+        "example_cloze": "Sie sah sich {{c1::hilflos}} um, weil niemand Englisch sprach.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-453",
+    "word": "indirekt",
+    "translation_ru": "косвенный, непрямой; косвенно, намёками",
+    "translation_en": "indirect; indirectly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "indirekt",
+    "default_example": "adv",
+    "search_forms": [
+      "indirekte",
+      "indirektem",
+      "indirekten",
+      "indirekter",
+      "indirektes"
+    ],
+    "example_de": "Er hat mir indirekt zu verstehen gegeben, dass er kündigen will.",
+    "example_ru": "Он косвенно дал мне понять, что хочет уволиться.",
+    "example_en": "He indirectly let me know that he wants to hand in his notice.",
+    "example_cloze": "Er hat mir {{c1::indirekt}} zu verstehen gegeben, dass er kündigen will.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Im Wohnzimmer haben wir nur indirektes Licht.",
+        "example_ru": "В гостиной у нас только непрямое освещение.",
+        "example_en": "In the living room we only have indirect lighting.",
+        "example_cloze": "Im Wohnzimmer haben wir nur {{c1::indirektes}} Licht.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Грамматика: indirekte Rede — косвенная речь.",
+    "usage_note_en": "Grammar: indirekte Rede — reported speech."
+  },
+  {
+    "id": "adjective-adverb-454",
+    "word": "informell",
+    "translation_ru": "неофициальный, неформальный; неофициально, неформально",
+    "translation_en": "informal, unofficial; informally, unofficially",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "informell",
+    "default_example": "adj",
+    "search_forms": [
+      "informelle",
+      "informellem",
+      "informellen",
+      "informeller",
+      "informelles"
+    ],
+    "example_de": "Nach der Konferenz gab es noch ein informelles Treffen im Café.",
+    "example_ru": "После конференции была ещё неформальная встреча в кафе.",
+    "example_en": "After the conference there was an informal meeting in the café.",
+    "example_cloze": "Nach der Konferenz gab es noch ein {{c1::informelles}} Treffen im Café.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Wir haben uns vorher schon informell geeinigt.",
+        "example_ru": "Мы уже заранее неофициально договорились.",
+        "example_en": "We had already agreed informally beforehand.",
+        "example_cloze": "Wir haben uns vorher schon {{c1::informell}} geeinigt.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Книжное слово.",
+    "usage_note_en": "Formal word."
+  },
+  {
+    "id": "adjective-adverb-455",
+    "word": "mies",
+    "translation_ru": "паршивый, скверный; паршиво, плохо; подлый, гадкий",
+    "translation_en": "lousy, rotten; badly, poorly; mean, nasty",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "mies",
+    "default_example": "adj",
+    "search_forms": [
+      "miese",
+      "miesem",
+      "miesen",
+      "mieser",
+      "mieses"
+    ],
+    "example_de": "Bei diesem miesen Wetter bleibe ich lieber zu Hause.",
+    "example_ru": "В такую паршивую погоду я лучше останусь дома.",
+    "example_en": "In this lousy weather I'd rather stay at home.",
+    "example_cloze": "Bei diesem {{c1::miesen}} Wetter bleibe ich lieber zu Hause.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Firma bezahlt ihre Leute ziemlich mies.",
+        "example_ru": "Фирма платит своим сотрудникам довольно паршиво.",
+        "example_en": "The company pays its staff pretty badly.",
+        "example_cloze": "Die Firma bezahlt ihre Leute ziemlich {{c1::mies}}.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Разговорное; в значениях «скверный», «подлый» — неодобрительное. sich mies fühlen — плохо себя чувствовать.",
+    "usage_note_en": "Colloquial; in the senses “lousy” and “mean” — disapproving. sich mies fühlen — to feel rotten."
+  },
+  {
+    "id": "adjective-adverb-456",
+    "word": "monatelang",
+    "translation_ru": "месяцами, в течение многих месяцев; многомесячный",
+    "translation_en": "for months; months-long, lasting months",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "monatelang",
+    "default_example": "adv",
+    "search_forms": [
+      "monatelange",
+      "monatelangem",
+      "monatelangen",
+      "monatelanger",
+      "monatelanges"
+    ],
+    "example_de": "Wir haben monatelang auf die Genehmigung gewartet.",
+    "example_ru": "Мы месяцами ждали разрешения.",
+    "example_en": "We waited for months for the permit.",
+    "example_cloze": "Wir haben {{c1::monatelang}} auf die Genehmigung gewartet.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach monatelangem Streit haben sich die Nachbarn endlich versöhnt.",
+        "example_ru": "После многомесячной ссоры соседи наконец помирились.",
+        "example_en": "After months of arguing the neighbours finally made up.",
+        "example_cloze": "Nach {{c1::monatelangem}} Streit haben sich die Nachbarn endlich versöhnt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-457",
+    "word": "stundenlang",
+    "translation_ru": "часами, в течение нескольких часов; многочасовой",
+    "translation_en": "for hours; hours-long, lasting hours",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "stundenlang",
+    "default_example": "adv",
+    "search_forms": [
+      "stundenlange",
+      "stundenlangem",
+      "stundenlangen",
+      "stundenlanger",
+      "stundenlanges"
+    ],
+    "example_de": "Wegen eines Unfalls standen wir stundenlang im Stau.",
+    "example_ru": "Из-за аварии мы часами стояли в пробке.",
+    "example_en": "Because of an accident we were stuck in traffic for hours.",
+    "example_cloze": "Wegen eines Unfalls standen wir {{c1::stundenlang}} im Stau.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach einer stundenlangen Diskussion haben wir endlich eine Lösung gefunden.",
+        "example_ru": "После многочасовой дискуссии мы наконец нашли решение.",
+        "example_en": "After a discussion lasting hours we finally found a solution.",
+        "example_cloze": "Nach einer {{c1::stundenlangen}} Diskussion haben wir endlich eine Lösung gefunden.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-458",
+    "word": "tagelang",
+    "translation_ru": "несколько дней подряд, днями; многодневный",
+    "translation_en": "for days; days-long, lasting days",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "tagelang",
+    "default_example": "adv",
+    "search_forms": [
+      "tagelange",
+      "tagelangem",
+      "tagelangen",
+      "tagelanger",
+      "tagelanges"
+    ],
+    "example_de": "Nach dem Umzug haben wir tagelang Kisten ausgepackt.",
+    "example_ru": "После переезда мы несколько дней подряд распаковывали коробки.",
+    "example_en": "After the move we spent days unpacking boxes.",
+    "example_cloze": "Nach dem Umzug haben wir {{c1::tagelang}} Kisten ausgepackt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach tagelanger Suche hat die Polizei den entlaufenen Hund gefunden.",
+        "example_ru": "После многодневных поисков полиция нашла сбежавшую собаку.",
+        "example_en": "After a search lasting days the police found the runaway dog.",
+        "example_cloze": "Nach {{c1::tagelanger}} Suche hat die Polizei den entlaufenen Hund gefunden.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-459",
+    "word": "wochenlang",
+    "translation_ru": "неделями, несколько недель подряд; многонедельный",
+    "translation_en": "for weeks; weeks-long, lasting weeks",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "wochenlang",
+    "default_example": "adv",
+    "search_forms": [
+      "wochenlange",
+      "wochenlangem",
+      "wochenlangen",
+      "wochenlanger",
+      "wochenlanges"
+    ],
+    "example_de": "Nach der Operation durfte mein Vater wochenlang keinen Sport machen.",
+    "example_ru": "После операции моему отцу неделями нельзя было заниматься спортом.",
+    "example_en": "After the operation my father wasn't allowed to do any sport for weeks.",
+    "example_cloze": "Nach der Operation durfte mein Vater {{c1::wochenlang}} keinen Sport machen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach wochenlanger Hitze hat es endlich wieder geregnet.",
+        "example_ru": "После многонедельной жары наконец снова пошёл дождь.",
+        "example_en": "After weeks of heat it finally rained again.",
+        "example_cloze": "Nach {{c1::wochenlanger}} Hitze hat es endlich wieder geregnet.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-460",
+    "word": "abscheulich",
+    "translation_ru": "отвратительный, мерзкий; отвратительно, мерзко; гнусный (о поступке); ужасно, жутко (очень)",
+    "translation_en": "disgusting, revolting; disgustingly, revoltingly; abominable, vile; terribly, awfully",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "abscheulich",
+    "default_example": "adj",
+    "search_forms": [
+      "abscheuliche",
+      "abscheulichem",
+      "abscheulichen",
+      "abscheulicher",
+      "abscheuliches"
+    ],
+    "example_de": "Wer hat dieses abscheuliche Bild über das Sofa gehängt?",
+    "example_ru": "Кто повесил эту отвратительную картину над диваном?",
+    "example_en": "Who hung this revolting picture above the sofa?",
+    "example_cloze": "Wer hat dieses {{c1::abscheuliche}} Bild über das Sofa gehängt?",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Das Essen in der Kantine riecht heute wirklich abscheulich.",
+        "example_ru": "Еда в столовой сегодня отвратительно пахнет.",
+        "example_en": "The food in the canteen smells really revolting today.",
+        "example_cloze": "Das Essen in der Kantine riecht heute wirklich {{c1::abscheulich}}.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «ужасно, очень» — разговорное: abscheulich teuer.",
+    "usage_note_en": "In the sense “terribly, very” — colloquial: abscheulich teuer."
+  },
+  {
+    "id": "adjective-adverb-461",
+    "word": "absichtlich",
+    "translation_ru": "нарочно, намеренно; намеренный, умышленный",
+    "translation_en": "on purpose, deliberately; intentional, deliberate",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "absichtlich",
+    "default_example": "adv",
+    "search_forms": [
+      "absichtliche",
+      "absichtlichem",
+      "absichtlichen",
+      "absichtlicher",
+      "absichtliches"
+    ],
+    "example_de": "Entschuldigung, ich habe dich nicht absichtlich geschubst!",
+    "example_ru": "Извини, я толкнул тебя не нарочно!",
+    "example_en": "Sorry, I didn't push you on purpose!",
+    "example_cloze": "Entschuldigung, ich habe dich nicht {{c1::absichtlich}} geschubst!",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Schiedsrichter hat das absichtliche Foul sofort mit Rot bestraft.",
+        "example_ru": "Судья сразу наказал за умышленный фол красной карточкой.",
+        "example_en": "The referee immediately punished the deliberate foul with a red card.",
+        "example_cloze": "Der Schiedsrichter hat das {{c1::absichtliche}} Foul sofort mit Rot bestraft.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-462",
+    "word": "akkurat",
+    "translation_ru": "аккуратный, тщательный, точный; аккуратно, тщательно, точно",
+    "translation_en": "meticulous, neat, precise; neatly, meticulously, precisely",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "akkurat",
+    "default_example": "adj",
+    "search_forms": [
+      "akkurate",
+      "akkuratem",
+      "akkuraten",
+      "akkurater",
+      "akkurates"
+    ],
+    "example_de": "Unser Buchhalter ist sehr akkurat und macht fast nie Fehler.",
+    "example_ru": "Наш бухгалтер очень аккуратен и почти никогда не ошибается.",
+    "example_en": "Our accountant is very meticulous and hardly ever makes mistakes.",
+    "example_cloze": "Unser Buchhalter ist sehr {{c1::akkurat}} und macht fast nie Fehler.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Sie hat die Servietten akkurat gefaltet und auf den Tisch gelegt.",
+        "example_ru": "Она аккуратно сложила салфетки и положила их на стол.",
+        "example_en": "She folded the napkins neatly and put them on the table.",
+        "example_cloze": "Sie hat die Servietten {{c1::akkurat}} gefaltet und auf den Tisch gelegt.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Регионально как наречие — «именно, ровно»: akkurat um acht Uhr — ровно в восемь.",
+    "usage_note_en": "Regionally as an adverb — “exactly, precisely”: akkurat um acht Uhr — at eight o'clock sharp."
+  },
+  {
+    "id": "adjective-adverb-463",
+    "word": "aufdringlich",
+    "translation_ru": "навязчивый, назойливый; навязчиво, назойливо; резкий, слишком сильный (о запахе)",
+    "translation_en": "pushy, intrusive; pushily, intrusively; overpowering (of a smell)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "aufdringlich",
+    "default_example": "adj",
+    "search_forms": [
+      "aufdringliche",
+      "aufdringlichem",
+      "aufdringlichen",
+      "aufdringlicher",
+      "aufdringliches"
+    ],
+    "example_de": "Am Strand wurden wir ständig von aufdringlichen Händlern angesprochen.",
+    "example_ru": "На пляже к нам постоянно приставали навязчивые торговцы.",
+    "example_en": "On the beach we were constantly approached by pushy vendors.",
+    "example_cloze": "Am Strand wurden wir ständig von {{c1::aufdringlichen}} Händlern angesprochen.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Kellner wollte uns ziemlich aufdringlich zu einem Nachtisch überreden.",
+        "example_ru": "Официант довольно навязчиво пытался уговорить нас на десерт.",
+        "example_en": "The waiter tried rather pushily to talk us into a dessert.",
+        "example_cloze": "Der Kellner wollte uns ziemlich {{c1::aufdringlich}} zu einem Nachtisch überreden.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-464",
+    "word": "auffällig",
+    "translation_ru": "заметный, бросающийся в глаза, броский; заметно, броско; необычный, подозрительный; необычно, подозрительно",
+    "translation_en": "noticeable, eye-catching, flashy; noticeably, conspicuously; unusual, suspicious; unusually, suspiciously",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "auffällig",
+    "default_example": "adj",
+    "search_forms": [
+      "auffällige",
+      "auffälligem",
+      "auffälligen",
+      "auffälliger",
+      "auffälliges"
+    ],
+    "example_de": "Mit ihren auffälligen grünen Haaren sieht man sie schon von Weitem.",
+    "example_ru": "С её броскими зелёными волосами её видно издалека.",
+    "example_en": "With her eye-catching green hair you can spot her from far away.",
+    "example_cloze": "Mit ihren {{c1::auffälligen}} grünen Haaren sieht man sie schon von Weitem.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Mann ging auffällig langsam an unserem Haus vorbei.",
+        "example_ru": "Мужчина подозрительно медленно прошёл мимо нашего дома.",
+        "example_en": "The man walked suspiciously slowly past our house.",
+        "example_cloze": "Der Mann ging {{c1::auffällig}} langsam an unserem Haus vorbei.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В медицине и педагогике — «с отклонениями (от нормы)»: ein auffälliger Befund.",
+    "usage_note_en": "In medicine and education — “abnormal, showing problems”: ein auffälliger Befund."
+  },
+  {
+    "id": "adjective-adverb-465",
+    "word": "augenscheinlich",
+    "translation_ru": "очевидно, по-видимому; очевидный, явный",
+    "translation_en": "evidently, apparently; evident, obvious",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "augenscheinlich",
+    "default_example": "adv",
+    "search_forms": [
+      "augenscheinliche",
+      "augenscheinlichem",
+      "augenscheinlichen",
+      "augenscheinlicher",
+      "augenscheinliches"
+    ],
+    "example_de": "Der Hund hat augenscheinlich den ganzen Kuchen gefressen.",
+    "example_ru": "Собака, по-видимому, съела весь пирог.",
+    "example_en": "The dog has evidently eaten the whole cake.",
+    "example_cloze": "Der Hund hat {{c1::augenscheinlich}} den ganzen Kuchen gefressen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Trotz des augenscheinlichen Erfolgs war das Team nicht zufrieden.",
+        "example_ru": "Несмотря на очевидный успех, команда была недовольна.",
+        "example_en": "Despite the evident success, the team was not satisfied.",
+        "example_cloze": "Trotz des {{c1::augenscheinlichen}} Erfolgs war das Team nicht zufrieden.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Возвышенное. Как наречие часто означает вывод по внешним признакам — «судя по всему».",
+    "usage_note_en": "Elevated. As an adverb it often expresses a conclusion from appearances — “by the look of it”."
+  },
+  {
+    "id": "adjective-adverb-466",
+    "word": "ausdrücklich",
+    "translation_ru": "прямо, ясно, категорически; прямой, явный, недвусмысленный",
+    "translation_en": "explicitly, expressly; explicit, express",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "ausdrücklich",
+    "default_example": "adv",
+    "search_forms": [
+      "ausdrückliche",
+      "ausdrücklichem",
+      "ausdrücklichen",
+      "ausdrücklicher",
+      "ausdrückliches"
+    ],
+    "example_de": "Ich habe dir ausdrücklich gesagt, dass du das Fenster schließen sollst.",
+    "example_ru": "Я же прямо сказал тебе закрыть окно.",
+    "example_en": "I told you explicitly to close the window.",
+    "example_cloze": "Ich habe dir {{c1::ausdrücklich}} gesagt, dass du das Fenster schließen sollst.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Das Foto wurde mit ausdrücklicher Erlaubnis der Eltern veröffentlicht.",
+        "example_ru": "Фотографию опубликовали с прямого согласия родителей.",
+        "example_en": "The photo was published with the parents' express permission.",
+        "example_cloze": "Das Foto wurde mit {{c1::ausdrücklicher}} Erlaubnis der Eltern veröffentlicht.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-467",
+    "word": "eingehend",
+    "translation_ru": "подробно, тщательно; подробный, тщательный, обстоятельный",
+    "translation_en": "in detail, thoroughly; detailed, thorough",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "eingehend",
+    "default_example": "adv",
+    "search_forms": [
+      "eingehende",
+      "eingehendem",
+      "eingehenden",
+      "eingehender",
+      "eingehendes"
+    ],
+    "example_de": "Bevor wir den Mietvertrag unterschreiben, sollten wir ihn eingehend lesen.",
+    "example_ru": "Прежде чем подписывать договор аренды, нам стоит его тщательно прочитать.",
+    "example_en": "Before we sign the tenancy agreement, we should read it thoroughly.",
+    "example_cloze": "Bevor wir den Mietvertrag unterschreiben, sollten wir ihn {{c1::eingehend}} lesen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Bericht enthält eine eingehende Beschreibung aller Schäden am Haus.",
+        "example_ru": "Отчёт содержит подробное описание всех повреждений дома.",
+        "example_en": "The report contains a detailed description of all the damage to the house.",
+        "example_cloze": "Der Bericht enthält eine {{c1::eingehende}} Beschreibung aller Schäden am Haus.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "В значении «входящий» (eingehende Anrufe, Post — входящие звонки, почта) — связано с глаголом eingehen.",
+    "usage_note_en": "In the meaning 'incoming' (eingehende Anrufe, Post — incoming calls, post) — related to the verb eingehen."
+  },
+  {
+    "id": "adjective-adverb-468",
+    "word": "einwandfrei",
+    "translation_ru": "безупречный, безукоризненный; безупречно, без сбоев; неоспоримый, однозначный; неоспоримо, однозначно",
+    "translation_en": "perfect, impeccable; perfectly, flawlessly; indisputable, clear; indisputably, beyond doubt",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "einwandfrei",
+    "default_example": "adj",
+    "search_forms": [
+      "einwandfreie",
+      "einwandfreiem",
+      "einwandfreien",
+      "einwandfreier",
+      "einwandfreies"
+    ],
+    "example_de": "Der gebrauchte Wagen war in einwandfreiem Zustand.",
+    "example_ru": "Подержанная машина была в безупречном состоянии.",
+    "example_en": "The used car was in perfect condition.",
+    "example_cloze": "Der gebrauchte Wagen war in {{c1::einwandfreiem}} Zustand.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Videoaufnahme zeigt einwandfrei, wer den Unfall verursacht hat.",
+        "example_ru": "Видеозапись однозначно показывает, кто виноват в аварии.",
+        "example_en": "The video recording shows beyond doubt who caused the accident.",
+        "example_cloze": "Die Videoaufnahme zeigt {{c1::einwandfrei}}, wer den Unfall verursacht hat.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "einwandfrei nachweisen, feststellen — неоспоримо доказать, установить.",
+    "usage_note_en": "einwandfrei nachweisen, feststellen — to prove, establish beyond doubt."
+  },
+  {
+    "id": "adjective-adverb-469",
+    "word": "essenziell",
+    "translation_ru": "существенный, крайне важный, необходимый; существенно; незаменимый (об аминокислотах и т. п.)",
+    "translation_en": "essential, vital; substantially, fundamentally; essential (of amino acids etc.)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "essenziell",
+    "default_example": "adj",
+    "search_forms": [
+      "essenzielle",
+      "essenziellem",
+      "essenziellen",
+      "essenzieller",
+      "essenzielles",
+      "essentiell",
+      "essentielle",
+      "essentiellem",
+      "essentiellen",
+      "essentieller",
+      "essentielles"
+    ],
+    "example_de": "Teamfähigkeit ist in diesem Beruf eine essenzielle Voraussetzung.",
+    "example_ru": "В этой профессии умение работать в команде — необходимое условие.",
+    "example_en": "Being a team player is an essential requirement in this job.",
+    "example_cloze": "Teamfähigkeit ist in diesem Beruf eine {{c1::essenzielle}} Voraussetzung.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Ausreichend Schlaf trägt essenziell zu unserer Gesundheit bei.",
+        "example_ru": "Достаточный сон существенно влияет на наше здоровье.",
+        "example_en": "Getting enough sleep contributes substantially to our health.",
+        "example_cloze": "Ausreichend Schlaf trägt {{c1::essenziell}} zu unserer Gesundheit bei.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Также: essentiell. В значении «существенный» — книжное. Не путать с im Wesentlichen — в сущности, в основном.",
+    "usage_note_en": "Also: essentiell. In the meaning 'essential, vital' — formal. Not to be confused with im Wesentlichen — essentially, basically."
+  },
+  {
+    "id": "adjective-adverb-470",
+    "word": "feige",
+    "translation_ru": "трусливый; трусливо; подлый, коварный",
+    "translation_en": "cowardly; in a cowardly way; underhand, cowardly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "feige",
+    "default_example": "adj",
+    "search_forms": [
+      "feigem",
+      "feigen",
+      "feiger",
+      "feiges",
+      "feig"
+    ],
+    "example_de": "Unser feiger Hund versteckt sich bei jedem Gewitter unter dem Bett.",
+    "example_ru": "Наш трусливый пёс при каждой грозе прячется под кровать.",
+    "example_en": "Our cowardly dog hides under the bed whenever there's a thunderstorm.",
+    "example_cloze": "Unser {{c1::feiger}} Hund versteckt sich bei jedem Gewitter unter dem Bett.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Statt mit ihr zu reden, hat er feige per SMS Schluss gemacht.",
+        "example_ru": "Вместо того чтобы поговорить с ней, он трусливо расстался с ней по эсэмэске.",
+        "example_en": "Instead of talking to her, he took the coward's way out and broke up with her by text.",
+        "example_cloze": "Statt mit ihr zu reden, hat er {{c1::feige}} per SMS Schluss gemacht.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Неодобрительное. Также: feig. Не путать с die Feige — инжир.",
+    "usage_note_en": "Disapproving. Also: feig. Not to be confused with die Feige — fig."
+  },
+  {
+    "id": "adjective-adverb-471",
+    "word": "geringfügig",
+    "translation_ru": "незначительный, небольшой; незначительно, слегка",
+    "translation_en": "minor, slight; slightly, marginally",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "geringfügig",
+    "default_example": "adj",
+    "search_forms": [
+      "geringfügige",
+      "geringfügigem",
+      "geringfügigen",
+      "geringfügiger",
+      "geringfügiges"
+    ],
+    "example_de": "Bei dem Auffahrunfall entstanden zum Glück nur geringfügige Schäden.",
+    "example_ru": "К счастью, при столкновении машины получили лишь незначительные повреждения.",
+    "example_en": "Fortunately the rear-end collision caused only minor damage.",
+    "example_cloze": "Bei dem Auffahrunfall entstanden zum Glück nur {{c1::geringfügige}} Schäden.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Miete ist in diesem Jahr nur geringfügig gestiegen.",
+        "example_ru": "Квартплата в этом году выросла лишь незначительно.",
+        "example_en": "The rent has only gone up slightly this year.",
+        "example_cloze": "Die Miete ist in diesem Jahr nur {{c1::geringfügig}} gestiegen.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-472",
+    "word": "hinreichend",
+    "translation_ru": "достаточный; достаточно",
+    "translation_en": "sufficient, adequate; sufficiently, adequately",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "hinreichend",
+    "default_example": "adj",
+    "search_forms": [
+      "hinreichende",
+      "hinreichendem",
+      "hinreichenden",
+      "hinreichender",
+      "hinreichendes"
+    ],
+    "example_de": "Für eine Verurteilung gab es keine hinreichenden Beweise.",
+    "example_ru": "Для обвинительного приговора не было достаточных доказательств.",
+    "example_en": "There was not sufficient evidence for a conviction.",
+    "example_cloze": "Für eine Verurteilung gab es keine {{c1::hinreichenden}} Beweise.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Ist die Wohnung hinreichend groß für eine Familie mit zwei Kindern?",
+        "example_ru": "Достаточно ли велика квартира для семьи с двумя детьми?",
+        "example_en": "Is the flat sufficiently big for a family with two children?",
+        "example_cloze": "Ist die Wohnung {{c1::hinreichend}} groß für eine Familie mit zwei Kindern?",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-473",
+    "word": "kompromisslos",
+    "translation_ru": "бескомпромиссный; бескомпромиссно",
+    "translation_en": "uncompromising; uncompromisingly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "kompromisslos",
+    "default_example": "adj",
+    "search_forms": [
+      "kompromisslose",
+      "kompromisslosem",
+      "kompromisslosen",
+      "kompromissloser",
+      "kompromissloses"
+    ],
+    "example_de": "Die Regisseurin ist für ihren kompromisslosen Stil bekannt.",
+    "example_ru": "Режиссёр известна своим бескомпромиссным стилем.",
+    "example_en": "The director is known for her uncompromising style.",
+    "example_cloze": "Die Regisseurin ist für ihren {{c1::kompromisslosen}} Stil bekannt.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Verein setzt kompromisslos auf junge Spieler aus der eigenen Jugend.",
+        "example_ru": "Клуб бескомпромиссно делает ставку на молодых игроков из собственной академии.",
+        "example_en": "The club relies uncompromisingly on young players from its own youth academy.",
+        "example_cloze": "Der Verein setzt {{c1::kompromisslos}} auf junge Spieler aus der eigenen Jugend.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-474",
+    "word": "leidenschaftlich",
+    "translation_ru": "страстный, пылкий, увлечённый; страстно, горячо, увлечённо",
+    "translation_en": "passionate, ardent, keen; passionately, ardently, enthusiastically",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "leidenschaftlich",
+    "default_example": "adj",
+    "search_forms": [
+      "leidenschaftliche",
+      "leidenschaftlichem",
+      "leidenschaftlichen",
+      "leidenschaftlicher",
+      "leidenschaftliches"
+    ],
+    "example_de": "Seine leidenschaftliche Rede hat das ganze Publikum mitgerissen.",
+    "example_ru": "Его страстная речь увлекла всю публику.",
+    "example_en": "His passionate speech carried the whole audience with it.",
+    "example_cloze": "Seine {{c1::leidenschaftliche}} Rede hat das ganze Publikum mitgerissen.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die beiden Freunde streiten sich jedes Wochenende leidenschaftlich über Fußball.",
+        "example_ru": "Двое друзей каждые выходные горячо спорят о футболе.",
+        "example_en": "The two friends argue passionately about football every weekend.",
+        "example_cloze": "Die beiden Freunde streiten sich jedes Wochenende {{c1::leidenschaftlich}} über Fußball.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "leidenschaftlich gern — очень любить (делать что-либо): Sie kocht leidenschaftlich gern.",
+    "usage_note_en": "leidenschaftlich gern — to absolutely love (doing something): Sie kocht leidenschaftlich gern."
+  },
+  {
+    "id": "adjective-adverb-475",
+    "word": "logisch",
+    "translation_ru": "логичный; логично; (разг.) конечно, само собой",
+    "translation_en": "logical; logically; (colloquial) of course, naturally",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "logisch",
+    "default_example": "adj",
+    "search_forms": [
+      "logische",
+      "logischem",
+      "logischen",
+      "logischer",
+      "logisches"
+    ],
+    "example_de": "Für sein seltsames Verhalten gibt es bestimmt eine ganz logische Erklärung.",
+    "example_ru": "Его странному поведению наверняка есть вполне логичное объяснение.",
+    "example_en": "There's surely a perfectly logical explanation for his strange behaviour.",
+    "example_cloze": "Für sein seltsames Verhalten gibt es bestimmt eine ganz {{c1::logische}} Erklärung.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Lehrer hat die Aufgabe so logisch erklärt, dass sie jeder verstanden hat.",
+        "example_ru": "Учитель объяснил задачу так логично, что её понял каждый.",
+        "example_en": "The teacher explained the task so logically that everyone understood it.",
+        "example_cloze": "Der Lehrer hat die Aufgabe so {{c1::logisch}} erklärt, dass sie jeder verstanden hat.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «конечно, само собой» — разговорное: Kommst du mit? — Logisch!",
+    "usage_note_en": "Colloquial in the sense “of course”: Kommst du mit? — Logisch!"
+  },
+  {
+    "id": "adjective-adverb-476",
+    "word": "misstrauisch",
+    "translation_ru": "недоверчиво, с подозрением; недоверчивый, мнительный",
+    "translation_en": "distrustfully, suspiciously; distrustful, suspicious",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "misstrauisch",
+    "default_example": "adv",
+    "search_forms": [
+      "misstrauische",
+      "misstrauischem",
+      "misstrauischen",
+      "misstrauischer",
+      "misstrauisches"
+    ],
+    "example_de": "Der Kassierer hielt den Fünfzigeuroschein misstrauisch gegen das Licht.",
+    "example_ru": "Кассир недоверчиво посмотрел купюру в пятьдесят евро на свет.",
+    "example_en": "The cashier suspiciously held the fifty-euro note up to the light.",
+    "example_cloze": "Der Kassierer hielt den Fünfzigeuroschein {{c1::misstrauisch}} gegen das Licht.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Unser misstrauischer Hund bellt jeden Besucher an.",
+        "example_ru": "Наш недоверчивый пёс лает на каждого гостя.",
+        "example_en": "Our suspicious dog barks at every visitor.",
+        "example_cloze": "Unser {{c1::misstrauischer}} Hund bellt jeden Besucher an.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-477",
+    "word": "missverständlich",
+    "translation_ru": "двусмысленный, неясный, допускающий неверное толкование; двусмысленно, неясно",
+    "translation_en": "ambiguous, unclear, open to misunderstanding; ambiguously, unclearly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "missverständlich",
+    "default_example": "adj",
+    "search_forms": [
+      "missverständliche",
+      "missverständlichem",
+      "missverständlichen",
+      "missverständlicher",
+      "missverständliches"
+    ],
+    "example_de": "Wegen einer missverständlichen Nachricht wartete sie am falschen Bahnhof auf ihn.",
+    "example_ru": "Из-за двусмысленного сообщения она ждала его не на том вокзале.",
+    "example_en": "Because of an ambiguous message she waited for him at the wrong station.",
+    "example_cloze": "Wegen einer {{c1::missverständlichen}} Nachricht wartete sie am falschen Bahnhof auf ihn.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Uhrzeit stand so missverständlich in der Einladung, dass die Hälfte der Gäste zu spät kam.",
+        "example_ru": "Время в приглашении было указано так неясно, что половина гостей опоздала.",
+        "example_en": "The time was given so ambiguously in the invitation that half the guests arrived late.",
+        "example_cloze": "Die Uhrzeit stand so {{c1::missverständlich}} in der Einladung, dass die Hälfte der Gäste zu spät kam.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-478",
+    "word": "nachträglich",
+    "translation_ru": "позже, впоследствии, с опозданием; последующий, запоздалый",
+    "translation_en": "later, afterwards, belatedly; subsequent, belated",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "nachträglich",
+    "default_example": "adv",
+    "search_forms": [
+      "nachträgliche",
+      "nachträglichem",
+      "nachträglichen",
+      "nachträglicher",
+      "nachträgliches"
+    ],
+    "example_de": "Die fehlenden Unterlagen kann ich doch auch nachträglich einreichen, oder?",
+    "example_ru": "Недостающие документы я ведь могу подать и позже, правда?",
+    "example_en": "I can hand in the missing documents afterwards, can't I?",
+    "example_cloze": "Die fehlenden Unterlagen kann ich doch auch {{c1::nachträglich}} einreichen, oder?",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die Kollegen haben mir eine nachträgliche Geburtstagsfeier organisiert, weil ich im Urlaub war.",
+        "example_ru": "Коллеги устроили мне запоздалое празднование дня рождения, потому что я была в отпуске.",
+        "example_en": "My colleagues threw me a belated birthday party because I'd been on holiday.",
+        "example_cloze": "Die Kollegen haben mir eine {{c1::nachträgliche}} Geburtstagsfeier organisiert, weil ich im Urlaub war.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-479",
+    "word": "nennenswert",
+    "translation_ru": "заметный, значительный, существенный; заметно, существенно",
+    "translation_en": "significant, appreciable, worth mentioning; significantly, appreciably",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "nennenswert",
+    "default_example": "adj",
+    "search_forms": [
+      "nennenswerte",
+      "nennenswertem",
+      "nennenswerten",
+      "nennenswerter",
+      "nennenswertes"
+    ],
+    "example_de": "Bei der Umstellung auf das neue System gab es keine nennenswerten Probleme.",
+    "example_ru": "При переходе на новую систему никаких существенных проблем не возникло.",
+    "example_en": "There were no significant problems when switching to the new system.",
+    "example_cloze": "Bei der Umstellung auf das neue System gab es keine {{c1::nennenswerten}} Probleme.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Preise haben sich seit letztem Jahr nicht nennenswert verändert.",
+        "example_ru": "С прошлого года цены заметно не изменились.",
+        "example_en": "Prices haven't changed appreciably since last year.",
+        "example_cloze": "Die Preise haben sich seit letztem Jahr nicht {{c1::nennenswert}} verändert.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Часто с отрицанием: nichts Nennenswertes — ничего существенного, ничего заслуживающего упоминания.",
+    "usage_note_en": "Often with a negative: nichts Nennenswertes — nothing worth mentioning."
+  },
+  {
+    "id": "adjective-adverb-480",
+    "word": "offensichtlich",
+    "translation_ru": "очевидный, явный; очевидно, явно, по-видимому",
+    "translation_en": "obvious, evident; obviously, evidently, apparently",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "offensichtlich",
+    "default_example": "adj",
+    "search_forms": [
+      "offensichtliche",
+      "offensichtlichem",
+      "offensichtlichen",
+      "offensichtlicher",
+      "offensichtliches"
+    ],
+    "example_de": "Der Schiedsrichter hat einen offensichtlichen Elfmeter nicht gegeben.",
+    "example_ru": "Судья не назначил очевидный пенальти.",
+    "example_en": "The referee failed to award an obvious penalty.",
+    "example_cloze": "Der Schiedsrichter hat einen {{c1::offensichtlichen}} Elfmeter nicht gegeben.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Nachbarn sind offensichtlich verreist, ihr Briefkasten quillt schon über.",
+        "example_ru": "Соседи, по-видимому, уехали: их почтовый ящик уже переполнен.",
+        "example_en": "The neighbours have evidently gone away; their letterbox is already overflowing.",
+        "example_cloze": "Die Nachbarn sind {{c1::offensichtlich}} verreist, ihr Briefkasten quillt schon über.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Как вводное слово часто выражает вывод говорящего — «по-видимому».",
+    "usage_note_en": "As a sentence adverb it often expresses the speaker's inference — “apparently”."
+  },
+  {
+    "id": "adjective-adverb-481",
+    "word": "potenziell",
+    "translation_ru": "потенциальный, возможный; потенциально",
+    "translation_en": "potential, possible; potentially",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "potenziell",
+    "default_example": "adj",
+    "search_forms": [
+      "potenzielle",
+      "potenziellem",
+      "potenziellen",
+      "potenzieller",
+      "potenzielles",
+      "potentiell",
+      "potentielle",
+      "potentiellem",
+      "potentiellen",
+      "potentieller",
+      "potentielles"
+    ],
+    "example_de": "Unser Verein sucht für das Sommerfest noch potenzielle Sponsoren aus der Region.",
+    "example_ru": "Наш клуб ещё ищет для летнего праздника потенциальных спонсоров из региона.",
+    "example_en": "Our club is still looking for potential sponsors from the region for the summer party.",
+    "example_cloze": "Unser Verein sucht für das Sommerfest noch {{c1::potenzielle}} Sponsoren aus der Region.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Dieses alte Kabel ist potenziell gefährlich und sollte ausgetauscht werden.",
+        "example_ru": "Этот старый кабель потенциально опасен, и его нужно заменить.",
+        "example_en": "This old cable is potentially dangerous and should be replaced.",
+        "example_cloze": "Dieses alte Kabel ist {{c1::potenziell}} gefährlich und sollte ausgetauscht werden.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Также: potentiell.",
+    "usage_note_en": "Also: potentiell."
+  },
+  {
+    "id": "adjective-adverb-482",
+    "word": "sinnbildlich",
+    "translation_ru": "символический, образный; символически, образно",
+    "translation_en": "symbolic, emblematic; symbolically, figuratively",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "sinnbildlich",
+    "default_example": "adv",
+    "search_forms": [
+      "sinnbildliche",
+      "sinnbildlichem",
+      "sinnbildlichen",
+      "sinnbildlicher",
+      "sinnbildliches"
+    ],
+    "example_de": "Der leere Stuhl auf der Bühne steht sinnbildlich für alle, die heute fehlen.",
+    "example_ru": "Пустой стул на сцене символически обозначает всех, кого сегодня нет.",
+    "example_en": "The empty chair on stage stands symbolically for everyone who is missing today.",
+    "example_cloze": "Der leere Stuhl auf der Bühne steht {{c1::sinnbildlich}} für alle, die heute fehlen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Das Gemälde ist voller sinnbildlicher Details, die man erst auf den zweiten Blick versteht.",
+        "example_ru": "Картина полна символических деталей, которые понимаешь лишь со второго взгляда.",
+        "example_en": "The painting is full of symbolic details that you only understand at second glance.",
+        "example_cloze": "Das Gemälde ist voller {{c1::sinnbildlicher}} Details, die man erst auf den zweiten Blick versteht.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-483",
+    "word": "sporadisch",
+    "translation_ru": "эпизодический, нерегулярный, редкий; изредка, время от времени",
+    "translation_en": "sporadic, occasional; occasionally, now and then",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "sporadisch",
+    "default_example": "adv",
+    "search_forms": [
+      "sporadische",
+      "sporadischem",
+      "sporadischen",
+      "sporadischer",
+      "sporadisches"
+    ],
+    "example_de": "Seit dem Umzug sehen wir unsere alten Freunde nur noch sporadisch.",
+    "example_ru": "После переезда мы видимся со старыми друзьями лишь изредка.",
+    "example_en": "Since the move we only see our old friends now and then.",
+    "example_cloze": "Seit dem Umzug sehen wir unsere alten Freunde nur noch {{c1::sporadisch}}.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Trotz sporadischer Regenschauer war das Stadtfest gut besucht.",
+        "example_ru": "Несмотря на редкие кратковременные дожди, на городском празднике было много народу.",
+        "example_en": "Despite occasional showers the town festival was well attended.",
+        "example_cloze": "Trotz {{c1::sporadischer}} Regenschauer war das Stadtfest gut besucht.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-484",
+    "word": "symbolisch",
+    "translation_ru": "символический; символически",
+    "translation_en": "symbolic; symbolically",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "symbolisch",
+    "default_example": "adv",
+    "search_forms": [
+      "symbolische",
+      "symbolischem",
+      "symbolischen",
+      "symbolischer",
+      "symbolisches"
+    ],
+    "example_de": "Zur Eröffnung der neuen Brücke wurde symbolisch ein rotes Band durchgeschnitten.",
+    "example_ru": "На открытии нового моста символически перерезали красную ленточку.",
+    "example_en": "At the opening of the new bridge a red ribbon was symbolically cut.",
+    "example_cloze": "Zur Eröffnung der neuen Brücke wurde {{c1::symbolisch}} ein rotes Band durchgeschnitten.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Für das alte Fahrrad hat mein Nachbar nur einen symbolischen Preis von einem Euro verlangt.",
+        "example_ru": "За старый велосипед сосед попросил лишь символическую цену — один евро.",
+        "example_en": "My neighbour only asked a token price of one euro for the old bike.",
+        "example_cloze": "Für das alte Fahrrad hat mein Nachbar nur einen {{c1::symbolischen}} Preis von einem Euro verlangt.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Также о чисто условной, очень маленькой сумме: ein symbolischer Betrag — символическая сумма.",
+    "usage_note_en": "Also of a purely nominal, very small amount: ein symbolischer Betrag — a token sum."
+  },
+  {
+    "id": "adjective-adverb-485",
+    "word": "unangenehm",
+    "translation_ru": "неприятный, неловкий; неприятно",
+    "translation_en": "unpleasant, awkward; unpleasantly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unangenehm",
+    "default_example": "adj",
+    "search_forms": [
+      "unangenehme",
+      "unangenehmem",
+      "unangenehmen",
+      "unangenehmer",
+      "unangenehmes"
+    ],
+    "example_de": "Nach dem Streit herrschte im Büro eine unangenehme Stille.",
+    "example_ru": "После ссоры в офисе повисла неловкая тишина.",
+    "example_en": "After the argument there was an awkward silence in the office.",
+    "example_cloze": "Nach dem Streit herrschte im Büro eine {{c1::unangenehme}} Stille.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Milch roch schon etwas unangenehm, also habe ich sie weggeschüttet.",
+        "example_ru": "Молоко уже немного неприятно пахло, поэтому я его вылил.",
+        "example_en": "The milk already smelt a bit unpleasant, so I poured it away.",
+        "example_cloze": "Die Milch roch schon etwas {{c1::unangenehm}}, also habe ich sie weggeschüttet.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Устойчиво: Es ist mir unangenehm, dass … — Мне неловко, что …",
+    "usage_note_en": "Set phrase: Es ist mir unangenehm, dass … — I feel awkward that …"
+  },
+  {
+    "id": "adjective-adverb-486",
+    "word": "ungeduldig",
+    "translation_ru": "нетерпеливый; нетерпеливо, с нетерпением",
+    "translation_en": "impatient; impatiently",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "ungeduldig",
+    "default_example": "adv",
+    "search_forms": [
+      "ungeduldige",
+      "ungeduldigem",
+      "ungeduldigen",
+      "ungeduldiger",
+      "ungeduldiges"
+    ],
+    "example_de": "Sie schaute ungeduldig auf die Uhr, doch der Bus kam immer noch nicht.",
+    "example_ru": "Она нетерпеливо посмотрела на часы, но автобуса всё не было.",
+    "example_en": "She looked impatiently at her watch, but the bus still didn't come.",
+    "example_cloze": "Sie schaute {{c1::ungeduldig}} auf die Uhr, doch der Bus kam immer noch nicht.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Ein ungeduldiger Autofahrer hupte hinter uns, sobald die Ampel grün wurde.",
+        "example_ru": "Нетерпеливый водитель позади нас засигналил, как только загорелся зелёный.",
+        "example_en": "An impatient driver behind us honked as soon as the lights turned green.",
+        "example_cloze": "Ein {{c1::ungeduldiger}} Autofahrer hupte hinter uns, sobald die Ampel grün wurde.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-487",
+    "word": "verächtlich",
+    "translation_ru": "презрительный, пренебрежительный; презрительно, с презрением; презренный, достойный презрения",
+    "translation_en": "contemptuous, scornful; contemptuously, scornfully; despicable, contemptible",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "verächtlich",
+    "default_example": "adj",
+    "search_forms": [
+      "verächtliche",
+      "verächtlichem",
+      "verächtlichen",
+      "verächtlicher",
+      "verächtliches"
+    ],
+    "example_de": "Auf seine lahme Ausrede reagierte sie nur mit einem verächtlichen Schnauben.",
+    "example_ru": "На его жалкую отговорку она лишь презрительно фыркнула.",
+    "example_en": "She responded to his feeble excuse with nothing but a contemptuous snort.",
+    "example_cloze": "Auf seine lahme Ausrede reagierte sie nur mit einem {{c1::verächtlichen}} Schnauben.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Kellner musterte unsere schmutzigen Wanderschuhe verächtlich.",
+        "example_ru": "Официант презрительно оглядел наши грязные походные ботинки.",
+        "example_en": "The waiter eyed our muddy walking boots contemptuously.",
+        "example_cloze": "Der Kellner musterte unsere schmutzigen Wanderschuhe {{c1::verächtlich}}.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-488",
+    "word": "verflixt",
+    "translation_ru": "чёртов, проклятый; чертовски, ужасно; досадный, неприятный",
+    "translation_en": "blasted, darned; awfully, darned; annoying, tricky",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "verflixt",
+    "default_example": "adj",
+    "search_forms": [
+      "verflixte",
+      "verflixtem",
+      "verflixten",
+      "verflixter",
+      "verflixtes"
+    ],
+    "example_de": "Wo habe ich nur diesen verflixten Schlüssel hingelegt?",
+    "example_ru": "Куда же я положил этот чёртов ключ?",
+    "example_en": "Where on earth did I put that blasted key?",
+    "example_cloze": "Wo habe ich nur diesen {{c1::verflixten}} Schlüssel hingelegt?",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Draußen ist es heute verflixt kalt.",
+        "example_ru": "На улице сегодня чертовски холодно.",
+        "example_en": "It's awfully cold outside today.",
+        "example_cloze": "Draußen ist es heute {{c1::verflixt}} kalt.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Разговорное; в значении «чёртов» — также неодобрительное. Восклицание: Verflixt (noch mal)! — Чёрт возьми!",
+    "usage_note_en": "Colloquial; also disapproving in the sense “blasted”. As an exclamation: Verflixt (noch mal)! — Damn it!"
+  },
+  {
+    "id": "adjective-adverb-489",
+    "word": "verlässlich",
+    "translation_ru": "надёжный; надёжно",
+    "translation_en": "reliable, dependable; reliably",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "verlässlich",
+    "default_example": "adj",
+    "search_forms": [
+      "verlässliche",
+      "verlässlichem",
+      "verlässlichen",
+      "verlässlicher",
+      "verlässliches"
+    ],
+    "example_de": "Seit zwanzig Jahren ist sie eine verlässliche Kollegin, auf die man immer zählen kann.",
+    "example_ru": "Уже двадцать лет она надёжная коллега, на которую всегда можно рассчитывать.",
+    "example_en": "For twenty years she has been a reliable colleague you can always count on.",
+    "example_cloze": "Seit zwanzig Jahren ist sie eine {{c1::verlässliche}} Kollegin, auf die man immer zählen kann.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Unser alter Diesel springt auch im tiefsten Winter verlässlich an.",
+        "example_ru": "Наш старый дизель надёжно заводится даже в самые сильные морозы.",
+        "example_en": "Our old diesel starts reliably even in the depths of winter.",
+        "example_cloze": "Unser alter Diesel springt auch im tiefsten Winter {{c1::verlässlich}} an.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-490",
+    "word": "verzweifelt",
+    "translation_ru": "отчаявшийся, полный отчаяния, в отчаянии; безвыходный, отчаянный (о положении); отчаянный (о попытке, борьбе), отчаянно",
+    "translation_en": "desperate, despairing, in despair; desperate, hopeless (of a situation); desperate (of an attempt, struggle), desperately",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "verzweifelt",
+    "default_example": "adj",
+    "search_forms": [
+      "verzweifelte",
+      "verzweifeltem",
+      "verzweifelten",
+      "verzweifelter",
+      "verzweifeltes"
+    ],
+    "example_de": "Nach drei Stunden erfolgloser Suche rief die verzweifelte Mutter die Polizei.",
+    "example_ru": "После трёх часов безуспешных поисков отчаявшаяся мать позвонила в полицию.",
+    "example_en": "After three hours of searching in vain, the desperate mother called the police.",
+    "example_cloze": "Nach drei Stunden erfolgloser Suche rief die {{c1::verzweifelte}} Mutter die Polizei.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Ich suche schon den ganzen Morgen verzweifelt nach meinem Reisepass.",
+        "example_ru": "Я уже всё утро отчаянно ищу свой загранпаспорт.",
+        "example_en": "I've been desperately looking for my passport all morning.",
+        "example_cloze": "Ich suche schon den ganzen Morgen {{c1::verzweifelt}} nach meinem Reisepass.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-491",
+    "word": "widerlich",
+    "translation_ru": "отвратительный, противный, мерзкий; отвратительно, противно; до отвращения, ужасно (перед прилагательным: widerlich süß)",
+    "translation_en": "disgusting, revolting, nasty; disgustingly, revoltingly; sickeningly, horribly (before adjectives: widerlich süß)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "widerlich",
+    "default_example": "adj",
+    "search_forms": [
+      "widerliche",
+      "widerlichem",
+      "widerlichen",
+      "widerlicher",
+      "widerliches"
+    ],
+    "example_de": "Aus der Mülltonne im Hof kam ein widerlicher Gestank.",
+    "example_ru": "Из мусорного бака во дворе шла отвратительная вонь.",
+    "example_en": "A disgusting stench was coming from the bin in the yard.",
+    "example_cloze": "Aus der Mülltonne im Hof kam ein {{c1::widerlicher}} Gestank.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Im alten Keller roch es widerlich nach Schimmel.",
+        "example_ru": "В старом подвале противно пахло плесенью.",
+        "example_en": "There was a disgusting smell of mould in the old cellar.",
+        "example_cloze": "Im alten Keller roch es {{c1::widerlich}} nach Schimmel.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Неодобрительное.",
+    "usage_note_en": "Disapproving."
+  },
+  {
+    "id": "adjective-adverb-492",
+    "word": "zärtlich",
+    "translation_ru": "нежный, ласковый; нежно, ласково",
+    "translation_en": "tender, affectionate; tenderly, affectionately",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "zärtlich",
+    "default_example": "adj",
+    "search_forms": [
+      "zärtliche",
+      "zärtlichem",
+      "zärtlichen",
+      "zärtlicher",
+      "zärtliches"
+    ],
+    "example_de": "Aus dem Urlaub schrieb sie ihm einen langen, zärtlichen Brief.",
+    "example_ru": "Из отпуска она написала ему длинное нежное письмо.",
+    "example_en": "She wrote him a long, tender letter from her holiday.",
+    "example_cloze": "Aus dem Urlaub schrieb sie ihm einen langen, {{c1::zärtlichen}} Brief.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Katze rieb sich zärtlich an meinem Bein.",
+        "example_ru": "Кошка ласково потёрлась о мою ногу.",
+        "example_en": "The cat rubbed affectionately against my leg.",
+        "example_cloze": "Die Katze rieb sich {{c1::zärtlich}} an meinem Bein.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-493",
+    "word": "zurückhaltend",
+    "translation_ru": "сдержанный, скромный; сдержанно, осторожно",
+    "translation_en": "reserved, restrained, modest; with restraint, cautiously",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "zurückhaltend",
+    "default_example": "adj",
+    "search_forms": [
+      "zurückhaltende",
+      "zurückhaltendem",
+      "zurückhaltenden",
+      "zurückhaltender",
+      "zurückhaltendes"
+    ],
+    "example_de": "Auf die neuen Pläne der Geschäftsführung gab es im Team eine eher zurückhaltende Reaktion.",
+    "example_ru": "Новые планы руководства вызвали в команде довольно сдержанную реакцию.",
+    "example_en": "The management's new plans met with a rather reserved reaction from the team.",
+    "example_cloze": "Auf die neuen Pläne der Geschäftsführung gab es im Team eine eher {{c1::zurückhaltende}} Reaktion.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Arzt äußerte sich zurückhaltend zu den Heilungschancen.",
+        "example_ru": "Врач осторожно высказался о шансах на выздоровление.",
+        "example_en": "The doctor was cautious in what he said about the chances of recovery.",
+        "example_cloze": "Der Arzt äußerte sich {{c1::zurückhaltend}} zu den Heilungschancen.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-494",
+    "word": "zwingend",
+    "translation_ru": "обязательный, необходимый; обязательно, непременно; убедительный, неопровержимый; убедительно",
+    "translation_en": "mandatory, essential; necessarily, strictly; compelling, conclusive; compellingly, conclusively",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "zwingend",
+    "default_example": "adj",
+    "search_forms": [
+      "zwingende",
+      "zwingendem",
+      "zwingenden",
+      "zwingender",
+      "zwingendes"
+    ],
+    "example_de": "Für die Gletschertour ist festes Schuhwerk eine zwingende Voraussetzung.",
+    "example_ru": "Для похода на ледник прочная обувь — обязательное условие.",
+    "example_en": "Sturdy footwear is an essential requirement for the glacier hike.",
+    "example_cloze": "Für die Gletschertour ist festes Schuhwerk eine {{c1::zwingende}} Voraussetzung.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Für die Einreise brauchen Sie zwingend einen gültigen Reisepass.",
+        "example_ru": "Для въезда вам обязательно нужен действующий загранпаспорт.",
+        "example_en": "You absolutely must have a valid passport to enter the country.",
+        "example_cloze": "Für die Einreise brauchen Sie {{c1::zwingend}} einen gültigen Reisepass.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-495",
+    "word": "schrittweise",
+    "translation_ru": "постепенно, шаг за шагом; поэтапный, постепенный",
+    "translation_en": "gradually, step by step; gradual, step-by-step",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "schrittweise",
+    "default_example": "adv",
+    "search_forms": [
+      "schrittweisem",
+      "schrittweisen",
+      "schrittweiser",
+      "schrittweises"
+    ],
+    "example_de": "Wir renovieren das alte Haus schrittweise, Zimmer für Zimmer.",
+    "example_ru": "Мы ремонтируем старый дом постепенно, комнату за комнатой.",
+    "example_en": "We are renovating the old house step by step, room by room.",
+    "example_cloze": "Wir renovieren das alte Haus {{c1::schrittweise}}, Zimmer für Zimmer.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die Stadt plant eine schrittweise Senkung der Ticketpreise.",
+        "example_ru": "Город планирует поэтапное снижение цен на билеты.",
+        "example_en": "The city is planning a gradual reduction in ticket prices.",
+        "example_cloze": "Die Stadt plant eine {{c1::schrittweise}} Senkung der Ticketpreise.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-496",
+    "word": "schlussendlich",
+    "translation_ru": "в конечном счёте, в конце концов; окончательный",
+    "translation_en": "ultimately, in the end; final",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "schlussendlich",
+    "default_example": "adv",
+    "search_forms": [
+      "schlussendliche",
+      "schlussendlichem",
+      "schlussendlichen",
+      "schlussendlicher",
+      "schlussendliches"
+    ],
+    "example_de": "Schlussendlich hat sich die lange Suche nach einer Wohnung gelohnt.",
+    "example_ru": "В конце концов долгие поиски квартиры оправдали себя.",
+    "example_en": "In the end, the long search for a flat paid off.",
+    "example_cloze": "{{c1::Schlussendlich}} hat sich die lange Suche nach einer Wohnung gelohnt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die schlussendliche Entscheidung trifft der Vorstand im Dezember.",
+        "example_ru": "Окончательное решение правление примет в декабре.",
+        "example_en": "The board will make the final decision in December.",
+        "example_cloze": "Die {{c1::schlussendliche}} Entscheidung trifft der Vorstand im Dezember.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-497",
+    "word": "ungeheuer",
+    "translation_ru": "огромный, колоссальный; чрезвычайно, невероятно",
+    "translation_en": "enormous, tremendous; extremely, incredibly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "ungeheuer",
+    "default_example": "adj",
+    "search_forms": [
+      "ungeheure",
+      "ungeheurem",
+      "ungeheuren",
+      "ungeheurer",
+      "ungeheures",
+      "ungeheurere",
+      "ungeheurerem",
+      "ungeheureren",
+      "ungeheurerer",
+      "ungeheureres",
+      "ungeheuerste",
+      "ungeheuerstem",
+      "ungeheuersten",
+      "ungeheuerster",
+      "ungeheuerstes",
+      "ungeheuere",
+      "ungeheuerem",
+      "ungeheueren",
+      "ungeheuerer",
+      "ungeheueres"
+    ],
+    "comparative": "ungeheurer",
+    "superlative": "am ungeheuersten",
+    "example_de": "Der Lärm von der Baustelle ist eine ungeheure Belastung für die Nachbarn.",
+    "example_ru": "Шум со стройки — огромная нагрузка для соседей.",
+    "example_en": "The noise from the building site is an enormous strain on the neighbours.",
+    "example_cloze": "Der Lärm von der Baustelle ist eine {{c1::ungeheure}} Belastung für die Nachbarn.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Unsere neue Nachbarin ist ungeheuer hilfsbereit und kümmert sich oft um unsere Katze.",
+        "example_ru": "Наша новая соседка невероятно отзывчивая и часто присматривает за нашей кошкой.",
+        "example_en": "Our new neighbour is incredibly helpful and often looks after our cat.",
+        "example_cloze": "Unsere neue Nachbarin ist {{c1::ungeheuer}} hilfsbereit und kümmert sich oft um unsere Katze.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Перед окончанием и в сравнительной степени выпадает е из -euer: ungeheure Kosten, ungeheurer. Существительное das Ungeheuer «чудовище» — отдельная карточка.",
+    "usage_note_en": "The e of -euer drops before an ending and in the comparative: ungeheure Kosten, ungeheurer. The noun das Ungeheuer (“monster”) has its own card."
+  },
+  {
+    "id": "adjective-adverb-498",
+    "word": "abartig",
+    "translation_ru": "ненормальный, извращённый; (разг.) дико, безумно",
+    "translation_en": "abnormal, perverted; (colloquial) insanely, incredibly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "abartig",
+    "default_example": "adj",
+    "search_forms": [
+      "abartige",
+      "abartigem",
+      "abartigen",
+      "abartiger",
+      "abartiges"
+    ],
+    "example_de": "Ich finde es abartig, wie manche Leute ihre Hunde behandeln.",
+    "example_ru": "По-моему, то, как некоторые люди обращаются со своими собаками, — просто ненормально.",
+    "example_en": "I think the way some people treat their dogs is just sick.",
+    "example_cloze": "Ich finde es {{c1::abartig}}, wie manche Leute ihre Hunde behandeln.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Im Hochsommer wird es in seiner Dachwohnung abartig heiß.",
+        "example_ru": "В разгар лета в его мансарде становится дико жарко.",
+        "example_en": "In midsummer his attic flat gets insanely hot.",
+        "example_cloze": "Im Hochsommer wird es in seiner Dachwohnung {{c1::abartig}} heiß.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «извращённый» о людях и их наклонностях — часто оскорбительное. В значении «дикий, ненормальный (о поведении, ситуации)» и как усилитель — разговорное: abartig teuer — безумно дорого.",
+    "usage_note_en": "In the sense “perverted”, applied to people and their inclinations, often offensive. Colloquial in the sense “sick, outrageous (of behaviour, a situation)” and as an intensifier: abartig teuer — insanely expensive."
+  },
+  {
+    "id": "adjective-adverb-499",
+    "word": "buchstäblich",
+    "translation_ru": "буквально, прямо-таки, в полном смысле слова; буквальный, дословный",
+    "translation_en": "literally, quite literally, positively; literal, word-for-word",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "buchstäblich",
+    "default_example": "adv",
+    "search_forms": [
+      "buchstäbliche",
+      "buchstäblichem",
+      "buchstäblichen",
+      "buchstäblicher",
+      "buchstäbliches"
+    ],
+    "example_de": "Nach der langen Wanderung bin ich buchstäblich ins Bett gefallen.",
+    "example_ru": "После долгого похода я буквально рухнул в кровать.",
+    "example_en": "After the long hike I literally collapsed into bed.",
+    "example_cloze": "Nach der langen Wanderung bin ich {{c1::buchstäblich}} ins Bett gefallen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach dem Hochwasser standen viele Familien im buchstäblichen Sinne vor dem Nichts.",
+        "example_ru": "После наводнения многие семьи в буквальном смысле остались ни с чем.",
+        "example_en": "After the flood many families were left with literally nothing.",
+        "example_cloze": "Nach dem Hochwasser standen viele Familien im {{c1::buchstäblichen}} Sinne vor dem Nichts.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Главное употребление — наречие «буквально» (усиливает высказывание). В значении «дословный» — редкое, обычно говорят wörtlich.",
+    "usage_note_en": "Mainly used as the adverb “literally” (for emphasis). Rare in the sense “word-for-word”; wörtlich is the usual word."
+  },
+  {
+    "id": "adjective-adverb-500",
+    "word": "dementsprechend",
+    "translation_ru": "соответственно, соответствующим образом; соответствующий",
+    "translation_en": "accordingly, correspondingly; corresponding, appropriate",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "dementsprechend",
+    "default_example": "adv",
+    "search_forms": [
+      "dementsprechende",
+      "dementsprechendem",
+      "dementsprechenden",
+      "dementsprechender",
+      "dementsprechendes"
+    ],
+    "example_de": "Morgen wird es sehr kalt, also zieh dich bitte dementsprechend an.",
+    "example_ru": "Завтра будет очень холодно, так что, пожалуйста, оденься соответственно.",
+    "example_en": "It's going to be very cold tomorrow, so please dress accordingly.",
+    "example_cloze": "Morgen wird es sehr kalt, also zieh dich bitte {{c1::dementsprechend}} an.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Wer für viele Mitarbeiter verantwortlich ist, verdient auch ein dementsprechendes Gehalt.",
+        "example_ru": "Кто отвечает за многих сотрудников, тот и получает соответствующую зарплату.",
+        "example_en": "Anyone responsible for many employees also earns a corresponding salary.",
+        "example_cloze": "Wer für viele Mitarbeiter verantwortlich ist, verdient auch ein {{c1::dementsprechendes}} Gehalt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-501",
+    "word": "augenblicklich",
+    "translation_ru": "немедленно, сразу; немедленный; сейчас, в данный момент; нынешний, теперешний",
+    "translation_en": "immediately, at once; immediate; at the moment, currently; present, current",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "augenblicklich",
+    "default_example": "adv",
+    "search_forms": [
+      "augenblickliche",
+      "augenblicklichem",
+      "augenblicklichen",
+      "augenblicklicher",
+      "augenblickliches"
+    ],
+    "example_de": "Als der Feueralarm losging, verließen alle augenblicklich das Gebäude.",
+    "example_ru": "Когда сработала пожарная сигнализация, все немедленно покинули здание.",
+    "example_en": "When the fire alarm went off, everyone left the building immediately.",
+    "example_cloze": "Als der Feueralarm losging, verließen alle {{c1::augenblicklich}} das Gebäude.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die augenblickliche Lage auf dem Wohnungsmarkt macht vielen Familien Sorgen.",
+        "example_ru": "Нынешняя ситуация на рынке жилья беспокоит многие семьи.",
+        "example_en": "The current situation on the housing market worries many families.",
+        "example_cloze": "Die {{c1::augenblickliche}} Lage auf dem Wohnungsmarkt macht vielen Familien Sorgen.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-502",
+    "word": "bereitwillig",
+    "translation_ru": "охотно, с готовностью; охотный, готовый помочь, услужливый",
+    "translation_en": "willingly, readily; willing, obliging",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "bereitwillig",
+    "default_example": "adv",
+    "search_forms": [
+      "bereitwillige",
+      "bereitwilligem",
+      "bereitwilligen",
+      "bereitwilliger",
+      "bereitwilliges"
+    ],
+    "example_de": "Der Mann an der Rezeption hat uns bereitwillig den Weg zum Museum erklärt.",
+    "example_ru": "Мужчина на ресепшене охотно объяснил нам дорогу к музею.",
+    "example_en": "The man at reception readily explained the way to the museum.",
+    "example_cloze": "Der Mann an der Rezeption hat uns {{c1::bereitwillig}} den Weg zum Museum erklärt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Ohne die bereitwillige Unterstützung unserer Nachbarn hätten wir den Umzug nicht geschafft.",
+        "example_ru": "Если бы соседи так охотно нам не помогли, мы бы не справились с переездом.",
+        "example_en": "Without our neighbours' willing support we wouldn't have managed the move.",
+        "example_cloze": "Ohne die {{c1::bereitwillige}} Unterstützung unserer Nachbarn hätten wir den Umzug nicht geschafft.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-503",
+    "word": "bildlich",
+    "translation_ru": "образно, в переносном смысле; образный, переносный; наглядно, в виде изображения; изобразительный, наглядный",
+    "translation_en": "figuratively, metaphorically; figurative, metaphorical; pictorially, visually; pictorial, visual",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "bildlich",
+    "default_example": "adv",
+    "search_forms": [
+      "bildliche",
+      "bildlichem",
+      "bildlichen",
+      "bildlicher",
+      "bildliches"
+    ],
+    "example_de": "Man darf diesen Satz nicht wörtlich nehmen, er ist bildlich zu verstehen.",
+    "example_ru": "Эту фразу нельзя понимать буквально — её надо понимать в переносном смысле.",
+    "example_en": "You mustn't take this sentence literally; it is meant figuratively.",
+    "example_cloze": "Man darf diesen Satz nicht wörtlich nehmen, er ist {{c1::bildlich}} zu verstehen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die Autorin ist für ihre bildliche Sprache bekannt.",
+        "example_ru": "Писательница известна своим образным языком.",
+        "example_en": "The author is known for her figurative language.",
+        "example_cloze": "Die Autorin ist für ihre {{c1::bildliche}} Sprache bekannt.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "bildlich gesprochen — образно говоря.",
+    "usage_note_en": "bildlich gesprochen — figuratively speaking."
+  },
+  {
+    "id": "adjective-adverb-504",
+    "word": "eigenhändig",
+    "translation_ru": "собственноручный; собственноручно, своими руками, сам",
+    "translation_en": "personal, handwritten (done by one's own hand); with one's own hands, personally, oneself",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "eigenhändig",
+    "default_example": "adv",
+    "search_forms": [
+      "eigenhändige",
+      "eigenhändigem",
+      "eigenhändigen",
+      "eigenhändiger",
+      "eigenhändiges"
+    ],
+    "example_de": "Mein Vater hat das kleine Gartenhaus eigenhändig gebaut.",
+    "example_ru": "Мой отец своими руками построил маленький садовый домик.",
+    "example_en": "My father built the little garden shed with his own hands.",
+    "example_cloze": "Mein Vater hat das kleine Gartenhaus {{c1::eigenhändig}} gebaut.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Das Testament muss eine eigenhändige Unterschrift tragen.",
+        "example_ru": "На завещании должна стоять собственноручная подпись.",
+        "example_en": "The will must bear the testator's own handwritten signature.",
+        "example_cloze": "Das Testament muss eine {{c1::eigenhändige}} Unterschrift tragen.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-505",
+    "word": "entsetzlich",
+    "translation_ru": "ужасный, страшный, жуткий; ужасно, страшно (усиливает)",
+    "translation_en": "horrible, terrible, appalling; terribly, awfully (intensifying)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "entsetzlich",
+    "default_example": "adj",
+    "search_forms": [
+      "entsetzliche",
+      "entsetzlichem",
+      "entsetzlichen",
+      "entsetzlicher",
+      "entsetzliches"
+    ],
+    "example_de": "Ich hatte heute Nacht einen entsetzlichen Albtraum und konnte nicht mehr einschlafen.",
+    "example_ru": "Сегодня ночью мне приснился жуткий кошмар, и я больше не смогла уснуть.",
+    "example_en": "Last night I had a horrible nightmare and couldn't get back to sleep.",
+    "example_cloze": "Ich hatte heute Nacht einen {{c1::entsetzlichen}} Albtraum und konnte nicht mehr einschlafen.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Nach der langen Nachtschicht war ich entsetzlich müde.",
+        "example_ru": "После долгой ночной смены я ужасно устала.",
+        "example_en": "After the long night shift I was terribly tired.",
+        "example_cloze": "Nach der langen Nachtschicht war ich {{c1::entsetzlich}} müde.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «страшно сильный» (entsetzlicher Durst) и «ужасно, страшно» (entsetzlich laut) — разговорное.",
+    "usage_note_en": "Colloquial in the sense “terrible, intense” (entsetzlicher Durst) and “terribly, awfully” (entsetzlich laut)."
+  },
+  {
+    "id": "adjective-adverb-506",
+    "word": "fassungslos",
+    "translation_ru": "ошеломлённый, потрясённый, растерянный; ошеломлённо, в растерянности",
+    "translation_en": "stunned, shocked, bewildered; in shock, in bewilderment",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "fassungslos",
+    "default_example": "adj",
+    "search_forms": [
+      "fassungslose",
+      "fassungslosem",
+      "fassungslosen",
+      "fassungsloser",
+      "fassungsloses"
+    ],
+    "example_de": "Die fassungslosen Fans konnten die Niederlage in letzter Minute kaum glauben.",
+    "example_ru": "Ошеломлённые болельщики едва могли поверить в поражение на последней минуте.",
+    "example_en": "The stunned fans could hardly believe the last-minute defeat.",
+    "example_cloze": "Die {{c1::fassungslosen}} Fans konnten die Niederlage in letzter Minute kaum glauben.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Er hörte fassungslos zu, als die Ärztin ihm die Diagnose erklärte.",
+        "example_ru": "Он в растерянности слушал, как врач объясняет ему диагноз.",
+        "example_en": "He listened in bewilderment as the doctor explained the diagnosis to him.",
+        "example_cloze": "Er hörte {{c1::fassungslos}} zu, als die Ärztin ihm die Diagnose erklärte.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-507",
+    "word": "frontal",
+    "translation_ru": "лобовой, фронтальный; в лоб, лоб в лоб, спереди",
+    "translation_en": "head-on, frontal; head-on, from the front",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "frontal",
+    "default_example": "adv",
+    "search_forms": [
+      "frontale",
+      "frontalem",
+      "frontalen",
+      "frontaler",
+      "frontales"
+    ],
+    "example_de": "Auf der Landstraße sind gestern zwei Autos frontal zusammengestoßen.",
+    "example_ru": "Вчера на загородной дороге две машины столкнулись лоб в лоб.",
+    "example_en": "Yesterday two cars collided head-on on the country road.",
+    "example_cloze": "Auf der Landstraße sind gestern zwei Autos {{c1::frontal}} zusammengestoßen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Bei dem frontalen Aufprall haben die Airbags beide Fahrer geschützt.",
+        "example_ru": "При лобовом ударе подушки безопасности защитили обоих водителей.",
+        "example_en": "In the head-on impact the airbags protected both drivers.",
+        "example_cloze": "Bei dem {{c1::frontalen}} Aufprall haben die Airbags beide Fahrer geschützt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-508",
+    "word": "gänzlich",
+    "translation_ru": "совершенно, полностью, совсем; полный, абсолютный",
+    "translation_en": "completely, entirely, totally; complete, total",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "gänzlich",
+    "default_example": "adv",
+    "search_forms": [
+      "gänzliche",
+      "gänzlichem",
+      "gänzlichen",
+      "gänzlicher",
+      "gänzliches"
+    ],
+    "example_de": "Diese Art von Musik war mir bis gestern gänzlich unbekannt.",
+    "example_ru": "До вчерашнего дня такая музыка была мне совершенно незнакома.",
+    "example_en": "Until yesterday this kind of music was completely unknown to me.",
+    "example_cloze": "Diese Art von Musik war mir bis gestern {{c1::gänzlich}} unbekannt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Arzt hat ihr den gänzlichen Verzicht auf Zucker empfohlen.",
+        "example_ru": "Врач посоветовал ей полный отказ от сахара.",
+        "example_en": "The doctor recommended that she give up sugar completely.",
+        "example_cloze": "Der Arzt hat ihr den {{c1::gänzlichen}} Verzicht auf Zucker empfohlen.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-509",
+    "word": "geschickt",
+    "translation_ru": "ловкий, умелый, искусный, дипломатичный; ловко, умело, искусно, дипломатично",
+    "translation_en": "skilful, deft, clever, diplomatic; skilfully, deftly, cleverly, diplomatically",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "geschickt",
+    "default_example": "adv",
+    "search_forms": [
+      "geschickte",
+      "geschicktem",
+      "geschickten",
+      "geschickter",
+      "geschicktes"
+    ],
+    "example_de": "Die Moderatorin ist der unangenehmen Frage geschickt ausgewichen.",
+    "example_ru": "Ведущая ловко ушла от неприятного вопроса.",
+    "example_en": "The presenter skilfully dodged the awkward question.",
+    "example_cloze": "Die Moderatorin ist der unangenehmen Frage {{c1::geschickt}} ausgewichen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Unsere Tochter ist handwerklich sehr geschickt und baut gern Möbel.",
+        "example_ru": "У нашей дочери очень умелые руки, и она любит мастерить мебель.",
+        "example_en": "Our daughter is very skilful at DIY and likes building furniture.",
+        "example_cloze": "Unsere Tochter ist handwerklich sehr {{c1::geschickt}} und baut gern Möbel.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Не путать с формой глагола schicken: Ich habe dir das Foto geschickt — Я отправил тебе фото.",
+    "usage_note_en": "Not to be confused with the verb form of schicken: Ich habe dir das Foto geschickt — I sent you the photo.",
+    "participle_of": "schicken",
+    "meaning_differs": true,
+    "participle_default": "adjective"
+  },
+  {
+    "id": "adjective-adverb-510",
+    "word": "grauenhaft",
+    "translation_ru": "ужасный, кошмарный, жуткий; ужасно, жутко",
+    "translation_en": "horrible, horrific, dreadful, gruesome; horribly, dreadfully",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "grauenhaft",
+    "default_example": "adj",
+    "search_forms": [
+      "grauenhafte",
+      "grauenhaftem",
+      "grauenhaften",
+      "grauenhafter",
+      "grauenhaftes"
+    ],
+    "example_de": "Die alte Frau erzählte von ihren grauenhaften Erlebnissen während des Krieges.",
+    "example_ru": "Пожилая женщина рассказывала о жутких событиях, которые ей пришлось пережить во время войны.",
+    "example_en": "The old woman talked about her horrific experiences during the war.",
+    "example_cloze": "Die alte Frau erzählte von ihren {{c1::grauenhaften}} Erlebnissen während des Krieges.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Sänger hat gestern Abend grauenhaft falsch gesungen.",
+        "example_ru": "Певец вчера вечером ужасно фальшивил.",
+        "example_en": "The singer sang horribly out of tune last night.",
+        "example_cloze": "Der Sänger hat gestern Abend {{c1::grauenhaft}} falsch gesungen.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «очень плохой» и как усилитель (grauenhaft laut) — разговорное.",
+    "usage_note_en": "Colloquial in the sense “very bad” and as an intensifier (grauenhaft laut)."
+  },
+  {
+    "id": "adjective-adverb-511",
+    "word": "grauenvoll",
+    "translation_ru": "жуткий, ужасающий, кошмарный; ужасно, жутко",
+    "translation_en": "gruesome, horrifying, terrible; terribly, awfully",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "grauenvoll",
+    "default_example": "adj",
+    "search_forms": [
+      "grauenvolle",
+      "grauenvollem",
+      "grauenvollen",
+      "grauenvoller",
+      "grauenvolles"
+    ],
+    "example_de": "Mitten in der Nacht hörten wir einen grauenvollen Schrei aus dem Wald.",
+    "example_ru": "Посреди ночи мы услышали из леса жуткий крик.",
+    "example_en": "In the middle of the night we heard a horrifying scream from the woods.",
+    "example_cloze": "Mitten in der Nacht hörten wir einen {{c1::grauenvollen}} Schrei aus dem Wald.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Musik der Nachbarn war gestern bis Mitternacht grauenvoll laut.",
+        "example_ru": "Музыка у соседей вчера до полуночи была жутко громкой.",
+        "example_en": "The neighbours' music was horribly loud until midnight yesterday.",
+        "example_cloze": "Die Musik der Nachbarn war gestern bis Mitternacht {{c1::grauenvoll}} laut.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «ужасно, очень сильно» — разговорное.",
+    "usage_note_en": "Colloquial in the sense “terribly, very badly”."
+  },
+  {
+    "id": "adjective-adverb-512",
+    "word": "grausam",
+    "translation_ru": "жестокий; жестоко; тяжёлый, мучительный, ужасный; ужасно, страшно (усиливает)",
+    "translation_en": "cruel; cruelly; harsh, painful, terrible; terribly, awfully (intensifying)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "grausam",
+    "default_example": "adj",
+    "search_forms": [
+      "grausame",
+      "grausamem",
+      "grausamen",
+      "grausamer",
+      "grausames"
+    ],
+    "example_de": "Viele Zuschauer fanden die grausamen Szenen in dem Kriegsfilm schwer zu ertragen.",
+    "example_ru": "Многим зрителям было тяжело смотреть жестокие сцены в этом военном фильме.",
+    "example_en": "Many viewers found the cruel scenes in the war film hard to bear.",
+    "example_cloze": "Viele Zuschauer fanden die {{c1::grausamen}} Szenen in dem Kriegsfilm schwer zu ertragen.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Junge wurde von seinen Mitschülern grausam gehänselt.",
+        "example_ru": "Одноклассники жестоко дразнили мальчика.",
+        "example_en": "The boy was cruelly teased by his classmates.",
+        "example_cloze": "Der Junge wurde von seinen Mitschülern {{c1::grausam}} gehänselt.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «ужасно, страшно» — разговорное.",
+    "usage_note_en": "Colloquial in the sense “terribly, awfully”."
+  },
+  {
+    "id": "adjective-adverb-513",
+    "word": "großartig",
+    "translation_ru": "великолепный, замечательный; великолепно, замечательно; особый, особо (с отрицанием)",
+    "translation_en": "magnificent, great, superb; magnificently, superbly; much, special (with a negative)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "großartig",
+    "default_example": "adj",
+    "search_forms": [
+      "großartige",
+      "großartigem",
+      "großartigen",
+      "großartiger",
+      "großartiges"
+    ],
+    "example_de": "Danke für den großartigen Abend, wir haben uns sehr wohlgefühlt!",
+    "example_ru": "Спасибо за замечательный вечер, нам было очень хорошо!",
+    "example_en": "Thanks for a great evening, we really enjoyed ourselves!",
+    "example_cloze": "Danke für den {{c1::großartigen}} Abend, wir haben uns sehr wohlgefühlt!",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Kinder haben beim Schulkonzert großartig gesungen.",
+        "example_ru": "Дети замечательно пели на школьном концерте.",
+        "example_en": "The children sang superbly at the school concert.",
+        "example_cloze": "Die Kinder haben beim Schulkonzert {{c1::großartig}} gesungen.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В третьем значении — разговорное: Wir müssen nicht großartig planen — Нам не нужно особо планировать.",
+    "usage_note_en": "Colloquial in the third sense: Wir müssen nicht großartig planen — We don't need to plan much."
+  },
+  {
+    "id": "adjective-adverb-514",
+    "word": "hoffnungsvoll",
+    "translation_ru": "с надеждой, полный надежды; многообещающий, обнадёживающий",
+    "translation_en": "with hope, hopeful, full of hope; promising, encouraging",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "hoffnungsvoll",
+    "default_example": "adv",
+    "search_forms": [
+      "hoffnungsvolle",
+      "hoffnungsvollem",
+      "hoffnungsvollen",
+      "hoffnungsvoller",
+      "hoffnungsvolles"
+    ],
+    "example_de": "Sobald ich den Kühlschrank öffne, sieht mich unser Hund hoffnungsvoll an.",
+    "example_ru": "Стоит мне открыть холодильник, как наша собака с надеждой смотрит на меня.",
+    "example_en": "As soon as I open the fridge, our dog looks at me hopefully.",
+    "example_cloze": "Sobald ich den Kühlschrank öffne, sieht mich unser Hund {{c1::hoffnungsvoll}} an.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der junge Pianist gilt als eines der hoffnungsvollsten Talente des Landes.",
+        "example_ru": "Молодой пианист считается одним из самых многообещающих талантов страны.",
+        "example_en": "The young pianist is considered one of the most promising talents in the country.",
+        "example_cloze": "Der junge Pianist gilt als eines der {{c1::hoffnungsvollsten}} Talente des Landes.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Не путать: hoffentlich — надеюсь, будем надеяться.",
+    "usage_note_en": "Not to be confused with hoffentlich — hopefully, let's hope so."
+  },
+  {
+    "id": "adjective-adverb-515",
+    "word": "höllisch",
+    "translation_ru": "адский, мучительный, жуткий; адски, жутко, чертовски; адский, относящийся к аду",
+    "translation_en": "hellish, agonising, terrible; terribly, like hell, damn; infernal, of hell",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "höllisch",
+    "default_example": "adj",
+    "search_forms": [
+      "höllische",
+      "höllischem",
+      "höllischen",
+      "höllischer",
+      "höllisches"
+    ],
+    "example_de": "Nach der Zahnoperation hatte ich zwei Tage lang höllische Schmerzen.",
+    "example_ru": "После операции на зубе у меня два дня были адские боли.",
+    "example_en": "After my dental surgery I was in hellish pain for two days.",
+    "example_cloze": "Nach der Zahnoperation hatte ich zwei Tage lang {{c1::höllische}} Schmerzen.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Vorsicht, der Griff der Pfanne wird beim Braten höllisch heiß!",
+        "example_ru": "Осторожно, ручка сковородки при жарке адски нагревается!",
+        "example_en": "Careful, the pan handle gets incredibly hot when you're frying!",
+        "example_cloze": "Vorsicht, der Griff der Pfanne wird beim Braten {{c1::höllisch}} heiß!",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Как усилитель — разговорное: höllische Angst haben — страшно бояться.",
+    "usage_note_en": "Colloquial as an intensifier: höllische Angst haben — to be terribly afraid."
+  },
+  {
+    "id": "adjective-adverb-516",
+    "word": "klinisch",
+    "translation_ru": "клинический; клинически; стерильный, холодный (об обстановке, цвете)",
+    "translation_en": "clinical; clinically; sterile, clinical (cold, impersonal)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "klinisch",
+    "default_example": "adj",
+    "search_forms": [
+      "klinische",
+      "klinischem",
+      "klinischen",
+      "klinischer",
+      "klinisches"
+    ],
+    "example_de": "Das neue Medikament wird zurzeit in einer klinischen Studie an Freiwilligen getestet.",
+    "example_ru": "Новое лекарство сейчас испытывают на добровольцах в рамках клинического исследования.",
+    "example_en": "The new drug is currently being tested on volunteers in a clinical trial.",
+    "example_cloze": "Das neue Medikament wird zurzeit in einer {{c1::klinischen}} Studie an Freiwilligen getestet.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Wirkung der Salbe ist inzwischen klinisch nachgewiesen.",
+        "example_ru": "Действие мази теперь клинически доказано.",
+        "example_en": "The effect of the ointment has now been clinically proven.",
+        "example_cloze": "Die Wirkung der Salbe ist inzwischen {{c1::klinisch}} nachgewiesen.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Устойчиво: klinisch tot — в состоянии клинической смерти.",
+    "usage_note_en": "Set phrase: klinisch tot — clinically dead."
+  },
+  {
+    "id": "adjective-adverb-517",
+    "word": "maßlos",
+    "translation_ru": "непомерный, чрезмерный, безмерный, не знающий меры; безмерно, крайне, страшно (усиливает)",
+    "translation_en": "excessive, immoderate, boundless; extremely, terribly, utterly (intensifying)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "maßlos",
+    "default_example": "adj",
+    "search_forms": [
+      "maßlose",
+      "maßlosem",
+      "maßlosen",
+      "maßloser",
+      "maßloses"
+    ],
+    "example_de": "Sein maßloser Ehrgeiz hat ihn am Ende fast alle Freunde gekostet.",
+    "example_ru": "Непомерное честолюбие в итоге стоило ему почти всех друзей.",
+    "example_en": "In the end his boundless ambition cost him almost all his friends.",
+    "example_cloze": "Sein {{c1::maßloser}} Ehrgeiz hat ihn am Ende fast alle Freunde gekostet.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Mein kleiner Bruder war maßlos enttäuscht, als das Konzert abgesagt wurde.",
+        "example_ru": "Мой младший брат был страшно разочарован, когда концерт отменили.",
+        "example_en": "My little brother was terribly disappointed when the concert was cancelled.",
+        "example_cloze": "Mein kleiner Bruder war {{c1::maßlos}} enttäuscht, als das Konzert abgesagt wurde.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-518",
+    "word": "permanent",
+    "translation_ru": "постоянный, непрерывный; постоянно, всё время",
+    "translation_en": "permanent, constant, continuous; constantly, all the time",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "permanent",
+    "default_example": "adj",
+    "search_forms": [
+      "permanente",
+      "permanentem",
+      "permanenten",
+      "permanenter",
+      "permanentes"
+    ],
+    "example_de": "Der permanente Lärm von der Autobahn raubt mir nachts den Schlaf.",
+    "example_ru": "Постоянный шум с автобана не даёт мне спать по ночам.",
+    "example_en": "The constant noise from the motorway keeps me awake at night.",
+    "example_cloze": "Der {{c1::permanente}} Lärm von der Autobahn raubt mir nachts den Schlaf.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Mein Handy klingelt heute permanent, ich komme zu gar nichts.",
+        "example_ru": "У меня сегодня постоянно звонит телефон, я ничего не успеваю.",
+        "example_en": "My phone has been ringing constantly today, I can't get anything done.",
+        "example_cloze": "Mein Handy klingelt heute {{c1::permanent}}, ich komme zu gar nichts.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-519",
+    "word": "sacht",
+    "translation_ru": "мягкий, лёгкий, осторожный; мягко, осторожно, тихонько; постепенно, потихоньку",
+    "translation_en": "gentle, soft, light; gently, softly, carefully; gradually, little by little",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "sacht",
+    "default_example": "adv",
+    "search_forms": [
+      "sachte",
+      "sachtem",
+      "sachten",
+      "sachter",
+      "sachtes"
+    ],
+    "example_de": "Die Krankenschwester legte dem Kind sacht die Hand auf die Stirn.",
+    "example_ru": "Медсестра мягко положила ребёнку руку на лоб.",
+    "example_en": "The nurse gently laid her hand on the child's forehead.",
+    "example_cloze": "Die Krankenschwester legte dem Kind {{c1::sacht}} die Hand auf die Stirn.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Ein sachter Wind bewegte die Blätter der alten Birke.",
+        "example_ru": "Лёгкий ветерок шевелил листья старой берёзы.",
+        "example_en": "A gentle breeze stirred the leaves of the old birch.",
+        "example_cloze": "Ein {{c1::sachter}} Wind bewegte die Blätter der alten Birke.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Также: sachte. В значении «постепенно» — разговорное. Sachte, sachte! — Потише, не спеши! (разг.)",
+    "usage_note_en": "Also: sachte. Colloquial in the sense “gradually”. Sachte, sachte! — Easy does it! (colloquial)"
+  },
+  {
+    "id": "adjective-adverb-520",
+    "word": "strafrechtlich",
+    "translation_ru": "уголовно-правовой, уголовный (по уголовному праву); в уголовном порядке, по уголовному праву",
+    "translation_en": "criminal (relating to criminal law); under criminal law",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "strafrechtlich",
+    "default_example": "adv",
+    "search_forms": [
+      "strafrechtliche",
+      "strafrechtlichem",
+      "strafrechtlichen",
+      "strafrechtlicher",
+      "strafrechtliches"
+    ],
+    "example_de": "Der Fahrer wird wegen des Unfalls jetzt strafrechtlich verfolgt.",
+    "example_ru": "Водителя из-за аварии теперь привлекают к уголовной ответственности.",
+    "example_en": "The driver is now facing criminal prosecution because of the accident.",
+    "example_cloze": "Der Fahrer wird wegen des Unfalls jetzt {{c1::strafrechtlich}} verfolgt.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Für diesen Betrug drohen ihm ernste strafrechtliche Konsequenzen.",
+        "example_ru": "За это мошенничество ему грозит серьёзная уголовная ответственность.",
+        "example_en": "He faces serious criminal consequences for this fraud.",
+        "example_cloze": "Für diesen Betrug drohen ihm ernste {{c1::strafrechtliche}} Konsequenzen.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Относится к уголовному праву, а не «преступный» (преступный — kriminell, verbrecherisch).",
+    "usage_note_en": "Relates to criminal law, not “criminal” in the sense of wrongful (that is kriminell, verbrecherisch)."
+  },
+  {
+    "id": "adjective-adverb-521",
+    "word": "todsicher",
+    "translation_ru": "верный, надёжный (без малейшего сомнения); наверняка, точно",
+    "translation_en": "dead certain, sure-fire; for sure, definitely",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "todsicher",
+    "default_example": "adv",
+    "search_forms": [
+      "todsichere",
+      "todsicherem",
+      "todsicheren",
+      "todsicherer",
+      "todsicheres"
+    ],
+    "example_de": "Wenn wir jetzt nicht losfahren, verpassen wir todsicher den Zug.",
+    "example_ru": "Если мы сейчас не выедем, мы наверняка опоздаем на поезд.",
+    "example_en": "If we don't leave now, we'll miss the train for sure.",
+    "example_cloze": "Wenn wir jetzt nicht losfahren, verpassen wir {{c1::todsicher}} den Zug.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Mein Kollege hat angeblich ein todsicheres Mittel gegen Erkältungen.",
+        "example_ru": "У моего коллеги якобы есть верное средство от простуды.",
+        "example_en": "My colleague supposedly has a sure-fire remedy for colds.",
+        "example_cloze": "Mein Kollege hat angeblich ein {{c1::todsicheres}} Mittel gegen Erkältungen.",
+        "example_usage": "Adjektiv"
+      }
+    ],
+    "usage_note_ru": "Разговорное.",
+    "usage_note_en": "Colloquial."
+  },
+  {
+    "id": "adjective-adverb-522",
+    "word": "übertrieben",
+    "translation_ru": "чрезмерный, преувеличенный; чрезмерно, слишком",
+    "translation_en": "excessive, exaggerated; excessively, overly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "übertrieben",
+    "default_example": "adj",
+    "search_forms": [
+      "übertriebene",
+      "übertriebenem",
+      "übertriebenen",
+      "übertriebener",
+      "übertriebenes"
+    ],
+    "example_de": "Wegen der übertriebenen Sicherheitskontrollen hätten wir fast unseren Flug verpasst.",
+    "example_ru": "Из-за чрезмерных проверок безопасности мы чуть не опоздали на самолёт.",
+    "example_en": "Because of the excessive security checks we almost missed our flight.",
+    "example_cloze": "Wegen der {{c1::übertriebenen}} Sicherheitskontrollen hätten wir fast unseren Flug verpasst.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Für den kurzen Ausflug haben wir übertrieben viel Proviant eingepackt.",
+        "example_ru": "Для короткой поездки мы взяли с собой слишком много еды.",
+        "example_en": "We packed far too much food for the short trip.",
+        "example_cloze": "Für den kurzen Ausflug haben wir {{c1::übertrieben}} viel Proviant eingepackt.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Partizip II от übertreiben — преувеличивать. Как усилитель (übertrieben viel, übertrieben teuer) сохраняет оттенок «больше, чем нужно».",
+    "usage_note_en": "Past participle of übertreiben — to exaggerate. As an intensifier (übertrieben viel, übertrieben teuer) it keeps the sense of “more than necessary”."
+  },
+  {
+    "id": "adjective-adverb-523",
+    "word": "unauffällig",
+    "translation_ru": "незаметный, неприметный; незаметно",
+    "translation_en": "inconspicuous, unobtrusive; inconspicuously, discreetly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unauffällig",
+    "default_example": "adv",
+    "search_forms": [
+      "unauffällige",
+      "unauffälligem",
+      "unauffälligen",
+      "unauffälliger",
+      "unauffälliges"
+    ],
+    "example_de": "Während der langen Rede schaute er immer wieder unauffällig auf seine Uhr.",
+    "example_ru": "Во время длинной речи он то и дело незаметно поглядывал на часы.",
+    "example_en": "During the long speech he kept glancing discreetly at his watch.",
+    "example_cloze": "Während der langen Rede schaute er immer wieder {{c1::unauffällig}} auf seine Uhr.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Dieb trug eine graue Jacke und eine ganz unauffällige Mütze.",
+        "example_ru": "На воре были серая куртка и совершенно неприметная шапка.",
+        "example_en": "The thief was wearing a grey jacket and a completely nondescript hat.",
+        "example_cloze": "Der Dieb trug eine graue Jacke und eine ganz {{c1::unauffällige}} Mütze.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-524",
+    "word": "unermüdlich",
+    "translation_ru": "неутомимый, неустанный; неутомимо, неустанно",
+    "translation_en": "tireless, indefatigable; tirelessly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unermüdlich",
+    "default_example": "adj",
+    "search_forms": [
+      "unermüdliche",
+      "unermüdlichem",
+      "unermüdlichen",
+      "unermüdlicher",
+      "unermüdliches"
+    ],
+    "example_de": "Ohne die unermüdlichen Freiwilligen hätte das Stadtfest nicht stattfinden können.",
+    "example_ru": "Без неутомимых добровольцев городской праздник не смог бы состояться.",
+    "example_en": "Without the tireless volunteers, the town festival could not have taken place.",
+    "example_cloze": "Ohne die {{c1::unermüdlichen}} Freiwilligen hätte das Stadtfest nicht stattfinden können.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Großmutter strickte den ganzen Winter unermüdlich Socken für die Enkel.",
+        "example_ru": "Всю зиму бабушка неустанно вязала носки для внуков.",
+        "example_en": "All winter the grandmother tirelessly knitted socks for her grandchildren.",
+        "example_cloze": "Die Großmutter strickte den ganzen Winter {{c1::unermüdlich}} Socken für die Enkel.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-525",
+    "word": "unsinnig",
+    "translation_ru": "бессмысленный, нелепый; бессмысленно, нелепо; безумно, страшно",
+    "translation_en": "pointless, absurd; pointlessly, absurdly; insanely, terribly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unsinnig",
+    "default_example": "adj",
+    "search_forms": [
+      "unsinnige",
+      "unsinnigem",
+      "unsinnigen",
+      "unsinniger",
+      "unsinniges"
+    ],
+    "example_de": "Ich finde diese neue Regel für die Mülltrennung im Büro völlig unsinnig.",
+    "example_ru": "По-моему, это новое правило о сортировке мусора в офисе совершенно бессмысленно.",
+    "example_en": "I think this new rule about separating rubbish in the office is completely pointless.",
+    "example_cloze": "Ich finde diese neue Regel für die Mülltrennung im Büro völlig {{c1::unsinnig}}.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Er hat sein ganzes Erspartes völlig unsinnig ausgegeben.",
+        "example_ru": "Он совершенно бессмысленно потратил все свои сбережения.",
+        "example_en": "He spent all his savings in a completely pointless way.",
+        "example_cloze": "Er hat sein ganzes Erspartes völlig {{c1::unsinnig}} ausgegeben.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "В значении «безумно, страшно» (unsinnig teuer) — разговорное.",
+    "usage_note_en": "Colloquial in the sense “insanely, terribly” (unsinnig teuer)."
+  },
+  {
+    "id": "adjective-adverb-526",
+    "word": "unüberlegt",
+    "translation_ru": "необдуманный, опрометчивый; необдуманно, опрометчиво",
+    "translation_en": "rash, ill-considered; rashly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unüberlegt",
+    "default_example": "adj",
+    "search_forms": [
+      "unüberlegte",
+      "unüberlegtem",
+      "unüberlegten",
+      "unüberlegter",
+      "unüberlegtes"
+    ],
+    "example_de": "Mit einer unüberlegten Bemerkung hat er die ganze Stimmung am Tisch verdorben.",
+    "example_ru": "Необдуманным замечанием он испортил всё настроение за столом.",
+    "example_en": "With one rash remark he spoiled the whole mood at the table.",
+    "example_cloze": "Mit einer {{c1::unüberlegten}} Bemerkung hat er die ganze Stimmung am Tisch verdorben.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Bitte unterschreib den Vertrag nicht unüberlegt, lies ihn erst gründlich durch.",
+        "example_ru": "Пожалуйста, не подписывай договор необдуманно, сначала внимательно его прочитай.",
+        "example_en": "Please don't sign the contract rashly; read it through carefully first.",
+        "example_cloze": "Bitte unterschreib den Vertrag nicht {{c1::unüberlegt}}, lies ihn erst gründlich durch.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-527",
+    "word": "unverantwortlich",
+    "translation_ru": "безответственный; безответственно",
+    "translation_en": "irresponsible; irresponsibly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unverantwortlich",
+    "default_example": "adj",
+    "search_forms": [
+      "unverantwortliche",
+      "unverantwortlichem",
+      "unverantwortlichen",
+      "unverantwortlicher",
+      "unverantwortliches"
+    ],
+    "example_de": "Es ist unverantwortlich, bei diesem Glatteis mit Sommerreifen zu fahren.",
+    "example_ru": "Ездить в такой гололёд на летней резине безответственно.",
+    "example_en": "It's irresponsible to drive on summer tyres in this black ice.",
+    "example_cloze": "Es ist {{c1::unverantwortlich}}, bei diesem Glatteis mit Sommerreifen zu fahren.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der Fahrer ist an der Grundschule unverantwortlich schnell vorbeigefahren.",
+        "example_ru": "Водитель безответственно быстро проехал мимо начальной школы.",
+        "example_en": "The driver drove irresponsibly fast past the primary school.",
+        "example_cloze": "Der Fahrer ist an der Grundschule {{c1::unverantwortlich}} schnell vorbeigefahren.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-528",
+    "word": "unweigerlich",
+    "translation_ru": "неизбежно, непременно; неизбежный",
+    "translation_en": "inevitably, invariably; inevitable",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unweigerlich",
+    "default_example": "adv",
+    "search_forms": [
+      "unweigerliche",
+      "unweigerlichem",
+      "unweigerlichen",
+      "unweigerlicher",
+      "unweigerliches"
+    ],
+    "example_de": "Wenn du jeden Abend so lange am Handy bist, wirst du morgens unweigerlich müde sein.",
+    "example_ru": "Если ты каждый вечер столько сидишь в телефоне, утром ты неизбежно будешь уставшим.",
+    "example_en": "If you spend so long on your phone every evening, you will inevitably be tired in the morning.",
+    "example_cloze": "Wenn du jeden Abend so lange am Handy bist, wirst du morgens {{c1::unweigerlich}} müde sein.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Ein Bruch in der Familie war die unweigerliche Folge des Streits ums Erbe.",
+        "example_ru": "Неизбежным следствием спора о наследстве стал раскол в семье.",
+        "example_en": "A rift in the family was the inevitable consequence of the dispute over the inheritance.",
+        "example_cloze": "Ein Bruch in der Familie war die {{c1::unweigerliche}} Folge des Streits ums Erbe.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-529",
+    "word": "unzulässig",
+    "translation_ru": "недопустимый, недозволенный; недопустимо",
+    "translation_en": "inadmissible, impermissible; impermissibly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unzulässig",
+    "default_example": "adj",
+    "search_forms": [
+      "unzulässige",
+      "unzulässigem",
+      "unzulässigen",
+      "unzulässiger",
+      "unzulässiges"
+    ],
+    "example_de": "Die Firma wurde wegen unzulässiger Werbung abgemahnt.",
+    "example_ru": "Фирма получила предупреждение из-за недопустимой рекламы.",
+    "example_en": "The company received a formal warning for unlawful advertising.",
+    "example_cloze": "Die Firma wurde wegen {{c1::unzulässiger}} Werbung abgemahnt.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Bei der Kontrolle fiel auf, dass der Lkw unzulässig schwer beladen war.",
+        "example_ru": "При проверке выяснилось, что грузовик был загружен сверх допустимого веса.",
+        "example_en": "The check revealed that the lorry was loaded beyond the permitted weight.",
+        "example_cloze": "Bei der Kontrolle fiel auf, dass der Lkw {{c1::unzulässig}} schwer beladen war.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-530",
+    "word": "urplötzlich",
+    "translation_ru": "совершенно внезапно, вдруг; внезапный",
+    "translation_en": "all of a sudden; sudden",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "urplötzlich",
+    "default_example": "adv",
+    "search_forms": [
+      "urplötzliche",
+      "urplötzlichem",
+      "urplötzlichen",
+      "urplötzlicher",
+      "urplötzliches"
+    ],
+    "example_de": "Urplötzlich ging im ganzen Haus das Licht aus.",
+    "example_ru": "Совершенно внезапно во всём доме погас свет.",
+    "example_en": "All of a sudden the lights went out in the whole house.",
+    "example_cloze": "{{c1::Urplötzlich}} ging im ganzen Haus das Licht aus.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Ihre urplötzliche Abreise hat uns alle verwirrt.",
+        "example_ru": "Её внезапный отъезд всех нас озадачил.",
+        "example_en": "Her sudden departure confused all of us.",
+        "example_cloze": "Ihre {{c1::urplötzliche}} Abreise hat uns alle verwirrt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-531",
+    "word": "verbittert",
+    "translation_ru": "озлобленный, ожесточённый; с горечью, озлобленно",
+    "translation_en": "embittered, bitter; bitterly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "verbittert",
+    "default_example": "adj",
+    "search_forms": [
+      "verbitterte",
+      "verbittertem",
+      "verbitterten",
+      "verbitterter",
+      "verbittertes"
+    ],
+    "example_de": "Nach der Kündigung wurde mein Nachbar ein verbitterter Mann.",
+    "example_ru": "После увольнения мой сосед стал озлобленным человеком.",
+    "example_en": "After losing his job my neighbour became an embittered man.",
+    "example_cloze": "Nach der Kündigung wurde mein Nachbar ein {{c1::verbitterter}} Mann.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "„Mir hat ja nie jemand geholfen“, sagte sie verbittert.",
+        "example_ru": "«Мне ведь никто никогда не помогал», — с горечью сказала она.",
+        "example_en": "'Nobody ever helped me,' she said bitterly.",
+        "example_cloze": "„Mir hat ja nie jemand geholfen“, sagte sie {{c1::verbittert}}.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-532",
+    "word": "versunken",
+    "translation_ru": "погружённый (во что-либо), поглощённый; увлечённо, заворожённо",
+    "translation_en": "absorbed, engrossed; raptly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "versunken",
+    "default_example": "adj",
+    "search_forms": [
+      "versunkene",
+      "versunkenem",
+      "versunkenen",
+      "versunkener",
+      "versunkenes"
+    ],
+    "example_de": "Die in ihr Spiel versunkenen Kinder bemerkten den Regen gar nicht.",
+    "example_ru": "Погружённые в игру дети даже не заметили дождя.",
+    "example_en": "The children, absorbed in their game, didn't even notice the rain.",
+    "example_cloze": "Die in ihr Spiel {{c1::versunkenen}} Kinder bemerkten den Regen gar nicht.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Der alte Mann sah lange versunken aufs Meer hinaus.",
+        "example_ru": "Старик долго заворожённо смотрел на море.",
+        "example_en": "The old man gazed raptly out to sea for a long time.",
+        "example_cloze": "Der alte Mann sah lange {{c1::versunken}} aufs Meer hinaus.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Устойчиво: in Gedanken versunken — погружённый в мысли. В значении «затонувший» — форма глагола versinken.",
+    "usage_note_en": "Set phrase: in Gedanken versunken — lost in thought. In the sense 'sunken' it is a form of the verb versinken."
+  },
+  {
+    "id": "adjective-adverb-533",
+    "word": "vollkommen",
+    "translation_ru": "полный, совершенный; совершенно, полностью; безупречный, идеальный",
+    "translation_en": "complete, total; completely, totally; perfect, flawless",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "vollkommen",
+    "default_example": "adj",
+    "search_forms": [
+      "vollkommene",
+      "vollkommenem",
+      "vollkommenen",
+      "vollkommener",
+      "vollkommenes"
+    ],
+    "example_de": "Bei dem Regen war unser Wochenende am Meer ein vollkommener Reinfall.",
+    "example_ru": "Из-за дождя наши выходные на море оказались полным провалом.",
+    "example_en": "Because of the rain our weekend at the seaside was a complete flop.",
+    "example_cloze": "Bei dem Regen war unser Wochenende am Meer ein {{c1::vollkommener}} Reinfall.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Du hast vollkommen recht, das hatte ich ganz vergessen.",
+        "example_ru": "Ты совершенно прав, я об этом совсем забыл.",
+        "example_en": "You're absolutely right, I had completely forgotten about that.",
+        "example_cloze": "Du hast {{c1::vollkommen}} recht, das hatte ich ganz vergessen.",
+        "example_usage": "Adverbial"
+      }
+    ],
+    "usage_note_ru": "Ударение зависит от значения: vóllkommen — «полный, совершенный; совершенно, полностью»; vollkómmen — «безупречный, идеальный».",
+    "usage_note_en": "Stress depends on the meaning: vóllkommen — 'complete, total; completely, totally'; vollkómmen — 'perfect, flawless'."
+  },
+  {
+    "id": "adjective-adverb-534",
+    "word": "vorzeitig",
+    "translation_ru": "досрочный, преждевременный; досрочно, раньше срока",
+    "translation_en": "early, premature; early, prematurely",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "vorzeitig",
+    "default_example": "adv",
+    "search_forms": [
+      "vorzeitige",
+      "vorzeitigem",
+      "vorzeitigen",
+      "vorzeitiger",
+      "vorzeitiges"
+    ],
+    "example_de": "Wegen des Sturms mussten wir den Urlaub vorzeitig abbrechen.",
+    "example_ru": "Из-за шторма нам пришлось прервать отпуск раньше срока.",
+    "example_en": "Because of the storm we had to end our holiday early.",
+    "example_cloze": "Wegen des Sturms mussten wir den Urlaub {{c1::vorzeitig}} abbrechen.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Für die vorzeitige Rückzahlung des Kredits verlangt die Bank eine Gebühr.",
+        "example_ru": "За досрочное погашение кредита банк берёт комиссию.",
+        "example_en": "The bank charges a fee for early repayment of the loan.",
+        "example_cloze": "Für die {{c1::vorzeitige}} Rückzahlung des Kredits verlangt die Bank eine Gebühr.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-535",
+    "word": "widerwärtig",
+    "translation_ru": "отвратительный, мерзкий; отвратительно",
+    "translation_en": "disgusting, repulsive; disgustingly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "widerwärtig",
+    "default_example": "adj",
+    "search_forms": [
+      "widerwärtige",
+      "widerwärtigem",
+      "widerwärtigen",
+      "widerwärtiger",
+      "widerwärtiges"
+    ],
+    "example_de": "In der Küche herrschte ein widerwärtiger Gestank nach faulen Eiern.",
+    "example_ru": "На кухне стояла отвратительная вонь тухлых яиц.",
+    "example_en": "There was a disgusting stench of rotten eggs in the kitchen.",
+    "example_cloze": "In der Küche herrschte ein {{c1::widerwärtiger}} Gestank nach faulen Eiern.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Er hat sich auf der Feier wirklich widerwärtig benommen.",
+        "example_ru": "Он вёл себя на празднике по-настоящему отвратительно.",
+        "example_en": "He behaved really disgustingly at the party.",
+        "example_cloze": "Er hat sich auf der Feier wirklich {{c1::widerwärtig}} benommen.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-536",
+    "word": "widerwillig",
+    "translation_ru": "неохотно, нехотя; неохотный",
+    "translation_en": "reluctantly, grudgingly; reluctant, grudging",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "widerwillig",
+    "default_example": "adv",
+    "search_forms": [
+      "widerwillige",
+      "widerwilligem",
+      "widerwilligen",
+      "widerwilliger",
+      "widerwilliges"
+    ],
+    "example_de": "Widerwillig räumte mein Sohn endlich sein Zimmer auf.",
+    "example_ru": "Мой сын наконец нехотя убрал свою комнату.",
+    "example_en": "My son finally tidied his room, reluctantly.",
+    "example_cloze": "{{c1::Widerwillig}} räumte mein Sohn endlich sein Zimmer auf.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Mit einem widerwilligen Nicken stimmte er dem Plan zu.",
+        "example_ru": "Неохотно кивнув, он согласился с планом.",
+        "example_en": "With a reluctant nod he agreed to the plan.",
+        "example_cloze": "Mit einem {{c1::widerwilligen}} Nicken stimmte er dem Plan zu.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-537",
+    "word": "wörtlich",
+    "translation_ru": "дословный, буквальный; дословно, буквально",
+    "translation_en": "literal, verbatim; literally, word for word",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "wörtlich",
+    "default_example": "adv",
+    "search_forms": [
+      "wörtliche",
+      "wörtlichem",
+      "wörtlichen",
+      "wörtlicher",
+      "wörtliches"
+    ],
+    "example_de": "Ich habe den Satz wörtlich aus dem Buch abgeschrieben.",
+    "example_ru": "Я дословно переписал это предложение из книги.",
+    "example_en": "I copied the sentence word for word from the book.",
+    "example_cloze": "Ich habe den Satz {{c1::wörtlich}} aus dem Buch abgeschrieben.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Die wörtliche Bedeutung des Sprichworts ist eine ganz andere als die übertragene.",
+        "example_ru": "Буквальное значение этой пословицы совсем не такое, как переносное.",
+        "example_en": "The literal meaning of the proverb is quite different from the figurative one.",
+        "example_cloze": "Die {{c1::wörtliche}} Bedeutung des Sprichworts ist eine ganz andere als die übertragene.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-538",
+    "word": "erbarmungslos",
+    "translation_ru": "безжалостный, беспощадный; безжалостно, беспощадно",
+    "translation_en": "merciless, pitiless; mercilessly, pitilessly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "erbarmungslos",
+    "default_example": "adv",
+    "search_forms": [
+      "erbarmungslose",
+      "erbarmungslosem",
+      "erbarmungslosen",
+      "erbarmungsloser",
+      "erbarmungsloses"
+    ],
+    "example_de": "Die Sonne brannte erbarmungslos auf unsere Köpfe.",
+    "example_ru": "Солнце безжалостно пекло нам головы.",
+    "example_en": "The sun beat down mercilessly on our heads.",
+    "example_cloze": "Die Sonne brannte {{c1::erbarmungslos}} auf unsere Köpfe.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Film zeigt einen erbarmungslosen Kampf ums Überleben in der Wüste.",
+        "example_ru": "Фильм показывает беспощадную борьбу за выживание в пустыне.",
+        "example_en": "The film shows a merciless struggle for survival in the desert.",
+        "example_cloze": "Der Film zeigt einen {{c1::erbarmungslosen}} Kampf ums Überleben in der Wüste.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-539",
+    "word": "ultimativ",
+    "translation_ru": "ультимативный; ультимативно, в форме ультиматума; непревзойдённый (в рекламе)",
+    "translation_en": "in the form of an ultimatum, peremptory; as an ultimatum, peremptorily; ultimate (in advertising)",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "ultimativ",
+    "default_example": "adv",
+    "search_forms": [
+      "ultimative",
+      "ultimativem",
+      "ultimativen",
+      "ultimativer",
+      "ultimatives"
+    ],
+    "example_de": "Die Gewerkschaft forderte ultimativ eine Lohnerhöhung bis Ende Mai.",
+    "example_ru": "Профсоюз ультимативно потребовал повышения зарплаты до конца мая.",
+    "example_en": "The union peremptorily demanded a pay rise by the end of May.",
+    "example_cloze": "Die Gewerkschaft forderte {{c1::ultimativ}} eine Lohnerhöhung bis Ende Mai.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der Vermieter setzte uns eine ultimative Frist: bis Freitag zahlen oder ausziehen.",
+        "example_ru": "Арендодатель поставил нам ультимативный срок: заплатить до пятницы или съехать.",
+        "example_en": "The landlord gave us an ultimatum-style deadline: pay by Friday or move out.",
+        "example_cloze": "Der Vermieter setzte uns eine {{c1::ultimative}} Frist: bis Freitag zahlen oder ausziehen.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-540",
+    "word": "unerbittlich",
+    "translation_ru": "неумолимый, беспощадный; неумолимо, беспощадно",
+    "translation_en": "relentless, implacable; relentlessly",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unerbittlich",
+    "default_example": "adj",
+    "search_forms": [
+      "unerbittliche",
+      "unerbittlichem",
+      "unerbittlichen",
+      "unerbittlicher",
+      "unerbittliches"
+    ],
+    "example_de": "Gegen die unerbittliche Hitze half nur noch ein Sprung in den See.",
+    "example_ru": "От беспощадной жары спасал только прыжок в озеро.",
+    "example_en": "The only thing that helped against the relentless heat was a jump into the lake.",
+    "example_cloze": "Gegen die {{c1::unerbittliche}} Hitze half nur noch ein Sprung in den See.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Die Zeit läuft unerbittlich weiter, ob wir wollen oder nicht.",
+        "example_ru": "Время неумолимо идёт вперёд, хотим мы того или нет.",
+        "example_en": "Time moves on relentlessly, whether we like it or not.",
+        "example_cloze": "Die Zeit läuft {{c1::unerbittlich}} weiter, ob wir wollen oder nicht.",
+        "example_usage": "Adverbial"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-541",
+    "word": "unablässig",
+    "translation_ru": "непрестанно, не переставая; непрестанный, непрекращающийся",
+    "translation_en": "incessantly, ceaselessly; incessant, relentless",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "unablässig",
+    "default_example": "adv",
+    "search_forms": [
+      "unablässige",
+      "unablässigem",
+      "unablässigen",
+      "unablässiger",
+      "unablässiges"
+    ],
+    "example_de": "Das Telefon im Büro klingelte den ganzen Vormittag unablässig.",
+    "example_ru": "Телефон в офисе всё утро звонил не переставая.",
+    "example_en": "The office phone rang incessantly all morning.",
+    "example_cloze": "Das Telefon im Büro klingelte den ganzen Vormittag {{c1::unablässig}}.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Der unablässige Regen hat die Wege in Matsch verwandelt.",
+        "example_ru": "Непрекращающийся дождь превратил дорожки в грязь.",
+        "example_en": "The incessant rain has turned the paths into mud.",
+        "example_cloze": "Der {{c1::unablässige}} Regen hat die Wege in Matsch verwandelt.",
+        "example_usage": "Adjektiv"
+      }
+    ]
+  },
+  {
+    "id": "adjective-adverb-542",
+    "word": "getrost",
+    "translation_ru": "спокойно, смело, без опасений; уверенно; уверенный, спокойный",
+    "translation_en": "safely, without worrying; confidently; confident, calm",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "getrost",
+    "default_example": "adv",
+    "search_forms": [
+      "getroste",
+      "getrostem",
+      "getrosten",
+      "getroster",
+      "getrostes"
+    ],
+    "example_de": "Den Ersatzschlüssel lass getrost bei mir, ich passe gut darauf auf.",
+    "example_ru": "Запасной ключ спокойно оставь у меня, я за ним присмотрю.",
+    "example_en": "You can safely leave the spare key with me, I'll look after it.",
+    "example_cloze": "Den Ersatzschlüssel lass {{c1::getrost}} bei mir, ich passe gut darauf auf.",
+    "example_usage": "Adverbial",
+    "additional_examples": [
+      {
+        "example_de": "Nach dem Gespräch mit der Ärztin war sie wieder ganz getrost.",
+        "example_ru": "После разговора с врачом она снова была спокойна и полна уверенности.",
+        "example_en": "After talking to the doctor she was calm and confident again.",
+        "example_cloze": "Nach dem Gespräch mit der Ärztin war sie wieder ganz {{c1::getrost}}.",
         "example_usage": "Adjektiv"
       }
     ]

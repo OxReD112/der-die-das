@@ -20,7 +20,7 @@
   };
   function isPronoun(candidate) {return candidate?.item?.type === 'Pronomen' || candidate?.item?.type === 'pronoun';}
   function meanings(item,form,lang) {
-    const key=form.toLocaleLowerCase('de-DE'),ru=lang==='ru',id=Number(item.id?.split('-')[1]);
+    const key=form.toLowerCase(),ru=lang==='ru',id=Number(item.id?.split('-')[1]);
     if(id>=1&&id<=9)return (PERSONAL_GLOSSES[key] || [item.translation_ru,item.translation_en])[ru?0:1];
     if(id===10)return ru?'безличное «это»':'impersonal it';
     if(id>=11&&id<=18){

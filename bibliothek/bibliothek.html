@@ -15,7 +15,7 @@
     <title>Bibliothek · Deutsch.</title>
     <link rel="icon" href="../icon.webp" type="image/webp" />
     <link rel="stylesheet" href="../home.css?v=50" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261011-finish-position-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261024-g57-2" />
     <link rel="stylesheet" href="bookshelf.css?v=20261012-paper-fibers-2" />
     <link rel="stylesheet" href="../wortschatz/collection-window.css?v=1" />
     <link rel="stylesheet" href="reading-word-form.css?v=2" />
@@ -200,7 +200,7 @@
         </div>
         <p class="popover-grammar" id="popover-grammar" lang="de" hidden></p>
         <p class="bookmark-hint" id="bookmark-hint" hidden>Bookmark unfamiliar words. Choose what to learn later.</p>
-        <p class="popover-translation" id="popover-translation"></p>
+        <p class="popover-translation" id="popover-translation" tabindex="-1"></p>
         <details id="popover-alternatives" class="popover-alternatives" hidden>
           <summary>Other meanings</summary>
           <div id="popover-choices"></div>
@@ -235,6 +235,7 @@
         <section class="sheet-card">
           <button class="sheet-close" id="sheet-close" type="button" aria-label="Close">×</button>
           <div id="dictionary-card"></div>
+          <p class="visually-hidden" id="dictionary-pager-status" aria-live="polite"></p>
         </section>
       </div>
     </main>
@@ -421,29 +422,29 @@
     <script src="../components/deutsch-translation-v1.js?v=2"></script>
     <script src="../components/deutsch-day-v1.js?v=1"></script>
     <script src="../wortschatz/collection.js?v=6"></script>
-    <script src="resolver/fallback-dictionary.js?v=20261016-d19-1"></script>
-    <script src="resolver/russian-translations.js?v=20261016-d19-1"></script>
+    <script src="resolver/fallback-dictionary.js?v=20261025-junk-1"></script>
+    <script src="resolver/russian-translations.js?v=20261024-lowercase-1"></script>
     <script src="vendor/jszip-3.10.1.min.js"></script>
     <script src="reader/reading-data.js?v=20261011-author-1"></script>
     <script src="reader/book-import.js?v=20261011-cover-quality-2"></script>
     <script src="reader/epub-import.js?v=20261011-cover-quality-2"></script>
-    <script src="resolver/vocabulary-storage.js?v=20261010-remove-clear-marks-1"></script>
+    <script src="resolver/vocabulary-storage.js?v=20261024-lowercase-1"></script>
     <script src="reader/meaning-selections.js?v=2"></script>
-    <script src="resolver/lemma-resolver.js?v=20261016-d4-1"></script>
-    <script src="reader/vocabulary-highlights.js?v=20261008-l07-reverse-1"></script>
-    <script src="reader/vocabulary-list.js?v=1"></script>
+    <script src="resolver/lemma-resolver.js?v=20261025-lists-a"></script>
+    <script src="reader/vocabulary-highlights.js?v=20261024-lowercase-1"></script>
+    <script src="reader/vocabulary-list.js?v=20261024-lowercase-1"></script>
     <script src="../wortschatz/dictionary-card.js?v=20261007-adjadv-1"></script>
     <script src="../wortschatz/dictionary-import.js?v=20261007-adjadv-1"></script>
     <script src="../wortschatz/collection-window.js?v=20261007-adjadv-1"></script>
     <script src="reader/vocabulary-actions.js?v=20261007-adjadv-1"></script>
     <script src="reader/vocabulary-panel.js?v=20261010-remove-clear-marks-1"></script>
-    <script src="resolver/meaning-display.js?v=20261015-form-1"></script>
+    <script src="resolver/meaning-display.js?v=20261025-lists-2"></script>
     <script src="reader/reader-pagination.js?v=20261011-finish-position-1"></script>
     <script src="reader/reader-text-settings.js?v=1"></script>
-    <script src="reader/pronoun-reference.js?v=20261007-pronoun-popup-1"></script>
+    <script src="reader/pronoun-reference.js?v=20261024-lowercase-1"></script>
     <script src="reader/meaning-thanks.js?v=1"></script>
     <script src="reader/bookshelf.js?v=20261012-paper-fibers-2"></script>
-    <script src="reader/bibliothek.js?v=20261015-form-1"></script>
-    <div class="version-mark" aria-hidden="true">v30</div>
+    <script src="reader/bibliothek.js?v=20261024-lowercase-1"></script>
+    <div class="version-mark" aria-hidden="true">v34</div>
   </body>
 </html>

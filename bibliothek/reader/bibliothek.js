@@ -1,6 +1,26 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
+  // G45 (2), reference 2.A (user 22.10): a dictionary label is a small grey italic word before its meaning;
+  // in the card a tap shows the full word («разговорное»).
+  function appendLabelSegments(container, segments, prefix = "", interactive = true) {
+    if (prefix) container.append(prefix);
+    let previousText = false;
+    segments.forEach(segment => {
+      if (previousText && (segment.labels.length || segment.text)) container.append("; ");
+      for (const label of segment.labels) {
+        const mark = document.createElement("span"); mark.className = "popover-label"; mark.textContent = label.short; mark.title = label.full;
+        if (interactive && label.full !== label.short) {
+          mark.tabIndex = 0; mark.setAttribute("role", "button");
+          const toggle = event => { event.stopPropagation(); mark.textContent = mark.textContent === label.short ? label.full : label.short; };
+          mark.addEventListener("click", toggle);
+          mark.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggle(event); } });
+        }
+        container.append(mark, " ");
+      }
+      if (segment.text) { container.append(segment.text); previousText = true; }
+    });
+  }
   function updateDrawerTop() {
     const toolbar=document.querySelector('.reading-toolbar');
     if(toolbar?.getClientRects().length)document.documentElement.style.setProperty('--reader-header-bottom', `${toolbar.getBoundingClientRect().bottom}px`);
@@ -11,6 +31,9 @@
   const $library = $("library"), $reading = $("reading-view"), $bookList = $("book-list");
   const $file = $("book-file"), $text = $("reading-text"), $popover = $("word-popover"), $sheet = $("dictionary-sheet");
   let currentBook = null, selectedEntry = null, activePronouns = [], toastTimer = null, restoringPosition = false;
+  // G57 step 2 (user 24.10.2026): a word explained by its parts has «Словарная справка» when a part has an own card; the details
+  // page through those parts («Bauch · 1 / 2», ‹ ›, swipe). partEntries — the parts of the shown card; detailParts — the open details.
+  let partEntries = [], detailParts = [], detailIndex = 0;
   let thanksStorage;
   try { thanksStorage = window.localStorage; } catch (_) {}
   const meaningThanks = window.BibliothekMeaningThanks.create({storage:thanksStorage});
@@ -47,7 +70,7 @@
       window.__readingSaveTimer = setTimeout(() => updateProgress(book, book.position), 250);
     }
   });
-  const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+  const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || "";
 
@@ -241,8 +264,8 @@
   function coverInitials(title) {
     const words = String(title || "").normalize("NFC").match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}]*/gu) || [];
     return words.slice(0, 2).map((word, index) => index === 0
-      ? Array.from(word)[0].toLocaleUpperCase("de-DE")
-      : Array.from(word)[0].toLocaleLowerCase("de-DE")).join("") || "?";
+      ? Array.from(word)[0].toUpperCase()
+      : Array.from(word)[0].toLowerCase()).join("") || "?";
   }
 
   function renderBooks(books) {
@@ -647,20 +670,22 @@
     if (!dictionary) return null;
     if (id) { const byId = dictionary.find(entry => entry.id === id); if (byId) return byId; }
     if (!word) return null;
-    const key = String(word).toLocaleLowerCase("de-DE");
+    const key = String(word).toLowerCase();
     const types = type === "Adjektiv" ? ["Adjektiv","Adverb"] : [type];
-    return dictionary.find(entry => types.includes(entry.type) && String(entry.word || "").toLocaleLowerCase("de-DE") === key) || null;
+    return dictionary.find(entry => types.includes(entry.type) && String(entry.word || "").toLowerCase() === key) || null;
   }
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-nouns.json" ? "20261015-nouns-list2-07" : ["german-adjectives.json","german-adverbs.json","german-adjective-adverbs.json"].includes(path) ? "20261015-c1-1" : path === "german-pronouns.json" ? "20261015-form-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-verbs.json" ? "20261023-wn-recht-1" : path === "german-nouns.json" ? "20261020-nouns-list3-15" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261023-wn-partadj-1" : path === "german-adverbs.json" ? "20261023-wn-recht-1" : path === "german-expressions.json" ? "20261024-expr-009-e8" : path === "german-pronouns.json" ? "20261024-g65-2" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261020-pron-conj-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
     dictionaryPromise = Promise.all([get("german-nouns.json"),get("german-verbs.json"),get("german-adjectives.json"),get("german-adverbs.json"),get("german-conjunctions.json"),get("german-pronouns.json"),get("german-adjective-adverbs.json"),
-      get("german-articles.json"),get("german-prepositions.json"),get("german-numerals.json"),get("german-function-words.json")])
-      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs,articles,prepositions,numerals,functionWords]) => {
+      get("german-articles.json"),get("german-prepositions.json"),get("german-numerals.json"),get("german-function-words.json"),
+      // E1 (22.10.2026): expression cards (vor sich hin) — type «Ausdruck», found only through their `match`; a missing file is no expressions.
+      get("german-expressions.json").catch(() => [])])
+      .then(([nouns,verbs,adjectives,adverbs,conjunctions,pronouns,adjectiveAdverbs,articles,prepositions,numerals,functionWords,expressions]) => {
         dictionary = [
           ...nouns.map(x => ({ ...x, word:x.word, type:"Nomen" })),
           ...verbs.map(x => ({ ...x, word:x.infinitive, type:"Verb" })),
@@ -672,7 +697,8 @@
           ...articles.map(x => ({ ...x, type:"article" })),
           ...prepositions.map(x => ({ ...x, type:"preposition" })),
           ...numerals.map(x => ({ ...x, type:"numeral" })),
-          ...functionWords.map(x => ({ ...x, type:functionWordType[x.type] || x.type }))
+          ...functionWords.map(x => ({ ...x, type:functionWordType[x.type] || x.type })),
+          ...expressions.map(x => ({ ...x, type:"Ausdruck" }))
         ];
         lemmaResolver = window.BibliothekLemmaResolver.create(dictionary, window.DeutschFallbackDictionary);
         return dictionary;
@@ -751,6 +777,7 @@
     popupAnchor = anchor;
     const availableHeight = popupPlacement === "above" ? spaceAbove : spaceBelow;
     $popover.style.maxHeight = `${availableHeight}px`;
+    fitTranslation(availableHeight);
     const box = $popover.getBoundingClientRect();
     const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
     const top = popupPlacement === "above" ? anchor.top - box.height - gap : anchor.bottom + gap;
@@ -758,8 +785,27 @@
     $popover.style.top = `${Math.max(edge, top)}px`;
     $popover.dataset.placement = popupPlacement;
   }
+  // G57 (user 24.10.2026): only the meanings scroll inside the popup (heading and buttons stay); a fade at the bottom while
+  // more of them is below.
+  // G57 (review 24.10.2026, 320 px): when the card has less room than usual (placed above a word in the middle of a small
+  // screen), the meanings block shrinks to the room left — not the whole card scrolls — so the heading and «Словарная справка»
+  // stay in view. Never below three lines; with even less room the card scrolls as a whole, as before.
+  function fitTranslation(availableHeight) {
+    const c = $("popover-translation");
+    c.style.maxHeight = "";
+    const style = getComputedStyle($popover), outer = style.boxSizing === "border-box" ? 0 :
+      parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+    const rest = $popover.scrollHeight + ($popover.offsetHeight - $popover.clientHeight) - c.offsetHeight;
+    const room = availableHeight + outer - rest, max = parseFloat(getComputedStyle(c).maxHeight), line = parseFloat(getComputedStyle(c).lineHeight) || 22;
+    if (Number.isFinite(max) && room < max) c.style.maxHeight = `${Math.max(Math.ceil(line * 3), Math.floor(room))}px`;
+  }
+  function updateTranslationFade() {
+    const c = $("popover-translation");
+    c.classList.toggle("has-more-below", c.scrollHeight - c.clientHeight - c.scrollTop > 2);
+  }
+  $("popover-translation").addEventListener("scroll", updateTranslationFade, {passive:true});
   // Keep the same word-facing edge when translations or expanded notes resize it.
-  new ResizeObserver(() => { if (!popupExpansion) positionWordPopup(popupAnchor); }).observe($popover);
+  new ResizeObserver(() => { updateTranslationFade(); if (!popupExpansion) positionWordPopup(popupAnchor); }).observe($popover);
   async function openWordPopup(word, anchor) {
     dismissMeaningThanks();
     const request = ++lookupRequest;
@@ -768,11 +814,12 @@
     popupPlacement = null;
     popupAnchor = anchor;
     refreshPopupLanguage = null;
-    $("popover-bookmark").disabled = true;
+    $("popover-bookmark").disabled = true; $("popover-bookmark").hidden = false;
     $("popover-bookmark").setAttribute("aria-pressed", "false");
     selectedEntry = null;
     selectedResolution = null;
     activePronouns = [];
+    partEntries = []; detailParts = [];
     popupAmbiguous = true;
     const context = selectedContext;
     $("popover-word").textContent = word;
@@ -789,6 +836,7 @@
       loading.append(dot);
     }
     $("popover-translation").replaceChildren(loading);
+    $("popover-translation").scrollTop = 0; $("popover-translation").classList.remove("has-more-below");
     for (const id of ["popover-more", "popover-source", "popover-form-notes", "popover-alternatives"]) $(id).hidden = true;
     $("popover-form-notes").ontoggle = null;
     $("popover-choices").replaceChildren();
@@ -819,8 +867,12 @@
     if (request !== lookupRequest) return;
     const reference=window.BibliothekPronounReference;
     const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
-    let showPronounSummary=pronounCandidates.length>0 && (reference.isPronoun(resolution.selected) ||
+    // G65 (24.10.2026): a pronoun record whose recorded construction was found (was für ein) shows that construction (or the choice
+    // between it and the word's own reading, split_choice), not the summary.
+    let showPronounSummary=pronounCandidates.length>0 && !resolution.candidates.some(c=>c.construction?.id === "recorded-construction") && (reference.isPronoun(resolution.selected) ||
       !resolution.selected && !resolution.candidates.some(c=>c.pos==='article'));
+    // G34 (21.10.2026): what the resolver itself chose — pronounCandidates[0] below is only a heading fallback.
+    const resolverChosePronoun = reference.isPronoun(resolution.selected);
     if(showPronounSummary && !reference.isPronoun(resolution.selected))resolution.selected=pronounCandidates[0];
     popupAmbiguous = resolution.status === "ambiguous" && !resolution.selected;
     selectedResolution = resolution.selected;
@@ -842,6 +894,15 @@
     alternatives.hidden = true;
     alternatives.open = !resolution.selected;
     choices.replaceChildren();
+    // G57 (user 24.10.2026): «ещё N значений ↓» shows the hidden meanings here, in the popup (the card, or one line of a card of
+    // parts); a new word, another variant or another language starts short again.
+    let expandedMain = false;
+    const expandedLines = new Set();
+    const moreLabel = (n, ru) => {
+      const forms = n % 10 === 1 && n % 100 !== 11 ? "значение" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "значения" : "значений";
+      return ru ? `ещё ${n} ${forms}` : `${n} more ${n === 1 ? "meaning" : "meanings"}`;
+    };
+    const expandAndKeepFocus = () => { renderSelection(); content.focus({preventScroll:true}); };
     const renderSelection = () => {
       const candidate = selectedResolution;
       const ru = locale() === "ru", display = window.BibliothekMeaningDisplay;
@@ -853,44 +914,75 @@
       let model;
       if (referencePronoun) {
         // A possessive established before its noun (mein Buch) is that card alone (reference 4.3, A4).
-        const shown = (userConfirmed || resolution.evidence === "possessive-before-noun" && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] : pronounCandidates;
+        // G34 (21.10.2026): ihr before a noun is «её / их / Ваш» unless the resolver chose one card (Ihre mid-sentence → Ваш);
+        // the fallback heading card is not a choice (it narrowed every ihre Sprüche to «её»).
+        const possessiveRow = resolution.evidence === "possessive-before-noun";
+        const possessives = pronounCandidates.filter(c => display.partOfSpeech(c) === "Possessivpronomen");
+        const shown = (userConfirmed || possessiveRow && resolverChosePronoun && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] :
+          possessiveRow && possessives.length ? possessives : pronounCandidates;
         const types = [...new Set(shown.map(c => display.partOfSpeech(c)))];
         const use = pronounLink ? "Reflexiv" : "";
-        const values = reference.brief(resolution.evidence === "possessive-before-noun" && shown.length === 1 ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
+        const values = reference.brief(possessiveRow ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
         model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
-          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun] : null, helpEntry:selectedEntry,
+          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
           // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
           note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};
       } else if (candidate) {
         model = display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed});
       } else {
         model = {heading:word, grammar:"", spans:null, helpEntry:null, textLanguage:locale(),
-          text:resolution.candidates.length ? ru ? "Выберите значение слова в этом контексте:" : "Choose the meaning used here:" :
+          // G57 (user 24.10.2026): the choice window is the list of cards alone, without a «choose» line.
+          text:resolution.candidates.length ? "" :
             resolution.error ? ru ? "Не удалось загрузить словарь. Попробуйте ещё раз." : "The dictionary could not be loaded. Please try again." :
             resolution.unresolvedMeanings.length ? `${ru ? "английский: " : ""}${resolution.unresolvedMeanings.join("; ")}` : display.NO_TRANSLATION[locale()]};
       }
       selectedEntry = model.helpEntry || null;
+      partEntries = model.lines ? model.lines.map(l => l.helpEntry).filter((e, i, all) => e && all.findIndex(o => o?.id === e.id) === i) : [];
       $("popover-word").textContent = model.heading;
       const grammarLine = $("popover-grammar");
       grammarLine.textContent = model.grammar; grammarLine.hidden = !model.grammar;
-      content.textContent = model.text;
+      content.textContent = "";
+      const full = (expandedMain || expandedLines.size) && candidate && !referencePronoun
+        ? display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed, all:true}) : null;
+      const shown = expandedMain && full && !model.lines ? full : model;
+      const moreButton = (n, onClick) => {
+        const more = document.createElement("button"); more.type = "button"; more.className = "popover-more-meanings";
+        more.textContent = `${moreLabel(n, ru)} ↓`; more.setAttribute("aria-expanded", "false");
+        more.addEventListener("click", onClick); return more;
+      };
+      if (shown.segments) appendLabelSegments(content, shown.segments, shown.segmentPrefix);
+      // G48 (23.10.2026): a word explained by its parts — every part on a line of its own. G57: a part with more meanings than the
+      // two shown has «ещё N значений ↓», which opens the rest of that line here.
+      else if (model.lines) model.lines.forEach((line, index) => {
+        const open = expandedLines.has(index) && full?.lines?.[index];
+        const row = document.createElement("span"); row.className = "popover-formation-line"; row.textContent = open ? full.lines[index].text : line.text;
+        if (!open && line.more > 0) row.append(" ", moreButton(line.more, () => { expandedLines.add(index); expandAndKeepFocus(); }));
+        content.append(row);
+      });
+      else content.textContent = shown.text;
+      // D13 / G57: meanings of a card beyond the short text (own: about three lines; external: two) open here, in the popup.
+      if (!expandedMain && model.more > 0 && !model.lines) content.append(" ", moreButton(model.more, () => { expandedMain = true; expandAndKeepFocus(); }));
       if (model.note) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = model.note; content.append(note);
       }
       content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : locale();
+      updateTranslationFade();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
       if (referencePronoun && linkedReflexive) {
         const link = document.createElement("button"); link.type = "button"; link.className = "lemma-choice reflexive-link";
         link.textContent = `${ru ? "Связанный глагол" : "Linked verb"}: ${linkedReflexive.lemma}`;
         link.addEventListener("click",()=>chooseCandidate(linkedReflexive)); content.append(link);
       }
-      $("popover-more").hidden = !selectedEntry;
+      $("popover-more").hidden = !selectedEntry && !partEntries.length;
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       paintActiveWord(candidate, referencePronoun || candidate?.construction || candidate?.prepositionLink || candidate?.compound ? model.spans : undefined);
       if(showPronounSummary)popupAmbiguous=false;
+      // G57 (user 24.10.2026): no bookmark while no variant is chosen (it would save a word without a meaning).
+      $("popover-bookmark").hidden = popupAmbiguous;
+      if (popupAmbiguous) $("bookmark-hint").hidden = true;
       renderChoices();
     };
     const chooseCandidate = async candidate => {
@@ -899,8 +991,9 @@
           meaningThanks.selected();
           meaningChosenInPopup = true;
         }
-        showPronounSummary=reference.isPronoun(candidate);
+        showPronounSummary=reference.isPronoun(candidate) && candidate?.construction?.id !== "recorded-construction";
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null; userConfirmed = true;
+        expandedMain = false; expandedLines.clear();
         $("popover-bookmark").disabled = true;
         renderSelection();
         // Keep choices reachable after selection; remember only this occurrence.
@@ -948,7 +1041,7 @@
       source.hidden = !mainUsesExternal && !alternativesUseExternal;
       if (mainUsesExternal) $popover.insertBefore(source, $("popover-more"));
       else alternatives.append(source);
-      displayed.forEach(({candidate, text, language}) => {
+      displayed.forEach(({candidate, text, language, segments}) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "lemma-choice";
       if(candidate.dictionaryId)button.dataset.dictionaryId=candidate.dictionaryId;
@@ -956,11 +1049,18 @@
       // A variant is shown as it would read once chosen (reference, section 2).
       const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:true});
       const marked = altModel.derived ? altModel.text : locale() === "ru" && language === "en" ? `английский: ${text}` : text;
-      for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked]]) {
+      // G57 (user 24.10.2026): more meanings are only named here («ещё N значений», not a button): choosing the row opens its card,
+      // and the number is the one that card shows (a card of parts: all its lines).
+      const hidden = altModel.lines ? altModel.lines.reduce((sum, l) => sum + (l.more || 0), 0) : altModel.more || 0;
+      const moreText = hidden > 0 ? moreLabel(hidden, locale() === "ru") : "";
+      for (const [cls, value] of [["lemma-choice-heading", altModel.heading], ["lemma-choice-grammar", altModel.grammar], ["lemma-choice-text", marked], ["lemma-choice-more", moreText]]) {
         if (!value) continue;
         // Separators stay in the text (screen readers, copy) but not on screen.
         if (button.childNodes.length) { const sep = document.createElement("span"); sep.className = "visually-hidden"; sep.textContent = " · "; button.append(sep); }
-        const part = document.createElement("span"); part.className = cls; part.textContent = value; button.append(part);
+        const part = document.createElement("span"); part.className = cls;
+        if (cls === "lemma-choice-text" && segments && !altModel.derived) appendLabelSegments(part, segments, locale() === "ru" && language === "en" ? "английский: " : "", false);
+        else part.textContent = value;
+        button.append(part);
       }
       button.addEventListener("click",()=>chooseCandidate(candidate));
       choices.append(button);
@@ -971,15 +1071,16 @@
       const language = locale();
       if (request !== lookupRequest || language === renderedLanguage) return;
       renderedLanguage = language;
+      expandedMain = false; expandedLines.clear();
       const revision = ++languageRevision;
       // Repaint immediately; fetching Russian values must not keep English UI
       // frozen or recompute the user's chosen lemma.
       renderSelection();
-      if (!$sheet.hidden && selectedEntry) renderDictionaryDetails();
+      if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();
       await window.BibliothekRussianTranslations?.enrich(resolution,language);
       if (request !== lookupRequest || revision !== languageRevision || locale() !== language) return;
       renderSelection();
-      if (!$sheet.hidden && selectedEntry) renderDictionaryDetails();
+      if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();
     };
     notes.ontoggle = () => { if (request === lookupRequest) renderSelection(); };
     const loadingHeight = $popover.getBoundingClientRect().height;
@@ -1004,6 +1105,7 @@
 
   }
   function renderDictionaryDetails() {
+    if (detailParts.length) { renderPartDetails(); return; }
     if(!activePronouns.length){if(selectedEntry)renderDictionaryCard(selectedEntry);return;}
     const root=$("dictionary-card"),sections=[],seen=new Set();
     for(const candidate of activePronouns){
@@ -1017,6 +1119,37 @@
     }
     root.replaceChildren(...sections);delete root.dataset.pronounReference;
   }
+  // G57 step 2: the card of one part; with several parts a pager above it — the part, «1 / 2», ‹ ›.
+  function renderPartDetails(direction = document.activeElement?.closest?.(".dictionary-pager-step")?.dataset.step) {
+    detailIndex = Math.max(0, Math.min(detailIndex, detailParts.length - 1));
+    const item = detailParts[detailIndex];
+    renderDictionaryCard(item);
+    if (detailParts.length < 2) return;
+    const ru = locale() === "ru", pager = document.createElement("div"); pager.className = "dictionary-pager";
+    const step = (delta, label, symbol) => {
+      const button = document.createElement("button"); button.type = "button"; button.className = "dictionary-pager-step";
+      button.textContent = symbol; button.setAttribute("aria-label", label); button.dataset.step = delta < 0 ? "prev" : "next";
+      const target = detailIndex + delta; button.disabled = target < 0 || target >= detailParts.length;
+      button.addEventListener("click", () => showPart(target, button.dataset.step)); return button;
+    };
+    const place = document.createElement("span"); place.className = "dictionary-pager-place";
+    // Two cards of one word (treten «ступать» / «пинать»): the first meaning tells them apart.
+    const twin = detailParts.some((other, i) => i !== detailIndex && other.word === item.word);
+    const meaning = twin ? String(translation(item) || "").split(";")[0].trim() : "";
+    place.textContent = `${item.word}${meaning ? ` (${meaning})` : ""} · ${detailIndex + 1} / ${detailParts.length}`;
+    pager.append(step(-1, ru ? "Предыдущая часть" : "Previous part", "‹"), place, step(1, ru ? "Следующая часть" : "Next part", "›"));
+    $("dictionary-card").prepend(pager);
+    // Focus stays on the arrow just used (the other one at the end); a rebuild (language) keeps it too.
+    if (direction) (pager.querySelector(`[data-step="${direction}"]:not(:disabled)`) || pager.querySelector(".dictionary-pager-step:not(:disabled)"))?.focus({preventScroll:true});
+  }
+  function showPart(index, direction = index > detailIndex ? "next" : "prev") {
+    if (!detailParts.length || index < 0 || index >= detailParts.length || index === detailIndex) return;
+    detailIndex = index; renderPartDetails(direction);
+    $("dictionary-sheet").querySelector(".sheet-card").scrollTop = 0;
+    // One live region for screen readers, kept in the sheet: «Bauchhöhe: часть 2 из 2 — Höhe».
+    const ru = locale() === "ru", status = $("dictionary-pager-status");
+    if (status) status.textContent = `${selectedWord}: ${ru ? `часть ${index + 1} из ${detailParts.length}` : `part ${index + 1} of ${detailParts.length}`} — ${detailParts[index].word}`;
+  }
   function renderDictionaryCard(item) {
     const root = $("dictionary-card");
     root.replaceChildren();
@@ -1028,7 +1161,7 @@
       return;
     }
     const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
-    const formKey = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+    const formKey = value => String(value || "").normalize("NFC").trim().toLowerCase();
     const clickedForm = formKey(selectedWord);
     const reflexiveGroup = selectedResolution?.construction?.id === "reflexive-verb" ? selectedResolution.construction : null;
     const compoundTense = reflexiveGroup && ["Perfekt","Plusquamperfekt"].includes(reflexiveGroup.tense);
@@ -1055,7 +1188,7 @@
       }
     };
     const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
-    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Numerale",particle:"Partikel"})[item.type] || item.type);
+    addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
@@ -1157,6 +1290,8 @@
       const block = document.createElement("p"); block.className = "dictionary-example"; block.textContent = example.example_de;
       const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || ""; block.append(tr); root.append(block);
     }
+    // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
+    if (item.type === "Ausdruck") return;
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Add to Wortschatz";
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
@@ -1364,7 +1499,31 @@
     const bounds = sourcesDialog.getBoundingClientRect();
     if (event.target === sourcesDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) sourcesDialog.close();
   });
-  $("popover-more").addEventListener("click", () => { if (!selectedEntry) return; renderDictionaryDetails(); $popover.hidden = true; $sheet.hidden = false; });
+  $("popover-more").addEventListener("click", () => {
+    if (!selectedEntry && !partEntries.length) return;
+    detailParts = selectedEntry ? [] : partEntries; detailIndex = 0;
+    if ($("dictionary-pager-status")) $("dictionary-pager-status").textContent = "";
+    renderDictionaryDetails(); $popover.hidden = true; $sheet.hidden = false;
+  });
+  // G57 step 2: swipe sideways (phone) or ← / → (computer) to the next part of the details.
+  {
+    const card = $("dictionary-sheet").querySelector(".sheet-card");
+    let touch = null;
+    // A swipe on something that scrolls sideways itself (a wide table of forms) scrolls it, not the parts.
+    const scrollsSideways = target => { for (let el = target; el && el !== card; el = el.parentElement) if (el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX !== "visible") return true; return false; };
+    card.addEventListener("touchstart", event => { touch = event.touches.length === 1 && !scrollsSideways(event.target) ? {x:event.touches[0].clientX, y:event.touches[0].clientY} : null; }, {passive:true});
+    card.addEventListener("touchend", event => {
+      if (!touch || detailParts.length < 2) return;
+      const dx = event.changedTouches[0].clientX - touch.x, dy = event.changedTouches[0].clientY - touch.y; touch = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) showPart(detailIndex + (dx < 0 ? 1 : -1));
+    });
+    document.addEventListener("keydown", event => {
+      if ($sheet.hidden || detailParts.length < 2 || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+        event.target.closest?.("input, textarea, select, [contenteditable]") || scrollsSideways(event.target)) return;
+      if (event.key === "ArrowRight") { event.preventDefault(); showPart(detailIndex + 1); }
+      if (event.key === "ArrowLeft") { event.preventDefault(); showPart(detailIndex - 1); }
+    });
+  }
   $("sheet-close").addEventListener("click", closePopups);
   $("sheet-scrim").addEventListener("click", closePopups);
   document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });

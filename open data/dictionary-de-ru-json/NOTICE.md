@@ -10,3 +10,7 @@ Wikimedia reuse terms: https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use
 This is a translation projection into partitioned JSON, with display eligibility annotations. Selected source texts/fields remain unchanged. Omitted fields are listed in manifest.json. Original JSONL is preserved separately and is the complete source. Kaikki already extracted/postprocessed Wiktionary content. Known POS conflicts and grammatical-form descriptions remain in the export but are flagged against translation display. No audio is redistributed in this projection. No Russian morphology or lemma resolver is built.
 
 Adapted dictionary data is distributed under CC BY-SA 4.0. Each record retains its source article URL; preserve attribution, license links and modification notices when redistributing.
+
+Labels (converter 2.0.0, 2026-10-22): abbreviations at the start of Russian glosses (разг., устар., хим. …) recognised and stored as codes next to the sense; source texts unchanged.
+
+name_like (converter 2.1.0, 2026-10-22): senses of nouns that are proper names (places, persons …) marked from Russian Wiktionary categories; source texts unchanged.

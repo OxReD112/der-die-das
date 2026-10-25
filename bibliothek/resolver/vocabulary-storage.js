@@ -36,7 +36,7 @@
     if (entry.dictionaryId != null) return JSON.stringify(["main", String(entry.dictionaryId)]);
     // Unresolved forms stay separate until the resolver establishes a lemma.
     const resolved = entry.source === "fallback" && norm(entry.lemma);
-    return JSON.stringify([resolved ? "fallback" : "unresolved", norm(resolved || entry.form).toLocaleLowerCase("de-DE"), norm(entry.pos)]);
+    return JSON.stringify([resolved ? "fallback" : "unresolved", norm(resolved || entry.form).toLowerCase(), norm(entry.pos)]);
   }
   function occurrence(input) {
     const loc = input.location;

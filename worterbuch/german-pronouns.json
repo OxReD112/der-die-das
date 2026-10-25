@@ -2593,7 +2593,365 @@
       "was für einem"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/was_Interrogativpronomen",
-    "example_cloze": "{{c1::Was für ein}} Buch liest du?"
+    "example_cloze": "{{c1::Was für ein}} Buch liest du?",
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "was",
+            "not_after": [
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "das",
+              "es",
+              "dem",
+              "dies",
+              "Folgendes",
+              "einiges",
+              "weniges"
+            ]
+          },
+          {
+            "form": "für"
+          },
+          {
+            "form": [
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "eins"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "adjacent_choice": true
+      },
+      {
+        "parts": [
+          {
+            "form": "was",
+            "clause_start": true,
+            "not_after": [
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "das",
+              "es",
+              "dem",
+              "dies",
+              "Folgendes",
+              "einiges",
+              "weniges"
+            ],
+            "clause_start_after": [
+              "und",
+              "aber",
+              "oder",
+              "doch",
+              "denn",
+              "sondern"
+            ]
+          },
+          {
+            "form": [
+              "für ein",
+              "für eine",
+              "für einen",
+              "für einem",
+              "für einer",
+              "für eines",
+              "für eins"
+            ],
+            "before_frame_end": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "split_choice": true
+      },
+      {
+        "parts": [
+          {
+            "form": "was",
+            "clause_start": true,
+            "not_after": [
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "das",
+              "es",
+              "dem",
+              "dies",
+              "Folgendes",
+              "einiges",
+              "weniges"
+            ],
+            "clause_start_after": [
+              "und",
+              "aber",
+              "oder",
+              "doch",
+              "denn",
+              "sondern",
+              "mit",
+              "von",
+              "aus",
+              "in",
+              "an",
+              "auf",
+              "für",
+              "über",
+              "zu",
+              "bei",
+              "nach",
+              "unter",
+              "vor",
+              "durch",
+              "gegen",
+              "ohne",
+              "um",
+              "seit",
+              "hinter",
+              "neben",
+              "zwischen",
+              "wegen"
+            ]
+          },
+          {
+            "form": "für",
+            "not_next": [
+              "mich",
+              "dich",
+              "ihn",
+              "sie",
+              "es",
+              "uns",
+              "euch",
+              "Sie",
+              "ihr",
+              "ihm",
+              "ihnen",
+              "Ihnen",
+              "sich",
+              "mir",
+              "dir",
+              "den",
+              "die",
+              "das",
+              "dem",
+              "der",
+              "des",
+              "jeden",
+              "jede",
+              "jedes",
+              "alle",
+              "diesen",
+              "diese",
+              "dieses",
+              "meinen",
+              "meine",
+              "mein",
+              "deinen",
+              "deine",
+              "dein",
+              "seinen",
+              "seine",
+              "sein",
+              "ihren",
+              "ihre",
+              "unseren",
+              "unsere",
+              "euren",
+              "eure",
+              "heute",
+              "morgen",
+              "immer",
+              "jetzt",
+              "später",
+              "nichts",
+              "etwas",
+              "alles",
+              "viele",
+              "manche",
+              "einige",
+              "wenige",
+              "beide",
+              "jemanden",
+              "niemanden",
+              "wen",
+              "wem",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "eins"
+            ],
+            "before_frame_end": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "was",
+            "clause_start": true,
+            "not_after": [
+              "alles",
+              "etwas",
+              "nichts",
+              "vieles",
+              "manches",
+              "das",
+              "es",
+              "dem",
+              "dies",
+              "Folgendes",
+              "einiges",
+              "weniges"
+            ],
+            "clause_start_after": [
+              "und",
+              "aber",
+              "oder",
+              "doch",
+              "denn",
+              "sondern"
+            ]
+          },
+          {
+            "form": "für",
+            "not_next": [
+              "mich",
+              "dich",
+              "ihn",
+              "sie",
+              "es",
+              "uns",
+              "euch",
+              "Sie",
+              "ihr",
+              "ihm",
+              "ihnen",
+              "Ihnen",
+              "sich",
+              "mir",
+              "dir",
+              "den",
+              "die",
+              "das",
+              "dem",
+              "der",
+              "des",
+              "jeden",
+              "jede",
+              "jedes",
+              "alle",
+              "diesen",
+              "diese",
+              "dieses",
+              "meinen",
+              "meine",
+              "mein",
+              "deinen",
+              "deine",
+              "dein",
+              "seinen",
+              "seine",
+              "sein",
+              "ihren",
+              "ihre",
+              "unseren",
+              "unsere",
+              "euren",
+              "eure",
+              "heute",
+              "morgen",
+              "immer",
+              "jetzt",
+              "später",
+              "nichts",
+              "etwas",
+              "alles",
+              "viele",
+              "manche",
+              "einige",
+              "wenige",
+              "beide",
+              "jemanden",
+              "niemanden",
+              "wen",
+              "wem",
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer",
+              "eines",
+              "eins",
+              "kein",
+              "keine",
+              "keinen",
+              "keinem",
+              "keiner",
+              "keines"
+            ],
+            "before_frame_end": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "split_bare_choice": true
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Was für ein Buch liest du?",
+        "Was für ein schöner Tag!",
+        "Mit was für einem Auto fährst du?",
+        "Was hast du für ein Auto?",
+        "Was ist das für eine Frage?",
+        "Was für Bücher liest du gern?",
+        "Ich weiß nicht, was für einen Zweck das haben soll.",
+        "»Was für einer?«, fragte Ron.",
+        "Was hat das für einen Sinn?",
+        "Und was für Leute waren das?",
+        "Was für andere Möglichkeiten gibt es?",
+        "Er fragte, was er für ein Gewerbe verstehe.",
+        "Was sind das für Leute?",
+        "Was ist das für Wetter?",
+        "Was waren das für Zeiten!"
+      ],
+      "negative": [
+        "Was hast du für mich?",
+        "Das ist alles, was für ihn wichtig ist.",
+        "Das ist etwas, was für einen Menschen schwer ist.",
+        "Für ein Kind ist das zu schwer.",
+        "Was kostet das für uns?",
+        "Er fragte, was für heute geplant sei.",
+        "Was für viele selbstverständlich ist, ist für ihn neu.",
+        "Was ist das für mich?",
+        "Was hast du für deine Mutter gekauft?"
+      ]
+    }
   },
   {
     "id": "pronoun-048",
@@ -2728,5 +3086,387 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel",
     "example_cloze": "Nur {{c1::wenige}} haben die Frage richtig beantwortet."
+  },
+  {
+    "id": "pronoun-052",
+    "word": "jener",
+    "translation_ru": "тот; тот самый (о прошлом или уже известном)",
+    "translation_en": "that; that very (of the past or something known)",
+    "example_de": "Sie zeigte nicht auf das nahe Ufer, sondern auf jenes hinter dem Nebel.",
+    "example_ru": "Она показала не на ближний берег, а на тот, что за туманом.",
+    "example_en": "She pointed not at the near bank but at the one beyond the fog.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "jener",
+            "jene",
+            "jenes",
+            "jene"
+          ],
+          "Akkusativ": [
+            "jenen",
+            "jene",
+            "jenes",
+            "jene"
+          ],
+          "Dativ": [
+            "jenem",
+            "jener",
+            "jenem",
+            "jenen"
+          ],
+          "Genitiv": [
+            "jenes",
+            "jener",
+            "jenes",
+            "jener"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "Книжное слово. В паре с dieser: dieser — ближний, jener — дальний. О прошлом: in jener Nacht — в ту ночь, seit jener Zeit — с того времени. В разговоре вместо jener обычно говорят der da или der dort drüben.",
+    "usage_note_en": "A literary word. Paired with dieser: dieser is the nearer one, jener the farther one. Of the past: in jener Nacht (that night), seit jener Zeit (since that time). In speech, der da or der dort drüben is usually used instead.",
+    "search_forms": [
+      "jener",
+      "jene",
+      "jenes",
+      "jenen",
+      "jenem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/jener",
+    "example_cloze": "Sie zeigte nicht auf das nahe Ufer, sondern auf {{c1::jenes}} hinter dem Nebel."
+  },
+  {
+    "id": "pronoun-053",
+    "word": "derjenige",
+    "translation_ru": "тот (который …)",
+    "translation_en": "the one (who / that …)",
+    "example_de": "Derjenige, der zuletzt geht, macht das Licht aus.",
+    "example_ru": "Тот, кто уходит последним, выключает свет.",
+    "example_en": "The one who leaves last turns off the light.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "derjenige",
+            "diejenige",
+            "dasjenige",
+            "diejenigen"
+          ],
+          "Akkusativ": [
+            "denjenigen",
+            "diejenige",
+            "dasjenige",
+            "diejenigen"
+          ],
+          "Dativ": [
+            "demjenigen",
+            "derjenigen",
+            "demjenigen",
+            "denjenigen"
+          ],
+          "Genitiv": [
+            "desjenigen",
+            "derjenigen",
+            "desjenigen",
+            "derjenigen"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Пишется слитно: первая часть склоняется как артикль der, вторая — как прилагательное.",
+    "forms_note_en": "Written as one word: the first part declines like the article der, the second like an adjective.",
+    "usage_note_ru": "Усиленное der, die, das. После него обычно придаточное: derjenige, der … — тот, кто …; diejenigen, die … — те, кто … Реже — родительный падеж: Mein Zimmer ist größer als dasjenige meines Bruders. — Моя комната больше, чем комната брата.",
+    "usage_note_en": "An emphatic der, die, das. Usually followed by a relative clause: derjenige, der … (the one who …); diejenigen, die … (those who …). Less often by a genitive: Mein Zimmer ist größer als dasjenige meines Bruders. (My room is bigger than my brother's.)",
+    "search_forms": [
+      "derjenige",
+      "diejenige",
+      "dasjenige",
+      "diejenigen",
+      "denjenigen",
+      "demjenigen",
+      "derjenigen",
+      "desjenigen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/derjenige",
+    "example_cloze": "{{c1::Derjenige}}, der zuletzt geht, macht das Licht aus."
+  },
+  {
+    "id": "pronoun-054",
+    "word": "alledem",
+    "translation_ru": "всё это",
+    "translation_en": "all that",
+    "example_de": "Trotz alledem haben wir den Ausflug genossen.",
+    "example_ru": "Несмотря на всё это, поездка нам понравилась.",
+    "example_en": "Despite all that, we enjoyed the trip.",
+    "forms": null,
+    "usage_note_ru": "Не изменяется; стоит только после предлога: trotz alledem — несмотря на всё это, bei alledem — при всём этом, von alledem — обо всём этом. Другое написание — alldem.",
+    "usage_note_en": "Invariable; used only after a preposition: trotz alledem (despite all that), bei alledem (for all that), von alledem (about all that). Also spelled alldem.",
+    "search_forms": [
+      "alledem",
+      "alldem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/alledem",
+    "example_cloze": "Trotz {{c1::alledem}} haben wir den Ausflug genossen."
+  },
+  {
+    "id": "pronoun-055",
+    "word": "dergleichen",
+    "translation_ru": "такое, нечто подобное; такой, подобный (перед существительным)",
+    "translation_en": "such a thing, anything like that; such (before a noun)",
+    "example_de": "Dergleichen habe ich noch nie erlebt.",
+    "example_ru": "Такого со мной ещё не бывало.",
+    "example_en": "I've never experienced anything like it.",
+    "forms": null,
+    "usage_note_ru": "Не изменяется. und dergleichen (mehr) — и тому подобное (сокращённо u. dgl. / u. dgl. m.); nichts dergleichen — ничего подобного. Перед существительным: dergleichen Fragen — подобные вопросы.",
+    "usage_note_en": "Invariable. und dergleichen (mehr): and the like (abbreviated u. dgl. / u. dgl. m.); nichts dergleichen: nothing of the kind. Before a noun: dergleichen Fragen (such questions).",
+    "search_forms": [
+      "dergleichen",
+      "dgl",
+      "dgl."
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dergleichen",
+    "example_cloze": "{{c1::Dergleichen}} habe ich noch nie erlebt."
+  },
+  {
+    "id": "pronoun-056",
+    "word": "irgendwer",
+    "translation_ru": "кто-то, кто-нибудь (неважно кто)",
+    "translation_en": "someone, somebody, anyone (no matter who)",
+    "example_de": "Irgendwer hat meinen Regenschirm mitgenommen.",
+    "example_ru": "Кто-то унёс мой зонт.",
+    "example_en": "Somebody has taken my umbrella.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "irgendwer"
+          ],
+          "Akkusativ": [
+            "irgendwen"
+          ],
+          "Dativ": [
+            "irgendwem"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Склоняется как wer; Genitiv практически не употребляется.",
+    "forms_note_en": "Declines like wer; the genitive is hardly ever used.",
+    "usage_note_ru": "Разговорное, то же, что irgendjemand. nicht irgendwer — не кто попало, не абы кто.",
+    "usage_note_en": "Colloquial; means the same as irgendjemand. nicht irgendwer: not just anybody.",
+    "search_forms": [
+      "irgendwer",
+      "irgendwen",
+      "irgendwem"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/irgendwer",
+    "example_cloze": "{{c1::Irgendwer}} hat meinen Regenschirm mitgenommen."
+  },
+  {
+    "id": "pronoun-057",
+    "word": "jeglicher",
+    "translation_ru": "всякий, любой (без исключения)",
+    "translation_en": "any, every (whatsoever)",
+    "example_de": "Nach dem Streit hatte sie jegliche Lust auf das Fest verloren.",
+    "example_ru": "После ссоры у неё пропало всякое желание идти на праздник.",
+    "example_en": "After the argument she had lost all desire to go to the party.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Maskulin",
+          "Feminin",
+          "Neutrum",
+          "Plural"
+        ],
+        "rows": {
+          "Nominativ": [
+            "jeglicher",
+            "jegliche",
+            "jegliches",
+            "jegliche"
+          ],
+          "Akkusativ": [
+            "jeglichen",
+            "jegliche",
+            "jegliches",
+            "jegliche"
+          ],
+          "Dativ": [
+            "jeglichem",
+            "jeglicher",
+            "jeglichem",
+            "jeglichen"
+          ],
+          "Genitiv": [
+            "jeglichen / jegliches",
+            "jeglicher",
+            "jeglichen / jegliches",
+            "jeglicher"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Склоняется как dieser; в Genitiv мужского и среднего рода обычно jeglichen (jeglichen Geschlechts), реже jegliches. Множественное число встречается реже: jegliche Ansprüche.",
+    "forms_note_en": "Declines like dieser; the masculine and neuter genitive is usually jeglichen (jeglichen Geschlechts), less often jegliches. The plural is less common: jegliche Ansprüche.",
+    "usage_note_ru": "Усиленное jeder, чаще с абстрактными существительными: jegliche Hilfe — любая помощь, ohne jeglichen Zweifel — без всякого сомнения. Без существительного (ein jeglicher — каждый) — книжное, устаревающее.",
+    "usage_note_en": "An emphatic jeder, mostly with abstract nouns: jegliche Hilfe (any help), ohne jeglichen Zweifel (without any doubt). Without a noun (ein jeglicher, everyone) it is literary and dated.",
+    "search_forms": [
+      "jeglicher",
+      "jegliche",
+      "jegliches",
+      "jeglichen",
+      "jeglichem",
+      "jeglich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/jeglicher",
+    "example_cloze": "Nach dem Streit hatte sie {{c1::jegliche}} Lust auf das Fest verloren."
+  },
+  {
+    "id": "pronoun-058",
+    "word": "irgendetwas",
+    "translation_ru": "что-нибудь, что-то (неважно что)",
+    "translation_en": "something, anything (at all)",
+    "example_de": "Kann ich dir irgendetwas zu trinken bringen?",
+    "example_ru": "Принести тебе что-нибудь попить?",
+    "example_en": "Can I bring you anything to drink?",
+    "forms": null,
+    "usage_note_ru": "Не изменяется. В разговоре — irgendwas: Ist irgendwas? — Что-то случилось? Перед прилагательным: irgendetwas Neues — что-нибудь новое.",
+    "usage_note_en": "Invariable. Colloquially irgendwas: Ist irgendwas? (Is something wrong?) Before an adjective: irgendetwas Neues (something new).",
+    "search_forms": [
+      "irgendetwas",
+      "irgendwas"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/irgendetwas",
+    "example_cloze": "Kann ich dir {{c1::irgendetwas}} zu trinken bringen?"
+  },
+  {
+    "id": "pronoun-059",
+    "word": "etliche",
+    "translation_ru": "несколько, немало; порядочно (в ед. ч.)",
+    "translation_en": "several, quite a few; a fair amount (singular)",
+    "example_de": "Wir haben etliche Jahre in Wien gewohnt.",
+    "example_ru": "Мы прожили в Вене немало лет.",
+    "example_en": "We lived in Vienna for quite a few years.",
+    "forms": [
+      {
+        "label": "Plural",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "etliche"
+          ],
+          "Akkusativ": [
+            "etliche"
+          ],
+          "Dativ": [
+            "etlichen"
+          ],
+          "Genitiv": [
+            "etlicher"
+          ]
+        }
+      }
+    ],
+    "usage_note_ru": "В таблице — множественное число. В единственном числе: etliches — кое-что, немало (Ich habe noch etliches zu erledigen.); etliche Zeit — порядочно времени. Разговорное усиление: das hat etlichen Ärger gemacht — это доставило немало неприятностей.",
+    "usage_note_en": "The table shows plural forms. In the singular: etliches (a fair amount, quite a few things: Ich habe noch etliches zu erledigen.); etliche Zeit (quite some time). Colloquial intensifier: das hat etlichen Ärger gemacht (that caused a lot of trouble).",
+    "form_translations": [
+      {
+        "form": "etliches",
+        "ru": "кое-что, немало",
+        "en": "quite a few things, a fair amount",
+        "without_noun": true
+      }
+    ],
+    "search_forms": [
+      "etliche",
+      "etlichen",
+      "etlicher",
+      "etliches",
+      "etlichem",
+      "etlich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/etliche",
+    "example_cloze": "Wir haben {{c1::etliche}} Jahre in Wien gewohnt."
+  },
+  {
+    "id": "pronoun-060",
+    "word": "allesamt",
+    "translation_ru": "все до одного, все без исключения",
+    "translation_en": "all of them, every single one",
+    "example_de": "Die Gäste sind allesamt pünktlich gekommen.",
+    "example_ru": "Гости пришли вовремя все до одного.",
+    "example_en": "Every single one of the guests arrived on time.",
+    "forms": null,
+    "usage_note_ru": "Не изменяется; разговорное. Относится к подлежащему или дополнению во множественном числе: Sie waren allesamt müde. — Все они устали.",
+    "usage_note_en": "Invariable; colloquial. Refers to a plural subject or object: Sie waren allesamt müde. (They were all tired.)",
+    "search_forms": [
+      "allesamt"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/allesamt",
+    "example_cloze": "Die Gäste sind {{c1::allesamt}} pünktlich gekommen."
+  },
+  {
+    "id": "pronoun-061",
+    "word": "unsereiner",
+    "translation_ru": "наш брат, такие, как мы; (реже) я",
+    "translation_en": "the likes of us, people like us; (less often) I, me",
+    "example_de": "Für unsereinen ist das viel zu teuer.",
+    "example_ru": "Для нашего брата это слишком дорого.",
+    "example_en": "That's far too expensive for the likes of us.",
+    "forms": [
+      {
+        "label": "Deklination",
+        "columns": [
+          "Form"
+        ],
+        "rows": {
+          "Nominativ": [
+            "unsereiner"
+          ],
+          "Akkusativ": [
+            "unsereinen"
+          ],
+          "Dativ": [
+            "unsereinem"
+          ]
+        }
+      }
+    ],
+    "forms_note_ru": "Genitiv не употребляется. unsereins — то же значение, не изменяется. О женщине иногда — unsereine.",
+    "forms_note_en": "No genitive is used. unsereins means the same and is invariable. For a woman, sometimes unsereine.",
+    "usage_note_ru": "Разговорное. Глагол — в 3-м лице единственного числа: Da kann unsereiner nicht mithalten. — Тут нашему брату не угнаться.",
+    "usage_note_en": "Colloquial. The verb is third person singular: Da kann unsereiner nicht mithalten. (People like us can't keep up there.)",
+    "search_forms": [
+      "unsereiner",
+      "unsereinen",
+      "unsereinem",
+      "unsereins",
+      "unsereine"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/unsereiner",
+    "example_cloze": "Für {{c1::unsereinen}} ist das viel zu teuer."
   }
 ]

@@ -1,7 +1,7 @@
 /* Main forms match immediately. Fallback forms resolve near the viewport only. */
 (() => {
   "use strict";
-  const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+  const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   function create(text, toggle, getResolver) {
     const PREF = "deutschReadingHighlightsV1", cache = new Map();
     let visible = true, generation = 0, observer = null, reflexiveObserver = null, active = 0;

@@ -1,0 +1,12 @@
+{
+  "format_version": 1,
+  "about": "Senses of the external (Wiktionary) dictionary that the reader never shows, beyond the automatic names rule (fallback-dictionary.js: a word with a personal name hides its labelled slang / rude noun senses — Johannes, Petrus, Fritz, Kalle, Jürgen, Bimbo …). Each row: spelling, sense id, the exact English gloss (the row applies only while the gloss still matches), reason. The dictionary files themselves are not edited. ru_entries: parts of a Russian translation (word, part of speech, the exact part between «;») that are never shown.",
+  "entries": [
+    ["ali", 7046, "a Muslim, especially Turkish, immigrant (or descendant of immigrants)", "derogatory; the name sense reads «Ali (name)», so the names rule does not see it (reviewer 22.10.2026)"],
+    ["dirne", 18106,
+      "whore (prostitute or sexually unreserved woman)", "not a name, so the names rule does not apply; in Grimm Dirne is «девушка» (user 22.10.2026)"]
+  ],
+  "ru_entries": [
+    ["Dirne", "noun", "проститутка", "Russian Wiktionary gives «девка, девица; проститутка» without a label; hidden with the English «whore» (user 22.10.2026)"]
+  ]
+}

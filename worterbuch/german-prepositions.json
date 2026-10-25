@@ -1386,5 +1386,1140 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/dank",
     "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-034",
+    "type": "preposition",
+    "word": "außer",
+    "translation_ru": "кроме, за исключением; вне",
+    "translation_en": "except (for), apart from; out of",
+    "example_de": "Außer meiner Schwester kommen alle zum Fest.",
+    "example_ru": "Кроме моей сестры, на праздник придут все.",
+    "example_en": "Everyone is coming to the party except my sister.",
+    "cases": [
+      "Dativ",
+      "Akkusativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "außer + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "кроме кого-либо / чего-либо; вне чего-либо",
+        "note_en": "except someone / something; out of something",
+        "example_de": "außer mir"
+      },
+      {
+        "pattern": "außer + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "только в устойчивых оборотах с глаголами движения",
+        "note_en": "only in fixed phrases with verbs of motion",
+        "example_de": "außer jeden Zweifel stellen"
+      },
+      {
+        "pattern": "außer + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "только außer Landes (устаревающее) и außer Hauses (книжн.)",
+        "note_en": "only außer Landes (dated) and außer Hauses (formal)",
+        "example_de": "außer Landes gehen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Вне: außer Betrieb — не работает, außer Atem — запыхавшись, außer Dienst — в отставке. außer sich sein — быть вне себя, außer sich geraten (mir / mich) — выйти из себя. Союз außer (außer wenn, außer dass) — отдельная карточка.",
+    "usage_note_en": "Out of: außer Betrieb — out of order, außer Atem — out of breath, außer Dienst — retired. außer sich sein — to be beside oneself, außer sich geraten (mir / mich) — to lose one's temper. The conjunction außer (außer wenn, außer dass) has its own card.",
+    "search_forms": [
+      "außer"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auszer_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-035",
+    "type": "preposition",
+    "word": "pro",
+    "translation_ru": "на, с (каждого); в (за единицу времени)",
+    "translation_en": "per, for each; a (per unit of time)",
+    "example_de": "Der Eintritt kostet zehn Euro pro Person.",
+    "example_ru": "Вход стоит десять евро с человека.",
+    "example_en": "Admission costs ten euros per person.",
+    "cases": [
+      "Akkusativ",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "pro + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "на каждую единицу; обычно без артикля",
+        "note_en": "for each unit; usually without an article",
+        "example_de": "pro zusätzlichen Gast"
+      },
+      {
+        "pattern": "pro + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "то же; падеж виден только у прилагательного",
+        "note_en": "the same; the case shows only on an adjective",
+        "example_de": "pro zusätzlichem Gast"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Обычно без артикля: pro Tag, pro Stunde, pro Stück. 100 km pro Stunde — 100 км в час.",
+    "usage_note_en": "Usually without an article: pro Tag, pro Stunde, pro Stück. 100 km pro Stunde — 100 km an hour.",
+    "search_forms": [
+      "pro"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/pro_je_zu_jeweils_fuer",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-036",
+    "type": "preposition",
+    "word": "per",
+    "translation_ru": "по, через (о способе передачи); к (о дате, торг.)",
+    "translation_en": "by, via; as of (a date, commercial)",
+    "example_de": "Ich schicke dir die Unterlagen per E-Mail.",
+    "example_ru": "Я пришлю тебе документы по электронной почте.",
+    "example_en": "I'll send you the documents by email.",
+    "cases": [
+      "Akkusativ",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "per + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "способ: чем, через что; обычно без артикля",
+        "note_en": "means: by, via; usually without an article",
+        "example_de": "per gesonderten Brief"
+      },
+      {
+        "pattern": "per + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "то же; падеж виден только у прилагательного",
+        "note_en": "the same; the case shows only on an adjective",
+        "example_de": "per gesondertem Brief"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Обычно без артикля: per Post, per Bahn, per Telefon. Торговый язык: per 1. Mai — к 1 мая, per Stück — за штуку (лучше pro Stück). mit jemandem per du sein — быть с кем-либо на «ты».",
+    "usage_note_en": "Usually without an article: per Post, per Bahn, per Telefon. Commercial language: per 1. Mai — as of 1 May, per Stück — per piece (better: pro Stück). mit jemandem per du sein — to be on first-name terms with someone.",
+    "search_forms": [
+      "per"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/per",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-037",
+    "type": "preposition",
+    "word": "einschließlich",
+    "translation_ru": "включая",
+    "translation_en": "including",
+    "example_de": "Die Wohnung kostet 900 Euro im Monat, einschließlich der Nebenkosten.",
+    "example_ru": "Квартира стоит 900 евро в месяц, включая коммунальные расходы.",
+    "example_en": "The flat costs 900 euros a month, including utilities.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "einschließlich + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "включая что-либо",
+        "note_en": "including something",
+        "example_de": "einschließlich der Fahrt"
+      },
+      {
+        "pattern": "einschließlich + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "редко; но во мн. ч., когда Genitiv не виден, — обычно (или без окончания)",
+        "note_en": "rare; but usual in the plural when the genitive is not visible (or no ending)",
+        "example_de": "einschließlich Kindern"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Существительное без артикля в ед. ч. — без окончания: einschließlich Porto. Может стоять и после существительного. Наречие: bis einschließlich Freitag — по пятницу включительно. Сокращение: einschl.",
+    "usage_note_en": "A singular noun without an article has no ending: einschließlich Porto. It can also follow the noun. Adverb: bis einschließlich Freitag — up to and including Friday. Abbreviation: einschl.",
+    "search_forms": [
+      "einschließlich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/einschlieszlich_inklusive_samt_nebst",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-038",
+    "type": "preposition",
+    "word": "inklusive",
+    "translation_ru": "включая",
+    "translation_en": "including",
+    "example_de": "Der Flug kostet 120 Euro inklusive Gepäck.",
+    "example_ru": "Перелёт стоит 120 евро, включая багаж.",
+    "example_en": "The flight costs 120 euros including luggage.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "inklusive + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "включая что-либо",
+        "note_en": "including something",
+        "example_de": "inklusive aller Gebühren"
+      },
+      {
+        "pattern": "inklusive + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "редко; но во мн. ч., когда Genitiv не виден, — обычно (или без окончания)",
+        "note_en": "rare; but usual in the plural when the genitive is not visible (or no ending)",
+        "example_de": "inklusive Kosmetikartikeln"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Особенно в торговом языке. Существительное без артикля в ед. ч. — без окончания: inklusive Frühstück. Может стоять после: Frühstück inklusive. Наречие: bis inklusive Montag. Сокращение: inkl.",
+    "usage_note_en": "Especially commercial language. A singular noun without an article has no ending: inklusive Frühstück. It can follow the noun: Frühstück inklusive. Adverb: bis inklusive Montag. Abbreviation: inkl.",
+    "search_forms": [
+      "inklusive"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/inklusive_mitsamt",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-039",
+    "type": "preposition",
+    "word": "angesichts",
+    "translation_ru": "ввиду, учитывая; при виде, перед лицом",
+    "translation_en": "in view of, given; at the sight of, in the face of",
+    "example_de": "Angesichts der hohen Preise fahren wir dieses Jahr nicht in Urlaub.",
+    "example_ru": "Ввиду высоких цен мы в этом году не поедем в отпуск.",
+    "example_en": "In view of the high prices, we're not going on holiday this year.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "angesichts + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "ввиду чего-либо; при виде чего-либо",
+        "note_en": "in view of something; at the sight of something",
+        "example_de": "angesichts der Lage"
+      },
+      {
+        "pattern": "angesichts von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "angesichts von Krieg und Krise",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Книжное слово.",
+    "usage_note_en": "Formal word.",
+    "search_forms": [
+      "angesichts"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/angesichts_Hinblick_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-040",
+    "type": "preposition",
+    "word": "anhand",
+    "translation_ru": "по, на основании, с помощью",
+    "translation_en": "on the basis of, from, using",
+    "example_de": "Die Polizei hat den Täter anhand der Fingerabdrücke identifiziert.",
+    "example_ru": "Полиция опознала преступника по отпечаткам пальцев.",
+    "example_en": "The police identified the culprit from the fingerprints.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "anhand + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "на основании чего-либо, с помощью чего-либо",
+        "note_en": "on the basis of something, using something",
+        "example_de": "anhand eines Beispiels"
+      },
+      {
+        "pattern": "anhand von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "anhand von Fotos",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Пишется только слитно.",
+    "usage_note_en": "Always written as one word.",
+    "search_forms": [
+      "anhand"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/anhand_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-041",
+    "type": "preposition",
+    "word": "anstelle",
+    "translation_ru": "вместо",
+    "translation_en": "instead of, in place of",
+    "example_de": "Anstelle des Chefs kam seine Stellvertreterin zur Sitzung.",
+    "example_ru": "Вместо начальника на совещание пришла его заместительница.",
+    "example_en": "Instead of the boss, his deputy came to the meeting.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "anstelle + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вместо кого-либо / чего-либо",
+        "note_en": "instead of someone / something",
+        "example_de": "anstelle des Chefs"
+      },
+      {
+        "pattern": "anstelle von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "anstelle von Zucker",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Также раздельно: an Stelle (Duden рекомендует anstelle). Но: an die Stelle von … treten — занять место. То же значение — statt.",
+    "usage_note_en": "Also written an Stelle (Duden recommends anstelle). But: an die Stelle von … treten — to take the place of. Same meaning — statt.",
+    "search_forms": [
+      "anstelle"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/anstelle_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-042",
+    "type": "preposition",
+    "word": "aufgrund",
+    "translation_ru": "из-за, по причине; на основании",
+    "translation_en": "because of, due to; on the basis of",
+    "example_de": "Aufgrund eines Unfalls ist die Autobahn gesperrt.",
+    "example_ru": "Из-за аварии автобан перекрыт.",
+    "example_en": "The motorway is closed due to an accident.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "aufgrund + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "из-за чего-либо, на основании чего-либо",
+        "note_en": "because of something, on the basis of something",
+        "example_de": "aufgrund des Wetters"
+      },
+      {
+        "pattern": "aufgrund von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "aufgrund von Bauarbeiten",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Также раздельно: auf Grund (Duden рекомендует aufgrund). aufgrund dessen — поэтому, по этой причине. Звучит официальнее, чем wegen.",
+    "usage_note_en": "Also written auf Grund (Duden recommends aufgrund). aufgrund dessen — for this reason. Sounds more formal than wegen.",
+    "search_forms": [
+      "aufgrund"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/aufgrund_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-043",
+    "type": "preposition",
+    "word": "bezüglich",
+    "translation_ru": "относительно, касательно",
+    "translation_en": "regarding, concerning",
+    "example_de": "Bezüglich Ihrer Anfrage melden wir uns morgen.",
+    "example_ru": "Относительно вашего запроса мы свяжемся с вами завтра.",
+    "example_en": "We'll get back to you tomorrow regarding your enquiry.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "bezüglich + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "относительно чего-либо",
+        "note_en": "regarding something",
+        "example_de": "bezüglich des Vertrags"
+      },
+      {
+        "pattern": "bezüglich + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "во мн. ч., когда Genitiv не виден",
+        "note_en": "in the plural when the genitive is not visible",
+        "example_de": "bezüglich Anträgen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Канцелярское слово: письма, документы. Сокращение: bez.",
+    "usage_note_en": "Officialese: letters, documents. Abbreviation: bez.",
+    "search_forms": [
+      "bezüglich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bezueglich_Praeposition",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-044",
+    "type": "preposition",
+    "word": "gemäß",
+    "translation_ru": "согласно, в соответствии с",
+    "translation_en": "according to, in accordance with",
+    "example_de": "Gemäß dem neuen Gesetz müssen alle Geräte geprüft werden.",
+    "example_ru": "Согласно новому закону, все приборы должны пройти проверку.",
+    "example_en": "Under the new law, all devices must be tested.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "gemäß + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в соответствии с чем-либо",
+        "note_en": "in accordance with something",
+        "example_de": "gemäß dem Vertrag"
+      },
+      {
+        "pattern": "Dativ + gemäß",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "может стоять и после существительного",
+        "note_en": "it can also follow the noun",
+        "example_de": "dem Vertrag gemäß"
+      },
+      {
+        "pattern": "gemäß + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "редко",
+        "note_en": "rare",
+        "example_de": "gemäß des Vertrags"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Часто в документах и правилах: gemäß § 5. Прилагательное gemäß «соответствующий» (eine dem Alter gemäße Aufgabe) — не эта карточка.",
+    "usage_note_en": "Common in documents and regulations: gemäß § 5. The adjective gemäß 'appropriate' (eine dem Alter gemäße Aufgabe) is not this card.",
+    "search_forms": [
+      "gemäß"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/gemaesz_bezueglich_laut",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-045",
+    "type": "preposition",
+    "word": "hinsichtlich",
+    "translation_ru": "в отношении, относительно",
+    "translation_en": "with regard to, regarding",
+    "example_de": "Hinsichtlich des Termins sind wir uns noch nicht einig.",
+    "example_ru": "Относительно даты мы пока не договорились.",
+    "example_en": "We haven't agreed yet with regard to the date.",
+    "cases": [
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "hinsichtlich + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в отношении чего-либо",
+        "note_en": "with regard to something",
+        "example_de": "hinsichtlich der Kosten"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Канцелярское слово.",
+    "usage_note_en": "Officialese.",
+    "search_forms": [
+      "hinsichtlich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hinsichtlich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-046",
+    "type": "preposition",
+    "word": "mithilfe",
+    "translation_ru": "с помощью",
+    "translation_en": "with the help of, by means of",
+    "example_de": "Mithilfe einer App lerne ich jeden Tag neue Wörter.",
+    "example_ru": "С помощью приложения я каждый день учу новые слова.",
+    "example_en": "I learn new words every day with the help of an app.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "mithilfe + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "с помощью кого-либо / чего-либо",
+        "note_en": "with the help of someone / something",
+        "example_de": "mithilfe eines Wörterbuchs"
+      },
+      {
+        "pattern": "mithilfe von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "mithilfe von Freunden",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Также раздельно: mit Hilfe (Duden рекомендует mithilfe).",
+    "usage_note_en": "Also written mit Hilfe (Duden recommends mithilfe).",
+    "search_forms": [
+      "mithilfe"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/mithilfe_durch_mittels_dank",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-047",
+    "type": "preposition",
+    "word": "wider",
+    "translation_ru": "вопреки; против",
+    "translation_en": "contrary to; against",
+    "example_de": "Er hat den Vertrag wider besseres Wissen unterschrieben.",
+    "example_ru": "Он подписал договор, прекрасно зная, что поступает неправильно.",
+    "example_en": "He signed the contract against his better judgement.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "wider + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вопреки чему-либо; против чего-либо",
+        "note_en": "contrary to something; against something",
+        "example_de": "wider alle Regeln"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Книжное слово. Устойчиво: wider Willen — против воли, wider Erwarten — вопреки ожиданиям, das Für und Wider — за и против. Не путать с wieder (снова).",
+    "usage_note_en": "Formal word. Fixed phrases: wider Willen — unwillingly, wider Erwarten — contrary to expectations, das Für und Wider — the pros and cons. Not to be confused with wieder (again).",
+    "search_forms": [
+      "wider"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/wider",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-048",
+    "type": "preposition",
+    "word": "um … willen",
+    "translation_ru": "ради",
+    "translation_en": "for the sake of",
+    "example_de": "Sie hat um der Kinder willen auf die Reise verzichtet.",
+    "example_ru": "Она отказалась от поездки ради детей.",
+    "example_en": "She gave up the trip for the sake of the children.",
+    "cases": [
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "um + Genitiv + willen",
+        "case": "Genitiv",
+        "position": "around",
+        "status": "standard",
+        "note_ru": "ради кого-либо / чего-либо; слово в Genitiv стоит между um и willen",
+        "note_en": "for the sake of someone / something; the genitive stands between um and willen",
+        "example_de": "um der Sache willen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Восклицания: Um Himmels willen! Um Gottes willen! — Боже мой! С местоимениями слитно: um meinetwillen, um deinetwillen.",
+    "usage_note_en": "Exclamations: Um Himmels willen! Um Gottes willen! — For heaven's sake! With pronouns written as one word: um meinetwillen, um deinetwillen.",
+    "search_forms": [
+      "um … willen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/willen",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "um"
+        },
+        {
+          "form": "willen"
+        }
+      ],
+      "order": "fixed",
+      "scope": "clause",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Sie hat um der Kinder willen auf die Reise verzichtet.",
+        "Um Himmels willen, was ist denn passiert?",
+        "Er hat das nur um des Geldes willen gemacht.",
+        "Um Gottes willen!"
+      ],
+      "negative": [
+        "Er hat einen starken Willen.",
+        "Um seinen Willen durchzusetzen, ist ihm jedes Mittel recht."
+      ]
+    }
+  },
+  {
+    "id": "preposition-049",
+    "type": "preposition",
+    "word": "abzüglich",
+    "translation_ru": "за вычетом, минус",
+    "translation_en": "less, minus, after deducting",
+    "example_de": "Abzüglich der Steuern bleiben mir etwa 2000 Euro im Monat.",
+    "example_ru": "За вычетом налогов у меня остаётся около 2000 евро в месяц.",
+    "example_en": "After tax, I'm left with about 2,000 euros a month.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "abzüglich + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "за вычетом чего-либо",
+        "note_en": "less something",
+        "example_de": "abzüglich der Miete"
+      },
+      {
+        "pattern": "abzüglich + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "во мн. ч., когда Genitiv не виден",
+        "note_en": "in the plural when the genitive is not visible",
+        "example_de": "abzüglich Rabatten"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Особенно в торговом языке. Существительное без артикля в ед. ч. — без окончания: abzüglich Rabatt. Противоположное — zuzüglich (плюс).",
+    "usage_note_en": "Especially commercial language. A singular noun without an article has no ending: abzüglich Rabatt. The opposite is zuzüglich (plus).",
+    "search_forms": [
+      "abzüglich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/abzueglich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-050",
+    "type": "preposition",
+    "word": "infolge",
+    "translation_ru": "вследствие, из-за",
+    "translation_en": "as a result of, owing to",
+    "example_de": "Infolge des Streiks fielen viele Züge aus.",
+    "example_ru": "Из-за забастовки было отменено много поездов.",
+    "example_en": "Many trains were cancelled as a result of the strike.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "infolge + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вследствие чего-либо",
+        "note_en": "as a result of something",
+        "example_de": "infolge des Streiks"
+      },
+      {
+        "pattern": "infolge von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "infolge von Glatteis",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Пишется слитно. Раздельно in Folge — подряд: dreimal in Folge.",
+    "usage_note_en": "Written as one word. Separately, in Folge means in a row: dreimal in Folge.",
+    "search_forms": [
+      "infolge"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/infolge_wegen_dank",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-051",
+    "type": "preposition",
+    "word": "inmitten",
+    "translation_ru": "посреди, среди",
+    "translation_en": "in the middle of, amid",
+    "example_de": "Das kleine Haus steht inmitten eines großen Gartens.",
+    "example_ru": "Маленький дом стоит посреди большого сада.",
+    "example_en": "The little house stands in the middle of a large garden.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "inmitten + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "посреди чего-либо",
+        "note_en": "in the middle of something",
+        "example_de": "inmitten der Stadt"
+      },
+      {
+        "pattern": "inmitten von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "inmitten von Bäumen",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Книжное слово; в разговоре — mitten in: mitten im Garten.",
+    "usage_note_en": "Formal word; in speech — mitten in: mitten im Garten.",
+    "search_forms": [
+      "inmitten"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/inmitten_im_Zentrum_innerhalb",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-052",
+    "type": "preposition",
+    "word": "mitsamt",
+    "translation_ru": "вместе с",
+    "translation_en": "together with, along with",
+    "example_de": "Der Dieb ist mitsamt dem ganzen Schmuck verschwunden.",
+    "example_ru": "Вор исчез вместе со всеми драгоценностями.",
+    "example_en": "The thief disappeared along with all the jewellery.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "mitsamt + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вместе с кем-либо / чем-либо",
+        "note_en": "together with someone / something",
+        "example_de": "mitsamt dem Gepäck"
+      },
+      {
+        "pattern": "mitsamt + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "редко",
+        "note_en": "rare",
+        "example_de": "mitsamt des Gepäcks"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Усиленное samt: «вместе со всем».",
+    "usage_note_en": "An emphatic form of samt: 'along with all of'.",
+    "search_forms": [
+      "mitsamt"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/mitsamt",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-053",
+    "type": "preposition",
+    "word": "seitens",
+    "translation_ru": "со стороны",
+    "translation_en": "on the part of",
+    "example_de": "Seitens der Stadt gibt es noch keine Entscheidung.",
+    "example_ru": "Со стороны города решения пока нет.",
+    "example_en": "There is no decision yet on the part of the city.",
+    "cases": [
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "seitens + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "со стороны кого-либо",
+        "note_en": "on the part of someone",
+        "example_de": "seitens der Behörden"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Канцелярское слово; проще: von der Stadt, vonseiten der Stadt.",
+    "usage_note_en": "Officialese; simpler: von der Stadt, vonseiten der Stadt.",
+    "search_forms": [
+      "seitens"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/seitens",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-054",
+    "type": "preposition",
+    "word": "ungeachtet",
+    "translation_ru": "несмотря на, невзирая на",
+    "translation_en": "despite, regardless of",
+    "example_de": "Ungeachtet des Regens spielten die Kinder draußen.",
+    "example_ru": "Несмотря на дождь, дети играли на улице.",
+    "example_en": "Despite the rain, the children played outside.",
+    "cases": [
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "ungeachtet + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "несмотря на что-либо",
+        "note_en": "despite something",
+        "example_de": "ungeachtet der Kritik"
+      },
+      {
+        "pattern": "Genitiv + ungeachtet",
+        "case": "Genitiv",
+        "position": "after",
+        "status": "also_correct",
+        "note_ru": "может стоять и после существительного",
+        "note_en": "it can also follow the noun",
+        "example_de": "der Kritik ungeachtet"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Книжное слово; обычно говорят trotz. dessen ungeachtet — тем не менее.",
+    "usage_note_en": "Formal word; usually trotz. dessen ungeachtet — nevertheless.",
+    "search_forms": [
+      "ungeachtet"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ungeachtet_trotz_entgegen",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-055",
+    "type": "preposition",
+    "word": "zugunsten",
+    "translation_ru": "в пользу",
+    "translation_en": "in favour of, for the benefit of",
+    "example_de": "Das Konzert findet zugunsten eines Kinderkrankenhauses statt.",
+    "example_ru": "Концерт проводится в пользу детской больницы.",
+    "example_en": "The concert is being held in aid of a children's hospital.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "zugunsten + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в пользу кого-либо / чего-либо",
+        "note_en": "in favour of someone / something",
+        "example_de": "zugunsten der Kinder"
+      },
+      {
+        "pattern": "Dativ + zugunsten",
+        "case": "Dativ",
+        "position": "after",
+        "status": "also_correct",
+        "note_ru": "после существительного — реже",
+        "note_en": "after the noun — less common",
+        "example_de": "dem Verein zugunsten"
+      },
+      {
+        "pattern": "zugunsten von + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "частый вариант, особенно если Genitiv не виден; падеж определяет von",
+        "note_en": "common, especially when the genitive is not visible; von decides the case",
+        "example_de": "zugunsten von Familien",
+        "combined_with": "von"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Также раздельно: zu Gunsten (Duden рекомендует zugunsten).",
+    "usage_note_en": "Also written zu Gunsten (Duden recommends zugunsten).",
+    "search_forms": [
+      "zugunsten"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zugunsten_fuer",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-056",
+    "type": "preposition",
+    "word": "zuliebe",
+    "translation_ru": "ради (кого-либо / чего-либо), в угоду",
+    "translation_en": "for the sake of, to please",
+    "example_de": "Der Umwelt zuliebe fahren wir mit dem Fahrrad zur Arbeit.",
+    "example_ru": "Ради окружающей среды мы ездим на работу на велосипеде.",
+    "example_en": "We cycle to work for the sake of the environment.",
+    "cases": [
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "Dativ + zuliebe",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "стоит после существительного",
+        "note_en": "follows the noun",
+        "example_de": "dir zuliebe"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Стоит только после слова: mir zuliebe — ради меня. Вариант zulieb — особенно в Австрии.",
+    "usage_note_en": "Only after the word: mir zuliebe — for my sake. The variant zulieb is used especially in Austria.",
+    "search_forms": [
+      "zuliebe",
+      "zulieb"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zulieb",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-057",
+    "type": "preposition",
+    "word": "zufolge",
+    "translation_ru": "согласно, по (словам, данным)",
+    "translation_en": "according to",
+    "example_de": "Einer neuen Studie zufolge schlafen Jugendliche zu wenig.",
+    "example_ru": "Согласно новому исследованию, подростки слишком мало спят.",
+    "example_en": "According to a new study, teenagers don't get enough sleep.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "Dativ + zufolge",
+        "case": "Dativ",
+        "position": "after",
+        "status": "standard",
+        "note_ru": "стоит после существительного",
+        "note_en": "follows the noun",
+        "example_de": "dem Bericht zufolge"
+      },
+      {
+        "pattern": "zufolge + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "реже; перед существительным — в Швейцарии и в юридическом языке",
+        "note_en": "less common; before the noun — in Switzerland and in legal language",
+        "example_de": "zufolge des Berichts"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Обычно стоит после существительного. Похожие: laut, gemäß.",
+    "usage_note_en": "Usually follows the noun. Similar: laut, gemäß.",
+    "search_forms": [
+      "zufolge"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zufolge",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-058",
+    "type": "preposition",
+    "word": "zuzüglich",
+    "translation_ru": "плюс, с добавлением",
+    "translation_en": "plus, in addition to",
+    "example_de": "Der Kurs kostet 250 Euro zuzüglich der Prüfungsgebühr.",
+    "example_ru": "Курс стоит 250 евро плюс экзаменационный сбор.",
+    "example_en": "The course costs 250 euros plus the exam fee.",
+    "cases": [
+      "Genitiv",
+      "Dativ"
+    ],
+    "government": [
+      {
+        "pattern": "zuzüglich + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "плюс что-либо",
+        "note_en": "plus something",
+        "example_de": "zuzüglich der Steuer"
+      },
+      {
+        "pattern": "zuzüglich + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "во мн. ч., когда Genitiv не виден",
+        "note_en": "in the plural when the genitive is not visible",
+        "example_de": "zuzüglich Zuschlägen"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Особенно в торговом языке. Существительное без артикля в ед. ч. — без окончания: zuzüglich Porto. Противоположное — abzüglich (минус). Сокращение: zzgl.",
+    "usage_note_en": "Especially in commercial language. A singular noun without an article has no ending: zuzüglich Porto. The opposite is abzüglich (minus). Abbreviation: zzgl.",
+    "search_forms": [
+      "zuzüglich"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/zuzueglich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-059",
+    "type": "preposition",
+    "word": "samt",
+    "translation_ru": "вместе с, с",
+    "translation_en": "together with, along with",
+    "example_de": "Sie stand plötzlich samt ihrem Hund vor der Tür.",
+    "example_ru": "Она вдруг появилась на пороге вместе со своей собакой.",
+    "example_en": "She suddenly turned up at the door together with her dog.",
+    "cases": [
+      "Dativ",
+      "Genitiv"
+    ],
+    "government": [
+      {
+        "pattern": "samt + Dativ",
+        "case": "Dativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "вместе с чем-либо / кем-либо",
+        "note_en": "together with something / someone",
+        "example_de": "samt dem Zubehör"
+      },
+      {
+        "pattern": "samt + Genitiv",
+        "case": "Genitiv",
+        "position": "before",
+        "status": "also_correct",
+        "note_ru": "во мн. ч. часто и Genitiv",
+        "note_en": "in the plural the genitive is also common",
+        "example_de": "samt aller Möbel"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Существительное без артикля в ед. ч. — без окончания: samt Zubehör. samt und sonders — все без исключения. Усиленное — mitsamt. Не путать с существительным der Samt (бархат).",
+    "usage_note_en": "A singular noun without an article has no ending: samt Zubehör. samt und sonders — all without exception. Emphatic form — mitsamt. Not to be confused with the noun der Samt (velvet).",
+    "search_forms": [
+      "samt"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/samt_nebst_einschlieszlich",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "preposition-060",
+    "type": "preposition",
+    "word": "gen",
+    "translation_ru": "к, по направлению к",
+    "translation_en": "towards",
+    "example_de": "Die Vögel zogen gen Süden.",
+    "example_ru": "Птицы улетели на юг.",
+    "example_en": "The birds flew south.",
+    "cases": [
+      "Akkusativ"
+    ],
+    "government": [
+      {
+        "pattern": "gen + Akkusativ",
+        "case": "Akkusativ",
+        "position": "before",
+        "status": "standard",
+        "note_ru": "в направлении чего-либо; обычно без артикля",
+        "note_en": "towards something; usually without an article",
+        "example_de": "gen Norden"
+      }
+    ],
+    "forms": null,
+    "usage_note_ru": "Устаревающее слово (в книгах, сказках, иногда шутливо); обычно со сторонами света и Himmel: gen Himmel — к небу. Сейчас обычно nach или zu: nach Süden, zum Himmel.",
+    "usage_note_en": "Dated word (books, fairy tales, sometimes jocular); usually with compass points and Himmel: gen Himmel — towards heaven. Today usually nach or zu: nach Süden, zum Himmel.",
+    "search_forms": [
+      "gen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/gen",
+    "wortschatz_excluded": true
   }
 ]

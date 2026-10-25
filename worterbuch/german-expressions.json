@@ -1,0 +1,4620 @@
+[
+  {
+    "id": "expression-001",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "vor sich hin",
+    "translation_ru": "себе под нос; потихоньку, сам по себе",
+    "translation_en": "to oneself (muttering, humming); quietly, steadily, on one's own",
+    "example_de": "Opa sitzt auf der Bank und summt leise vor sich hin.",
+    "example_ru": "Дедушка сидит на скамейке и тихонько напевает себе под нос.",
+    "example_en": "Grandpa is sitting on the bench, quietly humming to himself.",
+    "example_cloze": "Opa sitzt auf der Bank und summt leise {{c1::vor sich hin}}.",
+    "notes_ru": [
+      "vor sich hin murmeln, summen, pfeifen — бормотать, напевать, насвистывать себе под нос.",
+      "still vor sich hin arbeiten — потихоньку работать, ни на кого не обращая внимания; vor sich hin starren — смотреть перед собой в одну точку.",
+      "О вещах — «потихоньку, само по себе»: Das alte Auto rostet im Hof vor sich hin.",
+      "С другими местоимениями: Ich murmelte vor mich hin. Warum brummst du so vor dich hin?",
+      "Редко пишется слитно: vor sich hinmurmeln.",
+      "Не путать: Er stellte die Tasse vor sich hin. — hinstellen «поставил перед собой»."
+    ],
+    "notes_en": [
+      "vor sich hin murmeln, summen, pfeifen — to mutter, hum, whistle to oneself.",
+      "still vor sich hin arbeiten — to work away quietly, paying no attention to anyone; vor sich hin starren — to stare into space.",
+      "Of things — \"slowly, by itself\": Das alte Auto rostet im Hof vor sich hin.",
+      "With other pronouns: Ich murmelte vor mich hin. Warum brummst du so vor dich hin?",
+      "Rarely written as one word: vor sich hinmurmeln.",
+      "Do not confuse: Er stellte die Tasse vor sich hin. — hinstellen \"put in front of oneself\"."
+    ],
+    "search_forms": [
+      "vor mich hin",
+      "vor dich hin",
+      "vor uns hin",
+      "vor euch hin"
+    ],
+    "related_ids": [
+      "preposition-024",
+      "pronoun-019",
+      "adverb-102"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hin",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "vor"
+        },
+        {
+          "reflexive": true
+        },
+        {
+          "form": "hin"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 2,
+      "not_separable_verb": [
+        "hinstellen",
+        "hinlegen",
+        "hinsetzen",
+        "hinwerfen",
+        "hinhalten",
+        "hinstrecken",
+        "hinbreiten",
+        "hinhängen",
+        "hinschieben",
+        "hinstoßen",
+        "hinrücken",
+        "hinfallen",
+        "hinknien",
+        "hinschütten",
+        "hinstreuen",
+        "hinschmeißen",
+        "hinkippen",
+        "hinschleudern",
+        "hinpflanzen",
+        "hinsinken"
+      ]
+    },
+    "tests": {
+      "positive": [
+        "Opa sitzt auf der Bank und summt leise vor sich hin.",
+        "Im Unterricht mochte Hermine nicht mehr auf sich aufmerksam machen, sie ließ den Kopf hängen und arbeitete still vor sich hin.",
+        "Der Alte murmelte vor sich hin.",
+        "Sie summte vor sich hin, während sie den Tisch deckte.",
+        "Ich murmelte vor mich hin.",
+        "Warum brummst du so vor dich hin?",
+        "Wir haben den ganzen Abend still vor uns hin gearbeitet.",
+        "Er starrte stumm vor sich hin.",
+        "Was murmelt ihr da vor euch hin?",
+        "Sie war schlecht gelaunt, weil er die ganze Zeit vor sich hin brummte.",
+        "Sie begann leise vor sich hin zu summen.",
+        "Er ging langsam vor sich hin und dachte nach.",
+        "Das alte Auto rostet im Hof vor sich hin.",
+        "Er setzte sich hin und murmelte vor sich hin."
+      ],
+      "negative": [
+        "Er nahm sein Tischchen vom Rücken, stellte es vor sich hin und sprach: »Tischchen, deck dich!«",
+        "Sie legte das Buch vor sich hin und schlug es auf.",
+        "Er setzte den Korb vor sich hin.",
+        "Er warf die Karten vor sich hin.",
+        "Vor dem Haus ging sie hin und her.",
+        "Sie hatte das Buch vor sich und las.",
+        "Leg das Heft vor dich hin!",
+        "Er hielt die Laterne vor sich hin."
+      ]
+    }
+  },
+  {
+    "id": "expression-002",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich auf den Weg machen",
+    "translation_ru": "отправляться в путь, пускаться в дорогу",
+    "translation_en": "to set off, to set out, to start out",
+    "example_de": "Nach dem Frühstück machten wir uns auf den Weg zum See.",
+    "example_ru": "После завтрака мы отправились к озеру.",
+    "example_en": "After breakfast we set off for the lake.",
+    "notes_ru": [
+      "sich auf den Weg nach / zu … machen — отправиться куда-либо: Er machte sich auf den Weg nach Hause.",
+      "Mach dich auf den Weg! — Отправляйся! Пора в путь!",
+      "sich auf den Heimweg / Rückweg machen — отправиться домой / в обратный путь.",
+      "Близко по смыслу: aufbrechen (разг. losgehen)."
+    ],
+    "notes_en": [
+      "sich auf den Weg nach / zu … machen — to set off for somewhere: Er machte sich auf den Weg nach Hause.",
+      "Mach dich auf den Weg! — Off you go! Time to go!",
+      "sich auf den Heimweg / Rückweg machen — to set off home / back.",
+      "Similar: aufbrechen (colloquial: losgehen)."
+    ],
+    "related_ids": [
+      "noun-597",
+      "verb-006",
+      "pronoun-019"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Weg",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "machte"
+            ]
+          },
+          {
+            "form": "mich"
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "machst",
+              "machtest",
+              "mach",
+              "mache",
+              "machest"
+            ]
+          },
+          {
+            "form": "dich"
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "macht",
+              "machte",
+              "machen",
+              "machten"
+            ]
+          },
+          {
+            "form": "sich"
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "machen",
+              "machten"
+            ]
+          },
+          {
+            "form": "uns"
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "macht",
+              "machtet",
+              "machet"
+            ]
+          },
+          {
+            "form": "euch"
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "reflexive": true
+          },
+          {
+            "form": "auf den"
+          },
+          {
+            "form": [
+              "Weg",
+              "Heimweg",
+              "Rückweg",
+              "Nachhauseweg"
+            ],
+            "not_next": [
+              "aufmerksam"
+            ]
+          },
+          {
+            "form": [
+              "machen",
+              "mache",
+              "machst",
+              "macht",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach",
+              "gemacht",
+              "machet",
+              "machest"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Frühstück machten wir uns auf den Weg zum See.",
+        "Der Esel lief fort und machte sich auf den Weg nach Bremen.",
+        "Mach dich auf den Weg, es wird schon dunkel!",
+        "Machen wir uns auf den Weg!",
+        "Sie hat sich schon früh am Morgen auf den Weg gemacht.",
+        "Als er sich endlich auf den Weg machte, regnete es.",
+        "Es ist Zeit, sich auf den Weg zu machen.",
+        "Morgen mache ich mich mit meinem Bruder auf den Weg.",
+        "Macht euch auf den Weg!",
+        "Wann macht ihr euch auf den Weg?",
+        "Nachdem sie sich auf den Weg gemacht hatten, fing es an zu schneien.",
+        "Die Brüder machten sich auf den langen Weg nach Süden.",
+        "Am Abend machten wir uns auf den Heimweg.",
+        "Machet euch auf den Weg!",
+        "Mache dich auf den Weg!",
+        "Er sagte, er mache sich auf den Weg."
+      ],
+      "negative": [
+        "Er machte sich Sorgen, weil ein Baum auf dem Weg lag.",
+        "Mach den Müll weg!",
+        "Sie hat sich auf den Weg gesetzt.",
+        "Der Weg war lang, und wir machten eine Pause.",
+        "Er machte sich weg, bevor jemand kam.",
+        "Er machte sich Sorgen auf dem Weg nach Hause.",
+        "Er machte sich auf, den Weg zu suchen.",
+        "Der Förster machte uns auf den Weg zum Bach aufmerksam.",
+        "Er hat mich auf den Weg aufmerksam gemacht."
+      ]
+    }
+  },
+  {
+    "id": "expression-003",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit etwas nichts zu tun haben",
+    "translation_ru": "не иметь отношения (к чему-либо); не хотеть иметь дела (с кем-либо, чем-либо)",
+    "translation_en": "to have nothing to do with (something); to want nothing to do with (someone or something)",
+    "example_de": "Mein Bruder hat mit dem Streit nichts zu tun.",
+    "example_ru": "Мой брат не имеет никакого отношения к этой ссоре.",
+    "example_en": "My brother has nothing to do with the argument.",
+    "notes_ru": [
+      "Das hat nichts damit zu tun. — Это тут ни при чём.",
+      "mit jemandem nichts zu tun haben wollen — не хотеть иметь с кем-либо дела: Mit diesen Leuten will ich nichts zu tun haben.",
+      "Без mit — другое: Ich habe heute nichts zu tun. — Мне сегодня нечего делать.",
+      "Утвердительно: mit etwas zu tun haben — иметь отношение к чему-либо; иметь дело с кем-либо."
+    ],
+    "notes_en": [
+      "Das hat nichts damit zu tun. — That has nothing to do with it.",
+      "mit jemandem nichts zu tun haben wollen — to want nothing to do with someone: Mit diesen Leuten will ich nichts zu tun haben.",
+      "Without mit it means something else: Ich habe heute nichts zu tun. — I have nothing to do today.",
+      "Affirmative: mit etwas zu tun haben — to have to do with something; to deal with someone."
+    ],
+    "related_ids": [
+      "pronoun-024",
+      "verb-194",
+      "verb-002",
+      "preposition-003",
+      "adverb-223"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/tun_handeln",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": [
+              "nichts",
+              "nix"
+            ]
+          },
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "nichts",
+              "nix"
+            ]
+          },
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": "zu tun"
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": [
+              "nichts",
+              "nix"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": [
+              "nichts",
+              "nix"
+            ]
+          },
+          {
+            "form": "zu tun"
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": [
+              "mit",
+              "damit"
+            ]
+          },
+          {
+            "form": [
+              "nichts",
+              "nix"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mein Bruder hat mit dem Streit nichts zu tun.",
+        "Die FDP hat erst zugestimmt und will jetzt nichts mehr damit zu tun haben.",
+        "Das hat nichts mit dir zu tun.",
+        "Damit habe ich nichts zu tun!",
+        "Mit diesen Leuten will ich nichts zu tun haben.",
+        "Ich glaube, dass er mit dem Diebstahl nichts zu tun hat.",
+        "Das hatte mit Glück nichts zu tun.",
+        "Sie schwor, dass sie nichts damit zu tun gehabt hätte.",
+        "Ich hab damit nichts zu tun.",
+        "Das hat überhaupt nichts damit zu tun.",
+        "Damit hab ich nix zu tun!"
+      ],
+      "negative": [
+        "Ich habe heute nichts zu tun.",
+        "Hast du morgen etwas zu tun?",
+        "Ich habe viel mit Kunden zu tun.",
+        "Er hatte nichts zu tun, damit war der Tag langweilig.",
+        "Hat er etwas damit zu tun?",
+        "Sie hat nichts mit ihm gesprochen.",
+        "Ich habe nichts zu tun und spiele mit meinem Hund.",
+        "Was hat das mit mir zu tun?"
+      ]
+    }
+  },
+  {
+    "id": "expression-004",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Hinblick auf",
+    "translation_ru": "ввиду, учитывая (что-либо); что касается (чего-либо), в отношении (чего-либо)",
+    "translation_en": "in view of, considering (something); with regard to, regarding (something)",
+    "example_de": "Im Hinblick auf die hohen Kosten haben wir uns für den Zug entschieden.",
+    "example_ru": "Учитывая высокие расходы, мы решили ехать поездом.",
+    "example_en": "In view of the high costs, we decided to take the train.",
+    "notes_ru": [
+      "Управление: auf + Akkusativ — im Hinblick auf die Prüfung.",
+      "Реже: in Hinblick auf. С придаточным: im Hinblick darauf, dass … — учитывая то, что …",
+      "Книжное; в разговоре чаще wegen, was … angeht."
+    ],
+    "notes_en": [
+      "Takes auf + accusative — im Hinblick auf die Prüfung.",
+      "Less often: in Hinblick auf. With a clause: im Hinblick darauf, dass … — considering that …",
+      "Formal; in speech more often wegen, was … angeht."
+    ],
+    "search_forms": [
+      "in Hinblick auf",
+      "im Hinblick darauf",
+      "in Hinblick darauf"
+    ],
+    "related_ids": [
+      "preposition-018",
+      "adverb-435",
+      "preposition-039",
+      "preposition-045"
+    ],
+    "source_url": "https://www.dwds.de/wb/Hinblick",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": [
+            "im Hinblick",
+            "in Hinblick"
+          ]
+        },
+        {
+          "form": [
+            "auf",
+            "darauf"
+          ]
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Im Hinblick auf die hohen Kosten haben wir uns für den Zug entschieden.",
+        "Am deutlichsten sind die Studienergebnisse im Hinblick auf Krebs im Mund- und Rachenraum.",
+        "Ich bitte in Hinblick auf meine Gesundheit um ein paar freie Tage.",
+        "Im Hinblick darauf, dass morgen Feiertag ist, schließen wir heute früher.",
+        "Die Regeln wurden im Hinblick auf die Sicherheit der Kinder geändert."
+      ],
+      "negative": [
+        "Er warf einen kurzen Blick auf die Uhr.",
+        "Im Hinterhof wartete sie auf ihren Bruder.",
+        "Mit Blick auf das Meer frühstückten wir auf der Terrasse.",
+        "Den Hinblick auf das Ganze verlor er nie."
+      ]
+    }
+  },
+  {
+    "id": "expression-005",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "auf etwas hinauswollen",
+    "translation_ru": "клонить (к чему-либо), иметь в виду (что-либо)",
+    "translation_en": "to get at, to drive at (something)",
+    "example_de": "Ich verstehe nicht, worauf du hinauswillst.",
+    "example_ru": "Я не понимаю, к чему ты клонишь.",
+    "example_en": "I don't understand what you're getting at.",
+    "notes_ru": [
+      "Worauf willst du hinaus? — К чему ты клонишь?",
+      "Darauf will ich ja hinaus! — Вот к этому я и веду!",
+      "О тексте, фильме: Worauf will das Buch hinaus? — К чему ведёт книга, что она хочет сказать?",
+      "Без auf / worauf / darauf — другое: Der Hund will hinaus. — Собака хочет на улицу (hinauswollen «хотеть выйти»)."
+    ],
+    "notes_en": [
+      "Worauf willst du hinaus? — What are you getting at?",
+      "Darauf will ich ja hinaus! — That's exactly my point!",
+      "Of a text or film: Worauf will das Buch hinaus? — What is the book getting at?",
+      "Without auf / worauf / darauf it means something else: Der Hund will hinaus. — The dog wants to go out (hinauswollen \"to want to go out\")."
+    ],
+    "related_ids": [
+      "adverb-302",
+      "adverb-435",
+      "verb-209",
+      "adverb-266"
+    ],
+    "source_url": "https://www.dwds.de/wb/hinauswollen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "worauf",
+              "darauf"
+            ],
+            "not_after": [
+              "kurz",
+              "gleich",
+              "bald",
+              "sofort",
+              "unmittelbar",
+              "tags",
+              "später"
+            ]
+          },
+          {
+            "form": [
+              "will",
+              "willst",
+              "wollen",
+              "wollt",
+              "wollte",
+              "wolltest",
+              "wollten",
+              "wolltet",
+              "wolle",
+              "wollest",
+              "gewollt"
+            ]
+          },
+          {
+            "form": "hinaus"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "will",
+              "willst",
+              "wollen",
+              "wollt",
+              "wollte",
+              "wolltest",
+              "wollten",
+              "wolltet",
+              "wolle",
+              "wollest",
+              "gewollt"
+            ]
+          },
+          {
+            "form": [
+              "worauf",
+              "darauf"
+            ],
+            "not_after": [
+              "kurz",
+              "gleich",
+              "bald",
+              "sofort",
+              "unmittelbar",
+              "tags",
+              "später"
+            ]
+          },
+          {
+            "form": "hinaus"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "worauf",
+              "darauf"
+            ],
+            "not_after": [
+              "kurz",
+              "gleich",
+              "bald",
+              "sofort",
+              "unmittelbar",
+              "tags",
+              "später"
+            ]
+          },
+          {
+            "form": [
+              "hinauswollen",
+              "hinauswill",
+              "hinauswillst",
+              "hinauswollt",
+              "hinauswollte",
+              "hinauswolltest",
+              "hinauswollten",
+              "hinauswolltet",
+              "hinauswolle",
+              "hinauswollest",
+              "hinausgewollt",
+              "hinauszuwollen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich verstehe nicht, worauf du hinauswillst.",
+        "»Worauf willst du hinaus?«, fragte Ron.",
+        "Darauf will ich ja hinaus!",
+        "Ich will darauf hinaus, dass wir mehr Zeit brauchen.",
+        "Worauf wollte er eigentlich hinaus?",
+        "Endlich merkte ich, worauf er hinauswollte.",
+        "Worauf will das Buch eigentlich hinaus?",
+        "Worauf wollen Sie hinaus?",
+        "Niemand wusste, worauf das alles hinauswill."
+      ],
+      "negative": [
+        "Der Hund will hinaus.",
+        "Ich will hinaus auf die Straße.",
+        "Worauf wartest du? Ich will hinaus!",
+        "Darauf will ich nicht antworten, ich gehe hinaus.",
+        "Auf dem Hof wollte das Kind hinaus.",
+        "Kurz darauf wollte der Hund hinaus.",
+        "Ich weiß nicht, worauf das hinausläuft."
+      ]
+    }
+  },
+  {
+    "id": "expression-006",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "ein Gesicht / eine Grimasse ziehen",
+    "translation_ru": "скорчить (недовольную) мину, скривиться; корчить рожи, гримасничать",
+    "translation_en": "to pull a (long) face, to make a face; to pull faces, to grimace",
+    "example_de": "Als er hörte, dass er abwaschen muss, zog er ein langes Gesicht.",
+    "example_ru": "Когда он услышал, что ему мыть посуду, у него вытянулось лицо.",
+    "example_en": "When he heard he had to do the dishes, he pulled a long face.",
+    "notes_ru": [
+      "ein langes / schiefes / saures Gesicht ziehen (machen) — скорчить кислую мину (от разочарования, недовольства).",
+      "Grimassen ziehen / schneiden, Gesichter schneiden — корчить рожи.",
+      "Близко: das Gesicht verziehen — скривиться, поморщиться (отдельный глагол verziehen)."
+    ],
+    "notes_en": [
+      "ein langes / schiefes / saures Gesicht ziehen (machen) — to pull a long / sour face (out of disappointment, displeasure).",
+      "Grimassen ziehen / schneiden, Gesichter schneiden — to pull faces.",
+      "Similar: das Gesicht verziehen — to grimace, to wince (a separate verb, verziehen)."
+    ],
+    "related_ids": [
+      "noun-257",
+      "verb-747"
+    ],
+    "source_url": "https://www.dwds.de/wb/Gesicht",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zögst",
+              "zögt",
+              "zieh",
+              "gezogen"
+            ]
+          },
+          {
+            "form": [
+              "ein",
+              "eine",
+              "kein",
+              "keine",
+              "dieses",
+              "diese",
+              "solch ein",
+              "solch eine"
+            ]
+          },
+          {
+            "form": [
+              "Gesicht",
+              "Grimasse",
+              "Fratze"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ein",
+              "eine",
+              "kein",
+              "keine"
+            ]
+          },
+          {
+            "form": [
+              "Gesicht",
+              "Grimasse",
+              "Fratze"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          },
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zögst",
+              "zögt",
+              "zieh",
+              "gezogen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zögst",
+              "zögt",
+              "zieh",
+              "gezogen"
+            ]
+          },
+          {
+            "form": [
+              "Gesichter",
+              "Grimassen",
+              "Fratzen"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Gesichter",
+              "Grimassen",
+              "Fratzen"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          },
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zögst",
+              "zögt",
+              "zieh",
+              "gezogen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Als er hörte, dass er abwaschen muss, zog er ein langes Gesicht.",
+        "Ron zog eine Grimasse.",
+        "Warum ziehst du so ein Gesicht?",
+        "Die Kinder zogen hinter dem Rücken des Lehrers Grimassen.",
+        "Sie zog eine Grimasse, als sie den sauren Saft probierte.",
+        "Er hat ein schiefes Gesicht gezogen.",
+        "Hör auf, Grimassen zu ziehen!",
+        "Zieh doch nicht so ein Gesicht!",
+        "Er zog wieder dieses Gesicht."
+      ],
+      "negative": [
+        "Sie zog die Decke über ihr Gesicht.",
+        "Er zog das Tuch vom Gesicht.",
+        "Er zog die Mütze tief ins Gesicht.",
+        "Er verzog das Gesicht.",
+        "Sie zog ihn an der Hand, und sein Gesicht wurde rot.",
+        "Sie schnitt Grimassen.",
+        "Sie zogen die Kapuzen über ihre Gesichter.",
+        "Ein Lächeln zog über ihr ganzes Gesicht.",
+        "Er grinste übers ganze Gesicht und zog los.",
+        "Ihre Gesichter zogen sich in die Länge.",
+        "Mit ernstem Gesicht zog er die Pistole.",
+        "Dieses Gesicht zog alle Blicke auf sich."
+      ]
+    }
+  },
+  {
+    "id": "expression-007",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Bilanz ziehen",
+    "translation_ru": "подводить итог(и)",
+    "translation_en": "to take stock, to sum up",
+    "example_de": "Am Ende des Schuljahres ziehen wir gemeinsam Bilanz.",
+    "example_ru": "В конце учебного года мы вместе подводим итоги.",
+    "example_en": "At the end of the school year we take stock together.",
+    "notes_ru": [
+      "eine positive / traurige Bilanz ziehen — подвести хорошие / печальные итоги.",
+      "Bilanz über etwas ziehen, die Bilanz einer Sache ziehen — подвести итоги чего-либо: die Bilanz des Tages ziehen.",
+      "В бухгалтерии: eine Bilanz ziehen / aufstellen — составить баланс.",
+      "Близко: das Fazit ziehen — подвести итог, сделать вывод."
+    ],
+    "notes_en": [
+      "eine positive / traurige Bilanz ziehen — to give a positive / bleak assessment.",
+      "Bilanz über etwas ziehen, die Bilanz einer Sache ziehen — to take stock of something: die Bilanz des Tages ziehen.",
+      "In accounting: eine Bilanz ziehen / aufstellen — to draw up the balance sheet.",
+      "Similar: das Fazit ziehen — to sum up, to draw a conclusion."
+    ],
+    "related_ids": [
+      "noun-3027",
+      "verb-747",
+      "noun-2627"
+    ],
+    "source_url": "https://www.dwds.de/wb/Bilanz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zieh",
+              "gezogen",
+              "ziehet",
+              "ziehest"
+            ]
+          },
+          {
+            "form": [
+              "Bilanz",
+              "Bilanzen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Bilanz",
+              "Bilanzen"
+            ]
+          },
+          {
+            "form": [
+              "ziehen",
+              "ziehe",
+              "ziehst",
+              "zieht",
+              "zog",
+              "zogst",
+              "zogen",
+              "zogt",
+              "zöge",
+              "zögest",
+              "zögen",
+              "zöget",
+              "zieh",
+              "gezogen",
+              "ziehet",
+              "ziehest"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Am Ende des Schuljahres ziehen wir gemeinsam Bilanz.",
+        "Nach zehn Jahren zog sie eine positive Bilanz ihrer Arbeit.",
+        "Die Polizei hat nach dem Fest eine erste Bilanz gezogen.",
+        "Es ist Zeit, Bilanz zu ziehen.",
+        "Der Trainer zieht eine traurige Bilanz.",
+        "Am Abend zog er die Bilanz des Tages.",
+        "Sie war froh, weil sie endlich Bilanz zog.",
+        "Er wollte in Ruhe Bilanz über sein Leben ziehen.",
+        "Die Abteilungen ziehen am Jahresende ihre Bilanzen."
+      ],
+      "negative": [
+        "Die Bilanz der Firma ist gut.",
+        "Er zog den Wagen in die Garage.",
+        "Die Firma legt ihre Bilanz vor.",
+        "Wir ziehen nächste Woche um."
+      ]
+    }
+  },
+  {
+    "id": "expression-008",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit etwas zu tun haben",
+    "translation_ru": "иметь отношение (к чему-либо), быть связанным (с чем-либо); иметь дело (с кем-либо, чем-либо)",
+    "translation_en": "to have to do with (something), to be connected with (something); to deal with (someone or something)",
+    "example_de": "Seine schlechte Laune hat sicher mit dem Wetter zu tun.",
+    "example_ru": "Его плохое настроение наверняка связано с погодой.",
+    "example_en": "His bad mood surely has to do with the weather.",
+    "notes_ru": [
+      "Was hat das mit mir zu tun? — А я тут при чём?",
+      "es mit jemandem zu tun haben — иметь дело с кем-либо: Mit wem habe ich es zu tun?",
+      "Отрицание — отдельная карточка: mit etwas nichts zu tun haben.",
+      "Без mit — другое: Ich habe heute viel zu tun. — У меня сегодня много дел."
+    ],
+    "notes_en": [
+      "Was hat das mit mir zu tun? — What has that got to do with me?",
+      "es mit jemandem zu tun haben — to be dealing with someone: Mit wem habe ich es zu tun?",
+      "The negative is a separate card: mit etwas nichts zu tun haben.",
+      "Without mit it means something else: Ich habe heute viel zu tun. — I have a lot to do today."
+    ],
+    "related_ids": [
+      "verb-194",
+      "verb-002",
+      "preposition-003",
+      "adverb-223"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/tun_handeln",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": [
+              "mit",
+              "damit",
+              "womit"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mit",
+              "damit",
+              "womit"
+            ]
+          },
+          {
+            "form": "zu tun"
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "mit",
+              "damit",
+              "womit"
+            ]
+          },
+          {
+            "form": [
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "habest",
+              "habet",
+              "gehabt"
+            ]
+          },
+          {
+            "form": "zu tun"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Seine schlechte Laune hat sicher mit dem Wetter zu tun.",
+        "Konnte all dies etwas mit den Potters zu tun haben?",
+        "Hat er etwas damit zu tun?",
+        "Was hat das mit mir zu tun?",
+        "Mit wem habe ich es zu tun?",
+        "Ich glaube, dass es mit seiner Kindheit zu tun hat.",
+        "In meinem Beruf habe ich viel mit Kindern zu tun.",
+        "Es hat damit zu tun, dass er krank ist."
+      ],
+      "negative": [
+        "Ich habe heute viel zu tun.",
+        "Hast du morgen etwas zu tun?",
+        "Ich habe nichts zu tun und spiele mit meinem Hund.",
+        "Das hat nichts mit dir zu tun.",
+        "Damit habe ich nichts zu tun!",
+        "Damit hatte er zu kämpfen.",
+        "Womit habe ich das verdient?"
+      ]
+    }
+  },
+  {
+    "id": "expression-009",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "es gibt",
+    "translation_ru": "есть, имеется, существует; будет, случится (о событии)",
+    "translation_en": "there is, there are, there exists; there will be, to happen (of an event)",
+    "example_de": "In unserer Straße gibt es eine kleine Bäckerei.",
+    "example_ru": "На нашей улице есть маленькая пекарня.",
+    "example_en": "There is a small bakery on our street.",
+    "notes_ru": [
+      "С винительным; глагол всегда в ед. ч.: Es gibt einen Park. Es gibt viele Bücher. Gibt es noch Kaffee?",
+      "О событии: Gleich gibt's Ärger! — Сейчас будут неприятности!",
+      "Отличие от es ist / sind: es gibt — что-то вообще существует, имеется; es ist / sind — где-то находится (Es sind drei Kinder im Garten).",
+      "Was gibt's? — Что случилось? Что такое? Was gibt es heute zum Essen? — Что у нас сегодня поесть?",
+      "Das gibt's doch nicht! — Не может быть!",
+      "Не путать: Er gibt es mir. — Он даёт это мне (es — «это», дополнение; geben «давать»)."
+    ],
+    "notes_en": [
+      "Takes the accusative; the verb is always singular: Es gibt einen Park. Es gibt viele Bücher. Gibt es noch Kaffee?",
+      "Of an event: Gleich gibt's Ärger! — There's going to be trouble!",
+      "Unlike es ist / sind: es gibt — something exists, is available; es ist / sind — something is (located) somewhere (Es sind drei Kinder im Garten).",
+      "Was gibt's? — What's up? What is it? Was gibt es heute zum Essen? — What is there to eat today?",
+      "Das gibt's doch nicht! — That can't be true!",
+      "Do not confuse: Er gibt es mir. — He gives it to me (es is the object; geben \"to give\")."
+    ],
+    "related_ids": [
+      "verb-016",
+      "pronoun-010"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/geben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "gibt",
+              "gab",
+              "gäbe",
+              "gebe"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ]
+          },
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "not_particle_at_end": [
+          "zu",
+          "ab",
+          "an",
+          "auf",
+          "aus",
+          "ein",
+          "her",
+          "heraus",
+          "hin",
+          "mit",
+          "nach",
+          "preis",
+          "statt",
+          "vor",
+          "weg",
+          "zurück",
+          "bekannt",
+          "kund"
+        ],
+        "choice_particle_at_end": [
+          "frei",
+          "wieder"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "gibt",
+              "gab",
+              "gäbe",
+              "gebe",
+              "gäb"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ]
+          },
+          {
+            "form": "s",
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "not_particle_at_end": [
+          "zu",
+          "ab",
+          "an",
+          "auf",
+          "aus",
+          "ein",
+          "her",
+          "heraus",
+          "hin",
+          "mit",
+          "nach",
+          "preis",
+          "statt",
+          "vor",
+          "weg",
+          "zurück",
+          "bekannt",
+          "kund"
+        ],
+        "choice_particle_at_end": [
+          "frei",
+          "wieder"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "gibts",
+              "gabs"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "not_particle_at_end": [
+          "zu",
+          "ab",
+          "an",
+          "auf",
+          "aus",
+          "ein",
+          "her",
+          "heraus",
+          "hin",
+          "mit",
+          "nach",
+          "preis",
+          "statt",
+          "vor",
+          "weg",
+          "zurück",
+          "bekannt",
+          "kund"
+        ],
+        "choice_particle_at_end": [
+          "frei",
+          "wieder"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": [
+              "gibt",
+              "gab",
+              "gäbe",
+              "gebe"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "s",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": [
+              "gibt",
+              "gab",
+              "gäbe",
+              "gebe"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ]
+          },
+          {
+            "form": [
+              "wird",
+              "würde",
+              "werden",
+              "würden",
+              "wurde",
+              "soll",
+              "sollte",
+              "sollen",
+              "kann",
+              "könnte",
+              "können",
+              "konnte",
+              "konnten",
+              "muss",
+              "müsste",
+              "musste",
+              "darf",
+              "dürfte",
+              "durfte",
+              "mag",
+              "möge",
+              "möchte",
+              "mochte",
+              "will",
+              "wollte",
+              "scheint",
+              "schien",
+              "scheinen",
+              "werde",
+              "könne",
+              "müsse",
+              "solle",
+              "dürfe",
+              "wolle"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem"
+            ]
+          },
+          {
+            "form": "geben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wird",
+              "würde",
+              "werden",
+              "würden",
+              "wurde",
+              "soll",
+              "sollte",
+              "sollen",
+              "kann",
+              "könnte",
+              "können",
+              "konnte",
+              "konnten",
+              "muss",
+              "müsste",
+              "musste",
+              "darf",
+              "dürfte",
+              "durfte",
+              "mag",
+              "möge",
+              "möchte",
+              "mochte",
+              "will",
+              "wollte",
+              "scheint",
+              "schien",
+              "scheinen",
+              "werde",
+              "könne",
+              "müsse",
+              "solle",
+              "dürfe",
+              "wolle"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ]
+          },
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ]
+          },
+          {
+            "form": "geben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei",
+              "ist",
+              "sind",
+              "war",
+              "waren",
+              "wäre",
+              "wären",
+              "sei"
+            ]
+          },
+          {
+            "form": "geben"
+          },
+          {
+            "form": [
+              "wird",
+              "würde",
+              "werden",
+              "würden",
+              "wurde",
+              "soll",
+              "sollte",
+              "sollen",
+              "kann",
+              "könnte",
+              "können",
+              "konnte",
+              "konnten",
+              "muss",
+              "müsste",
+              "musste",
+              "darf",
+              "dürfte",
+              "durfte",
+              "mag",
+              "möge",
+              "möchte",
+              "mochte",
+              "will",
+              "wollte",
+              "scheint",
+              "schien",
+              "scheinen",
+              "werde",
+              "könne",
+              "müsse",
+              "solle",
+              "dürfe",
+              "wolle"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wird",
+              "würde",
+              "werden",
+              "würden",
+              "wurde",
+              "soll",
+              "sollte",
+              "sollen",
+              "kann",
+              "könnte",
+              "können",
+              "konnte",
+              "konnten",
+              "muss",
+              "müsste",
+              "musste",
+              "darf",
+              "dürfte",
+              "durfte",
+              "mag",
+              "möge",
+              "möchte",
+              "mochte",
+              "will",
+              "wollte",
+              "scheint",
+              "schien",
+              "scheinen",
+              "werde",
+              "könne",
+              "müsse",
+              "solle",
+              "dürfe",
+              "wolle"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ]
+          },
+          {
+            "form": "s",
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": "geben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "hätte",
+              "habe",
+              "haben"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem"
+            ]
+          },
+          {
+            "form": "gegeben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": "gegeben"
+          },
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "hätte",
+              "habe",
+              "haben"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "hätte",
+              "habe",
+              "haben"
+            ],
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ]
+          },
+          {
+            "form": "es",
+            "not_after": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr",
+              "man"
+            ],
+            "not_next": [
+              "mir",
+              "dir",
+              "ihm",
+              "ihr",
+              "uns",
+              "euch",
+              "ihnen",
+              "Ihnen",
+              "dem",
+              "einem",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "jedem",
+              "keinem",
+              "diesem",
+              "jemandem",
+              "niemandem",
+              "zurück",
+              "her",
+              "weiter",
+              "preis",
+              "bekannt",
+              "kund",
+              "frei"
+            ]
+          },
+          {
+            "form": "gegeben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In unserer Straße gibt es eine kleine Bäckerei.",
+        "Drinnen gab es nur einen Raum.",
+        "Gibt es noch Kaffee?",
+        "Es gibt keinen Grund zur Sorge.",
+        "Ich glaube nicht, dass es hier Wölfe gibt.",
+        "Es hat gestern ein Gewitter gegeben.",
+        "Morgen wird es Regen geben.",
+        "Was gibt es heute zum Essen?",
+        "Früher gab es hier einen großen Wald.",
+        "Frau Mutter, was gibt's heute zu essen?",
+        "Esel gibt's hier genug.",
+        "Es gebe keine Hinweise auf einen Anschlag, sagte der Sprecher.",
+        "Gleich gibt's Ärger!",
+        "Das gibt es doch nicht!",
+        "Was gibt es Neues?",
+        "Hat es Probleme gegeben?",
+        "Es soll dort Krawalle gegeben haben.",
+        "Ich glaube, dass es gestern Streit gegeben hat.",
+        "Wenn's Ärger gibt, ruf mich an.",
+        "Da wird's etwas zu essen geben.",
+        "Wird es morgen Regen geben?",
+        "Ich glaube, dass es bald Schnee geben wird.",
+        "Diesmal konnte es keinen Zweifel geben: Hagrid blickte Harry nicht in die Augen.",
+        "Er sagte, es werde morgen Regen geben.",
+        "Es könne keinen Zweifel geben, meinte der Richter.",
+        "Gibts noch Kuchen?",
+        "Es scheint keine Lösung zu geben.",
+        "Es soll morgen Regen geben.",
+        "Es wird Ärger geben.",
+        "Wie's nun Tag war, gab's großen Lärm, der Kaufmann lag tot im Bett.",
+        "Da es bei mir nur wenig albernes Zauberstabgefuchtel gibt, werden viele von euch kaum glauben, dass es sich um Zauberei handelt."
+      ],
+      "negative": [
+        "Er gibt es mir morgen.",
+        "Sie gab es ihm zurück.",
+        "Morgen gibt er es dir.",
+        "Ich weiß, dass er es mir gibt.",
+        "Er will es ihr geben.",
+        "Es gab ihm neue Kraft.",
+        "Das Kind gibt es zurück.",
+        "Geben Sie mir bitte das Buch.",
+        "Er gibt's mir morgen.",
+        "Die Zauberin gab dem Kinde den Namen Rapunzel und nahm es mit sich fort.",
+        "Du hast einmal das Versprechen gegeben und du mußt es halten.",
+        "Er gab es auf.",
+        "Der gibt es dir nie im Leben.",
+        "Es ist ihm nicht gegeben, Gefühle zu zeigen.",
+        "Es wurde ein großes Fest gegeben.",
+        "Viele geben es nicht zu.",
+        "Die Eltern geben es den Kindern.",
+        "Ich habe es ihm gegeben.",
+        "Er gab es preis.",
+        "Ich weiß, dass er's nicht gibt.",
+        "Aufgabe der Arbeitsgemeinschaft ist es Impulse und Anregungen für die kirchliche Arbeit mit älteren Menschen zu geben.",
+        "Es ist üblich Trinkgeld zu geben.",
+        "Es wird ihm Freude geben.",
+        "Es hat ihm nichts gegeben.",
+        "Sie gab es jedem Kind.",
+        "Der Wirt gab's einem Mädchen, das sollt's in den Schrank stellen."
+      ]
+    }
+  },
+  {
+    "id": "expression-010",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "ein paar",
+    "translation_ru": "несколько, пара (немного)",
+    "translation_en": "a few, a couple of",
+    "example_de": "Kannst du mir ein paar Minuten helfen?",
+    "example_ru": "Можешь помочь мне несколько минут?",
+    "example_en": "Can you help me for a few minutes?",
+    "notes_ru": [
+      "Не склоняется: mit ein paar Freunden — с несколькими друзьями.",
+      "ein paar Mal (слитно: ein paarmal) — несколько раз; die paar Euro — эти несколько евро.",
+      "Не путать: ein Paar (с заглавной) — пара, двое: ein Paar Schuhe — пара обуви."
+    ],
+    "notes_en": [
+      "Does not decline: mit ein paar Freunden — with a few friends.",
+      "ein paar Mal (one word: ein paarmal) — a few times; die paar Euro — those few euros.",
+      "Do not confuse: ein Paar (capitalised) — a pair, two: ein Paar Schuhe — a pair of shoes."
+    ],
+    "related_ids": [
+      "article-002",
+      "noun-637"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/paar_einige",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "ein"
+        },
+        {
+          "form": "paar"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Kannst du mir ein paar Minuten helfen?",
+        "Aus seiner Schnauze flogen ein paar Funken.",
+        "Ein paar Tage später kam er zurück.",
+        "Er war mit ein paar Freunden im Kino.",
+        "Ich habe es ein paar Mal versucht."
+      ],
+      "negative": [
+        "Neben der Tür standen eine Armbrust und ein Paar Galoschen.",
+        "Ein Paar Schuhe stand vor der Tür.",
+        "Die beiden sind ein schönes Paar.",
+        "Die paar Euro kann ich dir leihen."
+      ]
+    }
+  },
+  {
+    "id": "expression-011",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf einmal",
+    "translation_ru": "вдруг, внезапно; сразу, одновременно",
+    "translation_en": "suddenly, all of a sudden; at once, at the same time",
+    "example_de": "Wir saßen gemütlich im Garten, und auf einmal fing es an zu regnen.",
+    "example_ru": "Мы уютно сидели в саду, и вдруг пошёл дождь.",
+    "example_en": "We were sitting comfortably in the garden, and suddenly it started to rain.",
+    "notes_ru": [
+      "«Вдруг»: Auf einmal war das Licht weg.",
+      "«Сразу, за один раз»: Iss nicht alles auf einmal! — Не ешь всё сразу!",
+      "В старых текстах также: mit einmal — вдруг."
+    ],
+    "notes_en": [
+      "\"Suddenly\": Auf einmal war das Licht weg.",
+      "\"At once, in one go\": Iss nicht alles auf einmal! — Don't eat it all at once!",
+      "In old texts also: mit einmal — suddenly."
+    ],
+    "related_ids": [
+      "preposition-018",
+      "adverb-058"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/einmal",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "auf"
+        },
+        {
+          "form": "einmal"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Wir saßen gemütlich im Garten, und auf einmal fing es an zu regnen.",
+        "Wie sie so saßen, kam auf einmal ein Hase übers Feld dahergelaufen.",
+        "Auf einmal war das Licht weg.",
+        "Iss nicht alles auf einmal!",
+        "Ich kann nicht drei Dinge auf einmal machen."
+      ],
+      "negative": [
+        "Ich war einmal auf dem Berg.",
+        "Er sprang auf, einmal noch wollte er es versuchen.",
+        "Mach bitte einmal die Tür auf."
+      ]
+    }
+  },
+  {
+    "id": "expression-012",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf und ab",
+    "translation_ru": "взад и вперёд, туда-сюда; вверх и вниз",
+    "translation_en": "back and forth, to and fro; up and down",
+    "example_de": "Nervös lief er im Flur auf und ab.",
+    "example_ru": "Он нервно ходил по коридору взад и вперёд.",
+    "example_en": "He paced up and down the hallway nervously.",
+    "notes_ru": [
+      "auf und ab gehen / laufen / schreiten (auch: auf- und abgehen) — ходить взад-вперёд; то же: auf und nieder.",
+      "Вверх-вниз: Der Ball hüpfte auf und ab.",
+      "Не путать: das Auf und Ab (с заглавной) — взлёты и падения."
+    ],
+    "notes_en": [
+      "auf und ab gehen / laufen / schreiten (also: auf- und abgehen) — to pace up and down; likewise: auf und nieder.",
+      "Vertically: Der Ball hüpfte auf und ab.",
+      "Do not confuse: das Auf und Ab (capitalised) — ups and downs."
+    ],
+    "related_ids": [
+      "preposition-018"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auf_Adverb",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "auf"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "ab"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 2
+    },
+    "tests": {
+      "positive": [
+        "Nervös lief er im Flur auf und ab.",
+        "Er schritt vor dem Feuer auf und ab.",
+        "Der Ball hüpfte auf und ab.",
+        "Sie ging im Zimmer auf und ab und dachte nach."
+      ],
+      "negative": [
+        "Das Leben ist ein ständiges Auf und Ab.",
+        "Er stand auf und ging hinaus.",
+        "Sie stand auf und abends ging sie aus."
+      ]
+    }
+  },
+  {
+    "id": "expression-013",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "vor allem",
+    "translation_ru": "прежде всего, особенно",
+    "translation_en": "above all, especially",
+    "example_de": "Im Urlaub möchte ich vor allem schlafen und lesen.",
+    "example_ru": "В отпуске я хочу прежде всего спать и читать.",
+    "example_en": "On holiday I mainly want to sleep and read.",
+    "notes_ru": [
+      "Часто перед тем, что выделяется: Sie mag Obst, vor allem Äpfel.",
+      "Не путать: vor allem Volk (старое) — перед всем народом (allem — при существительном)."
+    ],
+    "notes_en": [
+      "Often before what is singled out: Sie mag Obst, vor allem Äpfel.",
+      "Do not confuse: vor allem Volk (old) — in front of all the people (allem goes with the noun)."
+    ],
+    "related_ids": [
+      "preposition-024",
+      "pronoun-025"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/vor_allem",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "vor"
+        },
+        {
+          "form": "allem",
+          "not_next": [
+            "Volk",
+            "Volke",
+            "Volks",
+            "Bösen",
+            "Übel",
+            "Unheil",
+            "Unglück",
+            "Gesinde",
+            "Hof",
+            "Hofe",
+            "Gericht",
+            "Gerichte",
+            "Möglichen",
+            "Erdenklichen",
+            "Schaden",
+            "Leid",
+            "Argen",
+            "Lebendigen",
+            "Getier",
+            "Neuen",
+            "Fremden",
+            "Unbekannten",
+            "Schlechten",
+            "Gefährlichen",
+            "Hässlichen",
+            "Leben",
+            "Lebenden"
+          ]
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Im Urlaub möchte ich vor allem schlafen und lesen.",
+        "Harry fiel auf, dass sie dabei vor allem den Kapitän der Slytherins, Marcus Flint, anschaute, einen Fünftklässler.",
+        "Sie mag Obst, vor allem Äpfel.",
+        "Vor allem musst du pünktlich sein.",
+        "Das gilt vor allem für Kinder.",
+        "Ich habe Angst, vor allem im Dunkeln.",
+        "Achtung, vor allem bei Glätte!",
+        "Er hat Angst vor allem vor Hunden."
+      ],
+      "negative": [
+        "Der König sprach vor allem Volk.",
+        "Gott möge uns vor allem Bösen bewahren.",
+        "Er hatte vor allen Leuten gesprochen.",
+        "Man hat sie vor allem Möglichen gewarnt.",
+        "Hüte dich vor allem Fremden.",
+        "Sie warnte ihn vor allem Neuen.",
+        "Albert Schweitzer lehrte Ehrfurcht vor allem Leben."
+      ]
+    }
+  },
+  {
+    "id": "expression-014",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Stillen",
+    "translation_ru": "про себя, в душе; втайне, незаметно",
+    "translation_en": "inwardly, privately; secretly, unnoticed",
+    "example_de": "Harry dachte im Stillen das Gleiche, doch der Gedanke munterte ihn überhaupt nicht auf.",
+    "example_ru": "Гарри про себя думал то же самое, но эта мысль его совсем не подбодрила.",
+    "example_en": "Harry privately thought the same, but the thought did not cheer him up at all.",
+    "notes_ru": [
+      "Также: im Stillen hoffen / denken / lachen — втайне надеяться / думать про себя / смеяться про себя.",
+      "Близко: in aller Stille — тихо, в узком кругу.",
+      "Старое написание (до 1996): im stillen.",
+      "Не путать: das Stillen — кормление грудью (Beim Stillen des Kindes …); im stillen Zimmer — в тихой комнате; der Stille Ozean — Тихий океан."
+    ],
+    "notes_en": [
+      "Also: im Stillen hoffen / denken / lachen — to secretly hope / to think to oneself / to laugh to oneself.",
+      "Similar: in aller Stille — quietly, privately (in a small circle).",
+      "Old spelling (before 1996): im stillen.",
+      "Do not confuse: das Stillen — breastfeeding (Beim Stillen des Kindes …); im stillen Zimmer — in the quiet room; der Stille Ozean — the Pacific Ocean."
+    ],
+    "related_ids": [
+      "preposition-020"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Stille",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "im"
+        },
+        {
+          "form": "Stillen",
+          "not_next": [
+            "Ozean",
+            "Ozeans"
+          ]
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Harry dachte im Stillen das Gleiche, doch der Gedanke munterte ihn überhaupt nicht auf.",
+        "Harry gab ihr im Stillen Recht, denn Neville schaffte es sogar, mit beiden Füßen fest auf dem Boden eine erstaunliche Zahl von Unfällen zu erleiden.",
+        "Im Stillen hoffte sie, dass er nicht kommen würde.",
+        "Er lachte im Stillen über die Geschichte."
+      ],
+      "negative": [
+        "Nach dem Stillen schlief das Baby ein.",
+        "Das Stillen des Hungers war schwer.",
+        "Beim Stillen des Kindes las sie.",
+        "Er saß im stillen Zimmer.",
+        "Im Stillen Ozean gibt es viele Inseln."
+      ]
+    }
+  },
+  {
+    "id": "expression-015",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Freien",
+    "translation_ru": "на открытом воздухе, на улице, под открытым небом",
+    "translation_en": "outdoors, outside, in the open air",
+    "example_de": "Bei schönem Wetter essen wir im Sommer oft im Freien.",
+    "example_ru": "В хорошую погоду летом мы часто едим на улице.",
+    "example_en": "In nice weather we often eat outdoors in summer.",
+    "notes_ru": [
+      "Куда: ins Freie — на улицу, наружу: Die Kinder liefen ins Freie.",
+      "Не путать: im freien Fall — в свободном падении (freien — прилагательное frei, со строчной); freien (устар.) — свататься."
+    ],
+    "notes_en": [
+      "Direction: ins Freie — outside, out into the open: Die Kinder liefen ins Freie.",
+      "Do not confuse: im freien Fall — in free fall (freien is the adjective frei, lowercase); freien (dated) — to woo."
+    ],
+    "related_ids": [
+      "preposition-020",
+      "adjective-068"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Freie",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "im"
+        },
+        {
+          "form": "Freien",
+          "not_next": [
+            "Deutschen",
+            "Theater",
+            "Theaters",
+            "Hochstift",
+            "Universität",
+            "Presse"
+          ]
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Bei schönem Wetter essen wir im Sommer oft im Freien.",
+        "Diese können im Freien und in Krafträumen durchgeführt werden.",
+        "Im Freien ist es heute viel zu kalt.",
+        "Die Kinder haben den ganzen Tag im Freien gespielt."
+      ],
+      "negative": [
+        "Das Molekül liegt im freien Zustand vor.",
+        "Der Stein fiel im freien Fall nach unten.",
+        "Die Kinder liefen ins Freie.",
+        "Er wollte um ihre Hand freien.",
+        "Das Stück läuft im Freien Theater am Markt."
+      ]
+    }
+  },
+  {
+    "id": "expression-016",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "ab und zu",
+    "translation_ru": "иногда, время от времени",
+    "translation_en": "now and then, from time to time",
+    "example_de": "Ab und zu gehen wir am Wochenende ins Theater.",
+    "example_ru": "Время от времени мы ходим в театр по выходным.",
+    "example_en": "Now and then we go to the theatre at the weekend.",
+    "notes_ru": [
+      "То же (чаще на севере): ab und an.",
+      "Близко: manchmal, gelegentlich."
+    ],
+    "notes_en": [
+      "Also (more common in the north): ab und an.",
+      "Similar: manchmal, gelegentlich."
+    ],
+    "related_ids": [
+      "preposition-008",
+      "conjunction-001",
+      "preposition-007"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ab_und_zu",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "ab"
+          },
+          {
+            "form": "und"
+          },
+          {
+            "form": "zu",
+            "not_next": [
+              "Hause",
+              "Ende",
+              "Bett",
+              "Fuß",
+              "Boden",
+              "Tisch",
+              "dem",
+              "der",
+              "den",
+              "einem",
+              "einer",
+              "seinem",
+              "seiner",
+              "ihrem",
+              "ihrer",
+              "meinem",
+              "meiner",
+              "Recht",
+              "Unrecht",
+              "ihm",
+              "ihnen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "ab"
+          },
+          {
+            "form": "und"
+          },
+          {
+            "form": "an",
+            "not_next": [
+              "Hause",
+              "Ende",
+              "Bett",
+              "Fuß",
+              "Boden",
+              "Tisch",
+              "dem",
+              "der",
+              "einem",
+              "einer",
+              "seinem",
+              "seiner",
+              "ihrem",
+              "ihrer",
+              "meinem",
+              "meiner"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ab und zu gehen wir am Wochenende ins Theater.",
+        "Wir selbst gehen dort ab und zu Essen, obwohl wir ganz in der Nähe wohnen.",
+        "Er ruft mich ab und zu an.",
+        "Ab und an trinke ich einen Kaffee.",
+        "Ich sehe ab und an den Nachbarn im Garten.",
+        "Er kommt ab und zu spät nach Hause.",
+        "Sie hört ab und zu ihr Lieblingslied."
+      ],
+      "negative": [
+        "Er nahm den Hut ab und zu Hause legte er sich hin.",
+        "Sie schloss die Tür ab und zu dem Nachbarn sagte sie nichts.",
+        "Ab morgen gilt der neue Fahrplan.",
+        "Er stieg ab und zu Fuß ging er weiter.",
+        "Ab morgen kommt er öfter.",
+        "Er stieg ab und an der Haltestelle wartete schon sein Bruder.",
+        "Sie lehnte das Angebot ab und zu Recht, wie sich später zeigte."
+      ]
+    }
+  },
+  {
+    "id": "expression-017",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "wir sehen uns",
+    "translation_ru": "увидимся, до встречи",
+    "translation_en": "see you, see you later",
+    "example_de": "Ich muss jetzt los – wir sehen uns morgen!",
+    "example_ru": "Мне пора – увидимся завтра!",
+    "example_en": "I have to go now – see you tomorrow!",
+    "notes_ru": [
+      "Wir sehen uns gleich / später / bald — увидимся через минуту / позже / скоро. Wir sehen uns noch! — Ещё увидимся!",
+      "Разг.: Man sieht sich! — Ещё пересечёмся!",
+      "Wir sehen uns! / Wir sehen uns. — тоже «увидимся»; с другими словами после uns (die Bilder an, im Spiegel, gezwungen) — обычное sehen."
+    ],
+    "notes_en": [
+      "Wir sehen uns gleich / später / bald — see you in a minute / later / soon. Wir sehen uns noch! — We'll see each other again!",
+      "Colloquial: Man sieht sich! — See you around!",
+      "Wir sehen uns! / Wir sehen uns. — also \"see you\"; with other words after uns (die Bilder an, im Spiegel, gezwungen) — plain sehen."
+    ],
+    "related_ids": [
+      "pronoun-006",
+      "verb-011"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "wir"
+          },
+          {
+            "form": "sehen"
+          },
+          {
+            "form": "uns"
+          },
+          {
+            "form": [
+              "hoffentlich",
+              "ja",
+              "doch",
+              "also",
+              "dann",
+              "wohl",
+              "sicher",
+              "bestimmt"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "gleich",
+              "später",
+              "morgen",
+              "bald",
+              "nachher",
+              "dann",
+              "übermorgen",
+              "wieder",
+              "heute",
+              "nächste",
+              "nächsten",
+              "am",
+              "in"
+            ],
+            "optional": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "abend",
+          "acht",
+          "also",
+          "am",
+          "april",
+          "august",
+          "bald",
+          "bestimmt",
+          "dann",
+          "dezember",
+          "dienstag",
+          "doch",
+          "donnerstag",
+          "drei",
+          "ein",
+          "einem",
+          "einer",
+          "elf",
+          "februar",
+          "freitag",
+          "früh",
+          "frühjahr",
+          "frühling",
+          "fünf",
+          "gleich",
+          "halb",
+          "herbst",
+          "heute",
+          "hoffentlich",
+          "im",
+          "in",
+          "ja",
+          "jahr",
+          "jahren",
+          "januar",
+          "juli",
+          "juni",
+          "mai",
+          "minuten",
+          "mittag",
+          "mittwoch",
+          "monat",
+          "monaten",
+          "montag",
+          "morgen",
+          "märz",
+          "nachher",
+          "nachmittag",
+          "neun",
+          "noch",
+          "november",
+          "nächste",
+          "nächsten",
+          "oktober",
+          "paar",
+          "samstag",
+          "sechs",
+          "september",
+          "sicher",
+          "sieben",
+          "sommer",
+          "sonnabend",
+          "sonntag",
+          "später",
+          "stunden",
+          "tag",
+          "tagen",
+          "uhr",
+          "vier",
+          "viertel",
+          "vormittag",
+          "wieder",
+          "winter",
+          "woche",
+          "wochen",
+          "wochenende",
+          "wohl",
+          "zehn",
+          "zwei",
+          "zwölf",
+          "übermorgen"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "gleich",
+          "bald",
+          "später",
+          "morgen",
+          "übermorgen",
+          "dann",
+          "nachher",
+          "heute",
+          "abend",
+          "nachmittag",
+          "vormittag",
+          "mittag",
+          "früh",
+          "montag",
+          "dienstag",
+          "mittwoch",
+          "donnerstag",
+          "freitag",
+          "samstag",
+          "sonnabend",
+          "sonntag",
+          "wochenende",
+          "woche",
+          "monat",
+          "jahr",
+          "tagen",
+          "wochen",
+          "uhr",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": "sehen"
+          },
+          {
+            "form": "wir"
+          },
+          {
+            "form": "uns"
+          },
+          {
+            "form": [
+              "hoffentlich",
+              "ja",
+              "doch",
+              "also",
+              "dann",
+              "wohl",
+              "sicher",
+              "bestimmt"
+            ],
+            "optional": true
+          },
+          {
+            "form": [
+              "gleich",
+              "später",
+              "morgen",
+              "bald",
+              "nachher",
+              "dann",
+              "übermorgen",
+              "wieder",
+              "heute",
+              "nächste",
+              "nächsten",
+              "am",
+              "in"
+            ],
+            "optional": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0,
+        "clause_rest": [
+          "abend",
+          "acht",
+          "also",
+          "am",
+          "april",
+          "august",
+          "bald",
+          "bestimmt",
+          "dann",
+          "dezember",
+          "dienstag",
+          "doch",
+          "donnerstag",
+          "drei",
+          "ein",
+          "einem",
+          "einer",
+          "elf",
+          "februar",
+          "freitag",
+          "früh",
+          "frühjahr",
+          "frühling",
+          "fünf",
+          "gleich",
+          "halb",
+          "herbst",
+          "heute",
+          "hoffentlich",
+          "im",
+          "in",
+          "ja",
+          "jahr",
+          "jahren",
+          "januar",
+          "juli",
+          "juni",
+          "mai",
+          "minuten",
+          "mittag",
+          "mittwoch",
+          "monat",
+          "monaten",
+          "montag",
+          "morgen",
+          "märz",
+          "nachher",
+          "nachmittag",
+          "neun",
+          "noch",
+          "november",
+          "nächste",
+          "nächsten",
+          "oktober",
+          "paar",
+          "samstag",
+          "sechs",
+          "september",
+          "sicher",
+          "sieben",
+          "sommer",
+          "sonnabend",
+          "sonntag",
+          "später",
+          "stunden",
+          "tag",
+          "tagen",
+          "uhr",
+          "vier",
+          "viertel",
+          "vormittag",
+          "wieder",
+          "winter",
+          "woche",
+          "wochen",
+          "wochenende",
+          "wohl",
+          "zehn",
+          "zwei",
+          "zwölf",
+          "übermorgen"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "gleich",
+          "bald",
+          "später",
+          "morgen",
+          "übermorgen",
+          "dann",
+          "nachher",
+          "heute",
+          "abend",
+          "nachmittag",
+          "vormittag",
+          "mittag",
+          "früh",
+          "montag",
+          "dienstag",
+          "mittwoch",
+          "donnerstag",
+          "freitag",
+          "samstag",
+          "sonnabend",
+          "sonntag",
+          "wochenende",
+          "woche",
+          "monat",
+          "jahr",
+          "tagen",
+          "wochen",
+          "uhr",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich muss jetzt los – wir sehen uns morgen!",
+        "»Wir sehen uns gleich, hoffentlich …« Und Harry ließ sich fallen.",
+        "Hagrid Harry borgte sich Rons Federkiel, kritzelte »Ja, gerne, wir sehen uns später« auf die Rückseite des Briefes.",
+        "»Wir sehen uns dann im Sommer.«",
+        "Sehen wir uns morgen?",
+        "Wir sehen uns hoffentlich bald wieder.",
+        "Wir sehen uns noch!",
+        "Wir sehen uns morgen und dann fängt der Kurs an.",
+        "Wir sehen uns.",
+        "Wir sehen uns am Montag.",
+        "Wir sehen uns in drei Tagen.",
+        "Wir sehen uns nächste Woche!",
+        "Wir sehen uns um acht.",
+        "Wir sehen uns morgen um 8 Uhr.",
+        "Wir sehen uns morgen beim Essen.",
+        "Wir sehen uns morgen in der Großen Halle.",
+        "Wir sehen uns heute Abend im Kino."
+      ],
+      "negative": [
+        "Wir sehen uns die Bilder später an.",
+        "Wir sehen uns im Spiegel.",
+        "Morgen sehen wir uns den Film an.",
+        "Wir sehen uns heute einen Film an.",
+        "Sehen wir uns morgen die Wohnung an?",
+        "Wir sehen uns gleich die Bilder an.",
+        "Wir sehen uns heute Fotos an.",
+        "Wir sehen uns noch einmal um.",
+        "Wir sehen uns morgen besser vor.",
+        "Wir sehen uns heute gezwungen, die Preise zu erhöhen.",
+        "Wir sehen uns bald als Sieger.",
+        "Wir sehen uns morgen nicht in der Lage, zu kommen.",
+        "Wir sehen uns nicht ähnlich.",
+        "Wir sehen uns morgen nach einer neuen Wohnung um.",
+        "Wir sehen uns wieder im Spiegel.",
+        "Wir sehen uns in Hogwarts."
+      ]
+    }
+  },
+  {
+    "id": "expression-018",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Dunkeln",
+    "translation_ru": "в темноте, в потёмках; в неведении, неизвестно",
+    "translation_en": "in the dark, in darkness; in ignorance, unknown",
+    "example_de": "Ohne Taschenlampe konnten wir im Dunkeln den Weg kaum finden.",
+    "example_ru": "Без фонарика мы почти не могли найти дорогу в темноте.",
+    "example_en": "Without a torch we could hardly find the way in the dark.",
+    "notes_ru": [
+      "im Dunkeln tappen — блуждать в потёмках, ничего не знать: Die Polizei tappt noch im Dunkeln.",
+      "jemanden im Dunkeln lassen — держать кого-либо в неведении.",
+      "Не путать: dunkeln — темнеть (глагол); im dunklen Wald — в тёмном лесу."
+    ],
+    "notes_en": [
+      "im Dunkeln tappen — to grope in the dark, to have no clue: Die Polizei tappt noch im Dunkeln.",
+      "jemanden im Dunkeln lassen — to keep someone in the dark.",
+      "Do not confuse: dunkeln — to grow dark (verb); im dunklen Wald — in the dark forest."
+    ],
+    "related_ids": [
+      "preposition-020",
+      "adjective-057"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/dunkel",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "im"
+        },
+        {
+          "form": "Dunkeln"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 1
+    },
+    "tests": {
+      "positive": [
+        "Ohne Taschenlampe konnten wir im Dunkeln den Weg kaum finden.",
+        "An der Wand entlang waren Tische und Stühle aufgestapelt und im Dunkeln konnte er auch einen umgedrehten Papierkorb erkennen.",
+        "Die Polizei tappt noch im Dunkeln.",
+        "Warum hast du mich so lange im Dunkeln gelassen?",
+        "Im Dunkeln habe ich Angst."
+      ],
+      "negative": [
+        "Es fängt schon an zu dunkeln.",
+        "Sie gingen durch den dunklen Wald.",
+        "Er saß im dunkeln Walde.",
+        "Ins Dunkel der Nacht verschwand er."
+      ]
+    }
+  },
+  {
+    "id": "expression-019",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jemanden zum Narren halten / haben",
+    "translation_ru": "дурачить (кого-либо), водить за нос, морочить голову",
+    "translation_en": "to make a fool of (someone), to fool (someone), to pull someone's leg",
+    "example_de": "Glaub ihm kein Wort, er will dich nur zum Narren halten!",
+    "example_ru": "Не верь ни одному его слову, он просто хочет тебя одурачить!",
+    "example_en": "Don't believe a word he says, he just wants to make a fool of you!",
+    "notes_ru": [
+      "Ihr sollt mich nicht länger zum Narren haben! (Гримм) — Хватит меня дурачить!",
+      "Не путать: sich zum Narren machen — выставить себя дураком; einen Narren an jemandem gefressen haben — души не чаять в ком-либо; der Narr — дурак, шут."
+    ],
+    "notes_en": [
+      "Ihr sollt mich nicht länger zum Narren haben! (Grimm) — Stop making a fool of me!",
+      "Do not confuse: sich zum Narren machen — to make a fool of oneself; einen Narren an jemandem gefressen haben — to be crazy about someone; der Narr — fool, jester."
+    ],
+    "related_ids": [
+      "verb-146",
+      "verb-002"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Narr",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "zum Narren",
+            "not_next": [
+              "gemacht",
+              "machen",
+              "macht",
+              "machte",
+              "machten",
+              "geworden",
+              "werden",
+              "wird",
+              "wurde",
+              "ernannt",
+              "erklärt",
+              "gestempelt",
+              "gekrönt",
+              "gewählt",
+              "keine",
+              "kein",
+              "keinen",
+              "keiner",
+              "keinerlei"
+            ]
+          },
+          {
+            "form": [
+              "halten",
+              "halte",
+              "hältst",
+              "hält",
+              "haltet",
+              "hielt",
+              "hieltest",
+              "hielten",
+              "hieltet",
+              "hielte",
+              "gehalten",
+              "halt",
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hieltst"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "halten",
+              "halte",
+              "hältst",
+              "hält",
+              "haltet",
+              "hielt",
+              "hieltest",
+              "hielten",
+              "hieltet",
+              "hielte",
+              "gehalten",
+              "halt",
+              "haben",
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hieltst"
+            ]
+          },
+          {
+            "form": "zum Narren",
+            "not_next": [
+              "gemacht",
+              "machen",
+              "macht",
+              "machte",
+              "machten",
+              "geworden",
+              "werden",
+              "wird",
+              "wurde",
+              "ernannt",
+              "erklärt",
+              "gestempelt",
+              "gekrönt",
+              "gewählt",
+              "keine",
+              "kein",
+              "keinen",
+              "keiner",
+              "keinerlei"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Glaub ihm kein Wort, er will dich nur zum Narren halten!",
+        "Ihr sollt mich nicht länger zum Narren haben!",
+        "Die Geschichte ist aber doch, wie es den Teufel einmal dran gekriegt und zum Narren gehabt hat.",
+        "Er hält uns alle zum Narren.",
+        "Sie haben mich die ganze Zeit zum Narren gehalten."
+      ],
+      "negative": [
+        "Er hat sich vor allen zum Narren gemacht.",
+        "»Ihr Narren,« rief er, »was schreit ihr?«",
+        "Der König hatte einen Narren am Hof.",
+        "Er wurde zum Narren des ganzen Dorfes.",
+        "Man hat ihn zum Narren erklärt.",
+        "Er hat zum Narren keine Lust."
+      ]
+    }
+  },
+  {
+    "id": "expression-020",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "hin und her",
+    "translation_ru": "туда-сюда, взад и вперёд; так и сяк (обдумывать, обсуждать)",
+    "translation_en": "back and forth, to and fro; this way and that (think, discuss)",
+    "example_de": "Der Hund lief aufgeregt am Zaun hin und her.",
+    "example_ru": "Собака взволнованно бегала вдоль забора туда-сюда.",
+    "example_en": "The dog ran excitedly back and forth along the fence.",
+    "notes_ru": [
+      "hin und her überlegen / reden — прикидывать так и сяк, обсуждать без конца.",
+      "Не путать: das Hin und Her (с заглавной) — неразбериха, метания.",
+      "hin- und hergerissen sein — разрываться (между чем-либо).",
+      "Близко: auf und ab."
+    ],
+    "notes_en": [
+      "hin und her überlegen / reden — to think / talk something over this way and that.",
+      "Do not confuse: das Hin und Her (capitalised) — back-and-forth, toing and froing.",
+      "hin- und hergerissen sein — to be torn (between things).",
+      "Similar: auf und ab."
+    ],
+    "related_ids": [
+      "adverb-102",
+      "conjunction-001",
+      "adverb-098"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hin_und_her",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "hin"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "her"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Der Hund lief aufgeregt am Zaun hin und her.",
+        "So ging er hin und her und wartete.",
+        "Wir haben lange hin und her überlegt.",
+        "Hin und her schaukelte das kleine Boot."
+      ],
+      "negative": [
+        "Das ewige Hin und Her nervt mich.",
+        "Er setzte sich hin und wartete.",
+        "Komm her und setz dich hin."
+      ]
+    }
+  },
+  {
+    "id": "expression-021",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf und davon",
+    "translation_ru": "прочь, (и) был таков; смыться, удрать (sich auf und davon machen)",
+    "translation_en": "off and away, gone; to make off, to run off (sich auf und davon machen)",
+    "example_de": "Als wir zurückkamen, war die Katze längst auf und davon.",
+    "example_ru": "Когда мы вернулись, кошки давно и след простыл.",
+    "example_en": "When we came back, the cat was long gone.",
+    "notes_ru": [
+      "auf und davon sein — исчезнуть, скрыться; sich auf und davon machen — смыться, удрать."
+    ],
+    "notes_en": [
+      "auf und davon sein — to be gone, to have run off; sich auf und davon machen — to make off, to clear off."
+    ],
+    "related_ids": [
+      "preposition-018",
+      "conjunction-001"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/auf_Adverb",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "auf"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "davon"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 2
+    },
+    "tests": {
+      "positive": [
+        "Als wir zurückkamen, war die Katze längst auf und davon.",
+        "Der Vogel fliegt auf und davon.",
+        "Der Dieb machte sich mit dem Geld auf und davon.",
+        "Sie hat sich einfach auf und davon gemacht."
+      ],
+      "negative": [
+        "Er stand auf und ging davon.",
+        "Davon weiß ich nichts.",
+        "Die Tür ging auf und herein kam Harry."
+      ]
+    }
+  },
+  {
+    "id": "expression-022",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf und nieder",
+    "translation_ru": "вверх и вниз; взад и вперёд",
+    "translation_en": "up and down; back and forth",
+    "example_de": "Das kleine Boot schaukelte auf den Wellen auf und nieder.",
+    "example_ru": "Лодочка качалась на волнах вверх и вниз.",
+    "example_en": "The little boat rocked up and down on the waves.",
+    "notes_ru": [
+      "То же: auf und ab (чаще)."
+    ],
+    "notes_en": [
+      "Same as: auf und ab (more common)."
+    ],
+    "related_ids": [
+      "preposition-018",
+      "conjunction-001",
+      "adverb-393"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/nieder_Adverb",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "auf"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "nieder"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 2
+    },
+    "tests": {
+      "positive": [
+        "Das kleine Boot schaukelte auf den Wellen auf und nieder.",
+        "Der Junge sprang vor Freude auf und nieder.",
+        "Die Kolben bewegen sich gleichmäßig auf und nieder.",
+        "Nervös ging sie im Zimmer auf und nieder."
+      ],
+      "negative": [
+        "Er stand auf und kniete nieder.",
+        "Nieder mit dem Tyrannen!",
+        "Sie stand auf und niedergeschlagen ging sie hinaus."
+      ]
+    }
+  },
+  {
+    "id": "expression-023",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "hin und wieder",
+    "translation_ru": "иногда, время от времени",
+    "translation_en": "now and then, every so often",
+    "example_de": "Hin und wieder besucht sie ihre alte Schule.",
+    "example_ru": "Иногда она навещает свою старую школу.",
+    "example_en": "Now and then she visits her old school.",
+    "notes_ru": [
+      "Близко: ab und zu, manchmal, gelegentlich."
+    ],
+    "notes_en": [
+      "Similar: ab und zu, manchmal, gelegentlich."
+    ],
+    "related_ids": [
+      "adverb-102",
+      "conjunction-001",
+      "adverb-022"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hin_und_wieder",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "hin"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "wieder"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Hin und wieder besucht sie ihre alte Schule.",
+        "Wir treffen uns hin und wieder zum Essen.",
+        "Er raucht nur hin und wieder eine Zigarette."
+      ],
+      "negative": [
+        "Er ging hin und kam bald wieder.",
+        "Wieder ging er zu ihr hin.",
+        "Leg dich hin und schlaf wieder ein."
+      ]
+    }
+  },
+  {
+    "id": "expression-024",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "kreuz und quer",
+    "translation_ru": "вдоль и поперёк; как попало, беспорядочно",
+    "translation_en": "all over, crisscross; every which way, higgledy-piggledy",
+    "example_de": "Im Sommer sind wir kreuz und quer durch Skandinavien gereist.",
+    "example_ru": "Летом мы изъездили Скандинавию вдоль и поперёк.",
+    "example_en": "In the summer we travelled all over Scandinavia.",
+    "notes_ru": [
+      "Пишется со строчной: kreuz und quer."
+    ],
+    "notes_en": [
+      "Written in lower case: kreuz und quer."
+    ],
+    "related_ids": [
+      "noun-728",
+      "conjunction-001",
+      "adverb-177"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/kreuz",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "kreuz"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "quer"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Im Sommer sind wir kreuz und quer durch Skandinavien gereist.",
+        "Die Kabel lagen kreuz und quer auf dem Boden.",
+        "Kreuz und quer liefen die Kinder über den Hof."
+      ],
+      "negative": [
+        "Sie zeichnete ein Kreuz und quer darüber einen dicken Strich.",
+        "Der Baum lag quer über dem Weg.",
+        "Sie schlug ein Kreuz und betete."
+      ]
+    }
+  },
+  {
+    "id": "expression-025",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "hin und zurück",
+    "translation_ru": "туда и обратно",
+    "translation_en": "there and back, return (ticket), round trip",
+    "example_de": "Einmal nach Hamburg, hin und zurück, bitte.",
+    "example_ru": "Один до Гамбурга, туда и обратно, пожалуйста.",
+    "example_en": "One to Hamburg, return, please.",
+    "notes_ru": [
+      "Fahrkarte hin und zurück — билет туда и обратно (= Rückfahrkarte)."
+    ],
+    "notes_en": [
+      "Fahrkarte hin und zurück — return ticket (= Rückfahrkarte)."
+    ],
+    "related_ids": [
+      "adverb-102",
+      "conjunction-001",
+      "adverb-024"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hin",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "hin"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "zurück"
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 0
+    },
+    "tests": {
+      "positive": [
+        "Einmal nach Hamburg, hin und zurück, bitte.",
+        "Die Fahrt hin und zurück dauert vier Stunden.",
+        "Was kostet eine Fahrkarte hin und zurück?"
+      ],
+      "negative": [
+        "Er ging hin und kam spät zurück.",
+        "Komm sofort zurück!",
+        "Setz dich hin und lehn dich zurück."
+      ]
+    }
+  },
+  {
+    "id": "expression-026",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "bei jemandem ein und aus gehen",
+    "translation_ru": "часто бывать (у кого-либо), быть своим человеком (в доме)",
+    "translation_en": "to come and go (at someone's house), to be a regular visitor",
+    "example_de": "Bei uns gehen die Nachbarskinder ein und aus.",
+    "example_ru": "Соседские дети у нас как дома.",
+    "example_en": "The neighbours' children come and go at our place.",
+    "notes_ru": [
+      "Встречается также: ein- und ausgehen.",
+      "Не путать: schaltete das Licht ein und aus (= ein- und ausschalten), atmete tief ein und aus (= ein- und ausatmen) — два глагола.",
+      "weder ein noch aus wissen — не знать, что делать."
+    ],
+    "notes_en": [
+      "Also found: ein- und ausgehen.",
+      "Do not confuse: schaltete das Licht ein und aus (= ein- und ausschalten), atmete tief ein und aus (= ein- und ausatmen) — two verbs.",
+      "weder ein noch aus wissen — to be at one's wits' end."
+    ],
+    "related_ids": [
+      "conjunction-001",
+      "preposition-001"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ein_Adverb",
+    "wortschatz_excluded": true,
+    "match": {
+      "parts": [
+        {
+          "form": "ein"
+        },
+        {
+          "form": "und"
+        },
+        {
+          "form": "aus",
+          "not_next": [
+            "der",
+            "dem",
+            "den",
+            "einem",
+            "einer",
+            "meinem",
+            "meiner",
+            "deinem",
+            "deiner",
+            "seinem",
+            "seiner",
+            "ihrem",
+            "ihrer",
+            "unserem",
+            "unserer",
+            "eurem",
+            "eurer",
+            "diesem",
+            "dieser",
+            "jedem",
+            "jeder",
+            "Gewohnheit",
+            "Angst",
+            "Liebe",
+            "Neugier",
+            "Versehen",
+            "Spaß",
+            "Wut",
+            "Trotz",
+            "Mitleid",
+            "Furcht",
+            "Freude",
+            "Langeweile",
+            "Not",
+            "Rache",
+            "Eifersucht",
+            "Höflichkeit",
+            "Prinzip",
+            "Überzeugung",
+            "Holz",
+            "Stein",
+            "Glas",
+            "Papier"
+          ],
+          "clause_has": [
+            "gehen",
+            "gehe",
+            "gehst",
+            "geht",
+            "ging",
+            "gingst",
+            "gingen",
+            "gingt",
+            "ginge",
+            "gegangen"
+          ]
+        }
+      ],
+      "order": "fixed",
+      "scope": "adjacent",
+      "anchor": 2
+    },
+    "tests": {
+      "positive": [
+        "Bei uns gehen die Nachbarskinder ein und aus.",
+        "Er ging in diesem Haus jahrelang ein und aus.",
+        "Früher sind bei ihr viele Künstler ein und aus gegangen.",
+        "Bei ihm gingen Künstler ein und aus, die er bewunderte."
+      ],
+      "negative": [
+        "Er schaltete das Licht ein und aus.",
+        "Sie atmete tief ein und aus.",
+        "Er ging hinaus, schaltete das Licht ein und aus.",
+        "Er stieg ein und aus Gewohnheit ging er noch eine Runde.",
+        "Er stieg ein und aus dem Haus ging niemand mehr."
+      ]
+    }
+  },
+  {
+    "id": "expression-028",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "immer noch / noch immer",
+    "translation_ru": "всё ещё, до сих пор",
+    "translation_en": "still",
+    "example_de": "Es regnet immer noch.",
+    "example_ru": "Всё ещё идёт дождь.",
+    "example_en": "It's still raining.",
+    "notes_ru": [
+      "noch immer — то же, чуть книжнее; immer noch nicht — всё ещё не, до сих пор не.",
+      "Не путать: immer + noch + сравнительная степень — всё больше / всё хуже (Sie will immer noch mehr; Es wurde immer noch schlimmer); но Das ist immer noch besser als nichts — это всё-таки лучше, чем ничего."
+    ],
+    "notes_en": [
+      "noch immer — the same, slightly more literary; immer noch nicht — still not.",
+      "Do not confuse: immer + noch + comparative — more and more / worse and worse (Sie will immer noch mehr; Es wurde immer noch schlimmer); but Das ist immer noch besser als nichts — that is still better than nothing."
+    ],
+    "related_ids": [
+      "adverb-008",
+      "adverb-013"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/immer",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "immer"
+          },
+          {
+            "form": "noch",
+            "not_next": [
+              "mehr",
+              "weniger",
+              "schlimmer",
+              "einmal",
+              "mal"
+            ],
+            "not_next_comparative": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "noch"
+          },
+          {
+            "form": "immer",
+            "not_next": [
+              "mehr",
+              "wieder",
+              "weiter",
+              "wenn"
+            ],
+            "not_next_comparative": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Es regnet immer noch.",
+        "Er wartet noch immer auf eine Antwort.",
+        "Ich verstehe immer noch nicht, was er meint.",
+        "Noch immer lag Schnee auf den Bergen.",
+        "Immer noch keine Nachricht von ihm?",
+        "Das ist immer noch besser als nichts."
+      ],
+      "negative": [
+        "Er kommt immer zu spät.",
+        "Es wurde immer noch schlimmer.",
+        "Sie will immer noch mehr.",
+        "Hast du noch Zeit?",
+        "Sein Besen stieg immer noch höher und schwebte davon."
+      ]
+    }
+  },
+  {
+    "id": "expression-029",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "nach Hause",
+    "translation_ru": "домой",
+    "translation_en": "home (direction)",
+    "example_de": "Nach der Arbeit fahre ich direkt nach Hause.",
+    "example_ru": "После работы я еду прямо домой.",
+    "example_en": "After work I go straight home.",
+    "notes_ru": [
+      "nach Hause gehen / kommen / fahren / bringen — идти / приходить / ехать / отвозить домой; устар. nach Haus.",
+      "Где? — zu Hause (дома); куда? — nach Hause (домой).",
+      "Допустимо и слитно: nachhause (особенно в Австрии и Швейцарии)."
+    ],
+    "notes_en": [
+      "nach Hause gehen / kommen / fahren / bringen — to go / come / drive / take home; old: nach Haus.",
+      "Where? — zu Hause (at home); where to? — nach Hause (home).",
+      "Also written as one word: nachhause (especially in Austria and Switzerland)."
+    ],
+    "related_ids": [
+      "noun-016"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/nach_Hause",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "nach"
+          },
+          {
+            "form": [
+              "Hause",
+              "Haus"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "nachhause"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach der Arbeit fahre ich direkt nach Hause.",
+        "Komm bitte pünktlich nach Hause!",
+        "Er brachte sie nach Haus.",
+        "Wann kommst du nachhause?"
+      ],
+      "negative": [
+        "Er sehnte sich nach dem Hause seiner Kindheit.",
+        "Wir suchen nach einem Haus mit Garten.",
+        "Er ging nach seinem Haus."
+      ]
+    }
+  },
+  {
+    "id": "expression-031",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "einer nach dem ander(e)n",
+    "translation_ru": "один за другим, по очереди",
+    "translation_en": "one after another, one by one",
+    "example_de": "Die Gäste verabschiedeten sich einer nach dem anderen.",
+    "example_ru": "Гости прощались один за другим.",
+    "example_en": "The guests said goodbye one after another.",
+    "notes_ru": [
+      "Формы: eine nach der anderen, eins nach dem anderen; также einer nach dem andern (книжн., разг.).",
+      "С существительным: ein Glas nach dem anderen — стакан за стаканом."
+    ],
+    "notes_en": [
+      "Forms: eine nach der anderen, eins nach dem anderen; also einer nach dem andern (literary, colloquial).",
+      "With a noun: ein Glas nach dem anderen — glass after glass."
+    ],
+    "related_ids": [
+      "pronoun-026",
+      "pronoun-044"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ander",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "einer",
+              "eine",
+              "eins",
+              "eines",
+              "einen",
+              "einem"
+            ]
+          },
+          {
+            "form": [
+              "nach dem andern",
+              "nach dem anderen",
+              "nach der andern",
+              "nach der anderen",
+              "nach dem andren",
+              "nach der andren"
+            ],
+            "not_next": [
+              "Ende",
+              "Seite",
+              "Ufer",
+              "Tag",
+              "Mal",
+              "Morgen",
+              "Jahr",
+              "Teil",
+              "Zimmer",
+              "Raum",
+              "Haus",
+              "Tisch",
+              "Weg",
+              "Ort",
+              "Stelle",
+              "Richtung",
+              "Hälfte",
+              "Woche",
+              "Hand",
+              "Straße",
+              "Stadt",
+              "Ecke",
+              "Wand",
+              "Tür",
+              "Fenster",
+              "Bett",
+              "Baum",
+              "Mann",
+              "Frau",
+              "Kind"
+            ],
+            "not_after": [
+              "sich"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ein",
+              "eine",
+              "einen",
+              "einem",
+              "einer"
+            ]
+          },
+          {
+            "form": [
+              "nach dem andern",
+              "nach dem anderen",
+              "nach der andern",
+              "nach der anderen",
+              "nach dem andren",
+              "nach der andren"
+            ],
+            "not_next": [
+              "Ende",
+              "Seite",
+              "Ufer",
+              "Tag",
+              "Mal",
+              "Morgen",
+              "Jahr",
+              "Teil",
+              "Zimmer",
+              "Raum",
+              "Haus",
+              "Tisch",
+              "Weg",
+              "Ort",
+              "Stelle",
+              "Richtung",
+              "Hälfte",
+              "Woche",
+              "Hand",
+              "Straße",
+              "Stadt",
+              "Ecke",
+              "Wand",
+              "Tür",
+              "Fenster",
+              "Bett",
+              "Baum",
+              "Mann",
+              "Frau",
+              "Kind"
+            ],
+            "not_after": [
+              "sich"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Gäste verabschiedeten sich einer nach dem anderen.",
+        "Eine nach der anderen verließen die Schülerinnen den Raum.",
+        "Eins nach dem andern, wir haben Zeit!",
+        "Sie kamen einer nach dem andern herein.",
+        "Er warf einen Stein nach dem andern ins Wasser.",
+        "Eine Eule nach der anderen flog über ihre Köpfe."
+      ],
+      "negative": [
+        "Er fuhr mit einer nach dem anderen Ende der Stadt.",
+        "Nach dem anderen Essen war er satt.",
+        "Sie ging mit einem nach der anderen Seite.",
+        "Mit einem Lächeln drehte er sich nach dem anderen um.",
+        "Er rief eine Stunde nach dem anderen Termin an."
+      ]
+    }
+  }
+]

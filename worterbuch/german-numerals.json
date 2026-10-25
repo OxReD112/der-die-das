@@ -57,17 +57,27 @@
       "numeral_kind": "cardinal",
       "value": 2
     },
-    "forms_note_ru": "Разговорный вариант: zwo. Редкий Genitiv: zweier (die Mutter zweier Kinder).",
-    "forms_note_en": "Colloquial variant: zwo. Rare genitive: zweier (die Mutter zweier Kinder).",
+    "forms_note_ru": "Разговорный вариант: zwo. Редкий Genitiv: zweier (die Mutter zweier Kinder). Дательный без существительного: zu zweien «вдвоём», von uns zweien. zu zweit — «вдвоём».",
+    "forms_note_en": "Colloquial variant: zwo. Rare genitive: zweier (die Mutter zweier Kinder). Dative without a noun: zu zweien (two together), von uns zweien. zu zweit — two together.",
     "usage_note_ru": "По телефону и для ясности часто говорят zwo, чтобы не спутать с drei.",
     "usage_note_en": "On the phone and for clarity people often say zwo, so as not to confuse it with drei.",
     "search_forms": [
       "zwei",
       "zwo",
-      "zweier"
+      "zweier",
+      "zweien",
+      "zweit"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zwei",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "zweit",
+        "zweien"
+      ],
+      "ru": "вдвоём",
+      "en": "two together"
+    }
   },
   {
     "id": "numeral-004",
@@ -83,16 +93,26 @@
       "numeral_kind": "cardinal",
       "value": 3
     },
-    "forms_note_ru": "Редкий Genitiv: dreier (während dreier Jahre).",
-    "forms_note_en": "Rare genitive: dreier (während dreier Jahre).",
+    "forms_note_ru": "Редкий Genitiv: dreier (während dreier Jahre). Дательный без существительного: zu dreien «втроём», von uns dreien. zu dritt — «втроём».",
+    "forms_note_en": "Rare genitive: dreier (während dreier Jahre). Dative without a noun: zu dreien (three together), von uns dreien. zu dritt — three together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: dreizehn (13), dreißig (30) — с ß.",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: dreizehn (13), dreißig (30) — with ß.",
     "search_forms": [
       "drei",
-      "dreier"
+      "dreier",
+      "dreien",
+      "dritt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/drei",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "dritt",
+        "dreien"
+      ],
+      "ru": "втроём",
+      "en": "three together"
+    }
   },
   {
     "id": "numeral-005",
@@ -108,13 +128,26 @@
       "numeral_kind": "cardinal",
       "value": 4
     },
+    "forms_note_ru": "Без существительного: zu vieren «вчетвером»; разг.: auf allen vieren «на четвереньках», alle viere von sich strecken «растянуться, расслабиться; тж. умереть». zu viert — «вчетвером».",
+    "forms_note_en": "Without a noun: zu vieren (four together); colloquial: auf allen vieren (on all fours), alle viere von sich strecken (to stretch out and relax; also: to die). zu viert — four together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: vierzehn (14), vierzig (40).",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: vierzehn (14), vierzig (40).",
     "search_forms": [
-      "vier"
+      "vier",
+      "vieren",
+      "viere",
+      "viert"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/vier",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "viert",
+        "vieren"
+      ],
+      "ru": "вчетвером",
+      "en": "four together"
+    }
   },
   {
     "id": "numeral-006",
@@ -130,13 +163,26 @@
       "numeral_kind": "cardinal",
       "value": 5
     },
+    "forms_note_ru": "Без существительного: zu fünfen или zu fünft «впятером»; fünf(e) gerade sein lassen (разг.) — смотреть сквозь пальцы.",
+    "forms_note_en": "Without a noun: zu fünfen or zu fünft (five together); fünf(e) gerade sein lassen (colloquial) — to turn a blind eye.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: fünfzehn (15), fünfzig (50).",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: fünfzehn (15), fünfzig (50).",
     "search_forms": [
-      "fünf"
+      "fünf",
+      "fünfen",
+      "fünfe",
+      "fünft"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/fuenf",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "fünft",
+        "fünfen"
+      ],
+      "ru": "впятером",
+      "en": "five together"
+    }
   },
   {
     "id": "numeral-007",
@@ -152,13 +198,26 @@
       "numeral_kind": "cardinal",
       "value": 6
     },
+    "forms_note_ru": "Без существительного: zu sechsen «вшестером», den sechsen; sechse — старая форма (в сказках: Sechse kommen durch die ganze Welt). zu sechst — «вшестером».",
+    "forms_note_en": "Without a noun: zu sechsen (six together), den sechsen; sechse is an old form (fairy tales: Sechse kommen durch die ganze Welt). zu sechst — six together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: sechzehn (16), sechzig (60) — без -s.",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: sechzehn (16), sechzig (60) — without -s.",
     "search_forms": [
-      "sechs"
+      "sechs",
+      "sechsen",
+      "sechse",
+      "sechst"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/sechs",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "sechst",
+        "sechsen"
+      ],
+      "ru": "вшестером",
+      "en": "six together"
+    }
   },
   {
     "id": "numeral-008",
@@ -174,13 +233,26 @@
       "numeral_kind": "cardinal",
       "value": 7
     },
+    "forms_note_ru": "Без существительного: mit sieben(en); siebene — старая форма (в сказках: alle siebene, Siebene auf einen Streich). zu siebt / zu siebenen — «всемером».",
+    "forms_note_en": "Without a noun: mit sieben(en); siebene is an old form (fairy tales: alle siebene, Siebene auf einen Streich). zu siebt / zu siebenen — seven together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: siebzehn (17), siebzig (70) — без -en. Глагол sieben («просеивать») — другое слово.",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: siebzehn (17), siebzig (70) — without -en. The verb sieben (to sift) is a different word.",
     "search_forms": [
-      "sieben"
+      "sieben",
+      "siebene",
+      "siebenen",
+      "siebt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/sieben_Zahl",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "siebt",
+        "siebenen"
+      ],
+      "ru": "всемером",
+      "en": "seven together"
+    }
   },
   {
     "id": "numeral-009",
@@ -196,13 +268,22 @@
       "numeral_kind": "cardinal",
       "value": 8
     },
+    "forms_note_ru": "zu acht — «ввосьмером».",
+    "forms_note_en": "zu acht — eight together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: achtzehn (18), achtzig (80).",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: achtzehn (18), achtzig (80).",
     "search_forms": [
       "acht"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/acht_Kardinalzahl",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "acht"
+      ],
+      "ru": "ввосьмером",
+      "en": "eight together"
+    }
   },
   {
     "id": "numeral-010",
@@ -218,13 +299,26 @@
       "numeral_kind": "cardinal",
       "value": 9
     },
+    "forms_note_ru": "Без существительного: zu neunen; разг. также neune: alle neun(e)! — (кегли) все девять сбиты; шутл. при грохоте падения. zu neunt — «вдевятером».",
+    "forms_note_en": "Without a noun: zu neunen; colloquially also neune: alle neun(e)! — (skittles) all nine down; jokingly when something crashes down. zu neunt — nine together.",
     "usage_note_ru": "Числа 13–19 образуются с -zehn, десятки — с -zig: neunzehn (19), neunzig (90).",
     "usage_note_en": "13–19 are formed with -zehn, the tens with -zig: neunzehn (19), neunzig (90).",
     "search_forms": [
-      "neun"
+      "neun",
+      "neune",
+      "neunen",
+      "neunt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/neun",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "neunt",
+        "neunen"
+      ],
+      "ru": "вдевятером",
+      "en": "nine together"
+    }
   },
   {
     "id": "numeral-011",
@@ -240,13 +334,23 @@
       "numeral_kind": "cardinal",
       "value": 10
     },
+    "forms_note_ru": "zu zehnt — «вдесятером».",
+    "forms_note_en": "zu zehnt — ten together.",
     "usage_note_ru": "Числа 13–19: единицы + zehn — dreizehn, vierzehn; но sechzehn, siebzehn.",
     "usage_note_en": "13–19: unit + zehn — dreizehn, vierzehn; but sechzehn, siebzehn.",
     "search_forms": [
-      "zehn"
+      "zehn",
+      "zehnt"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zehn",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "zehnt"
+      ],
+      "ru": "вдесятером",
+      "en": "ten together"
+    }
   },
   {
     "id": "numeral-012",
@@ -262,13 +366,24 @@
       "numeral_kind": "cardinal",
       "value": 11
     },
+    "forms_note_ru": "elfe — старая форма без существительного (в сказках: Als elfe ihre Sprüche eben getan hatten …). Не путать с die Elfe — эльф. zu elft — «в 11 человек».",
+    "forms_note_en": "elfe is an old form without a noun (fairy tales: Als elfe ihre Sprüche eben getan hatten …). Not to be confused with die Elfe (elf). zu elft — eleven together.",
     "usage_note_ru": "elf и zwölf — особые слова, как eleven и twelve в английском; с 13 числа образуются с -zehn.",
     "usage_note_en": "elf and zwölf are special words, like eleven and twelve; from 13 the numbers are formed with -zehn.",
     "search_forms": [
-      "elf"
+      "elf",
+      "elfe",
+      "elft"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/elf",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "elft"
+      ],
+      "ru": "в 11 человек",
+      "en": "eleven together"
+    }
   },
   {
     "id": "numeral-013",
@@ -284,13 +399,26 @@
       "numeral_kind": "cardinal",
       "value": 12
     },
+    "forms_note_ru": "Без существительного: zu zwölfen; zwölfe — старая форма (в сказках: es schlug zwölfe — пробило двенадцать). zu zwölft — «в 12 человек».",
+    "forms_note_en": "Without a noun: zu zwölfen; zwölfe is an old form (fairy tales: es schlug zwölfe — it struck twelve). zu zwölft — twelve together.",
     "usage_note_ru": "elf и zwölf — особые слова, как eleven и twelve в английском; с 13 числа образуются с -zehn.",
     "usage_note_en": "elf and zwölf are special words, like eleven and twelve; from 13 the numbers are formed with -zehn.",
     "search_forms": [
-      "zwölf"
+      "zwölf",
+      "zwölfe",
+      "zwölfen",
+      "zwölft"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/zwoelf",
-    "wortschatz_excluded": true
+    "wortschatz_excluded": true,
+    "collective": {
+      "forms": [
+        "zwölft",
+        "zwölfen"
+      ],
+      "ru": "в 12 человек",
+      "en": "twelve together"
+    }
   },
   {
     "id": "numeral-014",
@@ -350,8 +478,8 @@
       "numeral_kind": "cardinal",
       "value": 100
     },
-    "usage_note_ru": "hundert или einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Hunderte (с большой буквы) — существительное «сотни».",
-    "usage_note_en": "hundert or einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Hunderte (capitalised) is a noun: hundreds.",
+    "usage_note_ru": "hundert или einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. Неопределённое «сотни» — Hunderte (можно и hunderte), отдельная карточка.",
+    "usage_note_en": "hundert or einhundert; 101 — hunderteins, 250 — zweihundertfünfzig. The indefinite “hundreds” is Hunderte (also hunderte), a separate card.",
     "search_forms": [
       "hundert"
     ],
@@ -372,8 +500,8 @@
       "numeral_kind": "cardinal",
       "value": 1000
     },
-    "usage_note_ru": "tausend или eintausend; 2026 — zweitausendsechsundzwanzig. Tausende (с большой буквы) — существительное «тысячи».",
-    "usage_note_en": "tausend or eintausend; 2026 — zweitausendsechsundzwanzig. Tausende (capitalised) is a noun: thousands.",
+    "usage_note_ru": "tausend или eintausend; 2026 — zweitausendsechsundzwanzig. Неопределённое «тысячи» — Tausende (можно и tausende), отдельная карточка.",
+    "usage_note_en": "tausend or eintausend; 2026 — zweitausendsechsundzwanzig. The indefinite “thousands” is Tausende (also tausende), a separate card.",
     "search_forms": [
       "tausend"
     ],
@@ -462,6 +590,94 @@
       "drittem"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/dritte",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-021",
+    "type": "numeral",
+    "word": "Hunderte",
+    "translation_ru": "сотни",
+    "translation_en": "hundreds",
+    "example_de": "Hunderte von Menschen warteten vor dem Tor.",
+    "example_ru": "Сотни людей ждали у ворот.",
+    "example_en": "Hundreds of people were waiting at the gate.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "indefinite"
+    },
+    "usage_note_ru": "Неопределённо большое количество, не число 100. Пишется с большой или маленькой буквы: viele Hunderte / hunderte drängten sich herbei. Точное число — hundert.",
+    "usage_note_en": "An indefinite large number, not the number 100. Written with a capital or small letter: viele Hunderte / hunderte drängten sich herbei. The exact number is hundert.",
+    "search_forms": [
+      "hunderte",
+      "hunderten"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Hundert_Menge",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-022",
+    "type": "numeral",
+    "word": "Tausende",
+    "translation_ru": "тысячи",
+    "translation_en": "thousands",
+    "example_de": "Tausende von Zuschauern waren begeistert.",
+    "example_ru": "Тысячи зрителей были в восторге.",
+    "example_en": "Thousands of spectators were thrilled.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "indefinite"
+    },
+    "usage_note_ru": "Неопределённо большое количество, не число 1000. Пишется с большой или маленькой буквы: Tausende / tausende Zuschauer waren begeistert. Точное число — tausend.",
+    "usage_note_en": "An indefinite large number, not the number 1000. Written with a capital or small letter: Tausende / tausende Zuschauer waren begeistert. The exact number is tausend.",
+    "search_forms": [
+      "tausende",
+      "tausenden"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Tausend_Menge",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-023",
+    "type": "numeral",
+    "word": "Zehntausende",
+    "translation_ru": "десятки тысяч",
+    "translation_en": "tens of thousands",
+    "example_de": "Zehntausende demonstrierten in der Hauptstadt.",
+    "example_ru": "Десятки тысяч человек вышли на демонстрацию в столице.",
+    "example_en": "Tens of thousands demonstrated in the capital.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "indefinite"
+    },
+    "usage_note_ru": "Неопределённое количество, не число 10 000; пишется с большой или маленькой буквы: Zehntausende / zehntausende von Opfern. Точное число — zehntausend.",
+    "usage_note_en": "An indefinite number, not the number 10,000; written with a capital or small letter: Zehntausende / zehntausende von Opfern. The exact number is zehntausend.",
+    "search_forms": [
+      "zehntausende",
+      "zehntausenden"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Zehntausend",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "numeral-024",
+    "type": "numeral",
+    "word": "Hunderttausende",
+    "translation_ru": "сотни тысяч",
+    "translation_en": "hundreds of thousands",
+    "example_de": "Hunderttausende Menschen verloren ihre Arbeit.",
+    "example_ru": "Сотни тысяч людей потеряли работу.",
+    "example_en": "Hundreds of thousands of people lost their jobs.",
+    "forms": null,
+    "grammar": {
+      "numeral_kind": "indefinite"
+    },
+    "usage_note_ru": "Неопределённое количество, не число 100 000; пишется с большой или маленькой буквы: Hunderttausende / hunderttausende Anhänger. Точное число — hunderttausend.",
+    "usage_note_en": "An indefinite number, not the number 100,000; written with a capital or small letter: Hunderttausende / hunderttausende Anhänger. The exact number is hunderttausend.",
+    "search_forms": [
+      "hunderttausende",
+      "hunderttausenden"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Hunderttausend",
     "wortschatz_excluded": true
   }
 ]

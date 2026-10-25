@@ -11,7 +11,7 @@
   const open = document.getElementById("dictionaryOpen");
   if (!input || !form || !results || !open) return;
 
-  const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen" };
+  const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen", expression: "Ausdruck" };
   let entries = null;
   let loadPromise = null;
   let selected = null;
@@ -51,14 +51,16 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261015-nouns-list2-07"),
-      loadJson("worterbuch/german-verbs.json?v=20261010-wie-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261015-c1-1"),
-      loadJson("worterbuch/german-adverbs.json?v=20261015-c1-1"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261011-um-zu-en-1"),
-      loadJson("worterbuch/german-pronouns.json?v=20261015-form-1"),
-      loadJson("worterbuch/german-adjective-adverbs.json?v=20261015-c1-1")
-    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs]) => {
+      loadJson("worterbuch/german-nouns.json?v=20261020-nouns-list3-15"),
+      loadJson("worterbuch/german-verbs.json?v=20261023-wn-recht-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261023-wn-partadj-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261023-wn-recht-1"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261020-pron-conj-1"),
+      loadJson("worterbuch/german-pronouns.json?v=20261024-g65-2"),
+      loadJson("worterbuch/german-adjective-adverbs.json?v=20261023-wn-partmark-1"),
+      // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
+      loadJson("worterbuch/german-expressions.json?v=20261024-expr-028-031").catch(() => [])
+    ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs, expressions]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
         ...nouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "noun" })),
@@ -67,7 +69,8 @@
         ...adverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adverb" })),
         ...adjectiveAdverbs.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "adjective" })),
         ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" })),
-        ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" }))
+        ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" })),
+        ...(Array.isArray(expressions) ? expressions : []).filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "expression" }))
       ];
       render();
       return entries;
@@ -277,6 +280,17 @@
     }
 
     if (item.type !== "verb" && !hasWordOrder) entry.append(example);
+    // E1: an expression card — translation, example, then its notes («Hinweise», one line each); the type line «Ausdruck»
+    // (TYPE_LABEL); no Wortschatz button (wortschatz_excluded, user 22.10).
+    if (item.type === "expression") {
+      const lines = language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
+      if (Array.isArray(lines) && lines.length) {
+        const notes = node("section", "dictionary-entry-section dictionary-entry-hints");
+        notes.append(node("h4", "dictionary-entry-label", "Hinweise"));
+        lines.forEach(line => notes.append(node("p", "dictionary-entry-note", line)));
+        entry.append(notes);
+      }
+    }
     for (const extra of item.additional_examples || []) {
       const section = node("section", "dictionary-entry-section");
       section.append(node("h4", "dictionary-entry-label", "Beispiel · " + (extra.example_usage || "")));

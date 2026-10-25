@@ -1,7 +1,7 @@
 /* Chapter ranges use original paragraph indices, including shared-file EPUB chapters. */
 (() => {
   "use strict";
-  const norm = value => String(value || "").normalize("NFC").trim().toLocaleLowerCase("de-DE");
+  const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   const tokenPattern = /[\p{L}\p{M}]+(?:['’][\p{L}\p{M}]+)*/gu;
   function paragraphs(book) {
     return book.chapters?.length ? book.chapters.map(c => c.paragraphs) : [String(book.content || "").replace(/\r\n?/g,"\n").split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean)];
