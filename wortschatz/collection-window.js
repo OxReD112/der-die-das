@@ -2,8 +2,9 @@
    All texts in this window are English on purpose: users whose German is still weak must understand
    how to manage and import their words. Labels in Title Case (Settings rule), questions in sentence case.
    Plan: Documentation/WORTSCHATZ_COLLECTIONS.md (step 3). Storage lives in collection.js.
-   - Start screen: „DEINE WÖRTER“ + „<name> · <n> Wörter ›“ (opens the window) + „＋ Use your own words“ (Starter-Set only).
-   - „Fertig für heute“: pill „<name> · <n> Wörter“. The built-in set is called „Starter-Set“.
+   - Start screen: „DEINE WÖRTER“ + „<name> · <n> Wörter ›“ (opens the window).
+   - „Fertig für heute“: pill „<name> · <n> Wörter“.
+   - 2026-10-26: no built-in Starter-Set. No collection → choose screen (word sets / own words, fillChoose).
    - Window: name, word count, word list; own collection: rename, export, delete → back to the built-in set.
    - Word form (step 4): „＋ Wort hinzufügen“ and tap a word in the list = edit / delete it.
      Changes that touch progress or WORDS set `dirty`; closing the window then reloads the page
@@ -17,11 +18,11 @@
   if (!C || !modal || !card) return;
   const embedded = modal.dataset.host === "reader";
   let dictionarySaved = null;
-  const BUILTIN_NAME = "Starter-Set";
-
+  // 2026-10-26: no built-in Starter-Set any more. Without an own collection Wortschatz shows the choose screen
+  // (word sets / own words, fillChoose below); the window then only offers ways to start one.
   const own = () => C.isOwn();
-  const list = () => (own() ? C.cards() : window.WORDS || []);
-  const name = () => (own() ? C.get().name || "My Words" : BUILTIN_NAME);
+  const list = () => (own() ? C.cards() : []);
+  const name = () => (own() ? C.get().name || "My Words" : "");
   const wordsLabel = n => (n === 1 ? "1 word" : n + " words");
   const tr = (c, f) =>
     typeof window.getTranslation === "function" ? window.getTranslation(c, f) : typeof c[f] === "string" ? c[f] : "";
@@ -44,7 +45,7 @@
       count = n === 1 ? "1 Wort" : n + " Wörter",
       label = name() + " · " + count;
     ["collBtnStart", "collBtnDone"].forEach(id => {
-      // „Starter-Set · 217 Wörter ›“ on both screens
+      // „<name> ›“ on both screens
       const b = $(id);
       if (!b) return;
       b.textContent = "";
@@ -65,8 +66,6 @@
       const c = $(id);
       if (c) c.textContent = countText;
     });
-    const ownBtn = $("ownWordsBtn");
-    if (ownBtn) ownBtn.style.display = own() ? "none" : "";
   }
 
   /* ---------- open / close (same timing as the table windows) ---------- */
@@ -135,7 +134,7 @@
 
   /* ---------- main view: name, count, list, actions ---------- */
   function viewMain() {
-    if (!own()) return viewStarter();
+    if (!own()) return viewCreate();
     card.textContent = "";
     const words = list();
     card.appendChild(head(name()));
@@ -144,13 +143,19 @@
     meta.appendChild(button("coll-link", "Rename", viewRename));
     card.appendChild(meta);
 
-    // most-used action on top (like „Use My Own Words“ in the Starter-Set window)
     // v2.104: both ways to get words in, side by side (same shape; Add Word = the everyday action, cream)
     // v2.111: Import List = the raised „Use your own words“ look (the outlined one looked disabled)
     const top = el("div", "coll-pair");
     top.appendChild(button("coll-main", "＋ Add Word", () => viewForm(null)));
     top.appendChild(button("coll-raised", "Import List", () => viewImport({})));
     card.appendChild(top);
+    if (!embedded) {
+      // opens another view (not a fold-out) → „Word Sets ›“, the same › as the start screen's collection line
+      const ws = button("coll-sets-link", "", () => viewSets(viewMain));
+      ws.appendChild(el("span", null, "Word Sets"));
+      ws.appendChild(el("span", "coll-line-chev", "›", { "aria-hidden": "true" }));
+      card.appendChild(ws);
+    }
 
     const box = el("div", "coll-list coll-list-below");
     words.forEach(w => {
@@ -174,46 +179,6 @@
     bottom.appendChild(el("span", "coll-dot", "·", { "aria-hidden": "true" }));
     bottom.appendChild(button("coll-link", "Delete", viewDelete));
     card.appendChild(bottom);
-  }
-
-  // Starter-Set: what it is + the way to your own words. The word list only on request.
-  function viewStarter() {
-    card.textContent = "";
-    card.appendChild(head(BUILTIN_NAME));
-    const words = list();
-    card.appendChild(el("p", "coll-text", words.length + " everyday German words in example sentences."));
-    // v2.101: fold-out line (same mechanic as the Pronomen table: ▸ turns ▾) right under the description;
-    // the list unfolds under it and scrolls; „Use My Own Words“ stays visible at the bottom.
-    const toggle = button("coll-fold", "All Words in the Set", () => {
-      const show = box.style.display === "none";
-      box.style.display = show ? "" : "none";
-      toggle.classList.toggle("open", show);
-      toggle.setAttribute("aria-expanded", show ? "true" : "false");
-    });
-    toggle.setAttribute("aria-expanded", "false");
-    card.appendChild(toggle);
-    const box = el("div", "coll-list coll-list-below");
-    box.style.display = "none";
-    words.forEach(w => {
-      const row = el("div", "coll-word");
-      row.appendChild(
-        el(
-          "span",
-          "coll-de",
-          w.base ||
-            String(w.target || "")
-              .split(" / ")
-              .join(" "),
-          { lang: "de" } // v2.112: German hyphenation for the rare word that is too long for its column
-        )
-      );
-      row.appendChild(el("span", "coll-tr", tr(w, "translation")));
-      box.appendChild(row);
-    });
-    card.appendChild(box);
-    const b = el("div", "coll-form-buttons coll-bottom-main");
-    b.appendChild(button("coll-main", "Use My Own Words", viewCreate));
-    card.appendChild(b);
   }
 
   /* ---------- word form: add (card=null) or edit one word ---------- */
@@ -292,7 +257,11 @@
       creating = !!opts.create;
     card.textContent = "";
     card.appendChild(head(editing ? "Edit Word" : "New Word", session ? null : opts.cancel || viewMain));
+    // v2026-10-26: Wörterbuch search on top of the new-word form (only in Wortschatz itself, not in Bibliothek,
+    // not for a word that already came from the Wörterbuch). While you search, the form hides.
+    const withSearch = !editing && !opts.draft && !embedded && !opts.fromDictionary;
     const sc = el("div", "coll-scroll");
+    const search = withSearch ? dictionarySearch(opts, sc, () => (now ? (now.checked ? "next" : "end") : "next")) : null;
     card.appendChild(sc);
 
     const prefill = !editing && opts.prefill ? opts.prefill : null;
@@ -363,7 +332,8 @@
       now.checked = true;
       sw.appendChild(now);
       sc.appendChild(sw);
-      sc.appendChild(el("p", "coll-hint", "On: comes up in your next round. Off: added to the end of your list."));
+      sc.appendChild(el("p", "coll-hint", "On: comes with your next new words (+ 5). Off: added to the end of your list."));
+      now.addEventListener("change", () => search?.refresh());
     }
     const err = el("p", "coll-error");
     sc.appendChild(err);
@@ -421,6 +391,8 @@
         grammar: fGram.value,
         pos
       };
+      const dictionaryId = opts.dictionaryId || (prefill && prefill.dictionaryId);
+      if (dictionaryId) fields.dictionaryId = dictionaryId;
       if (!toks.length) {
         err.textContent = "Please type a sentence.";
         fSentence.focus();
@@ -460,7 +432,7 @@
             return;
           }
         } else {
-          const r = creating ? C.create(opts.name, [fields]) : C.add([fields], { activateNow: now.checked });
+          const r = creating && !own() ? C.create(opts.name, [fields]) : C.add([fields], { placement: now && !now.checked ? "end" : "next" });
           if (r.duplicates) {
             err.textContent = "This word is already in your collection.";
             return;
@@ -486,16 +458,175 @@
     b.appendChild(button("coll-main", "Save", save));
     if (editing && !session && !opts.draft) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w)));
     sc.appendChild(b); // Save at the very END of the form (v2.100): you pass every field first
-    if (!editing) setTimeout(() => fSentence.focus(), 60);
+    if (!editing) setTimeout(() => (search && !prefill ? search.focus() : !prefill && fSentence.focus()), 60);
   }
 
-  function viewDictionaryConfirm(prefill, validate) {
+  /* ---------- Wörterbuch search in the new-word form (v2026-10-26, plan: OPEN_TASKS „Wortschatz — доработки“ 1) ----------
+     Type → the form hides and dictionary cards show (German word or its RU / EN translation).
+     ＋ adds the card at once („Learn Now“ decides: next new words or end of the list); ✓ Added = tap to undo.
+     Tap the word itself → the form is filled with that card, to check or change it before Save.
+     Clear the search → the form is back. Cards without a learning example are not shown. */
+  let dictionaryIndex = null; // one load per page
+  const fold = v =>
+    String(v || "").normalize("NFC").toLocaleLowerCase("de-DE").trim()
+      .replace(/ä/g, "a").replace(/ö/g, "o").replace(/ü/g, "u").replace(/ß/g, "ss").replace(/ё/g, "е");
+  function loadDictionaryIndex() {
+    dictionaryIndex ||= I.load().then(map => {
+      const seen = new Set(), out = [];
+      for (const item of map.values()) {
+        if (seen.has(item.id)) continue;
+        seen.add(item.id);
+        if (!window.WortschatzDictionaryCard.check(item).available) continue;
+        const word = item.word || item.infinitive || "";
+        const de = [word, ...(Array.isArray(item.search_forms) ? item.search_forms : [])].map(fold).filter(Boolean);
+        const meanings = [item.translation_ru, item.translation_en]
+          .flatMap(t => String(t || "").split(/[,;/]|\s[—–-]\s/))
+          .map(t => fold(t.replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ")).replace(/^to /, ""))
+          .filter(Boolean);
+        out.push({ item, word: fold(word), de, meanings, len: word.length });
+      }
+      return out;
+    }).catch(e => { dictionaryIndex = null; throw e; });
+    return dictionaryIndex;
+  }
+  function findInDictionary(index, query) {
+    const q = fold(query), hits = [];
+    if (!q) return hits;
+    for (const e of index) {
+      let rank = -1;
+      if (e.de.includes(q)) rank = 0;
+      else if (e.word.startsWith(q)) rank = 1;
+      else if (e.meanings.includes(q)) rank = 2;
+      else if (q.length >= 3 && e.word.includes(q)) rank = 3;
+      else if (q.length >= 3 && e.meanings.some(m => m.startsWith(q) || m.includes(" " + q))) rank = 4;
+      if (rank >= 0) hits.push({ e, rank });
+    }
+    hits.sort((a, b) => a.rank - b.rank || a.e.len - b.e.len || a.e.word.localeCompare(b.e.word, "de"));
+    return hits.slice(0, 40).map(h => h.e.item);
+  }
+  function dictionarySearch(opts, form, placement) {
+    const lang = window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en";
+    const wrap = el("div", "coll-search");
+    const input = el("input", "coll-field coll-search-field", null, {
+      type: "search", id: "cfSearch", placeholder: "Search the Wörterbuch", "aria-label": "Search the Wörterbuch",
+      autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: "false", enterkeyhint: "search"
+    });
+    wrap.appendChild(input);
+    card.appendChild(wrap);
+    const results = el("div", "coll-scroll coll-results");
+    results.style.display = "none";
+    card.appendChild(results);
+    const addedHere = new Map(); // dictionaryId → card id added from this search (for undo)
+    let timer = 0, run = 0;
+
+    const fieldsOf = item => Object.assign(window.WortschatzDictionaryCard.create(item, lang), { dictionaryId: item.id });
+    function addWord(item) {
+      const fields = fieldsOf(item);
+      const r = own() ? C.add([fields], { placement: placement() }) : C.create(opts.name || "My Words", [fields]);
+      if (!r.added) throw new Error(r.duplicates ? "duplicate" : (r.skipped[0] && r.skipped[0].reason) || "not-saved");
+      const added = C.cards().find(c => c.dictionaryId === item.id);
+      addedHere.set(item.id, added && added.id);
+      if (opts.create) { // the first ＋ created the collection: ‹ now leads to it, not back to „Your Own Words“
+        opts = Object.assign({}, opts, { create: false, cancel: viewMain });
+        const back = card.querySelector(".coll-back");
+        if (back) back.onclick = viewMain;
+      }
+      dirty = true;
+      refreshButtons();
+    }
+    function undo(item) {
+      const id = addedHere.get(item.id);
+      if (id) C.remove(id);
+      addedHere.delete(item.id);
+      dirty = true;
+      refreshButtons();
+    }
+    function row(item) {
+      const fields = fieldsOf(item);
+      const r = el("div", "coll-word coll-hit");
+      const pick = button("coll-hit-main", "", () =>
+        viewForm(null, Object.assign({}, opts, { prefill: fields, dictionaryId: item.id }))
+      );
+      pick.setAttribute("aria-label", "Fill the form with " + fields.base);
+      pick.appendChild(el("span", "coll-de", fields.base, { lang: "de" }));
+      pick.appendChild(el("span", "coll-tr", plainValue(fields.translation)));
+      r.appendChild(pick);
+      const status = el("span", "coll-hit-side");
+      r.appendChild(status);
+      const msg = el("p", "coll-error coll-hit-error");
+      function draw() {
+        status.textContent = "";
+        if (addedHere.has(item.id)) {
+          const b = button("coll-hit-added", "✓ Added", () => { undo(item); draw(); });
+          b.setAttribute("aria-label", "Added. Tap to undo");
+          status.appendChild(b);
+        } else if (own() && C.has(fields)) {
+          status.appendChild(el("span", "coll-hit-in", "In list"));
+        } else {
+          const b = button("coll-hit-add", "＋", () => {
+            msg.textContent = "";
+            try { addWord(item); } catch (e) {
+              msg.textContent = e.message === "storage-full" ? "Storage is full - the word wasn't saved."
+                : e.message === "duplicate" ? "This word is already in your collection." : "The word couldn't be saved.";
+            }
+            draw();
+          });
+          b.setAttribute("aria-label", "Add " + fields.base);
+          status.appendChild(b);
+        }
+      }
+      draw();
+      const box = el("div");
+      box.appendChild(r);
+      box.appendChild(msg);
+      return box;
+    }
+    function note() {
+      return el("p", "coll-hint coll-results-note",
+        placement() === "end" ? "＋ adds the word to the end of your list." : "＋ adds the word to your next new words.");
+    }
+    async function update() {
+      const q = input.value.trim(), mine = ++run;
+      const searching = q.length > 0;
+      form.style.display = searching ? "none" : "";
+      results.style.display = searching ? "" : "none";
+      if (!searching) { results.textContent = ""; return; }
+      if (q.length < 2) { results.textContent = ""; results.appendChild(el("p", "coll-note", "Keep typing…")); return; }
+      if (!results.childElementCount) results.appendChild(el("p", "coll-note", "Loading the Wörterbuch…"));
+      let index;
+      try { index = await loadDictionaryIndex(); } catch (e) {
+        if (mine !== run) return;
+        results.textContent = "";
+        results.appendChild(el("p", "coll-error", "The Wörterbuch couldn't be loaded. Please try again."));
+        return;
+      }
+      if (mine !== run) return;
+      const items = findInDictionary(index, q);
+      results.textContent = "";
+      if (!items.length) {
+        results.appendChild(el("p", "coll-note", "Not in the Wörterbuch. Clear the search to type your own word."));
+        return;
+      }
+      results.appendChild(note());
+      const list = el("div", "coll-list coll-list-below");
+      items.forEach(item => list.appendChild(row(item)));
+      results.appendChild(list);
+    }
+    input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(update, 120); });
+    input.addEventListener("keydown", e => { if (e.key === "Enter") e.preventDefault(); });
+    loadDictionaryIndex().catch(() => {}); // start loading while you look at the form
+    return {
+      focus: () => input.focus({ preventScroll: true }),
+      refresh: () => { if (input.value.trim()) update(); }
+    };
+  }
+
+  function viewDictionaryConfirm(prefill, validate, dictionaryId) {
     card.textContent = "";
     card.appendChild(head("Your Own Words", embedded ? close : viewMain));
-    card.appendChild(el("p", "coll-text", "Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."));
-    card.appendChild(el("p", "coll-text", "Continue to add this word to your own collection?"));
+    card.appendChild(el("p", "coll-text", "You don't have your own word collection yet. This word starts it."));
     const b = el("div", "coll-form-buttons");
-    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill, validate, cancel: embedded ? close : viewMain })));
+    b.appendChild(button("coll-main", "Continue", () => viewForm(null, { create: true, name: "My Words", prefill, validate, dictionaryId, fromDictionary: true, cancel: embedded ? close : viewMain })));
     b.appendChild(button("coll-link", "Cancel", close));
     card.appendChild(b);
   }
@@ -544,7 +675,7 @@
       if(issues.length){open(()=>viewDictionaryError({...issues[0],code:'DICTIONARY_CLOZE_INVALID'}));lastDictionaryRequest=request.id;clearDictionaryPending(request.id);return;}
       const validate=async()=>I.validate([row],await I.load());
       dictionarySaved=onSaved;
-      open(()=>own() ? viewForm(null,{prefill:row.card,validate,cancel:embedded ? close : viewMain}) : viewDictionaryConfirm(row.card,validate));
+      open(()=>own() ? viewForm(null,{prefill:row.card,validate,dictionaryId:item.id,fromDictionary:true,cancel:embedded ? close : viewMain}) : viewDictionaryConfirm(row.card,validate,item.id));
       lastDictionaryRequest=request.id;clearDictionaryPending(request.id);
     } catch(error) {
       console.error("Could not prepare the dictionary word",error);
@@ -570,7 +701,7 @@
         sc.appendChild(el("p", "coll-hint", `${issue.base || "Unknown word"}${issue.dictionaryId ? " ("+issue.dictionaryId+")" : ""}: ${reason}.`));
       }
       if (!own()) {
-        sc.appendChild(el("p","coll-text","Your own words replace the Starter-Set. Its progress is kept so you can return later."));
+        sc.appendChild(el("p","coll-text","These words start your own word collection."));
         sc.appendChild(el("label","coll-label","Collection Name",{for:"readingCollectionName"}));
         const nameInput=el("input","coll-field",null,{id:"readingCollectionName",type:"text",maxlength:"40",value:request.name});
         nameInput.addEventListener("input",()=>{request.name=nameInput.value;persist();});sc.appendChild(nameInput);
@@ -613,10 +744,10 @@
         for(const control of sc.querySelectorAll("input,button,select"))control.disabled=true;
         try {
           const selection=selected(),rows=selection.map(({row})=>row);
-          const issues=I.validate(rows,await I.load());
+          const dictionary=await I.load(),issues=I.validate(rows,dictionary);
           if(issues.length){error.textContent=issues.map(issue=>I.describe({...issue,n:selection[issue.n-1].index+1})).join("; ");return;}
           persist();
-          const items=rows.map(row=>row.card),prepared=C.prepare(items,own()?C.cards():[]);
+          const items=rows.map(row=>({...row.card,dictionaryId:dictionary.get(row.dictionaryId)?.id || row.dictionaryId})),prepared=C.prepare(items,own()?C.cards():[]);
           if(prepared.skipped.length){error.textContent=prepared.skipped.map(issue=>I.describe({...issue,n:selection[issue.n-1].index+1,dictionaryId:rows[issue.n-1].dictionaryId,base:rows[issue.n-1].card.base})).join("; ");return;}
           if(!prepared.cards.length){error.textContent="These words are already in your collection.";return;}
           const result=own()?C.add(items,{placement:request.placement}):C.create(request.name.trim() || "My Words",items);
@@ -648,6 +779,188 @@
       console.error("Could not restore the reading draft",error);
       open(()=>review("The draft could not be prepared. It is kept; please try again."));
     }
+  }
+
+  /* ---------- Word sets (v2026-10-26, OPEN_TASKS „Wortschatz — доработки“ 2) ----------
+     A set is a ready-made selection to pick from, not a deck: nothing is ticked at first, „Select All“ ticks
+     everything, the count shows how many are ticked. Words already in the collection show „In list“.
+     Set files: sets/<id>.json = {id, name, description:{en,ru}, entries:[{id: Wörterbuch id,
+     sentence?, sentenceTranslation?:{ru,en}, translation?:{ru,en}} | {custom:{base, pos, sentence, translation:{ru,en},
+     sentenceTranslation:{ru,en}}}]} — an entry may carry its own example for this set, and a word that is not in
+     the Wörterbuch (e.g. „es sei denn“) is a custom entry; the Wörterbuch is not changed. Cards keep dictionaryId (duplicates are checked per meaning). */
+  const SETS = [
+    { id: "a2-b1", name: "A2 → B1", file: "sets/a2-b1.json?v=1" },
+    { id: "b1-b2", name: "B1 → B2", file: "sets/b1-b2.json?v=1" },
+    { id: "b2-c1", name: "B2 → C1", file: "sets/b2-c1.json?v=1" }
+  ];
+  // Choose screen (wortschatz.js showChoose): one collection-line per set + „Start with my own words“.
+  function fillChoose(box, ownBtn) {
+    if (!box) return;
+    box.textContent = "";
+    SETS.forEach(def => {
+      const wrap = el("div", "chooseSet");
+      const b = button("coll-line", "", () => open(() => viewSetPick(def, null)));
+      b.appendChild(el("span", "coll-line-name", def.name));
+      b.appendChild(el("span", "coll-line-chev", "›", { "aria-hidden": "true" }));
+      wrap.appendChild(b);
+      const info = el("p", "collCount", "");
+      wrap.appendChild(info);
+      box.appendChild(wrap);
+      loadSet(def).then(set => { info.textContent = (set.entries || []).length + " words"; }).catch(() => {});
+    });
+    if (ownBtn) ownBtn.onclick = () => open(viewCreate);
+  }
+  const setCache = {};
+  async function loadSet(def) {
+    setCache[def.id] ||= (async () => {
+      const r = await fetch(def.file, { cache: "no-store" });
+      if (!r.ok) throw new Error("set-missing");
+      return r.json();
+    })().catch(e => { delete setCache[def.id]; throw e; });
+    return setCache[def.id];
+  }
+  const uiLang = () => (window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en");
+  const pickLang = v => (v && typeof v === "object" ? v[uiLang()] || v.en || v.ru || "" : v || "");
+  function viewSets(back, collectionName) {
+    card.textContent = "";
+    card.appendChild(head("Word Sets", back));
+    const sc = el("div", "coll-scroll");
+    card.appendChild(sc);
+    sc.appendChild(el("p", "coll-text", "Ready-made word sets. Open one and tick the words you want to learn."));
+    const box = el("div", "coll-list coll-list-below");
+    sc.appendChild(box);
+    SETS.forEach(def => {
+      const row = button("coll-word is-btn", "", () => viewSetPick(def, () => viewSets(back, collectionName), collectionName));
+      const name = el("span", "coll-de", "…");
+      const info = el("span", "coll-tr", "");
+      row.appendChild(name);
+      row.appendChild(info);
+      box.appendChild(row);
+      loadSet(def).then(set => {
+        name.textContent = set.name;
+        info.textContent = (set.entries || []).length + " words";
+      }).catch(() => { name.textContent = def.id; info.textContent = "Couldn't be loaded."; });
+    });
+  }
+  async function viewSetPick(def, back, collectionName) {
+    card.textContent = "";
+    card.appendChild(head("Word Set", back));
+    const sc = el("div", "coll-scroll");
+    card.appendChild(sc);
+    sc.appendChild(el("p", "coll-note", "Loading…"));
+    let set, dictionary;
+    try { [set, dictionary] = await Promise.all([loadSet(def), I.load()]); } catch (e) {
+      sc.textContent = "";
+      sc.appendChild(el("p", "coll-error", "The set couldn't be loaded. Please try again.", { role: "alert" }));
+      return;
+    }
+    const lang = uiLang();
+    const words = [];
+    for (const entry of set.entries || []) {
+      if (entry.custom) {
+        const c = entry.custom;
+        const fields = { sentence: c.sentence, translation: pickLang(c.translation), sentenceTranslation: pickLang(c.sentenceTranslation), base: c.base, pos: c.pos || "Andere", grammar: "" };
+        if (C.normalize(fields).card) words.push(fields);
+        continue;
+      }
+      const item = dictionary.get(entry.id);
+      if (!item || !window.WortschatzDictionaryCard.check(item).available) continue;
+      const fields = Object.assign(window.WortschatzDictionaryCard.create(item, lang), { dictionaryId: item.id });
+      if (entry.sentence) fields.sentence = entry.sentence;
+      if (entry.sentenceTranslation) fields.sentenceTranslation = pickLang(entry.sentenceTranslation);
+      if (entry.translation) fields.translation = pickLang(entry.translation);
+      if (!C.normalize(fields).card) continue;
+      words.push(fields);
+    }
+    card.textContent = "";
+    card.appendChild(head(set.name, back));
+    let nameIn = null;
+    if (!own()) {
+      // The ticked words become your own collection right away — name it now (you can rename it later too).
+      const nb = el("div", "coll-pick-name");
+      nb.appendChild(el("label", "coll-label", "Collection Name", { for: "cfSetName" }));
+      nameIn = el("input", "coll-field", null, { id: "cfSetName", type: "text", maxlength: "40", autocomplete: "off", value: collectionName || set.name });
+      nameIn.value = collectionName || set.name;
+      nb.appendChild(nameIn);
+      nb.appendChild(el("p", "coll-hint", "This will be your own collection - you can add, edit and delete words any time."));
+      card.appendChild(nb);
+    }
+    const top = el("div", "coll-pick-top");
+    const count = el("span", "coll-pick-count", "", { "aria-live": "polite" });
+    const all = button("coll-link", "Select All", null);
+    top.appendChild(all); // „Select All“ on the left, above the ticks; the count on the right
+    top.appendChild(count);
+    card.appendChild(top);
+    const list = el("div", "coll-scroll coll-list coll-pick-list");
+    card.appendChild(list);
+    const picked = new Set();
+    const avail = words.filter(w => !(own() && C.has(w)));
+    const boxes = [];
+    words.forEach((w, i) => {
+      const there = own() && C.has(w);
+      const row = el("label", "coll-word coll-pick" + (there ? " is-in" : ""));
+      if (there) row.appendChild(el("span", "coll-hit-in coll-pick-mark", "In list"));
+      else {
+        const cb = el("input", "coll-pick-check", null, { type: "checkbox", "aria-label": "Learn " + w.base });
+        cb.addEventListener("change", () => { cb.checked ? picked.add(i) : picked.delete(i); draw(); });
+        boxes.push([cb, i]);
+        row.appendChild(cb);
+      }
+      const text = el("span", "coll-pick-text");
+      text.appendChild(el("span", "coll-de", w.base, { lang: "de" }));
+      text.appendChild(el("span", "coll-tr", plainValue(w.translation)));
+      row.appendChild(text);
+      list.appendChild(row);
+    });
+    const bottom = el("div", "coll-form-buttons coll-pick-bottom");
+    let now = null;
+    if (own()) {
+      const sw = el("label", "coll-switch");
+      sw.appendChild(el("span", null, "Learn Now"));
+      now = el("input", null, null, { type: "checkbox", "aria-label": "Learn now" });
+      now.checked = true;
+      sw.appendChild(now);
+      bottom.appendChild(sw);
+      bottom.appendChild(el("p", "coll-hint", "On: they come with your next new words (+ 5). Off: added to the end of your list."));
+    }
+    const err = el("p", "coll-error", "", { role: "alert" });
+    bottom.appendChild(err);
+    const add = button("coll-main", "", null);
+    bottom.appendChild(add);
+    card.appendChild(bottom);
+    function draw() {
+      const n = picked.size;
+      count.textContent = avail.length ? "Selected: " + n + " / " + avail.length : "All words are already in your list.";
+      all.textContent = n === avail.length && n ? "Clear All" : "Select All";
+      all.style.display = avail.length ? "" : "none";
+      add.textContent = n ? (own() ? "Add " : "Create Collection with ") + (n === 1 ? "1 Word" : n + " Words") : "Tick the words you want to learn";
+      add.disabled = !n;
+      err.textContent = "";
+    }
+    all.onclick = () => {
+      const on = picked.size !== avail.length;
+      boxes.forEach(([cb, i]) => { cb.checked = on; on ? picked.add(i) : picked.delete(i); });
+      draw();
+    };
+    add.onclick = () => {
+      if (!picked.size) return;
+      const items = [...picked].sort((a, b) => a - b).map(i => words[i]);
+      let r;
+      try {
+        r = own() ? C.add(items, { placement: now && !now.checked ? "end" : "next" }) : C.create((nameIn && nameIn.value.trim()) || set.name, items);
+      } catch (e) {
+        err.textContent = e.message === "storage-full" ? "Storage is full - the words weren't saved." : "The words couldn't be saved.";
+        return;
+      }
+      if (!r.added) { err.textContent = "These words are already in your collection."; return; }
+      dirty = true;
+      refreshButtons();
+      viewMain();
+      const notice = el("p", "coll-text", r.added + (r.added === 1 ? " word" : " words") + " added from „" + set.name + "“.");
+      notice.setAttribute("role", "status");
+      card.insertBefore(notice, card.children[1]);
+    };
+    draw();
   }
 
   function viewRemove(w) {
@@ -718,19 +1031,13 @@ Rules:
     else fallback();
   }
 
-  // Starter-Set → own words: name, then import a list or type the first word.
+  // No collection yet → own words: name, then add the first word (Wörterbuch search / typing) or import a list.
   function viewCreate() {
     card.textContent = "";
-    card.appendChild(head("Your Own Words", viewMain));
+    card.appendChild(head("Your Own Words"));
     const sc = el("div", "coll-scroll");
     card.appendChild(sc);
-    sc.appendChild(
-      el(
-        "p",
-        "coll-text",
-        "Your own words replace the Starter-Set. Your progress there is set aside - you can switch back later."
-      )
-    );
+    sc.appendChild(el("p", "coll-text", "Give your collection a name, then add words: search the Wörterbuch, type them or import a list."));
     const l = el("label", "coll-label", "Collection Name", { for: "cfName" });
     sc.appendChild(l);
     const nameIn = el("input", "coll-field", null, {
@@ -743,12 +1050,8 @@ Rules:
     sc.appendChild(nameIn);
     const nm = () => nameIn.value.trim() || "My Words";
     const b = el("div", "coll-form-buttons");
-    b.appendChild(button("coll-main", "Import List", () => viewImport({ create: true, name: nm() })));
-    b.appendChild(
-      button("coll-raised", "Type the First Word", () =>
-        viewForm(null, { create: true, name: nm(), cancel: viewCreate })
-      )
-    );
+    b.appendChild(button("coll-main", "Add the First Word", () => viewForm(null, { create: true, name: nm(), cancel: viewCreate })));
+    b.appendChild(button("coll-raised", "Import List", () => viewImport({ create: true, name: nm() })));
     card.appendChild(b);
   }
 
@@ -974,48 +1277,27 @@ Rules:
         "coll-text",
         "„" +
           name() +
-          "“ with " +
-          wordsLabel(n) +
-          " and your progress with it will be deleted, and you go back to the Starter-Set. This can't be undone - export the words first if you want to keep them."
+          "“ and your progress will be deleted. You can start again with a word set or your own words. This can't be undone - export the words first if you want to keep them."
       )
     );
     const b = el("div", "coll-buttons");
     b.appendChild(button("coll-main", "Keep", viewMain)); // safe choice = contrast button
-    b.appendChild(button("coll-quiet", "Delete", () => (C.hasDemoProgress() ? viewDemoChoice() : finish(false))));
+    b.appendChild(button("coll-quiet", "Delete", () => { C.deleteCollection(); location.reload(); }));
     b.appendChild(button("coll-link", "Export First", exportFile));
     card.appendChild(b);
   }
-  function viewDemoChoice() {
-    card.textContent = "";
-    card.appendChild(head("Back to Starter-Set"));
-    card.appendChild(
-      el(
-        "p",
-        "coll-text",
-        "You have already practised with the Starter-Set. Do you want to continue where you left off?"
-      )
-    );
-    const b = el("div", "coll-buttons");
-    b.appendChild(button("coll-main", "Continue", () => finish(true)));
-    b.appendChild(button("coll-quiet", "Start Over", () => finish(false)));
-    card.appendChild(b);
-  }
-  function finish(continueDemo) {
-    C.backToDemo(continueDemo);
-    location.reload(); // Wortschatz keeps progress in memory: start fresh from storage
-  }
+
 
   ["collBtnStart", "collBtnDone"].forEach(id => {
     const b = $(id);
     if (b) b.onclick = open;
   });
-  if ($("ownWordsBtn")) $("ownWordsBtn").onclick = () => open(viewCreate); // start screen: straight to „Your Own Words“
   refreshButtons();
   // ✎ on the answer screen: edit the card you're looking at (own collection only)
   function editInSession(w, onSaved) {
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
   }
-  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord };
+  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord, fillChoose };
   // Only unfinished legacy imports are discarded; localStorage is untouched.
   if (!embedded) {
     try {

@@ -1,0 +1,922 @@
+{
+ "id": "b1-b2",
+ "name": "B1 → B2",
+ "description": {
+  "en": "200 words that take you from B1 to B2.",
+  "ru": "200 слов, которые ведут с B1 на B2."
+ },
+ "version": 2,
+ "created": "2026-10-26",
+ "note": "Entries are Wörterbuch ids; an entry may carry its own sentence / sentenceTranslation / translation for this set (the Wörterbuch itself is not changed).",
+ "entries": [
+  {
+   "id": "noun-191"
+  },
+  {
+   "id": "verb-1144",
+   "sentence": "{{c1::Bewahren}} Sie bitte Ruhe und verlassen Sie das Gebäude über die Treppe.",
+   "sentenceTranslation": {
+    "ru": "Пожалуйста, сохраняйте спокойствие и покиньте здание по лестнице.",
+    "en": "Please stay calm and leave the building by the stairs."
+   }
+  },
+  {
+   "id": "adjective-892"
+  },
+  {
+   "id": "noun-2982"
+  },
+  {
+   "id": "verb-1211"
+  },
+  {
+   "id": "adjective-666",
+   "sentence": "Über das Thema wird seit Jahren eine breite {{c1::gesellschaftliche}} Debatte geführt.",
+   "sentenceTranslation": {
+    "ru": "Об этой теме уже много лет ведётся широкая общественная дискуссия.",
+    "en": "There has been a broad public debate on this topic for years."
+   }
+  },
+  {
+   "id": "conjunction-036",
+   "sentence": "Bitte bringen Sie Ihren Ausweis {{c1::sowie}} eine Kopie des Mietvertrags mit.",
+   "sentenceTranslation": {
+    "ru": "Пожалуйста, возьмите с собой удостоверение личности, а также копию договора аренды.",
+    "en": "Please bring your ID as well as a copy of the rental contract."
+   }
+  },
+  {
+   "id": "noun-3282",
+   "sentence": "Die Ergebnisse der Umfrage lassen unterschiedliche {{c1::Interpretationen}} zu.",
+   "sentenceTranslation": {
+    "ru": "Результаты опроса допускают разные толкования.",
+    "en": "The survey results allow for different interpretations."
+   }
+  },
+  {
+   "id": "verb-1443",
+   "sentence": "Bitte {{c1::versehen}} Sie das Formular mit Datum und Unterschrift.",
+   "sentenceTranslation": {
+    "ru": "Пожалуйста, поставьте на бланке дату и подпись.",
+    "en": "Please add the date and your signature to the form."
+   }
+  },
+  {
+   "id": "noun-3687"
+  },
+  {
+   "id": "adverb-280"
+  },
+  {
+   "id": "verb-1210",
+   "sentence": "Leider können wir Ihnen keine Auskunft {{c1::erteilen}}.",
+   "sentenceTranslation": {
+    "ru": "К сожалению, мы не можем предоставить вам информацию.",
+    "en": "Unfortunately we can't give you any information."
+   }
+  },
+  {
+   "id": "noun-3109"
+  },
+  {
+   "id": "adverb-300"
+  },
+  {
+   "id": "verb-1190",
+   "sentence": "Viele Anwohner {{c1::empfinden}} den Lärm als starke Belastung.",
+   "sentenceTranslation": {
+    "ru": "Многие жители воспринимают шум как серьёзную нагрузку.",
+    "en": "Many residents perceive the noise as a heavy burden."
+   },
+   "translation": {
+    "ru": "воспринимать (как), ощущать",
+    "en": "to perceive (as), to feel"
+   }
+  },
+  {
+   "id": "noun-190"
+  },
+  {
+   "id": "verb-1047"
+  },
+  {
+   "id": "adjective-adverb-480",
+   "sentence": "Trotz {{c1::offensichtlicher}} Mängel wurde die Wohnung zum vollen Preis vermietet.",
+   "sentenceTranslation": {
+    "ru": "Несмотря на очевидные недостатки, квартиру сдали по полной цене.",
+    "en": "Despite obvious defects, the flat was rented out at the full price."
+   }
+  },
+  {
+   "id": "noun-3190"
+  },
+  {
+   "id": "adverb-244"
+  },
+  {
+   "id": "verb-1147"
+  },
+  {
+   "id": "noun-3523",
+   "sentence": "In der Fabrik wird rund um die Uhr in drei {{c1::Schichten}} gearbeitet.",
+   "sentenceTranslation": {
+    "ru": "На фабрике круглосуточно работают в три смены.",
+    "en": "The factory runs around the clock in three shifts."
+   },
+   "translation": {
+    "ru": "смена (на работе); слой",
+    "en": "shift (at work); layer"
+   }
+  },
+  {
+   "id": "adjective-670",
+   "sentence": "Bis zu einem {{c1::gewissen}} Grad kann ich deine Kritik verstehen.",
+   "sentenceTranslation": {
+    "ru": "До определённой степени я понимаю твою критику.",
+    "en": "To a certain extent I can understand your criticism."
+   }
+  },
+  {
+   "id": "verb-1417",
+   "sentence": "Der Dauerregen hat uns den ganzen Ausflug {{c1::verdorben}}.",
+   "sentenceTranslation": {
+    "ru": "Затяжной дождь испортил нам всю поездку.",
+    "en": "The constant rain spoiled the whole trip for us."
+   }
+  },
+  {
+   "id": "noun-3707",
+   "sentence": "Gegen den Bescheid können Sie innerhalb eines Monats {{c1::Widerspruch}} einlegen.",
+   "sentenceTranslation": {
+    "ru": "Решение можно обжаловать в течение месяца.",
+    "en": "You can appeal against the decision within one month."
+   },
+   "translation": {
+    "ru": "возражение; противоречие; Widerspruch einlegen — обжаловать",
+    "en": "objection; contradiction; Widerspruch einlegen — to appeal"
+   }
+  },
+  {
+   "id": "adverb-278"
+  },
+  {
+   "id": "verb-1408"
+  },
+  {
+   "id": "noun-3712"
+  },
+  {
+   "id": "verb-1124"
+  },
+  {
+   "id": "noun-3208"
+  },
+  {
+   "id": "adverb-193"
+  },
+  {
+   "custom": {
+    "base": "es sei denn",
+    "pos": "Andere",
+    "sentence": "Wir gehen morgen wandern, {{c1::es sei denn}}, es regnet.",
+    "sentenceTranslation": {
+     "ru": "Завтра мы пойдём в поход, если только не будет дождя.",
+     "en": "We're going hiking tomorrow, unless it rains."
+    },
+    "translation": {
+     "ru": "если только не; разве что",
+     "en": "unless"
+    }
+   }
+  },
+  {
+   "id": "verb-1142"
+  },
+  {
+   "id": "noun-3416"
+  },
+  {
+   "id": "adjective-559"
+  },
+  {
+   "id": "noun-3679"
+  },
+  {
+   "id": "verb-1330"
+  },
+  {
+   "id": "adjective-adverb-461"
+  },
+  {
+   "id": "noun-188"
+  },
+  {
+   "id": "verb-1340"
+  },
+  {
+   "id": "noun-3302"
+  },
+  {
+   "id": "adjective-558"
+  },
+  {
+   "id": "verb-1242"
+  },
+  {
+   "id": "adverb-046"
+  },
+  {
+   "id": "noun-2936",
+   "sentence": "Ich bin der {{c1::Ansicht}}, dass die Stadt mehr Radwege braucht.",
+   "sentenceTranslation": {
+    "ru": "Я придерживаюсь мнения, что городу нужно больше велодорожек.",
+    "en": "I am of the opinion that the city needs more cycle paths."
+   }
+  },
+  {
+   "id": "verb-1148",
+   "sentence": "Ich {{c1::beziehe}} mich auf Ihre Anzeige vom 3. Mai.",
+   "sentenceTranslation": {
+    "ru": "Я ссылаюсь на ваше объявление от 3 мая.",
+    "en": "I am referring to your advertisement of 3 May."
+   },
+   "translation": {
+    "ru": "ссылаться на (sich beziehen auf); въезжать (в квартиру)",
+    "en": "to refer to (sich beziehen auf); to move into"
+   }
+  },
+  {
+   "id": "adverb-277"
+  },
+  {
+   "id": "noun-3350"
+  },
+  {
+   "id": "verb-721"
+  },
+  {
+   "id": "noun-3106"
+  },
+  {
+   "id": "adjective-853"
+  },
+  {
+   "id": "verb-1115"
+  },
+  {
+   "id": "noun-3435"
+  },
+  {
+   "id": "adjective-adverb-466"
+  },
+  {
+   "id": "verb-1435"
+  },
+  {
+   "id": "noun-3432"
+  },
+  {
+   "id": "adverb-027"
+  },
+  {
+   "id": "verb-1132"
+  },
+  {
+   "id": "adverb-287"
+  },
+  {
+   "id": "noun-3231"
+  },
+  {
+   "id": "verb-1052",
+   "sentence": "Entschuldigung, wir sind schon wieder vom Thema {{c1::abgekommen}}.",
+   "sentenceTranslation": {
+    "ru": "Извините, мы опять отклонились от темы.",
+    "en": "Sorry, we've drifted off topic again."
+   },
+   "translation": {
+    "ru": "отклоняться (от темы); сбиваться (с пути)",
+    "en": "to digress; to stray"
+   }
+  },
+  {
+   "id": "noun-3649"
+  },
+  {
+   "id": "adverb-272"
+  },
+  {
+   "id": "verb-1349"
+  },
+  {
+   "id": "noun-3623"
+  },
+  {
+   "id": "adjective-636"
+  },
+  {
+   "id": "noun-3365"
+  },
+  {
+   "id": "verb-1213"
+  },
+  {
+   "id": "adverb-045"
+  },
+  {
+   "id": "noun-2954"
+  },
+  {
+   "id": "adjective-775"
+  },
+  {
+   "id": "verb-1137"
+  },
+  {
+   "id": "noun-2946"
+  },
+  {
+   "id": "verb-1365"
+  },
+  {
+   "id": "adjective-925"
+  },
+  {
+   "id": "noun-3017"
+  },
+  {
+   "id": "verb-1623"
+  },
+  {
+   "id": "adverb-395"
+  },
+  {
+   "id": "noun-3449"
+  },
+  {
+   "id": "verb-1123"
+  },
+  {
+   "id": "adverb-306"
+  },
+  {
+   "id": "noun-3386"
+  },
+  {
+   "id": "adjective-adverb-085"
+  },
+  {
+   "id": "verb-1254"
+  },
+  {
+   "id": "noun-1080"
+  },
+  {
+   "id": "verb-1079",
+   "sentence": "Viele ältere Menschen sind im Alltag auf Hilfe {{c1::angewiesen}}.",
+   "sentenceTranslation": {
+    "ru": "Многие пожилые люди в быту зависят от помощи.",
+    "en": "Many older people depend on help in everyday life."
+   },
+   "translation": {
+    "ru": "зависеть от (angewiesen sein auf); давать указание",
+    "en": "to depend on (angewiesen sein auf); to instruct"
+   }
+  },
+  {
+   "id": "adverb-279"
+  },
+  {
+   "id": "noun-3108"
+  },
+  {
+   "id": "verb-479"
+  },
+  {
+   "id": "noun-3249"
+  },
+  {
+   "id": "adjective-adverb-268"
+  },
+  {
+   "id": "verb-1239",
+   "sentence": "Die Experten {{c1::gelangten}} zu dem Schluss, dass das Projekt zu teuer ist.",
+   "sentenceTranslation": {
+    "ru": "Эксперты пришли к выводу, что проект слишком дорогой.",
+    "en": "The experts came to the conclusion that the project is too expensive."
+   },
+   "translation": {
+    "ru": "приходить (к выводу, результату); добираться",
+    "en": "to come to (a conclusion); to reach"
+   }
+  },
+  {
+   "id": "noun-3558"
+  },
+  {
+   "custom": {
+    "base": "je nachdem",
+    "pos": "Andere",
+    "sentence": "Ich komme mit dem Rad oder mit dem Bus, {{c1::je nachdem}}, wie das Wetter ist.",
+    "sentenceTranslation": {
+     "ru": "Я приеду на велосипеде или на автобусе — в зависимости от погоды.",
+     "en": "I'll come by bike or by bus, depending on the weather."
+    },
+    "translation": {
+     "ru": "в зависимости от того (как, ли)",
+     "en": "depending on"
+    }
+   }
+  },
+  {
+   "id": "adjective-787",
+   "sentence": "Zur Blutabnahme kommen Sie bitte morgens {{c1::nüchtern}}.",
+   "sentenceTranslation": {
+    "ru": "На анализ крови, пожалуйста, приходите утром натощак.",
+    "en": "Please come for the blood test in the morning on an empty stomach."
+   },
+   "translation": {
+    "ru": "натощак; трезвый, рассудительный",
+    "en": "on an empty stomach; sober, level-headed"
+   }
+  },
+  {
+   "id": "verb-1209",
+   "sentence": "Nach der Doppelschicht war sie völlig {{c1::erschöpft}}.",
+   "sentenceTranslation": {
+    "ru": "После двойной смены она была совершенно измотана.",
+    "en": "After the double shift she was completely exhausted."
+   },
+   "translation": {
+    "ru": "измотанный (erschöpft); исчерпывать",
+    "en": "exhausted (erschöpft); to use up"
+   }
+  },
+  {
+   "id": "noun-3662"
+  },
+  {
+   "id": "adverb-264"
+  },
+  {
+   "id": "verb-1125",
+   "sentence": "Die Zentralbank will die Inflation mit höheren Zinsen {{c1::bekämpfen}}.",
+   "sentenceTranslation": {
+    "ru": "Центробанк хочет бороться с инфляцией с помощью повышения ставок.",
+    "en": "The central bank wants to fight inflation with higher interest rates."
+   }
+  },
+  {
+   "id": "noun-3197"
+  },
+  {
+   "id": "noun-2960"
+  },
+  {
+   "id": "verb-1118"
+  },
+  {
+   "id": "adjective-adverb-464"
+  },
+  {
+   "id": "noun-3683",
+   "sentence": "Bitte geben Sie bei Rückfragen immer die Nummer des {{c1::Vorgangs}} an.",
+   "sentenceTranslation": {
+    "ru": "При запросах всегда указывайте номер дела.",
+    "en": "Please always quote the case number in any enquiries."
+   }
+  },
+  {
+   "id": "verb-1127"
+  },
+  {
+   "id": "adjective-adverb-428"
+  },
+  {
+   "custom": {
+    "base": "vorausgesetzt",
+    "pos": "Andere",
+    "sentence": "Wir schaffen das Projekt bis Freitag, {{c1::vorausgesetzt}}, alle helfen mit.",
+    "sentenceTranslation": {
+     "ru": "Мы закончим проект к пятнице при условии, что все помогут.",
+     "en": "We'll finish the project by Friday, provided everyone helps."
+    },
+    "translation": {
+     "ru": "при условии, что",
+     "en": "provided (that)"
+    }
+   }
+  },
+  {
+   "id": "noun-2243"
+  },
+  {
+   "id": "verb-1058"
+  },
+  {
+   "id": "noun-2988",
+   "sentence": "Viele Eltern haben {{c1::Bedenken}} gegen die neue Handyregel an der Schule.",
+   "sentenceTranslation": {
+    "ru": "У многих родителей есть сомнения насчёт нового правила о мобильных телефонах в школе.",
+    "en": "Many parents have concerns about the school's new phone rule."
+   },
+   "translation": {
+    "ru": "сомнения, опасения (Bedenken haben)",
+    "en": "concerns, doubts"
+   }
+  },
+  {
+   "id": "adjective-adverb-168"
+  },
+  {
+   "id": "verb-1237"
+  },
+  {
+   "id": "noun-2935"
+  },
+  {
+   "id": "adjective-556"
+  },
+  {
+   "id": "verb-1101"
+  },
+  {
+   "id": "noun-3708"
+  },
+  {
+   "id": "verb-1109"
+  },
+  {
+   "id": "adverb-270"
+  },
+  {
+   "id": "noun-2904",
+   "sentence": "Vor der Veranstaltung hat uns die Chefin den genauen {{c1::Ablauf}} erklärt.",
+   "sentenceTranslation": {
+    "ru": "Перед мероприятием начальница объяснила нам точный порядок проведения.",
+    "en": "Before the event, the boss explained the exact schedule to us."
+   },
+   "translation": {
+    "ru": "ход, порядок (проведения); истечение (срока)",
+    "en": "course, procedure; expiry"
+   }
+  },
+  {
+   "custom": {
+    "base": "infolgedessen",
+    "pos": "Andere",
+    "sentence": "Der Zug hatte eine Stunde Verspätung. {{c1::Infolgedessen}} habe ich meinen Anschluss verpasst.",
+    "sentenceTranslation": {
+     "ru": "Поезд опоздал на час. Вследствие этого я опоздала на пересадку.",
+     "en": "The train was an hour late. As a result, I missed my connection."
+    },
+    "translation": {
+     "ru": "вследствие этого",
+     "en": "as a result, consequently"
+    }
+   }
+  },
+  {
+   "id": "verb-1372"
+  },
+  {
+   "id": "noun-2970",
+   "sentence": "Das ganze {{c1::Ausmaß}} des Problems wurde erst Monate später sichtbar.",
+   "sentenceTranslation": {
+    "ru": "Весь масштаб проблемы стал виден лишь спустя месяцы.",
+    "en": "The full extent of the problem only became visible months later."
+   },
+   "translation": {
+    "ru": "масштаб, размах",
+    "en": "extent, scale"
+   }
+  },
+  {
+   "id": "adjective-adverb-131"
+  },
+  {
+   "id": "verb-1452"
+  },
+  {
+   "id": "noun-2086"
+  },
+  {
+   "id": "adverb-297"
+  },
+  {
+   "id": "verb-1428"
+  },
+  {
+   "id": "noun-3012"
+  },
+  {
+   "id": "verb-1400",
+   "sentence": "Die Chefin hat mir die Verantwortung für das Projekt {{c1::übertragen}}.",
+   "sentenceTranslation": {
+    "ru": "Начальница передала мне ответственность за проект.",
+    "en": "The boss handed responsibility for the project over to me."
+   },
+   "translation": {
+    "ru": "передавать (полномочия, ответственность); транслировать",
+    "en": "to transfer, to hand over; to broadcast"
+   }
+  },
+  {
+   "id": "noun-3001",
+   "sentence": "Die Pflege der kranken Mutter ist für die ganze Familie eine große {{c1::Belastung}}.",
+   "sentenceTranslation": {
+    "ru": "Уход за больной матерью — большая нагрузка для всей семьи.",
+    "en": "Caring for their sick mother is a heavy burden for the whole family."
+   }
+  },
+  {
+   "id": "adjective-adverb-291"
+  },
+  {
+   "id": "conjunction-048"
+  },
+  {
+   "id": "verb-1469"
+  },
+  {
+   "id": "noun-3661"
+  },
+  {
+   "id": "adjective-642",
+   "sentence": "Ich kenne ihn nur {{c1::flüchtig}}, wir haben uns zweimal bei Freunden gesehen.",
+   "sentenceTranslation": {
+    "ru": "Я знаю его лишь мельком, мы виделись пару раз у друзей.",
+    "en": "I only know him in passing; we've met twice at friends'."
+   },
+   "translation": {
+    "ru": "мельком, поверхностно; мимолётный",
+    "en": "in passing, superficially; fleeting"
+   }
+  },
+  {
+   "id": "noun-3264"
+  },
+  {
+   "id": "verb-352"
+  },
+  {
+   "id": "adjective-891"
+  },
+  {
+   "id": "noun-1506"
+  },
+  {
+   "id": "verb-1194"
+  },
+  {
+   "id": "noun-3414"
+  },
+  {
+   "id": "adjective-951",
+   "sentence": "Sind Sie mit dem neuen Programm schon {{c1::vertraut}}?",
+   "sentenceTranslation": {
+    "ru": "Вы уже освоились с новой программой?",
+    "en": "Are you already familiar with the new program?"
+   }
+  },
+  {
+   "id": "verb-1445",
+   "sentence": "Der Lärm von der Baustelle {{c1::verstärkt}} meine Kopfschmerzen noch.",
+   "sentenceTranslation": {
+    "ru": "Шум со стройки ещё больше усиливает мою головную боль.",
+    "en": "The noise from the building site makes my headache even worse."
+   }
+  },
+  {
+   "id": "adverb-033"
+  },
+  {
+   "id": "noun-3288"
+  },
+  {
+   "id": "verb-1193"
+  },
+  {
+   "id": "adverb-288"
+  },
+  {
+   "id": "noun-3002"
+  },
+  {
+   "id": "verb-1217"
+  },
+  {
+   "id": "noun-2977",
+   "sentence": "Das monatliche Treffen dient dem {{c1::Austausch}} von Erfahrungen zwischen den Abteilungen.",
+   "sentenceTranslation": {
+    "ru": "Ежемесячная встреча служит для обмена опытом между отделами.",
+    "en": "The monthly meeting serves to exchange experience between departments."
+   },
+   "translation": {
+    "ru": "обмен",
+    "en": "exchange"
+   }
+  },
+  {
+   "id": "adverb-036"
+  },
+  {
+   "id": "verb-1414"
+  },
+  {
+   "id": "noun-3615"
+  },
+  {
+   "id": "adjective-345"
+  },
+  {
+   "id": "verb-1205"
+  },
+  {
+   "id": "noun-2995"
+  },
+  {
+   "id": "noun-2567"
+  },
+  {
+   "id": "verb-1218"
+  },
+  {
+   "id": "adjective-566",
+   "sentence": "Von der Preiserhöhung sind vor allem Familien mit Kindern {{c1::betroffen}}.",
+   "sentenceTranslation": {
+    "ru": "Повышение цен затрагивает прежде всего семьи с детьми.",
+    "en": "The price increase mainly affects families with children."
+   },
+   "translation": {
+    "ru": "затронутый, пострадавший (von etw.); потрясённый",
+    "en": "affected (von etw.); dismayed"
+   }
+  },
+  {
+   "id": "noun-794"
+  },
+  {
+   "id": "verb-1299"
+  },
+  {
+   "id": "noun-3385"
+  },
+  {
+   "id": "adverb-251",
+   "sentence": "Ich kann deine Kritik {{c1::durchaus}} verstehen, trotzdem sehe ich das anders.",
+   "sentenceTranslation": {
+    "ru": "Я вполне понимаю твою критику, но всё же вижу это иначе.",
+    "en": "I can certainly understand your criticism, but I still see it differently."
+   }
+  },
+  {
+   "id": "verb-1166"
+  },
+  {
+   "id": "noun-3492",
+   "sentence": "Influencer mit großer {{c1::Reichweite}} verdienen viel Geld mit Werbung.",
+   "sentenceTranslation": {
+    "ru": "Блогеры с большим охватом зарабатывают на рекламе много денег.",
+    "en": "Influencers with a large reach earn a lot of money from advertising."
+   }
+  },
+  {
+   "id": "adjective-535"
+  },
+  {
+   "id": "noun-3051"
+  },
+  {
+   "id": "verb-1171"
+  },
+  {
+   "id": "adverb-255"
+  },
+  {
+   "id": "noun-3729"
+  },
+  {
+   "id": "adjective-547"
+  },
+  {
+   "id": "verb-1117"
+  },
+  {
+   "id": "noun-3691"
+  },
+  {
+   "id": "verb-1146"
+  },
+  {
+   "id": "adjective-615"
+  },
+  {
+   "id": "noun-2933"
+  },
+  {
+   "id": "verb-1110"
+  },
+  {
+   "id": "adjective-198"
+  },
+  {
+   "id": "noun-3005"
+  },
+  {
+   "id": "verb-1145"
+  },
+  {
+   "id": "adverb-039"
+  },
+  {
+   "id": "noun-2997"
+  },
+  {
+   "id": "adverb-285"
+  },
+  {
+   "id": "verb-1427",
+   "sentence": "Ich {{c1::verfolge}} die Debatte über das neue Gesetz jeden Abend in den Nachrichten.",
+   "sentenceTranslation": {
+    "ru": "Я каждый вечер слежу за дебатами о новом законе в новостях.",
+    "en": "I follow the debate about the new law on the news every evening."
+   },
+   "translation": {
+    "ru": "следить (за чем-либо); добиваться (цели)",
+    "en": "to follow (events); to pursue (a goal)"
+   }
+  },
+  {
+   "id": "noun-3626"
+  },
+  {
+   "id": "verb-1401"
+  },
+  {
+   "id": "adjective-617"
+  },
+  {
+   "id": "noun-3128"
+  },
+  {
+   "id": "verb-1434"
+  },
+  {
+   "id": "noun-2903"
+  },
+  {
+   "id": "adverb-234"
+  },
+  {
+   "id": "verb-1113"
+  },
+  {
+   "id": "noun-3238",
+   "sentence": "Die Regierung hat ihre {{c1::Haltung}} in dieser Frage geändert.",
+   "sentenceTranslation": {
+    "ru": "Правительство изменило свою позицию по этому вопросу.",
+    "en": "The government has changed its stance on this issue."
+   },
+   "translation": {
+    "ru": "позиция, отношение; осанка",
+    "en": "stance, attitude; posture"
+   }
+  },
+  {
+   "id": "conjunction-035"
+  },
+  {
+   "id": "adjective-602"
+  },
+  {
+   "id": "verb-1404",
+   "sentence": "Es hat lange gedauert, bis sie ihre Angst vor dem Fliegen {{c1::überwunden}} hat.",
+   "sentenceTranslation": {
+    "ru": "Ей понадобилось много времени, чтобы преодолеть страх перед полётами.",
+    "en": "It took her a long time to overcome her fear of flying."
+   }
+  },
+  {
+   "id": "noun-3620"
+  },
+  {
+   "id": "adjective-668"
+  },
+  {
+   "id": "verb-1214",
+   "sentence": "Die Entscheidung hat sich am Ende als richtig {{c1::erwiesen}}.",
+   "sentenceTranslation": {
+    "ru": "В итоге решение оказалось правильным.",
+    "en": "In the end the decision turned out to be right."
+   },
+   "translation": {
+    "ru": "оказываться (sich als … erweisen); оказывать (услугу)",
+    "en": "to turn out to be (sich als … erweisen); to do (a favour)"
+   }
+  },
+  {
+   "id": "noun-3022"
+  }
+ ]
+}

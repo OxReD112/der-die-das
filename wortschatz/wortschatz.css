@@ -128,7 +128,7 @@ button {
 }
 /* shared press effect for every button: .97 + a touch darker */
 #startBtn:active,
-.ownWordsBtn:active,
+.chooseOwnBtn:active,
 .coll-line:active,
 .check:active,
 .continue:active,
@@ -172,6 +172,7 @@ button {
 }
 /* the top bar belongs to the session, not to the start and done screens */
 body:has(#start.show) header,
+body:has(#choose.show) header,
 body:has(#done.show) header {
   display: none;
 }
@@ -322,7 +323,8 @@ body:has(#done.show) header {
   font-family: var(--font);
   z-index: 4;
 }
-body:has(#start.show) .start-about {
+body:has(#start.show) .start-about,
+body:has(#choose.show) .start-about {
   display: block;
 }
 .start-about h2 {
@@ -386,7 +388,7 @@ body:has(#start.show) .start-about {
   pointer-events: none;
   z-index: 5;
 }
-body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
+body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .version-mark {
   display: none;
 }
 
@@ -1033,3 +1035,90 @@ body:not(:has(#done.show)):not(:has(#start.show)) .version-mark {
 .reading-review-row > input { appearance:none; position:relative; border:1.5px solid var(--muted); border-radius:50%; background:transparent; }
 .reading-review-row > input:checked { border-color:transparent; }
 .reading-review-row > input:checked::after { content:""; position:absolute; inset:1px; border-radius:50%; background:var(--mint,#55c9ab); }
+
+/* ===== CHOOSE SCREEN (2026-10-26): no words yet → „Where do you want to start?“
+   Same layout as the start screen: title on top, the QUICK START block centred, the main button low.
+   Set lines use the start screen's collection-line look (text + ›, no frames); own words = main button. ===== */
+#choose {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 36px;
+}
+#choose.show {
+  display: flex;
+}
+#choose .title {
+  font:
+    400 clamp(48px, 13vw, 72px) / 1.05 Georgia,
+    serif;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin: 0;
+}
+#choose .chooseQuestion {
+  margin: 14px 0 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+#choose .startWords {
+  margin: auto 0;
+  padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#choose .chooseHint {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+/* one hairline between the sets (as in the word lists), a little air around each */
+.chooseSetList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+  max-width: 100%;
+}
+.chooseSet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 14px 0;
+}
+.chooseSet + .chooseSet {
+  border-top: 1px solid var(--hairline);
+}
+.chooseSet .collCount {
+  margin: 0;
+}
+#choose .startActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+#choose .chooseOwnBtn {
+  width: 312px;
+  max-width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  background: var(--main-bg);
+  color: var(--main-text);
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+#choose .chooseOwnHint {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}

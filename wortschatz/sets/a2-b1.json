@@ -1,0 +1,736 @@
+{
+ "id": "a2-b1",
+ "name": "A2 → B1",
+ "description": {
+  "en": "200 words that take you from A2 to B1.",
+  "ru": "200 слов, которые ведут с A2 на B1."
+ },
+ "version": 1,
+ "created": "2026-10-26",
+ "note": "Entries are Wörterbuch ids; an entry may carry its own sentence / sentenceTranslation / translation for this set (the Wörterbuch itself is not changed).",
+ "entries": [
+  {
+   "id": "noun-1804"
+  },
+  {
+   "id": "verb-392",
+   "sentence": "Mir ist sofort {{c1::aufgefallen}}, dass du eine neue Brille hast.",
+   "sentenceTranslation": {
+    "ru": "Я сразу заметила, что у тебя новые очки.",
+    "en": "I noticed right away that you have new glasses."
+   }
+  },
+  {
+   "id": "adverb-109"
+  },
+  {
+   "id": "conjunction-006"
+  },
+  {
+   "id": "noun-1139"
+  },
+  {
+   "id": "verb-297"
+  },
+  {
+   "id": "adjective-363"
+  },
+  {
+   "id": "noun-278"
+  },
+  {
+   "id": "verb-454"
+  },
+  {
+   "id": "noun-169"
+  },
+  {
+   "id": "adverb-035",
+   "sentence": "Der Film war {{c1::eher}} langweilig.",
+   "sentenceTranslation": {
+    "ru": "Фильм был скорее скучным.",
+    "en": "The film was rather boring."
+   }
+  },
+  {
+   "id": "verb-155"
+  },
+  {
+   "id": "adverb-031"
+  },
+  {
+   "id": "noun-968"
+  },
+  {
+   "id": "verb-549"
+  },
+  {
+   "id": "adverb-151"
+  },
+  {
+   "id": "noun-795"
+  },
+  {
+   "id": "verb-602"
+  },
+  {
+   "id": "noun-167"
+  },
+  {
+   "id": "adjective-200",
+   "sentence": "Das war nur ein Witz, nimm das nicht so {{c1::ernst}}!",
+   "sentenceTranslation": {
+    "ru": "Это была просто шутка, не принимай это так всерьёз!",
+    "en": "It was just a joke, don't take it so seriously!"
+   }
+  },
+  {
+   "id": "conjunction-029"
+  },
+  {
+   "id": "noun-1106"
+  },
+  {
+   "id": "verb-426"
+  },
+  {
+   "id": "noun-816"
+  },
+  {
+   "id": "adverb-138"
+  },
+  {
+   "id": "verb-449"
+  },
+  {
+   "id": "noun-1770"
+  },
+  {
+   "id": "conjunction-014"
+  },
+  {
+   "id": "verb-407"
+  },
+  {
+   "id": "adjective-adverb-018"
+  },
+  {
+   "id": "noun-1711"
+  },
+  {
+   "id": "verb-693"
+  },
+  {
+   "id": "noun-1021"
+  },
+  {
+   "id": "conjunction-050"
+  },
+  {
+   "id": "verb-687"
+  },
+  {
+   "id": "noun-1107"
+  },
+  {
+   "id": "conjunction-034",
+   "sentence": "{{c1::Statt}} den Bus {{c1::zu}} nehmen, fahre ich mit dem Rad.",
+   "sentenceTranslation": {
+    "ru": "Вместо того чтобы ехать на автобусе, я езжу на велосипеде.",
+    "en": "Instead of taking the bus, I ride my bike."
+   }
+  },
+  {
+   "id": "adjective-adverb-125"
+  },
+  {
+   "id": "verb-2571"
+  },
+  {
+   "id": "noun-292",
+   "sentence": "Die {{c1::Ware}} war beschädigt, deshalb habe ich sie zurückgeschickt.",
+   "sentenceTranslation": {
+    "ru": "Товар был повреждён, поэтому я отправила его обратно.",
+    "en": "The goods were damaged, so I sent them back."
+   }
+  },
+  {
+   "id": "noun-814"
+  },
+  {
+   "id": "verb-249"
+  },
+  {
+   "id": "adverb-047"
+  },
+  {
+   "id": "conjunction-017"
+  },
+  {
+   "id": "noun-1760",
+   "sentence": "Ich lege großen {{c1::Wert}} auf Pünktlichkeit.",
+   "sentenceTranslation": {
+    "ru": "Я придаю большое значение пунктуальности.",
+    "en": "Punctuality matters a lot to me."
+   },
+   "translation": {
+    "ru": "ценность, значение (Wert legen auf — придавать значение)",
+    "en": "value, importance (Wert legen auf — to attach importance to)"
+   }
+  },
+  {
+   "id": "verb-2570"
+  },
+  {
+   "id": "adverb-038"
+  },
+  {
+   "id": "noun-170"
+  },
+  {
+   "id": "verb-752"
+  },
+  {
+   "id": "noun-1698"
+  },
+  {
+   "id": "adjective-090"
+  },
+  {
+   "id": "verb-283"
+  },
+  {
+   "id": "conjunction-046"
+  },
+  {
+   "id": "noun-179"
+  },
+  {
+   "id": "verb-565"
+  },
+  {
+   "id": "adverb-139"
+  },
+  {
+   "id": "noun-1251"
+  },
+  {
+   "id": "verb-243"
+  },
+  {
+   "id": "noun-1787"
+  },
+  {
+   "id": "adjective-171"
+  },
+  {
+   "id": "conjunction-033"
+  },
+  {
+   "id": "noun-1564",
+   "sentence": "Mach dir keine {{c1::Sorgen}}, alles wird gut.",
+   "sentenceTranslation": {
+    "ru": "Не волнуйся, всё будет хорошо.",
+    "en": "Don't worry, everything will be fine."
+   }
+  },
+  {
+   "id": "verb-537"
+  },
+  {
+   "id": "noun-196"
+  },
+  {
+   "id": "adjective-264"
+  },
+  {
+   "id": "verb-548"
+  },
+  {
+   "id": "noun-902"
+  },
+  {
+   "id": "conjunction-030"
+  },
+  {
+   "id": "verb-395"
+  },
+  {
+   "id": "adjective-adverb-075"
+  },
+  {
+   "id": "noun-1065"
+  },
+  {
+   "id": "verb-425"
+  },
+  {
+   "id": "noun-164"
+  },
+  {
+   "id": "adverb-149"
+  },
+  {
+   "id": "verb-603"
+  },
+  {
+   "id": "noun-280"
+  },
+  {
+   "id": "conjunction-022"
+  },
+  {
+   "id": "adverb-128"
+  },
+  {
+   "id": "verb-260"
+  },
+  {
+   "id": "noun-178"
+  },
+  {
+   "id": "noun-1728"
+  },
+  {
+   "id": "verb-090"
+  },
+  {
+   "id": "adverb-166"
+  },
+  {
+   "id": "conjunction-021"
+  },
+  {
+   "id": "noun-1481",
+   "sentence": "In der {{c1::Regel}} arbeite ich bis 17 Uhr.",
+   "sentenceTranslation": {
+    "ru": "Как правило, я работаю до 17 часов.",
+    "en": "As a rule, I work until 5 pm."
+   },
+   "translation": {
+    "ru": "правило (in der Regel — как правило)",
+    "en": "rule (in der Regel — as a rule)"
+   }
+  },
+  {
+   "id": "verb-380"
+  },
+  {
+   "id": "adverb-204"
+  },
+  {
+   "id": "noun-808"
+  },
+  {
+   "id": "verb-086"
+  },
+  {
+   "id": "noun-1799",
+   "sentence": "In {{c1::Zukunft}} komme ich pünktlich, versprochen!",
+   "sentenceTranslation": {
+    "ru": "В будущем буду приходить вовремя, обещаю!",
+    "en": "In future I'll be on time, I promise!"
+   }
+  },
+  {
+   "id": "adjective-adverb-037"
+  },
+  {
+   "id": "verb-495"
+  },
+  {
+   "id": "conjunction-027"
+  },
+  {
+   "id": "noun-857"
+  },
+  {
+   "id": "verb-545"
+  },
+  {
+   "id": "adverb-147"
+  },
+  {
+   "id": "noun-1552"
+  },
+  {
+   "id": "verb-351"
+  },
+  {
+   "id": "noun-1293"
+  },
+  {
+   "id": "adjective-086"
+  },
+  {
+   "id": "adverb-175"
+  },
+  {
+   "id": "noun-1016",
+   "sentence": "Wir müssen die {{c1::Erde}} für unsere Kinder schützen.",
+   "sentenceTranslation": {
+    "ru": "Мы должны беречь Землю для наших детей.",
+    "en": "We have to protect the Earth for our children."
+   }
+  },
+  {
+   "id": "verb-387"
+  },
+  {
+   "id": "noun-174"
+  },
+  {
+   "id": "adjective-adverb-057"
+  },
+  {
+   "id": "verb-503"
+  },
+  {
+   "id": "noun-1281"
+  },
+  {
+   "id": "conjunction-016"
+  },
+  {
+   "id": "verb-756"
+  },
+  {
+   "id": "adverb-106"
+  },
+  {
+   "id": "noun-1536",
+   "sentence": "Das ist nicht deine {{c1::Schuld}}.",
+   "sentenceTranslation": {
+    "ru": "Это не твоя вина.",
+    "en": "It's not your fault."
+   }
+  },
+  {
+   "id": "verb-476"
+  },
+  {
+   "id": "noun-1535"
+  },
+  {
+   "id": "adjective-088"
+  },
+  {
+   "id": "verb-097",
+   "sentence": "Vielen Dank, wir haben Ihre Bewerbung {{c1::erhalten}}.",
+   "sentenceTranslation": {
+    "ru": "Большое спасибо, мы получили ваше заявление.",
+    "en": "Thank you, we have received your application."
+   }
+  },
+  {
+   "id": "verb-344"
+  },
+  {
+   "id": "conjunction-005"
+  },
+  {
+   "id": "adverb-197"
+  },
+  {
+   "id": "verb-679"
+  },
+  {
+   "id": "noun-1542",
+   "sentence": "Ich habe noch {{c1::Schwierigkeiten}} mit der Aussprache.",
+   "sentenceTranslation": {
+    "ru": "У меня ещё есть трудности с произношением.",
+    "en": "I still have difficulties with pronunciation."
+   }
+  },
+  {
+   "id": "noun-991"
+  },
+  {
+   "id": "verb-481"
+  },
+  {
+   "id": "adjective-adverb-103"
+  },
+  {
+   "id": "conjunction-044",
+   "sentence": "Es regnete {{c1::zwar}}, {{c1::aber}} wir gingen trotzdem spazieren.",
+   "sentenceTranslation": {
+    "ru": "Шёл, правда, дождь, но мы всё равно пошли гулять.",
+    "en": "It was raining, but we went for a walk anyway."
+   }
+  },
+  {
+   "id": "noun-276"
+  },
+  {
+   "id": "verb-720"
+  },
+  {
+   "id": "adjective-186"
+  },
+  {
+   "id": "noun-1169"
+  },
+  {
+   "id": "verb-470"
+  },
+  {
+   "id": "noun-984"
+  },
+  {
+   "id": "adjective-adverb-407"
+  },
+  {
+   "id": "verb-089"
+  },
+  {
+   "id": "adverb-026"
+  },
+  {
+   "id": "noun-166",
+   "sentence": "Wir müssen bald eine {{c1::Entscheidung}} treffen.",
+   "sentenceTranslation": {
+    "ru": "Нам скоро нужно принять решение.",
+    "en": "We have to make a decision soon."
+   }
+  },
+  {
+   "id": "verb-368"
+  },
+  {
+   "id": "adjective-adverb-098",
+   "sentence": "Sie hat endlich eine {{c1::feste}} Stelle.",
+   "sentenceTranslation": {
+    "ru": "У неё наконец постоянная работа.",
+    "en": "She finally has a permanent job."
+   }
+  },
+  {
+   "id": "noun-171"
+  },
+  {
+   "id": "verb-098"
+  },
+  {
+   "id": "noun-1598"
+  },
+  {
+   "id": "adjective-296"
+  },
+  {
+   "id": "conjunction-028"
+  },
+  {
+   "id": "noun-1746",
+   "sentence": "Ich habe keine {{c1::Vorstellung}}, wie viel so eine Wohnung kostet.",
+   "sentenceTranslation": {
+    "ru": "Я понятия не имею, сколько стоит такая квартира.",
+    "en": "I have no idea how much a flat like that costs."
+   }
+  },
+  {
+   "id": "verb-717"
+  },
+  {
+   "id": "noun-1356"
+  },
+  {
+   "id": "adverb-126"
+  },
+  {
+   "id": "verb-079"
+  },
+  {
+   "id": "noun-192"
+  },
+  {
+   "id": "conjunction-049"
+  },
+  {
+   "id": "verb-383"
+  },
+  {
+   "id": "adjective-adverb-050"
+  },
+  {
+   "id": "noun-1122"
+  },
+  {
+   "id": "verb-751"
+  },
+  {
+   "id": "noun-858"
+  },
+  {
+   "id": "adjective-304"
+  },
+  {
+   "id": "verb-702"
+  },
+  {
+   "id": "noun-1249"
+  },
+  {
+   "id": "conjunction-012"
+  },
+  {
+   "id": "adjective-adverb-151",
+   "sentence": "Danke, das ist nicht {{c1::nötig}}!",
+   "sentenceTranslation": {
+    "ru": "Спасибо, это не нужно!",
+    "en": "Thanks, that's not necessary!"
+   }
+  },
+  {
+   "id": "verb-396"
+  },
+  {
+   "id": "noun-1714"
+  },
+  {
+   "id": "noun-175"
+  },
+  {
+   "id": "verb-614",
+   "sentence": "Keine Sorge, ich {{c1::regle}} das mit dem Vermieter.",
+   "sentenceTranslation": {
+    "ru": "Не волнуйся, я улажу это с арендодателем.",
+    "en": "Don't worry, I'll sort it out with the landlord."
+   }
+  },
+  {
+   "id": "adjective-284"
+  },
+  {
+   "id": "conjunction-025"
+  },
+  {
+   "id": "noun-275"
+  },
+  {
+   "id": "verb-669"
+  },
+  {
+   "id": "adverb-200"
+  },
+  {
+   "id": "noun-279"
+  },
+  {
+   "id": "verb-400"
+  },
+  {
+   "id": "noun-1104"
+  },
+  {
+   "id": "adjective-066",
+   "sentence": "Der Bahnhof ist ganz {{c1::nah}}, nur fünf Minuten zu Fuß.",
+   "sentenceTranslation": {
+    "ru": "Вокзал совсем близко, всего пять минут пешком.",
+    "en": "The station is very close, just five minutes on foot."
+   }
+  },
+  {
+   "id": "verb-471"
+  },
+  {
+   "id": "conjunction-018"
+  },
+  {
+   "id": "noun-1075"
+  },
+  {
+   "id": "verb-530"
+  },
+  {
+   "id": "adverb-044"
+  },
+  {
+   "id": "noun-411"
+  },
+  {
+   "id": "verb-398"
+  },
+  {
+   "id": "noun-1635"
+  },
+  {
+   "id": "adjective-259"
+  },
+  {
+   "id": "adverb-186"
+  },
+  {
+   "id": "noun-1476"
+  },
+  {
+   "id": "verb-726"
+  },
+  {
+   "id": "noun-1673",
+   "sentence": "Dein neuer Kollege ist ein netter {{c1::Typ}}.",
+   "sentenceTranslation": {
+    "ru": "Твой новый коллега — приятный парень.",
+    "en": "Your new colleague is a nice guy."
+   }
+  },
+  {
+   "id": "adverb-040"
+  },
+  {
+   "id": "verb-719"
+  },
+  {
+   "id": "noun-189"
+  },
+  {
+   "id": "conjunction-013"
+  },
+  {
+   "id": "verb-637"
+  },
+  {
+   "id": "adverb-127"
+  },
+  {
+   "id": "noun-1127"
+  },
+  {
+   "id": "verb-2558"
+  },
+  {
+   "id": "noun-1751"
+  },
+  {
+   "id": "adjective-adverb-027",
+   "sentence": "Sie postet viel in {{c1::sozialen}} Netzwerken.",
+   "sentenceTranslation": {
+    "ru": "Она много публикует в социальных сетях.",
+    "en": "She posts a lot on social networks."
+   }
+  },
+  {
+   "id": "verb-404"
+  },
+  {
+   "id": "noun-018"
+  },
+  {
+   "id": "conjunction-026",
+   "sentence": "Wir fahren {{c1::entweder}} mit dem Zug {{c1::oder}} mit dem Auto.",
+   "sentenceTranslation": {
+    "ru": "Мы поедем либо на поезде, либо на машине.",
+    "en": "We'll go either by train or by car."
+   }
+  },
+  {
+   "id": "adjective-adverb-055"
+  },
+  {
+   "id": "verb-521"
+  },
+  {
+   "id": "noun-193"
+  }
+ ]
+}

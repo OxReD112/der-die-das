@@ -79,9 +79,12 @@ async function loadKeyboardComponent() {
 const $ = id => document.getElementById(id),
   STORE = "wortsternSRSv03",
   HOME_STATS = "deutschHomeStatsV1";
-/* Own word collection (collection.js, 2026-09-26): if the user has one, it replaces the built-in set.
+/* Own word collection (collection.js). 2026-10-26: there is no built-in set any more — without an own
+   collection WORDS is empty and the start screen asks „Where do you want to start?“ (word sets / own words).
+   Old Starter-Set progress is moved into an own collection once, before anything reads it.
    Everything below (deck, due count, notifications, progress) works on WORDS, so nothing else changes. */
-if (window.WortschatzCollection && WortschatzCollection.isOwn()) window.WORDS = WortschatzCollection.cards();
+if (window.WortschatzCollection && WortschatzCollection.needsLegacyMove()) WortschatzCollection.migrateLegacy("legacy/starter-set.js?v=1");
+window.WORDS = window.WortschatzCollection && WortschatzCollection.isOwn() ? WortschatzCollection.cards() : [];
 
 function publishWortschatzStatus(done = false) {
   try {
@@ -137,7 +140,7 @@ function publishWortschatzProgress() {
     const started = mine.length;
     const sitzt = mine.filter(id => lvl(id) >= SITZT_LEVEL).length;
     const learned = mine.filter(id => lvl(id) >= LEARNED_LEVEL).length;
-    let collection = "Starter-Set";
+    let collection = "";
     try {
       if (window.WortschatzCollection && WortschatzCollection.isOwn())
         collection = String(WortschatzCollection.get().name || "My Words");
@@ -747,6 +750,7 @@ function cardsLabel(n) {
   return n === 1 ? "1 Karte" : n + " Karten";
 }
 function showStart() {
+  if (!WORDS.length) return showChoose();
   ensureDeck();
   const n = dueCount();
   publishWortschatzStatus(n === 0);
@@ -767,7 +771,7 @@ function showStart() {
 /* Start screen height (v2.96): fill the space down to the „Worum geht's?“ description, so Starten sits low
    and the DEINE WÖRTER block is centred between the title and the buttons (flex + margin:auto). */
 function layoutStart() {
-  const st = $("start"),
+  const st = $("choose").classList.contains("show") ? $("choose") : $("start"),
     about = $("startAbout");
   if (!st || !st.classList.contains("show")) return;
   st.style.minHeight = "";
@@ -778,6 +782,18 @@ function layoutStart() {
   st.style.minHeight = Math.max(0, Math.round(aboutTop - top - 36)) + "px";
 }
 addEventListener("resize", layoutStart);
+/* CHOOSE SCREEN (2026-10-26): no words yet → word sets (quick start) or own words. Same layout as the start
+   screen; the set lines use the start screen's collection-line look (no frames). */
+function showChoose() {
+  publishWortschatzStatus(true);
+  publishWortschatzProgress();
+  $("done").className = "done";
+  $("study").style.display = "none";
+  $("start").classList.remove("show");
+  $("choose").classList.add("show");
+  if (window.WortschatzCollectionWindow) WortschatzCollectionWindow.fillChoose($("chooseSets"), $("chooseOwn"));
+  layoutStart();
+}
 function startSession() {
   $("start").classList.remove("show");
   $("study").style.display = "flex";
@@ -787,7 +803,7 @@ $("startBtn").onclick = startSession;
 showStart();
 // Desktop: Enter on the start screen = Starten
 document.addEventListener("keydown", e => {
-  if (e.key === "Enter" && $("start").classList.contains("show")) {
+  if (e.key === "Enter" && $("start").classList.contains("show") && !$("collModal").classList.contains("open")) {
     e.preventDefault();
     startSession();
   }

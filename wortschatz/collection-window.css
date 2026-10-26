@@ -532,3 +532,208 @@ textarea.coll-paste {
   user-select: text;
 }
 
+
+/* v2026-10-26 · Wörterbuch search on top of the new-word form (OPEN_TASKS „Wortschatz — доработки“ 1).
+   The field stays put; while you search, the results replace the form below it. */
+.coll-search {
+  flex: 0 0 auto;
+  margin: 4px 0 2px;
+}
+.coll-search {
+  position: relative;
+}
+/* magnifier, so the field reads as a search and not as one more form field */
+.coll-search::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 17px;
+  height: 17px;
+  transform: translateY(-50%);
+  background: var(--muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+.coll-search-field {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 40px;
+}
+.coll-results-note {
+  margin: 10px 0 0;
+}
+.coll-hit {
+  align-items: center;
+  padding: 0;
+  gap: 10px;
+}
+.coll-hit-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.coll-hit-main:active {
+  transform: scale(0.99);
+  filter: brightness(0.94);
+}
+.coll-hit-side {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 36px;
+}
+.coll-hit-add {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--text);
+  font: 400 18px/1 var(--font);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.coll-hit-add:active,
+.coll-hit-added:active {
+  transform: scale(0.94);
+}
+.coll-hit-added {
+  border: 0;
+  background: none;
+  padding: 8px 0;
+  color: var(--accent);
+  font: 600 13px/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.coll-hit-in {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.coll-hit-error:empty {
+  display: none;
+}
+
+/* v2026-10-26 · Word sets: pick words from a ready-made set (nothing ticked at first, „Select All“, count). */
+.coll-sets-link {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  margin: 2px 0 14px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: 600 15px var(--font);
+  cursor: pointer;
+}
+.coll-sets-link .coll-line-chev {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1;
+  margin-left: 6px;
+  transform: translateY(-1px);
+}
+.coll-pick-top {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0 8px;
+}
+.coll-pick-count {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--muted);
+}
+.coll-pick-list {
+  margin-top: 0;
+}
+.coll-pick {
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+.coll-pick.is-in {
+  cursor: default;
+  opacity: 0.7;
+}
+/* round tick in the app's own look (the native box was a bright white square in dark mode) */
+.coll-pick-check {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 1.5px solid color-mix(in srgb, var(--text) 32%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+.coll-pick-check::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  margin-top: -2px;
+  border: solid var(--main-text);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.12s ease;
+}
+.coll-pick-check:checked {
+  background: var(--main-bg);
+  border-color: var(--main-bg);
+}
+.coll-pick-check:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+.coll-pick-name {
+  flex: 0 0 auto;
+  margin-bottom: 14px;
+}
+.coll-pick-name .coll-label {
+  margin-top: 4px;
+}
+.coll-pick-mark {
+  flex: 0 0 auto;
+  min-width: 22px;
+}
+.coll-pick-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.coll-pick-bottom {
+  flex: 0 0 auto;
+  margin-top: 10px;
+}
+.coll-pick-bottom .coll-main:disabled {
+  opacity: 0.5;
+}

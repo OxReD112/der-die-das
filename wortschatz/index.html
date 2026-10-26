@@ -16,8 +16,8 @@
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="icon" type="image/png" href="icon.png" />
     <link rel="apple-touch-icon" href="icon.png" />
-    <link rel="stylesheet" href="wortschatz.css?v=11" />
-    <link rel="stylesheet" href="collection-window.css?v=1" />
+    <link rel="stylesheet" href="wortschatz.css?v=13" />
+    <link rel="stylesheet" href="collection-window.css?v=6" />
   </head>
   <body>
     <main class="app">
@@ -37,8 +37,20 @@
           <p class="startNote" id="startNote"></p>
         </div>
         <div class="startActions">
-          <button class="ownWordsBtn" id="ownWordsBtn" type="button">＋ Use your own words</button>
           <button id="startBtn" type="button">Starten</button>
+        </div>
+      </section>
+      <section id="choose" aria-labelledby="chooseTitle">
+        <h1 class="title" id="chooseTitle">Wortschatz.</h1>
+        <p class="chooseQuestion">Where do you want to start?</p>
+        <div class="startWords chooseSets">
+          <div class="startLabel">Quick start</div>
+          <p class="chooseHint">Pick the words you want to learn</p>
+          <div class="chooseSetList" id="chooseSets"></div>
+        </div>
+        <div class="startActions">
+          <button class="chooseOwnBtn" id="chooseOwn" type="button">＋ Start with my own words</button>
+          <p class="chooseOwnHint">Search the Wörterbuch, type or import</p>
         </div>
       </section>
       <section class="stage" id="study" style="display: none">
@@ -140,12 +152,11 @@
     <script src="../components/deutsch-day-v1.js?v=1"></script>
     <script src="../components/deutsch-translation-v1.js?v=2"></script>
     <script src="../components/deutsch-wortschatz-due-v1.js?v=2"></script>
-    <script src="words.js?v=3"></script>
-    <script src="collection.js?v=6"></script>
+    <script src="collection.js?v=8"></script>
     <script src="dictionary-card.js?v=20261007-adjadv-1"></script>
   <script src="dictionary-import.js?v=20261007-adjadv-1"></script>
-    <script src="collection-window.js?v=20261007-adjadv-1"></script>
-    <script src="wortschatz.js?v=6"></script>
+    <script src="collection-window.js?v=20261026-nostarter-4"></script>
+    <script src="wortschatz.js?v=7"></script>
     <script src="../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

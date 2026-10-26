@@ -1,0 +1,1187 @@
+{
+ "id": "b2-c1",
+ "name": "B2 → C1",
+ "description": {
+  "en": "200 words that take you from B2 to C1.",
+  "ru": "200 слов, которые ведут с B2 на C1."
+ },
+ "version": 2,
+ "created": "2026-10-26",
+ "note": "Entries are Wörterbuch ids; an entry may carry its own sentence / sentenceTranslation / translation for this set (the Wörterbuch itself is not changed).",
+ "entries": [
+  {
+   "id": "noun-3866"
+  },
+  {
+   "id": "verb-1866"
+  },
+  {
+   "id": "adverb-366",
+   "sentence": "Wie das Ministerium {{c1::soeben}} mitteilte, bleibt die Brücke bis Montag gesperrt.",
+   "sentenceTranslation": {
+    "ru": "Как только что сообщило министерство, мост остаётся закрытым до понедельника.",
+    "en": "As the ministry has just announced, the bridge will remain closed until Monday."
+   }
+  },
+  {
+   "id": "noun-197"
+  },
+  {
+   "id": "verb-1947"
+  },
+  {
+   "id": "adjective-1056"
+  },
+  {
+   "id": "noun-2181"
+  },
+  {
+   "id": "verb-1868"
+  },
+  {
+   "id": "conjunction-038"
+  },
+  {
+   "id": "noun-4794"
+  },
+  {
+   "id": "adjective-1449"
+  },
+  {
+   "id": "verb-1957",
+   "sentence": "Seine Gelassenheit vor der Prüfung {{c1::grenzte}} schon an Gleichgültigkeit.",
+   "sentenceTranslation": {
+    "ru": "Его спокойствие перед экзаменом граничило уже с равнодушием.",
+    "en": "His calm before the exam was bordering on indifference."
+   }
+  },
+  {
+   "id": "noun-3513"
+  },
+  {
+   "id": "verb-2322",
+   "sentence": "Das Start-up {{c1::vertreibt}} seine Produkte ausschließlich online.",
+   "sentenceTranslation": {
+    "ru": "Стартап продаёт свою продукцию исключительно онлайн.",
+    "en": "The start-up sells its products exclusively online."
+   },
+   "translation": {
+    "ru": "сбывать, распространять (товар); изгонять",
+    "en": "to sell, to distribute; to drive out"
+   }
+  },
+  {
+   "id": "adjective-1461",
+   "sentence": "Eine Besichtigung ist nur nach {{c1::vorheriger}} Anmeldung möglich.",
+   "sentenceTranslation": {
+    "ru": "Осмотр возможен только по предварительной записи.",
+    "en": "Viewings are only possible by prior appointment."
+   }
+  },
+  {
+   "id": "noun-2962"
+  },
+  {
+   "id": "verb-2212",
+   "sentence": "Der Kleinstadt ist es gelungen, den Trend zur Abwanderung {{c1::umzukehren}}.",
+   "sentenceTranslation": {
+    "ru": "Городку удалось обратить вспять тенденцию оттока населения.",
+    "en": "The small town has managed to reverse the trend of people moving away."
+   },
+   "translation": {
+    "ru": "обращать вспять (тенденцию); поворачивать обратно",
+    "en": "to reverse (a trend); to turn back"
+   }
+  },
+  {
+   "id": "adjective-adverb-162"
+  },
+  {
+   "id": "noun-4740",
+   "sentence": "Der Roman wurde lange zu {{c1::Unrecht}} übersehen.",
+   "sentenceTranslation": {
+    "ru": "Роман долгое время незаслуженно оставался без внимания.",
+    "en": "The novel was long unjustly overlooked."
+   }
+  },
+  {
+   "id": "verb-2210",
+   "sentence": "Eine gute Chefin {{c1::umgibt}} sich mit Menschen, die ihr auch widersprechen.",
+   "sentenceTranslation": {
+    "ru": "Хорошая начальница окружает себя людьми, которые могут ей и возразить.",
+    "en": "A good boss surrounds herself with people who will also contradict her."
+   }
+  },
+  {
+   "id": "noun-4755"
+  },
+  {
+   "id": "verb-2420"
+  },
+  {
+   "id": "adverb-380",
+   "sentence": "Der Vorschlag klingt vernünftig, {{c1::wobei}} die Finanzierung noch völlig offen ist.",
+   "sentenceTranslation": {
+    "ru": "Предложение звучит разумно, хотя вопрос финансирования пока совершенно открыт.",
+    "en": "The proposal sounds reasonable, although the funding is still completely unresolved."
+   }
+  },
+  {
+   "id": "noun-3978",
+   "sentence": "Die {{c1::Besetzung}} der Professur hat sich um ein Jahr verzögert.",
+   "sentenceTranslation": {
+    "ru": "Замещение должности профессора затянулось на год.",
+    "en": "Filling the professorship has been delayed by a year."
+   },
+   "translation": {
+    "ru": "замещение (должности); состав исполнителей",
+    "en": "filling (a post); cast"
+   }
+  },
+  {
+   "id": "verb-2356"
+  },
+  {
+   "id": "adverb-398",
+   "sentence": "Die geplante Reform ist unter Fachleuten {{c1::höchst}} umstritten.",
+   "sentenceTranslation": {
+    "ru": "Планируемая реформа крайне спорна среди специалистов.",
+    "en": "The planned reform is highly controversial among experts."
+   }
+  },
+  {
+   "id": "noun-4473"
+  },
+  {
+   "id": "conjunction-057",
+   "sentence": "Studierende und Rentner zahlen 8 {{c1::beziehungsweise}} 6 Euro Eintritt.",
+   "sentenceTranslation": {
+    "ru": "Студенты и пенсионеры платят за вход 8 и 6 евро соответственно.",
+    "en": "Students and pensioners pay 8 and 6 euros admission respectively."
+   }
+  },
+  {
+   "id": "verb-1551",
+   "sentence": "Als Beleg für ihre These {{c1::führt}} die Autorin mehrere Studien {{c1::an}}.",
+   "sentenceTranslation": {
+    "ru": "В подтверждение своего тезиса автор приводит несколько исследований.",
+    "en": "The author cites several studies as evidence for her thesis."
+   }
+  },
+  {
+   "id": "noun-4084"
+  },
+  {
+   "id": "adjective-1116"
+  },
+  {
+   "id": "verb-2336",
+   "sentence": "Viele Studierende {{c1::verzweifeln}} an der Wohnungssuche in München.",
+   "sentenceTranslation": {
+    "ru": "Многие студенты приходят в отчаяние от поисков жилья в Мюнхене.",
+    "en": "Many students despair of finding a flat in Munich."
+   }
+  },
+  {
+   "id": "noun-3917",
+   "sentence": "In ihrem {{c1::Aufsatz}} für eine Fachzeitschrift untersucht die Soziologin das Wohnen im Alter.",
+   "sentenceTranslation": {
+    "ru": "В своей статье для научного журнала социолог исследует жильё для пожилых людей.",
+    "en": "In her paper for a journal, the sociologist examines housing in old age."
+   },
+   "translation": {
+    "ru": "статья (научная); сочинение",
+    "en": "paper, article; essay"
+   }
+  },
+  {
+   "id": "verb-1672"
+  },
+  {
+   "id": "adjective-1495"
+  },
+  {
+   "id": "noun-3572"
+  },
+  {
+   "id": "verb-1770",
+   "sentence": "Die Pläne sind erst gestern an die Öffentlichkeit {{c1::gedrungen}}.",
+   "sentenceTranslation": {
+    "ru": "Планы стали известны общественности только вчера.",
+    "en": "The plans only leaked to the public yesterday."
+   },
+   "translation": {
+    "ru": "проникать; an die Öffentlichkeit dringen — стать известным",
+    "en": "to penetrate; to leak out (to the public)"
+   }
+  },
+  {
+   "id": "adjective-adverb-398"
+  },
+  {
+   "id": "noun-3714"
+  },
+  {
+   "id": "verb-1721"
+  },
+  {
+   "id": "noun-3684"
+  },
+  {
+   "id": "adjective-903"
+  },
+  {
+   "id": "verb-1547",
+   "sentence": "In der Diskussion {{c1::brachte}} sie einen wichtigen Einwand {{c1::an}}.",
+   "sentenceTranslation": {
+    "ru": "В ходе дискуссии она высказала важное возражение.",
+    "en": "During the discussion she raised an important objection."
+   },
+   "translation": {
+    "ru": "высказывать (возражение, критику); прикреплять",
+    "en": "to raise (an objection); to attach"
+   }
+  },
+  {
+   "id": "noun-4085",
+   "sentence": "Der {{c1::Entwurf}} des neuen Klimagesetzes wird nächste Woche im Bundestag beraten.",
+   "sentenceTranslation": {
+    "ru": "Проект нового закона о климате будет обсуждаться в бундестаге на следующей неделе.",
+    "en": "The draft of the new climate law will be debated in the Bundestag next week."
+   }
+  },
+  {
+   "id": "verb-2162",
+   "sentence": "Wegen des Streiks hat die Airline heute über hundert Flüge {{c1::gestrichen}}.",
+   "sentenceTranslation": {
+    "ru": "Из-за забастовки авиакомпания сегодня отменила более ста рейсов.",
+    "en": "Because of the strike, the airline cancelled over a hundred flights today."
+   },
+   "translation": {
+    "ru": "отменять, сокращать (рейсы, выплаты); красить",
+    "en": "to cancel, to cut; to paint"
+   }
+  },
+  {
+   "id": "conjunction-051"
+  },
+  {
+   "id": "adverb-369"
+  },
+  {
+   "id": "noun-3959"
+  },
+  {
+   "id": "verb-2183",
+   "sentence": "Die Initiative hat dem Bürgermeister eine Petition mit 5000 Unterschriften {{c1::übergeben}}.",
+   "sentenceTranslation": {
+    "ru": "Инициативная группа вручила бургомистру петицию с 5000 подписей.",
+    "en": "The campaign group handed the mayor a petition with 5,000 signatures."
+   }
+  },
+  {
+   "id": "noun-3187"
+  },
+  {
+   "id": "adjective-1210"
+  },
+  {
+   "id": "verb-1946"
+  },
+  {
+   "id": "noun-4468"
+  },
+  {
+   "id": "verb-1184"
+  },
+  {
+   "id": "adjective-1414",
+   "sentence": "Es ist mir völlig {{c1::unverständlich}}, warum die Stadt das Projekt gestoppt hat.",
+   "sentenceTranslation": {
+    "ru": "Мне совершенно непонятно, почему город остановил проект.",
+    "en": "It is completely incomprehensible to me why the city stopped the project."
+   }
+  },
+  {
+   "id": "noun-3696"
+  },
+  {
+   "id": "verb-1607",
+   "sentence": "Die Forscher {{c1::stellten}} die These {{c1::auf}}, dass Schlafmangel das Gedächtnis schwächt.",
+   "sentenceTranslation": {
+    "ru": "Исследователи выдвинули тезис о том, что недосыпание ослабляет память.",
+    "en": "The researchers put forward the thesis that lack of sleep weakens memory."
+   },
+   "translation": {
+    "ru": "выдвигать (тезис, требование); ставить",
+    "en": "to put forward (a thesis); to set up"
+   }
+  },
+  {
+   "id": "adverb-322"
+  },
+  {
+   "id": "noun-3507"
+  },
+  {
+   "id": "verb-1883"
+  },
+  {
+   "id": "noun-3924"
+  },
+  {
+   "id": "adjective-646"
+  },
+  {
+   "id": "verb-2239",
+   "sentence": "Er konnte seine Enttäuschung kaum {{c1::verbergen}}.",
+   "sentenceTranslation": {
+    "ru": "Он едва мог скрыть своё разочарование.",
+    "en": "He could hardly hide his disappointment."
+   }
+  },
+  {
+   "id": "conjunction-039"
+  },
+  {
+   "id": "noun-3678"
+  },
+  {
+   "id": "verb-1876",
+   "sentence": "Durch den Hagel haben viele Landwirte große Verluste {{c1::erlitten}}.",
+   "sentenceTranslation": {
+    "ru": "Из-за града многие фермеры понесли большие убытки.",
+    "en": "Many farmers suffered heavy losses because of the hail."
+   }
+  },
+  {
+   "id": "adjective-adverb-309"
+  },
+  {
+   "id": "noun-3168"
+  },
+  {
+   "id": "verb-1718",
+   "sentence": "Die Ministerin {{c1::berief}} sich in ihrer Rede auf eine aktuelle Studie.",
+   "sentenceTranslation": {
+    "ru": "В своей речи министр сослалась на недавнее исследование.",
+    "en": "In her speech the minister invoked a recent study."
+   },
+   "translation": {
+    "ru": "ссылаться на (sich berufen auf); назначать",
+    "en": "to invoke, to refer to (sich berufen auf); to appoint"
+   }
+  },
+  {
+   "id": "noun-3723"
+  },
+  {
+   "id": "adjective-536"
+  },
+  {
+   "id": "verb-2299",
+   "sentence": "Die Politik darf die Augen nicht länger vor dem Fachkräftemangel {{c1::verschließen}}.",
+   "sentenceTranslation": {
+    "ru": "Политики больше не могут закрывать глаза на нехватку квалифицированных кадров.",
+    "en": "Politicians can no longer close their eyes to the skills shortage."
+   },
+   "translation": {
+    "ru": "закрывать глаза на (die Augen verschließen vor); запирать",
+    "en": "to close one's eyes to; to lock"
+   }
+  },
+  {
+   "id": "noun-3023"
+  },
+  {
+   "id": "verb-1678"
+  },
+  {
+   "id": "adverb-327"
+  },
+  {
+   "id": "noun-4232"
+  },
+  {
+   "id": "verb-1669"
+  },
+  {
+   "id": "adverb-381"
+  },
+  {
+   "id": "noun-3205"
+  },
+  {
+   "id": "verb-1671"
+  },
+  {
+   "id": "noun-3722"
+  },
+  {
+   "id": "conjunction-037"
+  },
+  {
+   "id": "adverb-382"
+  },
+  {
+   "id": "verb-1843",
+   "sentence": "Der Grafik ist zu {{c1::entnehmen}}, dass die Zahl der Studierenden gestiegen ist.",
+   "sentenceTranslation": {
+    "ru": "Из графика следует, что число студентов выросло.",
+    "en": "The chart shows that the number of students has risen."
+   }
+  },
+  {
+   "id": "noun-4842"
+  },
+  {
+   "id": "verb-1836",
+   "sentence": "Diese Ausstellung solltest du dir nicht {{c1::entgehen}} lassen!",
+   "sentenceTranslation": {
+    "ru": "Эту выставку тебе нельзя пропустить!",
+    "en": "You shouldn't miss this exhibition!"
+   },
+   "translation": {
+    "ru": "упускать (sich etw. nicht entgehen lassen — не упустить)",
+    "en": "to miss (sich etw. nicht entgehen lassen — not to miss sth)"
+   }
+  },
+  {
+   "id": "adjective-1060",
+   "sentence": "Der Zeitpunkt war {{c1::denkbar}} ungünstig.",
+   "sentenceTranslation": {
+    "ru": "Момент был крайне неудачным.",
+    "en": "The timing was extremely unfortunate."
+   }
+  },
+  {
+   "id": "noun-3860"
+  },
+  {
+   "id": "verb-2319"
+  },
+  {
+   "id": "noun-4130"
+  },
+  {
+   "id": "adjective-1171"
+  },
+  {
+   "id": "verb-2441"
+  },
+  {
+   "id": "noun-4834"
+  },
+  {
+   "id": "adjective-1020"
+  },
+  {
+   "id": "verb-2387"
+  },
+  {
+   "id": "noun-3529"
+  },
+  {
+   "id": "verb-2293",
+   "sentence": "Bevor ich mich entscheide, muss ich mir erst einen Überblick {{c1::verschaffen}}.",
+   "sentenceTranslation": {
+    "ru": "Прежде чем решить, мне нужно сначала составить общее представление.",
+    "en": "Before I decide, I first need to get an overview."
+   },
+   "translation": {
+    "ru": "обеспечивать (себе); sich einen Überblick verschaffen — составить представление",
+    "en": "to provide, to obtain; to get (an overview)"
+   }
+  },
+  {
+   "id": "adverb-337"
+  },
+  {
+   "id": "noun-4265"
+  },
+  {
+   "id": "verb-1944"
+  },
+  {
+   "id": "conjunction-040",
+   "sentence": "Die Ergebnisse sind {{c1::insofern}} überraschend, als niemand mit einem so klaren Unterschied gerechnet hatte.",
+   "sentenceTranslation": {
+    "ru": "Результаты удивительны в том смысле, что никто не ожидал такой явной разницы.",
+    "en": "The results are surprising insofar as nobody had expected such a clear difference."
+   },
+   "translation": {
+    "ru": "в том смысле, что (insofern … als); поскольку",
+    "en": "insofar as; in that"
+   }
+  },
+  {
+   "id": "noun-4551",
+   "sentence": "Die Studierenden organisieren das Festival ganz in eigener {{c1::Regie}}.",
+   "sentenceTranslation": {
+    "ru": "Студенты организуют фестиваль полностью самостоятельно.",
+    "en": "The students organise the festival entirely on their own."
+   },
+   "translation": {
+    "ru": "руководство (in eigener Regie — самостоятельно); режиссура",
+    "en": "management (in eigener Regie — on one's own); direction"
+   }
+  },
+  {
+   "id": "adjective-654"
+  },
+  {
+   "id": "verb-1739",
+   "sentence": "Mit dem Projekt {{c1::betritt}} die Universität wissenschaftliches Neuland.",
+   "sentenceTranslation": {
+    "ru": "Этим проектом университет вступает на новую для науки территорию.",
+    "en": "With this project the university is breaking new scientific ground."
+   },
+   "translation": {
+    "ru": "вступать (Neuland betreten); входить",
+    "en": "to enter; to break (new ground)"
+   }
+  },
+  {
+   "id": "noun-1087"
+  },
+  {
+   "id": "verb-1696",
+   "sentence": "Das Unternehmen {{c1::bekennt}} sich klar zu den Klimazielen.",
+   "sentenceTranslation": {
+    "ru": "Компания открыто заявляет о своей приверженности климатическим целям.",
+    "en": "The company clearly commits itself to the climate targets."
+   },
+   "translation": {
+    "ru": "заявлять о приверженности (sich bekennen zu); признавать",
+    "en": "to commit oneself (to); to admit"
+   }
+  },
+  {
+   "id": "adverb-037"
+  },
+  {
+   "id": "noun-3869"
+  },
+  {
+   "id": "verb-1504"
+  },
+  {
+   "id": "noun-4580",
+   "sentence": "Nach zwanzig Jahren kündigte die Abgeordnete ihren {{c1::Rückzug}} aus der Politik an.",
+   "sentenceTranslation": {
+    "ru": "Спустя двадцать лет депутат объявила о своём уходе из политики.",
+    "en": "After twenty years the MP announced her withdrawal from politics."
+   },
+   "translation": {
+    "ru": "уход (из политики, от дел); отступление",
+    "en": "withdrawal, retirement; retreat"
+   }
+  },
+  {
+   "id": "adjective-1265",
+   "sentence": "Die Antwort der Behörde kam {{c1::reichlich}} spät.",
+   "sentenceTranslation": {
+    "ru": "Ответ ведомства пришёл довольно-таки поздно.",
+    "en": "The authority's answer came rather late."
+   },
+   "translation": {
+    "ru": "довольно-таки, слишком (reichlich spät); обильный",
+    "en": "rather, quite (reichlich spät); plentiful"
+   }
+  },
+  {
+   "id": "verb-1985",
+   "sentence": "Dem habe ich nichts {{c1::hinzuzufügen}}.",
+   "sentenceTranslation": {
+    "ru": "Мне к этому нечего добавить.",
+    "en": "I have nothing to add to that."
+   }
+  },
+  {
+   "id": "noun-3908",
+   "sentence": "Die Kampagne soll zur {{c1::Aufklärung}} über die Risiken des Rauchens beitragen.",
+   "sentenceTranslation": {
+    "ru": "Кампания должна способствовать информированию о рисках курения.",
+    "en": "The campaign is meant to help inform people about the risks of smoking."
+   },
+   "translation": {
+    "ru": "информирование, просвещение (über); выяснение",
+    "en": "informing, education (about); clarification"
+   }
+  },
+  {
+   "id": "adverb-291"
+  },
+  {
+   "id": "verb-1555",
+   "sentence": "Wenn die Trockenheit weiter {{c1::anhält}}, drohen Ernteausfälle.",
+   "sentenceTranslation": {
+    "ru": "Если засуха продолжится, возможны неурожаи.",
+    "en": "If the drought continues, crop failures are likely."
+   },
+   "translation": {
+    "ru": "продолжаться, длиться; останавливать(ся)",
+    "en": "to continue, to last; to stop"
+   }
+  },
+  {
+   "id": "noun-2266"
+  },
+  {
+   "id": "verb-1861"
+  },
+  {
+   "id": "adjective-1424"
+  },
+  {
+   "id": "adverb-357"
+  },
+  {
+   "id": "noun-4741"
+  },
+  {
+   "id": "verb-1676"
+  },
+  {
+   "id": "noun-4823"
+  },
+  {
+   "id": "adverb-284"
+  },
+  {
+   "id": "verb-1708",
+   "sentence": "Wer ein Problem lösen will, muss es zuerst klar {{c1::benennen}}.",
+   "sentenceTranslation": {
+    "ru": "Кто хочет решить проблему, должен сначала чётко её обозначить.",
+    "en": "Anyone who wants to solve a problem must first name it clearly."
+   },
+   "translation": {
+    "ru": "(чётко) назвать, обозначить",
+    "en": "to name, to identify clearly"
+   }
+  },
+  {
+   "id": "noun-3944"
+  },
+  {
+   "id": "adjective-1045"
+  },
+  {
+   "id": "verb-2307",
+   "sentence": "Versuch doch mal, dich in seine Lage zu {{c1::versetzen}}.",
+   "sentenceTranslation": {
+    "ru": "Попробуй поставить себя на его место.",
+    "en": "Try putting yourself in his position."
+   },
+   "translation": {
+    "ru": "sich in jmds Lage versetzen — поставить себя на чьё-то место; переводить",
+    "en": "to put oneself in someone's position; to transfer"
+   }
+  },
+  {
+   "id": "noun-3956",
+   "sentence": "Wer ein Stipendium erhält, kann eine {{c1::Befreiung}} von den Studiengebühren beantragen.",
+   "sentenceTranslation": {
+    "ru": "Получатели стипендии могут подать заявление об освобождении от платы за обучение.",
+    "en": "Scholarship holders can apply for exemption from tuition fees."
+   },
+   "translation": {
+    "ru": "освобождение (от обязанности, платы)",
+    "en": "exemption; liberation"
+   }
+  },
+  {
+   "id": "verb-2245"
+  },
+  {
+   "id": "noun-4335"
+  },
+  {
+   "id": "adjective-adverb-537",
+   "sentence": "Das darfst du nicht so {{c1::wörtlich}} nehmen.",
+   "sentenceTranslation": {
+    "ru": "Не надо понимать это так буквально.",
+    "en": "You shouldn't take that so literally."
+   }
+  },
+  {
+   "id": "verb-2393",
+   "sentence": "In ihrer Masterarbeit {{c1::widmet}} sie sich der Frage, wie Kinder zweisprachig aufwachsen.",
+   "sentenceTranslation": {
+    "ru": "В магистерской работе она занимается вопросом о том, как дети растут двуязычными.",
+    "en": "In her master's thesis she devotes herself to the question of how children grow up bilingual."
+   },
+   "translation": {
+    "ru": "посвящать (себя чему-то — sich widmen)",
+    "en": "to devote (oneself) to"
+   }
+  },
+  {
+   "id": "noun-3902",
+   "sentence": "Der {{c1::Aufbau}} der Hausarbeit sollte klar und logisch sein.",
+   "sentenceTranslation": {
+    "ru": "Структура курсовой работы должна быть ясной и логичной.",
+    "en": "The structure of the term paper should be clear and logical."
+   },
+   "translation": {
+    "ru": "структура, строение; создание",
+    "en": "structure; building up"
+   }
+  },
+  {
+   "custom": {
+    "base": "wenngleich",
+    "pos": "Andere",
+    "sentence": "Das Konzept überzeugt, {{c1::wenngleich}} einige Details noch fehlen.",
+    "sentenceTranslation": {
+     "ru": "Концепция убедительна, хотя некоторых деталей ещё не хватает.",
+     "en": "The concept is convincing, even though some details are still missing."
+    },
+    "translation": {
+     "ru": "хотя, пусть даже",
+     "en": "although, even though"
+    }
+   }
+  },
+  {
+   "id": "verb-1677"
+  },
+  {
+   "id": "verb-1596"
+  },
+  {
+   "id": "adverb-321"
+  },
+  {
+   "id": "verb-1723"
+  },
+  {
+   "id": "adverb-346",
+   "sentence": "Zum Datenschutz gibt es viele Fragen. {{c1::Hierzu}} hat die Behörde ein Merkblatt veröffentlicht.",
+   "sentenceTranslation": {
+    "ru": "По защите данных возникает много вопросов. По этому поводу ведомство опубликовало памятку.",
+    "en": "There are many questions about data protection. The authority has published an information sheet on this."
+   }
+  },
+  {
+   "id": "noun-4681"
+  },
+  {
+   "id": "verb-1945",
+   "sentence": "Ich muss {{c1::gestehen}}, dass ich den Vortrag nicht ganz verstanden habe.",
+   "sentenceTranslation": {
+    "ru": "Должна признаться, что не совсем поняла доклад.",
+    "en": "I must admit I didn't quite understand the talk."
+   },
+   "translation": {
+    "ru": "признаваться (ich muss gestehen — должна признаться)",
+    "en": "to admit, to confess"
+   }
+  },
+  {
+   "id": "verb-1315"
+  },
+  {
+   "id": "adjective-1007"
+  },
+  {
+   "id": "verb-2425",
+   "sentence": "Das Medikament ist in der EU noch nicht {{c1::zugelassen}}.",
+   "sentenceTranslation": {
+    "ru": "Лекарство в ЕС ещё не одобрено.",
+    "en": "The drug has not yet been approved in the EU."
+   }
+  },
+  {
+   "id": "noun-4653"
+  },
+  {
+   "custom": {
+    "base": "gleichwohl",
+    "pos": "Andere",
+    "sentence": "Die Kosten sind hoch. {{c1::Gleichwohl}} halten wir das Projekt für sinnvoll.",
+    "sentenceTranslation": {
+     "ru": "Расходы высоки. Тем не менее мы считаем проект целесообразным.",
+     "en": "The costs are high. Nevertheless, we consider the project worthwhile."
+    },
+    "translation": {
+     "ru": "тем не менее, однако",
+     "en": "nevertheless"
+    }
+   }
+  },
+  {
+   "id": "verb-2248"
+  },
+  {
+   "id": "verb-2220"
+  },
+  {
+   "id": "verb-2378",
+   "sentence": "Die alte Fabrik musste einem Neubau {{c1::weichen}}.",
+   "sentenceTranslation": {
+    "ru": "Старой фабрике пришлось уступить место новостройке.",
+    "en": "The old factory had to make way for a new building."
+   },
+   "translation": {
+    "ru": "уступать (место); отступать",
+    "en": "to make way (for); to give way"
+   }
+  },
+  {
+   "id": "noun-3880"
+  },
+  {
+   "custom": {
+    "base": "demnach",
+    "pos": "Andere",
+    "sentence": "Laut der Studie schlafen Jugendliche zu wenig. {{c1::Demnach}} sollte die Schule später beginnen.",
+    "sentenceTranslation": {
+     "ru": "Согласно исследованию, подростки спят слишком мало. Следовательно, школа должна начинаться позже.",
+     "en": "According to the study, teenagers sleep too little. Accordingly, school should start later."
+    },
+    "translation": {
+     "ru": "следовательно; согласно этому",
+     "en": "accordingly, therefore"
+    }
+   }
+  },
+  {
+   "id": "verb-1505"
+  },
+  {
+   "id": "noun-4782"
+  },
+  {
+   "custom": {
+    "base": "angesichts",
+    "pos": "Andere",
+    "sentence": "{{c1::Angesichts}} der hohen Mieten ziehen viele Familien aufs Land.",
+    "sentenceTranslation": {
+     "ru": "Ввиду высокой арендной платы многие семьи переезжают за город.",
+     "en": "In view of the high rents, many families are moving to the countryside."
+    },
+    "translation": {
+     "ru": "ввиду, учитывая (+ Gen.)",
+     "en": "in view of, given (+ gen.)"
+    }
+   }
+  },
+  {
+   "id": "adverb-314"
+  },
+  {
+   "id": "verb-1767"
+  },
+  {
+   "id": "verb-2404"
+  },
+  {
+   "id": "verb-2406",
+   "sentence": "Die Koalition ist am Streit über den Haushalt {{c1::zerbrochen}}.",
+   "sentenceTranslation": {
+    "ru": "Коалиция распалась из-за спора о бюджете.",
+    "en": "The coalition broke up over the budget dispute."
+   },
+   "translation": {
+    "ru": "распадаться (an etw. — из-за чего-то); разбиваться",
+    "en": "to break up (over sth); to break"
+   }
+  },
+  {
+   "custom": {
+    "base": "die Rahmenbedingungen",
+    "pos": "Substantiv",
+    "sentence": "Die Regierung will bessere {{c1::Rahmenbedingungen}} für kleine Unternehmen schaffen.",
+    "sentenceTranslation": {
+     "ru": "Правительство хочет создать лучшие условия для малого бизнеса.",
+     "en": "The government wants to create better conditions for small businesses."
+    },
+    "translation": {
+     "ru": "общие условия, рамки",
+     "en": "general conditions, framework"
+    }
+   }
+  },
+  {
+   "id": "verb-2053"
+  },
+  {
+   "id": "verb-2353"
+  },
+  {
+   "id": "noun-3863"
+  },
+  {
+   "id": "adjective-adverb-522"
+  },
+  {
+   "id": "verb-2392"
+  },
+  {
+   "id": "noun-3835"
+  },
+  {
+   "id": "adjective-1108"
+  },
+  {
+   "id": "verb-2224",
+   "sentence": "Die Preise {{c1::unterliegen}} starken saisonalen Schwankungen.",
+   "sentenceTranslation": {
+    "ru": "Цены подвержены сильным сезонным колебаниям.",
+    "en": "Prices are subject to strong seasonal fluctuations."
+   },
+   "translation": {
+    "ru": "подлежать, быть подверженным (чему-то); проигрывать",
+    "en": "to be subject to; to lose (to)"
+   }
+  },
+  {
+   "id": "noun-4635"
+  },
+  {
+   "id": "verb-1609",
+   "sentence": "Im Laufe des Projekts {{c1::tauchten}} immer neue Probleme {{c1::auf}}.",
+   "sentenceTranslation": {
+    "ru": "В ходе проекта возникали всё новые проблемы.",
+    "en": "New problems kept cropping up during the project."
+   }
+  },
+  {
+   "custom": {
+    "base": "die Tragweite",
+    "pos": "Substantiv",
+    "sentence": "Viele haben die {{c1::Tragweite}} dieser Entscheidung unterschätzt.",
+    "sentenceTranslation": {
+     "ru": "Многие недооценили значимость этого решения.",
+     "en": "Many underestimated the significance of this decision."
+    },
+    "translation": {
+     "ru": "значимость, масштаб последствий",
+     "en": "significance, scope"
+    }
+   }
+  },
+  {
+   "custom": {
+    "base": "der Missstand",
+    "pos": "Substantiv",
+    "sentence": "Die Journalistin deckte zahlreiche {{c1::Missstände}} in der Pflege auf.",
+    "sentenceTranslation": {
+     "ru": "Журналистка вскрыла многочисленные недостатки в сфере ухода за больными.",
+     "en": "The journalist exposed numerous failings in the care sector."
+    },
+    "translation": {
+     "ru": "недостаток, неблагополучие (в системе)",
+     "en": "grievance, deplorable state of affairs"
+    }
+   }
+  },
+  {
+   "id": "verb-1720",
+   "sentence": "Der Vortrag {{c1::berührte}} auch die Frage der Finanzierung.",
+   "sentenceTranslation": {
+    "ru": "Доклад затронул и вопрос финансирования.",
+    "en": "The talk also touched on the question of funding."
+   },
+   "translation": {
+    "ru": "затрагивать (вопрос, тему); трогать",
+    "en": "to touch on (a question); to touch"
+   }
+  },
+  {
+   "id": "conjunction-041"
+  },
+  {
+   "id": "noun-4726"
+  },
+  {
+   "id": "adjective-1460"
+  },
+  {
+   "id": "verb-1852"
+  },
+  {
+   "custom": {
+    "base": "die Abwägung",
+    "pos": "Substantiv",
+    "sentence": "Nach sorgfältiger {{c1::Abwägung}} aller Argumente haben wir uns dagegen entschieden.",
+    "sentenceTranslation": {
+     "ru": "После тщательного взвешивания всех аргументов мы решили против.",
+     "en": "After careful consideration of all the arguments, we decided against it."
+    },
+    "translation": {
+     "ru": "взвешивание (за и против), оценка",
+     "en": "weighing up, consideration"
+    }
+   }
+  },
+  {
+   "id": "adjective-1359"
+  },
+  {
+   "id": "verb-1554"
+  },
+  {
+   "id": "noun-4727"
+  },
+  {
+   "id": "verb-2187",
+   "sentence": "Die Entscheidung {{c1::überlasse}} ich ganz dir.",
+   "sentenceTranslation": {
+    "ru": "Решение я полностью оставляю за тобой.",
+    "en": "I'll leave the decision entirely up to you."
+   }
+  },
+  {
+   "id": "noun-4675",
+   "sentence": "Der Minister wollte zu den Vorwürfen zunächst nicht {{c1::Stellung}} nehmen.",
+   "sentenceTranslation": {
+    "ru": "Министр поначалу не захотел высказываться по поводу обвинений.",
+    "en": "The minister initially declined to comment on the allegations."
+   },
+   "translation": {
+    "ru": "позиция (Stellung nehmen — высказываться); положение",
+    "en": "position, stance (Stellung nehmen — to comment)"
+   }
+  },
+  {
+   "custom": {
+    "base": "die Teilhabe",
+    "pos": "Substantiv",
+    "sentence": "Bildung ist eine wichtige Voraussetzung für gesellschaftliche {{c1::Teilhabe}}.",
+    "sentenceTranslation": {
+     "ru": "Образование — важное условие участия в жизни общества.",
+     "en": "Education is an important prerequisite for participation in society."
+    },
+    "translation": {
+     "ru": "участие, сопричастность",
+     "en": "participation"
+    }
+   }
+  },
+  {
+   "id": "verb-1667"
+  },
+  {
+   "id": "noun-3969"
+  },
+  {
+   "id": "adjective-1454",
+   "sentence": "Mit dem Baubeginn hat die Stadt {{c1::vollendete}} Tatsachen geschaffen.",
+   "sentenceTranslation": {
+    "ru": "Начав строительство, город поставил всех перед свершившимся фактом.",
+    "en": "By starting construction, the city has created a fait accompli."
+   },
+   "translation": {
+    "ru": "свершившийся (vollendete Tatsachen — свершившийся факт); совершенный",
+    "en": "accomplished (vollendete Tatsachen — fait accompli); perfect"
+   }
+  },
+  {
+   "id": "verb-1260"
+  },
+  {
+   "id": "noun-4385"
+  },
+  {
+   "id": "verb-1738"
+  },
+  {
+   "id": "noun-4143"
+  },
+  {
+   "custom": {
+    "base": "der Werdegang",
+    "pos": "Substantiv",
+    "sentence": "In ihrer Bewerbung beschreibt sie ihren beruflichen {{c1::Werdegang}}.",
+    "sentenceTranslation": {
+     "ru": "В своём заявлении она описывает свой профессиональный путь.",
+     "en": "In her application she describes her professional background."
+    },
+    "translation": {
+     "ru": "путь, карьера (профессиональная)",
+     "en": "career path, background"
+    }
+   }
+  },
+  {
+   "id": "conjunction-054"
+  },
+  {
+   "id": "verb-1534"
+  },
+  {
+   "id": "noun-4441",
+   "sentence": "Im {{c1::Mittelpunkt}} der Konferenz steht die digitale Bildung.",
+   "sentenceTranslation": {
+    "ru": "В центре внимания конференции — цифровое образование.",
+    "en": "Digital education is the focus of the conference."
+   },
+   "translation": {
+    "ru": "центр внимания (im Mittelpunkt stehen); центр",
+    "en": "focus (im Mittelpunkt stehen); centre"
+   }
+  },
+  {
+   "custom": {
+    "base": "die Zumutung",
+    "pos": "Substantiv",
+    "sentence": "Drei Stunden Wartezeit beim Amt sind eine echte {{c1::Zumutung}}.",
+    "sentenceTranslation": {
+     "ru": "Три часа ожидания в ведомстве — это настоящее безобразие.",
+     "en": "A three-hour wait at the office is a real imposition."
+    },
+    "translation": {
+     "ru": "чрезмерное требование, безобразие",
+     "en": "imposition, unreasonable demand"
+    }
+   }
+  },
+  {
+   "id": "verb-1691",
+   "sentence": "Wie soll ich ihr nur {{c1::beibringen}}, dass ihr Projekt gestrichen wurde?",
+   "sentenceTranslation": {
+    "ru": "Как же мне сообщить ей, что её проект отменили?",
+    "en": "How on earth am I going to break it to her that her project has been cancelled?"
+   },
+   "translation": {
+    "ru": "(осторожно) сообщить; учить",
+    "en": "to break (news) to; to teach"
+   }
+  },
+  {
+   "custom": {
+    "base": "die Vereinbarkeit",
+    "pos": "Substantiv",
+    "sentence": "Die {{c1::Vereinbarkeit}} von Familie und Beruf ist für viele Eltern ein großes Thema.",
+    "sentenceTranslation": {
+     "ru": "Совмещение семьи и работы — важная тема для многих родителей.",
+     "en": "Balancing family and career is a big issue for many parents."
+    },
+    "translation": {
+     "ru": "совместимость, возможность совмещать",
+     "en": "compatibility, balancing"
+    }
+   }
+  },
+  {
+   "id": "adjective-1013"
+  },
+  {
+   "id": "verb-2292"
+  },
+  {
+   "id": "noun-4474",
+   "sentence": "Die Debatte blieb leider an der {{c1::Oberfläche}}.",
+   "sentenceTranslation": {
+    "ru": "Дебаты, к сожалению, остались поверхностными.",
+    "en": "Unfortunately the debate stayed on the surface."
+   },
+   "translation": {
+    "ru": "поверхность (an der Oberfläche bleiben — оставаться поверхностным)",
+    "en": "surface (an der Oberfläche bleiben — to stay superficial)"
+   }
+  }
+ ]
+}

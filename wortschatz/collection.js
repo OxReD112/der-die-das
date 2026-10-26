@@ -5,8 +5,9 @@
    - deutschWortschatzCollectionV1   the user's own collection:
        { v:1, name, createdAt, nextId, cards:[ {id:"u1", sentence, blank, revealed, target,
          translation, sentenceTranslation, grammar, pos, base} ] }
-     No key = the built-in set (words.js) is used.
-   - deutschWortschatzDemoProgressV1 the built-in set's progress, set aside while an own collection is active.
+     No key = no words yet: Wortschatz shows „Where do you want to start?“ (word sets or own words).
+     (2026-10-26: the built-in Starter-Set is gone. Old Starter-Set progress is moved into an own collection
+     „Starter-Set“ once, see migrateLegacy(); the set-aside demo progress key is dropped.)
    - wortsternSRSv03                 progress of the ACTIVE collection (unchanged key, so Home's due count,
                                      daily points and Restore keep working as before).
 
@@ -15,7 +16,12 @@
    - Translations of own cards are plain strings (one language); the language switch doesn't touch them.
    - Required per card: a sentence with at least one {{c1::…}} and a translation (meaning of the word).
      Several {{c1::…}} = pieces of ONE answer (separable verbs). blank / revealed / target are built here.
-   - Duplicates = same base form (article der/die/das ignored; base defaults to the hidden word(s)) or the very same sentence.
+   - Duplicates (v2, 2026-10-26) = the very same sentence, or: two cards from the Wörterbuch (both have dictionaryId)
+     are duplicates only if they are the same dictionary card — so different meanings of one word (Block: 3 cards)
+     can be added independently; otherwise (at least one card typed / imported without dictionaryId) the same base
+     form (article der/die/das ignored; base defaults to the hidden word(s)) as before.
+   - Card fields kept by this file besides the learning fields: dictionaryId (the Wörterbuch card the word came from),
+     nextNew (true = placed as one of the next new words, see add()).
    - Functions that change progress write straight to localStorage: the page must reload afterwards
      (the Wortschatz page keeps its progress in memory and would otherwise overwrite it). */
 (function () {
@@ -112,9 +118,24 @@
   // A word counts as already there if its base form matches, or the whole sentence is the same.
   // Hidden words alone are NOT compared: „der Bescheid“ and „Bescheid geben“ hide the same word but are
   // different things to learn. A duplicate slipping through is harmless; skipping a wanted word is not.
-  function germanKeys(card) {
-    return [...new Set(["b:" + germanKey(card), "s:" + str(card.sentence).toLowerCase()])];
+  // Duplicate index (v2): see the rule in the header.
+  function dupIndex(list) {
+    const ix = { s: new Set(), d: new Set(), bAll: new Set(), bNoId: new Set() };
+    ix.put = c => {
+      ix.s.add(str(c.sentence).toLowerCase());
+      ix.bAll.add(germanKey(c));
+      if (c.dictionaryId) ix.d.add(String(c.dictionaryId));
+      else ix.bNoId.add(germanKey(c));
+    };
+    ix.has = c => {
+      if (ix.s.has(str(c.sentence).toLowerCase())) return true;
+      return c.dictionaryId ? ix.d.has(String(c.dictionaryId)) || ix.bNoId.has(germanKey(c)) : ix.bAll.has(germanKey(c));
+    };
+    (list || []).forEach(ix.put);
+    return ix;
   }
+  // Is this word (a card, or {dictionaryId, base, sentence}) already in the own collection?
+  const has = c => dupIndex(cards()).has(c);
   // Returns {card} or {reason}. Reasons are short English texts for the import summary (the collection screens are in English).
   function normalize(raw) {
     if (!raw || typeof raw !== "object") return { reason: "Not a valid entry" };
@@ -138,6 +159,8 @@
       pos: str(raw.pos),
       base: str(raw.base) || parts.join(" ")
     };
+    const dictionaryId = str(raw.dictionaryId);
+    if (dictionaryId) card.dictionaryId = dictionaryId;
     return { card };
   }
 
@@ -154,8 +177,7 @@
 
   // Checks a list against the cards already there. Nothing is saved.
   function prepare(items, existing) {
-    const seen = new Set();
-    (existing || []).forEach(c => germanKeys(c).forEach(k => seen.add(k)));
+    const seen = dupIndex(existing);
     const ok = [],
       skipped = [];
     let duplicates = 0;
@@ -165,12 +187,11 @@
         skipped.push({ n: i + 1, reason: r.reason, preview: str(raw && raw.sentence).slice(0, 60) });
         return;
       }
-      const ks = germanKeys(r.card);
-      if (ks.some(k => seen.has(k))) {
+      if (seen.has(r.card)) {
         duplicates++;
         return;
       }
-      ks.forEach(k => seen.add(k));
+      seen.put(r.card);
       ok.push(r.card);
     });
     return { cards: ok, skipped, duplicates };
@@ -182,21 +203,24 @@
   const summary = (p, extra) =>
     Object.assign({ added: p.cards.length, skipped: p.skipped, duplicates: p.duplicates }, extra || {});
 
-  // Switch from the built-in set to an own collection. The demo progress is set aside.
+  // Start the own collection (there is none yet).
   function create(name, items) {
     if (isOwn()) throw new Error("already-own");
     const p = prepare(items, []);
     if (!p.cards.length) return summary(p, { created: false });
     const c = { v: 1, name: str(name) || "My Words", createdAt: new Date().toISOString(), nextId: 1, cards: [] };
     c.cards = withIds(c, p.cards);
-    const demo = localStorage.getItem(PROGRESS_KEY);
     write(KEY, c); // throws if storage is full — nothing changed yet
-    if (demo !== null) localStorage.setItem(DEMO_KEY, demo);
+    localStorage.removeItem(DEMO_KEY);
     write(PROGRESS_KEY, { cards: {}, activeIds: [] }); // Wortschatz picks the first 10 words on its next start
     return summary(p, { created: true });
   }
 
-  // Add more words to the own collection. activateNow: cards become active right away (due today).
+  // Add more words to the own collection.
+  // placement "next" (v2, 2026-10-26; „Learn Now“ on): the words come with the next „+ 5 neue Wörter“ — after the
+  //   words already started and after earlier „next“ words, in the order they were added (nextNew flag). Not started.
+  // placement "end" („Learn Now“ off): at the very end of the list.
+  // activateNow (old „Learn Now“, no longer used by the window): cards become active right away (due today).
   function add(items, { activateNow = false, placement = "end" } = {}) {
     const c = get();
     if (!c) throw new Error("no-collection");
@@ -207,7 +231,14 @@
     const fresh = withIds(c, p.cards);
     if (placement === "next") {
       const active = new Set((read(PROGRESS_KEY)?.activeIds || []).map(String));
-      c.cards = c.cards.filter(card => active.has(String(card.id))).concat(fresh, c.cards.filter(card => !active.has(String(card.id))));
+      const isActive = card => active.has(String(card.id));
+      c.cards.forEach(card => {
+        if (isActive(card)) delete card.nextNew; // started: no longer waiting
+      });
+      fresh.forEach(card => (card.nextNew = true));
+      c.cards = c.cards
+        .filter(isActive)
+        .concat(c.cards.filter(card => !isActive(card) && card.nextNew), fresh, c.cards.filter(card => !isActive(card) && !card.nextNew));
     } else c.cards = c.cards.concat(fresh);
     write(KEY, c);
     if (activateNow) {
@@ -233,10 +264,10 @@
     FIELDS.forEach(f => (merged[f] = fields && fields[f] !== undefined ? fields[f] : c.cards[i][f]));
     const r = normalize(merged);
     if (!r.card) return r;
-    const ks = germanKeys(r.card);
-    if (c.cards.some((x, j) => j !== i && germanKeys(x).some(k => ks.includes(k))))
-      return { reason: "This word is already in your collection" };
-    c.cards[i] = Object.assign({ id, addedAt: c.cards[i].addedAt }, r.card);
+    const old = c.cards[i];
+    if (old.dictionaryId && !r.card.dictionaryId) r.card.dictionaryId = old.dictionaryId; // edited dictionary word: same meaning
+    if (dupIndex(c.cards.filter((x, j) => j !== i)).has(r.card)) return { reason: "This word is already in your collection" };
+    c.cards[i] = Object.assign({ id, addedAt: old.addedAt }, r.card, old.nextNew ? { nextNew: true } : {});
     write(KEY, c);
     return { card: c.cards[i] };
   }
@@ -273,6 +304,7 @@
         FIELDS.forEach(f => {
           if (x[f]) o[f] = x[f];
         });
+        if (x.dictionaryId) o.dictionaryId = x.dictionaryId;
         return o;
       }),
       null,
@@ -280,19 +312,56 @@
     );
   }
 
-  // Delete the own collection and go back to the built-in set.
-  // continueDemo: true = restore the demo progress that was set aside, false = start the demo from zero.
-  function backToDemo(continueDemo) {
-    const demo = localStorage.getItem(DEMO_KEY);
-    if (continueDemo && demo !== null) localStorage.setItem(PROGRESS_KEY, demo);
-    else localStorage.setItem(PROGRESS_KEY, JSON.stringify({ cards: {}, activeIds: [] }));
+  // Delete the own collection and its progress: Wortschatz is empty again („Where do you want to start?“).
+  function deleteCollection() {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify({ cards: {}, activeIds: [] }));
     localStorage.removeItem(KEY);
     localStorage.removeItem(DEMO_KEY);
   }
-  const hasDemoProgress = () => {
-    const d = read(DEMO_KEY);
-    return !!(d && Array.isArray(d.activeIds) && d.activeIds.length);
-  };
+
+  /* One-time move of the old built-in Starter-Set (2026-10-26). Users who practised with it keep the words
+     they had started, with their progress, as an own collection „Starter-Set“; words never started are dropped.
+     The old cards are read from legacy/starter-set.js (window.WORDS format, never executed). Synchronous on
+     purpose: Wortschatz reads the collection while the page loads. If anything fails, nothing is changed. */
+  function needsLegacyMove() {
+    if (isOwn()) return false;
+    const st = read(PROGRESS_KEY);
+    return !!(st && Array.isArray(st.activeIds) && st.activeIds.some(id => typeof id === "number" || /^\d+$/.test(String(id))));
+  }
+  function migrateLegacy(url) {
+    if (!needsLegacyMove()) return false;
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url, false);
+      xhr.send();
+      if (xhr.status && xhr.status !== 200) return false;
+      const old = parse(xhr.responseText).items;
+      const st = read(PROGRESS_KEY);
+      const started = new Set(st.activeIds.map(String));
+      const c = { v: 1, name: "Starter-Set", createdAt: new Date().toISOString(), nextId: 1, cards: [] };
+      const progress = { cards: {}, activeIds: [] };
+      const addedAt = new Date().toISOString();
+      old.filter(w => started.has(String(w.id))).forEach(w => {
+        const r = normalize(w);
+        if (!r.card) return;
+        const id = "u" + c.nextId++;
+        c.cards.push(Object.assign({ id, addedAt }, r.card));
+        progress.activeIds.push(id);
+        if (st.cards && st.cards[w.id]) progress.cards[id] = st.cards[w.id];
+      });
+      if (!c.cards.length) {
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify({ cards: {}, activeIds: [] }));
+        return false;
+      }
+      write(KEY, c);
+      write(PROGRESS_KEY, progress);
+      localStorage.removeItem(DEMO_KEY);
+      return true;
+    } catch (e) {
+      console.error("Could not move the old Starter-Set", e);
+      return false;
+    }
+  }
 
   // Rough size of everything this app keeps in localStorage (UTF-16: 2 bytes per character).
   function storageBytes() {
@@ -317,14 +386,16 @@
     normalize,
     prepare,
     germanKey,
+    has,
     create,
     add,
     update,
     remove,
     rename,
     exportText,
-    backToDemo,
-    hasDemoProgress,
+    deleteCollection,
+    needsLegacyMove,
+    migrateLegacy,
     storageBytes
   };
 })();
