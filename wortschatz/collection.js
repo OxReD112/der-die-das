@@ -20,6 +20,7 @@
      are duplicates only if they are the same dictionary card — so different meanings of one word (Block: 3 cards)
      can be added independently; otherwise (at least one card typed / imported without dictionaryId) the same base
      form (article der/die/das ignored; base defaults to the hidden word(s)) as before.
+   - otherMeanings (2026-10-26): the word's other meanings; `translation` is the one the example trains (meanings.js).
    - Card fields kept by this file besides the learning fields: dictionaryId (the Wörterbuch card the word came from),
      nextNew (true = placed as one of the next new words, see add()).
    - Functions that change progress write straight to localStorage: the page must reload afterwards
@@ -29,7 +30,7 @@
   const DEMO_KEY = "deutschWortschatzDemoProgressV1";
   const PROGRESS_KEY = "wortsternSRSv03";
   const CLOZE = /\{\{c\d+::(.*?)(?:::[^}]*)?\}\}/g;
-  const FIELDS = ["sentence", "translation", "sentenceTranslation", "grammar", "pos", "base"];
+  const FIELDS = ["sentence", "translation", "otherMeanings", "sentenceTranslation", "grammar", "pos", "base"];
 
   const read = k => {
     try {
@@ -159,6 +160,10 @@
       pos: str(raw.pos),
       base: str(raw.base) || parts.join(" ")
     };
+    // 2026-10-26 (meanings.js): the trained meaning is `translation`; the word's other meanings are kept apart
+    // ("" = split, none). meaningGuess = chosen without example-senses.json, corrected later.
+    if (raw.otherMeanings !== undefined) card.otherMeanings = translationValue(raw.otherMeanings);
+    if (raw.meaningGuess === true) card.meaningGuess = true;
     const dictionaryId = str(raw.dictionaryId);
     if (dictionaryId) card.dictionaryId = dictionaryId;
     return { card };
@@ -270,6 +275,22 @@
     c.cards[i] = Object.assign({ id, addedAt: old.addedAt }, r.card, old.nextNew ? { nextNew: true } : {});
     write(KEY, c);
     return { card: c.cards[i] };
+  }
+
+  // Main meaning / other meanings set by meanings.js (fixCollection). Progress is not touched.
+  function applyMeanings(list) {
+    const c = get();
+    if (!c || !list || !list.length) return;
+    const by = new Map(list.map(x => [x.id, x]));
+    c.cards.forEach(card => {
+      const x = by.get(card.id);
+      if (!x) return;
+      card.translation = x.translation;
+      card.otherMeanings = x.otherMeanings;
+      if (x.meaningGuess) card.meaningGuess = true;
+      else delete card.meaningGuess;
+    });
+    write(KEY, c);
   }
 
   // Remove one card and its progress.
@@ -407,6 +428,7 @@
     add,
     update,
     remove,
+    applyMeanings,
     rename,
     exportText,
     deleteCollection,

@@ -287,6 +287,10 @@
     });
     fMeaning.value = editing ? plainValue(w.translation) : prefill ? plainValue(prefill.translation) : "";
     sc.appendChild(fM);
+    // 2026-10-26: the word's other meanings (shown quietly as „auch: …“ under the answer), separated by „;“
+    const [fO, fOther] = field("Other Meanings", true, "input", { id: "cfOther", type: "text", placeholder: "to propose; to recommend" });
+    fOther.value = editing ? plainValue(w.otherMeanings) : prefill ? plainValue(prefill.otherMeanings) : "";
+    sc.appendChild(fO);
     const [fT, fTrans] = field("Sentence Translation", true, "input", {
       id: "cfTrans",
       type: "text",
@@ -386,6 +390,7 @@
       const fields = {
         sentence: clozeText(toks),
         translation: fMeaning.value,
+        otherMeanings: fOther.value,
         sentenceTranslation: fTrans.value,
         base: fBase.value.trim() || autoBase(),
         grammar: fGram.value,
@@ -520,7 +525,12 @@
     const addedHere = new Map(); // dictionaryId → card id added from this search (for undo)
     let timer = 0, run = 0;
 
-    const fieldsOf = item => Object.assign(window.WortschatzDictionaryCard.create(item, lang), { dictionaryId: item.id });
+    const M = window.WortschatzMeanings;
+    if (M) M.load(); // the trained meaning of each word (example-senses.json); until it's there, a guess
+    const fieldsOf = item => {
+      const f = Object.assign(window.WortschatzDictionaryCard.create(item, lang), { dictionaryId: item.id });
+      return M ? M.splitFields(f) : f;
+    };
     function addWord(item) {
       const fields = fieldsOf(item);
       const r = own() ? C.add([fields], { placement: placement() }) : C.create(opts.name || "My Words", [fields]);
@@ -850,7 +860,7 @@
     card.appendChild(sc);
     sc.appendChild(el("p", "coll-note", "Loading…"));
     let set, dictionary;
-    try { [set, dictionary] = await Promise.all([loadSet(def), I.load()]); } catch (e) {
+    try { [set, dictionary] = await Promise.all([loadSet(def), I.load(), window.WortschatzMeanings && WortschatzMeanings.load()]); } catch (e) {
       sc.textContent = "";
       sc.appendChild(el("p", "coll-error", "The set couldn't be loaded. Please try again.", { role: "alert" }));
       return;
@@ -870,8 +880,9 @@
       if (entry.sentence) fields.sentence = entry.sentence;
       if (entry.sentenceTranslation) fields.sentenceTranslation = pickLang(entry.sentenceTranslation);
       if (entry.translation) fields.translation = pickLang(entry.translation);
-      if (!C.normalize(fields).card) continue;
-      words.push(fields);
+      const split = window.WortschatzMeanings ? WortschatzMeanings.splitFields(fields) : fields; // list shows the trained meaning only
+      if (!C.normalize(split).card) continue;
+      words.push(split);
     }
     card.textContent = "";
     card.appendChild(head(set.name, back));

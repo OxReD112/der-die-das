@@ -85,6 +85,22 @@ const $ = id => document.getElementById(id),
    Everything below (deck, due count, notifications, progress) works on WORDS, so nothing else changes. */
 if (window.WortschatzCollection && WortschatzCollection.needsLegacyMove()) WortschatzCollection.migrateLegacy("legacy/starter-set.js?v=1");
 window.WORDS = window.WortschatzCollection && WortschatzCollection.isOwn() ? WortschatzCollection.cards() : [];
+// Words that still carry the whole line of meanings (older cards, words from Bibliothek) or a guessed one:
+// split / correct them in the background (meanings.js). The open session sees the change at once.
+if (window.WortschatzMeanings && WORDS.length)
+  WortschatzMeanings.fixCollection()
+    .then(changes => {
+      const by = new Map(changes.map(x => [x.id, x]));
+      WORDS.forEach(w => {
+        const x = by.get(w.id);
+        if (!x) return;
+        w.translation = x.translation;
+        w.otherMeanings = x.otherMeanings;
+        if (x.meaningGuess) w.meaningGuess = true;
+        else delete w.meaningGuess;
+      });
+    })
+    .catch(() => {});
 
 function publishWortschatzStatus(done = false) {
   try {
@@ -577,6 +593,7 @@ function checkCopy(typed) {
   $("correctDiff").innerHTML = "";
   $("base").textContent = current.base;
   $("meaning").textContent = getTranslation(current, "translation");
+  drawAuch();
   $("grammar").textContent = getTranslation(current, "grammar");
   fitAnswer();
   rec(current).seen = true;
@@ -627,6 +644,7 @@ function check() {
   }
   $("base").textContent = current.base;
   $("meaning").textContent = getTranslation(current, "translation");
+  drawAuch();
   $("grammar").textContent = getTranslation(current, "grammar");
   fitAnswer();
   r.seen = true;
@@ -668,6 +686,7 @@ function applyEditedCard(fresh) {
   $("answerTranslation").textContent = getTranslation(current, "sentenceTranslation");
   $("base").textContent = current.base;
   $("meaning").textContent = getTranslation(current, "translation");
+  drawAuch();
   $("grammar").textContent = getTranslation(current, "grammar");
   if ($("targetForm").style.display !== "none")
     $("targetForm").textContent = shownAnswer(current, targets(current).join(" "));
@@ -694,6 +713,36 @@ function applyDeletedCard(id) {
   save();
   publishWortschatzStatus(idx >= queue.length);
   render();
+}
+/* „auch: …“ (2026-10-26): the word's other meanings, quiet, under the trained one. Up to 2 shown (first synonym of each);
+   more → „+N“, a tap shows them all. */
+function drawAuch() {
+  const box = $("auch");
+  if (!box) return;
+  box.textContent = "";
+  const others = window.WortschatzMeanings ? WortschatzMeanings.parts(getTranslation(current, "otherMeanings"), ";") : [];
+  if (!others.length) return;
+  const first = s => (window.WortschatzMeanings.parts(s, ",")[0] || s);
+  const label = document.createElement("b");
+  label.textContent = "auch: ";
+  box.appendChild(label);
+  const shown = others.length <= 2 ? others : others.slice(0, 2).map(first);
+  box.appendChild(document.createTextNode(shown.join(" · ")));
+  if (others.length > 2) {
+    const more = document.createElement("button");
+    more.type = "button";
+    more.className = "auchMore";
+    more.textContent = "+" + (others.length - 2);
+    more.setAttribute("aria-label", "Alle Bedeutungen zeigen");
+    more.onclick = e => {
+      e.stopPropagation();
+      box.textContent = "";
+      box.appendChild(label);
+      box.appendChild(document.createTextNode(others.join(" · ")));
+    };
+    box.appendChild(document.createTextNode(" · "));
+    box.appendChild(more);
+  }
 }
 /* Long words (2026-10-26): a word wider than the answer area gets a smaller font instead of running off the edge. */
 function fitWide(el, widthOf) {
