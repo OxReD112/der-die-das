@@ -982,17 +982,19 @@
 
   /* ---------- Settings (2026-10-26): the gear at the bottom right of the start / done screen ----------
      For now one setting: the review pace (collection.js → PACES). */
+  // Settings (2026-10-26): like the rest of the exercise — names in simple German, the explanations in the
+  // user's language (RU / EN, the app's language switch). Not English-only like the collection window.
   function viewSettings() {
+    const ru = window.DeutschTranslation?.getLang?.() === "ru";
     card.textContent = "";
-    card.appendChild(head("Settings"));
+    card.appendChild(head("Lerntempo")); // the only setting so far: it is the title (a section label comes with a second one)
     const sc = el("div", "coll-scroll");
     card.appendChild(sc);
-    sc.appendChild(el("span", "coll-label coll-label-first", "Review Pace"));
-    const box = el("div", "coll-paces", null, { role: "radiogroup", "aria-label": "Review pace" });
+    const box = el("div", "coll-paces", null, { role: "radiogroup", "aria-label": "Lerntempo" });
     sc.appendChild(box);
     const options = [
-      ["standard", "Standard", "For the long run"],
-      ["intensiv", "Intensiv", "Before an exam · more reviews"]
+      ["standard", "Standard", ru ? "Чтобы помнить надолго" : "For the long run"],
+      ["intensiv", "Intensiv", ru ? "Перед экзаменом · больше повторений" : "Before an exam · more reviews"]
     ];
     function draw() {
       const current = C.getPace();
@@ -1010,13 +1012,21 @@
         const t = el("span", "coll-pace-text");
         t.appendChild(el("span", "coll-pace-name", label));
         t.appendChild(el("span", "coll-pace-note", note));
-        t.appendChild(el("span", "coll-pace-note coll-pace-days", C.PACES[id].join(" · ") + " days"));
+        t.appendChild(el("span", "coll-pace-note coll-pace-days", C.PACES[id].join(" · ") + " Tage"));
         b.appendChild(t);
         box.appendChild(b);
       });
     }
     draw();
-    sc.appendChild(el("p", "coll-hint", "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews."));
+    sc.appendChild(
+      el(
+        "p",
+        "coll-hint",
+        ru
+          ? "Слово с ошибкой всегда возвращается на следующий день. Новый темп действует только на следующие повторения."
+          : "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews."
+      )
+    );
   }
 
   // session (from ✎ during practice): no reload — the running session drops the word and goes on (2026-10-26)
