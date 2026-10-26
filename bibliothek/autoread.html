@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Автотест чтения</title>
+<style>
+  /* Test page for the reader (26.10.2026): opens bibliothek.html in a frame and "reads" the open book by itself — taps
+     words, waits for the card, closes it, turns pages — for a set time, and records the time of every tap and reloads
+     of the tab. Memory of Safari is recorded by the Web Inspector on the Mac (Timelines → Memory) at the same time.
+     The reader and the resolver are not changed; this page only clicks inside the frame (same site). */
+  :root { --bg:#f6f3ec; --fg:#222; --muted:#666; --line:#d8d2c4; --accent:#2d6a4f; --warn:#a4161a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1d1d1b; --fg:#eee; --muted:#aaa; --line:#444; --accent:#74c69d; --warn:#ff8585; } }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); font:15px/1.35 -apple-system, system-ui, sans-serif; }
+  body { display:flex; flex-direction:column; }
+  #panel { padding:8px 12px calc(8px + env(safe-area-inset-top,0)) ; padding-top:calc(8px + env(safe-area-inset-top,0)); border-bottom:1px solid var(--line); }
+  #row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  button, select { font:inherit; padding:6px 12px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--fg); }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  #status { margin-top:6px; color:var(--muted); font-size:13px; min-height:1.3em; }
+  #status.warn { color:var(--warn); }
+  #frame { flex:1; width:100%; border:0; }
+  #result { display:none; flex:1; overflow:auto; padding:12px; }
+  #result textarea { width:100%; height:60vh; font:12px/1.4 ui-monospace, Menlo, monospace; background:transparent; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:8px; }
+  body.done #frame { display:none; } body.done #result { display:block; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <div id="row">
+    <button id="start" class="primary" type="button">Старт</button>
+    <select id="minutes" aria-label="Длительность">
+      <option value="5">5 мин</option><option value="16" selected>16 мин</option><option value="30">30 мин</option>
+    </select>
+    <button id="stop" type="button" hidden>Стоп</button>
+    <button id="show" type="button" hidden>Результат</button>
+  </div>
+  <div id="status">Откройте книгу в окне ниже (с начала главы), затем нажмите «Старт».</div>
+</div>
+<iframe id="frame" src="bibliothek.html" title="Читалка"></iframe>
+<div id="result">
+  <p><button id="copy" class="primary" type="button">Скопировать результат</button> <button id="back" type="button">Назад к читалке</button></p>
+  <textarea id="text" readonly></textarea>
+</div>
+<script>
+(() => {
+  'use strict';
+  const KEY = 'deutschAutoreadV1';
+  const TAPS_PER_PAGE = 6, PAUSE_MS = 3000, CARD_SHOW_MS = 1200, TAP_TIMEOUT_MS = 30000;
+  const $ = id => document.getElementById(id);
+  const frame = $('frame'), status = $('status');
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (_) { return null; } };
+  const save = run => { try { localStorage.setItem(KEY, JSON.stringify(run)); } catch (_) {} };
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const say = (text, warn) => { status.textContent = text; status.classList.toggle('warn', !!warn); };
+  let run = load(), stopping = false, wakeLock = null;
+  // ?minutes=N adds a custom duration (short trial runs).
+  const custom = +new URLSearchParams(location.search).get('minutes');
+  if (custom > 0) $('minutes').add(new Option(custom + ' мин', String(custom), true, true));
+
+  // A run that was still "running" when this page loaded: the tab was reloaded (iOS drops a tab that used too much
+  // memory). Count it and keep the taps recorded so far.
+  if (run && run.state === 'running') {
+    run.reloads.push({at: Date.now(), minute: +((Date.now() - run.started) / 60000).toFixed(1), taps: run.taps.length});
+    run.state = 'interrupted'; save(run);
+    say(`Вкладка перезагрузилась во время теста (через ${run.reloads.at(-1).minute} мин, после ${run.taps.length} нажатий). «Результат» — что успели записать; «Старт» — новый тест.`, true);
+    $('show').hidden = false;
+  } else if (run && run.state === 'finished') { $('show').hidden = false; }
+
+  // Seeded choice of words, so two runs on the same book and page tap the same words.
+  let seed = 1;
+  const random = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+
+  function reader() {
+    const doc = frame.contentDocument;
+    if (!doc || doc.getElementById('reading-view')?.hidden !== false) return null;
+    return doc;
+  }
+  function visibleWords(doc) {
+    const view = doc.getElementById('page-viewport')?.getBoundingClientRect();
+    if (!view) return [];
+    return [...doc.querySelectorAll('#reading-text .reading-word')].filter(w => {
+      const r = w.getBoundingClientRect();
+      return r.width > 0 && r.left >= view.left - 1 && r.right <= view.right + 1 && r.top >= view.top - 1 && r.bottom <= view.bottom + 1 && /\p{L}{2,}/u.test(w.textContent);
+    });
+  }
+  function cardReady(doc) {
+    const pop = doc.getElementById('word-popover');
+    return pop && !pop.hidden && pop.getAttribute('aria-busy') === 'false' && !pop.querySelector('.popover-loading');
+  }
+  async function tap(doc, word) {
+    const started = performance.now();
+    word.click();
+    while (!cardReady(doc)) {
+      if (performance.now() - started > TAP_TIMEOUT_MS) return null;
+      await sleep(20);
+    }
+    return Math.round(performance.now() - started);
+  }
+  async function closeCard(doc) {
+    doc.getElementById('popover-close')?.click();
+    await sleep(150);
+  }
+  async function nextPage(doc) {
+    const before = doc.getElementById('page-status')?.textContent + '|' + visibleWords(doc).slice(0, 3).map(w => w.dataset.tokenOffset).join(',');
+    doc.getElementById('page-next')?.click();
+    await sleep(900);
+    const after = doc.getElementById('page-status')?.textContent + '|' + visibleWords(doc).slice(0, 3).map(w => w.dataset.tokenOffset).join(',');
+    return before !== after;
+  }
+
+  async function start() {
+    const doc = reader();
+    if (!doc) { say('Сначала откройте книгу в окне ниже.', true); return; }
+    const minutes = +$('minutes').value;
+    run = {version: 1, state: 'running', started: Date.now(), minutes, ua: navigator.userAgent,
+      book: doc.title.replace(/\s*·\s*Bibliothek\s*$/u, ''),
+      page: doc.getElementById('page-status')?.textContent?.trim() || '', taps: [], reloads: [], pages: 0, timeouts: 0};
+    save(run); stopping = false; seed = 1;
+    $('start').hidden = true; $('stop').hidden = false; $('show').hidden = true; $('minutes').disabled = true;
+    try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (_) { wakeLock = null; }
+    const end = run.started + minutes * 60000;
+    let lastSave = 0;
+    while (!stopping && Date.now() < end) {
+      const page = reader();
+      if (!page) { say('Читалка закрыла книгу — тест остановлен.', true); break; }
+      const words = visibleWords(page);
+      for (let i = 0; i < TAPS_PER_PAGE && words.length && !stopping && Date.now() < end; i++) {
+        const word = words[Math.floor(random() * words.length)];
+        const ms = await tap(page, word);
+        if (ms === null) run.timeouts++;
+        run.taps.push({t: Math.round((Date.now() - run.started) / 1000), w: word.textContent, ms});
+        await sleep(CARD_SHOW_MS);
+        await closeCard(page);
+        const left = Math.max(0, Math.round((end - Date.now()) / 60000));
+        say(`Идёт тест: ${run.taps.length} нажатий, последнее ${ms === null ? 'не дождались' : ms + ' мс'}, страниц ${run.pages}, осталось ~${left} мин. Не трогайте телефон.`);
+        if (Date.now() - lastSave > 5000) { save(run); lastSave = Date.now(); }
+        await sleep(PAUSE_MS);
+      }
+      if (stopping || Date.now() >= end) break;
+      if (!(await nextPage(page))) { say('Книга (или глава) закончилась — тест остановлен раньше.', true); break; }
+      run.pages++;
+    }
+    run.state = 'finished'; run.ended = Date.now(); save(run);
+    try { await wakeLock?.release(); } catch (_) {}
+    $('start').hidden = false; $('stop').hidden = true; $('minutes').disabled = false; $('show').hidden = false;
+    showResult();
+  }
+
+  const median = a => { const s = [...a].sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : Math.round((s[s.length / 2 - 1] + s[s.length / 2]) / 2)) : '—'; };
+  const pct = (a, p) => { const s = [...a].sort((x, y) => x - y); return s.length ? s[Math.min(s.length - 1, Math.ceil(s.length * p) - 1)] : '—'; };
+  function report(r) {
+    const ms = r.taps.map(t => t.ms).filter(x => x !== null);
+    const lines = [
+      'Автотест чтения (bibliothek/autoread.html, v1)',
+      `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
+      `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
+      `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
+      `Нажатий: ${r.taps.length}; страниц перевёрнуто: ${r.pages}; не дождались карточки (>${TAP_TIMEOUT_MS / 1000} с): ${r.timeouts}`,
+      `Перезагрузки вкладки: ${r.reloads.length ? r.reloads.map(x => `на ${x.minute} мин после ${x.taps} нажатий`).join('; ') : 'нет'}`,
+      `Время до карточки: медиана ${median(ms)} мс, p90 ${pct(ms, .9)} мс, p95 ${pct(ms, .95)} мс, максимум ${ms.length ? Math.max(...ms) : '—'} мс`,
+      '', 'По минутам (минута: нажатий, медиана, максимум):'];
+    const byMinute = new Map();
+    for (const t of r.taps) { const m = Math.floor(t.t / 60); if (!byMinute.has(m)) byMinute.set(m, []); byMinute.get(m).push(t.ms); }
+    for (const [m, a] of byMinute) { const ok = a.filter(x => x !== null); lines.push(`  ${String(m + 1).padStart(2)}: ${a.length}, ${median(ok)} мс, ${ok.length ? Math.max(...ok) : '—'} мс${a.length - ok.length ? `, не дождались ${a.length - ok.length}` : ''}`); }
+    lines.push('', 'Самые долгие нажатия:');
+    for (const t of [...r.taps].filter(t => t.ms !== null).sort((a, b) => b.ms - a.ms).slice(0, 10)) lines.push(`  ${t.ms} мс — «${t.w}» на ${(t.t / 60).toFixed(1)} мин`);
+    lines.push('', `Устройство: ${r.ua}`);
+    lines.push('', 'Все нажатия (секунда от начала, слово, мс):', r.taps.map(t => `${t.t} ${t.w} ${t.ms ?? 'x'}`).join('; '));
+    return lines.join('\n');
+  }
+  function showResult() {
+    const r = load(); if (!r) return;
+    $('text').value = report(r); document.body.classList.add('done');
+  }
+
+  $('start').addEventListener('click', () => { start().catch(e => { say('Ошибка теста: ' + e.message, true); const r = load(); if (r) { r.state = 'error'; r.error = String(e.message); save(r); } }); });
+  $('stop').addEventListener('click', () => { stopping = true; say('Останавливаю после текущего нажатия…'); });
+  $('show').addEventListener('click', showResult);
+  $('back').addEventListener('click', () => document.body.classList.remove('done'));
+  $('copy').addEventListener('click', async () => {
+    const text = $('text');
+    try { await navigator.clipboard.writeText(text.value); $('copy').textContent = 'Скопировано'; }
+    catch (_) { text.focus(); text.select(); document.execCommand?.('copy'); $('copy').textContent = 'Выделено — скопируйте'; }
+  });
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && load()?.state === 'running') { try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (_) {} }
+  });
+})();
+</script>
+</body>
+</html>
