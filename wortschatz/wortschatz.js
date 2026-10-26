@@ -126,6 +126,9 @@ try {
   const saved = JSON.parse(localStorage.getItem(STORE) || "null");
   if (saved && saved.cards && Array.isArray(saved.activeIds)) state = saved;
 } catch (e) {}
+// „seen“ (2026-10-26): the word has been shown at least once, so 👁 is offered only at its very first showing.
+// Words that already moved up a level were seen before; old words still at level 0 may get the eye once.
+for (const k in state.cards) if (state.cards[k] && state.cards[k].level > 0) state.cards[k].seen = true;
 // Calendar days "YYYY-MM-DD" in local time: the shared helper (components/deutsch-day-v1.js), same as Home.
 const day = () => DeutschDay.key();
 const add = n => DeutschDay.key(-n);
@@ -192,7 +195,9 @@ let queue = [],
   sessionTotal = 0,
   completed = 0,
   failedToday = new Set(),
-  closedToday = new Set();
+  closedToday = new Set(),
+  peekedToday = new Set(),
+  ghostShown = false;
 function normalize(s) {
   return s
     .trim()
@@ -410,6 +415,7 @@ function build(cards = null) {
   completed = 0;
   failedToday = new Set();
   closedToday = new Set();
+  peekedToday = new Set();
   publishWortschatzStatus(queue.length === 0);
   publishWortschatzProgress();
   render();
@@ -450,6 +456,7 @@ function render() {
   $("almostHint").classList.remove("show");
   $("almostHint").textContent = "";
   $("question").classList.remove("hidden");
+  setupPeek();
   $("feedback").className = "feedback";
   $("feedbackShell").className = "feedbackShell";
   $("feedbackShell").style.transform = "";
@@ -513,9 +520,74 @@ function shownAnswer(c, text) {
     ? t.charAt(0).toLocaleUpperCase("de-DE") + t.slice(1)
     : t;
 }
+/* 👁 — first showing of a new word (2026-10-26): try to remember it yourself, or tap the eye and copy it. */
+function setupPeek() {
+  ghostShown = false;
+  const r = rec(current),
+    can = r.level === 0 && !r.seen && !failedToday.has(current.id) && !peekedToday.has(current.id);
+  $("ghostEye").classList.toggle("show", can);
+  $("ghostEye").classList.remove("used");
+  $("question").classList.toggle("peek", can);
+}
+$("ghostEye").onclick = e => {
+  e.preventDefault();
+  if (!current || ghostShown || !$("ghostEye").classList.contains("show")) return;
+  ghostShown = true;
+  peekedToday.add(current.id);
+  $("sentence").innerHTML = ghostHTML(current);
+  $("ghostEye").classList.add("used");
+  fitTopZone();
+  if (innerWidth >= 700) $("answerInput").focus();
+};
+// The gaps filled with the hidden words, faintly: taken from the cloze marks in order ({{c1::schlage}} … {{c1::vor}});
+// without them, the first answer split into words when that matches the number of gaps.
+function ghostHTML(c) {
+  const blanks = (String(c.blank || "").match(/_____/g) || []).length;
+  let words = [...String(c.sentence || "").matchAll(/\{\{c\d+::(.*?)(?:::[^}]*)?\}\}/g)].map(m => m[1]);
+  if (words.length !== blanks) {
+    const first = (targetParts(c)[0] || "").split(/\s+/).filter(Boolean);
+    words = first.length === blanks ? first : blanks === 1 ? [targetParts(c)[0] || ""] : [];
+  }
+  if (!words.length) return blankHTML(c);
+  let i = 0;
+  return esc(c.blank).replace(/_____/g, () => "<span class='ghost'>" + esc(words[i++] || "") + "</span>");
+}
+// Copying is not an answer: a slip only shakes the field; done → neutral answer screen, level and date stay,
+// the word comes back at the end of this session with an empty gap.
+function checkCopy(typed) {
+  const matched = targets(current).find(t => normalize(t) === typed),
+    f = $("answerInput");
+  if (!matched) {
+    f.classList.add("almost");
+    f.classList.remove("nudge");
+    void f.offsetWidth;
+    f.classList.add("nudge");
+    return;
+  }
+  ghostShown = false;
+  $("question").classList.add("hidden");
+  $("keyboard")?.classList.remove("show");
+  $("feedbackShell").className = "feedbackShell show";
+  $("feedback").className = "feedback show neutral";
+  $("answerSentence").innerHTML = revealHTML(current);
+  $("answerTranslation").textContent = getTranslation(current, "sentenceTranslation");
+  $("targetForm").textContent = shownAnswer(current, matched);
+  $("targetForm").style.display = "inline-block";
+  $("typedDiff").innerHTML = "";
+  $("correctDiff").innerHTML = "";
+  $("base").textContent = current.base;
+  $("meaning").textContent = getTranslation(current, "translation");
+  $("grammar").textContent = getTranslation(current, "grammar");
+  fitAnswer();
+  rec(current).seen = true;
+  if (!queue.slice(idx + 1).some(c => c.id === current.id)) queue.push(current);
+  save();
+  updateEditButton();
+}
 function check() {
   let typed = normalize($("answerInput").value);
   if (!typed) return;
+  if (ghostShown) return checkCopy(typed);
   const opts = targets(current),
     matched = opts.find(t => normalize(t) === typed);
   let ok = !!matched;
@@ -557,6 +629,7 @@ function check() {
   $("meaning").textContent = getTranslation(current, "translation");
   $("grammar").textContent = getTranslation(current, "grammar");
   fitAnswer();
+  r.seen = true;
   if (ok) {
     if (failedToday.has(current.id)) {
       r.level = 0;
@@ -617,6 +690,7 @@ function applyDeletedCard(id) {
   sessionTotal = Math.max(0, sessionTotal - 1);
   if (closedToday.delete(id)) completed = Math.max(0, completed - 1);
   failedToday.delete(id);
+  peekedToday.delete(id);
   save();
   publishWortschatzStatus(idx >= queue.length);
   render();
