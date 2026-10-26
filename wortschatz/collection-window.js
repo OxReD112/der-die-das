@@ -248,7 +248,7 @@
     return [wrap, f];
   }
 
-  // opts.session: opened from ✎ on the answer screen — edit only, no delete, no reload;
+  // opts.session: opened from ✎ on the answer screen — no reload; Delete Word only with opts.onDeleted (2026-10-26);
   // onSaved(card) lets the running session show the corrected card right away.
   function viewForm(w, opts) {
     opts = opts || {};
@@ -457,6 +457,7 @@
     if (creating) opts.cancel = opts.cancel || viewMain;
     b.appendChild(button("coll-main", "Save", save));
     if (editing && !session && !opts.draft) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w)));
+    if (editing && session && opts.onDeleted) b.appendChild(button("coll-link", "Delete Word", () => viewRemove(w, opts)));
     sc.appendChild(b); // Save at the very END of the form (v2.100): you pass every field first
     if (!editing) setTimeout(() => (search && !prefill ? search.focus() : !prefill && fSentence.focus()), 60);
   }
@@ -1002,14 +1003,31 @@
     sc.appendChild(el("p", "coll-hint", "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews."));
   }
 
-  function viewRemove(w) {
+  // session (from ✎ during practice): no reload — the running session drops the word and goes on (2026-10-26)
+  function viewRemove(w, session) {
     card.textContent = "";
     card.appendChild(head("Delete this word?"));
-    card.appendChild(el("p", "coll-text", "„" + (w.base || w.target) + "“ and your progress with it will be deleted."));
+    card.appendChild(
+      el(
+        "p",
+        "coll-text",
+        "„" + (w.base || w.target) + "“ and your progress with it will be deleted." + (session ? " The session goes on with the next word." : "")
+      )
+    );
     const b = el("div", "coll-buttons");
-    b.appendChild(button("coll-main", "Keep", () => viewForm(w)));
+    b.appendChild(button("coll-main", "Keep", () => viewForm(w, session || undefined)));
     b.appendChild(
       button("coll-quiet", "Delete", () => {
+        if (session) {
+          try {
+            C.remove(w.id);
+          } catch (e) {
+            return;
+          }
+          close();
+          session.onDeleted(w.id);
+          return;
+        }
         C.remove(w.id);
         dirty = true;
         refreshButtons();
@@ -1333,8 +1351,8 @@ Rules:
   });
   refreshButtons();
   // ✎ on the answer screen: edit the card you're looking at (own collection only)
-  function editInSession(w, onSaved) {
-    if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
+  function editInSession(w, onSaved, onDeleted) {
+    if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved, onDeleted }));
   }
   if ($("wsSettings")) $("wsSettings").onclick = () => open(viewSettings);
   window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord, fillChoose };

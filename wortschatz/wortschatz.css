@@ -772,28 +772,27 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   font-size: 14px;
   color: var(--muted);
 }
-/* ✎ (own words only): quiet corner button, palette grey at low strength, 44px tap area */
+/* ✎ (own words only), 2026-10-26: centred between the card and Weiter — it belongs to this card and can no
+   longer sit on top of a long word. Icon only, palette grey at low strength, 44px tap area. */
 .editCard {
   display: none;
-  position: absolute;
-  right: -10px;
-  top: 4px;
   width: 44px;
   height: 44px;
+  margin: -6px auto -12px;
   padding: 0;
   border: 0;
   background: none;
   color: var(--muted);
-  opacity: 0.6;
+  opacity: 0.7;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 3;
+  -webkit-tap-highlight-color: transparent;
   transition:
     transform 0.12s ease,
     opacity 0.12s ease;
 }
-.feedback.show .editCard.own {
+.feedbackShell.show .editCard.own {
   display: flex;
 }
 .editCard svg {
@@ -804,6 +803,13 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .editCard:active {
   transform: scale(0.92);
   opacity: 1;
+}
+
+/* Long words (2026-10-26): wortschatz.js shrinks a word that is wider than the screen (fitAnswer);
+   base form and meaning may break as a last resort instead of running off the edge. */
+.base,
+.meaning {
+  overflow-wrap: anywhere;
 }
 
 /* WEITER: the quiet button — it doesn't urge you on, you read the answer first. Same surface + outline as the

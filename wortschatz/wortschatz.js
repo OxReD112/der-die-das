@@ -556,6 +556,7 @@ function check() {
   $("base").textContent = current.base;
   $("meaning").textContent = getTranslation(current, "translation");
   $("grammar").textContent = getTranslation(current, "grammar");
+  fitAnswer();
   if (ok) {
     if (failedToday.has(current.id)) {
       r.level = 0;
@@ -597,11 +598,53 @@ function applyEditedCard(fresh) {
   $("grammar").textContent = getTranslation(current, "grammar");
   if ($("targetForm").style.display !== "none")
     $("targetForm").textContent = shownAnswer(current, targets(current).join(" "));
+  fitAnswer();
 }
+/* Delete Word from the ✎ window (2026-10-26): the word leaves the collection (collection.js removes it and its
+   progress), today's queue and the counter; the session goes on with the next word (or „Fertig für heute“). */
+function applyDeletedCard(id) {
+  if (!current || current.id !== id) return;
+  delete state.cards[id];
+  state.activeIds = state.activeIds.filter(x => x !== id);
+  const w = WORDS.findIndex(c => c.id === id);
+  if (w >= 0) WORDS.splice(w, 1);
+  if (!WORDS.length) {
+    save();
+    location.reload(); // the collection is empty now → „Where do you want to start?“
+    return;
+  }
+  queue = queue.filter((c, k) => k < idx || c.id !== id);
+  sessionTotal = Math.max(0, sessionTotal - 1);
+  if (closedToday.delete(id)) completed = Math.max(0, completed - 1);
+  failedToday.delete(id);
+  save();
+  publishWortschatzStatus(idx >= queue.length);
+  render();
+}
+/* Long words (2026-10-26): a word wider than the answer area gets a smaller font instead of running off the edge. */
+function fitWide(el, widthOf) {
+  if (!el) return;
+  el.style.fontSize = "";
+  const box = $("feedback").clientWidth,
+    w = widthOf(el);
+  if (box && w > box) {
+    const fs = parseFloat(getComputedStyle(el).fontSize);
+    el.style.fontSize = Math.max(12, Math.floor((fs * box) / w * 0.97)) + "px";
+  }
+}
+function fitAnswer() {
+  if (!$("feedback").classList.contains("show")) return;
+  const scroll = el => el.scrollWidth;
+  fitWide($("targetForm"), scroll);
+  fitWide($("typedDiff"), scroll);
+  fitWide($("correctDiff"), scroll);
+  fitWide($("answerSentence"), el => Math.max(0, ...[...el.querySelectorAll(".target")].map(t => t.getBoundingClientRect().width)));
+}
+addEventListener("resize", fitAnswer);
 if ($("editCard"))
   $("editCard").onclick = e => {
     e.stopPropagation();
-    if (current) WortschatzCollectionWindow.editInSession(current, applyEditedCard);
+    if (current) WortschatzCollectionWindow.editInSession(current, applyEditedCard, applyDeletedCard);
   };
 function showDone() {
   publishWortschatzStatus(true);
