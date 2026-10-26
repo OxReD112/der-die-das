@@ -888,8 +888,12 @@
     }
     const top = el("div", "coll-pick-top");
     const count = el("span", "coll-pick-count", "", { "aria-live": "polite" });
-    const all = button("coll-link", "Select All", null);
-    top.appendChild(all); // „Select All“ on the left, above the ticks; the count on the right
+    // „Select All“ on the left, above the ticks (a circle like the word ticks, as in the Bibliothek); the count on the right
+    const allRow = el("label", "coll-pick-all");
+    const all = el("input", null, null, { type: "checkbox", "aria-label": "Select all" });
+    allRow.appendChild(all);
+    allRow.appendChild(document.createTextNode("Select All"));
+    top.appendChild(allRow);
     top.appendChild(count);
     card.appendChild(top);
     const list = el("div", "coll-scroll coll-list coll-pick-list");
@@ -932,13 +936,14 @@
     function draw() {
       const n = picked.size;
       count.textContent = avail.length ? "Selected: " + n + " / " + avail.length : "All words are already in your list.";
-      all.textContent = n === avail.length && n ? "Clear All" : "Select All";
-      all.style.display = avail.length ? "" : "none";
+      all.checked = !!n && n === avail.length;
+      all.indeterminate = n > 0 && n < avail.length;
+      allRow.style.display = avail.length ? "" : "none";
       add.textContent = n ? (own() ? "Add " : "Create Collection with ") + (n === 1 ? "1 Word" : n + " Words") : "Tick the words you want to learn";
       add.disabled = !n;
       err.textContent = "";
     }
-    all.onclick = () => {
+    all.onchange = () => {
       const on = picked.size !== avail.length;
       boxes.forEach(([cb, i]) => { cb.checked = on; on ? picked.add(i) : picked.delete(i); });
       draw();

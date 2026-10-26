@@ -676,40 +676,48 @@ textarea.coll-paste {
   cursor: default;
   opacity: 0.7;
 }
-/* round tick in the app's own look (the native box was a bright white square in dark mode) */
-.coll-pick-check {
+/* Ticks in the same look and size as the Bibliothek word list (2026-10-26): a thin grey 14px circle, filled green when chosen,
+   no tick mark; „Select All“ has the same circle (green with a dash when only some words are chosen).
+   The whole row is the tap area. Bibliothek: bibliothek.css .vocabulary-dialog input[type="checkbox"] — keep the two alike. */
+.coll-pick-check,
+.coll-pick-all input {
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
+  width: 14px;
+  height: 14px;
   margin: 0;
-  border: 1.5px solid color-mix(in srgb, var(--text) 32%, transparent);
+  border: 1px solid var(--muted);
   border-radius: 50%;
   background: transparent;
-  display: grid;
-  place-content: center;
   cursor: pointer;
   transition:
     background 0.12s ease,
     border-color 0.12s ease;
 }
-.coll-pick-check::after {
+.coll-pick-check:checked,
+.coll-pick-all input:checked,
+.coll-pick-all input:indeterminate {
+  border-color: var(--green);
+  background: var(--green);
+}
+.coll-pick-all input:indeterminate::after {
   content: "";
-  width: 6px;
-  height: 11px;
-  margin-top: -2px;
-  border: solid var(--main-text);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg) scale(0);
-  transition: transform 0.12s ease;
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: 5px;
+  height: 2px;
+  background: var(--card-bg);
 }
-.coll-pick-check:checked {
-  background: var(--main-bg);
-  border-color: var(--main-bg);
-}
-.coll-pick-check:checked::after {
-  transform: rotate(45deg) scale(1);
+.coll-pick-all {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--sec-text);
+  cursor: pointer;
 }
 .coll-pick-name {
   flex: 0 0 auto;
