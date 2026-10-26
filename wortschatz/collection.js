@@ -286,6 +286,22 @@
     }
   }
 
+  /* Review pace (2026-10-26): how far apart the reviews are. Stored in the collection itself, so Home's backup
+     keeps it. Standard = the long run (the intervals so far), Intensiv = before an exam (more reviews).
+     A wrong answer always starts the word again (today until right, then tomorrow) — in both paces. */
+  const PACES = { standard: [1, 8, 20, 45, 90], intensiv: [1, 3, 7, 21, 45] };
+  function getPace() {
+    const c = get();
+    return c && PACES[c.pace] ? c.pace : "standard";
+  }
+  function setPace(pace) {
+    const c = get();
+    if (!c || !PACES[pace]) return getPace();
+    c.pace = pace;
+    write(KEY, c);
+    return pace;
+  }
+
   function rename(name) {
     const c = get();
     if (!c) throw new Error("no-collection");
@@ -394,6 +410,9 @@
     rename,
     exportText,
     deleteCollection,
+    PACES,
+    getPace,
+    setPace,
     needsLegacyMove,
     migrateLegacy,
     storageBytes

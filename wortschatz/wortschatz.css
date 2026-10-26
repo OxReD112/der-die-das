@@ -1122,3 +1122,37 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ===== SETTINGS GEAR (2026-10-26): bottom right, on the line of the version number — the line the shared Home
+   button sits on (Home centres the button there). Plain icon like Home's own settings gear and Bibliothek's
+   bottom-row icons; only on the start and the done screen. ===== */
+.ws-settings-btn {
+  display: none;
+  position: fixed;
+  z-index: 6;
+  right: max(8px, calc((100% - 480px) / 2 + 8px));
+  bottom: calc(env(safe-area-inset-bottom) + 11px);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ws-settings-btn svg {
+  width: 17px;
+  height: 17px;
+}
+.ws-settings-btn:active {
+  filter: brightness(0.82);
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+}
+body:has(#start.show) .ws-settings-btn,
+body:has(#done.show) .ws-settings-btn {
+  display: flex;
+}

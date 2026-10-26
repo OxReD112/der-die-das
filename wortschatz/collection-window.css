@@ -737,3 +737,61 @@ textarea.coll-paste {
 .coll-pick-bottom .coll-main:disabled {
   opacity: 0.5;
 }
+
+/* v2026-10-26 · Settings window: review pace as two round choices (same circle as the word-set ticks) */
+.coll-label-first {
+  margin-top: 4px;
+}
+.coll-pace {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.coll-pace:last-child {
+  border-bottom: 0;
+}
+.coll-pace-dot {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--text) 32%, transparent);
+  display: grid;
+  place-content: center;
+}
+.coll-pace.on .coll-pace-dot {
+  border-color: var(--main-bg);
+  background: var(--main-bg);
+}
+.coll-pace.on .coll-pace-dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--main-text);
+}
+.coll-pace-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.coll-pace-name {
+  font: 600 16px/1.25 var(--font);
+  color: var(--text);
+}
+.coll-pace-note {
+  font-size: 13px;
+  color: var(--muted);
+}
+.coll-pace-days {
+  font-variant-numeric: tabular-nums;
+}

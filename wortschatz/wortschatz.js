@@ -112,8 +112,13 @@ function publishWortschatzStatus(done = false) {
 // A mistake resets the card: it stays in today's session until answered correctly, then returns tomorrow.
 // Level 6 = FULLY LEARNED: the word also passed the 90-day review (6 correct reviews in a row).
 // After level 5 the interval stays 90 days; reaching level 6 only marks the word as learned.
-const steps = [1, 8, 20, 45, 90];
-const LEARNED_LEVEL = steps.length + 1;
+// Review pace (2026-10-26, collection.js → PACES): Standard 1 · 8 · 20 · 45 · 90, Intensiv 1 · 3 · 7 · 21 · 45.
+// Both have 5 steps, so a word's level and „learned“ mean the same in both; a change applies to the next reviews.
+let steps = (window.WortschatzCollection && WortschatzCollection.PACES[WortschatzCollection.getPace()]) || [1, 8, 20, 45, 90];
+window.WortschatzSetPace = pace => {
+  if (window.WortschatzCollection && WortschatzCollection.PACES[pace]) steps = WortschatzCollection.PACES[pace];
+};
+const LEARNED_LEVEL = 6; // 5 steps + 1
 const INITIAL_WORDS = 10,
   ADD_BATCH = 5;
 let state = { cards: {}, activeIds: [] };

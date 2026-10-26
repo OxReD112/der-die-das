@@ -963,6 +963,45 @@
     draw();
   }
 
+  /* ---------- Settings (2026-10-26): the gear at the bottom right of the start / done screen ----------
+     For now one setting: the review pace (collection.js → PACES). */
+  function viewSettings() {
+    card.textContent = "";
+    card.appendChild(head("Settings"));
+    const sc = el("div", "coll-scroll");
+    card.appendChild(sc);
+    sc.appendChild(el("span", "coll-label coll-label-first", "Review Pace"));
+    const box = el("div", "coll-paces", null, { role: "radiogroup", "aria-label": "Review pace" });
+    sc.appendChild(box);
+    const options = [
+      ["standard", "Standard", "For the long run"],
+      ["intensiv", "Intensiv", "Before an exam · more reviews"]
+    ];
+    function draw() {
+      const current = C.getPace();
+      box.textContent = "";
+      options.forEach(([id, label, note]) => {
+        const on = id === current;
+        const b = button("coll-pace" + (on ? " on" : ""), "", () => {
+          C.setPace(id);
+          if (typeof window.WortschatzSetPace === "function") window.WortschatzSetPace(id);
+          draw();
+        });
+        b.setAttribute("role", "radio");
+        b.setAttribute("aria-checked", on ? "true" : "false");
+        b.appendChild(el("span", "coll-pace-dot", null, { "aria-hidden": "true" }));
+        const t = el("span", "coll-pace-text");
+        t.appendChild(el("span", "coll-pace-name", label));
+        t.appendChild(el("span", "coll-pace-note", note));
+        t.appendChild(el("span", "coll-pace-note coll-pace-days", C.PACES[id].join(" · ") + " days"));
+        b.appendChild(t);
+        box.appendChild(b);
+      });
+    }
+    draw();
+    sc.appendChild(el("p", "coll-hint", "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews."));
+  }
+
   function viewRemove(w) {
     card.textContent = "";
     card.appendChild(head("Delete this word?"));
@@ -1297,6 +1336,7 @@ Rules:
   function editInSession(w, onSaved) {
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved }));
   }
+  if ($("wsSettings")) $("wsSettings").onclick = () => open(viewSettings);
   window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord, fillChoose };
   // Only unfinished legacy imports are discarded; localStorage is untouched.
   if (!embedded) {
