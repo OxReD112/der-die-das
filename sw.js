@@ -16,12 +16,16 @@ self.addEventListener("push", event => {
 
 self.addEventListener("notificationclick", event => {
   event.notification.close();
-  const target = event.notification.data || "./";
+  // 02.11.2026: the push server sends url "/" — the domain root, outside the app (the site lives in a
+  // sub-folder, e.g. …github.io/der-die-das/), so the tap opened an empty page. A link starting with one "/"
+  // is now read inside the app's own folder (the service worker's scope).
+  const raw = String(event.notification.data || "./");
+  const target = new URL(/^\/(?!\/)/.test(raw) ? "." + raw : raw, self.registration.scope).href;
   event.waitUntil(
     self.clients.matchAll({ type:"window", includeUncontrolled:true }).then(clients => {
       for (const client of clients) {
         if ("focus" in client) {
-          client.navigate(target);
+          if (client.navigate) client.navigate(target).catch(() => {});
           return client.focus();
         }
       }
