@@ -319,6 +319,21 @@ body:has(#game:not(.hidden)) .version-mark {
   position: relative;
   overflow: hidden;
 }
+/* 03.11.2026 (Alena, as Artikel): both cards are tall enough for every answer (right or wrong, two examples), so the
+   answer card has the question card's size and Weiter stands where the case buttons were (kasus.js answer()).
+   Tall phones and tablets 486, SE-sized phones 420 (the Home button sits in the corner below); 320 px keeps 360. */
+@media (max-width: 699.98px) and (min-height: 701px), (min-width: 700px) and (min-height: 740px) {
+  .card,
+  .answer-card-main {
+    min-height: 486px;
+  }
+}
+@media (max-width: 699.98px) and (max-height: 700px) and (min-width: 341px) {
+  .card,
+  .answer-card-main {
+    min-height: 420px;
+  }
+}
 .card {
   margin-top: 26px;
   padding: 30px 24px 25px;

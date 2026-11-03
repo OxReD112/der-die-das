@@ -232,11 +232,13 @@ function answer(selected) {
   const shownCase = correct ? selected : primary.case;
   const shownStatus = correct ? match.status : primary.status;
   const fromRect = els.preposition.getBoundingClientRect();
-  const cardTop = els.questionCard.getBoundingClientRect().top; // tablets: the answer card takes the question card's place
+  const cardTop = els.questionCard.getBoundingClientRect().top, // tablets: the answer card takes the question card's place
+    choicesTop = els.choices.getBoundingClientRect().top; // Weiter takes the case buttons' place (03.11.2026)
 
   els.questionCard.classList.add("hidden");
   els.answerState.classList.remove("hidden");
   els.answerState.style.marginTop = "";
+  els.next.style.marginTop = "";
   els.next.classList.remove("hidden");
   els.choices.classList.add("hidden");
 
@@ -277,6 +279,8 @@ function answer(selected) {
     const shift = cardTop - els.answerState.getBoundingClientRect().top;
     if (shift > 0) els.answerState.style.marginTop = parseFloat(getComputedStyle(els.answerState).marginTop) + shift + "px";
   }
+  const down = choicesTop - els.next.getBoundingClientRect().top;
+  if (down) els.next.style.marginTop = Math.max(0, parseFloat(getComputedStyle(els.next).marginTop) + down) + "px";
   animateReveal(fromRect);
 }
 
@@ -303,11 +307,13 @@ function animateReveal(fromRect) {
   const parts = [els.answerEyebrow, els.answerTranslation, els.answerWrong, els.answerCase, els.rule];
   parts.push(els.exampleText, els.exampleTranslation);
   parts.forEach((el, i) => {
+    // to the line's own opacity (the example's translation is 0.68): it no longer flashes bright and then dims
+    const own = getComputedStyle(el).opacity;
     revealAnims.push(
       el.animate(
         [
           { opacity: 0, transform: "translateY(-6px)" },
-          { opacity: 1, transform: "none" }
+          { opacity: own, transform: "none" }
         ],
         {
           duration: 190,
