@@ -17,7 +17,8 @@
 //   forms     - optional noun form per question (Dativ Plural, "zu Hause" …)
 //   lead      - optional verb per question, e.g. {wohin:"Ich fliege"} (default: Ich bin / Ich gehe / Ich komme)
 //   alt       - optional other correct form per question, e.g. {wo:["auf der"]} → counted as correct,
-//               "Auch richtig: …" shown below the button. Only for real everyday variants (Arbeit, Party, Hochzeit).
+//               shown under its own line as „тоже верно · чаще: <main form>“ (03.11.2026). Only for real everyday
+//               variants (Arbeit, Party, Hochzeit).
 //   note      - optional {ru, en} line shown under the rule after the card, for cards that break
 //               their category's pattern (e.g. Toilette: a room, but auf).
 

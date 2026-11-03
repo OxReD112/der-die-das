@@ -59,7 +59,15 @@ function escapeHtml(s) {
 
 /* ===== NOTES BELOW WEITER ===== */
 // A real everyday variant was chosen (e.g. „auf der Arbeit“)
-const altNote = (entry, q, form) => "Auch richtig: " + form + " " + nounFor(entry, q) + ".";
+/* An accepted other form (an die Tankstelle for zur Tankstelle): said under its own line, not as a loose note
+   below (Alena 03.11.2026) — „тоже верно · чаще: zur Tankstelle“. */
+const altUsual = (entry, q) => {
+  const ru = window.DeutschTranslation?.getLang?.() === "ru";
+  return (
+    '<span class="alt-usual">' + (ru ? "тоже верно · чаще: " : "also right · more common: ") +
+    "<b>" + escapeHtml(entry[q] + " " + nounFor(entry, q)) + "</b></span>"
+  );
+};
 
 // Only when zu/von was picked where the box wants in/an/auf (Wohin) or aus (Woher):
 // this drill trains ending up IN/AT/ON the place, not just going up to it.
@@ -382,8 +390,11 @@ function finishCard() {
   els.ruleForms.textContent = cat.rule || "";
   els.ruleNote.innerHTML =
     (entry.note ? "<div>" + escapeHtml(getTranslation(entry, "note")) + "</div>" : "") +
-    usedAlts.map(a => "<div>" + escapeHtml(altNote(entry, a.q, a.form)) + "</div>").join("") +
     zuHints.join("");
+  usedAlts.forEach(a => {
+    const row = els.steps.querySelector('.step[data-step="' + QUESTIONS.findIndex(q => q.key === a.q) + '"] .sentence');
+    if (row) row.insertAdjacentHTML("beforeend", altUsual(entry, a.q));
+  });
   els.choices.classList.add("hidden");
   els.next.textContent = index === session.length - 1 ? "Fertig" : "Weiter";
   els.next.classList.remove("hidden");

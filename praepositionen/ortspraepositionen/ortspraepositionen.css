@@ -552,6 +552,23 @@ body:has(#game:not(.hidden)) .version-mark {
   font-weight: 650;
   letter-spacing: -0.01em;
 }
+/* an accepted other form, under its own line: „тоже верно · чаще: zur Tankstelle“ (03.11.2026) */
+.alt-usual {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+  opacity: 0.85;
+}
+.alt-usual b {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+@media (min-width: 700px) and (min-height: 740px) {
+  .alt-usual {
+    font-size: 16px;
+  }
+}
 /* 03.11.2026 (Alena): the extra note stands above Weiter (Weiter is at the bottom), quiet: grey, half-transparent */
 .rule-note {
   margin-top: 16px;
