@@ -45,7 +45,14 @@
 .row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}
 .key{height:44px;width:calc((100% - 27px)/10);padding:0;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1;flex:0 0 calc((100% - 27px)/10);min-width:0;border:1px solid transparent;border-radius:10px;background:var(--key);color:var(--key-text);font-size:20px;-webkit-tap-highlight-color:transparent}
 .row.third{justify-content:flex-end}
-.row.third .back{margin-left:0;flex:0 0 calc(2 * ((100% - 27px)/10) + 3px);width:calc(2 * ((100% - 27px)/10) + 3px)}
+.row.third .back{margin-left:0}
+/* Shift (03.11.2026, Alena): left of the third row, ⌫ one key wide like the phone's own keyboard; the space bar keeps its size.
+   One tap = the next letter is a capital (then it switches off); tap again to cancel. The keys show what they type. */
+.key.shift svg{width:20px;height:20px;display:block}
+.key.shift .on{display:none}
+.keyboard.shift-on .key.shift{background:var(--key-text);color:var(--key)}
+.keyboard.shift-on .key.shift .on{display:block}
+.keyboard.shift-on .key.shift .off{display:none}
 .row.special{width:100%;justify-content:center;gap:3px}
 .row.special .key{color:var(--special-text)}
 .row.special .space{flex:1 1 auto;width:auto;color:var(--key-text)}
@@ -61,7 +68,7 @@
 <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
  <div class="row" data-keys="QWERTYUIOP"></div>
  <div class="row" data-keys="ASDFGHJKL"></div>
- <div class="row third" data-keys="ßZXCVBNM"><button class="key back" data-key="BACK">⌫</button></div>
+ <div class="row third" data-keys="ßZXCVBNM"><button class="key shift" data-key="SHIFT" aria-label="Shift" aria-pressed="false"><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg><svg class="on" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg></button><button class="key back" data-key="BACK">⌫</button></div>
  <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
 </div>
 <script>
@@ -98,7 +105,17 @@
  let lastTouchEnd=0;
  const emit=(b)=>{
    if(!b)return;
-   kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:b.dataset.key||""}}));
+   let k=b.dataset.key||"";
+   if(k==="SHIFT"){setShift(!kb.classList.contains("shift-on"));return} // Shift stays inside the keyboard: no event
+   if(k.length===1&&kb.classList.contains("shift-on")){if(k!=="ß")k=k.toUpperCase();setShift(false)}
+   else if(k==="OK")setShift(false);
+   kb.dispatchEvent(new CustomEvent("deutsch-keyboard-input",{bubbles:true,composed:true,detail:{key:k}}));
+ };
+ // the letter keys show what they type: small letters, capitals while Shift is on (ß stays ß)
+ const setShift=on=>{
+   kb.classList.toggle("shift-on",on);
+   kb.querySelector(".key.shift")?.setAttribute("aria-pressed",String(on));
+   kb.querySelectorAll(".key[data-key]").forEach(k=>{const c=k.dataset.key;if(c.length===1&&c!=="ß")k.textContent=on?c.toUpperCase():c});
  };
  kb.addEventListener("touchend",e=>{
    lastTouchEnd=Date.now();
@@ -115,7 +132,7 @@
  document.querySelectorAll("#keyboard .row[data-keys]").forEach(row=>{
    const back=row.querySelector(".back");
    for(const ch of row.dataset.keys){
-     const b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch;row.insertBefore(b,back);
+     const b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch.toLowerCase();row.insertBefore(b,back);
    }
  });
 })();
