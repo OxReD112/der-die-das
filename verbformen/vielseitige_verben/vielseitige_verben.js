@@ -224,6 +224,7 @@ function render() {
   $("answer").value = "";
   $("answer").disabled = false;
   $("answer-area").classList.remove("hidden");
+  document.querySelector(".verb-strip")?.classList.remove("hidden");
   $("result").className = "result";
   $("hint").classList.add("hidden");
   $("next").classList.remove("show");
@@ -380,6 +381,7 @@ function checkAnswer() {
   $("hint").innerHTML = hint;
   $("hint").classList.toggle("hidden", !hint);
   $("answer-area").classList.add("hidden");
+  document.querySelector(".verb-strip")?.classList.add("hidden"); // 03.11.2026 (Alena): the five verbs only with the question
   $("next").classList.add("show");
   $("roundTableBtn").disabled = false;
   updateNextBar();

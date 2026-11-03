@@ -381,7 +381,7 @@ body:has(#study:not(.hidden)) .version-mark {
 /* clue words, marked after Prüfen */
 .sentence mark {
   color: inherit;
-  background: linear-gradient(transparent 55%, var(--marker) 55%, var(--marker) 92%, transparent 92%);
+  background: linear-gradient(transparent 30%, var(--marker) 30%, var(--marker) 82%, transparent 82%); /* 03.11.2026: across the middle of the letters (Literata is taller than the old font — the band had slid under the word) */
   padding: 0 1px;
 }
 .sentence .gap {
