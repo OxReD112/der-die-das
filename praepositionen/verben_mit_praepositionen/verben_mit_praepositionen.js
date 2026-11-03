@@ -259,6 +259,7 @@ function buildGap() {
   input.setAttribute("autocapitalize", "off");
   input.setAttribute("spellcheck", "false");
   input.setAttribute("aria-label", "Präposition");
+  mirror.textContent = "\u00a0"; // one invisible line from the start (see paintGap)
   gap.replaceChildren(mirror, input);
   if (IS_TOUCH) {
     // Phones use the in-app German keyboard; the system keyboard never opens
@@ -285,7 +286,10 @@ function paintGap() {
     mirror = $("gapMirror");
   if (!input) return;
   if (input.value !== typed) input.value = typed;
-  mirror.textContent = typed;
+  // never empty (03.11.2026): an empty blank had no line of text — a 2px box whose place Safari computed
+  // differently after a letter was typed and deleted, so the blank jumped up. A no-break space keeps one
+  // invisible line in it: the same height and baseline empty or filled.
+  mirror.textContent = typed || "\u00a0";
   fitSentence();
 }
 
