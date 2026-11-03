@@ -562,7 +562,7 @@ body:has(#study:not(.hidden)) .version-mark {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
-  margin: 0 auto 16px;
+  margin: 6px 0 0;
   max-width: 520px;
 }
 .form-kind {
@@ -570,7 +570,10 @@ body:has(#study:not(.hidden)) .version-mark {
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+.form-kind:empty {
+  display: none;
 }
 .explanation {
   color: var(--muted);

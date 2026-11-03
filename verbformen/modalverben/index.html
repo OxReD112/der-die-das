@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=3" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="modalverben.css?v=35" />
+    <link rel="stylesheet" href="modalverben.css?v=36" />
   </head>
   <body>
     <div id="formsModal" class="forms-modal" aria-hidden="true">
@@ -67,14 +67,12 @@
             <div class="state" id="state"></div>
             <div class="result-body">
               <div class="answer-feedback" id="answerFeedback" hidden></div>
+              <!-- 03.11.2026 (Alena): the form is always shown — tense · person above the two verbs, the contrast
+                   with the neighbouring form below; the meaning line (it mostly repeated the translation) and
+                   „Mehr zur Form ›“ are gone -->
+              <div class="form-kind" id="formKind"></div>
               <div class="form-line" id="formLine"></div>
-              <div class="meaning" id="meaning"></div>
-              <button class="result-more" id="resultMore" type="button">Mehr zur Form ›</button>
-              <div class="result-more-part">
-                <div class="meaning-contrast" id="meaningContrast"></div>
-                <div class="form-kind" id="formKind"></div>
-                <div class="explanation" id="explanation"></div>
-              </div>
+              <div class="meaning-contrast" id="meaningContrast"></div>
             </div>
           </div>
           <button id="next">Weiter</button>
@@ -108,7 +106,7 @@
     <script src="answer-rules.js?v=2"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
     <script src="../../components/deutsch-end-v1.js?v=1"></script>
-    <script src="modalverben.js?v=27"></script>
+    <script src="modalverben.js?v=28"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

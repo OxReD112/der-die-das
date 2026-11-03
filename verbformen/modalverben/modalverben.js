@@ -281,26 +281,13 @@ function checkAnswer() {
     line.push(" → ", wrong);
   }
   $("formLine").replaceChildren(...line);
-  $("meaning").textContent = getTranslation(item, "meaning");
   $("meaningContrast").textContent = getTranslation(item, "meaningContrast");
-  $("explanation").textContent = getTranslation(item, "explanation");
-  showResultMore();
   requestAnimationFrame(fitResult);
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
   $("roundTableBtn").disabled = false;
 }
 
-/* The answer panel shows the answer and its meaning; „Mehr zur Form ›“ opens the rest (the other meaning, the form,
-   the explanation), which then scrolls inside the panel — the screen itself never scrolls (01.11.2026). */
-function showResultMore() {
-  const rest = document.querySelector("#result .result-more-part");
-  $("resultMore").hidden = !rest.textContent.trim();
-}
-$("resultMore").addEventListener("click", () => {
-  $("result").classList.add("open");
-  fitResult();
-});
 
 /* Answer on one screen (01.11.2026, CSS block ANSWER ON ONE SCREEN): the answer panel is as tall as its content and
    grows (after „Mehr zur Form ›“) up to Weiter, which always ends 16px above the pinned Spickzettel; what does not
