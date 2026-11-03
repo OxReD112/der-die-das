@@ -551,6 +551,20 @@ body:has(#game:not(.hidden)) .version-mark {
 .rule-card.open .rule-more-part {
   display: block;
 }
+/* Phones with room (03.11.2026, Alena — variant B): the question card is tall enough for the whole answer, examples
+   and the note are always shown, the answer card has the question card's size and Weiter stands where der / die / das
+   were (artikel.js choose) — nothing moves from word to word. Short phones (≤ 700 px, SE) keep the folded rule. */
+@media (max-width: 699.98px) and (min-height: 701px) {
+  .card {
+    min-height: 456px;
+  }
+  .rule-card .rule-more {
+    display: none;
+  }
+  .rule-card .rule-more-part {
+    display: block;
+  }
+}
 
 /* ===== KEYBOARD EDGE (01.11.2026) =====
    Everything you tap or read in the answer (field, answer panel, Weiter, the end buttons) reaches the edges of the

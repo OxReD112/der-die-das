@@ -145,6 +145,8 @@ function render() {
   $("translation").textContent = getTranslation(w, "translation");
   $("feedback").className = "feedback";
   $("feedback").style.marginTop = "";
+  $("feedback").style.minHeight = "";
+  $("continue").style.marginTop = "";
   $("choices").style.display = "grid";
   $("card").style.display = "flex";
   $("counter").textContent = `${index + 1} / ${sessionSize}`;
@@ -154,7 +156,9 @@ function render() {
 
 /* ===== ANSWER + FEEDBACK ===== */
 function choose(article) {
-  const cardTop = $("card").getBoundingClientRect().top; // tablets: the answer takes the question card's place (below)
+  const cardTop = $("card").getBoundingClientRect().top, // tablets: the answer takes the question card's place (below)
+    cardHeight = $("card").getBoundingClientRect().height,
+    choicesTop = $("choices").getBoundingClientRect().top;
   const w = current(),
     ok = article === w.article;
   total++;
@@ -193,6 +197,14 @@ function choose(article) {
   $("choices").style.display = "none";
   $("card").style.display = "none";
   fitOneLine(document.querySelector(".answer-word"));
+  if (!TABLET.matches) {
+    // Phones (03.11.2026, Alena): the answer card has the question card's size, Weiter stands where der / die / das were
+    const fb = $("feedback"),
+      c = $("continue");
+    fb.style.minHeight = cardHeight + "px";
+    const down = choicesTop - c.getBoundingClientRect().top;
+    if (down > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + down + "px";
+  }
   if (TABLET.matches) {
     const fb = $("feedback");
     fb.style.marginTop = "";
