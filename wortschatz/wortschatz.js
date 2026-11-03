@@ -53,26 +53,39 @@ function fitTopZone() {
    margin-top: auto); the answer's sentence takes exactly its place and Weiter is pinned at the bottom, where the
    keyboard's last row was (72px above the edge). */
 const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
-let tabletTop = null;
+let tabletTop = null,
+  keyboardBottom = null; // phones (03.11.2026, Alena): Weiter's bottom = the keyboard's bottom — no reaching up, no jumping
 function rememberTabletTop() {
   const zone = document.querySelector("#question .topZone"),
     kb = document.getElementById("keyboard");
-  if (zone && kb && kb.classList.contains("is-touch") && kb.classList.contains("show") && !document.getElementById("question").classList.contains("hidden"))
+  if (zone && kb && kb.classList.contains("is-touch") && kb.classList.contains("show") && !document.getElementById("question").classList.contains("hidden")) {
     tabletTop = zone.getBoundingClientRect().top;
+    keyboardBottom = kb.getBoundingClientRect().bottom;
+  }
 }
 function placeTabletAnswer() {
   const shell = $("feedbackShell"),
     c = $("continue");
   shell.style.marginTop = "";
   c.style.marginTop = "";
-  if (!TABLET.matches || tabletTop == null || !$("keyboard")?.classList.contains("is-touch") || !$("feedback").classList.contains("show")) return;
-  const shift = tabletTop - $("answerTop").getBoundingClientRect().top;
-  if (shift > 0) shell.style.marginTop = shift + "px";
-  const rest = innerHeight - 72 - c.getBoundingClientRect().bottom;
+  if (!$("keyboard")?.classList.contains("is-touch") || !$("feedback").classList.contains("show")) return;
+  let target;
+  if (TABLET.matches) {
+    if (tabletTop == null) return;
+    const shift = tabletTop - $("answerTop").getBoundingClientRect().top;
+    if (shift > 0) shell.style.marginTop = shift + "px";
+    target = innerHeight - 72;
+  } else {
+    if (keyboardBottom == null) return;
+    target = Math.min(keyboardBottom, innerHeight);
+  }
+  const rest = target - c.getBoundingClientRect().bottom;
   if (rest > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + rest + "px";
 }
 addEventListener("resize", fitTopZone);
 addEventListener("resize", rememberTabletTop);
+// the answer's Literata loads with the first answer and makes it taller after Weiter was placed: place again
+document.fonts?.addEventListener?.("loadingdone", () => { if ($("feedback").classList.contains("show")) fitAnswer(); });
 async function loadKeyboardComponent() {
   const mount = document.getElementById("keyboardMount");
   if (!mount) return false;
@@ -698,6 +711,7 @@ function check() {
   save();
   publishWortschatzStatus();
   updateEditButton();
+  placeTabletAnswer(); // ✎ appears with the first answer of a session — Weiter is placed again under it
 }
 /* ✎ on the answer screen (own words only): edit the card you're looking at. The session keeps running —
    the corrected text shows at once; WORDS and the queue hold the same card objects, so a card that
