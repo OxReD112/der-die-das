@@ -48,6 +48,10 @@
 .row.third .back{margin-left:0}
 /* Shift (03.11.2026, Alena): left of the third row, ⌫ one key wide like the phone's own keyboard; the space bar keeps its size.
    One tap = the next letter is a capital (then it switches off); tap again to cancel. The keys show what they type. */
+/* small letters (03.11.2026, Alena — as on the iPhone keyboard): the x-height stands in the middle of the key, not the
+   whole line with room for ascenders and descenders (it sat ~2px low). Capitals with Shift keep their place. */
+.key.letter>span{display:block;text-box:trim-both ex alphabetic}
+.keyboard.shift-on .key.letter:not([data-key="ß"])>span{text-box:normal}
 .key.shift svg{width:20px;height:20px;display:block}
 .key.shift .on{display:none}
 .keyboard.shift-on .key.shift{background:var(--key-text);color:var(--key)}
@@ -69,7 +73,7 @@
  <div class="row" data-keys="QWERTYUIOP"></div>
  <div class="row" data-keys="ASDFGHJKL"></div>
  <div class="row third" data-keys="ßZXCVBNM"><button class="key shift" data-key="SHIFT" aria-label="Shift" aria-pressed="false"><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg><svg class="on" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg></button><button class="key back" data-key="BACK">⌫</button></div>
- <div class="row special"><button class="key" data-key="ä">ä</button><button class="key" data-key="ö">ö</button><button class="key" data-key="ü">ü</button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
+ <div class="row special"><button class="key letter" data-key="ä"><span>ä</span></button><button class="key letter" data-key="ö"><span>ö</span></button><button class="key letter" data-key="ü"><span>ü</span></button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
 </div>
 <script>
 (()=>{
@@ -115,7 +119,7 @@
  const setShift=on=>{
    kb.classList.toggle("shift-on",on);
    kb.querySelector(".key.shift")?.setAttribute("aria-pressed",String(on));
-   kb.querySelectorAll(".key[data-key]").forEach(k=>{const c=k.dataset.key;if(c.length===1&&c!=="ß")k.textContent=on?c.toUpperCase():c});
+   kb.querySelectorAll(".key.letter").forEach(k=>{const c=k.dataset.key;if(c!=="ß")k.firstChild.textContent=on?c.toUpperCase():c});
  };
  kb.addEventListener("touchend",e=>{
    lastTouchEnd=Date.now();
@@ -132,7 +136,7 @@
  document.querySelectorAll("#keyboard .row[data-keys]").forEach(row=>{
    const back=row.querySelector(".back");
    for(const ch of row.dataset.keys){
-     const b=document.createElement("button");b.className="key";b.dataset.key=ch.toLowerCase();b.textContent=ch.toLowerCase();row.insertBefore(b,back);
+     const b=document.createElement("button");b.className="key letter";b.dataset.key=ch.toLowerCase();b.innerHTML="<span></span>";b.firstChild.textContent=ch.toLowerCase();row.insertBefore(b,back);
    }
  });
 })();
