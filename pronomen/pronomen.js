@@ -308,8 +308,10 @@ function submit() {
   tabletAnswer();
 }
 function tabletAnswer() {
-  if (!TABLET.matches || !tabletPromptTop || !$("keyboard")?.classList.contains("is-touch")) return;
-  document.querySelector("#game .prompt").style.marginTop = tabletPromptTop;
+  // 03.11.2026 (Alena): phones too — Weiter 16px above the Spickzettel, where the keyboard was (as Partizip II);
+  // the question's place is held on tablets only. Short screens scroll as before.
+  if (!$("keyboard")?.classList.contains("is-touch") || SHORT_SCREEN.matches) return;
+  if (TABLET.matches && tabletPromptTop) document.querySelector("#game .prompt").style.marginTop = tabletPromptTop;
   const c = $("continue"),
     pill = $("roundTableBtn").getBoundingClientRect();
   c.style.marginTop = "";
