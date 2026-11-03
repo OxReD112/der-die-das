@@ -197,20 +197,17 @@ function choose(article) {
   $("choices").style.display = "none";
   $("card").style.display = "none";
   fitOneLine(document.querySelector(".answer-word"));
-  if (!TABLET.matches) {
-    // Phones (03.11.2026, Alena): the answer card has the question card's size, Weiter stands where der / die / das were
-    const fb = $("feedback"),
-      c = $("continue");
-    fb.style.minHeight = cardHeight + "px";
-    const down = choicesTop - c.getBoundingClientRect().top;
-    if (down > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + down + "px";
-  }
+  // Phones and tablets (03.11.2026, Alena): nothing moves — the answer card has the question card's size and top,
+  // Weiter stands where der / die / das were.
+  const fb = $("feedback"),
+    c = $("continue");
+  fb.style.minHeight = cardHeight + "px";
   if (TABLET.matches) {
-    const fb = $("feedback");
-    fb.style.marginTop = "";
     const shift = cardTop - fb.getBoundingClientRect().top;
     if (shift > 0) fb.style.marginTop = parseFloat(getComputedStyle(fb).marginTop) + shift + "px";
   }
+  const down = choicesTop - c.getBoundingClientRect().top;
+  if (down > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + down + "px";
 }
 
 /* ===== SCREENS ===== */
