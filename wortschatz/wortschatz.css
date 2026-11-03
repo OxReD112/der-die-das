@@ -1486,8 +1486,8 @@ body:has(#done.show) .ws-settings-btn {
 #collModal .coll-pair .coll-quiet,
 #collModal .coll-pair .coll-raised {
   width: auto;
-  flex: 1 1 auto; /* the longer label takes more room („＋ Добавить слово“ | „Импорт списка“) */
-  padding: 0 8px;
+  flex: 1 1 0; /* two equal buttons: „＋ Wort“ | „Importieren“ */
+  padding: 0 16px;
   border-radius: 14px;
   font-size: 16px;
 }

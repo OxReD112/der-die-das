@@ -157,8 +157,9 @@
     // v2.104: both ways to get words in, side by side (same shape; Add Word = the everyday action, cream)
     // v2.111: Import List = the raised „Use your own words“ look (the outlined one looked disabled)
     const top = el("div", "coll-pair");
-    top.appendChild(button("coll-main", L("＋ Add Word", "＋ Добавить слово"), () => viewForm(null)));
-    top.appendChild(button("coll-raised", L("Import List", "Импорт списка"), () => viewImport({})));
+    // 03.11 (Alena): German labels like Weiter / Starten — short enough for two equal buttons on every phone
+    top.appendChild(button("coll-main", "＋ Wort", () => viewForm(null)));
+    top.appendChild(button("coll-raised", "Importieren", () => viewImport({})));
     card.appendChild(top);
     if (!embedded) {
       // opens another view (not a fold-out) → „Word Sets ›“, the same › as the start screen's collection line
