@@ -552,10 +552,12 @@ body:has(#game:not(.hidden)) .version-mark {
   font-weight: 650;
   letter-spacing: -0.01em;
 }
+/* 03.11.2026 (Alena): the extra note stands above Weiter (Weiter is at the bottom), quiet: grey, half-transparent */
 .rule-note {
   margin-top: 16px;
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--muted);
+  opacity: 0.75;
   line-height: 1.45;
   text-align: center;
 }

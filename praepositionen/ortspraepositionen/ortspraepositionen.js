@@ -278,10 +278,25 @@ function render() {
   fitToCard(els.place);
   // Tablets (03.11.2026): the card with its buttons stands in the middle of the screen (CSS margin-top: auto);
   // its place is then fixed for the whole card, so the three answers and Weiter never move it
-  els.card.style.marginTop = "";
+  els.card.style.marginTop = els.choices.style.marginTop = "";
   if (TABLET.matches) els.card.style.marginTop = getComputedStyle(els.card).marginTop;
+  placeBottom(); // after the card's place is fixed
 }
 const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+/* 03.11.2026 (Alena): the answer buttons and Weiter stand at the bottom — their bottom 16px above the Spickzettel,
+   where the keyboard ends in the typing exercises; the card keeps its place at the top. Never makes the page
+   scroll (only room that is free is used). */
+function placeBottom() {
+  els.choices.style.marginTop = els.ruleNote.style.marginTop = els.next.style.marginTop = "";
+  const pill = els.roundTableBtn.getBoundingClientRect();
+  if (!pill.height) return;
+  const target = pill.top - 16,
+    btn = cardDone ? els.next : els.choices,
+    holder = cardDone ? (els.ruleNote.textContent.trim() ? els.ruleNote : els.next) : els.choices;
+  const down = target - btn.getBoundingClientRect().bottom;
+  if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+}
+window.addEventListener("resize", () => requestAnimationFrame(placeBottom));
 
 function renderChoices() {
   const entry = session[index],
@@ -342,6 +357,7 @@ function answer(form) {
         rows[step].classList.remove("pending");
         rows[step].classList.add("active");
         renderChoices();
+        placeBottom();
         locked = false;
       } else {
         finishCard();
@@ -373,6 +389,7 @@ function finishCard() {
   els.next.classList.remove("hidden");
   els.roundTableBtn.disabled = false;
   els.bar.style.width = ((index + 1) / session.length) * 100 + "%";
+  placeBottom();
 }
 
 function next() {
