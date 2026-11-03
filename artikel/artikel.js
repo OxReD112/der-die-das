@@ -15,8 +15,8 @@ document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "
 
 /* ===== RULE CARD LABELS (in the user's language, like the rule texts) ===== */
 const CARD_UI = {
-  en: { why: "WHY", headsUp: "Heads up:" },
-  ru: { why: "ПОЧЕМУ", headsUp: "Обратите внимание:" }
+  en: { headsUp: "Heads up:" },
+  ru: { headsUp: "Обратите внимание:" }
 };
 
 /* ===== STATE ===== */
@@ -138,11 +138,13 @@ addEventListener("resize", () => {
   fitOneLine(document.querySelector(".answer-word"));
 });
 
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
 function render() {
   const w = current();
   $("word").textContent = w.word;
   $("translation").textContent = getTranslation(w, "translation");
   $("feedback").className = "feedback";
+  $("feedback").style.marginTop = "";
   $("choices").style.display = "grid";
   $("card").style.display = "flex";
   $("counter").textContent = `${index + 1} / ${sessionSize}`;
@@ -152,26 +154,28 @@ function render() {
 
 /* ===== ANSWER + FEEDBACK ===== */
 function choose(article) {
+  const cardTop = $("card").getBoundingClientRect().top; // tablets: the answer takes the question card's place (below)
   const w = current(),
     ok = article === w.article;
   total++;
+  $("bar").style.width = `${((index + 1) / sessionSize) * 100}%`; // the bar fills on the answer, like every exercise
   recordDailyArtikel(ok);
   updateDifficulty(w, ok);
   if (hasProgress()) DeutschProgress.record(PROGRESS_ID, progressKey(w), ok);
   if (ok) correct++;
 
   $("feedback").className = "feedback show " + (ok ? "correct" : "wrong");
-  $("feedbackTitle").textContent = ok ? "✓ Richtig" : "✕ Nicht ganz";
-  $("choiceLine").innerHTML = ok
-    ? `Deine Wahl: <strong>${article}</strong>.`
-    : `Deine Wahl: <strong>${article}</strong>. Richtig: <strong>${w.article}</strong>.`;
+  // Answer screen (01.11.2026): the verdict as a small label (like Fester Kasus); a wrong article stands crossed out
+  // above the right one, in place of the old „Das Wort“ label and the „Deine Wahl … Richtig …“ line.
+  $("feedbackTitle").textContent = ok ? "Richtig" : "Nicht ganz";
+  $("answerChoice").textContent = ok ? "" : article;
   $("answerArticle").textContent = w.article;
   $("answerWord").textContent = w.word;
   $("answerTranslation").textContent = getTranslation(w, "translation");
   // Rule card follows the RU/EN setting (words.js: ruleName / explanation / reliability are {ru, en}).
   const ui = CARD_UI[DeutschTranslation.getLang()] || CARD_UI.en;
   const ruleName = getTranslation(w, "ruleName") || w.ruleLabel;
-  $("ruleLabel").textContent = `${ui.why} ${w.article.toUpperCase()}? (${ruleName})`;
+  $("ruleLabel").textContent = ruleName;
   $("ruleTitle").textContent = getTranslation(w, "explanation");
   const examples = Array.isArray(w.examples) ? w.examples.join(", ") : w.examples || "";
   $("ruleExamples").textContent = examples;
@@ -181,9 +185,20 @@ function choose(article) {
   $("ruleReliability").innerHTML = reliability ? `<strong>${ui.headsUp}</strong> ` : "";
   if (reliability) $("ruleReliability").append(reliability);
   $("ruleReliability").style.display = reliability ? "" : "none";
+  // the rule in one line; examples and the reliability note open with „Beispiele und Ausnahmen ›“
+  $("ruleCard").classList.remove("open");
+  $("ruleMore").hidden = !examples && !reliability;
+  // Tablets (03.11.2026): the question stands in the middle of the screen; the answer card takes its place —
+  // its top where the question card's top was.
   $("choices").style.display = "none";
   $("card").style.display = "none";
   fitOneLine(document.querySelector(".answer-word"));
+  if (TABLET.matches) {
+    const fb = $("feedback");
+    fb.style.marginTop = "";
+    const shift = cardTop - fb.getBoundingClientRect().top;
+    if (shift > 0) fb.style.marginTop = parseFloat(getComputedStyle(fb).marginTop) + shift + "px";
+  }
 }
 
 /* ===== SCREENS ===== */
@@ -201,8 +216,7 @@ function endSession() {
   $("game").classList.add("hidden");
   $("endScreen").classList.remove("hidden");
   $("endCorrect").textContent = `${correct} / ${sessionSize}`;
-  const pct = Math.round((correct / sessionSize) * 100);
-  $("endSummary").textContent = `${pct} % richtig. Was schwierig war, kommt öfter wieder.`;
+  $("endSummary").textContent = DeutschEnd.note(correct, sessionSize);
 }
 function next() {
   if (total >= sessionSize) {
@@ -217,6 +231,7 @@ function next() {
 document.querySelectorAll(".session-option").forEach(b => (b.onclick = () => startSession(Number(b.dataset.size))));
 document.querySelectorAll(".choice").forEach(b => (b.onclick = () => choose(b.dataset.a)));
 $("continue").onclick = next;
+$("ruleMore").onclick = () => $("ruleCard").classList.add("open");
 $("playAgain").onclick = () => {
   $("endScreen").classList.add("hidden");
   $("sessionScreen").classList.remove("hidden");

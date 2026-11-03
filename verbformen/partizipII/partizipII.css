@@ -2,70 +2,14 @@
    When this file changes, raise its ?v= in index.html, the Verbformen page's partizipII/?v=
    and the Home tile's verbformen/?v= */
 
-/* ===== PALETTE ===== */
+/* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 :root {
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  --serif: Georgia, "Times New Roman", serif; /* words, forms, titles */
-
-  --bg: #1b1b1d;
-  --card-bg: #2a2a2d; /* 10/20/30 buttons, table window */
-  --text: #f2f0ed;
-  --muted: #8f8f94;
-  --text-secondary: #c8c7c4; /* table button */
-  --example-text: #c8c7c4;
   --pattern-text: #c7c3bc; /* vowels in the table */
-  --lit-bg: rgba(232, 196, 120, 0.13); /* the verb's vowel change after Prüfen (gold, like Modalverben) */
   --lit-line: rgba(232, 196, 120, 0.55);
-  --lit-text: #e8c478;
-  --lit-form: #efe6d4;
-  --hint-line: rgba(232, 196, 120, 0.6); /* the hint after a mistake (like Vielseitige Verben) */
-  --mint: #5bc8a4;
-  --red: #ff7770;
-
-  --hairline: rgba(255, 255, 255, 0.1); /* outlines, progress track */
-  --result-line: rgba(255, 255, 255, 0.08); /* line above the answer, before it turns green / red */
-  --field-bg: rgba(255, 255, 255, 0.03); /* typing field and Weiter */
-  --cell-bg: rgba(255, 255, 255, 0.025); /* table cells */
-  --cell-line: rgba(255, 255, 255, 0.07);
-  --overlay-scrim: rgba(0, 0, 0, 0.34);
-  --close-icon: #fff;
-
-  /* shared across exercises (Design Police 2026-09-25) */
-  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
-  --start-version: rgba(255, 255, 255, 0.24);
-  --end-again-text: rgba(242, 240, 237, 0.55);
-  --end-main-bg: #ece6dc; /* cream: Prüfen and „Zur Startseite“ */
-  --end-main-text: #1b1b1d;
 }
 [data-theme="light"] {
-  --bg: #f6f4f1;
-  --card-bg: #fff;
-  --text: #242426;
-  --muted: #727278;
-  --text-secondary: #55565b;
-  --example-text: #727278;
   --pattern-text: #4a4844;
-  --lit-bg: rgba(196, 146, 40, 0.13);
   --lit-line: rgba(160, 112, 20, 0.5);
-  --lit-text: #97680f;
-  --lit-form: #3a3326;
-  --hint-line: rgba(160, 112, 20, 0.5);
-  --mint: #3fa68a;
-  --red: #e95e66;
-
-  --hairline: rgba(0, 0, 0, 0.1);
-  --result-line: rgba(0, 0, 0, 0.1);
-  --field-bg: #fff;
-  --cell-bg: rgba(0, 0, 0, 0.035);
-  --cell-line: rgba(0, 0, 0, 0.09);
-  --overlay-scrim: rgba(0, 0, 0, 0.2);
-  --close-icon: #242426;
-
-  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --start-version: rgba(36, 36, 38, 0.34);
-  --end-again-text: rgba(36, 36, 38, 0.55);
-  --end-main-bg: #242426;
-  --end-main-text: #f6f4f1;
 }
 
 /* ===== PAGE SHELL (blueprint for all exercises) =====
@@ -123,7 +67,7 @@ body {
 }
 .title {
   font-family: var(--serif);
-  font-size: clamp(54px, 15vw, 78px);
+  font-size: clamp(56px, 14vw, 84px);
   font-weight: 400;
   letter-spacing: -3px;
   margin: 0 0 12px;
@@ -147,7 +91,7 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: var(--card-bg);
   color: var(--text);
   box-shadow: var(--start-btn-shadow);
@@ -169,14 +113,16 @@ body {
 /* „Vokalwechsel · Tabelle“: on the start screen under 10/20/30, during a round centred in the Home
    button's row, a bit smaller (2026-09-27) */
 .pattern-table-btn {
+  /* Spickzettel: one size on the start screen and in the exercise, in every exercise (01.11.2026) */
   border: 1px solid var(--hairline);
-  border-radius: 17px;
+  border-radius: 999px;
   background: transparent;
   color: var(--text-secondary);
   font-family: var(--font);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.2;
   font-weight: 400;
-  padding: 11px 14px;
+  padding: 10px 13px;
   box-shadow: none;
   cursor: pointer;
   transition:
@@ -213,9 +159,9 @@ body {
   pointer-events: auto;
   margin: 0;
   background: var(--bg);
-  font: 400 12.5px/1.2 var(--font); /* ≈12% smaller than on the start screen: there if needed, not inviting */
-  padding: 9px 12px;
-  border-radius: 15px;
+  font: 400 13px/1.2 var(--font);
+  padding: 10px 13px;
+  border-radius: 999px;
 }
 
 /* Description „Worum geht's?“ (same as Artikel / Pronomen / Modalverben).
@@ -236,7 +182,7 @@ body {
 }
 .start-about h2 {
   margin: 0 0 5px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.3;
   color: var(--muted);
@@ -244,7 +190,7 @@ body {
 }
 .start-about .about-de {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -264,7 +210,7 @@ body:has(#start.hidden) .start-about {
   margin: 0;
   padding: 0;
   text-align: center;
-  font: 400 11px/1 var(--font);
+  font: 400 12px/1 var(--font);
   letter-spacing: 0.04em;
   color: transparent;
   -webkit-user-select: none;
@@ -318,7 +264,7 @@ body:has(.pattern-modal.open) .version-mark {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
@@ -329,8 +275,8 @@ body:has(.pattern-modal.open) .version-mark {
     filter 0.12s ease;
 }
 #playAgain {
-  background: transparent;
-  color: var(--end-again-text);
+  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
+  color: var(--text);
   border: 1px solid var(--hairline);
 }
 #homeBack {
@@ -415,7 +361,7 @@ body:has(.pattern-modal.open) .version-mark {
 #verb {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(58px, 17vw, 84px);
+  font-size: clamp(52px, 17vw, 70px); /* task word: 52 on phones, 70 on iPad — one size for Artikel, Partizip II, Fester Kasus question and answer (01.11.2026) */
   letter-spacing: -3px;
   line-height: 1;
   margin-bottom: 13px;
@@ -437,7 +383,7 @@ body:has(.pattern-modal.open) .version-mark {
   border-radius: 18px;
   background-color: var(--field-bg);
   color: var(--text);
-  font: 400 24px var(--serif);
+  font: 400 20px var(--serif);
   text-align: center;
   outline: none;
   box-shadow: none;
@@ -469,8 +415,8 @@ body:has(.pattern-modal.open) .version-mark {
 #next {
   width: 100%;
   height: 56px;
-  border-radius: 17px;
-  font: 600 16px/1 var(--font);
+  border-radius: 18px;
+  font: 650 16px/1 var(--font);
   box-shadow: none;
   cursor: pointer;
   transition:
@@ -572,8 +518,10 @@ body:has(.pattern-modal.open) .version-mark {
   margin-bottom: 12px;
 }
 .state {
+  /* one verdict label in every exercise (01.11.2026): 12px, 650, capitals, 0.1em, as in Artikel */
   font-size: 12px;
-  letter-spacing: 0.14em;
+  font-weight: 650;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .good .state {
@@ -584,26 +532,26 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .vowel-pattern {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.12em;
   text-transform: lowercase;
   white-space: nowrap;
 }
 .forms {
   font-family: var(--serif);
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1.35;
   margin-bottom: 10px;
 }
 .meta {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.55;
 }
 .example {
   margin-top: 15px;
   color: var(--example-text);
-  font-size: 15px;
+  font-size: 16px;
   font-style: italic;
 }
 /* south German / Austrian / Swiss Perfekt with sein: small, quiet, on its own line */
@@ -667,12 +615,14 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .pattern-modal-card {
   width: min(560px, 100%);
-  max-height: 82vh;
+  max-height: min(80vh, 720px); /* one window frame (01.11.2026): at most 80% of the screen, the rest scrolls inside */
   overflow: hidden;
   background: var(--card-bg);
   border: 1px solid var(--hairline);
-  border-radius: 24px;
-  padding: 4px 18px 14px;
+  border-radius: 26px; /* windows like the cards: one radius for big surfaces (01.11.2026) */
+  --card-pad: 18px;
+  position: relative;
+  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -693,6 +643,8 @@ body:has(.pattern-modal.open) .version-mark {
   justify-content: space-between;
   align-items: center;
   flex: 0 0 auto;
+  padding-right: 28px;
+  margin-bottom: 8px;
 }
 .pattern-modal-head h2 {
   margin: 0;
@@ -701,13 +653,34 @@ body:has(.pattern-modal.open) .version-mark {
   font-weight: 400;
 }
 .pattern-close {
+  /* close: a small round button like the sheets of iOS (01.11.2026) — quieter than the title, clear of the 26px
+     corner, centred on the title; the tap area is 44 × 44 (::after) */
+  position: absolute;
+  top: calc(var(--card-pad) - 7px);
+  right: calc(var(--card-pad) - 4px);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
   border: 0;
-  background: transparent;
-  color: var(--close-icon);
-  font-size: 28px;
-  line-height: 1;
-  padding: 8px;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--hairline);
+  color: var(--muted);
   cursor: pointer;
+}
+.pattern-close::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+.pattern-close svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  fill: none;
 }
 #patternModalBody {
   overflow: auto;
@@ -727,7 +700,7 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .pattern-intro {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   margin: 6px 0 8px;
 }
@@ -744,13 +717,13 @@ body:has(.pattern-modal.open) .version-mark {
   min-height: 40px;
   padding: 8px 9px;
   border: 1px solid var(--cell-line);
-  border-radius: 11px;
+  border-radius: 13px;
   background: var(--cell-bg);
 }
 .pattern-source,
 .pattern-options {
   font-family: var(--font);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--pattern-text);
   line-height: 1;
 }
@@ -791,7 +764,7 @@ body:has(.pattern-modal.open) .version-mark {
 .pattern-group {
   padding: 8px 10px;
   border: 1px solid var(--cell-line);
-  border-radius: 11px;
+  border-radius: 13px;
   background: var(--cell-bg);
 }
 .pattern-group.lit {
@@ -806,7 +779,7 @@ body:has(.pattern-modal.open) .version-mark {
   align-items: baseline;
   gap: 0 4px;
   color: var(--pattern-text);
-  font-size: 15px;
+  font-size: 16px;
 }
 .pattern-group-head .arrow {
   color: var(--muted);
@@ -824,7 +797,7 @@ body:has(.pattern-modal.open) .version-mark {
 .pattern-rule {
   padding: 8px 10px;
   border: 1px solid var(--cell-line);
-  border-radius: 11px;
+  border-radius: 13px;
   background: var(--cell-bg);
 }
 .pattern-rule.lit {
@@ -832,7 +805,7 @@ body:has(.pattern-modal.open) .version-mark {
 }
 .pattern-rule-text {
   color: var(--pattern-text);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.35;
 }
 .pattern-rule.lit .pattern-rule-text {
@@ -849,7 +822,7 @@ body:has(.pattern-modal.open) .version-mark {
   margin-top: 3px;
   color: var(--muted);
   font-family: var(--serif);
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .lit-vowel {
   padding: 2px 4px;
@@ -880,7 +853,7 @@ body:has(.pattern-modal.open) .version-mark {
 /* ===== PHONES ===== */
 @media (max-width: 699px) {
   #verb {
-    font-size: 56px;
+    font-size: 52px;
   }
 }
 @media (max-width: 600px) {
@@ -905,46 +878,33 @@ body:has(.pattern-modal.open) .version-mark {
   .result-head {
     margin-bottom: 9px;
   }
-  .state {
-    font-size: 10px;
-  }
   .vowel-pattern {
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.1em;
   }
   .forms {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.28;
     margin-bottom: 7px;
   }
   .meta {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.4;
   }
   .example {
     margin-top: 10px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.4;
   }
   #next {
     margin-top: 13px;
   }
   /* the card sits as high as before the layer was fitted to the screen (v54 reached past the top edge) */
-  .pattern-modal {
-    padding: 10px 10px calc(10px + env(safe-area-inset-top));
-  }
-  .pattern-modal-card {
-    max-height: 84vh;
-    padding: 3px 12px 12px;
-  }
-  .pattern-modal-head {
-    padding: 2px 2px 3px;
-  }
   .pattern-modal-head h2 {
-    font-size: 19px;
+    font-size: 20px;
   }
   .pattern-intro {
-    font-size: 10px;
+    font-size: 12px;
     margin: 3px 0 7px;
   }
   .pattern-grid {
@@ -955,14 +915,14 @@ body:has(.pattern-modal.open) .version-mark {
     gap: 4px;
     min-height: 34px;
     padding: 7px 7px;
-    border-radius: 9px;
+    border-radius: 13px; /* box in box: window 26 − 13 inset (01.11.2026) */
   }
   .pattern-source,
   .pattern-options {
     font-size: 14px;
   }
   .pattern-options .arrow {
-    font-size: 11px;
+    font-size: 12px;
     margin: 0 2px;
   }
 }
@@ -1035,12 +995,183 @@ body:has(.pattern-modal.open) .version-mark {
   }
   .pattern-source,
   .pattern-options {
-    font-size: 13px;
+    font-size: 14px;
   }
   .pattern-options {
     flex-wrap: nowrap;
   }
   .pattern-options .arrow {
     margin: 0 1px;
+  }
+}
+
+/* ===== KEYBOARD EDGE (01.11.2026) =====
+   Everything you tap or read in the answer (field, answer panel, Weiter, the end buttons) reaches the edges of the
+   on-screen keyboard, i.e. the .app column — the rule Vielseitige Verben already had (2026-09-28). Text keeps its own
+   inner padding. End buttons: as wide as the column, at most 360px, centred. */
+/* Field, answer panel and Weiter stay inside the card's 20px (decision 01.11.2026: they are never on screen together
+   with the keyboard, and the panel looks better narrow; Weiter matches the panel it sits under). */
+.finish-actions {
+  width: min(calc(100% + 40px), 360px);
+  margin-left: calc(50% - min(calc(50% + 20px), 180px));
+  margin-right: 0;
+}
+
+/* ===== ANSWER ON ONE SCREEN (01.11.2026) =====
+   After Prüfen the screen itself never scrolls. The answer panel is as tall as its content and grows up to Weiter;
+   Weiter always sits 16px above the pinned Spickzettel (pill: 16px up + 35px high).
+   The panel shows the answer and its meaning; „Mehr zur Form ›“ opens the rest, which scrolls inside the panel
+   with a soft fade at the bottom. The panel height and Weiter's place are set by fitResult() in the script (the question card may be
+   zoomed by fitCard(), so CSS alone cannot know the room). Phones and tablets with the on-screen keyboard; short screens (see SHORT SCREENS)
+   keep scrolling the page as before. */
+.result-more-part {
+  display: none;
+}
+.result.open .result-more-part {
+  display: block;
+}
+.result.open .result-more {
+  display: none;
+}
+.result-more {
+  display: block;
+  margin: 10px 0 0;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: 500 14px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.result-more[hidden] {
+  display: none;
+}
+@media (min-height: 560px) and (min-width: 341px), (min-height: 610px) {
+  #study:has(.keyboard.is-touch):has(.result.show) .card {
+    padding-bottom: 0;
+  }
+  #study:has(.keyboard.is-touch):has(.result.show) .card::before {
+    bottom: 0; /* the card's soft glow must not reach under Weiter and make the page scroll */
+  }
+  #study:has(.keyboard.is-touch):has(.result.show) #keyboardMount {
+    display: none;
+  }
+  #study:has(.keyboard.is-touch) .result.show {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #study:has(.keyboard.is-touch) .result.show .result-body {
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    margin-bottom: -18px; /* the fade runs over the panel's bottom padding, not over text */
+    padding-bottom: 18px;
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 22px), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 22px), transparent);
+  }
+  #study:has(.keyboard.is-touch) #next {
+    flex: none;
+  }
+}
+
+/* ===== END SCREEN (01.11.2026) =====
+   One end screen in every exercise: everything from „Fertig.“ to the buttons stands in the middle of the screen
+   (a faint exercise title on top stays there and is not counted); „Fertig.“ 34 + score 28 in the sans family,
+   48 + 34 in the serif family (Verbformen); one kind phrase (components/deutsch-end-v1.js); the „Noch üben“ list
+   comes from components/deutsch-base-v1.css. Gaps: 10 between Fertig. / score / phrase, 30 before list and buttons. */
+#finish:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+#finish h2 {
+  margin: auto 0 0;
+  font-size: 48px;
+  line-height: 1.05;
+}
+#finish .final-score {
+  margin: 10px 0 0;
+  font-size: 34px;
+}
+#finish > p {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+#finish .finish-actions {
+  margin-top: 30px;
+  margin-bottom: auto;
+}
+
+/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
+   counter 14px muted with digits of equal width */
+.progress {
+  border-radius: 99px;
+}
+.progress > i {
+  border-radius: 99px;
+  transition: width 0.25s ease;
+}
+#count {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* narrowest phones: the window frame of the other Spickzettel windows */
+@media (max-width: 359px) {
+  .pattern-modal-card {
+    --card-pad: 14px;
+  }
+}
+
+/* ===== TABLETS (03.11.2026, as Modalverben) — iPad upright and sideways; computers take the sizes too =====
+   One column of 600, the keyboard as wide as the column (bigger keys: components/deutsch-keyboard), the question
+   in the middle of the room above the keyboard (decision B), held there while the answer shows
+   (partizipII.js → fitCard / fitResult); Weiter stays at the bottom, where the keyboard was.
+   Small text one step up; „Mehr zur Form ›“ is open only on tall tablets. */
+@media (min-width: 700px) and (min-height: 740px) {
+  .app {
+    width: min(100%, 648px);
+  }
+  .translation,
+  .meta,
+  .example {
+    font-size: 20px;
+  }
+  .state,
+  .regional {
+    font-size: 14px;
+  }
+  .vowel-pattern,
+  .hint {
+    font-size: 16px;
+  }
+  .forms {
+    font-size: 28px;
+  }
+  #next {
+    height: 64px; /* buttons as Wortschatz on a tablet: 64 high, 20 */
+    font-size: 20px;
+  }
+  #study:has(.keyboard.is-touch) .result.show {
+    flex: none;
+  }
+}
+@media (min-width: 700px) and (min-height: 1000px) {
+  /* the question in the middle only on tall tablets: sideways the short card sat too low (03.11.2026) */
+  #study:has(.keyboard.is-touch) .card {
+    margin-top: auto;
+  }
+  .result-more {
+    display: none !important;
+  }
+  .result-more-part {
+    display: block;
   }
 }

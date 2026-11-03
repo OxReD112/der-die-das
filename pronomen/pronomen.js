@@ -267,6 +267,7 @@ function submit() {
   const x = deck[i],
     ok = norm(answer) === norm(x.answer);
   recordDailyAnswer();
+  $("bar").style.width = `${((i + 1) / deck.length) * 100}%`; // the bar fills on the answer, like every exercise
   const keys = statKey(x);
   const count = (key, right) => {
     const v = sessionAnswers[key] || { correct: 0, wrong: 0 };
@@ -304,6 +305,19 @@ function submit() {
   $("check").style.display = "none";
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   $("roundTableBtn").disabled = false;
+  tabletAnswer();
+}
+function tabletAnswer() {
+  if (!TABLET.matches || !tabletPromptTop || !$("keyboard")?.classList.contains("is-touch")) return;
+  document.querySelector("#game .prompt").style.marginTop = tabletPromptTop;
+  const c = $("continue"),
+    pill = $("roundTableBtn").getBoundingClientRect();
+  c.style.marginTop = "";
+  const rest = pill.top - 16 - c.getBoundingClientRect().bottom;
+  if (pill.height && rest > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + rest + "px";
+  const app = document.querySelector(".app"),
+    over = app.scrollHeight - app.clientHeight; // never make the page scroll for it
+  if (over > 0 && c.style.marginTop) c.style.marginTop = Math.max(0, parseFloat(c.style.marginTop) - over) + "px";
 }
 function next() {
   i++;
@@ -324,24 +338,12 @@ function finish() {
   $("game").classList.add("hidden");
   $("done").classList.remove("hidden");
   $("score").textContent = `${correct} / ${deck.length}`;
-  // Always kind - praise for taking part (2026-10-22).
-  $("doneNote").textContent =
-    correct === deck.length
-      ? "Perfekt – alles richtig!"
-      : correct * 2 >= deck.length
-        ? "Gut gemacht – Runde geschafft!"
-        : "Schön, dass du geübt hast – bleib dran!";
+  // Always kind - praise for taking part (2026-10-22); the phrase and the list are shared (deutsch-end-v1.js)
+  $("doneNote").textContent = DeutschEnd.note(correct, deck.length);
   const weak = Object.entries(currentStats())
     .filter(([, v]) => v.weak)
-    .sort((a, b) => b[1].errorRate - a[1].errorRate)
-    .slice(0, 3);
-  const box = $("weak");
-  if (weak.length) {
-    const title = document.createElement("b");
-    title.textContent = "Noch üben";
-    box.replaceChildren(title, ...weak.flatMap(([k]) => [document.createElement("br"), weakLabel(k)]));
-    box.classList.remove("hidden");
-  } else box.classList.add("hidden");
+    .sort((a, b) => b[1].errorRate - a[1].errorRate);
+  DeutschEnd.list($("weak"), weak.map(([k]) => weakLabel(k)));
 }
 
 /* ===== BUTTONS ===== */
@@ -437,12 +439,23 @@ document.addEventListener("deutsch-keyboard-input", e => {
    small screen leaves no room for the keyboard at its place, the question shrinks just enough (down to 80%).
    Measured for every sentence, and again when the screen size changes. */
 const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+/* Tablets (03.11.2026, CSS block TABLETS, as Modalverben): the question stands in the middle of the room above the
+   keyboard (margin-top: auto); the answer holds it there, and Weiter is pinned at the bottom (16px above the
+   Spickzettel), where the keyboard was — tabletAnswer(). */
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+let tabletPromptTop = "";
 function fitPrompt() {
   const prompt = document.querySelector("#game .prompt"),
     kb = $("keyboard"),
     app = document.querySelector(".app");
   prompt.style.zoom = "";
+  const answering = !$("feedback").classList.contains("hidden");
+  if (!answering) {
+    prompt.style.marginTop = "";
+    $("continue").style.marginTop = "";
+  }
   if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  if (TABLET.matches && !answering) tabletPromptTop = getComputedStyle(prompt).marginTop;
   const over = app.scrollHeight - app.clientHeight;
   if (over <= 0) return;
   const h = prompt.offsetHeight;
@@ -454,7 +467,7 @@ window.addEventListener("resize", () => {
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../components/deutsch-keyboard-v2.60.html");
+  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=2");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const text = await r.text();
   const tpl = document.createElement("template");

@@ -137,15 +137,16 @@
   }
   // Is this word (a card, or {dictionaryId, base, sentence}) already in the own collection?
   const has = c => dupIndex(cards()).has(c);
-  // Returns {card} or {reason}. Reasons are short English texts for the import summary (the collection screens are in English).
+  // Returns {card} or {reason}. Reasons are short texts for the import summary, in the user's language (02.11.2026, RU / EN).
+  const L = (en, ru) => (window.DeutschTranslation?.getLang?.() === "ru" ? ru : en);
   function normalize(raw) {
-    if (!raw || typeof raw !== "object") return { reason: "Not a valid entry" };
+    if (!raw || typeof raw !== "object") return { reason: L("Not a valid entry", "Неверная запись") };
     const sentence = str(raw.sentence);
-    if (!sentence) return { reason: "No sentence" };
+    if (!sentence) return { reason: L("No sentence", "Нет предложения") };
     const parts = hiddenParts(sentence);
-    if (!parts.length || parts.some(p => !p)) return { reason: "No word marked with {{c1::…}} in the sentence" };
+    if (!parts.length || parts.some(p => !p)) return { reason: L("No word marked with {{c1::…}} in the sentence", "В предложении не отмечено слово {{c1::…}}") };
     const translation = translationValue(raw.translation);
-    if (!translation) return { reason: "No meaning" };
+    if (!translation) return { reason: L("No meaning", "Нет значения") };
     const clean = sentence.replace(CLOZE, (m, w) => "{{c1::" + w.trim() + "}}");
     const card = {
       sentence: clean,
@@ -213,7 +214,7 @@
     if (isOwn()) throw new Error("already-own");
     const p = prepare(items, []);
     if (!p.cards.length) return summary(p, { created: false });
-    const c = { v: 1, name: str(name) || "My Words", createdAt: new Date().toISOString(), nextId: 1, cards: [] };
+    const c = { v: 1, name: str(name) || L("My Words", "Мои слова"), createdAt: new Date().toISOString(), nextId: 1, cards: [] };
     c.cards = withIds(c, p.cards);
     write(KEY, c); // throws if storage is full — nothing changed yet
     localStorage.removeItem(DEMO_KEY);
@@ -264,14 +265,14 @@
     const c = get();
     if (!c) throw new Error("no-collection");
     const i = c.cards.findIndex(x => x.id === id);
-    if (i < 0) return { reason: "Card not found" };
+    if (i < 0) return { reason: L("Card not found", "Карточка не найдена") };
     const merged = {};
     FIELDS.forEach(f => (merged[f] = fields && fields[f] !== undefined ? fields[f] : c.cards[i][f]));
     const r = normalize(merged);
     if (!r.card) return r;
     const old = c.cards[i];
     if (old.dictionaryId && !r.card.dictionaryId) r.card.dictionaryId = old.dictionaryId; // edited dictionary word: same meaning
-    if (dupIndex(c.cards.filter((x, j) => j !== i)).has(r.card)) return { reason: "This word is already in your collection" };
+    if (dupIndex(c.cards.filter((x, j) => j !== i)).has(r.card)) return { reason: L("This word is already in your collection", "Это слово уже есть в коллекции") };
     c.cards[i] = Object.assign({ id, addedAt: old.addedAt }, r.card, old.nextNew ? { nextNew: true } : {});
     write(KEY, c);
     return { card: c.cards[i] };

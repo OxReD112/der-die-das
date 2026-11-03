@@ -15,66 +15,23 @@
   initial-value: #5bc8a4;
 }
 
-/* ===== PALETTE ===== */
+/* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 :root {
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-
-  --bg: #1b1b1d;
-  --card-bg: #2a2a2d; /* 10/20/30 buttons, case buttons */
-  --text: #f2f0ed;
-  --muted: #8f8f94;
-  --text-secondary: #c8c7c4; /* chips, summary parts, „Noch üben“ */
-  --example-text: #c8c7c4; /* example sentence */
-  --mint: #5bc8a4;
-  --red: #ff7770;
-
-  --hairline: rgba(255, 255, 255, 0.1); /* outlines, progress track */
-  --feedback-line: rgba(255, 255, 255, 0.11); /* line above the answer */
   --gap-line: rgba(255, 255, 255, 0.28); /* the blank under the verb */
-  --field-bg: rgba(255, 255, 255, 0.03); /* Weiter */
-  --focus: rgba(255, 255, 255, 0.18);
-
   /* case buttons (same shape as Fester Kasus, own shadow and hover) */
   --case-text: #fff;
   --case-bg-hover: #313235;
   --case-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
   --case-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 7px 18px rgba(0, 0, 0, 0.16);
   --case-shadow-active: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 3px 9px rgba(0, 0, 0, 0.12);
-
-  /* shared across exercises (Design Police 2026-09-25) */
-  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
-  --start-version: rgba(255, 255, 255, 0.24);
-  --end-again-text: rgba(242, 240, 237, 0.55);
-  --end-main-bg: #ece6dc; /* cream: Prüfen, „Zur Startseite“ */
-  --end-main-text: #1b1b1d;
 }
 [data-theme="light"] {
-  --bg: #f6f4f1;
-  --card-bg: #fff;
-  --text: #242426;
-  --muted: #727278;
-  --text-secondary: #55565b;
-  --example-text: #727278;
-  --mint: #3fa68a;
-  --red: #e95e66;
-
-  --hairline: rgba(0, 0, 0, 0.1);
-  --feedback-line: rgba(0, 0, 0, 0.11);
   --gap-line: rgba(0, 0, 0, 0.25);
-  --field-bg: #fff;
-  --focus: rgba(0, 0, 0, 0.18);
-
   --case-text: #242426;
   --case-bg-hover: #f4f2ef;
   --case-shadow: 0 0 0 1px rgba(0, 0, 0, 0.09), 0 4px 12px rgba(0, 0, 0, 0.07);
   --case-shadow-hover: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 6px 16px rgba(0, 0, 0, 0.07);
   --case-shadow-active: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.05);
-
-  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --start-version: rgba(36, 36, 38, 0.34);
-  --end-again-text: rgba(36, 36, 38, 0.55);
-  --end-main-bg: #242426;
-  --end-main-text: #f6f4f1;
 }
 
 /* ===== PAGE SHELL (same as Partizip II / Modalverben / Ortspräpositionen / Fester Kasus) =====
@@ -129,7 +86,7 @@ body {
 }
 .start-title {
   margin: 38px 0 11px;
-  font-size: 36px;
+  font-size: 34px;
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
@@ -162,7 +119,7 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: var(--card-bg);
   color: var(--text);
   box-shadow: var(--start-btn-shadow);
@@ -202,7 +159,7 @@ body {
 }
 .start-about h2 {
   margin: 0 0 5px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.3;
   color: var(--muted);
@@ -210,7 +167,7 @@ body {
 }
 .start-about .about-de {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -230,7 +187,7 @@ body:has(#start.hidden) .start-about {
   margin: 0;
   padding: 0;
   text-align: center;
-  font: 400 11px/1 var(--font);
+  font: 400 12px/1 var(--font);
   letter-spacing: 0.04em;
   color: transparent;
   -webkit-user-select: none;
@@ -245,7 +202,7 @@ body:has(#game:not(.hidden)) .version-mark {
 /* Summary */
 .done-title {
   margin: 0 0 6px;
-  font-size: 58px;
+  font-size: 56px;
   font-weight: 700;
   letter-spacing: -0.05em;
 }
@@ -270,7 +227,7 @@ body:has(#game:not(.hidden)) .version-mark {
 .done-part {
   padding: 8px 13px;
   border: 1px solid var(--hairline);
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 14px;
   color: var(--text-secondary);
 }
@@ -280,16 +237,6 @@ body:has(#game:not(.hidden)) .version-mark {
 .done-note {
   margin-bottom: 28px;
   color: var(--muted);
-}
-/* „Noch üben“: the three verbs missed most often in the last 5 rounds */
-.weak {
-  max-width: 420px;
-  margin: 22px auto;
-  padding: 16px;
-  border: 1px solid var(--hairline);
-  border-radius: 17px;
-  color: var(--text-secondary);
-  line-height: 1.55;
 }
 .done-actions {
   width: min(100%, 360px);
@@ -305,7 +252,7 @@ body:has(#game:not(.hidden)) .version-mark {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
@@ -316,8 +263,8 @@ body:has(#game:not(.hidden)) .version-mark {
     filter 0.12s ease;
 }
 #playAgain {
-  background: transparent;
-  color: var(--end-again-text);
+  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
+  color: var(--text);
   border: 1px solid var(--hairline);
 }
 #homeBack {
@@ -370,7 +317,7 @@ body:has(#game:not(.hidden)) .version-mark {
   pointer-events: none;
 }
 .top-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--muted);
 }
@@ -416,7 +363,7 @@ body:has(#game:not(.hidden)) .version-mark {
   line-height: 1.4;
 }
 .sentence {
-  font-size: clamp(30px, 7vw, 45px);
+  font-size: clamp(28px, 7vw, 34px);
   line-height: 1.18;
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -511,7 +458,7 @@ html.is-touch .gap-input {
 }
 .case-line {
   align-self: start;
-  font-size: clamp(22px, 5vw, 28px);
+  font-size: clamp(20px, 5vw, 28px);
   font-weight: 650;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -532,7 +479,7 @@ html.is-touch .gap-input {
   height: 56px;
   margin: 28px auto 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--end-main-bg);
   color: var(--end-main-text);
   font: 650 16px/1 var(--font);
@@ -647,7 +594,7 @@ html:not(.is-touch) #check {
   align-items: center;
   justify-content: center;
   gap: 0.35em;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 650;
   line-height: 1;
   white-space: nowrap;
@@ -683,7 +630,7 @@ html:not(.is-touch) #check {
   background: var(--card-bg);
   color: var(--case-text);
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
   cursor: pointer;
@@ -720,8 +667,8 @@ html:not(.is-touch) #check {
   gap: 7px;
   padding: 7px 12px;
   border: 1px solid var(--hairline);
-  border-radius: 11px;
-  font-size: 13px;
+  border-radius: 999px;
+  font-size: 14px;
   color: var(--text-secondary);
 }
 .chip .mark {
@@ -746,7 +693,7 @@ html:not(.is-touch) #check {
 }
 .example {
   margin-top: 24px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
   color: var(--example-text);
@@ -767,10 +714,10 @@ html:not(.is-touch) #check {
   margin-top: 40px;
   padding: 0;
   border: 1px solid var(--hairline);
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--field-bg);
   color: var(--text);
-  font: 600 16px/1 var(--font);
+  font: 650 16px/1 var(--font);
   box-shadow: none;
   cursor: pointer;
   transition:
@@ -797,7 +744,7 @@ html:not(.is-touch) #check {
 }
 @media (max-width: 520px) {
   .case-choice {
-    font-size: 19px;
+    font-size: 20px;
   }
 }
 html.is-touch .app {
@@ -937,5 +884,117 @@ html.is-touch.vmp-measure .kbzone {
   .divider {
     left: 0;
     width: 100%;
+  }
+}
+
+/* ===== KEYBOARD EDGE (01.11.2026) =====
+   Everything you tap or read in the answer (field, answer panel, Weiter, the end buttons) reaches the edges of the
+   on-screen keyboard, i.e. the .app column — the rule Vielseitige Verben already had (2026-09-28). Text keeps its own
+   inner padding. End buttons: as wide as the column, at most 360px, centred. */
+@media (max-width: 600px) {
+  .feedback {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+}
+.done-actions {
+  width: min(calc(100% + 28px), 360px);
+  margin-left: calc(50% - min(calc(50% + 14px), 180px));
+  margin-right: 0;
+}
+
+/* ===== END SCREEN (01.11.2026) =====
+   One end screen in every exercise: everything from „Fertig.“ to the buttons stands in the middle of the screen
+   (a faint exercise title on top stays there and is not counted); „Fertig.“ 34 + score 28 in the sans family,
+   48 + 34 in the serif family (Verbformen); one kind phrase (components/deutsch-end-v1.js); the „Noch üben“ list
+   comes from components/deutsch-base-v1.css. Gaps: 10 between Fertig. / score / phrase, 30 before list and buttons. */
+#done:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+#done .done-title {
+  margin: auto 0 0;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+#done .done-score {
+  margin: 10px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+#done .done-score-label {
+  margin: 4px 0 0;
+}
+#done .done-parts {
+  margin: 14px 0 0;
+}
+#done .done-note {
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+#done .done-actions {
+  margin-top: 30px;
+  margin-bottom: auto;
+}
+
+/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
+   counter 14px muted with digits of equal width */
+.progress i {
+  border-radius: 99px;
+  transition: width 0.25s ease;
+}
+.counter {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* type scale (01.11.2026): on the narrowest phones (320) the long title would touch the counter at 20px */
+@media (max-width: 359px) {
+  .top-title {
+    font-size: 16px;
+  }
+}
+
+/* ===== TABLETS (03.11.2026, as Modalverben) — iPad upright and sideways; computers take the sizes too =====
+   One column of 600 (.app 600 + 2 × 18 + 2 × 14), the keyboard as wide as the column (bigger keys:
+   components/deutsch-keyboard), the question in the middle of the room above the keyboard (decision B) — the
+   answer opens under it without moving it (feedback is absolute, as on phones). Weiter follows the answer: the
+   last tap is a case button in the middle of the screen. Small text one step up. */
+@media (min-width: 700px) and (min-height: 740px) {
+  .app {
+    width: min(664px, 100%);
+  }
+  .kbzone #keyboardMount {
+    width: 100%;
+  }
+  html.is-touch .qzone {
+    align-items: center;
+  }
+  html.is-touch .anchor {
+    padding-top: 0;
+  }
+  .meaning,
+  .case-question,
+  .example {
+    font-size: 20px;
+  }
+  .also-line,
+  .example-tr,
+  .chip {
+    font-size: 16px;
+  }
+  .case-choice,
+  #continue {
+    min-height: 64px;
+    height: 64px; /* buttons as Wortschatz on a tablet: 64 high, 20 */
+    font-size: 20px;
   }
 }

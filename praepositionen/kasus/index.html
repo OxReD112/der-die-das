@@ -16,7 +16,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Fester Kasus" />
     <title>Fester Kasus</title>
-    <link rel="stylesheet" href="kasus.css?v=3" />
+    <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=3" />
+    <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
+    <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
+    <link rel="stylesheet" href="kasus.css?v=25" />
   </head>
   <body>
     <main class="app">
@@ -48,7 +51,8 @@
           <div class="answer-card-main" id="answerCardMain">
             <div class="answer-eyebrow" id="answerEyebrow">Richtig</div>
             <div class="answer-preposition" id="answerPreposition">mit</div>
-            <div class="answer-divider" id="answerDivider"></div>
+            <div class="answer-translation" id="answerTranslation"></div>
+            <div class="answer-wrong" id="answerWrong" hidden></div>
             <div class="answer-case-large" id="answerCase">Dativ</div>
             <div class="answer-note" id="rule"></div>
             <div class="answer-example" id="exampleText"></div>
@@ -69,8 +73,8 @@
       <section class="hidden" id="endScreen">
         <h1>Fertig.</h1>
         <div class="end-score" id="endScore">0 / 10</div>
-        <div class="weak hidden" id="weak"></div>
         <div class="end-note" id="endNote"></div>
+        <div class="end-list hidden" id="weak"></div>
         <div class="finish-actions">
           <button id="playAgain">Noch eine Runde</button>
           <button id="homeBack">Zur Startseite</button>
@@ -87,7 +91,8 @@
     <script src="../../components/deutsch-day-v1.js?v=1"></script>
     <script src="prepositions.js?v=13"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="kasus.js?v=4"></script>
+    <script src="../../components/deutsch-end-v1.js?v=1"></script>
+    <script src="kasus.js?v=9"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

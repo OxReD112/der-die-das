@@ -55,6 +55,8 @@
 .keyboard.is-touch .key{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}
 .keyboard.is-touch .key:active,.keyboard.is-touch .key.is-pressed{transform:scale(1.08);background:var(--key-active-bg);border-color:transparent;position:relative;z-index:3}
 .keyboard.is-touch .key.ok:active,.keyboard.is-touch .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:var(--ok-active-text)}
+/* Tablets (03.11.2026): the keyboard is as wide as the 600 column — keys taller and letters bigger, like the iPad's own */
+@media (min-width:700px) and (min-height:740px){.key{height:58px;font-size:24px;border-radius:12px}.row{margin-bottom:7px}.row.special .ok{font-size:26px}}
 </style>
 <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
  <div class="row" data-keys="QWERTYUIOP"></div>

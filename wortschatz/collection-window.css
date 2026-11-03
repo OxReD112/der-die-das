@@ -72,9 +72,10 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 1.25;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* 02.11.2026: a long title wraps to a second line instead of „Удалить коллекци…“ (320 px) */
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  padding: 6px 0; /* inside the 52 px row for one line; air above the text for two */
 }
 .coll-close {
   flex: 0 0 auto;
@@ -210,7 +211,11 @@
   height: 48px;
   border-radius: 16px;
   font-size: 15px;
-  white-space: nowrap;
+  line-height: 1.15;
+  padding: 0 8px;
+  /* 02.11.2026: a longer label (Russian „＋ Добавить слово“ on a 320 px screen) wraps to a second line
+     instead of being cut */
+  white-space: normal;
 }
 
 /* word list */
@@ -661,6 +666,7 @@ textarea.coll-paste {
 }
 .coll-pick-count {
   margin-left: auto;
+  white-space: nowrap;
   font-size: 14px;
   color: var(--muted);
 }

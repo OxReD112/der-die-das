@@ -50,7 +50,8 @@
   --good-line-shadow: 0 0 14px rgba(91, 200, 164, 0.3);
   --bad-line-shadow: 0 0 14px rgba(255, 119, 112, 0.34);
 
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Literata Deutsch", Georgia, "Times New Roman", serif; /* components/deutsch-fonts-v1.css (02.11.2026) */
 }
 
 /* ===== PALETTE · light ===== */
@@ -110,7 +111,8 @@ body {
   min-height: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font);
+  font-variant-ligatures: no-common-ligatures;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   touch-action: manipulation;
@@ -154,19 +156,22 @@ button {
   margin-bottom: 12px;
 }
 .brand {
-  font:
-    26px Georgia,
-    serif;
+  font: 400 20px var(--serif);
+  letter-spacing: -0.5px;
   color: var(--muted);
+}
+#counter {
+  font-variant-numeric: tabular-nums;
 }
 .progress {
   height: 3px;
   background: var(--hairline);
-  border-radius: 8px;
+  border-radius: 99px;
   overflow: hidden;
 }
 .progress div {
   height: 100%;
+  border-radius: 99px;
   background: var(--muted);
   transition: width 0.2s;
 }
@@ -192,10 +197,8 @@ body:has(#done.show) header {
   display: flex;
 }
 #start .title {
-  font:
-    400 clamp(48px, 13vw, 72px) / 1.05 Georgia,
-    serif;
-  letter-spacing: -2px;
+  font: 400 clamp(56px, 14vw, 84px) / 1.05 var(--serif);
+  letter-spacing: -3px;
   color: var(--text);
   margin: 0;
 }
@@ -229,11 +232,11 @@ body:has(#done.show) header {
   margin: 0 0 12px;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 18px;
   background: var(--card-bg);
   box-shadow: var(--card-shadow);
   color: var(--text);
-  font: 600 15px/1 var(--font);
+  font: 600 16px/1 var(--font);
   cursor: pointer;
   transition:
     transform 0.12s ease,
@@ -246,7 +249,7 @@ body:has(#done.show) header {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--main-bg);
   color: var(--main-text);
   font: 650 16px/1 var(--font);
@@ -275,10 +278,10 @@ body:has(#done.show) header {
   margin: 0;
   padding: 6px 10px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   background: none;
   color: var(--text);
-  font: 500 17px/1.25 var(--font);
+  font: 500 16px/1.25 var(--font);
   cursor: pointer;
   transition:
     transform 0.12s ease,
@@ -295,7 +298,7 @@ body:has(#done.show) header {
 }
 .coll-line-chev {
   color: var(--muted);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   margin-left: 8px;
   flex: 0 0 auto;
@@ -329,7 +332,7 @@ body:has(#choose.show) .start-about {
 }
 .start-about h2 {
   margin: 0 0 5px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.3;
   color: var(--muted);
@@ -340,7 +343,7 @@ body:has(#choose.show) .start-about {
 }
 .start-about .about-de {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -380,7 +383,7 @@ body:has(#choose.show) .start-about {
   margin: 0;
   padding: 0;
   text-align: center;
-  font: 400 11px/1 var(--font);
+  font: 400 12px/1 var(--font);
   letter-spacing: 0.04em;
   color: transparent;
   -webkit-user-select: none;
@@ -411,10 +414,13 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   width: min(620px, 100%);
 }
 .sentence {
-  font-size: clamp(28px, 7vw, 42px);
-  line-height: 1.28;
-  letter-spacing: -0.025em;
+  font-family: var(--serif); /* 02.11.2026: German text in Literata, as in the exercises */
+  font-size: clamp(28px, 7vw, 34px);
+  line-height: 1.35;
   max-width: 620px;
+}
+.blankGroup {
+  white-space: nowrap;
 }
 .blank {
   display: inline-block;
@@ -427,7 +433,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .translation {
   margin-top: 20px;
   color: var(--muted);
-  font-size: clamp(16px, 4.2vw, 22px);
+  font-size: 16px;
 }
 
 /* Typo hint above the typing field: the line is always reserved (nothing jumps), red text fades in */
@@ -457,7 +463,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 400 24px var(--font);
+  font: 400 20px var(--font);
   outline: none;
   background-color: var(--field-bg);
   box-shadow: none;
@@ -515,7 +521,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   width: min(620px, 100%);
   height: 56px;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   padding: 16px;
   background: var(--main-bg);
   color: var(--main-text);
@@ -557,9 +563,9 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 }
 .answerSentence {
   display: inline;
-  font-size: clamp(28px, 7vw, 42px);
-  line-height: 1.28;
-  letter-spacing: -0.025em;
+  font-family: var(--serif);
+  font-size: clamp(28px, 7vw, 34px);
+  line-height: 1.35;
   max-width: 620px;
   margin: 0 auto;
 }
@@ -576,11 +582,11 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   display: block;
   margin-top: 18px;
   color: var(--muted);
-  font-size: clamp(17px, 4.2vw, 22px);
+  font-size: 16px;
 }
 .speakTop {
   display: block;
-  font-size: clamp(28px, 7vw, 42px);
+  font-size: clamp(28px, 7vw, 34px);
   width: 1em;
   height: auto;
   margin: 16px auto 18px;
@@ -594,9 +600,12 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 .speakTop:active {
   transform: scale(0.94);
 }
-/* No German voice on this device: no speaker icon, sentence not tappable. */
+/* No German voice on this device: no speaker icon, sentence not tappable — the line keeps the same air. */
 .noGermanVoice .speakTop {
   display: none;
+}
+.noGermanVoice .detail {
+  margin-top: 22px;
 }
 .noGermanVoice .answerTop {
   cursor: default;
@@ -631,28 +640,15 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   }
 }
 
-/* right answer: the word in green */
-.targetForm {
-  display: inline-block;
-  margin-top: 22px;
-  color: var(--accent);
-  font:
-    36px Georgia,
-    serif;
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
-  padding: 1px 5px;
-}
-.feedback.bad .targetForm {
-  display: none;
-}
-
-/* wrong answer: what you typed ↓ the right word, differences marked */
+/* wrong answer: what you typed ↓ the right word, differences marked. 02.11.2026: a little smaller than the base
+   form under the line (22, iPad 26 — chosen by eye, it balances the screen); the letters stand column by column (wortschatz.js diffHTML), so the font stays
+   monospace. A right answer shows no extra word: it is green in the sentence. */
 .diffBlock {
   display: none;
-  margin-top: 26px;
+  margin-top: 22px;
   padding-bottom: 0;
   font:
-    32px ui-monospace,
+    22px ui-monospace,
     SFMono-Regular,
     Menlo,
     Monaco,
@@ -677,9 +673,10 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   background: var(--diff-error-bg);
 }
 .diffArrow {
-  margin: 1px 0;
+  margin: 4px 0;
   color: var(--diff-arrow);
-  font: 24px/1 sans-serif;
+  font: 16px/1 sans-serif;
+  opacity: 0.55;
 }
 .diffArrow img {
   display: block;
@@ -687,6 +684,10 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   height: 1em;
   object-fit: contain;
   margin: 0 auto;
+}
+/* the arrow icon is drawn light grey: dark on the light theme (02.11.2026 — it was hardly visible) */
+[data-theme="light"] .diffArrow img {
+  filter: invert(1);
 }
 .diffCorrect {
   color: var(--diff-correct);
@@ -760,11 +761,12 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   gap: 12px;
 }
 .base {
-  font-size: 25px;
+  font-family: var(--serif);
+  font-size: 24px; /* 02.11.2026: one step below the sentence */
   margin: 0;
 }
 .meaning {
-  font-size: 20px;
+  font-size: 16px;
   color: var(--meaning-text);
 }
 .grammar {
@@ -813,9 +815,6 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   height: 0;
   width: min(620px, 100%);
   margin: 0 auto;
-}
-#question .ghostRow {
-  order: 3;
 }
 .ghostEye {
   display: none;
@@ -868,15 +867,11 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   background: var(--hairline);
   box-shadow: none;
 }
-.feedback.neutral .targetForm {
-  color: var(--text);
-  background: transparent;
-}
 
 /* „auch: …“ — the word's other meanings under the trained one (2026-10-26) */
 .auch {
   margin-top: 6px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -900,26 +895,25 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   cursor: pointer;
 }
 
-/* Long words (2026-10-26): wortschatz.js shrinks a word that is wider than the screen (fitAnswer);
-   base form and meaning may break as a last resort instead of running off the edge. */
-.base,
+/* Long words (2026-10-26, 02.11.2026): wortschatz.js shrinks a word that is wider than the screen (fitAnswer) —
+   the base form too, so it wraps only between words; the meaning may break as a last resort. */
 .meaning {
   overflow-wrap: anywhere;
 }
 
-/* WEITER: the quiet button — it doesn't urge you on, you read the answer first. Same surface + outline as the
-   typing field; half as wide as the answer area, centred. */
+/* WEITER: the quiet button — same surface + outline as the typing field. 02.11.2026: as wide as the typing field,
+   as in the exercises (was half as wide). */
 .continue {
   display: block;
-  width: 50%;
+  width: min(560px, 100%);
   height: 56px;
   margin: 18px auto 0;
   padding: 0;
   border: 1px solid var(--hairline);
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--field-bg);
   color: var(--text);
-  font: 600 16px/1 var(--font);
+  font: 650 16px/1 var(--font);
   box-shadow: none;
   cursor: pointer;
   transition:
@@ -949,20 +943,18 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   width: 100%;
 }
 #done h1 {
-  font:
-    46px/1.05 Georgia,
-    serif;
+  font: 400 48px/1.05 var(--serif);
   margin: 0 0 15px;
 }
 .doneTop p {
   color: var(--muted);
-  font-size: 18px;
+  font-size: 20px;
   margin: 0;
 }
 .doneScore {
   margin-top: 18px;
   color: var(--text);
-  font-size: 17px;
+  font-size: 16px;
 }
 .doneScore:empty {
   display: none;
@@ -995,7 +987,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
@@ -1006,9 +998,10 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
     filter 0.12s ease;
 }
 .finish-actions .addWords {
-  /* v2.111: the raised „＋ Use your own words“ look (was outlined, text at 55% — looked disabled) */
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
+  /* 02.11.2026: the one quiet button of the exercises (Weiter, „Noch eine Runde“): field surface, 10% outline,
+     full-strength text (v2.111 had made it raised because the old outline with 55% text looked disabled) */
+  border: 1px solid var(--hairline);
+  background: var(--field-bg);
   color: var(--text);
 }
 .finish-actions .home-back {
@@ -1044,6 +1037,9 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
     order: 3;
     margin-top: 28px;
   }
+  #question .ghostRow {
+    order: 3;
+  }
   #question .check {
     order: 4;
     display: none;
@@ -1065,26 +1061,38 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   }
   .topZone .sentence,
   .topZone .answerSentence {
-    min-height: 2.56em;
+    min-height: 2.7em; /* two lines */
   }
   .translation {
     font-size: 16px;
   }
   .answerTranslation {
-    font-size: 17px;
+    font-size: 16px;
   }
   .speakTop {
     width: 1.25em;
   }
   .diffBlock {
-    margin-top: 22px;
-    font-size: 28px;
+    margin-top: 20px;
   }
   .detail {
     padding-top: 12px;
   }
   .grammar {
     margin-top: 26px;
+  }
+}
+
+/* Small phones (iPhone SE, Safari with its bars): Literata a touch tighter (as the system font before), so a
+   two-line sentence fits above the keyboard without shrinking (02.11.2026). */
+@media (max-width: 699px) and (max-height: 700px) {
+  .sentence,
+  .answerSentence {
+    line-height: 1.28;
+  }
+  .topZone .sentence,
+  .topZone .answerSentence {
+    min-height: 2.56em;
   }
 }
 
@@ -1151,10 +1159,8 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   display: flex;
 }
 #choose .title {
-  font:
-    400 clamp(48px, 13vw, 72px) / 1.05 Georgia,
-    serif;
-  letter-spacing: -2px;
+  font: 400 clamp(56px, 14vw, 84px) / 1.05 var(--serif);
+  letter-spacing: -3px;
   color: var(--text);
   margin: 0;
 }
@@ -1172,7 +1178,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 }
 #choose .chooseHint {
   margin: 0 0 14px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 /* one hairline between the sets (as in the word lists), a little air around each */
@@ -1209,7 +1215,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--main-bg);
   color: var(--main-text);
   font: 650 16px/1 var(--font);
@@ -1220,7 +1226,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 }
 #choose .chooseOwnHint {
   margin: 10px 0 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -1237,7 +1243,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   height: 44px;
   padding: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
   align-items: center;
@@ -1256,4 +1262,265 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
 body:has(#start.show) .ws-settings-btn,
 body:has(#done.show) .ws-settings-btn {
   display: flex;
+}
+
+/* ===== TABLETS AND COMPUTERS (02.11.2026) =====
+   On a big screen the phone layout looked like a phone screen opened on a tablet: small text and buttons in the
+   middle of a lot of empty space. Here everything gets about a quarter larger, by the same steps of the type scale
+   (12 → 14 → 16 → 20 → 28 → 34): titles 84, Fertig 70, buttons 64 high and 400–420 wide, the answer field 68.
+   Only where the screen is both wide and tall (iPad upright and sideways, computers); phones sideways keep the
+   phone layout. */
+@media (min-width: 700px) and (min-height: 740px) {
+  /* top bar of the session */
+  .top {
+    font-size: 16px;
+  }
+  .brand {
+    font-size: 28px;
+  }
+  /* start, choose and done screens: the DEINE WÖRTER block */
+  .startLabel {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .coll-line {
+    font-size: 20px;
+  }
+  .coll-line-chev {
+    font-size: 24px;
+  }
+  .collCount,
+  #start .startNote,
+  .allAdded {
+    font-size: 16px;
+  }
+  #choose .chooseQuestion {
+    font-size: 20px;
+  }
+  #choose .chooseHint,
+  #choose .chooseOwnHint {
+    font-size: 16px;
+  }
+  .chooseSetList {
+    width: 320px;
+  }
+  .chooseSet {
+    padding: 18px 0;
+  }
+  #start #startBtn,
+  #choose .chooseOwnBtn {
+    width: 400px;
+    height: 64px;
+    font-size: 20px;
+  }
+  .start-about {
+    width: 420px;
+  }
+  .start-about h2,
+  .start-about .about-de {
+    font-size: 16px;
+  }
+  .ws-settings-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  /* question */
+  #question {
+    width: min(600px, 100%); /* 03.11.2026: one column of 600 for every exercise; keyboard as wide */
+  }
+  .translation,
+  .answerTranslation {
+    font-size: 20px;
+  }
+  .inputbox {
+    height: 68px;
+    min-height: 68px;
+    font-size: 28px;
+  }
+  .inputbox:placeholder-shown {
+    background-size: 2px 32px;
+  }
+  .ghostEye {
+    top: -56px;
+  }
+  .check {
+    height: 64px;
+    font-size: 20px;
+  }
+  #almostHint {
+    font-size: 20px;
+  }
+  /* answer */
+  .diffBlock {
+    font-size: 26px;
+  }
+  .base {
+    font-size: 28px;
+  }
+  .meaning {
+    font-size: 20px;
+  }
+  .auch {
+    font-size: 20px;
+  }
+  .grammar {
+    font-size: 16px;
+  }
+  .continue {
+    width: min(600px, 100%);
+    height: 64px;
+    font-size: 20px;
+  }
+  /* done screen */
+  #done h1 {
+    font-size: 70px;
+    margin-bottom: 20px;
+  }
+  .doneTop p {
+    font-size: 28px;
+  }
+  .doneScore {
+    font-size: 20px;
+  }
+  .finish-actions {
+    width: min(100%, 420px);
+    gap: 12px;
+  }
+  .finish-actions button {
+    height: 64px;
+    font-size: 20px;
+  }
+}
+/* 03.11.2026, decision B: the sentence in the middle of the room above the keyboard (wortschatz.js → placeTabletAnswer)
+   — only on tall tablets: sideways it sat too low, with the answer and the speaker icon still to come under it */
+@media (min-width: 700px) and (min-height: 1000px) {
+  #question:has(.keyboard.is-touch) .topZone {
+    margin-top: auto;
+  }
+}
+
+/* ===== WORDS WINDOW (02.11.2026): the window of the exercises' Spickzettel =====
+   Wortschatz only — this file is not loaded in Bibliothek, which keeps collection-window.css as it is.
+   #collModal raises the weight above collection-window.css (loaded after this file).
+   Corners 26, padding 18 (320 px: 14), the round close button, sizes on the type scale (12 / 14 / 16 / 20),
+   wide buttons 18, buttons in a row 14, small things round. */
+#collModal .coll-card {
+  --card-pad: 18px;
+  width: min(560px, 100%);
+  border-radius: 26px;
+  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
+}
+#collModal .coll-head {
+  min-height: 32px;
+  margin-bottom: 10px;
+}
+#collModal .coll-title {
+  padding: 0;
+}
+/* × → a 30 px circle, the cross drawn 10 px in the muted grey (the glyph is hidden); tap area 44 × 44 */
+#collModal .coll-close {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 -4px 0 0;
+  padding: 0;
+  border-radius: 999px;
+  background: var(--hairline);
+  color: transparent;
+  font-size: 0;
+  align-self: flex-start;
+}
+#collModal .coll-close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 10px;
+  height: 10px;
+  background: var(--muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='black' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='black' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+#collModal .coll-close::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+#collModal .coll-back {
+  padding: 0 10px 2px 0;
+  font-size: 30px;
+}
+/* text sizes */
+#collModal .coll-text,
+#collModal .coll-preview,
+#collModal .coll-fold,
+#collModal .coll-sets-link {
+  font-size: 16px;
+}
+#collModal .coll-note,
+#collModal .coll-label,
+#collModal .coll-hint,
+#collModal .coll-hit-added,
+#collModal .coll-hit-in,
+#collModal .coll-pace-note,
+#collModal .coll-bottom {
+  font-size: 14px;
+}
+#collModal .coll-new {
+  font-size: 12px;
+  font-weight: 650;
+}
+#collModal textarea.coll-paste {
+  font-size: 12px;
+}
+#collModal .coll-name-input {
+  font-size: 20px;
+}
+/* buttons and chips */
+#collModal .coll-main,
+#collModal .coll-quiet,
+#collModal .coll-raised {
+  border-radius: 18px;
+}
+#collModal .coll-pair .coll-main,
+#collModal .coll-pair .coll-quiet,
+#collModal .coll-pair .coll-raised {
+  width: auto;
+  flex: 1 1 auto; /* the longer label takes more room („＋ Добавить слово“ | „Импорт списка“) */
+  padding: 0 8px;
+  border-radius: 14px;
+  font-size: 16px;
+}
+@media (min-width: 370px) {
+  #collModal .coll-pair .coll-main,
+  #collModal .coll-pair .coll-quiet,
+  #collModal .coll-pair .coll-raised {
+    white-space: nowrap;
+  }
+}
+#collModal .coll-chip {
+  border-radius: 999px;
+  font-size: 16px;
+}
+@media (max-width: 340px) {
+  #collModal .coll-card {
+    --card-pad: 14px;
+  }
+}
+/* Search field (02.11.2026): the browser's own clear button (blue × on iPhone) → our small round one:
+   a 20 px circle in the 10% outline colour with a thin cross in the muted grey, like the window's close button. */
+#collModal .coll-search-field {
+  padding-right: 12px; /* the circle sits at the right edge, mirroring the magnifier on the left (iOS search bar) */
+}
+#collModal .coll-search-field::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23ffffff' fill-opacity='0.1'/%3E%3Cpath d='M7 7l6 6M13 7l-6 6' stroke='%238f8f94' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+}
+[data-theme="light"] #collModal .coll-search-field::-webkit-search-cancel-button {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23000000' fill-opacity='0.1'/%3E%3Cpath d='M7 7l6 6M13 7l-6 6' stroke='%23727278' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
 }

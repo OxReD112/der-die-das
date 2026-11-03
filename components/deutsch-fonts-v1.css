@@ -1,0 +1,49 @@
+/* Deutsch fonts (01.11.2026): Inter for the interface, Literata for the serif (titles of the Verbformen family,
+   German words and forms). Both are under the SIL Open Font License (fonts/OFL-*.txt): free to ship inside the
+   site and the iOS / Android apps. They replace the system font of Apple and Georgia, which Android does not have
+   and which cannot be shipped in an app. Subset: Latin, Latin Extended, Cyrillic (the interface can be Russian).
+
+   "Literata Deutsch" is Literata reduced to the size of Georgia (size-adjust 94 %: its lowercase is 6 % taller),
+   so every font-size written for Georgia keeps its look. Text measured by the fit functions of the exercises is
+   measured again once the fonts have loaded (components/deutsch-fonts-v1.js).
+
+   An exercise uses them through its own variables:
+     --font:  "Inter", -apple-system, …
+     --serif: "Literata Deutsch", Georgia, … */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-italic.woff") format("woff");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata Deutsch";
+  src: url("../fonts/literata.woff") format("woff");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 94%;
+}
+@font-face {
+  font-family: "Literata Deutsch";
+  src: url("../fonts/literata-italic.woff") format("woff");
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 94%;
+}
+
+/* No ligatures: in "finden" the f and the i melted into one sign, and in German a ligature must not sit on the
+   border of two word parts (Auflage). Learners should see every letter. */
+html {
+  font-variant-ligatures: no-common-ligatures;
+}

@@ -30,7 +30,8 @@
     return errors;
   }
   function describe(error) {
-    return `${error.n ? 'Row '+error.n+' · ' : ''}${error.base || 'Unknown word'}${error.dictionaryId ? ' ('+error.dictionaryId+')' : ''}: ${error.reason}`;
+    const ru = window.DeutschTranslation?.getLang?.() === 'ru'; // 02.11.2026: in the user's language
+    return `${error.n ? (ru ? 'Строка ' : 'Row ')+error.n+' · ' : ''}${error.base || (ru ? 'Неизвестное слово' : 'Unknown word')}${error.dictionaryId ? ' ('+error.dictionaryId+')' : ''}: ${error.reason}`;
   }
   window.WortschatzDictionaryImport=Object.freeze({VERSION,READING,DIRECT,load,row,validate,describe});
 })();

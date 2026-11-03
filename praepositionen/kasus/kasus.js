@@ -100,7 +100,8 @@ const els = {
   answerCardMain: document.getElementById("answerCardMain"),
   answerEyebrow: document.getElementById("answerEyebrow"),
   answerPreposition: document.getElementById("answerPreposition"),
-  answerDivider: document.getElementById("answerDivider"),
+  answerTranslation: document.getElementById("answerTranslation"),
+  answerWrong: document.getElementById("answerWrong"),
   answerCase: document.getElementById("answerCase"),
   rule: document.getElementById("rule"),
   exampleText: document.getElementById("exampleText"),
@@ -155,17 +156,10 @@ function finish() {
   els.game.classList.add("hidden");
   els.end.classList.remove("hidden");
   els.endScore.textContent = score + " / " + session.length;
-  els.endNote.textContent = "Was schwierig war, kommt öfter wieder.";
-  // „Noch üben“: up to 3 prepositions still marked difficult (a recent mistake not yet made up for), hardest first
-  const weak = PREPOSITIONS.filter(e => weightFor(e) >= 2)
-    .sort((a, b) => weightFor(b) - weightFor(a))
-    .slice(0, 3);
-  if (weak.length) {
-    const title = document.createElement("b");
-    title.textContent = "Noch üben";
-    els.weak.replaceChildren(title, ...weak.flatMap(e => [document.createElement("br"), progressLabel(e)]));
-    els.weak.classList.remove("hidden");
-  } else els.weak.classList.add("hidden");
+  els.endNote.textContent = DeutschEnd.note(score, session.length);
+  // „Noch üben“: prepositions still marked difficult (a recent mistake not yet made up for), hardest first
+  const weak = PREPOSITIONS.filter(e => weightFor(e) >= 2).sort((a, b) => weightFor(b) - weightFor(a));
+  DeutschEnd.list(els.weak, weak.map(e => progressLabel(e)));
   scrollToTop();
 }
 
@@ -238,9 +232,11 @@ function answer(selected) {
   const shownCase = correct ? selected : primary.case;
   const shownStatus = correct ? match.status : primary.status;
   const fromRect = els.preposition.getBoundingClientRect();
+  const cardTop = els.questionCard.getBoundingClientRect().top; // tablets: the answer card takes the question card's place
 
   els.questionCard.classList.add("hidden");
   els.answerState.classList.remove("hidden");
+  els.answerState.style.marginTop = "";
   els.next.classList.remove("hidden");
   els.choices.classList.add("hidden");
 
@@ -248,6 +244,11 @@ function answer(selected) {
   els.answerCardMain.className = "answer-card-main " + (variantLabel ? "special" : !correct ? "wrong" : "");
   els.answerEyebrow.textContent = correct ? (variantLabel ? "Richtig · " + variantLabel : "Richtig") : "Nicht ganz";
   els.answerPreposition.textContent = entry.preposition;
+  // 02.11.2026: compact answer — the word's translation stays under it (as in the question), the picked wrong case
+  // crossed out right above the right one
+  els.answerTranslation.textContent = getTranslation(entry, "translation");
+  els.answerWrong.textContent = correct ? "" : selected;
+  els.answerWrong.hidden = correct;
   // A preposition with two right cases always shows both, the main one first (author 2026-10-23): „Genitiv / Dativ“
   els.answerCase.textContent = entry.cases.length > 1 ? [primary, ...entry.cases.filter(c => c !== primary)].map(c => c.case).join(" / ") : shownCase;
   if (correct) {
@@ -255,15 +256,9 @@ function answer(selected) {
       ? getTranslation(entry, "variantNote") || statusMessage(shownStatus, entry)
       : getTranslation(entry, "note");
   } else {
-    // wrong: the picked case crossed out, and the note under it (2026-10-23: it was hidden after a mistake)
-    const crossed = document.createElement("span");
-    crossed.className = "wrong-choice";
-    crossed.textContent = selected;
-    const note = getTranslation(entry, "note");
-    const noteLine = document.createElement("span");
-    noteLine.className = "wrong-note";
-    noteLine.textContent = note || "";
-    els.rule.replaceChildren(crossed, ...(note ? [noteLine] : []));
+    // wrong: the note under the case as after a right answer (2026-10-23: it was hidden after a mistake);
+    // the picked case is crossed out above the right one (answerWrong)
+    els.rule.textContent = getTranslation(entry, "note");
   }
 
   els.exampleText.textContent = entry.example || "";
@@ -277,6 +272,11 @@ function answer(selected) {
   scrollToTop();
   fitToCard(els.answerPreposition);
   fitCase(els.answerCase);
+  // Tablets (03.11.2026): the question card stands in the middle of the screen; the answer card's top goes where its top was
+  if (TABLET.matches) {
+    const shift = cardTop - els.answerState.getBoundingClientRect().top;
+    if (shift > 0) els.answerState.style.marginTop = parseFloat(getComputedStyle(els.answerState).marginTop) + shift + "px";
+  }
   animateReveal(fromRect);
 }
 
@@ -284,6 +284,7 @@ function answer(selected) {
    The preposition flies from its question position into the answer card (FLIP),
    the rest of the answer fades in and slides down slightly, one after another. */
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
 let revealAnims = [];
 function stopReveal() {
   revealAnims.forEach(a => a.cancel());
@@ -299,7 +300,7 @@ function animateReveal(fromRect) {
   const scale = fromRect.height / toRect.height;
   const fly = [{ transform: `translate(${dx}px,${dy}px) scale(${scale})` }, { transform: "none" }];
   revealAnims.push(els.answerPreposition.animate(fly, { duration: 260, easing: "cubic-bezier(.2,.8,.2,1)" }));
-  const parts = [els.answerEyebrow, els.answerDivider, els.answerCase, els.rule];
+  const parts = [els.answerEyebrow, els.answerTranslation, els.answerWrong, els.answerCase, els.rule];
   parts.push(els.exampleText, els.exampleTranslation);
   parts.forEach((el, i) => {
     revealAnims.push(

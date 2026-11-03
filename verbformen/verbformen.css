@@ -2,29 +2,7 @@
    Same structure as praepositionen/praepositionen.css (only the title fonts differ).
    When this file changes, raise its ?v= in index.html and the Home tile's verbformen/?v= */
 
-/* ===== PALETTE ===== */
-:root {
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  --serif: Georgia, "Times New Roman", serif; /* title and card titles, like the Verbformen exercises */
-
-  --bg: #1b1b1d;
-  --card-bg: #2a2a2d; /* exercise cards */
-  --text: #f2f0ed;
-  --muted: #8f8f94;
-
-  /* shared across exercises (Design Police 2026-09-25) */
-  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
-  --start-version: rgba(255, 255, 255, 0.24);
-}
-[data-theme="light"] {
-  --bg: #f6f4f1;
-  --card-bg: #fff;
-  --text: #242426;
-  --muted: #727278;
-
-  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --start-version: rgba(36, 36, 38, 0.34);
-}
+/* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 
 /* ===== PAGE SHELL =====
    The page itself never scrolls or bounces. Everything lives in .app, which fills the screen

@@ -157,12 +157,19 @@ function startSession(size) {
    small screen leaves no room for the keyboard at its place, the question card shrinks just enough (down to 80%).
    Measured for every sentence, and again when the screen size changes. */
 const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+/* Tablets (03.11.2026, CSS block TABLETS): the question stands in the middle of the room above the keyboard
+   (margin-top: auto). The answer keeps the question exactly there: before Prüfen the card's top is remembered and
+   held while the answer shows; Weiter stays pinned at the bottom, where the keyboard was. */
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+let tabletCardTop = "";
 function fitCard() {
   const card = document.querySelector("#study .card"),
     kb = $("keyboard"),
     app = document.querySelector(".app");
   card.style.zoom = "";
+  if (!checked) card.style.marginTop = "";
   if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  if (TABLET.matches && !checked) tabletCardTop = getComputedStyle(card).marginTop;
   const over = app.scrollHeight - app.clientHeight;
   if (over <= 0) return;
   const h = card.offsetHeight;
@@ -213,21 +220,24 @@ function render() {
   $("answer").disabled = false;
   $("answer-area").classList.remove("hidden");
   $("result").className = "result";
+  fitResult();
   $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("next").classList.remove("show");
   $("check").style.display = isTouchDevice ? "none" : "";
   $("count").textContent = index + 1 + " / " + deck.length;
-  $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
+  // progress like every exercise (01.11.2026): empty on the first question, it fills when the answer is checked
+  $("bar").style.width = (index / deck.length) * 100 + "%";
   scrollToTop();
   syncKeyboardAndFocus();
 }
 
 /* ===== ANSWER ===== */
 const ANSWER_FEEDBACK = {
-  expected: { ru: "Верно", en: "Correct" },
-  alternative: { ru: "Корректно, но другой смысл", en: "Valid, but a different meaning" },
-  alternativeTone: { ru: "Корректно, но другой оттенок", en: "Valid, but a different tone" },
-  incorrect: { ru: "Ответ не подходит к заданию", en: "The answer does not fit the task" },
+  // the verdict is German in every exercise (01.11.2026); the explanation below it follows the interface language
+  expected: { ru: "Richtig", en: "Richtig" },
+  alternative: { ru: "Möglich · andere Bedeutung", en: "Möglich · andere Bedeutung" },
+  alternativeTone: { ru: "Möglich · anderer Ton", en: "Möglich · anderer Ton" },
+  incorrect: { ru: "Nicht ganz", en: "Nicht ganz" },
   target: { ru: "Здесь нужно выразить: ", en: "The intended meaning is: " },
   entered: { ru: "Ваш вариант: ", en: "Your version: " }
 };
@@ -242,6 +252,7 @@ function checkAnswer() {
   if (assessment.kind === "empty") return;
 
   checked = true;
+  $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
   const ok = assessment.kind === "expected";
   const alternative = assessment.kind === "alternative";
   if (ok) correctCount++;
@@ -273,10 +284,50 @@ function checkAnswer() {
   $("meaning").textContent = getTranslation(item, "meaning");
   $("meaningContrast").textContent = getTranslation(item, "meaningContrast");
   $("explanation").textContent = getTranslation(item, "explanation");
+  showResultMore();
+  requestAnimationFrame(fitResult);
   $("answer-area").classList.add("hidden");
   $("next").classList.add("show");
   $("roundTableBtn").disabled = false;
 }
+
+/* The answer panel shows the answer and its meaning; „Mehr zur Form ›“ opens the rest (the other meaning, the form,
+   the explanation), which then scrolls inside the panel — the screen itself never scrolls (01.11.2026). */
+function showResultMore() {
+  const rest = document.querySelector("#result .result-more-part");
+  $("resultMore").hidden = !rest.textContent.trim();
+}
+$("resultMore").addEventListener("click", () => {
+  $("result").classList.add("open");
+  fitResult();
+});
+
+/* Answer on one screen (01.11.2026, CSS block ANSWER ON ONE SCREEN): the answer panel is as tall as its content and
+   grows (after „Mehr zur Form ›“) up to Weiter, which always ends 16px above the pinned Spickzettel; what does not
+   fit then scrolls inside the panel. The card may carry a
+   zoom from fitCard(), so the room measured on screen is divided by it. Only with the touch keyboard and not on
+   short screens (there the page scrolls as before). */
+function fitResult() {
+  const result = $("result"),
+    next = $("next"),
+    kb = $("keyboard");
+  result.style.maxHeight = "";
+  next.style.marginTop = "";
+  if (!checked || !kb || !kb.classList.contains("is-touch") || SHORT_SCREEN.matches) return;
+  // tablets: the question stays where it stood; Weiter is pinned at the bottom as on a phone (03.11.2026: it appears
+  // where you just pressed ✓ and never jumps with the answer's length)
+  if (TABLET.matches && tabletCardTop) document.querySelector("#study .card").style.marginTop = tabletCardTop;
+  const pill = $("roundTableBtn").getBoundingClientRect();
+  if (!pill.height) return;
+  const zoom = parseFloat(document.querySelector("#study .card").style.zoom) || 1;
+  // the panel is as tall as its content, but never taller than the room down to Weiter's place
+  const room = pill.top - 16 - next.getBoundingClientRect().bottom;
+  result.style.maxHeight = Math.max(120, (result.getBoundingClientRect().height + room) / zoom) + "px";
+  // Weiter keeps its place 16px above the Spickzettel, however short the panel is
+  const rest = pill.top - 16 - next.getBoundingClientRect().bottom;
+  if (rest > 0) next.style.marginTop = parseFloat(getComputedStyle(next).marginTop) + rest / zoom + "px";
+}
+window.addEventListener("resize", fitResult);
 
 function next() {
   if (index + 1 >= deck.length) {
@@ -291,7 +342,7 @@ function finishSession() {
   checked = false;
   showScreen("finish");
   $("finalScore").textContent = correctCount + " / " + deck.length;
-  $("summary").textContent = "Was schwierig war, kommt öfter wieder.";
+  $("summary").textContent = DeutschEnd.note(correctCount, deck.length);
 }
 
 document
@@ -367,7 +418,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../../components/deutsch-keyboard-v2.60.html");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=2");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const tpl = document.createElement("template");
   tpl.innerHTML = await r.text();

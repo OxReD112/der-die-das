@@ -16,7 +16,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Der.Die.Das." />
     <title>Artikel</title>
-    <link rel="stylesheet" href="artikel.css?v=2" />
+    <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=3" />
+    <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
+    <script src="../components/deutsch-fonts-v1.js?v=1"></script>
+    <link rel="stylesheet" href="artikel.css?v=18" />
   </head>
   <body>
     <main class="app">
@@ -55,20 +58,22 @@
         </section>
         <section class="feedback" id="feedback">
           <h2 id="feedbackTitle"></h2>
-          <p id="choiceLine"></p>
           <div class="answer-card">
-            <div class="answer-label">Das Wort</div>
+            <div class="answer-choice" id="answerChoice"></div>
             <div class="answer-word"><span id="answerArticle"></span> <span id="answerWord"></span></div>
             <div class="answer-translation" id="answerTranslation"></div>
           </div>
-          <div class="rule-card">
+          <div class="rule-card" id="ruleCard">
             <div class="rule-label" id="ruleLabel"></div>
             <div class="rule-title" id="ruleTitle"></div>
-            <div class="rule-examples" id="ruleExamples"></div>
-            <div class="rule-reliability" id="ruleReliability"></div>
+            <button class="rule-more" id="ruleMore" type="button">Beispiele und Ausnahmen ›</button>
+            <div class="rule-more-part">
+              <div class="rule-examples" id="ruleExamples"></div>
+              <div class="rule-reliability" id="ruleReliability"></div>
+            </div>
           </div>
-          <button id="continue">Weiter</button>
         </section>
+        <button id="continue">Weiter</button>
       </div>
 
       <section class="hidden" id="endScreen">
@@ -87,7 +92,8 @@
     <script src="../components/deutsch-translation-v1.js?v=2"></script>
     <script src="words.js?v=4"></script>
     <script src="../components/deutsch-progress-v1.js"></script>
-    <script src="artikel.js?v=3"></script>
+    <script src="../components/deutsch-end-v1.js?v=1"></script>
+    <script src="artikel.js?v=7"></script>
     <script src="../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

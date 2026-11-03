@@ -15,7 +15,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Modalverben" />
-    <link rel="stylesheet" href="modalverben.css?v=14" />
+    <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=3" />
+    <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
+    <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
+    <link rel="stylesheet" href="modalverben.css?v=35" />
   </head>
   <body>
     <div id="formsModal" class="forms-modal" aria-hidden="true">
@@ -62,12 +65,17 @@
           </div>
           <div class="result" id="result">
             <div class="state" id="state"></div>
-            <div class="answer-feedback" id="answerFeedback" hidden></div>
-            <div class="form-line" id="formLine"></div>
-            <div class="meaning" id="meaning"></div>
-            <div class="meaning-contrast" id="meaningContrast"></div>
-            <div class="form-kind" id="formKind"></div>
-            <div class="explanation" id="explanation"></div>
+            <div class="result-body">
+              <div class="answer-feedback" id="answerFeedback" hidden></div>
+              <div class="form-line" id="formLine"></div>
+              <div class="meaning" id="meaning"></div>
+              <button class="result-more" id="resultMore" type="button">Mehr zur Form ›</button>
+              <div class="result-more-part">
+                <div class="meaning-contrast" id="meaningContrast"></div>
+                <div class="form-kind" id="formKind"></div>
+                <div class="explanation" id="explanation"></div>
+              </div>
+            </div>
           </div>
           <button id="next">Weiter</button>
         </section>
@@ -99,7 +107,8 @@
     <script src="special_verbs.js?v=14"></script>
     <script src="answer-rules.js?v=1"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="modalverben.js?v=17"></script>
+    <script src="../../components/deutsch-end-v1.js?v=1"></script>
+    <script src="modalverben.js?v=24"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

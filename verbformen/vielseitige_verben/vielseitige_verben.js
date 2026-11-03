@@ -147,12 +147,18 @@ function startSession(size) {
 /* Keyboard above the Home button (same as Modalverben): when a long sentence on a small screen leaves no room
    for the keyboard at its place, the question card shrinks just enough (down to 80%). */
 const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)");
+/* Tablets (03.11.2026, CSS block TABLETS, as Modalverben): the question stands in the middle of the room above the
+   keyboard (margin-top: auto); while the answer shows, the card's top is held where it was (check()). */
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+let tabletCardTop = "";
 function fitCard() {
   const card = document.querySelector("#study .card"),
     kb = $("keyboard"),
     app = document.querySelector(".app");
   card.style.zoom = "";
+  if (!checked) card.style.marginTop = "";
   if (!kb || !kb.classList.contains("is-touch") || !kb.classList.contains("show") || SHORT_SCREEN.matches) return;
+  if (TABLET.matches && !checked) tabletCardTop = getComputedStyle(card).marginTop;
   const over = app.scrollHeight - app.clientHeight;
   if (over <= 0) return;
   const h = card.offsetHeight;
@@ -225,7 +231,8 @@ function render() {
   $("check").style.display = isTouchDevice ? "none" : "";
   $("roundTableBtn").disabled = true; // no peeking: the table opens only after Prüfen
   $("count").textContent = index + 1 + " / " + deck.length;
-  $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
+  // progress like every exercise (01.11.2026): empty on the first question, it fills when the answer is checked
+  $("bar").style.width = (index / deck.length) * 100 + "%";
   scrollToTop();
   syncKeyboardAndFocus();
 }
@@ -340,6 +347,7 @@ function checkAnswer() {
   if (!typed) return;
 
   checked = true;
+  $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
   // the accepted spelling the typed word matched (ß/ss, case): shown instead of the raw input
   const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed));
   const ok = Boolean(matched);
@@ -352,6 +360,7 @@ function checkAnswer() {
   const shown = ok ? matched : item.answer;
   $("result").className = "result show " + (ok ? "good" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
+  if (TABLET.matches && tabletCardTop && $("keyboard")?.classList.contains("is-touch")) document.querySelector("#study .card").style.marginTop = tabletCardTop;
   $("sentence").innerHTML = sentenceHtml(item, shown, !ok);
   $("state").textContent = ok ? "Richtig" : "Nicht ganz";
   // the right word in green; after a mistake the typed word in red, crossed out
@@ -390,7 +399,7 @@ function finishSession() {
   checked = false;
   showScreen("finish");
   $("finalScore").textContent = correctCount + " / " + deck.length;
-  $("summary").textContent = "Was schwierig war, kommt öfter wieder.";
+  $("summary").textContent = DeutschEnd.note(correctCount, deck.length);
   const groups = {};
   results.forEach(({ item, ok }) => {
     const k = progressKey(item);
@@ -401,16 +410,8 @@ function finishSession() {
   const missed = Object.values(groups)
     .filter(g => g.miss)
     .sort((a, b) => b.miss - a.miss);
-  $("slipped").innerHTML = missed.length
-    ? "<h3>Hier gab es Fehler</h3>" +
-      missed
-        .map(
-          g =>
-            `<div class="slipped-row"><span class="v">${g.verb}</span><span>${esc(pick(VV_JOBS[g.job]))}</span>` +
-            `<span class="n">${g.miss} / ${g.n}</span></div>`
-        )
-        .join("")
-    : "";
+  // „Noch üben“ like every exercise: verb · job, most missed first, no counts (01.11.2026)
+  DeutschEnd.list($("slipped"), missed.map(g => g.verb + " · " + pick(VV_JOBS[g.job])));
 }
 
 document
@@ -486,7 +487,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../../components/deutsch-keyboard-v2.60.html");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=2");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const tpl = document.createElement("template");
   tpl.innerHTML = await r.text();

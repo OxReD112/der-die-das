@@ -16,7 +16,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Verbformen" />
-    <link rel="stylesheet" href="partizipII.css?v=7" />
+    <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=3" />
+    <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
+    <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
+    <link rel="stylesheet" href="partizipII.css?v=30" />
   </head>
   <body>
     <main class="app">
@@ -57,10 +60,15 @@
               <div class="state" id="state"></div>
               <div class="vowel-pattern" id="vowelPattern"></div>
             </div>
-            <div class="forms" id="forms"></div>
-            <div class="meta" id="meta"></div>
-            <div class="example" id="example"></div>
-            <div class="hint hidden" id="hint"></div>
+            <div class="result-body">
+              <div class="forms" id="forms"></div>
+              <div class="meta" id="meta"></div>
+              <button class="result-more" id="resultMore" type="button">Mehr zur Form ›</button>
+              <div class="result-more-part">
+                <div class="example" id="example"></div>
+                <div class="hint hidden" id="hint"></div>
+              </div>
+            </div>
           </div>
           <button id="next">Weiter</button>
         </section>
@@ -86,7 +94,7 @@
         <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
           <div class="pattern-modal-head">
             <h2 id="patternModalTitle">Partizip II · Spickzettel</h2>
-            <button class="pattern-close" id="patternClose" aria-label="Schließen">×</button>
+            <button class="pattern-close" id="patternClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div id="patternModalBody"></div>
         </div>
@@ -97,7 +105,8 @@
     <script src="../../components/deutsch-translation-v1.js?v=2"></script>
     <script src="verbs.js?v=10"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
-    <script src="partizipII.js?v=12"></script>
+    <script src="../../components/deutsch-end-v1.js?v=1"></script>
+    <script src="partizipII.js?v=21"></script>
     <script src="../../components/deutsch-wide-v1.js?v=2"></script>
 </body>
 </html>

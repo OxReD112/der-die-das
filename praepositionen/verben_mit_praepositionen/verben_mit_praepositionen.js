@@ -459,16 +459,9 @@ function finish() {
   const weak = Object.entries(currentStats())
     .filter(([, v]) => v.weak)
     .sort((a, b) => b[1].errorRate - a[1].errorRate)
-    .map(([k]) => weakLabel(k))
-    .filter(Boolean)
-    .slice(0, 3);
-  if (weak.length) {
-    const title = document.createElement("b");
-    title.textContent = "Noch üben";
-    const lines = weak.flatMap(w => [document.createElement("br"), w]);
-    $("weak").replaceChildren(title, ...lines);
-    $("weak").classList.remove("hidden");
-  } else $("weak").classList.add("hidden");
+    .map(([k]) => weakLabel(k));
+  DeutschEnd.list($("weak"), weak);
+  $("doneNote").textContent = DeutschEnd.note(score.full, session.length);
 }
 
 /* ===== CASE BUTTONS ===== */
@@ -515,7 +508,7 @@ document.addEventListener("deutsch-keyboard-input", e => typeKey(e.detail?.key |
 
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
-  const r = await fetch("../../components/deutsch-keyboard-v2.60.html");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=2");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const tpl = document.createElement("template");
   tpl.innerHTML = await r.text();

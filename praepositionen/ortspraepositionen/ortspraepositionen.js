@@ -276,7 +276,12 @@ function render() {
   els.roundTableBtn.disabled = true; // no peeking: the table opens only when all three lines are answered
   renderChoices();
   fitToCard(els.place);
+  // Tablets (03.11.2026): the card with its buttons stands in the middle of the screen (CSS margin-top: auto);
+  // its place is then fixed for the whole card, so the three answers and Weiter never move it
+  els.card.style.marginTop = "";
+  if (TABLET.matches) els.card.style.marginTop = getComputedStyle(els.card).marginTop;
 }
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
 
 function renderChoices() {
   const entry = session[index],
@@ -385,7 +390,7 @@ function finish() {
   els.game.classList.add("hidden");
   els.end.classList.remove("hidden");
   els.endScore.textContent = score + " / " + taps;
-  els.endNote.textContent = "Was schwierig war, kommt öfter wieder.";
+  els.endNote.textContent = DeutschEnd.note(score, taps);
   scrollToTop();
 }
 

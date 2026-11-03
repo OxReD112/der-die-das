@@ -49,11 +49,34 @@ function fitTopZone() {
   const h = zone.offsetHeight;
   zone.style.zoom = Math.max(0.8, (h - over) / h).toFixed(3);
 }
+/* Tablets (03.11.2026, as the exercises): the sentence stands in the middle of the room above the keyboard (CSS
+   margin-top: auto); the answer's sentence takes exactly its place and Weiter is pinned at the bottom, where the
+   keyboard's last row was (72px above the edge). */
+const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+let tabletTop = null;
+function rememberTabletTop() {
+  const zone = document.querySelector("#question .topZone"),
+    kb = document.getElementById("keyboard");
+  if (zone && kb && kb.classList.contains("is-touch") && kb.classList.contains("show") && !document.getElementById("question").classList.contains("hidden"))
+    tabletTop = zone.getBoundingClientRect().top;
+}
+function placeTabletAnswer() {
+  const shell = $("feedbackShell"),
+    c = $("continue");
+  shell.style.marginTop = "";
+  c.style.marginTop = "";
+  if (!TABLET.matches || tabletTop == null || !$("keyboard")?.classList.contains("is-touch") || !$("feedback").classList.contains("show")) return;
+  const shift = tabletTop - $("answerTop").getBoundingClientRect().top;
+  if (shift > 0) shell.style.marginTop = shift + "px";
+  const rest = innerHeight - 72 - c.getBoundingClientRect().bottom;
+  if (rest > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + rest + "px";
+}
 addEventListener("resize", fitTopZone);
+addEventListener("resize", rememberTabletTop);
 async function loadKeyboardComponent() {
   const mount = document.getElementById("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../components/deutsch-keyboard-v2.60.html");
+  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=2");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const text = await r.text();
   const tpl = document.createElement("template");
@@ -73,6 +96,7 @@ async function loadKeyboardComponent() {
   window.deutschKeyboardReady = true;
   kb.classList.add("show"); // component itself stays hidden unless it detected a touch device
   fitTopZone();
+  rememberTabletTop();
   return true;
 }
 
@@ -167,7 +191,7 @@ function publishWortschatzProgress() {
     let collection = "";
     try {
       if (window.WortschatzCollection && WortschatzCollection.isOwn())
-        collection = String(WortschatzCollection.get().name || "My Words");
+        collection = String(WortschatzCollection.get().name || getTranslation({ n: { en: "My Words", ru: "Мои слова" } }, "n"));
     } catch (e) {}
     let data = null;
     try {
@@ -436,8 +460,12 @@ function build(cards = null) {
   publishWortschatzProgress();
   render();
 }
+// The gap keeps the punctuation next to it on its line (02.11.2026: „gutem ___ .“ — the full stop went alone to the next line).
 function blankHTML(c) {
-  return c.blank.replace(/_____/g, "<span class='blank' aria-label='missing word'></span>");
+  return c.blank.replace(
+    /([^\s\p{L}\p{N}]*)_____([^\s\p{L}\p{N}]*)/gu,
+    "<span class='blankGroup'>$1<span class='blank' aria-label='fehlendes Wort'></span>$2</span>"
+  );
 }
 // The answer's parts are marked in the sentence. They are searched in the plain sentence, left to right, as whole
 // word starts - never inside markup already added (2026-10-23: „an“ of „melde … an“ was found inside „<span“ and broke
@@ -481,11 +509,15 @@ function render() {
     $("keyboard").classList.add("show");
   }
   fitTopZone();
+  rememberTabletTop();
   if (innerWidth >= 700) setTimeout(() => $("answerInput").focus(), 30);
 }
 function esc(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
+// The letters stand column by column (02.11.2026): a letter you left out is a red „_“ in your row, a letter you
+// added leaves a gap in the right row — both rows are always the same length, so in the monospace font every
+// letter sits exactly above its partner.
 function diffHTML(typed, correct) {
   const a = [...typed],
     b = [...correct],
@@ -521,20 +553,15 @@ function diffHTML(typed, correct) {
       j++;
     } else if (del <= ins) {
       top.push(`<span class="diffWrong">${esc(a[i])}</span>`);
+      bottom.push(`<span class="diffGap">\u00a0</span>`);
       i++;
     } else {
+      top.push(`<span class="diffWrong" aria-label="fehlender Buchstabe">_</span>`);
       bottom.push(`<span class="diffMissing">${esc(b[j])}</span>`);
       j++;
     }
   }
   return [top.join(""), bottom.join("")];
-}
-// The answer as shown in green: lower case like the typed text, but a noun (base „der/die/das …“) starts with a capital.
-function shownAnswer(c, text) {
-  const t = normalize(text);
-  return /^(der|die|das)\s/i.test(String((c && c.base) || ""))
-    ? t.charAt(0).toLocaleUpperCase("de-DE") + t.slice(1)
-    : t;
 }
 /* 👁 — first showing of a new word (2026-10-26): try to remember it yourself, or tap the eye and copy it. */
 function setupPeek() {
@@ -553,6 +580,7 @@ $("ghostEye").onclick = e => {
   $("sentence").innerHTML = ghostHTML(current);
   $("ghostEye").classList.add("used");
   fitTopZone();
+  rememberTabletTop();
   if (innerWidth >= 700) $("answerInput").focus();
 };
 // The gaps filled with the hidden words, faintly: taken from the cloze marks in order ({{c1::schlage}} … {{c1::vor}});
@@ -587,8 +615,6 @@ function checkCopy(typed) {
   $("feedback").className = "feedback show neutral";
   $("answerSentence").innerHTML = revealHTML(current);
   $("answerTranslation").textContent = getTranslation(current, "sentenceTranslation");
-  $("targetForm").textContent = shownAnswer(current, matched);
-  $("targetForm").style.display = "inline-block";
   $("typedDiff").innerHTML = "";
   $("correctDiff").innerHTML = "";
   $("base").textContent = current.base;
@@ -632,8 +658,6 @@ function check() {
   $("feedback").className = "feedback show " + (ok ? "good" : "bad");
   $("answerSentence").innerHTML = revealHTML(current);
   $("answerTranslation").textContent = getTranslation(current, "sentenceTranslation");
-  $("targetForm").textContent = shownAnswer(current, correct);
-  $("targetForm").style.display = ok ? "inline-block" : "none";
   if (!ok) {
     const [top, bottom] = diffHTML(typed, normalize(correct));
     $("typedDiff").innerHTML = top;
@@ -688,8 +712,6 @@ function applyEditedCard(fresh) {
   $("meaning").textContent = getTranslation(current, "translation");
   drawAuch();
   $("grammar").textContent = getTranslation(current, "grammar");
-  if ($("targetForm").style.display !== "none")
-    $("targetForm").textContent = shownAnswer(current, targets(current).join(" "));
   fitAnswer();
 }
 /* Delete Word from the ✎ window (2026-10-26): the word leaves the collection (collection.js removes it and its
@@ -758,10 +780,25 @@ function fitWide(el, widthOf) {
 function fitAnswer() {
   if (!$("feedback").classList.contains("show")) return;
   const scroll = el => el.scrollWidth;
-  fitWide($("targetForm"), scroll);
   fitWide($("typedDiff"), scroll);
   fitWide($("correctDiff"), scroll);
   fitWide($("answerSentence"), el => Math.max(0, ...[...el.querySelectorAll(".target")].map(t => t.getBoundingClientRect().width)));
+  fitWide($("base"), longestWord); // 02.11.2026: a long base form shrinks instead of breaking inside the word
+  placeTabletAnswer();
+}
+// Width of the longest word of an element (it may wrap between words, never inside one).
+function longestWord(el) {
+  const probe = document.createElement("span");
+  probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font:inherit;letter-spacing:inherit";
+  el.appendChild(probe);
+  let w = 0;
+  for (const word of el.textContent.split(/\s+/)) {
+    if (!word) continue;
+    probe.textContent = word;
+    w = Math.max(w, probe.getBoundingClientRect().width);
+  }
+  probe.remove();
+  return w;
 }
 addEventListener("resize", fitAnswer);
 if ($("editCard"))
@@ -955,7 +992,19 @@ function layoutStart() {
 addEventListener("resize", layoutStart);
 /* CHOOSE SCREEN (2026-10-26): no words yet → word sets (quick start) or own words. Same layout as the start
    screen; the set lines use the start screen's collection-line look (no frames). */
+// Choose screen texts in the user's language (02.11.2026, RU / EN); the title stays German.
+const CHOOSE_TEXT = {
+  chooseQuestion: { en: "Where do you want to start?", ru: "С чего начнём?" },
+  chooseQuick: { en: "Quick start", ru: "Быстрый старт" },
+  chooseHint: { en: "Pick the words you want to learn", ru: "Выбери слова, которые хочешь учить" },
+  chooseOwn: { en: "＋ Start with my own words", ru: "＋ Начать со своих слов" },
+  chooseOwnHint: { en: "Search the Wörterbuch, type or import", ru: "Найди в Wörterbuch, введи сам или импортируй" }
+};
+if ($("wsSettings")) $("wsSettings").setAttribute("aria-label", getTranslation({ t: { en: "Settings", ru: "Настройки" } }, "t"));
 function showChoose() {
+  Object.keys(CHOOSE_TEXT).forEach(id => {
+    if ($(id)) $(id).textContent = getTranslation(CHOOSE_TEXT, id);
+  });
   publishWortschatzStatus(true);
   publishWortschatzProgress();
   $("done").className = "done";

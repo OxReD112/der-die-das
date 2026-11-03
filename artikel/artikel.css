@@ -1,93 +1,26 @@
 /* Artikel (Der.Die.Das.) — styles. Markup: index.html · script: artikel.js
    When this file changes, raise its ?v= in index.html and the Home tile's artikel/?v= */
 
-/* ===== PALETTE ===== */
+/* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 :root {
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-
-  --bg: #1b1b1d;
-  --card-bg: #2a2a2d; /* word card, feedback panel, 10/20/30 and der/die/das buttons */
-  --text: #f2f0ed;
-  --muted: #8f8f94;
-  --text-secondary: #c8c7c4;
   --text-strong: #f2f0ed;
   --text-subtle: #c8c7c4;
-  --mint: #5bc8a4;
   --coral: #ff7770;
-  --blue: #72a7ff;
-
   --line: rgba(255, 255, 255, 0.09);
-  --hairline: rgba(255, 255, 255, 0.1); /* progress track, Weiter and „Noch eine Runde“ outline */
   --answer-surface: rgba(27, 27, 29, 0.58);
-  --game-title: rgba(255, 255, 255, 0.11);
   --good: rgba(91, 200, 164, 0.5);
   --bad: rgba(255, 119, 112, 0.5);
-  --good-glow: radial-gradient(
-    ellipse at 50% 42%,
-    rgba(91, 200, 164, 0.42) 0%,
-    rgba(91, 200, 164, 0.24) 18%,
-    rgba(91, 200, 164, 0.11) 40%,
-    rgba(91, 200, 164, 0.04) 60%,
-    transparent 78%
-  );
-  --bad-glow: radial-gradient(
-    ellipse at 50% 42%,
-    rgba(255, 119, 112, 0.48) 0%,
-    rgba(255, 119, 112, 0.28) 18%,
-    rgba(255, 119, 112, 0.13) 40%,
-    rgba(255, 119, 112, 0.05) 60%,
-    transparent 78%
-  );
-
-  /* shared across exercises (Design Police 2026-09-25) */
-  --card-lift: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.3);
-  --start-btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 5px 14px rgba(0, 0, 0, 0.14);
-  --start-version: rgba(255, 255, 255, 0.24);
   --quiet-bg: rgba(255, 255, 255, 0.03);
-  --end-again-text: rgba(242, 240, 237, 0.55);
-  --end-main-bg: #ece6dc; /* cream: same as the Prüfen/Weiter buttons */
-  --end-main-text: #1b1b1d;
 }
 [data-theme="light"] {
-  --bg: #f6f4f1;
-  --card-bg: #fff;
-  --text: #242426;
-  --muted: #727278;
-  --text-secondary: #55565b;
   --text-strong: #55565b;
   --text-subtle: #727278;
-  --mint: #3fa68a;
   --coral: #e95e66;
-  --blue: #5588e0;
-
   --line: rgba(0, 0, 0, 0.09);
-  --hairline: rgba(0, 0, 0, 0.1);
   --answer-surface: rgba(36, 36, 38, 0.035);
-  --game-title: rgba(36, 36, 38, 0.09);
   --good: rgba(63, 166, 138, 0.5);
   --bad: rgba(233, 94, 102, 0.5);
-  --good-glow: radial-gradient(
-    ellipse at 50% 42%,
-    rgba(63, 166, 138, 0.18) 0%,
-    rgba(63, 166, 138, 0.09) 18%,
-    rgba(63, 166, 138, 0.03) 40%,
-    transparent 70%
-  );
-  --bad-glow: radial-gradient(
-    ellipse at 50% 42%,
-    rgba(233, 94, 102, 0.19) 0%,
-    rgba(233, 94, 102, 0.09) 18%,
-    rgba(233, 94, 102, 0.025) 40%,
-    transparent 70%
-  );
-
-  --card-lift: 0 2px 4px rgba(0, 0, 0, 0.04), 0 14px 34px rgba(0, 0, 0, 0.09);
-  --start-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --start-version: rgba(36, 36, 38, 0.34);
   --quiet-bg: #fff;
-  --end-again-text: rgba(36, 36, 38, 0.55);
-  --end-main-bg: #242426;
-  --end-main-text: #f6f4f1;
 }
 
 /* ===== PAGE SHELL (same as Partizip II) =====
@@ -132,7 +65,7 @@ button {
 
 /* ===== START + SUMMARY SCREENS ===== */
 .game-title {
-  font-size: clamp(56px, 12vw, 94px);
+  font-size: clamp(56px, 12vw, 84px);
   font-weight: 700;
   letter-spacing: -0.065em;
   color: var(--game-title);
@@ -173,7 +106,7 @@ button {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: var(--card-bg);
   color: var(--text);
   box-shadow: var(--start-btn-shadow);
@@ -208,7 +141,7 @@ button {
 }
 .start-about h2 {
   margin: 0 0 5px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.3;
   color: var(--muted);
@@ -216,7 +149,7 @@ button {
 }
 .start-about .about-de {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -231,7 +164,7 @@ body:has(#sessionScreen.hidden) .start-about {
   margin: 0 0 28px;
 }
 .end-score {
-  font-size: 58px;
+  font-size: 56px;
   font-weight: 700;
   letter-spacing: -0.05em;
   margin: 18px 0 6px;
@@ -249,7 +182,7 @@ body:has(#sessionScreen.hidden) .start-about {
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 17px;
+  border-radius: 18px;
   font-size: 16px;
   font-weight: 650;
   line-height: 1;
@@ -266,8 +199,8 @@ body:has(#sessionScreen.hidden) .start-about {
   filter: brightness(0.94);
 }
 #playAgain {
-  background: transparent;
-  color: var(--end-again-text);
+  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
+  color: var(--text);
   border: 1px solid var(--hairline);
 }
 #homeBack {
@@ -287,7 +220,7 @@ body:has(#sessionScreen.hidden) .start-about {
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.04em;
@@ -353,7 +286,7 @@ body:has(#game:not(.hidden)) .version-mark {
   background: var(--bg);
 }
 .top-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--muted);
 }
@@ -402,7 +335,7 @@ body:has(#game:not(.hidden)) .version-mark {
   margin-bottom: 18px;
 }
 .word {
-  font-size: clamp(48px, 11vw, 76px);
+  font-size: clamp(52px, 11vw, 70px); /* task word: 52 on phones, 70 on iPad — one size for Artikel, Partizip II, Fester Kasus question and answer (01.11.2026) */
   font-weight: 650;
   letter-spacing: -0.04em;
   text-align: center;
@@ -426,7 +359,7 @@ body:has(#game:not(.hidden)) .version-mark {
   border-radius: 14px;
   background: var(--card-bg);
   box-shadow: var(--start-btn-shadow);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 650;
   line-height: normal;
   cursor: pointer;
@@ -459,33 +392,27 @@ body:has(#game:not(.hidden)) .version-mark {
 }
 
 /* ===== FEEDBACK ===== */
+/* Answer screen (01.11.2026): same card as the question card and Fester Kasus — lifted, no outline, radius 26; the
+   colour comes from the glow and the small label only. It holds two inner cards; radii follow „box in a box“ —
+   outer 26, gap 12, inner 14. Weiter stands under the card, as in Fester Kasus. */
 .feedback {
   display: none;
   margin-top: 18px;
-  border-radius: 22px;
-  padding: 22px;
+  border-radius: 26px;
+  padding: 12px;
   background: var(--card-bg);
-  border: 1px solid var(--line);
+  box-shadow: var(--card-lift);
   position: relative;
   overflow: hidden;
 }
 .feedback.show {
   display: block;
 }
-.feedback.correct {
-  border-color: var(--good);
-}
-.feedback.wrong {
-  border-color: var(--bad);
-}
 .feedback::before {
   content: "";
   position: absolute;
-  left: 50%;
-  top: -230px;
-  width: 155%;
-  height: 650px;
-  transform: translateX(-50%);
+  inset: -170px -30% auto; /* same place and size as the Fester Kasus card glow (01.11.2026) */
+  height: 380px;
   pointer-events: none;
 }
 .feedback.correct::before {
@@ -502,8 +429,11 @@ body:has(#game:not(.hidden)) .version-mark {
   position: relative;
 }
 #feedbackTitle {
-  margin: 0 0 10px;
-  font-size: 20px;
+  margin: 10px 0 0;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-align: center;
 }
 .feedback.correct #feedbackTitle {
@@ -512,32 +442,31 @@ body:has(#game:not(.hidden)) .version-mark {
 .feedback.wrong #feedbackTitle {
   color: var(--coral);
 }
-#choiceLine {
-  margin: 8px 0;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  text-align: center;
-}
 .answer-card,
 .rule-card {
-  margin-top: 16px;
-  padding: 18px;
+  margin-top: 12px;
+  padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--answer-surface);
 }
 .answer-card {
   text-align: center;
 }
-.answer-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--muted);
-  margin-bottom: 8px;
+/* the article you chose, crossed out, above the right one (only after a wrong answer) */
+.answer-choice {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--coral);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  margin-bottom: 2px;
+}
+.answer-choice:empty {
+  display: none;
 }
 .answer-word {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   transition: color 0.2s ease;
 }
@@ -546,12 +475,12 @@ body:has(#game:not(.hidden)) .version-mark {
   margin-top: 6px;
 }
 .rule-label {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.1em;
   color: var(--muted);
-  font-weight: 400;
-  margin-bottom: 12px;
+  font-weight: 650;
+  margin-bottom: 8px;
 }
 .rule-title {
   font-size: 16px;
@@ -560,7 +489,7 @@ body:has(#game:not(.hidden)) .version-mark {
   line-height: 1.5;
 }
 .rule-examples {
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   color: var(--text-subtle);
   margin-top: 10px;
@@ -578,16 +507,17 @@ body:has(#game:not(.hidden)) .version-mark {
 
 /* Weiter: the quiet button, shared by all exercises (blueprint: Partizip II) — you read the answer first */
 #continue {
+  display: none;
   width: 100%;
   height: 56px;
-  margin-top: 18px;
+  margin-top: 14px;
   padding: 0;
   border: 1px solid var(--hairline);
-  border-radius: 17px;
+  border-radius: 18px;
   background: var(--quiet-bg);
   color: var(--text);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 650;
   line-height: 1;
   cursor: pointer;
   transition:
@@ -597,4 +527,147 @@ body:has(#game:not(.hidden)) .version-mark {
 #continue:active {
   transform: scale(0.97);
   filter: brightness(0.94);
+}
+.feedback.show + #continue {
+  display: block;
+}
+/* „Beispiele und Ausnahmen ›“: examples and the reliability note stay folded until asked for */
+.rule-more {
+  display: block;
+  margin: 0;
+  padding: 4px 0 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: 500 14px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.rule-more[hidden],
+.rule-more-part,
+.rule-card.open .rule-more {
+  display: none;
+}
+.rule-card.open .rule-more-part {
+  display: block;
+}
+
+/* ===== KEYBOARD EDGE (01.11.2026) =====
+   Everything you tap or read in the answer (field, answer panel, Weiter, the end buttons) reaches the edges of the
+   on-screen keyboard, i.e. the .app column — the rule Vielseitige Verben already had (2026-09-28). Text keeps its own
+   inner padding. End buttons: as wide as the column, at most 360px, centred. */
+.finish-actions {
+  width: min(calc(100% + 28px), 360px);
+  margin-left: calc(50% - min(calc(50% + 14px), 180px));
+  margin-right: 0;
+}
+
+/* ===== END SCREEN (01.11.2026) =====
+   One end screen in every exercise: everything from „Fertig.“ to the buttons stands in the middle of the screen
+   (a faint exercise title on top stays there and is not counted); „Fertig.“ 34 + score 28 in the sans family,
+   48 + 34 in the serif family (Verbformen); one kind phrase (components/deutsch-end-v1.js); the „Noch üben“ list
+   comes from components/deutsch-base-v1.css. Gaps: 10 between Fertig. / score / phrase, 30 before list and buttons. */
+#endScreen:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+/* room as tall as the faint „Der.Die.Das.“ above, so the block is centred on the screen, not under the title */
+#endScreen::after {
+  content: "";
+  flex: 0 1 calc(1.2 * clamp(56px, 12vw, 94px));
+}
+#endScreen .game-title {
+  margin-bottom: 0;
+}
+#endScreen h1 {
+  margin: auto 0 0;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+#endScreen .end-score {
+  margin: 10px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+#endScreen p {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+#endScreen .finish-actions {
+  margin-top: 30px;
+  margin-bottom: auto;
+}
+
+/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
+   counter 14px muted with digits of equal width */
+.progress i {
+  border-radius: 99px;
+  transition: width 0.25s ease;
+}
+.counter {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== TABLETS (03.11.2026) — iPad upright and sideways; computers take the sizes too =====
+   One column of 600 for every exercise; the word card with der / die / das in the middle of the screen, the answer
+   in its place (artikel.js → choose) with Weiter right under it. „Beispiele und Ausnahmen“ is open here.
+   Small text one step up (12 → 14, 16 → 20, 28 → 34). */
+@media (min-width: 700px) and (min-height: 740px) {
+  .app {
+    width: min(636px, 100%);
+  }
+  #game:not(.hidden) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  #game .card {
+    margin-top: auto;
+  }
+  #game .choices {
+    margin-bottom: auto;
+  }
+  #game #continue {
+    margin-bottom: auto;
+  }
+  .eyebrow,
+  .translation,
+  .answer-choice,
+  .answer-translation,
+  .rule-title {
+    font-size: 20px;
+  }
+  .answer-word {
+    font-size: 34px;
+  }
+  .rule-label,
+  #feedbackTitle {
+    font-size: 14px;
+  }
+  .rule-examples,
+  .rule-reliability {
+    font-size: 16px;
+  }
+  .choice,
+  #continue {
+    height: 64px; /* buttons as Wortschatz on a tablet: 64 high, 20 */
+  }
+  #continue {
+    font-size: 20px;
+  }
+  .rule-more-part {
+    display: block;
+  }
+  .rule-more {
+    display: none !important;
+  }
 }
