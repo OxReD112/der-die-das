@@ -1306,6 +1306,20 @@ body:has(.pattern-modal.open) .start-about {
   font: 650 20px/1.1 var(--font);
   letter-spacing: -0.01em;
 }
+.ptile-case {
+  margin-left: auto;
+  padding: 1px 7px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.ptile.lit .ptile-case {
+  border-color: var(--lit-line);
+  color: var(--lit-text);
+}
 .ptile-means {
   margin-top: 5px;
   color: var(--pattern-text);

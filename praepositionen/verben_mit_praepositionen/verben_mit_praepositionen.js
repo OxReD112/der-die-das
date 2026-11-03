@@ -666,22 +666,29 @@ const ICON = {
   thought: '<path d="M7.5 16.5a4.5 4.5 0 0 1-.6-8.9A5 5 0 0 1 16.4 6a4 4 0 0 1 1.1 7.9 3.5 3.5 0 0 1-3 2.6z"/><circle cx="8" cy="19.6" r="1.1"/><circle cx="5.2" cy="21.6" r=".6"/>', // a cloud — the old circle read as a mirrored magnifier (Alena 03.11)
   check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
   person: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.8 3.7-5.5 7-5.5s6 1.7 7 5.5"/>',
-  from: '<path d="M20 12H7"/><path d="m11 7-5 5 5 5"/><path d="M3 5v14"/>'
+  from: '<path d="M20 12H7"/><path d="m11 7-5 5 5 5"/><path d="M3 5v14"/>',
+  to: '<path d="M3 12h12"/><path d="m11 8 4 4-4 4"/><circle cx="19" cy="12" r="2"/>',
+  out: '<path d="M10 5H5v14h5"/><path d="M9 12h11"/><path d="m16 8 4 4-4 4"/>',
+  into: '<path d="M14 5h5v14h-5"/><path d="M3 12h11"/><path d="m10 8 4 4-4 4"/>',
+  against: '<path d="M3 12h7"/><path d="m7 8 3 4-3 4"/><path d="M21 12h-7"/><path d="m17 8-3 4 3 4"/>'
 };
 const PREP_TIPS = [
   { group: "almost", prep: "über", icon: "bubble", head: { ru: "тема разговора; реакция на то, что уже есть", en: "a topic; a reaction to what is there" }, ex: ["sprechen über", "sich ärgern über"] },
   { group: "almost", prep: "vor", icon: "alert", head: { ru: "страх, опасность", en: "fear, danger" }, ex: ["Angst haben vor", "warnen vor"] },
-  { group: "almost", prep: "mit", icon: "people", head: { ru: "вместе с кем-то; чем занят", en: "together with; busy with" }, ex: ["sich treffen mit", "anfangen mit"] },
-  { group: "almost", prep: "nach", icon: "search", head: { ru: "поиск, вопрос", en: "searching, asking" }, ex: ["suchen nach", "fragen nach"] },
-  { group: "almost", prep: "um", icon: "heart", head: { ru: "просьба, забота", en: "asking for, caring" }, ex: ["bitten um", "sich kümmern um"] },
+  { group: "almost", prep: "mit", case: "Dat", icon: "people", head: { ru: "вместе с кем-то; чем занят", en: "together with; busy with" }, ex: ["sich treffen mit", "anfangen mit"] },
+  { group: "almost", prep: "nach", case: "Dat", icon: "search", head: { ru: "поиск, вопрос", en: "searching, asking" }, ex: ["suchen nach", "fragen nach"] },
+  { group: "almost", prep: "um", case: "Akk", icon: "heart", head: { ru: "просьба, забота", en: "asking for, caring" }, ex: ["bitten um", "sich kümmern um"] },
   { group: "often", prep: "auf", icon: "ahead", head: { ru: "то, что впереди; внимание", en: "what lies ahead; attention" }, ex: ["warten auf", "achten auf"],
     note: { ru: "но verzichten, bestehen auf", en: "but verzichten, bestehen auf" } },
   { group: "often", prep: "an", icon: "thought", head: { ru: "думать, помнить, верить; участвовать в чём-то", en: "thinking, remembering, believing; taking part" }, ex: ["denken an", "teilnehmen an"] },
-  { group: "often", prep: "für", icon: "check", head: { ru: "за что (как «за»)", en: "for what" }, ex: ["danken für", "sich entscheiden für"] },
-  { group: "often", prep: "bei", icon: "person", head: { ru: "у кого, перед кем", en: "with / to whom" }, ex: ["sich bedanken bei", "helfen bei"] },
-  { group: "learn", prep: "von", icon: "from", head: { ru: "то «от», то «о»", en: "„from“ or „about“" }, ex: ["abhängen von", "erzählen von"] }
+  { group: "often", prep: "für", case: "Akk", icon: "check", head: { ru: "за что (как «за»)", en: "for what" }, ex: ["danken für", "sich entscheiden für"] },
+  { group: "often", prep: "bei", case: "Dat", icon: "person", head: { ru: "у кого, перед кем", en: "with / to whom" }, ex: ["sich bedanken bei", "helfen bei"] },
+  { group: "learn", prep: "von", case: "Dat", icon: "from", head: { ru: "то «от», то «о»", en: "„from“ or „about“" }, ex: ["abhängen von", "erzählen von"] },
+  { group: "learn", prep: "zu", case: "Dat", icon: "to", head: { ru: "к; поздравлять с", en: "to; congratulate on" }, ex: ["gehören zu", "gratulieren zu"] },
+  { group: "learn", prep: "aus", case: "Dat", icon: "out", head: { ru: "из", en: "of, from" }, ex: ["bestehen aus"] },
+  { group: "learn", prep: "in", icon: "into", head: { ru: "в", en: "in, into" }, ex: ["sich verlieben in"] },
+  { group: "learn", prep: "gegen", case: "Akk", icon: "against", head: { ru: "против", en: "against" }, ex: ["protestieren gegen"] }
 ];
-const LEARN_REST = { preps: ["zu", "aus", "in", "gegen"], ex: ["gehören zu", "bestehen aus", "sich verlieben in", "protestieren gegen"] };
 const TIP_GROUPS = [
   ["almost", { ru: "Почти всегда так", en: "Almost always so" }],
   ["often", { ru: "Часто так", en: "Often so" }],
@@ -710,7 +717,9 @@ function exHtml(list, prep, cols) {
 function tileHtml(t, prep) {
   return (
     '<div class="ptile' + (prep === t.prep ? " lit" : "") + '"><div class="ptile-head">' + svgIcon(t.icon) +
-    '<span class="ptile-prep" lang="de">' + t.prep + "</span></div>" +
+    '<span class="ptile-prep" lang="de">' + t.prep + "</span>" +
+    // one case with every verb (Dativ-only / Akkusativ-only prepositions) — Alena 03.11: „+ Dat“, only when always
+    (t.case ? '<span class="ptile-case" lang="de">+ ' + t.case + "</span>" : "") + "</div>" +
     '<div class="ptile-means">' + escapeTip(tipText(t.head)) + "</div>" +
     exHtml(t.ex, t.prep) +
     (t.note ? '<div class="ptile-note">' + escapeTip(tipText(t.note)) + "</div>" : "") + "</div>"
@@ -718,11 +727,7 @@ function tileHtml(t, prep) {
 }
 function tipsHtml(prep) {
   return TIP_GROUPS.map(([g, title]) => {
-    let tiles = PREP_TIPS.filter(t => t.group === g).map(t => tileHtml(t, prep)).join("");
-    if (g === "learn")
-      tiles +=
-        '<div class="ptile ptile-wide' + (LEARN_REST.preps.includes(prep) ? " lit" : "") + '"><div class="ptile-head"><span class="ptile-prep" lang="de">' +
-        LEARN_REST.preps.join(" · ") + "</span></div>" + exHtml(LEARN_REST.ex, null, true) + "</div>";
+    const tiles = PREP_TIPS.filter(t => t.group === g).map(t => tileHtml(t, prep)).join("");
     return '<h3 class="pattern-section">' + escapeTip(tipText(title)) + '</h3><div class="ptiles">' + tiles + "</div>";
   }).join("") + '<p class="ptile-foot">' + escapeTip(tipText(RU_HINT)) + "</p>";
 }
