@@ -1175,3 +1175,7 @@ body:has(.pattern-modal.open) .version-mark {
     display: block;
   }
 }
+/* Gemischte Verben (03.11.2026): the note under the vowel groups stands alone in its card */
+.pattern-rule-note.pattern-rule-note-only {
+  margin-top: 0;
+}
