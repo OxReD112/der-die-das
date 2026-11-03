@@ -611,6 +611,10 @@
     async function update() {
       const q = input.value.trim(), mine = ++run;
       const searching = q.length > 0;
+      // 03.11 (Alena): the window keeps its height while you search — the results take the form's place
+      // (before, „no results“ shrank the window and it jumped down under the keyboard)
+      if (searching && form.style.display !== "none") results.style.minHeight = form.offsetHeight + "px";
+      if (!searching) results.style.minHeight = "";
       form.style.display = searching ? "none" : "";
       results.style.display = searching ? "" : "none";
       if (!searching) { results.textContent = ""; return; }
