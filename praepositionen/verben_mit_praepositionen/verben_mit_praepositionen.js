@@ -359,10 +359,27 @@ function submitPrep() {
     caseShownAt = performance.now();
     $("caseQuestion").classList.remove("off");
     $("caseStep").classList.remove("hidden");
+    pinAnswerButtons();
   } else {
     showAnswer();
   }
 }
+
+/* 03.11.2026 (Alena): on touch screens the case buttons and Weiter stand at the bottom, their bottom where the
+   keyboard's bottom was — the finger is already there. The answer hangs below the question (absolute), so the
+   extra room above them moves nothing. Short screens (≤ 559 px) flow as before. */
+function pinToKeyboard(el, holder) {
+  holder.style.marginTop = "";
+  const kb = $("keyboard");
+  if (!IS_TOUCH || SHORT_SCREEN.matches || !kb || el.offsetParent === null) return;
+  const down = kb.getBoundingClientRect().bottom - el.getBoundingClientRect().bottom;
+  if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+}
+function pinAnswerButtons() {
+  if (phase === "case") pinToKeyboard($("choices"), $("caseStep"));
+  else if (phase === "answer") pinToKeyboard($("continue"), $("continue"));
+}
+window.addEventListener("resize", () => requestAnimationFrame(pinAnswerButtons));
 
 function span(className, text) {
   const el = document.createElement("span");
@@ -422,6 +439,7 @@ function showAnswer() {
   $("prepFeedback").classList.add("hidden");
   $("finalFeedback").classList.remove("hidden");
   $("bar").style.width = ((index + 1) / session.length) * 100 + "%";
+  pinAnswerButtons();
 }
 
 function next() {
