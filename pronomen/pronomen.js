@@ -247,13 +247,23 @@ function tableOpen() {
 }
 /* An answer that starts the sentence is stored in lower case (mein); it is shown as written there (Mein). */
 const shownAnswer = x => (x.sentence.startsWith("___") ? x.answer.charAt(0).toLocaleUpperCase("de-DE") + x.answer.slice(1) : x.answer);
-/* The on-screen keyboard has no capital letters, so case is not checked. For the formal Sie / Ihnen / Ihr…
-   in mid-sentence the right spelling is shown in green with a short note (decided 2026-10-22). */
+/* Capital letters (03.11.2026, Alena; the keyboard has Shift now): the case is checked. The polite Sie / Ihnen /
+   Ihr… is always capitalised, also at the start of the sentence; any other word at the start may be typed in
+   either case; in mid-sentence the case must be right (sie „they“ ≠ Sie). A right word in the wrong case is a
+   mistake, with a short note under the answer. */
 const POLITE_NOTE = {
-  note: { ru: "Вежливая форма - с большой буквы: {w}", en: "Polite form - capitalised: {w}" }
+  note: { ru: "Вежливая форма — с большой буквы: {w}", en: "Polite form — capitalised: {w}" },
+  small: { ru: "Здесь с маленькой буквы: {w}", en: "Lower case here: {w}" }
 };
-const politeCaseSlip = (x, typed) =>
-  !x.sentence.startsWith("___") && /^[A-ZÄÖÜ]/.test(x.answer) && typed.trim() !== x.answer && norm(typed) === norm(x.answer);
+const isPolite = x => /(^|· )Sie → /.test(x.skill);
+const plain = s => s.trim().replace(/[.,!?;:]/g, "");
+function caseRight(x, typed) {
+  const t = plain(typed);
+  if (t === x.answer) return true;
+  if (x.sentence.startsWith("___") && !isPolite(x)) return norm(t) === norm(x.answer);
+  return false;
+}
+const politeCaseSlip = (x, typed) => norm(typed) === norm(x.answer) && !caseRight(x, typed);
 function coloured(text, cls) {
   const s = document.createElement("span");
   s.className = cls;
@@ -265,7 +275,7 @@ function coloured(text, cls) {
 function submit() {
   if (!answer.trim() || feedbackOpen()) return;
   const x = deck[i],
-    ok = norm(answer) === norm(x.answer);
+    ok = norm(answer) === norm(x.answer) && caseRight(x, answer);
   recordDailyAnswer();
   $("bar").style.width = `${((i + 1) / deck.length) * 100}%`; // the bar fills on the answer, like every exercise
   const keys = statKey(x);
@@ -298,7 +308,9 @@ function submit() {
   $("given").replaceChildren(coloured(answer, ok ? "good" : "bad"));
   const slip = politeCaseSlip(x, answer);
   $("correctText").replaceChildren(...(ok && !slip ? [] : [coloured("→ " + shownAnswer(x), "good")]));
-  $("caseNote").textContent = slip ? getTranslation(POLITE_NOTE, "note").replace("{w}", x.answer) : "";
+  $("caseNote").textContent = slip
+    ? getTranslation(POLITE_NOTE, /^[A-ZÄÖÜ]/.test(x.answer) || isPolite(x) ? "note" : "small").replace("{w}", shownAnswer(x))
+    : "";
   $("caseNote").hidden = !slip;
   $("skill").textContent = x.skill + (x.type === "possessive" && x.gender ? " · " + x.gender : "");
   $("answerbox").style.display = "none";

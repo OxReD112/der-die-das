@@ -509,6 +509,7 @@ function render() {
   $("translation").textContent = getTranslation(current, "sentenceTranslation");
   $("answerInput").value = "";
   hintsUsed = 0;
+  caseHinted = false;
   $("answerInput").classList.remove("almost", "nudge");
   $("almostHint").classList.remove("show");
   $("almostHint").textContent = "";
@@ -644,13 +645,48 @@ function checkCopy(typed) {
   save();
   updateEditButton();
 }
+/* Capital letters (03.11.2026, Alena; the keyboard has Shift now): the case is checked. A word at the start of the
+   sentence may be typed in either case — except a noun, which is always capitalised. A right word in the wrong case
+   gets one more try with a hint („Fast. Nomen schreibt man groß.“), the second time it is a mistake. */
+const keepCase = s => s.trim().replace(/\s*,\s*/g, " ").replace(/\s+/g, " ");
+const isNoun = c => c.pos === "Substantiv" || /^(der|die|das)\s/i.test(c.base || "");
+function blankAtStart(c) {
+  const before = String(c.blank || "").split("_____")[0].trim();
+  return !before || /[.!?:„“"»«]$/.test(before);
+}
+const lowerFirst = s => s.charAt(0).toLocaleLowerCase("de-DE") + s.slice(1);
+function caseRight(c, typedKeep, target) {
+  const t = keepCase(target);
+  if (typedKeep === t) return true;
+  return blankAtStart(c) && !isNoun(c) && lowerFirst(typedKeep) === lowerFirst(t);
+}
+let caseHinted = false;
+function caseHint(c, target) {
+  if (/^[A-ZÄÖÜ]/.test(target)) return isNoun(c) ? "Fast. Nomen schreibt man groß." : "Fast. Hier schreibt man groß.";
+  return "Fast. Hier schreibt man klein.";
+}
 function check() {
   let typed = normalize($("answerInput").value);
   if (!typed) return;
   if (ghostShown) return checkCopy(typed);
+  const typedKeep = keepCase($("answerInput").value);
   const opts = targets(current),
     matched = opts.find(t => normalize(t) === typed);
   let ok = !!matched;
+  if (ok && !caseRight(current, typedKeep, matched)) {
+    if (!caseHinted) {
+      caseHinted = true;
+      $("almostHint").textContent = caseHint(current, keepCase(matched));
+      $("almostHint").classList.add("show");
+      const f = $("answerInput");
+      f.classList.add("almost");
+      f.classList.remove("nudge");
+      void f.offsetWidth;
+      f.classList.add("nudge");
+      return;
+    }
+    ok = false;
+  }
   const r = rec(current);
   const tolerant = (r.level || 0) >= TOLERANT_FROM_LEVEL && !failedToday.has(current.id);
   if (!ok && tolerant && hintsUsed < MAX_HINTS && opts.some(t => isClose(typed, t))) {
@@ -666,9 +702,8 @@ function check() {
   }
   // For an error, compare against the closest accepted answer so the highlighted difference is useful.
   let correct = opts[0] || "";
-  if (!ok && opts.length > 1) {
-    correct = [...opts].sort((x, y) => osa(typed, normalize(x)) - osa(typed, normalize(y)))[0];
-  } else if (ok) correct = matched;
+  if (matched) correct = matched;
+  else if (opts.length > 1) correct = [...opts].sort((x, y) => osa(typed, normalize(x)) - osa(typed, normalize(y)))[0];
   $("question").classList.add("hidden");
   $("keyboard")?.classList.remove("show");
   $("feedbackShell").className = "feedbackShell show";
@@ -676,7 +711,12 @@ function check() {
   $("answerSentence").innerHTML = revealHTML(current);
   $("answerTranslation").textContent = getTranslation(current, "sentenceTranslation");
   if (!ok) {
-    const [top, bottom] = diffHTML(typed, normalize(correct));
+    // letters in their real case (03.11.2026): „zustand“ → „Zustand“ marks the z; a free first letter at the
+    // start of the sentence is not marked
+    const right = keepCase(correct),
+      freeFirst = blankAtStart(current) && !isNoun(current) && lowerFirst(typedKeep).charAt(0) === lowerFirst(right).charAt(0),
+      mine = freeFirst ? right.charAt(0) + typedKeep.slice(1) : typedKeep;
+    const [top, bottom] = diffHTML(mine, right);
     $("typedDiff").innerHTML = top;
     $("correctDiff").innerHTML = bottom;
   } else {

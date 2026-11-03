@@ -247,7 +247,7 @@ function checkAnswer() {
     return;
   }
   const item = deck[index];
-  const a = window.ModalAnswerRules.normalize($("answer").value);
+  const a = $("answer").value.normalize("NFC").trim(); // as typed: the case is checked (03.11.2026)
   const assessment = window.ModalAnswerRules.assess(item, a);
   if (assessment.kind === "empty") return;
 

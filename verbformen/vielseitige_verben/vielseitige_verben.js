@@ -350,7 +350,11 @@ function checkAnswer() {
   checked = true;
   $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
   // the accepted spelling the typed word matched (ß/ss, case): shown instead of the raw input
-  const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed));
+  // capital letters (03.11.2026, Alena): a capital here only starts the sentence (Wird …?), a small first letter is
+  // fine there; otherwise the case must be as written
+  const keep = s => String(s || "").trim().replace(/\s+/g, " ").replace(/ß/g, "ss"),
+    caseRight = x => keep(typed) === keep(x) || (/^[A-ZÄÖÜ]/.test(x) && keep(typed).charAt(0).toLocaleUpperCase("de-DE") + keep(typed).slice(1) === keep(x));
+  const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed) && caseRight(x));
   const ok = Boolean(matched);
   if (ok) correctCount++;
   results.push({ item, ok });
