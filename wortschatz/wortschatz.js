@@ -561,7 +561,11 @@ function diffHTML(typed, correct) {
       j++;
     }
   }
-  return [top.join(""), bottom.join("")];
+  // 03.11 (Alena, A + B): a quite different word (under 60 % of the right letters match) is not compared letter by letter —
+  // what you typed in red, the right word whole; and the right word never has holes (no gap under an extra letter).
+  const same = bottom.filter(s => s.includes("diffSame")).length;
+  if (same < n * 0.6) return [`<span class="diffWrong">${esc(typed)}</span>`, `<span class="diffSame">${esc(correct)}</span>`];
+  return [top.join(""), bottom.filter(s => !s.includes("diffGap")).join("")];
 }
 /* 👁 — first showing of a new word (2026-10-26): try to remember it yourself, or tap the eye and copy it. */
 function setupPeek() {
