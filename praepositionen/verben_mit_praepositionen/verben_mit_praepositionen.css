@@ -17,6 +17,8 @@
 
 /* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 :root {
+  --pattern-text: #c7c3bc; /* Spickzettel text (as Partizip II) */
+  --lit-line: rgba(232, 196, 120, 0.55); /* the verb's rule, gold */
   --gap-line: rgba(255, 255, 255, 0.28); /* the blank under the verb */
   /* case buttons (same shape as Fester Kasus, own shadow and hover) */
   --case-text: #fff;
@@ -26,6 +28,8 @@
   --case-shadow-active: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 3px 9px rgba(0, 0, 0, 0.12);
 }
 [data-theme="light"] {
+  --pattern-text: #4a4844;
+  --lit-line: rgba(160, 112, 20, 0.5);
   --gap-line: rgba(0, 0, 0, 0.25);
   --case-text: #242426;
   --case-bg-hover: #f4f2ef;
@@ -996,5 +1000,363 @@ html.is-touch.vmp-measure .kbzone {
     min-height: 64px;
     height: 64px; /* buttons as Wortschatz on a tablet: 64 high, 20 */
     font-size: 20px;
+  }
+}
+
+/* ===== SPICKZETTEL (03.11.2026) — button and window as in Partizip II =====
+   Kasus (rules) · Welche Präposition? (tendencies); each line says how far it holds (a small tag); the verb's
+   preposition is lit gold after the answer. A wrong case: the case rule under the answer (.case-rule). */
+.pattern-table-btn {
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: 400 13px/1.2 var(--font);
+  padding: 10px 13px;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.pattern-table-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+#start .pattern-table-btn {
+  margin-top: 28px;
+}
+.in-session-pattern {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 16px); /* centred on the Home button's row */
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+}
+.pattern-table-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.pattern-table-btn:disabled:active {
+  transform: none;
+  filter: none;
+}
+.in-session-pattern .pattern-table-btn {
+  pointer-events: auto;
+  background: var(--bg);
+}
+.pattern-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.pattern-modal.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.pattern-modal-card {
+  width: min(560px, 100%);
+  max-height: min(80vh, 720px);
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 26px;
+  --card-pad: 18px;
+  position: relative;
+  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.pattern-modal.open .pattern-modal-card {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+.pattern-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 auto;
+  padding-right: 28px;
+  margin-bottom: 8px;
+}
+.pattern-modal-head h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+}
+.pattern-close {
+  position: absolute;
+  top: calc(var(--card-pad) - 7px);
+  right: calc(var(--card-pad) - 4px);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--hairline);
+  color: var(--muted);
+  cursor: pointer;
+}
+.pattern-close::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+.pattern-close svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  fill: none;
+}
+#tipsModalBody {
+  overflow: auto;
+  min-height: 0;
+}
+.pattern-section {
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+  font: 600 12px/1.3 var(--font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pattern-section:first-child {
+  margin-top: 4px;
+}
+.pattern-intro {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 6px 0 8px;
+}
+.pattern-rules {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+.pattern-rule {
+  padding: 8px 10px;
+  border: 1px solid var(--cell-line);
+  border-radius: 13px;
+  background: var(--cell-bg);
+}
+.pattern-rule.lit {
+  border-color: var(--lit-line);
+}
+.pattern-rule-text {
+  color: var(--pattern-text);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.pattern-rule.lit .pattern-rule-text {
+  color: var(--lit-text);
+}
+.pattern-rule-ex {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.pattern-rule-note {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.pattern-rule-note.pattern-rule-note-only {
+  margin-top: 0;
+}
+/* how far a line holds: always / almost always / often / learn by heart */
+.tip-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+.tip-tag.tip-always {
+  color: var(--mint);
+  border-color: color-mix(in srgb, var(--mint) 40%, transparent);
+}
+/* under the answer, after a wrong case */
+.case-rule {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.case-rule[hidden] {
+  display: none;
+}
+body:has(.pattern-modal.open) .start-about {
+  opacity: 0;
+}
+@media (max-width: 359px) {
+  .pattern-modal-card {
+    --card-pad: 14px;
+  }
+}
+@media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
+  .in-session-pattern {
+    position: static;
+    margin-top: 20px;
+  }
+}
+@media (min-width: 700px) and (min-height: 740px) {
+  .pattern-modal-head h2 {
+    font-size: 24px;
+  }
+  .pattern-rule-text,
+  .pattern-rule-ex {
+    font-size: 16px;
+  }
+  .pattern-rule-note,
+  .pattern-intro,
+  .case-rule {
+    font-size: 14px;
+  }
+  .case-rule {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pattern-modal,
+  .pattern-modal-card {
+    transition: none !important;
+  }
+}
+
+/* Spickzettel tiles: which preposition (03.11.2026, Alena — visual): two columns, a line icon, the preposition,
+   one short line of meaning, 2–3 verbs; the verb's preposition gold after the answer. */
+.ptiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 8px;
+}
+.ptile {
+  min-width: 0;
+  padding: 9px 10px 10px;
+  border: 1px solid var(--cell-line);
+  border-radius: 13px;
+  background: var(--cell-bg);
+}
+.ptile-wide {
+  grid-column: 1 / -1;
+}
+.ptile.lit {
+  border-color: var(--lit-line);
+}
+.ptile-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.ptile-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+}
+.ptile.lit .ptile-icon,
+.ptile.lit .ptile-prep {
+  color: var(--lit-text);
+}
+.ptile-prep {
+  color: var(--text);
+  font: 650 20px/1.1 var(--font);
+  letter-spacing: -0.01em;
+}
+.ptile-means {
+  margin-top: 5px;
+  color: var(--pattern-text);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.ptile-ex {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.ptile-ex b {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.ptile.lit .ptile-ex b {
+  color: var(--lit-text);
+}
+.ptile-ex-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 10px;
+}
+.ptile-note {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.3;
+  opacity: 0.85;
+}
+.ptile-foot {
+  margin: 14px 2px 2px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 339px) {
+  .ptiles {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 700px) and (min-height: 740px) {
+  .ptile-prep {
+    font-size: 24px;
+  }
+  .ptile-means {
+    font-size: 15px;
+  }
+  .ptile-ex,
+  .ptile-foot {
+    font-size: 14px;
   }
 }

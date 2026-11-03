@@ -229,6 +229,7 @@ function render() {
   $("caseStep").classList.add("hidden");
   paintGap();
   $("check").classList.remove("hidden");
+  $("roundTipsBtn").disabled = true; // no peeking: the Spickzettel opens after the answer
   $("feedback").className = "feedback hidden";
   $("finalFeedback").classList.add("hidden");
   $("prepFeedback").classList.remove("hidden");
@@ -427,6 +428,10 @@ function showAnswer() {
   const chips = [chip(prepOK, "Präposition", typed.trim())];
   if (caseOK !== null) chips.push(chip(caseOK, "Kasus", chosenCase));
   $("chips").replaceChildren(...chips);
+  // a wrong case: the case rule of this preposition (Spickzettel „Kasus“), one quiet line (03.11.2026)
+  $("caseRule").textContent = caseOK === false ? caseRuleFor(used.preposition) : "";
+  $("caseRule").hidden = caseOK !== false;
+  $("roundTipsBtn").disabled = false;
   // The other accepted pair(s), without comment (author 2026-10-23): „auch: von + Dativ“
   const others = pairsOf(x).filter(p => p.preposition !== used.preposition);
   $("alsoLine").textContent = others.length ? "auch: " + others.map(p => p.preposition + " + " + p.case).join(" · ") : "";
@@ -616,3 +621,138 @@ $("playAgain").addEventListener("click", () => showScreen("start"));
 $("homeBack").addEventListener("click", goBackToHome);
 
 loadKeyboardComponent().catch(e => console.error(e));
+
+/* ===== SPICKZETTEL (03.11.2026, Alena) =====
+   Which preposition: tendencies as tiles (PREP_TIPS below), checked against the 71 pairs of this exercise. After an
+   answer the verb's preposition is lit and the window opens there; before the answer the button is off (no
+   peeking), as in every exercise. The case rules (CASE_TIPS) are not in the window — Fester Kasus trains that —
+   but a wrong case shows the rule of its preposition under the answer (caseRuleFor). */
+const TIP_TAG = {
+  always: { ru: "всегда", en: "always" },
+  almost: { ru: "почти всегда", en: "almost always" },
+  often: { ru: "часто", en: "often" },
+  learn: { ru: "запомнить", en: "learn by heart" }
+};
+const CASE_TIPS = [
+  { preps: ["mit", "von", "zu", "bei", "nach", "aus"], tag: "always",
+    head: "mit · von · zu · bei · nach · aus → Dativ",
+    ex: "sprechen mit · träumen von · gratulieren zu",
+    note: { ru: "у этих предлогов только один падеж — угадывать нечего", en: "these prepositions have only one case — nothing to guess" } },
+  { preps: ["für", "um", "gegen"], tag: "always",
+    head: "für · um · gegen → Akkusativ",
+    ex: "danken für · bitten um · protestieren gegen" },
+  { preps: ["über"], tag: "always", head: "über → Akkusativ", ex: "sprechen über · sich ärgern über" },
+  { preps: ["vor"], tag: "always", head: "vor → Dativ", ex: "Angst haben vor · warnen vor" },
+  { preps: ["auf"], tag: "almost", head: "auf → Akkusativ", ex: "warten auf · hoffen auf · achten auf",
+    note: { ru: "исключение: bestehen auf + Dativ (настаивать на)", en: "exception: bestehen auf + Dativ (to insist on)" } },
+  { preps: ["an"], tag: "often", head: { ru: "an: мысль, чувство к кому-то → Akkusativ; участие, работа → Dativ", en: "an: a thought or feeling towards → Akkusativ; taking part, working → Dativ" },
+    ex: "denken an · glauben an · sich erinnern an  |  teilnehmen an · arbeiten an · zweifeln an",
+    note: { ru: "в упражнении 5 + 5 — единственный предлог, где падеж правда надо помнить", en: "5 + 5 in this exercise — the one preposition where the case really has to be remembered" } },
+  { preps: ["in"], tag: "learn", head: "in → Akkusativ", ex: "sich verlieben in" }
+];
+/* Welche Präposition? (Alena 03.11.2026: no case part — Fester Kasus trains that; visual, short) — tiles in two
+   columns, one small line-icon each; honesty by grouping: „almost always so“ / „often so“ / „just learn“. */
+const ICON = {
+  bubble: '<path d="M4 5.5h16v10H9l-5 4z"/>',
+  alert: '<path d="M12 4 21 19H3z"/><path d="M12 10v4"/><path d="M12 16.5v.5"/>',
+  people: '<circle cx="8.5" cy="9" r="3"/><circle cx="15.5" cy="9" r="3"/><path d="M3 19c.8-3 3-4.5 5.5-4.5S13.2 16 14 19"/><path d="M13 15c.7-.3 1.6-.5 2.5-.5 2.5 0 4.7 1.5 5.5 4.5"/>',
+  search: '<circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/>',
+  heart: '<path d="M12 19s-7-4.4-7-9.3A3.8 3.8 0 0 1 12 7.6a3.8 3.8 0 0 1 7 2.1C19 14.6 12 19 12 19z"/>',
+  ahead: '<path d="M4 12h13"/><path d="m13 7 5 5-5 5"/><path d="M21 5v14"/>',
+  thought: '<circle cx="12" cy="10" r="5.5"/><circle cx="7" cy="18" r="1.5"/><circle cx="4.5" cy="21" r=".8"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
+  person: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.8 3.7-5.5 7-5.5s6 1.7 7 5.5"/>',
+  from: '<path d="M20 12H7"/><path d="m11 7-5 5 5 5"/><path d="M3 5v14"/>'
+};
+const PREP_TIPS = [
+  { group: "almost", prep: "über", icon: "bubble", head: { ru: "тема разговора; реакция на то, что уже есть", en: "a topic; a reaction to what is there" }, ex: ["sprechen über", "sich ärgern über"] },
+  { group: "almost", prep: "vor", icon: "alert", head: { ru: "страх, опасность", en: "fear, danger" }, ex: ["Angst haben vor", "warnen vor"] },
+  { group: "almost", prep: "mit", icon: "people", head: { ru: "вместе с кем-то; чем занят", en: "together with; busy with" }, ex: ["sich treffen mit", "anfangen mit"] },
+  { group: "almost", prep: "nach", icon: "search", head: { ru: "поиск, вопрос", en: "searching, asking" }, ex: ["suchen nach", "fragen nach"] },
+  { group: "almost", prep: "um", icon: "heart", head: { ru: "просьба, забота", en: "asking for, caring" }, ex: ["bitten um", "sich kümmern um"] },
+  { group: "often", prep: "auf", icon: "ahead", head: { ru: "то, что впереди; внимание", en: "what lies ahead; attention" }, ex: ["warten auf", "achten auf"],
+    note: { ru: "но verzichten, bestehen auf", en: "but verzichten, bestehen auf" } },
+  { group: "often", prep: "an", icon: "thought", head: { ru: "мысль к кому-то; участие", en: "a thought towards; taking part" }, ex: ["denken an", "teilnehmen an"] },
+  { group: "often", prep: "für", icon: "check", head: { ru: "за что (как «за»)", en: "for what" }, ex: ["danken für", "sich entscheiden für"] },
+  { group: "often", prep: "bei", icon: "person", head: { ru: "у кого, перед кем", en: "with / to whom" }, ex: ["sich bedanken bei", "helfen bei"] },
+  { group: "learn", prep: "von", icon: "from", head: { ru: "то «от», то «о»", en: "„from“ or „about“" }, ex: ["abhängen von", "erzählen von"] }
+];
+const LEARN_REST = { preps: ["zu", "aus", "in", "gegen"], ex: ["gehören zu", "bestehen aus", "sich verlieben in", "protestieren gegen"] };
+const TIP_GROUPS = [
+  ["almost", { ru: "Почти всегда так", en: "Almost always so" }],
+  ["often", { ru: "Часто так", en: "Often so" }],
+  ["learn", { ru: "Просто запомнить", en: "Just learn them" }]
+];
+const RU_HINT = {
+  ru: "Часто помогает русский: antworten auf — отвечать на, glauben an — верить в, abhängen von — зависеть от. Ловушка: warten auf — просто «ждать».",
+  en: "Some are like English: teilnehmen an — take part in, abhängen von — depend on, protestieren gegen — protest against."
+};
+const tipText = v => (typeof v === "string" ? v : getTranslation({ v }, "v"));
+function escapeTip(s) {
+  return String(s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+}
+const svgIcon = name =>
+  '<svg class="ptile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[name] + "</svg>";
+// examples whole, one per line (Alena: „sprechen · nachdenken über“ read as if only the last verb took über)
+function exHtml(list, prep, cols) {
+  return (
+    '<div class="ptile-ex' + (cols ? " ptile-ex-cols" : "") + '" lang="de">' +
+    list.map(e => {
+      const i = e.lastIndexOf(" ");
+      return "<div>" + escapeTip(e.slice(0, i)) + " <b>" + escapeTip(e.slice(i + 1)) + "</b></div>";
+    }).join("") + "</div>"
+  );
+}
+function tileHtml(t, prep) {
+  return (
+    '<div class="ptile' + (prep === t.prep ? " lit" : "") + '"><div class="ptile-head">' + svgIcon(t.icon) +
+    '<span class="ptile-prep" lang="de">' + t.prep + "</span></div>" +
+    '<div class="ptile-means">' + escapeTip(tipText(t.head)) + "</div>" +
+    exHtml(t.ex, t.prep) +
+    (t.note ? '<div class="ptile-note">' + escapeTip(tipText(t.note)) + "</div>" : "") + "</div>"
+  );
+}
+function tipsHtml(prep) {
+  return TIP_GROUPS.map(([g, title]) => {
+    let tiles = PREP_TIPS.filter(t => t.group === g).map(t => tileHtml(t, prep)).join("");
+    if (g === "learn")
+      tiles +=
+        '<div class="ptile ptile-wide' + (LEARN_REST.preps.includes(prep) ? " lit" : "") + '"><div class="ptile-head"><span class="ptile-prep" lang="de">' +
+        LEARN_REST.preps.join(" · ") + "</span></div>" + exHtml(LEARN_REST.ex, null, true) + "</div>";
+    return '<h3 class="pattern-section">' + escapeTip(tipText(title)) + '</h3><div class="ptiles">' + tiles + "</div>";
+  }).join("") + '<p class="ptile-foot">' + escapeTip(tipText(RU_HINT)) + "</p>";
+}
+/* under the answer after a wrong case: the case rule of this preposition, one line */
+function caseRuleFor(prep) {
+  const t = CASE_TIPS.find(r => r.preps.includes(prep));
+  if (!t) return "";
+  return tipText(t.head) + " · " + tipText(TIP_TAG[t.tag]) + (t.preps[0] === "auf" ? " (" + tipText(t.note) + ")" : "");
+}
+const tipsOpen = () => $("tipsModal").classList.contains("open");
+function openTips(round) {
+  const prep = round && phase === "answer" && used ? used.preposition : null;
+  if (round && !prep) return; // off until the answer
+  $("tipsModalBody").innerHTML = tipsHtml(prep);
+  $("tipsModal").classList.add("open");
+  $("tipsModal").setAttribute("aria-hidden", "false");
+  const lit = $("tipsModalBody").querySelector(".lit");
+  if (lit) lit.scrollIntoView({ block: "center" });
+}
+function closeTips() {
+  $("tipsModal").classList.remove("open");
+  $("tipsModal").setAttribute("aria-hidden", "true");
+}
+document.querySelectorAll("[data-tips]").forEach(b => b.addEventListener("click", () => openTips(b.dataset.tips === "round")));
+$("tipsClose").onclick = closeTips;
+$("tipsModal").onclick = e => {
+  if (e.target === $("tipsModal")) closeTips();
+};
+document.addEventListener(
+  "keydown",
+  e => {
+    if (!tipsOpen()) return;
+    if (e.key === "Escape") closeTips();
+    e.stopImmediatePropagation(); // the exercise's keys (Enter = Weiter, 1 / 2 = case) wait while the window is open
+  },
+  true
+);
