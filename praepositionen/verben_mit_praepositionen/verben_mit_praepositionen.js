@@ -659,7 +659,7 @@ const ICON = {
   search: '<circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/>',
   heart: '<path d="M12 19s-7-4.4-7-9.3A3.8 3.8 0 0 1 12 7.6a3.8 3.8 0 0 1 7 2.1C19 14.6 12 19 12 19z"/>',
   ahead: '<path d="M4 12h13"/><path d="m13 7 5 5-5 5"/><path d="M21 5v14"/>',
-  thought: '<circle cx="12" cy="10" r="5.5"/><circle cx="7" cy="18" r="1.5"/><circle cx="4.5" cy="21" r=".8"/>',
+  thought: '<path d="M7.5 16.5a4.5 4.5 0 0 1-.6-8.9A5 5 0 0 1 16.4 6a4 4 0 0 1 1.1 7.9 3.5 3.5 0 0 1-3 2.6z"/><circle cx="8" cy="19.6" r="1.1"/><circle cx="5.2" cy="21.6" r=".6"/>', // a cloud — the old circle read as a mirrored magnifier (Alena 03.11)
   check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
   person: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.8 3.7-5.5 7-5.5s6 1.7 7 5.5"/>',
   from: '<path d="M20 12H7"/><path d="m11 7-5 5 5 5"/><path d="M3 5v14"/>'
@@ -672,7 +672,7 @@ const PREP_TIPS = [
   { group: "almost", prep: "um", icon: "heart", head: { ru: "просьба, забота", en: "asking for, caring" }, ex: ["bitten um", "sich kümmern um"] },
   { group: "often", prep: "auf", icon: "ahead", head: { ru: "то, что впереди; внимание", en: "what lies ahead; attention" }, ex: ["warten auf", "achten auf"],
     note: { ru: "но verzichten, bestehen auf", en: "but verzichten, bestehen auf" } },
-  { group: "often", prep: "an", icon: "thought", head: { ru: "мысль к кому-то; участие", en: "a thought towards; taking part" }, ex: ["denken an", "teilnehmen an"] },
+  { group: "often", prep: "an", icon: "thought", head: { ru: "думать, помнить, верить; участвовать в чём-то", en: "thinking, remembering, believing; taking part" }, ex: ["denken an", "teilnehmen an"] },
   { group: "often", prep: "für", icon: "check", head: { ru: "за что (как «за»)", en: "for what" }, ex: ["danken für", "sich entscheiden für"] },
   { group: "often", prep: "bei", icon: "person", head: { ru: "у кого, перед кем", en: "with / to whom" }, ex: ["sich bedanken bei", "helfen bei"] },
   { group: "learn", prep: "von", icon: "from", head: { ru: "то «от», то «о»", en: "„from“ or „about“" }, ex: ["abhängen von", "erzählen von"] }
