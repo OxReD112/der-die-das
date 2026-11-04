@@ -2728,3 +2728,14 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 .reading-view .highlights-toggle[aria-pressed="false"] { color:var(--muted); }
 
 .page-flow .chapter-end.is-book-end { justify-content:center; align-items:center; box-sizing:border-box; }
+
+/* 04.11 (Alena): every UI icon has one line — 1.2 px at any size (vector-effect keeps it from scaling) */
+.book-delete svg *,
+.popover-bookmark svg *,
+.highlights-toggle svg *,
+.vocabulary-toggle svg *,
+.vocabulary-copy svg *,
+.vocabulary-header #vocabulary-close svg *,
+.text-segments svg *,
+.storage-info svg *,
+#contents-close svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }

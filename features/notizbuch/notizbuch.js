@@ -88,7 +88,7 @@
     animateContent(direction, direction === "forward" && view === "topics" && selectedTopic ? els.list : null);
   }
   const pencilSvg = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 16.5 15.8 4.7a2.8 2.8 0 0 1 4 4L8 20.5 3 21l1-4.5Z"/><path d="m13.8 6.7 4 4"/></svg>';
-  const trashSvg = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
+  const trashSvg = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M6.5 7l.8 12.2a1 1 0 0 0 1 .8h7.4a1 1 0 0 0 1-.8L17.5 7"/></svg>';
   function openEntry(id) {
     const entry = allEntries().find(item => item.id === id); if (!entry) return;
     openedId = id; $("detail-topic").textContent = entry.category || ""; $("detail-title").textContent = entry.title;

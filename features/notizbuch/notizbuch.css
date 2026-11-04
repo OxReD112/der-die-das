@@ -190,3 +190,10 @@ button.nb-topic-title { align-items:center; }
 
 /* Phones: „＋ Neue Notiz“ one step down, 14 (04.11, air on the iPhone 13) */
 @media (max-width: 699px) { .nb-primary { font-size:14px; } }
+
+/* 04.11 (Alena): every UI icon has one line — 1.2 px at any size (vector-effect keeps it from scaling) */
+.nb-search-toggle svg *,
+.nb-search svg *,
+.nb-icon-action svg *,
+.nb-save-tick svg *,
+.nb-format-menu svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }

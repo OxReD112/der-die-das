@@ -2914,3 +2914,10 @@ html.home-wide-layout body {
     margin-bottom: 10px;
   }
 }
+
+/* 04.11 (Alena): every UI icon has one line — 1.2 px at any size (vector-effect keeps it from scaling) */
+.home-back svg *,
+.notebook-icon-button svg *,
+.settings-info svg *,
+.about-close svg *,
+.keep-label svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }

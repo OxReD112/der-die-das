@@ -155,3 +155,11 @@
    Small buttons in a row (10/20/30, der/die/das, cases, prepositions) and the boxes beside the answer
    field (Situation, Wo? / Wohin? / Woher? rows): 14. Wide elements across the column — the answer field, Prüfen, Weiter,
    end buttons: 18 (one value, Alena 01.11). Everything up to ~40px high is fully round: Spickzettel, tags (✗ Präposition / ✓ Kasus, Präposition 0 / 10, formula blocks, tags in the Spickzettel windows). */
+
+/* 04.11 (Alena): every UI icon has one line — 1.2 px at any size (vector-effect keeps it from scaling) */
+.close svg *,
+.oclose svg *,
+.pattern-close svg *,
+.forms-close svg *,
+.forms-reset svg *,
+.meaning-tag svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }
