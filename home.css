@@ -842,15 +842,14 @@ header h1 {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--hairline);
+  border: 0;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  background: var(--tile-surface); /* = the Home button: the tiles' fill, soft shadow, thin top line in dark (04.11) */
+  box-shadow: var(--lift-highlight), var(--lift-shadow);
   color: var(--text);
   font:
     400 28px/42px var(--font);
   text-align: center;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
