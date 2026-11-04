@@ -644,10 +644,13 @@ html:not(.is-touch) #check {
     background 0.16s ease,
     box-shadow 0.16s ease;
 }
-.case-choice:hover {
-  background: var(--case-bg-hover);
-  box-shadow: var(--case-shadow-hover);
-  transform: translateY(-1px);
+/* 04.11 (Alena): hover only with a mouse — on a phone the last tap (keyboard ✓) left Dativ lit, the two cases looked different */
+@media (hover: hover) {
+  .case-choice:hover {
+    background: var(--case-bg-hover);
+    box-shadow: var(--case-shadow-hover);
+    transform: translateY(-1px);
+  }
 }
 .case-choice:active {
   transform: scale(0.985);
