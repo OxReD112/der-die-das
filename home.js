@@ -1303,7 +1303,7 @@ async function saveDeutschBackup() {
     const reading = await window.BibliothekReadingData.exportData();
     if (reading.states.length) backup.modules.bibliothek = {storageVersion:'deutschReadingDataV1',state:reading};
     if (!Object.keys(backup.modules).some(name => !BACKUP_MODULES[name]?.setting)) {
-      if (note) note.textContent = "· No progress found";
+      if (note) note.textContent = "· kein Fortschritt gefunden";
       return;
     }
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
@@ -1319,11 +1319,11 @@ async function saveDeutschBackup() {
       localStorage.setItem(DEUTSCH_LAST_BACKUP_KEY, new Date().toISOString());
     } catch (e) {}
     if (note) {
-      note.textContent = "· Backup created";
+      note.textContent = "· Backup erstellt";
       note.classList.remove("is-warning");
     }
   } catch (e) {
-    if (note) note.textContent = "· Backup failed";
+    if (note) note.textContent = "· Backup fehlgeschlagen";
   }
 }
 
@@ -1359,13 +1359,18 @@ async function restoreDeutschBackup(file) {
     const dateLabel =
       created && !Number.isNaN(created.getTime())
         ? created.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })
-        : "unknown date";
+        : "";
     /* Short confirm: date + time, and the name if the backup has one. */
     const profile = restorable.find(([name]) => name === "profile");
     const backupName =
       profile && profile[2] && typeof profile[2].name === "string" ? profile[2].name.trim().slice(0, 20) : "";
-    if (!window.confirm(`Restore backup from ${dateLabel}?` + (backupName ? `\nName: ${backupName}` : ""))) {
-      if (note) note.textContent = "· Restore cancelled";
+    /* a question to understand, so in Your Language (04.11, short words German, explanations in your language) */
+    const ru = window.DeutschTranslation?.getLang?.() === "ru";
+    const question = ru
+      ? (dateLabel ? `Восстановить бэкап от ${dateLabel}?` : "Восстановить бэкап?")
+      : (dateLabel ? `Restore the backup from ${dateLabel}?` : "Restore the backup?");
+    if (!window.confirm(question + (backupName ? `\nName: ${backupName}` : ""))) {
+      if (note) note.textContent = "· abgebrochen";
       return;
     }
     /* A restored file is a backup too: count its date as the last backup (if newer). */
@@ -1434,7 +1439,7 @@ async function restoreDeutschBackup(file) {
       langToggle.setAttribute("data-lang", lang);
       langToggle.setAttribute(
         "aria-label",
-        "Your Language: " + (lang === "en" ? "English" : "Russian") + ". Tap to switch."
+        "Deine Sprache: " + (lang === "en" ? "Englisch" : "Russisch") + ". Tippen zum Wechseln."
       );
     }
 
@@ -1449,12 +1454,12 @@ async function restoreDeutschBackup(file) {
       notificationsMoved = await window.DeutschNotifications.relink(previousNotificationUser);
     }
 
-    if (note) note.textContent = notificationsMoved ? "· Restore complete" : "· Restored · turn Notifications on again";
+    if (note) note.textContent = notificationsMoved ? "· wiederhergestellt" : "· wiederhergestellt · Benachrichtigungen neu einschalten";
     const nameField = document.getElementById("nameInput");
     if (nameField) nameField.value = getUserName();
     syncHomeDashboard();
   } catch (e) {
-    if (note) note.textContent = "· Restore failed";
+    if (note) note.textContent = "· Wiederherstellen fehlgeschlagen";
   }
 }
 
@@ -1616,7 +1621,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       localStorage.setItem(ENABLED_KEY, next ? "1" : "0");
     } catch (error) {
       console.error("Deutsch notifications:", error);
-      if (note) note.textContent = "Notification setup failed.";
+      if (note) note.textContent = window.DeutschTranslation?.getLang?.() === "ru" ? "Не получилось включить уведомления." : "Couldn't turn on notifications.";
     } finally {
       toggle.disabled = false;
       render();
@@ -1698,7 +1703,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       langToggle.setAttribute("data-lang", lang);
       langToggle.setAttribute(
         "aria-label",
-        "Your Language: " + (lang === "en" ? "English" : "Russian") + ". Tap to switch."
+        "Deine Sprache: " + (lang === "en" ? "Englisch" : "Russisch") + ". Tippen zum Wechseln."
       );
     }
     if (nameInput && document.activeElement !== nameInput) nameInput.value = getUserName();
@@ -1879,8 +1884,14 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     document.dispatchEvent(new CustomEvent("deutsch:translationlang"));
   });
 
+  const LIMIT_TEXT = {
+    en: "You can keep practising today without a daily limit. It will turn on again automatically\u00a0tomorrow.",
+    ru: "Сегодня можно заниматься без дневного лимита. Завтра он снова включится\u00a0сам."
+  };
   limit?.addEventListener("click", () => {
     if (limitOn()) {
+      const limitText = document.getElementById("dailyLimitConfirmText");
+      if (limitText) limitText.textContent = LIMIT_TEXT[window.DeutschTranslation?.getLang?.()] || LIMIT_TEXT.en;
       confirm.classList.add("is-open");
       confirm.setAttribute("aria-hidden", "false");
     } else {
@@ -1889,6 +1900,16 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       renderDailyStats();
       render();
     }
+  });
+
+  /* The whole row is the button (04.11): a tap on „Helles Design“ or beside the switch flips it, on „Name“ starts typing. */
+  document.querySelectorAll("#settingsPanel .settings-row").forEach(row => {
+    row.addEventListener("click", event => {
+      if (event.target.closest("button, input, label")) return;
+      const control = row.querySelector(".settings-toggle, .settings-lang");
+      if (control) control.click();
+      else row.querySelector("input")?.focus();
+    });
   });
 
   // Tap outside the window or Esc = "No" (like the table windows).
@@ -2016,7 +2037,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   let copyTimer = 0;
 
   function homeVersion() {
-    const m = openBtn.textContent.match(/version\s+([\d.]+)/);
+    const m = openBtn.textContent.match(/version\s+([\d.]+)/i);
     return m ? m[1] : "–";
   }
   async function readVersion(path) {
@@ -2062,9 +2083,9 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     return rows.map(r => (r.level === "sub" ? "  " : "") + r.name + " " + r.el.textContent).join("\n");
   }
   function copied(ok) {
-    copyBtn.textContent = ok ? "✓ Copied" : "Copy failed";
+    copyBtn.textContent = ok ? "✓ Kopiert" : "Kopieren fehlgeschlagen";
     clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => (copyBtn.textContent = "Copy"), 1600);
+    copyTimer = setTimeout(() => (copyBtn.textContent = "Kopieren"), 1600);
   }
   function copy() {
     const text = copyText();
@@ -2088,7 +2109,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   function open() {
     fill();
-    copyBtn.textContent = "Copy";
+    copyBtn.textContent = "Kopieren";
     win.classList.add("open");
     win.setAttribute("aria-hidden", "false");
   }
@@ -2127,48 +2148,48 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     '<svg aria-hidden="true" class="share-ic" width="16" height="18" viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V1.5M4.5 5 8 1.5 11.5 5M5 8H2.5v10.5h11V8H11"/></svg>';
   const T = {
     en: {
-      label: "Keep your progress",
+      label: "Fortschritt sichern",
       card: "Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
-      how: "Show me how ›",
-      title: "Add to Home Screen",
+      how: "So geht's ›",
+      title: "Zum Home-Bildschirm",
       s1: "Save your progress first.",
-      btn: "Make a Backup",
-      done: "✓ Backup Created",
+      btn: "Backup erstellen",
+      done: "✓ Backup erstellt",
       s2: "Tap <b>Share</b> " + SHARE + " in Safari, then <b>Add to Home Screen</b>.",
-      s3: "Open Deutsch. from the new icon, go to <b>Settings → Restore</b> and pick the backup file.",
+      s3: "Open Deutsch. from the new icon, go to <b>Einstellungen → Wiederherstellen</b> and pick the backup file.",
       foot: "The Home Screen app has its own storage, so your progress needs to be moved over once.",
       hintIOS:
         "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
       hintMac:
         "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often.",
-      infoTitle: "Your progress",
+      infoTitle: "Dein Fortschritt",
       info1:
         "Your progress is saved only on this device - in this browser, or in the Home Screen app. It isn't stored online, so clearing website data, deleting the app or switching to a new device would erase it.",
       infoSafari: " Safari also deletes it after 7 days without a visit.",
       info2:
-        "Make a backup now and then. It's a small file you can bring back anytime with Restore - on this device or a new one."
+        "Make a backup now and then. It's a small file you can bring back anytime with Wiederherstellen - on this device or a new one."
     },
     ru: {
-      label: "Сохраните прогресс",
+      label: "Fortschritt sichern",
       card: "Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
-      how: "Как это сделать ›",
-      title: "На экран «Домой»",
-      s1: "Сначала сохраните прогресс.",
-      btn: "Сделать бэкап",
-      done: "✓ Бэкап сохранён",
-      s2: "Нажмите <b>Поделиться</b> " + SHARE + " в Safari, затем <b>На экран «Домой»</b>.",
-      s3: "Откройте Deutsch. с новой иконки, зайдите в <b>Settings → Restore</b> и выберите файл бэкапа.",
+      how: "So geht's ›",
+      title: "Zum Home-Bildschirm",
+      s1: "Сначала сохрани прогресс.",
+      btn: "Backup erstellen",
+      done: "✓ Backup erstellt",
+      s2: "Нажми <b>Поделиться</b> " + SHARE + " в Safari, затем <b>На экран «Домой»</b>.",
+      s3: "Открой Deutsch. с новой иконки, зайди в <b>Einstellungen → Wiederherstellen</b> и выбери файл бэкапа.",
       foot: "У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
       hintIOS:
-        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавьте Deutsch. на экран «Домой» или почаще делайте бэкап.",
+        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавь Deutsch. на экран «Домой» или почаще делай бэкап.",
       hintMac:
-        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делайте бэкап.",
-      infoTitle: "Ваш прогресс",
+        "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делай бэкап.",
+      infoTitle: "Dein Fortschritt",
       info1:
         "Прогресс хранится только на этом устройстве - в этом браузере или в приложении на экране «Домой». В интернете он не сохраняется, поэтому если очистить данные сайта, удалить приложение или перейти на новое устройство, он пропадёт.",
       infoSafari: " Кроме того, Safari удаляет его, если 7 дней не заходить на сайт.",
       info2:
-        "Время от времени делайте бэкап. Это небольшой файл, из которого прогресс можно вернуть через Restore - на этом же или на новом устройстве."
+        "Время от времени делай бэкап. Это небольшой файл, из которого прогресс можно вернуть через Wiederherstellen - на этом же или на новом устройстве."
     }
   };
   const $ = id => document.getElementById(id);
@@ -2243,12 +2264,12 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       } else {
         note.textContent =
           d === null
-            ? "· No backup yet"
+            ? "· noch kein Backup"
             : d === 0
-              ? "· Last backup today"
+              ? "· letztes Backup heute"
               : d === 1
-                ? "· Last backup yesterday"
-                : "· Last backup " + d + " days ago";
+                ? "· letztes Backup gestern"
+                : "· letztes Backup vor " + d + " Tagen";
         if (atRisk() && progress && (d === null || d > WARN_DAYS)) note.classList.add("is-warning");
       }
     }

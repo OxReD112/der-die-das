@@ -14,8 +14,10 @@
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
   <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=3">
-  <link rel="stylesheet" href="../../home.css?v=54">
-  <link rel="stylesheet" href="notizbuch.css?v=27">
+  <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1">
+  <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
+  <link rel="stylesheet" href="../../home.css?v=63">
+  <link rel="stylesheet" href="notizbuch.css?v=29">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -54,6 +56,13 @@
         <div class="nb-form-head">
           <h2 class="nb-form-title" id="form-title">Neue Notiz</h2>
           <div class="nb-form-buttons">
+          <!-- Aa (04.11): in the pinned heading, so it stays at hand in a long note; the menu opens under the heading -->
+          <button class="nb-format-toggle" id="format-toggle" type="button" aria-label="Text formatieren" aria-expanded="false" aria-controls="format-menu">Aa</button>
+          <div class="nb-format-menu" id="format-menu" role="group" aria-label="Textformatierung" hidden>
+            <button type="button" data-format="bold" aria-label="Fett" aria-pressed="false"><b aria-hidden="true">B</b></button>
+            <button type="button" data-format="italic" aria-label="Kursiv" aria-pressed="false"><i aria-hidden="true">I</i></button>
+            <button type="button" data-format="checklist" aria-label="Checkliste" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6.5"/><path d="m6.5 10 2.3 2.3 4.7-4.7"/></svg></button>
+          </div>
           <button class="nb-save-tick nb-cancel-x" id="cancel-edit" type="button" aria-label="Abbrechen" title="Abbrechen">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>
           </button>
@@ -67,12 +76,6 @@
           <label class="nb-field"><span>Kurzzeile (optional)</span><input id="entry-subline" maxlength="100" placeholder="Ein hilfreicher Hinweis"></label>
           <div class="nb-field nb-note-field">
             <span id="note-label">Notiz</span>
-            <button class="nb-format-toggle" id="format-toggle" type="button" aria-label="Text formatieren" aria-expanded="false" aria-controls="format-menu">Aa</button>
-            <div class="nb-format-menu" id="format-menu" role="group" aria-label="Textformatierung" hidden>
-              <button type="button" data-format="bold" aria-label="Fett" aria-pressed="false"><b aria-hidden="true">B</b></button>
-              <button type="button" data-format="italic" aria-label="Kursiv" aria-pressed="false"><i aria-hidden="true">I</i></button>
-              <button type="button" data-format="checklist" aria-label="Checkliste" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6.5"/><path d="m6.5 10 2.3 2.3 4.7-4.7"/></svg></button>
-            </div>
             <div id="entry-body" class="nb-note-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="note-label" data-placeholder="Was möchtest du dir merken?"></div>
           </div>
           <div class="nb-field nb-topic-field">
@@ -99,6 +102,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=23"></script>
+  <script src="notizbuch.js?v=24"></script>
 </body>
 </html>

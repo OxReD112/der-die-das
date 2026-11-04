@@ -94,7 +94,11 @@
     $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = cleanNoteHtml(entry.bodyHtml);
     else $("detail-body").textContent = entry.body || "";
     renderTaskButtons();
-    $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
+    /* 04.11: the pencil sits in the heading's empty right column (opposite "‹"), so a long note needn't be scrolled to
+       the end to edit it; the title stays centred. The trash stays under the text. */
+    $("edit-entry")?.remove();
+    document.querySelector(".nb-detail-head").insertAdjacentHTML("beforeend", `<button class="nb-icon-action nb-detail-edit" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button>`);
+    $("detail-actions").innerHTML = `<button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
     $("delete-entry")?.addEventListener("click", event => {
