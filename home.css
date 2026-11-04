@@ -2899,18 +2899,18 @@ html.home-wide-layout body {
   }
 }
 
-/* Exercise tiles without the „0 / 10“ counter (04.11, Alena: lighter page; today's total is in Heute). The line
-   appears only when the round is done: the glow + „✓ fertig“. Wortschatz and Bibliothek keep their line. */
-.mosaic .tile-small:not(.is-done) .status {
+/* Exercise tiles without a status line (04.11, Alena: lighter page; today's total is in Heute). A done round shows
+   only the green glow — no „✓ fertig“, so the names never jump. Wortschatz and Bibliothek keep their line. */
+.mosaic .tile-small .status {
   display: none;
 }
 /* Name half-way between its place with the line and without it (Alena 04.11): not as high as with an empty line, not
-   down at the edge; a done tile's name rises by the other half for „✓ fertig“. Half of status line + gap (14 + 4). */
-.mosaic .tile-small:not(.is-done) .name {
+   down at the edge. Half of status line + gap (14 + 4). */
+.mosaic .tile-small .name {
   margin-bottom: 9px;
 }
 @media (min-width: 700px) and (min-height: 740px) {
-  .mosaic .tile-small:not(.is-done) .name {
+  .mosaic .tile-small .name {
     margin-bottom: 10px;
   }
 }

@@ -1533,6 +1533,7 @@ body:has(#done.show) .ws-settings-btn {
    Home left (Home's own button, 44, 12px above the bottom edge), cassette in the middle, ✎ at the right edge
    mirroring Home. While typing: very faint and not tappable; on the answer: full, the cassette jumps. */
 .speakTop { color: var(--text); }
+.speakTopIcon * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; } /* the big cassette: the same 1.2 px line as every icon */
 .wsTools { display: none; }
 html.ws-tools-row .wsTools {
   position: fixed;
