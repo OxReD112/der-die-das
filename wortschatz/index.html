@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" href="icon.png" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="wortschatz.css?v=30" />
+    <link rel="stylesheet" href="wortschatz.css?v=31" />
     <link rel="stylesheet" href="collection-window.css?v=11" />
   </head>
   <body>
@@ -119,7 +119,7 @@
               <div class="diffWord diffCorrect" id="correctDiff"></div>
             </div>
             <button class="speakTop" id="speakTop" aria-label="Satz anhören">
-              <img class="speakTopIcon" src="../components/icons/Audio.svg" alt="" aria-hidden="true" />
+              <svg class="speakTopIcon" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.3,14.5h-8.3l1.2-2.2h5.8l1.3,2.2Z"/><rect x="2.4" y="2" width="19.2" height="12.5" rx="1.6" ry="1.6"/><path d="M7.9,5.9h8.2c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6H7.9c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/><path d="M7.9,5.9h0c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6h0c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/><path d="M16.1,5.9h0c.9,0,1.6.7,1.6,1.6h0c0,.9-.7,1.6-1.6,1.6h0c-.9,0-1.6-.7-1.6-1.6h0c0-.9.7-1.6,1.6-1.6Z"/></svg>
             </button>
             <div class="detail">
               <div class="answerTargetRow"><div class="base" id="base"></div></div>
@@ -145,6 +145,8 @@
           <button class="continue" id="continue">Weiter</button>
         </div>
       </section>
+      <!-- 04.11 (Alena): on phones the cassette (centre) and ✎ (right) stand in Home's bottom row — wortschatz.js placeTools() -->
+      <div class="wsTools" id="wsTools"></div>
       <section class="done" id="done">
         <div class="doneInner" id="doneInner">
           <div class="doneTop">
@@ -190,7 +192,7 @@
     <script src="dictionary-card.js?v=20261007-adjadv-1"></script>
   <script src="dictionary-import.js?v=20261102-lang-3"></script>
     <script src="collection-window.js?v=20261103-search-1"></script>
-    <script src="wortschatz.js?v=27"></script>
+    <script src="wortschatz.js?v=28"></script>
     <script src="../components/deutsch-wide-v1.js?v=4"></script>
 </body>
 </html>

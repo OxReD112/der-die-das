@@ -992,6 +992,39 @@ function speakCurrent() {
 $("feedback").addEventListener("click", e => {
   if (e.target.closest("#answerTop,#speakTop")) speakCurrent();
 });
+/* 04.11 (Alena): on phones (not the short screens, where Home is small at the top) the cassette and ✎ move into
+   Home's bottom row: Home left, cassette in the middle (where the exercises have Spickzettel), ✎ right. While you
+   type they stay there, very faint, so nothing pops in and out; on the answer they are full and the cassette jumps. */
+const PHONE_ROW = window.matchMedia("(max-width: 699px)");
+let toolsSpot = null;
+function syncTools() {
+  const row = $("wsTools");
+  if (!row) return;
+  const study = $("study").style.display !== "none";
+  row.classList.toggle("is-on", study);
+  row.classList.toggle("is-answer", study && $("feedbackShell").classList.contains("show"));
+}
+function placeTools() {
+  const row = $("wsTools"), sp = $("speakTop"), ed = $("editCard");
+  if (!row || !sp || !ed) return;
+  if (!toolsSpot) toolsSpot = { sp: [sp.parentNode, sp.nextSibling], ed: [ed.parentNode, ed.nextSibling] };
+  const inRow = PHONE_ROW.matches && !SHORT_SCREEN.matches;
+  document.documentElement.classList.toggle("ws-tools-row", inRow);
+  if (inRow && sp.parentNode !== row) row.append(sp, ed);
+  else if (!inRow && sp.parentNode === row) {
+    toolsSpot.sp[0].insertBefore(sp, toolsSpot.sp[1]);
+    toolsSpot.ed[0].insertBefore(ed, toolsSpot.ed[1]);
+  }
+  syncTools();
+}
+$("wsTools")?.addEventListener("click", e => {
+  if (e.target.closest("#speakTop") && $("wsTools").classList.contains("is-answer")) speakCurrent();
+});
+new MutationObserver(syncTools).observe($("feedbackShell"), { attributes: true, attributeFilter: ["class"] });
+new MutationObserver(syncTools).observe($("study"), { attributes: true, attributeFilter: ["style"] });
+PHONE_ROW.addEventListener?.("change", placeTools);
+SHORT_SCREEN.addEventListener?.("change", placeTools);
+placeTools();
 /* START SCREEN (2026-09-26): the session no longer starts on load.
    Cards due -> start screen with today's count; Starten -> the same build() as before.
    Nothing due -> straight to "Fertig für heute", exactly as before.

@@ -764,6 +764,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   font-family: var(--serif);
   font-size: 24px; /* 02.11.2026: one step below the sentence */
   margin: 0;
+  color: var(--text); /* 04.11 (Alena): as bright as the sentence (was the grey of the details) */
 }
 .meaning {
   font-size: 16px;
@@ -784,8 +785,7 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   padding: 0;
   border: 0;
   background: none;
-  color: var(--muted);
-  opacity: 0.7;
+  color: var(--text); /* 04.11 (Alena): one colour with the cassette and Home (was a faded grey, looked switched off) */
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -1528,3 +1528,46 @@ body:has(#done.show) .ws-settings-btn {
 /* 04.11 (Alena): every UI icon has one line — 1.2 px at any size (vector-effect keeps it from scaling) */
 .ghostEye svg *,
 .editCard svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }
+
+/* ===== 04.11 (Alena): phones — cassette and ✎ in Home's bottom row (wortschatz.js placeTools) =====
+   Home left (Home's own button, 44, 12px above the bottom edge), cassette in the middle, ✎ at the right edge
+   mirroring Home. While typing: very faint and not tappable; on the answer: full, the cassette jumps. */
+.speakTop { color: var(--text); }
+.wsTools { display: none; }
+html.ws-tools-row .wsTools {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  z-index: 5;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+html.ws-tools-row .wsTools.is-on { opacity: 0.16; }
+html.ws-tools-row .wsTools.is-answer { opacity: 1; }
+html.ws-tools-row .wsTools.is-answer > * { pointer-events: auto; }
+html.ws-tools-row .wsTools .speakTop {
+  position: relative;
+  margin: 0;
+  width: 34px;
+  font-size: 34px;
+  animation: none;
+}
+html.ws-tools-row .wsTools .speakTop::before { content: ""; position: absolute; inset: -8px -5px; } /* 44 tap area */
+html.ws-tools-row .wsTools.is-answer .speakTop { animation: audioPop 0.72s cubic-bezier(0.22, 0.8, 0.28, 1) 1.55s both; }
+html.ws-tools-row .wsTools .editCard {
+  position: absolute;
+  top: 0;
+  right: max(12px, calc((100% - 480px) / 2 + 12px));
+  margin: 0;
+  display: flex;
+  visibility: hidden;
+}
+html.ws-tools-row .wsTools .editCard.own { visibility: visible; }
+html.ws-tools-row .wsTools .editCard svg { width: 20px; height: 20px; }
+html.ws-tools-row .detail { margin-top: 22px; } /* the cassette's old place under the word: same air as without a voice */
