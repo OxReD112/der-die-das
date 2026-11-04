@@ -58,10 +58,6 @@ html.deutsch-wide .keyboard .key {
   width: calc((100% - 54px) / 10);
   flex-basis: calc((100% - 54px) / 10);
 }
-html.deutsch-wide .keyboard .row.third .back {
-  width: calc(2 * ((100% - 54px) / 10) + 6px);
-  flex-basis: calc(2 * ((100% - 54px) / 10) + 6px);
-}
 html.deutsch-wide .keyboard .row.special .space { width: auto; flex: 1 1 auto; }
 html.deutsch-wide .keyboard .row.special .ok {
   width: calc(2.5 * ((100% - 54px) / 10) + 9px);
