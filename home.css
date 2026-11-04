@@ -2217,9 +2217,9 @@ header h1 {
     padding: 25px 4px 8px;
   }
 
-  /* small tiles: 13 on phones (04.11, Alena on iPhone 13: at 14 „Präpositionen“ / „Verbformen“ touched the tile's edges) */
+  /* small tiles: 12 on phones, as before 04.11 (Alena: 14 and 13 looked too big, „Präpositionen“ touched the edges) */
   .mosaic .tile-small .name {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .phrase-week-home-row {
@@ -2254,12 +2254,6 @@ header h1 {
   }
 }
 
-/* narrow Android phones (360): one step less again — 12 */
-@media (max-width: 374px) {
-  .mosaic .tile-small .name {
-    font-size: 12px;
-  }
-}
 
 @media (max-width: 430px) {
   .phrase-screen-content {
