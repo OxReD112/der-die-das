@@ -2205,43 +2205,23 @@ header h1 {
     margin-top: 18px;
   }
 
-  /* Phones keep the sizes they had before 04.11 (Alena on iPhone 13: one step up everywhere took the air out of
-     the page). Inter, colours, radii and the full width stay; iPad has its own sizes below. */
+  /* Phones: one step down on the scale (04.11, Alena on iPhone 13: one step up everywhere took the air out).
+     Heute and the phrase of the week keep their sizes. */
   header h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .greeting {
-    min-height: calc(15px * 1.4 + 2px + 13px * 1.4);
-    font-size: 15px;
+    min-height: calc(14px * 1.4 + 2px + 12px * 1.4);
+    font-size: 14px;
   }
 
   .greeting-sub {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .mosaic .tile-vocab .name {
-    font-size: 15px;
-  }
-
-  .mosaic .tile-small .status {
-    font-size: 10px;
-  }
-
-  .phrase-week-home-row .phrase-week-label {
-    font-size: 10px;
-  }
-
-  .phrase-week-home-literal {
-    font-size: 13px;
-  }
-
-  .today-number {
-    font-size: 24px;
-  }
-
-  .today-unit {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .mosaic .tile-vocab .tile-copy {
@@ -2869,3 +2849,9 @@ html.home-wide-layout body {
 .mosaic .tile-library .tile-copy { position:absolute; left:62%; right:12px; top:50%; transform:translateY(-50%); text-align:left; }
 .mosaic .tile-library .name { font-size:clamp(17px,3vw,24px); font-weight:650; }
 .mosaic .tile-library .status { min-height:14px; margin-top:4px; color:var(--muted); font-size:11px; line-height:1.15; }
+
+/* Exercise tiles without the „0 / 10“ counter (04.11, Alena: lighter page; today's total is in Heute). The line
+   appears only when the round is done: the glow + „✓ fertig“. Wortschatz and Bibliothek keep their line. */
+.mosaic .tile-small:not(.is-done) .status {
+  visibility: hidden; /* keeps its line, so the names of a row stay level when one tile is done */
+}
