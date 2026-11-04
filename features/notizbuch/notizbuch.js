@@ -53,6 +53,7 @@
     $("search-toggle").hidden = !list || searchOpen;
     els.searchBox.hidden = !list || !searchOpen;
     els.list.hidden = !list; els.listToolbar.hidden = !list;
+    $("detail-actions").hidden = screen !== "detail";
     els.scroll.scrollTop = 0;
     animateContent(direction, screen === "detail" ? els.detail : screen === "edit" ? els.edit : null);
   }
@@ -94,11 +95,8 @@
     $("detail-sub").textContent = entry.sub || ""; $("detail-sub").hidden = !entry.sub; if (entry.bodyHtml) $("detail-body").innerHTML = cleanNoteHtml(entry.bodyHtml);
     else $("detail-body").textContent = entry.body || "";
     renderTaskButtons();
-    /* 04.11: the pencil sits in the heading's empty right column (opposite "‹"), so a long note needn't be scrolled to
-       the end to edit it; the title stays centred. The trash stays under the text. */
-    $("edit-entry")?.remove();
-    document.querySelector(".nb-detail-head").insertAdjacentHTML("beforeend", `<button class="nb-icon-action nb-detail-edit" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button>`);
-    $("detail-actions").innerHTML = `<button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
+    /* 04.11 (Alena): pencil + trash pinned at the bottom (two 36 circles), so a long note needn't be scrolled to the end. */
+    $("detail-actions").innerHTML = `<button class="nb-icon-action" id="edit-entry" type="button" aria-label="Bearbeiten">${pencilSvg}</button><button class="nb-icon-action" id="delete-entry" type="button" aria-label="Löschen">${trashSvg}</button>`;
     setScreen("detail", "forward");
     $("edit-entry")?.addEventListener("click", () => openEditor(entry));
     $("delete-entry")?.addEventListener("click", event => {
@@ -106,6 +104,24 @@
       showDeleteConfirm("Notiz löschen?", "Diese Notiz wird von diesem Gerät entfernt.", event.detail === 0, true);
     });
   }
+  /* 04.11 (Alena, iPhone): with the keyboard open, the text being typed must stay in sight — the page itself never
+     scrolls (the heading with Aa / ✓ stays), only the note scrolls so the caret sits above the keyboard. */
+  function keepCaretVisible() {
+    const sc = els.scroll; if (!sc || app.dataset.screen !== "edit") return;
+    const active = document.activeElement; if (!active || !sc.contains(active)) return;
+    let r = null; const sel = document.getSelection();
+    if (sel && sel.rangeCount && sc.contains(sel.anchorNode)) {
+      const range = sel.getRangeAt(0); r = range.getClientRects()[0] || range.getBoundingClientRect();
+      if (!r || (!r.height && !r.top)) { const n = sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentElement; r = n && n.getBoundingClientRect(); }
+    }
+    if (!r || (!r.height && !r.top)) r = active.getBoundingClientRect();
+    const box = sc.getBoundingClientRect();
+    if (r.bottom > box.bottom - 16) sc.scrollTop += r.bottom - box.bottom + 16;
+    else if (r.top < box.top + 8) sc.scrollTop -= box.top + 8 - r.top;
+  }
+  document.addEventListener("selectionchange", () => requestAnimationFrame(keepCaretVisible));
+  window.addEventListener("resize", () => setTimeout(keepCaretVisible, 60));
+  window.addEventListener("scroll", () => { if (window.scrollY) window.scrollTo(0, 0); });
   /* One confirm window for both deletes. Inside Home, Home draws it (5.94) — it gets the title + text to show;
      isDefault = the plain "Notiz löschen?" (Home then keeps its own wording). */
   function showDeleteConfirm(title, text, keyboard, isDefault = false, confirmLabel = "") {

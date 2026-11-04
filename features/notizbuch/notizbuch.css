@@ -6,7 +6,7 @@
 .nb-tabs { display:flex; gap:22px; margin:14px 0 0; border-bottom:1px solid var(--hairline); }
 .nb-tab { min-height:40px; border:0; border-bottom:2px solid transparent; padding:8px 0 9px; background:transparent; color:var(--muted); font:500 14px/1.2 var(--font); cursor:pointer; }
 .nb-tab[aria-selected="true"] { border-bottom-color:var(--mint); color:var(--text); }
-.nb-scroll { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding-top:9px; padding-bottom:112px; scrollbar-width:none; }
+.nb-scroll { flex:1 1 auto; min-height:0; overflow-x:hidden; overflow-y:auto; /* overflow-x (04.11): the tap areas of the edit heading reach past the edge — no sideways drag */ overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding-top:9px; padding-bottom:112px; scrollbar-width:none; }
 #notebook[data-screen="edit"] .nb-scroll { padding-bottom:32px; }
 .nb-scroll::-webkit-scrollbar { display:none; }
 .nb-list { min-height:100%; }
@@ -124,7 +124,9 @@ button.nb-topic-title { align-items:center; }
 .nb-detail-sub { grid-column:1 / -1; grid-row:3; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; margin:5px 0 0; color:var(--muted); font-size:16px; line-height:1.4; }
 .nb-detail-sub[hidden] { display:none !important; }
 .nb-detail-body { padding-top:17px; color:var(--secondary-text); font-size:16px; line-height:1.6; white-space:pre-wrap; overflow-wrap:anywhere; }
-.nb-detail-actions { display:flex; justify-content:center; gap:12px; margin-top:18px; }
+.nb-detail-toolbar { gap:16px; }
+.nb-detail-toolbar .nb-icon-action { width:36px; height:36px; background:var(--tile-surface); box-shadow:var(--lift-highlight),var(--lift-shadow); }
+.nb-detail-toolbar .nb-icon-action::before { inset:-4px; }
 
 /* Edit screen (Notizbuch v21): grey round × left of the save tick replaces "< Zurück" — same as Zurück: back without saving */
 .nb-form-buttons { flex:0 0 auto; display:flex; align-items:center; gap:6px; }
@@ -163,7 +165,6 @@ button.nb-topic-title { align-items:center; }
 #notebook[data-screen="edit"] .nb-title-row { display:none; }
 #notebook[data-screen="edit"] .nb-fixed-header { padding-top:8px; }
 /* Pencil opposite "‹" — the heading's right column was empty, so the title stays centred */
-.nb-detail-edit { grid-column:3; grid-row:1; justify-self:end; align-self:center; }
 .nb-detail-head { row-gap:0; }
 
 /* ===== Big screens (iPad, computer) — one step up, like Home and the exercises (04.11) ===== */

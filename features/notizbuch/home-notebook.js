@@ -81,11 +81,14 @@
   /* 04.11: the iPhone keyboard scrolls the page up to show the caret, so the Notizbuch heading (Aa, ✓) went off the top.
      While the keyboard is open, the panel covers only the part of the screen that is still visible. */
   const vv = window.visualViewport;
+  const header = document.querySelector("body > header, header");
   function fitToKeyboard() {
     const keyboard = !!vv && opened && vv.height < window.innerHeight - 80;
     panel.style.top = keyboard ? vv.offsetTop + "px" : "";
     panel.style.bottom = keyboard ? "auto" : "";
     panel.style.height = keyboard ? vv.height + "px" : "";
+    // „Deutsch.“ (Home's fixed header, drawn over the panel) moves with the visible part too — it scrolled away
+    if (header) header.style.transform = keyboard && vv.offsetTop ? `translateY(${vv.offsetTop}px)` : "";
   }
   vv?.addEventListener("resize", fitToKeyboard);
   vv?.addEventListener("scroll", fitToKeyboard);

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1">
   <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
   <link rel="stylesheet" href="../../home.css?v=66">
-  <link rel="stylesheet" href="notizbuch.css?v=32">
+  <link rel="stylesheet" href="notizbuch.css?v=33">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -50,7 +50,6 @@
           <p class="nb-detail-sub" id="detail-sub" hidden></p>
         </div>
         <div class="nb-detail-body" id="detail-body"></div>
-        <div class="nb-detail-actions" id="detail-actions"></div>
       </section>
       <section class="nb-screen" id="edit-screen" hidden>
         <div class="nb-form-head">
@@ -90,6 +89,8 @@
       <div class="nb-toolbar" id="list-toolbar">
         <button class="nb-primary" id="create-note" type="button">＋ Neue Notiz</button>
       </div>
+      <!-- 04.11 (Alena): a note's pencil + trash — two small circles pinned at the bottom, where „＋ Neue Notiz“ is in the list -->
+      <div class="nb-toolbar nb-detail-toolbar" id="detail-actions" hidden></div>
     </div>
     <div class="nb-confirm" id="delete-confirm" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" hidden>
       <div class="nb-confirm-card">
@@ -102,6 +103,6 @@
       </div>
     </div>
   </main>
-  <script src="notizbuch.js?v=24"></script>
+  <script src="notizbuch.js?v=25"></script>
 </body>
 </html>
