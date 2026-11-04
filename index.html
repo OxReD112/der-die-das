@@ -125,14 +125,18 @@
   <title>
    Deutsch
   </title>
+  <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
+  <link href="components/deutsch-base-v1.css?v=3" rel="stylesheet"/>
+  <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
+  <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
    // Home's styles. Normally a plain stylesheet. During the launch splash it loads without holding back the
    // first paint — the splash needs only the inline styles above, and iOS fades its launch picture out before
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=52" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=52" rel="stylesheet"/>');
+     ? '<link href="home.css?v=54" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=54" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
