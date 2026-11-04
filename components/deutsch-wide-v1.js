@@ -54,7 +54,7 @@ html.deutsch-wide #keyboardMount {
 html.deutsch-wide .keyboard .row { gap: 6px; margin-bottom: 7px; }
 html.deutsch-wide .keyboard .key {
   height: 56px;
-  font-size: 22px;
+  font-size: 24px;
   width: calc((100% - 54px) / 10);
   flex-basis: calc((100% - 54px) / 10);
 }
@@ -63,6 +63,14 @@ html.deutsch-wide .keyboard .row.special .ok {
   width: calc(2.5 * ((100% - 54px) / 10) + 9px);
   flex-basis: calc(2.5 * ((100% - 54px) / 10) + 9px);
   font-size: 24px;
+}
+/* big iPads (≥ 900px tall, e.g. 12.9" / 13" landscape): keys closer to square, like the
+   iPad's own keyboard — the height follows the key width (0.72 of it, Alena 2026-11-04,
+   variant A); the taller keyboard also lifts the question, which is centred above it.
+   Lower screens (11" iPads, 820–834px) keep 56px: Wortschatz's three-line sentences
+   need that room. */
+@media (min-height: 900px) {
+  html.deutsch-wide .keyboard .key { height: calc((var(--ex-block) - 54px) / 10 * 0.72); }
 }`;
 
   function addStyle() {
