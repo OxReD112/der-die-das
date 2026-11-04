@@ -58,29 +58,29 @@
 [data-theme="light"] {
   --green: #3fa68a;
   --red: #e95e66;
-  --gray-100: #242426;
-  --gray-300: #727278;
-  --gray-500: #727278;
+  --gray-100: #2f2c29;
+  --gray-300: #77726c;
+  --gray-500: #77726c;
 
   --bg: #f6f4f1;
-  --sec-text: #55565b;
-  --meaning-text: #55565b;
+  --sec-text: #5a5651;
+  --meaning-text: #5a5651;
   --hairline: rgba(0, 0, 0, 0.1);
-  --blank-line: rgba(36, 36, 38, 0.38);
-  --version: rgba(36, 36, 38, 0.34);
+  --blank-line: rgba(47, 44, 41, 0.38);
+  --version: rgba(47, 44, 41, 0.34);
 
-  --field-bg: #fff;
-  --card-bg: #fff;
+  --field-bg: #fbf9f6;
+  --card-bg: #fbf9f6;
   --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --main-bg: #242426;
+  --main-bg: #2f2c29;
   --main-text: #f6f4f1;
-  --quiet-text: rgba(36, 36, 38, 0.55);
+  --quiet-text: rgba(47, 44, 41, 0.55);
   --overlay-scrim: rgba(0, 0, 0, 0.2);
 
-  --diff-word-bg: rgba(36, 36, 38, 0.035);
+  --diff-word-bg: rgba(47, 44, 41, 0.035);
   --diff-error-bg: rgba(233, 94, 102, 0.1);
   --diff-arrow: #77777c;
-  --diff-correct: #55565b;
+  --diff-correct: #5a5651;
 
   --good-glow: radial-gradient(
     ellipse at center,

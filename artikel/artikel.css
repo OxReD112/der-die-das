@@ -13,14 +13,14 @@
   --quiet-bg: rgba(255, 255, 255, 0.03);
 }
 [data-theme="light"] {
-  --text-strong: #55565b;
-  --text-subtle: #727278;
+  --text-strong: #5a5651;
+  --text-subtle: #77726c;
   --coral: #e95e66;
   --line: rgba(0, 0, 0, 0.09);
-  --answer-surface: rgba(36, 36, 38, 0.035);
+  --answer-surface: rgba(47, 44, 41, 0.035);
   --good: rgba(63, 166, 138, 0.5);
   --bad: rgba(233, 94, 102, 0.5);
-  --quiet-bg: #fff;
+  --quiet-bg: #fbf9f6;
 }
 
 /* ===== PAGE SHELL (same as Partizip II) =====

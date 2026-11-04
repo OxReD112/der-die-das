@@ -21,7 +21,7 @@
   --toggle-track: rgba(255, 255, 255, 0.12);
 
   /* cards + tiles (tiles = the buttons' card colour, soft lift shadow, thin top line in dark only) */
-  --card-radius: 26px; /* cards, as in the exercises */
+  --card-radius: 18px; /* Home tiles, Heute and the Home cards: 18 (Alena 04.11 — 26 looked too round on the small tiles) */
   --card-bg: rgba(255, 255, 255, 0.018);
   --card-bg-soft: rgba(255, 255, 255, 0.014);
   --tile-surface: #2a2a2d;
@@ -47,25 +47,25 @@
 [data-theme="light"] {
   --error: #e95e66;
 
-  --secondary-text: #55565b;
-  --label-text: #4a4a4d;
-  --strong-text: #242426;
+  --secondary-text: #5a5651;
+  --label-text: #4e4a46;
+  --strong-text: #2f2c29;
   --version-mark: color-mix(in srgb, var(--text) 34%, transparent);
 
   --toggle-track: rgba(0, 0, 0, 0.12);
 
   --card-bg: rgba(0, 0, 0, 0.03);
   --card-bg-soft: rgba(0, 0, 0, 0.025);
-  --tile-surface: #fff;
+  --tile-surface: #fbf9f6;
   --tile-today-sheen: rgba(0, 0, 0, 0.025);
   --lift-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 14px rgba(0, 0, 0, 0.08);
-  --lift-highlight: none;
+  --lift-highlight: inset 0 0 0 transparent; /* "none" would break the Home button's two-part shadow */
 
   --mint-core: rgba(63, 166, 138, 0.3);
   --mint-mid: rgba(63, 166, 138, 0.18);
 
   --confirm-scrim: rgba(0, 0, 0, 0.2);
-  --window-card: #fff;
+  --window-card: #fbf9f6;
   --window-line: rgba(0, 0, 0, 0.1);
 }
 
@@ -700,7 +700,7 @@ header h1 {
   text-align: left;
   background:
     radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--mint) 5.5%, transparent), transparent 64%),
-    var(--card-bg-soft);
+    var(--tile-surface); /* same fill as the tiles (04.11; was a see-through layer: darker than the page in light, sunk in dark) */
 }
 
 .mosaic .tile-today::before {
@@ -1879,7 +1879,7 @@ header h1 {
   color: #1b1b1d;
 }
 [data-theme="light"] .settings-confirm-button.is-main {
-  background: #242426;
+  background: #2f2c29;
   color: #f6f4f1;
 }
 .settings-confirm-button.is-quiet {
@@ -2019,7 +2019,7 @@ header h1 {
   -webkit-tap-highlight-color: transparent;
 }
 [data-theme="light"] .keep-backup-btn {
-  background: #242426;
+  background: #2f2c29;
   color: #f6f4f1;
 }
 .keep-backup-btn:disabled {
@@ -2124,9 +2124,10 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--hairline);
+  border: 0;
   border-radius: 50%;
-  background: var(--bg); /* solid: it always sits on the plain page colour (a blur was drawn late by Safari → blink) */
+  background: var(--tile-surface); /* round buttons = the Home tiles: their fill, soft shadow, thin top line in dark (04.11) */
+  box-shadow: var(--lift-highlight), var(--lift-shadow);
   color: var(--text);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

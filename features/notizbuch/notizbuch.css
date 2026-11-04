@@ -27,8 +27,8 @@
 .nb-search { min-width:0; flex:1; display:flex; align-items:center; gap:9px; height:48px; margin-top:10px; padding:0 13px; border-radius:18px; background:var(--tile-surface); color:var(--muted); }
 .nb-search input { width:100%; min-width:0; height:46px; border:0; outline:0; background:transparent; color:var(--text); font:400 16px/1.3 var(--font); }
 .nb-search-close { flex:0 0 28px; width:28px; height:32px; border:0; border-radius:50%; background:transparent; color:var(--muted); font:300 24px/1 var(--font); cursor:pointer; }
-.nb-primary { min-height:48px; border:0; border-radius:99px; padding:0 20px; background:#242426; color:#f6f4f1; font:600 16px/1.2 var(--font); white-space:nowrap; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-[data-theme="light"] .nb-primary { background:#242426; color:#f6f4f1; }
+.nb-primary { min-height:48px; border:0; border-radius:99px; padding:0 20px; background:#2f2c29; color:#f6f4f1; font:600 16px/1.2 var(--font); white-space:nowrap; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+[data-theme="light"] .nb-primary { background:#2f2c29; color:#f6f4f1; }
 :root:not([data-theme="light"]) .nb-primary { background:#ece6dc; color:#1b1b1d; }
 .nb-primary:active { transform:scale(.98); }
 .nb-status { position:absolute; top:calc(100% + 10px); left:50%; z-index:4; width:max-content; max-width:calc(100vw - 48px); transform:translateX(-50%); border:1px solid var(--hairline); border-radius:999px; padding:8px 15px; background:var(--tile-surface); color:var(--text); box-shadow:0 5px 18px rgba(0,0,0,.14); text-align:center; font-size:14px; line-height:1.25; pointer-events:none; }
@@ -62,7 +62,7 @@
 .nb-confirm-card h2 { margin:0; color:var(--text); font-size:20px; line-height:1.25; }
 .nb-confirm-card p { margin:8px 0 18px; color:var(--muted); font-size:14px; line-height:1.45; }
 .nb-confirm-actions { display:flex; justify-content:flex-end; align-items:center; gap:16px; }
-.nb-delete-confirm { min-height:44px; border:0; border-radius:999px; padding:0 17px; background:var(--error); color:#242426; font:600 14px/1.2 var(--font); cursor:pointer; }
+.nb-delete-confirm { min-height:44px; border:0; border-radius:999px; padding:0 17px; background:var(--error); color:#2f2c29; font:600 14px/1.2 var(--font); cursor:pointer; }
 @media (min-width:760px) { .notebook-page { width:min(100%,720px); } }
 @media (max-width:420px) { .notebook-body { padding-left:max(22px,env(safe-area-inset-left)); padding-right:max(22px,env(safe-area-inset-right)); } }
 

@@ -16,12 +16,12 @@
 }
 .coll-modal *, .coll-modal *::before, .coll-modal *::after { box-sizing: border-box; }
 [data-theme="light"] .coll-modal {
-  --sec-text: #55565b;
-  --card-bg: #fff;
-  --field-bg: #fff;
-  --main-bg: #242426;
+  --sec-text: #5a5651;
+  --card-bg: #fbf9f6;
+  --field-bg: #fbf9f6;
+  --main-bg: #2f2c29;
   --main-text: #f6f4f1;
-  --quiet-text: #727278;
+  --quiet-text: #77726c;
   --overlay-scrim: rgba(0,0,0,.2);
   --error: #e95e66;
 }

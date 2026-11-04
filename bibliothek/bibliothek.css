@@ -13,9 +13,9 @@
   position: relative;
 }
 [data-theme="light"] .reader {
-  --bibliothek-primary: #242426;
+  --bibliothek-primary: #2f2c29;
   --bibliothek-primary-text: #f6f4f1;
-  --bibliothek-field-bg: #fff;
+  --bibliothek-field-bg: #fbf9f6;
 }
 .reader [hidden] {
   display: none !important;
@@ -1716,7 +1716,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   color: var(--bibliothek-primary-text, #1b1b1d);
 }
 [data-theme="light"] .vocabulary-main {
-  background: #242426;
+  background: #2f2c29;
   color: #f6f4f1;
 }
 .vocabulary-main:disabled {
@@ -1831,7 +1831,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 
 .dictionary-form-match {
   background: var(--reader-selection-yellow);
-  color: #242426;
+  color: #2f2c29;
   border-radius: 3px;
   padding: 1px 3px;
   box-decoration-break: clone;
