@@ -23,6 +23,7 @@
     layer.setAttribute("aria-hidden", "true");
     openButton.setAttribute("aria-expanded", "false");
     root.classList.remove("home-notebook-open");
+    fitToKeyboard();
     if (restoreFocusOnClose) openButton.focus({ preventScroll:true });
     else openButton.blur();
   }
@@ -77,6 +78,17 @@
       frame.contentWindow?.postMessage({ type:"deutsch-notebook-open", theme:currentTheme(), lang:localStorage.getItem("deutschTranslationLangV1") || "en" }, location.origin);
     }
   });
+  /* 04.11: the iPhone keyboard scrolls the page up to show the caret, so the Notizbuch heading (Aa, ✓) went off the top.
+     While the keyboard is open, the panel covers only the part of the screen that is still visible. */
+  const vv = window.visualViewport;
+  function fitToKeyboard() {
+    const keyboard = !!vv && opened && vv.height < window.innerHeight - 80;
+    panel.style.top = keyboard ? vv.offsetTop + "px" : "";
+    panel.style.bottom = keyboard ? "auto" : "";
+    panel.style.height = keyboard ? vv.height + "px" : "";
+  }
+  vv?.addEventListener("resize", fitToKeyboard);
+  vv?.addEventListener("scroll", fitToKeyboard);
   frame.addEventListener("load", () => {
     if (opened) frame.contentWindow?.postMessage({ type:"deutsch-notebook-open", theme:currentTheme(), lang:localStorage.getItem("deutschTranslationLangV1") || "en" }, location.origin);
   });
