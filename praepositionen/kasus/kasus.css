@@ -376,7 +376,7 @@ body:has(#game:not(.hidden)) .version-mark {
   box-shadow: var(--start-btn-shadow);
   font-family: var(--font);
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 650; /* answer buttons: one weight, like der / die / das (Alena 04.11) */
   letter-spacing: 0;
   cursor: pointer;
   transition:
