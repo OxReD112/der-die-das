@@ -2202,11 +2202,46 @@ header h1 {
 
   .today-bottom {
     width: 100%;
-    margin-top: 14px; /* 18 → 14, 04.11: with the larger text the page keeps its old height on a 390 iPhone */
+    margin-top: 18px;
+  }
+
+  /* Phones keep the sizes they had before 04.11 (Alena on iPhone 13: one step up everywhere took the air out of
+     the page). Inter, colours, radii and the full width stay; iPad has its own sizes below. */
+  header h1 {
+    font-size: 32px;
   }
 
   .greeting {
-    margin-bottom: 15px; /* 18 → 15, same reason */
+    min-height: calc(15px * 1.4 + 2px + 13px * 1.4);
+    font-size: 15px;
+  }
+
+  .greeting-sub {
+    font-size: 13px;
+  }
+
+  .mosaic .tile-vocab .name {
+    font-size: 15px;
+  }
+
+  .mosaic .tile-small .status {
+    font-size: 10px;
+  }
+
+  .phrase-week-home-row .phrase-week-label {
+    font-size: 10px;
+  }
+
+  .phrase-week-home-literal {
+    font-size: 13px;
+  }
+
+  .today-number {
+    font-size: 24px;
+  }
+
+  .today-unit {
+    font-size: 11px;
   }
 
   .mosaic .tile-vocab .tile-copy {
@@ -2224,7 +2259,7 @@ header h1 {
 
   .phrase-week-home-row {
     width: 100%;
-    margin-top: 18px; /* 22 → 18, same reason */
+    margin-top: 22px;
     padding: 10px 4px 14px;
   }
 
