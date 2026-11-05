@@ -123,7 +123,9 @@
     var s = sent(), k = st.cur, c = k ? cellOf(s, k) : null, L = lang();
     Array.prototype.forEach.call($("cats").children, function (b, i) { b.setAttribute("aria-selected", i === st.cat); });
 
-    $("context").textContent = s.context;
+    /* a particle can bring its own situation (what the other person just said) — e.g. stressed DOCH needs someone
+       who said the opposite; without a particle, or when it has none, the sentence's situation */
+    $("context").textContent = (c && c.status === "ok" && c.context) || s.context;
     var parts = s.sentence.split("___");
     var cls = "slot " + (c ? c.status : "empty");
     $("sentence").innerHTML = esc(parts[0]) + '<span class="' + cls + '">' + (k ? esc(k) : "&nbsp;") + "</span>" + esc(parts[1]);

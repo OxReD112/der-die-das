@@ -111,7 +111,7 @@
     var q = R.list[R.i], t = q.t;
     $("pCounter").textContent = (R.i + 1) + " / " + R.n;
     $("pBar").style.width = (R.i / R.n * 100) + "%";
-    $("pContext").textContent = t.s.context;
+    $("pContext").textContent = t.s.particles[t.answer].context || t.s.context; /* the task's own situation if it has one */
     $("pSentence").innerHTML = sentenceHtml(t.s, null);
     var f = FUNCTIONS[t.fn];
     $("pLabel").innerHTML = "<small>" + (lang() === "ru" ? "Что ты хочешь сказать:" : "What you want to say:") + "</small>" + esc(f ? pick(f.label) : t.fn);
