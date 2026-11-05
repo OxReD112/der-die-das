@@ -574,8 +574,8 @@ const shell = document.getElementById("appShell");
 const frame = document.getElementById("appFrame");
 const back = document.getElementById("homeBack");
 
-// 05.11 (Alena): „Wörterbuch“ sits in the middle of the screen; the pencil goes to its right as far from the word as
-// the capsule is to its left (the gear stays at the right edge). Not on the wide Home (its own layout).
+// 05.11 (Alena): „Wörterbuch“ sits in the middle of the screen; the pencil goes to its right, halfway between
+// „as far from the word as the capsule is to its left“ and „next to the gear“ (the gear stays at the right edge). Not on the wide Home (its own layout).
 function placeDockTools() {
   const pen = document.getElementById("notebookOpen");
   const word = document.getElementById("dictionaryOpen");
@@ -592,8 +592,12 @@ function placeDockTools() {
   if (!text.width || !box.width) return;
   const gap = text.left - places.getBoundingClientRect().right;
   const icon = pen.querySelector("svg").getBoundingClientRect().width || 21;
+  const gear = document.getElementById("settingsOpen");
+  const mirrored = text.right + gap - (44 - icon) / 2 - box.left; // as far from the word as the capsule
+  const nextToGear = gear ? gear.getBoundingClientRect().left - 44 - box.left : mirrored; // where it stood before
   pen.style.right = "auto";
-  pen.style.left = Math.round(text.right + gap - (44 - icon) / 2 - box.left) + "px";
+  // 05.11 later (Alena): halfway between the two — the mirrored place left a hole at the right
+  pen.style.left = Math.round((mirrored + Math.max(mirrored, nextToGear)) / 2) + "px";
 }
 addEventListener("resize", placeDockTools);
 addEventListener("load", placeDockTools);
@@ -763,6 +767,7 @@ function openApp(tile) {
   clearTimeout(preloadTimer);
   document.documentElement.classList.toggle("place-library", isLibraryApp(tile.dataset.app));
   document.documentElement.classList.remove("place-hidden");
+  if (isLibraryApp(tile.dataset.app)) back.classList.add("is-hidden"); // the shelf has the dock, not the round button
   if (preloadedApp !== tile.dataset.app) setFrameSrc(tile.dataset.app);
   preloadedApp = null;
   const zoom = useAnimation();
@@ -805,7 +810,7 @@ function zoomContentIn(earliest, withButton, onSettled) {
     if (withButton) {
       shell.classList.remove("is-animating");
       updateBack(); // the Home button is placed now and fades in with the content
-      back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
+      if (!back.classList.contains("is-hidden")) back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
     }
     frame.style.opacity = "";
     frame.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CONTENT_FADE_MS, easing: EASE_SOFT });
@@ -975,7 +980,10 @@ function updateBack() {
     doc = frame.contentDocument;
     win = frame.contentWindow;
   } catch (e) {}
+  // Lesen: the round button only while a book is open — never while the shelf is loading (05.11: it blinked top left)
+  const libraryPlace = document.documentElement.classList.contains("place-library");
   if (!doc || !doc.head || !win) {
+    if (libraryPlace) back.classList.add("is-hidden");
     placeBack("corner");
     return;
   }
@@ -990,7 +998,8 @@ function updateBack() {
   const libraryPage = framePath() === "bibliothek/bibliothek.html";
   const windows = libraryPage ? WINDOW_SEL + ',dialog[open],.book-confirm,.word-popover,.dictionary-sheet' : WINDOW_SEL;
   const windowOpen = [...doc.querySelectorAll(windows)].some(el => isShown(el, win, true));
-  back.classList.toggle("is-hidden", windowOpen);
+  const shelf = libraryPlace && !(libraryPage && libraryReading(doc, win));
+  back.classList.toggle("is-hidden", windowOpen || shelf);
   setFrameWindow(windowOpen);
   if (libraryPage) document.documentElement.classList.toggle("place-hidden", windowOpen || libraryReading(doc, win));
   if (windowOpen) return;
@@ -1002,7 +1011,8 @@ function updateBack() {
 
   // Bibliothek: on the shelf the dock takes the Home button's job (05.11); while reading the round Home button sits at
   // the left edge of the bottom controls, as before.
-  if (libraryPage && !libraryReading(doc, win)) {
+  if (shelf) {
+    if (!libraryPage) return; // the Bibliothek is still loading
     back.classList.add("is-hidden");
     if (!doc.getElementById("deutsch-home-dock")) {
       const st = doc.createElement("style");

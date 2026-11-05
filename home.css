@@ -2140,8 +2140,8 @@ header h1 {
 
 .home-back svg {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 22px; /* 05.11: the capsule's house, same size */
+  height: 22px;
 }
 
 .home-back.is-small {

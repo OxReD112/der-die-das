@@ -135,8 +135,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=71" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=71" rel="stylesheet"/>');
+     ? '<link href="home.css?v=72" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=72" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -451,7 +451,7 @@
   </div>
 
   <section aria-hidden="true" class="app-shell" id="appShell">
-   <button aria-label="Zur Startseite" class="home-back" id="homeBack" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5 12 4.5l7.5 6"/><path d="M6.5 9v9.5a1 1 0 0 0 1 1H10v-5h4v5h2.5a1 1 0 0 0 1-1V9"/></svg></button>
+   <button aria-label="Zur Startseite" class="home-back" id="homeBack" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg></button>
    <iframe class="app-frame" id="appFrame" title="Deutsch exercise">
    </iframe>
   </section>
@@ -469,7 +469,7 @@
   <script src="greetings.js?v=2">
   </script>
  <script src="bibliothek/reader/reading-data.js?v=1"></script>
- <script src="home.js?v=20261105-dock-2"></script>
+ <script src="home.js?v=20261105-dock-3"></script>
  <script src="features/notizbuch/home-notebook.js?v=9"></script>
  <script src="progress-screen.js?v=27"></script>
  <script src="worterbuch.js?v=20261024-g65-2"></script>
