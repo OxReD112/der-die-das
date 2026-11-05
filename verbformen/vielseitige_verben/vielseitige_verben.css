@@ -91,7 +91,7 @@ body {
   flex: 0 0 96px;
   min-width: 0;
   font-family: var(--font);
-  font-size: 20px; /* 10 / 20 / 30 here: 20, regular (the others 21, 650) — kept as it was, 05.11 */
+  font-size: 20px; /* family rule (Alena 05.11): titles in Literata → 10 / 20 / 30 lighter, 20 regular; Inter-title exercises 21 / 650 */
   font-weight: 400;
   line-height: normal;
 }
