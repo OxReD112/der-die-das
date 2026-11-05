@@ -296,7 +296,7 @@ const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
    scroll (only room that is free is used). */
 function placeBottom() {
   els.choices.style.marginTop = els.ruleNote.style.marginTop = els.next.style.marginTop = "";
-  if (!els.roundTableBtn.getBoundingClientRect().height) return; // short screens: the Spickzettel follows the content
+  // when (touch only, not on short screens — there the Spickzettel follows the content): components/deutsch-bottom-v1.js
   const btn = cardDone ? els.next : els.choices,
     holder = cardDone ? (els.ruleNote.textContent.trim() ? els.ruleNote : els.next) : els.choices;
   DeutschBottom.pin(btn, holder); // the shared bottom line (components/deutsch-bottom-v1.js)

@@ -124,7 +124,8 @@
   }
   /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end on the shared
      bottom line (components/deutsch-bottom-v1.js: where the keyboard ends in the typing exercises). Only free room is
-     used: never makes the page scroll. Tablets: as before (their round comes later). */
+     used: never makes the page scroll. Touch screens only, not short ones (the shared rule in that file). Tablets: as
+     before (their round comes later). */
   var TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
   function placeBottom() {
     var done = !$("pFeedback").classList.contains("hidden");

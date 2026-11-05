@@ -372,10 +372,10 @@ function submitPrep() {
 
 /* 03.11.2026 (Alena): on touch screens the case buttons and Weiter stand at the bottom, their bottom where the
    keyboard's bottom was — the finger is already there. The answer hangs below the question (absolute), so the
-   extra room above them moves nothing. Short screens (≤ 559 px) flow as before. */
+   extra room above them moves nothing. When (touch only, not on short screens): components/deutsch-bottom-v1.js. */
 function pinToKeyboard(el, holder) {
   holder.style.marginTop = "";
-  if (!IS_TOUCH || SHORT_SCREEN.matches || el.offsetParent === null) return;
+  if (el.offsetParent === null) return;
   DeutschBottom.pin(el, holder); // the shared bottom line (components/deutsch-bottom-v1.js) = the keyboard's bottom
 }
 function pinAnswerButtons() {
