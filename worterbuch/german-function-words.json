@@ -76,5 +76,221 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/letzte",
     "wortschatz_excluded": false
+  },
+  {
+    "id": "function-005",
+    "type": "Interjektion",
+    "word": "ach",
+    "translation_ru": "ах!, ох!; (ach so) ах вот как",
+    "translation_en": "oh!, ah!; (ach so) oh, I see",
+    "example_de": "Ach, wie schön!",
+    "example_ru": "Ах, как красиво!",
+    "example_en": "Oh, how beautiful!",
+    "target_file": null,
+    "usage_note_ru": "Ach so! — Ах вот оно что! Ach was! / Ach wo! — Да ну!, Ничего подобного! Ach je! — Ох!, Ой-ой-ой! Ach du meine Güte! — Боже мой! (см. (du) meine Güte!).",
+    "usage_note_en": "Ach so! — Oh, I see! Ach was! / Ach wo! — Nonsense!, Not at all! Ach je! — Oh dear! Ach du meine Güte! — Goodness me! (see (du) meine Güte!).",
+    "search_forms": [
+      "ach"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ach",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-006",
+    "type": "Interjektion",
+    "word": "na",
+    "translation_ru": "ну!, ну?; ну и … (удивление, нетерпение, ободрение)",
+    "translation_en": "well; so; come on",
+    "example_de": "Na, wie geht's?",
+    "example_ru": "Ну, как дела?",
+    "example_en": "So, how are you?",
+    "target_file": null,
+    "usage_note_ru": "Na also! — Ну вот видишь! Na und? — Ну и что? Na gut. — Ну ладно. Na los! — Ну, давай! na ja — ну, в общем (отдельная запись).",
+    "usage_note_en": "Na also! — There you go! Na und? — So what? Na gut. — All right then. Na los! — Come on! na ja — well (separate record).",
+    "search_forms": [
+      "na"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/na",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-007",
+    "type": "Interjektion",
+    "word": "ei",
+    "translation_ru": "ой!, ах!, ну и ну! (удивление)",
+    "translation_en": "oh!, why! (surprise)",
+    "example_de": "Ei, wer kommt denn da?",
+    "example_ru": "Ой, кто это к нам идёт?",
+    "example_en": "Why, who's coming there?",
+    "target_file": null,
+    "usage_note_ru": "Устар., часто в сказках. Ei, ei! — ай-ай-ай! (укор) или ну-ну (ласково, утешая). Не путать: das Ei — яйцо.",
+    "usage_note_en": "Old-fashioned, common in fairy tales. Ei, ei! — tut-tut! (reproach) or there, there (soothing). Do not confuse: das Ei — egg.",
+    "search_forms": [
+      "ei"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ei_Interjektion",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-008",
+    "type": "Interjektion",
+    "word": "o",
+    "translation_ru": "о!",
+    "translation_en": "oh!, O!",
+    "example_de": "O weh, was machen wir jetzt?",
+    "example_ru": "Ох, беда, что же нам теперь делать?",
+    "example_en": "Oh dear, what do we do now?",
+    "target_file": null,
+    "usage_note_ru": "Книжн., в обращениях и восклицаниях: O Gott! — О боже! O weh! — Ох, беда! В разговоре обычнее: oh.",
+    "usage_note_en": "Literary, in addresses and exclamations: O Gott! — O God! O weh! — Oh dear! In speech oh is more usual.",
+    "search_forms": [
+      "o"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/o_Interjektion",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-009",
+    "type": "Interjektion",
+    "word": "oh",
+    "translation_ru": "о!, ох!, ой!",
+    "translation_en": "oh!",
+    "example_de": "Oh, das tut mir leid!",
+    "example_ru": "Ой, мне очень жаль!",
+    "example_en": "Oh, I'm sorry!",
+    "target_file": null,
+    "usage_note_ru": "Oh nein! — О нет! Oh je! — Ох!",
+    "usage_note_en": "Oh nein! — Oh no! Oh je! — Oh dear!",
+    "search_forms": [
+      "oh"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/oh",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-010",
+    "type": "Interjektion",
+    "word": "ähm",
+    "translation_ru": "э-э, гм (заминка в речи)",
+    "translation_en": "um, er",
+    "example_de": "Ähm, ich weiß nicht genau.",
+    "example_ru": "Э-э, я точно не знаю.",
+    "example_en": "Um, I'm not sure.",
+    "target_file": null,
+    "usage_note_ru": "Также: äh, hm.",
+    "usage_note_en": "Also: äh, hm.",
+    "search_forms": [
+      "ähm"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/aehm",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-011",
+    "type": "Interjektion",
+    "word": "aha",
+    "translation_ru": "ага!, вот как!",
+    "translation_en": "aha!, I see!",
+    "example_de": "Aha, jetzt verstehe ich!",
+    "example_ru": "Ага, теперь понимаю!",
+    "example_en": "Aha, now I understand!",
+    "target_file": null,
+    "usage_note_ru": "",
+    "usage_note_en": "",
+    "search_forms": [
+      "aha"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/aha",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-012",
+    "type": "Interjektion",
+    "word": "ah",
+    "translation_ru": "а!, ах! (удивление, понимание, удовольствие)",
+    "translation_en": "ah!, oh!",
+    "example_de": "Ah, da bist du ja!",
+    "example_ru": "А, вот ты где!",
+    "example_en": "Ah, there you are!",
+    "target_file": null,
+    "usage_note_ru": "",
+    "usage_note_en": "",
+    "search_forms": [
+      "ah"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/ah",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-013",
+    "type": "Interjektion",
+    "word": "tja",
+    "translation_ru": "н-да; ну что ж (делать)",
+    "translation_en": "well; oh well",
+    "example_de": "Tja, da kann man nichts machen.",
+    "example_ru": "Н-да, тут ничего не поделаешь.",
+    "example_en": "Oh well, there's nothing you can do about it.",
+    "target_file": null,
+    "usage_note_ru": "",
+    "usage_note_en": "",
+    "search_forms": [
+      "tja"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/tja",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-014",
+    "type": "Interjektion",
+    "word": "pfui",
+    "translation_ru": "фу!, тьфу!",
+    "translation_en": "ugh!, yuck!",
+    "example_de": "Pfui, wie das stinkt!",
+    "example_ru": "Фу, как воняет!",
+    "example_en": "Ugh, it stinks!",
+    "target_file": null,
+    "usage_note_ru": "Pfui Teufel! — Тьфу ты, гадость! Также как запрет (собаке, ребёнку): Pfui! Lass das! — Фу! Брось!",
+    "usage_note_en": "Pfui Teufel! — Yuck! Also as a reprimand (to a dog, a child): Pfui! Lass das! — No! Leave it!",
+    "search_forms": [
+      "pfui"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/pfui",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-015",
+    "type": "Interjektion",
+    "word": "autsch",
+    "translation_ru": "ой!, ай! (от боли)",
+    "translation_en": "ouch!",
+    "example_de": "Autsch, das tut weh!",
+    "example_ru": "Ай, больно!",
+    "example_en": "Ouch, that hurts!",
+    "target_file": null,
+    "usage_note_ru": "",
+    "usage_note_en": "",
+    "search_forms": [
+      "autsch"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/autsch",
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-016",
+    "type": "Interjektion",
+    "word": "hu",
+    "translation_ru": "у-у!, ух! (испуг, холод; чтобы напугать)",
+    "translation_en": "ooh!, whoo! (fear, cold; to scare someone)",
+    "example_de": "Hu, ist das kalt hier drinnen!",
+    "example_ru": "Ух, как здесь холодно!",
+    "example_en": "Ooh, it's cold in here!",
+    "target_file": null,
+    "usage_note_ru": "Также звук совы: hu, hu. Hu! — чтобы напугать (как русское «у-у!»).",
+    "usage_note_en": "Also the call of an owl: hu, hu. Hu! — to scare someone (like “boo!”).",
+    "search_forms": [
+      "hu"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/hu",
+    "wortschatz_excluded": true
   }
 ]

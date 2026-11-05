@@ -133,7 +133,12 @@
     "example_de": "Ich bin froh, dass du da bist.",
     "example_ru": "Я рад, что ты здесь.",
     "example_en": "I'm glad you're here.",
-    "example_cloze": "Ich bin {{c1::froh}}, dass du da bist."
+    "example_cloze": "Ich bin {{c1::froh}}, dass du da bist.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-028",
@@ -366,6 +371,11 @@
         "example_cloze": "Die alte Krone im Museum ist mit kleinen Rubinen {{c1::besetzt}}.",
         "example_usage": "Adjektiv"
       }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
     ]
   },
   {
@@ -396,7 +406,8 @@
     "example_de": "Der Himmel ist heute bewölkt.",
     "example_ru": "Сегодня небо облачное.",
     "example_en": "The sky is cloudy today.",
-    "example_cloze": "Der Himmel ist heute {{c1::bewölkt}}."
+    "example_cloze": "Der Himmel ist heute {{c1::bewölkt}}.",
+    "passive": "none"
   },
   {
     "id": "adjective-073",
@@ -426,7 +437,8 @@
     "example_de": "Der Park ist bei Familien sehr beliebt.",
     "example_ru": "Парк очень популярен среди семей.",
     "example_en": "The park is very popular with families.",
-    "example_cloze": "Der Park ist bei Familien sehr {{c1::beliebt}}."
+    "example_cloze": "Der Park ist bei Familien sehr {{c1::beliebt}}.",
+    "passive": "none"
   },
   {
     "id": "adjective-083",
@@ -466,7 +478,15 @@
     "example_de": "Seid ihr bereit für die Reise?",
     "example_ru": "Вы готовы к поездке?",
     "example_en": "Are you ready for the trip?",
-    "example_cloze": "Seid ihr {{c1::bereit}} für die Reise?"
+    "example_cloze": "Seid ihr {{c1::bereit}} für die Reise?",
+    "complements": [
+      {
+        "pattern": "zu + Dativ"
+      },
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-096",
@@ -488,7 +508,12 @@
     "example_de": "Meine Eltern sind seit zwanzig Jahren verheiratet.",
     "example_ru": "Мои родители женаты уже двадцать лет.",
     "example_en": "My parents have been married for twenty years.",
-    "example_cloze": "Meine Eltern sind seit zwanzig Jahren {{c1::verheiratet}}."
+    "example_cloze": "Meine Eltern sind seit zwanzig Jahren {{c1::verheiratet}}.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-098",
@@ -956,7 +981,8 @@
     "example_de": "Er möchte ein berühmter Sänger werden.",
     "example_ru": "Он хочет стать знаменитым певцом.",
     "example_en": "He wants to become a famous singer.",
-    "example_cloze": "Er möchte ein {{c1::berühmter}} Sänger werden."
+    "example_cloze": "Er möchte ein {{c1::berühmter}} Sänger werden.",
+    "passive": "none"
   },
   {
     "id": "adjective-139",
@@ -1158,7 +1184,12 @@
     "example_de": "Bist du sauer auf mich?",
     "example_ru": "Ты на меня сердишься?",
     "example_en": "Are you annoyed with me?",
-    "example_cloze": "Bist du {{c1::sauer}} auf mich?"
+    "example_cloze": "Bist du {{c1::sauer}} auf mich?",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-162",
@@ -1252,7 +1283,12 @@
     "example_de": "Unser Ausflug ist vom Wetter abhängig.",
     "example_ru": "Наша поездка зависит от погоды.",
     "example_en": "Our trip depends on the weather.",
-    "example_cloze": "Unser Ausflug ist vom Wetter {{c1::abhängig}}."
+    "example_cloze": "Unser Ausflug ist vom Wetter {{c1::abhängig}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-172",
@@ -1322,7 +1358,8 @@
     "example_de": "Wir suchen eine ausgebildete Krankenpflegerin.",
     "example_ru": "Мы ищем квалифицированную медсестру.",
     "example_en": "We are looking for a trained nurse.",
-    "example_cloze": "Wir suchen eine {{c1::ausgebildete}} Krankenpflegerin."
+    "example_cloze": "Wir suchen eine {{c1::ausgebildete}} Krankenpflegerin.",
+    "participle_of": "ausbilden"
   },
   {
     "id": "adjective-181",
@@ -1334,7 +1371,12 @@
     "example_de": "Er ist vom Sportunterricht befreit.",
     "example_ru": "Он освобождён от уроков физкультуры.",
     "example_en": "He is exempt from PE lessons.",
-    "example_cloze": "Er ist vom Sportunterricht {{c1::befreit}}."
+    "example_cloze": "Er ist vom Sportunterricht {{c1::befreit}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-182",
@@ -1358,7 +1400,12 @@
     "example_de": "Die Kinder sind vom Zirkus begeistert.",
     "example_ru": "Дети в восторге от цирка.",
     "example_en": "The children are delighted with the circus.",
-    "example_cloze": "Die Kinder sind vom Zirkus {{c1::begeistert}}."
+    "example_cloze": "Die Kinder sind vom Zirkus {{c1::begeistert}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-184",
@@ -1419,7 +1466,8 @@
     "example_de": "Er war so betrunken, dass er nicht mehr laufen konnte.",
     "example_ru": "Он был так пьян, что уже не мог идти.",
     "example_en": "He was so drunk that he couldn't walk any more.",
-    "example_cloze": "Er war so {{c1::betrunken}}, dass er nicht mehr laufen konnte."
+    "example_cloze": "Er war so {{c1::betrunken}}, dass er nicht mehr laufen konnte.",
+    "passive": "none"
   },
   {
     "id": "adjective-188",
@@ -1455,7 +1503,15 @@
     "example_de": "Wir sind dir sehr dankbar für deine Hilfe.",
     "example_ru": "Мы тебе очень благодарны за помощь.",
     "example_en": "We are very grateful to you for your help.",
-    "example_cloze": "Wir sind dir sehr {{c1::dankbar}} für deine Hilfe."
+    "example_cloze": "Wir sind dir sehr {{c1::dankbar}} für deine Hilfe.",
+    "complements": [
+      {
+        "pattern": "Dativ"
+      },
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-191",
@@ -1497,7 +1553,12 @@
     "example_de": "Sind Sie damit einverstanden?",
     "example_ru": "Вы с этим согласны?",
     "example_en": "Do you agree with that?",
-    "example_cloze": "Sind Sie damit {{c1::einverstanden}}?"
+    "example_cloze": "Sind Sie damit {{c1::einverstanden}}?",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-195",
@@ -1517,7 +1578,8 @@
     "example_de": "Sie ist fest entschlossen, Ärztin zu werden.",
     "example_ru": "Она твёрдо решила стать врачом.",
     "example_en": "She is determined to become a doctor.",
-    "example_cloze": "Sie ist fest {{c1::entschlossen}}, Ärztin zu werden."
+    "example_cloze": "Sie ist fest {{c1::entschlossen}}, Ärztin zu werden.",
+    "passive": "none"
   },
   {
     "id": "adjective-197",
@@ -1549,7 +1611,8 @@
     "example_de": "Ich bin erkältet und bleibe heute zu Hause.",
     "example_ru": "У меня простуда, и сегодня я останусь дома.",
     "example_en": "I have a cold and I'm staying at home today.",
-    "example_cloze": "Ich bin {{c1::erkältet}} und bleibe heute zu Hause."
+    "example_cloze": "Ich bin {{c1::erkältet}} und bleibe heute zu Hause.",
+    "passive": "none"
   },
   {
     "id": "adjective-200",
@@ -1581,7 +1644,8 @@
     "example_de": "Unsere Kinder sind schon erwachsen.",
     "example_ru": "Наши дети уже взрослые.",
     "example_en": "Our children are already grown up.",
-    "example_cloze": "Unsere Kinder sind schon {{c1::erwachsen}}."
+    "example_cloze": "Unsere Kinder sind schon {{c1::erwachsen}}.",
+    "passive": "none"
   },
   {
     "id": "adjective-203",
@@ -1677,7 +1741,12 @@
     "example_de": "Die Wohnung ist für eine Familie mit Kindern gut geeignet.",
     "example_ru": "Квартира хорошо подходит для семьи с детьми.",
     "example_en": "The flat is well suited to a family with children.",
-    "example_cloze": "Die Wohnung ist für eine Familie mit Kindern gut {{c1::geeignet}}."
+    "example_cloze": "Die Wohnung ist für eine Familie mit Kindern gut {{c1::geeignet}}.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-212",
@@ -1697,7 +1766,8 @@
     "example_de": "Die Lehrerin ist streng, aber gerecht.",
     "example_ru": "Учительница строгая, но справедливая.",
     "example_en": "The teacher is strict but fair.",
-    "example_cloze": "Die Lehrerin ist streng, aber {{c1::gerecht}}."
+    "example_cloze": "Die Lehrerin ist streng, aber {{c1::gerecht}}.",
+    "passive": "none"
   },
   {
     "id": "adjective-214",
@@ -1728,6 +1798,11 @@
         "example_cloze": "Die Gitarre ist verstimmt, weil die Saiten nicht richtig {{c1::gespannt}} sind.",
         "example_usage": "Adjektiv"
       }
+    ],
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
     ]
   },
   {
@@ -1740,7 +1815,8 @@
     "example_de": "Wir treffen uns zur gewohnten Zeit.",
     "example_ru": "Встречаемся в обычное время.",
     "example_en": "We'll meet at the usual time.",
-    "example_cloze": "Wir treffen uns zur {{c1::gewohnten}} Zeit."
+    "example_cloze": "Wir treffen uns zur {{c1::gewohnten}} Zeit.",
+    "passive": "none"
   },
   {
     "id": "adjective-218",
@@ -1827,7 +1903,12 @@
     "example_de": "Bist du an Politik interessiert?",
     "example_ru": "Тебя интересует политика?",
     "example_en": "Are you interested in politics?",
-    "example_cloze": "Bist du an Politik {{c1::interessiert}}?"
+    "example_cloze": "Bist du an Politik {{c1::interessiert}}?",
+    "complements": [
+      {
+        "pattern": "an + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-226",
@@ -2170,7 +2251,12 @@
     "example_de": "Wer ist schuld an dem Unfall?",
     "example_ru": "Кто виноват в аварии?",
     "example_en": "Who is to blame for the accident?",
-    "example_cloze": "Wer ist {{c1::schuld}} an dem Unfall?"
+    "example_cloze": "Wer ist {{c1::schuld}} an dem Unfall?",
+    "complements": [
+      {
+        "pattern": "an + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-260",
@@ -2246,7 +2332,12 @@
     "example_de": "Wir sind stolz auf unsere Tochter.",
     "example_ru": "Мы гордимся нашей дочерью.",
     "example_en": "We are proud of our daughter.",
-    "example_cloze": "Wir sind {{c1::stolz}} auf unsere Tochter."
+    "example_cloze": "Wir sind {{c1::stolz}} auf unsere Tochter.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-271",
@@ -2278,7 +2369,12 @@
     "example_de": "Er ist süchtig nach Computerspielen.",
     "example_ru": "Он зависим от компьютерных игр.",
     "example_en": "He is addicted to computer games.",
-    "example_cloze": "Er ist {{c1::süchtig}} nach Computerspielen."
+    "example_cloze": "Er ist {{c1::süchtig}} nach Computerspielen.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-274",
@@ -2332,7 +2428,8 @@
     "example_de": "Das Fotografieren ist im Museum untersagt.",
     "example_ru": "Фотографировать в музее запрещено.",
     "example_en": "Photography is prohibited in the museum.",
-    "example_cloze": "Das Fotografieren ist im Museum {{c1::untersagt}}."
+    "example_cloze": "Das Fotografieren ist im Museum {{c1::untersagt}}.",
+    "participle_of": "untersagen"
   },
   {
     "id": "adjective-282",
@@ -2354,7 +2451,12 @@
     "example_de": "Ich bin heute Abend mit Freunden verabredet.",
     "example_ru": "Сегодня вечером у меня встреча с друзьями.",
     "example_en": "I'm meeting friends this evening.",
-    "example_cloze": "Ich bin heute Abend mit Freunden {{c1::verabredet}}."
+    "example_cloze": "Ich bin heute Abend mit Freunden {{c1::verabredet}}.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-284",
@@ -2366,7 +2468,12 @@
     "example_de": "Wer ist für dieses Projekt verantwortlich?",
     "example_ru": "Кто отвечает за этот проект?",
     "example_en": "Who is responsible for this project?",
-    "example_cloze": "Wer ist für dieses Projekt {{c1::verantwortlich}}?"
+    "example_cloze": "Wer ist für dieses Projekt {{c1::verantwortlich}}?",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-285",
@@ -2398,7 +2505,13 @@
     "example_de": "Die beiden sind total verliebt.",
     "example_ru": "Они по уши влюблены.",
     "example_en": "The two of them are madly in love.",
-    "example_cloze": "Die beiden sind total {{c1::verliebt}}."
+    "example_cloze": "Die beiden sind total {{c1::verliebt}}.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ"
+      }
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-288",
@@ -2410,7 +2523,12 @@
     "example_de": "Sie sind verpflichtet, eine Versicherung abzuschließen.",
     "example_ru": "Вы обязаны оформить страховку.",
     "example_en": "You are required to take out insurance.",
-    "example_cloze": "Sie sind {{c1::verpflichtet}}, eine Versicherung abzuschließen."
+    "example_cloze": "Sie sind {{c1::verpflichtet}}, eine Versicherung abzuschließen.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-289",
@@ -2432,7 +2550,12 @@
     "example_de": "Bist du mit ihm verwandt?",
     "example_ru": "Ты с ним в родстве?",
     "example_en": "Are you related to him?",
-    "example_cloze": "Bist du mit ihm {{c1::verwandt}}?"
+    "example_cloze": "Bist du mit ihm {{c1::verwandt}}?",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-291",
@@ -2547,7 +2670,12 @@
     "example_de": "Wer ist hier für die Anmeldung zuständig?",
     "example_ru": "Кто здесь отвечает за регистрацию?",
     "example_en": "Who is in charge of registration here?",
-    "example_cloze": "Wer ist hier für die Anmeldung {{c1::zuständig}}?"
+    "example_cloze": "Wer ist hier für die Anmeldung {{c1::zuständig}}?",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-305",
@@ -2695,7 +2823,15 @@
     "example_de": "Wir sind vom Hotel enttäuscht.",
     "example_ru": "Мы разочарованы гостиницей.",
     "example_en": "We are disappointed with the hotel.",
-    "example_cloze": "Wir sind vom Hotel {{c1::enttäuscht}}."
+    "example_cloze": "Wir sind vom Hotel {{c1::enttäuscht}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      },
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-322",
@@ -2741,7 +2877,12 @@
     "example_de": "Er ist vom Lärm der Baustelle genervt.",
     "example_ru": "Его раздражает шум со стройки.",
     "example_en": "He is annoyed by the noise from the building site.",
-    "example_cloze": "Er ist vom Lärm der Baustelle {{c1::genervt}}."
+    "example_cloze": "Er ist vom Lärm der Baustelle {{c1::genervt}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-326",
@@ -2753,7 +2894,12 @@
     "example_de": "Alle waren von der Nachricht geschockt.",
     "example_ru": "Все были шокированы новостью.",
     "example_en": "Everyone was shocked by the news.",
-    "example_cloze": "Alle waren von der Nachricht {{c1::geschockt}}."
+    "example_cloze": "Alle waren von der Nachricht {{c1::geschockt}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-327",
@@ -2765,7 +2911,12 @@
     "example_de": "Vor Weihnachten sind viele Menschen gestresst.",
     "example_ru": "Перед Рождеством многие люди в стрессе.",
     "example_en": "Before Christmas many people are stressed.",
-    "example_cloze": "Vor Weihnachten sind viele Menschen {{c1::gestresst}}."
+    "example_cloze": "Vor Weihnachten sind viele Menschen {{c1::gestresst}}.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-328",
@@ -2811,7 +2962,12 @@
     "example_de": "Viele Kunden sind mit dem Service unzufrieden.",
     "example_ru": "Многие клиенты недовольны обслуживанием.",
     "example_en": "Many customers are unhappy with the service.",
-    "example_cloze": "Viele Kunden sind mit dem Service {{c1::unzufrieden}}."
+    "example_cloze": "Viele Kunden sind mit dem Service {{c1::unzufrieden}}.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-334",
@@ -2835,7 +2991,15 @@
     "example_de": "Wir waren überrascht, wie günstig das Essen war.",
     "example_ru": "Мы были удивлены, насколько недорогой была еда.",
     "example_en": "We were surprised how cheap the food was.",
-    "example_cloze": "Wir waren {{c1::überrascht}}, wie günstig das Essen war."
+    "example_cloze": "Wir waren {{c1::überrascht}}, wie günstig das Essen war.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      },
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-336",
@@ -3561,7 +3725,8 @@
     "example_en": "We spent a night in a rather run-down hotel near the station.",
     "example_cloze": "Wir haben eine Nacht in einem ziemlich {{c1::heruntergekommenen}} Hotel am Bahnhof verbracht.",
     "usage_note_ru": "Часто неодобрительное. Также форма глагола herunterkommen: Sie ist gerade die Treppe heruntergekommen. — Она только что спустилась по лестнице.",
-    "usage_note_en": "Often disapproving. Also a form of the verb herunterkommen: Sie ist gerade die Treppe heruntergekommen. — She has just come down the stairs."
+    "usage_note_en": "Often disapproving. Also a form of the verb herunterkommen: Sie ist gerade die Treppe heruntergekommen. — She has just come down the stairs.",
+    "passive": "none"
   },
   {
     "id": "adjective-406",
@@ -3573,7 +3738,8 @@
     "example_en": "Unfortunately the school still works with outdated computers and slow printers.",
     "example_cloze": "Die Schule arbeitet leider noch mit {{c1::veralteten}} Computern und langsamen Druckern.",
     "usage_note_ru": "Также форма глагола veralten: Handys veralten heute sehr schnell. — Телефоны сегодня очень быстро устаревают.",
-    "usage_note_en": "Also a form of the verb veralten: Handys veralten heute sehr schnell. — Mobile phones go out of date very quickly nowadays."
+    "usage_note_en": "Also a form of the verb veralten: Handys veralten heute sehr schnell. — Mobile phones go out of date very quickly nowadays.",
+    "passive": "none"
   },
   {
     "id": "adjective-407",
@@ -3597,7 +3763,12 @@
     "example_en": "We walked down to the lake along a narrow path overgrown with ferns.",
     "example_cloze": "Wir gingen auf einem schmalen, mit Farn {{c1::überwachsenen}} Pfad hinunter zum See.",
     "usage_note_ru": "mit + Dativ (или von + Dativ): mit Wald überwachsen — заросший лесом. Также форма глагола überwachsen: Efeu überwächst langsam die ganze Mauer. — Плющ постепенно затягивает всю стену.",
-    "usage_note_en": "mit + dative (or von + dative): mit Wald überwachsen — overgrown with forest. Also a form of the verb überwachsen: Efeu überwächst langsam die ganze Mauer. — Ivy is slowly covering the whole wall."
+    "usage_note_en": "mit + dative (or von + dative): mit Wald überwachsen — overgrown with forest. Also a form of the verb überwachsen: Efeu überwächst langsam die ganze Mauer. — Ivy is slowly covering the whole wall.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-409",
@@ -3609,7 +3780,13 @@
     "example_en": "For years I was clearly no match for my older brother at chess.",
     "example_cloze": "Beim Schach war ich meinem älteren Bruder jahrelang klar {{c1::unterlegen}}.",
     "usage_note_ru": "jemandem (in etwas / an etwas) unterlegen sein — уступать кому-либо (в чём-либо). Также причастие глагола unterliegen «проиграть» (unterlag, ist unterlegen): Der Amtsinhaber unterlag bei der Wahl seinem Herausforderer. — Действующий глава проиграл выборы своему сопернику.",
-    "usage_note_en": "jemandem (in etwas / an etwas) unterlegen sein — to be inferior to someone (in something). Also the participle of the verb unterliegen “to lose” (unterlag, ist unterlegen): Der Amtsinhaber unterlag bei der Wahl seinem Herausforderer. — The incumbent lost the election to his challenger."
+    "usage_note_en": "jemandem (in etwas / an etwas) unterlegen sein — to be inferior to someone (in something). Also the participle of the verb unterliegen “to lose” (unterlag, ist unterlegen): Der Amtsinhaber unterlag bei der Wahl seinem Herausforderer. — The incumbent lost the election to his challenger.",
+    "complements": [
+      {
+        "pattern": "Dativ"
+      }
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-410",
@@ -3667,7 +3844,8 @@
     "example_en": "This restaurant serves unusual dishes from all over the world.",
     "example_cloze": "In diesem Restaurant gibt es {{c1::ausgefallene}} Gerichte aus aller Welt.",
     "usage_note_ru": "Также форма глагола ausfallen: Der Unterricht ist ausgefallen. — Урок отменили.",
-    "usage_note_en": "Also a form of the verb ausfallen: Der Unterricht ist ausgefallen. — The lesson was cancelled."
+    "usage_note_en": "Also a form of the verb ausfallen: Der Unterricht ist ausgefallen. — The lesson was cancelled.",
+    "passive": "none"
   },
   {
     "id": "adjective-415",
@@ -3691,7 +3869,12 @@
     "example_en": "The fire brigade did exemplary work during the fire.",
     "example_cloze": "Die Feuerwehr hat bei dem Brand {{c1::beispielhafte}} Arbeit geleistet.",
     "usage_note_ru": "beispielhaft für etwas sein — быть типичным примером чего-либо.",
-    "usage_note_en": "beispielhaft für etwas sein — to be a typical example of something."
+    "usage_note_en": "beispielhaft für etwas sein — to be a typical example of something.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-417",
@@ -3703,7 +3886,12 @@
     "example_en": "The new colleague is very keen and learns quickly.",
     "example_cloze": "Die neue Kollegin ist sehr {{c1::bemüht}} und lernt schnell.",
     "usage_note_ru": "Часто с оттенком заметного усилия. Устойчиво: bemüht sein, etwas zu tun — стараться что-либо сделать; um etwas bemüht sein — стараться добиться чего-либо.",
-    "usage_note_en": "Often implies visible effort. Set phrases: bemüht sein, etwas zu tun — to try hard to do something; um etwas bemüht sein — to strive for something."
+    "usage_note_en": "Often implies visible effort. Set phrases: bemüht sein, etwas zu tun — to try hard to do something; um etwas bemüht sein — to strive for something.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-418",
@@ -3725,7 +3913,8 @@
     "example_en": "He was so drunk that he had to take a taxi home.",
     "example_cloze": "Er war so {{c1::besoffen}}, dass er mit dem Taxi nach Hause fahren musste.",
     "usage_note_ru": "Фамильярное.",
-    "usage_note_en": "Very informal."
+    "usage_note_en": "Very informal.",
+    "passive": "none"
   },
   {
     "id": "adjective-420",
@@ -3737,7 +3926,12 @@
     "example_en": "The doctor read the results with a worried expression.",
     "example_cloze": "Mit {{c1::besorgter}} Miene las der Arzt die Ergebnisse.",
     "usage_note_ru": "besorgt um jemanden sein — беспокоиться о ком-либо. Также форма глагола besorgen: Ich habe Brot besorgt. — Я купил хлеб.",
-    "usage_note_en": "besorgt um jemanden sein — to be worried about someone. Also a form of the verb besorgen: Ich habe Brot besorgt. — I got some bread."
+    "usage_note_en": "besorgt um jemanden sein — to be worried about someone. Also a form of the verb besorgen: Ich habe Brot besorgt. — I got some bread.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-421",
@@ -3855,7 +4049,12 @@
     "example_en": "She looked at me with astonished eyes when I told her the news.",
     "example_cloze": "Sie sah mich mit {{c1::erstaunten}} Augen an, als ich ihr die Neuigkeit erzählte.",
     "usage_note_ru": "über etwas erstaunt sein — удивляться чему-либо.",
-    "usage_note_en": "über etwas erstaunt sein — to be surprised at something."
+    "usage_note_en": "über etwas erstaunt sein — to be surprised at something.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-432",
@@ -3977,7 +4176,12 @@
     "example_en": "The greedy seagulls snatched the chips right off our plates.",
     "example_cloze": "Die {{c1::gierigen}} Möwen schnappten uns die Pommes vom Teller.",
     "usage_note_ru": "gierig nach etwas — жадный до чего-либо.",
-    "usage_note_en": "gierig nach etwas — greedy for something."
+    "usage_note_en": "gierig nach etwas — greedy for something.",
+    "complements": [
+      {
+        "pattern": "nach + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-443",
@@ -4090,8 +4294,8 @@
     "example_ru": "В этой огромной шляпе он выглядит по-настоящему нелепо.",
     "example_en": "He looks really ridiculous in that huge hat.",
     "example_cloze": "Mit diesem riesigen Hut sieht er wirklich {{c1::lächerlich}} aus.",
-    "usage_note_ru": "Неодобрительное. Устойчиво: sich lächerlich machen — выставить себя на посмешище.",
-    "usage_note_en": "Disapproving. Set phrase: sich lächerlich machen — to make a fool of oneself."
+    "usage_note_ru": "Неодобрительное.",
+    "usage_note_en": "Disapproving."
   },
   {
     "id": "adjective-453",
@@ -4402,7 +4606,12 @@
     "example_en": "The year in Spain was a very formative time for me.",
     "example_cloze": "Das Jahr in Spanien war eine sehr {{c1::prägende}} Zeit für mich.",
     "usage_note_ru": "prägend für jemanden/etwas sein — оказать определяющее влияние на кого-либо/что-либо. Форма глагола prägen.",
-    "usage_note_en": "prägend für jemanden/etwas sein — to have a defining influence on someone/something. A form of the verb prägen."
+    "usage_note_en": "prägend für jemanden/etwas sein — to have a defining influence on someone/something. A form of the verb prägen.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-480",
@@ -4508,7 +4717,12 @@
     "example_en": "As a committed cyclist she cycles to work even in winter.",
     "example_cloze": "Als {{c1::überzeugte}} Radfahrerin fährt sie auch im Winter mit dem Rad zur Arbeit.",
     "usage_note_ru": "von etwas überzeugt sein — быть уверенным в чём-либо. Также форма глагола überzeugen: Er hat mich überzeugt. — Он меня убедил.",
-    "usage_note_en": "von etwas überzeugt sein — to be convinced of something. Also a form of the verb überzeugen: Er hat mich überzeugt. — He convinced me."
+    "usage_note_en": "von etwas überzeugt sein — to be convinced of something. Also a form of the verb überzeugen: Er hat mich überzeugt. — He convinced me.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-489",
@@ -4552,7 +4766,12 @@
     "example_en": "Because of an incompetent tradesman our bathroom still isn't finished.",
     "example_cloze": "Wegen eines {{c1::unfähigen}} Handwerkers ist unser Bad immer noch nicht fertig.",
     "usage_note_ru": "zu etwas unfähig sein — быть не в состоянии что-либо сделать.",
-    "usage_note_en": "zu etwas unfähig sein — to be incapable of something."
+    "usage_note_en": "zu etwas unfähig sein — to be incapable of something.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-493",
@@ -4586,7 +4805,12 @@
     "example_en": "The court found that the man was innocent.",
     "example_cloze": "Das Gericht hat festgestellt, dass der Mann {{c1::unschuldig}} ist.",
     "usage_note_ru": "an etwas unschuldig sein — быть не виноватым в чём-либо.",
-    "usage_note_en": "an etwas unschuldig sein — not to be to blame for something."
+    "usage_note_en": "an etwas unschuldig sein — not to be to blame for something.",
+    "complements": [
+      {
+        "pattern": "an + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-496",
@@ -4618,7 +4842,8 @@
     "example_en": "The past three months have been very tiring for our family.",
     "example_cloze": "Die {{c1::vergangenen}} drei Monate waren für unsere Familie sehr anstrengend.",
     "usage_note_ru": "Также форма глагола vergehen: Die Zeit ist schnell vergangen. — Время пролетело быстро.",
-    "usage_note_en": "Also a form of the verb vergehen: Die Zeit ist schnell vergangen. — Time flew by."
+    "usage_note_en": "Also a form of the verb vergehen: Die Zeit ist schnell vergangen. — Time flew by.",
+    "passive": "none"
   },
   {
     "id": "adjective-499",
@@ -4688,7 +4913,12 @@
     "example_en": "In the exam you have to write a coherent text about yourself.",
     "example_cloze": "In der Prüfung muss man einen {{c1::zusammenhängenden}} Text über sich schreiben.",
     "usage_note_ru": "mit etwas zusammenhängend — связанный с чем-либо. Также форма глагола zusammenhängen.",
-    "usage_note_en": "mit etwas zusammenhängend — connected with something. Also a form of the verb zusammenhängen."
+    "usage_note_en": "mit etwas zusammenhängend — connected with something. Also a form of the verb zusammenhängen.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-505",
@@ -5003,7 +5233,12 @@
     "example_en": "My grandparents are surprisingly open-minded for their age.",
     "example_cloze": "Meine Großeltern sind für ihr Alter erstaunlich {{c1::aufgeschlossen}}.",
     "usage_note_ru": "aufgeschlossen für etwas — открытый для чего-либо. Также форма глагола aufschließen — отпирать: Ich habe die Tür aufgeschlossen.",
-    "usage_note_en": "aufgeschlossen für etwas — open to something. Also a form of the verb aufschließen — to unlock: Ich habe die Tür aufgeschlossen."
+    "usage_note_en": "aufgeschlossen für etwas — open to something. Also a form of the verb aufschließen — to unlock: Ich habe die Tür aufgeschlossen.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-534",
@@ -5033,7 +5268,8 @@
     "example_de": "Der Bericht gibt ein ausgewogenes Bild von den Vor- und Nachteilen.",
     "example_ru": "Отчёт даёт взвешенное представление о плюсах и минусах.",
     "example_en": "The report gives a balanced picture of the pros and cons.",
-    "example_cloze": "Der Bericht gibt ein {{c1::ausgewogenes}} Bild von den Vor- und Nachteilen."
+    "example_cloze": "Der Bericht gibt ein {{c1::ausgewogenes}} Bild von den Vor- und Nachteilen.",
+    "passive": "none"
   },
   {
     "id": "adjective-537",
@@ -5153,7 +5389,12 @@
     "example_en": "I'm genuinely impressed by how well you already speak German.",
     "example_cloze": "Ich bin ehrlich {{c1::beeindruckt}} davon, wie gut du schon Deutsch sprichst.",
     "usage_note_ru": "von etwas beeindruckt sein — быть под впечатлением от чего-либо. Также форма глагола beeindrucken: Der Film hat mich beeindruckt.",
-    "usage_note_en": "von etwas beeindruckt sein — to be impressed by something. Also a form of the verb beeindrucken: Der Film hat mich beeindruckt."
+    "usage_note_en": "von etwas beeindruckt sein — to be impressed by something. Also a form of the verb beeindrucken: Der Film hat mich beeindruckt.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-548",
@@ -5201,7 +5442,12 @@
     "example_en": "Her concern for the child's health is entirely justified.",
     "example_cloze": "Ihre Sorge um die Gesundheit des Kindes ist durchaus {{c1::begründet}}.",
     "usage_note_ru": "in etwas begründet sein — объясняться чем-либо. Также форма глагола begründen — обосновывать.",
-    "usage_note_en": "in etwas begründet sein — to be due to something. Also a form of the verb begründen — to justify."
+    "usage_note_en": "in etwas begründet sein — to be due to something. Also a form of the verb begründen — to justify.",
+    "complements": [
+      {
+        "pattern": "in + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-552",
@@ -5267,7 +5513,8 @@
     "example_en": "After the anaesthetic I was still groggy for hours.",
     "example_cloze": "Nach der Narkose war ich noch stundenlang {{c1::benommen}}.",
     "usage_note_ru": "Не путать с формой глагола sich benehmen — вести себя: Er hat sich gut benommen.",
-    "usage_note_en": "Not to be confused with the form of the verb sich benehmen — to behave: Er hat sich gut benommen."
+    "usage_note_en": "Not to be confused with the form of the verb sich benehmen — to behave: Er hat sich gut benommen.",
+    "passive": "none"
   },
   {
     "id": "adjective-558",
@@ -5279,7 +5526,12 @@
     "example_en": "That's a legitimate question, and I'm happy to answer it.",
     "example_cloze": "Das ist eine {{c1::berechtigte}} Frage, die ich gern beantworte.",
     "usage_note_ru": "Также форма глагола berechtigen: zu etwas berechtigt sein — иметь право на что-либо.",
-    "usage_note_en": "Also a form of the verb berechtigen: zu etwas berechtigt sein — to be entitled to something."
+    "usage_note_en": "Also a form of the verb berechtigen: zu etwas berechtigt sein — to be entitled to something.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-559",
@@ -5303,7 +5555,8 @@
     "example_en": "Our neighbour is a rather freaky guy with purple hair and three parrots.",
     "example_cloze": "Unser Nachbar ist ein ziemlich {{c1::ausgeflippter}} Typ mit lila Haaren und drei Papageien.",
     "usage_note_ru": "Разговорное. Также форма глагола ausflippen: Als er das hörte, ist er völlig ausgeflippt. — Услышав это, он совсем вышел из себя.",
-    "usage_note_en": "Colloquial. Also a form of the verb ausflippen: Als er das hörte, ist er völlig ausgeflippt. — When he heard that, he completely lost it."
+    "usage_note_en": "Colloquial. Also a form of the verb ausflippen: Als er das hörte, ist er völlig ausgeflippt. — When he heard that, he completely lost it.",
+    "passive": "none"
   },
   {
     "id": "adjective-561",
@@ -5327,7 +5580,12 @@
     "example_en": "Filled with the wish to find her grandfather, she travelled to Canada.",
     "example_cloze": "Von dem Wunsch {{c1::beseelt}}, ihren Großvater zu finden, reiste sie nach Kanada.",
     "usage_note_ru": "Обычно: von etwas beseelt sein — быть исполненным чего-либо.",
-    "usage_note_en": "Usually: von etwas beseelt sein — to be filled with something."
+    "usage_note_en": "Usually: von etwas beseelt sein — to be filled with something.",
+    "complements": [
+      {
+        "pattern": "von + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-563",
@@ -5339,7 +5597,12 @@
     "example_en": "The constant ringing of the phone disturbed me at work.",
     "example_cloze": "Das {{c1::beständige}} Klingeln des Telefons hat mich bei der Arbeit gestört.",
     "usage_note_ru": "gegen etwas beständig sein — быть стойким к чему-либо: hitzebeständig — жаростойкий.",
-    "usage_note_en": "gegen etwas beständig sein — to be resistant to something: hitzebeständig — heat-resistant."
+    "usage_note_en": "gegen etwas beständig sein — to be resistant to something: hitzebeständig — heat-resistant.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-564",
@@ -5772,7 +6035,12 @@
     "example_en": "Her jealous boyfriend keeps secretly reading her messages.",
     "example_cloze": "Ihr {{c1::eifersüchtiger}} Freund liest ständig heimlich ihre Nachrichten.",
     "usage_note_ru": "eifersüchtig auf jemanden sein — ревновать кого-либо.",
-    "usage_note_en": "eifersüchtig auf jemanden sein — to be jealous of someone."
+    "usage_note_en": "eifersüchtig auf jemanden sein — to be jealous of someone.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-602",
@@ -5828,7 +6096,8 @@
     "usage_note_ru": "Неодобрительное. Также форма глагола sich einbilden: eine eingebildete Krankheit — мнимая болезнь.",
     "usage_note_en": "Disapproving. Also a form of the verb sich einbilden: eine eingebildete Krankheit — an imaginary illness.",
     "participle_of": "sich einbilden",
-    "meaning_differs": true
+    "meaning_differs": true,
+    "passive": "none"
   },
   {
     "id": "adjective-607",
@@ -5990,7 +6259,12 @@
     "example_en": "In an indignant voice the guest complained about the cold food.",
     "example_cloze": "Mit {{c1::entrüsteter}} Stimme beschwerte sich der Gast über das kalte Essen.",
     "usage_note_ru": "über etwas entrüstet sein — возмущаться чем-либо.",
-    "usage_note_en": "über etwas entrüstet sein — to be indignant about something."
+    "usage_note_en": "über etwas entrüstet sein — to be indignant about something.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-622",
@@ -6002,7 +6276,12 @@
     "example_en": "With a horrified look she read the amount of the electricity bill.",
     "example_cloze": "Mit {{c1::entsetztem}} Blick las sie die Höhe der Stromrechnung.",
     "usage_note_ru": "über etwas entsetzt sein — ужасаться чему-либо, быть потрясённым чем-либо.",
-    "usage_note_en": "über etwas entsetzt sein — to be horrified at something."
+    "usage_note_en": "über etwas entsetzt sein — to be horrified at something.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-623",
@@ -6036,7 +6315,12 @@
     "example_en": "We stood in silence before the majestic panorama of the mountains.",
     "example_cloze": "Schweigend standen wir vor dem {{c1::erhabenen}} Panorama der Berge.",
     "usage_note_ru": "über etwas erhaben sein — быть выше чего-либо; über jeden Zweifel erhaben — вне всяких сомнений.",
-    "usage_note_en": "über etwas erhaben sein — to be above something; über jeden Zweifel erhaben — beyond all doubt."
+    "usage_note_en": "über etwas erhaben sein — to be above something; über jeden Zweifel erhaben — beyond all doubt.",
+    "complements": [
+      {
+        "pattern": "über + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-626",
@@ -6166,7 +6450,12 @@
     "example_en": "We're looking for a capable programmer for our small team.",
     "example_cloze": "Wir suchen eine {{c1::fähige}} Programmiererin für unser kleines Team.",
     "usage_note_ru": "zu etwas fähig sein — быть способным на что-либо.",
-    "usage_note_en": "zu etwas fähig sein — to be capable of something."
+    "usage_note_en": "zu etwas fähig sein — to be capable of something.",
+    "complements": [
+      {
+        "pattern": "zu + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-637",
@@ -7765,7 +8054,12 @@
     "example_en": "My brother is jealous because I got the bigger room.",
     "example_cloze": "Mein Bruder ist {{c1::neidisch}}, weil ich das größere Zimmer bekommen habe.",
     "usage_note_ru": "Устойчиво: auf jemanden neidisch sein — завидовать кому-либо.",
-    "usage_note_en": "Set phrase: auf jemanden neidisch sein — to be jealous of someone."
+    "usage_note_en": "Set phrase: auf jemanden neidisch sein — to be jealous of someone.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-781",
@@ -9340,7 +9634,12 @@
     "example_en": "After ten years of marriage they realised that their plans for life were incompatible.",
     "example_cloze": "Nach zehn Jahren Ehe merkten sie, dass ihre Lebenspläne {{c1::unvereinbar}} waren.",
     "usage_note_ru": "mit etwas unvereinbar sein — быть несовместимым с чем-либо.",
-    "usage_note_en": "mit etwas unvereinbar sein — to be incompatible with something."
+    "usage_note_en": "mit etwas unvereinbar sein — to be incompatible with something.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-921",
@@ -9534,7 +9833,12 @@
     "example_en": "For many parents, work and family are hard to reconcile.",
     "example_cloze": "Für viele Eltern sind Beruf und Familie nur schwer {{c1::vereinbar}}.",
     "usage_note_ru": "mit etwas vereinbar sein — быть совместимым с чем-либо.",
-    "usage_note_en": "mit etwas vereinbar sein — to be compatible with something."
+    "usage_note_en": "mit etwas vereinbar sein — to be compatible with something.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-939",
@@ -9602,7 +9906,12 @@
     "example_en": "With a sheepish grin he admitted that he had forgotten our appointment.",
     "example_cloze": "Mit einem {{c1::verlegenen}} Grinsen gab er zu, dass er unseren Termin vergessen hatte.",
     "usage_note_ru": "Устойчиво: um etwas verlegen sein — нуждаться в чём-либо; nie um eine Antwort verlegen sein — за словом в карман не лезть. Не путать с глаголом verlegen — переносить, класть не на место.",
-    "usage_note_en": "Set phrases: um etwas verlegen sein — to be short of something; nie um eine Antwort verlegen sein — never to be at a loss for an answer. Not to be confused with the verb verlegen — to postpone, to mislay."
+    "usage_note_en": "Set phrases: um etwas verlegen sein — to be short of something; nie um eine Antwort verlegen sein — never to be at a loss for an answer. Not to be confused with the verb verlegen — to postpone, to mislay.",
+    "complements": [
+      {
+        "pattern": "um + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-945",
@@ -9655,7 +9964,8 @@
     "example_de": "Auf der verschneiten Landstraße kamen wir nur im Schritttempo voran.",
     "example_ru": "По заснеженному шоссе мы продвигались со скоростью пешехода.",
     "example_en": "On the snow-covered country road we could only move at walking pace.",
-    "example_cloze": "Auf der {{c1::verschneiten}} Landstraße kamen wir nur im Schritttempo voran."
+    "example_cloze": "Auf der {{c1::verschneiten}} Landstraße kamen wir nur im Schritttempo voran.",
+    "passive": "none"
   },
   {
     "id": "adjective-949",
@@ -9687,7 +9997,13 @@
     "example_en": "After three years abroad the familiar dialect of my home region sounded like music.",
     "example_cloze": "Nach drei Jahren im Ausland klang der {{c1::vertraute}} Dialekt meiner Heimat wie Musik.",
     "usage_note_ru": "sich mit etwas vertraut machen — ознакомиться с чем-либо, освоить что-либо.",
-    "usage_note_en": "sich mit etwas vertraut machen — to familiarise oneself with something."
+    "usage_note_en": "sich mit etwas vertraut machen — to familiarise oneself with something.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-952",
@@ -9699,7 +10015,12 @@
     "example_en": "The plot of the crime novel is so complicated that I had to flick back twice.",
     "example_cloze": "Die Handlung des Krimis ist so {{c1::verwickelt}}, dass ich zweimal zurückblättern musste.",
     "usage_note_ru": "in etwas verwickelt sein — быть замешанным во что-либо (форма глагола verwickeln).",
-    "usage_note_en": "in etwas verwickelt sein — to be involved in something (a form of the verb verwickeln)."
+    "usage_note_en": "in etwas verwickelt sein — to be involved in something (a form of the verb verwickeln).",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-953",
@@ -10083,7 +10404,13 @@
     "example_en": "The two feuding neighbours haven't said a word to each other for years.",
     "example_cloze": "Die beiden {{c1::zerstrittenen}} Nachbarn reden seit Jahren kein Wort miteinander.",
     "usage_note_ru": "mit jemandem zerstritten sein — быть в ссоре с кем-либо.",
-    "usage_note_en": "mit jemandem zerstritten sein — to have fallen out with someone."
+    "usage_note_en": "mit jemandem zerstritten sein — to have fallen out with someone.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-986",
@@ -10137,7 +10464,12 @@
     "example_en": "The overwhelmed waiter brought us the wrong drink twice.",
     "example_cloze": "Der {{c1::überforderte}} Kellner brachte uns zweimal das falsche Getränk.",
     "usage_note_ru": "Устойчиво: mit etwas überfordert sein — не справляться с чем-либо: Mit drei Kindern und Vollzeitjob bin ich total überfordert. — С тремя детьми и полной ставкой я совсем не справляюсь. sich überfordert fühlen — чувствовать, что не справляешься. Также форма глагола überfordern: Die neue Software überfordert viele Kollegen. — Новая программа многим коллегам не по силам.",
-    "usage_note_en": "Set phrases: mit etwas überfordert sein — to be unable to cope with something: Mit drei Kindern und Vollzeitjob bin ich total überfordert. — With three children and a full-time job I'm completely overwhelmed. sich überfordert fühlen — to feel overwhelmed. Also a form of the verb überfordern: Die neue Software überfordert viele Kollegen. — The new software is too much for many colleagues."
+    "usage_note_en": "Set phrases: mit etwas überfordert sein — to be unable to cope with something: Mit drei Kindern und Vollzeitjob bin ich total überfordert. — With three children and a full-time job I'm completely overwhelmed. sich überfordert fühlen — to feel overwhelmed. Also a form of the verb überfordern: Die neue Software überfordert viele Kollegen. — The new software is too much for many colleagues.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-991",
@@ -10149,7 +10481,8 @@
     "example_en": "Unfortunately, all that's left of that evening is a blurred photo on my phone.",
     "example_cloze": "Leider ist von dem Abend nur ein {{c1::verschwommenes}} Handyfoto übrig geblieben.",
     "usage_note_ru": "verschwommene Erinnerungen — смутные воспоминания. Также форма глагола verschwimmen: Im Homeoffice verschwimmen Arbeit und Freizeit. — При работе из дома граница между работой и отдыхом размывается.",
-    "usage_note_en": "verschwommene Erinnerungen — vague memories. Also a form of the verb verschwimmen: Im Homeoffice verschwimmen Arbeit und Freizeit. — When working from home, work and free time blur into each other."
+    "usage_note_en": "verschwommene Erinnerungen — vague memories. Also a form of the verb verschwimmen: Im Homeoffice verschwimmen Arbeit und Freizeit. — When working from home, work and free time blur into each other.",
+    "passive": "none"
   },
   {
     "id": "adjective-992",
@@ -10193,7 +10526,8 @@
     "example_de": "Unseren Urlaub haben wir in einem abgelegenen Bauernhaus in den Bergen verbracht.",
     "example_ru": "Отпуск мы провели в уединённом крестьянском доме в горах.",
     "example_en": "We spent our holiday in a remote farmhouse in the mountains.",
-    "example_cloze": "Unseren Urlaub haben wir in einem {{c1::abgelegenen}} Bauernhaus in den Bergen verbracht."
+    "example_cloze": "Unseren Urlaub haben wir in einem {{c1::abgelegenen}} Bauernhaus in den Bergen verbracht.",
+    "passive": "none"
   },
   {
     "id": "adjective-996",
@@ -10626,7 +10960,8 @@
     "example_en": "Only authorised persons may enter the server room.",
     "example_cloze": "Nur {{c1::befugte}} Personen dürfen den Serverraum betreten.",
     "usage_note_ru": "Чаще предикативно: Dazu bin ich nicht befugt — На это у меня нет полномочий.",
-    "usage_note_en": "More often predicative: Dazu bin ich nicht befugt — I'm not authorised to do that."
+    "usage_note_en": "More often predicative: Dazu bin ich nicht befugt — I'm not authorised to do that.",
+    "passive": "none"
   },
   {
     "id": "adjective-1035",
@@ -10638,7 +10973,12 @@
     "example_en": "He is eager to finally find out his exam result.",
     "example_cloze": "Er ist {{c1::begierig}} darauf, endlich das Ergebnis der Prüfung zu erfahren.",
     "usage_note_ru": "begierig auf etwas sein / begierig darauf sein, etwas zu tun — жаждать чего-либо, сгорать от нетерпения.",
-    "usage_note_en": "begierig auf etwas sein / begierig darauf sein, etwas zu tun — to be eager for something, to be eager to do something."
+    "usage_note_en": "begierig auf etwas sein / begierig darauf sein, etwas zu tun — to be eager for something, to be eager to do something.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1036",
@@ -10650,7 +10990,15 @@
     "example_en": "Can I help you find a suitable present?",
     "example_cloze": "Kann ich Ihnen bei der Suche nach einem passenden Geschenk {{c1::behilflich}} sein?",
     "usage_note_ru": "Обычно: jemandem (bei etwas) behilflich sein — помочь кому-либо (в чём-либо).",
-    "usage_note_en": "Usually: jemandem (bei etwas) behilflich sein — to help someone (with something)."
+    "usage_note_en": "Usually: jemandem (bei etwas) behilflich sein — to help someone (with something).",
+    "complements": [
+      {
+        "pattern": "Dativ"
+      },
+      {
+        "pattern": "bei + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-1037",
@@ -10680,9 +11028,7 @@
     "example_de": "Der Unterschied zwischen den beiden Weinen ist kaum bemerkbar.",
     "example_ru": "Разница между этими двумя винами едва заметна.",
     "example_en": "The difference between the two wines is barely noticeable.",
-    "example_cloze": "Der Unterschied zwischen den beiden Weinen ist kaum {{c1::bemerkbar}}.",
-    "usage_note_ru": "sich bemerkbar machen — давать о себе знать; привлекать к себе внимание.",
-    "usage_note_en": "sich bemerkbar machen — to make itself felt; to draw attention to oneself."
+    "example_cloze": "Der Unterschied zwischen den beiden Weinen ist kaum {{c1::bemerkbar}}."
   },
   {
     "id": "adjective-1040",
@@ -11211,7 +11557,12 @@
     "example_en": "Our new boss is quite receptive to suggestions from the team.",
     "example_cloze": "Unsere neue Chefin ist für Vorschläge aus dem Team durchaus {{c1::empfänglich}}.",
     "usage_note_ru": "Обычно: für etwas empfänglich sein — быть восприимчивым к чему-либо.",
-    "usage_note_en": "Usually: für etwas empfänglich sein — to be receptive or susceptible to something."
+    "usage_note_en": "Usually: für etwas empfänglich sein — to be receptive or susceptible to something.",
+    "complements": [
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1088",
@@ -11275,7 +11626,12 @@
     "example_en": "I'm not particularly keen on working on Sunday.",
     "example_cloze": "Ich bin nicht besonders {{c1::erpicht}} darauf, am Sonntag zu arbeiten.",
     "usage_note_ru": "Обычно: auf etwas erpicht sein — жаждать чего-либо; часто с отрицанием: nicht darauf erpicht sein — не гореть желанием.",
-    "usage_note_en": "Usually: auf etwas erpicht sein — to be keen on something; often negated: nicht darauf erpicht sein — not to be keen on it."
+    "usage_note_en": "Usually: auf etwas erpicht sein — to be keen on something; often negated: nicht darauf erpicht sein — not to be keen on it.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1094",
@@ -11295,7 +11651,8 @@
     "example_de": "Erstarrte Lava bedeckt den ganzen Hang des alten Vulkans.",
     "example_ru": "Застывшая лава покрывает весь склон старого вулкана.",
     "example_en": "Solidified lava covers the whole slope of the old volcano.",
-    "example_cloze": "{{c1::Erstarrte}} Lava bedeckt den ganzen Hang des alten Vulkans."
+    "example_cloze": "{{c1::Erstarrte}} Lava bedeckt den ganzen Hang des alten Vulkans.",
+    "passive": "none"
   },
   {
     "id": "adjective-1096",
@@ -11405,7 +11762,8 @@
     "example_en": "The textbook has extra exercises for advanced pupils.",
     "example_cloze": "Für {{c1::fortgeschrittene}} Schüler gibt es im Lehrbuch zusätzliche Übungen.",
     "usage_note_ru": "Ein Kurs für Fortgeschrittene — курс для продвинутых.",
-    "usage_note_en": "Ein Kurs für Fortgeschrittene — a course for advanced learners."
+    "usage_note_en": "Ein Kurs für Fortgeschrittene — a course for advanced learners.",
+    "passive": "none"
   },
   {
     "id": "adjective-1106",
@@ -11528,7 +11886,12 @@
     "example_en": "I'm tied to my mobile phone contract for another two years.",
     "example_cloze": "Ich bin noch zwei Jahre an meinen Handyvertrag {{c1::gebunden}}.",
     "usage_note_ru": "Обычно: an etwas gebunden sein — быть связанным чем-либо, зависеть от чего-либо. in Leder gebunden — в кожаном переплёте. «Привязанный», «переплетённый» — формы глагола binden.",
-    "usage_note_en": "Usually: an etwas gebunden sein — to be bound by or tied to something. in Leder gebunden — leather-bound. “Tied”, “bound (book)” are forms of the verb binden."
+    "usage_note_en": "Usually: an etwas gebunden sein — to be bound by or tied to something. in Leder gebunden — leather-bound. “Tied”, “bound (book)” are forms of the verb binden.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1117",
@@ -12057,7 +12420,12 @@
     "example_en": "Because our children have already had chickenpox, they are now immune to the disease.",
     "example_cloze": "Weil unsere Kinder schon Windpocken hatten, sind sie jetzt gegen diese Krankheit {{c1::immun}}.",
     "usage_note_ru": "gegen etwas immun sein — быть невосприимчивым к чему-либо.",
-    "usage_note_en": "gegen etwas immun sein — to be immune to something."
+    "usage_note_en": "gegen etwas immun sein — to be immune to something.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1166",
@@ -12376,7 +12744,12 @@
     "example_en": "Is the new charging cable compatible with my old phone too?",
     "example_cloze": "Ist das neue Ladekabel auch mit meinem alten Handy {{c1::kompatibel}}?",
     "usage_note_ru": "mit etwas kompatibel sein — быть совместимым с чем-либо.",
-    "usage_note_en": "mit etwas kompatibel sein — to be compatible with something."
+    "usage_note_en": "mit etwas kompatibel sein — to be compatible with something.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-1193",
@@ -12620,7 +12993,12 @@
     "example_en": "The fire brigade was almost powerless against the huge forest fire.",
     "example_cloze": "Die Feuerwehr stand dem riesigen Waldbrand fast {{c1::machtlos}} gegenüber.",
     "usage_note_ru": "gegen etwas machtlos sein — быть бессильным против чего-либо.",
-    "usage_note_en": "gegen etwas machtlos sein — to be powerless against something."
+    "usage_note_en": "gegen etwas machtlos sein — to be powerless against something.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1216",
@@ -14648,7 +15026,8 @@
     "example_de": "Weil drei Kolleginnen krank sind, ist unsere Praxis diese Woche stark unterbesetzt.",
     "example_ru": "Из-за того, что три сотрудницы на больничном, в нашей клинике на этой неделе острая нехватка персонала.",
     "example_en": "Because three colleagues are off sick, our practice is badly understaffed this week.",
-    "example_cloze": "Weil drei Kolleginnen krank sind, ist unsere Praxis diese Woche stark {{c1::unterbesetzt}}."
+    "example_cloze": "Weil drei Kolleginnen krank sind, ist unsere Praxis diese Woche stark {{c1::unterbesetzt}}.",
+    "passive": "none"
   },
   {
     "id": "adjective-1402",
@@ -15030,7 +15409,8 @@
     "example_de": "Es ist noch verfrüht, über einen Sieger zu sprechen.",
     "example_ru": "Говорить о победителе ещё преждевременно.",
     "example_en": "It is still premature to talk about a winner.",
-    "example_cloze": "Es ist noch {{c1::verfrüht}}, über einen Sieger zu sprechen."
+    "example_cloze": "Es ist noch {{c1::verfrüht}}, über einen Sieger zu sprechen.",
+    "passive": "none"
   },
   {
     "id": "adjective-1438",
@@ -15098,7 +15478,13 @@
     "example_en": "The children were totally obsessed with the new video game.",
     "example_cloze": "Die Kinder waren total {{c1::versessen}} auf das neue Videospiel.",
     "usage_note_ru": "Обычно: auf etwas versessen sein — быть помешанным на чём-либо.",
-    "usage_note_en": "Usually: auf etwas versessen sein — to be mad about something."
+    "usage_note_en": "Usually: auf etwas versessen sein — to be mad about something.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-1444",
@@ -15142,7 +15528,12 @@
     "example_en": "The two of them were so engrossed in their game of chess that they forgot about the food.",
     "example_cloze": "Die beiden waren so in ihr Schachspiel {{c1::vertieft}}, dass sie das Essen vergaßen.",
     "usage_note_ru": "Устойчиво: in etwas vertieft sein — быть погружённым во что-либо. В значении «углублённый» — форма глагола vertiefen.",
-    "usage_note_en": "Set phrase: in etwas vertieft sein — to be absorbed in something. In the sense 'deepened' it is a form of the verb vertiefen."
+    "usage_note_en": "Set phrase: in etwas vertieft sein — to be absorbed in something. In the sense 'deepened' it is a form of the verb vertiefen.",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1448",
@@ -15616,7 +16007,8 @@
     "example_en": "In the past such children were simply called backward.",
     "example_cloze": "Früher nannte man solche Kinder einfach {{c1::zurückgeblieben}}.",
     "usage_note_ru": "Часто неодобрительное (может звучать оскорбительно). В значении «оставшийся, отставший» — форма глагола zurückbleiben.",
-    "usage_note_en": "Often disapproving (can sound offensive). In the sense 'left behind' it is a form of the verb zurückbleiben."
+    "usage_note_en": "Often disapproving (can sound offensive). In the sense 'left behind' it is a form of the verb zurückbleiben.",
+    "passive": "none"
   },
   {
     "id": "adjective-1492",
@@ -15947,7 +16339,12 @@
     "example_en": "Our maths teacher was always very lenient about small calculation mistakes.",
     "example_cloze": "Unser Mathelehrer war bei kleinen Rechenfehlern immer sehr {{c1::nachsichtig}}.",
     "usage_note_ru": "nachsichtig mit jemandem / gegenüber jemandem sein — быть снисходительным к кому-либо.",
-    "usage_note_en": "nachsichtig mit jemandem / gegenüber jemandem sein — to be lenient with someone."
+    "usage_note_en": "nachsichtig mit jemandem / gegenüber jemandem sein — to be lenient with someone.",
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-1522",
@@ -16205,7 +16602,8 @@
     "example_en": "This fucking printer isn't working again!",
     "example_cloze": "Dieser {{c1::verfickte}} Drucker funktioniert schon wieder nicht!",
     "usage_note_ru": "Грубое. Неодобрительное.",
-    "usage_note_en": "Vulgar. Disapproving."
+    "usage_note_en": "Vulgar. Disapproving.",
+    "passive": "none"
   },
   {
     "id": "adjective-1546",
@@ -16553,7 +16951,12 @@
     "usage_note_en": "auf etwas gefasst sein — to be prepared for something (usually unpleasant). Also a form of the verb fassen — to grab, to catch: Der Dieb wurde gefasst. — The thief was caught.",
     "participle_of": "fassen",
     "meaning_differs": true,
-    "participle_default": "verb"
+    "participle_default": "verb",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-1573",
@@ -16677,7 +17080,12 @@
     "participle_of": "erfahren",
     "meaning_differs": true,
     "participle_default": "verb",
-    "adjective_after_sein": true
+    "adjective_after_sein": true,
+    "complements": [
+      {
+        "pattern": "in + Dativ"
+      }
+    ]
   },
   {
     "id": "adjective-1580",

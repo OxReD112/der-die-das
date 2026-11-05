@@ -299,7 +299,8 @@
         "example_cloze": "Die beiden reagieren {{c1::verschieden}}.",
         "example_usage": "Adverbial"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-005",
@@ -946,7 +947,15 @@
     "usage_note_ru": "Чаще определение или сказуемое. Устойчиво: mit jemandem bekannt sein — быть знакомым с кем-либо; jemanden mit jemandem bekannt machen — знакомить кого-либо с кем-либо; jemandem bekannt vorkommen — казаться знакомым. bekanntlich — отдельное слово «как известно».",
     "usage_note_en": "Usually attributive or predicative. Set phrases: mit jemandem bekannt sein — to be acquainted with someone; jemanden mit jemandem bekannt machen — to introduce someone to someone; jemandem bekannt vorkommen — to seem familiar to someone. bekanntlich is a separate word meaning “as is known”.",
     "participle_of": "bekennen",
-    "von_agent_ok": true
+    "von_agent_ok": true,
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      },
+      {
+        "pattern": "für + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-adverb-024",
@@ -5289,7 +5298,8 @@
         "example_cloze": "Ich bestelle einen {{c1::doppelten}} Espresso.",
         "example_usage": "Adjektiv"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-057",
@@ -10043,7 +10053,8 @@
         "example_cloze": "Das ist eine {{c1::angemessene}} Antwort.",
         "example_usage": "Adjektiv"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-269",
@@ -14080,6 +14091,11 @@
         "example_cloze": "Wir haben {{c1::zufriedene}} Kunden.",
         "example_usage": "Adjektiv"
       }
+    ],
+    "complements": [
+      {
+        "pattern": "mit + Dativ"
+      }
     ]
   },
   {
@@ -15405,7 +15421,12 @@
       }
     ],
     "usage_note_ru": "angrenzend an + Akkusativ — примыкающий к чему-либо.",
-    "usage_note_en": "angrenzend an + accusative means adjoining something."
+    "usage_note_en": "angrenzend an + accusative means adjoining something.",
+    "complements": [
+      {
+        "pattern": "an + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-adverb-413",
@@ -16255,7 +16276,8 @@
         "example_cloze": "Sie sitzt {{c1::entspannt}} im Sessel.",
         "example_usage": "Zustand beim Handeln"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-436",
@@ -16325,7 +16347,8 @@
         "example_cloze": "Das ist eine {{c1::erwünschte}} Veränderung.",
         "example_usage": "Adjektiv"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-438",
@@ -16856,7 +16879,15 @@
       }
     ],
     "usage_note_ru": "jemandem böse sein — сердиться на кого-то (Dativ).",
-    "usage_note_en": "jemandem böse sein — to be angry with someone (dative)."
+    "usage_note_en": "jemandem böse sein — to be angry with someone (dative).",
+    "complements": [
+      {
+        "pattern": "Dativ"
+      },
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-121",
@@ -17437,7 +17468,12 @@
       }
     ],
     "usage_note_ru": "neugierig auf + Akkusativ — любопытно узнать / увидеть что-то.",
-    "usage_note_en": "neugierig auf + accusative — curious to know / see something."
+    "usage_note_en": "neugierig auf + accusative — curious to know / see something.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-242",
@@ -17911,7 +17947,12 @@
       }
     ],
     "usage_note_ru": "wütend auf + Akkusativ — в ярости на кого-то, очень зол на кого-то.",
-    "usage_note_en": "wütend auf + accusative — furious with someone."
+    "usage_note_en": "wütend auf + accusative — furious with someone.",
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-302",
@@ -18940,7 +18981,12 @@
       }
     ],
     "usage_note_ru": "allergisch gegen etwas sein — иметь аллергию на что-либо; переносно — не выносить чего-либо.",
-    "usage_note_en": "allergisch gegen etwas sein — to be allergic to something; figuratively — to be unable to stand something."
+    "usage_note_en": "allergisch gegen etwas sein — to be allergic to something; figuratively — to be unable to stand something.",
+    "complements": [
+      {
+        "pattern": "gegen + Akkusativ"
+      }
+    ]
   },
   {
     "id": "adjective-adverb-447",
@@ -19046,7 +19092,8 @@
         "example_cloze": "Nach einem {{c1::erneuten}} Versuch hat es endlich geklappt.",
         "example_usage": "Adjektiv"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-450",
@@ -20492,7 +20539,8 @@
         "example_cloze": "Ich suche schon den ganzen Morgen {{c1::verzweifelt}} nach meinem Reisepass.",
         "example_usage": "Adverbial"
       }
-    ]
+    ],
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-491",
@@ -21979,7 +22027,8 @@
       }
     ],
     "usage_note_ru": "Устойчиво: in Gedanken versunken — погружённый в мысли. В значении «затонувший» — форма глагола versinken.",
-    "usage_note_en": "Set phrase: in Gedanken versunken — lost in thought. In the sense 'sunken' it is a form of the verb versinken."
+    "usage_note_en": "Set phrase: in Gedanken versunken — lost in thought. In the sense 'sunken' it is a form of the verb versinken.",
+    "passive": "none"
   },
   {
     "id": "adjective-adverb-533",

@@ -83,8 +83,8 @@
     "example_de": "Sie kommt immer pünktlich.",
     "example_ru": "Она всегда приходит вовремя.",
     "example_en": "She always arrives on time.",
-    "usage_note_ru": "immer noch — всё ещё; immer + сравнительная степень — всё более: immer besser, immer mehr. Противоположность — nie.",
-    "usage_note_en": "immer noch — still; immer + comparative — more and more: immer besser, immer mehr. The opposite is nie.",
+    "usage_note_ru": "immer + сравнительная степень — всё более: immer besser, immer mehr. Противоположность — nie.",
+    "usage_note_en": "immer + comparative — more and more: immer besser, immer mehr. The opposite is nie.",
     "example_cloze": "Sie kommt {{c1::immer}} pünktlich."
   },
   {
@@ -257,8 +257,8 @@
     "example_de": "Wann kommst du zurück?",
     "example_ru": "Когда ты вернёшься?",
     "example_en": "When are you coming back?",
-    "usage_note_ru": "Часто часть отделяемого глагола: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück. hin und zurück — туда и обратно.",
-    "usage_note_en": "Often part of a separable verb: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück. hin und zurück — there and back.",
+    "usage_note_ru": "Часто часть отделяемого глагола: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück.",
+    "usage_note_en": "Often part of a separable verb: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück.",
     "example_cloze": "Wann kommst du {{c1::zurück}}?"
   },
   {
@@ -1097,8 +1097,8 @@
   {
     "id": "adverb-098",
     "word": "her",
-    "translation_ru": "сюда (к говорящему); (тому) назад",
-    "translation_en": "here (towards the speaker); ago",
+    "translation_ru": "сюда (к говорящему); (тому) назад; (von … her) со стороны; (hinter … her) следом за; (vor sich her) перед собой",
+    "translation_en": "here (towards the speaker); ago; (von … her) from the direction of; (hinter … her) after, behind; (vor sich her) in front of oneself",
     "example_de": "Komm mal her!",
     "example_ru": "Иди-ка сюда!",
     "example_en": "Come here!",
@@ -1145,13 +1145,13 @@
   {
     "id": "adverb-102",
     "word": "hin",
-    "translation_ru": "туда (от говорящего)",
-    "translation_en": "there (away from the speaker)",
+    "translation_ru": "туда (от говорящего); (nach / zum … hin) по направлению к; (auf … hin) по (просьбе, приказу); (bis … hin) вплоть до",
+    "translation_en": "there (away from the speaker); (nach / zum … hin) towards; (auf … hin) at (someone's request, order); (bis … hin) right up to",
     "example_de": "Wo gehst du hin?",
     "example_ru": "Куда ты идёшь?",
     "example_en": "Where are you going?",
-    "usage_note_ru": "hin — движение от говорящего, her — к говорящему. Часто часть глагола: hingehen, hinfahren. hin und zurück — туда и обратно. hin sein (разг.) — сломаться, пропасть: Mein Handy ist hin. — Мой телефон накрылся.",
-    "usage_note_en": "hin — movement away from the speaker, her — towards the speaker. Often part of a verb: hingehen, hinfahren. hin und zurück — there and back. hin sein (colloquial) — to be broken, ruined: Mein Handy ist hin. — My phone is done for.",
+    "usage_note_ru": "hin — движение от говорящего, her — к говорящему. Часто часть глагола: hingehen, hinfahren. hin sein (разг.) — сломаться, пропасть: Mein Handy ist hin. — Мой телефон накрылся.",
+    "usage_note_en": "hin — movement away from the speaker, her — towards the speaker. Often part of a verb: hingehen, hinfahren. hin sein (colloquial) — to be broken, ruined: Mein Handy ist hin. — My phone is done for.",
     "example_cloze": "Wo gehst du {{c1::hin}}?",
     "reading_policy": "single"
   },
@@ -5153,5 +5153,153 @@
     ],
     "usage_note_ru": "Пишется раздельно; старое написание (до 1996, в старых книгах): zuviel. С исчисляемыми во мн. ч.: zu viele Leute — слишком много людей. Существительное: das Zuviel — избыток.",
     "usage_note_en": "Written as two words; old spelling (before 1996, in older books): zuviel. With plural count nouns: zu viele Leute — too many people. The noun: das Zuviel — excess."
+  },
+  {
+    "id": "adverb-437",
+    "word": "daran",
+    "translation_ru": "об этом, о нём (думать, помнить), в это (верить); на этом, на нём, за это (держаться)",
+    "translation_en": "of it, about it (to think, remember), in it (to believe); on it, at it, to it",
+    "example_de": "Denk bitte daran, die Tür abzuschließen.",
+    "example_ru": "Пожалуйста, не забудь запереть дверь.",
+    "example_en": "Please remember to lock the door.",
+    "example_cloze": "Denk bitte {{c1::daran}}, die Tür abzuschließen.",
+    "usage_note_ru": "Заменяет an + вещь; для людей — an + местоимение (an ihn). С глаголами и прилагательными с an: daran denken — помнить об этом, daran glauben — верить в это, daran arbeiten — работать над этим, interessiert daran — заинтересован в этом. Es liegt daran, dass … — Дело в том, что … Разговорно: dran.",
+    "usage_note_en": "Replaces an + a thing; for people use an + pronoun (an ihn). With verbs and adjectives taking an: daran denken — to remember it, daran glauben — to believe in it, daran arbeiten — to work on it, interessiert daran — interested in it. Es liegt daran, dass … — It's because … Colloquially: dran."
+  },
+  {
+    "id": "adverb-438",
+    "word": "darum",
+    "translation_ru": "поэтому, вот почему; об этом, о том (просить, заботиться); вокруг этого",
+    "translation_en": "that's why, therefore; for it, about it (to ask, to take care); around it",
+    "example_de": "Ich war krank, darum konnte ich nicht kommen.",
+    "example_ru": "Я был болен, поэтому не смог прийти.",
+    "example_en": "I was ill, that's why I couldn't come.",
+    "example_cloze": "Ich war krank, {{c1::darum}} konnte ich nicht kommen.",
+    "usage_note_ru": "Заменяет um + вещь; для людей — um + местоимение (um ihn). С глаголами с um: darum bitten — просить об этом, sich darum kümmern — позаботиться об этом. Es geht darum, dass … — Речь о том, что … Darum! — Потому! Разговорно: drum.",
+    "usage_note_en": "Replaces um + a thing; for people use um + pronoun (um ihn). With verbs taking um: darum bitten — to ask for it, sich darum kümmern — to take care of it. Es geht darum, dass … — The point is that … Darum! — Because! Colloquially: drum."
+  },
+  {
+    "id": "adverb-439",
+    "word": "darunter",
+    "translation_ru": "под этим, под ним (под это); среди них, в том числе; (о величине) меньше, ниже",
+    "translation_en": "under it, underneath; among them, including; less, below (that)",
+    "example_de": "Er hob den Teppich hoch und fand darunter einen alten Schlüssel.",
+    "example_ru": "Он приподнял ковёр и нашёл под ним старый ключ.",
+    "example_en": "He lifted the carpet and found an old key underneath.",
+    "example_cloze": "Er hob den Teppich hoch und fand {{c1::darunter}} einen alten Schlüssel.",
+    "usage_note_ru": "Заменяет unter + вещь; для людей — unter + местоимение (unter ihm). Среди них: viele Gäste, darunter auch der Bürgermeister — много гостей, в том числе и бургомистр. Was verstehst du darunter? — Что ты под этим понимаешь? С глаголами с unter: darunter leiden — страдать от этого. Разговорно: drunter.",
+    "usage_note_en": "Replaces unter + a thing; for people use unter + pronoun (unter ihm). Among them: viele Gäste, darunter auch der Bürgermeister — many guests, including the mayor. Was verstehst du darunter? — What do you mean by that? With verbs taking unter: darunter leiden — to suffer from it. Colloquially: drunter."
+  },
+  {
+    "id": "adverb-440",
+    "word": "davon",
+    "translation_ru": "об этом, о нём (говорить, знать); от этого, от него, из этого; из них (часть)",
+    "translation_en": "of it, about it (to talk, know); from it, from that; of them (part)",
+    "example_de": "Davon habe ich noch nie gehört.",
+    "example_ru": "Об этом я никогда не слышал.",
+    "example_en": "I've never heard of that.",
+    "example_cloze": "{{c1::Davon}} habe ich noch nie gehört.",
+    "usage_note_ru": "Заменяет von + вещь; для людей — von + местоимение (von ihm). С глаголами и прилагательными с von: davon sprechen — говорить об этом, davon träumen — мечтать об этом, davon abhängen — зависеть от этого, davon überzeugt — убеждён в этом. Часть: Zwei davon sind kaputt. — Два из них сломаны. Не путать: davonlaufen, davonfahren — частица «прочь».",
+    "usage_note_en": "Replaces von + a thing; for people use von + pronoun (von ihm). With verbs and adjectives taking von: davon sprechen — to talk about it, davon träumen — to dream of it, davon abhängen — to depend on it, davon überzeugt — convinced of it. Part: Zwei davon sind kaputt. — Two of them are broken. Do not confuse: davonlaufen, davonfahren — particle ‘away’."
+  },
+  {
+    "id": "adverb-441",
+    "word": "dazu",
+    "translation_ru": "на это, к этому (сказать, добавить); для этого; к тому же, вдобавок",
+    "translation_en": "about it, to it (to say, to add); for it, for that purpose; in addition, besides",
+    "example_de": "Was sagst du dazu?",
+    "example_ru": "Что ты на это скажешь?",
+    "example_en": "What do you say to that?",
+    "example_cloze": "Was sagst du {{c1::dazu}}?",
+    "usage_note_ru": "Заменяет zu + вещь; для людей — zu + местоимение (zu ihm). Для этого: Dazu braucht man viel Geduld. — Для этого нужно много терпения. Ich habe keine Lust dazu. — У меня нет на это желания. Ich bin nicht dazu gekommen. — Я не успел. noch dazu — к тому же. Не путать: dazugehören, dazukommen — частица.",
+    "usage_note_en": "Replaces zu + a thing; for people use zu + pronoun (zu ihm). For it: Dazu braucht man viel Geduld. — You need a lot of patience for that. Ich habe keine Lust dazu. — I don't feel like it. Ich bin nicht dazu gekommen. — I didn't get round to it. noch dazu — on top of that. Do not confuse: dazugehören, dazukommen — particle."
+  },
+  {
+    "id": "adverb-442",
+    "word": "woran",
+    "translation_ru": "о чём, за что, на чём, над чем (вопрос); по чему (узнать)",
+    "translation_en": "what … of / about / on (question); by what (to recognize)",
+    "example_de": "Woran denkst du gerade?",
+    "example_ru": "О чём ты сейчас думаешь?",
+    "example_en": "What are you thinking about right now?",
+    "example_cloze": "{{c1::Woran}} denkst du gerade?",
+    "usage_note_ru": "wo + an: вопрос о вещи с глаголами с an: denken an → Woran denkst du? Woran arbeitest du? — Над чем ты работаешь? Woran liegt das? — В чём причина? Woran erkennt man …? — По чему узнают …? О людях: An wen …? Ответ: daran.",
+    "usage_note_en": "wo + an: a question about a thing with verbs taking an: denken an → Woran denkst du? Woran arbeitest du? — What are you working on? Woran liegt das? — What's the reason? Woran erkennt man …? — How can you tell …? About people: An wen …? Answer: daran."
+  },
+  {
+    "id": "adverb-443",
+    "word": "dran",
+    "translation_ru": "(разг.) об этом (думать, помнить); на этом, на нём, к этому (= daran); (an etwas ist etwas dran) в этом что-то есть; (dran sein) (чья-то) очередь",
+    "translation_en": "(colloquial) of it, about it (to think, remember); on it, at it, to it (= daran); (an etwas ist etwas dran) there is something in it; (dran sein) to be someone's turn",
+    "example_de": "Denk dran, morgen ist wieder Schule!",
+    "example_ru": "Не забудь, завтра снова в школу!",
+    "example_en": "Remember, there's school again tomorrow!",
+    "usage_note_ru": "Разг. форма от daran. Am Knochen ist kaum Fleisch dran. — На кости почти нет мяса. An dem Gerücht ist etwas dran. — В этом слухе что-то есть. jemanden drannehmen — вызвать (ученика). Выражения: dran sein, spät dran sein, gut / schlecht dran sein, drauf und dran sein.",
+    "usage_note_en": "Colloquial form of daran. Am Knochen ist kaum Fleisch dran. — There's hardly any meat on the bone. An dem Gerücht ist etwas dran. — There's something in the rumour. jemanden drannehmen — to call on (a pupil). Expressions: dran sein, spät dran sein, gut / schlecht dran sein, drauf und dran sein.",
+    "example_cloze": "Denk {{c1::dran}}, morgen ist wieder Schule!"
+  },
+  {
+    "id": "adverb-444",
+    "word": "drum",
+    "translation_ru": "(разг.) поэтому; об этом, о том (просить, заботиться); вокруг этого",
+    "translation_en": "(colloquial) that's why; for it, about it (to ask, to take care); around it",
+    "example_de": "Ich hatte mein Handy vergessen, drum bin ich noch mal zurückgegangen.",
+    "example_ru": "Я забыл телефон, поэтому вернулся за ним.",
+    "example_en": "I'd forgotten my phone, so I went back for it.",
+    "usage_note_ru": "Разг. форма от darum. sei’s drum — ну и пусть, так и быть; drum herumreden — ходить вокруг да около; mit allem Drum und Dran — со всем, что к этому полагается; das Drumherum — всё, что вокруг, антураж.",
+    "usage_note_en": "Colloquial form of darum. sei’s drum — so be it, never mind; drum herumreden — to beat about the bush; mit allem Drum und Dran — with all the trimmings; das Drumherum — the trappings, everything around it.",
+    "example_cloze": "Ich hatte mein Handy vergessen, {{c1::drum}} bin ich noch mal zurückgegangen."
+  },
+  {
+    "id": "adverb-445",
+    "word": "danke",
+    "parts_of_speech": [
+      "Interjektion"
+    ],
+    "translation_ru": "спасибо",
+    "translation_en": "thank you, thanks",
+    "example_de": "Danke für die schönen Blumen!",
+    "example_ru": "Спасибо за красивые цветы!",
+    "example_en": "Thank you for the lovely flowers!",
+    "usage_note_ru": "Также: danke schön, danke sehr — большое спасибо; Nein, danke. — Нет, спасибо. Ответ: Bitte! / Bitte schön! — Не за что. От ich danke (я благодарю); благодарить — danken (+ Dat.): Ich danke dir für alles.",
+    "usage_note_en": "Also: danke schön, danke sehr — thank you very much; Nein, danke. — No, thank you. The reply: Bitte! / Bitte schön! — You're welcome. From ich danke (I thank); to thank — danken (+ dative): Ich danke dir für alles.",
+    "example_cloze": "{{c1::Danke}} für die schönen Blumen!",
+    "search_forms": [
+      "danke schön",
+      "danke sehr"
+    ],
+    "related_ids": [
+      "verb-127"
+    ]
+  },
+  {
+    "id": "adverb-446",
+    "word": "ja",
+    "parts_of_speech": [
+      "Partikel"
+    ],
+    "translation_ru": "да; (в середине фразы) ведь, же; (после запятой, усиление) даже",
+    "translation_en": "yes; (mid-sentence) after all, you know; (after a comma) even",
+    "example_de": "Kommst du mit? – Ja, gern.",
+    "example_ru": "Ты пойдёшь с нами? – Да, с удовольствием.",
+    "example_en": "Are you coming along? – Yes, I'd love to.",
+    "usage_note_ru": "Частица в середине утверждения — «ведь, же»: Das ist ja toll! — Это же здорово! Du weißt ja, … — Ты ведь знаешь, … В просьбе и предостережении ja nicht — «только не, ни в коем случае»: Komm ja nicht zu spät! — Только не опаздывай! Ответ «да» на отрицательный вопрос — doch. na ja / nun ja — отдельное выражение.",
+    "usage_note_en": "A particle in the middle of a statement — “after all, you know”: Das ist ja toll! — That's great! Du weißt ja, … — As you know, … In a request or warning ja nicht — “whatever you do, don't”: Komm ja nicht zu spät! — Don't you dare be late! The answer “yes” to a negative question is doch. na ja / nun ja — a separate expression.",
+    "example_cloze": "Kommst du mit? – {{c1::Ja}}, gern."
+  },
+  {
+    "id": "adverb-447",
+    "word": "nein",
+    "parts_of_speech": [
+      "Partikel"
+    ],
+    "translation_ru": "нет",
+    "translation_en": "no",
+    "example_de": "Möchtest du noch Kaffee? – Nein, danke.",
+    "example_ru": "Хочешь ещё кофе? – Нет, спасибо.",
+    "example_en": "Would you like some more coffee? – No, thank you.",
+    "usage_note_ru": "Ответ на вопрос: Nein! — Нет! Ответ «да» на отрицательный вопрос — doch (Kommst du nicht? – Doch!). Удивление: Nein, wie schön! — Ах, как здорово! Не путать: nicht — не (отрицание при слове), kein — никакой, ни один.",
+    "usage_note_en": "Answer to a question: Nein! — No! The answer “yes” to a negative question is doch (Kommst du nicht? – Doch!). Surprise: Nein, wie schön! — Oh, how lovely! Do not confuse: nicht — not (negating a word), kein — no, not any.",
+    "example_cloze": "Möchtest du noch Kaffee? – {{c1::Nein}}, danke."
   }
 ]

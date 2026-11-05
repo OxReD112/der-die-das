@@ -61,7 +61,8 @@
     // G16 (user decision 18.10 / 19.10): a noun or a name is always capitalised, also from the external
     // dictionary, whose keys are lowercase (brunnen -> Brunnen); the article of external nouns is a later step.
     const capital = gerund || candidate.source === 'fallback' && ['noun','name'].includes(candidate.pos);
-    return `${candidate.item?.article || (gerund ? 'das' : '')} ${capital ? candidate.lemma.charAt(0).toUpperCase() + candidate.lemma.slice(1) : candidate.lemma}`.trim();
+    // G16 (advisor 25.10): an external noun with one gender of its meanings takes its article (die Schnecke, der Brunnen).
+    return `${candidate.item?.article || (gerund ? 'das' : '') || (candidate.source === 'fallback' && candidate.pos === 'noun' && candidate.nounArticle) || ''} ${capital ? candidate.lemma.charAt(0).toUpperCase() + candidate.lemma.slice(1) : candidate.lemma}`.trim();
   }
   // G45 (2), reference 2.A (user 22.10.2026): dictionary labels before their meaning, from both dictionaries
   // (codes: fc122e9 English senses[6], a706d75 Russian `labels`). Style and region map to a short set; the domain
@@ -271,12 +272,21 @@
     hearsay:{ru:'здесь: говорят, будто', en:'here: is said to'},
     haveTo:{ru:'нужно / должен', en:'have to'},
     infinitiveParticle:{ru:'Отдельно не переводится', en:'Not translated separately'},
+    // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): lassen with sich where the form proves the sense.
+    lassen_canBeDone:{ru:'здесь: можно (сделать)', en:'here: can be done'},
+    lassen_self:{ru:'здесь: сам (упал, опустился); (перен.) расслабиться, отпустить себя', en:'here: let oneself (drop, sink); (fig.) to let go, to relax'},
+    // L15 step 4 (reference F12-B5j / k): lass / lasst / lassen Sie + uns + infinitive.
+    lassen_letUs:{ru:'здесь: давай(те)', en:'here: let\u2019s'},
     // Reference G6 (to-do 3.12): the verb that changes its meaning with zu.
     zu_scheinen:{ru:'здесь: кажется, по-видимому', en:'here: seems to'},
     zu_brauchen:{ru:'здесь: нужно', en:'here: need to'},
     zu_wissen:{ru:'здесь: уметь', en:'here: know how to'},
     zu_pflegen:{ru:'здесь: обычно, имеет обыкновение', en:'here: usually, tends to'},
     'zu_vermögen':{ru:'здесь: быть в состоянии', en:'here: be able to'}
+  };
+  const AUX_HINT_TEXT = {
+    perfect:{ru:'Вспомогательный глагол (Perfekt)', en:'Auxiliary verb (perfect)'},
+    passive:{ru:'Вспомогательный глагол (пассив / Futur)', en:'Auxiliary verb (passive / future)'}
   };
   const POS_DE = {article:'Artikel', preposition:'Präposition', prep:'Präposition', numeral:'Zahlwort', num:'Zahlwort',
     particle:'Partikel', intj:'Interjektion', postp:'Postposition', contraction:'Präposition + Artikel', character:'Zeichen',
@@ -323,17 +333,21 @@
   function constructionMarks(candidate, confirmed = false, language = 'en') {
     const k = candidate.construction;
     if (!k || !confirmed && (k.confidence === 'tentative' || candidate.reflexiveUnconfirmed)) return {marks:[], role:null, spans:null};
-    const own = verbBase(candidate.lemma), main = verbBase(k.lemma || ''), isMain = own === main, name = k.lemma || '';
+    const own = verbBase(candidate.lemma), main = verbBase(k.lemma || ''), isMain = own === main, name = k.coordinatedLemma || k.lemma || '';
     const spans = k.spans || null;
     switch (k.id) {
       case 'separable-verb': return {marks:[], role:null, spans};
       // G2 addition (reference 19.10): sein + participle of a verb with haben and sein — Perfekt or state.
       // L13 (reference F12-G3): hätte / wäre + participle — the participle «Konjunktiv II», hätte / wäre «Konjunktiv II mit …»
       // with «бы (о прошлом)» instead of the dictionary meaning.
-      case 'perfect-group': if (k.label === 'Konjunktiv II') return isMain && !k.clickedRole ? {marks:['Konjunktiv II'], role:null, spans}
+      // A3 (advisor 03.11): er habe … versucht, er sei … gestorben — the participle «Konjunktiv I», habe / sei «Konjunktiv I mit …».
+      case 'perfect-group': if (k.label === 'Konjunktiv I') return isMain && !k.clickedRole ? {marks:['Konjunktiv I'], role:null, spans}
+          : {marks:[`Konjunktiv I mit ${name}`], role:k.clickedRole || 'auxiliary', spans};
+        if (k.label === 'Konjunktiv II') return isMain && !k.clickedRole ? {marks:['Konjunktiv II'], role:null, spans}
           : {marks:[`Konjunktiv II mit ${name}`], role:'conditionalPast', spans};
-        return {marks:[`${k.label}${k.state ? ` / ${language === 'ru' ? 'состояние' : 'state'}` : ''} mit ${name}`], role:isMain ? null : 'auxiliary', spans};
-      case 'werden-future': return {marks:[`Futur I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
+        return {marks:[`${k.label}${k.state ? ` / ${language === 'ru' ? 'состояние' : 'state'}` : ''} mit ${name}`], role:k.clickedRole || (isMain ? null : 'auxiliary'), spans};
+      case 'werden-future': if (k.mood === 'Konjunktiv I') return {marks:[isMain ? 'Konjunktiv I' : `Konjunktiv I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
+        return {marks:[`Futur I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
       // F12-G1a / G22: tense first, then Passiv (wurde … getroffen «Präteritum · Passiv mit treffen»); Präsens stays «Passiv mit …» (4.6).
       case 'werden-passive': {
         const past = /Präteritum/u.test(k.note?.en || '');
@@ -429,8 +443,17 @@
         // Konjunktiv II of möchte belongs to the modal, not to the lassen group; only würde makes it the group's mood.
         const wuerde = (k.spans || []).some(span => /^würd/iu.test(span.text));
         const tense = k.tense && k.tense !== 'Präsens' && (k.tense !== 'Konjunktiv II' || wuerde) ? k.tense : null;
-        if (own === 'lassen') return {marks:[tense ? `${tense} mit ${name}` : `mit ${name}`], role:null, spans};
-        if (isMain) return {marks:[tense ? `${tense} mit lassen` : `lassen mit ${name}`], role:null, spans};
+        // (step 4, reference F12-B5a: a simple tense only on the finite form — lassen under a modal is an infinitive: sollte … reparieren
+        // lassen «mit reparieren»; ließe itself is Konjunktiv II, the würde rule is for the modal möchte only)
+        const ownTense = k.outerModal ? null : k.tense && k.tense !== 'Präsens' ? k.tense : null;
+        if (own === 'lassen') return {marks:[ownTense ? `${ownTense} mit ${name}` : `mit ${name}`], role:k.sense ? `lassen_${k.sense}` : null, spans};
+        // (L15 step 4, reference F12-B5j: uns of lass uns keeps its own card «нас» with a line under it — see cardCore)
+        if (k.sense === 'letUs' && candidate.item?.type === 'Pronomen') return {marks:[], role:null, spans};
+        // (advisor 29.10, reference F12-B5a / B5c: the infinitive under lassen shows «mit lassen» — a simple tense only on ließ / lässt,
+        // as with modals; a compound tense stays: bestreichen «Plusquamperfekt mit lassen»; L19: two infinitives joined by und, each the main verb)
+        const infinitiveHere = isMain || String(name).split(' und ').map(verbBase).includes(own);
+        const compound = tense && /^(?:Perfekt|Plusquamperfekt|Futur I|Konjunktiv II)$/u.test(tense) ? tense : null;
+        if (infinitiveHere) return {marks:[compound ? `${compound} mit lassen` : 'mit lassen'], role:null, spans};
         if (MODALS.has(own)) return {marks:[`mit ${name} lassen`], role:null, spans};
         return {marks:[`${tense || 'Präsens'} mit ${name} lassen`],
           role:tense === 'Perfekt' ? 'perfectHave' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
@@ -445,6 +468,10 @@
       case 'recorded-construction': return {marks:candidate.expressionTense ? [candidate.expressionTense] : [], role:null, spans};
       // B2: Komparativ + als — als shows «здесь: чем».
       case 'comparative-als': return {marks:['Komparativ + als'], role:null, spans};
+      // G51 step 3: Komparativ + denn (härter denn je) — denn shows «здесь: чем».
+      case 'comparative-denn': return {marks:['Komparativ + denn'], role:null, spans};
+      // G51 / G14: a modal particle — the line «Partikel» comes from the card's posLabel, no marks of its own.
+      case 'modal-particle': return {marks:[], role:null, spans};
       case 'zu-conjunction': return {marks:[], role:own === 'zu' ? 'infinitiveParticle' : null, spans};
       // Reference G6 (to-do 3.12): schien «Präteritum · mit fürchten» + «здесь: кажется, по-видимому»; fürchten «mit scheinen»;
       // zu Infinitivpartikel. With a chain inside (A6 × G6: schien … gekommen zu sein) the chain words keep the chain's
@@ -471,7 +498,7 @@
   // Compound: «die Bauchhöhe = Bauch + Höhe» · «Nomen · Kompositum» · «Bauch — живот · Höhe — высота»; linking letters in
   // brackets (Eule(n)); a half-suffix gives a fixed explanation (-frei: без …). Derived word: «Nomen · aus Verb einbiegen» ·
   // «Возможно, от einbiegen — …» (the link is seen in the spelling only, L12); -erei / -ig / -lich / -bar / un- with their
-  // explanation before the base. A part without a Russian meaning keeps its English one, marked (only derived words).
+  // explanation in the order of the word (un- before the base, a suffix after it — G79). A part without a Russian meaning keeps its English one, marked (only derived words).
   const HALF_SUFFIX = {frei:['-frei: без …','-frei: -free'],los:['-los: без …','-los: -less'],voll:['-voll: полный …','-voll: -ful'],
     reich:['-reich: богатый …','-reich: rich in …'],arm:['-arm: бедный …','-arm: low in …'],artig:['-artig: похожий на …','-artig: …-like'],
     fähig:['-fähig: способный к …','-fähig: capable of …']};
@@ -492,7 +519,7 @@
     return language === 'ru' && en.length ? {text:`английский: ${en.slice(0, n).join('; ')}`, rest:Math.max(0, en.length - 2)} : {text:'', rest:0};
   }
   // The lines of the card (user 23.10): every part on a line of its own — «Bauch — живот», «Höhe — высота; уровень»;
-  // a half-suffix or a suffix explanation first. A line of a part with an own card and more meanings carries the
+  // a half-suffix or a suffix explanation last, as in the word (G79, user 25.10). A line of a part with an own card and more meanings carries the
   // part's entry id and the number of the meanings not shown.
   // G68 (user 24.10.2026): a name read literally — one line «буквально: Weiß + Kopf — белый + голова», the first meaning of
   // each part (as for other names, no translation of the name itself).
@@ -510,14 +537,19 @@
     const gloss = (p, prefix = '') => { const m = formationMeaning(p, language);
       return {text:`${prefix}${formationName(p)} — ${m.text}`, more:p.dictionaryId ? m.rest : 0, entryId:p.dictionaryId || null}; };
     const fixed = text => ({text, more:0, entryId:null});
+    // #21 (reference F12-G12e): a diminutive — the base's parts, the last one marked «(уменьш.)»: «Spatz — воробей (уменьш.)»,
+    // «Rock — юбка · Tasche — карман (уменьш.)».
+    if (f.kind === 'diminutive') return f.parts.map((p, k) => { const g = gloss(p);
+      return k === f.parts.length - 1 && g.text ? {...g, text:`${g.text} ${language === 'ru' ? '(уменьш.)' : '(diminutive)'}`} : g; });
     if (f.kind === 'compound') {
       const parts = f.half ? f.parts.slice(0, -1) : f.parts;
-      return [...(f.half ? [fixed(HALF_SUFFIX[f.half][i])] : []), ...parts.map(p => gloss(p))];
+      // G79 (user 25.10): the lines follow the parts of the word, as the heading (eulenfrei = Eule(n) + frei: Eule — …, then -frei)
+      return [...parts.map(p => gloss(p)), ...(f.half ? [fixed(HALF_SUFFIX[f.half][i])] : [])];
     }
     const b = f.base;
     if (f.prefix === 'un') return [fixed(FORMATION_TEXT.un[i]), gloss(b)];
-    if (f.suffix === 'erei') return [fixed(FORMATION_TEXT.erei[b.pos === 'Verb' ? 'Verb' : 'Nomen'][i]), gloss(b)];
-    if (FORMATION_TEXT[f.suffix]) return [fixed(FORMATION_TEXT[f.suffix][i]), gloss(b)];
+    if (f.suffix === 'erei') return [gloss(b), fixed(FORMATION_TEXT.erei[b.pos === 'Verb' ? 'Verb' : 'Nomen'][i])];
+    if (FORMATION_TEXT[f.suffix]) return [gloss(b), fixed(FORMATION_TEXT[f.suffix][i])];
     return [gloss(b, `${language === 'ru' ? 'Возможно, от' : 'Possibly from'} `)];
   }
   // G47 (reference C4, 23.10.2026): a joined particle + verb that no dictionary has, explained by its parts as G48 does
@@ -548,7 +580,12 @@
     if (lines[0] && !lines[0].helpEntry) lines[0].helpEntry = lookup({word:f.particle.form, type:'Adverb'}) || null;
     // The verb's label segments are the verb's meaning, not the parts: dropped (the browser shows segments before lines).
     const {segments: _segments, segmentPrefix: _prefix, ...rest} = base;
-    return {...rest, heading:`${f.lemma} = ${f.particle.form} + ${f.verb.lemma}`, text:lines.map(l => l.text).join(' · '), lines,
+    // G47 part 2 (advisor 03.11): a separated particle (eilte … hinaus) — the joined word is in no dictionary, so it is not the
+    // heading: the parts only, «hinaus- + eilen», the meanings of the parts from their cards, the grammar of the verb.
+    const split = candidate.construction?.id === 'directional-split';
+    // (advisor 03.11: the grammar line as for the other separable verbs — «Trennbares Verb · Präteritum»)
+    if (split && typeof rest.grammar === 'string') rest.grammar = rest.grammar.replace(/^Verb\b/u, 'Trennbares Verb');
+    return {...rest, heading:split ? `${f.particle.form}- + ${f.verb.lemma}` : `${f.lemma} = ${f.particle.form} + ${f.verb.lemma}`, text:lines.map(l => l.text).join(' · '), lines,
       textLanguage:language, missing:false, derived:true, note:'', more:0, helpEntry:null};
   }
   // One line of text (Wortschatz, alternatives, tools): the lines joined with « · ».
@@ -571,7 +608,8 @@
       };
       heading += ` = ${f.parts.map(label).join(' + ')}`;
       marks.push('Kompositum');
-    } else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
+    } else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
+    else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
     const lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
     for (const l of lines) if (!l.helpEntry) l.more = 0;
     return {heading, grammar:[f.pos, ...marks].join(' · '), text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
@@ -604,15 +642,33 @@
   }
   // E7 (reference C8, 24.10.2026): a hyphen stub read as the whole word (Gold- und Silbermünzen) keeps the card of the whole word
   // and adds a line under the meaning; a stub without a whole word that is a function word (Aus- oder Umschalten) is «part of a word».
-  function cardBase(resolution, candidate, options = {}) {
+  function cardCore(resolution, candidate, options = {}) {
     const language = options.language === 'ru' ? 'ru' : 'en';
     if (candidate?.wordFragment) return {heading:candidate.lemma, grammar:'', text:candidate.translation[language], textLanguage:language,
       missing:false, derived:true, note:'', more:0, spans:candidate.compound?.spans || null, helpEntry:null};
     let model = wordCard(resolution, candidate, options);
     // L23 (reference A3, 19.10): a modal in Konjunktiv I (er könne) — the hint for reported speech under the meaning.
-    if (candidate?.formFeatures?.reportedSpeech && candidate.construction?.id === 'modal-group') {
+    // (advisor 03.11: also habe / sei / werde in Konjunktiv I — alone or in their Perfekt / Futur group, and the group's main verb)
+    const konj1Group = ['perfect-group','werden-future'].includes(candidate?.construction?.id) && (candidate.construction.label === 'Konjunktiv I' || candidate.construction.mood === 'Konjunktiv I') && !candidate.construction.asIf;
+    if (candidate?.formFeatures?.reportedSpeech && (candidate.construction?.id === 'modal-group' || !candidate.construction) || konj1Group) {
       const hint = language === 'ru' ? 'косвенная речь: так говорят или думают другие' : 'reported speech';
       model = {...model, note:model.note ? `${model.note}; ${hint}` : hint};
+    }
+    // G12 (advisor 29.10): a card found through the new spelling names the old one (läßt — old spelling of lässt).
+    const ref = resolution?.formReference;
+    if (ref?.oldSpelling && candidate && candidate.source === 'main') {
+      const line = language === 'ru' ? `старое написание: ${ref.form} = ${ref.target}` : `old spelling: ${ref.form} = ${ref.target}`;
+      model = {...model, note:model.note ? `${model.note}; ${line}` : line};
+    }
+    // L15 step 4 (reference F12-B5j, user 25.10, variant Б): uns of lass uns — its own meaning and the line «здесь: lass uns …».
+    if (candidate?.construction?.id === 'lassen-infinitive' && candidate.construction.sense === 'letUs' && candidate.item?.type === 'Pronomen') {
+      const line = language === 'ru' ? 'здесь: lass uns … — «давай(те) …»' : 'here: lass uns … — “let’s …”';
+      model = {...model, note:model.note ? `${model.note}; ${line}` : line};
+    }
+    // so «здесь: то, тогда» (advisor 29.10): so resuming the clause before it — the so card stays, the line is added.
+    if (resolution?.soResumptive && candidate && candidate === resolution.selected) {
+      const line = language === 'ru' ? 'здесь: то, тогда (часто не переводится)' : 'here: then (often not translated)';
+      model = {...model, note:model.note ? `${model.note}; ${line}` : line};
     }
     const e = resolution?.ellipsis;
     if (!e || e.partOnly || !candidate || candidate !== resolution.selected) return model;
@@ -655,6 +711,31 @@
     const confirmed = !!options.confirmed;
     const k = constructionMarks(candidate, confirmed, language);
     let headingText = heading(candidate), type = partOfSpeech(candidate, confirmed), marks = [...k.marks], text = null, helpEntry = candidate.item || null, more = 0;
+    // 29.10.2026 (expressions chat; advisor: the tense line of expressions): an expression's line mirrors the line of its verb's
+    // card on its own part (resolver: expressionVerb) — «Verb» becomes «Feste Wendung» / «Ausdruck»; «mit X» goes when X is the
+    // expression's own verb (it is the expression itself), so are «Reflexiv» of a heading with sich and the verb's preposition
+    // pattern. es ward ihnen das Urteil gesprochen — «Feste Wendung · Präteritum · Passiv»; Mach dir keine Sorgen — «… · Imperativ».
+    // A chain of another verb (wurde … geboren — Passiv mit gebären, the participle is a word of the heading) is not taken: the
+    // tense the resolver established stays (Präteritum).
+    let exprSpans = null;
+    const ev = candidate.construction?.id === 'recorded-construction' ? candidate.expressionVerb : null;
+    const evChain = ev?.candidate?.construction?.lemma ? verbBase(ev.candidate.construction.lemma) : ev?.verb;
+    if (ev && ev.candidate && evChain === ev.verb) {
+      // (M1-c, links chat 30.10: the line of an expression names its own verb only — not a second infinitive after und)
+      const evCandidate = ev.candidate.construction?.coordinatedLemma ? {...ev.candidate, construction:{...ev.candidate.construction, coordinatedLemma:null}} : ev.candidate;
+      const line = cardBase(ev.resolution, evCandidate, {...options}).grammar.split(' · ').slice(1);
+      // (a reflexive pronoun of the heading: sich, uns in wir sehen uns — «Reflexiv» is the expression itself)
+      // (05.11: also a reflexive pronoun among the expression's own parts — a variant: sich … aufgehoben fühlen)
+      const sich = /(?:^|\s)(?:sich|mich|dich|uns|euch|mir|dir)(?:['’]s)?(?=\s|$)/u.test(norm(candidate.lemma || '')) ||
+        (k.spans || []).some(x => /^(?:sich|mich|dich|uns|euch|mir|dir)$/u.test(norm(x.text || '')));
+      marks = line.map(m => m.replace(new RegExp(` mit (?:sich )?${ev.verb.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')}$`, 'u'), ''))
+        .filter(m => m && !(sich && m === 'Reflexiv') && !/\+\s*(?:Akkusativ|Dativ|Genitiv|Infinitiv)/u.test(m));
+      // (the verb's line says nothing — a plain Verb: the tense the resolver established stays: es gibt — gäbe «Konjunktiv II»)
+      if (candidate.expressionTense && !marks.length) marks.push(candidate.expressionTense);
+      // (reference C1-G: the highlight is the expression plus the auxiliary / modal of its verb's chain)
+      const extra = (ev.chainWords || []).filter(x => !(k.spans || []).some(y => y.start === x.start));
+      if (extra.length && k.spans) exprSpans = [...k.spans, ...extra].sort((a, b) => a.start - b.start);
+    }
     const explanation = candidate.explanation, usage = candidate.usage, contraction = candidate.contraction;
     if (explanation?.kind === 'superlative') {
       const base = lookup({id:explanation.baseId, word:explanation.baseLemma, type:'Adjektiv'});
@@ -694,10 +775,16 @@
       const base = gerund ? gerund[1].trim() : usage.base;
       type = 'Nomen'; marks = [`aus ${fromVerb ? 'Verb' : 'Adjektiv'} ${base}`];
       if (usage?.kind === 'infinitive' || gerund) headingText = `das ${base.charAt(0).toUpperCase()}${base.slice(1)}`;
+      // #20 (reference NOM-02g): etwas Neues / nichts Besonderes — the -e form as the heading, without an article (Neue).
+      else if (usage?.kind === 'adjective' && usage.marker) headingText = String(candidate.lemma || '').replace(/s$/u, '');
       const ownNoun = gerund ? compact(String(candidate.translation?.en || '').replace(/^gerund of[^;]*;?/iu, '')) : '';
       const baseEntry = lookup({id:usage?.baseDictionaryId, word:base, type:fromVerb ? 'Verb' : 'Adjektiv'});
       const synthetic = value => String(value || '').split(/:\s*/u).slice(1).join(': ').trim();
-      if (language === 'en' && ownNoun) text = {text:ownNoun, language};
+      // #20 (advisor 05.11): an outside noun of this very nominalization with a meaning in this language (der Fremde
+      // «незнакомец», die Alte «старуха», das Gute «добро») is shown as the noun itself, without «aus Adjektiv».
+      const nounMeaning = !fromVerb && compact(usage?.noun?.translation?.[language] || '');
+      if (nounMeaning) { marks = []; text = {text:nounMeaning, language}; }
+      else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {
         const own = entryFit(baseEntry, language), ownEn = entryFit(baseEntry, 'en');
         // G8 (22.10.2026, user): without an own card of the base, the base word's external record among the candidates
@@ -747,6 +834,8 @@
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
     if (features?.number === 'plural' && !pair) marks.push('Plural');
+    // G69 (advisor 25.10): an external noun clicked in a spelling of its plural column only (Er fand Goldmünzen)
+    else if (candidate.externalPlural && candidate.source === 'fallback' && !pair && !marks.includes('Plural')) marks.push('Plural');
     if (features?.degree && !marks.includes(features.degree)) marks.push(features.degree);
     // Translation of the clicked form from the own card (alles «всё» on the alle
     // card): the heading is the form, the help stays the card (alle).
@@ -766,11 +855,30 @@
     const derived = !!text;
     if (!text && k.role) text = {text:ROLE_TEXT[k.role][language], language};
     if (!text && !contraction?.expression) { text = meaningText(candidate, language); more = text?.more || 0; }
+    // Links chat, step A (advisor 03.11): werden / haben / sein without a link, a participle in the part (resolver auxiliaryHint) —
+    // «auxiliary verb» first, the own meaning second (the order of senses, not a link: no mark, no highlight).
+    const auxHint = candidate.formFeatures?.auxiliaryHint;
+    if (auxHint && !k.role && text && !contraction) {
+      const first = AUX_HINT_TEXT[auxHint][language];
+      text = {text:`${first}; ${text.text}`, language:text.language};
+    }
     // B7: colloquial spellings — «war’s = war + es», «hab (= habe)»; es gibt / es geht
     // stay without the verb's own translation until the expressions exist (F8).
     if (contraction) {
       headingText = contractionHeading(contraction);
       if (contraction.expression) { text = null; more = 0; }
+    }
+    // 29.10.2026 (expressions chat; advisor p. 5; reference X5.14): a chain word outside an expression names the expression
+    // («Modalverb · Präteritum / Konjunktiv II mit sich an etwas (Akkusativ) machen»; resolver: chainExpression).
+    const xName = candidate.construction?.expressionName, xVerb = xName ? (candidate.construction.lemma || '') : '';
+    if (xName && xVerb) {
+      const esc = s => s.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+      const rx = new RegExp(`(^| )mit (?:sich )?${esc(verbBase(xVerb))}(?= |$)`, 'u');
+      // (a heading that starts with mit is not doubled: «Modalverb · mit etwas zu tun haben», not «mit mit …»)
+      marks = marks.map(m => m.replace(rx, `$1${/^mit\s/u.test(xName) ? '' : 'mit '}${xName}`));
+      const words = candidate.construction.expressionSpans || [];
+      const extra = words.filter(x => !(k.spans || []).some(y => y.start === x.start));
+      if (extra.length && k.spans) exprSpans = [...k.spans, ...extra].sort((a, b) => a.start - b.start);
     }
     const grammar = [type, ...marks].filter(Boolean).join(' · ');
     // A reflexive verb with an interpretation keeps its note under the meaning.
@@ -780,7 +888,79 @@
     // Labels (reference 2.A): segments of the plain text, only when the text is the meaning itself.
     const segments = text?.segments && (!derived || text.prefix) && !contraction ? {segments:text.segments, segmentPrefix:text.prefix || ''} : {};
     return {heading:headingText, grammar, text:text ? text.text : NO_TRANSLATION[language], textLanguage:text ? text.language : language,
-      missing:!text, derived, note, more:text ? more : 0, spans:k.spans || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
+      missing:!text, derived, note, more:text ? more : 0, spans:exprSpans || k.spans || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
+  }
+  // G70 (user 24.10.2026): the heading, the grammar line and the translation come from one card. A reflexive use of a verb whose
+  // card has no reflexive meaning (lexicalSenseConfirmed false):
+  //  (2) (user 24.10, decision B) a «sich ~ …» segment of an external record is NOT shown as the meaning — 29 of 108 book places were
+  //      confidently wrong (wandte sich um «ворочаться»); it stays visible in the parts line with the full meaning of X (p. 4);
+  //  (3) a free dative «себе» (mir / dir, or a direct object of its own: Er kaufte sich ein Buch) — the card's own meaning: heading X,
+  //      «Reflexiv», the chain named X, not «sich X»;
+  //  (4) otherwise (an accusative sich: Der Sturm hat sich gelegt) — heading «sich X», no translation, and a parts line «X — …»
+  //      (as G47): the meaning of sich X is not guessed from X. With an own card «sich X» the resolver chooses it (p. 1).
+  // (G57's card() wraps this one, so «ещё N значений» counts the reflexive card that is shown)
+  function cardBase(resolution, candidate, options = {}) {
+    const result = cardCore(resolution, candidate, options);
+    const k = candidate?.construction, language = options.language === 'ru' ? 'ru' : 'en';
+    if (!k || k.id !== 'reflexive-verb' || k.lexicalSenseConfirmed || k.interpretation || k.attachmentOnly || candidate.formation ||
+      k.confidence === 'tentative' && !options.confirmed || pos(candidate) !== 'Verb') return result;
+    const lemma = String(candidate.lemma || '').replace(/^sich\s+/u, '');
+    if (/^sich\s/u.test(String(candidate.lemma || '')) || ![lemma, `sich ${lemma}`].includes(result.heading) || !/(?:^| · )Reflexiv(?: · |$)/u.test(result.grammar)) return result;
+    // 27.10.2026 (advisor + user: reflexive marks of the external dictionaries, 2f3859a — EN senses column 8, RU senses `reflexive`):
+    // sich linked, our card without the field `reflexive` (or no card of ours) — the senses the dictionary marks as used with sich are
+    // the meaning, shown like our field (heading «sich X», all marked senses of the wanted kind in dictionary order, 4.13). The kind by
+    // the G70 sign: an accusative object in the part (a dative sich) → dat only; none → acc / opt first, the kind missing → the marked
+    // ones there are; uns / euch without that sign (Akk or Dat) → all marked ones. Without marks of this language — as before.
+    // (advisor 27.10: rule A — a verb with own sich expressions (reflexivePhraseVerb) takes no marks; rule B — a dative sich with a
+    // direct object in the part (Er schnitt sich ein Stück, biss sich ein Stück ab) is the free dative «себе» of G70: no marks, X as
+    // before; the marks work for an accusative sich without an object and for mir / dir without such an object)
+    const objectDative = !!(k.objectGroup || candidate.reflexiveObjectSign || k.freeDative && k.reflexiveCase !== 'Dativ');
+    if (!candidate.reflexivePhraseVerb && !objectDative && !(candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive) {
+      const dative = k.reflexiveCase === 'Dativ';
+      const unclear = !dative && k.reflexiveCase !== 'Akkusativ' && ['uns','euch'].includes(norm(k.pronoun?.text || ''));
+      const markedSenses = lang => {
+        const marks = candidate.reflexiveMarks?.[lang];
+        if (!marks || typeof marks !== 'object') return [];
+        const rows = Object.entries(marks), kinds = unclear ? ['acc','dat','opt'] : dative ? ['dat'] : ['acc','opt'];
+        // (with the dative sign only dat: an accusative or optional sense is excluded by the object — Er wusch sich die Hände is not
+        // «мыться»; without the sign a dative-only verb shows its dat senses)
+        const pick = rows.some(([, m]) => kinds.includes(m)) ? rows.filter(([, m]) => kinds.includes(m)) : dative ? [] : rows;
+        const clean = value => compact(value).replace(/^~\s*sich\s+/u, '').replace(/^[\p{Ll}ßäöü]+,\s*sich\s+/u, '')
+          .replace(/^sich\s+(?:~\s*)?(?=[^\s])/u, '').replace(/^~\s*/u, '').trim();
+        return [...new Set(pick.flatMap(([text]) => clean(text).split(';').map(t => t.trim())))]
+          .filter(t => t && !/~/u.test(t) && (lang !== 'ru' || /[а-яё]/iu.test(t)));
+      };
+      // (compact() per sense keeps two parts of a long sense; all marked senses are listed — fit() and «ещё N значений» like the field)
+      // (one language's marks only for its own interface — a mark only in the other dictionary leaves this one as before, advisor 27.10)
+      const own = markedSenses(language);
+      if (own.length) {
+        const shown = fit(own.join('; '));
+        const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
+        return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
+          text:shown.text, textLanguage:language, missing:false, derived:true, note:rest.note || '', more:shown.rest};
+      }
+    }
+    // G70 step 2 (WN reflexive batch, 24.10): the field `reflexive` of an own card — the meaning of X with an accusative sich
+    // (verstecken → sich verstecken «прятаться»). Read as a field, not from the text; not with mir / dir.
+    // (a link found through the external record of the verb — Beruhige dich! — reads the field of our card of the same verb)
+    // G87 (a) (advisor 28.10.2026): a field marked "case": "Dativ" (begegnen, beißen) is the meaning with a dative sich — taken with
+    // mir / dir and with an object, not with mich / dich (ich beiße mir auf die Lippe → «прикусить (губу, язык)»).
+    const ownItem = candidate.item || (options.lookup ? options.lookup({word:lemma, type:'Verb'}) : null);
+    const dativeField = ownItem?.reflexive?.case === 'Dativ';
+    if (k.freeDative && !dativeField) return {...result, heading:lemma, grammar:result.grammar.split(' · ').map(m => m.replace(` mit sich ${lemma}`, ` mit ${lemma}`)).join(' · ')};
+    const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !k.objectGroup ? ownItem?.reflexive : null;
+    // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
+    const fieldFit = fit(String(field?.[`translation_${language}`] || ''));
+    if (fieldFit.text) {
+      const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
+      const note = String(field[`note_${language}`] || '').trim();
+      return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:language, missing:false, derived:true, note, more:fieldFit.rest};
+    }
+    const meaning = meaningText(candidate, language);
+    const lines = [{text:NO_TRANSLATION[language], more:0, helpEntry:null},
+      ...(meaning ? [{text:`${lemma} — ${meaning.text.replace(/^английский: /u, '')}`, more:meaning.more || 0, helpEntry:candidate.item || null}] : [])];
+    const {segments: _s, segmentPrefix: _p, ...rest} = result;
+    return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};
   }
   window.BibliothekMeaningDisplay = Object.freeze({formationText, formationLines, groups, alternatives, pos, heading, brief, compact, formComment, nounPhraseComment, labelSegments,
     card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION});

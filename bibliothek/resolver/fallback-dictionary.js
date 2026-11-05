@@ -58,7 +58,10 @@
   }
   const verbFormCache = new Map();
   const verbFormsBase = new URL("data/fallback-verb-forms/", document.currentScript.src);
-  const separableUrl = new URL("data/separable-index.json?v=20261017-verbs-1", document.currentScript.src);
+  // Versions in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
+  // versioned file for good — a changed data file needs a new version here (dev/bibliothek/tools/data-versions.json).
+  const verbFormsVersion = "1024-1";
+  const separableUrl = new URL("data/separable-index.json?v=20261028-links-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
@@ -107,7 +110,7 @@
   const verbFormPartition = word => fnv(word) & 1023;
   async function mayBeVerb(word) {
     try {
-      if(!verbMembershipPromise)verbMembershipPromise=fetch(new URL('manifest.json',verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
+      if(!verbMembershipPromise)verbMembershipPromise=fetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
       const m=await verbMembershipPromise,key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
       const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;
       for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
@@ -147,7 +150,7 @@
   }
   function verbFormPart(index) {
     if (verbFormCache.has(index)) return keepPart(verbFormCache,index,verbFormCache.get(index));
-    const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json`,verbFormsBase)).then(response => {
+    const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json?v=${verbFormsVersion}`,verbFormsBase)).then(response => {
       if (!response.ok) throw new Error("Fallback verb morphology unavailable");
       return response.json();
     }).then(data => {
@@ -164,12 +167,19 @@
     const rows = (await verbFormPart(index))[spelling] || [];
     return rows.map(([lemma,tags])=>[spelling,lemma,tags]);
   }
+  // Speed (26.10.2026): several independent lookups that a step used to make one after another (one network wait each)
+  // are started together and read in the old order — the results are the same, failures surface at the same place.
+  function startAll(keys, ask) {
+    const pending = new Map();
+    for (const key of keys) if (!pending.has(key)) { const p = ask(key); p.catch(() => {}); pending.set(key,p); }
+    return pending;
+  }
   async function derivedVerbGroups(word, issues = null) {
     let links;
     try { links = await verbFormLinks(word); } catch (error) { issues?.push({source:'verb-forms',message:String(error.message || error)}); return []; }
-    const groups = [];
-    for(const lemma of [...new Set(links.map(row=>row[1]))]) {
-      const lexical = (await lexicalGroups(lemma)).filter(g=>g.pos === "verb" && g.meanings.length);
+    const groups = [], lemmaList = [...new Set(links.map(row=>row[1]))], pending = startAll(lemmaList, lemma => lexicalGroups(lemma));
+    for(const lemma of lemmaList) {
+      const lexical = (await pending.get(lemma)).filter(g=>g.pos === "verb" && g.meanings.length);
       groups.push(...lexical);
       const data = {inflections:links.filter(row=>row[1] === lemma),senses:[[0,word,"verb",`inflection of ${lemma}:`,0]]};
       groups.push({kind:"form-note",word,pos:"verb",meanings:[`inflection of ${lemma}:`],lemmas:[lemma],
@@ -228,7 +238,7 @@
   function dictionaryPart(index) {
     if (cache.has(index)) return keepDictionaryPart(index,cache.get(index));
     let bytes = 0;
-    const promise = Promise.all([fetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=8192-2`, base))
+    const promise = Promise.all([fetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=8192-3`, base))
       .then(response => {
         if (!response.ok) throw new Error("Fallback dictionary unavailable");
         // The text length bounds the cache; a response without text() (test stand-ins) counts as an average part.
@@ -270,13 +280,18 @@
   }
   function groupsFor(word, data) {
     observe('groups-build', {word});
-    const byPos = new Map(), labelsByPos = new Map();
+    const byPos = new Map(), labelsByPos = new Map(), reflexiveByPos = new Map(), genderByPos = new Map();
     for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0]-b[0])) {
       const pos = row[2] || "";
-      if (!byPos.has(pos)) { byPos.set(pos, []); labelsByPos.set(pos, {}); }
+      if (!byPos.has(pos)) { byPos.set(pos, []); labelsByPos.set(pos, {}); reflexiveByPos.set(pos, {}); genderByPos.set(pos, {}); }
       byPos.get(pos).push(row[3]);
+      // G16 (fc122e9): the gender of a noun sense (column 5: m / f / n, several — m:n)
+      if (typeof row[5] === "string" && row[5] && !(row[3] in genderByPos.get(pos))) genderByPos.get(pos)[row[3]] = row[5];
       // G45 (2), reference 2.A: usage labels of the sense (index 6, fc122e9) travel with its meaning text.
       if (Array.isArray(row[6]) && row[6].length) labelsByPos.get(pos)[row[3]] = [...row[6]];
+      // 27.10.2026 (reflexive marks, 2f3859a): a verb sense used with sich (column 8: acc / dat / opt) — read by meaning-display only
+      // when sich is linked with the verb and our card has no field `reflexive`.
+      if (["acc","dat","opt"].includes(row[7]) && !(row[3] in reflexiveByPos.get(pos))) reflexiveByPos.get(pos)[row[3]] = row[7];
     }
     // Auxiliary rows (haben: ~9 300, sein: ~1 500 "auxiliary of <verb>" links) never name a
     // lemma inside a sense, and comparing every sense with each of them cost seconds in browsers.
@@ -295,8 +310,39 @@
       const notes = [...new Set(values.filter(value => reference(value) || continuation(value)))];
       const meanings = [...new Set(values.filter(value => !notes.includes(value)))], all = labelsByPos.get(pos) || {};
       const labels = Object.fromEntries(meanings.filter(m => all[m]).map(m => [m,all[m]]));
-      return {word,pos,meanings,formNotes:notes,...(Object.keys(labels).length ? {labels} : {})};
+      const marks = reflexiveByPos.get(pos) || {}, reflexive = Object.fromEntries(meanings.filter(m => marks[m]).map(m => [m,marks[m]]));
+      const noun = pos === "noun" ? nounFacts(word, data, meanings.map(m => genderByPos.get(pos)[m])) : null;
+      return {word,pos,meanings,formNotes:notes,...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
+        ...(noun ? {noun} : {})};
     });
+  }
+  // G16 + G69 (advisor 25.10.2026, rules of DICTIONARY_DATA_FOR_RESOLVER 3.1): the article of an external noun and its
+  // singular / plural spellings, from the English export (entries[i][4]: g — m / f / n / p, several m:f; decl — eight cells
+  // nominative / accusative / dative / genitive singular, then plural; a cell is ending alternatives split by «/», a leading
+  // number drops that many letters first: haus 3äuser → häuser, «-» no form). The gender of the meanings is the noun's gender
+  // (die See «sea», der See «lake»); meanings of several genders or a meaning with two genders — no article; no gender at the
+  // meanings — the word's one gender. A noun declined like an adjective (strong / weak alternatives -r / -m / -n in the
+  // singular: die Angestellte, der Angestellte) — no article, its gender follows the meaning.
+  function nounFacts(word, data, meaningGenders) {
+    const facts = (data?.entries || []).map(e => e?.[4]).filter(f => f && typeof f === "object");
+    const decls = facts.flatMap(f => [f.decl,...(Array.isArray(f.alt) ? f.alt.map(a => a?.[1]) : [])]).filter(d => typeof d === "string" && d.split("|").length === 8);
+    const lower = String(word).normalize("NFC").toLowerCase();
+    const spell = cell => cell.split("/").filter(a => a !== "-").map(a => { const m = a.match(/^(\d*)(.*)$/u), n = Number(m[1] || 0);
+      return (n ? lower.slice(0, -n) : lower) + m[2]; });
+    const singular = new Set(), plural = new Set();
+    for (const d of decls) d.split("|").forEach((cell, i) => spell(cell).forEach(f => (i < 4 ? singular : plural).add(f)));
+    const adjectival = decls.some(d => d.split("|").slice(0, 4).some(cell => { const alts = cell.split("/").map(a => a.replace(/^\d+/u, ""));
+      return alts.length > 1 && alts.some(a => /[rm]$/u.test(a)) && alts.some(a => /n$/u.test(a)); }));
+    const marked = meaningGenders.filter(Boolean);
+    let gender = null;
+    if (marked.length) { const kinds = new Set(marked); gender = kinds.size === 1 && /^[mfn]$/u.test(marked[0]) ? marked[0] : null; }
+    else { const kinds = new Set(facts.map(f => f.g).filter(Boolean)); gender = kinds.size === 1 && /^[mfn]$/u.test([...kinds][0]) ? [...kinds][0] : null; }
+    // (reviewer 27.10: a headword that is also a function word or a letter — Ach, Es, Du, Nein, Wenn, O, H — or a nominalized
+    // adjective form (was Schönes, Neues) is no plain noun: no article; two letters or less — no article)
+    const closed = (data?.senses || []).some(s => ["intj","pron","article","prep","conj","character","det","particle","postp","num"].includes(s[2]));
+    const nominalized = (data?.senses || []).some(s => s[2] === "noun" && /^nominalization of\b/iu.test(String(s[3] || "")));
+    const article = !adjectival && !closed && !nominalized && lower.length > 2 && gender ? {m:"der",f:"die",n:"das"}[gender] : null;
+    return article || singular.size || plural.size ? {article, singular:[...singular], plural:[...plural]} : null;
   }
   // Evidence belongs to the clicked spelling, not to permanent dictionary cards.
   function noteReferencesLemma(note,lemma) {
@@ -439,25 +485,66 @@
     }
     return result;
   }
-  async function weakVerbGroups(word) {
+  // #29 (links chat 04.11, RESOLVER2_TASK_PARTICIPLE_FORMS): a verb head of the Russian dictionary alone (überbauen, rezipieren,
+  // enthäuten — no English record) confirms a participle hypothesis of a word the English dictionary does not know at all; its group
+  // has no English meaning (the Russian one comes with the enrichment, as for the Russian-only separable verbs — abformen).
+  async function russianVerb(lemma) {
+    try { const r = await window.BibliothekRussianTranslations?.lookup(lemma,"verb"); return !!r?.meanings?.length; } catch (_) { return false; }
+  }
+  async function weakVerbGroups(word, unknown = false) {
     const form = String(word).normalize("NFC").toLowerCase(), groups = [], seen = new Set();
-    for (const {lemma,rows} of weakHypotheses(form)) {
+    const hypotheses = weakHypotheses(form), pending = startAll(hypotheses.map(h => h.lemma), lemma => lexicalGroups(lemma));
+    for (const {lemma,rows} of hypotheses) {
       const key = lemma+"|"+JSON.stringify(rows);
       if (seen.has(key)) continue; seen.add(key);
-      const lexical = (await lexicalGroups(lemma)).filter(g => g.pos === "verb" && g.word === lemma && g.meanings.length);
+      let lexical = (await pending.get(lemma)).filter(g => g.pos === "verb" && g.word === lemma && g.meanings.length);
+      if (!lexical.length && unknown && rows.every(tags => tags.includes("participle")) && await russianVerb(lemma))
+        lexical = [{word:lemma,pos:"verb",meanings:[],russianOnly:true}];
       if (!lexical.length) continue;
       if (!groups.some(g => g.word === lemma && !g.kind)) groups.push(...lexical.map(g => ({...g,derived:"regular-weak-form"})));
       groups.push({kind:"form-note",derived:"regular-weak-form",word,pos:"verb",meanings:[`inflection of ${lemma}:`],lemmas:[lemma],
         inflections:rows.map(tags => ({form,lemma,pos:"verb",tags:[...tags,...(tags.includes("participle") ? [] : ["indicative"])],
           person:tags.find(t => /-person$/u.test(t)) || null,number:tags.find(t => ["singular","plural"].includes(t)) || null,
-          tense:tags.find(t => ["present","past"].includes(t) && !tags.includes("participle")) || null,
+          // (#29: a past participle carries «past» like the dictionary's own rows — gebaut —; without it the reader took it for a
+          // present participle and built no Perfekt / passive group)
+          tense:tags.find(t => ["present","past"].includes(t) && (!tags.includes("participle") || t === "past")) || null,
           mood:tags.includes("participle") ? null : "indicative",source:"regular-weak-form"}))});
     }
     return groups;
   }
   async function withWeakVerb(word, groups) {
     if (groups.some(g => g.pos === "verb")) return groups;
-    try { return [...groups,...await weakVerbGroups(word)]; } catch (_) { return groups; }
+    try { return [...groups,...await weakVerbGroups(word,!groups.length)]; } catch (_) { return groups; }
+  }
+  // #29 (links chat 04.11): a word the dictionaries do not know that is a particle + a recorded participle of a simple verb, where
+  // particle + verb is a verb of the separable index (Russian-only ones too): ab + geformt → abformen, ein + gesungen → einsingen
+  // (strong verbs too — the participle is the simple verb's recorded one, nothing is guessed).
+  let separableByPrefix = null;
+  async function separableParticipleGroups(word) {
+    const form = String(word).normalize("NFC").toLowerCase(), groups = [];
+    if (!separableByPrefix) separableByPrefix = separableEntries().then(rows => {
+      const map = new Map();
+      for (const row of rows) { const [lemma,prefix] = row; if (!/^[\p{Ll}]+$/u.test(lemma)) continue;
+        if (!map.has(prefix)) map.set(prefix,new Map()); map.get(prefix).set(lemma,row); }
+      return map;
+    }).catch(e => { separableByPrefix = null; throw e; });
+    const byPrefix = await separableByPrefix;
+    for (const [prefix,lemmas] of byPrefix) {
+      if (!form.startsWith(prefix) || form.length < prefix.length+4) continue;
+      const rest = form.slice(prefix.length);
+      if (!await mayBeVerb(rest)) continue;
+      const links = (await verbFormLinks(rest)).filter(([,,tags]) => String(tags).split(",").includes("participle"));
+      for (const lemma of [...new Set(links.map(row => row[1]))]) {
+        const row = lemmas.get(prefix+lemma);
+        if (!row || groups.some(g => g.word === row[0])) continue;
+        const meanings = row[3] || [];
+        groups.push({word:row[0],pos:"verb",meanings,...(meanings.length ? {} : {russianOnly:true}),derived:"separable-participle"});
+        groups.push({kind:"form-note",derived:"separable-participle",word,pos:"verb",meanings:[`inflection of ${row[0]}:`],lemmas:[row[0]],
+          inflections:links.filter(l => l[1] === lemma).map(([,,tags]) => { const t = String(tags).split(",");
+            return {form,lemma:row[0],pos:"verb",tags:t,person:null,number:null,tense:t.includes("past") ? "past" : t.includes("present") ? "present" : null,mood:null,source:"separable-participle"}; })});
+      }
+    }
+    return groups;
   }
   // B4 (15.10.2026): a lowercase spelling the export does not know at all
   // (zypriotischen, warzigeres) may be a regular declined form of an adjective
@@ -484,10 +571,11 @@
   }
   async function adjectiveEndingGroups(word) {
     const form = String(word).normalize("NFC").toLowerCase(), groups = [], seen = new Set();
-    for (const {base,ending,degree} of adjectiveHypotheses(form)) {
+    const hypotheses = adjectiveHypotheses(form), pending = startAll(hypotheses.map(h => h.base), base => lexicalGroups(base));
+    for (const {base,ending,degree} of hypotheses) {
       const key = base+"|"+degree;
       if (seen.has(key)) continue; seen.add(key);
-      const lexical = (await lexicalGroups(base)).filter(g => g.pos === "adj" && g.word === base && g.meanings.length);
+      const lexical = (await pending.get(base)).filter(g => g.pos === "adj" && g.word === base && g.meanings.length);
       if (!lexical.length) continue;
       if (!groups.some(g => g.word === base && !g.kind)) groups.push(...lexical.map(g => ({...g,derived:"regular-adjective-ending"})));
       groups.push({kind:"form-note",derived:"regular-adjective-ending",word,pos:"adj",meanings:[`inflection of ${base}:`],lemmas:[base],
@@ -499,6 +587,7 @@
     const groups = await lookupGroups(word,issues);
     // Lowercase spellings only: a capital inside a sentence is a noun (Fronten, Rechte).
     if (!/^\p{Ll}/u.test(String(word).normalize("NFC").trim())) return groups;
+    if (!groups.length) { try { const separable = await separableParticipleGroups(word); if (separable.length) return separable; } catch (_) {} }
     const withVerb = await withWeakVerb(word,groups);
     if (withVerb.length) return withVerb;
     try { return await adjectiveEndingGroups(word); } catch (_) { return withVerb; }
@@ -506,8 +595,11 @@
   async function lookupGroups(word, issues = null) {
     observe('lookup', {word});
     const candidates = [...new Set([String(word).normalize("NFC").trim(), String(word).normalize("NFC").trim().toLowerCase()])];
+    // Both spellings at once (Der / der, Zum / zum: the capital one mostly has no record). For a word of the sentence the
+    // warm-up has requested both already, so the extra part costs nothing there; measured: requests −0.1 %, one wait less.
+    const records = startAll(candidates, candidate => record(candidate));
     for (const candidate of candidates) {
-      const data = await record(candidate);
+      const data = await records.get(candidate);
       if (!data) continue;
       const direct = groupsFor(candidate,data);
       // The export also contains auxiliary relations and malformed form mappings.
@@ -534,6 +626,8 @@
         const target = merged.get(key);
         target.meanings = [...new Set([...target.meanings,...group.meanings])];
         if (group.labels) target.labels = {...(target.labels || {}),...group.labels};
+        if (group.reflexive) target.reflexive = {...(target.reflexive || {}),...group.reflexive};
+        if (group.noun && !target.noun) target.noun = group.noun;
       }
       if (merged.size || notes.length) return [...merged.values(),...notes];
       if (meanings(data).length) return [{word:candidate,pos:"",meanings:meanings(data),unresolved:true}];
@@ -620,11 +714,27 @@
   const auxiliarySets = new Map();
   async function perfectAuxiliaries(lemma) {
     const key = String(lemma).normalize("NFC").toLowerCase(), result = [];
+    // Speed (26.10.2026): both records are requested at once (one network wait, not two); checked in the old order.
     for (const auxiliary of ["haben","sein"]) {
-      if (!auxiliarySets.has(auxiliary)) auxiliarySets.set(auxiliary,record(auxiliary).then(data => new Set((data?.inflections || [])
-        .filter(row => String(row[2] || "").split(",").includes("auxiliary") && row[0] === auxiliary)
-        .map(row => String(row[1]).normalize("NFC").toLowerCase()))).catch(error => {auxiliarySets.delete(auxiliary);throw error;}));
-      if ((await auxiliarySets.get(auxiliary)).has(key)) result.push(auxiliary);
+      if (!auxiliarySets.has(auxiliary)) {
+        const pending = record(auxiliary).then(data => new Set((data?.inflections || [])
+          .filter(row => String(row[2] || "").split(",").includes("auxiliary") && row[0] === auxiliary)
+          .map(row => String(row[1]).normalize("NFC").toLowerCase()))).catch(error => {auxiliarySets.delete(auxiliary);throw error;});
+        pending.catch(() => {});   // a failure is reported by the await below, never as an unhandled rejection
+        auxiliarySets.set(auxiliary,pending);
+      }
+    }
+    for (const auxiliary of ["haben","sein"]) if ((await auxiliarySets.get(auxiliary)).has(key)) result.push(auxiliary);
+    // #29 (05.11): a verb of the separable index without auxiliary rows of its own (abformen, einsingen — Russian-only) takes those
+    // of its simple verb (formen, singen): hat … abgeformt.
+    if (!result.length) {
+      try {
+        const row = (await separableEntries()).find(r => r[0] === key);
+        if (row && key.startsWith(row[1]) && key.length > row[1].length) {
+          const base = key.slice(row[1].length);
+          for (const auxiliary of ["haben","sein"]) if ((await auxiliarySets.get(auxiliary)).has(base)) result.push(auxiliary);
+        }
+      } catch (_) { /* no index: no auxiliary, as before */ }
     }
     return result;
   }
@@ -687,6 +797,16 @@
   // G68 (24.10.2026): any record of the spelling, also one with only a variant note (beileibe = bei Leibe) — a whole word
   // known to the dictionary is never explained by its parts.
   async function hasRecord(word) { try { return !!(await record(String(word || "").normalize("NFC").toLowerCase())); } catch (_) { return false; } }
+  // #21 (05.11): a record that only says «diminutive of X» (täschchen — tasche, geisslein — geiss) shows no meaning of its own;
+  // the base it names, for the diminutive card of the resolver (word formation).
+  async function diminutiveBase(word) {
+    try {
+      const data = await record(String(word || "").normalize("NFC").toLowerCase());
+      const rows = (data?.inflections || []).filter(row => String(row[2] || "").split(",").includes("diminutive"));
+      const bases = [...new Set(rows.map(row => row[1]))];
+      return bases.length === 1 ? bases[0] : null;
+    } catch (_) { return null; }
+  }
   async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
-  window.DeutschFallbackDictionary = {wordParts,hasRecord,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  window.DeutschFallbackDictionary = {wordParts,hasRecord,diminutiveBase,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

@@ -14,3 +14,7 @@ Adapted dictionary data is distributed under CC BY-SA 4.0. Each record retains i
 Labels (converter 2.0.0, 2026-10-22): abbreviations at the start of Russian glosses (разг., устар., хим. …) recognised and stored as codes next to the sense; source texts unchanged.
 
 name_like (converter 2.1.0, 2026-10-22): senses of nouns that are proper names (places, persons …) marked from Russian Wiktionary categories; source texts unchanged.
+
+Reflexive marks (converter 2.2.0, 2026-10-27): verb senses whose Russian gloss starts with «sich ~», «(sich)» … marked; texts unchanged.
+
+Reading of doublets (converter 2.3.0, 2026-10-31): sense.reading for separable / inseparable doublet verbs where the Russian Wiktionary forms show it; texts unchanged.

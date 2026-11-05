@@ -137,7 +137,7 @@
           label.append(
             check,
             document.createTextNode(
-              `${item?.article ? item.article + " " : ""}${record.lemma || record.occurrences[0].form}`
+              `${item?.article ? item.article + " " : /^(?:der|die|das)$/u.test(record.article || "") ? record.article + " " : ""}${record.lemma || record.occurrences[0].form}`
             )
           );
           check.addEventListener("change", () => {

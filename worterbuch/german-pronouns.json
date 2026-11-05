@@ -1965,7 +1965,7 @@
   {
     "id": "pronoun-037",
     "word": "der",
-    "translation_ru": "тот; та; то",
+    "translation_ru": "тот; та; то; те",
     "translation_en": "that one; those",
     "example_de": "Welchen Mantel meinst du? — Den dort.",
     "example_ru": "Какое пальто ты имеешь в виду? — То, вон там.",
@@ -2007,8 +2007,28 @@
         }
       }
     ],
-    "usage_note_ru": "Указательное местоимение der/die/das заменяет существительное и обычно выделяется ударением. Это не артикль. Dativ Plural: denen.",
-    "usage_note_en": "The demonstrative der/die/das replaces a noun and is usually stressed. It is not an article. Dative plural: denen.",
+    "usage_note_ru": "Указательное местоимение der/die/das заменяет существительное и обычно выделяется ударением. Это не артикль. Dativ Plural: denen. Без существительного das — «это; то»: Das weiß ich. — Это я знаю. О названном раньше — «он, она, оно; они»: Die sind einfach anders erzogen. — Они просто иначе воспитаны. В сказках и разговорной речи вместо er / sie / es (глагол — на втором месте, не в конце): Es war einmal ein König, der hatte drei Töchter. — Жил-был король, у него было три дочери.",
+    "usage_note_en": "The demonstrative der/die/das replaces a noun and is usually stressed. It is not an article. Dative plural: denen. Without a noun, das means “this; that”: Das weiß ich. — I know that. Referring back — “he, she, it; they”: Die sind einfach anders erzogen. — They have simply been brought up differently. In fairy tales and colloquial speech instead of er / sie / es (the verb comes second, not at the end): Es war einmal ein König, der hatte drei Töchter. — Once upon a time there was a king; he had three daughters.",
+    "form_translations": [
+      {
+        "form": "das",
+        "ru": "это; то; (о названном раньше) он, она, оно",
+        "en": "this; that; (referring back) it",
+        "without_noun": true
+      },
+      {
+        "form": "der",
+        "ru": "тот; (о названном раньше) он",
+        "en": "that; (referring back) he",
+        "without_noun": true
+      },
+      {
+        "form": "die",
+        "ru": "та; те; (о названном раньше) она, они",
+        "en": "that; those; (referring back) she / they",
+        "without_noun": true
+      }
+    ],
     "search_forms": [
       "der",
       "die",

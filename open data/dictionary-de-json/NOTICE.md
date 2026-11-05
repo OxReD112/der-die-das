@@ -15,3 +15,7 @@ https://github.com/heuwels/lector/releases/tag/dict-de-2026-06-25
 
 Enrichment (converter 2.0.0, 2026-10-22): noun gender, noun declension and sense usage labels added from the Kaikki.org extraction of English Wiktionary (kaikki.org German, export 2026-10-03 (enwiktionary dump 2026-09-02)), with Russian Wiktionary (Kaikki.org) as a fallback source of gender. Same licence (CC BY-SA 4.0).
 https://ru.wiktionary.org/
+
+Reflexive marks (converter 2.1.0, 2026-10-27): senses.reflexive from English Wiktionary sense tags (Kaikki.org).
+
+Kaikki fields (converter 2.2.0, 2026-10-31): entries.aux, senses.transitivity, senses.reading, senses.topics from English Wiktionary (Kaikki.org).

@@ -81,6 +81,8 @@
           source:input.dictionaryId != null ? "main" : input.source === "fallback" && norm(input.lemma) ? "fallback" : "unresolved",
           pos:norm(input.pos), translation:{ en:norm(input.translation?.en), ru:norm(input.translation?.ru) },
           ...(nominalUsage(input.usage) ? {usage:nominalUsage(input.usage)} : {}),
+          // a compound by parts (no dictionary entry): the article of its last part, as in the popup (advisor 03.11)
+          ...(input.dictionaryId == null && input.formation?.kind === "compound" && /^(?:der|die|das)$/u.test(input.formation.gender || "") ? {article:input.formation.gender} : {}),
           createdAt:now, occurrences:[]
         };
         const existing = record.occurrences.findIndex(o => o.chapterIndex === encountered.chapterIndex && o.paragraphIndex === encountered.paragraphIndex && o.tokenOffset === encountered.tokenOffset);

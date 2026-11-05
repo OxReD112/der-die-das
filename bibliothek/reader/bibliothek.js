@@ -1,6 +1,11 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
+  // 26.10.2026: data cache of the reader — versioned dictionary files are kept on disk and not asked from the server
+  // again (dictionary-cache-sw.js; Documentation/BIBLIOTHEK_DICTIONARY_CACHE_PLAN_RU.md). A failure changes nothing.
+  // Switch-off (with the KILL variant of the worker): replace the next line with
+  // try { navigator.serviceWorker?.getRegistrations().then(rs => rs.forEach(r => r.scope.endsWith("/bibliothek/") && r.unregister())); } catch (_) {}
+  try { if ("serviceWorker" in navigator && window.isSecureContext) navigator.serviceWorker.register("dictionary-cache-sw.js", {scope:"./"}).catch(() => {}); } catch (_) {}
   // G45 (2), reference 2.A (user 22.10): a dictionary label is a small grey italic word before its meaning;
   // in the card a tap shows the full word («разговорное»).
   function appendLabelSegments(container, segments, prefix = "", interactive = true) {
@@ -677,7 +682,7 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-verbs.json" ? "20261023-wn-recht-1" : path === "german-nouns.json" ? "20261020-nouns-list3-15" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261023-wn-partadj-1" : path === "german-adverbs.json" ? "20261023-wn-recht-1" : path === "german-expressions.json" ? "20261024-expr-009-e8" : path === "german-pronouns.json" ? "20261024-g65-2" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261020-pron-conj-1" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-function-words.json" ? "20261104-wn-nouns43-1" : path === "german-verbs.json" ? "20261104-wn-nouns43-1" : path === "german-nouns.json" ? "20261104-wn-nouns43-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261101-wn-passivenone31-1" : path === "german-adverbs.json" ? "20261104-wn-nein35-1" : path === "german-expressions.json" ? "20261105-wn-expr44-1" : path === "german-pronouns.json" ? "20261028-wn-pron037-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261031-wn-doch24-4" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
@@ -869,7 +874,8 @@
     const pronounCandidates=[...resolution.candidates,...lemmaResolver.match(word)].filter(reference.isPronoun).filter((candidate,index,all)=>all.findIndex(other=>other.dictionaryId===candidate.dictionaryId)===index);
     // G65 (24.10.2026): a pronoun record whose recorded construction was found (was für ein) shows that construction (or the choice
     // between it and the word's own reading, split_choice), not the summary.
-    let showPronounSummary=pronounCandidates.length>0 && !resolution.candidates.some(c=>c.construction?.id === "recorded-construction") && (reference.isPronoun(resolution.selected) ||
+    // (L15 step 4, reference F12-B5j: uns of lass uns — the card of wir «нас» in the lassen group, not the summary)
+    let showPronounSummary=pronounCandidates.length>0 && !resolution.candidates.some(c=>["recorded-construction","lassen-infinitive"].includes(c.construction?.id)) && (reference.isPronoun(resolution.selected) ||
       !resolution.selected && !resolution.candidates.some(c=>c.pos==='article'));
     // G34 (21.10.2026): what the resolver itself chose — pronounCandidates[0] below is only a heading fallback.
     const resolverChosePronoun = reference.isPronoun(resolution.selected);
@@ -918,11 +924,15 @@
         // the fallback heading card is not a choice (it narrowed every ihre Sprüche to «её»).
         const possessiveRow = resolution.evidence === "possessive-before-noun";
         const possessives = pronounCandidates.filter(c => display.partOfSpeech(c) === "Possessivpronomen");
-        const shown = (userConfirmed || possessiveRow && resolverChosePronoun && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] :
+        // G50 step 2 (28.10.2026, reference F12-G13a / b, U-H22): der / die / das whose role the resolver established (B15, G50 —
+        // the demonstrative «тот», das «это» via its form translation, or the relative «который») is that card alone, not the summary.
+        const roleChosen = resolverChosePronoun && resolution.decision?.rule === "der-pronoun-role" && ["pronoun-037","pronoun-038"].includes(resolution.selected?.dictionaryId);
+        const shown = (userConfirmed || roleChosen || possessiveRow && resolverChosePronoun && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] :
           possessiveRow && possessives.length ? possessives : pronounCandidates;
         const types = [...new Set(shown.map(c => display.partOfSpeech(c)))];
         const use = pronounLink ? "Reflexiv" : "";
-        const values = reference.brief(possessiveRow ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
+        const values = roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
+          reference.brief(possessiveRow ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
         model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
           text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
           // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
@@ -1192,6 +1202,8 @@
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
       (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
+    // G70 step 2: the `reflexive` field of a verb card — «sich X — …» under the translation, as in the Wörterbuch.
+    if (item.reflexive) addInfo("p","dictionary-translation",`sich ${item.infinitive || item.word} — ${locale() === "ru" ? item.reflexive.translation_ru || item.reflexive.translation_en : item.reflexive.translation_en || item.reflexive.translation_ru}`);
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
     addInfo("p","dictionary-detail",locale() === "ru" ? item.plural_note_ru : item.plural_note_en);
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
@@ -1292,7 +1304,7 @@
     }
     // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
     if (item.type === "Ausdruck") return;
-    const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Add to Wortschatz";
+    const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Zum Wortschatz"; // German, as in Wörterbuch (user 27.10.2026)
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
   function addToWortschatz(item) {
@@ -1302,7 +1314,7 @@
     form.addDictionaryWord({
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
       version:2, dictionaryId:item.id, lang:locale()
-    }, () => showToast("Added to Wortschatz."));
+    }, () => showToast("Zum Wortschatz hinzugefügt.")); // German, as the button (user 27.10.2026)
   }
 
   let selectedWord = "", selectedContext = null, popupAmbiguous = false, bookmarkBusy = false;
@@ -1402,7 +1414,10 @@
     let tokenOffset = Number(span.dataset.tokenOffset);
     if (typeof Intl.Segmenter === "function") {
       const offset = Number(span.dataset.tokenOffset);
-      const segments=[...new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)];
+      // L40 / P8 (26.10.2026): a cut after an abbreviation (von Dr. | med., z. | B.) is no sentence end — join the next segment.
+      const segments=[];
+      for(const part of new Intl.Segmenter("de", {granularity:"sentence"}).segment(sentence)){const last=segments[segments.length-1];
+        if(last&&window.BibliothekLemmaResolver.abbreviationEnd(last.segment,part.segment))last.segment+=part.segment;else segments.push({index:part.index,segment:part.segment});}
       for (const [index,part] of segments.entries()) {
         if (part.index <= offset && offset < part.index + part.segment.length) {
           let text=part.segment;
