@@ -2930,7 +2930,7 @@ html.home-wide-layout body {
    moves them onto the capsule's line). While reading and in any window the capsule goes away and the round Home
    button is there as before (html.place-hidden). */
 .home-places {
-  --place-w: 56px;
+  --place-w: 46px; /* 05.11: a little narrower (icons the same), so „Wörterbuch“ fits in the middle of an iPhone 13 */
   position: fixed;
   left: max(24px, calc((100% - var(--dashboard-width)) / 2)); /* the left edge of the tiles */
   bottom: calc(env(safe-area-inset-bottom) + 16px);
@@ -3004,19 +3004,19 @@ html:not(.home-wide-layout) .home-actions {
   min-height: 56px;
   margin: 0 auto;
 }
-/* „Wörterbuch“ in the middle of the room between the capsule and the pencil (Alena 05.11): the word's box spans
-   from the capsule's right edge (capsule: 124 wide, at the tiles' left edge) to the pencil icon's left edge */
+/* „Wörterbuch“ exactly in the middle of the screen (Alena 05.11); the pencil stands to its right as far from it as
+   the capsule to its left — home.js (placeDockTools) measures and places it */
 html:not(.home-wide-layout) .settings-launcher {
   position: absolute;
-  left: calc(max(24px, (100vw - var(--dashboard-width)) / 2) - (100vw - min(100vw - 48px, 720px)) / 2 + 124px);
-  right: calc(max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px)) + 76.5px);
+  left: 50%;
+  right: auto;
   top: 50%;
-  transform: translateY(-50%);
-  padding: 13px 0;
+  transform: translate(-50%, -50%);
+  padding: 13px 12px;
   text-align: center;
 }
 html:not(.home-wide-layout) .settings-launcher:active {
-  transform: translateY(-50%) scale(0.97);
+  transform: translate(-50%, -50%) scale(0.97);
 }
 html:not(.home-wide-layout) .notebook-icon-button {
   left: auto;

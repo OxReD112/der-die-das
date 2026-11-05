@@ -574,6 +574,31 @@ const shell = document.getElementById("appShell");
 const frame = document.getElementById("appFrame");
 const back = document.getElementById("homeBack");
 
+// 05.11 (Alena): „Wörterbuch“ sits in the middle of the screen; the pencil goes to its right as far from the word as
+// the capsule is to its left (the gear stays at the right edge). Not on the wide Home (its own layout).
+function placeDockTools() {
+  const pen = document.getElementById("notebookOpen");
+  const word = document.getElementById("dictionaryOpen");
+  const places = document.getElementById("homePlaces");
+  if (!pen || !word || !places) return;
+  if (document.documentElement.classList.contains("home-wide-layout")) {
+    pen.style.left = "";
+    return;
+  }
+  const box = pen.parentElement.getBoundingClientRect();
+  const range = document.createRange();
+  range.selectNodeContents(word);
+  const text = range.getBoundingClientRect();
+  if (!text.width || !box.width) return;
+  const gap = text.left - places.getBoundingClientRect().right;
+  const icon = pen.querySelector("svg").getBoundingClientRect().width || 21;
+  pen.style.right = "auto";
+  pen.style.left = Math.round(text.right + gap - (44 - icon) / 2 - box.left) + "px";
+}
+addEventListener("resize", placeDockTools);
+addEventListener("load", placeDockTools);
+document.fonts?.ready.then(placeDockTools);
+requestAnimationFrame(placeDockTools);
 document.getElementById("placeHome")?.addEventListener("click", () => {
   if (shell.classList.contains("open")) closeApp();
 });
