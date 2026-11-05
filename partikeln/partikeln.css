@@ -136,25 +136,28 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .size:active { transform: scale(0.97); filter: brightness(0.94); }
 
 #pGame { padding-top: calc(env(safe-area-inset-top) + 23px); }
-.counter { color: var(--muted); font-size: 14px; }
+.counter { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
 .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 99px; overflow: hidden; z-index: 1; }
-.progress i { display: block; height: 100%; background: var(--muted); width: 0; transition: width 0.3s ease; }
+.progress i { display: block; height: 100%; background: var(--muted); width: 0; border-radius: 99px; transition: width 0.25s ease; }
 #pGame .prompt { margin-top: 40px; }
-.task-label { margin-top: 26px; font-size: 13px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; color: var(--text); }
+.task-label { margin-top: 26px; font-size: 12px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; color: var(--text); }
 .task-label small { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
 
 /* answer buttons: like der / die / das — quiet buttons, 2 × 2 */
 .answers { margin: 30px auto 0; width: min(100%, 360px); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .ans {
-  height: 56px; border: 0; border-radius: 14px; background: var(--card-bg); color: var(--text); font: 600 18px/1 var(--font);
+  height: 56px; border: 0; border-radius: 14px; background: var(--card-bg); color: var(--text); font: 650 20px/1 var(--font); /* two in a row: 20, as the cases in Verben mit Präp. */
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05); cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease, background-color 0.15s, color 0.15s;
 }
 .ans:active { transform: scale(0.97); filter: brightness(0.94); }
 .ans:disabled { cursor: default; }
-.ans.right { background: color-mix(in srgb, var(--mint) 18%, var(--card-bg)); color: var(--mint); box-shadow: inset 0 0 0 1.5px var(--mint); }
-.ans.wrong { background: color-mix(in srgb, var(--red) 16%, var(--card-bg)); color: var(--red); box-shadow: inset 0 0 0 1.5px var(--red); }
-.ans.faded { opacity: 0.45; }
-#pSentence .slot.ok { color: var(--mint); border-bottom-color: var(--mint); }
+/* after the answer (as Ortspräpositionen): the result is in the sentence — right word mint, a wrong pick struck through
+   before the right one; the buttons only go pale, no coloured boxes */
+.ans:disabled { opacity: 0.4; transform: none; filter: none; }
+#pSentence .slot.ok, #pSentence .slot.fixed { border-bottom-color: transparent; min-width: 0; }
+#pSentence .slot.ok { color: var(--mint); }
+#pSentence .slot .wrong { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--red); opacity: 0.82; margin-right: 0.3em; }
+#pSentence .slot .right { color: var(--text); }
 
 /* feedback (as Pronomen: line + glow in the state colour) */
 .feedback { --state: var(--mint); position: relative; margin: 34px 0 0; padding: 24px 0 0; text-align: center; border-top: 1px solid var(--feedback-line); isolation: isolate; }
@@ -176,18 +179,25 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .fb-scale .track { cursor: default; }
 .mine { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--red); background: var(--bg); transform: translate(-50%, -50%); pointer-events: none; }
 .fb-note { margin-top: 16px; min-height: 0; }
+/* Weiter = the quiet button of every exercise (variant E, 05.11): no outline, the tiles' fill, the keys' small shadow */
 .continue {
-  width: min(600px, 100%); height: 56px; margin-top: 22px; padding: 0; border: 1px solid var(--hairline); border-radius: 18px;
-  background: var(--field-bg); color: var(--text); font: 650 16px/1 var(--font); cursor: pointer;
+  width: min(600px, 100%); height: 56px; margin-top: 22px; padding: 0; border: 0; border-radius: 18px;
+  background: var(--card-bg); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  color: var(--text); font: 650 16px/1 var(--font); cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease;
 }
+.continue:active, .done-actions button:active { transform: scale(0.97); filter: brightness(0.94); }
 
-/* done */
-.brand-done { margin-bottom: 45px; }
-.done-score { font-size: 58px; font-weight: 700; letter-spacing: -0.05em; margin: 18px 0 6px; }
-.done-note { color: var(--muted); margin-bottom: 8px; }
-.done-actions { width: min(100%, 360px); margin: 28px auto 0; display: flex; flex-direction: column; gap: 10px; }
-.done-actions button { width: 100%; height: 56px; border: 0; border-radius: 18px; font: 650 16px/1 var(--font); cursor: pointer; }
-#pAgain { background: var(--field-bg); color: var(--text); border: 1px solid var(--hairline); }
+/* done = the one end screen of every exercise (as Pronomen): „Fertig.“ 34, score 28, kind phrase 16 — the block in the
+   middle of the screen (the faint title on top is not counted); 10 between them, 30 before the list and the buttons */
+#pDone:not(.hidden) { display: flex; flex-direction: column; min-height: 100%; }
+#pDone::after { content: ""; flex: 0 1 calc(1.2 * clamp(56px, 12vw, 94px)); }
+#pDone .brand-done { margin-bottom: 0; }
+#pDone h1 { margin: auto 0 0; font-size: 34px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+.done-score { margin: 10px 0 0; font-size: 28px; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.done-note { margin: 10px 0 0; font-size: 16px; line-height: 1.4; color: var(--muted); }
+.done-actions { width: min(100%, 360px); margin: 30px auto auto; display: flex; flex-direction: column; gap: 10px; }
+.done-actions button { width: 100%; height: 56px; border: 0; border-radius: 18px; font: 650 16px/1 var(--font); cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease; }
+#pAgain { background: var(--card-bg); color: var(--text); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05); }
 #homeBack { background: var(--end-main-bg); color: var(--end-main-text); }
 body:has(#pGame:not(.hidden)) .version-mark { display: none; }
 
@@ -201,7 +211,7 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
   font: 400 13px/1.2 var(--font); padding: 10px 13px; cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease;
 }
 .table-btn:active { transform: scale(0.97); filter: brightness(0.94); }
-.mode-switch { font-size: 12.5px; padding: 7px 12px; }
+.mode-switch { font-size: 12px; padding: 7px 12px; } /* 05.11: on the type scale (was 12.5) */
 
 /* Üben start: the level switch sits low, where „Worum geht's?“ sits on other start screens (Alena 05.11):
    chosen once, remembered, so it stays out of the way of 10 / 20 / 30. 80 px = above Home's round button row. */

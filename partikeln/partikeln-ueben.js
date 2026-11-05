@@ -105,7 +105,8 @@
   }
   function sentenceHtml(s, k, cls) {
     var parts = s.sentence.split("___");
-    return esc(parts[0]) + '<span class="slot ' + (k ? cls : "empty") + '">' + (k ? esc(k) : "&nbsp;") + "</span>" + esc(parts[1]);
+    var inner = !k ? "&nbsp;" : cls === "fixed" ? '<span class="wrong">' + esc(k[0]) + '</span><span class="right">' + esc(k[1]) + "</span>" : esc(k);
+    return esc(parts[0]) + '<span class="slot ' + (k ? cls : "empty") + '">' + inner + "</span>" + esc(parts[1]);
   }
   function ask() {
     var q = R.list[R.i], t = q.t;
@@ -127,13 +128,10 @@
     var q = R.list[R.i], t = q.t, P = t.s.particles, good = t.accept.indexOf(k) >= 0;
     if (good) R.right++; else R.missed.push(t.answer);
     var shown = good ? k : t.answer;
-    Array.prototype.forEach.call($("pAnswers").children, function (b) {
-      b.disabled = true;
-      if (b.dataset.k === shown) b.classList.add("right");
-      else if (b.dataset.k === k) b.classList.add("wrong");
-      else b.classList.add("faded");
-    });
-    $("pSentence").innerHTML = sentenceHtml(t.s, shown, "ok");
+    Array.prototype.forEach.call($("pAnswers").children, function (b) { b.disabled = true; });
+    /* the result is in the sentence (as Ortspräpositionen): right → mint; wrong → yours struck through, then the right one */
+    $("pSentence").innerHTML = good ? sentenceHtml(t.s, k, "ok") : sentenceHtml(t.s, [k, t.answer], "fixed");
+    $("pBar").style.width = ((R.i + 1) / R.n * 100) + "%"; /* the bar grows at the answer, as in every exercise */
     var c = P[shown], L = lang();
     var fb = $("pFeedback"); fb.classList.remove("hidden"); fb.classList.toggle("wrong", !good);
     $("pVerdict").textContent = good ? "Richtig" : "Nicht ganz";
