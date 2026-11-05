@@ -375,10 +375,8 @@ function submitPrep() {
    extra room above them moves nothing. Short screens (≤ 559 px) flow as before. */
 function pinToKeyboard(el, holder) {
   holder.style.marginTop = "";
-  const kb = $("keyboard");
-  if (!IS_TOUCH || SHORT_SCREEN.matches || !kb || el.offsetParent === null) return;
-  const down = kb.getBoundingClientRect().bottom - el.getBoundingClientRect().bottom;
-  if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+  if (!IS_TOUCH || SHORT_SCREEN.matches || el.offsetParent === null) return;
+  DeutschBottom.pin(el, holder); // the shared bottom line (components/deutsch-bottom-v1.js) = the keyboard's bottom
 }
 function pinAnswerButtons() {
   if (phase === "case") pinToKeyboard($("choices"), $("caseStep"));

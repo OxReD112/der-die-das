@@ -329,15 +329,13 @@ function fitResult() {
   next.style.marginTop = "";
   if (!checked || !kb || !kb.classList.contains("is-touch") || SHORT_SCREEN.matches) return;
   if (TABLET.matches && tabletCardTop) document.querySelector("#study .card").style.marginTop = tabletCardTop;
-  const pill = $("roundTableBtn").getBoundingClientRect();
-  if (!pill.height) return;
   const zoom = parseFloat(document.querySelector("#study .card").style.zoom) || 1;
-  // the panel is as tall as its content, but never taller than the room down to Weiter's place
-  const room = pill.top - 16 - next.getBoundingClientRect().bottom;
+  // the panel is as tall as its content, but never taller than the room down to Weiter's place (the shared bottom
+  // line, components/deutsch-bottom-v1.js — where the keyboard ended)
+  const room = DeutschBottom.line() - next.getBoundingClientRect().bottom;
   result.style.maxHeight = Math.max(120, (result.getBoundingClientRect().height + room) / zoom) + "px";
-  // Weiter keeps its place 16px above the Spickzettel, however short the panel is
-  const rest = pill.top - 16 - next.getBoundingClientRect().bottom;
-  if (rest > 0) next.style.marginTop = parseFloat(getComputedStyle(next).marginTop) + rest / zoom + "px";
+  // Weiter keeps its place on that line, however short the panel is
+  DeutschBottom.pin(next, next, { zoom: zoom, scroller: null });
 }
 window.addEventListener("resize", fitResult);
 

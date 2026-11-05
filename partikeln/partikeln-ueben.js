@@ -122,20 +122,16 @@
     document.querySelector(".app").scrollTop = 0;
     placeBottom();
   }
-  /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end at the same
-     height, 70 px above the bottom edge (where the keyboard ends in the typing exercises; clear of the round Home
-     button). Only free room is used: never makes the page scroll. Tablets: as before (their round comes later). */
+  /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end on the shared
+     bottom line (components/deutsch-bottom-v1.js: where the keyboard ends in the typing exercises). Only free room is
+     used: never makes the page scroll. Tablets: as before (their round comes later). */
   var TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
-  var floor = document.createElement("div");
-  floor.style.cssText = "position:fixed;left:0;width:0;height:0;bottom:calc(env(safe-area-inset-bottom) + 70px);pointer-events:none";
-  document.body.appendChild(floor);
   function placeBottom() {
     var done = !$("pFeedback").classList.contains("hidden");
-    var btn = done ? $("pContinue") : $("pAnswers"), holder = done ? $("pContinue") : $("pAnswers");
-    holder.style.marginTop = "";
+    var el = done ? $("pContinue") : $("pAnswers");
+    el.style.marginTop = "";
     if (TABLET.matches || $("pGame").classList.contains("hidden")) return;
-    var down = floor.getBoundingClientRect().top - btn.getBoundingClientRect().bottom;
-    if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+    window.DeutschBottom.pin(el);
   }
   window.addEventListener("resize", function () { requestAnimationFrame(placeBottom); });
   $("pAnswers").addEventListener("click", function (e) {

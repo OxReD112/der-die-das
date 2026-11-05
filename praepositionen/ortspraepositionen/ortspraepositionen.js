@@ -296,13 +296,10 @@ const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
    scroll (only room that is free is used). */
 function placeBottom() {
   els.choices.style.marginTop = els.ruleNote.style.marginTop = els.next.style.marginTop = "";
-  const pill = els.roundTableBtn.getBoundingClientRect();
-  if (!pill.height) return;
-  const target = pill.top - 16,
-    btn = cardDone ? els.next : els.choices,
+  if (!els.roundTableBtn.getBoundingClientRect().height) return; // short screens: the Spickzettel follows the content
+  const btn = cardDone ? els.next : els.choices,
     holder = cardDone ? (els.ruleNote.textContent.trim() ? els.ruleNote : els.next) : els.choices;
-  const down = target - btn.getBoundingClientRect().bottom;
-  if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+  DeutschBottom.pin(btn, holder); // the shared bottom line (components/deutsch-bottom-v1.js)
 }
 window.addEventListener("resize", () => requestAnimationFrame(placeBottom));
 

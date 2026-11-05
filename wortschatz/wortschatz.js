@@ -69,18 +69,13 @@ function placeTabletAnswer() {
   shell.style.marginTop = "";
   c.style.marginTop = "";
   if (!$("keyboard")?.classList.contains("is-touch") || !$("feedback").classList.contains("show")) return;
-  let target;
   if (TABLET.matches) {
     if (tabletTop == null) return;
     const shift = tabletTop - $("answerTop").getBoundingClientRect().top;
     if (shift > 0) shell.style.marginTop = shift + "px";
-    target = innerHeight - 72;
-  } else {
-    if (keyboardBottom == null) return;
-    target = Math.min(keyboardBottom, innerHeight);
-  }
-  const rest = target - c.getBoundingClientRect().bottom;
-  if (rest > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + rest + "px";
+  } else if (keyboardBottom == null) return;
+  // the shared bottom line (components/deutsch-bottom-v1.js) = where the keyboard ended, on phones and tablets
+  DeutschBottom.pin(c, c, { scroller: null });
 }
 addEventListener("resize", fitTopZone);
 addEventListener("resize", rememberTabletTop);

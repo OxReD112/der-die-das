@@ -324,14 +324,7 @@ function tabletAnswer() {
   // the question's place is held on tablets only. Short screens scroll as before.
   if (!$("keyboard")?.classList.contains("is-touch") || SHORT_SCREEN.matches) return;
   if (TABLET.matches && tabletPromptTop) document.querySelector("#game .prompt").style.marginTop = tabletPromptTop;
-  const c = $("continue"),
-    pill = $("roundTableBtn").getBoundingClientRect();
-  c.style.marginTop = "";
-  const rest = pill.top - 16 - c.getBoundingClientRect().bottom;
-  if (pill.height && rest > 0) c.style.marginTop = parseFloat(getComputedStyle(c).marginTop) + rest + "px";
-  const app = document.querySelector(".app"),
-    over = app.scrollHeight - app.clientHeight; // never make the page scroll for it
-  if (over > 0 && c.style.marginTop) c.style.marginTop = Math.max(0, parseFloat(c.style.marginTop) - over) + "px";
+  DeutschBottom.pin($("continue")); // the shared bottom line (components/deutsch-bottom-v1.js), never makes the page scroll
 }
 function next() {
   i++;
