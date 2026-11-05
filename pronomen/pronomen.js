@@ -470,7 +470,7 @@ window.addEventListener("resize", () => {
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=7");
+  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=8");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const text = await r.text();
   const tpl = document.createElement("template");

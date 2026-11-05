@@ -400,7 +400,7 @@ document.addEventListener("deutsch-keyboard-input", e => {
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=7");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=8");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const tpl = document.createElement("template");
   tpl.innerHTML = await r.text();
@@ -750,10 +750,8 @@ function openFormsTable(mode) {
 
 const tableIsOpen = () => DeutschWindow.isOpen($("formsModal"));
 
-$("formsModal").addEventListener("windowclose", () => {
-  // computer: back to typing without clicking into the field first
-  if (inRound() && !checked && !isTouchDevice) focusAnswer();
-});
+// (05.11: the old "windowclose → focus the answer field" is gone: the round Spickzettel only opens after Prüfen,
+// so it never ran; the window gives the focus back to the Spickzettel button itself, components/deutsch-window-v1.js)
 
 document
   .querySelectorAll("[data-forms-table]")

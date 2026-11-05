@@ -6,7 +6,9 @@
   --key-text:#eee;
   --key-active-bg:#3a3a3e;
   --special-text:#b8ddd2;
-  --mint:#43d2ad;
+  /* OK (✓): the app's own mint (components/deutsch-base-v1.css --mint, 05.11 Alena: one mint; was #43d2ad / #2f9e82);
+     the fallback is the same value for pages without the shared tokens (Wortschatz) */
+  --kb-mint:var(--mint,#5bc8a4);
   --ok-active-text:#fff;
   --popup-bg:#3a3a3e;
   --popup-text:#eee;
@@ -28,7 +30,7 @@
   --key-text:#2f2c29;
   --key-active-bg:#f1eee9;
   --special-text:#2f8f78;
-  --mint:#2f9e82;
+  --kb-mint:var(--mint,#3fa68a);
   --ok-active-text:#fff;
   --popup-bg:#fbf9f6;
   --popup-text:#2f2c29;
@@ -62,12 +64,12 @@
 .row.special{width:100%;justify-content:center;gap:3px}
 .row.special .key{color:var(--key-text)} /* 05.11 (Alena): ä ö ü in the letters' colour, not green */
 .row.special .space{flex:1 1 auto;width:auto;color:var(--key-text)}
-.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--mint);border-color:transparent;font-size:22px;font-weight:500}
+.row.special .ok{margin-left:0;flex:0 0 calc(2.5 * ((100% - 27px)/10) + 4.5px);width:calc(2.5 * ((100% - 27px)/10) + 4.5px);color:var(--kb-mint);border-color:transparent;font-size:22px;font-weight:500}
 
 /* ===== PRESS FEEDBACK (touch only) ===== */
 .keyboard.is-touch .key{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transform:scale(1);transform-origin:center;transition:transform .09s ease,background-color .09s ease,border-color .09s ease;will-change:transform}
 .keyboard.is-touch .key:active,.keyboard.is-touch .key.is-pressed{transform:scale(1.08);background:var(--key-active-bg);border-color:transparent;position:relative;z-index:3}
-.keyboard.is-touch .key.ok:active,.keyboard.is-touch .key.ok.is-pressed{border-color:var(--mint);background:var(--mint);color:var(--ok-active-text)}
+.keyboard.is-touch .key.ok:active,.keyboard.is-touch .key.ok.is-pressed{border-color:var(--kb-mint);background:var(--kb-mint);color:var(--ok-active-text)}
 /* Tablets (03.11.2026): the keyboard is as wide as the 600 column — keys taller and letters bigger, like the iPad's own */
 @media (min-width:700px) and (min-height:740px){.key{height:58px;font-size:24px;border-radius:12px}.row{margin-bottom:7px}.row.special .ok{font-size:26px}}
 </style>

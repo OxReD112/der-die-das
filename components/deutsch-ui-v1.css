@@ -115,9 +115,12 @@
   width: 10px;
   height: 10px;
   stroke: currentColor;
-  stroke-width: 1.8;
   stroke-linecap: round;
   fill: none;
+}
+.ui-close svg * {
+  stroke-width: 1.2px; /* one icon line at any size (05.11: was 1.8 here, the 1.2 rule of deutsch-base-v1.css won) */
+  vector-effect: non-scaling-stroke;
 }
 
 .ui-progress {
