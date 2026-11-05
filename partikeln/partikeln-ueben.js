@@ -108,6 +108,44 @@
     var inner = !k ? "&nbsp;" : cls === "fixed" ? '<span class="wrong">' + esc(k[0]) + '</span><span class="right">' + esc(k[1]) + "</span>" : esc(k);
     return esc(parts[0]) + '<span class="slot ' + (k ? cls : "empty") + '">' + inner + "</span>" + esc(parts[1]);
   }
+  /* the tone scale is part of the task (Alena 05.11): shown with the question, at the same place in the answer */
+  /* (variant A: under „What you want to say“ — the scale reads with the label; it moves only with the sentence's length) */
+  function paintScale(t, shownKey, yourKey) {
+    var P = t.s.particles, track = $("pTrack");
+    Array.prototype.slice.call(track.querySelectorAll(".ohne-mark")).forEach(function (e) { e.remove(); });
+    var om = document.createElement("div"); om.className = "ohne-mark"; om.style.left = t.s.base.t * 100 + "%"; track.insertBefore(om, $("pMine"));
+    $("pOhne").style.left = t.s.base.t * 100 + "%";
+    $("pThumb").style.left = P[shownKey].t * 100 + "%";
+    var mine = yourKey && P[yourKey];
+    if (mine && mine.status === "ok" && yourKey !== shownKey) { $("pMine").style.display = ""; $("pMine").style.left = mine.t * 100 + "%"; }
+    else $("pMine").style.display = "none";
+  }
+  /* The sentence keeps its height from question to answer, so the scale under it never moves within a task: R.hold is
+     the tallest way the answer can fill the gap (right → one word, wrong → struck-through + right); whatever the
+     sentence lacks of it goes ABOVE the sentence (padding-top), under the situation. */
+  function measureHold() {
+    var q = R && R.list[R.i], el = $("pSentence");
+    R.hold = 0;
+    if (!q || !el.offsetWidth) return;
+    var probe = el.cloneNode(false);
+    probe.removeAttribute("id");
+    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;padding:0;width:" + el.clientWidth + "px";
+    el.parentNode.appendChild(probe);
+    q.options.forEach(function (k) {
+      probe.innerHTML = q.t.accept.indexOf(k) >= 0 ? sentenceHtml(q.t.s, k, "ok") : sentenceHtml(q.t.s, [k, q.t.answer], "fixed");
+      R.hold = Math.max(R.hold, probe.offsetHeight);
+    });
+    probe.remove();
+  }
+  function holdSentence() {
+    var el = $("pSentence");
+    el.style.paddingTop = "";
+    if (R && R.hold) el.style.paddingTop = Math.max(0, R.hold - el.offsetHeight) + "px";
+  }
+  window.addEventListener("resize", function () {
+    if (!R || $("pGame").classList.contains("hidden")) return;
+    requestAnimationFrame(function () { $("pSentence").style.paddingTop = ""; measureHold(); holdSentence(); });
+  });
   function ask() {
     var q = R.list[R.i], t = q.t;
     $("pCounter").textContent = (R.i + 1) + " / " + R.n;
@@ -117,6 +155,8 @@
     var f = FUNCTIONS[t.fn];
     $("pLabel").innerHTML = "<small>" + (lang() === "ru" ? "Что ты хочешь сказать:" : "What you want to say:") + "</small>" + esc(f ? pick(f.label) : t.fn);
     $("pAnswers").innerHTML = q.options.map(function (k) { return '<button class="ans" type="button" data-k="' + k + '">' + esc(k) + "</button>"; }).join("");
+    $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+    $("pThumb").style.transition = "none"; paintScale(t, t.answer, null); $("pThumb").offsetWidth; $("pThumb").style.transition = "";
     $("pFeedback").classList.add("hidden");
     $("pAnswers").classList.remove("hidden");
     document.querySelector(".app").scrollTop = 0;
@@ -147,6 +187,7 @@
     $("pAnswers").classList.add("hidden"); /* the answer takes their room (Alena 05.11) */
     /* the result is in the sentence (as Ortspräpositionen): right → mint; wrong → yours struck through, then the right one */
     $("pSentence").innerHTML = good ? sentenceHtml(t.s, k, "ok") : sentenceHtml(t.s, [k, t.answer], "fixed");
+    holdSentence(); /* same height as in the question: the scale stays put */
     $("pBar").style.width = ((R.i + 1) / R.n * 100) + "%"; /* the bar grows at the answer, as in every exercise */
     var c = P[shown], L = lang();
     var fb = $("pFeedback"); fb.classList.remove("hidden"); fb.classList.toggle("wrong", !good);
@@ -157,15 +198,10 @@
     if (L === "ru" && c.hint) extra.push(c.hint);
     if (also.length) extra.push((L === "ru" ? "тоже подходит: " : "also right: ") + also.join(", "));
     $("pAlso").textContent = extra.join(" · ");
-    /* the scale: where the right answer sits, and (if wrong but it fits the sentence) where yours landed */
-    var track = $("pTrack");
-    Array.prototype.slice.call(track.querySelectorAll(".ohne-mark")).forEach(function (e) { e.remove(); });
-    var om = document.createElement("div"); om.className = "ohne-mark"; om.style.left = t.s.base.t * 100 + "%"; track.insertBefore(om, $("pMine"));
-    $("pOhne").style.left = t.s.base.t * 100 + "%";
-    $("pThumb").style.left = c.t * 100 + "%";
+    /* the scale (already shown with the task): where the right answer sits, and (if wrong but it fits the sentence)
+       where yours landed */
+    paintScale(t, shown, good ? null : k);
     var mine = P[k];
-    if (!good && mine && mine.status === "ok") { $("pMine").style.display = ""; $("pMine").style.left = mine.t * 100 + "%"; }
-    else $("pMine").style.display = "none";
     /* explanation: why the right one; if wrong, what yours would have meant */
     var note = pick(c.note);
     if (!good) {

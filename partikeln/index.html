@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=5" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="partikeln.css?v=8" />
+    <link rel="stylesheet" href="partikeln.css?v=9" />
   </head>
   <body>
     <main class="app">
@@ -98,18 +98,18 @@
         </div>
         <div class="prompt">
           <div class="context" id="pContext"></div>
-          <div class="sentence" id="pSentence"></div>
+          <div class="sentence p-sentence" id="pSentence"></div>
           <div class="task-label" id="pLabel"></div>
+          <div class="scale" id="pTone">
+            <div class="track" id="pTrack"><div class="mine" id="pMine"></div><div class="thumb" id="pThumb"></div></div>
+            <div class="scale-labels"><span>weich</span><span class="ohne" id="pOhne">ohne</span><span>scharf</span></div>
+          </div>
         </div>
         <div class="answers" id="pAnswers"></div>
         <div id="pFeedback" class="feedback hidden">
           <div class="fb-verdict" id="pVerdict"></div>
           <div class="translation on" id="pTranslation"></div>
           <div class="fb-also" id="pAlso"></div>
-          <div class="scale fb-scale">
-            <div class="track" id="pTrack"><div class="mine" id="pMine"></div><div class="thumb" id="pThumb"></div></div>
-            <div class="scale-labels"><span>weich</span><span class="ohne" id="pOhne">ohne</span><span>scharf</span></div>
-          </div>
           <p class="note fb-note" id="pNote"></p>
           <button class="continue ui-quiet" id="pContinue" type="button">Weiter</button>
         </div>
@@ -133,7 +133,7 @@
     <script src="../components/deutsch-end-v1.js?v=1"></script>
     <script src="partikeln.js?v=2"></script>
     <script src="../components/deutsch-bottom-v1.js?v=2"></script>
-    <script src="partikeln-ueben.js?v=6"></script>
+    <script src="partikeln-ueben.js?v=7"></script>
     <script src="../components/deutsch-wide-v1.js?v=4"></script>
   </body>
 </html>

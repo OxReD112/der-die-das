@@ -155,10 +155,10 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .ans:disabled { cursor: default; }
 /* after the answer (as Ortspräpositionen): the result is in the sentence — right word mint, a wrong pick struck through
    before the right one */
-#pSentence .slot.ok, #pSentence .slot.fixed { border-bottom-color: transparent; min-width: 0; }
-#pSentence .slot.ok { color: var(--mint); }
-#pSentence .slot .wrong { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--red); opacity: 0.82; margin-right: 0.3em; }
-#pSentence .slot .right { color: var(--text); }
+.p-sentence .slot.ok, .p-sentence .slot.fixed { border-bottom-color: transparent; min-width: 0; }
+.p-sentence .slot.ok { color: var(--mint); }
+.p-sentence .slot .wrong { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--red); opacity: 0.82; margin-right: 0.3em; }
+.p-sentence .slot .right { color: var(--text); }
 
 /* feedback (as Pronomen: line + glow in the state colour) */
 .feedback { --state: var(--mint); position: relative; margin: 34px 0 0; padding: 24px 0 0; text-align: center; border-top: 1px solid var(--feedback-line); isolation: isolate; }
@@ -176,8 +176,9 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .feedback .translation { margin-top: 10px; }
 .fb-also { margin-top: 6px; font-size: 14px; color: var(--muted); min-height: 0; }
 .fb-also:empty { display: none; }
-.fb-scale { margin: 18px auto 0; max-width: 520px; }
-.fb-scale .track { cursor: default; }
+/* 05.11 (Alena): the scale is part of the task — under „What you want to say“, the same place in question and answer */
+#pTone { margin: 16px auto 0; max-width: 520px; }
+#pTone .track { cursor: default; }
 .mine { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--red); background: var(--bg); transform: translate(-50%, -50%); pointer-events: none; }
 .fb-note { margin-top: 16px; min-height: 0; }
 /* Weiter = the quiet button of every exercise (variant E, 05.11): no outline, the tiles' fill, the keys' small shadow */
@@ -229,7 +230,7 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
   .task-label { margin-top: 14px; }
   .task-label small { margin-bottom: 3px; }
   .feedback { margin-top: 18px; padding-top: 14px; }
-  .fb-scale { margin-top: 12px; }
+  #pTone { margin-top: 12px; }
   .fb-note { margin-top: 10px; }
   .continue { margin-top: 14px; }
 }
