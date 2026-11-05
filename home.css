@@ -3004,13 +3004,16 @@ html:not(.home-wide-layout) .home-actions {
   min-height: 56px;
   margin: 0 auto;
 }
+/* „Wörterbuch“ in the middle of the room between the capsule and the pencil (Alena 05.11): the word's box spans
+   from the capsule's right edge (capsule: 124 wide, at the tiles' left edge) to the pencil icon's left edge */
 html:not(.home-wide-layout) .settings-launcher {
   position: absolute;
-  left: auto;
-  right: calc(max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px)) + 88px); /* just left of the pencil */
+  left: calc(max(24px, (100vw - var(--dashboard-width)) / 2) - (100vw - min(100vw - 48px, 720px)) / 2 + 124px);
+  right: calc(max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px)) + 76.5px);
   top: 50%;
   transform: translateY(-50%);
-  padding: 13px 12px;
+  padding: 13px 0;
+  text-align: center;
 }
 html:not(.home-wide-layout) .settings-launcher:active {
   transform: translateY(-50%) scale(0.97);
