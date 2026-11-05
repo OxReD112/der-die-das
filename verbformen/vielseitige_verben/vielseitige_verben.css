@@ -253,7 +253,7 @@ body:has(#study:not(.hidden)) .version-mark {
   pointer-events: none;
 }
 .progress {
-  background: var(--hairline);
+  /* the grey track: .ui-progress (components/deutsch-ui-v1.css, 05.11) */
   margin-bottom: 26px;
   position: sticky;
   top: calc(var(--shell-top) + 36px);
@@ -1025,11 +1025,7 @@ body:has(#study:not(.hidden)) .version-mark {
   line-height: 1.3;
 }
 
-#count {
-  font-size: 14px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
+/* #count: the look comes from .ui-counter (components/deutsch-ui-v1.css, 05.11) */
 
 /* ===== TABLETS (03.11.2026, as Modalverben) — iPad upright and sideways; computers take the sizes too =====
    One column of 600, the keyboard as wide as the column (bigger keys: components/deutsch-keyboard), the question

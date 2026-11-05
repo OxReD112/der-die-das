@@ -127,6 +127,7 @@
   height: 3px;
   border-radius: 99px;
   overflow: hidden;
+  background: var(--hairline); /* the grey track (05.11: was in each exercise — its own background or a line under the top bar) */
 }
 .ui-progress > i {
   display: block;

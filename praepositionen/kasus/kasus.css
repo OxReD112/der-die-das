@@ -245,8 +245,7 @@ body:has(#game:not(.hidden)) .version-mark {
   padding-bottom: 2px;
 }
 .progress {
-  margin-top: 11px;
-  background: var(--hairline);
+  margin-top: 11px; /* the grey track: .ui-progress (components/deutsch-ui-v1.css, 05.11) */
 }
 .progress i {
   width: 0;

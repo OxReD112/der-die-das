@@ -257,16 +257,7 @@ body:has(#game:not(.hidden)) .version-mark {
   padding-bottom: 14px;
   background: var(--bg);
 }
-.top::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: var(--hairline);
-  border-radius: 99px;
-}
+/* the grey track under the bar: .ui-progress itself (components/deutsch-ui-v1.css, 05.11; was a .top line here) */
 /* strip in the background colour above the sticky top bar: scrolled content doesn't show through */
 #game::before {
   content: "";

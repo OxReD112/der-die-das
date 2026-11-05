@@ -260,7 +260,7 @@ body:has(.pattern-modal.open) .version-mark {
   pointer-events: none;
 }
 .progress {
-  background: var(--hairline);
+  /* the grey track: .ui-progress (components/deutsch-ui-v1.css, 05.11) */
   margin-bottom: 32px;
   position: sticky;
   top: calc(var(--shell-top) + 36px);
@@ -910,11 +910,7 @@ body:has(.pattern-modal.open) .version-mark {
   margin-bottom: auto;
 }
 
-#count {
-  font-size: 14px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
+/* #count: the look comes from .ui-counter (components/deutsch-ui-v1.css, 05.11) */
 
 /* narrowest phones: the window frame of the other Spickzettel windows */
 

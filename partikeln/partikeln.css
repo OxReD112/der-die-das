@@ -61,7 +61,7 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 /* ===== TOP BAR (as Pronomen, no counter) ===== */
 #explore { padding-top: calc(env(safe-area-inset-top) + 23px); padding-bottom: 240px; }
 .top { display: flex; justify-content: space-between; align-items: center; margin: 0 -14px; padding-bottom: 14px; position: sticky; top: calc(env(safe-area-inset-top) + 4px); z-index: 10; background: var(--bg); }
-.top:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--hairline); border-radius: 99px; }
+.top:not(:has(.ui-progress)):after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--hairline); border-radius: 99px; }
 .top:before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: calc(env(safe-area-inset-top) + 4px); background: var(--bg); }
 .top-title { font-size: 20px; font-weight: 700; color: var(--muted); }
 
