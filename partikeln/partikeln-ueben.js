@@ -118,8 +118,26 @@
     $("pLabel").innerHTML = "<small>" + (lang() === "ru" ? "Что ты хочешь сказать:" : "What you want to say:") + "</small>" + esc(f ? pick(f.label) : t.fn);
     $("pAnswers").innerHTML = q.options.map(function (k) { return '<button class="ans" type="button" data-k="' + k + '">' + esc(k) + "</button>"; }).join("");
     $("pFeedback").classList.add("hidden");
+    $("pAnswers").classList.remove("hidden");
     document.querySelector(".app").scrollTop = 0;
+    placeBottom();
   }
+  /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end at the same
+     height, 70 px above the bottom edge (where the keyboard ends in the typing exercises; clear of the round Home
+     button). Only free room is used: never makes the page scroll. Tablets: as before (their round comes later). */
+  var TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
+  var floor = document.createElement("div");
+  floor.style.cssText = "position:fixed;left:0;width:0;height:0;bottom:calc(env(safe-area-inset-bottom) + 70px);pointer-events:none";
+  document.body.appendChild(floor);
+  function placeBottom() {
+    var done = !$("pFeedback").classList.contains("hidden");
+    var btn = done ? $("pContinue") : $("pAnswers"), holder = done ? $("pContinue") : $("pAnswers");
+    holder.style.marginTop = "";
+    if (TABLET.matches || $("pGame").classList.contains("hidden")) return;
+    var down = floor.getBoundingClientRect().top - btn.getBoundingClientRect().bottom;
+    if (down > 0) holder.style.marginTop = parseFloat(getComputedStyle(holder).marginTop) + down + "px";
+  }
+  window.addEventListener("resize", function () { requestAnimationFrame(placeBottom); });
   $("pAnswers").addEventListener("click", function (e) {
     var b = e.target.closest(".ans"); if (!b || b.disabled) return;
     answer(b.dataset.k);
@@ -129,6 +147,7 @@
     if (good) R.right++; else R.missed.push(t.answer);
     var shown = good ? k : t.answer;
     Array.prototype.forEach.call($("pAnswers").children, function (b) { b.disabled = true; });
+    $("pAnswers").classList.add("hidden"); /* the answer takes their room (Alena 05.11) */
     /* the result is in the sentence (as Ortspräpositionen): right → mint; wrong → yours struck through, then the right one */
     $("pSentence").innerHTML = good ? sentenceHtml(t.s, k, "ok") : sentenceHtml(t.s, [k, t.answer], "fixed");
     $("pBar").style.width = ((R.i + 1) / R.n * 100) + "%"; /* the bar grows at the answer, as in every exercise */
@@ -158,7 +177,7 @@
                  : (mine ? pick(mine.note) + " " : "")) + note;
     }
     $("pNote").textContent = note;
-    setTimeout(function () { fb.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 50);
+    placeBottom();
   }
   $("pContinue").addEventListener("click", function () {
     R.i++;

@@ -133,7 +133,7 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
   flex: 0 0 96px;
 }
 
-#pGame { padding-top: calc(env(safe-area-inset-top) + 23px); }
+#pGame { padding-top: calc(env(safe-area-inset-top) + 23px); padding-bottom: calc(env(safe-area-inset-bottom) + 28px); } /* bottom: if a long answer scrolls, Weiter still ends 70 px up, clear of the round Home button */
 
 .progress { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
 }
@@ -143,17 +143,18 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .task-label { margin-top: 26px; font-size: 12px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; color: var(--text); }
 .task-label small { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
 
-/* answer buttons: like der / die / das — quiet buttons, 2 × 2 */
-.answers { margin: 30px auto 0; width: min(100%, 360px); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* answer buttons: as in Ortspräpositionen (Alena 05.11) — 56 high, 16 / 650, corners 14, the start buttons' shadow;
+   2 × 2 across the column. On phones they stand at the bottom (partikeln-ueben.js → placeBottom) and go away once
+   you've answered: the answer and its explanation take their room, Weiter stands where they were. */
+.answers { margin: 30px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .ans {
-  height: 56px; border: 0; border-radius: 14px; background: var(--card-bg); color: var(--text); font: 650 20px/1 var(--font); /* two in a row: 20, as the cases in Verben mit Präp. */
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05); cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease, background-color 0.15s, color 0.15s;
+  height: 56px; padding: 0 10px; border: 0; border-radius: 14px; background: var(--card-bg); color: var(--text); font: 650 16px/1 var(--font);
+  box-shadow: var(--start-btn-shadow); white-space: nowrap; cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease;
 }
 .ans:active { transform: scale(0.97); filter: brightness(0.94); }
 .ans:disabled { cursor: default; }
 /* after the answer (as Ortspräpositionen): the result is in the sentence — right word mint, a wrong pick struck through
-   before the right one; the buttons only go pale, no coloured boxes */
-.ans:disabled { opacity: 0.4; transform: none; filter: none; }
+   before the right one */
 #pSentence .slot.ok, #pSentence .slot.fixed { border-bottom-color: transparent; min-width: 0; }
 #pSentence .slot.ok { color: var(--mint); }
 #pSentence .slot .wrong { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--red); opacity: 0.82; margin-right: 0.3em; }
@@ -181,7 +182,7 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .fb-note { margin-top: 16px; min-height: 0; }
 /* Weiter = the quiet button of every exercise (variant E, 05.11): no outline, the tiles' fill, the keys' small shadow */
 .continue {
-  width: min(600px, 100%); margin-top: 22px; padding: 0;
+  width: 100%; margin-top: 22px; padding: 0;
 }
 
 /* done = the one end screen of every exercise (as Pronomen): „Fertig.“ 34, score 28, kind phrase 16 — the block in the
@@ -218,3 +219,17 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
   .level-pick { position: static; margin-top: 12px; }
 }
 
+
+/* Short phones (≤ 700 px high: SE, Safari with its bars), Alena 05.11: the answer with its explanation and Weiter on one
+   screen — the gaps between the blocks are tighter, the sizes stay. */
+@media (max-height: 700px) {
+  #pGame { padding-top: calc(env(safe-area-inset-top) + 16px); }
+  #pGame .prompt { margin-top: 22px; }
+  #pGame .context { margin-bottom: 6px; }
+  .task-label { margin-top: 14px; }
+  .task-label small { margin-bottom: 3px; }
+  .feedback { margin-top: 18px; padding-top: 14px; }
+  .fb-scale { margin-top: 12px; }
+  .fb-note { margin-top: 10px; }
+  .continue { margin-top: 14px; }
+}
