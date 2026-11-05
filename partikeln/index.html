@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        if (localStorage.getItem("deutschThemeV1") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Partikeln" />
+    <title>Partikeln</title>
+    <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
+    <script src="../components/deutsch-fonts-v1.js?v=1"></script>
+    <link rel="stylesheet" href="partikeln.css?v=1" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="start" class="screen">
+        <div class="brand">Partikeln</div>
+        <h1>Was möchtest du?</h1>
+        <p class="muted">Kleine Wörter, die den Ton verändern.</p>
+        <div class="start-actions">
+          <div class="mode-buttons">
+            <button id="exploreBtn" class="mode-main" type="button">Entdecken</button>
+            <button id="practiceBtn" class="mode-quiet" type="button">Üben</button>
+          </div>
+        </div>
+      </section>
+      <div class="start-about" id="startAbout">
+        <h2>Worum geht's?</h2>
+        <p class="about-de" id="aboutText"></p>
+      </div>
+
+      <section id="explore" class="screen hidden">
+        <div class="top">
+          <button class="top-title as-link" id="exploreTitle" type="button" aria-label="Zur Partikeln-Startseite">Partikeln</button>
+          <button class="table-btn mode-switch" id="toUeben" type="button">Üben</button>
+        </div>
+
+        <div class="cats" id="cats" role="tablist"></div>
+
+        <div class="prompt">
+          <div class="context" id="context"></div>
+          <div class="sentence" id="sentence"></div>
+          <div class="translation" id="translation"></div>
+          <button class="shuffle" id="shuffle" type="button" aria-label="Anderes Beispiel">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M2 4.5h2.5c3 0 4 7 7 7H14" />
+              <path d="M2 11.5h2.5c1.4 0 2.3-1.5 3-3.2M9 6c.7-1 1.4-1.5 2.5-1.5H14" />
+              <path d="M12 2.5l2 2-2 2M12 9.5l2 2-2 2" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="meaning">
+          <div class="fn" id="fn"></div>
+          <div class="hint" id="hint"></div>
+          <div class="scale">
+            <div class="track" id="track"><div class="ghost" id="ghost"></div><div class="thumb" id="thumb"></div></div>
+            <div class="scale-labels"><span>weich</span><span class="ohne" id="ohneLabel">ohne</span><span>scharf</span></div>
+          </div>
+          <p class="note" id="note"></p>
+        </div>
+
+        <div class="particles" id="particles"></div>
+      </section>
+      <!-- ===== ÜBEN ===== -->
+      <section id="pStart" class="screen hidden">
+        <div class="brand">Partikeln</div>
+        <h1>Wie viele Übungen?</h1>
+        <p class="muted">Die passende Partikel für jeden Ton.</p>
+        <div class="options">
+          <button class="size" data-n="10">10</button>
+          <button class="size" data-n="20">20</button>
+          <button class="size" data-n="30">30</button>
+        </div>
+        <div class="levels" id="levels" role="tablist" aria-label="Niveau">
+          <button class="cat" data-lv="A2">A2</button><button class="cat" data-lv="B1">B1</button><button class="cat" data-lv="B2">B2</button>
+        </div>
+      </section>
+
+      <section id="pGame" class="screen hidden">
+        <div class="top">
+          <div class="top-title">Partikeln</div>
+          <div class="counter" id="pCounter">1 / 10</div>
+          <div class="progress"><i id="pBar"></i></div>
+        </div>
+        <div class="prompt">
+          <div class="context" id="pContext"></div>
+          <div class="sentence" id="pSentence"></div>
+          <div class="task-label" id="pLabel"></div>
+        </div>
+        <div class="answers" id="pAnswers"></div>
+        <div id="pFeedback" class="feedback hidden">
+          <div class="fb-verdict" id="pVerdict"></div>
+          <div class="translation on" id="pTranslation"></div>
+          <div class="fb-also" id="pAlso"></div>
+          <div class="scale fb-scale">
+            <div class="track" id="pTrack"><div class="mine" id="pMine"></div><div class="thumb" id="pThumb"></div></div>
+            <div class="scale-labels"><span>weich</span><span class="ohne" id="pOhne">ohne</span><span>scharf</span></div>
+          </div>
+          <p class="note fb-note" id="pNote"></p>
+          <button class="continue" id="pContinue" type="button">Weiter</button>
+        </div>
+      </section>
+
+      <section id="pDone" class="screen hidden">
+        <div class="brand brand-done">Partikeln</div>
+        <h1>Fertig.</h1>
+        <div class="done-score" id="pScore">0 / 10</div>
+        <div class="done-note" id="pDoneNote"></div>
+        <div class="end-list hidden" id="pWeak"></div>
+        <div class="done-actions">
+          <button id="pAgain" type="button">Noch eine Runde</button>
+          <button id="homeBack" type="button">Zur Startseite</button>
+        </div>
+      </section>
+      <div class="version-mark" aria-hidden="true">v1.0</div>
+    </main>
+    <script src="../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="sentences.js?v=1"></script>
+    <script src="../components/deutsch-end-v1.js?v=1"></script>
+    <script src="partikeln.js?v=1"></script>
+    <script src="partikeln-ueben.js?v=1"></script>
+    <script src="../components/deutsch-wide-v1.js?v=2"></script>
+  </body>
+</html>
