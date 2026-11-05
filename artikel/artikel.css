@@ -698,3 +698,12 @@ body:has(#game:not(.hidden)) .version-mark {
     display: none !important;
   }
 }
+
+/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
+   page in both themes, and the keys' small shadow */
+#playAgain,
+#continue {
+  border-color: transparent !important;
+  background: var(--card-bg) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}

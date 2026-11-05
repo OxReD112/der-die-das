@@ -1572,3 +1572,12 @@ html.ws-tools-row .wsTools .editCard {
 html.ws-tools-row .wsTools .editCard.own { visibility: visible; }
 html.ws-tools-row .wsTools .editCard svg { width: 20px; height: 20px; }
 html.ws-tools-row .detail { margin-top: 22px; } /* the cassette's old place under the word: same air as without a voice */
+
+/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
+   page in both themes, and the keys' small shadow */
+.continue,
+.finish-actions .addWords {
+  border-color: transparent !important;
+  background: var(--card-bg) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
