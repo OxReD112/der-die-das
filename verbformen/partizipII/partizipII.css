@@ -1188,3 +1188,62 @@ body:has(.pattern-modal.open) .version-mark {
   background: var(--card-bg) !important;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
+
+/* ===== SPICKZETTEL TABS (05.11.2026, Alena) =====
+   Four tabs by verb type — Schwach · Stark · Gemischt · Besondere — the tabs of the Vielseitige Verben table
+   (.vv-tabs: serif 16, a line under the chosen one; capsules are meanings in the app, not tabs). The window keeps
+   one height on every tab (Stark is the tallest and fills the frame), so it never jumps when a tab is switched. */
+.pattern-modal-card {
+  height: min(80vh, 720px);
+}
+.pattern-tabs {
+  --tab-pad: clamp(2px, 2.4vw - 4.5px, 9px);
+  flex: 0 0 auto;
+  display: flex;
+  margin: 2px 0 0;
+  border-bottom: 1px solid var(--detail-line);
+}
+.pattern-tab {
+  position: relative;
+  border: 0;
+  background: none;
+  color: var(--forms-dim);
+  font-family: var(--serif);
+  font-size: 16px;
+  padding: 8px var(--tab-pad) 9px;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pattern-tab:first-child {
+  margin-left: calc(-1 * var(--tab-pad)); /* the first name lines up with the cards */
+}
+.pattern-tab.on {
+  color: var(--text);
+}
+.pattern-tab.on::after {
+  content: "";
+  position: absolute;
+  left: var(--tab-pad);
+  right: var(--tab-pad);
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+}
+.pattern-panel {
+  padding-bottom: 4px;
+}
+.pattern-panel > .pattern-section:first-child {
+  margin-top: 12px;
+}
+.pattern-intro.pattern-intro-first {
+  margin-top: 12px;
+}
+.pattern-rules.pattern-rules-first {
+  margin-top: 12px;
+}
+/* werden → geworden: the note under the head (in the passive — worden) */
+.pattern-group .pattern-rule-note {
+  margin-top: 4px;
+}

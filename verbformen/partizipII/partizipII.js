@@ -538,31 +538,56 @@ function vowelSlot(v) {
   return from;
 }
 
-/* General rules under the vowels, in the user's language; the verb's rule is lit after Prüfen. */
-const TABLE_RULES = [
-  { id: "insep", section: "Präfixe", en: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — no ge‑", ru: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — без ge‑", ex: "bekommen → bekommen · vergessen → vergessen",
+/* General rules, in the user's language; the verb's rule is lit after Prüfen.
+   05.11.2026 (Alena): the Spickzettel has four tabs by verb type — Schwach · Stark · Gemischt · Besondere (the tabs
+   of the Vielseitige Verben table, not capsules: capsules are meanings). The prefix rules are repeated under
+   Schwach, Stark and Gemischt; special verbs have no prefixes worth a rule. */
+const PREFIX_RULES = [
+  { id: "insep", en: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — no ge‑", ru: "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — без ge‑", ex: "bekommen → bekommen · vergessen → vergessen",
     note: { en: "don't confuse: geben → gegeben, gehen → gegangen (here ge‑ is not a prefix but part of the stem)", ru: "не путать: geben → gegeben, gehen → gegangen (здесь ge‑ не приставка, а часть корня)" } },
-  { id: "sep", section: "Präfixe", en: "separable prefix — ge- goes inside", ru: "отделяемая приставка — ge- внутри", ex: "an·ge·fangen · ein·ge·laden" },
-  { id: "strong", section: "Endungen", en: "strong verbs: ending -en", ru: "сильные глаголы: окончание -en", ex: "finden → gefunden · schreiben → geschrieben",
-    note: { en: "among irregular verbs, all are strong except the mixed and the special ones", ru: "среди неправильных глаголов все, кроме смешанных и особых, — сильные" } },
-  // 03.11.2026 (Alena, variant B): mixed verbs have their own section — the vowel groups, the -t ending and the whole list
-  { id: "mixed", section: "Gemischte Verben", mixed: true,
-    intro: { en: "the vowel changes, the ending is -t — like regular verbs", ru: "гласная меняется, окончание -t — как у правильных" },
-    groups: [
-      { id: "e-a", from: "e", to: "a", ex: "kennen → gekannt · nennen → genannt · rennen → gerannt · brennen → gebrannt · denken → gedacht" },
-      { id: "i-a", from: "i", to: "a", ex: "bringen → gebracht" },
-      { id: "i-u", from: "i", to: "u", ex: "wissen → gewusst" }
-    ],
-    note: { en: "There are almost no other such verbs: these seven, senden and wenden (two forms: gesandt / gesendet, gewandt / gewendet) — and the same verbs with prefixes: erkennen, verbringen, nachdenken.",
-      ru: "Других таких глаголов почти нет: эти семь, senden и wenden (две формы: gesandt / gesendet, gewandt / gewendet) — и они же с приставками: erkennen, verbringen, nachdenken." } },
-  { id: "special", section: "Besondere Verben", en: "their own forms — learn them", ru: "свои формы — запомнить", ex: "sein → gewesen · haben → gehabt · tun → getan",
-    note: { en: "and the modal verbs", ru: "и модальные глаголы" } },
-  { id: "consonant", section: "Konsonanten", en: "the vowel becomes short — the consonant doubles", ru: "гласная становится краткой — согласная удваивается", ex: "streiten → gestritten · nehmen → genommen · schließen → geschlossen",
+  { id: "sep", en: "separable prefix — ge- goes inside", ru: "отделяемая приставка — ge- внутри", ex: "an·ge·fangen · ein·ge·laden" }
+];
+const WEAK_RULES = [
+  { id: "weak", en: "ge- + stem + -t", ru: "ge- + основа + -t", ex: "machen → gemacht · spielen → gespielt · kaufen → gekauft" },
+  { id: "weakE", en: "stem ending in -t / -d: ‑e‑ before the -t", ru: "основа на -t / -d — перед -t вставляется ‑e‑", ex: "arbeiten → gearbeitet · warten → gewartet · reden → geredet" },
+  { id: "ieren", en: "-ieren — no ge‑", ru: "-ieren — без ge‑", ex: "studieren → studiert · telefonieren → telefoniert" }
+];
+const STRONG_RULE = { id: "strong", en: "ending -en, the vowel often changes", ru: "окончание -en, гласная часто меняется", ex: "finden → gefunden · schreiben → geschrieben · fahren → gefahren",
+  note: { en: "among irregular verbs, all are strong except the mixed and the special ones", ru: "среди неправильных глаголов все, кроме смешанных и особых, — сильные" } };
+// werden is strong (e → o); its one special point: worden in the passive (Alena 05.11)
+const WERDEN = { from: "werden", to: "geworden", note: { en: "in the passive — worden: Das Haus ist gebaut worden.", ru: "в пассиве — worden: Das Haus ist gebaut worden." } };
+const CONSONANT_RULES = [
+  { id: "consonant", en: "the vowel becomes short — the consonant doubles", ru: "гласная становится краткой — согласная удваивается", ex: "streiten → gestritten · nehmen → genommen · schließen → geschlossen",
     note: { en: "and the other way round: bitten → gebeten", ru: "и наоборот: bitten → gebeten" },
     note2: { en: "ch never doubles: riechen → gerochen", ru: "ch не удваивается: riechen → gerochen" } },
-  { id: "consonantOwn", section: "Konsonanten", en: "the consonant changes or is added", ru: "согласная меняется или добавляется", ex: "ziehen → gezogen · schneiden → geschnitten · bringen → gebracht · denken → gedacht · gehen → gegangen · stehen → gestanden · essen → gegessen · sitzen → gesessen",
+  { id: "consonantOwn", en: "the consonant changes or is added", ru: "согласная меняется или добавляется", ex: "ziehen → gezogen · schneiden → geschnitten · bringen → gebracht · denken → gedacht · gehen → gegangen · stehen → gestanden · essen → gegessen · sitzen → gesessen",
     note: { en: "these are the most common such verbs", ru: "это самые частые такие глаголы" } }
 ];
+// 03.11.2026 (Alena, variant B): mixed verbs — the vowel groups, the -t ending and the whole list
+const MIXED = {
+  intro: { en: "the vowel changes, the ending is -t — like regular verbs", ru: "гласная меняется, окончание -t — как у правильных" },
+  groups: [
+    { id: "e-a", from: "e", to: "a", ex: "kennen → gekannt · nennen → genannt · rennen → gerannt · brennen → gebrannt · denken → gedacht" },
+    { id: "i-a", from: "i", to: "a", ex: "bringen → gebracht" },
+    { id: "i-u", from: "i", to: "u", ex: "wissen → gewusst" }
+  ],
+  note: { en: "There are almost no other such verbs: these seven, senden and wenden (two forms: gesandt / gesendet, gewandt / gewendet) — and the same verbs with prefixes: erkennen, verbringen, nachdenken.",
+    ru: "Других таких глаголов почти нет: эти семь, senden и wenden (две формы: gesandt / gesendet, gewandt / gewendet) — и они же с приставками: erkennen, verbringen, nachdenken." }
+};
+const SPECIAL_RULES = [
+  { id: "special", en: "their own forms — learn them", ru: "свои формы — запомнить", ex: "sein → gewesen · haben → gehabt · tun → getan" },
+  // reference only: the modal verbs are not in the exercise (Alena 05.11)
+  { id: "modal", en: "modal verbs", ru: "модальные глаголы", ex: "können → gekonnt · müssen → gemusst · dürfen → gedurft · wollen → gewollt · sollen → gesollt · mögen → gemocht",
+    note: { en: "with another verb — the infinitive: Ich habe kommen müssen.", ru: "с другим глаголом — инфинитив: Ich habe kommen müssen." } }
+];
+const PATTERN_TABS = [
+  { id: "schwach", name: "Schwach" },
+  { id: "stark", name: "Stark" },
+  { id: "gemischt", name: "Gemischt" },
+  { id: "besondere", name: "Besondere" }
+];
+// the tab of a verb (the start screen opens Stark: the exercise is about irregular verbs)
+const verbTab = v => (!v ? "stark" : v.kind === "mixed" ? "gemischt" : v.kind === "special" ? "besondere" : "stark");
 function verbRules(v) {
   if (!v) return [];
   const r = [v.prefix ? "insep" : v.separable ? "sep" : null, v.kind || "strong"].filter(Boolean);
@@ -574,49 +599,52 @@ function verbRules(v) {
 
 function patternTableHtml(lit = null, v = null) {
   const slot = vowelSlot(v);
+  const litRules = verbRules(v);
+  const own = verbTab(v);
+  const t = o => o[lang()] || o.en;
+  const section = name => '<h3 class="pattern-section">' + name + "</h3>";
+  const rule = (r, on) =>
+    '<div class="pattern-rule' + (on ? " lit" : "") + '"><div class="pattern-rule-text">' + t(r) +
+    '</div><div class="pattern-rule-ex" lang="de">' + r.ex + "</div>" +
+    [r.note, r.note2].filter(Boolean).map(n => '<div class="pattern-rule-note">' + t(n) + "</div>").join("") + "</div>";
+  const rules = (list, tab) => '<div class="pattern-rules">' + list.map(r => rule(r, !!v && tab === own && litRules.includes(r.id))).join("") + "</div>";
+  const group = (g, on, note = "") =>
+    '<div class="pattern-group' + (on ? " lit" : "") + '"><div class="pattern-group-head"><span class="pattern-source">' + g.from +
+    '</span><span class="arrow">→</span><span class="pattern-to">' + g.to + "</span>" + note + "</div>" +
+    (g.ex ? '<div class="pattern-rule-ex" lang="de">' + g.ex + "</div>" : "") + "</div>";
+  const prefixes = tab => section("Präfixe") + rules(PREFIX_RULES, tab);
+
   const cells = VOWEL_CHANGES.map(([from, to]) => {
     const on = slot === from;
     return (
       '<div class="pattern-cell' + (on ? " lit" : "") + '"><div class="pattern-source">' + from +
       '</div><div class="pattern-options"><span class="arrow">→</span>' +
-      to.map(t => (on && lit && t === lit[1] ? '<span class="lit-vowel">' : "<span>") + t + "</span>").join('<span class="arrow">·</span>') +
+      to.map(x => (on && lit && x === lit[1] ? '<span class="lit-vowel">' : "<span>") + x + "</span>").join('<span class="arrow">·</span>') +
       "</div></div>\n"
     );
   });
-  const groups = VOWEL_GROUPS.map(g => {
-    const on = slot === g.id;
-    const note = g.note ? '<span class="pattern-group-note">' + (g.note[lang()] || g.note.en) + "</span>" : "";
-    return (
-      '<div class="pattern-group' + (on ? " lit" : "") + '"><div class="pattern-group-head"><span class="pattern-source">' + g.from +
-      '</span><span class="arrow">→</span><span class="pattern-to">' + g.to + "</span>" + note +
-      '</div><div class="pattern-rule-ex" lang="de">' + g.ex + "</div></div>"
-    );
-  }).join("\n");
-  const litRules = verbRules(v);
-  let section = "";
+  const groups = VOWEL_GROUPS.map(g =>
+    group(g, slot === g.id, g.note ? '<span class="pattern-group-note">' + t(g.note) + "</span>" : "")).join("\n");
+  const werden = group(WERDEN, !!v && v.infinitive === "werden") .replace("</div></div>", '</div><div class="pattern-rule-note">' + t(WERDEN.note) + "</div></div>");
   // mixed verbs: the group of the verb's vowel change (kennen „e - a - a“ → e-a) is lit
   const mixedSlot = v && v.kind === "mixed" ? (patternLit(v) || []).join("-") : null;
-  const mixedHtml = r =>
-    '<p class="pattern-intro">' + (r.intro[lang()] || r.intro.en) + '</p></div><div class="pattern-groups">' +
-    r.groups.map(g =>
-      '<div class="pattern-group' + (mixedSlot === g.id ? " lit" : "") + '"><div class="pattern-group-head"><span class="pattern-source">' + g.from +
-      '</span><span class="arrow">→</span><span class="pattern-to">' + g.to + '</span></div><div class="pattern-rule-ex" lang="de">' + g.ex + "</div></div>"
-    ).join("\n") +
-    '</div><div class="pattern-rules"><div class="pattern-rule"><div class="pattern-rule-note pattern-rule-note-only">' + (r.note[lang()] || r.note.en) + "</div></div>";
-  const rules = TABLE_RULES.map(
-    r =>
-      (r.section !== section ? '</div><h3 class="pattern-section">' + (section = r.section) + '</h3><div class="pattern-rules">' : "") +
-      (r.mixed ? mixedHtml(r) :
-      '<div class="pattern-rule' + (litRules.includes(r.id) ? " lit" : "") + '"><div class="pattern-rule-text">' +
-      (r[lang()] || r.en) + '</div><div class="pattern-rule-ex" lang="de">' + r.ex + "</div>" +
-      [r.note, r.note2].filter(Boolean).map(n => '<div class="pattern-rule-note">' + (n[lang()] || n.en) + "</div>").join("") + "</div>")
-  ).join("\n");
-  return (
-    '<h3 class="pattern-section">Vokalwechsel</h3><p class="pattern-intro">Infinitiv → Partizip II · starke Verben</p>' +
-    '<div class="pattern-grid">\n' + cells.join("") + "</div>" +
-    '<div class="pattern-groups">' + groups + "</div>" +
-    '<div class="pattern-rules">' + rules + "</div>"
-  );
+
+  const panels = {
+    schwach: section("Endung -t") + rules(WEAK_RULES, "schwach") + prefixes("schwach"),
+    stark:
+      section("Endung -en") + rules([STRONG_RULE], "stark") +
+      section("Vokalwechsel") + '<p class="pattern-intro">Infinitiv → Partizip II</p>' +
+      '<div class="pattern-grid">\n' + cells.join("") + "</div>" +
+      '<div class="pattern-groups">' + groups + werden + "</div>" +
+      section("Konsonanten") + rules(CONSONANT_RULES, "stark") + prefixes("stark"),
+    gemischt:
+      '<p class="pattern-intro pattern-intro-first">' + t(MIXED.intro) + '</p><div class="pattern-groups">' +
+      MIXED.groups.map(g => group(g, mixedSlot === g.id)).join("\n") + "</div>" +
+      '<div class="pattern-rules"><div class="pattern-rule"><div class="pattern-rule-note pattern-rule-note-only">' + t(MIXED.note) + "</div></div></div>" +
+      prefixes("gemischt"),
+    besondere: rules(SPECIAL_RULES.map(r => r), "besondere").replace('class="pattern-rules"', 'class="pattern-rules pattern-rules-first"')
+  };
+  return PATTERN_TABS.map(tab => '<section class="pattern-panel" data-tab="' + tab.id + '" role="tabpanel">' + panels[tab.id] + "</section>").join("");
 }
 const tableIsOpen = () => $("patternModal").classList.contains("open");
 
@@ -626,15 +654,35 @@ function patternLit(v) {
   return parts.length >= 3 ? [parts[0], parts[2]] : null;
 }
 
+function showPatternTab(id) {
+  document.querySelectorAll("#patternTabs .pattern-tab").forEach(b => {
+    const on = b.dataset.tab === id;
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-selected", on);
+  });
+  document.querySelectorAll("#patternModalBody .pattern-panel").forEach(p => (p.hidden = p.dataset.tab !== id));
+  $("patternModalBody").scrollTop = 0;
+}
+$("patternTabs").innerHTML = PATTERN_TABS.map(
+  tab => '<button class="pattern-tab" type="button" role="tab" data-tab="' + tab.id + '">' + tab.name + "</button>"
+).join("");
+$("patternTabs").onclick = e => {
+  const b = e.target.closest(".pattern-tab");
+  if (b) showPatternTab(b.dataset.tab);
+};
+
 function openPatternTable(round) {
   if (round && !(inRound() && checked)) return; // off until Prüfen
   const v = round ? deck[index] : null;
   $("patternModalBody").innerHTML = patternTableHtml(v && v.kind !== "special" ? patternLit(v) : null, v);
+  showPatternTab(verbTab(v));
   const modal = $("patternModal");
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
-  // 03.11.2026 (Alena): open at the verb's own rule (mixed verbs, prefixes, consonants are further down)
-  const lit = round && $("patternModalBody").querySelector(".lit");
+  // 03.11.2026 (Alena): open at the verb's own rule — 05.11: on the verb's tab, scrolled to its rule
+  // the verb's own vowel (its group, else its cell) first; the general „ending -en“ card is lit for every strong verb
+  const panel = $("patternModalBody").querySelector(".pattern-panel:not([hidden])");
+  const lit = round && (panel.querySelector(".pattern-group.lit") || panel.querySelector(".pattern-cell.lit") || panel.querySelector(".lit"));
   if (lit) lit.scrollIntoView({ block: "center" });
 }
 function closePatternTable() {
