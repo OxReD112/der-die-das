@@ -110,6 +110,20 @@
   --bad-glow: radial-gradient( ellipse at 50% 38%, rgba(233, 94, 102, 0.27) 0%, rgba(233, 94, 102, 0.12) 24%, rgba(233, 94, 102, 0.04) 48%, transparent 76% );
 }
 
+/* ===== THE BOTTOM LINE (05.11.2026) =====
+   Where the answer buttons and Weiter end at the bottom of the screen in every exercise: the bottom of the on-screen
+   keyboard's last row, this far above the bottom edge (+ home indicator). Phones 77, tablets 79. The script
+   components/deutsch-bottom-v1.js uses the same numbers; a page that places Weiter with CSS alone (Vielseitige
+   Verben's sticky bar) uses this variable. */
+:root {
+  --bottom-line: 77px;
+}
+@media (min-width: 700px) and (min-height: 740px) {
+  :root {
+    --bottom-line: 79px;
+  }
+}
+
 /* ===== END SCREEN: „Noch üben“ list (01.11.2026, components/deutsch-end-v1.js) =====
    The same in every exercise: no frame, centered, one font (the sans of the interface, also in the Verbformen
    family), at most three lines and „und N weitere“, no counts. */

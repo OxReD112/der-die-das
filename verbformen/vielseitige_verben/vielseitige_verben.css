@@ -393,7 +393,8 @@ body:has(#study:not(.hidden)) .version-mark {
 
 /* ===== WEITER BAR (2026-09-29) ===== a long explanation pushed Weiter under the Home button and the table pill.
    Weiter sits in its own bar under the question card and never goes below the Home row: its bottom edge stays
-   72px above the bottom edge (+ home indicator) — where the on-screen keyboard's last row ends.
+   on the shared bottom line (--bottom-line, components/deutsch-base-v1.css: 77 / 79 px above the bottom edge + home
+   indicator) — where the on-screen keyboard's last row ends (05.11: was 72, the keyboard's own box, 5 / 7 px lower).
    - Phones and tablets (on-screen keyboard): the bar is pushed to that place, same spot for every sentence.
    - Computers: the bar follows the explanation (15px under it, as before).
    - Both: when the explanation is too long for the screen, the bar stays pinned (sticky) and the question card
@@ -407,7 +408,7 @@ body:has(#study:not(.hidden)) .version-mark {
   bottom: 0;
   z-index: 10;
   margin: 0 -24px;
-  padding: 15px 24px calc(env(safe-area-inset-bottom) + 72px);
+  padding: 15px 24px calc(env(safe-area-inset-bottom) + var(--bottom-line, 77px)); /* 05.11: the shared bottom line (was 72) */
 }
 .next-bar:has(#next.show) {
   display: block;

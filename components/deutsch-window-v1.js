@@ -6,23 +6,49 @@
    DeutschWindow.isOpen(win) / DeutschWindow.anyOpen()
 
    Every .ui-window closes by itself with its × (.ui-close), a tap on the dimmed layer outside the card, and Esc.
-   While a window is open the exercise's own keys wait (Enter = Weiter etc. do nothing), only Tab moves on.
+   While a window is open nothing behind it works (05.11.2026 fix: before, Enter on a focused Weiter behind the
+   window still pressed it): focus moves into the card, Tab goes round inside the window, every other key outside it
+   does nothing (no exercise listener, no browser default); on close the focus goes back where it was.
    Home (home.js) finds an open window by .ui-window.open — no list of names per exercise. */
 (function () {
   "use strict";
   function isOpen(win) {
     return !!win && win.classList.contains("open");
   }
+  var FOCUSABLE = "button:not([disabled]),[href],input:not([disabled]),select,textarea,[tabindex]:not([tabindex='-1'])";
+  var before = null; // what had the focus before the window opened
+  function card(win) {
+    return win.querySelector(".ui-window-card") || win;
+  }
   function open(win) {
     if (!win) return;
+    if (!isOpen(win)) before = document.activeElement;
     win.classList.add("open");
     win.setAttribute("aria-hidden", "false");
+    var c = card(win);
+    if (!c.hasAttribute("tabindex")) c.setAttribute("tabindex", "-1");
+    if (!win.contains(document.activeElement)) c.focus({ preventScroll: true });
   }
   function close(win) {
     if (!isOpen(win)) return;
     win.classList.remove("open");
     win.setAttribute("aria-hidden", "true");
-    win.dispatchEvent(new CustomEvent("windowclose"));
+    var back = before;
+    before = null;
+    if (win.contains(document.activeElement)) document.activeElement.blur();
+    if (back && back.isConnected && back.focus && !back.disabled) back.focus({ preventScroll: true });
+    win.dispatchEvent(new CustomEvent("windowclose")); // after: an exercise may move the focus on
+  }
+  // Tab / Shift+Tab go round the window's own buttons; with none, the focus stays on the card
+  function trapTab(win, e) {
+    var list = Array.prototype.filter.call(win.querySelectorAll(FOCUSABLE), function (el) {
+      return el.getClientRects().length > 0;
+    });
+    e.preventDefault();
+    if (!list.length) return card(win).focus({ preventScroll: true });
+    var i = list.indexOf(document.activeElement);
+    var next = e.shiftKey ? (i <= 0 ? list.length - 1 : i - 1) : (i === -1 || i === list.length - 1 ? 0 : i + 1);
+    list[next].focus({ preventScroll: true });
   }
   function anyOpen() {
     return document.querySelector(".ui-window.open");
@@ -36,8 +62,12 @@
     "keydown",
     function (e) {
       var win = anyOpen();
-      if (!win || e.key === "Tab") return;
-      if (e.key === "Escape") close(win);
+      if (!win) return;
+      if (e.key === "Tab") return trapTab(win, e);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close(win);
+      } else if (!win.contains(e.target)) e.preventDefault(); // a key on something behind the window does nothing
       e.stopImmediatePropagation();
     },
     true

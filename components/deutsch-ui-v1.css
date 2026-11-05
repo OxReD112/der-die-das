@@ -196,6 +196,9 @@
     transform 0.2s ease,
     filter 0.2s ease;
 }
+.ui-window-card:focus {
+  outline: none; /* it takes the focus when the window opens (deutsch-window-v1.js), no ring around the card */
+}
 .ui-window.open .ui-window-card {
   opacity: 1;
   transform: scale(1);
