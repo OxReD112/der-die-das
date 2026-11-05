@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Verbformen" />
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
-    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=2" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="partizipII.css?v=34" />
+    <link rel="stylesheet" href="partizipII.css?v=35" />
   </head>
   <body>
     <main class="app">
@@ -91,14 +91,14 @@
         </div>
       </section>
 
-      <div id="patternModal" class="pattern-modal" aria-hidden="true">
-        <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
-          <div class="pattern-modal-head">
-            <h2 id="patternModalTitle">Partizip II · Spickzettel</h2>
+      <div id="patternModal" class="pattern-modal ui-window" aria-hidden="true">
+        <div class="pattern-modal-card ui-window-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
+          <div class="pattern-modal-head ui-window-head">
+            <h2 class="ui-window-title" id="patternModalTitle">Partizip II · Spickzettel</h2>
             <button class="pattern-close ui-close" id="patternClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div class="pattern-tabs" id="patternTabs" role="tablist"></div>
-          <div id="patternModalBody"></div>
+          <div id="patternModalBody" class="ui-window-body"></div>
         </div>
       </div>
       <div class="version-mark" aria-hidden="true">v66</div>
@@ -109,7 +109,8 @@
     <script src="../../components/deutsch-progress-v1.js"></script>
     <script src="../../components/deutsch-end-v1.js?v=1"></script>
     <script src="../../components/deutsch-bottom-v1.js?v=1"></script>
-    <script src="partizipII.js?v=29"></script>
+    <script src="../../components/deutsch-window-v1.js?v=1"></script>
+    <script src="partizipII.js?v=30"></script>
     <script src="../../components/deutsch-wide-v1.js?v=4"></script>
 </body>
 </html>

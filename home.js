@@ -914,7 +914,9 @@ document.addEventListener("touchstart", noTouch, { passive: true });
        No measuring of the page layout (5.84–5.89 searched each screen for a gap: slow, and a different place on
        every screen). It appears together with the exercise's content and fades out while a table window is open. */
 const TITLE_SEL = ".top-title,.top .brand";
-const WINDOW_SEL = ".modal,.pattern-modal,.forms-modal,.omodal,.coll-modal"; // .coll-modal = Wortschatz collection window (Home 5.49)
+// 05.11: every exercise window is a .ui-window (components/deutsch-window-v1.js) — no list of names per exercise;
+// .coll-modal = the Wortschatz word window (shared with the Bibliothek, its own frame for now)
+const WINDOW_SEL = ".ui-window,.coll-modal";
 const SHORT_SCREEN = "(max-height: 559px), (max-width: 340px) and (max-height: 609px)";
 // added to every exercise page Home opens (to move into the exercises' own styles in the shared-stylesheet round)
 const ROW_STYLE =

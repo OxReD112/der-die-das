@@ -4,6 +4,9 @@
 
 /* ===== PALETTE ===== shared colours and fonts: components/deutsch-base-v1.css; here only this page's own */
 :root {
+  /* family: titles in Literata → window titles too, regular (components/deutsch-ui-v1.css → .ui-window-title) */
+  --window-title-font: var(--serif);
+  --window-title-weight: 400;
   --pattern-text: #c7c3bc; /* vowels in the table */
   --lit-line: rgba(232, 196, 120, 0.55);
 }
@@ -488,83 +491,8 @@ body:has(.pattern-modal.open) .version-mark {
 /* ===== TABLE WINDOW „Vokalwechsel“ =====
    The table-window rule: blur 8px + 34% / 20% darkening (like Home's settings dialog), card colour,
    10% outline, 24px corners, fade + zoom-in, × top right, tap outside / Esc closes. */
-.pattern-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s linear 0.18s;
-}
-.pattern-modal.open {
-  opacity: 1;
-  visibility: visible;
-  background: var(--overlay-scrim);
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s;
-}
-.pattern-modal-card {
-  width: min(560px, 100%);
-  max-height: min(80vh, 720px); /* one window frame (01.11.2026): at most 80% of the screen, the rest scrolls inside */
-  overflow: hidden;
-  background: var(--card-bg);
-  border: 1px solid var(--hairline);
-  border-radius: 26px; /* windows like the cards: one radius for big surfaces (01.11.2026) */
-  --card-pad: 18px;
-  position: relative;
-  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.pattern-modal.open .pattern-modal-card {
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
-}
-.pattern-modal-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 0 0 auto;
-  padding-right: 28px;
-  margin-bottom: 8px;
-}
-.pattern-modal-head h2 {
-  margin: 0;
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 400;
-}
-.pattern-close {
-  /* close: a small round button like the sheets of iOS (01.11.2026) — quieter than the title, clear of the 26px
-     corner, centred on the title; the tap area is 44 × 44 (::after) */
-  position: absolute;
-  top: calc(var(--card-pad) - 7px);
-  right: calc(var(--card-pad) - 4px);
-}
 
 #patternModalBody {
-  overflow: auto;
-  min-height: 0;
   padding-top: 0;
 }
 /* section titles inside the Tipps window: Vokalwechsel · Präfixe und Endungen */
@@ -779,10 +707,7 @@ body:has(.pattern-modal.open) .version-mark {
   #next {
     margin-top: 13px;
   }
-  /* the card sits as high as before the layer was fitted to the screen (v54 reached past the top edge) */
-  .pattern-modal-head h2 {
-    font-size: 20px;
-  }
+  
   .pattern-intro {
     font-size: 12px;
     margin: 3px 0 7px;
@@ -858,10 +783,7 @@ body:has(.pattern-modal.open) .version-mark {
   #answer:placeholder-shown {
     animation: none;
   }
-  .pattern-modal,
-  .pattern-modal-card {
-    transition: none !important;
-  }
+  
 }
 
 /* 3 × 3 vowel grid on the narrowest phones (320–360px): „ei → ie · i · ei“ stays on one line */
@@ -995,11 +917,6 @@ body:has(.pattern-modal.open) .version-mark {
 }
 
 /* narrowest phones: the window frame of the other Spickzettel windows */
-@media (max-width: 359px) {
-  .pattern-modal-card {
-    --card-pad: 14px;
-  }
-}
 
 /* ===== TABLETS (03.11.2026, as Modalverben) — iPad upright and sideways; computers take the sizes too =====
    One column of 600, the keyboard as wide as the column (bigger keys: components/deutsch-keyboard), the question

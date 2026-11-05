@@ -735,31 +735,13 @@ function caseRuleFor(prep) {
   if (!t) return "";
   return tipText(t.head) + " · " + tipText(TIP_TAG[t.tag]) + (t.preps[0] === "auf" ? " (" + tipText(t.note) + ")" : "");
 }
-const tipsOpen = () => $("tipsModal").classList.contains("open");
+const tipsOpen = () => DeutschWindow.isOpen($("tipsModal"));
 function openTips(round) {
   const prep = round && phase === "answer" && used ? used.preposition : null;
   if (round && !prep) return; // off until the answer
   $("tipsModalBody").innerHTML = tipsHtml(prep);
-  $("tipsModal").classList.add("open");
-  $("tipsModal").setAttribute("aria-hidden", "false");
+  DeutschWindow.open($("tipsModal")); // × / tap outside / Esc (other keys wait): components/deutsch-window-v1.js
   const lit = $("tipsModalBody").querySelector(".lit");
   if (lit) lit.scrollIntoView({ block: "center" });
 }
-function closeTips() {
-  $("tipsModal").classList.remove("open");
-  $("tipsModal").setAttribute("aria-hidden", "true");
-}
 document.querySelectorAll("[data-tips]").forEach(b => b.addEventListener("click", () => openTips(b.dataset.tips === "round")));
-$("tipsClose").onclick = closeTips;
-$("tipsModal").onclick = e => {
-  if (e.target === $("tipsModal")) closeTips();
-};
-document.addEventListener(
-  "keydown",
-  e => {
-    if (!tipsOpen()) return;
-    if (e.key === "Escape") closeTips();
-    e.stopImmediatePropagation(); // the exercise's keys (Enter = Weiter, 1 / 2 = case) wait while the window is open
-  },
-  true
-);

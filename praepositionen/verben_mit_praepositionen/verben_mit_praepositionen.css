@@ -935,84 +935,7 @@ html.is-touch.vmp-measure .kbzone {
   pointer-events: auto;
   background: var(--bg);
 }
-.pattern-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s linear 0.18s;
-}
-.pattern-modal.open {
-  opacity: 1;
-  visibility: visible;
-  background: var(--overlay-scrim);
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s;
-}
-.pattern-modal-card {
-  width: min(560px, 100%);
-  max-height: min(80vh, 720px);
-  overflow: hidden;
-  background: var(--card-bg);
-  border: 1px solid var(--hairline);
-  border-radius: 26px;
-  --card-pad: 18px;
-  position: relative;
-  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.pattern-modal.open .pattern-modal-card {
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
-}
-.pattern-modal-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 0 0 auto;
-  padding-right: 28px;
-  margin-bottom: 8px;
-}
-.pattern-modal-head h2 {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 400;
-}
-.pattern-close {
-  position: absolute;
-  top: calc(var(--card-pad) - 7px);
-  right: calc(var(--card-pad) - 4px);
-}
 
-#tipsModalBody {
-  overflow: auto;
-  min-height: 0;
-}
 .pattern-section {
   margin: 16px 0 0;
   color: var(--text-secondary);
@@ -1096,11 +1019,6 @@ html.is-touch.vmp-measure .kbzone {
 body:has(.pattern-modal.open) .start-about {
   opacity: 0;
 }
-@media (max-width: 359px) {
-  .pattern-modal-card {
-    --card-pad: 14px;
-  }
-}
 @media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
   .in-session-pattern {
     position: static;
@@ -1108,9 +1026,7 @@ body:has(.pattern-modal.open) .start-about {
   }
 }
 @media (min-width: 700px) and (min-height: 740px) {
-  .pattern-modal-head h2 {
-    font-size: 24px;
-  }
+  
   .pattern-rule-text,
   .pattern-rule-ex {
     font-size: 16px;
@@ -1122,12 +1038,6 @@ body:has(.pattern-modal.open) .start-about {
   }
   .case-rule {
     font-size: 16px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pattern-modal,
-  .pattern-modal-card {
-    transition: none !important;
   }
 }
 

@@ -18,20 +18,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Vielseitige Verben" />
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
-    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=2" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="vielseitige_verben.css?v=38" />
+    <link rel="stylesheet" href="vielseitige_verben.css?v=39" />
   </head>
   <body>
-    <div id="formsModal" class="forms-modal" aria-hidden="true">
-      <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
-        <div class="forms-modal-head">
-          <h2 id="formsModalTitle">Vielseitige Verben · Formen</h2>
+    <div id="formsModal" class="forms-modal ui-window" aria-hidden="true">
+      <div class="forms-modal-card ui-window-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
+        <div class="forms-modal-head ui-window-head">
+          <h2 class="ui-window-title" id="formsModalTitle">Vielseitige Verben · Formen</h2>
           <button class="forms-close ui-close" id="formsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
         </div>
         <div class="vv-tabs" id="formsTabs" role="tablist"></div>
-        <div id="formsModalBody"></div>
+        <div id="formsModalBody" class="ui-window-body"></div>
       </div>
     </div>
     <main class="app">
@@ -105,7 +105,8 @@
     <script src="forms_table.js?v=13"></script>
     <script src="../../components/deutsch-progress-v1.js"></script>
     <script src="../../components/deutsch-end-v1.js?v=1"></script>
-    <script src="vielseitige_verben.js?v=29"></script>
+    <script src="../../components/deutsch-window-v1.js?v=1"></script>
+    <script src="vielseitige_verben.js?v=30"></script>
     <script src="../../components/deutsch-wide-v1.js?v=4"></script>
 </body>
 </html>

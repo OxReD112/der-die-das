@@ -536,16 +536,11 @@ function tableHtml(litCat = null) {
 }
 
 const omodal = document.getElementById("omodal");
-const tableIsOpen = () => omodal.classList.contains("open");
+const tableIsOpen = () => DeutschWindow.isOpen(omodal);
 function openTable(round) {
   if (round && !(inRound() && cardDone)) return; // off until the card is done
   document.getElementById("otable").innerHTML = tableHtml(round ? session[index].cat : null);
-  omodal.classList.add("open");
-  omodal.setAttribute("aria-hidden", "false");
-}
-function closeTable() {
-  omodal.classList.remove("open");
-  omodal.setAttribute("aria-hidden", "true");
+  DeutschWindow.open(omodal); // × / tap outside / Esc: components/deutsch-window-v1.js
 }
 
 /* ===== BACK TO HOME ===== */
@@ -589,10 +584,7 @@ els.homeBack.addEventListener("click", goBackToHome);
 document
   .querySelectorAll("[data-otable]")
   .forEach(b => b.addEventListener("click", () => openTable(b.dataset.otable === "round")));
-document.getElementById("oclose").addEventListener("click", closeTable);
-omodal.addEventListener("click", e => {
-  if (e.target === omodal) closeTable();
-});
+// × / tap outside / Esc: components/deutsch-window-v1.js
 
 /* ===== KEYS (computer keyboard) =====
    Only during a round and while the table window is closed; Esc closes the table.
@@ -601,10 +593,7 @@ omodal.addEventListener("click", e => {
    Cmd / Ctrl / Option combinations are left to the browser. On the start and summary screens
    Enter presses the focused button, as usual. */
 document.addEventListener("keydown", e => {
-  if (tableIsOpen()) {
-    if (e.key === "Escape") closeTable();
-    return;
-  }
+  if (tableIsOpen()) return; // Esc closes it: components/deutsch-window-v1.js
   if (!inRound() || e.metaKey || e.ctrlKey || e.altKey) return;
   if (e.key === "Enter" || e.key === " ") {
     if (!cardDone || (document.activeElement && document.activeElement.matches("[data-otable]"))) return;

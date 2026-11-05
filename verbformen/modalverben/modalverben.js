@@ -367,10 +367,7 @@ $("homeBack").onclick = goBackToHome;
    race through the sentences. Enter on the table button still opens the table. On the start and summary
    screens Enter presses the focused button, as usual. */
 document.addEventListener("keydown", e => {
-  if (tableIsOpen()) {
-    if (e.key === "Escape") closeFormsTable();
-    return;
-  }
+  if (tableIsOpen()) return; // Esc closes it: components/deutsch-window-v1.js
   if (!inRound()) return;
   if (e.key === "Enter") {
     if (document.activeElement && document.activeElement.matches("[data-forms-table]")) return;
@@ -748,28 +745,19 @@ function openFormsTable(mode) {
   modalFormMode = "scheme";
   modalFormTag = null;
   renderFormsTable();
-  const modal = $("formsModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
+  DeutschWindow.open($("formsModal")); // × / tap outside / Esc: components/deutsch-window-v1.js
 }
 
-const tableIsOpen = () => $("formsModal").classList.contains("open");
+const tableIsOpen = () => DeutschWindow.isOpen($("formsModal"));
 
-function closeFormsTable() {
-  const modal = $("formsModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
+$("formsModal").addEventListener("windowclose", () => {
   // computer: back to typing without clicking into the field first
   if (inRound() && !checked && !isTouchDevice) focusAnswer();
-}
+});
 
 document
   .querySelectorAll("[data-forms-table]")
   .forEach(button => button.addEventListener("click", () => openFormsTable(button.dataset.formsTable)));
-$("formsClose").onclick = closeFormsTable;
-$("formsModal").onclick = e => {
-  if (e.target === $("formsModal")) closeFormsTable();
-};
 
 $("formsModalBody").addEventListener("click", e => {
   const reset = e.target.closest("[data-reset-forms]");

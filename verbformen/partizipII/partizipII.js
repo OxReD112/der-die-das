@@ -440,10 +440,7 @@ $("homeBack").onclick = goBackToHome;
    Enter on the table button still opens the table. On the start and summary screens Enter
    presses the focused button, as usual. */
 document.addEventListener("keydown", e => {
-  if (tableIsOpen()) {
-    if (e.key === "Escape") closePatternTable();
-    return;
-  }
+  if (tableIsOpen()) return; // Esc closes it: components/deutsch-window-v1.js
   if (!inRound()) return;
   if (e.key === "Enter") {
     if (document.activeElement && document.activeElement.matches("[data-pattern-table]")) return;
@@ -674,26 +671,17 @@ function openPatternTable(round) {
   const v = round ? deck[index] : null;
   $("patternModalBody").innerHTML = patternTableHtml(v && v.kind !== "special" ? patternLit(v) : null, v);
   showPatternTab(verbTab(v));
-  const modal = $("patternModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
+  DeutschWindow.open($("patternModal")); // × / tap outside / Esc: components/deutsch-window-v1.js
   // 03.11.2026 (Alena): open at the verb's own rule — 05.11: on the verb's tab, scrolled to its rule
   // the verb's own vowel (its group, else its cell) first; the general „ending -en“ card is lit for every strong verb
   const panel = $("patternModalBody").querySelector(".pattern-panel:not([hidden])");
   const lit = round && (panel.querySelector(".pattern-group.lit") || panel.querySelector(".pattern-cell.lit") || panel.querySelector(".lit"));
   if (lit) lit.scrollIntoView({ block: "center" });
 }
-function closePatternTable() {
-  const modal = $("patternModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
+$("patternModal").addEventListener("windowclose", () => {
   // computer: back to typing without clicking into the field first
   if (inRound() && !checked && !isTouchDevice) focusAnswer();
-}
+});
 document
   .querySelectorAll("[data-pattern-table]")
   .forEach(b => b.addEventListener("click", () => openPatternTable(b.dataset.patternTable === "round")));
-$("patternClose").onclick = closePatternTable;
-$("patternModal").onclick = e => {
-  if (e.target === $("patternModal")) closePatternTable();
-};

@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Verben + Präp." />
     <title>Verben mit Präpositionen</title>
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
-    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=2" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="verben_mit_praepositionen.css?v=25" />
+    <link rel="stylesheet" href="verben_mit_praepositionen.css?v=26" />
   </head>
   <body>
     <main class="app">
@@ -107,13 +107,13 @@
         <h2>Worum geht's?</h2>
         <p class="about-de" id="aboutText"></p>
       </div>
-      <div id="tipsModal" class="pattern-modal" aria-hidden="true">
-        <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="tipsModalTitle">
-          <div class="pattern-modal-head">
-            <h2 id="tipsModalTitle">Präpositionen · Spickzettel</h2>
+      <div id="tipsModal" class="pattern-modal ui-window" aria-hidden="true">
+        <div class="pattern-modal-card ui-window-card" role="dialog" aria-modal="true" aria-labelledby="tipsModalTitle">
+          <div class="pattern-modal-head ui-window-head">
+            <h2 class="ui-window-title" id="tipsModalTitle">Präpositionen · Spickzettel</h2>
             <button class="pattern-close ui-close" id="tipsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
-          <div id="tipsModalBody"></div>
+          <div id="tipsModalBody" class="ui-window-body"></div>
         </div>
       </div>
       <div class="version-mark" aria-hidden="true">v3.17</div>
@@ -125,7 +125,8 @@
     <script src="../../components/deutsch-progress-v1.js"></script>
     <script src="../../components/deutsch-end-v1.js?v=1"></script>
     <script src="../../components/deutsch-bottom-v1.js?v=1"></script>
-    <script src="verben_mit_praepositionen.js?v=17"></script>
+    <script src="../../components/deutsch-window-v1.js?v=1"></script>
+    <script src="verben_mit_praepositionen.js?v=18"></script>
     <script src="../../components/deutsch-wide-v1.js?v=4"></script>
 </body>
 </html>

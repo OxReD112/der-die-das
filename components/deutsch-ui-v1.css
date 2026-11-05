@@ -138,3 +138,106 @@
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* ===== WINDOW (Spickzettel and other reference windows), 05.11.2026 =====
+   One frame for every window over an exercise (native: a sheet / dialog component). Open / close / Esc / tap outside:
+   components/deutsch-window-v1.js. What is inside (tables, tabs, tiles) stays the exercise's own.
+     .ui-window         the dimmed, blurred layer; centred; .open shows it
+     .ui-window-card    the card: as wide as the column (iPad 560), at most 80 % of the screen high, corners 26
+     .ui-window-head    title row; .ui-window-title 20 px — family font: --window-title-font / --window-title-weight
+                        (Inter 700 by default; the Verbformen family sets Literata 400)
+     .ui-window-body    the part that scrolls
+     .ui-close          the round × (look above), placed in the card's top right corner */
+.ui-window {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.ui-window.open {
+  opacity: 1;
+  visibility: visible;
+  background: var(--overlay-scrim);
+  transition:
+    opacity 0.18s ease,
+    background-color 0.18s ease,
+    visibility 0s;
+}
+.ui-window-card {
+  --card-pad: 18px; /* side padding; the × keeps the same distance from the right edge and the top */
+  position: relative;
+  width: min(560px, 100%);
+  max-height: min(80vh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px; /* title centred on the × */
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 26px;
+  text-align: left;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(8px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.ui-window.open .ui-window-card {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+.ui-window-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 auto;
+  padding-right: 28px; /* room for the × */
+  margin-bottom: 8px;
+}
+.ui-window-title {
+  margin: 0;
+  font-family: var(--window-title-font, var(--font));
+  font-size: 20px;
+  font-weight: var(--window-title-weight, 700);
+  color: var(--text);
+}
+.ui-window-body {
+  overflow-y: auto;
+  overflow-x: hidden; /* never sideways on the phone */
+  min-height: 0;
+}
+.ui-window .ui-close {
+  position: absolute;
+  top: calc(var(--card-pad) - 7px);
+  right: calc(var(--card-pad) - 4px);
+}
+@media (max-width: 359px) {
+  .ui-window {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .ui-window-card {
+    --card-pad: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-window,
+  .ui-window-card {
+    transition: none !important;
+  }
+}

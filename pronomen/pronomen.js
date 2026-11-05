@@ -243,7 +243,7 @@ function feedbackOpen() {
   return !$("feedback").classList.contains("hidden");
 }
 function tableOpen() {
-  return !$("modal").classList.contains("hidden");
+  return DeutschWindow.isOpen($("modal"));
 }
 /* An answer that starts the sentence is stored in lower case (mein); it is shown as written there (Mein). */
 const shownAnswer = x => (x.sentence.startsWith("___") ? x.answer.charAt(0).toLocaleUpperCase("de-DE") + x.answer.slice(1) : x.answer);
@@ -391,10 +391,6 @@ $("homeBack").onclick = goBackToHome;
    (preventDefault): a still-focused Weiter or Prüfen button must not act on it a second time.
    Cmd/Ctrl shortcuts are left to the browser; Option stays allowed (Option+s = ß on a Mac). */
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && tableOpen()) {
-    closeModal();
-    return;
-  }
   if ($("game").classList.contains("hidden") || tableOpen() || e.metaKey || e.ctrlKey) return;
   if (feedbackOpen()) {
     if (e.key === "Enter") {
@@ -651,18 +647,8 @@ document.querySelectorAll("[data-table]").forEach(
       else markWeakTable();
       wireEndingsFold();
       $("modalBody").scrollTop = 0;
-      $("modal").classList.remove("hidden");
-      requestAnimationFrame(() => requestAnimationFrame(() => $("modal").classList.add("open")));
+      DeutschWindow.open($("modal")); // × / tap outside / Esc: components/deutsch-window-v1.js
     })
 );
-function closeModal() {
-  const m = $("modal");
-  m.classList.remove("open");
-  setTimeout(() => m.classList.add("hidden"), 220);
-}
-$("close").onclick = closeModal;
-$("modal").onclick = e => {
-  if (e.target === $("modal")) closeModal();
-};
 
 loadKeyboardComponent().catch(e => console.error(e));

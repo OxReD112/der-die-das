@@ -558,79 +558,6 @@ body:has(#game:not(.hidden)) .version-mark {
 /* ===== TABLE WINDOW „Wo · Wohin · Woher“ =====
    The table-window rule: blur 8px + 34% / 20% darkening (like Home's settings dialog), card colour,
    10% outline, 24px corners, fade + zoom-in, × top right, tap outside / Esc closes. */
-.omodal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  padding-top: calc(16px + env(safe-area-inset-top));
-  z-index: 20;
-  background: rgba(0, 0, 0, 0);
-  -webkit-backdrop-filter: blur(8px); /* on the layer itself, so the blur fades in and out together with it */
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s linear 0.18s;
-}
-.omodal.open {
-  opacity: 1;
-  visibility: visible;
-  background: var(--overlay-scrim);
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s;
-}
-.osheet {
-  width: min(560px, 100%);
-  max-height: min(80vh, 720px); /* one window frame (01.11.2026): at most 80% of the screen, the rest scrolls inside */
-  overflow: auto;
-  background: var(--card-bg);
-  border: 1px solid var(--hairline);
-  border-radius: 26px; /* windows like the cards: one radius for big surfaces (01.11.2026) */
-  --card-pad: 18px; /* side padding; the close cross keeps the same distance from the right edge and the top */
-  position: relative;
-  padding: calc(var(--card-pad) - 4px) var(--card-pad) 16px; /* top like every Spickzettel window */ /* title centred on the cross */
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.omodal.open .osheet {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
-.ohead {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  padding-right: 28px; /* room for the cross */
-}
-.ohead h2 {
-  margin: 0;
-  font-size: 20px; /* window title 20 like every Spickzettel window */
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-/* Light cross (like Modalverben / Vielseitige Verben / Pronomen): the drawn 14 px sits var(--card-pad) from the
-   right edge and from the top, inside a 40 px tap area (13 px around it). */
-.oclose {
-  /* close: a small round button like the sheets of iOS (01.11.2026) — quieter than the title, clear of the 26px
-     corner, centred on the title; the tap area is 44 × 44 (::after) */
-  position: absolute;
-  top: calc(var(--card-pad) - 7px);
-  right: calc(var(--card-pad) - 4px);
-}
 
 /* Table (v21): examples (two, no articles except a country that needs one) and the prepositions on ONE line;
    the category on its own line underneath, full width. „Dativ“ hangs under nach / zu without lifting the word,
@@ -824,16 +751,14 @@ body:has(#game:not(.hidden)) .version-mark {
   * {
     transition: none !important;
   }
-  .osheet {
-    filter: none;
-  }
+  
 }
 
 /* Very narrow phones (320 px): less padding and column gap, so the examples stay on one line
    and the group name doesn't run into „Dativ“ under nach / zu. */
 @media (max-width: 359px) {
-  .omodal { padding-left: 10px; padding-right: 10px; }
-  .osheet { --card-pad: 14px; }
+  
+  
   .otbl2 { column-gap: 8px; }
   .otbl2 .ex { font-size: 16px; }
 }
