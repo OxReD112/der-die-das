@@ -85,54 +85,13 @@ body {
 }
 .choice {
   flex: 0 0 96px;
-  width: 96px;
   min-width: 0;
-  height: 58px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 14px;
-  background: var(--card-bg);
-  color: var(--text);
-  box-shadow: var(--start-btn-shadow);
   font-family: var(--font);
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.choice:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
+  font-size: 20px; /* 10 / 20 / 30 here: 20, regular (the others 21, 650) — kept as it was, 05.11 */
+  font-weight: 400;
+  line-height: normal;
 }
 
-/* „Vokalwechsel · Tabelle“: on the start screen under 10/20/30, during a round centred in the Home
-   button's row, a bit smaller (2026-09-27) */
-.pattern-table-btn {
-  /* Spickzettel: one size on the start screen and in the exercise, in every exercise (01.11.2026) */
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-secondary);
-  font-family: var(--font);
-  font-size: 13px;
-  line-height: 1.2;
-  font-weight: 400;
-  padding: 10px 13px;
-  box-shadow: none;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.pattern-table-btn:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
-}
 #start .pattern-table-btn {
   margin-top: 28px;
 }
@@ -146,15 +105,7 @@ body {
   z-index: 20;
   pointer-events: none;
 }
-/* during a round: off until Prüfen - greyed out, does nothing (no note) */
-.pattern-table-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-.pattern-table-btn:disabled:active {
-  transform: none;
-  filter: none;
-}
+
 .in-session-pattern .pattern-table-btn {
   pointer-events: auto;
   margin: 0;
@@ -263,29 +214,9 @@ body:has(.pattern-modal.open) .version-mark {
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 0;
-  border-radius: 18px;
-  font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-#playAgain {
-  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
-  color: var(--text);
-  border: 1px solid var(--hairline);
-}
-#homeBack {
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-}
-.finish-actions button:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== TOP BAR ===== title and counter in the palette grey, 3px progress line: hairline track + grey fill.
@@ -326,20 +257,11 @@ body:has(.pattern-modal.open) .version-mark {
   pointer-events: none;
 }
 .progress {
-  height: 3px;
   background: var(--hairline);
-  border-radius: 9px;
-  overflow: hidden;
   margin-bottom: 32px;
   position: sticky;
   top: calc(var(--shell-top) + 36px);
   z-index: 50;
-}
-.progress > i {
-  display: block;
-  height: 100%;
-  background: var(--muted);
-  border-radius: 9px;
 }
 
 /* ===== QUESTION CARD ===== */
@@ -414,36 +336,16 @@ body:has(.pattern-modal.open) .version-mark {
 #check,
 #next {
   width: 100%;
-  height: 56px;
-  border-radius: 18px;
-  font: 650 16px/1 var(--font);
-  box-shadow: none;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
 #check {
   margin: 14px auto 0;
-  border: 0;
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-  font-weight: 650;
 }
 #next {
   display: none;
   margin: 18px auto 0;
-  border: 1px solid var(--hairline);
-  background: var(--field-bg);
-  color: var(--text);
 }
 #next.show {
   display: block;
-}
-#check:active,
-#next:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== ANSWER (after Prüfen) ===== a line that spreads from the middle and glows green / red */
@@ -658,30 +560,8 @@ body:has(.pattern-modal.open) .version-mark {
   position: absolute;
   top: calc(var(--card-pad) - 7px);
   right: calc(var(--card-pad) - 4px);
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 999px;
-  padding: 0;
-  background: var(--hairline);
-  color: var(--muted);
-  cursor: pointer;
 }
-.pattern-close::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-.pattern-close svg {
-  width: 10px;
-  height: 10px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  fill: none;
-}
+
 #patternModalBody {
   overflow: auto;
   min-height: 0;
@@ -1108,15 +988,6 @@ body:has(.pattern-modal.open) .version-mark {
   margin-bottom: auto;
 }
 
-/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
-   counter 14px muted with digits of equal width */
-.progress {
-  border-radius: 99px;
-}
-.progress > i {
-  border-radius: 99px;
-  transition: width 0.25s ease;
-}
 #count {
   font-size: 14px;
   color: var(--muted);
@@ -1178,15 +1049,6 @@ body:has(.pattern-modal.open) .version-mark {
 /* Gemischte Verben (03.11.2026): the note under the vowel groups stands alone in its card */
 .pattern-rule-note.pattern-rule-note-only {
   margin-top: 0;
-}
-
-/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
-   page in both themes, and the keys' small shadow */
-#playAgain,
-#next {
-  border-color: transparent !important;
-  background: var(--card-bg) !important;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* ===== SPICKZETTEL TABS (05.11.2026, Alena) =====

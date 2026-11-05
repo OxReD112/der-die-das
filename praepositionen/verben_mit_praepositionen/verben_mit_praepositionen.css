@@ -117,29 +117,9 @@ body {
 }
 .session-option {
   flex: 0 0 96px;
-  width: 96px;
   min-width: 0;
-  height: 58px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 14px;
-  background: var(--card-bg);
-  color: var(--text);
-  box-shadow: var(--start-btn-shadow);
-  font: 650 21px/1 var(--font);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
-.session-option:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
-}
+
 .session-option:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
@@ -255,29 +235,9 @@ body:has(#game:not(.hidden)) .version-mark {
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 0;
-  border-radius: 18px;
-  font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-#playAgain {
-  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
-  color: var(--text);
-  border: 1px solid var(--hairline);
-}
-#homeBack {
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-}
-.done-actions button:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== TOP BAR ===== title and counter in the palette grey, 3px progress line: hairline track + grey fill.
@@ -325,26 +285,16 @@ body:has(#game:not(.hidden)) .version-mark {
   font-weight: 700;
   color: var(--muted);
 }
-.counter {
-  color: var(--muted);
-  font-size: 14px;
-}
+
 .progress {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 3px;
-  border-radius: 99px;
-  overflow: hidden;
   z-index: 1;
 }
 .progress i {
-  display: block;
   width: 0;
-  height: 100%;
-  background: var(--muted);
-  transition: width 0.25s ease;
 }
 
 /* ===== QUESTION ===== meaning, verb + blank (typing field), then one slot for „Welcher Kasus?“ / „+ Kasus“ */
@@ -480,25 +430,10 @@ html.is-touch .gap-input {
 #check {
   display: none;
   width: min(600px, 100%);
-  height: 56px;
   margin: 28px auto 0;
-  border: 0;
-  border-radius: 18px;
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-  font: 650 16px/1 var(--font);
-  box-shadow: none;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
 html:not(.is-touch) #check {
   display: block;
-}
-#check:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== FEEDBACK ===== (Pronomen style, glow per step): left half = preposition, right half = case */
@@ -715,25 +650,9 @@ html:not(.is-touch) #check {
 #continue {
   position: relative;
   z-index: 2;
-  touch-action: manipulation;
   width: min(600px, 100%);
-  height: 56px;
   margin-top: 40px;
   padding: 0;
-  border: 1px solid var(--hairline);
-  border-radius: 18px;
-  background: var(--field-bg);
-  color: var(--text);
-  font: 650 16px/1 var(--font);
-  box-shadow: none;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-#continue:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== PHONES AND TABLETS (in-app keyboard): TWO ZONES =====
@@ -951,18 +870,6 @@ html.is-touch.vmp-measure .kbzone {
   margin-bottom: auto;
 }
 
-/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
-   counter 14px muted with digits of equal width */
-.progress i {
-  border-radius: 99px;
-  transition: width 0.25s ease;
-}
-.counter {
-  font-size: 14px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* type scale (01.11.2026): on the narrowest phones (320) the long title would touch the counter at 20px */
 @media (max-width: 359px) {
   .top-title {
@@ -1009,22 +916,7 @@ html.is-touch.vmp-measure .kbzone {
 /* ===== SPICKZETTEL (03.11.2026) — button and window as in Partizip II =====
    Kasus (rules) · Welche Präposition? (tendencies); each line says how far it holds (a small tag); the verb's
    preposition is lit gold after the answer. A wrong case: the case rule under the answer (.case-rule). */
-.pattern-table-btn {
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-secondary);
-  font: 400 13px/1.2 var(--font);
-  padding: 10px 13px;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.pattern-table-btn:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
-}
+
 #start .pattern-table-btn {
   margin-top: 28px;
 }
@@ -1038,14 +930,7 @@ html.is-touch.vmp-measure .kbzone {
   z-index: 20;
   pointer-events: none;
 }
-.pattern-table-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-.pattern-table-btn:disabled:active {
-  transform: none;
-  filter: none;
-}
+
 .in-session-pattern .pattern-table-btn {
   pointer-events: auto;
   background: var(--bg);
@@ -1122,30 +1007,8 @@ html.is-touch.vmp-measure .kbzone {
   position: absolute;
   top: calc(var(--card-pad) - 7px);
   right: calc(var(--card-pad) - 4px);
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 999px;
-  padding: 0;
-  background: var(--hairline);
-  color: var(--muted);
-  cursor: pointer;
 }
-.pattern-close::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-.pattern-close svg {
-  width: 10px;
-  height: 10px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  fill: none;
-}
+
 #tipsModalBody {
   overflow: auto;
   min-height: 0;
@@ -1378,11 +1241,3 @@ body:has(.pattern-modal.open) .start-about {
   }
 }
 
-/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
-   page in both themes, and the keys' small shadow */
-#playAgain,
-#continue {
-  border-color: transparent !important;
-  background: var(--card-bg) !important;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-}

@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Verbformen" />
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="partizipII.css?v=33" />
+    <link rel="stylesheet" href="partizipII.css?v=34" />
   </head>
   <body>
     <main class="app">
@@ -27,11 +28,11 @@
         <h1 class="title">Partizip II.</h1>
         <p class="subtitle">Wie viele Verben?</p>
         <div class="choices">
-          <button class="choice" data-size="10">10</button>
-          <button class="choice" data-size="20">20</button>
-          <button class="choice" data-size="30">30</button>
+          <button class="choice ui-size" data-size="10">10</button>
+          <button class="choice ui-size" data-size="20">20</button>
+          <button class="choice ui-size" data-size="30">30</button>
         </div>
-        <button class="pattern-table-btn" data-pattern-table>Spickzettel</button>
+        <button class="pattern-table-btn ui-spick" data-pattern-table>Spickzettel</button>
       </section>
       <div class="start-about" id="startAbout">
         <h2>Worum geht's?</h2>
@@ -40,7 +41,7 @@
 
       <section id="study" class="hidden">
         <div class="top"><span class="brand">Partizip II.</span><span id="count"></span></div>
-        <div class="progress"><i id="bar"></i></div>
+        <div class="progress ui-progress"><i id="bar"></i></div>
         <section class="card">
           <div id="verb"></div>
           <div class="translation" id="translation"></div>
@@ -54,7 +55,7 @@
             spellcheck="false"
             enterkeyhint="done"
           />
-          <button id="check">Prüfen</button>
+          <button class="ui-main" id="check">Prüfen</button>
           <div class="result" id="result">
             <div class="result-head">
               <div class="state" id="state"></div>
@@ -70,11 +71,11 @@
               </div>
             </div>
           </div>
-          <button id="next">Weiter</button>
+          <button class="ui-quiet" id="next">Weiter</button>
         </section>
         <div id="keyboardMount"></div>
         <div class="in-session-pattern">
-          <button class="pattern-table-btn" type="button" id="roundTableBtn" data-pattern-table="round" disabled>
+          <button class="pattern-table-btn ui-spick" type="button" id="roundTableBtn" data-pattern-table="round" disabled>
             Spickzettel
           </button>
         </div>
@@ -85,8 +86,8 @@
         <div id="finalScore" class="final-score"></div>
         <p id="summary"></p>
         <div class="finish-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
 
@@ -94,7 +95,7 @@
         <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
           <div class="pattern-modal-head">
             <h2 id="patternModalTitle">Partizip II · Spickzettel</h2>
-            <button class="pattern-close" id="patternClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+            <button class="pattern-close ui-close" id="patternClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div class="pattern-tabs" id="patternTabs" role="tablist"></div>
           <div id="patternModalBody"></div>

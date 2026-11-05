@@ -1,0 +1,140 @@
+/* Deutsch exercises — shared look of the controls (05.11.2026, Alena: „change it once, it changes everywhere“).
+   Linked in every exercise after components/deutsch-base-v1.css and BEFORE the exercise's own stylesheet.
+   Only how a control looks lives here: fill, outline, corners, shadow, type, the press effect. Where it stands
+   (margins, width, fixed / sticky, display none / block) stays in each exercise. An exercise may still override
+   a value on purpose (e.g. a 64 px Weiter on a tablet) — its stylesheet comes later and wins at equal weight.
+   Every value here was the value in the exercises when it moved here (checked pixel by pixel, 9 exercises ×
+   iPhone 13 / SE / iPad × dark / light). New exercise: give its controls these classes and it looks like the rest.
+
+   .ui-quiet    the quiet wide button: Weiter, „Noch eine Runde“ (variant E, 05.11)
+   .ui-main     the main wide button: Prüfen, „Zur Startseite“ (cream in dark, dark in light)
+   .ui-size     10 / 20 / 30 on the start screen
+   .ui-spick    the Spickzettel pill (start screen and during a round; greyed out while it can't be used)
+   .ui-close    the round × of the Spickzettel windows (30 px, tap area 44 × 44)
+   .ui-progress the 3 px progress bar under the top bar; its fill is the <i> inside
+   .ui-counter  „3 / 10“ */
+
+.ui-quiet,
+.ui-main {
+  height: 56px;
+  border-radius: 18px;
+  font: 650 16px/1 var(--font);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.ui-quiet {
+  border: 1px solid transparent;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.ui-main {
+  border: 0;
+  background: var(--end-main-bg);
+  color: var(--end-main-text);
+  box-shadow: none;
+}
+
+.ui-size {
+  width: 96px;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--start-btn-shadow);
+  font: 650 21px/1 var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+
+.ui-spick {
+  margin: 0;
+  padding: 10px 13px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  box-shadow: none;
+  font: 400 13px/1.2 var(--font);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.ui-spick:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ui-quiet:active,
+.ui-main:active,
+.ui-size:active,
+.ui-spick:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+.ui-spick:disabled:active {
+  transform: none;
+  filter: none;
+}
+
+.ui-close {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--hairline);
+  color: var(--muted);
+  cursor: pointer;
+}
+.ui-close::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+}
+.ui-close svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.ui-progress {
+  height: 3px;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ui-progress > i {
+  display: block;
+  height: 100%;
+  background: var(--muted);
+  border-radius: 99px;
+  transition: width 0.25s ease;
+}
+
+.ui-counter {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}

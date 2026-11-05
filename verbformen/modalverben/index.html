@@ -16,16 +16,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Modalverben" />
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="modalverben.css?v=37" />
+    <link rel="stylesheet" href="modalverben.css?v=38" />
   </head>
   <body>
     <div id="formsModal" class="forms-modal" aria-hidden="true">
       <div class="forms-modal-card" role="dialog" aria-modal="true" aria-labelledby="formsModalTitle">
         <div class="forms-modal-head">
           <h2 id="formsModalTitle">Modalverben · Formen</h2>
-          <button class="forms-close" id="formsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+          <button class="forms-close ui-close" id="formsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
         </div>
         <div id="formsModalBody"></div>
       </div>
@@ -35,16 +36,16 @@
         <h1 class="title">Modalverben.</h1>
         <p class="subtitle">Wie viele Sätze?</p>
         <div class="choices">
-          <button class="choice" data-size="10">10</button>
-          <button class="choice" data-size="20">20</button>
-          <button class="choice" data-size="30">30</button>
+          <button class="choice ui-size" data-size="10">10</button>
+          <button class="choice ui-size" data-size="20">20</button>
+          <button class="choice ui-size" data-size="30">30</button>
         </div>
-        <button class="forms-table-btn" type="button" data-forms-table="full">Spickzettel</button>
+        <button class="forms-table-btn ui-spick" type="button" data-forms-table="full">Spickzettel</button>
       </section>
 
       <section id="study" class="hidden">
         <div class="top"><span class="brand">Modalverben.</span><span id="count"></span></div>
-        <div class="progress"><i id="bar"></i></div>
+        <div class="progress ui-progress"><i id="bar"></i></div>
         <section class="card">
           <div id="verb"></div>
           <div class="intention" id="intention"></div>
@@ -61,7 +62,7 @@
               spellcheck="false"
               enterkeyhint="done"
             />
-            <button id="check">Prüfen</button>
+            <button class="ui-main" id="check">Prüfen</button>
           </div>
           <div class="result" id="result">
             <div class="state" id="state"></div>
@@ -75,11 +76,11 @@
               <div class="meaning-contrast" id="meaningContrast"></div>
             </div>
           </div>
-          <button id="next">Weiter</button>
+          <button class="ui-quiet" id="next">Weiter</button>
         </section>
         <div id="keyboardMount"></div>
         <div class="in-session-forms">
-          <button class="forms-table-btn" type="button" id="roundTableBtn" data-forms-table="verb" disabled>
+          <button class="forms-table-btn ui-spick" type="button" id="roundTableBtn" data-forms-table="verb" disabled>
             Spickzettel
           </button>
         </div>
@@ -90,8 +91,8 @@
         <div id="finalScore" class="final-score"></div>
         <p id="summary"></p>
         <div class="finish-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
       <div class="start-about" id="startAbout">

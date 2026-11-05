@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Der.Die.Das." />
     <title>Artikel</title>
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="artikel.css?v=22" />
+    <link rel="stylesheet" href="artikel.css?v=23" />
   </head>
   <body>
     <main class="app">
@@ -28,9 +29,9 @@
         <h1>Wie viele Wörter?</h1>
         <p>Endungen, Gruppen und Ausnahmen.</p>
         <div class="session-options">
-          <button class="session-option" data-size="10">10</button>
-          <button class="session-option" data-size="20">20</button>
-          <button class="session-option" data-size="30">30</button>
+          <button class="session-option ui-size" data-size="10">10</button>
+          <button class="session-option ui-size" data-size="20">20</button>
+          <button class="session-option ui-size" data-size="30">30</button>
         </div>
       </section>
       <div class="start-about" id="startAbout">
@@ -42,9 +43,9 @@
         <section class="top">
           <div>
             <div class="top-title">Der.Die.Das.</div>
-            <div class="progress"><i id="bar"></i></div>
+            <div class="progress ui-progress"><i id="bar"></i></div>
           </div>
-          <div class="counter" id="counter">1 / 10</div>
+          <div class="counter ui-counter" id="counter">1 / 10</div>
         </section>
         <section class="card" id="card">
           <div class="eyebrow">Wähle den richtigen Artikel.</div>
@@ -73,7 +74,7 @@
             </div>
           </div>
         </section>
-        <button id="continue">Weiter</button>
+        <button class="ui-quiet" id="continue">Weiter</button>
       </div>
 
       <section class="hidden" id="endScreen">
@@ -82,8 +83,8 @@
         <div class="end-score" id="endCorrect">0 / 0</div>
         <p id="endSummary">Runde geschafft.</p>
         <div class="finish-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
       <div class="version-mark" aria-hidden="true">v30</div>

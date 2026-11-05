@@ -115,31 +115,10 @@ button {
   gap: 12px;
 }
 .session-option {
-  appearance: none;
   flex: 0 0 96px;
-  width: 96px;
   min-width: 0;
-  height: 58px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 14px;
-  background: var(--card-bg);
-  color: var(--text);
-  box-shadow: var(--start-btn-shadow);
-  font: 650 21px/1 var(--font);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
-.session-option:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
-}
+
 .session-option:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
@@ -237,29 +216,9 @@ body:has(#game:not(.hidden)) .version-mark {
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 0;
-  border-radius: 18px;
-  font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-#playAgain {
-  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
-  color: var(--text);
-  border: 1px solid var(--hairline);
-}
-#homeBack {
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-}
-.finish-actions button:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== TOP BAR ===== title and counter in the palette grey, 3px progress line: hairline track + grey fill.
@@ -283,25 +242,14 @@ body:has(#game:not(.hidden)) .version-mark {
   color: var(--muted);
 }
 .counter {
-  font-size: 14px;
-  color: var(--muted);
   padding-bottom: 2px;
-  font-variant-numeric: tabular-nums;
 }
 .progress {
   margin-top: 11px;
-  height: 3px;
-  border-radius: 99px;
   background: var(--hairline);
-  overflow: hidden;
 }
 .progress i {
-  display: block;
-  height: 100%;
   width: 0;
-  background: var(--muted);
-  border-radius: inherit;
-  transition: width 0.25s ease;
 }
 
 /* ===== WORD CARD ===== shared look with Artikel (the flash-card feeling): „lifted“, no outline.
@@ -506,22 +454,7 @@ body:has(#game:not(.hidden)) .version-mark {
 /* ===== WEITER ===== the quiet button (blueprint: Partizip II). It doesn't urge you on; you read the answer first. */
 #next {
   width: 100%;
-  height: 56px;
   margin-top: 14px;
-  border: 1px solid var(--hairline);
-  border-radius: 18px;
-  background: var(--field-bg);
-  color: var(--text);
-  font: 650 16px/1 var(--font);
-  box-shadow: none;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-#next:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== PHONES ===== */
@@ -609,18 +542,6 @@ body:has(#game:not(.hidden)) .version-mark {
   margin-bottom: auto;
 }
 
-/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
-   counter 14px muted with digits of equal width */
-.progress i {
-  border-radius: 99px;
-  transition: width 0.25s ease;
-}
-.counter {
-  font-size: 14px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* ===== TABLETS (03.11.2026, as Artikel) — iPad upright and sideways; computers take the sizes too =====
    One column of 600; the card with Akkusativ / Dativ / Genitiv in the middle of the screen, the answer card in its
    place (kasus.js → answer) with Weiter right under it — the last tap was a case button there.
@@ -668,11 +589,3 @@ body:has(#game:not(.hidden)) .version-mark {
   }
 }
 
-/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
-   page in both themes, and the keys' small shadow */
-#playAgain,
-#next {
-  border-color: transparent !important;
-  background: var(--card-bg) !important;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-}

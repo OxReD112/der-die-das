@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Verben + Präp." />
     <title>Verben mit Präpositionen</title>
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="verben_mit_praepositionen.css?v=24" />
+    <link rel="stylesheet" href="verben_mit_praepositionen.css?v=25" />
   </head>
   <body>
     <main class="app">
@@ -28,20 +29,20 @@
         <div class="start-sub">Wie viele Übungen?</div>
         <p class="start-hint">Schreib die Präposition, dann wähle den Kasus.</p>
         <div class="session-options">
-          <button class="session-option" data-size="10">10</button>
-          <button class="session-option" data-size="20">20</button>
-          <button class="session-option" data-size="30">30</button>
+          <button class="session-option ui-size" data-size="10">10</button>
+          <button class="session-option ui-size" data-size="20">20</button>
+          <button class="session-option ui-size" data-size="30">30</button>
         </div>
-        <button class="pattern-table-btn" type="button" data-tips="start">Spickzettel</button>
+        <button class="pattern-table-btn ui-spick" type="button" data-tips="start">Spickzettel</button>
       </section>
 
       <section id="game" class="hidden">
         <div class="top">
           <div>
             <div class="top-title">Verben mit Präpositionen</div>
-            <div class="progress"><i id="bar"></i></div>
+            <div class="progress ui-progress"><i id="bar"></i></div>
           </div>
-          <div class="counter" id="counter">1 / 10</div>
+          <div class="counter ui-counter" id="counter">1 / 10</div>
         </div>
 
         <div class="exercise">
@@ -59,7 +60,7 @@
                   <div class="case-question off" id="caseQuestion">Welcher Kasus?</div>
                 </div>
               </div>
-              <button id="check">Prüfen</button>
+              <button class="ui-main" id="check">Prüfen</button>
 
               <div id="feedback" class="feedback hidden">
                 <div class="glow l"></div>
@@ -77,7 +78,7 @@
                   <div class="also-line" id="alsoLine" hidden></div>
                   <div class="example" id="example"></div>
                   <div class="example-tr" id="exampleTr"></div>
-                  <button id="continue">Weiter</button>
+                  <button class="ui-quiet" id="continue">Weiter</button>
                 </div>
               </div>
             </div>
@@ -85,7 +86,7 @@
           <div class="kbzone" id="kbZone"><div id="keyboardMount"></div></div>
         </div>
         <div class="in-session-pattern">
-          <button class="pattern-table-btn" type="button" id="roundTipsBtn" data-tips="round" disabled>Spickzettel</button>
+          <button class="pattern-table-btn ui-spick" type="button" id="roundTipsBtn" data-tips="round" disabled>Spickzettel</button>
         </div>
       </section>
 
@@ -97,8 +98,8 @@
         <div class="done-note" id="doneNote"></div>
         <div class="end-list hidden" id="weak"></div>
         <div class="done-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
 
@@ -110,7 +111,7 @@
         <div class="pattern-modal-card" role="dialog" aria-modal="true" aria-labelledby="tipsModalTitle">
           <div class="pattern-modal-head">
             <h2 id="tipsModalTitle">Präpositionen · Spickzettel</h2>
-            <button class="pattern-close" id="tipsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+            <button class="pattern-close ui-close" id="tipsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div id="tipsModalBody"></div>
         </div>

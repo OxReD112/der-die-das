@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Pronomen" />
     <title>Pronomen</title>
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="pronomen.css?v=23" />
+    <link rel="stylesheet" href="pronomen.css?v=24" />
   </head>
   <body>
     <main class="app">
@@ -28,12 +29,12 @@
         <h1>Wie viele Übungen?</h1>
         <p class="muted">Personal- und Possessivpronomen gemischt.</p>
         <div class="options">
-          <button class="size" data-n="10">10</button>
-          <button class="size" data-n="20">20</button>
-          <button class="size" data-n="30">30</button>
+          <button class="size ui-size" data-n="10">10</button>
+          <button class="size ui-size" data-n="20">20</button>
+          <button class="size ui-size" data-n="30">30</button>
         </div>
         <div class="table-buttons">
-          <button class="table-btn" data-table="reference">Spickzettel</button>
+          <button class="table-btn ui-spick" data-table="reference">Spickzettel</button>
         </div>
       </section>
       <div class="start-about" id="startAbout">
@@ -45,9 +46,9 @@
         <div class="top">
           <div>
             <div class="top-title">Pronomen</div>
-            <div class="progress"><i id="bar"></i></div>
+            <div class="progress ui-progress"><i id="bar"></i></div>
           </div>
-          <div class="counter" id="counter">1 / 10</div>
+          <div class="counter ui-counter" id="counter">1 / 10</div>
         </div>
 
         <div class="exercise">
@@ -57,17 +58,17 @@
             <div class="translation" id="translation"></div>
           </div>
           <div class="answerbox" id="answerbox"></div>
-          <button class="check" id="check">Prüfen</button>
+          <button class="check ui-main" id="check">Prüfen</button>
           <div id="feedback" class="feedback hidden">
             <div class="given" id="given"></div>
             <div class="correct-text" id="correctText"></div>
             <div class="case-note" id="caseNote" hidden></div>
             <div class="skill" id="skill"></div>
-            <button class="continue" id="continue">Weiter</button>
+            <button class="continue ui-quiet" id="continue">Weiter</button>
           </div>
           <div id="keyboardMount"></div>
           <div class="table-buttons in-session-tables">
-            <button class="table-btn" type="button" id="roundTableBtn" data-table="round" disabled>Spickzettel</button>
+            <button class="table-btn ui-spick" type="button" id="roundTableBtn" data-table="round" disabled>Spickzettel</button>
           </div>
         </div>
       </section>
@@ -79,8 +80,8 @@
         <div class="done-note" id="doneNote">Gut gemacht – Runde geschafft!</div>
         <div class="end-list hidden" id="weak"></div>
         <div class="done-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
 
@@ -88,7 +89,7 @@
         <div class="modal-card">
           <div class="modal-head">
             <h2 id="modalTitle"></h2>
-            <button class="close" id="close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+            <button class="close ui-close" id="close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div id="modalBody"></div>
         </div>

@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Fester Kasus" />
     <title>Fester Kasus</title>
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="kasus.css?v=28" />
+    <link rel="stylesheet" href="kasus.css?v=29" />
   </head>
   <body>
     <main class="app">
@@ -27,9 +28,9 @@
         <h1>Fester Kasus</h1>
         <p>Wie viele Übungen?</p>
         <div class="session-options">
-          <button class="session-option" data-size="10">10</button>
-          <button class="session-option" data-size="20">20</button>
-          <button class="session-option" data-size="30">30</button>
+          <button class="session-option ui-size" data-size="10">10</button>
+          <button class="session-option ui-size" data-size="20">20</button>
+          <button class="session-option ui-size" data-size="30">30</button>
         </div>
       </section>
 
@@ -37,9 +38,9 @@
         <header class="top">
           <div class="top-row">
             <div class="top-title">Fester Kasus</div>
-            <div class="counter" id="counter">1 / 10</div>
+            <div class="counter ui-counter" id="counter">1 / 10</div>
           </div>
-          <div class="progress"><i id="bar"></i></div>
+          <div class="progress ui-progress"><i id="bar"></i></div>
         </header>
 
         <section class="card" id="questionCard">
@@ -67,7 +68,7 @@
           <button class="case-choice" data-case="Dativ">Dativ</button>
           <button class="case-choice" data-case="Genitiv">Genitiv</button>
         </section>
-        <button class="hidden" id="next">Weiter</button>
+        <button class="hidden ui-quiet" id="next">Weiter</button>
       </section>
 
       <section class="hidden" id="endScreen">
@@ -76,8 +77,8 @@
         <div class="end-note" id="endNote"></div>
         <div class="end-list hidden" id="weak"></div>
         <div class="finish-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
       <div class="start-about" id="startAbout">

@@ -74,27 +74,6 @@ h1 {
 }
 .size {
   flex: 0 0 96px;
-  width: 96px;
-  height: 58px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 14px;
-  background: var(--card-bg);
-  color: var(--text);
-  box-shadow: var(--start-btn-shadow);
-  font: 650 21px/1 var(--font);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.size:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* „Pronomen · Tabelle“ — on the start screen and during the game */
@@ -107,23 +86,6 @@ h1 {
 .table-btn {
   /* Spickzettel: one size on the start screen and in the exercise, in every exercise (01.11.2026) */
   margin: 0;
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-secondary);
-  font-family: var(--font);
-  font-size: 13px;
-  line-height: 1.2;
-  font-weight: 400;
-  padding: 10px 13px;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.table-btn:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* „Worum geht's?“ — width = the 10/20/30 row (3 × 96px + 2 × 12px), fixed above the version mark (2026-09-26) */
@@ -179,29 +141,9 @@ body:has(#start.hidden) .start-about {
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 0;
-  border-radius: 18px;
-  font: 650 16px/1 var(--font);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.done-actions button:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
-}
-#playAgain {
-  background: var(--field-bg); /* one calm button: like Weiter (01.11.2026) */
-  color: var(--text);
-  border: 1px solid var(--hairline);
-}
-#homeBack {
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
 }
 
 /* Version number: only on the start and summary screens */
@@ -284,24 +226,15 @@ body:has(#game:not(.hidden)) .version-mark {
   font-weight: 700;
   color: var(--muted);
 }
-.counter {
-  color: var(--muted);
-  font-size: 14px;
-}
+
 .progress {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 3px;
-  border-radius: 99px;
-  overflow: hidden;
   z-index: 1;
 }
 .progress i {
-  display: block;
-  height: 100%;
-  background: var(--muted);
   width: 0;
 }
 
@@ -383,24 +316,10 @@ html:not(.is-touch) .answerbox {
 .check {
   display: none;
   width: min(600px, 100%);
-  height: 56px;
   margin: 14px auto 0;
-  border: 0;
-  border-radius: 18px;
-  background: var(--end-main-bg);
-  color: var(--end-main-text);
-  font: 650 16px/1 var(--font);
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
 html:not(.is-touch) .check {
   display: block;
-}
-.check:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* ===== FEEDBACK ===== */
@@ -480,24 +399,9 @@ html:not(.is-touch) .check {
 .continue {
   position: relative;
   z-index: 2;
-  touch-action: manipulation;
   width: min(600px, 100%);
-  height: 56px;
   margin-top: 25px;
   padding: 0;
-  border: 1px solid var(--hairline);
-  border-radius: 18px;
-  background: var(--field-bg);
-  color: var(--text);
-  font: 650 16px/1 var(--font);
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-}
-.continue:active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 
 /* Table button during the game: centred in the Home button's row, a bit smaller (2026-09-27) */
@@ -509,15 +413,7 @@ html:not(.is-touch) .check {
   z-index: 20;
   pointer-events: none;
 }
-/* during a round: off until Prüfen - greyed out, does nothing (no note) */
-.table-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-.table-btn:disabled:active {
-  transform: none;
-  filter: none;
-}
+
 .in-session-tables .table-btn {
   pointer-events: auto;
   background: var(--bg);
@@ -610,30 +506,8 @@ html:not(.is-touch) .check {
   position: absolute;
   top: calc(var(--card-pad) - 7px);
   right: calc(var(--card-pad) - 4px);
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 999px;
-  padding: 0;
-  background: var(--hairline);
-  color: var(--muted);
-  cursor: pointer;
 }
-.close::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-.close svg {
-  width: 10px;
-  height: 10px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  fill: none;
-}
+
 #modalBody {
   overflow: auto;
   min-height: 0;
@@ -874,18 +748,6 @@ html:not(.is-touch) .check {
   margin-bottom: auto;
 }
 
-/* progress and counter: the same in every exercise (01.11.2026) — round 3px bar, round fill that grows softly,
-   counter 14px muted with digits of equal width */
-.progress i {
-  border-radius: 99px;
-  transition: width 0.25s ease;
-}
-.counter {
-  font-size: 14px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* ===== TABLETS (03.11.2026, as Modalverben) — iPad upright and sideways; computers take the sizes too =====
    One column of 600 (.app 600 + 2 × 18 + 2 × 14), the keyboard as wide as the column (bigger keys:
    components/deutsch-keyboard), the question in the middle of the room above the keyboard (decision B), held there
@@ -918,11 +780,3 @@ html:not(.is-touch) .check {
   }
 }
 
-/* 05.11 (Alena, variant E): the quiet button (Weiter, „Noch eine Runde“) — no outline; the tiles' fill, lighter than the
-   page in both themes, and the keys' small shadow */
-#playAgain,
-.continue {
-  border-color: transparent !important;
-  background: var(--card-bg) !important;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-}

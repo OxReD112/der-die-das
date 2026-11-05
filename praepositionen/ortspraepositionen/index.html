@@ -17,9 +17,10 @@
     <meta name="apple-mobile-web-app-title" content="Ortspräpositionen" />
     <title>Ortspräpositionen</title>
     <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=5" />
+    <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="ortspraepositionen.css?v=31" />
+    <link rel="stylesheet" href="ortspraepositionen.css?v=32" />
   </head>
   <body>
     <main class="app">
@@ -27,20 +28,20 @@
         <h1>Ortspräpositionen</h1>
         <p>Wie viele Übungen?</p>
         <div class="session-options">
-          <button class="session-option" data-size="10">10</button>
-          <button class="session-option" data-size="20">20</button>
-          <button class="session-option" data-size="30">30</button>
+          <button class="session-option ui-size" data-size="10">10</button>
+          <button class="session-option ui-size" data-size="20">20</button>
+          <button class="session-option ui-size" data-size="30">30</button>
         </div>
-        <button class="table-btn" type="button" data-otable>Spickzettel</button>
+        <button class="table-btn ui-spick" type="button" data-otable>Spickzettel</button>
       </section>
 
       <section id="game" class="hidden">
         <header class="top">
           <div class="top-row">
             <div class="top-title">Ortspräpositionen</div>
-            <div class="counter" id="counter">1 / 10</div>
+            <div class="counter ui-counter" id="counter">1 / 10</div>
           </div>
-          <div class="progress"><i id="bar"></i></div>
+          <div class="progress ui-progress"><i id="bar"></i></div>
           <div class="glow" aria-hidden="true"></div>
         </header>
 
@@ -57,9 +58,9 @@
 
         <section class="choices" id="choices"></section>
         <div class="rule-note" id="ruleNote"></div>
-        <button class="hidden" id="next">Weiter</button>
+        <button class="hidden ui-quiet" id="next">Weiter</button>
         <div class="in-session-table">
-          <button class="table-btn" type="button" id="roundTableBtn" data-otable="round" disabled>Spickzettel</button>
+          <button class="table-btn ui-spick" type="button" id="roundTableBtn" data-otable="round" disabled>Spickzettel</button>
         </div>
       </section>
 
@@ -68,8 +69,8 @@
         <div class="end-score" id="endScore">0 / 30</div>
         <div class="end-note" id="endNote"></div>
         <div class="finish-actions">
-          <button id="playAgain">Noch eine Runde</button>
-          <button id="homeBack">Zur Startseite</button>
+          <button class="ui-quiet" id="playAgain">Noch eine Runde</button>
+          <button class="ui-main" id="homeBack">Zur Startseite</button>
         </div>
       </section>
       <div class="start-about" id="startAbout">
@@ -81,7 +82,7 @@
         <div class="osheet" role="dialog" aria-label="Wo · Wohin · Woher">
           <div class="ohead">
             <h2>Wo · Wohin · Woher</h2>
-            <button class="oclose" id="oclose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+            <button class="oclose ui-close" id="oclose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           </div>
           <div id="otable"></div>
         </div>
