@@ -6,7 +6,6 @@
   --tone-a: #5bc8a4;
   --tone-b: #e8c478;
   --tone-c: #ff7770;
-  --cats-track: var(--hairline);
   --thumb-bg: var(--text);
   --thumb-ring: transparent;
 }
@@ -14,7 +13,6 @@
   --tone-a: #3fa68a;
   --tone-b: #d9a23a;
   --tone-c: #e95e66;
-  --cats-track: rgba(0, 0, 0, 0.055);
   --thumb-bg: #fbf9f6;
   --thumb-ring: rgba(0, 0, 0, 0.14);
 }
@@ -68,9 +66,11 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 .top-title { font-size: 20px; font-weight: 700; color: var(--muted); }
 
 /* ===== CATEGORIES: capsule ===== */
-.cats { margin: 20px auto 0; width: max-content; max-width: 100%; display: flex; padding: 3px; border-radius: 999px; background: var(--cats-track); }
+/* the capsules (categories here, level on the Üben start) look like Home's places capsule (Alena 05.11): the tiles' fill
+   and soft shadow, the chosen one a faint pad without a shadow of its own, its word bright, the others muted */
+.cats { margin: 20px auto 0; width: max-content; max-width: 100%; display: flex; padding: 4px; border-radius: 999px; background: var(--card-bg); box-shadow: var(--start-btn-shadow); }
 .cat { border: 0; background: none; padding: 7px 15px; border-radius: 999px; font: 600 14px/1.2 var(--font); color: var(--muted); cursor: pointer; transition: background-color 0.18s ease, color 0.18s ease; }
-.cat[aria-selected="true"] { background: var(--card-bg); color: var(--text); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); }
+.cat[aria-selected="true"] { background: var(--hairline); color: var(--text); }
 .cat:disabled { opacity: 0.35; cursor: default; }
 
 /* ===== SENTENCE ===== */
@@ -126,7 +126,7 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 
 /* ===================== ÜBEN ===================== */
 #pStart, #pDone { text-align: center; }
-.levels { margin: 0 auto; width: max-content; display: flex; padding: 3px; border-radius: 999px; background: var(--cats-track); }
+.levels { margin: 0 auto; width: max-content; display: flex; padding: 4px; border-radius: 999px; background: var(--card-bg); box-shadow: var(--start-btn-shadow); }
 .levels .cat { padding: 7px 20px; }
 .options { display: flex; justify-content: center; gap: 12px; margin: 28px 0 22px; }
 .size {
@@ -209,9 +209,12 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
 
 .mode-switch { font-size: 12px; padding: 7px 12px; } /* 05.11: on the type scale (was 12.5) */
 
-/* Üben start: the level switch sits low, where „Worum geht's?“ sits on other start screens (Alena 05.11):
-   chosen once, remembered, so it stays out of the way of 10 / 20 / 30. 80 px = above Home's round button row. */
-#pStart .levels { position: fixed; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 80px); z-index: 4; }
+/* Üben start: the level — „Niveau“ + the capsule — sits low, where „Worum geht's?“ sits on other start screens
+   (Alena 05.11, variant C): chosen once, remembered, so it stays out of the way of 10 / 20 / 30; 120 px up, clear of
+   Home's round button. */
+.level-pick { position: fixed; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 120px); z-index: 4; text-align: center; }
+.level-pick h2 { margin: 0 0 8px; font-size: 14px; font-weight: 650; line-height: 1.3; color: var(--muted); }
 @media (max-height: 559px), (max-width: 340px) and (max-height: 609px) {
-  #pStart .levels { position: static; margin-top: 12px; }
+  .level-pick { position: static; margin-top: 12px; }
 }
+

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=1" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="partikeln.css?v=3" />
+    <link rel="stylesheet" href="partikeln.css?v=4" />
   </head>
   <body>
     <main class="app">
@@ -82,8 +82,11 @@
           <button class="size ui-size" data-n="20">20</button>
           <button class="size ui-size" data-n="30">30</button>
         </div>
-        <div class="levels" id="levels" role="tablist" aria-label="Niveau">
+        <div class="level-pick">
+        <h2 id="levelsLabel">Niveau</h2>
+        <div class="levels" id="levels" role="tablist" aria-labelledby="levelsLabel">
           <button class="cat" data-lv="A2">A2</button><button class="cat" data-lv="B1">B1</button><button class="cat" data-lv="B2">B2</button>
+        </div>
         </div>
       </section>
 
