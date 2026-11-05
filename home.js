@@ -574,6 +574,9 @@ const shell = document.getElementById("appShell");
 const frame = document.getElementById("appFrame");
 const back = document.getElementById("homeBack");
 
+document.getElementById("placeHome")?.addEventListener("click", () => {
+  if (shell.classList.contains("open")) closeApp();
+});
 document.querySelectorAll("[data-app]").forEach(button => {
   button.addEventListener("pointerdown", () => preloadApp(button), { passive: true });
   button.addEventListener("click", () => openApp(button));
@@ -727,9 +730,14 @@ function preloadApp(tile) {
   }, 1500);
 }
 
+// 05.11: Lesen (the Bibliothek) is a place of the bottom dock — the dock stays above it (home.css → .place-library)
+const isLibraryApp = url => /^bibliothek\//.test(url || "");
 function openApp(tile) {
   if (animBusy) return;
+  if (isLibraryApp(tile.dataset.app) && shell.classList.contains("open")) return; // already there
   clearTimeout(preloadTimer);
+  document.documentElement.classList.toggle("place-library", isLibraryApp(tile.dataset.app));
+  document.documentElement.classList.remove("place-hidden");
   if (preloadedApp !== tile.dataset.app) setFrameSrc(tile.dataset.app);
   preloadedApp = null;
   const zoom = useAnimation();
@@ -815,6 +823,7 @@ function openChapterExercise(url) {
 
 function closeApp() {
   if (animBusy) return;
+  document.documentElement.classList.remove("place-library", "place-hidden"); // the dock's pad slides back to Üben
   renderDailyStats();
   const hideShell = () => {
     shell.classList.remove("open", "preload", "is-animating", "is-closing");
@@ -925,6 +934,11 @@ function safeTop() {
   return parseFloat(getComputedStyle(safeProbe).paddingTop) || 0;
 }
 
+// the Bibliothek shows a book (its reading view is open)
+function libraryReading(doc, win) {
+  const view = doc.getElementById("reading-view");
+  return !!view && !view.hidden && isShown(view, win, true);
+}
 function updateBack() {
   backRaf = 0;
   if (!shell.classList.contains("open") || shell.classList.contains("is-closing")) {
@@ -953,6 +967,7 @@ function updateBack() {
   const windowOpen = [...doc.querySelectorAll(windows)].some(el => isShown(el, win, true));
   back.classList.toggle("is-hidden", windowOpen);
   setFrameWindow(windowOpen);
+  if (libraryPage) document.documentElement.classList.toggle("place-hidden", windowOpen || libraryReading(doc, win));
   if (windowOpen) return;
 
   const W = win.innerWidth;
@@ -960,7 +975,27 @@ function updateBack() {
   const short = win.matchMedia(SHORT_SCREEN).matches;
   doc.documentElement.classList.remove("deutsch-home-in-bar");
 
-  // Bibliothek keeps Home at the left edge of its bottom controls, including while reading.
+  // Bibliothek: on the shelf the dock takes the Home button's job (05.11); while reading the round Home button sits at
+  // the left edge of the bottom controls, as before.
+  if (libraryPage && !libraryReading(doc, win)) {
+    back.classList.add("is-hidden");
+    if (!doc.getElementById("deutsch-home-dock")) {
+      const st = doc.createElement("style");
+      st.id = "deutsch-home-dock";
+      st.textContent =
+        // the shelf ends above the dock; its own buttons (view, ＋) stand on the capsule's line at the right (Alena 05.11)
+        "#library{padding-bottom:calc(env(safe-area-inset-bottom) + 110px)!important}" +
+        ".library-screen .library-actions{bottom:calc(env(safe-area-inset-bottom) + 18px)!important}" +
+        // right edge = the right edge of Home's tiles (iPad upright: the 600 column inside the Bibliothek's 720)
+        ":root{--dock-right:max(24px,calc((100vw - 600px) / 2 - (100vw - min(100vw, 720px)) / 2))}" +
+        ".library-actions .library-add-toggle{left:auto!important;right:var(--dock-right)!important}" +
+        ".library-screen .library-actions .library-view-toggle{right:calc(var(--dock-right) + 62px)!important}" +
+        "@media (max-height:700px){.empty-mark{height:clamp(110px,20dvh,230px)!important}.empty-library{padding-top:28px!important}}" +
+        ".library-screen .reader-toast{bottom:calc(env(safe-area-inset-bottom) + 90px)!important}";
+      doc.head.appendChild(st);
+    }
+    return;
+  }
   if (libraryPage) {
     rowTop = version ? version.getBoundingClientRect().top + version.getBoundingClientRect().height / 2 - 22 : null;
     const reader = doc.getElementById("reader");
@@ -1030,7 +1065,7 @@ function scheduleBack() {
 }
 frame.addEventListener("load", () => {
   if (backObserver) backObserver.disconnect();
-  back.classList.remove("is-hidden");
+  if (!document.documentElement.classList.contains("place-library")) back.classList.remove("is-hidden"); // shelf: the dock is there instead
   try {
     backObserver = new MutationObserver(scheduleBack);
     backObserver.observe(frame.contentDocument.documentElement, {

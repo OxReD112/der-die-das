@@ -2921,3 +2921,140 @@ html.home-wide-layout body {
 .settings-info svg *,
 .about-close svg *,
 .keep-label svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }
+
+/* ===== 05.11 (Alena): the bottom dock — places in a capsule, tools around it =====
+   Places (they change the screen): Üben = Home, Lesen = Bibliothek — a small floating capsule at the bottom LEFT, on
+   the same spot on both screens, the chosen one in a round pad. On the right: the tools of the screen — on Home
+   „Wörterbuch“ (word), Notizbuch, Einstellungen (plain, no pad — rule 04.11: a pad only for the one main thing; they
+   open their windows over everything, as before); on the Bibliothek shelf its own view toggle and „＋“ (home.js
+   moves them onto the capsule's line). While reading and in any window the capsule goes away and the round Home
+   button is there as before (html.place-hidden). */
+.home-places {
+  --place-w: 56px;
+  position: fixed;
+  left: max(24px, calc((100% - var(--dashboard-width)) / 2)); /* the left edge of the tiles */
+  bottom: calc(env(safe-area-inset-bottom) + 16px);
+  z-index: 31;
+  display: flex;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 999px;
+  background: var(--tile-surface);
+  box-shadow: var(--lift-highlight), var(--lift-shadow);
+  transition: opacity 0.2s ease;
+}
+.home-places-pill {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: var(--place-w);
+  height: 46px;
+  border-radius: 999px;
+  background: var(--hairline);
+  transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+[data-theme="light"] .home-places-pill {
+  background: rgba(0, 0, 0, 0.055);
+}
+.place-library .home-places-pill {
+  transform: translateX(calc(var(--place-w) + 2px));
+}
+.home-place {
+  position: relative;
+  width: var(--place-w);
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color 0.2s ease;
+}
+.home-place svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.home-place svg * {
+  vector-effect: non-scaling-stroke;
+}
+html:not(.place-library) #placeHome,
+.place-library #placeLibrary {
+  color: var(--text);
+}
+.home-place:active svg {
+  transform: scale(0.94);
+}
+/* the tools around the capsule (phones and iPad upright; the wide Home keeps its own layout) */
+html:not(.home-wide-layout) .home-actions {
+  position: fixed; /* on the line of the capsule, whatever the page's height */
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 16px);
+  width: min(calc(100% - 48px), 720px); /* the tiles' column */
+  min-height: 56px;
+  margin: 0 auto;
+}
+html:not(.home-wide-layout) .settings-launcher {
+  position: absolute;
+  left: auto;
+  right: calc(max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px)) + 88px); /* just left of the pencil */
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 13px 12px;
+}
+html:not(.home-wide-layout) .settings-launcher:active {
+  transform: translateY(-50%) scale(0.97);
+}
+html:not(.home-wide-layout) .notebook-icon-button {
+  left: auto;
+  right: calc(max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px)) + 44px);
+}
+html:not(.home-wide-layout) .settings-icon-button {
+  right: max(-12px, calc((100% - var(--dashboard-width)) / 2 - 12px));
+}
+html:not(.home-wide-layout) .settings-icon-button svg {
+  width: 19px;
+  height: 19px;
+}
+/* windows of Home and of the Bibliothek: the dock goes */
+.home-settings-open .home-places,
+.home-dictionary-open .home-places,
+.home-notebook-open .home-places,
+.place-library.place-hidden .home-places {
+  opacity: 0;
+  pointer-events: none;
+}
+/* Lesen: the dock and Home's tool windows stay above the Bibliothek (the exercise layer is z-index 1000) */
+.place-library .home-places {
+  z-index: 1002;
+}
+.place-library .home-actions {
+  opacity: 0;
+  pointer-events: none;
+}
+.place-library .settings-layer,
+.place-library .dictionary-layer,
+.place-library .notebook-layer {
+  z-index: 1003;
+}
+/* the wide Home (iPad landscape, computer): only the capsule, at the bottom in the middle — to be designed */
+.home-wide-layout .home-places {
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom) + 24px);
+  transform: translateX(-50%);
+}
+/* 05.11 (Alena): the simpler pencil for the Notizbuch (24 × 24, the dock's line) */
+.notebook-icon-button svg {
+  width: 21px;
+  height: 21px;
+}
