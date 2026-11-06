@@ -71,6 +71,10 @@ html.deutsch-wide .keyboard .row.special .ok {
    need that room. */
 @media (min-height: 900px) {
   html.deutsch-wide .keyboard .key { height: calc((var(--ex-block) - 54px) / 10 * 0.72); }
+  /* the letters (and ✓) grow with the key, in the same proportion as on the lower wide screens: 24 on a 56 key
+     (06.11, Alena: they stayed 24 on 77 px keys and looked lost); the Shift and ⌫ icons follow them (em) */
+  html.deutsch-wide .keyboard .key,
+  html.deutsch-wide .keyboard .row.special .ok { font-size: calc((var(--ex-block) - 54px) / 10 * 0.72 * 24 / 56); }
 }`;
 
   function addStyle() {
