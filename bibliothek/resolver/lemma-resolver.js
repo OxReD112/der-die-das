@@ -2247,10 +2247,15 @@
         !WIE_QUESTION_WORD.test(words[i+1]||'')&&
         words.slice(from,i-1).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[i-1]));
       const clauses = [];let start = 0, relation = 'root';
+      // (P7 for the reflexive search, advisor 06.11, L-028: a quoted name / title is no boundary — the same quotedTitles as the chains;
+      // will sich … mit dem Programm „Mostly Mallwitz“ präsentieren)
+      const titleMarks = new Set();
+      for (const [a,b] of quotedTitles(sentence,tokens,clauseGaps.plain)) { titleMarks.add(a); titleMarks.add(b); }
       for (let i=1;i<tokens.length;i++) {
         // G15 (19.10.2026): a comma, point or colon inside a number (13,5; 26.600; 6:4) is no clause boundary.
         // A list of numbers (6:4, 5:7, 6:3) is one nominal element too.
-        const gap = clauseGapText(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index).replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+/gu,'0'),tokens[i-1][0],tokens[i][0]);
+        const rawGap = clauseGapText(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index).replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+/gu,'0'),tokens[i-1][0],tokens[i][0]);
+        const gap = titleMarks.has(i-1) ? rawGap.replace(/[„“”"»«]/gu," ") : rawGap;
         const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])||coordinators.has(words[j])));
         const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
         const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
@@ -4552,6 +4557,35 @@
     // A separable particle of an own verb (nahe of nahelegen, fest) keeps its old handling: it may belong to the verb.
     const ownModifierForm = word => /^\p{Ll}/u.test(word) && !(forms.get(norm(word)) || []).some(e => e.type === "Verb") && !separableParticles.has(norm(word)) &&
       (forms.get(norm(word)) || []).some(e => ["Adjektiv","Adverb"].includes(e.type));
+    // P7 (26.10.2026; one rule for every chain — advisor 06.11, L-028): a quoted name / title stays in its clause as its noun and the
+    // quote marks join — only capital words and numbers (wird für die "Einehe" benutzt, werden die "Faschisten" gezeigt, an die
+    // Bezeichnungen "Hofgut" und "Kapelle" angelehnt; review 26.10: not a lowercase word after a determiner — Das "kann" wurde
+    // gestrichen, Das "Ich liebe dich" wurde oft gesagt keep the old boundary). The closing mark followed only by a space, at most 6
+    // words, no stop inside. (modals A, advisor 31.10: also a quoted noun phrase — declined adjectives and prepositions / articles
+    // before a capital noun as its last word: ein "verfallenes römisches Landhaus" vorstellen, die … zugeteilte "Missionsaufgabe zur
+    // Volkserziehung" erreichen. No lowercase word that is a verb form.) Gives token index of the word before the opening mark →
+    // index of the last quoted word; stop is the boundary pattern of the caller.
+    function quotedTitles(sentence, tokens, stop) {
+      const out = new Map();
+      const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
+      const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"„":"“","»":"«","“":"”","\"":"\""};
+      const nounPhraseWord = t => /^[\p{Lu}\d]/u.test(t[0]) || /^\p{Ll}/u.test(t[0]) && !(forms.get(norm(t[0])) || []).some(e => e.type === "Verb") &&
+        !(verbAnalyses.get(norm(t[0])) || []).length && (prepositions.has(norm(t[0])) || ARTICLE_WORD.test(norm(t[0])) || /\p{L}{2,}(?:e|en|er|es|em)$/u.test(norm(t[0])));
+      for (let a = 0; a+2 < tokens.length; a++) {
+        const g = gapAfter(a).replace(/\d+(?:[.,:]\d+)*/gu, " "); if (!OPEN.test(g) || !/^\s/u.test(g)) continue;
+        const open = g.trim(), close = pairOf[open];
+        if (!close) continue;
+        let joinedTo = -1;
+        for (let b = a+1; b+1 < tokens.length && b-a <= 6; b++) {
+          const h = gapAfter(b);
+          if (h.trim() === close && CLOSE.test(h)) { joinedTo = b; break; }
+          if (stop.test(h)) break;
+        }
+        const quoted = joinedTo > 0 ? tokens.slice(a+1,joinedTo+1) : [];
+        if (quoted.length && (quoted.every(t => /^[\p{Lu}\d]/u.test(t[0])) || /^\p{Lu}/u.test(quoted.at(-1)[0]) && quoted.every(nounPhraseWord))) out.set(a,joinedTo);
+      }
+      return out;
+    }
     function verbalClause(word, context, consumer, boundaries, gap = clauseGaps.plain) {
       if (!context || !Number.isInteger(context.tokenOffset)) return null;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,consumer);
@@ -4577,7 +4611,7 @@
       // Gaps (links chat, 24.10.2026; train: ~170 passives): a short insertion in brackets or quotes inside the clause
       // (wird die Einheit CI5 (Criminal Intelligence 5) gegründet; der Spielfilm "Soldatensender Calais" … produziert) is
       // skipped like the one between dashes: the clause goes on after it and the words inside never compete.
-      const quoteJoin = new Set();
+      const quoteJoin = new Set(), titles = quotedTitles(sentence,tokens,gap);
       const commaJoin = new Set();
       const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"(":")","„":"“","»":"«","“":"”","\"":"\""};
       for (let a = 0; a+2 < tokens.length; a++) {
@@ -4586,25 +4620,8 @@
         // (a determiner before it makes the quoted word its noun — Meinen "Flitzer" habe ich … gekauft: no insertion, as before)
         const determinerBefore = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*)$/u.test(norm(tokens[a][0]));
         const open = g.trim(), close = pairOf[open];
-        // (P7, 26.10.2026: around a name / title — only capital words and numbers — the quoted words stay in the clause as its
-        // noun and the quote marks join (review 26.10: not a lowercase word after a determiner — Das "kann" wurde gestrichen,
-        // Das "Ich liebe dich" wurde oft gesagt keep the old boundary): wird für die "Einehe" benutzt, werden die "Faschisten" gezeigt, an die
-        // Bezeichnungen "Hofgut" und "Kapelle" angelehnt. The closing mark followed only by a space, at most 6 words, no stop inside)
-        if (open !== "(") {
-          let joinedTo = -1;
-          for (let b = a+1; b+1 < tokens.length && b-a <= 6; b++) {
-            const h = gapAfter(b);
-            if (h.trim() === close && CLOSE.test(h)) { joinedTo = b; break; }
-            if (gap.test(h)) break;
-          }
-          // (modals A, advisor 31.10: also a quoted noun phrase — declined adjectives and prepositions / articles before a capital noun as
-          // its last word: ein "verfallenes römisches Landhaus" vorstellen, die … zugeteilte "Missionsaufgabe zur Volkserziehung" erreichen.
-          // No lowercase word that is a verb form: Das "Ich liebe dich" wurde oft gesagt keeps the boundary)
-          const nounPhraseWord = t => /^[\p{Lu}\d]/u.test(t[0]) || /^\p{Ll}/u.test(t[0]) && !(forms.get(norm(t[0])) || []).some(e => e.type === "Verb") &&
-            !(verbAnalyses.get(norm(t[0])) || []).length && (prepositions.has(norm(t[0])) || ARTICLE_WORD.test(norm(t[0])) || /\p{L}{2,}(?:e|en|er|es|em)$/u.test(norm(t[0])));
-          const quoted = joinedTo > 0 ? tokens.slice(a+1,joinedTo+1) : [];
-          if (quoted.length && (quoted.every(t => /^[\p{Lu}\d]/u.test(t[0])) || /^\p{Lu}/u.test(quoted.at(-1)[0]) && quoted.every(nounPhraseWord))) { quoteJoin.add(a); quoteJoin.add(joinedTo); continue; }
-        }
+        // (P7: a quoted name / title stays in the clause — quotedTitles, shared with the reflexive search)
+        if (titles.has(a)) { quoteJoin.add(a); quoteJoin.add(titles.get(a)); continue; }
         if (determinerBefore) continue;
         for (let b = a+1; b+1 < tokens.length && b-a <= 12; b++) {
           const h = gapAfter(b).replace(/\d+(?:[.,:]\d+)*/gu, " ");
