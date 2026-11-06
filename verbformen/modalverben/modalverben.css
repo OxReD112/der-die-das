@@ -687,6 +687,8 @@ body:has(#study:not(.hidden)) .version-mark {
 .forms-symbol svg,
 .forms-legend svg,
 .meaning-tag svg {
+  /* the meaning tag's line is fixed to 1.2 px by deutsch-base-v1.css; the column symbols and the legend below set
+     their own width per size, so the dashed circle keeps its dashes (06.11) */
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
@@ -696,6 +698,7 @@ body:has(#study:not(.hidden)) .version-mark {
 .forms-symbol svg {
   width: 17px;
   height: 17px;
+  stroke-width: 1.694; /* one icon line of 1.2 px: 1.2 × 24 / 17 (06.11, was 1.5 → 1.06 px) */
 }
 .forms-detail-table th.lit,
 .forms-detail-table th.lit .forms-symbol {
@@ -724,6 +727,10 @@ body:has(#study:not(.hidden)) .version-mark {
   width: 12px;
   height: 12px;
   flex: 0 0 auto;
+  stroke-width: 2.4; /* 1.2 px line: 1.2 × 24 / 12 (06.11, was 1.5 → 0.75 px) */
+}
+.forms-legend svg [stroke-dasharray] {
+  stroke-linecap: butt; /* at 12 px round ends would close the gaps of the dashed circle */
 }
 .forms-meanings {
   margin-top: 16px;
