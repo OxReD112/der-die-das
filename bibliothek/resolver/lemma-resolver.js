@@ -4565,6 +4565,16 @@
     // before a capital noun as its last word: ein "verfallenes römisches Landhaus" vorstellen, die … zugeteilte "Missionsaufgabe zur
     // Volkserziehung" erreichen. No lowercase word that is a verb form.) Gives token index of the word before the opening mark →
     // index of the last quoted word; stop is the boundary pattern of the caller.
+    // (modals C1, 31.10; one function since 06.11 — also the «become» sign of a fronted participle, L-018): a lowercase word that is a
+    // participle of an own verb, or a word no own card knows with the shape of a participle — particle + ge…t / ge…en (ausgeschenkt,
+    // eingekesselt), …iert, ge…t of an own verb's stem (gestutzt); not the adjective gescheit, not be- / ver- / er- shapes (P4 / T3)
+    function participleLikeWord(word) {
+      return /^\p{Ll}/u.test(word) && ((verbAnalyses.get(norm(word)) || []).some(a => a.kind === "participle") ||
+          !(forms.get(norm(word)) || []).length && !(reflexiveForms.get(norm(word)) || []).length &&
+          (new RegExp(`^(?:(?:${SEPARABLE_PARTICIPLE_PARTICLES})ge\\p{Ll}{2,}(?:t|en)|\\p{Ll}{3,}iert)$`,"u").test(norm(word)) ||
+           // (review 31.10: a plain ge…t only when ge- + stem + -en / -n is an own verb — gestutzt, not the adjective gescheit)
+           /^ge\p{Ll}{2,}t$/u.test(norm(word)) && [norm(word).slice(2,-1) + "en", norm(word).slice(2,-1) + "n"].some(v => (forms.get(v) || []).some(x => x.type === "Verb" && norm(x.word) === v))));
+    }
     function quotedTitles(sentence, tokens, stop) {
       const out = new Map();
       const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
@@ -4674,11 +4684,7 @@
         // verb's stem: modernisiert, eingekesselt, aufgerieben — is a participle here too, as the passive group itself reads it through
         // the external dictionary: sollen modernisiert und erweitert werden, eingekesselt und aufgerieben werden. Not be- / ver- / er-
         // shapes: often adjectives — verarmt, bewandert; P4 / T3)
-        const ownParticiple = i => /^\p{Ll}/u.test(tokens[i][0]) && ((verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "participle") ||
-          !(forms.get(norm(tokens[i][0])) || []).length && !(reflexiveForms.get(norm(tokens[i][0])) || []).length &&
-          (new RegExp(`^(?:(?:${SEPARABLE_PARTICIPLE_PARTICLES})ge\\p{Ll}{2,}(?:t|en)|\\p{Ll}{3,}iert)$`,"u").test(norm(tokens[i][0])) ||
-           // (review 31.10: a plain ge…t only when ge- + stem + -en / -n is an own verb — gestutzt, not the adjective gescheit)
-           /^ge\p{Ll}{2,}t$/u.test(norm(tokens[i][0])) && [norm(tokens[i][0]).slice(2,-1) + "en", norm(tokens[i][0]).slice(2,-1) + "n"].some(v => (forms.get(v) || []).some(x => x.type === "Verb" && norm(x.word) === v))));
+        const ownParticiple = i => participleLikeWord(tokens[i][0]);
         if (consumer === 'werdenGroup' && (w === "und" || w === "oder") && ownParticiple(p)) {
           let e = k+1; while (e+1 < tokens.length && connected(e,e+1) && !(boundaries.has(norm(tokens[e+1][0])) && !joinWords.has(norm(tokens[e+1][0])))) e++;
           const WERDEN_FORM = /^(?:werden|wird|wurde|wurden|würde|würden|worden|werde|wirst|werdet|wurdest)$/u;
@@ -5370,11 +5376,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!tense.includes("Präsens") && !tense.includes("Präteritum")) continue;
         // (capital at the start as before; lowercase only after adverbs or at the start of a part after a comma / semicolon / dash)
         const lowerOk = /^\p{Ll}/u.test(tokens[part][0]) && (part > start || start > 0);
-        // (review 04.11: in the new positions — after adverbs, lowercase after a comma — not a participle that is also an adjective of
-        // a state / feeling: …, besorgt wurde er erst später; Zunehmend gereizt wurde die Stimmung — «become»)
+        // (advisor 06.11, L-018: the word order does not change the reading — an own adjective card of the participle stops the passive
+        // here no more than at the end: verletzt wurde niemand = Niemand wurde verletzt; «become» only by the same signs as at the end —
+        // becomeAdjectives, passive: none, a degree word. The review 04.11 guard «not a participle that is also an adjective» is gone)
         const newPosition = part > start || /^\p{Ll}/u.test(tokens[part][0]);
+        // (a sign of «become» as at the end — Er wurde ruhig und gelassen: an adjective without a verb of its own joined by und / oder right
+        // before the participle — ruhig und gelassen wurde er nie; also one only the external dictionary knows: sollen gescheit und
+        // gebildet werden; not a participle — ausgeschenkt und verkauft werden: participleLikeWord, as P4 / T4)
+        const adjectiveCoordinated = k => k >= 2 && /^(?:und|oder)$/u.test(norm(tokens[k-1][0])) && /^\s+$/u.test(clause.sentence.slice(tokens[k-2].index + tokens[k-2][0].length, tokens[k-1].index)) &&
+          /^\p{Ll}/u.test(tokens[k-2][0]) && (forms.get(norm(tokens[k-2][0])) || []).every(e => ["Adjektiv","Adverb"].includes(e.type)) &&
+          !verbs(k-2).length && !participles(k-2).length && !participleLikeWord(tokens[k-2][0]);
         if (becomeAdjectives.has(norm(tokens[part][0])) || !/^\p{Lu}/u.test(tokens[part][0]) && !lowerOk || passiveNone(tokens[part][0]) ||
-          becomeDegreeBefore(tokens,part) || newPosition && (adjectivalForm(tokens[part][0]) || participleAdjectiveCard(tokens[part][0]))) continue;
+          becomeDegreeBefore(tokens,part) || adjectiveCoordinated(part)) continue;
         const main = participles(part);
         if (!main.length || new Set(main.map(e=>norm(e.word).replace(/^sich\s+/u,""))).size !== 1) continue;
         const linked = [part,head.i];
