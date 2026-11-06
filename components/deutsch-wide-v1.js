@@ -32,7 +32,7 @@ html[data-ex="modalverben"].deutsch-wide .sentence { max-width: none !important;
    closer to the other exercises' questions; the answer gap (3.6em) grows with it.
    The longest sentences still fit in two lines within the 600px column. */
 html[data-ex="modalverben"].deutsch-wide .sentence,
-html[data-ex="vielseitige_verben"].deutsch-wide .sentence { font-size: 36px !important; }
+html[data-ex="vielseitige_verben"].deutsch-wide .sentence { font-size: 34px !important; } /* 06.11: 36 → 34, on the scale (iPad upright is 34 too) */
 /* a question that needs two lines gets two even lines (no single word alone on the second line) */
 html.deutsch-wide .sentence,
 html.deutsch-wide .context,

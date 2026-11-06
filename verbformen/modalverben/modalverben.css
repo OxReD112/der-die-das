@@ -72,10 +72,15 @@ body {
 }
 .title {
   font-family: var(--serif);
-  font-size: clamp(56px, 14vw, 84px);
+  font-size: 56px; /* every phone (06.11: was clamp(56px, 14vw, 84px) — 58–62 on big phones, off the scale) */
   font-weight: 400;
   letter-spacing: -3px;
   margin: 0 0 12px;
+}
+@media (min-width: 600px) {
+  .title {
+    font-size: 84px; /* iPad, wide screens, phone sideways — as the clamp gave from 600 px on */
+  }
 }
 .subtitle {
   color: var(--muted);

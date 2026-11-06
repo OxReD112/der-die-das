@@ -115,7 +115,7 @@ button {
   margin: 0 0 11px;
 }
 #sessionScreen h1 {
-  font-size: clamp(28px, 8.6vw, 34px);
+  font-size: 34px; /* on the scale (06.11: was clamp(28px, 8.6vw, 34px) — 31–33.8 on phones); fits on 360 */
 }
 #sessionScreen p {
   color: var(--muted);
@@ -359,7 +359,7 @@ body:has(#game:not(.hidden)) .version-mark {
 }
 .place .article {
   color: var(--muted);
-  font-size: 0.62em;
+  font-size: calc(20em / 34); /* 20 next to the place's 34 (iPad); 16 next to 28 on phones — below (06.11: was 0.62em = 21.1 / 17.4) */
   letter-spacing: -0.2px;
   margin-right: 0.2em;
   vertical-align: 0.08em;
@@ -686,6 +686,9 @@ body:has(#game:not(.hidden)) .version-mark {
 @media (max-width: 699px) {
   .place {
     font-size: 28px;
+  }
+  .place .article {
+    font-size: calc(16em / 28);
   }
 }
 @media (max-width: 520px) {
