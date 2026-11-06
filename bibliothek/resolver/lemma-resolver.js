@@ -5660,6 +5660,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // also a form note «inflection of X:» with a line of its own «perfect participle» / «past participle» — vereidigt, erbeutet —,
     // and a record of the form itself «past participle of X» whose X came not with the lookup — eingeschmolzen: X is looked up
     // and must be an external verb.)
+    // #29, hole 2 (advisor 06.11, rule B): a verb with an inseparable prefix forms its participle without ge-, from the simple verb's
+    // participle (umkreisen ← gekreist: umkreist; überdecken ← gedeckt: überdeckt; durchfließen ← geflossen: durchflossen). The
+    // external rows often mark such a spelling only as «3rd person present» or «Präteritum plural»; the simple verb's own card proves
+    // the participle. Not a spelling equal to the infinitive (entladen, durchlaufen): Futur or passive — the existing «Futur I / Passiv».
+    // The caller decides by place (werden / sein / haben in the part, the form closing it).
+    const INSEPARABLE_PREFIX = /^(?:be|emp|ent|er|ver|zer|miss|durch|über|um|unter|hinter|wider)(?=\p{L}{3})/u;
+    function inseparableParticiple(lemma, form) {
+      const l = norm(lemma), f = norm(form), prefix = INSEPARABLE_PREFIX.exec(l)?.[0];
+      if (!prefix || f === l || !f.startsWith(prefix)) return false;
+      return (lemmas.get(l.slice(prefix.length)) || []).some(e => e.type === "Verb" && !/^sich\s/u.test(e.word) &&
+        String(e.perfect_form || "").trim().split(/\s+/u).map(norm).some(p => p.startsWith("ge") && prefix+p.slice(2) === f));
+    }
     async function externalParticipleLemmas(form, facts, consumer) {
       // (#29: a verb of the Russian dictionary alone counts too — die Decken wurden abgeformt, das Grundstück wurde überbaut)
       const known = new Set(facts.filter(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb' && (g.meanings?.length || g.russianOnly)).map(g => norm(g.word)));
@@ -5672,6 +5684,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         ...notes.filter(g => (g.meanings || []).some(m => /^(?:perfect|past) participle$/iu.test(String(m).trim())))
           .flatMap(g => (g.meanings || []).map(m => /^inflection of ([\p{L}\p{M}]+):?$/iu.exec(String(m).trim())?.[1]).filter(Boolean)).map(norm)
       ].filter(l => known.has(l)));
+      if (lemmas.size) return lemmas;
+      for (const l of known) if (inseparableParticiple(l,form)) lemmas.add(l);
       if (lemmas.size) return lemmas;
       const own = facts.filter(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb' && norm(g.word) === norm(form))
         .flatMap(g => g.meanings || []).map(ofLine).filter(Boolean).map(norm);
@@ -7473,7 +7487,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const afterAnd = head.i === end && tail === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0]));
         if (tail < start || tail === start && !afterAnd || tail === head.i || ![head.i,tail].includes(selected)) continue;
         const form = tokens[tail][0];
-        if (!/^\p{Ll}/u.test(form) || matches(tail).length || lexicalSeparated(norm(form))) continue;
+        // (#29 rule B: an imported separable reading — über·deckt — does not hide, for the passive only (reviewer 06.11: in the perfect, «weil er Zeit hat und alles überdeckt» is finite), the inseparable participle: überdeckt of überdecken)
+        if (!/^\p{Ll}/u.test(form) || matches(tail).length && !matches(tail).every(e => e.importedSeparable && inseparableParticiple(e.word,form)) || lexicalSeparated(norm(form))) continue;
         // A capitalised word inside the sentence, or one before another capitalised
         // word (Sein Vermögen), is a noun phrase here, not a competing verb.
         const nominal = i => /^\p{Lu}/u.test(tokens[i][0]) && (i > 0 || /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? ""));
