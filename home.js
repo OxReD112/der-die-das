@@ -2177,7 +2177,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     en: {
       label: "Fortschritt sichern",
       card: "Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
-      how: "So geht's ›",
+      how: "So geht's",
       title: "Zum Home-Bildschirm",
       s1: "Save your progress first.",
       btn: "Backup erstellen",
@@ -2199,7 +2199,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     ru: {
       label: "Fortschritt sichern",
       card: "Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
-      how: "So geht's ›",
+      how: "So geht's",
       title: "Zum Home-Bildschirm",
       s1: "Сначала сохрани прогресс.",
       btn: "Backup erstellen",
@@ -2337,7 +2337,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     if (!show) return;
     $("keepLabel").textContent = t().label;
     $("keepText").textContent = t().card;
-    $("keepHow").textContent = t().how;
+    $("keepHow").innerHTML = t().how + ' <span aria-hidden="true" class="ui-chev"></span>'; // › = the shared .ui-chev (06.11)
   }
   $("keepDismiss")?.addEventListener("click", () => {
     const s = cardState();

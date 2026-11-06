@@ -296,12 +296,9 @@ body:has(#done.show) header {
   min-width: 0;
 }
 .coll-line-chev {
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1;
+  color: var(--muted); /* the shared .ui-chev, as high as the name's letters (06.11; was the letter › at 20 px) */
   margin-left: 8px;
   flex: 0 0 auto;
-  transform: translateY(-1px);
 }
 .collCount {
   margin: 2px 0 0;
@@ -1280,9 +1277,6 @@ body:has(#done.show) .ws-settings-btn {
   }
   .coll-line {
     font-size: 20px;
-  }
-  .coll-line-chev {
-    font-size: 24px;
   }
   .collCount,
   #start .startNote,

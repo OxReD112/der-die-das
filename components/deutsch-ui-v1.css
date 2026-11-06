@@ -16,7 +16,9 @@
    .ui-panel-close  the big × of a full-screen panel: Wörterbuch, Einstellungen, Notizbuch (a bare 14 px cross
                 in one 1.2 px line, tap area 44; decision 04.11: panels keep a big ×, windows the round one; 06.11)
    .ui-progress the 3 px progress bar under the top bar; its fill is the <i> inside
-   .ui-counter  „3 / 10“ */
+   .ui-counter  „3 / 10“
+   .ui-chev     the one arrow of the app (06.11): › forward / more, ‹ back (.ui-chev-back), a fold that turns down
+                (.ui-chev-fold); with words it is as big as their letters, alone (.ui-chev-lone) 14 px high */
 
 .ui-quiet,
 .ui-main {
@@ -194,6 +196,44 @@
 .ui-panel-close svg * {
   stroke-width: 1.2px;
   vector-effect: non-scaling-stroke;
+}
+
+/* ---- .ui-chev (06.11): the one arrow — instead of the letters ‹ › → (each place had its own font and size) ----
+   One 1.2 px line, the colour of the text around it. Markup: an empty <span class="ui-chev" aria-hidden="true"></span>
+   after the words („Alle Details ›“, „Mehr zur Form ›“) or before them (.ui-chev-back: „‹ Zurück zur Suche“), with a
+   space or a gap between. With words: as high as a small letter of that text (0.58 em). Alone — a row or a card that
+   opens something, a back button in a head — .ui-chev-lone: always 14 px high, wherever it stands.
+   A fold (a row that opens below itself): .ui-chev-fold turns down while the row has aria-expanded="true".
+   Drawn as two sides of a small square turned 45°, moved so that the visible arrow sits in the middle of its box. */
+.ui-chev {
+  --chev: 0.41em; /* the square's side; the arrow is √2 × as high */
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--chev);
+  height: var(--chev);
+  border: 0 solid currentColor;
+  border-width: 1.2px 1.2px 0 0;
+  vertical-align: 0.1em;
+  transform: translateX(-35%) rotate(45deg);
+}
+.ui-chev-back {
+  transform: translateX(35%) rotate(-135deg);
+}
+.ui-chev-lone {
+  --chev: 10px;
+  vertical-align: middle;
+}
+.ui-chev-fold {
+  transition: transform 0.25s ease;
+}
+[aria-expanded="true"] .ui-chev-fold {
+  transform: translateY(-35%) rotate(135deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-chev-fold {
+    transition: none;
+  }
 }
 
 .ui-progress {

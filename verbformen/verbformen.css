@@ -87,16 +87,13 @@ h1 {
     transform 0.12s ease,
     filter 0.12s ease;
 }
-.choice::after {
-  content: "›";
+.choice-chev {
+  /* the shared .ui-chev, alone (06.11; was the letter › at 28 px) */
   position: absolute;
-  right: 18px;
+  right: 22px;
   top: 50%;
-  transform: translateY(-52%);
+  margin-top: -5px; /* half of its 10 px box */
   color: var(--muted);
-  font-family: var(--font);
-  font-size: 28px;
-  font-weight: 300;
 }
 .choice:active {
   transform: scale(0.97);

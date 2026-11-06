@@ -127,7 +127,7 @@
   </title>
   <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
   <link href="components/deutsch-base-v1.css?v=6" rel="stylesheet"/>
-  <link href="components/deutsch-ui-v1.css?v=7" rel="stylesheet"/>
+  <link href="components/deutsch-ui-v1.css?v=8" rel="stylesheet"/>
   <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
   <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
@@ -136,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=77" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=77" rel="stylesheet"/>');
+     ? '<link href="home.css?v=78" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=78" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -211,10 +211,10 @@
     <span class="greeting-sub" id="greetingSub"></span>
    </p>
    <section aria-label="&Uuml;bungen" class="dashboard mosaic tile-pager">
-    <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
+    <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true" class="ui-chev ui-chev-back ui-chev-lone"></span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261106-clear-1" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261106-chev-1" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -227,7 +227,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.48" type="button">
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.49" type="button">
      <div class="tile-art">
       <img alt="" src="artikel/icon.webp"/>
      </div>
@@ -240,7 +240,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.112" type="button">
+    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.113" type="button">
      <div class="tile-art">
       <img alt="" src="verbformen/icon.webp"/>
      </div>
@@ -266,7 +266,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=84" type="button">
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=85" type="button">
      <div class="tile-art">
       <img alt="" src="praepositionen/icon.webp"/>
      </div>
@@ -296,7 +296,7 @@
     </button>
      </div>
     </div>
-    <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true">&rsaquo;</span></button>
+    <button aria-label="N&auml;chste Seite" class="rail-arrow rail-next" id="pageNext" type="button"><span aria-hidden="true" class="ui-chev ui-chev-lone"></span></button>
     <div aria-label="Seiten" class="page-dots" id="pageDots"></div>
    </section>
        <button aria-label="Redewendung anzeigen" class="phrase-week-home-row" id="phraseWeekToggle" type="button">
@@ -305,7 +305,7 @@
       <div class="phrase-week-home-title" id="phraseWeekHomeTitle"></div>
       <div class="phrase-week-home-literal" id="phraseWeekHomeLiteral"></div>
      </div>
-     <span aria-hidden="true" class="phrase-week-arrow">&rsaquo;</span>
+     <span aria-hidden="true" class="phrase-week-arrow ui-chev ui-chev-lone"></span>
     </button>
 
     <div class="mosaic today-bottom">
@@ -347,7 +347,7 @@
         <div class="phrase-week-example" id="phraseWeekExample"></div>
        </div>
       <button aria-label="Zur Startseite" class="phrase-screen-back" id="phraseScreenBack" type="button">
-       <span aria-hidden="true" class="phrase-screen-back-arrow">&lsaquo;</span>
+       <span aria-hidden="true" class="ui-chev ui-chev-back ui-chev-lone"></span>
       </button>
       </div>
      </section>
@@ -370,7 +370,7 @@
   </nav>
   <div class="notebook-layer" id="notebookLayer" aria-hidden="true">
    <section class="notebook-panel" id="notebookPanel" aria-label="Notizbuch">
-    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=34" loading="eager"></iframe>
+    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=35" loading="eager"></iframe>
    </section>
   </div>
   <div class="settings-layer" id="settingsLayer">
@@ -394,7 +394,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>Über Deutsch.</span></span></button>
     </div>
-    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.152 — Versionen aller Seiten anzeigen">Deutsch. Version 5.152 <span aria-hidden="true">›</span></button>
+    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.153 — Versionen aller Seiten anzeigen">Deutsch. Version 5.153 <span aria-hidden="true" class="ui-chev"></span></button>
    </div>
    </section>
   </div>
@@ -411,7 +411,7 @@
       </form>
       <p class="dictionary-intro" id="dictionaryIntro"></p>
       <div class="dictionary-entry-backbar" id="dictionaryEntryBackbar" hidden>
-       <button class="dictionary-back" id="dictionaryBack" type="button">‹ Zurück zur Suche</button>
+       <button class="dictionary-back" id="dictionaryBack" type="button"><span aria-hidden="true" class="ui-chev ui-chev-back"></span>Zurück zur Suche</button>
        <span class="dictionary-entry-type" id="dictionaryEntryType"></span>
       </div>
       <div class="dictionary-results" id="dictionaryResults" aria-live="polite"></div>
@@ -487,9 +487,9 @@
  <script src="bibliothek/reader/reading-data.js?v=1"></script>
  <script src="components/deutsch-window-v1.js?v=3"></script>
  <script src="components/deutsch-panel-v1.js?v=2"></script>
- <script src="home.js?v=20261106-windows-1"></script>
+ <script src="home.js?v=20261106-chev-1"></script>
  <script src="features/notizbuch/home-notebook.js?v=10"></script>
- <script src="progress-screen.js?v=28"></script>
+ <script src="progress-screen.js?v=29"></script>
  <script src="worterbuch.js?v=20261106-wn-expr46-2"></script>
 </body>
 </html>

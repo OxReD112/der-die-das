@@ -41,7 +41,8 @@
 .pg-modal{--pg-glow-at:50% 100%;
   background:radial-gradient(120% 60% at var(--pg-glow-at),color-mix(in srgb,var(--mint) 7%,transparent),transparent 70%),var(--card-bg)}
 .pg-head h2{display:flex;align-items:center;min-width:0}
-.pg-head-back{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--text);font:300 30px/20px var(--font);padding:0 10px 2px 0;margin-left:-2px;cursor:pointer}
+.pg-head-back{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;align-self:stretch;border:0;background:none;color:var(--text);padding:0 12px 0 0;margin-left:-2px;cursor:pointer} /* ‹ = the shared .ui-chev (06.11) */
+.pg-head-back[hidden]{display:none}
 .pg-head-back,.pg-row:not(.static){transition:transform .12s ease,filter .12s ease,background-color .2s}
 .pg-head-back:active,.pg-row:not(.static):active{transform:scale(.97);filter:brightness(.94)}
 .pg-body-scroll{overflow:auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -75,8 +76,7 @@
 .pg-d .tot{color:var(--muted);font-weight:500;font-size:12px}
 .pg-d .pg-ws{color:var(--pg-secondary);font-weight:600;font-size:12px}
 .pg-d .pg-wl{color:var(--mint);font-weight:650;font-size:12px}
-.pg-chev{color:var(--muted);margin-left:8px;display:inline-block;transition:transform .25s}
-.pg-row.open .pg-chev{transform:rotate(90deg)}
+.pg-chev{color:var(--muted);margin-left:8px} /* the shared .ui-chev; in a chapter it folds down (.ui-chev-fold, 06.11) */
 .pg-track{position:relative;height:5px;border-radius:3px;background:var(--pg-line)}
 .pg-row.sub .pg-track{height:4px}
 .pg-track i{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:5px}
@@ -294,7 +294,7 @@
     hero.append(learned,description);
 
     const details=document.createElement("button");details.type="button";details.className="home-pg-details";
-    details.textContent=wide?"Alle Details →":"Alle Details anzeigen →";details.addEventListener("click",open);
+    details.innerHTML=(wide?"Alle Details":"Alle Details anzeigen")+' <span aria-hidden="true" class="ui-chev"></span>'; // › = the shared .ui-chev (06.11; was →)details.addEventListener("click",open);
     box.replaceChildren(heading,hero,details);
   }
 
@@ -349,7 +349,7 @@
     m.chapters.forEach((c,i)=>{
       const known=c.subs?c.subs.some(e=>e.known):c.single.known;
       const r=document.createElement("button");r.type="button";r.className="pg-row";
-      r.innerHTML=`<div class="pg-top"><span class="pg-n">${c.name}</span><span>${deltaHTML(c,known)}<span class="pg-chev">›</span></span></div>`;
+      r.innerHTML=`<div class="pg-top"><span class="pg-n">${c.name}</span><span>${deltaHTML(c,known)}<span class="pg-chev ui-chev" aria-hidden="true"></span></span></div>`;
       bar(r,c);r.onclick=()=>go(sc=>chapter(sc,i),"fwd");list.append(r);
     });
   }
@@ -361,15 +361,15 @@
     if(c.single){body.append(detail(c.single));return}
     body.style.padding="8px";
     c.subs.forEach(e=>{
-      const r=document.createElement("div");r.className="pg-row sub";r.setAttribute("role","button");
-      r.innerHTML=`<div class="pg-top"><span class="pg-n">${e.name}</span><span>${deltaHTML(e,e.known)}<span class="pg-chev">›</span></span></div>`;
+      const r=document.createElement("div");r.className="pg-row sub";r.setAttribute("role","button");r.setAttribute("aria-expanded","false");
+      r.innerHTML=`<div class="pg-top"><span class="pg-n">${e.name}</span><span>${deltaHTML(e,e.known)}<span class="pg-chev ui-chev ui-chev-fold" aria-hidden="true"></span></span></div>`;
       bar(r,e);
       const ex=document.createElement("div");ex.className="pg-expand";const inn=document.createElement("div");ex.append(inn);r.append(ex);
       r.onclick=ev=>{
         if(ev.target.closest(".pg-expand"))return;
         const open=!r.classList.contains("open");
-        body.querySelectorAll(".pg-row.open").forEach(x=>x.classList.remove("open"));
-        if(open){inn.innerHTML="";const d=detail(e,{line:true});d.style.paddingTop="12px";inn.append(d);r.classList.add("open")}
+        body.querySelectorAll(".pg-row.open").forEach(x=>{x.classList.remove("open");x.setAttribute("aria-expanded","false")});
+        if(open){inn.innerHTML="";const d=detail(e,{line:true});d.style.paddingTop="12px";inn.append(d);r.classList.add("open");r.setAttribute("aria-expanded","true")}
       };
       body.append(r);
     });
@@ -394,7 +394,7 @@
   function init(){
     root=document.createElement("div");root.className="pg ui-window";root.id="progressScreen";root.setAttribute("aria-hidden","true");
     root.innerHTML='<div class="pg-modal ui-window-card" role="dialog" aria-modal="true" aria-labelledby="pgTitle">'
-      +'<div class="pg-head ui-window-head"><h2 class="ui-window-title"><button class="pg-head-back" type="button" aria-label="Zurück" hidden>‹</button><span id="pgTitle">Fortschritt</span></h2>'
+      +'<div class="pg-head ui-window-head"><h2 class="ui-window-title"><button class="pg-head-back" type="button" aria-label="Zurück" hidden><span class="ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span></button><span id="pgTitle">Fortschritt</span></h2>'
       +'<button class="ui-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>'
       +'<div class="pg-body-scroll"><div class="pg-inner"></div></div></div>';
     document.body.append(root);

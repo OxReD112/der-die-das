@@ -61,7 +61,7 @@
       if (!b) return;
       b.textContent = "";
       b.appendChild(el("span", "coll-line-name", name()));
-      b.appendChild(el("span", "coll-line-chev", "›", { "aria-hidden": "true" }));
+      b.appendChild(el("span", "coll-line-chev ui-chev", "", { "aria-hidden": "true" }));
       b.setAttribute("aria-label", L("Word collection: ", "Коллекция слов: ") + label);
     });
     // v2.102: „15 / 217 Wörter angefangen“ — words you've started (in your rotation) out of all words in the collection.
@@ -111,7 +111,11 @@
   // No „Cancel“ links any more (v2.100): ‹ does what they did.
   function head(title, back) {
     const h = el("div", "coll-head ui-window-head");
-    if (back) h.appendChild(button("coll-back", "‹", back)).setAttribute("aria-label", L("Back", "Назад"));
+    if (back) {
+      const b = h.appendChild(button("coll-back", "", back)); // ‹ = the shared .ui-chev (06.11)
+      b.setAttribute("aria-label", L("Back", "Назад"));
+      b.appendChild(el("span", "ui-chev ui-chev-back ui-chev-lone", "", { "aria-hidden": "true" }));
+    }
     h.appendChild(el("h2", "coll-title ui-window-title", title, { id: "collTitle" }));
     // the shared round × (DeutschWindow closes the window on it)
     const x = h.appendChild(el("button", "ui-close", null, { type: "button", "aria-label": L("Close", "Закрыть") }));
@@ -141,7 +145,7 @@
       // opens another view (not a fold-out) → „Word Sets ›“, the same › as the start screen's collection line
       const ws = button("coll-sets-link", "", () => viewSets(viewMain));
       ws.appendChild(el("span", null, L("Word Sets", "Наборы слов")));
-      ws.appendChild(el("span", "coll-line-chev", "›", { "aria-hidden": "true" }));
+      ws.appendChild(el("span", "coll-line-chev ui-chev", "", { "aria-hidden": "true" }));
       card.appendChild(ws);
     }
 
@@ -815,7 +819,7 @@
       const wrap = el("div", "chooseSet");
       const b = button("coll-line", "", () => open(() => viewSetPick(def, null)));
       b.appendChild(el("span", "coll-line-name", def.name));
-      b.appendChild(el("span", "coll-line-chev", "›", { "aria-hidden": "true" }));
+      b.appendChild(el("span", "coll-line-chev ui-chev", "", { "aria-hidden": "true" }));
       wrap.appendChild(b);
       const info = el("p", "collCount", "");
       wrap.appendChild(info);

@@ -22,11 +22,12 @@
 .coll-back {
   flex: 0 0 auto;
   align-self: stretch;
+  display: inline-flex;
+  align-items: center;
   border: 0;
   background: transparent;
-  color: var(--text);
-  font: 300 30px/20px var(--font);
-  padding: 0 10px 2px 0;
+  color: var(--text); /* ‹ = the shared .ui-chev, alone (06.11) */
+  padding: 0 12px 0 0;
   margin-left: -2px;
   cursor: pointer;
   transition:
@@ -594,11 +595,8 @@ textarea.coll-paste {
   cursor: pointer;
 }
 .coll-sets-link .coll-line-chev {
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1;
+  color: var(--muted); /* the shared .ui-chev (06.11) */
   margin-left: 6px;
-  transform: translateY(-1px);
 }
 .coll-pick-top {
   flex: 0 0 auto;

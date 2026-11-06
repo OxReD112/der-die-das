@@ -349,7 +349,7 @@ header h1 {
     width: 32px;
     height: 32px;
     margin: 0;
-    padding: 0 0 2px;
+    padding: 0;
     border: 1px solid var(--hairline);
     border-radius: 50%;
     appearance: none;
@@ -357,9 +357,7 @@ header h1 {
     background: color-mix(in srgb, var(--bg) 78%, transparent);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    color: var(--muted);
-    font:
-      300 24px/1 var(--font);
+    color: var(--muted); /* the arrow inside: the shared .ui-chev (06.11) */
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
@@ -680,9 +678,7 @@ header h1 {
 
 .phrase-week-arrow {
   display: block;
-  color: var(--muted); /* the same „›“ as on the Verbformen / Präpositionen cards */
-  font: 300 28px/1 var(--font);
-  transform: translateY(-1px);
+  color: var(--muted); /* the shared .ui-chev, alone — the same as on the Verbformen / Präpositionen cards (06.11) */
 }
 
 /* ===== Heute card (under Phrase of the Week) — opens the Fortschritt window (progress-screen.js) ===== */
@@ -846,10 +842,7 @@ header h1 {
   border-radius: 50%;
   background: var(--tile-surface); /* = the Home button: the tiles' fill, soft shadow, thin top line in dark (04.11) */
   box-shadow: var(--lift-highlight), var(--lift-shadow);
-  color: var(--text);
-  font:
-    400 28px/42px var(--font);
-  text-align: center;
+  color: var(--text); /* the arrow inside: the shared .ui-chev (06.11) */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -862,10 +855,6 @@ header h1 {
   filter: brightness(0.94);
 }
 
-.phrase-screen-back-arrow {
-  display: inline-block;
-  transform: translateY(-1px);
-}
 
 /* ===== Settings ===== */
 .backup-file {
@@ -1103,6 +1092,7 @@ header h1 {
 .dictionary-back {
   display: inline-flex;
   align-items: center;
+  gap: 0.4em; /* ‹ = the shared .ui-chev (06.11) */
   margin: 0;
   padding: 4px 0;
   border: 0;

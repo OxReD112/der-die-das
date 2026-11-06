@@ -62,7 +62,7 @@
     const entries = allEntries();
     els.list.innerHTML = categories.map(name => {
       const count = entries.filter(entry => entry.category === name).length;
-      return `<button class="nb-row" type="button" data-topic="${esc(name)}"><span class="nb-row-copy"><strong>${esc(name)}</strong><small>${count} ${count === 1 ? "Eintrag" : "Einträge"}</small></span><span class="nb-arrow" aria-hidden="true">›</span></button>`;
+      return `<button class="nb-row" type="button" data-topic="${esc(name)}"><span class="nb-row-copy"><strong>${esc(name)}</strong><small>${count} ${count === 1 ? "Eintrag" : "Einträge"}</small></span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`;
     }).join("") || '<p class="nb-empty">Lege beim Schreiben dein erstes Thema an.</p>';
     els.list.querySelectorAll("[data-topic]").forEach(button => button.addEventListener("click", () => { selectedTopic = button.dataset.topic; renderList("forward"); }));
   }
@@ -76,10 +76,10 @@
     /* Topic heading (Notizbuch v20): "‹ Grammatik 2" = back to all topics; pencil = rename, trash = delete. Pinned like the
        edit screen's heading. Inside a topic the rows don't repeat the topic name. */
     const back = inTopic ? `<div class="nb-topic-head" id="topic-head">
-        <button class="nb-topic-title" type="button" id="topic-back" aria-label="Zurück zu allen Themen"><span class="nb-topic-chevron" aria-hidden="true">‹</span><span class="nb-topic-name">${esc(selectedTopic)}</span><span class="nb-topic-count" aria-label="${entries.length} ${entries.length === 1 ? "Notiz" : "Notizen"}">${entries.length}</span></button>
+        <button class="nb-topic-title" type="button" id="topic-back" aria-label="Zurück zu allen Themen"><span class="nb-topic-chevron ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span><span class="nb-topic-name">${esc(selectedTopic)}</span><span class="nb-topic-count" aria-label="${entries.length} ${entries.length === 1 ? "Notiz" : "Notizen"}">${entries.length}</span></button>
         <div class="nb-topic-tools"><button class="nb-icon-action" id="rename-topic" type="button" aria-label="Thema umbenennen">${pencilSvg}</button><button class="nb-icon-action" id="delete-topic" type="button" aria-label="Thema „${esc(selectedTopic)}“ löschen">${trashSvg}</button></div>
       </div>` : "";
-    const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category && !inTopic ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow" aria-hidden="true">›</span></button>`).join("");
+    const rows = entries.map(entry => `<button class="nb-row" type="button" data-entry="${esc(entry.id)}"><span class="nb-row-copy">${entry.category && !inTopic ? `<small class="nb-row-category">${esc(entry.category)}</small>` : ""}<strong>${esc(entry.title)}</strong>${entry.sub ? `<small>${esc(entry.sub)}</small>` : ""}</span><span class="nb-arrow ui-chev ui-chev-lone" aria-hidden="true"></span></button>`).join("");
     els.list.innerHTML = back + (rows || '<p class="nb-empty">Hier ist noch nichts gespeichert.</p>');
     $("topic-back")?.addEventListener("click", () => { selectedTopic = ""; renderList("back"); });
     $("delete-topic")?.addEventListener("click", event => askDeleteTopic(selectedTopic, event.detail === 0));
