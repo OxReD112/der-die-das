@@ -533,7 +533,7 @@ document.addEventListener("deutsch-keyboard-input", e => typeKey(e.detail?.key |
 
 async function loadKeyboardComponent() {
   const mount = $("keyboardMount");
-  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=9");
+  const r = await fetch("../../components/deutsch-keyboard-v2.60.html?v=10");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const tpl = document.createElement("template");
   tpl.innerHTML = await r.text();

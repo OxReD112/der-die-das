@@ -43,6 +43,10 @@
 
 .keyPopup{position:absolute;z-index:20;display:none;align-items:center;justify-content:center;pointer-events:none;width:48px;height:56px;border:1px solid transparent;border-radius:11px;background:var(--popup-bg);color:var(--popup-text);font-size:25px;font-weight:500;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.18)}
 .keyPopup.show{display:flex}
+/* iPad and wide screens (06.11, Alena): no letter popup — like the iPad's own keyboard; the pressed key lights up and
+   grows a little (press feedback below). Phones keep it: there the finger covers the key. */
+@media (min-width:700px) and (min-height:740px){.keyPopup.show{display:none}}
+html.deutsch-wide .keyPopup.show{display:none}
 
 /* ===== ROWS & KEYS ===== */
 .row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}

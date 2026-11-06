@@ -84,7 +84,7 @@ document.fonts?.addEventListener?.("loadingdone", () => { if ($("feedback").clas
 async function loadKeyboardComponent() {
   const mount = document.getElementById("keyboardMount");
   if (!mount) return false;
-  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=9");
+  const r = await fetch("../components/deutsch-keyboard-v2.60.html?v=10");
   if (!r.ok) throw new Error("Keyboard component failed to load");
   const text = await r.text();
   const tpl = document.createElement("template");
