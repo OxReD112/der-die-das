@@ -41445,5 +41445,244 @@
         "Man muss sich in Schiffen überfahren lassen."
       ]
     }
+  },
+  {
+    "id": "expression-204",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "sich (Dativ) den Kopf zerbrechen",
+    "translation_ru": "ломать голову (над чем-либо)",
+    "translation_en": "to rack one's brains (over something)",
+    "example_de": "Ich zerbreche mir seit Tagen den Kopf über diese Aufgabe.",
+    "example_ru": "Я уже несколько дней ломаю голову над этой задачей.",
+    "example_en": "I've been racking my brains over this problem for days.",
+    "notes_ru": [
+      "Над чем — über + Akk. или darüber, … (Er zerbrach sich den Kopf darüber, wie …). Мн. ч.: sie zerbrachen sich die Köpfe."
+    ],
+    "notes_en": [
+      "Over what — über + accusative or darüber, … (Er zerbrach sich den Kopf darüber, wie …). Plural: sie zerbrachen sich die Köpfe."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Kopf",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "zerbreche",
+              "zerbrichst",
+              "zerbricht",
+              "zerbrechen",
+              "zerbrecht",
+              "zerbrach",
+              "zerbrachst",
+              "zerbrachen",
+              "zerbracht",
+              "zerbräche",
+              "zerbrächen",
+              "zerbrich"
+            ]
+          },
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "den Kopf",
+              "die Köpfe",
+              "seinen Kopf",
+              "ihren Kopf",
+              "meinen Kopf",
+              "deinen Kopf",
+              "unsere Köpfe",
+              "ihre Köpfe",
+              "eure Köpfe"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "den Kopf",
+              "die Köpfe",
+              "seinen Kopf",
+              "ihren Kopf",
+              "meinen Kopf",
+              "deinen Kopf",
+              "unsere Köpfe",
+              "ihre Köpfe",
+              "eure Köpfe"
+            ]
+          },
+          {
+            "form": [
+              "zerbreche",
+              "zerbrichst",
+              "zerbricht",
+              "zerbrechen",
+              "zerbrecht",
+              "zerbrach",
+              "zerbrachst",
+              "zerbrachen",
+              "zerbracht",
+              "zerbräche",
+              "zerbrächen",
+              "zerbrich",
+              "zerbrochen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich zerbreche mir seit Tagen den Kopf über diese Aufgabe.",
+        "Sie zerbrachen sich die Köpfe darüber, was denn mit so viel Aufwand geschützt werden musste.",
+        "Sie hatten keine Zeit, sich den Kopf darüber zu zerbrechen.",
+        "Darüber habe ich mir lange den Kopf zerbrochen."
+      ],
+      "negative": [
+        "Der Stein zerbrach ihm fast den Kopf.",
+        "Die Vase ist zerbrochen.",
+        "Er zerbrach den Teller über seinem Kopf."
+      ]
+    }
+  },
+  {
+    "id": "expression-205",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Begriff sein (etwas zu tun)",
+    "translation_ru": "собираться (сделать); вот-вот (сделать)",
+    "translation_en": "to be about to (do something)",
+    "example_de": "Wir waren gerade im Begriff zu gehen, als das Telefon klingelte.",
+    "example_ru": "Мы как раз собирались уходить, когда зазвонил телефон.",
+    "example_en": "We were just about to leave when the phone rang.",
+    "notes_ru": [
+      "Книжн.; также старое im Begriffe sein. Не путать: im Begriff der Freiheit — в понятии свободы."
+    ],
+    "notes_en": [
+      "Formal; also old-fashioned im Begriffe sein. Do not confuse: im Begriff der Freiheit — in the concept of freedom."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Begriff",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seist",
+              "seien"
+            ]
+          },
+          {
+            "form": [
+              "im Begriff",
+              "im Begriffe"
+            ],
+            "not_next": [
+              "der",
+              "des",
+              "eines",
+              "einer",
+              "von",
+              "vom",
+              "für",
+              "aus"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "im Begriff",
+              "im Begriffe"
+            ],
+            "not_next": [
+              "der",
+              "des",
+              "eines",
+              "einer",
+              "von",
+              "vom",
+              "für",
+              "aus"
+            ]
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seist",
+              "seien",
+              "sein",
+              "gewesen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wir waren gerade im Begriff zu gehen, als das Telefon klingelte.",
+        "Er überrumpelte seine Bedienerin, die im Begriffe war heraufzugehen.",
+        "Ich bin im Begriff, einen großen Fehler zu machen.",
+        "Er war im Begriff, das Haus zu verlassen.",
+        "Sie war im Begriff, die Tür zu öffnen.",
+        "Er war im Begriff, dem Mann zu helfen."
+      ],
+      "negative": [
+        "Im Begriff der Freiheit steckt viel Geschichte.",
+        "Das ist ein Begriff aus der Physik.",
+        "Im Begriff des Staates liegt viel."
+      ]
+    }
   }
 ]
