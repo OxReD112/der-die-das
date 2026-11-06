@@ -14597,6 +14597,43 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (2) A verb form without its final -e (hab, würd, könnt) when the full form
     // is an own finite verb form and the short one has no reading of its own.
     // Expansions of colloquial spellings in one sentence: [{start,end,text,replacement,base,kind}].
+    // Links chat, advisor 06.11 (variant (a), registry L32): the old separate spelling of a separable verb — a particle of the G47
+    // class (DIRECTIONAL + SPLIT_EXTRA, not SPLIT_SKIP) right before an infinitive / participle that closes the part, when a dictionary
+    // has the joined verb: ließen ihre Lumpen fort brennen → fortbrennen, wollte zu ihr hinauf steigen, keinen Weg heraus finden. The
+    // sentence is read joined (offsets map back like the colloquial expansions); the card is the joined verb. Not: the frame um … herum
+    // (um dich herum sehen), in … hinein / herein; los, weiter, mit, zusammen are not in the class (los werden — registry L32).
+    async function oldSeparateJoins(sentence) {
+      const out = [], words = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
+      for (let i = 0; i + 1 < words.length; i++) {
+        const P = words[i][0], V = words[i+1][0], p = norm(P);
+        if (!/^\p{Ll}/u.test(P) || !/^\p{Ll}/u.test(V) || SPLIT_SKIP.has(p)) continue;
+        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p)) continue;
+        if (!/^[ \t]+$/u.test(sentence.slice(words[i].index + P.length, words[i+1].index))) continue;
+        const after = sentence.slice(words[i+1].index + V.length);
+        if (!/^\s*(?:[,;:.!?…()"„“”»«–—]|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(after)) continue;
+        // An infinitive or participle (a word the cards know by its rows; the shape only for a word they do not know: hinaus wollten
+        // is finite). Not sein / haben / werden / a modal: weg sein, zurück sein, hinaus wollen are two words (as G47, directionalParticle).
+        const vRows = verbAnalyses.get(norm(V)) || [];
+        if (vRows.length ? !vRows.some(r => ["infinitive","participle"].includes(r.kind)) : !PARTICIPLE_SHAPE.test(norm(V)) && !REGULAR_INFINITIVE_SHAPE.test(norm(V))) continue;
+        if (vRows.some(r => /^(?:sein|haben|werden|können|müssen|dürfen|sollen|wollen|mögen|möchten)$/u.test(norm(r.base || r.entry?.word || "")))) continue;
+        const before = sentence.slice(0, words[i].index), from = before.search(/[^,;:.!?…()"„“”»«–—]*$/u), part = before.slice(from);
+        if (/^(?:herum|umher)$/u.test(p) && /(?<![\p{L}\p{M}])um(?![\p{L}\p{M}])/u.test(part)) continue;
+        // rings umher / rings herum: the adverb ringsumher, ringsherum (die rings umher stehen — stehen; review 06.11)
+        if (/(?<![\p{L}\p{M}])rings[ \t]+$/iu.test(part)) continue;
+        if (/^(?:hinein|herein)$/u.test(p) && /(?<![\p{L}\p{M}])(?:in|ins|im)(?![\p{L}\p{M}])/iu.test(part)) continue;
+        const joined = p + norm(V);
+        // The joined verb: an own card or form, a record of the external dictionary (hinaufsteigen), or else the verb's own card
+        // (fortbrennen, which no dictionary knows: the same card by parts as G47 part 2 gives the separated particle, fort + brennen).
+        let known = (forms.get(joined) || []).some(e => e.type === "Verb") || (verbAnalyses.get(joined) || []).length > 0, composed = false;
+        if (!known) try { known = (await lexicalLookup(joined,'oldSeparateJoins')).some(g => !g.unresolved && canonicalPos(g.pos) === "Verb"); } catch (_) { known = false; }
+        // (not hinterher / voraus / voran: «afterwards, ahead» as often as a direction — hat es hinterher bereut; review 06.11)
+        if (!known && !/^(?:hinterher|voraus|voran)$/u.test(p)) known = composed = vRows.some(r => r.entry && ["infinitive","participle"].includes(r.kind));
+        if (!known) continue;
+        out.push({start:words[i].index,end:words[i+1].index + V.length,text:sentence.slice(words[i].index,words[i+1].index + V.length),
+          replacement:P + V,base:P + V,kind:"join",stem:P + V,composed});
+      }
+      return out;
+    }
     function colloquialExpansions(sentence) {
       // A short form needs an adjacent personal pronoun of the same person (ich hab, hab ich, würd er).
       const words = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
@@ -14691,7 +14728,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (hyphenated) return hyphenated;
       const sentence = String(context?.sentence || ""), at = context?.tokenOffset;
       if (!Number.isInteger(at) || sentence.slice(at,at+word.length) !== word) return resolveFollowingReference(word,context);
-      const rows = colloquialExpansions(sentence);
+      // A join by parts (fortbrennen: no dictionary has it) is read only from its own words; another word of the sentence (mußten …
+      // heim wandern) keeps its link to the simple verb, which a chain cannot find in a verb no dictionary has.
+      const rows = [...colloquialExpansions(sentence),...await oldSeparateJoins(sentence)].sort((a,b) => a.start - b.start)
+        .filter(r => !r.composed || at >= r.start && at < r.end)
+        .reduce((kept,r) => kept.some(q => q.end > r.start) ? kept : [...kept,r],[]);
       if (!rows.length) return resolveFollowingReference(word,context);
       // The sentence is read with full forms; offsets map back piecewise.
       let text = "", last = 0, clicked = null, newAt = null;
@@ -14700,7 +14741,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         text += sentence.slice(last,r.start);
         const from = text.length; text += r.replacement;
         pieces.push({...r,from,to:text.length});
-        if (r.start === at) { clicked = r; newAt = from; }
+        if (r.start === at || r.kind === "join" && at >= r.start && at < r.end) { clicked = r; newAt = from; }
         last = r.end;
       }
       text += sentence.slice(last);
@@ -14709,9 +14750,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (const p of pieces) if (p.end <= at) delta += p.replacement.length - p.text.length;
         newAt = at+delta;
       }
-      if (clicked && word !== clicked.text) return resolveFollowingReference(word,context);
+      if (clicked && clicked.kind !== "join" && word !== clicked.text) return resolveFollowingReference(word,context);
       const target = clicked ? clicked.base : word;
-      const resolved = await resolveFollowingReference(target,{...context,sentence:text,tokenOffset:newAt});
+      let resolved = await resolveFollowingReference(target,{...context,sentence:text,tokenOffset:newAt});
+      // An old separate spelling no dictionary knows joined (fort brennen → fortbrennen): the G47 card by parts of the joined form,
+      // read in the joined sentence (the later steps of resolve see only the clicked word of the original one).
+      if (clicked?.kind === "join") resolved = await directionalParticle(target,{...context,sentence:text,tokenOffset:newAt},resolved,null,
+        SPLIT_EXTRA.find(([x]) => target.startsWith(x)) || null);
       if (!resolved?.candidates?.length) return clicked ? resolveFollowingReference(word,context) : resolved;
       const back = (start,end) => {
         const piece = pieces.find(p => start >= p.from && start < p.to);
@@ -14739,9 +14784,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const mapped = remap(resolved);
       // One span per word: "es" maps onto the clicked spelling as well.
       for (const c of mapped.candidates || []) for (const k of [c.construction,c.prepositionLink,c.nounArticleLink,...(c.nounPhrase || [])].filter(Boolean))
-        if (Array.isArray(k.spans)) k.spans = k.spans.filter((x,i,all) => all.findIndex(y => y.start === x.start) === i);
+        if (Array.isArray(k.spans)) k.spans = k.spans.flatMap(x => {
+          // a joined old separate spelling (hinauf steigen) is highlighted as its two words
+          const join = pieces.find(p => p.kind === "join" && p.start === x.start && p.end === x.end);
+          if (!join) return [x];
+          const gap = /[ \t]+/u.exec(join.text);
+          return [{...x,end:join.start + gap.index,text:join.text.slice(0,gap.index)},
+            {...x,start:join.start + gap.index + gap[0].length,text:join.text.slice(gap.index + gap[0].length)}];
+        }).filter((x,i,all) => all.findIndex(y => y.start === x.start) === i);
       mapped.form = word;
-      if (!clicked) return mapped;
+      if (!clicked || clicked.kind === "join") return mapped;
       const mark = c => ({...c,contraction:{form:word,parts:clicked.kind === "es" ? [clicked.stem,"es"] : [clicked.base],kind:clicked.kind,
         // es gibt / es geht are fixed expressions (F8): no translation of geben / gehen until then.
         ...(clicked.kind === "es" && canonicalPos(c.pos) === "Verb" && ["geben","gehen"].includes(norm(c.lemma)) ? {expression:true} : {})}});
