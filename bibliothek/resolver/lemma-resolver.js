@@ -3683,7 +3683,11 @@
         const INDICATIVE_TENSES = ["Präsens","Präteritum","Imperativ"];
         // (review 04.11: a stem the simple verb's own card lists in any tense — führe / führen, its real Konjunktiv II: Ich wünschte, er
         // führe endlich heim; der Zug führe ab — keeps its pair; only a stem the card does not list at all — führt, führst — goes)
-        const indicativeOf = simple => { const cards = (lemmas.get(simple) || []).filter(e => e.type === "Verb");
+        // (speed chat 06.11: one simple verb is asked for every stem of every particle verb — thousands of times at book open;
+        // its forms do not change here, so the answer is kept per simple verb)
+        const indicativeKept = new Map();
+        const indicativeOf = simple => { if (!indicativeKept.has(simple)) indicativeKept.set(simple, indicativeOfCards(simple)); return indicativeKept.get(simple); };
+        const indicativeOfCards = simple => { const cards = (lemmas.get(simple) || []).filter(e => e.type === "Verb");
           if (!cards.length) return null;
           const set = new Set(), any = new Set();
           for (const c of cards) for (const [t,group] of Object.entries(formsOf(c))) for (const f of Object.values(group || {})) {

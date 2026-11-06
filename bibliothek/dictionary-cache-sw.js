@@ -5,8 +5,11 @@
 // dictionary data never changes under the same address — every file is addressed with a version (?v=…) — so this
 // worker keeps such files on disk and answers them without asking the server.
 //
-// Only versioned data of the dictionaries goes through the cache (`cacheable`); pages, code and our own dictionaries
-// (worterbuch/) go to the network as before. Any failure of the cache falls back to the network request.
+// Only versioned data of the dictionaries goes through the cache (`cacheable`); pages and code go to the network as before.
+// Any failure of the cache falls back to the network request.
+// Our own dictionaries (worterbuch/german-*.json, loaded by reader/bibliothek.js with ?v=…) — since 06.11 too (audit 06.11:
+// 2.4 MB at every open after the HTTP cache is gone); when one of them gets a new version, its older copies are removed
+// from the cache once the new one is stored (they are large and change often).
 // A changed data file needs a new version in its address (dev/bibliothek/tools/data-versions.json, regression
 // data-cache-versions-qa.cjs); otherwise this cache keeps answering the old file.
 //
@@ -19,7 +22,7 @@
 'use strict';
 
 const GENERATION = 'bibliothek-data-1';   // a new value drops the whole old cache on activation
-const MAX_ENTRIES = 2500;                 // ~40 MB of parts; the oldest entries go first
+const MAX_ENTRIES = 2500;                 // ~40 MB of parts + ~12 MB of our own dictionaries; the oldest entries go first
 const TRIM_EVERY = 50;                    // count the entries after this many new files
 
 const root = new URL('../', self.location.href).pathname;   // the site root (…/der-die-das/)
@@ -28,9 +31,16 @@ const dataPaths = [
   /^open%20data\/dictionary-de-ru-json\/(?:parts\/\d{4}|manifest)\.json$/,
   /^bibliothek\/resolver\/data\/fallback-verb-forms\/(?:\d{4}|manifest)\.json$/,
   /^bibliothek\/resolver\/data\/[\w-]+\.json$/,
+  /^worterbuch\/german-[\w-]+\.json$/,
 ];
+const replacedOnUpdate = /^worterbuch\//;     // one copy per file: a newer version drops the older ones
+// Versions of our own dictionaries start with the date (20261104-wn-nouns43-1), so a later version sorts higher; an old
+// page (from the HTTP cache, or a tab left open) asking for an older version gets it from the network without storing it.
 function cacheable(request) {
   if (request.method !== 'GET') return false;
+  // A request that asks for a fresh copy (fetch with cache:'no-store' / 'reload' — the words window's import,
+  // wortschatz/dictionary-import.js, loads the same files) goes to the network as without this worker (review 06.11).
+  if (request.cache === 'no-store' || request.cache === 'reload') return false;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin || !url.searchParams.get('v') || !url.pathname.startsWith(root)) return false;
   const path = url.pathname.slice(root.length);
@@ -52,6 +62,20 @@ async function trim(cache) {
   const keys = await cache.keys();                    // in the order the entries were added
   for (let i = 0; i < keys.length - MAX_ENTRIES; i++) await cache.delete(keys[i]);
 }
+const versionOf = url => url.searchParams.get('v') || '';
+async function newerKept(cache, request) {          // a later version of this file is already stored
+  const url = new URL(request.url);
+  if (!replacedOnUpdate.test(url.pathname.slice(root.length))) return false;
+  return (await cache.keys()).some(key => { const kept = new URL(key.url); return kept.pathname === url.pathname && versionOf(kept) > versionOf(url); });
+}
+async function dropOlder(cache, request) {
+  const url = new URL(request.url);
+  if (!replacedOnUpdate.test(url.pathname.slice(root.length))) return;
+  for (const key of await cache.keys()) {
+    const old = new URL(key.url);
+    if (old.pathname === url.pathname && versionOf(old) < versionOf(url)) await cache.delete(key);
+  }
+}
 async function answer(event) {
   const request = event.request;
   let cache = null;
@@ -65,7 +89,8 @@ async function answer(event) {
     // Stored after the answer is handed back: the reader does not wait for the disk.
     try {
       const copy = response.clone();
-      event.waitUntil(cache.put(request, copy).then(() => { if (added++ % TRIM_EVERY === 0) return trim(cache); }).catch(() => {}));
+      event.waitUntil(newerKept(cache, request).then(newer => newer ? null : cache.put(request, copy).then(() => dropOlder(cache, request)))
+        .then(() => { if (added++ % TRIM_EVERY === 0) return trim(cache); }).catch(() => {}));
     } catch (_) {}
   }
   return response;
