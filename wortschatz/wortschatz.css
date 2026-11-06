@@ -358,14 +358,7 @@ body:has(#choose.show) .start-about {
   align-items: center;
   gap: 6px;
 }
-.aboutToggle::after {
-  content: "▸";
-  font-size: 10px;
-  transition: transform 0.15s;
-}
-.start-about.open .aboutToggle::after {
-  transform: rotate(90deg);
-}
+/* the arrow after „Worum geht's?“: the shared fold arrow .ui-chev-fold, turns down with aria-expanded (06.11; was ▸) */
 
 /* Version number: only on the start and the done screen */
 /* Hidden since 2026-10-05 (Home 5.121): the number is shown in Home → Settings → Versions, which reads it from

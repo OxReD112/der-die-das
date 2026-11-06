@@ -485,15 +485,8 @@ html:not(.is-touch) .check {
 .tbl-more summary::-webkit-details-marker {
   display: none;
 }
-.tbl-more summary::before {
-  content: "▸";
-  display: inline-block;
-  font-size: 12px;
-  color: var(--muted);
-  transition: transform 0.15s;
-}
-.tbl-more[open] summary::before {
-  transform: rotate(90deg);
+.tbl-more summary .ui-chev {
+  color: var(--muted); /* the shared fold arrow .ui-chev-fold (06.11; was the letter ▸) */
 }
 .tbl-more .tbl {
   margin-top: 2px;

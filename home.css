@@ -1793,18 +1793,10 @@ body > .ui-window {
   -webkit-tap-highlight-color: transparent;
 }
 .keep-x {
+  /* the look: the shared round × of the windows .ui-close (06.11; was the letter × at 22 px); here only where it stands */
   position: absolute;
-  top: 8px;
+  top: 10px;
   right: 10px;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  background: none;
-  padding: 4px 6px;
-  color: var(--muted);
-  font:
-    300 22px/1 var(--font);
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 .keep-link,

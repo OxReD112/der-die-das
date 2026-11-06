@@ -247,36 +247,8 @@
 .coll-dot {
   color: var(--muted);
 }
-/* Starter-Set window (v2.101): fold-out line like the Pronomen table (▸ → ▾), main button always at the bottom */
-.coll-fold {
-  flex: 0 0 auto;
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin: -8px 0 14px;
-  padding: 4px 0;
-  border: 0;
-  background: none;
-  color: var(--text);
-  font: 600 15px var(--font);
-  cursor: pointer;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.coll-fold::before {
-  content: "▸";
-  display: inline-block;
-  font-size: 12px;
-  color: var(--muted);
-  transition: transform 0.15s;
-}
-.coll-fold.open::before {
-  transform: rotate(90deg);
-}
-.coll-fold:active {
-  filter: brightness(0.94);
-}
+/* Starter-Set window (v2.101): main button always at the bottom (06.11: its fold-out line .coll-fold is gone from the
+   window since 2026-10-26, its rules removed) */
 .coll-bottom-main {
   padding-top: 14px;
 }

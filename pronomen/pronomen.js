@@ -531,7 +531,7 @@ const reference =
   ).join("") +
   "</table>" +
   '<p class="tbl-note">Possessiv = Stamm + Endung: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren</p>' +
-  '<details class="tbl-more"><summary>Possessiv-Endungen</summary>' +
+  '<details class="tbl-more"><summary><span class="ui-chev ui-chev-fold" aria-hidden="true"></span>Possessiv-Endungen</summary>' +
   '<table class="tbl"><tr><th>Kasus</th><th>Mask.</th><th>Neutr.</th><th>Fem.</th><th>Plural</th></tr>' +
   CASES.map(
     ([short, kasus]) =>
