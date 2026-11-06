@@ -1200,6 +1200,10 @@ header h1 {
   font-size: 16px;
   line-height: 1.45;
 }
+/* G70 step 2: the `reflexive` field of a verb — «sich X — …» under the main translation */
+.dictionary-entry-reflexive { margin-top: 4px; }
+.dictionary-entry-reflexive strong { color: var(--text); font-weight: 600; }
+.dictionary-entry-reflexive-example { margin-top: 6px; }
 .dictionary-entry-example {
   margin: 0;
   color: var(--text);
@@ -1214,7 +1218,7 @@ header h1 {
 }
 .dictionary-add-wortschatz {
   /* the look is the shared quiet wide button .ui-quiet (components/deutsch-ui-v1.css; worterbuch.js gives the class,
-     06.11); here only where it stands */
+     06.11); here only where it stands. Tablet 64 / 20 — in the tablet block below */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1222,22 +1226,6 @@ header h1 {
   margin-top: 24px;
   padding: 0 16px;
   touch-action: manipulation;
-}
-/* Until the site has the worterbuch.js that gives the class: the same look (delete when it has) */
-.dictionary-add-wortschatz:not(.ui-quiet) {
-  height: 56px;
-  border: 1px solid transparent;
-  border-radius: 18px;
-  background: var(--card-bg);
-  color: var(--text);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
-  font: 650 16px/1 var(--font);
-  cursor: pointer;
-  transition: transform 0.12s ease, filter 0.12s ease;
-}
-.dictionary-add-wortschatz:not(.ui-quiet):active {
-  transform: scale(0.97);
-  filter: brightness(0.94);
 }
 .dictionary-verb-complement-note {
   margin-top: 1px;

@@ -13,6 +13,7 @@
 
   const TYPE_LABEL = { noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb", conjunction: "Konjunktion", pronoun: "Pronomen", expression: "Ausdruck" };
   let entries = null;
+  let expressionsByCard = new Map();
   let loadPromise = null;
   let selected = null;
 
@@ -32,14 +33,39 @@
     return selectedText || ru || en || "";
   }
 
+  // Wörterbuch quality A5 (user 27.10.2026): search compares one spelling — typographic apostrophes (’ ‘ ʼ ´ `, iPhone keyboard)
+  // count as ', ß as ss (sei’s drum → sei's drum, Massnahmen → Maßnahmen).
   function normalized(value) {
-    return String(value || "").trim().normalize("NFC").toLocaleLowerCase("de-DE");
+    return String(value || "").trim().normalize("NFC").toLocaleLowerCase("de-DE").replace(/[’‘ʼ´`]/g, "'").replace(/ß/g, "ss");
+  }
+
+  // Wörterbuch quality A1 (user 26.10.2026): a verb with the field `reflexive` is also found as «sich X» (sich drehen → drehen),
+  // like an own «sich X» card; in the list of matches such a hit shows «sich X — <reflexive translation>».
+  function reflexiveName(item) {
+    return item.type === "verb" && item.reflexive && item.reflexive.worterbuch_hidden !== true ? "sich " + item.word : "";
+  }
+
+  // Wörterbuch quality A6 (user 27.10.2026): the search keys of a card, computed once — the headword, the «sich X» line, the
+  // search_forms and the headword without its brackets: grammar marks dropped (sich (Dativ) Sorgen machen → sich Sorgen machen)
+  // and optional letters kept (einer nach dem ander(e)n → einer nach dem anderen, … andern).
+  function searchKeys(item) {
+    if (item.searchKeys) return item.searchKeys;
+    const word = normalized(item.word);
+    const forms = new Set((item.search_forms || []).map(normalized));
+    const raw = String(item.word);
+    if (raw.includes("(")) {
+      forms.add(normalized(raw.replace(/\s*\([^)]*\)/g, "")));
+      forms.add(normalized(raw.replace(/[()]/g, "")));
+    }
+    forms.delete(word);
+    item.searchKeys = { word, forms: [...forms], sich: normalized(reflexiveName(item)) };
+    return item.searchKeys;
   }
 
   function isExactMatch(item, query) {
     const needle = normalized(query);
-    return normalized(item.word) === needle
-      || Boolean(item.search_forms?.some(form => normalized(form) === needle));
+    const keys = searchKeys(item);
+    return keys.word === needle || keys.forms.includes(needle) || Boolean(keys.sich && keys.sich === needle);
   }
 
   function loadDatabase() {
@@ -51,15 +77,15 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261020-nouns-list3-15"),
-      loadJson("worterbuch/german-verbs.json?v=20261023-wn-recht-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261023-wn-partadj-1"),
-      loadJson("worterbuch/german-adverbs.json?v=20261023-wn-recht-1"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261020-pron-conj-1"),
-      loadJson("worterbuch/german-pronouns.json?v=20261024-g65-2"),
-      loadJson("worterbuch/german-adjective-adverbs.json?v=20261023-wn-partmark-1"),
+      loadJson("worterbuch/german-nouns.json?v=20261104-wn-nouns43-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261104-wn-nouns43-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261101-wn-passivenone31-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261104-wn-nein35-1"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261031-wn-doch24-4"),
+      loadJson("worterbuch/german-pronouns.json?v=20261028-wn-pron037-1"),
+      loadJson("worterbuch/german-adjective-adverbs.json?v=20261101-wn-passivenone31-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-      loadJson("worterbuch/german-expressions.json?v=20261024-expr-028-031").catch(() => [])
+      loadJson("worterbuch/german-expressions.json?v=20261105-wn-expr44-1").catch(() => [])
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs, expressions]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
@@ -71,7 +97,17 @@
         ...conjunctions.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "conjunction" })),
         ...pronouns.filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "pronoun" })),
         ...(Array.isArray(expressions) ? expressions : []).filter(item => item && typeof item.word === "string").map(item => ({ ...item, type: "expression" }))
-      ];
+      // Wörterbuch quality A4 (user 27.10.2026): a card with `worterbuch_hidden: true` is for the book reader only — not shown here.
+      ].filter(item => item.worterbuch_hidden !== true);
+      // A7: the expressions of a word («Ausdrücke» on its card) — every expression lists its words in related_ids.
+      expressionsByCard = new Map();
+      for (const item of entries) {
+        if (item.type !== "expression") continue;
+        for (const id of item.related_ids || []) {
+          if (!expressionsByCard.has(id)) expressionsByCard.set(id, []);
+          expressionsByCard.get(id).push(item);
+        }
+      }
       render();
       return entries;
     })
@@ -87,19 +123,56 @@
   function findMatches(query) {
     const needle = normalized(query);
     if (!needle || !entries) return [];
+    const rankOf = (text, exact) => exact ? 0 : text.startsWith(needle) ? 1 : text.includes(needle) ? 2 : -1;
     const matches = entries
       .map(item => {
-        const word = normalized(item.word);
-        const rank = isExactMatch(item, needle) ? 0 : word.startsWith(needle) ? 1 : word.includes(needle) ? 2 : -1;
-        return { item, rank };
+        const keys = searchKeys(item);
+        let rank = rankOf(keys.word, keys.word === needle || keys.forms.includes(needle));
+        // A6: a search form also counts by its beginning or a part, a half step after the same kind of headword match
+        // (sich Sorgen → «sich (Dativ) Sorgen machen» via its form «sich Sorgen machen»).
+        if (needle.length >= 3) for (const form of keys.forms) {
+          const formRank = rankOf(form, false);
+          if (formRank >= 0 && (rank < 0 || formRank + 0.5 < rank)) rank = formRank + 0.5;
+        }
+        const sichName = keys.sich;
+        const sichRank = sichName ? rankOf(sichName, sichName === needle) : -1;
+        // A1: the «sich X» line wins when it matches better than the bare verb (sich dreh… → «sich drehen — вращаться»).
+        if (sichRank >= 0 && (rank < 0 || sichRank < rank)) return { item: { ...item, reflexiveHit: true }, rank: sichRank, key: reflexiveName(item) };
+        return { item, rank, key: item.word };
       })
       .filter(match => match.rank >= 0)
-      .sort((a, b) => a.rank - b.rank || a.item.word.localeCompare(b.item.word, "de") || (a.item.type === "noun" ? -1 : 1));
+      .sort((a, b) => a.rank - b.rank || a.key.localeCompare(b.key, "de") || (a.item.type === "noun" ? -1 : 1));
     return matches.map(match => match.item);
+  }
+
+  // Wörterbuch quality A7 (user 27.10.2026): «Ausdrücke» — expressions with this word (their related_ids), each opens its card.
+  function appendExpressions(entry, item) {
+    const list = item.type === "expression" ? [] : (expressionsByCard.get(item.id) || []).slice().sort((a, b) => a.word.localeCompare(b.word, "de"));
+    if (!list.length) return;
+    const section = node("section", "dictionary-entry-section dictionary-entry-expressions");
+    section.append(node("h4", "dictionary-entry-label", "Ausdrücke"));
+    list.forEach(expression => {
+      const button = node("button", "dictionary-match dictionary-entry-expression");
+      button.type = "button";
+      button.append(node("span", "dictionary-match-word", expression.word));
+      button.append(node("span", "dictionary-match-translation", translated(expression.translation_ru, expression.translation_en)));
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        selected = expression;
+        render();
+        results.scrollIntoView?.({ block: "start" });
+      });
+      section.append(button);
+    });
+    entry.append(section);
   }
 
   function makeEntry(item) {
     const entry = node("article", "dictionary-entry");
+    // 06.11 (Alena, variant B): the part of speech is a label above the word, like BEISPIEL (was small on the right
+    // of the „‹ Zurück zur Suche“ row; home.css hides that one when this label is there)
+    const pos = item.parts_of_speech?.join(" / ") || TYPE_LABEL[item.type] || "";
+    if (pos) entry.append(node("p", "dictionary-entry-pos", pos));
     entry.append(node("h3", "dictionary-entry-headword", (item.article ? item.article + " " : "") + item.word));
 
     if (item.type === "verb") {
@@ -127,9 +200,22 @@
     // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
     const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
     const noteAfterTranslation = ["adverb", "conjunction", "pronoun"].includes(item.type);
-    if (usageNote && !noteAfterTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
+    // Wörterbuch quality A2 (user 26.10.2026): the note of a verb, noun or adjective stands right under its translation (and the
+    // «sich X» line), as WOERTERBUCH_VERBS asks; the Plural line and its plural note stay above the translation.
+    const noteUnderTranslation = ["verb", "noun", "adjective"].includes(item.type);
+    if (usageNote && !noteAfterTranslation && !noteUnderTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
 
     entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
+    // G70 step 2 (WN reflexive batch, user 24.10.2026): the field `reflexive` — the meaning of the verb with an accusative sich — is a line
+    // under the main translation: «sich X — …». Its example and note follow the main example in their own section (A3, below).
+    const reflexive = item.type === "verb" && item.reflexive && item.reflexive.worterbuch_hidden !== true
+      ? translated(item.reflexive.translation_ru, item.reflexive.translation_en) : "";
+    if (reflexive) {
+      const line = node("p", "dictionary-entry-translation dictionary-entry-reflexive");
+      line.append(node("strong", "", "sich " + item.word), document.createTextNode(" — " + reflexive));
+      entry.append(line);
+    }
+    if (usageNote && noteUnderTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
     if (hasWordOrder) {
       const section = node("section", "dictionary-entry-section dictionary-word-order");
       section.append(node("h4", "dictionary-entry-label", item.parts_of_speech?.includes("Adjektiv") ? "Wortstellung · Adverbial" : "Wortstellung"));
@@ -228,7 +314,24 @@
     const exampleTranslation = translated(item.example_ru, item.example_en);
     if (exampleTranslation) example.append(node("p", "dictionary-entry-example-translation", exampleTranslation));
     if (item.type === "verb") entry.append(example);
+    // Wörterbuch quality A3 (user 26.10.2026): the example and note of the «sich X» line — a section of its own after the main example,
+    // labelled «Beispiel · sich X» (or «sich X» when there is only a note), so it no longer reads as the main example.
+    if (reflexive) {
+      const reflexiveNote = translated(item.reflexive.note_ru, item.reflexive.note_en);
+      if (item.reflexive.example_de || reflexiveNote) {
+        const section = node("section", "dictionary-entry-section dictionary-entry-reflexive-section");
+        section.append(node("h4", "dictionary-entry-label", (item.reflexive.example_de ? "Beispiel · " : "") + "sich " + item.word));
+        if (item.reflexive.example_de) {
+          section.append(node("p", "dictionary-entry-example dictionary-entry-reflexive-example", item.reflexive.example_de));
+          const reflexiveExample = translated(item.reflexive.example_ru, item.reflexive.example_en);
+          if (reflexiveExample) section.append(node("p", "dictionary-entry-example-translation", reflexiveExample));
+        }
+        if (reflexiveNote) section.append(node("p", "dictionary-entry-note", reflexiveNote));
+        entry.append(section);
+      }
+    }
 
+    if (item.type === "verb") appendExpressions(entry, item);
     if (item.type === "verb" && item.forms) {
       const forms = item.forms;
       const konjunktivII = forms["Konjunktiv II"];
@@ -298,8 +401,10 @@
       section.append(node("p", "dictionary-entry-example-translation", translated(extra.example_ru, extra.example_en)));
       entry.append(section);
     }
+    if (item.type !== "verb") appendExpressions(entry, item);
     if (item.wortschatz_excluded !== true) {
-      const addToWortschatz = node("button", "dictionary-add-wortschatz", "＋ Add to Wortschatz");
+      // Wörterbuch quality (user 27.10.2026): the button speaks German, like the rest of the window.
+      const addToWortschatz = node("button", "dictionary-add-wortschatz ui-quiet", "＋ Zum Wortschatz"); // the shared quiet wide button (06.11)
       addToWortschatz.type = "button";
       addToWortschatz.addEventListener("click", () => {
         if (typeof window.openWortschatzForDictionary === "function") window.openWortschatzForDictionary(item);
@@ -315,8 +420,13 @@
     matches.slice(0, 12).forEach(item => {
       const button = node("button", "dictionary-match");
       button.type = "button";
-      button.append(node("span", "dictionary-match-word", (item.article ? item.article + " " : "") + item.word));
-      button.append(node("span", "dictionary-match-translation", translated(item.translation_ru, item.translation_en)));
+      if (item.reflexiveHit) {
+        button.append(node("span", "dictionary-match-word", reflexiveName(item)));
+        button.append(node("span", "dictionary-match-translation", translated(item.reflexive.translation_ru, item.reflexive.translation_en)));
+      } else {
+        button.append(node("span", "dictionary-match-word", (item.article ? item.article + " " : "") + item.word));
+        button.append(node("span", "dictionary-match-translation", translated(item.translation_ru, item.translation_en)));
+      }
       button.addEventListener("click", event => {
         event.preventDefault();
         input.blur();
