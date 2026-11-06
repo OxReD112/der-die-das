@@ -531,12 +531,15 @@
     const names = f.parts.map((p, k) => k === last ? formationName(p) : label(p, k)).join(' + ');
     return `${language === 'ru' ? 'буквально' : 'literally'}: ${names} — ${f.parts.map(first).join(' + ')}`;
   }
+  // One line «name — meaning», signed with the word it belongs to: a part of a compound / the base of a diminutive (4.19) and the
+  // plain verb under a reflexive «sich X» without its own meaning (advisor + user 06.11) — never shown as the meaning of the whole.
+  function namedLine(name, text, more = 0, entryId = null) { return {text:`${name} — ${text}`, more, entryId}; }
   function formationLines(f, language) {
     if (f.kind === 'particle-verb') return particleVerbLines(f, language);
     if (f.kind === 'name') return [{text:nameLiteral(f, language), more:0, entryId:null}];
     const i = language === 'ru' ? 0 : 1;
     const gloss = (p, prefix = '') => { const m = formationMeaning(p, language);
-      return {text:`${prefix}${formationName(p)} — ${m.text}`, more:p.dictionaryId ? m.rest : 0, entryId:p.dictionaryId || null}; };
+      return namedLine(`${prefix}${formationName(p)}`, m.text, p.dictionaryId ? m.rest : 0, p.dictionaryId || null); };
     const fixed = text => ({text, more:0, entryId:null});
     // #21 (reference F12-G12e): a diminutive — the base's parts, the last one marked «(уменьш.)»: «Spatz — воробей (уменьш.)»,
     // «Rock — юбка · Tasche — карман (уменьш.)».
@@ -957,9 +960,12 @@
       const note = String(field[`note_${language}`] || '').trim();
       return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:language, missing:false, derived:true, note, more:fieldFit.rest};
     }
+    // (advisor + user 06.11, SICH_X_NO_TRANSLATION: no meaning of «sich X» in the interface language — the plain verb's own line,
+    // signed with its name, as a part line: «regen — шевелить, двигать»; «not found» only when the verb has none either)
     const meaning = meaningText(candidate, language);
-    const lines = [{text:NO_TRANSLATION[language], more:0, helpEntry:null},
-      ...(meaning ? [{text:`${lemma} — ${meaning.text.replace(/^английский: /u, '')}`, more:meaning.more || 0, helpEntry:candidate.item || null}] : [])];
+    // (user 06.11: the mark «(без sich)» after the verb's name is required — without it the line reads as the meaning of «sich X»)
+    const lines = meaning ? [{...namedLine(`${lemma} ${language === 'ru' ? '(без sich)' : '(without sich)'}`, meaning.text.replace(/^английский: /u, ''), meaning.more || 0), helpEntry:candidate.item || null}]
+      : [{text:NO_TRANSLATION[language], more:0, helpEntry:null}];
     const {segments: _s, segmentPrefix: _p, ...rest} = result;
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};
   }

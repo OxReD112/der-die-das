@@ -10387,13 +10387,47 @@
         "ihr": "zeigtet",
         "sie": "zeigten"
       }
-    },
-    "reflexive": {
-      "translation_ru": "показаться; оказаться, проявиться",
-      "translation_en": "to appear, to show oneself; to turn out, to become apparent",
-      "example_de": "Es zeigte sich bald, dass der Plan nicht funktionierte.",
-      "example_ru": "Вскоре оказалось, что план не работает.",
-      "example_en": "It soon became clear that the plan wasn't working."
+    }
+  },
+  {
+    "id": "verb-2749",
+    "infinitive": "sich zeigen",
+    "translation_ru": "показаться, появиться; оказаться, обнаружиться; проявить себя (каким-либо)",
+    "translation_en": "to appear, to show oneself; to turn out, to become apparent; to prove (to be)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Es zeigt sich, dass … — оказывается, что …; sich dankbar / großzügig zeigen — проявить благодарность / щедрость; Die Sonne zeigt sich — выглянуло солнце.",
+    "usage_note_en": "Es zeigt sich, dass … — it turns out that …; sich dankbar / großzügig zeigen — to show gratitude / generosity; Die Sonne zeigt sich — the sun comes out.",
+    "example_de": "Erst bei der Prüfung zeigte sich, wie gut sie vorbereitet war.",
+    "example_cloze": "Erst bei der Prüfung {{c1::zeigte}} sich, wie gut sie vorbereitet war.",
+    "example_ru": "Только на экзамене обнаружилось, насколько хорошо она подготовилась.",
+    "example_en": "Only in the exam did it become clear how well prepared she was.",
+    "perfect_form": "haben sich gezeigt",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "zeige mich",
+        "du": "zeigst dich",
+        "er/sie/es": "zeigt sich",
+        "wir": "zeigen uns",
+        "ihr": "zeigt euch",
+        "sie": "zeigen sich"
+      },
+      "Präteritum": {
+        "ich": "zeigte mich",
+        "du": "zeigtest dich",
+        "er/sie/es": "zeigte sich",
+        "wir": "zeigten uns",
+        "ihr": "zeigtet euch",
+        "sie": "zeigten sich"
+      },
+      "Konjunktiv II": {
+        "ich": "zeigte mich",
+        "du": "zeigtest dich",
+        "er/sie/es": "zeigte sich",
+        "wir": "zeigten uns",
+        "ihr": "zeigtet euch",
+        "sie": "zeigten sich"
+      }
     }
   },
   {
@@ -122855,6 +122889,47 @@
         "du": "Brumm!",
         "ihr": "Brummt!",
         "Sie": "Brummen Sie!"
+      }
+    }
+  },
+  {
+    "id": "verb-2750",
+    "infinitive": "sich regen",
+    "translation_ru": "шевелиться, двигаться; (о чувстве, жизни, ветре) пробуждаться, подниматься",
+    "translation_en": "to move, to stir; (of a feeling, life, wind) to arise, to stir",
+    "auxiliary": "haben",
+    "usage_note_ru": "Чаще с отрицанием: Nichts regte sich. — Ничто не шевелилось. Sie regte sich nicht. — Она не шевелилась. Не путать: sich aufregen — волноваться, возмущаться.",
+    "usage_note_en": "Mostly with a negative: Nichts regte sich. — Nothing stirred. Sie regte sich nicht. — She didn't move. Do not confuse: sich aufregen — to get upset.",
+    "example_de": "Im dunklen Garten regte sich kein Blatt.",
+    "example_cloze": "Im dunklen Garten {{c1::regte}} sich kein Blatt.",
+    "example_ru": "В тёмном саду не шевелился ни один листок.",
+    "example_en": "Not a leaf stirred in the dark garden.",
+    "perfect_form": "haben sich geregt",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "rege mich",
+        "du": "regst dich",
+        "er/sie/es": "regt sich",
+        "wir": "regen uns",
+        "ihr": "regt euch",
+        "sie": "regen sich"
+      },
+      "Präteritum": {
+        "ich": "regte mich",
+        "du": "regtest dich",
+        "er/sie/es": "regte sich",
+        "wir": "regten uns",
+        "ihr": "regtet euch",
+        "sie": "regten sich"
+      },
+      "Konjunktiv II": {
+        "ich": "regte mich",
+        "du": "regtest dich",
+        "er/sie/es": "regte sich",
+        "wir": "regten uns",
+        "ihr": "regtet euch",
+        "sie": "regten sich"
       }
     }
   }

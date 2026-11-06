@@ -2357,7 +2357,13 @@
       // (#30 / G87 (b), 05.11: a preposition-like word before a punctuation mark governs nothing after it — forderte … auf, sich
       // anzusehen: auf is the detached particle closing its part, sich belongs to the zu-infinitive)
       // (a nominative-only pronoun — ich, du, er, wir — is never governed by a preposition: während er herumging is the conjunction)
-      const beforePrep = i=>i>0&&prepositions.has(words[i-1])&&!zuOpener(i)&&!['ich','du','er','wir'].includes(words[i])&&
+      // (WN 47 transfer, 06.11: the detached particle of a finite separable verb right before sich + zu-infinitive is no preposition —
+      // fing an sich zu regen: an is anfangen's, sich is the infinitive's)
+      // (zu right after sich or one word later — not vor sich auf den Tisch und fing an zu erzählen)
+      const particleBeforeZu = i=>reflexivePronouns.has(words[i])&&words.some((w,j)=>j>i&&j<=i+2&&w==='zu'&&/^\p{Ll}/u.test(tokens[j+1]?.[0]||'')&&(analyses[j+1]||[]).some(a=>a.kind==='infinitive'))&&
+        !/[,;:.!?]/u.test(String(sentence||'').slice(tokens[i-1].index,tokens[i].index))&&
+        Array.from({length:Math.min(i-1,6)},(_,k)=>i-2-k).some(j=>j>=0&&analyses[j].some(a=>a.kind==='finite'&&(lemmas.get(words[i-1]+a.base)||[]).some(e=>e.type==='Verb'&&e.separable_prefix)));
+      const beforePrep = i=>i>0&&prepositions.has(words[i-1])&&!zuOpener(i)&&!particleBeforeZu(i)&&!['ich','du','er','wir'].includes(words[i])&&
         !/[,;:.!?«»„“”"–—()]/u.test(String(sentence||'').slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index));
       // Inverted order: a reflexive pronoun may stand between the finite verb
       // and a bare-name subject (Damit stellt sich Leister …).
@@ -2651,6 +2657,20 @@
         // no reflexive card on either: sich before the group is the infinitive's, as before (versprach sich zu bessern)
         return 'zu';
       };
+      // (SICH_X (в), advisor 06.11: sich right after an article, inside an attribute that ends in a declined participle before its
+      // noun, is the participle's — einen sich im Ausland befindenden Jugendfreund —, not the clause verb's)
+      // (train 06.11: der / die / das … that opens its part, alone or after a preposition, is a relative pronoun — die sich im besetzten
+      // Gebiet bildete, an die sich das … Nebenthema anschließt: sich is the relative clause's)
+      const partStart=i=>{let k=i;while(k>0&&!/[,;:.!?«»„“”"–—()]/u.test(String(sentence||'').slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index)))k--;return k;};
+      const attributeSich=p=>p>0&&(/^(?:ein|eine|einen|einem|einer|eines)$/u.test(words[p-1])||
+        /^(?:der|die|das|den|dem|des)$/u.test(words[p-1])&&p-1>partStart(p-1)+(prepositions.has(words[partStart(p-1)])?1:0))&&
+        (()=>{for(let j=p+1;j<=p+6&&j+1<words.length;j++){
+          // (review: no finite verb on the way — das sich anhörte wie ein verdruckstes Kichern is a relative clause)
+          if(/[,;:.!?«»„“”"–—()]/u.test(String(sentence||'').slice(tokens[j-1].index+tokens[j-1][0].length,tokens[j].index)))return false;
+          if(analyses[j].some(a=>a.kind==='finite')&&!/end(?:e|en|er|em|es)$/u.test(words[j]))return false;
+          // (a present participle -end- or a ge-…-t participle, declined — not zweite / letzte)
+          if(/^\p{Ll}/u.test(tokens[j][0])&&/(?:\p{Ll}end|^ge\p{Ll}+t)(?:e|en|er|em|es)$/u.test(words[j])&&/^\p{Lu}/u.test(tokens[j+1][0]))return true;}
+          return false;})();
       const relations=[];
       for(let ci=0;ci<clauses.length;ci++) {
         const clause=clauses[ci], previous=ci>0?clauses[ci-1]:null;
@@ -2684,7 +2704,15 @@
           const singleSich=(()=>{let n=0;for(let p=clause.start;p<=clause.end;p++)if(words[p]==='sich')n++;return n===1;})();
           helpers=helpers.filter(h=>subjects(clause,h.analysis.person).length===1||inherited&&subjects(inherited,h.analysis.person).length===1||
             singleSich&&THIRD_PERSONS.includes(h.analysis.person)&&(GROUP_HELPER_VERBS.includes(h.analysis.base)||modalLemmas.has(h.analysis.base)));
+          // (SICH_X (в), advisor 06.11: a clause joined by und / oder to a clause with its own subject and finite verb shares that
+          // subject — Ich gehe mit und begleite dich: begleite is «ich begleite», not an imperative whose dich would be reflexive)
+          const sharedSubject=previous&&clause.relation==='coordinate'&&['und','oder'].includes(words[clause.start])&&
+            // (only an explicit ich / er / sie / wir there — an imperative before und keeps the next one an imperative too: Rette dein
+            // Leben und schließ dich mir an, brauch's nur recht wohl und trau dir nicht zuviel)
+            Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k).some(i=>analyses[i].some(r=>r.kind==='finite'&&r.person&&
+              subjects(previous,r.person,false).some(x=>x.index!==null&&['ich','er','sie','wir'].includes(words[x.index]))));
           for(const a of rows) {
+            if(a.kind==='imperative'&&sharedSubject)continue;
             // A weak -te form is Präteritum and Konjunktiv II at once; the reflexive group takes Präteritum (P1).
             if(a.kind==='finite'&&a.tense==='Konjunktiv II'&&rows.some(r=>r.kind==='finite'&&r.tense==='Präteritum'&&r.base===a.base&&r.person===a.person))continue;
             // Copulas/auxiliaries alone do not establish a lexical reflexive verb.
@@ -2768,7 +2796,7 @@
             }
             if(attempt)attempt.stage='pronoun';
             const pronouns=[];
-            for(let p=clause.start;p<=clause.end;p++)if(reflexivePronouns.has(words[p])&&!beforePrep(p)) {
+            for(let p=clause.start;p<=clause.end;p++)if(reflexivePronouns.has(words[p])&&!beforePrep(p)&&!attributeSich(p)) {
               const per=pronounPersons[words[p]];
               if(per===subject.person||per==='third'&&THIRD_PERSONS.includes(subject.person))pronouns.push(p);
             }
