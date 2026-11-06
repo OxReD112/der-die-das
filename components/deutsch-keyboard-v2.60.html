@@ -55,8 +55,12 @@
    whole line with room for ascenders and descenders (it sat ~2px low). Capitals with Shift keep their place. */
 .key.letter>span{display:block;text-box:trim-both ex alphabetic}
 .keyboard.shift-on .key.letter:not([data-key="ß"])>span{text-box:normal}
-.key.shift svg{width:20px;height:20px;display:block}
-.key.shift svg *{stroke-width:1.2px;vector-effect:non-scaling-stroke} /* 04.11: one icon line, 1.2 px */
+/* Shift and ⌫ icons follow the letters of their key (06.11, Alena): size and line in em of the key's font-size, so they
+   grow with the letters wherever the keyboard is bigger (phone letters 20 → Shift 20, ⌫ 24, line 1.2;
+   tablet letters 24 → Shift 24, ⌫ 28.8, line 1.44). Was: Shift 20 px with a 1.2 px line everywhere, ⌫ a letter. */
+.key.shift svg{width:1em;height:1em;display:block}
+.key.back svg{width:1.2em;height:1.2em;display:block}
+.key.shift svg *,.key.back svg *{stroke-width:.06em;vector-effect:non-scaling-stroke}
 .key.shift .on{display:none}
 .keyboard.shift-on .key.shift{background:var(--key-text);color:var(--key)}
 .keyboard.shift-on .key.shift .on{display:block}
@@ -76,7 +80,7 @@
 <div class="keyboard" id="keyboard"><div class="keyPopup" id="keyPopup" aria-hidden="true"></div>
  <div class="row" data-keys="QWERTYUIOP"></div>
  <div class="row" data-keys="ASDFGHJKL"></div>
- <div class="row third" data-keys="ßZXCVBNM"><button class="key shift" data-key="SHIFT" aria-label="Shift" aria-pressed="false"><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg><svg class="on" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg></button><button class="key back" data-key="BACK">⌫</button></div>
+ <div class="row third" data-keys="ßZXCVBNM"><button class="key shift" data-key="SHIFT" aria-label="Shift" aria-pressed="false"><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg><svg class="on" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/></svg></button><button class="key back" data-key="BACK" aria-label="Löschen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5.5h10.5a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5H9L3.5 12z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/></svg></button></div>
  <div class="row special"><button class="key letter" data-key="ä"><span>ä</span></button><button class="key letter" data-key="ö"><span>ö</span></button><button class="key letter" data-key="ü"><span>ü</span></button><button class="key space" data-key="SPACE" aria-label="Space">&nbsp;</button><button class="key ok" data-key="OK">✓</button></div>
 </div>
 <script>
