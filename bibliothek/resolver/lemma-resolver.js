@@ -13321,7 +13321,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // dictionary (lief zurück → zurücklaufen, hörte auf) keeps its card; never for an, auf, aus … (not in the list).
     // Not: davon (erzählte davon), entlang (den Fluss entlang), vorwärts, hindurch, her / hin; in … hinein (bis in die Nacht hinein).
     const SPLIT_EXTRA = [["heim","домой","home"],["entgegen","навстречу","towards"]];
-    const SPLIT_SKIP = new Set(["davon","entlang","vorwärts","hindurch","her","hin"]);
+    // (advisor 06.11: hinterher is mostly the adverb «потом» — bereute es hinterher; its particle verbs come through their own cards)
+    const SPLIT_SKIP = new Set(["davon","entlang","vorwärts","hindurch","her","hin","hinterher"]);
     async function separatedDirectional(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
