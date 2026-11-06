@@ -14794,9 +14794,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }).filter((x,i,all) => all.findIndex(y => y.start === x.start) === i);
       mapped.form = word;
       if (!clicked || clicked.kind === "join") return mapped;
+      // es gibt / es geht are fixed expressions (F8): no translation of geben / gehen until then (es gibt / wie geht's — own expressions
+      // where found). Advisor + tests chat 06.11: the verb's card where 's is plainly no impersonal es — geben with a dative person in the
+      // part ('s = «это»: gaben's dem Wirt, Gib's ihm) and gehen with a direction (Dann ging's nach Hause); the impersonal es geht
+      // without one (so geht's nicht, dem Hündlein geht's besser, los geht's) keeps the placeholder: a sure wrong «идти» is worse.
+      const part = (() => { const before = sentence.slice(0,at), after = sentence.slice(at+word.length);
+        const from = Math.max(...[...".,;:!?»«„“\"()–—"].map(ch => before.lastIndexOf(ch))) + 1;
+        const cut = after.search(/[.,;:!?»«„“"()–—]/u);
+        return norm(before.slice(from) + " " + (cut < 0 ? after : after.slice(0,cut))); })();
+      const ES_DATIVE = /(?:^|\s)(?:dem|der|ihm|ihr|mir|dir|uns|euch|ihnen|einem|einer|(?:mein|dein|sein|ihr|unser|eur|kein)(?:em|er))(?=\s|$)/u;
+      const ES_DIRECTION = /(?:^|\s)(?:nach|zu|zum|zur|in|ins|an|ans|auf|aufs|über|durch|bis|gegen|heim|hinaus|hinein|heraus|herein|hinauf|herauf|hinunter|herunter|hinüber|zurück)(?=\s|$)/u;
+      const esExpression = c => clicked.kind === "es" && canonicalPos(c.pos) === "Verb" &&
+        (norm(c.lemma) === "geben" && !ES_DATIVE.test(part) || norm(c.lemma) === "gehen" && !ES_DIRECTION.test(part));
       const mark = c => ({...c,contraction:{form:word,parts:clicked.kind === "es" ? [clicked.stem,"es"] : [clicked.base],kind:clicked.kind,
-        // es gibt / es geht are fixed expressions (F8): no translation of geben / gehen until then.
-        ...(clicked.kind === "es" && canonicalPos(c.pos) === "Verb" && ["geben","gehen"].includes(norm(c.lemma)) ? {expression:true} : {})}});
+        ...(esExpression(c) ? {expression:true} : {})}});
       const marked = new Map((mapped.candidates || []).map(c => [c,mark(c)]));
       mapped.candidates = mapped.candidates.map(c => marked.get(c));
       if (mapped.selected) mapped.selected = marked.get(mapped.selected) || mark(mapped.selected);
