@@ -4328,19 +4328,31 @@
       // Untersuchung" ab, schlossen sowohl "Tapferkeit vor dem Feind" als auch … ein). A quote with a verb (stellt sich "einfach
       // umziehen" vor, "Baulöwe, der sozial handelte") keeps its guard.
       const SENTENCE_INSIDE = /[;:!?]|\.\s+\p{Lu}/u;
-      for (const match of observedMatches(original.matchAll(/\([^()]*\)/gu),'separableScope')) {
+      const PARENTHESES = /\([^()]*\)/gu, QUOTATIONS = /"[^"\n]{1,80}"|„[^„“”\n]{1,80}[“”]|»[^»«\n]{1,80}«|«[^«»\n]{1,80}»/gu,
+        INSERTIONS = /,\s*(?:wie|während|obwohl)\b[^,;:.!?]*,/gu, CONTINUES = /^[^\p{L}.!?;:,]*\p{L}/u;
+      // (speed chat 05.11) The words of every bracket and quotation are looked up together before the checks below, which still
+      // read them one by one in their own order and stop where they stopped — the same answer; only the network waits overlap
+      // (a dialogue of Grimm with three quotations waited for ~26 words in a row).
+      try {
+        const warm = word => { tokenAnalyses(word, undefined, 'separableScope').catch(() => {}); };
+        for (const match of original.matchAll(PARENTHESES)) for (const t of rangeTokens(original,match.index,match.index+match[0].length,'separableScope')) warm(t[0]);
+        for (const match of original.matchAll(QUOTATIONS)) if (CONTINUES.test(original.slice(match.index + match[0].length)))
+          for (const t of rangeTokens(original,match.index,match.index+match[0].length,'separableScope')) warm(t[0]);
+        for (const match of original.matchAll(INSERTIONS)) { const tail = rangeTokens(original,match.index,match.index+match[0].length,'separableScope').at(-1); if (tail) warm(tail[0]); }
+      } catch (_) { /* warming only: the checks below ask again */ }
+      for (const match of observedMatches(original.matchAll(PARENTHESES),'separableScope')) {
         if (!await hasPredicate(match.index,match.index+match[0].length) && !SENTENCE_INSIDE.test(match[0])) ranges.push([match.index,match.index+match[0].length]);
       }
-      for (const match of observedMatches(original.matchAll(/"[^"\n]{1,80}"|„[^„“”\n]{1,80}[“”]|»[^»«\n]{1,80}«|«[^«»\n]{1,80}»/gu),'separableScope')) {
+      for (const match of observedMatches(original.matchAll(QUOTATIONS),'separableScope')) {
         // (regressions 27.10: a quotation that ends the clause is the object of the word before it — legt Wert auf "…", kommt mit
         // „dem Namen“ — and keeps its guard; only a quotation with more words of the clause after it is transparent)
         const rest = original.slice(match.index + match[0].length);
-        if (!/^[^\p{L}.!?;:,]*\p{L}/u.test(rest)) continue;
+        if (!CONTINUES.test(rest)) continue;
         if (!await hasPredicate(match.index,match.index+match[0].length) && !SENTENCE_INSIDE.test(match[0]) && !/,/u.test(match[0])) ranges.push([match.index,match.index+match[0].length]);
       }
       // A closed subordinate insertion owns its predicates and particles.
       // Unmarked comma clauses and unfinished insertions retain the old guards.
-      for (const match of observedMatches(original.matchAll(/,\s*(?:wie|während|obwohl)\b[^,;:.!?]*,/gu),'separableScope')) {
+      for (const match of observedMatches(original.matchAll(INSERTIONS),'separableScope')) {
         const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
         const tail=inner.at(-1);
         const finite=tail&&(await tokenAnalyses(tail[0], undefined, 'separableScope')).some(a=>a.kind==='finite');
@@ -5150,7 +5162,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!clause) return null;
       const {tokens,selected,start,end,indices,matches,verbs,possessiveBeforeNoun} = clause;
       const finite = clause.finiteIn;
-      const tenses = (e,i) => ["Präsens","Präteritum","Konjunktiv II"].filter(t=>finite(e,i,t));
+      // (links chat, advisor 05.11: the Konjunktiv I of sein — sei / seien / seist / seiet — before … worden is the perfect passive of
+      // indirect speech: Der Täter sei festgenommen worden, die Toten seien … beerdigt worden; only with worden in the part, so er sei
+      // müde and the imperative seien Sie stay as they are)
+      const konj1SeinWorden = (e,i) => e.word === "sein" && /^\p{Ll}/u.test(tokens[i][0]) && SEIN_FINITE.konjunktiv1.includes(norm(tokens[i][0])) &&
+        tokens[i+1]?.[0] !== "Sie" && indices.some(k => k !== i && norm(tokens[k][0]) === "worden");
+      const tenses = (e,i) => { const t = ["Präsens","Präteritum","Konjunktiv II"].filter(t=>finite(e,i,t)); return t.length || !konj1SeinWorden(e,i) ? t : ["Konjunktiv I"]; };
       const predicate = i => matches(i).filter(e=>e.type === "Adjektiv" || e.type === "Nomen" && /^[A-ZÄÖÜ]/u.test(tokens[i][0]));
       // G11: a zu-infinitive (zu stehlen, umzubringen) belongs to the verb it depends on — no competing predicate of werden.
       const zuInf = i => i > 0 && norm(tokens[i-1][0]) === "zu" && /^\p{Ll}/u.test(tokens[i][0]) ||
@@ -5477,7 +5494,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const tailWord = norm(tokens[tail][0]);
           const werden = verbs(tail).filter(e=>e.word === "werden");
           if (werden.length !== 1 || tail-1 === head.i) continue;
-          const tense = tenses(head.e,head.i).includes("Konjunktiv II") && !finite(head.e,head.i,"Präteritum") && !finite(head.e,head.i,"Präsens") ? "Konjunktiv II" :
+          const tense = tenses(head.e,head.i).includes("Konjunktiv I") ? "Konjunktiv I" :
+            tenses(head.e,head.i).includes("Konjunktiv II") && !finite(head.e,head.i,"Präteritum") && !finite(head.e,head.i,"Präsens") ? "Konjunktiv II" :
             finite(head.e,head.i,"Präteritum") ? "Plusquamperfekt" : "Perfekt";
           if (tailWord === "worden") {
             main = participles(tail-1); id = "werden-passive-perfect";
@@ -7433,6 +7451,35 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           note:{en:`Passiv · ${tense.includes("Präteritum") ? "Präteritum" : tense.includes("Konjunktiv II") ? "Konjunktiv II" : "Präsens"}`,ru:`Passiv · ${tense.includes("Präteritum") ? "Präteritum" : tense.includes("Konjunktiv II") ? "Konjunktiv II" : "Präsens"}`},
           meaning:selected === head.i ? {en:"passive auxiliary",ru:"вспомогательный глагол пассива"} : null,
           spans:[head.i,tail].sort((a,b)=>a-b).map(clause.span)});
+      }
+      // (links chat, advisor 05.11: sein + a participle only the external dictionary knows + worden is the perfect passive — sie seien
+      // verhext worden, das Kind war verhext worden; with worden the participle is no «become» adjective, so an own adjective card of
+      // that spelling — verhext — does not stop it. Konjunktiv I of sein as in werdenGroupIn: sei / seien … worden.)
+      if (!groups.length) {
+        const w = indices.find(i => i > start && norm(tokens[i][0]) === "worden");
+        const werdenRow = w !== undefined ? matches(w).filter(e => e.word === "werden") : [];
+        const part = w !== undefined ? w-1 : -1, form = part >= start ? tokens[part][0] : "";
+        const konj1 = (e,i) => /^\p{Ll}/u.test(tokens[i][0]) && SEIN_FINITE.konjunktiv1.includes(norm(tokens[i][0])) && tokens[i+1]?.[0] !== "Sie";
+        const seinHeads = werdenRow.length === 1 ? indices.flatMap(i => i !== part && i !== w ? matches(i).filter(e => e.word === "sein" &&
+          (finiteTenses(e,i).length || konj1(e,i))).map(e => ({i,e})) : []) : [];
+        if (seinHeads.length === 1 && /^\p{Ll}/u.test(form) && !matches(part).some(e => e.type === "Verb") && !lexicalSeparated(norm(form)) &&
+            [seinHeads[0].i,part,w].includes(selected)) {
+          const head = seinHeads[0], linked = [head.i,part,w];
+          const nominal = i => /^\p{Lu}/u.test(tokens[i][0]) && (i > 0 || /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? ""));
+          if (!indices.some(i => !linked.includes(i) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i) && !nominal(i))) {
+            let facts = null;
+            try { facts = await lexicalLookup(form,'externalPassiveGroup'); } catch (_) { facts = null; }
+            const lemmas = facts ? await externalParticipleLemmas(form,facts,'externalParticipleLemmas') : new Set();
+            if (lemmas.size === 1 && [...lemmas][0] !== norm(form)) {
+              const [lemma] = lemmas;
+              const tense = !finiteTenses(head.e,head.i).length ? "Konjunktiv I" : finiteTenses(head.e,head.i).includes("Konjunktiv II") &&
+                !finiteTenses(head.e,head.i).some(t => t !== "Konjunktiv II") ? "Konjunktiv II" : finiteTenses(head.e,head.i).includes("Präteritum") ? "Plusquamperfekt" : "Perfekt";
+              return {id:"werden-passive-perfect",lemma,roles:[head.e,{word:lemma,type:"Verb"},werdenRow[0]],
+                note:{en:`Passiv · ${tense}`,ru:`Passiv · ${tense}`},meaning:{en:"passive auxiliary",ru:"вспомогательный глагол пассива"},
+                spans:[...linked].sort((a,b)=>a-b).map(clause.span)};
+            }
+          }
+        }
       }
       return groups.length === 1 ? groups[0] : null;
     }
@@ -11355,6 +11402,35 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // only beside our own noun card: a window with an external name record (riß, füllen, per in Kör per) stays as it was (review 04.11)
           candidates.some(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen') && await (async () => {
             const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'ownLowercase'), w = norm(word);
+            // (the part closes at a comma; a list inside it — zum Wandern, Joggen und Mountainbiken ein — closes at the sentence mark)
+            const partEnds = () => {
+              const at = clickedTokenIndex(tokens, context.tokenOffset, word);
+              const close = re => { let end = at;
+                while (end + 1 < tokens.length && !re.test(sentence.slice(tokens[end].index + tokens[end][0].length, tokens[end + 1].index))) end++;
+                return end; };
+              return [...new Set([close(/[,;:.!?…»«„“"()–—]/u), close(/[;:.!?…»«„“"()–—]/u)])].map(end => {
+                const p = end > at ? norm(tokens[end][0]) : '';
+                return p && /^\p{Ll}+$/u.test(tokens[end][0]) && p.length <= 8 ? p : '';
+              });
+            };
+            // (speed chat 05.11) The lookups of the three checks below start together, before the checks: each check still reads
+            // them one by one in its own order and stops where it stopped, so the answer is the same — only the network waits
+            // overlap (before, every word of the sentence waited for the previous one: up to 160 waits in a row on a long sentence).
+            try {
+              const warm = pending => { pending.catch(() => {}); return pending; };
+              const verbBases = rows => new Set(rows.filter(x => canonicalPos(x.pos || 'Verb') === 'Verb' && (x.base || x.lemma)).map(x => norm(x.base || x.lemma)));
+              for (const t of tokens) if (norm(t[0]) !== w) warm(tokenAnalyses(t[0], undefined, 'ownLowercase').then(vr => {
+                for (const lemma of verbBases(vr)) warm(tokenAnalyses(w + lemma, undefined, 'ownLowercase'));
+              }));
+              for (const p of partEnds()) {
+                if (p) warm(tokenAnalyses(word, undefined, 'ownLowercase').then(own => {
+                  for (const base of new Set([w, ...verbBases(own)])) warm(tokenAnalyses(p + base, undefined, 'ownLowercase'));
+                }));
+              }
+              // (review 05.11: only the dictionary entry of each word, not its morphology — collectMorphology here would mark the
+              // words as looked up before the first check runs, and tokenAnalyses would then skip its verb-form filter for them)
+              for (const t of tokens) if (/^\p{Ll}/u.test(t[0]) && norm(t[0]) !== w) warm(sourceLookup(t[0], 'ownLowercase', 'grammar'));
+            } catch (_) { /* warming only: the checks below ask again */ }
             // (count 04.11) a separated first part of a verb in old spelling — teil an seinem Glück nehmen (teilnehmen): the choice stays
             for (const t of tokens) {
               if (norm(t[0]) === w) continue;
@@ -11369,14 +11445,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (train 04.11) the word that closes the part + the verb of the word is a dictionary verb — Wanderwege … laden zum Wandern
             // ein (einladen): the separable reading stays open
             {
-              // (the part closes at a comma; a list inside it — zum Wandern, Joggen und Mountainbiken ein — closes at the sentence mark)
-              const at = clickedTokenIndex(tokens, context.tokenOffset, word);
-              const close = re => { let end = at;
-                while (end + 1 < tokens.length && !re.test(sentence.slice(tokens[end].index + tokens[end][0].length, tokens[end + 1].index))) end++;
-                return end; };
-              for (const end of new Set([close(/[,;:.!?…»«„“"()–—]/u), close(/[;:.!?…»«„“"()–—]/u)])) {
-              const p = end > at ? norm(tokens[end][0]) : '';
-              if (p && /^\p{Ll}+$/u.test(tokens[end][0]) && p.length <= 8) {
+              for (const p of partEnds()) {
+              if (p) {
                 let own = [];
                 try { own = (await tokenAnalyses(word, undefined, 'ownLowercase')).filter(x => canonicalPos(x.pos || 'Verb') === 'Verb' && (x.base || x.lemma)); } catch (_) {}
                 for (const base of new Set([w, ...own.map(x => norm(x.base || x.lemma))])) {
@@ -13134,6 +13204,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // the finite verb of the part (not haben / sein / werden / a modal: then the particle belongs to a chain)
       // (advisor 04.11 (a): a finite form of a verb of the external dictionary counts as ours — hüpfte, trollte, hol)
       const analysesOf = new Map();
+      // (speed chat 05.11) the words of the part are looked up together; the loop below reads them in order — the same rows
+      for (let k = a; k <= b; k++) if (!(verbAnalyses.get(norm(tokens[k][0])) || []).some(x => x.kind === "finite") && /^\p{Ll}/u.test(tokens[k][0]))
+        tokenAnalyses(tokens[k][0], undefined, "separatedDirectional").catch(() => {});
       for (let k = a; k <= b; k++) {
         let rows = verbAnalyses.get(norm(tokens[k][0])) || [];
         if (!rows.some(x => x.kind === "finite") && /^\p{Ll}/u.test(tokens[k][0])) {
@@ -13175,7 +13248,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const sel = result.selected;
       const own = sel && norm(sel.lemma).replace(/^sich\s+/u, "");
       if (sel && (sel.construction?.id === "separable-verb" || own.startsWith(P) && own.length > P.length + 2)) return result;
-      for (const x of bases) {
+      // (speed chat 05.11) the records of «particle + verb» are asked four at a time (a verb form like ging has ~30 bases, and the
+      // first record usually ends the loop); the loop reads them in order and stops where it stopped — the same answer
+      for (const [i, x] of bases.entries()) {
+        if (fallback.hasRecord && i % 4 === 0) for (const y of bases.slice(i, i + 4)) {
+          if ((lemmas.get(P + y) || []).length || verbAnalyses.has(P + y)) break;
+          try { Promise.resolve(fallback.hasRecord(P + y)).catch(() => {}); } catch (_) {}
+        }
         const whole = P + x;
         if ((lemmas.get(whole) || []).length || verbAnalyses.has(whole)) return result;
         if (fallback.hasRecord && await fallback.hasRecord(whole)) return result;
