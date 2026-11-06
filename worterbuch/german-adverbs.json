@@ -5301,5 +5301,89 @@
     "usage_note_ru": "Ответ на вопрос: Nein! — Нет! Ответ «да» на отрицательный вопрос — doch (Kommst du nicht? – Doch!). Удивление: Nein, wie schön! — Ах, как здорово! Не путать: nicht — не (отрицание при слове), kein — никакой, ни один.",
     "usage_note_en": "Answer to a question: Nein! — No! The answer “yes” to a negative question is doch (Kommst du nicht? – Doch!). Surprise: Nein, wie schön! — Oh, how lovely! Do not confuse: nicht — not (negating a word), kein — no, not any.",
     "example_cloze": "Möchtest du noch Kaffee? – {{c1::Nein}}, danke."
+  },
+  {
+    "id": "adverb-448",
+    "word": "fort",
+    "translation_ru": "прочь; дальше (продолжая)",
+    "translation_en": "away; on (continuing)",
+    "example_de": "Als wir ankamen, war der Zug schon fort.",
+    "example_ru": "Когда мы пришли, поезд уже ушёл.",
+    "example_en": "When we arrived, the train had already gone.",
+    "usage_note_ru": "Чаще часть глагола: fortgehen — уходить, fortfahren — продолжать (fährt fort zu reden). und so fort — и так далее; in einem fort — беспрерывно. Не путать: das Fort — форт.",
+    "usage_note_en": "More often part of a verb: fortgehen — to go away, fortfahren — to continue (fährt fort zu reden). und so fort — and so on; in einem fort — incessantly. Do not confuse: das Fort — fort.",
+    "example_cloze": "Als wir ankamen, war der Zug schon {{c1::fort}}."
+  },
+  {
+    "id": "adverb-449",
+    "word": "hinauf",
+    "translation_ru": "наверх (туда, от говорящего)",
+    "translation_en": "up (there, away from the speaker)",
+    "example_de": "Die Treppe hinauf geht es zum Dachboden.",
+    "example_ru": "Вверх по лестнице — на чердак.",
+    "example_en": "Up the stairs is the way to the attic.",
+    "usage_note_ru": "her — к говорящему, hin — от говорящего. hinauf — туда наверх, herauf — сюда наверх. Чаще часть глагола: hinaufgehen, hinaufsteigen. Разг.: rauf.",
+    "usage_note_en": "her — towards the speaker, hin — away from the speaker. hinauf — up there, herauf — up here. More often part of a verb: hinaufgehen, hinaufsteigen. Colloquial: rauf.",
+    "example_cloze": "Die Treppe {{c1::hinauf}} geht es zum Dachboden."
+  },
+  {
+    "id": "adverb-450",
+    "word": "hinunter",
+    "translation_ru": "вниз (туда, от говорящего)",
+    "translation_en": "down (there, away from the speaker)",
+    "example_de": "Den Berg hinunter fuhren wir mit dem Rad.",
+    "example_ru": "С горы вниз мы ехали на велосипеде.",
+    "example_en": "We cycled down the mountain.",
+    "usage_note_ru": "her — к говорящему, hin — от говорящего. hinunter — туда вниз, herunter — сюда вниз. Чаще часть глагола: hinuntergehen, hinunterschauen. Разг.: runter.",
+    "usage_note_en": "her — towards the speaker, hin — away from the speaker. hinunter — down there, herunter — down here. More often part of a verb: hinuntergehen, hinunterschauen. Colloquial: runter.",
+    "example_cloze": "Den Berg {{c1::hinunter}} fuhren wir mit dem Rad."
+  },
+  {
+    "id": "adverb-451",
+    "word": "herunter",
+    "translation_ru": "вниз (сюда, к говорящему)",
+    "translation_en": "down (here, towards the speaker)",
+    "example_de": "Komm sofort vom Dach herunter!",
+    "example_ru": "Немедленно слезай с крыши!",
+    "example_en": "Come down off the roof at once!",
+    "usage_note_ru": "her — к говорящему, hin — от говорящего. herunter — сюда вниз, hinunter — туда вниз. Чаще часть глагола: herunterkommen, herunterfallen. Разг.: runter.",
+    "usage_note_en": "her — towards the speaker, hin — away from the speaker. herunter — down here, hinunter — down there. More often part of a verb: herunterkommen, herunterfallen. Colloquial: runter.",
+    "example_cloze": "Komm sofort vom Dach {{c1::herunter}}!"
+  },
+  {
+    "id": "adverb-452",
+    "word": "hinab",
+    "translation_ru": "вниз (туда, от говорящего)",
+    "translation_en": "down (there, away from the speaker)",
+    "example_de": "Der schmale Weg führte steil ins Tal hinab.",
+    "example_ru": "Узкая тропа круто спускалась в долину.",
+    "example_en": "The narrow path led steeply down into the valley.",
+    "usage_note_ru": "Книжн. = hinunter. Чаще часть глагола: hinabsteigen, hinabsinken.",
+    "usage_note_en": "Literary = hinunter. More often part of a verb: hinabsteigen, hinabsinken.",
+    "example_cloze": "Der schmale Weg führte steil ins Tal {{c1::hinab}}."
+  },
+  {
+    "id": "adverb-453",
+    "word": "herüber",
+    "translation_ru": "сюда, на эту сторону",
+    "translation_en": "over here (to this side)",
+    "example_de": "Vom Nachbargarten wehte Musik herüber.",
+    "example_ru": "Из соседнего сада сюда доносилась музыка.",
+    "example_en": "Music drifted over from the garden next door.",
+    "usage_note_ru": "her — к говорящему, hin — от говорящего. herüber — сюда, через что-либо; hinüber — туда, на ту сторону. Чаще часть глагола: herüberkommen, herüberreichen. Разг.: rüber.",
+    "usage_note_en": "her — towards the speaker, hin — away from the speaker. herüber — over here, across something; hinüber — over there, to the other side. More often part of a verb: herüberkommen, herüberreichen. Colloquial: rüber.",
+    "example_cloze": "Vom Nachbargarten wehte Musik {{c1::herüber}}."
+  },
+  {
+    "id": "adverb-454",
+    "word": "entgegen",
+    "translation_ru": "навстречу; вопреки",
+    "translation_en": "towards (to meet); contrary to, against",
+    "example_de": "Die Kinder liefen dem Vater entgegen.",
+    "example_ru": "Дети побежали навстречу отцу.",
+    "example_en": "The children ran to meet their father.",
+    "usage_note_ru": "Кому, чему — Dativ, часто после слова: dem Vater entgegen — навстречу отцу; entgegen allen Erwartungen / allen Erwartungen entgegen — вопреки всем ожиданиям. Часть глагола: entgegenkommen, entgegennehmen.",
+    "usage_note_en": "To whom, to what — dative, often after the word: dem Vater entgegen — to meet his father; entgegen allen Erwartungen / allen Erwartungen entgegen — contrary to all expectations. Part of a verb: entgegenkommen, entgegennehmen.",
+    "example_cloze": "Die Kinder liefen dem Vater {{c1::entgegen}}."
   }
 ]

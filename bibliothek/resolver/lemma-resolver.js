@@ -3968,8 +3968,11 @@
         // Wald, warf sie hinaus ins Wasser, blickte nieder auf ihren Fuß) — the PP gives the direction.
         // Only the two-part directional particles (hinaus, hinein, herum, hinüber, hervor, herunter …) and nieder; a bare
         // hin / her before a preposition stays the adverb (Wir fahren hin zum Bahnhof — reviewed exclusion).
+        // (advisor 06.11, WN batch 49: not a list here — the G47 class g47Particle (links chat, L39), so a new adverb card of such a
+        // particle does not break it again: ging fort zum Tor stays fortgehen, ging zurück zum Haus — zurückgehen; + nieder and hindurch,
+        // which the old pattern had and the G47 class has not: blickte nieder auf ihren Fuß)
         if ((forms.get(norm(tokens[j][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
-            !(prepositions.has(norm(tokens[j+1]?.[0] ?? "")) && /^(?:(?:hin|her)\p{Ll}{2,}|nieder)$/u.test(norm(tokens[j][0])))) return false;
+            !(prepositions.has(norm(tokens[j+1]?.[0] ?? "")) && (g47Particle(norm(tokens[j][0])) || ["nieder","hindurch"].includes(norm(tokens[j][0]))))) return false;
         let end = j + 1;
         while (end < tokens.length && !hard(end-1,end) && !soft(end-1,end)) end++;
         const entriesAt = k => forms.get(norm(tokens[k][0])) || [];
