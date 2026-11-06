@@ -796,12 +796,12 @@ header h1 {
 
 .phrase-screen .phrase-week-label {
   margin-bottom: 24px;
-  font-size: 13px;
+  font-size: 12px; /* the phrase screen on the scale (06.11): 13 / 30 / 17 / 18 → 12 / 28 / 16 / 16, iPad one step up */
 }
 
 .phrase-week-title {
   color: var(--text);
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.18;
   font-weight: 650;
   letter-spacing: -0.35px;
@@ -810,7 +810,7 @@ header h1 {
 .phrase-week-literal {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
@@ -818,7 +818,7 @@ header h1 {
 .phrase-week-meaning {
   margin-top: 28px;
   color: var(--secondary-text);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
@@ -2230,6 +2230,25 @@ body > .ui-window {
 
   html:not(.home-wide-layout) .phrase-week-home-literal {
     font-size: 16px;
+  }
+
+  /* the phrase screen one step up (06.11; was the phone sizes) */
+  html:not(.home-wide-layout) .phrase-screen-content {
+    width: min(100%, 520px);
+  }
+
+  html:not(.home-wide-layout) .phrase-screen .phrase-week-label {
+    font-size: 14px;
+  }
+
+  html:not(.home-wide-layout) .phrase-week-title {
+    font-size: 34px;
+  }
+
+  html:not(.home-wide-layout) .phrase-week-literal,
+  html:not(.home-wide-layout) .phrase-week-meaning,
+  html:not(.home-wide-layout) .phrase-week-example {
+    font-size: 20px;
   }
 
   html:not(.home-wide-layout) .mosaic .tile-today {
