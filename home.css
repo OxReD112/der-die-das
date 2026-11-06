@@ -1275,7 +1275,7 @@ header h1 {
   background: transparent;
   color: var(--muted);
   font:
-    500 13px/1.2 var(--font);
+    500 14px/1.2 var(--font); /* on the scale (06.11, was 13) */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
@@ -1827,7 +1827,7 @@ body > .ui-window {
   border-top: 1px solid var(--hairline);
   color: var(--secondary-text);
   font:
-    400 15px/1.4 var(--font);
+    400 14px/1.4 var(--font); /* on the scale (06.11, was 15) */
 }
 .howto-steps li:first-child {
   border-top: 0;
@@ -1839,10 +1839,10 @@ body > .ui-window {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--mint) 18%, transparent);
-  color: var(--mint);
+  background: var(--hairline); /* neutral: mint only means „right“ (06.11, was a mint circle) */
+  color: var(--text);
   font:
-    600 13px/1 var(--font);
+    600 12px/1 var(--font); /* on the scale (06.11, was 13) */
 }
 .howto-steps b {
   color: var(--strong-text);
@@ -1876,7 +1876,7 @@ body > .ui-window {
   cursor: default;
 }
 .keep-foot {
-  font-size: 13px;
+  font-size: 12px; /* on the scale (06.11, was 13) */
   margin: 0;
 }
 
@@ -2597,14 +2597,14 @@ html.home-wide-layout body {
   margin: 0;
 }
 .home-wide-layout .home-pg-hero b {
-  font-size: 15px;
+  font-size: 16px; /* on the scale (06.11): „+0“ 15 → 16, „Sachen sitzen jetzt“ 13 → 14 */
   letter-spacing: 0;
   font-weight: 650;
 }
 .home-wide-layout .home-pg-hero span {
   overflow: hidden;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -2693,13 +2693,13 @@ html.home-wide-layout body {
   }
   .rotate-hint-title {
     margin: 0 0 8px;
-    font-size: 24px; /* = the pause screen's title */
+    font-size: 28px; /* = the pause screen's title on phones (06.11: on the scale, was 24) */
     font-weight: 700;
   }
   .rotate-hint-text {
     margin: 0;
     color: var(--muted);
-    font-size: 15px;
+    font-size: 16px; /* = the pause screen's text (06.11, was 15) */
   }
 }
 
