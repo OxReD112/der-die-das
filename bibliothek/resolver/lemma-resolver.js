@@ -190,6 +190,9 @@
   const VON_AGENT_PREPOSITIONS = ["von","vom"];
   // von / vom / durch: the agent of a werden-passive (wird von X / durch X vertreten).
   const PASSIVE_AGENT_PREPOSITIONS = ["von","vom","durch"];
+  // (advisor 07.11) An agent in the part before token t — von / vom / durch + a determiner or a capital word (von Arthur, von der Polizei).
+  const passiveAgentBefore = (tokens, indices, t) => indices.some(i => i < t && PASSIVE_AGENT_PREPOSITIONS.includes(norm(tokens[i][0])) && i+1 < t &&
+    (DETERMINER_WORD.test(norm(tokens[i+1][0])) || /^\p{Lu}/u.test(tokens[i+1][0])));
   // um / ohne / statt / anstatt opening a zu-infinitive (um … zu helfen).
   const ZU_INFINITIVE_OPENERS = ['um','ohne','statt','anstatt'];
   // The case a one-case preposition governs: 2 = dative, 1 = accusative.
@@ -2285,7 +2288,7 @@
         // oder does not join after an imperative that opens the part, without a finite verb)
         const modifierPair=modifierWord(i-1)&&modifierWord(i+1)&&!words.slice(start,i-1).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[i-1]));
         const nominalCoord=['und','oder'].includes(words[i])&&!/[,;:.!?]/u.test(gap)&&(!leftFinite||!rightFinite)&&
-          (words[i]==='und'||leftFinite||!(analyses[coordinators.has(words[start])?start+1:start]||[]).some(a=>a.kind==='imperative'))&&(capitalPair||modifierPair)||partsJoin;
+          (words[i]==='und'||leftFinite||!(analyses[coordinators.has(words[start])?start+1:start]||[]).some(a=>a.kind==='imperative'))&&(capitalPair||modifierPair||nounPhrasePair(sentence,tokens,i))||partsJoin;
         // S1 (17.10.2026): damit without a punctuation mark before it is the pronominal
         // adverb (mühte sich damit ab, stopfte die Löcher damit zu), not the conjunction.
         const adverbialDamit=words[i]==='damit'&&!/[,;:.!?…“”„"«»()–—]/u.test(gap);
@@ -4575,8 +4578,25 @@
            // (review 31.10: a plain ge…t only when ge- + stem + -en / -n is an own verb — gestutzt, not the adjective gescheit)
            /^ge\p{Ll}{2,}t$/u.test(norm(word)) && [norm(word).slice(2,-1) + "en", norm(word).slice(2,-1) + "n"].some(v => (forms.get(v) || []).some(x => x.type === "Verb" && norm(x.word) === v))));
     }
+    // (advisor 07.11, from the L-018 count; one notion for every chain, 4.19) und / oder at token k inside one noun phrase: two declined
+    // modifiers before the noun — rote oder weiße Shorts, der oberen und unteren Temperatur (the second one by its shape only when the
+    // noun follows right after it: niedrigen) —, or two parallel noun phrases with a determiner each — der Mehringplatz und der
+    // Blücherplatz (not Meister und die Gesellen: review 22.10). limit is the last token the noun may stand at.
+    function nounPhrasePair(sentence, tokens, k, limit = tokens.length - 1) {
+      const p = k - 1;
+      if (p < 0 || k + 1 >= tokens.length || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[k][0]))) return false;
+      const w = i => norm(tokens[i][0]);
+      const verbal = i => (forms.get(w(i)) || []).some(e => e.type === "Verb") || (verbAnalyses.get(w(i)) || []).length > 0;
+      const noun = i => i <= limit && /^\p{Lu}/u.test(tokens[i][0]) && !clauseInitial(sentence, tokens[i].index) && !prepositions.has(w(i));
+      const modifier = i => i <= limit && /^\p{Ll}/u.test(tokens[i][0]) && (ownModifierForm(tokens[i][0]) || adjectivalForm(tokens[i][0])) &&
+        /(?:e|en|er|es|em)$/u.test(w(i)) && !verbal(i) && !DETERMINER_WORD.test(w(i));
+      const shape = i => i <= limit && /^\p{Ll}\p{L}*(?:e|en|er|es|em)$/u.test(tokens[i][0]) && !verbal(i) && !DETERMINER_WORD.test(w(i)) &&
+        !prepositions.has(w(i)) && !(forms.get(w(i)) || []).some(e => !["Adjektiv","Adverb"].includes(e.type));
+      if (modifier(p) && (modifier(k+1) || shape(k+1) && noun(k+2))) { for (let i = k+2; i <= limit; i++) if (noun(i)) return true; }
+      return noun(p) && p > 0 && DETERMINER_WORD.test(w(p-1)) && DETERMINER_WORD.test(w(k+1)) && (noun(k+2) || modifier(k+2) && noun(k+3));
+    }
     function quotedTitles(sentence, tokens, stop) {
-      const out = new Map();
+      const out = new Map(); out.bracketAfter = new Set();
       const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
       const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"„":"“","»":"«","“":"”","\"":"\""};
       const nounPhraseWord = t => /^[\p{Lu}\d]/u.test(t[0]) || /^\p{Ll}/u.test(t[0]) && !(forms.get(norm(t[0])) || []).some(e => e.type === "Verb") &&
@@ -4585,14 +4605,18 @@
         const g = gapAfter(a).replace(/\d+(?:[.,:]\d+)*/gu, " "); if (!OPEN.test(g) || !/^\s/u.test(g)) continue;
         const open = g.trim(), close = pairOf[open];
         if (!close) continue;
-        let joinedTo = -1;
+        let joinedTo = -1, bracketAt = -1;
         for (let b = a+1; b+1 < tokens.length && b-a <= 6; b++) {
           const h = gapAfter(b);
-          if (h.trim() === close && CLOSE.test(h)) { joinedTo = b; break; }
+          // (advisor 07.11: also when a bracket opens right after the closing mark — der Begriff "Befreiungsarmee" (Quân Giải phóng)
+          // gebraucht: the title joins, the bracket after it is an insertion of its own; out.bracketAfter holds such closing words)
+          const bracket = /^\s*[“«”"]\s+\(\s*$/u.test(h) && h.trim().startsWith(close);
+          if (h.trim() === close && CLOSE.test(h) || bracket) { joinedTo = b; if (bracket) bracketAt = b; break; }
           if (stop.test(h)) break;
         }
         const quoted = joinedTo > 0 ? tokens.slice(a+1,joinedTo+1) : [];
-        if (quoted.length && (quoted.every(t => /^[\p{Lu}\d]/u.test(t[0])) || /^\p{Lu}/u.test(quoted.at(-1)[0]) && quoted.every(nounPhraseWord))) out.set(a,joinedTo);
+        if (quoted.length && (quoted.every(t => /^[\p{Lu}\d]/u.test(t[0])) || /^\p{Lu}/u.test(quoted.at(-1)[0]) && quoted.every(nounPhraseWord))) {
+          out.set(a,joinedTo); if (bracketAt === joinedTo) out.bracketAfter.add(joinedTo); }
       }
       return out;
     }
@@ -4626,12 +4650,13 @@
       const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"(":")","„":"“","»":"«","“":"”","\"":"\""};
       for (let a = 0; a+2 < tokens.length; a++) {
         // (numbers are no tokens: Intelligence 5) — the digits stand in the gap)
-        const g = gapAfter(a).replace(/\d+(?:[.,:]\d+)*/gu, " "); if (!OPEN.test(g) || !/^\s/u.test(g)) continue;
+        // (a title's closing mark right before a bracket — "Befreiungsarmee" (Quân …): the bracket alone is the insertion here)
+        const g = (titles.bracketAfter.has(a) ? gapAfter(a).replace(/^\s*[“«”"]/u," ") : gapAfter(a)).replace(/\d+(?:[.,:]\d+)*/gu, " "); if (!OPEN.test(g) || !/^\s/u.test(g)) continue;
         // (a determiner before it makes the quoted word its noun — Meinen "Flitzer" habe ich … gekauft: no insertion, as before)
         const determinerBefore = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*)$/u.test(norm(tokens[a][0]));
         const open = g.trim(), close = pairOf[open];
         // (P7: a quoted name / title stays in the clause — quotedTitles, shared with the reflexive search)
-        if (titles.has(a)) { quoteJoin.add(a); quoteJoin.add(titles.get(a)); continue; }
+        if (titles.has(a)) { quoteJoin.add(a); if (!titles.bracketAfter.has(titles.get(a))) quoteJoin.add(titles.get(a)); continue; }
         if (determinerBefore) continue;
         for (let b = a+1; b+1 < tokens.length && b-a <= 12; b++) {
           const h = gapAfter(b).replace(/\d+(?:[.,:]\d+)*/gu, " ");
@@ -4742,7 +4767,13 @@
         const causePP = ppHead >= 0 && /^(?:mit|bei|vor|aus)$/u.test(norm(tokens[ppHead][0]));
         const seinOnly = i => { const own = (verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => a.kind === "participle" && a.entry);
           return own.length > 0 && own.every(a => a.entry.auxiliary === "sein"); };
-        const nounJoin = capitalNoun(p) && (capitalNoun(k+1) || prepositions.has(norm(tokens[k+1][0]))) && !causePP;
+        // (advisor 07.11, from the L-018 count: und / oder inside one noun phrase is no boundary either — nounPhrasePair, shared with
+        // sentenceClauses: rote oder weiße Shorts, der oberen und unteren Temperatur, der Mehringplatz und der Blücherplatz)
+        const npPair = nounPhrasePair(sentence,tokens,k,r);
+        // (the new pairs: no cause phrase anywhere earlier in the part — Mit dem Alter wurde der Mann und die Frau gelassen, P4 / T3)
+        let partStart = p; while (partStart > 0 && connected(partStart-1,partStart)) partStart--;
+        const causeInPart = tokens.slice(partStart,p).some(t => /^(?:mit|bei|vor|aus)$/u.test(norm(t[0])));
+        const nounJoin = (capitalNoun(p) && (capitalNoun(k+1) || prepositions.has(norm(tokens[k+1][0]))) || npPair && !causeInPart) && !causePP;
         // (P4 / T3, 26.10.2026: the last word may also be the participle of a separable verb only the external dictionary knows —
         // wird auf Männer und Frauen aufgestockt. Only particle + ge- + -t: ver- / be- shapes are often adjectives — bewandert,
         // verhasst, verarmt; review 26.10)
@@ -5303,6 +5334,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !indices.some(i => NOMINATIVE_PRONOUN.test(norm(tokens[i][0])));
       const becomeAt = i => werdenInClause && !reflexiveInClause && !impersonalDative && !context.coordinatedLeft && passiveNone(tokens[i][0]);
       const participles = i => becomeAt(i) ? [] : untwin(verbs(i).filter(e=>clause.participleOf(e,i)),i);
+      // (advisor 07.11, from the L-018 count: an agent is a stronger sign of the passive than a degree word — wird einige Male von Arthur
+      // sehr verletzt. von / vom / durch + a determiner or a capital word in the part before the participle; without it the degree word
+      // keeps «become» — Er wird noch heute sehr verehrt is the registry)
+      const degreeBecome = t => becomeDegreeBefore(tokens,t) && !passiveAgentBefore(tokens,indices,t);
       const infinitives = i => verbs(i).filter(e=>(phraseFirst(e) ? norm(e.word).split(/\s+/u).at(-1) : norm(e.word)) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
       // G15 step 4 (16.10.2026): a following «und / oder + verb» starts another
       // predicate (wurde verhaftet und starb) or shares the auxiliary (hat …
@@ -5338,7 +5373,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // except the named bekannt / verrückt.
         // An own adjective whose participle reading only the external dictionary knows (berühmt — berühmen «to boast»)
         // stays «become» (wird berühmt werden).
-        if (!/^\p{Ll}/u.test(tokens[part][0]) || becomeAdjectives.has(norm(tokens[part][0])) || becomeDegreeBefore(tokens,part) ||
+        if (!/^\p{Ll}/u.test(tokens[part][0]) || becomeAdjectives.has(norm(tokens[part][0])) || degreeBecome(part) ||
             adjectivalForm(tokens[part][0]) && !participles(part).length && !participleAdjectiveCard(tokens[part][0])) continue;
         let main = participles(part);
         if (!main.length && !verbs(part).length && !becomeAt(part)) main = await externalParticiple(tokens[part][0]);
@@ -5387,7 +5422,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           /^\p{Ll}/u.test(tokens[k-2][0]) && (forms.get(norm(tokens[k-2][0])) || []).every(e => ["Adjektiv","Adverb"].includes(e.type)) &&
           !verbs(k-2).length && !participles(k-2).length && !participleLikeWord(tokens[k-2][0]);
         if (becomeAdjectives.has(norm(tokens[part][0])) || !/^\p{Lu}/u.test(tokens[part][0]) && !lowerOk || passiveNone(tokens[part][0]) ||
-          becomeDegreeBefore(tokens,part) || adjectiveCoordinated(part)) continue;
+          degreeBecome(part) || adjectiveCoordinated(part)) continue;
         const main = participles(part);
         if (!main.length || new Set(main.map(e=>norm(e.word).replace(/^sich\s+/u,""))).size !== 1) continue;
         const linked = [part,head.i];
@@ -5472,7 +5507,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // alone — würde verliebt (sich verlieben); advisor 01.11: the passive by form, not only for a haben card — würde gestartet /
             // gerollt; würde verzweifelt / betrunken stay «become» as adjectives; gestorben würde → passive, registry)
             if (!infinitives(tail).length && participles(tail).length && /^\p{Ll}/u.test(tokens[tail][0]) &&
-                !becomeDegreeBefore(tokens,tail) && !becomeAdjectives.has(norm(tokens[tail][0])) &&
+                !degreeBecome(tail) && !becomeAdjectives.has(norm(tokens[tail][0])) &&
                 !adjectivalForm(tokens[tail][0]) && participles(tail).some(e => !/^sich\s/u.test(norm(e.word)))) {
               // G11: würde + a participle is the passive in Konjunktiv II (wenn er vom König gefragt würde, damit ihm nicht der Hals
               // mit abgeschnitten würde) — before, werden was «become».
@@ -5566,7 +5601,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const guess = indices.some(i=>norm(tokens[i][0]) === "wohl");
             note = guess ? {en:"Inference",ru:"Предположение"} : {en:"Future / inference",ru:"Будущее / предположение"};
             meaning = guess ? {en:"probably",ru:"вероятно"} : {en:"will / probably",ru:"будет / вероятно"};
-          } else if (participles(tail).length && (!becomeDegreeBefore(tokens,tail) || correlateSo(tail-1)) &&
+          } else if (participles(tail).length && (!degreeBecome(tail) || correlateSo(tail-1)) &&
             // (review 03.11: the named own adjectives bekannt / verrückt are «become» here too, as in Futur I / Konjunktiv II —
             // Er wird verrückt, Sie wurde völlig verrückt; before, «Passiv mit verrücken»)
             !becomeAdjectives.has(norm(tokens[tail][0]))) {
@@ -7610,7 +7645,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (lemma === norm(form) && !indices.some(i => PASSIVE_AGENT_PREPOSITIONS.includes(norm(tokens[i][0])))) continue;
         // A degree word before it makes the participle an adjective: werden =
         // become (wurde er ein wenig niedergeschlagen), as in G15c.
-        if (becomeDegreeBefore(tokens,tail)) continue;
+        if (becomeDegreeBefore(tokens,tail) && !passiveAgentBefore(tokens,indices,tail)) continue;
         // An own adjective of that spelling is werden = become (wurde … bekannt),
         // and a comparison after it continues the clause (wird zerstreut als … genutzt).
         // L34: not an adjective card that names this verb and means something else (wurde … aufgeweckt — aufwecken).
