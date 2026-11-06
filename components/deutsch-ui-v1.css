@@ -11,6 +11,9 @@
    .ui-size     10 / 20 / 30 on the start screen (21 / 650; the Verbformen family, titles in Literata, sets 20 / regular itself)
    .ui-spick    the Spickzettel pill (start screen and during a round; greyed out while it can't be used)
    .ui-close    the round × of the Spickzettel windows (30 px, tap area 44 × 44)
+   .ui-clear    the small round × inside a search field: empties it (20 px circle, tap area 36; 06.11)
+   .ui-panel-close  the big × of a full-screen panel: Wörterbuch, Einstellungen, Notizbuch (a bare 14 px cross
+                in one 1.2 px line, tap area 44; decision 04.11: panels keep a big ×, windows the round one; 06.11)
    .ui-progress the 3 px progress bar under the top bar; its fill is the <i> inside
    .ui-counter  „3 / 10“ */
 
@@ -120,6 +123,75 @@
 }
 .ui-close svg * {
   stroke-width: 1.2px; /* one icon line at any size (05.11: was 1.8 here, the 1.2 rule of deutsch-base-v1.css won) */
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- .ui-clear (06.11): the round × inside a search field (Wörterbuch, the words window) ----
+   The field places it (position absolute, right edge); here only its look. Markup:
+   <button class="ui-clear" type="button" aria-label="…"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button> */
+.ui-clear {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ui-clear::before {
+  content: "";
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--hairline);
+}
+.ui-clear svg {
+  grid-area: 1 / 1;
+  width: 8px;
+  height: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+.ui-clear svg * {
+  stroke-width: 1.2px;
+  vector-effect: non-scaling-stroke;
+}
+.ui-clear:active {
+  color: var(--text);
+}
+
+/* ---- .ui-panel-close (06.11): the big × of a full-screen panel, drawn as an icon (was the letter × at 28 px) ----
+   Same markup as .ui-clear; the panel places it. */
+.ui-panel-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+}
+.ui-panel-close svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+.ui-panel-close svg * {
+  stroke-width: 1.2px;
   vector-effect: non-scaling-stroke;
 }
 

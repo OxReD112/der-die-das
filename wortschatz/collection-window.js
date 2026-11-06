@@ -506,6 +506,17 @@
       autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: "false", enterkeyhint: "search"
     });
     wrap.appendChild(input);
+    // 06.11: the shared round × (.ui-clear, components/deutsch-ui-v1.css) instead of the browser's own one
+    const clearBtn = el("button", "ui-clear coll-search-clear", null, { type: "button", "aria-label": L("Clear search", "Очистить поиск") });
+    clearBtn.innerHTML = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>';
+    clearBtn.hidden = true;
+    clearBtn.onclick = () => {
+      input.value = "";
+      input.dispatchEvent(new Event("input"));
+      input.focus({ preventScroll: true });
+    };
+    input.addEventListener("input", () => { clearBtn.hidden = !input.value; });
+    wrap.appendChild(clearBtn);
     card.appendChild(wrap);
     const results = el("div", "coll-scroll coll-results");
     results.style.display = "none";

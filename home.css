@@ -955,50 +955,14 @@ header h1 {
   appearance: none;
 }
 .dictionary-search-clear {
+  /* the look is the shared .ui-clear (components/deutsch-ui-v1.css, 06.11); here only where it stands */
   position: absolute;
   top: 50%;
   right: 6px;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
   transform: translateY(-50%);
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--muted);
-  font: 400 23px/1 var(--font);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-/* 06.11: our small round × (20 px circle in the outline colour, thin cross) — like the search field of the words window;
-   the button stays 36 px to tap */
-.dictionary-search-clear::before {
-  content: "";
-  grid-area: 1 / 1;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--hairline);
-}
-.dictionary-search-clear svg {
-  grid-area: 1 / 1;
-  width: 8px;
-  height: 8px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-}
-.dictionary-search-clear svg * {
-  stroke-width: 1.2px;
-  vector-effect: non-scaling-stroke;
 }
 .dictionary-search-clear[hidden] {
   display: none;
-}
-.dictionary-search-clear:active {
-  color: var(--text);
 }
 .dictionary-search input:focus {
   /* 06.11: neutral, like the search field of the words window (mint means „right“ in the app) */
@@ -1068,6 +1032,10 @@ header h1 {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: color 0.12s ease;
+}
+.dictionary-entry .dictionary-match {
+  padding-left: 0; /* 06.11: the expressions of an entry start where the rest of the entry starts */
+  padding-right: 0;
 }
 .dictionary-match + .dictionary-match {
   border-top: 1px solid var(--hairline);
@@ -1245,15 +1213,19 @@ header h1 {
   line-height: 1.45;
 }
 .dictionary-add-wortschatz {
-  /* 06.11: the quiet wide button of the exercises (.ui-quiet in components/deutsch-ui-v1.css: Weiter,
-     „Noch eine Runde“) — the button is made by worterbuch.js, so the look is repeated here */
+  /* the look is the shared quiet wide button .ui-quiet (components/deutsch-ui-v1.css; worterbuch.js gives the class,
+     06.11); here only where it stands */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 56px;
   margin-top: 24px;
   padding: 0 16px;
+  touch-action: manipulation;
+}
+/* Until the site has the worterbuch.js that gives the class: the same look (delete when it has) */
+.dictionary-add-wortschatz:not(.ui-quiet) {
+  height: 56px;
   border: 1px solid transparent;
   border-radius: 18px;
   background: var(--card-bg);
@@ -1261,16 +1233,40 @@ header h1 {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
   font: 650 16px/1 var(--font);
   cursor: pointer;
-  touch-action: manipulation;
   transition: transform 0.12s ease, filter 0.12s ease;
 }
-.dictionary-add-wortschatz:active {
+.dictionary-add-wortschatz:not(.ui-quiet):active {
   transform: scale(0.97);
   filter: brightness(0.94);
 }
 .dictionary-verb-complement-note {
   margin-top: 1px;
 }
+/* 06.11 (Alena): Wörterbuch on a tablet (iPad upright) one step up the type scale, like the exercises and Home.
+   Not on the wide Home (iPad landscape / computer): there the Wörterbuch is the small block in the left column. */
+@media (min-width: 700px) and (min-height: 740px) {
+  html:not(.home-wide-layout) .dictionary-search input { height: 56px; font-size: 20px; }
+  html:not(.home-wide-layout) .dictionary-intro,
+  html:not(.home-wide-layout) .dictionary-hint,
+  html:not(.home-wide-layout) .dictionary-back { font-size: 16px; }
+  html:not(.home-wide-layout) .dictionary-entry-type,
+  html:not(.home-wide-layout) .dictionary-entry-pos,
+  html:not(.home-wide-layout) .dictionary-entry-label,
+  html:not(.home-wide-layout) .dictionary-match-translation,
+  html:not(.home-wide-layout) .dictionary-match-plural,
+  html:not(.home-wide-layout) .dictionary-match-perfect { font-size: 14px; }
+  html:not(.home-wide-layout) .dictionary-match-word { font-size: 20px; }
+  html:not(.home-wide-layout) .dictionary-entry-headword { font-size: 34px; }
+  html:not(.home-wide-layout) .dictionary-entry-plural,
+  html:not(.home-wide-layout) .dictionary-entry-translation,
+  html:not(.home-wide-layout) .dictionary-entry-example { font-size: 20px; }
+  html:not(.home-wide-layout) .dictionary-entry-example-translation,
+  html:not(.home-wide-layout) .dictionary-entry-note,
+  html:not(.home-wide-layout) .dictionary-forms-table { font-size: 16px; }
+  html:not(.home-wide-layout) .dictionary-forms-table thead th { font-size: 14px; }
+  html:not(.home-wide-layout) .dictionary-add-wortschatz { height: 64px; font-size: 20px; } /* the tablet Weiter */
+}
+
 /* No double-tap-zoom wait on iOS: switches react on the first tap. Scrolling and pinch-zoom still work. */
 .settings-panel,
 .settings-panel button,
@@ -1389,27 +1385,16 @@ header h1 {
   text-align: center;
   font-size: 20px;
   line-height: 1.1;
-  font-weight: 650;
+  font-weight: 700; /* 06.11: like the window titles (was 650) */
   letter-spacing: -0.4px;
 }
 .settings-close {
+  /* the look is the shared .ui-panel-close (components/deutsch-ui-v1.css, 06.11: the cross drawn in one 1.2 px line
+     instead of the letter × at 28 px); here only where it stands: the cross's right edge where the letter's was */
   position: absolute;
-  right: 0;
+  right: -14px;
   top: 50%;
   transform: translateY(-50%);
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  font:
-    400 28px/1 var(--font);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
 .settings-close:active {
   transform: translateY(-50%) scale(0.97);
@@ -2626,14 +2611,17 @@ html.home-wide-layout body {
   cursor: pointer;
 }
 .home-wide-layout .dictionary-panel .settings-close {
-  right: -6px;
+  right: -12px;
   width: 36px;
   height: 36px;
   color: var(--muted);
-  font-size: 24px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
+}
+.home-wide-layout .dictionary-panel .settings-close svg {
+  width: 12px;
+  height: 12px;
 }
 .home-wide-layout .dictionary-content {
   margin-top: 0;

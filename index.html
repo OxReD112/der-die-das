@@ -127,6 +127,7 @@
   </title>
   <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
   <link href="components/deutsch-base-v1.css?v=6" rel="stylesheet"/>
+  <link href="components/deutsch-ui-v1.css?v=6" rel="stylesheet"/>
   <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
   <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
@@ -135,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=74" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=74" rel="stylesheet"/>');
+     ? '<link href="home.css?v=75" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=75" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -213,7 +214,7 @@
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true">&lsaquo;</span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261106-window-1" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261106-clear-1" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -365,17 +366,17 @@
   <nav class="home-places" id="homePlaces" aria-label="Bereiche">
    <span class="home-places-pill" aria-hidden="true"></span>
    <button class="home-place is-active" id="placeHome" type="button" aria-label="Üben"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg></button>
-   <button class="home-place" id="placeLibrary" type="button" aria-label="Lesen" data-app="bibliothek/bibliothek.html?v=20261106-window-1"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7c-2-1.6-4.6-2-8-2v12c3.4 0 6 .4 8 2 2-1.6 4.6-2 8-2V5c-3.4 0-6 .4-8 2zM12 7v12"/></svg></button>
+   <button class="home-place" id="placeLibrary" type="button" aria-label="Lesen" data-app="bibliothek/bibliothek.html?v=20261106-clear-1"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7c-2-1.6-4.6-2-8-2v12c3.4 0 6 .4 8 2 2-1.6 4.6-2 8-2V5c-3.4 0-6 .4-8 2zM12 7v12"/></svg></button>
   </nav>
   <div class="notebook-layer" id="notebookLayer" aria-hidden="true">
    <section class="notebook-panel" id="notebookPanel" aria-label="Notizbuch">
-    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=33" loading="eager"></iframe>
+    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=34" loading="eager"></iframe>
    </section>
   </div>
   <div class="settings-layer" id="settingsLayer">
    <section aria-hidden="true" class="settings-panel" id="settingsPanel">
    <div class="settings-content">
-    <div class="settings-title-row"><h2 class="settings-title">Einstellungen</h2><button class="settings-close" id="settingsClose" type="button" aria-label="Einstellungen schließen">×</button></div>
+    <div class="settings-title-row"><h2 class="settings-title">Einstellungen</h2><button class="settings-close ui-panel-close" id="settingsClose" type="button" aria-label="Einstellungen schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
     <div class="settings-list">
      <div class="settings-action-row"><button class="settings-action" id="backupSave" type="button"><span class="settings-action-content"><span>Backup</span><span class="settings-action-note" id="backupNote"></span></span></button><button class="settings-info" id="backupInfoOpen" type="button" aria-label="Wo ist mein Fortschritt gespeichert?"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg></button></div>
      <button class="settings-action" id="backupRestore" type="button"><span class="settings-action-content"><span>Wiederherstellen</span><span class="settings-action-note" id="restoreNote"></span></span></button>
@@ -400,12 +401,12 @@
   <div class="dictionary-layer" id="dictionaryLayer">
    <section aria-hidden="true" class="settings-panel dictionary-panel" id="dictionaryPanel">
     <div class="settings-content">
-     <div class="settings-title-row"><h2 class="settings-title">Wörterbuch</h2><button class="settings-close" id="dictionaryClose" type="button" aria-label="Close Wörterbuch">×</button></div>
+     <div class="settings-title-row"><h2 class="settings-title">Wörterbuch</h2><button class="settings-close ui-panel-close" id="dictionaryClose" type="button" aria-label="Wörterbuch schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
      <div class="dictionary-content">
       <form class="dictionary-search" id="dictionarySearchForm" role="search">
        <div class="dictionary-input-wrap">
         <input id="dictionarySearchInput" type="search" placeholder="Wort suchen …" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Deutsches Wort suchen" aria-controls="dictionaryResults" aria-autocomplete="list" />
-        <button class="dictionary-search-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+        <button class="dictionary-search-clear ui-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
        </div>
       </form>
       <p class="dictionary-intro" id="dictionaryIntro"></p>

@@ -14,10 +14,11 @@
   <link rel="icon" href="../../icon.webp" type="image/webp">
   <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
   <link rel="stylesheet" href="../../components/deutsch-base-v1.css?v=6">
+  <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=6">
   <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1">
   <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
   <link rel="stylesheet" href="../../home.css?v=68">
-  <link rel="stylesheet" href="notizbuch.css?v=34">
+  <link rel="stylesheet" href="notizbuch.css?v=35">
 </head>
 <body class="notebook-body">
   <main class="notebook-page" id="notebook" data-screen="list">
@@ -27,7 +28,7 @@
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 4.2 4.2"/></svg>
         </button>
         <h1>Notizbuch</h1>
-        <button class="nb-close" id="close-notebook" type="button" aria-label="Notizbuch schließen">×</button>
+        <button class="nb-close ui-panel-close" id="close-notebook" type="button" aria-label="Notizbuch schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
       </div>
       <nav class="nb-tabs" role="tablist" aria-label="Notizbuch">
         <button class="nb-tab" role="tab" aria-selected="true" data-view="all">Alles</button>
