@@ -135,8 +135,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=73" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=73" rel="stylesheet"/>');
+     ? '<link href="home.css?v=74" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=74" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -405,7 +405,7 @@
       <form class="dictionary-search" id="dictionarySearchForm" role="search">
        <div class="dictionary-input-wrap">
         <input id="dictionarySearchInput" type="search" placeholder="Wort suchen …" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Deutsches Wort suchen" aria-controls="dictionaryResults" aria-autocomplete="list" />
-        <button class="dictionary-search-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden>×</button>
+        <button class="dictionary-search-clear" id="dictionarySearchClear" type="button" aria-label="Suche leeren" hidden><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
        </div>
       </form>
       <p class="dictionary-intro" id="dictionaryIntro"></p>

@@ -972,6 +972,28 @@ header h1 {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
+/* 06.11: our small round × (20 px circle in the outline colour, thin cross) — like the search field of the words window;
+   the button stays 36 px to tap */
+.dictionary-search-clear::before {
+  content: "";
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--hairline);
+}
+.dictionary-search-clear svg {
+  grid-area: 1 / 1;
+  width: 8px;
+  height: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+.dictionary-search-clear svg * {
+  stroke-width: 1.2px;
+  vector-effect: non-scaling-stroke;
+}
 .dictionary-search-clear[hidden] {
   display: none;
 }
@@ -979,7 +1001,8 @@ header h1 {
   color: var(--text);
 }
 .dictionary-search input:focus {
-  border-color: color-mix(in srgb, var(--mint) 65%, var(--hairline));
+  /* 06.11: neutral, like the search field of the words window (mint means „right“ in the app) */
+  border-color: color-mix(in srgb, var(--text) 28%, transparent);
 }
 .dictionary-search input::placeholder {
   color: var(--muted);
@@ -1086,13 +1109,25 @@ header h1 {
   border-bottom: 1px solid var(--hairline);
 }
 .dictionary-entry-type {
-  position: absolute;
-  right: 3px;
-  bottom: 1px;
+  /* on the row of „‹ Zurück zur Suche“, level with it (06.11; before: pinned to the bottom, it looked like a broken line).
+     Shown only while worterbuch.js has no label above the word (.dictionary-entry-pos) */
   color: var(--muted);
   font-size: 12px;
   line-height: 1.3;
   text-align: right;
+}
+.dictionary-content:has(.dictionary-entry-pos) .dictionary-entry-type {
+  display: none;
+}
+.dictionary-entry-pos {
+  /* 06.11 (Alena, variant B): the part of speech above the word — the section-label look (BEISPIEL, „Noch üben“) */
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .dictionary-entry-backbar[hidden] {
   display: none;
