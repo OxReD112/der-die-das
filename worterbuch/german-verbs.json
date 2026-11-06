@@ -67845,11 +67845,11 @@
   {
     "id": "verb-1485",
     "infinitive": "zurückführen",
-    "translation_ru": "возводить (к чему-либо), объяснять (чем-либо); отводить обратно",
-    "translation_en": "to trace back (to), to attribute (to); to lead back",
+    "translation_ru": "возводить (к чему-либо), объяснять (чем-либо)",
+    "translation_en": "to trace back (to), to attribute (to)",
     "auxiliary": "haben",
-    "usage_note_ru": "auf etwas zurückzuführen sein — объясняться чем-либо. Отводить обратно: Nach dem Ausflug führte die Erzieherin die Kinder in die Kita zurück.",
-    "usage_note_en": "auf etwas zurückzuführen sein — to be due to something. To lead back: Nach dem Ausflug führte die Erzieherin die Kinder in die Kita zurück.",
+    "usage_note_ru": "auf etwas zurückzuführen sein — объясняться чем-либо. Вести обратно (in / zu / durch …) — отдельная карточка.",
+    "usage_note_en": "auf etwas zurückzuführen sein — to be due to something. To lead back (in / zu / durch …) — a separate card.",
     "example_de": "Die Historikerin führt den Namen des Dorfes auf ein altes slawisches Wort zurück.",
     "example_cloze": "Die Historikerin {{c1::führt}} den Namen des Dorfes auf ein altes slawisches Wort {{c1::zurück}}.",
     "example_ru": "Историк возводит название деревни к старому славянскому слову.",
@@ -67888,6 +67888,70 @@
         "wir": "führten zurück",
         "ihr": "führtet zurück",
         "sie": "führten zurück"
+      }
+    }
+  },
+  {
+    "id": "verb-2751",
+    "infinitive": "zurückführen",
+    "translation_ru": "вести обратно, отводить назад; возвращать",
+    "translation_en": "to lead back, to take back; to return",
+    "auxiliary": "haben",
+    "usage_note_ru": "С направлением: in / zu / durch / nach + …: jemanden ins Haus zurückführen — отвести обратно в дом. Возводить (к чему-либо), объяснять (чем-либо) — auf + Akk., отдельная карточка.",
+    "usage_note_en": "With a direction: in / zu / durch / nach + …: jemanden ins Haus zurückführen — to take someone back into the house. To trace back, to attribute — auf + accusative, a separate card.",
+    "example_de": "Nach dem Ausflug führte die Erzieherin die Kinder in die Kita zurück.",
+    "example_cloze": "Nach dem Ausflug {{c1::führte}} die Erzieherin die Kinder in die Kita {{c1::zurück}}.",
+    "example_ru": "После прогулки воспитательница отвела детей обратно в детский сад.",
+    "example_en": "After the outing the teacher took the children back to the nursery.",
+    "perfect_form": "haben zurückgeführt",
+    "complements": [
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "отвести обратно куда-либо",
+        "note_en": "to lead back into somewhere"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "отвести обратно к кому-, чему-либо",
+        "note_en": "to lead back to someone, something"
+      },
+      {
+        "pattern": "durch + Akkusativ",
+        "note_ru": "вести обратно через что-либо",
+        "note_en": "to lead back through something"
+      }
+    ],
+    "forms": null,
+    "separable_prefix": "zurück",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "führe zurück",
+        "du": "führst zurück",
+        "er/sie/es": "führt zurück",
+        "wir": "führen zurück",
+        "ihr": "führt zurück",
+        "sie": "führen zurück"
+      },
+      "Präteritum": {
+        "ich": "führte zurück",
+        "du": "führtest zurück",
+        "er/sie/es": "führte zurück",
+        "wir": "führten zurück",
+        "ihr": "führtet zurück",
+        "sie": "führten zurück"
+      },
+      "Konjunktiv II": {
+        "ich": "führte zurück",
+        "du": "führtest zurück",
+        "er/sie/es": "führte zurück",
+        "wir": "führten zurück",
+        "ihr": "führtet zurück",
+        "sie": "führten zurück"
+      },
+      "Imperativ": {
+        "du": "führ zurück",
+        "ihr": "führt zurück",
+        "Sie": "führen Sie zurück"
       }
     }
   },

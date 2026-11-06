@@ -6443,7 +6443,36 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let particleIndex = -1;
       if (particle) for (let i = end; i > index; i--) if (norm(tokens[i][0]) === particle) { particleIndex = i; break; }
       const words = []; for (let i = start; i <= end; i++) if (i !== index && i !== particleIndex) words.push({i,w:norm(tokens[i][0]),t:tokens[i][0]});
-      if (words.some(x => x.w === "sich" || x.w === "lassen")) return null;
+      // (zurückführen twins, advisor 06.11: two haben cards that differ only by their prepositions — the preposition of one card in the
+      // part decides also where the object signs are not used: a passive participle, sich … lassen — auf drei Vorfälle zurückgeführt
+      // wird, sich auf … zurückführen lassen «возводить»)
+      const habenOnly = cards.length === 2 && cards.every(c => String(c.item.auxiliary || "").trim() === "haben");
+      const ownPrepsOf = c => (c.item.complements || []).map(x => String(x.pattern || "")).filter(p => /[a-zäöü]\s*\+/u.test(p))
+        .flatMap(p => p.split("+")[0].split(/[\/…]/u)).map(x => norm(x.trim())).filter(Boolean);
+      // the case of the phrase must fit the card's pattern for a two-way preposition (im Krieg, in den Körpern — no «in + Akkusativ»)
+      const CONTRACTED_CASE = {ins:["in","Akkusativ"],ans:["an","Akkusativ"],aufs:["auf","Akkusativ"],zum:["zu","Dativ"],zur:["zu","Dativ"]};
+      const caseOfPattern = (c,p) => (c.item.complements || []).map(x => String(x.pattern || "")).flatMap(q => q.split(/\s*\/\s*/u))
+        .map(q => new RegExp(`^${p}\\s*\\+\\s*(Akkusativ|Dativ)`,"u").exec(q.trim())?.[1]).filter(Boolean);
+      const phraseCase = i => { const d = norm(tokens[i+1]?.[0] ?? ""); if (/^(?:dem|der|einem|einer|meinem|meiner|deinem|seinem|seiner|ihrem|ihrer|unserem|eurem|diesem|dieser|jenem|keinem|keiner)$/u.test(d)) return "Dativ";
+        if (/^(?:die|das|einen|eine|ein|diese|dieses|meine|deine|seine|ihre|unsere|eure|keine|alle)$/u.test(d)) return "Akkusativ";
+        if (d === "den") { let k = i+2; while (k <= end && /^\p{Ll}/u.test(tokens[k][0])) k++; return k <= end && /n$/u.test(norm(tokens[k][0])) ? "Dativ" : "Akkusativ"; }
+        return null; };
+      const TWO_WAY_P = /^(?:in|an|auf|über|unter|vor|hinter|neben|zwischen)$/u;
+      // (a phrase that runs straight to the verb: no punctuation and no second noun phrase starting right after a noun — auf das Wort
+      // dyaus zurückführen, auf Anregungen der … Architektur zurückzuführen; not im Nordosten von Wien Einzug gehalten)
+      const toVerb = i => { for (let k = i+1; k < index; k++) {
+        if (/[,;:.!?()–—]/u.test(sentence.slice(tokens[k-1].index + tokens[k-1][0].length,tokens[k].index))) return false;
+        if (k > i+1 && /^\p{Lu}/u.test(tokens[k][0]) && /^\p{Lu}/u.test(tokens[k-1][0]) && !/-\s*$/u.test(sentence.slice(tokens[k-1].index + tokens[k-1][0].length,tokens[k].index))) return false; }
+        return true; };
+      const prepFits = (c,p) => words.some(x => { if (x.i <= start || x.i > index || !toVerb(x.i)) return false;
+        if (CONTRACTED_CASE[x.w]) return CONTRACTED_CASE[x.w][0] === p && caseOfPattern(c,p).includes(CONTRACTED_CASE[x.w][1]);
+        if (x.w !== p) return false;
+        if (!TWO_WAY_P.test(p)) return true;
+        const k = phraseCase(x.i); return !k || caseOfPattern(c,p).includes(k); });
+      const habenPrepPick = () => { if (!habenOnly) return null;
+        const hit = cards.filter(c => ownPrepsOf(c).some(p => prepFits(c,p)));
+        return hit.length === 1 ? {candidate:hit[0],evidence:'complement-preposition'} : null; };
+      if (words.some(x => x.w === "sich" || x.w === "lassen")) return habenPrepPick();
       // L53-3: a particle at the clause end that makes another verb of this one (Ich zöge es doch vor — vorziehen «предпочитать»):
       // the new object evidence (es / etwas / a name) is not used then; a pronoun is no particle (Sein Wort hielt er — erhalten).
       const endParticleVerb = words.some(x => x.i === end && /^\p{Ll}+$/u.test(x.t) && x.i > index && !PERSONAL_OBJECT_PRONOUN.test(x.w) &&
@@ -6469,7 +6498,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (a preposition before a bare noun is a set phrase: in Mitleidenschaft / in Betracht gezogen — the choice)
       if (participle && passiveWords) { cards = cards.filter(c => String(c.item.auxiliary || "").trim() !== "sein");
         const setPhrase = words.some(x => /^(?:in|an|auf|über|unter|vor|hinter|zu|nach)$/u.test(x.w) && x.i < end && /^\p{Lu}/u.test(tokens[x.i+1][0]));
-        return cards.length === 1 && !setPhrase ? {candidate:cards[0],evidence:'passive-transitive'} : null; }
+        return cards.length === 1 && !setPhrase ? {candidate:cards[0],evidence:'passive-transitive'} : habenPrepPick(); }
       if (participle && !passiveWords) {
         const aux = words.some(x => SEIN_FINITE_WORD.test(x.w) || x.w === "sein" && x.i > index) ? "sein" :
           words.some(x => HABEN_FINITE_WORD.test(x.w) || x.w === "haben" && x.i > index) ? "haben" : null;
@@ -6715,8 +6744,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (einziehen, advisor 01.11: ins / ans / aufs is in / an / auf + the accusative — it counts for a card whose complement is that
       // preposition with the accusative: ob er ins Weiße Haus einziehen kann — «въезжать», in + Akkusativ)
       const CONTRACTED_ACC = {ins:"in",ans:"an",aufs:"auf"};
+      // (zurückführen twins, advisor 06.11: so are zum / zur zu + the dative — zurück zum Sport, zur Größe zurückführen; not im / am /
+      // vom / beim — a place, a time or a noun's attribute far more often: im Extremfall, Anzeichen vom Schnatz)
+      const CONTRACTED_DAT = {zum:"zu",zur:"zu"};
       const contractedAcc = (c,p) => words.some(x => CONTRACTED_ACC[x.w] === p) &&
-        patterns(c).some(q => q.split(/\s*\/\s*/u).some(alt => new RegExp(`^${p}\\s*\\+\\s*Akkusativ`,"u").test(alt.trim())));
+        patterns(c).some(q => q.split(/\s*\/\s*/u).some(alt => new RegExp(`^${p}\\s*\\+\\s*Akkusativ`,"u").test(alt.trim()))) ||
+        words.some(x => CONTRACTED_DAT[x.w] === p) &&
+        patterns(c).some(q => q.split(/\s*\/\s*/u).some(alt => new RegExp(`^${p}\\s*\\+\\s*Dativ`,"u").test(alt.trim())));
       const prepCounts = (c,p) => ((clauseWords.has(p) || contractedAcc(c,p)) && !(daStart && looseAfter && daStart.w.match(DA_PREP)[1] === p && !words.some(x => x.w === p))) && !(p === "für" && accPrep(c).includes("für") &&
         !words.some(x => x.w === "für" && predicateAfter(x.i)) && !(daPreps.includes("für") && free.some(x => OBJ_PRON.test(x.w))));
       // L36: a noun phrase after the verb outside a prepositional phrase (zog den Schlitten nach Hause, stieß den Besen gegen die Wand)
@@ -6743,9 +6777,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (a zu-infinitive — zu ziehen, um … zu ziehen, statt … zu ziehen — has no subject: any noun phrase may be its object)
       const zuClause = norm(tokens[index-1]?.[0] ?? "") === "zu" || norm(word) === prefix0 + "zu" + base0.slice(prefix0.length);
       const subjectSpan = k => !zuClause && (k - start <= 2 || nominalHeads.length && k === nominalHeads[0].i);
+      // (zurückführen twins, advisor 06.11: when every card is a haben card, a noun phrase before the preposition may be the object of
+      // either card — it decides nothing about the sense, so the preposition decides for the non-finite form too, when it does not open
+      // the part (Von diesen konnte nur Trier die Klasse halten — the choice): alle diese Formen auf das Wort dyaus zurückführen
+      // «возводить»; a pair with a sein card — ziehen, einziehen — as before)
+      const habenPair = cards.every(c => String(c.item.auxiliary || "").trim() === "haben");
+      // (… only a phrase that runs straight to the verb, one noun at most: auf das Wort dyaus zurückführen, auf drei Vorfälle zurückgeführt;
+      // not im Nordosten von Wien Einzug gehalten — the choice)
+      const phraseToVerb = i => i < index && toVerb(i);
       const nonFiniteOpen = !nonFinite || !nominalHeads.length || nominalHeads.every(x => subjectSpan(x.i)) && nominalHeads.filter(x => /^\p{Lu}/u.test(x.t)).length <= 1;
       const viaAdverb = (c,p) => daPreps.includes(p);
-      const withPrep = (prepBlind && !preps(explicitAccusative).size ? [] : cards.filter(c => [...preps(c)].some(p => prepCounts(c,p) && directionOk(c,p) && (nonFiniteOpen || viaAdverb(c,p)))))
+      const withPrep = (prepBlind && !preps(explicitAccusative).size ? [] : cards.filter(c => [...preps(c)].some(p => prepCounts(c,p) && directionOk(c,p) && (nonFiniteOpen || viaAdverb(c,p) || habenPair && words.some(x => x.i > start && (x.w === p || CONTRACTED_ACC[x.w] === p || CONTRACTED_DAT[x.w] === p) && phraseToVerb(x.i))))))
         .filter(c => !(looseNP && (subjectKnown || /^(?:sie|es)$/u.test(norm(tokens[index+1]?.[0] ?? "")) && free.some(x => x.i > index+1 && QUANT_DET.test(x.w))) && c.item.auxiliary === "sein" && cards.some(h => h.item.auxiliary === "haben")));
       // L38 (22.10.2026, bestehen «заключаться» in + Dativ beside «существовать» without complements): a two-way preposition with
       // the dative may be a place (Die Firma besteht seit 1900 in Berlin): beside a card without complements it decides only as a
