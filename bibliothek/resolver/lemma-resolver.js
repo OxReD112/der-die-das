@@ -2302,7 +2302,10 @@
         const closingParticle=rightEnd>i&&nominalAfter(i+1)&&words.slice(start,i).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[rightEnd]));
         const nominalJoin=(words[i]==='als'&&words[i+1]!=='auch'&&!words.slice(start,i).includes('sowohl')||COORDINATORS_WITHOUT_COMMA.includes(words[i])&&closingParticle)&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&leftFinite&&!rightFinite&&
           !words.slice(i+1,rightEnd+1).some(w=>subjectPersons[w]);
-        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!particleDenn&&!nominalJoin ||
+        // (advisor 06.11: the shared core first — und / oder + a finite verb right after it, or a subject pronoun + a finite verb,
+        // opens a part before the exceptions above: jagte die Hufeisen ab und schlug ihm …, Geh und sage …, dachte Harry und rückte …)
+        const coreOpens=COORDINATORS_WITHOUT_COMMA.includes(words[i])&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&coordinatorOpensClause(tokens,i+1,sentence);
+        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin || coreOpens || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!particleDenn&&!nominalJoin ||
           comparisonAfterParticle(i,start)) {
           clauses.push({start,end:i-1,relation});
           start=i;relation=/[;:.!?…]/u.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
@@ -4854,7 +4857,14 @@
         if (lexical.word === "haben" && other.some(i=>nounComplements.has(norm(tokens[i][0])) || norm(tokens[i][0]) === "vor")) continue;
         // (review 03.11: with sein only a noun between sein and the infinitive — Er ist im Begriff zu gehen, Es ist Zeit zu gehen;
         // not the subject before it — Das Problem ist zu lösen)
-        if (lexical.word === "sein" && other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && nounComplements.has(norm(tokens[i][0])))) continue;
+        // (advisor 06.11, expressions chat: the same noun in the order of a subordinate clause — als er im Begriff war zu gehen, die im
+        // Begriffe war heraufzugehen —: a preposition + a noun of the list in the part before sein; and the old dative in -e after a
+        // preposition is the same form — Begriffe as im Grabe. No new words in the list; Das Problem ist zu lösen stays sein + zu.)
+        const listNoun = i => { const w = norm(tokens[i][0]), prep = i > 0 && prepositions.has(norm(tokens[i-1][0]));
+          return /^\p{Lu}/u.test(tokens[i][0]) && (nounComplements.has(w) || prep && w.endsWith("e") && nounComplements.has(w.slice(0,-1))); };
+        const prepositional = i => i > start && prepositions.has(norm(tokens[i-1][0]));
+        if (lexical.word === "sein" && other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && (nounComplements.has(norm(tokens[i][0])) || prepositional(i) && listNoun(i)))) continue;
+        if (lexical.word === "sein" && other.some(i=>i < Math.min(head.i,tail) && prepositional(i) && listNoun(i))) continue;
         // Only an undeclined (predicative) adjective governs the infinitive (bereit zu gehen);
         // a declined one is attributive inside a phrase (im höchstem Maße weiter zu empfehlen).
         if (lexical.word === "sein" && other.some(i=>!mannerWords.has(norm(tokens[i][0])) &&
@@ -12386,11 +12396,49 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // part of the sentence when a finite verb follows right after it (Die FDP hat erst zugestimmt und will jetzt nichts damit zu tun
     // haben) or after a subject pronoun (05.11, expressions chat: … in die Tat umgesetzt und sie hat gelacht). Used by constructionAt
     // (the parts of an expression) and by expressionGrammar (the auxiliary of the tense line). `i` — the token right after und / oder.
+    // The shared core (links chat, advisor 06.11; comparison claude/COORD_BOUNDARY_COMPARE_2026-11-06_RU.md): sentenceClauses (the
+    // parts of the verbal groups) cuts by it first, before its own exceptions. Two refinements of 06.11, both by grammar:
+    // - a subject pronoun after und opens a part only when the part before und already has its own finite verb — otherwise it is the
+    //   second subject (Deine Tante und ich haben darüber nachgedacht);
+    // - a word with an own adjective card right before a capitalized noun is that noun's adjective, not a finite verb (Alle Zylinder
+    //   und schicken Kappen);
+    // - item 3: the second place (adverb / determiner + noun, then an unambiguously finite verb) — below.
+    // `sentence` (optional) gives the punctuation that ends the part before und; without it the part runs to the sentence start.
     const SUBJECT_PRONOUN = /^(?:ich|du|er|sie|es|wir|ihr|man)$/u;
-    function coordinatorOpensClause(tokens, i) {
+    function coordinatorOpensClause(tokens, i, sentence = null) {
       if (i < 2 || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0]))) return false;
       const finiteLow = k => tokens[k] && /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === "finite");
-      return finiteLow(i) || SUBJECT_PRONOUN.test(norm(tokens[i][0])) && finiteLow(i+1);
+      // (also a determiner before a capitalized word — meine Katze: meine is no «ich meine» there; run 06.11)
+      const attributive = k => /^\p{Lu}/u.test(tokens[k+1]?.[0] ?? "") && (DETERMINER_WORD.test(norm(tokens[k][0])) ||
+        (forms.get(norm(tokens[k][0])) || []).some(e => e.type === "Adjektiv") && (forms.get(norm(tokens[k+1][0])) || []).some(e => e.type === "Nomen"));
+      if (finiteLow(i) && !attributive(i)) return true;
+      const finiteBefore = () => {
+        // (the part before und ends at punctuation or at an earlier und / oder — meine Katze und ich fühlten uns …, after hat … genommen
+        // und: the finite verb before the first und is not this part's; run 06.11)
+        let a = i - 2;
+        while (a > 0 && !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[a-1][0])) &&
+          !(sentence && /[,;:.!?…()"„“”»«–—]/u.test(sentence.slice(tokens[a-1].index + tokens[a-1][0].length, tokens[a].index)))) a--;
+        for (let k = a; k <= i - 2; k++) if (finiteLow(k) && !attributive(k)) return true;
+        return false;
+      };
+      if (SUBJECT_PRONOUN.test(norm(tokens[i][0])) && finiteLow(i+1) && !attributive(i+1)) return finiteBefore();
+      // (advisor 06.11, item 3: the second place — an adverb, or a determiner + a noun, then an unambiguously finite verb, opens a
+      // part, again only when the part before und has its own finite verb: Der Himmel war jetzt klar und das Meer schimmerte …, und
+      // manchmal flog eine Eule; not Der König und seine Jäger sahen. Forms in -en that are also an infinitive are not taken — und
+      // die Kinder schlafen, the trap of E3.)
+      const rows = k => verbAnalyses.get(norm(tokens[k]?.[0] ?? "")) || [];
+      const plainFinite = k => finiteLow(k) && !rows(k).some(a => ["infinitive","participle","imperative"].includes(a.kind)) && !attributive(k);
+      let k = i;
+      // (a pair of adverbs around und — hin und her, auf und ab — is one part: den der Wind hin und her schlug; run 06.11)
+      const adverbAt = q => tokens[q] && /^\p{Ll}/u.test(tokens[q][0]) && (forms.get(norm(tokens[q][0])) || []).some(e => e.type === "Adverb") && !rows(q).length;
+      if (adverbAt(k) && !adverbAt(i-2)) k++;
+      else if (DETERMINER_WORD.test(norm(tokens[k][0]))) {
+        k++;
+        while (tokens[k] && /^\p{Ll}/u.test(tokens[k][0]) && !rows(k).length && LOWERCASE_DECLINED_WORD.test(tokens[k][0])) k++;
+        if (!tokens[k] || !/^\p{Lu}/u.test(tokens[k][0])) return false;
+        k++;
+      } else return false;
+      return plainFinite(k) && finiteBefore();
     }
     async function constructionAt(word, context) {
       if (!Number.isInteger(context?.tokenOffset) || !constructionAnchors.size) return null;
@@ -12409,7 +12457,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const innerPoint = i && gap(i) === "." && /^\p{L}{1,3}$/u.test(tokens[i-1][0]) && /^\p{L}{1,3}$/u.test(tokens[i][0]) &&
           (/^\p{L}$/u.test(tokens[i-1][0]) || /^\p{L}$/u.test(tokens[i][0]));
         if (i && !innerPoint && /[,;:.!?…–—()"„“”«»]/u.test(clauseGapText(gap(i), tokens[i-1][0], tokens[i][0]))) c++;
-        else if (coordinatorOpensClause(tokens, i)) c++;
+        else if (coordinatorOpensClause(tokens, i, sentence)) c++;
         // (review 05.11: the point inside u.a. / d.h. opens nothing — D.H. Lawrence, U.A. Fanthorpe stay names)
         clause.push(c); opening.push(!i || !innerPoint && /[.!?:„“"«»]/u.test(gap(i)));
       }
@@ -12995,7 +13043,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // a finite verb shares it (Er hat gelacht und sich auf den Weg gemacht — hat; wird aufstehen und sich auf den Weg machen — wird).
           const fs = tokens.findIndex(t => t.index >= first), le = Math.max(fs, tokens.findIndex(t => t.index >= lastAt) - 1);
           for (let k = from + 1; k < to; k++) {
-            if (!coordinatorOpensClause(tokens, k)) continue;
+            if (!coordinatorOpensClause(tokens, k, sentence)) continue;
             if (k <= fs) from = k; else if (k > le) { to = k; break; }
           }
           for (let i = from; i < to; i++) clause.push({i, rows:verbAnalyses.get(norm(tokens[i][0])) || []});
