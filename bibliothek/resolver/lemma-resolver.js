@@ -3557,6 +3557,24 @@
       };
     }
     const capitalise = s => s.charAt(0).toUpperCase() + s.slice(1);
+    // A capital word opening its clause is an adverbial adjective, not a name, when the clause says so: zu or a preposition follows
+    // it, or after the finite verb right behind it stands a subject (a personal pronoun, a determiner, a capital word) — sich between
+    // them is skipped (Führungslos schloss sich die NAL …). Goldreich versteckte sich, als … keeps the name rule.
+    function adjectiveOpensClause(context) {
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'wordFormation');
+      const i = tokens.findIndex(t => t.index === context.tokenOffset);
+      if (i < 0 || i + 1 >= tokens.length) return false;
+      const gap = k => sentence.slice(tokens[k].index + tokens[k][0].length, tokens[k+1].index);
+      if (!/^[ \t]+$/u.test(gap(i))) return false;
+      const n1 = norm(tokens[i+1][0]);
+      if (n1 === "zu" || prepositions.has(n1)) return true;
+      if (!(verbAnalyses.get(n1) || []).some(a => a.kind === "finite")) return false;
+      let k = i + 2;
+      while (k < tokens.length && /^[ \t]+$/u.test(gap(k-1)) && /^(?:sich|mich|dich|uns|euch|nicht|auch|noch|nun|jetzt|dann|so)$/u.test(norm(tokens[k][0]))) k++;
+      if (k >= tokens.length || !/^[ \t]+$/u.test(gap(k-1))) return false;
+      const t = tokens[k][0], n = norm(t);
+      return /^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(n) || !!determinerFeatures(t) || WORD_FORMATION_DET.test(n) || /^\p{Lu}/u.test(t);
+    }
     async function wordFormationCandidate(word, context) {
       const spelling = String(word || "");
       if (!context || !Number.isInteger(context.tokenOffset) || spelling.length < 6 || !/^[\p{L}]+$/u.test(spelling) ||
@@ -3568,6 +3586,14 @@
       const around = String(context.sentence || "");
       if (/[-‐‑]$/u.test(around.slice(0,context.tokenOffset)) || /^[-‐‑]/u.test(around.slice(context.tokenOffset + spelling.length))) return null;
       const w = norm(spelling), capital = /^\p{Lu}/u.test(spelling), ctx = wordFormationContext(spelling,context);
+      // (advisor 06.11, fresh sample: «X- und Y» — the signs before the stub are the signs of the whole group: ein vielfältiges Sport-
+      // und Kulturangebot — Kulturangebot has «ein vielfältiges» as Sport- has; Schul- oder Hochschulabschluss)
+      { const m = /([\p{L}]+)[-‐‑][ \t]+(?:und|oder|sowie|bzw\.|beziehungsweise)[ \t]+$/u.exec(around.slice(0,context.tokenOffset));
+        if (m && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep)) {
+          const s2 = wordFormationContext(m[1],{...context,tokenOffset:m.index});
+          for (const k of ["det","adj","contraction","prep","definite","plural","number","case","gender"]) if (s2[k] !== undefined && ctx[k] === undefined || s2[k] && !ctx[k]) ctx[k] = s2[k];
+          if (s2.det || s2.adj || s2.contraction || s2.prep) { ctx.bare = false; ctx.name = false; ctx.nameSlot = false; }
+        } }
       // G68 (user 24.10): a whole word a dictionary knows is never split, in any case (beileibe — «bei Leibe», not Beil + Eibe).
       // (#21: a record that only names the base of a diminutive — täschchen «diminutive of Tasche» — gives that base)
       let dimBase = null;
@@ -3586,7 +3612,10 @@
         if (other?.ambiguous) other = null;
         // G68: a capital word opening the clause read as an adjective without an ending (Goldreich versteckte sich) is a name
         // as often as an adjective: no card (Eulenfreie Tage keeps its ending and its noun).
-        if (other?.compound && other.compound.parts.at(-1).ending === '') other = null;
+        // (advisor 06.11, fresh sample: not when the clause shows the adjective — zu or a preposition right after it, Verteidigungsfähig
+        // zu sein, Hauptverantwortlich für …; or its own subject after the finite verb, Naturräumlich wird dieser Abschnitt …, Führungslos
+        // schloss sich die NAL …, Verwaltungsmäßig war Mohrungen …: then the word is no subject, so no name)
+        if (other?.compound && other.compound.parts.at(-1).ending === '' && !adjectiveOpensClause(context)) other = null;
         // G68: a bare start of a clause (no sign before the word) does not make a noun of an adjective (Eulenfreie Tage).
         if (other && found && ctx.bare && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep)) {
           found = await wordFormationCore.analyse(w,true,{...ctx,bare:false});
