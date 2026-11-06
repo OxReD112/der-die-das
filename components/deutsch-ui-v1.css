@@ -227,6 +227,9 @@
   vertical-align: middle;
 }
 .ui-chev-fold {
+  /* turned down, the arrow is √2 × as wide as its box: room on both sides, so a scrolling box (Spickzettel, the
+     fold at its very left edge) does not cut its left arm off (06.11: it looked like a tick ✓) */
+  margin-inline: calc(var(--chev) * 0.21 + 1.5px);
   transition: transform 0.25s ease;
 }
 [aria-expanded="true"] .ui-chev-fold,
