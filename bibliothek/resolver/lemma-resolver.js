@@ -4085,7 +4085,9 @@
         const out = [];
         for (const base of bases) for (const row of (MODAL_VERB_SET.has(base) || GROUP_HELPER_VERBS.includes(base) ? [] : separableBases.get(base) || [])) {
           const particleCards = forms.get(norm(row.prefix)) || [];
-          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) ||
+          // (links chat 06.11, advisor, WN batch 49: a particle of the G47 class keeps the external verb although it has an adverb card
+          // of its own — bestanden hier fort → fortbestehen; DIRECTION_PARTICLE stays for hin / her, raus, rein …, which G47 skips)
+          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) && !g47Particle(norm(row.prefix)) ||
             SHORT_PRONOMINAL_ADVERB.test(norm(row.prefix))) continue;
           out.push({entry:row.entry,prefix:norm(row.prefix),sharedForm:true});
         }
@@ -13323,6 +13325,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const SPLIT_EXTRA = [["heim","домой","home"],["entgegen","навстречу","towards"]];
     // (advisor 06.11: hinterher is mostly the adverb «потом» — bereute es hinterher; its particle verbs come through their own cards)
     const SPLIT_SKIP = new Set(["davon","entlang","vorwärts","hindurch","her","hin","hinterher"]);
+    // The G47 class (links chat 06.11, advisor): a direction particle of the lists above, not SPLIT_SKIP. One class for every rule that
+    // lets such a particle close a separable verb although it has an adverb card of its own (WN batch 49: fort, entgegen …).
+    function g47Particle(p) { return !SPLIT_SKIP.has(p) && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
     async function separatedDirectional(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
