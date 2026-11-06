@@ -459,7 +459,8 @@
           role:tense === 'Perfekt' ? 'perfectHave' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
       }
       // zu inside haben/sein + zu is the same Infinitivpartikel as in 4.8 (agreed 11 Oct 2026).
-      case 'sein-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[isMain ? 'sein + zu' : `sein + zu mit ${name}`], role:null, spans};
+      // (#15, advisor 06.11: the tense first, as with the passive — «Präteritum · sein + zu mit sehen»; Präsens without a mark)
+      case 'sein-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'sein + zu' : `sein + zu mit ${name}`}`], role:null, spans};
       // zu + infinitive (4.8): zu is the Infinitivpartikel; the verb keeps a plain Verb line.
       case 'zu-infinitive': return {marks:[], role:own === 'zu' ? 'infinitiveParticle' : null, spans};
       // um / ohne / statt … zu: the opener keeps its conjunction card (heading, Konjunktion, meaning).
@@ -482,7 +483,7 @@
         if (k.inner?.id === 'zu-chain') return {...constructionMarks({...candidate, construction:{...k.inner, spans}}, confirmed), spans};
         return {marks:[`mit ${k.verb}`], role:null, spans};
       }
-      case 'haben-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[isMain ? 'haben + zu' : `haben + zu mit ${name}`], role:isMain ? null : 'haveTo', spans};
+      case 'haben-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'haben + zu' : `haben + zu mit ${name}`}`], role:isMain ? null : 'haveTo', spans};
       // C14 step 1: the resolver gives Perfekt / Plusquamperfekt in the note (gesprochen worden war).
       // F12-G1b / G22 (user decision 18.10): tense first, then Passiv. gestohlen «Perfekt · Passiv»,
       // ist «Perfekt · Passiv mit stehlen» (auxiliary text), worden the same with the passive text.
