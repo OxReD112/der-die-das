@@ -1888,6 +1888,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     panel.classList.add("is-open");
     panel.setAttribute("aria-hidden", "false");
     open?.setAttribute("aria-expanded", "true");
+    window.DeutschPanel?.opened(panel, closeSettings); // Esc, Tab inside, nothing behind (components/deutsch-panel-v1.js)
   }
   function closeSettings() {
     nameInput?.blur();
@@ -1897,6 +1898,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     panel.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("home-settings-open");
     open?.setAttribute("aria-expanded", "false");
+    window.DeutschPanel?.closed(panel);
   }
 
   open?.addEventListener("click", () => {
@@ -1911,6 +1913,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     dictionaryPanel.classList.add("is-open");
     dictionaryPanel.setAttribute("aria-hidden", "false");
     dictionaryOpen?.setAttribute("aria-expanded", "true");
+    window.DeutschPanel?.opened(dictionaryPanel, closeDictionary);
     dictionarySearchInput?.focus({ preventScroll: true });
     // The browser may focus the clicked launcher after its click handlers run.
     // Reapply focus on the next frame so keyboard input goes to the search box.
@@ -1924,6 +1927,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     dictionaryPanel.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("home-dictionary-open");
     dictionaryOpen?.setAttribute("aria-expanded", "false");
+    window.DeutschPanel?.closed(dictionaryPanel);
   }
   dictionaryOpen?.addEventListener("click", () => {
     dictionaryPanel.classList.contains("is-open") ? closeDictionary() : openDictionary();
