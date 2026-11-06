@@ -127,7 +127,7 @@
   </title>
   <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
   <link href="components/deutsch-base-v1.css?v=6" rel="stylesheet"/>
-  <link href="components/deutsch-ui-v1.css?v=6" rel="stylesheet"/>
+  <link href="components/deutsch-ui-v1.css?v=7" rel="stylesheet"/>
   <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
   <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
@@ -136,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=76" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=76" rel="stylesheet"/>');
+     ? '<link href="home.css?v=77" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=77" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -420,49 +420,49 @@
    </section>
    <span class="settings-morph" id="dictionaryMorph" aria-hidden="true">Wörterbuch</span>
   </div>
-  <div aria-hidden="true" class="about-window" id="keepWindow">
-   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="keepTitle">
-    <div class="about-head"><h2 id="keepTitle"></h2><button class="about-close" id="keepClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+  <div aria-hidden="true" class="about-window ui-window" id="keepWindow">
+   <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="keepTitle">
+    <div class="about-head ui-window-head"><h2 class="ui-window-title" id="keepTitle"></h2><button class="about-close ui-close" id="keepClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
     <ol class="howto-steps" id="keepSteps"></ol>
     <p class="about-text keep-foot" id="keepFoot"></p>
    </div>
   </div>
-  <div aria-hidden="true" class="about-window" id="backupInfoWindow">
-   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="backupInfoTitle">
-    <div class="about-head"><h2 id="backupInfoTitle"></h2><button class="about-close" id="backupInfoClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+  <div aria-hidden="true" class="about-window ui-window" id="backupInfoWindow">
+   <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="backupInfoTitle">
+    <div class="about-head ui-window-head"><h2 class="ui-window-title" id="backupInfoTitle"></h2><button class="about-close ui-close" id="backupInfoClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
     <p class="about-text" id="backupInfoText"></p>
     <p class="about-text" id="backupInfoText2"></p>
     <button class="keep-backup-btn backup-info-btn" id="backupInfoSave" type="button"></button>
    </div>
   </div>
-  <div aria-hidden="true" class="about-window" id="aboutWindow">
-   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-    <div class="about-head"><h2 id="aboutTitle">Über Deutsch.</h2><button class="about-close" id="aboutClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+  <div aria-hidden="true" class="about-window ui-window" id="aboutWindow">
+   <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-head ui-window-head"><h2 class="ui-window-title" id="aboutTitle">Über Deutsch.</h2><button class="about-close ui-close" id="aboutClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
     <p class="about-text" id="aboutText"></p>
    </div>
   </div>
-  <div aria-hidden="true" class="about-window" id="versionsWindow">
-   <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="versionsTitle">
-    <div class="about-head"><h2 id="versionsTitle">Versionen</h2><button class="about-close" id="versionsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+  <div aria-hidden="true" class="about-window ui-window" id="versionsWindow">
+   <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="versionsTitle">
+    <div class="about-head ui-window-head"><h2 class="ui-window-title" id="versionsTitle">Versionen</h2><button class="about-close ui-close" id="versionsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
     <ul class="versions-list" id="versionsList"></ul>
     <button class="keep-backup-btn versions-copy" id="versionsCopy" type="button">Kopieren</button>
    </div>
   </div>
-  <div aria-hidden="true" class="settings-confirm" id="dailyLimitConfirm">
-   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
-    <div class="settings-confirm-title" id="dailyLimitConfirmTitle">Tageslimit ausschalten?</div>
-    <div class="settings-confirm-text" id="dailyLimitConfirmText">You can keep practising today without a daily limit. It will turn on again automatically&nbsp;tomorrow.</div>
-    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="dailyLimitNo" type="button">Nein, danke</button><button class="settings-confirm-button is-quiet" id="dailyLimitYes" type="button">Aus</button></div>
+  <div aria-hidden="true" class="settings-confirm ui-window" id="dailyLimitConfirm">
+   <div class="settings-confirm-card ui-window-card ui-window-small ui-window-ask" role="dialog" aria-modal="true" aria-labelledby="dailyLimitConfirmTitle">
+    <div class="settings-confirm-title ui-window-title" id="dailyLimitConfirmTitle">Tageslimit ausschalten?</div>
+    <div class="settings-confirm-text ui-window-ask-text" id="dailyLimitConfirmText">You can keep practising today without a daily limit. It will turn on again automatically&nbsp;tomorrow.</div>
+    <div class="settings-confirm-actions ui-window-ask-actions"><button class="settings-confirm-button is-main" id="dailyLimitNo" type="button">Nein, danke</button><button class="settings-confirm-button is-quiet" id="dailyLimitYes" type="button">Aus</button></div>
    </div>
   </div>
 
   <!-- Notizbuch "Notiz löschen?" (Home 5.94): shown by Home, not inside the notebook frame, so it covers the "Deutsch."
        header too and dims the strips like every other window — see features/notizbuch/home-notebook.js -->
-  <div aria-hidden="true" class="settings-confirm" id="notebookDeleteConfirm">
-   <div class="settings-confirm-card" role="dialog" aria-modal="true" aria-labelledby="notebookDeleteTitle">
-    <div class="settings-confirm-title" id="notebookDeleteTitle">Notiz löschen?</div>
-    <div class="settings-confirm-text">Diese Notiz wird von diesem Gerät&nbsp;entfernt.</div>
-    <div class="settings-confirm-actions"><button class="settings-confirm-button is-main" id="notebookDeleteNo" type="button">Abbrechen</button><button class="settings-confirm-button is-quiet" id="notebookDeleteYes" type="button">Löschen</button></div>
+  <div aria-hidden="true" class="settings-confirm ui-window" id="notebookDeleteConfirm">
+   <div class="settings-confirm-card ui-window-card ui-window-small ui-window-ask" role="dialog" aria-modal="true" aria-labelledby="notebookDeleteTitle">
+    <div class="settings-confirm-title ui-window-title" id="notebookDeleteTitle">Notiz löschen?</div>
+    <div class="settings-confirm-text ui-window-ask-text">Diese Notiz wird von diesem Gerät&nbsp;entfernt.</div>
+    <div class="settings-confirm-actions ui-window-ask-actions"><button class="settings-confirm-button is-main" id="notebookDeleteNo" type="button">Abbrechen</button><button class="settings-confirm-button is-quiet" id="notebookDeleteYes" type="button">Löschen</button></div>
    </div>
   </div>
 
@@ -485,10 +485,11 @@
   <script src="greetings.js?v=2">
   </script>
  <script src="bibliothek/reader/reading-data.js?v=1"></script>
- <script src="components/deutsch-panel-v1.js?v=1"></script>
- <script src="home.js?v=20261106-panel-1"></script>
- <script src="features/notizbuch/home-notebook.js?v=9"></script>
- <script src="progress-screen.js?v=27"></script>
+ <script src="components/deutsch-window-v1.js?v=3"></script>
+ <script src="components/deutsch-panel-v1.js?v=2"></script>
+ <script src="home.js?v=20261106-windows-1"></script>
+ <script src="features/notizbuch/home-notebook.js?v=10"></script>
+ <script src="progress-screen.js?v=28"></script>
  <script src="worterbuch.js?v=20261106-wn-expr46-2"></script>
 </body>
 </html>

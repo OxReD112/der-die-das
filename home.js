@@ -1068,8 +1068,8 @@ function updateBack() {
    of the screen, so while any window is open Home's background (and the status-bar colour) takes the dimmed colour
    — see home.css → .window-dim. Two sources: a window inside the exercise (setFrameWindow, from the Home button
    code) and Home's own windows (watched below). The dim stays while either is open. */
-const HOME_WINDOWS = ".pg, .about-window, .settings-confirm"; // Fortschritt, About + Keep your progress, "Are you sure?"
-const HOME_WINDOW_OPEN = ".pg.open, .about-window.open, .settings-confirm.is-open";
+const HOME_WINDOWS = ".ui-window"; // Fortschritt, About, Versionen, Keep your progress, Backup, "Are you sure?" (06.11: all the shared window)
+const HOME_WINDOW_OPEN = ".ui-window.open";
 const windowDim = { frame: false, home: false };
 function setFrameWindow(on) {
   setWindowDim("frame", on);
@@ -1892,8 +1892,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   function closeSettings() {
     nameInput?.blur();
-    confirm.classList.remove("is-open");
-    confirm.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(confirm);
     panel.classList.remove("is-open");
     panel.setAttribute("aria-hidden", "true");
     document.documentElement.classList.remove("home-settings-open");
@@ -1968,8 +1967,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     if (limitOn()) {
       const limitText = document.getElementById("dailyLimitConfirmText");
       if (limitText) limitText.textContent = LIMIT_TEXT[window.DeutschTranslation?.getLang?.()] || LIMIT_TEXT.en;
-      confirm.classList.add("is-open");
-      confirm.setAttribute("aria-hidden", "false");
+      window.DeutschWindow.open(confirm);
     } else {
       localStorage.setItem(LIMIT_KEY, "1");
       localStorage.removeItem(DAILY_LIMIT_OFF_DATE_KEY);
@@ -1988,32 +1986,15 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     });
   });
 
-  // Tap outside the window or Esc = "No" (like the table windows).
-  confirm?.addEventListener("click", event => {
-    if (event.target === confirm) no?.click();
-  });
-  document.addEventListener(
-    "keydown",
-    event => {
-      if (event.key === "Escape" && confirm?.classList.contains("is-open")) {
-        event.stopPropagation();
-        no?.click();
-      }
-    },
-    true
-  );
-
-  no?.addEventListener("click", () => {
-    confirm.classList.remove("is-open");
-    confirm.setAttribute("aria-hidden", "true");
-    render();
-  });
+  // Tap outside the window or Esc = "No": the shared window closes itself (components/deutsch-window-v1.js), then
+  // windowclose → nothing changed, the switch shows the limit as on again.
+  confirm?.addEventListener("windowclose", render);
+  no?.addEventListener("click", () => window.DeutschWindow.close(confirm));
 
   yes?.addEventListener("click", () => {
     localStorage.setItem(LIMIT_KEY, "0");
     localStorage.setItem(DAILY_LIMIT_OFF_DATE_KEY, DeutschDay.key());
-    confirm.classList.remove("is-open");
-    confirm.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(confirm);
     renderDailyStats();
     render();
   });
@@ -2048,28 +2029,13 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   function open() {
     text.textContent = ABOUT_TEXT[lang()] || ABOUT_TEXT.en;
-    win.classList.add("open");
-    win.setAttribute("aria-hidden", "false");
+    window.DeutschWindow.open(win); // the shared window (components/deutsch-window-v1.js, 06.11)
   }
   function close() {
-    win.classList.remove("open");
-    win.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(win);
   }
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
-  win.addEventListener("click", e => {
-    if (e.target === win) close();
-  });
-  document.addEventListener(
-    "keydown",
-    e => {
-      if (e.key === "Escape" && win.classList.contains("open")) {
-        e.stopPropagation();
-        close();
-      }
-    },
-    true
-  );
 })();
 /* ===== VERSIONS window (Settings → „Deutsch. version …“, Home 5.122) =====
    The pages no longer show their version number (it's transparent there, see each page's .version-mark).
@@ -2186,29 +2152,14 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   function open() {
     fill();
     copyBtn.textContent = "Kopieren";
-    win.classList.add("open");
-    win.setAttribute("aria-hidden", "false");
+    window.DeutschWindow.open(win); // the shared window (components/deutsch-window-v1.js, 06.11)
   }
   function close() {
-    win.classList.remove("open");
-    win.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(win);
   }
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
   if (copyBtn) copyBtn.addEventListener("click", copy);
-  win.addEventListener("click", e => {
-    if (e.target === win) close();
-  });
-  document.addEventListener(
-    "keydown",
-    e => {
-      if (e.key === "Escape" && win.classList.contains("open")) {
-        e.stopPropagation();
-        close();
-      }
-    },
-    true
-  );
 })();
 /* ===== KEEP YOUR PROGRESS (2026-09-26, Home 5.72) — see Documentation/DECISIONS.md =====
    - Settings: "· Last backup …" next to Backup on every device. Red (palette red) only in
@@ -2421,36 +2372,20 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   function openWin() {
     renderWindow();
-    win.classList.add("open");
-    win.setAttribute("aria-hidden", "false");
+    window.DeutschWindow.open(win); // the shared window (components/deutsch-window-v1.js, 06.11)
   }
   function closeWin() {
-    win.classList.remove("open");
-    win.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(win);
   }
   if (win) {
     $("keepHow")?.addEventListener("click", openWin);
     $("keepClose")?.addEventListener("click", closeWin);
     win.addEventListener("click", e => {
-      if (e.target === win) {
-        closeWin();
-        return;
-      }
       if (e.target.closest && e.target.closest("#keepBackup")) {
         saveDeutschBackup();
         renderWindow();
       }
     });
-    document.addEventListener(
-      "keydown",
-      e => {
-        if (e.key === "Escape" && win.classList.contains("open")) {
-          e.stopPropagation();
-          closeWin();
-        }
-      },
-      true
-    );
   }
 
   /* (i) next to Backup in Settings → "Your progress" window (Home 5.97). Every device, browser and
@@ -2468,12 +2403,10 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   }
   function openInfo() {
     renderInfo();
-    infoWin.classList.add("open");
-    infoWin.setAttribute("aria-hidden", "false");
+    window.DeutschWindow.open(infoWin); // the shared window (components/deutsch-window-v1.js, 06.11)
   }
   function closeInfo() {
-    infoWin.classList.remove("open");
-    infoWin.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(infoWin);
   }
   if (infoWin) {
     $("backupInfoOpen")?.addEventListener("click", openInfo);
@@ -2483,19 +2416,6 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       renderInfo();
       renderBackupNote();
     });
-    infoWin.addEventListener("click", e => {
-      if (e.target === infoWin) closeInfo();
-    });
-    document.addEventListener(
-      "keydown",
-      e => {
-        if (e.key === "Escape" && infoWin.classList.contains("open")) {
-          e.stopPropagation();
-          closeInfo();
-        }
-      },
-      true
-    );
   }
 
   function renderAll() {

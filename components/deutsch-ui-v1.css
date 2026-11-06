@@ -12,6 +12,7 @@
    .ui-spick    the Spickzettel pill (start screen and during a round; greyed out while it can't be used)
    .ui-close    the round × of the Spickzettel windows (30 px, tap area 44 × 44)
    .ui-clear    the small round × inside a search field: empties it (20 px circle, tap area 36; 06.11)
+   .ui-window-small, .ui-window-ask  a small window (360) / a question with two answers (06.11)
    .ui-panel-close  the big × of a full-screen panel: Wörterbuch, Einstellungen, Notizbuch (a bare 14 px cross
                 in one 1.2 px line, tap area 44; decision 04.11: panels keep a big ×, windows the round one; 06.11)
    .ui-progress the 3 px progress bar under the top bar; its fill is the <i> inside
@@ -272,6 +273,31 @@
     transform 0.2s ease,
     filter 0.2s ease;
 }
+/* 06.11: a small window for a short text or a question („Über Deutsch.“, „Tageslimit ausschalten?“) — narrow on the
+   iPad too, like the iPhone's own alerts (was 360 in Home's own windows) */
+.ui-window-card.ui-window-small {
+  width: min(360px, 100%);
+}
+/* A question with two answers (no ×): title and text centred, the two buttons in a row at the bottom */
+.ui-window-card.ui-window-ask {
+  padding: 26px var(--card-pad) var(--card-pad);
+  text-align: center;
+}
+.ui-window-ask .ui-window-title {
+  line-height: 1.2;
+}
+.ui-window-ask-text {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ui-window-ask-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
 .ui-window-card:focus {
   outline: none; /* it takes the focus when the window opens (deutsch-window-v1.js), no ring around the card */
 }
@@ -301,6 +327,7 @@
   min-height: 0;
 }
 .ui-window .ui-close {
+  z-index: 2; /* always above the window's content (06.11: in Fortschritt the content covered it) */
   position: absolute;
   top: calc(var(--card-pad) - 7px);
   right: calc(var(--card-pad) - 4px);

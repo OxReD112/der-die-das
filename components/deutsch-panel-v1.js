@@ -13,7 +13,7 @@
 (function () {
   "use strict";
   var FOCUSABLE = "button:not([disabled]),[href],input:not([disabled]),select,textarea,[tabindex]:not([tabindex='-1'])";
-  var OVER = ".ui-window.open,.about-window.open,.settings-confirm.is-open";
+  var OVER = ".ui-window.open"; // every window is the shared one (06.11)
   var now = null; // { panel, close, before }
 
   function opened(panel, close) {

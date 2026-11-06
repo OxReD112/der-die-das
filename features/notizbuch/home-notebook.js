@@ -48,25 +48,20 @@
     if (delTitle) delTitle.textContent = title || defaultTitle;
     if (delText) { if (text) delText.textContent = text; else delText.innerHTML = defaultText; }
     if (delYes) delYes.textContent = confirmLabel || defaultYes; // "Zusammenführen" for merging topics (Notizbuch v20)
-    delWin.classList.add("is-open");
-    delWin.setAttribute("aria-hidden", "false");
+    window.DeutschWindow.open(delWin); // the shared window (components/deutsch-window-v1.js, 06.11)
     delNo?.focus({ preventScroll:true }); // keys now go to Home's window, not the notebook behind it
   }
   function answerDelete(confirmed) {
     if (!delOpen) return;
     delOpen = false;
-    delWin.classList.remove("is-open");
-    delWin.setAttribute("aria-hidden", "true");
+    window.DeutschWindow.close(delWin);
     delNo?.blur(); delYes?.blur();
     frame.contentWindow?.postMessage({ type:"deutsch-notebook-delete-answer", confirmed, keyboard:delKeyboard }, location.origin);
     if (!confirmed || delKeyboard) frame.focus();
   }
   delNo?.addEventListener("click", () => answerDelete(false));
   delYes?.addEventListener("click", () => answerDelete(true));
-  delWin?.addEventListener("click", event => { if (event.target === delWin) answerDelete(false); }); // tap outside = Abbrechen
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && delOpen) { event.stopPropagation(); answerDelete(false); } // Esc = Abbrechen, notebook stays open
-  }, true);
+  delWin?.addEventListener("windowclose", () => answerDelete(false)); // tap outside / Esc (the shared window closes itself) = Abbrechen
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
     if (event.data?.type === "deutsch-notebook-close") closeNotebook();

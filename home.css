@@ -1217,6 +1217,7 @@ header h1 {
   line-height: 1.45;
 }
 .dictionary-add-wortschatz {
+  --card-bg: var(--window-card); /* the quiet button's fill = the exercises' card colour (Home's --card-bg is see-through) */
   /* the look is the shared quiet wide button .ui-quiet (components/deutsch-ui-v1.css; worterbuch.js gives the class,
      06.11); here only where it stands. Tablet 64 / 20 — in the tablet block below */
   display: flex;
@@ -1708,97 +1709,15 @@ header h1 {
   font-variant-numeric: tabular-nums;
 }
 
-/* ===== Windows: About, Keep your progress, "Are you sure?" =====
-   Built like the exercises' table windows: page behind blurred 8px + darkened (34 % dark / 20 % light);
-   window = card colour, 10 % outline, 24px corners, short fade + zoom-in; × top right, tap outside or Esc closes. */
-.about-window {
-  position: fixed;
-  inset: 0;
-  top: calc(-1 * env(safe-area-inset-top));
-  z-index: 960;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  padding-top: calc(18px + env(safe-area-inset-top));
-  background: var(--confirm-scrim);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    visibility 0s linear 0.18s;
+/* ===== Windows: About, Versionen, Keep your progress, Backup, "Are you sure?" =====
+   06.11.2026: the shared window of the exercises (components/deutsch-ui-v1.css .ui-window, .ui-window-small,
+   .ui-window-ask; behaviour components/deutsch-window-v1.js). Here only Home's layer and the content. */
+body > .ui-window {
+  z-index: 1004; /* above the panels, also over the Bibliothek (its tool layers are 1003) */
+  --card-bg: var(--window-card); /* on Home --card-bg is the see-through tile colour; a window is solid (= the exercises' card) */
 }
-.about-window.open {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 0.18s ease,
-    visibility 0s;
-}
-.about-card {
-  width: min(100%, 360px);
-  padding: 6px 22px 24px;
-  background: var(--window-card);
-  border: 1px solid var(--window-line);
-  border-radius: 26px; /* windows = the exercises' windows (04.11, was 24) */
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.about-window.open .about-card {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
-.about-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 56px;
-}
-.about-head h2 {
-  margin: 0;
-  color: var(--text);
-  font:
-    650 20px/1.2 var(--font);
-}
-/* × = the exercises' window cross (04.11): a 30px circle, 10px cross, 44px tap area */
-.about-close {
-  appearance: none;
-  -webkit-appearance: none;
-  position: relative;
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  margin-right: -4px;
-  border: 0;
-  border-radius: 999px;
-  padding: 0;
-  background: var(--hairline);
-  color: var(--muted);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.about-close::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-.about-close svg {
-  width: 10px;
-  height: 10px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  fill: none;
+.ui-window-card > .keep-backup-btn {
+  align-self: flex-start; /* the card is a column: „Kopieren“, „Backup erstellen“ stay as wide as their word */
 }
 .about-text {
   margin: 4px 0 0;
@@ -1807,69 +1726,6 @@ header h1 {
     400 16px/1.5 var(--font);
 }
 
-.settings-confirm {
-  position: fixed;
-  inset: 0;
-  top: calc(-1 * env(safe-area-inset-top));
-  z-index: 950;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  padding-top: calc(24px + env(safe-area-inset-top));
-  background: var(--confirm-scrim);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    visibility 0s linear 0.18s;
-}
-.settings-confirm.is-open {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 0.18s ease,
-    visibility 0s;
-}
-.settings-confirm-card {
-  width: min(100%, 360px);
-  padding: 28px 24px 22px;
-  border: 1px solid var(--window-line);
-  border-radius: 26px;
-  background: var(--window-card);
-  text-align: center;
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.settings-confirm.is-open .settings-confirm-card {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
-.settings-confirm-title {
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 650;
-}
-.settings-confirm-text {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-.settings-confirm-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 24px;
-}
 /* No = contrast button (we'd rather the user says no), Yes = quiet button. Shape of "Zur Startseite". */
 .settings-confirm-button {
   appearance: none;
@@ -1877,7 +1733,7 @@ header h1 {
   min-height: 56px;
   border-radius: 14px; /* two buttons in a row = 14, like der / die / das (04.11, was 17) */
   font:
-    700 16px/1 var(--font);
+    650 16px/1 var(--font); /* 06.11: like every button (was 700) */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -2860,13 +2716,7 @@ html.home-wide-layout body {
   .settings-action,
   .settings-info,
   .settings-close,
-  .settings-confirm,
-  .settings-confirm.is-open,
-  .settings-confirm-card,
   .settings-confirm-button,
-  .about-window,
-  .about-window.open,
-  .about-card,
   .settings-version {
     transition: none;
   }
@@ -2934,7 +2784,6 @@ html.home-wide-layout body {
 .home-back svg *,
 .notebook-icon-button svg *,
 .settings-info svg *,
-.about-close svg *,
 .keep-label svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }
 
 /* ===== 05.11 (Alena): the bottom dock — places in a capsule, tools around it =====
