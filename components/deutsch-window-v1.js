@@ -9,6 +9,8 @@
    While a window is open nothing behind it works (05.11.2026 fix: before, Enter on a focused Weiter behind the
    window still pressed it): focus moves into the card, Tab goes round inside the window, every other key outside it
    does nothing (no exercise listener, no browser default); on close the focus goes back where it was.
+   Keys inside the window reach its own fields and buttons (06.11: the words window of Wortschatz / Bibliothek has
+   forms — Enter saves a new name) but never the page behind it: the window stops them on their way up.
    Home (home.js) finds an open window by .ui-window.open — no list of names per exercise. */
 (function () {
   "use strict";
@@ -25,6 +27,12 @@
     if (!isOpen(win)) before = document.activeElement;
     win.classList.add("open");
     win.setAttribute("aria-hidden", "false");
+    if (!win._keysStay) {
+      win._keysStay = true;
+      win.addEventListener("keydown", function (e) {
+        e.stopPropagation(); // a key inside the window never reaches the page's own listeners
+      });
+    }
     var c = card(win);
     if (!c.hasAttribute("tabindex")) c.setAttribute("tabindex", "-1");
     if (!win.contains(document.activeElement)) c.focus({ preventScroll: true });
@@ -66,9 +74,12 @@
       if (e.key === "Tab") return trapTab(win, e);
       if (e.key === "Escape") {
         e.preventDefault();
+        e.stopImmediatePropagation();
         close(win);
-      } else if (!win.contains(e.target)) e.preventDefault(); // a key on something behind the window does nothing
-      e.stopImmediatePropagation();
+      } else if (!win.contains(e.target)) {
+        e.preventDefault(); // a key on something behind the window does nothing
+        e.stopImmediatePropagation();
+      }
     },
     true
   );

@@ -135,7 +135,6 @@ button {
 .check:active,
 .continue:active,
 .finish-actions button:active,
-.coll-close:active,
 .coll-back:active,
 .coll-link:active,
 .coll-main:active,
@@ -1104,10 +1103,6 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   #almostHint {
     transition: none;
   }
-  .coll-modal,
-  .coll-card {
-    transition: none !important;
-  }
 }
 
 /* ===== KEYBOARD ABOVE THE HOME BUTTON (phones and tablets, 2026-09-27) =====
@@ -1402,54 +1397,9 @@ body:has(#done.show) .ws-settings-btn {
 /* ===== WORDS WINDOW (02.11.2026): the window of the exercises' Spickzettel =====
    Wortschatz only — this file is not loaded in Bibliothek, which keeps collection-window.css as it is.
    #collModal raises the weight above collection-window.css (loaded after this file).
-   Corners 26, padding 18 (320 px: 14), the round close button, sizes on the type scale (12 / 14 / 16 / 20),
+   06.11.2026: frame, title and × come from the shared window (components/deutsch-ui-v1.css), also in Bibliothek.
+   Sizes on the type scale (12 / 14 / 16 / 20),
    wide buttons 18, buttons in a row 14, small things round. */
-#collModal .coll-card {
-  --card-pad: 18px;
-  width: min(560px, 100%);
-  border-radius: 26px;
-  padding: calc(var(--card-pad) - 4px) var(--card-pad) 14px;
-}
-#collModal .coll-head {
-  min-height: 32px;
-  margin-bottom: 10px;
-}
-#collModal .coll-title {
-  padding: 0;
-}
-/* × → a 30 px circle, the cross drawn 10 px in the muted grey (the glyph is hidden); tap area 44 × 44 */
-#collModal .coll-close {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  margin: 0 -4px 0 0;
-  padding: 0;
-  border-radius: 999px;
-  background: var(--hairline);
-  color: transparent;
-  font-size: 0;
-  align-self: flex-start;
-}
-#collModal .coll-close::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 10px;
-  height: 10px;
-  background: var(--muted);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='black' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='black' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-#collModal .coll-close::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-#collModal .coll-back {
-  padding: 0 10px 2px 0;
-  font-size: 30px;
-}
 /* text sizes */
 #collModal .coll-text,
 #collModal .coll-preview,
@@ -1501,11 +1451,6 @@ body:has(#done.show) .ws-settings-btn {
 #collModal .coll-chip {
   border-radius: 999px;
   font-size: 16px;
-}
-@media (max-width: 340px) {
-  #collModal .coll-card {
-    --card-pad: 14px;
-  }
 }
 /* Search field (02.11.2026): the browser's own clear button (blue × on iPhone) → our small round one:
    a 20 px circle in the 10% outline colour with a thin cross in the muted grey, like the window's close button. */

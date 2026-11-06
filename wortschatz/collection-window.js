@@ -79,67 +79,43 @@
     });
   }
 
-  /* ---------- open / close (same timing as the table windows) ---------- */
-  let lastFocus = null,
-    dirty = false,
-    closeTimer = null;
+  /* ---------- open / close: the shared window (components/deutsch-window-v1.js, 06.11.2026) ----------
+     DeutschWindow does the rest like in the exercises' Spickzettel: ×, a tap outside and Esc close it; Tab stays
+     inside; keys never reach the page behind it (before, Enter behind the ✎ window went on to the next word);
+     the focus goes back where it was. Own here: the views inside, emptied after closing, the page reloads if
+     the words changed. */
+  const W = window.DeutschWindow;
+  let dirty = false,
+    closeTimer = null,
+    opening = 0;
   function open(firstView) {
     clearTimeout(closeTimer);
-    lastFocus = document.activeElement;
+    cancelAnimationFrame(opening);
     dirty = false;
     (typeof firstView === "function" ? firstView : viewMain)();
-    modal.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      modal.classList.add("open");
-      card.querySelector("button, input, textarea")?.focus({ preventScroll: true });
-    }));
+    // two frames: the new view is laid out before the window fades in
+    opening = requestAnimationFrame(() => (opening = requestAnimationFrame(() => W.open(modal))));
   }
   function close() {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
+    cancelAnimationFrame(opening);
+    if (W.isOpen(modal)) W.close(modal); // → windowclose below
+  }
+  modal.addEventListener("windowclose", () => {
     closeTimer = setTimeout(() => {
       card.textContent = "";
       if (dirty && !embedded) location.reload();
     }, 220);
-    if (lastFocus && lastFocus.focus)
-      try {
-        lastFocus.focus({ preventScroll: true });
-      } catch (e) {}
-  }
-  modal.addEventListener("click", e => {
-    if (e.target === modal) close();
-  });
-  document.addEventListener(
-    "keydown",
-    e => {
-      if (e.key === "Tab" && modal.classList.contains("open")) {
-        const controls = [...card.querySelectorAll("button, input, textarea, select, a[href]")].filter(el => !el.disabled && el.getClientRects().length);
-        const first = controls[0], last = controls[controls.length - 1];
-        if (first && ((!card.contains(document.activeElement)) || (e.shiftKey ? document.activeElement === first : document.activeElement === last))) {
-          e.preventDefault();
-          (e.shiftKey ? last : first).focus();
-        }
-      }
-      if (e.key === "Escape" && modal.classList.contains("open")) {
-        e.preventDefault();
-        e.stopPropagation();
-        close();
-      }
-    },
-    true
-  );
-  // Keys typed in the window (rename field) must not reach the exercise's Enter handlers
-  card.addEventListener("keydown", e => {
-    if (e.key === "Enter") e.stopPropagation();
   });
 
   // ‹ (one step back) left of the title, × (close the window) on the right — like the Fortschritt window.
   // No „Cancel“ links any more (v2.100): ‹ does what they did.
   function head(title, back) {
-    const h = el("div", "coll-head");
+    const h = el("div", "coll-head ui-window-head");
     if (back) h.appendChild(button("coll-back", "‹", back)).setAttribute("aria-label", L("Back", "Назад"));
-    h.appendChild(el("h2", "coll-title", title, { id: "collTitle" }));
-    h.appendChild(button("coll-close", "×", close)).setAttribute("aria-label", L("Close", "Закрыть"));
+    h.appendChild(el("h2", "coll-title ui-window-title", title, { id: "collTitle" }));
+    // the shared round × (DeutschWindow closes the window on it)
+    const x = h.appendChild(el("button", "ui-close", null, { type: "button", "aria-label": L("Close", "Закрыть") }));
+    x.innerHTML = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>';
     return h;
   }
 

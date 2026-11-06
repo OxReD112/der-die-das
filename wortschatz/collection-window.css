@@ -1,103 +1,33 @@
-/* ===== COLLECTION WINDOW (v2.87–v2.107) — Documentation/WORTSCHATZ_COLLECTIONS.md =====
-   The table-window rule: blur 8px + 34% / 20% darkening, card colour, 10% outline, 24px corners, fade + zoom-in,
-   × top right, tap outside / Esc closes. The layer fills the screen exactly (inset:0, v2.107).
+/* ===== COLLECTION WINDOW — Documentation/WORTSCHATZ_COLLECTIONS.md =====
+   06.11.2026: the frame is the shared window of the exercises (components/deutsch-ui-v1.css .ui-window,
+   .ui-window-card, .ui-window-head, .ui-window-title, .ui-close; behaviour components/deutsch-window-v1.js).
+   Here only what this window has of its own: ‹ one step back left of the title, a title that wraps, the views.
    Confirm buttons = the „Are you sure?“ rule: the safe choice is the main button, the risky one the quiet button. */
-.coll-modal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  padding-top: max(64px, env(safe-area-inset-top) + 20px);
-  padding-bottom: max(40px, env(safe-area-inset-bottom) + 20px);
-  z-index: 30;
-  background: rgba(0, 0, 0, 0);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s linear 0.18s;
-  font-family: var(--font);
-}
-.coll-modal.open {
-  opacity: 1;
-  visibility: visible;
-  background: var(--overlay-scrim);
-  transition:
-    opacity 0.18s ease,
-    background-color 0.18s ease,
-    visibility 0s;
-}
 .coll-card {
-  width: min(520px, 100%);
-  max-height: min(640px, 100%);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--card-bg);
-  border: 1px solid var(--hairline);
-  border-radius: 24px;
-  padding: 6px 22px 14px;
-  text-align: left;
   color: var(--text);
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(8px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    filter 0.2s ease;
-}
-.coll-modal.open .coll-card {
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
 }
 .coll-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex: 0 0 auto;
-  min-height: 52px;
+  justify-content: flex-start; /* ‹ and the title from the left (the shared head spreads its items) */
+  gap: 0;
+  min-height: 24px;
 }
 .coll-title {
   flex: 1 1 auto;
   min-width: 0;
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
   line-height: 1.25;
   /* 02.11.2026: a long title wraps to a second line instead of „Удалить коллекци…“ (320 px) */
   overflow-wrap: anywhere;
   text-wrap: balance;
-  padding: 6px 0; /* inside the 52 px row for one line; air above the text for two */
-}
-.coll-close {
-  flex: 0 0 auto;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  font: 400 28px/1 var(--font);
-  padding: 8px;
-  margin-right: -8px;
-  cursor: pointer;
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
 }
 .coll-back {
   flex: 0 0 auto;
+  align-self: stretch;
   border: 0;
   background: transparent;
   color: var(--text);
-  font: 300 34px/1 var(--font);
-  padding: 4px 10px 8px 0;
-  margin-left: -4px;
+  font: 300 30px/20px var(--font);
+  padding: 0 10px 2px 0;
+  margin-left: -2px;
   cursor: pointer;
   transition:
     transform 0.12s ease,
