@@ -3972,7 +3972,10 @@
         // particle does not break it again: ging fort zum Tor stays fortgehen, ging zurück zum Haus — zurückgehen; + nieder and hindurch,
         // which the old pattern had and the G47 class has not: blickte nieder auf ihren Fuß)
         if ((forms.get(norm(tokens[j][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
-            !(prepositions.has(norm(tokens[j+1]?.[0] ?? "")) && (g47Particle(norm(tokens[j][0])) || ["nieder","hindurch"].includes(norm(tokens[j][0]))))) return false;
+            !(prepositions.has(norm(tokens[j+1]?.[0] ?? "")) && (g47Particle(norm(tokens[j][0])) || ["nieder","hindurch"].includes(norm(tokens[j][0]))) &&
+              // (advisor 06.11: not a particle that opens the piece after a comma — …machten, zurück durch die Mauer: the verb's part
+              // ends at the comma; zurück is the adverb «назад»)
+              !(j > 0 && /[,;:–—]/u.test(gap(j-1,j))))) return false;
         let end = j + 1;
         while (end < tokens.length && !hard(end-1,end) && !soft(end-1,end)) end++;
         const entriesAt = k => forms.get(norm(tokens[k][0])) || [];
