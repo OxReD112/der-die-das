@@ -1,11 +1,16 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
-  // 26.10.2026: data cache of the reader — versioned dictionary files are kept on disk and not asked from the server
-  // again (dictionary-cache-sw.js; Documentation/BIBLIOTHEK_DICTIONARY_CACHE_PLAN_RU.md). A failure changes nothing.
-  // Switch-off (with the KILL variant of the worker): replace the next line with
-  // try { navigator.serviceWorker?.getRegistrations().then(rs => rs.forEach(r => r.scope.endsWith("/bibliothek/") && r.unregister())); } catch (_) {}
-  try { if ("serviceWorker" in navigator && window.isSecureContext) navigator.serviceWorker.register("dictionary-cache-sw.js", {scope:"./"}).catch(() => {}); } catch (_) {}
+  // 07.11.2026: the data cache is kept by the page itself (resolver/data-cache.js). The service worker of 26.10
+  // (dictionary-cache-sw.js) cost ~1 s on the iPhone every time Safari had stopped it (autoread 06.11), so it is removed:
+  // its registration goes; the files it stored stay in the same cache and are read by the page. Only that worker — the
+  // push worker of the home page (sw.js, another scope) is not touched.
+  try {
+    navigator.serviceWorker?.getRegistrations().then(rs => rs.forEach(r => {
+      const script = (r.active || r.waiting || r.installing)?.scriptURL || "";
+      if (script.split("?")[0] === new URL("dictionary-cache-sw.js", location.href).href) r.unregister();
+    })).catch(() => {});
+  } catch (_) {}
   // G45 (2), reference 2.A (user 22.10): a dictionary label is a small grey italic word before its meaning;
   // in the card a tap shows the full word («разговорное»).
   function appendLabelSegments(container, segments, prefix = "", interactive = true) {
@@ -682,7 +687,9 @@
   async function loadDictionary() {
     if (dictionary) return dictionary;
     if (dictionaryPromise) return dictionaryPromise;
-    const get = path => fetch(`../worterbuch/${path}?v=${path === "german-function-words.json" ? "20261104-wn-nouns43-1" : path === "german-verbs.json" ? "20261106-wn-zurueck50-1" : path === "german-nouns.json" ? "20261104-wn-nouns43-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261101-wn-passivenone31-1" : path === "german-adverbs.json" ? "20261106-wn-adverbs49-1" : path === "german-expressions.json" ? "20261106-wn-expr46-2" : path === "german-pronouns.json" ? "20261028-wn-pron037-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261031-wn-doch24-4" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    // 07.11.2026: through the reader's data cache (resolver/data-cache.js), without it — plain fetch
+    const dataFetch = (input, options) => (window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
+    const get = path => dataFetch(`../worterbuch/${path}?v=${path === "german-function-words.json" ? "20261104-wn-nouns43-1" : path === "german-verbs.json" ? "20261106-wn-zurueck50-1" : path === "german-nouns.json" ? "20261104-wn-nouns43-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261101-wn-passivenone31-1" : path === "german-adverbs.json" ? "20261106-wn-adverbs49-1" : path === "german-expressions.json" ? "20261106-wn-expr46-2" : path === "german-pronouns.json" ? "20261028-wn-pron037-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261031-wn-doch24-4" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};

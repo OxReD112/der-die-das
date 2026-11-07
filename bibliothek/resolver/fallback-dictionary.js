@@ -1,6 +1,8 @@
 /* Lossless dictionary export reader. Stored dictionary content is never edited. */
 (() => {
   "use strict";
+  // 07.11.2026: versioned data files go through the reader's data cache (resolver/data-cache.js); without it — plain fetch
+  const dataFetch = (input, options) => (typeof window !== "undefined" && window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
   let diagnosticPending = null;
   function observePending(pending) {
     if (typeof window.BibliothekAnalysisDiagnostics !== 'function') return;
@@ -64,7 +66,7 @@
   const separableUrl = new URL("data/separable-index.json?v=20261028-links-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
-    if (!separablePromise) separablePromise = fetch(separableUrl).then(response => {
+    if (!separablePromise) separablePromise = dataFetch(separableUrl).then(response => {
       if (!response.ok) throw new Error("Separable index unavailable");
       return response.json();
     }).then(data => {
@@ -77,7 +79,7 @@
   const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261015-a2-1", document.currentScript.src);
   let verbPrepositionPromise = null;
   function verbPrepositions() {
-    if (!verbPrepositionPromise) verbPrepositionPromise = fetch(verbPrepositionUrl).then(response => {
+    if (!verbPrepositionPromise) verbPrepositionPromise = dataFetch(verbPrepositionUrl).then(response => {
       if (!response.ok) throw new Error("Verb preposition list unavailable");
       return response.json();
     }).then(data => {
@@ -90,7 +92,7 @@
   const superlativeUrl=new URL('data/superlative-index.json?v=20261008-l07-1',document.currentScript.src);
   let superlativePromise=null;
   async function superlativeEntries(word) {
-    if(!superlativePromise)superlativePromise=fetch(superlativeUrl).then(r=>{
+    if(!superlativePromise)superlativePromise=dataFetch(superlativeUrl).then(r=>{
       if(!r.ok)throw Error('Superlative index unavailable');return r.json();
     }).then(d=>{
       if(d.format_version!==1||!d.records||typeof d.records!=='object')throw Error('Invalid superlative index');
@@ -110,7 +112,7 @@
   const verbFormPartition = word => fnv(word) & 1023;
   async function mayBeVerb(word) {
     try {
-      if(!verbMembershipPromise)verbMembershipPromise=fetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
+      if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
       const m=await verbMembershipPromise,key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
       const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;
       for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
@@ -123,7 +125,7 @@
   const wordPartsUrl=new URL('data/word-formation-parts.json?v=20261023-g48-1',document.currentScript.src);
   let wordPartsPromise=null;
   function wordParts() {
-    if(!wordPartsPromise)wordPartsPromise=fetch(wordPartsUrl).then(r=>{if(!r.ok)throw Error('Word parts unavailable');return r.json();}).then(d=>{const m=d.membership;
+    if(!wordPartsPromise)wordPartsPromise=dataFetch(wordPartsUrl).then(r=>{if(!r.ok)throw Error('Word parts unavailable');return r.json();}).then(d=>{const m=d.membership;
       if(d.format_version!==1||m?.format!=='bloom-fnv1a-v1'||m.bits!==2097152||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid word parts');
       const bitmap=Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16));
       return Object.freeze({has(word){const key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
@@ -142,7 +144,7 @@
   const auxiliaryFormsUrl=new URL('data/auxiliary-verb-forms.json?v=20261008-f4-1',document.currentScript.src);
   let auxiliaryFormsPromise=null;
   async function auxiliaryInflections(word) {
-    if(!auxiliaryFormsPromise)auxiliaryFormsPromise=fetch(auxiliaryFormsUrl).then(r=>{
+    if(!auxiliaryFormsPromise)auxiliaryFormsPromise=dataFetch(auxiliaryFormsUrl).then(r=>{
       if(!r.ok)throw Error('Auxiliary morphology unavailable');return r.json();
     }).then(d=>{if(d.format_version!==1||!d.records)throw Error('Invalid auxiliary morphology');return d.records;}).catch(e=>{auxiliaryFormsPromise=null;throw e;});
     const rows=(await auxiliaryFormsPromise)[String(word).normalize('NFC').toLowerCase()]||[];
@@ -150,7 +152,7 @@
   }
   function verbFormPart(index) {
     if (verbFormCache.has(index)) return keepPart(verbFormCache,index,verbFormCache.get(index));
-    const pending = fetch(new URL(`${String(index).padStart(4,"0")}.json?v=${verbFormsVersion}`,verbFormsBase)).then(response => {
+    const pending = dataFetch(new URL(`${String(index).padStart(4,"0")}.json?v=${verbFormsVersion}`,verbFormsBase)).then(response => {
       if (!response.ok) throw new Error("Fallback verb morphology unavailable");
       return response.json();
     }).then(data => {
@@ -193,7 +195,7 @@
   const hiddenSensesUrl = new URL("data/fallback-hidden-senses.json?v=20261022-nm-1", document.currentScript.src);
   let hiddenSensesPromise = null;
   function hiddenSenses() {
-    if (!hiddenSensesPromise) hiddenSensesPromise = fetch(hiddenSensesUrl).then(response => {
+    if (!hiddenSensesPromise) hiddenSensesPromise = dataFetch(hiddenSensesUrl).then(response => {
       if (!response.ok) throw new Error("Hidden sense list unavailable");
       return response.json();
     }).then(data => {
@@ -238,7 +240,7 @@
   function dictionaryPart(index) {
     if (cache.has(index)) return keepDictionaryPart(index,cache.get(index));
     let bytes = 0;
-    const promise = Promise.all([fetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=8192-3`, base))
+    const promise = Promise.all([dataFetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=8192-3`, base))
       .then(response => {
         if (!response.ok) throw new Error("Fallback dictionary unavailable");
         // The text length bounds the cache; a response without text() (test stand-ins) counts as an average part.

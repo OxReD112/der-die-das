@@ -1,6 +1,8 @@
 /* Translation enrichment only: never creates or ranks lemma candidates. */
 (() => {
   "use strict";
+  // 07.11.2026: versioned data files go through the reader's data cache (resolver/data-cache.js); without it — plain fetch
+  const dataFetch = (input, options) => (typeof window !== "undefined" && window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
   let diagnosticPending = null;
   function observePending(pending) {
     if (typeof window.BibliothekAnalysisDiagnostics !== 'function') return;
@@ -42,7 +44,7 @@
     const index = partition(word);
     observe('partition-cache', {cache:'russian',key:index,word,state:cacheState(cache,index),size:cache.size});
     if (!cache.has(index)) {
-      const request = fetch(new URL(`parts/${String(index).padStart(4,"0")}.json?v=${version}`,base))
+      const request = dataFetch(new URL(`parts/${String(index).padStart(4,"0")}.json?v=${version}`,base))
         .then(response => {
           if (!response.ok) throw new Error("Russian translations unavailable");
           return response.json();
@@ -62,7 +64,7 @@
   const hiddenUrl = new URL("data/fallback-hidden-senses.json?v=20261022-nm-1", document.currentScript.src);
   let hiddenPromise = null;
   function hiddenParts() {
-    if (!hiddenPromise) hiddenPromise = fetch(hiddenUrl).then(r => { if (!r.ok) throw new Error("Hidden sense list unavailable"); return r.json(); })
+    if (!hiddenPromise) hiddenPromise = dataFetch(hiddenUrl).then(r => { if (!r.ok) throw new Error("Hidden sense list unavailable"); return r.json(); })
       .then(d => new Map((Array.isArray(d?.ru_entries) ? d.ru_entries : [])
         .filter(r => Array.isArray(r) && r.slice(0,3).every(v => typeof v === "string"))
         .map(([w,pos,part]) => [`${w}\u0000${pos}\u0000${part.trim()}`,true])))
@@ -76,7 +78,7 @@
   // connectors и / или / тж. / часто / особ. is cut here too; its known labels join the sense's codes.
   let abbreviationsPromise = null;
   function abbreviations() {
-    if (!abbreviationsPromise) abbreviationsPromise = fetch(new URL(`manifest.json?v=${version}`, base)).then(r => { if (!r.ok) throw new Error("manifest"); return r.json(); })
+    if (!abbreviationsPromise) abbreviationsPromise = dataFetch(new URL(`manifest.json?v=${version}`, base)).then(r => { if (!r.ok) throw new Error("manifest"); return r.json(); })
       .then(m => { const codes = m?.labels?.codes || {}, all = new Map(Object.values(codes).flatMap(group => Object.entries(group)));
         // the first abbreviation of each domain code — the card shows domains the resolver has no table for (сексол., карт.)
         all.domains = {}; for (const [abbr,code] of Object.entries(codes.domain || {})) if (!(code in all.domains)) all.domains[code] = abbr;
