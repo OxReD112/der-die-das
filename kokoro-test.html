@@ -50,6 +50,7 @@ textarea:focus-visible, button:focus-visible, input:focus-visible { outline: 2px
 .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .speed { flex: 1; min-width: 160px; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 14px; }
 .speed input { flex: 1; accent-color: var(--mint); }
+.speed select { flex: 1; min-width: 0; background: rgba(255, 255, 255, 0.03); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; font: 14px var(--font); }
 .speed output { font-variant-numeric: tabular-nums; min-width: 3ch; text-align: right; }
 .primary {
   width: 100%; border: 0; border-radius: 14px; padding: 14px; font: 600 16px var(--font);
@@ -80,6 +81,15 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
     <label for="text">Предложение</label>
     <textarea id="text">Guten Tag, wie geht es Ihnen heute?</textarea>
     <div class="samples" id="samples"></div>
+    <div class="row">
+      <div class="speed">
+        <span>Движок</span>
+        <select id="ep">
+          <option value="wasm" selected>Процессор (WebAssembly)</option>
+          <option value="webgpu">Видеокарта (WebGPU)</option>
+        </select>
+      </div>
+    </div>
     <div class="row">
       <div class="speed">
         <span>Скорость</span>
@@ -144,6 +154,12 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
     b.addEventListener("click", () => { $("text").value = s; });
     $("samples").appendChild(b);
   });
+  $("ep").addEventListener("change", () => {
+    if (session) { try { session.release(); } catch (e) {} }
+    session = null;
+    $("play").textContent = "Прочитать";
+    setStatus("Движок сменится при следующем нажатии.");
+  });
   $("speed").addEventListener("input", () => { $("speedOut").textContent = Number($("speed").value).toFixed(2); });
 
   function setStatus(msg, isError) {
@@ -203,7 +219,8 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       externalData: [{ path: FILES.data, data: new Uint8Array(data) }],
       graphOptimizationLevel: "all",
     });
-    const order = ("gpu" in navigator) ? ["webgpu", "wasm"] : ["wasm"];
+    const want = $("ep").value;
+    const order = want === "webgpu" && ("gpu" in navigator) ? ["webgpu", "wasm"] : ["wasm"];
     let lastErr = null;
     for (const ep of order) {
       try { session = await ort.InferenceSession.create(new Uint8Array(modelBuf), opts(ep)); engine = ep; break; }
