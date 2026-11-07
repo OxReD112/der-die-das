@@ -2259,11 +2259,19 @@
       // will sich … mit dem Programm „Mostly Mallwitz“ präsentieren)
       const titleMarks = new Set();
       for (const [a,b] of quotedTitles(sentence,tokens,clauseGaps.plain)) { titleMarks.add(a); titleMarks.add(b); }
+      // (P8 for the reflexive search, advisor 07.11: a bracket without a finite verb of its own is no boundary — the same
+      // parenthesisSpans as the chains; die sich durch (Sprach-) Witz und Humor auszeichnen; a bracket with a part of its own —
+      // (er war müde) — stays a boundary)
+      // (the words inside are an insertion of the part — skipped like the words of an inserted clause: nutzten die freie Talfahrt
+      // (sich Treibenlassen mit dem Strom) — sich is no reflexive of nutzten; run 07.11)
+      const parenMarks = new Set(), parenInsertions = [];
+      for (const [a,b] of parenthesisSpans(sentence,tokens))
+        if (!tokens.slice(a+1,b+1).some((t,n) => /^\p{Ll}/u.test(t[0]) && (analyses[a+1+n] || []).some(r => r.kind === 'finite'))) { parenMarks.add(a); parenMarks.add(b); parenInsertions.push({start:a+1,end:b}); }
       for (let i=1;i<tokens.length;i++) {
         // G15 (19.10.2026): a comma, point or colon inside a number (13,5; 26.600; 6:4) is no clause boundary.
         // A list of numbers (6:4, 5:7, 6:3) is one nominal element too.
         const rawGap = clauseGapText(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index).replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+/gu,'0'),tokens[i-1][0],tokens[i][0]);
-        const gap = titleMarks.has(i-1) ? rawGap.replace(/[„“”"»«]/gu," ") : rawGap;
+        const gap = (parenMarks.has(i-1) ? rawGap.replace(/[()]/gu," ") : rawGap).replace(titleMarks.has(i-1) ? /[„“”"»«]/gu : /$^/u," ");
         const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])||coordinators.has(words[j])));
         const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
         const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
@@ -2334,6 +2342,17 @@
           tokens[aside.start][0][0]!==words[aside.start][0]&&!subjectPersons[words[aside.start]]&&!['der','die','das'].includes(words[aside.start])){
           prior.insertions=[...(prior.insertions||[]),{start:aside.start,end:aside.end}];prior.end=next.end;clauses.splice(i,2);i--;
         }
+      }
+      for(const r of parenInsertions){const c=clauses.find(c=>r.start>=c.start&&r.end<=c.end);if(c&&c.start<r.start)c.insertions=[...(c.insertions||[]),r];}
+      // (advisor 07.11: a finished subordinate clause between two commas does not cut the reflexive pronoun from its verb — the same
+      // insertedClauseSpans as the chains; die sich, wenn man an einem ruhigen Sonntag nachdenkt, in der Erinnerung ungeordnet
+      // aufhäufen. The inserted clause stays a clause of its own, listed before the joined part, which skips it as an insertion)
+      for(const [a,b] of insertedClauseSpans(sentence,tokens,'reflexive',analyses)){
+        const pi=clauses.findIndex(c=>c.end===a),ai=clauses.findIndex(c=>c.start===a+1&&c.end===b),ni=clauses.findIndex(c=>c.start===b+1);
+        if(pi<0||ai!==pi+1||ni!==pi+2)continue;
+        const prior=clauses[pi],aside=clauses[ai],next=clauses[ni];
+        const joined={start:prior.start,end:next.end,relation:prior.relation,insertions:[...(prior.insertions||[]),{start:aside.start,end:aside.end},...(next.insertions||[])]};
+        clauses.splice(pi,3,aside,joined);
       }
       for(const c of clauses)c.relative=c.relation==='comma'&&['der','die','das','den','dem','dessen','deren'].includes(words[c.start])&&
         (!(forms.get(words[c.start+1])||[]).some(e=>e.type==='Nomen')||['dessen','deren'].includes(words[c.start]));
@@ -2687,6 +2706,10 @@
       const relations=[];
       for(let ci=0;ci<clauses.length;ci++) {
         const clause=clauses[ci], previous=ci>0?clauses[ci-1]:null;
+        // (advisor 07.11: a part joined over an inserted clause — insertedClauseSpans — does not see the words of the insertion; they
+        // are a clause of their own, listed before it)
+        const hidden=[];for(const r of clause.insertions||[])for(let i=r.start;i<=r.end;i++){hidden.push([i,analyses[i],words[i]]);analyses[i]=[];words[i]='';}
+        try {
         const inherited=ci>1&&clause.relation==='comma'&&previous.relative&&
           !analyses.slice(clauses[ci-2].start,clauses[ci-2].end+1).some(rows=>rows.some(a=>['finite','infinitive','participle'].includes(a.kind)))
           ? clauses[ci-2] : null;
@@ -3110,6 +3133,7 @@
               ...(complement?{complement:{...complement}}:{})},_lexicalIndices:[v,...componentIndices.filter(i=>i!==controller&&!nonLexical.includes(i)&&(!unresolvedLassen||i===v))],_pronounIndex:pronoun});
           }
         }
+        } finally { for(const [i,a,w] of hidden){analyses[i]=a;words[i]=w;} }
       }
       // Multiple morphological analyses can describe the same attachment.
       const unique=relations.filter((r,i,all)=>all.findIndex(x=>window.BibliothekVocabulary.identity(x)===window.BibliothekVocabulary.identity(r)&&JSON.stringify(x.construction.spans)===JSON.stringify(r.construction.spans))===i);
@@ -4600,6 +4624,89 @@
       if (modifier(p) && (modifier(k+1) || shape(k+1) && noun(k+2))) { for (let i = k+2; i <= limit; i++) if (noun(i)) return true; }
       return noun(p) && p > 0 && DETERMINER_WORD.test(w(p-1)) && DETERMINER_WORD.test(w(k+1)) && (noun(k+2) || modifier(k+2) && noun(k+3));
     }
+    // P8 brackets (one detector for the chains and the reflexive search — advisor 07.11): a bracket opening after token a and closing
+    // after token b, at most 12 tokens, no other bracket inside (commas, colons, points and quotes inside belong to it — Architekten
+    // KMSP (Kaplan, Matzke, Schöler + Partner)). Gives a → b.
+    function parenthesisSpans(sentence, tokens) {
+      const out = new Map();
+      const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]).replace(/\d+(?:[.,:]\d+)*/gu, " ");
+      for (let a = 0; a+2 < tokens.length; a++) {
+        const g = gapAfter(a).replace(/^\s*[“«”"]/u," ");
+        if (!/^\s*\(\s*$/u.test(g) || !/^\s/u.test(g)) continue;
+        for (let b = a+1; b+1 < tokens.length && b-a <= 12; b++) {
+          const h = gapAfter(b);
+          // (also after a hyphen of a shortened word — (Sprach-) Witz)
+          if (/^\s*-?\s*\)\s*$/u.test(h)) { out.set(a,b); break; }
+          if (/[()]/u.test(h)) break;
+        }
+      }
+      return out;
+    }
+    // (advisor 07.11, comma insertions, only the narrow case): a finished subordinate clause between two commas inside the part — its
+    // first word a relative pronoun / subordinating conjunction, its last word before the second comma a finite verb — is skipped like
+    // an insertion between dashes, when (2) before the first comma a finite auxiliary / modal of the chain has no verb of its own yet
+    // and (3) after the second comma a participle / infinitive closes the part (then only the end, a mark or verbs of the chain;
+    // no new finite verb before it): kann Dinge, die er sucht, nicht finden. Not an apposition or a short insertion without a verb
+    // (die Weißgardisten, wie erwartet), not a zu-infinitive after the comma (habe dabei geholfen, dieses Problem zu beseitigen).
+    // One check for the chains of verbalClause (head "chain": a finite auxiliary / modal waits for its verb) and the reflexive search
+    // of sentenceClauses (head "reflexive": the reflexive pronoun waits for its verb) — advisor 07.11. Gives [a, b]: the first comma
+    // after token a, the second after token b.
+    function insertedClauseSpans(sentence, tokens, head = "chain", analyses = null) {
+      const out = [], REFLEXIVE_WORDS = new Set(["sich","mich","dich","uns","euch"]);
+      const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
+        const AUXILIARY = new Set(["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten"]);
+        // (the reflexive search passes the sentence's own analyses — external verbs too: aufhäufen)
+        const rowsOf = i => analyses?.[i]?.length ? analyses[i] : verbAnalyses.get(norm(tokens[i][0])) || [];
+        const commaAfter = i => i+1 < tokens.length && /^\s*,\s*$/u.test(gapAfter(i));
+        const stopAfter = i => i+1 >= tokens.length || /[,;:.!?…()"„“”»«–—]/u.test(gapAfter(i));
+        const lowFinite = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => r.kind === "finite");
+        const chainVerb = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => ["participle","infinitive"].includes(r.kind));
+        const auxWord = i => rowsOf(i).some(r => AUXILIARY.has(norm(r.base || "")) ) || AUXILIARY.has(norm(tokens[i][0])) || /^(?:worden|geworden|gewesen|gehabt)$/u.test(norm(tokens[i][0]));
+        for (let a = 0; a+3 < tokens.length; a++) {
+          // (also auch / selbst / gerade before the conjunction: auch wenn, selbst als)
+          const opener = INSERTED_CLAUSE_OPENERS.has(norm(tokens[a+1][0])) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
+            a+2 < tokens.length && /^(?:wenn|als|ob|obwohl|nachdem|während|bevor|weil|dass|daß)$/u.test(norm(tokens[a+2][0]));
+          // (a d- / welch- word before a capital noun is an article — ihre Aufgabe, die Zerstörung … zu überwachen, abgeschlossen)
+          const article = /^(?:der|die|das|dem|den|welcher|welche|welches|welchem|welchen)$/u.test(norm(tokens[a+1][0])) && /^\s+$/u.test(gapAfter(a+1)) && /^\p{Lu}/u.test(tokens[a+2]?.[0] ?? "");
+          if (!commaAfter(a) || !opener || article) continue;
+          let b = a+1; while (b+1 < tokens.length && b-a <= 16 && !stopAfter(b)) b++;
+          // (the last word a finite verb that is no participle too: wie erwartet, wie gesagt are short insertions without a verb — registry)
+          if (!commaAfter(b) || b === a+1 || !lowFinite(b) || rowsOf(b).some(r => r.kind === "participle") || norm(tokens[b-1][0]) === "zu" || b+1 >= tokens.length) continue;
+          // (2) a finite auxiliary / modal before the first comma in the same part, with no participle / infinitive after it yet
+          let h = a; while (h > 0 && !stopAfter(h-1)) h--;
+          let aux = -1;
+          if (head === "reflexive") { for (let i = h; i <= a; i++) if (REFLEXIVE_WORDS.has(norm(tokens[i][0]))) aux = i;
+            // (the reflexive search: the pronoun waits for its verb — no verb after it before the first comma, and no verb of its own
+            // before it in the part but a finite auxiliary / modal: Er hat sich, als er kam, gesetzt; not Es trug sich zu, daß …;
+            // die freute sich, als …; Mach dich auf, bevor … — the verb is already there; run 07.11)
+            const verbBefore = tokens.slice(h,aux).some((t,n) => { const rows = rowsOf(h+n);
+              return rows.some(r => ["finite","imperative"].includes(r.kind)) && !rows.some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || ""))) ||
+                rows.some(r => ["participle","infinitive"].includes(r.kind)) && /^\p{Ll}/u.test(t[0]); });
+            if (aux < 0 || verbBefore || tokens.slice(aux+1,a+1).some((t,n) => lowFinite(aux+1+n) || chainVerb(aux+1+n))) continue; }
+          else { for (let i = h; i <= a; i++) if (rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || ""))) && /^\p{Ll}/u.test(tokens[i][0]) || i === h && rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || "")))) aux = i;
+            // (run 07.11: no verb of the chain after it yet, an auxiliary infinitive included — Musst also ganz schön bescheuert sein, wenn …)
+            if (aux < 0 || tokens.slice(aux+1,a+1).some((t,n) => chainVerb(aux+1+n))) continue; }
+          // (3) after the second comma: the part closes in a participle / infinitive, then only verbs of the chain
+          let e = b+1; while (e+1 < tokens.length && !stopAfter(e)) e++;
+          // (run 07.11: not when the part after the second comma is a clause of its own — it opens with a relative / conjunction (…,
+          // die ich je gesehen habe), a finite form stands before the verb (…, dann wollen wir den Weg schon finden), or a finite form
+          // follows it (…, von welchen sie essen sollten); after the verb only non-finite verbs of the chain: unterstützt werden)
+          if (INSERTED_CLAUSE_OPENERS.has(norm(tokens[b+1][0]))) continue;
+          let v = -1;
+          // (the reflexive search: the last word of the part is its verb, finite too — a subordinate clause, verb last: die sich, wenn
+          // man … nachdenkt, in der Erinnerung ungeordnet aufhäufen)
+          if (head === "reflexive") { if (lowFinite(e) || chainVerb(e)) v = e;
+            // (no finite form before it on the way: a participle used as an adjective is no verb of a clause — ungeordnet aufhäufen)
+            if (v < 0 || tokens.slice(b+1,v).some((t,n) => lowFinite(b+1+n) && !chainVerb(b+1+n))) continue; }
+          else for (let i = b+1; i <= e; i++) { if (chainVerb(i) && !auxWord(i)) { v = i; break; } if (lowFinite(i)) { v = -2; break; } }
+          // (not a zu-infinitive, also the joined one — ihn in den Schrank einzuschließen, ein Einhorn abzuschlachten: it belongs to the
+          // inserted clause or to a phrase of its own)
+          if (v < 0 || v > b+1 && norm(tokens[v-1][0]) === "zu" || zuForms.has(norm(tokens[v][0])) || rowsOf(v).some(r => /zu/u.test(String(r.kind)))) continue;
+          if (head !== "reflexive" && tokens.slice(v+1,e+1).some(t => !/^(?:werden|sein|haben|worden|gewesen|geworden|gehabt|können|müssen|dürfen|sollen|wollen|mögen|lassen)$/u.test(norm(t[0])))) continue;
+          out.push([a,b]);
+        }
+      return out;
+    }
     function quotedTitles(sentence, tokens, stop) {
       const out = new Map(); out.bracketAfter = new Set();
       const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
@@ -4650,7 +4757,7 @@
       // Gaps (links chat, 24.10.2026; train: ~170 passives): a short insertion in brackets or quotes inside the clause
       // (wird die Einheit CI5 (Criminal Intelligence 5) gegründet; der Spielfilm "Soldatensender Calais" … produziert) is
       // skipped like the one between dashes: the clause goes on after it and the words inside never compete.
-      const quoteJoin = new Set(), titles = quotedTitles(sentence,tokens,gap);
+      const quoteJoin = new Set(), titles = quotedTitles(sentence,tokens,gap), parens = parenthesisSpans(sentence,tokens);
       const commaJoin = new Set();
       const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"(":")","„":"“","»":"«","“":"”","\"":"\""};
       for (let a = 0; a+2 < tokens.length; a++) {
@@ -4663,6 +4770,7 @@
         // (P7: a quoted name / title stays in the clause — quotedTitles, shared with the reflexive search)
         if (titles.has(a)) { quoteJoin.add(a); if (!titles.bracketAfter.has(titles.get(a))) quoteJoin.add(titles.get(a)); continue; }
         if (determinerBefore) continue;
+        if (open === "(") { const b = parens.get(a); if (b !== undefined && (selected <= a || selected > b) && !insertionAfter.has(a)) { insertionAfter.set(a,b+1); insertionBefore.set(b+1,a); } continue; }
         for (let b = a+1; b+1 < tokens.length && b-a <= 12; b++) {
           const h = gapAfter(b).replace(/\d+(?:[.,:]\d+)*/gu, " ");
           if (h.trim() === close && CLOSE.test(h)) { if ((selected <= a || selected > b) && !insertionAfter.has(a)) { insertionAfter.set(a,b+1); insertionBefore.set(b+1,a); } break; }
@@ -4671,49 +4779,8 @@
           if (open === "(" ? /[()]/u.test(h) : gap.test(h)) break;
         }
       }
-      // (advisor 07.11, comma insertions, only the narrow case): a finished subordinate clause between two commas inside the part — its
-      // first word a relative pronoun / subordinating conjunction, its last word before the second comma a finite verb — is skipped like
-      // an insertion between dashes, when (2) before the first comma a finite auxiliary / modal of the chain has no verb of its own yet
-      // and (3) after the second comma a participle / infinitive closes the part (then only the end, a mark or verbs of the chain;
-      // no new finite verb before it): kann Dinge, die er sucht, nicht finden. Not an apposition or a short insertion without a verb
-      // (die Weißgardisten, wie erwartet), not a zu-infinitive after the comma (habe dabei geholfen, dieses Problem zu beseitigen).
-      if (gap.test(",")) {
-        const AUXILIARY = new Set(["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten"]);
-        const rowsOf = i => verbAnalyses.get(norm(tokens[i][0])) || [];
-        const commaAfter = i => i+1 < tokens.length && /^\s*,\s*$/u.test(gapAfter(i));
-        const stopAfter = i => i+1 >= tokens.length || /[,;:.!?…()"„“”»«–—]/u.test(gapAfter(i));
-        const lowFinite = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => r.kind === "finite");
-        const chainVerb = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => ["participle","infinitive"].includes(r.kind));
-        const auxWord = i => rowsOf(i).some(r => AUXILIARY.has(norm(r.base || "")) ) || AUXILIARY.has(norm(tokens[i][0])) || /^(?:worden|geworden|gewesen|gehabt)$/u.test(norm(tokens[i][0]));
-        for (let a = 0; a+3 < tokens.length; a++) {
-          // (also auch / selbst / gerade before the conjunction: auch wenn, selbst als)
-          const opener = INSERTED_CLAUSE_OPENERS.has(norm(tokens[a+1][0])) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
-            a+2 < tokens.length && /^(?:wenn|als|ob|obwohl|nachdem|während|bevor|weil|dass|daß)$/u.test(norm(tokens[a+2][0]));
-          // (a d- / welch- word before a capital noun is an article — ihre Aufgabe, die Zerstörung … zu überwachen, abgeschlossen)
-          const article = /^(?:der|die|das|dem|den|welcher|welche|welches|welchem|welchen)$/u.test(norm(tokens[a+1][0])) && /^\s+$/u.test(gapAfter(a+1)) && /^\p{Lu}/u.test(tokens[a+2]?.[0] ?? "");
-          if (!commaAfter(a) || !opener || article) continue;
-          let b = a+1; while (b+1 < tokens.length && b-a <= 16 && !stopAfter(b)) b++;
-          // (the last word a finite verb that is no participle too: wie erwartet, wie gesagt are short insertions without a verb — registry)
-          if (!commaAfter(b) || b === a+1 || !lowFinite(b) || rowsOf(b).some(r => r.kind === "participle") || norm(tokens[b-1][0]) === "zu" || b+1 >= tokens.length) continue;
-          // (2) a finite auxiliary / modal before the first comma in the same part, with no participle / infinitive after it yet
-          let h = a; while (h > 0 && !stopAfter(h-1)) h--;
-          let aux = -1; for (let i = h; i <= a; i++) if (rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || ""))) && /^\p{Ll}/u.test(tokens[i][0]) || i === h && rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || "")))) aux = i;
-          // (run 07.11: no verb of the chain after it yet, an auxiliary infinitive included — Musst also ganz schön bescheuert sein, wenn …)
-          if (aux < 0 || tokens.slice(aux+1,a+1).some((t,n) => chainVerb(aux+1+n))) continue;
-          // (3) after the second comma: the part closes in a participle / infinitive, then only verbs of the chain
-          let e = b+1; while (e+1 < tokens.length && !stopAfter(e)) e++;
-          // (run 07.11: not when the part after the second comma is a clause of its own — it opens with a relative / conjunction (…,
-          // die ich je gesehen habe), a finite form stands before the verb (…, dann wollen wir den Weg schon finden), or a finite form
-          // follows it (…, von welchen sie essen sollten); after the verb only non-finite verbs of the chain: unterstützt werden)
-          if (INSERTED_CLAUSE_OPENERS.has(norm(tokens[b+1][0]))) continue;
-          let v = -1; for (let i = b+1; i <= e; i++) { if (chainVerb(i) && !auxWord(i)) { v = i; break; } if (lowFinite(i)) { v = -2; break; } }
-          // (not a zu-infinitive, also the joined one — ihn in den Schrank einzuschließen, ein Einhorn abzuschlachten: it belongs to the
-          // inserted clause or to a phrase of its own)
-          if (v < 0 || v > b+1 && norm(tokens[v-1][0]) === "zu" || zuForms.has(norm(tokens[v][0])) || rowsOf(v).some(r => /zu/u.test(String(r.kind)))) continue;
-          if (tokens.slice(v+1,e+1).some(t => !/^(?:werden|sein|haben|worden|gewesen|geworden|gehabt|können|müssen|dürfen|sollen|wollen|mögen|lassen)$/u.test(norm(t[0])))) continue;
-          if ((selected <= a || selected > b) && !insertionAfter.has(a)) { insertionAfter.set(a,b+1); insertionBefore.set(b+1,a); }
-        }
-      }
+      if (gap.test(",")) for (const [a,b] of insertedClauseSpans(sentence,tokens,"chain"))
+        if ((selected <= a || selected > b) && !insertionAfter.has(a)) { insertionAfter.set(a,b+1); insertionBefore.set(b+1,a); }
       const skipped = new Set(), skip = (a,b) => { for (let i = a+1; i < b; i++) skipped.add(i); };
       // G15 (19.10.2026): und / oder / als between nominal parts does not end the clause (wurden Schulungen und
       // Weiterbildungen … durchgeführt; wird als Keltiberische Schrift bezeichnet; wurde 1963 als … gegründet).
