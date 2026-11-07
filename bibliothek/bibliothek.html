@@ -17,7 +17,7 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=6" />
     <link rel="stylesheet" href="../home.css?v=81" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261107-scale-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261107-icons-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261107-scale-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=10" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
@@ -71,7 +71,7 @@
           <p>Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
         </div>
         <dialog class="paste-dialog" id="paste-dialog" aria-labelledby="paste-dialog-title">
-          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button id="paste-close" type="button" aria-label="Close">×</button></div>
+          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
         <form class="paste-form" id="paste-form">
           <label for="paste-title">Title</label>
           <input id="paste-title" maxlength="120" placeholder="My text" required />
@@ -85,7 +85,7 @@
 
       <div id="library-actions" class="library-actions" aria-label="Library controls">
         <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
-        <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu">+</button>
+        <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
         <div class="library-add-menu" id="library-add-menu" hidden>
           <button id="add-book" type="button">Datei hochladen <small>EPUB · TXT</small></button>
           <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog">Text einfügen</button>
@@ -95,7 +95,7 @@
       <section class="reading-view" id="reading-view" hidden>
         <div class="reading-toolbar">
           <button class="toolbar-back" id="back-library" type="button" aria-label="Back to Bibliothek">
-            <span class="toolbar-arrow" aria-hidden="true">‹</span
+            <span class="toolbar-arrow ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span
             ><span class="toolbar-title" id="toolbar-title"></span>
           </button>
           <div class="reader-tools">
@@ -187,7 +187,7 @@
       </div>
       <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
       <div class="word-popover" id="word-popover" role="dialog" aria-label="Word translation" hidden>
-        <button class="popover-close" id="popover-close" type="button" aria-label="Close">×</button>
+        <button class="popover-close ui-close" id="popover-close" type="button" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
         <div class="popover-heading">
           <p class="popover-word" id="popover-word"></p>
           <button
@@ -223,7 +223,7 @@
           Wiktionary · CC BY-SA 4.0
         </button>
         <button class="popover-more" id="popover-more" type="button">
-          Dictionary details <span aria-hidden="true">›</span>
+          Dictionary details <span class="ui-chev ui-chev-lone" aria-hidden="true"></span>
         </button>
       </div>
       <div
@@ -236,7 +236,7 @@
       >
         <button class="sheet-scrim" id="sheet-scrim" type="button" aria-label="Close details"></button>
         <section class="sheet-card">
-          <button class="sheet-close" id="sheet-close" type="button" aria-label="Close">×</button>
+          <button class="sheet-close ui-close" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
           <div id="dictionary-card"></div>
           <p class="visually-hidden" id="dictionary-pager-status" aria-live="polite"></p>
         </section>
@@ -264,7 +264,7 @@
     <dialog class="text-settings" id="text-settings" aria-labelledby="text-settings-heading">
       <div class="text-settings-header">
         <h2 id="text-settings-heading" tabindex="-1" autofocus>Text</h2>
-        <button class="text-settings-close" type="button" data-text-close aria-label="Close text settings">×</button>
+        <button class="text-settings-close ui-close" type="button" data-text-close aria-label="Close text settings"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
       </div>
       <div class="text-size-row">
         <button class="text-size-step is-smaller" type="button" data-text-smaller aria-label="Smaller text">A</button>
@@ -358,7 +358,7 @@
             id="vocabulary-continue"
             href="../wortschatz/index.html?v=20261007-adjadv-1"
             hidden
-            >Continue in Wortschatz ›</a
+            >Continue in Wortschatz <span class="ui-chev" aria-hidden="true"></span></a
           >
           <label class="vocabulary-manual-copy" id="vocabulary-manual-copy" hidden
             >Copy this vocabulary<textarea id="vocabulary-copy-text" readonly rows="4"></textarea>
@@ -368,13 +368,13 @@
     </dialog>
     <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
       <button
-        class="sources-close"
+        class="sources-close ui-close"
         id="sources-close"
         type="button"
         aria-label="Close data sources and licenses"
         autofocus
       >
-        ×
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
       </button>
       <h2 id="data-sources-title">Data sources &amp; licenses</h2>
       <h3>German–English Dictionary</h3>
@@ -448,8 +448,8 @@
     <script src="reader/reader-text-settings.js?v=1"></script>
     <script src="reader/pronoun-reference.js?v=20261024-lowercase-1"></script>
     <script src="reader/meaning-thanks.js?v=1"></script>
-    <script src="reader/bookshelf.js?v=20261012-paper-fibers-2"></script>
+    <script src="reader/bookshelf.js?v=20261107-icons-1"></script>
     <script src="reader/bibliothek.js?v=20261107-wn-seinhaben55-1"></script>
-    <div class="version-mark" aria-hidden="true">v36</div>
+    <div class="version-mark" aria-hidden="true">v37</div>
   </body>
 </html>

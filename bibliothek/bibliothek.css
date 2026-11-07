@@ -2673,3 +2673,19 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 .text-segments svg *,
 .storage-info svg *,
 #contents-close svg * { stroke-width:1.2px !important; vector-effect:non-scaling-stroke; }
+
+/* 07.11 (design chat): the letter icons × + ‹ › ← → of Bibliothek became the shared icons of the app
+   (components/deutsch-ui-v1.css): windows, sheets and the popover close with the round .ui-close (30 px, tap area 44),
+   arrows are .ui-chev, «+» is a drawn plus in one line. Each × keeps the centre the letter's 38 / 44 px button had. */
+.popover-close.ui-close { top: 14px; right: 16px; width: 30px; height: 30px; }
+@media (max-width: 699px) { .popover-close.ui-close { top: 10px; right: 11px; } }
+.sheet-close.ui-close { width: 30px; height: 30px; margin-top: -4px; margin-right: -9px; }
+.text-settings-close.ui-close { width: 30px; height: 30px; margin: 7px -5px 7px 0; }
+.sources-close.ui-close { width: 30px; height: 30px; margin: -5px -5px 0 0; }
+.paste-dialog-heading .ui-close { width: 30px; height: 30px; flex: none; margin: 7px 2px 7px 0; background: var(--hairline); }
+.toolbar-arrow.ui-chev { margin-inline: 4px 2px; }
+.popover-more .ui-chev { color: var(--muted); }
+.library-add-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; }
+.library-add-toggle svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.library-bookshelf .arrow { display: inline-grid; place-items: center; }
+.library-bookshelf .caption-actions .book-delete svg { width: 18px; height: 18px; }
