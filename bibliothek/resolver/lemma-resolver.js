@@ -4226,7 +4226,11 @@
         // - Preis und …; a lowercase spelling that is also an own word of another kind — mal, schnell — is that word)
         const gapBefore = i > 0 ? sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index) : "";
         const ownOther = /^\p{Ll}/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type));
-        const clauseOpening = (i === 0 || /[.,;:!?»«"“”„(–—]/u.test(gapBefore) || ["und","oder"].includes(norm(tokens[i-1][0]))) && !ownOther &&
+        // (advisor 07.11: also after one opening adverb — Nun komm nur mit, Nun hör mal zu, So gib ihn her, Nun zieh mich … hinauf)
+        const gapBeforeAdverb = i > 1 ? sentence.slice(tokens[i-2].index + tokens[i-2][0].length, tokens[i-1].index) : "";
+        const adverbOpening = i > 0 && /^(?:nun|so|dann|jetzt|also|doch|bitte|na)$/u.test(norm(tokens[i-1][0])) && /^\s+$/u.test(gapBefore) &&
+          (i === 1 || /[.,;:!?»«"“”„(–—]/u.test(gapBeforeAdverb)) && !["du","sie","es","ihr"].includes(norm(tokens[i+1]?.[0] ?? ""));
+        const clauseOpening = (i === 0 || /[.,;:!?»«"“”„(–—]/u.test(gapBefore) || ["und","oder"].includes(norm(tokens[i-1][0])) || adverbOpening) && !ownOther &&
           !["ich","er","wir","man"].includes(norm(tokens[i+1]?.[0] ?? ""));
         // (a direction particle stays one although it is also an adjective: Komm rein! — rein «чистый»)
         const imperativeParticle = prefix => (DIRECTION_PARTICLE.test(prefix) || !(forms.get(prefix) || []).some(e => e.type === "Adjektiv" && norm(e.word) === prefix)) && !SHORT_PRONOMINAL_ADVERB.test(prefix);
@@ -13803,7 +13807,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       ["heraus","наружу (сюда)","out (towards)"],["hinüber","на ту сторону","over, across"],["herüber","на эту сторону","over, across"],
       ["herum","вокруг; туда-сюда","around"],["umher","вокруг; туда-сюда","around"],["zurück","назад, обратно","back"],
       ["fort","прочь","away"],["weg","прочь","away"],["davon","прочь","away"],["voran","вперёд","ahead, forward"],["voraus","вперёд","ahead, forward"],
-      ["vorwärts","вперёд","ahead, forward"],["empor","вверх","up(wards)"],["entlang","вдоль","along"],["herbei","сюда (к говорящему)","here, over (towards the speaker)"],["heran","ближе, вплотную (к)","up to, closer"],["hervor","наружу (из-за, из-под), вперёд","out, forth"],["hinweg","прочь; поверх, через","away; over"],["hindurch","сквозь, через","through"],["hinzu","к (чему-то); вдобавок","to (something); in addition"],["hinterher","следом, вслед; потом","after, behind; afterwards"],["her","сюда; (hinter … her) следом; (vor … her) впереди","here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead"],["hin","туда","there, away from the speaker"]]
+      ["vorwärts","вперёд","ahead, forward"],["empor","вверх","up(wards)"],
+      // (advisor 04.11 / 07.11, G47 extension: mit-, weiter-, zusammen-, vorbei- — transparent particles; los- stays outside)
+      ["mit","вместе (с кем-либо)","along, with (others)"],["weiter","дальше; продолжать","further, on"],["zusammen","вместе; в одно (целое)","together"],["vorbei","мимо","past, by"],["entlang","вдоль","along"],["herbei","сюда (к говорящему)","here, over (towards the speaker)"],["heran","ближе, вплотную (к)","up to, closer"],["hervor","наружу (из-за, из-под), вперёд","out, forth"],["hinweg","прочь; поверх, через","away; over"],["hindurch","сквозь, через","through"],["hinzu","к (чему-то); вдобавок","to (something); in addition"],["hinterher","следом, вслед; потом","after, behind; afterwards"],["her","сюда; (hinter … her) следом; (vor … her) впереди","here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead"],["hin","туда","there, away from the speaker"]]
       .sort((a,b) => b[0].length - a[0].length);
     // The perfect / zu chain of the simple verb was found in the sentence with the particle cut off: its spans move back.
     function directionalSpans(construction, at, from, to) {
@@ -13853,7 +13859,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const SPLIT_SKIP = new Set(["davon","entlang","vorwärts","hindurch","her","hin","hinterher"]);
     // The G47 class (links chat 06.11, advisor): a direction particle of the lists above, not SPLIT_SKIP. One class for every rule that
     // lets such a particle close a separable verb although it has an adverb card of its own (WN batch 49: fort, entgegen …).
-    function g47Particle(p) { return !SPLIT_SKIP.has(p) && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
+    // (advisor 07.11, G47 extension: mit-, weiter-, zusammen-, vorbei- are read by parts — joined forms and a particle that closes
+    // its part before a punctuation mark — but are not in this class: the rules that let a G47 particle close a verb before a
+    // preposition or join an old separate spelling stay without them — zusammen mit, gingen zusammen durch, weiter entfernt)
+    const G47_TRANSPARENT = new Set(["mit","weiter","zusammen","vorbei"]);
+    function g47Particle(p) { return !SPLIT_SKIP.has(p) && !G47_TRANSPARENT.has(p) && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
     async function separatedDirectional(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
@@ -13867,6 +13877,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (SPLIT_SKIP.has(P) || !/^\p{Ll}/u.test(tokens[b][0])) return result;
       const row = DIRECTIONAL.find(([p]) => p === P) || SPLIT_EXTRA.find(([p]) => p === P);
       if (!row || b - a < 1) return result;
+      // (mit, weiter, zusammen, vorbei: only right before a punctuation mark, the end or und / oder — not mit 10:0, mit "…")
+      if (G47_TRANSPARENT.has(P) && !/^\s*(?:[,;:.!?…)–—]|["„“”»«]\s*(?:[,;:.!?…)–—]|$)|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(sentence.slice(tokens[b].index + tokens[b][0].length))) return result;
       if (P === "fort" && b >= 2 && norm(tokens[b - 1][0]) === "einem" && norm(tokens[b - 2][0]) === "in") return result; // in einem fort
       if (/^(?:hinein|herein)$/u.test(P) && tokens.slice(a, b).some(t => /^(?:in|ins|im)$/u.test(norm(t[0])))) return result;
       // the finite verb of the part (not haben / sein / werden / a modal: then the particle belongs to a chain)
@@ -13951,7 +13963,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // to this rule whenever it answers: it reads the simple verb in the sentence (meinen Mann hat er die Treppe hinabgeworfen — Perfekt;
       // Harry sei das Schulhaus emporgeklettert — Konjunktiv I) and shows the parts where the full verb has no meaning in the reader's
       // language (English herabfallen = herab + fallen); otherwise the card stays.
-      if (!force && !extraRow && result && (result.candidates || []).length && result.candidates.every(c => c.separableParticiple)) {
+      // (G47 extension 07.11: not for mit-, weiter-, zusammen-, vorbei- — a card of the joined verb stays: vorbeigezogen sei → vorbeiziehen)
+      if (!force && !extraRow && result && (result.candidates || []).length && result.candidates.every(c => c.separableParticiple) &&
+          !G47_TRANSPARENT.has((DIRECTIONAL.find(([p]) => norm(String(word)).startsWith(p)) || [])[0])) {
         let other = null;
         try { other = await directionalParticle(word, context, {...result, candidates:[], selected:null, preferred:null, status:"unresolved", unresolvedMeanings:[]}); } catch (_) { other = null; }
         return (other?.candidates || []).length ? other : result;
@@ -15151,7 +15165,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = 0; i + 1 < words.length; i++) {
         const P = words[i][0], V = words[i+1][0], p = norm(P);
         if (!/^\p{Ll}/u.test(P) || !/^\p{Ll}/u.test(V) || SPLIT_SKIP.has(p)) continue;
-        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p)) continue;
+        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p)) continue;
         if (!/^[ \t]+$/u.test(sentence.slice(words[i].index + P.length, words[i+1].index))) continue;
         const after = sentence.slice(words[i+1].index + V.length);
         if (!/^\s*(?:[,;:.!?…()"„“”»«–—]|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(after)) continue;
