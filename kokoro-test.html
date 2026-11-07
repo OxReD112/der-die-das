@@ -111,6 +111,7 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       <dt>Синтез</dt><dd id="mSynth">—</dd>
       <dt>Длина аудио</dt><dd id="mAudio">—</dd>
       <dt>Нет в словаре</dt><dd id="mMissing">—</dd>
+      <dt>Куски</dt><dd id="mParts">—</dd>
     </dl>
     <div class="phon" id="phon"></div>
   </section>
@@ -220,6 +221,8 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       graphOptimizationLevel: "all",
     });
     const want = $("ep").value;
+    // WebAssembly runs in a background worker so the page stays responsive (WebGPU cannot use it)
+    if (want === "wasm") ort.env.wasm.proxy = true;
     const order = want === "webgpu" && ("gpu" in navigator) ? ["webgpu", "wasm"] : ["wasm"];
     let lastErr = null;
     for (const ep of order) {
@@ -318,12 +321,18 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       const t0 = performance.now();
       // synthesize the first piece, then keep one piece ahead while playing
       let next = synth(parts[0], speed), synthMs = 0, audioSec = 0, first = 0;
+      const stats = [];
       for (let i = 0; i < parts.length; i++) {
         const s0 = performance.now();
         const pcm = await next;
         synthMs += performance.now() - s0;
         if (i === 0) first = performance.now() - t0;
         audioSec += pcm.length / 24000;
+        let peak = 0, sum = 0, bad = 0;
+        for (let k = 0; k < pcm.length; k++) { const v = pcm[k]; if (!Number.isFinite(v)) { bad++; continue; } const a = Math.abs(v); if (a > peak) peak = a; sum += v * v; }
+        const rms = Math.sqrt(sum / Math.max(1, pcm.length));
+        stats.push(`${i + 1}: ${(pcm.length / 24000).toFixed(2)} с, пик ${peak.toFixed(2)}, громк. ${rms.toFixed(3)}${bad ? `, битых ${bad}` : ""}`);
+        $("mParts").textContent = stats.join("; ");
         next = i + 1 < parts.length ? synth(parts[i + 1], speed) : null;
         setStatus("Читаю…");
         await playPcm(pcm);
