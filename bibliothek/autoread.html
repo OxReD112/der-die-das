@@ -59,6 +59,10 @@
   // ?minutes=N adds a custom duration (short trial runs).
   const custom = +new URLSearchParams(location.search).get('minutes');
   if (custom > 0) $('minutes').add(new Option(custom + ' мин', String(custom), true, true));
+  // ?hedge=1 (07.11.2026, a trial): the reader asks a slow dictionary part a second time (resolver/data-cache.js)
+  const hedge = new URLSearchParams(location.search).get('hedge') === '1';
+  if (hedge) frame.src = 'bibliothek.html?hedge=1';
+  const hedgeStats = () => { try { const h = frame.contentWindow.BibliothekDataCache?.hedge; return h ? {...h} : null; } catch (_) { return null; } };
 
   // A run that was still "running" when this page loaded: the tab was reloaded (iOS drops a tab that used too much
   // memory). Count it and keep the taps recorded so far.
@@ -163,14 +167,14 @@
         await closeCard(page);
         const left = Math.max(0, Math.round((end - Date.now()) / 60000));
         say(`Идёт тест: ${run.taps.length} нажатий, последнее ${ms === null ? 'не дождались' : ms + ' мс'}, страниц ${run.pages}, осталось ~${left} мин. Не трогайте телефон.`);
-        if (Date.now() - lastSave > 5000) { save(run); lastSave = Date.now(); }
+        if (Date.now() - lastSave > 5000) { run.hedge = hedgeStats(); save(run); lastSave = Date.now(); }
         await sleep(PAUSE_MS);
       }
       if (stopping || Date.now() >= end) break;
       if (!(await nextPage(page))) { say('Книга (или глава) закончилась — тест остановлен раньше.', true); break; }
       run.pages++;
     }
-    run.state = 'finished'; run.ended = Date.now(); save(run);
+    run.state = 'finished'; run.ended = Date.now(); run.hedge = hedgeStats(); save(run);
     try { await wakeLock?.release(); } catch (_) {}
     $('start').hidden = false; $('stop').hidden = true; $('minutes').disabled = false; $('show').hidden = false;
     showResult();
@@ -195,6 +199,9 @@
       lines.push(`Скачано: ${mb(r.net.bytes)} за ${r.net.requests} запросов (${mb(r.net.bytes / minutes)} в минуту; без кэша данных и кэша браузера)`);
       for (const [k, [b, n]] of Object.entries(r.net.byKind).sort((a, b) => b[1][0] - a[1][0])) lines.push(`  ${k}: ${mb(b)}, ${n}`);
     } else if (r.net) lines.push('Скачано: браузер не дал посчитать');
+    if (r.hedge) lines.push(r.hedge.enabled
+      ? `Запасной запрос: включён; запасных ${r.hedge.spare}, из них пришли первыми ${r.hedge.spareWon}, первый успел ${r.hedge.firstWon}, оба не удались ${r.hedge.bothFailed}, не отправлены (предел 2) ${r.hedge.capped ?? 0}`
+      : 'Запасной запрос: выключен');
     lines.push('', 'По минутам (минута: нажатий, медиана, максимум' + (r.net?.measured ? ', скачано' : '') + '):');
     const byMinute = new Map();
     for (const t of r.taps) { const m = Math.floor(t.t / 60); if (!byMinute.has(m)) byMinute.set(m, []); byMinute.get(m).push(t.ms); }
