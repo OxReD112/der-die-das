@@ -8406,6 +8406,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     };
     // Adjective endings after a determiner: weak after der-type, mixed after ein-type.
     function expectedEnding(declension,feature) {
+      // (strong — after dessen / deren: an dessen hohem Dach, mit deren kleinen Kindern)
+      if (declension === "strong") {
+        if (feature.number === "plural") return {nominative:"e",accusative:"e",dative:"en",genitive:"er"}[feature.case];
+        return ({nominative:{masculine:"er",feminine:"e",neuter:"es"},accusative:{masculine:"en",feminine:"e",neuter:"es"},
+          dative:{masculine:"em",feminine:"er",neuter:"em"},genitive:{masculine:"en",feminine:"er",neuter:"en"}})[feature.case]?.[feature.gender];
+      }
       if (feature.number === "plural") return "en";
       if (declension === "mixed") {
         if (feature.case === "nominative" && feature.gender === "masculine") return "er";
@@ -8419,8 +8425,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     // Determiner features: own article cards; possessives decline like ein,
     // dies-/jen-/jed-/welch-/manch- like der. Card tables, never a copied table.
-    function determinerFeatures(form) {
+    function determinerFeatures(form, {genitiveRelative = false} = {}) {
       const key = norm(form);
+      // (advisor 07.11, DESSEN_DEREN_COUNT: in a noun group after a preposition dessen / deren stands where the article stands —
+      // an deren Fuß, auf dessen Dach, nach dessen Tod; it fixes no case, gender or number of the noun, the adjectives after it
+      // decline strong: an dessen hohem Dach)
+      if (genitiveRelative && (key === "dessen" || key === "deren")) {
+        const der = [...articleCardsByForm.get("der") || []].find(card => card.grammar?.article_kind === "definite");
+        const rows = der ? ["der","die","das","den","dem","des"].flatMap(f => [...(articleFeatures(der)?.get(f) || [])]) : [];
+        return rows.length ? rows.map(f => ({...f,declension:"strong"})) : null;
+      }
       const cards = articleCardsByForm.get(key);
       if (cards?.length) {
         const features = cards.flatMap(card => [...(articleFeatures(card)?.get(key) || [])].map(f => ({...f,declension:card.grammar?.adjective_declension || null})));
@@ -8545,12 +8559,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Bounded noun group to the right of an anchor (article or preposition):
     // [determiner] modifier{0,3} ["] Noun, whitespace-joined only. The head of
     // a hyphenated compound is its last part (ein Fünf-Sterne-Hotel → Hotel).
-    async function nounGroupAfter(sentence, tokens, anchor, {determiner, consumer}) {
+    async function nounGroupAfter(sentence, tokens, anchor, {determiner, consumer, genitiveRelative = false}) {
       let i = anchor + 1, det = null;
       const quote = /^\s*(?:``|[„“"«‚‘])\s*$/u;
       const beforeHead = (a,b) => groupJoined(sentence,tokens,a,b) || quote.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
       if (!tokens[i] || !beforeHead(anchor,i)) return {reason:"boundary"};
-      if (determiner && /^[a-zäöüß]/u.test(tokens[i][0]) && determinerFeatures(tokens[i][0])) {
+      if (determiner && /^[a-zäöüß]/u.test(tokens[i][0]) && determinerFeatures(tokens[i][0],{genitiveRelative})) {
         det = i; i++;
         if (!tokens[i] || !beforeHead(i-1,i)) return {reason:"boundary"};
       }
@@ -9505,10 +9519,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         e.grammar?.numeral_kind === "cardinal" && norm(e.word) !== norm(tokens[i][0]));
       if (next && (dativeNumeral(index+1) || dativeNumeral(index+2) && (forms.get(next) || []).some(e => e.type === "Adverb") && !boundary.test(gap(index+1,index+2))))
         return {...prep,evidence:'preposition-before-numeral'};
-      const group = figureFirst ? {} : await nounGroupAfter(sentence,tokens,index,{determiner:true,consumer:'prepositionChoice'});
+      let group = figureFirst ? {} : await nounGroupAfter(sentence,tokens,index,{determiner:true,consumer:'prepositionChoice',genitiveRelative:true});
+      // (dessen / deren with no noun group after it — statt dessen ein …, deren ich gedenke — is read as before)
+      if (/^(?:dessen|deren)$/u.test(next || "") && !(group.readings && group.det !== null &&
+          agreeingFeatures(determinerFeatures(tokens[group.det][0],{genitiveRelative:true}) || [],group,governed).length))
+        group = await nounGroupAfter(sentence,tokens,index,{determiner:true,consumer:'prepositionChoice'});
       let caseMismatch = false;
       if (group.readings && group.det !== null) {
-        const features = determinerFeatures(tokens[group.det][0]) || [];
+        const features = determinerFeatures(tokens[group.det][0],{genitiveRelative:true}) || [];
         if (agreeingFeatures(features,group,governed).length) return {...prep,evidence:'preposition-before-noun-phrase'};
         caseMismatch = true;
       } else if (group.readings) {
