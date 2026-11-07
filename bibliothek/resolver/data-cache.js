@@ -88,52 +88,6 @@
     } else await cache.put(url.href, copy);
     if (++added % TRIM_EVERY === 0) await trim(cache);   // (the first trim of a page: 4 s after the open)
   }
-  // Spare request (speed chat 07.11, a trial: off unless bibliothek.html?hedge=1). On the iPhone, after a few seconds of
-  // network silence, the second and later requests of a batch sometimes wait ~1 s before they are sent (Safari / iOS; the
-  // first request of the batch goes at once; Documentation/QA/iPhone_Autoread_2026-11-07/). A part that has not answered
-  // well past the usual time is asked once more; the first answer wins, the other request is cancelled. The threshold
-  // follows the network (3 × the median of the last answers, at least 500 ms), at most 2 spare requests at a time, and an
-  // error only when both fail — the same file either way. The spare goes past the browser's HTTP cache (Chromium holds a
-  // second request for the same address until the first one has finished).
-  let hedge = false;
-  try { hedge = typeof location !== "undefined" && new URLSearchParams(location.search).get("hedge") === "1"; } catch (_) { hedge = false; }
-  const HEDGE_MIN_MS = 500, HEDGE_FIRST_MS = 600, HEDGE_FACTOR = 3, HEDGE_MAX_SPARE = 2, HEDGE_SAMPLES = 20;
-  const answered = [], stats = {enabled: hedge, spare: 0, spareWon: 0, firstWon: 0, bothFailed: 0, capped: 0};
-  let spareInFlight = 0;
-  // (the usual time: the answer time of the request that won, from its own start — a held first request that a spare had to
-  // save does not raise it, a slow network does; review 07.11)
-  const threshold = () => { if (!answered.length) return HEDGE_FIRST_MS;
-    const sorted = [...answered].sort((a, b) => a - b); return Math.max(HEDGE_MIN_MS, HEDGE_FACTOR * sorted[sorted.length >> 1]); };
-  const noteAnswer = ms => { answered.push(ms); if (answered.length > HEDGE_SAMPLES) answered.shift(); };
-  function networkFetch(input, options, url) {
-    if (!hedge || !/\/\d+\.json$/.test(url.pathname) || (options && options.signal) || typeof AbortController === "undefined") return fetch(input, options);
-    const started = performance.now();
-    return new Promise((resolve, reject) => {
-      const first = new AbortController();
-      let spare = null, spareStarted = 0, done = false, failed = 0, firstError = null, timer = null;
-      const settle = (response, winner) => {
-        if (done) return; done = true; clearTimeout(timer);
-        (winner === first ? spare : first)?.abort();
-        if (spare) { spareInFlight--; stats[winner === spare ? "spareWon" : "firstWon"]++; }
-        noteAnswer(performance.now() - (winner === spare ? spareStarted : started));
-        resolve(response);
-      };
-      const fail = (error, which) => {
-        if (done) return;
-        failed++; if (!firstError) firstError = error;
-        if (which === first && !spare) { done = true; clearTimeout(timer); reject(error); return; }   // as before: no second request
-        if (failed >= 2) { done = true; spareInFlight--; stats.bothFailed++; reject(firstError); }
-      };
-      fetch(input, {...(options || {}), signal: first.signal}).then(r => settle(r, first), e => fail(e, first));
-      timer = setTimeout(() => {
-        if (done) return;
-        if (spareInFlight >= HEDGE_MAX_SPARE) { stats.capped++; return; }
-        spare = new AbortController(); spareStarted = performance.now(); spareInFlight++; stats.spare++;
-        // past the browser's own cache: a browser may hold a second request for an address until the first one is done
-        fetch(input, {...(options || {}), cache: "no-store", signal: spare.signal}).then(r => settle(r, spare), e => fail(e, spare));
-      }, threshold());
-    });
-  }
   const STALLED = Symbol("stalled");
   const within = (pending, ms) => { let timer = null;
     return Promise.race([pending, new Promise(resolve => { timer = setTimeout(() => resolve(STALLED), ms); })]).finally(() => clearTimeout(timer)); };
@@ -156,7 +110,7 @@
         }
       }
     } catch (_) { cache = null; }
-    const response = await networkFetch(input, options, url);
+    const response = await fetch(input, options);
     if (cache && response.status === 200 && response.type === "basic") {
       try { const copy = response.clone(); store(cache, url, copy).catch(() => {}); } catch (_) {}
     }
@@ -164,5 +118,5 @@
   }
   // the first open (reading the list of entries) happens while the page loads, not at the first tap
   if (site) setTimeout(() => { open().catch(() => {}); }, 0);
-  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, enabled: !!site, hedge: stats});
+  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, enabled: !!site});
 })();

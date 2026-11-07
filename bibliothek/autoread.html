@@ -59,10 +59,6 @@
   // ?minutes=N adds a custom duration (short trial runs).
   const custom = +new URLSearchParams(location.search).get('minutes');
   if (custom > 0) $('minutes').add(new Option(custom + ' мин', String(custom), true, true));
-  // ?hedge=1 (07.11.2026, a trial): the reader asks a slow dictionary part a second time (resolver/data-cache.js)
-  const hedge = new URLSearchParams(location.search).get('hedge') === '1';
-  if (hedge) frame.src = 'bibliothek.html?hedge=1';
-  const hedgeStats = () => { try { const h = frame.contentWindow.BibliothekDataCache?.hedge; return h ? {...h} : null; } catch (_) { return null; } };
 
   // A run that was still "running" when this page loaded: the tab was reloaded (iOS drops a tab that used too much
   // memory). Count it and keep the taps recorded so far.
@@ -94,14 +90,39 @@
     const pop = doc.getElementById('word-popover');
     return pop && !pop.hidden && pop.getAttribute('aria-busy') === 'false' && !pop.querySelector('.popover-loading');
   }
+  // Breakdown of a tap (07.11.2026, v3): what the time went to, without Web Inspector (it changes speed and memory).
+  // Network: the reader's requests that started during the tap (Resource Timing of its frame) — how many, in how many
+  // waves one after another (a request that starts after all earlier ones ended), the time any of them was open, the
+  // longest wait before a request was sent (requestStart − startTime: the ~1 s seen in Web Inspector) and the longest
+  // server wait. Busy: how long the page did not run its timers (a 20 ms timer late by more than 30 ms) — work on the
+  // page itself: the resolver, layout.
+  function breakdown(win, t0, t1, busy) {
+    let list = [];
+    try { list = win.performance.getEntriesByType('resource').filter(e => e.startTime >= t0 - 5 && e.startTime <= t1); } catch (_) {}
+    list.sort((a, b) => a.startTime - b.startTime);
+    let waves = 0, open = 0, end = -1, cover = 0, from = 0, queue = 0, server = 0;
+    for (const e of list) {
+      if (e.startTime > end + 2) { waves++; if (end >= 0) cover += end - from; from = e.startTime; }
+      end = Math.max(end, e.responseEnd || e.startTime + e.duration);
+      if (e.requestStart > 0) queue = Math.max(queue, e.requestStart - e.startTime);
+      if (e.requestStart > 0 && e.responseStart > 0) server = Math.max(server, e.responseStart - e.requestStart);
+    }
+    if (end >= 0) cover += end - from;
+    open = cover;
+    return {n: list.length, waves, net: Math.round(open), queue: Math.round(queue), server: Math.round(server), busy: Math.round(busy)};
+  }
   async function tap(doc, word) {
-    const started = performance.now();
+    const win = doc.defaultView, started = performance.now(), t0 = win.performance.now();
+    let busy = 0, last = performance.now();
+    const watch = setInterval(() => { const now = performance.now(), late = now - last - 20; if (late > 30) busy += late; last = now; }, 20);
     word.click();
     while (!cardReady(doc)) {
-      if (performance.now() - started > TAP_TIMEOUT_MS) return null;
+      if (performance.now() - started > TAP_TIMEOUT_MS) { clearInterval(watch); return {ms: null}; }
       await sleep(20);
     }
-    return Math.round(performance.now() - started);
+    clearInterval(watch);
+    const ms = Math.round(performance.now() - started);
+    return {ms, parts: breakdown(win, t0, win.performance.now(), busy)};
   }
   async function closeCard(doc) {
     doc.getElementById('popover-close')?.click();
@@ -160,21 +181,21 @@
       const words = visibleWords(page);
       for (let i = 0; i < TAPS_PER_PAGE && words.length && !stopping && Date.now() < end; i++) {
         const word = words[Math.floor(random() * words.length)];
-        const ms = await tap(page, word);
+        const {ms, parts} = await tap(page, word);
         if (ms === null) run.timeouts++;
-        run.taps.push({t: Math.round((Date.now() - run.started) / 1000), w: word.textContent, ms});
+        run.taps.push({t: Math.round((Date.now() - run.started) / 1000), w: word.textContent, ms, ...(parts ? {b: parts} : {})});
         await sleep(CARD_SHOW_MS);
         await closeCard(page);
         const left = Math.max(0, Math.round((end - Date.now()) / 60000));
         say(`Идёт тест: ${run.taps.length} нажатий, последнее ${ms === null ? 'не дождались' : ms + ' мс'}, страниц ${run.pages}, осталось ~${left} мин. Не трогайте телефон.`);
-        if (Date.now() - lastSave > 5000) { run.hedge = hedgeStats(); save(run); lastSave = Date.now(); }
+        if (Date.now() - lastSave > 5000) { save(run); lastSave = Date.now(); }
         await sleep(PAUSE_MS);
       }
       if (stopping || Date.now() >= end) break;
       if (!(await nextPage(page))) { say('Книга (или глава) закончилась — тест остановлен раньше.', true); break; }
       run.pages++;
     }
-    run.state = 'finished'; run.ended = Date.now(); run.hedge = hedgeStats(); save(run);
+    run.state = 'finished'; run.ended = Date.now(); save(run);
     try { await wakeLock?.release(); } catch (_) {}
     $('start').hidden = false; $('stop').hidden = true; $('minutes').disabled = false; $('show').hidden = false;
     showResult();
@@ -185,7 +206,7 @@
   function report(r) {
     const ms = r.taps.map(t => t.ms).filter(x => x !== null);
     const lines = [
-      'Автотест чтения (bibliothek/autoread.html, v2)',
+      'Автотест чтения (bibliothek/autoread.html, v3)',
       `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
       `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
       `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
@@ -199,15 +220,20 @@
       lines.push(`Скачано: ${mb(r.net.bytes)} за ${r.net.requests} запросов (${mb(r.net.bytes / minutes)} в минуту; без кэша данных и кэша браузера)`);
       for (const [k, [b, n]] of Object.entries(r.net.byKind).sort((a, b) => b[1][0] - a[1][0])) lines.push(`  ${k}: ${mb(b)}, ${n}`);
     } else if (r.net) lines.push('Скачано: браузер не дал посчитать');
-    if (r.hedge) lines.push(r.hedge.enabled
-      ? `Запасной запрос: включён; запасных ${r.hedge.spare}, из них пришли первыми ${r.hedge.spareWon}, первый успел ${r.hedge.firstWon}, оба не удались ${r.hedge.bothFailed}, не отправлены (предел 2) ${r.hedge.capped ?? 0}`
-      : 'Запасной запрос: выключен');
     lines.push('', 'По минутам (минута: нажатий, медиана, максимум' + (r.net?.measured ? ', скачано' : '') + '):');
     const byMinute = new Map();
     for (const t of r.taps) { const m = Math.floor(t.t / 60); if (!byMinute.has(m)) byMinute.set(m, []); byMinute.get(m).push(t.ms); }
     for (const [m, a] of byMinute) { const ok = a.filter(x => x !== null); lines.push(`  ${String(m + 1).padStart(2)}: ${a.length}, ${median(ok)} мс, ${ok.length ? Math.max(...ok) : '—'} мс${a.length - ok.length ? `, не дождались ${a.length - ok.length}` : ''}${r.net?.measured ? `, ${((r.net.byMinute[m] || 0) / 1024).toFixed(0)} КБ` : ''}`); }
     lines.push('', 'Самые долгие нажатия:');
     for (const t of [...r.taps].filter(t => t.ms !== null).sort((a, b) => b.ms - a.ms).slice(0, 10)) lines.push(`  ${t.ms} мс — «${t.w}» на ${(t.t / 60).toFixed(1)} мин`);
+    const slow = r.taps.filter(t => t.ms !== null && t.ms >= 1000 && t.b).sort((a, b) => b.ms - a.ms);
+    if (r.taps.some(t => t.b)) {
+      lines.push('', 'Разбивка нажатий ≥ 1 с (сеть: запросов, волн подряд, время с открытыми запросами, самое долгое ожидание до отправки, самый долгий ответ сервера; страница занята):');
+      for (const t of slow) lines.push(`  ${t.ms} мс «${t.w}» (${(t.t / 60).toFixed(1)} мин): сеть ${t.b.net} мс — запросов ${t.b.n}, волн ${t.b.waves}, до отправки ≤ ${t.b.queue} мс, сервер ≤ ${t.b.server} мс; страница занята ${t.b.busy} мс`);
+      if (!slow.length) lines.push('  нет');
+      const all = r.taps.filter(t => t.ms !== null && t.b), avg = k => all.length ? Math.round(all.reduce((a, t) => a + t.b[k], 0) / all.length) : 0;
+      lines.push(`  в среднем на нажатие (все ${all.length}): сеть ${avg('net')} мс, ${(all.reduce((a, t) => a + t.b.waves, 0) / Math.max(1, all.length)).toFixed(1)} волн, страница занята ${avg('busy')} мс; ожидание до отправки ≥ 500 мс — в ${all.filter(t => t.b.queue >= 500).length} нажатиях`);
+    }
     lines.push('', `Устройство: ${r.ua}`);
     lines.push('', 'Все нажатия (секунда от начала, слово, мс):', r.taps.map(t => `${t.t} ${t.w} ${t.ms ?? 'x'}`).join('; '));
     return lines.join('\n');
