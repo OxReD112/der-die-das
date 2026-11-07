@@ -121,7 +121,7 @@
       // G45 (2), reference 2.A (user 22.10): a label at the start of a gloss (G17, a706d75: [gloss index, cut, codes]) is shown
       // apart from the text. The stored translation keeps the source gloss (derived lines, der/die pairs, Wortschatz keep
       // their inline label, review 22.10); `shown` is the gloss without its labels for the card, `labels` its codes.
-      const labels = {}, shown = [], reflexive = {};
+      const labels = {}, shown = [], reflexive = {}, names = new Set();
       const entries = matched.map(row => ({recordId:row.record_id,word:row.word,pos:row.pos,sourceUrl:row.source_url,
         senses:row.senses.filter(s => s.display_status === "translation" && Array.isArray(s.data?.glosses))
           .map(s => ({senseIndex:s.sense_index,sourceId:s.data.id,glosses:s.data.glosses.map((g,i) => {
@@ -136,6 +136,8 @@
               const text = withoutHiddenParts(cut.text,row.word,row.pos,hidden);
               if (text) {
                 shown.push(text);
+                // (advisor 06.11) a sense the source marks as a name (name_like: Runkel «Рункель», a town; Braun «Браун (фамилия)»)
+                if (Array.isArray(s.name_like) && s.name_like.length) names.add(text);
                 // The first gloss with this text decides (Zunge: «анат. язык» before «кулин. язык» — one key «язык»).
                 if (!(text in labels)) labels[text] = mark ? [...new Set([...mark[2],...cut.codes])] : [];
               }
@@ -147,6 +149,7 @@
         return {language:"ru",source:"Russian Wiktionary / Kaikki.org",entries,
           meanings:[...new Set(entries.flatMap(row => row.senses.flatMap(s => s.glosses)))],
           ...(Object.keys(reflexive).length ? {reflexive} : {}),
+          ...(names.size ? {names:[...names]} : {}),
           ...(labelled ? {labels, shown:[...new Set(shown)], domains:known.domains || {}} : {})};
       }
     }

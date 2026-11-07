@@ -507,16 +507,36 @@
     erei:{Verb:['-erei: занятие (часто надоевшее)','-erei: activity (often tiresome)'],Nomen:['-erei: место для …','-erei: place for …']},
     ig:['-ig: с … / похожий на …','-ig: with … / like …'], lich:['-lich: с … / похожий на …','-lich: with … / like …'],
     bar:['-bar: можно …','-bar: can be …'], un:['un-: не-','un-: not …']};
-  const formationName = p => p.pos === 'Nomen' ? p.lemma.charAt(0).toUpperCase() + p.lemma.slice(1) : p.lemma;
+  // (advisor 07.11) a bound first part is named with its hyphen: «rück- — назад, обратно; задний»
+  const formationName = p => p.pos === 'Nomen' ? p.lemma.charAt(0).toUpperCase() + p.lemma.slice(1) : p.pos === 'Präfix' ? `${p.lemma}-` : p.lemma;
   // A part shows its first two meanings (user 23.10); the rest is counted for «ещё N значений» (the part's own card).
   // An external part loses its brackets (Latin names, usage notes: «елец (Leuciscus leuciscus L.)»), as compact() does for
   // external cards; an own part keeps them, as its card does (D13).
+  // (advisor 06.11) A meaning of a part with a rude usage label (груб., пренебр., жарг. — RUDE_LABELS, the labels the cards show):
+  // an external meaning by its Russian label codes, an own meaning by its bracket at the start («(разг., неодобр.) рявкать»).
+  const LABEL_WORDS = new Set([...LABEL_SET.flatMap(([, ru, , en]) => [ru, en]), ...Object.values(DOMAIN),
+    'вульг.', 'бран.', 'неодобр.', 'презр.', 'обсц.', 'прост.']);
+  // (abbreviations only — «вульг.»: a domain word written out in full, «радио», is a meaning: Funk — радио)
+  const onlyLabels = m => { const w = String(m).split(/[\s,]+/u).filter(Boolean); return w.length > 0 && w.every(x => /\.$/u.test(x) && LABEL_WORDS.has(x)); };
+  const RUDE_OWN = /^\([^()]*(?:груб|вульг|бран|неодобр|пренебр|презр|жарг|обсц|непристойн|оскорб)[^()]*\)/u;
   function formationMeaning(p, language) {
     const list = text => p.source === 'main' ? meaningParts(text) : meaningParts(String(text || '').replace(/\([^()]*\)/g, ''));
     // A wiki template left in an external Russian meaning («:Шаблон:Дрозд») is no meaning (G68).
-    const own = list(language === 'ru' ? p.ru : p.en).filter(m => !/Шаблон:|^:/u.test(m)), en = list(p.en);
+    // (a «meaning» that is only a label — Arsch «вульг.» — is no meaning)
+    const own = list(language === 'ru' ? p.ru : p.en).filter(m => !/Шаблон:|^:/u.test(m) && !onlyLabels(m)), en = list(p.en);
     const n = shownCount(Infinity);
-    if (own.length) return {text:own.slice(0, n).join('; '), rest:Math.max(0, own.length - 2)};
+    if (own.length) {
+      // (advisor 06.11) The two shown meanings are the first ones without a rude label; all meanings (ещё N значений) in their
+      // order, a rude one with its label. A part whose every meaning is rude shows the first one with its label (never empty).
+      const codes = language === 'ru' && p.source !== 'main' && p.ruLabels ? partCodes(p.ruLabels) : null;
+      const rudeCodes = m => (codes?.get(labelKey(m)) || []).filter(c => RUDE_LABELS.has(LABEL_BY_CODE.get(c)?.id));
+      const rude = m => language === 'ru' && (p.source === 'main' ? RUDE_OWN.test(m) : rudeCodes(m).length > 0);
+      const marked = m => { const c = p.source === 'main' ? [] : rudeCodes(m);
+        return c.length ? `${shownLabels(c, 'ru', false).map(l => l.short).join(' ')} ${m}` : m; };
+      const plain = own.filter(m => !rude(m)), short = plain.length ? plain.slice(0, 2) : [own[0]];
+      const shown = n === Infinity ? own : short;
+      return {text:shown.map(m => plain.length && !rude(m) ? m : marked(m)).join('; '), rest:Math.max(0, own.length - short.length)};
+    }
     return language === 'ru' && en.length ? {text:`английский: ${en.slice(0, n).join('; ')}`, rest:Math.max(0, en.length - 2)} : {text:'', rest:0};
   }
   // The lines of the card (user 23.10): every part on a line of its own — «Bauch — живот», «Höhe — высота; уровень»;
@@ -539,7 +559,8 @@
     if (f.kind === 'name') return [{text:nameLiteral(f, language), more:0, entryId:null}];
     const i = language === 'ru' ? 0 : 1;
     const gloss = (p, prefix = '') => { const m = formationMeaning(p, language);
-      return namedLine(`${prefix}${formationName(p)}`, m.text, p.dictionaryId ? m.rest : 0, p.dictionaryId || null); };
+      // (advisor 06.11) «ещё N значений» for every part, own or external: the external meanings are in the split whole.
+      return namedLine(`${prefix}${formationName(p)}`, m.text, m.rest, p.dictionaryId || null); };
     const fixed = text => ({text, more:0, entryId:null});
     // #21 (reference F12-G12e): a diminutive — the base's parts, the last one marked «(уменьш.)»: «Spatz — воробей (уменьш.)»,
     // «Rock — юбка · Tasche — карман (уменьш.)».
@@ -615,7 +636,6 @@
     } else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
     const lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
-    for (const l of lines) if (!l.helpEntry) l.more = 0;
     return {heading, grammar:[f.pos, ...marks].join(' · '), text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
       note:'', more:0, spans:null, helpEntry:null};
   }
@@ -651,6 +671,18 @@
     if (candidate?.wordFragment) return {heading:candidate.lemma, grammar:'', text:candidate.translation[language], textLanguage:language,
       missing:false, derived:true, note:'', more:0, spans:candidate.compound?.spans || null, helpEntry:null};
     let model = wordCard(resolution, candidate, options);
+    // (advisor 06.11, fresh sample item 3 (в), DRAFT): an external word known only in English — its composition from our parts as a
+    // line under the English text, in the Russian interface only; a hint, not a translation («состав:», as «(без sich)»).
+    // (only under an English text: a card that already says it in Russian — «От missachten — …» — needs no parts)
+    // (and a diminutive of such a word: «Lämmerschwanz — английский: lamb tail (уменьш.)», advisor 07.11)
+    if (candidate?.composition && language === 'ru' && /(?:^|— )английский: /u.test(String(model.text || ''))) {
+      // (advisor 06.11: the lines of the «Kompositum» card itself — the same parts and the same meanings, two of them; a part
+      // with more meanings is a button that opens them in the line, as «ещё N значений» of the card)
+      const lines = formationLines(candidate.composition, 'ru').map(l => ({text:String(l.text || ''), more:l.more || 0}));
+      // (a part without a Russian meaning — Palme — [[]] — gives no line: all parts or none)
+      if (lines.length > 1 && lines.every(l => /\s—\s.*\p{L}/u.test(l.text) && !/[\[\]{}]/u.test(l.text)))
+        model = {...model, composition:{prefix:'состав: ', lines}};
+    }
     // L23 (reference A3, 19.10): a modal in Konjunktiv I (er könne) — the hint for reported speech under the meaning.
     // (advisor 03.11: also habe / sei / werde in Konjunktiv I — alone or in their Perfekt / Futur group, and the group's main verb)
     const konj1Group = ['perfect-group','werden-future'].includes(candidate?.construction?.id) && (candidate.construction.label === 'Konjunktiv I' || candidate.construction.mood === 'Konjunktiv I') && !candidate.construction.asIf;

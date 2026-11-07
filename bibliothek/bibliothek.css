@@ -851,6 +851,18 @@ body.library-screen .data-sources button:active:not(:disabled) {
   color: var(--text);
   text-decoration: underline;
 }
+/* user 07.11: the chevron of a line of parts — down opens its meanings, up closes them */
+.popover-chevron {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  vertical-align: -0.08em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .dictionary-sheet {
   position: fixed;
   z-index: 25;
@@ -1817,6 +1829,19 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin-top: 6px;
   color: var(--muted);
   font-size: 14px;
+}
+/* advisor 06.11: «состав» — the parts of an external word known only in English; «состав:» on a line of its own (user 07.11),
+   then one line per part. The « · » between them is for screen readers and copied text only. */
+.popover-composition-line {
+  display: block;
+}
+.popover-composition-sep {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .dictionary-form-match {

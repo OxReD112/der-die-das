@@ -910,7 +910,7 @@
     // G57 (user 24.10.2026): «ещё N значений ↓» shows the hidden meanings here, in the popup (the card, or one line of a card of
     // parts); a new word, another variant or another language starts short again.
     let expandedMain = false;
-    const expandedLines = new Set();
+    const expandedLines = new Set(), expandedParts = new Set();
     const moreLabel = (n, ru) => {
       const forms = n % 10 === 1 && n % 100 !== 11 ? "значение" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "значения" : "значений";
       return ru ? `ещё ${n} ${forms}` : `${n} more ${n === 1 ? "meaning" : "meanings"}`;
@@ -959,7 +959,7 @@
       const grammarLine = $("popover-grammar");
       grammarLine.textContent = model.grammar; grammarLine.hidden = !model.grammar;
       content.textContent = "";
-      const full = (expandedMain || expandedLines.size) && candidate && !referencePronoun
+      const full = (expandedMain || expandedLines.size || expandedParts.size) && candidate && !referencePronoun
         ? display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed, all:true}) : null;
       const shown = expandedMain && full && !model.lines ? full : model;
       const moreButton = (n, onClick) => {
@@ -967,13 +967,26 @@
         more.textContent = `${moreLabel(n, ru)} ↓`; more.setAttribute("aria-expanded", "false");
         more.addEventListener("click", onClick); return more;
       };
+      // (user 07.11) a line of parts opens and closes with a chevron: down — «ещё N значений», up — collapse it again.
+      const chevron = up => { const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("class", "popover-chevron"); svg.setAttribute("viewBox", "0 0 12 12"); svg.setAttribute("aria-hidden", "true");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", up ? "M2.5 7.5 6 4l3.5 3.5" : "M2.5 4.5 6 8l3.5-3.5"); svg.append(path); return svg; };
+      const toggleButton = (n, open, text, onClick) => {
+        const button = document.createElement("button"); button.type = "button"; button.className = "popover-more-meanings";
+        const label = open ? (ru ? "свернуть" : "collapse") : moreLabel(n, ru);
+        if (text) button.append(label, "\u00a0"); else { button.setAttribute("aria-label", label); button.title = label; }
+        button.append(chevron(open)); button.setAttribute("aria-expanded", String(open));
+        button.addEventListener("click", onClick); return button;
+      };
       if (shown.segments) appendLabelSegments(content, shown.segments, shown.segmentPrefix);
       // G48 (23.10.2026): a word explained by its parts — every part on a line of its own. G57: a part with more meanings than the
       // two shown has «ещё N значений ↓», which opens the rest of that line here.
       else if (model.lines) model.lines.forEach((line, index) => {
         const open = expandedLines.has(index) && full?.lines?.[index];
         const row = document.createElement("span"); row.className = "popover-formation-line"; row.textContent = open ? full.lines[index].text : line.text;
-        if (!open && line.more > 0) row.append(" ", moreButton(line.more, () => { expandedLines.add(index); expandAndKeepFocus(); }));
+        if (open) row.append("\u00a0", toggleButton(line.more, true, false, () => { expandedLines.delete(index); expandAndKeepFocus(); }));
+        else if (line.more > 0) row.append(" ", toggleButton(line.more, false, true, () => { expandedLines.add(index); expandAndKeepFocus(); }));
         content.append(row);
       });
       else content.textContent = shown.text;
@@ -982,6 +995,23 @@
       if (model.note) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = model.note; content.append(note);
+      }
+      // (advisor 06.11) «состав»: an external word known only in English — its parts, one line each (the lines of the
+      // «Kompositum» card); a part with more meanings than the two shown is a button that opens them in its line.
+      if (model.composition) {
+        const note = document.createElement("small"); note.className = "popover-construction popover-composition";
+        note.append(model.composition.prefix);
+        model.composition.lines.forEach((line, index) => {
+          if (index) { const sep = document.createElement("span"); sep.className = "popover-composition-sep"; sep.textContent = " · "; note.append(sep); }
+          const open = expandedParts.has(index) && full?.composition?.lines?.[index];
+          const row = document.createElement("span"); row.className = "popover-composition-line";
+          row.textContent = open ? full.composition.lines[index].text : line.text;
+          // (user 07.11) a chevron at the end of the part, not an underlined line: down opens its meanings, up closes them
+          if (open) row.append("\u00a0", toggleButton(line.more, true, false, () => { expandedParts.delete(index); expandAndKeepFocus(); }));
+          else if (line.more > 0) row.append("\u00a0", toggleButton(line.more, false, false, () => { expandedParts.add(index); expandAndKeepFocus(); }));
+          note.append(row);
+        });
+        content.append(note);
       }
       content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : locale();
       updateTranslationFade();
@@ -1009,7 +1039,7 @@
         }
         showPronounSummary=reference.isPronoun(candidate) && candidate?.construction?.id !== "recorded-construction";
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null; userConfirmed = true;
-        expandedMain = false; expandedLines.clear();
+        expandedMain = false; expandedLines.clear(); expandedParts.clear();
         $("popover-bookmark").disabled = true;
         renderSelection();
         // Keep choices reachable after selection; remember only this occurrence.
@@ -1087,7 +1117,7 @@
       const language = locale();
       if (request !== lookupRequest || language === renderedLanguage) return;
       renderedLanguage = language;
-      expandedMain = false; expandedLines.clear();
+      expandedMain = false; expandedLines.clear(); expandedParts.clear();
       const revision = ++languageRevision;
       // Repaint immediately; fetching Russian values must not keep English UI
       // frozen or recompute the user's chosen lemma.

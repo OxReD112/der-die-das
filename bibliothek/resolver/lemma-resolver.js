@@ -800,7 +800,8 @@
   //        number:'plural'|null, gerund:boolean, en, entry}]>  (lemma readings form:false, inflected forms form:true)
   //   dict.mayBe(spelling) -> boolean     cheap prefilter (false = surely in no dictionary)
   //   dict.blocked(spelling) -> boolean   an own function word / preposition / adverb card or a verb particle (never a part)
-  //   dict.ru(lemma, pos) -> Promise<string>  the first Russian meaning ('' when there is none)
+  //   dict.ru(lemma, pos) -> Promise<string | {text, labels}>  the Russian meanings ('' when there is none); an external word
+  //        with usage labels gives them too: labels {shown meaning: [codes]} (advisor 06.11: rude meanings of a part)
   //   dict.gender(lemma) -> Promise<'der'|'die'|'das'|null>  one singular gender of an external noun
   //   ctx: {det, defDirect, otherDet, adj, contraction, prep, title, nextNoun, pluralDet, singularDet} (resolver: wordFormationContext)
   function createWordFormation(dict) {
@@ -841,7 +842,11 @@
     async function withRu(rows) {
       await Promise.all(rows.map(r => {
         if (r.ru !== undefined) return null;
-        if (!ruPending.has(r)) ruPending.set(r, dict.ru(r.lemma, r.pos).then(ru => { r.ru = ru; }));
+        if (!ruPending.has(r)) ruPending.set(r, dict.ru(r.lemma, r.pos).then(value => {
+          const ru = typeof value === 'object' && value ? String(value.text || '') : value;
+          r.ru = ru;
+          if (r.ru && value?.labels) r.ruLabels = value.labels;
+        }));
         return ruPending.get(r);
       }));
       return rows;
@@ -885,7 +890,15 @@
     // only after a noun. Ranks: an own word, then an own verb stem (Lese-sessel is lesen, not Lese «harvest»), an external
     // word, a linking element of a word whose form the whole spelling is (Drache(n)-, Küche(n)-), other linking
     // elements, a plural, a dropped -e, an external verb stem.
+    // (advisor 07.11) Bound first parts: a beginning that is no word of its own but a frequent start of compounds, with a fixed
+    // meaning (as the half-suffixes -frei, -los at the end). rück- «назад, обратно; задний» (Rückspiegel, Rückweg, Rückblick) —
+    // not the verb rücken «передвигать» (its form rück); Rücken- (Rückenwind) and Rücke- (Rückewagen, from rücken) stay.
+    // (advisor 07.11) also miss- (Missbrauch), stief- (Stiefmutter), sonder- (Sonderzug, not the verb sondern), fehl- (Fehlstart, not
+    // Fehl «порок»). Not erz- (Erz «руда»: Erzbergbau), mords-, riesen- (registry).
+    const BOUND_FIRST = {rück: {ru: 'назад, обратно; задний', en: 'back, backwards; rear'}, miss: {ru: 'не-, плохо', en: 'mis-, badly'},
+      stief: {ru: 'неродной, сводный', en: 'step-'}, sonder: {ru: 'особый, специальный', en: 'special'}, fehl: {ru: 'ошибочный, неудачный', en: 'wrong, failed'}};
     async function modifier(s, min) {
+      if (BOUND_FIRST[s]) return [{pos: 'Präfix', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, rank: 0, ...BOUND_FIRST[s]}];
       if (dict.blocked(s)) return [];
       await warm(modifierSpellings(s, min));
       const out = [];
@@ -904,7 +917,10 @@
             rank: r.source !== 'main' ? 3.5 : link ? ((await readings(a, ['Nomen'], true)).some(n => n.source === 'main') ? 2.2 : 0.2) : nen ? 0.2 : 0.35});
         if (!link && a.length >= min) {
           for (const r of (await readings(a, ['Nomen'])).filter(r => r.form && r.number === 'plural')) out.push({...r, text: a, link: '', plural: true, rank: 2.5});
-          if (a.length >= 4) for (const r of await readings(a + 'e', ['Nomen'], true)) out.push({...r, text: a, link: '', drop: 'e', rank: 3});
+          // (advisor 07.11) an own noun without its -e comes before the stem of an own verb (0.35) — after a word written as it is
+          // (0.3: Funk- = Funk «радио», not Funke): Straf- = Strafe, End- = Ende
+          // (an own noun also from three letters: End- = Ende)
+          if (a.length >= 3) for (const r of await readings(a + 'e', ['Nomen'], true)) if (r.source === 'main' || a.length >= 4) out.push({...r, text: a, link: '', drop: 'e', rank: r.source === 'main' ? 0.32 : 3});
         }
       }
       out.sort((x, y) => x.rank - y.rank || ownFirst(x, y) || (x.pos === 'Nomen' ? 0 : 1) - (y.pos === 'Nomen' ? 0 : 1));
@@ -968,7 +984,9 @@
       // the fewest linking letters decide only between readings of one cut.
       // A cut into own words only beats a cut with a part only the external dictionary knows (Bad + Straße, not Bad(s) +
       // Trasse); between two cuts into own words (Lebensmittel + Punkt / Leben(s) + Mittelpunkt) nothing decides.
-      if (new Set(s.map(x => x.at[0])).size > 1 && s.some(x => x.parts.every(p => p.source === 'main'))) s = s.filter(x => x.parts.every(p => p.source === 'main'));
+      // (a bound first part — sonder-, rück- — counts as an own word: Sonder + Einheit, not Sonde + Reinheit)
+      const ownPart = p => p.source === 'main' || p.source === 'bound';
+      if (new Set(s.map(x => x.at[0])).size > 1 && s.some(x => x.parts.every(ownPart))) s = s.filter(x => x.parts.every(ownPart));
       const cuts = new Set(s.map(x => x.at[0]));
       if (cuts.size > 1) return null;
       const min = Math.min(...s.map(x => linkLen(x.parts[0])));
@@ -1222,6 +1240,12 @@
         return {compound: c};
       }
       if (!noun) { const d = await nounAdjective(w, ctx); if (d) return {derivation: d}; }
+      // (advisor 07.11) A known whole noun with a diminutive ending comes before a split into parts: Deckbettchen is
+      // Deckbett + -chen, not Deck + Bettchen (also when the base is known only in English: Lämmerschwanz).
+      if (noun && !ctx.title && /(?:chen|lein)s?$/u.test(w)) {
+        const dim = await diminutive(w, ctx);
+        if (dim?.base) return {diminutive: dim};
+      }
       const c = await compound(w, noun, ctx);
       if (c && c.parts) return {compound: c};
       if (noun && !(c && c.ambiguous) && !ctx.title) {
@@ -3501,7 +3525,10 @@
           if (own) return String(own.translation_ru || "");
           try {
             const r = await window.BibliothekRussianTranslations?.lookup(lemma,{Nomen:"noun",Adjektiv:"adj",Verb:"verb"}[pos]);
-            return r ? (r.shown || r.meanings || []).join("; ") : "";
+            // (advisor 06.11) a meaning that is a name (the source marks it: Runkel «Рункель», a town) is no meaning of a part
+            const names = new Set(r?.names || []);
+            const text = r ? (r.shown || r.meanings || []).filter(m => !names.has(m)).join("; ") : "";
+            return r?.labels && text ? {text,labels:r.labels} : text;
           } catch (_) { return ""; }
         }
       };
@@ -3612,7 +3639,7 @@
       const t = tokens[k][0], n = norm(t);
       return /^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(n) || !!determinerFeatures(t) || WORD_FORMATION_DET.test(n) || /^\p{Lu}/u.test(t);
     }
-    async function wordFormationCandidate(word, context) {
+    async function wordFormationCandidate(word, context, options = {}) {
       const spelling = String(word || "");
       if (!context || !Number.isInteger(context.tokenOffset) || spelling.length < 6 || !/^[\p{L}]+$/u.test(spelling) ||
           spelling === spelling.toUpperCase() || !fallback?.wordParts) return null;
@@ -3634,14 +3661,17 @@
       // G68 (user 24.10): a whole word a dictionary knows is never split, in any case (beileibe — «bei Leibe», not Beil + Eibe).
       // (#21: a record that only names the base of a diminutive — täschchen «diminutive of Tasche» — gives that base)
       let dimBase = null;
-      if (lemmas.has(w) || forms.has(w)) return null;
-      if (fallback.hasRecord && await fallback.hasRecord(w)) {
+      if (!options.ignoreRecord && (lemmas.has(w) || forms.has(w))) return null;
+      // (advisor 06.11, (в) composition: the record of the word is known — only its parts are wanted for the line «состав»)
+      if (!options.ignoreRecord && fallback.hasRecord && await fallback.hasRecord(w)) {
         dimBase = fallback.diminutiveBase ? await fallback.diminutiveBase(w) : null;
         if (!dimBase) return null;
       }
       // A capital at the start of a sentence may be a noun or an adjective (Eulenreich war der Wald; Zwergenreich Moria):
       // when both readings exist, no card.
       if (dimBase) ctx.dimBase = dimBase;
+      // ((в) composition: the record already says what the word is — the clause around it need not show it: Am achten Spieltag)
+      if (options.ignoreRecord && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep)) { ctx.bare = false; ctx.name = false; ctx.nameSlot = false; ctx.adj = true; }
       let noun = capital, found = await wordFormationCore.analyse(w,noun,ctx);
       if (found?.ambiguous) return null;
       if (capital && clauseInitial(context.sentence,context.tokenOffset)) {
@@ -3671,7 +3701,7 @@
       }
       if (!found) return null;
       const part = p => ({text:p.text,link:p.link || "",drop:!!p.drop,plural:!!p.plural,stem:!!p.stem,surface:p.surface || p.text,lemma:p.lemma,pos:p.pos,
-        source:p.source,dictionaryId:p.entry?.id || null,ru:p.ru || "",en:p.en || (p.entry ? String(p.entry.translation_en || "") : "")});
+        source:p.source,dictionaryId:p.entry?.id || null,ru:p.ru || "",...(p.ruLabels ? {ruLabels:p.ruLabels} : {}),en:p.en || (p.entry ? String(p.entry.translation_en || "") : "")});
       if (asName) {
         const formation = {kind:"name",parts:found.compound.parts.map(part),lemma:spelling,gender:null,number:null,pos:"Name"};
         const translation = {en:window.BibliothekMeaningDisplay?.formationText?.(formation,"en") || "",ru:window.BibliothekMeaningDisplay?.formationText?.(formation,"ru") || ""};
@@ -11907,6 +11937,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       selection.finish(resolution);
       observe('stage', {stage:'grammar-complete',selected:resolution.selected?.lemma || null});
       await presentResolution(word,context,resolution,phrasesFor);
+      // (advisor 06.11, fresh sample item 3 (в), DRAFT): an external noun / adjective known only in English — its composition from our
+      // parts as a line under the English text («состав: Spiel — игра · Tag — день»); a hint, not a translation.
+      { const sel = resolution.selected;
+        // (Russian interface only: the English one never downloads Russian partitions)
+        if ((window.DeutschTranslation?.getLang?.() || 'en') === 'ru' && sel && sel.source === 'fallback' && !sel.composition && !String(sel.translation?.ru || '').trim() &&
+            String(sel.translation?.en || '').trim() && ['Nomen','Adjektiv'].includes(canonicalPos(sel.pos)) &&
+            // (not a record that names another word — diminutive of / alternative form of / plural of …: its own pointer decides)
+            !/^\s*(?:diminutive|alternative|obsolete|archaic|dated|plural|clipping|abbreviation|form|inflection|misspelling|nonstandard)\b/iu.test(String(sel.translation.en))) {
+          const formed = await wordFormationCandidate(word,{...context},{ignoreRecord:true}).catch(() => null);
+          if (formed?.formation?.kind === 'compound') { const withC = {...sel, composition:formed.formation};
+            resolution.candidates = resolution.candidates.map(c => c === sel ? withC : c); resolution.selected = withC;
+            if (resolution.preferred === sel) resolution.preferred = withC; }
+        }
+        // (advisor 07.11) a diminutive whose base is known only in English (Lämmerschwänzchen — Lämmerschwanz «lamb tail»): the
+        // «состав» of the base, by the same function (Lamm — ягнёнок · Schwanz — хвост)
+        const base = sel?.formation?.kind === 'diminutive' && sel.formation.parts?.length === 1 ? sel.formation.parts[0] : null;
+        if ((window.DeutschTranslation?.getLang?.() || 'en') === 'ru' && base && !sel.composition && !String(base.ru || '').trim() && String(base.en || '').trim()) {
+          const baseWord = String(base.lemma || '').charAt(0).toUpperCase() + String(base.lemma || '').slice(1);
+          const formed = await wordFormationCandidate(baseWord,{...context},{ignoreRecord:true}).catch(() => null);
+          if (formed?.formation?.kind === 'compound') { const withC = {...sel, composition:formed.formation};
+            resolution.candidates = resolution.candidates.map(c => c === sel ? withC : c); resolution.selected = withC;
+            if (resolution.preferred === sel) resolution.preferred = withC; }
+        } }
       return resolution;
     }
     // B6 (15.10.2026): a selected verb card whose clicked spelling is one of its
