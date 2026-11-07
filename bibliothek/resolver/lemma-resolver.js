@@ -4648,11 +4648,17 @@
     // modifiers before the noun — rote oder weiße Shorts, der oberen und unteren Temperatur (the second one by its shape only when the
     // noun follows right after it: niedrigen) —, or two parallel noun phrases with a determiner each — der Mehringplatz und der
     // Blücherplatz (not Meister und die Gesellen: review 22.10). limit is the last token the noun may stand at.
+    // (advisor 07.11, from the #36 count: a pair word opens both halves of one phrase — zwischen 1978 und 1985, zwischen der
+    // energetischen und der stofflichen Nutzung, sowohl durch die Luft als auch durch das Erdreich, weder … noch, entweder … oder:
+    // the second half opens no new part). The opener earlier in the same part, no verb form, mark or other coordinator between, and
+    // after the joining word a noun phrase start (a determiner, a number, a preposition, a declined modifier or a capital noun).
+    const PAIR_OPENERS = {und:"zwischen", als:"sowohl", noch:"weder", oder:"entweder"};
     function nounPhrasePair(sentence, tokens, k, limit = tokens.length - 1) {
       const p = k - 1;
-      if (p < 0 || k + 1 >= tokens.length || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[k][0]))) return false;
       const w = i => norm(tokens[i][0]);
       const verbal = i => (forms.get(w(i)) || []).some(e => e.type === "Verb") || (verbAnalyses.get(w(i)) || []).length > 0;
+      if (p >= 0 && k + 1 < tokens.length && PAIR_OPENERS[w(k)] && pairOpened(sentence, tokens, k, verbal)) return true;
+      if (p < 0 || k + 1 >= tokens.length || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[k][0]))) return false;
       const noun = i => i <= limit && /^\p{Lu}/u.test(tokens[i][0]) && !clauseInitial(sentence, tokens[i].index) && !prepositions.has(w(i));
       const modifier = i => i <= limit && /^\p{Ll}/u.test(tokens[i][0]) && (ownModifierForm(tokens[i][0]) || adjectivalForm(tokens[i][0])) &&
         /(?:e|en|er|es|em)$/u.test(w(i)) && !verbal(i) && !DETERMINER_WORD.test(w(i));
@@ -4660,6 +4666,29 @@
         !prepositions.has(w(i)) && !(forms.get(w(i)) || []).some(e => !["Adjektiv","Adverb"].includes(e.type));
       if (modifier(p) && (modifier(k+1) || shape(k+1) && noun(k+2))) { for (let i = k+2; i <= limit; i++) if (noun(i)) return true; }
       return noun(p) && p > 0 && DETERMINER_WORD.test(w(p-1)) && DETERMINER_WORD.test(w(k+1)) && (noun(k+2) || modifier(k+2) && noun(k+3));
+    }
+    function pairOpened(sentence, tokens, k, verbal) {
+      const w = i => norm(tokens[i][0]), opener = PAIR_OPENERS[w(k)];
+      // (numbers are no tokens: zwischen 1978 und 1985 — a gap of spaces and numbers is plain, and a number after the joining word
+      // starts the second half)
+      const gapOf = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
+      const plain = (a,b) => /^\s+$/u.test(gapOf(a,b).replace(/\d+(?:[.,:]\d+)*/gu," "));
+      const number = (a,b) => /\d/u.test(gapOf(a,b));
+      let o = -1;
+      for (let i = k-1; i >= 0 && i >= k-10; i--) {
+        if (!plain(i,i+1)) return false;
+        if (w(i) === opener) { o = i; break; }
+        if (COORDINATORS_WITHOUT_COMMA.includes(w(i)) || ["als","noch"].includes(w(i))) return false;
+        if (/^\p{Ll}/u.test(tokens[i][0]) && verbal(i) && !DETERMINER_WORD.test(w(i))) return false;
+      }
+      if (o < 0 || o === k-1 && !number(o,k) || !plain(k,k+1)) return false;
+      const j = w(k) === "als" ? (w(k+1) === "auch" && k+2 < tokens.length && plain(k+1,k+2) ? k+2 : -1) : k+1;
+      if (j < 0) return false;
+      if (number(j-1,j)) return true;
+      const t = tokens[j][0];
+      if (/^\p{Ll}/u.test(t) && verbal(j) && !DETERMINER_WORD.test(w(j)) && !prepositions.has(w(j))) return false;
+      return DETERMINER_WORD.test(w(j)) || /^\d/u.test(t) || prepositions.has(w(j)) || /^\p{Lu}/u.test(t) ||
+        /^\p{Ll}\p{L}*(?:e|en|er|es|em)$/u.test(t);
     }
     // P8 brackets (one detector for the chains and the reflexive search — advisor 07.11): a bracket opening after token a and closing
     // after token b, at most 12 tokens, no other bracket inside (commas, colons, points and quotes inside belong to it — Architekten
@@ -4796,6 +4825,18 @@
       // skipped like the one between dashes: the clause goes on after it and the words inside never compete.
       const quoteJoin = new Set(), titles = quotedTitles(sentence,tokens,gap), parens = parenthesisSpans(sentence,tokens);
       const commaJoin = new Set();
+      // (advisor 07.11, from the #36 count: «nicht nur …, sondern auch …» is one pair too — the comma right before sondern auch is no
+      // boundary when nicht nur stands earlier in the same part, with no verb form and no other mark between: wird nicht nur von
+      // Charon, sondern auch von Pluto umkreist)
+      for (let a = 2; a+2 < tokens.length; a++) {
+        if (!/^\s*,\s*$/u.test(gapAfter(a)) || norm(tokens[a+1][0]) !== "sondern" || norm(tokens[a+2][0]) !== "auch" || !/^\s+$/u.test(gapAfter(a+1))) continue;
+        for (let i = a; i >= 1 && i >= a-10; i--) {
+          if (i < a && !/^\s+$/u.test(gapAfter(i).replace(/\d+(?:[.,:]\d+)*/gu," "))) break;
+          const v = norm(tokens[i][0]);
+          if (/^\p{Ll}/u.test(tokens[i][0]) && !DETERMINER_WORD.test(v) && ((forms.get(v) || []).some(e => e.type === "Verb") || (verbAnalyses.get(v) || []).length)) break;
+          if (v === "nur" && norm(tokens[i-1][0]) === "nicht" && /^\s+$/u.test(gapAfter(i-1)) && i < a) { commaJoin.add(a); break; }
+        }
+      }
       const OPEN = /^\s*[(„»“"]\s*$/u, CLOSE = /^\s*[)“«”"]\s*$/u, pairOf = {"(":")","„":"“","»":"«","“":"”","\"":"\""};
       for (let a = 0; a+2 < tokens.length; a++) {
         // (numbers are no tokens: Intelligence 5) — the digits stand in the gap)
@@ -4852,7 +4893,17 @@
         // Verb + preposition pairs keep the strict clause: a preposition after und belongs to a noun as often as to
         // the verb (einen Handel mit Töpfen und irdenem Geschirr anfangen — mit belongs to Handel).
         if (consumer === 'verbPrepositionLink') return false;
+        if (w === "sondern" && p === k-1 && commaJoin.has(k-1) && norm(tokens[k+1]?.[0] ?? "") === "auch") return true;
         if (!joinWords.has(w) || k < 1 || k+1 >= tokens.length || !(p !== k-1 || connected(k-1,k)) || !connected(k,k+1)) return false;
+        // (advisor 07.11, #36: the second half of a pair — zwischen 1978 und 1985, sowohl … als auch … — opens no new part)
+        // (run 07.11: not when a finite-only verb follows in the second half — … -- auf den Dünen zwischen Strand und Lagune wuchsen …:
+        // that is a part of its own)
+        if (p === k-1 && PAIR_OPENERS[w] && pairOpened(sentence,tokens,k,i => (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Verb") || (verbAnalyses.get(norm(tokens[i][0])) || []).length > 0)) {
+          let finiteAfter = false;
+          for (let i = k+1; i < tokens.length && connected(i-1,i); i++) { const rows = verbAnalyses.get(norm(tokens[i][0])) || [];
+            if (/^\p{Ll}/u.test(tokens[i][0]) && rows.some(a => a.kind === "finite") && !rows.some(a => a.kind === "participle" || a.kind === "infinitive")) { finiteAfter = true; break; } }
+          if (!finiteAfter) return true;
+        }
         const next = norm(tokens[k+1][0]);
         if (subjectWords.has(next) || ["ob","auch","wenn","dass","daß","wie","wo","wohin","woher","was","wer","warum","weshalb","wann","weil","da","damit","sobald","bevor","nachdem","obwohl","während","sondern","denn"].includes(next)) return false;
         // P4 / T4 (links chat, 26.10.2026): two participles joined by und / oder before a closing werden (gequält und getötet werden,
