@@ -1026,7 +1026,7 @@ function updateBack() {
         // right edge = the right edge of Home's tiles (iPad upright: the 600 column inside the Bibliothek's 720)
         ":root{--dock-right:max(24px,calc((100vw - 600px) / 2 - (100vw - min(100vw, 720px)) / 2))}" +
         ".library-actions .library-add-toggle{left:auto!important;right:var(--dock-right)!important}" +
-        ".library-screen .library-actions .library-view-toggle{right:calc(var(--dock-right) + 62px)!important}" +
+        ".library-screen .library-actions .library-view-toggle{right:calc(var(--dock-right) + 54px)!important}" +
         "@media (max-height:700px){.empty-mark{height:clamp(110px,20dvh,230px)!important}.empty-library{padding-top:28px!important}}" +
         ".library-screen .reader-toast{bottom:calc(env(safe-area-inset-bottom) + 90px)!important}";
       doc.head.appendChild(st);

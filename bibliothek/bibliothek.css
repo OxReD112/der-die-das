@@ -2689,3 +2689,25 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 .library-add-toggle svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
 .library-bookshelf .arrow { display: inline-grid; place-items: center; }
 .library-bookshelf .caption-actions .book-delete svg { width: 18px; height: 18px; }
+
+/* 07.11 (design chat): the windows of Bibliothek like the app's windows (components/deutsch-ui-v1.css .ui-window):
+   corners 26, sides 18, the round × 11 px from the top and 14 px from the right edge of its card. */
+.paste-dialog { position: relative; padding: 14px 18px 18px; border-radius: 26px; }
+.paste-dialog-heading { padding-right: 28px; min-height: 24px; }
+.paste-dialog-heading .ui-close { position: absolute; top: 11px; right: 14px; margin: 0; }
+.data-sources { padding: 14px 18px 18px; border-radius: 26px; }
+.data-sources h2 { margin: 0 40px 22px 0; line-height: 1.2; }
+.sources-close.ui-close { position: absolute; top: 11px; right: 14px; float: none; margin: 0; }
+.sheet-card { padding-left: 18px; padding-right: 18px; border-radius: 26px 26px 0 0; }
+/* the sheet's × is sticky (stays in view on a long card); Chrome / Safari count its top from inside the card's padding */
+.sheet-close.ui-close { top: -1px; right: auto; margin-top: -1px; margin-right: -4px; }
+.text-settings { border-radius: 26px 26px 0 0; padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+.text-settings-header { position: relative; padding-right: 28px; min-height: 30px; }
+.text-settings-close.ui-close { position: absolute; top: -3px; right: -4px; margin: 0; }
+@media (min-width: 700px) {
+  .sheet-card { border-radius: 26px; }
+  .text-settings { border-radius: 26px; padding: 14px 18px 10px; }
+}
+/* the «+» of the shelf: a round button like Home's (tile fill, soft shadow, no border), centred on the capsule's line (home.js places it and the view toggle at the right) */
+body.library-screen .reader .library-add-toggle { width: 44px; height: 44px; border: 0; background: var(--tile-surface); box-shadow: var(--lift-highlight), var(--lift-shadow); }
+.library-actions .library-add-toggle { left: calc(50% - 22px); bottom: 4px; }
