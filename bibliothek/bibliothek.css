@@ -2731,3 +2731,25 @@ body.library-screen .reader .library-add-toggle { width: 44px; height: 44px; bor
 .text-settings-toggle { border-radius: 50%; }
 .library-add-menu { border-radius: 18px; }
 body.library-screen .reader .library-add-menu button { border-radius: 12px; }
+
+/* 07.11 (design chat): the last two icons of Bibliothek on the one icon line of the app (1.2 px at any size) */
+.contents-toggle svg *,
+.library-view-toggle svg * { stroke-width: 1.2px !important; vector-effect: non-scaling-stroke; }
+
+/* 07.11 (design chat): mint means only „right“ in the app — the states of Bibliothek are neutral, like Home's and the
+   exercises' (progress fill --muted, a chosen / pressed thing in the text colour, a field in focus a neutral line).
+   Kept mint (Alena 07.11): the chain of a marked word — the pressed bookmark in the popover, the counter in the header
+   while Meine Wörter is open, the marked words in the text. Also kept: the reading-form toggle (tested colours), the glow behind the shelf (shared with Home), focus rings. */
+.chapter-progress-track span { background: var(--muted); }
+.text-size-row input[type="range"]::-webkit-slider-runnable-track { background: linear-gradient(to right, var(--muted) var(--fill), var(--toggle-track) var(--fill)); }
+.text-size-row input[type="range"]::-moz-range-track { background: linear-gradient(to right, var(--muted) var(--fill), var(--toggle-track) var(--fill)); }
+.contents-entry[aria-current] > span:first-child { color: var(--text); }
+.contents-entry[aria-current]::before,
+.book-marker::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.08) 1px, transparent 2.5px), var(--muted); }
+.reading-body:has(#contents-dialog[open]) .contents-toggle,
+.toast-action { color: var(--text); }
+.lemma-choice[aria-pressed="true"] { border-color: var(--text); }
+.vocabulary-dialog input[type="checkbox"]:checked,
+.vocabulary-dialog input[type="checkbox"]:indeterminate { border-color: var(--text); background: var(--text); }
+.paste-form input:focus,
+.paste-form textarea:focus { border-color: color-mix(in srgb, var(--text) 28%, transparent); }
