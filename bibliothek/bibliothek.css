@@ -2711,3 +2711,23 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 /* the «+» of the shelf: a round button like Home's (tile fill, soft shadow, no border), centred on the capsule's line (home.js places it and the view toggle at the right) */
 body.library-screen .reader .library-add-toggle { width: 44px; height: 44px; border: 0; background: var(--tile-surface); box-shadow: var(--lift-highlight), var(--lift-shadow); }
 .library-actions .library-add-toggle { left: calc(50% - 22px); bottom: 4px; }
+
+/* 07.11 (design chat): corners by role, like the rest of the app — a wide button 18, a button or choice in a row 14
+   (a block inside it: 14 − its padding), a menu / small card 18, an icon button round. Drawn covers, spines and
+   the marks in the book's text keep their small corners. */
+.word-popover { border-radius: 18px; }
+@media (max-width: 699px) { .word-popover { border-radius: 18px; } }
+.primary-action,
+.library-actions .primary-action,
+.dictionary-add,
+#vocabulary-add,
+.vocabulary-main,
+.vocabulary-manual-copy textarea { border-radius: 18px; }
+.next-chapter-card,
+.lemma-choice { border-radius: 14px; }
+.text-segments { border-radius: 14px; }
+.text-segments button { border-radius: 11px; }
+.contents-toggle,
+.text-settings-toggle { border-radius: 50%; }
+.library-add-menu { border-radius: 18px; }
+body.library-screen .reader .library-add-menu button { border-radius: 12px; }
