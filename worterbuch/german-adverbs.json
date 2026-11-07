@@ -5385,5 +5385,17 @@
     "usage_note_ru": "Кому, чему — Dativ, часто после слова: dem Vater entgegen — навстречу отцу; entgegen allen Erwartungen / allen Erwartungen entgegen — вопреки всем ожиданиям. Часть глагола: entgegenkommen, entgegennehmen.",
     "usage_note_en": "To whom, to what — dative, often after the word: dem Vater entgegen — to meet his father; entgegen allen Erwartungen / allen Erwartungen entgegen — contrary to all expectations. Part of a verb: entgegenkommen, entgegennehmen.",
     "example_cloze": "Die Kinder liefen dem Vater {{c1::entgegen}}."
+  },
+  {
+    "id": "adverb-455",
+    "word": "mit",
+    "translation_ru": "тоже, также; вместе (с другими)",
+    "translation_en": "also, too; along (with others)",
+    "example_de": "Bei der Gründung des Vereins war ich mit dabei.",
+    "example_ru": "При основании клуба я тоже присутствовал.",
+    "example_en": "I was there too when the club was founded.",
+    "usage_note_ru": "Не путать с предлогом mit + Dativ (mit dem Bus). Наречие стоит без существительного, часто перед dabei, dazu, daran: Das gehört mit dazu. — Это тоже сюда относится. Er schluckte ihn mit hinab. — Он проглотил его вместе (с остальным). Kommst du mit? — это глагол mitkommen.",
+    "usage_note_en": "Do not confuse with the preposition mit + dative (mit dem Bus). The adverb stands without a noun, often before dabei, dazu, daran: Das gehört mit dazu. — That is part of it too. Er schluckte ihn mit hinab. — He swallowed it along with the rest. Kommst du mit? is the verb mitkommen.",
+    "example_cloze": "Bei der Gründung des Vereins war ich {{c1::mit}} dabei."
   }
 ]

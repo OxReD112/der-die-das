@@ -123043,5 +123043,99 @@
         "Sie": "schielen Sie an"
       }
     }
+  },
+  {
+    "id": "verb-2753",
+    "infinitive": "mitansehen",
+    "translation_ru": "смотреть (не вмешиваясь), быть свидетелем; терпеть",
+    "translation_en": "to watch (without stepping in), to witness; to put up with",
+    "auxiliary": "haben",
+    "usage_note_ru": "Отделяются обе части: sieht mit an, sah mit an, hat mitangesehen (также mit angesehen). Часто с nicht / kaum: Ich kann das nicht länger mit ansehen. — Я не могу больше на это смотреть.",
+    "usage_note_en": "Both parts separate: sieht mit an, sah mit an, hat mitangesehen (also mit angesehen). Often with nicht / kaum: Ich kann das nicht länger mit ansehen. — I can't stand watching this any longer.",
+    "example_de": "Die Nachbarn sahen hilflos mit an, wie das Feuer die Scheune zerstörte.",
+    "example_cloze": "Die Nachbarn {{c1::sahen}} hilflos {{c1::mit an}}, wie das Feuer die Scheune zerstörte.",
+    "example_ru": "Соседи беспомощно смотрели, как огонь уничтожает сарай.",
+    "example_en": "The neighbours watched helplessly as the fire destroyed the barn.",
+    "perfect_form": "haben mitangesehen",
+    "forms": null,
+    "separable_prefix": "mitan",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "sehe mit an",
+        "du": "siehst mit an",
+        "er/sie/es": "sieht mit an",
+        "wir": "sehen mit an",
+        "ihr": "seht mit an",
+        "sie": "sehen mit an"
+      },
+      "Präteritum": {
+        "ich": "sah mit an",
+        "du": "sahst mit an",
+        "er/sie/es": "sah mit an",
+        "wir": "sahen mit an",
+        "ihr": "saht mit an",
+        "sie": "sahen mit an"
+      },
+      "Konjunktiv II": {
+        "ich": "sähe mit an",
+        "du": "sähest mit an",
+        "er/sie/es": "sähe mit an",
+        "wir": "sähen mit an",
+        "ihr": "sähet mit an",
+        "sie": "sähen mit an"
+      },
+      "Imperativ": {
+        "du": "sieh mit an",
+        "ihr": "seht mit an",
+        "Sie": "sehen Sie mit an"
+      }
+    }
+  },
+  {
+    "id": "verb-2754",
+    "infinitive": "mitanhören",
+    "translation_ru": "слышать (невольно), слушать",
+    "translation_en": "to overhear, to listen (to)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Отделяются обе части: hört mit an, hörte mit an, hat mitangehört (также mit angehört). Er hörte das Gespräch mit an. — Он невольно слышал разговор. Также «терпеть, выслушивать»: Das kann ich mir nicht mehr mit anhören.",
+    "usage_note_en": "Both parts separate: hört mit an, hörte mit an, hat mitangehört (also mit angehört). Er hörte das Gespräch mit an. — He overheard the conversation. Also 'to put up with hearing': Das kann ich mir nicht mehr mit anhören.",
+    "example_de": "Durch die dünne Wand hörten wir jeden Streit der Nachbarn mit an.",
+    "example_cloze": "Durch die dünne Wand {{c1::hörten}} wir jeden Streit der Nachbarn {{c1::mit an}}.",
+    "example_ru": "Через тонкую стену мы слышали каждую ссору соседей.",
+    "example_en": "Through the thin wall we overheard every one of the neighbours' rows.",
+    "perfect_form": "haben mitangehört",
+    "forms": null,
+    "separable_prefix": "mitan",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "höre mit an",
+        "du": "hörst mit an",
+        "er/sie/es": "hört mit an",
+        "wir": "hören mit an",
+        "ihr": "hört mit an",
+        "sie": "hören mit an"
+      },
+      "Präteritum": {
+        "ich": "hörte mit an",
+        "du": "hörtest mit an",
+        "er/sie/es": "hörte mit an",
+        "wir": "hörten mit an",
+        "ihr": "hörtet mit an",
+        "sie": "hörten mit an"
+      },
+      "Konjunktiv II": {
+        "ich": "hörte mit an",
+        "du": "hörtest mit an",
+        "er/sie/es": "hörte mit an",
+        "wir": "hörten mit an",
+        "ihr": "hörtet mit an",
+        "sie": "hörten mit an"
+      },
+      "Imperativ": {
+        "du": "hör mit an",
+        "ihr": "hört mit an",
+        "Sie": "hören Sie mit an"
+      }
+    }
   }
 ]

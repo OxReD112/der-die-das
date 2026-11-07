@@ -4067,7 +4067,10 @@
         // (advisor 06.11, WN batch 49: not a list here — the G47 class g47Particle (links chat, L39), so a new adverb card of such a
         // particle does not break it again: ging fort zum Tor stays fortgehen, ging zurück zum Haus — zurückgehen; + nieder and hindurch,
         // which the old pattern had and the G47 class has not: blickte nieder auf ihren Fuß)
-        if ((forms.get(norm(tokens[j][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
+        // (cards chat 07.11, WN batch 52: mit has an adverb card of its own, «тоже; вместе» — the meaning it carries inside mitnehmen,
+        // mitgehen …; it does not close the bracket for the adverb: nahm er nicht mit in den Wald, ging mit zu der Schatzkammer,
+        // nehme dich mit fort, komm doch mit hinaus stay the verbs)
+        if (norm(tokens[j][0]) !== "mit" && (forms.get(norm(tokens[j][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
             !(prepositions.has(norm(tokens[j+1]?.[0] ?? "")) && (g47Particle(norm(tokens[j][0])) || ["nieder","hindurch"].includes(norm(tokens[j][0]))) &&
               // (advisor 06.11: not a particle that opens the piece after a comma — …machten, zurück durch die Mauer: the verb's part
               // ends at the comma; zurück is the adverb «назад»)
@@ -11224,6 +11227,84 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return {candidates,removed,lexemes:state.lexemes};
     }
+    // (advisor 07.11, TWO_PARTICLES_COUNT) Two particles in a row at the end of a part (kroch immer weiter zurück, fragt mich nicht
+    // weiter aus): when exactly one of them makes a dictionary verb with the verb of the part (the neighbour is read as that verb —
+    // zurück- + kriechen, ausfragen) and the clicked one does not (weiterkriechen, weiterfragen are no words), the clicked one is its
+    // own adverb card. Both make a verb (mit an: mitanhören / anhören; mit fort: mitnehmen / fortnehmen) — the window stays.
+    // (advisor 07.11) after the whole pipeline: a window of the clicked word between its own adverb card and other readings becomes
+    // that adverb card (twoParticlesAdverb)
+    async function twoParticlesStep(word, context, result, pipeline) {
+      if (context?.twoParticleProbe || !result || result.selected) return result;
+      const adverb = await twoParticlesAdverb(word,context,result.candidates || [],pipeline).catch(() => null);
+      if (!adverb) return prepositionFirst(word,context,result);
+      return keepDecision(result,{...result,selected:adverb.candidate,preferred:adverb.candidate,status:'resolved',evidence:adverb.evidence,
+        candidates:[adverb.candidate,...(result.candidates || []).filter(c => c !== adverb.candidate)]},
+        {outcome:'selected',rule:'two-particles-adverb',reason:'two-particles-adverb'});
+    }
+    // (advisor 07.11, r25 U-H25: a window with an own preposition and an own adverb card of the word — mit «с» / «тоже, вместе» —
+    // lists the preposition first when a noun phrase follows right after the word: an article, dessen / deren, a possessive, an
+    // adjective or a noun — Probleme mit deren Tochter; otherwise the order stays)
+    function prepositionFirst(word, context, result) {
+      const list = result?.candidates || [];
+      if (result.selected || !Number.isInteger(context?.tokenOffset)) return result;
+      const w = norm(word), mine = c => c.source === 'main' && norm(c.lemma) === w;
+      const prep = list.findIndex(c => mine(c) && ['preposition','Präposition','prep'].includes(canonicalPos(c.pos)));
+      const adv = list.findIndex(c => mine(c) && canonicalPos(c.pos) === 'Adverb');
+      if (prep < 0 || adv < 0 || prep < adv) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'prepositionFirst');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0 || i+1 >= tokens.length || !/^\s+$/u.test(sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index))) return result;
+      const t = tokens[i+1][0], n = norm(t), own = forms.get(n) || [];
+      const nounPhrase = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|dessen|deren)$/u.test(n) ||
+        /^(?:mein|dein|sein|ihr|unser|euer|eur|Ihr)(?:e|en|em|er|es)?$/iu.test(t) ||
+        own.some(e => e.type === 'Adjektiv') || /^\p{Lu}/u.test(t) && (own.some(e => e.type === 'Nomen') || !own.length);
+      if (!nounPhrase) return result;
+      const next = [...list]; const [p] = next.splice(prep,1); next.splice(adv,0,p);
+      return keepDecision(result,{...result,candidates:next});
+    }
+    // (the diagnostic decision of a resolution is non-enumerable — a copy keeps it, with the rule of the step that chose)
+    function keepDecision(from, to, change = null) {
+      if (from && Object.prototype.hasOwnProperty.call(from,'decision'))
+        Object.defineProperty(to,'decision',{value:change ? {...from.decision,...change} : from.decision,enumerable:false,writable:true,configurable:true});
+      return to;
+    }
+    async function twoParticlesAdverb(word, context, candidates, pipeline) {
+      if (!Number.isInteger(context?.tokenOffset)) return null;
+      const w = norm(word);
+      if (!WORD_FORMATION_PARTICLES.has(w) && !['weiter','mit','wieder','zusammen','fest'].includes(w)) return null;
+      const adverb = candidates.find(c => c.source === 'main' && canonicalPos(c.pos) === 'Adverb' && norm(c.lemma) === w);
+      if (!adverb) return null;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'twoParticlesAdverb');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return null;
+      const gap = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
+      const after = k => sentence.slice(tokens[k].index+tokens[k][0].length);
+      for (const j of [i+1,i-1]) {
+        if (j < 0 || j >= tokens.length) continue;
+        const other = tokens[j][0], o = norm(other);
+        if (!/^\p{Ll}/u.test(other) || !WORD_FORMATION_PARTICLES.has(o) || !/^\s+$/u.test(gap(Math.min(i,j),Math.max(i,j)))) continue;
+        // (the pair closes its part: a punctuation mark or the end right after it)
+        if (!/^\s*(?:[.,;:!?»«"„“”'‚‘’)…–—]|$)/u.test(after(Math.max(i,j)))) continue;
+        let probe;
+        try { probe = await pipeline(other,{...context,tokenOffset:tokens[j].index,twoParticleProbe:true}); } catch (_) { continue; }
+        const v = probe?.selected || null;
+        if (!v || canonicalPos(v.pos) !== 'Verb') continue;
+        const base = v.formation?.kind === 'particle-verb' && norm(v.formation.parts?.[0]?.lemma || '') === o ? norm(v.formation.parts?.[1]?.lemma || '') :
+          norm(v.lemma || '').startsWith(o) ? norm(v.lemma).slice(o.length) : '';
+        if (!base || base.length < 3) continue;
+        // (the clicked particle with the same verb is no dictionary verb — else both make a verb: the window)
+        // (nor with the whole verb of the other particle: sah ruhig mit an — mitansehen, hörte das mit an — mitanhören; advisor 07.11:
+        // no list here — the gap is in the data, the cards mitansehen / mitanhören are ordered from the cards chat)
+        for (const whole of [w+base, w+norm(v.lemma || '').replace(/^sich\s+/u,'')]) {
+          // (our own cards too — lexicalLookup reads the external dictionary only: mitansehen, mitanhören, WN batch 54)
+          if ((forms.get(whole) || []).some(e => e.type === 'Verb' && norm(e.word).replace(/^sich\s+/u,'') === whole)) return null;
+          const facts = await lexicalLookup(whole,'twoParticlesAdverb').catch(() => []);
+          if (facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb')) return null;
+        }
+        return {candidate:adverb,evidence:'two-particles-adverb'};
+      }
+      return null;
+    }
     async function resolveInternal(word, context) {
       syncSourceVersion();
       if(context){
@@ -14373,7 +14454,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
