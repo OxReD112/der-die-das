@@ -98,6 +98,7 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       </div>
     </div>
     <button class="primary" id="play" type="button">Загрузить голос и прочитать</button>
+    <button class="chip" id="replay" type="button" hidden>Проиграть ещё раз</button>
     <div class="bar" id="bar" hidden><div id="barFill"></div></div>
     <div class="status" id="status" role="status"></div>
   </section>
@@ -295,20 +296,45 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
     return out.audio.data.slice(0, len);
   }
 
+  // iOS Safari only starts sound after a tap; a long wait can leave the audio context stuck.
+  function unlockAudio() {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    try { audioCtx.resume(); } catch (e) {}
+    try {
+      const b = audioCtx.createBuffer(1, 1, 22050), s = audioCtx.createBufferSource();
+      s.buffer = b; s.connect(audioCtx.destination); s.start(0);
+    } catch (e) {}
+  }
   async function playPcm(pcm) {
+    if (audioCtx.state !== "running") {
+      try { await Promise.race([audioCtx.resume(), new Promise(r => setTimeout(r, 800))]); } catch (e) {}
+    }
+    if (audioCtx.state !== "running") return false;
     const buf = audioCtx.createBuffer(1, pcm.length, 24000);
     buf.copyToChannel(pcm, 0);
     const src = audioCtx.createBufferSource();
     src.buffer = buf; src.connect(audioCtx.destination);
-    await new Promise(r => { src.onended = r; src.start(); });
+    await new Promise(r => {
+      src.onended = r;
+      setTimeout(r, buf.duration * 1000 + 1500); // never wait forever
+      src.start();
+    });
+    return true;
   }
+  let lastPcm = [];
+  $("replay").addEventListener("click", async () => {
+    if (!lastPcm.length) return;
+    unlockAudio();
+    setStatus("Проигрываю…");
+    for (const p of lastPcm) { if (!(await playPcm(p))) { setStatus("Браузер не дал включить звук. Проверьте громкость и беззвучный режим.", true); return; } }
+    setStatus("Готово.");
+  });
 
   $("play").addEventListener("click", async () => {
     if (busy) return;
     busy = true; $("play").disabled = true;
     try {
-      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === "suspended") await audioCtx.resume();
+      unlockAudio();
       if (!session) await load();
       $("play").textContent = "Прочитать";
       const { phon, missing } = toPhonemes($("text").value);
@@ -320,8 +346,8 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
       setStatus("Синтез…");
       const t0 = performance.now();
       // synthesize the first piece, then keep one piece ahead while playing
-      let next = synth(parts[0], speed), synthMs = 0, audioSec = 0, first = 0;
-      const stats = [];
+      let next = synth(parts[0], speed), synthMs = 0, audioSec = 0, first = 0, blocked = false;
+      const stats = []; lastPcm = []; $("replay").hidden = true;
       for (let i = 0; i < parts.length; i++) {
         const s0 = performance.now();
         const pcm = await next;
@@ -334,12 +360,14 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
         stats.push(`${i + 1}: ${(pcm.length / 24000).toFixed(2)} с, пик ${peak.toFixed(2)}, громк. ${rms.toFixed(3)}${bad ? `, битых ${bad}` : ""}`);
         $("mParts").textContent = stats.join("; ");
         next = i + 1 < parts.length ? synth(parts[i + 1], speed) : null;
+        lastPcm.push(pcm);
         setStatus("Читаю…");
-        await playPcm(pcm);
+        if (!(await playPcm(pcm))) blocked = true;
       }
       $("mSynth").textContent = `до первого звука ${(first / 1000).toFixed(2)} с, кусков: ${parts.length}`;
       $("mAudio").textContent = `${audioSec.toFixed(2)} с`;
-      setStatus("Готово.");
+      $("replay").hidden = false;
+      setStatus(blocked ? "Звук готов, но браузер его не включил. Нажмите «Проиграть ещё раз»." : "Готово.");
     } catch (e) {
       console.error(e);
       setStatus("Ошибка: " + (e && e.message ? e.message : e), true);
