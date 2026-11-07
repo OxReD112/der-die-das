@@ -288,7 +288,7 @@ dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap:
     const out = await session.run({
       input_ids: new ort.Tensor("int64", inp, [1, MAX_IDS]),
       attention_mask: new ort.Tensor("int64", mask, [1, MAX_IDS]),
-      ref_s: new ort.Tensor("float32", voice, [1, 256]),
+      ref_s: new ort.Tensor("float32", voice.slice(), [1, 256]), // a copy: the worker takes over the buffer it is given
       speed: new ort.Tensor("float32", new Float32Array([speed]), [1]),
       random_phases: new ort.Tensor("float32", phases, [1, 9]),
     });
