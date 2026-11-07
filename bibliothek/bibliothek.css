@@ -136,7 +136,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .reader-heading h1 {
   margin: 0;
   color: var(--text);
-  font-size: 25px;
+  font-size: 28px;
   line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -418,7 +418,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   overflow: hidden;
   overflow-wrap: anywhere;
   color: var(--text);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 18px;
   font-weight: 650;
 }
@@ -426,7 +426,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   display: block;
   margin-top: 4px;
   color: var(--secondary-text);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 16px;
   overflow-wrap: anywhere;
 }
@@ -484,7 +484,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .empty-library h2 {
   margin: 0;
   color: var(--text);
-  font-size: 19px;
+  font-size: 20px;
 }
 .empty-library p {
   max-width: 300px;
@@ -588,7 +588,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border-radius: 999px;
   background: var(--window-card);
   color: var(--text);
-  font-size: 13px;
+  font-size: 14px;
   box-shadow: var(--lift-shadow);
 }
 .word-popover.meaning-thanks {
@@ -645,7 +645,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: transparent;
   color: var(--muted);
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
   text-align: left;
   text-decoration: underline;
@@ -671,7 +671,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 }
 .data-sources h2 {
   margin: 0 40px 22px 0;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.25;
 }
 .data-sources h3 {
@@ -716,7 +716,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .popover-word {
   margin: 1px 0 5px;
   color: var(--text);
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 700;
 }
@@ -747,7 +747,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .lemma-choice-grammar {
   margin-top: 1px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 .lemma-choice-text {
   margin-top: 2px;
@@ -921,7 +921,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .dictionary-headword {
   margin: 0 44px 5px 0;
   color: var(--text);
-  font-size: 25px;
+  font-size: 28px;
   line-height: 1.2;
 }
 .dictionary-pos {
@@ -934,7 +934,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .dictionary-translation {
   margin: 0 0 15px;
   color: var(--secondary-text);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4;
 }
 .dictionary-detail {
@@ -947,16 +947,21 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin: 16px 0;
   min-width: 0;
 }
-.dictionary-pronoun-forms h3 {
+/* 07.11: the section labels of the card (Formen …) like the labels of a Wörterbuch article — 12 / 650 capitals */
+.dictionary-pronoun-forms h3,
+.dictionary-verb-forms h3 {
   margin: 0 0 8px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .dictionary-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 13px;
+  font-size: 14px;
 }
 .dictionary-table th,
 .dictionary-table td {
@@ -967,7 +972,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 }
 .dictionary-table thead th {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 .dictionary-example {
   margin: 15px 0;
@@ -985,7 +990,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin-top: 6px;
   color: var(--muted);
   font:
-    13px/1.4 var(--font);
+    14px/1.4 var(--font);
 }
 .dictionary-add {
   width: 100%;
@@ -1166,15 +1171,15 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .contents-header h2,
 .vocabulary-header h2 {
   margin: 24px 0 0;
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.3;
-  font-weight: 650;
+  font-weight: 700;
 }
 .contents-header p,
 .vocabulary-header p {
   margin: 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
   overflow-wrap: anywhere;
 }
@@ -1369,7 +1374,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: transparent;
   color: var(--text);
   font:
-    600 13px/1.2 var(--font);
+    600 14px/1.2 var(--font);
   cursor: pointer;
 }
 
@@ -1429,7 +1434,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: transparent;
   color: var(--secondary-text);
   font:
-    600 13px/1.2 var(--font);
+    600 12px/1.2 var(--font);
   cursor: pointer;
 }
 .vocabulary-toggle svg {
@@ -1453,7 +1458,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   flex: none;
   min-height: 48px;
   border-bottom: 1px solid var(--hairline);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--secondary-text);
 }
 .vocabulary-select-all {
@@ -1534,7 +1539,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .vocabulary-row p {
   margin: 3px 0 0 24px;
   color: var(--secondary-text);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
   overflow-wrap: anywhere;
 }
@@ -1620,7 +1625,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: var(--tile-surface);
   color: var(--text);
   box-shadow: var(--lift-shadow);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   pointer-events: auto;
 }
@@ -1707,7 +1712,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   cursor: pointer;
   padding: 4px 0;
   color: var(--secondary-text);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
 }
 .popover-alternatives summary::-webkit-details-marker {
@@ -2191,7 +2196,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin: 0;
   padding: 0;
   text-align: right;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.04em;
@@ -2337,16 +2342,16 @@ body.library-screen .data-sources button:active:not(:disabled) {
   }
   .popover-word {
     margin: 1px 0 4px;
-    font-size: 19px;
+    font-size: 20px;
     line-height: 1.2;
   }
   .popover-grammar {
     margin: -2px 0 4px;
-    font-size: 13px;
+    font-size: 12px;
   }
   .popover-translation {
     margin-bottom: 9px;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.32;
   }
   .word-popover .fallback-meaning-group {
@@ -2375,7 +2380,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   .popover-more {
     min-height: 44px;
     padding-top: 7px;
-    font-size: 13px;
+    font-size: 14px;
   }
   .popover-close {
     top: 3px;
@@ -2386,6 +2391,9 @@ body.library-screen .data-sources button:active:not(:disabled) {
   }
   .popover-bookmark {
     margin-top: -6px;
+  }
+  .lemma-choice-grammar {
+    font-size: 12px;
   }
 }
 
@@ -2506,7 +2514,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin-left: -10px;
 }
 .text-size-step.is-larger {
-  font-size: 27px;
+  font-size: 28px;
   margin-right: -8px;
 }
 .text-size-step:disabled {
@@ -2561,7 +2569,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   min-height: 56px;
   border-top: 1px solid var(--hairline);
   color: var(--secondary-text);
-  font-size: 15px;
+  font-size: 14px;
 }
 .text-segments {
   display: flex;
@@ -2581,7 +2589,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border-radius: 8px;
   background: transparent;
   color: var(--muted);
-  font: 500 15px/1 var(--font);
+  font: 500 16px/1 var(--font);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -2620,7 +2628,7 @@ body.library-screen .reader .library-add-toggle { display:grid; place-items:cent
 .empty-library .library-add-menu { position:relative; left:auto; right:auto; bottom:auto; margin-top:12px; }
 body.library-screen .reader .library-add-menu button { display:block; width:100%; min-height:48px; padding:12px; text-align:left; border:0; background:transparent; color:var(--text); border-radius:10px; font:500 14px/1.35 var(--font); }
 .library-add-menu button:hover { background:var(--bg); }
-.library-add-menu small { display:block; margin-top:3px; color:var(--muted); font-size:11px; }
+.library-add-menu small { display:block; margin-top:3px; color:var(--muted); font-size:12px; }
 .paste-dialog { width:min(480px,calc(100% - 32px)); max-height:calc(100dvh - 40px); overflow:auto; padding:22px; border:1px solid var(--hairline); border-radius:20px; background:var(--bg); color:var(--text); }
 .paste-dialog::backdrop { background:rgba(0,0,0,.55); }
 .paste-dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }

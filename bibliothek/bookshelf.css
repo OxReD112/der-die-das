@@ -9,13 +9,13 @@ body.library-screen .reader .library-bookshelf .book { position:absolute; top:58
 .library-bookshelf .author { font-size:10px; text-transform:none; letter-spacing:0; order:2; margin-top:auto; font:500 11px/1.35 var(--font); max-width:120px; }
 .library-bookshelf .cover-title { font:500 calc(28px * var(--book-scale))/1.04 Arial,sans-serif; margin:0; order:0; letter-spacing:calc(-1.2px * var(--book-scale)); }
 .library-bookshelf .caption { text-align:center; padding:12px 16px 0; min-height:96px; }
-.library-bookshelf h2 { margin:0 0 9px; font:600 23px/1.2 var(--font); overflow-wrap:anywhere; }
+.library-bookshelf h2 { margin:0 0 9px; font:600 28px/1.2 var(--font); overflow-wrap:anywhere; }
 .library-bookshelf .caption-author { color:var(--secondary-text); font-size:14px; line-height:1.4; overflow-wrap:anywhere; margin-top:6px; }
-.library-bookshelf .details { color:var(--quiet); font-size:13px; margin-top:8px; line-height:1.4; }
+.library-bookshelf .details { color:var(--quiet); font-size:12px; margin-top:8px; line-height:1.4; }
 .library-bookshelf .navigation { display:flex; justify-content:center; gap:24px; align-items:center; padding:8px 0 16px; }
 .library-bookshelf .arrow { width:44px; height:44px; border:0; border-radius:0; background:transparent; color:var(--ink); font-size:22px; cursor:pointer; }
 .library-bookshelf .arrow:disabled { opacity:.3; }
-.library-bookshelf .count { color:var(--quiet); font-size:13px; min-width:45px; text-align:center; font-variant-numeric:tabular-nums; }
+.library-bookshelf .count { color:var(--quiet); font-size:12px; min-width:45px; text-align:center; font-variant-numeric:tabular-nums; }
 .library-bookshelf .cover-title, .library-bookshelf .author { position:relative; z-index:2; }
 .library-bookshelf .front::before { content:""; position:absolute; left:4px; top:0; bottom:0; width:1px; z-index:3; background:color-mix(in srgb,var(--cover-ink) 13%,var(--cover)); border:0; }
 .library-bookshelf .spine::before, .library-bookshelf .spine::after { content:""; position:absolute; left:4px; right:4px; height:1px; background:var(--cover-ink); opacity:.25; display:none; }
@@ -49,7 +49,7 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
 .library-view-toggle svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
 .library-view-toggle:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
 @media(max-width:600px) {
- .library-bookshelf h2 { font-size:21px; }
+ .library-bookshelf h2 { font-size:20px; }
  .library-bookshelf .caption { min-height:112px; }
 }
 
