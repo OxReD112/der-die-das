@@ -32740,6 +32740,58 @@
     }
   },
   {
+    "id": "verb-2755",
+    "infinitive": "verbrennen",
+    "translation_ru": "сжигать; сгорать",
+    "translation_en": "to burn (something); to burn (up), to be burnt",
+    "auxiliary": [
+      "haben",
+      "sein"
+    ],
+    "usage_note_ru": "Сжигать (что-либо) — hat verbrannt: Er hat die Briefe verbrannt. Сгорать — ist verbrannt: Das Haus ist verbrannt. Обжечься — sich verbrennen (отдельная карточка). Формы: verbrannte, verbrannt.",
+    "usage_note_en": "To burn something — hat verbrannt: Er hat die Briefe verbrannt. To burn up — ist verbrannt: Das Haus ist verbrannt. To burn oneself — sich verbrennen (separate card). Forms: verbrannte, verbrannt.",
+    "example_de": "Beim Aufräumen verbrannte sie alle alten Liebesbriefe im Kamin.",
+    "example_cloze": "Beim Aufräumen {{c1::verbrannte}} sie alle alten Liebesbriefe im Kamin.",
+    "example_ru": "Наводя порядок, она сожгла в камине все старые любовные письма.",
+    "example_en": "While tidying up, she burnt all her old love letters in the fireplace.",
+    "perfect_form": "haben verbrannt",
+    "forms": {
+      "Präteritum": {
+        "ich": "verbrannte",
+        "du": "verbranntest",
+        "er/sie/es": "verbrannte",
+        "wir": "verbrannten",
+        "ihr": "verbranntet",
+        "sie": "verbrannten"
+      },
+      "Konjunktiv II": {
+        "ich": "verbrennte",
+        "du": "verbrenntest",
+        "er/sie/es": "verbrennte",
+        "wir": "verbrennten",
+        "ihr": "verbrenntet",
+        "sie": "verbrennten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "сжигать что-либо (hat verbrannt)",
+        "note_en": "to burn something (hat verbrannt)"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "verbrenne",
+        "du": "verbrennst",
+        "er/sie/es": "verbrennt",
+        "wir": "verbrennen",
+        "ihr": "verbrennt",
+        "sie": "verbrennen"
+      }
+    }
+  },
+  {
     "id": "verb-696",
     "infinitive": "sich vergnügen",
     "translation_ru": "развлекаться",
@@ -35834,11 +35886,14 @@
   {
     "id": "verb-760",
     "infinitive": "abziehen",
-    "translation_ru": "вычитать, удерживать (из суммы); снимать (постельное бельё)",
-    "translation_en": "to subtract, to deduct; to strip (a bed)",
-    "auxiliary": "haben",
-    "usage_note_ru": "Уходить (о войсках, дыме) — Perfekt с sein: Die Truppen sind abgezogen. das Bett abziehen — снять постельное бельё.",
-    "usage_note_en": "To withdraw, to clear (troops, smoke) takes sein: Die Truppen sind abgezogen. das Bett abziehen — to strip the bed.",
+    "translation_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё); уходить, удаляться (о войсках, дыме)",
+    "translation_en": "to subtract, to deduct, to strip (a skin, a bed); to withdraw, to leave (of troops, smoke)",
+    "auxiliary": [
+      "haben",
+      "sein"
+    ],
+    "usage_note_ru": "С дополнением — hat abgezogen (вычел, снял); уходить, удаляться — ist abgezogen: Die Truppen sind abgezogen. Der Rauch zieht ab. das Bett abziehen — снять постельное бельё; einem Tier das Fell abziehen — снять шкуру.",
+    "usage_note_en": "With an object — hat abgezogen (deducted, stripped); to withdraw, to leave — ist abgezogen: Die Truppen sind abgezogen. Der Rauch zieht ab. das Bett abziehen — to strip the bed; einem Tier das Fell abziehen — to skin an animal.",
     "example_de": "Die Kosten werden vom Lohn abgezogen.",
     "example_cloze": "Die Kosten werden vom Lohn {{c1::abgezogen}}.",
     "example_ru": "Расходы вычитаются из зарплаты.",

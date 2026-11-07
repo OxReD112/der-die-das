@@ -7210,7 +7210,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const needsSeparableChoice = sameVerb && !senseCard || candidates.some(c => c.construction?.id === "separable-verb" && c.construction.confidence === "tentative");
       return {grouped,
         proposals:{
-          'single-construction':{candidate:grouped.length === 1 ? grouped[0] : null},
+          // (advisor 07.11: the state group of a haben-only verb does not choose over an external adjective of the same spelling —
+          // the window «adjective first» of 05.11 stays, the verb keeps «состояние» there)
+          'single-construction':{candidate:grouped.length === 1 && !(grouped[0].construction.stateOnly && word != null &&
+            candidates.some(c => c !== grouped[0] && (canonicalPos(c.pos) === "Adjektiv" && norm(c.lemma) === norm(word) || canonicalPos(c.pos) === "Verb" && !c.construction))) ? grouped[0] : null},
           'separated-verb':{candidate:senseCard || (separated.length === 1 && separated[0].construction.confidence !== "tentative" ? candidates.find(c => same(c,separated[0])) : null),
             evidence:separated.some(c => c.construction.confidence !== "tentative") ? "separated-verb-pair" : separated.length ? "tentative-separated-verb-pair" : null}},
         blocks:[
@@ -7430,7 +7433,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // opens its part after und / oder; the pair geschrieben hatte stands, as dass … gebaut und eröffnet wurde for werden)
         const afterAnd = (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word)) && head.i === end && tail === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0]));
         if (!frontedInfinitive && !afterAnd && (tail <= start || tail === head.i)) continue;
-        let linked = [], roles = [], id, label, main, mainIndex = tail, state = false, passive = false, coordinatedNames = null;
+        // (sein-state draft, external-perfect-qa: a personal subject pronoun and a noun phrase with an article between sein and the
+        // participle — Er ist das Bild betrachtet — is no state: the state's subject is the participle's object, there is no second one)
+        const stateWithObject = (h,t) => { const lo = Math.min(h,t), hi = Math.max(h,t);
+          const text = String(context?.sentence || ""); let start = lo; while (start > 0 && !/[,;:.!?]/u.test(text.slice(tokens[start-1].index+tokens[start-1][0].length,tokens[start].index))) start--;
+          const pronoun = tokens.slice(start,hi).some(x => /^(?:ich|du|er|wir|ihr)$/u.test(norm(x[0])));
+          const phrase = tokens.slice(lo+1,hi).some((x,n) => /^(?:der|die|das|den|ein|eine|einen)$/u.test(norm(x[0])) && /^\p{Lu}/u.test(tokens[lo+2+n]?.[0] ?? ""));
+          return pronoun && phrase; };
+        let linked = [], roles = [], id, label, main, mainIndex = tail, state = false, stateOnly = false, passive = false, coordinatedNames = null;
         if (modals.has(head.e.word)) {
           // G15e (16.10.2026): a modal takes a bare infinitive; a zu-infinitive at
           // the end belongs to another construction (sollten … bewachen um …
@@ -7504,6 +7514,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             linked = [head.i,tail-1,tail]; roles = [head.e,...lexical,...modal];
           } else {
             main = withReflexive(matches(tail),reflexiveRows(tail,"Partizip II")).filter(e => clause.participleOf(e,tail) && auxiliariesOf(e).includes(head.e.word) && wordsBefore(e,tail));
+            // (advisor 07.11, item 4: sein + the participle of a verb whose card has only haben — ist repariert, sind … unterstellt — is
+            // the state passive, not Perfekt: the group «состояние» only. Indicative only; not with an own or external adjective card of
+            // the form — the window «adjective first» stays, decision 05.11 — and not with a verb that also has sein: «/ состояние»)
+            if (!main.length && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
+                !participleAdjectiveCard(tokens[tail][0]) && !stateWithObject(head.i,tail) &&
+                // (train s14056: Ist- of a hyphenated compound — Ist-Wert-Anzeigen — is no sein)
+                !/^-/u.test(String(context?.sentence || "").slice(tokens[head.i].index + tokens[head.i][0].length))) {
+              main = withReflexive(matches(tail),reflexiveRows(tail,"Partizip II")).filter(e => clause.participleOf(e,tail) && wordsBefore(e,tail) &&
+                auxiliariesOf(e).includes("haben") && !auxiliariesOf(e).includes("sein"));
+              // (one verb only: geboten — bieten / gebieten — stays without a group, Vorsicht ist geboten)
+              const bases = new Set((verbAnalyses.get(norm(tokens[tail][0])) || []).filter(a => a.kind === "participle").map(a => norm(a.base)));
+              if (main.length && new Set(main.map(base)).size === 1 && bases.size <= 1) stateOnly = true; else main = [];
+            }
             id = "perfect-group"; linked = [head.i,tail]; roles = [head.e,...main];
             // 20.10.2026 (links to-do, reviewers of L18): a form right after zu is a zu-infinitive, not a participle
             // (hatten sie … keine große Chance zu erraten — haben «иметь», not Plusquamperfekt of erraten).
@@ -7595,6 +7618,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // haben / sein is the auxiliary, though the participle (or the expression) has the same verb.
           ...(id === "perfect-group" && label !== "Konjunktiv II" && selected === head.i && context.coordinatedFirst == null ? {clickedRole:"auxiliary"} : {}),
           ...(state ? {state:true} : {}),
+          ...(stateOnly ? {stateOnly:true} : {}),
           ...(label === "Konjunktiv I" && konj1AsIf(tokens, head.i) ? {asIf:true} : {})};
         // Non-enumerable: where the lexical verb stands and its reflexive readings
         // (reflexiveGroupLemma names the group after a confirmed one).
@@ -7692,6 +7716,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const base = sentence.slice(0,tokens[p1].index);
       const synthetic = base + tokens[p2][0] + ".";
       const group = await runConstructionProducers(tokens[p2][0],{sentence:synthetic,tokenOffset:base.length},candidates,subset);
+      // (links chat 07.11, sein-state draft: a state group — sein + participle of a haben verb — is never shared with a haben
+      // group before und: … verursacht hat) und weil er kein Ferrari ist is not «ist verursacht»)
+      if (group?.stateOnly) return null;
       if (!group || group.id !== leftGroup.id || !(group.spans || []).some(span => span.start === heads[0].start)) return null;
       const spans = group.spans.map(span => span.start === base.length ? {text:tokens[p2][0],start:tokens[p2].index,end:tokens[p2].index + tokens[p2][0].length} : span);
       if (spans.length !== 2) return null;
@@ -10440,7 +10467,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Bauten), a year in the sentence (ist 1900 gebaut).
       'participle-sein-adjective-window'(f) {
         const {word} = f;
-        if (!/^\p{Ll}/u.test(word) || f.candidates.some(c => c.construction)) return undefined;
+        // (advisor 07.11: the state group of a haben-only verb keeps this window — the adjective first, the verb with «состояние» second)
+        if (!/^\p{Ll}/u.test(word) || f.candidates.some(c => c.construction && !c.construction.stateOnly)) return undefined;
         if (f.adjectives.some(c => c.source === "main" && norm(c.lemma) === norm(word))) return undefined;
         const adjectives = f.adjectives.filter(c => norm(c.lemma) === norm(word));
         const verbs = participleOwnVerb(word,f.verbs).filter(c => /^(?:hat|haben)\b/u.test(norm(String(c.item?.perfect_form || ""))));
@@ -14527,7 +14555,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -14783,6 +14811,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (/^(?:in|an|auf|über)$/u.test(w(i)) && i < e && w(i+1) === "den") { const n = phraseEnd(i+1); if (n > i+1 && !/n$/u.test(w(n))) return true; }
       }
       return false;
+    }
+    // (advisor 07.11, item 4) A tap on sein of the state group of a haben-only verb shows the group only when the participle shows it
+    // too: when the participle is a window (an external adjective — ist gebaut, ist beschäftigt — or two verbs — geboten), sein stays
+    // «быть», as before. The participle is resolved once more (with noMirror, no loop back here).
+    async function stateAuxiliaryFollows(word, context, result, pipeline) {
+      const sel = result?.selected, k = sel?.construction;
+      if (!k || k.id !== "perfect-group" || !k.stateOnly || !context || context.noMirror || context.noStateGroup || norm(String(sel.lemma || "")) !== "sein") return result;
+      const other = (k.spans || []).find(x => x && x.start !== context.tokenOffset && Number.isInteger(x.start));
+      if (!other) return result;
+      const r = await pipeline(other.text,{...context,tokenOffset:other.start,noMirror:true});
+      if (r?.selected?.construction?.stateOnly) return result;
+      // (sein is read again without the state group — its own tense line as before)
+      return pipeline(word,{...context,noStateGroup:true});
     }
     async function seinCardNoState(word, context, result, pipeline) {
       const sel = result?.selected, k = sel?.construction;

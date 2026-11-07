@@ -345,6 +345,9 @@
           : {marks:[`Konjunktiv I mit ${name}`], role:k.clickedRole || 'auxiliary', spans};
         if (k.label === 'Konjunktiv II') return isMain && !k.clickedRole ? {marks:['Konjunktiv II'], role:null, spans}
           : {marks:[`Konjunktiv II mit ${name}`], role:'conditionalPast', spans};
+        // (advisor 07.11: sein + participle of a haben-only verb — the state passive alone: «состояние mit reparieren», with war
+        // «Präteritum · состояние mit …», as «Präteritum · Passiv mit …» of werden)
+        if (k.stateOnly) return {marks:[`${k.label === 'Plusquamperfekt' ? 'Präteritum · ' : ''}${language === 'ru' ? 'состояние' : 'state'} mit ${name}`], role:k.clickedRole || (isMain ? null : 'auxiliary'), spans};
         return {marks:[`${k.label}${k.state ? ` / ${language === 'ru' ? 'состояние' : 'state'}` : ''} mit ${name}`], role:k.clickedRole || (isMain ? null : 'auxiliary'), spans};
       case 'werden-future': if (k.mood === 'Konjunktiv I') return {marks:[isMain ? 'Konjunktiv I' : `Konjunktiv I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
         return {marks:[`Futur I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
@@ -766,7 +769,9 @@
     if (ev && ev.candidate && evChain === ev.verb) {
       // (M1-c, links chat 30.10: the line of an expression names its own verb only — not a second infinitive after und)
       const evCandidate = ev.candidate.construction?.coordinatedLemma ? {...ev.candidate, construction:{...ev.candidate.construction, coordinatedLemma:null}} : ev.candidate;
-      const line = cardBase(ev.resolution, evCandidate, {...options}).grammar.split(' · ').slice(1);
+      // (links chat 07.11, sein-state draft: the state group of a haben-only verb gives an expression no line — no tense inside an
+      // expression, decision 05.11: Als das Urteil gesprochen war → «Feste Wendung»)
+      const line = ev.candidate.construction?.stateOnly ? [] : cardBase(ev.resolution, evCandidate, {...options}).grammar.split(' · ').slice(1);
       // (a reflexive pronoun of the heading: sich, uns in wir sehen uns — «Reflexiv» is the expression itself)
       // (05.11: also a reflexive pronoun among the expression's own parts — a variant: sich … aufgehoben fühlen)
       const sich = /(?:^|\s)(?:sich|mich|dich|uns|euch|mir|dir)(?:['’]s)?(?=\s|$)/u.test(norm(candidate.lemma || '')) ||
