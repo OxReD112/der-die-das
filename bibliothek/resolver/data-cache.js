@@ -65,7 +65,9 @@
     return opened;
   }
   async function trim(cache) {
+    const counted = clock();
     const keys = await cache.keys();                    // in the order the entries were added
+    note(stats.keys, {at: Math.round(counted), ms: Math.round(clock() - counted), n: keys.length}, 100);
     const over = keys.length - limit();
     if (over <= 0) return;
     // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
@@ -88,6 +90,15 @@
     } else await cache.put(url.href, copy);
     if (++added % TRIM_EVERY === 0) await trim(cache);   // (the first trim of a page: 4 s after the open)
   }
+  // Counters (speed chat 07.11, read by autoread.html; they change nothing): long taps on the iPhone had ~1.4–1.6 s that
+  // were neither network nor page work — about WAIT_MS. Every cache step slower than 200 ms is noted with its time on this
+  // page's clock (performance.now, as Resource Timing): opening the cache, looking a file up, reading a kept copy, and
+  // each count of the entries (keys() in trim) with its length.
+  const SLOW_MS = 200, stats = {stalled: 0, slow: [], keys: []};
+  const clock = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
+  const note = (list, row, max) => { list.push(row); if (list.length > max) list.shift(); };
+  const timed = async (kind, pending) => { const t = clock(); try { return await pending; }
+    finally { const ms = clock() - t; if (ms > SLOW_MS) note(stats.slow, {kind, at: Math.round(t), ms: Math.round(ms)}, 300); } };
   const STALLED = Symbol("stalled");
   const within = (pending, ms) => { let timer = null;
     return Promise.race([pending, new Promise(resolve => { timer = setTimeout(() => resolve(STALLED), ms); })]).finally(() => clearTimeout(timer)); };
@@ -98,14 +109,14 @@
     if (!url || !cacheable(url, options)) return fetch(input, options);
     let cache = null;
     try {                                               // a broken or stalled cache (quota, private mode) only means: ask the network
-      const store_ = await within(open(), OPEN_WAIT_MS);
-      const kept = store_ === STALLED ? STALLED : await within(store_.match(url.href, {ignoreVary: true}), WAIT_MS);   // the version in the address is the identity
-      if (kept === STALLED) { pausedUntil = Date.now() + PAUSE_MS; cache = null; }
+      const store_ = await timed("open", within(open(), OPEN_WAIT_MS));
+      const kept = store_ === STALLED ? STALLED : await timed("match", within(store_.match(url.href, {ignoreVary: true}), WAIT_MS));   // the version in the address is the identity
+      if (kept === STALLED) { pausedUntil = Date.now() + PAUSE_MS; cache = null; stats.stalled++; }
       else {
         cache = store_;
         if (kept) {
           // a stored copy that cannot be read (a write cut off when the app was killed) is dropped and asked again
-          try { const body = await kept.arrayBuffer(); return new Response(body, {status: kept.status, statusText: kept.statusText, headers: kept.headers}); }
+          try { const body = await timed("read", kept.arrayBuffer()); return new Response(body, {status: kept.status, statusText: kept.statusText, headers: kept.headers}); }
           catch (_) { store_.delete(url.href).catch(() => {}); }
         }
       }
@@ -118,5 +129,5 @@
   }
   // the first open (reading the list of entries) happens while the page loads, not at the first tap
   if (site) setTimeout(() => { open().catch(() => {}); }, 0);
-  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, enabled: !!site});
+  host.BibliothekDataCache = Object.freeze({fetch: cachedFetch, enabled: !!site, stats});
 })();

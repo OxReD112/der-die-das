@@ -69,6 +69,8 @@
     $('show').hidden = false;
   } else if (run && run.state === 'finished') { $('show').hidden = false; }
 
+  const cacheStats = () => { try { const st = frame.contentWindow.BibliothekDataCache?.stats;
+    return st ? {stalled: st.stalled, slow: st.slow.map(x => ({kind: x.kind, ms: x.ms})), keys: st.keys.map(x => ({ms: x.ms, n: x.n}))} : null; } catch (_) { return null; } };
   // Seeded choice of words, so two runs on the same book and page tap the same words.
   let seed = 1;
   const random = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
@@ -109,7 +111,12 @@
     }
     if (end >= 0) cover += end - from;
     open = cover;
-    return {n: list.length, waves, net: Math.round(open), queue: Math.round(queue), server: Math.round(server), busy: Math.round(busy)};
+    // the data cache (v4, 07.11): its steps slower than 200 ms and its entry counts during the tap
+    let slow = [], keys = [];
+    try { const st = win.BibliothekDataCache?.stats;
+      if (st) { slow = st.slow.filter(x => x.at >= t0 - 5 && x.at <= t1); keys = st.keys.filter(x => x.at <= t1 && x.at + x.ms >= t0); } } catch (_) {}
+    return {n: list.length, waves, net: Math.round(open), queue: Math.round(queue), server: Math.round(server), busy: Math.round(busy),
+      cs: slow.length, cmax: slow.reduce((m, x) => Math.max(m, x.ms), 0), ck: keys.reduce((m, x) => Math.max(m, x.ms), 0)};
   }
   async function tap(doc, word) {
     const win = doc.defaultView, started = performance.now(), t0 = win.performance.now();
@@ -188,14 +195,14 @@
         await closeCard(page);
         const left = Math.max(0, Math.round((end - Date.now()) / 60000));
         say(`Идёт тест: ${run.taps.length} нажатий, последнее ${ms === null ? 'не дождались' : ms + ' мс'}, страниц ${run.pages}, осталось ~${left} мин. Не трогайте телефон.`);
-        if (Date.now() - lastSave > 5000) { save(run); lastSave = Date.now(); }
+        if (Date.now() - lastSave > 5000) { run.cache = cacheStats(); save(run); lastSave = Date.now(); }
         await sleep(PAUSE_MS);
       }
       if (stopping || Date.now() >= end) break;
       if (!(await nextPage(page))) { say('Книга (или глава) закончилась — тест остановлен раньше.', true); break; }
       run.pages++;
     }
-    run.state = 'finished'; run.ended = Date.now(); save(run);
+    run.state = 'finished'; run.ended = Date.now(); run.cache = cacheStats(); save(run);
     try { await wakeLock?.release(); } catch (_) {}
     $('start').hidden = false; $('stop').hidden = true; $('minutes').disabled = false; $('show').hidden = false;
     showResult();
@@ -206,7 +213,7 @@
   function report(r) {
     const ms = r.taps.map(t => t.ms).filter(x => x !== null);
     const lines = [
-      'Автотест чтения (bibliothek/autoread.html, v3)',
+      'Автотест чтения (bibliothek/autoread.html, v4)',
       `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
       `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
       `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
@@ -229,10 +236,16 @@
     const slow = r.taps.filter(t => t.ms !== null && t.ms >= 1000 && t.b).sort((a, b) => b.ms - a.ms);
     if (r.taps.some(t => t.b)) {
       lines.push('', 'Разбивка нажатий ≥ 1 с (сеть: запросов, волн подряд, время с открытыми запросами, самое долгое ожидание до отправки, самый долгий ответ сервера; страница занята):');
-      for (const t of slow) lines.push(`  ${t.ms} мс «${t.w}» (${(t.t / 60).toFixed(1)} мин): сеть ${t.b.net} мс — запросов ${t.b.n}, волн ${t.b.waves}, до отправки ≤ ${t.b.queue} мс, сервер ≤ ${t.b.server} мс; страница занята ${t.b.busy} мс`);
+      for (const t of slow) lines.push(`  ${t.ms} мс «${t.w}» (${(t.t / 60).toFixed(1)} мин): сеть ${t.b.net} мс — запросов ${t.b.n}, волн ${t.b.waves}, до отправки ≤ ${t.b.queue} мс, сервер ≤ ${t.b.server} мс; страница занята ${t.b.busy} мс${t.b.cs !== undefined ? `; кэш: медленных шагов ${t.b.cs}${t.b.cs ? ` (≤ ${t.b.cmax} мс)` : ''}${t.b.ck ? `, шёл подсчёт записей ${t.b.ck} мс` : ''}` : ''}`);
       if (!slow.length) lines.push('  нет');
       const all = r.taps.filter(t => t.ms !== null && t.b), avg = k => all.length ? Math.round(all.reduce((a, t) => a + t.b[k], 0) / all.length) : 0;
       lines.push(`  в среднем на нажатие (все ${all.length}): сеть ${avg('net')} мс, ${(all.reduce((a, t) => a + t.b.waves, 0) / Math.max(1, all.length)).toFixed(1)} волн, страница занята ${avg('busy')} мс; ожидание до отправки ≥ 500 мс — в ${all.filter(t => t.b.queue >= 500).length} нажатиях`);
+    }
+    if (r.cache) {
+      const k = r.cache.keys, sorted = [...k].map(x => x.ms).sort((a, b) => a - b), kinds = {};
+      for (const x of r.cache.slow) kinds[x.kind] = (kinds[x.kind] || 0) + 1;
+      lines.push('', `Кэш данных: не ответил вовремя (1,5 с) — ${r.cache.stalled} раз; шагов дольше 200 мс — ${r.cache.slow.length} (${Object.entries(kinds).map(([a, n]) => a + ' ' + n).join(', ') || '—'})`);
+      lines.push(`  подсчёт записей: ${k.length} раз, ${sorted.length ? `медиана ${sorted[sorted.length >> 1]} мс, максимум ${sorted.at(-1)} мс, записей ${k.at(-1).n}` : '—'}`);
     }
     lines.push('', `Устройство: ${r.ua}`);
     lines.push('', 'Все нажатия (секунда от начала, слово, мс):', r.taps.map(t => `${t.t} ${t.w} ${t.ms ?? 'x'}`).join('; '));
