@@ -21,7 +21,7 @@
   const MAX_ENTRIES = 8000;                 // ~31 MB of parts (32768 parts since 07.11, ~3.9 KB each) + ~12 MB of our own dictionaries; the oldest go first
   const TRIM_EVERY = 50;                    // count the entries after this many new files
   const dataPaths = [
-    /^open%20data\/dictionary-de-json\/parts\/\d{4}\.json$/,
+    /^open%20data\/dictionary-de-json\/parts\/\d{4,5}\.json$/,   // 32768 parts since 07.11: 0000…32767
     /^open%20data\/dictionary-de-ru-json\/(?:parts\/\d{4}|manifest)\.json$/,
     /^bibliothek\/resolver\/data\/fallback-verb-forms\/(?:\d{4}|manifest)\.json$/,
     /^bibliothek\/resolver\/data\/[\w-]+\.json$/,
