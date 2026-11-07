@@ -4192,7 +4192,9 @@
           const particleCards = forms.get(norm(row.prefix)) || [];
           // (links chat 06.11, advisor, WN batch 49: a particle of the G47 class keeps the external verb although it has an adverb card
           // of its own — bestanden hier fort → fortbestehen; DIRECTION_PARTICLE stays for hin / her, raus, rein …, which G47 skips)
-          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) && !g47Particle(norm(row.prefix)) ||
+          // (links chat 07.11, advisor 06.11, L39 (Б) one particle at a time: wieder — Wir kommen morgen wieder → wiederkommen;
+          // only here, at the end of the part, where the scan already asks for the particle to close the verb)
+          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) && !g47Particle(norm(row.prefix)) && norm(row.prefix) !== "wieder" ||
             SHORT_PRONOMINAL_ADVERB.test(norm(row.prefix))) continue;
           out.push({entry:row.entry,prefix:norm(row.prefix),sharedForm:true});
         }
