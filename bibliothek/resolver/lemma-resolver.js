@@ -240,6 +240,16 @@
   const MID_PART_SUBORDINATORS = new Set(["damit","während"]);
   // (advisor 07.11, comma insertions) The first word of a finished subordinate clause between two commas inside a part: a relative
   // pronoun or a subordinating conjunction (kann Dinge, die er sucht, nicht finden).
+  // (links chat 07.11, advisor 07.11: «wie + participle» between two commas is a short insertion, not a part of its own — wachte,
+  // wie vorher angekündigt, … wieder auf; hat, wie erwartet, gewonnen. Only wie, at most two of these adverbs and one participle;
+  // wie with a subject and a finite verb — , wie er erwartet hatte, — is a subordinate clause, read as before.)
+  const WIE_INSERTION_ADVERBS = new Set(["bereits","schon","vorher","zuvor","eben","oben","früher","ursprünglich","ausdrücklich","allgemein","bekanntlich"]);
+  function wieParticipleWords(words, isParticiple) {
+    const n = words.length;
+    if (n < 2 || n > 4 || String(words[0]).toLocaleLowerCase("de-DE") !== "wie") return false;
+    for (let i = 1; i < n-1; i++) if (!WIE_INSERTION_ADVERBS.has(String(words[i]).toLocaleLowerCase("de-DE"))) return false;
+    return /^\p{Ll}/u.test(String(words[n-1])) && isParticiple(words[n-1]);
+  }
   const INSERTED_CLAUSE_OPENERS = new Set(["der","die","das","dem","den","deren","dessen","denen","welcher","welche","welches","welchem","welchen",
     "wenn","weil","dass","daß","als","ob","obwohl","obgleich","nachdem","während","bevor","ehe","sobald","solange","seit","seitdem","bis","falls",
     "wo","wie","was","wer","damit","indem","sodass"]);
@@ -4504,6 +4514,14 @@
         const finite=tail&&(await tokenAnalyses(tail[0], undefined, 'separableScope')).some(a=>a.kind==='finite');
         if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
       }
+      // (advisor 07.11) the short insertion «, wie (bereits …) participle,» owns no particle of the part — the same wieParticipleWords
+      for (const match of observedMatches(original.matchAll(/,\s*wie(?:\s+\p{L}+){1,3}\s*,/gu),'separableScope')) {
+        const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
+        const before=original.slice(0,match.index), part=before.slice(Math.max(0,before.search(/[^,;:.!?]*$/u)));
+        if (/(?:^|[^\p{L}])(?:so|ebenso|genauso|gleich|doppelt)(?![\p{L}])/iu.test(part)) continue;
+        const tailRows=inner.length?await tokenAnalyses(inner.at(-1)[0], undefined, 'separableScope'):[];
+        if (wieParticipleWords(inner.map(t=>t[0]),()=>tailRows.some(a=>a.kind==='participle'))) ranges.push([match.index,match.index+match[0].length]);
+      }
       let chars = original.split('');
       const containing = ranges.find(([a,b])=>context.tokenOffset>=a&&context.tokenOffset<b);
       if (containing) {
@@ -4728,6 +4746,17 @@
         const lowFinite = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => r.kind === "finite");
         const chainVerb = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => ["participle","infinitive"].includes(r.kind));
         const auxWord = i => rowsOf(i).some(r => AUXILIARY.has(norm(r.base || "")) ) || AUXILIARY.has(norm(tokens[i][0])) || /^(?:worden|geworden|gewesen|gehabt)$/u.test(norm(tokens[i][0]));
+        // (advisor 07.11) «, wie (bereits …) participle,» inside a part: an insertion for the chains and the reflexive search alike —
+        // not after so / ebenso / genauso of the same part (the comparison so … wie)
+        for (let a = 0; a+2 < tokens.length; a++) {
+          if (!commaAfter(a) || norm(tokens[a+1][0]) !== "wie") continue;
+          let b = a+1; while (b+1 < tokens.length && b-a <= 4 && !stopAfter(b)) b++;
+          if (!commaAfter(b) || b+1 >= tokens.length) continue;
+          if (!wieParticipleWords(tokens.slice(a+1,b+1).map(t => t[0]), () => rowsOf(b).some(r => r.kind === "participle"))) continue;
+          let h = a; while (h > 0 && !stopAfter(h-1)) h--;
+          if (tokens.slice(h,a+1).some(t => /^(?:so|ebenso|genauso|gleich|doppelt)$/u.test(norm(t[0])))) continue;
+          out.push([a,b]);
+        }
         for (let a = 0; a+3 < tokens.length; a++) {
           // (also auch / selbst / gerade before the conjunction: auch wenn, selbst als)
           const opener = INSERTED_CLAUSE_OPENERS.has(norm(tokens[a+1][0])) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
