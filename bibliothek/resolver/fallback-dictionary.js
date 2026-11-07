@@ -108,7 +108,7 @@
     for (const byte of new TextEncoder().encode(word)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
     return hash;
   };
-  const dictionaryPartition = word => fnv(word) & 8191;
+  const dictionaryPartition = word => fnv(word) & 32767;
   const verbFormPartition = word => fnv(word) & 1023;
   async function mayBeVerb(word) {
     try {
@@ -240,7 +240,7 @@
   function dictionaryPart(index) {
     if (cache.has(index)) return keepDictionaryPart(index,cache.get(index));
     let bytes = 0;
-    const promise = Promise.all([dataFetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=8192-3`, base))
+    const promise = Promise.all([dataFetch(new URL(`parts/${String(index).padStart(4, "0")}.json?v=32768-1`, base))
       .then(response => {
         if (!response.ok) throw new Error("Fallback dictionary unavailable");
         // The text length bounds the cache; a response without text() (test stand-ins) counts as an average part.

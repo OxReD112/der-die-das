@@ -18,7 +18,7 @@
 (() => {
   "use strict";
   const GENERATION = "bibliothek-data-1";   // a new value drops the whole old cache (at the first page that sees it)
-  const MAX_ENTRIES = 2500;                 // ~40 MB of parts + ~12 MB of our own dictionaries; the oldest entries go first
+  const MAX_ENTRIES = 8000;                 // ~31 MB of parts (32768 parts since 07.11, ~3.9 KB each) + ~12 MB of our own dictionaries; the oldest go first
   const TRIM_EVERY = 50;                    // count the entries after this many new files
   const dataPaths = [
     /^open%20data\/dictionary-de-json\/parts\/\d{4}\.json$/,
