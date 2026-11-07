@@ -111,13 +111,40 @@
     return before !== after;
   }
 
+  // Traffic (07.11.2026): what the reader really downloads — Resource Timing of the reader's frame (a file from the data
+  // cache or the HTTP cache is not counted: no network). transferSize where the browser gives it, else the encoded size.
+  const netKind = url => /dictionary-de-json\/parts\//.test(url) ? 'части внешнего словаря' : /dictionary-de-ru-json\/parts\//.test(url) ? 'части русского словаря'
+    : /fallback-verb-forms\/\d/.test(url) ? 'части форм глагола' : /\/worterbuch\//.test(url) ? 'наши словари' : /\.json(\?|$)/.test(url) ? 'другие данные' : 'код, страница, стили';
+  let netObserver = null;
+  function watchTraffic(doc) {
+    try {
+      const win = doc.defaultView;
+      win.performance.setResourceTimingBufferSize?.(100000);
+      netObserver?.disconnect();
+      netObserver = new win.PerformanceObserver(list => {
+        if (!run || run.state !== 'running') return;
+        for (const e of list.getEntries()) {
+          const bytes = e.transferSize > 0 ? e.transferSize : (e.transferSize === 0 ? 0 : (e.encodedBodySize || 0));
+          if (!bytes) continue;
+          const m = Math.floor((Date.now() - run.started) / 60000), k = netKind(e.name), n = run.net;
+          n.bytes += bytes; n.requests++; n.byMinute[m] = (n.byMinute[m] || 0) + bytes;
+          n.byKind[k] = n.byKind[k] || [0, 0]; n.byKind[k][0] += bytes; n.byKind[k][1]++;
+        }
+      });
+      netObserver.observe({type: 'resource', buffered: false});
+      run.net.measured = true;
+    } catch (_) { run.net.measured = false; }
+  }
+
   async function start() {
     const doc = reader();
     if (!doc) { say('Сначала откройте книгу в окне ниже.', true); return; }
     const minutes = +$('minutes').value;
     run = {version: 1, state: 'running', started: Date.now(), minutes, ua: navigator.userAgent,
       book: doc.title.replace(/\s*·\s*Bibliothek\s*$/u, ''),
-      page: doc.getElementById('page-status')?.textContent?.trim() || '', taps: [], reloads: [], pages: 0, timeouts: 0};
+      page: doc.getElementById('page-status')?.textContent?.trim() || '', taps: [], reloads: [], pages: 0, timeouts: 0,
+      net: {bytes: 0, requests: 0, byMinute: {}, byKind: {}}};
+    watchTraffic(doc);
     save(run); stopping = false; seed = 1;
     $('start').hidden = true; $('stop').hidden = false; $('show').hidden = true; $('minutes').disabled = true;
     try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (_) { wakeLock = null; }
@@ -154,17 +181,24 @@
   function report(r) {
     const ms = r.taps.map(t => t.ms).filter(x => x !== null);
     const lines = [
-      'Автотест чтения (bibliothek/autoread.html, v1)',
+      'Автотест чтения (bibliothek/autoread.html, v2)',
       `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
       `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
       `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
       `Нажатий: ${r.taps.length}; страниц перевёрнуто: ${r.pages}; не дождались карточки (>${TAP_TIMEOUT_MS / 1000} с): ${r.timeouts}`,
       `Перезагрузки вкладки: ${r.reloads.length ? r.reloads.map(x => `на ${x.minute} мин после ${x.taps} нажатий`).join('; ') : 'нет'}`,
       `Время до карточки: медиана ${median(ms)} мс, p90 ${pct(ms, .9)} мс, p95 ${pct(ms, .95)} мс, максимум ${ms.length ? Math.max(...ms) : '—'} мс`,
-      '', 'По минутам (минута: нажатий, медиана, максимум):'];
+    ];
+    const mb = b => (b / 1048576).toFixed(2) + ' МБ';
+    if (r.net?.measured) {
+      const minutes = Math.max(1, ((r.ended || Date.now()) - r.started) / 60000);
+      lines.push(`Скачано: ${mb(r.net.bytes)} за ${r.net.requests} запросов (${mb(r.net.bytes / minutes)} в минуту; без кэша данных и кэша браузера)`);
+      for (const [k, [b, n]] of Object.entries(r.net.byKind).sort((a, b) => b[1][0] - a[1][0])) lines.push(`  ${k}: ${mb(b)}, ${n}`);
+    } else if (r.net) lines.push('Скачано: браузер не дал посчитать');
+    lines.push('', 'По минутам (минута: нажатий, медиана, максимум' + (r.net?.measured ? ', скачано' : '') + '):');
     const byMinute = new Map();
     for (const t of r.taps) { const m = Math.floor(t.t / 60); if (!byMinute.has(m)) byMinute.set(m, []); byMinute.get(m).push(t.ms); }
-    for (const [m, a] of byMinute) { const ok = a.filter(x => x !== null); lines.push(`  ${String(m + 1).padStart(2)}: ${a.length}, ${median(ok)} мс, ${ok.length ? Math.max(...ok) : '—'} мс${a.length - ok.length ? `, не дождались ${a.length - ok.length}` : ''}`); }
+    for (const [m, a] of byMinute) { const ok = a.filter(x => x !== null); lines.push(`  ${String(m + 1).padStart(2)}: ${a.length}, ${median(ok)} мс, ${ok.length ? Math.max(...ok) : '—'} мс${a.length - ok.length ? `, не дождались ${a.length - ok.length}` : ''}${r.net?.measured ? `, ${((r.net.byMinute[m] || 0) / 1024).toFixed(0)} КБ` : ''}`); }
     lines.push('', 'Самые долгие нажатия:');
     for (const t of [...r.taps].filter(t => t.ms !== null).sort((a, b) => b.ms - a.ms).slice(0, 10)) lines.push(`  ${t.ms} мс — «${t.w}» на ${(t.t / 60).toFixed(1)} мин`);
     lines.push('', `Устройство: ${r.ua}`);
