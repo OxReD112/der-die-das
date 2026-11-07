@@ -14,12 +14,18 @@
  * drops the older ones; an older version (an old page from the HTTP cache) is not stored.
  * A changed data file needs a new version in its address (dev/bibliothek/tools/data-versions.json, regression
  * data-cache-versions-qa.cjs); otherwise this cache keeps answering the old file.
+ * The limit takes only parts (speed chat 07.11): on the iPhone our own data files stored 26.10 were the oldest entries, the
+ * age limit dropped them and they were downloaded again, while thousands of parts of the old 8 192 version lay unused. Now
+ * only numbered parts (…/NNNN.json) are removed at the limit, the oldest first — so the parts of an old version go first; of
+ * a file that is not a part (our dictionaries, data/*.json, manifests: a few dozen) only a copy in an earlier version may
+ * go, never the one with the latest version (versions start with the date, so they compare as text).
  */
 (() => {
   "use strict";
   const GENERATION = "bibliothek-data-1";   // a new value drops the whole old cache (at the first page that sees it)
-  const MAX_ENTRIES = 8000;                 // ~31 MB of parts (32768 parts since 07.11, ~3.9 KB each) + ~12 MB of our own dictionaries; the oldest go first
+  const MAX_ENTRIES = 8000;                 // ~31 MB of parts (32768 parts since 07.11, ~3.9 KB each) + ~12 MB of our own dictionaries; the oldest parts go first
   const TRIM_EVERY = 50;                    // count the entries after this many new files
+  const limit = () => Number((typeof window !== "undefined" && window.__bibliothekDataCacheMax) || 0) || MAX_ENTRIES;   // (a test sets a small limit)
   const dataPaths = [
     /^open%20data\/dictionary-de-json\/parts\/\d{4,5}\.json$/,   // 32768 parts since 07.11: 0000…32767
     /^open%20data\/dictionary-de-ru-json\/(?:parts\/\d{4}|manifest)\.json$/,
@@ -60,7 +66,17 @@
   }
   async function trim(cache) {
     const keys = await cache.keys();                    // in the order the entries were added
-    for (let i = 0; i < keys.length - MAX_ENTRIES; i++) await cache.delete(keys[i]);
+    const over = keys.length - limit();
+    if (over <= 0) return;
+    // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
+    // latest by version, not by order: an old page in another tab may store an old version after the new one; review 07.11)
+    const rows = keys.map(key => { try { const url = new URL(key.url);
+      return {key, path: url.pathname, version: url.searchParams.get("v") || "", part: /\/\d+\.json$/.test(url.pathname)}; }
+      catch (_) { return {key, path: "", version: "", part: false}; } });
+    const latest = new Map();
+    for (const row of rows) if (!row.part && !(latest.get(row.path) > row.version)) latest.set(row.path, row.version);
+    const removable = rows.filter(row => row.part || row.version !== latest.get(row.path));
+    for (let i = 0; i < Math.min(over, removable.length); i++) await cache.delete(removable[i].key);
   }
   const versionOf = url => url.searchParams.get("v") || "";
   async function store(cache, url, copy) {
