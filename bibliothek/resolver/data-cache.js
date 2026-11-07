@@ -19,12 +19,18 @@
  * only numbered parts (…/NNNN.json) are removed at the limit, the oldest first — so the parts of an old version go first; of
  * a file that is not a part (our dictionaries, data/*.json, manifests: a few dozen) only a copy in an earlier version may
  * go, never the one with the latest version (versions start with the date, so they compare as text).
+ * No counting while reading (speed chat 07.11, autoread v4 on the iPhone): counting the entries (cache.keys(), ~7 500) took
+ * 3.4–3.6 s there, it ran 4 s after every page open and after every 50 new files, and the lookups waiting behind it ran
+ * into WAIT_MS — the long taps of 2–3 s. Now the number of entries is kept (localStorage, «bibliothekDataCacheCount»): +1
+ * per stored file; the entries are counted only when that number is over the limit, unknown, or a day old — and then only
+ * when the cache has not been used for IDLE_MS; a clean-up goes down to 90 % of the limit, so the next one is far away.
  */
 (() => {
   "use strict";
   const GENERATION = "bibliothek-data-1";   // a new value drops the whole old cache (at the first page that sees it)
   const MAX_ENTRIES = 8000;                 // ~31 MB of parts (32768 parts since 07.11, ~3.9 KB each) + ~12 MB of our own dictionaries; the oldest parts go first
-  const TRIM_EVERY = 50;                    // count the entries after this many new files
+  const IDLE_MS = 10000, RECOUNT_MS = 24 * 3600 * 1000, KEEP = 0.9;   // count only in a quiet moment; at most once a day otherwise
+  const COUNT_KEY = "bibliothekDataCacheCount";
   const limit = () => Number((typeof window !== "undefined" && window.__bibliothekDataCacheMax) || 0) || MAX_ENTRIES;   // (a test sets a small limit)
   const dataPaths = [
     /^open%20data\/dictionary-de-json\/parts\/\d{4,5}\.json$/,   // 32768 parts since 07.11: 0000…32767
@@ -36,10 +42,10 @@
   const replacedOnUpdate = /^worterbuch\//;
   const host = typeof window !== "undefined" ? window : globalThis;
   const isRequest = input => typeof Request !== "undefined" && input instanceof Request;
-  const WAIT_MS = 1500;                     // a lookup that does not answer (WebKit stalls happen) counts as a miss
+  const WAIT_MS = 500;                      // a lookup that does not answer (WebKit stalls happen) counts as a miss (1.5 s before 07.11)
   const OPEN_WAIT_MS = 5000;                // the first open reads the list of entries — on a phone it can take longer
   const PAUSE_MS = 30000;                   // after a stall: plain fetch for a while, then the cache is tried again (review 07.11)
-  let site = null, opened = null, added = 0, pausedUntil = 0;
+  let site = null, opened = null, pausedUntil = 0, lastUse = 0, countTimer = null;
   try {
     // host.__bibliothekNoDataCache: tests that block parts to simulate a failing network switch the cache off (review 07.11)
     if (typeof caches !== "undefined" && typeof location !== "undefined" && host.isSecureContext !== false && !host.__bibliothekNoDataCache)
@@ -55,21 +61,33 @@
   function open() {
     if (!opened) opened = (async () => {
       const cache = await caches.open(GENERATION);
-      // once per page: older generations go, and the cache is brought under its limit
+      // once per page: older generations go; the entries are counted later, in a quiet moment, if they need to be
       setTimeout(() => {
         caches.keys().then(names => Promise.all(names.filter(n => n.startsWith("bibliothek-data-") && n !== GENERATION).map(n => caches.delete(n))))
-          .then(() => trim(cache)).catch(() => {});
+          .then(() => { const c = readCount(); if (!c || c.n > limit() || Date.now() - c.at > RECOUNT_MS) countLater(cache); }).catch(() => {});
       }, 4000);
       return cache;
     })();
     return opened;
   }
+  const readCount = () => { try { const c = JSON.parse(localStorage.getItem(COUNT_KEY)); return c && Number.isFinite(c.n) && Number.isFinite(c.at) ? c : null; } catch (_) { return null; } };
+  const writeCount = (n, at) => { try { localStorage.setItem(COUNT_KEY, JSON.stringify({n: Math.max(0, n), at})); } catch (_) {} };
+  const addCount = d => { const c = readCount(); if (c) writeCount(c.n + d, c.at); return c ? c.n + d : null; };
+  // count (and clean up) when the cache has not been used for IDLE_MS — never in the middle of a tap
+  function countLater(cache) {
+    if (countTimer) return;
+    const check = () => {
+      if (clock() - lastUse < IDLE_MS) { countTimer = setTimeout(check, IDLE_MS); return; }
+      trim(cache).catch(() => {}).finally(() => { countTimer = null; });
+    };
+    countTimer = setTimeout(check, IDLE_MS);
+  }
   async function trim(cache) {
     const counted = clock();
     const keys = await cache.keys();                    // in the order the entries were added
     note(stats.keys, {at: Math.round(counted), ms: Math.round(clock() - counted), n: keys.length}, 100);
-    const over = keys.length - limit();
-    if (over <= 0) return;
+    const over = keys.length > limit() ? keys.length - Math.floor(limit() * KEEP) : 0;   // down to 90 %: the next clean-up is far
+    if (over <= 0) { writeCount(keys.length, Date.now()); return; }
     // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
     // latest by version, not by order: an old page in another tab may store an old version after the new one; review 07.11)
     const rows = keys.map(key => { try { const url = new URL(key.url);
@@ -78,7 +96,9 @@
     const latest = new Map();
     for (const row of rows) if (!row.part && !(latest.get(row.path) > row.version)) latest.set(row.path, row.version);
     const removable = rows.filter(row => row.part || row.version !== latest.get(row.path));
-    for (let i = 0; i < Math.min(over, removable.length); i++) await cache.delete(removable[i].key);
+    let removed = 0;
+    for (let i = 0; i < Math.min(over, removable.length); i++) if (await cache.delete(removable[i].key)) removed++;
+    writeCount(keys.length - removed, Date.now());
   }
   const versionOf = url => url.searchParams.get("v") || "";
   async function store(cache, url, copy) {
@@ -86,9 +106,13 @@
       const same = await cache.keys(url.origin + url.pathname, {ignoreSearch: true});
       if (same.some(key => versionOf(new URL(key.url)) > versionOf(url))) return;      // a later version is kept: not stored
       await cache.put(url.href, copy);
-      for (const key of same) if (versionOf(new URL(key.url)) < versionOf(url)) await cache.delete(key);
-    } else await cache.put(url.href, copy);
-    if (++added % TRIM_EVERY === 0) await trim(cache);   // (the first trim of a page: 4 s after the open)
+      let gone = 0;
+      for (const key of same) if (versionOf(new URL(key.url)) < versionOf(url) && await cache.delete(key)) gone++;
+      if (same.some(key => key.url === url.href)) gone++;   // (the same address again: no new entry)
+      addCount(1 - gone);
+    } else { await cache.put(url.href, copy); addCount(1); }
+    const c = readCount();
+    if (!c || c.n > limit()) countLater(cache);
   }
   // Counters (speed chat 07.11, read by autoread.html; they change nothing): long taps on the iPhone had ~1.4–1.6 s that
   // were neither network nor page work — about WAIT_MS. Every cache step slower than 200 ms is noted with its time on this
@@ -104,6 +128,7 @@
     return Promise.race([pending, new Promise(resolve => { timer = setTimeout(() => resolve(STALLED), ms); })]).finally(() => clearTimeout(timer)); };
   async function cachedFetch(input, options) {
     let url = null;
+    lastUse = clock();
     if (!site || Date.now() < pausedUntil || isRequest(input)) return fetch(input, options);
     try { url = new URL(String(input), location.href); } catch (_) { url = null; }
     if (!url || !cacheable(url, options)) return fetch(input, options);

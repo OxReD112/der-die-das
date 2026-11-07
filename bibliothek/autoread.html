@@ -244,7 +244,7 @@
     if (r.cache) {
       const k = r.cache.keys, sorted = [...k].map(x => x.ms).sort((a, b) => a - b), kinds = {};
       for (const x of r.cache.slow) kinds[x.kind] = (kinds[x.kind] || 0) + 1;
-      lines.push('', `Кэш данных: не ответил вовремя (1,5 с) — ${r.cache.stalled} раз; шагов дольше 200 мс — ${r.cache.slow.length} (${Object.entries(kinds).map(([a, n]) => a + ' ' + n).join(', ') || '—'})`);
+      lines.push('', `Кэш данных: не ответил вовремя (0,5 с; до 07.11 вечера — 1,5 с) — ${r.cache.stalled} раз; шагов дольше 200 мс — ${r.cache.slow.length} (${Object.entries(kinds).map(([a, n]) => a + ' ' + n).join(', ') || '—'})`);
       lines.push(`  подсчёт записей: ${k.length} раз, ${sorted.length ? `медиана ${sorted[sorted.length >> 1]} мс, максимум ${sorted.at(-1)} мс, записей ${k.at(-1).n}` : '—'}`);
     }
     lines.push('', `Устройство: ${r.ua}`);
