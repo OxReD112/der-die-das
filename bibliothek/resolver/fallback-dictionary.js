@@ -58,7 +58,6 @@
     trimDictionaryCache(index);
     return value;
   }
-  const verbFormCache = new Map();
   const verbFormsBase = new URL("data/fallback-verb-forms/", document.currentScript.src);
   // Versions in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
   // versioned file for good — a changed data file needs a new version here (dev/bibliothek/tools/data-versions.json).
@@ -102,14 +101,14 @@
     return (await superlativePromise)[String(word).normalize('NFC').toLowerCase()]||[];
   }
   // FNV-1a over the UTF-8 bytes. D22 (25.10.2026): the dictionary parts are 8 192 (open data/dictionary-de-json/manifest.json,
-  // partition_count; the old part of a word is its new part & 1023); the verb-form parts stay 1 024 (fallback-verb-forms).
+  // partition_count; the old part of a word is its new part & 1023); since 07.11 32 768. The verb-form rows come from the same
+  // parts (verbFormLinks); of fallback-verb-forms the reader reads only the manifest — the membership filter (mayBeVerb).
   const fnv = word => {
     let hash = 2166136261;
     for (const byte of new TextEncoder().encode(word)) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
     return hash;
   };
   const dictionaryPartition = word => fnv(word) & 32767;
-  const verbFormPartition = word => fnv(word) & 1023;
   async function mayBeVerb(word) {
     try {
       if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
@@ -150,24 +149,24 @@
     const rows=(await auxiliaryFormsPromise)[String(word).normalize('NFC').toLowerCase()]||[];
     return rows.map(([lemma,person,number,tense,mood])=>({lemma,person,number,tense,mood}));
   }
-  function verbFormPart(index) {
-    if (verbFormCache.has(index)) return keepPart(verbFormCache,index,verbFormCache.get(index));
-    const pending = dataFetch(new URL(`${String(index).padStart(4,"0")}.json?v=${verbFormsVersion}`,verbFormsBase)).then(response => {
-      if (!response.ok) throw new Error("Fallback verb morphology unavailable");
-      return response.json();
-    }).then(data => {
-      if(data.format_version !== 1 || data.partition !== index)throw new Error("Invalid fallback verb morphology partition");
-      return data.records;
-    }).catch(error=>{if(verbFormCache.get(index)===pending)verbFormCache.delete(index);throw error;});
-    observePending(pending);
-    return keepPart(verbFormCache,index,pending);
-  }
-
+  // Speed chat 07.11.2026: the verb-form table (data/fallback-verb-forms/NNNN.json) was a copy of the external dictionary's
+  // own inflection rows — all 106 773 forms rebuild byte for byte from the form's own record by the builder's rule
+  // (dev/bibliothek/scripts/build-fallback-verb-forms.cjs; regression verb-forms-from-dictionary-qa.cjs). The rows are read
+  // from that record now: the reader asks the same part for the word anyway, so one request fewer per word. (The builder's
+  // «lemma has a verb sense» condition holds for every such row of this dictionary — the regression checks it.)
+  const VERB_FORM_KINDS = ["indicative","subjunctive","imperative","infinitive","infinitive-zu","participle"];
   async function verbFormLinks(word) {
-    const spelling = String(word).normalize("NFC").toLowerCase(), index = verbFormPartition(spelling);
-    observe('partition-cache', {cache:'verb-forms',key:index,word:spelling,state:cacheState(verbFormCache,index),size:verbFormCache.size});
-    const rows = (await verbFormPart(index))[spelling] || [];
-    return rows.map(([lemma,tags])=>[spelling,lemma,tags]);
+    const spelling = String(word).normalize("NFC").toLowerCase();
+    const data = await record(spelling), rows = [];
+    for (const [rawForm,rawLemma,rawTags] of data?.inflections || []) {
+      const form = String(rawForm || "").normalize("NFC").toLowerCase(), lemma = String(rawLemma || "").normalize("NFC").toLowerCase();
+      const tags = String(rawTags || "").split(",").filter(Boolean);
+      if (form !== spelling || !/^[\p{L}\p{M}]+$/u.test(form) || !/^[\p{L}\p{M}]+$/u.test(lemma) ||
+        tags.some(t => t === "auxiliary" || t.startsWith("error-")) || !tags.some(t => VERB_FORM_KINDS.includes(t))) continue;
+      const value = [spelling,lemma,[...new Set(tags)].sort().join(",")];
+      if (!rows.some(row => row[1] === value[1] && row[2] === value[2])) rows.push(value);
+    }
+    return rows;
   }
   // Speed (26.10.2026): several independent lookups that a step used to make one after another (one network wait each)
   // are started together and read in the old order — the results are the same, failures surface at the same place.
@@ -778,14 +777,8 @@
       const records = await Promise.all(candidates.map(peek));
       await Promise.all(candidates.map((candidate,i) => records[i] &&
         Promise.all(linkedLemmas(candidate,records[i]).map(lemma => warmLexical(lemma,new Set([candidate]))))));
-      let verbLinked = false;
-      if (!records.some(Boolean)) {
-        try {
-          const lemmas = [...new Set(((await verbFormPart(verbFormPartition(lower)))[lower] || []).map(row => row[0]))];
-          verbLinked = lemmas.length > 0;
-          await Promise.all(lemmas.map(lemma => warmLexical(lemma,new Set())));
-        } catch (_) {}
-      }
+      // (a word without a record has no verb-form rows either: they are read from its record since 07.11)
+      const verbLinked = false;
       if (!/^\p{Ll}/u.test(spelling)) return;
       const verb = verbLinked || records.some(data => (data?.senses || []).some(row => row[2] === "verb"));
       const hypotheses = [...(verb ? [] : weakHypotheses(spelling).map(h => h.lemma)),
