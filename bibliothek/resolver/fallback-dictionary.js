@@ -137,7 +137,8 @@
   async function nounGender(word) {
     const data=await record(String(word).normalize('NFC').toLowerCase());
     // The genders of the noun senses (senses[i][5]) and of the entries; a form line («plural of Nachricht») does not count.
-    const genders=new Set([...(data?.entries||[]).map(e=>e?.[4]?.g),...(data?.senses||[]).filter(s=>s[2]==='noun'&&!/\b(?:plural|singular|genitive|dative|accusative|nominative|inflection|form|spelling) of\b/iu.test(String(s[3]||''))).map(s=>s[5])].filter(g=>['m','f','n'].includes(g)));
+    // (advisor 07.11: nor an obsolete / archaic sense — Farm «ферма» is die; der Farm «Farn», «barque» are obsolete)
+    const genders=new Set([...(data?.entries||[]).map(e=>e?.[4]?.g),...(data?.senses||[]).filter(s=>s[2]==='noun'&&!(Array.isArray(s[6])&&s[6].some(l=>/^(?:obsolete|archaic)$/iu.test(l)))&&!/\b(?:plural|singular|genitive|dative|accusative|nominative|inflection|form|spelling) of\b/iu.test(String(s[3]||''))).map(s=>s[5])].filter(g=>['m','f','n'].includes(g)));
     return genders.size===1?({m:'der',f:'die',n:'das'})[[...genders][0]]:genders.size>1?'?':null;
   }
   const auxiliaryFormsUrl=new URL('data/auxiliary-verb-forms.json?v=20261008-f4-1',document.currentScript.src);

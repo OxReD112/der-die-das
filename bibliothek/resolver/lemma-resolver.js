@@ -3741,7 +3741,11 @@
               (head.entry ? String(head.entry.plural || "").split(/\s*,\s*/u).map(norm).includes(surface) : true)) number = "plural";
           // das Baumtragen, beim Holzhacken, das Stühlerücken: a neuter determiner before a head of another gender or a
           // plural is a nominalized infinitive, not this compound.
-          if (/^(?:das|dies|dieses|jenes|jedes|welches|manches|solches|alles)$/u.test(ctx.detForm) && (number || headGender && headGender !== "das")) return null;
+          // (advisor 07.11: the check must not leave nothing — kept for a feminine singular head of two parts with no capital word after it, unless the head may be such an infinitive (Tragen, Hacken — not the imperative farm); dass das Schönheitsfarm
+          // hieß keeps Schönheit(s) + Farm, das stays as it is)
+          if (/^(?:das|dies|dieses|jenes|jedes|welches|manches|solches|alles)$/u.test(ctx.detForm) && (number || headGender && headGender !== "das") &&
+              (!(headGender === "die" && !number && parts.length === 2 && !ctx.nextCapital) ||
+               (verbAnalyses.get(surface) || []).some(a => a.kind === "infinitive") || (await wordFormationDict.readings(surface)).some(r => r.pos === "Verb" && norm(r.lemma) === surface))) return null;
           let headText = number || !head.form ? surface : base;
           // A dative plural shows its plural (den Wichtelmännern -> die Wichtelmänner = Wichtel + Männer).
           if (number && /n$/u.test(headText)) {
@@ -12650,7 +12654,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (type === "Nomen" && entry?.plural && !entry.plural_only && !entry.declension_forms && !candidate.usage) {
         const word = norm(entry.word), plural = norm(entry.plural);
         const plurals = new Set([plural, /[ns]$/u.test(plural) ? plural : plural + "n"]);
-        const singulars = new Set([word, word + "s", word + "es", word + "e", word + "n", word + "en"]);
+        // (advisor 07.11, PLURAL_AND_DAS_FARM: a feminine noun has no endings in the singular — Änderungen, Spritzen are plural)
+        const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", word + "n", word + "en"]);
         if (plurals.has(form) && !singulars.has(form)) return {number:"plural"};
         // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
         // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
