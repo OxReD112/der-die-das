@@ -4178,6 +4178,7 @@
         for (let k = i+1; k < j; k++) if ((CIRCUMPOSITION_ENDS[norm(tokens[k][0])] || []).includes(p)) return true;
         return false; };
       const AND_OR_NEXT_ADVERB = j => ["und","oder"].includes(norm(tokens[j+1]?.[0] ?? "")) && (forms.get(norm(tokens[j+2]?.[0] ?? "")) || []).some(e => e.type === "Adverb");
+      const L39_OWN_ADVERB_PARTICLES = new Set(["wieder","zu"]);
       const sharedFormPairs = i => {
         if (secondary) return [];
         const t = tokens[i][0], key = norm(t);
@@ -4193,8 +4194,9 @@
           // (links chat 06.11, advisor, WN batch 49: a particle of the G47 class keeps the external verb although it has an adverb card
           // of its own — bestanden hier fort → fortbestehen; DIRECTION_PARTICLE stays for hin / her, raus, rein …, which G47 skips)
           // (links chat 07.11, advisor 06.11, L39 (Б) one particle at a time: wieder — Wir kommen morgen wieder → wiederkommen;
-          // only here, at the end of the part, where the scan already asks for the particle to close the verb)
-          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) && !g47Particle(norm(row.prefix)) && norm(row.prefix) !== "wieder" ||
+          // then zu — wenden ihre Ohren … zu → zuwenden, laufen … der Spornspitze zu → zulaufen; only here, at the end of the part,
+          // where the scan already asks for the particle to close the verb)
+          if (particleCards.some(e => e.type === "Adjektiv") || particleCards.some(e => e.type === "Adverb") && !DIRECTION_PARTICLE.test(norm(row.prefix)) && !g47Particle(norm(row.prefix)) && !L39_OWN_ADVERB_PARTICLES.has(norm(row.prefix)) ||
             SHORT_PRONOMINAL_ADVERB.test(norm(row.prefix))) continue;
           out.push({entry:row.entry,prefix:norm(row.prefix),sharedForm:true});
         }
