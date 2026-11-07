@@ -238,6 +238,11 @@
   // ersetzt). The pure conjunctions (wenn, bevor, ob, dass, weil, nachdem …) still open their part as in main; als before a noun
   // phrase is alsNounPhrase (werdenGroup, externalPassiveGroup), so — the correlate of werdenGroupIn. Not the coordinators.
   const MID_PART_SUBORDINATORS = new Set(["damit","während"]);
+  // (advisor 07.11, comma insertions) The first word of a finished subordinate clause between two commas inside a part: a relative
+  // pronoun or a subordinating conjunction (kann Dinge, die er sucht, nicht finden).
+  const INSERTED_CLAUSE_OPENERS = new Set(["der","die","das","dem","den","deren","dessen","denen","welcher","welche","welches","welchem","welchen",
+    "wenn","weil","dass","daß","als","ob","obwohl","obgleich","nachdem","während","bevor","ehe","sobald","solange","seit","seitdem","bis","falls",
+    "wo","wie","was","wer","damit","indem","sodass"]);
   // Links chat (advisor 05.11.2026, item 5 / 1): denn inside the part — no punctuation mark before it — is the particle, as doch
   // (Was hat er denn gesagt?, Seid Ihr denn nicht verwundet?); after a mark it stays the conjunction (…, denn er war müde).
   const MID_PART_PARTICLES = new Set(["doch","denn"]);
@@ -4664,6 +4669,49 @@
           // (P7: inside brackets commas, colons, abbreviation points and quotes are part of the insertion — Architekten KMSP
           // (Kaplan, Matzke, Schöler + Partner) … gebaut; only another bracket ends the search)
           if (open === "(" ? /[()]/u.test(h) : gap.test(h)) break;
+        }
+      }
+      // (advisor 07.11, comma insertions, only the narrow case): a finished subordinate clause between two commas inside the part — its
+      // first word a relative pronoun / subordinating conjunction, its last word before the second comma a finite verb — is skipped like
+      // an insertion between dashes, when (2) before the first comma a finite auxiliary / modal of the chain has no verb of its own yet
+      // and (3) after the second comma a participle / infinitive closes the part (then only the end, a mark or verbs of the chain;
+      // no new finite verb before it): kann Dinge, die er sucht, nicht finden. Not an apposition or a short insertion without a verb
+      // (die Weißgardisten, wie erwartet), not a zu-infinitive after the comma (habe dabei geholfen, dieses Problem zu beseitigen).
+      if (gap.test(",")) {
+        const AUXILIARY = new Set(["haben","sein","werden","können","müssen","dürfen","sollen","wollen","mögen","möchten"]);
+        const rowsOf = i => verbAnalyses.get(norm(tokens[i][0])) || [];
+        const commaAfter = i => i+1 < tokens.length && /^\s*,\s*$/u.test(gapAfter(i));
+        const stopAfter = i => i+1 >= tokens.length || /[,;:.!?…()"„“”»«–—]/u.test(gapAfter(i));
+        const lowFinite = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => r.kind === "finite");
+        const chainVerb = i => /^\p{Ll}/u.test(tokens[i][0]) && rowsOf(i).some(r => ["participle","infinitive"].includes(r.kind));
+        const auxWord = i => rowsOf(i).some(r => AUXILIARY.has(norm(r.base || "")) ) || AUXILIARY.has(norm(tokens[i][0])) || /^(?:worden|geworden|gewesen|gehabt)$/u.test(norm(tokens[i][0]));
+        for (let a = 0; a+3 < tokens.length; a++) {
+          // (also auch / selbst / gerade before the conjunction: auch wenn, selbst als)
+          const opener = INSERTED_CLAUSE_OPENERS.has(norm(tokens[a+1][0])) || /^(?:auch|selbst|gerade|sogar|noch)$/u.test(norm(tokens[a+1][0])) &&
+            a+2 < tokens.length && /^(?:wenn|als|ob|obwohl|nachdem|während|bevor|weil|dass|daß)$/u.test(norm(tokens[a+2][0]));
+          // (a d- / welch- word before a capital noun is an article — ihre Aufgabe, die Zerstörung … zu überwachen, abgeschlossen)
+          const article = /^(?:der|die|das|dem|den|welcher|welche|welches|welchem|welchen)$/u.test(norm(tokens[a+1][0])) && /^\s+$/u.test(gapAfter(a+1)) && /^\p{Lu}/u.test(tokens[a+2]?.[0] ?? "");
+          if (!commaAfter(a) || !opener || article) continue;
+          let b = a+1; while (b+1 < tokens.length && b-a <= 16 && !stopAfter(b)) b++;
+          // (the last word a finite verb that is no participle too: wie erwartet, wie gesagt are short insertions without a verb — registry)
+          if (!commaAfter(b) || b === a+1 || !lowFinite(b) || rowsOf(b).some(r => r.kind === "participle") || norm(tokens[b-1][0]) === "zu" || b+1 >= tokens.length) continue;
+          // (2) a finite auxiliary / modal before the first comma in the same part, with no participle / infinitive after it yet
+          let h = a; while (h > 0 && !stopAfter(h-1)) h--;
+          let aux = -1; for (let i = h; i <= a; i++) if (rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || ""))) && /^\p{Ll}/u.test(tokens[i][0]) || i === h && rowsOf(i).some(r => r.kind === "finite" && AUXILIARY.has(norm(r.base || "")))) aux = i;
+          // (run 07.11: no verb of the chain after it yet, an auxiliary infinitive included — Musst also ganz schön bescheuert sein, wenn …)
+          if (aux < 0 || tokens.slice(aux+1,a+1).some((t,n) => chainVerb(aux+1+n))) continue;
+          // (3) after the second comma: the part closes in a participle / infinitive, then only verbs of the chain
+          let e = b+1; while (e+1 < tokens.length && !stopAfter(e)) e++;
+          // (run 07.11: not when the part after the second comma is a clause of its own — it opens with a relative / conjunction (…,
+          // die ich je gesehen habe), a finite form stands before the verb (…, dann wollen wir den Weg schon finden), or a finite form
+          // follows it (…, von welchen sie essen sollten); after the verb only non-finite verbs of the chain: unterstützt werden)
+          if (INSERTED_CLAUSE_OPENERS.has(norm(tokens[b+1][0]))) continue;
+          let v = -1; for (let i = b+1; i <= e; i++) { if (chainVerb(i) && !auxWord(i)) { v = i; break; } if (lowFinite(i)) { v = -2; break; } }
+          // (not a zu-infinitive, also the joined one — ihn in den Schrank einzuschließen, ein Einhorn abzuschlachten: it belongs to the
+          // inserted clause or to a phrase of its own)
+          if (v < 0 || v > b+1 && norm(tokens[v-1][0]) === "zu" || zuForms.has(norm(tokens[v][0])) || rowsOf(v).some(r => /zu/u.test(String(r.kind)))) continue;
+          if (tokens.slice(v+1,e+1).some(t => !/^(?:werden|sein|haben|worden|gewesen|geworden|gehabt|können|müssen|dürfen|sollen|wollen|mögen|lassen)$/u.test(norm(t[0])))) continue;
+          if ((selected <= a || selected > b) && !insertionAfter.has(a)) { insertionAfter.set(a,b+1); insertionBefore.set(b+1,a); }
         }
       }
       const skipped = new Set(), skip = (a,b) => { for (let i = a+1; i < b; i++) skipped.add(i); };
