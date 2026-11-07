@@ -959,15 +959,15 @@ $("answerInput").addEventListener("keydown", e => {
    The voice list can arrive late, so we re-check on voiceschanged and a few times after load.
    BEST VOICE FIRST (2026-11-07, Alena): if the user has downloaded a better German voice, use it.
    Order: Premium > Enhanced (Apple; the name is translated into the phone's language, so we also
-   check voiceURI) > Google's German voice in Chrome > any other voice, de-DE before other German,
-   on-device before online. Apple's Eloquence novelty voices (Eddy, Flo, Grandma, ...) go last. */
+   check voiceURI) > any other voice, de-DE before other German, on-device before online (online
+   voices such as Chrome's "Google Deutsch" fall silent offline - Alena wants offline to work).
+   Apple's Eloquence novelty voices (Eddy, Flo, Grandma, ...) go last. */
 let germanVoice = null;
 function germanVoiceScore(v) {
   const id = `${v.voiceURI || ""} ${v.name || ""}`;
   let score = 0;
   if (/premium/i.test(id)) score += 40;
   else if (/enhanced|erweitert|verbessert|улучш/i.test(id)) score += 30;
-  else if (/^google/i.test(v.name || "")) score += 20;
   if (/eloquence/i.test(v.voiceURI || "")) score -= 50;
   if (/^de[-_]DE$/i.test(v.lang || "")) score += 4;
   if (v.localService) score += 2;
