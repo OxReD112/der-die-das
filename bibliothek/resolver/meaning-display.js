@@ -747,6 +747,13 @@
     const confirmed = !!options.confirmed;
     const k = constructionMarks(candidate, confirmed, language);
     let headingText = heading(candidate), type = partOfSpeech(candidate, confirmed), marks = [...k.marks], text = null, helpEntry = candidate.item || null, more = 0;
+    // (fresh sample 06.11, L-055) an external initialism / acronym keeps the spelling of the text: USA, not «Usa» (the external
+    // dictionary keeps its keys in lowercase)
+    // (or a record whose English text writes the word in this spelling: NATO «NATO»)
+    if (candidate.source === 'fallback' && word && word.toLowerCase() === String(candidate.lemma || '').toLowerCase() && word !== word.toLowerCase() &&
+        (/^(?:initialism|acronym|abbreviation)\b/iu.test(String(candidate.translation?.en || '')) ||
+         word.length > 1 && word === word.toUpperCase() && String(candidate.translation?.en || '').split(/[^\p{L}\p{N}]+/u).includes(word)))
+      headingText = headingText.replace(new RegExp(`${candidate.lemma.charAt(0).toUpperCase()}${candidate.lemma.slice(1).replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')}$`, 'u'), word);
     // 29.10.2026 (expressions chat; advisor: the tense line of expressions): an expression's line mirrors the line of its verb's
     // card on its own part (resolver: expressionVerb) — «Verb» becomes «Feste Wendung» / «Ausdruck»; «mit X» goes when X is the
     // expression's own verb (it is the expression itself), so are «Reflexiv» of a heading with sich and the verb's preposition

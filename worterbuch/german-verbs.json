@@ -122996,5 +122996,52 @@
         "sie": "regten sich"
       }
     }
+  },
+  {
+    "id": "verb-2752",
+    "infinitive": "anschielen",
+    "translation_ru": "коситься (на кого-либо, что-либо); поглядывать искоса",
+    "translation_en": "to look sideways at, to eye furtively",
+    "auxiliary": "haben",
+    "usage_note_ru": "Кого, что — Akkusativ: jemanden misstrauisch anschielen — недоверчиво коситься на кого-либо. Отделяемый: schielte an, hat angeschielt. Без an: schielen — косить (о глазах); auf etwas schielen — коситься на что-либо, зариться.",
+    "usage_note_en": "Whom, what — accusative: jemanden misstrauisch anschielen — to eye someone suspiciously. Separable: schielte an, hat angeschielt. Without an: schielen — to squint; auf etwas schielen — to eye something, to covet it.",
+    "example_de": "Der Junge schielte den Kuchen auf dem Tisch hungrig an.",
+    "example_cloze": "Der Junge {{c1::schielte}} den Kuchen auf dem Tisch hungrig {{c1::an}}.",
+    "example_ru": "Мальчик голодными глазами косился на пирог на столе.",
+    "example_en": "The boy eyed the cake on the table hungrily.",
+    "perfect_form": "haben angeschielt",
+    "forms": null,
+    "separable_prefix": "an",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "schiele an",
+        "du": "schielst an",
+        "er/sie/es": "schielt an",
+        "wir": "schielen an",
+        "ihr": "schielt an",
+        "sie": "schielen an"
+      },
+      "Präteritum": {
+        "ich": "schielte an",
+        "du": "schieltest an",
+        "er/sie/es": "schielte an",
+        "wir": "schielten an",
+        "ihr": "schieltet an",
+        "sie": "schielten an"
+      },
+      "Konjunktiv II": {
+        "ich": "schielte an",
+        "du": "schieltest an",
+        "er/sie/es": "schielte an",
+        "wir": "schielten an",
+        "ihr": "schieltet an",
+        "sie": "schielten an"
+      },
+      "Imperativ": {
+        "du": "schiel an",
+        "ihr": "schielt an",
+        "Sie": "schielen Sie an"
+      }
+    }
   }
 ]
