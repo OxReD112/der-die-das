@@ -14622,7 +14622,55 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         let x=null;try{x=await pipeline(v.word,v.context);}catch(_){x=null;}
         const c=x&&x.selected;if(!c||canonicalPos(c.pos)!=="Verb")return r;
         return {...x,candidates:[c,...(r.candidates||[]).filter(k=>k!==sel&&canonicalPos(k.pos)!=="Verb"),...(sel?[sel]:[])],evidence:"capital-verb-before-pronoun"};};
-      const pending=hyphenEllipsis(word,context).then(e=>e?ellipsis(e):pipeline(word,context)).then(capitalVerb);
+      // (advisor 07.11, ALL_CAPS_COUNT: a run of two or more words in capitals — a shout, a heading. Inside it an external abbreviation
+      // is not offered (AN is no «initialism of Arbeitnehmer»), the links see the words in ordinary spelling, and a word without an own
+      // card tries its lowercase and its capitalised spelling: one answer is taken, two different ones — the window. An own card stays.)
+      const capsRun=async r=>{
+        if(context?.capsProbe||!Number.isInteger(context?.tokenOffset))return r;
+        const caps=t=>t.length>1&&/\p{Lu}/u.test(t)&&t===t.toUpperCase();
+        if(!caps(String(word)))return r;
+        const sentence=String(context.sentence||''),tokens=sharedTokens(sentence,'capsRun'),at=clickedTokenIndex(tokens,context.tokenOffset,word);
+        if(at<0)return r;
+        // (words next to each other with a space only — not a list of abbreviations: SA, SS; ZDF / KIKA; FAW - VW)
+        const joined=(a,b)=>/^[ \t]+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
+        let a=at,b=at;while(a>0&&caps(tokens[a-1][0])&&joined(a-1,a))a--;while(b+1<tokens.length&&caps(tokens[b+1][0])&&joined(b,b+1))b++;
+        if(b-a<1)return r;
+        // (a run of German words: more than half of them known in ordinary spelling — not HOSTAL HOSTILE HOTEL HOSTAGE, not DEN HAAG)
+        const knownWord=t=>{const l=t.toLowerCase(),c=t.charAt(0)+l.slice(1);return lemmas.has(l)||forms.has(l)||verbAnalyses.has(l)||!!contractionForms[l]||lemmas.has(c)||forms.has(c);};
+        let known=0;for(let k=a;k<=b;k++)if(knownWord(tokens[k][0]))known++;
+        if(known*2<=b-a+1)return r;
+        const abbreviation=c=>c&&c.source==='fallback'&&/^(?:initialism|acronym|abbreviation)\b/iu.test(String(c.translation?.en||''));
+        const title=t=>t.charAt(0)+t.slice(1).toLowerCase(),lower=t=>t.toLowerCase();
+        // (a word after a determiner / preposition is a noun when it has a noun card: DEN WEG → den Weg, not weg)
+        // (after a determiner: a noun card, or a word that is otherwise only an adverb / particle — EIN LOS, DEN WEG; a verb or an
+        // adjective stays lowercase — DAS GLAUBT, KEINEN HIRNRISSIGEN ALTEN)
+        const nounCard=t=>[...(lemmas.get(title(t))||[]),...(forms.get(title(t))||[]),...(forms.get(lower(t))||[])].some(e=>e.type==='Nomen');
+        const onlyLight=t=>{const l=lower(t),rows=[...(lemmas.get(l)||[]),...(forms.get(l)||[])];return !verbAnalyses.has(l)&&rows.every(e=>!['Verb','Adjektiv'].includes(e.type));};
+        const nounAfter=k=>k>a&&(determinerFeatures(lower(tokens[k-1][0]))&&(nounCard(tokens[k][0])||onlyLight(tokens[k][0]))||
+          prepositions.has(lower(tokens[k-1][0]))&&nounCard(tokens[k][0]));
+        const ordinary=(t,k)=>{const l=lower(t);return k!==undefined&&nounAfter(k)?title(t):lemmas.has(l)||forms.has(l)||verbAnalyses.has(l)?l:title(t);};
+        const spell=(form)=>{let out='',last=0;for(let k=a;k<=b;k++){out+=sentence.slice(last,tokens[k].index)+(k===at?form:ordinary(tokens[k][0],k));last=tokens[k].index+tokens[k][0].length;}
+          return out+sentence.slice(last);};
+        // An own card stays — unless the ordinary spelling links it into a construction it lacks here (SEHT … AN → sich ansehen).
+        if(r?.selected&&r.selected.source==='main'){
+          const form=ordinary(String(word),at);let x=null;try{x=await pipeline(form,{...context,sentence:spell(form),capsProbe:true});}catch(_){x=null;}
+          const spans=c=>(c?.construction?.spans||[]).length;
+          return x?.selected&&x.selected.source==='main'&&spans(x.selected)>spans(r.selected)&&['separable-verb','reflexive-verb'].includes(x.selected.construction.id)?
+            keepDecision(x,{...x,evidence:x.evidence||'caps-run-ordinary-spelling'}):r;
+        }
+        // (only a word with no answer now — «not found», a window or an external abbreviation; HERZOG VON ANHALT keeps its name)
+        if(r?.selected&&!abbreviation(r.selected))return r;
+        const answers=[];
+        for(const form of [lower(word),title(word)]){let x=null;try{x=await pipeline(form,{...context,sentence:spell(form),capsProbe:true});}catch(_){x=null;}
+          if(x&&x.selected&&!abbreviation(x.selected))answers.push(x);}
+        const same=(x,y)=>window.BibliothekVocabulary.identity(x.selected)===window.BibliothekVocabulary.identity(y.selected);
+        if(answers.length&&answers.every(x=>same(x,answers[0])))return keepDecision(answers[0],{...answers[0],evidence:answers[0].evidence||'caps-run-ordinary-spelling'});
+        if(!r)return r;
+        const candidates=(r.candidates||[]).filter(c=>!abbreviation(c));
+        if(abbreviation(r.selected)||candidates.length!==(r.candidates||[]).length)
+          return keepDecision(r,{...r,candidates,selected:null,preferred:null,status:candidates.length?'ambiguous':'unresolved'},{outcome:'needs-choice',rule:null});
+        return r;};
+      const pending=hyphenEllipsis(word,context).then(e=>e?ellipsis(e):pipeline(word,context)).then(capitalVerb).then(capsRun);
       return pending.then(result=>{release();return result;},error=>{release();throw error;});
     }
     // G40 (21.10.2026): a pronominal adverb whose own card also has a temporal meaning (darauf «на это …; после этого,
