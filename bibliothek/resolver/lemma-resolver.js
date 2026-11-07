@@ -5144,11 +5144,14 @@
       const DECLINED_BEFORE = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|all\p{L}*|viel\p{L}*|wenig\p{L}*|mehrere|einig\p{L}*|beid\p{L}*|manch\p{L}*|solch\p{L}*|\d+)$/u;
       // (review 24.10: not a bare Partizip II / infinitive — hat begonnen Bücher zu schreiben, werden gebeten Platz zu nehmen;
       // an attributive form has its own ending: begonnenen, gebetene)
+      // (links chat 07.11, registry s7873: an extended attribute — der bei lebendigem Leib verbrannten Personen — attributeFrameDeterminer)
+      const attributeAfterPrepositionGroup = i => attributeFrameDeterminer(tokens,i,start) >= 0;
       const attributiveForm = i => i > start && i < end && LOWERCASE_DECLINED_WORD.test(tokens[i][0]) && nounToken(i+1) &&
         !verbs(i).some(e => participleOf(e,i) || norm(e.word) === norm(tokens[i][0])) &&
         !/[,;:.!?()–—"„“»«]/u.test(sentence.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index)) &&
         // (advisor 04.11, map: also after als / wie — als degradierte Mythen angesehen; als manuell … — no)
-        (DECLINED_BEFORE.test(norm(tokens[i-1][0])) || prepositions.has(norm(tokens[i-1][0])) || /^(?:als|wie)$/u.test(norm(tokens[i-1][0])) || verbs(i-1).some(e => ["Präsens","Präteritum","Konjunktiv II"].some(t => finiteIn(e,i-1,t))));
+        (DECLINED_BEFORE.test(norm(tokens[i-1][0])) || prepositions.has(norm(tokens[i-1][0])) || /^(?:als|wie)$/u.test(norm(tokens[i-1][0])) || verbs(i-1).some(e => ["Präsens","Präteritum","Konjunktiv II"].some(t => finiteIn(e,i-1,t))) ||
+        attributeAfterPrepositionGroup(i));
       // Modals W2 (links chat, advisor 01.11): a word whose own adjective / adverb card wins (Begrenzt, Umgekehrt, Bedingt, Eventuell)
       // is no possible verb of the group — not when werden / worden / sein follows at once (then it is the participle: Gesagt werden
       // muss, Finanziert werden soll) and not when the adjective card names the verb as its default (participle_default verb / choice).
@@ -8058,6 +8061,42 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return unchanged;
     }
+    // (links chat 07.11, advisor 07.11 — registry s7873; one function for the parts of the sentence and the card of the tapped word, 4.19)
+    // An extended attribute: a determiner (also dessen / deren, a possessive), a group with a preposition right after it, then the
+    // declined form before its noun — der bei lebendigem Leib verbrannten Personen, seiner im Jahr 1873 erfolgten Zulassung. The ending
+    // agrees with the determiner as an adjective's does; between the preposition and the form no verb form of its own, no punctuation.
+    // Gives the determiner's index, else -1. Not touched: Die Kinder spielten im Hof (no determiner + preposition before the form).
+    const ATTRIBUTE_FRAME_DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|dessen|deren)$/u;
+    function attributeFrameEndings(det) {
+      if (/^(?:dessen|deren)$/u.test(det)) return ["e","er","es","en","em"];
+      const ein = /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)/u.test(det);
+      if (/(?:en|em)$/u.test(det)) return ["en"];
+      if (ein && /^(?:ein|kein|mein|dein|sein|ihr|unser|euer)$/u.test(det)) return ["er","es"];
+      if (/(?:er|es)$/u.test(det)) return ein ? ["en"] : ["e","en"];
+      if (det === "das") return ["e"];
+      if (/e$/u.test(det)) return ["e","en"];
+      return [];
+    }
+    function attributeFrameDeterminer(tokens, i, lo = 0) {
+      const text = String(tokens[i]?.input ?? ""), word = norm(tokens[i]?.[0] ?? "");
+      const ending = (/(en|em|er|es|e)$/u.exec(word) || [])[1];
+      if (!ending || !/^\p{Ll}/u.test(tokens[i][0]) || !/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") ||
+          /[,;:.!?()–—"„“»«]/u.test(text.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index))) return -1;
+      const verbal = k => (verbAnalyses.get(norm(tokens[k][0])) || []).length > 0 || (forms.get(norm(tokens[k][0])) || []).some(e => e.type === "Verb");
+      for (let d = i-1; d >= lo && i-d <= 8; d--) {
+        if (/[,;:.!?()–—"„“»«]/u.test(text.slice(tokens[d].index + tokens[d][0].length, tokens[i].index))) return -1;
+        const det = norm(tokens[d][0]);
+        if (!ATTRIBUTE_FRAME_DETERMINER.test(det) || !/^\p{Ll}/u.test(tokens[d][0]) && d !== lo && d !== 0) continue;
+        // (a determiner right before the form or one word before it is the form's own — dem selbst gewählten Tod: the ordinary
+        // noun group, not this frame; a determiner further inside the group belongs to it — im Laufe der Jahrhunderte erfolgte)
+        if (!prepositions.has(norm(tokens[d+1][0]))) { if (d >= i-2) return -1; continue; }
+        if (d+1 >= i-1) return -1;
+        for (let k = d+2; k < i; k++) if (/^\p{Ll}/u.test(tokens[k][0]) && verbal(k) && !adjectivalForm(tokens[k][0]) && !ownModifierForm(tokens[k][0]) &&
+          !LOWERCASE_DECLINED_WORD.test(tokens[k][0])) return -1;
+        return attributeFrameEndings(det).includes(ending) ? d : -1;
+      }
+      return -1;
+    }
     function nominalRank(word, tokens, index, start, end, matches, candidates, shared = null, otherFinite = false) {
       const unchanged = {candidates,preferred:null,evidence:null};
       // Capitals inside a clause can signal nominalisation. Sentence-initial
@@ -8084,6 +8123,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let left = index-1;
       while (left >= start && index-left <= 3 && modifierAt(left)) left--;
       if (Number.isInteger(shared?.frameLeft)) left = shared.frameLeft;
+      // (s7873: an extended attribute — the determiner before the group with a preposition; only the form itself is checked)
+      let frameFrom = null;
+      if (!Number.isInteger(shared?.frameLeft) && (left < start || !ATTRIBUTE_FRAME_DETERMINER.test(norm(tokens[left][0])))) {
+        // (the frame only marks a verb's participle: with an adjective card of the form the choice stays as it was — der von Thomas
+        // Jefferson gegründeten Partei keeps gegründet)
+        const d = candidates.some(c => canonicalPos(c.pos) === "Adjektiv") ? -1 : attributeFrameDeterminer(tokens,index,start); if (d >= 0) { left = d; frameFrom = index; } }
       const determiner = left >= start ? norm(tokens[left][0]) : "";
       const definite = DEFINITE_ARTICLES.includes(determiner);
       const ein = /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(determiner);
@@ -8118,7 +8163,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const expected = articleKind === "strong" || articleKind === "mixed" && !determinerEnding ? strong : weak;
             // All modifiers must admit the same analysis, not independently
             // borrow incompatible cases from an ambiguous article.
-            for (let i = left+1; i < head; i++) {
+            for (let i = frameFrom ?? left+1; i < head; i++) {
               const options = i === index ? analyses : shared ? shared.get(i) || [] : modifiers.get(norm(tokens[i]?.[0])) || [];
               if (!options.some(row => row.ending === expected || row.invariant)) return;
             }
