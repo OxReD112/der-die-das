@@ -956,18 +956,32 @@ $("answerInput").addEventListener("keydown", e => {
 /* GERMAN VOICE ONLY (2026-09-27): we pick a German voice ourselves instead of letting
    the phone choose. If the device has no German voice, the speaker icon is hidden
    (body.noGermanVoice) and tapping the sentence does nothing - never a wrong-language voice.
-   The voice list can arrive late, so we re-check on voiceschanged and a few times after load. */
+   The voice list can arrive late, so we re-check on voiceschanged and a few times after load.
+   BEST VOICE FIRST (2026-11-07, Alena): if the user has downloaded a better German voice, use it.
+   Order: Premium > Enhanced (Apple; the name is translated into the phone's language, so we also
+   check voiceURI) > Google's German voice in Chrome > any other voice, de-DE before other German,
+   on-device before online. Apple's Eloquence novelty voices (Eddy, Flo, Grandma, ...) go last. */
 let germanVoice = null;
+function germanVoiceScore(v) {
+  const id = `${v.voiceURI || ""} ${v.name || ""}`;
+  let score = 0;
+  if (/premium/i.test(id)) score += 40;
+  else if (/enhanced|erweitert|verbessert|улучш/i.test(id)) score += 30;
+  else if (/^google/i.test(v.name || "")) score += 20;
+  if (/eloquence/i.test(v.voiceURI || "")) score -= 50;
+  if (/^de[-_]DE$/i.test(v.lang || "")) score += 4;
+  if (v.localService) score += 2;
+  return score;
+}
 function pickGermanVoice() {
   const voices = "speechSynthesis" in window ? speechSynthesis.getVoices() : [];
   const de = voices.filter(v => /^de([-_]|$)/i.test(v.lang || ""));
-  const isDeDE = v => /^de[-_]DE$/i.test(v.lang);
-  germanVoice =
-    de.find(v => isDeDE(v) && v.localService) ||
-    de.find(isDeDE) ||
-    de.find(v => v.localService) ||
-    de[0] ||
-    null;
+  germanVoice = null;
+  let best = -Infinity;
+  for (const v of de) {
+    const s = germanVoiceScore(v);
+    if (s > best) { best = s; germanVoice = v; } // ties keep the list order, as before
+  }
   document.body.classList.toggle("noGermanVoice", !germanVoice);
 }
 pickGermanVoice();
