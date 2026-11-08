@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  window.BibliothekBookshelf={create({root,onOpen,onDelete,describe,getPreferredId=()=>null}) {
+  window.BibliothekBookshelf={create({root,onOpen,onDelete,onReset=()=>{},describe,getPreferredId=()=>null}) {
     let dispose=()=>{}, selectedId=null, current=[];
     const hash=value=>Array.from(String(value)).reduce((sum,c)=>(Math.imul(sum,31)+c.codePointAt(0))>>>0,0);
     function update(books) {
@@ -8,7 +8,7 @@
       root.replaceChildren();
       if(!books.length)return;
       const controller=new AbortController(), listen=(el,type,fn,opts={})=>el.addEventListener(type,fn,{...opts,signal:controller.signal});
-      root.innerHTML='<div class="shelf-stage" aria-label="Bücherregal"></div><div class="caption"><h2><button type="button" class="shelf-title"></button></h2><div class="caption-author" hidden></div><div class="details"></div><div class="caption-actions"><button type="button" class="book-delete" aria-label="Delete book"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M6.5 7l.8 12.2a1 1 0 0 0 1 .8h7.4a1 1 0 0 0 1-.8L17.5 7"/></svg></button></div></div><div class="navigation"><button type="button" class="arrow prev" aria-label="Previous book"><span class="ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span></button><span class="count" aria-live="polite"></span><button type="button" class="arrow next" aria-label="Next book"><span class="ui-chev ui-chev-lone" aria-hidden="true"></span></button></div>';
+      root.innerHTML='<div class="shelf-stage" aria-label="Bücherregal"></div><div class="caption"><h2><button type="button" class="shelf-title"></button></h2><div class="caption-author" hidden></div><div class="details"></div><div class="caption-actions"><button type="button" class="book-reset" aria-label="Reset book"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 2.05-4.95"/><path d="M5 4.5V8h3.5"/></svg></button><button type="button" class="book-delete" aria-label="Delete book"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M6.5 7l.8 12.2a1 1 0 0 0 1 .8h7.4a1 1 0 0 0 1-.8L17.5 7"/></svg></button></div></div><div class="navigation"><button type="button" class="arrow prev" aria-label="Previous book"><span class="ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span></button><span class="count" aria-live="polite"></span><button type="button" class="arrow next" aria-label="Next book"><span class="ui-chev ui-chev-lone" aria-hidden="true"></span></button></div>';
       const stage=root.querySelector('.shelf-stage');
       const preferred=getPreferredId();
       const preferredIndex=books.findIndex(book=>book.id===preferred);
@@ -164,7 +164,7 @@
       captionAuthor.hidden=!book.author;
       const details=describe(book);
       if(root.querySelector('.details').textContent!==details)root.querySelector('.details').textContent=details;
-      root.querySelector('.book-delete').setAttribute('aria-label',`„${book.title}“ löschen`);
+      root.querySelector('.book-delete').setAttribute('aria-label',`„${book.title}“ löschen`);root.querySelector('.book-reset').setAttribute('aria-label',`„${book.title}“ zurücksetzen`);
       root.querySelector('.count').textContent=(selected+1)+' / '+books.length;root.querySelector('.prev').disabled=selected===0;root.querySelector('.next').disabled=selected===books.length-1;
     }
     function choose(index,force=false){
@@ -221,7 +221,7 @@
     },{passive:false});
 
       listen(root.querySelector('.shelf-title'),'click',()=>onOpen(books[selected]));
-      listen(root.querySelector('.book-delete'),'click',e=>onDelete(books[selected],e.currentTarget));
+      listen(root.querySelector('.book-delete'),'click',e=>onDelete(books[selected],e.currentTarget));listen(root.querySelector('.book-reset'),'click',e=>onReset(books[selected],e.currentTarget));
       function scrub(value) {
         wheelPosition=Math.max(0,Math.min(books.length-1,value));
         if(motion!==null){cancelAnimationFrame(motion);motion=null;}clearTimeout(settleTimer);settleTimer=null;

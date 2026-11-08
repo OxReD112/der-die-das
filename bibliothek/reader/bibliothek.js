@@ -171,7 +171,10 @@
     storageInfo.setAttribute("aria-expanded", String(open));
   }
   storageInfo.addEventListener("click", () => {
-    setStorageNotice(storageInfo.getAttribute("aria-expanded") !== "true");
+    const open = storageInfo.getAttribute("aria-expanded") !== "true";
+    setStorageNotice(open);
+    // the ⓘ sits on the dock line (08.11): the note opens at the top of the library, so bring the top into view
+    if (open) $("library").scrollTo({ top: 0, behavior: "smooth" });
   });
   let storageNoticeSeen = false;
   try { storageNoticeSeen = localStorage.getItem(STORAGE_NOTICE_KEY) === "seen"; } catch (_) {}
@@ -267,12 +270,58 @@
     if(book.missingContent){reloadBookId=book.id;$file.click();}
     else {bookshelf.pause();openBook(book);}
   }
-  function requestBookDelete(book,trigger) {
-    pendingDelete=book;deleteTrigger=trigger;
-    $("delete-confirm-title").textContent=`„${book.title}“ löschen?`;
-    $("delete-confirm").hidden=false;$library.inert=true;$("library-actions").inert=true;
+  // 08.11 (Alena): one confirm for both actions on one or several books. «Zurücksetzen» clears the reading progress
+  // and the marked words of the book (highlights, Meine Wörter, chosen meanings); «Löschen» removes the book with all
+  // of that. Words already in Wortschatz stay in both cases.
+  function requestBookAction(kind,books,trigger) {
+    if(!books.length)return;
+    pendingDelete={kind,books};deleteTrigger=trigger;
+    const one=books.length===1, name=one?`„${books[0].title}“`:`${books.length} Bücher`;
+    $("delete-confirm-title").textContent=kind==='reset'?`${name} zurücksetzen?`:`${name} löschen?`;
+    $("delete-confirm-text").textContent=kind==='reset'
+      ?`Lesefortschritt und markierte Wörter ${one?'dieses Buches':'dieser Bücher'} werden gelöscht. Dein Wortschatz bleibt.`
+      :`${one?'Das Buch wird':'Die Bücher werden'} mit Lesefortschritt und markierten Wörtern von diesem Gerät entfernt. Dein Wortschatz bleibt.`;
+    $("confirm-delete").textContent=kind==='reset'?'Zurücksetzen':'Löschen';
+    $("delete-confirm").hidden=false;$library.inert=true;$("library-actions").inert=true;$("library-bulk").inert=true;
     $("reader").querySelector(".reader-header").inert=true;$("cancel-delete").focus({preventScroll:true});
   }
+  function requestBookDelete(book,trigger) { requestBookAction('delete',[book],trigger); }
+  let editing=false, listBooks=[];
+  const selectedIds=new Set();
+  function syncEditing() {
+    const listShown=libraryView==='list'&&listBooks.length>0;
+    if(!listShown)editing=false;
+    if(!editing)selectedIds.clear();
+    document.documentElement.classList.toggle('library-editing',editing);
+    $("library-edit-bar").hidden=!listShown;
+    $("library-edit").textContent=editing?'Fertig':'Bearbeiten';
+    $("library-edit").setAttribute('aria-pressed',String(editing));
+    const all=listBooks.length>0&&selectedIds.size===listBooks.length;
+    $("library-select-all").hidden=!editing;
+    $("library-select-all").textContent=all?'Keine auswählen':'Alle auswählen';
+    $("library-bulk").hidden=!editing;
+    $("library-actions").hidden=editing;
+    for(const row of $bookList.querySelectorAll('.book-row')){
+      const on=selectedIds.has(row.dataset.bookId);
+      row.classList.toggle('is-selected',on);
+      const open=row.querySelector('.book-open');
+      if(editing)open.setAttribute('aria-pressed',String(on));else open.removeAttribute('aria-pressed');
+    }
+    const n=selectedIds.size;
+    $("bulk-reset").disabled=n===0;$("bulk-delete").disabled=n===0;
+    $("bulk-delete").textContent=n?`Löschen (${n})`:'Löschen';
+  }
+  function setEditing(on) { editing=on; if(on)closeAddMenu(); syncEditing(); }
+  function toggleSelected(id) { if(selectedIds.has(id))selectedIds.delete(id);else selectedIds.add(id); syncEditing(); }
+  $("library-edit").addEventListener('click',()=>setEditing(!editing));
+  $("library-select-all").addEventListener('click',()=>{
+    if(selectedIds.size===listBooks.length)selectedIds.clear();else listBooks.forEach(book=>selectedIds.add(book.id));
+    syncEditing();
+  });
+  const chosenBooks=()=>listBooks.filter(book=>selectedIds.has(book.id));
+  $("bulk-reset").addEventListener('click',event=>requestBookAction('reset',chosenBooks(),event.currentTarget));
+  $("bulk-delete").addEventListener('click',event=>requestBookAction('delete',chosenBooks(),event.currentTarget));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editing&&$("delete-confirm").hidden){event.preventDefault();setEditing(false);$("library-edit").focus({preventScroll:true});}});
   function describeLibraryBook(book) {
     if(book.missingContent)return 'Reload file · '+String(book.format||'txt').toUpperCase();
     if(book.completed)return 'Gelesen';
@@ -283,7 +332,7 @@
     const words=Number(book.wordCount||0);
     return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
   }
-  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,describe:describeLibraryBook,getPreferredId:()=>lastOpenedBookId});
+  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,onReset:(book,trigger)=>requestBookAction('reset',[book],trigger),describe:describeLibraryBook,getPreferredId:()=>lastOpenedBookId});
   function applyLibraryView() {
     const populated=$bookList.children.length>0;
     const addParent=populated?$("library-actions"):$("empty-library");
@@ -296,6 +345,7 @@
       ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/><path d="M9 6h12M9 12h12M9 18h12"/></svg>'
       : '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="5" height="14" rx=".6" transform="rotate(13 4.5 22)"/><rect x="9" y="5" width="5" height="17" rx=".6" transform="rotate(8 11.5 22)"/><rect x="17" y="3" width="5" height="19" rx=".6"/></svg>';
     viewToggle.setAttribute('aria-label',libraryView==='shelf'?'Switch to list view':'Switch to bookshelf view');
+    syncEditing();
   }
   viewToggle.addEventListener('click',()=>{
     libraryView=libraryView==='shelf'?'list':'shelf';
@@ -320,7 +370,7 @@
       const button = document.createElement("button");
       button.className = "book-open";
       button.type = "button";
-      button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-author" hidden></span><span class="book-subtitle"></span></span><span class="book-arrow" aria-hidden="true">›</span>`;
+      button.innerHTML = `<span class="book-icon" aria-hidden="true"></span><span class="book-meta"><span class="book-title"></span><span class="book-author" hidden></span><span class="book-subtitle"></span></span><span class="book-arrow ui-chev ui-chev-lone" aria-hidden="true"></span>`;
       const hasSecondPage = book.missingContent || splitParagraphs(book.content).length > 1;
       const started = hasSecondPage && Boolean(book.readingStarted || Number(book.position) > 0 || Number(book.chapterIndex) > 0);
       const completed = started && Boolean(book.completed);
@@ -356,21 +406,24 @@
       button.querySelector(".book-subtitle").textContent = describeLibraryBook(book);
       if(book.missingContent) {
         row.classList.add('is-missing');
+        button.querySelector('.book-arrow').className = 'book-arrow';
         button.querySelector('.book-arrow').textContent = '↻';
         button.querySelector('.book-subtitle').textContent = 'Reload file · ' + fileFormat;
         button.setAttribute('aria-label', `Reload file for “${book.title}”`);
         button.title = 'Reload the original file to continue reading';
       }
-      button.addEventListener("click", () => openLibraryBook(book));
-      const remove = document.createElement("button");
-      remove.className = "book-delete";
-      remove.type = "button";
-      remove.setAttribute("aria-label", `„${book.title}“ löschen`);
-      remove.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4.5 7h15M9 7V4.5h6V7m3.5 0-.8 13h-11L5.9 7M10 10.5v6m4-6v6"/></svg>';
-      remove.addEventListener("click", () => requestBookDelete(book,remove));
-      row.append(button, remove);
+      // 08.11 (Alena): no trash in every row — «Bearbeiten» selects books; then the whole row selects instead of opening.
+      row.dataset.bookId = book.id;
+      const check = document.createElement("span");
+      check.className = "book-check";
+      check.setAttribute("aria-hidden", "true");
+      check.addEventListener("click", () => { if (editing) toggleSelected(book.id); });
+      button.addEventListener("click", () => editing ? toggleSelected(book.id) : openLibraryBook(book));
+      row.append(check, button);
       $bookList.append(row);
     });
+    listBooks = books;
+    for (const id of [...selectedIds]) if (!books.some(book => book.id === id)) selectedIds.delete(id);
     applyLibraryView();
     if(libraryView==='shelf')$library.scrollTop=0;
     bookshelf.update([...books].reverse());
@@ -391,6 +444,7 @@
     $("delete-confirm").hidden = true;
     $library.inert = false;
     $("library-actions").inert = false;
+    $("library-bulk").inert = false;
     $("reader").querySelector(".reader-header").inert = false;
     pendingDelete = null;
     if (restoreFocus && deleteTrigger?.isConnected) deleteTrigger.focus({ preventScroll:true });
@@ -399,21 +453,32 @@
   $("cancel-delete").addEventListener("click", () => closeDeleteConfirm());
   $("confirm-delete").addEventListener("click", async () => {
     if (!pendingDelete || deleting) return;
-    const id = pendingDelete.id;
+    const { kind, books } = pendingDelete;
     deleting = true;
     clearTimeout(window.__readingSaveTimer);
     $("confirm-delete").disabled = true;
     $("cancel-delete").disabled = true;
     try {
       const db = await openDb();
-      await new Promise((resolve, reject) => {
-        const tx = db.transaction(STORE, "readwrite");
-        tx.objectStore(STORE).delete(id);
+      for (const book of books) {
+        if (kind === "reset") {
+          // Reading data only: the progress, marked words and chosen meanings go; the book keeps its title and author.
+          const clean = { ...book };
+          for (const field of window.BibliothekReadingData.fields) delete clean[field];
+          delete clean.missingContent;
+          await window.BibliothekReadingData.remove(book.id);
+          await window.BibliothekReadingData.save(clean);
+          continue;
+        }
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction(STORE, "readwrite");
+          tx.objectStore(STORE).delete(book.id);
 
-        tx.oncomplete = resolve;
-        tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not delete this book"));
-      });
-      await window.BibliothekReadingData.remove(id);
+          tx.oncomplete = resolve;
+          tx.onerror = tx.onabort = () => reject(tx.error || new Error("Could not delete this book"));
+        });
+        await window.BibliothekReadingData.remove(book.id);
+      }
       // Release the previous reader content as well as the persisted record.
       clearTimeout(window.__readingSaveTimer);
       currentBook = null;
@@ -422,13 +487,14 @@
       selectedWord = "";
       deleting = false;
       closeDeleteConfirm(false);
+      editing = false;
       await refreshBooks();
       ($bookList.querySelector(".book-open") || addToggle).focus({ preventScroll:true });
-      showToast("Deleted from this device.");
+      showToast(kind === "reset" ? (books.length === 1 ? "Zurückgesetzt." : `${books.length} Bücher zurückgesetzt.`) : (books.length === 1 ? "Gelöscht." : `${books.length} Bücher gelöscht.`));
     } catch (error) {
       deleting = false;
       closeDeleteConfirm();
-      showToast("The text could not be deleted. Please try again.");
+      showToast(kind === "reset" ? "Das Zurücksetzen hat nicht geklappt. Bitte versuch es noch einmal." : "Das Löschen hat nicht geklappt. Bitte versuch es noch einmal.");
     } finally {
       $("confirm-delete").disabled = false;
       $("cancel-delete").disabled = false;

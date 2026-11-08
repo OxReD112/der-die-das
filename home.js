@@ -1003,7 +1003,8 @@ function updateBack() {
   const shelf = libraryPlace && !(libraryPage && libraryReading(doc, win));
   back.classList.toggle("is-hidden", windowOpen || shelf);
   setFrameWindow(windowOpen);
-  if (libraryPage) document.documentElement.classList.toggle("place-hidden", windowOpen || libraryReading(doc, win));
+  // the Bibliothek list in «Bearbeiten»: Zurücksetzen / Löschen stand on the dock's line instead (08.11)
+  if (libraryPage) document.documentElement.classList.toggle("place-hidden", windowOpen || libraryReading(doc, win) || doc.documentElement.classList.contains("library-editing"));
   if (windowOpen) return;
 
   const W = win.innerWidth;
@@ -1027,6 +1028,7 @@ function updateBack() {
         ":root{--dock-right:max(24px,calc((100vw - 600px) / 2 - (100vw - min(100vw, 720px)) / 2))}" +
         ".library-actions .library-add-toggle{left:auto!important;right:var(--dock-right)!important}" +
         ".library-screen .library-actions .library-view-toggle{right:calc(var(--dock-right) + 54px)!important}" +
+        ".library-screen .library-actions .storage-info{right:calc(var(--dock-right) + 108px)!important}" +
         "@media (max-height:700px){.empty-mark{height:clamp(110px,20dvh,230px)!important}.empty-library{padding-top:28px!important}}" +
         ".library-screen .reader-toast{bottom:calc(env(safe-area-inset-bottom) + 90px)!important}";
       doc.head.appendChild(st);

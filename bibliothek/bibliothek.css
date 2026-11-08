@@ -2806,3 +2806,55 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
   -webkit-mask: linear-gradient(to right, transparent, #000 8px, #000 30px, transparent);
   mask: linear-gradient(to right, transparent, #000 8px, #000 30px, transparent);
 }
+
+/* 08.11 (Alena): the list of books — bigger covers (48 × 68, iPad 60 × 84), no lines, the shared chevron, no trash in
+   every row: «Bearbeiten» above the list selects books (monochrome round marks), then «Zurücksetzen» (progress and
+   marked words) and «Löschen» stand where the dock was. The list fades out under the dock while it scrolls, so the
+   view and ＋ buttons never sit on top of a title. */
+.library-edit-bar { position: sticky; top: -20px; z-index: 2; display: flex; justify-content: flex-end; align-items: center; min-height: 44px; margin: 8px 0 -4px; background: var(--bg); }
+.library-edit-bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 24px; background: linear-gradient(to bottom, var(--bg), transparent); pointer-events: none; }
+.library-edit-bar[hidden] { display: none; }
+.library-edit-bar button { min-height: 44px; padding: 0 2px; border: 0; background: none; color: var(--text); font: 600 14px/1 var(--font); cursor: pointer; }
+.library-edit-bar .library-select-all { margin-right: auto; color: var(--muted); font-weight: 500; }
+.library-edit-bar button[hidden] { display: none; }
+.library-edit-bar + .book-list { margin-top: 0; }
+.book-row { min-height: 0; padding: 12px 1px; border-bottom: 0; gap: 0; }
+.book-open { grid-template-columns: 48px minmax(0, 1fr) 14px; gap: 14px; min-height: 68px; }
+.book-icon, .book-cover { width: 48px; min-width: 48px; height: 68px; min-height: 68px; }
+.book-icon { font-size: 19px; }
+.book-icon.has-narrow-cover .book-cover { left: 5px; width: 43px; }
+.book-marker { right: 7px; width: 8px; height: 16px; }
+.book-arrow.ui-chev { justify-self: center; color: var(--muted); }
+.book-check { display: none; flex: none; width: 44px; align-self: stretch; margin-left: -11px; place-items: center; cursor: pointer; }
+.book-check::before, .book-check::after { grid-area: 1 / 1; }
+.book-check::before { content: ""; width: 22px; height: 22px; box-sizing: border-box; border: 1.2px solid var(--muted); border-radius: 50%; }
+.book-row.is-selected .book-check::before { border-color: var(--text); background: var(--text); }
+.book-row.is-selected .book-check::after { content: ""; width: 9px; height: 5px; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); transform: translateY(-1px) rotate(-45deg); }
+.library-editing .book-check { display: grid; }
+.library-editing .book-arrow { visibility: hidden; }
+.library-fade { display: none; position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: calc(env(safe-area-inset-bottom) + 104px); background: linear-gradient(to bottom, transparent, var(--bg) 46%); pointer-events: none; }
+.library-screen .reader:has(.library:not(.is-bookshelf) .book-row) .library-fade { display: block; }
+.library-bulk { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 18px); z-index: 5; display: flex; justify-content: center; gap: 10px; padding: 0 20px; }
+.library-bulk[hidden] { display: none; }
+.library-bulk-button { flex: 1; max-width: 220px; min-height: 52px; border: 0; border-radius: 18px; background: var(--tile-surface); box-shadow: var(--lift-highlight), var(--lift-shadow); color: var(--text); font: 650 16px/1 var(--font); cursor: pointer; }
+.library-bulk-button.is-danger { color: var(--red); }
+.library-bulk-button:disabled { opacity: 0.4; cursor: default; }
+.library-bulk-button:focus-visible, .library-edit-bar button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+@media (min-width: 700px) and (min-height: 740px) {
+  .library-edit-bar button { font-size: 16px; }
+  .book-open { grid-template-columns: 60px minmax(0, 1fr) 14px; gap: 18px; min-height: 84px; }
+  .book-icon, .book-cover { width: 60px; min-width: 60px; height: 84px; min-height: 84px; }
+  .book-icon { font-size: 23px; }
+  .book-icon.has-narrow-cover .book-cover { left: 6px; width: 54px; }
+  .book-title { font-size: 20px; line-height: 24px; }
+  .book-author { font-size: 16px; line-height: 20px; }
+  .book-subtitle { font-size: 14px; line-height: 18px; }
+}
+
+/* 08.11 (Alena): ⓘ (storage note) moved from the title to the dock line, left of the view toggle; on the shelf ↺
+   «Zurücksetzen» (progress and marked words of this book) stands next to the trash, in the same line. */
+.library-actions .storage-info { top: auto; bottom: 4px; right: 54px; pointer-events: auto; }
+.library-bookshelf .caption-actions .book-reset { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.library-bookshelf .caption-actions .book-reset svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.library-bookshelf .caption-actions .book-reset svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.library-bookshelf .caption-actions .book-reset:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 50%; }
