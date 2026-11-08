@@ -162,7 +162,6 @@
   });
 
   const storageInfo = $("storage-info"), storageNotice = $("storage-notice");
-  const STORAGE_NOTICE_KEY = "deutschLibraryStorageNoticeV1";
   let storageNoticeTimer;
   function setStorageNotice(open) {
     clearTimeout(storageNoticeTimer);
@@ -176,15 +175,9 @@
     // the ⓘ sits on the dock line (08.11): the note opens at the top of the library, so bring the top into view
     if (open) $("library").scrollTo({ top: 0, behavior: "smooth" });
   });
-  let storageNoticeSeen = false;
-  try { storageNoticeSeen = localStorage.getItem(STORAGE_NOTICE_KEY) === "seen"; } catch (_) {}
-  setStorageNotice(!storageNoticeSeen);
-  if (!storageNoticeSeen) {
-    storageNoticeTimer = setTimeout(() => {
-      setStorageNotice(false);
-      try { localStorage.setItem(STORAGE_NOTICE_KEY, "seen"); } catch (_) {}
-    }, 6000);
-  }
+  // 08.11 (Alena): the note no longer opens by itself on the first visit — it took much of the screen; it is always
+  // one tap away on ⓘ in the dock line.
+  setStorageNotice(false);
   window.addEventListener("storage", event => {
     if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateReaderLanguage();
   });
