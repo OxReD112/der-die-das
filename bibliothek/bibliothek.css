@@ -2677,8 +2677,6 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 /* 07.11 (design chat): the letter icons × + ‹ › ← → of Bibliothek became the shared icons of the app
    (components/deutsch-ui-v1.css): windows, sheets and the popover close with the round .ui-close (30 px, tap area 44),
    arrows are .ui-chev, «+» is a drawn plus in one line. Each × keeps the centre the letter's 38 / 44 px button had. */
-.popover-close.ui-close { top: 14px; right: 16px; width: 30px; height: 30px; }
-@media (max-width: 699px) { .popover-close.ui-close { top: 10px; right: 11px; } }
 .sheet-close.ui-close { width: 30px; height: 30px; margin-top: -4px; margin-right: -9px; }
 .text-settings-close.ui-close { width: 30px; height: 30px; margin: 7px -5px 7px 0; }
 .sources-close.ui-close { width: 30px; height: 30px; margin: -5px -5px 0 0; }
@@ -2765,3 +2763,14 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 /* Inhalt like a book's contents: no rules between the lines, held by air */
 .contents-entry { border-bottom: 0; min-height: 46px; padding-top: 12px; padding-bottom: 12px; }
 .contents-entry[aria-current]::before { top: 8px; }
+
+/* 08.11 (design chat, Alena; tests chat 08.11): the popover has no × — it closes by a tap outside or Esc, the word gets the whole line.
+   The bookmark hangs from the top edge in the corner like a book's ribbon: an outline when not saved, mint when saved
+   (the mint chain of a marked word). The button stays 44 x 44 for the tap; only the drawing hangs from the edge. */
+.popover-bookmark { position: absolute; z-index: 2; top: -1px; right: 12px; margin: 0; padding: 0; display: flex; justify-content: center; align-items: flex-start; }
+.popover-bookmark svg { width: 16px; height: 24px; }
+.popover-heading { padding-right: 22px; }
+@media (max-width: 699px) {
+  .popover-bookmark { right: 6px; margin: 0; }
+  .popover-heading { padding-right: 20px; }
+}

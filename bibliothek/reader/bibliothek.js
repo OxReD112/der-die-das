@@ -1587,7 +1587,6 @@
   }
   window.addEventListener("pagehide", flushReadingPosition);
   document.addEventListener("visibilitychange", () => { if (document.hidden) flushReadingPosition(); });
-  $("popover-close").addEventListener("click", closePopups);
   const sourcesDialog = $("data-sources");
   $("popover-source").addEventListener("click", () => sourcesDialog.showModal());
   $("sources-close").addEventListener("click", () => sourcesDialog.close());
