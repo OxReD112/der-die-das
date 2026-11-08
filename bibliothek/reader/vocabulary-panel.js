@@ -231,6 +231,7 @@
         if (request !== countRun || getBook() !== book) return;
         const n = window.BibliothekVocabularyList.scoped(records, getRange()).length;
         $("vocabulary-count").textContent = n;
+        $("vocabulary-toggle").classList.toggle("has-words", n > 0); // 08.11: the bookmark fills when a word is marked
         $("vocabulary-toggle").setAttribute(
           "aria-label",
           `Open ${book.chapters?.length ? "chapter" : "text"} vocabulary, ${n} marked words`
@@ -252,6 +253,7 @@
       } catch (error) {
         if (request === countRun) {
           $("vocabulary-count").textContent = "–";
+          $("vocabulary-toggle").classList.remove("has-words");
           $("vocabulary-toggle").setAttribute("aria-label", "Open vocabulary");
         }
       }

@@ -2902,3 +2902,9 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 
 /* 08.11 (Alena, variant А): Inhalt open — its icon fades (quiet, nothing added to the header) */
 .reading-body:has(#contents-dialog[open]) .contents-toggle { opacity: 0.4; }
+
+/* 08.11 (Alena, variant Б): the header bookmark fills (text colour, not mint) once a word of this chapter / text is
+   marked; Meine Wörter open — the button fades like Inhalt (was mint while open). */
+.reading-view .vocabulary-toggle.has-words { color: var(--text); }
+.reading-view .vocabulary-toggle.has-words svg { fill: currentColor; }
+.reading-body:has(#vocabulary-dialog[open]) .vocabulary-toggle { color: var(--text); opacity: 0.4; }
