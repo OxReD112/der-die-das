@@ -5037,8 +5037,8 @@
     "example_cloze": "Am Wochenende schlafe ich {{c1::meist}} bis neun Uhr.",
     "reading_policy": "single",
     "example_usage": "Adverb",
-    "usage_note_ru": "= meistens. Не путать: die meisten Leute — большинство людей (превосходная степень от viel).",
-    "usage_note_en": "= meistens. Don't confuse with die meisten Leute — most people (superlative of viel)."
+    "usage_note_ru": "= meistens. Не путать: die meisten Leute — большинство людей (превосходная степень от viel, отдельная карточка).",
+    "usage_note_en": "= meistens. Do not confuse: die meisten Leute — most people (superlative of viel, separate card)."
   },
   {
     "id": "adverb-428",
@@ -5397,5 +5397,18 @@
     "usage_note_ru": "Не путать с предлогом mit + Dativ (mit dem Bus). Наречие стоит без существительного, часто перед dabei, dazu, daran: Das gehört mit dazu. — Это тоже сюда относится. Er schluckte ihn mit hinab. — Он проглотил его вместе (с остальным). Kommst du mit? — это глагол mitkommen.",
     "usage_note_en": "Do not confuse with the preposition mit + dative (mit dem Bus). The adverb stands without a noun, often before dabei, dazu, daran: Das gehört mit dazu. — That is part of it too. Er schluckte ihn mit hinab. — He swallowed it along with the rest. Kommst du mit? is the verb mitkommen.",
     "example_cloze": "Bei der Gründung des Vereins war ich {{c1::mit}} dabei."
+  },
+  {
+    "id": "adverb-456",
+    "word": "weniger",
+    "translation_ru": "меньше; менее",
+    "translation_en": "less; fewer",
+    "comparative_of": "wenig",
+    "example_de": "Heute habe ich weniger Zeit als gestern.",
+    "example_ru": "Сегодня у меня меньше времени, чем вчера.",
+    "example_en": "I have less time today than yesterday.",
+    "usage_note_ru": "Сравнительная степень от wenig: wenig — weniger — am wenigsten. Не склоняется: weniger Geld, weniger Leute. Перед прилагательным — «менее»: weniger schön. immer weniger — всё меньше; nicht weniger als — не меньше чем. Не путать с wenige — немногие (wenige Leute).",
+    "usage_note_en": "Comparative of wenig: wenig — weniger — am wenigsten. It never changes its ending: weniger Geld, weniger Leute. Before an adjective — “less”: weniger schön. immer weniger — less and less; nicht weniger als — no less than. Do not confuse with wenige — few (wenige Leute).",
+    "example_cloze": "Heute habe ich {{c1::weniger}} Zeit als gestern."
   }
 ]

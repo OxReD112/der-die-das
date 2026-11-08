@@ -17134,5 +17134,22 @@
     "participle_of": "verbinden",
     "meaning_differs": true,
     "participle_default": "close"
+  },
+  {
+    "id": "adjective-1582",
+    "word": "meist",
+    "translation_ru": "(die meisten) большинство, наибольшее число; (das meiste) большая часть, почти всё",
+    "translation_en": "(die meisten) most, the majority; (das meiste) most (of it)",
+    "example_de": "Die meisten Kinder in der Klasse haben ein Handy.",
+    "example_ru": "У большинства детей в классе есть мобильный телефон.",
+    "example_en": "Most of the children in the class have a mobile phone.",
+    "example_cloze": "Die {{c1::meisten}} Kinder in der Klasse haben ein Handy.",
+    "usage_note_ru": "Превосходная степень от viel: viel — mehr — am meisten. Почти всегда с артиклем: die meisten (Leute) — большинство (людей); die meisten von uns — большинство из нас; das meiste — большая часть: Das meiste habe ich vergessen. Наречие meist — обычно, чаще всего (отдельная карточка).",
+    "usage_note_en": "Superlative of viel: viel — mehr — am meisten. Almost always with the article: die meisten (Leute) — most (people); die meisten von uns — most of us; das meiste — most of it: Das meiste habe ich vergessen. The adverb meist — usually, mostly (separate card).",
+    "search_forms": [
+      "meiste",
+      "meisten"
+    ],
+    "inflected_only": true
   }
 ]

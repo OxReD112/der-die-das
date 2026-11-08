@@ -1583,9 +1583,12 @@
     }
     for (const entry of entries) {
       for (const id of entry.alias_ids || []) byId.set(String(id),entry);
-      add(lemmas, entry.word, entry); add(forms, entry.word, entry);
+      // A card that is never met without an ending (inflected_only: die meisten, das meiste) is not a reading of the bare word
+      // (meist «обычно» — the adverb card).
+      add(lemmas, entry.word, entry); if (!entry.inflected_only) add(forms, entry.word, entry);
       for (const form of entry.search_forms || []) add(forms, form, entry);
-      if (entry.type === "Adjektiv") {
+      // a card met only inflected (meist: die meisten) lists its forms itself — no endings from the bare word
+      if (entry.type === "Adjektiv" && !entry.inflected_only) {
         const word = norm(entry.word);
         // Invariant colour/loan adjectives do not acquire regular endings.
         if (!INVARIANT_ADJECTIVES.has(word)) {
@@ -11251,7 +11254,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const local=[];let end=0;
       for(const t of nearby){if(/[^\s]/u.test(tail.slice(end,t.index)))break;local.push(t);end=t.index+t[0].length;}
       const next=local[0];
-      let bases=norm(word)==='am'&&next?superlatives.get(norm(next[0]))||[]:[];
+      let bases=norm(word)==='am'&&next?(superlatives.get(norm(next[0]))||[]).filter(e=>!e.inflected_only):[]; // am meisten: not die meisten
       // Already available lexical data only; no neighbour lookup or recursive resolution.
       let nominal=false,windowExhausted=false;
       for(const t of local){
@@ -11445,6 +11448,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const next = [...list]; const [p] = next.splice(prep,1); next.splice(adv,0,p);
       return keepDecision(result,{...result,candidates:next});
     }
+    // WN 56 (advisor 07.11): an own card of a comparative (weniger, comparative_of: wenig) against its positive read with an
+    // ending: right after a preposition with the genitive the form is the genitive plural (innerhalb weniger Monate — «немногие»),
+    // otherwise the comparative card (weniger Zeit, nicht weniger als — «меньше; менее»). A genitive after a noun (die Arbeit
+    // weniger Stunden) is not told apart — registry.
+    function comparativeCard(word, context, result) {
+      const list = result?.candidates || [], w = norm(word);
+      const own = list.find(c => c.source === 'main' && norm(c.lemma) === w && c.item?.comparative_of);
+      if (!own || !Number.isInteger(context?.tokenOffset)) return result;
+      const positive = list.find(c => c.source === 'main' && norm(c.lemma) === norm(own.item.comparative_of));
+      const same = (a, b) => a && b && a.source === b.source && a.dictionaryId === b.dictionaryId && norm(a.lemma) === norm(b.lemma);
+      if (!positive || result.selected && !same(result.selected,own) && !same(result.selected,positive)) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'comparativeCard');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return result;
+      const before = i > 0 && /^\s+$/u.test(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index)) ? norm(tokens[i-1][0]) : '';
+      const chosen = GENITIVE_PREPOSITIONS.has(before) ? positive : own;
+      if (same(result.selected,chosen) && result.status === 'resolved') return result;
+      return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',
+        evidence:'comparative-card'},{outcome:'selected',rule:'comparative-card',reason:'comparative-card'});
+    }
+    const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
     // (the diagnostic decision of a resolution is non-enumerable — a copy keeps it, with the rule of the step that chose)
     function keepDecision(from, to, change = null) {
       if (from && Object.prototype.hasOwnProperty.call(from,'decision'))
@@ -11509,7 +11533,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       })();
       const severalWords = e => e.type === "Verb" && /\s/u.test(norm(e.word).replace(/^sich\s+/u,""));
       const phraseHere = e => !!tapPart && phraseInPlace(e,tapPart.raw,tapPart.t,k => phraseRows(norm(tapPart.raw[k])));
-      const exact = [...(forms.get(norm(word)) || []).filter(e => !context || !severalWords(e) || phraseHere(e)),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
+      // a card met only inflected (die meisten) is not the form after am (am meisten Angst — the superlative of viel)
+      const afterAm = Number.isInteger(context?.tokenOffset) && /(?:^|[^\p{L}])am\s+$/iu.test(String(context.sentence || '').slice(0,context.tokenOffset));
+      const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm)),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
       // C21: a cardinal / ordinal without an own numeral card of this spelling.
       if (!exact.some(e => e.type === "numeral")) {
         const generated = numeralEntry(word);
@@ -11567,7 +11593,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const siblings = lemmas.get(norm(group.word)) || [];
             const main = siblings.filter(item => partOfSpeech && item.type === partOfSpeech &&
               !(verbalNoun(item) && !norm(word).startsWith(norm(item.word))) &&
-              !(item.type === "Pronomen" && !listsForm(item) && siblings.some(other => other !== item && other.type === "Pronomen" && listsForm(other))));
+              !(item.type === "Pronomen" && !listsForm(item) && siblings.some(other => other !== item && other.type === "Pronomen" && listsForm(other))) &&
+              !(item.inflected_only && (afterAm || norm(word) === norm(item.word))));
+            // the bare word of a card met only inflected (meist — die meisten): neither that card nor its external group
+            if (!main.length && siblings.some(item => item.type === partOfSpeech && item.inflected_only && norm(word) === norm(item.word))) continue;
             for (const item of main) dictionaryForms.add(item.id);
             candidates.push(...main.map(mainCandidate));
             // #29: a verb of the Russian dictionary alone (überbaut — überbauen, abgeformt — abformen) is a candidate without English text.
@@ -14648,7 +14677,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is

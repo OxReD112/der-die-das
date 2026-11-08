@@ -3101,8 +3101,7 @@
     "usage_note_en": "Plural for countable things: wenige Bücher. After die: die wenigen Bücher, den wenigen Büchern.",
     "search_forms": [
       "wenige",
-      "wenigen",
-      "weniger"
+      "wenigen"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/wenig_vereinzelt_nicht_viel",
     "example_cloze": "Nur {{c1::wenige}} haben die Frage richtig beantwortet."
