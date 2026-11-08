@@ -3414,8 +3414,12 @@
       // Red») still blocks. A bare-stem homograph (Alt «alto», Gut «estate») does not.
       const marked = c => /^(?:nominali[sz]ation of|(?:female|male) equivalent of)|\((?:male|female)(?: or of unspecified (?:gender|sex))?\)/iu
         .test(String(c.meanings?.[0] || c.translation?.en || ""));
+      // (advisor 08.11, user cases (4)) a masculine -er record paired with a feminine -e record «female equivalent of …er» is the
+      // masculine of this nominalization too (kleiner «boy, young man» / kleine «girl»; Schwarzer / Schwarze; Heiliger / Heilige)
+      const femalePair = c => norm(c.lemma) === stem0+"er" && candidates.some(o => o.source === "fallback" && norm(o.lemma) === stem0+"e" &&
+        new RegExp(`^female equivalent of ${stem0}er\\b`,"iu").test(String(o.meanings?.[0] || o.translation?.en || "")));
       const nominalization = c => c.source === "fallback" && ["Nomen","name"].includes(canonicalPos(c.pos)) &&
-        [stem0+"e",stem0+"er",stem0+"es"].includes(norm(c.lemma)) && marked(c);
+        [stem0+"e",stem0+"er",stem0+"es"].includes(norm(c.lemma)) && (marked(c) || femalePair(c));
       // Our own noun declined like an adjective (der / die Kranke) is chosen by its agreement step (reference 4.13), not here.
       if ((lemmas.get(stem0+"e") || []).some(e => e.type === "Nomen" && adjectivalNounStem(e))) return null;
       const others = candidates.filter(c => !["Adjektiv","Adverb"].includes(canonicalPos(c.pos)));
@@ -11668,6 +11672,71 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const chosen = own[0];
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'old-dative-e'},{outcome:'selected',rule:'old-dative-e',reason:'old-dative-e'});
     }
+    // Advisor 08.11 (claude/MIT_AND_4_RECOUNT_2026-11-08_RU.md): a window of our preposition mit and our adverb mit «тоже,
+    // вместе» is decided by the next word. Before a noun group (a determiner / possessive, a dative pronoun, a number, a word
+    // with a capital, an adjective with an ending + a noun) — the preposition. Before an infinitive / zu-infinitive / participle
+    // that closes the part (um mit anzusehen, hundert Reiter mit ziehen und …, der Hals mit abgeschnitten würde) — the adverb.
+    // The window stays: mit einer / eines der (also «one of»), kann ich mit sein? (sein — a verb), anything else.
+    const MIT_PRONOUNS = new Set(['mir','dir','ihm','ihr','uns','euch','ihnen','sich','dem','den','denen','wem','jemandem','niemandem','allen','beiden','vielen','wenigen','einander','viel','vielem','wenig','nichts','etwas','solchem','solcher']);
+    const MIT_AUX = /^(?:wurde|wurden|würde|würden|werden|wird|ward|worden|ist|sind|war|waren|hat|hatte|hatten|haben|habe|sei|wäre|wären|kann|konnte|könne|könnte|muss|muß|musste|mußte|soll|sollte|will|wollte|darf|durfte|mag|mochte)$/iu;
+    async function mitByNextWord(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || result.status !== 'ambiguous' || norm(word) !== 'mit' || !Number.isInteger(context?.tokenOffset)) return result;
+      const prep = list.filter(c => c.source === 'main' && c.pos === 'preposition' && norm(c.lemma) === 'mit');
+      const adv = list.filter(c => c.source === 'main' && c.pos === 'Adverb' && norm(c.lemma) === 'mit');
+      if (prep.length !== 1 || adv.length !== 1 || list.some(c => c.construction || canonicalPos(c.pos) === 'Verb')) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'mitByNextWord');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0 || word.length > 1 && word === word.toUpperCase()) return result;
+      const gap = (a, b) => sentence.slice(tokens[a].index+tokens[a][0].length, tokens[b].index);
+      const plain = k => tokens[k] && /^\s+$/u.test(gap(k-1,k));
+      if (tokens[i+1] && /^\s+\d/u.test(sentence.slice(tokens[i].index+tokens[i][0].length))) return keepDecision(result,{...result,candidates:[prep[0],...list.filter(x => x !== prep[0])],selected:prep[0],preferred:prep[0],status:'resolved',evidence:'mit-before-noun-group'},{outcome:'selected',rule:'mit-before-noun-group',reason:'mit-before-noun-group'});
+      if (!plain(i+1)) return result;
+      const next = tokens[i+1][0], n = norm(next);
+      const closes = k => !tokens[k+1] || !plain(k+1) || /^(?:und|oder)$/iu.test(tokens[k+1][0]);
+      const choose = (c, rule) => keepDecision(result,{...result,candidates:[c,...list.filter(x => x !== c)],selected:c,preferred:c,status:'resolved',evidence:rule},{outcome:'selected',rule,reason:rule});
+      // (kept as a window)
+      if (/^(?:einer|eines)$/u.test(n) || n === 'sein' && closes(i+1)) return result;
+      if (/^\d/u.test(next) || /^\p{Lu}/u.test(next) && next !== next.toUpperCase()) return choose(prep[0],'mit-before-noun-group');
+      // der + a superlative in -ste (wird mit der höchste Punkt erreicht — «один из») is a nominative: the window stays
+      if (n === 'der' && plain(i+2) && /^\p{Ll}+ste$/u.test(tokens[i+2][0])) return result;
+      // mit governs the dative: a determiner in another case (mit ein Grund, mit die Ursache — «тоже») is no noun group of mit
+      // A determiner: the noun group must agree in the dative (mit meinen Schwester, mit dem unbekanntes Namen — the window
+      // stays); an unknown noun after it stays a window too (mit dem Unbekanntwort), unless it is an adjective with an ending
+      // (mit der Linken — a nominalized adjective).
+      if (FORM_DETERMINERS.test(n) || n === 'der') {
+        const group = await nounGroupAfter(sentence,tokens,i,{determiner:true,consumer:'mitByNextWord'});
+        if (group.readings && group.det !== null) {
+          const card = prepositionCardsByForm.get('mit');
+          if (!agreeingFeatures(determinerFeatures(tokens[group.det][0]) || [],group,card ? governedCases(card) : new Set()).length) return result;
+          return choose(prep[0],'mit-before-noun-group');
+        }
+        const head = tokens[i+2] && plain(i+2) ? tokens[i+2][0] : '';
+        if (!(/^\p{Lu}\p{Ll}+(?:en|e)$/u.test(head) && (modifiers.get(norm(head)) || []).some(r => r.kind === 'adjective'))) return result;
+      }
+      if (FORM_DETERMINERS.test(n) && /(?:em|er|en)$/u.test(n) && !/^(?:euer|unser)$/u.test(n) ||
+          n === 'der' || n === 'dem' || n === 'den' || MIT_PRONOUNS.has(n)) return choose(prep[0],'mit-before-noun-group');
+      if (FORM_DETERMINERS.test(n)) return result;
+      // adjectives / participles with a dative ending, joined by und or a comma, then a noun (mit bösen und giftigen Blicken,
+      // mit feinen, langen Schwänzen, mit hervorquellenden … Augen is not taken: only up to four such words)
+      if (/^\p{Ll}+(?:en|em|er)$/u.test(next)) {
+        let k = i + 1;
+        // (an unknown word in -em / -er is taken: zornigem, vieler; one in -en or -e must be a known modifier or participle — not
+        // wie, not an infinitive)
+        const modifier = t => /^\p{Ll}+(?:em|er)$/u.test(t) && !/^(?:aber|oder|immer|wieder|weder|ihrer|seiner|meiner|deiner|unserer|eurer|einer|keiner|jener|dieser|jeder|aller|welcher|solcher|mancher|der|wer|her|hier|sehr|mehr|nur|schon|zuvor|nimmer|vorher|daher|seither|euer|unser|über|unter|hinter|wider|außer|sonder|entweder|ehemaliger)$/u.test(t) && !zuForms.has(norm(t)) ||
+          /^\p{Ll}+en$/u.test(t) && !zuForms.has(norm(t)) && (!(verbAnalyses.get(norm(t)) || []).some(a => a.kind === 'infinitive') ||
+            (forms.get(norm(t)) || []).some(e => e.type === 'numeral' || e.type === 'Adjektiv')) ||
+          /^\p{Ll}+(?:en|em|er|e)$/u.test(t) && !zuForms.has(norm(t)) && ((modifiers.get(norm(t)) || []).length ||
+          (forms.get(norm(t)) || []).some(e => e.type === 'Adjektiv') || (verbAnalyses.get(norm(t)) || []).some(a => a.kind === 'participle'));
+        while (k <= i + 4 && tokens[k] && (modifier(tokens[k][0]) || /^und$/u.test(tokens[k][0]) && k > i + 1) && tokens[k+1] && /^\s*,?\s+$/u.test(gap(k,k+1))) k++;
+        if (k > i + 1 && tokens[k] && /^\p{Lu}\p{Ll}/u.test(tokens[k][0]) && /^\s+$/u.test(gap(k-1,k)) && !/^und$/u.test(tokens[k-1][0])) return choose(prep[0],'mit-before-noun-group');
+      }
+      // an infinitive / zu-infinitive / participle closing the part (or followed only by its finite auxiliary)
+      const rows = (verbAnalyses.get(n) || []).concat(zuForms.has(n) ? [{kind:'infinitive-zu'}] : []);
+      if (rows.some(a => ['infinitive','participle','infinitive-zu'].includes(a.kind)) && /^\p{Ll}/u.test(next) &&
+          (closes(i+1) || plain(i+2) && MIT_AUX.test(tokens[i+2][0]) && closes(i+2))) return choose(adv[0],'mit-before-closing-verb');
+      return result;
+    }
     const POLITE_FORMS = new Set(['Sie','Ihnen','Ihr','Ihre','Ihren','Ihrem','Ihrer','Ihres']);
     const FORM_DETERMINERS = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein\p{L}*|dein\p{L}*|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser\p{L}*|euer|eure|euren|eurem|eurer|eures|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|solch\p{L}*|manch\p{L}*|all\p{L}*)$/iu;
     const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
@@ -15003,7 +15072,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
