@@ -2858,3 +2858,36 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 .library-bookshelf .caption-actions .book-reset svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
 .library-bookshelf .caption-actions .book-reset svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
 .library-bookshelf .caption-actions .book-reset:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 50%; }
+
+/* 08.11 (Alena): one selection mark everywhere — the monochrome round mark of «Bearbeiten» in the Bibliothek list:
+   a 22 px circle (line 1.2, --muted); chosen: filled with the text colour and a tick in the background colour;
+   «some chosen»: filled with a dash. Same values in bibliothek.css (Meine Wörter, list) and collection-window.css /
+   wortschatz.css (word windows of Wortschatz and Bibliothek) — keep them alike. */
+.vocabulary-dialog input[type="checkbox"] { -webkit-appearance: none; appearance: none; position: relative; display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; margin: 0; box-sizing: border-box; border: 1.2px solid var(--muted); border-radius: 50%; background: transparent; accent-color: auto; cursor: pointer; }
+.vocabulary-dialog input[type="checkbox"]:checked,
+.vocabulary-dialog input[type="checkbox"]:indeterminate { border-color: var(--text); background: var(--text); }
+.vocabulary-dialog input[type="checkbox"]:checked::after { content: ""; position: static; inset: auto; width: 9px; height: 5px; border-radius: 0; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); background: transparent; transform: translateY(-1px) rotate(-45deg); }
+.vocabulary-dialog input[type="checkbox"]:indeterminate::after { content: ""; position: static; inset: auto; width: 10px; height: 1.6px; border: 0; border-radius: 1px; background: var(--bg); transform: none; }
+/* the lines under a word start under the word again (mark 22 + gap 10) */
+.vocabulary-row p { margin-left: 32px; }
+.vocabulary-row blockquote { margin-left: 36px; }
+.vocabulary-passage { width: calc(100% - 32px); margin-left: 32px; }
+
+/* 08.11 (Alena): ⓘ — first which files work, then where the books are kept. */
+.storage-note { display: grid; gap: 8px; color: var(--muted); font-size: 14px; line-height: 1.45; padding: 14px 16px; border-radius: 18px; }
+.storage-note p { margin: 0; }
+.storage-note strong { display: block; margin-bottom: 2px; color: var(--text); font-weight: 600; }
+
+/* 08.11 (Alena): the «+» menu as a small card of the app — stands right above «+» (its right edge on the button's
+   right edge), each choice with its icon (line 1.2), a title and one line under it, a thin line between them. */
+.library-actions .library-add-menu { left: auto; right: var(--dock-right, 0px); bottom: 60px; }
+.library-add-menu { width: 272px; padding: 6px; border: 0; border-radius: 18px; background: var(--tile-surface); box-shadow: var(--lift-highlight), var(--lift-shadow), 0 12px 32px rgba(0, 0, 0, 0.18); }
+.empty-library .library-add-menu { margin: 12px auto 0; }
+body.library-screen .reader .library-add-menu button { display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 10px 12px; border-radius: 12px; font: 600 16px/1.25 var(--font); }
+body.library-screen .reader .library-add-menu button + button { position: relative; }
+body.library-screen .reader .library-add-menu button + button::before { content: ""; position: absolute; top: 0; left: 48px; right: 12px; height: 1px; background: var(--hairline); }
+.library-add-menu button svg { flex: none; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.library-add-menu button svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.library-add-menu button span { display: block; min-width: 0; }
+.library-add-menu small { display: block; margin-top: 2px; color: var(--muted); font: 400 12px/1.3 var(--font); }
+.library-add-menu button:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }

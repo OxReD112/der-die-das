@@ -723,3 +723,18 @@ textarea.coll-paste {
 .coll-pace-days {
   font-variant-numeric: tabular-nums;
 }
+
+/* 08.11 (Alena): one selection mark everywhere — the monochrome round mark of «Bearbeiten» in the Bibliothek list:
+   a 22 px circle (line 1.2, --muted); chosen: filled with the text colour and a tick in the background colour;
+   «some chosen»: filled with a dash. Same values in bibliothek.css (Meine Wörter, list) and collection-window.css /
+   wortschatz.css (word windows of Wortschatz and Bibliothek) — keep them alike. */
+.coll-pick-check,
+.coll-pick-all input { -webkit-appearance: none; appearance: none; position: relative; display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; margin: 0; box-sizing: border-box; border: 1.2px solid var(--muted); border-radius: 50%; background: transparent; accent-color: auto; cursor: pointer; }
+.coll-pick-check:checked,
+.coll-pick-all input:checked,
+.coll-pick-check:indeterminate,
+.coll-pick-all input:indeterminate { border-color: var(--text); background: var(--text); }
+.coll-pick-check:checked::after,
+.coll-pick-all input:checked::after { content: ""; position: static; inset: auto; width: 9px; height: 5px; border-radius: 0; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); background: transparent; transform: translateY(-1px) rotate(-45deg); }
+.coll-pick-check:indeterminate::after,
+.coll-pick-all input:indeterminate::after { content: ""; position: static; inset: auto; width: 10px; height: 1.6px; border: 0; border-radius: 1px; background: var(--bg); transform: none; }

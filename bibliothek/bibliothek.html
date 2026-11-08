@@ -17,11 +17,11 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=6" />
     <link rel="stylesheet" href="../home.css?v=81" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261108-list-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261108-menu-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261108-shelf-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=10" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
-    <link rel="stylesheet" href="../wortschatz/collection-window.css?v=15" />
+    <link rel="stylesheet" href="../wortschatz/collection-window.css?v=16" />
     <link rel="stylesheet" href="reading-word-form.css?v=3" />
   </head>
   <body class="reading-body library-screen">
@@ -33,10 +33,12 @@
       <section class="library" id="library" aria-label="Your books">
         <div class="storage-notice" id="storage-notice">
           <div class="storage-notice-inner">
-            <p class="storage-note">
-              Books you add are saved on this device for convenience. Browser storage can be cleared, so keep your
-              original files as a backup.
-            </p>
+            <div class="storage-note">
+              <p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such
+                as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p>
+              <p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your
+                original files as a backup.</p>
+            </div>
           </div>
         </div>
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
@@ -96,8 +98,8 @@
         <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
         <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
         <div class="library-add-menu" id="library-add-menu" hidden>
-          <button id="add-book" type="button">Datei hochladen <small>EPUB · TXT</small></button>
-          <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog">Text einfügen</button>
+          <button id="add-book" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg><span>Datei hochladen <small>EPUB ohne DRM · TXT</small></span></button>
+          <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5h6M9 4.5a1 1 0 0 0-1 1V6h8v-.5a1 1 0 0 0-1-1M8 5.5H6.5A1.5 1.5 0 0 0 5 7v12a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V7a1.5 1.5 0 0 0-1.5-1.5H16M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg><span>Text einfügen <small>Einen deutschen Text einfügen</small></span></button>
         </div>
       </div>
 
@@ -458,6 +460,6 @@
     <script src="reader/meaning-thanks.js?v=1"></script>
     <script src="reader/bookshelf.js?v=20261108-list-1"></script>
     <script src="reader/bibliothek.js?v=20261108-list-1"></script>
-    <div class="version-mark" aria-hidden="true">v46</div>
+    <div class="version-mark" aria-hidden="true">v47</div>
   </body>
 </html>
