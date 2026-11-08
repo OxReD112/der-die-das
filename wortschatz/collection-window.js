@@ -669,10 +669,10 @@
     card.appendChild(head(L("Word Cannot Be Added", "Слово нельзя добавить"), embedded ? close : viewMain));
     const reasons = {
       DICTIONARY_ENTRY_MISSING: L("The dictionary entry is missing.", "В словаре нет этой статьи."),
-      DICTIONARY_ENTRY_EXCLUDED: L("This pronoun is excluded from Wortschatz.", "Это местоимение не входит в Wortschatz."),
+      DICTIONARY_ENTRY_EXCLUDED: L("This word has no learning card.", "У этого слова нет учебной карточки."), // 08.11: not only pronouns
       DICTIONARY_CLOZE_INVALID: L("The dictionary example has invalid answer markup and needs correction.", "В примере из словаря неверно отмечено слово — его нужно исправить.")
     };
-    const label = [error.base, error.dictionaryId].filter(Boolean).join(" · ") || L("Unknown word", "Неизвестное слово");
+    const label = error.base || L("Unknown word", "Неизвестное слово"); // 08.11 (Alena): no record number
     card.appendChild(el("p", "coll-text", label));
     card.appendChild(el("p", "coll-error", reasons[error.code] || L("The word could not be prepared. Please try again.", "Не удалось подготовить слово. Попробуй ещё раз."), {role: "alert"}));
     if (error.code === "DICTIONARY_CLOZE_INVALID") card.appendChild(el("p", "coll-hint", error.reason));
@@ -714,10 +714,7 @@
       const sc=el("div","coll-scroll");card.appendChild(sc);
       sc.appendChild(el("p","coll-text",L(`Review words from „${String(request.title || "Bibliothek")}“. Tap any word to edit it before adding.`,`Проверь слова из «${String(request.title || "Bibliothek")}». Нажми на слово, чтобы изменить его перед добавлением.`)));
       if (request.unavailable) sc.appendChild(el("p","coll-hint",L(`${request.unavailable} words without learning cards remain saved in Bibliothek.`,`${request.unavailable} ${ruN(request.unavailable,"слово","слова","слов")} без учебных карточек остаются в Bibliothek.`)));
-      for (const issue of request.diagnostics || []) {
-        const reason=issue.code === "DICTIONARY_ENTRY_EXCLUDED" ? L("excluded from Wortschatz","не входит в Wortschatz") : issue.code === "DICTIONARY_ENTRY_MISSING" ? L("dictionary entry missing","нет статьи в словаре") : L("dictionary example needs correction","пример из словаря нужно исправить");
-        sc.appendChild(el("p", "coll-hint", `${issue.base || L("Unknown word","Неизвестное слово")}${issue.dictionaryId ? " ("+issue.dictionaryId+")" : ""}: ${reason}.`));
-      }
+      // 08.11 (Alena): no line per word with its record number and reason — the line above says how many stay in Bibliothek.
       if (!own()) {
         sc.appendChild(el("p","coll-text",L("These words start your own word collection.","С этих слов начнётся твоя коллекция.")));
         sc.appendChild(el("label","coll-label",L("Collection Name","Название коллекции"),{for:"readingCollectionName"}));
