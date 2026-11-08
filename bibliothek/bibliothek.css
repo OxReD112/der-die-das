@@ -2754,7 +2754,7 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 
 /* 08.11 (design chat, Alena 16.10 / 08.11): the reader's own colour — carmine ribbon = "your place in the book"
    (the started book on the shelf, the current chapter in Inhalt — ribbon and title). Only for ribbons; mint stays the marked word. */
-:root { --ribbon: #e4475e; }
+:root { --ribbon: #c8223f; }
 [data-theme="light"] { --ribbon: #b0182b; }
 .contents-entry[aria-current]::before,
 .book-marker::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.08) 1px, transparent 2.5px), var(--ribbon); }
@@ -2790,12 +2790,12 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 [data-theme="light"] { --bm-edge: rgba(47, 44, 41, 0.18); }
 .popover-bookmark { color: var(--muted); }
 .popover-bookmark::before { content: ""; position: absolute; top: 1px; left: calc(50% - 6.5px); width: 13px; height: 3px; background: linear-gradient(to bottom, var(--bm-edge), transparent); pointer-events: none; }
-/* Inhalt: no carmine — the current chapter's ribbon in the text colour comes out of a slit: the part above it stays behind
+/* Inhalt: the current chapter's title in the text colour, its carmine ribbon (= the bookmark on the shelf, Alena 08.11) comes out of a slit: the part above it stays behind
    in a soft shadow (a little to the left, long to the right); in the dark theme also a thin light lip under the slit. */
 :root { --slit-shadow: rgba(0, 0, 0, 0.3); --slit-height: 11px; --slit-right: 120px; --slit-lip: rgba(255, 255, 255, 0.22); }
 [data-theme="light"] { --slit-shadow: rgba(50, 35, 20, 0.13); --slit-height: 8px; --slit-right: 80px; --slit-lip: transparent; }
 .contents-entry[aria-current] > span:first-child { color: var(--text); }
-.contents-entry[aria-current]::before { background: var(--text); }
+.contents-entry[aria-current]::before { background: var(--ribbon); }
 .contents-entry[aria-current]::after {
   content: ""; position: absolute; pointer-events: none;
   top: calc(8px - var(--slit-height)); left: calc(2px + var(--depth) * 12px);
