@@ -3685,7 +3685,9 @@
       // G68 (user 24.10): a whole word a dictionary knows is never split, in any case (beileibe — «bei Leibe», not Beil + Eibe).
       // (#21: a record that only names the base of a diminutive — täschchen «diminutive of Tasche» — gives that base)
       let dimBase = null;
-      if (!options.ignoreRecord && (lemmas.has(w) || forms.has(w))) return null;
+      // (advisor 08.11: a joined form of the separable index — vor + trieb — is no record of a capital word inside the sentence: Der Vortrieb)
+      const indexJoinedOnly = capital && midSentenceCapital(spelling, context) && (forms.get(w) || []).every(e => e.importedSeparable && norm(e.word) !== w);
+      if (!options.ignoreRecord && (lemmas.has(w) || forms.has(w) && !indexJoinedOnly)) return null;
       // (advisor 06.11, (в) composition: the record of the word is known — only its parts are wanted for the line «состав»)
       if (!options.ignoreRecord && fallback.hasRecord && await fallback.hasRecord(w)) {
         dimBase = fallback.diminutiveBase ? await fallback.diminutiveBase(w) : null;
@@ -8767,7 +8769,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (plural) readings.push({number:"plural",gender:null,cases:singular || ownPlural ? new Set() : cases,noDative});
         if (singular) for (const gender of genders.length ? genders : [null]) readings.push({number:"singular",gender,cases:plural ? new Set() : singularCases});
       }
-      if (!morph.candidates.length && /^[A-ZÄÖÜ]/u.test(surface)) readings.push({number:null,gender:null,cases:new Set(),unknown:true});
+      // (advisor 08.11: a capital word whose only candidates are joined forms of the separable index — Vortrieb = vor + trieb — is an
+      // unknown noun in a noun group, as before the index kept noun spellings)
+      const indexJoined = /^[A-ZÄÖÜ]/u.test(surface) && (forms.get(s) || []).length && (forms.get(s) || []).every(e => e.importedSeparable && norm(e.word) !== s) &&
+        morph.candidates.every(c => canonicalPos(c.pos) === "Verb" && (forms.get(s) || []).some(e => norm(e.word) === norm(c.lemma)));
+      if ((!morph.candidates.length || indexJoined) && /^[A-ZÄÖÜ]/u.test(surface)) readings.push({number:null,gender:null,cases:new Set(),unknown:true});
       return readings;
     }
     // Endings a modifier token can show; invariant tokens (degree adverbs,
@@ -11731,7 +11737,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const phraseHere = e => !!tapPart && phraseInPlace(e,tapPart.raw,tapPart.t,k => phraseRows(norm(tapPart.raw[k])));
       // a card met only inflected (die meisten) is not the form after am (am meisten Angst — the superlative of viel)
       const afterAm = Number.isInteger(context?.tokenOffset) && /(?:^|[^\p{L}])am\s+$/iu.test(String(context.sentence || '').slice(0,context.tokenOffset));
-      const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm)),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
+      // (advisor 08.11, claude/S2_NOFILTER_CAUSES_2026-11-08_RU.md: the index keeps forms spelled like a noun — kamen, baue, trieb; a
+      // capital inside the sentence is the noun's — Der Vortrieb is no vortreiben)
+      const capitalInside = /^\p{Lu}/u.test(word) && midSentenceCapital(word, context);
+      const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm) &&
+        !(capitalInside && e.importedSeparable && norm(e.word) !== norm(word))),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
       // C21: a cardinal / ordinal without an own numeral card of this spelling.
       if (!exact.some(e => e.type === "numeral")) {
         const generated = numeralEntry(word);
@@ -14135,6 +14145,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       ["herum","вокруг; туда-сюда","around"],["umher","вокруг; туда-сюда","around"],["zurück","назад, обратно","back"],
       ["fort","прочь","away"],["weg","прочь","away"],["davon","прочь","away"],["voran","вперёд","ahead, forward"],["voraus","вперёд","ahead, forward"],
       ["vorwärts","вперёд","ahead, forward"],["empor","вверх","up(wards)"],
+      // (advisor 08.11: auseinander-, dahin- — transparent particles too; dahin with both meanings, «away» first — as in its joined verbs)
+      ["auseinander","в разные стороны","apart"],["dahin","прочь, мимо; туда","away, along; there"],
       // (advisor 04.11 / 07.11, G47 extension: mit-, weiter-, zusammen-, vorbei- — transparent particles; los- stays outside)
       ["mit","вместе (с кем-либо)","along, with (others)"],["weiter","дальше; продолжать","further, on"],["zusammen","вместе; в одно (целое)","together"],["vorbei","мимо","past, by"],["entlang","вдоль","along"],["herbei","сюда (к говорящему)","here, over (towards the speaker)"],["heran","ближе, вплотную (к)","up to, closer"],["hervor","наружу (из-за, из-под), вперёд","out, forth"],["hinweg","прочь; поверх, через","away; over"],["hindurch","сквозь, через","through"],["hinzu","к (чему-то); вдобавок","to (something); in addition"],["hinterher","следом, вслед; потом","after, behind; afterwards"],["her","сюда; (hinter … her) следом; (vor … her) впереди","here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead"],["hin","туда","there, away from the speaker"]]
       .sort((a,b) => b[0].length - a[0].length);
@@ -14211,6 +14223,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (mit, weiter, zusammen, vorbei: only right before a punctuation mark, the end or und / oder — not mit 10:0, mit "…")
       if (G47_TRANSPARENT.has(P) && !/^\s*(?:[,;:.!?…)–—]|["„“”»«]\s*(?:[,;:.!?…)–—]|$)|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(sentence.slice(tokens[b].index + tokens[b][0].length))) return result;
       if (P === "fort" && b >= 2 && norm(tokens[b - 1][0]) === "einem" && norm(tokens[b - 2][0]) === "in") return result; // in einem fort
+      // (advisor 08.11: dahin before «, wo / wohin / woher / bis / dass» points to a place — legte ihr Haupt dahin, wo … — no particle)
+      if (P === "dahin" && /^\s*,\s*(?:wo|wohin|woher|bis|dass|daß)(?![\p{L}\p{M}])/u.test(sentence.slice(tokens[b].index + tokens[b][0].length))) return result;
       if (/^(?:hinein|herein)$/u.test(P) && tokens.slice(a, b).some(t => /^(?:in|ins|im)$/u.test(norm(t[0])))) return result;
       // the finite verb of the part (not haben / sein / werden / a modal: then the particle belongs to a chain)
       // (advisor 04.11 (a): a finite form of a verb of the external dictionary counts as ours — hüpfte, trollte, hol)
@@ -14288,6 +14302,42 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!c || c.formation?.kind !== "particle-verb" || c.construction || !bases.some(x => /n$/u.test(x) && norm(c.lemma) === P + x)) return result;
       const cand = {...c, construction:{id:"directional-split", lemma:c.lemma, spans:[span(v), span(b)]}};
       return {...r, candidates:[cand], preferred:cand, selected:cand, status:"resolved", evidence:"directional-split"};
+    }
+    // (advisor 08.11, claude/S2_NOUNFILTER_OFF_RUN_2026-11-08_RU.md) an external particle verb without an English meaning (forttragen,
+    // hinauftragen, herabfallen — the Russian dictionary or the separable index alone): its English text is its parts, by the same
+    // formation text as the G47 / #29 card (fort — away · tragen — to carry); the heading and the Russian text stay.
+    const englishParts = new Map();
+    async function englishByParts(result) {
+      if (!result || !(result.candidates || []).length) return result;
+      const plainLemma = c => norm(c.lemma).replace(/^sich\s+/u, "");
+      const needs = c => c && c.source === "fallback" && canonicalPos(c.pos) === "Verb" && !c.formation && !String(c.translation?.en || "").trim();
+      if (!result.candidates.some(needs)) return result;
+      const swap = new Map();
+      for (const c of result.candidates) {
+        if (!needs(c)) continue;
+        const whole = plainLemma(c);
+        // a particle the table has no meaning for (ab-, aus-, nach-): the index's own split, shown bare (advisor 08.11)
+        let row = DIRECTIONAL.find(([p]) => whole.startsWith(p) && whole.length >= p.length + 3);
+        if (!row) for (let i = 2; i <= whole.length - 3 && !row; i++)
+          if ((separableBases.get(whole.slice(i)) || []).some(r => r.prefix === whole.slice(0,i) && plainLemma({lemma:r.entry.word}) === whole)) row = [whole.slice(0,i), "", ""];
+        if (!row) continue;
+        const [particle, ru, en] = row, simple = whole.slice(particle.length);
+        if (!englishParts.has(whole)) {
+          let text = "";
+          try {
+            const inner = await resolveWithDiagnostics(simple, {sentence:simple, tokenOffset:0});
+            const verbs = (inner?.candidates || []).filter(v => canonicalPos(v.pos) === "Verb" && plainLemma(v) === simple && !v.construction);
+            if (verbs.length) text = window.BibliothekMeaningDisplay?.formationText?.({kind:"particle-verb", particle:{form:particle, ru, en}, verb:verbs[0], verbs, lemma:whole, pos:"Verb"}, "en") || "";
+          } catch (_) { text = ""; }
+          if (englishParts.size > 2048) englishParts.clear();
+          englishParts.set(whole, text);
+        }
+        const text = englishParts.get(whole);
+        if (text) swap.set(c, {...c, translation:{...(c.translation || {}), en:text}, englishByParts:true});
+      }
+      if (!swap.size) return result;
+      const map = c => swap.get(c) || c;
+      return {...result, candidates:result.candidates.map(map), selected:result.selected && map(result.selected), preferred:result.preferred && map(result.preferred)};
     }
     async function directionalParticle(word, context, result, force = null, extraRow = null) {
       // #29 (books, regressions 05.11): a card found only as particle + participle (hinabgeworfen — hinabwerfen, herabgefallen) gives way
@@ -14934,7 +14984,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is

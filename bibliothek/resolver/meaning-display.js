@@ -591,7 +591,9 @@
       const own = ownCard(v), rest = own ? Math.max(0, meaningParts(v.translation?.[shown] || '').length - 2) : 0;
       return {text:`${v.lemma} — ${prefix}${parts.slice(0, shownCount(Infinity)).join('; ')}`, more:rest, entryId:own ? v.dictionaryId || null : null};
     };
-    return [{text:`${f.particle.form} — ${f.particle[language] || f.particle.en}`, more:0, entryId:null}, ...(f.verbs || [f.verb]).map(line)];
+    // (advisor 08.11: a particle without a meaning of its own in the table — ab-, aus-, nach- — is shown bare: «ab- · fressen — to eat»)
+    const particleMeaning = f.particle[language] || f.particle.en;
+    return [{text:particleMeaning ? `${f.particle.form} — ${particleMeaning}` : `${f.particle.form}-`, more:0, entryId:null}, ...(f.verbs || [f.verb]).map(line)];
   }
   // The card: heading «hinabrutschen = hinab + rutschen», the grammar of the verb form (Präteritum, Perfekt mit … and its
   // highlight), one line per part.
