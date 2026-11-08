@@ -4748,6 +4748,33 @@
       if (modifier(p) && (modifier(k+1) || shape(k+1) && noun(k+2))) { for (let i = k+2; i <= limit; i++) if (noun(i)) return true; }
       return noun(p) && p > 0 && DETERMINER_WORD.test(w(p-1)) && DETERMINER_WORD.test(w(k+1)) && (noun(k+2) || modifier(k+2) && noun(k+3));
     }
+    // (advisor 08.11, claude/MODAL_TRAIN_CAUSES_2026-11-08_RU.md (2); the same modifier test as nounPhrasePair) a comma after token a
+    // inside one noun phrase: a declined modifier before it and a declined modifier with the same ending after it (an undeclined
+    // degree word between may stand: überwiegend tonigen), then the noun before any verb form or other mark (commas of the same list
+    // are fine) — eine maßvolle, schrittweise Belastung; einen dunklen, warmen Ton. Not a list of nouns, not a clause after the comma.
+    function commaModifierPair(sentence, tokens, a) {
+      const w = i => norm(tokens[i][0]);
+      const gapAfter = i => sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index);
+      if (a < 1 || a+2 >= tokens.length || !/^\s*,\s*$/u.test(gapAfter(a))) return false;
+      const verbal = i => (forms.get(w(i)) || []).some(e => e.type === "Verb") || (verbAnalyses.get(w(i)) || []).length > 0;
+      const ending = i => (/(?:em|en|er|es|e)$/u.exec(w(i)) || [""])[0];
+      const modifier = i => /^\p{Ll}/u.test(tokens[i][0]) && (ownModifierForm(tokens[i][0]) || adjectivalForm(tokens[i][0])) &&
+        ending(i) && !verbal(i) && !DETERMINER_WORD.test(w(i)) && !prepositions.has(w(i));
+      const shape = i => /^\p{Ll}\p{L}*(?:e|en|er|es|em)$/u.test(tokens[i][0]) && !verbal(i) && !DETERMINER_WORD.test(w(i)) &&
+        !prepositions.has(w(i)) && !(forms.get(w(i)) || []).some(e => !["Adjektiv","Adverb"].includes(e.type));
+      const degree = i => /^\p{Ll}/u.test(tokens[i][0]) && !ending(i) && !verbal(i) && (forms.get(w(i)) || []).some(e => ["Adjektiv","Adverb"].includes(e.type));
+      if (!(modifier(a) || shape(a))) return false;
+      let b = a+1;
+      if (degree(b) && /^\s+$/u.test(gapAfter(b))) b++;
+      if (!(modifier(b) || shape(b)) || ending(b) !== ending(a)) return false;
+      for (let i = b+1; i < tokens.length && i <= b+4; i++) {
+        const g = gapAfter(i-1);
+        if (!/^\s+$/u.test(g) && !/^\s*,\s*$/u.test(g)) return false;
+        if (/^\p{Lu}/u.test(tokens[i][0]) && !clauseInitial(sentence, tokens[i].index) && !prepositions.has(w(i))) return true;
+        if (!(modifier(i) || shape(i) || degree(i))) return false;
+      }
+      return false;
+    }
     function pairOpened(sentence, tokens, k, verbal) {
       const w = i => norm(tokens[i][0]), opener = PAIR_OPENERS[w(k)];
       // (numbers are no tokens: zwischen 1978 und 1985 — a gap of spaces and numbers is plain, and a number after the joining word
@@ -4917,6 +4944,8 @@
       // skipped like the one between dashes: the clause goes on after it and the words inside never compete.
       const quoteJoin = new Set(), titles = quotedTitles(sentence,tokens,gap), parens = parenthesisSpans(sentence,tokens);
       const commaJoin = new Set();
+      // (advisor 08.11) modifiers through a comma inside one noun phrase (commaModifierPair) — eine maßvolle, schrittweise Belastung
+      for (let a = 1; a+2 < tokens.length; a++) if (commaModifierPair(sentence, tokens, a)) commaJoin.add(a);
       // (advisor 07.11, from the #36 count: «nicht nur …, sondern auch …» is one pair too — the comma right before sondern auch is no
       // boundary when nicht nur stands earlier in the same part, with no verb form and no other mark between: wird nicht nur von
       // Charon, sondern auch von Pluto umkreist)
@@ -5590,7 +5619,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const plain = await werdenGroupIn(word,context,clauseGaps.plain) || await werdenGroupIn(word,context,clauseGaps.dashed);
       if (plain) return plain;
       const g = await werdenGroupIn(word,context,clauseGaps.plain,WERDEN_BOUNDARIES_NO_ALS);
-      return g && ["werden-passive","werden-passive-perfect"].includes(g.id) && g.alsNoun ? g : null;
+      if (g && ["werden-passive","werden-passive-perfect"].includes(g.id) && g.alsNoun) return g;
+      // (advisor 08.11, modals U (2) for the passive: a finite modal joined by und / oder to the next one shares its passive chain —
+      // a tap on könne in könne und müsse … konzentriert werden reads the chain of müsse, which names könne)
+      if (context?.coordinatedFirst == null && Number.isInteger(context?.tokenOffset)) {
+        const tokens = sharedTokens(String(context.sentence || ""),'werdenGroup'), at = clickedTokenIndex(tokens,context.tokenOffset,word);
+        if (at >= 0 && ["und","oder"].includes(norm(tokens[at+1]?.[0] ?? "")) && tokens[at+2] && /^\p{Ll}/u.test(tokens[at+2][0]) &&
+            [at,at+2].every(i => (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Verb" && MODAL_VERB_SET.has(e.word)))) {
+          const g2 = await werdenGroupIn(tokens[at+2][0],{...context,tokenOffset:tokens[at+2].index,coordinatedFirst:at},clauseGaps.plain);
+          if (g2 && g2.id === "modal-passive" && g2.spans.some(sp => sp.start === tokens[at].index)) return g2;
+        }
+      }
+      return null;
     }
     async function werdenGroupIn(word, context, gaps, boundaries = clauseBoundaries.werden) {
       const clause = verbalClause(word,context,'werdenGroup',boundaries,gaps);
@@ -6038,6 +6078,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!main.length && !verbs(part).length && !becomeAt(part)) main = await externalParticiple(tokens[part][0]);
         let linked = [head.i,part,aux,...(chainModal !== null && aux === chainModal-1 ? [chainModal] : [])].sort((a,b)=>a-b);
         if (chainModal !== null && aux !== chainModal-1) continue;
+        // (advisor 08.11, modals U (2) for the passive: a finite modal right before und / oder before the part shares the passive chain
+        // of the next modal — könne und müsse … konzentriert werden, müssen und sollen diskutiert werden: Passiv mit konzentrieren)
+        let partnerModal = null;
+        if (!fronted && chainModal === null && head.i === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0])) &&
+            !/[,;:.!?()–—"„“»«]/u.test(String(clause.sentence || "").slice(tokens[start-2].index + tokens[start-2][0].length, tokens[start].index))) {
+          const p0 = start-2, own = (forms.get(norm(tokens[p0][0])) || []).filter(e => e.type === "Verb" && modalWords.has(e.word) && modalFinite(e,p0));
+          if (own.length && /^\p{Ll}/u.test(tokens[p0][0]) || own.length && p0 === 0) { partnerModal = {i:p0,e:own[0]}; linked = [p0,...linked]; }
+        }
         // (P4 / T4: a participle joined by und / oder to it shares the frame — sollen bald begonnen und … abgeschlossen werden;
         // tapped, it names its own verb)
         const coordinated = indices.filter(i => !linked.includes(i) && /^\p{Ll}/u.test(tokens[i][0]) && participles(i).length &&
@@ -6050,7 +6098,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             meaning:selected === aux ? {en:"passive auxiliary",ru:"вспомогательный глагол пассива"} : null,
             // (links chat 04.11: an own card that is only «sich X» names the passive «X» when no sich stands in the part —
             // müssen angemeldet werden: Passiv mit anmelden, as the plain werden-passive does)
-            lemma:indices.some(i => norm(tokens[i][0]) === "sich") ? main[0].word : String(main[0].word).replace(/^sich\s+/u,""),roles:[head.e,...main,...werden,...(chainModal !== null ? modalAt(chainModal).slice(0,1) : [])],spans:linked.map(clause.span)};
+            lemma:indices.some(i => norm(tokens[i][0]) === "sich") ? main[0].word : String(main[0].word).replace(/^sich\s+/u,""),roles:[head.e,...main,...werden,...(chainModal !== null ? modalAt(chainModal).slice(0,1) : []),...(partnerModal ? [partnerModal.e] : [])],spans:linked.map(clause.span)};
       }
       return result.length === 1 ? result[0] : null;
     }
@@ -7448,9 +7496,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (modalAt(at) && modalAt(at+2) && /^\p{Ll}/u.test(tokens[at+2][0])) {
         const g2 = verbGroupIn(tokens[at+2][0], {...context,tokenOffset:tokens[at+2].index,coordinatedFirst:at});
         // An auxiliary infinitive (… könne und müsse konzentriert werden, müssen und sollen diskutiert werden) is a passive /
-        // perfect of the second modal, not a shared plain infinitive: no link, as on main (run 01.11).
+        // perfect of the second modal, not a shared plain infinitive: not here — the passive chain is shared in werdenGroup (advisor 08.11).
         if (g2 && g2.id === "modal-group" && g2.spans.some(sp => sp.start === tokens[at].index) &&
           !g2.spans.some(sp => ["werden","worden","sein","haben"].includes(norm(sp.text)))) return g2;
+        // (advisor 08.11: the passive chain of the next modal names this one too — könne und müsse … konzentriert werden)
+        if (g2 && g2.id === "modal-passive" && g2.spans.some(sp => sp.start === tokens[at].index)) return g2;
       }
       if (!tokens[at+3] || !/^\p{Ll}/u.test(tokens[at][0])) return null;
       // (links chat, advisor 02.11: the same for a participle before a closing haben / sein — gelesen und geschrieben hatte)
