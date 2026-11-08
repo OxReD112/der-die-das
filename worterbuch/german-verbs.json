@@ -123192,5 +123192,117 @@
         "Sie": "hören Sie mit an"
       }
     }
+  },
+  {
+    "id": "verb-2756",
+    "infinitive": "sich ausmalen",
+    "translation_ru": "представлять себе (в красках)",
+    "translation_en": "to imagine, to picture (to oneself)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Местоимение в дательном, что представлять — Akkusativ: Du malst dir das Schlimmste aus. — Ты представляешь себе самое худшее. Слабый, отделяемый: malte sich aus, hat sich ausgemalt. Без sich — ausmalen «расписывать (красками), раскрашивать».",
+    "usage_note_en": "The pronoun is dative, what one imagines is accusative: Du malst dir das Schlimmste aus. — You imagine the worst. Weak, separable: malte sich aus, hat sich ausgemalt. Without sich — ausmalen “to paint (a room), to colour in”.",
+    "example_de": "Schon Wochen vor der Reise malte sie sich jeden Tag am Meer aus.",
+    "example_cloze": "Schon Wochen vor der Reise {{c1::malte}} sie sich jeden Tag am Meer {{c1::aus}}.",
+    "example_ru": "Ещё за несколько недель до поездки она в красках представляла себе каждый день у моря.",
+    "example_en": "Weeks before the trip she was already picturing every day by the sea.",
+    "perfect_form": "haben sich ausgemalt",
+    "forms": {
+      "Präsens": {
+        "ich": "male mir aus",
+        "du": "malst dir aus",
+        "er/sie/es": "malt sich aus",
+        "wir": "malen uns aus",
+        "ihr": "malt euch aus",
+        "sie": "malen sich aus"
+      },
+      "Präteritum": {
+        "ich": "malte mir aus",
+        "du": "maltest dir aus",
+        "er/sie/es": "malte sich aus",
+        "wir": "malten uns aus",
+        "ihr": "maltet euch aus",
+        "sie": "malten sich aus"
+      },
+      "Konjunktiv II": {
+        "ich": "malte mir aus",
+        "du": "maltest dir aus",
+        "er/sie/es": "malte sich aus",
+        "wir": "malten uns aus",
+        "ihr": "maltet euch aus",
+        "sie": "malten sich aus"
+      }
+    },
+    "separable_prefix": "aus",
+    "reflexive_case": "Dativ",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (sich — Dativ)",
+        "note_en": "something (sich is dative)"
+      }
+    ],
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "mal dir aus",
+        "ihr": "malt euch aus",
+        "Sie": "malen Sie sich aus"
+      }
+    }
+  },
+  {
+    "id": "verb-2757",
+    "infinitive": "sich aneignen",
+    "translation_ru": "присваивать; усваивать, осваивать",
+    "translation_en": "to appropriate; to acquire, to learn",
+    "auxiliary": "haben",
+    "usage_note_ru": "Местоимение в дательном, что присваивать или усваивать — Akkusativ: Er hat sich das Wissen schnell angeeignet. — Он быстро усвоил эти знания. sich fremdes Eigentum aneignen — присвоить чужое имущество. Слабый, отделяемый: eignete sich an, hat sich angeeignet.",
+    "usage_note_en": "The pronoun is dative, what one appropriates or learns is accusative: Er hat sich das Wissen schnell angeeignet. — He picked up the knowledge quickly. sich fremdes Eigentum aneignen — to appropriate someone else's property. Weak, separable: eignete sich an, hat sich angeeignet.",
+    "example_de": "In einem Jahr im Ausland eignete sie sich fließendes Spanisch an.",
+    "example_cloze": "In einem Jahr im Ausland {{c1::eignete}} sie sich fließendes Spanisch {{c1::an}}.",
+    "example_ru": "За год за границей она освоила беглый испанский.",
+    "example_en": "In a year abroad she picked up fluent Spanish.",
+    "perfect_form": "haben sich angeeignet",
+    "forms": {
+      "Präsens": {
+        "ich": "eigne mir an",
+        "du": "eignest dir an",
+        "er/sie/es": "eignet sich an",
+        "wir": "eignen uns an",
+        "ihr": "eignet euch an",
+        "sie": "eignen sich an"
+      },
+      "Präteritum": {
+        "ich": "eignete mir an",
+        "du": "eignetest dir an",
+        "er/sie/es": "eignete sich an",
+        "wir": "eigneten uns an",
+        "ihr": "eignetet euch an",
+        "sie": "eigneten sich an"
+      },
+      "Konjunktiv II": {
+        "ich": "eignete mir an",
+        "du": "eignetest dir an",
+        "er/sie/es": "eignete sich an",
+        "wir": "eigneten uns an",
+        "ihr": "eignetet euch an",
+        "sie": "eigneten sich an"
+      }
+    },
+    "separable_prefix": "an",
+    "reflexive_case": "Dativ",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (sich — Dativ)",
+        "note_en": "something (sich is dative)"
+      }
+    ],
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "eigne dir an",
+        "ihr": "eignet euch an",
+        "Sie": "eignen Sie sich an"
+      }
+    }
   }
 ]
