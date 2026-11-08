@@ -69238,5 +69238,19 @@
     "example_en": "The farmer pushed the cart full of hay.",
     "usage_note_ru": "Также die Karre (мн. Karren) — то же; (разг.) Karre — колымага, старая машина.",
     "usage_note_en": "Also die Karre (plural Karren) — the same; (colloquial) Karre — an old banger, an old car."
+  },
+  {
+    "id": "noun-5363",
+    "word": "Montage",
+    "article": "die",
+    "plural": "Montagen",
+    "translation_ru": "монтаж, сборка, установка; (в кино) монтаж",
+    "translation_en": "assembly, installation, fitting; (film) montage, editing",
+    "example_de": "Für die Montage der neuen Küche brauchten die Handwerker einen ganzen Tag.",
+    "example_cloze": "Für die {{c1::Montage}} der neuen Küche brauchten die Handwerker einen ganzen Tag.",
+    "example_ru": "На установку новой кухни мастерам понадобился целый день.",
+    "example_en": "The workmen needed a whole day to fit the new kitchen.",
+    "usage_note_ru": "Die Montage der Möbel dauert zwei Stunden. — Сборка мебели занимает два часа. auf Montage sein — быть в командировке на монтаже. Не путать с die Montage — мн. ч. от der Montag (понедельник): an Montagen — по понедельникам.",
+    "usage_note_en": "Die Montage der Möbel dauert zwei Stunden. — Assembling the furniture takes two hours. auf Montage sein — to be away on an installation job. Do not confuse with die Montage — plural of der Montag (Monday): an Montagen — on Mondays."
   }
 ]

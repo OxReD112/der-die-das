@@ -12446,7 +12446,26 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (a record «papiere» / «leut» of the same plural is no rival).
         const rivalNoun = pluralOnly && resolution.candidates.some(c => c.source === 'fallback' && canonicalPos(c.pos) === 'Nomen' &&
           /^\p{Lu}/u.test(c.lemma) && norm(c.lemma) !== norm(linked[0].lemma) && norm(c.lemma) !== norm(word));
-        if (linked.length === 1 && !rivalNoun) selection.fill(resolution,'article-noun-agreement',linked[0],
+        // Advisor 08.11 (claude/DIE_PLURAL_HOMOGRAPH_COUNT_2026-11-08_RU.md): the clicked form is also the singular of another
+        // noun with an entry of its own — a gender, a meaning that is not obsolete / archaic and not a pointer to another word
+        // («female equivalent of», «obsolete form of», «plural of», «alternative form of», «synonym of» …): die Herde «herd»,
+        // der Fächer «fan», die Montage «installation». Then the choice window stays, the plural of our card first. Arme
+        // («female equivalent of Armer»), Preise (obsolete Prise), Brüder («brethren», no gender) keep the plural card. The
+        // same in every interface language (not by the Russian line). A neuter noun (das Rollen) cannot stand after die.
+        const POINTER = /\b(?:form|spelling|equivalent|plural|singular|synonym|gerund|diminutive|abbreviation|agent noun|feminine|masculine|variant|inflection|participle)\s+of\b/iu;
+        const DATED = /^(?:obsolete|archaic|dated|rare)$/iu;
+        let singularRival = false;
+        if (pluralOnly && !rivalNoun) {
+          const others = resolution.candidates.filter(c => c.source === 'fallback' && c.pos === 'noun' && norm(c.lemma) === norm(word));
+          // a meaning that is one capitalised word is a pointer too (muslime «Muslimah» — the female form of Muslim)
+          const own = others.some(c => (c.meanings?.length ? c.meanings : [c.translation?.en]).some(m => m && !POINTER.test(m) && !/^\p{Lu}[\p{L}-]*$/u.test(String(m).trim()) &&
+            !(c.meaningLabels?.en?.[m] || []).some(l => DATED.test(l)) && !/^(?:obsolete|archaic)\b/iu.test(m)));
+          if (own) {
+            const gender = fallback.nounGender ? await fallback.nounGender(word).catch(() => null) : null;
+            singularRival = gender === 'der' || gender === 'die' || gender === '?';
+          }
+        }
+        if (linked.length === 1 && !rivalNoun && !singularRival) selection.fill(resolution,'article-noun-agreement',linked[0],
           linked[0].pos === 'article' ? 'definite-article-noun-agreement' : 'noun-definite-article-agreement');
       }
       if (selection.canFill('noun-homonym-agreement',resolution)) {

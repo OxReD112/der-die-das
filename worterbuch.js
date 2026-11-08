@@ -77,8 +77,8 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261104-wn-nouns43-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261108-wn-reflex57-1"),
+      loadJson("worterbuch/german-nouns.json?v=20261108-wn-montage58-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261108-wn-montage58-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261107-wn-meist35-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261107-wn-meist56-2"),
       loadJson("worterbuch/german-conjunctions.json?v=20261031-wn-doch24-4"),
