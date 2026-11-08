@@ -11769,6 +11769,26 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!plural) return result;
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'plural-over-bare-record'},{outcome:'selected',rule:'plural-over-bare-record',reason:'plural-over-bare-record'});
     }
+    // A run of two or more words in capitals (a shout, a heading; advisor 07.11, ALL_CAPS_COUNT): the words next to each other with
+    // a space only (not a list of abbreviations: SA, SS; ZDF / KIKA; FAW - VW), more than half of them known in ordinary spelling
+    // (not HOSTAL HOSTILE HOTEL HOSTAGE, not DEN HAAG). One check for the caps-run reading and the abbreviation line (08.11).
+    function capsRunBounds(word, context) {
+      if (!Number.isInteger(context?.tokenOffset)) return null;
+      const caps = t => t.length > 1 && /\p{Lu}/u.test(t) && t === t.toUpperCase();
+      if (!caps(String(word))) return null;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'capsRun'), at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0) return null;
+      const joined = (x, y) => /^[ \t]+$/u.test(sentence.slice(tokens[x].index+tokens[x][0].length,tokens[y].index));
+      let a = at, b = at;
+      while (a > 0 && caps(tokens[a-1][0]) && joined(a-1,a)) a--;
+      while (b+1 < tokens.length && caps(tokens[b+1][0]) && joined(b,b+1)) b++;
+      if (b - a < 1) return null;
+      const knownWord = t => { const l = t.toLowerCase(), c = t.charAt(0)+l.slice(1); return lemmas.has(l) || forms.has(l) || verbAnalyses.has(l) || !!contractionForms[l] || lemmas.has(c) || forms.has(c); };
+      let known = 0;
+      for (let k = a; k <= b; k++) if (knownWord(tokens[k][0])) known++;
+      if (known * 2 <= b - a + 1) return null;
+      return {sentence,tokens,at,a,b};
+    }
     const POLITE_FORMS = new Set(['Sie','Ihnen','Ihr','Ihre','Ihren','Ihrem','Ihrer','Ihres']);
     const FORM_DETERMINERS = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein\p{L}*|dein\p{L}*|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser\p{L}*|euer|eure|euren|eurem|eurer|eures|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|solch\p{L}*|manch\p{L}*|all\p{L}*)$/iu;
     const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
@@ -13307,7 +13327,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       repoint();
       // Enrich only after all morphology, ranking and selection are complete.
       if (window.BibliothekRussianTranslations)
-        await window.BibliothekRussianTranslations.enrich({...resolution,candidates:resolution.candidates.filter(c=>!c.explanation)},window.DeutschTranslation?.getLang?.() || "en");
+        await window.BibliothekRussianTranslations.enrich({...resolution,candidates:resolution.candidates.filter(c=>!c.explanation),...(capsRunBounds(word,context)?{capsRun:true}:{})},window.DeutschTranslation?.getLang?.() || "en");
       observe('stage', {stage:'enrichment-complete'});
       return resolution;
     }
@@ -15126,20 +15146,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 07.11, ALL_CAPS_COUNT: a run of two or more words in capitals — a shout, a heading. Inside it an external abbreviation
       // is not offered (AN is no «initialism of Arbeitnehmer»), the links see the words in ordinary spelling, and a word without an own
       // card tries its lowercase and its capitalised spelling: one answer is taken, two different ones — the window. An own card stays.)
+      // (advisor 08.11: one check for both places — the caps run below and the Russian abbreviation line in russian-translations,
+      // which is not looked up inside a run: the result carries the non-enumerable mark capsRun)
+      const markRun=x=>{if(x&&typeof x==='object')Object.defineProperty(x,'capsRun',{value:true,enumerable:false,configurable:true});return x;};
       const capsRun=async r=>{
-        if(context?.capsProbe||!Number.isInteger(context?.tokenOffset))return r;
-        const caps=t=>t.length>1&&/\p{Lu}/u.test(t)&&t===t.toUpperCase();
-        if(!caps(String(word)))return r;
-        const sentence=String(context.sentence||''),tokens=sharedTokens(sentence,'capsRun'),at=clickedTokenIndex(tokens,context.tokenOffset,word);
-        if(at<0)return r;
-        // (words next to each other with a space only — not a list of abbreviations: SA, SS; ZDF / KIKA; FAW - VW)
-        const joined=(a,b)=>/^[ \t]+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
-        let a=at,b=at;while(a>0&&caps(tokens[a-1][0])&&joined(a-1,a))a--;while(b+1<tokens.length&&caps(tokens[b+1][0])&&joined(b,b+1))b++;
-        if(b-a<1)return r;
-        // (a run of German words: more than half of them known in ordinary spelling — not HOSTAL HOSTILE HOTEL HOSTAGE, not DEN HAAG)
-        const knownWord=t=>{const l=t.toLowerCase(),c=t.charAt(0)+l.slice(1);return lemmas.has(l)||forms.has(l)||verbAnalyses.has(l)||!!contractionForms[l]||lemmas.has(c)||forms.has(c);};
-        let known=0;for(let k=a;k<=b;k++)if(knownWord(tokens[k][0]))known++;
-        if(known*2<=b-a+1)return r;
+        if(context?.capsProbe)return r;
+        const run=capsRunBounds(word,context);
+        if(!run)return r;
+        const {sentence,tokens,at,a,b}=run;
+        return markRun(await capsRunInside(r,sentence,tokens,at,a,b));};
+      const capsRunInside=async(r,sentence,tokens,at,a,b)=>{
         const abbreviation=c=>c&&c.source==='fallback'&&/^(?:initialism|acronym|abbreviation)\b/iu.test(String(c.translation?.en||''));
         const title=t=>t.charAt(0)+t.slice(1).toLowerCase(),lower=t=>t.toLowerCase();
         // (a word after a determiner / preposition is a noun when it has a noun card: DEN WEG → den Weg, not weg)

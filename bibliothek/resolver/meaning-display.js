@@ -898,6 +898,12 @@
     }
     // Reference 13 (user decision 19.10): a name is «Name» without a translation — the dictionary
     // records of names are English notes that leak into Russian.
+    // (advisor 08.11) an abbreviation the Russian dictionary keeps in capitals (USA «США», DDR «ГДР») shows that Russian line.
+    if (candidate.source === 'fallback' && candidate.pos === 'name' && !usage && !contraction && language === 'ru' && candidate.abbreviationRu &&
+        String(candidate.translation?.ru || '').trim()) {
+      return {heading:headingText, grammar:'Name', text:String(candidate.labelledText?.ru || candidate.translation.ru), textLanguage:'ru', missing:false, derived:false, note:'', more:0,
+        spans:k.spans || null, helpEntry:null};
+    }
     if (candidate.source === 'fallback' && candidate.pos === 'name' && !usage && !contraction) {
       return {heading:headingText, grammar:'Name', text:'', textLanguage:language, missing:false, derived:false, note:'', more:0,
         spans:k.spans || null, helpEntry:null};

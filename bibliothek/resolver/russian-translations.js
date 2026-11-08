@@ -159,6 +159,27 @@
     observe('enrich-start', {language,candidates:resolution.candidates.length});
     if (language !== "ru") {observe('enrich-end', {language});return resolution;}
     const pending = new Map();
+    // (advisor 08.11) an abbreviation written in capitals (USA, DDR, UFO, BMW): the Russian dictionary keeps it in capitals
+    // (USA «США», DDR «ГДР», UFO «НЛО») as a noun or an abbreviation; the outside record is lowercase (usa, a name or a noun).
+    // The Russian line is shown; a name without one stays as before (rule 19.10).
+    const form = String(resolution.form || "").normalize("NFC");
+    // (not inside a run of words in capitals — KOMMT UND SEHT EUCH DIESE SCHLANGE AN!: the resolver marks it capsRun)
+    if (/^[A-ZÄÖÜ]{2,}$/u.test(form) && !resolution.capsRun) await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.translation?.ru &&
+        ["noun","name"].includes(String(c.pos || "")) && String(c.lemma || "").toLowerCase() === form.toLowerCase()).map(async candidate => {
+      try {
+        const result = await lookup(form,"noun") || await lookup(form,"abbrev");
+        if (result) {
+          candidate.translation = {...candidate.translation,ru:result.meanings.join("; ")};
+          candidate.russianTranslation = result;
+          candidate.abbreviationRu = true;
+          if (result.labels) {
+            candidate.meaningLabels = {...(candidate.meaningLabels || {}),ru:result.labels};
+            candidate.labelledText = {...(candidate.labelledText || {}),ru:result.shown.join("; ")};
+            candidate.labelDomains = result.domains;
+          }
+        }
+      } catch (_) { /* optional */ }
+    }));
     await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.translation?.ru).map(async candidate => {
       const key = JSON.stringify([candidate.lemma,posOf(candidate.pos)]);
       if (!pending.has(key)) pending.set(key,lookup(candidate.lemma,candidate.pos));
