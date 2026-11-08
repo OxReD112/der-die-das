@@ -2783,3 +2783,26 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 .popover-more { min-height: 36px; padding-top: 6px; position: relative; }
 .popover-more::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
 @media (max-width: 699px) { .popover-more { min-height: 34px; padding-top: 5px; } }
+
+/* 08.11 (design chat, Alena): the bookmark of the popover — a quieter outline and, inside the ribbon only, a thin shade along
+   the popover's top edge (light theme: shadow, dark theme: highlight) so it parts from the card. */
+:root { --bm-edge: rgba(255, 255, 255, 0.2); }
+[data-theme="light"] { --bm-edge: rgba(47, 44, 41, 0.18); }
+.popover-bookmark { color: var(--muted); }
+.popover-bookmark::before { content: ""; position: absolute; top: 1px; left: calc(50% - 6.5px); width: 13px; height: 3px; background: linear-gradient(to bottom, var(--bm-edge), transparent); pointer-events: none; }
+/* Inhalt: no carmine — the current chapter's ribbon in the text colour comes out of a slit: the part above it stays behind
+   in a soft shadow (a little to the left, long to the right); in the dark theme also a thin light lip under the slit. */
+:root { --slit-shadow: rgba(0, 0, 0, 0.3); --slit-height: 11px; --slit-right: 120px; --slit-lip: rgba(255, 255, 255, 0.22); }
+[data-theme="light"] { --slit-shadow: rgba(50, 35, 20, 0.13); --slit-height: 8px; --slit-right: 80px; --slit-lip: transparent; }
+.contents-entry[aria-current] > span:first-child { color: var(--text); }
+.contents-entry[aria-current]::before { background: var(--text); }
+.contents-entry[aria-current]::after {
+  content: ""; position: absolute; pointer-events: none;
+  top: calc(8px - var(--slit-height)); left: calc(2px + var(--depth) * 12px);
+  width: calc(22px + var(--slit-right)); height: calc(var(--slit-height) + 1px);
+  background:
+    linear-gradient(var(--slit-lip), var(--slit-lip)) 0 100% / 100% 1px no-repeat,
+    linear-gradient(to top, var(--slit-shadow), transparent) 0 0 / 100% var(--slit-height) no-repeat;
+  -webkit-mask: linear-gradient(to right, transparent, #000 8px, #000 30px, transparent);
+  mask: linear-gradient(to right, transparent, #000 8px, #000 30px, transparent);
+}
