@@ -117,7 +117,8 @@
   async function trim(cache) {
     const counted = clock();
     const keys = await cache.keys();                    // in the order the entries were added
-    note(stats.keys, {at: Math.round(counted), ms: Math.round(clock() - counted), n: keys.length}, 100);
+    const row = {at: Math.round(counted), ms: Math.round(clock() - counted), n: keys.length};
+    note(stats.keys, row, 100);
     const over = keys.length > limit() ? keys.length - Math.floor(limit() * KEEP) : 0;   // down to 90 %: the next clean-up is far
     if (over <= 0) { writeCount(keys.length, Date.now()); return; }
     // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
@@ -129,7 +130,9 @@
     for (const row of rows) if (!row.part && !(latest.get(row.path) > row.version)) latest.set(row.path, row.version);
     const removable = rows.filter(row => row.part || row.version !== latest.get(row.path));
     let removed = 0;
+    const cleaning = clock();
     for (let i = 0; i < Math.min(over, removable.length); i++) if (await cache.delete(removable[i].key)) removed++;
+    row.removed = removed; row.cleanMs = Math.round(clock() - cleaning);   // (counters for autoread, speed chat 08.11)
     writeCount(keys.length - removed, Date.now());
   }
   const versionOf = url => url.searchParams.get("v") || "";
@@ -149,7 +152,8 @@
   // Counters (speed chat 07.11, read by autoread.html; they change nothing): long taps on the iPhone had ~1.4–1.6 s that
   // were neither network nor page work — about WAIT_MS. Every cache step slower than 200 ms is noted with its time on this
   // page's clock (performance.now, as Resource Timing): opening the cache, looking a file up, reading a kept copy, and
-  // each count of the entries (keys() in trim) with its length.
+  // each count of the entries (keys() in trim) with its length — and, after a clean-up, how many went and how long the
+  // deletes took (removed, cleanMs; 08.11: do the taps that wait for the cache fall into the clean-up?).
   const SLOW_MS = 200, stats = {stalled: 0, slow: [], keys: []};
   const clock = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
   const note = (list, row, max) => { list.push(row); if (list.length > max) list.shift(); };

@@ -70,7 +70,10 @@
   } else if (run && run.state === 'finished') { $('show').hidden = false; }
 
   const cacheStats = () => { try { const st = frame.contentWindow.BibliothekDataCache?.stats;
-    return st ? {stalled: st.stalled, slow: st.slow.map(x => ({kind: x.kind, ms: x.ms})), keys: st.keys.map(x => ({ms: x.ms, n: x.n}))} : null; } catch (_) { return null; } };
+    // (08.11: the time of every slow step and every count / clean-up, as Date.now — the timeline of the report)
+    const o = frame.contentWindow.performance.timeOrigin || 0, when = at => o ? Math.round(o + at) : null;
+    return st ? {stalled: st.stalled, slow: st.slow.map(x => ({kind: x.kind, ms: x.ms, at: when(x.at)})),
+      keys: st.keys.map(x => ({ms: x.ms, n: x.n, at: when(x.at), removed: x.removed, cleanMs: x.cleanMs}))} : null; } catch (_) { return null; } };
   // Seeded choice of words, so two runs on the same book and page tap the same words.
   let seed = 1;
   const random = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
@@ -213,7 +216,7 @@
   function report(r) {
     const ms = r.taps.map(t => t.ms).filter(x => x !== null);
     const lines = [
-      'Автотест чтения (bibliothek/autoread.html, v4)',
+      'Автотест чтения (bibliothek/autoread.html, v5)',
       `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
       `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
       `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
@@ -246,6 +249,16 @@
       for (const x of r.cache.slow) kinds[x.kind] = (kinds[x.kind] || 0) + 1;
       lines.push('', `Кэш данных: не ответил вовремя (0,5 с; до 07.11 вечера — 1,5 с) — ${r.cache.stalled} раз; шагов дольше 200 мс — ${r.cache.slow.length} (${Object.entries(kinds).map(([a, n]) => a + ' ' + n).join(', ') || '—'})`);
       lines.push(`  подсчёт записей: ${k.length} раз, ${sorted.length ? `медиана ${sorted[sorted.length >> 1]} мс, максимум ${sorted.at(-1)} мс, записей ${k.at(-1).n}` : '—'}`);
+      // (08.11) when: each count and clean-up, each slow step — and whether a slow step fell into a count / clean-up
+      const min = at => at == null ? '?' : ((at - r.started) / 60000).toFixed(1);
+      const windows = k.filter(x => x.at != null).map(x => [x.at, x.at + x.ms + (x.cleanMs || 0)]);
+      for (const x of k) lines.push(`  на ${min(x.at)} мин: подсчёт ${x.ms} мс, записей ${x.n}${x.removed !== undefined ? `, уборка ${x.cleanMs} мс, удалено ${x.removed}` : ', без уборки'}`);
+      const slowAt = r.cache.slow.filter(x => x.at != null);
+      if (slowAt.length) {
+        const inside = slowAt.filter(x => windows.some(([a, b]) => x.at + x.ms >= a && x.at <= b));
+        lines.push(`  медленные шаги во время подсчёта / уборки: ${inside.length} из ${slowAt.length}`);
+        lines.push('  медленные шаги (минута, шаг, мс): ' + slowAt.map(x => `${min(x.at)} ${x.kind} ${x.ms}${windows.some(([a, b]) => x.at + x.ms >= a && x.at <= b) ? '*' : ''}`).join('; ') + '  (* — во время подсчёта / уборки)');
+      }
     }
     lines.push('', `Устройство: ${r.ua}`);
     lines.push('', 'Все нажатия (секунда от начала, слово, мс):', r.taps.map(t => `${t.t} ${t.w} ${t.ms ?? 'x'}`).join('; '));
