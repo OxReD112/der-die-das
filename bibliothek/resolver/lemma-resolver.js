@@ -434,10 +434,31 @@
   // can start: before a lowercase word, or a number after an abbreviation that never ends a sentence (Nr. 5, ca. 20); z. B.
   // also before a capital word other than a sentence start (z. B. Kinder). An initial, St., Co., usw. … before a capital word
   // or a number stay two segments.)
+  // (P8, advisor 08.11, claude/TITLE_NAME_P8_COUNT_2026-11-08_RU.md: the reader cut a sentence after Dr. / Prof. / St. and an initial
+  // before a capital word — 0,7 % of news sentences, and the cut breaks every link of the sentence. A capital word can start a sentence,
+  // so the check looks the other way: after a title the segments are joined unless a closed list of sentence openers follows (Er, Die,
+  // Dann, Gestern …) — Zoo-Kuratorin Dr. Sabrina Linn, Prof. Stratmann, Kanton St. Gallen, 3 Mio. Euro; after an initial they are joined
+  // when the word before it is no own noun (a name or an unknown word: Lina E. Mit …? — Mit is an opener; Otto M. Schwarz) and no
+  // opener follows: Gruppe A. Gruppe B hat … (Gruppe is a noun) and Karl V. Er wurde … (Er) stay two sentences.)
+  const TITLE_ABBREVIATIONS = new Set(["dr","prof","st","nr","hr","fr","co","mio","mrd","med","habil","pharm","mag","dipl","ing","phil","rer","nat",
+    "jur","dent","vet","theol","sen","jun","hl"]);
+  const SENTENCE_OPENERS = new Set([...SENTENCE_START_WORDS, "gestern","morgen","vorgestern","übermorgen","deshalb","deswegen","trotzdem","außerdem",
+    "zudem","allerdings","jedoch","denn","bis","für","um","durch","über","unter","gegen","ohne","seine","ihr","ihre","ihren","ihrem","sein","seinen",
+    "seinem","unser","unseren","diesen","diesem","jenes","welche","welcher","welches","nicht","nur","immer","dazu","daher","dafür","also"]);
+  let ownNounWords = null;
   function abbreviationEnd(segment, next) {
     const text = String(segment), m = /(?:^|[\s(])([\p{L}]+)\.\s*$/u.exec(text); if (!m) return false;
     const after = /^\s*([\p{L}\d]+)/u.exec(String(next ?? ""))?.[1]; if (!after) return false;
     const word = m[1].toLowerCase(), single = /^\p{Lu}$/u.test(m[1]);
+    if (/^\p{Lu}/u.test(after) && !SENTENCE_OPENERS.has(after.toLowerCase())) {
+      if (!single && TITLE_ABBREVIATIONS.has(word)) return true;
+      if (single) {
+        // (a chain of initials: J. | K. Rowling, Firma E. | F. Walcker — an initial after an initial, or a segment of initials only)
+        if (/^\s*\p{Lu}\.(?:\s|$)/u.test(String(next)) && /^\p{Lu}$/u.test(after) || /^\s*(?:\p{Lu}\.\s*)+$/u.test(text)) return true;
+        const before = /([\p{L}\p{M}]+)\.?\s+\p{Lu}\.\s*$/u.exec(text)?.[1];
+        if (before && !(ownNounWords && /^\p{Lu}\p{Ll}/u.test(before) && ownNounWords.has(before.toLowerCase()))) return true;
+      }
+    }
     const zB = m[1] === "B" && /(?:^|[\s(])z\.\s*B\.\s*$/u.test(text);
     if (zB) return /^[\p{Ll}\d]/u.test(after) || !SENTENCE_START_WORDS.has(after.toLowerCase());
     if (word === "z" && after === "B") return true;
@@ -1436,6 +1457,8 @@
     // (Imperativ, advisor 29.10: the forms a verb card lists only as Imperativ — nimm, sprich, unterhalt, stich, wachs)
     const imperativeOnlyForms = new Map();
     const forms = new Map(), phraseForms = new Map(), lemmas = new Map(), zuForms = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    // (P8: the own nouns for the initial check of abbreviationEnd — Gruppe A. | Gruppe B …)
+    ownNounWords = new Set(entries.filter(e => e?.type === "Nomen" && e.word).map(e => String(e.word).toLowerCase()));
     // S2 (17.10.2026): a stem known only from derived particle + verb entries (bewohnten →
     // mitbewohnen) does not make a word a possible verb outside the separable scanner.
     const lexicalSeparated = key => (separatedForms.get(key) || []).some(pair => !pair.entry.derivedSeparable);
@@ -2501,6 +2524,10 @@
             if(prepositions.has(words[j])&&!(words[j]==='vor'&&words[j+1]==='allem')){embedded=true;break;}
           }
           if(embedded)continue;
+          // (part 1 / G60, advisor 08.11: a capital word right after a title is a name — a third-person subject: und Dr. Trapp bellte mich …
+          // an — mich is no reflexive of the ich before und)
+          if(person==='er/sie/es'&&i>clause.start&&/^\p{Lu}/u.test(tokens[i][0])&&!analyses[i].some(a=>a.kind==='finite'&&/^\p{Ll}/u.test(tokens[i][0]))&&
+            /^(?:herr|herrn|frau|fräulein|mr|mrs|ms|miss|madam|dr|prof)$/u.test(words[i-1])&&analyses[i+1]?.some(a=>a.kind==='finite')){found.push({index:i,person});continue;}
           if(!clause.insertions?.some(r=>i+1>=r.start&&i+1<=r.end)&&tokens[i+1]?.[0][0]!==words[i+1]?.[0]&&!analyses[i+1]?.length&&!determiners.test(words[i+1])&&!prepositions.has(words[i+1]))continue;
           const nounEntries=(forms.get(words[i])||[]).filter(e=>e.type==='Nomen');
           let det=i-1;while(det>=clause.start&&i-det<=8&&!prepositions.has(words[det])&&!reflexivePronouns.has(words[det])&&!determiners.test(words[det])&&!(analyses[det]||[]).length)det--;
@@ -11727,6 +11754,75 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // adjectives between (an ending; not der / sich / seiner … — mit einem seiner Blicke, einem der wichtigsten Orte are plurals)
     const OLD_DATIVE_ADJ = '(?:\\s+(?!(?:der|des|sich|seiner|ihrer|meiner|deiner|unserer|eurer|einer|keiner|dieser|jener|welcher|aller)\\s)\\p{Ll}+(?:e|en|em|er|es))*';
     const OLD_DATIVE_BEFORE = new RegExp(`(?:^|[\\s(„»"'])(?:(?:${caseFree('im|am|vom|zum|beim')})${OLD_DATIVE_ADJ}|(?:${caseFree(OLD_DATIVE_PREPOSITIONS)})\\s+(?:${OLD_DATIVE_DETERMINERS})${OLD_DATIVE_ADJ}|${caseFree('bei|zu')})\\s+$`, 'u');
+    // G60 / part 1 (advisor 08.11, claude/TITLE_NAME_P8_COUNT_2026-11-08_RU.md): a capital word after a title is a name.
+    // After Dr. / Prof. / St. (a chain of titles is passed: Prof. Dr. Müller, Dr. med. Weber) always «Name». After Herr / Herrn / Frau /
+    // Fräulein / Familie / Mr / Mrs / Miss / Ms / Madam: «Name» when the word has no own noun card (not found, an adjective, a verb,
+    // a spelling of another word — Herr Hurtig, Herr Holtz, Familie Lauteren) or an own noun of the other gender (Frau Richter); an own
+    // noun of the title's gender stays (Frau Königin, Herr Wirt); an external noun only — the window «Name / Nomen», name first (Herrn
+    // Kiesel, Familie Vogt). Not a title: after an indefinite word, a number or a possessive (jede dritte Frau Opfer, meiner Frau Folge,
+    // seines Herrn Tür); not a name: a title noun (Frau Doktor / Professor / Direktor …). After an initial with a name before it
+    // (Otto M. Schwarz, B. Braun) — «Name».
+    const NAME_TITLES = new Set(["herr","herrn","frau","fräulein","familie","mr","mrs","miss","ms","madam"]);
+    const NAME_TITLE_ABBREVIATIONS = new Set(["dr","prof","st"]);
+    const TITLE_NOUNS = new Set(["doktor","doktorin","professor","professorin","direktor","direktorin","präsident","präsidentin","minister","ministerin",
+      "pfarrer","pfarrerin","kollege","kollegin","nachbar","nachbarin"]);
+    // (regression g68-bare-compound-qa: a compound with a title noun as its last part is a title too — Herr Hauptkommissar)
+    const TITLE_NOUN_HEADS = /(?:doktor|doktorin|professor|professorin|direktor|direktorin|präsident|präsidentin|minister|ministerin|pfarrer|pfarrerin|kommissar|kommissarin|meister|meisterin|inspektor|inspektorin|sekretär|sekretärin|kanzler|kanzlerin|offizier|leutnant|general|kapitän|rat|rätin)$/u;
+    const NOT_TITLE_BEFORE = /^(?:ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|jede|jeder|jedes|jedem|jeden|viele|vielen|einige|manche|mehrere|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|\p{L}+te|\p{L}+ste|\d+|(?:mein|dein|sein|ihr|unser|euer|eur)\p{L}*)$/u;
+    function nameAfterTitle(word, context, result) {
+      if (!result || !/^\p{Lu}/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
+      const sentence = context.sentence, before = sentence.slice(0, context.tokenOffset);
+      if (SENTENCE_OPENERS.has(norm(word)) || TITLE_NOUNS.has(norm(word)) || NAME_TITLES.has(norm(word)) || TITLE_NOUN_HEADS.test(norm(word))) return result;
+      // a title in a chain is no name (Prof. Dr. Müller, Dr. med. Weber)
+      if (TITLE_ABBREVIATIONS.has(norm(word)) && sentence.slice(context.tokenOffset + String(word).length).startsWith(".")) return result;
+      // the word right before: a title (with its point), a chain of titles, an initial
+      const m = /(?:^|[^\p{L}])([\p{L}]+)(\.?)\s+$/u.exec(before); if (!m) return result;
+      const prev = m[1], dot = m[2] === ".", key = norm(prev);
+      const beforePrev = before.slice(0, m.index + (m[0].length - m[0].trimStart().length));
+      const prevWordOf = text => norm((/([\p{L}]+)\.?\s+$/u.exec(text) || [,""])[1]);
+      let kind = null;
+      if (dot && NAME_TITLE_ABBREVIATIONS.has(key)) kind = "abbreviation";
+      else if (dot && TITLE_ABBREVIATIONS.has(key) && /(?:^|\s)(?:Dr|Prof)\.\s+(?:\p{L}+\.\s+)*$/u.test(before)) kind = "abbreviation";
+      else if (!dot && NAME_TITLES.has(key) && !/^\p{Ll}/u.test(prev)) {
+        const p2 = /([\p{L}\d]+)\s+$/u.exec(before.slice(0, before.length - m[0].trimStart().length));
+        if (p2 && NOT_TITLE_BEFORE.test(norm(p2[1]))) return result;
+        kind = "title";
+      } else if (dot && /^\p{Lu}$/u.test(prev)) {
+        const w0 = /([\p{L}]+)\.?\s+\p{Lu}\.\s+$/u.exec(before)?.[1];
+        if (w0 && /^\p{Lu}/u.test(w0) && !(lemmas.get(norm(w0)) || []).some(e => e.type === "Nomen")) kind = "initial";
+        // (an article right before the initial: der B. Braun Stiftung)
+        if (w0 && /^(?:der|die|das|dem|den|des)$/u.test(w0)) kind = "initial";
+        if (/(?:^|[\s(])\p{Lu}\.\s+\p{Lu}\.\s+$/u.test(before)) kind = "initial";
+        if (/(?:^|\s)(?:Dr|Prof|Mr|Mrs|Herr|Herrn|Frau)\.?\s+\p{Lu}\.\s+$/u.test(before)) kind = "initial";
+      }
+      if (!kind) return result;
+      const list = result.candidates || [];
+      const name = {source:"fallback",lemma:String(word),pos:"name",posLabel:"Name",translation:{en:"",ru:""},item:null};
+      const sel = result.selected || result.preferred || null;
+      if (sel && sel.pos === "name") return result;
+      const ownNoun = list.find(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === norm(word));
+      // an external noun counts only when it is this very spelling (Herrn Holtz is no form of das Holz, Familie Graves no der Gravis)
+      const anyNoun = list.find(c => (canonicalPos(c.pos) === "Nomen" || c.pos === "noun") && norm(c.lemma) === norm(word));
+      const pick = (status, cands, evidence) => keepDecision(result, {...result, candidates:cands, selected:status === "resolved" ? cands[0] : null,
+        preferred:cands[0], status, evidence}, {outcome:status === "resolved" ? "selected" : "window", rule:"name-after-title", reason:evidence});
+      // (an own adjective stays: die Frau Liebste; a single capital is an initial — Mr H.)
+      if (sel?.source === "main" && canonicalPos(sel.pos) === "Adjektiv" && kind === "title") return result;
+      if (/^\p{Lu}$/u.test(String(word))) return pick("resolved", [name, ...list], "name-initial-after-title");
+      // an expression or a link through the word stays (machte sich die Frau Hoffnung)
+      if (sel?.usage || sel?.construction && !["separable-verb","reflexive-verb"].includes(sel.construction.id)) return result;
+      // (after an initial: a numeral or an inflected own noun is no name — Adolf H. Zwei Leben, Ludwig I. Repressionen …)
+      if (kind === "initial" && (canonicalPos(sel?.pos) === "num" || sel?.pos === "numeral" || /^(?:Zahlwort|numeral)$/iu.test(String(sel?.posLabel || "")) ||
+        list.some(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && norm(c.lemma) !== norm(word)))) return result;
+      if (kind === "abbreviation" || kind === "initial") return pick("resolved", [name, ...list], "name-after-" + kind);
+      const titleGender = /^(?:herr|herrn)$/u.test(key) ? "der" : /^(?:frau|fräulein)$/u.test(key) ? "die" : null;
+      if (ownNoun) {
+        const article = String(ownNoun.item?.article || "");
+        if (titleGender && article && !article.split(/\s*\/\s*/u).includes(titleGender)) return pick("resolved", [name, ...list], "name-after-title-gender");
+        return result;
+      }
+      if (anyNoun && result.status !== "unresolved" && canonicalPos(sel?.pos) === "Nomen") return pick("ambiguous", [name, ...list], "name-or-noun-after-title");
+      return pick("resolved", [name, ...list], "name-after-title");
+    }
     function oldDativeE(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || list.length < 2 || !/^\p{Lu}\p{Ll}+e$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
@@ -15303,7 +15399,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
