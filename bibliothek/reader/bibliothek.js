@@ -1005,19 +1005,26 @@
       const shown = expandedMain && full && !model.lines ? full : model;
       const moreButton = (n, onClick) => {
         const more = document.createElement("button"); more.type = "button"; more.className = "popover-more-meanings";
-        more.textContent = `${moreLabel(n, ru)} ↓`; more.setAttribute("aria-expanded", "false");
+        more.append(moreLabel(n, ru), "\u00a0", sideChevron()); more.setAttribute("aria-expanded", "false");
         more.addEventListener("click", onClick); return more;
       };
       // (user 07.11) a line of parts opens and closes with a chevron: down — «ещё N значений», up — collapse it again.
+      // (design 08.11, Alena) «ещё N значений ›» — one sideways chevron, the shared .ui-chev; open — an up chevron (the word «свернуть» wrapped to its own line).
+      const sideChevron = () => { const c = document.createElement("span"); c.className = "ui-chev"; c.setAttribute("aria-hidden", "true"); return c; };
+      const collapseButton = onClick => { const b = document.createElement("button"); b.type = "button"; b.className = "popover-more-meanings popover-collapse";
+        const label = ru ? "свернуть" : "collapse"; b.setAttribute("aria-expanded", "true");
+        b.setAttribute("aria-label", label); b.title = label; b.append(chevron(true));
+        b.addEventListener("click", onClick); return b; };
       const chevron = up => { const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "popover-chevron"); svg.setAttribute("viewBox", "0 0 12 12"); svg.setAttribute("aria-hidden", "true");
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", up ? "M2.5 7.5 6 4l3.5 3.5" : "M2.5 4.5 6 8l3.5-3.5"); svg.append(path); return svg; };
       const toggleButton = (n, open, text, onClick) => {
+        if (open) return collapseButton(onClick);
         const button = document.createElement("button"); button.type = "button"; button.className = "popover-more-meanings";
-        const label = open ? (ru ? "свернуть" : "collapse") : moreLabel(n, ru);
+        const label = moreLabel(n, ru);
         if (text) button.append(label, "\u00a0"); else { button.setAttribute("aria-label", label); button.title = label; }
-        button.append(chevron(open)); button.setAttribute("aria-expanded", String(open));
+        button.append(sideChevron()); button.setAttribute("aria-expanded", "false");
         button.addEventListener("click", onClick); return button;
       };
       if (shown.segments) appendLabelSegments(content, shown.segments, shown.segmentPrefix);
@@ -1033,6 +1040,7 @@
       else content.textContent = shown.text;
       // D13 / G57: meanings of a card beyond the short text (own: about three lines; external: two) open here, in the popup.
       if (!expandedMain && model.more > 0 && !model.lines) content.append(" ", moreButton(model.more, () => { expandedMain = true; expandAndKeepFocus(); }));
+      else if (expandedMain && model.more > 0 && !model.lines) content.append("\u00a0", collapseButton(() => { expandedMain = false; expandAndKeepFocus(); }));
       if (model.note) {
         const note = document.createElement("small"); note.className = "popover-construction";
         note.textContent = model.note; content.append(note);
@@ -1081,6 +1089,7 @@
         showPronounSummary=reference.isPronoun(candidate) && candidate?.construction?.id !== "recorded-construction";
         popupAmbiguous = false; selectedResolution = candidate; selectedEntry = candidate.item || null; userConfirmed = true;
         expandedMain = false; expandedLines.clear(); expandedParts.clear();
+        alternatives.open = false;
         $("popover-bookmark").disabled = true;
         renderSelection();
         // Keep choices reachable after selection; remember only this occurrence.
@@ -1105,6 +1114,7 @@
       const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale()).filter(row=>!showPronounSummary || !reference.isPronoun(row.candidate));
       if(showPronounSummary)alternatives.open=false;
       alternatives.hidden = !displayed.length;
+      alternatives.classList.toggle("is-choosing", popupAmbiguous && !showPronounSummary);
       const source = $("popover-source");
       const russianArticles = $("russian-source-articles");
       russianArticles.replaceChildren();

@@ -2774,3 +2774,12 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
   .popover-bookmark { right: 6px; margin: 0; }
   .popover-heading { padding-right: 20px; }
 }
+
+/* 08.11 (design chat, Alena): popover — «ещё N значений ›» with the shared sideways .ui-chev; while choosing a meaning the
+   variants stand without the «Другие значения» heading (it appears after the choice, the rest fold under it);
+   «Словарная справка» lower — the line above stays, less air (tap area still 44 via the padding above the line). */
+.popover-more-meanings .ui-chev { color: inherit; }
+.popover-alternatives.is-choosing > summary { display: none; }
+.popover-more { min-height: 36px; padding-top: 6px; position: relative; }
+.popover-more::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+@media (max-width: 699px) { .popover-more { min-height: 34px; padding-top: 5px; } }
