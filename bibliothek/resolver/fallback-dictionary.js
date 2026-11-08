@@ -62,7 +62,7 @@
   // Versions in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
   // versioned file for good — a changed data file needs a new version here (dev/bibliothek/tools/data-versions.json).
   const verbFormsVersion = "1024-1";
-  const separableUrl = new URL("data/separable-index.json?v=20261108-nounfilter-off-1", document.currentScript.src);
+  const separableUrl = new URL("data/separable-index.json?v=20261108-own-nouns-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = dataFetch(separableUrl).then(response => {

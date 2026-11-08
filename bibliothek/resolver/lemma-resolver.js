@@ -2256,8 +2256,16 @@
     // token with established nominal roles masked, the clause partition
     // (relations, apposition insertions, relative clauses) and detached forms
     // proven by a clause-final prefix. Consumers keep their own decisions.
+    // (advisor 08.11, E7 for every chain) a lowercase word right after «und / oder / sowie + hyphen», with or without a space — the
+    // second part of a compound noun (Personaleinsatz und - aufwand, Arbeitgeber und -nehmer) —, is no verb form. Not «Ein- und
+    // Ausgang» (the hyphen after the first part) and not a dash (– —), which stays a boundary.
+    function ellipsisSecondPart(sentence, tokens, i) {
+      if (i < 1 || !tokens[i] || !/^\p{Ll}/u.test(tokens[i][0]) || !/^(?:und|oder|sowie)$/u.test(norm(tokens[i-1][0]))) return false;
+      return /^\s*[-‐‑]\s*$/u.test(String(sentence).slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index));
+    }
     async function sentenceVerbAnalyses(sentence,tokens,words,consumer) {
       const analyses = await Promise.all(tokens.map(t=>tokenAnalyses(t[0], undefined, consumer)));
+      for(let i=0;i<tokens.length;i++) if(ellipsisSecondPart(sentence,tokens,i)) analyses[i]=[];
       // Morphological homographs such as meine/meinen and Buch/Arbeit must
       // remain determiners/nouns inside an identifiable noun phrase.
       for(let i=0;i<tokens.length;i++) {
@@ -5246,7 +5254,7 @@
         // er es gesagt haben)
         !(/^(?:haben|sein|werden)$/u.test(norm(tokens[end][0])) && end !== i && verbs(i).some(e => participleOf(e,i)) &&
           !(end-1 > i && verbs(end-1).some(e => participleOf(e,end-1))));
-      const possibleVerb = i => (verbs(i).length || lexicalSeparated(norm(tokens[i][0]))) && !context.attributiveOffsets?.has(tokens[i].index) && !attributiveForm(i) && !adjectiveCardWins(i);
+      const possibleVerb = i => (verbs(i).length || lexicalSeparated(norm(tokens[i][0]))) && !context.attributiveOffsets?.has(tokens[i].index) && !attributiveForm(i) && !adjectiveCardWins(i) && !ellipsisSecondPart(sentence, tokens, i);
       // A word between the linked words that can block the link (a competing predicate).
       // L66 (links chat, user 26.10.2026): a lowercase form that is only an imperative (deck, sieh, komm) inside the clause — not its
       // first word, not after und / oder — is no competing predicate: it stands in a quoted name or call (mit dem Tischchen deck
@@ -6205,7 +6213,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (L15 step 1: a mid-clause doch is the particle — wollte ihn doch nicht ertrinken lassen; und between two nouns joins the
       // noun phrase — mit Lautsprechern … und Subwoofern ausstatten lassen)
       const nounCoordination=i=>norm(tokens[i]?.[0])==='und'&&i>0&&/^\p{Lu}/u.test(tokens[i-1][0])&&!clauseInitial(sentence,tokens[i-1].index)&&
-        tokens[i+1]&&(/^\p{Lu}/u.test(tokens[i+1][0])||DETERMINER_WORD.test(norm(tokens[i+1][0])));
+        tokens[i+1]&&(/^\p{Lu}/u.test(tokens[i+1][0])||DETERMINER_WORD.test(norm(tokens[i+1][0]))||ellipsisSecondPart(sentence,tokens,i+1));
       // (L19, 30.10: und between two lowercase infinitive shapes right before a form of lassen — putzen und streichen lassen — joins them)
       const infinitivePair=i=>norm(tokens[i]?.[0])==='und'&&i>0&&tokens[i+2]&&[tokens[i-1][0],tokens[i+1][0]].every(t=>/^\p{Ll}/u.test(t)&&REGULAR_INFINITIVE_SHAPE.test(norm(t)))&&
         /^(?:lassen|lässt|lasse|lasst|ließ|ließen|ließe|ließest|gelassen)$/u.test(norm(lassenForm(tokens[i+2][0])));
@@ -6274,6 +6282,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
       }
       const indices=Array.from({length:end-start+1},(_,i)=>start+i),analyses=await Promise.all(indices.map(i=>tokenAnalyses(lassenForm(tokens[i][0]),lassenLexicalLookup, 'lassenGroup')));
+      // (advisor 08.11, E7: the second part of a compound after «und -» is no verb form)
+      indices.forEach((t,k)=>{if(ellipsisSecondPart(sentence,tokens,t))analyses[k]=[];});
       const rows=i=>analyses[i-start]||[], words=i=>norm(lassenForm(tokens[i]?.[0] || ""));
       const finite=i=>rows(i).filter(a=>['finite','imperative'].includes(a.kind)&&!a.detached);
       // (L15 step 1: an infinitive of the external dictionary, or particle + an own verb's infinitive — hinabsinken, fortschlafen)
@@ -6439,7 +6449,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (#29, books 05.11: a participle after the comparison wie is a manner word — ließ ihn wie angefroren / wie erstarrt innehalten)
           rows(i).length>0&&rows(i).every(a=>a.kind==='participle')&&i>start&&words(i-1)==='wie';
         for(const i of indices)if(!linked.includes(i)&&verbalKinds(i).length&&!attributeBeforeNoun(i)&&!participleModifier(i)&&
-          !ownNoun(i)&&!possessive(i)&&!modalParticle(i)&&!notVerbal(i)&&!await attributive(i)){competing=true;break;}
+          !ownNoun(i)&&!possessive(i)&&!modalParticle(i)&&!notVerbal(i)&&!ellipsisSecondPart(sentence,tokens,i)&&!await attributive(i)){competing=true;break;}
         if(competing)continue;
         let second=null;
         // (L15 step 1: a comma before und closes the clause — grüßen läßt, und die Dir … schreiben wird)
@@ -11911,8 +11921,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 08.11, claude/S2_NOFILTER_CAUSES_2026-11-08_RU.md: the index keeps forms spelled like a noun — kamen, baue, trieb; a
       // capital inside the sentence is the noun's — Der Vortrieb is no vortreiben)
       const capitalInside = /^\p{Lu}/u.test(word) && midSentenceCapital(word, context);
+      // (advisor 08.11, E7: Personaleinsatz und - aufwand — the second part of a compound is no joined verb form)
+      const ellipsisTap = (() => { if (!Number.isInteger(context?.tokenOffset)) return false; const st = String(context.sentence || ""), tk = sharedTokens(st,'resolve');
+        const at = clickedTokenIndex(tk,context.tokenOffset,word); return at >= 0 && ellipsisSecondPart(st,tk,at); })();
       const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm) &&
-        !(capitalInside && e.importedSeparable && norm(e.word) !== norm(word))),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
+        !((capitalInside || ellipsisTap) && e.importedSeparable && norm(e.word) !== norm(word))),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
       // C21: a cardinal / ordinal without an own numeral card of this spelling.
       if (!exact.some(e => e.type === "numeral")) {
         const generated = numeralEntry(word);
