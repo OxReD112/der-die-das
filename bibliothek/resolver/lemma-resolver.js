@@ -13040,6 +13040,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (Euch with a capital: the old polite address in the books — Gebt Euch keine Mühe)
     const CONSTRUCTION_REFLEXIVE_DATIVE = ["mir","dir","sich","uns","euch","Euch"];
     const reflexivePartForms = part => part.reflexive === "dative" ? CONSTRUCTION_REFLEXIVE_DATIVE : CONSTRUCTION_REFLEXIVE;
+    // Normalised word lists of a construction part (speed chat 08.11, agreed with the expressions chat): kept per part object
+    // (WeakMap — a reloaded expressions dictionary brings new objects, nothing old is reused), in the same order as before;
+    // occurrences() used to split and normalise them again for every tap and every word of the sentence. Same results.
+    const partLists = new WeakMap();
+    const partList = (part, key) => {
+      let lists = partLists.get(part);
+      if (!lists) partLists.set(part, lists = new Map());
+      if (!lists.has(key)) lists.set(key, key === "alternatives"
+        ? (part.reflexive ? reflexivePartForms(part) : [].concat(part.form || [])).map(alt => { const raw = String(alt).trim().split(/\s+/u); return {raw, words: raw.map(norm)}; })
+        : [].concat(part[key]).map(norm));
+      return lists.get(key);
+    };
     const constructionAnchors = (() => {
       const map = new Map();
       for (const entry of entries) for (const m of [].concat(entry.match || [])) {
@@ -13168,25 +13180,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (part.zu_infinitive) {
           for (let i = 0; i < tokens.length; i++) {
             if (!/^\p{Ll}/u.test(tokens[i][0])) continue;
-            if (part.not_after && i > 0 && [].concat(part.not_after).map(norm).includes(keys[i-1])) continue;
+            if (part.not_after && i > 0 && partList(part,"not_after").includes(keys[i-1])) continue;
             if ((await tokenAnalyses(tokens[i][0],undefined,'constructionAt')).some(a => a.kind === "infinitive" && a.zu)) out.push([i]);
           }
           return out;
         }
-        for (const alt of part.reflexive ? reflexivePartForms(part) : [].concat(part.form || [])) {
-          const raw = String(alt).trim().split(/\s+/u), words = raw.map(norm);
+        for (const {raw, words} of partList(part,"alternatives")) {
           for (let i = 0; i + words.length <= tokens.length; i++) {
             if (!words.every((w,k) => keys[i+k] === w && clause[i+k] === clause[i] &&
               (upper(raw[k]) === upper(tokens[i+k][0]) || !upper(raw[k]) && opening[i+k]))) continue;
             const last = i + words.length - 1;
             // (`clause_start_after`: one of these words may open the clause before the part — Und was hat er für ein Auto?, Mit was für Leuten)
-            if (part.clause_start && i > 0 && clause[i-1] === clause[i] && !(part.clause_start_after && [].concat(part.clause_start_after).map(norm).includes(keys[i-1]) &&
+            if (part.clause_start && i > 0 && clause[i-1] === clause[i] && !(part.clause_start_after && partList(part,"clause_start_after").includes(keys[i-1]) &&
               (i === 1 || clause[i-2] !== clause[i-1] || opening[i-1]))) continue;
             // E3: a word with an own conjunction card opening its clause and not followed by a finite verb is the conjunction
             // after a comma (…, damit ich nichts zu tun habe «чтобы» — not the expression; Damit hab ich nix zu tun! at the sentence start stays).
             if (expression && words.length === 1 && i > 0 && clause[i-1] !== clause[i] && !opening[i] && (forms.get(keys[i]) || []).some(e => e.type === "Konjunktion") &&
                 !(tokens[i+1] && clause[i+1] === clause[i] && finiteHere(i+1))) continue;
-            if (part.not_after && i > 0 && [].concat(part.not_after).map(norm).includes(keys[i-1])) continue;
+            if (part.not_after && i > 0 && partList(part,"not_after").includes(keys[i-1])) continue;
             // 29.10.2026 (expressions chat; 101 / 106 dabei sein; advisor decision): `not_after_clause_adjective: "<word>"` — the
             // word right before the part opens its clause and has an own adjective card, and the part's first word is followed
             // right away by this word: Wichtig ist dabei, regelmäßig zu trinken — dabei «при этом», not «dabei sein». A word
@@ -13248,7 +13259,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             })()) continue;
             if (part.next === "comparative" && !(tokens[last+1] && clause[last+1] === clause[last] && await comparativeToken(tokens,last+1,same))) continue;
             if (part.next === "degree" && !(tokens[last+1] && clause[last+1] === clause[last] && await degreeToken(tokens[last+1]))) continue;
-            if (part.not_next && tokens[last+1] && [].concat(part.not_next).map(norm).includes(keys[last+1])) continue;
+            if (part.not_next && tokens[last+1] && partList(part,"not_next").includes(keys[last+1])) continue;
             // 28.10.2026 (expressions chat; 108 um sein, 030 zu Haus; advisor decision): `not_next_number: true` — no number in digits
             // right after the part (digits are not tokens: Die Pause ist um 10 — the time, not «закончиться»; Er ging zu Haus 5).
             if (part.not_next_number && /^\s*\d/u.test(sentence.slice(tokens[last].index + tokens[last][0].length))) continue;
@@ -13260,9 +13271,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (part.not_next_comparative && tokens[last+1] && clause[last+1] === clause[last] && await comparativeToken(tokens,last+1,same) &&
               !tokens.some((t,k) => k > last + 1 && clause[k] === clause[last] && keys[k] === "als")) continue;
             // An impersonal es in the clause (Wie ist's so traurig, dass …): the word takes its own dass-clause.
-            if (part.not_next_impersonal && tokens[last+1] && [].concat(part.not_next_impersonal).map(norm).includes(keys[last+1]) &&
+            if (part.not_next_impersonal && tokens[last+1] && partList(part,"not_next_impersonal").includes(keys[last+1]) &&
               tokens.some((t,k) => clause[k] === clause[i] && (keys[k] === "es" || /['’]s$/u.test(keys[k]) || keys[k] === "s" && /['’]$/u.test(gap(k))))) continue;
-            if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && [].concat(part.clause_has).map(norm).includes(keys[k]))) continue;
+            if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && partList(part,"clause_has").includes(keys[k]))) continue;
             // (31.10.2026: a reflexive part agrees with the subject — CONSTRUCTION_REFLEXIVE_DATIVE above)
             if (part.reflexive) {
               const shared = await sentenceSubjectFacts(sentence,'constructionAt');
