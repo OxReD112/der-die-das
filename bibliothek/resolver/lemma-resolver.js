@@ -11513,6 +11513,53 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',
         evidence:'comparative-card'},{outcome:'selected',rule:'comparative-card',reason:'comparative-card'});
     }
+    // Advisor 08.11 (claude/WINDOWS_USER_CASES_RECOUNT_2026-11-08_RU.md), signs of German spelling for a choice window:
+    // (1) a word with a capital inside the sentence is a noun — not the first word of a sentence, after » „ " : ( – —, not the
+    //     polite Sie / Ihnen / Ihr…, not in a heading where every word is capitalised; a window with a name stays as it is;
+    // (2) a lowercase word with an adjective ending between a determiner and a noun is an adjective (an attributive adjective
+    //     always has an ending: das eigentlich Geheimnisvolle — adverb).
+    // Only when exactly one such card is in the window — it is chosen; otherwise the window stays as it was.
+    function windowByForm(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || result.status !== 'ambiguous' || list.length < 2 || !Number.isInteger(context?.tokenOffset)) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'windowByForm');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return result;
+      const gap = (a, b) => sentence.slice(tokens[a].index+tokens[a][0].length, tokens[b].index);
+      const plain = (a, b) => /^\s+$/u.test(gap(a,b));
+      const w = tokens[i][0];
+      let keep = null, rule = '';
+      if (/^\p{Lu}\p{Ll}/u.test(w) && i > 0 && /^[\s,]+$/u.test(gap(i-1,i)) ) {
+        const prev = tokens[i-1][0];
+        // right after a personal pronoun a capitalised word is the verb written with a capital (Wir Haben Ihn …)
+        const opens = /[.!?:;»«„“"‚‘()\[\]–—]$/u.test(prev) || /^[»«„“"‚‘(–—]/u.test(prev) || /^(ich|du|er|sie|es|wir|ihr|man)$/iu.test(prev);
+        const words = tokens.filter(t => /^\p{L}/u.test(t[0]));
+        const heading = words.length > 1 && words.every(t => /^\p{Lu}/u.test(t[0]));
+        // not a window with a pronoun (Du / Ich in letters, All in English titles) or a number (auf den Zehnten, um Zwei)
+        if (!opens && !heading && !POLITE_FORMS.has(w) && !list.some(c => /^(name|pronomen|pron|numeral|num)$/i.test(c.pos || ''))) {
+          // an adjective with a capital is a noun made of it (der Kleine, die Fremde — #20): it stays in the window
+          keep = list.filter(c => /^(nomen|noun|adjektiv|adj)$/i.test(c.pos || '')); rule = 'capital-noun';
+          if (!keep.some(c => /^(nomen|noun)$/i.test(c.pos || ''))) keep = null;
+        }
+      } else if (/^\p{Ll}\p{L}*(e|en|er|em|es)$/u.test(w) && i > 0 && i + 1 < tokens.length && plain(i-1,i) && plain(i,i+1) &&
+                 FORM_DETERMINERS.test(tokens[i-1][0]) && /^\p{Lu}\p{Ll}/u.test(tokens[i+1][0])) {
+        // not when the word can itself be a determiner or a number (die paar Brocken)
+        // nor when it is itself an adverb card (der später Brückens Ehemann wurde)
+        if (!list.some(c => /^(det|num|numeral|pronomen|pron|article)$/i.test(c.pos || '') || /^(adverb|adv)$/i.test(c.pos || '') && norm(c.lemma) === norm(w))) { keep = list.filter(c => /^(adjektiv|adj)$/i.test(c.pos || '')); rule = 'determiner-adjective'; }
+      }
+      if (!keep || !keep.length || keep.length === list.length) return result;
+      // several cards left (die Schale / der Schal, der / das Band): the window would show the first one as the answer — leave it
+      if (keep.length > 1) return result;
+      // already the shown pick (internal-capital-noun, noun-after-determiner keep the other readings as alternatives) — as it was
+      const sameCard = (a, b) => a && b && a.source === b.source && a.pos === b.pos && norm(a.lemma) === norm(b.lemma) && a.dictionaryId === b.dictionaryId;
+      if (sameCard(result.selected, keep[0])) return result;
+      // a participle before a noun (der gesetzte Termin, die geplante Investition) stays a choice — adjective first (L34)
+      if (rule === 'determiner-adjective' && list.some(c => /^verb$/i.test(c.pos || '')) && /(end|t|en)$/u.test(norm(keep[0].lemma))) return result;
+      const rest = list.filter(c => !keep.includes(c));
+      return keepDecision(result,{...result,candidates:[keep[0],...rest],selected:keep[0],preferred:keep[0],status:'resolved',evidence:rule},{outcome:'selected',rule,reason:rule});
+    }
+    const POLITE_FORMS = new Set(['Sie','Ihnen','Ihr','Ihre','Ihren','Ihrem','Ihrer','Ihres']);
+    const FORM_DETERMINERS = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein\p{L}*|dein\p{L}*|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser\p{L}*|euer|eure|euren|eurem|eurer|eures|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|solch\p{L}*|manch\p{L}*|all\p{L}*)$/iu;
     const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
     // (the diagnostic decision of a resolution is non-enumerable — a copy keeps it, with the rule of the step that chose)
     function keepDecision(from, to, change = null) {
@@ -14737,7 +14784,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
