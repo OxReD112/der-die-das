@@ -13246,7 +13246,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return ![tokens[at-1], tokens[at+1]].some(t => t && ["ich","du","ihr"].includes(norm(t[0])));
     }
     function modalMood(word, c) {
-      if (c.construction?.id !== "modal-group" || canonicalPos(c.pos) !== "Verb") return null;
+      // (advisor 08.11: the modal of a passive chain names its mood / tense the same way — müsse gelesen werden: Konjunktiv I)
+      if (!["modal-group","modal-passive"].includes(c.construction?.id) || canonicalPos(c.pos) !== "Verb") return null;
       const base = norm(c.lemma);
       if (!MODAL_BASES.has(base) || norm(c.construction.lemma || "") === base) return null;
       const tenses = new Set((verbAnalyses.get(norm(word)) || []).filter(r => r.kind === "finite" && norm(r.base) === base).map(r => r.tense));

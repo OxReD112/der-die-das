@@ -359,8 +359,13 @@
       // G15a (user decision 16.10): werden + a form that is both infinitive and participle, no evidence either way.
       case 'werden-future-or-passive': return {marks:[`Futur I / Passiv mit ${name}`], role:isMain ? null : 'futureOrPassive', spans};
       // A3 (reference 5.6): gelesen «Passiv mit müssen», muss / werden «Passiv mit lesen».
-      case 'modal-passive': return {marks:[isMain ? `Passiv mit ${k.modal}` : `Passiv mit ${name}`],
-        role:!isMain && own === 'werden' ? 'passive' : null, spans};
+      // (advisor 08.11: the modal names its mood / tense as in the active group — müsse gelesen werden «Konjunktiv I · Passiv mit lesen»,
+      // musste … «Präteritum · Passiv mit …»; Präsens indicative stays «Passiv mit …»)
+      case 'modal-passive': {
+        const mood = MODALS.has(own) && !isMain ? candidate.formFeatures?.modalMood : null;
+        return {marks:[isMain ? `Passiv mit ${k.modal}` : `${mood ? mood + ' · ' : ''}Passiv mit ${name}`],
+          role:!isMain && own === 'werden' ? 'passive' : null, spans};
+      }
       case 'werden-conditional': return {marks:[isMain ? 'Konjunktiv II' : `Konjunktiv II mit ${name}`], role:isMain ? null : 'conditional', spans};
       // To-do 3.4 (F12-B7): wird's gewesen sein — the clicked sein is the auxiliary «Futur II mit sein», not the participle's lemma.
       case 'werden-future-perfect': if (k.clickedRole) return {marks:[`Futur II mit ${name}`], role:k.clickedRole, spans};
