@@ -933,6 +933,13 @@
           if (a.length >= 3) for (const r of await readings(a + 'e', ['Nomen'], true)) if (r.source === 'main' || a.length >= 4) out.push({...r, text: a, link: '', drop: 'e', rank: r.source === 'main' ? 0.32 : 3});
         }
       }
+      // (advisor 08.11, Hühner-) a plural of a noun with a gender comes before an outside record of the very same spelling
+      // that has no gender (hühner «a loud group of women»): Hühnerhof = Huhn + Hof, not «hühner» + Hof
+      for (const p of out.filter(r => r.plural)) {
+        const bare = out.filter(r => !r.plural && !r.stem && !r.link && r.source === 'fallback' && r.pos === 'Nomen' && norm(r.lemma) === norm(p.text));
+        if (bare.length && await dict.gender(p.lemma) && !(await Promise.all(bare.map(b => dict.gender(b.lemma)))).some(Boolean))
+          p.rank = Math.min(...bare.map(b => b.rank)) - 0.01;
+      }
       out.sort((x, y) => x.rank - y.rank || ownFirst(x, y) || (x.pos === 'Nomen' ? 0 : 1) - (y.pos === 'Nomen' ? 0 : 1));
       await withRu(out);
       // An external spelling without a Russian meaning gives way to the same word with a linking -s / -n (Liebling(s)-, not «lieblings»).
@@ -11737,6 +11744,31 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           (closes(i+1) || plain(i+2) && MIT_AUX.test(tokens[i+2][0]) && closes(i+2))) return choose(adv[0],'mit-before-closing-verb');
       return result;
     }
+    // Advisor 08.11 (Hühner- / Tage): a window of nouns where the word is the plural of a noun with a gender (our card Tag, the
+    // outside record Huhn) and another outside record of this very spelling has no gender (tage «period, that time of the month»,
+    // hühner «a loud group of women») — the plural reading first. Words with two gendered nouns (die Schalen: Schal / Schale)
+    // are not touched.
+    function pluralOverBareRecord(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || result.status !== 'ambiguous' || list.length < 2) return result;
+      const w = norm(word), nounish = c => canonicalPos(c.pos) === 'Nomen';
+      // (not a nominalized infinitive — das Feiern, zum Speichern: its lemma is written with a capital)
+      const bare = list.filter(c => c.source === 'fallback' && nounish(c) && c.pos === 'noun' && norm(c.lemma) === w && !c.nounArticle && /^\p{Ll}/u.test(c.lemma));
+      const gendered = list.filter(c => nounish(c) && norm(c.lemma) !== w && (c.source === 'main' ? /^(?:der|die|das)$/u.test(String(c.item?.article || '')) : !!c.nounArticle));
+      if (bare.length !== 1 || gendered.length !== 1 || list.some(c => nounish(c) && !bare.includes(c) && !gendered.includes(c))) return result;
+      const chosen = gendered[0];
+      // a hyphen stub (Seifen - Lagerstätte «россыпь») is a part of another word
+      if (Number.isInteger(context?.tokenOffset) && /^\s*[-‐–]/u.test(String(context.sentence || '').slice(context.tokenOffset + String(word).length))) return result;
+      // another card of ours in the window (Sieben — the numeral, Aktive — the adjective, Feiern — the verb) keeps the window
+      if (list.some(c => c.source === 'main' && c !== chosen)) return result;
+      // an outside plural only with a meaning in a dictionary of ours (Huhn «курица»; not Trope «figure of speech» beside die
+      // Tropen «tropics», a plural-only word)
+      if (chosen.source !== 'main' && !String(chosen.translation?.ru || '').trim()) return result;
+      // the form must be a plural of it (our card's plural field / search forms, or the outside record's plural)
+      const plural = chosen.source === 'main' ? String(chosen.item?.plural || '').split(/[,;/]\s*/u).map(x => norm(x.replace(/^die\s+/u,''))).includes(w) : !!chosen.externalPlural;
+      if (!plural) return result;
+      return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'plural-over-bare-record'},{outcome:'selected',rule:'plural-over-bare-record',reason:'plural-over-bare-record'});
+    }
     const POLITE_FORMS = new Set(['Sie','Ihnen','Ihr','Ihre','Ihren','Ihrem','Ihrer','Ihres']);
     const FORM_DETERMINERS = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein\p{L}*|dein\p{L}*|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser\p{L}*|euer|eure|euren|eurem|eurer|eures|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|solch\p{L}*|manch\p{L}*|all\p{L}*)$/iu;
     const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
@@ -15072,7 +15104,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
