@@ -117,9 +117,13 @@
     return hash;
   };
   const dictionaryPartition = word => fnv(word) & 32767;
+  // hex text of a filter → bytes (speed chat 08.11): one pass over the characters; before, match(/../g) made 131 072 /
+  // 262 144 two-letter strings and parsed each (~36 / ~97 ms and ~12 / ~28 MB of garbage in cloud node; the same bytes).
+  // The text is checked as /^[0-9a-f]+$/ before.
+  const hexBytes=s=>{const v=c=>c<58?c-48:c-87,out=new Uint8Array(s.length>>1);for(let i=0;i<out.length;i++)out[i]=v(s.charCodeAt(2*i))<<4|v(s.charCodeAt(2*i+1));return out;};
   async function mayBeVerb(word) {
     try {
-      if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16))};}).catch(e=>{verbMembershipPromise=null;throw e;});
+      if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:hexBytes(m.bitmap)};}).catch(e=>{verbMembershipPromise=null;throw e;});
       const m=await verbMembershipPromise,key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
       const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;
       for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
@@ -134,7 +138,7 @@
   function wordParts() {
     if(!wordPartsPromise)wordPartsPromise=dataFetch(wordPartsUrl).then(r=>{if(!r.ok)throw Error('Word parts unavailable');return r.json();}).then(d=>{const m=d.membership;
       if(d.format_version!==1||m?.format!=='bloom-fnv1a-v1'||m.bits!==2097152||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid word parts');
-      const bitmap=Uint8Array.from(m.bitmap.match(/../g),s=>parseInt(s,16));
+      const bitmap=hexBytes(m.bitmap);
       return Object.freeze({has(word){const key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
         const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(bitmap[bit>>>3]&(1<<(bit&7))))return false;}return true;}});
     }).catch(e=>{wordPartsPromise=null;throw e;});
