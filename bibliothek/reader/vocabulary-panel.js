@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
-  function create({ getBook, getRange, getResolver, goTo, language, onChanged }) {
+  function create({ getBook, getRange, getResolver, withCardDetails, goTo, language, onChanged }) {
     const dialog = $("vocabulary-dialog"),
       list = $("vocabulary-list"),
       selected = new Set();
@@ -123,7 +123,10 @@
           entries = window.BibliothekVocabularyList.scoped(refreshed, range);
           await onChanged();
         }
-        currentResolver = resolver;
+        // (08.11.2026: the cards with their examples — the light dictionary of the reader has none; bibliothek.js)
+        const detailed = withCardDetails ? await withCardDetails(resolver, entries) : resolver;
+        if (request !== run || !dialog.open) return;
+        currentResolver = detailed;
         selection();
 
         for (const record of entries) {

@@ -49,6 +49,33 @@
   const meaningThanks = window.BibliothekMeaningThanks.create({storage:thanksStorage});
   let meaningChosenInPopup = false;
   let dictionary = null, dictionaryPromise = null;
+  // Details of our own cards (08.11.2026, speed chat): examples, notes and the like are not in the reader's light files
+  // (worterbuch/reader/, build-reader-dictionaries.cjs); the reference card and the word window's learning cards read them.
+  // cardDetailsSource: card id → where its details are; a part (NN.json) is read once, through the data cache, when a card
+  // of it is opened. withDetails(card) is the source card again (the same fields; the details after the others).
+  const cardDetailsSource = new Map(), cardDetails = new Map(), cardDetailParts = new Map();
+  const cardDetailsUrl = card => {
+    const where = card && card.id != null ? cardDetailsSource.get(String(card.id)) : null;
+    if (!where) return null;
+    let h = 2166136261; for (const b of new TextEncoder().encode(String(card.id))) h = Math.imul(h ^ b, 16777619) >>> 0;
+    return `${where.base}${String(h & (where.parts - 1)).padStart(2, "0")}.json?v=${where.version}`;
+  };
+  const cardDetailsReady = cards => cards.every(card => { const url = cardDetailsUrl(card); return !url || cardDetailParts.get(url)?.done; });
+  function ensureCardDetails(cards) {
+    const dataFetch = (input, options) => (window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
+    return Promise.all([...new Set(cards.map(cardDetailsUrl).filter(Boolean))].map(url => {
+      let part = cardDetailParts.get(url);
+      if (!part) {
+        part = {done:false};
+        part.promise = dataFetch(url).then(r => { if (!r.ok) throw new Error("card details load failed"); return r.json(); })
+          .then(rows => { for (const [id, extra] of Object.entries(rows || {})) cardDetails.set(id, extra); part.done = true; })
+          .catch(() => { cardDetailParts.delete(url); });   // (not read: the card without its details; asked again next time)
+        cardDetailParts.set(url, part);
+      }
+      return part.promise;
+    }));
+  }
+  const withDetails = card => { const extra = card && card.id != null ? cardDetails.get(String(card.id)) : null; return extra ? {...card, ...extra} : card; };
   let pendingDelete = null, deleteTrigger = null, deleting = false;
   let switchingChapter = false, renderRequest = 0;
   let restoreLastPage = false;
@@ -115,6 +142,11 @@
     getBook:() => currentBook, getRange:vocabularyRange, language:locale,
     onChanged:() => { refreshHighlights(); return vocabularyPanel.updateCount(); },
     getResolver:async () => { try { await loadDictionary(); return lemmaResolver; } catch (_) { return window.BibliothekLemmaResolver.create([], window.DeutschFallbackDictionary); } },
+    // (08.11.2026: the learning cards need the examples — the details of the listed cards are read first)
+    withCardDetails:async (resolver, records) => {
+      await ensureCardDetails(records.filter(r => r.dictionaryId != null).map(r => resolver.entry?.(r.dictionaryId)).filter(Boolean));
+      return Object.create(resolver, {entry:{value:id => withDetails(resolver.entry(id))}});
+    },
     goTo:async occurrence => {
       if (!currentBook) return;
       if (hasChapters(currentBook)) {
@@ -689,7 +721,16 @@
     if (dictionaryPromise) return dictionaryPromise;
     // 07.11.2026: through the reader's data cache (resolver/data-cache.js), without it — plain fetch
     const dataFetch = (input, options) => (window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
-    const get = path => dataFetch(`../worterbuch/${path}?v=${path === "german-function-words.json" ? "20261104-wn-nouns43-1" : path === "german-verbs.json" ? "20261107-wn-seinhaben55-1" : path === "german-nouns.json" ? "20261104-wn-nouns43-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261107-wn-meist35-1" : path === "german-adverbs.json" ? "20261107-wn-meist56-2" : path === "german-expressions.json" ? "20261106-wn-expr46-2" : path === "german-pronouns.json" ? "20261107-wn-weniger56-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261031-wn-doch24-4" : "20261011-um-zu-en-1"}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); });
+    // 08.11.2026 (speed chat): the reader loads worterbuch/reader/ — the cards without their examples and notes (built from
+    // worterbuch/german-*.json by dev/bibliothek/scripts/build-reader-dictionaries.cjs, same version); the details come with
+    // the reference card (ensureCardDetails). A file in the old form (a list of cards) is read as before.
+    const versionOf = path => path === "german-function-words.json" ? "20261104-wn-nouns43-1" : path === "german-verbs.json" ? "20261107-wn-seinhaben55-1" : path === "german-nouns.json" ? "20261104-wn-nouns43-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261107-wn-meist35-1" : path === "german-adverbs.json" ? "20261107-wn-meist56-2" : path === "german-expressions.json" ? "20261106-wn-expr46-2" : path === "german-pronouns.json" ? "20261107-wn-weniger56-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261031-wn-doch24-4" : "20261011-um-zu-en-1";
+    const get = path => dataFetch(`../worterbuch/reader/${path}?v=${versionOf(path)}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); })
+      .then(data => { if (Array.isArray(data)) return data;
+        if (data?.format_version !== 1 || !Array.isArray(data.entries) || !(data.details_parts >= 1)) throw new Error("dictionary load failed");
+        const where = {base:`../worterbuch/reader/${path.replace(/\.json$/u, "")}-details/`, parts:data.details_parts, version:versionOf(path)};
+        for (const card of data.entries) cardDetailsSource.set(String(card.id), where);
+        return data.entries; });
     // Function-word cards (articles, prepositions, numerals, single words) keep
     // their own types; single words map to the existing reader types.
     const functionWordType = {adverb:"Adverb",adjective:"Adjektiv",particle:"particle"};
@@ -1150,7 +1191,16 @@
     await refreshBookmark(request);
 
   }
-  function renderDictionaryDetails() {
+  let cardDetailsRequest = 0;
+  function renderDictionaryDetails(loaded = false) {
+    // (08.11.2026: the details of the shown cards first — all parts of a pager at once, so ‹ › stay immediate — from the data
+    // cache, or a part from the network the first time)
+    const shown = detailParts.length ? detailParts : activePronouns.length ? activePronouns.map(c => c.item) : selectedEntry ? [selectedEntry] : [];
+    const request = ++cardDetailsRequest;
+    // (Mac browser tests 08.11: the card is drawn at once from the light card — forms, the add button, the pronoun reference
+    // are there; the examples and notes join it when their part is read, the first time only)
+    if (!loaded && !cardDetailsReady(shown))
+      ensureCardDetails(shown).then(() => { if (request === cardDetailsRequest && !$sheet.hidden) renderDictionaryDetails(true); });
     if (detailParts.length) { renderPartDetails(); return; }
     if(!activePronouns.length){if(selectedEntry)renderDictionaryCard(selectedEntry);return;}
     const root=$("dictionary-card"),sections=[],seen=new Set();
@@ -1197,6 +1247,7 @@
     if (status) status.textContent = `${selectedWord}: ${ru ? `часть ${index + 1} из ${detailParts.length}` : `part ${index + 1} of ${detailParts.length}`} — ${detailParts[index].word}`;
   }
   function renderDictionaryCard(item) {
+    item = withDetails(item);
     const root = $("dictionary-card");
     root.replaceChildren();
     delete root.dataset.pronounReference;

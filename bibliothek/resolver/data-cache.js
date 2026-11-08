@@ -10,7 +10,7 @@
  * answer is stored afterwards (the reader does not wait for the disk). Not ours (other paths, no ?v=, another site, a request
  * for a fresh copy with cache:'no-store' / 'reload') or no Cache API (private mode, tests in node) → plain fetch. Any failure
  * of the cache → plain fetch. A network error stays a network error (no second request).
- * Our own dictionaries (worterbuch/german-*.json): one copy per file — a later version (versions start with the date)
+ * Our own dictionaries (worterbuch/german-*.json; since 08.11 worterbuch/reader/ — light copies + details parts): one copy per file — a later version (versions start with the date)
  * drops the older ones; an older version (an old page from the HTTP cache) is not stored.
  * A changed data file needs a new version in its address (dev/bibliothek/tools/data-versions.json, regression
  * data-cache-versions-qa.cjs); otherwise this cache keeps answering the old file.
@@ -38,6 +38,10 @@
     /^bibliothek\/resolver\/data\/fallback-verb-forms\/(?:\d{4}|manifest)\.json$/,
     /^bibliothek\/resolver\/data\/[\w-]+\.json$/,
     /^worterbuch\/german-[\w-]+\.json$/,
+    // the reader's light dictionaries and their details parts (08.11.2026, build-reader-dictionaries.cjs); a details part
+    // (…-details/NN.json, two digits) is not dropped by the limit (review 08.11: a dropped part means a card without its
+    // examples when offline) — only an earlier version of it goes
+    /^worterbuch\/reader\/german-[\w-]+(?:-details\/\d{2})?\.json$/,
   ];
   const replacedOnUpdate = /^worterbuch\//;
   const host = typeof window !== "undefined" ? window : globalThis;
@@ -64,11 +68,39 @@
       // once per page: older generations go; the entries are counted later, in a quiet moment, if they need to be
       setTimeout(() => {
         caches.keys().then(names => Promise.all(names.filter(n => n.startsWith("bibliothek-data-") && n !== GENERATION).map(n => caches.delete(n))))
+          // (the old dictionaries go first, the count after them — so the count includes their removal; review 08.11)
+          .then(() => dropOldDictionaries(cache))
           .then(() => { const c = readCount(); if (!c || c.n > limit() || Date.now() - c.at > RECOUNT_MS) countLater(cache); }).catch(() => {});
       }, 4000);
       return cache;
     })();
     return opened;
+  }
+  // The full dictionaries the reader stored before 08.11 (worterbuch/german-*.json, ~12 MB) — it now reads worterbuch/reader/;
+  // they are the latest version of their address, so the limit would never drop them (review 08.11). Once per device, in a
+  // quiet moment, by address (no list of entries — cache.keys() is the slow step on the iPhone).
+  const OLD_DICTIONARIES_KEY = "bibliothekOldDictionariesGone";
+  const OLD_DICTIONARIES = ["nouns","verbs","adjectives","adverbs","conjunctions","pronouns","adjective-adverbs","articles","prepositions","numerals","function-words","expressions"];
+  // Marked done only when every delete went through (a delete that finds nothing went through too); after a failure the next
+  // page open tries again (user 08.11).
+  function dropOldDictionaries(cache) {
+    try { if (localStorage.getItem(OLD_DICTIONARIES_KEY)) return Promise.resolve(); } catch (_) { return Promise.resolve(); }
+    return new Promise(resolve => {
+      const run = () => {
+        if (clock() - lastUse < IDLE_MS) { setTimeout(run, IDLE_MS); return; }
+        // (a stalled cache does not hold the count back: after OPEN_WAIT_MS it counts as not done — tried again next time)
+        within(Promise.all(OLD_DICTIONARIES.map(name => cache.delete(new URL(`worterbuch/german-${name}.json`, site).href, {ignoreSearch: true})
+          .then(gone => ({ok: true, gone}), () => ({ok: false, gone: false})))), OPEN_WAIT_MS)
+          .then(rows => {
+            if (rows === STALLED) return;
+            const n = rows.filter(r => r.gone).length;
+            if (n) addCount(-n);
+            if (rows.every(r => r.ok)) try { localStorage.setItem(OLD_DICTIONARIES_KEY, "1"); } catch (_) {}
+          })
+          .catch(() => {}).finally(resolve);
+      };
+      setTimeout(run, IDLE_MS);
+    });
   }
   const readCount = () => { try { const c = JSON.parse(localStorage.getItem(COUNT_KEY)); return c && Number.isFinite(c.n) && Number.isFinite(c.at) ? c : null; } catch (_) { return null; } };
   const writeCount = (n, at) => { try { localStorage.setItem(COUNT_KEY, JSON.stringify({n: Math.max(0, n), at})); } catch (_) {} };
@@ -91,7 +123,7 @@
     // what may go, the oldest first: parts, and a copy of another file in an earlier version than its latest one (the
     // latest by version, not by order: an old page in another tab may store an old version after the new one; review 07.11)
     const rows = keys.map(key => { try { const url = new URL(key.url);
-      return {key, path: url.pathname, version: url.searchParams.get("v") || "", part: /\/\d+\.json$/.test(url.pathname)}; }
+      return {key, path: url.pathname, version: url.searchParams.get("v") || "", part: /\/\d{4,}\.json$/.test(url.pathname)}; }
       catch (_) { return {key, path: "", version: "", part: false}; } });
     const latest = new Map();
     for (const row of rows) if (!row.part && !(latest.get(row.path) > row.version)) latest.set(row.path, row.version);
