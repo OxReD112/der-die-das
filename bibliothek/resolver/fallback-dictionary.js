@@ -62,13 +62,21 @@
   // Versions in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
   // versioned file for good — a changed data file needs a new version here (dev/bibliothek/tools/data-versions.json).
   const verbFormsVersion = "1024-1";
-  const separableUrl = new URL("data/separable-index.json?v=20261028-links-1", document.currentScript.src);
+  const separableUrl = new URL("data/separable-index.json?v=20261108-compact-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
     if (!separablePromise) separablePromise = dataFetch(separableUrl).then(response => {
       if (!response.ok) throw new Error("Separable index unavailable");
       return response.json();
     }).then(data => {
+      // format 2 (speed chat 08.11): a list of base forms is written once and an entry names it by number — the rows given back
+      // are those of format 1 ([verb, particle, base forms, meanings, derived?]), the lists shared between the verbs of one base
+      if (data.format_version === 2 && Array.isArray(data.entries) && Array.isArray(data.stems)) {
+        const rows = data.entries.map(([word,prefix,stems,...rest]) => {
+          if (!Array.isArray(data.stems[stems])) throw new Error("Invalid separable index");
+          return [word,prefix,data.stems[stems],...rest]; });
+        return rows;
+      }
       if (data.format_version !== 1 || !Array.isArray(data.entries)) throw new Error("Invalid separable index");
       return data.entries;
     }).catch(error => { separablePromise = null; throw error; });

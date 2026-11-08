@@ -3839,23 +3839,25 @@
             any.add(w); if (INDICATIVE_TENSES.includes(t)) set.add(w); }
           set.any = any;
           return set; };
-        for (const [stem,pairs] of separatedForms) {
+        // (speed chat 08.11: the same choice with less garbage at book open — the helpers once, not per stem; the groups by particle
+        // without copying the list at each pair; the marks without a pair per verb. The order of the drops is the same.)
+        const simpleOf = p => norm(p.entry.word).replace(/^sich\s+/u,"").slice(p.prefix.length);
+        const isIndicative = (p,stem) => { const set = indicativeOf(simpleOf(p)); return set ? set.has(stem) || (set.any.has(stem) ? null : false) : null; };
+        // (the same with one verb only — Führt ihn herunter: herunterfahren alone, führt only its Konjunktiv II — when the stem is
+        // Präsens / Präteritum / Imperativ of another own verb: führt of führen)
+        const otherIndicative = (p,stem) => (forms.get(stem) || []).some(e => e.type === "Verb" && norm(e.word) !== simpleOf(p) &&
+          INDICATIVE_TENSES.some(t => Object.values(formsOf(e)[t] || {}).some(f => norm(String(f).replace(/[!.]/gu,"").split(/\s+/u)[0]) === stem)));
+        separatedForms.forEach((pairs,stem) => {
           const byPrefix = new Map();
-          for (const p of pairs) byPrefix.set(p.prefix,[...(byPrefix.get(p.prefix) || []),p]);
-          let drop = [];
-          const simpleOf = p => norm(p.entry.word).replace(/^sich\s+/u,"").slice(p.prefix.length);
-          const isIndicative = p => { const set = indicativeOf(simpleOf(p)); return set ? set.has(stem) || (set.any.has(stem) ? null : false) : null; };
-          // (the same with one verb only — Führt ihn herunter: herunterfahren alone, führt only its Konjunktiv II — when the stem is
-          // Präsens / Präteritum / Imperativ of another own verb: führt of führen)
-          const otherIndicative = p => (forms.get(stem) || []).some(e => e.type === "Verb" && norm(e.word) !== simpleOf(p) &&
-            INDICATIVE_TENSES.some(t => Object.values(formsOf(e)[t] || {}).some(f => norm(String(f).replace(/[!.]/gu,"").split(/\s+/u)[0]) === stem)));
+          for (const p of pairs) { const group = byPrefix.get(p.prefix); if (group) group.push(p); else byPrefix.set(p.prefix,[p]); }
+          const drop = [];
           for (const group of byPrefix.values()) {
-            const marks = group.map(p => [p,isIndicative(p)]);
-            if (marks.some(([,m]) => m === true)) drop = drop.concat(marks.filter(([,m]) => m === false).map(([p]) => p));
-            else drop = drop.concat(marks.filter(([p,m]) => m === false && otherIndicative(p)).map(([p]) => p));
+            const marks = group.map(p => isIndicative(p,stem));
+            if (marks.includes(true)) { for (let i = 0; i < group.length; i++) if (marks[i] === false) drop.push(group[i]); }
+            else for (let i = 0; i < group.length; i++) if (marks[i] === false && otherIndicative(group[i],stem)) drop.push(group[i]);
           }
           if (drop.length) separatedForms.set(stem,pairs.filter(p => !drop.includes(p)));
-        }
+        });
         // (item 2.5: a short colloquial particle stands for its full one — schmuggel ihn rein, quasselt hier drin rum, treibt sich rum —
         // when no verb is written with the short particle itself; see COLLOQUIAL_PARTICLES. The full one: her- before hin- among those
         // the form has (for the simple verb's list: an own card first, else her-). All three maps of the bracket take the alias:
@@ -3864,29 +3866,36 @@
         const shortTaken = (short,simple) => verbCard(short + simple) || verbCard("sich " + short + simple) || (separableBases.get(simple) || []).some(r => r.prefix === short);
         const longFor = (longs,simple) => longs.find(l => verbCard(l + simple) || verbCard("sich " + l + simple)) ||
           longs.find(l => (separableBases.get(simple) || []).some(r => r.prefix === l));
-        const restOf = (entry,prefix) => norm(entry.word).replace(/^sich\s+/u,"").slice(prefix.length);
+        // (speed chat 08.11: the rest of a verb after its particle once per card and particle; in the pass over the stems below, «taken» once per simple verb
+        // and short particle — separableBases does not change in that pass — and the pairs of a stem once per stem, not per pair)
+        const rests = new Map();
+        const restOf = (entry,prefix) => { let byPrefix = rests.get(entry); if (!byPrefix) rests.set(entry,byPrefix = new Map());
+          let rest = byPrefix.get(prefix); if (rest === undefined) byPrefix.set(prefix,rest = norm(entry.word).replace(/^sich\s+/u,"").slice(prefix.length)); return rest; };
         for (const [short,longs] of Object.entries(COLLOQUIAL_PARTICLES)) {
-          for (const map of [separatedForms,imperativeSeparated]) for (const [stem,pairs] of map) {
-            const extra = [];
+          const takenNow = new Map();
+          const taken = simple => { let t = takenNow.get(simple); if (t === undefined) { t = shortTaken(short,simple); takenNow.set(simple,t); } return t; };
+          for (const map of [separatedForms,imperativeSeparated]) map.forEach((pairs,stem) => {
+            let extra = null, both = null, heres = null;
             for (const p of pairs) {
               if (!longs.includes(p.prefix)) continue;
               const simple = restOf(p.entry,p.prefix);
+              if (!simple || taken(simple)) continue;
               // (the full particle among those this very form has: stieg … hinauf when the index has no «stieg» of heraufsteigen)
-              const both = [...(separatedForms.get(stem) || []),...(imperativeSeparated.get(stem) || [])];
-              const here = longs.filter(l => both.some(q => q.prefix === l && restOf(q.entry,l) === simple));
-              if (!simple || shortTaken(short,simple) || here[0] !== p.prefix ||
-                pairs.some(q => q.prefix === short && q.entry === p.entry)) continue;
-              extra.push({...p,prefix:short,colloquial:p.prefix});
+              if (!both) { both = [...(separatedForms.get(stem) || []),...(imperativeSeparated.get(stem) || [])]; heres = new Map(); }
+              let here = heres.get(simple);
+              if (here === undefined) { here = longs.find(l => both.some(q => q.prefix === l && restOf(q.entry,l) === simple)); heres.set(simple,here); }
+              if (here !== p.prefix || pairs.some(q => q.prefix === short && q.entry === p.entry)) continue;
+              (extra || (extra = [])).push({...p,prefix:short,colloquial:p.prefix});
             }
-            if (extra.length) map.set(stem,[...pairs,...extra]);
-          }
-          for (const [simple,rows] of separableBases) {
-            if (shortTaken(short,simple)) continue;
+            if (extra) map.set(stem,[...pairs,...extra]);
+          });
+          separableBases.forEach((rows,simple) => {
+            if (shortTaken(short,simple)) return;
             const long = longFor(longs,simple);
             const extra = rows.filter(r => r.prefix === long).map(r => ({...r,prefix:short,colloquial:long}));
             if (extra.length) separableBases.set(simple,[...rows,...extra]);
-          }
-          for (const [key,rows] of reflexiveForms) {
+          });
+          reflexiveForms.forEach((rows,key) => {
             const extra = [];
             for (const r of rows) {
               if (!r.particle || !longs.includes(r.particle)) continue;
@@ -3895,7 +3904,7 @@
               extra.push({...r,particle:short,colloquial:r.particle});
             }
             if (extra.length) reflexiveForms.set(key,[...rows,...extra]);
-          }
+          });
         }
         morphologyEpoch++; morphologyFacts.clear(); verbFacts.clear(); nounFrames.clear(); subjectFactsCache.clear();
       }).catch(error => { preparation = null; throw error; });
