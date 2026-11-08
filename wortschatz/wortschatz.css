@@ -26,7 +26,9 @@
   --main-bg: #ece6dc; /* the one main button: cream */
   --main-text: #1b1b1d;
   --quiet-text: rgba(242, 240, 237, 0.55); /* outlined second button */
-  --overlay-scrim: rgba(0, 0, 0, 0.34);
+  --overlay-scrim: rgba(0, 0, 0, 0.55);
+  --window-surface: #323236; /* = components/deutsch-base-v1.css (08.11) */
+  --window-shadow: 0 18px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
   --diff-word-bg: rgba(255, 255, 255, 0.025);
   --diff-error-bg: rgba(255, 119, 112, 0.1);
@@ -75,7 +77,9 @@
   --main-bg: #2f2c29;
   --main-text: #f6f4f1;
   --quiet-text: rgba(47, 44, 41, 0.55);
-  --overlay-scrim: rgba(0, 0, 0, 0.2);
+  --overlay-scrim: rgba(40, 30, 20, 0.28);
+  --window-surface: #fbf9f6;
+  --window-shadow: 0 18px 48px rgba(60, 40, 20, 0.22);
 
   --diff-word-bg: rgba(47, 44, 41, 0.035);
   --diff-error-bg: rgba(233, 94, 102, 0.1);

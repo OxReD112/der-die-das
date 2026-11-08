@@ -126,8 +126,8 @@
    Deutsch
   </title>
   <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
-  <link href="components/deutsch-base-v1.css?v=6" rel="stylesheet"/>
-  <link href="components/deutsch-ui-v1.css?v=10" rel="stylesheet"/>
+  <link href="components/deutsch-base-v1.css?v=7" rel="stylesheet"/>
+  <link href="components/deutsch-ui-v1.css?v=11" rel="stylesheet"/>
   <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
   <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
@@ -136,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=81" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=81" rel="stylesheet"/>');
+     ? '<link href="home.css?v=82" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=82" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -214,7 +214,7 @@
     <button aria-label="Vorherige Seite" class="rail-arrow rail-prev" id="pagePrev" type="button"><span aria-hidden="true" class="ui-chev ui-chev-back ui-chev-lone"></span></button>
     <div class="tile-pages" id="tilePages">
      <div class="tile-page">
-    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261108-checks-1" type="button">
+    <button class="tile tile-vocab module" data-app="wortschatz/?v=20261108-windows-1" type="button">
      <div class="tile-art vocab-art">
       <img alt="" src="wortschatz/icon.webp"/>
      </div>
@@ -227,7 +227,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.51" type="button">
+    <button class="tile tile-small tile-articles module" data-app="artikel/?v=2.52" type="button">
      <div class="tile-art">
       <img alt="" src="artikel/icon.webp"/>
      </div>
@@ -240,7 +240,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.119" type="button">
+    <button class="tile tile-small tile-verbs module" data-app="verbformen/?v=2.120" type="button">
      <div class="tile-art">
       <img alt="" src="verbformen/icon.webp"/>
      </div>
@@ -253,7 +253,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-pronouns module" data-app="pronomen/?v=73" type="button">
+    <button class="tile tile-small tile-pronouns module" data-app="pronomen/?v=74" type="button">
      <div class="tile-art">
       <img alt="" src="pronomen/icon.webp"/>
      </div>
@@ -266,7 +266,7 @@
       </div>
      </div>
     </button>
-    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=91" type="button">
+    <button class="tile tile-small tile-prepositions module" data-app="praepositionen/?v=92" type="button">
      <div class="tile-art">
       <img alt="" src="praepositionen/icon.webp"/>
      </div>
@@ -283,7 +283,7 @@
      <!-- Page 2 (05.11, Alena): Partikeln, temporary until the Sprachgefühl tile of the new Home layout
           (claude/HOME_LAYOUT_PLAN_2026-11-05_RU.md). No picture yet: an empty card with its name. -->
      <div class="tile-page">
-    <button class="tile tile-small tile-particles module" data-app="partikeln/?v=18" type="button">
+    <button class="tile tile-small tile-particles module" data-app="partikeln/?v=19" type="button">
      <div class="tile-art"></div>
      <div class="tile-copy">
       <div class="name">
@@ -366,11 +366,11 @@
   <nav class="home-places" id="homePlaces" aria-label="Bereiche">
    <span class="home-places-pill" aria-hidden="true"></span>
    <button class="home-place is-active" id="placeHome" type="button" aria-label="Üben"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg></button>
-   <button class="home-place" id="placeLibrary" type="button" aria-label="Lesen" data-app="bibliothek/bibliothek.html?v=20261108-note-1"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7c-2-1.6-4.6-2-8-2v12c3.4 0 6 .4 8 2 2-1.6 4.6-2 8-2V5c-3.4 0-6 .4-8 2zM12 7v12"/></svg></button>
+   <button class="home-place" id="placeLibrary" type="button" aria-label="Lesen" data-app="bibliothek/bibliothek.html?v=20261108-windows-1"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7c-2-1.6-4.6-2-8-2v12c3.4 0 6 .4 8 2 2-1.6 4.6-2 8-2V5c-3.4 0-6 .4-8 2zM12 7v12"/></svg></button>
   </nav>
   <div class="notebook-layer" id="notebookLayer" aria-hidden="true">
    <section class="notebook-panel" id="notebookPanel" aria-label="Notizbuch">
-    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=35" loading="eager"></iframe>
+    <iframe id="notebookFrame" title="Notizbuch" src="features/notizbuch/?embedded=1&v=36" loading="eager"></iframe>
    </section>
   </div>
   <div class="settings-layer" id="settingsLayer">
@@ -394,7 +394,7 @@
      <div class="settings-gap" aria-hidden="true"></div>
      <button class="settings-action" id="aboutOpen" type="button"><span class="settings-action-content"><span>Über Deutsch.</span></span></button>
     </div>
-    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.177 — Versionen aller Seiten anzeigen">Deutsch. Version 5.177 <span aria-hidden="true" class="ui-chev"></span></button>
+    <button class="settings-version" id="versionsOpen" type="button" aria-label="Deutsch. Version 5.178 — Versionen aller Seiten anzeigen">Deutsch. Version 5.178 <span aria-hidden="true" class="ui-chev"></span></button>
    </div>
    </section>
   </div>

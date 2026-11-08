@@ -2891,3 +2891,14 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 .library-add-menu button span { display: block; min-width: 0; }
 .library-add-menu small { display: block; margin-top: 2px; color: var(--muted); font: 400 12px/1.3 var(--font); }
 .library-add-menu button:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+
+/* 08.11 (Alena, variant В): the windows of Bibliothek like the app's windows — «… löschen? / zurücksetzen?»,
+   «Text einfügen», «Data sources»: the lifted window surface and shadow, corners 26, the page behind darker and
+   blurred like under .ui-window. (Their behaviour — tap outside, focus — moves to DeutschWindow with the test chat.) */
+.book-confirm { background: var(--overlay-scrim); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.book-confirm-card { border: 1px solid var(--hairline); border-radius: 26px; background: var(--window-surface); box-shadow: var(--window-shadow); }
+.paste-dialog, .data-sources { border: 1px solid var(--hairline); background: var(--window-surface); box-shadow: var(--window-shadow); }
+.paste-dialog::backdrop, .data-sources::backdrop { background: var(--overlay-scrim); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+
+/* 08.11 (Alena, variant А): Inhalt open — its icon fades (quiet, nothing added to the header) */
+.reading-body:has(#contents-dialog[open]) .contents-toggle { opacity: 0.4; }

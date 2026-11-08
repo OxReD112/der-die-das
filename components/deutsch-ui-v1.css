@@ -393,3 +393,7 @@ details[open] > summary .ui-chev-fold {
     transition: none !important;
   }
 }
+
+/* 08.11 (Alena, variant В): every window is a lifted surface — its own colour (a tone lighter than the cards in the
+   dark theme), a soft shadow and a thin light line at the top; the page behind is darker (--overlay-scrim). */
+.ui-window-card { background: var(--window-surface, var(--card-bg)); box-shadow: var(--window-shadow, none); }

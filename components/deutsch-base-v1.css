@@ -34,7 +34,11 @@
   --field-bg: rgba(255, 255, 255, 0.03);
   --feedback-line: rgba(255, 255, 255, 0.11);
   --result-line: rgba(255, 255, 255, 0.08);
-  --overlay-scrim: rgba(0, 0, 0, 0.34);
+  --overlay-scrim: rgba(0, 0, 0, 0.55); /* 08.11: darker (was 0.34) — a window stands clearly off the page */
+  /* 08.11 (Alena, variant В): a window is a lifted surface — a tone lighter than the cards, a soft shadow below and
+     a thin light line at its top in the dark theme */
+  --window-surface: #323236;
+  --window-shadow: 0 18px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --close-icon: #fff;
   /* Gold highlight of the asked form (tables, Spickzettel) */
   --lit-bg: rgba(232, 196, 120, 0.13);
@@ -85,7 +89,9 @@
   --field-bg: #fbf9f6;
   --feedback-line: rgba(0, 0, 0, 0.11);
   --result-line: rgba(0, 0, 0, 0.1);
-  --overlay-scrim: rgba(0, 0, 0, 0.2);
+  --overlay-scrim: rgba(40, 30, 20, 0.28);
+  --window-surface: #fbf9f6;
+  --window-shadow: 0 18px 48px rgba(60, 40, 20, 0.22);
   --close-icon: #2f2c29;
   /* Gold highlight of the asked form (tables, Spickzettel) */
   --lit-bg: rgba(196, 146, 40, 0.13);

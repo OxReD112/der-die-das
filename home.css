@@ -34,7 +34,7 @@
   --mint-mid: rgba(91, 200, 164, 0.24);
 
   /* windows (About, "Are you sure?", Keep your progress) — progress-screen.js also uses --confirm-scrim */
-  --confirm-scrim: rgba(0, 0, 0, 0.34);
+  --confirm-scrim: rgba(0, 0, 0, 0.55);
   --window-card: #2a2a2d;
   --window-line: rgba(255, 255, 255, 0.1);
 
@@ -64,7 +64,7 @@
   --mint-core: rgba(63, 166, 138, 0.3);
   --mint-mid: rgba(63, 166, 138, 0.18);
 
-  --confirm-scrim: rgba(0, 0, 0, 0.2);
+  --confirm-scrim: rgba(40, 30, 20, 0.28);
   --window-card: #fbf9f6;
   --window-line: rgba(0, 0, 0, 0.1);
 }

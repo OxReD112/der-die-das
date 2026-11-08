@@ -7,7 +7,7 @@
   --main-bg: #ece6dc;
   --main-text: #1b1b1d;
   --quiet-text: var(--secondary-text, #c8c7c4);
-  --overlay-scrim: rgba(0,0,0,.34);
+  --overlay-scrim: rgba(0,0,0,.55);
   --error: #ff7770;
   --accent: var(--mint);
   --blank-line: var(--text);
@@ -22,7 +22,7 @@
   --main-bg: #2f2c29;
   --main-text: #f6f4f1;
   --quiet-text: #77726c;
-  --overlay-scrim: rgba(0,0,0,.2);
+  --overlay-scrim: rgba(40,30,20,.28);
   --error: #e95e66;
 }
 @media (prefers-reduced-motion: reduce) {
