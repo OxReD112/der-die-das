@@ -13259,6 +13259,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const bang = end === "!" && !/,/u.test(after.slice(0, after.search(/[.!?]/u)));
           return {strong, weak, subject, end, bang};
         };
+        // Imperativ on Sie / wir (G96; advisor 08.11, claude/IMPERATIVE_SIE_WIR_COUNT_2026-11-08_RU.md): the verb opens its part, Sie / wir
+        // right after it, the sentence ends with «!» or «.» (not «?») — Gehen wir!, Seien Sie still!, Strecken Sie Ihren Arm aus. Not: a
+        // verb of opinion with nothing after Sie (Meinen Sie, …; Wissen Sie, … — a question / «знаете»; Glauben Sie mir! stays Imperativ);
+        // a conditional — verb first again after the comma (Kommen Sie zu spät, verpassen Sie …). With wir and a word only a statement
+        // takes (Empfehlen wir gerne weiter!, Kommen wir gerne wieder! — [Das] … wir) — «Imperativ / Präsens».
+        {
+          const sentence = String(context?.sentence || "");
+          const head = forms.find(f => Number.isInteger(f.start) && /^[\p{L}\p{M}]+\s+(?:Sie|wir)(?![\p{L}\p{M}])/u.test(sentence.slice(f.start)) && clauseInitial(sentence, f.start));
+          const SIE_WIR_OK = (labels.has("Präsens") && /(?:en|ern|eln|n)$/u.test(head?.form || "") || head?.form === "seien") &&
+            !modalLemmas.has(base) && !["haben","werden"].includes(base) && !(base === "sein" && head?.form !== "seien");
+          if (head && SIE_WIR_OK && !(candidate.source === "main" && candidate.item?.imperative === "none")) {
+            const rest = sentence.slice(head.start).replace(/^[\p{L}\p{M}]+\s+/u, "");
+            const pronoun = /^(Sie|wir)/u.exec(rest)[1], afterPronoun = rest.slice(pronoun.length);
+            const end = (/[.!?]/u.exec(afterPronoun) || [""])[0];
+            const partEnd = afterPronoun.search(/[,;:.!?»«„“"–—()]/u), part = (partEnd < 0 ? afterPronoun : afterPronoun.slice(0, partEnd)).split(/\s(?:und|oder)\s/u)[0];
+            const opinion = pronoun === "Sie" && /^(?:meinen|glauben|denken|finden|wissen)$/u.test(base) && /^\s*(?:[,.!?»«„“"–—]|$)/u.test(afterPronoun);
+            const conditional = partEnd >= 0 && afterPronoun[partEnd] === "," &&
+              (verbAnalyses.get(norm((/^\s*([\p{L}\p{M}]+)/u.exec(afterPronoun.slice(partEnd + 1)) || [,""])[1])) || []).some(r => r.kind === "finite");
+            if (end !== "?" && !opinion && !conditional) {
+              const statement = pronoun === "wir" && /(?:^|[^\p{L}\p{M}])(?:gern|gerne|nur|wieder|bestimmt|sicher|immer|auch|auf\s+jeden\s+Fall)(?![\p{L}\p{M}])/iu.test(part);
+              return {tense: statement ? "Imperativ / Präsens" : "Imperativ"};
+            }
+          }
+        }
         if (labels.has("Imperativ") && labels.size > 1 && ownLabels.size && ![...labels].some(t => /^Partizip/u.test(t))) {
           const sign = imperativeSigns(), own = [...ownLabels];
           if (sign && !sign.subject && sign.end !== "?") {
