@@ -3663,6 +3663,17 @@
       const around = String(context.sentence || "");
       if (/[-‐‑]$/u.test(around.slice(0,context.tokenOffset)) || /^[-‐‑]/u.test(around.slice(context.tokenOffset + spelling.length))) return null;
       const w = norm(spelling), capital = /^\p{Lu}/u.test(spelling), ctx = wordFormationContext(spelling,context);
+      // (advisor 08.11) the grammar group asks for the head right after a tapped form with an adjective ending that the
+      // external dictionary knows only as a verb (das verwaiste Stadtarchiv): that form is its attribute
+      if (options.attributeBefore && !ctx.adj) {
+        ctx.adj = true; ctx.bare = false; ctx.name = false; ctx.nameSlot = false;
+        const t1 = sharedTokens(around,'wordFormation'), i1 = clickedTokenIndex(t1,context.tokenOffset,spelling), p2 = i1 > 1 ? t1[i1-2][0] : null;
+        if (p2 && /^\s+$/u.test(around.slice(t1[i1-2].index+p2.length,t1[i1-1].index)) && (determinerFeatures(p2) || WORD_FORMATION_DET.test(norm(p2)))) {
+          const d = norm(p2); ctx.det = true; ctx.detForm = d; ctx.otherDet = !/^(?:der|die|das|den|dem|des)$/u.test(d);
+          ctx.pluralDet = /^(?:die|diese|jene|keine|alle|beide|viele|einige|mehrere|manche|solche|welche|meine|deine|seine|ihre|unsere|eure)$/u.test(d);
+          ctx.singularDet = /^(?:das|dem|des|ein|eine|einem|einen|eines|einer|(?:kein|mein|dein|sein|ihr|unser|euer|eur|dies|jen|jed|welch|manch|solch)(?:em|es))$/u.test(d);
+        }
+      }
       // (advisor 06.11, fresh sample: «X- und Y» — the signs before the stub are the signs of the whole group: ein vielfältiges Sport-
       // und Kulturangebot — Kulturangebot has «ein vielfältiges» as Sport- has; Schul- oder Hochschulabschluss)
       { const m = /([\p{L}]+)[-‐‑][ \t]+(?:und|oder|sowie|bzw\.|beziehungsweise)[ \t]+$/u.exec(around.slice(0,context.tokenOffset));
@@ -3782,6 +3793,25 @@
       const translation = {en:window.BibliothekMeaningDisplay?.formationText?.(formation,"en") || "",ru:window.BibliothekMeaningDisplay?.formationText?.(formation,"ru") || ""};
       return {source:"fallback",lemma,pos:noun ? "noun" : "adj",posLabel:noun ? "Nomen" : "Adjektiv",translation,formation,
         item:{...item,translation_en:translation.en,translation_ru:translation.ru}};
+    }
+    // (advisor 08.11, claude/ATTR_SIMPLE_FRAME_COUNT_2026-11-08_RU.md) a compound noun no dictionary has as a whole, as the head of a
+    // noun group: the card of the same word formation that shows it (wordFormationCandidate — gender and number of its last part; two
+    // living genders or an old meaning give no card, so no head). attributeBefore: the tapped form with an adjective ending stands
+    // right before it. One entry per sentence and offset, read by the grammar group (grammarClause) and the role frame alike.
+    const compoundHeadItems = new Map();
+    async function compoundHeadEntry(sentence, token, attributeBefore = false) {
+      const key = sentence + "\u0000" + token.index;
+      if (compoundHeadItems.has(key)) return compoundHeadItems.get(key);
+      const k = token[0];
+      let entry = null;
+      if (/^\p{Lu}/u.test(k) && !(forms.get(norm(k)) || []).length) {
+        const formed = await wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null), f = formed?.formation;
+        if (f?.kind === "compound" && f.pos === "Nomen")
+          entry = {word:k,type:"Nomen",article:f.number ? "" : (f.gender || ""),plural:f.number === "plural" ? k : "",number:f.number || null,numberUnknown:false,compoundHead:true};
+      }
+      if (compoundHeadItems.size > 4096) compoundHeadItems.clear();
+      compoundHeadItems.set(key,entry);
+      return entry;
     }
     let preparation = null;
     function prepareSeparable() {
@@ -8340,6 +8370,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               plural:numbers.has('plural')?tokens[head][0]:'',number:numbers.size===1?[...numbers][0]:null,numberUnknown:!numbers.size};
           }));break;
         }
+        // (links chat 08.11, advisor 08.11 — claude/ATTR_SIMPLE_FRAME_COUNT_2026-11-08_RU.md): a compound noun no dictionary has as a whole
+        // (einer erhöhten Balkendecke, das verwaiste Stadtarchiv) is the head with the gender and number of the same word formation
+        // that shows it (wordFormationCandidate — its last part; two living genders or an old meaning: no card, so no head here).
+        if(/^[A-ZÄÖÜ]/u.test(tokens[head][0])&&!nouns.length){
+          const entry=await compoundHeadEntry(sentence,tokens[head],head===index+1&&/^\p{Ll}+(?:e|en|em|er|es)$/u.test(word));
+          if(entry){nounMatches.set(head,[entry]);break;}
+        }
         shared.set(head,modifierRows(r));if(!shared.get(head).length)return blocked('intervening-modifier-unproven');
       }
       if(!nounMatches.has(head))return blocked('noun-head-unproven');
@@ -10212,7 +10249,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let start = index, end = index;
       while (start > 0 && connected(start-1,start) && (!boundaries.has(norm(tokens[start-1][0])) || midClauseDoch(sentence,tokens,start-1))) start--;
       while (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
-      const matches = i => forms.get(norm(tokens[i]?.[0])) || [];
+      // (advisor 08.11: an unknown compound noun after the word — its word-formation card, prepared in the async stage)
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || (i > index && tokens[i] && compoundHeadItems.get(sentence + "\u0000" + tokens[i].index) ? [compoundHeadItems.get(sentence + "\u0000" + tokens[i].index)] : []);
       const unchanged = {candidates,preferred:null,evidence:null};
       const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
       const verbs = candidates.filter(isVerb);
@@ -11704,6 +11742,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           }
         } catch (e) { error = e; }
       }
+      // (advisor 08.11, claude/S2_NOFILTER_CAUSES_2026-11-08_RU.md, cause 3: the joined form of a verb only the separable index has,
+      // whose simple verb only the external dictionary has — zuriegelte, anstrahlte, wegschmolz: the simple verb's form rows (riegelte
+      // of riegeln) are the rows of the joined form; read by formFeatures as the external rows of a form are)
+      if (!error) {
+        const form = norm(word);
+        for (const c of candidates) {
+          if (canonicalPos(c.pos) !== "Verb") continue;
+          const base = norm(c.lemma).replace(/^sich\s+/u,"");
+          if (base === form || inflections.some(row => norm(row.lemma).replace(/^sich\s+/u,"") === base && norm(row.form) === form)) continue;
+          let joined = null;
+          for (let i = 2; i <= base.length - 3 && !joined; i++) {
+            const prefix = base.slice(0,i), simple = base.slice(i);
+            if (form.startsWith(prefix) && form.length > prefix.length + 1 &&
+                (separableBases.get(simple) || []).some(r => r.prefix === prefix && norm(r.entry.word).replace(/^sich\s+/u,"") === base)) joined = {prefix,simple};
+          }
+          if (!joined || phraseRows(form.slice(joined.prefix.length)).some(row => norm(row.base) === joined.simple)) continue;
+          try {
+            const rest = form.slice(joined.prefix.length), groups = (await collectMorphology(rest, undefined, 'joinedTense')).groups;
+            for (const g of groups) if (g.kind === "form-note") for (const row of g.inflections || [])
+              if (norm(row.lemma) === joined.simple && norm(row.form) === rest && !(row.tags || []).includes("participle"))
+                inflections.push({...row,form:word,lemma:c.lemma,source:"joined-simple-verb"});
+          } catch (_) { /* no rows: no tense, as before */ }
+        }
+      }
       // Replace conditional reflexive entries before POS coverage can hide
       // their non-reflexive counterparts. Unconfirmed senses remain available
       // for manual selection but cannot rank or resolve themselves.
@@ -11998,6 +12060,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (nameReadingOrders.size > 4096) nameReadingOrders.clear();
           nameReadingOrders.set(`${pos}:${word}`,order);
         }
+      // (advisor 08.11) an unknown compound noun after the tapped word: its entry (compoundHeadEntry) for the grammar group below
+      if (context && Number.isInteger(context.tokenOffset)) {
+        const s0 = String(context.sentence || ""), t0 = sharedTokens(s0,'compoundHeads'), i0 = clickedTokenIndex(t0,context.tokenOffset,word);
+        for (let h = i0+1; i0 >= 0 && h < t0.length && h-i0 <= 3; h++)
+          if (/^\p{Lu}/u.test(t0[h][0])) await compoundHeadEntry(s0,t0[h],h === i0+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word));
+      }
       const roleRank = await sharedRoleRank(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const grammatical = roleRank || grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
@@ -12754,6 +12822,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             /subjunctive-ii/u.test(mood) || /subjunctive/u.test(mood) && form.length > 2 && (tense === "past" || tense === "preterite" || row.tags?.includes("subjunctive-ii")) ? "Konjunktiv II" :
             /subjunctive/u.test(mood) ? "Konjunktiv I" : tense === "past" || tense === "preterite" ? "Präteritum" : tense === "present" ? "Präsens" : "?");
         }
+        // (advisor 08.11, claude/S2_NOFILTER_CAUSES_2026-11-08_RU.md, cause 3: the joined form of a particle verb whose own rows do
+        // not name it — a verb only the separable index has: herabfiel, herauslief, hinwendete — takes the tense of the simple verb's form,
+        // as a separated one does above: herab + fiel → fiel of fallen, Präteritum)
+        if (!labels.size && !separableSpans && form !== base)
+          for (let i = 2; i <= base.length - 3; i++) {
+            const p = base.slice(0,i), s = base.slice(i);
+            if (!form.startsWith(p) || form.length <= p.length + 1) continue;
+            if (!(separableBases.get(s) || []).some(r => r.prefix === p && norm(r.entry.word).replace(/^sich\s+/u,"") === base)) continue;
+            const rest = form.slice(p.length);
+            for (const row of phraseRows(rest)) {
+              if (norm(row.base) !== s || row.kind === "infinitive" || row.compound?.length || row.detached) continue;
+              labels.add(row.tense); sources.set(row.tense, {form:rest, start:context?.tokenOffset});
+              if (formsOf(row.entry)?.["Konjunktiv II"]) ownKonjunktiv = true;
+            }
+            break;
+          }
         // (G91 / WN batch 29, advisor 01.11: a card with imperative: "none" is never an imperative — also not by the external dictionary)
         if (candidate.source === "main" && candidate.item?.imperative === "none") { labels.delete("Imperativ"); ownLabels.delete("Imperativ"); sources.delete("Imperativ"); }
         const [only] = labels;
