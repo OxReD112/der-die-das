@@ -8080,8 +8080,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (/e$/u.test(det)) return ["e","en"];
       return [];
     }
-    function attributeFrameDeterminer(tokens, i, lo = 0) {
-      const text = String(tokens[i]?.input ?? ""), word = norm(tokens[i]?.[0] ?? "");
+    // (tests chat 07.11) A capital word in -er right before another capital word (Frankfurter Aktienbörse, Berliner Mauer, Schweizer
+    // Käse): with an adjective record (checked by the caller) the indeclinable adjective of a place name — a modifier, not a noun head.
+    function capitalErBeforeNoun(tokens, i, sentence = null) {
+      const text = String(sentence ?? tokens[i]?.input ?? "");
+      return /^\p{Lu}\p{Ll}+er$/u.test(tokens[i]?.[0] ?? "") && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") &&
+        /^\s+$/u.test(text.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index));
+    }
+    function attributeFrameDeterminer(tokens, i, lo = 0, sentence = null) {
+      const text = String(sentence ?? tokens[i]?.input ?? ""), word = norm(tokens[i]?.[0] ?? "");
       const ending = (/(en|em|er|es|e)$/u.exec(word) || [])[1];
       if (!ending || !/^\p{Ll}/u.test(tokens[i][0]) || !/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") ||
           /[,;:.!?()–—"„“»«]/u.test(text.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index))) return -1;
@@ -8092,6 +8099,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!ATTRIBUTE_FRAME_DETERMINER.test(det) || !/^\p{Ll}/u.test(tokens[d][0]) && d !== lo && d !== 0) continue;
         // (a determiner right before the form or one word before it is the form's own — dem selbst gewählten Tod: the ordinary
         // noun group, not this frame; a determiner further inside the group belongs to it — im Laufe der Jahrhunderte erfolgte)
+        // (a determiner right after a preposition is the group's own — von ihr moderierten, im Laufe der Jahrhunderte)
+        if (d > lo && prepositions.has(norm(tokens[d-1][0])) && d >= i-2 && !prepositions.has(norm(tokens[d+1][0]))) continue;
         if (!prepositions.has(norm(tokens[d+1][0]))) { if (d >= i-2) return -1; continue; }
         if (d+1 >= i-1) return -1;
         for (let k = d+2; k < i; k++) if (/^\p{Ll}/u.test(tokens[k][0]) && verbal(k) && !adjectivalForm(tokens[k][0]) && !ownModifierForm(tokens[k][0]) &&
@@ -8177,6 +8186,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const compatible = analyses.filter(row => allowed.has(row.ending) || row.invariant && allowed.size);
       if (!compatible.length) return unchanged;
       let favoured = [...new Set(compatible.map(row => row.candidate))];
+      // (advisor 07.11 (a): an attribute frame with an own verb card and only an external adjective — the verb)
+      if (shared?.verbOverExternal) { const own = favoured.filter(c => c.source === "main" && canonicalPos(c.pos) === "Verb"); if (own.length) favoured = own; }
       // B (17.10.2026): an attributive participle without sich before it belongs to
       // the plain verb, not to its sich-twin (seltsam gekleideter Menschen).
       const twinBase = c => norm(c.lemma).replace(/^sich\s+/u,"");
@@ -8294,12 +8305,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if(invariant?.length){shared.invariant=true;shared.get(index).push(...invariant.map(c=>({lemma:c.lemma,pos:c.pos,kind:'adjective',invariant:true,base:c.lemma})));}
       if(!shared.get(index).length || /^[A-ZÄÖÜ]/u.test(word)&&!shared.invariant)return blocked('modifier-role-unproven');
       const participle = shared.get(index).some(a=>a.kind.startsWith('participle-'));
-      const nounMatches=new Map();let headCandidates=[],head=index+1;
+      const nounMatches=new Map();let headCandidates=[],head=index+1,placeAdjectiveAt=-1;
       for(;head<tokens.length&&head-index<=3;head++){
         const openingQuote = /^\s*(?:``|[„“"«])\s*$/u.test(sentence.slice(tokens[head-1].index+tokens[head-1][0].length,tokens[head].index));
         if(!joined(head-1,head) && !(participle && head===index+1 && openingQuote))return blocked('role-boundary');
         const r=await analysisAt(head);if(!r)return blocked('neighbor-morphology-error');
         const nouns=r.candidates.filter(c=>canonicalPos(c.pos)==='Nomen');
+        // (tests chat 07.11, s917: a capital word in -er right before another capital word — Frankfurter Aktienbörse, Berliner Mauer —
+        // is itself a modifier, not the head; the head is the next word)
+        // (advisor 07.11: only with an adjective record of the word in our or the external dictionary — Frankfurter, Berliner, Wiener,
+        // Schweizer; Lehrer, Kellner, Vater, Bruder, Zimmer stay nouns)
+        if(capitalErBeforeNoun(tokens,head,sentence)&&r.candidates.some(c=>canonicalPos(c.pos)==='Adjektiv')){shared.set(head,[{kind:'adjective',invariant:true,lemma:tokens[head][0],base:tokens[head][0]}]);placeAdjectiveAt=head;continue;}
+        // (the word after it is the head also when no dictionary has it — Aktienbörse: gender and number unknown)
+        if(head>index+1&&placeAdjectiveAt===head-1&&/^[A-ZÄÖÜ]/u.test(tokens[head][0])&&!nouns.length){
+          nounMatches.set(head,[{word:tokens[head][0],type:'Nomen',article:'',plural:'',number:null,numberUnknown:true}]);break;}
         if(/^[A-ZÄÖÜ]/u.test(tokens[head][0])&&nouns.length){
           headCandidates=nouns.map(c=>({identity:window.BibliothekVocabulary.identity(c),source:c.source,
             dictionaryId:c.dictionaryId,lemma:c.lemma,pos:c.pos}));
@@ -8351,6 +8370,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           }
         }
       }
+      // (links chat 07.11, advisor 07.11 — the same attributeFrameDeterminer as the parts of the sentence and nominalRank, 4.19): a
+      // determiner, a group with a preposition, then the participle — einem mit silbrigem Blut bespritzten Umhang, eine im Jahr 2011
+      // errichtete Aussichtsplattform. Not with an adjective card of the form (gegründet, befreundet keep their path).
+      // (advisor 07.11, variant (a)) With an own verb card of the participle and only an external adjective of the form (kontrolliert,
+      // verkauft, finanziert) the frame takes the verb, «Partizip II» (shared.verbOverExternal, nominalRank); an own adjective card
+      // still wins (befreundet).
+      const ownVerbOnlyExternalAdjective = clicked.candidates.some(c=>c.source==='main'&&canonicalPos(c.pos)==='Verb') &&
+        !clicked.candidates.some(c=>c.source==='main'&&canonicalPos(c.pos)==='Adjektiv');
+      if(participle && left===index-1 && !Number.isInteger(shared.frameLeft) &&
+          (!clicked.candidates.some(c=>canonicalPos(c.pos)==='Adjektiv') || ownVerbOnlyExternalAdjective)) {
+        const outer=attributeFrameDeterminer(tokens,index,0,sentence);
+        if(outer>=0) { for(let i=outer+1;i<index;i++)shared.set(i,[{kind:'participle-complement',invariant:true}]); left=outer;shared.frameLeft=outer;
+          if(clicked.candidates.some(c=>canonicalPos(c.pos)==='Adjektiv'))shared.verbOverExternal=true; }
+      }
       // KF7 C (advisor 02.11.2026): adverbs and bare adjectives between the article and a declined participle are the
       // participle's own dependents (Das hier erwähnte Theaterstück, eine strahlend hell erleuchtete Gruft); they do not
       // agree. The noun head is already required above, so «Das hier erwähnte er nicht» stays a finite verb.
@@ -8386,7 +8419,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       hypothesis.headCandidates=headCandidates;
       return {hypothesis,
         clicked:{candidates:clicked.candidates,inflections:clicked.inflections},shared:[...shared],invariant:!!shared.invariant,
-        frameLeft:shared.frameLeft,allowedCases:shared.allowedCases,nounMatches:[...nounMatches],sources};
+        frameLeft:shared.frameLeft,verbOverExternal:!!shared.verbOverExternal,allowedCases:shared.allowedCases,nounMatches:[...nounMatches],sources};
     }
     async function buildDisplayNounFrame(sentence,tokens,clicked,externalModifiers) {
       const sources=[],blocked=reason=>({hypothesis:null,reason,sources});
@@ -8472,7 +8505,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(!frame.hypothesis)return null;
         const {clicked}=frame, {det:left,head}=frame.hypothesis;
         const shared=new Map(frame.shared),nounMatches=new Map(frame.nounMatches);
-        shared.invariant=frame.invariant;shared.frameLeft=frame.frameLeft;shared.allowedCases=frame.allowedCases;
+        shared.invariant=frame.invariant;shared.frameLeft=frame.frameLeft;shared.allowedCases=frame.allowedCases;shared.verbOverExternal=frame.verbOverExternal;
         observe('noun-hypothesis-use',{consumer:'sharedRoleRank',id:frame.hypothesis.id,purpose:'grammar'});
         const extended=[...candidates];
         for(const c of clicked.candidates)if(shared.get(index).some(a=>a.lemma===c.lemma&&canonicalPos(a.pos)===canonicalPos(c.pos))&&
@@ -11135,6 +11168,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const participleAlternative = f.verbs.some(c =>
           c.item && norm(String(c.item.perfect_form || "").split(/\s+/u).at(-1)) === norm(f.word) ||
           f.inflections.some(row => norm(row.lemma) === norm(c.lemma) && row.tags.includes("participle")));
+        // (links chat 07.11, advisor 07.11: the attribute frame is stronger — the same attributeFrameDeterminer, 4.19 — der von ihr
+        // kontrollierte Bereich; not with an adjective card of the form, which keeps its own path)
+        if (finiteOnly.length && !f.candidates.some(c => c.source === "main" && canonicalPos(c.pos) === "Adjektiv") && attributeFrameDeterminer(f.tokens,f.index,f.start) >= 0) return undefined;
         return finiteOnly.length && !f.nouns.length && !participleAlternative ? f.choose(finiteOnly,"validated-finite-form") : undefined;
       }
     };
@@ -13888,6 +13924,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // The perfect / zu chain of the simple verb was found in the sentence with the particle cut off: its spans move back.
     function directionalSpans(construction, at, from, to) {
       if (!construction?.spans) return construction;
+      // (advisor 07.11) The auxiliary of a verb by parts is unknown — the simple verb's (zischen, schweben → haben) is not taken:
+      // verbs of motion with a particle go with sein. The state group of the simple verb becomes «Perfekt / Plusquamperfekt /
+      // состояние», as a verb with sein without an independent sign: das an seinem Ohr vorbeigezischt war, waren … hereingeschwebt.
+      if (construction.stateOnly) { const {stateOnly, ...rest} = construction; construction = {...rest, state:true}; }
       const delta = to.length - from.length;
       return {...construction, spans:construction.spans.map(span => span.start === at ? {...span, text:to, end:at + to.length}
         : span.start > at ? {...span, start:span.start + delta, end:span.end + delta} : span)};
