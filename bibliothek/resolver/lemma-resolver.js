@@ -12940,6 +12940,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // concessive conjunctions, als ob, damit + subject (purpose clause), wishes, Konjunktiv I of
     // indirect speech and any own form that is only Konjunktiv II (wäre, hätte, würde, käme).
     const KONJUNKTIV_SIGNALS = /^(?:wenn|falls|sofern|ob|sei|seien|seiest|seist|seiet|wünschte\p{L}*|würde\p{L}*|hätte\p{L}*|hätt|wäre\p{L}*|wär|könnte\p{L}*|müsste\p{L}*|müßte\p{L}*|dürfte\p{L}*|wüsste\p{L}*|wüßte\p{L}*)$/u;
+    // (#22 (в) item 3, advisor 08.11: wünschte is the Konjunktiv II wish only after ich / wir and before a comma and a part without dass
+    // whose finite verb stands second — Ich wünschte, ich hätte …; Ich wünschte, die McGonagall würde …; otherwise it is Präteritum: Es wünschte ihnen
+    // die Tageszeit, wünschten ihm viel Glück, wünschte, daß …)
+    function wishWuenschte(sentence, start) {
+      const words = [...String(sentence || "").matchAll(/[\p{L}\p{M}]+/gu)], at = words.findIndex(m => m.index === start);
+      if (at < 0 || !/^wünscht(?:e|en|est|et)$/u.test(norm(words[at][0])) || !words[at + 1]) return false;
+      // (books check 08.11: only the speaker's own wish — ich / wir wünschte(n), right before; Harry wünschte, er könnte …, Er wünschte,
+      // Ron würde … tell the narrative — Präteritum)
+      if (!(at > 0 && /^(?:ich|wir)$/u.test(norm(words[at - 1][0])))) return false;
+      const gap = (a, b) => sentence.slice(words[a].index + words[a][0].length, words[b].index);
+      if (!/^\s*,\s*$/u.test(gap(at, at + 1))) return false;
+      const first = words[at + 1][0], f = norm(first);
+      if (/^(?:dass|daß|ob|wenn|als|weil|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
+      const finite = i => words[i] && /^\s+$/u.test(gap(i - 1, i)) && (verbAnalyses.get(norm(words[i][0])) || []).some(r => r.kind === "finite");
+      if (subjectPersons[f] || /^\p{Lu}/u.test(first)) return finite(at + 2);
+      if (/^(?:der|die|das|den|dem)$/u.test(f)) return finite(at + 3);
+      return false;
+    }
     const NO_WEAK_PAST_LABEL = new Set([...modalLemmas, "möchten", "haben", "sein", "werden"]);
     // An exclamatory wish (#15, advisor 06.11): in the verb's part wenn, then nur / doch / bloß before the verb, and the part ends
     // with «!» after it (wenn mir's nur gruselte!, Wenn es mir nur gruselte!).
@@ -12958,7 +12976,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // after direct speech (»…?« fragte der Vater; a reader sentence starting «fragte der Vater») is the
       // speech tag, an indicative (to-do 19.10, 2.1, R-kafka-13).
       const speechTag = /^\p{Ll}/u.test(sentence.slice(start)) && /(?:^|[«»“”"‚‘’]\s*,?\s*)$/u.test(sentence.slice(0, start));
-      if (clauseInitial(sentence, start) && !speechTag) return false;
+      // (#22 (в), advisor 08.11, answer 3: a question with the weak -te form first — Wohnten Sie dort? — is Präteritum; the other
+      // signs of its part still count)
+      const question = /^\p{L}*te(?:st|n|t)?(?![\p{L}])/u.test(sentence.slice(start)) && (/[.!?]/u.exec(sentence.slice(start)) || [""])[0] === "?";
+      if (clauseInitial(sentence, start) && !speechTag && !question) return "doubt";
       // als + verb: als wohnte er hier.
       if (/(?:^|[^\p{L}])als[^\p{L}]*$/iu.test(sentence.slice(0, start))) return false;
       // Before a noun after a determiner, a number, a verb or a determiner + adverb the
@@ -12977,7 +12998,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         /^(?:ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|seine\p{L}*|ihre\p{L}*|unser\p{L}*|eure\p{L}*)$/u.test(prev) &&
         /^\s*,/u.test(sentence.slice(words[at].index + words[at][0].length)))) return false;
       // A capitalised spelling inside the sentence is a noun (das Verlangte).
-      if (/^\p{Lu}/u.test(words[at][0]) && (next && /^\p{Lu}/u.test(next) || !clauseInitial(sentence, start))) return false;
+      // (#22 (в) answer 3: the polite Sie / Ihr after a verb opening a question is no noun — Wohnten Sie dort?)
+      if (/^\p{Lu}/u.test(words[at][0]) && (next && /^\p{Lu}/u.test(next) && !/^(?:Sie|Ihr|Ihnen)$/u.test(next) || !clauseInitial(sentence, start))) return false;
       if (next && /^\p{Lu}/u.test(next) && gap(words[at], words[at + 1])) {
         if (gap(words[at - 1], words[at]) && ((verbAnalyses.get(prev) || []).some(r => r.kind === "finite") || prepositions.has(prev) || DET.test(prev) ||
           /^\p{Ll}/u.test(words[at - 1][0]) && DET.test(prev2) && gap(words[at - 2], words[at - 1]))) return false;
@@ -13023,7 +13045,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         DET.test(norm(opener)) && /^\p{Lu}/u.test(second);
       // (the participle counts here — mir gesagt hat, ihr gefielen —, a part right after a comma)
       const afterComma = lo > 0 && /^\s*,\s*$/u.test(sentence.slice(words[lo - 1].index + words[lo - 1][0].length, words[lo].index));
-      if (afterComma && at > lo && subjectFirst && (() => { const p0 = partAt(lo - 1, -1); for (let j = lo - 1; j >= p0; j--) if (REPORTING.test(norm(words[j][0])) && !(/^\p{Lu}/u.test(words[j][0]) && !clauseInitial(sentence, words[j].index))) return true; return false; })()) return false;
+      if (afterComma && at > lo && subjectFirst && (() => { const p0 = partAt(lo - 1, -1); for (let j = lo - 1; j >= p0; j--) if (REPORTING.test(norm(words[j][0])) && !(/^\p{Lu}/u.test(words[j][0]) && !clauseInitial(sentence, words[j].index))) return true; return false; })()) return "doubt";
+      const loOwn = lo, hiOwn = hi;
       if (reported) { lo = 0; hi = words.length - 1; }
       let lo2 = lo, hi2 = hi;
       if (lo > 0) { const s0 = partAt(lo - 1, -1); if (COND.test(norm(words[s0][0]))) lo2 = s0; }
@@ -13039,19 +13062,77 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // part before it — Ich wäre froh, er spielte mit; Es wäre gut, wir arbeiteten mehr)
         else if (/^\s*,\s*$/u.test(edge) && at === lo + 1 && DAMIT_SUBJECT.test(norm(words[lo][0]))) lo2 = Math.min(lo2, partAt(lo - 1, -1));
       }
+      // (#22 (в) item 1, advisor 08.11, claude/TE_REMAINDER_COUNT_2026-11-08_RU.md: wenn / falls / sofern / ob alone are no Konjunktiv
+      // sign — wenn es stürmte und regnete, ob Filch folgte are Präteritum; they count together with another sign anywhere in the
+      // sentence — wäre, hätte, würde, a form that is only Konjunktiv II: Was würden die Dursleys sagen, wenn er … auftauchte? —
+      // and als ob counts by itself)
+      const CONDITIONAL_SIGN = /^(?:wenn|falls|sofern|ob)$/u;
+      const otherSign = (k, m) => {
+        const w = norm(m[0]);
+        if (k === at || /^\p{Lu}/u.test(m[0]) && !clauseInitial(sentence, m.index) || CONDITIONAL_SIGN.test(w)) return false;
+        if (/^wünscht/u.test(w)) return wishWuenschte(sentence, m.index);
+        if (KONJUNKTIV_SIGNALS.test(w)) return true;
+        const finite = (verbAnalyses.get(w) || []).filter(r => r.kind === "finite" && !(r.tense === "Konjunktiv I" && MODAL_STEMS[norm(r.base)]));
+        return finite.length > 0 && finite.every(r => ["Konjunktiv II","Konjunktiv I"].includes(r.tense));
+      };
+      // (#22 (в), advisor 08.11, answer 2: a wenn / falls / sofern part and the main part it belongs to, with a form that is only
+      // Konjunktiv II in one of them — hätte, wäre, würde, käme — is the Konjunktiv II pair: Wenn er mehr arbeitete, hätte er Geld;
+      // Wenn er käme, freute ich mich — «Konjunktiv II», not the double label)
+      const STRONG_KONJ2 = /^(?:würde\p{L}*|hätte\p{L}*|hätt|wäre\p{L}*|wär|könnte\p{L}*|müsste\p{L}*|müßte\p{L}*|dürfte\p{L}*|wüsste\p{L}*|wüßte\p{L}*)$/u;
+      const strongKonj2 = k => { const m = words[k], w = norm(m[0]);
+        if (k === at || /^\p{Lu}/u.test(m[0]) && !clauseInitial(sentence, m.index)) return false;
+        if (STRONG_KONJ2.test(w)) return true;
+        const finite = (verbAnalyses.get(w) || []).filter(r => r.kind === "finite");
+        return finite.length > 0 && finite.every(r => r.tense === "Konjunktiv II"); };
+      const pairCond = k => { const w = norm(words[k][0]); return /^(?:wenn|falls|sofern)$/u.test(w) &&
+        !(w === "wenn" && k > 0 && /^(?:wie|als)$/u.test(norm(words[k - 1][0]))); };
+      const range = (a, b) => Array.from({length: Math.max(0, b - a + 1)}, (_, i) => a + i);
+      {
+        // (books check 08.11: only a comma joins the pair — not a quote or a dash: »…, wenn Sie … gesessen hätten«, sagte Professor
+        // McGonagall; Er machte ihr keinen Vorwurf – wenn er …; the main part after the wenn part opens with its finite verb or so / da /
+        // dann — Wenn …, hätte er …; not wenn sie meinten, sie hätten es gewiß; reported speech keeps the doubt — er wusste, wenn er …
+        // jammerte, würde ihm …)
+        const commaGap = (a, b) => /^\s*,\s*$/u.test(sentence.slice(words[a].index + words[a][0].length, words[b].index));
+        const opensMain = k => { const w = norm(words[k][0]);
+          return /^(?:so|da|dann)$/u.test(w) || (verbAnalyses.get(w) || []).some(r => r.kind === "finite") || STRONG_KONJ2.test(w); };
+        let pair = null;
+        // reported: only the part of the verb of saying itself makes the pair — Was würden die Dursleys sagen, wenn er … auftauchte?
+        if (reported) { if (range(loOwn, hiOwn).some(pairCond) && loOwn > 0) pair = range(partAt(loOwn - 1, -1), loOwn - 1); }
+        else if (range(lo, hi).some(pairCond)) {
+          // the own part is the conditional part: the main part is the next part (Wenn …, hätte er …), else the one before it
+          if (hi + 1 < words.length && !pairCond(hi + 1)) { if (commaGap(hi, hi + 1) && opensMain(hi + 1)) pair = [...range(lo, hi), ...range(hi + 1, partAt(hi + 1, 1))]; }
+          else if (lo > 0 && commaGap(lo - 1, lo)) pair = [...range(partAt(lo - 1, -1), lo - 1), ...range(lo, hi)];
+        } else {
+          // the own part is the main part: a conditional part right before or after it (Wenn er käme, freute ich mich; Ich freute mich, wenn er käme)
+          const s0 = lo > 0 ? partAt(lo - 1, -1) : -1;
+          if (s0 >= 0 && pairCond(s0) && commaGap(lo - 1, lo) && opensMain(lo)) pair = [...range(s0, lo - 1), ...range(lo, hi)];
+          // (not an inserted tag opening with its verb — Er hätte …, vermutete er, wenn Percy … hätte)
+          else if (hi + 1 < words.length && pairCond(hi + 1) && commaGap(hi, hi + 1) && !(lo > 0 && at === lo)) pair = [...range(lo, hi), ...range(hi + 1, partAt(hi + 1, 1))];
+        }
+        if (pair && pair.some(strongKonj2)) return "konj";
+      }
+      let conditional = false;
       for (const [k, m] of words.entries()) {
         if (k < lo2 || k > hi2) continue;
         const w = norm(m[0]);
         // C14 step 1: a capital inside the sentence is a noun, not a Konjunktiv form (Schritte — schritte of schreiten, Wänden).
         if (/^\p{Lu}/u.test(m[0]) && !clauseInitial(sentence, m.index)) continue;
-        if (KONJUNKTIV_SIGNALS.test(w)) return false;
+        if (CONDITIONAL_SIGN.test(w)) {
+          if (w === "ob" && k > 0 && norm(words[k - 1][0]) === "als" && /^\s*$/u.test(sentence.slice(words[k - 1].index + words[k - 1][0].length, m.index))) return "doubt";
+          // (books check 08.11: wie wenn is als ob — wie wenn sie nach einem sehr langen Tag zu Bett gingen)
+          if (w === "wenn" && k > 0 && norm(words[k - 1][0]) === "wie" && /^\s*$/u.test(sentence.slice(words[k - 1].index + words[k - 1][0].length, m.index))) return "doubt";
+          conditional = true; continue;
+        }
+        if (/^wünscht/u.test(w)) { if (wishWuenschte(sentence, m.index)) return "doubt"; continue; }
+        if (KONJUNKTIV_SIGNALS.test(w)) return "doubt";
         // damit + subject opens a purpose clause (damit sie für ihn beteten); damit + verb is an adverb (damit packte er).
-        if (w === "damit" && words[k + 1] && (DAMIT_SUBJECT.test(norm(words[k + 1][0])) || DET.test(norm(words[k + 1][0])))) return false;
+        if (w === "damit" && words[k + 1] && (DAMIT_SUBJECT.test(norm(words[k + 1][0])) || DET.test(norm(words[k + 1][0])))) return "doubt";
         // (L23, books check 24.10: the derived modal Konjunktiv I — als könne sie — is no sign for the weak -te form of
         // another clause: Sie baute sich vor den dreien auf …, … damit rechnete, Voldemort könne hereinplatzen)
         const finite = (verbAnalyses.get(w) || []).filter(r => r.kind === "finite" && !(r.tense === "Konjunktiv I" && MODAL_STEMS[norm(r.base)]));
-        if (finite.length && finite.every(r => ["Konjunktiv II","Konjunktiv I"].includes(r.tense))) return false;
+        if (finite.length && finite.every(r => ["Konjunktiv II","Konjunktiv I"].includes(r.tense))) return "doubt";
       }
+      if (conditional && words.some((m, k) => otherSign(k, m))) return "doubt";
       return true;
     }
     function formFeatures(word, candidate, resolution, context) {
@@ -13093,7 +13174,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (at >= 0 && konj1Sign(sentence, tokens, at)) return {tense:"Konjunktiv I", ...(konj1AsIf(tokens, at) ? {} : {reportedSpeech:true})};
         }
         for (const row of resolution.inflections || []) {
-          if (canonicalPos(row.pos) !== "Verb" || norm(row.lemma).replace(/^sich\s+/u, "") !== base || norm(row.form) !== form) continue;
+          // (#22 (в) item 2, advisor 08.11: a separated verb only the external dictionary knows — faltete … zusammen, wischte … ab —
+          // reads the external rows of its simple verb's clicked form: faltete of falten, Präteritum / Konjunktiv II)
+          const rowLemma = norm(row.lemma).replace(/^sich\s+/u, "");
+          if (canonicalPos(row.pos) !== "Verb" || rowLemma !== base && !(simple && rowLemma === simple) || norm(row.form) !== form) continue;
           const mood = String(row.mood || ""), tense = String(row.tense || "");
           // (#15, tense check 05.11: the external «subjunctive, past» row and a subjunctive row tagged subjunctive-ii are
           // Konjunktiv II — käme, wüsste, bliebe; as the analysis rows read them; not a two-letter form — et, a broken row of amtshandeln)
@@ -13135,7 +13219,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // Konjunktiv II: wenn mir's nur gruselte!)
           // (a weak -te form is its Konjunktiv II too, also when only the Präteritum row is listed — gruseln of the external dictionary)
           if ((labels.has("Konjunktiv II") || /te(?:st|n|t)?$/u.test(weakForm)) && wishClause(String(context?.sentence || ""), sources.get("Präteritum")?.start ?? context?.tokenOffset)) return {tense:"Konjunktiv II"};
-          return weakPastIndicative(base, sources.get("Präteritum")?.start ?? context?.tokenOffset, context) ? {tense:"Präteritum"} : null;
+          // (#22 (в) item 4, advisor 08.11: als right before the finite verb is als ob — als hoffte sie, als regneten sie: Konjunktiv II)
+          { const sentence = String(context?.sentence || ""), at = sources.get("Präteritum")?.start ?? context?.tokenOffset;
+            if (Number.isInteger(at) && !NO_WEAK_PAST_LABEL.has(base) && /(?:^|[^\p{L}])als\s+$/iu.test(sentence.slice(0, at))) return {tense:"Konjunktiv II"};
+            if (Number.isInteger(at) && base === "wünschen" && wishWuenschte(sentence, at)) return {tense:"Konjunktiv II"}; }
+          // (#22 (в) item 5, advisor 08.11, rule 1.5: where a Konjunktiv sign leaves the doubt — a sign in the part, reported speech, the
+          // verb opening its part — the double label «Präteritum / Konjunktiv II»; an attributive spelling or a modal stays without a tense)
+          const past = weakPastIndicative(base, sources.get("Präteritum")?.start ?? context?.tokenOffset, context);
+          return past === true ? {tense:"Präteritum"} : past === "doubt" ? {tense:"Präteritum / Konjunktiv II"} : past === "konj" ? {tense:"Konjunktiv II"} : null;
         }
         // Imperativ (advisor 29.10): the verb opens its part of the sentence (a quote after a comma opens direct speech: »…«, sagte
         // der Esel, »zieh lieber …), no subject pronoun follows it, no participle reading, no «?» at the end — (1) the own card lists
