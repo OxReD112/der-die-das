@@ -1558,20 +1558,6 @@ body.library-screen .data-sources button:active:not(:disabled) {
     serif;
   overflow-wrap: anywhere;
 }
-.vocabulary-passage {
-  display: block;
-  width: calc(100% - 24px);
-  margin-left: 24px;
-  min-height: 22px;
-  padding: 1px 0;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  text-align: right;
-  font:
-    12px/1.4 var(--font);
-  cursor: pointer;
-}
 .vocabulary-empty {
   color: var(--muted);
   font:
@@ -2871,7 +2857,6 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 /* the lines under a word start under the word again (mark 22 + gap 10) */
 .vocabulary-row p { margin-left: 32px; }
 .vocabulary-row blockquote { margin-left: 36px; }
-.vocabulary-passage { width: calc(100% - 32px); margin-left: 32px; }
 
 /* 08.11 (Alena): ⓘ — first which files work, then where the books are kept. */
 .storage-note { display: grid; gap: 8px; color: var(--muted); font-size: 14px; line-height: 1.45; padding: 14px 16px; border-radius: 18px; }
@@ -2908,3 +2893,46 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 .reading-view .vocabulary-toggle.has-words { color: var(--text); }
 .reading-view .vocabulary-toggle.has-words svg { fill: currentColor; }
 .reading-body:has(#vocabulary-dialog[open]) .vocabulary-toggle { color: var(--text); opacity: 0.4; }
+
+/* 08.11 (Alena): Meine Wörter — a row is the word, its part of speech and its meaning, with › at the right; the round
+   mark chooses the word, a tap anywhere else opens its dictionary card on a second screen inside the same window:
+   the list slides away to the left, the card comes in from the right; «‹ Meine Wörter» stays on top (the card scrolls
+   under it, fading out), a swipe to the right goes back. `translate`, not `transform` — the drawer's own opening
+   animation moves the list with `transform`. */
+.vocabulary-row { position: relative; padding: 10px 26px 12px 0; cursor: pointer; }
+.vocabulary-row-heading { gap: 10px; }
+.vocabulary-row-heading .vocabulary-row-check { display: flex; flex: none; min-height: 0; margin: -11px; padding: 11px; cursor: pointer; }
+.vocabulary-row-open {
+  flex: 1; min-width: 0; min-height: 32px; padding: 0; border: 0; background: none;
+  color: var(--text); text-align: left; font: 600 16px/1.3 var(--font); overflow-wrap: anywhere; cursor: pointer;
+}
+.vocabulary-row-arrow { position: absolute; right: 4px; top: 50%; margin-top: -7px; color: var(--muted); }
+.vocabulary-dialog .reader-drawer-content { transition: translate 0.38s cubic-bezier(0.22, 1, 0.36, 1); }
+.vocabulary-dialog.is-detail .reader-drawer-content { translate: calc(-100% - 32px) 0; }
+.vocabulary-detail {
+  position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; box-sizing: border-box;
+  padding: inherit; padding-bottom: 0;
+  translate: calc(100% + 8px) 0; transition: translate 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vocabulary-dialog.is-detail .vocabulary-detail { translate: 0 0; }
+.vocabulary-detail[hidden] { display: none; }
+.vocabulary-detail-bar { flex: none; display: flex; align-items: center; min-height: 44px; margin-top: -6px; }
+.vocabulary-back {
+  display: inline-flex; align-items: center; gap: 9px; min-height: 44px; margin-left: -2px; padding: 0 12px 0 2px;
+  border: 0; background: none; color: var(--text); font: 500 16px/1.2 var(--font); cursor: pointer;
+}
+.vocabulary-detail-scroll {
+  flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 18px 0 calc(env(safe-area-inset-bottom) + 40px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18px);
+  mask-image: linear-gradient(to bottom, transparent, #000 18px);
+}
+.vocabulary-detail-card .dictionary-headword { margin-right: 0; }
+.vocabulary-detail-passage {
+  display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 52px;
+  margin-top: 18px; padding: 0; border: 0; border-top: 1px solid var(--hairline); background: none;
+  color: var(--text); font: 500 15px/1.3 var(--font); text-align: left; cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vocabulary-dialog .reader-drawer-content, .vocabulary-detail { transition: none; }
+}

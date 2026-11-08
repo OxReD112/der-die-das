@@ -17,7 +17,7 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261108-count-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261108-words-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261108-shelf-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
@@ -368,13 +368,27 @@
             id="vocabulary-continue"
             href="../wortschatz/index.html?v=20261007-adjadv-1"
             hidden
-            >Continue in Wortschatz <span class="ui-chev" aria-hidden="true"></span></a
+            >Weiter im Wortschatz <span class="ui-chev" aria-hidden="true"></span></a
           >
           <label class="vocabulary-manual-copy" id="vocabulary-manual-copy" hidden
-            >Copy this vocabulary<textarea id="vocabulary-copy-text" readonly rows="4"></textarea>
+            >Zum Kopieren markieren<textarea id="vocabulary-copy-text" readonly rows="4"></textarea>
           </label>
         </div>
       </div>
+      <!-- 08.11 (Alena): the second screen of Meine Wörter — a word's dictionary card slides in from the right -->
+      <section class="vocabulary-detail" id="vocabulary-detail" aria-label="Wörterbuch" hidden inert>
+        <div class="vocabulary-detail-bar">
+          <button class="vocabulary-back" id="vocabulary-back" type="button">
+            <span class="ui-chev ui-chev-back" aria-hidden="true"></span>Meine Wörter
+          </button>
+        </div>
+        <div class="vocabulary-detail-scroll" id="vocabulary-detail-scroll">
+          <div class="vocabulary-detail-card" id="vocabulary-detail-card"></div>
+          <button class="vocabulary-detail-passage" id="vocabulary-detail-passage" type="button">
+            Im Text zeigen <span class="ui-chev" aria-hidden="true"></span>
+          </button>
+        </div>
+      </section>
     </dialog>
     <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
       <button
@@ -452,14 +466,14 @@
     <script src="../components/deutsch-window-v1.js?v=3"></script>
     <script src="../wortschatz/collection-window.js?v=20261106-chev-1"></script>
     <script src="reader/vocabulary-actions.js?v=20261007-adjadv-1"></script>
-    <script src="reader/vocabulary-panel.js?v=20261108-count-1"></script>
+    <script src="reader/vocabulary-panel.js?v=20261108-words-1"></script>
     <script src="resolver/meaning-display.js?v=20261108-passive-mood-1"></script>
     <script src="reader/reader-pagination.js?v=20261011-finish-position-1"></script>
     <script src="reader/reader-text-settings.js?v=1"></script>
     <script src="reader/pronoun-reference.js?v=20261024-lowercase-1"></script>
     <script src="reader/meaning-thanks.js?v=1"></script>
     <script src="reader/bookshelf.js?v=20261108-list-1"></script>
-    <script src="reader/bibliothek.js?v=20261108-note-2"></script>
-    <div class="version-mark" aria-hidden="true">v50</div>
+    <script src="reader/bibliothek.js?v=20261108-words-1"></script>
+    <div class="version-mark" aria-hidden="true">v51</div>
   </body>
 </html>

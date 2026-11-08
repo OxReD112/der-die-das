@@ -147,6 +147,8 @@
       await ensureCardDetails(records.filter(r => r.dictionaryId != null).map(r => resolver.entry?.(r.dictionaryId)).filter(Boolean));
       return Object.create(resolver, {entry:{value:id => withDetails(resolver.entry(id))}});
     },
+    // 08.11 (Alena): a tap on a word of Meine Wörter — the same card as «Словарная справка», on the list's second screen
+    renderCard:(item, root, form) => renderDictionaryCard(item, {root, form}),
     goTo:async occurrence => {
       if (!currentBook) return;
       if (hasChapters(currentBook)) {
@@ -1315,9 +1317,12 @@
     const ru = locale() === "ru", status = $("dictionary-pager-status");
     if (status) status.textContent = `${selectedWord}: ${ru ? `часть ${index + 1} из ${detailParts.length}` : `part ${index + 1} of ${detailParts.length}`} — ${detailParts[index].word}`;
   }
-  function renderDictionaryCard(item) {
+  // 08.11 (Alena): Meine Wörter shows the same card on its second screen — `root` there, the word as it stood in the
+  // book (its form is marked in the tables), no reading of the sentence and no «＋ Zum Wortschatz» (the list adds words).
+  function renderDictionaryCard(item, list = null) {
     item = withDetails(item);
-    const root = $("dictionary-card");
+    const root = list?.root || $("dictionary-card");
+    const selectedWord = list ? list.form || "" : selectedWordNow(), selectedResolution = list ? null : selectedResolutionNow();
     root.replaceChildren();
     delete root.dataset.pronounReference;
     // The pronoun reference is only for Pronomen cards; other excluded
@@ -1353,7 +1358,7 @@
         } else element.append(document.createTextNode(part));
       }
     };
-    const head = document.createElement("h2"); head.className = "dictionary-headword"; head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
+    const head = document.createElement("h2"); head.className = "dictionary-headword"; if (!list) head.id = "sheet-word"; head.textContent = `${item.article ? item.article + " " : ""}${item.word}`; root.append(head);
     addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
     addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
@@ -1459,10 +1464,12 @@
       const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || ""; block.append(tr); root.append(block);
     }
     // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
-    if (item.type === "Ausdruck") return;
+    if (item.type === "Ausdruck" || list) return;
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Zum Wortschatz"; // German, as in Wörterbuch (user 27.10.2026)
     button.addEventListener("click", () => addToWortschatz(item)); root.append(button);
   }
+  function selectedWordNow() { return selectedWord; }
+  function selectedResolutionNow() { return selectedResolution; }
   function addToWortschatz(item) {
     const form = window.WortschatzCollectionWindow;
     if (!form) { showToast("The word form is unavailable. Please reload and try again."); return; }

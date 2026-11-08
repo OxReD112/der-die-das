@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
-  function create({ getBook, getRange, getResolver, withCardDetails, goTo, language, onChanged }) {
+  function create({ getBook, getRange, getResolver, withCardDetails, renderCard, goTo, language, onChanged }) {
     const dialog = $("vocabulary-dialog"),
       list = $("vocabulary-list"),
       selected = new Set();
@@ -40,20 +40,22 @@
       closing = false;
     }
     const availability = record => window.BibliothekVocabularyActions.availability(record, currentResolver);
-    const issueLabel = error =>
-      `${error.base || "Unknown word"}${error.dictionaryId ? " (" + error.dictionaryId + ")" : ""}: ${error.code === "DICTIONARY_ENTRY_EXCLUDED" ? "excluded from Wortschatz" : error.code === "DICTIONARY_ENTRY_MISSING" ? "dictionary entry missing" : "dictionary example needs correction"}`;
+    // 08.11 (Alena): no record numbers and no English in the list — a word without a learning card only says so.
+    const NO_CARD = "ohne Lernkarte";
+    const PARTS = { adj: "Adjektiv", adv: "Adverb", noun: "Nomen", verb: "Verb", conj: "Konjunktion", pron: "Pronomen",
+      prep: "Präposition", preposition: "Präposition", article: "Artikel", art: "Artikel", num: "Zahlwort", numeral: "Zahlwort",
+      particle: "Partikel", expression: "Ausdruck", expr: "Ausdruck", interj: "Interjektion" };
+    const partOfSpeech = pos => PARTS[pos] || PARTS[String(pos || "").toLowerCase()] || pos;
+    const wordOf = record => {
+      const item = record.dictionaryId != null ? currentResolver?.entry?.(record.dictionaryId) : null;
+      return `${item?.article ? item.article + " " : /^(?:der|die|das)$/u.test(record.article || "") ? record.article + " " : ""}${record.lemma || record.occurrences[0].form}`;
+    };
     function selection() {
       const locked = busy;
       const n = selected.size,
         chosenEntries = entries.filter(e => selected.has(e.key)),
         eligible = chosenEntries.filter(e => availability(e).available).length;
-      const issues = chosenEntries
-        .map(availability)
-        .filter(result => !result.available)
-        .map(result => issueLabel(result.error));
-      $("vocabulary-selection").textContent = n
-        ? `${n} selected · ${eligible} with learning cards${issues.length ? " · " + issues.join("; ") : ""}`
-        : "";
+      $("vocabulary-selection").textContent = n ? `${n} ausgewählt · ${eligible} mit Lernkarte` : "";
       $("vocabulary-select-all").checked = entries.length > 0 && n === entries.length;
       $("vocabulary-select-all").indeterminate = n > 0 && n < entries.length;
       $("vocabulary-select-all").disabled = !entries.length || locked;
@@ -77,7 +79,7 @@
       list.scrollTop = 0;
       selection();
       $("vocabulary-empty").hidden = true;
-      $("vocabulary-status").textContent = "Loading vocabulary…";
+      $("vocabulary-status").textContent = "Wird geladen …";
       const range = $("vocabulary-scope").value === "book" ? null : getRange();
       $("vocabulary-subtitle").textContent =
         $("vocabulary-scope").value === "book" ? book.title : range?.title || book.title;
@@ -130,81 +132,147 @@
         selection();
 
         for (const record of entries) {
+          // 08.11 (Alena): a row is the word, its part of speech and its meaning; the round mark chooses it, a tap
+          // anywhere else opens its dictionary card on the second screen («Im Text zeigen» is there now).
           const row = text("section", "vocabulary-row", ""),
             heading = text("div", "vocabulary-row-heading", "");
+          const word = wordOf(record);
           const label = document.createElement("label"),
             check = document.createElement("input");
+          label.className = "vocabulary-row-check";
           check.type = "checkbox";
           check.value = record.key;
-          const item = record.dictionaryId != null ? resolver.entry?.(record.dictionaryId) : null;
-          label.append(
-            check,
-            document.createTextNode(
-              `${item?.article ? item.article + " " : /^(?:der|die|das)$/u.test(record.article || "") ? record.article + " " : ""}${record.lemma || record.occurrences[0].form}`
-            )
-          );
+          check.setAttribute("aria-label", word);
+          label.append(check);
           check.addEventListener("change", () => {
             if (check.checked) selected.add(record.key);
             else selected.delete(record.key);
             selection();
           });
-          heading.append(label);
+          const opener = text("button", "vocabulary-row-open", word);
+          opener.type = "button";
+          opener.addEventListener("click", () => showDetail(record, opener));
+          heading.append(label, opener);
           row.append(heading);
           const translation =
             language() === "ru"
               ? record.translation.ru || record.translation.en
               : record.translation.en || record.translation.ru;
+          const withCard = record.source === "main" && availability(record).available;
           row.append(
-            text(
-              "p",
-              "vocabulary-availability",
-              [
-                { adj: "Adjektiv", adv: "Adverb", noun: "Nomen", verb: "Verb", conj: "Konjunktion", pron: "Pronomen" }[
-                  record.pos
-                ] || record.pos,
-                record.source === "main"
-                  ? availability(record).available
-                    ? "Lernkarte verfügbar"
-                    : issueLabel(availability(record).error)
-                  : record.source === "fallback"
-                    ? "Nur Übersetzung"
-                    : "Saved word"
-              ]
-                .filter(Boolean)
-                .join(" · ")
-            )
+            text("p", "vocabulary-availability", [partOfSpeech(record.pos), withCard ? "" : NO_CARD].filter(Boolean).join(" · "))
           );
-          row.append(text("p", "", translation || "Meaning not available yet"));
-          const occurrence = record.occurrences[0];
-          const link = text("button", "vocabulary-passage", `${occurrence.form} · Im Text zeigen ›`);
-          link.type = "button";
-          link.addEventListener("click", async () => {
-            if (closing || navigating) return;
-            link.disabled = true;
-            navigating = true;
-            try {
-              let focus;
-              await close(async () => {
-                focus = await goTo(occurrence);
-              });
-              focus?.();
-            } catch (error) {
-              console.warn("Could not open vocabulary passage", error);
-            } finally {
-              navigating = false;
-            }
+          row.append(text("p", "", translation || "Bedeutung noch unbekannt"));
+          const arrow = text("span", "ui-chev ui-chev-lone vocabulary-row-arrow", "");
+          arrow.setAttribute("aria-hidden", "true");
+          row.append(arrow);
+          row.addEventListener("click", event => {
+            if (!event.target.closest("label, button") && !getSelection()?.toString()) showDetail(record, opener);
           });
-          row.append(link);
           list.append(row);
         }
         $("vocabulary-status").textContent = `${entries.length} ${entries.length === 1 ? "Wort" : "Wörter"}`;
       } catch (error) {
         if (request === run)
-          $("vocabulary-status").textContent = "Vocabulary could not be loaded. Reopen the list to try again.";
+          $("vocabulary-status").textContent = "Wörter konnten nicht geladen werden. Bitte noch einmal öffnen.";
       }
+    }
+    // 08.11 (Alena): the second screen — the list slides away to the left, the word's card comes in from the right
+    // (the same card as «Словарная справка» in the book); «‹ Meine Wörter» on top stays put while the card scrolls.
+    const detail = $("vocabulary-detail"),
+      drawer = dialog.querySelector(".reader-drawer-content");
+    let detailRecord = null,
+      detailTrigger = null,
+      detailTimer = 0;
+    const still = () => matchMedia("(prefers-reduced-motion:reduce)").matches;
+    function showDetail(record, from) {
+      if (busy || closing || navigating) return;
+      detailRecord = record;
+      detailTrigger = from;
+      const card = $("vocabulary-detail-card"),
+        occurrence = record.occurrences[0],
+        item = record.dictionaryId != null ? currentResolver?.entry?.(record.dictionaryId) : null;
+      card.replaceChildren();
+      if (item && renderCard) renderCard(item, card, occurrence.form);
+      else {
+        // a word the dictionary has no card for: what the list knows of it
+        const translation =
+          language() === "ru" ? record.translation.ru || record.translation.en : record.translation.en || record.translation.ru;
+        card.append(
+          text("h2", "dictionary-headword", wordOf(record)),
+          ...(record.pos ? [text("p", "dictionary-pos", partOfSpeech(record.pos))] : []),
+          text("p", "dictionary-translation", translation || "Bedeutung noch unbekannt")
+        );
+      }
+      $("vocabulary-detail-scroll").scrollTop = 0;
+      clearTimeout(detailTimer);
+      detail.hidden = false;
+      detail.inert = false;
+      drawer.inert = true;
+      void detail.offsetWidth; // the start position is drawn before the slide
+      dialog.classList.add("is-detail");
+      $("vocabulary-back").focus({ preventScroll: true });
+    }
+    function hideDetail(instant = false) {
+      if (detail.hidden) return;
+      dialog.classList.remove("is-detail");
+      detail.inert = true;
+      drawer.inert = false;
+      const done = () => {
+        if (!dialog.classList.contains("is-detail")) detail.hidden = true;
+      };
+      clearTimeout(detailTimer);
+      if (instant || still()) done();
+      else detailTimer = setTimeout(done, 450);
+      if (!instant && detailTrigger?.isConnected) detailTrigger.focus({ preventScroll: true });
+      detailRecord = null;
+    }
+    $("vocabulary-back").addEventListener("click", () => hideDetail());
+    $("vocabulary-detail-passage").addEventListener("click", async () => {
+      const occurrence = detailRecord?.occurrences[0];
+      if (!occurrence || closing || navigating) return;
+      navigating = true;
+      try {
+        let focus;
+        await close(async () => {
+          focus = await goTo(occurrence);
+        });
+        focus?.();
+      } catch (error) {
+        console.warn("Could not open vocabulary passage", error);
+      } finally {
+        navigating = false;
+      }
+    });
+    // a swipe to the right goes back, as on the iPhone — not on a table that scrolls sideways itself
+    {
+      let touch = null;
+      const sideways = target => {
+        for (let el = target; el && el !== detail; el = el.parentElement)
+          if (el.scrollWidth > el.clientWidth + 1 && getComputedStyle(el).overflowX !== "visible") return true;
+        return false;
+      };
+      detail.addEventListener(
+        "touchstart",
+        event => {
+          touch =
+            event.touches.length === 1 && !sideways(event.target)
+              ? { x: event.touches[0].clientX, y: event.touches[0].clientY }
+              : null;
+        },
+        { passive: true }
+      );
+      detail.addEventListener("touchend", event => {
+        if (!touch) return;
+        const dx = event.changedTouches[0].clientX - touch.x,
+          dy = event.changedTouches[0].clientY - touch.y;
+        touch = null;
+        if (dx > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) hideDetail();
+      });
     }
     function open(from) {
       if (!getBook()) return;
+      hideDetail(true);
 
       trigger = from || $("vocabulary-toggle");
       selected.clear();
@@ -241,8 +309,11 @@
           const review = text(
             "button",
             "chapter-vocabulary-review",
-            `You marked ${n} ${n === 1 ? "word" : "words"} · Review vocabulary ›`
+            `${n} ${n === 1 ? "Wort" : "Wörter"} markiert · Ansehen `
           );
+          const chev = text("span", "ui-chev", "");
+          chev.setAttribute("aria-hidden", "true");
+          review.append(chev);
           review.id = "chapter-vocabulary-review";
           review.type = "button";
           review.addEventListener("click", () => open(review));
@@ -272,13 +343,13 @@
         if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
         await navigator.clipboard.writeText(value);
         $("vocabulary-manual-copy").hidden = true;
-        $("vocabulary-action-status").textContent = "Vocabulary copied.";
+        $("vocabulary-action-status").textContent = "Kopiert.";
       } catch (error) {
         $("vocabulary-manual-copy").hidden = false;
         $("vocabulary-copy-text").value = value;
         $("vocabulary-copy-text").focus();
         $("vocabulary-copy-text").select();
-        $("vocabulary-action-status").textContent = "Clipboard unavailable. Select and copy the text below.";
+        $("vocabulary-action-status").textContent = "Kopieren ging nicht. Bitte den Text unten markieren und kopieren.";
       } finally {
         busy = false;
         selection();
@@ -291,20 +362,19 @@
       $("vocabulary-continue").hidden = true;
       try {
         const result = window.BibliothekVocabularyActions.add(chosen(), currentResolver, getBook().title);
-        const details = [...result.excluded, ...result.problems].map(issueLabel).join("; ");
         const unavailable = result.unavailable.length
-          ? ` ${result.unavailable.length} without learning cards kept in vocabulary.`
+          ? ` ${result.unavailable.length} ${NO_CARD} bleiben in Meine Wörter.`
           : "";
         if (result.pending) {
           $("vocabulary-action-status").textContent =
-            `${result.cards.length} words ready to review.${unavailable}${details ? " " + details : ""}`;
+            `${result.cards.length} ${result.cards.length === 1 ? "Wort" : "Wörter"} bereit.${unavailable}`;
           $("vocabulary-continue").hidden = false;
           location.assign($("vocabulary-continue").href);
         } else
           $("vocabulary-action-status").textContent =
-            `No learning cards available.${unavailable}${details ? " " + details : ""}`;
+            `Keine Lernkarten.${unavailable}`;
       } catch (error) {
-        $("vocabulary-action-status").textContent = "Words could not be added. Please try again.";
+        $("vocabulary-action-status").textContent = "Wörter konnten nicht hinzugefügt werden. Bitte noch einmal versuchen.";
       } finally {
         busy = false;
         selection();
@@ -313,12 +383,14 @@
     dialog.addEventListener("cancel", event => {
       event.preventDefault();
       if (busy) return;
-      close();
+      if (!detail.hidden) hideDetail();
+      else close();
     });
     $("vocabulary-toggle").addEventListener("click", () => open($("vocabulary-toggle")));
     $("vocabulary-close").addEventListener("click", close);
     dialog.addEventListener("close", () => {
       run++;
+      hideDetail(true);
       if (!navigating && trigger?.isConnected) trigger.focus({ preventScroll: true });
     });
     dialog.addEventListener("click", event => {
