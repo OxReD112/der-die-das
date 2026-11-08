@@ -2753,3 +2753,15 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
 .vocabulary-dialog input[type="checkbox"]:indeterminate { border-color: var(--text); background: var(--text); }
 .paste-form input:focus,
 .paste-form textarea:focus { border-color: color-mix(in srgb, var(--text) 28%, transparent); }
+
+/* 08.11 (design chat, Alena 16.10 / 08.11): the reader's own colour — carmine ribbon = "your place in the book"
+   (the started book on the shelf, the current chapter in Inhalt — ribbon and title). Only for ribbons; mint stays the marked word. */
+:root { --ribbon: #e4475e; }
+[data-theme="light"] { --ribbon: #b0182b; }
+.contents-entry[aria-current]::before,
+.book-marker::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.08) 1px, transparent 2.5px), var(--ribbon); }
+.contents-entry[aria-current] > span:first-child { color: var(--ribbon); }
+.book-icon.is-completed .book-marker::before { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.08) 1px, transparent 2.5px), var(--secondary-text); }
+/* Inhalt like a book's contents: no rules between the lines, held by air */
+.contents-entry { border-bottom: 0; min-height: 46px; padding-top: 12px; padding-bottom: 12px; }
+.contents-entry[aria-current]::before { top: 8px; }
