@@ -135,7 +135,10 @@
     return {ms, parts: breakdown(win, t0, win.performance.now(), busy)};
   }
   async function closeCard(doc) {
-    doc.getElementById('popover-close')?.click();
+    // (08.11: the popover has no × any more — it closes by Esc or a tap outside, as the reader does it)
+    const close = doc.getElementById('popover-close');
+    if (close) close.click();
+    else doc.dispatchEvent(new (doc.defaultView.KeyboardEvent)('keydown', {key: 'Escape', bubbles: true}));
     await sleep(150);
   }
   async function nextPage(doc) {
@@ -216,7 +219,7 @@
   function report(r) {
     const ms = r.taps.map(t => t.ms).filter(x => x !== null);
     const lines = [
-      'Автотест чтения (bibliothek/autoread.html, v5)',
+      'Автотест чтения (bibliothek/autoread.html, v5.1)',
       `Дата: ${new Date(r.started).toLocaleString('ru-RU')}`,
       `Книга: ${r.book}${r.page ? ' · начало: ' + r.page : ''}`,
       `Задано: ${r.minutes} мин; прошло: ${(((r.ended || Date.now()) - r.started) / 60000).toFixed(1)} мин; состояние: ${r.state}`,
