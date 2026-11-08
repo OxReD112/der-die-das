@@ -11596,6 +11596,72 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const rest = list.filter(c => !keep.includes(c));
       return keepDecision(result,{...result,candidates:[keep[0],...rest],selected:keep[0],preferred:keep[0],status:'resolved',evidence:rule},{outcome:'selected',rule,reason:rule});
     }
+    // Advisor 08.11: ganz / gerade — our adjective and adverb cards of the same spelling in one window. Between a determiner and
+    // a noun — the adjective (eine gerade Linie); ganz right before a name or a noun without an article — «весь» (ganz Hogwarts,
+    // ganz Deutschland; not etwas ganz Besonderes — a noun made of an adjective); gerade closing its part after sein — «прямой»
+    // (Die Linie ist gerade.); otherwise the adverb («совсем», «как раз»). Where the spelling cannot tell — the window stays.
+    const TWIN_SIGNS = {ganz: 'bare-name', gerade: 'after-sein'};
+    const SEIN_FORMS = new Set(['bin','bist','ist','sind','seid','war','warst','waren','wart','sei','seien','wäre','wären','gewesen','sein']);
+    function adjectiveAdverbTwin(word, context, result) {
+      const list = result?.candidates || [], w = norm(word), sign = TWIN_SIGNS[w];
+      if (!sign || !result || result.status !== 'ambiguous' || !Number.isInteger(context?.tokenOffset)) return result;
+      const adj = list.filter(c => c.source === 'main' && c.pos === 'Adjektiv' && norm(c.lemma) === w);
+      const adv = list.filter(c => c.source === 'main' && c.pos === 'Adverb' && norm(c.lemma) === w);
+      if (adj.length !== 1 || adv.length !== 1) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'adjectiveAdverbTwin');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return result;
+      const gap = (a, b) => sentence.slice(tokens[a].index+tokens[a][0].length, tokens[b].index);
+      const plain = (a, b) => b < tokens.length && a >= 0 && /^\s+$/u.test(gap(a,b));
+      const next = plain(i,i+1) ? tokens[i+1][0] : '', prev = plain(i-1,i) ? tokens[i-1][0] : '';
+      const after = sentence.slice(tokens[i].index+tokens[i][0].length);
+      const capitalNext = /^\p{Lu}\p{Ll}/u.test(next), afterDeterminer = !!prev && FORM_DETERMINERS.test(prev);
+      let chosen = adv[0];
+      // gerade (an inflected form) between a determiner and a noun; ganz has no ending, so after a determiner it is the adverb
+      // (die ganz Hartgesottenen)
+      if (sign === 'after-sein' && afterDeterminer && capitalNext) chosen = adj[0];
+      // gerade before a capitalised word without a determiner: either (als gerade Linien) or (hab gerade Ronan gefragt) — a choice
+      else if (sign === 'after-sein' && capitalNext) return result;
+      // gerade before a preposition: «как раз» (gerade in diesem Moment) or «прямо» (ging gerade zum Bett, gerade auf den Kopf) — a choice
+      // gerade before a participle in -end, before und / oder, before a verb that makes something straight (gerade klopfen, biegen,
+      // setzen, halten …); ganz before swallowing (ganz hinuntergeschluckt — «целиком») — a choice
+      else if (sign === 'after-sein' && (/^\p{Ll}+end(e|en|er|em|es)?$/u.test(next) || /^(und|oder)$/iu.test(next) ||
+               /^(ge)?(bieg|bog|klopf|mach|setz|stell|halt|hielt|richt|leg|rück|zieh|zog|streck|bürst|kämm)/iu.test(next))) return result;
+      else if (sign === 'bare-name' && /(schluck|schlang|schlung|fress|fraß|gefressen)/iu.test(next)) return result;
+      else if (sign === 'after-sein' && /^(an|am|ans|auf|aus|bei|beim|bis|durch|gegen|hinter|in|im|ins|mit|nach|neben|über|um|unter|von|vom|vor|zu|zum|zur|zwischen)$/iu.test(next)) return result;
+      else if (sign === 'bare-name' && capitalNext && !afterDeterminer && !/^(etwas|nichts|was|viel|wenig|allerlei|mehr)$/iu.test(prev) &&
+               !(lemmas.get(norm(next.replace(/(e|en|er|em|es)$/u,''))) || []).some(e => e.type === 'Adjektiv')) chosen = adj[0];
+      else if (/^\s*([.!?;:,»«"“”)–—]|$)/u.test(after)) {
+        // closing its part: gerade after sein — «прямой» (Die Linie ist gerade.); after an object it can be either (hielt den
+        // Besenstiel gerade / meinte Harry gerade,) — a choice; ganz closing its part (Die Vase ist ganz. / Ich finde das ganz.) — a choice
+        const afterSein = !!prev && SEIN_FORMS.has(norm(prev));
+        if (sign === 'after-sein' && afterSein) chosen = adj[0];
+        else return result;
+      }
+      return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'adjective-adverb-twin'},{outcome:'selected',rule:'adjective-adverb-twin',reason:'adjective-adverb-twin'});
+    }
+    // Advisor 08.11, user cases (3): the old dative singular in -e after a preposition (im Halse, vom Halse, auf dem Herde, an dem
+    // Tage, bei Tage, in seinem Hause) — our der / das noun card without the -e, when no card of ours is written with the -e.
+    // Signal: im / am / vom / zum / beim (+ adjectives), a preposition + a dative singular determiner (+ adjectives), or bei / zu
+    // right before the word. Only a window is decided.
+    const OLD_DATIVE_PREPOSITIONS = 'an|auf|aus|bei|durch|hinter|in|mit|nach|neben|seit|über|unter|von|vor|zu|zwischen|gegenüber|außer';
+    const OLD_DATIVE_DETERMINERS = 'dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|unserm|eurem|euerm|diesem|jenem|jedem|welchem|solchem|manchem';
+    const caseFree = list => list.split('|').map(w => `[${w[0]}${w[0].toUpperCase()}]${w.slice(1)}`).join('|');
+    // adjectives between (an ending; not der / sich / seiner … — mit einem seiner Blicke, einem der wichtigsten Orte are plurals)
+    const OLD_DATIVE_ADJ = '(?:\\s+(?!(?:der|des|sich|seiner|ihrer|meiner|deiner|unserer|eurer|einer|keiner|dieser|jener|welcher|aller)\\s)\\p{Ll}+(?:e|en|em|er|es))*';
+    const OLD_DATIVE_BEFORE = new RegExp(`(?:^|[\\s(„»"'])(?:(?:${caseFree('im|am|vom|zum|beim')})${OLD_DATIVE_ADJ}|(?:${caseFree(OLD_DATIVE_PREPOSITIONS)})\\s+(?:${OLD_DATIVE_DETERMINERS})${OLD_DATIVE_ADJ}|${caseFree('bei|zu')})\\s+$`, 'u');
+    function oldDativeE(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || result.status !== 'ambiguous' || list.length < 2 || !/^\p{Lu}\p{Ll}+e$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
+      const stem = norm(word).slice(0, -1);
+      if ((lemmas.get(norm(word)) || []).some(e => e.type === 'Nomen' && norm(e.word) === norm(word))) return result;
+      const own = list.filter(c => c.source === 'main' && c.pos === 'Nomen' && norm(c.lemma) === stem && /^(der|das)$/i.test(String(c.item?.article || '')));
+      if (own.length !== 1 || list.some(c => c !== own[0] && c.source === 'main' && c.pos === 'Nomen')) return result;
+      const before = context.sentence.slice(Math.max(0, context.tokenOffset - 80), context.tokenOffset);
+      if (!OLD_DATIVE_BEFORE.test(before)) return result;
+      const chosen = own[0];
+      return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'old-dative-e'},{outcome:'selected',rule:'old-dative-e',reason:'old-dative-e'});
+    }
     const POLITE_FORMS = new Set(['Sie','Ihnen','Ihr','Ihre','Ihren','Ihrem','Ihrer','Ihres']);
     const FORM_DETERMINERS = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein\p{L}*|dein\p{L}*|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser\p{L}*|euer|eure|euren|eurem|eurer|eures|dies\p{L}*|jen\p{L}*|jed\p{L}*|welch\p{L}*|solch\p{L}*|manch\p{L}*|all\p{L}*)$/iu;
     const GENITIVE_PREPOSITIONS = new Set(['innerhalb','außerhalb','während','binnen','trotz','wegen','aufgrund','statt','anstatt','mithilfe','anhand','infolge','oberhalb','unterhalb','jenseits','diesseits','angesichts','hinsichtlich','bezüglich','mangels','laut']);
@@ -14868,7 +14934,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
