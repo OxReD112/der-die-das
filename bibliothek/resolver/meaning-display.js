@@ -431,6 +431,8 @@
         if (own === 'zu') return {marks:[], role:'infinitiveParticle', spans};
         if (k.conjunctionWord && own === k.conjunctionWord) return {marks:[], role:null, spans};
         if (k.chain === 'perfect') return {marks:[`Perfekt mit ${name}`], role:k.clickedRole || null, spans};
+        // (links chat, advisor 09.11, map N2) ignoriert zu werden: «Passiv mit ignorieren»; werden — the passive auxiliary text
+        if (k.chain === 'passive') return {marks:[`Passiv mit ${name}`], role:k.clickedRole || null, spans};
         if (MODALS.has(own) && !isMain) return {marks:[`mit ${name}`], role:null, spans};
         return {marks:[`Modal mit ${name}`], role:null, spans};
       }

@@ -5771,6 +5771,16 @@
         } else if (["können","müssen","dürfen","sollen","wollen","mögen"].includes(second)) {
           lexical = rows.filter(e => norm(e.word) === norm(tokens[before][0]));
           kind = "modal";
+        } else if (second === "werden" && participleLikeWord(tokens[before][0]) && !degreeBefore && !passiveNone(tokens[before][0]) &&
+            !["bekannt","verrückt"].includes(norm(tokens[before][0]))) {
+          // (links chat, advisor 09.11, map N2: the passive zu-infinitive — ignoriert zu werden, um … aufgenommen zu werden — is
+          // «Passiv mit X»; the word right before zu werden is participle-like (participleLikeWord). An own adjective card that is
+          // no participle of an own verb (gerecht zu werden) stays as it is; bekannt / verrückt / passive: "none" stay «become»,
+          // as in werdenGroup)
+          const own = [...new Map((verbAnalyses.get(norm(tokens[before][0])) || []).filter(a => a.kind === "participle" && a.entry)
+            .map(a => [a.entry.id ?? a.entry.word,a.entry])).values()];
+          lexical = own.length ? own : await externalParticiple(tokens[before][0]);
+          kind = "passive";
         }
         // Modals Z (links chat, advisor 01.11): an infinitive only the external dictionary knows also heads the modal chain
         // (um dort Glocken unterbringen zu können, nicht für die Kosten aufkommen zu müssen) — the word right before zu, written in
@@ -5801,10 +5811,10 @@
         if (kind && lexical.length && new Set(lexical.map(e => norm(e.word).replace(/^sich\s+/u,""))).size === 1) {
           const lemma = String(lexical[0].word).replace(/^sich\s+/u,"");
           const linked = [...(opener !== null ? [opener] : []),...(firstInfinitive !== null ? [firstInfinitive] : []),before,z,v];
-          return {id:'zu-chain',chain:kind,label:kind === "perfect" ? "Perfekt" : "Modal",lemma,modal:kind === "modal" ? second : null,
+          return {id:'zu-chain',chain:kind,label:kind === "perfect" ? "Perfekt" : kind === "passive" ? "Passiv" : "Modal",lemma,modal:kind === "modal" ? second : null,
             conjunction:conjunction || null,conjunctionWord:conjunction ? norm(conjunction.word) : null,roles:[...lexical,...entries,...(conjunction ? [conjunction] : [])],main:lexical[0],marker:clicked === z,
-            clickedRole:kind === "perfect" && clicked === v ? "auxiliary" : null,
-            note:kind === "perfect" ? {ru:'Perfekt · zu + инфинитив',en:'Perfekt · zu + infinitive'} : {ru:'модальный + zu + инфинитив',en:'modal + zu + infinitive'},
+            clickedRole:kind === "perfect" && clicked === v ? "auxiliary" : kind === "passive" && clicked === v ? "passive" : null,
+            note:kind === "perfect" ? {ru:'Perfekt · zu + инфинитив',en:'Perfekt · zu + infinitive'} : kind === "passive" ? {ru:'Passiv · zu + инфинитив',en:'Passiv · zu + infinitive'} : {ru:'модальный + zu + инфинитив',en:'modal + zu + infinitive'},
             spans:linked.map(span)};
         }
       }
@@ -5872,6 +5882,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const k = verbIndex;
         const rest = tokens.slice(from, tail+1), first = norm(rest[0][0]);
         const body = zuEnd ? rest.slice(0, norm(tokens[tail-1][0]) === "zu" ? -2 : -1) : rest;
+        // (links chat, advisor 09.11, map N3: wie with no verb form after it is a comparison, not a new part — as und / oder in
+        // coordinatorOpensClause: ich kann nicht so laufen wie du, Er hat so gut gespielt wie nie zuvor, wurde … so demokratisch
+        // gewählt wie bei uns. wie + a clause — wie er sagte, wie angekündigt — is no Nachfeld: a verb form in the rest)
+        if (first === "wie" && !zuEnd) return rest.length > 1 && rest.slice(1).every(t => plainWord(t) || ["und","oder"].includes(norm(t[0])));
         if (!body.every(plainWord)) return false;
         if (["um","ohne","statt","anstatt"].includes(first)) return zuEnd;
         // (review 04.11: a bare zu-infinitive only for a verb whose card takes zu + Infinitiv — hatte geplant … zu werden; not
@@ -7845,10 +7859,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             let j = i+1; while (j <= end && /^\p{Ll}+(?:e|en|er|es|em)$/u.test(tokens[j][0]) && !ELLIPTIC_DETERMINER.test(norm(tokens[j][0]))) j++;
             return !(j <= end && /^\p{Lu}/u.test(tokens[j][0]));
           })());
-        let tail = frontedInfinitive ? 0 : head.i === end ? end-1 : end, nachfeldFrom = -1;
+        // (links chat, advisor 09.11, map N1; L-018 «the word order does not change the reading», as P6 for werden): a participle right
+        // before a finite haben / sein that opens the part, or follows only adverbs there, is the Perfekt with the participle in front —
+        // Gekauft habe ich das Buch gestern, Angefangen hat es mit …, Weiterhin negativ aufgefallen ist der Service. Capital only as the
+        // first word of the part; lowercase after adverbs or at the start of a later part. Its card must take this auxiliary (Ausgestellt
+        // sind Exponate, Besonders gefährdet sind … — a state of a haben verb — stay as they are); no later verb form in the part (then
+        // the participle at the end is the pair); not a sentence adverbial — ehrlich gesagt, streng genommen, anders ausgedrückt.
+        const frontedParticiple = (() => {
+          if (!PERFECT_AUXILIARIES.includes(head.e.word) || frontedInfinitive || konj1(head.i)) return null;
+          const p = head.i - 1;
+          if (p < start || head.i >= end + 1) return null;
+          const adverb = k => /^\p{Ll}/u.test(tokens[k][0]) || k === start ? (forms.get(norm(tokens[k][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
+            !matches(k).length && !HOW_MUCH_DEGREE_WORDS.includes(norm(tokens[k][0])) : false;
+          if (!tokens.slice(start,p).every((t,k) => adverb(start+k))) return null;
+          if (/^\p{Lu}/u.test(tokens[p][0]) ? p !== start : !(p > start || start > 0)) return null;
+          if (p > start && /^(?:gesagt|gesprochen|genommen|gesehen|betrachtet|gerechnet|ausgedrückt|formuliert|gefragt|zugegeben)$/u.test(norm(tokens[p][0]))) return null;
+          if (STATE_DEGREE_WORDS.includes(norm(tokens[p-1]?.[0] ?? "")) && p > start) return null;
+          // (regressions 09.11: a form that is an own adjective / adverb card too is that word in front — Bestimmt hat er recht)
+          if (adjectivalForm(tokens[p][0])) return null;
+          if (indices.some(i => i > head.i && /^\p{Ll}/u.test(tokens[i][0]) && (matches(i).some(e => e.type === "Verb") || (verbAnalyses.get(norm(tokens[i][0])) || []).length ||
+            i === end && /(?:t|en)$/u.test(norm(tokens[i][0])) && !(forms.get(norm(tokens[i][0])) || []).length))) return null;
+          return withReflexive(matches(p),reflexiveRows(p,"Partizip II")).some(e => clause.participleOf(e,p) && auxiliariesOf(e).includes(head.e.word)) ? p : null;
+        })();
+        let tail = frontedInfinitive ? 0 : frontedParticiple !== null ? frontedParticiple : head.i === end ? end-1 : end, nachfeldFrom = -1;
         // (item Б: the infinitive / participle before a prepositional phrase or a zu-infinitive after it — sollten … bewachen um …
         // zu erhöhen, ist aufgewachsen in Burgdorf, haben sich Zeit genommen um herauszufinden)
-        if (!frontedInfinitive && head.i < tail && (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word))) {
+        if (!frontedInfinitive && frontedParticiple === null && head.i < tail && (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word))) {
           const k = nachfeldTail(tokens, head.i, tail, i => modals.has(head.e.word) ? infinitives(i).length > 0 :
             matches(i).some(e => clause.participleOf(e,i)) && !adjectivalForm(tokens[i][0]));
           if (k > 0) { tail = k; nachfeldFrom = k+1; }
@@ -7856,7 +7892,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (item Б continued, advisor 05.11: the same Nachfeld after the closing auxiliary / modal of a verb-final part — was Hagrid
         // gesagt hatte in jener Nacht, obwohl er versucht hatte zu erklären, als man … gehen konnte um alles zu besorgen: the
         // participle / infinitive right before it is the tail, as if the auxiliary closed the part)
-        if (nachfeldFrom < 0 && !frontedInfinitive && head.i > start + 1 && head.i < end && tail === end && (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word)) &&
+        if (nachfeldFrom < 0 && !frontedInfinitive && frontedParticiple === null && head.i > start + 1 && head.i < end && tail === end && (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word)) &&
           /^\p{Ll}/u.test(tokens[head.i-1][0]) && (modals.has(head.e.word) ? infinitives(head.i-1).length > 0 :
             matches(head.i-1).some(e => clause.participleOf(e,head.i-1)) && !adjectivalForm(tokens[head.i-1][0])) &&
           nachfeldRestFits(tokens, head.i+1, end, head.i-1)) { tail = head.i-1; nachfeldFrom = head.i+1; }
@@ -7864,7 +7900,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (links chat, advisor 02.11: so also the closing auxiliary — weil er gelesen und geschrieben hatte: the participle before it
         // opens its part after und / oder; the pair geschrieben hatte stands, as dass … gebaut und eröffnet wurde for werden)
         const afterAnd = (modals.has(head.e.word) || PERFECT_AUXILIARIES.includes(head.e.word)) && head.i === end && tail === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0]));
-        if (!frontedInfinitive && !afterAnd && (tail <= start || tail === head.i)) continue;
+        if (!frontedInfinitive && frontedParticiple === null && !afterAnd && (tail <= start || tail === head.i)) continue;
         // (sein-state draft, external-perfect-qa: a personal subject pronoun and a noun phrase with an article between sein and the
         // participle — Er ist das Bild betrachtet — is no state: the state's subject is the participle's object, there is no second one)
         const stateWithObject = (h,t) => { const lo = Math.min(h,t), hi = Math.max(h,t);
@@ -7922,8 +7958,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             }
           }
         } else {
-          const modal = infinitives(tail).filter(e=>modals.has(e.word));
-          const lexical = tail-1 !== head.i ? infinitives(tail-1) : [];
+          const modal = frontedParticiple !== null ? [] : infinitives(tail).filter(e=>modals.has(e.word));
+          const lexical = frontedParticiple === null && tail-1 !== head.i ? infinitives(tail-1) : [];
           // L2 (links to-do, reference F12-B14e, user 20.10): haben + participle + werden + modal is the passive of the
           // modal perfect (die … nicht hatten geklärt werden können), not «Perfekt mit werden können».
           let passiveLexical = head.e.word === "haben" && modal.length === 1 && lexical.length && lexical.every(e => e.word === "werden") &&
@@ -7949,7 +7985,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (advisor 07.11, item 4: sein + the participle of a verb whose card has only haben — ist repariert, sind … unterstellt — is
             // the state passive, not Perfekt: the group «состояние» only. Indicative only; not with an own or external adjective card of
             // the form — the window «adjective first» stays, decision 05.11 — and not with a verb that also has sein: «/ состояние»)
-            if (!main.length && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
+            if (!main.length && frontedParticiple === null && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
                 !participleAdjectiveCard(tokens[tail][0]) && !stateWithObject(head.i,tail) &&
                 // (train s14056: Ist- of a hyphenated compound — Ist-Wert-Anzeigen — is no sein)
                 !/^-/u.test(String(context?.sentence || "").slice(tokens[head.i].index + tokens[head.i][0].length))) {
@@ -7962,8 +7998,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             id = "perfect-group"; linked = [head.i,tail]; roles = [head.e,...main];
             // 20.10.2026 (links to-do, reviewers of L18): a form right after zu is a zu-infinitive, not a participle
             // (hatten sie … keine große Chance zu erraten — haben «иметь», not Plusquamperfekt of erraten).
-            if (norm(tokens[tail-1]?.[0] ?? "") === "zu") continue;
-            if (head.e.word === "sein" && adjectiveSign(String(context.sentence || ""),tokens,tail,start,end)) continue;
+            if (frontedParticiple === null && norm(tokens[tail-1]?.[0] ?? "") === "zu") continue;
+            if (frontedParticiple === null && head.e.word === "sein" && adjectiveSign(String(context.sentence || ""),tokens,tail,start,end)) continue;
             if (pastConditional(head.e,head.i) && conditionalStateOrRequest(tail,head)) continue;
             // G2 addition (reference 19.10, user decision): a verb the dictionary forms with haben and with sein
             // (ziehen, treten, fahren) — sein + its participle is Perfekt or a state; the form never tells them apart.
