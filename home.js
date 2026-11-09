@@ -585,6 +585,10 @@ function placeDockTools() {
     pen.style.left = "";
     return;
   }
+  // 09.11 (Alena): not while an exercise is open or the dock is moving — a resize then (the iPhone keyboard closing
+  // when she leaves Wortschatz) measured the capsule mid-animation and put the pencil on the gear until the next resize.
+  // It is measured again once Home is back (hideShell).
+  if (shell.classList.contains("open") || shell.classList.contains("is-animating")) return;
   const box = pen.parentElement.getBoundingClientRect();
   const range = document.createRange();
   range.selectNodeContents(word);
@@ -597,7 +601,8 @@ function placeDockTools() {
   const nextToGear = gear ? gear.getBoundingClientRect().left - 44 - box.left : mirrored; // where it stood before
   pen.style.right = "auto";
   // 05.11 later (Alena): halfway between the two — the mirrored place left a hole at the right
-  pen.style.left = Math.round((mirrored + Math.max(mirrored, nextToGear)) / 2) + "px";
+  // never nearer the gear than its old place next to it
+  pen.style.left = Math.round(Math.min(nextToGear, (mirrored + Math.max(mirrored, nextToGear)) / 2)) + "px";
 }
 addEventListener("resize", placeDockTools);
 addEventListener("load", placeDockTools);
@@ -861,6 +866,7 @@ function closeApp() {
     document.documentElement.classList.remove("app-open");
     setFrameWindow(false);
     animBusy = false;
+    requestAnimationFrame(placeDockTools); // 09.11: the pencil measured again with Home in place
   };
   if (!useAnimation() || !shell.classList.contains("open")) {
     hideShell();
