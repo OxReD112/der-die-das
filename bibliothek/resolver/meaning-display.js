@@ -648,7 +648,9 @@
     } else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
     const lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
-    return {heading, grammar:[f.pos, ...marks].join(' · '), text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
+    // (advisor 09.11) a split with a place-name / surname head and no sign before it: «Name / Nomen · Kompositum» — both readings shown
+    const grammar = (f.maybeName ? 'Name / ' : '') + [f.pos, ...marks].join(' · ');
+    return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
       note:'', more:0, spans:null, helpEntry:null};
   }
   const fromText = (source, meaning, language) => `${language === 'ru' ? 'От' : 'From'} ${source} — ${meaning}`;

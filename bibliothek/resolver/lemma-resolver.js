@@ -980,7 +980,7 @@
         // Schuppen «shed» or the plural of Schuppe «scale», Rappen «coin» or of Rappe «black horse»: not decided here.
         const exact = rs.filter(r => !r.form), plural = rs.filter(r => r.form && r.number === 'plural');
         if (exact.length && plural.some(p => exact.every(e => norm(e.lemma) !== norm(p.lemma))))
-          for (const e of exact) if (e.source === 'main' && e.entry?.plural_only !== true || e.source === 'fallback' && await dict.gender(e.lemma)) return [];
+          for (const e of exact) if (e.source === 'main' && e.entry?.plural_only !== true || e.source === 'fallback' && await dict.gender(e.lemma)) return Object.assign([], {undecided: true});
         // A head of two genders (die / der Leiter, die / der Heide, das / die Steuer): its meaning is not decided — no split.
         if (rs[0] !== undefined && rs.every(r => r.source === 'fallback') && await dict.gender(rs.sort((x, y) => (x.form ? 1 : 0) - (y.form ? 1 : 0))[0].lemma) === '?') return [];
         // das Holzhacken, beim Holzhacken, dem Donnergrollen: after a singular das / dem / des an infinitive whose noun
@@ -1061,13 +1061,32 @@
       if (ctx.title) return false;
       const lemma = norm(h.lemma);
       if (!NAME_HEADS.has(lemma)) return true;
-      if (!(ctx.det || ctx.adj)) return false;
+      // (advisor 09.11, claude/COMPOUND_SPLIT_COUNT_2026-11-09_RU.md п. 5) without a determiner or an attribute a place-name / surname
+      // head is split as «maybe a name» (Schöndorf, Kugelmann, Salzbergen: ≈ 40 % names) — the card says so; with no name before it
+      // (a plural head is no place or person — Tulpenfelder, Holzbrücken, aus Sicherheitsgründen; nor after a small word with an adjective
+      // ending — die riesigen …, mit vergrößertem Führerhaus — an attribute the dictionaries do not know)
+      // (a plural head after a singular contraction is no plural at all — im Staubecken is Stau + Becken, not Staub + Ecken)
+      if (h.number === 'plural' && ctx.contraction) return false;
+      if (!(ctx.det || ctx.adj || ctx.lowerAttr || ctx.numberBefore && h.number === 'plural')) return ctx.name || ctx.nameSlot ? false : 'maybe';
       return lemma !== 'mann' || h.number === 'plural' || !!parts.at(-2)?.link;
     }
-    const nounOk = async (h, parts, ctx) => nameOk(h, parts, ctx) && (ctx.nameMode || h.number === 'plural' && !ctx.title || commonSign(ctx) || await bareOk(h, parts, ctx));
+    // (advisor 09.11, п. 5: «делится — показываем состав всегда, „имя“ — подпись, а не запрет») a split into known parts is a common noun
+    // without a sign before it as well (Fluggerät, Bundesarchiv, Heizkissen: ≈ 92 % of the words without a sign) — not where a name
+    // stands: after a title (Herr, König), a given name (Hermann Mühleisen), namens / hieß, the subject of a speech tag (sagte Kaltwasser)
+    // (advisor + user 09.11, claude/COMPOUND_SPLIT_COUNT_2026-11-09_RU.md п. 5) a common-noun card only with a sign of a noun before it
+    // (a determiner, an attribute — own or unknown with an adjective ending, a contraction, a preposition; a plural; an uncounted noun
+    // after a verb with its subject); without one the word is a name as often as a noun: «Name / Nomen · Kompositum» with its parts
+    // (Ich bin Süßmilch, Das ist Eisenbart, Silvio Schierle) — this replaces G68 «not found» for words that split; never where a name
+    // stands for sure (a title, a given name, namens / hieß, the subject of a speech tag: those keep the Name card)
+    const nounOk = async (h, parts, ctx) => {
+      const named = nameOk(h, parts, ctx);
+      if (!named) return false;
+      if (ctx.nameMode || h.number === 'plural' && !ctx.title || commonSign(ctx) || ctx.lowerAttr || await bareOk(h, parts, ctx)) return named;
+      return ctx.title || ctx.name || ctx.nameSlot ? false : 'maybe';
+    };
     const headPart = (h, surface) => ({...h, text: h.ending !== undefined ? h.text : surface, surface});
     async function compound(w, noun, ctx) {
-      const splits = [], blocked = [];
+      const splits = [], blocked = [], undecided = [];
       // Speed (26.10.2026): the loops below asked one cut after another. Every head and first part they ask is computed
       // once (memo) and the independent ones together, in waves of exactly the calls the loops make: all heads, then the
       // first parts of the cuts that have a head; the loops then read the answers in their old order.
@@ -1091,7 +1110,9 @@
           if (shared && !(/[bcdfghklmnprstz]/u.test(w[i - 1]) && w[i - 1] === w[i - 2] && /[aeiouäöü]/u.test(w[i]))) continue;
           const h0 = shared ? i - 1 : i;
           const hs = await headOf(w.slice(h0), 3);
-          if (!hs.length) continue;
+          // (advisor 09.11, G75) a cut whose last part is not decided (Becken «таз» / the plural of Becke) with a known first part is a way
+          // of its own: Staubecken = Stau + Becken / Staub + Ecke — two last parts, no split
+          if (!hs.length) { if (hs.undecided && noun && !shared && (await modOf(w.slice(0, i), 3)).length) undecided.push(h0); continue; }
           // An adjective with an ending stands before a noun; one without an ending does not (Zwergenreich Moria is a name).
           if (!noun && (hs[0].ending ? !ctx.nextNoun : ctx.nextCapital)) continue;
           // A verb stem never shares the consonant (Kommandantin is not Komm + Mandantin; the old Schwimmeister is lost).
@@ -1102,12 +1123,14 @@
           if (noun && ms[0].plural && NEUTER_DET.test(ctx.detForm || '') && (await readings(w.slice(h0), ['Verb'], true)).length) continue;
           // (the exception: a head that is only a verb's infinitive — Lesen, not Stürmen, also a plural of Sturm: Zwilling(s) + Türmen)
           if (shortOk(parts) && (linkOk(parts) || (await readings(w.slice(h0), ['Verb'], true)).length && !(await readings(w.slice(h0), ['Nomen'])).some(r => r.form))) {
-            if (!noun || await nounOk(parts[1], parts, ctx)) splits.push({w, at: [h0], parts});
+            const ok = !noun || await nounOk(parts[1], parts, ctx);
+            if (ok) splits.push({w, at: [h0], parts, ...(ok === 'maybe' ? {maybeName: true} : {})});
             else blocked.push({w, at: [h0], parts});
           }
         }
       }
       let result = null;
+      if (splits.length && undecided.some(at => splits.every(x => at < x.at[0]))) return {ambiguous: [...splits]};
       // G68 (user 24.10): a word that splits into known parts in more than one way is not split — also when the other way is
       // one the context does not allow (Musikerleben: Musik + Erleben / Musiker + Leben, a place-name head).
       if (splits.length) {
@@ -1136,7 +1159,8 @@
         const m2 = (await modOf(w.slice(i, j), 4)).filter(firstPart);
         if (!m2.length) continue;
         const parts = [m1[0], m2[0], headPart(hs[0], w.slice(j))];
-        if (linkOk(parts) && await nounOk(parts[2], parts, ctx)) three.push({w, at: [i, j], parts});
+        const ok = linkOk(parts) && await nounOk(parts[2], parts, ctx);
+        if (ok) three.push({w, at: [i, j], parts, ...(ok === 'maybe' ? {maybeName: true} : {})});
       }
       if (three.length === 1) return three[0].parts.every(p => p.ru) ? three[0] : result || {noRu: three[0]};
       if (three.length > 1) return result || {ambiguous: three};
@@ -1285,6 +1309,12 @@
         if (dim?.base) return {diminutive: dim};
       }
       const c = await compound(w, noun, ctx);
+      // (advisor 09.11: compounds split without a sign now) a head that is itself a diminutive no own card has (Rosen + Bäumchen) gives way
+      // to the diminutive of the compound (Rosenbaum + -chen), as before the split was allowed there
+      if (c && c.parts && noun && !ctx.title && /(?:chen|lein)s?$/u.test(w) && /(?:chen|lein)$/u.test(norm(c.parts.at(-1).lemma || '')) && c.parts.at(-1).source !== 'main') {
+        const dim = await diminutive(w, ctx);
+        if (dim?.parts) return {diminutive: dim};
+      }
       if (c && c.parts) return {compound: c};
       if (noun && !(c && c.ambiguous) && !ctx.title) {
         const dim = await diminutive(w, ctx);
@@ -3632,7 +3662,11 @@
         }
         return false;
       };
-      const adj = isAdj(p1), detToken = isDet(p1) ? p1 : adj && isDet(p2) ? p2 : null, d = detToken ? norm(detToken) : "";
+      // (09.11) «Das berichtete Morgenpost»: a capital das / der / die opening the clause and a finite verb form after it are a pronoun and
+      // its verb, not a determiner and an attribute
+      const pronounVerb = !!p1 && !!p2 && i > 1 && /^(?:Das|Dies)$/u.test(p2) && (i - 2 === 0 || /[.!?:;»«„“"]\s*$/u.test(sentence.slice(0,tokens[i-2].index))) &&
+        (verbAnalyses.get(norm(p1)) || []).some(r => r.kind === "finite");
+      const adj = isAdj(p1) && !pronounVerb, detToken = isDet(p1) ? p1 : adj && isDet(p2) ? p2 : null, d = detToken ? norm(detToken) : "";
       const definite = /^(?:der|die|das|den|dem|des)$/u.test(d);
       const next = i >= 0 && i + 1 < tokens.length ? tokens[i+1] : null, after = next ? gap(i,i+1) : "";
       // G68 (24.10.2026, reference C8f): bare — no determiner, attribute or preposition, but a small word of its clause right
@@ -3673,7 +3707,8 @@
           /^(?:ihn|sie)$/u.test(key) && /^(?:nenn|nann|rief|ruf)/u.test(k2) ||
           key === "namen" && /^(?:den|dem|des|einen|seinen|ihren|deinen|meinen)$/u.test(k2);
         // The subject of a speech tag: a finite verb after the quote, the word ending its clause (»Ja«, antwortete Weißkopf.).
-        slot = finite && /[»«"“”„‚‘’–—][ \t]*,?[ \t]*$/u.test(sentence.slice(0,prevWord.index)) && /^[ \t]*(?:[.,;:!?»«"“”–—]|$)/u.test(rest);
+        // (09.11: a verb no dictionary knows counts too — »Nein«, brummelte Kellermann)
+        slot = (finite || /^\p{Ll}/u.test(pw)) && /[»«"“”„‚‘’–—][ \t]*,?[ \t]*$/u.test(sentence.slice(0,prevWord.index)) && /^[ \t]*(?:[.,;:!?»«"“”–—]|$)/u.test(rest);
       }
       // A word where a name stands is read as a name or not at all — never as a common noun (»Nein«, sagte Kaltwasser.).
       const nameSlot = slot && !listed;
@@ -3710,6 +3745,11 @@
       const t = tokens[k][0], n = norm(t);
       return /^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(n) || !!determinerFeatures(t) || WORD_FORMATION_DET.test(n) || /^\p{Lu}/u.test(t);
     }
+    // (advisor 09.11, п. 3) the genders a determiner allows for a singular noun right after it (with an attribute between)
+    const DET_GENDERS = {der:["der","die"],die:["die"],das:["das"],den:["der"],dem:["der","das"],des:["der","das"],ein:["der","das"],eine:["die"],
+      einen:["der"],einem:["der","das"],einer:["die"],eines:["der","das"],kein:["der","das"],keine:["die"],keinen:["der"],keinem:["der","das"],keiner:["die"],keines:["der","das"],
+      dieser:["der","die"],diese:["die"],dieses:["das"],diesen:["der"],diesem:["der","das"],jeder:["der","die"],jede:["die"],jedes:["das"],jeden:["der"],jedem:["der","das"],
+      zum:["der","das"],zur:["die"],im:["der","das"],am:["der","das"],vom:["der","das"],beim:["der","das"],ins:["das"]};
     async function wordFormationCandidate(word, context, options = {}) {
       const spelling = String(word || "");
       if (!context || !Number.isInteger(context.tokenOffset) || spelling.length < 6 || !/^[\p{L}]+$/u.test(spelling) ||
@@ -3719,8 +3759,15 @@
       wordFormationCore ||= createWordFormation(wordFormationDict);
       // A part of a hyphenated word (Beinklammer-Fluch) keeps the hyphen rule (resolveHyphenated): its article is the whole word's.
       const around = String(context.sentence || "");
-      if (/[-‐‑]$/u.test(around.slice(0,context.tokenOffset)) || /^[-‐‑]/u.test(around.slice(context.tokenOffset + spelling.length))) return null;
-      const w = norm(spelling), capital = /^\p{Lu}/u.test(spelling), ctx = wordFormationContext(spelling,context);
+      // (advisor 09.11, п. 4) the last part of a hyphenated word (Ukraine-Flüchtlingshilfe, Ex-Konzernchef, CO₂-Preisanreiz) is split as a
+      // word of its own: its gender is its own; the signs before it are the signs before the whole word (ihre Ukraine-…).
+      if (/^[-‐‑]/u.test(around.slice(context.tokenOffset + spelling.length))) return null;
+      let signAt = context.tokenOffset, firstPart = spelling;
+      for (let m; (m = /([^\s\-‐‑»«„“"'(\[]+)[-‐‑]$/u.exec(around.slice(0,signAt))); ) { signAt = m.index; firstPart = m[1]; }
+      const hyphenated = signAt !== context.tokenOffset;
+      if (hyphenated && !/^[\p{L}\p{N}]/u.test(firstPart)) return null;
+      const signContext = hyphenated ? {...context,tokenOffset:signAt} : context;
+      const w = norm(spelling), capital = /^\p{Lu}/u.test(spelling), ctx = wordFormationContext(hyphenated ? firstPart : spelling,signContext);
       // (advisor 08.11) the grammar group asks for the head right after a tapped form with an adjective ending that the
       // external dictionary knows only as a verb (das verwaiste Stadtarchiv): that form is its attribute
       if (options.attributeBefore && !ctx.adj) {
@@ -3740,6 +3787,51 @@
           for (const k of ["det","adj","contraction","prep","definite","plural","number","case","gender"]) if (s2[k] !== undefined && ctx[k] === undefined || s2[k] && !ctx[k]) ctx[k] = s2[k];
           if (s2.det || s2.adj || s2.contraction || s2.prep) { ctx.bare = false; ctx.name = false; ctx.nameSlot = false; }
         } }
+      // (advisor 09.11) an attribute the dictionaries do not know: small words with an adjective ending between a determiner, a
+      // contraction or a preposition and the word (ein fünfgleisiger Holzanbau, die oben erwähnten …, mit vergrößertem Führerhaus) —
+      // not a verb after the subject (»Nein«, sagte Kaltwasser; Der Arzt untersuchte Hirschsprung)
+      { const words = [...around.slice(0,signAt).matchAll(/\p{L}+|[^\p{L}\s]/gu)].map(m => m[0]);
+        const opens = t => !!determinerFeatures(t) || WORD_FORMATION_DET.test(norm(t)) || !!contractionArticle(t) || (lemmas.get(norm(t)) || []).some(e => e.type === "preposition");
+        let k = words.length - 1, attrs = 0, opener = "", skips = 0;
+        for (; k >= 0; k--) {
+          const t = words[k];
+          if (opens(t)) { opener = t; break; }
+          if (/^\p{Ll}{3,}(?:e|en|em|er|es)$/u.test(t)) { attrs++; continue; }
+          if (attrs && (t === "," || /^(?:oben|unten|bereits|bisher|so|sehr|ganz|besonders|eher|noch|schon|und|oder)$/u.test(t))) continue;
+          // (between them also adverbs and the like — der flächenmäßig größte …, das regional und thematisch differenzierte …, dem 1383
+          // verliehenen …, der US - amerikanischen …: a small word without a finite reading, a number, a hyphenated first part)
+          if (attrs && skips < 4 && (/^\d/u.test(t) || t === "-" || /^\p{Lu}[\p{L}]*$/u.test(t) && words[k+1] === "-" ||
+              /^\p{Ll}{3,}$/u.test(t) && !(verbAnalyses.get(norm(t)) || []).some(r => r.kind === "finite"))) { skips++; continue; }
+          break;
+        }
+        // (Das berichtete Morgenpost: a capital pronoun opening the clause and its finite verb)
+        const clauseOpener = k >= 0 && /^(?:Das|Dies)$/u.test(opener) && (k === 0 || /^[.!?:;»«„“"]$/u.test(words[k-1]));
+        if (clauseOpener && attrs === 1 && (verbAnalyses.get(norm(words[k+1] || "")) || []).some(r => r.kind === "finite")) attrs = 0;
+        ctx.lowerAttr = attrs > 0 && !!opener;
+        // (the determiner before an unknown attribute is the word's determiner: number and gender as after ein großer …)
+        if (ctx.lowerAttr && !ctx.det && !ctx.adj && (determinerFeatures(opener) || WORD_FORMATION_DET.test(norm(opener)))) {
+          const d = norm(opener); ctx.det = true; ctx.adj = true; ctx.detForm = d; ctx.otherDet = !/^(?:der|die|das|den|dem|des)$/u.test(d);
+          ctx.pluralDet = /^(?:die|diese|jene|keine|alle|beide|viele|einige|mehrere|manche|solche|welche|meine|deine|seine|ihre|unsere|eure)$/u.test(d);
+          ctx.singularDet = /^(?:das|dem|des|ein|eine|einem|einen|eines|einer|(?:kein|mein|dein|sein|ihr|unser|euer|eur|dies|jen|jed|welch|manch|solch)(?:em|es))$/u.test(d);
+          ctx.bare = false; ctx.name = false; ctx.nameSlot = false;
+        } }
+      // (advisor 09.11, п. 5) a given name right before it (Hermann Mühleisen, Joseph Weiskopf, Florian Hartleib): the word stands
+      // where a surname stands — «Name» with its parts, not a common noun. The given name is the external record «… given name» (or
+      // a spelling of one: Joseph); names that are also words (Ernst, Frank, Rosa) count as well — here always before a capital word.
+      if (capital && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep || ctx.name || ctx.title) && fallback.lookup) {
+        const m = /(?:^|[^\p{L}])(\p{Lu}\p{Ll}+)[ \t]+$/u.exec(around.slice(0,context.tokenOffset));
+        if (m && !WORD_FORMATION_DET.test(norm(m[1])) && !determinerFeatures(m[1])) {
+          let groups = [];
+          try { groups = await fallback.lookup(m[1]) || []; } catch (_) { groups = []; }
+          const senses = g => [...(g.senses || []), ...(g.meanings || [])].map(x => typeof x === "string" ? x : String(x?.gloss || x?.en || ""));
+          // (advisor 09.11) an adjective of a place by the data (der Frankfurter Jahrhunderthalle, im Berliner Regierungsviertel) is an attribute
+          // (or an inhabitant noun of a place with a determiner before it — die Frankfurter Jahrhunderthalle: before a capital word it is the
+          // place adjective; der Frankfurter alone is the inhabitant)
+          const detBefore = (() => { const d = /(?:^|[^\p{L}])(\p{L}+)[ \t]+$/u.exec(around.slice(0,m.index + m[0].length - m[0].trimStart().length)); return !!d && (!!determinerFeatures(d[1]) || WORD_FORMATION_DET.test(norm(d[1])) || !!contractionArticle(d[1])); })();
+          if (/er$/u.test(m[1]) && (groups.some(g => g.pos === "adj") || detBefore && groups.some(g => g.pos === "noun" && senses(g).some(x => /\binhabitant of\b/u.test(x))))) { ctx.adj = true; ctx.bare = false; }
+          else if (groups.some(g => g.pos === "name" && senses(g).some(x => /\bgiven name\b|^(?:alternative )?spelling of \p{Lu}/u.test(x)))) { ctx.name = true; ctx.bare = false; }
+        }
+      }
       // G68 (user 24.10): a whole word a dictionary knows is never split, in any case (beileibe — «bei Leibe», not Beil + Eibe).
       // (#21: a record that only names the base of a diminutive — täschchen «diminutive of Tasche» — gives that base)
       let dimBase = null;
@@ -3768,6 +3860,9 @@
         // schloss sich die NAL …, Verwaltungsmäßig war Mohrungen …: then the word is no subject, so no name)
         if (other?.compound && other.compound.parts.at(-1).ending === '' && !adjectiveOpensClause(context)) other = null;
         // G68: a bare start of a clause (no sign before the word) does not make a noun of an adjective (Eulenfreie Tage).
+        // (advisor 09.11: a split is a noun without a sign as well — so an adjective with an ending before a noun, opening the clause,
+        // is the adjective: Eulenfreie Tage)
+        if (other && found && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep) && other.compound?.parts.at(-1)?.ending) found = null;
         if (other && found && ctx.bare && !(ctx.det || ctx.adj || ctx.contraction || ctx.prep)) {
           found = await wordFormationCore.analyse(w,true,{...ctx,bare:false});
           if (found?.ambiguous) found = null;
@@ -3801,15 +3896,42 @@
           // An own card decides alone (das Foto, der Laden); without one, an external record of two genders gives no card.
           const external = !ownGenders.size && fallback.nounGender ? await fallback.nounGender(head.lemma).catch(() => null) : null;
           const genders = new Set([...ownGenders,...(external && external !== "?" ? [external] : [])]);
-          if (external === "?" || genders.size > 1) return null;
-          const headGender = genders.size === 1 ? [...genders][0] : null, surface = w.slice(at), base = norm(head.lemma);
+          if (external === "?") return null;
+          // (advisor 09.11, п. 3) a head with two own cards of two genders (der / das Gehalt, der / das Teil, die / das Steuer, der / die
+          // Leiter): the determiner before it decides when it fits one gender only (der Salzgehalt — «содержание», die Gewerbesteuer —
+          // «налог»); otherwise both cards are named, each with its article, and the heading has none.
+          let headGender = genders.size === 1 ? [...genders][0] : null;
+          if (genders.size > 1) {
+            const cards = (lemmas.get(norm(head.lemma)) || []).filter(e => e.type === "Nomen" && e.article && norm(e.word) === norm(head.lemma));
+            const allowed = (ctx.det || ctx.contraction) && !ctx.pluralDet && head.number !== "plural" ? DET_GENDERS[ctx.detForm] : null;
+            const fit = allowed ? cards.filter(e => allowed.includes(e.article)) : [];
+            if (fit.length === 1) {
+              const e = fit[0];
+              Object.assign(head, {entry:e, lemma:e.word, ru:String(e.translation_ru || ""), en:String(e.translation_en || ""), source:"main"});
+              delete head.ruLabels;
+              headGender = e.article;
+            } else {
+              const both = cards.filter((e, k) => cards.findIndex(x => x.article === e.article) === k);
+              if (both.length < 2) return null;
+              Object.assign(head, {entry:null, source:"main", twoGenders:both.map(e => e.article),
+                ru:both.map(e => `${e.article} ${e.word}: ${String(e.translation_ru || "").split(/;\s*/u)[0]}`).join("; "),
+                en:both.map(e => `${e.article} ${e.word}: ${String(e.translation_en || "").split(/;\s*/u)[0]}`).join("; ")});
+              delete head.ruLabels;
+            }
+          }
+          const surface = w.slice(at), base = norm(head.lemma);
           // A weak noun after a determiner (den Prinzen, dem Jungen) is plural only when the determiner is plural (die Prinzen);
           // without one it stays plural (mit Goldbuchstaben); after a singular determiner a plural-looking form is singular.
           const ownPlurals = head.entry?.plural && head.entry.plural !== "—" ? head.entry.plural.split(/\s*,\s*/u).map(norm) : [];
           const weak = headGender === "der" && (ownPlurals.length ? ownPlurals.includes(surface) && (surface === base + "n" || surface === base + "en") :
             /e$/u.test(base) && surface === base + "n");
           number = head.number === "plural" || head.entry?.plural_only ? "plural" : null;
-          if (number && !head.entry?.plural_only && (ctx.singularDet || weak && ctx.det && !ctx.pluralDet)) number = null;
+          // (der before a weak plural is its genitive plural — einer der wichtigsten Produktionsfaktoren; der Soldat is the nominative)
+          if (number && !head.entry?.plural_only && (ctx.singularDet || weak && ctx.det && !ctx.pluralDet && ctx.detForm !== "der")) number = null;
+          // (09.11) a head known only as a form of another spelling (ausrüstungsgegenstände of Ausrüstungsgegenstand) after a plural
+          // determiner is that plural (die oben erwähnten Filmausrüstungsgegenstände)
+          if (!number && head.form && ctx.pluralDet && surface !== norm(head.lemma) && !(ctx.singularDet) &&
+              !(await wordFormationDict.readings(surface)).some(r => r.pos === "Nomen" && !r.form)) number = "plural";
           // die Sterntaler: «die» before a masculine or neuter noun is its plural.
           if (!number && ctx.pluralDet && ["der","das"].includes(headGender) && !head.form &&
               (head.entry ? String(head.entry.plural || "").split(/\s*,\s*/u).map(norm).includes(surface) : true)) number = "plural";
@@ -3831,7 +3953,9 @@
           lemma = capitalise(w.slice(0,at) + headText);
           gender = number ? "die" : headGender;
         } else lemma = w.slice(0,at) + head.text;
-        formation = {kind:"compound",parts:parts.map(part),half:!noun && head.half ? head.text : null};
+        formation = {kind:"compound",parts:parts.map(part),half:!noun && head.half ? head.text : null,...(found.compound.maybeName ? {maybeName:true} : {})};
+        // «maybe a name»: no article of its own (a place or a person — not «das Dorf» of the sentence)
+        if (found.compound.maybeName) { gender = null; number = null; }
       } else if (found.diminutive) {
         const d = found.diminutive;
         number = d.number;
@@ -3866,7 +3990,8 @@
       let entry = null;
       if (/^\p{Lu}/u.test(k) && !(forms.get(norm(k)) || []).length) {
         const formed = await wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null), f = formed?.formation;
-        if (f?.kind === "compound" && f.pos === "Nomen")
+        // (a «maybe a name» split has no article of its own: no noun group around it — Das berichtete Morgenpost)
+        if (f?.kind === "compound" && f.pos === "Nomen" && !f.maybeName)
           entry = {word:k,type:"Nomen",article:f.number ? "" : (f.gender || ""),plural:f.number === "plural" ? k : "",number:f.number || null,numberUnknown:false,compoundHead:true};
       }
       if (compoundHeadItems.size > 4096) compoundHeadItems.clear();
@@ -13591,6 +13716,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // External attachment is display-only: no new selection, gender or case.
       const unlinked = resolution.candidates;
       resolution.candidates = await Promise.all(unlinked.map(async c => {
+        // (09.11, chat of tests: a «maybe a name» split has no article — Das berichtete Morgenpost: das is the pronoun)
+        if (c.formation?.maybeName) return c;
         const link = await externalNounArticleLink(word,context,c,unlinked);
         return link ? {...c,nounArticleLink:link} : c;
       }));
@@ -13621,7 +13748,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             ? {...c,construction:{...c.construction,spans:pair.spans}} :
             c.nounPhrase || c.nounArticleLink || c.construction ? c :
             pair.clicked === 'article' ? c.pos === 'article' && c.source === 'main' ? {...c,nounArticleLink:pair} : c :
-            canonicalPos(c.pos) === 'Nomen' ? {...c,nounArticleLink:pair} : c);
+            canonicalPos(c.pos) === 'Nomen' && !c.formation?.maybeName ? {...c,nounArticleLink:pair} : c);
           repoint();
         }
       }
