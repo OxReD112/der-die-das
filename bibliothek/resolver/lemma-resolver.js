@@ -982,6 +982,12 @@
         let rs = (await readings(s, ['Nomen'])).filter(r => !r.gerund);
         // des Wahrsagens: a genitive of a nominalized infinitive, not Sage + -ns.
         if (/ens$/u.test(s) && (await readings(s.slice(0, -1), ['Verb'], true)).length) rs = rs.filter(r => !r.form);
+        // (advisor 09.11, des Festsaales, des Zugangebots) the genitive -s / -es of our masculine or neuter noun is our card (Saal, Angebot),
+        // not only the external form record
+        if (!rs.some(r => r.source === 'main') && /[^s]s$/u.test(s)) for (const b of [s.slice(0, -1), ...(/es$/u.test(s) ? [s.slice(0, -2)] : [])]) {
+          for (const r of await readings(b, ['Nomen'], true)) if (r.source === 'main' && /^(?:der|das)$/u.test(String(r.entry?.article || '')) && !rs.some(x => x.source === 'main' && norm(x.lemma) === norm(r.lemma)))
+            rs.push({...r, form: true, number: null, genitive: true});
+        }
         // Schuppen «shed» or the plural of Schuppe «scale», Rappen «coin» or of Rappe «black horse»: not decided here.
         const exact = rs.filter(r => !r.form), plural = rs.filter(r => r.form && r.number === 'plural');
         if (exact.length && plural.some(p => exact.every(e => norm(e.lemma) !== norm(p.lemma))))
@@ -1035,6 +1041,35 @@
       const min = Math.min(...s.map(x => linkLen(x.parts[0])));
       s = s.filter(x => linkLen(x.parts[0]) === min);
       return s.length === 1 ? s[0] : null;
+    }
+    // (advisor 09.11) two splits that differ only by where one linking letter goes (Kreis + Sport / Kreis(s) + Port, Wetter + Stein /
+    // Wetter(s) + Tein, Gewerbe + Steuer / Gewerbe(s) + teuer): the one without a case form or a clipping, with a meaning in every part,
+    // with more own cards (only between these two) and a noun rather than an adjective after the first part; otherwise no split
+    const WEAK_EN = /clipping of|abbreviation|initialism|alternative (?:form|spelling)|formerly standard spelling|apocopic form|plural of|obsolete/iu;
+    async function linkShift(list) {
+      const byAt = new Map();
+      for (const x of list) if (!byAt.has(x.at.join())) byAt.set(x.at.join(), x);
+      if (byAt.size !== 2) return null;
+      const [a, b] = [...byAt.values()];
+      if (a.at.length !== b.at.length) return null;
+      const d = a.at.map((v, k) => v !== b.at[k] ? k : -1).filter(k => k >= 0);
+      if (d.length !== 1) return null;
+      const k = d[0], pa = a.parts[k], pb = b.parts[k];
+      // (the same first part, only the linking letter moves: not reich «богатый» + Samt / Reich + -s- + Amt)
+      if (norm(pa.lemma) !== norm(pb.lemma) || pa.pos !== pb.pos || pa.source !== pb.source || Math.abs(a.at[k] - b.at[k]) !== Math.abs(linkLen(pa) - linkLen(pb))) return null;
+      // (the last part in the genitive — Festsaal(e)s — is no weak part)
+      const weak = async (p, k, all) => k < all.length - 1 && p.form && p.number !== 'plural' || WEAK_EN.test(String(p.en || '')) || p.pos === 'Nomen' && !p.ru && !(await dict.gender(p.lemma));
+      const score = async x => [(await Promise.all(x.parts.map(weak))).filter(Boolean).length,
+        -x.parts.filter(p => p.source === 'main' || p.source === 'bound').length, x.parts.slice(1).filter(p => p.pos === 'Adjektiv').length];
+      const [sa, sb] = [await score(a), await score(b)];
+      const cmp = sa.map((v, i) => v - sb[i]).find(v => v !== 0) || 0;
+      if (!cmp) return null;
+      const win = cmp < 0 ? a : b, ws = cmp < 0 ? sa : sb;
+      if (ws[0] || !win.parts.every(p => p.ru)) return null;
+      // a name of the longer first part (Schwarzwald + Straße, Goldstein + Park — a place, not Schwarz + Wald + Straße): no split
+      if (win.at.length > 1 && dict.name && await dict.name(norm(win.w.slice(0, win.at.at(-1))))) return null;
+      if (console.__shift) console.__shift.push({w: win.w, parts: win.parts.map(p => p.lemma)});
+      return win;
     }
     // A common noun shows itself by what stands before it; a name does not (Herr Seligmann, sagte Kellermann, in Bornheim).
     const commonSign = ctx => !ctx.title && (ctx.det || ctx.adj || ctx.contraction || ctx.prep);
@@ -1142,7 +1177,8 @@
       if (splits.length) {
         const all = [...splits, ...blocked.filter(b => b.parts.every(p => p.ru) && !splits.some(x => x.at[0] === b.at[0]))];
         const c = await choose(all);
-        result = c && splits.includes(c) ? (c.parts.every(p => p.ru) ? c : {noRu: c}) : {ambiguous: all};
+        const shift = c ? null : await linkShift(all);
+        result = c && splits.includes(c) ? (c.parts.every(p => p.ru) ? c : {noRu: c}) : shift && splits.includes(shift) ? shift : {ambiguous: all};
       }
       if (result && !result.noRu) return result;
       // Three parts (user 19.10): only when two fail; every part at least 4 letters; exactly one split; nouns only
@@ -1169,7 +1205,7 @@
         if (ok) three.push({w, at: [i, j], parts, ...(ok === 'maybe' ? {maybeName: true} : {})});
       }
       if (three.length === 1) return three[0].parts.every(p => p.ru) ? three[0] : result || {noRu: three[0]};
-      if (three.length > 1) return result || {ambiguous: three};
+      if (three.length > 1) { const shift = result ? null : await linkShift(three); return result || shift || {ambiguous: three}; }
       return result;
     }
     async function verbOf(stem, plain) {
@@ -3626,6 +3662,8 @@
         readings,
         mayBe:s => lemmas.has(s) || forms.has(s) || !!wordFormationParts?.has(s),
         blocked:s => WORD_FORMATION_PARTICLES.has(s) || closed(s),
+        // (advisor 09.11, linkShift) the external dictionary has a name of this spelling (Schwarzwald, Goldstein)
+        name:async s => { try { return ((await fallback.lookupFacts(s)).groups || []).some(g => g.pos === "name"); } catch (_) { return false; } },
         gender:lemma => fallback.nounGender ? fallback.nounGender(lemma).catch(() => null) : Promise.resolve(null),
         ru:async (lemma, pos) => {
           const own = (lemmas.get(norm(lemma)) || []).find(e => e.type === pos);
@@ -11804,8 +11842,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // A known base verb does not cover a reconstructed complete verb
         // missing from ours (stellt … bereit -> bereitstellen, not stellen).
         const uncoveredCompleteVerb = separated.length === 1 && separated[0].source === "fallback" ? separated[0] : null;
-        return candidates.filter(c => c.source === "main" || c.reflexiveUnconfirmed || c.construction?.id === "reflexive-verb" || c === uncoveredCompleteVerb || separated.some(pair => pair.source === "fallback" && window.BibliothekVocabulary.identity(pair) === window.BibliothekVocabulary.identity(c)) ||
+        // (advisor 09.11, опись №12, G9) an external name (Koch, Bauer as surnames) is not the same lexeme as our noun: it stays, after our cards
+        const keptName = c => /^\p{Lu}/u.test(String(state.word || "")) && c.source === "fallback" && c.pos === "name" && candidates.some(m => m.source === "main" && canonicalPos(m.pos) === "Nomen" && norm(m.lemma) === norm(c.lemma));
+        const kept = candidates.filter(c => c.source === "main" || keptName(c) || c.reflexiveUnconfirmed || c.construction?.id === "reflexive-verb" || c === uncoveredCompleteVerb || separated.some(pair => pair.source === "fallback" && window.BibliothekVocabulary.identity(pair) === window.BibliothekVocabulary.identity(c)) ||
           knownPartsOfSpeech.has(canonicalPos(c.pos)) && !coveredLexemes.has(lexicalKey(c)));
+        return [...kept.filter(c => !keptName(c)), ...kept.filter(keptName)];
       }
     };
     function ownCoverage(candidates,separated,word) {
