@@ -3750,7 +3750,9 @@
     const DET_GENDERS = {der:["der","die"],die:["die"],das:["das"],den:["der"],dem:["der","das"],des:["der","das"],ein:["der","das"],eine:["die"],
       einen:["der"],einem:["der","das"],einer:["die"],eines:["der","das"],kein:["der","das"],keine:["die"],keinen:["der"],keinem:["der","das"],keiner:["die"],keines:["der","das"],
       dieser:["der","die"],diese:["die"],dieses:["das"],diesen:["der"],diesem:["der","das"],jeder:["der","die"],jede:["die"],jedes:["das"],jeden:["der"],jedem:["der","das"],
-      zum:["der","das"],zur:["die"],im:["der","das"],am:["der","das"],vom:["der","das"],beim:["der","das"],ins:["das"]};
+      zum:["der","das"],zur:["die"],im:["der","das"],am:["der","das"],vom:["der","das"],beim:["der","das"],ins:["das"],
+      ...Object.fromEntries(["mein","dein","sein","ihr","unser","euer"].flatMap(p => { const b = p === "euer" ? "eur" : p;
+        return [[p,["der","das"]],[b+"e",["die"]],[b+"en",["der"]],[b+"em",["der","das"]],[b+"er",["die"]],[b+"es",["der","das"]]]; }))};
     async function wordFormationCandidate(word, context, options = {}) {
       const spelling = String(word || "");
       if (!context || !Number.isInteger(context.tokenOffset) || spelling.length < 6 || !/^[\p{L}]+$/u.test(spelling) ||
@@ -3905,7 +3907,15 @@
           if (genders.size > 1) {
             const cards = (lemmas.get(norm(head.lemma)) || []).filter(e => e.type === "Nomen" && e.article && norm(e.word) === norm(head.lemma));
             const allowed = (ctx.det || ctx.contraction) && !ctx.pluralDet && head.number !== "plural" ? DET_GENDERS[ctx.detForm] : null;
-            const fit = allowed ? cards.filter(e => allowed.includes(e.article)) : [];
+            let fit = allowed ? cards.filter(e => allowed.includes(e.article)) : [];
+            // (advisor 09.11, die Kunde) one of the two cards has a rare plural: a plural head is the other (Großkunden, Firmenkunden — der
+            // Kunde); a singular head without a determiner that decides is the rare-plural one (Kräuterkunde, Erdkunde — die Kunde)
+            const rarePlural = cards.filter(e => TWIN_RARE_PLURAL.test(String(e.plural_note_en || '')));
+            if (fit.length !== 1 && rarePlural.length === 1 && cards.length === 2) {
+              const pluralHead = head.number === "plural" || w.slice(at) !== norm(head.lemma) || ctx.pluralDet;
+              const pick = pluralHead ? cards.find(e => e !== rarePlural[0]) : rarePlural[0];
+              if (!allowed || allowed.includes(pick.article) || pluralHead) fit = [pick];
+            }
             if (fit.length === 1) {
               const e = fit[0];
               Object.assign(head, {entry:e, lemma:e.word, ru:String(e.translation_ru || ""), en:String(e.translation_en || ""), source:"main"});
@@ -12042,6 +12052,52 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return result;
     }
+    // (advisor 09.11, WN batch 61 die Kunde) two own noun cards of one word and two genders (der Kunde «клиент» / die Kunde «знание;
+    // весть») left as a window: the form decides. A plural form — the twin whose plural is not marked rare (die Kunden, 750.000 Kunden →
+    // der Kunde). A singular: an adjective with -er right before it without a determiner (zufriedener / Schwieriger Kunde) — masculine;
+    // with -e (frohe Kunde) — feminine; a bare singular after sein / werden / als (Bin … Kunde, als Kunde) — the counted masculine;
+    // der not after a preposition (in erster Linie der Kunde) — masculine nominative. Otherwise the window stays.
+    const TWIN_RARE_PLURAL = /^(?:The plural is rare\.|The plural is rarely used\.|Usually singular\.|Usually used in the singular\.)/u;
+    function twinGenderByForm(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || result.status !== 'ambiguous' || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
+      const twins = list.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && c.item?.article);
+      if (twins.length !== 2 || twins[0].item.article === twins[1].item.article || norm(twins[0].lemma) !== norm(twins[1].lemma)) return result;
+      if (list.some(c => !twins.includes(c) && c.source === 'main')) return result;
+      const byArticle = a => twins.find(c => c.item.article === a);
+      const choose = (c, evidence) => c ? keepDecision(result,{...result,candidates:[c,...list.filter(x => x !== c)],selected:c,preferred:c,status:'resolved',evidence},{outcome:'selected',rule:evidence,reason:evidence}) : result;
+      const w = norm(word), lemma = norm(twins[0].lemma);
+      // (only pairs whose cards say so: one twin's plural is rare — a word of study / tidings beside a counted person; nominalized
+      // adjectives der / die Angestellte keep their window)
+      const rare = twins.filter(c => TWIN_RARE_PLURAL.test(String(c.item.plural_note_en || '')));
+      if (rare.length !== 1) return result;
+      // (a plural both cards share — die Kunden; not a genitive of one that is the plural of the other: allen Lobs)
+      if (w !== lemma) {
+        const plurals = c => String(c.item.plural || '').split(/\s*,\s*/u).map(norm);
+        return twins.every(c => plurals(c).includes(w)) ? choose(twins.find(c => c !== rare[0]), 'twin-plural-not-rare') : result;
+      }
+      const sentence = context.sentence, tokens = sharedTokens(sentence,'twinGenderByForm');
+      let at = clickedTokenIndex(tokens,context.tokenOffset,word); if (at < 1) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      // (the last part of a hyphenated word: the words before the whole word — Enttäuschter Kaufland-Kunde)
+      while (at > 1 && /^[-‐‑]$/u.test(gap(at))) at--;
+      if (!/^\s+$/u.test(gap(at))) return result;
+      const p1 = tokens[at-1][0], k1 = norm(p1), p2 = at > 1 && /^\s+$/u.test(gap(at-1)) ? norm(tokens[at-2][0]) : '';
+      const det2 = p2 && (!!determinerFeatures(tokens[at-2][0]) || WORD_FORMATION_DET.test(p2) || (lemmas.get(p2) || []).some(e => e.type === 'preposition') || !!contractionArticle(tokens[at-2][0]));
+      const masc = byArticle('der');
+      if (!det2 && /^\p{L}{3,}er$/u.test(k1) && !determinerFeatures(p1) && !WORD_FORMATION_DET.test(k1)) return choose(masc, 'twin-adjective-er');
+      // (a bare singular after sein / werden / als, adverbs between: Bin schon lange Kunde, Ich war einmal Kunde)
+      for (let i = at - 1; i >= Math.max(0, at - 4); i--) {
+        if (i < at - 1 && !/^\s+$/u.test(gap(i+1))) break;
+        const t = norm(tokens[i][0]);
+        if (/^(?:bin|bist|ist|sind|seid|war|waren|warst|wart|wird|werden|wurde|wurden|bleibt|blieb|als|mal)$/u.test(t)) return choose(masc, 'twin-bare-predicate');
+        if (!/^\p{Ll}/u.test(tokens[i][0]) || determinerFeatures(tokens[i][0]) || WORD_FORMATION_DET.test(t) || (lemmas.get(t) || []).some(e => e.type === 'Adjektiv' && !(lemmas.get(t) || []).some(x => x.type === 'Adverb'))) break;
+      }
+      if (!det2 && /^\p{Ll}{3,}e$/u.test(p1) && !determinerFeatures(p1) && !WORD_FORMATION_DET.test(k1) && !(lemmas.get(k1) || []).some(e => e.type === 'Adverb')) return choose(byArticle('die'), 'twin-adjective-e');
+      // (not after a preposition: von der Kunde — the feminine dative)
+      if (k1 === 'der' && !(p2 && (lemmas.get(p2) || []).some(e => e.type === 'preposition'))) return choose(masc, 'twin-der-nominative');
+      return result;
+    }
     function oldDativeE(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || list.length < 2 || !/^\p{Lu}\p{Ll}+e$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
@@ -15620,7 +15676,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is

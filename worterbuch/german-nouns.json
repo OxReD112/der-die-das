@@ -69252,5 +69252,21 @@
     "example_en": "The workmen needed a whole day to fit the new kitchen.",
     "usage_note_ru": "Die Montage der Möbel dauert zwei Stunden. — Сборка мебели занимает два часа. auf Montage sein — быть в командировке на монтаже. Не путать с die Montage — мн. ч. от der Montag (понедельник): an Montagen — по понедельникам.",
     "usage_note_en": "Die Montage der Möbel dauert zwei Stunden. — Assembling the furniture takes two hours. auf Montage sein — to be away on an installation job. Do not confuse with die Montage — plural of der Montag (Monday): an Montagen — on Mondays."
+  },
+  {
+    "id": "noun-5364",
+    "word": "Kunde",
+    "article": "die",
+    "plural": "Kunden",
+    "translation_ru": "знание, учение (Erdkunde); (устар.) весть, известие",
+    "translation_en": "knowledge, study (Erdkunde); (literary) tidings, news",
+    "example_de": "Die Kunde von seinem Sieg verbreitete sich schnell im ganzen Land.",
+    "example_cloze": "Die {{c1::Kunde}} von seinem Sieg verbreitete sich schnell im ganzen Land.",
+    "example_ru": "Весть о его победе быстро разнеслась по всей стране.",
+    "example_en": "The news of his victory spread quickly throughout the country.",
+    "usage_note_ru": "В сложных словах — наука, учение: Erdkunde — география, Heimatkunde — краеведение, Naturkunde — естествознание. Не путать с der Kunde — клиент, покупатель (мн. ч. тоже die Kunden).",
+    "plural_note_ru": "Мн. ч. употребляется редко.",
+    "plural_note_en": "The plural is rare.",
+    "usage_note_en": "In compounds — a field of study: Erdkunde — geography, Heimatkunde — local history and geography, Naturkunde — natural history. Do not confuse with der Kunde — customer, client (plural also die Kunden)."
   }
 ]

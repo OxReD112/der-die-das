@@ -77,7 +77,7 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261109-wn-meanings60-1"),
+      loadJson("worterbuch/german-nouns.json?v=20261109-wn-kunde61-2"),
       loadJson("worterbuch/german-verbs.json?v=20261108-wn-montage58-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261109-wn-meanings60-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261109-wn-lange59-1"),
