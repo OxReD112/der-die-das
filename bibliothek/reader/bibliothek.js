@@ -702,15 +702,23 @@
     $("chapter-progress-track").hidden = !hasChapters(book);
     const end = $("chapter-end"); end.replaceChildren(); end.hidden = false; end.classList.remove("is-book-end"); end.style.height = "";
     const entries = hasChapters(book) ? readingEntries(book) : [], active = hasChapters(book) ? activeEntry(book) : null, index = entries.indexOf(active);
+    // 09.11 (Alena): the end of a chapter — a card with the next chapter's title (variant Б); the end of the book — the
+    // carmine ribbon, «Ende» and «Das war die letzte Seite.», no button: the book is marked as read by reaching it.
     if (entries[index + 1]) {
       const next = document.createElement("button"); next.id = "next-chapter"; next.className = "next-chapter-card"; next.type = "button";
-      next.textContent = "Nächstes Kapitel →";
+      const label = document.createElement("small"), title = document.createElement("b"), chev = document.createElement("span");
+      label.textContent = "Nächstes Kapitel"; title.textContent = entries[index + 1].title; title.lang = "de";
+      chev.className = "ui-chev ui-chev-lone"; chev.setAttribute("aria-hidden", "true");
+      next.append(label, title, chev);
       next.setAttribute("aria-label", "Nächstes Kapitel: " + entries[index + 1].title); next.addEventListener("click", () => navigateTo(entries[index + 1])); end.append(next);
     } else {
       end.classList.add("is-book-end");
-      const finish = document.createElement("button"); finish.className = "next-chapter-card"; finish.type = "button";
-      finish.textContent = book.completed ? "Buch abgeschlossen ✓" : "Buch abschließen ✓"; finish.disabled = Boolean(book.completed);
-      finish.addEventListener("click", async () => { book.completed = true; book.readingStarted = true; await saveBook(book); renderChapterNavigation(book); vocabularyPanel.updateCount(); showToast("Buch abgeschlossen."); }); end.append(finish);
+      // the end page: the carmine ribbon, «Ende» and one line; the book counts as read on reaching it (updateBookmarkStatus)
+      const box = document.createElement("div"); box.className = "book-end";
+      const mark = document.createElement("span"); mark.className = "book-end-ribbon"; mark.setAttribute("aria-hidden", "true");
+      const heading = document.createElement("h3"); heading.textContent = "Ende"; heading.lang = "de";
+      const line = document.createElement("p"); line.textContent = "Das war die letzte Seite."; line.lang = "de";
+      box.append(mark, heading, line); end.append(box);
     }
 
   }
@@ -1657,7 +1665,11 @@
       changed = true;
     }
     const last = paragraphs[paragraphs.length - 1];
-    if (book.readingStarted && !book.completed && !hasChapters(book) && pagination.page > 0 && pagination.page === pagination.count - 1) {
+    // 09.11 (Alena): every book is «Gelesen» once its last page is reached — a text without chapters as before, a book
+    // with chapters on the last page of its last chapter (there is no «Buch abschließen» button any more).
+    const entries = hasChapters(book) ? readingEntries(book) : [];
+    const lastPart = !hasChapters(book) ? pagination.page > 0 : activeEntry(book) === entries[entries.length - 1];
+    if (book.readingStarted && !book.completed && lastPart && pagination.page === pagination.count - 1) {
       book.completed = true;
       changed = true;
     }

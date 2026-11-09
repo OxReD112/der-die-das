@@ -1116,10 +1116,6 @@ body.library-screen .data-sources button:active:not(:disabled) {
     500 14px/1.4 var(--font);
   cursor: pointer;
 }
-.next-chapter-card:disabled {
-  cursor: default;
-  color: var(--muted);
-}
 .contents-dialog,
 .vocabulary-dialog {
   box-sizing: border-box;
@@ -2917,3 +2913,26 @@ body.library-screen .reader .library-add-menu button + button::before { content:
    previous title and its own (a little nearer its own), not lying on its title */
 .contents-entry[aria-current]::before { top: 1px; }
 .contents-entry[aria-current]::after { top: calc(1px - var(--slit-height)); }
+
+/* 09.11 (Alena): the end of a chapter — «N Wörter markiert · Ansehen ›» on its own line, under it a card the width of
+   the text with the next chapter's title (variant Б). The end of the book — the carmine ribbon, «Ende» and one line
+   (no button: reaching the last page marks the book as read). */
+.chapter-end { flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 10px; }
+.chapter-end .chapter-vocabulary-review { align-self: flex-start; padding-left: 0; }
+.chapter-end .chapter-vocabulary-review .ui-chev { margin-left: 4px; }
+#next-chapter.next-chapter-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 12px;
+  width: 100%; min-height: 0; padding: 16px 18px; border: 0; border-radius: 18px;
+  background: var(--tile-surface); box-shadow: var(--lift-highlight), var(--lift-shadow); text-align: left;
+}
+#next-chapter small { grid-column: 1; color: var(--muted); font: 600 11px/1.2 var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+#next-chapter b { grid-column: 1; font: 600 17px/1.3 var(--serif); overflow-wrap: anywhere; }
+#next-chapter .ui-chev { grid-column: 2; grid-row: 1 / 3; color: var(--muted); }
+.book-end { display: grid; justify-items: center; gap: 12px; width: min(320px, 100%); margin: 0 auto; text-align: center; }
+.book-end h3 { margin: 4px 0 0; color: var(--text); font: 400 26px/1.2 var(--serif); }
+.book-end p { margin: 0 0 6px; color: var(--muted); font: 14px/1.45 var(--font); }
+.book-end-ribbon { width: 16px; height: 34px; background: var(--ribbon); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%); }
+
+/* 09.11 (Alena): the word of «Словарная справка» (from the popover and on Meine Wörter's second screen) the size of the
+   popover's word — it was 28, louder than everything around it */
+.dictionary-headword { font-size: 20px; }
