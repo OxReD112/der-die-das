@@ -13748,7 +13748,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     function modalMood(word, c) {
       // (advisor 08.11: the modal of a passive chain names its mood / tense the same way — müsse gelesen werden: Konjunktiv I)
-      if (!["modal-group","modal-passive"].includes(c.construction?.id) || canonicalPos(c.pos) !== "Verb") return null;
+      // (TODO 64, advisor 08.11 #22 (а): the same for the modal of a perfect infinitive — musste … gewesen sein — and of a lassen chain —
+      // wollte ihn nicht ziehen lassen)
+      if (!["modal-group","modal-passive","modal-perfect-infinitive","lassen-infinitive"].includes(c.construction?.id) || canonicalPos(c.pos) !== "Verb") return null;
       const base = norm(c.lemma);
       if (!MODAL_BASES.has(base) || norm(c.construction.lemma || "") === base) return null;
       const tenses = new Set((verbAnalyses.get(norm(word)) || []).filter(r => r.kind === "finite" && norm(r.base) === base).map(r => r.tense));

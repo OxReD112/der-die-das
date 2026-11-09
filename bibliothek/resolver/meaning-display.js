@@ -421,7 +421,8 @@
       case 'modal-perfect-infinitive': {
         const tail = k.passive ? ['Perfekt', 'Passiv'] : ['Perfekt'];
         if (k.clickedRole) return {marks:[`Modal mit ${name}`, ...tail], role:k.clickedRole, spans};
-        if (MODALS.has(own) && !isMain) return {marks:[`mit ${name}`, ...tail], role:k.hearsay && own === 'sollen' ? 'hearsay' : null, spans};
+        // (TODO 64: the modal names its tense / mood as in the plain modal group — musste … gewesen sein «Präteritum mit sein · Perfekt»)
+        if (MODALS.has(own) && !isMain) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name}`, ...tail], role:k.hearsay && own === 'sollen' ? 'hearsay' : null, spans}; }
         return {marks:[`Modal mit ${name}`, ...tail], role:null, spans};
       }
       // Reference A6 (F12-A6): geträumt / haben «Perfekt mit träumen» (haben — auxiliary text), sterben «Modal mit sterben»,
@@ -465,7 +466,7 @@
         const infinitiveHere = isMain || String(name).split(' und ').map(verbBase).includes(own);
         const compound = tense && /^(?:Perfekt|Plusquamperfekt|Futur I|Konjunktiv II)$/u.test(tense) ? tense : null;
         if (infinitiveHere) return {marks:[compound ? `${compound} mit lassen` : 'mit lassen'], role:null, spans};
-        if (MODALS.has(own)) return {marks:[`mit ${name} lassen`], role:null, spans};
+        if (MODALS.has(own)) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name} lassen`], role:null, spans}; }
         return {marks:[`${tense || 'Präsens'} mit ${name} lassen`],
           role:tense === 'Perfekt' ? 'perfectHave' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
       }
