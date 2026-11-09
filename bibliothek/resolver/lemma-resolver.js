@@ -1067,7 +1067,8 @@
       // ending — die riesigen …, mit vergrößertem Führerhaus — an attribute the dictionaries do not know)
       // (a plural head after a singular contraction is no plural at all — im Staubecken is Stau + Becken, not Staub + Ecken)
       if (h.number === 'plural' && ctx.contraction) return false;
-      if (!(ctx.det || ctx.adj || ctx.lowerAttr || ctx.numberBefore && h.number === 'plural')) return ctx.name || ctx.nameSlot ? false : 'maybe';
+      // (advisor 09.11, r2-cmp-contr) a contraction is a sign too (am Arbeitsleben, im Schlosshof); its gender is checked against the last part later
+      if (!(ctx.det || ctx.adj || ctx.lowerAttr || ctx.contraction || ctx.numberBefore && h.number === 'plural')) return ctx.name || ctx.nameSlot ? false : 'maybe';
       return lemma !== 'mann' || h.number === 'plural' || !!parts.at(-2)?.link;
     }
     // (advisor 09.11, п. 5: «делится — показываем состав всегда, „имя“ — подпись, а не запрет») a split into known parts is a common noun
@@ -3955,6 +3956,12 @@
         } else lemma = w.slice(0,at) + head.text;
         formation = {kind:"compound",parts:parts.map(part),half:!noun && head.half ? head.text : null,...(found.compound.maybeName ? {maybeName:true} : {})};
         // «maybe a name»: no article of its own (a place or a person — not «das Dorf» of the sentence)
+        // (chat of tests 09.11) a contraction as the only sign must agree with the gender of the last part: zur Rosenwald (zu der, Wald is
+        // der) is no common noun — «Name / Nomen · Kompositum» as without a sign
+        if (noun && !found.compound.maybeName && ctx.contraction && !(ctx.det || ctx.adj || ctx.lowerAttr) && gender && !number) {
+          const allowed = DET_GENDERS[norm(context.sentence.slice(0,signAt).match(/(\p{L}+)[ \t]*$/u)?.[1] || "")];
+          if (allowed && !allowed.includes(gender)) { found.compound.maybeName = true; formation = {...formation, maybeName:true}; }
+        }
         if (found.compound.maybeName) { gender = null; number = null; }
       } else if (found.diminutive) {
         const d = found.diminutive;
