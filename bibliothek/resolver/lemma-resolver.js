@@ -15521,6 +15521,40 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (1) right before an adjective / adverb: the adverb (sein may stand in the part: Ihm war … entschieden übel; haben / werden
       // not — wurde … so demokratisch gewählt wie, aufgenommen zu werden: the verb's own chain)
       const HABEN_WERDEN = /^(?:habe|hab|hast|hat|haben|habt|hatte|hattest|hatten|hattet|hätte|hätten|hättest|hättet|werde|wirst|wird|werden|werdet|wurde|wurden|würde|würden|worden|geworden|ward)$/u;
+      // (09.11, advisor; train map: Auch deshalb entstanden bald populistische Bewegungen, … besiedelt gewöhnlich … Hänge): a spelling that is
+      // also a finite form, after the first member of its clause, with no other finite verb in the clause, is the finite verb of the
+      // clause — not a modifier (Damals entstanden viele Häuser; the adverb stays for Ihm war allmählich entschieden übel — war is the verb).
+      // The clause: the span past brackets and quotes (Das Dünenrosengebüsch (Roso …) besiedelt gewöhnlich …), cut at und / oder / aber …
+      // (Es entstanden bald neue Häuser und die Stadt wuchs). The first member: words before it that do not open a noun group (not Ein
+      // entschieden besseres Ergebnis, mit entschieden …), a number in digits (1956 / 1957 entstanden erstmals …), or a whole adverbial
+      // clause before a comma (Als die Römer kamen, entstanden bald neue Städte). Another finite verb: an auxiliary / copula form (sei,
+      // wäre) or a word with a verb reading only — enge, gewöhnlich are adjectives first (In den vergangenen Jahren entstanden enge …).
+      const finiteSelf = verbRows.some(x => x.kind === "finite");
+      if (finiteSelf) {
+        let cf = at; while (cf > ab && !CLAUSE_COORDINATORS.includes(low(cf - 1))) cf--;
+        let ct = at; while (ct < ae && !CLAUSE_COORDINATORS.includes(low(ct + 1))) ct++;
+        // (finite auxiliary / copula forms only — not sein (also the possessive), gewesen, worden, geworden)
+        const AUX_FINITE = /^(?:habe|hab|hast|hat|haben|habt|hatte|hattest|hatten|hattet|hätte|hätten|hättest|hättet|bin|bist|ist|sind|seid|war|warst|waren|wart|wäre|wären|wärst|sei|seien|werde|wirst|wird|werden|werdet|wurde|wurden|würde|würden|ward)$/u;
+        const otherFinite = k => k !== at && (/^\p{Ll}/u.test(tokens[k][0]) || k === 0) && (AUX_FINITE.test(low(k)) ||
+          (verbAnalyses.get(low(k)) || []).some(a => a.kind === "finite") && !(forms.get(low(k)) || []).some(e => e.type !== "Verb") && !ARTICLE_WORD.test(low(k)));
+        const prev = at > cf ? low(at - 1) : "";
+        const groupOpen = prev && (ARTICLE_WORD.test(prev) || prepositions.has(prev) || /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen|jed|manch|welch|solch)\p{L}*$/u.test(prev));
+        const lead = sentence.slice(ab > 0 ? tokens[ab - 1].index + tokens[ab - 1][0].length : 0, tokens[ab].index).split(/[,;:.!?–—]/u).pop();
+        let clauseBefore = false;
+        if (at === ab && ab > 0 && /,/u.test(gap(ab - 1, ab))) {
+          let q = ab - 1; while (q > 0 && !/[,;:.!?–—]/u.test(gap(q - 1, q))) q--;
+          // (a subordinate clause has a word between the conjunction and its finite verb last: Als die Römer kamen, …; not Da stand er
+          // nun, verloren mitten …, not Wie erwartet, entschieden besser …)
+          clauseBefore = (q === 0 || /[.!?:;]/u.test(gap(q - 1, q))) && /^(?:als|wenn|weil|da|nachdem|bevor|während|sobald|solange|seit|seitdem|bis|obwohl|obgleich|falls|sofern|wo|wie|dass|daß|ob)$/u.test(low(q)) &&
+            q < ab - 2 && (AUX.test(low(ab - 1)) || (verbAnalyses.get(low(ab - 1)) || []).some(a => a.kind === "finite"));
+        }
+        // (the span starts a sentence or follows . ! ? : ; — after a bare comma the finite verb may stand before it: Heute spielt sie, wie
+        // ich finde, entschieden besser; Ihm war, glaube ich, allmählich entschieden übel)
+        const spanStart = ab === 0 || /[.!?:;]/u.test(gap(ab - 1, ab));
+        const firstMember = clauseBefore || spanStart && (at > cf ? !groupOpen : cf === ab && /\d/u.test(lead));
+        let other = false; for (let k = cf; k <= ct; k++) if (otherFinite(k)) { other = true; break; }
+        if (firstMember && !other) return result;
+      }
       if (at + 1 <= end && !wide.some(k => HABEN_WERDEN.test(low(k))) && /^\s+$/u.test(gap(at, at + 1)) && /^\p{Ll}/u.test(tokens[at + 1][0])) {
         const next = low(at + 1), own = forms.get(next) || [];
         // (an adjective / adverb only — not zu, a preposition, a particle or a conjunction: aufgenommen zu werden, gedrückt an …)
