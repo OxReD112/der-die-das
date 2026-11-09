@@ -169,8 +169,10 @@
       return labelledParts(candidate, language).slice(0, shownCount(Infinity)).map(row => row.text).join('; ');
     let text = candidate.translation?.[language] || '';
     // G40 (21.10.2026): a meaning the resolver proved from the sentence (bald darauf → «после этого, потом») comes first.
-    if (Number.isInteger(candidate.senseFirst)) { const parts = meaningParts(text); if (candidate.senseFirst < parts.length)
-      text = [parts[candidate.senseFirst], ...parts.filter((_, i) => i !== candidate.senseFirst)].map(p => p.trim()).join('; '); }
+    // (cheap signs 09.11: the English line may cut its meanings otherwise than the Russian one — danach: senseFirstEn)
+    const first = language === 'en' && Number.isInteger(candidate.senseFirstEn) ? candidate.senseFirstEn : candidate.senseFirst;
+    if (Number.isInteger(first)) { const parts = meaningParts(text); if (first < parts.length)
+      text = [parts[first], ...parts.filter((_, i) => i !== first)].map(p => p.trim()).join('; '); }
     if (language === 'en' && /^gerund of anrufen$/i.test(text.trim())) return 'the act of calling';
     if (language === 'en' && /^gerund of /i.test(text.trim())) return 'verbal noun';
     // A confirmed lassen bracket does not pick permission versus causation.

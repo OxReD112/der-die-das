@@ -7111,7 +7111,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const accNP = k => (ACC_DET.test(norm(tokens[k]?.[0] ?? "")) || NEUTRAL_DET.test(norm(tokens[k]?.[0] ?? ""))) && !inPhrase.has(k) && objectNoun(k+1) > 0 &&
             !TIME_NOUN.test(norm(tokens[objectNoun(k+1)][0]));
           const twoAccusatives = free.some(x => /^(?:mich|dich|ihn|uns|euch|sie|es)$/u.test(x.w) && !(x.t === "Sie" && x.i > start) && x.i+1 <= end && accNP(x.i+1));
-          if (personPronoun || thingSubject || numberObject || twoAccusatives) return {candidate:twin,evidence:'double-accusative-frame'};
+          // (cheap signs, advisor 08.11, claude/CHEAP_SIGNS_COUNT_2026-11-08_RU.md: das / sein / ihr … Leben is the object of «стоить» —
+          // die Droge hat Zehntausenden das Leben gekostet; a time only with lang after it — sein Leben lang)
+          const lifeObject = free.some(x => x.w === "leben" && /^(?:das|sein|ihr|mein|dein|unser|euer|ihre|seine)$/u.test(norm(tokens[x.i-1]?.[0] ?? "")) &&
+            norm(tokens[x.i+1]?.[0] ?? "") !== "lang");
+          if (personPronoun || thingSubject || numberObject || twoAccusatives || lifeObject) return {candidate:twin,evidence:'double-accusative-frame'};
         } }
       // (the own form decides unless an object speaks against its card: hing den Hasen an einen Ast — window)
       if (formCard) return accusative && !patterns(formCard).some(p => /Akkusativ/u.test(p)) ? null : {candidate:formCard,evidence:'own-form'};
@@ -11823,6 +11827,36 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (anyNoun && result.status !== "unresolved" && canonicalPos(sel?.pos) === "Nomen") return pick("ambiguous", [name, ...list], "name-or-noun-after-title");
       return pick("resolved", [name, ...list], "name-after-title");
     }
+    // Cheap signs (advisor 08.11, claude/CHEAP_SIGNS_COUNT_2026-11-08_RU.md): weiß after sein / werden in its part is the colour — Ihre
+    // Lippen waren weiß, das war so weiß wie Schnee, der Bauch ist weiß (not wissen: er weiß); alle right after wir / ihr / sie / uns / euch is
+    // the pronoun «все» — der Wolf fand sie alle (not «alle» finished), ich mache sie alle zu reichen Leuten (not allemachen).
+    const SEIN_WERDEN_FINITE = /^(?:ist|war|sind|waren|bin|bist|seid|wäre|wären|sei|wird|wurde|wurden|werden|ward|wirst|bleibt|blieb|blieben|scheint|schien)$/u;
+    function cheapSignCards(word, context, result) {
+      const list = result?.candidates || [];
+      if (!result || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
+      const w = String(word), sentence = context.sentence, tokens = sharedTokens(sentence,'cheapSignCards');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word); if (at < 0) return result;
+      const gapBefore = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const choose = (c, evidence) => keepDecision(result,{...result,candidates:[c,...list.filter(x => x !== c)],selected:c,preferred:c,status:'resolved',evidence},{outcome:'selected',rule:evidence,reason:evidence});
+      if (w === "weiß") {
+        const adj = list.find(c => c.source === "main" && canonicalPos(c.pos) === "Adjektiv" && norm(c.lemma) === "weiß");
+        if (!adj || result.selected === adj) return result;
+        for (let i = at - 1; i >= Math.max(0, at - 3); i--) {
+          if (/[,;:.!?»«„“"()–—]/u.test(gapBefore(i+1))) break;
+          const t = norm(tokens[i][0]);
+          if (SEIN_WERDEN_FINITE.test(t)) return choose(adj, "weiss-after-sein");
+          if (SUBJECT_PRONOUNS.has(t) && !/^(?:sie|es)$/u.test(t) || !/^\p{Ll}/u.test(tokens[i][0]) && i !== at - 1 && !/^(?:so|noch|ganz|fast|sehr|schon|wie)$/u.test(t)) {
+            if (!/^(?:so|noch|ganz|fast|sehr|schon|nicht)$/u.test(t)) break;
+          }
+        }
+        return result;
+      }
+      if (w === "alle" && at > 0 && /^\s+$/u.test(gapBefore(at)) && /^(?:wir|ihr|sie|uns|euch)$/u.test(norm(tokens[at-1][0]))) {
+        const pron = list.find(c => c.source === "main" && canonicalPos(c.pos) === "Pronomen" && norm(c.lemma) === "alle");
+        if (pron && result.selected !== pron) return choose(pron, "alle-after-pronoun");
+      }
+      return result;
+    }
     function oldDativeE(word, context, result) {
       const list = result?.candidates || [];
       if (!result || result.status !== 'ambiguous' || list.length < 2 || !/^\p{Lu}\p{Ll}+e$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
@@ -15399,7 +15433,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -15477,6 +15511,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function temporalSense(word, context, result) {
       const c = result?.selected;
       if (!c || c.source !== "main" || !c.item || canonicalPos(c.pos) !== "Adverb" || !context || !Number.isInteger(context.tokenOffset)) return result;
+      if (norm(word) === "danach") return danachSense(word, context, result);
       if (!/^(?:da|hier)r?auf$/u.test(norm(word))) return result;
       const parts = String(c.item.translation_ru || "").split(/;\s*/u), index = parts.findIndex(part => TEMPORAL_PART.test(part.trim()));
       if (index <= 0) return result;
@@ -15509,10 +15544,57 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // opens the clause (Ein paar Tage darauf hub …, Am Morgen darauf …), not a duration (zehn Jahre darauf hingearbeitet).
       const countAt = at - 2 >= begin ? at - 2 : -1;
       const opensClause = countAt === begin || countAt === begin + 1 && TIME_COUNT.test(norm(tokens[begin][0]));
+      // (cheap signs, advisor 08.11, claude/CHEAP_SIGNS_COUNT_2026-11-08_RU.md: also a time noun after im / am / in den … anywhere — im Jahr
+      // darauf, in den Tagen darauf; darauf folgend-; Darauf opening the sentence + a finite verb, no verb governing auf in the part — by the
+      // cards' complements, a short fallback list while they are incomplete — Darauf ging sie …, not Darauf weist … hin, Darauf aufbauend)
+      const nextWord = norm(tokens[at+1]?.[0] ?? "");
+      const followGap = at+1 < tokens.length ? sentence.slice(tokens[at].index + tokens[at][0].length, tokens[at+1].index) : "";
+      const AUF_FALLBACK = /^(?:weis\p{L}*|wies\p{L}*|gewiesen|hingewiesen|deut\p{L}*|gedeutet|hingedeutet|hinauszulaufen|hinausläuft|hinauslief|hinauslaufen|warte\p{L}*|gewartet|achte\p{L}*|geachtet|rechne\p{L}*|gerechnet|besteh\p{L}*|bestand\p{L}*|bestanden|verlass\p{L}*|verließ\p{L}*|zähl\p{L}*|hoff\p{L}*|bezieh\p{L}*|bezog\p{L}*|bezogen|antwort\p{L}*|spezialisiert|aufbauend|angesprochen|legen|legte\p{L}*|gelegt|freu\p{L}*|stolz|angewiesen)$/u;
+      const partWords = tokens.slice(begin,end).map(t => norm(t[0]));
+      const fallbackGoverns = partWords.some((w,i) => begin+i !== at && AUF_FALLBACK.test(w));
+      const sentenceStart = at === begin && /^\p{Lu}/u.test(tokens[at][0]) && (at === 0 || /[.!?»«„“"–—:]\s*$/u.test(sentence.slice(0, tokens[at].index)));
+      const verbFirst = sentenceStart && /^\s+$/u.test(followGap) && /^\p{Ll}/u.test(tokens[at+1]?.[0] ?? "") && !/(?:end|ert)$/u.test(nextWord) &&
+        (verbAnalyses.get(nextWord) || []).some(a => a.kind === "finite");
+      const timeAnywhere = at > 1 && !/[,;:.!?»«„“"()–—]/u.test(gap) && TIME_NOUN.test(before) && /^(?:im|am|in|den|dem|die|der|tags)$/u.test(prev2);
+      const following = /^\s+$/u.test(followGap) && /^folgend/u.test(nextWord);
       const sign = at > 0 && !/[,;:.!?»«„“"()–—]/u.test(gap) && (TIME_WORD.test(before) || before === "lange" && prev2 === "nicht" ||
-        TIME_NOUN.test(before) && TIME_COUNT.test(prev2) && opensClause);
-      if (!sign || governsAuf) return result;
+        TIME_NOUN.test(before) && TIME_COUNT.test(prev2) && opensClause) || timeAnywhere || following;
+      const dataGoverns = tokens.slice(begin,end).some((t,i) => begin+i !== at && (
+        (forms.get(norm(t[0])) || []).some(e => e.type === "Verb" && aufCard(e)) ||
+        (verbAnalyses.get(norm(t[0])) || []).some(a => aufCard(a.entry) && (!a.detached || clauseWords.has(norm(a.prefix || ""))))));
+      const verbSign = !sign && verbFirst && !dataGoverns && !fallbackGoverns;
+      if (verbFirst && !sign) { (console.__cheap = console.__cheap || []).push(dataGoverns ? "darauf-governs-data" : fallbackGoverns ? "darauf-governs-fallback" : "darauf-verb-first"); }
+      if (!(sign || verbSign) || sign && governsAuf) return result;
       const selected = {...c, senseFirst:index, senseEvidence:"temporal-sign"};
+      return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
+        candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+    }
+    // (cheap signs, advisor 08.11): danach «после этого, потом» stays first; a verb or word of the part that governs nach — by the cards'
+    // complements, a short fallback list (aussehen, klingen … are not in them) — puts «об этом» first: fragte danach, sehnten sich danach,
+    // es sieht danach aus.
+    const NACH_FALLBACK = /^(?:frag\p{L}*|gefragt|sehn\p{L}*|gesehnt|such\p{L}*|gesucht|streb\p{L}*|gestrebt|sieht|sah|sahen|aussehen|aussah|aus|klang|klingt|klingen|griff|greif\p{L}*|gegriffen|verlang\p{L}*|verlangt)$/u;
+    function danachSense(word, context, result) {
+      const c = result.selected;
+      const parts = String(c.item.translation_ru || "").split(/;\s*/u), index = parts.findIndex(part => /об этом|о нём|по этому/u.test(part));
+      if (index <= 0) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'danachSense');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0) return result;
+      let end = at + 1; while (end < tokens.length && !/[,;:.!?»«„“"–—]/u.test(sentence.slice(tokens[end-1].index + tokens[end-1][0].length, tokens[end].index))) end++;
+      let begin = at; while (begin > 0 && !/[,;:.!?»«„“"–—]/u.test(sentence.slice(tokens[begin-1].index + tokens[begin-1][0].length, tokens[begin].index))) begin--;
+      // (nach + Dativ as the object only — not a direction «nach / in + …»; a particle closing the part makes another verb: richteten
+      // sich … ein, machten sich … auf, zog … aus)
+      const nachCard = e => (e?.complements || []).some(x => /^nach\s*\+/u.test(String(x.pattern || "").trim()));
+      const partWords = tokens.slice(begin,end).map(t => norm(t[0]));
+      const closing = WORD_FORMATION_PARTICLES.has(partWords.at(-1) || "") || /^(?:ein|auf|zu|an|aus|ab|mit|vor|weg|fort|zurück|her|hin)$/u.test(partWords.at(-1) || "");
+      const byData = tokens.slice(begin,end).some((t,i) => begin+i !== at && ((forms.get(norm(t[0])) || []).some(e => e.type === "Verb" && nachCard(e) && !closing) ||
+        (verbAnalyses.get(norm(t[0])) || []).some(a => nachCard(a.entry) && (a.detached ? partWords.includes(norm(a.prefix || "")) : !closing))));
+      const byFallback = !byData && tokens.slice(begin,end).some((t,i) => begin+i !== at && NACH_FALLBACK.test(norm(t[0])) && !(norm(t[0]) === "aus" && !tokens.slice(begin,end).some(u => /^(?:sieht|sah|sahen|aussehen)$/u.test(norm(u[0])))));
+      if (!byData && !byFallback) return result;
+      (console.__cheap = console.__cheap || []).push(byData ? "danach-governs-data" : "danach-governs-fallback");
+      // (the English line may cut the meanings otherwise — afterwards; after that; about it: its own place of «about it»)
+      const indexEn = String(c.item.translation_en || "").split(/;\s*/u).findIndex(part => /\babout (?:it|that|this|him|her|them)\b/u.test(part));
+      const selected = {...c, senseFirst:index, ...(indexEn >= 0 ? {senseFirstEn:indexEn} : {}), senseEvidence:"governed-preposition"};
       return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
         candidates:(result.candidates || []).map(x => x === c ? selected : x)};
     }
