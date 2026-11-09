@@ -7,8 +7,11 @@
   const DEFAULT_SIZE = 2;
   const SPACING = { compact: 1.55, normal: 1.82, loose: 2.1 };
   const FONTS = {
-    serif: 'Georgia, "Times New Roman", serif',
-    sans: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'
+    // 09.11 (Alena): the app's own fonts (components/deutsch-fonts-v1.css), the same on every device — Literata for
+    // Serif (sized to Georgia, so lines and pages barely move), Inter for Sans; Georgia and the system font only
+    // while they load.
+    serif: '"Literata Deutsch", Georgia, "Times New Roman", serif',
+    sans: '"Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif'
   };
   const DEFAULTS = { size: DEFAULT_SIZE, spacing: "normal", align: "justify", font: "serif" };
 

@@ -335,8 +335,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: var(--tile-surface);
   color: var(--bibliothek-primary);
   font:
-    600 16px/1 Georgia,
-    serif;
+    600 16px/1 var(--serif);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 2px 4px rgba(0, 0, 0, 0.12);
@@ -461,7 +460,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border: 1px solid var(--hairline);
   border-radius: 2px 4px 4px 2px;
   color: color-mix(in srgb, var(--muted) 70%, transparent);
-  font: 40px/1 Georgia, serif;
+  font: 40px/1 var(--serif);
 }
 .empty-mark::before {
   content: "";
@@ -559,7 +558,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   color: var(--text);
   /* Size, spacing, font and alignment come from the reader's text settings (reader-text-settings.js). */
   font: 400 calc(clamp(18px, 4.8vw, 21px) * var(--reader-text-scale, 1)) / var(--reader-line-height, 1.82)
-    var(--reader-font, Georgia, "Times New Roman", serif);
+    var(--reader-font, var(--serif));
   letter-spacing: 0.005em;
   overflow-wrap: anywhere;
 }
@@ -981,7 +980,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   background: var(--card-bg);
   color: var(--secondary-text);
   font:
-    16px/1.5 Georgia,
+    16px/1.5 var(--serif),
     "Times New Roman",
     serif;
 }
@@ -1554,8 +1553,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border-left: 2px solid var(--hairline);
   color: var(--secondary-text);
   font:
-    15px/1.5 Georgia,
-    serif;
+    15px/1.5 var(--serif);
   overflow-wrap: anywhere;
 }
 .vocabulary-empty {
@@ -2402,7 +2400,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border-radius: 8px;
   background: transparent;
   color: var(--secondary-text);
-  font: 600 19px/1 Georgia, "Times New Roman", serif;
+  font: 600 19px/1 var(--serif);
   letter-spacing: -0.02em;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -2491,7 +2489,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   border: 0;
   background: transparent;
   color: var(--secondary-text);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--serif);
   line-height: 1;
   cursor: pointer;
 }
@@ -2580,7 +2578,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   -webkit-tap-highlight-color: transparent;
 }
 .text-segments button.is-serif {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--serif);
   font-size: 16px;
 }
 .text-segments button[aria-pressed="true"] {
@@ -2709,8 +2707,9 @@ body.library-screen .reader .library-add-toggle { width: 44px; height: 44px; bor
 .vocabulary-manual-copy textarea { border-radius: 18px; }
 .next-chapter-card,
 .lemma-choice { border-radius: 14px; }
-.text-segments { border-radius: 14px; }
-.text-segments button { border-radius: 11px; }
+/* 09.11 (Alena): the setting buttons as the segment switches of iOS — rounder would read as pills */
+.text-segments { border-radius: 10px; }
+.text-segments button { border-radius: 7px; }
 .contents-toggle,
 .text-settings-toggle { border-radius: 50%; }
 .library-add-menu { border-radius: 18px; }

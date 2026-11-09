@@ -45,7 +45,7 @@
         if(!mobile)return base;
         titleProbe.style.width=Math.max(36,size(i).height-52)+'px';titleProbe.textContent=books[i].title;
         titleProbe.style.font='400 12px/14px Arial';const sans=titleProbe.offsetHeight;
-        titleProbe.style.font='400 12px/14px Georgia';const height=Math.max(sans,titleProbe.offsetHeight);
+        titleProbe.style.font='400 12px/14px "Literata Deutsch", Georgia';const height=Math.max(sans,titleProbe.offsetHeight);
         return Math.max(base,height+8);
       }
       thicknesses.forEach((_,i)=>thicknesses[i]=titleThickness(i));
@@ -69,7 +69,7 @@
         el.dataset.coverDesign=designs[hashes[i]%designs.length];
         const coverFont=b.title.length>60?17:b.title.length>22?19:el.dataset.coverDesign==='title'?33:25;
         // Keep whole words intact where possible, including within the inset frame.
-        titleProbe.style.whiteSpace='nowrap';titleProbe.style.width='max-content';titleProbe.style.font=`400 ${coverFont}px Georgia`;
+        titleProbe.style.whiteSpace='nowrap';titleProbe.style.width='max-content';titleProbe.style.font=`400 ${coverFont}px "Literata Deutsch", Georgia`;
         let widestWord=0;
         for(const word of b.title.split(/\s+/)){titleProbe.textContent=word;widestWord=Math.max(widestWord,titleProbe.offsetWidth);}
         titleProbe.style.whiteSpace='normal';
@@ -261,6 +261,9 @@
       dispose=()=>{controller.abort();observer.disconnect();clearTimeout(settleTimer);if(motion!==null)cancelAnimationFrame(motion);};
       render();fit();
     }
+    // 09.11: titles are measured in Literata — once it has loaded, measure the shelf again if it was drawn before
+    if(document.fonts&&!document.fonts.check('12px "Literata Deutsch"'))
+      document.fonts.load('12px "Literata Deutsch"').then(()=>{if(current.length&&root.isConnected)update(current);},()=>{});
     return {update,pause:()=>{dispose();},resume:()=>update(current)};
   }};
 })();
