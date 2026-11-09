@@ -6735,6 +6735,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (review 30.10: ich before it too — Ich lass uns eine Pizza kommen, Ich lass dich gehen)
         const colloquialIch=head.kind==='imperative'&&(words(l+1)==='ich'||words(l-1)==='ich');
         tense=outer===null?(head.kind==='infinitive'?undefined:colloquialIch?'Präsens':letUs!==null?'Imperativ':head.tense):head.base==='haben'?headRows.some(a=>a.tense==='Präteritum')?'Plusquamperfekt':'Perfekt':head.base==='werden'?headRows.some(a=>a.tense==='Konjunktiv II')?'Konjunktiv II':'Futur I':head.tense;
+        // (advisor 09.11: the wenn / falls / sofern pair of #22 (в) answer 2 also for lassen itself — ließen is Präteritum and Konjunktiv II:
+        // Wenn sie das Haus bauen ließen, wären sie froh → «Konjunktiv II»)
+        if(outer===null&&tense==='Präteritum'&&headRows.some(a=>a.tense==='Konjunktiv II')&&
+          weakPastIndicative('lassen',tokens[l].index,{sentence},true)==='konj')tense='Konjunktiv II';
         const replacement=outer!==null&&head.base==='haben';
         // (L15 steps 2 / 3, advisor 29.10 — strict: «здесь: …» only where the form proves it; otherwise the plain card with the link)
         const preposition=i=>i>=0&&((forms.get(words(i))||[]).some(e=>e.type==='preposition')||/^(?:als|wie|im|am|zum|zur|vom|beim|ins|ans|aufs|durchs|fürs|ums|unters|übers|vors|hinters)$/u.test(words(i)));
@@ -13370,9 +13374,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const end = /[,;:.!?»«„“"–—()]/u.exec(after);
       return !!end && end[0] === "!";
     }
-    function weakPastIndicative(base, start, context) {
+    // (advisor 09.11: pairOnly — only the wenn / falls / sofern pair of #22 (в) answer 2: "konj" or false; for a modal or lassen of a
+    // chain whose form is Präteritum and Konjunktiv II at once — Wenn er … reparieren lassen wollte, würde …; Wenn sie das Haus bauen
+    // ließen, wären sie froh; the question sign is not taken there — Sollte er es gewusst haben? keeps the double label)
+    function weakPastIndicative(base, start, context, pairOnly = false) {
       const sentence = String(context?.sentence || "");
-      if (!sentence || !Number.isInteger(start) || NO_WEAK_PAST_LABEL.has(base)) return false;
+      if (!sentence || !Number.isInteger(start) || !pairOnly && NO_WEAK_PAST_LABEL.has(base)) return false;
       // Verb-first: a conditional (Fragte man ihn, …) or a question — not claimed. A lowercase form right
       // after direct speech (»…?« fragte der Vater; a reader sentence starting «fragte der Vater») is the
       // speech tag, an indicative (to-do 19.10, 2.1, R-kafka-13).
@@ -13380,9 +13387,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (#22 (в), advisor 08.11, answer 3: a question with the weak -te form first — Wohnten Sie dort? — is Präteritum; the other
       // signs of its part still count)
       const question = /^\p{L}*te(?:st|n|t)?(?![\p{L}])/u.test(sentence.slice(start)) && (/[.!?]/u.exec(sentence.slice(start)) || [""])[0] === "?";
-      if (clauseInitial(sentence, start) && !speechTag && !question) return "doubt";
+      if (!pairOnly && clauseInitial(sentence, start) && !speechTag && !question) return "doubt";
       // als + verb: als wohnte er hier.
-      if (/(?:^|[^\p{L}])als[^\p{L}]*$/iu.test(sentence.slice(0, start))) return false;
+      if (!pairOnly && /(?:^|[^\p{L}])als[^\p{L}]*$/iu.test(sentence.slice(0, start))) return false;
       // Before a noun after a determiner, a number, a verb or a determiner + adverb the
       // spelling is an attributive participle (die beleuchtete Fenster, waren beleuchtete
       // Sichtfenster, dem blank polierten Tor), not a finite verb: no mark.
@@ -13395,13 +13402,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // das siebente / siebte is an ordinal, not sieben «просеивать». An ein-word / possessive + form +
       // comma is an adjective series (ihre erhitzten, schweißüberströmten Gesichter); der, die, das,
       // dieser, alles before the form are pronoun subjects (das hörte, …) and keep the mark.
-      if (DET.test(prev) && gap(words[at - 1], words[at]) && (/^sieb(?:en)?te[nmrs]?$/u.test(norm(words[at][0])) ||
+      if (!pairOnly && DET.test(prev) && gap(words[at - 1], words[at]) && (/^sieb(?:en)?te[nmrs]?$/u.test(norm(words[at][0])) ||
         /^(?:ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|seine\p{L}*|ihre\p{L}*|unser\p{L}*|eure\p{L}*)$/u.test(prev) &&
         /^\s*,/u.test(sentence.slice(words[at].index + words[at][0].length)))) return false;
       // A capitalised spelling inside the sentence is a noun (das Verlangte).
       // (#22 (в) answer 3: the polite Sie / Ihr after a verb opening a question is no noun — Wohnten Sie dort?)
-      if (/^\p{Lu}/u.test(words[at][0]) && (next && /^\p{Lu}/u.test(next) && !/^(?:Sie|Ihr|Ihnen)$/u.test(next) || !clauseInitial(sentence, start))) return false;
-      if (next && /^\p{Lu}/u.test(next) && gap(words[at], words[at + 1])) {
+      if (!pairOnly && /^\p{Lu}/u.test(words[at][0]) && (next && /^\p{Lu}/u.test(next) && !/^(?:Sie|Ihr|Ihnen)$/u.test(next) || !clauseInitial(sentence, start))) return false;
+      if (!pairOnly && next && /^\p{Lu}/u.test(next) && gap(words[at], words[at + 1])) {
         if (gap(words[at - 1], words[at]) && ((verbAnalyses.get(prev) || []).some(r => r.kind === "finite") || prepositions.has(prev) || DET.test(prev) ||
           /^\p{Ll}/u.test(words[at - 1][0]) && DET.test(prev2) && gap(words[at - 2], words[at - 1]))) return false;
         // die von ihr erwartete Wirkung, einem mit Blut bespritzten Umhang: a determiner
@@ -13508,10 +13515,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const s0 = lo > 0 ? partAt(lo - 1, -1) : -1;
           if (s0 >= 0 && pairCond(s0) && commaGap(lo - 1, lo) && opensMain(lo)) pair = [...range(s0, lo - 1), ...range(lo, hi)];
           // (not an inserted tag opening with its verb — Er hätte …, vermutete er, wenn Percy … hätte)
-          else if (hi + 1 < words.length && pairCond(hi + 1) && commaGap(hi, hi + 1) && !(lo > 0 && at === lo)) pair = [...range(lo, hi), ...range(hi + 1, partAt(hi + 1, 1))];
+          else if (hi + 1 < words.length && pairCond(hi + 1) && commaGap(hi, hi + 1) && !(lo > 0 && at === lo) &&
+            // (pairOnly, Mac / books check 09.11: not a wenn part inserted inside the own part — der sollte ihm, wenn es aufgewacht wäre,
+            // Kriegsdienste anbieten: the part after it has no clear finite verb (a form that is also an infinitive does not count) and continues the own part; the modal keeps the double label)
+            !(pairOnly && (() => { const e = partAt(hi + 1, 1); if (e + 1 >= words.length || !commaGap(e, e + 1)) return false;
+              return !range(e + 1, partAt(e + 1, 1)).some(k => { const rows = verbAnalyses.get(norm(words[k][0])) || [];
+                return /^\p{Ll}/u.test(words[k][0]) && rows.some(r => r.kind === "finite") && !rows.some(r => r.kind === "infinitive"); }); })()))
+            pair = [...range(lo, hi), ...range(hi + 1, partAt(hi + 1, 1))];
         }
         if (pair && pair.some(strongKonj2)) return "konj";
       }
+      if (pairOnly) return false;
       let conditional = false;
       for (const [k, m] of words.entries()) {
         if (k < lo2 || k > hi2) continue;
@@ -13761,7 +13775,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (/(?:est|et)$/u.test(norm(word))) return false;
       return ![tokens[at-1], tokens[at+1]].some(t => t && ["ich","du","ihr"].includes(norm(t[0])));
     }
-    function modalMood(word, c) {
+    function modalMood(word, c, context) {
       // (advisor 08.11: the modal of a passive chain names its mood / tense the same way — müsse gelesen werden: Konjunktiv I)
       // (TODO 64, advisor 08.11 #22 (а): the same for the modal of a perfect infinitive — musste … gewesen sein — and of a lassen chain —
       // wollte ihn nicht ziehen lassen)
@@ -13770,7 +13784,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!MODAL_BASES.has(base) || norm(c.construction.lemma || "") === base) return null;
       const tenses = new Set((verbAnalyses.get(norm(word)) || []).filter(r => r.kind === "finite" && norm(r.base) === base).map(r => r.tense));
       if (tenses.size === 1 && tenses.has("Konjunktiv II")) return "Konjunktiv II";
-      if (tenses.size === 2 && tenses.has("Konjunktiv II") && tenses.has("Präteritum")) return "Präteritum / Konjunktiv II";
+      if (tenses.size === 2 && tenses.has("Konjunktiv II") && tenses.has("Präteritum"))
+        return weakPastIndicative(base, context?.tokenOffset, context, true) === "konj" ? "Konjunktiv II" : "Präteritum / Konjunktiv II";
       if (tenses.size === 1 && tenses.has("Präteritum")) return "Präteritum";
       // L23 (reference A3, F12-A3c): a Konjunktiv I form (könne, solle) is never another tense of the modal.
       if (tenses.size === 1 && tenses.has("Konjunktiv I")) return "Konjunktiv I";
@@ -13873,7 +13888,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const hint = auxiliaryHint(word, c, context);
         const features = {...formFeatures(word, c, resolution, context), ...(modalAsFullVerb(word, c, context) ? {fullVerb:true} : {}),
           ...(hint ? {auxiliaryHint:hint} : {}),
-          ...(modalMood(word, c) ? {modalMood:modalMood(word, c), ...(modalMood(word, c) === "Konjunktiv I" && reportedSpeech(word, context) ? {reportedSpeech:true} : {})} : {}),
+          ...(modalMood(word, c, context) ? {modalMood:modalMood(word, c, context), ...(modalMood(word, c, context) === "Konjunktiv I" && reportedSpeech(word, context) ? {reportedSpeech:true} : {})} : {}),
           ...(externalSeparable(c, word) ? {separable:true} : {})};
         return Object.keys(features).length ? {...c, formFeatures:features} : c;
       });
