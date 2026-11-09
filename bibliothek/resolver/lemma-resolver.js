@@ -10505,12 +10505,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         } catch (_) { return null; }
         if (own.errors.length || following.errors.length) return null;
         const lowercaseLast = /^[a-zäöüß]/u.test(tokens[last][0]);
-        const adjective = !!ending && ending.base !== 'adverb' && !ending.unknown;
+        // (09.11, die Kunde) a reading with no ending at all is no adjective of the group (hatte der Kunde Geld — Kunde is the head)
+        // (only for a word with an own noun card — Kunde; Große, Tropfenden, Deutsche stay adjectives of the group)
+        const lastKey = norm(tokens[last][0]);
+        const ownNounCard = (lemmas.get(lastKey) || []).some(e => e.type === 'Nomen' && norm(e.word) === lastKey) &&
+          !['', 'e', 'en', 'em', 'er', 'es'].some(e => lastKey.endsWith(e) && (lemmas.get(lastKey.slice(0, lastKey.length - e.length)) || []).some(x => x.type === 'Adjektiv'));
+        const adjective = !!ending && ending.base !== 'adverb' && !ending.unknown && !(ownNounCard && ending.endings && !Object.keys(ending.endings).length);
         const noun = !lowercaseLast && nounReadings(tokens[last][0],own).some(r => !r.unknown);
         const nextNoun = nounReadings(tokens[next][0],following).some(r => !r.unknown);
         // A capitalised -er word before a known noun may be a place adjective
         // (die Pariser Regierung, die Gebauer Kunden) even when the dictionary lists only a noun.
-        if (!lowercaseLast && first === last && /er$/u.test(tokens[last][0]) && nextNoun && !adjective) return null;
+        // (advisor 09.11) only a word with an adjective record — our card or the external dictionary — is the place adjective (die Pariser
+        // Regierung, im Berliner Regierungsviertel); Leiter, Lehrer, Kellner, Mutter stay the head (hatte der Leiter Geld)
+        if (!lowercaseLast && first === last && /er$/u.test(tokens[last][0]) && nextNoun && !adjective) {
+          const key = norm(tokens[last][0]);
+          let placeAdjective = (lemmas.get(key) || []).concat(forms.get(key) || []).some(e => e.type === 'Adjektiv');
+          // (or a noun of the inhabitants of a place: Pariser «Parisian», Nürnberger «resident of Nuremberg»; or a name — zur Oettinger Brauerei, am Berger Feld)
+          if (!placeAdjective && fallback.lookup) { try { placeAdjective = (await fallback.lookup(tokens[last][0]) || []).some(g => g.pos === 'adj' ||
+            g.pos === 'name' && !(lemmas.get(key) || []).some(e => e.type === 'Nomen') ||
+            g.pos === 'noun' && [...(g.senses || []), ...(g.meanings || [])].map(x => typeof x === 'string' ? x : String(x?.gloss || '')).some(x => /\binhabitant\b|\bresident\b|\bnative\b|person from|^alternative form of \p{Lu}\p{Ll}+er\b|^[A-Z][a-z]+(?:ian|an|ese|ite|er)\b/u.test(x))); } catch (_) {} }
+          if (placeAdjective) return null;
+        }
         if ((lowercaseLast && first !== last || adjective && !noun) && nextNoun) { first = next; last = wordEnd(next); between++; }
         else if (!(noun && !adjective && !lowercaseLast)) return null;
       }
