@@ -5441,7 +5441,9 @@
       // an attributive form has its own ending: begonnenen, gebetene)
       // (links chat 07.11, registry s7873: an extended attribute — der bei lebendigem Leib verbrannten Personen — attributeFrameDeterminer)
       const attributeAfterPrepositionGroup = i => attributeFrameDeterminer(tokens,i,start) >= 0;
-      const attributiveForm = i => i > start && i < end && LOWERCASE_DECLINED_WORD.test(tokens[i][0]) && nounToken(i+1) &&
+      // (links chat 09.11, advisor 09.11: after a proven attribute frame an unknown capital word is the head of the group — der heute durch soziale
+      // Probleme bekannte Soldiner Kiez; as after a place adjective in -er)
+      const attributiveForm = i => i > start && i < end && LOWERCASE_DECLINED_WORD.test(tokens[i][0]) && (nounToken(i+1) || nounCapital(i+1) && attributeAfterPrepositionGroup(i)) &&
         !verbs(i).some(e => participleOf(e,i) || norm(e.word) === norm(tokens[i][0])) &&
         !/[,;:.!?()–—"„“»«]/u.test(sentence.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index)) &&
         // (advisor 04.11, map: also after als / wie — als degradierte Mythen angesehen; als manuell … — no)
@@ -8434,9 +8436,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // noun group, not this frame; a determiner further inside the group belongs to it — im Laufe der Jahrhunderte erfolgte)
         // (a determiner right after a preposition is the group's own — von ihr moderierten, im Laufe der Jahrhunderte)
         if (d > lo && prepositions.has(norm(tokens[d-1][0])) && d >= i-2 && !prepositions.has(norm(tokens[d+1][0]))) continue;
-        if (!prepositions.has(norm(tokens[d+1][0]))) { if (d >= i-2) return -1; continue; }
-        if (d+1 >= i-1) return -1;
-        for (let k = d+2; k < i; k++) if (/^\p{Ll}/u.test(tokens[k][0]) && verbal(k) && !adjectivalForm(tokens[k][0]) && !ownModifierForm(tokens[k][0]) &&
+        // (links chat 09.11, advisor 09.11: an adverb / number before the group — der heute durch soziale Probleme bekannte Kiez, den dort für ihn
+        // arbeitenden Baumeister, die 1897 von ihm gebaute Kirche)
+        const lead = k => /^\d+$/u.test(tokens[k][0]) || /^\p{Ll}/u.test(tokens[k][0]) && !verbal(k) &&
+          (forms.get(norm(tokens[k][0])) || []).some(e => ["Adverb","Partikel","particle"].includes(e.type));
+        let p = d+1; while (p < i-1 && !prepositions.has(norm(tokens[p][0])) && lead(p)) p++;
+        if (!prepositions.has(norm(tokens[p][0]))) { if (d >= i-2) return -1; continue; }
+        if (p+1 >= i) return -1;
+        for (let k = p+1; k < i; k++) if (/^\p{Ll}/u.test(tokens[k][0]) && verbal(k) && !adjectivalForm(tokens[k][0]) && !ownModifierForm(tokens[k][0]) &&
           !LOWERCASE_DECLINED_WORD.test(tokens[k][0])) return -1;
         return attributeFrameEndings(det).includes(ending) ? d : -1;
       }
