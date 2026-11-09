@@ -2195,36 +2195,12 @@ body.library-screen .data-sources button:active:not(:disabled) {
   outline: 2px solid var(--mint);
   border-radius: 50%;
 }
-.storage-notice {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    grid-template-rows 0.4s ease,
-    opacity 0.4s ease,
-    visibility 0.4s;
-}
-.storage-notice.is-open {
-  grid-template-rows: 1fr;
-  opacity: 1;
-  visibility: visible;
-}
-.storage-notice-inner {
-  min-height: 0;
-  overflow: hidden;
-}
 #page-previous,
 #page-next {
   display: none;
 }
 #page-status {
   text-align: left;
-}
-@media (prefers-reduced-motion: reduce) {
-  .storage-notice {
-    transition: none;
-  }
 }
 
 .book-row.is-missing .book-open {
@@ -2920,3 +2896,19 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 /* 09.11 (Alena): the word of the popover and of the dictionary card is read aloud on a tap (only with a German voice) */
 .popover-word.can-speak,
 .dictionary-headword.can-speak { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+/* 09.11 (Alena): the note behind ⓘ in its own window (variant Б), the same window as «Text einfügen» */
+.storage-dialog { width: min(400px, calc(100% - 32px)); }
+.storage-dialog .storage-note { margin-top: 12px; padding: 0; border-radius: 0; background: none; }
+.storage-dialog h2:focus { outline: none; }
+
+/* 09.11 (Alena): the message at the bottom — a card of the app, not a pill: as wide as it needs (it was held to half
+   the screen by left: 50%, so a long error broke into three narrow lines and looked round), corners 18, text centred */
+.reader-toast {
+  width: max-content;
+  max-width: min(calc(100vw - 48px), 440px);
+  box-sizing: border-box;
+  border-radius: 18px;
+  text-align: center;
+  line-height: 1.4;
+}

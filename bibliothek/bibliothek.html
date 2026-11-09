@@ -17,7 +17,7 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261109-speech-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261109-texts-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261109-fonts-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
@@ -31,16 +31,6 @@
       </header>
 
       <section class="library" id="library" aria-label="Your books">
-        <div class="storage-notice" id="storage-notice">
-          <div class="storage-notice-inner">
-            <div class="storage-note">
-              <p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such
-                as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p>
-              <p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your
-                original files as a backup.</p>
-            </div>
-          </div>
-        </div>
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
         <div class="library-bookshelf" id="library-bookshelf" hidden></div>
         <div class="library-edit-bar" id="library-edit-bar" hidden>
@@ -51,16 +41,22 @@
         <div class="empty-library" id="empty-library">
           <div class="empty-mark" aria-hidden="true">Aa</div>
           <h2 lang="de">Dein Leseraum</h2>
-          <p>Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
+          <p id="empty-library-text">Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
         </div>
+        <!-- 09.11 (Alena): the note behind ⓘ is a window over the library (it used to push the shelf down under the dock);
+             its text follows the language setting (bibliothek.js, libraryTexts) -->
+        <dialog class="paste-dialog storage-dialog" id="storage-notice" aria-labelledby="storage-notice-title">
+          <div class="paste-dialog-heading"><h2 id="storage-notice-title" tabindex="-1" autofocus>Bücher hinzufügen</h2><button class="ui-close" id="storage-notice-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="storage-note" id="storage-note"></div>
+        </dialog>
         <dialog class="paste-dialog" id="paste-dialog" aria-labelledby="paste-dialog-title">
-          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
         <form class="paste-form" id="paste-form">
-          <label for="paste-title">Title</label>
-          <input id="paste-title" maxlength="120" placeholder="My text" required />
-          <label for="paste-content">German text</label>
-          <textarea id="paste-content" rows="8" required placeholder="Paste a text to read…"></textarea>
-          <button class="primary-action" type="submit">Save text</button>
+          <label for="paste-title">Titel</label>
+          <input id="paste-title" maxlength="120" placeholder="Mein Text" required />
+          <label for="paste-content">Deutscher Text</label>
+          <textarea id="paste-content" rows="8" required placeholder="Deutschen Text hier einfügen …"></textarea>
+          <button class="primary-action" type="submit">Speichern</button>
         </form>
         </dialog>
         <input id="book-file" type="file" accept=".txt,.epub,text/plain,application/epub+zip" hidden />
@@ -76,8 +72,8 @@
           class="storage-info"
           id="storage-info"
           type="button"
-          aria-label="Book storage information"
-          aria-expanded="false"
+          aria-label="Hinweise zu Büchern"
+          aria-haspopup="dialog"
           aria-controls="storage-notice"
         >
           <svg
@@ -268,7 +264,7 @@
         </div>
         <div class="contents-columns" aria-hidden="true">Wörter</div>
         <div class="contents-list" id="contents-list"></div>
-        <p id="contents-empty" role="status" hidden>No chapters found.</p>
+        <p id="contents-empty" role="status" hidden>Keine Kapitel gefunden.</p>
       </div>
     </dialog>
     <dialog class="text-settings" id="text-settings" aria-labelledby="text-settings-heading">
@@ -395,12 +391,12 @@
         class="sources-close ui-close"
         id="sources-close"
         type="button"
-        aria-label="Close data sources and licenses"
+        aria-label="Schließen"
         autofocus
       >
         <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
       </button>
-      <h2 id="data-sources-title">Data sources &amp; licenses</h2>
+      <h2 id="data-sources-title">Quellen und Lizenzen</h2>
       <h3>German–English Dictionary</h3>
       <p>
         Dictionary data is derived from Wiktionary contributors, extracted via Kaikki.org, and distributed in this
@@ -415,7 +411,7 @@
         original SQLite dataset was converted into partitioned JSON files for application lookup. Dictionary content was
         preserved.
       </p>
-      <h3>Sources</h3>
+      <h3>Quellen</h3>
       <ul>
         <li><a href="https://en.wiktionary.org/" target="_blank" rel="noopener">Wiktionary ↗</a></li>
         <li><a href="https://kaikki.org/dictionary/German/" target="_blank" rel="noopener">Kaikki.org ↗</a></li>
@@ -425,7 +421,7 @@
           >
         </li>
       </ul>
-      <h3>Russian definitions</h3>
+      <h3>Russische Bedeutungen</h3>
       <p>
         Russian Wiktionary contributors; extracted and postprocessed via Wiktextract / Kaikki.org. Selected definition
         fields were converted into partitioned JSON with display annotations; source texts were preserved.
@@ -436,7 +432,7 @@
         >
       </p>
       <div id="russian-source-articles"></div>
-      <h3>License</h3>
+      <h3>Lizenz</h3>
       <p>
         <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"
           >Creative Commons Attribution-ShareAlike 4.0 International ↗</a
@@ -473,7 +469,7 @@
     <script src="reader/pronoun-reference.js?v=20261024-lowercase-1"></script>
     <script src="reader/bookshelf.js?v=20261109-fonts-1"></script>
     <script src="../components/deutsch-voice-v1.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261109-speech-lange59-1"></script>
-    <div class="version-mark" aria-hidden="true">v55</div>
+    <script src="reader/bibliothek.js?v=20261109-texts-2"></script>
+    <div class="version-mark" aria-hidden="true">v56</div>
   </body>
 </html>

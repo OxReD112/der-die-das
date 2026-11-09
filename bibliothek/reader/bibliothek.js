@@ -107,6 +107,56 @@
   });
   const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
+  // 09.11 (Alena): the rule of the app — names, buttons and short messages in German; explanations in the language of
+  // the setting. The library's explanations (the ⓘ note, the empty library) and its error messages follow it here;
+  // the messages of the import files stay in English there and are translated by this table.
+  const LIBRARY_NOTE = {
+    en: '<p><strong>Which files work</strong> EPUB without copy protection (DRM) and TXT. Books bought in shops such as Kindle, Apple Books or Kobo are usually protected and won’t open. PDF isn’t supported.</p><p><strong>Where books are kept</strong> Only on this device. Browser storage can be cleared, so keep your original files as a backup.</p>',
+    ru: '<p><strong>Какие файлы подходят</strong> EPUB без защиты от копирования (DRM) и TXT. Книги из магазинов — Kindle, Apple Books, Kobo — обычно защищены и не откроются. PDF не поддерживается.</p><p><strong>Где хранятся книги</strong> Только на этом устройстве. Хранилище браузера может очиститься, поэтому сохраняйте исходные файлы.</p>'
+  };
+  const LIBRARY_EMPTY = {
+    en: "Add a TXT or unencrypted EPUB file, or paste a German text to get started.",
+    ru: "Добавьте файл TXT или EPUB без защиты или вставьте немецкий текст, чтобы начать."
+  };
+  const MESSAGES_RU = {
+    "Reading position could not be saved.": "Не удалось сохранить место чтения.",
+    "Meaning selected, but the correction could not be saved.": "Значение выбрано, но сохранить выбор не удалось.",
+    "The word form is unavailable. Please reload and try again.": "Форма слова недоступна. Перезагрузите страницу и попробуйте ещё раз.",
+    "Vocabulary could not be loaded. Try reopening this word.": "Не удалось загрузить слова. Откройте это слово ещё раз.",
+    "Could not undo the mark. Please try again.": "Не удалось отменить отметку. Попробуйте ещё раз.",
+    "The mark could not be saved. Please try again.": "Не удалось сохранить отметку. Попробуйте ещё раз.",
+    "The book could not be saved. Check available browser storage.": "Не удалось сохранить книгу. Проверьте свободное место в браузере.",
+    "The text could not be saved. Check available browser storage.": "Не удалось сохранить текст. Проверьте свободное место в браузере.",
+    "Local book storage is unavailable in this browser.": "В этом браузере нельзя хранить книги.",
+    "This text is empty.": "Текст пустой.",
+    "This file type is not supported. Choose a TXT or EPUB file.": "Такой файл не подходит. Выберите TXT или EPUB.",
+    "EPUB import is not available yet.": "Загрузка EPUB пока недоступна.",
+    "This file could not be read. Try selecting it again.": "Не удалось прочитать файл. Выберите его ещё раз.",
+    "This EPUB contains invalid XML or chapter markup.": "В этом EPUB ошибка в разметке глав.",
+    "This EPUB references an unsupported resource.": "Этот EPUB ссылается на неподдерживаемый файл.",
+    "This EPUB contains an invalid resource path.": "В этом EPUB неверный путь к файлу.",
+    "An EPUB chapter is missing its text body.": "В одной из глав EPUB нет текста.",
+    "This EPUB is too large. Choose a file smaller than 50 MB.": "Этот EPUB слишком большой. Выберите файл меньше 50 МБ.",
+    "This EPUB could not be opened. It may be damaged or password-protected.": "Не удалось открыть этот EPUB. Возможно, он повреждён или защищён паролем.",
+    "This EPUB is too large to import on this device.": "Этот EPUB слишком большой для этого устройства.",
+    "This EPUB is missing a required book file.": "В этом EPUB не хватает нужного файла.",
+    "An EPUB chapter is too large to import.": "Одна из глав EPUB слишком большая.",
+    "This EPUB uses an unsupported or invalid text encoding.": "В этом EPUB неподдерживаемая или неверная кодировка текста.",
+    "This file is not a valid EPUB book.": "Это не EPUB-книга.",
+    "This EPUB is missing its chapter list.": "В этом EPUB нет списка глав.",
+    "This EPUB is DRM-protected. Choose a DRM-free book.": "Этот EPUB защищён (DRM). Выберите книгу без защиты.",
+    "This EPUB references a missing chapter.": "В этом EPUB не хватает главы.",
+    "This EPUB contains an unsupported chapter format.": "В этом EPUB главы в неподдерживаемом формате.",
+    "This EPUB contains no readable text.": "В этом EPUB нет текста для чтения."
+  };
+  const say = message => locale() === "ru" && MESSAGES_RU[message] || message;
+  function applyLibraryTexts() {
+    const lang = locale() === "ru" ? "ru" : "en";
+    $("storage-note").innerHTML = LIBRARY_NOTE[lang];
+    $("storage-note").lang = lang;
+    $("empty-library-text").textContent = LIBRARY_EMPTY[lang];
+    $("empty-library-text").lang = lang;
+  }
   const translation = item => locale() === "ru" ? item.translation_ru || item.translation_en : item.translation_en || "";
 
   const vocabularyHighlights = window.BibliothekHighlights.create($text, $("highlights-toggle"), async () => {
@@ -161,23 +211,18 @@
     }
   });
 
+  // 09.11 (Alena): the note behind ⓘ is a window over the library (variant Б) — it used to open inside the library and
+  // push the shelf down under the dock. Closed by ×, a tap beside it or Esc. Never opens by itself (08.11).
   const storageInfo = $("storage-info"), storageNotice = $("storage-notice");
-  let storageNoticeTimer;
-  function setStorageNotice(open) {
-    clearTimeout(storageNoticeTimer);
-    storageNotice.classList.toggle("is-open", open);
-    storageNotice.setAttribute("aria-hidden", String(!open));
-    storageInfo.setAttribute("aria-expanded", String(open));
-  }
-  storageInfo.addEventListener("click", () => {
-    const open = storageInfo.getAttribute("aria-expanded") !== "true";
-    setStorageNotice(open);
-    // the ⓘ sits on the dock line (08.11): the note opens at the top of the library, so bring the top into view
-    if (open) $("library").scrollTo({ top: 0, behavior: "smooth" });
+  storageInfo.addEventListener("click", () => storageNotice.showModal());
+  $("storage-notice-close").addEventListener("click", () => storageNotice.close());
+  storageNotice.addEventListener("click", event => {
+    const bounds = storageNotice.getBoundingClientRect();
+    if (event.target === storageNotice && (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom)) storageNotice.close();
   });
-  // 08.11 (Alena): the note no longer opens by itself on the first visit — it took much of the screen; it is always
-  // one tap away on ⓘ in the dock line.
-  setStorageNotice(false);
+  storageNotice.addEventListener("close", () => storageInfo.focus({preventScroll:true}));
+  applyLibraryTexts();
   window.addEventListener("storage", event => {
     if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateReaderLanguage();
   });
@@ -228,6 +273,7 @@
     setProgress();
   }
   function showToast(message, actionLabel, duration = 3200) {
+    message = say(message);
     const toast = $("reader-toast");
     toast.classList.remove("has-undo");
     toast.replaceChildren(document.createTextNode(message));
@@ -315,7 +361,7 @@
   $("bulk-delete").addEventListener('click',event=>requestBookAction('delete',chosenBooks(),event.currentTarget));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editing&&$("delete-confirm").hidden){event.preventDefault();setEditing(false);$("library-edit").focus({preventScroll:true});}});
   function describeLibraryBook(book) {
-    if(book.missingContent)return 'Reload file · '+String(book.format||'txt').toUpperCase();
+    if(book.missingContent)return 'Datei neu laden · '+String(book.format||'txt').toUpperCase();
     if(book.completed)return 'Gelesen';
     const started=book.readingStarted||Number(book.position)>0||Number(book.chapterIndex)>0;
     const resume=hasChapters(book)&&started?activeEntry({...book,chapterIndex:book.chapterIndex||0,position:book.position||0}):null;
@@ -400,8 +446,8 @@
         row.classList.add('is-missing');
         button.querySelector('.book-arrow').className = 'book-arrow';
         button.querySelector('.book-arrow').textContent = '↻';
-        button.querySelector('.book-subtitle').textContent = 'Reload file · ' + fileFormat;
-        button.setAttribute('aria-label', `Reload file for “${book.title}”`);
+        button.querySelector('.book-subtitle').textContent = 'Datei neu laden · ' + fileFormat;
+        button.setAttribute('aria-label', `Datei für „${book.title}“ neu laden`);
         button.title = 'Reload the original file to continue reading';
       }
       // 08.11 (Alena): no trash in every row — «Bearbeiten» selects books; then the whole row selects instead of opening.
@@ -427,7 +473,7 @@
       renderBooks(books);
       $("library-status").textContent = "";
     } catch (error) {
-      $("library-status").textContent = "Local book storage is unavailable in this browser.";
+      $("library-status").textContent = say("Local book storage is unavailable in this browser.");
       $("empty-library").hidden = false;
     }
   }
@@ -818,6 +864,7 @@
   }
   let lookupRequest = 0, refreshPopupLanguage = null;
   function updateReaderLanguage() {
+      applyLibraryTexts();
       refreshPopupLanguage?.();
   }
   function reflexiveAnchor(candidate, context) {
@@ -1473,7 +1520,7 @@
     showToast(message);
     if (!undo) return;
     $("reader-toast").classList.add("has-undo");
-    const button = document.createElement("button"); button.type = "button"; button.className = "toast-undo"; button.textContent = "Undo";
+    const button = document.createElement("button"); button.type = "button"; button.className = "toast-undo"; button.textContent = "Rückgängig";
     button.addEventListener("click", async () => {
       button.disabled = true;
       try { await undo(); showToast("Mark removed."); refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
@@ -1490,10 +1537,10 @@
       const records = await V.list(input.bookId);
       if (records.some(record => record.key === key)) {
         await V.clear(input.bookId, undefined, key);
-        bookmarkToast("Mark removed.");
+        bookmarkToast("Markierung entfernt.");
       } else {
         await V.mark(input);
-        bookmarkToast("Marked for vocabulary", () => V.clear(input.bookId, undefined, key));
+        bookmarkToast("Gemerkt", () => V.clear(input.bookId, undefined, key));
       }
     } catch (_) { showToast("The mark could not be saved. Please try again."); }
     finally { bookmarkBusy = false; refreshHighlights(); vocabularyPanel.updateCount(); await refreshBookmark(); }
@@ -1562,7 +1609,7 @@
       const book = await window.BibliothekImport.fromFile(file);
       await importBook(book);
       await refreshBooks();
-      showToast("Saved on this device.");
+      showToast("Gespeichert.");
     } catch (error) {
       showToast(error instanceof window.BibliothekImport.ImportError ? error.message : "The book could not be saved. Check available browser storage.");
     } finally { $file.value = ""; reloadBookId=null; }
@@ -1577,7 +1624,7 @@
     try {
       reloadBookId=null;
       await importBook(await window.BibliothekImport.fromText(title, content));
-      $("paste-form").reset();pasteDialog.close(); await refreshBooks(); showToast("Text saved on this device.");
+      $("paste-form").reset();pasteDialog.close(); await refreshBooks(); showToast("Gespeichert.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
   $("back-library").addEventListener("click", async () => {
