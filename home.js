@@ -998,7 +998,9 @@ function updateBack() {
     win.dispatchEvent(new Event("resize")); // pages that measure their own layout (Wortschatz) do it again
   }
   const libraryPage = framePath() === "bibliothek/bibliothek.html";
-  const windows = libraryPage ? WINDOW_SEL + ',dialog[open],.book-confirm,.word-popover,.dictionary-sheet' : WINDOW_SEL;
+  // 09.11 (Alena): the word popover is not a window (it does not cover the book) — Home stays while it is open,
+  // instead of going and coming back with every word
+  const windows = libraryPage ? WINDOW_SEL + ',dialog[open],.book-confirm,.dictionary-sheet' : WINDOW_SEL;
   const windowOpen = [...doc.querySelectorAll(windows)].some(el => isShown(el, win, true));
   const shelf = libraryPlace && !(libraryPage && libraryReading(doc, win));
   back.classList.toggle("is-hidden", windowOpen || shelf);

@@ -2912,3 +2912,8 @@ body.library-screen .reader .library-add-menu button + button::before { content:
   text-align: center;
   line-height: 1.4;
 }
+
+/* 09.11 (Alena): the ribbon of the current chapter in Inhalt comes out of its slit higher — about halfway between the
+   previous title and its own (a little nearer its own), not lying on its title */
+.contents-entry[aria-current]::before { top: 1px; }
+.contents-entry[aria-current]::after { top: calc(1px - var(--slit-height)); }
