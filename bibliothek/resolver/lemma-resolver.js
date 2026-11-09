@@ -2319,6 +2319,18 @@
         let d=i-1;while(d>=0&&i-d<=8&&(modifiers.has(words[d])||(forms.get(words[d])||[]).some(e=>['Adjektiv','Adverb'].includes(e.type))))d--;
         if(d>=0&&determiners.test(words[d])&&i-d<=8&&!/[,;:.!?]/u.test(sentence.slice(tokens[d].index,tokens[i].index)))for(let j=d+1;j<i;j++)analyses[j]=[];
       }
+      // (registry review 08.11, `claude/SECOND_FINITE_COUNT_2026-11-08_RU.md`: one finite verb per part — a lowercase word with an own
+      // non-verb card loses its finite reading when its part (punctuation, coordinator / subordinator) has a clear finite form)
+      { const STOP=new Set(['und','oder','aber','denn','sondern','weil','dass','daß','wenn','ob','als','bevor','nachdem','obwohl','während','damit','bis','der','die','das','wo','wie','was','wer']);
+        const nonVerbOwn = k => (forms.get(words[k]) || []).some(e => e.type !== "Verb" && !(e.type === "Adjektiv" && norm(e.word) !== words[k]));
+        const clearFinite = k => /^\p{Ll}/u.test(tokens[k][0]) && analyses[k].length > 0 && analyses[k].some(r => r.kind === "finite") && analyses[k].every(r => ["finite","imperative"].includes(r.kind)) && !(forms.get(words[k]) || []).some(e => e.type !== "Verb" && e.type !== "Nomen") && !(modifiers.get(words[k]) || []).length;
+        const cut = k => /[,;:.!?…()"„“”»«–—]/u.test(sentence.slice(tokens[k].index+tokens[k][0].length,tokens[k+1].index)) || STOP.has(words[k+1]);
+        const drop = [];
+        for(let i=0;i<tokens.length;i++){ if(!/^\p{Ll}/u.test(tokens[i][0])||!nonVerbOwn(i)||!analyses[i].some(r=>r.kind==='finite'))continue;
+          let a=i;while(a>0&&!cut(a-1))a--; let b=i;while(b+1<tokens.length&&!cut(b))b++;
+          for(let k=a;k<=b;k++)if(k!==i&&clearFinite(k)){drop.push(i);break;} }
+        for(const i of drop)analyses[i]=analyses[i].filter(r=>r.kind!=='finite');
+      }
       return analyses;
     }
     function sentenceClauses(sentence,tokens,words,analyses) {
@@ -4062,9 +4074,21 @@
         if (nounAhead(i+1)) return true;
         return !!tokens[i+2] && declined(i+1) && /^\s+$/u.test(gap(i+1,i+2)) && nounAhead(i+2);
       };
+      // (one finite verb per part, registry review 08.11): own non-verb card + lowercase; a clear finite form — every reading finite
+      // / imperative (no infinitive / participle: halten, gehen are no anchor), no own non-verb card
+      // (advisor 09.11) a declined adjective form (stillen, probierten, leere) is left to the attributive rule of 27.10 with its guards;
+      // a clear finite form has no other reading (a noun card of a lowercase form — das Muss — does not count)
+      // (fingierten — also a declined participle — is no anchor)
+      const nonVerbOwn = k => (forms.get(norm(tokens[k][0])) || []).some(e => e.type !== "Verb" && !(e.type === "Adjektiv" && norm(e.word) !== norm(tokens[k][0])));
+      const clearFinite = k => { const rows = verbAnalyses.get(norm(tokens[k][0])) || [];
+        return /^\p{Ll}/u.test(tokens[k][0]) && rows.some(r => r.kind === "finite") && rows.every(r => ["finite","imperative"].includes(r.kind)) && !(forms.get(norm(tokens[k][0])) || []).some(e => e.type !== "Verb" && e.type !== "Nomen") && !(modifiers.get(norm(tokens[k][0])) || []).length; };
+      const secondFiniteHomograph = (i, from, to) => /^\p{Ll}/u.test(tokens[i][0]) && nonVerbOwn(i) &&
+        tokens.some((t,k) => k >= from && k <= to && k !== i && clearFinite(k));
       const competingVerb = (i, head, crossedComma = false) => {
         if (context.separableNominalOffsets?.has(tokens[i].index)) return false;
         const entries = forms.get(norm(tokens[i][0])) || [];
+        // (one finite verb per part: not a second verb beside a clear finite head)
+        if (head !== undefined && !crossedComma && /^\p{Ll}/u.test(tokens[i][0]) && nonVerbOwn(i) && clearFinite(head)) return false;
         // S1: sein before a noun or an adjective is the possessive (breitete sein Tuch aus);
         // only in the first pass — across a comma it may be another clause's verb.
         if (!secondary && !crossedComma && possessiveSein(i)) return false;
@@ -4349,6 +4373,11 @@
           possible.some(pair => pair.prefix === norm(t[0])) && !nominalParticle(i,j))) continue;
         let start = i;
         while (start > 0 && !hard(start-1,start) && !soft(start-1,start)) start--;
+        // (registry review 08.11, `claude/SECOND_FINITE_COUNT_2026-11-08_RU.md`: one finite verb per part — a lowercase word with an
+        // own non-verb card (lange, näher, vergnügt, sein …) is no verb owning the particle when its part already has a clear finite
+        // form; sah sie lange an — not anlangen; Ich mal ein Bild, Die Nacht naht — no other finite form, still a verb)
+        { let end = i; while (end+1 < tokens.length && !hard(end,end+1) && !soft(end,end+1)) end++;
+          if (secondFiniteHomograph(i, start, end)) continue; }
         // Internal capitals belong to a nominal phrase even when the noun is
         // only in fallback (Sparten ... aus). A quoted noun after an article
         // remains nominal although the quote starts a new local segment.
@@ -9440,7 +9469,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           (forms.get(ke) || []).every(x => x.type === 'Verb') && /(?:te|ten|tet|test|t|en|st)$/u.test(ke)) return false;
       }
       const types = new Set((forms.get(k1) || []).map(e => e.type));
-      if (['Nomen','Verb','Adverb','Partikel','Präposition','Konjunktion'].some(t => types.has(t))) return false;
+      // (an adverb card beside a declined adjective of ours keeps the elliptic reading: das lange, schmale Paket — WN batch 59 lange)
+      if (['Nomen','Verb','Partikel','Präposition','Konjunktion'].some(t => types.has(t)) || (types.has('Adverb') && !types.has('Adjektiv'))) return false;
       if (w === 'das' && /^\p{Ll}+mal$/u.test(k1) && /^(?:erste|zweite|dritte|letzte|nächste|vorige)mal$/u.test(k1)) return true;
       if (w === 'die' && /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf)$/u.test(k1)) return true;
       const weak = {der:/(?:e|en|rn)$/u, die:/(?:e|en|rn)$/u, das:/e$/u, den:/(?:en|rn)$/u, dem:/(?:en|rn)$/u}[w];
@@ -11747,6 +11777,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         else return result;
       }
       return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'adjective-adverb-twin'},{outcome:'selected',rule:'adjective-adverb-twin',reason:'adjective-adverb-twin'});
+    }
+    // WN batch 59 + one finite verb per part (advisor 09.11): lange — our adverb card «долго; давно» and the declined adjective
+    // lang (die lange Nacht) in one window. Before a noun (lange Haare, auf lange Sicht, eine 65 m lange Mauer; also over declined
+    // adjectives: lange schwarze Haare) — the adjective; otherwise the adverb (Er schlief lange, Es dauerte nicht lange, sah sie lange an).
+    function langeAdverb(word, context, result) {
+      const list = result?.candidates || [];
+      if (norm(word) !== 'lange' || !/^\p{Ll}/u.test(String(word)) || !result || !Number.isInteger(context?.tokenOffset)) return result;
+      const adv = list.find(c => c.source === 'main' && c.pos === 'Adverb' && norm(c.lemma) === 'lange');
+      const adj = list.find(c => c.source === 'main' && c.pos === 'Adjektiv' && norm(c.lemma) === 'lang');
+      if (!adv || !adj) return result;
+      const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'langeAdverb');
+      const i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return result;
+      const plain = (a, b) => b < tokens.length && /^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length, tokens[b].index));
+      // a list of adjectives before the noun, also with a comma (lange, buntlackierte Fingernägel)
+      const listGap = (a, b) => b < tokens.length && /^\s*,?\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length, tokens[b].index));
+      let k = i + 1;
+      while (k < tokens.length && (k === i + 1 ? listGap(k-1,k) : plain(k-1,k)) && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(tokens[k][0]) && k - i <= 3) k++;
+      if (k === i + 1 && !plain(i,k)) k = tokens.length;
+      const nounNext = k < tokens.length && plain(k-1,k) && /^\p{Lu}\p{Ll}/u.test(tokens[k][0]);
+      const chosen = nounNext ? adj : adv;
+      if (result.selected === chosen) return result;
+      return keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'lange-adverb'},{outcome:'selected',rule:'lange-adverb',reason:nounNext ? 'before-noun' : 'adverb'});
     }
     // Advisor 08.11, user cases (3): the old dative singular in -e after a preposition (im Halse, vom Halse, auf dem Herde, an dem
     // Tage, bei Tage, in seinem Hause) — our der / das noun card without the -e, when no card of ours is written with the -e.
@@ -15433,7 +15486,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is

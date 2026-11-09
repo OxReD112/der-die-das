@@ -5410,5 +5410,17 @@
     "usage_note_ru": "Сравнительная степень от wenig: wenig — weniger — am wenigsten. Не склоняется: weniger Geld, weniger Leute. Перед прилагательным — «менее»: weniger schön. immer weniger — всё меньше; nicht weniger als — не меньше чем. Не путать с wenige — немногие (wenige Leute).",
     "usage_note_en": "Comparative of wenig: wenig — weniger — am wenigsten. It never changes its ending: weniger Geld, weniger Leute. Before an adjective — “less”: weniger schön. immer weniger — less and less; nicht weniger als — no less than. Do not confuse with wenige — few (wenige Leute).",
     "example_cloze": "Heute habe ich {{c1::weniger}} Zeit als gestern."
+  },
+  {
+    "id": "adverb-457",
+    "word": "lange",
+    "translation_ru": "долго; давно",
+    "translation_en": "for a long time, long; long ago",
+    "example_de": "Nach der Wanderung haben wir am Sonntag lange geschlafen.",
+    "example_ru": "После похода мы в воскресенье долго спали.",
+    "example_en": "After the hike we slept in late on Sunday.",
+    "usage_note_ru": "Er schlief lange. — Он долго спал. Ich warte schon lange. — Я давно жду. Wie lange dauert das? — Сколько это длится? Наречие: lange — länger — am längsten; noch lange nicht — ещё далеко не. Не путать с прилагательным lang: die lange Nacht — долгая ночь.",
+    "usage_note_en": "Er schlief lange. — He slept for a long time. Ich warte schon lange. — I've been waiting for a long time. Wie lange dauert das? — How long does it take? Adverb: lange — länger — am längsten; noch lange nicht — not by a long way. Do not confuse with the adjective lang: die lange Nacht — the long night.",
+    "example_cloze": "Nach der Wanderung haben wir am Sonntag {{c1::lange}} geschlafen."
   }
 ]
