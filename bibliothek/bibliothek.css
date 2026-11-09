@@ -590,25 +590,6 @@ body.library-screen .data-sources button:active:not(:disabled) {
   font-size: 14px;
   box-shadow: var(--lift-shadow);
 }
-.word-popover.meaning-thanks {
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-  width: max-content;
-  max-height: none;
-  min-height: 0;
-  padding: 11px 16px;
-  border-color: var(--hairline);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: normal;
-  text-align: center;
-  overflow: hidden;
-  pointer-events: none;
-  animation: none;
-  box-shadow: var(--lift-shadow);
-}
 .toast-action {
   display: inline-block;
   margin-left: 10px;
@@ -2935,3 +2916,7 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 @media (prefers-reduced-motion: reduce) {
   .vocabulary-dialog .reader-drawer-content, .vocabulary-detail { transition: none; }
 }
+
+/* 09.11 (Alena): the word of the popover and of the dictionary card is read aloud on a tap (only with a German voice) */
+.popover-word.can-speak,
+.dictionary-headword.can-speak { cursor: pointer; -webkit-tap-highlight-color: transparent; }

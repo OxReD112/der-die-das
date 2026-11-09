@@ -198,8 +198,14 @@
         // a word the dictionary has no card for: what the list knows of it
         const translation =
           language() === "ru" ? record.translation.ru || record.translation.en : record.translation.en || record.translation.ru;
+        const head = text("h2", "dictionary-headword", wordOf(record));
+        // 09.11 (Alena): read aloud on a tap, like the word of the full card (only with a German voice)
+        if (window.DeutschVoice?.available()) {
+          head.classList.add("can-speak");
+          head.addEventListener("click", () => window.DeutschVoice.speak(head.textContent));
+        }
         card.append(
-          text("h2", "dictionary-headword", wordOf(record)),
+          head,
           ...(record.pos ? [text("p", "dictionary-pos", partOfSpeech(record.pos))] : []),
           text("p", "dictionary-translation", translation || "Bedeutung noch unbekannt")
         );
