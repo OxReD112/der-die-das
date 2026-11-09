@@ -69268,5 +69268,19 @@
     "plural_note_ru": "Мн. ч. употребляется редко.",
     "plural_note_en": "The plural is rare.",
     "usage_note_en": "In compounds — a field of study: Erdkunde — geography, Heimatkunde — local history and geography, Naturkunde — natural history. Do not confuse with der Kunde — customer, client (plural also die Kunden)."
+  },
+  {
+    "id": "noun-5365",
+    "word": "Reich",
+    "article": "das",
+    "plural": "Reiche",
+    "translation_ru": "государство, империя; царство (das Reich der Tiere)",
+    "translation_en": "empire, realm; kingdom (das Reich der Tiere)",
+    "example_de": "Das Römische Reich erstreckte sich einst über weite Teile Europas.",
+    "example_cloze": "Das Römische {{c1::Reich}} erstreckte sich einst über weite Teile Europas.",
+    "example_ru": "Римская империя когда-то простиралась на большую часть Европы.",
+    "example_en": "The Roman Empire once stretched across large parts of Europe.",
+    "usage_note_ru": "das Deutsche Reich — Германская империя; im Reich der Träume — в царстве снов. Частая первая часть: Reichstag, Reichskanzler. Не путать с прилагательным reich — богатый.",
+    "usage_note_en": "das Deutsche Reich — the German Empire; im Reich der Träume — in the realm of dreams. Frequent first part: Reichstag, Reichskanzler. Do not confuse with the adjective reich — rich."
   }
 ]

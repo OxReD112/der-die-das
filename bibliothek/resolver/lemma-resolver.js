@@ -1056,6 +1056,12 @@
       if (d.length !== 1) return null;
       const k = d[0], pa = a.parts[k], pb = b.parts[k];
       // (the same first part, only the linking letter moves: not reich «богатый» + Samt / Reich + -s- + Amt)
+      // (advisor 09.11, партия 63) a linking -s- stands only after a noun: our noun + -s- before our adjective without it (Reich(s) + Amt, not reich + Samt)
+      const sNoun = (x, y) => x.pos === 'Nomen' && ['s', 'es'].includes(x.link) && y.pos === 'Adjektiv' && !y.link && x.source === 'main' && y.source === 'main';
+      if (norm(pa.lemma) === norm(pb.lemma) && (sNoun(pa, pb) || sNoun(pb, pa)) && Math.abs(a.at[k] - b.at[k]) === Math.abs(linkLen(pa) - linkLen(pb))) {
+        const win = sNoun(pa, pb) ? a : b;
+        return win.parts.every(p => p.ru) ? win : null;
+      }
       if (norm(pa.lemma) !== norm(pb.lemma) || pa.pos !== pb.pos || pa.source !== pb.source || Math.abs(a.at[k] - b.at[k]) !== Math.abs(linkLen(pa) - linkLen(pb))) return null;
       // (the last part in the genitive — Festsaal(e)s — is no weak part)
       const weak = async (p, k, all) => k < all.length - 1 && p.form && p.number !== 'plural' || WEAK_EN.test(String(p.en || '')) || p.pos === 'Nomen' && !p.ru && !(await dict.gender(p.lemma));
@@ -1165,6 +1171,9 @@
           // (the exception: a head that is only a verb's infinitive — Lesen, not Stürmen, also a plural of Sturm: Zwilling(s) + Türmen)
           if (shortOk(parts) && (linkOk(parts) || (await readings(w.slice(h0), ['Verb'], true)).length && !(await readings(w.slice(h0), ['Nomen'])).some(r => r.form))) {
             const ok = !noun || await nounOk(parts[1], parts, ctx);
+            // (advisor 09.11, партия 63) without a sign of a noun the last part -reich is the half-suffix «богатый (чем-то)» (Goldreich — the word could
+            // be the adjective goldreich); das Reich only with a sign of a noun (das Königreich, im Goldreich der Zwerge)
+            if (ok === 'maybe' && norm(parts[1].lemma) === 'reich') parts[1] = {pos: 'Adjektiv', lemma: 'reich', source: 'main', form: false, text: 'reich', ending: '', half: true, ru: 'reich', en: 'reich', surface: parts[1].surface};
             if (ok) splits.push({w, at: [h0], parts, ...(ok === 'maybe' ? {maybeName: true} : {})});
             else blocked.push({w, at: [h0], parts});
           }
@@ -3561,7 +3570,14 @@
       const outsideHomograph = c => c.source === "fallback" && ["Nomen","name"].includes(canonicalPos(c.pos)) &&
         (nominalization(c) || /^name$/iu.test(String(c.pos || "")) || [base,stem0].includes(norm(c.lemma)) && others.some(nominalization) &&
           !(c.nounArticle && (genders.has(homographGender(c)) || genders.has("plural"))));
-      if (others.length && !(opener && others.every(outsideHomograph))) return null;
+      // (advisor 09.11, партия 63) our own bare-stem noun of a gender that cannot be meant blocks no more than an outside one (der Reiche —
+      // not das Reich), beside a record of this nominalization
+      const ownGender = c => ({"der":"male","die":"female","das":"neuter"})[String(c.item?.article || "")];
+      const ownHomograph = c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && [base,stem0].includes(norm(c.lemma)) && others.some(nominalization) &&
+        !!ownGender(c) && !genders.has(ownGender(c)) && !genders.has("plural") &&
+        // (its plural after a determiner that can be plural stays: die Reiche der Antike)
+        !(String(c.item?.plural || "").split(/\s*,\s*/u).map(norm).includes(surface) && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche|solche|manche)$/u.test(determiner));
+      if (others.length && !(opener && others.every(c => outsideHomograph(c) || ownHomograph(c)))) return null;
       const {sentence,tokens,index} = slot, next = tokens[index+1];
       // A compound hyphen or any capitalised next word (a head or part of a name:
       // die Neue Zürcher Zeitung) keeps the adjective attributive.
@@ -4007,7 +4023,7 @@
           lemma = capitalise(w.slice(0,at) + headText);
           gender = number ? "die" : headGender;
         } else lemma = w.slice(0,at) + head.text;
-        formation = {kind:"compound",parts:parts.map(part),half:!noun && head.half ? head.text : null,...(found.compound.maybeName ? {maybeName:true} : {})};
+        formation = {kind:"compound",parts:parts.map(part),half:(!noun || found.compound.maybeName) && head.half ? head.text : null,...(found.compound.maybeName ? {maybeName:true} : {})};
         // «maybe a name»: no article of its own (a place or a person — not «das Dorf» of the sentence)
         // (chat of tests 09.11) a contraction as the only sign must agree with the gender of the last part: zur Rosenwald (zu der, Wald is
         // der) is no common noun — «Name / Nomen · Kompositum» as without a sign
@@ -10311,7 +10327,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // the word is a modifier (ein paar Knochen, die leeren Schachteln).
       const gapAt = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
       const prev = index > 0 && /^\s+$/u.test(gapAt(index-1,index)) ? tokens[index-1][0] : null;
-      const nextCapital = tokens[index+1] && /^\s+$/u.test(gapAt(index,index+1)) && /^\p{Lu}/u.test(tokens[index+1][0]);
+      // (advisor 09.11, партия 63) also through lowercase words with an adjective ending before a capital (mit einem reich verzierten Goldrahmen)
+      let nextCapital = false;
+      for (let k = index+1; tokens[k] && /^\s+$/u.test(gapAt(k-1,k)); k++) {
+        if (/^\p{Lu}/u.test(tokens[k][0])) { nextCapital = true; break; }
+        // (an article or other determiner opens a group of its own: den stand der Dinge, in den laden des Bäckers)
+        if (!/^\p{Ll}+(?:e|en|em|er|es)$/u.test(tokens[k][0]) || determinerFeatures(tokens[k][0]) || contractionArticle(tokens[k][0]) ||
+          /^(?:der|die|das|dem|den|des|ein|eine|einem|einen|einer|eines|(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen|jed|welch|solch|manch|all)(?:e|en|em|er|es)?)$/u.test(norm(tokens[k][0]))) break;
+      }
       if (prev && /^\p{Ll}/u.test(prev) && (determinerFeatures(prev) || contractionArticle(prev) ||
         /^(?:der|die|das|dem|den|des|ein|eine|einem|einen|einer|eines|(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen)(?:e|en|em|er|es)?)$/u.test(norm(prev))) && !nextCapital &&
         candidates.some(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen')) return false;
@@ -13766,7 +13789,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const word = norm(entry.word), plural = norm(entry.plural);
         const plurals = new Set([plural, /[ns]$/u.test(plural) ? plural : plural + "n"]);
         // (advisor 07.11, PLURAL_AND_DAS_FARM: a feminine noun has no endings in the singular — Änderungen, Spritzen are plural)
-        const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", word + "n", word + "en"]);
+        // (advisor 09.11, партия 63: in allen Reichen, in den Jahren) a neuter noun has no singular in -n / -en — except where the plural itself is
+        // the stem + (e)n (das Herz — dem Herzen / die Herzen)
+        const neuterN = entry.article === "das" && ![word + "n", word + "en"].includes(plural);
+        const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", ...(neuterN ? [] : [word + "n", word + "en"])]);
         if (plurals.has(form) && !singulars.has(form)) return {number:"plural"};
         // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
         // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
