@@ -276,6 +276,7 @@
     infinitiveParticle:{ru:'Отдельно не переводится', en:'Not translated separately'},
     // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): lassen with sich where the form proves the sense.
     lassen_canBeDone:{ru:'здесь: можно (сделать)', en:'here: can be done'},
+    lassen_canOrAllow:{ru:'здесь: можно (сделать) / позволить (себя)', en:'here: can be done / let oneself be …'},
     lassen_self:{ru:'здесь: сам (упал, опустился); (перен.) расслабиться, отпустить себя', en:'here: let oneself (drop, sink); (fig.) to let go, to relax'},
     // L15 step 4 (reference F12-B5j / k): lass / lasst / lassen Sie + uns + infinitive.
     lassen_letUs:{ru:'здесь: давай(те)', en:'here: let\u2019s'},

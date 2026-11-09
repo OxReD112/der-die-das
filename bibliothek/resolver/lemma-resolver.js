@@ -319,6 +319,11 @@
   // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): sich + lassen + one of these infinitives — «здесь: сам (упал, опустился)»
   // (closed list B5 в), and the subject pronouns of «здесь: можно (сделать)» (Das lässt sich machen, Vieles lässt sich erklären).
   const LASSEN_SELF_INFINITIVES = new Set(['fallen','sinken','plumpsen','zurückfallen']);
+  // (advisor 09.11: also with a particle of direction — hinabfallen, herunterfallen, niedersinken; not ein- / an- / zu- / mit- …, whose
+  // verbs are no «сам (упал)» — sich etwas einfallen lassen)
+  const lassenSelfInfinitive = base => { if (LASSEN_SELF_INFINITIVES.has(base)) return true;
+    const prefix = PARTICLE_INFINITIVE_PREFIX.exec(base)?.[0];
+    return !!prefix && !['ein','an','zu','mit','wohl','los','auf','aus','ab','nach','vor','weg','fort','heim'].includes(prefix) && LASSEN_SELF_INFINITIVES.has(base.slice(prefix.length)); };
   const LASSEN_CAN_SUBJECTS = new Set(['das','dies','es','was','nichts','alles','vieles','etwas','einiges','manches']);
   // L15 step 4 (reference F12-B5j / k, user 25.10): lass / lasst / lassen Sie + uns + infinitive is «давай(те)»; uns there is the
   // accusative of wir «нас» (the card of wir with this form, not the summary нас / нам / себя / себе)
@@ -6557,7 +6562,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const usAt=words(l+1)===LASSEN_LET_US_PRONOUN?l+1:words(l)==='lassen'&&tokens[l+1]?.[0]==='Sie'&&words(l+2)===LASSEN_LET_US_PRONOUN?l+2:null;
         const adverbWord=i=>{const e=forms.get(words(i))||[];return words(i)==='nicht'||e.length>0&&e.every(x=>x.type==='Adverb');};
         const letUsShape=usAt!==null&&part>usAt&&Array.from({length:part-usAt-1},(_,k)=>usAt+1+k).some(i=>!adverbWord(i));
-        if(twoWordWins&&!(agreeingReflexive&&LASSEN_SELF_INFINITIVES.has([...bases][0]))&&!letUsShape)continue;
+        if(twoWordWins&&!(agreeingReflexive&&lassenSelfInfinitive([...bases][0]))&&!letUsShape)continue;
         // The own möchten card and the Konjunktiv II of mögen describe
         // the same finite paradigm. Share structural proof, retaining both
         // dictionary identities and the formal Konjunktiv II analysis.
@@ -6779,19 +6784,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             group=nounMember?{end:i,member}:null;
           }
           // (und + lassen first: the subject is the one of the first part — und ließ sich für den Kreuzer Bier dazu geben)
+          // (advisor 09.11: a comma with a closing quote counts as a comma — »Sollte es Aschenputtel sein,« ließ sich die Axt holen)
           // (review 29.10: also after aber / sondern / doch and after a comma when the part before is a main clause — Er stand auf, ließ sich
           // alles erklären; a subordinate part before it is the first position — Wie roh … wirkt, lässt sich daraus ablesen, dass …)
-          const partBefore=(()=>{if(start!==l||start===0||!/,\s*$/u.test(sentence.slice(tokens[start-1].index,tokens[start].index)))return null;
+          const partBefore=(()=>{if(start!==l||start===0||!/,\s*[«»"“”„]?\s*$/u.test(sentence.slice(tokens[start-1].index,tokens[start].index)))return null;
             let j=start-1;while(j>0&&!/[,.;:!?»«"“”„()–—]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,tokens[j].index)))j--;return j;})();
           const subordinateBefore=partBefore!==null&&(OBJECT_CLAUSE_OPENERS.includes(words(partBefore))||!CLAUSE_COORDINATORS.includes(words(partBefore))&&
             (forms.get(words(partBefore))||[]).some(e=>e.type==='Konjunktion'));
           if(start===l&&head.kind!=='imperative'&&(['und','oder','aber','sondern','doch'].includes(words(start-1))||partBefore!==null&&!subordinateBefore))
             members.unshift({start:-1,end:-1,noun:false,word:''});
           // (an object that is never the subject — den / einen / keinen / meinen … + noun: Sie ließ sich das Glas fallen has das, see members)
-          const accusative=indices.some(i=>NEVER_NOMINATIVE_DETERMINER.test(words(i))&&!preposition(i-1)&&tokens[i+1]&&i+1<=end&&/^\p{Lu}/u.test(tokens[i+1][0]));
+          const timeNoun=i=>{for(let k=i+1;k<=Math.min(end,i+3)&&tokens[k];k++)if(/^\p{Lu}/u.test(tokens[k][0]))return OBJ_TIME.test(norm(tokens[k][0]))||MEASURE.test(norm(tokens[k][0]));return false;};
+          const accusative=indices.some(i=>NEVER_NOMINATIVE_DETERMINER.test(words(i))&&!preposition(i-1)&&tokens[i+1]&&i+1<=end&&/^\p{Lu}/u.test(tokens[i+1][0])&&!timeNoun(i));
           const innerBase=[...bases][0];
           // (self: no object besides the subject — Sie ließ sich das Glas fallen is «уронить»)
-          if(LASSEN_SELF_INFINITIVES.has(innerBase)&&!['mir','dir'].includes(reflexive)&&members.length<=1&&!accusative&&
+          if(lassenSelfInfinitive(innerBase)&&!['mir','dir'].includes(reflexive)&&members.length<=1&&!accusative&&
             !indices.some(i=>['gegenseitig','einander'].includes(words(i))))sense='self';
           // («велеть (сделать для себя)» is not shown — advisor 29.10, variant 1: by form it is the same as the expressions (sich die Chance nicht
           // entgehen lassen) and an accusative of time (den ganzen Tag); the plain card with the link until those expressions and a transitive
@@ -6810,6 +6817,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const m0=members[0],relative=m0&&m0.start>=0&&/[,(–—]\s*$/u.test(sentence.slice(0,tokens[m0.start].index));
             const closedSubject=members.length===1&&m0.start===m0.end&&LASSEN_CAN_SUBJECTS.has(m0.word)&&(m0.word!=='es'||thatClause)&&!(m0.word==='das'&&relative);
             if(impersonal||closedSubject)sense='canBeDone';
+            // (registry review 08.11, advisor 09.11: lässt sich + infinitive — «можно / позволить (себя)» when the part has its subject and no
+            // other direct object; an accusative of time is no object — ließ sich den ganzen Tag treiben; sich die Haare schneiden lassen
+            // is «велел себе» — an object, no slash; the expressions win before — sich Zeit lassen, sich etwas einfallen lassen)
+            // (advisor 09.11, Mac 09f: not when the object is a clause and the part has its subject — ließ sich zeigen, ob … (the impersonal
+            // «можно» without a subject is decided above — Daraus lässt sich schließen, dass …); not for a clause-final lassen of a part
+            // after und / oder … without its own subject or another finite verb — und sich die Briefe gleich geben lassen: die Briefe is the object)
+            else if(!(objectClause&&/^\s*,\s*(?:dass|daß|ob|wie)\b/iu.test(after))&&!(l===end&&words(l)==='lassen'&&CLAUSE_COORDINATORS.includes(words(start-1))&&!indices.some(i=>i!==l&&finite(i).some(a=>outerBases.has(a.base))))&&
+              members.filter(m=>!(m.start>=0&&tokens.slice(m.start,m.end+1).some(t=>/^\p{Lu}/u.test(t[0])&&(OBJ_TIME.test(norm(t[0]))||MEASURE.test(norm(t[0])))))).length===1&&!accusative&&!indices.some(i=>(words(i)==='etwas'||words(i)==='nichts'||words(i)==='alles')&&i!==m0.start))sense='canOrAllow';
           }
         }
         // (the two-word card wins unless the group proved «сам (упал)» — Hans ließ sich das Glas fallen: fallenlassen «уронить»)
