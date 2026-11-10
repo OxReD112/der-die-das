@@ -116,6 +116,12 @@
     st.prevT = from;
     if (st.cur) { var tk = triedKey(); (st.tried[tk] = st.tried[tk] || {})[st.cur] = cellOf(sent(), st.cur).status; }
     render(false);
+    if (st.cur && cellOf(sent(), st.cur).status !== "ok") shake();
+  }
+  /* 10.11 (Alena): a particle that doesn't fit — the sentence shakes left-right once, like a wrong answer */
+  function shake() {
+    var el = $("sentence");
+    el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
   }
 
   /* ---------- render ---------- */
@@ -135,6 +141,9 @@
     tr.textContent = pick(ok ? c.translation : s.base.translation);
     tr.classList.toggle("on", !!ok);
 
+    /* 10.11 (Alena): the explanation is easy to miss — when it changes, the slider moves first, then the text
+       comes up from below (fades in) */
+    var note = $("note"), before = note.textContent;
     var fn = $("fn"), hint = $("hint");
     if (!c) { fn.textContent = "Ohne Partikel"; fn.className = "fn dim"; hint.textContent = ""; $("note").textContent = TXT.start[L] || TXT.start.en; }
     else if (ok) {
@@ -148,6 +157,7 @@
     renderScale(fresh);
     renderParticles();
     placeNote();
+    if (note.textContent !== before) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
   }
 
   function stops() {
@@ -188,7 +198,7 @@
   }
   /* two rows, split where the longer row is shortest (words like eigentlich / vielleicht are wide) — measured */
   function splitRows(widths) {
-    function w(a, b) { var n = 0; for (var i = a; i < b; i++) n += widths[i] + 2; return n; }
+    function w(a, b) { var n = 0; for (var i = a; i < b; i++) n += widths[i] + (i > a ? 6 : 0); return n; } /* words + the 6px gaps between them */
     var L = widths.length, best = Math.min(5, L), bestW = Infinity;
     for (var i = 3; i <= 7 && i < L; i++) {
       var m = Math.max(w(0, i), w(i, L));
@@ -209,7 +219,7 @@
     box.innerHTML = html(list); /* one row first, to measure each word */
     var widths = Array.prototype.map.call(box.querySelectorAll(".pt"), function (b) { return b.getBoundingClientRect().width; });
     var room = box.clientWidth - 24, cut = splitRows(widths);
-    function w(a, b) { var n = 0; for (var i = a; i < b; i++) n += widths[i] + 2; return n; }
+    function w(a, b) { var n = 0; for (var i = a; i < b; i++) n += widths[i] + (i > a ? 6 : 0); return n; } /* words + the 6px gaps between them */
     if (Math.max(w(0, cut), w(cut, widths.length)) <= room) {
       box.innerHTML = html(list.slice(0, cut)) + html(list.slice(cut));
     } else { /* too wide for two rows (several long words): three balanced rows */
