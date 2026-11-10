@@ -134,14 +134,14 @@
   // G48 (23.10.2026, reference C6): spellings that may be a part of a compound or the base of a derived word (Bloom
   // filter, dev/bibliothek/scripts/build-word-formation-parts.cjs; same hashing as the verb membership). Missing or
   // invalid filter: no word formation at all (never a download per letter position).
-  const wordPartsUrl=new URL('data/word-formation-parts.json?v=20261023-g48-1',document.currentScript.src);
+  const wordPartsUrl=new URL('data/word-formation-parts.json?v=20261110-step-1',document.currentScript.src);
   let wordPartsPromise=null;
   function wordParts() {
     if(!wordPartsPromise)wordPartsPromise=dataFetch(wordPartsUrl).then(r=>{if(!r.ok)throw Error('Word parts unavailable');return r.json();}).then(d=>{const m=d.membership;
-      if(d.format_version!==1||m?.format!=='bloom-fnv1a-v1'||m.bits!==2097152||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid word parts');
+      if(d.format_version!==1||m?.format!=='bloom-fnv1a-v2'||m.bits!==2097152||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid word parts');
       const bitmap=hexBytes(m.bitmap);
       return Object.freeze({has(word){const key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
-        const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(bitmap[bit>>>3]&(1<<(bit&7))))return false;}return true;}});
+        const step=((Math.imul(h^0x9e3779b9,2246822519)>>>0)>>>13)|1;for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(bitmap[bit>>>3]&(1<<(bit&7))))return false;}return true;}});
     }).catch(e=>{wordPartsPromise=null;throw e;});
     return wordPartsPromise;
   }

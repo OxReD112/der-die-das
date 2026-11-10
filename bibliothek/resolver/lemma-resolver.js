@@ -951,6 +951,17 @@
     // Fehl «порок»). Not erz- (Erz «руда»: Erzbergbau), mords-, riesen- (registry).
     const BOUND_FIRST = {rück: {ru: 'назад, обратно; задний', en: 'back, backwards; rear'}, miss: {ru: 'не-, плохо', en: 'mis-, badly'},
       stief: {ru: 'неродной, сводный', en: 'step-'}, sonder: {ru: 'особый, специальный', en: 'special'}, fehl: {ru: 'ошибочный, неудачный', en: 'wrong, failed'}};
+    // A first part read as a verb stem (lern-, wart-e-) or as a noun without its -e (Straf- = Strafe, Pell- = Pelle): the readings
+    // and their length conditions, shared by modifier() and the stub of «X- und Y» (resolver hyphenEllipsis, 10.11).
+    async function stemVerbReadings(a) {
+      const out = [];
+      if (a.length < 3) return out;   // (no reading is kept below three letters; not asked either)
+      for (const {v, nen} of stemVerbs(a)) for (const r of await readings(v, ['Verb'], true)) if (r.source === 'main' ? a.length >= 3 : a.length >= 4) out.push({r, nen});
+      return out;
+    }
+    async function droppedEReadings(a) {
+      return a.length >= 3 ? (await readings(a + 'e', ['Nomen'], true)).filter(r => r.source === 'main' || a.length >= 4) : [];
+    }
     async function modifier(s, min) {
       if (BOUND_FIRST[s]) return [{pos: 'Präfix', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, rank: 0, ...BOUND_FIRST[s]}];
       if (dict.blocked(s)) return [];
@@ -966,15 +977,15 @@
         // With -e- an own noun keeps its place (Tag(e)- of Tag, not tagen); otherwise the own verb stem comes early.
         // Without a linking letter an external noun keeps its place (Zauber-, not zaubern); rechen- of rechnen, zeichen-
         // of zeichnen and an -e- stem (les-e-) are verbs.
-        if (!link || link === 'e') for (const {v, nen} of stemVerbs(a)) for (const r of await readings(v, ['Verb'], true))
-          if (r.source === 'main' ? a.length >= 3 : a.length >= 4) out.push({...r, text: a, link, stem: true,
+        if (!link || link === 'e') for (const {r, nen} of await stemVerbReadings(a))
+          out.push({...r, text: a, link, stem: true,
             rank: r.source !== 'main' ? 3.5 : link ? ((await readings(a, ['Nomen'], true)).some(n => n.source === 'main') ? 2.2 : 0.2) : nen ? 0.2 : 0.35});
         if (!link && a.length >= min) {
           for (const r of (await readings(a, ['Nomen'])).filter(r => r.form && r.number === 'plural')) out.push({...r, text: a, link: '', plural: true, rank: 2.5});
           // (advisor 07.11) an own noun without its -e comes before the stem of an own verb (0.35) — after a word written as it is
           // (0.3: Funk- = Funk «радио», not Funke): Straf- = Strafe, End- = Ende
           // (an own noun also from three letters: End- = Ende)
-          if (a.length >= 3) for (const r of await readings(a + 'e', ['Nomen'], true)) if (r.source === 'main' || a.length >= 4) out.push({...r, text: a, link: '', drop: 'e', rank: r.source === 'main' ? 0.32 : 3});
+          for (const r of await droppedEReadings(a)) out.push({...r, text: a, link: '', drop: 'e', rank: r.source === 'main' ? 0.32 : 3});
         }
       }
       // (advisor 08.11, Hühner-) a plural of a noun with a gender comes before an outside record of the very same spelling
@@ -1438,7 +1449,9 @@
       // Several splits (G68): no card, and not a name either (the caller stops).
       return d ? {derivation: d} : c && c.ambiguous ? {ambiguous: true} : null;
     }
-    return {analyse, HALF};
+    // (10.11) a first part known only as a verb stem or a noun without its -e (the stub of «X- und Y»: Brat- und Pellkartoffeln)
+    const stemOrDroppedE = async a => (await stemVerbReadings(a)).length > 0 || (await droppedEReadings(a)).length > 0;
+    return {analyse, HALF, stemOrDroppedE};
   }
   function create(entries, fallback, {diagnostics = window.BibliothekAnalysisDiagnostics} = {}) {
     // auxiliary as a list (advisor + user 05.11): a card may name both auxiliaries — ["sein", "haben"] (zerbrechen: ist zerbrochen /
@@ -15512,8 +15525,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const word_ = async x => lemmas.has(x) || forms.has(x) || verbAnalyses.has(x) || (await wordFormationDict.readings(x)).length > 0;
       // A first part: a word, or a headword with a linking letter (Lebens = Leben + s; not «lebens» + s).
       const lemma_ = async x => lemmas.has(x) || (await wordFormationDict.readings(x)).some(r => !r.form);
+      // (10.11) also a verb stem or a noun without its -e, as a first part of a compound (Brat- und Pellkartoffeln: Pell- = Pelle;
+      // the word parts filter let «pell» through by mistake before)
       const known = async h => WORD_FORMATION_PARTICLES.has(h) || await word_(h) ||
-        (await Promise.all(ELLIPSIS_LINKS.filter(l => l && h.endsWith(l) && h.length - l.length >= 2).map(l => lemma_(h.slice(0, h.length - l.length))))).some(Boolean);
+        (await Promise.all(ELLIPSIS_LINKS.filter(l => l && h.endsWith(l) && h.length - l.length >= 2).map(l => lemma_(h.slice(0, h.length - l.length))))).some(Boolean) ||
+        await wordFormationCore.stemOrDroppedE(h);
       // A rest of the same kind as the next word: a noun for a capital word (Strafe, not the verb form trafe); a verb or adjective
       // form for a small word, also without its ending (her|bewegter: bewegt).
       const kind = async x => capital ? (await wordFormationDict.readings(x)).some(r => r.pos === "Nomen")
