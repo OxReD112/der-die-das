@@ -516,7 +516,9 @@
   // explanation in the order of the word (un- before the base, a suffix after it — G79). A part without a Russian meaning keeps its English one, marked (only derived words).
   const HALF_SUFFIX = {frei:['-frei: без …','-frei: -free'],los:['-los: без …','-los: -less'],voll:['-voll: полный …','-voll: -ful'],
     reich:['-reich: богатый …','-reich: rich in …'],arm:['-arm: бедный …','-arm: low in …'],artig:['-artig: похожий на …','-artig: …-like'],
-    fähig:['-fähig: способный к …','-fähig: capable of …']};
+    fähig:['-fähig: способный к …','-fähig: capable of …'],
+    // (advisor 10.11) drei + Geschoss + -ig
+    ig:['-ig: с …','-ig: with …']};
   const FORMATION_TEXT = {
     erei:{Verb:['-erei: занятие (часто надоевшее)','-erei: activity (often tiresome)'],Nomen:['-erei: место для …','-erei: place for …']},
     ig:['-ig: с … / похожий на …','-ig: with … / like …'], lich:['-lich: с … / похожий на …','-lich: with … / like …'],
@@ -645,6 +647,8 @@
     if (f.kind === 'compound') {
       const noun = f.pos === 'Nomen', last = f.parts.length - 1;
       const label = (p, k) => {
+        // (a numeral adjective: vierstimmig = vier + Stimm + -ig)
+        if (k === last && f.half === 'ig') return '-ig';
         const text = k === last ? (noun ? cap(f.number === 'plural' ? p.surface : p.lemma.toLowerCase()) : p.text)
           : (noun && k === 0 || p.pos === 'Nomen' ? cap(p.text) : p.text);
         return `${text}${p.link ? `(${p.link})` : ''}`;

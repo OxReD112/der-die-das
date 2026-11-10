@@ -962,8 +962,29 @@
     async function droppedEReadings(a) {
       return a.length >= 3 ? (await readings(a + 'e', ['Nomen'], true)).filter(r => r.source === 'main' || a.length >= 4) : [];
     }
+    // (advisor 10.11) a numeral as a first part: a cardinal (Dreikampf, Sechstagekrieg), an ordinal stem (Zweitliga, zweithöchste),
+    // a decade or a number noun in -er (Sechzigerjahre, Zweierbob). Not ein- (a verb prefix: einfahren), not elf- (Elfenbein: elfen-).
+    const NUMERAL_FIRST = (() => {
+      const card = {zwei: ['два', 'two'], drei: ['три', 'three'], vier: ['четыре', 'four'], fünf: ['пять', 'five'], sechs: ['шесть', 'six'],
+        sieben: ['семь', 'seven'], acht: ['восемь', 'eight'], neun: ['девять', 'nine'], zehn: ['десять', 'ten'], zwölf: ['двенадцать', 'twelve'],
+        zwanzig: ['двадцать', 'twenty'], dreißig: ['тридцать', 'thirty'], vierzig: ['сорок', 'forty'], fünfzig: ['пятьдесят', 'fifty'],
+        sechzig: ['шестьдесят', 'sixty'], siebzig: ['семьдесят', 'seventy'], achtzig: ['восемьдесят', 'eighty'], neunzig: ['девяносто', 'ninety'],
+        hundert: ['сто', 'hundred'], tausend: ['тысяча', 'thousand']};
+      const ord = {zweit: ['второй', 'second'], dritt: ['третий', 'third'], viert: ['четвёртый', 'fourth'], fünft: ['пятый', 'fifth'],
+        sechst: ['шестой', 'sixth'], siebt: ['седьмой', 'seventh'], neunt: ['девятый', 'ninth'], zehnt: ['десятый', 'tenth']};
+      const er = {zweier: ['двойка', 'two, team of two'], dreier: ['тройка', 'three, team of three'], vierer: ['четвёрка', 'four, team of four'],
+        sechser: ['шестёрка', 'six'], zwanziger: ['двадцатые годы', 'the twenties'],
+        dreißiger: ['тридцатые годы', 'the thirties'], vierziger: ['сороковые годы', 'the forties'], fünfziger: ['пятидесятые годы', 'the fifties'],
+        sechziger: ['шестидесятые годы', 'the sixties'], siebziger: ['семидесятые годы', 'the seventies'], achtziger: ['восьмидесятые годы', 'the eighties'],
+        neunziger: ['девяностые годы', 'the nineties']};
+      const out = {};
+      for (const [m, [ru, en]] of [...Object.entries(card), ...Object.entries(ord), ...Object.entries(er)]) out[m] = {ru, en, ordinal: m in ord, noun: m in er};
+      return out;
+    })();
     async function modifier(s, min) {
       if (BOUND_FIRST[s]) return [{pos: 'Präfix', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, rank: 0, ...BOUND_FIRST[s]}];
+      if (NUMERAL_FIRST[s]) return [{pos: 'Zahlwort', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, numeral: true, rank: 0,
+        ru: NUMERAL_FIRST[s].ru, en: NUMERAL_FIRST[s].en}];
       if (dict.blocked(s)) return [];
       await warm(modifierSpellings(s, min));
       const out = [];
@@ -1161,7 +1182,9 @@
       return ctx.title || ctx.name || ctx.nameSlot ? false : 'maybe';
     };
     const headPart = (h, surface) => ({...h, text: h.ending !== undefined ? h.text : surface, surface});
-    async function compound(w, noun, ctx) {
+    // (advisor 10.11) a numeral split that may be a name (Siebengebirge, Vierbach) is not read: names stay as they were (r2-numfirst-maybe)
+    async function compound(w, noun, ctx) { const r = await splitCompound(w, noun, ctx); return r?.parts && r.maybeName && r.parts[0].numeral ? null : r; }
+    async function splitCompound(w, noun, ctx) {
       const splits = [], blocked = [], undecided = [];
       // Speed (26.10.2026): the loops below asked one cut after another. Every head and first part they ask is computed
       // once (memo) and the independent ones together, in waves of exactly the calls the loops make: all heads, then the
@@ -1243,6 +1266,8 @@
         if (ok) three.push({w, at: [i, j], parts, ...(ok === 'maybe' ? {maybeName: true} : {})});
       }
       if (three.length === 1) return three[0].parts.every(p => p.ru) ? three[0] : result || {noRu: three[0]};
+      // (advisor 10.11) of several three-part splits, the only one whose parts all have a Russian meaning (Sechs + Tag(e) + Krieg, not Sech + Stage + Krieg)
+      if (three.length > 1 && !result) { const full = three.filter(x => x.parts.every(p => p.ru)); if (full.length === 1) return full[0]; }
       if (three.length > 1) { const shift = result ? null : await linkShift(three); return result || shift || {ambiguous: three}; }
       return result;
     }
@@ -1408,6 +1433,24 @@
       if (d.base && !d.base.ru) return null;
       return {...d, lemma: bare + 'in', number: plural ? 'plural' : null};
     }
+    // (advisor 10.11) a numeral before an adjective: drei + Geschoss + -ig (dreigeschossig, sechszackig, vierstimmig — the base a noun of a
+    // dictionary), an ordinal before a superlative (zweithöchste, viertgrößte — a form of an adjective of a dictionary)
+    async function numeralAdjective(w) {
+      const num = Object.keys(NUMERAL_FIRST).filter(k => !NUMERAL_FIRST[k].ordinal && !NUMERAL_FIRST[k].noun && w.startsWith(k)).sort((x, y) => y.length - x.length)[0];
+      let m = num ? new RegExp(`^(${num})(.{3,}?)ig(e|en|em|er|es)?$`, 'u').exec(w) : null;
+      if (m) {
+        // (a noun in -en first: sechsstreifig — Streifen «полоса», not Streife «патруль»)
+        const n = (await withRu(await readings(m[2] + 'en', ['Nomen'], true))).find(r => r.ru) || (await nounOf(m[2])).find(r => r.ru);
+        if (n) return {w, at: [m[1].length, m[1].length + m[2].length], parts: [{...(await modifier(m[1], 3))[0]}, {...n, text: m[2], link: ''},
+          {pos: 'Adjektiv', lemma: 'ig', source: 'main', form: false, text: 'ig', ending: m[3] || '', half: true, ru: 'ig', en: 'ig'}]};
+      }
+      m = /^(zweit|dritt|viert|fünft|sechst|siebt|neunt|zehnt)(.{4,})$/u.exec(w);
+      if (m) {
+        const a = (await withRu((await readings(m[2], ['Adjektiv'])).filter(r => r.form && r.ru !== '').sort(ownFirst)))[0];
+        if (a && a.ru) return {w, at: [m[1].length], parts: [{...(await modifier(m[1], 3))[0]}, {...a, text: m[2], ending: ''}]};
+      }
+      return null;
+    }
     // The whole analysis: noun-based -ig / -lich, compound, derivation.
     async function analyse(w, noun, ctx) {
       if (ctx.nameMode) {
@@ -1420,6 +1463,7 @@
         return {compound: c};
       }
       if (!noun) { const d = await nounAdjective(w, ctx); if (d) return {derivation: d}; }
+      if (!noun) { const n = await numeralAdjective(w); if (n) return {compound: n}; }
       // (advisor 07.11) A known whole noun with a diminutive ending comes before a split into parts: Deckbettchen is
       // Deckbett + -chen, not Deck + Bettchen (also when the base is known only in English: Lämmerschwanz).
       if (noun && !ctx.title && /(?:chen|lein)s?$/u.test(w)) {
