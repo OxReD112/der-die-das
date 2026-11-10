@@ -2619,7 +2619,14 @@
           (forms.get(words[k])||[]).some(e=>['Adjektiv','Adverb'].includes(e.type))&&!(forms.get(words[k])||[]).some(e=>e.type==='Verb'))&&
           !analyses[k]?.some(a=>['finite','infinitive','participle','imperative'].includes(a.kind));
         const closingParticle=rightEnd>i&&nominalAfter(i+1)&&words.slice(start,i).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[rightEnd]));
-        const nominalJoin=(words[i]==='als'&&words[i+1]!=='auch'&&!words.slice(start,i).includes('sowohl')||COORDINATORS_WITHOUT_COMMA.includes(words[i])&&closingParticle)&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&leftFinite&&!rightFinite&&
+        // (advisor 10.11: als + a group + the closing infinitive / participle of the verb group before it — kann man sich als Teilchen
+        // vorstellen, hat sich als richtig erwiesen —: the only verb form after als ends the part and reads as an infinitive or a participle,
+        // a modal / haben / sein / werden is finite before als — one clause, not als + a clause)
+        const groupEndAfterAls=words[i]==='als'&&rightEnd>i+1&&analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'&&['können','müssen','dürfen','sollen','wollen','mögen','möchten','haben','sein','werden'].includes(a.base)))&&
+          analyses.slice(i+1,rightEnd).every(rows=>!rows.some(a=>a.kind==='finite'))&&analyses[rightEnd].some(a=>a.kind==='infinitive'||a.kind==='participle')&&
+          // (no quotation or bracket inside — würden sich als „Unschuldslämmer“ präsentieren keeps its parts as before)
+          !/[„“”"»«()]/u.test(sentence.slice(tokens[i].index,tokens[rightEnd].index));
+        const nominalJoin=(words[i]==='als'&&words[i+1]!=='auch'&&!words.slice(start,i).includes('sowohl')||COORDINATORS_WITHOUT_COMMA.includes(words[i])&&closingParticle)&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&leftFinite&&(!rightFinite||groupEndAfterAls)&&
           !words.slice(i+1,rightEnd+1).some(w=>subjectPersons[w]);
         // (advisor 06.11: the shared core first — und / oder + a finite verb right after it, or a subject pronoun + a finite verb,
         // opens a part before the exceptions above: jagte die Hufeisen ab und schlug ihm …, Geh und sage …, dachte Harry und rückte …)
@@ -3381,6 +3388,24 @@
             // partner, in the data a «mit + Dativ» complement «с кем-либо» (sich verstehen «ладить») — is set aside with a singular subject
             // and no mit in the clause: Er versteht sich selbst nicht → verstehen «понимать», Wir verstehen uns gut → «ладить». The dative
             // reading by selbst belongs to the plain card only.
+            // (advisor 10.11) an accusative object at the start of the part, the subject after the finite verb — Diese Elektronen kann man
+            // sich als Teilchen vorstellen, Das kann ich mir vorstellen: sich is a dative (sich etwas vorstellen «представлять себе»).
+            // The group: a determiner that can be accusative + up to two adjectives + a noun (den only with a masculine singular noun — Den
+            // Kindern stellte er sich vor is a dative object), or es / das / dies / alles / nichts; right after it the finite verb; the
+            // subject after the verb and before sich; no time / measure noun (Den ganzen Tag hatte er sich versteckt)
+            const objectFirst=(()=>{
+              const s0=clause.start;
+              if(subjectAt===null||subjectAt<=s0+1||subjectAt>pronoun||!SUBJECT_PRONOUNS.has(words[subjectAt])&&words[subjectAt]!=='man')return false;
+              const finiteAt=j=>j<words.length&&analyses[j].some(r=>r.kind==='finite');
+              if(/^(?:es|das|dies|alles|nichts)$/u.test(words[s0]))return finiteAt(s0+1)&&subjectAt>s0+1;
+              if(!ACCUSATIVE_CAPABLE_DETERMINER.test(words[s0]))return false;
+              // (up to three lowercase words before the noun — adjectives and the adverbs before them: Diese frei beweglichen Elektronen)
+              let j=s0+1;while(j<=s0+3&&j<pronoun&&/^[a-zäöüß]+$/u.test(tokens[j][0])&&!finiteAt(j)&&!SUBJECT_PRONOUNS.has(words[j]))j++;
+              if(!/^\p{Lu}/u.test(tokens[j]?.[0]||'')||!finiteAt(j+1)||subjectAt<=j+1)return false;
+              if(MEASURE.test(words[j])||OBJ_TIME.test(words[j]))return false;
+              if(words[s0]==='den'&&!(forms.get(words[j])||[]).some(e=>e.type==='Nomen'&&e.article==='der'&&norm(e.word)===words[j]))return false;
+              return true;
+            })();
             const ownReflexiveCard=!!a.entry&&reflexiveEntries.has(a.entry);
             const reciprocalOwnCard=ownReflexiveCard&&(a.entry.complements||[]).some(c=>/^mit\b/u.test(norm(c.pattern||''))&&/с кем/u.test(c.note_ru||''));
             const partnerInClause=words.slice(clause.start,clause.end+1).includes('mit');
@@ -3404,14 +3429,14 @@
             // makes sich a dative, the field is not taken (Sie sahen sich an, was passiert war → ansehen «смотреть»); a field whose own
             // example takes such a clause keeps it (Ich frage mich, ob … → sich fragen «задаваться вопросом»)
             const fieldTakesClause=!!a.entry?.reflexive&&new RegExp(`,\\s*(?:${OBJECT_CLAUSE_OPENERS.join('|')})\\b`,'iu').test(String(a.entry.reflexive.example_de||''));
-            const dativeReading=freeDative||objectAfterSubject||objectGroupStrict||selfMarker!==null&&!ownReflexiveCard||
+            const dativeReading=freeDative||objectAfterSubject||objectGroupStrict||objectFirst||selfMarker!==null&&!ownReflexiveCard||
               objectBeforeSich||objectClause&&!ownReflexiveCard&&!fieldTakesClause&&!(subject.index!==null&&words[subject.index]==='es');
             // (review 26.10: a plural subject alone does not make it reciprocal — selbst right after sich means «oneself»: Wir hatten uns selbst
             // nicht verstanden → «понимать»; only mit names the partner)
             if(selfMarker!==null&&reciprocalOwnCard&&!partnerInClause)continue;
             if(a.entry&&reflexiveEntries.has(a.entry)&&(a.entry.reflexive_case==='Dativ'
-              ?caseName==='Akkusativ'||caseName!=='Dativ'&&!freeDative&&!objectGroup&&!clauseAfter&&!relativeObject&&!objectBeforeSich&&!pronounObject&&!objectInfinitive&&!onlyDativeReflexive
-              :caseName==='Dativ'||objectGroupStrict||objectAfterSubject||freeDative))continue;
+              ?caseName==='Akkusativ'||caseName!=='Dativ'&&!freeDative&&!objectGroup&&!clauseAfter&&!relativeObject&&!objectBeforeSich&&!pronounObject&&!objectInfinitive&&!onlyDativeReflexive&&!objectFirst
+              :caseName==='Dativ'||objectGroupStrict||objectAfterSubject||freeDative||objectFirst))continue;
             const tokenSpan=i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
             // S1 (17.10.2026): the separable scanner proves a detached particle of this very
             // verb outside the clause seen here (stellte sich das Urteil als falsch heraus --,
@@ -4219,6 +4244,29 @@
       if (compoundHeadItems.size > 4096) compoundHeadItems.clear();
       compoundHeadItems.set(key,entry);
       return entry;
+    }
+    // (advisor 10.11) the heads the grammar group reads (grammarClause → matches): the capitalised words right after the tapped word
+    // (up to three), each with the attributeBefore of this tap. The grammar group reads them only for a tapped word that is not
+    // only a conjunction / adverb / particle (their rules read no noun head). grammarHeads() reads them in the async stage — a logic
+    // step, not a speed step: a prefetch may only fill the same store by the same key earlier (the result does not depend on it).
+    const GRAMMAR_HEADS_NOT_NEEDED = new Set(["Konjunktion","Adverb","Partikel","particle","Interjektion","conjunction","adverb"]);
+    const grammarHeadsNeeded = candidates => (candidates || []).some(c => !GRAMMAR_HEADS_NOT_NEEDED.has(canonicalPos(c.pos)) && !GRAMMAR_HEADS_NOT_NEEDED.has(c.pos));
+    const grammarHeadAttribute = (word, index, h) => h === index+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word);
+    function grammarHeadTokens(tokens, index, word) {
+      const out = [];
+      for (let h = index+1; index >= 0 && h < tokens.length && h-index <= 3; h++) if (/^\p{Lu}/u.test(tokens[h][0])) out.push([tokens[h], grammarHeadAttribute(word, index, h)]);
+      return out;
+    }
+    async function grammarHeads(word, context, candidates) {
+      if (!context || !Number.isInteger(context.tokenOffset) || !grammarHeadsNeeded(candidates)) return;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'compoundHeads'), index = clickedTokenIndex(tokens,context.tokenOffset,word);
+      // (speed chat 10.11, agreed with the links chat: the word formations start together — one after another each was a chain of
+      // network waits, Hotel zum Bahnblick Cokeworth 1 → 8 waves; the entries are kept one after another in the old order — the map of
+      // entries is cleared at its size limit by the store that crosses it, so the order of the stores stays the same)
+      // (advisor + speed chat 10.11: this replaces the earlier prefetch block of resolveInternal — the same words, the same key, before
+      // the role check; it is the logic step, so the card does not depend on a prefetch)
+      const heads = grammarHeadTokens(tokens, index, word).map(([token, attr]) => [token, attr, compoundHeadFormation(sentence, token, attr)]);
+      for (const [token, attr, formed] of heads) await compoundHeadEntry(sentence, token, attr, formed);
     }
     let preparation = null;
     function prepareSeparable() {
@@ -10861,7 +10909,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       while (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
       // (advisor 08.11: an unknown compound noun after the word — its word-formation card, prepared in the async stage)
       // (the same attributeBefore as the async stage computed for this tapped word)
-      const headItem = i => i > index && tokens[i] ? compoundHeadItems.get(compoundHeadKey(sentence, tokens[i], i === index+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word))) : null;
+      // (advisor 10.11: only the heads grammarHeads() reads for this tap — up to three words after it, not for a conjunction / adverb /
+      // particle — so an entry another tap stored cannot change this card)
+      const headsNeeded = grammarHeadsNeeded(candidates);
+      const headItem = i => headsNeeded && i > index && i-index <= 3 && tokens[i] && /^\p{Lu}/u.test(tokens[i][0]) ? compoundHeadItems.get(compoundHeadKey(sentence, tokens[i], grammarHeadAttribute(word, index, i))) : null;
       const matches = i => forms.get(norm(tokens[i]?.[0])) || (headItem(i) ? [headItem(i)] : []);
       const unchanged = {candidates,preferred:null,evidence:null};
       const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
@@ -12808,6 +12859,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // for manual selection but cannot rank or resolve themselves.
       // L01 attributive participles have independent noun-phrase evidence;
       // they must not require an explicit reflexive pronoun in the text.
+      if (derived.some(e=>reflexiveEntries.has(e))) await grammarHeads(word,context,candidates);
       const attributed = derived.some(e=>reflexiveEntries.has(e))
         ? grammarRank(word,context,candidates,inflections).candidates.filter(c=>reflexiveEntries.has(c.item) && c.usage?.role === "attributive") : [];
       candidates = candidates.filter(c => !reflexiveEntries.has(c.item) || norm(word) === norm(c.lemma));
@@ -13097,20 +13149,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (nameReadingOrders.size > 4096) nameReadingOrders.clear();
           nameReadingOrders.set(`${pos}:${word}`,order);
         }
-      // (advisor 08.11) an unknown compound noun after the tapped word: its entry (compoundHeadEntry) for the grammar group below
-      // (speed chat 10.11: not for a conjunction, adverb or particle — doch … Onkel Vernon 5 network waits → 1)
-      if (!(candidates.length && candidates.every(c => ["Konjunktion","Adverb","Partikel","particle","Interjektion"].includes(canonicalPos(c.pos)))) &&
-          context && Number.isInteger(context.tokenOffset)) {
-        const s0 = String(context.sentence || ""), t0 = sharedTokens(s0,'compoundHeads'), i0 = clickedTokenIndex(t0,context.tokenOffset,word);
-        // (speed chat 10.11, agreed with the links chat: the heads are looked up together — one after another each was a chain of
-        // network waits: Hotel zum Bahnblick Cokeworth 1 → 8 waves; each entry is the same, compoundHeadEntry keeps it per offset)
-        // (review 10.11: the word formations start together, the entries are kept one after another in the old order — the map
-        // of entries is cleared at its size limit by the store that crosses it, so the order of the stores stays the same)
-        const heads = [];
-        for (let h = i0+1; i0 >= 0 && h < t0.length && h-i0 <= 3; h++)
-          if (/^\p{Lu}/u.test(t0[h][0])) { const attr = h === i0+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word); heads.push([t0[h],attr,compoundHeadFormation(s0,t0[h],attr)]); }
-        for (const [token,attr,formed] of heads) await compoundHeadEntry(s0,token,attr,formed);
-      }
+      await grammarHeads(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const roleRank = await sharedRoleRank(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const grammatical = roleRank || grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
       const ranked = contextualRank(word, context, grammatical.candidates);
