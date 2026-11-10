@@ -1184,8 +1184,34 @@
       return ctx.title || ctx.name || ctx.nameSlot ? false : 'maybe';
     };
     const headPart = (h, surface) => ({...h, text: h.ending !== undefined ? h.text : surface, surface});
-    // (advisor 10.11) a numeral split that may be a name (Siebengebirge, Vierbach) is not read: names stay as they were (r2-numfirst-maybe)
-    async function compound(w, noun, ctx) { const r = await splitCompound(w, noun, ctx); return r?.parts && r.maybeName && r.parts[0].numeral ? null : r; }
+    // (advisor 10.11, claude/CAUSES_SAMPLE100_2026-11-10_RU.md п. 4) a split whose part has no Russian meaning is kept: the part shows
+    // its English meaning in the Russian interface («английский: …», as in «состав»), the split is no longer thrown away
+    // Only a split with a sign of a common noun (not «возможно, имя»: Greenberg, Griphook, Stockport) and a part whose English is
+    // a meaning, not a note (spelling of, form of, gerund of, clipping of, female equivalent …: Zippen, Nahme, Gefäss).
+    const NOTE_GLOSS = /\b(?:spelling|form|gerund|clipping|equivalent|nominalization|diminutive|plural|synonym|shorthand|short) of\b|\bagent noun\b|\binstance noun\b|^only (?:in|used)\b|\b(?:obsolete|archaic|dated)\b/iu;
+    // (it is the last try: createWordFormation asks with ctx.weakSplit only when nothing else read the word — a feminine,
+    // a derivation, the ß spelling come first: Kinobetreiberinnen, Strassenrennen)
+    // (advisor 10.11) X-burger, -hauser, -heimer, -dorfer, -berger, -felder with an English-only last part (Burger, Hauser): the inhabitant or
+    // the adjective of a place (Offenburger, Schaffhauser) — «Name / Nomen», the place and -er, not X + Burger
+    const DEMONYM = {burger: 'burg', hauser: 'hausen', heimer: 'heim', dorfer: 'dorf', berger: 'berg', felder: 'feld'};
+    async function compound(w, noun, ctx) {
+      const r = await splitCompound(w, noun, ctx);
+      // (r2-numfirst-maybe) a numeral split that may be a name (Siebengebirge, Vierbach) is not read: names stay as they were
+      if (r?.parts && r.maybeName && r.parts[0].numeral) return null;
+      if (!r?.noRu) return r;
+      const c = r.noRu, last = c.parts.at(-1), place = DEMONYM[norm(last.lemma)];
+      if (ctx.weakSplit && noun && place && !last.ru && c.parts.length === 2) {
+        const base = w.slice(0, c.at[0]) + place, name = base.charAt(0).toUpperCase() + base.slice(1);
+        return {w, at: c.at, maybeName: true, parts: [
+          {pos: 'Name', lemma: name, source: 'bound', form: false, text: base, link: '', ru: 'название места', en: 'place name'},
+          {pos: 'Adjektiv', lemma: 'er', source: 'main', form: false, text: 'er', ending: '', half: true, ru: 'er', en: 'er'}]};
+      }
+      // (advisor 10.11, variant (в)) such a split is always «Name / Nomen · Kompositum» (both readings), also with a sign of a noun;
+      // a word with an adjective ending (Orthopädische, Halleschen) is no noun split
+      // (an adjective has no «Name /» reading: wulstartig, bayernweit stay «не нашёл»)
+      if (!ctx.weakSplit || !noun || c.parts.some(p => !p.ru && (!p.en || NOTE_GLOSS.test(p.en))) || /sch(?:e|en|er|es|em)$/u.test(w)) return r;
+      return {...c, maybeName: true};
+    }
     async function splitCompound(w, noun, ctx) {
       const splits = [], blocked = [], undecided = [];
       // Speed (26.10.2026): the loops below asked one cut after another. Every head and first part they ask is computed
@@ -4130,6 +4156,16 @@
         found = await wordFormationCore.analyse(w,true,{...ctx,nameMode:true});
         if (found?.ambiguous) found = null;
         asName = !!found;
+      }
+      // (advisor 10.11) a split whose part has only an English meaning — the last try
+      // (not for the «состав» line of a word with its own record — Turnschuhe is no Turn + Schuh; not when the Russian dictionary has
+      // the whole word: Hackmesser «косарь», Wolfswurz «аконит» keep their record)
+      const wholeT = typeof window !== "undefined" && window.BibliothekRussianTranslations;
+      let wholeRecord = false;
+      if (!found && !asName && !options.ignoreRecord && wholeT?.hasWhole) { try { wholeRecord = !!(await wholeT.hasWhole(word,'ru')) || /ß/u.test(word) && !!(await wholeT.hasWhole(String(word).replace(/ß/gu,'ss'),'ru')); } catch (_) {} }
+      if (!found && !asName && !options.ignoreRecord && !wholeRecord) {
+        found = await wordFormationCore.analyse(w,noun,{...ctx,weakSplit:true});
+        if (found?.ambiguous || found && !found.compound) found = null;
       }
       if (!found) return null;
       const part = p => ({text:p.text,link:p.link || "",drop:!!p.drop,plural:!!p.plural,stem:!!p.stem,surface:p.surface || p.text,lemma:p.lemma,pos:p.pos,
@@ -16292,7 +16328,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const translation={en:window.BibliothekMeaningDisplay?.formationText?.(formation,'en')||'',ru:window.BibliothekMeaningDisplay?.formationText?.(formation,'ru')||''};
         const c={source:'fallback',lemma:v.word,pos:'noun',posLabel:'Nomen',translation,formation,item:{word:v.word,type:'Nomen',article:head.article,translation_en:translation.en,translation_ru:translation.ru}};
         return {candidates:[c],preferred:c,selected:c,status:'resolved',unresolvedMeanings:[],evidence:'hyphen-compound'};};
-      const ellipsis=async e=>{for(const v of e.variants){let r=null;try{r=await pipeline(v.word,v.context);}catch(_){r=null;}if(!known(r))r=await hyphenCompound(v);if(known(r)){const x=ellipsisResult(r,v);if(x)return x;}}
+      // (advisor 10.11) a joined word read only as an English-only split («Name / Nomen») gives way to the fragment's own reading
+      // (Stechpalmen- und Mistelzweigen: Stechpalmen «Plural», not Stechpalmenzweige = Stechpalme + Zweig)
+      const weakJoin=r=>{const f=r&&r.selected&&r.selected.formation;return !!(f&&f.kind==='compound'&&f.maybeName&&f.parts.some(p=>!p.ru));};
+      const ellipsis=async e=>{for(const v of e.variants){let r=null;try{r=await pipeline(v.word,v.context);}catch(_){r=null;}if(!known(r)||weakJoin(r))r=await hyphenCompound(v);if(known(r)&&!weakJoin(r)){const x=ellipsisResult(r,v);if(x)return x;}}
         return e.fragment?ellipsisResult(null,e.fragment):pipeline(word,context);};
       const capitalVerb=async r=>{const v=capitalVerbBeforePronoun(word,context);const sel=r&&r.selected;
         if(!v||sel&&canonicalPos(sel.pos)!=="Nomen")return r;
@@ -16858,8 +16897,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     async function resolveFollowingReference(word, context) {
       const result = await resolveFollowingReferenceOnce(word, context);
       // Swiss ss (swissSpelling): no record of the ss spelling at all — the ß spelling, when it has one.
-      if (/ss/u.test(String(word)) && !(result?.candidates || []).length) {
+      // (also when the only reading is a split with an English-only part: Strassenrennen — Straßenrennen, not Strass + Rennen)
+      const weakOnly = (result?.candidates || []).length > 0 && result.candidates.every(c => c.formation?.kind === "compound" && c.formation.parts.some(p => !p.ru));
+      if (/ss/u.test(String(word)) && (!(result?.candidates || []).length || weakOnly)) {
         const read = await resolveFollowingReferenceOnce(word, context, swissSpelling(word));
+        // (the ß spelling replaces an English-only split only with a reading of its own, not with another split: Schnitzmesser)
+        if (weakOnly && (read?.candidates || []).some(c => c.formation?.kind === "compound" && c.formation.parts.some(p => !p.ru))) return result;
         return (read?.candidates || []).length ? read : result;
       }
       if (!/ß/u.test(String(word)) || (result?.candidates || []).some(c => c.source === "main")) return result;
