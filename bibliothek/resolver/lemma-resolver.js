@@ -4197,13 +4197,16 @@
     const compoundHeadItems = new Map();
     // (speed chat 10.11) the word formation of a head, started before its entry is kept: null when no lookup is needed (an entry
     // already kept, a small letter, a word of our own) — the same conditions as compoundHeadEntry below
+    // (advisor 10.11, found by the speed chat: the key held only sentence + place — the reading of the head depends on attributeBefore too,
+    // so the card depended on the order of the taps: Perfekte Handwerksarbeit, Kroatische Militäreinheiten) every input is in the key
+    const compoundHeadKey = (sentence, token, attributeBefore) => sentence + "\u0000" + token.index + "\u0000" + (attributeBefore ? 1 : 0);
     function compoundHeadFormation(sentence, token, attributeBefore = false) {
       const k = token[0];
-      if (compoundHeadItems.has(sentence + "\u0000" + token.index) || !/^\p{Lu}/u.test(k) || (forms.get(norm(k)) || []).length) return null;
+      if (compoundHeadItems.has(compoundHeadKey(sentence, token, attributeBefore)) || !/^\p{Lu}/u.test(k) || (forms.get(norm(k)) || []).length) return null;
       return wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null);
     }
     async function compoundHeadEntry(sentence, token, attributeBefore = false, started = null) {
-      const key = sentence + "\u0000" + token.index;
+      const key = compoundHeadKey(sentence, token, attributeBefore);
       if (compoundHeadItems.has(key)) return compoundHeadItems.get(key);
       const k = token[0];
       let entry = null;
@@ -10857,7 +10860,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       while (start > 0 && connected(start-1,start) && (!boundaries.has(norm(tokens[start-1][0])) || midClauseDoch(sentence,tokens,start-1))) start--;
       while (end+1 < tokens.length && connected(end,end+1) && (!boundaries.has(norm(tokens[end+1][0])) || midClauseDoch(sentence,tokens,end+1))) end++;
       // (advisor 08.11: an unknown compound noun after the word — its word-formation card, prepared in the async stage)
-      const matches = i => forms.get(norm(tokens[i]?.[0])) || (i > index && tokens[i] && compoundHeadItems.get(sentence + "\u0000" + tokens[i].index) ? [compoundHeadItems.get(sentence + "\u0000" + tokens[i].index)] : []);
+      // (the same attributeBefore as the async stage computed for this tapped word)
+      const headItem = i => i > index && tokens[i] ? compoundHeadItems.get(compoundHeadKey(sentence, tokens[i], i === index+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word))) : null;
+      const matches = i => forms.get(norm(tokens[i]?.[0])) || (headItem(i) ? [headItem(i)] : []);
       const unchanged = {candidates,preferred:null,evidence:null};
       const isVerb = c => (posMap[c.pos] || c.pos) === "Verb";
       const verbs = candidates.filter(isVerb);
