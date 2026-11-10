@@ -654,11 +654,22 @@
     } else if (f.kind === 'feminine') marks.push(`weibliche Form von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
-    const lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
+    let lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
+    // (advisor + user 10.11) a whole Russian record of the word (Fechtmeister «тренер по фехтованию», not «фехтовать · мастер»):
+    // its meanings instead of the parts, in the Russian interface; the heading and the grammar stay those of the split
+    if (language === 'ru' && candidate.wholeRu?.meanings?.length) { const m = fit(candidate.wholeRu.meanings.join('; ')); lines = [{text:m.text, more:m.rest, helpEntry:null}]; }
     // (advisor 09.11) a split with a place-name / surname head and no sign before it: «Name / Nomen · Kompositum» — both readings shown
     const grammar = (f.maybeName ? 'Name / ' : '') + [f.pos, ...marks].join(' · ');
     return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
       note:'', more:0, spans:null, helpEntry:null};
+  }
+  // (advisor + user 10.11) a word no reading found, with a whole Russian record: «Fangnetz · Nomen — рыболовная сеть …» (Russian only;
+  // the Russian dictionary has no gender, so no article)
+  function wholeCard(resolution, word, language) {
+    const w = resolution?.wholeRu;
+    if (language !== 'ru' || !w?.meanings?.length) return null;
+    const m = fit(w.meanings.join('; '));
+    return {heading:w.word || word, grammar:w.pos || '', text:m.text, more:0, textLanguage:'ru', missing:false, derived:true, note:'', spans:null, helpEntry:null};
   }
   const fromText = (source, meaning, language) => `${language === 'ru' ? 'От' : 'From'} ${source} — ${meaning}`;
   // Dictionary meaning on the chosen language; RU without a Russian value keeps the English one marked.
@@ -1038,5 +1049,5 @@
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};
   }
   window.BibliothekMeaningDisplay = Object.freeze({formationText, formationLines, groups, alternatives, pos, heading, brief, compact, formComment, nounPhraseComment, labelSegments,
-    card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION});
+    card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION, wholeCard});
 })();

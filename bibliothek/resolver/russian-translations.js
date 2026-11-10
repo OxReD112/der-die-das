@@ -254,6 +254,34 @@
         }
       } catch (_) { candidate.russianTranslationError = "unavailable"; }
     }));
+    // (advisor + user 10.11) a whole Russian record of a word the English dictionary and our cards do not know — instead of a split
+    // or «не нашёл», in the Russian interface only. A split keeps its gender and number (the Russian dictionary has neither) and
+    // shows the record of its base form (Holzhackers — Holzhacker) of the same part of speech; a name split («Name / Nomen …»)
+    // stays as it is. A word without any reading: the record of the part of speech its spelling allows (a capital — a noun
+    // first; lowercase — not a noun). A record whose meanings are all names (Mölln «Мёльн») is not taken.
+    const plainMeanings = r => r && r.meanings.filter(m => !(r.names || []).includes(m)).length ? r : null;
+    await Promise.all(resolution.candidates.filter(c => c.formation?.kind === "compound" && !c.formation.maybeName && !c.wholeRu).map(async candidate => {
+      const f = candidate.formation, word = String(f.lemma || ""), pos = posOf(f.pos);
+      try {
+        if (!word || !["noun","adj","verb"].includes(pos) || !(await hasWhole(word,"ru"))) return;
+        const result = plainMeanings(await lookup(word,pos));
+        if (result) candidate.wholeRu = {word,pos:f.pos,meanings:result.meanings,result};
+      } catch (_) { /* optional */ }
+    }));
+    if (!resolution.candidates.length && resolution.status === "unresolved" && !resolution.error && !(resolution.unresolvedMeanings || []).length && !resolution.wholeRu && !resolution.nameSign) {
+      // (not a short word: »Ahm – Petunia …« is an interjection, not «ам» the old measure)
+      const word = form.trim(), capital = /^\p{Lu}/u.test(word), lower = word.charAt(0).toLowerCase() + word.slice(1);
+      const tries = capital ? [[word,"noun"],[lower,"adj"],[lower,"verb"],[lower,"adv"]] : [[word,"adj"],[word,"verb"],[word,"adv"]];
+      try {
+        for (const [spelling, pos] of word.length >= 4 ? tries : []) {
+          if (!spelling || !(await hasWhole(spelling,"ru"))) continue;
+          const result = plainMeanings(await lookup(spelling,pos));
+          // (a place: every meaning a geographic one — Rotterdam «геогр. Роттердам (город в Нидерландах)» — is «Name», not «Nomen»)
+          const place = pos === "noun" && result && result.meanings.every(m => /^геогр\./u.test(m));
+          if (result) { resolution.wholeRu = {word:spelling,pos:place ? "Name" : {noun:"Nomen",adj:"Adjektiv",verb:"Verb",adv:"Adverb"}[pos],meanings:result.meanings,result}; break; }
+        }
+      } catch (_) { /* optional */ }
+    }
     observe('enrich-end', {language});
     return resolution;
   }

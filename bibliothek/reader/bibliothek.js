@@ -1070,6 +1070,9 @@
           note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};
       } else if (candidate) {
         model = display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed});
+      } else if (!resolution.candidates.length && display.wholeCard?.(resolution, word, locale())) {
+        // (advisor + user 10.11) a whole Russian record of a word nothing else knows (Russian interface only)
+        model = display.wholeCard(resolution, word, locale());
       } else {
         model = {heading:word, grammar:"", spans:null, helpEntry:null, textLanguage:locale(),
           // G57 (user 24.10.2026): the choice window is the list of cards alone, without a «choose» line.
@@ -1155,7 +1158,7 @@
       }
       $("popover-more").hidden = !selectedEntry && !partEntries.length;
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
-      $("popover-source").hidden = candidate ? candidate.source !== "fallback" : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback");
+      $("popover-source").hidden = candidate ? candidate.source !== "fallback" && !(locale() === "ru" && candidate.wholeRu) : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback") && !(locale() === "ru" && resolution.wholeRu);
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
       paintActiveWord(candidate, referencePronoun || candidate?.construction || candidate?.prepositionLink || candidate?.compound ? model.spans : undefined);
       if(showPronounSummary)popupAmbiguous=false;

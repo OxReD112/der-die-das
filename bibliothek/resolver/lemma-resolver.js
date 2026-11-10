@@ -13257,6 +13257,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!resolution.candidates.length && !unresolvedMeanings.length && !formNotes.length && !error) {
         const formed = await wordFormationCandidate(word,context);
         if (formed) selection.override(resolution,'word-formation',{selected:formed,candidates:[formed],evidence:'word-formation'});
+        // (advisor + user 10.11) a word in a name slot (»Nein«, sagte Kaltwasser; Herr …, a given name before it) stays «не нашёл»: the whole
+        // Russian record (Kaltwasser «холодная вода») is not asked for it
+        else if (/^\p{Lu}/u.test(word) && Number.isInteger(context?.tokenOffset)) {
+          try { const c = wordFormationContext(word,context); if (c && (c.name || c.nameSlot || c.title)) resolution.nameSign = true; } catch (_) { /* optional */ }
+        }
       }
       selection.finish(resolution);
       observe('stage', {stage:'grammar-complete',selected:resolution.selected?.lemma || null});
@@ -15943,6 +15948,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       sourceActivation++;clearPartialSources();
       const sentence=String(context?.sentence || '');
       warmSentence(sentence,word);
+      // (advisor + user 10.11; speed chat: together with the parts, not after them) the whole Russian record of the tapped spelling is asked
+      // at once in the Russian interface, so the enrichment that shows it (a split / «не нашёл») finds its part already loaded
+      try{const T=typeof window!=='undefined'&&window.BibliothekRussianTranslations;if(T?.hasWhole&&window.DeutschTranslation?.getLang?.()==='ru'&&/^\p{L}{4,}$/u.test(word))
+        T.hasWhole(word,'ru').then(h=>h&&T.lookup(word,/^\p{Lu}/u.test(word)?'noun':'adj')).catch(()=>{});}catch(_){}
       const shared=sentenceContext(sentence);
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
@@ -16011,7 +16020,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           return keepDecision(r,{...r,candidates,selected:null,preferred:null,status:candidates.length?'ambiguous':'unresolved'},{outcome:'needs-choice',rule:null});
         return r;};
       const pending=hyphenEllipsis(word,context).then(e=>e?ellipsis(e):pipeline(word,context)).then(capitalVerb).then(capsRun);
-      return pending.then(result=>{release();return result;},error=>{release();throw error;});
+      // (advisor + user 10.11) a word nothing found: the enrichment may find its whole Russian record (Russian interface only)
+      const wholeRu=async result=>{try{const T=typeof window!=='undefined'&&window.BibliothekRussianTranslations;
+        if(result&&result.status==='unresolved'&&!result.candidates?.length&&!result.wholeRu&&T?.enrich&&window.DeutschTranslation?.getLang?.()==='ru')
+          await T.enrich(result,'ru');}catch(_){}return result;};
+      return pending.then(wholeRu).then(result=>{release();return result;},error=>{release();throw error;});
     }
     // G40 (21.10.2026): a pronominal adverb whose own card also has a temporal meaning (darauf «на это …; после этого,
     // потом», hierauf) shows that meaning first only with an explicit sign: a time word right before it (bald, gleich,
