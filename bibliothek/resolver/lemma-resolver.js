@@ -1341,6 +1341,44 @@
       if (d.base) await withRu([d.base]);
       return {...d, lemma: bare, number: ctx.pluralDet ? 'plural' : null};
     }
+    // (advisor 09.11) a feminine in -in / -innen that no dictionary knows — «die Kommissarin · Nomen · weibliche Form von Kommissar»,
+    // the meaning of the masculine word. The masculine: the word without -in / -innen, also without the umlaut of its last vowel and
+    // with -e (Ärzt-in — Arzt, Köch-in — Koch, Bäuer-in — Bauer, Kolleg-in — Kollege); a masculine noun of a dictionary that is our own
+    // card or ends like a person (-er, -or, -ant, -ent, -ist, -at, -ar …), or a compound of known parts with such a head
+    // (Ortsvorsteher-in). Not Termin, Benzin, Kamin, Medizin, Vitamin, Delfin, Rubin, Berlin. Two different masculine words — no card.
+    const FEMININE_PERSON = /(?:er|or|ant|ent|ist|at|ar|är|eur|ier|iker|oge|ograf|ograph|soph|ot|it|et)$/u;
+    async function feminine(w, ctx) {
+      const m = /^(.{3,}?)(innen|in)$/u.exec(w);
+      // (after a given name it is a surname: Maria Elisabetha Hügelin)
+      if (!m || ctx.name) return null;
+      const bare = m[1], plural = m[2] === 'innen';
+      const plain = st => st.replace(/äu(?!.*[äöü])/u, 'au').replace(/ä(?!.*[äöü])/u, 'a').replace(/ö(?!.*[äöü])/u, 'o').replace(/ü(?!.*[äöü])/u, 'u');
+      const spellings = [...new Set([bare, plain(bare), bare + 'e', plain(bare) + 'e'])];
+      await warm(spellings);
+      // (our own card without a person ending only when the spelling changed — Ärzt-in → Arzt, Kolleg-in → Kollege; not Hügel-in, a surname)
+      const person = (r, s) => FEMININE_PERSON.test(norm(r.lemma)) || r.source === 'main' && s !== bare;
+      const masculine = async r => (r.source === 'main' ? String(r.entry?.article || '') === 'der' : (await dict.gender(r.lemma)) === 'der');
+      const found = new Map();
+      for (const s of spellings) {
+        if (s.length < 3 || dict.blocked(s)) continue;
+        for (const r of await readings(s, ['Nomen'], true)) if (!r.gerund && !r.form && person(r, s) && await masculine(r) && !found.has('n:' + norm(r.lemma))) found.set('n:' + norm(r.lemma), {base: {...r, text: s}, baseLemma: r.lemma});
+      }
+      if (!found.size) for (const s of spellings) {
+        if (s.length < 6 || found.size > 1) continue;
+        const c = await compound(s, true, {...ctx, nameMode: false, title: false, adj: true});
+        if (c?.ambiguous) return {ambiguous: true};
+        const head = c?.parts?.at(-1);
+        if (c?.parts && c.parts.every(p => p.ru) && !head.form && FEMININE_PERSON.test(norm(head.lemma)) && await masculine(head)) {
+          const key = 'c:' + c.parts.map(p => norm(p.lemma)).join('+');
+          if (!found.has(key)) found.set(key, {parts: c.parts, baseLemma: s.charAt(0).toUpperCase() + s.slice(1)});
+        }
+      }
+      if (found.size !== 1) return found.size ? {ambiguous: true} : null;
+      const d = [...found.values()][0];
+      if (d.base) await withRu([d.base]);
+      if (d.base && !d.base.ru) return null;
+      return {...d, lemma: bare + 'in', number: plural ? 'plural' : null};
+    }
     // The whole analysis: noun-based -ig / -lich, compound, derivation.
     async function analyse(w, noun, ctx) {
       if (ctx.nameMode) {
@@ -1360,6 +1398,12 @@
         if (dim?.base) return {diminutive: dim};
       }
       const c = await compound(w, noun, ctx);
+      // (advisor 09.11) a feminine in -in / -innen where no plain split is (Kommissarin is Kommissar + -in, not Kommis + Sarin;
+      // Gastwirtin stays Gast + Wirtin)
+      if (noun && !ctx.title && /in(?:nen)?$/u.test(w) && !(c && c.parts)) {
+        const fem = await feminine(w, ctx);
+        if (fem && !fem.ambiguous) return {feminine: fem};
+      }
       // (advisor 09.11: compounds split without a sign now) a head that is itself a diminutive no own card has (Rosen + Bäumchen) gives way
       // to the diminutive of the compound (Rosenbaum + -chen), as before the split was allowed there
       if (c && c.parts && noun && !ctx.title && /(?:chen|lein)s?$/u.test(w) && /(?:chen|lein)$/u.test(norm(c.parts.at(-1).lemma || '')) && c.parts.at(-1).source !== 'main') {
@@ -4032,6 +4076,12 @@
           if (allowed && !allowed.includes(gender)) { found.compound.maybeName = true; formation = {...formation, maybeName:true}; }
         }
         if (found.compound.maybeName) { gender = null; number = null; }
+      } else if (found.feminine) {
+        const d = found.feminine;
+        number = d.number;
+        lemma = capitalise(d.lemma);
+        gender = "die";
+        formation = {kind:"feminine",baseLemma:d.baseLemma,parts:(d.parts || [d.base]).map(part)};
       } else if (found.diminutive) {
         const d = found.diminutive;
         number = d.number;

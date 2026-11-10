@@ -578,6 +578,8 @@
     const fixed = text => ({text, more:0, entryId:null});
     // #21 (reference F12-G12e): a diminutive — the base's parts, the last one marked «(уменьш.)»: «Spatz — воробей (уменьш.)»,
     // «Rock — юбка · Tasche — карман (уменьш.)».
+    // (advisor 09.11) a feminine in -in: the masculine word's parts and meaning («Kommissar — комиссар»)
+    if (f.kind === 'feminine') return f.parts.map(p => gloss(p));
     if (f.kind === 'diminutive') return f.parts.map((p, k) => { const g = gloss(p);
       return k === f.parts.length - 1 && g.text ? {...g, text:`${g.text} ${language === 'ru' ? '(уменьш.)' : '(diminutive)'}`} : g; });
     if (f.kind === 'compound') {
@@ -649,7 +651,8 @@
       };
       heading += ` = ${f.parts.map(label).join(' + ')}`;
       marks.push('Kompositum');
-    } else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
+    } else if (f.kind === 'feminine') marks.push(`weibliche Form von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
+    else if (f.kind === 'diminutive') marks.push(`Verkleinerung von ${f.baseLemma.charAt(0).toUpperCase()}${f.baseLemma.slice(1)}`);
     else marks.push(f.prefix === 'un' ? `un- + ${f.base.lemma}` : `aus ${f.base.pos === 'Nomen' ? 'Nomen' : f.base.pos === 'Verb' ? 'Verb' : 'Adjektiv'} ${formationName(f.base)}`);
     const lines = formationLines(f, language).map(l => ({text:l.text, more:l.more, helpEntry:l.entryId ? lookup({id:l.entryId}) : null}));
     // (advisor 09.11) a split with a place-name / surname head and no sign before it: «Name / Nomen · Kompositum» — both readings shown
