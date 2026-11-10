@@ -1127,12 +1127,6 @@ body:not(:has(#done.show)):not(:has(#start.show)):not(:has(#choose.show)) .versi
   }
 }
 
-.reading-review-row { display:flex; align-items:center; gap:12px; }
-.reading-review-row > input { flex:none; width:18px; height:18px; accent-color:var(--mint); }
-.reading-review-row > button { flex:1; min-width:0; border:0; }
-.reading-review-row > input { appearance:none; position:relative; border:1.5px solid var(--muted); border-radius:50%; background:transparent; }
-.reading-review-row > input:checked { border-color:transparent; }
-.reading-review-row > input:checked::after { content:""; position:absolute; inset:1px; border-radius:50%; background:var(--mint,#55c9ab); }
 
 /* ===== CHOOSE SCREEN (2026-10-26): no words yet → „Where do you want to start?“
    Same layout as the start screen: title on top, the QUICK START block centred, the main button low.
@@ -1504,8 +1498,3 @@ html.ws-tools-row .detail { margin-top: 22px; } /* the cassette's old place unde
    a 22 px circle (line 1.2, --muted); chosen: filled with the text colour and a tick in the background colour;
    «some chosen»: filled with a dash. Same values in bibliothek.css (Meine Wörter, list) and collection-window.css /
    wortschatz.css (word windows of Wortschatz and Bibliothek) — keep them alike. */
-.reading-review-row > input { -webkit-appearance: none; appearance: none; position: relative; display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; margin: 0; box-sizing: border-box; border: 1.2px solid var(--muted); border-radius: 50%; background: transparent; accent-color: auto; cursor: pointer; }
-.reading-review-row > input:checked,
-.reading-review-row > input:indeterminate { border-color: var(--text); background: var(--text); }
-.reading-review-row > input:checked::after { content: ""; position: static; inset: auto; width: 9px; height: 5px; border-radius: 0; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); background: transparent; transform: translateY(-1px) rotate(-45deg); }
-.reading-review-row > input:indeterminate::after { content: ""; position: static; inset: auto; width: 10px; height: 1.6px; border: 0; border-radius: 1px; background: var(--bg); transform: none; }

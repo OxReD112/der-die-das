@@ -2936,3 +2936,22 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 /* 09.11 (Alena): the word of «Словарная справка» (from the popover and on Meine Wörter's second screen) the size of the
    popover's word — it was 28, louder than everything around it */
 .dictionary-headword { font-size: 20px; }
+
+/* 10.11 (Alena, variant А): one word added from «Словарная справка» — a card with ✓, the word and where it went.
+   It rises a little out of transparency and goes back the same way (the plain message was easy to miss). */
+.saved-card {
+  position: fixed; z-index: 31; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 84px);
+  display: flex; align-items: center; gap: 12px; box-sizing: border-box;
+  width: max-content; max-width: min(calc(100vw - 48px), 420px); padding: 14px 18px 14px 14px; border-radius: 18px;
+  background: var(--window-surface, var(--card-bg)); box-shadow: var(--window-shadow, 0 10px 30px rgba(0, 0, 0, 0.3));
+  color: var(--text); font: 500 15px/1.35 var(--font);
+  opacity: 0; transform: translate(-50%, 14px);
+  transition: opacity 0.28s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.saved-card.is-shown { opacity: 1; transform: translate(-50%, 0); }
+.saved-check { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--end-main-bg); }
+.saved-check svg { width: 16px; height: 16px; fill: none; stroke: var(--end-main-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.saved-word { display: block; font-weight: 650; }
+.saved-where { display: block; color: var(--muted); font-size: 13px; font-weight: 500; }
+@media (prefers-reduced-motion: reduce) { .saved-card { transition: opacity 0.2s ease; transform: translate(-50%, 0); } }

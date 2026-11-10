@@ -446,7 +446,7 @@
       }
       dirty = true;
       refreshButtons();
-      if (embedded) { close(); dictionarySaved?.(); return; }
+      if (embedded) { close(); dictionarySaved?.({ base: fields.base, translation: fields.translation, collection: name() }); return; } // 10.11: the word for the reader's confirmation
       viewMain();
     }
 
@@ -702,7 +702,41 @@
   }
 
   const READING_PENDING = I.READING;
-  async function addReadingWords(request) {
+  // 10.11 (Alena): from a book (`embed`) the review stays over the book: after adding, a confirmation in the same window
+  // (✓, «N Wörter», the words, «Weiterlesen» / «Открыть Wortschatz»); «Отказаться» or × end the batch at once — the
+  // words stay marked in the book (Meine Wörter), nothing to lose, so no second question.
+  let readingEmbed = null;
+  modal.addEventListener("windowclose", () => {
+    if (!readingEmbed) return;
+    readingEmbed = null;
+    try { sessionStorage.removeItem(READING_PENDING); } catch (e) {}
+  });
+  function viewReadingDone(result, words, unavailable, embed) {
+    card.textContent = "";
+    card.appendChild(head(""));
+    const box = el("div", "coll-done");
+    const mark = box.appendChild(el("span", "coll-done-check", null, { "aria-hidden": "true" }));
+    mark.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+    box.appendChild(el("h3", "coll-done-title", result.added === 1 ? "1 Wort" : result.added + " Wörter", { lang: "de", role: "status" }));
+    box.appendChild(el("p", "coll-text", L(`added to Wortschatz, collection „${name()}“`, `${result.added === 1 ? "добавлено" : "добавлены"} в Wortschatz, коллекция «${name()}»`)));
+    if (words.length && words.length <= 5) {
+      const ul = box.appendChild(el("ul", "coll-done-list"));
+      for (const w of words) {
+        const li = ul.appendChild(el("li"));
+        li.appendChild(el("span", "coll-de", w.base || "", { lang: "de" }));
+        li.appendChild(el("span", "coll-tr", plainValue(w.translation)));
+      }
+    }
+    const notes = [];
+    if (result.duplicates) notes.push(L(`${result.duplicates} already in your collection.`, `${result.duplicates} ${ruN(result.duplicates, "слово уже было", "слова уже были", "слов уже были")} в коллекции.`));
+    if (unavailable) notes.push(L(`${unavailable} without learning cards stay in Meine Wörter.`, `${unavailable} ${ruN(unavailable, "слово без карточки осталось", "слова без карточек остались", "слов без карточек остались")} в Meine Wörter.`));
+    if (notes.length) box.appendChild(el("p", "coll-hint", notes.join(" ")));
+    box.appendChild(button("coll-main", "Weiterlesen", close));
+    if (embed.openWortschatz) box.appendChild(button("coll-link", L("Open Wortschatz", "Открыть Wortschatz"), () => { close(); embed.openWortschatz(); }));
+    card.appendChild(box);
+  }
+  async function addReadingWords(request, embed = null) {
+    readingEmbed = embed;
     if (!request?.id || request.version !== I.VERSION || !Array.isArray(request.rows) || !request.rows.length) return;
     request.excluded ||= [];
     request.placement ||= "end";
@@ -713,7 +747,7 @@
       card.appendChild(head(L("Words from Reading", "Слова из чтения")));
       const sc=el("div","coll-scroll");card.appendChild(sc);
       sc.appendChild(el("p","coll-text",L(`Review words from „${String(request.title || "Bibliothek")}“. Tap any word to edit it before adding.`,`Проверь слова из «${String(request.title || "Bibliothek")}». Нажми на слово, чтобы изменить его перед добавлением.`)));
-      if (request.unavailable) sc.appendChild(el("p","coll-hint",L(`${request.unavailable} words without learning cards remain saved in Bibliothek.`,`${request.unavailable} ${ruN(request.unavailable,"слово","слова","слов")} без учебных карточек остаются в Bibliothek.`)));
+      if (request.unavailable) sc.appendChild(el("p","coll-hint",L(`${request.unavailable} ${request.unavailable===1?"word without a learning card remains":"words without learning cards remain"} saved in Bibliothek.`,`${request.unavailable} ${ruN(request.unavailable,"слово без учебной карточки остаётся","слова без учебных карточек остаются","слов без учебных карточек остаются")} в Bibliothek.`)));
       // 08.11 (Alena): no line per word with its record number and reason — the line above says how many stay in Bibliothek.
       if (!own()) {
         sc.appendChild(el("p","coll-text",L("These words start your own word collection.","С этих слов начнётся твоя коллекция.")));
@@ -769,7 +803,9 @@
           if(!result.added){error.textContent=L("No words were added.","Слова не добавлены.");return;}
           dirty=true;
           sessionStorage.removeItem(READING_PENDING);
-          refreshButtons();viewMain();
+          refreshButtons();
+          if(embed){const words=selection.map(({row})=>row.card||{});viewReadingDone(result,words,request.unavailable||0,embed);return;}
+          viewMain();
           const notice=el("p","coll-text",L(`${result.added} words added${request.placement==="next"?" as the next new words":""}.${result.duplicates?` ${result.duplicates} already in your collection.`:""}`,`Добавлено: ${wordsLabel(result.added)}${request.placement==="next"?" — следующими новыми":""}.${result.duplicates?` Уже были в коллекции: ${result.duplicates}.`:""}`));
           card.insertBefore(notice,card.children[1]);notice.setAttribute("role","status");
           const listRows=card.querySelectorAll('.coll-list .coll-word');
@@ -781,10 +817,13 @@
       });
       confirm.disabled=!selected().length;buttons.appendChild(confirm);
       buttons.appendChild(button("coll-link",L("Discard This Batch","Отказаться от этих слов"),()=>{
+        if(embed){sessionStorage.removeItem(READING_PENDING);close();return;}
         card.textContent="";card.appendChild(head(L("Discard these words?","Отказаться от этих слов?"),()=>review()));
         card.appendChild(el("p","coll-text",L("Nothing has been added. The words remain saved in Bibliothek.","Ничего не добавлено. Слова остаются в Bibliothek.")));
-        card.appendChild(button("coll-main",L("Keep Reviewing","Продолжить проверку"),()=>review()));
-        card.appendChild(button("coll-link",L("Discard Batch","Отказаться"),()=>{sessionStorage.removeItem(READING_PENDING);viewMain();}));
+        // 10.11 (Alena): the link stood glued to the button — both in the buttons row, as in the review
+        const row=el("div","coll-form-buttons");card.appendChild(row);
+        row.appendChild(button("coll-main",L("Keep Reviewing","Продолжить проверку"),()=>review()));
+        row.appendChild(button("coll-link",L("Discard Batch","Отказаться"),()=>{sessionStorage.removeItem(READING_PENDING);viewMain();}));
       }));
     }
     try {
@@ -1423,7 +1462,7 @@ Rules:
     if (own() && w && String(w.id).charAt(0) === "u") open(() => viewForm(w, { session: true, onSaved, onDeleted }));
   }
   if ($("wsSettings")) $("wsSettings").onclick = () => open(viewSettings);
-  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord, fillChoose };
+  window.WortschatzCollectionWindow = { open, close, refreshButtons, editInSession, addDictionaryWord, fillChoose, reviewReadingWords: addReadingWords };
   // Only unfinished legacy imports are discarded; localStorage is untouched.
   if (!embedded) {
     try {
@@ -1431,7 +1470,24 @@ Rules:
       sessionStorage.removeItem("deutschWortschatzPendingReadingWordsV1");
     } catch(error) { console.error("Could not discard legacy imports",error); }
   }
-  if (embedded) return; // Reader opens explicitly; pending imports belong to Wortschatz.
+  function restoreReading() {
+    try {
+      // 10.11: an unfinished reading review comes back where it was opened — over the book in Bibliothek.
+      const pending = sessionStorage.getItem(READING_PENDING);
+      if (pending) {
+        addReadingWords(JSON.parse(pending), embedded ? { get openWortschatz() { return window.BibliothekOpenWortschatz; } } : null);
+      }
+    } catch (error) {
+      console.error("Could not read the reading draft",error);
+      open(()=>{
+        card.textContent="";
+        card.appendChild(head(L("Draft Could Not Be Restored","Не удалось восстановить черновик"),close));
+        card.appendChild(el("p","coll-error",L("Your draft is kept. Please try again.","Черновик сохранён. Попробуй ещё раз."),{role:"alert"}));
+        card.appendChild(button("coll-main",L("Close","Закрыть"),close));
+      });
+    }
+  }
+  if (embedded) { restoreReading(); return; } // Reader: only an unfinished reading review comes back, over the book.
   window.addEventListener("message", event => {
     if (event.origin !== location.origin || event.data?.type !== "deutsch:wortschatz-add") return;
     addDictionaryWord(event.data.request);
@@ -1443,18 +1499,5 @@ Rules:
     console.error("Could not restore the dictionary request", error);
     open(() => viewDictionaryError(error));
   }
-  try {
-    const pending = sessionStorage.getItem(READING_PENDING);
-    if (pending) {
-      addReadingWords(JSON.parse(pending));
-    }
-  } catch (error) {
-    console.error("Could not read the reading draft",error);
-    open(()=>{
-      card.textContent="";
-      card.appendChild(head(L("Draft Could Not Be Restored","Не удалось восстановить черновик"),close));
-      card.appendChild(el("p","coll-error",L("Your draft is kept. Please try again.","Черновик сохранён. Попробуй ещё раз."),{role:"alert"}));
-      card.appendChild(button("coll-main",L("Close","Закрыть"),close));
-    });
-  }
+  restoreReading();
 })();

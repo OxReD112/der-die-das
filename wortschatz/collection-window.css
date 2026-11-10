@@ -738,3 +738,24 @@ textarea.coll-paste {
 .coll-pick-all input:checked::after { content: ""; position: static; inset: auto; width: 9px; height: 5px; border-radius: 0; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); background: transparent; transform: translateY(-1px) rotate(-45deg); }
 .coll-pick-check:indeterminate::after,
 .coll-pick-all input:indeterminate::after { content: ""; position: static; inset: auto; width: 10px; height: 1.6px; border: 0; border-radius: 1px; background: var(--bg); transform: none; }
+
+/* 10.11 (Alena): words from a book added — the confirmation in the same window (✓, «N Wörter», the words) */
+.coll-done { display: grid; justify-items: center; gap: 8px; margin-top: -8px; text-align: center; }
+.coll-done-check { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 4px; border-radius: 50%; background: var(--end-main-bg); }
+.coll-done-check svg { width: 24px; height: 24px; fill: none; stroke: var(--end-main-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.coll-done-title { margin: 0; color: var(--text); font: 600 21px/1.2 var(--font); }
+.coll-done .coll-text { margin: 0; }
+.coll-done-list { width: 100%; margin: 6px 0 4px; padding: 0; list-style: none; text-align: left; }
+.coll-done-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--hairline); }
+.coll-done-list .coll-tr { color: var(--muted); text-align: right; }
+.coll-done .coll-main { width: 100%; margin-top: 8px; }
+
+/* 10.11: the review rows of «Слова из чтения» live with the shared window (moved from wortschatz.css) — over a book the
+   window had the browser's blue squares instead of the round marks */
+.reading-review-row { display: flex; align-items: center; gap: 12px; }
+.reading-review-row > button { flex: 1; min-width: 0; border: 0; }
+.reading-review-row > input { -webkit-appearance: none; appearance: none; position: relative; display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; margin: 0; box-sizing: border-box; border: 1.2px solid var(--muted); border-radius: 50%; background: transparent; accent-color: auto; cursor: pointer; }
+.reading-review-row > input:checked,
+.reading-review-row > input:indeterminate { border-color: var(--text); background: var(--text); }
+.reading-review-row > input:checked::after { content: ""; width: 9px; height: 5px; border-left: 1.6px solid var(--bg); border-bottom: 1.6px solid var(--bg); transform: translateY(-1px) rotate(-45deg); }
+.reading-review-row > input:indeterminate::after { content: ""; width: 10px; height: 1.6px; border-radius: 1px; background: var(--bg); }

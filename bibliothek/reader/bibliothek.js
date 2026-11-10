@@ -280,7 +280,7 @@
     if (actionLabel) {
       const action = document.createElement("a");
       action.className = "toast-action";
-      action.href = "../wortschatz/index.html?v=20261007-adjadv-1";
+      action.href = "../wortschatz/index.html?v=20261110-confirm-1"; // 10.11: was an October key
       action.textContent = actionLabel;
       toast.append(action);
     }
@@ -1504,7 +1504,25 @@
     form.addDictionaryWord({
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
       version:2, dictionaryId:item.id, lang:locale()
-    }, () => showToast("Zum Wortschatz hinzugefügt.")); // German, as the button (user 27.10.2026)
+    }, word => showSaved(word)); // 10.11 (Alena): a card with ✓ and the word, not the small message she missed
+  }
+  // 10.11 (Alena, variant А): «✓ der Wald · im Wortschatz · «Мои слова»» — rises a little out of transparency and
+  // goes back the same way; a few seconds, nothing to tap.
+  let savedTimer = 0;
+  function showSaved(word = {}) {
+    const box = $("saved-card");
+    clearTimeout(savedTimer);
+    box.querySelector(".saved-word").textContent = word.base || "Gespeichert";
+    box.querySelector(".saved-where").textContent = word.collection
+      ? `im Wortschatz · «${word.collection}»` : "im Wortschatz";
+    box.hidden = false;
+    box.classList.remove("is-shown");
+    void box.offsetWidth;
+    box.classList.add("is-shown");
+    savedTimer = setTimeout(() => {
+      box.classList.remove("is-shown");
+      savedTimer = setTimeout(() => { box.hidden = true; }, 320);
+    }, 4000);
   }
 
   let selectedWord = "", selectedContext = null, popupAmbiguous = false, bookmarkBusy = false;

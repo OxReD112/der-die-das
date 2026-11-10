@@ -17,11 +17,11 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261109-end-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261110-confirm-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261109-fonts-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
-    <link rel="stylesheet" href="../wortschatz/collection-window.css?v=16" />
+    <link rel="stylesheet" href="../wortschatz/collection-window.css?v=17" />
     <link rel="stylesheet" href="reading-word-form.css?v=4" />
   </head>
   <body class="reading-body library-screen">
@@ -192,7 +192,12 @@
           </div>
         </div>
       </div>
-      <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
+      <!-- 10.11 (Alena): one word added to Wortschatz from «Словарная справка» -->
+    <div class="saved-card" id="saved-card" role="status" aria-live="polite" hidden>
+      <span class="saved-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span><b class="saved-word" lang="de"></b><small class="saved-where"></small></span>
+    </div>
+    <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
       <div class="word-popover" id="word-popover" role="dialog" aria-label="Word translation" hidden>
         <div class="popover-heading">
           <p class="popover-word" id="popover-word"></p>
@@ -362,7 +367,7 @@
           <a
             class="vocabulary-continue"
             id="vocabulary-continue"
-            href="../wortschatz/index.html?v=20261007-adjadv-1"
+            href="../wortschatz/index.html?v=20261110-confirm-1"
             hidden
             >Weiter im Wortschatz <span class="ui-chev" aria-hidden="true"></span></a
           >
@@ -460,16 +465,16 @@
     <script src="../wortschatz/dictionary-card.js?v=20261007-adjadv-1"></script>
     <script src="../wortschatz/dictionary-import.js?v=20261102-lang-3"></script>
     <script src="../components/deutsch-window-v1.js?v=3"></script>
-    <script src="../wortschatz/collection-window.js?v=20261108-plain-1"></script>
+    <script src="../wortschatz/collection-window.js?v=20261110-confirm-1"></script>
     <script src="reader/vocabulary-actions.js?v=20261007-adjadv-1"></script>
-    <script src="reader/vocabulary-panel.js?v=20261109-speech-1"></script>
+    <script src="reader/vocabulary-panel.js?v=20261110-confirm-1"></script>
     <script src="resolver/meaning-display.js?v=20261110-ru-whole-1"></script>
     <script src="reader/reader-pagination.js?v=20261011-finish-position-1"></script>
     <script src="reader/reader-text-settings.js?v=20261109-fonts-1"></script>
     <script src="reader/pronoun-reference.js?v=20261024-lowercase-1"></script>
     <script src="reader/bookshelf.js?v=20261109-fonts-1"></script>
     <script src="../components/deutsch-voice-v1.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261110-wn-partadj66b-1"></script>
-    <div class="version-mark" aria-hidden="true">v58</div>
+    <script src="reader/bibliothek.js?v=20261110-confirm-2"></script>
+    <div class="version-mark" aria-hidden="true">v59</div>
   </body>
 </html>

@@ -361,8 +361,9 @@
         selection();
       }
     });
-    $("vocabulary-add").addEventListener("click", () => {
+    $("vocabulary-add").addEventListener("click", async () => {
       if (busy || !currentResolver || !selected.size) return;
+      let review = null;
       busy = true;
       selection();
       $("vocabulary-continue").hidden = true;
@@ -372,10 +373,18 @@
           ? ` ${result.unavailable.length} ${NO_CARD} bleiben in Meine Wörter.`
           : "";
         if (result.pending) {
-          $("vocabulary-action-status").textContent =
-            `${result.cards.length} ${result.cards.length === 1 ? "Wort" : "Wörter"} bereit.${unavailable}`;
-          $("vocabulary-continue").hidden = false;
-          location.assign($("vocabulary-continue").href);
+          // 10.11 (Alena): the review opens over the book — Bibliothek is no longer replaced by the Wortschatz page
+          // (that left Home's dock hidden and no way back to the book). Meine Wörter closes first: its dialog would
+          // cover the shared window.
+          const request = JSON.parse(sessionStorage.getItem(window.BibliothekVocabularyActions.PENDING) || "null");
+          const form = window.WortschatzCollectionWindow;
+          if (request && form?.reviewReadingWords) {
+            review = () => form.reviewReadingWords(request, { openWortschatz });
+          } else {
+            $("vocabulary-action-status").textContent =
+              `${result.cards.length} ${result.cards.length === 1 ? "Wort" : "Wörter"} bereit.${unavailable}`;
+            $("vocabulary-continue").hidden = false;
+          }
         } else
           $("vocabulary-action-status").textContent =
             `Keine Lernkarten.${unavailable}`;
@@ -385,6 +394,10 @@
         busy = false;
         selection();
       }
+      if (review) {
+        await close();
+        review();
+      }
     });
     dialog.addEventListener("cancel", event => {
       event.preventDefault();
@@ -392,6 +405,15 @@
       if (!detail.hidden) hideDetail();
       else close();
     });
+    // «Открыть Wortschatz» after adding: Home opens its Wortschatz tile; Bibliothek on its own goes to the page
+    function openWortschatz() {
+      try {
+        const tile = window.parent !== window && window.parent.document.querySelector('[data-app^="wortschatz/"]');
+        if (tile) { tile.click(); return; }
+      } catch (e) {}
+      location.assign($("vocabulary-continue").href);
+    }
+    window.BibliothekOpenWortschatz = openWortschatz; // the same link on a review restored after a reload
     $("vocabulary-toggle").addEventListener("click", () => open($("vocabulary-toggle")));
     $("vocabulary-close").addEventListener("click", close);
     dialog.addEventListener("close", () => {
