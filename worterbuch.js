@@ -79,7 +79,7 @@
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261109-wn-reich63-1"),
       loadJson("worterbuch/german-verbs.json?v=20261109-wn-reich63-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261110-wn-partadj66-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261110-wn-partadj66b-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261109-wn-lange59-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261031-wn-doch24-4"),
       loadJson("worterbuch/german-pronouns.json?v=20261107-wn-weniger56-1"),

@@ -1463,6 +1463,13 @@
       const list = [...new Set(e.auxiliary.map(x => norm(String(x)).trim()).filter(Boolean))];
       return {...e, auxiliaries:list, auxiliary:list.includes("haben") ? "haben" : list[0] || ""};
     });
+    // (links chat, advisor 10.11 — batch 66 second pass) An adjective card marked copula_or_attributive_only (erklärt-like forms whose
+    // verb is far more frequent: verkehrt, überlebt, geschafft …) takes no part in any chain or check: the resolver reads the form as if
+    // the card were not there, and chooses the card only at the form itself before a noun or after a copula (copulaOnlyReading).
+    // After sein — only with an adverb or degree word right before the form (Er ist heute verhindert); without one the form reads as on
+    // main, on purpose (advisor 10.11): bare sein + form is as often the state of the verb (die erste Prüfung ist geschafft).
+    const copulaOnlyCards = new Map();
+    entries = entries.filter(e => !(e?.copula_or_attributive_only && e.type === "Adjektiv" && e.word && (copulaOnlyCards.set(norm(e.word),e), true)));
     const auxiliariesOf = e => e?.auxiliaries || String(e?.auxiliary || "").split(/\s*\/\s*|\s+/u).map(norm).filter(Boolean);
     // doch / damit inside the part (item 2b; damit — TODO item 17: the conjunction by the verb-final sign, damitOpensPart below)
     // (review 05.11: denn without its comma before a subject + finite verb — sie hatte, es hat, der Bus ist, was hätte — is the causal
@@ -11834,6 +11841,53 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const card = pool[0];
       return {card, selected:{...card,usage:{...adjective.usage,kind:'participle-II',base:card.lemma}}};
     }
+    // (links chat, advisor 10.11 — batch 66 second pass) Where a copula_or_attributive_only card is the adjective: 'attributive' — an
+    // inflected form before a noun (der verabschiedete Haushalt) with no sign of the verb between the determiner and it (a number, von, a
+    // dependent: des 1861 verabschiedeten Regulativs); 'predicative' — the bare form after sein (not for a sein-Perfekt verb), wirken,
+    // scheinen, bleiben, aussehen, sich fühlen of its own part, with no werden / haben / modal and no von there (ich bin völlig geschafft).
+    const WERDEN_FORM_WORD = /^(?:werde|wirst|wird|werden|werdet|wurde|wurdest|wurden|wurdet|ward|wardst|würde|würdest|würden|würdet|worden|geworden)$/u;
+    const MODAL_FORM_WORD = /^(?:kann|kannst|können|könnt|konnte\p{L}*|könnte\p{L}*|muss|muß|musst|mußt|müssen|müsst|müßt|musste\p{L}*|mußte\p{L}*|müsste\p{L}*|müßte\p{L}*|darf|darfst|dürfen|dürft|durfte\p{L}*|dürfte\p{L}*|soll|sollst|sollen|sollt|sollte\p{L}*|will|willst|wollen|wollt|wollte\p{L}*|mag|magst|mögen|mögt|mochte\p{L}*|möchte\p{L}*)$/u;
+    const COPULA_OTHER_WORD = /^(?:wirk(?:e|st|t|en|et|te|test|ten|tet)|schein(?:e|st|t|en|et)|schien(?:st|en|t)?|bleib(?:e|st|t|en|et)|blieb(?:st|en|t)?|fühl(?:e|st|t|en|et|te|test|ten|tet))$/u;
+    function copulaOnlyReading(card, word, context) {
+      const sentence = String(context?.sentence || '');
+      if (!Number.isInteger(context?.tokenOffset) || !/^\p{Ll}/u.test(word)) return null;
+      const tokens = sharedTokens(sentence,'copulaOnly'), i = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (i < 0) return null;
+      const w = k => norm(tokens[k]?.[0] ?? ''), gap = (a,b) => sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index);
+      const punct = /[,;:.!?…()"„“”»«–—]/u, base = norm(card.word), form = norm(word);
+      if (form !== base) {
+        if (!form.startsWith(base) || !/^(?:e|en|em|er|es)$/u.test(form.slice(base.length))) return null;
+        let n = -1;
+        for (let k = i+1; k < tokens.length && k <= i+3; k++) { if (punct.test(gap(k-1,k))) break; if (/^\p{Lu}/u.test(tokens[k][0])) { n = k; break; } }
+        if (n < 0) return null;
+        let d = i-1;
+        // (back to the determiner or preposition that opens the group: im übertragenen Sinn, die sehr gefragte)
+        while (d >= 0 && d >= i-6 && !punct.test(gap(d,d+1)) && /^[\p{Ll}\d]/u.test(tokens[d][0]) && !DETERMINER_WORD.test(w(d)) && !prepositions.has(w(d)) &&
+          !['und','oder','aber','sowie','sondern'].includes(w(d))) d--;
+        // (the group needs its opener: a bare form before a noun is also the finite verb — überlebte Harry, verkehrten auf der Strecke)
+        if (!(d >= 0 && d >= i-6 && (DETERMINER_WORD.test(w(d)) || prepositions.has(w(d))))) return null;
+        const from = d+1, between = [];
+        for (let k = from; k < i; k++) between.push(k);
+        // (numbers are no tokens: a year in the text between — des 1861 verabschiedeten Regulativs)
+        const span = sentence.slice(from > 0 ? tokens[from-1].index+tokens[from-1][0].length : 0,tokens[i].index);
+        if (/\d/u.test(span) || between.some(k => VON_AGENT_PREPOSITIONS.includes(w(k))) || attributiveParticipleReading(tokens,between) === 'verb') return null;
+        return 'attributive';
+      }
+      let a = i, b = i;
+      while (a > 0 && !punct.test(gap(a-1,a)) && !['und','oder','aber'].includes(w(a-1))) a--;
+      while (b < tokens.length-1 && !punct.test(gap(b,b+1)) && !['und','oder','aber'].includes(w(b+1))) b++;
+      const part = Array.from({length:b-a+1},(_,d) => a+d).filter(k => k !== i);
+      if (part.some(k => WERDEN_FORM_WORD.test(w(k)) || HABEN_FINITE_WORD.test(w(k)) || MODAL_FORM_WORD.test(w(k)) || VON_AGENT_PREPOSITIONS.includes(w(k)))) return null;
+      const seinPerfekt = (lemmas.get(norm(card.participle_of || '')) || []).some(e => e.type === 'Verb' && auxiliariesOf(e).includes('sein'));
+      const aus = part.some(k => w(k) === 'aus');
+      // (after sein only with an adverb or degree word right before the form — sind sehr gefragt, ist heute verhindert; a bare sein + form is
+      // as often the state of the verb: die erste Prüfung ist geschafft, ist an … übertragen)
+      const adverbBefore = i > 0 && !punct.test(gap(i-1,i)) && /^\p{Ll}/u.test(tokens[i-1][0]) && (PARTICIPLE_DEGREE.has(w(i-1)) ||
+        (forms.get(w(i-1)) || []).some(e => ["Adjektiv","Adverb"].includes(e.type) && norm(e.word) === w(i-1)));
+      const copula = part.some(k => !seinPerfekt && adverbBefore && SEIN_FINITE_OR_GEWESEN.test(w(k)) && w(k) !== 'gewesen' || COPULA_OTHER_WORD.test(w(k)) ||
+        aus && /^(?:sieh|siehst|sieht|seht|sehen|sah|sahst|sahen|saht|sähe\p{L}*)$/u.test(w(k)));
+      return copula ? 'predicative' : null;
+    }
     function participleOwnVerb(word, verbs) {
       const rows = (verbAnalyses.get(norm(word)) || []).filter(a => a.kind === "participle" && a.entry);
       return verbs.filter(c => c.source === "main" && rows.some(a => norm(a.base) === norm(c.lemma).replace(/^sich\s+/u,"")));
@@ -13358,6 +13412,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (verbs) selection.override(resolution,'own-verb-over-untranslated-adjective',{selected:verbs.selected,
             candidates:[verbs.selected,...resolution.candidates.filter(c => c !== sel && c !== verbs.card),sel],evidence:'own-verb-over-untranslated-adjective'});
         } }
+      // (links chat, advisor 10.11 — batch 66 second pass) a copula_or_attributive_only card at its own form before a noun or after a copula
+      { const card = copulaOnlyCards.get(norm(word).replace(/(?:e|en|em|er|es)$/u,'')) || copulaOnlyCards.get(norm(word));
+        if (card && !resolution.selected?.construction) {
+          const role = copulaOnlyReading(card,word,context);
+          if (role) { const c = {...mainCandidate(card),usage:{kind:'adjective',role,form:word}};
+            selection.override(resolution,'copula-or-attributive-card',{selected:c,candidates:[c,...resolution.candidates],evidence:'copula-or-attributive-card'}); } } }
       selection.finish(resolution);
       observe('stage', {stage:'grammar-complete',selected:resolution.selected?.lemma || null});
       await presentResolution(word,context,resolution,phrasesFor);
