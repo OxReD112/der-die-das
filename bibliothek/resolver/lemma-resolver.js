@@ -135,7 +135,25 @@
   // «How much» degree word right before token i, written in lower case (als gültiges Recht angesehen: Recht is the noun;
   // wenig only as «ein wenig»: wurde wenig beachtet is the passive).
   const howMuchBefore = (tokens, i) => { const raw = tokens[i-1]?.[0] ?? "", w = norm(raw);
-    return /^\p{Ll}/u.test(raw) && HOW_MUCH_DEGREE_WORDS.includes(w) && (w !== "wenig" || norm(tokens[i-2]?.[0] ?? "") === "ein"); };
+    return /^\p{Ll}/u.test(raw) && HOW_MUCH_DEGREE_WORDS.includes(w) && (w !== "wenig" || norm(tokens[i-2]?.[0] ?? "") === "ein") &&
+      !(w === "so" && soWieComparison(tokens,i)); };
+  // (links chat, advisor 10.11, N3 remainder: so … wie in the same part with no verb form after wie is a comparison, and so is no
+  // degree word there — wurde so behandelt wie ein König is the passive, ist so gelaufen wie du the perfect. Without wie so stays the
+  // degree word: So müde wurde er, wurde so müde; wie + a clause — so gebaut, wie er es wollte; so behandelt wie er es verdient — is
+  // not this comparison. i is the word right after so; the part ends at a punctuation mark. soWieVerbForm is set where the
+  // dictionary is loaded — a lowercase word with a verb card or a verb analysis, as plainWord of the N3 Nachfeld)
+  let soWieVerbForm = () => true;
+  const soWieComparison = (tokens, i) => {
+    const sentence = String(tokens[i]?.input ?? "");
+    const boundary = k => /[,;:.!?»«„“"()–—]/u.test(sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index));
+    for (let k = i+1; k < tokens.length && !boundary(k); k++) {
+      if (norm(tokens[k][0]) !== "wie") continue;
+      const rest = [];
+      for (let r = k+1; r < tokens.length && !boundary(r); r++) rest.push(tokens[r][0]);
+      return rest.length > 0 && !rest.some(word => soWieVerbForm(word));
+    }
+    return false;
+  };
   // werden + a degree word + participle = «become» (advisor 03.11, variant (б)): the «how much» words, äußerst / extrem (as sehr), and
   // ganz — with werden it is «quite» as often as «completely» (ward er ganz vergnügt «стал совсем весёлым»), the form cannot tell, so it
   // stays «become». The step A hint keeps only the «how much» words: after ganz / äußerst / extrem both readings are possible, and the
@@ -1582,6 +1600,10 @@
     // (Imperativ, advisor 29.10: the forms a verb card lists only as Imperativ — nimm, sprich, unterhalt, stich, wachs)
     const imperativeOnlyForms = new Map();
     const forms = new Map(), phraseForms = new Map(), lemmas = new Map(), zuForms = new Map(), separatedForms = new Map(), byId = new Map(entries.map(entry => [String(entry.id),entry]));
+    // (advisor 10.11, so … wie: a verb form after wie — the comparison check of soWieComparison)
+    soWieVerbForm = word => { const w = norm(word);
+      if (/^\p{Lu}/u.test(word) || ["und","oder"].includes(w) || prepositions.has(w) || DETERMINER_WORD.test(w)) return false;
+      return (forms.get(w) || []).some(e => e.type === "Verb") || (verbAnalyses.get(w) || []).length > 0; };
     // (P8: the own nouns for the initial check of abbreviationEnd — Gruppe A. | Gruppe B …)
     ownNounWords = new Set(entries.filter(e => e?.type === "Nomen" && e.word).map(e => String(e.word).toLowerCase()));
     // S2 (17.10.2026): a stem known only from derived particle + verb entries (bewohnten →
@@ -5837,7 +5859,8 @@
         // Own cards only (a derived «particle + verb» entry such as ablesen is not a card of its own).
         const rows = (forms.get(norm(tokens[before][0])) || []).filter(e => e.type === "Verb" && /^verb-\d+$/u.test(String(e.id || "")));
         let lexical = [], kind = null;
-        const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[before-1]?.[0] ?? ""));
+        const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[before-1]?.[0] ?? "")) &&
+          !(norm(tokens[before-1][0]) === "so" && soWieComparison(tokens,before));
         if (PERFECT_AUXILIARIES.includes(second) && !(second === "sein" && degreeBefore)) {
           lexical = rows.filter(e => norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[before][0]) &&
             auxiliariesOf(e).includes(second));
@@ -7939,6 +7962,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // first word of the part; lowercase after adverbs or at the start of a later part. Its card must take this auxiliary (Ausgestellt
         // sind Exponate, Besonders gefährdet sind … — a state of a haben verb — stay as they are); no later verb form in the part (then
         // the participle at the end is the pair); not a sentence adverbial — ehrlich gesagt, streng genommen, anders ausgedrückt.
+        // (links chat, advisor 10.11, N1 continued, L-018: sein after a fronted participle of a verb whose card has only haben is the
+        // state passive, as in the usual order — Geschrieben ist der Brief schon as Der Brief ist schon geschrieben: «состояние mit X»
+        // by the same check below; an own / external adjective card of the form stays as it is — Geschlossen ist das Geschäft heute)
+        let frontedState = false;
         const frontedParticiple = (() => {
           if (!PERFECT_AUXILIARIES.includes(head.e.word) || frontedInfinitive || konj1(head.i)) return null;
           const p = head.i - 1;
@@ -7948,12 +7975,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!tokens.slice(start,p).every((t,k) => adverb(start+k))) return null;
           if (/^\p{Lu}/u.test(tokens[p][0]) ? p !== start : !(p > start || start > 0)) return null;
           if (p > start && /^(?:gesagt|gesprochen|genommen|gesehen|betrachtet|gerechnet|ausgedrückt|formuliert|gefragt|zugegeben)$/u.test(norm(tokens[p][0]))) return null;
-          if (STATE_DEGREE_WORDS.includes(norm(tokens[p-1]?.[0] ?? "")) && p > start) return null;
+          if (STATE_DEGREE_WORDS.includes(norm(tokens[p-1]?.[0] ?? "")) && p > start && !(norm(tokens[p-1][0]) === "so" && soWieComparison(tokens,p))) return null;
           // (regressions 09.11: a form that is an own adjective / adverb card too is that word in front — Bestimmt hat er recht)
           if (adjectivalForm(tokens[p][0])) return null;
-          if (indices.some(i => i > head.i && /^\p{Ll}/u.test(tokens[i][0]) && (matches(i).some(e => e.type === "Verb") || (verbAnalyses.get(norm(tokens[i][0])) || []).length ||
+          // (advisor 10.11: an own adverb card that is no participle / infinitive of a verb is the adverb — Geschrieben ist der Brief
+          // schon: schon is no imperative of schonen here)
+          const adverbWord = i => (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "Adverb") &&
+            !(verbAnalyses.get(norm(tokens[i][0])) || []).some(a => ["participle","infinitive"].includes(a.kind));
+          if (indices.some(i => i > head.i && /^\p{Ll}/u.test(tokens[i][0]) && !adverbWord(i) && (matches(i).some(e => e.type === "Verb") || (verbAnalyses.get(norm(tokens[i][0])) || []).length ||
             i === end && /(?:t|en)$/u.test(norm(tokens[i][0])) && !(forms.get(norm(tokens[i][0])) || []).length))) return null;
-          return withReflexive(matches(p),reflexiveRows(p,"Partizip II")).some(e => clause.participleOf(e,p) && auxiliariesOf(e).includes(head.e.word)) ? p : null;
+          const rows = withReflexive(matches(p),reflexiveRows(p,"Partizip II")).filter(e => clause.participleOf(e,p));
+          if (rows.some(e => auxiliariesOf(e).includes(head.e.word))) return p;
+          if (head.e.word === "sein" && rows.some(e => auxiliariesOf(e).includes("haben"))) { frontedState = true; return p; }
+          return null;
         })();
         let tail = frontedInfinitive ? 0 : frontedParticiple !== null ? frontedParticiple : head.i === end ? end-1 : end, nachfeldFrom = -1;
         // (item Б: the infinitive / participle before a prepositional phrase or a zu-infinitive after it — sollten … bewachen um …
@@ -8000,7 +8034,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // stays «Modal mit sein».
           const auxWord = norm(tokens[tail][0]);
           // A degree word before the participle makes it a state adjective (wer könnte so verzweifelt sein), as G15c.
-          const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[tail-2]?.[0] ?? ""));
+          const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[tail-2]?.[0] ?? "")) &&
+            !(norm(tokens[tail-2][0]) === "so" && soWieComparison(tokens,tail-1));
           // G2 addition (2): an adjective sign (den Besetzern nicht gewachsen sein, ihm unterlegen sein) keeps
           // «Modal mit sein» — replaces the temporary gewachsen + dative exception (C18, 19.10).
           const adjectiveSignBefore = tail-1 > start && adjectiveSign(String(context.sentence || ""),tokens,tail-1,start,end);
@@ -8059,7 +8094,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (advisor 07.11, item 4: sein + the participle of a verb whose card has only haben — ist repariert, sind … unterstellt — is
             // the state passive, not Perfekt: the group «состояние» only. Indicative only; not with an own or external adjective card of
             // the form — the window «adjective first» stays, decision 05.11 — and not with a verb that also has sein: «/ состояние»)
-            if (!main.length && frontedParticiple === null && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
+            if (!main.length && (frontedParticiple === null || frontedState) && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
                 !participleAdjectiveCard(tokens[tail][0]) && !stateWithObject(head.i,tail) &&
                 // (train s14056: Ist- of a hyphenated compound — Ist-Wert-Anzeigen — is no sein)
                 !/^-/u.test(String(context?.sentence || "").slice(tokens[head.i].index + tokens[head.i][0].length))) {
@@ -8923,7 +8958,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const twoCasePrep=participle&&left>=0&&['in','an','auf','unter','über','vor','hinter','neben','zwischen'].includes(norm(tokens[left][0]));
       if(twoCasePrep)shared.allowedCases=[1,2];
       const strongPrep=left>=0&&(['mit','bei','von','zu','aus','nach','für','durch','gegen','ohne','um'].includes(norm(tokens[left][0]))||twoCasePrep);
-      if(left<0 || !det.test(norm(tokens[left][0]))&&!strongPrep || !joined(left,left+1))return blocked('nominal-frame-unproven');
+      // (links chat, advisor 10.11, queue item (д) — claude/MAP_QUEUE_N1_N3_A_D_2026-11-09_RU.md): a form in -te / -ten without a
+      // determiner right before a noun is the attributive participle when a finite verb stands earlier in the same part — no
+      // punctuation and no und / oder between: bietet qualifizierte Rechtsberatung an, holte dafür emigrierte Filmregisseure, sucht mit
+      // zwei speziell trainierten Spürhunden. A second finite verb cannot follow the first inside one part. Without such a verb the
+      // form stays as it was — Einige Tage später besuchte Kasparow …, «…», warnte Gewerkschaftssprecher … (the finite verb itself).
+      // The finite verb: a lowercase word with a finite reading and no own card of another part of speech (sein «его» is no verb).
+      const finiteEarlier=()=>{
+        if(!participle||!/te[n]?$/u.test(norm(word))||left<0||!joined(left,left+1))return false;
+        for(let k=left;k>=0;k--){
+          if(k<left&&/[,;:.!?»«„“"()–—]/u.test(sentence.slice(tokens[k].index+tokens[k][0].length,tokens[k+1].index)))return false;
+          // (a determiner on the way is an article frame — für den gut vorbereiteten Geist, des damals neu gebildeten Landes —: not this rule)
+          const w=norm(tokens[k][0]);if(['und','oder','sowie'].includes(w)||det.test(w))return false;
+          if(/^\p{Ll}/u.test(tokens[k][0])&&(verbAnalyses.get(w)||[]).some(a=>a.kind==='finite')&&!(forms.get(w)||[]).some(e=>!['Verb','Nomen'].includes(e.type)))return true;
+        }
+        return false;
+      };
+      if(left<0 || !det.test(norm(tokens[left][0]))&&!strongPrep&&!finiteEarlier() || !joined(left,left+1))return blocked('nominal-frame-unproven');
       const hypothesis=nounHypothesis(sentence,tokens,left,head,'role',sources);
       hypothesis.candidateIdentities=clicked.candidates.map(c=>window.BibliothekVocabulary.identity(c));
       hypothesis.evidence=[...shared].map(([tokenId,rows])=>({tokenId,rows}));
@@ -11125,7 +11176,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       'participle-sein-adjective-window'(f) {
         const {word} = f;
         // (advisor 07.11: the state group of a haben-only verb keeps this window — the adjective first, the verb with «состояние» second)
-        if (!/^\p{Ll}/u.test(word) || f.candidates.some(c => c.construction && !c.construction.stateOnly)) return undefined;
+        // (advisor 10.11, N1 continued: a capital participle that opens its part — Ausgestellt sind Exponate, Verkauft sind alle
+        // Karten — takes the window as in the usual order; the word order does not change the reading, L-018)
+        const opensPart = f.index === 0 || /[,;:.!?»«„“"()–—]\s*$/u.test(String(f.sentence || "").slice(0, f.tokens?.[f.index]?.index ?? 0));
+        if (!(/^\p{Ll}/u.test(word) || /^\p{Lu}\p{Ll}/u.test(word) && opensPart) || f.candidates.some(c => c.construction && !c.construction.stateOnly)) return undefined;
         if (f.adjectives.some(c => c.source === "main" && norm(c.lemma) === norm(word))) return undefined;
         const adjectives = f.adjectives.filter(c => norm(c.lemma) === norm(word));
         const verbs = participleOwnVerb(word,f.verbs).filter(c => /^(?:hat|haben)\b/u.test(norm(String(c.item?.perfect_form || ""))));
@@ -11750,6 +11804,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const grammarRuleOrder = selectionRules.filter(rule => rule.group === 'grammar' && !rule.shared).map(rule => rule.id);
     const separateSensesVerbRows = Object.freeze(['sentence-initial-finite-verb','finite-verb-with-subject','finite-verb-after-question-word','finite-verb-with-noun-subject','validated-finite-form']);
     // Our verb cards whose participle is this word (beschäftigt — beschäftigen).
+    // (advisor 10.11, decision 07.11 (a)) The own verb card of an attributive participle chosen as an external adjective, when that
+    // adjective has no translation in the interface language: {card, selected} — the card with the attributive Partizip II use.
+    async function attributiveOwnVerb(adjective, candidates) {
+      const lang = window.DeutschTranslation?.getLang?.() || 'en';
+      const rows = (verbAnalyses.get(norm(adjective.lemma)) || []).filter(a => a.kind === 'participle' && a.entry);
+      const own = candidates.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Verb' && !c.construction &&
+        rows.some(a => norm(a.base) === norm(c.lemma).replace(/^sich\s+/u,'')));
+      const plain = own.filter(c => !/^sich\s/u.test(norm(c.lemma))), pool = plain.length ? plain : own;
+      if (!pool.length || new Set(pool.map(c => norm(c.lemma))).size !== 1) return null;
+      if (String(adjective.translation?.[lang] || '').trim()) return null;
+      if (lang === 'ru' && window.BibliothekRussianTranslations) {
+        const ru = await window.BibliothekRussianTranslations.lookup(adjective.lemma,adjective.pos).catch(() => null);
+        if (ru && (ru.meanings || []).length) return null;
+      }
+      const card = pool[0];
+      return {card, selected:{...card,usage:{...adjective.usage,kind:'participle-II',base:card.lemma}}};
+    }
     function participleOwnVerb(word, verbs) {
       const rows = (verbAnalyses.get(norm(word)) || []).filter(a => a.kind === "participle" && a.entry);
       return verbs.filter(c => c.source === "main" && rows.some(a => norm(a.base) === norm(c.lemma).replace(/^sich\s+/u,"")));
@@ -13263,6 +13334,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           try { const c = wordFormationContext(word,context); if (c && (c.name || c.nameSlot || c.title)) resolution.nameSign = true; } catch (_) { /* optional */ }
         }
       }
+      // (links chat, advisor 10.11 — decision 07.11, variant (a), in every path of the noun group): an attributive form chosen as an
+      // external adjective with no translation in the interface language, while our own card of its verb is there and no own adjective
+      // card — the verb, «Partizip II · От X» (die verbesserte Audioqualität → verbessern «улучшать»). An own adjective card (bekannt,
+      // befreundet) and an external adjective with a translation in the interface language stay as they are.
+      { const sel = resolution.selected;
+        if (sel && sel.source !== 'main' && canonicalPos(sel.pos) === 'Adjektiv' && sel.usage?.role === 'attributive' &&
+            !resolution.candidates.some(c => c.source === 'main' && canonicalPos(c.pos) === 'Adjektiv')) {
+          const verbs = await attributiveOwnVerb(sel, resolution.candidates);
+          if (verbs) selection.override(resolution,'own-verb-over-untranslated-adjective',{selected:verbs.selected,
+            candidates:[verbs.selected,...resolution.candidates.filter(c => c !== sel && c !== verbs.card),sel],evidence:'own-verb-over-untranslated-adjective'});
+        } }
       selection.finish(resolution);
       observe('stage', {stage:'grammar-complete',selected:resolution.selected?.lemma || null});
       await presentResolution(word,context,resolution,phrasesFor);
