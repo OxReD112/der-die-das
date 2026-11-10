@@ -5562,6 +5562,9 @@
         const marker = norm(tokens[tail-1]?.[0]) === "zu" && tail-1 !== head.i ? tail-1 : null;
         const main = joined.length ? joined : marker !== null ? verbs(tail).filter(e=>norm(e.word) === norm(tokens[tail][0])) : [];
         if (!main.length || new Set(main.map(e=>norm(e.word))).size !== 1) continue;
+        // (links chat 09.11, Mac run w103: sein + zu sein is no sein + zu group — du bist nicht mehr würdig im Himmel zu sein: the adjective
+        // governs zu sein; haben + zu sein stays — Du hast still zu sein)
+        if (lexical.word === "sein" && norm(main[0].word) === "sein") continue;
         const linked = [head.i,tail,...(marker !== null ? [marker] : []),...(participleIndex !== null ? [participleIndex] : [])];
         if (!linked.includes(selected)) continue;
         const other = indices.filter(i=>!linked.includes(i));
@@ -5580,8 +5583,19 @@
         if (lexical.word === "sein" && other.some(i=>i < Math.min(head.i,tail) && prepositional(i) && listNoun(i))) continue;
         // Only an undeclined (predicative) adjective governs the infinitive (bereit zu gehen);
         // a declined one is attributive inside a phrase (im höchstem Maße weiter zu empfehlen).
+        // (links chat 09.11, advisor 09.11, TODO 10: the adjective governs the infinitive only right before it — Es ist schwierig zu sehen, bereit zu gehen;
+        // an adjective further left is a sentence adverb of the sein + zu group — ist ethisch nicht zu vertreten, sind telefonisch selten
+        // zu erreichen)
+        // (narrowed after the count: with an es of the part the adjective governs the infinitive wherever it stands — es ist auch möglich
+        // mit der Paysafecard … zu bezahlen, Es war mir wichtig Arzu … zu geleiten, Wichtig ist es hierbei zu beachten)
+        const esInPart = indices.some(i=>norm(tokens[i][0]) === "es");
+        // (Mac run w103 / recount 09.11: adjectives that take a zu-infinitive with its object between — ist sehr bemüht die Kunden
+        // zufriedenzustellen, war bestrebt …, ist verpflichtet … — block the group wherever they stand, as bereit / fähig did)
+        const SEIN_ZU_GOVERNING_ADJECTIVES = new Set(["bereit","fähig","willig","entschlossen","froh","stolz","bemüht","bestrebt","gewillt",
+          "imstande","verpflichtet","berechtigt","befugt","gezwungen","genötigt","gewohnt","geneigt","würdig"]);
+        const beforeZu = esInPart ? -1 : (marker !== null ? marker : tail) - 1;
         if (lexical.word === "sein" && other.some(i=>!mannerWords.has(norm(tokens[i][0])) &&
-          (matches(i).some(e=>e.type === "Adjektiv" && norm(e.word) === norm(tokens[i][0])) || ["bereit","fähig","willig","entschlossen","froh","stolz"].includes(norm(tokens[i][0]))))) continue;
+          ((beforeZu < 0 || i === beforeZu) && matches(i).some(e=>e.type === "Adjektiv" && norm(e.word) === norm(tokens[i][0])) || SEIN_ZU_GOVERNING_ADJECTIVES.has(norm(tokens[i][0]))))) continue;
         if (other.some(i=>clause.competing(i,true) && !possessiveBeforeNoun(i) && !clause.nounToken(i))) continue;
         // A comparison inside (das Gleiche wie Truppen … zu führen) is not sein / haben + zu.
         if (other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && COMPARISON_PARTICLES.includes(norm(tokens[i][0])))) continue;
@@ -5596,7 +5610,10 @@
         const groupTense = participleIndex !== null ? tense.replace(/ · $/u, "") : simple.length === 1 && simple[0] !== "Präsens" ? simple[0] : null;
         result.push({id:modal ? "haben-zu" : "sein-zu",note,lemma:main[0].word,...(groupTense ? {tense:groupTense} : {}),
           meaningLemma:lexical.word,meaning:modal || selected !== (participleIndex ?? head.i) ? null : {en:"can / must be",ru:"можно / нужно"},
-          marker:selected === marker,main:main[0],roles:[head.e,lexical,...main],
+          // (links chat 09.11, Mac run w103: a separable verb known only from the external index — anzutreffen — has no forms to check
+          // against the tapped word, so on sein / haben it stood as a second card and opened a window with die Ware: Damals waren
+          // Elefanten anzutreffen; it is a role only on the infinitive itself)
+          marker:selected === marker,main:main[0],roles:[head.e,lexical,...main.filter(e => !e.importedSeparable || selected === tail)],
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(clause.span)});
       }
       return result.length === 1 ? result[0] : null;
