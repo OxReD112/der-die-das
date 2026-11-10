@@ -52,7 +52,10 @@
     const text=(tag,cls,value)=>{const node=document.createElement(tag);node.className=cls;node.textContent=value;return node;};
     const titles={personal:ru?'Личные и притяжательные местоимения':'Personal and possessive pronouns',reflexive:ru?'Возвратные местоимения':'Reflexive pronouns',demonstrative:ru?'Указательное местоимение der/die/das':'Demonstrative pronoun der/die/das',relative:ru?'Относительное местоимение der/die/das':'Relative pronoun der/die/das',impersonal:ru?'Безличное es':'Impersonal es'};
     const heading=text('h2','dictionary-headword',clickedWord || item.word);heading.id='sheet-word';root.append(heading);
-    root.append(text('p','dictionary-pos',ru?'местоимение':'pronoun'),text('h3','pronoun-reference-title',titles[kind]));
+    // 10.11 (Alena): the part of speech in German, as in the popover and on every other card
+    const id=Number(item.id?.split('-')[1]),possessive=id>=11&&id<=18;
+    const pos={personal:possessive?'Possessivpronomen':'Personalpronomen',reflexive:'Reflexivpronomen',demonstrative:'Demonstrativpronomen',relative:'Relativpronomen',impersonal:'Pronomen'}[kind];
+    root.append(text('p','dictionary-pos',pos),text('h3','pronoun-reference-title',titles[kind]));
     function table(title,columns,rows) {
       const section=text('section','dictionary-pronoun-forms','');
       if(title)section.append(text('h3','',title));
@@ -66,8 +69,11 @@
     function example(de,translation) { const node=text('p','dictionary-example',de);node.lang='de';const tr=text('span','dictionary-example-translation',translation);tr.lang=lang;node.append(tr);root.append(node); }
     if(kind==='personal') {
       table('', ['Nom.','Akk.','Dat.','Possessiv'],PERSONAL_ROWS);
+      // 10.11 (Alena): the endings only for mein / dein / sein … — for ich, ihm, sie the table was beside the point
+      if(possessive){
       root.append(text('p','dictionary-detail',ru?'Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren':'Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren'));
       table(ru?'Притяжательные окончания':'Possessive endings',['Kasus','Mask.','Neutr.','Fem.','Plural'],ENDINGS);
+      }
     } else if(kind==='reflexive') {
       table('', ['Personal','Akkusativ','Dativ'],REFLEXIVE);
       example('Ich wasche mich',ru?'Я моюсь.':'I wash myself.');

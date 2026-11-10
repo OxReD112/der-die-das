@@ -1305,6 +1305,14 @@
       if(sections.length)section.querySelector('#sheet-word')?.removeAttribute('id');
       sections.push(section);
     }
+    // 10.11 (Alena): one card for a form of two kinds (mir — personal and reflexive): the word once, its kinds on one line,
+    // then a part per kind under its own title — not two cards one under the other.
+    if(sections.length>1){
+      const kinds=[...new Set(sections.map(section=>section.querySelector('.dictionary-pos')?.textContent).filter(Boolean))];
+      sections.slice(1).forEach(section=>section.querySelectorAll(':scope > .dictionary-headword, :scope > .dictionary-pos').forEach(node=>node.remove()));
+      const first=sections[0].querySelector(':scope > .dictionary-pos');if(first)first.textContent=kinds.join(' · ');
+      sections.slice(1).forEach(section=>section.classList.add('pronoun-reference-more'));
+    }
     root.replaceChildren(...sections);delete root.dataset.pronounReference;
   }
   // G57 step 2: the card of one part; with several parts a pager above it — the part, «1 / 2», ‹ ›.

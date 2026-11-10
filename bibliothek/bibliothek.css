@@ -2955,3 +2955,6 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 .saved-word { display: block; font-weight: 650; }
 .saved-where { display: block; color: var(--muted); font-size: 13px; font-weight: 500; }
 @media (prefers-reduced-motion: reduce) { .saved-card { transition: opacity 0.2s ease; transform: translate(-50%, 0); } }
+
+/* 10.11 (Alena): a form of two kinds (mir) — one card; the second kind starts under a thin line, without the word again */
+.pronoun-reference-more { margin-top: 22px; padding-top: 4px; border-top: 1px solid var(--hairline); }
