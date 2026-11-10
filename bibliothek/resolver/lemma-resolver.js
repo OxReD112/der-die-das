@@ -14010,6 +14010,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const neuterN = entry.article === "das" && ![word + "n", word + "en"].includes(plural);
         const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", ...(neuterN ? [] : [word + "n", word + "en"])]);
         if (plurals.has(form) && !singulars.has(form)) return {number:"plural"};
+        // (advisor 09.11, «Plural» step 2) a masculine / neuter noun after die / keine / meine / deine / seine / ihre / unsere / eure / diese /
+        // jene / alle / welche (attribute words between them allowed): these forms go with a masculine / neuter noun only in the plural
+        // (die Lehrer, keine Fenster, alle alten Wagen); a feminine noun is not touched (keine Frau)
+        if (plurals.has(form) && ["der","das"].includes(entry.article) && Number.isInteger(context?.tokenOffset)) {
+          const words = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}]+|[^\p{L}\s]/gu)].map(m => m[0]);
+          let k = words.length - 1, attrs = 0;
+          while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) &&
+            !/^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) { k--; attrs++; }
+          if (k >= 0 && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) return {number:"plural"};
+        }
         // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
         // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
         if (plurals.has(form) && Number.isInteger(context?.tokenOffset)) {
