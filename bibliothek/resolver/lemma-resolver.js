@@ -12648,7 +12648,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 08.11, E7: Personaleinsatz und - aufwand — the second part of a compound is no joined verb form)
       const ellipsisTap = (() => { if (!Number.isInteger(context?.tokenOffset)) return false; const st = String(context.sentence || ""), tk = sharedTokens(st,'resolve');
         const at = clickedTokenIndex(tk,context.tokenOffset,word); return at >= 0 && ellipsisSecondPart(st,tk,at); })();
-      const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm) &&
+      // (advisor 10.11) an abbreviation with its dot (sog., St.) is no form of a verb (saugen, amtshandeln)
+      const abbreviationDot = Number.isInteger(context?.tokenOffset) && String(context.sentence || "")[context.tokenOffset + String(word).length] === "." &&
+        [ABBREVIATION_NEVER_END, ABBREVIATION_MAY_END, ABBREVIATION_BEFORE_NAME].some(list => list.has(norm(word)));
+      const exact = [...(forms.get(norm(word)) || []).filter(e => (!context || !severalWords(e) || phraseHere(e)) && !(e.inflected_only && afterAm) && !(abbreviationDot && e.type === "Verb") &&
         !((capitalInside || ellipsisTap) && e.importedSeparable && norm(e.word) !== norm(word))),...(tapPart ? (phraseForms.get(norm(word)) || []).filter(phraseHere) : [])];
       // C21: a cardinal / ordinal without an own numeral card of this spelling.
       if (!exact.some(e => e.type === "numeral")) {
@@ -12690,6 +12693,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const morphology = await collectMorphology(word, undefined, 'resolveInternal');
           if (morphology.errors.length) throw new Error(morphology.errors.map(e=>e.message).join('; '));
           for (const group of morphology.groups) {
+            if (abbreviationDot && group.pos === "verb") continue;
             // (advisor 03.11, inventory №2: a capitalised word inside the sentence keeps the external noun of haben / sein —
             // Kategorien Werden, Nicht-Sein und Sein → das Sein «бытие»; Er ist …, Sein Haus at the start stay as before)
             const midNoun = !group.kind && canonicalPos(group.pos) === "Nomen" && norm(group.word) === norm(word) && /^\p{Lu}/u.test(word) && midSentenceCapital(word, context, true);
@@ -16187,7 +16191,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(abbreviation(r.selected)||candidates.length!==(r.candidates||[]).length)
           return keepDecision(r,{...r,candidates,selected:null,preferred:null,status:candidates.length?'ambiguous':'unresolved'},{outcome:'needs-choice',rule:null});
         return r;};
-      const pending=hyphenEllipsis(word,context).then(e=>e?ellipsis(e):pipeline(word,context)).then(capitalVerb).then(capsRun);
+      // (advisor 10.11, claude/CAUSES_SAMPLE100_2026-11-10_RU.md п. 3) a capitalised word inside the sentence whose only readings are
+      // forms of a verb other than its infinitive is a name or a noun no dictionary has (Präsident Bill Clinton, Gouverneur Rod, Universal
+      // Time, Sankt Petersburg) — no verb card; das Lesen, beim Dirigieren (the infinitive) stay
+      const capitalOnlyVerb=async r=>{
+        if(!r||!/^\p{Lu}\p{Ll}/u.test(word)||!midSentenceCapital(word,context))return r;
+        const cs=r.candidates||[],bare=c=>norm(String(c.lemma||'').replace(/^sich\s+/u,'')),isVerb=c=>canonicalPos(c.pos)==='Verb';
+        const verbs=cs.filter(isVerb),others=cs.filter(c=>!isVerb(c));
+        if(!verbs.length||verbs.some(c=>bare(c)===norm(word))||r.selected&&!isVerb(r.selected))return r;
+        // only a finite form (Bill — imperative of bellen, Las — preterite of lesen, Sankt — of sinken): a participle (Der Sprechende Hut,
+        // Gedruckt bei) or an infinitive reading keeps the card; a form with a determiner or pronoun after it is a verb (Setze deine Reise)
+        const lemmas=new Set(verbs.map(bare)),rows=(r.inflections||[]).filter(x=>!x.pos||x.pos==='verb');
+        if(!rows.length||rows.some(x=>(x.tags||[]).some(t=>/participle|infinitive/u.test(t))||!lemmas.has(norm(x.lemma||'')))||!rows.some(x=>x.person||x.mood==='imperative'))return r;
+        // (a stem before a hyphen is the first part of a compound — Wohn- und Esszimmer, die Warn-App: the verb is its meaning)
+        const after=String(context.sentence||'').slice(context.tokenOffset+word.length);
+        if(/^\s*-/u.test(after))return r;
+        // (a participle with an adjective ending — die Bedienten, das Verlangte, Vertrocknete Zunge: the verb is its meaning)
+        const stem=/^(.+?(?:t|en))(?:e|en|er|es|em)$/u.exec(norm(word))?.[1];
+        if(stem){let groups=[];try{groups=await lexicalLookup(stem,'capitalOnlyVerb');}catch(_){groups=[];}
+          if((groups||[]).some(g=>g.kind==='form-note'&&(g.inflections||[]).some(x=>lemmas.has(norm(x.lemma||''))&&(x.tags||[]).includes('participle'))))return r;}
+        const next=(/^\s+([\p{L}]+)/u.exec(after)||[])[1]||'';
+        if(/^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\w*|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|eu[e]?r\w*|mich|dich|sich|uns|euch|ihn|es|noch|nicht|doch|mal|bitte|auch|schon|gern|nur)$/u.test(next))return r;
+        // the other readings stay (Sankt Petersburg — the card Sankt «святой»); none — «не нашёл»
+        const one=others.length===1?others[0]:null;
+        return keepDecision(r,{...r,candidates:others,selected:one,preferred:one,status:one?'resolved':others.length?'ambiguous':'unresolved',evidence:'capital-only-verb-form'},
+          {outcome:one?'selected':'needs-choice',rule:null});};
+      const pending=hyphenEllipsis(word,context).then(e=>e?ellipsis(e):pipeline(word,context)).then(capitalVerb).then(capsRun).then(capitalOnlyVerb);
       // (advisor + user 10.11) a word nothing found: the enrichment may find its whole Russian record (Russian interface only)
       const wholeRu=async result=>{try{const T=typeof window!=='undefined'&&window.BibliothekRussianTranslations;
         if(result&&result.status==='unresolved'&&!result.candidates?.length&&!result.wholeRu&&T?.enrich&&window.DeutschTranslation?.getLang?.()==='ru')

@@ -175,7 +175,9 @@
     for (const [rawForm,rawLemma,rawTags] of data?.inflections || []) {
       const form = String(rawForm || "").normalize("NFC").toLowerCase(), lemma = String(rawLemma || "").normalize("NFC").toLowerCase();
       const tags = String(rawTags || "").split(",").filter(Boolean);
-      if (form !== spelling || !/^[\p{L}\p{M}]+$/u.test(form) || !/^[\p{L}\p{M}]+$/u.test(lemma) ||
+      // (advisor 10.11) a form of fewer than three letters is no verb form: the external table of amtshandeln has the stray
+      // pieces st, et, en (St. Gallen, et cum spiritu → «amtshandeln · Präteritum»)
+      if (form.length < 3 || form !== spelling || !/^[\p{L}\p{M}]+$/u.test(form) || !/^[\p{L}\p{M}]+$/u.test(lemma) ||
         tags.some(t => t === "auxiliary" || t.startsWith("error-")) || !tags.some(t => VERB_FORM_KINDS.includes(t))) continue;
       const value = [spelling,lemma,[...new Set(tags)].sort().join(",")];
       if (!rows.some(row => row[1] === value[1] && row[2] === value[2])) rows.push(value);
