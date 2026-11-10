@@ -4059,13 +4059,20 @@
     // living genders or an old meaning give no card, so no head). attributeBefore: the tapped form with an adjective ending stands
     // right before it. One entry per sentence and offset, read by the grammar group (grammarClause) and the role frame alike.
     const compoundHeadItems = new Map();
-    async function compoundHeadEntry(sentence, token, attributeBefore = false) {
+    // (speed chat 10.11) the word formation of a head, started before its entry is kept: null when no lookup is needed (an entry
+    // already kept, a small letter, a word of our own) — the same conditions as compoundHeadEntry below
+    function compoundHeadFormation(sentence, token, attributeBefore = false) {
+      const k = token[0];
+      if (compoundHeadItems.has(sentence + "\u0000" + token.index) || !/^\p{Lu}/u.test(k) || (forms.get(norm(k)) || []).length) return null;
+      return wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null);
+    }
+    async function compoundHeadEntry(sentence, token, attributeBefore = false, started = null) {
       const key = sentence + "\u0000" + token.index;
       if (compoundHeadItems.has(key)) return compoundHeadItems.get(key);
       const k = token[0];
       let entry = null;
       if (/^\p{Lu}/u.test(k) && !(forms.get(norm(k)) || []).length) {
-        const formed = await wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null), f = formed?.formation;
+        const formed = await (started || wordFormationCandidate(k,{sentence,tokenOffset:token.index},{attributeBefore}).catch(() => null)), f = formed?.formation;
         // (a «maybe a name» split has no article of its own: no noun group around it — Das berichtete Morgenpost)
         if (f?.kind === "compound" && f.pos === "Nomen" && !f.maybeName)
           entry = {word:k,type:"Nomen",article:f.number ? "" : (f.gender || ""),plural:f.number === "plural" ? k : "",number:f.number || null,numberUnknown:false,compoundHead:true};
@@ -12852,8 +12859,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 08.11) an unknown compound noun after the tapped word: its entry (compoundHeadEntry) for the grammar group below
       if (context && Number.isInteger(context.tokenOffset)) {
         const s0 = String(context.sentence || ""), t0 = sharedTokens(s0,'compoundHeads'), i0 = clickedTokenIndex(t0,context.tokenOffset,word);
+        // (speed chat 10.11, agreed with the links chat: the heads are looked up together — one after another each was a chain of
+        // network waits: Hotel zum Bahnblick Cokeworth 1 → 8 waves; each entry is the same, compoundHeadEntry keeps it per offset)
+        // (review 10.11: the word formations start together, the entries are kept one after another in the old order — the map
+        // of entries is cleared at its size limit by the store that crosses it, so the order of the stores stays the same)
+        const heads = [];
         for (let h = i0+1; i0 >= 0 && h < t0.length && h-i0 <= 3; h++)
-          if (/^\p{Lu}/u.test(t0[h][0])) await compoundHeadEntry(s0,t0[h],h === i0+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word));
+          if (/^\p{Lu}/u.test(t0[h][0])) { const attr = h === i0+1 && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(word); heads.push([t0[h],attr,compoundHeadFormation(s0,t0[h],attr)]); }
+        for (const [token,attr,formed] of heads) await compoundHeadEntry(s0,token,attr,formed);
       }
       const roleRank = await sharedRoleRank(word,context,candidates.filter(c=>!c.reflexiveUnconfirmed));
       const grammatical = roleRank || grammarRank(word, context, candidates.filter(c => !c.reflexiveUnconfirmed), inflections);
