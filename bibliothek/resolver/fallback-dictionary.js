@@ -61,7 +61,8 @@
   const verbFormsBase = new URL("data/fallback-verb-forms/", document.currentScript.src);
   // Versions in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
   // versioned file for good — a changed data file needs a new version here (dev/bibliothek/tools/data-versions.json).
-  const verbFormsVersion = "1024-1";
+  const verbFormsVersion = "1024-2";   // (1024-2, 10.11: the membership filter rebuilt with the high-bit step; format bloom-fnv1a-v2 — an old page that reads the
+  // new file rejects it and answers «maybe», as without a filter, instead of hashing it the old way)
   const separableUrl = new URL("data/separable-index.json?v=20261108-own-nouns-1", document.currentScript.src);
   let separablePromise = null, verbMembershipPromise = null;
   function separableEntries() {
@@ -123,9 +124,9 @@
   const hexBytes=s=>{const v=c=>c<58?c-48:c-87,out=new Uint8Array(s.length>>1);for(let i=0;i<out.length;i++)out[i]=v(s.charCodeAt(2*i))<<4|v(s.charCodeAt(2*i+1));return out;};
   async function mayBeVerb(word) {
     try {
-      if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v1'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:hexBytes(m.bitmap)};}).catch(e=>{verbMembershipPromise=null;throw e;});
+      if(!verbMembershipPromise)verbMembershipPromise=dataFetch(new URL(`manifest.json?v=${verbFormsVersion}`,verbFormsBase)).then(r=>{if(!r.ok)throw Error('Verb membership unavailable');return r.json();}).then(d=>{const m=d.membership;if(m?.format!=='bloom-fnv1a-v2'||m.bits!==1048576||m.hashes!==4||typeof m.bitmap!=='string'||m.bitmap.length!==m.bits/4||!/^[0-9a-f]+$/.test(m.bitmap))throw Error('Invalid verb membership');return {...m,bitmap:hexBytes(m.bitmap)};}).catch(e=>{verbMembershipPromise=null;throw e;});
       const m=await verbMembershipPromise,key=String(word).normalize('NFC').toLowerCase();let h=2166136261;for(const b of new TextEncoder().encode(key))h=Math.imul(h^b,16777619)>>>0;
-      const step=(Math.imul(h^0x9e3779b9,2246822519)>>>0)|1;
+      const step=((Math.imul(h^0x9e3779b9,2246822519)>>>0)>>>13)|1;   // (speed chat 10.11: the high bits — the builders hash the same way)
       for(let k=0;k<m.hashes;k++){const bit=(h+k*step)&(m.bits-1);if(!(m.bitmap[bit>>>3]&(1<<(bit&7))))return false;}
       return true;
     } catch (_) { return true; } // Missing filter preserves the full lookup path.
@@ -816,5 +817,13 @@
     } catch (_) { return null; }
   }
   async function lookupFacts(word) { const issues = []; return {groups:await lookup(word,issues),issues}; }
-  window.DeutschFallbackDictionary = {wordParts,hasRecord,diminutiveBase,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
+  // (speed chat 10.11, advisor) may the word be a verb form the reader can read — a recorded form (the filter), or a weak form
+  // the lookup builds itself (weakHypotheses: vorankündigtet, nopptest) whose infinitive is in the filter. The filter holds
+  // only recorded forms; before 10.11 its false positives (16 %) let some built forms through by chance.
+  async function mayBeVerbForm(word) {
+    if (await mayBeVerb(word)) return true;
+    for (const hypothesis of weakHypotheses(word)) if (await mayBeVerb(hypothesis.lemma)) return true;
+    return false;
+  }
+  window.DeutschFallbackDictionary = {mayBeVerbForm,wordParts,hasRecord,diminutiveBase,nounGender,nameReadingOrder,lookupFacts,warm,perfectAuxiliaries,verbPrepositions,separableFormEvidence,auxiliaryInflections,lookup, lookupEntry, separableEntries, mayBeVerb, spellingTranslation, superlativeEntries};
 })();

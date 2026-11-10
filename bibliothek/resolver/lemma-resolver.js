@@ -2385,7 +2385,7 @@
       if (!result.length && word[0] !== key[0] && (forms.get(key) || []).some(e=>e.type === 'Nomen')) return result;
       // #29 (links chat 04.11): a participle shape (ge- / -iert / an inseparable prefix … -t, -en) may be a participle the verb-form
       // filter does not list — a verb known only from the Russian dictionary (überbaut) or particle + participle (abgeformt, eingesungen).
-      if(!result.length && fallback.mayBeVerb && !readerProbeAvailable(word) && !PARTICIPLE_SHAPE.test(key) && !await fallback.mayBeVerb(word))return result;
+      if(!result.length && fallback.mayBeVerb && !readerProbeAvailable(word) && !PARTICIPLE_SHAPE.test(key) && !await (fallback.mayBeVerbForm || fallback.mayBeVerb)(word))   /* (10.11: a weak form the lookup builds passes too — speed chat, advisor) */return result;
       let groups;
       try { groups = await lookup(word,consumer); } catch (_) { return result; }
       const evidence = groups.filter(g=>g.kind === 'form-note').flatMap(g=>g.inflections || []);
@@ -3398,7 +3398,7 @@
       try { await prepareSeparable(); } catch (_) { /* Own evidence remains usable offline. */ }
       if(!reflexivePronouns.has(key)&&!verbAnalyses.has(key)&&!zuForms.has(key)&&!lexicalSeparated(key)&&!(verbParticles.has(key)&&String(context?.sentence||'').toLowerCase().split(/[^\p{L}]+/u).some(w=>reflexivePronouns.has(w)))){
         if(word[0]!==key[0]&&(forms.get(key)||[]).some(e=>e.type==='Nomen'))return [];
-        if(fallback.mayBeVerb&&!await fallback.mayBeVerb(word))return [];
+        if(fallback.mayBeVerb&&!await (fallback.mayBeVerbForm||fallback.mayBeVerb)(word))return [];   // (10.11: weak forms the lookup builds pass — speed chat, advisor)
       }
       observe('relation-cache', {consumer:'reflexiveCandidates',cache:'grammar',key:sentence,state:grammarCache.has(sentence)?'retained':'miss',size:grammarCache.size});
       if(!grammarCache.has(sentence)) {
