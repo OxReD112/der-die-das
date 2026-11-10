@@ -13098,7 +13098,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           nameReadingOrders.set(`${pos}:${word}`,order);
         }
       // (advisor 08.11) an unknown compound noun after the tapped word: its entry (compoundHeadEntry) for the grammar group below
-      if (context && Number.isInteger(context.tokenOffset)) {
+      // (speed chat 10.11: not for a conjunction, adverb or particle — doch … Onkel Vernon 5 network waits → 1)
+      if (!(candidates.length && candidates.every(c => ["Konjunktion","Adverb","Partikel","particle","Interjektion"].includes(canonicalPos(c.pos)))) &&
+          context && Number.isInteger(context.tokenOffset)) {
         const s0 = String(context.sentence || ""), t0 = sharedTokens(s0,'compoundHeads'), i0 = clickedTokenIndex(t0,context.tokenOffset,word);
         // (speed chat 10.11, agreed with the links chat: the heads are looked up together — one after another each was a chain of
         // network waits: Hotel zum Bahnblick Cokeworth 1 → 8 waves; each entry is the same, compoundHeadEntry keeps it per offset)
