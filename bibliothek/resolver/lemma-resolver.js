@@ -255,7 +255,9 @@
   // by the verb-final sign (damitOpensPart); otherwise it stays inside the part (Die Ausstattung wurde während der Gegenreformation
   // ersetzt). The pure conjunctions (wenn, bevor, ob, dass, weil, nachdem …) still open their part as in main; als before a noun
   // phrase is alsNounPhrase (werdenGroup, externalPassiveGroup), so — the correlate of werdenGroupIn. Not the coordinators.
-  const MID_PART_SUBORDINATORS = new Set(["damit","während"]);
+  // (links chat, advisor 10.11, R0: bis — a preposition too: hielt sich 1548 bis 1550 in Zürich auf, zog sich bis Mai hin; Warte, bis er kommt
+  // keeps its comma; bis er kam, war es dunkel opens the sentence)
+  const MID_PART_SUBORDINATORS = new Set(["damit","während","bis"]);
   // (advisor 07.11, comma insertions) The first word of a finished subordinate clause between two commas inside a part: a relative
   // pronoun or a subordinating conjunction (kann Dinge, die er sucht, nicht finden).
   // (links chat 07.11, advisor 07.11: «wie + participle» between two commas is a short insertion, not a part of its own — wachte,
@@ -2569,7 +2571,9 @@
         // G15 (19.10.2026): a comma, point or colon inside a number (13,5; 26.600; 6:4) is no clause boundary.
         // A list of numbers (6:4, 5:7, 6:3) is one nominal element too.
         const rawGap = clauseGapText(sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index).replace(/\d+(?:[.,:]\d+)*(?:\s*,\s*\d+(?:[.,:]\d+)*)+/gu,'0'),tokens[i-1][0],tokens[i][0]);
-        const gap = (parenMarks.has(i-1) ? rawGap.replace(/[()]/gu," ") : rawGap).replace(titleMarks.has(i-1) ? /[„“”"»«]/gu : /$^/u," ");
+        // (R0, advisor 10.11: the shared commaModifierPair of the chains — eine maßvolle, schrittweise Belastung — is no boundary either)
+        const gap0 = (parenMarks.has(i-1) ? rawGap.replace(/[()]/gu," ") : rawGap).replace(titleMarks.has(i-1) ? /[„“”"»«]/gu : /$^/u," ");
+        const gap = commaModifierPair(sentence,tokens,i-1) ? gap0.replace(/,/u," ") : gap0;
         const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])||coordinators.has(words[j])));
         const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
         const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
@@ -2631,7 +2635,31 @@
         // (advisor 06.11: the shared core first — und / oder + a finite verb right after it, or a subject pronoun + a finite verb,
         // opens a part before the exceptions above: jagte die Hufeisen ab und schlug ihm …, Geh und sage …, dachte Harry und rückte …)
         const coreOpens=COORDINATORS_WITHOUT_COMMA.includes(words[i])&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&coordinatorOpensClause(tokens,i+1,sentence);
-        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin || coreOpens || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!particleDenn&&!nominalJoin ||
+        // (R0, advisor 10.11, expert sign № 137) und / oder inside the bracket of a main part: a finite haben / sein / werden / modal in the
+        // second place, and the only finite reading after und is the last word of the part, which is a participle / infinitive too —
+        // Ich habe mich für Partynasenbecher und Gebisseiswürfelformen entschieden: the form at the end is no finite verb, und opens no part
+        const bracketHead=[start,start+1].find(k=>k<i&&/^\p{Ll}|^\p{Lu}/u.test(tokens[k]?.[0]||'')&&(analyses[k]||[]).some(a=>a.kind==='finite'&&(['haben','sein','werden'].includes(a.base)||modalLemmas.has(a.base))));
+        const bracketJoin=COORDINATORS_WITHOUT_COMMA.includes(words[i])&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&bracketHead!==undefined&&
+          !analyses.slice(start,i).some((rows,k)=>start+k!==bracketHead&&rows.some(a=>a.kind==='finite'&&/^\p{Ll}/u.test(tokens[start+k][0])))&&
+          // (no word before und that no dictionary knows — it may be the closing verb: Du kannst dich hineinschleichen und …, Sollte sich
+          // dieses Niveau verstetigen oder … steigen; as unknownSmall of partsJoin)
+          !tokens.slice(bracketHead+1,i).some((t,k)=>{const w=words[bracketHead+1+k],stem=w.replace(/(?:e|en|em|er|es)$/u,'');
+            return /^\p{Ll}+$/u.test(t[0])&&!forms.has(w)&&!lemmas.has(w)&&!forms.has(stem)&&!lemmas.has(stem)&&!(analyses[bracketHead+1+k]||[]).length;})&&
+          // (the bracket still open before und — no participle / infinitive there: Er hat sich gewaschen und die Kinder schlafen is two parts)
+          !analyses.slice(bracketHead+1,i).some((rows,k)=>/^\p{Ll}/u.test(tokens[bracketHead+1+k][0])&&rows.some(a=>['participle','infinitive'].includes(a.kind)))&&
+          (()=>{const e=rightEnd;if(e<=i)return false;
+            for(let k=i+1;k<e;k++)if((analyses[k]||[]).some(a=>a.kind==='finite')&&/^\p{Ll}/u.test(tokens[k][0]))return false;
+            return /^\p{Ll}/u.test(tokens[e][0])&&(analyses[e]||[]).some(a=>['participle','infinitive'].includes(a.kind));})();
+        // (links chat, advisor 10.11, R0: the shared boundary functions of the chains — als before a noun phrase is «as» (alsNounPhrase:
+        // fühlt sich als Kunde willkommen, konnte sich als einzige Single … platzieren); während / bis without a mark before them are the
+        // shared mid-part words (midClauseDoch: hat sich während der Eiszeit … eingeschnitten))
+        // (not a comparison clause with its own subject — soviel verdienen als ich brauche: the subject check of nominalJoin)
+        const alsAs=words[i]==='als'&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&alsNounPhrase(tokens,i,rightEnd)&&!words.slice(i+1,rightEnd+1).some(w=>subjectPersons[w])&&
+          // (and no full finite verb before als in the part — versprechen … sich als Freunde wieder zu treffen: two predicates; a modal /
+          // haben / sein / werden before it is the verb's own group — konnte sich als einzige Single … platzieren)
+          !analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'&&!modalLemmas.has(a.base)&&!['haben','sein','werden'].includes(a.base)));
+        const midSubordinator=subordinators.has(words[i])&&midClauseDoch(sentence,tokens,i);
+        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!particleDenn&&!nominalJoin&&!bracketJoin ||
           comparisonAfterParticle(i,start)) {
           clauses.push({start,end:i-1,relation});
           start=i;relation=/[;:.!?…]/u.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
@@ -3198,7 +3226,15 @@
             // the clause is no second predicate — it describes (fühlt sich dort aufgehoben, setzte sich bevorzugt für … ein);
             // its finite reading (bevorzugt «er bevorzugt») is not a second finite verb of the clause either.
             const helperInClause=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(i=>i!==v&&analyses[i].some(r=>r.kind==='finite'&&TENSE_AUXILIARIES.includes(r.base)));
-            const describingParticiple=i=>a.kind==='finite'&&i>v&&!helperInClause&&analyses[i].some(r=>r.kind==='participle')&&!analyses[i].some(r=>r.kind==='infinitive');
+            // (links chat, advisor 10.11, R0: so is a participle in the Vorfeld before the finite verb — 1,5 Kilometer vom Ortsteil entfernt
+            // befindet sich …, Allgemein gesprochen bezieht sich …, Ethnisch betrachtet setzte sich …: no haben / sein / werden in the
+            // clause, no other finite form before the verb)
+            // (not a present participle — gähnend und sich streckend hinausging: sich is streckend's —, and not a form that is also finite after
+            // a reflexive pronoun — mit dem sich die Archäologie beschäftigt umfasst …, der mich … unterstützt - ich spreche)
+            const vorfeldParticiple=i=>a.kind==='finite'&&i<v&&!helperInClause&&!TENSE_AUXILIARIES.includes(a.base)&&!(/end$/u.test(words[i])&&reflexivePronouns.has(words[i-1]))&&
+              !(analyses[i].some(r=>r.kind==='finite')&&Array.from({length:i-clause.start},(_,k)=>clause.start+k).some(j=>reflexivePronouns.has(words[j])))&&
+              Array.from({length:v-clause.start},(_,k)=>clause.start+k).every(j=>j===i||!analyses[j].some(r=>r.kind==='finite'&&/^\p{Ll}/u.test(tokens[j][0])&&!analyses[j].some(x=>x.kind==='participle')));
+            const describingParticiple=i=>a.kind==='finite'&&(i>v||vorfeldParticiple(i))&&!helperInClause&&analyses[i].some(r=>r.kind==='participle')&&!analyses[i].some(r=>r.kind==='infinitive');
             const competingIndices=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>
               !allowed.has(i)&&!ownOtherWord(i)&&!predicativeParticiple(i)&&!describingParticiple(i)&&!nounAt(i)&&!modifierOpening(i)&&!attributiveBefore(i)&&(
                 (reflexiveForms.get(words[i])||[]).some(row=>['Infinitiv','Partizip II'].includes(row.tense))&&(words[i-1]==='zu'||i===clause.end)||
@@ -14146,6 +14182,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (sign.strong && own.every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t))) return {tense:sign.bang ? "Imperativ" : "Imperativ / Präsens"};
           }
         }
+        // (advisor 10.11, train map: Auch deshalb entstanden bald populistische Bewegungen) a Präteritum spelled as its Partizip II — a strong
+        // plural (entstanden) — that participleModifier has already read as the finite verb of its part (second position, no auxiliary / other
+        // finite verb: the sign of efd7528b; context.finiteClause) is Präteritum. Weak -te forms keep their own rules (1.5, weakPastIndicative).
+        if (context?.finiteClause && labels.has("Präteritum") && [...labels].every(t => ["Präteritum","Partizip II","Partizip"].includes(t))) return {tense:"Präteritum"};
         if (labels.size !== 1 || !["Präteritum","Imperativ","Konjunktiv II"].includes(only)) return null;
         // An imperative opens its clause; elsewhere the same spelling is another form or another word.
         if (only === "Imperativ") {
@@ -15880,6 +15920,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // adjective, also before a separated particle or in the middle (Ron sah ihn verdutzt an, rief Dumbledore ausgelassen, fügte er
     // strahlend hinzu, sagte Dumbledore strahlend) — the rule of 03.11 (participleManner) beyond the end of the part. Not: bedeckte das
     // Gesicht (finite), die Taschen gefüllt hatte, bedeckt ward (auxiliary), war … mit Pech bedeckt (sein: the window stays, 03.11).
+    // (advisor 10.11) the tense of a form participleModifier reads as the finite verb of its part — by formFeatures, the one tense function
+    // (context.finiteClause: entstanden «Präteritum»); a form that already has a tense, or none by formFeatures, stays as it is.
+    function finiteClauseTense(word, context, result) {
+      const c = result?.selected;
+      if (!c || canonicalPos(c.pos) !== "Verb" || c.formFeatures?.tense) return result;
+      // (only the verb-second order with something after it in its span — not the last word before a comma / full stop: Als Teil der
+      // Planung entstanden, findet sich …; Einhundertfünfzig Punkte verloren. — and no auxiliary / worden in the sentence span: … in den
+      // Kardinalsstand erhoben worden, In den Turm ist … einbezogen)
+      const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence, "finiteClauseTense"), at = clickedTokenIndex(tokens, context?.tokenOffset, word);
+      if (at < 0 || at + 1 >= tokens.length) return result;
+      const gap = (x, y) => sentence.slice(tokens[x].index + tokens[x][0].length, tokens[y].index);
+      if (/[,;:.!?…–—()"„“”»«]/u.test(gap(at, at + 1))) return result;
+      let a = at; while (a > 0 && !/[,;:.!?–—]/u.test(gap(a - 1, a))) a--;
+      let b = at; while (b + 1 < tokens.length && !/[,;:.!?–—]/u.test(gap(b, b + 1))) b++;
+      for (let k = a; k <= b; k++) if (k !== at && (SEIN_FINITE_OR_GEWESEN.test(norm(tokens[k][0])) || HABEN_FINITE_WORD.test(norm(tokens[k][0])) ||
+        /^(?:werde|wirst|wird|werden|werdet|wurde|wurdest|wurden|wurdet|ward|würde|würdest|würden|würdet|worden|geworden)$/u.test(norm(tokens[k][0])))) return result;
+      const f = formFeatures(word, c, result, {...context, finiteClause:true});
+      if (!f?.tense) return result;
+      const marked = {...c, formFeatures:{...(c.formFeatures || {}), tense:f.tense}};
+      const swap = x => x === c ? marked : x;
+      return {...result, selected:marked, ...(result.preferred === c ? {preferred:marked} : {}), candidates:(result.candidates || []).map(swap)};
+    }
     async function participleModifier(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const c = result.selected, cands = result.candidates || [], w = norm(word);
@@ -15962,7 +16024,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const spanStart = ab === 0 || /[.!?:;]/u.test(gap(ab - 1, ab));
         const firstMember = clauseBefore || spanStart && (at > cf ? !groupOpen : cf === ab && /\d/u.test(lead));
         let other = false; for (let k = cf; k <= ct; k++) if (otherFinite(k)) { other = true; break; }
-        if (firstMember && !other) return result;
+        if (firstMember && !other) return finiteClauseTense(word, context, result);
       }
       if (at + 1 <= end && !wide.some(k => HABEN_WERDEN.test(low(k))) && /^\s+$/u.test(gap(at, at + 1)) && /^\p{Ll}/u.test(tokens[at + 1][0])) {
         const next = low(at + 1), own = forms.get(next) || [];
