@@ -20,6 +20,13 @@
   }
 
   const base = new URL("../../open%20data/dictionary-de-ru-json/", document.currentScript.src);
+  // Whole words of the Russian dictionary that the English one has no record of (speed chat 10.11.2026, advisor + user;
+  // claude/RU_DICT_IN_PARSING_COST_2026-11-10_RU.md): a Bloom filter, dev/bibliothek/scripts/build-ru-whole-words.cjs.
+  // hasWhole(word, language) -> Promise<boolean>: «maybe» — the Russian record may then be asked (lookup); false — surely
+  // not. Only the Russian interface: for another language false, and nothing is downloaded. The file (~73 KB gzip) is read
+  // once, at the first question. No reader code asks it yet (the second resolver chat decides where).
+  const wholeWordsUrl = new URL("data/ru-whole-words.json?v=20261110-ru-whole-1", document.currentScript.src);
+  let wholeWords = null;
   // Version in the data addresses (26.10.2026): the reader's data cache (bibliothek/dictionary-cache-sw.js) keeps a
   // versioned file for good — a changed part or manifest needs a new version here (dev/bibliothek/tools/data-versions.json).
   const version = "1024-2";
@@ -250,5 +257,28 @@
     observe('enrich-end', {language});
     return resolution;
   }
-  window.BibliothekRussianTranslations = Object.freeze({lookup,enrich});
+  function hasWhole(word, language) {
+    if (language !== "ru" || typeof word !== "string" || !word.trim()) return Promise.resolve(false);
+    word = word.trim();
+    if (!wholeWords) wholeWords = dataFetch(wholeWordsUrl).then(response => {
+      if (!response.ok) throw new Error("Russian whole words unavailable");
+      return response.json();
+    }).then(data => {
+      const m = data && data.format_version === 1 && data.membership;
+      if (!m || m.format !== "bloom-fnv1a-v2-case" || !Number.isInteger(m.bits) || m.bits < 8 || (m.bits & (m.bits - 1)) !== 0 ||
+          !Number.isInteger(m.hashes) || m.hashes < 1 || m.hashes > 32 || typeof m.bitmap !== "string" || m.bitmap.length !== m.bits / 4 || !/^[0-9a-f]+$/.test(m.bitmap))
+        throw new Error("Invalid Russian whole words");
+      const v = c => c < 58 ? c - 48 : c - 87, bits = new Uint8Array(m.bitmap.length >> 1);
+      for (let i = 0; i < bits.length; i++) bits[i] = v(m.bitmap.charCodeAt(2 * i)) << 4 | v(m.bitmap.charCodeAt(2 * i + 1));
+      return {size: m.bits, hashes: m.hashes, bits};
+    }).catch(error => { wholeWords = null; throw error; });
+    return wholeWords.then(f => {
+      let h = 2166136261;
+      for (const byte of new TextEncoder().encode(word.normalize("NFC"))) h = Math.imul(h ^ byte, 16777619) >>> 0;
+      const step = ((Math.imul(h ^ 0x9e3779b9, 2246822519) >>> 0) >>> 13) | 1;   // (the high bits: build-ru-whole-words.cjs)
+      for (let k = 0; k < f.hashes; k++) { const bit = (h + k * step) & (f.size - 1); if (!(f.bits[bit >>> 3] & (1 << (bit & 7)))) return false; }
+      return true;
+    }, () => true);   // (the filter missing: «maybe» — the caller asks the record itself, as without the filter)
+  }
+  window.BibliothekRussianTranslations = Object.freeze({lookup,enrich,hasWhole});
 })();
