@@ -489,6 +489,11 @@
       case 'comparative-als': return {marks:['Komparativ + als'], role:null, spans};
       // G51 step 3: Komparativ + denn (härter denn je) — denn shows «здесь: чем».
       case 'comparative-denn': return {marks:['Komparativ + denn'], role:null, spans};
+      // Grimm item 3 (11.11): als + a person form (als wäre) — als shows «здесь: как будто».
+      // Grimm item 3 (11.11): immer / viel + Komparativ (immer tiefer, viel zu schwach) — «здесь: всё …» / «здесь: намного».
+      case 'immer-comparative': return {marks:['immer + Komparativ'], role:null, spans};
+      case 'viel-comparative': return {marks:[spans.length > 2 ? 'viel zu + Adjektiv' : 'viel + Komparativ'], role:null, spans};
+      case 'as-if-als': return {marks:['als + Verb = als ob'], role:null, spans};
       // G51 / G14: a modal particle — the line «Partikel» comes from the card's posLabel, no marks of its own.
       case 'modal-particle': return {marks:[], role:null, spans};
       case 'zu-conjunction': return {marks:[], role:own === 'zu' ? 'infinitiveParticle' : null, spans};

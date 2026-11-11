@@ -648,6 +648,7 @@
     {id:'lexicon-convention',stage:'initial',kind:'preference'},
     {id:'reflexive-subject',stage:'initial',kind:'preference'},
     // Contextual group: readings of sein / ihr from their clause.
+    {id:'ihr-address',stage:'initial',kind:'preference',group:'contextual'},
     {id:'possessive-before-noun',stage:'initial',kind:'preference',group:'contextual'},
     {id:'sein-after-predicate-or-modal',stage:'initial',kind:'preference',group:'contextual'},
     {id:'sein-clause-final-after-modal',stage:'initial',kind:'preference',group:'contextual'},
@@ -8921,6 +8922,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // G34 (21.10.2026): Ihr / Ihre with a capital inside the sentence (not after a quote, colon, dash, bracket, «…» or an end
       // mark) is the polite «Ваш» only with an explicit sign — the polite Sie / Ihnen in the same sentence (Strecken Sie Ihren
       // Arm aus); titles (dass Ihre Hoheit krank sei) and the archaic «Ihr Kinder» keep «её / их / Ваш».
+      // Grimm list item 3 (advisor 11.11, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md): ihr in an address is the personal «вы» —
+      // ihr + adjectives in -en + a noun (ihr lieben Kinder, Ihr bösen Kinder: the possessive has ihre / a strong ending), or ihr + a noun
+      // in a plural form its card does not share with the singular (ihr Kinder, ihr Herren: the possessive before a plural is ihre),
+      // the group between the start of its part (a quote, a comma, : ; ! ?, or an interjection with its comma) and a mark. Not the
+      // dative: gab ihr Rad und Haspel, sprach ihr Trost zu (no mark before); not an apposition with a singular noun (Anna, ihr Kind, …).
+      'ihr-address': f => {
+        if (!/^(?:ihr|Ihr)$/u.test(f.tokens[f.index]?.[0] ?? "")) return null;
+        if (!/(?:^|[,»«„“":;!?–—(])\s*$/u.test(f.sentence.slice(0,f.tokens[f.index].index))) return null;
+        let i = f.index+1, adjectives = 0;
+        while (f.tokens[i] && f.adjacent(i-1,i) && /^\p{Ll}+en$/u.test(f.tokens[i][0]) && f.isAdjective(i)) { adjectives++; i++; }
+        const noun = f.tokens[i];
+        if (!noun || !f.adjacent(i-1,i) || !/^\p{Lu}/u.test(noun[0])) return null;
+        if (!/^\s*[,!?«»“".:;–—]/u.test(f.sentence.slice(noun.index + noun[0].length))) return null;
+        const nouns = f.matches(i).filter(e => e.type === "Nomen");
+        if (!nouns.length) return null;
+        const pluralOnly = nouns.some(e => norm(e.word) !== norm(noun[0]) && String(e.plural || "").split(/\s*,\s*/u).some(p => norm(p) === norm(noun[0])));
+        return adjectives || pluralOnly ? {ids:["pronoun-007"],evidence:"ihr-address"} : null;
+      },
       'possessive-before-noun': f => f.nounPhrase ?
         {ids:/^Ihr/u.test(f.word) && f.index > 0 && !/(?:[„“"»«‚‘:–—(….?!;]|\s-)\s*$/u.test(f.sentence.slice(0,f.tokens[f.index].index)) &&
           // titles of the 3rd person (Ihre Majestät, Ihrer Hoheit) — named exception, user 21.10
@@ -10843,11 +10862,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           (subjectPersons[norm(tokens[index+1][0])] || determinerFeatures(tokens[index+1][0])) && await verbFinalAfter())
         return conjunctionAt('conjunction-before-verb-final-clause');
       // Inside a clause opened by a subordinator (dass ich damit …, weil er aber …).
-      if (kindOf(start).includes("subordinating") && norm(tokens[start][0]) !== norm(word)) return adverbAt('adverb-in-subordinate-clause');
+      // aber is the particle «же, ведь» only in an exclamation (Das ist aber schön!, Du spielst aber gut!); inside a part elsewhere it is
+      // the contrast «но, однако» (bekam aber keine Antwort, konnte aber nicht, weil er aber nur zwölf Teller hatte) — Grimm list item 2
+      // (advisor 11.11, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md): its own conjunction card, not its adverb card. Other words keep
+      // the adverb (jedoch, also …).
+      // (the «!» ends aber's own part — not a later one: Ist aber mein Gefühl, macht euch selbst ein Bild!)
+      const exclamationParticle = () => norm(word) !== "aber" || ((/[.!?«“»,;:–—]/u.exec(sentence.slice(tokens[index].index)) || [""])[0]) === "!";
+      if (kindOf(start).includes("subordinating") && norm(tokens[start][0]) !== norm(word))
+        return exclamationParticle() ? adverbAt('adverb-in-subordinate-clause') : conjunctionAt('aber-contrast-inside-part');
       let finiteAt = -1;
       for (let i = start; i < index; i++) if (/^[a-zäöüß]/u.test(tokens[i][0]) || i === start)
         if (await finite(i)) { finiteAt = i; break; }
-      if (finiteAt < 0) return null;
+      // (aber after the first place of its part, before its finite verb: Der König aber reichte ihm die Hand, Er aber war froh — the
+      // contrast «а» too)
+      if (finiteAt < 0) return norm(word) === "aber" && !exclamationParticle() ? conjunctionAt('aber-contrast-inside-part') : null;
       // A closed verbal bracket (hat … zugegeben jedoch nicht behoben): the word
       // right after the non-finite verb that closes it links a second conjunct.
       if (index-1 > finiteAt && /^[a-zäöüß]/u.test(tokens[index-1][0])) {
@@ -10855,7 +10883,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (rows.length && rows.every(a => ["participle","infinitive"].includes(a.kind)))
           return conjunctionAt('conjunction-after-closed-bracket');
       }
-      return adverbAt('adverb-after-finite-verb');
+      return exclamationParticle() ? adverbAt('adverb-after-finite-verb') : conjunctionAt('aber-contrast-inside-part');
     }
     async function prepositionChoice(word, context, candidates, separated = []) {
       if (!Number.isInteger(context?.tokenOffset) || candidates.some(c => c.construction || canonicalPos(c.pos) === "Verb")) return null;
@@ -15929,6 +15957,67 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         return true;
       };
+      // Grimm list item 3 (advisor 11.11, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md): immer right before a comparative is «всё
+      // (больше)» — immer tiefer, immer mehr, immer größere; viel right before a comparative or zu + an adjective is «намного» — viel
+      // weitläufiger, viel zu schwach (not viel zu tun: an infinitive after zu). A comparative also with its ending (größere, größerer).
+      if ((keys[index] === "immer" || keys[index] === "viel") && index + 1 < tokens.length && clause[index+1] === clause[index]) {
+        const comparative = async k => k < tokens.length && clause[k] === clause[index] && !upper(tokens[k][0]) &&
+          (irregularComparatives.has(keys[k]) || comparativeForms.has(keys[k]) || [1,2].some(n => comparativeForms.has(keys[k].slice(0,-n)) && /(?:e|en|em|er|es)$/u.test(keys[k])) ||
+          // (an adjective of a dictionary card with -er and its ending — weitläufiger, schmutziger, schöneren)
+          await (async () => { const m = /^(\p{L}{3,})er(?:e|en|em|er|es)?$/u.exec(keys[k]); if (!m || (verbAnalyses.get(keys[k]) || []).length) return false;
+            for (const b of new Set([m[1], m[1].replace(/ä/u,"a").replace(/ö/u,"o").replace(/ü/u,"u")])) {
+              // (an own adjective card names its comparative — comparativeForms: guter is gut + -er, not a comparative — immer guter Dinge)
+              if ((forms.get(b) || []).some(e => e.type === "Adjektiv")) return false;
+              if (!(forms.get(b) || []).length) { try { if ((await collectMorphology(b,{discoverModifiers:true},'constructionAt')).analyses.some(x => canonicalPos(x.pos) === "Adjektiv")) return true; } catch (_) {} }
+            }
+            return false; })());
+        const record = (lemmas.get(keys[index]) || []).find(e => e.type === "Adverb");
+        // (immer + a comparative + als compares: immer besser als … — «всегда лучше, чем»)
+        const thenAls = () => { for (let k = index+2; k < tokens.length && k <= index+4 && clause[k] === clause[index]; k++) if (keys[k] === "als") return true; return false; };
+        // (immer weiter is the particle of a verb, not «всё дальше» (advisor 11.11): weiter last in its part that has a person form —
+        // es schrie immer weiter «продолжал кричать»; or a verb of the part has an own card with weiter- — hilft … immer weiter
+        // (weiterhelfen). With no verb in its part it stays: sie gingen fort, immer weiter)
+        const particleWeiter = () => {
+          if (keys[index] !== "immer" || keys[index+1] !== "weiter") return false;
+          const inPart = [];
+          for (let k = index; k >= 0 && clause[k] === clause[index]; k--) inPart.unshift(k);
+          for (let k = index+1; k < tokens.length && clause[k] === clause[index]; k++) inPart.push(k);
+          const verbs = inPart.filter(k => k !== index+1 && !upper(tokens[k][0]) && (verbAnalyses.get(keys[k]) || []).some(a => ["finite","participle","infinitive"].includes(a.kind)));
+          if (inPart.at(-1) === index+1 && verbs.some(k => (verbAnalyses.get(keys[k]) || []).some(a => a.kind === "finite"))) return true;
+          return verbs.some(k => (verbAnalyses.get(keys[k]) || []).some(a => (forms.get("weiter" + norm(a.base || "")) || []).some(e => e.type === "Verb")));
+        };
+        if (record && await comparative(index+1) && !(keys[index] === "immer" && thenAls()) && !particleWeiter())
+          return {entry:record, id:keys[index] === "immer" ? "immer-comparative" : "viel-comparative", spans:[span(index), span(index+1)],
+            translation:keys[index] === "immer" ? {ru:"здесь: всё (всё больше, всё глубже)", en:"here: ever (more and more)"} : {ru:"здесь: намного, гораздо", en:"here: much, far"}};
+        if (record && keys[index] === "viel" && keys[index+1] === "zu" && index + 2 < tokens.length && clause[index+2] === clause[index] && !upper(tokens[index+2][0]) &&
+            !(verbAnalyses.get(keys[index+2]) || []).some(a => a.kind === "infinitive") && (forms.get(keys[index+2]) || []).some(e => e.type === "Adjektiv" || e.type === "Adverb"))
+          return {entry:record, id:"viel-comparative", spans:[span(index), span(index+1), span(index+2)], translation:{ru:"здесь: намного, гораздо (viel zu — слишком уж)", en:"here: much, far (viel zu — far too)"}};
+      }
+      // Grimm list item 3 (advisor 11.11, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md): als with a person form right after it in
+      // its part is «как будто» (= als ob): als wäre, als hätten sie, als wollte er, als fischtet Ihr. A form that is also an infinitive
+      // is no sign (nichts als warten); the verb is written in lower case.
+      if (keys[index] === "als" && index + 1 < tokens.length && clause[index+1] === clause[index] && !upper(tokens[index+1][0])) {
+        let rows = verbAnalyses.get(keys[index+1]) || [];
+        // (a verb only in the external dictionary: its past / subjunctive form — als regneten, als fischtet Ihr)
+        if (!rows.length && !(forms.get(keys[index+1]) || []).length) {
+          try {
+            const external = (await collectMorphology(keys[index+1],{discoverModifiers:true},'constructionAt')).analyses;
+            if (external.length && external.every(x => canonicalPos(x.pos) === "Verb" && x.kind === "inflection") && external.some(x => /preterite|subjunctive/u.test(String(x.tense || ""))))
+              rows = [{kind:"finite"}];
+          } catch (_) {}
+        }
+        const record = (lemmas.get("als") || []).find(e => e.type === "Konjunktion");
+        // (right after als — nothing between; no participle (als erwartet, gilt als vermisst — er erwartet spells alike), no word with a
+        // card or reading of another kind (als meine liebe Frau, als äußerst nützlich), no participle with its ending before a capital word —
+        // an attribute (als versuchte Monopolisierung, gilt als bevorzugte Wohnlage))
+        const next = tokens[index+1], own = forms.get(keys[index+1]) || [];
+        if (record && /^\s+$/u.test(String(context?.sentence ?? "").slice(tokens[index].index + tokens[index][0].length, next.index)) &&
+            rows.some(a => a.kind === "finite") && !rows.some(a => ["infinitive","participle"].includes(a.kind)) &&
+            !own.some(e => ["Adjektiv","Adverb","Pronomen","article","Nomen","preposition"].includes(e.type)) &&
+            !(tokens[index+2] && /^\p{Lu}/u.test(tokens[index+2][0]) && (verbAnalyses.get(keys[index+1].replace(/en?$/u,"")) || []).some(a => a.kind === "participle")) &&
+            !await (async () => { try { return (await collectMorphology(keys[index+1],{discoverModifiers:true},'constructionAt')).analyses.some(x => ["Adjektiv","Adverb"].includes(canonicalPos(x.pos))); } catch (_) { return false; } })())
+          return {entry:record, id:"as-if-als", spans:[span(index), span(index+1)], translation:{ru:"здесь: как будто", en:"here: as if"}};
+      }
       if ((keys[index] === "als" || keys[index] === "denn" && thanDenn()) && index > 0) {
         const record = (lemmas.get(keys[index]) || []).find(e => e.type === "Konjunktion");
         for (let j = index - 1; record && j >= 0 && j >= index - 4 && clause[j] === clause[index]; j--) {

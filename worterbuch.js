@@ -81,7 +81,7 @@
       loadJson("worterbuch/german-verbs.json?v=20261111-wn-acht76-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261111-wn-einig72-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261109-wn-lange59-1"),
-      loadJson("worterbuch/german-conjunctions.json?v=20261031-wn-doch24-4"),
+      loadJson("worterbuch/german-conjunctions.json?v=20261111-wn-aber79-1"),
       loadJson("worterbuch/german-pronouns.json?v=20261107-wn-weniger56-1"),
       loadJson("worterbuch/german-adjective-adverbs.json?v=20261107-wn-meist35-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
