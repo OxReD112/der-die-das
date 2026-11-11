@@ -85,7 +85,7 @@
       loadJson("worterbuch/german-pronouns.json?v=20261107-wn-weniger56-1"),
       loadJson("worterbuch/german-adjective-adverbs.json?v=20261107-wn-meist35-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-      loadJson("worterbuch/german-expressions.json?v=20261106-wn-expr46-2").catch(() => [])
+      loadJson("worterbuch/german-expressions.json?v=20261111-wn-expr71-1").catch(() => [])
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs, expressions]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [

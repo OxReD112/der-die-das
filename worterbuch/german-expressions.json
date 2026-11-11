@@ -41684,5 +41684,256 @@
         "Im Begriff des Staates liegt viel."
       ]
     }
+  },
+  {
+    "id": "expression-206",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) einig sein",
+    "translation_ru": "быть единодушными, сходиться во мнении (über + Akk / darin)",
+    "translation_en": "to agree, to be in agreement",
+    "example_de": "Nach langer Diskussion waren sich alle einig, dass das Fest verschoben wird.",
+    "example_ru": "После долгого обсуждения все сошлись на том, что праздник переносится.",
+    "example_en": "After a long discussion everyone agreed that the party would be postponed.",
+    "notes_ru": [
+      "Wir sind uns einig. — Мы согласны друг с другом. Die Experten sind sich nicht einig, ob … — Эксперты расходятся во мнениях, …",
+      "О чём — über + Akk. или darin: Wir sind uns über den Preis einig. Возвратное в дательном (uns, euch, sich), обычно о нескольких людях. Договориться — sich einig werden."
+    ],
+    "notes_en": [
+      "Wir sind uns einig. — We agree. Die Experten sind sich nicht einig, ob … — The experts disagree on whether …",
+      "About what — über + accusative or darin: Wir sind uns über den Preis einig. The reflexive is dative (uns, euch, sich), usually about several people. To come to an agreement — sich einig werden."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/einig",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wärest",
+              "wären",
+              "wärt",
+              "wäret",
+              "sei",
+              "seist",
+              "seien",
+              "seiet",
+              "sein",
+              "gewesen"
+            ]
+          },
+          {
+            "reflexive": "dative",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": "einig",
+            "not_next": [
+              "geworden",
+              "werden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": "dative",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": "einig",
+            "not_next": [
+              "geworden",
+              "werden"
+            ]
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wärest",
+              "wären",
+              "wärt",
+              "wäret",
+              "sei",
+              "seist",
+              "seien",
+              "seiet",
+              "sein",
+              "gewesen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach langer Diskussion waren sich alle einig, dass das Fest verschoben wird.",
+        "Wir sind uns einig, dass wir umziehen.",
+        "Die Experten sind sich nicht einig, ob die Maßnahme wirkt.",
+        "Darin waren sich alle Teilnehmer der Diskussionsrunde einig.",
+        "Hier sind sich die beiden einig.",
+        "Er hofft, dass sich alle darin einig sind, dass es so weitergeht.",
+        "Es heißt, dass sich Hjulmand mit Sporting Lissabon einig ist.",
+        "Alle Beteiligten seien sich einig.",
+        "Die Rasselbande war sich einig: Das Geschenk musste größer sein.",
+        "Wir sind uns über den Preis einig.",
+        "Seid ihr euch einig?"
+      ],
+      "negative": [
+        "Er ist mit sich selbst nicht einig.",
+        "Einige sind sich nicht sicher.",
+        "Einige waren sich der Gefahr bewusst.",
+        "Sie sind sich einiger Fehler bewusst.",
+        "Das Land ist einig und stark.",
+        "Die Parteien wurden sich schnell einig.",
+        "Sie sind sich schnell einig geworden."
+      ]
+    }
+  },
+  {
+    "id": "expression-207",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) einig werden",
+    "translation_ru": "договориться, прийти к согласию",
+    "translation_en": "to come to an agreement",
+    "example_de": "Nach zwei Stunden Verhandlung wurden sich Käufer und Verkäufer endlich einig.",
+    "example_ru": "После двух часов переговоров покупатель и продавец наконец договорились.",
+    "example_en": "After two hours of negotiation the buyer and the seller finally came to an agreement.",
+    "notes_ru": [
+      "Die Parteien wurden sich schnell einig. — Стороны быстро договорились. О чём — über + Akk.: Wir sind uns über den Preis einig geworden.",
+      "Возвратное в дательном (uns, euch, sich). Быть единодушными — sich einig sein."
+    ],
+    "notes_en": [
+      "Die Parteien wurden sich schnell einig. — The parties quickly came to an agreement. About what — über + accusative: Wir sind uns über den Preis einig geworden.",
+      "The reflexive is dative (uns, euch, sich). To be in agreement — sich einig sein."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/einig",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "werde",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden",
+              "würdet",
+              "geworden"
+            ]
+          },
+          {
+            "reflexive": "dative",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": "einig"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": "dative",
+            "not_after": [
+              "mit"
+            ]
+          },
+          {
+            "form": "einig"
+          },
+          {
+            "form": [
+              "werde",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden",
+              "würdet",
+              "geworden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach zwei Stunden Verhandlung wurden sich Käufer und Verkäufer endlich einig.",
+        "Die Parteien wurden sich schnell einig.",
+        "Sie sind sich schnell einig geworden.",
+        "Wir werden uns schon einig.",
+        "Ich hoffe, dass ihr euch bald einig werdet.",
+        "Die Verhandlungspartner seien sich am Ende einig geworden.",
+        "Hier wurden sich die beiden Vereine einig: Der Spieler wechselt im Sommer.",
+        "Wir wurden uns über den Preis einig."
+      ],
+      "negative": [
+        "Er ist mit sich selbst nicht einig.",
+        "Einige sind sich nicht sicher.",
+        "Einige waren sich der Gefahr bewusst.",
+        "Sie sind sich einiger Fehler bewusst.",
+        "Das Land ist einig und stark.",
+        "Wir sind uns einig.",
+        "Alle Beteiligten seien sich einig."
+      ]
+    }
   }
 ]
