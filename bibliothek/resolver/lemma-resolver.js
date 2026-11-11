@@ -2624,7 +2624,9 @@
         // (R0, advisor 10.11: the shared commaModifierPair of the chains — eine maßvolle, schrittweise Belastung — is no boundary either)
         const gap0 = (parenMarks.has(i-1) ? rawGap.replace(/[()]/gu," ") : rawGap).replace(titleMarks.has(i-1) ? /[„“”"»«]/gu : /$^/u," ");
         const gap = commaModifierPair(sentence,tokens,i-1) ? gap0.replace(/,/u," ") : gap0;
-        const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])||coordinators.has(words[j])));
+        // (п. 77: als before a noun phrase — the shared alsNounPhrase — is no boundary of the part either: … und die Anerkennung des
+        // Russischen als zweite Amtssprache aus — the part after und runs to the particle)
+        const nextBoundary=tokens.findIndex((t,j)=>j>i&&(/[,;:.!?…]/u.test(sentence.slice(tokens[j-1].index+tokens[j-1][0].length,t.index))||subordinators.has(words[j])&&!(words[j]==='als'&&alsNounPhrase(tokens,j,-1))||coordinators.has(words[j])));
         const leftFinite=analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'));
         const rightFinite=analyses.slice(i+1,nextBoundary<0?tokens.length:nextBoundary).some(rows=>rows.some(a=>a.kind==='finite'));
         // L52 (links chat, 24.10.2026): und / oder with no verb form at all before it in the clause and the finite verb after
@@ -4578,14 +4580,14 @@
       const alsGroupNext = b => {
         const next = tokens[b+1];
         if (!next) return false;
-        // A number right after it (oder 17,70 Mark) is nominal.
-        if (/^\s*\d[\d.,]*\s*%?\s*$/u.test(sentence.slice(tokens[b].index + tokens[b][0].length, next.index))) return true;
+        // (п. 77: the noun phrase start and the number of the shared alsNounPhrase — als zweite Amtssprache, als erstes Unternehmen,
+        // als 20 Prozent; below — the adverb / adjective words of the scan, without its comparative check)
+        if (alsNounPhraseStart(tokens, b) || alsNumberAfter(tokens, b)) return true;
         if (!/^\s+$/u.test(gap(b,b+1))) return false;
         const key = norm(next[0]), entries = forms.get(key) || [];
         const particle = /^(?:ab|an|auf|aus|bei|ein|her|hin|mit|nach|vor|weg|zu|zurück|fort|los|hinauf|hinab|herauf|herab|hinunter|herunter|hinein|herein|hinaus|heraus|hinüber|herüber|herum|umher|davon|dahin|daher|zusammen|weiter|nieder|empor|entgegen|vorbei|voran|voraus|durch|um|über|unter)$/u;
         // auf und ab, hin und her are idioms of their own; nach und nach repeats one word.
         if (particle.test(key) && key !== norm(tokens[b-1]?.[0] ?? "") && (b+2 >= tokens.length || hard(b+1,b+2) || soft(b+1,b+2))) return false;
-        if (/^[A-ZÄÖÜ]/u.test(next[0]) || /^\d/u.test(next[0])) return true;
         if ((verbAnalyses.get(key) || []).some(a => ["finite","infinitive","imperative"].includes(a.kind)) || lexicalSeparated(key)) return false;
         if (prepositions.has(key) || particle.test(key) ||
           /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\p{L}*|mein\p{L}*|dein\p{L}*|sein\p{L}*|ihr\p{L}*|unser\p{L}*|eur\p{L}*|dies\p{L}*|jen\p{L}*|jed\p{L}*|all\p{L}*|viel\p{L}*|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf)$/u.test(key)) return true;
@@ -6240,16 +6242,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Zierpflanze … genutzt); not after a comparative (review 26.10: Es wurde wärmer als allgemein erwartet, teurer als geplant).
     // werdenGroup and externalPassiveGroup try their part again without als (WERDEN_BOUNDARIES_NO_ALS) and keep only such a passive.
     // (advisor 04.11, map: adverbs in -er — Märchen werden mitunter als … Mythen angesehen)
+    // (п. 77) personal / question / relative pronouns and pronoun forms in -er: never a comparative before als
+    const COMPARATIVE_LOOKALIKE = /^(?:er|wer|ihr|der|jener|dieser|einer|keiner|jeder|mancher|welcher|solcher|ihrer|unser|euer|aller|beider|anderer|derer|deren|dessen|einander)$/u;
     const NOT_COMPARATIVE_ER = /^(?:immer|wieder|aber|oder|sehr|daher|bisher|ferner|außer|hier|später|früher|mitunter|darunter|vorher|nachher|seither|nunmehr|hierüber|darüber|sonder)$/u;
+    // (п. 77, advisor 11.11: the words right after als that open a noun phrase — shared by alsNounPhrase and the separable scan,
+    // which adds its own adverb / adjective words and no comparative check: a comparison stays inside its part there — stürzte um
+    // mehr als 20 Prozent ab, läuft alles andere als normal ab)
+    function alsNounPhraseStart(tokens, i) {
+      return /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") || DETERMINER_WORD.test(norm(tokens[i+1]?.[0] ?? "")) ||
+        LOWERCASE_DECLINED_WORD.test(tokens[i+1]?.[0] ?? "") && /^\p{Lu}/u.test(tokens[i+2]?.[0] ?? "");
+    }
+    // (advisor 04.11, map: a number right after als — als 974 3032 ausgemustert, als 1. Ersatz eingesetzt; numbers are no tokens)
+    function alsNumberAfter(tokens, i) {
+      return /^\s+\d/u.test(String(tokens[i].input ?? "").slice(tokens[i].index + tokens[i][0].length, tokens[i+1]?.index ?? 0));
+    }
     function alsNounPhrase(tokens, i, verb) {
       if (norm(tokens[i]?.[0] ?? "") !== "als") return false;
       const w = norm(tokens[i-1]?.[0] ?? "");
-      if (/^(?:mehr|weniger|eher|lieber|anders|besser)$/u.test(w) || /er$/u.test(w) && /^\p{Ll}/u.test(tokens[i-1][0]) && !NOT_COMPARATIVE_ER.test(w)) return false;
-      return /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") || DETERMINER_WORD.test(norm(tokens[i+1]?.[0] ?? "")) ||
-        LOWERCASE_DECLINED_WORD.test(tokens[i+1]?.[0] ?? "") && /^\p{Lu}/u.test(tokens[i+2]?.[0] ?? "") ||
-        /^\p{Ll}/u.test(tokens[i+1]?.[0] ?? "") && i+2 === verb ||
-        // (advisor 04.11, map: a number right after als — als 974 3032 ausgemustert, als 1. Ersatz eingesetzt; numbers are no tokens)
-        /^\s+\d/u.test(String(tokens[i].input ?? "").slice(tokens[i].index + tokens[i][0].length, tokens[i+1]?.index ?? 0)) &&
+      // (п. 77, advisor 11.11: a pronoun or determiner in -er is no comparative — taucht er als Graf … auf, wer als Erster …, ihr als
+      // Gäste, einer als Zeuge: the same shape check as the look-back below)
+      if (/^(?:mehr|weniger|eher|lieber|anders|besser)$/u.test(w) || /er$/u.test(w) && /^\p{Ll}/u.test(tokens[i-1][0]) && !NOT_COMPARATIVE_ER.test(w) &&
+        !COMPARATIVE_LOOKALIKE.test(w) && !DETERMINER_WORD.test(w)) return false;
+      return alsNounPhraseStart(tokens, i) || /^\p{Ll}/u.test(tokens[i+1]?.[0] ?? "") && i+2 === verb ||
+        alsNumberAfter(tokens, i) &&
         // (review 04.11: nor a comparative up to three words before — schlimmer noch als 2015 befürchtet, reicher sogar als 1990 erwartet)
         ![i-2,i-3,i-4].some(k => { const x = norm(tokens[k]?.[0] ?? "");
           return k >= 0 && /^\p{Ll}/u.test(tokens[k][0]) && (/^(?:mehr|weniger|eher|lieber|anders|besser)$/u.test(x) || /er$/u.test(x) && x.length >= 5 && !NOT_COMPARATIVE_ER.test(x) &&
