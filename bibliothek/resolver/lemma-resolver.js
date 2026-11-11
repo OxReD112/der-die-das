@@ -2538,6 +2538,12 @@
       if (i < 1 || !tokens[i] || !/^\p{Ll}/u.test(tokens[i][0]) || !/^(?:und|oder|sowie)$/u.test(norm(tokens[i-1][0]))) return false;
       return /^\s*[-‐‑]\s*$/u.test(String(sentence).slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index));
     }
+    // (advisor 11.11, E7) the first part cut off by a hyphen right before und / oder / sowie / bzw. (sang- und klanglos, Wohn- und
+    // Geschäftshaus) is no verb of its part either — the separable scan does not take it as the host of a particle.
+    function ellipsisFirstPart(sentence, tokens, i) {
+      if (!tokens[i] || !tokens[i+1] || !/^(?:und|oder|sowie|bzw)$/u.test(norm(tokens[i+1][0]))) return false;
+      return /^[-‐‑]\s+$/u.test(String(sentence).slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index));
+    }
     async function sentenceVerbAnalyses(sentence,tokens,words,consumer) {
       const analyses = await Promise.all(tokens.map(t=>tokenAnalyses(t[0], undefined, consumer)));
       for(let i=0;i<tokens.length;i++) if(ellipsisSecondPart(sentence,tokens,i)) analyses[i]=[];
@@ -4620,7 +4626,8 @@
       const secondFiniteHomograph = (i, from, to) => /^\p{Ll}/u.test(tokens[i][0]) && nonVerbOwn(i) &&
         tokens.some((t,k) => k >= from && k <= to && k !== i && clearFinite(k));
       const competingVerb = (i, head, crossedComma = false) => {
-        if (context.separableNominalOffsets?.has(tokens[i].index)) return false;
+        // (advisor 11.11, E7: the stub before und / oder is no second verb of the part — stiegen sang- und klanglos ab → absteigen)
+        if (context.separableNominalOffsets?.has(tokens[i].index) || ellipsisFirstPart(sentence,tokens,i)) return false;
         const entries = forms.get(norm(tokens[i][0])) || [];
         // (one finite verb per part: not a second verb beside a clear finite head)
         if (head !== undefined && !crossedComma && /^\p{Ll}/u.test(tokens[i][0]) && nonVerbOwn(i) && clearFinite(head)) return false;
@@ -4873,6 +4880,8 @@
         // (Mach's gut!, Steh fest!, Mach es kurz — machen, stehen; adverbs stay: Mach weiter!, Mach das Fenster zu!).
         // (train 27.10: the opening is the start of the text, a punctuation mark or a dash – —, not a hyphen — 11 - mal … an, Villa - Romana
         // - Preis und …; a lowercase spelling that is also an own word of another kind — mal, schnell — is that word)
+        // (advisor 11.11, E7: sang- und klanglos ab — the stub before und / oder hosts no particle)
+        if (ellipsisFirstPart(sentence,tokens,i)) continue;
         const gapBefore = i > 0 ? sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index) : "";
         const ownOther = /^\p{Ll}/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type));
         // (advisor 07.11: also after one opening adverb — Nun komm nur mit, Nun hör mal zu, So gib ihn her, Nun zieh mich … hinauf)
@@ -7381,6 +7390,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // lights the whole group («Plusquamperfekt mit sehen und schütteln»); a tap on a participle keeps its own pair. The second participle
     // closes the part, and between und / oder and it there is no finite verb (wurde gebaut und die Kinder spielten — no extension).
     const AUX_SECOND_GROUPS = new Set(["perfect-group","werden-passive"]);
+    // (п. 16, advisor 11.11): all tagged senses of the verb in the external English dictionary are transitive (Kaikki tags, column
+    // transitivity); untagged, mixed or both — false
+    const transitiveOnlyCache = new Map();
+    async function transitiveOnly(lemma) {
+      const key = norm(String(lemma || ""));
+      if (!key || !fallback.lookupFacts) return false;
+      if (!transitiveOnlyCache.has(key)) transitiveOnlyCache.set(key,(async () => {
+        try { const tags = new Set(((await fallback.lookupFacts(key)).groups || []).filter(g => g.pos === "verb").flatMap(g => g.transitivity || []));
+          return tags.size === 1 && tags.has("transitive"); } catch (_) { return false; } })());
+      return transitiveOnlyCache.get(key);
+    }
     async function modalSecondExtend(group, context, candidates) {
       const aux = AUX_SECOND_GROUPS.has(group?.id);
       if (group?.id !== "modal-group" && !aux || (group.spans || []).length !== 2 || !Number.isInteger(context?.tokenOffset)) return group;
@@ -7438,7 +7458,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           return !readings.length || readings.some(r => r.unknown || r.number === "plural"); };
         if (nounClause && await mayBePlural()) Object.defineProperty(nounClause,'decisive',{value:true,enumerable:false}); }
       const second = await coordinatedGroup(tokens[p2][0],{...context,tokenOffset:tokens[p2].index},candidates);
-      if (nounClause && (aux || nounClause.decisive || !(second?.id === group.id && (second.spans || []).some(span => span.start === tokens[h].index)))) return nounClause;
+      // (п. 16, advisor 11.11, Kaikki tags п. 69): a second infinitive whose tagged senses are all transitive takes the plural group
+      // after und as its object — und Retoure-Pakete abgeben, und Schwierigkeiten bereiten; no tag, mixed or both — as before
+      // (und die Kinder schlafen); a reflexive second verb never
+      const decisive = !!nounClause?.decisive && !(!aux && second?.lemma && !/^sich\s/u.test(String(second.lemma)) && await transitiveOnly(second.lemma));
+      if (nounClause && (aux || decisive || !(second?.id === group.id && (second.spans || []).some(span => span.start === tokens[h].index)))) return nounClause;
       if (second?.id !== group.id || !(second.spans || []).some(span => span.start === tokens[h].index) ||
           !(second.spans || []).some(span => span.start === tokens[p2].index) || !second.lemma || norm(second.lemma) === norm(group.lemma || "")) return group;
       // (review 02.11: an undecided twin — gehört «hören / gehören», whose own tap shows no link — is not named by the auxiliary)
