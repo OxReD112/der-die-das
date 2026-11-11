@@ -6240,6 +6240,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (haben sich Zeit genommen um herauszufinden) or a zu-infinitive (hatte geplant heute dort Mitglied zu werden) — does not move
     // the end of the group: the participle / infinitive before it is the tail. Returns that index, or -1. Only when the last word
     // is no verb form itself and the words after the tail are nominal / prepositional / adverbs (no other verb but the zu-infinitive).
+    // 11.11.2026 (expressions chat; advisor 11.11, EXPRESSIONS_TODO 35 — one function for the verb chains and expressionGrammar):
+    // zu + a lower-case word is the zu-infinitive (zu stehlen, fertig zu werden), not a finite form.
+    function zuInfinitiveTokenAt(tokens, i) {
+      return i > 0 && norm(tokens[i-1]?.[0] ?? "") === "zu" && /^\p{Ll}/u.test(tokens[i]?.[0] ?? "");
+    }
+    // The finite werden of a Futur I / werden group and its infinitive: werden is no zu-infinitive (fertig zu werden), and the
+    // infinitive is another word than that werden (wird … fertig werden; not «wir werden … fertig» — the werden itself).
+    function werdenGroupPair(tokens, werdenIndex, infinitiveIndex) {
+      return werdenIndex !== infinitiveIndex && !zuInfinitiveTokenAt(tokens, werdenIndex);
+    }
     function nachfeldTail(tokens, low, tail, verbal, anyZu = false) {
       if (verbal(tail)) return -1;
       for (let k = tail-1; k > low; k--) {
@@ -6252,7 +6262,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // statt … zu, or a zu-infinitive (bare — only when the verb's card takes zu + Infinitiv, or anyZu).
     function nachfeldRestFits(tokens, from, tail, verbIndex, anyZu = false) {
       if (from > tail) return false;
-      const zuEnd = norm(tokens[tail-1]?.[0] ?? "") === "zu" && /^\p{Ll}/u.test(tokens[tail][0]) ||
+      const zuEnd = zuInfinitiveTokenAt(tokens, tail) ||
         /^\p{Ll}/u.test(tokens[tail][0]) && zuForms.has(norm(tokens[tail][0]));
       const plainWord = t => { const w = norm(t[0]);
         if (/^\p{Lu}/u.test(t[0]) || prepositions.has(w) || DETERMINER_WORD.test(w)) return true;
@@ -6307,7 +6317,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const tenses = (e,i) => { const t = ["Präsens","Präteritum","Konjunktiv II"].filter(t=>finite(e,i,t)); return t.length || !konj1SeinWorden(e,i) ? t : ["Konjunktiv I"]; };
       const predicate = i => matches(i).filter(e=>e.type === "Adjektiv" || e.type === "Nomen" && /^[A-ZÄÖÜ]/u.test(tokens[i][0]));
       // G11: a zu-infinitive (zu stehlen, umzubringen) belongs to the verb it depends on — no competing predicate of werden.
-      const zuInf = i => i > 0 && norm(tokens[i-1][0]) === "zu" && /^\p{Ll}/u.test(tokens[i][0]) ||
+      const zuInf = i => zuInfinitiveTokenAt(tokens, i) ||
         verbs(i).some(e => { const p = norm(e.separable_prefix || ""); return p && norm(tokens[i][0]) === p + "zu" + norm(e.word).slice(p.length); });
       // C18 (18.10.2026): without a reflexive pronoun in the clause the plain card of a verb with a reflexive twin
       // is the one (wurde an ihn gerichtet, sollte gerichtet werden: richten, not sich richten); before, the two
@@ -6444,6 +6454,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (futurePassiveAux.has(head.i)) continue;
         let tail = head.i === end ? end-1 : end;
         if (tail <= start || tail === head.i) continue;
+        if (head.e.word === "werden" && !werdenGroupPair(tokens, head.i, tail)) continue;
         // (item Б: the participle before a prepositional phrase / zu-infinitive after it; review 04.11: not a participle that is
         // also an own adjective — wurde gereizt wegen der Hitze, wurde ausgelassen vor Freude)
         if (head.e.word === "werden" && head.i < tail) { const k = nachfeldTail(tokens, head.i, tail, i => participles(i).length > 0 && !adjectivalForm(tokens[i][0]) && !becomeAdjectives.has(norm(tokens[i][0])), true); if (k > 0) tail = k; }
@@ -15945,8 +15956,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // The part of the sentence around the expression (up to punctuation): the auxiliary, the participle or werden may stand
       // outside the parts (hat sich auf den Weg gemacht; hat damit nichts zu tun gehabt).
       const clause = [];
+      let clauseTokens = [];
       if (sentence && spans?.length) {
-        const tokens = sharedTokens(sentence,'expressionGrammar'), first = Math.min(...spans.map(x => x.start)), lastAt = Math.max(...spans.map(x => x.end));
+        const tokens = clauseTokens = sharedTokens(sentence,'expressionGrammar'), first = Math.min(...spans.map(x => x.start)), lastAt = Math.max(...spans.map(x => x.end));
         const gap = (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
         let from = tokens.findIndex(t => t.index >= first), to = tokens.findIndex(t => t.index >= lastAt); if (to < 0) to = tokens.length;
         if (from >= 0) {
@@ -15965,6 +15977,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
       }
       let tense = null;
+      // 11.11.2026 (expressions chat; advisor 11.11, EXPRESSIONS_TODO 35): the werden of Futur I by the same sign as in the verb
+      // chains (werdenGroupPair) — not a zu-infinitive (mit den Aufgaben fertig zu werden, sich einig zu werden — no tense), and the
+      // infinitive of Futur is another word than that werden (wird … fertig werden; wir werden … fertig — Präsens).
+      const futureWerden = t => t.rows.some(a => a.kind === "finite" && a.base === "werden" && a.tense === "Präsens");
       if (headVerb) {
         const participle = clause.find(t => t.rows.some(a => a.kind === "participle" && ofVerb(a)));
         if (participle) {
@@ -15982,8 +15998,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const own = participle.rows.filter(a => a.kind === "participle" && ofVerb(a));
           if (auxBases.size === 1 && auxBases.has("sein") && own.length && own.every(a => a.entry &&
             String(a.entry.auxiliary || "").split(/\s*\/\s*|\s+/u).map(norm).filter(Boolean).every(x => x === "haben") && norm(a.entry.auxiliary || "") !== "")) tense = null;
-        } else if (clause.some(t => t.rows.some(a => a.kind === "finite" && a.base === "werden" && a.tense === "Präsens")) &&
-          partRows.some(r => r.some(a => a.kind === "infinitive" && ofVerb(a))) &&
+        } else if (clause.some(t => futureWerden(t) && partRows.some((r, k) => r.some(a => a.kind === "infinitive" && ofVerb(a)) &&
+            werdenGroupPair(clauseTokens, t.i, clauseTokens.findIndex(x => x.index === spans[k].start)))) &&
           !clause.some(t => t.rows.some(a => a.kind === "finite" && modalLemmas.has(a.base)))) {
           tense = "Futur I";   // er wird sich auf den Weg machen
         } else {
