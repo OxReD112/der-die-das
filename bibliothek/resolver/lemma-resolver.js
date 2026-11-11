@@ -16309,6 +16309,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 08.11: auseinander-, dahin- — transparent particles too; dahin with both meanings, «away» first — as in its joined verbs)
       ["auseinander","в разные стороны","apart"],["dahin","прочь, мимо; туда","away, along; there"],
       // (advisor 04.11 / 07.11, G47 extension: mit-, weiter-, zusammen-, vorbei- — transparent particles; los- stays outside)
+      // (advisor 11.11, G47 (а) tail: nieder-, los- — joined forms no dictionary knows: niedergegangen, losgeschickt, losgesaust;
+      // a full verb in a dictionary keeps its card — losgehen «начинаться»; sein / haben / werden are never a rest — losgewesen)
+      ["nieder","вниз","down"],["los","прочь; с места","off, away"],
       ["mit","вместе (с кем-либо)","along, with (others)"],["weiter","дальше; продолжать","further, on"],["zusammen","вместе; в одно (целое)","together"],["vorbei","мимо","past, by"],["entlang","вдоль","along"],["herbei","сюда (к говорящему)","here, over (towards the speaker)"],["heran","ближе, вплотную (к)","up to, closer"],["hervor","наружу (из-за, из-под), вперёд","out, forth"],["hinweg","прочь; поверх, через","away; over"],["hindurch","сквозь, через","through"],["hinzu","к (чему-то); вдобавок","to (something); in addition"],["hinterher","следом, вслед; потом","after, behind; afterwards"],["her","сюда; (hinter … her) следом; (vor … her) впереди","here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead"],["hin","туда","there, away from the speaker"]]
       .sort((a,b) => b[0].length - a[0].length);
     // The perfect / zu chain of the simple verb was found in the sentence with the particle cut off: its spans move back.
@@ -16367,7 +16370,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // its part before a punctuation mark — but are not in this class: the rules that let a G47 particle close a verb before a
     // preposition or join an old separate spelling stay without them — zusammen mit, gingen zusammen durch, weiter entfernt)
     const G47_TRANSPARENT = new Set(["mit","weiter","zusammen","vorbei"]);
-    function g47Particle(p) { return !SPLIT_SKIP.has(p) && !G47_TRANSPARENT.has(p) && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
+    // (los — joined forms and a particle closing its part only, advisor 11.11; not the class that lets it close a verb across the
+    // part — registry L32: los machen)
+    function g47Particle(p) { return !SPLIT_SKIP.has(p) && !G47_TRANSPARENT.has(p) && p !== "los" && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
     async function separatedDirectional(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
@@ -16512,7 +16517,42 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         try { other = await directionalParticle(word, context, {...result, candidates:[], selected:null, preferred:null, status:"unresolved", unresolvedMeanings:[]}); } catch (_) { other = null; }
         return (other?.candidates || []).length ? other : result;
       }
-      if (!result || (result.candidates || []).length || result.selected || !/^\p{Ll}/u.test(String(word)) || !Number.isInteger(context?.tokenOffset)) return result;
+      if (!result || (result.candidates || []).length || result.selected || !Number.isInteger(context?.tokenOffset)) return result;
+      // G47 (а) tail (advisor 11.11, claude/G47A_RECOUNT_2026-11-11_RU.md): (5) the first word of its sentence is read in lower case
+      // (Mitgeliefert werden …); (1) a joined participle with an adjective ending (die herabgefallenen Nüsse, mit zusammengesteckten
+      // Köpfen) is read without the ending, as an attribute: «Partizip II», no verb chain.
+      if (!force && !extraRow) {
+        const raw = String(word), text = String(context.sentence || ""), before = text.slice(0, context.tokenOffset);
+        if (/^\p{Lu}\p{Ll}+$/u.test(raw) && /^[\s»«„“"'‚‘’–—-]*$|[.!?:]\s*[»«„“"'‚‘’–—-]*\s*$/u.test(before) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const lower = raw.charAt(0).toLowerCase() + raw.slice(1);
+          if (DIRECTIONAL.some(([p]) => lower.startsWith(p) && lower.length >= p.length + 3)) {
+            let r = null;
+            try { r = await directionalParticle(lower, {...context, sentence:before + lower + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
+            return (r?.candidates || []).length ? r : result;
+          }
+          return result;
+        }
+        const ending = context.noAttributeEnding ? null : /^(\p{Ll}+ge\p{Ll}+?(?:t|en))(e|en|er|em|es)$/u.exec(raw);
+        // (the form as it stands first: hinübergeglitten, zusammengeschnitten end in -en themselves)
+        if (ending) {
+          let plain = null;
+          try { plain = await directionalParticle(raw, {...context, noAttributeEnding:true}, result); } catch (_) { plain = null; }
+          if ((plain?.candidates || []).length) return plain;
+        }
+        if (ending && DIRECTIONAL.some(([p]) => raw.startsWith(p + "ge") && raw.length >= p.length + 5) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const stem = ending[1];
+          let r = null;
+          try { r = await directionalParticle(stem, {...context, sentence:before + stem + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
+          if (!(r?.candidates || []).length || !(r.candidates || []).every(c => canonicalPos(c.pos) === "Verb")) return result;
+          const attribute = c => { const v = {...c, formFeatures:{tense:"Partizip II"}}; delete v.construction;
+            if (v.directionalSimple) v.directionalSimple = attribute(v.directionalSimple);
+            return v; };
+          const candidates = r.candidates.map(attribute);
+          return {...r, candidates, selected:r.selected ? candidates[r.candidates.indexOf(r.selected)] : null,
+            preferred:r.preferred ? candidates[r.candidates.indexOf(r.preferred)] : null};
+        }
+      }
+      if (!/^\p{Ll}/u.test(String(word))) return result;
       const w = String(word), sentence = String(context.sentence || "");
       if (w !== norm(w) || sentence.slice(context.tokenOffset, context.tokenOffset + w.length) !== w) return result;
       const row = (extraRow && w.startsWith(extraRow[0]) ? extraRow : null) || DIRECTIONAL.find(([p]) => w.startsWith(p) && w.length >= p.length + 3);
@@ -17898,7 +17938,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (let i = 0; i + 1 < words.length; i++) {
         const P = words[i][0], V = words[i+1][0], p = norm(P);
         if (!/^\p{Ll}/u.test(P) || !/^\p{Ll}/u.test(V) || SPLIT_SKIP.has(p)) continue;
-        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p)) continue;
+        // (los stays outside the old separate spelling — registry L32: los machen; advisor 11.11 took los into the joined forms)
+        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p) || p === "los") continue;
         if (!/^[ \t]+$/u.test(sentence.slice(words[i].index + P.length, words[i+1].index))) continue;
         const after = sentence.slice(words[i+1].index + V.length);
         if (!/^\s*(?:[,;:.!?…()"„“”»«–—]|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(after)) continue;
