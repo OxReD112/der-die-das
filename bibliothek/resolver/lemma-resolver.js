@@ -3030,7 +3030,17 @@
           // G87 (b) (28.10.2026): one host word read as several verbs of one person — the simple verb and separable ones whose particle is
           // not there (ging — gehen, ausgehen, weggehen …) — is one controller: its person is all the zu-infinitive needs (um sich … anzusehen)
           if(host.length>1&&new Set(host.map(h=>h.index)).size===1&&new Set(host.map(h=>h.analysis.person)).size===1){const plain=host.filter(h=>!h.analysis.prefix);host=[plain[0]||host[0]];multiHost=true;}
-          if(host.length!==1)return null;controller=host[0].index;control=host[0].analysis;tense='zu-Infinitiv';
+          // (R0 (3), advisor 11.11: sich opening the zu-group — right after the comma that opens it or after um / ohne / statt — belongs
+          // to the zu-infinitive without a controller: um sich zu erholen, mussten lernen, sich … zu gewöhnen, verbieten ihren
+          // Mitarbeitern, sich … zu organisieren. Only sich: mich / dich / uns / euch still need the controller's person. A sich of the
+          // host before the group — Er weigerte sich, das zu tun — stands in the host's part, not in this one.)
+          if(host.length!==1){
+            let s=-1;for(let i=clause.start;i<v;i++)if(words[i]==='sich'){s=i;break;}
+            const opens=s>=0&&(s===clause.start&&clause.relation==='comma'||s>0&&ZU_INFINITIVE_OPENERS.includes(words[s-1])&&(s-1===clause.start||clause.relation!=='comma'));
+            if(!opens)return null;
+            return {controller:v,control:{...a,person:'er/sie/es'},subjectClause:clause,tense:'zu-Infinitiv',zuIndex:words[v-1]==='zu'?v-1:null,uncontrolled:true};
+          }
+          controller=host[0].index;control=host[0].analysis;tense='zu-Infinitiv';
           if(words[v-1]==='zu')zuIndex=v-1;
           if(multiHost)return {controller,control,subjectClause,tense,zuIndex,multiHost:true};
         } else return null;
@@ -3297,8 +3307,13 @@
               !(analyses[i].some(r=>r.kind==='finite')&&Array.from({length:i-clause.start},(_,k)=>clause.start+k).some(j=>reflexivePronouns.has(words[j])))&&
               Array.from({length:v-clause.start},(_,k)=>clause.start+k).every(j=>j===i||!analyses[j].some(r=>r.kind==='finite'&&/^\p{Ll}/u.test(tokens[j][0])&&!analyses[j].some(x=>x.kind==='participle')));
             const describingParticiple=i=>a.kind==='finite'&&(i>v||vorfeldParticiple(i))&&!helperInClause&&analyses[i].some(r=>r.kind==='participle')&&!analyses[i].some(r=>r.kind==='infinitive');
+            // (R7, advisor 11.11: as in the chains — middleModifier, «a participle right before the closing verb» — a bare participle right
+            // before the group's own participle / infinitive describes the state: Ich habe mich ziemlich abgezockt gefühlt, haben uns …
+            // entnervt entschlossen; not after und / oder — two verbs —, not a declined attribute)
+            const closingModifier=i=>['participle','infinitive'].includes(a.kind)&&i===v-1&&i>pronoun&&analyses[i].some(r=>r.kind==='participle')&&
+              !/e[mnrs]?$/u.test(words[i])&&!['und','oder','sowie'].includes(words[i-1]);
             const competingIndices=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>
-              !allowed.has(i)&&!ownOtherWord(i)&&!predicativeParticiple(i)&&!describingParticiple(i)&&!nounAt(i)&&!modifierOpening(i)&&!attributiveBefore(i)&&(
+              !allowed.has(i)&&!ownOtherWord(i)&&!predicativeParticiple(i)&&!describingParticiple(i)&&!closingModifier(i)&&!nounAt(i)&&!modifierOpening(i)&&!attributiveBefore(i)&&(
                 (reflexiveForms.get(words[i])||[]).some(row=>['Infinitiv','Partizip II'].includes(row.tense))&&(words[i-1]==='zu'||i===clause.end)||
                 singleSich&&analyses[i].some(r=>r.kind==='finite'&&THIRD_PERSONS.includes(r.person))&&!(forms.get(words[i])||[]).some(e=>['Nomen','Adjektiv','Adverb','Pronomen'].includes(e.type))||
                 analyses[i].some(r=>
@@ -6960,7 +6975,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if((forms.get(key)||[]).some(e=>e.type!=='Verb')||(modifiers.get(key)||[]).length)continue;
         let whole=[];try{whole=await lassenLexicalLookup(t);}catch(_){continue;}
         if(whole.some(g=>!g.kind&&!g.unresolved&&norm(g.word)===key&&g.meanings?.length&&canonicalPos(g.pos)!=='Verb'))continue;
-        if(rest.length>2&&(forms.get(rest)||[]).some(e=>e.type==='Verb'&&norm(e.word)===rest)){extraInfinitives.set(i,[{kind:'infinitive',base:key,detached:false}]);continue;}
+        if(particleInfinitiveOf(t)){extraInfinitives.set(i,[{kind:'infinitive',base:key,detached:false}]);continue;}
         const externalVerb=async w=>{let groups=[];try{groups=w===key?whole:await lassenLexicalLookup(w);}catch(_){}
           return groups.some(g=>!g.kind&&!g.unresolved&&canonicalPos(g.pos)==='Verb'&&norm(g.word)===w&&g.meanings?.length);};
         // (zusammenschrecken: no card of its own; the particle + an external verb's infinitive)
@@ -7383,6 +7398,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let p2 = u+1;
       while (p2+1 < tokens.length && !/[,;:.!?…»«"“”()–—]/u.test(gapText(p2,p2+1)) && !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[p2+1][0]))) p2++;
       if (p2 === u+1 && !/^\p{Ll}/u.test(tokens[p2][0])) return group;
+      let nounClause = null;
       // (review 30.10: a separable particle written apart right before either infinitive — teil nehmen, mit ziehen — the second verb is
       // the particle verb, which the pair does not name: no extension)
       const particleAt = i => /^\p{Ll}/u.test(tokens[i][0]) && !adjectivalForm(tokens[i][0]) && (separableParticles.has(norm(tokens[i][0])) || new RegExp(`^(?:${SEPARABLE_PARTICIPLE_PARTICLES}|teil|herbei|hinüber|herüber|hervor|vorbei|zurecht)$`,"u").test(norm(tokens[i][0])));
@@ -7410,8 +7426,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           !nounCards.some(e => String(e.plural || "").split(/\s*,\s*/u).map(norm).includes(nounKey));
         // (a bare noun / name without a determiner and without an own card — und Maria tanzen — stays unknown: no extension, but the
         // pair of the tapped second word stays as it was)
-        if (finitePlural && nounPhrase && !singularByCard) return {clause:MODAL_SECOND_NOMINATIVE_START.test(first) || nounCards.length > 0 ? "strong" : "weak"}; }
+        // (п. 16, advisor 11.11: one decision for both taps — when the second infinitive's own tap proves the same modal pair, the modal
+        // names both: wollte … gehen und Futter holen, kann … kaufen und … Pakete abgeben; the clause sign only where it does not, the decision below)
+        if (finitePlural && nounPhrase && !singularByCard) nounClause = {clause:MODAL_SECOND_NOMINATIVE_START.test(first) || nounCards.length > 0 ? "strong" : "weak"};
+        // (the noun's own number decides: a noun that can be plural — die Kinder, Leute, Pakete — may be the subject of the plural form, so
+        // the clause sign stays for both taps; a noun only singular by the dictionary — Futter, ihre Geistersprache, Maria — cannot, as
+        // und die Frau tanzen above)
+        const mayBePlural = async () => { if (!noun) return true;
+          const morph = await tokenMorphology(noun,{discoverModifiers:false},'modalSecondInfinitive');
+          const readings = morph.errors.length ? [] : nounReadings(noun[0],morph);
+          return !readings.length || readings.some(r => r.unknown || r.number === "plural"); };
+        if (nounClause && await mayBePlural()) Object.defineProperty(nounClause,'decisive',{value:true,enumerable:false}); }
       const second = await coordinatedGroup(tokens[p2][0],{...context,tokenOffset:tokens[p2].index},candidates);
+      if (nounClause && (aux || nounClause.decisive || !(second?.id === group.id && (second.spans || []).some(span => span.start === tokens[h].index)))) return nounClause;
       if (second?.id !== group.id || !(second.spans || []).some(span => span.start === tokens[h].index) ||
           !(second.spans || []).some(span => span.start === tokens[p2].index) || !second.lemma || norm(second.lemma) === norm(group.lemma || "")) return group;
       // (review 02.11: an undecided twin — gehört «hören / gehören», whose own tap shows no link — is not named by the auxiliary)
@@ -7447,6 +7474,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const joined = await modalSecondExtend(first,firstContext,candidates);
       if (joined?.clause) return group;
       if (!joined || joined === first || !(joined.spans || []).some(span => span.start === tokens[t].index)) return group;
+      // (п. 16: the tapped word as written — a split part (holen of herbeiholen) keeps its own pair)
+      if (norm(String(group.lemma || "")).replace(/^sich\s+/u,"") !== norm(tokens[t][0])) return group;
       const copy = {...group,spans:joined.spans,roles:joined.roles,coordinatedLemma:joined.coordinatedLemma,coordinated:joined.coordinated};
       if (group.lexical) Object.defineProperty(copy,'lexical',{value:group.lexical,enumerable:false});
       return copy;
@@ -8200,6 +8229,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const g = verbGroupIn(tokens[at+3][0], {...context,tokenOffset:tokens[at+3].index,coordinatedFirst:at});
       return g && ["modal-group","perfect-group"].includes(g.id) && g.spans.some(sp => sp.start === tokens[at].index) ? g : null;
     }
+    // (links chat п. 16, advisor 11.11: one function for the lassen chain and the modal group — particle + an own verb's infinitive
+    // without a card of its own is that verb's infinitive: fortspringen, hineinspringen, hinstecken, herumtanzen; not a word of another
+    // kind, own or a modifier — wohlbehalten, zuweilen)
+    function particleInfinitiveOf(token) {
+      const key = norm(token);
+      if (token !== key || !REGULAR_INFINITIVE_SHAPE.test(key)) return false;
+      const prefix = PARTICLE_INFINITIVE_PREFIX.exec(key)?.[0], rest = prefix ? key.slice(prefix.length) : "";
+      if ((forms.get(key) || []).length || (modifiers.get(key) || []).length) return false;
+      return rest.length > 2 && (forms.get(rest) || []).some(e => e.type === "Verb" && norm(e.word) === rest);
+    }
     function verbGroupIn(word, context, gap = clauseGaps.plain) {
       const clause = verbalClause(word,context,'verbGroup',clauseBoundaries.verbGroup,gap);
       if (!clause) return null;
@@ -8219,6 +8258,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const at = i - (a.length - k); return at >= 0 && norm(tokens[at][0]) === x; }); };
       // (an own card of several words in place wins over the reflexive card of its last word: das dich zugrunde richten soll)
       const infinitives = i => { const rows = withReflexive(matches(i),reflexiveRows(i,"Infinitiv")).filter(e => (phraseFirst(e) ? base(e).split(/\s+/u).at(-1) : base(e)) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
+        // (п. 16: particle + an own verb's infinitive without a card — wollte er fortspringen — as for lassen)
+        if (!rows.length && i > 0 && particleInfinitiveOf(tokens[i][0])) return [{word:norm(tokens[i][0]),type:"Verb",particleInfinitive:true}];
         return rows.some(e => phraseFirst(e)) ? rows.filter(e => phraseFirst(e)) : rows; };
       const modals = MODAL_VERB_SET;
       // C14 step 1 (17.10.2026): a modal also heads the group in Konjunktiv II (könnte … töten, müsste … verderben);
@@ -8482,7 +8523,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             ...(head.e.word === "sollen" && ["soll","sollen"].includes(norm(tokens[head.i][0])) && clause.finiteIn(head.e,head.i,"Präsens") &&
               !indices.some(i => ["ich","wir","du","ihr","bis","spätestens"].includes(norm(tokens[i][0]))) ? {hearsay:true} : {})} : {}),
           ...(passive ? {passive:true} : {}),
-          ...(coordinatedNames && plain ? {coordinatedLemma:`${coordinatedNames.first} ${coordinatedNames.joiner} ${plain.word}`,coordinated:plain.word} : {}),
+          // (п. 16: each infinitive of a modal group as written — laufen und herbeiholen, not … holen of the split word; an auxiliary group
+          // names infinitives — Plusquamperfekt mit empfangen und lesen)
+          ...(coordinatedNames && plain ? (w => ({coordinatedLemma:`${coordinatedNames.first} ${coordinatedNames.joiner} ${w}`,coordinated:w}))(
+            id === "modal-group" && norm(tokens[tail]?.[0] ?? "").endsWith(norm(plain.word)) && /^\p{Ll}/u.test(tokens[tail]?.[0] ?? "") ? norm(tokens[tail][0]) : plain.word) : {}),
           // L13 (reference F12-G3b): wäre … gewesen — the clicked wäre is the auxiliary, though the participle is sein too.
           ...(id === "perfect-group" && label === "Konjunktiv II" && selected === head.i && context.coordinatedFirst == null ? {clickedRole:"conditionalPast"} : {}),
           // G49 (advisor 02.11): the same for the indicative — hatte … gehabt, war … gewesen, habe Angst gehabt: the clicked

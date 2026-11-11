@@ -336,7 +336,11 @@
   function constructionMarks(candidate, confirmed = false, language = 'en') {
     const k = candidate.construction;
     if (!k || !confirmed && (k.confidence === 'tentative' || candidate.reflexiveUnconfirmed)) return {marks:[], role:null, spans:null};
-    const own = verbBase(candidate.lemma), main = verbBase(k.lemma || ''), isMain = own === main, name = k.coordinatedLemma || k.lemma || '';
+    const own = verbBase(candidate.lemma), main = verbBase(k.lemma || ''), isMain = own === main;
+    // (links chat п. 16: a split word — herbeiholen = herbei + holen — is resolved on its part; the coordinated name keeps the word as
+    // written: «Modal mit laufen und herbeiholen», not … holen)
+    const tail = verbBase(k.coordinated || ''), name = k.coordinatedLemma && tail && own !== tail && own.endsWith(tail) && String(k.coordinatedLemma).endsWith(' ' + k.coordinated)
+      ? String(k.coordinatedLemma).slice(0, -String(k.coordinated).length) + own : k.coordinatedLemma || k.lemma || '';
     const spans = k.spans || null;
     switch (k.id) {
       case 'separable-verb': return {marks:[], role:null, spans};

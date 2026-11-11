@@ -30547,11 +30547,11 @@
   {
     "id": "verb-652",
     "infinitive": "sich stoßen",
-    "translation_ru": "удариться; ушибить (руку, голову)",
-    "translation_en": "to bump oneself, to knock oneself; to bang, to hurt (one's hand, head)",
+    "translation_ru": "удариться, ушибить (руку, голову); оттолкнуться (от чего-либо)",
+    "translation_en": "to bump oneself, to hurt (one's hand, head); to push off (from)",
     "auxiliary": "haben",
-    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки.",
-    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards.",
+    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — von / aus + Dativ: Der Skifahrer stieß sich aus dem Starthaus. С частицей ab — sich abstoßen (Er stieß sich vom Beckenrand ab).",
+    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — von / aus + dative: Der Skifahrer stieß sich aus dem Starthaus. With the particle ab — sich abstoßen (Er stieß sich vom Beckenrand ab).",
     "example_de": "Pass auf, dass du dich nicht am Kopf stößt!",
     "example_cloze": "Pass auf, dass du dich nicht am Kopf {{c1::stößt}}!",
     "example_ru": "Смотри не ударься головой!",
@@ -30588,6 +30588,11 @@
         "pattern": "an + Dativ",
         "note_ru": "удариться обо что-либо или чем-либо",
         "note_en": "to bump (a body part) / against something"
+      },
+      {
+        "pattern": "von + Dativ",
+        "note_ru": "оттолкнуться от чего-либо",
+        "note_en": "to push off from something"
       }
     ],
     "lookup_forms": {
