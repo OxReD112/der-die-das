@@ -9129,15 +9129,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function attributeFrameWideWalk(tokens, index, sentence, state) {
       const word = norm(tokens[index][0]), ending = teEnding(word);
       let pending = false;
-      for (let k = index-1; k >= 0 && index-k <= 10; k--) {
+      // (advisor 11.11, item 3 remainder: brackets and quoted titles by the shared parenthesisSpans / quotedTitles — a bracket or a
+      // quoted title inside the frame is passed — etwa 55 Parsec (ca. 180 Lichtjahre) entfernten, von "steueroptimierten
+      // Anlagestrategien" spezialisierte —; the form as the last word of a bracket looks beyond its opening — mit den beiden (als
+      // "klassisch" betrachteten) Sprachen; a comma of one noun phrase by the shared commaModifierPair)
+      const parens = parenthesisSpans(sentence, tokens), titles = quotedTitles(sentence, tokens, clauseGaps.plain);
+      const closing = new Map([...parens].map(([x,y]) => [y,x])), titleEnd = new Map([...titles].map(([x,y]) => [y,x]));
+      const inside = [...parens].find(([x,y]) => x < index && y === index);
+      for (let k = index-1; k >= 0 && index-k <= 12; k--) {
         // (numbers are no tokens: eines 1763 errichteten, des 1884 / 1885 errichteten, im 1,5 km entfernten; a comma only after a
         // declined attribute of a series: einer sehr jungen, fast nur mit Spaniern besetzten, der heutigen, 1832 errichteten)
+        if (closing.has(k) && closing.get(k) < k && !(inside && inside[1] === k)) { state.clean = false; pending = true; k = closing.get(k); }
+        else if (titleEnd.has(k) && titleEnd.get(k) < k) { state.clean = false; pending = true; k = titleEnd.get(k); }
         const raw = sentence.slice(tokens[k].index + tokens[k][0].length, tokens[k+1].index), gap = raw.replace(/\d+(?:[.,]\d+)*\.?/gu, "");
         if (gap !== raw) state.clean = false;
-        const series = /^\s*,\s*$/u.test(gap) && !pending && teSeriesAttribute(tokens[k][0], ending);
-        if (!/^\s*(?:[\/–-]\s*)*$/u.test(gap) && !/^\s*[»«„“"]\s*$/u.test(gap) && !series) return -1;
+        const series = /^\s*,\s*$/u.test(gap) && !pending && (teSeriesAttribute(tokens[k][0], ending) || commaModifierPair(sentence, tokens, k));
+        const bracketOpen = inside && k === inside[0];
+        const passed = parens.has(k) && parens.get(k) < index || titles.has(k) && titles.get(k) < index;
+        if (!/^\s*(?:[\/–-]\s*)*$/u.test(gap) && !/^\s*[»«„“"]\s*$/u.test(gap) && !series && !bracketOpen && !passed) return -1;
+        if (bracketOpen) state.clean = false;
         if (series) state.clean = false;
         const t = tokens[k][0], w = norm(t), article = contractionArticle(w);
+        // (the letters of a number — 1960er, 3D — are part of the number)
+        if (/\d$/u.test(sentence.slice(0, tokens[k].index))) { state.clean = false; continue; }
         // (a contraction carries its article: bis zur 1952 erfolgten Wiedergründung, im 1,5 km entfernten Stonehenge)
         if (article && /^\p{Ll}/u.test(t) && !pending) return attributeFrameEndings(article).includes(ending) ? k : -1;
         if (ATTRIBUTE_FRAME_DETERMINER.test(w) && /^\p{Ll}/u.test(t)) {
@@ -9227,11 +9241,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // sowie, a comma between attributes (verheiratete, zusammenlebende Paare). Gives the head's index or -1.
     function teNounAfter(sentence, tokens, index) {
       const ending = teEnding(tokens[index][0]);
+      // (advisor 11.11: a quoted title as the noun — die … diskutierte "Kosbacher Brücke", veröffentlichte "Geschichte der Psychologie" —,
+      // a bracket between attributes — weit verbreiteten salischen (maskulinen) Erbfolgerecht — or closing after the form — (schlecht
+      // koordinierten) Strafexpeditionen —, by the shared quotedTitles / parenthesisSpans; a comma by commaModifierPair too)
+      const parens = parenthesisSpans(sentence, tokens), titles = quotedTitles(sentence, tokens, clauseGaps.plain);
+      const closesAt = new Set([...parens].filter(([x,y]) => x < index && y >= index).map(([,y]) => y));
       let conj = false, attribute = false;
-      for (let k = index+1; k < tokens.length && k-index <= 6; k++) {
+      for (let k = index+1; k < tokens.length && k-index <= 7; k++) {
+        if (titles.has(k-1) && !conj) return k;
+        let jumped = false;
+        if (parens.has(k-1) && parens.get(k-1) > k-1 && (k-1 === index || attribute)) { k = parens.get(k-1) + 1; jumped = true; if (k >= tokens.length) return -1; }
         const gap = sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index), t = tokens[k][0], w = norm(t);
         const comma = /^\s*,\s*$/u.test(gap);
-        if (!/^\s+$/u.test(gap) && !(comma && teSeriesAttribute(t, ending))) return -1;
+        if (!/^\s+$/u.test(gap) && !(comma && (teSeriesAttribute(t, ending) || commaModifierPair(sentence, tokens, k-1))) &&
+          !(closesAt.has(k-1) && /^\s*\)\s*$/u.test(gap)) && !jumped) return -1;
         if (/^\p{Lu}/u.test(t)) return grammaticalWords.has(w) || ATTRIBUTE_FRAME_DETERMINER.test(w) || conj && !attribute ? -1 : k;
         if (["und","oder","sowie"].includes(w)) { if (conj) return -1; conj = true; attribute = false; continue; }
         if (teSeriesAttribute(t, ending)) { attribute = true; continue; }
@@ -9252,9 +9275,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const TE_PRONOUN_DETERMINER = /^(?:der|die|das|dies(?:e|er|es)?|jene[rs]?)$/u;
     function teAttributeSpelling(sentence, start) {
       const tokens = sharedTokens(sentence, "teAttributeSpelling"), at = tokens.findIndex(t => t.index === start);
-      if (at < 0 || !/^\p{Ll}/u.test(tokens[at][0]) || !/te[n]?$/u.test(norm(tokens[at][0]))) return false;
+      if (at < 0 || !/te[n]?$/u.test(norm(tokens[at][0]))) return false;
+      // (advisor 11.11, item 3 remainder: the form as the first word of the sentence or after a colon — Beschädigte Holzstege und
+      // Brücken wurden …, Erweiterte Dolmen sind … — is the attribute only with another finite verb in the same part; a pronoun right
+      // after it keeps the verb — Besuchte er …?)
+      const first = /^\p{Lu}/u.test(tokens[at][0]);
+      if (first && !(at === 0 || /:\s*$/u.test(sentence.slice(tokens[at-1].index + tokens[at-1][0].length, tokens[at].index)))) return false;
       const head = teNounAfter(sentence, tokens, at);
       if (head < 0) return false;
+      if (first) { const next = norm(tokens[at+1]?.[0] || "");
+        return !PRONOUN_PERSONS[next] && !TE_PRONOUNS.has(next) && !ATTRIBUTE_FRAME_DETERMINER.test(next) && !grammaticalWords.has(next) &&
+          finiteVerbInPart(sentence, tokens, at, head, {both:true, strict:true}); }
       // (a determiner right before the form and a head no own card has as a noun — a name —: das besänftigte Ron stays as it was)
       const knownHead = (forms.get(norm(tokens[head][0])) || []).some(e => e.type === "Nomen");
       const d = attributeFrameDeterminer(tokens, at, 0, sentence, true);
