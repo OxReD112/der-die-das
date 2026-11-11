@@ -7868,8 +7868,8 @@
   {
     "id": "verb-158",
     "infinitive": "laufen",
-    "translation_ru": "бегать; бежать; идти пешком; работать (о приборе)",
-    "translation_en": "to run; to walk; to be on (of a machine)",
+    "translation_ru": "бегать, бежать; идти пешком; идти, проходить (о времени, делах); работать (о приборе)",
+    "translation_en": "to run; to walk; to go (of time, things); to be on (of a machine)",
     "auxiliary": "sein",
     "example_de": "Ich laufe jeden Morgen fünf Kilometer.",
     "example_cloze": "Ich {{c1::laufe}} jeden Morgen fünf Kilometer.",
@@ -7906,7 +7906,9 @@
         "ihr": "Lauft!",
         "Sie": "Laufen Sie!"
       }
-    }
+    },
+    "usage_note_ru": "О делах и времени: Wie läuft's? — Как дела?; Die ersten Minuten liefen gut. — Первые минуты прошли хорошо. Сильный: läuft, lief, ist gelaufen.",
+    "usage_note_en": "Of things and time: Wie läuft's? — How's it going?; Die ersten Minuten liefen gut. — The first minutes went well. Strong: läuft, lief, ist gelaufen."
   },
   {
     "id": "verb-159",
@@ -8586,9 +8588,12 @@
   {
     "id": "verb-174",
     "infinitive": "reiten",
-    "translation_ru": "ездить верхом",
-    "translation_en": "to ride (a horse)",
-    "auxiliary": "sein",
+    "translation_ru": "ездить верхом; объезжать (лошадь)",
+    "translation_en": "to ride (a horse); to break in (a horse)",
+    "auxiliary": [
+      "sein",
+      "haben"
+    ],
     "usage_note_ru": "Perfekt обычно с sein (Ich bin geritten), реже с haben; с прямым дополнением (ein Pferd reiten) — haben.",
     "usage_note_en": "The perfect usually takes sein (Ich bin geritten), less often haben; with a direct object (ein Pferd reiten) it takes haben.",
     "example_de": "Meine Tochter reitet zweimal pro Woche.",
@@ -8623,7 +8628,14 @@
         "ihr": "reitet",
         "sie": "reiten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "ездить на ком-либо; объезжать (лошадь) (hat geritten)",
+        "note_en": "to ride; to break in (a horse) (hat geritten)"
+      }
+    ]
   },
   {
     "id": "verb-175",
@@ -9286,11 +9298,11 @@
   {
     "id": "verb-2574",
     "infinitive": "sich stellen",
-    "translation_ru": "встать (куда-либо); притворяться (каким-либо); сдаться (полиции); принять (вызов), ответить (на вопросы)",
-    "translation_en": "to stand (somewhere); to pretend (to be); to give oneself up; to face (a challenge, questions)",
+    "translation_ru": "встать (куда-либо); выступить (против — gegen); притворяться (каким-либо); сдаться (полиции); принять (вызов), ответить (на вопросы)",
+    "translation_en": "to stand (somewhere); to oppose (gegen); to pretend (to be); to give oneself up; to face (a challenge, questions)",
     "auxiliary": "haben",
-    "usage_note_ru": "Сдаться: Der Täter hat sich der Polizei gestellt. Притворяться: sich krank / tot / dumm stellen — притворяться больным / мёртвым / глупым; Er stellte sich, als ob er schliefe. — Он делал вид, что спит. sich (Dativ) eine Frage stellen — задаваться вопросом. Без sich: stellen — ставить (отдельная карточка).",
-    "usage_note_en": "To give oneself up: Der Täter hat sich der Polizei gestellt. To pretend: sich krank / tot / dumm stellen — to pretend to be ill / dead / stupid; Er stellte sich, als ob er schliefe. — He pretended to be asleep. sich (dative) eine Frage stellen — to ask oneself a question. Without sich: stellen — to put (separate card).",
+    "usage_note_ru": "Против: Viele stellten sich gegen den Plan. — Многие выступили против плана. Сдаться: Der Täter hat sich der Polizei gestellt. Притворяться: sich krank / tot / dumm stellen — притворяться больным / мёртвым / глупым; Er stellte sich, als ob er schliefe. — Он делал вид, что спит. sich (Dativ) eine Frage stellen — задаваться вопросом. Без sich: stellen — ставить (отдельная карточка).",
+    "usage_note_en": "Against: Viele stellten sich gegen den Plan. — Many came out against the plan. To give oneself up: Der Täter hat sich der Polizei gestellt. To pretend: sich krank / tot / dumm stellen — to pretend to be ill / dead / stupid; Er stellte sich, als ob er schliefe. — He pretended to be asleep. sich (dative) eine Frage stellen — to ask oneself a question. Without sich: stellen — to put (separate card).",
     "example_de": "Stell dich bitte ans Ende der Schlange.",
     "example_cloze": "{{c1::Stell}} dich bitte ans Ende der Schlange.",
     "example_ru": "Встань, пожалуйста, в конец очереди.",
@@ -9307,6 +9319,11 @@
         "pattern": "Dativ",
         "note_ru": "сдаться кому-либо (der Polizei); принять что-либо (einer Herausforderung, den Fragen)",
         "note_en": "to give oneself up to someone (der Polizei); to face something (einer Herausforderung, den Fragen)"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "выступать против чего-либо",
+        "note_en": "to oppose something"
       }
     ],
     "lookup_forms": {
@@ -81754,8 +81771,8 @@
     "translation_ru": "разрезать (пополам), перерезать",
     "translation_en": "to cut through, to cut in two",
     "auxiliary": "haben",
-    "usage_note_ru": "Отделяемый: schnitt durch, hat durchgeschnitten. Неотделяемый вариант (durchschnitt, hat durchschnitten) — (книжн.) пересекать, прорезать: Ein Fluss durchschneidet das Tal. Формы как у schneiden.",
-    "usage_note_en": "Separable: schnitt durch, hat durchgeschnitten. The inseparable variant (durchschnitt, hat durchschnitten) is (elevated) to cut across: Ein Fluss durchschneidet das Tal. Forms as for schneiden.",
+    "usage_note_ru": "Отделяемый: schnitt durch, hat durchgeschnitten. Неотделяемый (durchschnitt, hat durchschnitten) — (книжн.) пересекать, прорезать — отдельная карточка. Формы как у schneiden.",
+    "usage_note_en": "Separable: schnitt durch, hat durchgeschnitten. The inseparable verb (durchschnitt, hat durchschnitten) — (elevated) to cut across — is a separate card. Forms as for schneiden.",
     "example_de": "Die Einbrecher hatten vorher das Kabel der Alarmanlage durchgeschnitten.",
     "example_cloze": "Die Einbrecher hatten vorher das Kabel der Alarmanlage {{c1::durchgeschnitten}}.",
     "example_ru": "Взломщики заранее перерезали кабель сигнализации.",
@@ -81788,6 +81805,47 @@
         "wir": "schneiden durch",
         "ihr": "schneidet durch",
         "sie": "schneiden durch"
+      }
+    }
+  },
+  {
+    "id": "verb-2758",
+    "infinitive": "durchschneiden",
+    "translation_ru": "(книжн.) пересекать, прорезать; рассекать, перерезать",
+    "translation_en": "(elevated) to cut across, to traverse; to cut through, to sever",
+    "auxiliary": "haben",
+    "usage_note_ru": "Неотделяемый: durchschnitt, hat durchschnitten. Ein Fluss durchschneidet das Tal. — Река прорезает долину. Отделяемый (schnitt durch, hat durchgeschnitten) — разрезать пополам, перерезать — отдельная карточка.",
+    "usage_note_en": "Inseparable: durchschnitt, hat durchschnitten. Ein Fluss durchschneidet das Tal. — A river cuts through the valley. Separable (schnitt durch, hat durchgeschnitten) — to cut in two — is a separate card.",
+    "example_de": "Eine schmale Straße durchschneidet die Felder.",
+    "example_cloze": "Eine schmale Straße {{c1::durchschneidet}} die Felder.",
+    "example_ru": "Узкая дорога пересекает поля.",
+    "example_en": "A narrow road cuts across the fields.",
+    "perfect_form": "haben durchschnitten",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "durchschneide",
+        "du": "durchschneidest",
+        "er/sie/es": "durchschneidet",
+        "wir": "durchschneiden",
+        "ihr": "durchschneidet",
+        "sie": "durchschneiden"
+      },
+      "Präteritum": {
+        "ich": "durchschnitt",
+        "du": "durchschnittst",
+        "er/sie/es": "durchschnitt",
+        "wir": "durchschnitten",
+        "ihr": "durchschnittet",
+        "sie": "durchschnitten"
+      },
+      "Konjunktiv II": {
+        "ich": "durchschnitte",
+        "du": "durchschnittest",
+        "er/sie/es": "durchschnitte",
+        "wir": "durchschnitten",
+        "ihr": "durchschnittet",
+        "sie": "durchschnitten"
       }
     }
   },
@@ -81935,39 +81993,43 @@
     "translation_ru": "перерезать, рассекать (провод, сухожилие)",
     "translation_en": "to sever, to cut through",
     "auxiliary": "haben",
-    "usage_note_ru": "Отделяемый: trennte durch, hat durchgetrennt; встречается и неотделяемый вариант (durchtrennte, hat durchtrennt) с тем же значением.",
-    "usage_note_en": "Separable: trennte durch, hat durchgetrennt; the inseparable variant (durchtrennte, hat durchtrennt) with the same meaning also occurs.",
-    "example_de": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel durchgetrennt.",
-    "example_cloze": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel {{c1::durchgetrennt}}.",
+    "usage_note_ru": "Неотделяемый: durchtrennte, hat durchtrennt (ударение на «trennen»). Разг. иногда и отделяемо (trennte durch, hat durchgetrennt).",
+    "usage_note_en": "Inseparable: durchtrennte, hat durchtrennt (stress on «trennen»). Colloquially sometimes separable (trennte durch, hat durchgetrennt).",
+    "example_de": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel durchtrennt.",
+    "example_cloze": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel {{c1::durchtrennt}}.",
     "example_ru": "Во время строительных работ экскаватор случайно перерубил оптоволоконный кабель.",
     "example_en": "During the building work, a digger accidentally severed the fibre-optic cable.",
-    "perfect_form": "haben durchgetrennt",
+    "perfect_form": "haben durchtrennt",
     "forms": null,
-    "separable_prefix": "durch",
     "lookup_forms": {
       "Präsens": {
-        "ich": "trenne durch",
-        "du": "trennst durch",
-        "er/sie/es": "trennt durch",
-        "wir": "trennen durch",
-        "ihr": "trennt durch",
-        "sie": "trennen durch"
+        "ich": "durchtrenne",
+        "du": "durchtrennst",
+        "er/sie/es": "durchtrennt",
+        "wir": "durchtrennen",
+        "ihr": "durchtrennt",
+        "sie": "durchtrennen"
       },
       "Präteritum": {
-        "ich": "trennte durch",
-        "du": "trenntest durch",
-        "er/sie/es": "trennte durch",
-        "wir": "trennten durch",
-        "ihr": "trenntet durch",
-        "sie": "trennten durch"
+        "ich": "durchtrennte",
+        "du": "durchtrenntest",
+        "er/sie/es": "durchtrennte",
+        "wir": "durchtrennten",
+        "ihr": "durchtrenntet",
+        "sie": "durchtrennten"
       },
       "Konjunktiv II": {
-        "ich": "trennte durch",
-        "du": "trenntest durch",
-        "er/sie/es": "trennte durch",
-        "wir": "trennten durch",
-        "ihr": "trenntet durch",
-        "sie": "trennten durch"
+        "ich": "durchtrennte",
+        "du": "durchtrenntest",
+        "er/sie/es": "durchtrennte",
+        "wir": "durchtrennten",
+        "ihr": "durchtrenntet",
+        "sie": "durchtrennten"
+      },
+      "Imperativ": {
+        "du": "durchtrenn",
+        "ihr": "durchtrennt",
+        "Sie": "durchtrennen Sie"
       }
     }
   },
@@ -109603,11 +109665,14 @@
   {
     "id": "verb-2406",
     "infinitive": "zerbrechen",
-    "translation_ru": "разбиваться, ломаться (на куски); (перен.) распадаться (о дружбе, браке)",
-    "translation_en": "to break, to shatter; to break up (of a friendship, a marriage)",
-    "auxiliary": "sein",
-    "usage_note_ru": "В этом значении — с ist. С hat — разбить, сломать (что-либо). (книжн.) an etwas zerbrechen — сломаться (морально) из-за чего-либо. Сильный: zerbricht, zerbrach, ist / hat zerbrochen. zerbrechlich — хрупкий.",
-    "usage_note_en": "In this meaning with ist. With hat — to break (something). (elevated) an etwas zerbrechen — to be broken by something (emotionally). Strong: zerbricht, zerbrach, ist / hat zerbrochen. zerbrechlich — fragile.",
+    "translation_ru": "разбиваться, ломаться (на куски); разбить, сломать (что-либо); (перен.) распадаться (о дружбе, браке)",
+    "translation_en": "to break, to shatter; to break, to smash (something); to break up (of a friendship, a marriage)",
+    "auxiliary": [
+      "sein",
+      "haben"
+    ],
+    "usage_note_ru": "Без дополнения — ist zerbrochen (Die Vase ist zerbrochen — ваза разбилась); с дополнением — hat zerbrochen (Er hat den Teller zerbrochen — он разбил тарелку). (книжн.) an etwas zerbrechen — сломаться (морально) из-за чего-либо. Сильный: zerbricht, zerbrach, ist / hat zerbrochen. zerbrechlich — хрупкий.",
+    "usage_note_en": "Without an object — ist zerbrochen (Die Vase ist zerbrochen — the vase broke); with an object — hat zerbrochen (Er hat den Teller zerbrochen — he broke the plate). (elevated) an etwas zerbrechen — to be broken by something (emotionally). Strong: zerbricht, zerbrach, ist / hat zerbrochen. zerbrechlich — fragile.",
     "example_de": "Beim Umzug ist ausgerechnet die Vase meiner Großmutter zerbrochen.",
     "example_cloze": "Beim Umzug ist ausgerechnet die Vase meiner Großmutter {{c1::zerbrochen}}.",
     "example_ru": "При переезде разбилась именно бабушкина ваза.",
@@ -109645,7 +109710,14 @@
         "ihr": "zerbrecht",
         "Sie": "zerbrechen Sie"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "разбить, сломать что-либо (hat zerbrochen)",
+        "note_en": "to break something (hat zerbrochen)"
+      }
+    ]
   },
   {
     "id": "verb-2407",
@@ -123307,6 +123379,103 @@
         "du": "eigne dir an",
         "ihr": "eignet euch an",
         "Sie": "eignen Sie sich an"
+      }
+    }
+  },
+  {
+    "id": "verb-2759",
+    "infinitive": "hochsteigen",
+    "translation_ru": "подниматься (вверх), взлетать",
+    "translation_en": "to rise, to climb (up), to soar",
+    "auxiliary": "sein",
+    "usage_note_ru": "Der Ballon stieg hoch in die Luft. — Шар поднялся в воздух. Отделяемый, сильный: stieg hoch, ist hochgestiegen. Подниматься по лестнице, на гору — тоже: die Treppe hochsteigen.",
+    "usage_note_en": "Der Ballon stieg hoch in die Luft. — The balloon rose into the air. Separable, strong: stieg hoch, ist hochgestiegen. Also to climb up stairs or a hill: die Treppe hochsteigen.",
+    "example_de": "Aus dem Schornstein stieg dünner grauer Rauch hoch.",
+    "example_cloze": "Aus dem Schornstein {{c1::stieg}} dünner grauer Rauch {{c1::hoch}}.",
+    "example_ru": "Из трубы поднимался тонкий серый дым.",
+    "example_en": "Thin grey smoke rose from the chimney.",
+    "perfect_form": "sein hochgestiegen",
+    "forms": null,
+    "separable_prefix": "hoch",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "steige hoch",
+        "du": "steigst hoch",
+        "er/sie/es": "steigt hoch",
+        "wir": "steigen hoch",
+        "ihr": "steigt hoch",
+        "sie": "steigen hoch"
+      },
+      "Präteritum": {
+        "ich": "stieg hoch",
+        "du": "stiegst hoch",
+        "er/sie/es": "stieg hoch",
+        "wir": "stiegen hoch",
+        "ihr": "stiegt hoch",
+        "sie": "stiegen hoch"
+      },
+      "Konjunktiv II": {
+        "ich": "stiege hoch",
+        "du": "stiegest hoch",
+        "er/sie/es": "stiege hoch",
+        "wir": "stiegen hoch",
+        "ihr": "stieget hoch",
+        "sie": "stiegen hoch"
+      },
+      "Imperativ": {
+        "du": "steig hoch",
+        "ihr": "steigt hoch",
+        "Sie": "steigen Sie hoch"
+      }
+    }
+  },
+  {
+    "id": "verb-2760",
+    "infinitive": "sich anbahnen",
+    "translation_ru": "намечаться, назревать",
+    "translation_en": "to be in the offing, to be developing, to loom",
+    "auxiliary": "haben",
+    "usage_note_ru": "Eine Krise bahnt sich an. — Назревает кризис. Обычно в 3-м лице, о событиях и отношениях: Zwischen den beiden bahnt sich etwas an. — Между ними что-то намечается. Слабый, отделяемый: bahnte sich an, hat sich angebahnt. Без sich — anbahnen «налаживать, подготавливать (контакты)».",
+    "usage_note_en": "Eine Krise bahnt sich an. — A crisis is looming. Usually in the 3rd person, of events and relationships: Zwischen den beiden bahnt sich etwas an. — Something is developing between the two of them. Weak, separable: bahnte sich an, hat sich angebahnt. Without sich — anbahnen “to pave the way for, to initiate (contacts)”.",
+    "example_de": "In den Verhandlungen bahnte sich am Abend endlich eine Einigung an.",
+    "example_cloze": "In den Verhandlungen {{c1::bahnte}} sich am Abend endlich eine Einigung {{c1::an}}.",
+    "example_ru": "К вечеру в переговорах наконец наметилось соглашение.",
+    "example_en": "By the evening an agreement was finally emerging in the negotiations.",
+    "perfect_form": "haben sich angebahnt",
+    "forms": null,
+    "separable_prefix": "an",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "bahne mich an",
+        "du": "bahnst dich an",
+        "er/sie/es": "bahnt sich an",
+        "wir": "bahnen uns an",
+        "ihr": "bahnt euch an",
+        "sie": "bahnen sich an"
+      },
+      "Präteritum": {
+        "ich": "bahnte mich an",
+        "du": "bahntest dich an",
+        "er/sie/es": "bahnte sich an",
+        "wir": "bahnten uns an",
+        "ihr": "bahntet euch an",
+        "sie": "bahnten sich an"
+      },
+      "Konjunktiv II": {
+        "ich": "bahnte mich an",
+        "du": "bahntest dich an",
+        "er/sie/es": "bahnte sich an",
+        "wir": "bahnten uns an",
+        "ihr": "bahntet euch an",
+        "sie": "bahnten sich an"
+      },
+      "Konjunktiv I": {
+        "ich": "bahne mich an",
+        "du": "bahnest dich an",
+        "er/sie/es": "bahne sich an",
+        "wir": "bahnen uns an",
+        "ihr": "bahnet euch an",
+        "sie": "bahnen sich an"
       }
     }
   }

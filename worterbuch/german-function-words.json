@@ -292,5 +292,325 @@
     ],
     "source_url": "https://www.duden.de/rechtschreibung/hu",
     "wortschatz_excluded": true
+  },
+  {
+    "id": "function-017",
+    "type": "Abkürzung",
+    "word": "cm",
+    "translation_ru": "сантиметр (der Zentimeter)",
+    "translation_en": "centimetre (Zentimeter)",
+    "example_de": "Das Brett ist 40 cm breit.",
+    "example_ru": "Доска шириной 40 см.",
+    "example_en": "The board is 40 cm wide.",
+    "search_forms": [
+      "cm"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от der Zentimeter.",
+    "usage_note_en": "Abbreviation of der Zentimeter."
+  },
+  {
+    "id": "function-018",
+    "type": "Abkürzung",
+    "word": "Dr.",
+    "translation_ru": "доктор (der Doktor — учёная степень, в обращении и перед фамилией)",
+    "translation_en": "Dr (Doktor — academic title)",
+    "example_de": "Morgen habe ich einen Termin bei Dr. Weber.",
+    "example_ru": "Завтра у меня приём у доктора Вебера.",
+    "example_en": "Tomorrow I have an appointment with Dr Weber.",
+    "search_forms": [
+      "Dr"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от der Doktor. Пишется перед фамилией: Frau Dr. Klein.",
+    "usage_note_en": "Abbreviation of der Doktor. Written before the surname: Frau Dr. Klein."
+  },
+  {
+    "id": "function-019",
+    "type": "Abkürzung",
+    "word": "ca.",
+    "translation_ru": "около, примерно (circa)",
+    "translation_en": "about, approximately (circa)",
+    "example_de": "Der Weg zum Bahnhof dauert ca. zehn Minuten.",
+    "example_ru": "Дорога до вокзала занимает около десяти минут.",
+    "example_en": "The walk to the station takes about ten minutes.",
+    "search_forms": [
+      "ca"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от circa.",
+    "usage_note_en": "Abbreviation of circa."
+  },
+  {
+    "id": "function-020",
+    "type": "Abkürzung",
+    "word": "etc.",
+    "translation_ru": "и так далее, и т. д. (et cetera)",
+    "translation_en": "etc. (et cetera)",
+    "example_de": "Im Keller lagern Werkzeug, Farben, Pinsel etc.",
+    "example_ru": "В подвале хранятся инструменты, краски, кисти и т. д.",
+    "example_en": "Tools, paints, brushes etc. are stored in the cellar.",
+    "search_forms": [
+      "etc"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от лат. et cetera; по-немецки чаще usw.",
+    "usage_note_en": "Abbreviation of Latin et cetera; in German usw. is more common."
+  },
+  {
+    "id": "function-021",
+    "type": "Abkürzung",
+    "word": "TV",
+    "translation_ru": "телевидение; телевизор (das TV — Television)",
+    "translation_en": "TV, television",
+    "example_de": "Am Abend lief im TV ein alter Krimi.",
+    "example_ru": "Вечером по телевизору шёл старый детектив.",
+    "example_en": "An old crime film was on TV in the evening.",
+    "search_forms": [
+      "TV"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение (из англ.) от Television; по-немецки das Fernsehen.",
+    "usage_note_en": "Abbreviation (from English) of television; in German das Fernsehen."
+  },
+  {
+    "id": "function-022",
+    "type": "Abkürzung",
+    "word": "μm",
+    "translation_ru": "микрометр, микрон (der Mikrometer)",
+    "translation_en": "micrometre (Mikrometer)",
+    "example_de": "Die Fasern sind nur 20 μm dick.",
+    "example_ru": "Волокна толщиной всего 20 мкм.",
+    "example_en": "The fibres are only 20 μm thick.",
+    "search_forms": [
+      "μm"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от der Mikrometer (тысячная доля миллиметра).",
+    "usage_note_en": "Abbreviation of der Mikrometer (a thousandth of a millimetre)."
+  },
+  {
+    "id": "function-023",
+    "type": "Abkürzung",
+    "word": "usw.",
+    "translation_ru": "и так далее, и т. д. (und so weiter)",
+    "translation_en": "and so on, etc. (und so weiter)",
+    "example_de": "Wir brauchen noch Mehl, Zucker, Eier usw.",
+    "example_ru": "Нам ещё нужны мука, сахар, яйца и т. д.",
+    "example_en": "We still need flour, sugar, eggs and so on.",
+    "search_forms": [
+      "usw"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от und so weiter.",
+    "usage_note_en": "Abbreviation of und so weiter."
+  },
+  {
+    "id": "function-024",
+    "type": "Abkürzung",
+    "word": "engl.",
+    "translation_ru": "английский (englisch)",
+    "translation_en": "English (englisch)",
+    "example_de": "Das Wort ist engl. Herkunft.",
+    "example_ru": "Слово английского происхождения.",
+    "example_en": "The word is of English origin.",
+    "search_forms": [
+      "engl"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от englisch (в словарях и справках).",
+    "usage_note_en": "Abbreviation of englisch (in dictionaries and references)."
+  },
+  {
+    "id": "function-025",
+    "type": "Abkürzung",
+    "word": "Chr.",
+    "translation_ru": "Христос (Christus): v. Chr. — до н. э., n. Chr. — н. э.",
+    "translation_en": "Christ (Christus): v. Chr. — BC, n. Chr. — AD",
+    "example_de": "Die Stadt wurde um 500 v. Chr. gegründet.",
+    "example_ru": "Город был основан около 500 года до н. э.",
+    "example_en": "The town was founded around 500 BC.",
+    "search_forms": [
+      "Chr"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от Christus: vor Christus (v. Chr.) — до нашей эры, nach Christus (n. Chr.) — нашей эры.",
+    "usage_note_en": "Abbreviation of Christus: vor Christus (v. Chr.) — BC, nach Christus (n. Chr.) — AD."
+  },
+  {
+    "id": "function-026",
+    "type": "Abkürzung",
+    "word": "evtl.",
+    "translation_ru": "возможно, при случае (eventuell)",
+    "translation_en": "possibly, perhaps (eventuell)",
+    "example_de": "Ich komme evtl. etwas später.",
+    "example_ru": "Я, возможно, приду чуть позже.",
+    "example_en": "I may come a little later.",
+    "search_forms": [
+      "evtl"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от eventuell.",
+    "usage_note_en": "Abbreviation of eventuell."
+  },
+  {
+    "id": "function-027",
+    "type": "Abkürzung",
+    "word": "bzgl.",
+    "translation_ru": "относительно, касательно (bezüglich + Genitiv)",
+    "translation_en": "regarding, concerning (bezüglich)",
+    "example_de": "Bitte melden Sie sich bzgl. der Rechnung bei uns.",
+    "example_ru": "Пожалуйста, свяжитесь с нами относительно счёта.",
+    "example_en": "Please contact us regarding the invoice.",
+    "search_forms": [
+      "bzgl"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от bezüglich (+ Genitiv).",
+    "usage_note_en": "Abbreviation of bezüglich (+ genitive)."
+  },
+  {
+    "id": "function-028",
+    "type": "Abkürzung",
+    "word": "ital.",
+    "translation_ru": "итальянский (italienisch)",
+    "translation_en": "Italian (italienisch)",
+    "example_de": "Der Begriff stammt aus dem ital. Wortschatz.",
+    "example_ru": "Термин происходит из итальянской лексики.",
+    "example_en": "The term comes from the Italian vocabulary.",
+    "search_forms": [
+      "ital"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от italienisch (в словарях и справках).",
+    "usage_note_en": "Abbreviation of italienisch (in dictionaries and references)."
+  },
+  {
+    "id": "function-029",
+    "type": "Abkürzung",
+    "word": "Hr.",
+    "translation_ru": "господин (der Herr — в обращении, в письмах)",
+    "translation_en": "Mr (Herr)",
+    "example_de": "Hr. Schulz ist heute nicht im Büro.",
+    "example_ru": "Господина Шульца сегодня нет в офисе.",
+    "example_en": "Mr Schulz is not in the office today.",
+    "search_forms": [
+      "Hr"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от der Herr; чаще пишут Hrn. или полностью Herr.",
+    "usage_note_en": "Abbreviation of der Herr; Hrn. or the full Herr is more common."
+  },
+  {
+    "id": "function-030",
+    "type": "Abkürzung",
+    "word": "Abk.",
+    "translation_ru": "сокращение (die Abkürzung)",
+    "translation_en": "abbreviation (Abkürzung)",
+    "example_de": "Die Abk. für Kilometer ist km.",
+    "example_ru": "Сокращение для «километр» — km.",
+    "example_en": "The abbreviation for kilometre is km.",
+    "search_forms": [
+      "Abk"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Abkürzung.",
+    "usage_note_en": "Abbreviation of die Abkürzung."
+  },
+  {
+    "id": "function-031",
+    "type": "Abkürzung",
+    "word": "ggf.",
+    "translation_ru": "при необходимости, в случае надобности (gegebenenfalls)",
+    "translation_en": "if necessary, where applicable (gegebenenfalls)",
+    "example_de": "Bitte bringen Sie ggf. Ihren Ausweis mit.",
+    "example_ru": "При необходимости возьмите с собой удостоверение личности.",
+    "example_en": "Please bring your ID if necessary.",
+    "search_forms": [
+      "ggf"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от gegebenenfalls.",
+    "usage_note_en": "Abbreviation of gegebenenfalls."
+  },
+  {
+    "id": "function-032",
+    "type": "Abkürzung",
+    "word": "Inc.",
+    "translation_ru": "корпорация (Incorporated — в названиях американских фирм)",
+    "translation_en": "Inc. (Incorporated)",
+    "example_de": "Die Firma Acme Inc. hat ihren Sitz in Ohio.",
+    "example_ru": "Компания Acme Inc. находится в Огайо.",
+    "example_en": "The company Acme Inc. is based in Ohio.",
+    "search_forms": [
+      "Inc"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение (из англ.) от Incorporated; немецкое соответствие — AG.",
+    "usage_note_en": "Abbreviation (from English) of Incorporated; the German equivalent is AG."
+  },
+  {
+    "id": "function-033",
+    "type": "Abkürzung",
+    "word": "Mrd.",
+    "translation_ru": "миллиард (die Milliarde)",
+    "translation_en": "billion (Milliarde)",
+    "example_de": "Das Projekt kostet rund 2 Mrd. Euro.",
+    "example_ru": "Проект стоит около 2 млрд евро.",
+    "example_en": "The project costs around 2 billion euros.",
+    "search_forms": [
+      "Mrd"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Milliarde (тысяча миллионов).",
+    "usage_note_en": "Abbreviation of die Milliarde (a thousand million)."
+  },
+  {
+    "id": "function-034",
+    "type": "Abkürzung",
+    "word": "kV",
+    "translation_ru": "киловольт (das Kilovolt)",
+    "translation_en": "kilovolt (Kilovolt)",
+    "example_de": "Die Stromleitung führt eine Spannung von 380 kV.",
+    "example_ru": "По линии электропередачи идёт напряжение 380 кВ.",
+    "example_en": "The power line carries a voltage of 380 kV.",
+    "search_forms": [
+      "kV"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от das Kilovolt.",
+    "usage_note_en": "Abbreviation of das Kilovolt."
+  },
+  {
+    "id": "function-035",
+    "type": "Abkürzung",
+    "word": "MW",
+    "translation_ru": "мегаватт (das Megawatt)",
+    "translation_en": "megawatt (Megawatt)",
+    "example_de": "Der Windpark liefert insgesamt 60 MW.",
+    "example_ru": "Ветропарк выдаёт в общей сложности 60 МВт.",
+    "example_en": "The wind farm delivers 60 MW in total.",
+    "search_forms": [
+      "MW"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от das Megawatt.",
+    "usage_note_en": "Abbreviation of das Megawatt."
+  },
+  {
+    "id": "function-036",
+    "type": "Abkürzung",
+    "word": "St.",
+    "translation_ru": "святой (Sankt — в названиях)",
+    "translation_en": "Saint, St (Sankt — in names)",
+    "example_de": "Wir besuchten die Kirche St. Michael.",
+    "example_ru": "Мы посетили церковь Святого Михаила.",
+    "example_en": "We visited St Michael's Church.",
+    "search_forms": [
+      "St"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от Sankt: St. Gallen, St. Pauli.",
+    "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli."
   }
 ]

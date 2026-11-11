@@ -69282,5 +69282,19 @@
     "example_en": "The Roman Empire once stretched across large parts of Europe.",
     "usage_note_ru": "das Deutsche Reich — Германская империя; im Reich der Träume — в царстве снов. Частая первая часть: Reichstag, Reichskanzler. Не путать с прилагательным reich — богатый.",
     "usage_note_en": "das Deutsche Reich — the German Empire; im Reich der Träume — in the realm of dreams. Frequent first part: Reichstag, Reichskanzler. Do not confuse with the adjective reich — rich."
+  },
+  {
+    "id": "noun-5366",
+    "word": "Holzhacker",
+    "article": "der",
+    "plural": "Holzhacker",
+    "translation_ru": "дровосек; тот, кто колет дрова",
+    "translation_en": "woodcutter, woodchopper",
+    "example_de": "Der alte Holzhacker ging jeden Morgen mit seiner Axt in den Wald.",
+    "example_cloze": "Der alte {{c1::Holzhacker}} ging jeden Morgen mit seiner Axt in den Wald.",
+    "example_ru": "Старый дровосек каждое утро уходил с топором в лес.",
+    "example_en": "Every morning the old woodcutter went into the forest with his axe.",
+    "usage_note_ru": "Частое слово в сказках: Vor einem großen Walde wohnte ein armer Holzhacker … От Holz hacken — колоть дрова. Сейчас чаще der Holzfäller — лесоруб.",
+    "usage_note_en": "A common word in fairy tales: Vor einem großen Walde wohnte ein armer Holzhacker … From Holz hacken — to chop wood. Today der Holzfäller (lumberjack) is more common."
   }
 ]

@@ -17563,5 +17563,29 @@
     "participle_of": "verkehren",
     "meaning_differs": true,
     "copula_or_attributive_only": true
+  },
+  {
+    "id": "adjective-1616",
+    "word": "Sankt",
+    "translation_ru": "святой (в названиях городов, церквей, праздников)",
+    "translation_en": "Saint (in names of towns, churches, feasts)",
+    "example_de": "Im Dezember wartet das Kind auf Sankt Nikolaus.",
+    "example_ru": "В декабре ребёнок ждёт Святого Николая.",
+    "example_en": "In December the child waits for Saint Nicholas.",
+    "example_cloze": "Im Dezember wartet das Kind auf {{c1::Sankt}} Nikolaus.",
+    "usage_note_ru": "Не склоняется, стоит перед именем: Sankt Gallen, Sankt Petersburg. Сокращение — St.",
+    "usage_note_en": "Never changes its ending and stands before a name: Sankt Gallen, Sankt Petersburg. Abbreviation — St."
+  },
+  {
+    "id": "adjective-1617",
+    "word": "einig",
+    "translation_ru": "единый; согласный, единодушный",
+    "translation_en": "united; in agreement, of one mind",
+    "example_de": "Nach dem Streit waren sich die Geschwister endlich wieder einig.",
+    "example_ru": "После ссоры брат и сестра наконец снова пришли к согласию.",
+    "example_en": "After the quarrel the siblings finally agreed again.",
+    "example_cloze": "Nach dem Streit waren sich die Geschwister endlich wieder {{c1::einig}}.",
+    "usage_note_ru": "ein einiges Land — единая страна; Wir sind uns in diesem Punkt einig. — В этом мы согласны. sich (D) einig sein — быть единодушными; sich einig werden — договориться. Не путать с einige — несколько.",
+    "usage_note_en": "ein einiges Land — a united country; Wir sind uns in diesem Punkt einig. — We agree on this point. sich (D) einig sein — to be in agreement; sich einig werden — to come to an agreement. Do not confuse with einige — some, a few."
   }
 ]

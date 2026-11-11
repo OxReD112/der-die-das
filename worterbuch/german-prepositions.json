@@ -177,8 +177,8 @@
     "id": "preposition-006",
     "type": "preposition",
     "word": "von",
-    "translation_ru": "от; с, из (откуда); о (erzählen von); принадлежность (вместо Genitiv); кем (в пассиве)",
-    "translation_en": "from; about (erzählen von); of; by (passive)",
+    "translation_ru": "от, с, из (откуда); кем, —ом (при пассиве и причастии: von X geleitet); о (erzählen von); принадлежность (вместо Genitiv)",
+    "translation_en": "from; by (passive, participle: von X geleitet); about (erzählen von); of",
     "example_de": "Das Geschenk ist von meiner Oma.",
     "example_ru": "Подарок от моей бабушки.",
     "example_en": "The present is from my grandma.",
@@ -202,8 +202,8 @@
     "forms": null,
     "forms_note_ru": "Слитная форма: vom = von dem.",
     "forms_note_en": "Contracted form: vom = von dem.",
-    "usage_note_ru": "Откуда: von der Arbeit, vom Arzt. Время: von 9 bis 17 Uhr. О чём: Er erzählt von seiner Reise. Принадлежность, особенно в разговорной речи: das Auto von meinem Bruder = das Auto meines Bruders. В пассиве указывает, кем сделано действие: Das Buch wurde von Kafka geschrieben.",
-    "usage_note_en": "Where from: von der Arbeit, vom Arzt. Time: von 9 bis 17 Uhr. About: Er erzählt von seiner Reise. Possession, especially in speech: das Auto von meinem Bruder = das Auto meines Bruders. In the passive it names the doer: Das Buch wurde von Kafka geschrieben.",
+    "usage_note_ru": "Откуда: von der Arbeit, vom Arzt. Время: von 9 bis 17 Uhr. О чём: Er erzählt von seiner Reise. Принадлежность, особенно в разговорной речи: das Auto von meinem Bruder = das Auto meines Bruders. Кем сделано — в пассиве и при причастии: Das Buch wurde von Kafka geschrieben. — Книга написана Кафкой; die von ihr geleitete Schule — школа, которой она руководит.",
+    "usage_note_en": "Where from: von der Arbeit, vom Arzt. Time: von 9 bis 17 Uhr. About: Er erzählt von seiner Reise. Possession, especially in speech: das Auto von meinem Bruder = das Auto meines Bruders. The doer — in the passive and with a participle: Das Buch wurde von Kafka geschrieben. — The book was written by Kafka; die von ihr geleitete Schule — the school run by her.",
     "search_forms": [
       "von"
     ],

@@ -41935,5 +41935,108 @@
         "Alle Beteiligten seien sich einig."
       ]
     }
+  },
+  {
+    "id": "expression-208",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "auf Grund (+ Genitiv / von + Dativ)",
+    "translation_ru": "на основании, из-за, по причине",
+    "translation_en": "on the basis of, because of, due to",
+    "example_de": "Auf Grund des starken Schneefalls wurde der Flugverkehr eingestellt.",
+    "example_ru": "Из-за сильного снегопада авиасообщение было прекращено.",
+    "example_en": "Because of the heavy snowfall, air traffic was suspended.",
+    "notes_ru": [
+      "Раздельное написание предлога aufgrund (оба верны). С родительным (auf Grund der Lage) или von + Dativ (auf Grund von Fehlern).",
+      "Не путать: auf Grund laufen — сесть на мель; einer Sache auf den Grund gehen — докопаться до сути."
+    ],
+    "notes_en": [
+      "Separate spelling of the preposition aufgrund (both are correct). With the genitive (auf Grund der Lage) or von + dative (auf Grund von Fehlern).",
+      "Do not confuse: auf Grund laufen — to run aground; einer Sache auf den Grund gehen — to get to the bottom of something."
+    ],
+    "related_ids": [
+      "preposition-042"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/aufgrund",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "auf",
+            "not_after": [
+              "lief",
+              "liefen",
+              "liefst",
+              "lieft",
+              "läuft",
+              "läufst",
+              "laufen",
+              "lauft",
+              "laufe",
+              "liefe",
+              "gelaufen",
+              "geriet",
+              "gerieten",
+              "gerietst",
+              "gerät",
+              "gerätst",
+              "geraten",
+              "gerate",
+              "geriete",
+              "gerietet",
+              "sank",
+              "sanken",
+              "sinkt",
+              "sinken",
+              "gesunken",
+              "fuhr",
+              "fuhren",
+              "fährt"
+            ]
+          },
+          {
+            "form": "Grund",
+            "not_next": [
+              "gelaufen",
+              "geraten",
+              "laufen",
+              "zu",
+              "gesunken",
+              "sinken",
+              "gegangen",
+              "und",
+              "liegen",
+              "lag",
+              "lagen",
+              "gefahren",
+              "fahren"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf Grund des starken Schneefalls wurde der Flugverkehr eingestellt.",
+        "Auf Grund der Lage hatten sie nichts zu befürchten.",
+        "Auf Grund ihrer küstennahen Lage hatte die Abtei mit Seeräubern zu kämpfen.",
+        "Allerdings gab sie ihre Idee auf Grund des permanenten öffentlichen Spotts bald wieder auf.",
+        "Auf Grund von missbräuchlichen Anwendungen wurde das Mittel verboten.",
+        "Dabei starben viele auf Grund schlechter Ernährung.",
+        "Durch eine Neukalkulation auf Grund des dynamischen Marktumfelds sanken die Preise."
+      ],
+      "negative": [
+        "Das Schiff lief auf Grund.",
+        "Das Boot ist auf Grund gelaufen.",
+        "Das Schiff geriet auf Grund.",
+        "Er ging der Sache auf den Grund.",
+        "Der Schatz liegt auf dem Grund des Meeres.",
+        "Er baute ein Haus auf eigenem Grund und Boden."
+      ]
+    }
   }
 ]
