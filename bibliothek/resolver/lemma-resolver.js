@@ -14123,34 +14123,51 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         links.push({v,p,verbBase,rows:pairs(verbBase,prepositionAt(p))});
       }
       const mine = links.filter(l => (isVerb ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)));
-      // One pair in the clause; the same preposition or verb in another pair blocks.
-      if (mine.length !== 1 || links.some(l => l !== mine[0] && (l.p === mine[0].p || l.v === mine[0].v))) return;
-      const {v,p,verbBase,rows} = mine[0];
-      if (indices.filter(i => prepositionAt(i) === prepositionAt(p)).length !== 1) return;
-      const object = tokens[p+1];
-      if (!object || !indices.includes(p+1)) return;
-      // Strict variant (user decision 15.10.2026: a wrong hint is worse than none).
-      // (a) A prepositional phrase opening a main clause before its verb is mostly
-      // an adverbial (Nach der Mahlzeit fragte der Gast, Über ein Weilchen sprach).
-      if (p < v && clauseInitial(clause.sentence,tokens[p].index)) return;
-      // (b) The object is a determiner, a pronoun or a noun, not a bare modifier
-      // phrase of manner (sprach sie mit zornigem Blick).
-      const objectWord = norm(object[0]);
-      const nominalObject = /^\p{Lu}/u.test(object[0]) || objectCase[objectWord] || determinerFeatures(object[0]) || contractionCase[norm(tokens[p][0])] ||
-        (forms.get(objectWord) || []).some(e => ['Pronomen','article','num'].includes(e.type)) || ['nichts','etwas','alles','was','wen','wem','dessen','deren','ihn','sie','es','uns','euch'].includes(objectWord);
-      if (!nominalObject) return;
-      // (c) A preposition right after a standalone der / die / das belongs to it (der mit dem Hütchen).
-      // A relative der after a comma is the subject of its own clause (…, der an nichts Böses dachte).
-      if (p > 0 && DER_PRONOUNS.includes(norm(tokens[p-1][0])) && p-1 !== v &&
-          !(p > 1 && /,\s*[»«"„“‚‘]?\s*$/u.test(clause.sentence.slice(tokens[p-2].index+tokens[p-2][0].length,tokens[p-1].index)))) return;
-      // (d) A detached particle closing the clause makes it another verb (hält … von … zurück).
-      const last = tokens[clause.end];
-      if (clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) &&
-          ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return;
-      const cases = [...new Set(rows.map(r => r[2]))];
-      if (cases.length !== 1) return;
-      const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])];
-      if (seen && seen !== cases[0]) return;
+      // One pair in the clause; the same preposition or verb in another pair blocks. (Second resolver chat 11.11, advisor 08.11 / 11.11 —
+      // claude/TWO_PREP_COUNT_2026-11-11_RU.md) A partner and a topic of one verb (mit + über, bei + für / über) no longer block each
+      // other: on the tapped preposition its own pair (sprach mit ihm über das Wetter — on mit «sprechen + mit»), on the verb both pairs
+      // when both hold («Verb · mit + Dativ · über + Akkusativ»). Not halten für / von (hielt die Blaufärbung von L. … für …), arbeiten als / an.
+      const partnerTopic = (x, y) => /^(?:mit\+über|bei\+für|bei\+über)$/u.test([x,y].sort().join('+'));
+      const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p))));
+      // The checks of one pair; gives its case or null.
+      const pairCase = ({v,p,rows}) => {
+        if (indices.filter(i => prepositionAt(i) === prepositionAt(p)).length !== 1) return null;
+        const object = tokens[p+1];
+        if (!object || !indices.includes(p+1)) return null;
+        // Strict variant (user decision 15.10.2026: a wrong hint is worse than none).
+        // (a) A prepositional phrase opening a main clause before its verb is mostly
+        // an adverbial (Nach der Mahlzeit fragte der Gast, Über ein Weilchen sprach).
+        if (p < v && clauseInitial(clause.sentence,tokens[p].index)) return null;
+        // (b) The object is a determiner, a pronoun or a noun, not a bare modifier
+        // phrase of manner (sprach sie mit zornigem Blick).
+        const objectWord = norm(object[0]);
+        const nominalObject = /^\p{Lu}/u.test(object[0]) || objectCase[objectWord] || determinerFeatures(object[0]) || contractionCase[norm(tokens[p][0])] ||
+          (forms.get(objectWord) || []).some(e => ['Pronomen','article','num'].includes(e.type)) || ['nichts','etwas','alles','was','wen','wem','dessen','deren','ihn','sie','es','uns','euch'].includes(objectWord);
+        if (!nominalObject) return null;
+        // (c) A preposition right after a standalone der / die / das belongs to it (der mit dem Hütchen).
+        // A relative der after a comma is the subject of its own clause (…, der an nichts Böses dachte).
+        if (p > 0 && DER_PRONOUNS.includes(norm(tokens[p-1][0])) && p-1 !== v &&
+            !(p > 1 && /,\s*[»«"„“‚‘]?\s*$/u.test(clause.sentence.slice(tokens[p-2].index+tokens[p-2][0].length,tokens[p-1].index)))) return null;
+        // (d) A detached particle closing the clause makes it another verb (hält … von … zurück).
+        const last = tokens[clause.end];
+        if (clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) &&
+            ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return null;
+        const cases = [...new Set(rows.map(r => r[2]))];
+        if (cases.length !== 1) return null;
+        const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])];
+        if (seen && seen !== cases[0]) return null;
+        return cases[0];
+      };
+      let chosen;
+      if (mine.length === 1 && !otherBlocks(mine[0])) chosen = [mine[0]];
+      // (on the verb: its two pairs, a partner and a topic, both holding — else nothing, as before)
+      else if (isVerb && mine.length === 2 && partnerTopic(prepositionAt(mine[0].p),prepositionAt(mine[1].p)) && mine.every(l => !otherBlocks(l)) &&
+        !links.some(o => !mine.includes(o) && o.v === selected)) chosen = [...mine].sort((x,y) => x.p - y.p);
+      else return;
+      const caseOf = chosen.map(pairCase);
+      if (caseOf.some(c => !c)) return;
+      const {v,p,verbBase,rows} = chosen[0];
+      const cases = [caseOf[0]];
       // A confirmed reflexive link names the verb with sich (sich freuen + auf).
       let verbName = rows.length === 1 && !/^sich\s/u.test(norm(rows[0][0])) ? rows[0][0] : verbBase;
       if (isPreposition && rows.some(r => /^sich\s/u.test(norm(r[0])))) {
@@ -14162,6 +14179,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       const span = i => ({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
       const link = {verb:verbName,preposition:prepositionAt(p),case:cases[0],pattern:`${prepositionAt(p)} + ${cases[0]}`,spans:[v,p].sort((a,b) => a-b).map(span)};
+      // (both pairs on the verb: «mit + Dativ · über + Akkusativ», the verb and both prepositions lit)
+      if (chosen.length === 2) Object.assign(link,{pattern:chosen.map((l,n) => `${prepositionAt(l.p)} + ${caseOf[n]}`).join(' · '),
+        pairs:chosen.map((l,n) => ({preposition:prepositionAt(l.p),case:caseOf[n]})),spans:[v,...chosen.map(l => l.p)].sort((a,b) => a-b).map(span)});
       const marked = {...card,prepositionLink:link}, id = window.BibliothekVocabulary.identity(card);
       resolution.candidates = resolution.candidates.map(c => window.BibliothekVocabulary.identity(c) === id ? marked : c);
       if (resolution.preferred === card) resolution.preferred = marked;

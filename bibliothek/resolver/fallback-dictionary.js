@@ -84,7 +84,7 @@
     return separablePromise;
   }
   // A2 (15.10.2026): agreed verb + preposition pairs (exercise list, reference 4.9).
-  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261015-a2-1", document.currentScript.src);
+  const verbPrepositionUrl = new URL("data/verb-prepositions.json?v=20261111-twoprep-3", document.currentScript.src);
   let verbPrepositionPromise = null;
   function verbPrepositions() {
     if (!verbPrepositionPromise) verbPrepositionPromise = dataFetch(verbPrepositionUrl).then(response => {
