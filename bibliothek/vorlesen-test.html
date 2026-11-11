@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1b1b1d" />
+    <meta name="robots" content="noindex" />
+    <script>
+      try {
+        if (localStorage.getItem("deutschThemeV1") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#f6f4f1");
+        }
+      } catch (e) {}
+    </script>
+    <title>Vorlesen (Test) · Deutsch.</title>
+    <link rel="icon" href="../icon.webp" type="image/webp" />
+    <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
+    <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
+    <link rel="stylesheet" href="../home.css?v=82" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261110-pron-1" />
+    <link rel="stylesheet" href="bookshelf.css?v=20261109-fonts-1" />
+    <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
+    <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
+    <link rel="stylesheet" href="../wortschatz/collection-window.css?v=17" />
+    <link rel="stylesheet" href="reading-word-form.css?v=4" />
+    <!-- 11.11 (Alena): PROTOTYPE of reading aloud — a copy of bibliothek.html with the button left of the page number.
+         bibliothek.html is not changed. Differences: this style, the button, deutsch-voice-v2.js, reader/read-aloud.js. -->
+    <style>
+      .page-center { position:absolute; left:50%; transform:translateX(-50%); }
+      .page-center #page-status { position:static; transform:none; }
+      .read-aloud-toggle {
+        position:absolute; right:100%; top:50%; transform:translateY(-50%); margin-right:6px;
+        display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; border-radius:8px;
+        background:transparent; color:var(--secondary-text); cursor:pointer; -webkit-tap-highlight-color:transparent;
+      }
+      .read-aloud-toggle svg { display:block; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.2;
+        stroke-linecap:round; stroke-linejoin:round; }
+      .read-aloud-toggle svg * { vector-effect:non-scaling-stroke; }
+      .read-aloud-toggle .icon-pause { display:none; }
+      .read-aloud-toggle[data-state="reading"] { color:var(--mint); }
+      .read-aloud-toggle[data-state="reading"] .icon-play { display:none; }
+      .read-aloud-toggle[data-state="reading"] .icon-pause { display:block; }
+      .read-aloud-toggle:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
+      .reading-text .reading-word.is-spoken { background:color-mix(in srgb, var(--mint) 14%, transparent); }
+      .reading-text .reading-word.is-spoken-word { background:color-mix(in srgb, var(--mint) 40%, transparent); }
+    </style>
+  </head>
+  <body class="reading-body library-screen">
+    <main class="reader" id="reader">
+      <header class="reader-header">
+        <div class="reader-heading"><h1 id="page-title">Bibliothek.</h1></div>
+      </header>
+
+      <section class="library" id="library" aria-label="Your books">
+        <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
+        <div class="library-bookshelf" id="library-bookshelf" hidden></div>
+        <div class="library-edit-bar" id="library-edit-bar" hidden>
+          <button class="library-select-all" id="library-select-all" type="button" hidden>Alle auswählen</button>
+          <button class="library-edit" id="library-edit" type="button" aria-pressed="false">Bearbeiten</button>
+        </div>
+        <div class="book-list" id="book-list"></div>
+        <div class="empty-library" id="empty-library">
+          <div class="empty-mark" aria-hidden="true">Aa</div>
+          <h2 lang="de">Dein Leseraum</h2>
+          <p id="empty-library-text">Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
+        </div>
+        <!-- 09.11 (Alena): the note behind ⓘ is a window over the library (it used to push the shelf down under the dock);
+             its text follows the language setting (bibliothek.js, libraryTexts) -->
+        <dialog class="paste-dialog storage-dialog" id="storage-notice" aria-labelledby="storage-notice-title">
+          <div class="paste-dialog-heading"><h2 id="storage-notice-title" tabindex="-1" autofocus>Bücher hinzufügen</h2><button class="ui-close" id="storage-notice-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="storage-note" id="storage-note"></div>
+        </dialog>
+        <dialog class="paste-dialog" id="paste-dialog" aria-labelledby="paste-dialog-title">
+          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+        <form class="paste-form" id="paste-form">
+          <label for="paste-title">Titel</label>
+          <input id="paste-title" maxlength="120" placeholder="Mein Text" required />
+          <label for="paste-content">Deutscher Text</label>
+          <textarea id="paste-content" rows="8" required placeholder="Deutschen Text hier einfügen …"></textarea>
+          <button class="primary-action" type="submit">Speichern</button>
+        </form>
+        </dialog>
+        <input id="book-file" type="file" accept=".txt,.epub,text/plain,application/epub+zip" hidden />
+      </section>
+
+      <div class="library-fade" aria-hidden="true"></div>
+      <div class="library-bulk" id="library-bulk" aria-label="Ausgewählte Bücher" hidden>
+        <button class="library-bulk-button" id="bulk-reset" type="button" disabled>Zurücksetzen</button>
+        <button class="library-bulk-button is-danger" id="bulk-delete" type="button" disabled>Löschen</button>
+      </div>
+      <div id="library-actions" class="library-actions" aria-label="Library controls">
+        <button
+          class="storage-info"
+          id="storage-info"
+          type="button"
+          aria-label="Hinweise zu Büchern"
+          aria-haspopup="dialog"
+          aria-controls="storage-notice"
+        >
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          >
+            <circle cx="12" cy="12" r="9.5" />
+            <path d="M12 11v6" />
+            <circle cx="12" cy="7.6" r="0.4" fill="currentColor" />
+          </svg>
+        </button>
+        <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
+        <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="library-add-menu" id="library-add-menu" hidden>
+          <button id="add-book" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg><span>Datei hochladen <small>EPUB ohne DRM · TXT</small></span></button>
+          <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5h6M9 4.5a1 1 0 0 0-1 1V6h8v-.5a1 1 0 0 0-1-1M8 5.5H6.5A1.5 1.5 0 0 0 5 7v12a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V7a1.5 1.5 0 0 0-1.5-1.5H16M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg><span>Text einfügen <small>Einen deutschen Text einfügen</small></span></button>
+        </div>
+      </div>
+
+      <section class="reading-view" id="reading-view" hidden>
+        <div class="reading-toolbar">
+          <button class="toolbar-back" id="back-library" type="button" aria-label="Back to Bibliothek">
+            <span class="toolbar-arrow ui-chev ui-chev-back ui-chev-lone" aria-hidden="true"></span
+            ><span class="toolbar-title" id="toolbar-title"></span>
+          </button>
+          <div class="reader-tools">
+            <button
+              class="vocabulary-toggle"
+              id="vocabulary-toggle"
+              type="button"
+              aria-label="Open chapter vocabulary"
+              aria-haspopup="dialog"
+              aria-controls="vocabulary-dialog"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z" /></svg
+              ><span id="vocabulary-count">0</span></button
+            ><button
+              class="contents-toggle"
+              id="contents-toggle"
+              type="button"
+              aria-label="Open contents"
+              aria-haspopup="dialog"
+              aria-controls="contents-dialog"
+              hidden
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="chapter-progress-track" id="chapter-progress-track" hidden>
+          <span id="chapter-progress-fill"></span>
+        </div>
+        <div class="page-viewport" id="page-viewport">
+          <div class="page-flow" id="page-flow">
+            <h1 class="book-headline" id="book-headline"></h1>
+            <article class="reading-text" id="reading-text" lang="de" aria-label="Book text"></article>
+            <nav class="chapter-end" id="chapter-end" aria-label="Continue reading" hidden></nav>
+          </div>
+        </div>
+        <div class="page-controls">
+          <button id="page-previous" type="button" aria-label="Previous page">←</button
+          ><span class="page-center"
+            ><button class="read-aloud-toggle" id="read-aloud-toggle" type="button" aria-label="Vorlesen" title="Vorlesen" aria-pressed="false" hidden
+              ><svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-play" d="M8 5.5v13l10.5-6.5z"/><g class="icon-pause"><path d="M9 6v12"/><path d="M15 6v12"/></g></svg></button
+            ><span id="page-status" role="status" aria-live="polite"></span
+          ></span
+          ><button id="page-next" type="button" aria-label="Next page">→</button>
+          <div class="reader-bottom-tools">
+            <button
+              class="text-settings-toggle"
+              id="text-settings-toggle"
+              type="button"
+              aria-label="Texteinstellungen"
+              title="Texteinstellungen"
+              aria-haspopup="dialog"
+              aria-controls="text-settings"
+              aria-expanded="false"
+            >
+              <span aria-hidden="true">A<small>a</small></span></button
+            ><button
+              class="highlights-toggle"
+              id="highlights-toggle"
+              type="button"
+              aria-label="Hide vocabulary highlights"
+              title="Hide vocabulary highlights"
+              aria-pressed="true"
+              aria-controls="reading-text"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                <circle cx="12" cy="12" r="3" />
+                <path class="eye-slash" d="M3 3l18 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="book-confirm"
+        id="delete-confirm"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="delete-confirm-title"
+        aria-describedby="delete-confirm-text"
+        hidden
+      >
+        <div class="book-confirm-card">
+          <h2 id="delete-confirm-title">Text löschen?</h2>
+          <p id="delete-confirm-text">Der Text und dein Lesefortschritt werden von diesem Gerät entfernt.</p>
+          <div class="book-confirm-actions">
+            <button class="book-cancel" id="cancel-delete" type="button">Abbrechen</button>
+            <button class="book-delete-confirm" id="confirm-delete" type="button">Löschen</button>
+          </div>
+        </div>
+      </div>
+      <!-- 10.11 (Alena): one word added to Wortschatz from «Словарная справка» -->
+    <div class="saved-card" id="saved-card" role="status" aria-live="polite" hidden>
+      <span class="saved-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span><b class="saved-word" lang="de"></b><small class="saved-where"></small></span>
+    </div>
+    <div class="reader-toast" id="reader-toast" role="status" aria-live="polite" hidden></div>
+      <div class="word-popover" id="word-popover" role="dialog" aria-label="Word translation" hidden>
+        <div class="popover-heading">
+          <p class="popover-word" id="popover-word"></p>
+          <button
+            class="popover-bookmark"
+            id="popover-bookmark"
+            type="button"
+            aria-label="Mark as unknown"
+            title="Mark as unknown"
+            aria-pressed="false"
+            disabled
+          >
+            <svg viewBox="0 0 16 24" aria-hidden="true"><path d="M1.5 0v22.5l6.5-4.6 6.5 4.6V0" /></svg>
+          </button>
+        </div>
+        <p class="popover-grammar" id="popover-grammar" lang="de" hidden></p>
+        <p class="popover-translation" id="popover-translation" tabindex="-1"></p>
+        <details id="popover-alternatives" class="popover-alternatives" hidden>
+          <summary>Other meanings</summary>
+          <div id="popover-choices"></div>
+        </details>
+        <details id="popover-form-notes" class="popover-alternatives" hidden>
+          <summary>Word form · Wiktionary</summary>
+          <div id="popover-form-note-text"></div>
+        </details>
+        <button
+          class="popover-source"
+          id="popover-source"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="data-sources"
+          hidden
+        >
+          Wiktionary · CC BY-SA 4.0
+        </button>
+        <button class="popover-more" id="popover-more" type="button">
+          Dictionary details <span class="ui-chev ui-chev-lone" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div
+        class="dictionary-sheet"
+        id="dictionary-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sheet-word"
+        hidden
+      >
+        <button class="sheet-scrim" id="sheet-scrim" type="button" aria-label="Close details"></button>
+        <section class="sheet-card">
+          <button class="sheet-close ui-close" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+          <div id="dictionary-card"></div>
+          <p class="visually-hidden" id="dictionary-pager-status" aria-live="polite"></p>
+        </section>
+      </div>
+    </main>
+    <dialog class="contents-dialog" id="contents-dialog" aria-labelledby="contents-heading">
+      <div class="reader-drawer-content">
+        <div class="contents-header">
+          <div>
+            <p id="contents-book-title"></p>
+            <h2 id="contents-heading" tabindex="-1" autofocus>Inhalt</h2>
+          </div>
+          <button id="contents-close" type="button" aria-label="Close contents">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6" />
+              <path class="drawer-up-arrow" d="M6 15l6-6 6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="contents-columns" aria-hidden="true">Wörter</div>
+        <div class="contents-list" id="contents-list"></div>
+        <p id="contents-empty" role="status" hidden>Keine Kapitel gefunden.</p>
+      </div>
+    </dialog>
+    <dialog class="text-settings" id="text-settings" aria-labelledby="text-settings-heading">
+      <div class="text-settings-header">
+        <h2 id="text-settings-heading" tabindex="-1" autofocus>Text</h2>
+        <button class="text-settings-close ui-close" type="button" data-text-close aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+      </div>
+      <div class="text-size-row">
+        <button class="text-size-step is-smaller" type="button" data-text-smaller aria-label="Kleiner">A</button>
+        <input type="range" min="0" max="6" step="1" data-text-size aria-label="Schriftgröße" />
+        <button class="text-size-step is-larger" type="button" data-text-larger aria-label="Größer">A</button>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-spacing-label">
+        <span id="text-spacing-label">Zeilenabstand</span>
+        <div class="text-segments">
+          <button type="button" data-setting="spacing" data-value="compact" aria-label="Eng">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14M5 11h14M5 14h14M5 17h14" /></svg></button
+          ><button type="button" data-setting="spacing" data-value="normal" aria-label="Normal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" /></svg></button
+          ><button type="button" data-setting="spacing" data-value="loose" aria-label="Weit">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14M5 12h14M5 18.5h14" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-align-label">
+        <span id="text-align-label">Ausrichtung</span>
+        <div class="text-segments">
+          <button type="button" data-setting="align" data-value="justify" aria-label="Blocksatz">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg></button
+          ><button type="button" data-setting="align" data-value="left" aria-label="Linksbündig">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h11M4 14h14M4 18h9" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="text-setting-row" role="group" aria-labelledby="text-font-label">
+        <span id="text-font-label">Schrift</span>
+        <div class="text-segments">
+          <button class="is-serif" type="button" data-setting="font" data-value="serif">Serif</button
+          ><button class="is-sans" type="button" data-setting="font" data-value="sans">Sans</button>
+        </div>
+      </div>
+    </dialog>
+    <dialog class="vocabulary-dialog" id="vocabulary-dialog" aria-labelledby="vocabulary-heading">
+      <div class="reader-drawer-content">
+        <div class="vocabulary-header">
+          <div>
+            <label class="vocabulary-scope-label"
+              ><select id="vocabulary-scope" aria-label="Wörter aus Kapitel oder Buch">
+                <option value="chapter">Kapitel</option>
+                <option value="book">Buch</option>
+              </select></label
+            >
+            <p id="vocabulary-subtitle"></p>
+            <h2 id="vocabulary-heading" tabindex="-1" autofocus>Meine Wörter</h2>
+          </div>
+          <button id="vocabulary-close" type="button" aria-label="Close vocabulary">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path class="drawer-side-arrow" d="M5 12h14M13 6l6 6-6 6" />
+              <path class="drawer-up-arrow" d="M6 15l6-6 6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="vocabulary-controls">
+          <div class="vocabulary-selection-tools">
+            <label class="vocabulary-select-all"
+              ><input id="vocabulary-select-all" type="checkbox" /> Alle auswählen</label
+            ><button
+              class="vocabulary-copy"
+              id="vocabulary-copy"
+              type="button"
+              aria-label="Ausgewählte Wörter kopieren"
+              title="Ausgewählte Wörter kopieren"
+              disabled
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="7" width="13" height="15" rx="3" />
+                <path d="M9 7V5a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-1" />
+              </svg>
+            </button>
+          </div>
+          <p class="vocabulary-status" id="vocabulary-status" role="status"></p>
+        </div>
+        <div class="vocabulary-list" id="vocabulary-list"></div>
+        <p class="vocabulary-empty" id="vocabulary-empty" hidden>
+          Noch keine Wörter gespeichert.<br />Markiere neue Wörter beim Lesen.
+        </p>
+        <div class="vocabulary-footer">
+          <p class="vocabulary-selection" id="vocabulary-selection" role="status"></p>
+          <div class="vocabulary-actions" id="vocabulary-actions">
+            <button class="vocabulary-main" id="vocabulary-add" type="button" disabled hidden>
+              + 0 zum Wortschatz
+            </button>
+          </div>
+          <p class="vocabulary-action-status" id="vocabulary-action-status" role="status"></p>
+          <a
+            class="vocabulary-continue"
+            id="vocabulary-continue"
+            href="../wortschatz/index.html?v=20261110-confirm-1"
+            hidden
+            >Weiter im Wortschatz <span class="ui-chev" aria-hidden="true"></span></a
+          >
+          <label class="vocabulary-manual-copy" id="vocabulary-manual-copy" hidden
+            >Zum Kopieren markieren<textarea id="vocabulary-copy-text" readonly rows="4"></textarea>
+          </label>
+        </div>
+      </div>
+      <!-- 08.11 (Alena): the second screen of Meine Wörter — a word's dictionary card slides in from the right -->
+      <section class="vocabulary-detail" id="vocabulary-detail" aria-label="Wörterbuch" hidden inert>
+        <div class="vocabulary-detail-bar">
+          <button class="vocabulary-back" id="vocabulary-back" type="button">
+            <span class="ui-chev ui-chev-back" aria-hidden="true"></span>Meine Wörter
+          </button>
+        </div>
+        <div class="vocabulary-detail-scroll" id="vocabulary-detail-scroll">
+          <div class="vocabulary-detail-card" id="vocabulary-detail-card"></div>
+          <button class="vocabulary-detail-passage" id="vocabulary-detail-passage" type="button">
+            Im Text zeigen <span class="ui-chev" aria-hidden="true"></span>
+          </button>
+        </div>
+      </section>
+    </dialog>
+    <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
+      <button
+        class="sources-close ui-close"
+        id="sources-close"
+        type="button"
+        aria-label="Schließen"
+        autofocus
+      >
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+      </button>
+      <h2 id="data-sources-title">Quellen und Lizenzen</h2>
+      <h3>German–English Dictionary</h3>
+      <p>
+        Dictionary data is derived from Wiktionary contributors, extracted via Kaikki.org, and distributed in this
+        application using the German–English SQLite dataset provided by Lector.
+      </p>
+      <p>
+        The dictionary data is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA
+        4.0) License.
+      </p>
+      <p>
+        The source dataset was extracted from Wiktionary via Kaikki.org and packaged as a lookup database by Lector. The
+        original SQLite dataset was converted into partitioned JSON files for application lookup. Dictionary content was
+        preserved.
+      </p>
+      <h3>Quellen</h3>
+      <ul>
+        <li><a href="https://en.wiktionary.org/" target="_blank" rel="noopener">Wiktionary ↗</a></li>
+        <li><a href="https://kaikki.org/dictionary/German/" target="_blank" rel="noopener">Kaikki.org ↗</a></li>
+        <li>
+          <a href="https://lector.dev/free/german-dictionary/" target="_blank" rel="noopener"
+            >Lector German–English Dictionary ↗</a
+          >
+        </li>
+      </ul>
+      <h3>Russische Bedeutungen</h3>
+      <p>
+        Russian Wiktionary contributors; extracted and postprocessed via Wiktextract / Kaikki.org. Selected definition
+        fields were converted into partitioned JSON with display annotations; source texts were preserved.
+      </p>
+      <p>
+        <a href="https://kaikki.org/ruwiktionary/Немецкий/index.html" target="_blank" rel="noopener"
+          >Kaikki.org · Russian Wiktionary ↗</a
+        >
+      </p>
+      <div id="russian-source-articles"></div>
+      <h3>Lizenz</h3>
+      <p>
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"
+          >Creative Commons Attribution-ShareAlike 4.0 International ↗</a
+        >
+      </p>
+    </dialog>
+    <div class="coll-modal ui-window" id="collModal" data-host="reader" aria-hidden="true">
+      <div class="coll-card ui-window-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div>
+    </div>
+    <script src="../components/deutsch-translation-v1.js?v=2"></script>
+    <script src="../components/deutsch-day-v1.js?v=1"></script>
+    <script src="../wortschatz/collection.js?v=20261102-lang-3"></script>
+    <script src="resolver/data-cache.js?v=20261108-cache-timeline-1"></script>
+    <script src="resolver/fallback-dictionary.js?v=20261111-trans-e7-3"></script>
+    <script src="resolver/russian-translations.js?v=20261110-ru-whole-3"></script>
+    <script src="vendor/jszip-3.10.1.min.js"></script>
+    <script src="reader/reading-data.js?v=20261011-author-1"></script>
+    <script src="reader/book-import.js?v=20261011-cover-quality-2"></script>
+    <script src="reader/epub-import.js?v=20261011-cover-quality-2"></script>
+    <script src="resolver/vocabulary-storage.js?v=20261103-compound-article-1"></script>
+    <script src="reader/meaning-selections.js?v=2"></script>
+    <script src="resolver/lemma-resolver.js?v=20261111-plural3-5"></script>
+    <script src="reader/vocabulary-highlights.js?v=20261024-lowercase-1"></script>
+    <script src="reader/vocabulary-list.js?v=20261024-lowercase-1"></script>
+    <script src="../wortschatz/dictionary-card.js?v=20261007-adjadv-1"></script>
+    <script src="../wortschatz/dictionary-import.js?v=20261102-lang-3"></script>
+    <script src="../components/deutsch-window-v1.js?v=3"></script>
+    <script src="../wortschatz/collection-window.js?v=20261110-confirm-1"></script>
+    <script src="reader/vocabulary-actions.js?v=20261007-adjadv-1"></script>
+    <script src="reader/vocabulary-panel.js?v=20261110-confirm-1"></script>
+    <script src="resolver/meaning-display.js?v=20261111-plural3-1"></script>
+    <script src="reader/reader-pagination.js?v=20261011-finish-position-1"></script>
+    <script src="reader/reader-text-settings.js?v=20261109-fonts-1"></script>
+    <script src="reader/pronoun-reference.js?v=20261110-pron-1"></script>
+    <script src="reader/bookshelf.js?v=20261109-fonts-1"></script>
+    <script src="../components/deutsch-voice-v2.js?v=1"></script>
+    <script src="reader/bibliothek.js?v=20261111-wn-einig72-1"></script>
+    <script src="reader/read-aloud.js?v=1"></script>
+    <div class="version-mark" aria-hidden="true">v60</div>
+  </body>
+</html>
