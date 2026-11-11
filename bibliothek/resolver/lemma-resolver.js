@@ -14631,6 +14631,135 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const bang = end === "!" && !/,/u.test(after.slice(0, after.search(/[.!?]/u)));
           return {strong, weak, subject, end, bang};
         };
+        // Imperativ without its opening position (second resolver chat 11.11, advisor: Grimm list item 1, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md):
+        // so geh hübsch, nun trag mich, Jetzt geht und sucht, kommt und helft mir, Sei still und weine nicht, das brecht für mich ab.
+        // (1) a form only an imperative or a plural ihr can be — the own card lists it only as Imperativ (geh, vergiss, trag), or it is
+        // the own Präsens ihr form and not the er form (nehmt / nimmt, helft / hilft, brecht / bricht) — with no subject pronoun in its
+        // part before it (to the comma, und / oder after a comma, a quote or . ! ? : ;), none right after it, no ihr in its part (a plural
+        // ihr form is Präsens with ihr: nehmt ihr, ihr nehmt; es / sie / 's after it are objects: esst's auf, nehmt sie);
+        // (2) a form an ich / er form spells alike (geht, kommt, weine, schüttel): before it in its part only a word that opens an
+        // imperative (so, nun, jetzt, da, dann, also, doch, bitte, ach, nur … , und / oder), and from it to the end of its part no word that
+        // can be its subject — a pronoun in the nominative, a determiner, nichts / alles …, a capital word (Euch / Eurer … aside), a
+        // number; a group after a preposition is no subject (bleibt bei mir, geht in den Wald, seid auf eurer Hut vor dem Wolf).
+        // No «?» at the end of the sentence.
+        const IMPERATIVE_UPGRADE = false;
+        const IMPERATIVE_OPENERS = /^(?:so|nun|jetzt|da|dann|also|doch|bitte|ach|ja|nein|oh|o|nur|endlich|drum|und|oder|aber|denn|sondern)$/u;
+        const NOMINATIVE_WORDS = /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|ein|eine|kein|keine|mein|meine|dein|deine|sein|seine|ihre|unser|unsere|euer|eure|dieser|diese|dieses|jener|jene|jenes|jeder|jede|jedes|alle|alles|viele|einige|manche|welche|solche|beide|nichts|etwas|jemand|niemand|einer|keiner|was|wer|wenig|genug|mehr|dies|allerlei|vieles|manches|einiges|beides|anderes|folgendes|keins|eins)$/u;
+        const IMPERATIVE_CAPITAL_OBJECTS = /^(?:Euch|Eure|Euer|Eurem|Euren|Eurer|Eures|Ihnen|Dir|Dich|Mir|Mich)$/u;
+        const IMPERATIVE_SUBORDINATORS = /^(?:dass|daß|ob|wenn|weil|als|wer|was|wie|wo|wann|warum|obwohl|obgleich|nachdem|bevor|ehe|bis|seit|seitdem|sobald|solange|während|damit|falls|sofern|indem|je|der|die|das|dem|den|deren|dessen|welche|welcher|welches)$/u;
+        const IMPERATIVE_FRONTED = /^(?:das|dies|die|den|ihn|darum|drum|deshalb)$/u;
+        const SLOT_PREPOSITIONS = /^(?:in|an|auf|aus|bei|mit|nach|von|zu|vor|hinter|über|unter|neben|zwischen|durch|für|gegen|ohne|um|bis|seit|wegen|trotz|statt|während|ab|zum|zur|im|am|ins|ans|vom|beim|aufs|ums|durchs|fürs|hinters|übers|unters|vors)$/u;
+        // the words from a verb to the end of its part hold no subject: a group after a preposition is skipped (up to its noun / pronoun)
+        const emptySubjectSlot = words => {
+          for (let k = 0; k < words.length; k++) {
+            const w = words[k], low = w.toLowerCase();
+            if (SLOT_PREPOSITIONS.test(low)) {
+              let j = k + 1;
+              while (j < words.length && j <= k + 4 && !/^\p{Lu}/u.test(words[j]) && !/^(?:mir|mich|dir|dich|ihm|ihn|uns|euch|ihnen|sich)$/u.test(words[j])) j++;
+              k = j; continue;
+            }
+            if (/^['’]s$/u.test(w) || /^\d/u.test(w) || NOMINATIVE_WORDS.test(low)) return false;
+            if (/^\p{Lu}/u.test(w) && !IMPERATIVE_CAPITAL_OBJECTS.test(w)) return false;
+          }
+          return true;
+        };
+        // a form that is only an imperative or a plural ihr form: the own card's Imperativ alone (geh, trag), or its Präsens ihr and not er
+        const ihrOrImperativeOnly = (word, entry) => {
+          const f = norm(word), first = x => norm(String(x || "")).split(/\s+/u)[0];
+          const table = formsOf(entry);
+          if (table?.["Präsens"] && first(table["Präsens"].ihr) === f && first(table["Präsens"]["er/sie/es"]) !== f) return "ihr";
+          const rows = (verbAnalyses.get(f) || []).filter(r => !entry || r.entry === entry);
+          return rows.length && rows.every(r => r.kind === "imperative") ? "imperative" : null;
+        };
+        const imperativeSlot = () => {
+          const sentence = String(context?.sentence || ""), at = sources.get("Imperativ")?.start ?? context?.tokenOffset;
+          if (!Number.isInteger(at)) return null;
+          const verb = (/^[\p{L}\p{M}]+/u.exec(sentence.slice(at)) || [""])[0];
+          if (!verb) return null;
+          const after = sentence.slice(at + verb.length);
+          // (the end of its sentence or of its quote: »Sei still und weine nicht«, antwortete der Frosch, »… was gibst du mir?«)
+          if (((/[.!?«“]/u.exec(after) || [""])[0]) === "?") return null;
+          // (a quote or a bracket closed before the verb belongs to its part — Das Konzert „César“ findet, Die Steinach im Kreis Coburg
+          // (Oberfranken) liegt, »Kriech hinein«, sagte die Hexe, »und sieh zu —; a quote opens a part only after the start, a colon, a
+          // comma, . ! ? ; or a dash — not a title inside its clause: die einstige „Miss American Dream“, als „sicher nicht wichtig“)
+          let before = sentence.slice(0, at);
+          for (let guard = 0; guard < 20; guard++) {
+            const next = before.replace(/\([^()]*\)|„[^„“”"]*[“”"]|»[^»«]*«|«[^«»]*»|"[^"]*"|“[^“”]*”/u, " Q ");
+            if (next === before) break;
+            before = next;
+          }
+          before = before.replace(/([^\s:,.!?;–—(])(\s*)[»«„“"](?=[^»«„“"]*$)/u, "$1$2");
+          const hard = [";",":",".","!","?","»","«","„","“","\"","–","—","(",")"];
+          const cutAt = marks => Math.max(...marks.map(m => before.lastIndexOf(m))) + 1;
+          const wordsOf = text => [...text.matchAll(/[\p{L}\p{M}\d]+|['’]s(?![\p{L}\p{M}])/gu)].map(m => m[0]);
+          const wordsBefore = wordsOf(before.slice(cutAt([",",...hard])));
+          if (wordsBefore.some(w => /^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(w) || ["Ich","Du","Er","Es","Wir","Ihr","Man"].includes(w))) return null;
+          const stop = after.search(/[,;:.!?»«„“"–—()]|\s(?:und|oder)\s/u);
+          const rest = wordsOf(stop < 0 ? after : after.slice(0, stop));
+          const sure = ihrOrImperativeOnly(verb, candidate.source === "main" ? candidate.item : null) ||
+            (ownLabels.size > 0 && [...ownLabels].every(t => t === "Imperativ") ? "imperative" : null);
+          // before the verb in its part: words that open an imperative (so, nun, jetzt …); a form sure by its spelling may also follow one
+          // fronted word — das tu mir nach, das brecht für mich ab, die freßt in Gottes Namen (not sei: das sei sein Schicksal, ihm sei
+          // eiskalt — Konjunktiv I); after und / oder an earlier imperative of its part — its own verb first after the openers, sure by its
+          // form or with no subject after it (Jetzt geht und sucht, Kommt nur herein und bleibt; not Mein Vater ist nebenan und kauft)
+          // (a part opening with und after a comma: as with nothing before — …, als fischtet Ihr, und fischt also fort; und jetzt sei still)
+          // (und opening a quote continues the speech before the narration: its subject there is this verb's — »Bei Morgengrauen bin ich
+          // zurück«, sagte Filch, »und hol die Reste ab«; »Kriech hinein«, sagte die Hexe, »und sieh zu« has none)
+          { const raw = sentence.slice(0, at), resumed = /[»„“"]\s*(?:und|oder)\s*$/u.test(raw) && /([»„“"])([^»«„“”"]*)[«“”"][^»«„“”"]*[»„“"]\s*(?:und|oder)\s*$/u.exec(raw);
+            if (resumed && /(?:^|[^\p{L}\p{M}])(?:ich|wir|er|es|man)(?![\p{L}\p{M}])/iu.test(resumed[2])) return null; }
+          let k = /^(?:und|oder)$/u.test(wordsBefore[0] || "") ? 1 : 0;
+          while (k < wordsBefore.length && IMPERATIVE_OPENERS.test(wordsBefore[k].toLowerCase()) && !/^(?:und|oder)$/u.test(wordsBefore[k])) k++;
+          let conjunctHead = false;
+          if (k < wordsBefore.length) {
+            if (sure && norm(verb) !== "sei" && k === wordsBefore.length - 1 && IMPERATIVE_FRONTED.test(wordsBefore[k].toLowerCase())) {}
+            else {
+              if (!/^(?:und|oder)$/u.test(wordsBefore.at(-1))) return null;
+              const conjunct = wordsBefore.slice(k, -1), head = conjunct[0];
+              if (!head || NOMINATIVE_WORDS.test(head.toLowerCase()) || conjunct.slice(1).some(w => /^(?:und|oder)$/u.test(w))) return null;
+              const rows = verbAnalyses.get(norm(head)) || [];
+              if (!rows.some(r => r.kind === "imperative")) return null;
+              if (!rows.some(r => ihrOrImperativeOnly(head, r.entry)) && !emptySubjectSlot(conjunct.slice(1))) return null;
+              conjunctHead = true;
+            }
+          }
+          if (sure) {
+            if (rest.includes("ihr") || rest.includes("Ihr") || rest.some(w => /^(?:keiner|niemand|jemand|einer)$/u.test(w))) return null;
+            if (/^(?:ich|du|er|wir|man|Sie)$/u.test(rest[0] || "")) return null;
+            return {sure:true};
+          }
+          // (a form an er / ich form spells alike only in speech: inside an open quote, or a sentence that speaks to you — du, dich, euch,
+          // bitte … — or ends with «!»; narration with its subject left out — Nun sucht die Polizei den Halter – und bittet um Hinweise;
+          // Jashari aber, dieser so hoch gehandelte 21-Jährige, sprintet einfach weiter — keeps no tense)
+          {
+            const open = /[»„“"]/u.test(before);
+            const address = /(?:^|[^\p{L}\p{M}])(?:du|dich|dir|dein\p{L}*|euch|Euch|euer|eure\p{L}*|Eure\p{L}*|Euer|bitte|Bitte)(?![\p{L}\p{M}])/u.test(sentence) || /!\s*[«“"]?\s*$/u.test(sentence);
+            if (!open && !address) return null;
+          }
+          // (a form an er / ich form spells alike after a comma: not when a part before it in its sentence is a main clause with its
+          // subject — the subject is shared: Sie steht auf, geht ins Bad und duscht; da ist er gesund, heiter, arbeitet mit Lust; nor after
+          // a clause with a subordinator — the clause may be the subject: Wer zu spät kommt, bleibt draußen; Dass er kommt, freut mich;
+          // wer dem Herrn befiehlt seine Sach, schweigt, leidet — unless so / dann … opens the part: wenn der König auf der Wachtparade ist,
+          // so stellt Euch hin. Parts with no finite verb or no subject are fine: ihr Vöglein unter dem Himmel, kommt und helft; Ach, schüttel mich.)
+          {
+            const opener = /^(?:so|dann|da|also|nun|jetzt)$/u.test((wordsBefore[0] || "").toLowerCase());
+            const parts = before.slice(cutAt(hard), cutAt([",",...hard])).split(",").map(wordsOf).filter(part => part.length);
+            for (const part of parts) {
+              if (IMPERATIVE_SUBORDINATORS.test(part[0].toLowerCase())) { if (!opener) return null; continue; }
+              if (part.some((w, i) => NOMINATIVE_WORDS.test(w.toLowerCase()) || i > 0 && /^\p{Lu}/u.test(w) && !IMPERATIVE_CAPITAL_OBJECTS.test(w)) &&
+                part.some(w => (verbAnalyses.get(norm(w)) || []).some(r => r.kind === "finite"))) return null;
+            }
+          }
+          // (the subject is a clause or an infinitive after it: Nun steht fest: …, Jetzt bleibt abzuwarten, ob …, Nun liegt nahe, dass …)
+          {
+            const tail = stop < 0 ? "" : after.slice(stop);
+            if (/^\s*[:]/u.test(tail) || /^\s*,\s*(?:dass|daß|ob|wie|was|wer|wen|wem|wann|wo|warum|weshalb|wieso|welch\p{L}*)(?![\p{L}\p{M}])/u.test(tail) ||
+              rest.some(w => /^\p{Ll}+zu\p{Ll}+en$/u.test(w) && w.length > 7) || rest.includes("zu")) return null;
+          }
+          // (the imperative before und has no subject, nor has this one: Jetzt geht und sucht Wackersteine — only a pronoun after it
+          // gives it its own subject)
+          if (conjunctHead) return /^(?:ich|du|er|sie|es|wir|ihr|man|Sie|['’]s)$/u.test(rest[0] || "") ? null : {sure:false};
+          return emptySubjectSlot(rest) ? {sure:false} : null;
+        };
         // Imperativ on Sie / wir (G96; advisor 08.11, claude/IMPERATIVE_SIE_WIR_COUNT_2026-11-08_RU.md): the verb opens its part, Sie / wir
         // right after it, the sentence ends with «!» or «.» (not «?») — Gehen wir!, Seien Sie still!, Strecken Sie Ihren Arm aus. Not: a
         // verb of opinion with nothing after Sie (Meinen Sie, …; Wissen Sie, … — a question / «знаете»; Glauben Sie mir! stays Imperativ);
@@ -14659,9 +14788,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const sign = imperativeSigns(), own = [...ownLabels];
           if (sign && !sign.subject && sign.end !== "?") {
             if (own.every(t => t === "Imperativ") && (sign.strong || sign.weak)) return {tense:"Imperativ"};
-            if (sign.strong && own.every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t))) return {tense:sign.bang ? "Imperativ" : "Imperativ / Präsens"};
+            if (sign.strong && own.every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t))) return {tense:sign.bang || IMPERATIVE_UPGRADE && imperativeSlot() ? "Imperativ" : "Imperativ / Präsens"};
           }
         }
+        if (labels.has("Imperativ") && [...labels].every(t => ["Imperativ","Präsens","Konjunktiv I","?"].includes(t)) && [...ownLabels].every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t)) &&
+            !(candidate.source === "main" && candidate.item?.imperative === "none") && !modalLemmas.has(base) && imperativeSlot()) return {tense:"Imperativ"};
         // (advisor 10.11, train map: Auch deshalb entstanden bald populistische Bewegungen) a Präteritum spelled as its Partizip II — a strong
         // plural (entstanden) — that participleModifier has already read as the finite verb of its part (second position, no auxiliary / other
         // finite verb: the sign of efd7528b; context.finiteClause) is Präteritum. Weak -te forms keep their own rules (1.5, weakPastIndicative).
@@ -14670,7 +14801,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // An imperative opens its clause; elsewhere the same spelling is another form or another word.
         if (only === "Imperativ") {
           const sign = imperativeSigns();
-          if (!sign || sign.subject || !(sign.strong || sign.weak && ownLabels.size && [...ownLabels].every(t => t === "Imperativ"))) return null;
+          if (!sign || sign.subject || !(sign.strong || sign.weak && ownLabels.size && [...ownLabels].every(t => t === "Imperativ"))) return imperativeSlot() ? {tense:"Imperativ"} : null;
         }
         return {tense:only};
       }
