@@ -14672,7 +14672,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // can be its subject — a pronoun in the nominative, a determiner, nichts / alles …, a capital word (Euch / Eurer … aside), a
         // number; a group after a preposition is no subject (bleibt bei mir, geht in den Wald, seid auf eurer Hut vor dem Wolf).
         // No «?» at the end of the sentence.
-        const IMPERATIVE_UPGRADE = false;
         const IMPERATIVE_OPENERS = /^(?:so|nun|jetzt|da|dann|also|doch|bitte|ach|ja|nein|oh|o|nur|endlich|drum|und|oder|aber|denn|sondern)$/u;
         const NOMINATIVE_WORDS = /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|ein|eine|kein|keine|mein|meine|dein|deine|sein|seine|ihre|unser|unsere|euer|eure|dieser|diese|dieses|jener|jene|jenes|jeder|jede|jedes|alle|alles|viele|einige|manche|welche|solche|beide|nichts|etwas|jemand|niemand|einer|keiner|was|wer|wenig|genug|mehr|dies|allerlei|vieles|manches|einiges|beides|anderes|folgendes|keins|eins)$/u;
         const IMPERATIVE_CAPITAL_OBJECTS = /^(?:Euch|Eure|Euer|Eurem|Euren|Eurer|Eures|Ihnen|Dir|Dich|Mir|Mich)$/u;
@@ -14790,6 +14789,26 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (conjunctHead) return /^(?:ich|du|er|sie|es|wir|ihr|man|Sie|['’]s)$/u.test(rest[0] || "") ? null : {sure:false};
           return emptySubjectSlot(rest) ? {sure:false} : null;
         };
+        // a verb opening its sentence with no subject: «Imperativ» without «!» only when a particle of request follows it at once — Kommt
+        // nur herein, Geht doch hin, Sag mal, Wartet bitte hier, Bleib ruhig sitzen (advisor 11.11, claude/IMPERATIVE_POSITION_COUNT_2026-11-11_RU.md);
+        // otherwise «Imperativ / Präsens» stays (colloquial speech leaves the subject out). Not before «?» (Kommt doch noch?),
+        // not with a word that can be its subject later in its part (Weiß doch jeder).
+        const imperativeParticle = () => {
+          const sentence = String(context?.sentence || ""), at = sources.get("Imperativ")?.start ?? context?.tokenOffset;
+          if (!Number.isInteger(at)) return false;
+          const verb = (/^[\p{L}\p{M}]+/u.exec(sentence.slice(at)) || [""])[0];
+          const after = sentence.slice(at + verb.length);
+          const m = /^\s+(nur|doch|mal|bitte|schon|ruhig)(?![\p{L}\p{M}])/u.exec(after);
+          if (!verb || !m) return false;
+          // (not after a dash — an aside with its subject left out: er hat nur meinen Stiefel – spielt nur –)
+          if (/[–—-]\s*$/u.test(sentence.slice(0, at))) return false;
+          if (((/[.!?«“]/u.exec(after) || [""])[0]) === "?") return false;
+          const stop = after.search(/[,;:.!?»«„“"–—()]|\s(?:und|oder)\s/u);
+          const rest = [...(stop < 0 ? after : after.slice(0, stop)).matchAll(/[\p{L}\p{M}\d]+|['’]s(?![\p{L}\p{M}])/gu)].map(x => x[0]);
+          // (… schon at the end of its part and … wieder are speech with the subject left out: Geht schon, Passt schon, Geht mal wieder los)
+          if (rest[1] === "wieder" || m[1] === "schon" && rest.length < 2) return false;
+          return emptySubjectSlot(rest);
+        };
         // Imperativ on Sie / wir (G96; advisor 08.11, claude/IMPERATIVE_SIE_WIR_COUNT_2026-11-08_RU.md): the verb opens its part, Sie / wir
         // right after it, the sentence ends with «!» or «.» (not «?») — Gehen wir!, Seien Sie still!, Strecken Sie Ihren Arm aus. Not: a
         // verb of opinion with nothing after Sie (Meinen Sie, …; Wissen Sie, … — a question / «знаете»; Glauben Sie mir! stays Imperativ);
@@ -14818,7 +14837,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const sign = imperativeSigns(), own = [...ownLabels];
           if (sign && !sign.subject && sign.end !== "?") {
             if (own.every(t => t === "Imperativ") && (sign.strong || sign.weak)) return {tense:"Imperativ"};
-            if (sign.strong && own.every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t))) return {tense:sign.bang || IMPERATIVE_UPGRADE && imperativeSlot() ? "Imperativ" : "Imperativ / Präsens"};
+            if (sign.strong && own.every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t))) return {tense:sign.bang || imperativeParticle() ? "Imperativ" : "Imperativ / Präsens"};
           }
         }
         if (labels.has("Imperativ") && [...labels].every(t => ["Imperativ","Präsens","Konjunktiv I","?"].includes(t)) && [...ownLabels].every(t => ["Imperativ","Präsens","Konjunktiv I"].includes(t)) &&
