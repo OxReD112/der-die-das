@@ -1221,6 +1221,150 @@
         "order": "fixed",
         "scope": "clause",
         "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "schnitte",
+              "schneid",
+              "geschnitten"
+            ]
+          },
+          {
+            "form": [
+              "Gesichter",
+              "Grimassen",
+              "Fratzen"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Gesichter",
+              "Grimassen",
+              "Fratzen"
+            ],
+            "not_after": [
+              "mein",
+              "meinem",
+              "dein",
+              "deinem",
+              "sein",
+              "seinem",
+              "ihr",
+              "ihrem",
+              "unser",
+              "unserem",
+              "euer",
+              "eurem",
+              "meine",
+              "deine",
+              "seine",
+              "ihre",
+              "unsere",
+              "eure",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "das",
+              "dem",
+              "des",
+              "die",
+              "den",
+              "ins",
+              "im",
+              "vom",
+              "zum",
+              "übers",
+              "aufs",
+              "vors",
+              "durchs",
+              "ums",
+              "ganze",
+              "ganzes",
+              "ganzen"
+            ]
+          },
+          {
+            "form": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "schnitte",
+              "schneid",
+              "geschnitten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
       }
     ],
     "tests": {
@@ -1233,7 +1377,10 @@
         "Er hat ein schiefes Gesicht gezogen.",
         "Hör auf, Grimassen zu ziehen!",
         "Zieh doch nicht so ein Gesicht!",
-        "Er zog wieder dieses Gesicht."
+        "Er zog wieder dieses Gesicht.",
+        "Er musste Gesichter schneiden, damit die Leute lachen.",
+        "Die Kinder schnitten Grimassen hinter seinem Rücken.",
+        "Sie schnitt Grimassen."
       ],
       "negative": [
         "Sie zog die Decke über ihr Gesicht.",
@@ -1241,13 +1388,13 @@
         "Er zog die Mütze tief ins Gesicht.",
         "Er verzog das Gesicht.",
         "Sie zog ihn an der Hand, und sein Gesicht wurde rot.",
-        "Sie schnitt Grimassen.",
         "Sie zogen die Kapuzen über ihre Gesichter.",
         "Ein Lächeln zog über ihr ganzes Gesicht.",
         "Er grinste übers ganze Gesicht und zog los.",
         "Ihre Gesichter zogen sich in die Länge.",
         "Mit ernstem Gesicht zog er die Pistole.",
-        "Dieses Gesicht zog alle Blicke auf sich."
+        "Dieses Gesicht zog alle Blicke auf sich.",
+        "Sie schnitt das Brot in Scheiben."
       ]
     }
   },
@@ -42036,6 +42183,2309 @@
         "Er ging der Sache auf den Grund.",
         "Der Schatz liegt auf dem Grund des Meeres.",
         "Er baute ein Haus auf eigenem Grund und Boden."
+      ]
+    }
+  },
+  {
+    "id": "expression-209",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "bis dahin",
+    "translation_ru": "до тех пор; к тому времени; до того места",
+    "translation_en": "until then, by then; up to there",
+    "example_de": "Die Wahl ist erst im März. Bis dahin bleibt die alte Regierung im Amt.",
+    "example_ru": "Выборы только в марте. До тех пор остаётся старое правительство.",
+    "example_en": "The election is not until March. Until then the old government stays in office.",
+    "notes_ru": [
+      "О времени — «до тех пор, к тому времени»: Bis dahin ist alles erledigt. О месте — «до того места»: Bis dahin sind es zehn Kilometer."
+    ],
+    "notes_en": [
+      "Of time — “until then, by then”: Bis dahin ist alles erledigt. Of place — “up to there”: Bis dahin sind es zehn Kilometer."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/dahin",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "bis"
+          },
+          {
+            "form": "dahin"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "Bis"
+          },
+          {
+            "form": "dahin"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Wahl ist erst im März. Bis dahin bleibt die alte Regierung im Amt.",
+        "Scholz äußerte die Erwartung, dass Schweden bis dahin aufgenommen werde.",
+        "Er sprach mit einer mir bis dahin unbekannten Arroganz.",
+        "Bis dahin ist noch viel Zeit."
+      ],
+      "negative": [
+        "Er geht bis zur Tür.",
+        "Wir fahren dahin.",
+        "Bis morgen!"
+      ]
+    }
+  },
+  {
+    "id": "expression-210",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es kommt (jdm.) auf etw. an",
+    "translation_ru": "зависеть от чего-либо; быть важным (для кого-либо)",
+    "translation_en": "to depend on something; to matter (to someone)",
+    "example_de": "Beim Backen kommt es auf die richtige Temperatur an.",
+    "example_ru": "При выпечке главное — правильная температура.",
+    "example_en": "In baking, what matters is the right temperature.",
+    "notes_ru": [
+      "Das kommt darauf an. — Смотря как; это зависит. Es kommt mir nicht darauf an. — Мне это не важно. worauf es ankommt — что важно.",
+      "Не путать с ankommen «прибывать»: Wir kommen auf dem Bahnhof an."
+    ],
+    "notes_en": [
+      "Das kommt darauf an. — It depends. Es kommt mir nicht darauf an. — It doesn't matter to me. worauf es ankommt — what matters.",
+      "Do not confuse with ankommen “to arrive”: Wir kommen auf dem Bahnhof an."
+    ],
+    "related_ids": [
+      "verb-024"
+    ],
+    "source_url": "https://www.dwds.de/wb/ankommen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "kommt",
+              "kam",
+              "käme",
+              "komme",
+              "kommen",
+              "kamen",
+              "kämen"
+            ]
+          },
+          {
+            "form": [
+              "darauf",
+              "drauf",
+              "worauf",
+              "auf"
+            ],
+            "not_next": [
+              "dem",
+              "einem",
+              "der",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "den"
+            ]
+          },
+          {
+            "form": "an",
+            "clause_has": [
+              "es",
+              "das",
+              "alles",
+              "viel",
+              "vieles",
+              "nichts",
+              "wenig",
+              "mehr",
+              "dies",
+              "dem",
+              "darauf"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "darauf",
+              "drauf",
+              "worauf",
+              "auf"
+            ],
+            "not_next": [
+              "dem",
+              "einem",
+              "der",
+              "einer",
+              "meinem",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "unserem",
+              "eurem",
+              "diesem",
+              "dieser",
+              "jedem",
+              "jeder",
+              "den"
+            ]
+          },
+          {
+            "form": [
+              "ankommt",
+              "ankam",
+              "ankäme",
+              "ankomme",
+              "ankommen",
+              "ankamen",
+              "angekommen",
+              "anzukommen"
+            ],
+            "clause_has": [
+              "es",
+              "das",
+              "alles",
+              "viel",
+              "vieles",
+              "nichts",
+              "wenig",
+              "mehr",
+              "dies",
+              "dem",
+              "darauf"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Beim Backen kommt es auf die richtige Temperatur an.",
+        "Das kommt sehr darauf an, wie es passiert.",
+        "Eine neue Studie zeigt, worauf es ankommt.",
+        "Und wenn's auch ein Viertelpfund ist, kommt es mir nicht darauf an.",
+        "Es kommt nur auf dich an.",
+        "Ob es klappt, hängt davon ab, wie sehr es darauf ankommt."
+      ],
+      "negative": [
+        "Als Klein in Bukarest ankommt, regnet es.",
+        "Wir kommen morgen auf dem Bahnhof an.",
+        "Er kam auf einer Insel an.",
+        "Sie kamen spät an."
+      ]
+    }
+  },
+  {
+    "id": "expression-211",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "stecken bleiben / steckenbleiben",
+    "translation_ru": "застрять; (о речи) запнуться",
+    "translation_en": "to get stuck; to falter (in speech)",
+    "example_de": "Im Schnee ist unser Auto stecken geblieben.",
+    "example_ru": "Наша машина застряла в снегу.",
+    "example_en": "Our car got stuck in the snow.",
+    "notes_ru": [
+      "Пишется раздельно и слитно: stecken bleiben / steckenbleiben. Es blieb mir im Halse stecken. — У меня (слово) застряло в горле."
+    ],
+    "notes_en": [
+      "Written as two words or one: stecken bleiben / steckenbleiben. Es blieb mir im Halse stecken. — It stuck in my throat."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/stecken_bleiben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "stecken",
+            "not_after": [
+              "zu"
+            ]
+          },
+          {
+            "form": [
+              "bleibe",
+              "bleibst",
+              "bleibt",
+              "bleiben",
+              "bleibet",
+              "blieb",
+              "bliebst",
+              "blieben",
+              "bliebt",
+              "bliebe",
+              "bliebest",
+              "geblieben"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bleibe",
+              "bleibst",
+              "bleibt",
+              "bleibet",
+              "blieb",
+              "bliebst",
+              "blieben",
+              "bliebt",
+              "bliebe",
+              "bliebest",
+              "bleiben"
+            ]
+          },
+          {
+            "form": "stecken",
+            "not_after": [
+              "zu"
+            ],
+            "not_next": [
+              "zu",
+              "und"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "steckenbleiben",
+              "steckengeblieben",
+              "steckenbleibt",
+              "steckenblieb",
+              "steckenblieben",
+              "steckenzubleiben"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im Schnee ist unser Auto stecken geblieben.",
+        "Die Frau ist in einem Aufzug stecken geblieben.",
+        "Uns ist das Essen im Halse stecken geblieben.",
+        "Dieses blieb im Schädel des Königs stecken.",
+        "Wir sind im Stau steckengeblieben.",
+        "Er blieb mitten im Satz stecken."
+      ],
+      "negative": [
+        "Sie blieb stehen, um den Schlüssel in die Tasche zu stecken.",
+        "Er musste das Geld in den Umschlag stecken.",
+        "Sie bleiben zu Hause."
+      ]
+    }
+  },
+  {
+    "id": "expression-212",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "Was soll das (heißen)?",
+    "translation_ru": "Что это значит? Что это такое? (недовольно)",
+    "translation_en": "What is that supposed to mean? What's all this?",
+    "example_de": "»Was soll das?«, fragte die Lehrerin, als sie das Chaos sah.",
+    "example_ru": "«Это ещё что такое?» — спросила учительница, увидев беспорядок.",
+    "example_en": "“What's all this?” asked the teacher when she saw the mess.",
+    "notes_ru": [
+      "Выражает удивление или недовольство: Was soll das heißen? — Что это значит?"
+    ],
+    "notes_en": [
+      "Expresses surprise or annoyance: Was soll das heißen? — What is that supposed to mean?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/sollen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Was",
+              "was"
+            ]
+          },
+          {
+            "form": "soll"
+          },
+          {
+            "form": "das",
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2,
+        "clause_rest": [
+          "heißen",
+          "denn",
+          "bedeuten",
+          "eigentlich",
+          "jetzt",
+          "nun",
+          "hier",
+          "alles",
+          "schon",
+          "wieder",
+          "überhaupt",
+          "dann"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "»Was soll das?«, fragte die Lehrerin, als sie das Chaos sah.",
+        "»Was soll das?« rief der andere.",
+        "»Was soll das heißen, sie erwarten meine Eule?«",
+        "Was soll das denn?"
+      ],
+      "negative": [
+        "Was soll das Kind essen?",
+        "Was sollen wir tun?",
+        "Was soll ich dazu sagen?",
+        "Was soll das erst mit den anderen werden?"
+      ]
+    }
+  },
+  {
+    "id": "expression-213",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich auf die Beine machen",
+    "translation_ru": "отправиться (в путь), пуститься в дорогу",
+    "translation_en": "to set off, to get going",
+    "example_de": "Nach dem Frühstück machten wir uns auf die Beine.",
+    "example_ru": "После завтрака мы отправились в путь.",
+    "example_en": "After breakfast we set off.",
+    "notes_ru": [
+      "Близко: sich auf den Weg machen. Не путать с etw. auf die Beine stellen — организовать."
+    ],
+    "notes_en": [
+      "Similar: sich auf den Weg machen. Do not confuse with etw. auf die Beine stellen — to organize."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Bein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach"
+            ]
+          },
+          {
+            "reflexive": true
+          },
+          {
+            "form": "auf die Beine"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": true
+          },
+          {
+            "form": "auf die Beine"
+          },
+          {
+            "form": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach",
+              "gemacht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Frühstück machten wir uns auf die Beine.",
+        "Als der Wolf endlich ausgeschlafen hatte, machte er sich auf die Beine.",
+        "Wir müssen uns bald auf die Beine machen.",
+        "Er hat sich früh auf die Beine gemacht."
+      ],
+      "negative": [
+        "Er stellte das Kind auf die Beine.",
+        "Sie macht ihm Beine."
+      ]
+    }
+  },
+  {
+    "id": "expression-214",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. auf die Beine stellen",
+    "translation_ru": "организовать, наладить, поставить на ноги (дело)",
+    "translation_en": "to organize, to set up, to get something off the ground",
+    "example_de": "In nur drei Wochen haben die Schüler ein ganzes Konzert auf die Beine gestellt.",
+    "example_ru": "Всего за три недели школьники организовали целый концерт.",
+    "example_en": "In just three weeks the pupils put together a whole concert.",
+    "notes_ru": [
+      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Не путать с sich auf die Beine machen — отправиться."
+    ],
+    "notes_en": [
+      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Do not confuse with sich auf die Beine machen — to set off."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Bein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "stelle",
+              "stellst",
+              "stellt",
+              "stellen",
+              "stellte",
+              "stelltest",
+              "stellten",
+              "stelltet",
+              "stell",
+              "gestellt"
+            ]
+          },
+          {
+            "form": "auf die Beine",
+            "not_next": [
+              "und",
+              "gesetzt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "auf die Beine"
+          },
+          {
+            "form": [
+              "stelle",
+              "stellst",
+              "stellt",
+              "stellen",
+              "stellte",
+              "stelltest",
+              "stellten",
+              "stelltet",
+              "stell",
+              "gestellt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "In nur drei Wochen haben die Schüler ein ganzes Konzert auf die Beine gestellt.",
+        "Sie versuchten, eine Ausstellung auf die Beine zu stellen.",
+        "Der Verein stellte ein großes Fest auf die Beine."
+      ],
+      "negative": [
+        "Er machte sich auf die Beine.",
+        "Sie kam wieder auf die Beine."
+      ]
+    }
+  },
+  {
+    "id": "expression-215",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) jdn. / etw. vom Hals(e) schaffen",
+    "translation_ru": "избавиться от кого-либо / чего-либо",
+    "translation_en": "to get rid of someone / something",
+    "example_de": "Mit einer Ausrede schaffte sie sich den lästigen Vertreter vom Hals.",
+    "example_ru": "Под каким-то предлогом она отделалась от назойливого коммивояжёра.",
+    "example_en": "With an excuse she got rid of the annoying salesman.",
+    "notes_ru": [
+      "Возвратное в дательном, кого / что — винительный. Близко: jdn. / etw. los sein, loswerden."
+    ],
+    "notes_en": [
+      "The reflexive is dative, whom / what — accusative. Similar: jdn. / etw. los sein, loswerden."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Hals",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "schaffe",
+              "schaffst",
+              "schafft",
+              "schaffen",
+              "schaffte",
+              "schafften",
+              "schaffet",
+              "schafftest",
+              "geschafft",
+              "schuf",
+              "schufen"
+            ]
+          },
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "vom Hals",
+              "vom Halse"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "vom Hals",
+              "vom Halse"
+            ]
+          },
+          {
+            "form": [
+              "schaffe",
+              "schaffst",
+              "schafft",
+              "schaffen",
+              "schaffte",
+              "schafften",
+              "schaffet",
+              "schafftest",
+              "geschafft",
+              "schuf",
+              "schufen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mit einer Ausrede schaffte sie sich den lästigen Vertreter vom Hals.",
+        "Er überlegte, wie er sich den Helden vom Halse schaffen könnte.",
+        "Er sagt, dass wir uns Norbert vom Hals schaffen wollen."
+      ],
+      "negative": [
+        "Er ist vom Hals abwärts gelähmt.",
+        "Sie schaffte die Prüfung.",
+        "Er nahm sich den Schal vom Hals."
+      ]
+    }
+  },
+  {
+    "id": "expression-216",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. im Sinn haben",
+    "translation_ru": "замышлять, иметь в виду, намереваться",
+    "translation_en": "to have something in mind, to intend",
+    "example_de": "Niemand wusste, was der Alte im Sinn hatte.",
+    "example_ru": "Никто не знал, что замышляет старик.",
+    "example_en": "Nobody knew what the old man had in mind.",
+    "notes_ru": [
+      "Nichts Gutes im Sinn haben — замышлять недоброе. Не путать с im Sinne von / des … — в смысле, согласно."
+    ],
+    "notes_en": [
+      "Nichts Gutes im Sinn haben — to be up to no good. Do not confuse with im Sinne von / des … — in the sense of, according to."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Sinn",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "hab"
+            ]
+          },
+          {
+            "form": "im Sinn",
+            "not_next": [
+              "des",
+              "der",
+              "von",
+              "eines",
+              "einer"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "im Sinn",
+            "not_next": [
+              "des",
+              "der",
+              "von",
+              "eines",
+              "einer"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "hab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Niemand wusste, was der Alte im Sinn hatte.",
+        "Aber Gretel merkte, was sie im Sinn hatte.",
+        "Firenze hat nur das Beste im Sinn gehabt.",
+        "Er hat nichts Gutes im Sinn."
+      ],
+      "negative": [
+        "Er hat im Sinn des Gesetzes gehandelt.",
+        "Das hat keinen Sinn."
+      ]
+    }
+  },
+  {
+    "id": "expression-217",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdn. / etw. los sein",
+    "translation_ru": "избавиться от кого-либо / чего-либо (быть свободным от)",
+    "translation_en": "to be rid of someone / something",
+    "example_de": "Endlich bin ich den lästigen Husten los.",
+    "example_ru": "Наконец-то я избавился от надоедливого кашля.",
+    "example_en": "At last I've got rid of the annoying cough.",
+    "notes_ru": [
+      "Кого / что — винительный: Ich bin ihn los. Без дополнения — los «что-то происходит»: Was ist los? (не выражение)."
+    ],
+    "notes_en": [
+      "Whom / what — accusative: Ich bin ihn los. Without an object — los “going on”: Was ist los? (not this expression)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/los",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "den",
+              "einen",
+              "keinen",
+              "diesen",
+              "jenen",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "ihn",
+              "mich",
+              "dich",
+              "uns",
+              "euch"
+            ],
+            "not_next": [
+              "ganzen",
+              "ganze",
+              "lieben",
+              "gesamten",
+              "langen"
+            ]
+          },
+          {
+            "form": "los"
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien",
+              "sein",
+              "gewesen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien"
+            ]
+          },
+          {
+            "form": [
+              "den",
+              "einen",
+              "keinen",
+              "diesen",
+              "jenen",
+              "meinen",
+              "deinen",
+              "seinen",
+              "ihren",
+              "unseren",
+              "euren",
+              "ihn",
+              "mich",
+              "dich",
+              "uns",
+              "euch"
+            ],
+            "not_next": [
+              "ganzen",
+              "ganze",
+              "lieben",
+              "gesamten",
+              "langen"
+            ]
+          },
+          {
+            "form": "los"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Endlich bin ich den lästigen Husten los.",
+        "Er war froh, dass er den alten Nimmersatt los war.",
+        "Sie waren heilfroh, den Gestank des Trolls los zu sein.",
+        "Ich bin ihn endlich los."
+      ],
+      "negative": [
+        "Was ist los?",
+        "Da ist viel los.",
+        "Hier ist den ganzen Tag was los.",
+        "Was ist mit dir los?"
+      ]
+    }
+  },
+  {
+    "id": "expression-218",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "mit jdm. / etw. fertig werden",
+    "translation_ru": "справиться с кем-либо / чем-либо",
+    "translation_en": "to cope with someone / something, to deal with",
+    "example_de": "Mit dieser Enttäuschung muss sie erst einmal fertig werden.",
+    "example_ru": "С этим разочарованием ей сначала нужно справиться.",
+    "example_en": "She first has to come to terms with this disappointment.",
+    "notes_ru": [
+      "Без mit — fertig werden «закончить»: Ich werde bald fertig."
+    ],
+    "notes_en": [
+      "Without mit — fertig werden “to finish”: Ich werde bald fertig."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/fertig",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "mit"
+          },
+          {
+            "form": "fertig"
+          },
+          {
+            "form": [
+              "werde",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden",
+              "geworden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "werde",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden"
+            ]
+          },
+          {
+            "form": "mit"
+          },
+          {
+            "form": "fertig"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2,
+        "clause_rest": [
+          "können",
+          "müssen",
+          "wollen",
+          "sollen",
+          "werden"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mit dieser Enttäuschung muss sie erst einmal fertig werden.",
+        "Ich will schon allein mit den Riesen fertig werden.",
+        "Ich dachte, ich könnte allein mit ihm fertig werden.",
+        "Wir werden mit jedem Gegner fertig."
+      ],
+      "negative": [
+        "Ich werde bald fertig.",
+        "Das Essen wird gleich fertig.",
+        "Sie kam mit dem Bus und war fertig.",
+        "Diese wurden mit Motoren angetrieben und fertig gebaut angeboten."
+      ]
+    }
+  },
+  {
+    "id": "expression-219",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Acht geben / achtgeben (auf + Akk.)",
+    "translation_ru": "быть внимательным, следить (за), остерегаться",
+    "translation_en": "to pay attention (to), to watch out, to take care",
+    "example_de": "Gib gut Acht auf deine kleine Schwester!",
+    "example_ru": "Хорошенько присматривай за младшей сестрой!",
+    "example_en": "Take good care of your little sister!",
+    "notes_ru": [
+      "Пишется раздельно и слитно: Acht geben / achtgeben. Близко: sich in Acht nehmen — остерегаться. Не путать с числом acht."
+    ],
+    "notes_en": [
+      "Written as two words or one: Acht geben / achtgeben. Similar: sich in Acht nehmen — to beware. Do not confuse with the number acht."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/achtgeben",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "gebe",
+              "gibst",
+              "gibt",
+              "geben",
+              "gebt",
+              "gab",
+              "gabst",
+              "gaben",
+              "gabt",
+              "gäbe",
+              "gäben",
+              "gib"
+            ]
+          },
+          {
+            "form": [
+              "Acht",
+              "acht"
+            ],
+            "not_next_capital": true,
+            "not_next_number": true,
+            "not_next": [
+              "von",
+              "Mal",
+              "mal",
+              "oder",
+              "bis",
+              "weitere",
+              "weiteren",
+              "andere",
+              "anderen",
+              "verschiedene",
+              "neue",
+              "neuen",
+              "große",
+              "kleine",
+              "kleinere",
+              "größere"
+            ],
+            "not_after": [
+              "es",
+              "insgesamt",
+              "rund",
+              "etwa",
+              "circa",
+              "ca",
+              "über",
+              "unter",
+              "je",
+              "um",
+              "bis",
+              "von",
+              "zu",
+              "mit",
+              "weitere",
+              "die",
+              "der",
+              "den",
+              "alle"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Acht",
+              "acht"
+            ],
+            "not_after": [
+              "um",
+              "von",
+              "bis",
+              "zu",
+              "nach",
+              "vor",
+              "seit",
+              "ab",
+              "über",
+              "unter",
+              "mit",
+              "für"
+            ]
+          },
+          {
+            "form": [
+              "gebe",
+              "gibst",
+              "gibt",
+              "geben",
+              "gebt",
+              "gab",
+              "gabst",
+              "gaben",
+              "gabt",
+              "gäbe",
+              "gäben",
+              "gib",
+              "gegeben"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "achtgeben",
+              "achtgegeben",
+              "achtzugeben",
+              "achtgibt",
+              "achtgab"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Gib gut Acht auf deine kleine Schwester!",
+        "Du musst nur Acht geben, dass du mein Bett gut machst.",
+        "»Gib Acht, Bruder!«",
+        "Er gab nicht acht und fiel hin.",
+        "Ihr müsst gut achtgeben."
+      ],
+      "negative": [
+        "Er gab acht Euro aus.",
+        "Sie gaben acht Konzerte.",
+        "Wir geben um acht Uhr Bescheid.",
+        "Daneben gibt es acht weitere Mitarbeiter."
+      ]
+    }
+  },
+  {
+    "id": "expression-220",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. zu Herzen gehen",
+    "translation_ru": "тронуть, взволновать; огорчить (кого-либо)",
+    "translation_en": "to move someone deeply, to touch someone's heart",
+    "example_de": "Die Geschichte des kleinen Hundes ging allen zu Herzen.",
+    "example_ru": "История маленькой собачки тронула всех.",
+    "example_en": "The story of the little dog touched everyone's heart.",
+    "notes_ru": [
+      "Кого — дательный. Близко: sich (D) etw. zu Herzen nehmen — принять близко к сердцу."
+    ],
+    "notes_en": [
+      "Whom — dative. Similar: sich (D) etw. zu Herzen nehmen — to take something to heart."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Herz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "gehe",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gingen",
+              "gegangen"
+            ]
+          },
+          {
+            "form": "zu Herzen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Herzen"
+          },
+          {
+            "form": [
+              "gehe",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gingen",
+              "gegangen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Geschichte des kleinen Hundes ging allen zu Herzen.",
+        "Es wäre ihm noch mehr zu Herzen gegangen.",
+        "Seine Worte gingen mir sehr zu Herzen."
+      ],
+      "negative": [
+        "Er ging zu Hause.",
+        "Sie nahm es sich zu Herzen."
+      ]
+    }
+  },
+  {
+    "id": "expression-221",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) etw. zu Herzen nehmen",
+    "translation_ru": "принять (что-либо) близко к сердцу",
+    "translation_en": "to take something to heart",
+    "example_de": "Nimm dir die Kritik nicht so zu Herzen!",
+    "example_ru": "Не принимай критику так близко к сердцу!",
+    "example_en": "Don't take the criticism so much to heart!",
+    "notes_ru": [
+      "Возвратное в дательном: Ich nehme es mir zu Herzen. Близко: jdm. zu Herzen gehen — тронуть."
+    ],
+    "notes_en": [
+      "The reflexive is dative: Ich nehme es mir zu Herzen. Similar: jdm. zu Herzen gehen — to move someone."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Herz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "nehme",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmen",
+              "nimm",
+              "genommen"
+            ]
+          },
+          {
+            "form": "zu Herzen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "zu Herzen"
+          },
+          {
+            "form": [
+              "nehme",
+              "nimmst",
+              "nimmt",
+              "nehmen",
+              "nehmt",
+              "nahm",
+              "nahmst",
+              "nahmen",
+              "nahmt",
+              "nähme",
+              "nähmen",
+              "nimm",
+              "genommen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nimm dir die Kritik nicht so zu Herzen!",
+        "Sie nahm sich seine Worte sehr zu Herzen.",
+        "Er hat sich den Rat zu Herzen genommen."
+      ],
+      "negative": [
+        "Es ging ihm zu Herzen.",
+        "Er nahm das Buch."
+      ]
+    }
+  },
+  {
+    "id": "expression-222",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. (nicht) übers Herz bringen",
+    "translation_ru": "(не) решиться на что-либо, (не) смочь заставить себя",
+    "translation_en": "(not) to have the heart to do something",
+    "example_de": "Sie brachte es nicht übers Herz, den alten Hund wegzugeben.",
+    "example_ru": "У неё не хватило духу отдать старую собаку.",
+    "example_en": "She didn't have the heart to give the old dog away.",
+    "notes_ru": [
+      "Обычно с отрицанием: Ich bringe es nicht übers Herz. — У меня рука не поднимается."
+    ],
+    "notes_en": [
+      "Usually negated: Ich bringe es nicht übers Herz. — I can't bring myself to do it."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Herz",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "brächtest",
+              "brächten",
+              "bring",
+              "gebracht"
+            ]
+          },
+          {
+            "form": [
+              "übers Herz",
+              "über das Herz"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "übers Herz",
+              "über das Herz"
+            ]
+          },
+          {
+            "form": [
+              "bringe",
+              "bringst",
+              "bringt",
+              "bringen",
+              "brachte",
+              "brachtest",
+              "brachten",
+              "brachtet",
+              "brächte",
+              "brächtest",
+              "brächten",
+              "bring",
+              "gebracht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Sie brachte es nicht übers Herz, den alten Hund wegzugeben.",
+        "»Das tue ich nicht; wie sollt ich's übers Herz bringen, meine Kinder im Walde allein zu lassen.«",
+        "»Ich konnte es nicht übers Herz bringen, Euern Befehl auszuführen.«"
+      ],
+      "negative": [
+        "Er strich ihr übers Haar.",
+        "Sie legte die Hand aufs Herz."
+      ]
+    }
+  },
+  {
+    "id": "expression-223",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "um keinen Preis",
+    "translation_ru": "ни за что, ни за какие деньги",
+    "translation_en": "not at any price, on no account",
+    "example_de": "Um keinen Preis würde ich mein Fahrrad verkaufen.",
+    "example_ru": "Ни за что я не продам свой велосипед.",
+    "example_en": "I wouldn't sell my bike at any price.",
+    "notes_ru": [
+      "Противоположное: um jeden Preis — любой ценой."
+    ],
+    "notes_en": [
+      "The opposite: um jeden Preis — at any cost."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Preis",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "um",
+              "Um"
+            ]
+          },
+          {
+            "form": "keinen"
+          },
+          {
+            "form": "Preis"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Um keinen Preis würde ich mein Fahrrad verkaufen.",
+        "Ein Mann, den man um keinen Preis fortlassen dürfte."
+      ],
+      "negative": [
+        "Er will um jeden Preis gewinnen.",
+        "Es gab keinen Preis für ihn."
+      ]
+    }
+  },
+  {
+    "id": "expression-224",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "durch dick und dünn",
+    "translation_ru": "в огонь и в воду; несмотря ни на что, при любых трудностях",
+    "translation_en": "through thick and thin",
+    "example_de": "Echte Freunde gehen mit dir durch dick und dünn.",
+    "example_ru": "Настоящие друзья пойдут с тобой в огонь и в воду.",
+    "example_en": "Real friends go through thick and thin with you.",
+    "notes_ru": [
+      "Пишется и с большой буквы: durch Dick und Dünn."
+    ],
+    "notes_en": [
+      "Also written with capitals: durch Dick und Dünn."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/dick",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "durch"
+          },
+          {
+            "form": [
+              "dick",
+              "Dick"
+            ]
+          },
+          {
+            "form": "und"
+          },
+          {
+            "form": [
+              "dünn",
+              "Dünn"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Echte Freunde gehen mit dir durch dick und dünn.",
+        "Die sind von Büffelleder und haben schon lange gedient, gehen aber durch dick und dünn."
+      ],
+      "negative": [
+        "Das Brett ist dick und dünn zugleich.",
+        "Er schnitt das Brot dick und dünn."
+      ]
+    }
+  },
+  {
+    "id": "expression-225",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "was das Zeug hält",
+    "translation_ru": "изо всех сил, что есть мочи",
+    "translation_en": "for all one is worth, like mad",
+    "example_de": "Die Kinder rannten, was das Zeug hielt, um den Bus noch zu erwischen.",
+    "example_ru": "Дети неслись что есть мочи, чтобы успеть на автобус.",
+    "example_en": "The children ran like mad to catch the bus.",
+    "notes_ru": [
+      "Глагол меняет время: was das Zeug hält / hielt; у Гримма — was das Zeug wollte halten."
+    ],
+    "notes_en": [
+      "The verb changes tense: was das Zeug hält / hielt; in Grimm — was das Zeug wollte halten."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Zeug",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "was",
+              "Was"
+            ]
+          },
+          {
+            "form": "das"
+          },
+          {
+            "form": "Zeug"
+          },
+          {
+            "form": [
+              "hält",
+              "hielt",
+              "halten",
+              "hielte",
+              "hielten",
+              "halte"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Kinder rannten, was das Zeug hielt, um den Bus noch zu erwischen.",
+        "Die eilten herbei und schlugen ihn, was das Zeug wollte halten.",
+        "Er arbeitet, was das Zeug hält."
+      ],
+      "negative": [
+        "Was hält das Zeug zusammen?",
+        "Wo ist das Zeug?"
+      ]
+    }
+  },
+  {
+    "id": "expression-226",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. ist eine Laus über die Leber gelaufen",
+    "translation_ru": "кто-то не в духе, его что-то задело (рассердило)",
+    "translation_en": "something has upset someone, someone got out of bed on the wrong side",
+    "example_de": "Was ist denn mit dir los, ist dir eine Laus über die Leber gelaufen?",
+    "example_ru": "Что с тобой, какая муха тебя укусила?",
+    "example_en": "What's wrong with you, what's bitten you?",
+    "notes_ru": [
+      "Кому — дательный. В русском близко: какая муха укусила."
+    ],
+    "notes_en": [
+      "Whom — dative. Russian similar: какая муха укусила (what fly has bitten you)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Laus",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Laus"
+          },
+          {
+            "form": "über die Leber"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Was ist denn mit dir los, ist dir eine Laus über die Leber gelaufen?",
+        "Da lief dem Schneiderlein endlich, wie man sagt, die Laus über die Leber."
+      ],
+      "negative": [
+        "Der Hund hat eine Laus.",
+        "Die Leber ist ein Organ."
+      ]
+    }
+  },
+  {
+    "id": "expression-227",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "den Mantel nach dem Wind hängen",
+    "translation_ru": "держать нос по ветру, приспосабливаться (к обстоятельствам)",
+    "translation_en": "to trim one's sails to the wind, to be a turncoat",
+    "example_de": "Der Politiker hängt seinen Mantel immer nach dem Wind.",
+    "example_ru": "Этот политик всегда держит нос по ветру.",
+    "example_en": "That politician always trims his sails to the wind.",
+    "notes_ru": [
+      "Неодобрительно. Вариант: das Mäntelchen nach dem Wind hängen."
+    ],
+    "notes_en": [
+      "Disapproving. Variant: das Mäntelchen nach dem Wind hängen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Mantel",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Mantel",
+              "Mäntelchen"
+            ]
+          },
+          {
+            "form": [
+              "nach dem Wind",
+              "nach dem Winde"
+            ],
+            "clause_has": [
+              "hänge",
+              "hängst",
+              "hängt",
+              "hängen",
+              "hängte",
+              "hängten",
+              "hängtest",
+              "gehängt",
+              "häng",
+              "hing",
+              "hingen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der Politiker hängt seinen Mantel immer nach dem Wind.",
+        "»Ich schleife die Schere und drehe geschwind, und hänge mein Mäntelchen nach dem Wind.«"
+      ],
+      "negative": [
+        "Er hängte den Mantel an den Haken.",
+        "Nach dem Wind kam der Regen.",
+        "Er zog den Mantel an, denn nach dem Wind kam Regen."
+      ]
+    }
+  },
+  {
+    "id": "expression-228",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wo sich Fuchs und Hase gute Nacht sagen",
+    "translation_ru": "у чёрта на куличках, в глуши",
+    "translation_en": "in the middle of nowhere, at the back of beyond",
+    "example_de": "Mein Onkel wohnt in einem Dorf, wo sich Fuchs und Hase gute Nacht sagen.",
+    "example_ru": "Мой дядя живёт в деревне у чёрта на куличках.",
+    "example_en": "My uncle lives in a village in the middle of nowhere.",
+    "notes_ru": [
+      "Шутливо о глухом, удалённом месте."
+    ],
+    "notes_en": [
+      "Jokingly about a remote, lonely place."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Fuchs",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "Fuchs und Hase",
+              "Fuchs und Has"
+            ]
+          },
+          {
+            "form": "gute Nacht"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mein Onkel wohnt in einem Dorf, wo sich Fuchs und Hase gute Nacht sagen.",
+        "Wie ich an einen hohen Berg um die Waldecke kam, wo Fuchs und Has sich gute Nacht sagen, so sah ich da ein kleines Haus."
+      ],
+      "negative": [
+        "Der Fuchs und der Hase liefen davon.",
+        "Sie sagte gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "expression-229",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "durch Mark und Bein (gehen)",
+    "translation_ru": "(пронизывать) до мозга костей, насквозь",
+    "translation_en": "(to go) right through someone, to the marrow",
+    "example_de": "Der schrille Schrei ging mir durch Mark und Bein.",
+    "example_ru": "Пронзительный крик пронял меня до мозга костей.",
+    "example_en": "The shrill scream went right through me.",
+    "notes_ru": [
+      "О звуке, холоде, страхе: Die Kälte ging durch Mark und Bein. Также durch Mark und Knochen."
+    ],
+    "notes_en": [
+      "Of a sound, cold, fear: Die Kälte ging durch Mark und Bein. Also durch Mark und Knochen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Mark#2",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "durch"
+          },
+          {
+            "form": "Mark"
+          },
+          {
+            "form": "und"
+          },
+          {
+            "form": [
+              "Bein",
+              "Knochen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der schrille Schrei ging mir durch Mark und Bein.",
+        "»Du schreist einem durch Mark und Bein.«"
+      ],
+      "negative": [
+        "Er zahlte fünf Mark und ging.",
+        "Sie brach sich das Bein."
+      ]
+    }
+  },
+  {
+    "id": "expression-230",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. auf dem Fuß(e) folgen",
+    "translation_ru": "следовать по пятам (за кем-либо); тотчас последовать",
+    "translation_en": "to follow hard on someone's heels; to follow immediately",
+    "example_de": "Der kleine Bruder folgte ihr überallhin auf dem Fuß.",
+    "example_ru": "Младший брат повсюду ходил за ней по пятам.",
+    "example_en": "Her little brother followed hard on her heels everywhere.",
+    "notes_ru": [
+      "О событиях — сразу последовать: Die Strafe folgte auf dem Fuße. У Гримма: ihr immer auf dem Fuße nach."
+    ],
+    "notes_en": [
+      "Of events — to follow immediately: Die Strafe folgte auf dem Fuße. In Grimm: ihr immer auf dem Fuße nach."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Fuß",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "auf dem Fuß",
+              "auf dem Fuße"
+            ]
+          },
+          {
+            "form": [
+              "folge",
+              "folgst",
+              "folgt",
+              "folgen",
+              "folgte",
+              "folgtest",
+              "folgten",
+              "folgtet",
+              "gefolgt",
+              "nach"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "folge",
+              "folgst",
+              "folgt",
+              "folgen",
+              "folgte",
+              "folgtest",
+              "folgten",
+              "folgtet",
+              "gefolgt"
+            ]
+          },
+          {
+            "form": [
+              "auf dem Fuß",
+              "auf dem Fuße"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der kleine Bruder folgte ihr überallhin auf dem Fuß.",
+        "Da hüpfte der Frosch herein, ihr immer auf dem Fuße nach, bis zu ihrem Stuhl.",
+        "Die Strafe folgte auf dem Fuße."
+      ],
+      "negative": [
+        "Er stand auf dem Fuß des Berges.",
+        "Der Stein fiel ihm auf den Fuß."
+      ]
+    }
+  },
+  {
+    "id": "expression-231",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdm. geht es an den Kragen",
+    "translation_ru": "кому-то несдобровать, кому-то придётся плохо",
+    "translation_en": "someone is in for it, someone's neck is on the line",
+    "example_de": "Wenn der Chef das erfährt, geht es dir an den Kragen.",
+    "example_ru": "Если шеф узнает, тебе несдобровать.",
+    "example_en": "If the boss finds out, you'll be in for it.",
+    "notes_ru": [
+      "Кому — дательный; часто es → 's: geht dir's an den Kragen."
+    ],
+    "notes_en": [
+      "Whom — dative; es is often shortened: geht dir's an den Kragen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/Kragen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "gehe",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gegangen",
+              "geh"
+            ]
+          },
+          {
+            "form": "an den Kragen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "an den Kragen"
+          },
+          {
+            "form": [
+              "gehe",
+              "gehst",
+              "geht",
+              "gehen",
+              "ging",
+              "gingst",
+              "gingen",
+              "gingt",
+              "ginge",
+              "gegangen",
+              "geh"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wenn der Chef das erfährt, geht es dir an den Kragen.",
+        "»Wer kann da lustig sein, wenn's einem an den Kragen geht.«",
+        "Aber wagst du das noch einmal, so geht dir's an den Kragen.",
+        "»Komm, Bruderherz, es wird nicht gleich an den Kragen gehen.«"
+      ],
+      "negative": [
+        "Er packte ihn an den Kragen.",
+        "Sie nähte einen Knopf an den Kragen."
+      ]
+    }
+  },
+  {
+    "id": "expression-232",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jdn. gewähren lassen",
+    "translation_ru": "не мешать кому-либо, дать поступать по-своему",
+    "translation_en": "to let someone do as they please, not to interfere",
+    "example_de": "Die Eltern ließen das Kind gewähren, als es den Kuchen allein backen wollte.",
+    "example_ru": "Родители не мешали ребёнку, когда он захотел сам испечь пирог.",
+    "example_en": "The parents let the child get on with it when it wanted to bake the cake alone.",
+    "notes_ru": [
+      "Без lassen gewähren значит «предоставить, исполнить»: eine Bitte gewähren."
+    ],
+    "notes_en": [
+      "Without lassen, gewähren means “to grant”: eine Bitte gewähren."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/gewähren",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lasse",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließe",
+              "lass",
+              "laß",
+              "gelassen"
+            ]
+          },
+          {
+            "form": "gewähren"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "gewähren"
+          },
+          {
+            "form": [
+              "lasse",
+              "lässt",
+              "läßt",
+              "lassen",
+              "lasst",
+              "laßt",
+              "ließ",
+              "ließest",
+              "ließen",
+              "ließt",
+              "ließe",
+              "lass",
+              "laß",
+              "gelassen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Eltern ließen das Kind gewähren, als es den Kuchen allein backen wollte.",
+        "Das arme Sneewittchen dachte an nichts und ließ die Alte gewähren.",
+        "»Vater, laßt mich auch einmal gewähren.«"
+      ],
+      "negative": [
+        "Der König wollte ihm den verheißenen Lohn noch nicht gewähren.",
+        "Sie ließ sich Zeit."
+      ]
+    }
+  },
+  {
+    "id": "expression-233",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich (D) nichts / nicht viel aus etw. machen",
+    "translation_ru": "не придавать значения; (не) очень любить что-либо",
+    "translation_en": "not to care (much) about something, not to be keen on something",
+    "example_de": "Ich mache mir nicht viel aus Süßigkeiten.",
+    "example_ru": "Я не очень люблю сладкое.",
+    "example_en": "I'm not very keen on sweets.",
+    "notes_ru": [
+      "Mach dir nichts draus! — Не переживай! Возвратное в дательном."
+    ],
+    "notes_en": [
+      "Mach dir nichts draus! — Never mind! The reflexive is dative."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/machen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach"
+            ]
+          },
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "nichts",
+              "nicht viel",
+              "wenig",
+              "viel",
+              "nicht sonderlich viel",
+              "gar nichts",
+              "nicht das Geringste"
+            ]
+          },
+          {
+            "form": [
+              "aus",
+              "draus",
+              "daraus"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": "dative"
+          },
+          {
+            "form": [
+              "nichts",
+              "nicht viel",
+              "wenig",
+              "viel",
+              "nicht sonderlich viel",
+              "gar nichts",
+              "nicht das Geringste"
+            ]
+          },
+          {
+            "form": [
+              "aus",
+              "draus",
+              "daraus"
+            ]
+          },
+          {
+            "form": [
+              "mache",
+              "machst",
+              "macht",
+              "machen",
+              "machte",
+              "machtest",
+              "machten",
+              "machtet",
+              "mach",
+              "gemacht"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich mache mir nicht viel aus Süßigkeiten.",
+        "»Ich will mir nichts draus machen, die Vögel lassen mir auch manchmal was drauf fallen.«",
+        "Mach dir nichts draus!",
+        "Er macht sich wenig aus Fußball."
+      ],
+      "negative": [
+        "Er machte sich nichts zu essen.",
+        "Sie macht sich viel Arbeit."
+      ]
+    }
+  },
+  {
+    "id": "expression-234",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wie kommt es, dass …?",
+    "translation_ru": "как так получается, что …? отчего …?",
+    "translation_en": "how come …?, how is it that …?",
+    "example_de": "Wie kommt es, dass du heute so früh wach bist?",
+    "example_ru": "Как так вышло, что ты сегодня так рано проснулся?",
+    "example_en": "How come you're awake so early today?",
+    "notes_ru": [
+      "Разговорно: Wie kommt's? — Как так?"
+    ],
+    "notes_en": [
+      "Colloquial: Wie kommt's? — How come?"
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/kommen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ]
+          },
+          {
+            "form": "kommt"
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s"
+            ],
+            "not_next": [
+              "zu",
+              "zum",
+              "zur",
+              "nach",
+              "an",
+              "in",
+              "auf",
+              "hierher",
+              "dorthin"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ]
+          },
+          {
+            "form": [
+              "kommt's",
+              "kommt’s"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wie kommt es, dass du heute so früh wach bist?",
+        "»Sag' Sie mir doch, Frau Gothel, wie kommt es nur, Sie wird mir viel schwerer heraufzuziehen.«",
+        "»Guten Tag, Frau Katz von Kehrewitz, wie kommt's, daß sie alleine sitzt?«"
+      ],
+      "negative": [
+        "Wie kommt er nach Hause?",
+        "Wie kommt es zu diesem Fehler?"
       ]
     }
   }

@@ -69296,5 +69296,47 @@
     "example_en": "Every morning the old woodcutter went into the forest with his axe.",
     "usage_note_ru": "Частое слово в сказках: Vor einem großen Walde wohnte ein armer Holzhacker … От Holz hacken — колоть дрова. Сейчас чаще der Holzfäller — лесоруб.",
     "usage_note_en": "A common word in fairy tales: Vor einem großen Walde wohnte ein armer Holzhacker … From Holz hacken — to chop wood. Today der Holzfäller (lumberjack) is more common."
+  },
+  {
+    "id": "noun-5367",
+    "word": "Mus",
+    "article": "das",
+    "plural": "—",
+    "translation_ru": "пюре; повидло, джем",
+    "translation_en": "purée; fruit spread, jam",
+    "example_de": "Zum Frühstück aß sie Brot mit selbst gekochtem Mus aus Pflaumen.",
+    "example_cloze": "Zum Frühstück aß sie Brot mit selbst gekochtem {{c1::Mus}} aus Pflaumen.",
+    "example_ru": "На завтрак она ела хлеб с домашним сливовым повидлом.",
+    "example_en": "For breakfast she ate bread with homemade plum spread.",
+    "usage_note_ru": "Чаще в сложных словах: Apfelmus — яблочное пюре, Pflaumenmus — сливовое повидло, Kartoffelmus — картофельное пюре. В сказке: »Gut Mus feil!« — «Хорошее повидло продаю!». Не путать с die Mousse — мусс.",
+    "usage_note_en": "Mostly in compounds: Apfelmus — apple sauce, Pflaumenmus — plum spread, Kartoffelmus — mashed potatoes. In the fairy tale: »Gut Mus feil!« — “Good jam for sale!”. Do not confuse with die Mousse — mousse."
+  },
+  {
+    "id": "noun-5368",
+    "word": "Zwerglein",
+    "article": "das",
+    "plural": "Zwerglein",
+    "translation_ru": "гномик, маленький гном",
+    "translation_en": "little dwarf, little gnome",
+    "example_de": "Im Wald begegnete das Mädchen einem Zwerglein mit langem weißem Bart.",
+    "example_cloze": "Im Wald begegnete das Mädchen einem {{c1::Zwerglein}} mit langem weißem Bart.",
+    "example_ru": "В лесу девочка встретила гномика с длинной белой бородой.",
+    "example_en": "In the forest the girl met a little dwarf with a long white beard.",
+    "usage_note_ru": "Уменьшительное от der Zwerg — гном (суффикс -lein, всегда das, мн. ч. без изменений). Частое слово в сказках братьев Гримм.",
+    "usage_note_en": "Diminutive of der Zwerg — dwarf (suffix -lein, always das, plural unchanged). A common word in the Grimms' fairy tales."
+  },
+  {
+    "id": "noun-5369",
+    "word": "Acht",
+    "article": "die",
+    "plural": "Achten",
+    "translation_ru": "внимание, осторожность (устар.); восьмёрка (цифра)",
+    "translation_en": "attention, care (dated); (the figure) eight",
+    "example_de": "Bei Glatteis muss man auf der Treppe besonders Acht geben.",
+    "example_cloze": "Bei Glatteis muss man auf der Treppe besonders {{c1::Acht}} geben.",
+    "example_ru": "В гололёд на лестнице нужно быть особенно внимательным.",
+    "example_en": "On black ice you have to be especially careful on the stairs.",
+    "usage_note_ru": "Только в выражениях: Acht geben (achtgeben) — быть внимательным; sich in Acht nehmen — остерегаться; etw. außer Acht lassen — упустить из виду, не учесть. Второе значение — цифра, фигура «восьмёрка»: die Form einer Acht; множественное число die Achten — только в этом значении. Не путать с числом acht — восемь.",
+    "usage_note_en": "Only in phrases: Acht geben (achtgeben) — to pay attention; sich in Acht nehmen — to beware; etw. außer Acht lassen — to leave out of account, to disregard. Second meaning — the figure eight: die Form einer Acht; the plural die Achten only in this meaning. Do not confuse with the number acht — eight."
   }
 ]
