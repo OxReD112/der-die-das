@@ -4518,6 +4518,23 @@
       // (item 2b: a mid-clause doch is the modal particle — midClauseDoch)
       const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(compressedAbbreviation(a,b) ? "" : gap(a,b)) || boundaries.has(norm(tokens[b][0])) && !midClauseDoch(sentence,tokens,b);
       const soft = (a,b) => /,/u.test(gap(a,b)) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
+      // (es gibt, advisor 11.11: the particle right after the accusative object of es gibt — keinen Weg zurück, den Weg zurück nach Hause —
+      // an article group not inside a prepositional group; not gab es ungern auf, gibt es Mineralien an den Körper ab: es = «оно»)
+      const esGibtObjectBefore = j => {
+        if (!/^\p{Lu}/u.test(tokens[j-1]?.[0] ?? "")) return false;
+        let k = j-2; while (k > 0 && /^\p{Ll}/u.test(tokens[k][0]) && !DETERMINER_WORD.test(norm(tokens[k][0])) && LOWERCASE_DECLINED_WORD.test(tokens[k][0])) k--;
+        return k >= 0 && DETERMINER_WORD.test(norm(tokens[k][0])) && !prepositions.has(norm(tokens[k-1]?.[0] ?? ""));
+      };
+      const esGibtSubject = v => {
+        if (norm(tokens[v-1]?.[0] ?? "") !== "es" && norm(tokens[v+1]?.[0] ?? "") !== "es") return false;
+        let st = v; while (st > 0 && !hard(st-1,st) && !soft(st-1,st)) st--;
+        for (let k = st; k < v; k++) {
+          const w = norm(tokens[k][0]);
+          if (["ich","du","er","sie","wir","ihr"].includes(w)) return false;
+          if (DETERMINER_WORD.test(w) && /^\p{Lu}/u.test(tokens[k+1]?.[0] ?? "") && k+1 < v) return false;
+        }
+        return true;
+      };
       // S1 (17.10.2026): und / oder / aber / als without punctuation do not close the
       // bracket in the first pass either (wirft … Betrug und Bankrott vor, legte … als
       // Präsident … aus); a second verb after them still stops the scan (competingVerb).
@@ -5009,6 +5026,11 @@
             return pairedVerb && (verbAnalyses.get(norm(tokens[prev][0])) || []).some(a => a.kind === "finite") && /^\p{Ll}/u.test(tokens[prev][0]) ? "possible" : null;
           })();
           const pairs = (closes || trailing) && !nominalParticle(i,j) && !graded && !repeated && !expressionWord(j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) ? possible.filter(pair => pair.prefix === norm(tokens[j][0]) &&
+            // (second advisor 11.11: es gibt «имеется» is a closed construction — subject es + geben + accusative; a particle does not
+            // join geben there: Es gibt keinen Weg zurück, gibt es … nur noch den Weg zurück nach Hause. es right before or after the form
+            // and no other subject before it in the part — a personal pronoun or an article + noun: Er gibt es ihm zurück, Das Kind gibt
+            // es nicht her keep zurückgeben / hergeben)
+            !(norm(pair.entry?.word ?? "").replace(/^sich\s+/u,"") === pair.prefix + "geben" && esGibtSubject(i) && esGibtObjectBefore(j)) &&
             !(pair.entry.derivedSeparable && (crossed || trailing)) && !(extraposed && !zuComplement(pair)) && !(pair.sharedForm && (crossed || AND_OR_NEXT_ADVERB(j) || sharedFrameEnd(i,j))) && !(vorSichHin && !literalPlacing(pair)) &&
             !(objectInside === "proven" && intransitiveSein(pair)) &&
             // (review 27.10: a derived imperative that is also an own noun right before the particle — Blick zurück., Fall ab. — is a
