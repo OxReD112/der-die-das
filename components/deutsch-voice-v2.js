@@ -28,13 +28,22 @@
     if (v.localService) s += 2;
     return s;
   }
+  // TEMPORARY (11.11, Alena): a voice chosen by hand on the test page (vorlesen-test.html) — any voice of the browser,
+  // remembered in this browser. Not in v1; remove with the test page or decide for the real version.
+  const MANUAL_KEY = "deutschVoiceManualV2";
+  const keyOf = v => `${v.voiceURI || ""}|${v.name || ""}|${v.lang || ""}`;
+  let manualKey = null;
+  try { manualKey = localStorage.getItem(MANUAL_KEY); } catch (_) {}
   function pick() {
     let best = -Infinity, found = null;
-    for (const v of synth ? synth.getVoices() : []) {
+    const all = synth ? synth.getVoices() : [];
+    const manual = manualKey ? all.find(v => keyOf(v) === manualKey) : null;
+    for (const v of manual ? [] : all) {
       if (!/^de([-_]|$)/i.test(v.lang || "")) continue;
       const s = score(v);
       if (s > best) { best = s; found = v; } // ties keep the list order
     }
+    if (manual) found = manual;
     const changed = found !== voice;
     voice = found;
     if (changed) listeners.forEach(fn => { try { fn(!!voice); } catch (_) {} });
@@ -94,6 +103,18 @@
       return true;
     },
     stop,
-    onChange(fn) { listeners.add(fn); return () => listeners.delete(fn); }
+    onChange(fn) { listeners.add(fn); return () => listeners.delete(fn); },
+    // TEMPORARY (test page): every voice of the browser, the one in use, and choosing one by hand (null = automatic).
+    voices: () => (synth ? synth.getVoices() : []),
+    current: () => voice,
+    isManual: () => !!manualKey,
+    keyOf,
+    use(v) {
+      manualKey = v ? keyOf(v) : null;
+      try { if (manualKey) localStorage.setItem(MANUAL_KEY, manualKey); else localStorage.removeItem(MANUAL_KEY); } catch (_) {}
+      stop();
+      voice = undefined;          // force listeners to hear the change
+      pick();
+    }
   });
 })();

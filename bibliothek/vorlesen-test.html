@@ -44,6 +44,13 @@
       .read-aloud-toggle:focus-visible { outline:2px solid var(--mint); outline-offset:2px; }
       .reading-text .reading-word.is-spoken { background:color-mix(in srgb, var(--mint) 14%, transparent); }
       .reading-text .reading-word.is-spoken-word { background:color-mix(in srgb, var(--mint) 40%, transparent); }
+      /* TEMPORARY (11.11, Alena): choose any voice of this browser, for comparing. */
+      .voice-picker { position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); z-index:6;
+        display:flex; align-items:center; gap:6px; max-width:calc(100% - 32px); padding:4px 4px 4px 12px;
+        border:1px solid var(--hairline); border-radius:999px; background:var(--bg); color:var(--secondary-text); font-size:12px; white-space:nowrap; }
+      .voice-picker select { min-width:0; max-width:220px; font:500 13px/1.2 var(--font, -apple-system, sans-serif);
+        color:var(--text); background:transparent; border:0; padding:6px 4px; border-radius:999px; }
+      .voice-picker select:focus-visible { outline:2px solid var(--mint); outline-offset:1px; }
     </style>
   </head>
   <body class="reading-body library-screen">
@@ -162,6 +169,7 @@
           </div>
         </div>
         <div class="page-controls">
+          <label class="voice-picker" id="voice-picker" for="voice-select"><span>Stimme (Test)</span><select id="voice-select"></select></label>
           <button id="page-previous" type="button" aria-label="Previous page">←</button
           ><span class="page-center"
             ><button class="read-aloud-toggle" id="read-aloud-toggle" type="button" aria-label="Vorlesen" title="Vorlesen" aria-pressed="false" hidden
@@ -499,9 +507,46 @@
     <script src="reader/reader-text-settings.js?v=20261109-fonts-1"></script>
     <script src="reader/pronoun-reference.js?v=20261110-pron-1"></script>
     <script src="reader/bookshelf.js?v=20261109-fonts-1"></script>
-    <script src="../components/deutsch-voice-v2.js?v=1"></script>
+    <script src="../components/deutsch-voice-v2.js?v=2"></script>
     <script src="reader/bibliothek.js?v=20261111-wn-einig72-1"></script>
     <script src="reader/read-aloud.js?v=1"></script>
+    <script>
+      // TEMPORARY (11.11, Alena): every voice of this browser; German first. The choice is remembered in this browser
+      // and used for reading aloud and for the word in the popup. «Automatisch» = the app's own rule.
+      (() => {
+        const V = window.DeutschVoice, select = document.getElementById("voice-select");
+        if (!V?.voices || !select) return;
+        const isDe = v => /^de([-_]|$)/i.test(v.lang || "");
+        function render() {
+          const all = V.voices(), cur = V.current(), auto = document.createElement("option");
+          auto.value = ""; auto.textContent = "Automatisch" + (!V.isManual() && cur ? ` (${cur.name})` : "");
+          const groups = [["Deutsch", all.filter(isDe)], ["Andere Sprachen", all.filter(v => !isDe(v))]];
+          select.replaceChildren(auto);
+          for (const [label, list] of groups) {
+            if (!list.length) continue;
+            const g = document.createElement("optgroup"); g.label = label;
+            for (const v of list) {
+              const o = document.createElement("option");
+              o.value = V.keyOf(v);
+              o.textContent = `${v.name} · ${v.lang}${v.localService ? "" : " · online"}`;
+              g.append(o);
+            }
+            select.append(g);
+          }
+          select.value = V.isManual() && cur ? V.keyOf(cur) : "";
+        }
+        select.addEventListener("change", () => {
+          const v = V.voices().find(x => V.keyOf(x) === select.value) || null;
+          V.use(v);
+          render();
+          if (v || V.current()) V.speak("Guten Tag. Das ist meine Stimme.");
+        });
+        V.onChange(render);
+        speechSynthesis?.addEventListener?.("voiceschanged", render);
+        render();
+        [500, 1500, 4000].forEach(ms => setTimeout(render, ms));
+      })();
+    </script>
     <div class="version-mark" aria-hidden="true">v60</div>
   </body>
 </html>
