@@ -43118,16 +43118,18 @@
     "type": "Ausdruck",
     "group": "verbal_expression",
     "word": "mit jdm. / etw. fertig werden",
-    "translation_ru": "справиться с кем-либо / чем-либо",
-    "translation_en": "to cope with someone / something, to deal with",
+    "translation_ru": "справиться (с кем-либо / чем-либо); закончить (что-либо)",
+    "translation_en": "to cope with (someone / something); to finish (something)",
     "example_de": "Mit dieser Enttäuschung muss sie erst einmal fertig werden.",
     "example_ru": "С этим разочарованием ей сначала нужно справиться.",
     "example_en": "She first has to come to terms with this disappointment.",
     "notes_ru": [
-      "Без mit — fertig werden «закончить»: Ich werde bald fertig."
+      "Без mit — fertig werden «закончить»: Ich werde bald fertig.",
+      "Также с damit (прямо перед fertig): Er wird damit fertig — «справится с этим / закончит это»."
     ],
     "notes_en": [
-      "Without mit — fertig werden “to finish”: Ich werde bald fertig."
+      "Without mit — fertig werden “to finish”: Ich werde bald fertig.",
+      "Also with damit (right before fertig): Er wird damit fertig — «he will cope with it / finish it»."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/fertig",
@@ -43144,6 +43146,7 @@
           {
             "form": [
               "werde",
+              "werd",
               "wirst",
               "wird",
               "werden",
@@ -43166,8 +43169,37 @@
       {
         "parts": [
           {
+            "form": "damit fertig"
+          },
+          {
             "form": [
               "werde",
+              "werd",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden",
+              "geworden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "werde",
+              "werd",
               "wirst",
               "wird",
               "werden",
@@ -43191,6 +43223,40 @@
         "order": "fixed",
         "scope": "clause",
         "anchor": 2,
+        "clause_rest": [
+          "können",
+          "müssen",
+          "wollen",
+          "sollen",
+          "werden"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "werde",
+              "werd",
+              "wirst",
+              "wird",
+              "werden",
+              "werdet",
+              "wurde",
+              "wurdest",
+              "wurden",
+              "wurdet",
+              "würde",
+              "würdest",
+              "würden"
+            ]
+          },
+          {
+            "form": "damit fertig"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
         "clause_rest": [
           "können",
           "müssen",
