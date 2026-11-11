@@ -47,6 +47,13 @@
   // declined like an adjective (der andere, die beiden, das viele Geld, die meisten, der eine, die seinigen, das bißchen, die übrigen):
   // after der / die / das they keep the article reading, though the dictionaries call some of them pronouns.
   const PRONOMINAL_ADJECTIVE = /^(?:ander|andr|beid|viel|wenig|einig|mehrer|meist|übrig|sämtlich|selb|einzig|ein|kein|all|manch|solch|jed|jen|dies|welch|mein|dein|sein|ihr|unser|euer|eur|meinig|deinig|seinig|ihrig|unsrig|unserig|eurig|bißchen|bisschen)(?:e|en|em|er|es|n)?$/u;
+  // (links/sep-nachfeld, advisor 11.11, second advisor: a rule from the data instead of a hand list) A separable particle with an own
+  // Adverb card (wieder, da, gerade, gleich, zusammen, weiter, davon, los …) often acts as a standalone adverb: before a prepositional
+  // Nachfeld it joins its verb only when the separable card governs exactly that preposition (sich zusammensetzen + aus). Free: the
+  // directional class G47 (g47Particle: zurück, hinaus …), mit, adjective particles (fest, hoch, wach — guarded by the dictionary verb)
+  // and the words below, counted 11.11: zu — deckte sie zu bis über den Kopf (zudecken), los — ließ ihren Vater los aus dem
+  // Gefängnis (loslassen), hin / her — their own reflexive-sense condition (setzte sich hin im Sonnenschein).
+  const NACHFELD_FREE_ADVERB_PARTICLES = new Set(["mit","zu","los","hin","her"]);
   const DETERMINER_WORD = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein\w*|mein\w*|dein\w*|sein\w*|ihr\w*|unser\w*|eur\w*|dies\w*|jen\w*|jed\w*|all\w*|welch\w*|solch\w*|manch\w*|beide\w*)$/u;
   // Batch 2 — determiners.
   // ein / eine / einen: an indefinite article that may open a predicate noun (… hielt ihn für einen Spitzbuben).
@@ -2717,7 +2724,13 @@
         (!(forms.get(words[c.start+1])||[]).some(e=>e.type==='Nomen')||['dessen','deren'].includes(words[c.start]));
       return clauses;
     }
-    async function detachedClauseForms(words,analyses,clauses,consumer) {
+    // (links/sep-nachfeld 10.11, advisor: an own adverb particle — wieder / zusammen / … — joins only before a prepositional Nachfeld that
+    // its card governs — setzte sich die Bevölkerung zusammen aus …: sich zusammensetzen + aus; not gingen zusammen durch das Tor)
+    function governedNachfeldParticle(words,k,prefix,entry) {
+      return words[k]===prefix&&prepositions.has(words[k+1])&&
+        [entry,...(reflexiveLemmas.get(norm(entry?.word??'').replace(/^sich\s+/u,''))||[])].some(e=>(e?.complements||[]).some(c=>norm(String(c.pattern||'').split(/\s+/u)[0])===words[k+1]));
+    }
+    async function detachedClauseForms(words,analyses,clauses,consumer,sentence,tokens) {
       // A detached spelling may lack its own record while the proven joined
       // spelling has explicit inflection evidence in fallback (maßt ... an).
       for(const clause of clauses) for(let i=clause.start;i<clause.end;i++) {
@@ -2727,12 +2740,27 @@
           for(const row of await tokenAnalyses(joined, undefined, consumer))if(row.base===norm(pair.entry.word))
             analyses[i].push({...row,prefix:pair.prefix,detached:true});
         }
+        // (links/sep-nachfeld 10.11, advisor: a particle the separable scanner proves before its prepositional Nachfeld — setzte sich hin
+        // im Sonnenschein, zog sich zurück in sein Zimmer — takes part like the particle closing the part; G70 and the reflexive link follow)
+        if(!sentence)continue;
+        const prefixes=new Set([...(separatedForms.get(words[i])||[]).map(p=>p.prefix),...analyses[i].filter(r=>r.detached&&r.prefix).map(r=>r.prefix)]);
+        if(!words.some((w,k)=>k>i&&k<clause.end&&prefixes.has(w)))continue;
+        for(const c of await scanSeparableCandidates(tokens[i][0],await separableScope({sentence,tokenOffset:tokens[i].index}))) {
+          if(!c.construction.nachfeld||c.construction.spans[0].start!==tokens[i].index)continue;
+          const k=tokens.findIndex(t=>t.index===c.construction.spans.at(-1).start),base=norm(c.lemma).replace(/^sich\s+/u,'');
+          if(!(k>i&&k<clause.end&&prefixes.has(words[k])))continue;
+          let own=false;
+          analyses[i]=analyses[i].map(r=>r.detached&&r.prefix===words[k]&&r.base===base?(own=true,{...r,nachfeldAt:k}):r);
+          if(own)continue;
+          for(const row of await tokenAnalyses(words[k]+words[i], undefined, consumer))if(row.base===base)
+            analyses[i].push({...row,prefix:words[k],detached:true,nachfeldAt:k});
+        }
       }
     }
     async function sentenceClauseFacts(sentence,tokens,words,consumer) {
       const analyses = await sentenceVerbAnalyses(sentence,tokens,words,consumer);
       const clauses = sentenceClauses(sentence,tokens,words,analyses);
-      await detachedClauseForms(words,analyses,clauses,consumer);
+      await detachedClauseForms(words,analyses,clauses,consumer,sentence,tokens);
       return {sentence,tokens,words,analyses,clauses};
     }
     // Possible subjects (controllers) of a clause for a verb person: personal
@@ -3119,10 +3147,12 @@
             const attempt=diagnostic?{verbStart:tokens[v].index,base:a.base,kind:a.kind,stage:'components'}:null;if(attempt)diagnostic.attempts.push(attempt);
             const componentIndices=[v];
             if(a.detached) {
-              const p=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>i>v&&words[i]===a.prefix&&i===clause.end&&/^\p{Ll}/u.test(tokens[i][0]));
+              const p=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).filter(i=>i>v&&words[i]===a.prefix&&(i===clause.end||i===a.nachfeldAt)&&/^\p{Ll}/u.test(tokens[i][0]));
               if(p.length!==1)continue;componentIndices.push(p[0]);
             } else if(clause.end>v&&/^\p{Ll}/u.test(tokens[clause.end][0])&&
-              (lemmas.get(words[clause.end]+norm(a.base).replace(/^sich\s+/u,''))||[]).some(e=>e.type==='Verb'&&e.separable_prefix)) {
+              (lemmas.get(words[clause.end]+norm(a.base).replace(/^sich\s+/u,''))||[]).some(e=>e.type==='Verb'&&e.separable_prefix)||
+              // (links/sep-nachfeld 10.11: or the particle stands before its prepositional Nachfeld — setzte sich hin im Sonnenschein)
+              rows.some(r=>r.detached&&r.nachfeldAt!=null&&r.base===r.prefix+norm(a.base).replace(/^sich\s+/u,''))) {
               // G70 (review 25.10): the particle of a separable verb of this base closes the clause (stellen sich in einer Reihe auf,
               // legte sich hin) — the base verb (sich stellen, sich legen) is not the reading; the separable verb's own link is
               continue;
@@ -4880,7 +4910,41 @@
           const trailingOther = !closes && !prepositionalObject && possible.some(pair => pair.prefix === norm(tokens[j][0])) && (trailingAdverbial(j) || trailingZuInfinitive(j));
           // (item 2b″: the extraposed zu-infinitive group only for a card with zu + Infinitiv)
           const extraposed = !closes && !trailingOther && !secondary && possible.some(pair => pair.prefix === norm(tokens[j][0]) && zuComplement(pair)) && extraposedZuGroup(i,j);
-          const trailing = trailingOther || extraposed;
+          // (links chat, advisor 10.11: the shared Nachfeld of the chains, nachfeldRestFits — a prepositional group after the particle up
+          // to the end of its part: setzte sich die Bevölkerung zusammen aus 77,1 Prozent Weißen …, kam zurück aus Berlin. Not zusammen /
+          // mit / weiter / vorbei + mit — «вместе с» (07.11): ging zusammen mit ihm ins Kino, arbeitete zusammen mit Kollegen)
+          const nachfeldParticle = !closes && !trailingOther && !extraposed && !prepositionalObject && !secondary && !crossed &&
+            possible.some(pair => pair.prefix === norm(tokens[j][0])) && /^\s+$/u.test(gap(j,j+1)) && !(j > 0 && /[,;:–—]/u.test(gap(j-1,j))) &&
+            !(["zusammen","mit","weiter","vorbei"].includes(norm(tokens[j][0])) && norm(tokens[j+1]?.[0] ?? "") === "mit") &&
+            // (advisor 11.11: an own adverb particle — an Adverb card of ours, the same in-memory forms as particleCards, no lookup —
+            // only when the card governs this preposition; see NACHFELD_FREE_ADVERB_PARTICLES. Never a determiner — bilden ein bis zwei
+            // Magnete —, the end of a circumposition — von Genf aus, von 1512 an — nor bis hin zu; not an auxiliary — Was hast du da in der Hand?)
+            (!(forms.get(norm(tokens[j][0])) || []).some(e => e.type === "Adverb") || g47Particle(norm(tokens[j][0])) || NACHFELD_FREE_ADVERB_PARTICLES.has(norm(tokens[j][0])) || possible.some(pair => governedNachfeldParticle(tokens.map(t => norm(t[0])), j, pair.prefix, pair.entry))) &&
+            !DETERMINER_WORD.test(norm(tokens[j][0])) &&
+            !(["an","aus"].includes(norm(tokens[j][0])) && tokens.slice(i+1,j).some(t => ["von","vom"].includes(norm(t[0])))) &&
+            // (regressions 10.11: zu Hause is a place, not the particle's Nachfeld — hörte auf zu Hause, fängt Fische an zu Hause; nach after a
+            // noun is a postposition — ging der Reihe nach bis zum letzten Schüler; a bare hin / her before a preposition stays the adverb
+            // (reviewed: Wir fahren hin zum Bahnhof) unless sich in the part takes an own reflexive sense of the card — sich hinsetzen, hinlegen.reflexive: setzte sich hin im Sonnenschein)
+            !(norm(tokens[j+1]?.[0] ?? "") === "zu" && norm(tokens[j+2]?.[0] ?? "") === "hause") &&
+            !(norm(tokens[j][0]) === "nach" && /^\p{Lu}/u.test(tokens[j-1]?.[0] ?? "")) &&
+            (!["hin","her"].includes(norm(tokens[j][0])) || tokens.slice(i+1,j).some(t => reflexivePronouns.has(norm(t[0]))) &&
+              possible.some(pair => pair.prefix === norm(tokens[j][0]) && (reflexiveEntries.has(pair.entry) || pair.entry?.reflexive || (reflexiveLemmas.get(norm(pair.entry?.word ?? "")) || []).length))) &&
+            !(norm(tokens[j][0]) === "hin" && norm(tokens[j-1]?.[0] ?? "") === "bis") &&
+            !["haben","sein","werden"].includes(norm(possible.find(pair => pair.prefix === norm(tokens[j][0]))?.entry?.word ?? "").slice(norm(tokens[j][0]).length)) &&
+            (() => { let e = j+1; while (e+1 < tokens.length && !hard(e,e+1) && !soft(e,e+1)) e++;
+              // (run110 books: the part (up to und / oder / aber) must end in its prepositional group, not in a lowercase verb or particle —
+              // wollte übel mit ihr wirtschaften, rückte ein wenig näher an das Glas heran)
+              let last = j+1; while (last < e && !["und","oder","aber"].includes(norm(tokens[last+1][0]))) last++;
+              if (/^\p{Ll}/u.test(tokens[last][0])) return false;
+              if (!prepositions.has(norm(tokens[j+1]?.[0] ?? "")) || !nachfeldRestFits(tokens, j+1, e, j)) return false;
+              // (the shape of the attribute frame — a group, a declined form, its noun: mit in der Dunkelheit hüpfender Laterne — makes the
+              // word the preposition of that noun; attributeFrameDeterminer, and the bare frame right after a noun)
+              // (two determiners in a row — gegen die den Kürzeren — is no Nachfeld phrase: zog das Team aus zu Hause gegen die den …)
+      for (let k = j+2; k < e; k++) if (DETERMINER_WORD.test(norm(tokens[k][0])) && DETERMINER_WORD.test(norm(tokens[k+1][0]))) return false;
+      for (let k = j+2; k < e; k++) if (/^\p{Ll}/u.test(tokens[k][0]) && /^\p{Lu}/u.test(tokens[k+1][0]) &&
+                (attributeFrameDeterminer(tokens, k, j, sentence) >= 0 || LOWERCASE_DECLINED_WORD.test(tokens[k][0]) && /^\p{Lu}/u.test(tokens[k-1][0]) && !DETERMINER_WORD.test(norm(tokens[k][0])))) return false;
+              return true; })();
+          const trailing = trailingOther || extraposed || nachfeldParticle;
           // "kein Weg (daran) vorbei" belongs to führen, not vorbeifahren.
           // S2: a graded adjective-like particle is the adverb (warf ihn so hoch, schnürte so fest,
           // dachte nicht weiter — but steht nicht fest stays feststehen); X und X is an idiom (nach und nach), not a particle.
@@ -4955,7 +5019,10 @@
             if (selected === i || selected === j) for (const pair of pairs) {
               const spans = [i,j].map(k => ({text:tokens[k][0],start:tokens[k].index,end:tokens[k].index + tokens[k][0].length}));
               results.push({...mainCandidate(pair.entry),construction:{id:"separable-verb",spans,
-                ...(crossed || objectInside === "possible" && intransitiveSein(pair) ? {confidence:"tentative"} : {})}});
+                ...(crossed || objectInside === "possible" && intransitiveSein(pair) ? {confidence:"tentative"} : {}),
+                // (links/sep-nachfeld 10.11: the particle before a prepositional Nachfeld — by nachfeldRestFits or as a G47 directional
+                // particle, zog sich zurück in sein Zimmer — is marked for the reflexive search, which links it like a final particle)
+                ...(nachfeldParticle || trailingOther && prepositions.has(norm(tokens[j+1]?.[0] ?? "")) ? {nachfeld:true} : {})}});
             }
             // A completed primary bracket must not consume a later particle.
             if (!crossed) break;
