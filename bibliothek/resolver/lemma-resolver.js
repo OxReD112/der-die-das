@@ -2099,7 +2099,10 @@
       const parsed = numeralGrammar(word);
       if (!parsed) return null;
       const id = `numeral-generated:${parsed.kind}:${parsed.lemma}`;
-      if (generatedNumerals.has(id)) return generatedNumerals.get(id);
+      // (speed chat 10.11: kept per spelling — the card carries the tapped spelling in search_forms, so one kept for siebente made
+      // a later siebenten lose closed-class-exact-form: «im siebenten Bestandsjahr» depended on an earlier tap elsewhere)
+      const cacheKey = id + "\u0000" + norm(word);
+      if (generatedNumerals.has(cacheKey)) return generatedNumerals.get(cacheKey);
       const {kind,value,lemma} = parsed, note = numeralNoteCard(kind,lemma);
       const translation = kind === "cardinal" ? {ru:String(value),en:String(value)} :
         kind === "ordinal" ? {ru:`${value}-й`,en:englishOrdinal(value)} :
@@ -2109,7 +2112,7 @@
         ...(kind === "ordinal-mal" ? {usage_note_ru:`Старое написание: zum ${lemma.replace(/e?n?mal$/u,"en")} Mal.`,usage_note_en:`Old spelling of zum ${lemma.replace(/e?n?mal$/u,"en")} Mal.`} :
           note ? {usage_note_ru:note.usage_note_ru,usage_note_en:note.usage_note_en} : {}),
         search_forms:Object.freeze([norm(word)]),wortschatz_excluded:true});
-      generatedNumerals.set(id,entry);
+      generatedNumerals.set(cacheKey,entry);
       return entry;
     }
     const grammaticalWords = new Set(['ich','du','er','sie','es','wir','ihr','man','wer','mich','mir','dich','dir','sich','uns','euch','der','die','das','den','dem','des','ein','eine','einen','einem','einer','eines','zu','und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','als','bevor','nachdem']);
