@@ -10760,6 +10760,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const combined = new Set((card.government || []).filter(g => g.status === "standard").flatMap(g => String(g.combined_with || "").split("/")).map(norm).filter(Boolean));
       const next = tokens[index+1] && !boundary.test(gap(index,index+1)) ? norm(tokens[index+1][0]) : null;
       if (next && (combined.has(next) || combined.has(contractionForms[next]?.[0]))) return {...prep,evidence:'preposition-combination'};
+      // (second resolver chat, advisor 11.11, R10 — claude/SS_BIS_COUNT_2026-11-11_RU.md) bis right between two numbers with no comma
+      // before it is the preposition «до»: 1548 bis 1550, von 10 bis 18 Uhr, 3 bis 5 Prozent. The conjunction bis opens a clause, and a
+      // comma always stands before it (Warte, bis 3 Leute kommen); numbers are no tokens, so the sentence text is read.
+      if (norm(word) === "bis" && /\d[\d.,%]*\s+$/u.test(sentence.slice(0, tokens[index].index)) &&
+          /^\s+\d/u.test(sentence.slice(tokens[index].index + tokens[index][0].length)))
+        return {...prep,evidence:'preposition-number-range'};
       // 19.10.2026 (außer, seit, bis, während): a subject pronoun with an agreeing finite verb right after it
       // (Außer du möchtest …, außer ihr verschwindet, bis er kommt) makes the same-word conjunction card, not the
       // preposition. Agreement is checked: außer ihr gab es … (ihr = Dativ «её») stays a preposition.
