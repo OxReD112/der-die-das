@@ -265,6 +265,9 @@
   // (links chat, advisor 10.11, R0: bis — a preposition too: hielt sich 1548 bis 1550 in Zürich auf, zog sich bis Mai hin; Warte, bis er kommt
   // keeps its comma; bis er kam, war es dunkel opens the sentence)
   const MID_PART_SUBORDINATORS = new Set(["damit","während","bis"]);
+  // (second resolver chat, advisor 11.11, claude/BIS_NEXT_WORD_COUNT_2026-11-11_RU.md) words of time after the preposition bis — a closed list
+  const BIS_TIME_WORDS = new Set(["heute","morgen","gestern","jetzt","dahin","dato","bald","später","spät","zuletzt","mitternacht","mittag","abend",
+    "ende","anfang","mitte","frühjahr","frühling","sommer","herbst","winter","ostern","pfingsten","weihnachten","silvester"]);
   // (advisor 07.11, comma insertions) The first word of a finished subordinate clause between two commas inside a part: a relative
   // pronoun or a subordinating conjunction (kann Dinge, die er sucht, nicht finden).
   // (links chat 07.11, advisor 07.11: «wie + participle» between two commas is a short insertion, not a part of its own — wachte,
@@ -5448,6 +5451,19 @@
     // One check for the chains of verbalClause (head "chain": a finite auxiliary / modal waits for its verb) and the reflexive search
     // of sentenceClauses (head "reflexive": the reflexive pronoun waits for its verb) — advisor 07.11. Gives [a, b]: the first comma
     // after token a, the second after token b.
+    // Shared (advisor 07.11; second resolver chat 11.11, bis): a finished subordinate clause after the comma behind token a — it runs to
+    // the next comma (at most 16 words) and ends with a lowercase finite verb that is no participle too and no zu-infinitive (wie
+    // erwartet, wie gesagt are short insertions without a verb — registry); gives its last token, or -1. The caller checks its first
+    // word (a relative pronoun / subordinator) and what stands around it.
+    function finishedClauseAfter(sentence, tokens, a, rowsOf = i => verbAnalyses.get(norm(tokens[i][0])) || []) {
+      const gapAfter = i => clauseGapText(sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index),tokens[i][0],tokens[i+1][0]);
+      const commaAfter = i => i+1 < tokens.length && /^\s*,\s*$/u.test(gapAfter(i));
+      const stopAfter = i => i+1 >= tokens.length || /[,;:.!?…()"„“”»«–—]/u.test(gapAfter(i));
+      let b = a+1; while (b+1 < tokens.length && b-a <= 16 && !stopAfter(b)) b++;
+      if (!commaAfter(b) || b === a+1 || !/^\p{Ll}/u.test(tokens[b][0]) || !rowsOf(b).some(r => r.kind === "finite") ||
+          rowsOf(b).some(r => r.kind === "participle") || norm(tokens[b-1][0]) === "zu" || b+1 >= tokens.length) return -1;
+      return b;
+    }
     function insertedClauseSpans(sentence, tokens, head = "chain", analyses = null) {
       const out = [], REFLEXIVE_WORDS = new Set(["sich","mich","dich","uns","euch"]);
       const gapAfter = a => clauseGapText(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[a+1].index),tokens[a][0],tokens[a+1][0]);
@@ -5477,9 +5493,8 @@
           // (a d- / welch- word before a capital noun is an article — ihre Aufgabe, die Zerstörung … zu überwachen, abgeschlossen)
           const article = /^(?:der|die|das|dem|den|welcher|welche|welches|welchem|welchen)$/u.test(norm(tokens[a+1][0])) && /^\s+$/u.test(gapAfter(a+1)) && /^\p{Lu}/u.test(tokens[a+2]?.[0] ?? "");
           if (!commaAfter(a) || !opener || article) continue;
-          let b = a+1; while (b+1 < tokens.length && b-a <= 16 && !stopAfter(b)) b++;
-          // (the last word a finite verb that is no participle too: wie erwartet, wie gesagt are short insertions without a verb — registry)
-          if (!commaAfter(b) || b === a+1 || !lowFinite(b) || rowsOf(b).some(r => r.kind === "participle") || norm(tokens[b-1][0]) === "zu" || b+1 >= tokens.length) continue;
+          const b = finishedClauseAfter(sentence,tokens,a,rowsOf);
+          if (b < 0) continue;
           // (2) a finite auxiliary / modal before the first comma in the same part, with no participle / infinitive after it yet
           let h = a; while (h > 0 && !stopAfter(h-1)) h--;
           let aux = -1;
@@ -10199,18 +10214,50 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // first punctuation mark; partEnd gives its last token, partEndsWithFiniteVerb says whether that token is an own finite verb form
     // (lowercase, not a detached prefix verb; ß / ss both) — the verb-final sign of a subordinate part. Used by G50 (der / die / das
     // by the place of the verb) and meant for damit as well (links chat, TODO item 17: damit before a verb-final part is the conjunction).
-    function partEnd(sentence, tokens, start) {
+    // (`numbers`: a number between two words is no boundary — bis 3 Leute kommen, bis 1999 auch die Post …; second resolver chat 11.11)
+    function partEnd(sentence, tokens, start, {numbers = false} = {}) {
       let end = start;
-      while (end+1 < tokens.length && /^\s+$/u.test(sentence.slice(tokens[end].index+tokens[end][0].length,tokens[end+1].index))) end++;
+      const plain = g => /^\s+$/u.test(g) || numbers && /^\s+[\d%]+(?:\s+[\d%]+)*\s+$/u.test(g.replace(/(\d)[.,:](?=\d)/gu,'$1'));
+      while (end+1 < tokens.length && plain(sentence.slice(tokens[end].index+tokens[end][0].length,tokens[end+1].index))) end++;
       return end;
     }
     function finiteVerbToken(token) {
       const f = norm(token[0]);
       return /^\p{Ll}/u.test(token[0]) && [f,f.replace(/ß/gu,'ss')].some(x => (verbAnalyses.get(x) || []).some(r => r.kind === 'finite' && !r.detached));
     }
-    function partEndsWithFiniteVerb(sentence, tokens, start) {
-      const end = partEnd(sentence,tokens,start);
-      return end > start && finiteVerbToken(tokens[end]);
+    // (a joined separable form without its own row — particle + an own finite form: damit die Luft hereinkommt, bis sie ihn lossprach;
+    // shared by damitOpensPart and partEndsWithFiniteVerb alone)
+    function joinedFiniteToken(token) {
+      const f = norm(token[0]);
+      return /^\p{Ll}/u.test(token[0]) && SEPARABLE_PARTICIPLE_PARTICLES.split('|').some(p => f.startsWith(p) && f.length - p.length >= 3 &&
+        [f.slice(p.length),f.slice(p.length).replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []).some(r => r.kind === 'finite' && !r.detached));
+    }
+    // (second resolver chat, advisor 11.11, bis — claude/BIS_NEXT_WORD_COUNT_2026-11-11_RU.md) `alone`: the finished subordinate part —
+    // no other own finite verb inside it, but one of a coordinated verb-final pair (bis er seine Glieder streckte und die Augen
+    // aufschlug — right before und / oder) or one that is an infinitive / participle too (bis es Abend werden wollte, bis er seine
+    // Beute fahren ließ, unterworfen haben würde); not Bis Dezember wird es dauern.
+    // With `alone` the part also goes on over a finished relative / subordinate clause between commas (finishedClauseAfter — bis Peeves,
+    // der Tennis gegen die Wand spielte, den Weg frei machte), and a joined separable form closes it (bis sie ihn lossprach).
+    function partEndsWithFiniteVerb(sentence, tokens, start, {alone = false} = {}) {
+      let end = partEnd(sentence,tokens,start,{numbers:alone});
+      if (!alone) return end > start && finiteVerbToken(tokens[end]);
+      const inserted = new Set();
+      // (the part goes on after it — not with a preposition: bis zwei Meilen von des Königs Hauptstadt, wo eine Mühle war, an dessen Wehr …)
+      for (let b; end+1 < tokens.length && INSERTED_CLAUSE_OPENERS.has(norm(tokens[end+1][0])) && (b = finishedClauseAfter(sentence,tokens,end)) > 0 &&
+          !prepositions.has(norm(tokens[b+1][0]));) {
+        for (let i = end+1; i <= b; i++) inserted.add(i);
+        end = partEnd(sentence,tokens,b+1,{numbers:true});
+      }
+      if (!(end > start && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return false;
+      const rows = i => [norm(tokens[i][0]),norm(tokens[i][0]).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
+      // (the verbs at the end: an infinitive / participle reading and only such words up to the last one — not Bis Ende Oktober werden
+      // Arbeiten dort dauern)
+      let cluster = end;
+      while (cluster-1 > start && /^\p{Ll}/u.test(tokens[cluster-1][0]) && rows(cluster-1).some(r => r.kind === 'infinitive' || r.kind === 'participle')) cluster--;
+      // (a participle reading is the adjective / adverb inside the part: bis er endlich erschöpft zur Erde fiel)
+      for (let i = start+1; i < cluster; i++) if (!inserted.has(i) && finiteVerbToken(tokens[i]) && !/^(?:und|oder)$/u.test(norm(tokens[i+1][0])) &&
+        !rows(i).some(r => r.kind === 'participle')) return false;
+      return true;
     }
     // Links chat, TODO item 17 (advisor 02.11.2026): damit without a punctuation mark before it opens a part (the conjunction) by the
     // verb-final sign — the part after it ends with an own finite verb (Er ließ ihn spielen damit er ruhig ist; Er öffnete das Fenster
@@ -10244,16 +10291,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return SEPARABLE_PARTICIPLE_PARTICLES.split('|').includes(f) ||
         [f,f.replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []).some(r => r.kind === 'infinitive' || r.kind === 'participle');
     }
-    function damitOpensPart(sentence, tokens, k) {
+    // (`finiteBefore`, bis — second resolver chat 11.11: only after a finite verb of its own in the part before the word)
+    function damitOpensPart(sentence, tokens, k, {finiteBefore = false} = {}) {
       const verbRowsOf = f => [f,f.replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []);
       // (the part of damit stops before a subordinator without its comma: rechnet damit dass sie kommt, hört damit auf wenn …)
       let end = partEnd(sentence,tokens,k);
       for (let i = k+1; i <= end; i++) if (DAMIT_SUBORDINATORS.has(norm(tokens[i][0]))) { end = i-1; break; }
-      // (a joined separable form without its own row — particle + an own finite form: damit die Luft hereinkommt)
-      const joinedFinite = token => /^\p{Ll}/u.test(token[0]) && SEPARABLE_PARTICIPLE_PARTICLES.split('|').some(p => {
-        const f = norm(token[0]);
-        return f.startsWith(p) && f.length - p.length >= 3 && verbRowsOf(f.slice(p.length)).some(r => r.kind === 'finite' && !r.detached); });
-      if (!(end > k && (finiteVerbToken(tokens[end]) || joinedFinite(tokens[end])))) return false;
+      if (!(end > k && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return false;
       if (norm(tokens[end-1]?.[0] ?? '') === 'zu' && end-1 > k) return false;
       let start = k;
       while (start > 0 && !/[,;:.!?…–—"„“”»«()]/u.test(sentence.slice(tokens[start-1].index+tokens[start-1][0].length,tokens[start].index))) start--;
@@ -10264,12 +10308,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const finites = before.filter(finiteAt);
       const lastFinite = finites.length ? finites[finites.length-1] : -1;
       if (before.some(i => i > lastFinite && DAMIT_SUBORDINATORS.has(norm(tokens[i][0])))) return false;
-      if (lastFinite < 0) return true;
+      if (lastFinite < 0) return !finiteBefore;
+      // (finiteBefore: no relative pronoun after that verb either — und die ihn bis nach Rostock führte)
+      if (finiteBefore && before.some(i => i > lastFinite && INSERTED_CLAUSE_OPENERS.has(norm(tokens[i][0])) && /^\p{Ll}/u.test(tokens[i][0]) &&
+        !/^\s+\p{Lu}/u.test(sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index) + tokens[i+1][0]))) return false;
       // (an auxiliary / modal / lassen chain is still open before damit — no infinitive, participle or detached particle closes it
       // between them: konnte damit … erreicht werden; not ließ sie warten damit …, hat gespart damit …, ließ das Licht an damit …)
       const chain = finites.filter(i => DAMIT_CHAIN_FINITE.test(norm(tokens[i][0]))).pop();
       const particles = new Set(SEPARABLE_PARTICIPLE_PARTICLES.split('|'));
-      const closes = i => /^\p{Ll}/u.test(tokens[i][0]) && (particles.has(norm(tokens[i][0])) ||
+      // (finiteBefore: a particle closes the chain only right before the word — wurde nach dem Krieg bis … verlängert: nach is the preposition)
+      const closes = i => /^\p{Ll}/u.test(tokens[i][0]) && (particles.has(norm(tokens[i][0])) && (!finiteBefore || i === k-1) ||
         verbRowsOf(norm(tokens[i][0])).some(r => r.kind === 'infinitive' || r.kind === 'participle'));
       const open = chain !== undefined && !before.some(i => i > chain && closes(i));
       const nonFinite = verbRowsOf(norm(tokens[end][0])).some(r => r.kind === 'infinitive' || r.kind === 'participle');
@@ -10776,6 +10824,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (persons && (await tokenAnalyses(tokens[index+2][0],undefined,'prepositionChoice')).some(a => a.kind === "finite" && !a.detached && persons.includes(a.person)))
           return {candidate:sameConjunction[0],rule:'subordinate-clause',evidence:'conjunction-subject-verb'};
       }
+      const conjunctions = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Konjunktion" && norm(c.lemma) === norm(word) &&
+        conjunctionKind(c.item) === "subordinating");
+      const clauseStart = index === 0 || boundary.test(gap(index-1,index)) ||
+        (forms.get(norm(tokens[index-1][0])) || []).some(e => e.type === "Konjunktion" && conjunctionKind(e) === "coordinating");
+      // (second resolver chat, advisor 11.11 — claude/BIS_NEXT_WORD_COUNT_2026-11-11_RU.md) bis at the start of its part before a finished
+      // subordinate part — its own finite verb at the end, no other (partEndsWithFiniteVerb, alone) — is the conjunction «пока не», before
+      // the noun group after it is read as governed: wartete, bis er seine Glieder streckte; bis die Frau Königin kommt; bis das Tier
+      // ganz nahe war. Bis Dezember wird es dauern (wird before the end) stays the preposition.
+      // Without the comma: right after als (nicht eher …, als bis er … war), or by the sign of damit without its comma (damitOpensPart,
+      // with a finished finite verb of its own before bis in the part: wartete nicht erst bis er ihn ausgezogen hatte; schliefen bis der
+      // Morgen kam; Lange hat es gedauert bis es …) — not daß er bis dahin … kommen sollte, die bis dahin … hatten, wurde … bis
+      // Stanoviště verlängert.
+      if (norm(word) === "bis" && conjunctions.length === 1 && partEndsWithFiniteVerb(sentence,tokens,index,{alone:true}) && (clauseStart ||
+          index > 0 && norm(tokens[index-1][0]) === "als" || damitOpensPart(sentence,tokens,index,{finiteBefore:true})))
+        return {candidate:conjunctions[0],rule:'subordinate-clause',evidence:'subordinate-clause-verb-final'};
+      // (second resolver chat, advisor 11.11, second step) bis before a number or a word of time with no own finite verb at the end of its
+      // part (a form that is a participle too does not count: bis heute weiterentwickelt) is the preposition «до»: bis 1999, bis heute,
+      // bis dahin, bis Ende Mai, bis Mitternacht. Traps: bis 3 Leute kommen, bis morgen alles fertig ist — the conjunction's verb at the end.
+      if (norm(word) === "bis" && (/^\s+\d/u.test(sentence.slice(tokens[index].index + tokens[index][0].length)) || next && BIS_TIME_WORDS.has(next))) {
+        const end = partEnd(sentence,tokens,index,{numbers:true});
+        const endRows = [norm(tokens[end][0]),norm(tokens[end][0]).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
+        if (!(end > index && finiteVerbToken(tokens[end]) && !endRows.some(r => r.kind === 'participle'))) return {...prep,evidence:'preposition-time-or-number'};
+      }
       const governed = governedCases(card);
       // A figure right after the preposition (über 60 Prozent) may be an adverbial "more than".
       const figureFirst = tokens[index+1] && /\d/u.test(gap(index,index+1));
@@ -10799,10 +10870,6 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const cases = bareGroupCases(group);
         if (cases && governed.size && ![...cases].some(c => governed.has(c))) caseMismatch = true;
       }
-      const conjunctions = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Konjunktion" && norm(c.lemma) === norm(word) &&
-        conjunctionKind(c.item) === "subordinating");
-      const clauseStart = index === 0 || boundary.test(gap(index-1,index)) ||
-        (forms.get(norm(tokens[index-1][0])) || []).some(e => e.type === "Konjunktion" && conjunctionKind(e) === "coordinating");
       if (conjunctions.length === 1 && clauseStart) {
         let end = index;
         while (tokens[end+1] && !boundary.test(gap(end,end+1))) end++;
