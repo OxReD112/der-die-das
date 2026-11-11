@@ -8897,7 +8897,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return /^\p{Lu}\p{Ll}+er$/u.test(tokens[i]?.[0] ?? "") && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") &&
         /^\s+$/u.test(text.slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index));
     }
-    function attributeFrameDeterminer(tokens, i, lo = 0, sentence = null) {
+    // (second resolver chat 10.11, advisor 10.11, item 3: wide = true for a -te / -ten attribute — the wider walk of attributeFrameWide:
+    // numbers, adverbs, a series of attributes, a contraction, a preposition with attributes of the same ending; a group with a preposition
+    // there must close before the form — not … unter dem Bandnamen veröffentlichten Alben produzierte Orzabal, which the narrow walk below
+    // would take. One function of the attribute frame, as the advisor asked)
+    function attributeFrameDeterminer(tokens, i, lo = 0, sentence = null, wide = false) {
+      if (wide) return attributeFrameWide(tokens, i, String(sentence ?? tokens[i]?.input ?? ""));
       const text = String(sentence ?? tokens[i]?.input ?? ""), word = norm(tokens[i]?.[0] ?? "");
       const ending = (/(en|em|er|es|e)$/u.exec(word) || [])[1];
       if (!ending || !/^\p{Ll}/u.test(tokens[i][0]) || !/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") ||
@@ -9099,6 +9104,160 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         observe('noun-frame-projection',{from:frame.hypothesis.policy,anchor:tokens[anchor].tokenId,key,id:frame.hypothesis.id});
       }
     }
+    // (second resolver chat 10.11, item 3) The determiner of a -te / -ten attribute beyond numbers, adverbs and groups with a preposition
+    // (eines 1763 errichteten Hofs, der einzig offiziell anerkannte Fanklub, die erst nach seinem frühen Tod veröffentlichte, der als
+    // »Gewächshausgang« bezeichneten Brücke): the walk to the left stops at punctuation, und / oder, a verb form; a capital word and a
+    // determiner of another case are passed only inside a group that a preposition (or als) opens further left. Gives -1 when the
+    // determiner does not take the form's ending.
+    // (a preposition right before the attributes, with no determiner of their own — auf gut ausgebauten asphaltierten Feldwegen — is the
+    // frame too when the ending can follow it without an article: -en, or -e after a preposition that takes the accusative; only adverbs
+    // and attributes of the same ending between, no number, no und: not Um 1970 versuchte …, Erst vor kurzem erklärte …)
+    const TE_ACCUSATIVE_PREPOSITIONS = new Set(["für","durch","gegen","ohne","um","auf","in","an","über","unter","vor","hinter","neben","zwischen"]);
+    function attributeFrameWide(tokens, index, sentence) {
+      const state = {prep:-1, clean:true};
+      const d = attributeFrameWideWalk(tokens, index, sentence, state);
+      if (d >= 0 || state.prep < 0 || state.prep === index-1) return d;
+      const ending = teEnding(tokens[index][0]);
+      return ending === "en" || TE_ACCUSATIVE_PREPOSITIONS.has(norm(tokens[state.prep][0])) ? state.prep : -1;
+    }
+    const teEnding = t => (/(en|e)$/u.exec(norm(t)) || [])[1];
+    // An adverb of an own or external card, without a verb form of its own (gut, stark, weit, jemals, bis dahin's dahin).
+    const teAdverb = t => /^\p{Ll}/u.test(t) && !(verbAnalyses.get(norm(t)) || []).length && (forms.get(norm(t)) || []).some(e => ["Adverb","Partikel","particle"].includes(e.type) || e.type === "Adjektiv" && norm(e.word) === norm(t));
+    function attributeFrameWideWalk(tokens, index, sentence, state) {
+      const word = norm(tokens[index][0]), ending = teEnding(word);
+      let pending = false;
+      for (let k = index-1; k >= 0 && index-k <= 10; k--) {
+        // (numbers are no tokens: eines 1763 errichteten, des 1884 / 1885 errichteten, im 1,5 km entfernten; a comma only after a
+        // declined attribute of a series: einer sehr jungen, fast nur mit Spaniern besetzten, der heutigen, 1832 errichteten)
+        const raw = sentence.slice(tokens[k].index + tokens[k][0].length, tokens[k+1].index), gap = raw.replace(/\d+(?:[.,]\d+)*\.?/gu, "");
+        if (gap !== raw) state.clean = false;
+        const series = /^\s*,\s*$/u.test(gap) && !pending && teSeriesAttribute(tokens[k][0], ending);
+        if (!/^\s*(?:[\/–-]\s*)*$/u.test(gap) && !/^\s*[»«„“"]\s*$/u.test(gap) && !series) return -1;
+        if (series) state.clean = false;
+        const t = tokens[k][0], w = norm(t), article = contractionArticle(w);
+        // (a contraction carries its article: bis zur 1952 erfolgten Wiedergründung, im 1,5 km entfernten Stonehenge)
+        if (article && /^\p{Ll}/u.test(t) && !pending) return attributeFrameEndings(article).includes(ending) ? k : -1;
+        if (ATTRIBUTE_FRAME_DETERMINER.test(w) && /^\p{Ll}/u.test(t)) {
+          if (!pending && attributeFrameEndings(w).includes(ending)) return k;
+          // (inside a group: its own determiner, or a pronoun after its preposition — die von ihr erwartete)
+          if (pending || k > 0 && prepositions.has(norm(tokens[k-1][0]))) { state.clean = false; continue; }
+          return -1;
+        }
+        if (prepositions.has(w) || w === "als") { if (state.clean && state.prep < 0 && w !== "als" && /^\p{Ll}/u.test(t)) state.prep = k; state.clean = false; pending = false; continue; }
+        // (und / oder between two attributes or adverbs — Das regional und thematisch differenzierte, Der stets eifersüchtige und sehr
+        // auf … bedachte —, und / bis between numbers — zwischen 1939 und 1945 305 amtlich registrierte)
+        if (["und","oder","bis"].includes(w)) {
+          // (inside a group with a preposition: mit Palmetten und Blattwerk verzierten)
+          if (pending && w !== "bis") continue;
+          const digits = x => /\d/u.test(x);
+          const between = k > 0 && digits(sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index)) && digits(sentence.slice(tokens[k].index + t.length, tokens[k+1].index));
+          state.clean = false;
+          if (between || w !== "bis" && k > 0 && k+1 < index && !pending && (teAdverb(tokens[k-1][0]) || teSeriesAttribute(tokens[k-1][0], ending)) &&
+            (teAdverb(tokens[k+1][0]) || teSeriesAttribute(tokens[k+1][0], ending))) continue;
+          return -1;
+        }
+        if (["sowie","aber","sondern","wie","dass","daß","ob","weil","wenn"].includes(w)) return -1;
+        if (/^\p{Lu}/u.test(t)) { if (grammaticalWords.has(w) && !pending) return -1; pending = true; state.clean = false; continue; }
+        if (PRONOUN_PERSONS[w] && !prepositions.has(norm(tokens[k-1]?.[0] || ""))) return -1;
+        // (inside a group with a preposition: its own attributes, not a verb form — not … veröffentlichten Alben produzierte Orzabal)
+        if (pending) { if ((verbAnalyses.get(w) || []).length && !adjectivalForm(t) && !ownModifierForm(t)) return -1; continue; }
+        if (teAdverb(t)) continue;
+        // (an attribute of the form's own group: the same ending — not vor kurzem erklärte)
+        if (teSeriesAttribute(t, ending)) { state.clean = state.clean && true; continue; }
+        if (!(verbAnalyses.get(w) || []).length && !(forms.get(w) || []).length && !LOWERCASE_DECLINED_WORD.test(t)) { state.clean = false; continue; }
+        return -1;
+      }
+      return -1;
+    }
+    // A lowercase word of a series of attributes: a declined spelling of the same ending (-e / -en), no verb form of its own except a
+    // declined Partizip II without ge- (verfasste und komponierte), not a determiner, pronoun or preposition.
+    const TE_PRONOUNS = new Set(["ihnen","ihm","ihn","einander","jemand","jemanden","jemandem","niemand","niemanden","niemandem","etwas","nichts","alles","beide","beiden","einige","einigen","manche","manchen","mehrere","mehreren","viele","vielen","wenige","wenigen","andere","anderen","solche","solchen","selbe","selben","diese","diesen","jene","jenen","welche","welchen","keine","keinen","seine","seinen","ihre","ihren","meine","meinen","deine","deinen","unsere","unseren","eure","euren"]);
+    function teSeriesAttribute(t, ending) {
+      const w = norm(t);
+      if (!/^\p{Ll}/u.test(t) || t.length <= 3 || !LOWERCASE_DECLINED_WORD.test(t) || ending && teEnding(t) !== ending) return false;
+      if (ATTRIBUTE_FRAME_DETERMINER.test(w) || PRONOUN_PERSONS[w] || grammaticalWords.has(w) || TE_PRONOUNS.has(w) || prepositions.has(w) || TE_PART_EDGE_WORD.has(w)) return false;
+      const rows = verbAnalyses.get(w) || [];
+      if (!rows.some(r => ["finite","infinitive","imperative"].includes(r.kind))) return true;
+      return adjectivalForm(t) || ownModifierForm(t) || /te[n]?$/u.test(w) && rows.every(r => r.kind !== "finite" || teNoGe(norm(r.base || "")));
+    }
+    // (second resolver chat 10.11, item 3) Another certain finite verb in the part of a -te / -ten attribute — sein / haben / werden in a
+    // finite form, or a lowercase verb form with finite readings only (no infinitive, no other part of speech, not zu before it, not
+    // itself a -te / -ten spelling): Prozent waren verheiratete Paare; Das bis dahin etablierte Konzept wurde … The part ends at
+    // punctuation and und / oder / aber / sondern; the words from the form to its noun (from … to head) are not looked at.
+    const TE_PART_AUX = /^(?:bin|bist|ist|sind|seid|war|warst|waren|wart|sei|seien|wäre|wären|hat|hast|habt|hatte|hatten|hattest|hätte|hätten|wird|wirst|werdet|wurde|wurden|wurdest|würde|würden|ward)$/u;
+    const TE_PART_EDGE_WORD = new Set(["und","oder","sowie","aber","sondern"]);
+    // One function for «a finite verb in the part» of an attribute (advisor 10.11): the links chat's finiteEarlier (queue item (д): to the
+    // left of the frame, up to punctuation, und / oder / sowie, a determiner) and the second resolver chat's item 3 (both = true: the whole
+    // part around the form … head, its edges punctuation — not a comma inside a series of attributes — and und / oder / sowie / aber /
+    // sondern — not und between numbers; strict = true: sein / haben / werden in a finite form count; a spelling with an infinitive
+    // reading, after zu, or a -te / -ten spelling of a verb without ge- — a possible attribute itself — does not).
+    function finiteVerbInPart(sentence, tokens, index, head, {from = index-1, both = false, strict = false, isDeterminer = null} = {}) {
+      const gapAt = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      const finiteWord = k => {
+        const t = tokens[k][0], w = norm(t);
+        if (!/^\p{Ll}/u.test(t)) return false;
+        if (strict && TE_PART_AUX.test(w)) return true;
+        const rows = verbAnalyses.get(w) || [];
+        if (!rows.some(r => r.kind === "finite") || (forms.get(w) || []).some(e => !["Verb","Nomen"].includes(e.type))) return false;
+        if (!strict) return true;
+        return !rows.some(r => r.kind !== "finite") && !(k > 0 && norm(tokens[k-1][0]) === "zu") && !(/te[n]?$/u.test(w) && rows.some(r => teNoGe(norm(r.base || ""))));
+      };
+      if (!both) {
+        for (let k = from; k >= 0; k--) {
+          if (k < from && /[,;:.!?»«„“"()–—]/u.test(gapAt(k, k+1))) return false;
+          const w = norm(tokens[k][0]); if (["und","oder","sowie"].includes(w) || isDeterminer?.(w)) return false;
+          if (finiteWord(k)) return true;
+        }
+        return false;
+      }
+      const numberAnd = k => norm(tokens[k][0]) === "und" && k > 0 && k+1 < tokens.length && /\d/u.test(gapAt(k-1, k)) && /\d/u.test(gapAt(k, k+1));
+      const edge = (a, b) => /[,;:.!?()–—"„“»«]/u.test(gapAt(a, b)) && !(/^\s*,\s*$/u.test(gapAt(a, b).replace(/\d+(?:[.,]\d+)*\.?/gu, "")) && teSeriesAttribute(tokens[a][0]) && /^\p{Ll}/u.test(tokens[b][0])) ||
+        TE_PART_EDGE_WORD.has(norm(tokens[b][0])) && !numberAnd(b) || TE_PART_EDGE_WORD.has(norm(tokens[a][0])) && !numberAnd(a);
+      let a = index, b = head;
+      while (a > 0 && !edge(a-1, a)) a--;
+      while (b+1 < tokens.length && !edge(b, b+1)) b++;
+      for (let k = a; k <= b; k++) if ((k < index || k > head) && finiteWord(k)) return true;
+      return false;
+    }
+    // (second resolver chat 10.11, item 3) The noun after a lowercase -te / -ten form, by spelling only (for the tense label of a single
+    // verb card): the next capital word, or lowercase attributes before it — declined adjectives (didaktische), adverbs, one und / oder /
+    // sowie, a comma between attributes (verheiratete, zusammenlebende Paare). Gives the head's index or -1.
+    function teNounAfter(sentence, tokens, index) {
+      const ending = teEnding(tokens[index][0]);
+      let conj = false, attribute = false;
+      for (let k = index+1; k < tokens.length && k-index <= 6; k++) {
+        const gap = sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index), t = tokens[k][0], w = norm(t);
+        const comma = /^\s*,\s*$/u.test(gap);
+        if (!/^\s+$/u.test(gap) && !(comma && teSeriesAttribute(t, ending))) return -1;
+        if (/^\p{Lu}/u.test(t)) return grammaticalWords.has(w) || ATTRIBUTE_FRAME_DETERMINER.test(w) || conj && !attribute ? -1 : k;
+        if (["und","oder","sowie"].includes(w)) { if (conj) return -1; conj = true; attribute = false; continue; }
+        if (teSeriesAttribute(t, ending)) { attribute = true; continue; }
+        if (teAdverb(t)) continue;
+        return -1;
+      }
+      return -1;
+    }
+    // (second resolver chat 10.11, item 3) A lowercase -te / -ten spelling before its noun with the determiner beyond numbers, adverbs
+    // and groups with a preposition, or another finite verb in its part: the attribute (the tense label says «Partizip II», formFeatures).
+    // A verb whose Partizip II has no ge-: -ieren and an inseparable prefix, also after a separable particle (markiert, verabschiedet,
+    // benannt, anerkannt, eingemeindet).
+    function teNoGe(base) {
+      const stems = [base, ...[...separableParticles].filter(p => base.startsWith(p) && base.length > p.length + 4).map(p => base.slice(p.length))];
+      return stems.some(b => /ieren$/u.test(b) || /^(?:be|emp|ent|er|ge|miss|ver|zer|über|unter|hinter|wider)\p{L}{3}/u.test(b));
+    }
+    // a determiner that can also be a pronoun subject before a finite verb (das besänftigte Ron)
+    const TE_PRONOUN_DETERMINER = /^(?:der|die|das|dies(?:e|er|es)?|jene[rs]?)$/u;
+    function teAttributeSpelling(sentence, start) {
+      const tokens = sharedTokens(sentence, "teAttributeSpelling"), at = tokens.findIndex(t => t.index === start);
+      if (at < 0 || !/^\p{Ll}/u.test(tokens[at][0]) || !/te[n]?$/u.test(norm(tokens[at][0]))) return false;
+      const head = teNounAfter(sentence, tokens, at);
+      if (head < 0) return false;
+      // (a determiner right before the form and a head no own card has as a noun — a name —: das besänftigte Ron stays as it was)
+      const knownHead = (forms.get(norm(tokens[head][0])) || []).some(e => e.type === "Nomen");
+      const d = attributeFrameDeterminer(tokens, at, 0, sentence, true);
+      if (d >= 0) return knownHead || d < at-1 || !TE_PRONOUN_DETERMINER.test(norm(tokens[d][0])) || /\d/u.test(sentence.slice(tokens[d].index + tokens[d][0].length, tokens[at].index));
+      return finiteVerbInPart(sentence, tokens, at, head, {both:true, strict:true});
+    }
     async function buildRoleNounFrame(sentence,tokens,index) {
       const word=tokens[index][0], sources=[];
       const joined=(a,b)=>/^\s+$/u.test(sentence.slice(tokens[a].index+tokens[a][0].length,tokens[b].index));
@@ -9120,10 +9279,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if(invariant?.length){shared.invariant=true;shared.get(index).push(...invariant.map(c=>({lemma:c.lemma,pos:c.pos,kind:'adjective',invariant:true,base:c.lemma})));}
       if(!shared.get(index).length || /^[A-ZÄÖÜ]/u.test(word)&&!shared.invariant)return blocked('modifier-role-unproven');
       const participle = shared.get(index).some(a=>a.kind.startsWith('participle-'));
-      const nounMatches=new Map();let headCandidates=[],head=index+1,placeAdjectiveAt=-1;
-      for(;head<tokens.length&&head-index<=3;head++){
+      // (second resolver chat 10.11, advisor 10.11, item 3 of claude/CAUSES_SAMPLE100_2026-11-10_RU.md — claude/ATTR_TE_PRAETERITUM_PLACES_2026-11-10_RU.md):
+      // a lowercase form in -te / -ten that is also a declined Partizip II (errichtete, anerkannten) before its noun is the attribute, not
+      // Präteritum — when the noun group is proven: a series of attributes before one noun (verfasste und komponierte Musiktheater,
+      // eine motivierte und zuvorkommende Bedienung, verheiratete, zusammenlebende Paare), a noun no dictionary has (verzierten
+      // Kalksteinkapitelle), the determiner beyond numbers, adverbs and a group with a preposition (eines 1763 errichteten Hofs, der
+      // einzig offiziell anerkannte Fanklub, die erst nach seinem frühen Tod veröffentlichte), or another finite verb in the part
+      // (Prozent waren verheiratete Paare, Das bis dahin etablierte Konzept wurde …). Without any of them the form stays the finite verb
+      // (Einige Tage später besuchte Kasparow die Stadt).
+      // (only a spelling that is also Präteritum — a Partizip II without ge-; not with an own adjective card or a sich verb, which keep
+      // their path: gebildeten, vorbereiteten)
+      const teForm = participle && /^\p{Ll}/u.test(word) && /te[n]?$/u.test(norm(word)) &&
+        clicked.candidates.some(c => canonicalPos(c.pos) === "Verb" && teNoGe(norm(c.lemma).replace(/^sich\s+/u,""))) &&
+        !clicked.candidates.some(c => c.source === "main" && canonicalPos(c.pos) === "Adjektiv" || /^sich\s/u.test(c.lemma));
+      const nounMatches=new Map();let headCandidates=[],head=index+1,placeAdjectiveAt=-1,series=false;
+      for(;head<tokens.length&&head-index<=(series?6:3);head++){
         const openingQuote = /^\s*(?:``|[„“"«])\s*$/u.test(sentence.slice(tokens[head-1].index+tokens[head-1][0].length,tokens[head].index));
-        if(!joined(head-1,head) && !(participle && head===index+1 && openingQuote))return blocked('role-boundary');
+        const seriesComma = teForm && /^\s*,\s*$/u.test(sentence.slice(tokens[head-1].index+tokens[head-1][0].length,tokens[head].index)) && teSeriesAttribute(tokens[head][0],teEnding(word));
+        if(!joined(head-1,head) && !(participle && head===index+1 && openingQuote) && !seriesComma)return blocked('role-boundary');
+        if(teForm && ['und','oder','sowie'].includes(norm(tokens[head][0])) && !series){series=true;shared.set(head,[{kind:'participle-complement',invariant:true}]);continue;}
+        if(teForm && series && /^\p{Ll}/u.test(tokens[head][0]) && shared.get(head-1)?.[0]?.kind==='participle-complement'){
+          const adv=await analysisAt(head);
+          if(adv && !modifierRows(adv).length && adv.candidates.some(c=>canonicalPos(c.pos)==='Adverb') &&
+              !adv.analyses.some(x=>['finite','infinitive','imperative'].includes(x.kind))){shared.set(head,[{kind:'participle-complement',invariant:true}]);continue;}
+        }
         const r=await analysisAt(head);if(!r)return blocked('neighbor-morphology-error');
         const nouns=r.candidates.filter(c=>canonicalPos(c.pos)==='Nomen');
         // (tests chat 07.11, s917: a capital word in -er right before another capital word — Frankfurter Aktienbörse, Berliner Mauer —
@@ -9151,7 +9330,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // that shows it (wordFormationCandidate — its last part; two living genders or an old meaning: no card, so no head here).
         if(/^[A-ZÄÖÜ]/u.test(tokens[head][0])&&!nouns.length){
           const entry=await compoundHeadEntry(sentence,tokens[head],head===index+1&&/^\p{Ll}+(?:e|en|em|er|es)$/u.test(word));
-          if(entry){nounMatches.set(head,[entry]);break;}
+          if(entry){nounMatches.set(head,[entry]);break;}          // (not a name — das besänftigte Ron überhaupt nicht: das is the subject there)
+          if(teForm && !modifierRows(r).length && !grammaticalWords.has(norm(tokens[head][0])) && !ATTRIBUTE_FRAME_DETERMINER.test(norm(tokens[head][0])) && !r.candidates.length){nounMatches.set(head,[{word:tokens[head][0],type:'Nomen',article:'',plural:'',number:null,numberUnknown:true}]);shared.unknownHead=true;break;}
         }
         shared.set(head,modifierRows(r));if(!shared.get(head).length)return blocked('intervening-modifier-unproven');
       }
@@ -9240,17 +9420,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // zwei speziell trainierten Spürhunden. A second finite verb cannot follow the first inside one part. Without such a verb the
       // form stays as it was — Einige Tage später besuchte Kasparow …, «…», warnte Gewerkschaftssprecher … (the finite verb itself).
       // The finite verb: a lowercase word with a finite reading and no own card of another part of speech (sein «его» is no verb).
-      const finiteEarlier=()=>{
-        if(!participle||!/te[n]?$/u.test(norm(word))||left<0||!joined(left,left+1))return false;
-        for(let k=left;k>=0;k--){
-          if(k<left&&/[,;:.!?»«„“"()–—]/u.test(sentence.slice(tokens[k].index+tokens[k][0].length,tokens[k+1].index)))return false;
-          // (a determiner on the way is an article frame — für den gut vorbereiteten Geist, des damals neu gebildeten Landes —: not this rule)
-          const w=norm(tokens[k][0]);if(['und','oder','sowie'].includes(w)||det.test(w))return false;
-          if(/^\p{Ll}/u.test(tokens[k][0])&&(verbAnalyses.get(w)||[]).some(a=>a.kind==='finite')&&!(forms.get(w)||[]).some(e=>!['Verb','Nomen'].includes(e.type)))return true;
-        }
-        return false;
-      };
-      if(left<0 || !det.test(norm(tokens[left][0]))&&!strongPrep&&!finiteEarlier() || !joined(left,left+1))return blocked('nominal-frame-unproven');
+      // (a determiner on the way is an article frame — für den gut vorbereiteten Geist, des damals neu gebildeten Landes —: not this rule;
+      // the walk is the shared finiteVerbInPart)
+      const finiteEarlier=()=>!(!participle||!/te[n]?$/u.test(norm(word))||left<0||!joined(left,left+1)) &&
+        finiteVerbInPart(sentence,tokens,index,index,{from:left,isDeterminer:w=>det.test(w)});
+      let teFinite=false;
+      if(teForm && !Number.isInteger(shared.frameLeft) && !(left>=0&&(det.test(norm(tokens[left][0]))||strongPrep)&&joined(left,left+1)) && !finiteEarlier()){
+        const d=attributeFrameDeterminer(tokens,index,0,sentence,true);
+        if(d>=0){for(let i=d+1;i<index;i++)shared.set(i,[{kind:'participle-complement',invariant:true}]);left=d;shared.frameLeft=d;}
+        // (a noun no dictionary has is the head only with a determiner: not … erreichte The Yes Album, bezeichnete Mein Schatz ist …)
+        else if(!shared.unknownHead&&finiteVerbInPart(sentence,tokens,index,head,{both:true,strict:true})){teFinite=true;if(left<0)left=index;}
+      }
+      if(!teFinite && (left<0 || !det.test(norm(tokens[left][0]))&&!strongPrep&&!finiteEarlier() || !joined(left,left+1)))return blocked('nominal-frame-unproven');
+      // (… and words between the determiner and the form: das besänftigte Ron — das is the subject there; der vor Angst versteinerte Dudley)
+      if(shared.unknownHead && (attributeFrameDeterminer(tokens,index,0,sentence,true)<0 || left===index-1 && TE_PRONOUN_DETERMINER.test(norm(tokens[left][0]))))return blocked('noun-head-unproven');
       const hypothesis=nounHypothesis(sentence,tokens,left,head,'role',sources);
       hypothesis.candidateIdentities=clicked.candidates.map(c=>window.BibliothekVocabulary.identity(c));
       hypothesis.evidence=[...shared].map(([tokenId,rows])=>({tokenId,rows}));
@@ -14230,6 +14413,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // the same rule: Präteritum unless its part shows a Konjunktiv sign)
         const strongAlike = labels.size === 2 && labels.has("Konjunktiv II") && !/te(?:st|n|t)?$/u.test(weakForm);
         if (labels.has("Präteritum") && [...labels].every(t => ["Präteritum","Konjunktiv II"].includes(t)) && (/te(?:st|n|t)?$/u.test(weakForm) || strongAlike)) {
+          // (second resolver chat 10.11, advisor 10.11, item 3 — claude/ATTR_TE_PRAETERITUM_PLACES_2026-11-10_RU.md: a declined Partizip II of
+          // this verb — Partizip II without ge- + e / en: errichtete, anerkannten, benannte — before its noun, with the determiner beyond
+          // numbers, adverbs and groups with a preposition or another finite verb in its part, is the attribute: «Partizip II», not Präteritum
+          // — eines 1763 errichteten Hofs, der einzig offiziell anerkannte Fanklub, Prozent waren verheiratete Paare)
+          { const at = sources.get("Präteritum")?.start ?? context?.tokenOffset;
+            if (Number.isInteger(at) && !NO_WEAK_PAST_LABEL.has(base) && teAttributeSpelling(String(context?.sentence || ""), at)) {
+              // (the Partizip II has no ge-: -ieren and an inseparable prefix, also after a separable particle — markiert, verabschiedet,
+              // benannt, anerkannt, eingemeindet)
+              const own = norm(String(candidate.item?.perfect_form || "").split(/\s+/u).at(-1));
+              if (own ? [own + "e", own + "en"].includes(form) : teNoGe(base) && /te[n]?$/u.test(form)) return {tense:"Partizip II"};
+            } }
           // Only Präteritum while the own table lists Konjunktiv II: its Konjunktiv II is another spelling (hatte / hätte).
           if (labels.size === 1 && ownKonjunktiv) return {tense:"Präteritum"};
           // (#15, tense check 05.11, advisor 06.11: an exclamatory wish — wenn + nur / doch / bloß, the part ends with «!» — is
