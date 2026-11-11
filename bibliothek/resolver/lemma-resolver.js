@@ -2663,11 +2663,11 @@
         // und / oder join only when the part after them closes with a detached particle of a
         // verb before them (taten sich als eine Hecke zusammen, schaute sich rechts und links um).
         const rightEnd=(nextBoundary<0?tokens.length:nextBoundary)-1;
-        // The word after und / oder must be nominal or a modifier, not a possible verb (und ruhete sich … aus).
-        const nominalAfter=k=>tokens[k]&&(tokens[k][0][0]!==words[k][0]||determiners.test(words[k])||prepositions.has(words[k])||
-          (forms.get(words[k])||[]).some(e=>['Adjektiv','Adverb'].includes(e.type))&&!(forms.get(words[k])||[]).some(e=>e.type==='Verb'))&&
-          !analyses[k]?.some(a=>['finite','infinitive','participle','imperative'].includes(a.kind));
-        const closingParticle=rightEnd>i&&nominalAfter(i+1)&&words.slice(start,i).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[rightEnd]));
+        // The part after und / oder must not open a clause of its own — the shared coordinatorOpensClause of the separable scanner
+        // (п.42 / п.76, advisor 11.11: und ruhete sich … aus opens; ich setze mich nun und nimmermehr wieder auf does not).
+        // A reflexive pronoun right after und / oder is that of the verb form after it, not of the verb before und — the parts stay
+        // apart for the reflexive search (ging endlich gähnend und sich streckend hinaus: sich is streckend's, not hinausgehen's).
+        const closingParticle=rightEnd>i&&!coordinatorOpensClause(tokens,i+1,sentence)&&!reflexivePronouns.has(words[i+1])&&words.slice(start,i).some(w=>(separatedForms.get(w)||[]).some(pair=>pair.prefix===words[rightEnd]));
         // (advisor 10.11: als + a group + the closing infinitive / participle of the verb group before it — kann man sich als Teilchen
         // vorstellen, hat sich als richtig erwiesen —: the only verb form after als ends the part and reads as an infinitive or a participle,
         // a modal / haben / sein / werden is finite before als — one clause, not als + a clause)
@@ -4565,13 +4565,13 @@
       // S1 (17.10.2026): und / oder / aber / als without punctuation do not close the
       // bracket in the first pass either (wirft … Betrug und Bankrott vor, legte … als
       // Präsident … aus); a second verb after them still stops the scan (competingVerb).
-      // In the first pass the word after und / oder / als must be nominal or a modifier — a
+      // In the first pass the word after als must be nominal or a modifier — a
       // capital, determiner, preposition, number, adjective or adverb — never a possible verb
       // (und speite sie aus, und grinste ihn an) or another particle (auf und ab, hin und her).
-      const nominalNext = b => {
-        const next = tokens[b+1], word = norm(tokens[b][0]);
-        // aber is mostly the adverb inside a clause (sprachen sich aber … aus, schlägt aber fehl).
-        if (word === "aber") return true;
+      // (advisor 11.11, п.76: und / oder have no checks of their own here — the shared coordinatorOpensClause decides them in stops;
+      // the word checks below are for als only — als «как» + group, a question of its own, п.77)
+      const alsGroupNext = b => {
+        const next = tokens[b+1];
         if (!next) return false;
         // A number right after it (oder 17,70 Mark) is nominal.
         if (/^\s*\d[\d.,]*\s*%?\s*$/u.test(sentence.slice(tokens[b].index + tokens[b][0].length, next.index))) return true;
@@ -4590,7 +4590,15 @@
         return !entries.length && /(?:(?:ig|lich|isch|haft|sam|bar|los|end)(?:e[nmrs]?)?|e[nmrs])$/u.test(key) && !/(?:t|te|ten|tet|test|st)$/u.test(key);
       };
       const stops = (a,b) => hard(a,b) && !(passable.has(norm(tokens[b][0])) &&
-        !/[;:.!?…“”„"«»()]/u.test(gap(a,b)) && (secondary || nominalNext(b)));
+        !/[;:.!?…“”„"«»()]/u.test(gap(a,b)) && (secondary || passesCoordinator(b)));
+      // aber is mostly the adverb inside a clause (sprachen sich aber … aus, schlägt aber fehl); und / oder — one function for every
+      // chain (coordinatorOpensClause, as sentenceClauses); als — its own group check
+      const passesCoordinator = b => {
+        const word = norm(tokens[b][0]);
+        if (word === "aber") return true;
+        if (!tokens[b+1]) return false;
+        return COORDINATORS_WITHOUT_COMMA.includes(word) ? !coordinatorOpensClause(tokens, b+1, sentence) : alsGroupNext(b);
+      };
       const possessiveSein = k => norm(tokens[k][0]) === "sein" && tokens[k+1] && /^\s+$/u.test(gap(k,k+1)) &&
         (/^[A-ZÄÖÜ]/u.test(tokens[k+1][0]) || (forms.get(norm(tokens[k+1][0])) || []).some(e => e.type === "Adjektiv"));
       const nominalParticle = (i,j) => norm(tokens[j][0]) === "vorbei" &&
@@ -4680,49 +4688,7 @@
       // und zu Essen — gehen). Expressions of adjacent words only (auf und ab, ab und zu, ein paar, vor allem), with their own
       // not_next / not_after conditions; a pair that is no expression (schloss auf und zu, ging auf und herein kam Harry —
       // elliptic or a new clause) keeps the particle.
-      const expressionWord = j => {
-        const word = k => norm(tokens[k]?.[0] ?? "");
-        for (const {entry, m} of constructionAnchors.get(word(j)) || []) {
-          // only conditions this check can test (form, not_next, not_after, clause_has); others — not here
-          if (entry.type !== "Ausdruck" || m.scope !== "adjacent" || m.parts.some(part => part.optional || part.reflexive || !part.form ||
-            Object.keys(part).some(key => !["form","not_next","not_after","clause_has"].includes(key)))) continue;
-          const parts = m.parts.map(part => [].concat(part.form).map(f => String(f).trim().split(/\s+/u)));
-          // every way to write the pattern word by word (one alternative per part)
-          let spellings = [[]];
-          for (const alts of parts) spellings = spellings.flatMap(sp => alts.map(a => [...sp, a]));
-          for (const sp of spellings) {
-            const flat = sp.flat(), lastOf = sp.map((a,n) => sp.slice(0,n+1).flat().length - 1);
-            for (let off = 0; off < flat.length; off++) {
-              const start = j - off;
-              if (start < 0 || start + flat.length > tokens.length || norm(flat[off]) !== word(j)) continue;
-              if (!flat.every((f,n) => norm(f) === word(start+n) && (!/^\p{Lu}/u.test(f) || /^\p{Lu}/u.test(tokens[start+n][0])) &&
-                (n === 0 || /^\s+$/u.test(gap(start+n-1,start+n))))) continue;
-              const first = m.parts[0], last = m.parts.at(-1), end = start + lastOf.at(-1);
-              if (first.not_after && start > 0 && [].concat(first.not_after).map(norm).includes(word(start-1))) continue;
-              if (last.not_next && end+1 < tokens.length && [].concat(last.not_next).map(norm).includes(word(end+1))) continue;
-              // clause_has (bei jemandem ein und aus gehen — a form of gehen in the same part, not schaltete … ein und aus)
-              let from = start, to = end;
-              while (from > 0 && !hard(from-1,from) && !soft(from-1,from)) from--;
-              while (to < tokens.length-1 && !hard(to,to+1) && !soft(to,to+1)) to++;
-              const inPart = new Set(tokens.slice(from, to+1).map(t => norm(t[0])));
-              if (m.parts.some(part => part.clause_has && ![].concat(part.clause_has).map(norm).some(w => inPart.has(w)))) continue;
-              // E5: a finite verb right after the pattern and a verb before it whose particle is the first word — a new clause
-              // follows (stand auf und davon wusste niemand): the first word stays the particle.
-              const finiteAt = k => k < tokens.length && /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(word(k)) || []).some(a => a.kind === "finite") &&
-                !(verbAnalyses.get(word(k)) || []).some(a => ["infinitive","participle"].includes(a.kind));
-              if (end+1 <= to && finiteAt(end+1)) {
-                let verbBefore = null;
-                for (let k = start-1; k >= from; k--) if ((verbAnalyses.get(word(k)) || []).some(a => ["finite","imperative"].includes(a.kind)) && !(/^\p{Lu}/u.test(tokens[k][0]) && k > from)) { verbBefore = k; break; }
-                if (verbBefore !== null && (verbAnalyses.get(word(verbBefore)) || []).filter(a => ["finite","imperative"].includes(a.kind))
-                  .some(a => a.prefix && norm(a.prefix) === word(start) ||
-                    (separableBases.get(norm(a.base)) || []).some(row => norm(row.prefix) === word(start) && !row.entry.derivedSeparable))) continue;
-              }
-              return true;
-            }
-          }
-        }
-        return false;
-      };
+      const expressionWord = j => adjacentExpressionAt(tokens, j, gap, (a,b) => hard(a,b) || soft(a,b));
       // A non-final particle can close the verbal bracket before a proven
       // adverbial continuation. Bare determiners/nouns remain preposition uses.
       const trailingAdverbial = j => {
@@ -15155,8 +15121,77 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // - item 3: the second place (adverb / determiner + noun, then an unambiguously finite verb) — below.
     // `sentence` (optional) gives the punctuation that ends the part before und; without it the part runs to the sentence start.
     const SUBJECT_PRONOUN = /^(?:ich|du|er|sie|es|wir|ihr|man)$/u;
+    // L7 (links chat, 23.10.2026), shared (advisor 11.11): token j is a word of an expression of adjacent words found in the text
+    // (auf und ab, hin und her, ab und zu, ein paar, vor allem) with its own not_next / not_after / clause_has conditions. `gap(a,b)` is
+    // the text between two tokens, `partBreak(a,b)` — a boundary of the part between them. Used by the separable scan (a word of such an
+    // expression is no particle: ging auf und ab — gehen) and by coordinatorOpensClause (a pair of particles around und is one part
+    // only when it is such an expression: hin und her, auf und davon; springst hinaus und herein — two particles of the verb).
+    function adjacentExpressionAt(tokens, j, gap, partBreak) {
+      const hard = partBreak, soft = () => false;
+      const word = k => norm(tokens[k]?.[0] ?? "");
+      for (const {entry, m} of constructionAnchors.get(word(j)) || []) {
+        // only conditions this check can test (form, not_next, not_after, clause_has); others — not here
+        if (entry.type !== "Ausdruck" || m.scope !== "adjacent" || m.parts.some(part => part.optional || part.reflexive || !part.form ||
+          Object.keys(part).some(key => !["form","not_next","not_after","clause_has"].includes(key)))) continue;
+        const parts = m.parts.map(part => [].concat(part.form).map(f => String(f).trim().split(/\s+/u)));
+        // every way to write the pattern word by word (one alternative per part)
+        let spellings = [[]];
+        for (const alts of parts) spellings = spellings.flatMap(sp => alts.map(a => [...sp, a]));
+        for (const sp of spellings) {
+          const flat = sp.flat(), lastOf = sp.map((a,n) => sp.slice(0,n+1).flat().length - 1);
+          for (let off = 0; off < flat.length; off++) {
+            const start = j - off;
+            if (start < 0 || start + flat.length > tokens.length || norm(flat[off]) !== word(j)) continue;
+            if (!flat.every((f,n) => norm(f) === word(start+n) && (!/^\p{Lu}/u.test(f) || /^\p{Lu}/u.test(tokens[start+n][0])) &&
+              (n === 0 || /^\s+$/u.test(gap(start+n-1,start+n))))) continue;
+            const first = m.parts[0], last = m.parts.at(-1), end = start + lastOf.at(-1);
+            if (first.not_after && start > 0 && [].concat(first.not_after).map(norm).includes(word(start-1))) continue;
+            if (last.not_next && end+1 < tokens.length && [].concat(last.not_next).map(norm).includes(word(end+1))) continue;
+            // clause_has (bei jemandem ein und aus gehen — a form of gehen in the same part, not schaltete … ein und aus)
+            let from = start, to = end;
+            while (from > 0 && !hard(from-1,from) && !soft(from-1,from)) from--;
+            while (to < tokens.length-1 && !hard(to,to+1) && !soft(to,to+1)) to++;
+            const inPart = new Set(tokens.slice(from, to+1).map(t => norm(t[0])));
+            if (m.parts.some(part => part.clause_has && ![].concat(part.clause_has).map(norm).some(w => inPart.has(w)))) continue;
+            // E5: a finite verb right after the pattern and a verb before it whose particle is the first word — a new clause
+            // follows (stand auf und davon wusste niemand): the first word stays the particle.
+            const finiteAt = k => k < tokens.length && /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(word(k)) || []).some(a => a.kind === "finite") &&
+              !(verbAnalyses.get(word(k)) || []).some(a => ["infinitive","participle"].includes(a.kind));
+            if (end+1 <= to && finiteAt(end+1)) {
+              let verbBefore = null;
+              for (let k = start-1; k >= from; k--) if ((verbAnalyses.get(word(k)) || []).some(a => ["finite","imperative"].includes(a.kind)) && !(/^\p{Lu}/u.test(tokens[k][0]) && k > from)) { verbBefore = k; break; }
+              if (verbBefore !== null && (verbAnalyses.get(word(verbBefore)) || []).filter(a => ["finite","imperative"].includes(a.kind))
+                .some(a => a.prefix && norm(a.prefix) === word(start) ||
+                  (separableBases.get(norm(a.base)) || []).some(row => norm(row.prefix) === word(start) && !row.entry.derivedSeparable))) continue;
+            }
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+    // (advisor 11.11: one function for every chain — the checks of the separable scan's own word test join it: a number right after
+    // und / oder continues the part (1054 und 1076); a particle idiom at the end of the part opens (auf und ab, hin und her … ab); any
+    // possible verb right after it opens — an imperative or colloquial form (gieß, hol), a separated form of an index verb (grinste,
+    // schrumpelten) — besides the finite verb of the own cards below)
+    const COORDINATOR_PARTICLE = /^(?:ab|an|auf|aus|bei|ein|her|hin|mit|nach|vor|weg|zu|zurück|fort|los|hinauf|hinab|herauf|herab|hinunter|herunter|hinein|herein|hinaus|heraus|hinüber|herüber|herum|umher|davon|dahin|daher|zusammen|weiter|nieder|empor|entgegen|vorbei|voran|voraus|durch|um|über|unter)$/u;
     function coordinatorOpensClause(tokens, i, sentence = null) {
-      if (i < 2 || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0]))) return false;
+      if (i < 2 || !tokens[i] || !COORDINATORS_WITHOUT_COMMA.includes(norm(tokens[i-1][0]))) return false;
+      if (sentence && /^\s*\d[\d.,]*\s*%?\s*$/u.test(String(sentence).slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index))) return false;
+      { const key = norm(tokens[i][0]), after = sentence && tokens[i+1] ? String(sentence).slice(tokens[i].index + tokens[i][0].length, tokens[i+1].index) : "";
+        // (a particle after und closing the part opens it — not a pair of particles around und that is an expression of the dictionary:
+        // hin und her, auf und ab, auf und davon, also with the E7 hyphen hin- und zurück; springst hinaus und herein — the scan stops at the first particle)
+        if (COORDINATOR_PARTICLE.test(key) && key !== norm(tokens[i-2][0]) && (!tokens[i+1] || /[,;:.!?…“”„"«»()–—]/u.test(after)) &&
+            !(COORDINATOR_PARTICLE.test(norm(tokens[i-2][0])) && adjacentExpressionAt(tokens, i, (x,y) => sentence ? String(sentence).slice(tokens[x].index + tokens[x][0].length, tokens[y].index).replace(/^[-‐‑](?=\s)/u, "") : " ",
+              (x,y) => /[,;:.!?…“”„"«»()–—]/u.test(sentence ? String(sentence).slice(tokens[x].index + tokens[x][0].length, tokens[y].index) : "") ||
+                ["und","oder","aber","denn","sondern","weil","dass","daß","wenn","ob","als","bevor","nachdem"].includes(norm(tokens[y][0]))))) return true;
+        // (a word unknown to the own dictionary with a verb ending -t / -te / -ten / -st may be a verb — schrumpelten, grinste; the scan's rule)
+        if (/^\p{Ll}/u.test(tokens[i][0]) && !(forms.get(key) || []).length && /(?:t|te|ten|tet|test|st)$/u.test(key) &&
+            !(/e[nmrs]?$/u.test(key) && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "")) &&
+            !/(?:(?:ig|lich|isch|haft|sam|bar|los|end)(?:e[nmrs]?)?)$/u.test(key)) return true;
+        if (/^\p{Ll}/u.test(tokens[i][0]) && !(/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") && DETERMINER_WORD.test(key)) &&
+            ((verbAnalyses.get(key) || []).some(a => a.kind === "imperative") || lexicalSeparated(key)) &&
+            !(forms.get(key) || []).some(e => ["Adjektiv","Adverb","Pronomen","Präposition"].includes(e.type))) return true; }
       const finiteLow = k => tokens[k] && /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === "finite");
       // (also a determiner before a capitalized word — meine Katze: meine is no «ich meine» there; run 06.11)
       const attributive = k => /^\p{Lu}/u.test(tokens[k+1]?.[0] ?? "") && (DETERMINER_WORD.test(norm(tokens[k][0])) ||
