@@ -920,7 +920,9 @@
     }
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
-    if (features?.number === 'plural' && !pair) marks.push('Plural');
+    // (second resolver chat 11.11) a noun from an adjective in the plural (die Erwachsenen, zwei Jugendliche): the der / die card says
+    // «Plural» too — the gender does not matter in the plural
+    if (features?.number === 'plural' && (!pair || features.adjectiveNoun)) marks.push('Plural');
     // G69 (advisor 25.10): an external noun clicked in a spelling of its plural column only (Er fand Goldmünzen)
     else if (candidate.externalPlural && candidate.source === 'fallback' && !pair && !marks.includes('Plural')) marks.push('Plural');
     if (features?.degree && !marks.includes(features.degree)) marks.push(features.degree);

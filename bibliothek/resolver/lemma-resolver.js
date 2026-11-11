@@ -14709,15 +14709,98 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return {tense:only};
       }
       const entry = candidate.source === "main" ? candidate.item : null;
+      // (second resolver chat 11.11, advisor: G69 remainder (а)) a noun from an adjective (der / die Erwachsene — a card with declension_forms):
+      // the plural by its ending and the word before — -e with no determiner or after a number / quantifier (zwei Bekannte, auf Erwachsene
+      // wie auf Jugendliche, Verdächtige festgenommen; not after als / wie: als Angestellte arbeitet sie), -en after die / alle / keine … /
+      // a number or with no determiner (Die Toten, 700 Beschäftigten, von Deutschen, uns Erwachsenen); after der / den / dem / des / ein… —
+      // as before (der Toten: genitive plural or a feminine singular).
+      if (type === "Nomen" && entry?.declension_forms && !candidate.usage && Number.isInteger(context?.tokenOffset) && /e$/u.test(norm(entry.word))) {
+        const word = norm(entry.word);
+        if (form === word || form === word + "n") {
+          const words = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}\d]+|[^\p{L}\d\s]/gu)].map(m => m[0]);
+          const PLURAL_DET = /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche|solche|manche|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|\d+|uns|euch|wir|ihr)$/u;
+          const OTHER_DET = /^(?:der|den|dem|des|das|ein|eine|einen|einem|einer|eines|kein|keinen|keinem|keiner|keines|mein|meinen|meinem|meiner|meines|dein|deinen|deinem|deiner|deines|sein|seinen|seinem|seiner|seines|ihren|ihrem|ihrer|ihres|unseren|unserem|unserer|unseres|euren|eurem|eurer|eures|diesen|diesem|dieser|dieses|jenen|jenem|jener|jenes|jeden|jedem|jeder|jedes|im|am|vom|zum|zur|beim|als|wie)$/u;
+          let k = words.length - 1, attrs = 0;
+          while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) && !PLURAL_DET.test(norm(words[k])) && !OTHER_DET.test(norm(words[k]))) { k--; attrs++; }
+          const det = k >= 0 ? norm(words[k]) : "";
+          // (not next to a hyphen — dem CHOGM-Vorsitzenden, als Kolchos-Vorsitzende; not after a bracket or a quote — (Vorsitzende),
+          // » Deutsche Heimschule «; not a predicative after sein / werden / bleiben — ist Vorsitzende des Stadtrates; not after ins / ans …)
+          const sentence = String(context.sentence || "");
+          const hyphen = /[-‐]\s*$/u.test(sentence.slice(0, context.tokenOffset)) || /^[-‐]/u.test(sentence.slice(context.tokenOffset + String(word).length));
+          const predicative = /^(?:ist|war|sind|waren|bin|bist|seid|sei|wäre|wird|wurde|werden|wurden|würde|bleibt|blieb|bleiben|blieben|gilt|galt|gelten|heißt|nennt)$/u.test(det);
+          if (hyphen || predicative || /^[(»«„“"]$/u.test(words[k] || "") || contractionForms[det] && !PLURAL_DET.test(det)) return null;
+          // (-e: an attribute word in -er / -em before it is a singular ending — junger Erwachsener is not this form anyway)
+          // (-e after die / meine / diese … is the feminine singular: Die Erwachsene lachte — only numbers and quantifiers count there)
+          const pluralDet = form === word ? PLURAL_DET.test(det) && !/^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|welche|solche|manche|alle|ihr|wir)$/u.test(det) : PLURAL_DET.test(det);
+          if (pluralDet) return {number:"plural",adjectiveNoun:true};
+          // (with no determiner: also none of the singular kind among the three words before, up to a punctuation mark — der nunmehr
+          // Beschuldigte, gegen den 20-jährigen Beschuldigten)
+          // (the window stops at a preposition or und / oder too: Das gilt für Erwachsene)
+          let near = []; for (let j = words.length - 1; j >= 0 && near.length < 3 && !/^[,;:.!?()»«„“"–—]$/u.test(words[j]) &&
+            !(prepositions.has(norm(words[j])) && !OTHER_DET.test(norm(words[j]))) && !/^(?:und|oder|sowie)$/u.test(norm(words[j])); j--) near.push(words[j]);
+          if (near.some(x => x === "-" || OTHER_DET.test(norm(x)))) return null;
+          if (!OTHER_DET.test(det) && !PLURAL_DET.test(det) && !words.slice(k+1).some(x => /(?:er|em|es)$/u.test(x))) return {number:"plural",adjectiveNoun:true};
+        }
+        return null;
+      }
+      // (second resolver chat 11.11, G69 remainder — claude/PLURAL_REMAINDER_COUNT_2026-11-11_RU.md) a plural-only noun (die Eltern, die Kosten)
+      if (type === "Nomen" && entry?.plural_only && !entry.declension_forms && !candidate.usage && form === norm(entry.word)) return {number:"plural"};
       if (type === "Nomen" && entry?.plural && !entry.plural_only && !entry.declension_forms && !candidate.usage) {
         const word = norm(entry.word), plural = norm(entry.plural);
         const plurals = new Set([plural, /[ns]$/u.test(plural) ? plural : plural + "n"]);
         // (advisor 07.11, PLURAL_AND_DAS_FARM: a feminine noun has no endings in the singular — Änderungen, Spritzen are plural)
         // (advisor 09.11, партия 63: in allen Reichen, in den Jahren) a neuter noun has no singular in -n / -en — except where the plural itself is
-        // the stem + (e)n (das Herz — dem Herzen / die Herzen)
-        const neuterN = entry.article === "das" && ![word + "n", word + "en"].includes(plural);
+        // the stem + (e)n (das Herz — dem Herzen / die Herzen). (11.11, G69 remainder) Nor a strong masculine one — its plural is not the
+        // stem + (e)n (mit Freunden, in den nächsten Tagen, mit Lautsprechern); weak ones keep it (den Patienten).
+        const neuterN = ["das","der"].includes(entry.article) && ![word + "n", word + "en"].includes(plural);
         const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", ...(neuterN ? [] : [word + "n", word + "en"])]);
-        if (plurals.has(form) && !singulars.has(form)) return {number:"plural"};
+        // (11.11) a dative / genitive singular determiner right before (attribute words skipped) speaks against a strong masculine -(e)n
+        // plural — another noun spelled so: zu dem Flecken Langwedel (der Flecken «местечко», not die Flecke)
+        const singularDeterminer = () => {
+          if (!Number.isInteger(context?.tokenOffset)) return false;
+          const ws = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}]+|[^\p{L}\s]/gu)].map(m => m[0]);
+          let j = ws.length - 1, n = 0;
+          while (j >= 0 && n < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(ws[j]) && !ARTICLE_WORD.test(norm(ws[j])) && !/^(?:diese[mns]|jene[mns]|meine[mns]|deine[mns]|seine[mns]|ihre[mns]|unsere[mns]|eure[mns]|keine[mns]|welche[mns]|jede[mns])$/u.test(norm(ws[j]))) { j--; n++; }
+          // (also the accusative singular einen / keinen / meinen …: einen Armen is a poor man, no plural of Arm)
+          return j >= 0 && /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|im|am|vom|zum|beim|des|eines|keines|meines|deines|seines|ihres|unseres|eures|dieses|jenes|welches|jedes|einen|keinen|jeden)$/u.test(norm(ws[j]));
+        };
+        if (plurals.has(form) && !singulars.has(form) && !(entry.article === "der" && /n$/u.test(form) && singularDeterminer())) return {number:"plural"};
+        // (11.11, G69 remainder) by the word before the noun group (attribute words skipped, as in step 2 below):
+        //   der (not a relative after a comma) before a masculine / neuter noun in a plural form other than its nominative — the genitive
+        //     plural (der Probleme, der Patienten, der Gebäude); den before a neuter one — the dative plural (in den Augen);
+        //   the plural in -e equal to the old dative (Probleme / dem Probleme) when no dative singular determiner and no preposition
+        //     stands before it (Nette Gespräche, Termine werden vergeben; not im Grunde, zu Hause, mit großem Fleiße);
+        //   the plural in -s equal to the genitive singular (Hotels / des Hotels) when no genitive singular determiner stands before it.
+        if (plurals.has(form) && ["der","das"].includes(entry.article) && Number.isInteger(context?.tokenOffset)) {
+          const sentence = String(context.sentence || ""), text = sentence.slice(0, context.tokenOffset);
+          const words = [...text.matchAll(/[\p{L}\d']+|[^\p{L}\d'\s]/gu)].map(m => m[0]);
+          const DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein|meine|meinen|meinem|meiner|meines|dein|deine|deinen|deinem|deiner|deines|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser|unsere|unseren|unserem|unserer|unseres|euer|eure|euren|eurem|eurer|eures|dieser|diese|diesen|diesem|dieses|jener|jene|jenen|jenem|jenes|welcher|welche|welchen|welchem|welches|jeder|jede|jeden|jedem|jedes|alle|allen|aller|alles)$/u;
+          let k = words.length - 1, attrs = 0;
+          while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) && !DETERMINER.test(norm(words[k])) && !prepositions.has(norm(words[k]))) { k--; attrs++; }
+          const det = k >= 0 ? norm(words[k]) : "", start = k < 0 || /^[,;:.!?()»«„“"–—]$/u.test(words[k]);
+          // (not next to a hyphen — a part of a compound spelled apart: des ARD - Studios, Junioren - Weltrangliste)
+          const hyphen = /[-‐]\s*$/u.test(text) || /^\s*[-‐]/u.test(sentence.slice(context.tokenOffset + String(word).length)) || words[k] === "-";
+          if (!hyphen) {
+            // der: the genitive plural after a noun, einer / welcher …, or a genitive preposition (Behebung der Probleme, einer der besten
+            // Treffpunkte, entlang der Ufer); not a relative after a comma, not der as the subject (ist der Felsen an der Oberfläche)
+            const before = k > 0 ? words[k-1] : "";
+            const genitiveSlot = /^\p{Lu}/u.test(before) && k-1 > 0 && !/^[,;:.!?»«„“"–—(]$/u.test(words[k-2] || ".") ||
+              /^(?:einer|eines|einem|eine|einen|keiner|keines|welcher|welches|jeder|jedes|manche|viele|wegen|während|trotz|innerhalb|außerhalb|entlang|statt|anstatt|aufgrund|angesichts|mithilfe|oberhalb|unterhalb|jenseits|diesseits|bezüglich|hinsichtlich|infolge|anhand|zugunsten)$/u.test(norm(before));
+            if (det === "der" && genitiveSlot && (form !== word || entry.article === "das")) return {number:"plural"};
+            // (den + neuter: the dative plural only when the word has no masculine card — den Teil, den Band, den Gehalt; advisor 11.11)
+            if (det === "den" && entry.article === "das" && (form !== word || form === plural) &&
+              !(lemmas.get(word) || []).some(e => e.type === "Nomen" && e.article === "der")) return {number:"plural"};
+            const datSg = /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|im|am|vom|zum|beim)$/u;
+            // (-e: also a capital word opening the part — Nette Gespräche — and a preposition with an attribute word between, not in -em:
+            // auf weitere Geschäfte; not a preposition right before the noun — zu Hause, im Grunde, nach Hause)
+            const capitalOpening = k >= 0 && /^\p{Lu}/u.test(words[k]) && (k === 0 || /^[,;:.!?()»«„“"–—]$/u.test(words[k-1])) &&
+              !DETERMINER.test(det) && !prepositions.has(det) && !contractionForms[det];
+            const prepWithAttr = prepositions.has(det) && !contractionForms[det] && attrs > 0 && !words.slice(k+1).some(x => /em$/u.test(x));
+            // (der / den before the -e form: only the genitive plural rule above decides — der Arme (a poor man) is no plural of Arm)
+            if (form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
+            if (form === plural && form === word + "s" && (start || capitalOpening || ["der","den","die","keine","alle","meine","deine","seine","ihre","unsere","eure","diese","jene","welche"].includes(det) || prepositions.has(det) && !contractionForms[det])) return {number:"plural"};
+          }
+        }
         // (advisor 09.11, «Plural» step 2) a masculine / neuter noun after die / keine / meine / deine / seine / ihre / unsere / eure / diese /
         // jene / alle / welche (attribute words between them allowed): these forms go with a masculine / neuter noun only in the plural
         // (die Lehrer, keine Fenster, alle alten Wagen); a feminine noun is not touched (keine Frau)
@@ -14732,7 +14815,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
         if (plurals.has(form) && Number.isInteger(context?.tokenOffset)) {
           const before = String(context.sentence || "").slice(0, context.tokenOffset);
-          const prev = /([\p{L}\d]+)\s+$/u.exec(before)?.[1];
+          const NUMBER_WORD = /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u;
+          let prev = /([\p{L}\d]+)\s+$/u.exec(before)?.[1];
+          // (11.11) attribute words between the number and the noun are skipped — 3 verschiedene Zimmer, drei lange Jahre — for a number of
+          // at most three digits or a number word with no singular article before it (not Das 1927 entstandene Gebäude, im Jahr 2018 gegründete)
+          if (!(prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || NUMBER_WORD.test(norm(prev))))) {
+            const m = /(?:^|[^\p{L}\d])([\p{L}]*)\s*([\p{L}\d]+)(?:\s+\p{Ll}{2,}(?:e|en))+\s+$/u.exec(before);
+            if (m && (/^(?:[2-9]|\d{2,3})$/u.test(m[2]) || NUMBER_WORD.test(norm(m[2]))) && !/^(?:der|das|dem|des|die|ein|eine|einem|eines|einer|im|am|vom|zum)$/iu.test(m[1])) prev = m[2];
+          }
           if (prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u.test(norm(prev)))) return {number:"plural"};
         }
         return null;
