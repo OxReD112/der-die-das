@@ -346,6 +346,10 @@
   // anfangen, aufhören, anbieten, aufgeben …). Its particle right after the finite verb may stand before the extraposed
   // zu-infinitive group: fing an darüber zu lachen, hörte auf laut zu lachen.
   const ZU_INFINITIVE_COMPLEMENT = /\bzu \+ Infinitiv\b/u;
+  // (п. 78 / 2b″, advisor 11.11) the phase verbs: their zu-infinitive is the action that starts / stops, never a preposition group of
+  // the particle — fing es an ein wenig zu atmen, fing an seine Nase zu putzen, fingen sie an sich zu zanken. Not aufgeben / anbieten /
+  // vorschlagen …, whose particle stays a preposition before a noun phrase (gab auf diese Weise zu verstehen).
+  const PHASE_VERBS = new Set(["anfangen","aufhören"]);
   // L15 steps 2 / 3 (reference B5 addition 19.10, advisor 29.10): sich + lassen + one of these infinitives — «здесь: сам (упал, опустился)»
   // (closed list B5 в), and the subject pronouns of «здесь: можно (сделать)» (Das lässt sich machen, Vieles lässt sich erklären).
   const LASSEN_SELF_INFINITIVES = new Set(['fallen','sinken','plumpsen','zurückfallen']);
@@ -4763,15 +4767,22 @@
       // the clause part — fing an darüber zu lachen, fing an seine Nase zu putzen, fing an entsetzlich zu schreien und zu bläen.
       // At least one word between, no punctuation, no second copy of the particle (fing an der Tür an zu klopfen — the second an),
       // no finite verb; only for a card that takes zu + Infinitiv (the pairs filter below).
-      const extraposedZuGroup = (i,j) => {
-        if (j !== i+1 || !/^\s+$/u.test(gap(i,j))) return false;
+      const extraposedZuGroup = (i,j,phase) => {
+        // (п. 78: a phase verb also with words between the finite verb and its particle — a subject, an adverb: fing es an …,
+        // fing nun an …, fing das Tier an …; no punctuation and no other finite verb there)
+        if (phase ? j <= i || tokens.slice(i+1,j+1).some((t,n) => !/^\s+$/u.test(gap(i+n,i+n+1)) ||
+            /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(a => a.kind === "finite") && !(forms.get(norm(t[0])) || []).some(e => e.type !== "Verb"))
+          : j !== i+1 || !/^\s+$/u.test(gap(i,j))) return false;
         // (review 29.10: haben / sein / werden / lassen or a modal + zu is «must / can» — hat vor der Prüfung zu lernen, not vorhaben)
         if ((verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === "finite" && (GROUP_HELPER_VERBS.includes(norm(a.base)) || MODAL_VERB_SET.has(norm(a.base))))) return false;
         // (review 29.10: a determiner or a noun right after the particle makes it a preposition with its noun phrase — hörte auf dem
         // Weg …, gab auf diese Weise / auf Anfrage zu verstehen, hörte auf ihre Stimme zu achten, schlug vor Wut …; the cost: fing an
         // seine Nase zu putzen stays as before)
         const next = tokens[j+1]?.[0] ?? "";
-        if (DETERMINER_WORD.test(norm(next)) || /^\p{Lu}/u.test(next)) return false;
+        // (п. 78: for a phase verb a noun phrase after the particle is the infinitive's — fing an seine Nase zu putzen —, but a dative
+        // determiner keeps the particle a preposition of place: hörte auf dem Weg die Vögel zu singen)
+        if (!phase && (DETERMINER_WORD.test(norm(next)) || /^\p{Lu}/u.test(next)) ||
+          phase && DETERMINER_WORD.test(norm(next)) && /(?:em|er)$/u.test(norm(next))) return false;
         const p = norm(tokens[j][0]);
         for (let k = j+1; k+1 < tokens.length; k++) {
           if (!/^\s+$/u.test(gap(k-1,k))) return false;
@@ -4789,7 +4800,13 @@
         return false;
       };
       const zuComplement = pair => (pair.entry.complements || []).some(c => ZU_INFINITIVE_COMPLEMENT.test(String(c.pattern || "")));
-      const trailingZuInfinitive = j => {
+      // (п. 78) a zu-infinitive written in one word right after the particle, ending the part — fingen an einzuschlafen; only for a
+      // verb whose card takes zu + Infinitiv (`joined`), not um / ohne / statt + zu-infinitive (kam, um zuzuhören) nor an adverb of the
+      // part (haben … wieder herzustellen)
+      const joinedZuInfinitive = k => { const t = tokens[k]?.[0]; return !!t && t === norm(t) && (verbAnalyses.get(t) || []).some(a => a.kind === "infinitive" && a.zu); };
+      const trailingZuInfinitive = (j, joined = false) => {
+        if (joined && !ZU_INFINITIVE_OPENERS.includes(norm(tokens[j][0])) && joinedZuInfinitive(j+1) && /^\s+$/u.test(gap(j,j+1)))
+          return j+1===tokens.length-1 || hard(j+1,j+2) || soft(j+1,j+2);
         if (norm(tokens[j+1]?.[0]) !== 'zu' || !tokens[j+2]) return false;
         if (!/^\s+$/u.test(gap(j,j+1)) || !/^\s+$/u.test(gap(j+1,j+2)) || !zuInfinitiveWord(j+2)) return false;
         return j+2===tokens.length-1 || hard(j+2,j+3) || soft(j+2,j+3);
@@ -4879,7 +4896,7 @@
         // Only inspect paths that can contribute to this clicked occurrence.
         if (secondary && selected !== i && (i >= selected || !possible.some(pair => pair.prefix === norm(tokens[selected][0])))) continue;
         if (secondary && !tokens.some((t,j) => j > i &&
-          (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1) || trailingAdverbial(j) || trailingZuInfinitive(j)) &&
+          (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1) || trailingAdverbial(j) || trailingZuInfinitive(j, true)) &&
           possible.some(pair => pair.prefix === norm(t[0])) && !nominalParticle(i,j))) continue;
         let start = i;
         while (start > 0 && !hard(start-1,start) && !soft(start-1,start)) start--;
@@ -4920,9 +4937,11 @@
           const comparison = norm(tokens[j+1]?.[0] ?? "") === "wie" && /^\s+$/u.test(gap(j,j+1)) &&
             !WIE_QUESTION_WORD.test(norm(tokens[j+2]?.[0] ?? ""));
           const closes = (j === tokens.length-1 || hard(j,j+1) || soft(j,j+1) || comparison) && !prepositionalObject;
-          const trailingOther = !closes && !prepositionalObject && possible.some(pair => pair.prefix === norm(tokens[j][0])) && (trailingAdverbial(j) || trailingZuInfinitive(j));
+          const trailingOther = !closes && !prepositionalObject && possible.some(pair => pair.prefix === norm(tokens[j][0])) &&
+            (trailingAdverbial(j) || trailingZuInfinitive(j, possible.some(pair => pair.prefix === norm(tokens[j][0]) && zuComplement(pair))));
           // (item 2b″: the extraposed zu-infinitive group only for a card with zu + Infinitiv)
-          const extraposed = !closes && !trailingOther && !secondary && possible.some(pair => pair.prefix === norm(tokens[j][0]) && zuComplement(pair)) && extraposedZuGroup(i,j);
+          const extraposed = !closes && !trailingOther && !secondary && possible.some(pair => pair.prefix === norm(tokens[j][0]) && zuComplement(pair)) &&
+            extraposedZuGroup(i,j,possible.some(pair => pair.prefix === norm(tokens[j][0]) && zuComplement(pair) && PHASE_VERBS.has(norm(pair.entry.word).replace(/^sich\s+/u,""))));
           // (links chat, advisor 10.11: the shared Nachfeld of the chains, nachfeldRestFits — a prepositional group after the particle up
           // to the end of its part: setzte sich die Bevölkerung zusammen aus 77,1 Prozent Weißen …, kam zurück aus Berlin. Not zusammen /
           // mit / weiter / vorbei + mit — «вместе с» (07.11): ging zusammen mit ihm ins Kino, arbeitete zusammen mit Kollegen)
