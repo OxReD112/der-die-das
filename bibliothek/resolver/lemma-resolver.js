@@ -5840,6 +5840,12 @@
           const tail = tokens.slice(inside[1],r+1).map(t => norm(t[0])).join(" ");
           if (headBase && (NOUN_JOIN_CLUSTER_TAIL[headBase] || NOUN_JOIN_CLUSTER_TAIL.modal).test(tail)) return true;
         }
+        // (advisor 12.11, claude/WINTERREIFEN_TWO_UND_COUNT_2026-11-12_RU.md: the verb forms are counted up to the first participle — a
+        // second und / oder right after it starts the next predicate or the next clause: hat Reifen und Felgen gekauft und (diese) montiert,
+        // waren Tische und Stühle aufgestapelt und im Dunkeln konnte er …; the noun pair before the participle stays one part)
+        { let f = k+1; while (f < r && (jumped.has(f) || capitalNoun(f) || !(verbish(f) && !attributive(f) || participleShape(f) || ownParticiple(f) && !adjectivalForm(tokens[f][0])))) f++;
+          if (f < r && (participleAt(f) || participleShape(f) || ownParticiple(f)) && !seinOnly(f) &&
+            ["und","oder"].includes(norm(tokens[f+1]?.[0] ?? "")) && connected(f,f+1)) return true; }
         return inside.length === 1 && inside[0] === r;
       };
       // P5 variant 1 (links chat + advisor 31.10): a comma in a list of nominal members closed by und / oder does not end the part when the
