@@ -13000,6 +13000,31 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (regression g68-bare-compound-qa: a compound with a title noun as its last part is a title too — Herr Hauptkommissar)
     const TITLE_NOUN_HEADS = /(?:doktor|doktorin|professor|professorin|direktor|direktorin|präsident|präsidentin|minister|ministerin|pfarrer|pfarrerin|kommissar|kommissarin|meister|meisterin|inspektor|inspektorin|sekretär|sekretärin|kanzler|kanzlerin|offizier|leutnant|general|kapitän|rat|rätin)$/u;
     const NOT_TITLE_BEFORE = /^(?:ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|jede|jeder|jedes|jedem|jeden|viele|vielen|einige|manche|mehrere|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|\p{L}+te|\p{L}+ste|\d+|(?:mein|dein|sein|ihr|unser|euer|eur)\p{L}*)$/u;
+    // Links chat, TODO item 84 (advisor 12.11, claude/EHE_CONJUNCTION_COUNT_2026-11-12_RU.md): Ehe / Eh first in the sentence (or after an
+    // opening quote / dash), with no article — the subordinate «прежде чем»: a subject after it and the part ends with its own finite verb
+    // before a comma — Ehe er einschlief, sah er …; »Ehe du meine Tochter … erhältst,« sprach er; Eh er
+    // abzog, suchte er … The noun stays: Die Ehe war … (an article before), Ehe und Familie sind … (no verb-final part before a comma).
+    function eheConjunction(word, context, result) {
+      if (!result || !/^Eh(?:e)?$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
+      const sentence = context.sentence, tokens = sharedTokens(sentence,'eheConjunction');
+      const index = tokens.findIndex(t => t.index === context.tokenOffset);
+      if (index < 0 || !tokens[index+1]) return result;
+      if (!/^[\s»«„“"‚‘'(–—-]*$/u.test(sentence.slice(index > 0 ? tokens[index-1].index + tokens[index-1][0].length : 0, tokens[index].index)) ||
+          index > 0 && !/[.!?:;»«„“"–—]/u.test(sentence.slice(tokens[index-1].index + tokens[index-1][0].length, tokens[index].index))) return result;
+      if (/[^\s]/u.test(sentence.slice(tokens[index].index + tokens[index][0].length, tokens[index+1].index))) return result;
+      const end = partEnd(sentence,tokens,index,{numbers:true});
+      // (the own finite verb at the end and no other one before it; a determiner / possessive that is also a verb form — meine, seine —
+      // is no verb: »Ehe du meine Tochter … erhältst,«)
+      if (!(end > index + 1 && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return result;
+      for (let i = index + 1; i < end; i++) if (finiteVerbToken(tokens[i]) && !DETERMINER_WORD.test(norm(tokens[i][0])) &&
+        !(verbAnalyses.get(norm(tokens[i][0])) || []).some(r => r.kind === 'participle' || r.kind === 'infinitive')) return result;
+      if (!/^[»«„“"‚‘']?\s*,/u.test(sentence.slice(tokens[end].index + tokens[end][0].length))) return result;
+      const list = result.candidates || [];
+      const conj = list.find(c => norm(c.lemma) === norm(word) && (canonicalPos(c.pos) === "Konjunktion" || c.pos === "conj"));
+      if (!conj || result.selected === conj) return result;
+      return keepDecision(result,{...result,candidates:[conj,...list.filter(c => c !== conj)],selected:conj,preferred:conj,status:'resolved',
+        evidence:'ehe-conjunction'},{outcome:'selected',rule:'ehe-conjunction',reason:'ehe-conjunction'});
+    }
     function nameAfterTitle(word, context, result) {
       if (!result || !/^\p{Lu}/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = context.sentence, before = sentence.slice(0, context.tokenOffset);
@@ -17269,7 +17294,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
