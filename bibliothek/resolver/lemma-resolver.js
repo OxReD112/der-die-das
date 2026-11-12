@@ -193,6 +193,21 @@
   const NUMERAL_SERIES_JOINERS = ["oder","bis","und"];
   // Coordinating conjunctions that end the clause of a recorded expression.
   const CLAUSE_COORDINATORS = ["und","oder","aber","denn","sondern"];
+  // L26 (named exceptions, RESOLVER_LINKS_TODO_RU.md): own adjectives that stay «become» with werden — wurde bekannt «стал известен», not
+  // bekennen; wurde (fast) verrückt «сошёл с ума», not verrücken. One list for the werden group and the tap on the adjective (п. 6, 12.11).
+  const BECOME_NAMED_ADJECTIVES = ["bekannt","verrückt"];
+  // 5в (advisor 12.11): the subject a reflexive pronoun of the 1st / 2nd person has in its part — "own" (ich … mich / mir, du … dich / dir,
+  // wir … uns, ihr … euch), "other" (a subject pronoun of another person: Finde ich dich hier — dich is the object of finden), "none"; sich
+  // is always "own". One function for the werden group (5а.1: Die Stadt wurde mir vertraut — no own subject, mir is no reflexive) and the
+  // reflexive group of a verb (an "other" subject rejects it; the imperative and a zu-infinitive part have none of their own).
+  // The person of each reflexive pronoun — one table for reflexiveSubjectIn and reflexiveAgreesWithSubject (advisor 12.11).
+  const REFLEXIVE_PERSONS = {mich:"ich",mir:"ich",dich:"du",dir:"du",sich:"third",uns:"wir",euch:"ihr"};
+  function reflexiveSubjectIn(pronoun, words) {
+    const own = REFLEXIVE_PERSONS[pronoun];
+    if (!own || own === "third") return "own";
+    if (words.includes(own)) return "own";
+    return words.some(w => /^(?:ich|du|wir|er|man)$/u.test(w) && w !== own) ? "other" : "none";
+  }
   // One opening word of an imperative part (advisor 12.11: one list) — the position rule of the imperative (Grimm item 1, 11.11: so geh,
   // nun trag, da nimm), the separated-particle assembly of the imperative (links chat item 87: nun hol mich herunter) and the implicit
   // subject of a reflexive imperative (5а.2: so stellt Euch hin) share it.
@@ -2543,7 +2558,7 @@
       return result;
     }
     const subjectPersons = {ich:['ich'],du:['du'],er:['er/sie/es'],sie:['er/sie/es','sie'],es:['er/sie/es'],wir:['wir'],ihr:['ihr'],man:['er/sie/es'],wer:['er/sie/es'],was:['er/sie/es']};
-    const pronounPersons = {mich:'ich',mir:'ich',dich:'du',dir:'du',sich:'third',uns:'wir',euch:'ihr'};
+    const pronounPersons = REFLEXIVE_PERSONS;
     const determiners = /^(?:der|die|das|ein|eine|kein|keine|mein(?:e)?|dein(?:e)?|sein(?:e)?|ihr(?:e)?|unser(?:e)?|euer(?:e)?|eure|viele|beide|alle|einige|mehrere|etliche|diese|dieser|dieses|dessen|deren)$/u;
     // Step 7: shared sentence facts for relation producers. Verb morphology per
     // token with established nominal roles masked, the clause partition
@@ -3600,6 +3615,9 @@
             const zuHeadGroup=tense==='zu-Infinitiv'&&controller!==v&&['haben','sein'].includes(control.base)?
               (()=>{const g=zuGroup(tokens[v][0],{sentence,tokenOffset:tokens[v].index});
                 return g&&['haben-zu','sein-zu'].includes(g.id)&&g.spans.some(sp=>sp.start===tokens[controller].index)?g:null;})():null;
+            // (5в, advisor 12.11: a subject pronoun of another person in the part rejects the group — Finde ich dich hier, du alter Sünder:
+            // finden «находить», not sich finden; the imperative reading of Finde does not hold with ich after it)
+            if(reflexiveSubjectIn(words[pronoun],words.slice(clause.start,clause.end+1))==='other')continue;
             relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(unresolvedLassen?{attachmentOnly:true}:{}),...(reflexiveAmbiguity?{interpretation:'reciprocal'}:{}),
               note:reflexiveAmbiguity?{ru:'здесь: друг друга',en:'here: each other'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans:zuHeadGroup?[...spans,tokenSpan(controller)].sort((x,y)=>x.start-y.start):spans,tense,...(controller!==v&&modalLemmas.has(control.base)&&tense!=='zu-Infinitiv'?{modal:control.base}:{}),
               ...(zuHeadGroup?{zuGroup:{id:zuHeadGroup.id,...(zuHeadGroup.tense?{tense:zuHeadGroup.tense}:{})}}:{}),reflexiveCase:caseName,...(dativeReading?{freeDative:true}:{}),...(objectGroup&&!dativeReading?{objectGroup:true}:{}),
@@ -5368,7 +5386,7 @@
       return between.some(dependent) ? "verb" : "choice";
     }
     const participleAdjectiveCard = word => (forms.get(norm(word)) || []).find(e => e.type === "Adjektiv" && norm(e.word) === norm(word) &&
-      e.participle_of && e.meaning_differs && !["bekannt","verrückt"].includes(norm(word)));
+      e.participle_of && e.meaning_differs && !BECOME_NAMED_ADJECTIVES.includes(norm(word)));
     // L18 (links to-do, 20.10.2026): a lowercase form of an own adjective / adverb card (lange of lang) with no own verb
     // of that form is a modifier between the linked verbs, not a competing predicate (hat lange geschlafen — not langen).
     const separableParticles = new Set(entries.flatMap(e => e.separable_prefix ? [norm(e.separable_prefix)] : []));
@@ -6220,7 +6238,7 @@
           lexical = rows.filter(e => norm(e.word) === norm(tokens[before][0]));
           kind = "modal";
         } else if (second === "werden" && participleLikeWord(tokens[before][0]) && !degreeBefore && !passiveNone(tokens[before][0]) &&
-            !["bekannt","verrückt"].includes(norm(tokens[before][0]))) {
+            !BECOME_NAMED_ADJECTIVES.includes(norm(tokens[before][0]))) {
           // (links chat, advisor 09.11, map N2: the passive zu-infinitive — ignoriert zu werden, um … aufgenommen zu werden — is
           // «Passiv mit X»; the word right before zu werden is participle-like (participleLikeWord). An own adjective card that is
           // no participle of an own verb (gerecht zu werden) stays as it is; bekannt / verrückt / passive: "none" stay «become»,
@@ -6409,7 +6427,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // adjective card (verletzt, gezwungen, überzeugt, gefürchtet, überarbeitet …); with werden they are the passive of
       // the plain verb. Only bekannt and verrückt stay «become» (wurde … bekannt «стал известен», not bekennen;
       // wird verrückt werden «сойдёт с ума», not verrücken) — named exceptions, recorded in RESOLVER_LINKS_TODO_RU.md (L26).
-      const becomeAdjectives = new Set(["bekannt","verrückt"]);
+      const becomeAdjectives = new Set(BECOME_NAMED_ADJECTIVES);
       const untwin = (rows, i = null) => reflexiveInClause || i !== null && becomeAdjectives.has(norm(tokens[i][0])) ? rows :
         (rows.some(e=>!/^sich\s/u.test(norm(e.word))) ? rows.filter(e=>!/^sich\s/u.test(norm(e.word))) : rows);
       // (c) «become» (advisor 01.11): a passive: "none" adjective is no participle of a werden group (Sie wollte berühmt werden,
@@ -6453,9 +6471,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !indices.some(i => NOMINATIVE_PRONOUN.test(norm(tokens[i][0])) && norm(tokens[i][0]) !== "es") && !nounSubject();
       if (console.__vt) console.__vt.push([indices.map(i=>tokens[i][0]).join(' '), finiteWerden, werdenNumber, nounSubject(), impersonalDative]);
       // (5а.1: mir / mich, dir / dich, uns, euch are reflexive only with their own subject — Die Stadt wurde mir vertraut has none)
-      const ownReflexive = indices.some(i => { const w = norm(tokens[i][0]);
-        return w === "sich" || /^(?:mir|mich)$/u.test(w) && indices.some(j => norm(tokens[j][0]) === "ich") || /^(?:dir|dich)$/u.test(w) && indices.some(j => norm(tokens[j][0]) === "du") ||
-          w === "uns" && indices.some(j => norm(tokens[j][0]) === "wir") || w === "euch" && indices.some(j => norm(tokens[j][0]) === "ihr"); });
+      const clauseWords = indices.map(i => norm(tokens[i][0]));
+      const ownReflexive = clauseWords.some(w => reflexivePronouns.has(w) && reflexiveSubjectIn(w, clauseWords) === "own");
       const becomeAt = i => werdenInClause && !(reflexiveInClause && ownReflexive) && !impersonalDative && !context.coordinatedLeft && passiveNone(tokens[i][0]);
       const participles = i => becomeAt(i) ? [] : untwin(verbs(i).filter(e=>clause.participleOf(e,i)),i);
       // (advisor 07.11, from the L-018 count: an agent is a stronger sign of the passive than a degree word — wird einige Male von Arthur
@@ -15916,8 +15933,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               (i === 1 || clause[i-2] !== clause[i-1] || opening[i-1]))) continue;
             // E3: a word with an own conjunction card opening its clause and not followed by a finite verb is the conjunction
             // after a comma (…, damit ich nichts zu tun habe «чтобы» — not the expression; Damit hab ich nix zu tun! at the sentence start stays).
+            // (5а.3, cards chat + advisor 12.11: not when an expression of adjacent words starts with it — …, bis dahin warten wir; the
+            // shared adjacentExpressionAt with its not_next / not_after conditions)
             if (expression && words.length === 1 && i > 0 && clause[i-1] !== clause[i] && !opening[i] && (forms.get(keys[i]) || []).some(e => e.type === "Konjunktion") &&
-                !(tokens[i+1] && clause[i+1] === clause[i] && finiteHere(i+1))) continue;
+                !(tokens[i+1] && clause[i+1] === clause[i] && finiteHere(i+1)) &&
+                !(adjacentExpressionAt(tokens, i, (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index), (a,b) => clause[a] !== clause[b]) &&
+                  // (a verb-final part keeps the conjunction: Warte, bis dahin alles fertig ist)
+                  !partEndsWithFiniteVerb(sentence, tokens, i, {alone:true}))) continue;
             if (part.not_after && i > 0 && partList(part,"not_after").includes(keys[i-1])) continue;
             // 29.10.2026 (expressions chat; 101 / 106 dabei sein; advisor decision): `not_after_clause_adjective: "<word>"` — the
             // word right before the part opens its clause and has an own adjective card, and the part's first word is followed
@@ -17229,7 +17251,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // L55 (links chat, 24.10.2026; second resolver chat G59): the named «become» adjectives of L26 (bekannt) next to a finite
     // werden / sein of their clause — werden is «становиться» there (Im März 2010 wurde bekannt, dass …; Als es nun bekannt ward, daß …) —
     // are the adjective on their own tap too, not the choice with the participle of their verb (bekennen).
-    const BECOME_ADJECTIVES = new Set(["bekannt"]);
+    const BECOME_ADJECTIVES = new Set(BECOME_NAMED_ADJECTIVES);
     // Advisor 03.11 (reference R-potter-24): a participle that closes its part right after «full finite verb + subject» — no haben /
     // sein / werden in the part — is the manner adjective when an adjective card of the form exists (own or external):
     // »…«, sagte Hermine niedergeschlagen; sagte er leicht verärgert. Not: Hab ihn gefragt (haben), Er kam gelaufen (no subject between).
@@ -17518,6 +17540,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!clause.some(w => (verbAnalyses.get(w) || []).some(a => PREDICATIVE_SEIN_WERDEN.includes(a.base) && a.kind === "finite"))) return result;
       return {...result, selected:adjective, preferred:adjective, status:"resolved", evidence:"become-adjective"};
     }
+    // 5в (advisor 12.11): a window of two own cards of one verb that both carry the reflexive group (zog sich aus: ausziehen verb-115
+    // «раздеваться» with the field `reflexive`, verb-116 without it) — the group takes the card with the field.
+    function reflexiveFieldChoice(word, context, result) {
+      if (!result || result.selected || result.status !== "ambiguous") return result;
+      const group = (result.candidates || []).filter(c => c.construction?.id === "reflexive-verb" && c.source === "main" && c.item);
+      if (group.length < 2 || group.length !== (result.candidates || []).length) return result;
+      if (new Set(group.map(c => norm(c.lemma).replace(/^sich\s+/u, ""))).size !== 1) return result;
+      // (run95, train: sich … unterstellen — separable «укрыться» / inseparable «подчиниться»: the two verbs differ, the window stays)
+      if (new Set(group.map(c => norm(c.item.separable_prefix || ""))).size !== 1) return result;
+      const withField = group.filter(c => c.item.reflexive || /^sich\s/u.test(norm(c.item.word || "")));
+      if (withField.length !== 1) return result;
+      return {...result, selected:withField[0], preferred:withField[0], status:"resolved", evidence:"reflexive-field-choice"};
+    }
     // L52 (user 24.10.2026): a choice window whose clause has a reflexive pronoun shows the reflexive readings first
     // (Er traute sich zu waschen: sich trauen before trauen) — only the order of the window, nothing is chosen.
     function reflexiveFirst(word, context, result) {
@@ -17693,7 +17728,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
