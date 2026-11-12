@@ -17627,5 +17627,19 @@
     "usage_note_ru": "О форме: eine gebogene Nase — нос с горбинкой, ein gebogener Schnabel — изогнутый клюв, leicht gebogen — слегка изогнутый. Причастие II от biegen — гнуть; ist um die Ecke gebogen — от biegen «сворачивать».",
     "usage_note_en": "Of shape: eine gebogene Nase — an aquiline nose, ein gebogener Schnabel — a curved beak, leicht gebogen — slightly curved. Past participle of biegen — to bend; ist um die Ecke gebogen — from biegen “to turn”.",
     "participle_of": "biegen"
+  },
+  {
+    "id": "adjective-1619",
+    "word": "gestreift",
+    "translation_ru": "полосатый, в полоску",
+    "translation_en": "striped",
+    "example_de": "Zum Strand nahm sie ihr blau-weiß gestreiftes Handtuch mit.",
+    "example_ru": "На пляж она взяла своё полотенце в сине-белую полоску.",
+    "example_en": "She took her blue-and-white striped towel to the beach.",
+    "example_cloze": "Zum Strand nahm sie ihr blau-weiß {{c1::gestreiftes}} Handtuch mit.",
+    "usage_note_ru": "Часто с цветами: rot-weiß gestreift — в красно-белую полоску; quer / längs gestreift — в поперечную / продольную полоску. Ср. kariert — в клетку, gepunktet — в горошек. Не путать с глаголом streifen — задевать (hat gestreift); бродить (ist gestreift).",
+    "usage_note_en": "Often with colours: rot-weiß gestreift — red-and-white striped; quer / längs gestreift — horizontally / vertically striped. Cf. kariert — checked, gepunktet — dotted. Do not confuse with the verb streifen — to brush against (hat gestreift); to roam (ist gestreift).",
+    "participle_of": "streifen",
+    "meaning_differs": true
   }
 ]

@@ -31394,11 +31394,11 @@
   {
     "id": "verb-659",
     "infinitive": "treiben",
-    "translation_ru": "заниматься (спортом); гнать; дрейфовать",
-    "translation_en": "to do (sport); to drive; to drift",
+    "translation_ru": "заниматься (спортом); гнать; дрейфовать (на месте)",
+    "translation_en": "to do (sport); to drive; to drift (in one place)",
     "auxiliary": "haben",
-    "usage_note_ru": "В значении «дрейфовать» Perfekt с sein: Das Boot ist ans Ufer getrieben.",
-    "usage_note_en": "In the sense “to drift” the perfect takes sein: Das Boot ist ans Ufer getrieben.",
+    "usage_note_ru": "Дрейфовать куда-либо — treiben с sein (отдельная карточка): Das Boot ist ans Ufer getrieben; на месте — с haben или sein: Das Boot hat (ist) auf dem See getrieben.",
+    "usage_note_en": "To drift somewhere is treiben with sein (separate card): Das Boot ist ans Ufer getrieben; in one place — haben or sein: Das Boot hat (ist) auf dem See getrieben.",
     "example_de": "Ich treibe dreimal pro Woche Sport.",
     "example_cloze": "Ich {{c1::treibe}} dreimal pro Woche Sport.",
     "example_ru": "Я занимаюсь спортом три раза в неделю.",
@@ -31432,6 +31432,56 @@
         "sie": "treiben"
       }
     }
+  },
+  {
+    "id": "verb-2773",
+    "infinitive": "treiben",
+    "translation_ru": "плыть по течению, дрейфовать (куда-либо); быть отнесённым (течением, ветром)",
+    "translation_en": "to drift (somewhere), to be carried (by the current, the wind)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "С направлением Perfekt только с sein; на месте (auf dem Wasser treiben) — с haben или sein. «заниматься (спортом)» — treiben с haben (отдельная карточка).",
+    "usage_note_en": "With a direction the perfect takes only sein; in one place (auf dem Wasser treiben) — haben or sein. “to do (sport)” is treiben with haben (separate card).",
+    "example_de": "Nach dem Sturm ist das leere Boot ans Ufer getrieben.",
+    "example_cloze": "Nach dem Sturm ist das leere Boot ans Ufer {{c1::getrieben}}.",
+    "example_ru": "После шторма пустую лодку прибило к берегу.",
+    "example_en": "After the storm the empty boat drifted ashore.",
+    "perfect_form": "sein getrieben",
+    "forms": {
+      "Präteritum": {
+        "ich": "trieb",
+        "du": "triebst",
+        "er/sie/es": "trieb",
+        "wir": "trieben",
+        "ihr": "triebt",
+        "sie": "trieben"
+      },
+      "Konjunktiv II": {
+        "ich": "triebe",
+        "du": "triebest",
+        "er/sie/es": "triebe",
+        "wir": "trieben",
+        "ihr": "triebet",
+        "sie": "trieben"
+      }
+    },
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "treibe",
+        "du": "treibst",
+        "er/sie/es": "treibt",
+        "wir": "treiben",
+        "ihr": "treibt",
+        "sie": "treiben"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "an / in + Akkusativ",
+        "note_ru": "прибиться к чему-либо (ans Ufer), быть отнесённым куда-либо (ins Meer)",
+        "note_en": "to drift onto (ans Ufer), to be carried into (ins Meer)"
+      }
+    ]
   },
   {
     "id": "verb-660",
@@ -42451,8 +42501,8 @@
     "translation_ru": "охотиться (на кого-либо); гнаться (за кем-либо), гнать",
     "translation_en": "to hunt; to chase",
     "auxiliary": "haben",
-    "usage_note_ru": "Мчаться — Perfekt с sein: Der Wagen ist durch die Stadt gejagt. in die Luft jagen — взорвать. (разг.) jemanden ins Bockshorn jagen — запугать кого-либо; sich nicht ins Bockshorn jagen lassen — не дать себя запугать.",
-    "usage_note_en": "To race, to rush takes sein: Der Wagen ist durch die Stadt gejagt. in die Luft jagen — to blow up. (colloquial) jemanden ins Bockshorn jagen — to intimidate someone; sich nicht ins Bockshorn jagen lassen — not to let oneself be intimidated.",
+    "usage_note_ru": "Мчаться — jagen с sein (отдельная карточка): Der Wagen ist durch die Stadt gejagt. in die Luft jagen — взорвать. (разг.) jemanden ins Bockshorn jagen — запугать кого-либо; sich nicht ins Bockshorn jagen lassen — не дать себя запугать.",
+    "usage_note_en": "To race, to rush is jagen with sein (separate card): Der Wagen ist durch die Stadt gejagt. in die Luft jagen — to blow up. (colloquial) jemanden ins Bockshorn jagen — to intimidate someone; sich nicht ins Bockshorn jagen lassen — not to let oneself be intimidated.",
     "example_de": "Mein Onkel jagt im Herbst Wildschweine.",
     "example_cloze": "Mein Onkel {{c1::jagt}} im Herbst Wildschweine.",
     "example_ru": "Мой дядя осенью охотится на кабанов.",
@@ -42497,6 +42547,55 @@
         "sie": "jagten"
       }
     }
+  },
+  {
+    "id": "verb-2772",
+    "infinitive": "jagen",
+    "translation_ru": "мчаться, нестись",
+    "translation_en": "to race, to rush, to tear (along)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "О движении Perfekt с sein: Er ist die Treppe hinuntergejagt. «охотиться (на кого-либо)» — jagen с haben (отдельная карточка).",
+    "usage_note_en": "Of movement the perfect takes sein: Er ist die Treppe hinuntergejagt. “to hunt” is jagen with haben (separate card).",
+    "example_de": "Der Krankenwagen ist mit Blaulicht durch die Innenstadt gejagt.",
+    "example_cloze": "Der Krankenwagen ist mit Blaulicht durch die Innenstadt {{c1::gejagt}}.",
+    "example_ru": "Скорая с мигалкой промчалась через центр города.",
+    "example_en": "The ambulance raced through the city centre with its blue lights flashing.",
+    "perfect_form": "sein gejagt",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "jage",
+        "du": "jagst",
+        "er/sie/es": "jagt",
+        "wir": "jagen",
+        "ihr": "jagt",
+        "sie": "jagen"
+      },
+      "Präteritum": {
+        "ich": "jagte",
+        "du": "jagtest",
+        "er/sie/es": "jagte",
+        "wir": "jagten",
+        "ihr": "jagtet",
+        "sie": "jagten"
+      },
+      "Konjunktiv II": {
+        "ich": "jagte",
+        "du": "jagtest",
+        "er/sie/es": "jagte",
+        "wir": "jagten",
+        "ihr": "jagtet",
+        "sie": "jagten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "durch / über + Akkusativ",
+        "note_ru": "промчаться через что-либо, по чему-либо",
+        "note_en": "to race through, across something"
+      }
+    ]
   },
   {
     "id": "verb-898",
@@ -43141,8 +43240,8 @@
     "translation_ru": "хлопать, грохать; (разг.) влепить, врезать (jemandem eine knallen); (разг.) швырять",
     "translation_en": "to bang, to pop; (colloquial) to smack, to clout (jemandem eine knallen); (colloquial) to slam, to bang down",
     "auxiliary": "haben",
-    "usage_note_ru": "(разг.) врезаться, удариться — Perfekt с sein: Er ist mit dem Rad gegen einen Zaun geknallt.",
-    "usage_note_en": "(colloquial) to crash, to bang into takes sein: Er ist mit dem Rad gegen einen Zaun geknallt.",
+    "usage_note_ru": "(разг.) Врезаться, удариться — knallen с sein (отдельная карточка): Er ist mit dem Rad gegen einen Zaun geknallt. Лопнуть (о шине, шарике) — тоже с sein: Der Reifen ist geknallt.",
+    "usage_note_en": "(colloquial) To crash, to bang into is knallen with sein (separate card): Er ist mit dem Rad gegen einen Zaun geknallt. To burst (a tyre, a balloon) — also sein: Der Reifen ist geknallt.",
     "example_de": "Um Mitternacht knallten überall in der Stadt die Raketen.",
     "example_cloze": "Um Mitternacht {{c1::knallten}} überall in der Stadt die Raketen.",
     "example_ru": "В полночь по всему городу грохотали ракеты.",
@@ -43174,7 +43273,63 @@
         "ihr": "knalltet",
         "sie": "knallten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "(разг.) швырнуть, грохнуть что-либо на что-либо (etw. auf den Tisch knallen)",
+        "note_en": "(colloquial) to slam, to bang something down on something (etw. auf den Tisch knallen)"
+      }
+    ]
+  },
+  {
+    "id": "verb-2775",
+    "infinitive": "knallen",
+    "translation_ru": "(разг.) врезаться, с силой удариться (обо что-либо)",
+    "translation_en": "(colloquial) to crash, to slam (into)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "Perfekt с sein: Er ist mit dem Rad gegen einen Zaun geknallt. «хлопать, грохать» — knallen с haben (отдельная карточка).",
+    "usage_note_en": "The perfect takes sein: Er ist mit dem Rad gegen einen Zaun geknallt. “to bang, to pop” is knallen with haben (separate card).",
+    "example_de": "Der Ball ist mit voller Wucht gegen die Latte geknallt.",
+    "example_cloze": "Der Ball ist mit voller Wucht gegen die Latte {{c1::geknallt}}.",
+    "example_ru": "Мяч со всей силы врезался в перекладину.",
+    "example_en": "The ball slammed into the crossbar with full force.",
+    "perfect_form": "sein geknallt",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "knalle",
+        "du": "knallst",
+        "er/sie/es": "knallt",
+        "wir": "knallen",
+        "ihr": "knallt",
+        "sie": "knallen"
+      },
+      "Präteritum": {
+        "ich": "knallte",
+        "du": "knalltest",
+        "er/sie/es": "knallte",
+        "wir": "knallten",
+        "ihr": "knalltet",
+        "sie": "knallten"
+      },
+      "Konjunktiv II": {
+        "ich": "knallte",
+        "du": "knalltest",
+        "er/sie/es": "knallte",
+        "wir": "knallten",
+        "ihr": "knalltet",
+        "sie": "knallten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "gegen / an / auf + Akkusativ",
+        "note_ru": "врезаться во что-либо, удариться обо что-либо",
+        "note_en": "to crash into, to hit something"
+      }
+    ]
   },
   {
     "id": "verb-914",
@@ -46426,8 +46581,8 @@
     "translation_ru": "задевать, слегка касаться; затрагивать (тему)",
     "translation_en": "to brush (against), to graze; to touch on (a topic)",
     "auxiliary": "haben",
-    "usage_note_ru": "Бродить (по лесу, городу) — Perfekt с sein: Wir sind stundenlang durch die Altstadt gestreift.",
-    "usage_note_en": "To roam (through a forest, a town) takes sein: Wir sind stundenlang durch die Altstadt gestreift.",
+    "usage_note_ru": "Бродить (по лесу, городу) — streifen с sein (отдельная карточка): Wir sind stundenlang durch die Altstadt gestreift.",
+    "usage_note_en": "To roam (through a forest, a town) is streifen with sein (separate card): Wir sind stundenlang durch die Altstadt gestreift.",
     "example_de": "Im vollen Bus hat mich ein Rucksack an der Schulter gestreift.",
     "example_cloze": "Im vollen Bus hat mich ein Rucksack an der Schulter {{c1::gestreift}}.",
     "example_ru": "В переполненном автобусе меня задел по плечу чей-то рюкзак.",
@@ -46460,6 +46615,55 @@
         "sie": "streiften"
       }
     }
+  },
+  {
+    "id": "verb-2774",
+    "infinitive": "streifen",
+    "translation_ru": "бродить, странствовать (по лесу, городу)",
+    "translation_en": "to roam, to wander (through)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "Perfekt с sein, обычно с durch: durch die Stadt streifen. «задевать, слегка касаться» — streifen с haben (отдельная карточка).",
+    "usage_note_en": "The perfect takes sein, usually with durch: durch die Stadt streifen. “to brush (against), to graze” is streifen with haben (separate card).",
+    "example_de": "Als Kinder sind wir ganze Tage durch die Wälder gestreift.",
+    "example_cloze": "Als Kinder sind wir ganze Tage durch die Wälder {{c1::gestreift}}.",
+    "example_ru": "В детстве мы целыми днями бродили по лесам.",
+    "example_en": "As children we roamed the woods for days on end.",
+    "perfect_form": "sein gestreift",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "streife",
+        "du": "streifst",
+        "er/sie/es": "streift",
+        "wir": "streifen",
+        "ihr": "streift",
+        "sie": "streifen"
+      },
+      "Präteritum": {
+        "ich": "streifte",
+        "du": "streiftest",
+        "er/sie/es": "streifte",
+        "wir": "streiften",
+        "ihr": "streiftet",
+        "sie": "streiften"
+      },
+      "Konjunktiv II": {
+        "ich": "streifte",
+        "du": "streiftest",
+        "er/sie/es": "streifte",
+        "wir": "streiften",
+        "ihr": "streiftet",
+        "sie": "streiften"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "durch + Akkusativ",
+        "note_ru": "бродить по чему-либо",
+        "note_en": "to roam through something"
+      }
+    ]
   },
   {
     "id": "verb-989",
@@ -92663,11 +92867,11 @@
   {
     "id": "verb-2019",
     "infinitive": "krachen",
-    "translation_ru": "трещать, грохотать; (разг., с sein) врезаться, с грохотом удариться",
-    "translation_en": "to crash, to bang, to crack; (colloquial, with sein) to crash (into)",
+    "translation_ru": "трещать, грохотать",
+    "translation_en": "to crack, to bang",
     "auxiliary": "haben",
-    "usage_note_ru": "С sein (разг.) — врезаться: Das Auto ist gegen einen Baum gekracht. (разг.) Gleich kracht's! — сейчас кому-то влетит! sich krachen (разг.) — разругаться. der Krach — грохот; ссора.",
-    "usage_note_en": "With sein (colloquial) — to crash: Das Auto ist gegen einen Baum gekracht. (colloquial) Gleich kracht's! — there'll be trouble! sich krachen (colloquial) — to have a row. der Krach — din; row.",
+    "usage_note_ru": "Врезаться (разг.) — krachen с sein (отдельная карточка): Das Auto ist gegen einen Baum gekracht. (разг.) Обанкротиться — тоже с sein: Die Firma ist gekracht. (разг.) Gleich kracht's! — сейчас кому-то влетит! sich krachen (разг.) — разругаться. der Krach — грохот; ссора.",
+    "usage_note_en": "To crash into (colloquial) is krachen with sein (separate card): Das Auto ist gegen einen Baum gekracht. (colloquial) To go bust — also sein: Die Firma ist gekracht. (colloquial) Gleich kracht's! — there'll be trouble! sich krachen (colloquial) — to have a row. der Krach — din; row.",
     "example_de": "Die ganze Nacht krachte es draußen, weil die Nachbarn Silvester feierten.",
     "example_cloze": "Die ganze Nacht {{c1::krachte}} es draußen, weil die Nachbarn Silvester feierten.",
     "example_ru": "Всю ночь на улице грохотало, потому что соседи праздновали Новый год.",
@@ -92700,6 +92904,55 @@
         "sie": "krachten"
       }
     }
+  },
+  {
+    "id": "verb-2776",
+    "infinitive": "krachen",
+    "translation_ru": "(разг.) врезаться, с треском удариться (обо что-либо)",
+    "translation_en": "(colloquial) to crash (into)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "Perfekt с sein. «трещать, грохотать» — krachen с haben (отдельная карточка).",
+    "usage_note_en": "The perfect takes sein. “to crack, to bang” is krachen with haben (separate card).",
+    "example_de": "Bei Glatteis ist ein Lieferwagen gegen eine Laterne gekracht.",
+    "example_cloze": "Bei Glatteis ist ein Lieferwagen gegen eine Laterne {{c1::gekracht}}.",
+    "example_ru": "В гололёд фургон врезался в фонарный столб.",
+    "example_en": "On the icy road a van crashed into a lamp post.",
+    "perfect_form": "sein gekracht",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "krache",
+        "du": "krachst",
+        "er/sie/es": "kracht",
+        "wir": "krachen",
+        "ihr": "kracht",
+        "sie": "krachen"
+      },
+      "Präteritum": {
+        "ich": "krachte",
+        "du": "krachtest",
+        "er/sie/es": "krachte",
+        "wir": "krachten",
+        "ihr": "krachtet",
+        "sie": "krachten"
+      },
+      "Konjunktiv II": {
+        "ich": "krachte",
+        "du": "krachtest",
+        "er/sie/es": "krachte",
+        "wir": "krachten",
+        "ihr": "krachtet",
+        "sie": "krachten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "gegen / in + Akkusativ",
+        "note_ru": "врезаться во что-либо",
+        "note_en": "to crash into something"
+      }
+    ]
   },
   {
     "id": "verb-2020",

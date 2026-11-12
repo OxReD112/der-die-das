@@ -17100,9 +17100,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const whole = particle + plain(chosen);
         let full = null;
         try { full = await resolveWithDiagnostics(whole, {sentence:whole, tokenOffset:0}); } catch (_) { full = null; }
-        // Two own cards of the simple verb (treten «ступать» / «пинать»): an external full verb (hinaustreten «выходить») may be
-        // the other one (hat den Ball hinausgetreten «выбить»): the parts, with the cards of this form (review 23.10).
-        const fulls = own.length > 1 ? [] : (full?.candidates || []).filter(c => plain(c) === whole && canonicalPos(c.pos) === "Verb" && !c.construction);
+        // The full verb of any dictionary wins over the parts, as for a compound (advisor + user 12.11,
+        // claude/G47_TWO_CARDS_WHOLE_VERB_COUNT_2026-11-12_RU.md): the rule of 23.10 «two own cards of the simple verb — the parts»
+        // is gone (hinausgetreten waren «выходить», hergefahren «приезжать», hineingetrieben hatte «загонять»); Er hat den Ball
+        // hinausgetreten «выходить» — the registry.
+        const fulls = (full?.candidates || []).filter(c => plain(c) === whole && canonicalPos(c.pos) === "Verb" && !c.construction);
         if (new Set(fulls.map(c => window.BibliothekVocabulary.identity(c))).size > 1) return result;
         const construction = directionalSpans(chosen.construction, context.tokenOffset, rest, w);
         const bare = c => { const v = {...c}; delete v.construction; delete v.formFeatures; return v; };

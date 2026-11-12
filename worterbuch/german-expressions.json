@@ -44976,5 +44976,261 @@
         "Aus der Hüfte heraus drehte er sich und schoss."
       ]
     }
+  },
+  {
+    "id": "expression-237",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etwas in die Luft jagen",
+    "translation_ru": "взорвать (что-либо)",
+    "translation_en": "to blow (something) up",
+    "example_de": "Im Film jagen die Gangster am Ende die ganze Brücke in die Luft.",
+    "example_ru": "В конце фильма гангстеры взрывают весь мост.",
+    "example_en": "At the end of the film the gangsters blow up the whole bridge.",
+    "notes_ru": [
+      "Близко: sprengen. Также о себе: sich in die Luft jagen — взорвать себя. Буквальное «подбросить, взлететь в воздух» (die Rakete jagte in die Luft) — не это выражение."
+    ],
+    "notes_en": [
+      "Similar: sprengen. Also: sich in die Luft jagen — to blow oneself up. The literal “to shoot up into the air” (die Rakete jagte in die Luft) is not this expression."
+    ],
+    "related_ids": [
+      "verb-897"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Luft",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "jage",
+              "jagst",
+              "jagt",
+              "jagen",
+              "jagte",
+              "jagtest",
+              "jagten",
+              "jagtet",
+              "jag",
+              "gejagt",
+              "jagend"
+            ]
+          },
+          {
+            "form": "in die",
+            "not_after": [
+              "hoch",
+              "weit",
+              "senkrecht",
+              "steil",
+              "höher"
+            ]
+          },
+          {
+            "form": "Luft"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "in die",
+            "not_after": [
+              "hoch",
+              "weit",
+              "senkrecht",
+              "steil",
+              "höher"
+            ]
+          },
+          {
+            "form": "Luft"
+          },
+          {
+            "form": [
+              "jage",
+              "jagst",
+              "jagt",
+              "jagen",
+              "jagte",
+              "jagtest",
+              "jagten",
+              "jagtet",
+              "jag",
+              "gejagt",
+              "jagend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im Film jagen die Gangster am Ende die ganze Brücke in die Luft.",
+        "»Ich werde das Haus schon nicht in die Luft jagen«, sagte Harry.",
+        "Er spielte stundenlang, ohne am Computer einen Außerirdischen in die Luft zu jagen.",
+        "Sie behaupten, dass ihr ein Klo in die Luft gejagt habt.",
+        "Wir haben noch nie ein Klo in die Luft gejagt.",
+        "Die Rebellen jagten die Brücke in die Luft."
+      ],
+      "negative": [
+        "Der Vogel jagt in der Luft.",
+        "Sie jagten den Ball in die Ecke.",
+        "Der Ball flog in die Luft, und die Kinder jagten ihm nach.",
+        "Die Kinder warfen die Mützen in die Luft.",
+        "Sie jagten den Ball hoch in die Luft."
+      ]
+    }
+  },
+  {
+    "id": "expression-238",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "eins jagt das andere",
+    "translation_ru": "одно за другим, одно сменяет другое, сплошной чередой",
+    "translation_en": "one thing after another",
+    "example_de": "Im Dezember jagt ein Termin den nächsten, und zum Ausruhen bleibt kaum Zeit.",
+    "example_ru": "В декабре одна встреча сменяет другую, и на отдых почти не остаётся времени.",
+    "example_en": "In December one appointment follows another and there is hardly any time to rest.",
+    "notes_ru": [
+      "Также: einer jagt den anderen; с существительным: ein Highlight jagt das nächste, ein Rekord jagt den nächsten. Duden: ein Gedanke jagt den anderen. Близко: die Ereignisse jagen sich."
+    ],
+    "notes_en": [
+      "Also: einer jagt den anderen; with a noun: ein Highlight jagt das nächste, ein Rekord jagt den nächsten. Duden: ein Gedanke jagt den anderen. Similar: die Ereignisse jagen sich."
+    ],
+    "related_ids": [
+      "verb-897"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/jagen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "jagt",
+              "jagte",
+              "jagen",
+              "jagten"
+            ]
+          },
+          {
+            "form": [
+              "das nächste",
+              "das nächsten",
+              "das andere",
+              "das anderen",
+              "das andre",
+              "das andern",
+              "den nächste",
+              "den nächsten",
+              "den andere",
+              "den anderen",
+              "den andre",
+              "den andern",
+              "die nächste",
+              "die nächsten",
+              "die andere",
+              "die anderen",
+              "die andre",
+              "die andern"
+            ],
+            "not_next_capital": true,
+            "clause_has": [
+              "ein",
+              "eine",
+              "eins",
+              "einer",
+              "eines"
+            ],
+            "not_after": [
+              "dann",
+              "und",
+              "noch",
+              "auch"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "das nächste",
+              "das nächsten",
+              "das andere",
+              "das anderen",
+              "das andre",
+              "das andern",
+              "den nächste",
+              "den nächsten",
+              "den andere",
+              "den anderen",
+              "den andre",
+              "den andern",
+              "die nächste",
+              "die nächsten",
+              "die andere",
+              "die anderen",
+              "die andre",
+              "die andern"
+            ],
+            "not_next_capital": true,
+            "clause_has": [
+              "ein",
+              "eine",
+              "eins",
+              "einer",
+              "eines"
+            ],
+            "not_after": [
+              "dann",
+              "und",
+              "noch",
+              "auch"
+            ]
+          },
+          {
+            "form": [
+              "jagt",
+              "jagte",
+              "jagen",
+              "jagten",
+              "gejagt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im Dezember jagt ein Termin den nächsten, und zum Ausruhen bleibt kaum Zeit.",
+        "Auf dem rund fünf Kilometer langen Rundgang durch die Altstadt jagt ein Highlight das nächste.",
+        "Hohe Gewerbesteuereinnahmen, hier jagt ein Rekord den nächsten, füllen die Kasse.",
+        "In dieser Woche jagte eine Katastrophe die andere.",
+        "Bei uns jagt eins das andere.",
+        "Es war ein Jahr, in dem ein Unglück das andere jagte.",
+        "Einer jagt den anderen."
+      ],
+      "negative": [
+        "Der Hund jagt die andere Katze.",
+        "Er jagt das Reh.",
+        "Die Polizei jagte den nächsten Verdächtigen durch die Stadt.",
+        "Er jagte erst einen Hasen und dann den nächsten.",
+        "Der Fuchs jagte das eine Huhn und dann das andere."
+      ]
+    }
   }
 ]
