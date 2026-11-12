@@ -1022,7 +1022,17 @@
       for (const [m, [ru, en]] of [...Object.entries(card), ...Object.entries(ord), ...Object.entries(er)]) out[m] = {ru, en, ordinal: m in ord, noun: m in er};
       return out;
     })();
+    // 5б (advisor 12.11): a first part of two letters only as a noun of any dictionary written as an ordinary word — not an abbreviation
+    // or an initialism (CD, PC, KZ), not a name, not a function word (er, du, an, so) — and only before a last part of four letters or more
+    // (Öllämpchen, Eidotter).
+    const twoLetterFirst = async s => {
+      const e = dict.twoLetterNoun ? await dict.twoLetterNoun(s) : null;
+      if (!e) return [];
+      return [{pos: 'Nomen', lemma: e.word, source: e.source, form: false, ...(e.entry ? {entry: e.entry} : {}), en: e.en,
+        ...(e.ru !== undefined ? {ru: e.ru} : {}), gender: e.gender || null, text: s, link: '', rank: 0}];
+    };
     async function modifier(s, min) {
+      if (s.length === 2) return await twoLetterFirst(s);
       if (BOUND_FIRST[s]) return [{pos: 'Präfix', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, rank: 0, ...BOUND_FIRST[s]}];
       if (NUMERAL_FIRST[s]) return [{pos: 'Zahlwort', lemma: s, source: 'bound', form: false, text: s, link: '', bound: true, numeral: true, rank: 0,
         ru: NUMERAL_FIRST[s].ru, en: NUMERAL_FIRST[s].en}];
@@ -1266,6 +1276,8 @@
       const headOf = (s, min) => { const k = s + '|' + min; if (!heads.has(k)) heads.set(k, head(s, noun, min, neuter)); return heads.get(k); };
       const modOf = (s, min) => { const k = s + '|' + min; if (!mods.has(k)) mods.set(k, modifier(s, min)); return mods.get(k); };
       const cuts = [];
+      const two = w.length >= 6 && (await twoLetterFirst(w.slice(0, 2))).length > 0;
+      if (two) cuts.push([2, 2]);
       for (const shared of [false, true]) for (let i = shared ? 4 : 3; i <= w.length - 3; i++) {
         if (shared && !(/[bcdfghklmnprstz]/u.test(w[i - 1]) && w[i - 1] === w[i - 2] && /[aeiouäöü]/u.test(w[i]))) continue;
         cuts.push([i, shared ? i - 1 : i]);
@@ -1278,7 +1290,7 @@
       // Old spelling with two consonants for three (Schalloch = Schall + Loch): the head may share the doubled consonant;
       // with an ordinary split as well (Schal + Loch) the word has two splits — no card.
       for (const shared of [false, true]) {
-        for (let i = shared ? 4 : 3; i <= w.length - 3; i++) {
+        for (let i = shared ? 4 : two ? 2 : 3; i <= w.length - 3; i++) {
           if (shared && !(/[bcdfghklmnprstz]/u.test(w[i - 1]) && w[i - 1] === w[i - 2] && /[aeiouäöü]/u.test(w[i]))) continue;
           const h0 = shared ? i - 1 : i;
           const hs = await headOf(w.slice(h0), 3);
@@ -3966,6 +3978,27 @@
       "voran voraus vorbei vorüber weg weiter wider wieder zu zurück zusammen neben zwischen").split(" "));
     const wordFormationReadings = new Map();
     let wordFormationCore = null, wordFormationParts = null, wordFormationDict = null;
+    // 5б (advisor 12.11): a part whose outside record is only «agent noun of V» (Putzer: «agent noun of putzen») and has no Russian
+    // meaning takes the Russian of our own verb V: «тот, кто …: от putzen «чистить»» (Bartputzer). The sign is the record's own gloss.
+    // (advisor 12.11, 5б (6)) the English of such a part in the same shape: «one who …: from putzen “to clean”», then its other senses
+    function agentNounEn(meanings) {
+      const m = /^agent noun of ([\p{L}]+)(?:\s*\(.*\))?$/u.exec(String(meanings[0] || "").trim());
+      const verb = m && (lemmas.get(norm(m[1])) || []).find(x => x.type === "Verb" && String(x.translation_en || "").trim());
+      return verb ? [`one who …: from ${verb.word} “${String(verb.translation_en).trim()}”`, ...meanings.slice(1)] : meanings;
+    }
+    async function agentNounRu(lemma) {
+      let groups = [];
+      try { groups = (await fallback.lookupFacts(norm(lemma))).groups || []; } catch (_) { return ""; }
+      for (const g of groups) {
+        if (g.pos !== "noun" || g.unresolved || norm(String(g.word || "")) !== norm(lemma)) continue;
+        const m = /^agent noun of ([\p{L}]+)(?:\s*\(.*\))?$/u.exec(String((g.meanings || [])[0] || "").trim());
+        if (!m) continue;
+        const verb = (lemmas.get(norm(m[1])) || []).find(x => x.type === "Verb" && String(x.translation_ru || "").trim());
+        if (!verb) continue;
+        return `тот, кто …: от ${verb.word} «${String(verb.translation_ru).trim()}»`;
+      }
+      return "";
+    }
     function wordFormationDictionary() {
       // A pending request is shared (the word-formation steps request spellings together first, then read them).
       const pendingReadings = new Map();
@@ -3996,7 +4029,7 @@
               continue;
             }
             if (g.unresolved || !g.meanings?.length) continue;
-            rows.push({pos:P[g.pos],lemma:g.word,source:"fallback",form:norm(g.word) !== s,en:g.meanings.join("; "),
+            rows.push({pos:P[g.pos],lemma:g.word,source:"fallback",form:norm(g.word) !== s,en:(g.pos === "noun" ? agentNounEn(g.meanings) : g.meanings).join("; "),
               gerund:g.meanings.every(m => /^gerund of /u.test(m))});
           }
         }
@@ -4011,6 +4044,21 @@
       return {
         readings,
         mayBe:s => lemmas.has(s) || forms.has(s) || !!wordFormationParts?.has(s),
+        // (5б) a noun of two letters written as an ordinary word: our card (Öl, Ei; not CD, PC) or an outside noun whose record is no
+        // abbreviation, initialism or form of another word, and no function word of ours (er, du, an, so)
+        twoLetterNoun:async s => {
+          if (s.length !== 2) return null;
+          const own = (lemmas.get(s) || []).find(x => x.type === "Nomen" && /^\p{Lu}\p{Ll}$/u.test(String(x.word || "")));
+          if (own) return {word:own.word,source:"main",entry:own,en:String(own.translation_en || ""),ru:String(own.translation_ru || ""),gender:own.article || null};
+          if ((lemmas.get(s) || []).length || WORD_FORMATION_PARTICLES.has(s)) return null;
+          let groups = [];
+          try { groups = (await fallback.lookupFacts(s)).groups || []; } catch (_) { return null; }
+          const NOT_A_WORD = /^(?:(?:abbreviation|initialism|acronym|clipping|contraction|alternative form|apocopic form|short for|only used in|synonym of)\b|[A-Z]{2,}\b|.*\((?:abbreviation|initialism)\b)/iu;
+          const g = groups.find(x => x.pos === "noun" && !x.kind && !x.unresolved && norm(String(x.word || "")) === s && (x.meanings || []).length &&
+            !NOT_A_WORD.test(String(x.meanings[0])));
+          if (!g || groups.some(x => x.pos === "name" && norm(String(x.word || "")) === s)) return null;
+          return {word:s.charAt(0).toUpperCase() + s.slice(1),source:"fallback",en:g.meanings.join("; "),gender:g.noun?.article || null};
+        },
         blocked:s => WORD_FORMATION_PARTICLES.has(s) || closed(s),
         // (advisor 09.11, linkShift) the external dictionary has a name of this spelling (Schwarzwald, Goldstein)
         name:async s => { try { return ((await fallback.lookupFacts(s)).groups || []).some(g => g.pos === "name"); } catch (_) { return false; } },
@@ -4023,6 +4071,8 @@
             // (advisor 06.11) a meaning that is a name (the source marks it: Runkel «Рункель», a town) is no meaning of a part
             const names = new Set(r?.names || []);
             const text = r ? (r.shown || r.meanings || []).filter(m => !names.has(m)).join("; ") : "";
+            // (5б: an agent noun of an own verb without a Russian meaning — Putzer «тот, кто …: от putzen «чистить»»)
+            if (!text && pos === "Nomen") return await agentNounRu(lemma);
             return r?.labels && text ? {text,labels:r.labels} : text;
           } catch (_) { return ""; }
         }
@@ -4107,9 +4157,15 @@
       // A word where a name stands is read as a name or not at all — never as a common noun (»Nein«, sagte Kaltwasser.).
       const nameSlot = slot && !listed;
       if (nameSlot) bare = false;
+      // (5б, advisor 12.11) the Saxon genitive: des / eines / meines … + a capital noun in -s / -es + this word — the determiner belongs to
+      // the genitive (des Königs Waffenträger, des Königs Hausecke); this word has no determiner of its own, the genitive is its sign.
+      const saxon = !detToken && !!p1 && !!p2 && /^\p{Lu}\p{Ll}+s$/u.test(p1) &&
+        /^(?:des|eines|keines|meines|deines|seines|ihres|unseres|eures|dieses|jenes|jedes)$/u.test(norm(p2)) &&
+        [norm(p1), norm(p1).slice(0,-1), norm(p1).replace(/es$/u,"")].some(f => [...(forms.get(f) || []), ...(lemmas.get(f) || [])].some(e => e.type === "Nomen"));
+      if (saxon) { name = false; bare = false; }
       return {
-        bare, listed, name, nameSlot,
-        detForm:d || (p1 && contractionArticle(p1)) || "",
+        bare, listed, name, nameSlot, saxon,
+        detForm:saxon ? "" : d || (p1 && contractionArticle(p1)) || "",
         det:!!detToken, adj, defDirect:!!p1 && definite && detToken === p1, dieDirect:!!p1 && d === "die" && detToken === p1, otherDet:!!detToken && !definite,
         contraction:!!p1 && !!contractionArticle(p1), prep:!!p1 && (lemmas.get(norm(p1)) || []).some(e => e.type === "preposition"),
         title:!!p1 && WORD_FORMATION_TITLES.has(norm(p1)),
@@ -4117,7 +4173,9 @@
         pluralDet:/^(?:die|diese|jene|keine|alle|beide|viele|einige|mehrere|manche|solche|welche|meine|deine|seine|ihre|unsere|eure)$/u.test(d),
         singularDet:/^(?:das|dem|des|ein|eine|einem|einen|eines|einer|(?:kein|mein|dein|sein|ihr|unser|euer|eur|dies|jen|jed|welch|manch|solch)(?:em|es))$/u.test(d),
         nextNoun:!!next && (/^\s+$/u.test(after) && (/^\p{Lu}/u.test(next[0]) || SERIES_COORDINATOR.test(next[0])) || /^\s*,\s*$/u.test(after)),
-        nextCapital:!!next && /^\s+$/u.test(after) && /^\p{Lu}/u.test(next[0])
+        nextCapital:!!next && /^\s+$/u.test(after) && /^\p{Lu}/u.test(next[0]),
+        ...(saxon ? {det:true, adj:false, defDirect:false, dieDirect:false, otherDet:true, contraction:false, prep:false, title:false, numberBefore:false,
+          pluralDet:false, singularDet:false} : {})
       };
     }
     const capitalise = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -13937,6 +13995,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           }
         } catch (e) { error = e; }
       }
+      // (5б, advisor 12.11) a capital word that no dictionary has in its own spelling, with an adjective ending: the outside adjective of
+      // its lowercase spelling is a candidate, for the nominalized adjective (der Listige — listig «хитрый»; der Kluge works by our card)
+      // (only right after a determiner or etwas / nichts / alles: not a name — Phil Butcher, in Duhnen, The Normative)
+      const detBefore = Number.isInteger(context?.tokenOffset) && /(?:^|[^\p{L}])(?:[Dd](?:er|ie|as|en|em|es)|[Ee]in(?:e|en|em|er|es)?|[Kk]ein(?:e|en|em|er|es)?|[Ee]twas|[Nn]ichts|[Aa]lles|[Aa]lle|[Vv]iele)[ \t]+$/u.test(String(context.sentence || "").slice(0,context.tokenOffset));
+      if (!error && !candidates.length && detBefore && /^\p{Lu}\p{Ll}+(?:e|en|er|em|es)$/u.test(String(word)) && context) {
+        try {
+          for (const g of await lexicalLookup(String(word).toLowerCase(),'resolve'))
+            if (!g.kind && !g.unresolved && canonicalPos(g.pos) === "Adjektiv" && g.meanings?.length)
+              candidates.push({source:"fallback",lemma:g.word,pos:g.pos,posLabel:"Adjektiv",translation:{en:g.meanings.join("; "),ru:""},meanings:g.meanings});
+        } catch (_) { /* optional */ }
+      }
       // (advisor 08.11, claude/S2_NOFILTER_CAUSES_2026-11-08_RU.md, cause 3: the joined form of a verb only the separable index has,
       // whose simple verb only the external dictionary has — zuriegelte, anstrahlte, wegschmolz: the simple verb's form rows (riegelte
       // of riegeln) are the rows of the joined form; read by formFeatures as the external rows of a form are)
@@ -18461,7 +18530,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // «колени» is not schoss «стрелял», review 29.10)
     const OLD_SS = /(?<!ei|ai|au|äu|eu|ie|Ei|Ai|Au|Äu|Eu|Ie)ß(?![aeiouäöüy])/gu;
     async function resolveFollowingReference(word, context) {
-      const result = await resolveFollowingReferenceOnce(word, context);
+      const result = await nameGenitive(word, context, await resolveFollowingReferenceOnce(word, context));
       // Swiss ss (swissSpelling): no record of the ss spelling at all — the ß spelling, when it has one.
       // (also when the only reading is a split with an English-only part: Strassenrennen — Straßenrennen, not Strass + Rennen)
       const weakOnly = (result?.candidates || []).length > 0 && result.candidates.every(c => c.formation?.kind === "compound" && c.formation.parts.some(p => !p.ru));
@@ -18477,6 +18546,25 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const read = await resolveFollowingReferenceOnce(word, context, spelling);
       const card = read?.selected || read?.preferred;
       return card && card.source === "main" ? read : result;
+    }
+    // 5б (advisor 12.11): the genitive of a name — a capital word in -s that no dictionary has, right before a capital word (Hänsels Finger,
+    // Harrys Brille), whose spelling without -s is a name: the card of that name (as Hansens → Hans, which the record lists).
+    async function nameGenitive(word, context, result) {
+      if ((result?.candidates || []).length || !/^\p{Lu}\p{Ll}+[^s]s$/u.test(String(word)) || !Number.isInteger(context?.tokenOffset)) return result;
+      const sentence = String(context.sentence || ""), at = context.tokenOffset;
+      if (sentence.slice(at, at + word.length) !== word) return result;
+      // (the next word is a noun — Harrys Brille, Hänsels Finger; not a second name: Jules Koundé, Rubens Barrichello, Phillips Academy)
+      const next = /^[ \t]+(\p{Lu}[\p{L}\p{M}]*)/u.exec(sentence.slice(at + word.length));
+      if (!next) return result;
+      let noun = (forms.get(norm(next[1])) || []).some(e => e.type === "Nomen");
+      if (!noun) try { noun = (await lexicalLookup(next[1],'nameGenitive')).some(g => !g.unresolved && g.pos === "noun"); } catch (_) { noun = false; }
+      if (!noun) return result;
+      const base = word.slice(0, -1);
+      let read = null;
+      try { read = await resolveFollowingReferenceOnce(base, {...context, sentence:sentence.slice(0, at) + base + sentence.slice(at + word.length)}); } catch (_) { return result; }
+      const card = read?.selected;
+      if (!card || !(card.pos === "name" || canonicalPos(card.pos) === "Name") || (read.candidates || []).length !== 1) return result;
+      return read;
     }
     async function resolveFollowingReferenceOnce(word, context, oldSpellingTarget = null) {
       if (oldSpellingTarget) return readAs(word, context, oldSpellingTarget, null);
