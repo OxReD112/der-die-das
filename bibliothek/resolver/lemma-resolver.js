@@ -4878,9 +4878,15 @@
         const ownOther = /^\p{Ll}/u.test(tokens[i][0]) && (forms.get(norm(tokens[i][0])) || []).some(e => !["Verb","Nomen"].includes(e.type));
         // (advisor 07.11: also after one opening adverb — Nun komm nur mit, Nun hör mal zu, So gib ihn her, Nun zieh mich … hinauf)
         const gapBeforeAdverb = i > 1 ? sentence.slice(tokens[i-2].index + tokens[i-2][0].length, tokens[i-1].index) : "";
-        const adverbOpening = i > 0 && /^(?:nun|so|dann|jetzt|also|doch|bitte|na)$/u.test(norm(tokens[i-1][0])) && /^\s+$/u.test(gapBefore) &&
+        // (links chat, TODO item 87, advisor 12.11: aber opens it too — Aber schau nach!; and a fronted object — das / dies / den / dem,
+        // first in its part — before a form that is only an imperative: Das mach mir nach!, das tu mir nach; not Das mach ich nach —
+        // the subject after it, nor macht / mache — also indicative forms, which the imperative pairs never add)
+        const adverbOpening = i > 0 && /^(?:nun|so|dann|jetzt|also|doch|bitte|na|aber)$/u.test(norm(tokens[i-1][0])) && /^\s+$/u.test(gapBefore) &&
           (i === 1 || /[.,;:!?»«"“”„(–—]/u.test(gapBeforeAdverb)) && !["du","sie","es","ihr"].includes(norm(tokens[i+1]?.[0] ?? ""));
-        const clauseOpening = (i === 0 || /[.,;:!?»«"“”„(–—]/u.test(gapBefore) || ["und","oder"].includes(norm(tokens[i-1][0])) || adverbOpening) && !ownOther &&
+        const objectOpening = i > 0 && /^(?:das|dies|den|dem)$/u.test(norm(tokens[i-1][0])) && /^\s+$/u.test(gapBefore) &&
+          (i === 1 || /[.,;:!?»«"“”„(–—]/u.test(gapBeforeAdverb)) && /^\p{Ll}/u.test(tokens[i][0]) &&
+          !["ich","du","er","sie","es","wir","ihr","man"].includes(norm(tokens[i+1]?.[0] ?? ""));
+        const clauseOpening = (i === 0 || /[.,;:!?»«"“”„(–—]/u.test(gapBefore) || ["und","oder"].includes(norm(tokens[i-1][0])) || adverbOpening || objectOpening) && !ownOther &&
           !["ich","er","wir","man"].includes(norm(tokens[i+1]?.[0] ?? ""));
         // (a direction particle stays one although it is also an adjective: Komm rein! — rein «чистый»)
         const imperativeParticle = prefix => (DIRECTION_PARTICLE.test(prefix) || !(forms.get(prefix) || []).some(e => e.type === "Adjektiv" && norm(e.word) === prefix)) && !SHORT_PRONOMINAL_ADVERB.test(prefix);
@@ -16507,6 +16513,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // only a lowercase verb: a capitalized word is a noun or an adjective (die Weile, das Seufzen, Vergnügt summend …)
       for (let k = a; k < b; k++) if (finite(k) && /^\p{Ll}/u.test(tokens[k][0])) { v = k; break; }
       if (v < 0) for (let k = a; k < b; k++) if (finiteAny(k) && /^\p{Ll}/u.test(tokens[k][0])) { v = k; break; }
+      // (links chat, TODO item 87, advisor 12.11: the imperative — the same assembly as the indicative (Er holt mich herunter): an
+      // imperative form first in its part, or after one opening word of the imperative part (aber, und, doch, also, nun, so, dann …) —
+      // heb mich herauf, nun hol mich herunter, streck deine Finger heraus; capitalized only first in its sentence or after a mark)
+      const IMPERATIVE_OPENERS = /^(?:aber|und|oder|doch|also|nun|so|dann|jetzt|bitte|na)$/u;
+      const imperativeRows = new Map();
+      if (v < 0) for (let k = a; k < Math.min(b, a + 2); k++) {
+        let rows = (verbAnalyses.get(norm(tokens[k][0])) || []).filter(x => x.kind === "imperative");
+        if (!rows.length) try { rows = (await tokenAnalyses(tokens[k][0].toLowerCase(), undefined, "separatedDirectional")).filter(x => x.kind === "imperative"); } catch (_) {}
+        imperativeRows.set(k, rows);
+      }
+      const imperativeAt = k => (imperativeRows.get(k) || []).length > 0 &&
+        (k === a || k === a + 1 && IMPERATIVE_OPENERS.test(norm(tokens[a][0]))) &&
+        (/^\p{Ll}/u.test(tokens[k][0]) || k === a && (k === 0 || /[.!?:;»«„“"–—]/u.test(gap(k - 1, k)))) &&
+        !/^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(norm(tokens[k + 1]?.[0] ?? ""));
+      let imperative = false;
+      if (v < 0) for (let k = a; k < Math.min(b, a + 2); k++) if (imperativeAt(k)) { v = k; imperative = true; break; }
       if (v < 0 || at !== v && at !== b) return result;
       // (review 04.11: a declined participle / adjective before a noun is no finite verb — traditionell überlieferte Verfahren,
       // einer weichen, feuchten Wiese … heraus)
@@ -16526,7 +16548,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const CIRCUM = {hinweg:/^(?:über|darüber)$/u, herum:/^(?:um|darum)$/u, hervor:/^(?:hinter|unter|dahinter|darunter)$/u, hinaus:/^(?:über|darüber)$/u};
       if (CIRCUM[P] && inPart.some(t => CIRCUM[P].test(t))) return result;
       const vForm = norm(tokens[v][0]);
-      const bases = [...new Set((analysesOf.get(v) || []).filter(x => x.kind === "finite").map(x => norm(x.base)))];
+      const bases = [...new Set((imperative ? imperativeRows.get(v) || [] : analysesOf.get(v) || []).filter(x => x.kind === (imperative ? "imperative" : "finite")).map(x => norm(x.base)))];
       if (!bases.length || bases.some(x => /^(?:sein|haben|werden|können|müssen|dürfen|sollen|wollen|mögen|möchten|lassen)$/u.test(x))) return result;
       // a chain in the part (ist … hinausgeeilt is the joined form) — only the simple finite verb
       if (tokens.slice(a, b + 1).some((t, i) => a + i !== v && (verbAnalyses.get(norm(t[0])) || []).some(x => ["participle","infinitive"].includes(x.kind)) && /^\p{Ll}/u.test(t[0]) && a + i !== b)) return result;
@@ -16545,7 +16567,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if ((lemmas.get(whole) || []).length || verbAnalyses.has(whole)) return result;
         if (fallback.hasRecord && await fallback.hasRecord(whole)) return result;
       }
-      const joined = P + vForm;
+      // (an imperative form is no part of a joined form — herunterhol: the joined infinitive, the tense set to Imperativ below)
+      const ownBase = imperative ? norm((imperativeRows.get(v) || []).find(x => !x.prefix && !x.detached)?.base || "") : "";
+      if (imperative && !/n$/u.test(ownBase)) return result;
+      const joined = P + (imperative ? ownBase : vForm);
       const before = sentence.slice(0, tokens[v].index), middle = sentence.slice(tokens[v].index + tokens[v][0].length, tokens[b].index).replace(/\s+$/u, "");
       const shifted = before + joined + middle + sentence.slice(tokens[b].index + tokens[b][0].length);
       let r = null;

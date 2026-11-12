@@ -78,7 +78,7 @@
     });
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261112-wn-fix85-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261112-wn-fix85-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261112-wn-nachtun93-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261112-wn-cmp87-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261112-wn-old91-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261112-wn-old91-1"),

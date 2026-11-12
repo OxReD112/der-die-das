@@ -9573,6 +9573,59 @@
     }
   },
   {
+    "id": "verb-2762",
+    "infinitive": "nachtun",
+    "translation_ru": "делать так же, как кто-либо; подражать (кому-либо)",
+    "translation_en": "to do the same (as someone), to follow suit; to imitate, to copy",
+    "auxiliary": "haben",
+    "usage_note_ru": "Обычно es jdm. nachtun — сделать так же, как кто-либо: Tu es ihm nach! — Сделай, как он! Das tu mir erst einmal nach! — А ну-ка повтори! Сильный: tat nach, hat nachgetan. Синоним: nachmachen. Разг. также — добавить, подсыпать: noch etwas Salz nachtun.",
+    "usage_note_en": "Usually es jdm. nachtun — to do the same as someone: Tu es ihm nach! — Do as he does! Das tu mir erst einmal nach! — Let's see you do that! Strong: tat nach, hat nachgetan. Synonym: nachmachen. Colloquially also — to add (more): noch etwas Salz nachtun.",
+    "example_de": "Die Kleine sah ihre Schwester Rad fahren und wollte es ihr sofort nachtun.",
+    "example_cloze": "Die Kleine sah ihre Schwester Rad fahren und wollte es ihr sofort {{c1::nachtun}}.",
+    "example_ru": "Малышка увидела, как сестра катается на велосипеде, и сразу захотела сделать так же.",
+    "example_en": "The little girl saw her sister riding a bike and immediately wanted to do the same.",
+    "perfect_form": "haben nachgetan",
+    "forms": {
+      "Präsens": {
+        "ich": "tue nach",
+        "du": "tust nach",
+        "er/sie/es": "tut nach",
+        "wir": "tun nach",
+        "ihr": "tut nach",
+        "sie": "tun nach"
+      },
+      "Präteritum": {
+        "ich": "tat nach",
+        "du": "tatest nach",
+        "er/sie/es": "tat nach",
+        "wir": "taten nach",
+        "ihr": "tatet nach",
+        "sie": "taten nach"
+      },
+      "Konjunktiv II": {
+        "ich": "täte nach",
+        "du": "tätest nach",
+        "er/sie/es": "täte nach",
+        "wir": "täten nach",
+        "ihr": "tätet nach",
+        "sie": "täten nach"
+      },
+      "Imperativ": {
+        "du": "Tu nach!",
+        "ihr": "Tut nach!",
+        "Sie": "Tun Sie nach!"
+      }
+    },
+    "separable_prefix": "nach",
+    "complements": [
+      {
+        "pattern": "Dativ + Akkusativ (es / das)",
+        "note_ru": "делать (это) так же, как кто-либо",
+        "note_en": "to do (it) the same as someone"
+      }
+    ]
+  },
+  {
     "id": "verb-195",
     "infinitive": "üben",
     "translation_ru": "упражняться; тренировать",
@@ -13327,6 +13380,52 @@
         "du": "Lad herunter!",
         "ihr": "Ladet herunter!",
         "Sie": "Laden Sie herunter!"
+      }
+    },
+    "separable_prefix": "herunter"
+  },
+  {
+    "id": "verb-2764",
+    "infinitive": "herunterführen",
+    "translation_ru": "вести (свести) вниз (к говорящему); спускаться (о дороге, тропе)",
+    "translation_en": "to lead down (towards the speaker); to lead down, descend (of a path)",
+    "auxiliary": "haben",
+    "usage_note_ru": "herunter — вниз, к говорящему; от говорящего вниз — hinunterführen. О дороге: Ein schmaler Pfad führt zum See herunter. — К озеру спускается узкая тропинка. Слабый: führte herunter, hat heruntergeführt.",
+    "usage_note_en": "herunter — down, towards the speaker; away from the speaker — hinunterführen. Of a path: Ein schmaler Pfad führt zum See herunter. — A narrow path leads down to the lake. Weak: führte herunter, hat heruntergeführt.",
+    "example_de": "Der Bergführer führte die Gruppe sicher zu uns ins Tal herunter.",
+    "example_cloze": "Der Bergführer führte die Gruppe sicher zu uns ins Tal {{c1::herunter}}.",
+    "example_ru": "Проводник благополучно свёл группу к нам в долину.",
+    "example_en": "The guide led the group safely down to us in the valley.",
+    "perfect_form": "haben heruntergeführt",
+    "forms": {
+      "Präsens": {
+        "ich": "führe herunter",
+        "du": "führst herunter",
+        "er/sie/es": "führt herunter",
+        "wir": "führen herunter",
+        "ihr": "führt herunter",
+        "sie": "führen herunter"
+      },
+      "Präteritum": {
+        "ich": "führte herunter",
+        "du": "führtest herunter",
+        "er/sie/es": "führte herunter",
+        "wir": "führten herunter",
+        "ihr": "führtet herunter",
+        "sie": "führten herunter"
+      },
+      "Konjunktiv II": {
+        "ich": "führte herunter",
+        "du": "führtest herunter",
+        "er/sie/es": "führte herunter",
+        "wir": "führten herunter",
+        "ihr": "führtet herunter",
+        "sie": "führten herunter"
+      },
+      "Imperativ": {
+        "du": "Führ herunter!",
+        "ihr": "Führt herunter!",
+        "Sie": "Führen Sie herunter!"
       }
     },
     "separable_prefix": "herunter"
@@ -41853,6 +41952,52 @@
       }
     },
     "separable_prefix": "hin"
+  },
+  {
+    "id": "verb-2763",
+    "infinitive": "hersehen",
+    "translation_ru": "смотреть сюда (на говорящего)",
+    "translation_en": "to look here, to look this way",
+    "auxiliary": "haben",
+    "usage_note_ru": "her — к говорящему: Sieh her! — Посмотри сюда! Противоположное направление — hinsehen (смотреть туда). Сильный: sah her, hat hergesehen.",
+    "usage_note_en": "her — towards the speaker: Sieh her! — Look here! The opposite direction — hinsehen (to look there). Strong: sah her, hat hergesehen.",
+    "example_de": "Seht mal her, ich zeige euch einen Trick!",
+    "example_cloze": "Seht mal {{c1::her}}, ich zeige euch einen Trick!",
+    "example_ru": "Посмотрите-ка сюда, я покажу вам фокус!",
+    "example_en": "Look here, I'll show you a trick!",
+    "perfect_form": "haben hergesehen",
+    "forms": {
+      "Präsens": {
+        "ich": "sehe her",
+        "du": "siehst her",
+        "er/sie/es": "sieht her",
+        "wir": "sehen her",
+        "ihr": "seht her",
+        "sie": "sehen her"
+      },
+      "Präteritum": {
+        "ich": "sah her",
+        "du": "sahst her",
+        "er/sie/es": "sah her",
+        "wir": "sahen her",
+        "ihr": "saht her",
+        "sie": "sahen her"
+      },
+      "Konjunktiv II": {
+        "ich": "sähe her",
+        "du": "sähest her",
+        "er/sie/es": "sähe her",
+        "wir": "sähen her",
+        "ihr": "sähet her",
+        "sie": "sähen her"
+      },
+      "Imperativ": {
+        "du": "Sieh her!",
+        "ihr": "Seht her!",
+        "Sie": "Sehen Sie her!"
+      }
+    },
+    "separable_prefix": "her"
   },
   {
     "id": "verb-891",
