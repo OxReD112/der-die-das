@@ -7447,6 +7447,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       {id:'external-passive',produce:(word,context) => externalPassiveGroup(word,context),nounGroups:true},
       {id:'external-modal',produce:(word,context) => externalModalGroup(word,context),nounGroups:true},
       {id:'kommen-participle',produce:(word,context) => kommenParticipleGroup(word,context),nounGroups:true},
+      {id:'modal-direction',produce:(word,context,candidates) => modalDirectionGroup(word,context,candidates)},
       {id:'zu-infinitive',produce:(word,context) => zuInfinitiveGroup(word,context)},
       {id:'coordinated',produce:(word,context,candidates) => coordinatedGroup(word,context,candidates)}
     ].map(row => Object.freeze(row)));
@@ -9001,6 +9002,103 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return {id:"kommen-participle",lemma,...(tense ? {tense} : {}),roles:[head.e,...[role].flat()],
         note:{en:"kommen + Partizip II · the manner of coming (kam angerannt — came running)",ru:"kommen + Partizip II · способ движения (kam angerannt — прибежал)"},
         spans:[head.i,tail].sort((a,b)=>a-b).map(clause.span)};
+    }
+    // Links chat, TODO item 89 (advisor 12.11, claude/KOMMEN_PARTICIPLE_MODAL_DIRECTION_COUNT_2026-11-12_RU.md): a modal without an
+    // infinitive and with a direction — the verb of motion is left out: wollte heim, Die Kinder müssen fort, wollte er auf den Tisch, Wir
+    // müssen morgen nach London, dass Netanjahu ins Krankenhaus musste. The direction by its form: an adverb (heim, hinaus, hinein, fort,
+    // weg, zurück …), nach + a name / Hause, zu / zum / zur, in / an / auf / über / unter + an unambiguous accusative (ins, in den Wald,
+    // auf den Tisch, in die Bundesliga). Not: a dative after a two-case preposition (in der Politik), a case not seen (in München), an
+    // accusative object in the part (will nur das Herz davon, Willst du die Karte, will dich nicht mehr zur Gemahlin), another verb.
+    // (the shared DIRECTION_ADVERB list, WN batch 95 — and her: muss ein neuer Berg her)
+    const MODAL_DIRECTION_ADVERBS = {has:t => DIRECTION_ADVERB.test(t) || t === "her"};
+    const MODAL_PREPOSITION = /^(?:in|an|auf|über|unter|nach|zu|zum|zur|ins|ans|aufs|übers|unters|im|am|vom|beim|aus|von|mit|bei|durch|für|gegen|ohne|um|vor|hinter|neben|zwischen|seit|bis|bey)$/u;
+    const MODAL_PERSONAL = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|dies|das|was|wer|jemand|niemand|alles|nichts|etwas)$/u;
+    const MODAL_OBJECT_ONLY = /^(?:mich|dich|ihn|einen|den|(?:der|die|das|den|dem|des)selben?)$/u;
+    const MODAL_CLAUSE_OPENER = /^(?:als|weil|wenn|da|dass|daß|ob|wo|wohin|woher|aber|sondern|denn|so|und|oder|der|die|das|dem|den|welche[rnms]?|ich|du|er|sie|es|wir|ihr|man|was|wie|damit|bevor|nachdem|während|um|indem|doch|dann|bis|sobald|seit|seitdem|obwohl|falls|sonst|ehe)$/u;
+    async function modalDirectionGroup(word, context, candidates = []) {
+      const clause = verbalClause(word,context,'modalDirectionGroup',clauseBoundaries.verbGroup);
+      if (!clause) return null;
+      // (den / meinen … + a noun in -n / -s only the external dictionary knows: its number first — in den Autos, in den Bus)
+      await warmPhraseNouns(context.sentence);
+      const {tokens,selected,start,end,indices} = clause, matches = clause.verbs;
+      const finiteTenses = (e,i) => ["Präsens","Präteritum","Konjunktiv II",...konj1At(tokens,i)].filter(tense => clause.finiteIn(e,i,tense));
+      const heads = indices.flatMap(i => matches(i).filter(e => MODAL_VERB_SET.has(e.word) && finiteTenses(e,i).length).map(e => ({i,e})));
+      if (new Set(heads.map(h => h.i)).size !== 1 || selected !== heads[0].i) return null;
+      const head = heads[0], w = i => norm(tokens[i][0]);
+      // a separable modal found for the tap (fortmüssen, hinauswollen, mitdürfen — Darf mein Hund mit in den Kölner Zoo?) is that verb
+      if ((candidates || []).some(c => norm(c.lemma) !== head.e.word && norm(c.lemma).endsWith(head.e.word) && canonicalPos(c.pos) === "Verb")) return null;
+      // no other verb in the part (the infinitive of the modal: its own group above)
+      if (indices.some(i => i !== head.i && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i) &&
+        !MODAL_DIRECTION_ADVERBS.has(w(i)) && !(i > start && MODAL_PREPOSITION.test(w(i-1))))) return null;
+      // nor up to the end of the clause after the modal (the part may stop at a comma, a bracket or a quote before its infinitive:
+      // sollten … zur Gewinnung von Trink - und Brauchwasser … befinden, kann auf eine solide Ausbildung in Ringen, Jiu Jitsu …
+      // zurückgreifen, können auch zum Gratinieren oder, zu Klößchen geformt, … verwendet werden): the clause ends at . ! ? ; : – or
+      // at a comma before a word that opens a new clause (als, weil, der, wir …)
+      const sentence = String(context.sentence || "");
+      const gapAfter = i => sentence.slice(tokens[i].index + tokens[i][0].length, tokens[i+1] ? tokens[i+1].index : sentence.length);
+      // (a word unknown to the dictionaries ending in -en last before the break or the modal is an infinitive too: zum Ausgleich
+      // durchrutschen sollte)
+      const ends = i => i + 1 >= tokens.length || /[.!?;:,–—]/u.test(gapAfter(i));
+      const verbLike = (i, last) => { const t = norm(tokens[i][0]), analyses = verbAnalyses.get(t) || [];
+        return /^\p{Ll}/u.test(tokens[i][0]) && (analyses.some(a => a.kind === "infinitive" || a.kind === "participle") ||
+          last && !analyses.length && !(forms.get(t) || []).length && /(?:en|eln|ern)$/u.test(t) && t.length > 5); };
+      if (head.i > start && verbLike(head.i - 1, true)) return null;
+      // (zu right before the modal: a zu-infinitive, not the finite verb — zu ihnen hindurchfallen zu können, Potter)
+      if (head.i > 0 && w(head.i - 1) === "zu") return null;
+      for (let i = head.i; i + 1 < tokens.length; i++) {
+        const gap = gapAfter(i), next = norm(tokens[i+1][0]);
+        const nextAnalyses = verbAnalyses.get(next) || [];
+        // (a comma before a finite verb opens the next clause too: fort kann, hat mich …; ins Stadion kann, muss …)
+        if (/[.!?;:–—]/u.test(gap) || /,/u.test(gap) && (MODAL_CLAUSE_OPENER.test(next) ||
+          nextAnalyses.length && !nextAnalyses.some(a => a.kind === "infinitive" || a.kind === "participle"))) break;
+        if (verbLike(i + 1, ends(i + 1))) return null;
+      }
+      if (indices.some(i => reflexivePronouns.has(w(i)) && w(i) === "sich")) return null;
+      const rest = indices.filter(i => i !== head.i);
+      const nominal = i => /^\p{Lu}/u.test(tokens[i][0]) && (clause.nounToken(i) || i > start);
+      // walk the part: prepositional groups (up to their noun / pronoun) and the noun phrases outside them
+      let direction = null, outside = 0, objectOnly = false;
+      for (let k = 0; k < rest.length; k++) {
+        const i = rest[k], t = w(i);
+        if (MODAL_PREPOSITION.test(t)) {
+          let j = k + 1, det = null;
+          while (j < rest.length && !nominal(rest[j]) && !MODAL_PERSONAL.test(w(rest[j])) && !MODAL_PREPOSITION.test(w(rest[j])) && j - k < 4) { if (det === null) det = w(rest[j]); j++; }
+          const headWord = j < rest.length ? rest[j] : null;
+          if (headWord !== null && !MODAL_PREPOSITION.test(w(headWord))) {
+            const noun = tokens[headWord][0];
+            // (the case by the shared prepositionPhraseCase, as the card choice of the motion twins — WN batch 95)
+            const accusative = /^(?:zu|zum|zur)$/u.test(t) && !DIRECTION_ZU_IDIOM.test(norm(noun)) || prepositionPhraseCase(tokens,i,end) === "Akkusativ";
+            // (nach + a name or Hause: not nach Einschätzung «по оценке», nach Abs. — a card noun / an abbreviation)
+            const nach = t === "nach" && det === null && /^\p{Lu}/u.test(noun) && (norm(noun) === "hause" ||
+              !(forms.get(norm(noun)) || []).some(e => e.type === "Nomen") && !(noun.length <= 4 && /^\s*\./u.test(gapAfter(headWord))));
+            if (!direction && (accusative || nach)) direction = [i, headWord];
+            // (a name of several words: zur Frau Königin; a genitive of the noun: aus dem Haus der Weisheit)
+            while (j + 1 < rest.length && nominal(rest[j+1]) && rest[j+1] === rest[j] + 1) j++;
+            while (j + 2 < rest.length && /^(?:des|der)$/u.test(w(rest[j+1])) && nominal(rest[j+2])) j += 2;
+            k = j;
+          }
+          continue;
+        }
+        if (MODAL_DIRECTION_ADVERBS.has(t) && (t !== "davon" || directionAdverbAt(tokens,i,start,end))) {
+          // an own card of the adverb with the modal (fortmüssen, hinauswollen «хотеть выйти») is that verb: no group
+          if ((lemmas.get(t + head.e.word) || []).some(e => e.type === "Verb")) return null;
+          if (!direction) direction = [i]; continue; }
+        if (MODAL_OBJECT_ONLY.test(t)) objectOnly = true;
+        if (DETERMINER_WORD.test(t) || /^(?:der|die|das|den|dem|des)selbe[nmrs]?$/u.test(t) || clause.possessiveBeforeNoun(i)) {
+          outside++;
+          // the rest of the phrase up to its noun
+          while (k + 1 < rest.length && (nominal(rest[k+1]) || /(?:e|en|er|es|em)$/u.test(w(rest[k+1])) && !DETERMINER_WORD.test(w(rest[k+1]))) &&
+            !MODAL_PREPOSITION.test(w(rest[k+1])) && !MODAL_DIRECTION_ADVERBS.has(w(rest[k+1])) && !MODAL_PERSONAL.test(w(rest[k+1]))) { k++; if (nominal(rest[k])) break; }
+          continue;
+        }
+        if (MODAL_PERSONAL.test(t)) { outside++; continue; }
+        if (nominal(i)) outside++;
+      }
+      if (!direction || objectOnly || outside > 1) return null;
+      const tense = finiteTenses(head.e,head.i).filter(t => t !== "Präsens").join(" / ") || null;
+      return {id:"modal-direction",lemma:head.e.word,...(tense ? {tense} : {}),roles:[head.e],
+        note:{en:"modal without an infinitive · verb of motion left out",ru:"модальный без инфинитива · глагол движения опущен"},
+        spans:[head.i,...direction].sort((a,b)=>a-b).map(clause.span)};
     }
     // G15 step 4b (16.10.2026): a second participle / infinitive after «und /
     // oder» shares the auxiliary of the pair before it (hat mich … gerufen und

@@ -504,6 +504,9 @@
       // (links chat, TODO item 88, advisor 12.11) kommen + Partizip II of motion — kam angerannt «прибежал»: the tense on kommen as in a
       // simple group, «kommen + Partizip II» on the participle
       case 'kommen-participle': return {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'kommen + Partizip II' : `kommen + Partizip II mit ${name}`}`], role:null, spans};
+      // (links chat, TODO item 89, advisor 12.11) a modal without an infinitive + a direction: wollte heim «Präteritum / Konjunktiv II ·
+      // глагол движения опущен»
+      case 'modal-direction': return {marks:[`${k.tense ? k.tense + ' · ' : ''}${language === 'ru' ? 'глагол движения опущен' : 'verb of motion left out'}`], role:null, spans};
       // zu + infinitive (4.8): zu is the Infinitivpartikel; the verb keeps a plain Verb line.
       case 'zu-infinitive': return {marks:[], role:own === 'zu' ? 'infinitiveParticle' : null, spans};
       // um / ohne / statt … zu: the opener keeps its conjunction card (heading, Konjunktion, meaning).
