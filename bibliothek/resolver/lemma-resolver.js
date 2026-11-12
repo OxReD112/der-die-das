@@ -193,9 +193,10 @@
   const NUMERAL_SERIES_JOINERS = ["oder","bis","und"];
   // Coordinating conjunctions that end the clause of a recorded expression.
   const CLAUSE_COORDINATORS = ["und","oder","aber","denn","sondern"];
-  // One opening word of an imperative part (links chat item 87, 24056a05; advisor 12.11: one list) — the separated-particle assembly of
-  // the imperative (nun hol mich herunter) and the implicit subject of a reflexive imperative (5а.2: so stellt Euch hin) share it.
-  const IMPERATIVE_OPENER_WORDS = /^(?:aber|und|oder|doch|also|nun|so|dann|jetzt|bitte|na)$/u;
+  // One opening word of an imperative part (advisor 12.11: one list) — the position rule of the imperative (Grimm item 1, 11.11: so geh,
+  // nun trag, da nimm), the separated-particle assembly of the imperative (links chat item 87: nun hol mich herunter) and the implicit
+  // subject of a reflexive imperative (5а.2: so stellt Euch hin) share it.
+  const IMPERATIVE_OPENER_WORDS = /^(?:so|nun|jetzt|da|dann|also|doch|bitte|ach|ja|nein|oh|o|nur|endlich|drum|und|oder|aber|denn|sondern|na)$/u;
   // Batch 8 — prepositions and particles.
   // als / wie of a comparison: after a predicate the clause goes on (… genutzt als …, so groß wie …); between the parts of
   // a verb group it is no group (das Gleiche wie Truppen … zu führen).
@@ -14858,7 +14859,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // can be its subject — a pronoun in the nominative, a determiner, nichts / alles …, a capital word (Euch / Eurer … aside), a
         // number; a group after a preposition is no subject (bleibt bei mir, geht in den Wald, seid auf eurer Hut vor dem Wolf).
         // No «?» at the end of the sentence.
-        const IMPERATIVE_OPENERS = /^(?:so|nun|jetzt|da|dann|also|doch|bitte|ach|ja|nein|oh|o|nur|endlich|drum|und|oder|aber|denn|sondern)$/u;
+        const IMPERATIVE_OPENERS = IMPERATIVE_OPENER_WORDS;
         const NOMINATIVE_WORDS = /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|ein|eine|kein|keine|mein|meine|dein|deine|sein|seine|ihre|unser|unsere|euer|eure|dieser|diese|dieses|jener|jene|jenes|jeder|jede|jedes|alle|alles|viele|einige|manche|welche|solche|beide|nichts|etwas|jemand|niemand|einer|keiner|was|wer|wenig|genug|mehr|dies|allerlei|vieles|manches|einiges|beides|anderes|folgendes|keins|eins)$/u;
         const IMPERATIVE_CAPITAL_OBJECTS = /^(?:Euch|Eure|Euer|Eurem|Euren|Eurer|Eures|Ihnen|Dir|Dich|Mir|Mich)$/u;
         const IMPERATIVE_SUBORDINATORS = /^(?:dass|daß|ob|wenn|weil|als|wer|was|wie|wo|wann|warum|obwohl|obgleich|nachdem|bevor|ehe|bis|seit|seitdem|sobald|solange|während|damit|falls|sofern|indem|je|der|die|das|dem|den|deren|dessen|welche|welcher|welches)$/u;
