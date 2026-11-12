@@ -449,6 +449,8 @@
         else if (k.modal) marks.push(`Modal mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
         // G15 (19.10.2026): Futur I / Konjunktiv II with werden keep the tense, as Perfekt does (wird sich … abschwächen).
         else if (/^(?:Futur I|Konjunktiv II)/u.test(k.tense || '')) marks.push(`${k.tense} mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
+        // (links chat п. 10, advisor 12.11: haben / sein + zu over the reflexive zu-infinitive — hat sich … zu beteiligen «Reflexiv · haben + zu»)
+        else if (k.zuGroup) marks.push(`${k.zuGroup.tense ? k.zuGroup.tense + ' · ' : ''}${k.zuGroup.id === 'haben-zu' ? 'haben + zu' : 'sein + zu'}`);
         if (k.complement?.pattern) marks.push(k.complement.pattern);
         return {marks, role:null, spans};
       }

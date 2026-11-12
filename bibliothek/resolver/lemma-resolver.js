@@ -3577,8 +3577,14 @@
             // (the tentative attachment of a modal + infinitive + lassen bracket stays — it carries no card of its own)
             if(a.base==='lassen'&&!(a.entry&&reflexiveEntries.has(a.entry))&&!unresolvedLassen)continue;
             if(attempt)attempt.stage='linked';
+            // (links chat п. 10, advisor 12.11: the zu-infinitive of a reflexive verb under haben / sein + zu keeps that group — hat sich an
+            // diesen Kosten zu beteiligen «Reflexiv · haben + zu», hätten wir uns nach ihm zu richten; the group is the one zuGroup proves)
+            const zuHeadGroup=tense==='zu-Infinitiv'&&controller!==v&&['haben','sein'].includes(control.base)?
+              (()=>{const g=zuGroup(tokens[v][0],{sentence,tokenOffset:tokens[v].index});
+                return g&&['haben-zu','sein-zu'].includes(g.id)&&g.spans.some(sp=>sp.start===tokens[controller].index)?g:null;})():null;
             relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(unresolvedLassen?{attachmentOnly:true}:{}),...(reflexiveAmbiguity?{interpretation:'reciprocal'}:{}),
-              note:reflexiveAmbiguity?{ru:'здесь: друг друга',en:'here: each other'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans,tense,...(controller!==v&&modalLemmas.has(control.base)&&tense!=='zu-Infinitiv'?{modal:control.base}:{}),reflexiveCase:caseName,...(dativeReading?{freeDative:true}:{}),...(objectGroup&&!dativeReading?{objectGroup:true}:{}),
+              note:reflexiveAmbiguity?{ru:'здесь: друг друга',en:'here: each other'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans:zuHeadGroup?[...spans,tokenSpan(controller)].sort((x,y)=>x.start-y.start):spans,tense,...(controller!==v&&modalLemmas.has(control.base)&&tense!=='zu-Infinitiv'?{modal:control.base}:{}),
+              ...(zuHeadGroup?{zuGroup:{id:zuHeadGroup.id,...(zuHeadGroup.tense?{tense:zuHeadGroup.tense}:{})}}:{}),reflexiveCase:caseName,...(dativeReading?{freeDative:true}:{}),...(objectGroup&&!dativeReading?{objectGroup:true}:{}),
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
               ...(a.detached?{prefix:tokenSpan(componentIndices.find(i=>i!==v&&words[i]===a.prefix))}:{}),
               subject:subject.index===null?null:{text:tokens[subject.index][0],start:tokens[subject.index].index,end:tokens[subject.index].index+tokens[subject.index][0].length},
@@ -5920,7 +5926,11 @@
       const clause = verbalClause(word,context,'zuGroup',clauseBoundaries.zu,gap);
       if (!clause) return null;
       const {tokens,selected,start,end,indices,matches,verbs,finiteIn,possessiveBeforeNoun} = clause;
-      const finite = (e,i) => ["Präsens","Präteritum","Konjunktiv II"].some(t=>finiteIn(e,i,t));
+      // (links chat п. 10, advisor 12.11: the Konjunktiv I of sein heads the group too — daran sei in Zukunft zu arbeiten; the card of sein
+      // has no Konjunktiv I table, so the forms of SEIN_FINITE are read as in konj1SeinWorden; not the polite imperative seien Sie; habe is
+      // already the Präsens form)
+      const konj1Sein = (e,i) => e.word === "sein" && /^\p{Ll}/u.test(tokens[i][0]) && SEIN_FINITE.konjunktiv1.includes(norm(tokens[i][0])) && tokens[i+1]?.[0] !== "Sie";
+      const finite = (e,i) => ["Präsens","Präteritum","Konjunktiv II","Konjunktiv I"].some(t=>finiteIn(e,i,t)) || konj1Sein(e,i);
       // (L23, train check 24.10: a modal in Konjunktiv I after und is the next predicate, as before: habe … zu schweigen und könne …)
       // (links chat, item 4, 03.11: only und / oder right after the part — after a comma it opens another part: daß es nicht mehr zu
       // ändern war, und suchte …; was sie zu tun hatten, und hingen …)
@@ -5945,7 +5955,11 @@
         if (tail <= start || tail === head.i || !/^[a-zäöü]/u.test(tokens[tail][0])) continue;
         const joined = zuForms.get(norm(tokens[tail][0])) || [];
         const marker = norm(tokens[tail-1]?.[0]) === "zu" && tail-1 !== head.i ? tail-1 : null;
-        const main = joined.length ? joined : marker !== null ? verbs(tail).filter(e=>norm(e.word) === norm(tokens[tail][0])) : [];
+        const plain = joined.length ? joined : marker !== null ? verbs(tail).filter(e=>norm(e.word) === norm(tokens[tail][0])) : [];
+        // (links chat п. 10, advisor 12.11: a verb with only a reflexive card — sich beteiligen — and its pronoun in the part: hat sich an
+        // diesen Kosten zu beteiligen)
+        const main = plain.length || marker === null || !indices.some(i=>reflexivePronouns.has(norm(tokens[i][0]))) ? plain :
+          (reflexiveForms.get(norm(tokens[tail][0])) || []).filter(row => row.tense === "Infinitiv").map(row => row.entry);
         if (!main.length || new Set(main.map(e=>norm(e.word))).size !== 1) continue;
         // (links chat 09.11, Mac run w103: sein + zu sein is no sein + zu group — du bist nicht mehr würdig im Himmel zu sein: the adjective
         // governs zu sein; haben + zu sein stays — Du hast still zu sein)
@@ -5983,7 +5997,9 @@
           ((beforeZu < 0 || i === beforeZu) && matches(i).some(e=>e.type === "Adjektiv" && norm(e.word) === norm(tokens[i][0])) || SEIN_ZU_GOVERNING_ADJECTIVES.has(norm(tokens[i][0]))))) continue;
         if (other.some(i=>clause.competing(i,true) && !possessiveBeforeNoun(i) && !clause.nounToken(i))) continue;
         // A comparison inside (das Gleiche wie Truppen … zu führen) is not sein / haben + zu.
-        if (other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && COMPARISON_PARTICLES.includes(norm(tokens[i][0])))) continue;
+        if (other.some(i=>i > Math.min(head.i,tail) && i < Math.max(head.i,tail) && COMPARISON_PARTICLES.includes(norm(tokens[i][0])) &&
+          // (links chat п. 10, advisor 12.11: als + a noun phrase is no comparison — war … als Außenläufer zu finden, ist … als Fresko zu sehen)
+          !alsNounPhrase(tokens,i,tail))) continue;
         const modal = lexical.word === "haben";
         const tense = participleIndex !== null ? finiteIn(head.e,head.i,"Präteritum") ? "Plusquamperfekt · " : "Perfekt · " : "";
         // A recognised connection does not establish obligation (e.g. nichts zu tun).
@@ -5991,7 +6007,7 @@
           {en:`${tense}sein + zu · possibility / necessity`,ru:`${tense}sein + zu · возможность / необходимость`};
         // (#15, tense check 05.11, advisor 06.11: the group names its tense as the passive does — war … zu sehen «Präteritum»,
         // wäre … anzufangen «Konjunktiv II», hat … zu tun gehabt «Perfekt»; Präsens has no mark)
-        const simple = ["Präsens","Präteritum","Konjunktiv II"].filter(t=>finiteIn(head.e,head.i,t));
+        const simple = ["Präsens","Präteritum","Konjunktiv II","Konjunktiv I"].filter(t=>finiteIn(head.e,head.i,t) || t === "Konjunktiv I" && konj1Sein(head.e,head.i));
         const groupTense = participleIndex !== null ? tense.replace(/ · $/u, "") : simple.length === 1 && simple[0] !== "Präsens" ? simple[0] : null;
         result.push({id:modal ? "haben-zu" : "sein-zu",note,lemma:main[0].word,...(groupTense ? {tense:groupTense} : {}),
           meaningLemma:lexical.word,meaning:modal || selected !== (participleIndex ?? head.i) ? null : {en:"can / must be",ru:"можно / нужно"},
@@ -6000,6 +6016,11 @@
           // Elefanten anzutreffen; it is a role only on the infinitive itself)
           marker:selected === marker,main:main[0],roles:[head.e,lexical,...main.filter(e => !e.importedSeparable || selected === tail)],
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(clause.span)});
+        // (links chat п. 10, advisor 12.11: as verbGroup — reflexiveGroupLemma names the group after a confirmed reflexive card of the
+        // infinitive: hat sich an diesen Kosten zu beteiligen «haben + zu mit sich beteiligen»)
+        Object.defineProperty(result.at(-1),'lexical',{value:{offset:tokens[tail].index,word:tokens[tail][0],
+          reflexive:(reflexiveForms.get(norm(tokens[tail][0])) || []).filter(row => row.tense === "Infinitiv").map(row => row.entry)
+            .filter(e => norm(e.word).replace(/^sich\s+/u,"") === norm(main[0].word))},enumerable:false});
       }
       return result.length === 1 ? result[0] : null;
     }
@@ -7344,7 +7365,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const constructionProducers = Object.freeze([
       {id:'future-perfect',produce:(word,context) => futurePerfectGroup(word,context),nounGroups:true},
       {id:'lassen',produce:(word,context,candidates) => lassenGroup(word,context,candidates)},
-      {id:'zu',produce:(word,context) => zuGroup(word,context),nounGroups:true},
+      {id:'zu',produce:(word,context) => reflexiveGroupLemma(zuGroup(word,context),context),nounGroups:true},
       {id:'werden',produce:(word,context) => werdenGroup(word,context),nounGroups:true},
       {id:'verb-group',produce:(word,context) => reflexiveGroupLemma(verbGroup(word,context),context),nounGroups:true},
       {id:'external-perfect',produce:(word,context) => externalPerfectGroup(word,context),nounGroups:true},
