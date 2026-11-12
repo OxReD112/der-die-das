@@ -573,6 +573,23 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .reading-text p.book-align-right {
   text-align: right;
 }
+/* Emphasis set by the EPUB (epub-import.js paragraphLayout.marks, 12.11.2026): italic, bold, letter-spaced
+   (German «gesperrt»), small caps, small type. Colour, highlights and the active word come from .reading-word as before. */
+.reading-text .book-i {
+  font-style: italic;
+}
+.reading-text .book-b {
+  font-weight: 700;
+}
+.reading-text .book-spaced {
+  letter-spacing: 0.12em;
+}
+.reading-text .book-sc {
+  font-variant: small-caps;
+}
+.reading-text .book-small {
+  font-size: 0.9em;
+}
 .reading-word {
   border-radius: 2px;
   cursor: pointer;

@@ -722,35 +722,48 @@
     }
 
   }
-  // Line breaks (12.11.2026, D16): paragraphLayout.lineBreaks are offsets of spaces that were <br> in the EPUB. The
-  // space stays in the text (textContent is the sentence the resolver reads) and a <br> follows it, so offsets,
-  // highlights and bookmarks are unchanged; a break that would fall inside a word button is skipped.
-  function appendWithBreaks(fragment, token, start, breaks) {
-    let from = 0;
-    for (const offset of breaks) {
-      const at = offset - start;
-      if (at < from || at >= token.length) continue;
-      fragment.append(document.createTextNode(token.slice(from, at + 1)), document.createElement("br"));
-      from = at + 1;
+  // Book layout beside the text (12.11.2026, D16 / D23): paragraphLayout.lineBreaks are offsets of spaces that were
+  // <br> in the EPUB — the space stays in the text (textContent is the sentence the resolver reads) and a <br> follows
+  // it; paragraphLayout.marks ({start, end, kind}) wrap their characters in <span class="book-mark book-<kind>">, also
+  // inside a word button (an emphasised part of a word). Offsets, highlights and bookmarks are unchanged; a break that
+  // would fall inside a word button is skipped.
+  const BOOK_MARK_KINDS = new Set(["i", "b", "spaced", "sc", "small"]);
+  function appendLaidOut(parent, token, start, marks, breaks) {
+    const end = start + token.length, cuts = new Set([0, token.length]);
+    const own = marks.filter(m => m.start < end && m.end > start);
+    for (const m of own) { if (m.start > start) cuts.add(m.start - start); if (m.end < end) cuts.add(m.end - start); }
+    for (const offset of breaks) if (offset >= start && offset < end && token[offset - start] === " ") cuts.add(offset - start + 1);
+    const points = [...cuts].sort((x, y) => x - y);
+    for (let i = 0; i + 1 < points.length; i++) {
+      const from = points[i], to = points[i + 1], text = token.slice(from, to);
+      const kinds = own.filter(m => m.start <= start + from && m.end >= start + to).map(m => m.kind);
+      if (kinds.length) {
+        const mark = document.createElement("span");
+        mark.className = ["book-mark", ...new Set(kinds)].map((k, j) => j ? `book-${k}` : k).join(" ");
+        mark.textContent = text;
+        parent.append(mark);
+      } else parent.append(document.createTextNode(text));
+      if (breaks.includes(start + to - 1) && token[to - 1] === " ") parent.append(document.createElement("br"));
     }
-    if (from < token.length) fragment.append(document.createTextNode(token.slice(from)));
   }
   function wrapParagraph(paragraph, layout = null) {
     const fragment = document.createDocumentFragment();
     const tokens = window.BibliothekLemmaResolver.readerSegments(paragraph);
     const breaks = Array.isArray(layout?.lineBreaks) ? layout.lineBreaks : [];
+    const marks = Array.isArray(layout?.marks) ? layout.marks.filter(m => BOOK_MARK_KINDS.has(m?.kind) && m.end > m.start) : [];
     let tokenOffset = 0;
     tokens.forEach(token => {
       if (/^[\p{L}\p{M}]/u.test(token)) {
         const span = document.createElement("span");
         span.className = "reading-word";
         span.dataset.tokenOffset = String(tokenOffset);
-        span.textContent = token;
+        if (marks.length) appendLaidOut(span, token, tokenOffset, marks, []);
+        else span.textContent = token;
         span.tabIndex = 0;
         span.setAttribute("role", "button");
         span.setAttribute("aria-label", `${token}, tap for translation`);
         fragment.append(span);
-      } else if (breaks.length) appendWithBreaks(fragment, token, tokenOffset, breaks);
+      } else if (breaks.length || marks.length) appendLaidOut(fragment, token, tokenOffset, marks, breaks);
       else fragment.append(document.createTextNode(token));
       tokenOffset += token.length;
     });

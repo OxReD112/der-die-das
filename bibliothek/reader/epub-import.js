@@ -35,80 +35,137 @@
     }
     return parts.join("/");
   }
-  // Layout beside the text (12.11.2026, D16): the paragraph strings stay exactly what clean() gave before, so the
-  // resolver, word offsets, bookmarks and highlights see no change. A chapter may carry paragraphLayout — one entry
-  // per paragraph, null or { lineBreaks: [offsets of the spaces that were <br>], align: "center" | "right" }.
-  function cleanWithBreaks(raw, breaks) {
-    // Same result as clean(raw); breaks are raw indices of "\n" written for <br>, returned as offsets in the result.
-    let text = "", last = 0, lineBreaks = [], bi = 0;
-    const runs = /\s+/g;
-    for (let m; (m = runs.exec(raw));) {
-      text += raw.slice(last, m.index);
-      const end = m.index + m[0].length, edge = m.index === 0 || end === raw.length;
-      let hit = false;
-      while (bi < breaks.length && breaks[bi] < end) { if (breaks[bi] >= m.index) hit = true; bi++; }
-      if (!edge) { if (hit) lineBreaks.push(text.length); text += " "; }
-      last = end;
+  // Layout beside the text (12.11.2026, D16 + D23 step 1): the paragraph strings stay exactly what clean() gave before,
+  // so the resolver, word offsets, bookmarks and highlights see no change. A chapter may carry paragraphLayout — one
+  // entry per paragraph, null or { lineBreaks: [offsets of the spaces that were <br>], align: "center" | "right",
+  // marks: [{ start, end, kind: "i" | "b" | "spaced" | "sc" | "small" }], langs: [{ start, end, lang }] }.
+  // Offsets are in the paragraph string; a mark never starts or ends on a space.
+  function cleanMapped(raw) {
+    // Same result as clean(raw), plus map[i] = offset in the result of raw position i (a whitespace run maps to its
+    // one space; trimmed edges map to the start / end of the result).
+    const map = new Array(raw.length + 1);
+    let text = "", first = 0, last = raw.length;
+    while (first < raw.length && /\s/.test(raw[first])) first++;
+    while (last > first && /\s/.test(raw[last - 1])) last--;
+    for (let i = 0; i < raw.length; i++) {
+      if (i < first) { map[i] = 0; continue; }
+      if (i >= last) { map[i] = text.length; continue; }
+      if (/\s/.test(raw[i])) { if (!/\s/.test(raw[i - 1])) text += " "; map[i] = text.length - 1; }
+      else { map[i] = text.length; text += raw[i]; }
     }
-    text += raw.slice(last);
-    return text === clean(raw) ? { text, lineBreaks } : { text: clean(raw), lineBreaks: [] };
+    map[raw.length] = text.length;
+    return text === clean(raw) ? { text, map } : null;
   }
-  function alignRules(css) {
+  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing"];
+  function declarations(body) {
+    const out = {};
+    for (const [, name, value] of String(body || "").matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/gi)) {
+      const key = name.toLowerCase();
+      if (STYLE_PROPERTIES.includes(key)) out[key] = value.replace(/!important/i, "").trim().toLowerCase();
+    }
+    return out;
+  }
+  function styleRules(css) {
     const rules = [];
     css = css.replace(/\/\*[\s\S]*?\*\//g, "")
       .replace(/@media([^{]*)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g, (_, query, body) => /screen|all/i.test(query) || !query.trim() ? body : "");
     for (const [, selectors, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-      const value = /(?:^|;)\s*text-align\s*:\s*([a-z-]+)/i.exec(body)?.[1]?.toLowerCase();
-      if (!value || selectors.trim().startsWith("@")) continue;
+      const props = declarations(body);
+      if (!Object.keys(props).length || selectors.trim().startsWith("@")) continue;
       for (const selector of selectors.split(",")) {
         const last = selector.trim().split(/[\s>+~]+/).pop() || "";
         if (last.includes(":") || last.includes("[")) continue;
         const classes = [...last.matchAll(/\.([\w-]+)/g)].map(match => match[1]);
-        if (classes.length) rules.push({ tag: /^[a-z][\w-]*/i.exec(last)?.[0].toLowerCase() || "", classes, value });
+        if (classes.length) rules.push({ tag: /^[a-z][\w-]*/i.exec(last)?.[0].toLowerCase() || "", classes, props });
       }
     }
     return rules;
   }
-  function ownAlign(node, rules) {
-    const inline = /(?:^|;)\s*text-align\s*:\s*([a-z-]+)/i.exec(node.getAttribute("style") || "")?.[1]?.toLowerCase();
-    if (inline) return inline;
+  function ownStyle(node, rules) {
+    // Class rules of the book (tag-only rules are ignored), then the inline style.
     const tag = node.localName.toLowerCase(), classes = new Set((node.getAttribute("class") || "").split(/\s+/).filter(Boolean));
-    let value = null;
-    if (classes.size) for (const rule of rules) if ((!rule.tag || rule.tag === tag) && rule.classes.every(name => classes.has(name))) value = rule.value;
-    return value;
+    const props = {};
+    if (classes.size) for (const rule of rules) if ((!rule.tag || rule.tag === tag) && rule.classes.every(name => classes.has(name))) Object.assign(props, rule.props);
+    return Object.assign(props, declarations(node.getAttribute("style")));
   }
-  function extractChapter(doc, rules = []) {
+  const ITALIC_TAGS = new Set(["em", "i", "cite", "dfn", "var"]), BOLD_TAGS = new Set(["b", "strong"]);
+  function inlineState(node, tag, props, outer) {
+    const state = { ...outer };
+    if (ITALIC_TAGS.has(tag)) state.i = true;
+    if (BOLD_TAGS.has(tag)) state.b = true;
+    if (tag === "small") state.small = true;
+    const style = props["font-style"], weight = props["font-weight"], variant = props["font-variant"], spacing = props["letter-spacing"];
+    if (style) state.i = /^(italic|oblique)/.test(style);
+    if (weight) state.b = /^(bold|bolder|[6-9]00)$/.test(weight);
+    if (variant) state.sc = /small-caps/.test(variant);
+    if (spacing) state.spaced = /^(?:\d*\.)?\d+(?:em|rem|ex|px|pt|ch)$/.test(spacing) && parseFloat(spacing) > 0;
+    const lang = node.getAttributeNS("http://www.w3.org/XML/1998/namespace", "lang") || node.getAttribute("xml:lang") || node.getAttribute("lang");
+    if (lang) state.lang = lang.toLowerCase();
+    return state;
+  }
+  const MARK_KINDS = ["i", "b", "spaced", "sc", "small"];
+  function rangesOf(segments, map, text, test, value) {
+    // Merge raw text segments that pass test into ranges of the cleaned text, trimmed to non-space ends.
+    const out = [];
+    for (const seg of segments) {
+      if (!test(seg.state)) continue;
+      let start = map[seg.start], end = map[seg.end];
+      while (start < end && text[start] === " ") start++;
+      while (end > start && text[end - 1] === " ") end--;
+      if (start >= end) continue;
+      const prev = out[out.length - 1], v = value(seg.state);
+      if (prev && prev.value === v && start <= prev.end + 1 && /^ ?$/.test(text.slice(prev.end, start))) prev.end = Math.max(prev.end, end);
+      else out.push({ start, end, value: v });
+    }
+    return out;
+  }
+  function extractChapter(doc, rules = [], bookLang = "") {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
     const paragraphs = [], paragraphKinds = [], paragraphLayout = [], anchors = Object.create(null);
+    const base = value => String(value || "").toLowerCase().split(/[-_]/)[0];
     let pendingKind = "p";
-    let pending = "", pendingBreaks = [], align = null;
+    let pending = "", pendingBreaks = [], segments = [], align = null, state = {};
     const flush = () => {
-      const { text, lineBreaks } = cleanWithBreaks(pending, pendingBreaks);
+      const mapped = cleanMapped(pending), text = mapped ? mapped.text : clean(pending);
       if (text) {
         paragraphs.push(text); paragraphKinds.push(pendingKind);
         const layout = {};
-        if (lineBreaks.length) layout.lineBreaks = lineBreaks;
+        if (mapped) {
+          const lineBreaks = [...new Set(pendingBreaks.map(i => mapped.map[i]).filter(at => text[at] === " " && at > 0 && at < text.length - 1))];
+          if (lineBreaks.length) layout.lineBreaks = lineBreaks;
+          const marks = [];
+          for (const kind of MARK_KINDS) for (const r of rangesOf(segments, mapped.map, text, s => s[kind], () => kind)) marks.push({ start: r.start, end: r.end, kind });
+          if (marks.length) layout.marks = marks.sort((x, y) => x.start - y.start || x.end - y.end);
+          const langs = rangesOf(segments, mapped.map, text, s => s.lang && base(s.lang) !== base(bookLang), s => s.lang).map(r => ({ start: r.start, end: r.end, lang: r.value }));
+          if (langs.length) layout.langs = langs;
+        }
         if (align === "center" || align === "right") layout.align = align;
         paragraphLayout.push(Object.keys(layout).length ? layout : null);
       }
-      pending = ""; pendingBreaks = []; pendingKind = "p";
+      pending = ""; pendingBreaks = []; segments = []; pendingKind = "p";
     };
     const blocks = new Set(["p", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre", "tr", "figure", "figcaption", "dl", "dt", "dd"]);
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
     function walk(node) {
-      if (node.nodeType === 3 || node.nodeType === 4) { pending += node.nodeValue; return; }
+      if (node.nodeType === 3 || node.nodeType === 4) {
+        const value = node.nodeValue;
+        if (value && (MARK_KINDS.some(kind => state[kind]) || state.lang)) segments.push({ start: pending.length, end: pending.length + value.length, state });
+        pending += value; return;
+      }
       if (node.nodeType !== 1) return;
       const tag = node.localName.toLowerCase();
       if (excluded.has(tag) || node.hasAttribute("hidden") || node.getAttribute("aria-hidden") === "true") return;
       if (tag === "br") { pendingBreaks.push(pending.length); pending += "\n"; return; }
-      const block = blocks.has(tag), outer = align;
-      if (block) { flush(); align = ownAlign(node, rules) || outer; }
+      const block = blocks.has(tag), outer = align, outerState = state, props = ownStyle(node, rules);
+      if (block) { flush(); align = props["text-align"] || outer; }
+      state = inlineState(node, tag, props, outerState);
       const anchor = node.getAttribute("id") || node.getAttribute("name");
       if (anchor) anchors[anchor] = paragraphs.length;
       if (/^h[1-6]$/.test(tag)) pendingKind = tag;
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
+      state = outerState;
       if (block) { flush(); align = outer; }
     }
     walk(body); flush();
@@ -214,25 +271,26 @@
         }
       }
     } catch (_) { /* Keep the standard cover when artwork is missing or damaged. */ }
-    // Book stylesheets are read only for text-align (centred verse, right-aligned signatures); a missing or broken
-    // stylesheet only loses the alignment.
+    // Book stylesheets are read only for alignment and inline emphasis (text-align, font-style, font-weight,
+    // font-variant, letter-spacing); a missing or broken stylesheet only loses that layout.
     const styleCache = new Map();
-    async function chapterAlignRules(doc, path) {
+    async function chapterStyleRules(doc, path) {
       const rules = [];
       for (const node of [...elements(doc, "link"), ...elements(doc, "style")]) {
-        if (node.localName === "style") { rules.push(...alignRules(node.textContent || "")); continue; }
+        if (node.localName === "style") { rules.push(...styleRules(node.textContent || "")); continue; }
         if (!/stylesheet/i.test(node.getAttribute("rel") || "") || !node.getAttribute("href")) continue;
         let cssPath;
         try { cssPath = resolvePath(path, node.getAttribute("href")); } catch (_) { continue; }
         if (!styleCache.has(cssPath)) {
           let parsed = [];
-          try { if (!encrypted.has(cssPath) && zip.file(cssPath)) parsed = alignRules(await read(cssPath)); } catch (_) { parsed = []; }
+          try { if (!encrypted.has(cssPath) && zip.file(cssPath)) parsed = styleRules(await read(cssPath)); } catch (_) { parsed = []; }
           styleCache.set(cssPath, parsed);
         }
         rules.push(...styleCache.get(cssPath));
       }
       return rules;
     }
+    const bookLang = clean(elements(pkg, "language")[0]?.textContent);
     const chapters = [];
     for (const ref of elements(spine, "itemref")) {
       const item = items.get(ref.getAttribute("idref"));
@@ -242,7 +300,7 @@
       if (ref.getAttribute("linear") === "no") continue;
       if (item.getAttribute("media-type") !== "application/xhtml+xml") fail("This EPUB contains an unsupported chapter format.");
       const doc = xml(await read(path));
-      const chapter = extractChapter(doc, await chapterAlignRules(doc, path));
+      const chapter = extractChapter(doc, await chapterStyleRules(doc, path), bookLang);
       if (chapter.paragraphs.length) chapters.push({ id: ref.getAttribute("idref"), href: path, title: chapter.title || `Chapter ${chapters.length + 1}`, paragraphs: chapter.paragraphs, paragraphKinds: chapter.paragraphKinds, anchors: chapter.anchors, ...(chapter.paragraphLayout ? { paragraphLayout: chapter.paragraphLayout } : {}) });
     }
     if (!chapters.length) fail("This EPUB contains no readable text.");
