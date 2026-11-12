@@ -810,7 +810,17 @@
     "example_en": "When does the film start?",
     "usage_note_ru": "Вопросительное слово. В косвенном вопросе глагол уходит в конец: Weißt du, wann der Film anfängt? Для «когда» в рассказе о прошлом — союзы als / wenn, не wann.",
     "usage_note_en": "Question word. In an indirect question the verb goes to the end: Weißt du, wann der Film anfängt? For “when” in statements, use the conjunctions als / wenn, not wann.",
-    "example_cloze": "{{c1::Wann}} fängt der Film an?"
+    "example_cloze": "{{c1::Wann}} fängt der Film an?",
+    "extra_meanings": [
+      {
+        "ru": "когда, если (= wenn)",
+        "en": "when, if (= wenn)",
+        "register": "veraltet",
+        "example_de": "Wann du Königin bist, brauchst du nicht mehr zu Fuß zu gehen.",
+        "example_ru": "Когда станешь королевой, тебе больше не придётся ходить пешком.",
+        "example_en": "When you are queen, you won't need to walk any more."
+      }
+    ]
   },
   {
     "id": "adverb-076",
@@ -882,6 +892,16 @@
       "In an indirect question and in a clause with wie the verb goes to the end: Ich weiß nicht, wie das geht. wie du willst — as you like.",
       "Equality: so … wie, genauso … wie. wie immer — as always.",
       "After a comparative use als: größer als. größer wie is heard in speech but is not standard."
+    ],
+    "extra_meanings": [
+      {
+        "ru": "когда (= als)",
+        "en": "when (= als)",
+        "register": "veraltend",
+        "example_de": "Wie es sah, daß sie ihm nichts schenken wollten, ging es zur Türe hinaus.",
+        "example_ru": "Когда она увидела, что ей ничего не хотят подарить, она вышла за дверь.",
+        "example_en": "When she saw that they would not give her anything, she went out of the door."
+      }
     ]
   },
   {
@@ -2394,7 +2414,17 @@
       "False friend: also ≠ English “also” (that's auch).",
       "With a comma — “well, so”, word order unchanged: Also, wo waren wir?"
     ],
-    "example_cloze": "Der Bus kommt nicht. {{c1::Also}} gehen wir zu Fuß."
+    "example_cloze": "Der Bus kommt nicht. {{c1::Also}} gehen wir zu Fuß.",
+    "extra_meanings": [
+      {
+        "ru": "так, таким образом",
+        "en": "thus, in this way",
+        "register": "veraltet",
+        "example_de": "Also geschah es.",
+        "example_ru": "Так и случилось.",
+        "example_en": "And so it happened."
+      }
+    ]
   },
   {
     "id": "adverb-215",

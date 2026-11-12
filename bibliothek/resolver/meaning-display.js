@@ -180,6 +180,26 @@
     if (candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return text.trim();
     return ownCard(candidate) ? fit(text).text : compact(text);
   }
+  // WN batch 91 (cards chat + advisor 12.11): old meanings of an own card (`extra_meanings` {ru, en, register}) are never in the
+  // short text; card(…, {all:true}) adds them at the end, so «ещё N значений» counts them and opens them (G57, the same cut as
+  // every other hidden meaning). The register is a usage label of the label set (veraltet / veraltend → «устар.» / «dated»,
+  // gehoben → «книжн.» / «formal»; none — no label); an English popup takes only the English value and label.
+  const EXTRA_REGISTER = {veraltet:{id:'dated', ru:'устар.', ruFull:'устаревшее', en:'dated', enFull:'dated'},
+    veraltend:{id:'dated', ru:'устар.', ruFull:'устаревающее', en:'dated', enFull:'dated'},
+    gehoben:{id:'literary', ru:'книжн.', ruFull:'книжное', en:'formal', enFull:'formal'}};
+  function extraMeanings(candidate, language) {
+    if (!ALL || !ownCard(candidate) || !Array.isArray(candidate.item.extra_meanings)) return [];
+    return candidate.item.extra_meanings.map(m => {
+      const text = String(m?.[language] || '').trim(), label = EXTRA_REGISTER[m?.register];
+      return text ? {labels:label ? [{short:label[language], full:label[`${language}Full`], id:label.id}] : [], text} : null;
+    }).filter(Boolean);
+  }
+  // The own text with the old meanings after it: {text, segments} (segments null without them).
+  function withExtra(candidate, language, text, segments) {
+    const extra = extraMeanings(candidate, language);
+    if (!extra.length) return {text, segments};
+    return {text:[text, ...extra.map(e => e.text)].join('; '), segments:[...(segments || [{labels:[], text}]), ...extra]};
+  }
   // Meanings of an own card left out of the popup by fit() (0 for external entries).
   function hiddenMeanings(candidate, language) {
     if (!ownCard(candidate)) return 0;
@@ -694,7 +714,8 @@
     if (inline) { const own = brief(candidate, language, true), en = !own && language === 'ru' ? brief(candidate, 'en', true) : '';
       return own ? {text:own, language, more:hiddenMeanings(candidate, language)} : en ? {text:`английский: ${en}`, language:'en', more:hiddenMeanings(candidate, 'en')} : null; }
     const own = brief(candidate, language);
-    if (own) return {text:own, language, more:hiddenMeanings(candidate, language), segments:labelSegments(candidate, language, language)};
+    if (own) { const shown = withExtra(candidate, language, own, labelSegments(candidate, language, language));
+      return {text:shown.text, language, more:hiddenMeanings(candidate, language), segments:shown.segments}; }
     const english = language === 'ru' ? brief(candidate, 'en') : '';
     if (english) return {text:`английский: ${english}`, language:'en', more:hiddenMeanings(candidate, 'en'),
       segments:labelSegments(candidate, 'en', 'ru'), prefix:'английский: '};

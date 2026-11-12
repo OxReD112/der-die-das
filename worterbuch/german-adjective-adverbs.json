@@ -16797,7 +16797,17 @@
       }
     ],
     "usage_note_ru": "Разговорный вариант — alleine.",
-    "usage_note_en": "Colloquial variant: alleine."
+    "usage_note_en": "Colloquial variant: alleine.",
+    "extra_meanings": [
+      {
+        "ru": "однако, но",
+        "en": "but, however",
+        "register": "gehoben",
+        "example_de": "Frühmorgens stand sie auf, machte Feuer an und stellte den Kessel bei, allein statt des Garns legte sie einen Klumpen Werg hinein.",
+        "example_ru": "Рано утром она встала, развела огонь и поставила котёл, однако вместо пряжи положила туда ком пакли.",
+        "example_en": "Early in the morning she got up, lit the fire and put the kettle on, but instead of the yarn she put in a lump of tow."
+      }
+    ]
   },
   {
     "id": "adjective-111",
