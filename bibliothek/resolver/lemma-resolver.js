@@ -193,6 +193,9 @@
   const NUMERAL_SERIES_JOINERS = ["oder","bis","und"];
   // Coordinating conjunctions that end the clause of a recorded expression.
   const CLAUSE_COORDINATORS = ["und","oder","aber","denn","sondern"];
+  // One opening word of an imperative part (links chat item 87, 24056a05; advisor 12.11: one list) — the separated-particle assembly of
+  // the imperative (nun hol mich herunter) and the implicit subject of a reflexive imperative (5а.2: so stellt Euch hin) share it.
+  const IMPERATIVE_OPENER_WORDS = /^(?:aber|und|oder|doch|also|nun|so|dann|jetzt|bitte|na)$/u;
   // Batch 8 — prepositions and particles.
   // als / wie of a comparison: after a predicate the clause goes on (… genutzt als …, so groß wie …); between the parts of
   // a verb group it is no group (das Gleiche wie Truppen … zu führen).
@@ -1752,7 +1755,7 @@
     function addAnalysis(form, row) {
       // (G91 / WN batch 29, advisor 01.11: a card with imperative: "none" has no imperative in any meaning — leidtun, gefallen,
       // kosten «стоить»: its forms are never read as an imperative — Tut mir leid is «Präsens», not «Imperativ / Präsens»)
-      if (row.kind === "imperative" && row.entry?.imperative === "none") return;
+      if (row.kind === "imperative" && row.entry?.imperative === "none" && !row.reflexiveField) return;
       // (an own two-word card written apart: its rows apart as well — see phraseFirst)
       const map = phraseFirst(row.entry) ? phraseAnalyses : verbAnalyses;
       for (const key of new Set([norm(form), ...(['finite','imperative'].includes(row.kind) ? [oldSpelling(norm(form))] : [])])) {
@@ -1825,6 +1828,15 @@
           if (second === stem.slice(0,-1) && !/[dt]$/u.test(second)) addAnalysis(stem.slice(0,-1),{...row,person:"du",kind:"imperative",tense:"Imperativ"});
         }
         if (tense === "Präsens" && person === "ihr") addAnalysis(stem,{...row,kind:"imperative",tense:"Imperativ"});
+      }
+      // 5а.2 (cards chat + advisor 12.11): imperative: "none" is the plain card's (betragen «составлять»); its field `reflexive` (sich
+      // betragen «вести себя») has the imperative — Betrag dich anständig!, Betrage dich!, Betragt euch! Rows of the regular stem marked
+      // reflexiveField: only the reflexive group takes them (the reading without sich stays without an imperative).
+      if (entry.imperative === "none" && entry.reflexive && phrase.length === 1 && !entry.separable_prefix && /[^e]en$/u.test(base)) {
+        const stem = base.slice(0,-2), field = {...common,kind:"imperative",tense:"Imperativ",prefix:null,detached:false,reflexiveField:true};
+        if (!/[dt]$/u.test(stem)) addAnalysis(stem,{...field,person:"du"});
+        addAnalysis(stem + "e",{...field,person:"du"});
+        addAnalysis(stem + "t",{...field,person:"ihr"});
       }
       const infinitive = phrase.at(-1);
       addAnalysis(infinitive,{...common,kind:"infinitive",tense:"Infinitiv",prefix:null,detached:false});
@@ -2903,7 +2915,12 @@
         if(!s.length&&allowImplicit&&a.kind==='imperative'&&['du','ihr'].includes(a.person)&&
           (controller===clause.start||words[clause.start]==='bitte'||
           // (G70 books 25.10: a coordinator in front keeps the imperative at the head — …, aber stell dir vor, …)
-          controller>clause.start&&words.slice(clause.start,controller).every(w=>CLAUSE_COORDINATORS.includes(w)||w==='bitte')))return {index:null,person:a.person,implicit:true};
+          controller>clause.start&&words.slice(clause.start,controller).every(w=>CLAUSE_COORDINATORS.includes(w)||w==='bitte')||
+          // (5а.2, advisor 12.11: an opener word in front — so stellt Euch hin, Nun legt euch ans Feuer — when nothing after the verb in
+          // the part can be its subject: so speit Euch das gute Tier, so bitte ich dich keep their subject)
+          controller>clause.start&&words.slice(clause.start,controller).every(w=>CLAUSE_COORDINATORS.includes(w)||IMPERATIVE_OPENER_WORDS.test(w))&&
+            !words.slice(controller+1,clause.end+1).some((w,k)=>/^(?:der|die|das|ein|eine|ich|du|er|sie|es|wir|ihr|man|jemand|niemand|keiner)$/u.test(w)&&
+              !prepositions.has(words[controller+k])&&!contractionForms[words[controller+k]])))return {index:null,person:a.person,implicit:true};
         return null;
       }
       return {beforePrep,subjects,subjectFor};
@@ -14761,7 +14778,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             break;
           }
         // (G91 / WN batch 29, advisor 01.11: a card with imperative: "none" is never an imperative — also not by the external dictionary)
-        if (candidate.source === "main" && candidate.item?.imperative === "none") { labels.delete("Imperativ"); ownLabels.delete("Imperativ"); sources.delete("Imperativ"); }
+        // (5а.2: not the reflexive group of a card whose field `reflexive` has the imperative — Betrag dich anständig!)
+        if (candidate.source === "main" && candidate.item?.imperative === "none" && !(candidate.item.reflexive && candidate.construction?.id === "reflexive-verb")) { labels.delete("Imperativ"); ownLabels.delete("Imperativ"); sources.delete("Imperativ"); }
         const [only] = labels;
         // L34 (reference F12-G2g): a participle chosen as the verb by its sign after sein (waren von … geschickt) — «Partizip II».
         if (["participle-verb-sign","participle-default"].includes(resolution?.decision?.rule) && (labels.has("Partizip II") || labels.has("Partizip")) && !labels.has("Infinitiv") && resolution?.selected?.evidence !== "participle-default-verb-form") return {tense:"Partizip II"};
@@ -16540,7 +16558,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (links chat, TODO item 87, advisor 12.11: the imperative — the same assembly as the indicative (Er holt mich herunter): an
       // imperative form first in its part, or after one opening word of the imperative part (aber, und, doch, also, nun, so, dann …) —
       // heb mich herauf, nun hol mich herunter, streck deine Finger heraus; capitalized only first in its sentence or after a mark)
-      const IMPERATIVE_OPENERS = /^(?:aber|und|oder|doch|also|nun|so|dann|jetzt|bitte|na)$/u;
+      const IMPERATIVE_OPENERS = IMPERATIVE_OPENER_WORDS;
       const imperativeRows = new Map();
       if (v < 0) for (let k = a; k < Math.min(b, a + 2); k++) {
         let rows = (verbAnalyses.get(norm(tokens[k][0])) || []).filter(x => x.kind === "imperative");
