@@ -42,7 +42,9 @@
   // gapBefore: true (a scene break: <hr> or a book "break" class with a top margin), quote: true (inside <blockquote>;
   // quoteEnd on the last paragraph of it),
   // verse: true with stanzaStart / verseEnd (lines of div.poem > div.stanza > div.line — each line stays its own
-  // paragraph, as before) }.
+  // paragraph, as before), stanzaBreaks: [offsets among lineBreaks where the book has an empty line — two <br> in a
+  // row], pre: true (inside <pre>) }. Lines of a poem also come from paragraphs inside a poem container (Wikisource
+  // div.poem > p), from inline elements the book shows as blocks (span.line) and from line ends inside <pre>.
   // Offsets are in the paragraph string; a mark never starts or ends on a space.
   function cleanMapped(raw) {
     // Same result as clean(raw), plus map[i] = offset in the result of raw position i (a whitespace run maps to its
@@ -125,6 +127,7 @@
   }
   const BREAK_CLASS = /(?:^|[\s_-])(break|scene|space|spacer|gap|sep|separator)(?:$|[\s_-])/i, PAGE_CLASS = /page/i;
   const VERSE_LINE_CLASS = /(?:^|\s)(line|verse-?line|vers|zeile)(?:\s|$)/i, STANZA_CLASS = /(stanza|strophe)/i, POEM_CLASS = /(poem|verse|gedicht)/i;
+  const POEM_CONTAINER = /(?:^|\s)(poem|poetry|verse|gedicht|lyrics?)(?:\s|$)/i;
   const ORNAMENT = /^[*\s⁂·•—–\-_~#x✱✳]+$/;
   function topMargin(props) {
     const value = props["margin-top"] || (props.margin || "").split(/\s+/)[0] || "";
@@ -172,17 +175,27 @@
     const paragraphs = [], paragraphKinds = [], paragraphLayout = [], anchors = Object.create(null);
     const base = value => String(value || "").toLowerCase().split(/[-_]/)[0];
     let pendingKind = "p";
-    let pending = "", pendingBreaks = [], segments = [], align = null, state = {};
+    let pending = "", pendingBreaks = [], softBreaks = [], segments = [], align = null, state = {};
     const gapAt = new Set();
-    let quoteDepth = 0, quoteNode = null, lastQuote = null, verseStanza = null, lastStanza = null;
+    let quoteDepth = 0, quoteNode = null, lastQuote = null, verseStanza = null, lastStanza = null, preDepth = 0, stanzaNext = false;
     const flush = () => {
       const mapped = cleanMapped(pending), text = mapped ? mapped.text : clean(pending);
+      let leadingBreak = false, trailingBreaks = 0;
       if (text) {
         paragraphs.push(text); paragraphKinds.push(pendingKind);
         const layout = {};
         if (mapped) {
-          const lineBreaks = [...new Set(pendingBreaks.map(i => mapped.map[i]).filter(at => text[at] === " " && at > 0 && at < text.length - 1))];
+          const counts = new Map();
+          for (const i of pendingBreaks) counts.set(mapped.map[i], (counts.get(mapped.map[i]) || 0) + 1);
+          // A block-shown inline element breaks the line but never makes an empty line by itself.
+          for (const i of softBreaks) if (!counts.has(mapped.map[i])) counts.set(mapped.map[i], 1);
+          const lineBreaks = [...counts.keys()].filter(at => text[at] === " " && at > 0 && at < text.length - 1).sort((x, y) => x - y);
           if (lineBreaks.length) layout.lineBreaks = lineBreaks;
+          const stanzaBreaks = lineBreaks.filter(at => counts.get(at) >= 2);
+          if (stanzaBreaks.length) layout.stanzaBreaks = stanzaBreaks;
+          // In a poem, a <br> before the first line or two after the last one mark a stanza boundary.
+          leadingBreak = counts.has(0) && text[0] !== " " && pendingBreaks.some(i => mapped.map[i] === 0 && /\s/.test(pending[i]));
+          trailingBreaks = counts.get(text.length) || 0;
           const marks = [];
           for (const kind of MARK_KINDS) for (const r of rangesOf(segments, mapped.map, text, s => s[kind], () => kind)) marks.push({ start: r.start, end: r.end, kind });
           if (marks.length) layout.marks = marks.sort((x, y) => x.start - y.start || x.end - y.end);
@@ -195,17 +208,20 @@
         if (previous?.quote && quoteNode !== lastQuote) previous.quoteEnd = true;
         if (quoteDepth) layout.quote = true;
         lastQuote = quoteNode;
+        if (preDepth) layout.pre = true;
         if (verseStanza) {
           layout.verse = true;
-          if (verseStanza !== lastStanza) layout.stanzaStart = true;
+          if (verseStanza !== lastStanza || stanzaNext || leadingBreak) layout.stanzaStart = true;
           lastStanza = verseStanza;
+          stanzaNext = trailingBreaks >= 2;
         } else {
+          stanzaNext = false;
           if (previous?.verse) previous.verseEnd = true;
           lastStanza = null;
         }
         paragraphLayout.push(Object.keys(layout).length ? layout : null);
       }
-      pending = ""; pendingBreaks = []; segments = []; pendingKind = "p";
+      pending = ""; pendingBreaks = []; softBreaks = []; segments = []; pendingKind = "p";
     };
     const blocks = new Set(["p", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre", "tr", "figure", "figcaption", "dl", "dt", "dd"]);
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
@@ -213,6 +229,8 @@
       if (node.nodeType === 3 || node.nodeType === 4) {
         const value = cleanTextNode(node.nodeValue, pending[pending.length - 1]);
         if (value && (MARK_KINDS.some(kind => state[kind]) || state.lang)) segments.push({ start: pending.length, end: pending.length + value.length, state });
+        // Inside <pre> every line end is a line break (indentation still collapses, the text stays as before).
+        if (preDepth && value) for (let i = value.indexOf("\n"); i >= 0; i = value.indexOf("\n", i + 1)) pendingBreaks.push(pending.length + i);
         pending += value; return;
       }
       if (node.nodeType !== 1) return;
@@ -230,7 +248,8 @@
       const className = node.getAttribute("class") || "";
       // (b) An inline element the book shows as a block (span.tit-block) is a word boundary.
       const blockLike = !block && BLOCK_DISPLAY.test(props.display || "");
-      if (blockLike) pending += " ";
+      // An inline element shown as a block (span.line of a poem) also starts a new line.
+      if (blockLike) { softBreaks.push(pending.length); pending += " "; }
       if (block) {
         flush(); align = props["text-align"] || outer;
         if (BREAK_CLASS.test(className) && !PAGE_CLASS.test(className) && topMargin(props) >= 0.9) gapAt.add(paragraphs.length);
@@ -239,7 +258,13 @@
           let up = node.parentNode, stanza = null;
           while (up && up.nodeType === 1 && !stanza) { const c = up.getAttribute("class") || ""; if (STANZA_CLASS.test(c) || POEM_CLASS.test(c)) stanza = up; up = up.parentNode; }
           if (stanza) verseStanza = stanza;
+        } else if (!verseStanza && (tag === "p" || tag === "div")) {
+          // Paragraphs inside a poem container (Wikisource div.poem > p) are lines of that poem.
+          let up = node.parentNode;
+          while (up && up.nodeType === 1 && !POEM_CONTAINER.test(up.getAttribute("class") || "")) up = up.parentNode;
+          if (up && up.nodeType === 1) verseStanza = up;
         }
+        if (tag === "pre") preDepth++;
       }
       state = inlineState(node, tag, props, outerState);
       const anchor = node.getAttribute("id") || node.getAttribute("name");
@@ -247,9 +272,9 @@
       if (/^h[1-6]$/.test(tag)) pendingKind = tag;
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
-      if (blockLike) pending += " ";
+      if (blockLike) { softBreaks.push(pending.length); pending += " "; }
       state = outerState;
-      if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; }
+      if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; if (tag === "pre") preDepth--; }
     }
     walk(body); flush();
     if (paragraphLayout.at(-1)?.verse) paragraphLayout.at(-1).verseEnd = true;

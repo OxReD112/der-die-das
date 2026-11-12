@@ -634,6 +634,24 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .reading-text p.book-verse-end {
   margin-bottom: 1.15em;
 }
+/* A verse paragraph with several lines (<br>): every line starts at the poem's edge, no hanging indent. */
+.reading-text p.book-verse-line.book-has-breaks {
+  padding-left: 0;
+  text-indent: 0;
+}
+/* Phones: no poem indent, so a full verse line still fits on one screen line (a wrapped line would read as two). */
+@media (max-width: 600px) {
+  .reading-text p.book-verse-line {
+    margin-left: 0;
+  }
+}
+/* Preformatted text (<pre>, code): line ends kept, monospace, never justified. */
+.reading-text p.book-pre {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  text-align: left;
+  text-indent: 0;
+}
 .reading-word {
   border-radius: 2px;
   cursor: pointer;

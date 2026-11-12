@@ -728,7 +728,7 @@
   // inside a word button (an emphasised part of a word). Offsets, highlights and bookmarks are unchanged; a break that
   // would fall inside a word button is skipped.
   const BOOK_MARK_KINDS = new Set(["i", "b", "spaced", "sc", "small"]);
-  function appendLaidOut(parent, token, start, marks, breaks) {
+  function appendLaidOut(parent, token, start, marks, breaks, stanzas = []) {
     const end = start + token.length, cuts = new Set([0, token.length]);
     const own = marks.filter(m => m.start < end && m.end > start);
     for (const m of own) { if (m.start > start) cuts.add(m.start - start); if (m.end < end) cuts.add(m.end - start); }
@@ -743,13 +743,18 @@
         mark.textContent = text;
         parent.append(mark);
       } else parent.append(document.createTextNode(text));
-      if (breaks.includes(start + to - 1) && token[to - 1] === " ") parent.append(document.createElement("br"));
+      if (breaks.includes(start + to - 1) && token[to - 1] === " ") {
+        parent.append(document.createElement("br"));
+        // An empty line between stanzas (two <br> in the book).
+        if (stanzas.includes(start + to - 1)) parent.append(document.createElement("br"));
+      }
     }
   }
   function wrapParagraph(paragraph, layout = null) {
     const fragment = document.createDocumentFragment();
     const tokens = window.BibliothekLemmaResolver.readerSegments(paragraph);
     const breaks = Array.isArray(layout?.lineBreaks) ? layout.lineBreaks : [];
+    const stanzas = Array.isArray(layout?.stanzaBreaks) ? layout.stanzaBreaks : [];
     const marks = Array.isArray(layout?.marks) ? layout.marks.filter(m => BOOK_MARK_KINDS.has(m?.kind) && m.end > m.start) : [];
     let tokenOffset = 0;
     tokens.forEach(token => {
@@ -763,7 +768,7 @@
         span.setAttribute("role", "button");
         span.setAttribute("aria-label", `${token}, tap for translation`);
         fragment.append(span);
-      } else if (breaks.length || marks.length) appendLaidOut(fragment, token, tokenOffset, marks, breaks);
+      } else if (breaks.length || marks.length) appendLaidOut(fragment, token, tokenOffset, marks, breaks, stanzas);
       else fragment.append(document.createTextNode(token));
       tokenOffset += token.length;
     });
@@ -786,7 +791,8 @@
       const layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
       if (layout?.align === "center" || layout?.align === "right") p.classList.add(`book-align-${layout.align}`);
       // Paragraph layout from the EPUB (D23 step 2): scene break, quotation / letter, verse lines of a poem.
-      for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"]]) if (layout?.[field] === true) p.classList.add(name);
+      for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"], ["pre", "book-pre"]]) if (layout?.[field] === true) p.classList.add(name);
+      if (layout?.lineBreaks?.length) p.classList.add("book-has-breaks");
       p.append(wrapParagraph(paragraph, layout));
       $text.append(p);
     });
