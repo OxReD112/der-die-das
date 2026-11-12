@@ -7431,8 +7431,8 @@
     "translation_ru": "пробовать (на вкус), отведать",
     "translation_en": "to taste, to try",
     "auxiliary": "haben",
-    "usage_note_ru": "Чаще в разговоре и книжной речи; обычнее — probieren: Koste mal! — Попробуй! Er kostete den Wein. — Он отведал вина. Перен.: die Freiheit kosten — вкусить свободы. Не путать: kosten — стоить (отдельная карточка): Was kostet das?",
-    "usage_note_en": "Colloquial and literary; more usual is probieren: Koste mal! — Have a taste! Er kostete den Wein. — He tasted the wine. Figurative: die Freiheit kosten — to taste freedom. Do not confuse: kosten — to cost (separate card): Was kostet das?",
+    "usage_note_ru": "Нейтрально; в разговоре чаще говорят probieren. Koste mal! — Попробуй! Er kostete den Wein. — Он отведал вина. Перен.: die Freiheit kosten — вкусить свободы. Не путать: kosten — стоить (отдельная карточка): Was kostet das?",
+    "usage_note_en": "Neutral; in everyday speech probieren is more usual. Koste mal! — Have a taste! Er kostete den Wein. — He tasted the wine. Figurative: die Freiheit kosten — to taste freedom. Do not confuse: kosten — to cost (separate card): Was kostet das?",
     "example_de": "Koste mal die Suppe, ist sie salzig genug?",
     "example_cloze": "{{c1::Koste}} mal die Suppe, ist sie salzig genug?",
     "example_ru": "Попробуй-ка суп — он достаточно солёный?",
@@ -7868,8 +7868,8 @@
   {
     "id": "verb-158",
     "infinitive": "laufen",
-    "translation_ru": "бегать, бежать; идти пешком; идти, проходить (о времени, делах); работать (о приборе)",
-    "translation_en": "to run; to walk; to go (of time, things); to be on (of a machine)",
+    "translation_ru": "бегать, бежать; идти (пешком), идти (о делах, фильме); работать (о приборе), действовать (о сроке); течь (о воде)",
+    "translation_en": "to run; to walk, to go (of things), to be on (of a film); to be on (of a machine), to run (of a contract); to run (of water)",
     "auxiliary": "sein",
     "example_de": "Ich laufe jeden Morgen fünf Kilometer.",
     "example_cloze": "Ich {{c1::laufe}} jeden Morgen fünf Kilometer.",
@@ -7907,8 +7907,8 @@
         "Sie": "Laufen Sie!"
       }
     },
-    "usage_note_ru": "О делах и времени: Wie läuft's? — Как дела?; Die ersten Minuten liefen gut. — Первые минуты прошли хорошо. Сильный: läuft, lief, ist gelaufen.",
-    "usage_note_en": "Of things and time: Wie läuft's? — How's it going?; Die ersten Minuten liefen gut. — The first minutes went well. Strong: läuft, lief, ist gelaufen."
+    "usage_note_ru": "О делах: Wie läuft's? — Как дела?; Die ersten Minuten liefen gut. — Первые минуты прошли хорошо. Was läuft heute im Kino? — Что сегодня идёт в кино? Der Vertrag läuft drei Jahre. — Договор действует три года. Das Wasser läuft. — Вода течёт. Сильный: läuft, lief, ist gelaufen.",
+    "usage_note_en": "Of things: Wie läuft's? — How's it going?; Die ersten Minuten liefen gut. — The first minutes went well. Was läuft heute im Kino? — What's on at the cinema today? Der Vertrag läuft drei Jahre. — The contract runs for three years. Das Wasser läuft. — The water is running. Strong: läuft, lief, ist gelaufen."
   },
   {
     "id": "verb-159",
@@ -8588,8 +8588,8 @@
   {
     "id": "verb-174",
     "infinitive": "reiten",
-    "translation_ru": "ездить верхом; объезжать (лошадь)",
-    "translation_en": "to ride (a horse); to break in (a horse)",
+    "translation_ru": "ездить верхом, скакать (на лошади)",
+    "translation_en": "to ride (on horseback)",
     "auxiliary": [
       "sein",
       "haben"
@@ -8632,8 +8632,8 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "ездить на ком-либо; объезжать (лошадь) (hat geritten)",
-        "note_en": "to ride; to break in (a horse) (hat geritten)"
+        "note_ru": "ездить (на определённой лошади): ein Pferd reiten (hat geritten)",
+        "note_en": "to ride (a particular horse) (hat geritten)"
       }
     ]
   },
@@ -10363,8 +10363,8 @@
   {
     "id": "verb-212",
     "infinitive": "zeigen",
-    "translation_ru": "показывать",
-    "translation_en": "to show",
+    "translation_ru": "показывать; указывать (на что-либо)",
+    "translation_en": "to show; to point (at)",
     "auxiliary": "haben",
     "example_de": "Kannst du mir den Weg zum Bahnhof zeigen?",
     "example_cloze": "Kannst du mir den Weg zum Bahnhof {{c1::zeigen}}?",
@@ -10374,9 +10374,14 @@
     "forms": null,
     "complements": [
       {
-        "pattern": "Dativ",
+        "pattern": "Dativ + Akkusativ",
         "note_ru": "показывать что-либо кому-либо",
         "note_en": "to show someone something"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "указывать на что-либо: Er zeigte auf das Haus.",
+        "note_en": "to point at something: Er zeigte auf das Haus."
       }
     ],
     "lookup_forms": {
@@ -12698,11 +12703,11 @@
   {
     "id": "verb-258",
     "infinitive": "einziehen",
-    "translation_ru": "въезжать (в квартиру); вселяться",
-    "translation_en": "to move in",
+    "translation_ru": "въезжать (в квартиру), вселяться; входить, вступать (в город), проходить (в парламент); впитываться; наступать (о зиме)",
+    "translation_en": "to move in; to enter, to march in (a town), to get into (parliament); to soak in; to set in (of winter)",
     "auxiliary": "sein",
-    "usage_note_ru": "Perfekt с sein: Wir sind eingezogen. Не путать: einziehen (haben) — втягивать; призывать (в армию); взимать (отдельная карточка).",
-    "usage_note_en": "Perfect with sein: Wir sind eingezogen. Do not confuse: einziehen (haben) — to pull in; to conscript; to collect (separate card).",
+    "usage_note_ru": "Perfekt с sein: Wir sind eingezogen. Die Truppen zogen in die Stadt ein. — Войска вступили в город. Die Partei zog in den Bundestag ein. — Партия прошла в бундестаг. Die Creme zieht schnell ein. — Крем быстро впитывается. Не путать: einziehen (haben) — втягивать; призывать (в армию); взимать (отдельная карточка).",
+    "usage_note_en": "Perfect with sein: Wir sind eingezogen. Die Truppen zogen in die Stadt ein. — The troops marched into the town. Die Partei zog in den Bundestag ein. — The party entered the Bundestag. Die Creme zieht schnell ein. — The cream soaks in quickly. Do not confuse: einziehen (haben) — to pull in; to conscript; to collect (separate card).",
     "example_de": "Nächste Woche ziehen wir in die neue Wohnung ein.",
     "example_cloze": "Nächste Woche {{c1::ziehen}} wir in die neue Wohnung {{c1::ein}}.",
     "example_ru": "На следующей неделе мы въезжаем в новую квартиру.",
@@ -12751,8 +12756,8 @@
     "translation_ru": "втягивать (голову, когти); призывать (на военную службу); взимать (налоги, долги); изымать (из обращения); ставить (стену, перегородку)",
     "translation_en": "to pull in, to retract; to conscript, to draft; to collect (taxes, debts); to withdraw, to confiscate; to put in (a wall, a partition)",
     "auxiliary": "haben",
-    "usage_note_ru": "Переходный, Perfekt с haben: hat eingezogen. Призывать: jemanden zum Militär / zum Wehrdienst einziehen; чаще в пассиве: Er wurde eingezogen. — Его призвали. den Kopf einziehen — втянуть голову (в плечи). Въезжать (в квартиру) — einziehen с sein (отдельная карточка).",
-    "usage_note_en": "Transitive, perfect with haben: hat eingezogen. To conscript: jemanden zum Militär / zum Wehrdienst einziehen; often passive: Er wurde eingezogen. — He was drafted. den Kopf einziehen — to duck one's head. To move in (to a flat) is einziehen with sein (separate card).",
+    "usage_note_ru": "Переходный, Perfekt с haben: hat eingezogen. Призывать: jemanden zum Militär / zum Wehrdienst einziehen; чаще в пассиве: Er wurde eingezogen. — Его призвали. den Kopf einziehen — втянуть голову (в плечи). Въезжать (в квартиру) — einziehen с sein (отдельная карточка). Erkundigungen (über jdn.) einziehen — наводить справки (о ком-либо); einen Faden einziehen — вдеть нитку.",
+    "usage_note_en": "Transitive, perfect with haben: hat eingezogen. To conscript: jemanden zum Militär / zum Wehrdienst einziehen; often passive: Er wurde eingezogen. — He was drafted. den Kopf einziehen — to duck one's head. To move in (to a flat) is einziehen with sein (separate card). Erkundigungen (über jdn.) einziehen — to make inquiries (about someone); einen Faden einziehen — to thread a needle.",
     "example_de": "Im Herbst 1940 wurde auch ihr jüngerer Bruder zum Militär eingezogen.",
     "example_cloze": "Im Herbst 1940 wurde auch ihr jüngerer Bruder zum Militär {{c1::eingezogen}}.",
     "example_ru": "Осенью 1940 года её младшего брата тоже призвали в армию.",
@@ -15858,6 +15863,59 @@
         "wir": "streiten uns",
         "ihr": "streitet euch",
         "sie": "streiten sich"
+      }
+    }
+  },
+  {
+    "id": "verb-2761",
+    "infinitive": "sich zanken",
+    "translation_ru": "ссориться, браниться",
+    "translation_en": "to quarrel, to squabble, to bicker",
+    "auxiliary": "haben",
+    "usage_note_ru": "С кем — mit + Dativ, из-за чего — um + Akkusativ: Die Kinder zanken sich ständig. — Дети постоянно ссорятся. Sie zankten sich um das letzte Stück Kuchen. Слабый: zankte sich, hat sich gezankt. Близко: sich streiten.",
+    "usage_note_en": "With whom — mit + dative, over what — um + accusative: Die Kinder zanken sich ständig. — The children are always quarrelling. Sie zankten sich um das letzte Stück Kuchen. Weak: zankte sich, hat sich gezankt. Similar: sich streiten.",
+    "example_de": "Die beiden Katzen zankten sich laut fauchend um den Futternapf.",
+    "example_cloze": "Die beiden Katzen {{c1::zankten}} sich laut fauchend um den Futternapf.",
+    "example_ru": "Обе кошки, громко шипя, ссорились из-за миски с кормом.",
+    "example_en": "The two cats squabbled over the food bowl, hissing loudly.",
+    "perfect_form": "haben sich gezankt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "ссориться с кем-либо",
+        "note_en": "to quarrel with someone"
+      },
+      {
+        "pattern": "um + Akkusativ",
+        "note_ru": "ссориться из-за чего-либо",
+        "note_en": "to squabble over something"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "zanke mich",
+        "du": "zankst dich",
+        "er/sie/es": "zankt sich",
+        "wir": "zanken uns",
+        "ihr": "zankt euch",
+        "sie": "zanken sich"
+      },
+      "Präteritum": {
+        "ich": "zankte mich",
+        "du": "zanktest dich",
+        "er/sie/es": "zankte sich",
+        "wir": "zankten uns",
+        "ihr": "zanktet euch",
+        "sie": "zankten sich"
+      },
+      "Konjunktiv II": {
+        "ich": "zankte mich",
+        "du": "zanktest dich",
+        "er/sie/es": "zankte sich",
+        "wir": "zankten uns",
+        "ihr": "zanktet euch",
+        "sie": "zankten sich"
       }
     }
   },
@@ -30273,8 +30331,8 @@
     "translation_ru": "вставлять, засовывать, втыкать; находиться, торчать",
     "translation_en": "to put, to stick, to insert; to be (stuck), to be (somewhere)",
     "auxiliary": "haben",
-    "usage_note_ru": "Без дополнения — находиться, торчать: Der Schlüssel steckt im Schloss. Wo steckst du? — Где ты (пропадаешь)? Книжное прошедшее: stak.",
-    "usage_note_en": "Without an object — to be (stuck), to be somewhere: Der Schlüssel steckt im Schloss. Wo steckst du? — Where are you (hiding)? Literary past: stak.",
+    "usage_note_ru": "Без дополнения — находиться, торчать: Der Schlüssel steckt im Schloss. Wo steckst du? — Где ты (пропадаешь)? Книжное прошедшее: stak. Wer steckt dahinter? — Кто за этим стоит?",
+    "usage_note_en": "Without an object — to be (stuck), to be somewhere: Der Schlüssel steckt im Schloss. Wo steckst du? — Where are you (hiding)? Literary past: stak. Wer steckt dahinter? — Who is behind it?",
     "example_de": "Ich stecke den Schlüssel ins Schloss.",
     "example_cloze": "Ich {{c1::stecke}} den Schlüssel ins Schloss.",
     "example_ru": "Я вставляю ключ в замок.",
@@ -30564,11 +30622,11 @@
   {
     "id": "verb-652",
     "infinitive": "sich stoßen",
-    "translation_ru": "удариться, ушибить (руку, голову); оттолкнуться (от чего-либо)",
-    "translation_en": "to bump oneself, to hurt (one's hand, head); to push off (from)",
+    "translation_ru": "удариться, ушибить (руку, голову); (перен.) возмущаться, коробить (чем-либо)",
+    "translation_en": "to bump oneself, to hurt (one's hand, head); to take offence (at)",
     "auxiliary": "haben",
-    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — von / aus + Dativ: Der Skifahrer stieß sich aus dem Starthaus. С частицей ab — sich abstoßen (Er stieß sich vom Beckenrand ab).",
-    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — von / aus + dative: Der Skifahrer stieß sich aus dem Starthaus. With the particle ab — sich abstoßen (Er stieß sich vom Beckenrand ab).",
+    "usage_note_ru": "Ушибить что-либо — местоимение в дательном: Ich habe mir den Kopf gestoßen. — Я ударился головой. Перен. — an + Dativ: Sie stößt sich an seinem Ton. — Её коробит его тон. Без sich: stoßen — толкать (haben); auf + Akkusativ — наткнуться (sein); отдельные карточки. Оттолкнуться — sich abstoßen: Er stieß sich vom Beckenrand ab.",
+    "usage_note_en": "To hurt a part of the body — the pronoun is dative: Ich habe mir den Kopf gestoßen. — I banged my head. Figuratively — an + dative: Sie stößt sich an seinem Ton. — She takes offence at his tone. Without sich: stoßen — to push (haben); auf + accusative — to come across (sein); separate cards. To push off — sich abstoßen: Er stieß sich vom Beckenrand ab.",
     "example_de": "Pass auf, dass du dich nicht am Kopf stößt!",
     "example_cloze": "Pass auf, dass du dich nicht am Kopf {{c1::stößt}}!",
     "example_ru": "Смотри не ударься головой!",
@@ -30603,13 +30661,8 @@
     "complements": [
       {
         "pattern": "an + Dativ",
-        "note_ru": "удариться обо что-либо или чем-либо",
-        "note_en": "to bump (a body part) / against something"
-      },
-      {
-        "pattern": "von + Dativ",
-        "note_ru": "оттолкнуться от чего-либо",
-        "note_en": "to push off from something"
+        "note_ru": "удариться обо что-либо или чем-либо; (перен.) возмущаться чем-либо, находить неуместным",
+        "note_en": "to bump (a body part) / against something; (figurative) to take offence at something"
       }
     ],
     "lookup_forms": {
@@ -31898,11 +31951,11 @@
   {
     "id": "verb-679",
     "infinitive": "umgehen",
-    "translation_ru": "обращаться (с кем-либо, чем-либо)",
-    "translation_en": "to deal with, to handle",
+    "translation_ru": "обращаться (с кем-либо, чем-либо); ходить (о слухах), бродить (о призраке)",
+    "translation_en": "to deal with, to handle; to go around (of rumours), to haunt (of ghosts)",
     "auxiliary": "sein",
-    "usage_note_ru": "Отделяемый (umgegangen). Не путать: неотделяемый umgehen (umging, hat umgangen) — обходить (закон, проблему) (отдельная карточка).",
-    "usage_note_en": "Separable (umgegangen). Do not confuse: the inseparable umgehen (umging, hat umgangen) — to bypass, to circumvent (separate card).",
+    "usage_note_ru": "Отделяемый (umgegangen). Ein Gerücht geht um. — Ходит слух. Hier gehen Gespenster um. — Здесь бродят призраки. Не путать: неотделяемый umgehen (umging, hat umgangen) — обходить (закон, проблему) (отдельная карточка).",
+    "usage_note_en": "Separable (umgegangen). Ein Gerücht geht um. — There's a rumour going around. Hier gehen Gespenster um. — This place is haunted. Do not confuse: the inseparable umgehen (umging, hat umgangen) — to bypass, to circumvent (separate card).",
     "example_de": "Sie kann gut mit Kindern umgehen.",
     "example_cloze": "Sie kann gut mit Kindern {{c1::umgehen}}.",
     "example_ru": "Она умеет обращаться с детьми.",
@@ -36832,8 +36885,8 @@
   {
     "id": "verb-781",
     "infinitive": "angehen",
-    "translation_ru": "касаться (кого-либо)",
-    "translation_en": "to concern (someone)",
+    "translation_ru": "касаться (кого-либо); браться (за что-либо), решать (проблему)",
+    "translation_en": "to concern (someone); to tackle (a problem)",
     "auxiliary": "sein",
     "usage_note_ru": "was … angeht — что касается …: Was mich angeht, bin ich einverstanden. das geht nicht an — так не годится, это недопустимо. Браться за что-либо (ein Problem angehen) — Perfekt с haben: Wir haben das Problem sofort angegangen.",
     "usage_note_en": "was … angeht — as far as … is concerned: Was mich angeht, bin ich einverstanden. das geht nicht an — that won't do, that is not acceptable. To tackle something (ein Problem angehen) takes haben: Wir haben das Problem sofort angegangen.",
@@ -36877,8 +36930,7 @@
         "ihr": "geht an",
         "sie": "gehen an"
       }
-    },
-    "imperative": "none"
+    }
   },
   {
     "id": "verb-782",
@@ -81993,8 +82045,8 @@
     "translation_ru": "перерезать, рассекать (провод, сухожилие)",
     "translation_en": "to sever, to cut through",
     "auxiliary": "haben",
-    "usage_note_ru": "Неотделяемый: durchtrennte, hat durchtrennt (ударение на «trennen»). Разг. иногда и отделяемо (trennte durch, hat durchgetrennt).",
-    "usage_note_en": "Inseparable: durchtrennte, hat durchtrennt (stress on «trennen»). Colloquially sometimes separable (trennte durch, hat durchgetrennt).",
+    "usage_note_ru": "Обычно неотделяемый: durchtrennte, hat durchtrennt (ударение на «trennen»); встречается и отделяемо (ударение на «durch»): trennte durch, hat durchgetrennt.",
+    "usage_note_en": "Usually inseparable: durchtrennte, hat durchtrennt (stress on «trennen»); also used as separable (stress on «durch»): trennte durch, hat durchgetrennt.",
     "example_de": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel durchtrennt.",
     "example_cloze": "Bei den Bauarbeiten hat ein Bagger versehentlich das Glasfaserkabel {{c1::durchtrennt}}.",
     "example_ru": "Во время строительных работ экскаватор случайно перерубил оптоволоконный кабель.",
@@ -99829,8 +99881,7 @@
     "example_ru": "Возможно, я вчера немного перегнул палку, когда ты опоздал на час.",
     "example_en": "Maybe I overreacted a bit yesterday when you were an hour late.",
     "perfect_form": "haben überreagiert",
-    "forms": null,
-    "imperative": "none"
+    "forms": null
   },
   {
     "id": "verb-2192",
@@ -101638,7 +101689,7 @@
     "id": "verb-2229",
     "infinitive": "unterstellen",
     "translation_ru": "приписывать (кому-либо намерения, вину), предполагать; подчинять (кому-либо); утверждать без доказательств",
-    "translation_en": "to insinuate, to impute, to assume; to put (someone) under (someone), to subordinate; to accuse (someone of)",
+    "translation_en": "to insinuate, to impute, to assume; to subordinate (to someone); to allege (without proof)",
     "auxiliary": "haben",
     "usage_note_ru": "Неотделяемый, без ge-: unterstellte, hat unterstellt. Предполагать: Unterstellen wir einmal, dass … — допустим, что … Подчинять: jemandem unterstellt sein — быть в подчинении у кого-либо. die Unterstellung — инсинуация.",
     "usage_note_en": "Inseparable, no ge-: unterstellte, hat unterstellt. To assume: Unterstellen wir einmal, dass … — let's assume that … To put under: jemandem unterstellt sein — to report to someone. die Unterstellung — insinuation.",
@@ -123049,8 +123100,8 @@
     "translation_ru": "гудеть, жужжать; ворчать, бурчать",
     "translation_en": "to hum, to buzz; to grumble, to mutter",
     "auxiliary": "haben",
-    "usage_note_ru": "О моторе, пчеле, медведе — гудеть, жужжать, рычать; о человеке — ворчать, бурчать (себе под нос). Mir brummt der Kopf — у меня голова гудит.",
-    "usage_note_en": "Of an engine, a bee, a bear — to hum, to buzz, to growl; of a person — to grumble, to mutter. Mir brummt der Kopf — my head is buzzing.",
+    "usage_note_ru": "О моторе, пчеле, медведе — гудеть, жужжать, рычать; о человеке — ворчать, бурчать (себе под нос). Mir brummt der Kopf — у меня голова гудит. О движении с гулом — Perfekt с sein: Eine Hummel ist durchs Zimmer gebrummt. — По комнате прожужжал шмель. Разг.: Die Wirtschaft brummt. — Экономика на подъёме; drei Jahre brummen — отсидеть три года.",
+    "usage_note_en": "Of an engine, a bee, a bear — to hum, to buzz, to growl; of a person — to grumble, to mutter. Mir brummt der Kopf — my head is buzzing. Of movement with a buzz — perfect with sein: Eine Hummel ist durchs Zimmer gebrummt. — A bumblebee buzzed through the room. Colloquial: Die Wirtschaft brummt. — The economy is booming; drei Jahre brummen — to do three years (in prison).",
     "example_de": "Der alte Kühlschrank brummt die ganze Nacht.",
     "example_cloze": "Der alte Kühlschrank {{c1::brummt}} die ganze Nacht.",
     "example_ru": "Старый холодильник гудит всю ночь.",
@@ -123182,8 +123233,8 @@
     "translation_ru": "смотреть (не вмешиваясь), быть свидетелем; терпеть",
     "translation_en": "to watch (without stepping in), to witness; to put up with",
     "auxiliary": "haben",
-    "usage_note_ru": "Отделяются обе части: sieht mit an, sah mit an, hat mitangesehen (также mit angesehen). Часто с nicht / kaum: Ich kann das nicht länger mit ansehen. — Я не могу больше на это смотреть.",
-    "usage_note_en": "Both parts separate: sieht mit an, sah mit an, hat mitangesehen (also mit angesehen). Often with nicht / kaum: Ich kann das nicht länger mit ansehen. — I can't stand watching this any longer.",
+    "usage_note_ru": "Отделяются обе части: sieht mit an, sah mit an, hat mitangesehen (также mit angesehen). В значении «не мочь вынести» пишется только раздельно: Ich kann das nicht länger mit ansehen. — Я не могу больше на это смотреть.",
+    "usage_note_en": "Both parts separate: sieht mit an, sah mit an, hat mitangesehen (also mit angesehen). In the sense 'can't bear it' it is written only as two words: Ich kann das nicht länger mit ansehen. — I can't stand watching this any longer.",
     "example_de": "Die Nachbarn sahen hilflos mit an, wie das Feuer die Scheune zerstörte.",
     "example_cloze": "Die Nachbarn {{c1::sahen}} hilflos {{c1::mit an}}, wie das Feuer die Scheune zerstörte.",
     "example_ru": "Соседи беспомощно смотрели, как огонь уничтожает сарай.",
@@ -123388,8 +123439,8 @@
     "translation_ru": "подниматься (вверх), взлетать",
     "translation_en": "to rise, to climb (up), to soar",
     "auxiliary": "sein",
-    "usage_note_ru": "Der Ballon stieg hoch in die Luft. — Шар поднялся в воздух. Отделяемый, сильный: stieg hoch, ist hochgestiegen. Подниматься по лестнице, на гору — тоже: die Treppe hochsteigen.",
-    "usage_note_en": "Der Ballon stieg hoch in die Luft. — The balloon rose into the air. Separable, strong: stieg hoch, ist hochgestiegen. Also to climb up stairs or a hill: die Treppe hochsteigen.",
+    "usage_note_ru": "Отделяемый, сильный: stieg hoch, ist hochgestiegen. Подниматься по лестнице, на гору — тоже: die Treppe hochsteigen. Перен.: In ihm stieg Wut hoch. — В нём поднялась злость.",
+    "usage_note_en": "Separable, strong: stieg hoch, ist hochgestiegen. Also to climb up stairs or a hill: die Treppe hochsteigen. Figurative: In ihm stieg Wut hoch. — Anger welled up in him.",
     "example_de": "Aus dem Schornstein stieg dünner grauer Rauch hoch.",
     "example_cloze": "Aus dem Schornstein {{c1::stieg}} dünner grauer Rauch {{c1::hoch}}.",
     "example_ru": "Из трубы поднимался тонкий серый дым.",

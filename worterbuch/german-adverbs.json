@@ -5283,8 +5283,8 @@
     "example_de": "Kommst du mit? – Ja, gern.",
     "example_ru": "Ты пойдёшь с нами? – Да, с удовольствием.",
     "example_en": "Are you coming along? – Yes, I'd love to.",
-    "usage_note_ru": "Частица в середине утверждения — «ведь, же»: Das ist ja toll! — Это же здорово! Du weißt ja, … — Ты ведь знаешь, … В просьбе и предостережении ja nicht — «только не, ни в коем случае»: Komm ja nicht zu spät! — Только не опаздывай! Ответ «да» на отрицательный вопрос — doch. na ja / nun ja — отдельное выражение.",
-    "usage_note_en": "A particle in the middle of a statement — “after all, you know”: Das ist ja toll! — That's great! Du weißt ja, … — As you know, … In a request or warning ja nicht — “whatever you do, don't”: Komm ja nicht zu spät! — Don't you dare be late! The answer “yes” to a negative question is doch. na ja / nun ja — a separate expression.",
+    "usage_note_ru": "Частица в середине утверждения — «ведь, же»: Das ist ja toll! — Это же здорово! Du weißt ja, … — Ты ведь знаешь, … В просьбе и предостережении ja nicht — «только не, ни в коем случае»: Komm ja nicht zu spät! — Только не опаздывай!; без отрицания — «обязательно»: Sei ja vorsichtig! — Смотри, будь осторожен! Ответ «да» на отрицательный вопрос — doch. na ja / nun ja — отдельное выражение.",
+    "usage_note_en": "A particle in the middle of a statement — “after all, you know”: Das ist ja toll! — That's great! Du weißt ja, … — As you know, … In a request or warning ja nicht — “whatever you do, don't”: Komm ja nicht zu spät! — Don't you dare be late!; without a negation — “be sure to”: Sei ja vorsichtig! — Do be careful! The answer “yes” to a negative question is doch. na ja / nun ja — a separate expression.",
     "example_cloze": "Kommst du mit? – {{c1::Ja}}, gern."
   },
   {
@@ -5394,8 +5394,8 @@
     "example_de": "Bei der Gründung des Vereins war ich mit dabei.",
     "example_ru": "При основании клуба я тоже присутствовал.",
     "example_en": "I was there too when the club was founded.",
-    "usage_note_ru": "Не путать с предлогом mit + Dativ (mit dem Bus). Наречие стоит без существительного, часто перед dabei, dazu, daran: Das gehört mit dazu. — Это тоже сюда относится. Er schluckte ihn mit hinab. — Он проглотил его вместе (с остальным). Kommst du mit? — это глагол mitkommen.",
-    "usage_note_en": "Do not confuse with the preposition mit + dative (mit dem Bus). The adverb stands without a noun, often before dabei, dazu, daran: Das gehört mit dazu. — That is part of it too. Er schluckte ihn mit hinab. — He swallowed it along with the rest. Kommst du mit? is the verb mitkommen.",
+    "usage_note_ru": "Не путать с предлогом mit + Dativ (mit dem Bus). Наречие стоит без существительного, часто перед dabei, dazu, daran: Das gehört mit dazu. — Это тоже сюда относится. Das musst du mit berücksichtigen. — Это тоже надо учесть. С превосходной степенью — «один из»: Sie ist mit die Beste. — Она одна из лучших. Kommst du mit? — это глагол mitkommen.",
+    "usage_note_en": "Do not confuse with the preposition mit + dative (mit dem Bus). The adverb stands without a noun, often before dabei, dazu, daran: Das gehört mit dazu. — That is part of it too. Das musst du mit berücksichtigen. — You have to take that into account too. With a superlative — “one of”: Sie ist mit die Beste. — She is one of the best. Kommst du mit? is the verb mitkommen.",
     "example_cloze": "Bei der Gründung des Vereins war ich {{c1::mit}} dabei."
   },
   {
@@ -5407,15 +5407,15 @@
     "example_de": "Heute habe ich weniger Zeit als gestern.",
     "example_ru": "Сегодня у меня меньше времени, чем вчера.",
     "example_en": "I have less time today than yesterday.",
-    "usage_note_ru": "Сравнительная степень от wenig: wenig — weniger — am wenigsten. Не склоняется: weniger Geld, weniger Leute. Перед прилагательным — «менее»: weniger schön. immer weniger — всё меньше; nicht weniger als — не меньше чем. Не путать с wenige — немногие (wenige Leute).",
-    "usage_note_en": "Comparative of wenig: wenig — weniger — am wenigsten. It never changes its ending: weniger Geld, weniger Leute. Before an adjective — “less”: weniger schön. immer weniger — less and less; nicht weniger als — no less than. Do not confuse with wenige — few (wenige Leute).",
+    "usage_note_ru": "Сравнительная степень от wenig: wenig — weniger — am wenigsten. Не склоняется: weniger Geld, weniger Leute. Перед прилагательным — «менее»: weniger schön. immer weniger — всё меньше; nicht weniger als — не меньше чем. Не путать с wenige — немногие (wenige Leute). В счёте — минус: zehn weniger drei — десять минус три.",
+    "usage_note_en": "Comparative of wenig: wenig — weniger — am wenigsten. It never changes its ending: weniger Geld, weniger Leute. Before an adjective — “less”: weniger schön. immer weniger — less and less; nicht weniger als — no less than. Do not confuse with wenige — few (wenige Leute). In arithmetic — minus: zehn weniger drei — ten minus three.",
     "example_cloze": "Heute habe ich {{c1::weniger}} Zeit als gestern."
   },
   {
     "id": "adverb-457",
     "word": "lange",
     "translation_ru": "долго; давно",
-    "translation_en": "for a long time, long; long ago",
+    "translation_en": "for a long time, long; (with schon) for a long time now",
     "example_de": "Nach der Wanderung haben wir am Sonntag lange geschlafen.",
     "example_ru": "После похода мы в воскресенье долго спали.",
     "example_en": "After the hike we slept in late on Sunday.",

@@ -1803,6 +1803,19 @@
       {
         "pattern": "auf + Akkusativ"
       }
+    ],
+    "search_forms": [
+      "gespannter",
+      "gespanntere",
+      "gespannterem",
+      "gespannteren",
+      "gespannterer",
+      "gespannteres",
+      "gespannteste",
+      "gespanntestem",
+      "gespanntesten",
+      "gespanntester",
+      "gespanntestes"
     ]
   },
   {
@@ -10003,7 +10016,20 @@
         "pattern": "mit + Dativ"
       }
     ],
-    "passive": "none"
+    "passive": "none",
+    "search_forms": [
+      "vertrauter",
+      "vertrautere",
+      "vertrauterem",
+      "vertrauteren",
+      "vertrauterer",
+      "vertrauteres",
+      "vertrauteste",
+      "vertrautestem",
+      "vertrautesten",
+      "vertrautester",
+      "vertrautestes"
+    ]
   },
   {
     "id": "adjective-952",
@@ -17155,8 +17181,8 @@
   {
     "id": "adjective-1583",
     "word": "angeschlagen",
-    "translation_ru": "потрёпанный, ослабленный; нездоровый",
-    "translation_en": "chipped; weakened, beleaguered; ailing",
+    "translation_ru": "ослабленный, потрёпанный; нездоровый, щербатый (о посуде)",
+    "translation_en": "weakened, beleaguered; ailing, chipped (of crockery)",
     "example_de": "Nach der Niederlage wirkte die Mannschaft sichtlich angeschlagen.",
     "example_ru": "После поражения команда выглядела заметно ослабленной.",
     "example_en": "After the defeat the team looked visibly shaken.",
@@ -17195,7 +17221,7 @@
     "translation_en": "said, aforesaid",
     "example_de": "An besagtem Abend war er gar nicht in der Stadt.",
     "example_ru": "В упомянутый вечер его вообще не было в городе.",
-    "example_en": "On the said evening he was not in town at all.",
+    "example_en": "On the evening in question he was not in town at all.",
     "example_cloze": "An {{c1::besagtem}} Abend war er gar nicht in der Stadt.",
     "participle_of": "besagen",
     "meaning_differs": true
@@ -17314,7 +17340,7 @@
     "translation_ru": "прилизанный, вылизанный (wie geleckt)",
     "translation_en": "spick and span, slick",
     "example_de": "Die Wohnung sah aus wie geleckt.",
-    "example_ru": "Квартира выглядела как вылизанная.",
+    "example_ru": "Квартира была вылизана до блеска.",
     "example_en": "The flat looked spick and span.",
     "example_cloze": "Die Wohnung sah aus wie {{c1::geleckt}}.",
     "participle_of": "lecken",
@@ -17335,8 +17361,8 @@
   {
     "id": "adjective-1598",
     "word": "gerieben",
-    "translation_ru": "хитрый, пронырливый",
-    "translation_en": "crafty, wily",
+    "translation_ru": "хитрый, пронырливый; тёртый (калач)",
+    "translation_en": "crafty, wily; seasoned, streetwise",
     "example_de": "Der Händler war ein geriebener Geschäftsmann.",
     "example_ru": "Торговец был хитрым дельцом.",
     "example_en": "The trader was a crafty businessman.",
@@ -17465,10 +17491,10 @@
     "word": "überlebt",
     "translation_ru": "устаревший, отживший",
     "translation_en": "outdated, outmoded",
-    "example_de": "Viele halten diese Tradition für überlebt.",
-    "example_ru": "Многие считают эту традицию отжившей.",
-    "example_en": "Many people consider this tradition outdated.",
-    "example_cloze": "Viele halten diese Tradition für {{c1::überlebt}}.",
+    "example_de": "Diese Tradition ist längst überlebt.",
+    "example_ru": "Эта традиция давно отжила своё.",
+    "example_en": "This tradition has long been outdated.",
+    "example_cloze": "Diese Tradition ist längst {{c1::überlebt}}.",
     "participle_of": "überleben",
     "meaning_differs": true,
     "copula_or_attributive_only": true
@@ -17554,12 +17580,12 @@
   {
     "id": "adjective-1615",
     "word": "verkehrt",
-    "translation_ru": "неправильный; наоборот",
-    "translation_en": "wrong; the wrong way round",
-    "example_de": "Du hast den Pullover verkehrt herum an.",
-    "example_ru": "Ты надел свитер наизнанку.",
-    "example_en": "You have your jumper on inside out.",
-    "example_cloze": "Du hast den Pullover {{c1::verkehrt}} herum an.",
+    "translation_ru": "неправильный, ошибочный; наоборот, наизнанку (verkehrt herum)",
+    "translation_en": "wrong, mistaken; the wrong way round, inside out (verkehrt herum)",
+    "example_de": "Deine Antwort ist leider verkehrt.",
+    "example_ru": "Твой ответ, к сожалению, неправильный.",
+    "example_en": "Your answer is wrong, I'm afraid.",
+    "example_cloze": "Deine Antwort ist leider {{c1::verkehrt}}.",
     "participle_of": "verkehren",
     "meaning_differs": true,
     "copula_or_attributive_only": true

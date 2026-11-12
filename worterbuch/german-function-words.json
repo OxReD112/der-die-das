@@ -279,14 +279,14 @@
     "id": "function-016",
     "type": "Interjektion",
     "word": "hu",
-    "translation_ru": "у-у!, ух! (испуг, холод; чтобы напугать)",
-    "translation_en": "ooh!, whoo! (fear, cold; to scare someone)",
+    "translation_ru": "у-у!, ух!, фу! (испуг, холод, отвращение; чтобы напугать)",
+    "translation_en": "ooh!, ugh!, boo! (fear, cold, disgust; to scare someone)",
     "example_de": "Hu, ist das kalt hier drinnen!",
     "example_ru": "Ух, как здесь холодно!",
     "example_en": "Ooh, it's cold in here!",
     "target_file": null,
-    "usage_note_ru": "Также звук совы: hu, hu. Hu! — чтобы напугать (как русское «у-у!»).",
-    "usage_note_en": "Also the call of an owl: hu, hu. Hu! — to scare someone (like “boo!”).",
+    "usage_note_ru": "Hu, eine Spinne! — Фу, паук! Hu! — чтобы напугать (как русское «у-у!»). В сказках — также крик совы: »schuh, hu, hu, hu«.",
+    "usage_note_en": "Hu, eine Spinne! — Ugh, a spider! Hu! — to scare someone (like “boo!”). In fairy tales also the call of an owl: »schuh, hu, hu, hu«.",
     "search_forms": [
       "hu"
     ],
@@ -361,8 +361,8 @@
     "id": "function-021",
     "type": "Abkürzung",
     "word": "TV",
-    "translation_ru": "телевидение; телевизор (das TV — Television)",
-    "translation_en": "TV, television",
+    "translation_ru": "телевидение (das TV); (разг.) телевизор (der TV)",
+    "translation_en": "television (das TV); (colloquial) TV set (der TV)",
     "example_de": "Am Abend lief im TV ein alter Krimi.",
     "example_ru": "Вечером по телевизору шёл старый детектив.",
     "example_en": "An old crime film was on TV in the evening.",
@@ -370,8 +370,8 @@
       "TV"
     ],
     "wortschatz_excluded": true,
-    "usage_note_ru": "Сокращение (из англ.) от Television; по-немецки das Fernsehen.",
-    "usage_note_en": "Abbreviation (from English) of television; in German das Fernsehen."
+    "usage_note_ru": "Сокращение (из англ.) от Television; по-немецки das Fernsehen. Также TV = der Turnverein — спортивное общество (в названиях клубов: TV Musterstadt).",
+    "usage_note_en": "Abbreviation (from English) of television; in German das Fernsehen. Also TV = der Turnverein — gymnastics / sports club (in club names: TV Musterstadt)."
   },
   {
     "id": "function-022",
@@ -383,7 +383,8 @@
     "example_ru": "Волокна толщиной всего 20 мкм.",
     "example_en": "The fibres are only 20 μm thick.",
     "search_forms": [
-      "μm"
+      "μm",
+      "µm"
     ],
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от der Mikrometer (тысячная доля миллиметра).",
@@ -441,8 +442,8 @@
     "id": "function-026",
     "type": "Abkürzung",
     "word": "evtl.",
-    "translation_ru": "возможно, при случае (eventuell)",
-    "translation_en": "possibly, perhaps (eventuell)",
+    "translation_ru": "возможно, может быть; возможный (eventuell)",
+    "translation_en": "possibly, perhaps; possible (eventuell)",
     "example_de": "Ich komme evtl. etwas später.",
     "example_ru": "Я, возможно, приду чуть позже.",
     "example_en": "I may come a little later.",
@@ -450,8 +451,8 @@
       "evtl"
     ],
     "wortschatz_excluded": true,
-    "usage_note_ru": "Сокращение от eventuell.",
-    "usage_note_en": "Abbreviation of eventuell."
+    "usage_note_ru": "Сокращение от eventuell. Также как прилагательное: evtl. Änderungen — возможные изменения.",
+    "usage_note_en": "Abbreviation of eventuell. Also as an adjective: evtl. Änderungen — possible changes."
   },
   {
     "id": "function-027",
@@ -498,8 +499,8 @@
       "Hr"
     ],
     "wortschatz_excluded": true,
-    "usage_note_ru": "Сокращение от der Herr; чаще пишут Hrn. или полностью Herr.",
-    "usage_note_en": "Abbreviation of der Herr; Hrn. or the full Herr is more common."
+    "usage_note_ru": "Сокращение от der Herr. В косвенных падежах — Hrn. (= Herrn): an Hrn. Schulz. В обычном тексте слово чаще пишут полностью.",
+    "usage_note_en": "Abbreviation of der Herr. In the oblique cases — Hrn. (= Herrn): an Hrn. Schulz. In ordinary text the word is usually written out."
   },
   {
     "id": "function-030",
@@ -594,8 +595,8 @@
       "MW"
     ],
     "wortschatz_excluded": true,
-    "usage_note_ru": "Сокращение от das Megawatt.",
-    "usage_note_en": "Abbreviation of das Megawatt."
+    "usage_note_ru": "Сокращение от das Megawatt. Также MW = die Mittelwelle (средние волны, радио), der Mittelwert (среднее значение).",
+    "usage_note_en": "Abbreviation of das Megawatt. Also MW = die Mittelwelle (medium wave, radio), der Mittelwert (mean value)."
   },
   {
     "id": "function-036",
@@ -610,7 +611,7 @@
       "St"
     ],
     "wortschatz_excluded": true,
-    "usage_note_ru": "Сокращение от Sankt: St. Gallen, St. Pauli.",
-    "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli."
+    "usage_note_ru": "Сокращение от Sankt: St. Gallen, St. Pauli. В счетах и списках также St. = das Stück (штука), чаще Stk.",
+    "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli. In invoices and lists also St. = das Stück (piece), more often Stk."
   }
 ]

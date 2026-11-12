@@ -16276,8 +16276,7 @@
         "example_cloze": "Sie sitzt {{c1::entspannt}} im Sessel.",
         "example_usage": "Zustand beim Handeln"
       }
-    ],
-    "passive": "none"
+    ]
   },
   {
     "id": "adjective-adverb-436",
@@ -22371,5 +22370,51 @@
         "example_usage": "Adjektiv"
       }
     ]
+  },
+  {
+    "id": "adjective-adverb-543",
+    "word": "angespannt",
+    "translation_ru": "напряжённый (о положении, финансах, нервах, мышцах); напряжённо, сосредоточенно",
+    "translation_en": "tense, strained, tight (situation, finances); intently, with concentration",
+    "parts_of_speech": [
+      "Adjektiv",
+      "Adverb"
+    ],
+    "reading_policy": "merged",
+    "source_lemma": "angespannt",
+    "default_example": "adj",
+    "search_forms": [
+      "angespannte",
+      "angespanntem",
+      "angespannten",
+      "angespannter",
+      "angespanntes",
+      "angespanntere",
+      "angespannterem",
+      "angespannteren",
+      "angespannterer",
+      "angespannteres",
+      "angespannteste",
+      "angespanntestem",
+      "angespanntesten",
+      "angespanntester",
+      "angespanntestes"
+    ],
+    "example_de": "Nach dem Streit war die Stimmung im Büro sehr angespannt.",
+    "example_ru": "После ссоры атмосфера в офисе была очень напряжённой.",
+    "example_en": "After the argument the atmosphere in the office was very tense.",
+    "example_cloze": "Nach dem Streit war die Stimmung im Büro sehr {{c1::angespannt}}.",
+    "example_usage": "Adjektiv",
+    "additional_examples": [
+      {
+        "example_de": "Er hörte angespannt zu, um kein Wort zu verpassen.",
+        "example_ru": "Он напряжённо вслушивался, чтобы не пропустить ни слова.",
+        "example_en": "He listened intently so as not to miss a word.",
+        "example_cloze": "Er hörte {{c1::angespannt}} zu, um kein Wort zu verpassen.",
+        "example_usage": "Zustand beim Handeln"
+      }
+    ],
+    "usage_note_ru": "О положении, отношениях, нервах: Die Lage ist angespannt. — Положение напряжённое. Наречие — напряжённо, внимательно: angespannt zuhören. От anspannen — напрягать (силы, мышцы). Не путать с gespannt — с интересом, в ожидании: gespannt zuhören — слушать затаив дыхание.",
+    "usage_note_en": "Of a situation, relations, nerves: Die Lage ist angespannt. — The situation is tense. As an adverb — intently: angespannt zuhören. From anspannen — to tense, to strain (muscles, forces). Do not confuse with gespannt — eagerly, in suspense: gespannt zuhören."
   }
 ]

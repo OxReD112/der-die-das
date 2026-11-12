@@ -1365,6 +1365,76 @@
         "order": "fixed",
         "scope": "clause",
         "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "schnitte",
+              "schneid",
+              "geschnitten"
+            ]
+          },
+          {
+            "form": [
+              "eine",
+              "keine",
+              "diese",
+              "solch eine"
+            ]
+          },
+          {
+            "form": [
+              "Grimasse",
+              "Fratze"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "eine",
+              "keine"
+            ]
+          },
+          {
+            "form": [
+              "Grimasse",
+              "Fratze"
+            ]
+          },
+          {
+            "form": [
+              "schneide",
+              "schneidest",
+              "schneidet",
+              "schneiden",
+              "schnitt",
+              "schnittst",
+              "schnitten",
+              "schnittet",
+              "schnitte",
+              "schneid",
+              "geschnitten"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
       }
     ],
     "tests": {
@@ -1380,7 +1450,9 @@
         "Er zog wieder dieses Gesicht.",
         "Er musste Gesichter schneiden, damit die Leute lachen.",
         "Die Kinder schnitten Grimassen hinter seinem Rücken.",
-        "Sie schnitt Grimassen."
+        "Sie schnitt Grimassen.",
+        "Er schnitt eine Grimasse.",
+        "Sie hat eine Fratze geschnitten."
       ],
       "negative": [
         "Sie zog die Decke über ihr Gesicht.",
@@ -36276,7 +36348,7 @@
     "tests": {
       "positive": [
         "Die Feuerwehr war schon nach zehn Minuten vor Ort.",
-        "Alle konnten vor Ort sich den Entwurf anschauen.",
+        "Alle konnten sich vor Ort den Entwurf anschauen.",
         "Vor Ort sah die Lage ganz anders aus.",
         "Wir haben die Tickets direkt vor Ort gekauft."
       ],
@@ -36326,21 +36398,13 @@
             "form": "vor",
             "not_next": [
               "dem",
-              "der",
               "den",
               "des",
               "einem",
-              "einer",
-              "einen",
-              "eines",
               "seinem",
-              "seiner",
               "ihrem",
-              "ihrer",
               "meinem",
-              "meiner",
-              "diesem",
-              "dieser"
+              "diesem"
             ]
           }
         ],
@@ -36354,7 +36418,9 @@
         "Das kleine Café gibt es nach wie vor.",
         "Bin nach wie vor sehr zufrieden.",
         "Nach wie vor ist unklar, wer gewinnt.",
-        "Die Frage ist nach wie vor offen."
+        "Die Frage ist nach wie vor offen.",
+        "Er ist nach wie vor der Meinung, dass er recht hat.",
+        "Er ist nach wie vor einer der besten Spieler."
       ],
       "negative": [
         "Nach wie vor dem Essen soll man sich die Hände waschen.",
@@ -36419,8 +36485,8 @@
       ],
       "negative": [
         "Von Stunde zu Stunde wurde es kälter.",
-        "Er wartete von Stunde um Stunde.",
-        "Die Stunde fing um acht an."
+        "Die Stunde fing um acht an.",
+        "Er wartete Stunde um Stunde."
       ]
     }
   },
@@ -36582,7 +36648,6 @@
               "besser",
               "super",
               "prima",
-              "wohl",
               "sicher"
             ]
           },
@@ -36609,7 +36674,6 @@
               "besser",
               "super",
               "prima",
-              "wohl",
               "sicher"
             ]
           },
@@ -36727,7 +36791,6 @@
               "besser",
               "super",
               "prima",
-              "wohl",
               "sicher"
             ]
           },
@@ -36754,7 +36817,6 @@
               "besser",
               "super",
               "prima",
-              "wohl",
               "sicher"
             ]
           },
@@ -36794,7 +36856,8 @@
         "Man fühlte sich sehr gut bei ihr aufgehoben.",
         "Wer Bioprodukte sucht, ist hier super aufgehoben.",
         "Ich fühle mich dort aufgehoben.",
-        "Sie will ihre Kinder gut aufgehoben wissen."
+        "Sie will ihre Kinder gut aufgehoben wissen.",
+        "Ihre Daten sind bei uns sicher aufgehoben."
       ],
       "negative": [
         "Das Gesetz wurde aufgehoben.",
@@ -36805,7 +36868,8 @@
         "Die Sitzung ist aufgehoben.",
         "Das Urteil ist gut begründet und aufgehoben.",
         "Das Gesetz ist gut, aber es wurde aufgehoben.",
-        "Er fühlte sich gut, als das Verbot aufgehoben wurde."
+        "Er fühlte sich gut, als das Verbot aufgehoben wurde.",
+        "Das Urteil ist wohl aufgehoben."
       ]
     }
   },
@@ -36820,10 +36884,10 @@
     "example_ru": "В отпуске мы среди прочего прошли кулинарный курс.",
     "example_en": "On holiday we did a cooking course, among other things.",
     "notes_ru": [
-      "Сокращение — u. a. Не путать: unter anderem Namen — под другим именем."
+      "Сокращение — u. a.; оно же значит unter anderen (о лицах) и und andere (Müller u. a. — Мюллер и другие). Не путать: unter anderem Namen — под другим именем."
     ],
     "notes_en": [
-      "Abbreviation — u. a. Do not confuse: unter anderem Namen — under another name."
+      "Abbreviation — u. a.; it also stands for unter anderen (of people) and und andere (Müller u. a. — Müller et al.). Do not confuse: unter anderem Namen — under another name."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/unter_anderem",
@@ -37278,10 +37342,10 @@
     "example_ru": "Я почти ничего не ел.",
     "example_en": "I've eaten practically nothing.",
     "notes_ru": [
-      "Только перед nichts, nicht, kein, alle, sicher и т. п.: so gut wie fertig — почти готово. Не путать: so gut wie du — так же хорошо, как ты (сравнение)."
+      "Значит «почти»: so gut wie nichts / keine Zeit / fertig / neu / erledigt / immer. Не путать: so gut wie du — так же хорошо, как ты; so gut wie möglich — как можно лучше (сравнение)."
     ],
     "notes_en": [
-      "Only before nichts, nicht, kein, alle, sicher etc.: so gut wie fertig — practically finished. Do not confuse: so gut wie du — as well as you (comparison)."
+      "Means “almost”: so gut wie nichts / keine Zeit / fertig / neu / erledigt / immer. Do not confuse: so gut wie du — as well as you; so gut wie möglich — as well as possible (comparison)."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/so_gut_wie",
@@ -37299,32 +37363,78 @@
             "form": "gut"
           },
           {
-            "form": "wie"
-          },
-          {
-            "form": [
-              "nicht",
-              "nichts",
-              "kein",
-              "keine",
-              "keinen",
-              "keinem",
-              "keiner",
-              "keines",
-              "alle",
-              "allen",
-              "aller",
-              "alles",
-              "sicher",
-              "nie",
-              "niemand",
-              "niemals",
-              "unmöglich",
-              "ausgeschlossen",
-              "fertig",
-              "vorbei",
-              "sicher",
-              "unbekannt"
+            "form": "wie",
+            "not_next_capital": true,
+            "not_next": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "es",
+              "wir",
+              "ihr",
+              "man",
+              "der",
+              "die",
+              "das",
+              "den",
+              "dem",
+              "ein",
+              "eine",
+              "einer",
+              "einem",
+              "mein",
+              "meine",
+              "dein",
+              "deine",
+              "sein",
+              "seine",
+              "ihre",
+              "unser",
+              "unsere",
+              "euer",
+              "eure",
+              "dieser",
+              "diese",
+              "dieses",
+              "jeder",
+              "jede",
+              "möglich",
+              "nur",
+              "mich",
+              "dich",
+              "ihn",
+              "uns",
+              "euch",
+              "seinen",
+              "ihren",
+              "meinen",
+              "deinen",
+              "irgend",
+              "lange",
+              "kaum",
+              "selten",
+              "heute",
+              "gestern",
+              "früher",
+              "damals",
+              "zuvor",
+              "vorher",
+              "bei",
+              "in",
+              "im",
+              "auf",
+              "mit",
+              "zu",
+              "zum",
+              "zur",
+              "vor",
+              "nach",
+              "wenn",
+              "als",
+              "jemand",
+              "andere",
+              "anderen"
             ]
           }
         ],
@@ -37338,12 +37448,21 @@
         "Ich habe so gut wie nichts gegessen.",
         "Das ist so gut wie sicher.",
         "So gut wie alle waren da.",
-        "Er hat so gut wie keine Zeit."
+        "Er hat so gut wie keine Zeit.",
+        "Das Auto ist so gut wie neu.",
+        "Die Arbeit ist so gut wie erledigt.",
+        "Er ist so gut wie immer pünktlich."
       ],
       "negative": [
-        "Ich muss betteln, so gut wie du.",
         "Er spielt so gut wie sein Bruder.",
-        "So gut wie heute war es lange nicht."
+        "So gut wie heute war es lange nicht.",
+        "Mach es so gut wie möglich.",
+        "Ich helfe, so gut wie ich kann.",
+        "Sie singt so gut wie Maria.",
+        "Sie kennt ihn so gut wie mich.",
+        "Er kennt sie so gut wie seinen Vater.",
+        "Es lief so gut wie lange nicht.",
+        "Sie singt so gut wie ihre Mutter."
       ]
     }
   },
@@ -37830,10 +37949,10 @@
     "example_ru": "Это ты запросто сделаешь сам.",
     "example_en": "You can easily do that on your own.",
     "notes_ru": [
-      "Новое написание — ohne Weiteres. Не путать: ohne weiteres Kochen — без дальнейшей варки (weiteres — прилагательное)."
+      "Пишется также ohne Weiteres (так рекомендует Duden; оба написания верны). Не путать: ohne weiteres Kochen — без дальнейшей варки (weiteres — прилагательное)."
     ],
     "notes_en": [
-      "New spelling — ohne Weiteres. Do not confuse: ohne weiteres Kochen — without further cooking (weiteres — adjective)."
+      "Also written ohne Weiteres (Duden's recommendation; both spellings are correct). Do not confuse: ohne weiteres Kochen — without further cooking (weiteres — adjective)."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/weiter",
@@ -37883,10 +38002,10 @@
     "example_ru": "Да замолчи ты наконец!",
     "example_en": "Shut up, will you!",
     "notes_ru": [
-      "Также: über etwas den Mund halten — молчать о чём-либо. Не путать: sich die Hand vor den Mund halten — прикрыть рот рукой; den Mund zuhalten."
+      "Также: über etwas den Mund halten — молчать о чём-либо. Не путать: sich die Hand vor den Mund halten — прикрыть рот рукой; jdm. den Mund zuhalten — зажать кому-либо рот."
     ],
     "notes_en": [
-      "Also: über etwas den Mund halten — to keep quiet about something. Do not confuse: sich die Hand vor den Mund halten — to put one's hand over one's mouth; den Mund zuhalten."
+      "Also: über etwas den Mund halten — to keep quiet about something. Do not confuse: sich die Hand vor den Mund halten — to put one's hand over one's mouth; jdm. den Mund zuhalten — to put one's hand over someone's mouth."
     ],
     "related_ids": [
       "noun-370"
@@ -37989,13 +38108,49 @@
         "order": "fixed",
         "scope": "adjacent",
         "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "den Mund",
+            "not_after": [
+              "vor",
+              "an",
+              "in",
+              "über",
+              "auf",
+              "unter",
+              "hinter",
+              "zwischen",
+              "um",
+              "durch",
+              "für",
+              "gegen",
+              "aus",
+              "mit",
+              "von",
+              "zu",
+              "bei"
+            ]
+          },
+          {
+            "form": "zu"
+          },
+          {
+            "form": "halten"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
       }
     ],
     "tests": {
       "positive": [
         "Halt doch endlich den Mund!",
         "Ich sollte also lieber den Mund halten.",
-        "Er hielt den Mund und sagte nichts."
+        "Er hielt den Mund und sagte nichts.",
+        "Er versprach, den Mund zu halten."
       ],
       "negative": [
         "Er hielt sich die Hand vor den Mund.",
@@ -38369,7 +38524,14 @@
               "festem",
               "sicherem",
               "wackligen",
-              "wackeligen"
+              "wackeligen",
+              "gutem",
+              "schlechtem",
+              "vertrautem",
+              "freundschaftlichem",
+              "gespanntem",
+              "Kriegsfuß",
+              "Abruf"
             ]
           }
         ],
@@ -38431,7 +38593,14 @@
               "festem",
               "sicherem",
               "wackligen",
-              "wackeligen"
+              "wackeligen",
+              "gutem",
+              "schlechtem",
+              "vertrautem",
+              "freundschaftlichem",
+              "gespanntem",
+              "Kriegsfuß",
+              "Abruf"
             ]
           },
           {
@@ -38570,7 +38739,11 @@
         "Auf der Flasche steht nichts drauf.",
         "Er kritisiert die Fixierung auf eine rein materielle Besserung, die über der Freiheit stehe.",
         "Die Hoffnung auf das Wunder stand im Raum.",
-        "Er sagte, er stehe auf verlorenem Posten."
+        "Er sagte, er stehe auf verlorenem Posten.",
+        "Er stand auf und ging auf die Tür zu.",
+        "Ich stehe mit ihm auf gutem Fuß.",
+        "Ich stehe mit ihm auf Kriegsfuß.",
+        "Ich stehe auf Abruf bereit."
       ]
     }
   },
@@ -38585,10 +38758,10 @@
     "example_ru": "Телефон весь вечер звонил без конца.",
     "example_en": "The phone rang incessantly all evening.",
     "notes_ru": [
-      "Устар., книжн. Сейчас обычнее: ununterbrochen, ständig."
+      "= ununterbrochen, ständig."
     ],
     "notes_en": [
-      "Old-fashioned, literary. More usual today: ununterbrochen, ständig."
+      "= ununterbrochen, ständig."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/fort",
@@ -38715,7 +38888,7 @@
       ],
       "negative": [
         "Er kam in die Küche.",
-        "Die Quere des Balkens ist schmal."
+        "Er legte das Brett quer über die Kiste."
       ]
     }
   },
@@ -38898,10 +39071,10 @@
     "example_ru": "Волк сожрал бы ягнёнка целиком.",
     "example_en": "The wolf would have eaten the lamb skin and all.",
     "notes_ru": [
-      "Также переносно: mit Haut und Haaren ein Muggel — стопроцентный маггл."
+      "Также переносно: sich einer Sache mit Haut und Haar(en) verschreiben — целиком посвятить себя чему-либо."
     ],
     "notes_en": [
-      "Also figurative: mit Haut und Haaren ein Muggel — a Muggle through and through."
+      "Also figurative: sich einer Sache mit Haut und Haar(en) verschreiben — to devote oneself to something body and soul."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/Haut",
@@ -38933,11 +39106,11 @@
     "tests": {
       "positive": [
         "Der Wolf hätte das Lamm mit Haut und Haar gefressen.",
-        "Ich sei mit Haut und Haaren ein Muggel."
+        "Er hat sich der Musik mit Haut und Haaren verschrieben."
       ],
       "negative": [
-        "Mit Haut und Knochen war er nur noch.",
-        "Die Creme ist gut für Haut und Haar."
+        "Die Creme ist gut für Haut und Haar.",
+        "Er war nur noch Haut und Knochen."
       ]
     }
   },
@@ -39010,7 +39183,7 @@
     "translation_ru": "(благополучно) завершить, уладить; в надёжном месте",
     "translation_en": "(to get something) wrapped up, safely settled",
     "example_de": "Bis Freitag haben wir den Vertrag unter Dach und Fach.",
-    "example_ru": "До пятницы мы уладим договор.",
+    "example_ru": "К пятнице мы окончательно оформим договор.",
     "example_en": "We'll have the contract wrapped up by Friday.",
     "notes_ru": [
       "etwas unter Dach und Fach bringen — довести до конца; unter Dach und Fach sein — быть улаженным; (букв.) под крышей."
@@ -39299,8 +39472,12 @@
     "example_de": "Der Vorhang hat Feuer gefangen.",
     "example_ru": "Занавеска загорелась.",
     "example_en": "The curtain caught fire.",
-    "notes_ru": [],
-    "notes_en": [],
+    "notes_ru": [
+      "Перен.: Er fing sofort Feuer für die Idee. — Он сразу загорелся этой идеей."
+    ],
+    "notes_en": [
+      "Figurative: Er fing sofort Feuer für die Idee. — He was immediately fired up by the idea."
+    ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/Feuer",
     "wortschatz_excluded": true,
@@ -39338,7 +39515,13 @@
               "ein",
               "kein",
               "sein",
-              "ihr"
+              "ihr",
+              "offenem",
+              "offenes",
+              "mit",
+              "über",
+              "ans",
+              "vors"
             ]
           }
         ],
@@ -39363,7 +39546,13 @@
               "ein",
               "kein",
               "sein",
-              "ihr"
+              "ihr",
+              "offenem",
+              "offenes",
+              "mit",
+              "über",
+              "ans",
+              "vors"
             ]
           },
           {
@@ -39397,7 +39586,8 @@
       ],
       "negative": [
         "Er fing den Ball am Feuer.",
-        "Sie fingen Fische und machten ein Feuer."
+        "Sie fingen Fische und machten ein Feuer.",
+        "Sie fingen Fische und brieten sie über offenem Feuer."
       ]
     }
   },
@@ -39739,8 +39929,8 @@
         "Sie wollte ihn so richtig zur Minna machen."
       ],
       "negative": [
-        "In der Minna von Barnhelm sprach ihn Lessing an.",
-        "Er ging mit Minna ins Kino."
+        "Er ging mit Minna ins Kino.",
+        "Lessing schrieb die Komödie »Minna von Barnhelm«."
       ]
     }
   },
@@ -39749,8 +39939,8 @@
     "type": "Ausdruck",
     "group": "fixed_expression",
     "word": "im Trüben fischen",
-    "translation_ru": "ловить рыбу в мутной воде",
-    "translation_en": "to fish in troubled waters",
+    "translation_ru": "(разг.) ловить рыбу в мутной воде",
+    "translation_en": "(colloquial) to fish in troubled waters",
     "example_de": "Bei solchen Krisen fischen manche Händler gern im Trüben.",
     "example_ru": "В такие кризисы некоторые торговцы охотно ловят рыбу в мутной воде.",
     "example_en": "In crises like these some traders like to fish in troubled waters.",
@@ -39917,8 +40107,8 @@
         "Die Nachbarin schaut jeden Tag nach dem Rechten."
       ],
       "negative": [
-        "Er fragte nach dem Rechten Weg.",
-        "Sie sah nach dem rechten Schuh."
+        "Sie sah nach dem rechten Schuh.",
+        "Er fragte nach dem rechten Weg."
       ]
     }
   },
@@ -40179,8 +40369,8 @@
     "type": "Ausdruck",
     "group": "fixed_expression",
     "word": "jemanden ins Bockshorn jagen",
-    "translation_ru": "запугать, сбить с толку",
-    "translation_en": "to intimidate, to put the wind up someone",
+    "translation_ru": "(разг.) запугать, сбить с толку",
+    "translation_en": "(colloquial) to intimidate, to put the wind up someone",
     "example_de": "Lass dich von seinen Drohungen nicht ins Bockshorn jagen!",
     "example_ru": "Не дай его угрозам себя запугать!",
     "example_en": "Don't let his threats put the wind up you!",
@@ -40245,7 +40435,7 @@
     "tests": {
       "positive": [
         "Lass dich von seinen Drohungen nicht ins Bockshorn jagen!",
-        "Wir hätten uns doch nicht sollen ins Bockshorn jagen lassen."
+        "Wir hätten uns doch nicht ins Bockshorn jagen lassen sollen."
       ],
       "negative": [
         "Er jagte den Hasen ins Feld."
@@ -40503,8 +40693,8 @@
     "type": "Ausdruck",
     "group": "fixed_expression",
     "word": "mit Hängen und Würgen",
-    "translation_ru": "с грехом пополам, еле-еле",
-    "translation_en": "by the skin of one's teeth, with great difficulty",
+    "translation_ru": "(разг.) с грехом пополам, еле-еле",
+    "translation_en": "(colloquial) by the skin of one's teeth, with great difficulty",
     "example_de": "Er hat die Prüfung mit Hängen und Würgen bestanden.",
     "example_ru": "Он сдал экзамен с грехом пополам.",
     "example_en": "He passed the exam by the skin of his teeth.",
@@ -40650,13 +40840,17 @@
     "type": "Ausdruck",
     "group": "fixed_expression",
     "word": "reinen Tisch machen",
-    "translation_ru": "навести порядок; расставить точки над i, разобраться (раз и навсегда)",
-    "translation_en": "to make a clean sweep, to clear the air",
+    "translation_ru": "(разг.) навести порядок; расставить точки над i, разобраться (раз и навсегда)",
+    "translation_en": "(colloquial) to make a clean sweep, to clear the air",
     "example_de": "Nach dem Streit wollten wir endlich reinen Tisch machen.",
     "example_ru": "После ссоры мы хотели наконец во всём разобраться.",
     "example_en": "After the quarrel we wanted to clear the air at last.",
-    "notes_ru": [],
-    "notes_en": [],
+    "notes_ru": [
+      "С кем-либо / чем-либо — mit + Dativ: mit der Vergangenheit reinen Tisch machen."
+    ],
+    "notes_en": [
+      "With someone / something — mit + dative: mit der Vergangenheit reinen Tisch machen."
+    ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/Tisch",
     "wortschatz_excluded": true,
@@ -41718,10 +41912,10 @@
     "example_ru": "Мы как раз собирались уходить, когда зазвонил телефон.",
     "example_en": "We were just about to leave when the phone rang.",
     "notes_ru": [
-      "Книжн.; также старое im Begriffe sein. Не путать: im Begriff der Freiheit — в понятии свободы."
+      "Скорее письменное; также im Begriffe sein и im Begriff stehen. Не путать: im Begriff der Freiheit — в понятии свободы."
     ],
     "notes_en": [
-      "Formal; also old-fashioned im Begriffe sein. Do not confuse: im Begriff der Freiheit — in the concept of freedom."
+      "Rather written style; also im Begriffe sein and im Begriff stehen. Do not confuse: im Begriff der Freiheit — in the concept of freedom."
     ],
     "related_ids": [],
     "source_url": "https://www.duden.de/rechtschreibung/Begriff",
@@ -42259,11 +42453,11 @@
     "example_en": "In baking, what matters is the right temperature.",
     "notes_ru": [
       "Das kommt darauf an. — Смотря как; это зависит. Es kommt mir nicht darauf an. — Мне это не важно. worauf es ankommt — что важно.",
-      "Не путать с ankommen «прибывать»: Wir kommen auf dem Bahnhof an."
+      "Не путать с ankommen «прибывать»: Wir kommen am Bahnhof an."
     ],
     "notes_en": [
       "Das kommt darauf an. — It depends. Es kommt mir nicht darauf an. — It doesn't matter to me. worauf es ankommt — what matters.",
-      "Do not confuse with ankommen “to arrive”: Wir kommen auf dem Bahnhof an."
+      "Do not confuse with ankommen “to arrive”: Wir kommen am Bahnhof an."
     ],
     "related_ids": [
       "verb-024"
@@ -42399,9 +42593,9 @@
       ],
       "negative": [
         "Als Klein in Bukarest ankommt, regnet es.",
-        "Wir kommen morgen auf dem Bahnhof an.",
         "Er kam auf einer Insel an.",
-        "Sie kamen spät an."
+        "Sie kamen spät an.",
+        "Wir kommen morgen am Bahnhof an."
       ]
     }
   },
@@ -42688,10 +42882,12 @@
     "example_ru": "Всего за три недели школьники организовали целый концерт.",
     "example_en": "In just three weeks the pupils put together a whole concert.",
     "notes_ru": [
-      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Не путать с sich auf die Beine machen — отправиться."
+      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Не путать с sich auf die Beine machen — отправиться.",
+      "jdn. (wieder) auf die Beine stellen — также поставить (кого-либо) на ноги, вылечить."
     ],
     "notes_en": [
-      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Do not confuse with sich auf die Beine machen — to set off."
+      "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Do not confuse with sich auf die Beine machen — to set off.",
+      "jdn. (wieder) auf die Beine stellen — also to get someone back on their feet."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/Bein",
@@ -42863,16 +43059,18 @@
     "type": "Ausdruck",
     "group": "verbal_expression",
     "word": "etw. im Sinn haben",
-    "translation_ru": "замышлять, иметь в виду, намереваться",
-    "translation_en": "to have something in mind, to intend",
+    "translation_ru": "замышлять, иметь в виду, намереваться; (mit … nichts im Sinn haben) не интересоваться",
+    "translation_en": "to have something in mind, to intend; (mit … nichts im Sinn haben) to have no interest in",
     "example_de": "Niemand wusste, was der Alte im Sinn hatte.",
     "example_ru": "Никто не знал, что замышляет старик.",
     "example_en": "Nobody knew what the old man had in mind.",
     "notes_ru": [
-      "Nichts Gutes im Sinn haben — замышлять недоброе. Не путать с im Sinne von / des … — в смысле, согласно."
+      "Nichts Gutes im Sinn haben — замышлять недоброе. Не путать с im Sinne von / des … — в смысле, согласно.",
+      "Mit jdm. / etw. nichts im Sinn haben — не интересоваться кем-либо / чем-либо, не желать иметь дела: Mit Politik hat er nichts im Sinn."
     ],
     "notes_en": [
-      "Nichts Gutes im Sinn haben — to be up to no good. Do not confuse with im Sinne von / des … — in the sense of, according to."
+      "Nichts Gutes im Sinn haben — to be up to no good. Do not confuse with im Sinne von / des … — in the sense of, according to.",
+      "Mit jdm. / etw. nichts im Sinn haben — to have no interest in someone / something, to want nothing to do with: Mit Politik hat er nichts im Sinn."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/Sinn",
@@ -42974,10 +43172,12 @@
     "example_ru": "Наконец-то я избавился от надоедливого кашля.",
     "example_en": "At last I've got rid of the annoying cough.",
     "notes_ru": [
-      "Кого / что — винительный: Ich bin ihn los. Без дополнения — los «что-то происходит»: Was ist los? (не выражение)."
+      "Кого / что — винительный: Ich bin ihn los. Без дополнения — los «что-то происходит»: Was ist los? (не выражение).",
+      "Разг. о деньгах, вещах — лишиться, потерять: Jetzt bin ich 50 Euro los. — Теперь я на 50 евро беднее."
     ],
     "notes_en": [
-      "Whom / what — accusative: Ich bin ihn los. Without an object — los “going on”: Was ist los? (not this expression)."
+      "Whom / what — accusative: Ich bin ihn los. Without an object — los “going on”: Was ist los? (not this expression).",
+      "Colloquially of money, things — to lose: Jetzt bin ich 50 Euro los. — Now I'm 50 euros down."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/los",
@@ -43129,7 +43329,7 @@
     ],
     "notes_en": [
       "Without mit — fertig werden “to finish”: Ich werde bald fertig.",
-      "Also with damit (right before fertig): Er wird damit fertig — «he will cope with it / finish it»."
+      "Also with damit (right before fertig): Er wird damit fertig — “he will cope with it / finish it”."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/fertig",
@@ -43773,10 +43973,10 @@
     "example_ru": "Настоящие друзья пойдут с тобой в огонь и в воду.",
     "example_en": "Real friends go through thick and thin with you.",
     "notes_ru": [
-      "Пишется и с большой буквы: durch Dick und Dünn."
+      "Пишется со строчной: durch dick und dünn; обычно mit jdm. durch dick und dünn gehen — быть с кем-либо и в радости, и в горе."
     ],
     "notes_en": [
-      "Also written with capitals: durch Dick und Dünn."
+      "Written in lower case: durch dick und dünn; usually mit jdm. durch dick und dünn gehen — to stick with someone through thick and thin."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/dick",
@@ -43930,17 +44130,17 @@
     "id": "expression-227",
     "type": "Ausdruck",
     "group": "verbal_expression",
-    "word": "den Mantel nach dem Wind hängen",
+    "word": "den Mantel nach dem Wind hängen / drehen",
     "translation_ru": "держать нос по ветру, приспосабливаться (к обстоятельствам)",
-    "translation_en": "to trim one's sails to the wind, to be a turncoat",
+    "translation_en": "to trim one's sails to the wind, to swim with the tide",
     "example_de": "Der Politiker hängt seinen Mantel immer nach dem Wind.",
     "example_ru": "Этот политик всегда держит нос по ветру.",
     "example_en": "That politician always trims his sails to the wind.",
     "notes_ru": [
-      "Неодобрительно. Вариант: das Mäntelchen nach dem Wind hängen."
+      "Неодобрительно. Варианты: den Mantel / das Mäntelchen nach dem Wind(e) hängen / drehen / kehren."
     ],
     "notes_en": [
-      "Disapproving. Variant: das Mäntelchen nach dem Wind hängen."
+      "Disapproving. Variants: den Mantel / das Mäntelchen nach dem Wind(e) hängen / drehen / kehren."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/Mantel",
@@ -43970,7 +44170,23 @@
               "gehängt",
               "häng",
               "hing",
-              "hingen"
+              "hingen",
+              "drehe",
+              "drehst",
+              "dreht",
+              "drehen",
+              "drehte",
+              "drehten",
+              "gedreht",
+              "dreh",
+              "kehre",
+              "kehrst",
+              "kehrt",
+              "kehren",
+              "kehrte",
+              "kehrten",
+              "gekehrt",
+              "kehr"
             ]
           }
         ],
@@ -43982,7 +44198,8 @@
     "tests": {
       "positive": [
         "Der Politiker hängt seinen Mantel immer nach dem Wind.",
-        "»Ich schleife die Schere und drehe geschwind, und hänge mein Mäntelchen nach dem Wind.«"
+        "»Ich schleife die Schere und drehe geschwind, und hänge mein Mäntelchen nach dem Wind.«",
+        "Er dreht sein Mäntelchen nach dem Wind."
       ],
       "negative": [
         "Er hängte den Mantel an den Haken.",
@@ -44044,16 +44261,16 @@
     "type": "Ausdruck",
     "group": "fixed_expression",
     "word": "durch Mark und Bein (gehen)",
-    "translation_ru": "(пронизывать) до мозга костей, насквозь",
+    "translation_ru": "пронизывать насквозь, пробирать до дрожи",
     "translation_en": "(to go) right through someone, to the marrow",
     "example_de": "Der schrille Schrei ging mir durch Mark und Bein.",
-    "example_ru": "Пронзительный крик пронял меня до мозга костей.",
+    "example_ru": "От пронзительного крика меня пробрала дрожь.",
     "example_en": "The shrill scream went right through me.",
     "notes_ru": [
-      "О звуке, холоде, страхе: Die Kälte ging durch Mark und Bein. Также durch Mark und Knochen."
+      "О звуке, холоде, страхе: Die Kälte ging durch Mark und Bein. — Холод пробирал до костей."
     ],
     "notes_en": [
-      "Of a sound, cold, fear: Die Kälte ging durch Mark und Bein. Also durch Mark und Knochen."
+      "Of a sound, cold, fear: Die Kälte ging durch Mark und Bein. — The cold chilled me to the bone."
     ],
     "related_ids": [],
     "source_url": "https://www.dwds.de/wb/Mark#2",
@@ -44174,8 +44391,8 @@
         "Die Strafe folgte auf dem Fuße."
       ],
       "negative": [
-        "Er stand auf dem Fuß des Berges.",
-        "Der Stein fiel ihm auf den Fuß."
+        "Der Stein fiel ihm auf den Fuß.",
+        "Er stand mit einem Fuß auf dem Stuhl."
       ]
     }
   },
@@ -44270,9 +44487,9 @@
     "word": "jdn. gewähren lassen",
     "translation_ru": "не мешать кому-либо, дать поступать по-своему",
     "translation_en": "to let someone do as they please, not to interfere",
-    "example_de": "Die Eltern ließen das Kind gewähren, als es den Kuchen allein backen wollte.",
-    "example_ru": "Родители не мешали ребёнку, когда он захотел сам испечь пирог.",
-    "example_en": "The parents let the child get on with it when it wanted to bake the cake alone.",
+    "example_de": "Die Eltern ließen ihren Sohn gewähren, als er den Kuchen allein backen wollte.",
+    "example_ru": "Родители не мешали сыну, когда он захотел сам испечь пирог.",
+    "example_en": "The parents let their son get on with it when he wanted to bake the cake on his own.",
     "notes_ru": [
       "Без lassen gewähren значит «предоставить, исполнить»: eine Bitte gewähren."
     ],
@@ -44342,7 +44559,7 @@
     ],
     "tests": {
       "positive": [
-        "Die Eltern ließen das Kind gewähren, als es den Kuchen allein backen wollte.",
+        "Die Eltern ließen ihren Sohn gewähren, als er den Kuchen allein backen wollte.",
         "Das arme Sneewittchen dachte an nichts und ließ die Alte gewähren.",
         "»Vater, laßt mich auch einmal gewähren.«"
       ],
