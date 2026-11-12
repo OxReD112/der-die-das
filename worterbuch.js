@@ -78,14 +78,14 @@
     });
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261112-wn-fix85-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261112-wn-nachtun93-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261112-wn-md94-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261112-wn-motion95-7"),
+      loadJson("worterbuch/german-adjectives.json?v=20261112-wn-gebogen96-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261112-wn-old91-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261112-wn-old91-1"),
       loadJson("worterbuch/german-pronouns.json?v=20261107-wn-weniger56-1"),
       loadJson("worterbuch/german-adjective-adverbs.json?v=20261112-wn-md94-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-      loadJson("worterbuch/german-expressions.json?v=20261112-wn-fix86-1").catch(() => [])
+      loadJson("worterbuch/german-expressions.json?v=20261112-wn-expr97-1").catch(() => [])
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs, expressions]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [

@@ -17614,5 +17614,18 @@
     "example_cloze": "Nach dem Streit waren sich die Geschwister endlich wieder {{c1::einig}}.",
     "usage_note_ru": "ein einiges Land — единая страна; Wir sind uns in diesem Punkt einig. — В этом мы согласны. sich (D) einig sein — быть единодушными; sich einig werden — договориться. Не путать с einige — несколько.",
     "usage_note_en": "ein einiges Land — a united country; Wir sind uns in diesem Punkt einig. — We agree on this point. sich (D) einig sein — to be in agreement; sich einig werden — to come to an agreement. Do not confuse with einige — some, a few."
+  },
+  {
+    "id": "adjective-1618",
+    "word": "gebogen",
+    "translation_ru": "изогнутый, согнутый, дугообразный",
+    "translation_en": "bent, curved, arched",
+    "example_de": "Der Großvater stützte sich auf einen alten, gebogenen Stock.",
+    "example_ru": "Дедушка опирался на старую изогнутую палку.",
+    "example_en": "Grandfather leaned on an old, curved stick.",
+    "example_cloze": "Der Großvater stützte sich auf einen alten, {{c1::gebogenen}} Stock.",
+    "usage_note_ru": "О форме: eine gebogene Nase — нос с горбинкой, ein gebogener Schnabel — изогнутый клюв, leicht gebogen — слегка изогнутый. Причастие II от biegen — гнуть; ist um die Ecke gebogen — от biegen «сворачивать».",
+    "usage_note_en": "Of shape: eine gebogene Nase — an aquiline nose, ein gebogener Schnabel — a curved beak, leicht gebogen — slightly curved. Past participle of biegen — to bend; ist um die Ecke gebogen — from biegen “to turn”.",
+    "participle_of": "biegen"
   }
 ]

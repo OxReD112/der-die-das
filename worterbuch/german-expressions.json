@@ -44771,5 +44771,210 @@
         "Wie kommt es zu diesem Fehler?"
       ]
     }
+  },
+  {
+    "id": "expression-235",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "wie aus der Pistole geschossen",
+    "translation_ru": "мгновенно, не раздумывая (о быстром ответе, реакции)",
+    "translation_en": "like a shot, instantly, without hesitation",
+    "example_de": "Auf die Frage nach ihrem Lieblingsessen antwortete die Kleine wie aus der Pistole geschossen: »Pfannkuchen!«",
+    "example_ru": "На вопрос о любимой еде малышка мгновенно выпалила: «Блинчики!»",
+    "example_en": "Asked about her favourite food, the little girl answered like a shot: “Pancakes!”",
+    "notes_ru": [
+      "Разг. Обычно об ответе: antworten / sagen / kommen — wie aus der Pistole geschossen. Близко: sofort, ohne zu zögern."
+    ],
+    "notes_en": [
+      "Colloquial. Usually of an answer: antworten / sagen / kommen — wie aus der Pistole geschossen. Similar: sofort, ohne zu zögern."
+    ],
+    "related_ids": [
+      "verb-626"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Pistole",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ]
+          },
+          {
+            "form": "aus der"
+          },
+          {
+            "form": "Pistole"
+          },
+          {
+            "form": "geschossen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Auf die Frage nach ihrem Lieblingsessen antwortete die Kleine wie aus der Pistole geschossen: »Pfannkuchen!«",
+        "»Potter hat einen Besen geschickt bekommen, Professor«, sagte Malfoy wie aus der Pistole geschossen.",
+        "»Im Salon«, sagte Tante Petunia wie aus der Pistole geschossen, »wo ich sie herzlich in unserem Heim willkommen heiße.«",
+        "Die Antwort kam wie aus der Pistole geschossen."
+      ],
+      "negative": [
+        "Er hat mit der Pistole geschossen.",
+        "Die Kugel wurde aus der Pistole geschossen.",
+        "Aus der Pistole kam kein Schuss.",
+        "Er schoss wie ein Profi."
+      ]
+    }
+  },
+  {
+    "id": "expression-236",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "aus der Hüfte schießen",
+    "translation_ru": "действовать, отвечать сгоряча, с ходу, необдуманно",
+    "translation_en": "to shoot from the hip",
+    "example_de": "Bei schwierigen Verhandlungen sollte man nicht aus der Hüfte schießen.",
+    "example_ru": "На трудных переговорах не стоит действовать сгоряча.",
+    "example_en": "In difficult negotiations you shouldn't shoot from the hip.",
+    "notes_ru": [
+      "Разг. Часто с оттенком упрёка: Er schießt gern aus der Hüfte. — Он любит рубить с плеча. Буквально — стрелять от бедра, не целясь."
+    ],
+    "notes_en": [
+      "Colloquial, often critical: Er schießt gern aus der Hüfte. — He likes to shoot from the hip. Literally — to fire from the hip without aiming."
+    ],
+    "related_ids": [
+      "verb-626",
+      "noun-1954"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/Huefte",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "schieße",
+              "schießt",
+              "schießen",
+              "schießest",
+              "schieß",
+              "schoss",
+              "schoß",
+              "schossest",
+              "schosst",
+              "schossen",
+              "schösse",
+              "schössest",
+              "schössen",
+              "schösset",
+              "schösst",
+              "schießet",
+              "schoßt",
+              "schoßest",
+              "geschossen",
+              "schießend"
+            ]
+          },
+          {
+            "form": "aus der"
+          },
+          {
+            "form": "Hüfte",
+            "not_next": [
+              "ins",
+              "in",
+              "bis",
+              "nach",
+              "zum",
+              "zur",
+              "durch",
+              "hinunter",
+              "hinab",
+              "herab",
+              "hinauf",
+              "heraus"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "aus der"
+          },
+          {
+            "form": "Hüfte",
+            "not_next": [
+              "ins",
+              "in",
+              "bis",
+              "nach",
+              "zum",
+              "zur",
+              "durch",
+              "hinunter",
+              "hinab",
+              "herab",
+              "hinauf",
+              "heraus"
+            ]
+          },
+          {
+            "form": [
+              "schieße",
+              "schießt",
+              "schießen",
+              "schießest",
+              "schieß",
+              "schoss",
+              "schoß",
+              "schossest",
+              "schosst",
+              "schossen",
+              "schösse",
+              "schössest",
+              "schössen",
+              "schösset",
+              "schösst",
+              "schießet",
+              "schoßt",
+              "schoßest",
+              "geschossen",
+              "schießend"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Bei schwierigen Verhandlungen sollte man nicht aus der Hüfte schießen.",
+        "In seinen Filmen ist er der coole Draufgänger, der mit den richtigen Worten immer lässig aus der Hüfte schießt.",
+        "Er schießt gern aus der Hüfte.",
+        "Der Minister hat wieder einmal aus der Hüfte geschossen.",
+        "Wer aus der Hüfte schießt, muss sich später oft entschuldigen."
+      ],
+      "negative": [
+        "Er hat Schmerzen in der Hüfte.",
+        "Der Ball schoss ihm an die Hüfte.",
+        "Der Schmerz schoss ihm aus der Hüfte bis ins Knie.",
+        "Ein stechender Schmerz schoss aus der Hüfte ins Bein.",
+        "Er schoss den Ball aus der Hüfte ins Tor.",
+        "Er drehte sich aus der Hüfte und schoss aufs Tor.",
+        "Aus der Hüfte heraus drehte er sich und schoss."
+      ]
+    }
   }
 ]

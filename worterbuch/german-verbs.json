@@ -10591,6 +10591,142 @@
     }
   },
   {
+    "id": "verb-2767",
+    "infinitive": "sich biegen",
+    "translation_ru": "гнуться, сгибаться",
+    "translation_en": "to bend",
+    "auxiliary": "haben",
+    "usage_note_ru": "Die Äste biegen sich im Wind. — Ветки гнутся на ветру. sich vor Lachen biegen — корчиться от смеха. Сильный: bog sich, hat sich gebogen.",
+    "usage_note_en": "Die Äste biegen sich im Wind. — The branches bend in the wind. sich vor Lachen biegen — to double up with laughter. Strong: bog sich, hat sich gebogen.",
+    "example_de": "Unter der Last der reifen Äpfel bogen sich die Zweige bis zum Boden.",
+    "example_cloze": "Unter der Last der reifen Äpfel {{c1::bogen}} sich die Zweige bis zum Boden.",
+    "example_ru": "Под тяжестью спелых яблок ветки гнулись до самой земли.",
+    "example_en": "The branches bent to the ground under the weight of the ripe apples.",
+    "perfect_form": "haben sich gebogen",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "biege mich",
+        "du": "biegst dich",
+        "er/sie/es": "biegt sich",
+        "wir": "biegen uns",
+        "ihr": "biegt euch",
+        "sie": "biegen sich"
+      },
+      "Präteritum": {
+        "ich": "bog mich",
+        "du": "bogst dich",
+        "er/sie/es": "bog sich",
+        "wir": "bogen uns",
+        "ihr": "bogt euch",
+        "sie": "bogen sich"
+      },
+      "Konjunktiv II": {
+        "ich": "böge mich",
+        "du": "bögest dich",
+        "er/sie/es": "böge sich",
+        "wir": "bögen uns",
+        "ihr": "böget euch",
+        "sie": "bögen sich"
+      }
+    }
+  },
+  {
+    "id": "verb-2766",
+    "infinitive": "biegen",
+    "translation_ru": "гнуть, сгибать",
+    "translation_en": "to bend",
+    "auxiliary": "haben",
+    "usage_note_ru": "С прямым дополнением Perfekt с haben. «Сворачивать (за угол)» — biegen с sein (отдельная карточка). sich biegen — гнуться: Die Äste bogen sich im Wind.",
+    "usage_note_en": "With a direct object the perfect takes haben. “To turn (round a corner)” is biegen with sein (separate card). sich biegen — to bend: Die Äste bogen sich im Wind.",
+    "example_de": "Der Schmied hat das heiße Eisen zu einem Ring gebogen.",
+    "example_cloze": "Der Schmied hat das heiße Eisen zu einem Ring {{c1::gebogen}}.",
+    "example_ru": "Кузнец согнул горячее железо в кольцо.",
+    "example_en": "The blacksmith bent the hot iron into a ring.",
+    "perfect_form": "haben gebogen",
+    "forms": {
+      "Präsens": {
+        "ich": "biege",
+        "du": "biegst",
+        "er/sie/es": "biegt",
+        "wir": "biegen",
+        "ihr": "biegt",
+        "sie": "biegen"
+      },
+      "Präteritum": {
+        "ich": "bog",
+        "du": "bogst",
+        "er/sie/es": "bog",
+        "wir": "bogen",
+        "ihr": "bogt",
+        "sie": "bogen"
+      },
+      "Konjunktiv II": {
+        "ich": "böge",
+        "du": "bögest",
+        "er/sie/es": "böge",
+        "wir": "bögen",
+        "ihr": "böget",
+        "sie": "bögen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "гнуть, сгибать что-либо",
+        "note_en": "to bend something"
+      }
+    ]
+  },
+  {
+    "id": "verb-2765",
+    "infinitive": "biegen",
+    "translation_ru": "сворачивать, поворачивать (за угол, в улицу)",
+    "translation_en": "to turn (round a corner, into a street)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "О движении (без прямого дополнения) Perfekt с sein: Er ist um die Ecke gebogen. «Гнуть (что-либо)» — biegen с haben (отдельная карточка). Свернуть с дороги — abbiegen.",
+    "usage_note_en": "Of movement (no direct object) the perfect takes sein: Er ist um die Ecke gebogen. “To bend (something)” is biegen with haben (separate card). To turn off a road — abbiegen.",
+    "example_de": "Der Radfahrer ist zu schnell um die Ecke gebogen.",
+    "example_cloze": "Der Radfahrer ist zu schnell um die Ecke {{c1::gebogen}}.",
+    "example_ru": "Велосипедист слишком быстро свернул за угол.",
+    "example_en": "The cyclist turned the corner too fast.",
+    "perfect_form": "sein gebogen",
+    "forms": {
+      "Präsens": {
+        "ich": "biege",
+        "du": "biegst",
+        "er/sie/es": "biegt",
+        "wir": "biegen",
+        "ihr": "biegt",
+        "sie": "biegen"
+      },
+      "Präteritum": {
+        "ich": "bog",
+        "du": "bogst",
+        "er/sie/es": "bog",
+        "wir": "bogen",
+        "ihr": "bogt",
+        "sie": "bogen"
+      },
+      "Konjunktiv II": {
+        "ich": "böge",
+        "du": "bögest",
+        "er/sie/es": "böge",
+        "wir": "bögen",
+        "ihr": "böget",
+        "sie": "bögen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "um + Akkusativ / in + Akkusativ",
+        "note_ru": "свернуть за что-либо (um die Ecke) или куда-либо (in eine Seitenstraße)",
+        "note_en": "to turn round something (um die Ecke) or into something (in eine Seitenstraße)"
+      }
+    ]
+  },
+  {
     "id": "verb-215",
     "infinitive": "absagen",
     "translation_ru": "отменять; отказываться",
@@ -29482,8 +29618,8 @@
     "translation_ru": "бить (по мячу); стрелять",
     "translation_en": "to shoot (a ball); to shoot (a gun)",
     "auxiliary": "haben",
-    "usage_note_ru": "С движением (мчаться) — Perfekt с sein: Er ist um die Ecke geschossen. Разг.: Fotos schießen — делать снимки.",
-    "usage_note_en": "With movement (to shoot past) the perfect takes sein: Er ist um die Ecke geschossen. Colloquial: Fotos schießen — to take photos.",
+    "usage_note_ru": "«Мчаться, вылетать» — schießen с sein (отдельная карточка): Er ist um die Ecke geschossen. Разг.: Fotos schießen — делать снимки.",
+    "usage_note_en": "“To shoot past, to dash” is schießen with sein (separate card): Er ist um die Ecke geschossen. Colloquial: Fotos schießen — to take photos.",
     "example_de": "Er schießt den Ball ins Tor.",
     "example_cloze": "Er {{c1::schießt}} den Ball ins Tor.",
     "example_ru": "Он забивает мяч в ворота.",
@@ -29507,6 +29643,78 @@
         "sie": "schössen"
       }
     },
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "schieße",
+        "du": "schießt",
+        "er/sie/es": "schießt",
+        "wir": "schießen",
+        "ihr": "schießt",
+        "sie": "schießen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "забить (ein Tor); подстрелить (einen Hasen); (разг.) сделать (Fotos)",
+        "note_en": "to score (ein Tor); to shoot (einen Hasen); (colloquial) to take (Fotos)"
+      },
+      {
+        "pattern": "auf + Akkusativ",
+        "note_ru": "стрелять в кого-либо, по чему-либо (auf den Hasen)",
+        "note_en": "to shoot at someone or something (auf den Hasen)"
+      },
+      {
+        "pattern": "nach + Dativ",
+        "note_ru": "стрелять по чему-либо (nach der Scheibe)",
+        "note_en": "to shoot at something (nach der Scheibe)"
+      }
+    ]
+  },
+  {
+    "id": "verb-2768",
+    "infinitive": "schießen",
+    "translation_ru": "мчаться, вылетать, проноситься",
+    "translation_en": "to shoot, to dash, to race",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "О движении Perfekt с sein: Das Auto ist um die Ecke geschossen. Часто kam … (heraus)geschossen — вылетел. «Стрелять, бить (по мячу)» — schießen с haben (отдельная карточка). in die Höhe schießen — быстро вырасти. Без направления — только о растениях: Der Salat ist geschossen — салат пошёл в стрелку.",
+    "usage_note_en": "Of movement the perfect takes sein: Das Auto ist um die Ecke geschossen. Often kam … (heraus)geschossen — came shooting out. “To shoot (a gun, a ball)” is schießen with haben (separate card). in die Höhe schießen — to shoot up. Without a direction only of plants: Der Salat ist geschossen — the lettuce has bolted.",
+    "example_de": "Kaum ging die Tür auf, ist der Hund in den Garten geschossen.",
+    "example_cloze": "Kaum ging die Tür auf, ist der Hund in den Garten {{c1::geschossen}}.",
+    "example_ru": "Едва открылась дверь, собака пулей вылетела в сад.",
+    "example_en": "As soon as the door opened, the dog shot out into the garden.",
+    "perfect_form": "sein geschossen",
+    "forms": {
+      "Präteritum": {
+        "ich": "schoss",
+        "du": "schossest",
+        "er/sie/es": "schoss",
+        "wir": "schossen",
+        "ihr": "schosst",
+        "sie": "schossen"
+      },
+      "Konjunktiv II": {
+        "ich": "schösse",
+        "du": "schössest",
+        "er/sie/es": "schösse",
+        "wir": "schössen",
+        "ihr": "schösset",
+        "sie": "schössen"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "aus + Dativ",
+        "note_ru": "вылететь, выскочить откуда-либо (aus der Tür)",
+        "note_en": "to shoot out of something (aus der Tür)"
+      },
+      {
+        "pattern": "durch / um + Akkusativ",
+        "note_ru": "пронестись через что-либо (durch den Flur; о боли, мысли: durch den Kopf) или за что-либо (um die Ecke)",
+        "note_en": "to shoot through something (durch den Flur; of pain, a thought: durch den Kopf) or round something (um die Ecke)"
+      }
+    ],
     "lookup_forms": {
       "Präsens": {
         "ich": "schieße",
@@ -62765,14 +62973,90 @@
     "translation_ru": "парить, висеть в воздухе",
     "translation_en": "to float, to hover",
     "auxiliary": "haben",
-    "usage_note_ru": "С sein — плавно перемещаться: Die Tänzerin ist förmlich über die Bühne geschwebt. in Gefahr schweben — быть в опасности.",
-    "usage_note_en": "With sein — to glide (somewhere): Die Tänzerin ist förmlich über die Bühne geschwebt. in Gefahr schweben — to be in danger.",
+    "usage_note_ru": "«Плыть (по воздуху) куда-либо» — schweben с sein (отдельная карточка): Die Tänzerin ist über die Bühne geschwebt. in Gefahr schweben — быть в опасности. На юге Германии, в Австрии и Швейцарии и «парить» часто с sein: ist geschwebt.",
+    "usage_note_en": "“To glide (somewhere)” is schweben with sein (separate card): Die Tänzerin ist über die Bühne geschwebt. in Gefahr schweben — to be in danger. In southern Germany, Austria and Switzerland “to hover” also often takes sein: ist geschwebt.",
     "example_de": "Dank starker Magnete schwebt der Zug ein paar Zentimeter über den Schienen.",
     "example_cloze": "Dank starker Magnete {{c1::schwebt}} der Zug ein paar Zentimeter über den Schienen.",
     "example_ru": "Благодаря мощным магнитам поезд парит в нескольких сантиметрах над рельсами.",
     "example_en": "Thanks to powerful magnets, the train floats a few centimetres above the rails.",
     "perfect_form": "haben geschwebt",
     "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "schwebe",
+        "du": "schwebst",
+        "er/sie/es": "schwebt",
+        "wir": "schweben",
+        "ihr": "schwebt",
+        "sie": "schweben"
+      },
+      "Präteritum": {
+        "ich": "schwebte",
+        "du": "schwebtest",
+        "er/sie/es": "schwebte",
+        "wir": "schwebten",
+        "ihr": "schwebtet",
+        "sie": "schwebten"
+      },
+      "Konjunktiv II": {
+        "ich": "schwebte",
+        "du": "schwebtest",
+        "er/sie/es": "schwebte",
+        "wir": "schwebten",
+        "ihr": "schwebtet",
+        "sie": "schwebten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "in + Dativ",
+        "note_ru": "парить, висеть в чём-либо (in der Luft); быть (in Gefahr — в опасности)",
+        "note_en": "to float, to hang in something (in der Luft); to be (in Gefahr — in danger)"
+      },
+      {
+        "pattern": "über + Dativ",
+        "note_ru": "парить над чем-либо (über der Stadt)",
+        "note_en": "to hover over something (über der Stadt)"
+      }
+    ]
+  },
+  {
+    "id": "verb-2769",
+    "infinitive": "schweben",
+    "translation_ru": "плыть (по воздуху), плавно опускаться (подниматься)",
+    "translation_en": "to float, to glide (somewhere); to drift down (up)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "При перемещении (куда-либо) Perfekt с sein: Der Ballon ist über die Stadt geschwebt. «Парить, висеть на месте» — schweben с haben (отдельная карточка).",
+    "usage_note_en": "With movement (somewhere) the perfect takes sein: Der Ballon ist über die Stadt geschwebt. “To hover, to float in one place” is schweben with haben (separate card).",
+    "example_de": "Das Blatt ist langsam zu Boden geschwebt.",
+    "example_cloze": "Das Blatt ist langsam zu Boden {{c1::geschwebt}}.",
+    "example_ru": "Лист медленно опустился на землю.",
+    "example_en": "The leaf floated slowly to the ground.",
+    "perfect_form": "sein geschwebt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "durch + Akkusativ",
+        "note_ru": "проплыть через что-либо (durch den Raum)",
+        "note_en": "to float through something (durch den Raum)"
+      },
+      {
+        "pattern": "über + Akkusativ",
+        "note_ru": "проплыть над чем-либо (über die Stadt)",
+        "note_en": "to float across something (über die Stadt)"
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "вплыть куда-либо (ins Zimmer)",
+        "note_en": "to float into something (ins Zimmer)"
+      },
+      {
+        "pattern": "zu + Dativ",
+        "note_ru": "опуститься, подплыть к чему-либо (zu Boden)",
+        "note_en": "to float down, to drift to something (zu Boden)"
+      }
+    ],
     "lookup_forms": {
       "Präsens": {
         "ich": "schwebe",
@@ -123674,5 +123958,100 @@
         "sie": "bahnen sich an"
       }
     }
+  },
+  {
+    "id": "verb-2770",
+    "infinitive": "fegen",
+    "translation_ru": "подметать, мести; смахивать",
+    "translation_en": "to sweep; to sweep (off), to brush (off)",
+    "auxiliary": "haben",
+    "usage_note_ru": "С прямым дополнением Perfekt с haben. «Мчаться, проноситься» — fegen с sein (отдельная карточка). Синоним (южн.-нем.) — kehren.",
+    "usage_note_en": "With a direct object the perfect takes haben. “To sweep along, to race” is fegen with sein (separate card). Synonym (southern) — kehren.",
+    "example_de": "Nach dem Fest hat Opa den ganzen Hof gefegt.",
+    "example_cloze": "Nach dem Fest hat Opa den ganzen Hof {{c1::gefegt}}.",
+    "example_ru": "После праздника дедушка подмёл весь двор.",
+    "example_en": "After the party Grandpa swept the whole yard.",
+    "perfect_form": "haben gefegt",
+    "forms": {
+      "Präsens": {
+        "ich": "fege",
+        "du": "fegst",
+        "er/sie/es": "fegt",
+        "wir": "fegen",
+        "ihr": "fegt",
+        "sie": "fegen"
+      },
+      "Präteritum": {
+        "ich": "fegte",
+        "du": "fegtest",
+        "er/sie/es": "fegte",
+        "wir": "fegten",
+        "ihr": "fegtet",
+        "sie": "fegten"
+      },
+      "Konjunktiv II": {
+        "ich": "fegte",
+        "du": "fegtest",
+        "er/sie/es": "fegte",
+        "wir": "fegten",
+        "ihr": "fegtet",
+        "sie": "fegten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "подметать что-либо; сметать что-либо (Laub vom Weg fegen)",
+        "note_en": "to sweep something; to sweep something away (Laub vom Weg fegen)"
+      }
+    ]
+  },
+  {
+    "id": "verb-2771",
+    "infinitive": "fegen",
+    "translation_ru": "мчаться, проноситься (о ветре, буре; о человеке)",
+    "translation_en": "to sweep, to race, to tear (of wind, a storm; of a person)",
+    "auxiliary": "sein",
+    "direction_required": true,
+    "usage_note_ru": "О движении Perfekt с sein: Er ist um die Ecke gefegt. «Подметать» — fegen с haben (отдельная карточка).",
+    "usage_note_en": "Of movement the perfect takes sein: Er ist um die Ecke gefegt. “To sweep (with a broom)” is fegen with haben (separate card).",
+    "example_de": "Ein kalter Wind ist über die leeren Felder gefegt.",
+    "example_cloze": "Ein kalter Wind ist über die leeren Felder {{c1::gefegt}}.",
+    "example_ru": "Над пустыми полями пронёсся холодный ветер.",
+    "example_en": "A cold wind swept across the empty fields.",
+    "perfect_form": "sein gefegt",
+    "forms": {
+      "Präsens": {
+        "ich": "fege",
+        "du": "fegst",
+        "er/sie/es": "fegt",
+        "wir": "fegen",
+        "ihr": "fegt",
+        "sie": "fegen"
+      },
+      "Präteritum": {
+        "ich": "fegte",
+        "du": "fegtest",
+        "er/sie/es": "fegte",
+        "wir": "fegten",
+        "ihr": "fegtet",
+        "sie": "fegten"
+      },
+      "Konjunktiv II": {
+        "ich": "fegte",
+        "du": "fegtest",
+        "er/sie/es": "fegte",
+        "wir": "fegten",
+        "ihr": "fegtet",
+        "sie": "fegten"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "über / durch / um + Akkusativ",
+        "note_ru": "пронестись над чем-либо (über das Land), через что-либо (durch die Straßen) или за что-либо (um die Ecke)",
+        "note_en": "to sweep across (über das Land), through (durch die Straßen) or round something (um die Ecke)"
+      }
+    ]
   }
 ]

@@ -501,6 +501,9 @@
       // zu inside haben/sein + zu is the same Infinitivpartikel as in 4.8 (agreed 11 Oct 2026).
       // (#15, advisor 06.11: the tense first, as with the passive — «Präteritum · sein + zu mit sehen»; Präsens without a mark)
       case 'sein-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'sein + zu' : `sein + zu mit ${name}`}`], role:null, spans};
+      // (links chat, TODO item 88, advisor 12.11) kommen + Partizip II of motion — kam angerannt «прибежал»: the tense on kommen as in a
+      // simple group, «kommen + Partizip II» on the participle
+      case 'kommen-participle': return {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'kommen + Partizip II' : `kommen + Partizip II mit ${name}`}`], role:null, spans};
       // zu + infinitive (4.8): zu is the Infinitivpartikel; the verb keeps a plain Verb line.
       case 'zu-infinitive': return {marks:[], role:own === 'zu' ? 'infinitiveParticle' : null, spans};
       // um / ohne / statt … zu: the opener keeps its conjunction card (heading, Konjunktion, meaning).
