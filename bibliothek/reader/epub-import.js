@@ -38,7 +38,11 @@
   // Layout beside the text (12.11.2026, D16 + D23 step 1): the paragraph strings stay exactly what clean() gave before,
   // so the resolver, word offsets, bookmarks and highlights see no change. A chapter may carry paragraphLayout — one
   // entry per paragraph, null or { lineBreaks: [offsets of the spaces that were <br>], align: "center" | "right",
-  // marks: [{ start, end, kind: "i" | "b" | "spaced" | "sc" | "small" }], langs: [{ start, end, lang }] }.
+  // marks: [{ start, end, kind: "i" | "b" | "spaced" | "sc" | "small" }], langs: [{ start, end, lang }],
+  // gapBefore: true (a scene break: <hr> or a book "break" class with a top margin), quote: true (inside <blockquote>;
+  // quoteEnd on the last paragraph of it),
+  // verse: true with stanzaStart / verseEnd (lines of div.poem > div.stanza > div.line — each line stays its own
+  // paragraph, as before) }.
   // Offsets are in the paragraph string; a mark never starts or ends on a space.
   function cleanMapped(raw) {
     // Same result as clean(raw), plus map[i] = offset in the result of raw position i (a whitespace run maps to its
@@ -56,7 +60,7 @@
     map[raw.length] = text.length;
     return text === clean(raw) ? { text, map } : null;
   }
-  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing"];
+  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin"];
   function declarations(body) {
     const out = {};
     for (const [, name, value] of String(body || "").matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/gi)) {
@@ -119,6 +123,16 @@
     }
     return out;
   }
+  const BREAK_CLASS = /(?:^|[\s_-])(break|scene|space|spacer|gap|sep|separator)(?:$|[\s_-])/i, PAGE_CLASS = /page/i;
+  const VERSE_LINE_CLASS = /(?:^|\s)(line|verse-?line|vers|zeile)(?:\s|$)/i, STANZA_CLASS = /(stanza|strophe)/i, POEM_CLASS = /(poem|verse|gedicht)/i;
+  const ORNAMENT = /^[*\s⁂·•—–\-_~#x✱✳]+$/;
+  function topMargin(props) {
+    const value = props["margin-top"] || (props.margin || "").split(/\s+/)[0] || "";
+    const match = /^(\d*\.?\d+)(em|rem|px|pt)$/.exec(value);
+    if (!match) return 0;
+    const n = parseFloat(match[1]);
+    return match[2] === "px" ? n / 16 : match[2] === "pt" ? n / 12 : n;
+  }
   function extractChapter(doc, rules = [], bookLang = "") {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
@@ -126,6 +140,8 @@
     const base = value => String(value || "").toLowerCase().split(/[-_]/)[0];
     let pendingKind = "p";
     let pending = "", pendingBreaks = [], segments = [], align = null, state = {};
+    const gapAt = new Set();
+    let quoteDepth = 0, quoteNode = null, lastQuote = null, verseStanza = null, lastStanza = null;
     const flush = () => {
       const mapped = cleanMapped(pending), text = mapped ? mapped.text : clean(pending);
       if (text) {
@@ -141,6 +157,19 @@
           if (langs.length) layout.langs = langs;
         }
         if (align === "center" || align === "right") layout.align = align;
+        const index = paragraphs.length - 1, previous = paragraphLayout[index - 1];
+        if (gapAt.has(index) && index > 0 && !/^h[1-6]$/.test(pendingKind) && !ORNAMENT.test(text)) layout.gapBefore = true;
+        if (previous?.quote && quoteNode !== lastQuote) previous.quoteEnd = true;
+        if (quoteDepth) layout.quote = true;
+        lastQuote = quoteNode;
+        if (verseStanza) {
+          layout.verse = true;
+          if (verseStanza !== lastStanza) layout.stanzaStart = true;
+          lastStanza = verseStanza;
+        } else {
+          if (previous?.verse) previous.verseEnd = true;
+          lastStanza = null;
+        }
         paragraphLayout.push(Object.keys(layout).length ? layout : null);
       }
       pending = ""; pendingBreaks = []; segments = []; pendingKind = "p";
@@ -157,8 +186,20 @@
       const tag = node.localName.toLowerCase();
       if (excluded.has(tag) || node.hasAttribute("hidden") || node.getAttribute("aria-hidden") === "true") return;
       if (tag === "br") { pendingBreaks.push(pending.length); pending += "\n"; return; }
-      const block = blocks.has(tag), outer = align, outerState = state, props = ownStyle(node, rules);
-      if (block) { flush(); align = props["text-align"] || outer; }
+      // <hr> never splits text: the gap goes to the next paragraph that starts after it.
+      if (tag === "hr") { gapAt.add(paragraphs.length + (pending.trim() ? 1 : 0)); return; }
+      const block = blocks.has(tag), outer = align, outerState = state, outerStanza = verseStanza, props = ownStyle(node, rules);
+      const className = node.getAttribute("class") || "";
+      if (block) {
+        flush(); align = props["text-align"] || outer;
+        if (BREAK_CLASS.test(className) && !PAGE_CLASS.test(className) && topMargin(props) >= 0.9) gapAt.add(paragraphs.length);
+        if (tag === "blockquote" && !quoteDepth++) quoteNode = node;
+        if (VERSE_LINE_CLASS.test(className)) {
+          let up = node.parentNode, stanza = null;
+          while (up && up.nodeType === 1 && !stanza) { const c = up.getAttribute("class") || ""; if (STANZA_CLASS.test(c) || POEM_CLASS.test(c)) stanza = up; up = up.parentNode; }
+          if (stanza) verseStanza = stanza;
+        }
+      }
       state = inlineState(node, tag, props, outerState);
       const anchor = node.getAttribute("id") || node.getAttribute("name");
       if (anchor) anchors[anchor] = paragraphs.length;
@@ -166,9 +207,11 @@
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
       state = outerState;
-      if (block) { flush(); align = outer; }
+      if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; }
     }
     walk(body); flush();
+    if (paragraphLayout.at(-1)?.verse) paragraphLayout.at(-1).verseEnd = true;
+    if (paragraphLayout.at(-1)?.quote) paragraphLayout.at(-1).quoteEnd = true;
     const heading = ["h1", "h2", "h3"].map(tag => elements(body, tag)[0]).find(Boolean);
     return { title: clean(heading?.textContent || elements(doc, "title")[0]?.textContent), paragraphs, paragraphKinds, anchors, ...(paragraphLayout.some(Boolean) ? { paragraphLayout } : {}) };
   }

@@ -590,6 +590,50 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .reading-text .book-small {
   font-size: 0.9em;
 }
+/* Paragraph layout set by the EPUB (paragraphLayout, D23 step 2, 12.11.2026). The divider is drawn by CSS only, so the
+   paragraph text (what the resolver reads) stays the same. */
+.reading-text p.book-gap-before::before {
+  content: "*\2002*\2002*";
+  display: block;
+  margin: 0.2em 0 1.15em;
+  text-align: center;
+  text-indent: 0;
+  font-style: normal;
+  letter-spacing: 0;
+  color: var(--muted, currentColor);
+}
+.reading-text p.book-quote {
+  margin-left: 1.4em;
+  margin-right: 1.4em;
+  margin-bottom: 0.35em;
+}
+.reading-text p.book-quote-end {
+  margin-bottom: 1.15em;
+}
+/* Letters, inscriptions, lists: left-aligned whatever the reader's alignment setting (justify tears narrow lines);
+   lines the book itself centres or right-aligns keep that (user 12.11). */
+.reading-text p.book-quote:not(.book-align-center):not(.book-align-right) {
+  text-align: left;
+}
+.reading-text p.book-verse-line {
+  margin-bottom: 0;
+  margin-left: 1.4em;
+  padding-left: 1.4em;
+  text-indent: -1.4em;
+  text-align: left;
+}
+.reading-text p.book-verse-line.book-align-center {
+  text-align: center;
+}
+.reading-text p.book-verse-line.book-align-right {
+  text-align: right;
+}
+.reading-text p.book-stanza-start {
+  margin-top: 0.75em;
+}
+.reading-text p.book-verse-end {
+  margin-bottom: 1.15em;
+}
 .reading-word {
   border-radius: 2px;
   cursor: pointer;

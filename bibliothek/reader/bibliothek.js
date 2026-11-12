@@ -785,6 +785,8 @@
       p.dataset.paragraph = String(i);
       const layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
       if (layout?.align === "center" || layout?.align === "right") p.classList.add(`book-align-${layout.align}`);
+      // Paragraph layout from the EPUB (D23 step 2): scene break, quotation / letter, verse lines of a poem.
+      for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"]]) if (layout?.[field] === true) p.classList.add(name);
       p.append(wrapParagraph(paragraph, layout));
       $text.append(p);
     });
