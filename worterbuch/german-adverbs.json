@@ -5077,14 +5077,14 @@
   {
     "id": "adverb-431",
     "word": "eh",
-    "translation_ru": "всё равно, и так; (seit eh und je, wie eh und je) испокон веков, как всегда; (союз = ehe) прежде чем",
-    "translation_en": "anyway, in any case; (seit eh und je, wie eh und je) for ever, as always; (conjunction = ehe) before",
+    "translation_ru": "всё равно, и так; (seit eh und je, wie eh und je) испокон веков, как всегда; (устар., союз = ehe) прежде чем",
+    "translation_en": "anyway, in any case; (seit eh und je, wie eh und je) for ever, as always; (dated, conjunction = ehe) before",
     "example_de": "Nimm ruhig den Schirm mit, ich brauche ihn eh nicht.",
     "example_ru": "Бери зонт, мне он всё равно не нужен.",
     "example_en": "Go ahead and take the umbrella, I don't need it anyway.",
     "example_cloze": "Nimm ruhig den Schirm mit, ich brauche ihn {{c1::eh}} nicht.",
-    "usage_note_ru": "В значении «всё равно» — разговорное (юг Германии, Австрия) = sowieso. seit eh und je — испокон веков; wie eh und je — как всегда. Как союз eh = ehe «прежде чем»: eh ich gehe — прежде чем я уйду.",
-    "usage_note_en": "Meaning ‘anyway’ — colloquial (southern Germany, Austria) = sowieso. seit eh und je — for ever; wie eh und je — as always. As a conjunction eh = ehe ‘before’: eh ich gehe — before I go."
+    "usage_note_ru": "В значении «всё равно» — разговорное (юг Германии, Австрия) = sowieso. seit eh und je — испокон веков; wie eh und je — как всегда. Как союз (устар.) eh = ehe «прежде чем»: eh ich gehe — прежде чем я уйду.",
+    "usage_note_en": "Meaning ‘anyway’ — colloquial (southern Germany, Austria) = sowieso. seit eh und je — for ever; wie eh und je — as always. As a conjunction (dated) eh = ehe ‘before’: eh ich gehe — before I go."
   },
   {
     "id": "adverb-432",

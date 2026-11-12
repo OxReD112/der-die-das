@@ -10374,8 +10374,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let cluster = end;
       while (cluster-1 > start && /^\p{Ll}/u.test(tokens[cluster-1][0]) && rows(cluster-1).some(r => r.kind === 'infinitive' || r.kind === 'participle')) cluster--;
       // (a participle reading is the adjective / adverb inside the part: bis er endlich erschöpft zur Erde fiel)
+      // (links chat, TODO item 86, advisor 12.11: a determiner / possessive before a noun group is no finite verb — bis du meine Tochter …
+      // erhältst, Ehe du meine Tochter … erhältst; meine / seine / eine are also forms of meinen / einen)
+      const determinerBeforeNoun = i => DETERMINER_WORD.test(norm(tokens[i][0])) && (/^\p{Lu}/u.test(tokens[i+1]?.[0] ?? "") ||
+        LOWERCASE_DECLINED_WORD.test(tokens[i+1]?.[0] ?? "") && /^\p{Lu}/u.test(tokens[i+2]?.[0] ?? ""));
       for (let i = start+1; i < cluster; i++) if (!inserted.has(i) && finiteVerbToken(tokens[i]) && !/^(?:und|oder)$/u.test(norm(tokens[i+1][0])) &&
-        !rows(i).some(r => r.kind === 'participle')) return false;
+        !rows(i).some(r => r.kind === 'participle') && !determinerBeforeNoun(i)) return false;
       return true;
     }
     // Links chat, TODO item 17 (advisor 02.11.2026): damit without a punctuation mark before it opens a part (the conjunction) by the
@@ -13006,24 +13010,35 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // abzog, suchte er … The noun stays: Die Ehe war … (an article before), Ehe und Familie sind … (no verb-final part before a comma).
     function eheConjunction(word, context, result) {
       if (!result || !/^Eh(?:e)?$/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
-      const sentence = context.sentence, tokens = sharedTokens(sentence,'eheConjunction');
-      const index = tokens.findIndex(t => t.index === context.tokenOffset);
-      if (index < 0 || !tokens[index+1]) return result;
-      if (!/^[\s»«„“"‚‘'(–—-]*$/u.test(sentence.slice(index > 0 ? tokens[index-1].index + tokens[index-1][0].length : 0, tokens[index].index)) ||
-          index > 0 && !/[.!?:;»«„“"–—]/u.test(sentence.slice(tokens[index-1].index + tokens[index-1][0].length, tokens[index].index))) return result;
-      if (/[^\s]/u.test(sentence.slice(tokens[index].index + tokens[index][0].length, tokens[index+1].index))) return result;
-      const end = partEnd(sentence,tokens,index,{numbers:true});
-      // (the own finite verb at the end and no other one before it; a determiner / possessive that is also a verb form — meine, seine —
-      // is no verb: »Ehe du meine Tochter … erhältst,«)
-      if (!(end > index + 1 && (finiteVerbToken(tokens[end]) || joinedFiniteToken(tokens[end])))) return result;
-      for (let i = index + 1; i < end; i++) if (finiteVerbToken(tokens[i]) && !DETERMINER_WORD.test(norm(tokens[i][0])) &&
-        !(verbAnalyses.get(norm(tokens[i][0])) || []).some(r => r.kind === 'participle' || r.kind === 'infinitive')) return result;
-      if (!/^[»«„“"‚‘']?\s*,/u.test(sentence.slice(tokens[end].index + tokens[end][0].length))) return result;
       const list = result.candidates || [];
-      const conj = list.find(c => norm(c.lemma) === norm(word) && (canonicalPos(c.pos) === "Konjunktion" || c.pos === "conj"));
+      const pick = (chosen, rule) => keepDecision(result,{...result,candidates:[chosen,...list.filter(c => c !== chosen)],selected:chosen,preferred:chosen,
+        status:'resolved',evidence:rule},{outcome:'selected',rule,reason:rule});
+      const sign = (() => {
+        const sentence = context.sentence, tokens = sharedTokens(sentence,'eheConjunction');
+        const index = tokens.findIndex(t => t.index === context.tokenOffset);
+        if (index < 0 || !tokens[index+1]) return false;
+        if (!/^[\s»«„“"‚‘'(–—-]*$/u.test(sentence.slice(index > 0 ? tokens[index-1].index + tokens[index-1][0].length : 0, tokens[index].index)) ||
+            index > 0 && !/[.!?:;»«„“"–—]/u.test(sentence.slice(tokens[index-1].index + tokens[index-1][0].length, tokens[index].index))) return false;
+        if (/[^\s]/u.test(sentence.slice(tokens[index].index + tokens[index][0].length, tokens[index+1].index))) return false;
+        const end = partEnd(sentence,tokens,index,{numbers:true});
+        // (the shared sign: the part's own finite verb at its end and no other one before it — partEndsWithFiniteVerb, alone; a determiner
+        // before a noun is no verb there: »Ehe du meine Tochter … erhältst,«)
+        return end > index + 1 && partEndsWithFiniteVerb(sentence,tokens,index,{alone:true}) &&
+          /^[»«„“"‚‘']?\s*,/u.test(sentence.slice(tokens[end].index + tokens[end][0].length));
+      })();
+      // (links chat, advisor 12.11, with the card ehe of WN batch 92) without the sign a capital Ehe is the noun «брак», no window between
+      // our noun and our conjunction: Ehe und Familie sind wichtig; Eh without the sign keeps its own cards (eh «всё равно»)
+      if (!sign) {
+        if (word !== "Ehe" || result.selected) return result;
+        const noun = list.find(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === "ehe");
+        return noun && list.some(c => canonicalPos(c.pos) === "Konjunktion" && norm(c.lemma) === "ehe") ? pick(noun,'ehe-noun') : result;
+      }
+      // (the conjunction: our card ehe «(книжн.) прежде чем» — for Eh too, which never finds that card by its form: Eh er abzog, …)
+      const own = (lemmas.get("ehe") || []).find(e => e.type === "Konjunktion");
+      const conj = own ? list.find(c => c.dictionaryId === own.id) || mainCandidate(own) :
+        list.find(c => norm(c.lemma) === norm(word) && (canonicalPos(c.pos) === "Konjunktion" || c.pos === "conj"));
       if (!conj || result.selected === conj) return result;
-      return keepDecision(result,{...result,candidates:[conj,...list.filter(c => c !== conj)],selected:conj,preferred:conj,status:'resolved',
-        evidence:'ehe-conjunction'},{outcome:'selected',rule:'ehe-conjunction',reason:'ehe-conjunction'});
+      return pick(conj,'ehe-conjunction');
     }
     function nameAfterTitle(word, context, result) {
       if (!result || !/^\p{Lu}/u.test(String(word)) || typeof context?.sentence !== 'string' || !Number.isInteger(context?.tokenOffset)) return result;
