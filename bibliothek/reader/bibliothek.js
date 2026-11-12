@@ -722,9 +722,23 @@
     }
 
   }
-  function wrapParagraph(paragraph) {
+  // Line breaks (12.11.2026, D16): paragraphLayout.lineBreaks are offsets of spaces that were <br> in the EPUB. The
+  // space stays in the text (textContent is the sentence the resolver reads) and a <br> follows it, so offsets,
+  // highlights and bookmarks are unchanged; a break that would fall inside a word button is skipped.
+  function appendWithBreaks(fragment, token, start, breaks) {
+    let from = 0;
+    for (const offset of breaks) {
+      const at = offset - start;
+      if (at < from || at >= token.length) continue;
+      fragment.append(document.createTextNode(token.slice(from, at + 1)), document.createElement("br"));
+      from = at + 1;
+    }
+    if (from < token.length) fragment.append(document.createTextNode(token.slice(from)));
+  }
+  function wrapParagraph(paragraph, layout = null) {
     const fragment = document.createDocumentFragment();
     const tokens = window.BibliothekLemmaResolver.readerSegments(paragraph);
+    const breaks = Array.isArray(layout?.lineBreaks) ? layout.lineBreaks : [];
     let tokenOffset = 0;
     tokens.forEach(token => {
       if (/^[\p{L}\p{M}]/u.test(token)) {
@@ -736,7 +750,8 @@
         span.setAttribute("role", "button");
         span.setAttribute("aria-label", `${token}, tap for translation`);
         fragment.append(span);
-      } else fragment.append(document.createTextNode(token));
+      } else if (breaks.length) appendWithBreaks(fragment, token, tokenOffset, breaks);
+      else fragment.append(document.createTextNode(token));
       tokenOffset += token.length;
     });
     return fragment;
@@ -755,7 +770,9 @@
       const kind = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphKinds?.[i] : "p";
       const p = document.createElement(/^h[1-6]$/.test(kind || "") ? kind : "p");
       p.dataset.paragraph = String(i);
-      p.append(wrapParagraph(paragraph));
+      const layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
+      if (layout?.align === "center" || layout?.align === "right") p.classList.add(`book-align-${layout.align}`);
+      p.append(wrapParagraph(paragraph, layout));
       $text.append(p);
     });
     currentBook = book;

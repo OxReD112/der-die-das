@@ -35,13 +35,65 @@
     }
     return parts.join("/");
   }
-  function extractChapter(doc) {
+  // Layout beside the text (12.11.2026, D16): the paragraph strings stay exactly what clean() gave before, so the
+  // resolver, word offsets, bookmarks and highlights see no change. A chapter may carry paragraphLayout — one entry
+  // per paragraph, null or { lineBreaks: [offsets of the spaces that were <br>], align: "center" | "right" }.
+  function cleanWithBreaks(raw, breaks) {
+    // Same result as clean(raw); breaks are raw indices of "\n" written for <br>, returned as offsets in the result.
+    let text = "", last = 0, lineBreaks = [], bi = 0;
+    const runs = /\s+/g;
+    for (let m; (m = runs.exec(raw));) {
+      text += raw.slice(last, m.index);
+      const end = m.index + m[0].length, edge = m.index === 0 || end === raw.length;
+      let hit = false;
+      while (bi < breaks.length && breaks[bi] < end) { if (breaks[bi] >= m.index) hit = true; bi++; }
+      if (!edge) { if (hit) lineBreaks.push(text.length); text += " "; }
+      last = end;
+    }
+    text += raw.slice(last);
+    return text === clean(raw) ? { text, lineBreaks } : { text: clean(raw), lineBreaks: [] };
+  }
+  function alignRules(css) {
+    const rules = [];
+    css = css.replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/@media([^{]*)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g, (_, query, body) => /screen|all/i.test(query) || !query.trim() ? body : "");
+    for (const [, selectors, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const value = /(?:^|;)\s*text-align\s*:\s*([a-z-]+)/i.exec(body)?.[1]?.toLowerCase();
+      if (!value || selectors.trim().startsWith("@")) continue;
+      for (const selector of selectors.split(",")) {
+        const last = selector.trim().split(/[\s>+~]+/).pop() || "";
+        if (last.includes(":") || last.includes("[")) continue;
+        const classes = [...last.matchAll(/\.([\w-]+)/g)].map(match => match[1]);
+        if (classes.length) rules.push({ tag: /^[a-z][\w-]*/i.exec(last)?.[0].toLowerCase() || "", classes, value });
+      }
+    }
+    return rules;
+  }
+  function ownAlign(node, rules) {
+    const inline = /(?:^|;)\s*text-align\s*:\s*([a-z-]+)/i.exec(node.getAttribute("style") || "")?.[1]?.toLowerCase();
+    if (inline) return inline;
+    const tag = node.localName.toLowerCase(), classes = new Set((node.getAttribute("class") || "").split(/\s+/).filter(Boolean));
+    let value = null;
+    if (classes.size) for (const rule of rules) if ((!rule.tag || rule.tag === tag) && rule.classes.every(name => classes.has(name))) value = rule.value;
+    return value;
+  }
+  function extractChapter(doc, rules = []) {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
-    const paragraphs = [], paragraphKinds = [], anchors = Object.create(null);
+    const paragraphs = [], paragraphKinds = [], paragraphLayout = [], anchors = Object.create(null);
     let pendingKind = "p";
-    let pending = "";
-    const flush = () => { const text = clean(pending); if (text) { paragraphs.push(text); paragraphKinds.push(pendingKind); } pending = ""; pendingKind = "p"; };
+    let pending = "", pendingBreaks = [], align = null;
+    const flush = () => {
+      const { text, lineBreaks } = cleanWithBreaks(pending, pendingBreaks);
+      if (text) {
+        paragraphs.push(text); paragraphKinds.push(pendingKind);
+        const layout = {};
+        if (lineBreaks.length) layout.lineBreaks = lineBreaks;
+        if (align === "center" || align === "right") layout.align = align;
+        paragraphLayout.push(Object.keys(layout).length ? layout : null);
+      }
+      pending = ""; pendingBreaks = []; pendingKind = "p";
+    };
     const blocks = new Set(["p", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre", "tr", "figure", "figcaption", "dl", "dt", "dd"]);
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
     function walk(node) {
@@ -49,18 +101,19 @@
       if (node.nodeType !== 1) return;
       const tag = node.localName.toLowerCase();
       if (excluded.has(tag) || node.hasAttribute("hidden") || node.getAttribute("aria-hidden") === "true") return;
-      if (tag === "br") { pending += "\n"; return; }
-      if (blocks.has(tag)) flush();
+      if (tag === "br") { pendingBreaks.push(pending.length); pending += "\n"; return; }
+      const block = blocks.has(tag), outer = align;
+      if (block) { flush(); align = ownAlign(node, rules) || outer; }
       const anchor = node.getAttribute("id") || node.getAttribute("name");
       if (anchor) anchors[anchor] = paragraphs.length;
       if (/^h[1-6]$/.test(tag)) pendingKind = tag;
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
-      if (blocks.has(tag)) flush();
+      if (block) { flush(); align = outer; }
     }
     walk(body); flush();
     const heading = ["h1", "h2", "h3"].map(tag => elements(body, tag)[0]).find(Boolean);
-    return { title: clean(heading?.textContent || elements(doc, "title")[0]?.textContent), paragraphs, paragraphKinds, anchors };
+    return { title: clean(heading?.textContent || elements(doc, "title")[0]?.textContent), paragraphs, paragraphKinds, anchors, ...(paragraphLayout.some(Boolean) ? { paragraphLayout } : {}) };
   }
   async function thumbnail(bytes, type) {
     const url = URL.createObjectURL(new Blob([bytes], { type }));
@@ -161,6 +214,25 @@
         }
       }
     } catch (_) { /* Keep the standard cover when artwork is missing or damaged. */ }
+    // Book stylesheets are read only for text-align (centred verse, right-aligned signatures); a missing or broken
+    // stylesheet only loses the alignment.
+    const styleCache = new Map();
+    async function chapterAlignRules(doc, path) {
+      const rules = [];
+      for (const node of [...elements(doc, "link"), ...elements(doc, "style")]) {
+        if (node.localName === "style") { rules.push(...alignRules(node.textContent || "")); continue; }
+        if (!/stylesheet/i.test(node.getAttribute("rel") || "") || !node.getAttribute("href")) continue;
+        let cssPath;
+        try { cssPath = resolvePath(path, node.getAttribute("href")); } catch (_) { continue; }
+        if (!styleCache.has(cssPath)) {
+          let parsed = [];
+          try { if (!encrypted.has(cssPath) && zip.file(cssPath)) parsed = alignRules(await read(cssPath)); } catch (_) { parsed = []; }
+          styleCache.set(cssPath, parsed);
+        }
+        rules.push(...styleCache.get(cssPath));
+      }
+      return rules;
+    }
     const chapters = [];
     for (const ref of elements(spine, "itemref")) {
       const item = items.get(ref.getAttribute("idref"));
@@ -169,8 +241,9 @@
       if (encrypted.has(path)) fail("This EPUB is DRM-protected. Choose a DRM-free book.");
       if (ref.getAttribute("linear") === "no") continue;
       if (item.getAttribute("media-type") !== "application/xhtml+xml") fail("This EPUB contains an unsupported chapter format.");
-      const chapter = extractChapter(xml(await read(path)));
-      if (chapter.paragraphs.length) chapters.push({ id: ref.getAttribute("idref"), href: path, title: chapter.title || `Chapter ${chapters.length + 1}`, paragraphs: chapter.paragraphs, paragraphKinds: chapter.paragraphKinds, anchors: chapter.anchors });
+      const doc = xml(await read(path));
+      const chapter = extractChapter(doc, await chapterAlignRules(doc, path));
+      if (chapter.paragraphs.length) chapters.push({ id: ref.getAttribute("idref"), href: path, title: chapter.title || `Chapter ${chapters.length + 1}`, paragraphs: chapter.paragraphs, paragraphKinds: chapter.paragraphKinds, anchors: chapter.anchors, ...(chapter.paragraphLayout ? { paragraphLayout: chapter.paragraphLayout } : {}) });
     }
     if (!chapters.length) fail("This EPUB contains no readable text.");
     // Navigation is optional: a broken TOC must not make readable spine text unusable.

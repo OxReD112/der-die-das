@@ -566,6 +566,13 @@ body.library-screen .data-sources button:active:not(:disabled) {
   margin: 0 0 1.15em;
   text-align: var(--reader-align, justify);
 }
+/* Alignment set by the EPUB itself (centred verse, right-aligned signatures; epub-import.js paragraphLayout, 12.11.2026). */
+.reading-text p.book-align-center {
+  text-align: center;
+}
+.reading-text p.book-align-right {
+  text-align: right;
+}
 .reading-word {
   border-radius: 2px;
   cursor: pointer;
