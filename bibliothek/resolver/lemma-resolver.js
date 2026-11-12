@@ -6396,9 +6396,43 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const werdenInClause = indices.some(i => verbs(i).some(e => e.word === "werden"));
       const DATIVE_WORD = /^(?:mir|dir|ihm|ihr|ihnen|dem|einem|meinem|deinem|seinem|ihrem|unserem|eurem|keinem|diesem|jedem)$/u;
       const NOMINATIVE_PRONOUN = /^(?:ich|du|er|sie|es|wir|man)$/u;
+      // (5а.1, cards chat + advisor 12.11) a subject in the part ends the impersonal passive: a nominative unambiguous by its form that
+      // agrees with the finite werden (wurde / wird — 3rd person singular, wurden / werden — plural): der / das / ein + a noun, die / eine +
+      // a feminine noun in the singular, die + a plural noun for wurden. Not es (Es wurde ihm vertraut), not ihr (dative with wurde), not
+      // an accusative of time (die ganze Zeit, den ganzen Tag): Die Stadt wurde mir schnell vertraut, Mit der Zeit wurde ihr die Gegend
+      // vertraut, Das Gesicht wurde ihm vertraut — «становиться» + vertraut; Ihm wurde nicht mehr vertraut, Dem Zeugen wurde nicht vertraut
+      // stay the passive of vertrauen.
+      const finiteWerden = indices.map(i => norm(tokens[i][0])).find(w => /^(?:wird|wurde|würde|werde|wurden|werden|würden|wirst|wurdest)$/u.test(w));
+      const werdenNumber = !finiteWerden ? null : /^(?:wird|wurde|würde|werde)$/u.test(finiteWerden) ? "sg" : /^(?:wurden|würden|werden)$/u.test(finiteWerden) ? "pl" : null;
+      const TIME_NOUN = /^(?:zeit|tag|woche|monat|jahr|nacht|stunde|minute|sekunde|weile|moment|augenblick|abend|morgen|nachmittag|vormittag|winter|sommer|frühling|herbst)$/u;
+      const nounSubject = () => indices.some(i => {
+        const d = norm(tokens[i][0]);
+        if (!/^(?:der|die|das|ein|eine)$/u.test(d) || i > 0 && prepositions.has(norm(tokens[i-1][0]))) return false;
+        let k = i + 1;
+        while (indices.includes(k) && /^\p{Ll}/u.test(tokens[k][0]) && !(verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === "finite")) k++;
+        if (!indices.includes(k) || !/^\p{Lu}/u.test(tokens[k][0]) || TIME_NOUN.test(norm(tokens[k][0]))) return false;
+        if (tokens.slice(i+1,k).some(t => /^(?:ganz|ganze|ganzen|jede|jeden|jedes|halbe|halben)$/u.test(norm(t[0])))) return false;
+        const cards = (forms.get(norm(tokens[k][0])) || []).filter(e => e.type === "Nomen");
+        if (!cards.length) return false;
+        const sg = cards.filter(e => norm(e.word) === norm(tokens[k][0])), pl = cards.filter(e => norm(e.word) !== norm(tokens[k][0]) &&
+          String(e.plural || "").split(/\s*,\s*/u).some(p => norm(p) === norm(tokens[k][0])));
+        const gender = e => String(e.article || "").trim();
+        if (werdenNumber === "sg") {
+          if (d === "der" || d === "ein") return sg.some(e => gender(e) === "der") && !sg.some(e => gender(e) === "die") && !pl.length;
+          if (d === "das" || d === "ein") return sg.some(e => gender(e) === "das") && !pl.length;
+          return sg.length > 0 && sg.every(e => gender(e) === "die") && !pl.length;
+        }
+        if (werdenNumber === "pl") return d === "die" && pl.length > 0 && !sg.length;
+        return false;
+      });
       const impersonalDative = indices.some(i => DATIVE_WORD.test(norm(tokens[i][0])) && !(i > 0 && prepositions.has(norm(tokens[i-1][0])))) &&
-        !indices.some(i => NOMINATIVE_PRONOUN.test(norm(tokens[i][0])));
-      const becomeAt = i => werdenInClause && !reflexiveInClause && !impersonalDative && !context.coordinatedLeft && passiveNone(tokens[i][0]);
+        !indices.some(i => NOMINATIVE_PRONOUN.test(norm(tokens[i][0])) && norm(tokens[i][0]) !== "es") && !nounSubject();
+      if (console.__vt) console.__vt.push([indices.map(i=>tokens[i][0]).join(' '), finiteWerden, werdenNumber, nounSubject(), impersonalDative]);
+      // (5а.1: mir / mich, dir / dich, uns, euch are reflexive only with their own subject — Die Stadt wurde mir vertraut has none)
+      const ownReflexive = indices.some(i => { const w = norm(tokens[i][0]);
+        return w === "sich" || /^(?:mir|mich)$/u.test(w) && indices.some(j => norm(tokens[j][0]) === "ich") || /^(?:dir|dich)$/u.test(w) && indices.some(j => norm(tokens[j][0]) === "du") ||
+          w === "uns" && indices.some(j => norm(tokens[j][0]) === "wir") || w === "euch" && indices.some(j => norm(tokens[j][0]) === "ihr"); });
+      const becomeAt = i => werdenInClause && !(reflexiveInClause && ownReflexive) && !impersonalDative && !context.coordinatedLeft && passiveNone(tokens[i][0]);
       const participles = i => becomeAt(i) ? [] : untwin(verbs(i).filter(e=>clause.participleOf(e,i)),i);
       // (advisor 07.11, from the L-018 count: an agent is a stronger sign of the passive than a degree word — wird einige Male von Arthur
       // sehr verletzt. von / vom / durch + a determiner or a capital word in the part before the participle; without it the degree word
@@ -17118,9 +17152,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return {...result, selected:adjective, preferred:adjective, status:"resolved", evidence:"participle-manner-middle"};
     }
     function becomeAdjective(word, context, result) {
-      if (!result || result.status !== "ambiguous" || result.selected || !BECOME_ADJECTIVES.has(norm(word)) || !Number.isInteger(context?.tokenOffset)) return result;
+      // (5а.1, advisor 12.11) also an own adjective with passive: "none" (vertraut) whose werden group the clause did not read as a passive
+      // (a subject agrees with werden: Das Gesicht wurde ihm vertraut) — the choice of it and the verb's participle goes to the adjective;
+      // a passive (Ihm wurde nicht mehr vertraut) is resolved before and never reaches this.
+      if (!result || result.status !== "ambiguous" || result.selected || !Number.isInteger(context?.tokenOffset)) return result;
       const adjective = (result.candidates || []).find(c => c.source === "main" && c.item && ["Adjektiv","Adverb"].includes(c.item.type) && norm(c.item.word) === norm(word));
-      if (!adjective || !(result.candidates || []).some(c => norm(c.lemma).replace(/^sich\s+/u, "") === norm(adjective.item.participle_of || ""))) return result;
+      const noPassive = !!adjective && adjective.item.passive === "none" && (result.candidates || []).some(c => canonicalPos(c.pos) === "Verb" && !c.construction &&
+        (verbAnalyses.get(norm(word)) || []).some(a => a.kind === "participle" && a.base === norm(c.lemma)));
+      if (!BECOME_ADJECTIVES.has(norm(word)) && !noPassive) return result;
+      if (!adjective || !noPassive && !(result.candidates || []).some(c => norm(c.lemma).replace(/^sich\s+/u, "") === norm(adjective.item.participle_of || ""))) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "becomeAdjective"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
       if (at < 0) return result;
       const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
