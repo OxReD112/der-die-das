@@ -10681,7 +10681,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (index < 0) return false;
       const next = tokens[index+1], previous = tokens[index-1];
       if (next && /^\p{Lu}/u.test(next[0]) && /^\s+$/u.test(sentence.slice(tokens[index].index+tokens[index][0].length,next.index))) return false;
-      if (previous && (determinerFeatures(previous[0]) || /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|ein)(?:e|en|em|er|es)?$/u.test(norm(previous[0])))) return false;
+      // 5а.1а (12.11): or another attribute with the same ending -er between it and the noun (Kennzeichen verbotener terroristischer
+      // Organisationen, zahlreicher isländischer Bands) — not after a degree word (immer / viel / wesentlich … weiter gefasster Begriff),
+      // not a preposition (empfindlicher gegenüber Ribonukleasen); -en / -e after the comparative stays (immer seltener werdenden)
+      const spaced = k => /^\s+$/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index));
+      const degree = previous && /^(?:immer|viel|noch|je|desto|umso|um|weit|wesentlich|deutlich|erheblich|etwas|sehr|zu)$/u.test(norm(previous[0]));
+      let k = index + 1;
+      while (!degree && /er$/u.test(norm(word)) && tokens[k] && /^\p{Ll}{2,}er$/u.test(tokens[k][0]) && !prepositions.has(norm(tokens[k][0])) && spaced(k)) k++;
+      if (k > index + 1 && tokens[k] && /^\p{Lu}/u.test(tokens[k][0]) && spaced(k)) return false;
+      // 5а.1а (advisor 12.11): a determiner before it opens no noun group when the part ends with a lowercase word right after it
+      // (gegen diese entschlossener auf, als … — diese is the object, auf the separated particle)
+      const partEndsAfterNext = next && /^\p{Ll}/u.test(next[0]) && /^\s+$/u.test(sentence.slice(tokens[index].index+tokens[index][0].length,next.index)) &&
+        /^\s*(?:[,.;:!?)»«"“”–—]|$)/u.test(sentence.slice(next.index+next[0].length)) &&
+        // ein / kein / mein … with no ending wants the -er of an attribute (ein toller salat, — a lowercase noun)
+        !(previous && /^(?:ein|kein|mein|dein|sein|ihr|unser|euer)$/u.test(norm(previous[0])));
+      if (previous && !partEndsAfterNext && (determinerFeatures(previous[0]) || /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|ein)(?:e|en|em|er|es)?$/u.test(norm(previous[0])))) return false;
       return true;
     }
     // A4: an irregular comparative with its own card (besser — "лучше", also
@@ -14218,7 +14232,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     }
     async function participleUsage(word, context, resolution) {
       const card = resolution.selected;
-      if (card && canonicalPos(card.pos) === 'Adjektiv') return participleCard(word,resolution);
+      if (card && canonicalPos(card.pos) === 'Adjektiv') return participleCard(word,resolution,context);
       if (!card || canonicalPos(card.pos) !== 'Verb' || card.usage || card.construction || !/^\p{Ll}/u.test(word) ||
           !Number.isInteger(context?.tokenOffset) || grammaticalWords.has(norm(word)) || prepositions.has(norm(word))) return;
       const base = norm(card.lemma).replace(/^sich\s+/u,''), key = norm(word);
@@ -14356,9 +14370,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Tür): the grammar line names the participle (reference 4.10-4.11); the
     // card, its meaning and its help stay. No source-verb line (A8 withdrawn by
     // the user 15.10: guessing the verb from the form misleads, gewohnt <- wohnen).
-    async function participleCard(word, resolution) {
+    // 5а.1а (cards chat + advisor 12.11): the form X-er of a card whose headword is a past participle (vertrauter, besorgter) —
+    // with no noun after it (immer vertrauter, gespannter als sonst, je verzweifelter) it is the undeclined comparative (a predicate
+    // positive takes no ending): formFeatures gives «Komparativ»; before a noun (ein vertrauter Freund) an own card names the
+    // participle only when its data says so — `participle_of` without `meaning_differs` — otherwise «Adjektiv». Other forms as before.
+    async function participleCard(word, resolution, context) {
       const card = resolution.selected, lemma = norm(card.lemma);
       if (!/^\p{Ll}/u.test(word) || norm(word) === lemma || card.usage && card.usage.role !== 'attributive') return;
+
       const facts = await collectMorphology(word,{discoverModifiers:true},'resolveInternal');
       if (facts.errors.length) return;
       const row = facts.analyses.find(a => canonicalPos(a.pos) === 'Verb' && norm(a.base || '') === lemma &&
@@ -14367,7 +14386,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // longer read as a participle of verscheiden, beliebt of belieben.
         (card.source !== 'main' || a.evidence === 'dictionary-derived-modifier'));
       if (!row) return;
+      // (cards chat batch 94 + advisor 12.11) an own card whose meaning went its own way (participle_of + meaning_differs: bekannt,
+      // angesehen, verrückt, geschickt) is «Adjektiv» in every form; the name of the participle is for cards that keep the verb's meaning
+      if (card.source === 'main' && card.item?.participle_of && card.item?.meaning_differs) return;
       const kind = row.kind === 'participle-declined' ? (row.tags?.includes('past') ? 'participle-II' : 'participle-I') : row.kind;
+      if (kind === 'participle-II' && norm(word) === lemma + 'er' &&
+          (outsideNounGroup(word,context) || card.source === 'main' && !(card.item?.participle_of && !card.item?.meaning_differs))) return;
       const marked = {...card,usage:{...(card.usage || {}),kind,role:'attributive',form:word,base:card.lemma}};
       const id = window.BibliothekVocabulary.identity(card);
       resolution.candidates = resolution.candidates.map(c => window.BibliothekVocabulary.identity(c) === id ? marked : c);

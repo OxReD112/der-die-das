@@ -818,7 +818,7 @@
       : candidate.usage.kind === "adjective" ? locale() === "ru" ? "Субстантивированное прилагательное" : "Nominalized adjective"
       : locale() === "ru" ? "Субстантивированный инфинитив" : "Nominalized infinitive"} · ${candidate.usage.base}${candidate.usage.number === "plural" ? locale() === "ru" ? " · множественное число" : " · plural" : ""}`
     : candidate?.usage?.role === "attributive"
-    ? `${candidate.usage.form} · ${candidate.usage.kind === "participle-I" ? "Partizip I" : candidate.usage.kind === "participle-II" ? "Partizip II" : locale() === "ru" ? "прилагательное" : "adjective"} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
+    ? `${candidate.usage.form} · ${window.BibliothekMeaningDisplay.participleName(candidate.usage) || (locale() === "ru" ? "прилагательное" : "adjective")} (${candidate.usage.base}) · ${locale() === "ru" ? "определение к" : "modifier of"} ${candidate.usage.head}` : "";
   // Dictionary entry by id, or by word and reader type (help for am + Superlativ, contractions, "From …" lines).
   function findEntry({id, word, type} = {}) {
     if (!dictionary) return null;
@@ -836,7 +836,7 @@
     // 08.11.2026 (speed chat): the reader loads worterbuch/reader/ — the cards without their examples and notes (built from
     // worterbuch/german-*.json by dev/bibliothek/scripts/build-reader-dictionaries.cjs, same version); the details come with
     // the reference card (ensureCardDetails). A file in the old form (a list of cards) is read as before.
-    const versionOf = path => path === "german-function-words.json" ? "20261112-wn-fix85-1" : path === "german-verbs.json" ? "20261112-wn-nachtun93-1" : path === "german-nouns.json" ? "20261112-wn-fix85-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261112-wn-old91-1" : path === "german-adverbs.json" ? "20261112-wn-old91-1" : path === "german-expressions.json" ? "20261112-wn-fix86-1" : path === "german-pronouns.json" ? "20261107-wn-weniger56-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261112-wn-old91-1" : "20261011-um-zu-en-1";
+    const versionOf = path => path === "german-function-words.json" ? "20261112-wn-fix85-1" : path === "german-verbs.json" ? "20261112-wn-nachtun93-1" : path === "german-nouns.json" ? "20261112-wn-fix85-1" : ["german-adjectives.json","german-adjective-adverbs.json"].includes(path) ? "20261112-wn-md94-1" : path === "german-adverbs.json" ? "20261112-wn-old91-1" : path === "german-expressions.json" ? "20261112-wn-fix86-1" : path === "german-pronouns.json" ? "20261107-wn-weniger56-1" : path === "german-numerals.json" ? "20261018-c21b-1" : ["german-conjunctions.json","german-prepositions.json"].includes(path) ? "20261112-wn-old91-1" : "20261011-um-zu-en-1";
     const get = path => dataFetch(`../worterbuch/reader/${path}?v=${versionOf(path)}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); })
       .then(data => { if (Array.isArray(data)) return data;
         if (data?.format_version !== 1 || !Array.isArray(data.entries) || !(data.details_parts >= 1)) throw new Error("dictionary load failed");

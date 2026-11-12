@@ -708,6 +708,10 @@
     const m = fit(w.meanings.join('; '));
     return {heading:w.word || word, grammar:w.pos || '', text:m.text, more:0, textLanguage:'ru', missing:false, derived:true, note:'', spans:null, helpEntry:null};
   }
+  // 5а.1а (cards chat + advisor 12.11): the name of a participle use — one function for the popup and the dictionary details
+  // (reader/bibliothek.js); null for an adjective use. Which own card is a participle at all is the resolver's (participleCard:
+  // participle_of without meaning_differs; X-er with no noun after it — Komparativ).
+  const participleName = usage => usage?.kind === 'participle-I' ? 'Partizip I' : usage?.kind === 'participle-II' ? 'Partizip II' : null;
   const fromText = (source, meaning, language) => `${language === 'ru' ? 'От' : 'From'} ${source} — ${meaning}`;
   // Dictionary meaning on the chosen language; RU without a Russian value keeps the English one marked.
   function meaningText(candidate, language, inline = false) {
@@ -871,7 +875,7 @@
       headingText = `sich ${headingText}`;
     if (k.role === 'infinitiveParticle') type = 'Infinitivpartikel';
     if (usage?.role === 'attributive' || usage?.role === 'adverbial') {
-      const participle = usage.kind === 'participle-I' ? 'Partizip I' : usage.kind === 'participle-II' ? 'Partizip II' : null;
+      const participle = participleName(usage);
       if (participle && pos(candidate) === 'Verb') {
         // No own participle card: the source verb explains the form.
         const meaning = meaningText(candidate, language);
@@ -1089,5 +1093,5 @@
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};
   }
   window.BibliothekMeaningDisplay = Object.freeze({formationText, formationLines, groups, alternatives, pos, heading, brief, compact, formComment, nounPhraseComment, labelSegments,
-    card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION, wholeCard});
+    card, partOfSpeech, pronounType, contractionHeading, NO_TRANSLATION, wholeCard, participleName});
 })();

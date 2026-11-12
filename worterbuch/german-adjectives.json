@@ -10710,7 +10710,8 @@
     "usage_note_ru": "Также форма глагола ansehen — смотреть.",
     "usage_note_en": "Also a form of ansehen — to look at.",
     "participle_of": "ansehen",
-    "von_agent_ok": true
+    "von_agent_ok": true,
+    "meaning_differs": true
   },
   {
     "id": "adjective-1009",

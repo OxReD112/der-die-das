@@ -955,7 +955,8 @@
       {
         "pattern": "für + Akkusativ"
       }
-    ]
+    ],
+    "meaning_differs": true
   },
   {
     "id": "adjective-adverb-024",
