@@ -60,7 +60,7 @@
     map[raw.length] = text.length;
     return text === clean(raw) ? { text, map } : null;
   }
-  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin"];
+  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin", "display"];
   function declarations(body) {
     const out = {};
     for (const [, name, value] of String(body || "").matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/gi)) {
@@ -133,6 +133,39 @@
     const n = parseFloat(match[1]);
     return match[2] === "px" ? n / 16 : match[2] === "pt" ? n / 12 : n;
   }
+  // Text clean-up of new imports (D23 step 3, advisor 12.11): these change the paragraph text, so books imported
+  // before keep their stored text and offsets.
+  // (a) Page numbers set into the text are dropped — only by markup: a page-number class, epub:type="pagebreak" or
+  //     role="doc-pagebreak"; never a note reference (epub:type="noteref" / role="doc-noteref"), never by the look of
+  //     the text («[2]» as plain text or as a note link stays).
+  const PAGE_NUMBER_CLASSES = new Set(["pagenum", "pageno", "page-num", "page-number", "pagenumber", "x-ebookmaker-pageno", "seitenzahl"]);
+  const isNoteRef = node => /\bnoteref\b/i.test(node.getAttributeNS("http://www.idpf.org/2007/ops", "type") || node.getAttribute("epub:type") || "") || /\bdoc-noteref\b/i.test(node.getAttribute("role") || "");
+  function isPageNumber(node) {
+    if (isNoteRef(node)) return false;
+    const type = node.getAttributeNS("http://www.idpf.org/2007/ops", "type") || node.getAttribute("epub:type") || "";
+    const marked = /\bpagebreak\b/i.test(type) || /\bdoc-pagebreak\b/i.test(node.getAttribute("role") || "") ||
+      (node.getAttribute("class") || "").split(/\s+/).some(name => PAGE_NUMBER_CLASSES.has(name.toLowerCase()));
+    if (!marked) return false;
+    for (const inner of node.getElementsByTagName("*")) if (isNoteRef(inner)) return false;
+    return true;
+  }
+  // (c) U+00AD (soft hyphen) is removed everywhere; U+200B (zero-width space) only between two letters — elsewhere
+  //     (after «/», «-», at a node edge) it stays, as the word break it is.
+  function cleanTextNode(value, before) {
+    if (!/[\u00ad\u200b]/.test(value)) return value;
+    value = value.replace(/\u00ad/g, "");
+    let out = "";
+    for (let i = 0; i < value.length; i++) {
+      const ch = value[i];
+      if (ch === "\u200b") {
+        const prev = i ? out[out.length - 1] : before, next = value[i + 1];
+        if (prev && next && /\p{L}/u.test(prev) && /\p{L}/u.test(next)) continue;
+      }
+      out += ch;
+    }
+    return out;
+  }
+  const BLOCK_DISPLAY = /^(block|flex|grid|list-item|table)$/;
   function extractChapter(doc, rules = [], bookLang = "") {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
@@ -178,7 +211,7 @@
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
     function walk(node) {
       if (node.nodeType === 3 || node.nodeType === 4) {
-        const value = node.nodeValue;
+        const value = cleanTextNode(node.nodeValue, pending[pending.length - 1]);
         if (value && (MARK_KINDS.some(kind => state[kind]) || state.lang)) segments.push({ start: pending.length, end: pending.length + value.length, state });
         pending += value; return;
       }
@@ -188,8 +221,16 @@
       if (tag === "br") { pendingBreaks.push(pending.length); pending += "\n"; return; }
       // <hr> never splits text: the gap goes to the next paragraph that starts after it.
       if (tag === "hr") { gapAt.add(paragraphs.length + (pending.trim() ? 1 : 0)); return; }
+      if (isPageNumber(node)) {
+        // Keep its anchors (a contents entry may point at a page), drop its text.
+        for (const el of [node, ...node.getElementsByTagName("*")]) { const id = el.getAttribute("id") || el.getAttribute("name"); if (id) anchors[id] = paragraphs.length; }
+        return;
+      }
       const block = blocks.has(tag), outer = align, outerState = state, outerStanza = verseStanza, props = ownStyle(node, rules);
       const className = node.getAttribute("class") || "";
+      // (b) An inline element the book shows as a block (span.tit-block) is a word boundary.
+      const blockLike = !block && BLOCK_DISPLAY.test(props.display || "");
+      if (blockLike) pending += " ";
       if (block) {
         flush(); align = props["text-align"] || outer;
         if (BREAK_CLASS.test(className) && !PAGE_CLASS.test(className) && topMargin(props) >= 0.9) gapAt.add(paragraphs.length);
@@ -206,6 +247,7 @@
       if (/^h[1-6]$/.test(tag)) pendingKind = tag;
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
+      if (blockLike) pending += " ";
       state = outerState;
       if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; }
     }
