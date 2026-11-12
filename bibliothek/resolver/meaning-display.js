@@ -515,6 +515,8 @@
       case 'recorded-construction': return {marks:candidate.expressionTense ? [candidate.expressionTense] : [], role:null, spans};
       // B2: Komparativ + als — als shows «здесь: чем».
       case 'comparative-als': return {marks:['Komparativ + als'], role:null, spans};
+      // 5б (2): so + Adjektiv + als (so weiß als Schnee) — als shows «здесь: как».
+      case 'so-als': return {marks:['so + Adjektiv + als'], role:null, spans};
       // G51 step 3: Komparativ + denn (härter denn je) — denn shows «здесь: чем».
       case 'comparative-denn': return {marks:['Komparativ + denn'], role:null, spans};
       // Grimm item 3 (11.11): als + a person form (als wäre) — als shows «здесь: как будто».
@@ -741,6 +743,7 @@
    * more: meanings of an own card left out of the popup text (D13), for the «ещё N значений» link.
    * lookup({id, word, type}) returns a dictionary entry or null (for help and "From …" lines).
    */
+  const TENSE_MARK = /^(?:Präsens|Präteritum|Perfekt|Plusquamperfekt|Futur|Konjunktiv|Imperativ)/u;
   function contractionHeading(c) {
     return c.kind === 'es' ? `${c.form} = ${c.parts[0]} + es` : `${c.form} (= ${c.parts[0]})`;
   }
@@ -997,7 +1000,16 @@
     }
     // B7: colloquial spellings — «war’s = war + es», «hab (= habe)»; es gibt / es geht
     // stay without the verb's own translation until the expressions exist (F8).
-    if (contraction) {
+    // (5б (1), advisor + user 12.11: a verb form without its -e — hab, glaub, wär — keeps the infinitive heading of every verb; the form
+    // is named in the grammar line, after its tense: «Präsens · hab = habe», «Konjunktiv II · wär = wäre»)
+    if (contraction && contraction.kind === 'e') {
+      // (a chain mark without its tense takes it as «Konjunktiv II mit reparieren» does: «Präsens mit gehen»)
+      if (!marks.some(m => TENSE_MARK.test(m))) {
+        const chain = marks.findIndex(m => /^mit (?!\+)/u.test(m));
+        marks = chain < 0 ? [...marks, 'Präsens'] : marks.map((m, i) => i === chain ? `Präsens ${m}` : m);
+      }
+      marks = [...marks, `${contraction.form} = ${contraction.parts[0]}`];
+    } else if (contraction) {
       headingText = contractionHeading(contraction);
       if (contraction.expression) { text = null; more = 0; }
     }

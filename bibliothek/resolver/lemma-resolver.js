@@ -193,6 +193,9 @@
   const NUMERAL_SERIES_JOINERS = ["oder","bis","und"];
   // Coordinating conjunctions that end the clause of a recorded expression.
   const CLAUSE_COORDINATORS = ["und","oder","aber","denn","sondern"];
+  // 5б (3): the gloss of an external surname / given-name record (Eichbaum «a surname») — only such a record gives way to an own card or a
+  // compound split; a place or a language name (Russland, England, Deutsch «German (language)») keeps its record.
+  const SURNAME_GLOSS = /^(?:an?\s+)?(?:(?:common|rare|habitational|occupational)\s+)?(?:surname|family name|(?:male|female)?\s*given name)\b/iu;
   // L26 (named exceptions, RESOLVER_LINKS_TODO_RU.md): own adjectives that stay «become» with werden — wurde bekannt «стал известен», not
   // bekennen; wurde (fast) verrückt «сошёл с ума», not verrücken. One list for the werden group and the tap on the adjective (п. 6, 12.11).
   const BECOME_NAMED_ADJECTIVES = ["bekannt","verrückt"];
@@ -986,7 +989,9 @@
     // (advisor 07.11) also miss- (Missbrauch), stief- (Stiefmutter), sonder- (Sonderzug, not the verb sondern), fehl- (Fehlstart, not
     // Fehl «порок»). Not erz- (Erz «руда»: Erzbergbau), mords-, riesen- (registry).
     const BOUND_FIRST = {rück: {ru: 'назад, обратно; задний', en: 'back, backwards; rear'}, miss: {ru: 'не-, плохо', en: 'mis-, badly'},
-      stief: {ru: 'неродной, сводный', en: 'step-'}, sonder: {ru: 'особый, специальный', en: 'special'}, fehl: {ru: 'ошибочный, неудачный', en: 'wrong, failed'}};
+      stief: {ru: 'неродной, сводный', en: 'step-'}, sonder: {ru: 'особый, специальный', en: 'special'}, fehl: {ru: 'ошибочный, неудачный', en: 'wrong, failed'},
+      // (advisor 12.11, 5б (5): hinter- as a first part «задний», as Vorder- — Hinterfüße, Hintertür; not the preposition)
+      hinter: {ru: 'задний', en: 'back, rear, hind'}};
     // A first part read as a verb stem (lern-, wart-e-) or as a noun without its -e (Straf- = Strafe, Pell- = Pelle): the readings
     // and their length conditions, shared by modifier() and the stub of «X- und Y» (resolver hyphenEllipsis, 10.11).
     async function stemVerbReadings(a) {
@@ -1076,7 +1081,13 @@
         }
         // Schuppen «shed» or the plural of Schuppe «scale», Rappen «coin» or of Rappe «black horse»: not decided here.
         const exact = rs.filter(r => !r.form), plural = rs.filter(r => r.form && r.number === 'plural');
-        if (exact.length && plural.some(p => exact.every(e => norm(e.lemma) !== norm(p.lemma))))
+        // (5б (5), advisor 12.11: an own card of the head wins over a plural of an external noun only — Uhrkasten: der Kasten (own,
+        // plural Kästen) / Kasten as the plural of the external Kaste; Schuppen — two own cards — and Becken stay undecided)
+        const ownExact = exact.find(e => e.source === 'main');
+        let ownAlone = !!ownExact;
+        // (not when an outside noun of the same spelling has another gender — das Reis «ветка» beside our der Reis: Haselreis stays)
+        if (ownAlone) for (const e of exact) if (e.source !== 'main' && (await dict.gender(e.lemma)) !== String(ownExact.entry?.article || '')) { ownAlone = false; break; }
+        if (exact.length && plural.some(p => exact.every(e => norm(e.lemma) !== norm(p.lemma)) && (p.source === 'main' || !ownAlone)))
           for (const e of exact) if (e.source === 'main' && e.entry?.plural_only !== true || e.source === 'fallback' && await dict.gender(e.lemma)) return Object.assign([], {undecided: true});
         // A head of two genders (die / der Leiter, die / der Heide, das / die Steuer): its meaning is not decided — no split.
         if (rs[0] !== undefined && rs.every(r => r.source === 'fallback') && await dict.gender(rs.sort((x, y) => (x.form ? 1 : 0) - (y.form ? 1 : 0))[0].lemma) === '?') return [];
@@ -11048,11 +11059,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!/^\p{Ll}/u.test(t1) || PRONOMINAL_ADJECTIVE.test(k1)) return null;
         const types1 = new Set((forms.get(k1) || []).map(e => e.type));
         const verb = [k1,k1.replace(/ß/gu,'ss')].some(f => (verbAnalyses.get(f) || []).length);
+        // (5б (1), run 99: a finite verb form with a subject pronoun right after it is the verb second — Das weiß ich nicht, aber das glaube
+        // ich nicht: no noun Glaube, no adjective weiß)
+        const verbSecond = verb && /^\p{Ll}/u.test(t1) && index+2 < tokens.length && /^\s+$/u.test(gap(index,index+1)) && /^\s+$/u.test(gap(index+1,index+2)) &&
+          ['ich','du','er','es','wir','ihr','man'].includes(norm(tokens[index+2][0])) &&
+          [k1,k1.replace(/ß/gu,'ss')].some(f => (verbAnalyses.get(f) || []).some(a => a.kind === 'finite'));
         // (a lowercase noun of old or careless spelling keeps the article even when it is also a verb form: das essen, das frühstück)
-        if (['Nomen','Adjektiv','numeral','num','Zahlwort','Partizip','article'].some(t => types1.has(t))) return null;
+        if (!verbSecond && ['Nomen','Adjektiv','numeral','num','Zahlwort','Partizip','article'].some(t => types1.has(t))) return null;
         // (an inflected adjective of a known stem keeps the article: das weiche, dichte Fell)
         const stem = k1.match(/^(.{3,}?)(?:e|en|er|es|em)$/u)?.[1];
-        if (stem && [stem,stem+'e'].some(f => (forms.get(f) || []).some(e => e.type === 'Adjektiv'))) return null;
+        if (!verbSecond && stem && [stem,stem+'e'].some(f => (forms.get(f) || []).some(e => e.type === 'Adjektiv'))) return null;
         // (an adjective ending before a capital word, within a few words, is an attributive phrase: das tanzende Lichtflecken, das ihm verhasste Papsttum, Das derzeit rund 6.500 Seiten umfassende Werk)
         for (let j = index+1; j+1 < tokens.length && j <= index+7; j++) {
           const tj = tokens[j][0], g = gap(j,j+1), adjEnding = /^\p{Ll}.*(?:e|en|er|es|em)$/u.test(tj);
@@ -12144,6 +12160,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // G9 (21.10.2026, reference F13-N1): the external name of one ordinary noun (der Wolf, bei Namen, in ihrer Not)
         // is no competing noun; the name stays a candidate (second meaning). A word that opens quoted speech
         // (— »Ja, …«, »So will ich …«, »Au, miau!«, »Mm?«) keeps its window: the capital there is no evidence.
+        // 5б (3): an external name without a Russian meaning does not win over an own card of the same spelling (Er sprach Deutsch —
+        // the own deutsch, not the name record «German (language)» with no Russian meaning)
+        if (f.nouns.every(c => c.source === "fallback" && c.pos === "name" && !String(c.translation?.ru || "").trim() && SURNAME_GLOSS.test(String(c.translation?.en || ""))) &&
+            f.candidates.some(c => c.source === "main" && norm(c.lemma) === norm(f.word))) return undefined;
         const ordinaryNouns = f.nouns.filter(c => c.pos !== "name");
         if (ordinaryNouns.length === 1 && ordinaryNouns.length < f.nouns.length && ordinaryBeforeName(ordinaryNouns[0],f.word) &&
             !opensQuotedSpeech(f.sentence,f.tokens[f.index].index))
@@ -14567,6 +14587,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           resolution.adjectivalPair = {masculine:agreement.candidate.dictionaryId,feminine:agreement.pair.dictionaryId};
       }
       // G48 (reference 3.18 / C6): only when no dictionary knows the word at all — no card, no external record or form note.
+      // 5б (3) (advisor 12.11): an external name / surname record without a Russian meaning is no reading that stops the split of a
+      // compound — Eichbaum «a surname» → Eiche + Baum «дуб»; the record stays when the word does not split
+      const bareNames = resolution.candidates.length > 0 && resolution.candidates.every(c => c.source === "fallback" && c.pos === "name" && !String(c.translation?.ru || "").trim() &&
+        SURNAME_GLOSS.test(String(c.translation?.en || "")));
+      if (bareNames && !resolution.selected?.formation && /^\p{Lu}/u.test(word)) {
+        const formed = await wordFormationCandidate(word,context,{ignoreRecord:true}).catch(() => null);
+        if (formed?.formation && formed.pos !== "name") selection.override(resolution,'word-formation',{selected:formed,candidates:[formed,...resolution.candidates],evidence:'word-formation'});
+      }
       if (!resolution.candidates.length && !unresolvedMeanings.length && !formNotes.length && !error) {
         const formed = await wordFormationCandidate(word,context);
         if (formed) selection.override(resolution,'word-formation',{selected:formed,candidates:[formed],evidence:'word-formation'});
@@ -16572,6 +16600,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             !await (async () => { try { return (await collectMorphology(keys[index+1],{discoverModifiers:true},'constructionAt')).analyses.some(x => ["Adjektiv","Adverb"].includes(canonicalPos(x.pos))); } catch (_) { return false; } })())
           return {entry:record, id:"as-if-als", spans:[span(index), span(index+1)], translation:{ru:"здесь: как будто", en:"here: as if"}};
       }
+      // 5б (2) (advisor 12.11): so + an adjective / an adverb with degrees + als is the old comparison of equality «как» — so weiß als
+      // Schnee, so gut als ich, doppelt so hoch als vereinbart. Not so sicherlich als Motivation (a sentence adverb without degrees: als
+      // «в качестве»), not als + finite verb (as-if-als above), not so …, als ob / wenn, not anders als.
+      if (keys[index] === "als" && index >= 2 && keys[index-2] === "so" && clause[index-2] === clause[index] && clause[index-1] === clause[index] &&
+          /^\p{Ll}/u.test(tokens[index-1][0]) && !["ob","wenn"].includes(keys[index+1] ?? "")) {
+        const record = (lemmas.get("als") || []).find(e => e.type === "Konjunktion");
+        const own = forms.get(keys[index-1]) || [];
+        const graded = own.some(e => e.type === "Adjektiv" || e.type === "Adverb" && (e.comparative || e.superlative));
+        if (record && graded && !own.some(e => ["Pronomen","article","Konjunktion"].includes(e.type)))
+          return {entry:record, id:"so-als", spans:[span(index-2), span(index-1), span(index)], translation:{ru:"здесь: как", en:"here: as"}};
+      }
       if ((keys[index] === "als" || keys[index] === "denn" && thanDenn()) && index > 0) {
         const record = (lemmas.get(keys[index]) || []).find(e => e.type === "Konjunktion");
         for (let j = index - 1; record && j >= 0 && j >= index - 4 && clause[j] === clause[index]; j--) {
@@ -16851,6 +16890,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (advisor 11.11, G47 (а) tail: nieder-, los- — joined forms no dictionary knows: niedergegangen, losgeschickt, losgesaust;
       // a full verb in a dictionary keeps its card — losgehen «начинаться»; sein / haben / werden are never a rest — losgewesen)
       ["nieder","вниз","down"],["los","прочь; с места","off, away"],
+      // (advisor 12.11, 5б (4): daher-, hierher-, heim- — transparent particles: dahergeschritten, hierhergebracht, heimzutragen; wieder-,
+      // durch- also make inseparable verbs (wiederholen, durchsuchen) — only a joined form with -ge- / -zu- after them: wiedergebracht,
+      // wiederbringst stays, durchzuschlüpfen; JOINED_ONLY_PARTICLES); daher apart is the adverb «поэтому» (gilt es daher, wird daher
+      // geraten) — only its joined forms, as wieder / durch apart)
+      ["daher","сюда (о движении); мимо","along, this way"],["hierher","сюда","here, this way"],["heim","домой","home"],
+      ["wieder","обратно; снова","back; again"],["durch","сквозь, через","through"],
       ["mit","вместе (с кем-либо)","along, with (others)"],["weiter","дальше; продолжать","further, on"],["zusammen","вместе; в одно (целое)","together"],["vorbei","мимо","past, by"],["entlang","вдоль","along"],["herbei","сюда (к говорящему)","here, over (towards the speaker)"],["heran","ближе, вплотную (к)","up to, closer"],["hervor","наружу (из-за, из-под), вперёд","out, forth"],["hinweg","прочь; поверх, через","away; over"],["hindurch","сквозь, через","through"],["hinzu","к (чему-то); вдобавок","to (something); in addition"],["hinterher","следом, вслед; потом","after, behind; afterwards"],["her","сюда; (hinter … her) следом; (vor … her) впереди","here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead"],["hin","туда","there, away from the speaker"]]
       .sort((a,b) => b[0].length - a[0].length);
     // The perfect / zu chain of the simple verb was found in the sentence with the particle cut off: its spans move back.
@@ -16911,7 +16956,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const G47_TRANSPARENT = new Set(["mit","weiter","zusammen","vorbei"]);
     // (los — joined forms and a particle closing its part only, advisor 11.11; not the class that lets it close a verb across the
     // part — registry L32: los machen)
-    function g47Particle(p) { return !SPLIT_SKIP.has(p) && !G47_TRANSPARENT.has(p) && p !== "los" && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
+    const JOINED_ONLY_PARTICLES = new Set(["wieder","durch"]);
+    const joinedOk = (p, w) => !JOINED_ONLY_PARTICLES.has(p) || /^(?:ge|zu)\p{L}{3,}/u.test(norm(w).slice(p.length));
+    function g47Particle(p) { return !SPLIT_SKIP.has(p) && !G47_TRANSPARENT.has(p) && p !== "los" && !JOINED_ONLY_PARTICLES.has(p) && p !== "daher" && p !== "hierher" && (DIRECTIONAL.some(([x]) => x === p) || SPLIT_EXTRA.some(([x]) => x === p)); }
     async function separatedDirectional(word, context, result) {
       if (!result || !Number.isInteger(context?.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "separatedDirectional"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
@@ -16922,7 +16969,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let b = at; while (b + 1 < tokens.length && !BOUND.test(gap(b, b + 1)) && !JOIN.test(norm(tokens[b + 1][0]))) b++;
       let a = at; while (a > 0 && !BOUND.test(gap(a - 1, a)) && !JOIN.test(norm(tokens[a][0]))) a--;
       const P = norm(tokens[b][0]);
-      if (SPLIT_SKIP.has(P) || !/^\p{Ll}/u.test(tokens[b][0])) return result;
+      if (SPLIT_SKIP.has(P) || JOINED_ONLY_PARTICLES.has(P) || P === "daher" || P === "hierher" || !/^\p{Ll}/u.test(tokens[b][0])) return result;
       const row = DIRECTIONAL.find(([p]) => p === P) || SPLIT_EXTRA.find(([p]) => p === P);
       if (!row || b - a < 1) return result;
       // (mit, weiter, zusammen, vorbei: only right before a punctuation mark, the end or und / oder — not mit 10:0, mit "…")
@@ -17041,7 +17088,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!needs(c)) continue;
         const whole = plainLemma(c);
         // a particle the table has no meaning for (ab-, aus-, nach-): the index's own split, shown bare (advisor 08.11)
-        let row = DIRECTIONAL.find(([p]) => whole.startsWith(p) && whole.length >= p.length + 3);
+        let row = DIRECTIONAL.find(([p]) => whole.startsWith(p) && whole.length >= p.length + 3 && joinedOk(p, whole));
         if (!row) for (let i = 2; i <= whole.length - 3 && !row; i++)
           if ((separableBases.get(whole.slice(i)) || []).some(r => r.prefix === whole.slice(0,i) && plainLemma({lemma:r.entry.word}) === whole)) row = [whole.slice(0,i), "", ""];
         if (!row) continue;
@@ -17083,7 +17130,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const raw = String(word), text = String(context.sentence || ""), before = text.slice(0, context.tokenOffset);
         if (/^\p{Lu}\p{Ll}+$/u.test(raw) && /^[\s»«„“"'‚‘’–—-]*$|[.!?:]\s*[»«„“"'‚‘’–—-]*\s*$/u.test(before) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
           const lower = raw.charAt(0).toLowerCase() + raw.slice(1);
-          if (DIRECTIONAL.some(([p]) => lower.startsWith(p) && lower.length >= p.length + 3)) {
+          if (DIRECTIONAL.some(([p]) => lower.startsWith(p) && lower.length >= p.length + 3 && joinedOk(p, lower))) {
             let r = null;
             try { r = await directionalParticle(lower, {...context, sentence:before + lower + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
             return (r?.candidates || []).length ? r : result;
@@ -17113,7 +17160,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!/^\p{Ll}/u.test(String(word))) return result;
       const w = String(word), sentence = String(context.sentence || "");
       if (w !== norm(w) || sentence.slice(context.tokenOffset, context.tokenOffset + w.length) !== w) return result;
-      const row = (extraRow && w.startsWith(extraRow[0]) ? extraRow : null) || DIRECTIONAL.find(([p]) => w.startsWith(p) && w.length >= p.length + 3);
+      const row = (extraRow && w.startsWith(extraRow[0]) ? extraRow : null) || DIRECTIONAL.find(([p]) => w.startsWith(p) && w.length >= p.length + 3 && joinedOk(p, w));
       if (!row) return result;
       const [particle, ru, en] = row, after = w.slice(particle.length);
       // hinunterzustoßen is stoßen, not zustoßen «случаться»: the form without zu comes first, and a zu- verb is not taken.
@@ -17378,7 +17425,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const EDGE = /[,;:.!?»«„“"()–—]/u;
       let a = at; while (a > 0 && !EDGE.test(gap(a - 1, a))) a--;
       let b = at; while (b + 1 < tokens.length && !EDGE.test(gap(b, b + 1))) b++;
-      if (tokens.slice(a, b + 1).some(t => /^(?:du|ihr|dich|dir|euch)$/u.test(norm(t[0])) || verbal.some(x => x.person === "ich") && /^(?:ich|mich|mir)$/u.test(norm(t[0])))) return result;
+      if (tokens.slice(a, b + 1).some(t => /^(?:du|ihr|dich|dir|euch)$/u.test(norm(t[0])) || (verbal.some(x => x.person === "ich") || (verbAnalyses.get(w + "e") || []).some(x => x.kind === "finite" && x.person === "ich")) && /^(?:ich|mich|mir)$/u.test(norm(t[0])))) return result;
       // (count 04.11) an imperative reading at the head of its part — first word, or right after und / oder / aber / doch — is the
       // imperative: So spring … und halt ihn stets in Ehren! (object after it); un weis up den Künig (head of the part); not: und dicht behaart
       const imperative = verbal.some(x => x.kind === "imperative" || x.tags?.includes("imperative"));
@@ -18520,7 +18567,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const P = words[i][0], V = words[i+1][0], p = norm(P);
         if (!/^\p{Ll}/u.test(P) || !/^\p{Ll}/u.test(V) || SPLIT_SKIP.has(p)) continue;
         // (los stays outside the old separate spelling — registry L32: los machen; advisor 11.11 took los into the joined forms)
-        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p) || p === "los") continue;
+        // (daher and hierher written apart are adverbs — advisor 12.11, run 99: nicht hierher gehört stays hierher «сюда» + gehören;
+        // the joined forms hierhergebracht, dahergeschritten are read by G47)
+        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p) || p === "los" || p === "daher" || p === "hierher" || JOINED_ONLY_PARTICLES.has(p)) continue;
         if (!/^[ \t]+$/u.test(sentence.slice(words[i].index + P.length, words[i+1].index))) continue;
         const after = sentence.slice(words[i+1].index + V.length);
         if (!/^\s*(?:[,;:.!?…()"„“”»«–—]|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(after)) continue;
@@ -18577,14 +18626,42 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const from = before.search(/[^,;:.!?…()"„“”»«–—]*$/u);
         return /(?<![\p{L}\p{M}])ich(?![\p{L}\p{M}])/u.test(before.slice(from));
       };
+      // 5б (1) (advisor 12.11): the ich form without -e of an own verb (glaube → glaub, nehme → nehm, heiße → heiß) also where the short
+      // form has another reading (the imperative glaub, the adjective heiß): right after ich in a main part (Ich glaub, ich geh; Ich nehm
+      // sie), right before ich (Das glaub ich nicht, So heiß ich nicht) or as the last word of a subordinate part with ich (dass ich
+      // Rumpelstilzchen heiß). Not weil ich heiß bin (not the last word), not after ich allein / selbst / auch.
+      const SUBORDINATOR_WORD = /^(?:wenn|weil|dass|daß|ob|als|bevor|ehe|nachdem|sobald|solange|bis|damit|falls|obwohl|obgleich|während|wie|wo|was|wer|wann|warum|seit|seitdem|indem|der|die|das|den|dem|deren|dessen|welche[rnms]?)$/u;
+      const ichShort = (w,start) => {
+        if (!(verbAnalyses.get(norm(w)+"e") || []).some(a => a.kind === "finite" && a.person === "ich" && a.tense === "Präsens")) return false;
+        // (not a function word, a number or an adverb of its own — weil, schon, mein, gar, mal, acht: only a verb or an adjective spelling)
+        if ((forms.get(norm(w)) || []).some(e => !["Verb","Adjektiv"].includes(e.type)) || SUBORDINATOR_WORD.test(norm(w))) return false;
+        const i = words.findIndex(x => x.index === start);
+        if (i < 0) return false;
+        const gapOk = (a,b) => !/[.,;:!?…()"„“”»«–—]/u.test(sentence.slice(words[a].index + words[a][0].length, words[b].index));
+        const partStart = k => { let j = k; while (j > 0 && gapOk(j-1,j)) j--; return j; };
+        const partEnd = k => { let j = k; while (j+1 < words.length && gapOk(j,j+1)) j++; return j; };
+        const ichAt = k => k >= 0 && k < words.length && norm(words[k][0]) === "ich";
+        const ps = partStart(i), subordinate = SUBORDINATOR_WORD.test(norm(words[ps][0])) && ps < i;
+        // (a separable verb of the full form whose particle closes the part keeps its own reading — bring ich … mit, schließ ich … auf)
+        // (and not when such a particle closes a later part: Ich geh, mach du die Tür zu — the full gehe would take zu
+        // of the next part; Bevor ich geh, mach das Licht aus)
+        if ((separatedForms.get(norm(w)+"e") || []).some(p => words.some((x,j) => j > i && partEnd(j) === j && norm(x[0]) === p.prefix))) return false;
+        if (ichAt(i-1) && gapOk(i-1,i) && !subordinate) return true;
+        // (before ich: a relative pronoun opening the part is the fronted object — Das glaub ich nicht, Den krieg ich noch)
+        if (ichAt(i+1) && gapOk(i,i+1) && !(subordinate && !/^(?:der|die|das|den|dem)$/u.test(norm(words[ps][0])))) return true;
+        if (subordinate && partEnd(i) === i && words.slice(ps,i).some((x,k) => ichAt(ps+k))) return true;
+        return false;
+      };
       const shortVerb = (w,start) => {
         if (norm(w) === "hab" && /^\p{Lu}\p{Ll}+$/u.test(w) && clauseInitial(sentence,start)) w = norm(w);
+        // (5б (1): Glaub ich nicht — capitalised at the start of its part, right before ich)
+        if (/^\p{Lu}\p{Ll}+$/u.test(w) && clauseInitial(sentence,start) && ichShort(norm(w),start)) return true;
         if (!/^\p{Ll}+$/u.test(w)) return false;
         if (w === "hab" && !(forms.get(w) || []).length && (habParticiple(start) || habClosing(start))) return true;
         const only = imperativeOnlyForms.get(norm(w)) || [];
         const imperativeOnly = only.length > 0 && !(forms.get(norm(w)) || []).some(e => !only.includes(e)) &&
           !(verbAnalyses.get(norm(w)) || []).some(a => a.kind !== "imperative");
-        if (!imperativeOnly && ((forms.get(norm(w)) || []).length || (verbAnalyses.get(norm(w)) || []).length)) return false;
+        if (!imperativeOnly && ((forms.get(norm(w)) || []).length || (verbAnalyses.get(norm(w)) || []).length)) return ichShort(w,start);
         const persons = new Set((verbAnalyses.get(norm(w)+"e") || []).filter(a => a.kind === "finite").map(a => a.person));
         const i = words.findIndex(x => x.index === start);
         return i >= 0 && (imperativeOnly ? [words[i-1]] : [words[i-1],words[i+1]]).some(x => x && persons.has(pronounPerson[norm(x[0])]) &&
