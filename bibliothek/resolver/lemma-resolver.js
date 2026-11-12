@@ -453,8 +453,15 @@
       if (j >= a && (objectArticle.test(low(j)) || PREP.test(low(j)))) return false;
       if (j >= a && /^(?:der|die|das|ein|eine|kein|keine)$/u.test(low(j)) && j - 1 >= a && PREP.test(low(j-1))) return false;
       return true; };
+    // (a word before the verb after the last und / oder / aber of its part that does not open an imperative — und sei kein Idiot!,
+    // so sei es are not this case)
+    let c = a; for (let k = a; k < i; k++) if (/^(?:und|oder|aber|sondern|denn|doch)$/u.test(low(k))) c = k + 1;
+    const wordBefore = tokens.slice(c, i).some((_,n) => !IMPERATIVE_OPENER_WORDS.test(low(c + n)));
     return part.some(k => /^(?:er|sie|es|man|jemand|niemand|einer|keiner|jeder|wer)$/u.test(low(k)) ||
-      k < i && /^\p{Lu}/u.test(tokens[k][0]) && !startsSentence(k) && subjectNoun(k));
+      k < i && /^\p{Lu}/u.test(tokens[k][0]) && !startsSentence(k) && subjectNoun(k) ||
+      // (п. 91 (А), advisor 12.11, claude/KONJ1_AUX_COUNT_2026-11-12_RU.md: the noun subject after the verb when a word stands before it in
+      // its part — Wahrscheinlich sei der Mann gestorben, Insgesamt sei die Zahl … gestiegen; not the verb first — Sei die Erste!)
+      k > i && wordBefore && /^\p{Lu}/u.test(tokens[k][0]) && !startsSentence(k) && subjectNoun(k));
   }
   const personOf = key => String(key).replace(/~$/u,"");
   const formIn = (group,person) => [group[person],group[person + "~"]];
@@ -8705,7 +8712,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // by the same check below; an own / external adjective card of the form stays as it is — Geschlossen ist das Geschäft heute)
         let frontedState = false;
         const frontedParticiple = (() => {
-          if (!PERFECT_AUXILIARIES.includes(head.e.word) || frontedInfinitive || konj1(head.i)) return null;
+          if (!PERFECT_AUXILIARIES.includes(head.e.word) || frontedInfinitive) return null;
           const p = head.i - 1;
           if (p < start || head.i >= end + 1) return null;
           const adverb = k => /^\p{Ll}/u.test(tokens[k][0]) || k === start ? (forms.get(norm(tokens[k][0])) || []).some(e => ["Adverb","Adjektiv"].includes(e.type)) &&
@@ -8961,7 +8968,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const finiteTenses = (e,i) => ["Präsens","Präteritum"].filter(tense => clause.finiteIn(e,i,tense));
       // L13: hätte / wäre as in verbGroup.
       const pastConditional = (e,i) => !finiteTenses(e,i).length && clause.finiteIn(e,i,"Konjunktiv II");
-      const heads = indices.flatMap(i => matches(i).filter(e => PERFECT_AUXILIARIES.includes(e.word) && (finiteTenses(e,i).length || pastConditional(e,i))).map(e => ({i,e})));
+      // (п. 91 (Б), advisor 12.11: Konjunktiv I habe / sei / seien in reported speech, the same sign as in verbGroup — Die Sache sei
+      // aufgekommen, Die Zahl … sei zurückgegangen)
+      const konj1 = (e,i) => !finiteTenses(e,i).length && konj1Sign(clause.sentence, tokens, i) && ({sein:SEIN_FINITE,haben:HABEN_FINITE})[e.word]?.konjunktiv1.includes(norm(tokens[i][0]));
+      const heads = indices.flatMap(i => matches(i).filter(e => PERFECT_AUXILIARIES.includes(e.word) && (finiteTenses(e,i).length || pastConditional(e,i) || konj1(e,i))).map(e => ({i,e})));
       const groups = [];
       for (const head of heads) {
         const tail = head.i === end ? end-1 : end;
@@ -8994,7 +9004,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (völlig verdreckt, stark verwittert, stark abgetreten).
         const degree = ["völlig","stark","sehr","total","ganz","gänzlich","vollkommen","vollständig","ziemlich","äußerst","leicht","extrem"];
         if (head.e.word === "sein" && auxiliaries.includes("haben") && tail-1 > start && degree.includes(norm(tokens[tail-1][0]))) continue;
-        groups.push({id:"perfect-group",label:pastConditional(head.e,head.i) ? "Konjunktiv II" : finiteTenses(head.e,head.i).includes("Präteritum") ? "Plusquamperfekt" : "Perfekt",
+        groups.push({id:"perfect-group",label:konj1(head.e,head.i) ? "Konjunktiv I" : pastConditional(head.e,head.i) ? "Konjunktiv II" : finiteTenses(head.e,head.i).includes("Präteritum") ? "Plusquamperfekt" : "Perfekt",
           lemma,roles:[head.e,{word:lemma,type:"Verb"}],spans:[head.i,tail].sort((a,b)=>a-b).map(clause.span),
           // G2 addition (reference 19.10): haben and sein both listed — Perfekt or state.
           ...(head.e.word === "sein" && auxiliaries.includes("haben") ? {state:true} : {})});
