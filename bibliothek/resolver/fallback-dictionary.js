@@ -465,13 +465,20 @@
     }
     return mappings;
   }
-  async function lexicalGroups(word, visited = new Set()) {
+  // (links chat п. 80, advisor 12.11) asLemma: the word is the lemma a form link named (geführt → führen). It is read as that
+  // headword: when it has its own meanings in the linked part of speech, its own form links are not followed again — führen is
+  // also the Konjunktiv II of fahren, and that reading belongs to the spelling führen, not to geführt / führt / führten.
+  async function lexicalGroups(word, visited = new Set(), asLemma = null) {
     if (visited.has(word) || visited.size >= 4) return [];
     const next = new Set([...visited,word]), data = await record(word);
-    const direct = groupsFor(word,data), mappings = formMappings(word,data,direct);
+    const direct = groupsFor(word,data);
+    // (only for verbs: a noun / adjective lemma keeps its links — Beteiligten → beteiligter, Alliierten — there the further link
+    // keeps the masculine card next to the feminine one)
+    const headword = !!asLemma && asLemma.has("verb") && direct.some(group => group.meanings.length && group.pos === "verb");
+    const mappings = headword ? [] : formMappings(word,data,direct);
     const positions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
     structuredPositions(word,data,mappings,positions);
-    const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next)))).flat();
+    const mapped = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(lemma => lexicalGroups(lemma,next,positions.size ? positions : null)))).flat();
     return [...direct.filter(group => group.meanings.length),...mapped.filter(group => !positions.size || positions.has(group.pos))];
   }
   // B3 (15.10.2026): regular weak forms of an external verb that the export lists
@@ -629,7 +636,7 @@
       const describedPositions = new Set(direct.filter(group => group.formNotes.length).map(group => group.pos));
       structuredPositions(candidate,data,mappings,describedPositions);
       const groups = (await Promise.all([...new Set(mappings.map(row => row[1]))].map(async lemma => {
-        const mapped = await lexicalGroups(lemma,new Set([candidate]));
+        const mapped = await lexicalGroups(lemma,new Set([candidate]),describedPositions.size ? describedPositions : null);
         // A verb inflection must not inherit unrelated noun senses of its lemma.
         return mapped.filter(group => !describedPositions.size || describedPositions.has(group.pos));
       }))).flat();
