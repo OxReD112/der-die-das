@@ -782,6 +782,35 @@
     });
     return fragment;
   }
+  // Indented lines (D24 step 3b): a shaped poem («Alice», the mouse tail) or verse lines with indents. Each line of
+  // the paragraph goes into its own block span (the <br> between lines go; no text is added or removed, so textContent
+  // and word offsets stay) with its left margin: the smallest indent is taken off and, on a narrow screen, the indents
+  // shrink together so the widest one still leaves room for the line. A line that wraps hangs under its first word.
+  function indentLines(p, layout) {
+    const list = layout?.lineIndents;
+    if (!Array.isArray(list) || list.length !== (layout.lineBreaks?.length || 0) + 1 || !list.every(Number.isFinite)) return;
+    if (layout.align === "center" || layout.align === "right") return;
+    const low = Math.min(...list), range = Math.max(...list) - low;
+    if (!(range > 0)) return;
+    // Split the children at runs of <br>; a run of two or more is an empty line before the next line.
+    const lines = [{ nodes: [], gap: false }];
+    let run = 0;
+    for (const node of [...p.childNodes]) {
+      if (node.nodeName === "BR") { run++; continue; }
+      if (run) { lines.push({ nodes: [], gap: run >= 2 }); run = 0; }
+      lines.at(-1).nodes.push(node);
+    }
+    if (lines.length !== list.length) return;
+    p.classList.add("book-indented");
+    p.style.setProperty("--book-indent-range", String(range));
+    p.replaceChildren(...lines.map((line, i) => {
+      const span = document.createElement("span");
+      span.className = line.gap ? "book-line book-line-gap" : "book-line";
+      span.style.setProperty("--book-indent", String(list[i] - low));
+      span.append(...line.nodes);
+      return span;
+    }));
+  }
   function renderBookText(book) {
     prepareChapterPosition(book);
     const request = ++renderRequest;
@@ -808,6 +837,7 @@
         if (typeof layout.list.marker === "string" && layout.list.marker) p.dataset.marker = layout.list.marker;
       }
       p.append(wrapParagraph(paragraph, layout));
+      indentLines(p, layout);
       $text.append(p);
     });
     currentBook = book;

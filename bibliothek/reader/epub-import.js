@@ -45,6 +45,8 @@
   // paragraph, as before), stanzaBreaks: [offsets among lineBreaks where the book has an empty line — two <br> in a
   // row], pre: true (inside <pre>) }. Lines of a poem also come from paragraphs inside a poem container (Wikisource
   // div.poem > p), from inline elements the book shows as blocks (span.line) and from line ends inside <pre>.
+  // lineIndents: [left indent in em of each line — one entry per line of lineBreaks + 1] when a line starts with an
+  // indented inline element (a shaped poem such as the mouse tail in «Alice», Gutenberg .poem span.i2).
   // Offsets are in the paragraph string; a mark never starts or ends on a space.
   function cleanMapped(raw) {
     // Same result as clean(raw), plus map[i] = offset in the result of raw position i (a whitespace run maps to its
@@ -62,7 +64,7 @@
     map[raw.length] = text.length;
     return text === clean(raw) ? { text, map } : null;
   }
-  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin", "display", "list-style-type", "list-style"];
+  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin", "display", "list-style-type", "list-style", "margin-left", "padding-left", "text-indent"];
   function declarations(body) {
     const out = {};
     for (const [, name, value] of String(body || "").matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/gi)) {
@@ -229,6 +231,21 @@
       default: return `${n}.`;
     }
   }
+  // Left indent of a line (D24 step 3b, «Alice» mouse tail, Gutenberg .poem span.i4): margin-left + padding-left of
+  // an inline element, plus text-indent when the book shows it as a block — in em; null when the element sets none.
+  function lengthEm(value) {
+    const m = /^(-?(?:\d*\.)?\d+)(em|rem|px|pt|ex|ch)?$/.exec(String(value || "").trim());
+    if (!m) return null;
+    const n = parseFloat(m[1]);
+    return !m[2] ? (n === 0 ? 0 : null) : m[2] === "px" ? n / 16 : m[2] === "pt" ? n / 12 : m[2] === "ex" || m[2] === "ch" ? n / 2 : n;
+  }
+  function lineIndent(props, blockLike) {
+    const parts = ["margin-left", "padding-left", ...(blockLike ? ["text-indent"] : [])].filter(key => props[key] != null);
+    if (!parts.length) return null;
+    let em = 0;
+    for (const key of parts) { const v = lengthEm(props[key]); if (v == null) return null; em += v; }
+    return Math.round(Math.max(0, Math.min(em, 40)) * 10) / 10;
+  }
   const OL_TYPES = { "1": "decimal", a: "lower-alpha", A: "upper-alpha", i: "lower-roman", I: "upper-roman" };
   function extractChapter(doc, rules = [], bookLang = "", notes = null) {
     const body = elements(doc, "body")[0];
@@ -236,7 +253,7 @@
     const paragraphs = [], paragraphKinds = [], paragraphLayout = [], anchors = Object.create(null);
     const base = value => String(value || "").toLowerCase().split(/[-_]/)[0];
     let pendingKind = "p";
-    let pending = "", pendingBreaks = [], softBreaks = [], segments = [], align = null, state = {};
+    let pending = "", pendingBreaks = [], softBreaks = [], segments = [], indents = [], align = null, state = {};
     const gapAt = new Set();
     const noteSegments = [], listStack = [];
     let listItem = null;
@@ -263,6 +280,17 @@
           const marks = [];
           for (const kind of MARK_KINDS) for (const r of rangesOf(segments, mapped.map, text, s => s[kind], () => kind)) marks.push({ start: r.start, end: r.end, kind });
           if (marks.length) layout.marks = marks.sort((x, y) => x.start - y.start || x.end - y.end);
+          // The indent of each line: the first indented element that starts the line.
+          if (indents.length) {
+            const lineIndents = new Array(lineBreaks.length + 1).fill(null);
+            for (const { at, em } of indents) {
+              const m = mapped.map[at];
+              if (m !== 0 && !lineBreaks.includes(m) && !lineBreaks.includes(m - 1)) continue;
+              const line = lineBreaks.filter(b => b <= m && m !== 0).length;
+              if (lineIndents[line] == null) lineIndents[line] = em;
+            }
+            if (lineIndents.some(em => em > 0)) layout.lineIndents = lineIndents.map(em => em ?? 0);
+          }
           const langs = rangesOf(segments, mapped.map, text, s => s.lang && base(s.lang) !== base(bookLang), s => s.lang).map(r => ({ start: r.start, end: r.end, lang: r.value }));
           if (langs.length) layout.langs = langs;
         }
@@ -299,7 +327,7 @@
         }
         paragraphLayout.push(Object.keys(layout).length ? layout : null);
       }
-      pending = ""; pendingBreaks = []; softBreaks = []; segments = []; noteSegments.length = 0; pendingKind = "p";
+      pending = ""; pendingBreaks = []; softBreaks = []; segments = []; indents = []; noteSegments.length = 0; pendingKind = "p";
     };
     const blocks = new Set(["p", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre", "tr", "figure", "figcaption", "dl", "dt", "dd"]);
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
@@ -328,6 +356,7 @@
       const blockLike = !block && BLOCK_DISPLAY.test(props.display || "");
       // An inline element shown as a block (span.line of a poem) also starts a new line.
       if (blockLike) { softBreaks.push(pending.length); pending += " "; }
+      if (!block) { const em = lineIndent(props, blockLike); if (em != null) indents.push({ at: pending.length, em }); }
       if (block) {
         flush(); align = props["text-align"] || outer;
         if (BREAK_CLASS.test(className) && !PAGE_CLASS.test(className) && topMargin(props) >= 0.9) gapAt.add(paragraphs.length);

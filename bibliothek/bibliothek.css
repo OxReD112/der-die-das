@@ -732,6 +732,16 @@ body.library-screen .data-sources button:active:not(:disabled) {
     margin-left: -1.2em;
   }
 }
+/* Indented lines (D24 step 3b): each line is a block with its own left margin; on a narrow screen all margins shrink
+   together so the widest one still leaves 6em for the line; a wrapped line hangs under its first word. */
+.reading-text p.book-indented { text-align: left; text-indent: 0; }
+.reading-text .book-line {
+  display: block;
+  margin-left: max(0px, min(calc(var(--book-indent, 0) * 1em), calc((100% - 6em) * var(--book-indent, 0) / var(--book-indent-range, 1))));
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+.reading-text .book-line-gap { margin-top: 1em; }
 /* Preformatted text (<pre>, code): line ends kept, monospace, never justified. */
 .reading-text p.book-pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
