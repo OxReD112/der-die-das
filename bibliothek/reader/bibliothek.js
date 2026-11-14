@@ -727,7 +727,7 @@
   // it; paragraphLayout.marks ({start, end, kind}) wrap their characters in <span class="book-mark book-<kind>">, also
   // inside a word button (an emphasised part of a word). Offsets, highlights and bookmarks are unchanged; a break that
   // would fall inside a word button is skipped.
-  const BOOK_MARK_KINDS = new Set(["i", "b", "spaced", "sc", "small"]);
+  const BOOK_MARK_KINDS = new Set(["i", "b", "spaced", "sc", "small", "noteref"]);
   function appendLaidOut(parent, token, start, marks, breaks, stanzas = []) {
     const end = start + token.length, cuts = new Set([0, token.length]);
     const own = marks.filter(m => m.start < end && m.end > start);
@@ -741,6 +741,14 @@
         const mark = document.createElement("span");
         mark.className = ["book-mark", ...new Set(kinds)].map((k, j) => j ? `book-${k}` : k).join(" ");
         mark.textContent = text;
+        // A footnote reference (D24 step 2): a number or mark opens the note on tap; a reference on a word (an
+        // annotation link) is only underlined, so the word stays a word button.
+        const note = own.find(m => m.kind === "noteref" && m.start <= start + from && m.end >= start + to);
+        if (note) {
+          mark.dataset.noteTarget = note.target;
+          if (/[\p{L}]/u.test(token)) mark.classList.add("book-noteref-word");
+          else { mark.tabIndex = 0; mark.setAttribute("role", "button"); mark.setAttribute("aria-label", `Anmerkung ${text.replace(/[\[\]]/g, "")}`); }
+        }
         parent.append(mark);
       } else parent.append(document.createTextNode(text));
       if (breaks.includes(start + to - 1) && token[to - 1] === " ") {
@@ -791,7 +799,7 @@
       const layout = hasChapters(book) ? book.chapters[book.chapterIndex].paragraphLayout?.[i] : null;
       if (layout?.align === "center" || layout?.align === "right") p.classList.add(`book-align-${layout.align}`);
       // Paragraph layout from the EPUB (D23 step 2): scene break, quotation / letter, verse lines of a poem.
-      for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"], ["pre", "book-pre"]]) if (layout?.[field] === true) p.classList.add(name);
+      for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"], ["pre", "book-pre"], ["note", "book-note"], ["noteStart", "book-note-start"]]) if (layout?.[field] === true) p.classList.add(name);
       if (layout?.lineBreaks?.length) p.classList.add("book-has-breaks");
       p.append(wrapParagraph(paragraph, layout));
       $text.append(p);
@@ -1637,6 +1645,7 @@
     });
   }
   function closePopups() {
+    closeBookNote();
     popupExpansion?.cancel(); popupExpansion = null;
     lookupRequest++; refreshPopupLanguage = null; $popover.hidden = true; $sheet.hidden = true;
     activeWordSpan = null; paintActiveWord(null);
@@ -1721,7 +1730,42 @@
     event.preventDefault();
     event.stopImmediatePropagation();
   }, true);
-  $text.addEventListener("click", event => { const span = event.target.closest(".reading-word"); if (span) chooseWord(span); });
+  // Footnotes (D24 step 2): tapping a reference shows the note in a small card next to it; any other tap, Escape,
+  // scrolling or turning the page closes it.
+  let bookNote = null;
+  // Looked up by id (not the variable) so closePopups — also on every page turn — can call it at any time.
+  function closeBookNote() {
+    const note = document.getElementById("book-note-popup");
+    if (!note || note.hidden) return;
+    note.hidden = true;
+    document.querySelectorAll('.book-noteref[aria-expanded="true"]').forEach(ref => ref.setAttribute("aria-expanded", "false"));
+  }
+  function openBookNote(ref) {
+    const text = currentBook?.chapters?.[currentBook.chapterIndex]?.notes?.[ref.dataset.noteTarget];
+    if (!text) return;
+    if (!bookNote) {
+      bookNote = document.createElement("div");
+      bookNote.className = "book-note-popup"; bookNote.id = "book-note-popup"; bookNote.setAttribute("role", "note"); bookNote.hidden = true;
+      bookNote.addEventListener("click", event => event.stopPropagation());
+      document.body.append(bookNote);
+    }
+    closeBookNote();
+    bookNote.textContent = text;
+    bookNote.hidden = false; ref.setAttribute("aria-expanded", "true");
+    const r = ref.getBoundingClientRect(), w = bookNote.offsetWidth, h = bookNote.offsetHeight;
+    const left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2));
+    const below = r.bottom + 8 + h <= innerHeight - 12;
+    bookNote.style.left = `${left}px`; bookNote.style.top = `${below ? r.bottom + 8 : Math.max(12, r.top - 8 - h)}px`;
+  }
+  document.addEventListener("click", event => { if (!event.target.closest?.(".book-noteref")) closeBookNote(); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape") closeBookNote(); else if (event.key.startsWith("Arrow") || event.key === "PageDown" || event.key === "PageUp") closeBookNote(); });
+  addEventListener("resize", closeBookNote); addEventListener("scroll", closeBookNote, true);
+  $text.addEventListener("click", event => {
+    const ref = event.target.closest(".book-noteref:not(.book-noteref-word)");
+    if (ref) { event.preventDefault(); openBookNote(ref); return; }
+    const span = event.target.closest(".reading-word"); if (span) chooseWord(span);
+  });
+  $text.addEventListener("keydown", event => { if ((event.key === "Enter" || event.key === " ") && event.target.matches(".book-noteref[role=button]")) { event.preventDefault(); openBookNote(event.target); } });
   $text.addEventListener("keydown", event => { if ((event.key === "Enter" || event.key === " ") && event.target.matches(".reading-word")) { event.preventDefault(); chooseWord(event.target); } });
   function updateBookmarkStatus(book, paragraph) {
     const paragraphs = [...$text.querySelectorAll("[data-paragraph]")];

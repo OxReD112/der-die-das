@@ -169,7 +169,38 @@
     return out;
   }
   const BLOCK_DISPLAY = /^(block|flex|grid|list-item|table)$/;
-  function extractChapter(doc, rules = [], bookLang = "") {
+  // Footnotes (D24 step 2, 12.11.2026): a note reference keeps its text («[1]», «1») in the paragraph and gets a mark
+  // { kind: "noteref", target: "<file>#<id>" }; paragraphs inside the note body get note: true (noteStart on the first
+  // of a run); chapter.notes maps the targets its references use to the note text shown on tap. Nothing changes the
+  // paragraph text.
+  const NOTEREF_TYPE = /\b(noteref|annoref)\b/i, NOTEREF_CLASS = /(?:^|\s)(fnanchor|noteref|footnote-?ref|fn-?ref|footnote-?link)(?:\s|$)/i;
+  const BACKLINK = /(?:^|\s)(mw-cite-backlink|footnote-?back(link)?|fn-?back|backlink)(?:\s|$)/i;
+  const epubType = node => node.getAttributeNS("http://www.idpf.org/2007/ops", "type") || node.getAttribute("epub:type") || "";
+  function noteTarget(node, path) {
+    // A link to a footnote: epub:type noteref / annoref, role doc-noteref, a footnote-link class, or an internal link
+    // that is (or sits in) a superscript.
+    if (node.nodeType !== 1 || node.localName.toLowerCase() !== "a") return null;
+    const href = node.getAttribute("href") || "";
+    const hash = href.indexOf("#");
+    if (hash < 0 || /^[a-z]+:/i.test(href)) return null;
+    const marked = NOTEREF_TYPE.test(epubType(node)) || /\bdoc-noteref\b/i.test(node.getAttribute("role") || "") || NOTEREF_CLASS.test(node.getAttribute("class") || "") ||
+      node.parentNode?.localName?.toLowerCase() === "sup" || node.getElementsByTagName("sup").length > 0;
+    if (!marked) return null;
+    let file = path;
+    if (hash > 0) { try { file = resolvePath(path, href.slice(0, hash)); } catch (_) { return null; } }
+    const id = decodeURIComponent(href.slice(hash + 1));
+    return id ? `${file}#${id}` : null;
+  }
+  function noteText(node) {
+    // The note as shown on tap: its text without back links («↑», «^», «Zurück»).
+    const copy = node.cloneNode(true);
+    for (const el of [...copy.getElementsByTagName("*")]) {
+      const role = el.getAttribute("role") || "", type = epubType(el);
+      if (/\bdoc-backlink\b/i.test(role) || /\bbacklink\b/i.test(type) || BACKLINK.test(el.getAttribute("class") || "")) el.parentNode?.removeChild(el);
+    }
+    return clean(copy.textContent).replace(/^[↑↩^⇧]+\s*/u, "");
+  }
+  function extractChapter(doc, rules = [], bookLang = "", notes = null) {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
     const paragraphs = [], paragraphKinds = [], paragraphLayout = [], anchors = Object.create(null);
@@ -177,6 +208,8 @@
     let pendingKind = "p";
     let pending = "", pendingBreaks = [], softBreaks = [], segments = [], align = null, state = {};
     const gapAt = new Set();
+    const noteSegments = [];
+    let noteDepth = 0;
     let quoteDepth = 0, quoteNode = null, lastQuote = null, verseStanza = null, lastStanza = null, preDepth = 0, stanzaNext = false;
     const flush = () => {
       const mapped = cleanMapped(pending), text = mapped ? mapped.text : clean(pending);
@@ -209,6 +242,14 @@
         if (quoteDepth) layout.quote = true;
         lastQuote = quoteNode;
         if (preDepth) layout.pre = true;
+        if (noteDepth) { layout.note = true; if (!previous?.note) layout.noteStart = true; }
+        if (mapped) for (const seg of noteSegments) {
+          let start = mapped.map[seg.start], end = mapped.map[seg.end];
+          while (start < end && text[start] === " ") start++;
+          while (end > start && text[end - 1] === " ") end--;
+          if (start < end) (layout.marks ||= []).push({ start, end, kind: "noteref", target: seg.target });
+        }
+        if (layout.marks) layout.marks.sort((x, y) => x.start - y.start || x.end - y.end);
         if (verseStanza) {
           layout.verse = true;
           if (verseStanza !== lastStanza || stanzaNext || leadingBreak) layout.stanzaStart = true;
@@ -221,7 +262,7 @@
         }
         paragraphLayout.push(Object.keys(layout).length ? layout : null);
       }
-      pending = ""; pendingBreaks = []; softBreaks = []; segments = []; pendingKind = "p";
+      pending = ""; pendingBreaks = []; softBreaks = []; segments = []; noteSegments.length = 0; pendingKind = "p";
     };
     const blocks = new Set(["p", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "pre", "tr", "figure", "figcaption", "dl", "dt", "dd"]);
     const excluded = new Set(["script", "style", "noscript", "iframe", "object", "svg", "math"]);
@@ -267,14 +308,20 @@
         if (tag === "pre") preDepth++;
       }
       state = inlineState(node, tag, props, outerState);
+      const target = notes ? noteTarget(node, notes.path) : null, noteStart = pending.length;
+      const ownId = node.getAttribute("id");
+      const isNote = !!(notes && ownId && notes.targets.has(`${notes.path}#${ownId}`));
+      if (isNote) noteDepth++;
       const anchor = node.getAttribute("id") || node.getAttribute("name");
       if (anchor) anchors[anchor] = paragraphs.length;
       if (/^h[1-6]$/.test(tag)) pendingKind = tag;
       if (tag === "td" || tag === "th") pending += " ";
       for (const child of node.childNodes) walk(child);
+      if (target && pending.length > noteStart) noteSegments.push({ start: noteStart, end: pending.length, target });
       if (blockLike) { softBreaks.push(pending.length); pending += " "; }
       state = outerState;
       if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; if (tag === "pre") preDepth--; }
+      if (isNote) noteDepth--;
     }
     walk(body); flush();
     if (paragraphLayout.at(-1)?.verse) paragraphLayout.at(-1).verseEnd = true;
@@ -401,6 +448,25 @@
       return rules;
     }
     const bookLang = clean(elements(pkg, "language")[0]?.textContent);
+    // Footnotes, first pass: where the references point and what the notes say (notes may sit in another file, also in
+    // a non-linear one). A broken file only loses its notes here; reading it below still reports the error.
+    const docs = new Map(), noteRefs = new Set(), noteTexts = Object.create(null);
+    for (const ref of elements(spine, "itemref")) {
+      const item = items.get(ref.getAttribute("idref"));
+      if (!item || item.getAttribute("media-type") !== "application/xhtml+xml") continue;
+      try {
+        const path = resolvePath(packagePath, item.getAttribute("href"));
+        if (encrypted.has(path) || !zip.file(path)) continue;
+        const doc = xml(await read(path));
+        docs.set(path, doc);
+        for (const a of elements(doc, "a")) { const target = noteTarget(a, path); if (target) noteRefs.add(target); }
+      } catch (_) { /* reported below */ }
+    }
+    for (const [path, doc] of docs) for (const el of doc.getElementsByTagName("*")) {
+      const id = el.getAttribute("id");
+      if (id && noteRefs.has(`${path}#${id}`) && el.localName.toLowerCase() !== "a") noteTexts[`${path}#${id}`] = noteText(el);
+    }
+    const noteTargets = new Set(Object.keys(noteTexts));
     const chapters = [];
     for (const ref of elements(spine, "itemref")) {
       const item = items.get(ref.getAttribute("idref"));
@@ -409,9 +475,19 @@
       if (encrypted.has(path)) fail("This EPUB is DRM-protected. Choose a DRM-free book.");
       if (ref.getAttribute("linear") === "no") continue;
       if (item.getAttribute("media-type") !== "application/xhtml+xml") fail("This EPUB contains an unsupported chapter format.");
-      const doc = xml(await read(path));
-      const chapter = extractChapter(doc, await chapterStyleRules(doc, path), bookLang);
-      if (chapter.paragraphs.length) chapters.push({ id: ref.getAttribute("idref"), href: path, title: chapter.title || `Chapter ${chapters.length + 1}`, paragraphs: chapter.paragraphs, paragraphKinds: chapter.paragraphKinds, anchors: chapter.anchors, ...(chapter.paragraphLayout ? { paragraphLayout: chapter.paragraphLayout } : {}) });
+      const doc = docs.get(path) || xml(await read(path));
+      const chapter = extractChapter(doc, await chapterStyleRules(doc, path), bookLang, { path, targets: noteTargets });
+      // The notes this chapter's references point to (a reference whose note was not found stays plain text).
+      const notes = Object.create(null);
+      (chapter.paragraphLayout || []).forEach((layout, i) => {
+        if (!layout?.marks) return;
+        layout.marks = layout.marks.filter(m => m.kind !== "noteref" || noteTexts[m.target] !== undefined);
+        for (const m of layout.marks) if (m.kind === "noteref") notes[m.target] = noteTexts[m.target];
+        if (!layout.marks.length) delete layout.marks;
+        if (!Object.keys(layout).length) chapter.paragraphLayout[i] = null;
+      });
+      if (chapter.paragraphLayout && !chapter.paragraphLayout.some(Boolean)) delete chapter.paragraphLayout;
+      if (chapter.paragraphs.length) chapters.push({ id: ref.getAttribute("idref"), href: path, title: chapter.title || `Chapter ${chapters.length + 1}`, paragraphs: chapter.paragraphs, paragraphKinds: chapter.paragraphKinds, anchors: chapter.anchors, ...(chapter.paragraphLayout ? { paragraphLayout: chapter.paragraphLayout } : {}), ...(Object.keys(notes).length ? { notes: { ...notes } } : {}) });
     }
     if (!chapters.length) fail("This EPUB contains no readable text.");
     // Navigation is optional: a broken TOC must not make readable spine text unusable.
