@@ -53726,6 +53726,54 @@
     }
   },
   {
+    "id": "verb-2777",
+    "infinitive": "wahren",
+    "translation_ru": "соблюдать, сохранять, хранить (приличия, дистанцию, тайну); защищать, отстаивать (интересы, права)",
+    "translation_en": "to keep, to maintain, to preserve (appearances, distance); to protect, to safeguard (interests, rights)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Книжн. Устойчиво: den Schein wahren — сохранять видимость (приличия); das Gesicht wahren — сохранить лицо; Distanz / Abstand wahren — держать дистанцию; ein Geheimnis wahren — хранить тайну; seine Interessen wahren — отстаивать свои интересы. Слабый: wahrte, hat gewahrt. Не путать с прилагательным wahr — правдивый (die wahren Gründe) и с глаголом währen — длиться (wahrte ≠ währte). Близко: bewahren.",
+    "usage_note_en": "Formal. Set phrases: den Schein wahren — to keep up appearances; das Gesicht wahren — to save face; Distanz / Abstand wahren — to keep one's distance; ein Geheimnis wahren — to keep a secret; seine Interessen wahren — to safeguard one's interests. Weak: wahrte, hat gewahrt. Do not confuse with the adjective wahr — true (die wahren Gründe) and with währen — to last (wahrte ≠ währte). Similar: bewahren.",
+    "example_de": "Trotz des Streits versuchten beide, vor den Gästen den Schein zu wahren.",
+    "example_cloze": "Trotz des Streits versuchten beide, vor den Gästen den Schein zu {{c1::wahren}}.",
+    "example_ru": "Несмотря на ссору, оба старались при гостях делать вид, что ничего не случилось.",
+    "example_en": "Despite the quarrel, both tried to keep up appearances in front of the guests.",
+    "perfect_form": "haben gewahrt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "соблюдать, сохранять; защищать что-либо (den Schein, Distanz, das Gesicht; Interessen, Rechte)",
+        "note_en": "to keep, to maintain; to safeguard something"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "wahre",
+        "du": "wahrst",
+        "er/sie/es": "wahrt",
+        "wir": "wahren",
+        "ihr": "wahrt",
+        "sie": "wahren"
+      },
+      "Präteritum": {
+        "ich": "wahrte",
+        "du": "wahrtest",
+        "er/sie/es": "wahrte",
+        "wir": "wahrten",
+        "ihr": "wahrtet",
+        "sie": "wahrten"
+      },
+      "Konjunktiv II": {
+        "ich": "wahrte",
+        "du": "wahrtest",
+        "er/sie/es": "wahrte",
+        "wir": "wahrten",
+        "ihr": "wahrtet",
+        "sie": "wahrten"
+      }
+    }
+  },
+  {
     "id": "verb-1145",
     "infinitive": "bewältigen",
     "translation_ru": "справляться (с чем-либо), преодолевать",

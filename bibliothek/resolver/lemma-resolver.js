@@ -9585,6 +9585,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // numbers, adverbs, a series of attributes, a contraction, a preposition with attributes of the same ending; a group with a preposition
     // there must close before the form — not … unter dem Bandnamen veröffentlichten Alben produzierte Orzabal, which the narrow walk below
     // would take. One function of the attribute frame, as the advisor asked)
+    // 5а.4 (advisor 12.11): right after token i an opening quote (" „ “ « ‚ ‘ ‹) and then a capital word — a quoted noun.
+    function quotedNounAfter(sentence, tokens, i) {
+      const t = tokens[i], n = tokens[i + 1];
+      if (typeof sentence !== "string" || !t || !n || !Number.isInteger(t.index) || !Number.isInteger(n.index)) return false;
+      return /^\s*["„“«‚‘‹»]$/u.test(sentence.slice(t.index + t[0].length, n.index)) && /^\p{Lu}/u.test(n[0]);
+    }
     function attributeFrameDeterminer(tokens, i, lo = 0, sentence = null, wide = false) {
       if (wide) return attributeFrameWide(tokens, i, String(sentence ?? tokens[i]?.input ?? ""));
       const text = String(sentence ?? tokens[i]?.input ?? ""), word = norm(tokens[i]?.[0] ?? "");
@@ -11164,7 +11170,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (let j = index+1; j+1 < tokens.length && j <= index+7; j++) {
           const tj = tokens[j][0], g = gap(j,j+1), adjEnding = /^\p{Ll}.*(?:e|en|er|es|em)$/u.test(tj);
           if (adjEnding && /^\s+$/u.test(g) && /^\p{Lu}/u.test(tokens[j+1][0])) return null;
-          if (/,/u.test(g) ? !(adjEnding && /^\s*,\s*$/u.test(g) && /^\p{Ll}/u.test(tokens[j+1][0])) : !/^[\s\d.]*$/u.test(g)) break;
+          // (a list of adjectives over a comma — not after a verb form: hat sie die noch gewonnen, aber das ist eine andere Geschichte)
+          if (/,/u.test(g) ? !(adjEnding && /^\s*,\s*$/u.test(g) && /^\p{Ll}/u.test(tokens[j+1][0]) &&
+              !(verbAnalyses.get(norm(tj)) || []).some(a => ['finite','participle','infinitive'].includes(a.kind))) : !/^[\s\d.]*$/u.test(g)) break;
         }
         if (!verb && !['Pronomen','Adverb','Partikel'].some(t => types1.has(t)) && !SUBJECT_PRONOUNS.has(k1)) return null;
       }
@@ -11174,6 +11182,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (after a preposition a broken-off word is the article of an unsaid noun: rast auf die – Moment mal, Aber in der …)
       if (afterPreposition && /^\s*(?:[–—-]|…|\.\.\.)/u.test(tail)) return null;
       if (w === 'das' && !afterComma && !afterPreposition) return {candidate:demonstrative,evidence:'g50-not-article-next-word'};
+      // (second resolver chat 14.11, Tschick T-025) a relative pronoun opens its part: der / die / den / dem neither after a comma nor
+      // after a preposition, with a finite verb of its part before it (hat sie die noch gewonnen), is the demonstrative.
+      // Only when nothing after the word in its part can be its noun or its own verb: no capital word up to the end of the part (an
+      // extended attribute — die bereits seit 1861 bestehende Schule, der nun 29-jährige Frenzel), no finite verb closing the part (a
+      // relative clause without its comma — der Torte die wir haben wollten), not right after und / oder (… kennenlernte und die ihn …).
+      let partLast = index;
+      while (partLast + 1 < tokens.length && !/[,;:.!?()„“”"«»–—]/u.test(gap(partLast,partLast+1))) partLast++;
+      const finiteToken = t => /^\p{Ll}/u.test(t) && [norm(t),norm(t).replace(/ß/gu,'ss')].some(f => (verbAnalyses.get(f) || []).some(a => a.kind === 'finite' && !a.detached));
+      const quietAfter = partLast > index && !tokens.slice(index+1,partLast+1).some(t => /^\p{Lu}/u.test(t[0])) && !finiteToken(tokens[partLast][0]) &&
+        !/\d/u.test(sentence.slice(tokens[index].index, tokens[partLast].index + tokens[partLast][0].length)) &&
+        !(index > 0 && /^(?:und|oder|sowie)$/u.test(norm(tokens[index-1][0])));
+      if (!afterComma && !afterPreposition && quietAfter) {
+        let k = index - 1;
+        while (k >= 0 && !/[,;:.!?()„“”"«»–—]/u.test(gap(k,k+1))) k--;
+        for (let i = k + 1; i < index; i++) {
+          const t = tokens[i][0];
+          if (/^\p{Ll}/u.test(t) && [norm(t),norm(t).replace(/ß/gu,'ss')].some(f => (verbAnalyses.get(f) || []).some(a => a.kind === 'finite' && !a.detached)) &&
+              !(forms.get(norm(t)) || []).some(e => !['Verb'].includes(e.type)))
+            return {candidate:demonstrative,evidence:'g50-demonstrative-after-finite'};
+        }
+      }
       // G50 step 3, part 2 (advisor 01.11): the role by the place of the verb in the part of the clause after the word (up to the
       // next punctuation). Not decided — the window «тот / который».
       const role = roleByVerbPlaceInWindow(sentence,tokens,index,afterComma || afterPreposition && /,\s*$/u.test(sentence.slice(0,tokens[index-1].index)));
@@ -11462,6 +11491,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (finiteBefore) for (let i = index+1; i <= coordinatedEnd; i++) if (await finite(i)) return null;
         return conjunctionAt('phrasal-conjunction-without-verb');
       }
+      // (second resolver chat 14.11, Tschick T-029) a part already opened by a subordinator before the word — Dass es da keine Tiere
+      // gab, Nur dass es da natürlich gar keine Tiere gab — has its conjunction: the word is the adverb (there is no second
+      // subordinator inside one part). aber keeps its own reading below.
+      if (norm(word) !== "aber" && kind === "subordinating") {
+        // (not als / wie of a comparison or a role — als Mannequin bevor sie …)
+        for (let i = start; i < index; i++) if (kindOf(i).includes("subordinating") && norm(tokens[i][0]) !== norm(word) && !["als","wie"].includes(norm(tokens[i][0])) &&
+            !(forms.get(norm(tokens[i][0])) || []).some(e => ["Adverb","Präposition","Pronomen"].includes(e.type)))
+          return adverbAt('adverb-in-subordinate-clause');
+      }
       // A subordinator without its comma (… mein Stammladen solange wir hier wohnen bleiben):
       // a subject right after the word and a verb-final clause up to the boundary.
       if (kind === "subordinating" && tokens[index+1] &&
@@ -11545,6 +11583,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const endRows = [norm(tokens[end][0]),norm(tokens[end][0]).replace(/ß/gu,'ss')].flatMap(f => verbAnalyses.get(f) || []);
         if (!(end > index && finiteVerbToken(tokens[end]) && !endRows.some(r => r.kind === 'participle'))) return {...prep,evidence:'preposition-time-or-number'};
       }
+      // (second resolver chat 14.11, Tschick T-054) um before a time — a figure, a cardinal number word, halb / viertel / Mitternacht /
+      // Mittag (um sieben, um halb neun, um fünf vor drei, um 8 Uhr) — is the preposition «в (о точном времени)», not um … zu.
+      // (advisor 14.11, a trap of the links chat: not when a zu-infinitive closes the part — um zwei von uns … zu verstecken is um … zu)
+      const zuInPart = () => { let k = index + 1;
+        while (k < tokens.length && !/[,;:.!?()„“”"«»–—]/u.test(gap(k-1,k))) {
+          const t = norm(tokens[k][0]);
+          if (t === "zu" && tokens[k+1] && /^\s+$/u.test(gap(k,k+1)) && /^\p{Ll}/u.test(tokens[k+1][0]) ||
+              (verbAnalyses.get(t) || []).some(a => a.kind === "infinitive" && a.zu)) return true;
+          k++;
+        }
+        return false; };
+      if (norm(word) === "um" && !zuInPart() && (/^\s+\d/u.test(sentence.slice(tokens[index].index + tokens[index][0].length)) ||
+          next && (["halb","viertel","mitternacht","mittag"].includes(next) ||
+            (forms.get(next) || []).some(e => e.type === "numeral" && e.grammar?.numeral_kind === "cardinal" && norm(e.word) === next))))
+        return {...prep,evidence:'preposition-time-or-number'};
       const governed = governedCases(card);
       // A figure right after the preposition (über 60 Prozent) may be an adverbial "more than".
       const figureFirst = tokens[index+1] && /\d/u.test(gap(index,index+1));
@@ -12580,6 +12633,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const determiner = contractionArticle(rawDeterminer) || rawDeterminer;
         const inflectedDeterminer = /^(?:mein|dein|sein|ihr|unser|euer|eur|kein|dies|jen)(?:e|en|em|er|es)?$/u.test(determiner);
         if (!f.nouns.length || determinerIndex < start || !(determiners.has(determiner) || inflectedDeterminer)) return undefined;
+        // 5а.4 (cards chat + advisor 12.11): an opening quote between the word and a capital noun does not end the attribute frame —
+        // in einer wahren “Eishockeyschlacht”, ein sogenannter „Experte“: the lowercase word is the attribute, not a noun of its own.
+        if (/^[a-zäöüß]/u.test(word) && quotedNounAfter(f.sentence, tokens, index)) {
+          const attributes = f.adjectives.filter(a => ADJECTIVE_ENDINGS.includes(norm(word).startsWith(norm(a.lemma)) ? norm(word).slice(norm(a.lemma).length) : null));
+          return attributes.length ? f.choose(attributes,"noun-after-determiner") : undefined;
+        }
         if (/^[a-zäöüß]/u.test(word)) {
           // B1: in a text that capitalises its nouns, a lowercase word that may be
           // the finite verb of a clause without another finite verb is that verb
@@ -13489,7 +13548,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // a noun — the adjective (eine gerade Linie); ganz right before a name or a noun without an article — «весь» (ganz Hogwarts,
     // ganz Deutschland; not etwas ganz Besonderes — a noun made of an adjective); gerade closing its part after sein — «прямой»
     // (Die Linie ist gerade.); otherwise the adverb («совсем», «как раз»). Where the spelling cannot tell — the window stays.
-    const TWIN_SIGNS = {ganz: 'bare-name', gerade: 'after-sein'};
+    // (second resolver chat 14.11, Tschick T-036, G14 19.10) eigentlich — the adjective «настоящий, основной» is only attributive
+    // (der eigentliche Grund): the bare form is the adverb «вообще-то; на самом деле» (es ist eigentlich nur ein Gespräch).
+    const TWIN_SIGNS = {ganz: 'bare-name', gerade: 'after-sein', eigentlich: 'attributive-only'};
     const SEIN_FORMS = new Set(['bin','bist','ist','sind','seid','war','warst','waren','wart','sei','seien','wäre','wären','gewesen','sein']);
     function adjectiveAdverbTwin(word, context, result) {
       const list = result?.candidates || [], w = norm(word), sign = TWIN_SIGNS[w];
@@ -13506,9 +13567,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const after = sentence.slice(tokens[i].index+tokens[i][0].length);
       const capitalNext = /^\p{Lu}\p{Ll}/u.test(next), afterDeterminer = !!prev && FORM_DETERMINERS.test(prev);
       let chosen = adv[0];
+      if (sign === 'attributive-only') chosen = w === norm(adj[0].lemma) ? adv[0] : adj[0];
       // gerade (an inflected form) between a determiner and a noun; ganz has no ending, so after a determiner it is the adverb
       // (die ganz Hartgesottenen)
-      if (sign === 'after-sein' && afterDeterminer && capitalNext) chosen = adj[0];
+      if (sign === 'attributive-only') { /* decided above */ }
+      else if (sign === 'after-sein' && afterDeterminer && capitalNext) chosen = adj[0];
       // gerade before a capitalised word without a determiner: either (als gerade Linien) or (hab gerade Ronan gefragt) — a choice
       else if (sign === 'after-sein' && capitalNext) return result;
       // gerade before a preposition: «как раз» (gerade in diesem Moment) or «прямо» (ging gerade zum Bett, gerade auf den Kopf) — a choice

@@ -45232,5 +45232,67 @@
         "Der Fuchs jagte das eine Huhn und dann das andere."
       ]
     }
+  },
+  {
+    "id": "expression-239",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "in keiner Weise",
+    "translation_ru": "никоим образом, ни в коей мере, нисколько",
+    "translation_en": "in no way, not in the least, by no means",
+    "example_de": "Mit dem Unfall hatte er in keiner Weise etwas zu tun.",
+    "example_ru": "К аварии он не имел никакого отношения.",
+    "example_en": "He had nothing whatsoever to do with the accident.",
+    "notes_ru": [
+      "Разг., эмоц.: in keinster Weise (форма keinster ненормативна, часто шутл.). Близко: keineswegs, auf keinen Fall."
+    ],
+    "notes_en": [
+      "Colloquial emphatic: in keinster Weise (non-standard, often humorous). Similar: keineswegs, auf keinen Fall."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/kein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "in",
+              "In"
+            ]
+          },
+          {
+            "form": [
+              "keiner",
+              "keinster",
+              "keinerlei"
+            ]
+          },
+          {
+            "form": "Weise"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Mit dem Unfall hatte er in keiner Weise etwas zu tun.",
+        "Das Hotel ist in keinster Weise zu empfehlen!",
+        "Sie hat in keiner Weise den Charakter einer Straftruppe.",
+        "Der Arzt geht in keiner Weise auf die Belange des Patienten ein.",
+        "Das hat in keinerlei Weise geholfen.",
+        "In keiner Weise war er daran beteiligt."
+      ],
+      "negative": [
+        "Er tat es auf seine Weise.",
+        "Auf diese Weise geht es schneller.",
+        "Keiner war in der Nähe.",
+        "Er reagierte in einer Weise, die mich überraschte.",
+        "Keiner Weise ist das gelungen."
+      ]
+    }
   }
 ]
