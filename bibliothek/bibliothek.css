@@ -702,6 +702,36 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .book-note-popup[hidden] {
   display: none;
 }
+/* List items (D24 step 3, 14.11.2026): indented by depth, never justified; the marker comes from data-marker, outside
+   the text (the resolver reads only the text). */
+.reading-text p.book-li {
+  padding-left: calc(var(--book-list-depth, 1) * 1.5em);
+  text-indent: 0;
+  text-align: left;
+  margin-bottom: 0.45em;
+}
+.reading-text p.book-li[data-marker]::before {
+  content: attr(data-marker);
+  display: inline-block;
+  min-width: 1.5em;
+  margin-left: -1.5em;
+  padding-right: 0.3em;
+  box-sizing: border-box;
+  text-align: right;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0;
+  color: var(--secondary-text, var(--muted));
+}
+@media (max-width: 600px) {
+  .reading-text p.book-li {
+    padding-left: calc(var(--book-list-depth, 1) * 1.2em);
+  }
+  .reading-text p.book-li[data-marker]::before {
+    min-width: 1.2em;
+    margin-left: -1.2em;
+  }
+}
 /* Preformatted text (<pre>, code): line ends kept, monospace, never justified. */
 .reading-text p.book-pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;

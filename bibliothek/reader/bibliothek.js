@@ -801,6 +801,12 @@
       // Paragraph layout from the EPUB (D23 step 2): scene break, quotation / letter, verse lines of a poem.
       for (const [field, name] of [["gapBefore", "book-gap-before"], ["quote", "book-quote"], ["quoteEnd", "book-quote-end"], ["verse", "book-verse-line"], ["stanzaStart", "book-stanza-start"], ["verseEnd", "book-verse-end"], ["pre", "book-pre"], ["note", "book-note"], ["noteStart", "book-note-start"]]) if (layout?.[field] === true) p.classList.add(name);
       if (layout?.lineBreaks?.length) p.classList.add("book-has-breaks");
+      // List items (D24 step 3): indent by depth, the number or bullet drawn by CSS from data-marker.
+      if (layout?.list && Number.isInteger(layout.list.depth) && layout.list.depth > 0) {
+        p.classList.add("book-li");
+        p.style.setProperty("--book-list-depth", String(Math.min(layout.list.depth, 6)));
+        if (typeof layout.list.marker === "string" && layout.list.marker) p.dataset.marker = layout.list.marker;
+      }
       p.append(wrapParagraph(paragraph, layout));
       $text.append(p);
     });

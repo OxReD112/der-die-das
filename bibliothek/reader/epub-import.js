@@ -62,7 +62,7 @@
     map[raw.length] = text.length;
     return text === clean(raw) ? { text, map } : null;
   }
-  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin", "display"];
+  const STYLE_PROPERTIES = ["text-align", "font-style", "font-weight", "font-variant", "letter-spacing", "margin-top", "margin", "display", "list-style-type", "list-style"];
   function declarations(body) {
     const out = {};
     for (const [, name, value] of String(body || "").matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/gi)) {
@@ -200,6 +200,36 @@
     }
     return clean(copy.textContent).replace(/^[↑↩^⇧]+\s*/u, "");
   }
+  // Lists (D24 step 3, 14.11.2026): the paragraphs of a list item get list: { depth, marker? } — the marker («3.», «c.»,
+  // «iv.», «•», «◦», «▪») only on the item's first paragraph, none for list-style none. The marker is drawn by CSS, so
+  // the paragraph text stays as before. Numbering follows <ol start>, <li value>, <ol type> and the book's class rules.
+  const LIST_STYLES = ["decimal-leading-zero", "decimal", "lower-alpha", "upper-alpha", "lower-latin", "upper-latin", "lower-roman", "upper-roman", "disc", "circle", "square", "none"];
+  function listStyle(props) {
+    const own = (props["list-style-type"] || "").trim();
+    if (LIST_STYLES.includes(own)) return own;
+    return (props["list-style"] || "").split(/\s+/).find(word => LIST_STYLES.includes(word)) || null;
+  }
+  function roman(n) {
+    let out = "";
+    for (const [v, r] of [[1000, "m"], [900, "cm"], [500, "d"], [400, "cd"], [100, "c"], [90, "xc"], [50, "l"], [40, "xl"], [10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]]) while (n >= v) { out += r; n -= v; }
+    return out;
+  }
+  function letters(n) { let out = ""; while (n > 0) { n--; out = String.fromCharCode(97 + (n % 26)) + out; n = Math.floor(n / 26); } return out; }
+  function listMarker(style, n) {
+    switch (style) {
+      case "none": return "";
+      case "disc": return "•";
+      case "circle": return "◦";
+      case "square": return "▪";
+      case "decimal-leading-zero": return `${n < 10 && n >= 0 ? "0" : ""}${n}.`;
+      case "lower-alpha": case "lower-latin": return n > 0 ? `${letters(n)}.` : `${n}.`;
+      case "upper-alpha": case "upper-latin": return n > 0 ? `${letters(n).toUpperCase()}.` : `${n}.`;
+      case "lower-roman": return n > 0 && n < 4000 ? `${roman(n)}.` : `${n}.`;
+      case "upper-roman": return n > 0 && n < 4000 ? `${roman(n).toUpperCase()}.` : `${n}.`;
+      default: return `${n}.`;
+    }
+  }
+  const OL_TYPES = { "1": "decimal", a: "lower-alpha", A: "upper-alpha", i: "lower-roman", I: "upper-roman" };
   function extractChapter(doc, rules = [], bookLang = "", notes = null) {
     const body = elements(doc, "body")[0];
     if (!body) fail("An EPUB chapter is missing its text body.");
@@ -208,7 +238,8 @@
     let pendingKind = "p";
     let pending = "", pendingBreaks = [], softBreaks = [], segments = [], align = null, state = {};
     const gapAt = new Set();
-    const noteSegments = [];
+    const noteSegments = [], listStack = [];
+    let listItem = null;
     let noteDepth = 0;
     let quoteDepth = 0, quoteNode = null, lastQuote = null, verseStanza = null, lastStanza = null, preDepth = 0, stanzaNext = false;
     const flush = () => {
@@ -243,6 +274,12 @@
         lastQuote = quoteNode;
         if (preDepth) layout.pre = true;
         if (noteDepth) { layout.note = true; if (!previous?.note) layout.noteStart = true; }
+        if (listItem) {
+          // No second marker when the book already prints one in the text («• You pay…», «1. …»).
+          const printed = /^([•◦▪·*–—-]|\(?(\d+|[a-z]|[ivxlc]+)[.)])\s/i.test(text);
+          layout.list = { depth: listItem.depth, ...(!listItem.used && listItem.marker && !printed ? { marker: listItem.marker } : {}) };
+          listItem.used = true;
+        }
         if (mapped) for (const seg of noteSegments) {
           let start = mapped.map[seg.start], end = mapped.map[seg.end];
           while (start < end && text[start] === " ") start++;
@@ -308,6 +345,20 @@
         if (tag === "pre") preDepth++;
       }
       state = inlineState(node, tag, props, outerState);
+      const outerItem = listItem;
+      if (tag === "ol" || tag === "ul") {
+        const start = parseInt(node.getAttribute("start"), 10);
+        // A contents list inside <nav> gets no numbers (readers show it as a plain list).
+        let inNav = false;
+        for (let up = node.parentNode; up && up.nodeType === 1; up = up.parentNode) if (up.localName.toLowerCase() === "nav") { inNav = true; break; }
+        const style = inNav ? "none" : listStyle(props) || (tag === "ol" ? OL_TYPES[node.getAttribute("type")] || "decimal" : ["disc", "circle", "square"][Math.min(listStack.filter(l => l.kind === "ul").length, 2)]);
+        listStack.push({ kind: tag, n: Number.isFinite(start) ? start - 1 : 0, style });
+      }
+      if (tag === "li" && listStack.length) {
+        const list = listStack[listStack.length - 1], value = parseInt(node.getAttribute("value"), 10);
+        list.n = Number.isFinite(value) ? value : list.n + 1;
+        listItem = { marker: listMarker(listStyle(props) || list.style, list.n), depth: listStack.length, used: false };
+      }
       const target = notes ? noteTarget(node, notes.path) : null, noteStart = pending.length;
       const ownId = node.getAttribute("id");
       const isNote = !!(notes && ownId && notes.targets.has(`${notes.path}#${ownId}`));
@@ -322,6 +373,8 @@
       state = outerState;
       if (block) { flush(); align = outer; verseStanza = outerStanza; if (tag === "blockquote" && !--quoteDepth) quoteNode = null; if (tag === "pre") preDepth--; }
       if (isNote) noteDepth--;
+      if (tag === "li") listItem = outerItem;
+      if (tag === "ol" || tag === "ul") listStack.pop();
     }
     walk(body); flush();
     if (paragraphLayout.at(-1)?.verse) paragraphLayout.at(-1).verseEnd = true;
