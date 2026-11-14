@@ -297,7 +297,7 @@
   }
   function groupsFor(word, data) {
     observe('groups-build', {word});
-    const byPos = new Map(), labelsByPos = new Map(), reflexiveByPos = new Map(), genderByPos = new Map(), transitivityByPos = new Map();
+    const byPos = new Map(), labelsByPos = new Map(), reflexiveByPos = new Map(), genderByPos = new Map(), transitivityByPos = new Map(), transitivityOfByPos = new Map();
     for (const row of [...(data?.senses || [])].sort((a,b) => (a[4] ?? 0) - (b[4] ?? 0) || a[0]-b[0])) {
       const pos = row[2] || "";
       if (!byPos.has(pos)) { byPos.set(pos, []); labelsByPos.set(pos, {}); reflexiveByPos.set(pos, {}); genderByPos.set(pos, {}); transitivityByPos.set(pos, new Set()); }
@@ -312,6 +312,8 @@
       // (links chat п. 16, advisor 11.11): the transitivity tags of the senses (column 9: transitive / intransitive / both), as a set
       // per part of speech — read only by the resolver's transitiveOnly
       if (["transitive","intransitive","both"].includes(row[8])) transitivityByPos.get(pos).add(row[8]);
+      // (links chat TODO п. 98, advisor 14.11: the same tag per meaning — the meaning choice with an object in the part)
+      if (["transitive","intransitive","both"].includes(row[8])) { if (!transitivityOfByPos.has(pos)) transitivityOfByPos.set(pos, {}); if (!(row[3] in transitivityOfByPos.get(pos))) transitivityOfByPos.get(pos)[row[3]] = row[8]; }
     }
     // Auxiliary rows (haben: ~9 300, sein: ~1 500 "auxiliary of <verb>" links) never name a
     // lemma inside a sense, and comparing every sense with each of them cost seconds in browsers.
@@ -333,7 +335,8 @@
       const marks = reflexiveByPos.get(pos) || {}, reflexive = Object.fromEntries(meanings.filter(m => marks[m]).map(m => [m,marks[m]]));
       const noun = pos === "noun" ? nounFacts(word, data, meanings.map(m => genderByPos.get(pos)[m])) : null;
       return {word,pos,meanings,formNotes:notes,...(Object.keys(labels).length ? {labels} : {}),...(Object.keys(reflexive).length ? {reflexive} : {}),
-        ...(noun ? {noun} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {})};
+        ...(noun ? {noun} : {}),...(transitivityByPos.get(pos)?.size ? {transitivity:[...transitivityByPos.get(pos)].sort()} : {}),
+        ...(transitivityOfByPos.get(pos) ? {transitivityOf:Object.fromEntries(meanings.filter(m => m in transitivityOfByPos.get(pos)).map(m => [m,transitivityOfByPos.get(pos)[m]]))} : {})};
     });
   }
   // G16 + G69 (advisor 25.10.2026, rules of DICTIONARY_DATA_FOR_RESOLVER 3.1): the article of an external noun and its
@@ -655,6 +658,7 @@
         if (group.labels) target.labels = {...(target.labels || {}),...group.labels};
         if (group.reflexive) target.reflexive = {...(target.reflexive || {}),...group.reflexive};
         if (group.transitivity) target.transitivity = [...new Set([...(target.transitivity || []),...group.transitivity])].sort();
+        if (group.transitivityOf) target.transitivityOf = {...(target.transitivityOf || {}),...group.transitivityOf};
         if (group.noun && !target.noun) target.noun = group.noun;
       }
       if (merged.size || notes.length) return [...merged.values(),...notes];

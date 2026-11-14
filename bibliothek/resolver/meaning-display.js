@@ -137,6 +137,13 @@
     const rude = row => row.codes.some(code => RUDE_LABELS.has(LABEL_BY_CODE.get(code)?.id));
     const first = rows.findIndex(row => !rude(row));
     if (first > 0) rows.unshift(...rows.splice(first, 1));
+    // (links chat TODO п. 98, advisor 14.11) an object in the part of a separated external verb (objectInPart, the resolver): the first
+    // meaning marked transitive («перех.») comes before the meanings marked intransitive («неперех.») in front of it
+    if (candidate.objectInPart) {
+      const has = (row, code) => row.codes.includes(code);
+      const at = rows.findIndex(row => has(row, 'transitive'));
+      if (at > 0 && rows.slice(0, at).every(row => has(row, 'intransitive') && !has(row, 'transitive'))) rows.unshift(...rows.splice(at, 1));
+    }
     return rows;
   }
   function shownLabels(codes, display, first, domains = {}) {
@@ -170,7 +177,7 @@
   }
   function brief(candidate, language, inline = false) {
     // inline: a text shown without label segments (der/die pair) keeps the source gloss with its inline label
-    if (!inline && isExternal(candidate) && candidate.meaningLabels?.[language] && !Number.isInteger(candidate.senseFirst) &&
+    if (!inline && isExternal(candidate) && candidate.meaningLabels?.[language] && !Number.isInteger(candidate.senseFirst) && !(language === 'en' && Number.isInteger(candidate.senseFirstEn)) &&
         candidate.construction?.id !== 'lassen-infinitive' && !/^gerund of /i.test(String(candidate.translation?.[language] || '').trim()))
       return labelledParts(candidate, language).slice(0, shownCount(Infinity)).map(row => row.text).join('; ');
     let text = candidate.translation?.[language] || '';

@@ -599,6 +599,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "водить (машину); везти, отвозить кого-либо, что-либо",
         "note_en": "to drive (a vehicle); to drive, to take someone or something"
       }
@@ -4014,6 +4015,11 @@
         "pattern": "sich (Dativ) + Akkusativ",
         "note_ru": "представить себе что-либо",
         "note_en": "to imagine something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "представить себе что-либо",
+        "note_en": "to imagine something"
       }
     ],
     "reflexive_case": "Dativ"
@@ -4037,6 +4043,11 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "представить кого-либо кому-либо",
         "note_en": "to introduce someone to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "представлять кого-либо, что-либо",
+        "note_en": "to introduce / present someone, something"
       }
     ],
     "separable_prefix": "vor",
@@ -4355,6 +4366,11 @@
         "pattern": "(Dativ +) zu + Infinitiv",
         "note_ru": "предлагать (кому-либо) сделать что-либо",
         "note_en": "to suggest (to someone) doing something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "предлагать что-либо, кого-либо",
+        "note_en": "to suggest / propose something, someone"
       }
     ]
   },
@@ -8179,7 +8195,15 @@
         "ihr": "bringt mit",
         "sie": "bringen mit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "приносить, привозить что-либо, кого-либо",
+        "note_en": "to bring something, someone (along)"
+      }
+    ]
   },
   {
     "id": "verb-164",
@@ -8311,7 +8335,15 @@
         "Sie": "Nehmen Sie mit!"
       }
     },
-    "separable_prefix": "mit"
+    "separable_prefix": "mit",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "брать с собой что-либо, кого-либо",
+        "note_en": "to take something, someone along"
+      }
+    ]
   },
   {
     "id": "verb-167",
@@ -8375,7 +8407,16 @@
         "ihr": "möchtet",
         "sie": "möchten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "любить, нравиться",
+        "note_ru": "кого-либо / что-либо",
+        "note_en": "someone / something"
+      }
+    ]
   },
   {
     "id": "verb-169",
@@ -9397,7 +9438,14 @@
         "ihr": "studiertet",
         "sie": "studierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-191",
@@ -9525,7 +9573,16 @@
         "ihr": "trainiertet",
         "sie": "trainierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "тренировать",
+        "note_ru": "кого-либо / что-либо",
+        "note_en": "someone / something"
+      }
+    ]
   },
   {
     "id": "verb-194",
@@ -9622,6 +9679,12 @@
         "pattern": "Dativ + Akkusativ (es / das)",
         "note_ru": "делать (это) так же, как кто-либо",
         "note_en": "to do (it) the same as someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "это, что-либо (es / das / was) — сделать так же (кому-либо — дат. п., необязательно)",
+        "note_en": "it, something (es / das / was) — to do the same (dative of the person optional)"
       }
     ]
   },
@@ -9662,7 +9725,14 @@
         "ihr": "übtet",
         "sie": "übten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-196",
@@ -9796,7 +9866,14 @@
         "ihr": "verdientet",
         "sie": "verdienten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-199",
@@ -9967,7 +10044,14 @@
         "ihr": "Wascht!",
         "Sie": "Waschen Sie!"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-203",
@@ -10435,6 +10519,13 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "указывать на что-либо: Er zeigte auf das Haus.",
         "note_en": "to point at something: Er zeigte auf das Haus."
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "показывать",
+        "note_ru": "кому-либо что-либо",
+        "note_en": "someone something"
       }
     ],
     "lookup_forms": {
@@ -10743,6 +10834,11 @@
         "pattern": "Dativ",
         "note_ru": "отказать кому-либо (сообщить, что не придёшь)",
         "note_en": "to tell someone you can't come"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ab",
@@ -10812,7 +10908,14 @@
         "ihr": "schließt ab",
         "sie": "schließen ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-217",
@@ -12644,6 +12747,12 @@
         "pattern": "mit + Dativ",
         "note_ru": "обсуждать с кем-либо",
         "note_en": "to discuss with someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "обсуждать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -12988,6 +13097,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "втягивать, призывать, взимать что-, кого-либо",
         "note_en": "to pull in, to draft, to collect something, someone"
       },
@@ -13357,6 +13467,12 @@
         "pattern": "in / auf / an … + Akkusativ",
         "note_ru": "куда? — направление: Wechselpräposition с Akkusativ",
         "note_en": "where to? — direction: two-way preposition + accusative"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -13472,7 +13588,15 @@
         "ihr": "stelltet her",
         "sie": "stellten her"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "производить, изготавливать что-либо",
+        "note_en": "to produce / manufacture something"
+      }
+    ]
   },
   {
     "id": "verb-269",
@@ -13518,7 +13642,15 @@
         "Sie": "Laden Sie herunter!"
       }
     },
-    "separable_prefix": "herunter"
+    "separable_prefix": "herunter",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "скачивать что-либо",
+        "note_en": "to download something"
+      }
+    ]
   },
   {
     "id": "verb-2764",
@@ -13564,7 +13696,16 @@
         "Sie": "Führen Sie herunter!"
       }
     },
-    "separable_prefix": "herunter"
+    "separable_prefix": "herunter",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вести (свести) вниз (к говорящему)",
+        "note_ru": "вести вниз кого-либо",
+        "note_en": "to lead someone down"
+      }
+    ]
   },
   {
     "id": "verb-270",
@@ -13910,7 +14051,15 @@
         "ihr": "machtet kaputt",
         "sie": "machten kaputt"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "ломать, портить что-либо",
+        "note_en": "to break / ruin something"
+      }
+    ]
   },
   {
     "id": "verb-278",
@@ -14112,7 +14261,15 @@
         "ihr": "schreibt krank",
         "sie": "schreiben krank"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выписывать больничный кому-либо (кого-либо — Akk)",
+        "note_en": "to put someone on sick leave"
+      }
+    ]
   },
   {
     "id": "verb-283",
@@ -14246,6 +14403,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "кому-либо жаль",
         "note_en": "someone is sorry"
       }
@@ -14466,7 +14624,14 @@
         "ihr": "maltet",
         "sie": "malten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-291",
@@ -14896,7 +15061,14 @@
         "ihr": "packtet",
         "sie": "packten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-301",
@@ -15341,7 +15513,14 @@
         "ihr": "ruft",
         "sie": "rufen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-312",
@@ -15923,7 +16102,16 @@
         "ihr": "startetet",
         "sie": "starteten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "запускать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-325",
@@ -16359,6 +16547,12 @@
         "pattern": "von + Dativ",
         "note_ru": "мечтать о чём-либо; видеть во сне",
         "note_en": "to dream of / about something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "видеть сон",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -17611,7 +17805,15 @@
         "sie": "verwendeten wieder"
       }
     },
-    "separable_prefix": "wieder"
+    "separable_prefix": "wieder",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "использовать что-либо повторно",
+        "note_en": "to reuse something"
+      }
+    ]
   },
   {
     "id": "verb-359",
@@ -18251,6 +18453,12 @@
         "pattern": "über + Akkusativ",
         "note_ru": "голосовать по какому-либо вопросу",
         "note_en": "to vote on something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "согласовывать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ab",
@@ -18323,7 +18531,14 @@
         "Sie": "Waschen Sie ab!"
       }
     },
-    "separable_prefix": "ab"
+    "separable_prefix": "ab",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-373",
@@ -18342,6 +18557,13 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "обращать внимание на что-либо, следить за чем-либо",
         "note_en": "to pay attention to something, to watch"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "уважать",
+        "note_ru": "кого-либо / что-либо",
+        "note_en": "someone / something"
       }
     ],
     "lookup_forms": {
@@ -18533,7 +18755,14 @@
         "ihr": "bautet an",
         "sie": "bauten an"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-378",
@@ -18665,6 +18894,12 @@
         "pattern": "mit + Dativ",
         "note_ru": "хвастаться чем-либо",
         "note_en": "to show off about something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "указывать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "an"
@@ -19411,6 +19646,27 @@
         "pattern": "zu + Infinitiv",
         "note_ru": "бросить (делать что-либо), отказаться (от попыток что-либо сделать); обычно с es: es aufgeben, … zu …",
         "note_en": "to give up (doing something); usually with es: es aufgeben, … zu …"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "бросать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "отправлять (посылку)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сдавать (багаж)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ]
   },
@@ -21882,7 +22138,15 @@
         "er/sie/es": "blitzte"
       }
     },
-    "imperative": "none"
+    "imperative": "none",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "засечь камерой (о превышении скорости)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-451",
@@ -22050,6 +22314,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "ломать что-либо; нарушать что-либо (обещание, правило)",
         "note_en": "to break something; to break (a promise, a rule)"
       }
@@ -23521,6 +23786,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "идти навстречу кому-либо",
         "note_en": "to come towards someone"
       }
@@ -25001,7 +25267,14 @@
       "example_en": "Hold on tight!",
       "note_ru": "за что — an + Dativ: sich am Geländer festhalten.",
       "note_en": "to what — an + dative: sich am Geländer festhalten."
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "держать, удерживать кого-либо, что-либо; фиксировать что-либо",
+        "note_en": "to hold someone, something; to record something"
+      }
+    ]
   },
   {
     "id": "verb-522",
@@ -25043,7 +25316,14 @@
         "ihr": "legtet fest",
         "sie": "legten fest"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "устанавливать, назначать что-либо",
+        "note_en": "to fix / set something"
+      }
+    ]
   },
   {
     "id": "verb-523",
@@ -25089,7 +25369,15 @@
         "ihr": "nehmt fest",
         "Sie": "nehmen Sie fest"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "задерживать кого-либо",
+        "note_en": "to arrest someone"
+      }
+    ]
   },
   {
     "id": "verb-524",
@@ -25138,7 +25426,15 @@
       "example_en": "Old limescale had collected under the rim of the washbasin.",
       "note_ru": "Засесть в голове: Diese Idee hatte sich in seinem Kopf festgesetzt. — Эта мысль засела у него в голове. Обосноваться: Die Bande hatte sich in einem alten Lagerhaus festgesetzt. — Банда обосновалась на старом складе.",
       "note_en": "To stick in one's mind: Diese Idee hatte sich in seinem Kopf festgesetzt. — The idea had stuck in his head. To settle: Die Bande hatte sich in einem alten Lagerhaus festgesetzt. — The gang had holed up in an old warehouse."
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "устанавливать, назначать что-либо",
+        "note_en": "to set / fix something"
+      }
+    ]
   },
   {
     "id": "verb-525",
@@ -25209,7 +25505,14 @@
         "ihr": "stelltet fest",
         "sie": "stellten fest"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "обнаруживать, устанавливать что-либо",
+        "note_en": "to find / establish something"
+      }
+    ]
   },
   {
     "id": "verb-527",
@@ -25552,7 +25855,15 @@
         "ihr": "setztet fort",
         "sie": "setzten fort"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "продолжать что-либо",
+        "note_en": "to continue something"
+      }
+    ]
   },
   {
     "id": "verb-535",
@@ -25660,6 +25971,19 @@
         "pattern": "zu + Dativ",
         "note_ru": "приводить к чему-либо",
         "note_en": "to lead to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "вести",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "руководить",
+        "note_ru": "чем-либо (предприятием, группой)",
+        "note_en": "something (a business, a group)"
       }
     ],
     "lookup_forms": {
@@ -26262,7 +26586,14 @@
         "ihr": "gießt",
         "sie": "gießen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-551",
@@ -26337,6 +26668,13 @@
         "pattern": "nach + Dativ",
         "note_ru": "тянуться за чем-либо",
         "note_en": "to reach for something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "хватать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -26469,7 +26807,15 @@
         "ihr": "gucktet",
         "sie": "guckten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "смотреть",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-556",
@@ -26764,7 +27110,15 @@
         "Sie": "Fahren Sie herunter!"
       }
     },
-    "separable_prefix": "herunter"
+    "separable_prefix": "herunter",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выключать, снижать что-либо",
+        "note_en": "to shut down / reduce something"
+      }
+    ]
   },
   {
     "id": "verb-562",
@@ -26943,7 +27297,15 @@
         "Sie": "Laden Sie hoch!"
       }
     },
-    "separable_prefix": "hoch"
+    "separable_prefix": "hoch",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "загружать что-либо (в интернет)",
+        "note_en": "to upload something"
+      }
+    ]
   },
   {
     "id": "verb-566",
@@ -27363,7 +27725,16 @@
         "ihr": "klebtet",
         "sie": "klebten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "клеить",
+        "note_ru": "что-либо (куда-либо)",
+        "note_en": "something (somewhere)"
+      }
+    ]
   },
   {
     "id": "verb-576",
@@ -28486,6 +28857,11 @@
         "pattern": "Dativ",
         "note_ru": "сообщать кому-либо",
         "note_en": "to inform someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "сообщать что-либо",
+        "note_en": "to communicate / tell something"
       }
     ],
     "separable_prefix": "mit",
@@ -29163,7 +29539,16 @@
         "ihr": "reichtet",
         "sie": "reichten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "передавать (подавать)",
+        "note_ru": "кому-либо что-либо",
+        "note_en": "something to someone"
+      }
+    ]
   },
   {
     "id": "verb-616",
@@ -29300,6 +29685,12 @@
         "pattern": "Dativ",
         "note_ru": "сбрасывать кому-либо",
         "note_en": "to throw down to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "сбрасывать что-либо, кого-либо",
+        "note_en": "to throw something, someone down"
       }
     ],
     "separable_prefix": "runter"
@@ -29430,7 +29821,15 @@
         "ihr": "schaltetet",
         "sie": "schalteten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "включать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-622",
@@ -29469,7 +29868,14 @@
         "ihr": "schätztet",
         "sie": "schätzten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-623",
@@ -30361,7 +30767,21 @@
         "ihr": "spinnt",
         "sie": "spinnen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "нести чушь (разг.)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "прясть",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-640",
@@ -30651,6 +31071,13 @@
         "pattern": "in / auf / an … + Akkusativ",
         "note_ru": "куда? — направление: Wechselpräposition с Akkusativ",
         "note_en": "where to? — direction: two-way preposition + accusative"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вставлять, засовывать, втыкать",
+        "note_ru": "что-либо куда-либо",
+        "note_en": "something somewhere"
       }
     ],
     "lookup_forms": {
@@ -30970,6 +31397,12 @@
         "pattern": "an + Dativ",
         "note_ru": "удариться обо что-либо или чем-либо; (перен.) возмущаться чем-либо, находить неуместным",
         "note_en": "to bump (a body part) / against something; (figurative) to take offence at something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "удариться, ушибить (руку, голову)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -31431,7 +31864,23 @@
         "ihr": "treibt",
         "sie": "treiben"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "заниматься (спортом)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "гнать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2773",
@@ -31673,6 +32122,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "сушить что-либо",
         "note_en": "to dry something"
       }
@@ -32445,6 +32895,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "обходить что-либо",
         "note_en": "to bypass something"
       }
@@ -32510,6 +32961,11 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "переходить на что-либо",
         "note_en": "to switch to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "um",
@@ -32588,6 +33044,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "окружить кого-, что-либо",
         "note_en": "to surround someone, something"
       }
@@ -32815,7 +33272,14 @@
         "ihr": "unterrichtetet",
         "sie": "unterrichteten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-687",
@@ -33252,6 +33716,13 @@
         "pattern": "Akkusativ",
         "note_ru": "сжигать что-либо (hat verbrannt)",
         "note_en": "to burn something (hat verbrannt)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сжигать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -33828,7 +34299,23 @@
         "ihr": "vermitteltet",
         "sie": "vermittelten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "передавать (знания)",
+        "note_ru": "что-либо (кому-либо)",
+        "note_en": "something (to someone)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "устраивать (работу)",
+        "note_ru": "кому-либо что-либо / кого-либо",
+        "note_en": "something to someone / someone"
+      }
+    ]
   },
   {
     "id": "verb-708",
@@ -34434,6 +34921,12 @@
         "pattern": "sich (Dativ) + Akkusativ + von + Dativ",
         "note_ru": "ожидать чего-либо от чего-либо",
         "note_en": "to expect something from something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "reflexive_case": "Dativ"
@@ -34761,6 +35254,11 @@
         "pattern": "zu + Infinitiv",
         "note_ru": "собираться (сделать что-либо)",
         "note_en": "to intend (to do something)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "планировать что-либо (или zu + Infinitiv)",
+        "note_en": "to plan / intend something (or zu + infinitive)"
       }
     ]
   },
@@ -34796,6 +35294,8 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "казаться",
         "note_ru": "казаться кому-либо: Er kommt mir bekannt vor.",
         "note_en": "to seem to someone: Er kommt mir bekannt vor."
       }
@@ -34998,7 +35498,15 @@
         "Sie": "Werfen Sie weg!"
       }
     },
-    "separable_prefix": "weg"
+    "separable_prefix": "weg",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выбрасывать что-либо",
+        "note_en": "to throw something away"
+      }
+    ]
   },
   {
     "id": "verb-731",
@@ -35122,7 +35630,14 @@
         "ihr": "wendetet",
         "sie": "wendeten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-734",
@@ -35469,6 +35984,12 @@
         "pattern": "Akkusativ",
         "note_ru": "взвешивать что-либо; (слаб.: wiegte) качать, баюкать: ein Baby wiegen; sich in Sicherheit wiegen — тешить себя (ложной) уверенностью в безопасности.",
         "note_en": "to weigh something; (weak: wiegte) to rock: ein Baby wiegen; sich in Sicherheit wiegen — to lull oneself into a (false) sense of security."
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "взвешивать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ]
   },
@@ -35638,6 +36159,12 @@
         "pattern": "zu + Dativ",
         "note_ru": "относиться к числу кого-либо или чего-либо",
         "note_en": "to be one of, to rank among"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "считать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -36053,6 +36580,18 @@
         "pattern": "Dativ",
         "note_ru": "обещать кому-либо; нравиться кому-либо",
         "note_en": "to promise someone; to appeal to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "подтверждать участие, принимать (приглашение)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "обещать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "zu",
@@ -36123,7 +36662,14 @@
         "ihr": "fasstet zusammen",
         "sie": "fassten zusammen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (текст, итоги, части)",
+        "note_en": "something (a text, results, parts)"
+      }
+    ]
   },
   {
     "id": "verb-755",
@@ -36396,6 +36942,13 @@
         "pattern": "von + Dativ",
         "note_ru": "вычитать из чего-либо",
         "note_en": "to deduct from something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вычитать, удерживать (из суммы), снимать (шкуру, постельное бельё)",
+        "note_ru": "что-либо (из чего-либо)",
+        "note_en": "something (from something)"
       }
     ],
     "separable_prefix": "ab",
@@ -36668,7 +37221,14 @@
         "ihr": "vollzieht nach",
         "sie": "vollziehen nach"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "понимать, прослеживать что-либо",
+        "note_en": "to understand / retrace something"
+      }
+    ]
   },
   {
     "id": "verb-767",
@@ -36746,7 +37306,14 @@
         "ihr": "protokolliertet",
         "sie": "protokollierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-769",
@@ -36982,7 +37549,16 @@
         "ihr": "hautet ab",
         "sie": "hauten ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "отрубать (ветку, сук)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-774",
@@ -37925,6 +38501,13 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "пить за кого-либо или что-либо",
         "note_en": "to drink to someone or something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "толкать",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "separable_prefix": "an",
@@ -38557,6 +39140,12 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "отговаривать кого-либо от чего-либо (по-русски — кого? от чего?)",
         "note_en": "to talk someone out of something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо (кого-либо — Dativ)",
+        "note_en": "something (someone — dative)"
       }
     ],
     "separable_prefix": "aus",
@@ -39204,6 +39793,11 @@
         "pattern": "über + Akkusativ",
         "note_ru": "распоряжаться чем-либо, решать за кого-либо",
         "note_en": "to decide on something, to have a say over"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -40099,7 +40693,16 @@
         "ihr": "geht durch",
         "sie": "gehen durch"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "просматривать, проходить (по пунктам)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-842",
@@ -40664,6 +41267,13 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "вести расследование против кого-либо",
         "note_en": "to investigate someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "выяснять, устанавливать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -41116,6 +41726,11 @@
         "pattern": "von + Dativ",
         "note_ru": "держать вдали от кого-либо или чего-либо",
         "note_en": "to keep away from someone or something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "держать кого-либо, что-либо вдали",
+        "note_en": "to keep someone, something away"
       }
     ],
     "separable_prefix": "fern"
@@ -41160,7 +41775,14 @@
         "ihr": "machtet fertig",
         "sie": "machten fertig"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "изматывать, отчитывать кого-либо",
+        "note_en": "to wear someone out / tell someone off"
+      }
+    ]
   },
   {
     "id": "verb-865",
@@ -41556,7 +42178,15 @@
         "ihr": "machtet gut",
         "sie": "machten gut"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "загладить, исправить что-либо",
+        "note_en": "to make up for something"
+      }
+    ]
   },
   {
     "id": "verb-874",
@@ -41657,6 +42287,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "вылечивать кого-либо, что-либо",
         "note_en": "to heal, to cure someone or something"
       },
@@ -41773,7 +42404,14 @@
         "ihr": "findet heraus",
         "sie": "finden heraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "выяснять что-либо",
+        "note_en": "to find something out"
+      }
+    ]
   },
   {
     "id": "verb-879",
@@ -41814,7 +42452,15 @@
         "ihr": "bringt her",
         "sie": "bringen her"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "приносить, привозить что-либо, кого-либо (сюда)",
+        "note_en": "to bring something, someone here"
+      }
+    ]
   },
   {
     "id": "verb-880",
@@ -41856,7 +42502,15 @@
         "ihr": "holtet her",
         "sie": "holten her"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "приносить, приводить что-либо, кого-либо (сюда)",
+        "note_en": "to fetch something, someone here"
+      }
+    ]
   },
   {
     "id": "verb-881",
@@ -42073,7 +42727,15 @@
         "ihr": "bringt hin",
         "sie": "bringen hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "отводить, относить что-либо, кого-либо (туда)",
+        "note_en": "to take something, someone there"
+      }
+    ]
   },
   {
     "id": "verb-886",
@@ -42254,7 +42916,15 @@
         "ihr": "kriegtet hin",
         "sie": "kriegten hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "справиться с чем-либо (etw. hinkriegen)",
+        "note_en": "to manage / pull something off"
+      }
+    ]
   },
   {
     "id": "verb-890",
@@ -42975,7 +43645,16 @@
         "ihr": "kicktet",
         "sie": "kickten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "пинать",
+        "note_ru": "что-либо (мяч)",
+        "note_en": "something (a ball)"
+      }
+    ]
   },
   {
     "id": "verb-905",
@@ -43020,6 +43699,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "выливать, высыпать что-либо; наклонять, опрокидывать что-либо",
         "note_en": "to tip out, to pour something; to tip, to tilt something"
       }
@@ -43133,6 +43813,11 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "объяснять кому-либо что-либо",
         "note_en": "to make something clear to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "объяснять, давать понять что-либо",
+        "note_en": "to make something clear"
       }
     ],
     "separable_prefix": "klar",
@@ -43282,7 +43967,16 @@
         "ihr": "klemmtet",
         "sie": "klemmten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "зажимать, прищемлять",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-912",
@@ -43323,7 +44017,23 @@
         "ihr": "knacktet",
         "sie": "knackten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "колоть, раскалывать (орехи)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "взламывать (код)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-913",
@@ -43370,6 +44080,20 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "(разг.) швырнуть, грохнуть что-либо на что-либо (etw. auf den Tisch knallen)",
         "note_en": "(colloquial) to slam, to bang something down on something (etw. auf den Tisch knallen)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) влепить, врезать (jemandem eine knallen)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) швырять",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ]
   },
@@ -43478,6 +44202,13 @@
         "pattern": "mit + Dativ",
         "note_ru": "сочетать с чем-либо",
         "note_en": "to combine with something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "комбинировать, сочетать",
+        "note_ru": "что-либо (с чем-либо)",
+        "note_en": "something (with something)"
       }
     ],
     "lookup_forms": {
@@ -43526,6 +44257,13 @@
         "pattern": "mit + Dativ",
         "note_ru": "общаться с кем-либо",
         "note_en": "to communicate with someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сообщать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -43679,7 +44417,16 @@
         "ihr": "lagertet",
         "sie": "lagerten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "хранить (на складе)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-920",
@@ -43760,6 +44507,11 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "направлять на что-либо",
         "note_en": "to direct to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -43958,6 +44710,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "избавиться от кого-либо или чего-либо (по-русски — от + род. п.)",
         "note_en": "to get rid of someone or something"
       }
@@ -44049,7 +44802,14 @@
         "ihr": "bekommt mit",
         "sie": "bekommen mit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "замечать, получать что-либо",
+        "note_en": "to notice / get something"
+      }
+    ]
   },
   {
     "id": "verb-928",
@@ -44783,7 +45543,15 @@
         "ihr": "holtet raus",
         "sie": "holten raus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "доставать что-либо, кого-либо; выжимать что-либо",
+        "note_en": "to take something, someone out; to get something out of it"
+      }
+    ]
   },
   {
     "id": "verb-945",
@@ -44823,7 +45591,14 @@
         "ihr": "kriegtet raus",
         "sie": "kriegten raus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "выяснять, вытаскивать что-либо",
+        "note_en": "to find something out; to get something out"
+      }
+    ]
   },
   {
     "id": "verb-946",
@@ -44869,7 +45644,15 @@
         "Sie": "Werfen Sie raus!"
       }
     },
-    "separable_prefix": "raus"
+    "separable_prefix": "raus",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выгонять кого-либо; выбрасывать что-либо",
+        "note_en": "to throw someone out; to throw something away"
+      }
+    ]
   },
   {
     "id": "verb-947",
@@ -45004,7 +45787,15 @@
         "Sie": "Lassen Sie rein!"
       }
     },
-    "separable_prefix": "rein"
+    "separable_prefix": "rein",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "впускать кого-либо, что-либо",
+        "note_en": "to let someone, something in"
+      }
+    ]
   },
   {
     "id": "verb-950",
@@ -45373,7 +46164,14 @@
         "ihr": "rührtet",
         "sie": "rührten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-958",
@@ -46529,7 +47327,14 @@
         "ihr": "steuertet",
         "sie": "steuerten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-985",
@@ -46568,7 +47373,14 @@
         "ihr": "stilltet",
         "sie": "stillten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-986",
@@ -46705,7 +47517,15 @@
         "ihr": "streiftet",
         "sie": "streiften"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо / что-либо",
+        "note_en": "someone / something"
+      }
+    ]
   },
   {
     "id": "verb-2774",
@@ -47775,6 +48595,11 @@
         "pattern": "an + Akkusativ",
         "note_ru": "присуждать кому-либо",
         "note_en": "to award to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ]
   },
@@ -48328,6 +49153,11 @@
         "pattern": "an + Akkusativ",
         "note_ru": "направлять к кому-либо",
         "note_en": "to refer to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -48360,6 +49190,17 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "показывать кому-либо что-либо",
         "note_en": "to show someone something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Dativ + Akkusativ",
+        "meaning_ru": "морочить голову, обманывать",
+        "note_ru": "морочить голову кому-либо, обманывать кого-либо (чем-либо)",
+        "note_en": "to fool someone, to kid someone (about something)"
       }
     ],
     "separable_prefix": "vor",
@@ -48429,7 +49270,15 @@
         "ihr": "bringt weg",
         "sie": "bringen weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "относить, отвозить что-либо, кого-либо",
+        "note_en": "to take something, someone away"
+      }
+    ]
   },
   {
     "id": "verb-1024",
@@ -48519,7 +49368,15 @@
         "ihr": "schicktet weg",
         "sie": "schickten weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "отсылать что-либо; прогонять кого-либо",
+        "note_en": "to send something off; to send someone away"
+      }
+    ]
   },
   {
     "id": "verb-1026",
@@ -48568,6 +49425,11 @@
         "pattern": "an + Akkusativ",
         "note_ru": "передавать кому-либо",
         "note_en": "to pass on to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "передавать что-либо (дальше)",
+        "note_en": "to pass something on"
       }
     ],
     "separable_prefix": "weiter"
@@ -48698,7 +49560,15 @@
         "sie": "hätten wieder"
       }
     },
-    "separable_prefix": "wieder"
+    "separable_prefix": "wieder",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "получить что-либо обратно",
+        "note_en": "to have something back"
+      }
+    ]
   },
   {
     "id": "verb-1030",
@@ -48979,7 +49849,15 @@
         "ihr": "bekommt zurück",
         "sie": "bekommen zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "получать что-либо обратно",
+        "note_en": "to get something back"
+      }
+    ]
   },
   {
     "id": "verb-1036",
@@ -49028,6 +49906,12 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "возвращать кому-либо что-либо",
         "note_en": "to give something back to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "возвращать что-либо",
+        "note_en": "to give something back"
       }
     ],
     "separable_prefix": "zurück"
@@ -49069,7 +49953,15 @@
         "sie": "hätten zurück"
       }
     },
-    "separable_prefix": "zurück"
+    "separable_prefix": "zurück",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "получить что-либо обратно",
+        "note_en": "to have something back"
+      }
+    ]
   },
   {
     "id": "verb-1038",
@@ -49117,7 +50009,14 @@
         "ihr": "haltet zurück",
         "Sie": "halten Sie zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "удерживать кого-либо, что-либо; не выдавать что-либо",
+        "note_en": "to hold someone, something back; to withhold something"
+      }
+    ]
   },
   {
     "id": "verb-1039",
@@ -49300,7 +50199,15 @@
         "ihr": "zahltet zurück",
         "sie": "zahlten zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "возвращать что-либо (деньги, долг)",
+        "note_en": "to pay something back"
+      }
+    ]
   },
   {
     "id": "verb-1043",
@@ -49389,7 +50296,16 @@
         "ihr": "haltet zusammen",
         "Sie": "halten Sie zusammen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "скреплять",
+        "note_ru": "скреплять что-либо, держать что-либо вместе",
+        "note_en": "to hold something together"
+      }
+    ]
   },
   {
     "id": "verb-1045",
@@ -49535,7 +50451,14 @@
         "Sie": "Brechen Sie ab!"
       }
     },
-    "separable_prefix": "ab"
+    "separable_prefix": "ab",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1048",
@@ -50017,6 +50940,12 @@
         "pattern": "von + Dativ",
         "note_ru": "отказываться от чего-либо",
         "note_en": "to refrain from something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "предвидеть",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ab",
@@ -50827,7 +51756,14 @@
         "ihr": "spanntet an",
         "sie": "spannten an"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1077",
@@ -51097,7 +52033,14 @@
         "ihr": "artikuliertet",
         "sie": "artikulierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1083",
@@ -51589,7 +52532,15 @@
         "ihr": "nehmt auseinander",
         "Sie": "nehmen Sie auseinander"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "разбирать что-либо (на части)",
+        "note_en": "to take something apart"
+      }
+    ]
   },
   {
     "id": "verb-1094",
@@ -52459,7 +53410,16 @@
         "ihr": "balanciertet",
         "sie": "balancierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "удерживать в равновесии",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1113",
@@ -52855,6 +53815,11 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "признаваться кому-либо в чём-либо",
         "note_en": "to confess something to someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -53267,7 +54232,15 @@
         "ihr": "stelltet bereit",
         "sie": "stellten bereit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "предоставлять, подготавливать что-либо",
+        "note_en": "to provide something, to make something available"
+      }
+    ]
   },
   {
     "id": "verb-1132",
@@ -53347,7 +54320,16 @@
         "ihr": "beschleunigtet",
         "sie": "beschleunigten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "ускорять",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1134",
@@ -54347,6 +55329,13 @@
         "pattern": "für + Akkusativ / gegen + Akkusativ",
         "note_ru": "выступать за / против чего-либо",
         "note_en": "to demonstrate for / against something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "демонстрировать, показывать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -54617,7 +55606,15 @@
         "ihr": "dominiertet",
         "sie": "dominierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "доминировать (над чем-либо), господствовать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1163",
@@ -54842,7 +55839,16 @@
         "Sie": "Halten Sie durch!"
       }
     },
-    "separable_prefix": "durch"
+    "separable_prefix": "durch",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "выдерживать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1168",
@@ -54882,7 +55888,16 @@
         "ihr": "machtet durch",
         "sie": "machten durch"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) переживать, проходить (через трудности)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1169",
@@ -57329,7 +58344,16 @@
         "ihr": "federtet",
         "sie": "federten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "подрессоривать (обычно gefedert — на пружинах, с подвеской)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1224",
@@ -57448,7 +58472,29 @@
         "ihr": "feuertet",
         "sie": "feuerten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) увольнять",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "топить (печь)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) швырять",
+        "note_ru": "что-либо (куда-либо)",
+        "note_en": "something (somewhere)"
+      }
+    ]
   },
   {
     "id": "verb-1227",
@@ -57664,7 +58710,15 @@
         "Sie": "Lassen Sie frei!"
       }
     },
-    "separable_prefix": "frei"
+    "separable_prefix": "frei",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "освобождать, выпускать кого-либо",
+        "note_en": "to release someone"
+      }
+    ]
   },
   {
     "id": "verb-1232",
@@ -57801,7 +58855,15 @@
         "ihr": "funktet",
         "sie": "funkten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "передавать по радио",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1235",
@@ -58314,7 +59376,14 @@
         "ihr": "hacktet",
         "sie": "hackten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1247",
@@ -58533,7 +59602,14 @@
         "ihr": "zieht heran",
         "sie": "ziehen heran"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "привлекать, использовать что-либо, кого-либо; подтягивать что-либо",
+        "note_en": "to use, to call in something, someone; to pull something closer"
+      }
+    ]
   },
   {
     "id": "verb-1252",
@@ -58573,7 +59649,14 @@
         "ihr": "fordertet heraus",
         "sie": "forderten heraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "вызывать кого-либо (на бой), бросать вызов кому-либо",
+        "note_en": "to challenge someone"
+      }
+    ]
   },
   {
     "id": "verb-1253",
@@ -58615,7 +59698,15 @@
         "ihr": "stelltet heraus",
         "sie": "stellten heraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "подчёркивать, выделять что-либо; выставлять что-либо",
+        "note_en": "to emphasize something; to put something out"
+      }
+    ]
   },
   {
     "id": "verb-1254",
@@ -58732,6 +59823,11 @@
         "pattern": "aus / von + Dativ",
         "note_ru": "выводить из чего-либо",
         "note_en": "to derive from something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "выводить что-либо (из чего-либо)",
+        "note_en": "to derive something"
       }
     ],
     "separable_prefix": "her",
@@ -58849,7 +59945,15 @@
         "ihr": "bringt hervor",
         "sie": "bringen hervor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "производить, создавать что-либо",
+        "note_en": "to produce something"
+      }
+    ]
   },
   {
     "id": "verb-1259",
@@ -58940,7 +60044,14 @@
         "ihr": "hebt hervor",
         "sie": "heben hervor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "подчёркивать, выделять что-либо",
+        "note_en": "to emphasize something"
+      }
+    ]
   },
   {
     "id": "verb-1261",
@@ -58981,7 +60092,15 @@
         "ihr": "ruft hervor",
         "sie": "rufen hervor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "вызывать что-либо",
+        "note_en": "to cause something"
+      }
+    ]
   },
   {
     "id": "verb-2563",
@@ -59029,7 +60148,14 @@
         "ihr": "stoßt hervor",
         "Sie": "stoßen Sie hervor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "выпалить что-либо (слова)",
+        "note_en": "to blurt something out"
+      }
+    ]
   },
   {
     "id": "verb-1262",
@@ -59615,7 +60741,14 @@
         "ihr": "kassiertet",
         "sie": "kassierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1276",
@@ -60102,7 +61235,16 @@
         "ihr": "kondensiertet",
         "sie": "kondensierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сгущать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1288",
@@ -60467,6 +61609,13 @@
         "pattern": "an + Akkusativ",
         "note_ru": "во 2-м значении (сцеплять): прицеплять к чему-либо",
         "note_en": "in the 2nd meaning (to couple): to couple to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сцеплять (вагоны, прицеп)",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -60609,6 +61758,11 @@
         "pattern": "Akkusativ + Akkusativ",
         "note_ru": "учить кого-либо чему-либо",
         "note_en": "to teach someone something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -61312,6 +62466,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "проверять что-либо, заниматься чем-либо",
         "note_en": "to look into something, to pursue something"
       }
@@ -61592,7 +62747,14 @@
         "ihr": "legtet offen",
         "sie": "legten offen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "раскрывать что-либо",
+        "note_en": "to disclose something"
+      }
+    ]
   },
   {
     "id": "verb-1322",
@@ -61898,7 +63060,16 @@
         "ihr": "politisiertet",
         "sie": "politisierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "политизировать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1329",
@@ -62019,7 +63190,16 @@
         "ihr": "priorisiertet",
         "sie": "priorisierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "ранжировать по важности",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1332",
@@ -63547,7 +64727,14 @@
         "ihr": "stelltet sicher",
         "sie": "stellten sicher"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "обеспечивать что-либо; изымать что-либо",
+        "note_en": "to ensure something; to seize something"
+      }
+    ]
   },
   {
     "id": "verb-1366",
@@ -64290,7 +65477,15 @@
         "ihr": "summtet",
         "sie": "summten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "напевать (без слов)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1384",
@@ -65521,7 +66716,16 @@
         "ihr": "variiertet",
         "sie": "variierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "варьировать, видоизменять",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1413",
@@ -65732,6 +66936,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "портить что-либо",
         "note_en": "to spoil, to ruin something"
       }
@@ -67424,6 +68629,11 @@
         "pattern": "mit + Dativ",
         "note_ru": "набивать чем-либо",
         "note_en": "to stuff with something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "набивать что-либо (чем-либо)",
+        "note_en": "to stuff something (with something)"
       }
     ],
     "separable_prefix": "voll",
@@ -67495,7 +68705,15 @@
         "ihr": "bringt voran",
         "sie": "bringen voran"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "продвигать что-либо",
+        "note_en": "to advance something"
+      }
+    ]
   },
   {
     "id": "verb-1458",
@@ -67629,7 +68847,14 @@
         "ihr": "setztet voraus",
         "sie": "setzten voraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "предполагать, требовать что-либо",
+        "note_en": "to assume something; to require something"
+      }
+    ]
   },
   {
     "id": "verb-1461",
@@ -67648,6 +68873,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "предотвращать что-либо",
         "note_en": "to prevent something"
       }
@@ -67781,7 +69007,14 @@
         "ihr": "seht vorher",
         "Sie": "sehen Sie vorher"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "предвидеть что-либо",
+        "note_en": "to foresee something"
+      }
+    ]
   },
   {
     "id": "verb-1464",
@@ -67910,7 +69143,15 @@
         "ihr": "weist vor",
         "sie": "weisen vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "предъявлять что-либо; иметь что-либо (за плечами)",
+        "note_en": "to show something; to have something to one's credit"
+      }
+    ]
   },
   {
     "id": "verb-1467",
@@ -68003,6 +69244,12 @@
         "pattern": "Akkusativ + Dativ",
         "note_ru": "предпочитать что-либо чему-либо",
         "note_en": "to prefer something to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "предпочитать что-либо, кого-либо; переносить что-либо на более ранний срок",
+        "note_en": "to prefer something, someone; to bring something forward"
       }
     ],
     "separable_prefix": "vor",
@@ -68063,7 +69310,14 @@
         "ihr": "nehmt wahr",
         "Sie": "nehmen Sie wahr"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "воспринимать, замечать что-либо; использовать что-либо (возможность)",
+        "note_en": "to perceive, to notice something; to take (an opportunity)"
+      }
+    ]
   },
   {
     "id": "verb-1470",
@@ -68159,7 +69413,15 @@
         "ihr": "wascht weg",
         "Sie": "waschen Sie weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "смывать что-либо",
+        "note_en": "to wash something off"
+      }
+    ]
   },
   {
     "id": "verb-1472",
@@ -68338,7 +69600,14 @@
         "ihr": "gebt wieder",
         "Sie": "geben Sie wieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "передавать, воспроизводить, возвращать что-либо",
+        "note_en": "to render, to reproduce, to give back something"
+      }
+    ]
   },
   {
     "id": "verb-1476",
@@ -68380,7 +69649,15 @@
         "ihr": "wähltet wieder",
         "sie": "wählten wieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "переизбирать кого-либо",
+        "note_en": "to re-elect someone"
+      }
+    ]
   },
   {
     "id": "verb-1477",
@@ -68469,7 +69746,16 @@
         "ihr": "zaubertet",
         "sie": "zauberten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(перен.) сотворить (как по волшебству)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1479",
@@ -68741,7 +70027,23 @@
         "ihr": "zündetet",
         "sie": "zündeten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "запускать (фейерверк, ракету, двигатель)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "поджигать, взрывать (заряд)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1485",
@@ -68762,6 +70064,12 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "возводить к чему-либо; объяснять чем-либо",
         "note_en": "to trace back to something; to attribute to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "возводить что-либо к чему-либо, объяснять что-либо чем-либо",
+        "note_en": "to trace something back to something"
       }
     ],
     "separable_prefix": "zurück",
@@ -68820,6 +70128,11 @@
         "pattern": "durch + Akkusativ",
         "note_ru": "вести обратно через что-либо",
         "note_en": "to lead back through something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "вести, отводить кого-либо обратно; возвращать что-либо",
+        "note_en": "to lead someone back; to return something"
       }
     ],
     "forms": null,
@@ -68895,7 +70208,15 @@
         "ihr": "weist zurück",
         "sie": "weisen zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "отклонять, отвергать что-либо, кого-либо",
+        "note_en": "to reject something, someone"
+      }
+    ]
   },
   {
     "id": "verb-1487",
@@ -69761,7 +71082,14 @@
         "ihr": "legtet ab",
         "sie": "legten ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1506",
@@ -69856,7 +71184,15 @@
         "ihr": "rechnetet ab",
         "sie": "rechneten ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "отчитываться (о расходах), рассчитываться",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1508",
@@ -69899,7 +71235,15 @@
         "ihr": "reißt ab",
         "sie": "reißen ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1509",
@@ -70152,7 +71496,16 @@
         "ihr": "schaltetet ab",
         "sie": "schalteten ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "выключать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1515",
@@ -70492,7 +71845,14 @@
         "ihr": "serviertet ab",
         "sie": "servierten ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1523",
@@ -70671,6 +72031,13 @@
         "pattern": "von + Dativ / gegen + Akkusativ",
         "note_ru": "выделяться на фоне чего-либо",
         "note_en": "to stand out against something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "закалывать (скот)",
+        "note_ru": "кого-либо (животное)",
+        "note_en": "an animal"
       }
     ],
     "separable_prefix": "ab",
@@ -71608,6 +72975,12 @@
         "pattern": "an + Akkusativ / Dativ",
         "note_ru": "подключать к чему-либо; стыковаться с чем-либо",
         "note_en": "to connect to something; to dock with something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "подключать, присоединять",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "an",
@@ -72039,7 +73412,16 @@
         "ihr": "heuertet an",
         "sie": "heuerten an"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(разг.) нанимать",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-1558",
@@ -72368,7 +73750,16 @@
         "ihr": "schlagt an",
         "Sie": "schlagen Sie an"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вывешивать (объявление)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1565",
@@ -73126,6 +74517,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "взламывать что-либо",
         "note_en": "to break open, to force open something"
       }
@@ -73667,7 +75059,14 @@
         "ihr": "legtet auf",
         "sie": "legten auf"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-1593",
@@ -73839,7 +75238,15 @@
         "ihr": "erhaltet aufrecht",
         "Sie": "erhalten Sie aufrecht"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "поддерживать, сохранять что-либо",
+        "note_en": "to maintain something"
+      }
+    ]
   },
   {
     "id": "verb-1597",
@@ -73926,6 +75333,11 @@
         "pattern": "zu + Dativ",
         "note_ru": "призывать к чему-либо",
         "note_en": "to call for something, to urge to do something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "auf",
@@ -75671,6 +77083,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "вырывать что-либо (с корнем)",
         "note_en": "to pull out, to tear out something"
       }
@@ -75896,6 +77309,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "выделять, выводить что-либо",
         "note_en": "to excrete, to give off something"
       }
@@ -76010,6 +77424,20 @@
         "pattern": "jemanden/sich + Dativ",
         "note_ru": "подвергать (себя) чему-либо",
         "note_en": "to expose (oneself) to something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "бросать, оставлять (животное, ребёнка)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "подвергать (воздействию)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "aus",
@@ -76080,7 +77508,16 @@
         "ihr": "spanntet aus",
         "sie": "spannten aus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(фам.) отбивать (партнёра)",
+        "note_ru": "кому-либо кого-либо",
+        "note_en": "someone (from someone)"
+      }
+    ]
   },
   {
     "id": "verb-1647",
@@ -76101,6 +77538,11 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "стравливать с кем-либо",
         "note_en": "to play off against someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "aus",
@@ -76261,7 +77703,16 @@
         "ihr": "steht aus",
         "sie": "stehen aus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "терпеть, выносить (обычно: nicht ausstehen können — терпеть не мочь)",
+        "note_ru": "кого-либо / что-либо",
+        "note_en": "someone / something"
+      }
+    ]
   },
   {
     "id": "verb-1651",
@@ -79119,7 +80570,14 @@
         "ihr": "haltet bereit",
         "Sie": "halten Sie bereit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "держать что-либо наготове",
+        "note_en": "to have something ready"
+      }
+    ]
   },
   {
     "id": "verb-1715",
@@ -79578,6 +81036,11 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "принести кому-либо что-либо",
         "note_en": "to bring someone something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -79959,6 +81422,11 @@
         "pattern": "durch + Akkusativ",
         "note_ru": "(перен.) покорять чем-либо",
         "note_en": "to impress with something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -80739,6 +82207,11 @@
         "pattern": "vor + Dativ",
         "note_ru": "перед кем-либо",
         "note_en": "in front of someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "выставлять кого-либо в неприглядном виде, компрометировать кого-либо",
+        "note_en": "to show someone up, to expose someone"
       }
     ],
     "separable_prefix": "bloß",
@@ -81465,6 +82938,13 @@
         "pattern": "als + Akkusativ",
         "note_ru": "истолковать как что-либо",
         "note_en": "to interpret as"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "толковать, истолковывать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -81953,6 +83433,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "прорывать что-либо; нарушать что-либо (правило, традицию)",
         "note_en": "to break through something; to break something (a rule, a pattern)"
       }
@@ -82108,6 +83589,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "пронизывать что-либо, проникать во что-либо; переполнять кого-либо (о чувстве, идее)",
         "note_en": "to permeate, to penetrate something; to fill, to imbue someone (of a feeling, an idea)"
       }
@@ -83661,6 +85143,26 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "колотить кого-либо",
         "note_en": "to rain blows on someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "разбивать (окно, дверь), бить, колотить (кого-либо)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "выбирать (путь, курс, направление), пойти (по дороге)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вбивать (гвоздь)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ein"
@@ -83959,6 +85461,12 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "наносить удары (ножом) кому-либо",
         "note_en": "to stab at someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "прокалывать, накалывать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ein",
@@ -84377,6 +85885,13 @@
         "pattern": "Genitiv",
         "note_ru": "(книжн.) быть лишённым чего-либо",
         "note_en": "(elevated) to lack something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "обходиться без (чего-либо), испытывать недостаток",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -84442,6 +85957,20 @@
         "pattern": "von + Dativ",
         "note_ru": "освободить от чего-либо",
         "note_en": "to release from"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "освобождать (от обязанности, обещания)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "принимать роды",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -84797,7 +86326,15 @@
         "ihr": "nehmt entgegen",
         "Sie": "nehmen Sie entgegen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "принимать что-либо",
+        "note_en": "to accept, to receive something"
+      }
+    ]
   },
   {
     "id": "verb-1836",
@@ -88005,7 +89542,15 @@
         "ihr": "stelltet fertig",
         "sie": "stellten fertig"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "завершать что-либо",
+        "note_en": "to complete something"
+      }
+    ]
   },
   {
     "id": "verb-1909",
@@ -88043,6 +89588,12 @@
         "pattern": "an + Dativ",
         "note_ru": "привязать к чему-либо",
         "note_en": "to tie to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "привязывать что-либо, кого-либо",
+        "note_en": "to tie something, someone"
       }
     ],
     "separable_prefix": "fest",
@@ -88081,6 +89632,11 @@
         "pattern": "an + Dativ",
         "note_ru": "закрепить на чём-либо; (перен.) обосновать чем-либо",
         "note_en": "to fasten to; to base on"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "договариваться о чём-либо; закреплять что-либо",
+        "note_en": "to arrange something; to fasten something"
       }
     ],
     "separable_prefix": "fest",
@@ -88130,6 +89686,12 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "(разг.) поймать на чём-либо, обязать к чему-либо",
         "note_en": "to pin down to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "поймать кого-либо на слове; прибивать что-либо",
+        "note_en": "to pin someone down; to nail something down"
       }
     ],
     "separable_prefix": "fest",
@@ -88616,7 +90178,15 @@
         "ihr": "führtet fort",
         "sie": "führten fort"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "продолжать что-либо",
+        "note_en": "to continue something"
+      }
+    ]
   },
   {
     "id": "verb-1922",
@@ -88748,6 +90318,11 @@
         "pattern": "für + Akkusativ",
         "note_ru": "открыть для кого-либо, чего-либо",
         "note_en": "to open to, to release for"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "открывать что-либо (для чего-либо); освобождать кого-либо",
+        "note_en": "to release something, someone"
       }
     ],
     "separable_prefix": "frei",
@@ -88805,7 +90380,15 @@
         "ihr": "haltet frei",
         "Sie": "halten Sie frei"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "угощать кого-либо, платить за кого-либо",
+        "note_en": "to pay for someone, to treat someone"
+      }
+    ]
   },
   {
     "id": "verb-1926",
@@ -88889,7 +90472,15 @@
         "ihr": "setztet frei",
         "sie": "setzten frei"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выделять что-либо; увольнять кого-либо",
+        "note_en": "to release something; to lay someone off"
+      }
+    ]
   },
   {
     "id": "verb-1928",
@@ -88935,6 +90526,12 @@
         "pattern": "von + Dativ",
         "note_ru": "оправдать в чём-либо",
         "note_en": "to acquit of"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "separable_prefix": "frei",
@@ -89563,7 +91160,15 @@
         "ihr": "biegt gerade",
         "sie": "biegen gerade"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1943",
@@ -89916,7 +91521,15 @@
         "ihr": "bügeltet glatt",
         "sie": "bügelten glatt"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1951",
@@ -89993,6 +91606,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "быть равным кому-либо, чему-либо (дат. п.)",
         "note_en": "to be equal to"
       }
@@ -90006,6 +91620,159 @@
         "wir": "stehen gleich",
         "ihr": "steht gleich",
         "sie": "stehen gleich"
+      }
+    }
+  },
+  {
+    "id": "verb-2786",
+    "infinitive": "gleichsehen",
+    "translation_ru": "быть похожим (на кого-либо); (разг.) быть в духе (кого-либо)",
+    "translation_en": "to look like (someone); (colloquial) to be just like (someone)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Только с дательным: Das sieht ihm gleich! — Это на него похоже! Близко: ähneln. Без дополнения sehen + gleich — «сейчас увидит».",
+    "usage_note_en": "Only with the dative: Das sieht ihm gleich! — That's just like him! Similar: ähneln. Without an object sehen + gleich means “will see right away”.",
+    "example_de": "Der Junge sieht seinem Großvater auffallend gleich.",
+    "example_cloze": "Der Junge {{c1::sieht}} seinem Großvater auffallend {{c1::gleich}}.",
+    "example_ru": "Мальчик поразительно похож на своего деда.",
+    "example_en": "The boy looks strikingly like his grandfather.",
+    "perfect_form": "haben gleichgesehen",
+    "forms": {
+      "Präteritum": {
+        "ich": "sah gleich",
+        "du": "sahst gleich",
+        "er/sie/es": "sah gleich",
+        "wir": "sahen gleich",
+        "ihr": "saht gleich",
+        "sie": "sahen gleich"
+      },
+      "Konjunktiv II": {
+        "ich": "sähe gleich",
+        "du": "sähest gleich",
+        "er/sie/es": "sähe gleich",
+        "wir": "sähen gleich",
+        "ihr": "sähet gleich",
+        "sie": "sähen gleich"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "note_ru": "быть похожим на кого-либо; (разг.) das sieht ihm gleich — это на него похоже",
+        "note_en": "to look like someone; (colloquial) das sieht ihm gleich — that's just like him"
+      }
+    ],
+    "separable_prefix": "gleich",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "sehe gleich",
+        "du": "siehst gleich",
+        "er/sie/es": "sieht gleich",
+        "wir": "sehen gleich",
+        "ihr": "seht gleich",
+        "sie": "sehen gleich"
+      }
+    }
+  },
+  {
+    "id": "verb-2785",
+    "infinitive": "gleichmachen",
+    "translation_ru": "уравнивать; сровнять (с землёй)",
+    "translation_en": "to make equal, to level; to raze (to the ground)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Всегда с дополнением (что, кого): alle Menschen gleichmachen wollen. etw. dem Erdboden gleichmachen — сровнять с землёй. Без дополнения machen + gleich — «сейчас сделает»: Ich mache das gleich.",
+    "usage_note_en": "Always with an object: alle Menschen gleichmachen wollen. etw. dem Erdboden gleichmachen — to raze to the ground. Without an object machen + gleich means “will do right away”: Ich mache das gleich.",
+    "example_de": "Im Krieg wurde die Altstadt dem Erdboden gleichgemacht.",
+    "example_cloze": "Im Krieg wurde die Altstadt dem Erdboden {{c1::gleichgemacht}}.",
+    "example_ru": "Во время войны старый город сровняли с землёй.",
+    "example_en": "During the war the old town was razed to the ground.",
+    "perfect_form": "haben gleichgemacht",
+    "forms": {
+      "Präteritum": {
+        "ich": "machte gleich",
+        "du": "machtest gleich",
+        "er/sie/es": "machte gleich",
+        "wir": "machten gleich",
+        "ihr": "machtet gleich",
+        "sie": "machten gleich"
+      },
+      "Konjunktiv II": {
+        "ich": "machte gleich",
+        "du": "machtest gleich",
+        "er/sie/es": "machte gleich",
+        "wir": "machten gleich",
+        "ihr": "machtet gleich",
+        "sie": "machten gleich"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "уравнивать, сравнивать что-либо, кого-либо (dem Erdboden — с землёй)",
+        "note_en": "to make something equal, to level something (dem Erdboden — to the ground)"
+      }
+    ],
+    "separable_prefix": "gleich",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "mache gleich",
+        "du": "machst gleich",
+        "er/sie/es": "macht gleich",
+        "wir": "machen gleich",
+        "ihr": "macht gleich",
+        "sie": "machen gleich"
+      }
+    }
+  },
+  {
+    "id": "verb-2784",
+    "infinitive": "gleichkommen",
+    "translation_ru": "равняться, быть равносильным (чему-либо); сравниться (с кем-либо)",
+    "translation_en": "to be equal to, to amount to; to match (someone)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Только с дательным: Das kommt einem Wunder gleich. — Это просто чудо. Без дополнения kommen + gleich — «сейчас придёт»: Ich komme gleich.",
+    "usage_note_en": "Only with the dative: Das kommt einem Wunder gleich. — That is nothing short of a miracle. Without an object kommen + gleich means “will come right away”: Ich komme gleich.",
+    "example_de": "Die neue Steuer kommt für viele Familien einer Enteignung gleich.",
+    "example_cloze": "Die neue Steuer {{c1::kommt}} für viele Familien einer Enteignung {{c1::gleich}}.",
+    "example_ru": "Новый налог для многих семей равносилен экспроприации.",
+    "example_en": "For many families the new tax amounts to expropriation.",
+    "perfect_form": "sein gleichgekommen",
+    "forms": {
+      "Präteritum": {
+        "ich": "kam gleich",
+        "du": "kamst gleich",
+        "er/sie/es": "kam gleich",
+        "wir": "kamen gleich",
+        "ihr": "kamt gleich",
+        "sie": "kamen gleich"
+      },
+      "Konjunktiv II": {
+        "ich": "käme gleich",
+        "du": "kämest gleich",
+        "er/sie/es": "käme gleich",
+        "wir": "kämen gleich",
+        "ihr": "kämet gleich",
+        "sie": "kämen gleich"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "note_ru": "равняться чему-либо, быть равносильным чему-либо; сравниться с кем-либо (an + Dat — в чём-либо)",
+        "note_en": "to be equal to, to amount to something; to match someone (an + Dat — in something)"
+      }
+    ],
+    "separable_prefix": "gleich",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "komme gleich",
+        "du": "kommst gleich",
+        "er/sie/es": "kommt gleich",
+        "wir": "kommen gleich",
+        "ihr": "kommt gleich",
+        "sie": "kommen gleich"
       }
     }
   },
@@ -90324,7 +92091,14 @@
         "ihr": "heißt gut",
         "sie": "heißen gut"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1960",
@@ -90629,7 +92403,15 @@
         "ihr": "suchtet heim",
         "sie": "suchten heim"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-1966",
@@ -90648,6 +92430,7 @@
     "complements": [
       {
         "pattern": "Dativ + Akkusativ",
+        "required": true,
         "note_ru": "отплатить кому-либо за что-либо",
         "note_en": "to pay someone back for something"
       }
@@ -90738,7 +92521,14 @@
         "ihr": "bekommt heraus",
         "sie": "bekommen heraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1969",
@@ -90784,7 +92574,14 @@
         "Sie": "Geben Sie heraus!"
       }
     },
-    "separable_prefix": "heraus"
+    "separable_prefix": "heraus",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1970",
@@ -90872,6 +92669,12 @@
         "pattern": "aus + Dativ",
         "note_ru": "вырвать из чего-либо",
         "note_en": "to tear out of"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
       }
     ],
     "separable_prefix": "heraus",
@@ -90926,7 +92729,14 @@
         "ihr": "richtetet her",
         "sie": "richteten her"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1973",
@@ -91002,6 +92812,11 @@
         "pattern": "auf / in + Dativ / durch + Akkusativ",
         "note_ru": "водить по чему-либо",
         "note_en": "to show around"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "separable_prefix": "herum",
@@ -91072,7 +92887,14 @@
         "ihr": "zögertet hinaus",
         "sie": "zögerten hinaus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1976",
@@ -91165,6 +92987,7 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
         "note_ru": "предаваться чему-либо (дат. п.)",
         "note_en": "to give oneself over to"
       }
@@ -91273,7 +93096,14 @@
         "ihr": "nehmt hin",
         "Sie": "nehmen Sie hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1980",
@@ -91311,6 +93141,11 @@
         "pattern": "sich hinreißen lassen + zu + Dativ",
         "note_ru": "позволить себе (под влиянием чувства) что-либо",
         "note_en": "to get carried away into"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "separable_prefix": "hin",
@@ -91365,7 +93200,15 @@
         "ihr": "richtetet hin",
         "sie": "richteten hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-1982",
@@ -91519,6 +93362,11 @@
         "pattern": "Dativ / zu + Dativ",
         "note_ru": "добавить к чему-либо",
         "note_en": "to add to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "hinzu",
@@ -91590,7 +93438,15 @@
         "ihr": "zieht hinzu",
         "sie": "ziehen hinzu"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-1987",
@@ -91679,7 +93535,14 @@
         "ihr": "fahrt hoch",
         "Sie": "fahren Sie hoch"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1989",
@@ -91722,7 +93585,14 @@
         "ihr": "zieht hoch",
         "sie": "ziehen hoch"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-1990",
@@ -92469,7 +94339,14 @@
         "ihr": "stelltet klar",
         "sie": "stellten klar"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2007",
@@ -93352,7 +95229,15 @@
         "ihr": "legtet lahm",
         "sie": "legten lahm"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2026",
@@ -93489,7 +95374,15 @@
         "ihr": "läutetet",
         "sie": "läuteten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "звонить (в колокол, в дверь)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2029",
@@ -93703,7 +95596,15 @@
         "ihr": "bindet los",
         "sie": "binden los"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2034",
@@ -93790,7 +95691,14 @@
         "ihr": "lüftetet",
         "sie": "lüfteten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2036",
@@ -93954,7 +95862,15 @@
         "ihr": "mauertet",
         "sie": "mauerten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "класть (кирпич), возводить (стену)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2040",
@@ -94162,7 +96078,15 @@
         "ihr": "reißt mit",
         "sie": "reißen mit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2045",
@@ -94204,7 +96128,15 @@
         "ihr": "zähltet mit",
         "sie": "zählten mit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "считать (вместе с другими), включать в подсчёт",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2046",
@@ -94320,6 +96252,13 @@
       {
         "pattern": "Dativ (книжн.)",
         "note_ru": "исследовать что-либо",
+        "note_en": "to inquire into something (elevated)"
+      },
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "(книжн.) исследовать (что-либо)",
+        "note_ru": "чему-либо (дат. п.): einem Geheimnis nachforschen",
         "note_en": "to inquire into something (elevated)"
       }
     ],
@@ -94451,7 +96390,15 @@
         "ihr": "holtet nach",
         "sie": "holten nach"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо, кого-либо",
+        "note_en": "something, someone"
+      }
+    ]
   },
   {
     "id": "verb-2051",
@@ -94499,7 +96446,16 @@
         "ihr": "lasst nach",
         "Sie": "lassen Sie nach"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(торг.) уступать, сбавлять (цену)",
+        "note_ru": "что-либо (сумму)",
+        "note_en": "something (an amount)"
+      }
+    ]
   },
   {
     "id": "verb-2052",
@@ -94541,7 +96497,14 @@
         "ihr": "prüftet nach",
         "sie": "prüften nach"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2053",
@@ -94579,6 +96542,11 @@
         "pattern": "Dativ + Akkusativ",
         "note_ru": "доказать кому-либо что-либо (вину)",
         "note_en": "to prove something against someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "nach",
@@ -94772,7 +96740,14 @@
         "ihr": "schlagt nieder",
         "Sie": "schlagen Sie nieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2058",
@@ -94820,7 +96795,15 @@
         "ihr": "stecht nieder",
         "Sie": "stechen Sie nieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-2059",
@@ -95394,7 +97377,14 @@
         "ihr": "plündertet",
         "sie": "plünderten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2072",
@@ -95483,7 +97473,16 @@
         "ihr": "powertet",
         "sie": "powerten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(жарг.) активно продвигать (что-либо)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2074",
@@ -95524,7 +97523,16 @@
         "ihr": "praktiziertet",
         "sie": "praktizierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "применять (на практике), практиковать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2075",
@@ -96344,6 +98352,12 @@
         "pattern": "aus + Dativ",
         "note_ru": "выгнать откуда-либо",
         "note_en": "to throw out of"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
       }
     ],
     "separable_prefix": "raus",
@@ -96397,7 +98411,15 @@
         "ihr": "recherchiertet",
         "sie": "recherchierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "выяснять",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2094",
@@ -96438,7 +98460,15 @@
         "ihr": "regeneriertet",
         "sie": "regenerierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "(книжн.) восстанавливать, обновлять",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2095",
@@ -96564,7 +98594,15 @@
         "ihr": "bringt rein",
         "sie": "bringen rein"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2098",
@@ -96606,7 +98644,15 @@
         "ihr": "legtet rein",
         "sie": "legten rein"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2099",
@@ -96920,7 +98966,15 @@
         "ihr": "lasst runter",
         "Sie": "lassen Sie runter"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2106",
@@ -97441,6 +99495,11 @@
         "pattern": "um + Akkusativ",
         "note_ru": "обмотать вокруг чего-либо",
         "note_en": "to wind around"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -97624,7 +99683,14 @@
         "ihr": "schmuggeltet",
         "sie": "schmuggelten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2122",
@@ -98650,7 +100716,14 @@
         "ihr": "simuliertet",
         "sie": "simulierten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2146",
@@ -98745,7 +100818,14 @@
         "ihr": "speistet",
         "sie": "speisten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2148",
@@ -99280,7 +101360,14 @@
         "ihr": "stemmtet",
         "sie": "stemmten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2159",
@@ -99466,6 +101553,11 @@
         "pattern": "über / auf + Akkusativ",
         "note_ru": "посыпать что-либо",
         "note_en": "to sprinkle over / on"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -99912,7 +102004,15 @@
         "ihr": "schlagt tot",
         "Sie": "schlagen Sie tot"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-2174",
@@ -100083,7 +102183,15 @@
         "ihr": "trommeltet",
         "sie": "trommelten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "бить в барабан, играть на барабане",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2178",
@@ -101340,6 +103448,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "нарушать что-либо (закон, запрет, правило)",
         "note_en": "to break, to violate something (a law, a ban, a rule)"
       }
@@ -101439,6 +103548,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "надевать что-либо (поверх, наскоро)",
         "note_en": "to put on something (over other clothes), to slip on something"
       }
@@ -102248,6 +104358,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "обходить, подрывать что-либо",
         "note_en": "to circumvent, to undermine something"
       }
@@ -104661,7 +106772,16 @@
         "ihr": "verkrüppeltet",
         "sie": "verkrüppelten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(с hat) уродовать, калечить",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2277",
@@ -105379,7 +107499,22 @@
         "ihr": "versagtet",
         "sie": "versagten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "отказывать, выходить из строя",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(книжн.) отказывать (в чём-либо)",
+        "note_ru": "кому-либо что-либо",
+        "note_en": "something to someone"
+      }
+    ]
   },
   {
     "id": "verb-2293",
@@ -105855,6 +107990,13 @@
         "pattern": "mit + Dativ",
         "note_ru": "слиться с чем-либо",
         "note_en": "to merge with"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "(с hat) сплавлять, объединять",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -106580,6 +108722,13 @@
         "pattern": "gegen + Akkusativ",
         "note_ru": "нарушать что-либо",
         "note_en": "to violate"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "изгонять, отрекаться (от кого-либо)",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "lookup_forms": {
@@ -107569,7 +109718,14 @@
         "ihr": "sagtet voraus",
         "sie": "sagten voraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2342",
@@ -107617,7 +109773,14 @@
         "ihr": "seht voraus",
         "Sie": "sehen Sie voraus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2343",
@@ -107666,7 +109829,14 @@
         "ihr": "behaltet euch vor",
         "Sie": "behalten Sie sich vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (право, решение)",
+        "note_en": "something (a right, decision)"
+      }
+    ]
   },
   {
     "id": "verb-2344",
@@ -107769,7 +109939,15 @@
         "ihr": "bringt vor",
         "sie": "bringen vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2346",
@@ -107868,6 +110046,7 @@
     "complements": [
       {
         "pattern": "Dativ + Akkusativ",
+        "required": true,
         "note_ru": "утаивать что-либо от кого-либо",
         "note_en": "to withhold something from someone"
       }
@@ -107922,7 +110101,14 @@
         "ihr": "findet vor",
         "sie": "finden vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2349",
@@ -107964,7 +110150,14 @@
         "ihr": "führtet vor",
         "sie": "führten vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2350",
@@ -108006,7 +110199,14 @@
         "ihr": "sagtet vorher",
         "sie": "sagten vorher"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2351",
@@ -108048,7 +110248,15 @@
         "ihr": "legtet vor",
         "sie": "legten vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2352",
@@ -108157,7 +110365,15 @@
         "ihr": "nehmt vor",
         "Sie": "nehmen Sie vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2354",
@@ -108242,7 +110458,14 @@
         "ihr": "schreibt vor",
         "sie": "schreiben vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2356",
@@ -108299,7 +110522,14 @@
         "ihr": "seht vor",
         "Sie": "sehen Sie vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2357",
@@ -108378,6 +110608,8 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "(книжн.) возглавлять, руководить (учреждением, организацией)",
         "note_ru": "возглавлять что-либо",
         "note_en": "to head something"
       }
@@ -108434,7 +110666,14 @@
         "ihr": "täuschtet vor",
         "sie": "täuschten vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2360",
@@ -108482,7 +110721,15 @@
         "ihr": "tragt vor",
         "Sie": "tragen Sie vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2361",
@@ -108594,6 +110841,12 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "перенести на какое-либо время",
         "note_en": "to bring forward to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "vor",
@@ -108664,7 +110917,15 @@
         "ihr": "warntet vor",
         "sie": "warnten vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-2365",
@@ -108706,7 +110967,15 @@
         "ihr": "zeigtet vor",
         "sie": "zeigten vor"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2366",
@@ -108748,7 +111017,15 @@
         "ihr": "rütteltet wach",
         "sie": "rüttelten wach"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2367",
@@ -109064,7 +111341,15 @@
         "ihr": "blast weg",
         "Sie": "blasen Sie weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2374",
@@ -109112,7 +111397,15 @@
         "ihr": "lasst weg",
         "Sie": "lassen Sie weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо, кого-либо",
+        "note_en": "something, someone"
+      }
+    ]
   },
   {
     "id": "verb-2375",
@@ -109154,7 +111447,15 @@
         "ihr": "schafftet weg",
         "sie": "schafften weg"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2376",
@@ -109426,7 +111727,14 @@
         "ihr": "führtet weiter",
         "sie": "führten weiter"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2382",
@@ -109670,6 +111978,13 @@
         "pattern": "um + Akkusativ",
         "note_ru": "добиваться чего-либо",
         "note_en": "to seek, to court"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "вербовать, привлекать (клиентов, сторонников)",
+        "note_ru": "кого-либо (клиентов, сторонников)",
+        "note_en": "someone (customers, supporters)"
       }
     ],
     "lookup_forms": {
@@ -110053,7 +112368,14 @@
         "ihr": "belebtet wieder",
         "sie": "belebten wieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2395",
@@ -110103,7 +112425,15 @@
       "example_de": "Auf dem alten Foto habe ich mich kaum wiedererkannt.",
       "example_ru": "На старой фотографии я себя едва узнал.",
       "example_en": "I hardly recognized myself in the old photo."
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2396",
@@ -110269,7 +112599,15 @@
         "ihr": "wildertet",
         "sie": "wilderten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "браконьерствовать, незаконно охотиться",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2400",
@@ -110450,7 +112788,14 @@
         "ihr": "reibt wund",
         "sie": "reiben wund"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (часть тела): sich (Dat) die Füße wundreiben; sich wundreiben — натереть себе (кожу)",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2404",
@@ -110588,6 +112933,13 @@
         "pattern": "Akkusativ",
         "note_ru": "разбить, сломать что-либо (hat zerbrochen)",
         "note_en": "to break something (hat zerbrochen)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "разбить, сломать (что-либо)",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -111148,7 +113500,15 @@
         "ihr": "zischtet",
         "sie": "zischten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "meaning_ru": "(сердито) прошипеть",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2420",
@@ -111174,6 +113534,11 @@
         "pattern": "zu + Dativ / in + Akkusativ / vor + Akkusativ",
         "note_ru": "вызывать куда-либо (к себе, в кабинет, на комиссию)",
         "note_en": "to summon somewhere (to one's office, before a committee)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -111646,7 +114011,14 @@
         "ihr": "drehtet zurück",
         "sie": "drehten zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2431",
@@ -111688,7 +114060,15 @@
         "ihr": "erobertet zurück",
         "sie": "eroberten zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2432",
@@ -111774,7 +114154,15 @@
         "ihr": "gewinnt zurück",
         "sie": "gewinnen zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2434",
@@ -111866,7 +114254,15 @@
         "ihr": "holtet zurück",
         "sie": "holten zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2436",
@@ -111914,7 +114310,15 @@
         "ihr": "lasst zurück",
         "Sie": "lassen Sie zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2437",
@@ -111962,7 +114366,14 @@
         "ihr": "nehmt zurück",
         "Sie": "nehmen Sie zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2438",
@@ -112010,7 +114421,14 @@
         "ihr": "schlagt zurück",
         "Sie": "schlagen Sie zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2439",
@@ -112086,6 +114504,12 @@
         "pattern": "bis zu + Dativ",
         "note_ru": "проследить до чего-либо",
         "note_en": "to trace back to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "zurück",
@@ -112157,7 +114581,14 @@
         "ihr": "zieht zurück",
         "sie": "ziehen zurück"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2442",
@@ -112298,7 +114729,15 @@
         "ihr": "bringt zusammen",
         "sie": "bringen zusammen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2445",
@@ -112425,7 +114864,15 @@
         "ihr": "setztet zusammen",
         "sie": "setzten zusammen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2448",
@@ -112522,7 +114969,16 @@
         "ihr": "schlagt zu",
         "Sie": "schlagen Sie zu"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "захлопывать (дверь, книгу)",
+        "note_ru": "что-либо (дверь, книгу)",
+        "note_en": "something (a door, a book)"
+      }
+    ]
   },
   {
     "id": "verb-2450",
@@ -112543,6 +114999,13 @@
         "pattern": "Dativ",
         "note_ru": "сильно действовать на кого-либо",
         "note_en": "to take its toll on someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "добавлять (к веществу)",
+        "note_ru": "чему-либо что-либо (добавку)",
+        "note_en": "something (to a substance)"
       }
     ],
     "separable_prefix": "zu",
@@ -112742,8 +115205,17 @@
     "complements": [
       {
         "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "опережать (кого-либо)",
         "note_ru": "опередить кого-либо",
         "note_en": "to beat someone to it"
+      },
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "предупреждать, предотвращать (что-либо)",
+        "note_ru": "чему-либо (предотвратить)",
+        "note_en": "something (to forestall)"
       }
     ],
     "separable_prefix": "zuvor",
@@ -113217,6 +115689,11 @@
         "pattern": "mit + Dativ",
         "note_ru": "заразить чем-либо",
         "note_en": "to infect with"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "an",
@@ -113340,7 +115817,23 @@
         "ihr": "ätztet",
         "sie": "ätzten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "травить (кислотой), вытравливать (узор)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "прижигать",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2468",
@@ -113945,6 +116438,20 @@
         "pattern": "auf + Akkusativ",
         "note_ru": "датировать каким-либо временем",
         "note_en": "to date to"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "датировать (определять время создания)",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "ставить дату",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "lookup_forms": {
@@ -114724,7 +117231,15 @@
         "ihr": "lasst herab",
         "Sie": "lassen Sie herab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2499",
@@ -114788,6 +117303,13 @@
         "pattern": "für + Akkusativ",
         "note_ru": "хватать на что-либо",
         "note_en": "to be enough for something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "протягивать, подавать",
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "hin",
@@ -116911,7 +119433,15 @@
         "ihr": "bestimmtet vorher",
         "sie": "bestimmten vorher"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2549",
@@ -117536,7 +120066,14 @@
         "ihr": "spielt ab",
         "Sie": "spielen Sie ab"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
+      }
+    ]
   },
   {
     "id": "verb-2581",
@@ -117802,6 +120339,12 @@
         "pattern": "sich (Dativ) + Akkusativ",
         "note_ru": "послушать что-либо (музыку, доклад)",
         "note_en": "to listen to something (music, a talk)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ]
   },
@@ -117857,7 +120400,15 @@
         "ihr": "legt hin",
         "Sie": "legen Sie hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2590",
@@ -118279,7 +120830,15 @@
         "ihr": "stellt kalt",
         "Sie": "stellen Sie kalt"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      }
+    ]
   },
   {
     "id": "verb-2605",
@@ -118326,7 +120885,15 @@
         "ihr": "stellt ruhig",
         "Sie": "stellen Sie ruhig"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2606",
@@ -118392,6 +120959,11 @@
         "pattern": "in + Akkusativ",
         "note_ru": "подвесить во что-либо, на что-либо",
         "note_en": "to hook into something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо / кого-либо",
+        "note_en": "something / someone"
       }
     ],
     "separable_prefix": "ein",
@@ -118679,7 +121251,15 @@
         "ihr": "verwendet weiter",
         "Sie": "verwenden Sie weiter"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2613",
@@ -118924,6 +121504,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "надламывать, начинать что-либо",
         "note_en": "to crack, to open something"
       },
@@ -119979,7 +122560,15 @@
         "ihr": "legt nieder",
         "Sie": "legen Sie nieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2645",
@@ -120033,7 +122622,15 @@
         "ihr": "stellt hin",
         "Sie": "stellen Sie hin"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2646",
@@ -120145,7 +122742,23 @@
         "ihr": "zieht zusammen",
         "Sie": "ziehen Sie zusammen"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "стягивать, сдвигать",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сосредоточивать (войска)",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2648",
@@ -120253,7 +122866,15 @@
         "ihr": "seht wieder",
         "Sie": "sehen Sie wieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2650",
@@ -120308,7 +122929,15 @@
         "ihr": "findet wieder",
         "Sie": "finden Sie wieder"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2652",
@@ -120527,7 +123156,15 @@
         "ihr": "legt hinein",
         "Sie": "legen Sie hinein"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2656",
@@ -121808,7 +124445,15 @@
         "sie": "verfolgten weiter"
       }
     },
-    "separable_prefix": "weiter"
+    "separable_prefix": "weiter",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2690",
@@ -122016,7 +124661,16 @@
         "sie": "rennten hinterher"
       }
     },
-    "separable_prefix": "hinterher"
+    "separable_prefix": "hinterher",
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "(перен.) гоняться (за чем-либо)",
+        "note_ru": "за кем-либо, чем-либо (гоняться)",
+        "note_en": "after someone, something (to chase)"
+      }
+    ]
   },
   {
     "id": "verb-2695",
@@ -122057,7 +124711,14 @@
         "sie": "nutzten weiter"
       }
     },
-    "separable_prefix": "weiter"
+    "separable_prefix": "weiter",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2696",
@@ -122279,7 +124940,15 @@
         "ihr": "übernehmt mit",
         "Sie": "übernehmen Sie mit"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2701",
@@ -122320,7 +124989,15 @@
         "sie": "vollzögen mit"
       }
     },
-    "separable_prefix": "mit"
+    "separable_prefix": "mit",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2702",
@@ -122368,7 +125045,15 @@
         "ihr": "haltet raus",
         "Sie": "halten Sie raus"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      }
+    ]
   },
   {
     "id": "verb-2703",
@@ -122809,7 +125494,15 @@
         "sie": "hätten übrig"
       }
     },
-    "separable_prefix": "übrig"
+    "separable_prefix": "übrig",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "что-либо",
+        "note_en": "something"
+      }
+    ]
   },
   {
     "id": "verb-2713",
@@ -122850,7 +125543,16 @@
         "sie": "gingen gut"
       }
     },
-    "separable_prefix": "gut"
+    "separable_prefix": "gut",
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "(es geht jemandem gut) кому-либо хорошо, всё в порядке",
+        "note_ru": "кому-либо (хорошо)",
+        "note_en": "someone (is doing well)"
+      }
+    ]
   },
   {
     "id": "verb-2714",
@@ -123293,6 +125995,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "пропустить кого-, что-либо",
         "note_en": "to skip someone, something"
       }
@@ -123560,7 +126263,16 @@
         "Sie": "Schlagen Sie um!"
       }
     },
-    "separable_prefix": "um"
+    "separable_prefix": "um",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "перевернуть",
+        "note_ru": "что-либо (страницу, воротник)",
+        "note_en": "something (a page, a collar)"
+      }
+    ]
   },
   {
     "id": "verb-2733",
@@ -123759,6 +126471,12 @@
         "pattern": "Akkusativ (+ aus + Dativ)",
         "note_ru": "выпустить кого-, что-либо (откуда-либо)",
         "note_en": "to let someone, something out (of somewhere)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "выпустить кого-, что-либо (откуда-либо)",
+        "note_en": "to let someone, something out (of somewhere)"
       }
     ]
   },
@@ -123805,6 +126523,12 @@
     "complements": [
       {
         "pattern": "Akkusativ (+ Richtungsangabe)",
+        "note_ru": "выпустить кого-, что-либо (куда-либо)",
+        "note_en": "to let someone, something out (somewhere)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
         "note_ru": "выпустить кого-, что-либо (куда-либо)",
         "note_en": "to let someone, something out (somewhere)"
       }
@@ -123865,6 +126589,20 @@
         "pattern": "von + Dativ",
         "note_ru": "(книжн.) отказаться от чего-либо, отстать от кого-либо",
         "note_en": "(formal) to desist from something, to leave someone alone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сливать, спускать (воду, воздух, пар)",
+        "note_ru": "что-либо (откуда-либо)",
+        "note_en": "something (out of somewhere)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "уступить, сбросить (с цены)",
+        "note_ru": "кому-либо сколько-то (с цены)",
+        "note_en": "(an amount) off the price for someone"
       }
     ]
   },
@@ -124658,5 +127396,166 @@
         "note_en": "to trim something"
       }
     ]
+  },
+  {
+    "id": "verb-2787",
+    "infinitive": "nachkommen",
+    "translation_ru": "прийти позже, следом; успевать (за кем-либо, в темпе); (книжн.) выполнить (требование)",
+    "translation_en": "to come later, to follow; to keep up; (formal) to comply with (a demand)",
+    "auxiliary": "sein",
+    "usage_note_ru": "«Прийти следом» — обычно без дополнения: Ich komme gleich nach (er kam ihr nach — шёл за ней). «Успевать»: Bei diesem Tempo kommt keiner nach. «Выполнить» (книжн.) — с дательным: Er ist seiner Pflicht nicht nachgekommen. — Он не выполнил свою обязанность. (einer Bitte, einer Forderung, einem Wunsch nachkommen)",
+    "usage_note_en": "“To follow” — usually no object: Ich komme gleich nach (er kam ihr nach — he followed her). “To keep up”: Bei diesem Tempo kommt keiner nach. “To comply with” (formal) — with the dative: Er ist seiner Pflicht nicht nachgekommen. — He did not fulfil his duty. (einer Bitte, einer Forderung, einem Wunsch nachkommen)",
+    "example_de": "Geht schon vor, ich komme in einer halben Stunde nach.",
+    "example_cloze": "Geht schon vor, ich {{c1::komme}} in einer halben Stunde {{c1::nach}}.",
+    "example_ru": "Идите вперёд, я подойду через полчаса.",
+    "example_en": "Go on ahead, I'll follow in half an hour.",
+    "perfect_form": "sein nachgekommen",
+    "forms": {
+      "Präteritum": {
+        "ich": "kam nach",
+        "du": "kamst nach",
+        "er/sie/es": "kam nach",
+        "wir": "kamen nach",
+        "ihr": "kamt nach",
+        "sie": "kamen nach"
+      },
+      "Konjunktiv II": {
+        "ich": "käme nach",
+        "du": "kämest nach",
+        "er/sie/es": "käme nach",
+        "wir": "kämen nach",
+        "ihr": "kämet nach",
+        "sie": "kämen nach"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Dativ",
+        "required": true,
+        "meaning_ru": "(книжн.) выполнить (требование)",
+        "note_ru": "выполнить что-либо (требование, обязанность, просьбу)",
+        "note_en": "to comply with something (a demand, a duty, a request)"
+      }
+    ],
+    "separable_prefix": "nach",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "komme nach",
+        "du": "kommst nach",
+        "er/sie/es": "kommt nach",
+        "wir": "kommen nach",
+        "ihr": "kommt nach",
+        "sie": "kommen nach"
+      }
+    }
+  },
+  {
+    "id": "verb-2788",
+    "infinitive": "nachziehen",
+    "translation_ru": "тащить за собой; подтягивать (винты); обводить, подводить (линию, брови); (разг.) последовать (примеру)",
+    "translation_en": "to drag (behind); to tighten (screws); to go over, to pencil in (a line, eyebrows); (colloquial) to follow suit",
+    "auxiliary": "haben",
+    "usage_note_ru": "С дополнением: das Bein nachziehen — волочить ногу; die Schrauben nachziehen — подтянуть винты; die Augenbrauen nachziehen — подвести брови. Без дополнения (разг.) — последовать примеру: Die Industrie zog mit Preiserhöhungen nach. «Последовать, переехать следом» — nachziehen с sein (отдельная карточка).",
+    "usage_note_en": "With an object: das Bein nachziehen — to drag one's leg; die Schrauben nachziehen — to tighten the screws; die Augenbrauen nachziehen — to pencil in one's eyebrows. Without an object (colloquial) — to follow suit: Die Industrie zog mit Preiserhöhungen nach. “To follow, to move after (someone)” is nachziehen with sein (separate card).",
+    "example_de": "Nach dem Unfall zog er das linke Bein leicht nach.",
+    "example_cloze": "Nach dem Unfall {{c1::zog}} er das linke Bein leicht {{c1::nach}}.",
+    "example_ru": "После аварии он слегка подволакивал левую ногу.",
+    "example_en": "After the accident he dragged his left leg slightly.",
+    "perfect_form": "haben nachgezogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "zog nach",
+        "du": "zogst nach",
+        "er/sie/es": "zog nach",
+        "wir": "zogen nach",
+        "ihr": "zogt nach",
+        "sie": "zogen nach"
+      },
+      "Konjunktiv II": {
+        "ich": "zöge nach",
+        "du": "zögest nach",
+        "er/sie/es": "zöge nach",
+        "wir": "zögen nach",
+        "ihr": "zöget nach",
+        "sie": "zögen nach"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "тащить за собой",
+        "note_ru": "тащить, волочить что-либо за собой (das Bein)",
+        "note_en": "to drag something behind (das Bein)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "подтягивать (винты)",
+        "note_ru": "подтянуть что-либо (Schrauben, Muttern)",
+        "note_en": "to tighten something (Schrauben, Muttern)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "обводить, подводить (линию, брови)",
+        "note_ru": "обвести, подвести что-либо (Linie, Lippen, Augenbrauen)",
+        "note_en": "to go over, to pencil in something (Linie, Lippen, Augenbrauen)"
+      }
+    ],
+    "separable_prefix": "nach",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "ziehe nach",
+        "du": "ziehst nach",
+        "er/sie/es": "zieht nach",
+        "wir": "ziehen nach",
+        "ihr": "zieht nach",
+        "sie": "ziehen nach"
+      }
+    }
+  },
+  {
+    "id": "verb-2789",
+    "infinitive": "nachziehen",
+    "translation_ru": "последовать, двинуться (за кем-либо); переехать следом",
+    "translation_en": "to follow (someone); to move after (someone)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt с sein; кому — в дательном (необязательно): Die Kinder zogen den Musikanten nach. «Тащить за собой; подтягивать» — nachziehen с haben (отдельная карточка).",
+    "usage_note_en": "The perfect takes sein; whom — dative (optional): Die Kinder zogen den Musikanten nach. “To drag; to tighten” is nachziehen with haben (separate card).",
+    "example_de": "Ein Jahr später ist die Familie ihm nach Berlin nachgezogen.",
+    "example_cloze": "Ein Jahr später ist die Familie ihm nach Berlin {{c1::nachgezogen}}.",
+    "example_ru": "Через год семья переехала к нему в Берлин.",
+    "example_en": "A year later his family followed him to Berlin.",
+    "perfect_form": "sein nachgezogen",
+    "forms": {
+      "Präteritum": {
+        "ich": "zog nach",
+        "du": "zogst nach",
+        "er/sie/es": "zog nach",
+        "wir": "zogen nach",
+        "ihr": "zogt nach",
+        "sie": "zogen nach"
+      },
+      "Konjunktiv II": {
+        "ich": "zöge nach",
+        "du": "zögest nach",
+        "er/sie/es": "zöge nach",
+        "wir": "zögen nach",
+        "ihr": "zöget nach",
+        "sie": "zögen nach"
+      }
+    },
+    "separable_prefix": "nach",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "ziehe nach",
+        "du": "ziehst nach",
+        "er/sie/es": "zieht nach",
+        "wir": "ziehen nach",
+        "ihr": "zieht nach",
+        "sie": "ziehen nach"
+      }
+    }
   }
 ]

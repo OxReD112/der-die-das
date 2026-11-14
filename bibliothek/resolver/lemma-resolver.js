@@ -2785,7 +2785,9 @@
         // second place, and the only finite reading after und is the last word of the part, which is a participle / infinitive too —
         // Ich habe mich für Partynasenbecher und Gebisseiswürfelformen entschieden: the form at the end is no finite verb, und opens no part
         const bracketHead=[start,start+1].find(k=>k<i&&/^\p{Ll}|^\p{Lu}/u.test(tokens[k]?.[0]||'')&&(analyses[k]||[]).some(a=>a.kind==='finite'&&(['haben','sein','werden'].includes(a.base)||modalLemmas.has(a.base))));
-        const bracketJoin=COORDINATORS_WITHOUT_COMMA.includes(words[i])&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&bracketHead!==undefined&&
+        // (advisor 14.11, 5в (4): the same bracket check for aber inside the part — no mark before it, no subject pronoun after it
+        // (midClauseAber): sie dürfen sich aber nicht rühren — rühren is the infinitive of the modal, not a finite verb of a new part)
+        const bracketGroup=bracketHead!==undefined&&
           !analyses.slice(start,i).some((rows,k)=>start+k!==bracketHead&&rows.some(a=>a.kind==='finite'&&/^\p{Ll}/u.test(tokens[start+k][0])))&&
           // (no word before und that no dictionary knows — it may be the closing verb: Du kannst dich hineinschleichen und …, Sollte sich
           // dieses Niveau verstetigen oder … steigen; as unknownSmall of partsJoin)
@@ -2796,6 +2798,8 @@
           (()=>{const e=rightEnd;if(e<=i)return false;
             for(let k=i+1;k<e;k++)if((analyses[k]||[]).some(a=>a.kind==='finite')&&/^\p{Ll}/u.test(tokens[k][0]))return false;
             return /^\p{Ll}/u.test(tokens[e][0])&&(analyses[e]||[]).some(a=>['participle','infinitive'].includes(a.kind));})();
+        const bracketJoin=COORDINATORS_WITHOUT_COMMA.includes(words[i])&&!/[,;:.!?…“”„"«»()–—]/u.test(gap)&&bracketGroup;
+        const aberBracket=words[i]==='aber'&&midClauseAber(sentence,tokens,i)&&bracketGroup;
         // (links chat, advisor 10.11, R0: the shared boundary functions of the chains — als before a noun phrase is «as» (alsNounPhrase:
         // fühlt sich als Kunde willkommen, konnte sich als einzige Single … platzieren); während / bis without a mark before them are the
         // shared mid-part words (midClauseDoch: hat sich während der Eiszeit … eingeschnitten))
@@ -2805,7 +2809,7 @@
           // haben / sein / werden before it is the verb's own group — konnte sich als einzige Single … platzieren)
           !analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'&&!modalLemmas.has(a.base)&&!['haben','sein','werden'].includes(a.base)));
         const midSubordinator=subordinators.has(words[i])&&midClauseDoch(sentence,tokens,i);
-        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!particleDenn&&!nominalJoin&&!bracketJoin ||
+        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!aberBracket&&!particleDenn&&!nominalJoin&&!bracketJoin ||
           comparisonAfterParticle(i,start)) {
           clauses.push({start,end:i-1,relation});
           start=i;relation=/[;:.!?…]/u.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
@@ -5286,6 +5290,254 @@
         }));
       }
     }
+    // (links chat, advisor 12.11, claude/GLEICHKOMMEN_REQUIRED_OBJECT_COUNT_2026-11-12_RU.md) a separable verb whose every meaning needs
+    // an object (our complements «required», or the external English senses: all «[with dative]» — advisor 12.11)
+    // is not built by a particle that is also an adverb when its part has no such object: Ich komme gleich — kommen + gleich «сейчас»;
+    // Das kommt einem Wunder gleich keeps gleichkommen. The accusative may also be a clause or speech (»…«, fügte er hinzu; stellte fest, dass …).
+    const requiredObjectFacts = new Map();
+    async function requiredObjectCase(candidate) {
+      const lemma = norm(String(candidate.lemma || ""));
+      if (!lemma || /^sich\s/u.test(lemma)) return null;
+      const own = candidate.item?.complements || [];
+      const meanings = String(candidate.item?.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
+      // (advisor 14.11, data scheme: an element «+ Akk / + Dat» = the meaning takes the object; required: true = it needs it — only that is
+      // a requirement: Ich fasse kurz zusammen keeps zusammenfassen once its optional accusative has no required)
+      const ownRequired = own.filter(c => c && c.required === true && /^(?:Dativ|Akkusativ|Dativ \+ Akkusativ)$/u.test(String(c.pattern || "").trim()));
+      // (our field: the card needs the object only when every meaning does — a required complement without meaning_ru, or one per meaning)
+      if (ownRequired.length && (ownRequired.some(c => !c.meaning_ru) || meanings.length && meanings.every(m => ownRequired.some(c => String(c.meaning_ru || "").trim() === m))))
+        return /Dativ/u.test(ownRequired[0].pattern) && !/Akkusativ/u.test(ownRequired[0].pattern) ? "Dativ" : "Akkusativ";
+      if (typeof process !== "undefined" && process.env?.REQUIRED_OWN_ONLY === "1" || !fallback.lookupFacts) return null;
+      if (!requiredObjectFacts.has(lemma)) requiredObjectFacts.set(lemma, (async () => {
+        try {
+          const groups = ((await fallback.lookupFacts(lemma)).groups || []).filter(g => g.pos === "verb");
+          const senses = groups.flatMap(g => (g.meanings || []).map(String));
+          if (senses.length && senses.every(m => /^\s*\[with dative\]/u.test(m))) return "Dativ";
+          // (advisor 12.11: the Kaikki tag «transitive» means «may take an object», not «needs one» — losbrechen, ausruhen; it stays in п. 16)
+        } catch (_) {}
+        return null; })());
+      return requiredObjectFacts.get(lemma);
+    }
+    // (advisor 12.11 / 14.11) the object of a separated verb in its part: true / false, null when the candidate is no verb + particle pair.
+    // need — "Dativ" | "Akkusativ" (an accusative may also be a clause or speech).
+    // strict (the meaning choice): one nominal group is always the subject, a clause / speech proves no object, a capital right after a
+    // capital continues the group (der russische Botschafter Sergei Garmonin); the drop keeps the looser count — a doubt keeps the verb.
+    // A determiner is a declined form only (DETERMINER_WORD also takes jedoch, allerdings, seinerzeit).
+    const OBJECT_DETERMINER = /^(?:der|die|das|den|dem|des|ein(?:e|en|em|er|es)?|kein(?:e|en|em|er|es)?|(?:mein|dein|sein|ihr|unser|eur)(?:e|en|em|er|es)?|euer|(?:dies|jen|jed|all|welch|solch|manch)(?:e|en|em|er|es)|beide[nrs]?)$/u;
+    // (links chat, advisor 14.11, after pkg158) a direct accusative object surely in the part of a separated verb — for leaving out a card,
+    // narrower than the strict count: ihn / mich / dich; or an accusative-capable determiner + a noun after the verb (das zweite Haar,
+    // seine Zeitung, den Schlafrock — not a time noun) or es / 's, when the subject is sure — a nominative pronoun in the part, a nominal
+    // group before the verb, or the shared subject after und / oder / aber. Not a group after a preposition or als / wie, a number or a
+    // bare noun (zwei Cousins, TuWe, zornrote Furunkel — may be the subject).
+    function directAccusativeInPart(c, sentence, tokens) {
+      const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
+      if (spans.length !== 2) return false;
+      const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
+      if (v < 0 || j <= v) return false;
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      let a = v; while (a > 0 && !/[,;:.!?()–—»«„“"]/u.test(gap(a-1, a)) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
+      const sharedSubject = a + 1 === v && /^(?:und|oder|aber|sondern)$/u.test(norm(tokens[a][0]));
+      if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
+      const word = k => norm(tokens[k][0]);
+      // (the word right before the group: mit der Migros, als Letztplatzierte; wie immer seine Zeitung is no comparison)
+      const afterPrep = k => k - 1 > v && (prepositions.has(word(k-1)) || /^(?:als|wie)$/u.test(word(k-1))) && !/[,;:]/u.test(gap(k-1, k));
+      const TIME = /^(?:tag|tage|monat|abend|morgen|mittag|nachmittag|vormittag|sommer|winter|moment|augenblick|mal)$/u;
+      const DIRECT_DET = /^(?:das|die|den|ein|eine|einen|mein|meine|meinen|dein|deine|deinen|sein|seine|seinen|ihre|ihren|unser|unsere|unseren|euer|eure|euren|dies|diese|dieses|diesen|jene|jenes|jenen|keine|keinen|jede|jedes|jeden|alle)$/u;
+      const pronounSubject = tokens.slice(a, j).some((t, n) => /^(?:ich|du|er|sie|wir|man)$/u.test(norm(t[0])) && !afterPrep(a + n));
+      // (not inside a prepositional group nor a time noun — Am andern Morgen ging die Jagd von neuem an: die Jagd is the subject)
+      const inGroupOfPrep = k => { let n = k - 1; while (n >= a && /^\p{Ll}/u.test(tokens[n][0]) && !prepositions.has(word(n))) n--; return n >= a && prepositions.has(word(n)); };
+      const groupBefore = tokens.slice(a, v).some((t, n) => /^\p{Lu}/u.test(t[0]) && !inGroupOfPrep(a + n) && !TIME.test(norm(t[0])) && !OBJ_TIME.test(norm(t[0])) &&
+        !(a + n === a && (forms.get(norm(t[0])) || []).length && !(forms.get(norm(t[0])) || []).some(e => e.type === "Nomen")) &&
+        !/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(norm(t[0])) && !prepositions.has(norm(t[0])));
+      const subjectSure = pronounSubject || groupBefore || sharedSubject;
+      for (let k = v + 1; k < j; k++) {
+        const w = word(k), t = tokens[k][0];
+        if (/^(?:ihn|mich|dich)$/u.test(w) && !afterPrep(k)) return true;
+        if (!subjectSure || afterPrep(k)) continue;
+        if (w === "es" || /['’]s$/u.test(t) && k === v) return true;
+        if (DIRECT_DET.test(w) && !(w === "sie" )) { let n = k + 1; while (n < j && /^\p{Ll}/u.test(tokens[n][0]) && /(?:e|en|em|er|es)$/u.test(norm(tokens[n][0]))) n++;
+          if (n < j && /^\p{Lu}/u.test(tokens[n][0]) && !TIME.test(norm(tokens[n][0])) && !OBJ_TIME.test(norm(tokens[n][0]))) return true; }
+      }
+      if (subjectSure && /['’]s$/u.test(tokens[v][0])) return true;
+      return false;
+    }
+    // (dativeAside, advisor 14.11 (б): an unambiguous dative group — mir, ihm, dem Vater, einem … — is no candidate for the accusative)
+    function separatedObjectInPart(c, sentence, tokens, need, strict = false, dativeAside = false) {
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      {
+        const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
+        if (spans.length !== 2) return null;
+        const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
+        if (v < 0 || j <= v) return null;
+        // the part: from its start (a comma, a mark, und / oder …) to the particle; quotes inside do not end it (einer "kalten Enteignung")
+        let a = v; while (a > 0 && !/[,;:.!?()–—]/u.test(gap(a-1, a)) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
+        if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
+        // nominal groups of the part outside prepositional groups: a pronoun, a noun phrase (determiner … noun / a capital word), a
+        // pronominal adverb (darauf, damit — the prepositional object)
+        const NOMINAL_PRONOUN = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|sich|das|dies|was|wer|wen|wem|denen|dessen|deren|jemand\w*|niemand\w*|nichts|etwas|alles|allem|einander|andere\w*|beide\w*|viele\w*|einige\w*|manche\w*)$/u;
+        const before = [], after = [];
+        let open = false, prep = false;
+        for (let k = a; k < j; k++) {
+          if (k === v) { open = false; prep = false; continue; }
+          const t = norm(tokens[k][0]), list = k < v ? before : after;
+          if (prepositions.has(t) && !OBJECT_DETERMINER.test(t)) { prep = true; open = false; continue; }
+          if (/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(t)) { list.push(k); open = false; prep = false; continue; }
+          // (a capital at the start of the part is a noun only when no own card says otherwise — Jetzt, Oft are adverbs)
+          const capitalNoun = /^\p{Lu}/u.test(tokens[k][0]) && !(k === a && (forms.get(t) || []).length && !(forms.get(t) || []).some(e => e.type === "Nomen"));
+          // (a determiner followed by a lowercase word that is no inflected attribute, or by the verb / particle, is a pronoun: a member of its
+          // own that opens no group — Dieser stand er … vor; in ihr bald Langeweile: ihr is governed, Langeweile the object)
+          const pronounUse = OBJECT_DETERMINER.test(t) && (k+1 === v || k+1 === j || /^\p{Ll}/u.test(tokens[k+1]?.[0] ?? "") && !/(?:e|en|em|er|es)$/u.test(norm(tokens[k+1][0])) && !OBJECT_DETERMINER.test(norm(tokens[k+1][0])));
+          const starts = OBJECT_DETERMINER.test(t) || NOMINAL_PRONOUN.test(t) || capitalNoun || /^\d/u.test(t);
+          if (!starts) { if (open && /^\p{Ll}/u.test(tokens[k][0]) && !/(?:e|en|em|er|es)$/u.test(t)) { open = false; prep = false; } continue; }
+          // (strict: a capital right after a capital continues the name, also after an abbreviation — St. Lorenz River; a genitive after a
+          // noun belongs to it — die Arten der Gattung; etwas before the particle or an attribute is «somewhat» — ließ etwas nach)
+          if (strict && /^\p{Lu}/u.test(tokens[k][0]) && k > a && k-1 !== v && /^\p{Lu}/u.test(tokens[k-1][0]) && /^\.?\s+$/u.test(gap(k-1, k))) continue;
+          if (strict && /^(?:des|der|eines|einer|dessen|deren)$/u.test(t) && k > a && k-1 !== v && /^\p{Lu}/u.test(tokens[k-1][0]) && /^\s+$/u.test(gap(k-1, k))) { open = true; continue; }
+          if (strict && t === "etwas" && (k+1 === j || /^\p{Ll}/u.test(tokens[k+1]?.[0] ?? "") && !OBJECT_DETERMINER.test(norm(tokens[k+1][0])))) continue;
+          const dativeGroup = dativeAside && /^(?:mir|dir|ihm|ihnen|dem|einem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|keinem|denen|jedem|jemandem|niemandem)$/u.test(t);
+          // (… nor an accusative of time — den ganzen Tag, jede Woche, einen Moment: its noun, up to three words on, is a time noun)
+          const timeGroup = dativeAside && !open && !prep && (() => { for (let n = k; n < Math.min(j, k + 4); n++) if (/^\p{Lu}/u.test(tokens[n][0]))
+            return OBJ_TIME.test(norm(tokens[n][0])) || /^(?:tag|monat|abend|morgen|mittag|nachmittag|vormittag|sommer|winter|moment|augenblick|mal)$/u.test(norm(tokens[n][0])); return false; })();
+          if (!open && !prep && !dativeGroup && !timeGroup) list.push(k);
+          open = OBJECT_DETERMINER.test(t) && !pronounUse || /^\d/u.test(t);
+          if (!open) prep = false;
+        }
+        // the subject is in the part when something stands before the verb, or an unambiguous nominative pronoun right after it (kommst du
+        // gleich; und nahm es mit — es is the object);
+        // a verb first in its part (an imperative, the second verb after und) has its subject outside the part
+        const subjectAfter = /^(?:ich|du|er|wir|man)$/u.test(norm(tokens[v+1]?.[0] ?? "")) && after[0] === v+1;
+        // (strict: one group is the subject when something stands before the verb; a verb first in its part — after a comma, an
+        // imperative — has its subject outside: gab drei Alben heraus, Führt ihn herunter, Ging ihm gut)
+        // (also after a quotation: »…«, fasst die AG zusammen — the subject follows the verb)
+        const subjects = before.length || subjectAfter || strict && (v > a || a > 0 && /[»«„“”"]/u.test(gap(a-1, a))) ? 1 : 0;
+        if (before.length + after.length - subjects > 0) return true;
+        if (strict) return false;
+        // the accusative as a clause or speech: quotes, a colon, a comma right after the particle, a dass / ob / w- clause
+        if (need === "Akkusativ" && (/[»«„“"':]/u.test(sentence) || /^\s*,/u.test(sentence.slice(tokens[j].index + tokens[j][0].length)) ||
+          /,\s*(?:dass|daß|ob|wie|was|wer|wo|warum|weshalb|wann|wohin|woher)\b/u.test(sentence) || a > 0 && /,/u.test(gap(a-1, a)))) return true;
+        return false;
+      }
+    }
+    // (advisor 12.11 / 14.11, WN batch 102: «выбор значения внутри карточки тем же признаком») an own card whose object is required only
+    // for some meanings (complements[].required + meaning_ru): with the object in the part the first such meaning comes first (Er kam
+    // seiner Pflicht nicht nach — «выполнить»); without it the first meaning that needs none (Samsung zieht nach — nachziehen «последовать»).
+    // The English line follows when it has as many meanings as the Russian one.
+    function requiredMeaningFirst(c, sentence, tokens) {
+      // (advisor 14.11, data scheme) takes: an element «+ Akk / + Dat» of the meaning (with or without required); needs: required: true.
+      // With the object in the part a meaning that takes it is raised above the meanings before it that do not take it
+      // (TODO п. 98: hinreichen «протягивать», vorkommen «казаться», nachkommen «выполнить»); without it the first meaning that does not
+      // need it is raised above the meanings that need it (Samsung zieht nach — «последовать»).
+      const marks = (c.item?.complements || []).filter(x => x && /^(?:Dativ|Akkusativ|Dativ \+ Akkusativ)$/u.test(String(x.pattern || "").trim()));
+      if (!marks.length || Number.isInteger(c.senseFirst)) return;
+      const ru = String(c.item?.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
+      if (ru.length < 2) return;
+      const of = (x, m) => !x.meaning_ru || String(x.meaning_ru).trim() === m;
+      const isDat = x => /Dativ/u.test(x.pattern) && !/Akkusativ/u.test(x.pattern);
+      const env = typeof process !== "undefined" ? process.env || {} : {};
+      let at = -1;
+      for (const need of ["Dativ","Akkusativ"]) {
+        const ofCase = marks.filter(x => need === "Dativ" ? isDat(x) : !isDat(x));
+        if (!ofCase.length) continue;
+        const takes = m => ofCase.some(x => of(x, m)), needs = m => ofCase.some(x => x.required === true && of(x, m));
+        if (!ru.some(takes) && !ru.some(needs)) continue;
+        // (present: the strict count; absent: the loose one — a clause or speech is an object too: gibt an, wie hoch …)
+        const strictPresent = separatedObjectInPart(c, sentence, tokens, need, true);
+        if (strictPresent === null) return;
+        const present = strictPresent === true ? true : separatedObjectInPart(c, sentence, tokens, need) === false ? false : null;
+        if (present === true && !(need === "Akkusativ" && env.REQUIRED_AKK_RAISE === "0")) {
+          const k = ru.findIndex(takes);
+          if (k > 0 && !ru.slice(0, k).some(takes)) { at = k; break; }
+        } else if (present === false) {
+          const k = ru.findIndex(m => !needs(m));
+          if (k > 0 && ru.slice(0, k).every(needs)) { at = k; break; }
+        }
+      }
+      if (at <= 0) return;
+      c.senseFirst = at;
+      const en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
+      if (en.length === ru.length) c.senseFirstEn = at;
+    }
+    // (TODO п. 98, advisor 14.11) an external separated verb with an object in its part: in the English line a meaning that the external
+    // dictionary tags «transitive» («may take an accusative») comes before the meanings tagged «intransitive» in front of it. The Russian
+    // line of an external card comes from another dictionary and has no such tags. REQUIRED_OWN_ONLY=1 — only our field (the count).
+    async function externalTransitiveFirst(c, sentence, tokens) {
+      if (c.source !== "fallback") return;
+      const env = typeof process !== "undefined" ? process.env || {} : {};
+      if (env.REQUIRED_OWN_ONLY === "1") return;
+      // the first meaning tagged transitive, when every meaning before it is tagged intransitive
+      const first = (list, tag) => { const at = list.findIndex(m => ["transitive","both"].includes(tag(m)));
+        return at > 0 && list.slice(0, at).every(m => tag(m) === "intransitive") ? at : -1; };
+      let present = null;
+      const objectThere = () => present ??= separatedObjectInPart(c, sentence, tokens, "Akkusativ", true) === true;
+      // English: the Kaikki tags of the senses (the English line is the senses in their order)
+      if (!Number.isInteger(c.senseFirstEn) && Array.isArray(c.meanings) && c.meanings.length > 1 && fallback.lookupFacts && objectThere()) {
+        let tags = null;
+        try { tags = Object.assign({}, ...((await fallback.lookupFacts(norm(String(c.lemma || "")))).groups || []).filter(g => g.pos === "verb" && g.transitivityOf).map(g => g.transitivityOf)); } catch (_) { tags = null; }
+        const at = tags ? first(c.meanings, m => tags[m]) : -1;
+        if (at > 0) { const parts = String(c.translation?.en || "").split(";").map(x => x.trim()), k = parts.indexOf(String(c.meanings[at]).trim()); if (k > 0) c.senseFirstEn = k; }
+      }
+      // Russian (advisor 14.11): the marks «перех. / неперех.» of the Russian record are its label codes transitive / intransitive (141
+      // meanings of 46 verbs); the Russian text comes later, with the display — the resolver only marks the object in the part
+      // (objectInPart), and meaning-display raises the transitive meaning by the same rule. «(кого-л.) / (что-л.)» are not read.
+      if (env.REQUIRED_RU_LABELS !== "0" && objectThere()) c.objectInPart = true;
+    }
+    async function dropRequiredObjectMissing(candidates, context) {
+      if (!candidates?.length || !context || !Number.isInteger(context.tokenOffset)) return candidates;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "dropRequiredObjectMissing");
+      const drop = new Set();
+      for (const c of candidates) {
+        const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
+        if (spans.length !== 2) continue;
+        const j = tokens.findIndex(t => t.index === spans[1].start);
+        if (j < 0) continue;
+        const particle = norm(tokens[j][0]);
+        // only a particle that is also a word of its own (an adverb / adjective card: gleich, zurück, weiter …; nach, vor, mit)
+        if (!["nach","vor","mit"].includes(particle) && !(forms.get(particle) || []).some(e => e.type === "Adverb" || e.type === "Adjektiv")) {
+          requiredMeaningFirst(c, sentence, tokens); await externalTransitiveFirst(c, sentence, tokens); continue; }
+        const need = await requiredObjectCase(c);
+        if (!need) { requiredMeaningFirst(c, sentence, tokens); await externalTransitiveFirst(c, sentence, tokens); continue; }
+        if (separatedObjectInPart(c, sentence, tokens, need) === false) drop.add(c); else { requiredMeaningFirst(c, sentence, tokens); await externalTransitiveFirst(c, sentence, tokens); }
+      }
+      if (!drop.size) return candidates;
+      const kept = candidates.filter(c => !drop.has(c));
+      if (candidates.shortImperativeConflict) kept.shortImperativeConflict = candidates.shortImperativeConflict;
+      return kept;
+    }
+    // Links chat, advisor 14.11 (batch-run2 (а)): a particle does not make a verb that a nearer particle already closed — the verb,
+    // then a particle that ends its part and makes a known verb with it (own card or the external dictionary), then this particle:
+    // Das Schneiderlein zog weiter, immer seiner spitzen Nase nach — weiterziehen, nach stays the preposition; Er lief weiter,
+    // immer seiner Nase nach. Two particles in a row are the class of two particles (sah … mit an — mitansehen) and stay.
+    async function dropParticleTakenByNearer(candidates, context) {
+      if (!candidates?.length || !context || !Number.isInteger(context.tokenOffset)) return candidates;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "dropParticleTakenByNearer");
+      const known = new Map();
+      const verbExists = async lemma => {
+        if (!known.has(lemma)) known.set(lemma, (async () => {
+          if ((lemmas.get(lemma) || []).some(e => e.type === "Verb")) return true;
+          try { return ((await fallback.lookupFacts?.(lemma))?.groups || []).some(g => g.pos === "verb" && norm(g.word || lemma) === lemma); } catch (_) { return false; }
+        })());
+        return known.get(lemma);
+      };
+      const drop = new Set();
+      for (const c of candidates) {
+        const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
+        if (spans.length !== 2) continue;
+        const i = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
+        if (i < 0 || j <= i + 2) continue;
+        const particle = norm(tokens[j][0]), lemma = norm(String(c.lemma || "")).replace(/^sich\s+/u, "");
+        if (!lemma.startsWith(particle)) continue;
+        const base = lemma.slice(particle.length);
+        for (let k = i + 1; k < j - 1; k++) {
+          const t = tokens[k][0], after = sentence.slice(tokens[k].index + t.length, tokens[k+1].index);
+          if (!/^\p{Ll}+$/u.test(t) || !/^\s*[,;:–—]/u.test(after)) continue;
+          if (tokens.slice(i + 1, k).some(x => (verbAnalyses.get(norm(x[0])) || []).some(a => a.kind === "finite"))) break;
+          if (await verbExists(norm(t) + base)) { drop.add(c); break; }
+        }
+      }
+      if (!drop.size) return candidates;
+      const kept = candidates.filter(c => !drop.has(c));
+      if (candidates.shortImperativeConflict) kept.shortImperativeConflict = candidates.shortImperativeConflict;
+      return kept;
+    }
     const separableDiscoveryCache=new Map();
     async function discoverSeparableCandidates(word,context) {
       syncSourceVersion();
@@ -7480,6 +7732,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               independent=!nextRows.some(a=>a.kind==='infinitive') && nextRows.some(a=>a.kind==='finite'&&!a.detached&&persons.includes(a.person));
             }
           }
+          // (advisor 14.11, 5в (8): a clause-final finite lassen of a verb-final part — auf dem es sich gut schlagen läßt, weil er Karten spielen
+          // lässt — and after und a subordinate part of its own: a subordinator (und weil …) or a subject and a finite form closing the part
+          // (und sie Bier trinkt, und Ihr Eure alten Nägel gerade klopfen könnt); a part without its subject (und färben) stays as before)
+          if(!independent && next<tokens.length && words(end+1)==='und' && outer===null && l===end && connected(end+1,next)) {
+            if(['weil','dass','daß','wenn','ob','obwohl','während','falls','damit','sobald','bevor','nachdem','wo','wie'].includes(words(next)))independent=true;
+            else {
+              let t=next;while(t+1<tokens.length&&connected(t,t+1)&&!['und','oder','aber','denn','sondern'].includes(words(t+1)))t++;
+              if(t>next&&/^\p{Ll}/u.test(tokens[t][0])&&(subjectPersons[words(next)]||DETERMINER_WORD.test(words(next))&&/^\p{Lu}/u.test(tokens[next+1]?.[0]||'')||/^\p{Lu}/u.test(tokens[next][0]))) {
+                const lastRows=await tokenAnalyses(lassenForm(tokens[t][0]),lassenLexicalLookup,'lassenGroup');
+                independent=lastRows.some(a=>a.kind==='finite'&&!a.detached);
+              }
+            }
+          }
           // A second finite predicate can reuse an explicit personal subject.
           // Require agreement with both heads and exclude infinitive homographs.
           // (L15 step 1: und + a finite verb of the head's person shares the subject — ließ den Koch kommen und befahl ihm;
@@ -7562,7 +7827,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(H==='lassen'&&sense===null&&reflexive&&!(head.kind==='imperative'&&reflexive==='uns')){
           // noun groups and pronouns outside prepositional groups; a capital that is no own noun continues the group (Bruder Lustig,
           // Windows Defender); und joins coordinated groups (der Windows Defender und der Internet Explorer)
-          const members=[];
+          const members=[];let cliticEs=null;
           // the current noun group: its last index and whether a preposition governs it (im Bad - und Heizungskino, zur Turn - und Sportlehrerin)
           let group=null;
           const gap=i=>sentence.slice(tokens[i-1].index+tokens[i-1][0].length,tokens[i].index);
@@ -7570,7 +7835,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if(linked.includes(i)||i===reflexiveIndex)continue;
             const w=words(i),capital=/^\p{Lu}/u.test(tokens[i][0]);
             // (the clitic 's of sich's — read as sich es — is no member: ließen sich's wohlschmecken)
-            if(w==='es'&&i-1===reflexiveIndex)continue;
+            if(w==='es'&&i-1===reflexiveIndex){cliticEs=i;continue;}
             // (der / die alone are pronouns before a verb, sich or lassen — die laß ich mir …; der anderen is a genitive)
             // (an own pronoun card is a member too — niemand, jemand, keiner, jeder, wer: no «impersonal» without proof)
             const pronounMember=(subjectPersons[w]||LASSEN_CAN_SUBJECTS.has(w)||!reflexivePronouns.has(w)&&!DETERMINER_WORD.test(w)&&!DETERMINER_WORD.test(words(i-1))&&(forms.get(w)||[]).some(e=>e.type==='Pronomen')||/^(?:keine[rsn]?|jede[rsmn]?|manche[rsn]?|viele|beide|einige|alle|einer)$/u.test(w)&&!(tokens[i+1]&&/^\p{Lu}/u.test(tokens[i+1][0])&&i+1<=end)||['die','der'].includes(w)&&(i+1===l||i+1===reflexiveIndex||finite(i+1).length>0))&&
@@ -7597,6 +7862,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if(member)members.push(member);
             group=nounMember?{end:i,member}:null;
           }
+          // (advisor 14.11, 5в (8): with no other member the 's of sich's is the subject es — auf dem sich's gut schlagen läßt, Hier lässt
+          // sich's gut leben are es sich …; with a subject of its own — die Räuber ließen sich's wohlschmecken — it stays the object)
+          if(!members.length&&cliticEs!==null)members.push({start:cliticEs,end:cliticEs,noun:false,word:'es'});
           // (und + lassen first: the subject is the one of the first part — und ließ sich für den Kreuzer Bier dazu geben)
           // (advisor 09.11: a comma with a closing quote counts as a comma — »Sollte es Aschenputtel sein,« ließ sich die Axt holen)
           // (review 29.10: also after aber / sondern / doch and after a comma when the part before is a main clause — Er stand auf, ließ sich
@@ -8428,7 +8696,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const byCase = seen.has("Akkusativ") === seen.has("Dativ") ? [] : cards.filter(c => String(c.item.auxiliary || "").trim() === (seen.has("Akkusativ") ? "sein" : "haben"));
         if (byCase.length === 1) return {candidate:byCase[0],evidence:'direction-case'};
       }
-      if (dative && !accusative) { const c = pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))); if (c) return {candidate:c,evidence:'dative-object'}; }
+      // (links chat, advisor 14.11, batch-run2 (б)): a dative with no accusative, and no card with a plain Dativ — the card whose every
+      // Akkusativ is required (needs it: nachziehen «тащить за собой») gives way to the one card that does not need it (nachziehen
+      // «последовать»): Er zog dem Vater nach, Er zog ihm nach)
+      // (links chat, advisor 14.11, after pkg158: an accusative object surely in the part — the strict count, unambiguous datives and an
+      // accusative of time aside — leaves out the card of the verb with sein only and no Akkusativ: riß sie ihm das zweite Haar aus,
+      // riß es ihm aus — ausreißen «вырывать», not «сбегать»; Er riß ihm aus keeps «сбегать»; a verb that is not separated (fuhr ihm in
+      // den Leib) has no part to count)
+      // (a direct accusative of the card only — auf + Akkusativ is a prepositional object: ging … eine Partnerschaft ein keeps the
+      // window of the two sein cards of eingehen)
+      { const seinOnly = c => String(c.item.auxiliary || "").trim() === "sein" && !patterns(c).some(p => /^(?:Dativ\s*\+\s*)?Akkusativ\b/u.test(p.trim()));
+        if (cards.length > 1 && cards.some(seinOnly) && !cards.every(seinOnly) &&
+          cards.some(c => directAccusativeInPart(c, sentence, tokens))) {
+          const c = pick(cards.filter(c => !seinOnly(c))); if (c) return {candidate:c,evidence:'accusative-object'}; } }
+      const needsAccusative = c => { const a = (c.item.complements || []).filter(x => /^Akkusativ$/u.test(String(x.pattern || "").trim()));
+        return a.length > 0 && a.every(x => x.required === true); };
+      // (… only when the loose count of the part is sure there is no accusative — riß ihm das zweite Haar aus keeps the choice: das
+      // zweite Haar may be the object; a verb that is not separated has no part to count — the choice stays)
+      const withoutNeededAccusative = () => { const needing = cards.filter(needsAccusative);
+        if (!needing.length || !needing.every(c => separatedObjectInPart(c, sentence, tokens, "Akkusativ", false, true) === false)) return null;
+        return pick(cards.filter(c => !needsAccusative(c))); };
+      if (dative && !accusative) { const c = pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) || withoutNeededAccusative(); if (c) return {candidate:c,evidence:'dative-object'}; }
       // (WN batch 33, unterlaufen «вкрасться» Dativ / «обходить» Akkusativ: a dative noun phrase outside a prepositional phrase —
       // dem / einem / meinem … + noun, jedem / niemandem / jemandem, der + a feminine noun right after the finite verb — picks
       // the only card with a plain Dativ, nothing else: Bei der Übersetzung unterlief der Agentur ein Fehler, Ein Fehler kann
@@ -8443,7 +8731,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           return es.length > 0 && es.every(e => /^die\b/u.test(String(e.article || ""))); };
         // (review 02.11: a dative before a postposition is no object — dem Gesetz zum Trotz, dem Anschein nach, dem Bericht zufolge)
         const POSTPOSITION = /^(?:nach|zufolge|gegenüber|gemäß|entsprechend|zuliebe|entgegen|trotz|zum)$/u;
-        const notPostposed = k => { const n = nounEnd(k); return n > 0 && !POSTPOSITION.test(norm(tokens[n+1]?.[0] ?? "")); };
+        // (links chat, advisor 14.11 (б): the separated particle of the cards themselves at the end of the part is no postposition —
+        // Er zog dem Vater nach: nachziehen, not dem Anschein nach)
+        const ownParticleAt = k => !!prefix0 && cards.every(c => norm(c.item.separable_prefix || "") === prefix0) && k === end && norm(tokens[k]?.[0] ?? "") === prefix0;
+        const notPostposed = k => { const n = nounEnd(k); return n > 0 && (!POSTPOSITION.test(norm(tokens[n+1]?.[0] ?? "")) || ownParticleAt(n+1)); };
         // (review 02.11: die / das / diese + noun outside a prepositional phrase may be the accusative object — die Regeln, das Verbot:
         // then the dative noun phrase decides nothing)
         const looseDieDas = free.some(x => /^(?:die|das|diese|dieses)$/u.test(x.w) && nounEnd(x.i+1) > 0);
@@ -8452,12 +8743,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // unterlaufen)
         // (… or before a present participle that governs it: Seinem Rat folgend unterliefen sie die Sanktionen)
         const postposedAt = i => { const n = nounEnd(i+1), w = tokens[n > 0 ? n+1 : i+1]?.[0] ?? "";
-          return POSTPOSITION.test(norm(w)) || /^\p{Ll}\p{L}{3,}end$/u.test(w); };
+          return POSTPOSITION.test(norm(w)) && !ownParticleAt(n > 0 ? n+1 : i+1) || /^\p{Ll}\p{L}{3,}end$/u.test(w); };
         const unambiguous = free.some(x => x.i <= end && (DATIVE_NP_DET.test(x.w) || x.w === "denen") && !postposedAt(x.i));
         const dativeNP = unambiguous || !looseDieDas && free.some(x => x.i <= end && (DATIVE_NP_DET.test(x.w) && nounNext(x.i+1) && notPostposed(x.i+1) ||
           /^(?:jedem|niemandem|jemandem)$/u.test(x.w) && !POSTPOSITION.test(norm(tokens[x.i+1]?.[0] ?? "")) ||
           !nonFinite && x.w === "der" && x.i === index + 1 && feminineNext(x.i+1) && notPostposed(x.i+1)));
-        const c = dativeNP ? pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) : null;
+        const c = dativeNP ? pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) || withoutNeededAccusative() : null;
         if (c) return {candidate:c,evidence:'dative-object'};
       }
       // L36: an object that both cards take (ausrichten: richtet ihre Werbung … auf junge Kunden aus) leaves the preposition to decide.
@@ -14200,6 +14491,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const ownOnlyVerb = !internalCapital && (ownOnlyVerbs.has(norm(word)) || exact.some(item => item.type === "Verb" && ownOnlyVerbs.has(norm(item.word))));
       let separated = [];
       try { separated = await resolveSeparableCandidates(word,context); } catch (e) { preparationError ||= e; }
+      try { separated = await dropRequiredObjectMissing(separated,context); } catch (_) {}
+      try { separated = await dropParticleTakenByNearer(separated,context); } catch (_) {}
       // Independent clicked-word lookup overlaps sentence morphology; reuse
       // the same promise in both paths instead of serial network round trips.
       const directLookup=!ownOnlyVerb&&(!exact.length||context||reflexiveForms.has(norm(word)))?lexicalLookup(word,'resolve'):null;
