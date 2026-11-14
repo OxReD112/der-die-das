@@ -991,7 +991,20 @@
     fitTranslation(availableHeight);
     const box = $popover.getBoundingClientRect();
     const left = Math.max(edge, Math.min(window.innerWidth - box.width - edge, anchor.left + anchor.width / 2 - box.width / 2));
-    const top = popupPlacement === "above" ? anchor.top - box.height - gap : anchor.bottom + gap;
+    let top = popupPlacement === "above" ? anchor.top - box.height - gap : anchor.bottom + gap;
+    // 14.11 (Alena): the card must not cover the other parts of the word's group (ein … Holzhacker, ging … hinaus). When it
+    // would, it moves past the group's edge on the side it already stands on — above: over the group's first line, below:
+    // under its last line — and only if it fits there. It never changes side; with no room it stays as before.
+    const parts = [...$text.querySelectorAll(".is-active-word")].filter(span => span !== activeWordSpan)
+      .map(span => span.getBoundingClientRect())
+      .filter(r => r.width > 0 && r.right > 0 && r.left < window.innerWidth && r.bottom > 0 && r.top < viewportHeight);
+    const covers = at => parts.some(r => r.bottom > at && r.top < at + box.height && r.right > left && r.left < left + box.width);
+    if (parts.length && covers(top)) {
+      const moved = popupPlacement === "above"
+        ? Math.min(anchor.top, ...parts.map(r => r.top)) - box.height - gap
+        : Math.max(anchor.bottom, ...parts.map(r => r.bottom)) + gap;
+      if (moved >= edge && moved + box.height <= viewportHeight - edge) top = moved;
+    }
     $popover.style.left = `${left}px`;
     $popover.style.top = `${Math.max(edge, top)}px`;
     $popover.dataset.placement = popupPlacement;
@@ -1359,12 +1372,18 @@
     $popover.setAttribute("aria-busy", "false");
     positionWordPopup(anchor);
     const readyBox = $popover.getBoundingClientRect();
-    if (readyBox.height > loadingHeight && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const loadingTop = popupPlacement === "above" ? anchor.top - loadingHeight - 8 : readyBox.top;
+    const loadingBoxTop = popupPlacement === "above" ? anchor.top - loadingHeight - 8 : anchor.bottom + 8;
+    if (readyBox.height <= loadingHeight && Math.abs(readyBox.top - loadingBoxTop) > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // 14.11: the card moved past the group's edge without growing — it slides there instead of jumping
+      popupExpansion = $popover.animate([{top:`${loadingBoxTop}px`}, {top:`${readyBox.top}px`}], {duration:240, easing:"ease-out"});
+      const slide = popupExpansion;
+      slide.finished.then(() => { if (popupExpansion === slide) { popupExpansion = null; positionWordPopup(popupAnchor); } }).catch(() => {});
+    } else if (readyBox.height > loadingHeight && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const loadingTop = loadingBoxTop; // 14.11: below, too, from where the loader stood — a card moved under the group slides down
       popupExpansion = $popover.animate([
         {height:`${loadingHeight}px`, top:`${loadingTop}px`, overflow:"hidden"},
         {height:`${readyBox.height}px`, top:`${readyBox.top}px`, overflow:"hidden"}
-      ], {duration:180, easing:"ease-out"});
+      ], {duration:Math.abs(readyBox.top - loadingTop) > loadingHeight ? 240 : 180, easing:"ease-out"});
       const expansion = popupExpansion;
       expansion.finished.then(() => {
         if (popupExpansion !== expansion) return;
