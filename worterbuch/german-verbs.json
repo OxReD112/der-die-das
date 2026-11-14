@@ -7618,11 +7618,11 @@
   {
     "id": "verb-157",
     "infinitive": "lassen",
-    "translation_ru": "оставлять; позволять, давать (сделать); заставлять, поручать (сделать); перестать, бросить (делать что-либо)",
-    "translation_en": "to leave; to let, to allow; to make, to have (something done); to stop, to give up (doing something)",
+    "translation_ru": "оставлять; (с инфинитивом) велеть, поручить, дать (сделать), заставлять; позволять (сделать); перестать, бросить (делать что-либо); (lass / lasst uns) давай(те)",
+    "translation_en": "to leave; (with an infinitive) to have (something done), to make (someone do); to let, to allow; to stop, to give up (doing something); (lass / lasst uns) let's",
     "auxiliary": "haben",
-    "usage_note_ru": "С другим инфинитивом в Perfekt обычно используется Ersatzinfinitiv: Ich habe mir die Haare schneiden lassen. Перестать: Lass das! — Перестань! das Rauchen lassen — бросить курить. С инфинитивом: einen Arzt kommen lassen — вызвать врача; etwas sehen lassen — показать; sich sehen lassen — показаться, появиться; Lass uns gehen! — Давай пойдём! Lass dir Zeit! — Не торопись! (выражение sich Zeit lassen).",
-    "usage_note_en": "With another infinitive in the perfect, the Ersatzinfinitiv is usually used: Ich habe mir die Haare schneiden lassen. To stop: Lass das! — Stop it! das Rauchen lassen — to give up smoking. With an infinitive: einen Arzt kommen lassen — to send for a doctor; etwas sehen lassen — to show something; sich sehen lassen — to show up; Lass uns gehen! — Let's go! Lass dir Zeit! — Take your time! (expression sich Zeit lassen).",
+    "usage_note_ru": "С инфинитивом — велеть, дать сделать (кому-то другому): Er ließ das Auto reparieren. — Он отдал машину в ремонт. Sie ließ sich die Haare schneiden. — Она подстриглась (в парикмахерской). einen Arzt kommen lassen — вызвать врача. Позволить: Er ließ mich nicht schlafen. — Он не давал мне спать. Lass uns gehen! / Lasst uns anfangen! — Давай пойдём! / Давайте начнём! В Perfekt с другим инфинитивом — Ersatzinfinitiv: Ich habe mir die Haare schneiden lassen. Перестать: Lass das! — Перестань! das Rauchen lassen — бросить курить. Также: etwas sehen lassen — показать; sich sehen lassen — показаться, появиться; Lass dir Zeit! — Не торопись! (выражение sich Zeit lassen). sich lassen — можно, поддаётся: Das lässt sich machen. — Это можно сделать.",
+    "usage_note_en": "With an infinitive — to have something done (by someone else): Er ließ das Auto reparieren. — He had the car repaired. Sie ließ sich die Haare schneiden. — She had her hair cut. einen Arzt kommen lassen — to send for a doctor. To let: Er ließ mich nicht schlafen. — He didn't let me sleep. Lass uns gehen! / Lasst uns anfangen! — Let's go! / Let's start! In the perfect with another infinitive — the Ersatzinfinitiv: Ich habe mir die Haare schneiden lassen. To stop: Lass das! — Stop it! das Rauchen lassen — to give up smoking. Also: etwas sehen lassen — to show something; sich sehen lassen — to show up; Lass dir Zeit! — Take your time! (expression sich Zeit lassen). sich lassen — can be done: Das lässt sich machen. — That can be done.",
     "example_de": "Lass das Fenster bitte offen.",
     "example_cloze": "{{c1::Lass}} das Fenster bitte offen.",
     "example_ru": "Оставь, пожалуйста, окно открытым.",
@@ -32304,6 +32304,48 @@
       }
     },
     "separable_prefix": "um"
+  },
+  {
+    "id": "verb-2778",
+    "infinitive": "sich fortmachen",
+    "translation_ru": "(разг.) убраться, удрать, смыться",
+    "translation_en": "(colloquial) to make off, to clear off",
+    "auxiliary": "haben",
+    "usage_note_ru": "Часто — тайком или поспешно: Der Dieb hat sich schnell fortgemacht. Mach dich fort! — Убирайся! Близко: sich davonmachen, abhauen. Без sich: (разг.) fortmachen — продолжать; (регион., с sein) — переезжать.",
+    "usage_note_en": "Often secretly or hastily: Der Dieb hat sich schnell fortgemacht. Mach dich fort! — Clear off! Similar: sich davonmachen, abhauen. Without sich: (colloquial) fortmachen — to carry on; (regional, with sein) — to move away.",
+    "example_de": "Als der Bauer mit dem Stock kam, machten sich die Jungen schnell fort.",
+    "example_cloze": "Als der Bauer mit dem Stock kam, {{c1::machten}} sich die Jungen schnell {{c1::fort}}.",
+    "example_ru": "Когда крестьянин появился с палкой, мальчишки быстро удрали.",
+    "example_en": "When the farmer came with his stick, the boys quickly made off.",
+    "perfect_form": "haben sich fortgemacht",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "mache mich fort",
+        "du": "machst dich fort",
+        "er/sie/es": "macht sich fort",
+        "wir": "machen uns fort",
+        "ihr": "macht euch fort",
+        "sie": "machen sich fort"
+      },
+      "Präteritum": {
+        "ich": "machte mich fort",
+        "du": "machtest dich fort",
+        "er/sie/es": "machte sich fort",
+        "wir": "machten uns fort",
+        "ihr": "machtet euch fort",
+        "sie": "machten sich fort"
+      },
+      "Konjunktiv II": {
+        "ich": "machte mich fort",
+        "du": "machtest dich fort",
+        "er/sie/es": "machte sich fort",
+        "wir": "machten uns fort",
+        "ihr": "machtet euch fort",
+        "sie": "machten sich fort"
+      }
+    },
+    "separable_prefix": "fort"
   },
   {
     "id": "verb-679",

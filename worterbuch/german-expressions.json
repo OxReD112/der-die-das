@@ -45294,5 +45294,146 @@
         "Keiner Weise ist das gelungen."
       ]
     }
+  },
+  {
+    "id": "expression-240",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich schlafen legen",
+    "translation_ru": "лечь спать",
+    "translation_en": "to go to bed, to lie down to sleep",
+    "example_de": "Nach der langen Wanderung legten sich alle früh schlafen.",
+    "example_ru": "После долгого похода все рано легли спать.",
+    "example_en": "After the long hike everyone went to bed early.",
+    "notes_ru": [
+      "schlafen — инфинитив цели при legen: Ich lege mich schlafen. — Я ложусь спать.",
+      "Без sich: jemanden schlafen legen — уложить спать (ребёнка).",
+      "Близко: schlafen gehen, ins Bett / zu Bett gehen, sich zu Bett legen; (разг.) sich aufs Ohr legen."
+    ],
+    "notes_en": [
+      "schlafen is an infinitive of purpose with legen: Ich lege mich schlafen. — I'm going to bed.",
+      "Without sich: jemanden schlafen legen — to put (a child) to bed.",
+      "Similar: schlafen gehen, ins Bett / zu Bett gehen, sich zu Bett legen; (colloquial) sich aufs Ohr legen."
+    ],
+    "related_ids": [
+      "verb-051",
+      "verb-159"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/schlafen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "lege",
+              "legst",
+              "legt",
+              "legen",
+              "legte",
+              "legtest",
+              "legten",
+              "legtet",
+              "leg",
+              "legest",
+              "leget",
+              "gelegt"
+            ]
+          },
+          {
+            "reflexive": true
+          },
+          {
+            "form": "schlafen",
+            "not_after": [
+              "zu",
+              "um",
+              "und",
+              "oder",
+              "er",
+              "sie",
+              "es",
+              "ich",
+              "du",
+              "wir",
+              "ihr",
+              "der",
+              "die",
+              "das"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "reflexive": true
+          },
+          {
+            "form": "schlafen",
+            "not_after": [
+              "zu",
+              "um",
+              "und",
+              "oder",
+              "er",
+              "sie",
+              "es",
+              "ich",
+              "du",
+              "wir",
+              "ihr",
+              "der",
+              "die",
+              "das"
+            ]
+          },
+          {
+            "form": [
+              "lege",
+              "legst",
+              "legt",
+              "legen",
+              "legte",
+              "legtest",
+              "legten",
+              "legtet",
+              "leg",
+              "legest",
+              "leget",
+              "gelegt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach der langen Wanderung legten sich alle früh schlafen.",
+        "Der Gast bezahlte seine Zeche und legte sich schlafen.",
+        "Sie legten sich danach schlafen.",
+        "Nun ist es spät, da wollen wir uns schlafen legen.",
+        "Der Mann hat sich daher schlafen gelegt — allerdings mitten auf einer Bundesstraße.",
+        "Bevor sie sich schlafen legen, putzen die Kinder die Zähne.",
+        "Ich lege mich jetzt schlafen.",
+        "Er legte sich an diesem Abend nicht schlafen.",
+        "Leg dich schlafen!"
+      ],
+      "negative": [
+        "Er legte sich unter einen Baum und fing an zu schlafen.",
+        "Sie legte das Kind schlafen.",
+        "Ich lege mich hin, um zu schlafen.",
+        "Er legte das Buch weg und wollte schlafen.",
+        "Sie legte sich hin, konnte aber nicht schlafen.",
+        "Da legte er sich nieder damit er schlafen könnte.",
+        "Sie legte sich zu dem Kinde das schlafen sollte."
+      ]
+    }
   }
 ]

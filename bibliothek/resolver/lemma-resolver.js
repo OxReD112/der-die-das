@@ -388,6 +388,10 @@
   const LASSEN_LET_US_CARD = 'wir';
   // Coverage of lassen + infinitive, step A (links chat 30.10, claude/LASSEN_TRAIN_UNCOVERED_2026-10-30_RU.md): the forms of lassen and
   // the dash written as two hyphens («-- es lohnt sich»)
+  // the head verbs of the lassen + infinitive group (lassenGroup): lassen itself and, as a group of its own, the verbs of perception and
+  // helfen with a bare infinitive (links chat 14.11, advisor: sah ihn kommen, hörte sie sprechen, lösen helfen)
+  const LASSEN_GROUP_HEADS = new Set(['lassen']);
+  const PERCEPTION_GROUP_HEADS = new Set(['sehen','hören','fühlen','spüren','helfen']);
   const LASSEN_FORM_WORD = /^(?:lassen|lässt|läßt|lasse|lasst|laßt|lass|laß|ließ|ließen|ließe|ließest|liess|liessen)$/u;
   const DOUBLE_HYPHEN_DASH = /(?:^|\s)--(?:\s|$)/u;
   // step C (a2): words of quantity before a plural subject without an article (mehr Menschen, viele Leute)
@@ -6214,6 +6218,22 @@
       return {id:'modal-zu',verb,tense,lemma:inner.lemma,inner:innerConstruction,roles:[head.rows[0].entry,...roles],main,marker,
         note:{ru:`${verb} + zu`,en:`${verb} + zu`},spans:[headSpan,...inner.spans]};
     }
+    // (links chat п. 94 (А)): particle + zu + infinitive of a separable verb the external dictionary knows (herauszuholen → herausholen)
+    async function externalJoinedZu(token) {
+      const t = norm(token);
+      if (t !== token) return [];
+      for (let k = 2; k + 5 <= t.length; k++) {
+        const prefix = t.slice(0,k), rest = t.slice(k+2);
+        if (t.slice(k,k+2) !== 'zu' || !new RegExp(`^(?:${PARTICLE_INFINITIVE_PREFIX.source.slice(1)})$`,'u').test(prefix) || !REGULAR_INFINITIVE_SHAPE.test(rest)) continue;
+        const whole = prefix + rest, own = (forms.get(whole) || []).filter(e => e.type === 'Verb' && norm(e.word) === whole);
+        if (own.length) return own;
+        let facts = null;
+        try { facts = await lexicalLookup(whole,'zuJoinedExternal'); } catch (_) { facts = null; }
+        if ((facts || []).some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb' && g.meanings?.length && norm(g.word) === whole))
+          return [{word:whole,type:'Verb',external:true}];
+      }
+      return [];
+    }
     async function zuInfinitiveGroupBase(word, context, clickedIndex) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
       const sentence = String(context.sentence || ''), tokens = sharedTokens(sentence,'zuInfinitiveGroup');
@@ -6267,6 +6287,29 @@
           closes = (await tokenAnalyses(after[0],undefined,'zuInfinitiveGroup')).some(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached);
         return closes ? {z,v,entries} : null;
       };
+      // (links chat п. 94 (А), advisor 14.11: a joined zu-infinitive of a separable verb — um sie einzulassen, ohne mitzunehmen,
+      // statt aufzuräumen — is the zu group of um / ohne / statt too; zuForms holds the joined forms of own and indexed separable verbs.
+      // The same closing test and the same sich-twin choice as core)
+      const coreJoined = async v => {
+        if (!tokens[v] || !/^[a-zäöüß]/u.test(tokens[v][0])) return null;
+        let entries = [...new Map((zuForms.get(norm(tokens[v][0])) || []).map(e => [e.id ?? e.word,e])).values()];
+        // (a separable verb only the external dictionary knows — herauszuholen: particle + zu + infinitive, the whole verb an external
+        // verb entry of exactly that spelling)
+        if (!entries.length) entries = await externalJoinedZu(tokens[v][0]);
+        const bare = e => norm(e.word).replace(/^sich\s+/u,"");
+        if (!entries.length || new Set(entries.map(bare)).size !== 1) return null;
+        if (entries.length > 1) {
+          let reflexiveNear = false;
+          for (let i = v-1; i >= 0 && !breaks(i); i--) if (reflexivePronouns.has(norm(tokens[i][0]))) { reflexiveNear = true; break; }
+          const pick = entries.filter(e => /^sich\s/u.test(norm(e.word)) === reflexiveNear);
+          entries = pick.length ? pick : [entries.find(e => !/^sich\s/u.test(norm(e.word))) || entries[0]];
+        }
+        const after = tokens[v+1];
+        let closes = !after || breaks(v) || ['und','oder','aber','sondern','sowie'].includes(norm(after[0]));
+        if (!closes && /^\s+$/u.test(gapAfter(v)) && /^[a-zäöüß]/u.test(after[0]))
+          closes = (await tokenAnalyses(after[0],undefined,'zuInfinitiveGroup')).some(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached);
+        return closes ? {z:v,v,entries,joined:true} : null;
+      };
       // um / ohne / (an)statt … zu (reference 4.8, agreed 11 Oct 2026): the
       // opener starts its clause part (text start or after punctuation) and the
       // zu group closes the same part; um before a time (um 8 Uhr) is a preposition.
@@ -6280,11 +6323,27 @@
       let found = null, opener = null, conjunction = null;
       if (openerAt(clicked)) {
         for (let i = clicked+1; tokens[i] && !breaks(i-1); i++) {
+          // (п. 94 (А): a separate zu first, as before — um sich auszutauschen oder … zu besprechen keeps its zu besprechen —, but not
+          // past another opener after und / oder: ohne sich … umzusehen und ohne sie zu grüßen; um ihn um Hilfe zu bitten stays)
+          if (i > clicked+1 && openerWords[norm(tokens[i][0])] && ['und','oder','sowie'].includes(norm(tokens[i-1][0]))) break;
           if (norm(tokens[i][0]) !== 'zu') continue;
           found = await core(i);
           if (found) { opener = clicked; break; }
         }
+        // (then the joined zu-infinitive of a separable verb — um sie einzulassen, ohne aufzuwachen)
+        if (!found) for (let i = clicked+1; tokens[i] && !breaks(i-1); i++) {
+          if (i > clicked+1 && openerWords[norm(tokens[i][0])] && ['und','oder','sowie'].includes(norm(tokens[i-1][0]))) break;
+          if (/zu/u.test(tokens[i][0]) && norm(tokens[i][0]) !== 'zu' && (found = await coreJoined(i))) { opener = clicked; break; }
+        }
         if (!found) return null;
+      } else if (/^\p{Ll}+zu\p{Ll}+$/u.test(tokens[clicked][0]) && norm(tokens[clicked-1]?.[0] ?? '') !== 'zu' && (zuForms.has(norm(tokens[clicked][0])) || (await externalJoinedZu(tokens[clicked][0])).length)) {
+        // (п. 94 (А): a tap on the joined zu-infinitive itself — only with its opener; without one the tap stays as before)
+        found = await coreJoined(clicked);
+        if (!found) return null;
+        let start = clicked;
+        while (start > 0 && !breaks(start-1)) start--;
+        if (!(start < clicked && openerAt(start))) return null;
+        opener = start;
       } else {
         found = await core(norm(tokens[clicked][0]) === 'zu' ? clicked : clicked-1);
         // A6: the first word of the chain before zu (sterben zu können, geträumt zu haben).
@@ -6306,7 +6365,7 @@
       // gewesen zu sein: the participle must take this auxiliary, else it is a state, G2) or a modal infinitive
       // (sterben zu können). Only the chain is highlighted (12.1, p. 4), with um / ohne / statt when they open it.
       const second = norm(tokens[v][0]), before = z-1;
-      if (before >= 0 && joinedTokens(sentence,tokens,before,z) && /^\p{Ll}/u.test(tokens[before][0]) && (opener === null || before > opener)) {
+      if (!found.joined && before >= 0 && joinedTokens(sentence,tokens,before,z) && /^\p{Ll}/u.test(tokens[before][0]) && (opener === null || before > opener)) {
         // Own cards only (a derived «particle + verb» entry such as ablesen is not a card of its own).
         const rows = (forms.get(norm(tokens[before][0])) || []).filter(e => e.type === "Verb" && /^verb-\d+$/u.test(String(e.id || "")));
         let lexical = [], kind = null;
@@ -6366,9 +6425,11 @@
             spans:linked.map(span)};
         }
       }
+      // (п. 94 (А): an indexed or external separable verb of a joined form is a role only on that word — not a second card on um,
+      // as in zuGroupIn)
       if (conjunction) return {id:'zu-conjunction',label:conjunction.word,lemma:entries[0].word,conjunction,
-        roles:[...entries,conjunction],main:entries[0],marker:clicked === z,
-        note:{ru:conjunction.word+' + инфинитив',en:conjunction.word+' + infinitive'},spans:[span(opener),span(z),span(v)]};
+        roles:[...entries.filter(e => !found.joined || !(e.importedSeparable || e.external) || clicked === v),conjunction],main:entries[0],marker:!found.joined && clicked === z,
+        note:{ru:conjunction.word+' + инфинитив',en:conjunction.word+' + infinitive'},spans:found.joined ? [span(opener),span(v)] : [span(opener),span(z),span(v)]};
       return {id:'zu-infinitive',label:'zu + Infinitiv',lemma:entries[0].word,roles:entries,main:entries[0],marker:clicked === z,
         note:{ru:'zu + инфинитив',en:'zu + infinitive'},spans:[span(z),span(v)]};
     }
@@ -7047,11 +7108,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (L15 step 1: laßt — the ihr form and its imperative — too)
     const lassenHistoricalForms = new Map([['läßt','lässt'],['laß','lass'],['laßt','lasst'],['mußten','mussten']]);
     const lassenForm = word => lassenHistoricalForms.get(norm(word)) || word;
-    async function lassenGroup(word, context, candidates) {
+    async function lassenGroup(word, context, candidates, heads = LASSEN_GROUP_HEADS) {
       if (!context || !Number.isInteger(context.tokenOffset) || (!candidates.some(c=>canonicalPos(c.pos)==='Verb') && !lassenHistoricalForms.has(norm(word)) && norm(word)!==LASSEN_LET_US_PRONOUN)) return null;
       const sentence=String(context.sentence || ""),tokens=sharedTokens(sentence,'lassenGroup');
-      if(!tokens.some(t=>(forms.get(norm(lassenForm(t[0])))||[]).some(e=>e.type==='Verb'&&e.word==='lassen')))return null;
+      if(!tokens.some(t=>(forms.get(norm(lassenForm(t[0])))||[]).some(e=>e.type==='Verb'&&heads.has(e.word))))return null;
       const clicked=clickedTokenIndex(tokens,context.tokenOffset,word);
+      // (links chat 14.11, advisor: sehen / hören / fühlen / spüren / helfen + a bare infinitive is the same group with another head verb)
+      const headFormWord=w=>heads.has('lassen')?LASSEN_FORM_WORD.test(w):(forms.get(w)||[]).some(e=>e.type==='Verb'&&heads.has(e.word));
       if(clicked<0)return null;
       const boundaries=new Set(['und','oder','aber','denn','sondern','doch','weil','dass','daß','wenn','ob','bevor','nachdem','obwohl','während','falls','damit','sobald']);
       // A comma introducing an additive phrase need not close the verbal
@@ -7070,7 +7133,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // an opening quote: the next quote gap within 5 words, nothing but words and spaces inside, a word after the closing one
           let m=k+1;while(m+1<tokens.length&&m-k<=5&&/^\s+$/u.test(gapOf(m,m+1)))m++;
           // (review 30.10: a quotation with a form of lassen is its own speech — „lass ihn gehen“, „Lass mich gehen“)
-          if(Array.from({length:m-k},(_,q)=>k+1+q).some(q=>LASSEN_FORM_WORD.test(norm(lassenForm(tokens[q][0])))))continue;
+          if(Array.from({length:m-k},(_,q)=>k+1+q).some(q=>headFormWord(norm(lassenForm(tokens[q][0])))))continue;
           if(m+1<tokens.length&&m-k<=5&&quoteGap(gapOf(m,m+1))&&/^\p{Ll}/u.test(tokens[m+1][0])||m+1<tokens.length&&m-k<=5&&quoteGap(gapOf(m,m+1))&&tokens[m+1]&&quoteGap(gapOf(m+1,m+2>=tokens.length?m+1:m+2))){set.add(k);set.add(m);}
         }return set;})();
       const appositionComma=(()=>{const set=new Set();
@@ -7094,7 +7157,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         tokens[i+1]&&(/^\p{Lu}/u.test(tokens[i+1][0])||DETERMINER_WORD.test(norm(tokens[i+1][0]))||ellipsisSecondPart(sentence,tokens,i+1));
       // (L19, 30.10: und between two lowercase infinitive shapes right before a form of lassen — putzen und streichen lassen — joins them)
       const infinitivePair=i=>norm(tokens[i]?.[0])==='und'&&i>0&&tokens[i+2]&&[tokens[i-1][0],tokens[i+1][0]].every(t=>/^\p{Ll}/u.test(t)&&REGULAR_INFINITIVE_SHAPE.test(norm(t)))&&
-        /^(?:lassen|lässt|lasse|lasst|ließ|ließen|ließe|ließest|gelassen)$/u.test(norm(lassenForm(tokens[i+2][0])));
+        (heads.has('lassen')?/^(?:lassen|lässt|lasse|lasst|ließ|ließen|ließe|ließest|gelassen)$/u.test(norm(lassenForm(tokens[i+2][0]))):headFormWord(norm(tokens[i+2][0])));
       // (step A, a1: und / oder between members of the part — ein Bankprodukt oder Information … finden, Geschenken und vergoldeten Pokalen …
       // besänftigen — when before it a form of lassen has no infinitive yet and after it the part ends in a lowercase infinitive with no
       // subject pronoun on the way; a6: damit inside the part is the adverb — lassen sich damit … durchführen; als + a lowercase word of an
@@ -7108,7 +7171,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (but two attributes before a noun — spanischen und ungarischen Goldstücken — are a pair of adjectives)
         if(/^\p{Ll}/u.test(tokens[i-1][0])&&/n$/u.test(norm(tokens[i-1][0]))&&(modifiers.get(norm(tokens[i-1][0]))||[]).length===0&&!(forms.get(norm(tokens[i-1][0]))||[]).some(e=>e.type!=='Verb')&&!attributePair(i-1))return false;
         let j=i-1,open=false;
-        while(j>=0){const w=norm(lassenForm(tokens[j][0]));if(LASSEN_FORM_WORD.test(w)){open=true;break;}if(infinitiveShape(j)&&!DETERMINER_WORD.test(w))return false;if(j===0||!plainGap(j-1,j))break;j--;}
+        while(j>=0){const w=norm(lassenForm(tokens[j][0]));if(headFormWord(w)){open=true;break;}if(infinitiveShape(j)&&!DETERMINER_WORD.test(w))return false;if(j===0||!plainGap(j-1,j))break;j--;}
         if(!open)return false;
         // (the first infinitive on the way ends the search: before a punctuation mark, another und / oder or a form of lassen; a subject
         // pronoun or another boundary word first — no)
@@ -7123,8 +7186,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if(SUBJECT_PRONOUNS.has(w)&&!/^\p{Lu}/u.test(tokens[k+1]?.[0]||''))return false;
           if(k>i+1&&boundaries.has(w)&&!['und','oder'].includes(w))return false;
           // (review 30.10: another form of lassen — und lässt die Kinder spielen — is its own group)
-          if(LASSEN_FORM_WORD.test(norm(lassenForm(tokens[k][0]))))return false;
-          const last=k+1>=tokens.length||!plainGap(k,k+1)||['und','oder'].includes(norm(tokens[k+1][0]))||LASSEN_FORM_WORD.test(norm(lassenForm(tokens[k+1][0])));
+          if(headFormWord(norm(lassenForm(tokens[k][0]))))return false;
+          const last=k+1>=tokens.length||!plainGap(k,k+1)||['und','oder'].includes(norm(tokens[k+1][0]))||headFormWord(norm(lassenForm(tokens[k+1][0])));
           // (review 30.10: the verb right after und / oder — Wir lassen das Auto hier und laufen — is a second predicate, not a member)
           if(verbShape(k)&&last)return k>i+1;
           if(k+1>=tokens.length||!plainGap(k,k+1))return false;
@@ -7134,7 +7197,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (review 30.10: only right after the form of lassen or a pronoun — lassen sich damit, ließ ihn damit; Er ließ das Licht an damit die Kinder schlafen
       // is the conjunction without its comma)
       const adverbDamit=i=>norm(tokens[i]?.[0])==='damit'&&i>0&&plainGap(i-1,i)&&!SUBJECT_PRONOUNS.has(norm(tokens[i+1]?.[0]||''))&&
-        (LASSEN_FORM_WORD.test(norm(lassenForm(tokens[i-1][0])))||(forms.get(norm(tokens[i-1][0]))||[]).some(e=>e.type==='Pronomen')||reflexivePronouns.has(norm(tokens[i-1][0])));
+        (headFormWord(norm(lassenForm(tokens[i-1][0])))||(forms.get(norm(tokens[i-1][0]))||[]).some(e=>e.type==='Pronomen')||reflexivePronouns.has(norm(tokens[i-1][0])));
       // (review 30.10: only before the infinitive — after it, ließ ihn warten als einziger / länger kochen als üblich, als ends the part)
       const roleAls=i=>norm(tokens[i]?.[0])==='als'&&tokens[i+1]&&/^\p{Ll}/u.test(tokens[i+1][0])&&!SUBJECT_PRONOUNS.has(norm(tokens[i+1][0])) &&
         i>0&&!infinitiveShape(i-1)&&tokens[i+2]&&plainGap(i+1,i+2)&&
@@ -7154,8 +7217,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if(!context.lassenSecondProbe&&start>1&&norm(tokens[start-1][0])==='und'&&clicked===end&&/^\p{Ll}/u.test(tokens[clicked][0])&&connected(start-1,start)&&connected(start-2,start-1)){
         let j=start-2;while(j>0&&connected(j-1,j)&&!boundary(j-1))j--;
         for(let k=start-2;k>=j;k--){
-          if(!(forms.get(norm(lassenForm(tokens[k][0])))||[]).some(e=>e.type==='Verb'&&e.word==='lassen'))continue;
-          const g=await lassenGroup(tokens[k][0],{...context,tokenOffset:tokens[k].index,lassenSecondProbe:true},[{pos:'Verb'}]);
+          if(!(forms.get(norm(lassenForm(tokens[k][0])))||[]).some(e=>e.type==='Verb'&&heads.has(e.word)))continue;
+          const g=await lassenGroup(tokens[k][0],{...context,tokenOffset:tokens[k].index,lassenSecondProbe:true},[{pos:'Verb'}],heads);
           if(g?.coordinated&&g.spans.some(x=>x.start===tokens[clicked].index))return g;
         }
       }
@@ -7180,26 +7243,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (zusammenschrecken: no card of its own; the particle + an external verb's infinitive)
         if(await externalVerb(key)||rest.length>2&&await externalVerb(rest))extraInfinitives.set(i,[{kind:'infinitive',base:key,detached:false}]);
       }
-      const infinitives=i=>[...rows(i),...(extraInfinitives.get(i)||[])].filter(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(i)&&words(i-1)!=='zu'&&/^[a-zäöü]/u.test(tokens[i]?.[0]||''));
+      // (links chat 14.11: an attribute before a comma and a second attribute of the same noun — den heißen, stinkenden Atem; in einem
+      // weißen, glänzenden Kleidchen — is no infinitive)
+      const attributeBeforeComma=i=>i+2<tokens.length&&/^\s*,\s*$/u.test(gapOf(i,i+1))&&/^\p{Ll}/u.test(tokens[i+1][0])&&/(?:e|en|er|es|em)$/u.test(norm(tokens[i+1][0]))&&
+        /^\p{Lu}/u.test(tokens[i+2][0])&&/^\s+$/u.test(gapOf(i+1,i+2))&&[i-1,i-2].some(j=>j>=0&&DETERMINER_WORD.test(norm(tokens[j][0])));
+      const infinitives=i=>[...rows(i),...(extraInfinitives.get(i)||[])].filter(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(i)&&words(i-1)!=='zu'&&/^[a-zäöü]/u.test(tokens[i]?.[0]||'')&&!attributeBeforeComma(i));
       const outerBases=new Set(['haben','werden','können','müssen','dürfen','sollen','wollen','mögen','möchten']);
       const groups=[];
-      for(const l of indices.filter(i=>rows(i).some(a=>a.base==='lassen'))) {
+      for(const l of indices.filter(i=>rows(i).some(a=>heads.has(a.base)))) {
+        // the head verb of this group: lassen, or a verb of perception / helfen
+        const H=rows(l).find(a=>heads.has(a.base)).base;
         let part,outer=null,headRows=[],tense;
         // End-position finite modal/werden controls the replacement bracket.
-        if(l===end-1&&words(l)==='lassen'&&finite(end).some(a=>outerBases.has(a.base)&&a.base!=='haben')) {
+        if(l===end-1&&words(l)===H&&finite(end).some(a=>outerBases.has(a.base)&&a.base!=='haben')) {
           part=l-1;outer=end;headRows=finite(end).filter(a=>outerBases.has(a.base)&&a.base!=='haben');
-        } else if(l===end&&words(l)==='lassen'&&infinitives(l).some(a=>a.base==='lassen')) {
+        } else if(l===end&&words(l)===H&&infinitives(l).some(a=>a.base===H)) {
           const helpers=indices.filter(i=>i!==l&&i!==l-1&&finite(i).some(a=>outerBases.has(a.base)));
           if(helpers.length===1){outer=helpers[0];headRows=finite(outer).filter(a=>outerBases.has(a.base));part=l-1;}
-          else {headRows=finite(l).filter(a=>a.base==='lassen');part=l-1;}
-        } else if(l===end&&words(l)==='lassen'&&words(l-1)==='zu'&&l-2>=start) {
+          else {headRows=finite(l).filter(a=>a.base===H);part=l-1;}
+        } else if(l===end&&words(l)===H&&words(l-1)==='zu'&&l-2>=start) {
           // (L15 step 1: zu lassen — erschallen zu lassen, veröden zu lassen: the zu-infinitive of lassen with its infinitive)
-          headRows=rows(l).filter(a=>a.base==='lassen'&&a.kind==='infinitive');part=l-2;
-        } else {headRows=words(l-1)==='zu'?[]:finite(l).filter(a=>a.base==='lassen');part=l===end?l-1:end;}
+          headRows=rows(l).filter(a=>a.base===H&&a.kind==='infinitive');part=l-2;
+        } else {headRows=words(l-1)==='zu'?[]:finite(l).filter(a=>a.base===H);part=l===end?l-1:end;}
         // Clause-final lassen is also an infinitive. A finite reading needs
         // its own agreeing plural subject; do not invent an omitted helper
         // after a comma or borrow a subject from an earlier clause.
-        if(outer===null && l===end && words(l)==='lassen' && words(l-1)!=='zu') {
+        if(outer===null && l===end && words(l)===H && words(l-1)!=='zu') {
           const pluralSubject=indices.some(i=>i!==l && ['wir','sie'].includes(words(i))) ||
             indices.some(i=>i!==l && /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && ['die','diese','jene'].includes(words(i-1)) &&
               (forms.get(words(i))||[]).some(e=>e.type==='Nomen'&&String(e.plural||'').split(/\s*,\s*/u).some(p=>norm(p)===words(i)))) ||
@@ -7212,11 +7281,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         if(part<start||part===outer||part===l||!headRows.length)continue;
         const inner=infinitives(part),bases=new Set(inner.map(a=>a.base));
-        if(!inner.length||bases.size!==1)continue;
+        // (the head's own infinitive is no inner verb — Ich höre Musik hören)
+        if(!inner.length||bases.size!==1||bases.has(H))continue;
         // (L15 step 1, advisor 29.10 — reference B5e: a verb of two words wins over the general group: fallen + ließ → fallenlassen
         // «уронить», lässt … sitzen → sitzenlassen, sich … gefallen lassen; own card or a separable pair the index knows)
         const twoWord=[...bases][0]+'lassen',reflexiveHere=indices.some(i=>reflexivePronouns.has(words(i)));
-        const twoWordCards=[...(reflexiveHere?(forms.get('sich '+twoWord)||[]).filter(e=>e.type==='Verb'):[]),
+        const twoWordCards=H!=='lassen'?[]:[...(reflexiveHere?(forms.get('sich '+twoWord)||[]).filter(e=>e.type==='Verb'):[]),
           ...(reflexiveHere?(forms.get('sich '+[...bases][0]+' lassen')||[]).filter(e=>e.type==='Verb'):[]),
           ...(forms.get(twoWord)||[]).filter(e=>e.type==='Verb'&&!e.importedSeparable&&!/^sich\s/u.test(e.word)),
           ...(separatedForms.get(words(l))||[]).filter(pair=>pair.prefix===[...bases][0]&&!pair.entry.importedSeparable).map(pair=>pair.entry)];
@@ -7234,7 +7304,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // Lass uns Freunde sein, Lasst uns fröhlich sein are not seinlassen «бросить»; the full check is letUs below. Only with a word
         // between uns and the infinitive that is no adverb and no nicht — with adverbs alone uns may be the object of the two-word verb:
         // Lass uns nicht fallen! (fallenlassen), Lass uns hier nicht stehen! (stehenlassen))
-        const usAt=words(l+1)===LASSEN_LET_US_PRONOUN?l+1:words(l)==='lassen'&&tokens[l+1]?.[0]==='Sie'&&words(l+2)===LASSEN_LET_US_PRONOUN?l+2:null;
+        const usAt=H!=='lassen'?null:words(l+1)===LASSEN_LET_US_PRONOUN?l+1:words(l)==='lassen'&&tokens[l+1]?.[0]==='Sie'&&words(l+2)===LASSEN_LET_US_PRONOUN?l+2:null;
         const adverbWord=i=>{const e=forms.get(words(i))||[];return words(i)==='nicht'||e.length>0&&e.every(x=>x.type==='Adverb');};
         const letUsShape=usAt!==null&&part>usAt&&Array.from({length:part-usAt-1},(_,k)=>usAt+1+k).some(i=>!adverbWord(i));
         if(twoWordWins&&!(agreeingReflexive&&lassenSelfInfinitive([...bases][0]))&&!letUsShape)continue;
@@ -7251,6 +7321,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           (a.base==='möchten'&&a.tense==='Präsens'||a.base==='mögen'&&a.tense==='Konjunktiv II'));
         const headBases=new Set(headRows.map(a=>moechteHead?'mögen':a.base));if(headBases.size!==1)continue;
         if(moechteHead&&subjectPersons[words(start)]&&!headRows.some(a=>subjectPersons[words(start)].includes(a.person)))continue;
+        // (links chat 14.11: a form that is Präsens ihr and Imperativ — helft, laßt — takes the Imperativ the single verb would take by
+        // the shared imperative signs of formFeatures: kommt und helft mir lesen)
+        if(!moechteHead&&outer===null&&headRows.some(a=>a.kind==='imperative')&&headRows.some(a=>a.kind==='finite')&&
+          formFeatures(tokens[l][0],{pos:'Verb',lemma:H},{inflections:[]},{sentence,tokenOffset:tokens[l].index})?.tense==='Imperativ')
+          headRows=headRows.filter(a=>a.kind==='imperative');
         const head=moechteHead?headRows.find(a=>a.base==='mögen'):headRows[0],linked=[l,part,...(outer!==null?[outer]:[]),...(part===l-2&&words(l-1)==='zu'?[l-1]:[])];
         // Conditional/reported perfect replacement needs its own tense label.
         if(outer!==null&&head.base==='haben'&&!headRows.some(a=>['Präsens','Präteritum'].includes(a.tense)))continue;
@@ -7258,7 +7333,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // infinitive of the same lassen)
         let secondBefore=null;
         if(part<l&&words(part-1)==='und'&&part-2>=start&&connected(part-2,part-1)&&connected(part-1,part)&&words(part-3)!=='zu'&&
-          /^\p{Ll}/u.test(tokens[part-2][0])&&infinitives(part-2).some(a=>a.base!=='lassen')&&!['wir','sie','ihr'].includes(words(part-3))&&!finite(part-2).some(a=>a.entry&&a.kind==='finite'&&!infinitives(part-2).length)){
+          /^\p{Ll}/u.test(tokens[part-2][0])&&infinitives(part-2).some(a=>a.base!==H)&&!['wir','sie','ihr'].includes(words(part-3))&&!finite(part-2).some(a=>a.entry&&a.kind==='finite'&&!infinitives(part-2).length)){
           secondBefore={index:part-2,rows:infinitives(part-2)};linked.push(part-2);
         }
         // (L15 step 4, reference F12-B5j / k: uns right after the imperative — lass / laß uns, lasst / laßt uns at the start of the part or
@@ -7267,7 +7342,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (review 30.10: not after a subject — ich lass uns eine Pizza kommen —, not with ihr anywhere before it — Ihr kommt zu spät und
         // lasst uns warten —, not in a question — Lassen Sie uns warten?)
         const question=/^[^.!;:]*\?/u.test(sentence.slice(tokens[l].index));
-        if(outer===null&&!question&&!subjectPersons[words(l-1)]&&!tokens.slice(0,l).some(t=>norm(t[0])==='ihr')){
+        if(H==='lassen'&&outer===null&&!question&&!subjectPersons[words(l-1)]&&!tokens.slice(0,l).some(t=>norm(t[0])==='ihr')){
           const adverbOnly=i=>{const e=forms.get(words(i))||[];return e.length>0&&e.every(x=>x.type==='Adverb');};
           const at=words(l+1)===LASSEN_LET_US_PRONOUN?l+1:null;
           if(at!==null&&head.kind==='imperative'&&words(l)!=='lassen'&&words(l-1)!=='zu')letUs=at;
@@ -7369,7 +7444,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const tailRows=await Promise.all(Array.from({length:tail-next+1},(_,k)=>tokenAnalyses(lassenForm(tokens[next+k][0]),lassenLexicalLookup, 'lassenGroup')));
             const last=tailRows[tail-next]||[];
             const verbal=rs=>rs.some(a=>['finite','imperative','infinitive'].includes(a.kind));
-            if(connected(end+1,next) && last.some(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(tail)&&a.base!=='lassen') &&
+            if(connected(end+1,next) && last.some(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(tail)&&a.base!==H) &&
               /^\p{Ll}/u.test(tokens[tail][0]) && words(tail-1)!=='zu' && tailRows.slice(0,-1).every((rs,k)=>!verbal(rs)||/^\p{Lu}/u.test(tokens[next+k][0])||DETERMINER_WORD.test(words(next+k))) &&
               // (review 30.10: a possible plural subject before it makes the -en word a finite verb of a new clause — und wir essen, und sie
               // lachen, und alle lachen, und die Eltern ruhen: no second infinitive then)
@@ -7394,7 +7469,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             while(tail+1<tokens.length&&connected(tail,tail+1)&&!boundary(tail+1))tail++;
             const tailRows=await Promise.all(Array.from({length:tail-next+1},(_,k)=>tokenAnalyses(lassenForm(tokens[next+k][0]),lassenLexicalLookup, 'lassenGroup')));
             const last=tailRows[tail-next]||[];
-            independent=connected(end+1,next) && last.some(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(tail)&&a.base!=='lassen') &&
+            independent=connected(end+1,next) && last.some(a=>a.kind==='infinitive'&&!a.zu&&!a.detached&&a.base===words(tail)&&a.base!==H) &&
               /^[a-zäöü]/u.test(tokens[tail][0]) && words(tail-1)!=='zu' &&
               tailRows.slice(0,-1).every((rs,k)=>!rs.length&&(forms.get(words(next+k))||[]).some(e=>e.type==='Adverb'));
           }
@@ -7403,7 +7478,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const coordinated=second||secondBefore;
         if(second)linked.push(second.index);
         const lexical=[...new Map([...inner,...(coordinated?coordinated.rows:[])].map(a=>[a.entry?.id||a.base,a.entry||{word:a.base,type:'Verb'}])).values()];
-        const lassen=(forms.get(words(l))||[]).filter(e=>e.type==='Verb'&&e.word==='lassen');
+        const lassen=(forms.get(words(l))||[]).filter(e=>e.type==='Verb'&&e.word===H);
         if(!lassen.length)continue;
         const helpers=headRows.map(a=>a.entry).filter(Boolean);
         // (L15 step 1: laß / lass with ich after it is the colloquial ich form, not the imperative — das laß ich mir gefallen)
@@ -7413,7 +7488,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (advisor 09.11: the wenn / falls / sofern pair of #22 (в) answer 2 also for lassen itself — ließen is Präteritum and Konjunktiv II:
         // Wenn sie das Haus bauen ließen, wären sie froh → «Konjunktiv II»)
         if(outer===null&&tense==='Präteritum'&&headRows.some(a=>a.tense==='Konjunktiv II')&&
-          weakPastIndicative('lassen',tokens[l].index,{sentence},true)==='konj')tense='Konjunktiv II';
+          weakPastIndicative(H,tokens[l].index,{sentence},true)==='konj')tense='Konjunktiv II';
         const replacement=outer!==null&&head.base==='haben';
         // (L15 steps 2 / 3, advisor 29.10 — strict: «здесь: …» only where the form proves it; otherwise the plain card with the link)
         const preposition=i=>i>=0&&((forms.get(words(i))||[]).some(e=>e.type==='preposition')||/^(?:als|wie|im|am|zum|zur|vom|beim|ins|ans|aufs|durchs|fürs|ums|unters|übers|vors|hinters)$/u.test(words(i)));
@@ -7424,7 +7499,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const reflexiveIndex=indices.find(i=>reflexivePronouns.has(words(i))&&!preposition(i-1)&&agrees(i));
         const reflexive=reflexiveIndex===undefined?'':words(reflexiveIndex);
         let sense=letUs!==null?'letUs':null;
-        if(sense===null&&reflexive&&!(head.kind==='imperative'&&reflexive==='uns')){
+        if(H==='lassen'&&sense===null&&reflexive&&!(head.kind==='imperative'&&reflexive==='uns')){
           // noun groups and pronouns outside prepositional groups; a capital that is no own noun continues the group (Bruder Lustig,
           // Windows Defender); und joins coordinated groups (der Windows Defender und der Internet Explorer)
           const members=[];
@@ -7509,8 +7584,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (the two-word card wins unless the group proved «сам (упал)» — Hans ließ sich das Glas fallen: fallenlassen «уронить»)
         if(twoWordWins&&sense!=='self'&&!(sense==='letUs'&&letUsShape))continue;
         if(sense&&sense!=='letUs')linked.push(reflexiveIndex);
-        groups.push({id:'lassen-infinitive',...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · lassen':tense==='Futur I'||tense==='Konjunktiv II'?tense+' · lassen':'lassen + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
-          note:{ru:(replacement?tense+' · haben + Infinitiv + lassen':outer!==null?tense+' · ':'')+(replacement?'':'lassen + инфинитив')+' · значение определяется контекстом'+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + lassen':outer!==null?tense+' · ':'')+(replacement?'':'lassen + infinitive')+' · meaning depends on context'+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
+        groups.push({id:'lassen-infinitive',...(H!=='lassen'?{head:H}:{}),...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · '+H:tense==='Futur I'||tense==='Konjunktiv II'?tense+' · '+H:H+' + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
+          note:{ru:(replacement?tense+' · haben + Infinitiv + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + инфинитив')+(H==='lassen'?' · значение определяется контекстом':'')+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + infinitive')+(H==='lassen'?' · meaning depends on context':'')+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
       }
       return groups.length===1?groups[0]:null;
@@ -7522,6 +7597,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const constructionProducers = Object.freeze([
       {id:'future-perfect',produce:(word,context) => futurePerfectGroup(word,context),nounGroups:true},
       {id:'lassen',produce:(word,context,candidates) => lassenGroup(word,context,candidates)},
+      // (links chat 14.11: sehen / hören / fühlen / spüren / helfen + a bare infinitive — the same group function with its own head)
+      {id:'perception-infinitive',produce:(word,context,candidates) => lassenGroup(word,context,candidates,PERCEPTION_GROUP_HEADS)},
       {id:'zu',produce:(word,context) => reflexiveGroupLemma(zuGroup(word,context),context),nounGroups:true},
       {id:'werden',produce:(word,context) => werdenGroup(word,context),nounGroups:true},
       {id:'verb-group',produce:(word,context) => reflexiveGroupLemma(verbGroup(word,context),context),nounGroups:true},

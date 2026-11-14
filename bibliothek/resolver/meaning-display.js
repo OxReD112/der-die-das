@@ -32,6 +32,12 @@
   // their brackets while the translation fits about three popup lines; the rest is
   // counted for the «ещё N значений» link to the dictionary details.
   const FIT_LIMIT = 80;
+  // lassen + infinitive (links chat 14.11): the meaning of the card marked «(с инфинитивом)» / «(with an infinitive)» (WN batch 104);
+  // the infinitives with which lassen keeps «оставлять» first; fallen / sein / warten lassen keep the card as it is
+  const LASSEN_INFINITIVE_SENSE = /^\((?:с инфинитивом|with an infinitive)\)/u;
+  const LASSEN_LET_SENSE = /^(?:позволять|to let)(?![\p{L}])/u;
+  const LASSEN_LEAVE_INFINITIVES = new Set(['liegen','stehen','sitzen','hängen','stecken']);
+  const LASSEN_OWN_INFINITIVES = new Set(['fallen','sein','warten']);
   function meaningParts(text) {
     const parts = [];
     let depth = 0, current = '';
@@ -177,7 +183,19 @@
     if (language === 'en' && /^gerund of /i.test(text.trim())) return 'verbal noun';
     // A confirmed lassen bracket does not pick permission versus causation.
     // Keep every sense of its existing card visible instead of clipping to two.
-    if (candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return text.trim();
+    if (candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') {
+      // (links chat 14.11, advisor; WN batch 104: with an infinitive linked the meaning «(с инфинитивом) велеть, поручить, дать
+      // (сделать)» comes first — not with liegen / stehen / sitzen / hängen / stecken («оставить»), not with fallen / sein / warten lassen
+      // and not where the group proved its own sense: «давай(те)», «можно», «сам (упал)»)
+      const k = candidate.construction, inner = String(k.lemma || '').split(' und ').map(norm);
+      if (!k.sense && !inner.some(x => LASSEN_LEAVE_INFINITIVES.has(x) || LASSEN_OWN_INFINITIVES.has(x))) {
+        // (then «позволять (сделать)» / «to let, to allow» — the advisor's «велеть / дать, позволить» — before «оставлять»)
+        const parts = meaningParts(text).map(p => p.trim()), at = parts.findIndex(p => LASSEN_INFINITIVE_SENSE.test(p));
+        const let_ = parts.findIndex(p => LASSEN_LET_SENSE.test(p));
+        if (at > 0) return [parts[at], ...(let_ >= 0 ? [parts[let_]] : []), ...parts.filter((_, i) => i !== at && i !== let_)].join('; ');
+      }
+      return text.trim();
+    }
     return ownCard(candidate) ? fit(text).text : compact(text);
   }
   // WN batch 91 (cards chat + advisor 12.11): old meanings of an own card (`extra_meanings` {ru, en, register}) are never in the
@@ -486,16 +504,18 @@
         // (step 4, reference F12-B5a: a simple tense only on the finite form — lassen under a modal is an infinitive: sollte … reparieren
         // lassen «mit reparieren»; ließe itself is Konjunktiv II, the würde rule is for the modal möchte only)
         const ownTense = k.outerModal ? null : k.tense && k.tense !== 'Präsens' ? k.tense : null;
-        if (own === 'lassen') return {marks:[ownTense ? `${ownTense} mit ${name}` : `mit ${name}`], role:k.sense ? `lassen_${k.sense}` : null, spans};
+        // (links chat 14.11: the same group with a verb of perception / helfen as its head — sah ihn kommen, lösen helfen)
+        const headVerb = k.head || 'lassen';
+        if (own === headVerb) return {marks:[ownTense ? `${ownTense} mit ${name}` : `mit ${name}`], role:k.sense ? `lassen_${k.sense}` : null, spans};
         // (L15 step 4, reference F12-B5j: uns of lass uns keeps its own card «нас» with a line under it — see cardCore)
         if (k.sense === 'letUs' && candidate.item?.type === 'Pronomen') return {marks:[], role:null, spans};
         // (advisor 29.10, reference F12-B5a / B5c: the infinitive under lassen shows «mit lassen» — a simple tense only on ließ / lässt,
         // as with modals; a compound tense stays: bestreichen «Plusquamperfekt mit lassen»; L19: two infinitives joined by und, each the main verb)
         const infinitiveHere = isMain || String(name).split(' und ').map(verbBase).includes(own);
         const compound = tense && /^(?:Perfekt|Plusquamperfekt|Futur I|Konjunktiv II)$/u.test(tense) ? tense : null;
-        if (infinitiveHere) return {marks:[compound ? `${compound} mit lassen` : 'mit lassen'], role:null, spans};
-        if (MODALS.has(own)) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name} lassen`], role:null, spans}; }
-        return {marks:[`${tense || 'Präsens'} mit ${name} lassen`],
+        if (infinitiveHere) return {marks:[compound ? `${compound} mit ${headVerb}` : `mit ${headVerb}`], role:null, spans};
+        if (MODALS.has(own)) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name} ${headVerb}`], role:null, spans}; }
+        return {marks:[`${tense || 'Präsens'} mit ${name} ${headVerb}`],
           role:tense === 'Perfekt' ? 'perfectHave' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
       }
       // zu inside haben/sein + zu is the same Infinitivpartikel as in 4.8 (agreed 11 Oct 2026).
