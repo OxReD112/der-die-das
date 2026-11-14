@@ -4934,6 +4934,10 @@
         if (joined && !ZU_INFINITIVE_OPENERS.includes(norm(tokens[j][0])) && joinedZuInfinitive(j+1) && /^\s+$/u.test(gap(j,j+1)))
           return j+1===tokens.length-1 || hard(j+1,j+2) || soft(j+1,j+2);
         if (norm(tokens[j+1]?.[0]) !== 'zu' || !tokens[j+2]) return false;
+        // (links chat п. 94 (Б), advisor 14.11: um / ohne / statt opening its part after a comma or a dash is the opener of its own zu
+        // group — kam, um zu helfen; drehte sich um …, um zu sehen —, not the particle of the verb before the comma; fing an zu weinen
+        // without a comma stays)
+        if (ZU_INFINITIVE_OPENERS.includes(norm(tokens[j][0])) && j > 0 && (hard(j-1,j) || soft(j-1,j))) return false;
         if (!/^\s+$/u.test(gap(j,j+1)) || !/^\s+$/u.test(gap(j+1,j+2)) || !zuInfinitiveWord(j+2)) return false;
         return j+2===tokens.length-1 || hard(j+2,j+3) || soft(j+2,j+3);
       };
@@ -6241,7 +6245,8 @@
       const clicked = clickedTokenIndex(tokens,context.tokenOffset,word);
       if (clicked < 0) return null;
       const gapAfter = i => tokens[i+1] ? sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index) : '';
-      const breaks = i => /[,.;:!?()\[\]–—"“”„«»]/u.test(gapAfter(i));
+      // (п. 94 (В): an ellipsis before a capital ends the part too — um ein wenig Erfahrung zu sammeln … Es heißt; not a hesitation — um … um nach Hogwarts zu fahren)
+      const breaks = i => /[,.;:!?()\[\]–—"“”„«»]/u.test(gapAfter(i)) || /…/u.test(gapAfter(i)) && /^\p{Lu}/u.test(tokens[i+1]?.[0] ?? '');
       // zu at z with its infinitive at z+1 closing the group, or null.
       const core = async z => {
         const v = z+1;
@@ -6315,9 +6320,16 @@
       // opener starts its clause part (text start or after punctuation) and the
       // zu group closes the same part; um before a time (um 8 Uhr) is a preposition.
       const openerWords = {um:'um … zu',ohne:'ohne … zu',statt:'statt … zu',anstatt:'statt … zu'};
+      // (п. 94 (В), advisor 14.11: a focus word before the opener opens the part with it — nur um ihm zu helfen, einfach um sich zu
+      // vergewissern; a second opener after und / oder continues an opener's part — um … zu bleiben und um es steigern zu können)
+      const OPENER_FOCUS_WORDS = new Set(['nur','einfach','bloß','allein','schon','gerade','eben']);
+      const partStartBefore = i => { let k = i; while (k > 0 && !breaks(k-1)) k--; return k; };
       const openerAt = i => {
         const record = openerWords[norm(tokens[i]?.[0])];
-        if (!record || i > 0 && !breaks(i-1)) return null;
+        if (!record) return null;
+        const focus = i > 0 && OPENER_FOCUS_WORDS.has(norm(tokens[i-1][0])) && (i === 1 || breaks(i-2));
+        const second = i > 1 && ['und','oder'].includes(norm(tokens[i-1][0])) && !breaks(i-2) && openerWords[norm(tokens[partStartBefore(i-1)][0])] !== undefined;
+        if (i > 0 && !breaks(i-1) && !focus && !second) return null;
         if (/\d/u.test(gapAfter(i)) || norm(tokens[i+1]?.[0]) === 'uhr') return null;
         return (lemmas.get(norm(record)) || []).find(e => e.type === 'Konjunktion') || null;
       };
