@@ -18226,7 +18226,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -18585,6 +18585,45 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const end = (/[.!?]/u.exec(after) || [""])[0];
       if (end === "?" && at > start && /^(?:was|wer|wen|wem|wessen|wo|wie|wann|warum|wieso|weshalb|wohin|woher|welche[rsmn]?)$/u.test(norm(tokens[start][0]))) return pick(adverb, WOHL_LINES.question, "Partikel");
       return result;
+    }
+    // Grimm rest (2) (advisor 14.11): wo after a comma right after a time word — «здесь: когда» (In den alten Zeiten, wo …; an dem Tage,
+    // wo …; der Tag war gekommen, wo …; Jetzt, wo du dabei bist); the time noun may be followed by aber / denn / nun or by up to two
+    // lowercase verb words before the comma (die Zeit kam, wo …). Not a question (Nun, wo soll's denn sein?), not auf diese Stunde
+    // («до сих пор»: weiß niemand auf diese Stunde, wo sie hingelaufen ist), not a place between (zog in dieser Zeit nach Ungarn, wo …),
+    // not wo … auch / immer («где бы ни»).
+    const WO_WHEN_LINE = {ru:"здесь: когда", en:"here: when"};
+    const WO_TIME_NOUNS = /^(?:Tag|Tage|Tagen|Zeit|Zeiten|Augenblick|Augenblicke|Augenblicken|Moment|Momente|Momenten|Abend|Abende|Abenden|Morgen|Nacht|Nächte|Nächten|Stunde|Stunden|Jahr|Jahre|Jahren|Zeitpunkt|Woche|Wochen|Monat|Monate|Monaten|Minute|Minuten|Sekunde|Winter|Sommer|Frühling|Herbst|Mittag|Mal|Male|Zeitalter|Jahrzehnt|Jahrhundert)$/u;
+    async function woWhen(word, context, result) {
+      if (word !== "wo" || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const adverb = candidates.find(c => c.source === "main" && norm(c.lemma) === "wo" && canonicalPos(c.item?.type || c.pos) === "Adverb");
+      if (!adverb || result.selected !== adverb || adverb.construction) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'woWhen');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 1) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      if (!/^\s*,\s*$/u.test(gap(at))) return result;
+      const after = sentence.slice(tokens[at].index + tokens[at][0].length);
+      if (((/[.!?;]/u.exec(after)) || [""])[0] === "?") return result;
+      // (tests chat 14.11) wo … auch / immer in its part — «где бы ни» (Er wartete den ganzen Tag, wo er auch war.)
+      if (/\b(?:auch|immer)\b/u.test(after.split(/[,;:.!?»«„“"–—()]/u)[0])) return result;
+      let i = at - 1;
+      const timeAt = j => j >= 0 && WO_TIME_NOUNS.test(tokens[j][0]);
+      let ok = false;
+      if (/^(?:jetzt|nun|heute|damals)$/iu.test(tokens[i][0]) && (i === 0 || /[,;:.!?»«„“"–—]/u.test(gap(i)))) ok = true;
+      else {
+        if (/^(?:aber|denn|nun|doch)$/u.test(tokens[i][0])) i--;
+        for (let k = 0; k < 3 && i >= 0 && !ok; k++) {
+          if (timeAt(i)) { ok = true; break; }
+          if (!/^\p{Ll}+$/u.test(tokens[i][0]) || /^(?:in|an|auf|aus|bei|mit|nach|von|zu|zum|zur|im|am|vom|beim|ins|für|über|unter|vor|hinter|durch|gegen|um|bis|der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|und|oder)$/u.test(tokens[i][0])) break;
+          if (i > 0 && /[,;:.!?»«„“"–—()]/u.test(gap(i))) break;
+          i--;
+        }
+        if (ok && i >= 2 && norm(tokens[i][0]) === "stunde" && /^(?:diese|dieser)$/u.test(norm(tokens[i-1][0])) && norm(tokens[i-2][0]) === "auf") ok = false;
+      }
+      if (!ok) return result;
+      const x = {...adverb, translation:{...WO_WHEN_LINE}, construction:{id:"modal-particle", label:"wo", spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
+      return {...result, candidates:[x, ...candidates.filter(y => y !== adverb)], selected:x, preferred:x, status:"resolved"};
     }
     // Grimm rest (1) (advisor 14.11): zu right before an uninflected adjective / adverb with no noun after it — our card «слишком»
     // (zu groß, zu spät, zu viel gegessen, viel zu schwach); not zu + an inflected word (zu großen Ehren — the preposition), not an
