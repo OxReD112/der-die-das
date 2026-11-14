@@ -18137,7 +18137,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -18375,6 +18375,94 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (Was denn? — no verb needed in a question)
       if (end === "?" && at > start) return particle();
       return result;
+    }
+    // G51 doch / mal (advisor 14.11, reference F12-G14b / d): doch or mal in a part that an imperative opens — the verb first, after the
+    // opener words of IMPERATIVE_OPENER_WORDS only (So nimm doch was, Sieh doch mal!, Komm mal her!, Stellen Sie ihn doch …) — is the
+    // particle: «Partikel · здесь: же, ну (настойчиво)» / «здесь: -ка (смягчает просьбу)». Elsewhere (statements, questions, wishes) the
+    // card stays as before; doch first in its part stays the conjunction (G94).
+    const IMPERATIVE_PARTICLE_LINES = {
+      doch:{ru:"здесь: же, ну (настойчиво)", en:"here: come on, do (insisting)"},
+      mal:{ru:"здесь: -ка (смягчает просьбу)", en:"here: just (softens a request)"}
+    };
+    const DOCH_AND_YET_LINE = {ru:"здесь: и всё-таки", en:"here: and yet"};
+    const DOCH_WISH_LINE = {ru:"здесь: хоть бы, если бы только", en:"here: if only"};
+    const MAL_TIME_LINES = {erst:{ru:"здесь: сначала, для начала", en:"here: first, for now"}, noch:{ru:"здесь: ещё раз", en:"here: once more"},
+      einmal:{ru:"здесь: однажды, когда-то (= einmal)", en:"here: once, at one time (= einmal)"}};
+    async function imperativeParticle(word, context, result, pipeline) {
+      const f = norm(word), line = IMPERATIVE_PARTICLE_LINES[f];
+      if (!line || !/^\p{Ll}/u.test(String(word)) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const own = candidates.find(c => c.source === "main" && norm(c.lemma) === f && canonicalPos(c.item?.type || c.pos) === "Adverb");
+      if (!own || result.selected && result.selected !== own || result.selected?.construction) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'imperativeParticle');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 1) return result;
+      // (erst mal, noch mal, ein mal — the time words «сначала», «ещё раз», not the particle: Suchen wir uns erst mal ein Zimmer)
+      // (tests chat 14.11: erst mal «сначала», noch mal «ещё раз» — their own line, not the card that opens with «-ка»)
+      const asParticle = shown => { const particle = {...own, posLabel:"Partikel", translation:{...shown}, construction:{id:"modal-particle", label:f, spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
+        return {...result, candidates:[particle, ...candidates.filter(x => x !== own)], selected:particle, preferred:particle, status:"resolved"}; };
+      // (the time word keeps «Adverb»: erst mal, noch mal, es war mal)
+      const asTime = shown => { const x = asParticle(shown), sel = {...x.selected, posLabel:"Adverb"}; return {...x, candidates:[sel, ...x.candidates.slice(1)], selected:sel, preferred:sel}; };
+      if (f === "mal" && /^(?:erst|noch)$/u.test(norm(tokens[at-1][0]))) return asTime(MAL_TIME_LINES[norm(tokens[at-1][0])]);
+      if (f === "mal" && /^(?:ein|zum|auf|wieder|jedes|nächstes|letztes|dieses)$/u.test(norm(tokens[at-1][0]))) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const boundary = i => i === 0 || /[,;:.!?»«„“"–—()…]|\s-\s/u.test(gap(i));
+      let start = at; while (!boundary(start)) start--;
+      // (advisor 14.11, tests chat: und doch opening its part — «здесь: и всё-таки» / «and yet»: Und doch bewegt sie sich; not doch noch /
+      // doch nicht — by form they are also «ведь / же»: Du hast doch noch Zeit, Das geht doch nicht!)
+      if (f === "doch" && at === start + 1 && norm(tokens[start][0]) === "und") return asTime(DOCH_AND_YET_LINE);
+      let v = start; while (v < at && IMPERATIVE_OPENER_WORDS.test(norm(tokens[v][0]))) v++;
+      if (v >= at) return result;
+      const vContext = {...context, tokenOffset:tokens[v].index};
+      let r = await pipeline(tokens[v][0], vContext);
+      // (a capital verb before Sie / wir — Stellen Sie ihn doch …: the verb reading, as the tap on it gets it)
+      if (r?.selected?.formFeatures?.tense !== "Imperativ") { const cv = capitalVerbBeforePronoun(tokens[v][0], vContext); if (cv) r = await pipeline(cv.word, cv.context); }
+      let shown = line;
+      if (r?.selected?.formFeatures?.tense !== "Imperativ") {
+        // G51 step 2 (advisor 14.11, WN batch 107): doch in a wish — Konjunktiv II first in its part (Hätte er doch nur eine Uhr!) or
+        // wenn … doch … Konjunktiv II (Wenn wir doch ein Kind hätten!) — «здесь: хоть бы, если бы только». Not a condition with its main
+        // part after a comma — a Konjunktiv II verb or so / dann / da (Hätte er doch Zeit gehabt, wäre er gekommen; Wenn er doch käme,
+        // dann …); a verb in the indicative there is not the main part of a condition (Hätte er den Brief doch nur geöffnet, dachte Harry).
+        if (f === "mal") {
+          // (tests chat 14.11: mal = einmal in a statement in the past — Es war mal ein König, Ich war mal in Berlin — «здесь: однажды,
+          // когда-то», not the card that opens with «-ка»; a question or the present keeps the card: Kannst du mal kommen?)
+          let e = at + 1; while (e < tokens.length && !boundary(e)) e++;
+          const tail = e < tokens.length ? gap(e) : sentence.slice(tokens[e-1].index + tokens[e-1][0].length);
+          if (/\?/u.test(tail)) return result;
+          // (gerade mal «всего лишь», mal wieder «опять» — not einmal)
+          // (tests chat 14.11: nicht mal «даже не», nun mal / halt mal «уж так» — not einmal either)
+          if (/^(?:gerade|eben|grad|nicht|nun|halt)$/u.test(norm(tokens[at-1][0])) || at + 1 < e && norm(tokens[at+1][0]) === "wieder") return result;
+          // (train r113: mal as the noun written small — ein paar mal «несколько раз», das nächste mal «в следующий раз», zwei mal)
+          if (/^(?:ein|eine|einige|paar|das|dies|dieses|jedes|manches|viele|zig|\d+|\p{L}+(?:te|ten|tes|ste|sten))$/u.test(norm(tokens[at-1][0]))) return result;
+          const past = x => ["Präteritum","Perfekt","Plusquamperfekt"].includes(x?.selected?.formFeatures?.tense) ||
+            x?.selected?.construction?.id === "perfect-group" && ["Perfekt","Plusquamperfekt"].includes(x.selected.construction.label);
+          for (let i = start; i < e; i++) {
+            if (i === at || !(await tokenAnalyses(tokens[i][0],undefined,'imperativeParticle')).some(a => a.kind === "finite")) continue;
+            const x = i === v ? r : await pipeline(tokens[i][0], {...context, tokenOffset:tokens[i].index});
+            if (canonicalPos(x?.selected?.pos) !== "Verb") continue;
+            if (!past(x)) return result;
+            return asTime(MAL_TIME_LINES.einmal);
+          }
+          return result;
+        }
+        if (f !== "doch") return result;
+        // (Konjunktiv II of the verb, of a modal group, or of a past group — Wäre ich doch nur zu Hause geblieben!)
+        const kII = x => x?.selected?.formFeatures?.tense === "Konjunktiv II" || x?.selected?.formFeatures?.modalMood === "Konjunktiv II" ||
+          x?.selected?.construction?.id === "perfect-group" && x.selected.construction.label === "Konjunktiv II";
+        let e = at + 1; while (e < tokens.length && !boundary(e)) e++;
+        const tail = e < tokens.length ? gap(e) : sentence.slice(tokens[e-1].index + tokens[e-1][0].length);
+        // (a closing quote after the comma ends the speech: »Wenn ich doch … könnte,« sprach er — the next verb is the speech tag)
+        if (/^\s*[,;:–—-]/u.test(tail) && !/[»«“”"‘’]/u.test(tail) && e < tokens.length && (/^(?:so|dann|da)$/u.test(norm(tokens[e][0])) ||
+          (await tokenAnalyses(tokens[e][0],undefined,'imperativeParticle')).some(a => a.kind === "finite" && /Konjunktiv II/u.test(String(a.tense || "") + String(a.mood || ""))))) return result;
+        // (the Konjunktiv II verb opens its part itself, or after ach / oh only — so / da / dann before it make the consequence of a
+        // condition: so wären wir doch zusammen gestorben, da wäre mir doch eine Ziege lieber gewesen)
+        const opensItself = tokens.slice(start, v).every(t => /^(?:ach|oh|o|und)$/u.test(norm(t[0])));
+        const wish = norm(tokens[v][0]) === "wenn" ? e - 1 > at && kII(await pipeline(tokens[e-1][0], {...context, tokenOffset:tokens[e-1].index})) : opensItself && kII(r);
+        if (!wish) return result;
+        shown = DOCH_WISH_LINE;
+      }
+      const particle = {...own, posLabel:"Partikel", translation:{...shown}, construction:{id:"modal-particle", label:f, spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
+      return {...result, candidates:[particle, ...candidates.filter(x => x !== own)], selected:particle, preferred:particle, status:"resolved"};
     }
     // G51 step 4 (advisor 29–31.10, WN batch 24 — the conjunction card doch): doch first in its part — at the start of the sentence or
     // right after a mark (…, doch der Gesang …; Doch seine Freiheit …; …; doch …) — is the conjunction «но, однако»; elsewhere (Komm doch

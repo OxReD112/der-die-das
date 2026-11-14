@@ -967,13 +967,13 @@
   {
     "id": "adverb-085",
     "word": "doch",
-    "translation_ru": "всё-таки; же; да (в ответ на отрицание)",
-    "translation_en": "after all; yes (contradicting a negative)",
+    "translation_ru": "всё-таки; же, ну, ведь; да (в ответ на отрицание); (в желаниях) хоть бы",
+    "translation_en": "after all; just, do; yes (contradicting a negative); (in wishes) if only",
     "example_de": "Kommst du nicht mit? – Doch, ich komme mit!",
     "example_ru": "Ты не пойдёшь с нами? – Да нет, пойду!",
     "example_en": "Aren't you coming? – Yes, I am!",
-    "usage_note_ru": "Ответ «да» на отрицательный вопрос — doch, а не ja. Как частица смягчает просьбу или выражает упрёк: Komm doch mit! — Ну пойдём же! Das weißt du doch! — Ты же это знаешь!",
-    "usage_note_en": "The answer “yes” to a negative question is doch, not ja. As a particle it softens a request or adds reproach: Komm doch mit! — Do come along! Das weißt du doch! — You know that!",
+    "usage_note_ru": "Ответ «да» на отрицательный вопрос — doch, а не ja. При повелительном — настойчиво: Komm doch mit! — Ну пойдём же! Sei doch still! — Да замолчи же! В утверждении — упрёк, напоминание: Das weißt du doch! — Ты же это знаешь! В желаниях (часто с nur) — «ну хоть бы, только бы, если бы только»: Hätte er doch nur eine Uhr! — Если бы только у него были часы! Wenn wir doch ein Kind hätten! — Ах, если бы у нас был ребёнок! Союз doch «но, однако» — отдельная карточка.",
+    "usage_note_en": "The answer “yes” to a negative question is doch, not ja. With an imperative it insists: Komm doch mit! — Do come along! Sei doch still! — Do be quiet! In a statement it reproaches or reminds: Das weißt du doch! — But you know that! In wishes (often with nur) — “if only”: Hätte er doch nur eine Uhr! — If only he had a watch! Wenn wir doch ein Kind hätten! — If only we had a child! The conjunction doch “but, however” is a separate card.",
     "example_cloze": "Kommst du nicht mit? – {{c1::Doch}}, ich komme mit!"
   },
   {
@@ -1848,13 +1848,13 @@
   {
     "id": "adverb-165",
     "word": "mal",
-    "translation_ru": "раз; -ка (смягчает просьбу)",
-    "translation_en": "once; times; just (softens a request)",
+    "translation_ru": "-ка (смягчает просьбу, приказ); когда-нибудь, однажды (= einmal); умножить на (2 mal 3)",
+    "translation_en": "just (softens a request or an order); ever, some time (= einmal); times (2 mal 3)",
     "example_de": "Kannst du mir mal helfen?",
     "example_ru": "Можешь мне помочь?",
     "example_en": "Can you give me a hand?",
-    "usage_note_ru": "Как частица смягчает просьбу: Komm mal her! Сокращение от einmal: Warst du schon mal hier? В математике: drei mal vier — три умножить на четыре. Существительное: das Mal (раз).",
-    "usage_note_en": "As a particle it softens a request: Komm mal her! Short for einmal: Warst du schon mal hier? In maths: drei mal vier — three times four. Noun: das Mal (time, occasion).",
+    "usage_note_ru": "Как частица смягчает просьбу или приказ: Komm mal her! — Иди-ка сюда! Kannst du mir mal helfen? — Не поможешь мне? nun mal — уж так: Das ist nun mal so. Сокращение от einmal: Warst du schon mal hier? — Ты когда-нибудь здесь был? В математике: drei mal vier — три умножить на четыре. Существительное: das Mal (раз).",
+    "usage_note_en": "As a particle it softens a request or an order: Komm mal her! — Come here, will you! Kannst du mir mal helfen? — Could you give me a hand? nun mal — just: Das ist nun mal so. Short for einmal: Warst du schon mal hier? — Have you ever been here? In maths: drei mal vier — three times four. Noun: das Mal (time, occasion).",
     "example_cloze": "Kannst du mir {{c1::mal}} helfen?"
   },
   {
