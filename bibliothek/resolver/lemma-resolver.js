@@ -8603,7 +8603,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (w(i) === "es" && i === head+1 && head > start && (NOMINATIVE_SUBJECT_PRONOUN.test(w(head-1)) ||
             /^\p{Lu}/u.test(tokens[head-1][0]) && head-2 >= start && SUBJECT_DETERMINER.test(w(head-2)))) return true;
       }
-      return false;
+      // (links chat, advisor 13.11, claude/HATTE_HAETTE_COUNT_2026-11-13_RU.md (4): also a noun-phrase object, a da(r)- word or a clause
+      // right after the participle — hätte ich sofort das Gehöft verlassen, hätte seine Mannschaft Anweisungen gebraucht, hätten wir darauf
+      // geachtet, hätten bewiesen, dass …; not Der Laden hätte geöffnet (the noun is the subject); the request branch gern + adjective stays)
+      // (a reflexive sich in the part keeps the reflexive group — als hätte sich … eine Faust um sein Herz geschlossen)
+      if ([...Array(end - start + 1).keys()].some(n => w(n + start) === "sich")) return false;
+      const nominative = [...Array(end - start + 1).keys()].some(n => n + start !== head && NOMINATIVE_SUBJECT_PRONOUN.test(w(n + start)));
+      let groups = 0, open = false;
+      for (let i = start; i <= end; i++) {
+        if (i === head || i === tail) { open = false; continue; }
+        if (/^(?:da|dar)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(w(i))) return true;
+        if (afterPreposition(i) || prepositions.has(w(i))) { open = DETERMINER_WORD.test(w(i)) || prepositions.has(w(i)); continue; }
+        const capital = /^\p{Lu}/u.test(tokens[i][0]) && !(i === start && !(forms.get(w(i)) || []).some(e => e.type === "Nomen"));
+        if (DETERMINER_WORD.test(w(i)) && !open) { groups++; open = true; continue; }
+        if (capital) { if (!open) groups++; open = false; continue; }
+      }
+      if (groups - (nominative ? 0 : 1) > 0) return true;
+      const input = tokens[tail]?.input || "", after = input.slice(tokens[tail].index + tokens[tail][0].length);
+      return /^\s*,\s*(?:dass|daß|ob|wie|was|wer|wo|warum|weshalb|wann)\b/u.test(after);
     }
     function conditionalGuard(tokens,tail,start,end,indices,head = null) {
       const before = norm(tokens[tail-1]?.[0] ?? "");
