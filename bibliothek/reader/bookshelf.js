@@ -3,8 +3,9 @@
   window.BibliothekBookshelf={create({root,onOpen,onDelete,onReset=()=>{},describe,getPreferredId=()=>null}) {
     let dispose=()=>{}, selectedId=null, current=[];
     const hash=value=>Array.from(String(value)).reduce((sum,c)=>(Math.imul(sum,31)+c.codePointAt(0))>>>0,0);
+    let focusBook=()=>{};
     function update(books) {
-      dispose(); current=books;
+      dispose(); current=books; focusBook=()=>{};
       root.replaceChildren();
       if(!books.length)return;
       const controller=new AbortController(), listen=(el,type,fn,opts={})=>el.addEventListener(type,fn,{...opts,signal:controller.signal});
@@ -259,11 +260,13 @@
       // Changing the selected title must never reset the in-progress pose.
       const observer=new ResizeObserver(fit);observer.observe(root.parentElement);
       dispose=()=>{controller.abort();observer.disconnect();clearTimeout(settleTimer);if(motion!==null)cancelAnimationFrame(motion);};
+      // 14.11 (Alena): a book just added — the shelf turns to it, so it stands in the middle
+      focusBook=id=>{const index=books.findIndex(book=>book.id===id);if(index>=0){selectedId=id;choose(index,true);}};
       render();fit();
     }
     // 09.11: titles are measured in Literata — once it has loaded, measure the shelf again if it was drawn before
     if(document.fonts&&!document.fonts.check('12px "Literata Deutsch"'))
       document.fonts.load('12px "Literata Deutsch"').then(()=>{if(current.length&&root.isConnected)update(current);},()=>{});
-    return {update,pause:()=>{dispose();},resume:()=>update(current)};
+    return {update,focus:id=>focusBook(id),pause:()=>{dispose();},resume:()=>update(current)};
   }};
 })();

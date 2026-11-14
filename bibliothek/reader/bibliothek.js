@@ -370,7 +370,14 @@
     const words=Number(book.wordCount||0);
     return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
   }
-  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,onReset:(book,trigger)=>requestBookAction('reset',[book],trigger),describe:describeLibraryBook,getPreferredId:()=>lastOpenedBookId});
+  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,onReset:(book,trigger)=>requestBookAction('reset',[book],trigger),describe:describeLibraryBook,getPreferredId:()=>shelfFocusId||lastOpenedBookId});
+  // 14.11 (Alena): after adding, the shelf turns to the new book and stays on it until a book is opened
+  let shelfFocusId=null;
+  async function showAddedBook(book) {
+    await refreshBooks();
+    shelfFocusId=book.id;
+    bookshelf.focus(book.id);
+  }
   function applyLibraryView() {
     const populated=$bookList.children.length>0;
     const addParent=populated?$("library-actions"):$("empty-library");
@@ -888,7 +895,7 @@
   async function openBook(book) {
     closePopups();
     renderBookText(book);
-    lastOpenedBookId=book.id;
+    lastOpenedBookId=book.id;shelfFocusId=null;
     try { localStorage.setItem("deutschLibraryLastOpenedV1",book.id); } catch (_) {}
     document.title = `${book.title} · Bibliothek`;
     warmUpLookup();
@@ -1731,7 +1738,7 @@
     try {
       const book = await window.BibliothekImport.fromFile(file);
       await importBook(book);
-      await refreshBooks();
+      await showAddedBook(book);
       showToast("Gespeichert.");
     } catch (error) {
       showToast(error instanceof window.BibliothekImport.ImportError ? error.message : "The book could not be saved. Check available browser storage.");
@@ -1746,8 +1753,9 @@
     if (!title || !content) return;
     try {
       reloadBookId=null;
-      await importBook(await window.BibliothekImport.fromText(title, content));
-      $("paste-form").reset();pasteDialog.close(); await refreshBooks(); showToast("Gespeichert.");
+      const book = await window.BibliothekImport.fromText(title, content);
+      await importBook(book);
+      $("paste-form").reset();pasteDialog.close(); await showAddedBook(book); showToast("Gespeichert.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
   $("back-library").addEventListener("click", async () => {
