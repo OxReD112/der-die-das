@@ -1166,10 +1166,17 @@
           possessiveRow && possessives.length ? possessives : pronounCandidates;
         const types = [...new Set(shown.map(c => display.partOfSpeech(c)))];
         const use = pronounLink ? "Reflexiv" : "";
+        // Grimm rest (3) (advisor 14.11): a pronoun contracted with es (mir’s, dir’s, sich’s) — the meanings of the pronoun form itself
+        // (mir «мне / себе», as on mir alone; before, the summary of the whole pronoun «я / себя / себе») and « + это». Not ihr’s (вы / ей — as before).
+        const esStem = candidate?.contraction?.kind === "es" && /^(?:mir|dir|mich|dich|sich|uns|euch)$/iu.test(candidate.contraction.parts?.[0] || "") && candidate.contraction.parts[0] || "";
+        const ESTAIL = {ru:" + это", en:" + it"};
         // the address card's own translation without its note: «вы (к нескольким людям на «ты»)» → «вы» (the form ihr is «вы / ей» across cards)
-        const values = ihrAddress ? String(candidate.item?.[`translation_${locale()}`] || "").replace(/\s*\(.*$/u, "") : roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
-          reference.brief(possessiveRow ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
-        model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
+        // Grimm rest (4) (advisor 14.11): a pronoun line the resolver set for this place («здесь: (тот,) кто» — the free relative wer)
+        // is that card alone with its line and label.
+        const pronounLine = resolverChosePronoun && resolution.selected === candidate && candidate?.construction?.id === "modal-particle" && candidate.translation?.[locale()] ? candidate : null;
+        const values = pronounLine ? pronounLine.translation[locale()] : ihrAddress ? String(candidate.item?.[`translation_${locale()}`] || "").replace(/\s*\(.*$/u, "") : roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
+          reference.brief(possessiveRow ? shown : pronounCandidates,esStem || word,locale()).replace(/^[^·]*·\s*/u, "") + (esStem ? ESTAIL[locale()] : "");
+        model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLine?.posLabel || (pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen"), use].filter(Boolean).join(" · "),
           text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
           // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
           note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};

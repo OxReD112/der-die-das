@@ -18519,7 +18519,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -18917,6 +18917,34 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!ok) return result;
       const x = {...adverb, translation:{...WO_WHEN_LINE}, construction:{id:"modal-particle", label:"wo", spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
       return {...result, candidates:[x, ...candidates.filter(y => y !== adverb)], selected:x, preferred:x, status:"resolved"};
+    }
+    // Grimm rest (4) (advisor 14.11): wer opening the sentence (or a quote / a part after : ; – —) whose part ends with a comma and a
+    // finite verb of the 3rd person singular (verb-final: Wer das Rätsel löst, soll …; Wer nicht hören will, muss fühlen) — the free
+    // relative «здесь: (тот,) кто». Not a question (the finite verb right after wer: Wer ist der Lehrer, …?, Wer kann sich …), not wer as
+    // the predicate of another subject (Wer du bist, …; Wer seine Lehrer waren, … — the verb is not 3rd person singular). The label is
+    // «Relativ- / Interrogativpronomen» (advisor + user 14.11): a free relative and an indirect question in the subject place look the same
+    // (Wer … gefahren ist, muss noch ermittelt werden), like «Name / Nomen».
+    const WER_RELATIVE_LINE = {ru:"здесь: (тот,) кто", en:"here: whoever, (the one) who"};
+    async function werRelative(word, context, result) {
+      if (norm(word) !== "wer" || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const card = candidates.find(c => c.source === "main" && norm(c.lemma) === "wer");
+      if (!card || result.selected !== card || card.construction) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'werRelative');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0 || at + 2 >= tokens.length) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      if (at > 0 && !/[.!?:;»«„“"–—]\s*$/u.test(gap(at))) return result;
+      // the part: up to the first punctuation after wer; it must end with a comma
+      let end = at + 1;
+      while (end + 1 < tokens.length && !/[,;:.!?»«„“"–—()]/u.test(gap(end + 1))) end++;
+      if (end + 1 >= tokens.length || !/^\s*,/u.test(gap(end + 1)) || end - at < 2) return result;
+      const rows = i => verbAnalyses.get(norm(tokens[i][0])) || [];
+      const finite = i => /^\p{Ll}/u.test(tokens[i][0]) && rows(i).some(a => a.kind === "finite");
+      if (finite(at + 1)) return result;
+      if (!finite(end) || !rows(end).some(a => a.kind === "finite" && a.person === "er/sie/es")) return result;
+      const x = {...card, posLabel:"Relativ- / Interrogativpronomen", translation:{...WER_RELATIVE_LINE}, construction:{id:"modal-particle", label:"wer", spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
+      return {...result, candidates:[x, ...candidates.filter(y => y !== card)], selected:x, preferred:x, status:"resolved"};
     }
     // Grimm rest (1) (advisor 14.11): zu right before an uninflected adjective / adverb with no noun after it — our card «слишком»
     // (zu groß, zu spät, zu viel gegessen, viel zu schwach); not zu + an inflected word (zu großen Ehren — the preposition), not an
