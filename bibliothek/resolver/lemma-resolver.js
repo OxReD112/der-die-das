@@ -4559,13 +4559,23 @@
       for (const [token, attr, formed] of heads) await compoundHeadEntry(sentence, token, attr, formed);
     }
     let preparation = null;
+    const DA_PARTICLES = ["darüber","darunter","davor","dahinter","daran","darauf","darin","daraus","dazwischen","davon","dahin","daher","dabei","dafür","dagegen","daneben"];
     function prepareSeparable() {
       // A2: the small verb + preposition list loads with the book, not on the first tap.
       if (fallback.verbPrepositions) fallback.verbPrepositions().catch(() => {});
       if (!fallback.separableEntries) return Promise.resolve();
       observe('relation-cache', {consumer:'prepareSeparable',cache:'preparation',state:preparation?'retained':'miss'});
       if (!preparation) preparation = fallback.separableEntries().then(rows => {
-        for (const [word,prefix,stems,meanings,derived] of rows) {
+        for (const row of rows) {
+          let [word,prefix,stems,meanings,derived] = row;
+          // (second resolver chat, advisor 14.11: the longest known particle — the export's zu-infinitive splits darüberlegen,
+          // darunterschreiben … as dar + überlegen; it is darüber + legen. Only when every detached stem starts with the middle part)
+          // (the detached reading is not taken for them: schrieb ein Buch darüber is «about it», not darüberschreiben — only the joined
+          // forms and the parts of the word: darübergelegt = darüber- + legen)
+          const longer = DA_PARTICLES.find(p => p.length > prefix.length && p.startsWith(prefix) && word.startsWith(p) && word.length - p.length >= 4);
+          let joinedOnly = false;
+          if (longer && (stems || []).every(x => x.startsWith(longer.slice(prefix.length)) && x.length > longer.length - prefix.length)) {
+            stems = stems.map(x => x.slice(longer.length - prefix.length)); prefix = longer; joinedOnly = true; }
           const own = (lemmas.get(norm(word)) || []).filter(e => e.type === "Verb");
           // S2 (17.10.2026): derived entries (particle + known verb) link only in a primary bracket.
           const items = own.length ? own : [{id:`imported:${word}`,word,type:"Verb",importedSeparable:true,meanings,...(derived ? {derivedSeparable:true} : {}),...(derived === 2 ? {nominalSpelling:true} : {})}];
@@ -4581,12 +4591,13 @@
             add(zuForms,prefix+"zu"+word.slice(prefix.length),item);
             for (const stem of stems) {
               add(forms,prefix+stem,item);
+              if (joinedOnly) continue;
               const pairs = separatedForms.get(stem) || [];
               if (!pairs.some(p=>p.entry.id===item.id && p.prefix===prefix)) pairs.push({entry:item,prefix});
               separatedForms.set(stem,pairs);
             }
             // (item 2a: its du imperative — Gib es her! — from the simple verb, at the start of the clause only)
-            if (!formsOf(item).Imperativ?.du)
+            if (!formsOf(item).Imperativ?.du && !joinedOnly)
               for (const stem of duImperatives(word.slice(prefix.length))) {
                 if (stems.includes(stem)) continue;
                 const pairs = imperativeSeparated.get(stem) || [];
@@ -15837,9 +15848,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (!Number.isInteger(context?.tokenOffset)) return false;
           const ws = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}]+|[^\p{L}\s]/gu)].map(m => m[0]);
           let j = ws.length - 1, n = 0;
-          while (j >= 0 && n < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(ws[j]) && !ARTICLE_WORD.test(norm(ws[j])) && !/^(?:diese[mns]|jene[mns]|meine[mns]|deine[mns]|seine[mns]|ihre[mns]|unsere[mns]|eure[mns]|keine[mns]|welche[mns]|jede[mns])$/u.test(norm(ws[j]))) { j--; n++; }
+          while (j >= 0 && n < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(ws[j]) && !ARTICLE_WORD.test(norm(ws[j])) && !/^(?:diese[mns]|jene[mns]|meine[mns]|deine[mns]|seine[mns]|ihre[mns]|unsere[mns]|eure[mns]|keine[mns]|welche[mns]|jede[mns]|manche[mns]|solche[mns]|demselben|desselben)$/u.test(norm(ws[j]))) { j--; n++; }
           // (also the accusative singular einen / keinen / meinen …: einen Armen is a poor man, no plural of Arm)
-          return j >= 0 && /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|im|am|vom|zum|beim|des|eines|keines|meines|deines|seines|ihres|unseres|eures|dieses|jenes|welches|jedes|einen|keinen|jeden)$/u.test(norm(ws[j]));
+          return j >= 0 && /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|manchem|solchem|demselben|desselben|ebendem|ebendiesem|im|am|vom|zum|beim|des|eines|keines|meines|deines|seines|ihres|unseres|eures|dieses|jenes|welches|jedes|einen|keinen|jeden)$/u.test(norm(ws[j]));
         };
         if (plurals.has(form) && !singulars.has(form) && !(entry.article === "der" && /n$/u.test(form) && singularDeterminer())) return {number:"plural"};
         // (11.11, G69 remainder) by the word before the noun group (attribute words skipped, as in step 2 below):
@@ -15851,7 +15862,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (plurals.has(form) && ["der","das"].includes(entry.article) && Number.isInteger(context?.tokenOffset)) {
           const sentence = String(context.sentence || ""), text = sentence.slice(0, context.tokenOffset);
           const words = [...text.matchAll(/[\p{L}\d']+|[^\p{L}\d'\s]/gu)].map(m => m[0]);
-          const DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein|meine|meinen|meinem|meiner|meines|dein|deine|deinen|deinem|deiner|deines|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser|unsere|unseren|unserem|unserer|unseres|euer|eure|euren|eurem|eurer|eures|dieser|diese|diesen|diesem|dieses|jener|jene|jenen|jenem|jenes|welcher|welche|welchen|welchem|welches|jeder|jede|jeden|jedem|jedes|alle|allen|aller|alles)$/u;
+          const DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|mein|meine|meinen|meinem|meiner|meines|dein|deine|deinen|deinem|deiner|deines|sein|seine|seinen|seinem|seiner|seines|ihr|ihre|ihren|ihrem|ihrer|ihres|unser|unsere|unseren|unserem|unserer|unseres|euer|eure|euren|eurem|eurer|eures|dieser|diese|diesen|diesem|dieses|jener|jene|jenen|jenem|jenes|welcher|welche|welchen|welchem|welches|jeder|jede|jeden|jedem|jedes|alle|allen|aller|alles|derselbe|dieselbe|dasselbe|denselben|demselben|desselben|derselben|dieselben|ebendem|ebendiesem|ebender|ebendes)$/u;
           let k = words.length - 1, attrs = 0;
           while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) && !DETERMINER.test(norm(words[k])) && !prepositions.has(norm(words[k]))) { k--; attrs++; }
           const det = k >= 0 ? norm(words[k]) : "", start = k < 0 || /^[,;:.!?()»«„“"–—]$/u.test(words[k]);
@@ -15867,7 +15878,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (den + neuter: the dative plural only when the word has no masculine card — den Teil, den Band, den Gehalt; advisor 11.11)
             if (det === "den" && entry.article === "das" && (form !== word || form === plural) &&
               !(lemmas.get(word) || []).some(e => e.type === "Nomen" && e.article === "der")) return {number:"plural"};
-            const datSg = /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|im|am|vom|zum|beim)$/u;
+            // (advisor 14.11: auf demselben Pfade — derselbe in the dative / genitive singular, ebendem, too)
+            const datSg = /^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|manchem|solchem|im|am|vom|zum|beim|demselben|derselben|desselben|ebendem|ebendiesem)$/u;
             // (-e: also a capital word opening the part — Nette Gespräche — and a preposition with an attribute word between, not in -em:
             // auf weitere Geschäfte; not a preposition right before the noun — zu Hause, im Grunde, nach Hause)
             const capitalOpening = k >= 0 && /^\p{Lu}/u.test(words[k]) && (k === 0 || /^[,;:.!?()»«„“"–—]$/u.test(words[k-1])) &&
@@ -18214,7 +18226,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -18540,6 +18552,76 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       const particle = {...own, posLabel:"Partikel", translation:{...shown}, construction:{id:"modal-particle", label:f, spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
       return {...result, candidates:[particle, ...candidates.filter(x => x !== own)], selected:particle, preferred:particle, status:"resolved"};
+    }
+    // G51 rest (advisor 14.11): (1) eben — our adverb card instead of the window with the adjective «ровный», unless it closes its part
+    // after sein / werden / bleiben (Der Weg ist eben.); (2) wohl in a question opened by a question word — «здесь: интересно, …»
+    // (Was war wohl die Ursache davon?, Wo mochte er jetzt wohl stecken?); sehr wohl — «здесь: прекрасно, вполне».
+    const WOHL_LINES = {question:{ru:"здесь: интересно, …", en:"here: I wonder"}, sehr:{ru:"здесь: прекрасно, вполне", en:"here: perfectly well"}};
+    async function wohlEben(word, context, result) {
+      const f = norm(word);
+      if (!["eben","wohl"].includes(f) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const card = type => candidates.find(c => c.source === "main" && norm(c.lemma) === f && canonicalPos(c.item?.type || c.pos) === type);
+      const adverb = card("Adverb");
+      if (!adverb || result.selected && (result.selected !== adverb || result.selected.construction)) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'wohlEben');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const boundary = i => i === 0 || /[,;:.!?»«„“"–—()…]|\s-\s/u.test(gap(i));
+      let start = at; while (!boundary(start)) start--;
+      const after = sentence.slice(tokens[at].index + tokens[at][0].length);
+      const pick = (c, line, label) => { const x = line ? {...c, posLabel:label || c.posLabel, translation:{...line}, construction:{id:"modal-particle", label:f, spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}} : c;
+        return {...result, candidates:[x, ...candidates.filter(y => y !== c)], selected:x, preferred:x, status:"resolved"}; };
+      if (f === "eben") {
+        if (result.selected) return result;
+        if (!card("Adjektiv")) return result;
+        // (the predicate after sein / werden / bleiben closing its part: Der Weg ist eben. — the window stays)
+        const closes = at + 1 >= tokens.length || /^\s*[,;:.!?»«„“"–—()…]/u.test(after);
+        if (closes && tokens.slice(start, at).some(t => /^(?:ist|sind|war|waren|wird|werden|wurde|wurden|bleibt|blieb|sei|wäre|bin|bist|seid)$/u.test(norm(t[0])))) return result;
+        return pick(adverb);
+      }
+      if (at > 0 && norm(tokens[at-1][0]) === "sehr" && at - 1 >= start) return pick(adverb, WOHL_LINES.sehr);
+      const end = (/[.!?]/u.exec(after) || [""])[0];
+      if (end === "?" && at > start && /^(?:was|wer|wen|wem|wessen|wo|wie|wann|warum|wieso|weshalb|wohin|woher|welche[rsmn]?)$/u.test(norm(tokens[start][0]))) return pick(adverb, WOHL_LINES.question, "Partikel");
+      return result;
+    }
+    // Grimm rest (1) (advisor 14.11): zu right before an uninflected adjective / adverb with no noun after it — our card «слишком»
+    // (zu groß, zu spät, zu viel gegessen, viel zu schwach); not zu + an inflected word (zu großen Ehren — the preposition), not an
+    // infinitive (zu essen), not a noun after the word (zu viel Geld stays as it was).
+    async function zuToo(word, context, result) {
+      if (norm(word) !== "zu" || !/^z/u.test(String(word)) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      if (result.selected?.construction) return result;
+      const candidates = result.candidates || [];
+      const too = candidates.find(c => c.source === "main" && norm(c.lemma) === "zu" && canonicalPos(c.item?.type || c.pos) === "Adverb");
+      if (!too || result.selected === too) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'zuToo');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0 || at + 1 >= tokens.length) return result;
+      const gapAfter = i => sentence.slice(tokens[i].index + tokens[i][0].length, tokens[i+1]?.index ?? sentence.length);
+      if (/\S/u.test(gapAfter(at))) return result;
+      const next = tokens[at+1][0], n = norm(next);
+      if (!/^\p{Ll}+$/u.test(next)) return result;
+      // (a word that only modifies what follows, a language name — zu immer neueren, zu nur 173 €, zu fast allen, zu deutsch «по-немецки»; zu leid tun, zu liebe — zuleide, zuliebe)
+      if (/^(?:immer|nur|noch|fast|so|selbst|erst|bloß|etwa|rund|knapp|deutsch|englisch|französisch|lateinisch|italienisch|spanisch|russisch|leid|liebe|lieb)$/u.test(norm(next))) return result;
+      // (the word itself is an own adjective / adverb card, written as it stands — uninflected)
+      if (!(lemmas.get(n) || []).some(e => ["Adjektiv","Adverb"].includes(e.type) && norm(e.word) === n)) return result;
+      if ((await tokenAnalyses(next,undefined,'zuToo')).some(a => a.kind === "infinitive")) return result;
+      // (no noun right after it: zu viel Geld, zu wenig Zeit; nor a noun group the word only opens — zu sehr großen Geräten, zu regelmäßig
+      // hoher Luftfeuchtigkeit, zu so einer privaten Angelegenheit, Im Gegensatz zu fast allen anderen …: the preposition)
+      // (tests chat 14.11: zu viel / zu wenig before a noun is «слишком много / мало» too — zu viel Geld)
+      if (!/^(?:viel|wenig)$/u.test(n)) for (let j = at + 2; j < Math.min(tokens.length, at + 8); j++) {
+        if (/[,;:.!?–—()…]/u.test(gapAfter(j-1))) break;
+        const t = tokens[j][0];
+        if (/^(?:\p{Lu}|\d)/u.test(t)) return result;
+        // (a preposition or an article starts something else: zu wenig über die Probleme, zu klein und die Züge, zu schnell den Versicherer)
+        if (prepositions.has(norm(t)) || /^(?:der|die|das|den|dem|des)$/u.test(norm(t))) break;
+        if (!/^\p{Ll}+(?:e|en|er|es|em)$/u.test(t) &&
+          !/^(?:und|oder|so|ein|eine|einer|einem|einen|eines|alle|allen|aller|fast|immer|wieder|selbst|ganz|noch)$/u.test(norm(t))) break;
+      }
+      // (von fest zu flüssig, bis zu — the preposition)
+      if (at > 0 && /^(?:bis)$/u.test(norm(tokens[at-1][0])) || at > 1 && /^(?:von|vom)$/u.test(norm(tokens[at-2][0]))) return result;
+      return {...result, candidates:[too, ...candidates.filter(c => c !== too)], selected:too, preferred:too, status:"resolved"};
     }
     // G51 step 4 (advisor 29–31.10, WN batch 24 — the conjunction card doch): doch first in its part — at the start of the sentence or
     // right after a mark (…, doch der Gesang …; Doch seine Freiheit …; …; doch …) — is the conjunction «но, однако»; elsewhere (Komm doch
