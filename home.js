@@ -1025,6 +1025,9 @@ function updateBack() {
   if (shelf) {
     if (!libraryPage) return; // the Bibliothek is still loading
     back.classList.add("is-hidden");
+    // 14.11 (Alena): on the wide Home (desktop, iPad across) the capsule stands alone in the middle — ＋ in the middle
+    // was under it and no book could be added. There ＋ stands just right of the capsule, on its line.
+    doc.documentElement.classList.toggle("deutsch-home-wide", document.documentElement.classList.contains("home-wide-layout"));
     if (!doc.getElementById("deutsch-home-dock")) {
       const st = doc.createElement("style");
       st.id = "deutsch-home-dock";
@@ -1043,6 +1046,11 @@ function updateBack() {
         ".library-screen .library-actions .library-add-toggle{right:calc(50vw - 22px)!important}" +
         ".library-screen .library-actions .library-view-toggle{right:calc(var(--dock-edge) + 54px)!important}" +
         ".library-screen .library-actions .library-add-menu{position:fixed!important;left:auto!important;right:calc(50vw - 136px)!important;bottom:calc(env(safe-area-inset-bottom) + 78px)!important}" +
+        // wide Home: the capsule (104 wide, centre of the screen, 24 from the bottom, 56 high) — ＋ 12 px right of it,
+        // all the buttons on the capsule's middle line; the menu opens above ＋
+        ".deutsch-home-wide .library-screen .library-actions .storage-info,.deutsch-home-wide .library-screen .library-actions .library-add-toggle,.deutsch-home-wide .library-screen .library-actions .library-view-toggle{bottom:calc(env(safe-area-inset-bottom) + 30px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .library-add-toggle{right:calc(50vw - 108px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .library-add-menu{right:calc(50vw - 108px)!important;bottom:calc(env(safe-area-inset-bottom) + 86px)!important}" +
         "@media (max-height:700px){.empty-mark{height:clamp(110px,20dvh,230px)!important}.empty-library{padding-top:28px!important}}" +
         ".library-screen .reader-toast{bottom:calc(env(safe-area-inset-bottom) + 90px)!important}";
       doc.head.appendChild(st);
