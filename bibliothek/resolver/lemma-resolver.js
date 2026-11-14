@@ -2087,7 +2087,8 @@
     const mainCandidate = item => item.importedSeparable ? {
       source:"fallback",lemma:item.word,pos:"verb",posLabel:"Verb",meanings:item.meanings,
       translation:{en:item.meanings.join("; "),ru:""}
-    } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, posLabel:item.parts_of_speech?.join(" / ") || item.type, translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item,
+    } : ({ source:"main", dictionaryId:item.id, lemma:item.word, pos:item.type, posLabel:item.pos_label || item.parts_of_speech?.join(" / ") || item.type, // pos_label: the card's own part-of-speech line (WN 106 jedoch «Adverb / Konjunktion»)
+      translation:{en:item.translation_en || "",ru:item.translation_ru || ""}, item,
       ...(reflexiveEntries.has(item) ? {reflexiveLexical:{baseLemma:norm(item.word).replace(/^sich\s+/u,""),evidence:"dictionary-reflexive-lemma"}} : {}) });
     // C21 (18.10.2026): numerals are a closed, fully regular grammar. A clicked cardinal or
     // ordinal without an own card (fünfzig, siebenhundertunddreizehn, vierten, zwanzigsten,
@@ -11536,7 +11537,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const finite = async i => (await analyses(i)).some(a => a.kind === "finite" && !a.detached);
       const isParticle = i => (forms.get(norm(tokens[i][0])) || []).some(e => e.type === "particle");
       const conjunctionAt = evidence => ({candidate:conjunction,evidence});
-      const adverbAt = evidence => ({candidate:adverb,evidence});
+      // (п. 8 JEDOCH, advisor 03.11, rule 1.4 — our card before an outside one) when the adverb reading is only an outside record and our
+      // conjunction card is of the same word, our card is shown for the adverbial place too: Der ging jedoch daneben → jedoch «однако»,
+      // not the outside «however» without Russian.
+      // Only for a conjunction card whose own word order puts the verb right after it (jedoch · Verb · Subjekt — it fills the first place
+      // like an adverb); not seitdem / bevor / soviel (verb-final) or denn (· Subjekt · Verb), whose outside adverb is another word use.
+      const adverbLike = /^[^·]+·\s*\*\*Verb\*\*/u.test(conjunction.item?.word_order_pattern || "");
+      const adverbAt = evidence => adverb.source === "main" || !adverbLike ? {candidate:adverb,evidence} : {candidate:conjunction,evidence:`${evidence}-own-card`};
       if (/^[A-ZÄÖÜ]/u.test(tokens[index][0]) && start !== index) return null;
       // Verb-final stretch after the word: finite verb at the end, no finite
       // verb before it except a verb cluster (wohnen bleiben).
@@ -15745,7 +15752,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (advisor 09.11, партия 63: in allen Reichen, in den Jahren) a neuter noun has no singular in -n / -en — except where the plural itself is
         // the stem + (e)n (das Herz — dem Herzen / die Herzen). (11.11, G69 remainder) Nor a strong masculine one — its plural is not the
         // stem + (e)n (mit Freunden, in den nächsten Tagen, mit Lautsprechern); weak ones keep it (den Patienten).
-        const neuterN = ["das","der"].includes(entry.article) && ![word + "n", word + "en"].includes(plural);
+        // (п. 8 G69-own, advisor 03.11) a neuter noun in -e has no singular in -n (das Auge — die Augen; only das Herz — dem Herzen)
+        const neuterN = ["das","der"].includes(entry.article) && ![word + "n", word + "en"].includes(plural) || entry.article === "das" && /e$/u.test(word);
         const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", ...(neuterN ? [] : [word + "n", word + "en"])]);
         // (11.11) a dative / genitive singular determiner right before (attribute words skipped) speaks against a strong masculine -(e)n
         // plural — another noun spelled so: zu dem Flecken Langwedel (der Flecken «местечко», not die Flecke)
