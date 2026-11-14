@@ -1139,12 +1139,15 @@
         const possessives = pronounCandidates.filter(c => display.partOfSpeech(c) === "Possessivpronomen");
         // G50 step 2 (28.10.2026, reference F12-G13a / b, U-H22): der / die / das whose role the resolver established (B15, G50 —
         // the demonstrative «тот», das «это» via its form translation, or the relative «который») is that card alone, not the summary.
-        const roleChosen = resolverChosePronoun && resolution.decision?.rule === "der-pronoun-role" && ["pronoun-037","pronoun-038"].includes(resolution.selected?.dictionaryId);
+        // F12-G37b (14.11.2026): ihr the resolver read as the address «вы» (ihr lieben Kinder, ihr Herren — rule ihr-address) is that card alone too.
+        const ihrAddress = resolverChosePronoun && resolution.decision?.rule === "ihr-address" && resolution.selected?.dictionaryId === "pronoun-007";
+        const roleChosen = resolverChosePronoun && resolution.decision?.rule === "der-pronoun-role" && ["pronoun-037","pronoun-038"].includes(resolution.selected?.dictionaryId) || ihrAddress;
         const shown = (userConfirmed || roleChosen || possessiveRow && resolverChosePronoun && resolution.selected === candidate) && reference.isPronoun(candidate) ? [candidate] :
           possessiveRow && possessives.length ? possessives : pronounCandidates;
         const types = [...new Set(shown.map(c => display.partOfSpeech(c)))];
         const use = pronounLink ? "Reflexiv" : "";
-        const values = roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
+        // the address card's own translation without its note: «вы (к нескольким людям на «ты»)» → «вы» (the form ihr is «вы / ей» across cards)
+        const values = ihrAddress ? String(candidate.item?.[`translation_${locale()}`] || "").replace(/\s*\(.*$/u, "") : roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
           reference.brief(possessiveRow ? shown : pronounCandidates,word,locale()).replace(/^[^·]*·\s*/u, "");
         model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen", use].filter(Boolean).join(" · "),
           text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
