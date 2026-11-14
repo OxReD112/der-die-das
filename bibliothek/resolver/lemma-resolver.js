@@ -1807,7 +1807,8 @@
       // kosten «стоить»: its forms are never read as an imperative — Tut mir leid is «Präsens», not «Imperativ / Präsens»)
       if (row.kind === "imperative" && row.entry?.imperative === "none" && !row.reflexiveField) return;
       // (an own two-word card written apart: its rows apart as well — see phraseFirst)
-      const map = phraseFirst(row.entry) ? phraseAnalyses : verbAnalyses;
+      // (its joined spelling — instandgesetzt — holds the first part itself: an ordinary verb row, see joinedPhraseForms)
+      const map = phraseFirst(row.entry) && !row.joined ? phraseAnalyses : verbAnalyses;
       for (const key of new Set([norm(form), ...(['finite','imperative'].includes(row.kind) ? [oldSpelling(norm(form))] : [])])) {
         const rows = map.get(key) || [];
         if (!rows.some(r => r.entry === row.entry && r.kind === row.kind && r.person === row.person && r.tense === row.tense && r.detached === row.detached)) rows.push(row);
@@ -1836,7 +1837,7 @@
       const first = String(entry.word).trim().split(/\s+/u).filter((w,k) => !(k === 0 && norm(w) === "sich")).slice(0,-1), n = first.length;
       // (only a form of the card is judged here: a tap on the first part itself — gefallen in «ließ sich das nicht gefallen» — or on
       // its sich is decided by the path that found the card)
-      if (!n || first.some(w => norm(w) === norm(raw[t] || "")) || !rowsAt(t).some(a => a.entry === entry)) return true;
+      if (!n || first.some(w => norm(w) === norm(raw[t] || "")) || !rowsAt(t).some(a => a.entry === entry) || rowsAt(t).some(a => a.entry === entry && a.joined)) return true;
       // (at the start of the part a capital is the lowercase first part before a participle or an infinitive that is no person form:
       // Rückgängig gemacht wurde nichts — but Ernst nimmt den Bus is the name)
       const finiteHere = rowsAt(t).some(a => a.entry === entry && ["finite","imperative"].includes(a.kind));
@@ -1851,6 +1852,32 @@
       const c = raw.length - n;
       return c > t && first.every((_,j) => same(c+j,j)) && free(c-1) &&
         !raw.slice(t+1,c).some((w,k) => /^\p{Ll}/u.test(w) && rowsAt(t+1+k).some(a => a.kind === "finite" && !a.detached));
+    };
+    // Links chat (advisor 14.11, claude/EXTERNAL_PARTICIPLE_COUNT_2026-11-14_RU.md): an own two-word card written apart is also written
+    // joined, its first part (separable_prefix) before the form like a separable verb's particle — instandgesetzt, gefangengenommen,
+    // zugrundegegangen, instandzusetzen, dass es zustandekommt. One rule for every such card: [joined form, row tense, kind, zu].
+    const joinedPhraseForms = entry => {
+      const first = phraseFirst(entry);
+      if (!first) return [];
+      const out = [], last = norm(entry.word).replace(/^sich\s+/u,"").split(/\s+/u).at(-1);
+      for (const [tense,group] of Object.entries(formsOf(entry))) {
+        if (tense === "Imperativ") continue;
+        for (const [person,value] of Object.entries(group || {})) {
+          const parts = norm(String(value)).replace(/[.!?]+$/u,"").split(/\s+/u).filter(p => !reflexivePronouns.has(p));
+          if (parts.length === 2 && parts[1] === first && /^[\p{L}\p{M}]+$/u.test(parts[0])) out.push({form:first + parts[0],tense,person,kind:"finite"});
+        }
+      }
+      out.push({form:first + last,tense:"Infinitiv",kind:"infinitive"},{form:first + "zu" + last,tense:"Infinitiv",kind:"infinitive",zu:true});
+      const participle = norm(entry.perfect_form || "").split(/\s+/u).at(-1);
+      if (participle && /^[\p{L}\p{M}]+$/u.test(participle)) out.push({form:first + participle,tense:"Partizip II",kind:"participle"});
+      return out;
+    };
+    const joinedPhraseCache = new Map();
+    // true when the word is the card's joined participle / infinitive (kind: "participle" | "infinitive")
+    const joinedPhraseForm = (entry, word, kind) => {
+      if (!phraseFirst(entry)) return false;
+      if (!joinedPhraseCache.has(entry)) joinedPhraseCache.set(entry,joinedPhraseForms(entry));
+      return joinedPhraseCache.get(entry).some(j => j.kind === kind && !j.zu && j.form === norm(word));
     };
     const imperativeAnalyses = new Map();
     const phraseRows = key => [...(verbAnalyses.get(key) || []),...(phraseAnalyses.get(key) || []),...(imperativeAnalyses.get(key) || [])];
@@ -1898,6 +1925,9 @@
       const perfectPart = perfectWords.slice(1,-1).filter(p => !reflexivePronouns.has(p)).join("");
       const partApart = phrase.length === 1 && perfectPart && base.startsWith(perfectPart) && base === perfectPart + participle;
       if (participle && !partApart) addAnalysis(participle,{...common,kind:"participle",tense:"Partizip II",detached:false});
+      for (const j of joinedPhraseForms(entry))
+        addAnalysis(j.form,{...common,compound:[],kind:j.kind,tense:j.tense,detached:false,joined:true,prefix:null,
+          ...(j.person ? {person:j.person === "Sie" ? "sie" : personOf(j.person)} : {}),...(j.zu ? {zu:true} : {})});
     }
     function addReflexive(form,row) {
       for (const key of new Set([norm(form), ...(['Infinitiv','Partizip II'].includes(row.tense) ? [] : [oldSpelling(norm(form))])])) {
@@ -2008,6 +2038,7 @@
           }
         }
         if (phraseFirst(entry)) add(phraseForms,norm(entry.word).split(/\s+/u).at(-1),entry);
+        for (const j of joinedPhraseForms(entry)) { add(forms,j.form,entry); if (j.zu) add(zuForms,j.form,entry); }
         if (entry.type === "Verb") {
           const tenses = new Map();
           for (const [tense,group] of Object.entries(formsOf(entry))) for (const form of Object.values(group || {})) {
@@ -5884,7 +5915,12 @@
         // (P4 / T3, 26.10.2026: the last word may also be the participle of a separable verb only the external dictionary knows —
         // wird auf Männer und Frauen aufgestockt. Only particle + ge- + -t: ver- / be- shapes are often adjectives — bewandert,
         // verhasst, verarmt; review 26.10)
-        const participleShape = i => !verbish(i) && new RegExp(`^(?:${SEPARABLE_PARTICIPLE_PARTICLES})ge\\p{Ll}{2,}t$`,"u").test(tokens[i][0]) && !adjectivalForm(tokens[i][0]);
+        // (links chat, advisor 14.11, claude/EXTERNAL_PARTICIPLE_COUNT_2026-11-14_RU.md (2): or a Partizip II by the record of any dictionary —
+        // the external entry names its verb («past participle of X», a participle inflection row): von Geiz und Habsucht verblendet, etwas
+        // Reines und Schutzloses gemeuchelt; by the record, not by the shape — verhasst, bewandert stay out; an own adjective card keeps it out)
+        const participleShape = i => !verbish(i) && !adjectivalForm(tokens[i][0]) && (new RegExp(`^(?:${SEPARABLE_PARTICIPLE_PARTICLES})ge\\p{Ll}{2,}t$`,"u").test(tokens[i][0]) ||
+          /^\p{Ll}/u.test(tokens[i][0]) && externalParticipleWords.get(sentence)?.has(norm(tokens[i][0])) &&
+          !(externalParticipleWords.get(sentence).get(norm(tokens[i][0])).seinOnly && tokens.slice(partStart,i).some(t => (verbAnalyses.get(norm(t[0])) || []).some(a => a.base === 'werden'))));
         const inside = []; for (let i = k+1; i <= r; i++) if (!jumped.has(i) && !joinWords.has(norm(tokens[i][0])) && !capitalNoun(i) &&
           (verbish(i) && !attributive(i) || i === r && nounJoin && (participleAt(i) || participleShape(i)) && !seinOnly(i) && !(i > 0 && ARTICLE_WORD.test(norm(tokens[i-1][0]))))) inside.push(i);
         // L17 (links to-do, 21.10.2026): after als the predicate may be a verb-final cluster (als Sachsenvelt … erwähnt
@@ -5992,7 +6028,7 @@
       // C14 step 2 (17.10.2026): a capital inside the sentence is a noun, not a participle (in Verdacht ≠ verdacht
       // of verdenken); the sentence start and an all-capitals word (VERRÜCKT GEWORDEN) keep the participle.
       const nounCapital = i => /^\p{Lu}/u.test(tokens[i][0]) && tokens[i][0] !== tokens[i][0].toUpperCase() && !clauseInitial(sentence, tokens[i].index);
-      const participleOf = (e,i) => norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[i][0]) && !nounCapital(i);
+      const participleOf = (e,i) => (norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[i][0]) || joinedPhraseForm(e,tokens[i][0],"participle")) && !nounCapital(i);
       // Nominal facts: a capitalised dictionary noun, a possessive before it.
       const nounToken = i => /^[A-ZÄÖÜ]/u.test(tokens[i][0]) && matches(i).some(e=>e.type === "Nomen");
       // (P10, 26.10.2026: a capital inside the sentence is a noun — C14 — also without an own noun card: Sein Grab wird bis heute
@@ -6385,7 +6421,7 @@
         const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[before-1]?.[0] ?? "")) &&
           !(norm(tokens[before-1][0]) === "so" && soWieComparison(tokens,before));
         if (PERFECT_AUXILIARIES.includes(second) && !(second === "sein" && degreeBefore)) {
-          lexical = rows.filter(e => norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[before][0]) &&
+          lexical = rows.filter(e => (norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[before][0]) || joinedPhraseForm(e,tokens[before][0],"participle")) &&
             auxiliariesOf(e).includes(second));
           kind = "perfect";
         } else if (["können","müssen","dürfen","sollen","wollen","mögen"].includes(second)) {
@@ -6635,7 +6671,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // sehr verletzt. von / vom / durch + a determiner or a capital word in the part before the participle; without it the degree word
       // keeps «become» — Er wird noch heute sehr verehrt is the registry)
       const degreeBecome = t => becomeDegreeBefore(tokens,t) && !passiveAgentBefore(tokens,indices,t);
-      const infinitives = i => verbs(i).filter(e=>(phraseFirst(e) ? norm(e.word).split(/\s+/u).at(-1) : norm(e.word)) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
+      const infinitives = i => verbs(i).filter(e=>((phraseFirst(e) ? norm(e.word).split(/\s+/u).at(-1) : norm(e.word)) === norm(tokens[i][0]) || joinedPhraseForm(e,tokens[i][0],"infinitive")) && /^[a-zäöü]/u.test(tokens[i][0]));
       // G15 step 4 (16.10.2026): a following «und / oder + verb» starts another
       // predicate (wurde verhaftet und starb) or shares the auxiliary (hat …
       // gerufen und … gesagt); the pair before it is complete either way.
@@ -7635,7 +7671,35 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         c.construction.confidence !== "tentative" && !c.reflexiveUnconfirmed));
       return confirmed.length === 1 ? {...group,lemma:confirmed[0].word} : group;
     }
+    // (links chat, advisor 14.11, (2)): the Partizip II forms of verbs only another dictionary knows, per sentence — read synchronously by
+    // the noun-pair join of verbalClause (P4 / T3). Only lowercase words after an und / oder of the sentence that are no own verb form;
+    // a form counts when externalParticiple names exactly one verb (the record of the dictionary, not the shape of the word).
+    const externalParticipleWords = new Map();
+    async function warmExternalParticiples(sentence) {
+      if (!sentence || externalParticipleWords.has(sentence)) return;
+      const tokens = sharedTokens(sentence,'externalParticipleWords'), found = new Map();
+      externalParticipleWords.set(sentence,found);
+      if (externalParticipleWords.size > 200) externalParticipleWords.delete(externalParticipleWords.keys().next().value);
+      const andAt = tokens.findIndex(t => ['und','oder'].includes(norm(t[0])));
+      if (andAt < 0) return;
+      for (let i = andAt+1; i < tokens.length; i++) {
+        const t = tokens[i][0], w = norm(t);
+        if (t !== w || w.length < 5 || !/(?:t|en)$/u.test(w) || (verbAnalyses.get(w) || []).length || (forms.get(w) || []).length) continue;
+        // (traps of P4 / T3 and the advisor: an external adjective of the same spelling — bewandert, verhasst, verarmt — keeps the word
+        // out, as the shape rule did: «стать каким»)
+        let facts = [];
+        try { facts = await lexicalLookup(t,'externalParticipleWords'); } catch (_) { continue; }
+        if (facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Adjektiv' && norm(g.word) === w && g.meanings?.length)) continue;
+        const verb = await externalParticiple(t);
+        if (!verb.length) continue;
+        // (a verb with sein only — verarmen — has no passive: Der Bauer wurde durch Krieg und Pest verarmt stays «становиться»)
+        let aux = [];
+        try { aux = ((await fallback.perfectAuxiliaries?.(verb[0].word)) || []).map(norm); } catch (_) { aux = []; }
+        found.set(w,{seinOnly:aux.length > 0 && aux.every(a => a === 'sein')});
+      }
+    }
     async function runConstructionProducers(word, context, candidates, producers) {
+      await warmExternalParticiples(String(context?.sentence || ''));
       for (const producer of producers) {
         const pending = producer.produce(word,context,candidates);
         const group = pending && typeof pending.then === 'function' ? await pending : pending;
@@ -8774,7 +8838,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const wordsBefore = (e,i) => { const w = base(e).split(/\s+/u); return w.length < 2 || w.at(-1) !== "lassen" || w.slice(0,-1).every((x,k,a) => {
         const at = i - (a.length - k); return at >= 0 && norm(tokens[at][0]) === x; }); };
       // (an own card of several words in place wins over the reflexive card of its last word: das dich zugrunde richten soll)
-      const infinitives = i => { const rows = withReflexive(matches(i),reflexiveRows(i,"Infinitiv")).filter(e => (phraseFirst(e) ? base(e).split(/\s+/u).at(-1) : base(e)) === norm(tokens[i][0]) && /^[a-zäöü]/u.test(tokens[i][0]));
+      const infinitives = i => { const rows = withReflexive(matches(i),reflexiveRows(i,"Infinitiv")).filter(e => ((phraseFirst(e) ? base(e).split(/\s+/u).at(-1) : base(e)) === norm(tokens[i][0]) || joinedPhraseForm(e,tokens[i][0],"infinitive")) && /^[a-zäöü]/u.test(tokens[i][0]));
         // (п. 16: particle + an own verb's infinitive without a card — wollte er fortspringen — as for lassen)
         if (!rows.length && i > 0 && particleInfinitiveOf(tokens[i][0])) return [{word:norm(tokens[i][0]),type:"Verb",particleInfinitive:true}];
         return rows.some(e => phraseFirst(e)) ? rows.filter(e => phraseFirst(e)) : rows; };
@@ -17372,6 +17436,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const map = c => swap.get(c) || c;
       return {...result, candidates:result.candidates.map(map), selected:result.selected && map(result.selected), preferred:result.preferred && map(result.preferred)};
     }
+    // (advisor 14.11, (б)) the colloquial short particle of a word no dictionary has, read by the G47 parts of the full one
+    // (ranschaffen — heran + schaffen, runterschmeißen — herunter + schmeißen); the card search itself is in resolveFollowingReference.
+    async function colloquialParticleParts(word, context, result) {
+      const colloquial = COLLOQUIAL_PARTICLE.exec(String(word));
+      if (!colloquial || (result?.candidates || []).length || result?.formReference) return result;
+      for (const full of COLLOQUIAL_JOINED[colloquial[1].toLocaleLowerCase("de-DE")]) {
+        const target = (/^\p{Lu}/u.test(colloquial[1]) ? full[0].toUpperCase() + full.slice(1) : full) + colloquial[2];
+        let read = null;
+        try { read = await readAs(word, context, target, [], null, (s,c) => directionalParticle(s, c, {candidates:[], selected:null, preferred:null, status:"unresolved", unresolvedMeanings:[]})); } catch (_) { read = null; }
+        if ((read?.candidates || []).length) { read.formReference = {...read.formReference, colloquial:true}; return read; }
+      }
+      return result;
+    }
     async function directionalParticle(word, context, result, force = null, extraRow = null) {
       // #29 (books, regressions 05.11): a card found only as particle + participle (hinabgeworfen — hinabwerfen, herabgefallen) gives way
       // to this rule whenever it answers: it reads the simple verb in the sentence (meinen Mann hat er die Treppe hinabgeworfen — Perfekt;
@@ -18137,7 +18214,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -18804,6 +18881,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // ß marks a long vowel in both spellings — Buße, Große, Straße; and the card found must be the one the sentence reads — Schoß
     // «колени» is not schoss «стрелял», review 29.10)
     const OLD_SS = /(?<!ei|ai|au|äu|eu|ie|Ei|Ai|Au|Äu|Eu|Ie)ß(?![aeiouäöüy])/gu;
+    // the colloquial short particles of a joined word and their full ones: COLLOQUIAL_PARTICLES (her- before hin-). Not drin- / drauf- /
+    // drüber- / drunter- / dran- = da(r)- (advisor 14.11, count r154): 1 better in RU, 1 worse in EN — drübergelegt → darüberlegen,
+    // whose English text is the wrong split «dar- · überlegen — to think» (main shows it on darübergelegt too)
+    const COLLOQUIAL_JOINED = COLLOQUIAL_PARTICLES;
+    const COLLOQUIAL_PARTICLE = new RegExp(`^(${Object.keys(COLLOQUIAL_JOINED).sort((x,y) => y.length - x.length).join("|")})(\\p{Ll}{3,})$`,"iu");
     async function resolveFollowingReference(word, context) {
       const result = await nameGenitive(word, context, await resolveFollowingReferenceOnce(word, context));
       // Swiss ss (swissSpelling): no record of the ss spelling at all — the ß spelling, when it has one.
@@ -18814,6 +18896,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (the ß spelling replaces an English-only split only with a reading of its own, not with another split: Schnitzmesser)
         if (weakOnly && (read?.candidates || []).some(c => c.formation?.kind === "compound" && c.formation.parts.some(p => !p.ru))) return result;
         return (read?.candidates || []).length ? read : result;
+      }
+      // Links chat (advisor 14.11, claude/JOINED_REIN_COUNT_2026-11-14_RU.md (б)): the colloquial short particle (reingeschaut,
+      // rausgesucht, rumgestöbert, drinsteckt) of a word no dictionary has is read as the full one (hereingeschaut, herausgesucht,
+      // herumgestöbert, darinsteckt) — its own card or the G47 parts. Only without any card of the short spelling: reingehen,
+      // reingelegt, rauswerfen keep their colloquial cards; rannte, reinigen, reinlich, rumänisch, draufgehen are words of their own.
+      const colloquial = COLLOQUIAL_PARTICLE.exec(String(word));
+      if (colloquial && !(result?.candidates || []).length) {
+        for (const full of COLLOQUIAL_JOINED[colloquial[1].toLocaleLowerCase("de-DE")]) {
+          const target = (/^\p{Lu}/u.test(colloquial[1]) ? full[0].toUpperCase() + full.slice(1) : full) + colloquial[2];
+          const read = await readAs(word, context, target, []);
+          if ((read?.candidates || []).length) { read.formReference = {...read.formReference, colloquial:true}; return read; }
+        }
+        return result;
       }
       if (!/ß/u.test(String(word)) || (result?.candidates || []).some(c => c.source === "main")) return result;
       const spelling = String(word).replace(OLD_SS, "ss");
@@ -18872,7 +18967,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return read || resolution;
     }
     // The clicked spelling read as another one in the same place (B5 references, G12 old spellings).
-    async function readAs(word, context, target, candidates, utteranceStart = null) {
+    async function readAs(word, context, target, candidates, utteranceStart = null, via = resolveInternal) {
       const oldSpelling = candidates === null;
       if (utteranceStart === null) { const before = String(context?.sentence || "").slice(0,context?.tokenOffset || 0);
         utteranceStart = !before.trim() || /[.!?…:]\s*[«„“"‘»”]*\s*(?:[–—-]\s*)?$/u.test(before) || /[«„“"‘]\s*$/u.test(before); }
@@ -18888,7 +18983,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (sentence.slice(context.tokenOffset,context.tokenOffset+word.length) !== word) return resolution;
         targetContext = {...context,sentence:sentence.slice(0,context.tokenOffset)+spelling+sentence.slice(context.tokenOffset+word.length)};
       }
-      const followed = await resolveInternal(spelling,targetContext);
+      const followed = await via(spelling,targetContext);
       if (!followed?.candidates?.length || followed.candidates.every(c => referenceTarget(c,spelling))) return resolution;
       const reference = oldSpelling ? {form:word,target,notes:[],oldSpelling:true} : {form:word,target,notes:[...new Set(candidates.flatMap(c => c.meanings || []))]};
       // Highlight spans of the target sentence are shifted by the length difference after the clicked word.

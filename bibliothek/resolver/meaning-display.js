@@ -799,6 +799,11 @@
       const line = language === 'ru' ? `старое написание: ${ref.form} = ${ref.target}` : `old spelling: ${ref.form} = ${ref.target}`;
       model = {...model, note:model.note ? `${model.note}; ${line}` : line};
     }
+    // (advisor 14.11) a colloquial short particle read as the full one (reingeschaut — hereingeschaut)
+    if (ref?.colloquial && candidate) {
+      const line = language === 'ru' ? `разг.: ${ref.form} = ${ref.target}` : `colloquial: ${ref.form} = ${ref.target}`;
+      model = {...model, note:model.note ? `${model.note}; ${line}` : line};
+    }
     // L15 step 4 (reference F12-B5j, user 25.10, variant Б): uns of lass uns — its own meaning and the line «здесь: lass uns …».
     if (candidate?.construction?.id === 'lassen-infinitive' && candidate.construction.sense === 'letUs' && candidate.item?.type === 'Pronomen') {
       const line = language === 'ru' ? 'здесь: lass uns … — «давай(те) …»' : 'here: lass uns … — “let’s …”';

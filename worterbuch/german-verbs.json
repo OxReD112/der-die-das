@@ -40150,6 +40150,55 @@
     }
   },
   {
+    "id": "verb-2779",
+    "infinitive": "durchstreifen",
+    "translation_ru": "бродить по (чему-либо), исходить; прочёсывать, патрулировать",
+    "translation_en": "to roam (through), to wander (through); to patrol, to scour",
+    "auxiliary": "haben",
+    "usage_note_ru": "Неотделяемый: durchstreifte, hat durchstreift. Всегда с винительным: den Wald, die Stadt durchstreifen. Ср. streifen (sein) durch + Akk: Er ist durch den Wald gestreift.",
+    "usage_note_en": "Inseparable: durchstreifte, hat durchstreift. Always with the accusative: den Wald, die Stadt durchstreifen. Cf. streifen (sein) durch + Akk: Er ist durch den Wald gestreift.",
+    "example_de": "Die Kinder haben den ganzen Nachmittag den Wald hinter dem Dorf durchstreift.",
+    "example_cloze": "Die Kinder haben den ganzen Nachmittag den Wald hinter dem Dorf {{c1::durchstreift}}.",
+    "example_ru": "Дети всю вторую половину дня бродили по лесу за деревней.",
+    "example_en": "The children roamed the woods behind the village all afternoon.",
+    "perfect_form": "haben durchstreift",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "бродить по чему-либо, прочёсывать что-либо (den Wald, die Stadt)",
+        "note_en": "to roam, to comb something (den Wald, die Stadt)"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "durchstreife",
+        "du": "durchstreifst",
+        "er/sie/es": "durchstreift",
+        "wir": "durchstreifen",
+        "ihr": "durchstreift",
+        "sie": "durchstreifen"
+      },
+      "Präteritum": {
+        "ich": "durchstreifte",
+        "du": "durchstreiftest",
+        "er/sie/es": "durchstreifte",
+        "wir": "durchstreiften",
+        "ihr": "durchstreiftet",
+        "sie": "durchstreiften"
+      },
+      "Konjunktiv II": {
+        "ich": "durchstreifte",
+        "du": "durchstreiftest",
+        "er/sie/es": "durchstreifte",
+        "wir": "durchstreiften",
+        "ihr": "durchstreiftet",
+        "sie": "durchstreiften"
+      }
+    }
+  },
+  {
     "id": "verb-843",
     "infinitive": "einatmen",
     "translation_ru": "вдыхать",
@@ -124394,6 +124443,219 @@
         "pattern": "über / durch / um + Akkusativ",
         "note_ru": "пронестись над чем-либо (über das Land), через что-либо (durch die Straßen) или за что-либо (um die Ecke)",
         "note_en": "to sweep across (über das Land), through (durch die Straßen) or round something (um die Ecke)"
+      }
+    ]
+  },
+  {
+    "id": "verb-2780",
+    "infinitive": "umrempeln",
+    "translation_ru": "сбить с ног (толкнув)",
+    "translation_en": "to knock over, to bump into (and knock down)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Разг. Отделяемый: rempelt um, rempelte um, hat umgerempelt. Всегда с винительным (кого). Ср. anrempeln — толкнуть.",
+    "usage_note_en": "Colloquial. Separable: rempelt um, rempelte um, hat umgerempelt. Always with the accusative (whom). Cf. anrempeln — to jostle.",
+    "example_de": "Im Gedränge hat mich ein Mann mit einem großen Koffer fast umgerempelt.",
+    "example_cloze": "Im Gedränge hat mich ein Mann mit einem großen Koffer fast {{c1::umgerempelt}}.",
+    "example_ru": "В толкотне меня чуть не сбил с ног мужчина с большим чемоданом.",
+    "example_en": "In the crush a man with a big suitcase almost knocked me over.",
+    "perfect_form": "haben umgerempelt",
+    "forms": {
+      "Präsens": {
+        "ich": "rempele um",
+        "du": "rempelst um",
+        "er/sie/es": "rempelt um",
+        "wir": "rempeln um",
+        "ihr": "rempelt um",
+        "sie": "rempeln um"
+      },
+      "Präteritum": {
+        "ich": "rempelte um",
+        "du": "rempeltest um",
+        "er/sie/es": "rempelte um",
+        "wir": "rempelten um",
+        "ihr": "rempeltet um",
+        "sie": "rempelten um"
+      },
+      "Konjunktiv II": {
+        "ich": "rempelte um",
+        "du": "rempeltest um",
+        "er/sie/es": "rempelte um",
+        "wir": "rempelten um",
+        "ihr": "rempeltet um",
+        "sie": "rempelten um"
+      },
+      "Imperativ": {
+        "du": "Rempel um!",
+        "ihr": "Rempelt um!",
+        "Sie": "Rempeln Sie um!"
+      }
+    },
+    "separable_prefix": "um",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "сбить кого-либо с ног",
+        "note_en": "to knock someone over"
+      }
+    ]
+  },
+  {
+    "id": "verb-2781",
+    "infinitive": "umwidmen",
+    "translation_ru": "перепрофилировать, изменить назначение (земли, средств)",
+    "translation_en": "to repurpose; to rezone (land), to reallocate (funds)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Канцелярское слово. Отделяемый: widmet um, widmete um, hat umgewidmet. etwas in etwas umwidmen: eine Fläche in Bauland umwidmen — перевести участок в земли под застройку; Haushaltsmittel umwidmen — перераспределить бюджетные средства.",
+    "usage_note_en": "Official language. Separable: widmet um, widmete um, hat umgewidmet. etwas in etwas umwidmen: eine Fläche in Bauland umwidmen — to rezone a plot as building land; Haushaltsmittel umwidmen — to reallocate budget funds.",
+    "example_de": "Die Stadt will das alte Bahngelände in einen Park umwidmen.",
+    "example_cloze": "Die Stadt will das alte Bahngelände in einen Park {{c1::umwidmen}}.",
+    "example_ru": "Город хочет превратить бывшую железнодорожную территорию в парк.",
+    "example_en": "The city wants to convert the old railway site into a park.",
+    "perfect_form": "haben umgewidmet",
+    "forms": {
+      "Präsens": {
+        "ich": "widme um",
+        "du": "widmest um",
+        "er/sie/es": "widmet um",
+        "wir": "widmen um",
+        "ihr": "widmet um",
+        "sie": "widmen um"
+      },
+      "Präteritum": {
+        "ich": "widmete um",
+        "du": "widmetest um",
+        "er/sie/es": "widmete um",
+        "wir": "widmeten um",
+        "ihr": "widmetet um",
+        "sie": "widmeten um"
+      },
+      "Konjunktiv II": {
+        "ich": "widmete um",
+        "du": "widmetest um",
+        "er/sie/es": "widmete um",
+        "wir": "widmeten um",
+        "ihr": "widmetet um",
+        "sie": "widmeten um"
+      },
+      "Imperativ": {
+        "du": "Widme um!",
+        "ihr": "Widmet um!",
+        "Sie": "Widmen Sie um!"
+      }
+    },
+    "separable_prefix": "um",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "перепрофилировать что-либо",
+        "note_en": "to convert something"
+      },
+      {
+        "pattern": "in + Akkusativ",
+        "note_ru": "во что-либо, под что-либо",
+        "note_en": "into something"
+      }
+    ]
+  },
+  {
+    "id": "verb-2782",
+    "infinitive": "umsteuern",
+    "translation_ru": "изменить курс (перен.), сменить направление",
+    "translation_en": "to change course (fig.), to change direction",
+    "auxiliary": "haben",
+    "usage_note_ru": "Обычно без дополнения, в переносном смысле (политика, экономика). Отделяемый: steuert um, steuerte um, hat umgesteuert. Также с винительным (техн.): die Drehrichtung umsteuern — изменить направление вращения; den Verkehr umsteuern — перенаправить движение.",
+    "usage_note_en": "Usually without an object, figuratively (politics, economy). Separable: steuert um, steuerte um, hat umgesteuert. Also with the accusative (technical): die Drehrichtung umsteuern — to reverse the direction of rotation; den Verkehr umsteuern — to redirect traffic.",
+    "example_de": "Nach der Wahl musste die Regierung in der Energiepolitik umsteuern.",
+    "example_cloze": "Nach der Wahl musste die Regierung in der Energiepolitik {{c1::umsteuern}}.",
+    "example_ru": "После выборов правительству пришлось изменить курс в энергетической политике.",
+    "example_en": "After the election the government had to change course on energy policy.",
+    "perfect_form": "haben umgesteuert",
+    "forms": {
+      "Präsens": {
+        "ich": "steuere um",
+        "du": "steuerst um",
+        "er/sie/es": "steuert um",
+        "wir": "steuern um",
+        "ihr": "steuert um",
+        "sie": "steuern um"
+      },
+      "Präteritum": {
+        "ich": "steuerte um",
+        "du": "steuertest um",
+        "er/sie/es": "steuerte um",
+        "wir": "steuerten um",
+        "ihr": "steuertet um",
+        "sie": "steuerten um"
+      },
+      "Konjunktiv II": {
+        "ich": "steuerte um",
+        "du": "steuertest um",
+        "er/sie/es": "steuerte um",
+        "wir": "steuerten um",
+        "ihr": "steuertet um",
+        "sie": "steuerten um"
+      },
+      "Imperativ": {
+        "du": "Steuere um!",
+        "ihr": "Steuert um!",
+        "Sie": "Steuern Sie um!"
+      }
+    },
+    "separable_prefix": "um"
+  },
+  {
+    "id": "verb-2783",
+    "infinitive": "abstutzen",
+    "translation_ru": "подрезать, подстричь (укоротить)",
+    "translation_en": "to trim, to clip, to cut back",
+    "auxiliary": "haben",
+    "usage_note_ru": "Отделяемый: stutzt ab, stutzte ab, hat abgestutzt. Всегда с винительным: die Hecke, den Bart, die Äste abstutzen. Близко: stutzen, kürzen.",
+    "usage_note_en": "Separable: stutzt ab, stutzte ab, hat abgestutzt. Always with the accusative: die Hecke, den Bart, die Äste abstutzen. Similar: stutzen, kürzen.",
+    "example_de": "Im Herbst hat der Gärtner die Hecke ordentlich abgestutzt.",
+    "example_cloze": "Im Herbst hat der Gärtner die Hecke ordentlich {{c1::abgestutzt}}.",
+    "example_ru": "Осенью садовник как следует подстриг живую изгородь.",
+    "example_en": "In autumn the gardener gave the hedge a good trim.",
+    "perfect_form": "haben abgestutzt",
+    "forms": {
+      "Präsens": {
+        "ich": "stutze ab",
+        "du": "stutzt ab",
+        "er/sie/es": "stutzt ab",
+        "wir": "stutzen ab",
+        "ihr": "stutzt ab",
+        "sie": "stutzen ab"
+      },
+      "Präteritum": {
+        "ich": "stutzte ab",
+        "du": "stutztest ab",
+        "er/sie/es": "stutzte ab",
+        "wir": "stutzten ab",
+        "ihr": "stutztet ab",
+        "sie": "stutzten ab"
+      },
+      "Konjunktiv II": {
+        "ich": "stutzte ab",
+        "du": "stutztest ab",
+        "er/sie/es": "stutzte ab",
+        "wir": "stutzten ab",
+        "ihr": "stutztet ab",
+        "sie": "stutzten ab"
+      },
+      "Imperativ": {
+        "du": "Stutz ab!",
+        "ihr": "Stutzt ab!",
+        "Sie": "Stutzen Sie ab!"
+      }
+    },
+    "separable_prefix": "ab",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "note_ru": "подрезать, подстричь что-либо",
+        "note_en": "to trim something"
       }
     ]
   }
