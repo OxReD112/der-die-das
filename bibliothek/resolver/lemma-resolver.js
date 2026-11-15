@@ -20315,13 +20315,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return i >= 0 && (imperativeOnly ? [words[i-1]] : [words[i-1],words[i+1]]).some(x => x && persons.has(pronounPerson[norm(x[0])]) &&
           !/[.,;:!?]/u.test(sentence.slice(Math.min(x.index,start),Math.max(x.index,start))));
       };
+      // (advisor 15.11: one rule for every word-final apostrophe — könnt' / wär' / hätt' / würd' / sag' / geh' read as könnte /
+      // wäre / hätte / würde / sage / gehe when that full form is a finite verb; a capital only at the start of its part (Hans',
+      // Norris’ — a genitive); not inside a quote opened by a single quote mark ('Hallo', 'Pakt der Korrupten'))
+      const elidedE = (stem,start) => {
+        if (norm(stem) === "hab") return shortVerb(stem,start);
+        if (!/^\p{Ll}+$/u.test(stem) && !(/^\p{Lu}\p{Ll}+$/u.test(stem) && clauseInitial(sentence,start))) return false;
+        const before = sentence.slice(0,start);
+        const open = [...before.matchAll(/(?:^|[\s(„"“»«—–-])[‚‘'’`](?=[\p{L}\p{M}])/gu)].pop();
+        if (open && !/[\p{L}\p{M}][’'‘]/u.test(before.slice(open.index+open[0].length))) return false;
+        return (verbAnalyses.get(norm(stem)+"e") || []).some(a => a.kind === "finite");
+      };
       const result = [];
       // (advisor 05.11, item 27: hab’ / hab' — the apostrophe stands for the dropped -e, the same form as hab: Das letzte Viertel
       // hab' ich im Wirtshaus gegessen, Nun hab' ich dich)
       for (const m of sentence.matchAll(/(?<![\p{L}\p{M}’'])([\p{L}\p{M}]+)(?:([’'])s|([’'])(?![\p{L}\p{M}]))?(?![\p{L}\p{M}’'])/gu)) {
         const [text,stem,apostrophe,elided] = m, start = m.index;
         if (elided) {
-          if (norm(stem) === "hab" && shortVerb(stem,start)) result.push({start,end:start+stem.length,text:stem,replacement:stem+"e",base:stem+"e",kind:"e",stem});
+          if (elidedE(stem,start)) result.push({start,end:start+stem.length,text:stem,replacement:stem+"e",base:stem+"e",kind:"e",stem});
           continue;
         }
         if (apostrophe) {
