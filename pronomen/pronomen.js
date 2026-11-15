@@ -91,20 +91,9 @@ function weakLabel(key) {
 }
 
 /* ===== DAILY STATS (Home: today's answers) ===== */
-const DAILY_STATS_KEY = "deutschDailyStatsV1";
+// 15.11: the score of the day is counted in one place — components/deutsch-daily-v1.js (same rules, same data)
 function recordDailyAnswer() {
-  let stats = {};
-  try {
-    stats = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
-  } catch (e) {
-    stats = {};
-  }
-  const today = DeutschDay.key();
-  if (stats.date !== today) stats = { date: today };
-  stats.pronomen = Number(stats.pronomen || 0) + 1;
-  try {
-    localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(stats));
-  } catch (e) {}
+  window.DeutschDaily.record("pronomen", true);
 }
 
 /* ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====

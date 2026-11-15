@@ -158,17 +158,9 @@ function recordProgress(entry, ok) {
 
 /* ===== DAILY STATS (read by Home) =====
    One finished card (all three lines) counts as one answer; it is correct only when all three lines were right. */
-const DAILY_STATS_KEY = "deutschDailyStatsV1";
+// 15.11: the score of the day is counted in one place — components/deutsch-daily-v1.js (same rules, same data)
 function recordDaily(correct) {
-  try {
-    const today = DeutschDay.key();
-    let data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
-    if (data.date !== today) data = { date: today };
-    if (!data.ortspraepositionen) data.ortspraepositionen = { answers: 0, correct: 0 };
-    data.ortspraepositionen.answers++;
-    if (correct) data.ortspraepositionen.correct++;
-    localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
-  } catch (e) {}
+  window.DeutschDaily.record("ortspraepositionen", correct);
 }
 
 /* ===== SESSION =====

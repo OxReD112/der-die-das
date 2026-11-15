@@ -82,17 +82,9 @@ if (hasProgress()) {
 }
 
 /* ===== DAILY STATS (Home: today's points and the Artikel tile) ===== */
-const DAILY_STATS_KEY = "deutschDailyStatsV1";
+// 15.11: the score of the day is counted in one place — components/deutsch-daily-v1.js (same rules, same data)
 function recordDailyArtikel(ok) {
-  try {
-    const today = DeutschDay.key();
-    let data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
-    if (data.date !== today) data = { date: today, artikel: { answers: 0, correct: 0 } };
-    if (!data.artikel) data.artikel = { answers: 0, correct: 0 };
-    data.artikel.answers++;
-    if (ok) data.artikel.correct++;
-    localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
-  } catch (e) {}
+  window.DeutschDaily.record("artikel", ok);
 }
 
 /* ===== DECK ===== */

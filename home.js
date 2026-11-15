@@ -502,67 +502,38 @@ function renderDailyStats() {
   } catch (e) {}
   if (data.date !== DeutschDay.key()) data = {};
 
-  function answerCount(value) {
-    if (value && typeof value === "object") return Math.max(0, Number(value.answers) || 0);
-    return Math.max(0, Number(value) || 0);
-  }
-
-  const configs = [
-    { key: "artikel", selector: ".tile-articles", status: "artikelStatus", goal: 10 },
-    { key: "verbformen", selector: ".tile-verbs", status: null, goal: 10 },
-    { key: "pronomen", selector: ".tile-pronouns", status: null, goal: 10 },
-    { key: "praepositionen", selector: ".tile-prepositions", status: null, goal: 10 }
-  ];
-
-  let exercisePoints = 0;
-
-  configs.forEach(cfg => {
-    let answers = answerCount(data[cfg.key]);
-
-    if (cfg.key === "verbformen") {
-      const partizipII = Number(data.verbformen?.partizipII) || 0;
-      const modalverben = Number(data.verbformen?.modalverben) || 0;
-      const vielseitigeVerben = Number(data.verbformen?.vielseitigeVerben) || 0;
-      answers = partizipII + modalverben + vielseitigeVerben;
-    }
-
-    if (cfg.key === "praepositionen") {
-      // Sum of all Präpositionen exercises; add new ones here.
-      answers =
-        answerCount(data.festerKasus) +
-        answerCount(data.verbenMitPraepositionen) +
-        answerCount(data.ortspraepositionen);
-    }
-
-    exercisePoints += answers;
-
-    const tile = document.querySelector(cfg.selector);
-    const status = cfg.status ? document.getElementById(cfg.status) : tile?.querySelector(".status");
-
-    const done = answers >= cfg.goal;
-
-    if (status) {
-      status.textContent = done ? "✓ fertig" : `${Math.min(answers, cfg.goal)} / ${cfg.goal}`;
-    }
-    if (tile) tile.classList.toggle("is-done", done);
-  });
-
-  let vocabPoints = 0;
+  // 15.11: the numbers come from components/deutsch-daily-v1.js (the same file the native app runs)
   let vocabDone = false;
   try {
     const home = JSON.parse(localStorage.getItem("deutschHomeStatsV1") || "{}");
     const ws = home.wortschatz;
     vocabDone = !!(ws && ws.date === DeutschDay.key() && ws.done);
-    if (vocabDone) vocabPoints = 60;
   } catch (e) {}
+  const day = DeutschDaily.tally(data, DeutschDay.key(), vocabDone);
+  const points = day.points;
 
-  const points = exercisePoints + vocabPoints;
+  [
+    { key: "artikel", selector: ".tile-articles", status: "artikelStatus" },
+    { key: "verbformen", selector: ".tile-verbs", status: null },
+    { key: "pronomen", selector: ".tile-pronouns", status: null },
+    { key: "praepositionen", selector: ".tile-prepositions", status: null }
+  ].forEach(cfg => {
+    const answers = day.tiles[cfg.key];
+    const tile = document.querySelector(cfg.selector);
+    const status = cfg.status ? document.getElementById(cfg.status) : tile?.querySelector(".status");
+    const done = answers >= DeutschDaily.GOAL;
+    if (status) {
+      status.textContent = done ? "✓ fertig" : `${Math.min(answers, DeutschDaily.GOAL)} / ${DeutschDaily.GOAL}`;
+    }
+    if (tile) tile.classList.toggle("is-done", done);
+  });
+
   document.getElementById("todayTotal").textContent = String(points);
   document.getElementById("todayProgress").style.width = `${Math.min(points, 100)}%`;
 
   const hardStopOverlay = document.getElementById("hardStopOverlay");
   const dailyLimitEnabled = localStorage.getItem("deutschDailyLimitEnabledV1") !== "0";
-  const hardStop = dailyLimitEnabled && vocabDone && points >= 150;
+  const hardStop = DeutschDaily.limitReached(points, vocabDone, dailyLimitEnabled);
   if (hardStopOverlay) {
     hardStopOverlay.classList.toggle("is-active", hardStop);
     hardStopOverlay.setAttribute("aria-hidden", hardStop ? "false" : "true");
@@ -576,15 +547,7 @@ window.addEventListener("message", event => {
   if (type !== "deutsch:exerciseAnswer") return;
   if (exercise !== "partizipII" && exercise !== "modalverben" && exercise !== "vielseitigeVerben") return;
 
-  let data = {};
-  try {
-    data = JSON.parse(localStorage.getItem(DAILY_STATS_KEY) || "{}");
-  } catch (e) {}
-  if (data.date !== DeutschDay.key()) data = { date: DeutschDay.key() };
-  data.verbformen ||= {};
-  data.verbformen[exercise] = (Number(data.verbformen[exercise]) || 0) + 1;
-
-  localStorage.setItem(DAILY_STATS_KEY, JSON.stringify(data));
+  DeutschDaily.record(exercise, true); // 15.11: components/deutsch-daily-v1.js
   renderDailyStats();
 });
 
