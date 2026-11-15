@@ -9994,7 +9994,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // does not cover the plain verb (auf ihn stoßen solltest).
         const reflexiveIn = indices.some(i => reflexivePronouns.has(norm(tokens[i][0])));
         const ownTail = matches(tail).filter(e => reflexiveIn || !(e.type === "Verb" && /^sich\s/u.test(norm(e.word))));
-        if (!/^\p{Ll}/u.test(form) || ownTail.length || lexicalSeparated(norm(form)) || norm(tokens[tail-1][0]) === "zu") continue;
+        // (advisor 15.11, modals recount: the stem of an own separable verb — wachen of aufwachen, füllen of ausfüllen, stiften of
+        // anstiften — is that verb only with its particle in the part; without it the form closing the modal part is the infinitive of
+        // the external verb: Ich will … bei dem Kinde wachen, wollen wir … den Bauch füllen, ich will bald Ruhe stiften)
+        const separatedHere = (separatedForms.get(norm(form)) || []).some(pair => !pair.entry.derivedSeparable &&
+          indices.some(i => i !== tail && norm(tokens[i][0]) === pair.prefix));
+        if (!/^\p{Ll}/u.test(form) || ownTail.length || separatedHere || norm(tokens[tail-1][0]) === "zu") continue;
         if (COMPARISON_PARTICLES.includes(norm(tokens[tail+1]?.[0] ?? ""))) continue;
         // G15 (18.10.2026): an article / pronoun spelling before a dash is a broken-off phrase
         // (wollte ich einen – hier lang), not the infinitive (einen «unite»).
