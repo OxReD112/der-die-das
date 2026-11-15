@@ -2839,7 +2839,8 @@
           // haben / sein / werden before it is the verb's own group — konnte sich als einzige Single … platzieren)
           !analyses.slice(start,i).some(rows=>rows.some(a=>a.kind==='finite'&&!modalLemmas.has(a.base)&&!['haben','sein','werden'].includes(a.base)));
         const midSubordinator=subordinators.has(words[i])&&midClauseDoch(sentence,tokens,i);
-        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!aberBracket&&!particleDenn&&!nominalJoin&&!bracketJoin ||
+        const alsAttribute=alsInAttributeFrame(tokens,i);
+        if (/[,;:.!?…“”„"«»()–—]/u.test(gap) || subordinators.has(words[i])&&!adverbialDamit&&!nominalJoin&&!alsAs&&!midSubordinator&&!alsAttribute || coreOpens&&!bracketJoin || coordinators.has(words[i])&&!nominalCoord&&!adverbialAber&&!aberBracket&&!particleDenn&&!nominalJoin&&!bracketJoin ||
           comparisonAfterParticle(i,start)) {
           clauses.push({start,end:i-1,relation});
           start=i;relation=/[;:.!?…]/u.test(gap)?'root':subordinators.has(words[i])?'subordinate':coordinators.has(words[i])?'coordinate':/^\s*,\s*$/u.test(gap)?'comma':'boundary';
@@ -2979,7 +2980,9 @@
           // second subject merely because their article also has nominative uses.
           let embedded=false;
           for(let j=i-1;j>=clause.start;j--){
-            if(analyses[j].some(a=>a.kind==='finite'))break;
+            // (advisor 15.11: a participle after als inside an attribute frame is no finite verb — nach einem schwächer als erwartet
+            // ausgefallenen Quartalsbericht: the noun stays inside the prepositional group)
+            if(analyses[j].some(a=>a.kind==='finite')&&!(words[j-1]==='als'&&alsInAttributeFrame(tokens,j-1)))break;
             if(prepositions.has(words[j])&&!(words[j]==='vor'&&words[j+1]==='allem')){embedded=true;break;}
           }
           if(embedded)continue;
@@ -4820,6 +4823,11 @@
         // als 20 Prozent; below — the adverb / adjective words of the scan, without its comparative check)
         if (alsNounPhraseStart(tokens, b) || alsNumberAfter(tokens, b)) return true;
         if (!/^\s+$/u.test(gap(b,b+1))) return false;
+        // (advisor 15.11, as wie 10.11 d31e479: als with no finite verb form up to the end of its part — als erwartet, als geplant, als
+        // gedacht — is a comparison, not a boundary: fiel besser als erwartet aus, kam früher als geplant an. A word that is a participle
+        // too counts as none; a subject pronoun or a finite-only form opens a clause — als er kam; als ob stays)
+        { let e = b + 1; while (e + 1 < tokens.length && !hard(e, e+1) && !soft(e, e+1)) e++;
+          if (e > b + 1 && comparisonWithoutVerb(tokens, b, e, true)) return true; }
         const key = norm(next[0]), entries = forms.get(key) || [];
         const particle = /^(?:ab|an|auf|aus|bei|ein|her|hin|mit|nach|vor|weg|zu|zurück|fort|los|hinauf|hinab|herauf|herab|hinunter|herunter|hinein|herein|hinaus|heraus|hinüber|herüber|herum|umher|davon|dahin|daher|zusammen|weiter|nieder|empor|entgegen|vorbei|voran|voraus|durch|um|über|unter)$/u;
         // auf und ab, hin und her are idioms of their own; nach und nach repeats one word.
@@ -6946,6 +6954,45 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function alsNumberAfter(tokens, i) {
       return /^\s+\d/u.test(String(tokens[i].input ?? "").slice(tokens[i].index + tokens[i][0].length, tokens[i+1]?.index ?? 0));
     }
+    // Links chat (advisor 15.11, Zuversicht): a comparative + als + a declined adjective / participle right before a noun inside the
+    // frame of a determiner is one attribute — einem etwas schwächer als erwartet ausgefallenen Quartalsbericht, ein höher als erwartetes
+    // Ergebnis, einen besser als erwarteten Bericht: als opens no clause there. Not without the ending (besser als erwartet — a predicate),
+    // not with a determiner after als (größer als der Vater).
+    const ATTRIBUTE_DEGREE_WORD = /^(?:etwas|noch|viel|weit|deutlich|wesentlich|erheblich|leicht|kaum|ganz|sehr|deutlicher|zunächst|wenig)$/u;
+    function alsInAttributeFrame(tokens, i) {
+      if (norm(tokens[i]?.[0] ?? "") !== "als" || i < 2) return false;
+      const text = String(tokens[i].input ?? ""), gap = (a, b) => text.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      const lower = k => /^\p{Ll}/u.test(tokens[k]?.[0] ?? "");
+      const c = norm(tokens[i-1][0]);
+      if (!lower(i-1) || /[^\s]/u.test(gap(i-1, i)) || !(/^(?:mehr|weniger|besser|lieber|eher)$/u.test(c) || /er$/u.test(c) && c.length >= 5 &&
+        !NOT_COMPARATIVE_ER.test(c) && !COMPARATIVE_LOOKALIKE.test(c) && !DETERMINER_WORD.test(c))) return false;
+      let k = i - 2;
+      while (k >= 0 && lower(k) && ATTRIBUTE_DEGREE_WORD.test(norm(tokens[k][0])) && !/[^\s]/u.test(gap(k, k+1))) k--;
+      if (k < 0 || !DETERMINER_WORD.test(norm(tokens[k][0])) || /[^\s]/u.test(gap(k, k+1))) return false;
+      for (let j = i + 1; j <= i + 3 && j + 1 < tokens.length; j++) {
+        if (!lower(j) || /[^\s]/u.test(gap(j-1, j)) || DETERMINER_WORD.test(norm(tokens[j][0]))) return false;
+        if (/(?:e|en|em|er|es)$/u.test(norm(tokens[j][0])) && LOWERCASE_DECLINED_WORD.test(tokens[j][0]) && /^\p{Lu}/u.test(tokens[j+1][0]) &&
+          !/[^\s]/u.test(gap(j, j+1))) return true;
+      }
+      return false;
+    }
+    // A comparison particle without a verb (links chat, advisor 15.11 — one function for wie 10.11 d31e479 and als 15.11): the words
+    // after wie / als up to `end` are plain words — a capital, preposition, determiner, adverb, adjective, pronoun, number or a declined
+    // word, und / oder — and no verb form: ich kann nicht so laufen wie du, wie nie zuvor; fiel besser als sonst aus. With
+    // `participle`, a word that is also a participle counts as plain (als erwartet, als geplant, als gedacht: fiel besser als erwartet
+    // aus, kam früher als geplant an); wie angekündigt stays a clause for wie. A subject pronoun + a finite verb (als er kam) has a verb.
+    function comparisonPlainWord(t, participle = false) {
+      const w = norm(t[0]);
+      if (/^\p{Lu}/u.test(t[0]) || prepositions.has(w) || DETERMINER_WORD.test(w) || ["und","oder"].includes(w)) return true;
+      const rows = forms.get(w) || [], analyses = verbAnalyses.get(w) || [];
+      if (participle && /^\p{Ll}/u.test(t[0]) && analyses.some(a => a.kind === "participle")) return true;
+      if (rows.some(e => e.type === "Verb") || analyses.length) return false;
+      return LOWERCASE_DECLINED_WORD.test(t[0]) || rows.some(e => ["Adverb","Adjektiv","Pronomen","article","Zahlwort","numeral"].includes(e.type));
+    }
+    function comparisonWithoutVerb(tokens, i, end, participle = false) {
+      if (!COMPARISON_PARTICLES.includes(norm(tokens[i]?.[0] ?? "")) || end <= i || norm(tokens[i+1]?.[0] ?? "") === "ob") return false;
+      return tokens.slice(i+1, end+1).every(t => comparisonPlainWord(t, participle));
+    }
     function alsNounPhrase(tokens, i, verb) {
       if (norm(tokens[i]?.[0] ?? "") !== "als") return false;
       const w = norm(tokens[i-1]?.[0] ?? "");
@@ -7001,7 +7048,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (links chat, advisor 09.11, map N3: wie with no verb form after it is a comparison, not a new part — as und / oder in
         // coordinatorOpensClause: ich kann nicht so laufen wie du, Er hat so gut gespielt wie nie zuvor, wurde … so demokratisch
         // gewählt wie bei uns. wie + a clause — wie er sagte, wie angekündigt — is no Nachfeld: a verb form in the rest)
-        if (first === "wie" && !zuEnd) return rest.length > 1 && rest.slice(1).every(t => plainWord(t) || ["und","oder"].includes(norm(t[0])));
+        if (first === "wie" && !zuEnd) return comparisonWithoutVerb(tokens, from, tail);
         if (!body.every(plainWord)) return false;
         if (["um","ohne","statt","anstatt"].includes(first)) return zuEnd;
         // (review 04.11: a bare zu-infinitive only for a verb whose card takes zu + Infinitiv — hatte geplant … zu werden; not
