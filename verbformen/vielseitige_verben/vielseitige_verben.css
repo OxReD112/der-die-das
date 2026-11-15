@@ -70,7 +70,20 @@ body {
   padding: calc(var(--shell-top) + 36px) 20px 36px;
 }
 #study {
+  /* the round's top bar where every exercise has it (15.11.2026, Alena): title and counter 35px below the status bar,
+     the line at 58 — on every screen. The start and the end screens keep the family's --shell-top. */
+  --shell-top: calc(env(safe-area-inset-top) + 17px);
   padding-top: var(--shell-top);
+}
+#study .progress {
+  margin-top: -1px;
+  top: calc(var(--shell-top) + 35px);
+}
+/* phones: the bar came 7px lower, the question keeps its place (on the SE it would shrink otherwise) */
+@media (max-width: 699.98px) {
+  #study .progress {
+    margin-bottom: 20px;
+  }
 }
 .title {
   font-family: var(--serif);
@@ -465,10 +478,22 @@ body:has(#study:not(.hidden)) .version-mark {
 .result.good {
   border-top-color: var(--mint);
   box-shadow: 0 -24px 65px -32px color-mix(in srgb, var(--mint) 80%, transparent);
+  animation: resultGlowGood 0.42s ease-out; /* the glow fades in with the line, as in Partizip II (15.11.2026) */
 }
 .result.bad {
   border-top-color: var(--red);
   box-shadow: 0 -24px 70px -30px color-mix(in srgb, var(--red) 85%, transparent);
+  animation: resultGlowBad 0.42s ease-out;
+}
+@keyframes resultGlowGood {
+  from {
+    box-shadow: 0 -24px 65px -32px color-mix(in srgb, var(--mint) 0%, transparent);
+  }
+}
+@keyframes resultGlowBad {
+  from {
+    box-shadow: 0 -24px 70px -30px color-mix(in srgb, var(--red) 0%, transparent);
+  }
 }
 .result.good::before {
   background: var(--mint);
@@ -1052,10 +1077,11 @@ body:has(#study:not(.hidden)) .version-mark {
   .hint-rows .lbl {
     font-size: 16px;
   }
+  .state,
   .scene-label,
   .form-kind,
   .explanation .vv-blocks {
-    font-size: 14px;
+    font-size: 14px; /* .state: the verdict one step up, as in every exercise (15.11.2026) */
   }
   .form-line {
     font-size: 28px;

@@ -660,7 +660,7 @@ html:not(.is-touch) .check {
    tabletAnswer). Small text one step up. */
 @media (min-width: 700px) and (min-height: 740px) {
   .app {
-    width: min(664px, 100%);
+    width: min(636px, 100%); /* a column of 600, as every exercise (15.11.2026; was 664) */
   }
   #keyboardMount {
     width: 100%;

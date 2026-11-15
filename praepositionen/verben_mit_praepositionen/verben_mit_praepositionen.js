@@ -15,7 +15,7 @@ const IS_TOUCH = isTouchDevice();
 document.documentElement.classList.toggle("is-touch", IS_TOUCH);
 
 // Phone sideways / large text: the round flows from the top instead of the two zones (see the CSS)
-const SHORT_SCREEN = window.matchMedia("(max-height: 559px)");
+const SHORT_SCREEN = window.matchMedia("(max-height: 559px), (max-width: 340px) and (max-height: 609px)"); // as everywhere (15.11.2026)
 
 /* ===== START-SCREEN DESCRIPTION ===== „Worum geht's?“, in the user's language so it is surely understood */
 const START_ABOUT = {

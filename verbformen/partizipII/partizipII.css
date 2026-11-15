@@ -66,7 +66,20 @@ body {
   padding: calc(var(--shell-top) + 36px) 20px 36px;
 }
 #study {
+  /* the round's top bar where every exercise has it (15.11.2026, Alena): title and counter 35px below the status bar,
+     the line at 58 — on every screen. The start and the end screens keep the family's --shell-top. */
+  --shell-top: calc(env(safe-area-inset-top) + 17px);
   padding-top: var(--shell-top);
+}
+#study .progress {
+  margin-top: -1px;
+  top: calc(var(--shell-top) + 35px);
+}
+/* phones: the bar came 7px lower, the question keeps its place (on the SE it would shrink otherwise) */
+@media (max-width: 699.98px) {
+  #study .progress {
+    margin-bottom: 26px;
+  }
 }
 .title {
   font-family: var(--serif);

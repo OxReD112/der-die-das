@@ -225,6 +225,9 @@ body:has(#game:not(.hidden)) .version-mark {
    Green stays reserved for „correct“. Position = Partizip II: title and counter centred 33.5px from the top,
    line at 55px. */
 #game {
+  /* the round's top bar where every exercise has it (15.11.2026, Alena): 10px below the status bar on every screen
+     (on tablets and computers it was clamp(20px, 5vw, 38px) — lower than in the other exercises) */
+  --shell-top: calc(env(safe-area-inset-top) + 10px);
   padding-top: var(--shell-top);
 }
 .top {

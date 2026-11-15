@@ -351,6 +351,12 @@ body:has(#game:not(.hidden)) .version-mark {
   inset: -170px -30% auto; /* same place and size as the Fester Kasus card glow (01.11.2026) */
   height: 380px;
   pointer-events: none;
+  animation: glowIn 0.25s ease-out both; /* fades in, as the Fester Kasus card (15.11.2026) */
+}
+@keyframes glowIn {
+  from {
+    opacity: 0;
+  }
 }
 .feedback.correct::before {
   background: var(--good-glow);

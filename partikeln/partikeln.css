@@ -178,6 +178,12 @@ body:has(#explore:not(.hidden)) .version-mark { display: none; }
 }
 @keyframes spread { to { left: 0; width: 100%; } }
 .fb-verdict { font-size: 12px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--state); }
+@media (min-width: 700px) and (min-height: 740px) { .fb-verdict { font-size: 14px; } } /* tablets: one step up, as in every exercise (15.11.2026) */
+/* tablets, not the wide screen (components/deutsch-wide-v1.js measures Partikeln's own column): a column of 600, as
+   every exercise (15.11.2026; was 760) */
+@media (min-width: 700px) and (min-height: 740px) and (orientation: portrait), (min-width: 700px) and (max-width: 1023px) and (min-height: 740px) {
+  .app { width: min(636px, 100%); }
+} /* tablets: one step up, as in every exercise (15.11.2026) */
 .feedback .translation { margin-top: 10px; }
 .fb-also { margin-top: 6px; font-size: 14px; color: var(--muted); min-height: 0; }
 .fb-also:empty { display: none; }
@@ -229,8 +235,8 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
 /* Short phones (≤ 700 px high: SE, Safari with its bars), Alena 05.11: the answer with its explanation and Weiter on one
    screen — the gaps between the blocks are tighter, the sizes stay. */
 @media (max-height: 700px) {
-  #pGame { padding-top: calc(env(safe-area-inset-top) + 16px); }
-  #pGame .prompt { margin-top: 22px; }
+  #pGame .prompt { margin-top: 15px; } /* 15.11.2026: the top bar now where every exercise has it (7px lower), so the question
+     keeps its place: 7px less here */
   #pGame .context { margin-bottom: 6px; }
   .task-label { margin-top: 14px; }
   .task-label small { margin-bottom: 3px; }
