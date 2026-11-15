@@ -260,16 +260,22 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
      Taller screens (e.g. 12.9" iPad, 4:3) also get extra air between tiles · Heute ·
      Fortschritt (--wide-extra), until the block is about 70% of the screen height.
      11" iPad ≈ 1.04× and no extra air · 12.9" iPad ≈ 1.2× + ~28px per gap. */
+  const pointerFine = window.matchMedia("(hover: hover) and (pointer: fine)");
   const FIT = { width: 0.82, maxHeight: 0.78, airHeight: 0.70, maxZoom: 1.32, minZoom: 0.85, maxAir: 40 };
   function fit() {
     if (!columns || isOpen()) return; // never re-fit under an open keyboard
     homeTrack.style.setProperty("--wide-extra", "0px");
     const left = columns.left, right = columns.right;
     const width = right.offsetLeft + right.offsetWidth - left.offsetLeft;
-    const height = homeActions.offsetTop + homeActions.offsetHeight - header.offsetTop;
+    // 15.11: the tools left the block for the bottom row — the block is measured as if the gear row were still there
+    // (its 14 + 44 px), so the iPad keeps the size it had
+    const height = columns.foot.offsetTop + columns.foot.offsetHeight + 58 - header.offsetTop;
     if (!width || !height) return;
     const vw = window.innerWidth, vh = window.innerHeight;
-    const zoom = Math.min(FIT.maxZoom, Math.max(FIT.minZoom,
+    // 15.11 (Alena): on a computer (mouse) the block never grows past its designed size — filling a big browser window
+    // made the text huge; it stands in the middle with air around. iPad (finger) still fills its screen.
+    const maxZoom = pointerFine.matches ? 1 : FIT.maxZoom;
+    const zoom = Math.min(maxZoom, Math.max(FIT.minZoom,
       Math.min(FIT.width * vw / width, FIT.maxHeight * vh / height)));
     // the air goes 1× under the tiles, ½× under Heute and ½× above the gear → 2 shares
     const air = Math.min(FIT.maxAir, Math.max(0, (FIT.airHeight * vh / zoom - height) / 2));
@@ -278,6 +284,16 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     window.DEUTSCH_WIDE_BLOCK = Math.round(width * zoom);
     homeTrack.style.setProperty("--wide-extra", Math.round(air) + "px");
     setTop();
+    placeWideRow();
+  }
+  /* 15.11 (Alena): the bottom row as on the phone, but as wide as the block — the capsule under the block's left edge,
+     the pencil and the gear under its right edge (Bibliothek: ＋ in the middle, list view and ⓘ on the right) */
+  function placeWideRow() {
+    if (!columns) return;
+    const left = columns.left.getBoundingClientRect(), right = columns.right.getBoundingClientRect();
+    if (!left.width || !right.width) return;
+    root.style.setProperty("--wide-row-left", Math.round(left.left) + "px");
+    root.style.setProperty("--wide-row-right", Math.round(window.innerWidth - right.right) + "px");
   }
   let fitFrame = 0;
   function scheduleFit() {
@@ -334,7 +350,7 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
       moveInto(today, columns.right);
       moveInto(overview, columns.foot);
       moveInto(keepCard, columns.foot);
-      moveInto(homeActions, homeTrack);
+      // 15.11: the tools stay outside the scaled block, in the bottom row (placeWideRow)
       phraseScreen.setAttribute("aria-hidden", "false");
       dictPanel.setAttribute("aria-hidden", "false");
       dictClose?.setAttribute("tabindex", "-1");
@@ -344,6 +360,8 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
       dictLayer.style.transform = "";
       homeTrack.style.removeProperty("--wide-scale");
       homeTrack.style.removeProperty("--wide-extra");
+      root.style.removeProperty("--wide-row-left");
+      root.style.removeProperty("--wide-row-right");
       restore();
       phraseScreen.setAttribute("aria-hidden", "true");
       dictPanel.setAttribute("aria-hidden", "true");
@@ -1028,6 +1046,9 @@ function updateBack() {
     // 14.11 (Alena): on the wide Home (desktop, iPad across) the capsule stands alone in the middle — ＋ in the middle
     // was under it and no book could be added. There ＋ stands just right of the capsule, on its line.
     doc.documentElement.classList.toggle("deutsch-home-wide", document.documentElement.classList.contains("home-wide-layout"));
+    const rowRight = getComputedStyle(document.documentElement).getPropertyValue("--wide-row-right").trim();
+    if (rowRight) doc.documentElement.style.setProperty("--wide-row-right", rowRight);
+    else doc.documentElement.style.removeProperty("--wide-row-right");
     if (!doc.getElementById("deutsch-home-dock")) {
       const st = doc.createElement("style");
       st.id = "deutsch-home-dock";
@@ -1048,9 +1069,12 @@ function updateBack() {
         ".library-screen .library-actions .library-add-menu{position:fixed!important;left:auto!important;right:calc(50vw - 136px)!important;bottom:calc(env(safe-area-inset-bottom) + 78px)!important}" +
         // wide Home: the capsule (104 wide, centre of the screen, 24 from the bottom, 56 high) — ＋ 12 px right of it,
         // all the buttons on the capsule's middle line; the menu opens above ＋
+        // 15.11: ＋ in the middle again (as on the phone); list view and ⓘ under the right edge of Home's block
         ".deutsch-home-wide .library-screen .library-actions .storage-info,.deutsch-home-wide .library-screen .library-actions .library-add-toggle,.deutsch-home-wide .library-screen .library-actions .library-view-toggle{bottom:calc(env(safe-area-inset-bottom) + 30px)!important}" +
-        ".deutsch-home-wide .library-screen .library-actions .library-add-toggle{right:calc(50vw - 108px)!important}" +
-        ".deutsch-home-wide .library-screen .library-actions .library-add-menu{right:calc(50vw - 108px)!important;bottom:calc(env(safe-area-inset-bottom) + 86px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .library-add-toggle{right:calc(50vw - 22px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .library-add-menu{right:calc(50vw - 136px)!important;bottom:calc(env(safe-area-inset-bottom) + 86px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .storage-info{right:calc(var(--wide-row-right, 24px) - 14px)!important}" +
+        ".deutsch-home-wide .library-screen .library-actions .library-view-toggle{right:calc(var(--wide-row-right, 24px) + 30px)!important}" +
         "@media (max-height:700px){.empty-mark{height:clamp(110px,20dvh,230px)!important}.empty-library{padding-top:28px!important}}" +
         ".library-screen .reader-toast{bottom:calc(env(safe-area-inset-bottom) + 90px)!important}";
       doc.head.appendChild(st);

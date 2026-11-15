@@ -2630,25 +2630,28 @@ html.home-wide-layout body {
   pointer-events: none;
 }
 
-/* ---------- settings: the gear sits under the right column, on its right edge ---------- */
+/* ---------- 15.11 (Alena): the bottom row as on the phone, as wide as the block — the pencil next to the gear under
+   the block's right edge, on the capsule's line (home.js placeWideRow sets --wide-row-left / --wide-row-right) ---------- */
 .home-wide-layout .home-actions {
-  grid-area: gear;
-  position: relative;
-  inset: auto;
-  justify-content: flex-end;
-  align-items: flex-start;
+  position: fixed;
+  left: auto;
+  right: var(--wide-row-right, 24px);
+  top: auto;
+  bottom: calc(env(safe-area-inset-bottom) + 24px);
+  height: 56px;
   min-height: 0;
-  padding-top: calc(14px + var(--wide-extra, 0px) / 2);
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+.home-wide-layout .settings-icon-button,
+.home-wide-layout .notebook-icon-button {
+  position: static;
+  transform: none;
 }
 .home-wide-layout .settings-icon-button {
-  position: static;
-  margin-right: -14px; /* the 16px icon, not its 44px tap area, lines up with the column */
-  transform: none;
-}
-.home-wide-layout .notebook-icon-button {
-  left: calc(-1 * (var(--wide-left) + var(--wide-gap)));
-  top: calc(14px + var(--wide-extra, 0px) / 2);
-  transform: none;
+  margin-right: -14px; /* the icon, not its 44px tap area, lines up with the block's edge */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2915,11 +2918,11 @@ html:not(.home-wide-layout) .settings-icon-button svg {
 .place-library .notebook-layer {
   z-index: 1003;
 }
-/* the wide Home (iPad landscape, computer): only the capsule, at the bottom in the middle — to be designed */
+/* the wide Home (iPad landscape, computer): the capsule under the left edge of the block (15.11, Alena) */
 .home-wide-layout .home-places {
-  left: 50%;
+  left: var(--wide-row-left, 24px);
   bottom: calc(env(safe-area-inset-bottom) + 24px);
-  transform: translateX(-50%);
+  transform: none;
 }
 /* 05.11 (Alena): the simpler pencil for the Notizbuch (24 × 24, the dock's line) */
 .notebook-icon-button svg {
