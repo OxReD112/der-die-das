@@ -47471,5 +47471,546 @@
         "Im weiteren Sinne werden damit auch andere Zahlungsmethoden bezeichnet."
       ]
     }
+  },
+  {
+    "id": "expression-259",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "Bis dann!",
+    "translation_ru": "(разг.) до встречи, пока",
+    "translation_en": "(colloquial) see you (then)",
+    "example_de": "Wir treffen uns um acht am Kino. Bis dann!",
+    "example_ru": "Встречаемся в восемь у кинотеатра. До встречи!",
+    "example_en": "We'll meet at eight at the cinema. See you then!",
+    "notes_ru": [
+      "Прощание, когда следующая встреча уже назначена или подразумевается. Bis dann also! Не путать: Bis dann ist alles erledigt. — К тому времени всё будет готово (bis dann «до того времени», по частям)."
+    ],
+    "notes_en": [
+      "A goodbye when the next meeting is already arranged or implied. Bis dann also! Do not confuse: Bis dann ist alles erledigt. — By then everything will be done (bis dann «until then», word by word)."
+    ],
+    "related_ids": [
+      "expression-017",
+      "preposition-015",
+      "expression-209",
+      "adverb-056"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bis_Praeposition",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "also",
+              "und",
+              "dann",
+              "na",
+              "gut",
+              "okay",
+              "ok",
+              "tja",
+              "nun"
+            ]
+          },
+          {
+            "form": "dann"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "dann",
+          "also",
+          "mal",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag",
+          "allerseits",
+          "alle",
+          "zusammen",
+          "leute",
+          "ihr",
+          "wieder",
+          "uhr",
+          "halb",
+          "ein",
+          "eins",
+          "zwei",
+          "drei",
+          "vier",
+          "fünf",
+          "sechs",
+          "sieben",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "dann",
+          "bald",
+          "später",
+          "morgen",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Wir treffen uns um acht am Kino. Bis dann!",
+        "»Bis dann, Potter!«",
+        "Gut. Bis dann also!"
+      ],
+      "negative": [
+        "Die Ausstellung läuft bis morgen.",
+        "Bis morgen soll alles fertig sein.",
+        "Das verschieben wir bis später.",
+        "Er wartete, bis dann der Zug kam.",
+        "Bis dann ist alles erledigt.",
+        "Bis bald der Sommer kommt, dauert es noch.",
+        "Bis später am Abend blieb er im Büro.",
+        "Bis morgen bleibt das Büro geschlossen.",
+        "Dann bis morgen soll alles fertig sein.",
+        "Bis bald wird es nicht dauern."
+      ]
+    }
+  },
+  {
+    "id": "expression-260",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "Bis bald!",
+    "translation_ru": "(разг.) до скорого, до скорой встречи",
+    "translation_en": "(colloquial) see you soon",
+    "example_de": "Danke für den schönen Abend! Bis bald!",
+    "example_ru": "Спасибо за чудесный вечер! До скорого!",
+    "example_en": "Thanks for the lovely evening! See you soon!",
+    "notes_ru": [
+      "Duden: bis bald!; auf bald! — разговорная формула прощания. Срок не назван: «как-нибудь скоро»."
+    ],
+    "notes_en": [
+      "Duden: bis bald!; auf bald! — colloquial goodbye formula. No date is set: «some time soon»."
+    ],
+    "related_ids": [
+      "expression-017",
+      "preposition-015",
+      "adverb-001"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bald",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "also",
+              "und",
+              "dann",
+              "na",
+              "gut",
+              "okay",
+              "ok",
+              "tja",
+              "nun"
+            ]
+          },
+          {
+            "form": "bald"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "dann",
+          "also",
+          "mal",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag",
+          "allerseits",
+          "alle",
+          "zusammen",
+          "leute",
+          "ihr",
+          "wieder",
+          "uhr",
+          "halb",
+          "ein",
+          "eins",
+          "zwei",
+          "drei",
+          "vier",
+          "fünf",
+          "sechs",
+          "sieben",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "dann",
+          "bald",
+          "später",
+          "morgen",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Danke für den schönen Abend! Bis bald!",
+        "Bis bald, Harry.",
+        "Bis bald dann!",
+        "Bis bald mal wieder!",
+        "Und bis bald!"
+      ],
+      "negative": [
+        "Die Ausstellung läuft bis morgen.",
+        "Bis morgen soll alles fertig sein.",
+        "Das verschieben wir bis später.",
+        "Er wartete, bis dann der Zug kam.",
+        "Bis dann ist alles erledigt.",
+        "Bis bald der Sommer kommt, dauert es noch.",
+        "Bis später am Abend blieb er im Büro.",
+        "Bis morgen bleibt das Büro geschlossen.",
+        "Dann bis morgen soll alles fertig sein.",
+        "Bis bald wird es nicht dauern."
+      ]
+    }
+  },
+  {
+    "id": "expression-261",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "Bis später!",
+    "translation_ru": "(разг.) до встречи, увидимся (позже)",
+    "translation_en": "(colloquial) see you later",
+    "example_de": "Ich gehe kurz einkaufen. Bis später!",
+    "example_ru": "Я ненадолго в магазин. Увидимся!",
+    "example_en": "I'm just popping out to the shops. See you later!",
+    "notes_ru": [
+      "Обычно — встреча в тот же день. Duden: bis nachher, bis später — разговорные формулы прощания. Bis später dann — то же. Не путать: Das verschieben wir bis später. — Отложим это на потом (по частям)."
+    ],
+    "notes_en": [
+      "Usually a meeting later the same day. Duden: bis nachher, bis später — colloquial goodbye formulas. Bis später dann — the same. Do not confuse: Das verschieben wir bis später. — Let's put that off till later (word by word)."
+    ],
+    "related_ids": [
+      "expression-017",
+      "preposition-015",
+      "adverb-073"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/bis_Praeposition",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "also",
+              "und",
+              "dann",
+              "na",
+              "gut",
+              "okay",
+              "ok",
+              "tja",
+              "nun"
+            ]
+          },
+          {
+            "form": "später"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "dann",
+          "also",
+          "mal",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag",
+          "allerseits",
+          "alle",
+          "zusammen",
+          "leute",
+          "ihr",
+          "wieder",
+          "uhr",
+          "halb",
+          "ein",
+          "eins",
+          "zwei",
+          "drei",
+          "vier",
+          "fünf",
+          "sechs",
+          "sieben",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "dann",
+          "bald",
+          "später",
+          "morgen",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich gehe kurz einkaufen. Bis später!",
+        "Bis später.",
+        "»Bis später dann«, sagte Harry.",
+        "Bis später dann."
+      ],
+      "negative": [
+        "Die Ausstellung läuft bis morgen.",
+        "Bis morgen soll alles fertig sein.",
+        "Das verschieben wir bis später.",
+        "Er wartete, bis dann der Zug kam.",
+        "Bis dann ist alles erledigt.",
+        "Bis bald der Sommer kommt, dauert es noch.",
+        "Bis später am Abend blieb er im Büro.",
+        "Bis morgen bleibt das Büro geschlossen.",
+        "Dann bis morgen soll alles fertig sein.",
+        "Bis bald wird es nicht dauern."
+      ]
+    }
+  },
+  {
+    "id": "expression-262",
+    "type": "Ausdruck",
+    "group": "speech_formula",
+    "word": "Bis morgen!",
+    "translation_ru": "(разг.) до завтра",
+    "translation_en": "(colloquial) see you tomorrow",
+    "example_de": "Feierabend für heute. Bis morgen!",
+    "example_ru": "На сегодня всё. До завтра!",
+    "example_en": "That's it for today. See you tomorrow!",
+    "notes_ru": [
+      "Также: Bis morgen früh! — до завтрашнего утра; Bis morgen Abend! — до завтрашнего вечера. Не путать: Die Ausstellung läuft bis morgen. — Выставка идёт до завтра; Bis morgen soll alles fertig sein. — К завтрашнему дню всё должно быть готово (по частям).",
+      "В ответе на вопрос «до какого времени?» — обычное «до»: Bis wann bleibst du? — Bis morgen. (Здесь карточка тоже откроется: по одной части их не различить.)"
+    ],
+    "notes_en": [
+      "Also: Bis morgen früh! — see you tomorrow morning; Bis morgen Abend! — see you tomorrow evening. Do not confuse: Die Ausstellung läuft bis morgen. — The exhibition runs until tomorrow; Bis morgen soll alles fertig sein. — Everything is to be ready by tomorrow (word by word).",
+      "In an answer to «until when?» it is the plain «until»: Bis wann bleibst du? — Bis morgen. (The card opens here too: one part alone cannot tell them apart.)"
+    ],
+    "related_ids": [
+      "expression-017",
+      "preposition-015",
+      "adverb-011"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/morgen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ],
+            "clause_start": true,
+            "clause_start_after": [
+              "also",
+              "und",
+              "dann",
+              "na",
+              "gut",
+              "okay",
+              "ok",
+              "tja",
+              "nun"
+            ]
+          },
+          {
+            "form": "morgen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1,
+        "clause_rest": [
+          "dann",
+          "also",
+          "mal",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag",
+          "allerseits",
+          "alle",
+          "zusammen",
+          "leute",
+          "ihr",
+          "wieder",
+          "uhr",
+          "halb",
+          "ein",
+          "eins",
+          "zwei",
+          "drei",
+          "vier",
+          "fünf",
+          "sechs",
+          "sieben",
+          "acht",
+          "neun",
+          "zehn",
+          "elf",
+          "zwölf"
+        ],
+        "clause_rest_before_number": [
+          "um"
+        ],
+        "clause_rest_place": [
+          "im",
+          "in",
+          "am",
+          "an",
+          "beim",
+          "bei",
+          "auf",
+          "vor",
+          "zum",
+          "zur",
+          "hinter",
+          "neben",
+          "unter"
+        ],
+        "clause_rest_place_after": [
+          "dann",
+          "bald",
+          "später",
+          "morgen",
+          "früh",
+          "abend",
+          "mittag",
+          "nachmittag",
+          "vormittag"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Feierabend für heute. Bis morgen!",
+        "Bis morgen früh!",
+        "»Bis morgen dann«, rief sie.",
+        "Bis morgen um acht!",
+        "Bis morgen in der Schule!",
+        "Also bis morgen!"
+      ],
+      "negative": [
+        "Die Ausstellung läuft bis morgen.",
+        "Bis morgen soll alles fertig sein.",
+        "Das verschieben wir bis später.",
+        "Er wartete, bis dann der Zug kam.",
+        "Bis dann ist alles erledigt.",
+        "Bis bald der Sommer kommt, dauert es noch.",
+        "Bis später am Abend blieb er im Büro.",
+        "Bis morgen bleibt das Büro geschlossen.",
+        "Dann bis morgen soll alles fertig sein.",
+        "Bis bald wird es nicht dauern."
+      ]
+    }
   }
 ]
