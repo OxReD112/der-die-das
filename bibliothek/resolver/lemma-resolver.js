@@ -525,6 +525,9 @@
     "seinem","unser","unseren","diesen","diesem","jenes","welche","welcher","welches","nicht","nur","immer","dazu","daher","dafür","also"]);
   let ownNounWords = null;
   function abbreviationEnd(segment, next) {
+    // (advisor 15.11, L21: an ordinal after a determiner or a preposition is no sentence end — in der 22. Minute, am 3. Mai, zum 1. Januar)
+    if (/(?:^|\s)(?:der|die|das|dem|den|des|ein|einem|einen|einer|eines|am|im|zum|zur|vom|beim|ins|in|an|auf|ab|seit|bis|nach|vor|um|für|gegen|über|unter|mit|von|zu|bei|aus)\s+\d{1,4}\.\s*$/iu.test(String(segment)) &&
+      (w => !!w && !SENTENCE_OPENERS.has(w.toLowerCase()) && !!ownNounWords && ownNounWords.has(w.toLowerCase()))(/^\s*(\p{Lu}\p{Ll}+)/u.exec(String(next ?? ""))?.[1])) return true;
     const text = String(segment), m = /(?:^|[\s(])([\p{L}]+)\.\s*$/u.exec(text); if (!m) return false;
     const after = /^\s*([\p{L}\d]+)/u.exec(String(next ?? ""))?.[1]; if (!after) return false;
     const word = m[1].toLowerCase(), single = /^\p{Lu}$/u.test(m[1]);
@@ -4780,7 +4783,8 @@
         (/^\p{L}$/u.test(tokens[a][0]) || /^\p{L}$/u.test(tokens[b][0]) || /^\p{Ll}/u.test(tokens[b][0]));
       const compressedAbbreviation = (a,b) => innerPoint(a,b) || /^\.\s+$/u.test(rawGap(a,b)) && a > 0 && innerPoint(a-1,a);
       // (item 2b: a mid-clause doch is the modal particle — midClauseDoch)
-      const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(compressedAbbreviation(a,b) ? "" : gap(a,b)) || boundaries.has(norm(tokens[b][0])) && !midClauseDoch(sentence,tokens,b);
+      // (advisor 15.11, L21: a number with a dot or a colon inside the sentence is no mark — in der 22. Minute, um 8:30 Uhr)
+      const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(compressedAbbreviation(a,b) ? "" : gap(a,b).replace(/\d+(?:[.,:]\d+)*\.?/gu, " ")) || boundaries.has(norm(tokens[b][0])) && !midClauseDoch(sentence,tokens,b);
       // (P5 (б), advisor 15.11: a comma between two modifiers of one noun — commaModifierPair — is no boundary: gingen in einem lang
       // gezogenen, lauten Rülpser unter)
       const soft = (a,b) => (/,/u.test(gap(a,b)) && !(b === a+1 && commaModifierPair(sentence, tokens, a, true))) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
@@ -5467,7 +5471,7 @@
       const lead = (v > 0 ? gap(v-1, v) : sentence.slice(0, tokens[v].index)).split(/[,;:.!?()–—»«„“"]\s/u).pop();
       if (a === v && !/^\s*\d[\d.]*\s*$/u.test(lead)) return false;
       const rest = sentence.slice(tokens[j].index + tokens[j][0].length);
-      if (/^\s*(?:[:»«„“"]|,\s*(?:dass|daß|ob|wie|was|wer|wo|warum|weshalb|wann|wohin|woher)\b)/u.test(rest)) return false;
+      if (/^\s*(?:[:»«„“"]|,\s*(?:dass|daß|ob|wie|was|wer|wo|warum|weshalb|wann|wohin|woher)(?!\p{L}))/u.test(rest)) return false;
       const OBJECT_PRONOUN = /^(?:es|sich|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|ihr|einander|was|nichts|etwas|alles|jemand\w*|niemand\w*)$/u;
       const SUBJECT_PRONOUN = /^(?:ich|du|er|sie|wir|man)$/u;
       let groups = 0, open = false, prep = false;
@@ -5582,7 +5586,9 @@
         const strictCount = separatedObjectInPart(c, sentence, tokens, need, true);
         const strictPresent = need === "Akkusativ" && strictCount !== null ? directAccusativeInPart(c, sentence, tokens) : strictCount;
         if (strictPresent === null) return;
-        const present = strictPresent === true ? true : separatedObjectInPart(c, sentence, tokens, need) === false ? false : null;
+        // (advisor 15.11, WN 113 v3: a part surely without an accusative by the test of the two cards — one nominal group, the verb not
+        // first — needs no loose count: Mit einem Ruck fuhr der Zug an — anfahren «трогаться», der Zug is the subject)
+        const present = strictPresent === true ? true : separatedObjectInPart(c, sentence, tokens, need) === false || need === "Akkusativ" && noAccusativeInPart(c, sentence, tokens) ? false : null;
         if (present === true && !(need === "Akkusativ" && env.REQUIRED_AKK_RAISE === "0")) {
           const k = ru.findIndex(takes);
           if (k > 0 && !ru.slice(0, k).some(takes)) { at = k; break; }
@@ -5594,7 +5600,9 @@
       if (at <= 0) return;
       c.senseFirst = at;
       const en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
-      if (en.length === ru.length) c.senseFirstEn = at;
+      // (advisor 15.11: an English line cut otherwise than the Russian one keeps its order — aufgeben «to give up; to send» has three
+      // meanings for four Russian ones; the Russian index would raise «to send»)
+      c.senseFirstEn = en.length === ru.length ? at : 0;
     }
     // (TODO п. 98, advisor 14.11) an external separated verb with an object in its part: in the English line a meaning that the external
     // dictionary tags «transitive» («may take an accusative») comes before the meanings tagged «intransitive» in front of it. The Russian
@@ -6296,6 +6304,10 @@
         const prevWord = norm(tokens[p][0]);
         const closingForm = ["sein","haben","werden","können","müssen","dürfen","sollen","wollen","mögen","gewesen","gehabt","geworden","worden"].includes(prevWord);
         if (verbish(p) && !capitalNoun(p) && (closingForm || !(forms.get(prevWord) || []).some(e => e.type === "Verb" && headVerbs.has(e.word)))) return false;
+        // (advisor 15.11: an infinitive only the external dictionary knows closes its predicate as an own one does — Ich will die Kuh
+        // melken und mich waschen: melken is the modal's first infinitive, und opens the second — modalSecondExtend names both)
+        if (['verbGroup','externalModalGroup'].includes(consumer) && !verbish(p) && /^\p{Ll}/u.test(tokens[p][0]) && !adjectivalForm(tokens[p][0]) &&
+          externalInfinitiveWords.get(sentence)?.has(prevWord)) return false;
         // A participle shape of a verb only the external dictionary knows (abgeschnallt und … gelegt) also closes it.
         // (L14, gaps 24.10: also without ge- — an inseparable prefix or -iert: wurde komplett erneuert und die Beschilderung umgestellt)
         if (!verbish(p) && /^\p{Ll}[\p{L}]*ge\p{Ll}{2,}(?:t|en)$|^ge\p{Ll}{2,}(?:t|en)$|^(?:be|er|ent|emp|ver|zer|miss)\p{Ll}{3,}t$|^\p{Ll}{3,}iert$/u.test(tokens[p][0]) && !/^un/u.test(tokens[p][0]) && !adjectivalForm(tokens[p][0])) return false;
@@ -8137,8 +8149,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         found.set(w,{seinOnly:aux.length > 0 && aux.every(a => a === 'sein')});
       }
     }
+    // (advisor 15.11: the infinitives right before und / oder that only another dictionary knows, per sentence — read synchronously by
+    // the join of verbalClause: Ich will die Kuh melken und mich waschen — melken closes the first predicate as an own infinitive would)
+    const externalInfinitiveWords = new Map();
+    async function warmExternalInfinitives(sentence) {
+      if (!sentence || externalInfinitiveWords.has(sentence)) return;
+      const tokens = sharedTokens(sentence,'externalInfinitiveWords'), found = new Set();
+      externalInfinitiveWords.set(sentence,found);
+      if (externalInfinitiveWords.size > 200) externalInfinitiveWords.delete(externalInfinitiveWords.keys().next().value);
+      for (let i = 1; i+1 < tokens.length; i++) {
+        if (!['und','oder'].includes(norm(tokens[i+1][0]))) continue;
+        const t = tokens[i][0], w = norm(t);
+        if (t !== w || !REGULAR_INFINITIVE_SHAPE.test(w) || (verbAnalyses.get(w) || []).length || (forms.get(w) || []).length || (modifiers.get(w) || []).length) continue;
+        let facts = [];
+        try { facts = await lexicalLookup(t,'externalInfinitiveWords'); } catch (_) { continue; }
+        if (facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === 'Verb' && norm(String(g.word || '')).replace(/^sich\s+/u,'') === w && g.meanings?.length) &&
+          !facts.some(g => !g.kind && !g.unresolved && ['Adjektiv','Adverb'].includes(canonicalPos(g.pos)) && norm(g.word) === w)) found.add(w);
+      }
+    }
     async function runConstructionProducers(word, context, candidates, producers) {
       await warmExternalParticiples(String(context?.sentence || ''));
+      await warmExternalInfinitives(String(context?.sentence || ''));
       for (const producer of producers) {
         const pending = producer.produce(word,context,candidates);
         const group = pending && typeof pending.then === 'function' ? await pending : pending;
@@ -18730,6 +18761,46 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // muss man das Kopfballduell angehen und gewinnen (on angehen), Die USA kann und soll besorgt sein (on kann), lasst uns gehn und treten
     // (on treten). A reflexive pronoun of the partner's group goes along only when the tapped verb is reflexive too (sich laben und
     // erquicken — yes; sich setzen und spinnen — spinnen without sich). Not: er kam und ich ging (no verb partner), nouns (capitalised).
+    // (advisor 15.11, L21: two detached particles — stellt … wieder her, macht … wieder gut): wieder right before the particle at the end
+    // of the part and an own card «wieder + particle + verb» (separable_prefix wiederher / wiedergut, C15) — that card, wieder in the
+    // highlight. The part is resolved once more with the two words joined (the scanner already knows the joined prefix); without such a
+    // card wieder stays the adverb (kam wieder zurück).
+    const WIEDER_PREFIXES = new Set();
+    function wiederPrefixes() {
+      if (!WIEDER_PREFIXES.size) for (const rows of lemmas.values()) for (const e of rows) { const pre = norm(e.entry?.separable_prefix ?? e.separable_prefix ?? "");
+        if (/^wieder\p{L}+$/u.test(pre)) WIEDER_PREFIXES.add(pre); }
+      return WIEDER_PREFIXES;
+    }
+    async function wiederParticle(word, context, result, pipeline) {
+      const at = context?.tokenOffset, sentence = String(context?.sentence || "");
+      if (!result || context?.noWiederParticle || !Number.isInteger(at) || !/\bwieder\s/iu.test(sentence)) return result;
+      const tokens = sharedTokens(sentence, "wiederParticle"), k0 = clickedTokenIndex(tokens, at, word);
+      if (k0 < 0) return result;
+      const prefixes = wiederPrefixes();
+      for (let k = 0; k+1 < tokens.length; k++) {
+        if (norm(tokens[k][0]) !== "wieder" || tokens[k][0] !== "wieder") continue;
+        const particle = norm(tokens[k+1][0]);
+        if (!prefixes.has("wieder" + particle) || sentence.slice(tokens[k].index + 6, tokens[k+1].index) !== " ") continue;
+        // the particle ends its part
+        const after = tokens[k+2] ? sentence.slice(tokens[k+1].index + tokens[k+1][0].length, tokens[k+2].index) : "";
+        if (tokens[k+2] && !/[,;:.!?»«"“”()–—]/u.test(after)) continue;
+        const spans = result.selected?.construction?.spans || [];
+        const onVerb = spans.some(sp => sp.start === tokens[k+1].index) && canonicalPos(result.selected?.pos) === "Verb";
+        if (!onVerb && k0 !== k && k0 !== k+1) continue;
+        const joined = sentence.slice(0, tokens[k].index) + "wieder" + particle + " " + sentence.slice(tokens[k+1].index + tokens[k+1][0].length);
+        const tapAt = k0 === k || k0 === k+1 ? tokens[k].index : at, tapWord = k0 === k || k0 === k+1 ? "wieder" + particle : word;
+        let other = null;
+        try { other = await pipeline(tapWord, {...context, sentence:joined, tokenOffset:tapAt, noWiederParticle:true}); } catch (_) { other = null; }
+        const sel = other?.selected;
+        if (!sel || canonicalPos(sel.pos) !== "Verb" || sel.source !== "main" || !norm(String(sel.lemma || "")).replace(/^sich\s+/u, "").startsWith("wieder" + particle)) continue;
+        const fix = list => (list || []).flatMap(sp => sp.start === tokens[k].index ? [{text:tokens[k][0], start:tokens[k].index, end:tokens[k].index + tokens[k][0].length},
+          {text:tokens[k+1][0], start:tokens[k+1].index, end:tokens[k+1].index + tokens[k+1][0].length}] : [sp]);
+        const construction = sel.construction ? {...sel.construction, spans:fix(sel.construction.spans)} : sel.construction;
+        const selected = {...sel, construction};
+        return {...other, selected, preferred:selected, candidates:[selected, ...(other.candidates || []).filter(c => c !== sel)]};
+      }
+      return result;
+    }
     async function coordinationUnion(word, context, result, pipeline) {
       const at = context?.tokenOffset, sentence = String(context?.sentence || ""), AND = /^(?:und|oder)$/u;
       if (!result || context?.noCoordUnion || !Number.isInteger(at) || !/^\p{Ll}/u.test(word)) return result;
@@ -18775,7 +18846,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is

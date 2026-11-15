@@ -17660,5 +17660,19 @@
       "lauterer",
       "lauteres"
     ]
+  },
+  {
+    "id": "adjective-1621",
+    "word": "gewogen",
+    "translation_ru": "(книжн.) благосклонный, расположенный (к кому-либо)",
+    "translation_en": "(elevated) well-disposed, favourably inclined (towards someone)",
+    "example_de": "Das Glück war ihm an diesem Abend gewogen.",
+    "example_ru": "В тот вечер удача была к нему благосклонна.",
+    "example_en": "Luck was on his side that evening.",
+    "example_cloze": "Das Glück war ihm an diesem Abend {{c1::gewogen}}.",
+    "usage_note_ru": "С дательным: jemandem gewogen sein — благоволить кому-либо. Причастие II от wiegen / wägen — взвешен: Das Paket wurde gewogen.",
+    "usage_note_en": "With the dative: jemandem gewogen sein — to be well-disposed towards someone. Past participle of wiegen / wägen — weighed: Das Paket wurde gewogen.",
+    "participle_of": "wiegen",
+    "meaning_differs": true
   }
 ]

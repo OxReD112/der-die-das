@@ -77,9 +77,9 @@
       return response.json();
     });
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261112-wn-fix85-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261115-wn-eingehen118-1"),
-      loadJson("worterbuch/german-adjectives.json?v=20261115-wn-lauter115-1"),
+      loadJson("worterbuch/german-nouns.json?v=20261115-wn-oldgerman114-2"),
+      loadJson("worterbuch/german-verbs.json?v=20261115-wn-oldgerman114-2"),
+      loadJson("worterbuch/german-adjectives.json?v=20261115-wn-oldgerman114-2"),
       loadJson("worterbuch/german-adverbs.json?v=20261114-wn-selber110-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261114-wn-jedoch106-1"),
       loadJson("worterbuch/german-pronouns.json?v=20261114-wn-selber110-1"),

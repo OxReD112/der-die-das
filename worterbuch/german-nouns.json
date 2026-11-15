@@ -9564,7 +9564,17 @@
     "example_cloze": "Der {{c1::Abschied}} am Bahnhof fiel uns sehr schwer.",
     "example_ru": "Прощание на вокзале далось нам очень тяжело.",
     "example_en": "Saying goodbye at the station was very hard for us.",
-    "id": "noun-771"
+    "id": "noun-771",
+    "extra_meanings": [
+      {
+        "ru": "отставка, увольнение (со службы)",
+        "en": "discharge, resignation (from service)",
+        "register": "veraltet",
+        "example_de": "Der alte Offizier nahm seinen Abschied.",
+        "example_ru": "Старый офицер вышел в отставку.",
+        "example_en": "The old officer resigned his commission."
+      }
+    ]
   },
   {
     "word": "Abschluss",
@@ -69197,7 +69207,17 @@
     "example_ru": "После ученичества он три года работал подмастерьем.",
     "example_en": "After his apprenticeship he worked as a journeyman for three years.",
     "declension_note_ru": "Слабое склонение: der Geselle, den / dem / des Gesellen.",
-    "declension_note_en": "Weak declension: der Geselle, den / dem / des Gesellen."
+    "declension_note_en": "Weak declension: der Geselle, den / dem / des Gesellen.",
+    "extra_meanings": [
+      {
+        "ru": "спутник, товарищ",
+        "en": "companion, comrade",
+        "register": "selten",
+        "example_de": "Der Wanderer und sein treuer Geselle zogen weiter.",
+        "example_ru": "Странник и его верный спутник пошли дальше.",
+        "example_en": "The wanderer and his faithful companion went on."
+      }
+    ]
   },
   {
     "id": "noun-5360",
@@ -69356,5 +69376,139 @@
     "example_en": "In the evening Grandmother lit a little candle on the windowsill.",
     "usage_note_ru": "Уменьшительное от das Licht — свет; лампа, свеча (суффикс -lein, всегда das, мн. ч. без изменений). Книжное, сказочное. Ср. идиому: Mir geht ein Licht auf. — (разг.) До меня доходит.",
     "usage_note_en": "Diminutive of das Licht — light; lamp, candle (suffix -lein, always das, plural unchanged). Literary, fairy-tale. Cf. the idiom: Mir geht ein Licht auf. — (colloq.) It's dawning on me."
+  },
+  {
+    "id": "noun-5371",
+    "word": "Reis",
+    "article": "das",
+    "plural": "Reiser",
+    "translation_ru": "(книжн.) ветка, побег, прутик",
+    "translation_en": "(elevated) twig, sprig, shoot",
+    "example_de": "Die Gärtnerin schnitt ein junges Reis vom Apfelbaum.",
+    "example_cloze": "Die Gärtnerin schnitt ein junges {{c1::Reis}} vom Apfelbaum.",
+    "example_ru": "Садовница срезала молодой побег с яблони.",
+    "example_en": "The gardener cut a young shoot from the apple tree.",
+    "usage_note_ru": "Средний род: das Reis, die Reiser. Также (садов.) привой. Не путать с der Reis — рис (ед. ч.). Ср. das Reisig — хворост.",
+    "usage_note_en": "Neuter: das Reis, die Reiser. Also (gardening) scion. Not to be confused with der Reis — rice (singular). Cf. das Reisig — brushwood."
+  },
+  {
+    "id": "noun-5372",
+    "word": "Batzen",
+    "article": "der",
+    "plural": "Batzen",
+    "translation_ru": "(разг.) ком, кусок; куча (денег)",
+    "translation_en": "(colloquial) lump, chunk; a pile (of money)",
+    "example_de": "Für das alte Haus hat er einen ganzen Batzen Geld bezahlt.",
+    "example_cloze": "Für das alte Haus hat er einen ganzen {{c1::Batzen}} Geld bezahlt.",
+    "example_ru": "За старый дом он заплатил кучу денег.",
+    "example_en": "He paid a tidy sum for the old house.",
+    "usage_note_ru": "ein Batzen Lehm — ком глины; ein schöner Batzen Geld — кругленькая сумма.",
+    "usage_note_en": "ein Batzen Lehm — a lump of clay; ein schöner Batzen Geld — a tidy sum.",
+    "extra_meanings": [
+      {
+        "ru": "батцен (старинная серебряная монета)",
+        "en": "batz (old silver coin)",
+        "register": "historisch",
+        "example_de": "Für den Hut zahlte der Bauer zwei Batzen.",
+        "example_ru": "За шляпу крестьянин заплатил два батцена.",
+        "example_en": "The farmer paid two batzen for the hat."
+      }
+    ]
+  },
+  {
+    "id": "noun-5373",
+    "word": "Elle",
+    "article": "die",
+    "plural": "Ellen",
+    "translation_ru": "локтевая кость",
+    "translation_en": "ulna",
+    "example_de": "Beim Sturz hat sie sich die Elle gebrochen.",
+    "example_cloze": "Beim Sturz hat sie sich die {{c1::Elle}} gebrochen.",
+    "example_ru": "При падении она сломала локтевую кость.",
+    "example_en": "She broke her ulna in the fall.",
+    "usage_note_ru": "Ср. die Speiche — лучевая кость. Старое: zwanzig Ellen lang — длиной в двадцать локтей; etwas mit der Elle messen — мерить что-либо локтем.",
+    "usage_note_en": "Cf. die Speiche — radius. Old: zwanzig Ellen lang — twenty ells long; etwas mit der Elle messen — to measure something by the ell.",
+    "extra_meanings": [
+      {
+        "ru": "локоть (старая мера длины)",
+        "en": "ell (old measure of length)",
+        "register": "historisch",
+        "example_de": "Der Händler maß drei Ellen Leinen ab.",
+        "example_ru": "Торговец отмерил три локтя полотна.",
+        "example_en": "The merchant measured off three ells of linen."
+      },
+      {
+        "ru": "аршин, мерная линейка (портного)",
+        "en": "measuring stick, yardstick (of a tailor)",
+        "register": "veraltet",
+        "example_de": "Der Schneider legte die Elle auf den Stoff.",
+        "example_ru": "Портной положил аршин на ткань.",
+        "example_en": "The tailor laid the yardstick on the cloth."
+      }
+    ]
+  },
+  {
+    "id": "noun-5374",
+    "word": "Flechte",
+    "article": "die",
+    "plural": "Flechten",
+    "translation_ru": "лишайник; (мед.) лишай",
+    "translation_en": "lichen; (medicine) skin rash, lichen",
+    "example_de": "Auf den alten Grabsteinen wachsen graue Flechten.",
+    "example_cloze": "Auf den alten Grabsteinen wachsen graue {{c1::Flechten}}.",
+    "example_ru": "На старых надгробиях растут серые лишайники.",
+    "example_en": "Grey lichens grow on the old gravestones.",
+    "extra_meanings": [
+      {
+        "ru": "коса (из волос)",
+        "en": "braid, plait (of hair)",
+        "register": "gehoben, veraltet",
+        "example_de": "Die Magd trug ihr Haar in zwei langen Flechten.",
+        "example_ru": "Служанка носила волосы в двух длинных косах.",
+        "example_en": "The maid wore her hair in two long plaits."
+      }
+    ]
+  },
+  {
+    "id": "noun-5375",
+    "word": "Haarflechte",
+    "article": "die",
+    "plural": "Haarflechten",
+    "translation_ru": "(устар.) коса (из волос)",
+    "translation_en": "(dated) braid, plait (of hair)",
+    "example_de": "Die Großmutter trug ihre grauen Haarflechten um den Kopf gelegt.",
+    "example_cloze": "Die Großmutter trug ihre grauen {{c1::Haarflechten}} um den Kopf gelegt.",
+    "example_ru": "Бабушка носила седые косы, уложенные вокруг головы.",
+    "example_en": "Grandmother wore her grey braids wound round her head.",
+    "usage_note_ru": "Книжн., устар.; сейчас обычно der Zopf. Так у Гримма: Da ließ Rapunzel die Haarflechten herab — И Рапунцель спустила косы. Ср. die Flechte (устар.) — коса; сейчас — лишайник.",
+    "usage_note_en": "Literary, old-fashioned; today usually der Zopf. As in the Grimm tales: Da ließ Rapunzel die Haarflechten herab — So Rapunzel let down her braids. Cf. die Flechte (old) — braid; today — lichen."
+  },
+  {
+    "id": "noun-5376",
+    "word": "Backen",
+    "article": "der",
+    "plural": "Backen",
+    "translation_ru": "(регион.) щека",
+    "translation_en": "(regional) cheek",
+    "example_de": "Das Kind kam mit roten Backen aus der Kälte herein.",
+    "example_cloze": "Das Kind kam mit roten {{c1::Backen}} aus der Kälte herein.",
+    "example_ru": "Ребёнок вошёл с мороза с красными щеками.",
+    "example_en": "The child came in from the cold with red cheeks.",
+    "usage_note_ru": "Южнонем. = die Backe. Ein Apfel mit rotem Backen — яблоко с румяным боком. Также (тех.) колодка, губка (= Bremsbacke, Klemmbacke). Не путать с backen — печь (das Backen — выпечка).",
+    "usage_note_en": "Southern German = die Backe. Ein Apfel mit rotem Backen — an apple with a red side. Also (technical) shoe, jaw (= Bremsbacke, Klemmbacke). Not to be confused with backen — to bake (das Backen — baking)."
+  },
+  {
+    "id": "noun-5377",
+    "word": "Backen",
+    "article": "das",
+    "plural": "—",
+    "translation_ru": "выпечка, печение (процесс)",
+    "translation_en": "baking",
+    "example_de": "Beim Backen hilft mir meine kleine Tochter.",
+    "example_cloze": "Beim {{c1::Backen}} hilft mir meine kleine Tochter.",
+    "example_ru": "С выпечкой мне помогает моя маленькая дочка.",
+    "example_en": "My little daughter helps me with the baking.",
+    "usage_note_ru": "Субстантивированный инфинитив от backen — печь (без мн. ч.): beim Backen, zum Backen. Не путать с der Backen — щека (регион.).",
+    "usage_note_en": "Nominalised infinitive of backen — to bake (no plural): beim Backen, zum Backen. Not to be confused with der Backen — cheek (regional)."
   }
 ]

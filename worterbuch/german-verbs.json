@@ -453,7 +453,17 @@
         "ihr": "Lest!",
         "Sie": "Lesen Sie!"
       }
-    }
+    },
+    "extra_meanings": [
+      {
+        "ru": "собирать (виноград, колосья); перебирать (горох, чечевицу)",
+        "en": "to gather, to pick (grapes, ears of corn); to sort (peas, lentils)",
+        "register": "fachsprachlich",
+        "example_de": "Im Oktober werden an der Mosel die Trauben gelesen.",
+        "example_ru": "В октябре на Мозеле собирают виноград.",
+        "example_en": "In October the grapes are picked along the Moselle."
+      }
+    ]
   },
   {
     "id": "verb-011",
@@ -7259,7 +7269,17 @@
         "ihr": "heißt",
         "sie": "heißen"
       }
-    }
+    },
+    "extra_meanings": [
+      {
+        "ru": "велеть, приказывать (сделать что-либо)",
+        "en": "to tell, to bid (someone do something)",
+        "register": "gehoben, veraltend",
+        "example_de": "Der König hieß die Diener das Tor öffnen.",
+        "example_ru": "Король велел слугам открыть ворота.",
+        "example_en": "The king bade the servants open the gate."
+      }
+    ]
   },
   {
     "id": "verb-150",
@@ -15567,6 +15587,16 @@
         "pattern": "Akkusativ",
         "note_ru": "справляться с чем-либо, успевать что-либо",
         "note_en": "to manage something, to get something done"
+      }
+    ],
+    "extra_meanings": [
+      {
+        "ru": "доставить, отнести, убрать (куда-либо)",
+        "en": "to take, to bring, to get (somewhere)",
+        "register": "landschaftlich, umgangssprachlich",
+        "example_de": "Schafft mir den Kerl aus dem Haus!",
+        "example_ru": "Уберите этого парня из дома!",
+        "example_en": "Get that fellow out of the house!"
       }
     ]
   },
@@ -73156,7 +73186,17 @@
         "ihr": "führtet an",
         "sie": "führten an"
       }
-    }
+    },
+    "extra_meanings": [
+      {
+        "ru": "обмануть, провести, разыграть",
+        "en": "to fool, to take in, to have on",
+        "register": "umgangssprachlich, veraltend",
+        "example_de": "Da hast du dich aber schön anführen lassen!",
+        "example_ru": "Ну и ловко же тебя провели!",
+        "example_en": "You really let yourself be taken in there!"
+      }
+    ]
   },
   {
     "id": "verb-1552",
@@ -127564,6 +127604,205 @@
         "wir": "ziehen nach",
         "ihr": "zieht nach",
         "sie": "ziehen nach"
+      }
+    }
+  },
+  {
+    "id": "verb-2790",
+    "infinitive": "anfahren",
+    "translation_ru": "накричать (на кого-либо); подъезжать, заходить (в порт); сбить (машиной), задеть; трогаться (с места); подвозить, доставлять",
+    "translation_en": "to snap at, to tell off; to stop at, to call at; to drive into, to hit; to start (vehicle); to deliver",
+    "auxiliary": [
+      "haben",
+      "sein"
+    ],
+    "usage_note_ru": "С дополнением — hat angefahren: Er fuhr ihn wütend an — Он накричал на него. Sie wurde von einem Auto angefahren — Её сбила машина. Der Bus fährt die Haltestelle an — Автобус подъезжает к остановке; das Schiff fährt den Hafen an — судно заходит в порт. Без дополнения — ist angefahren: Der Zug fuhr mit einem Ruck an — Поезд резко тронулся. Также: eine Stadt anfahren — ехать (направляться) в город. angefahren kommen — подъехать. eine Anlage, einen Reaktor anfahren — запустить установку, реактор.",
+    "usage_note_en": "With an object — hat angefahren: Er fuhr ihn wütend an — He snapped at him. Sie wurde von einem Auto angefahren — She was hit by a car. Der Bus fährt die Haltestelle an — The bus calls at the stop; das Schiff fährt den Hafen an — the ship calls at the port. Without an object — ist angefahren: Der Zug fuhr mit einem Ruck an — The train started with a jolt. Also: eine Stadt anfahren — to head for a town. angefahren kommen — to drive up. eine Anlage, einen Reaktor anfahren — to start up a plant, a reactor.",
+    "example_de": "»Lass mich in Ruhe!«, fuhr sie ihren Bruder an.",
+    "example_cloze": "»Lass mich in Ruhe!«, {{c1::fuhr}} sie ihren Bruder {{c1::an}}.",
+    "example_ru": "«Оставь меня в покое!» — накричала она на брата.",
+    "example_en": "\"Leave me alone!\" she snapped at her brother.",
+    "perfect_form": "haben angefahren",
+    "forms": {
+      "Präsens": {
+        "ich": "fahre an",
+        "du": "fährst an",
+        "er/sie/es": "fährt an",
+        "wir": "fahren an",
+        "ihr": "fahrt an",
+        "sie": "fahren an"
+      },
+      "Präteritum": {
+        "ich": "fuhr an",
+        "du": "fuhrst an",
+        "er/sie/es": "fuhr an",
+        "wir": "fuhren an",
+        "ihr": "fuhrt an",
+        "sie": "fuhren an"
+      },
+      "Konjunktiv II": {
+        "ich": "führe an",
+        "du": "führest an",
+        "er/sie/es": "führe an",
+        "wir": "führen an",
+        "ihr": "führet an",
+        "sie": "führen an"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "накричать (на кого-либо)",
+        "note_ru": "кого-либо",
+        "note_en": "someone"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "подъезжать, заходить (в порт)",
+        "note_ru": "что-либо (остановку, порт)",
+        "note_en": "something (a stop, a port)"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "сбить (машиной), задеть",
+        "note_ru": "кого-либо, что-либо",
+        "note_en": "someone, something"
+      },
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "подвозить, доставлять",
+        "note_ru": "что-либо (землю, картофель)",
+        "note_en": "something (soil, potatoes)"
+      }
+    ],
+    "separable_prefix": "an",
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "fahr an",
+        "ihr": "fahrt an",
+        "Sie": "fahren Sie an"
+      }
+    }
+  },
+  {
+    "id": "verb-2791",
+    "infinitive": "anlaufen",
+    "translation_ru": "заработать, начаться; покраснеть, потускнеть, запотеть; разбегаться; заходить (в порт)",
+    "translation_en": "to start up, to begin; to turn red, to blush, to tarnish, to steam up; to take a run-up; to call at (a port)",
+    "auxiliary": [
+      "sein",
+      "haben"
+    ],
+    "usage_note_ru": "rot / rosa / blau anlaufen — покраснеть, порозоветь, посинеть: Er lief rot an. Die Brille läuft an — очки запотевают. Das Silber ist angelaufen — серебро потускнело. Der Motor läuft an — мотор заводится. Der Film läuft am Donnerstag an — фильм выходит в прокат в четверг. Die Kosten laufen an — расходы растут. angelaufen kommen — прибежать. einen Hafen anlaufen — заходить в порт (hat angelaufen): Das Schiff hat den Hafen angelaufen. gegen etwas anlaufen — выступать против чего-либо.",
+    "usage_note_en": "rot / rosa / blau anlaufen — to turn red, pink, blue: Er lief rot an. Die Brille läuft an — the glasses steam up. Das Silber ist angelaufen — the silver has tarnished. Der Motor läuft an — the engine starts. Der Film läuft am Donnerstag an — the film opens on Thursday. Die Kosten laufen an — the costs mount up. angelaufen kommen — to come running. einen Hafen anlaufen — to call at a port (hat angelaufen): Das Schiff hat den Hafen angelaufen. gegen etwas anlaufen — to campaign against something.",
+    "example_de": "Als der Lehrer seinen Namen nannte, lief Paul knallrot an.",
+    "example_cloze": "Als der Lehrer seinen Namen nannte, {{c1::lief}} Paul knallrot {{c1::an}}.",
+    "example_ru": "Когда учитель назвал его имя, Пауль густо покраснел.",
+    "example_en": "When the teacher said his name, Paul turned bright red.",
+    "perfect_form": "sein angelaufen",
+    "forms": {
+      "Präsens": {
+        "ich": "laufe an",
+        "du": "läufst an",
+        "er/sie/es": "läuft an",
+        "wir": "laufen an",
+        "ihr": "lauft an",
+        "sie": "laufen an"
+      },
+      "Präteritum": {
+        "ich": "lief an",
+        "du": "liefst an",
+        "er/sie/es": "lief an",
+        "wir": "liefen an",
+        "ihr": "lieft an",
+        "sie": "liefen an"
+      },
+      "Konjunktiv II": {
+        "ich": "liefe an",
+        "du": "liefest an",
+        "er/sie/es": "liefe an",
+        "wir": "liefen an",
+        "ihr": "liefet an",
+        "sie": "liefen an"
+      }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "заходить (в порт)",
+        "note_ru": "что-либо (den Hafen, eine Insel)",
+        "note_en": "something (den Hafen, eine Insel)"
+      },
+      {
+        "pattern": "gegen + Akkusativ",
+        "note_ru": "выступать против чего-либо",
+        "note_en": "to campaign against something"
+      }
+    ],
+    "separable_prefix": "an",
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "lauf an",
+        "ihr": "lauft an",
+        "Sie": "laufen Sie an"
+      }
+    }
+  },
+  {
+    "id": "verb-2792",
+    "infinitive": "sich laben",
+    "translation_ru": "(книжн.) подкрепиться, освежиться; угоститься, полакомиться (чем-либо)",
+    "translation_en": "(elevated) to refresh oneself; to feast on, to treat oneself to",
+    "auxiliary": "haben",
+    "usage_note_ru": "sich an etwas / mit etwas laben — угоститься, подкрепиться чем-либо: sich am kühlen Wasser laben, sich mit Kaffee und Kuchen laben. Без sich: jemanden laben — подкрепить, освежить кого-либо.",
+    "usage_note_en": "sich an etwas / mit etwas laben — to feast on, to refresh oneself with something: sich am kühlen Wasser laben, sich mit Kaffee und Kuchen laben. Without sich: jemanden laben — to refresh someone.",
+    "example_de": "Nach dem langen Marsch labten sich die Wanderer an frischem Quellwasser.",
+    "example_cloze": "Nach dem langen Marsch {{c1::labten}} sich die Wanderer an frischem Quellwasser.",
+    "example_ru": "После долгого перехода путники подкрепились свежей родниковой водой.",
+    "example_en": "After the long march the hikers refreshed themselves with fresh spring water.",
+    "perfect_form": "haben sich gelabt",
+    "forms": null,
+    "complements": [
+      {
+        "pattern": "an + Dativ",
+        "note_ru": "угоститься чем-либо, полакомиться чем-либо",
+        "note_en": "to feast on something"
+      },
+      {
+        "pattern": "mit + Dativ",
+        "note_ru": "подкрепиться чем-либо (mit einem kühlen Trunk)",
+        "note_en": "to refresh oneself with something (mit einem kühlen Trunk)"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "labe mich",
+        "du": "labst dich",
+        "er/sie/es": "labt sich",
+        "wir": "laben uns",
+        "ihr": "labt euch",
+        "sie": "laben sich"
+      },
+      "Präteritum": {
+        "ich": "labte mich",
+        "du": "labtest dich",
+        "er/sie/es": "labte sich",
+        "wir": "labten uns",
+        "ihr": "labtet euch",
+        "sie": "labten sich"
+      },
+      "Konjunktiv II": {
+        "ich": "labte mich",
+        "du": "labtest dich",
+        "er/sie/es": "labte sich",
+        "wir": "labten uns",
+        "ihr": "labtet euch",
+        "sie": "labten sich"
       }
     }
   }
