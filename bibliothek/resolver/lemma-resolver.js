@@ -18846,7 +18846,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -19317,6 +19317,59 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!ok) return result;
       const x = {...card, lemma:"lauter", posLabel:"Partikel", formFeatures:{}, translation:{...LAUTER_LINE}, construction:{id:"modal-particle", label:"lauter", spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}};
       return {...result, candidates:[x, ...candidates.filter(y => y !== card)], selected:x, preferred:x, status:"resolved"};
+    }
+    // #67 (reference chat 15.11, F12-G2b / G2d / G2e): the hidden verb variant of a window at a participle beside a finite sein of its part
+    // (war … geöffnet with the adjective geöffnet chosen; waren … getreten / bin … gefahren with the sein card chosen and the other card
+    // of the verb — treten «пинать», fahren «водить» — only with haben) is the state passive of that card: «(Präteritum ·) состояние mit X»,
+    // as the links chat's state group (sein + participle of a haben-only verb) — not a bare «Partizip II». Indicative sein only (not wäre /
+    // sei), one sein in the part, no zu before the participle, the variant's card only with haben; the chosen reading is not touched.
+    async function stateAlternative(word, context, result) {
+      if (!result?.candidates?.length || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const sel = result.selected;
+      const verbCard = c => c !== sel && !c.construction && c.source === "main" && /Verb/u.test(canonicalPos(c.item?.type || c.pos)) && c.item;
+      const rows = verbAnalyses.get(norm(word)) || [];
+      const alts = (result.candidates || []).filter(c => verbCard(c) && rows.some(a => a.kind === "participle" && a.entry === c.item) &&
+        auxiliariesOf(c.item).includes("haben") && !auxiliariesOf(c.item).includes("sein"));
+      if (!alts.length) return result;
+      // (as the state group: one verb only — gefallen of fallen / gefallen, geraten of geraten / raten stay «Partizip II»)
+      if (new Set(rows.filter(a => a.kind === "participle").map(a => norm(a.base))).size > 1) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'stateAlternative');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0 || at > 0 && norm(tokens[at-1][0]) === "zu") return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      let lo = at, hi = at;
+      while (lo > 0 && !/[,;:.!?»«„“"–—()]/u.test(gap(lo))) lo--;
+      while (hi + 1 < tokens.length && !/[,;:.!?»«„“"–—()]/u.test(gap(hi + 1))) hi++;
+      const heads = [];
+      for (let i = lo; i <= hi; i++) {
+        if (i === at || !/^\p{Ll}/u.test(tokens[i][0]) && i !== lo) continue;
+        const all = (verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => a.kind === "finite" && a.base === "sein");
+        const fin = all.filter(a => ["Präsens","Präteritum"].includes(a.tense));
+        if (fin.length && !all.some(a => /Konjunktiv/u.test(a.tense))) heads.push({i, tense:fin.some(a => a.tense === "Präteritum") ? "Präteritum" : "Präsens"});
+      }
+      // (two sein in the part — die eben heim gekommen waren und in den Saal getreten waren —: the one right after the participle)
+      const h = heads.length === 1 ? heads[0] : heads.find(x => x.i === at + 1);
+      if (!h) return result;
+      // (the participle closes its part or stands right before its sein — not etwas bewegt sich, where bewegt is the finite verb)
+      if (at !== hi && h.i !== at + 1) return result;
+      const span = i => ({text:tokens[i][0], start:tokens[i].index, end:tokens[i].index + tokens[i][0].length});
+      // (advisor 15.11) no state of a verb marked only intransitive: our card has no «+ Akk» (complements) and the Kaikki tags of its
+      // senses are all «intransitive» — war es nicht gewohnt is no state of wohnen. No tags anywhere — the state stays.
+      const onlyIntransitive = async c => {
+        if ((c.item?.complements || []).some(x => /Akkusativ/u.test(String(x?.pattern || "")))) return false;
+        if (!fallback.lookupFacts) return false;
+        let tags = [];
+        try { tags = ((await fallback.lookupFacts(norm(String(c.item.word || c.lemma || "")))).groups || []).filter(g => g.pos === "verb" && g.transitivityOf)
+          .flatMap(g => Object.values(g.transitivityOf)); } catch (_) { tags = []; }
+        return tags.length > 0 && tags.every(t => t === "intransitive");
+      };
+      const kept = [];
+      for (const c of alts) if (!(await onlyIntransitive(c))) kept.push(c);
+      if (!kept.length) return result;
+      const changed = new Map(kept.map(c => [c, {...c, formFeatures:(({tense, participleOnly, ...rest}) => rest)(c.formFeatures || {}), construction:{id:"perfect-group", lemma:c.item.word, label:h.tense === "Präteritum" ? "Plusquamperfekt" : "Perfekt",
+        stateOnly:true, spans:[span(Math.min(h.i,at)), span(Math.max(h.i,at))]}}]));
+      // (the decision of the chosen reading is kept — only a hidden variant changes)
+      return keepDecision(result,{...result, candidates:result.candidates.map(c => changed.get(c) || c)});
     }
     // #65 (advisor 15.11): Wart (old / colloquial imperative of warten) with «,» / «!» right after it or mal after it, and no ihr before it —
     // «warten · Verb · Imperativ» (Wart, ich komme!; »Wart!«; Wart mal). Not ihr wart (Ihr wart müde), not Wart ihr …? (the verb sein).
