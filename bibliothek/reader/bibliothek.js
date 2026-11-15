@@ -1272,7 +1272,8 @@
       $("popover-more").firstChild.textContent=showPronounSummary ? (ru ? "Справка о местоимениях " : "Pronoun reference ") : (ru ? "Словарная справка " : "Dictionary details ");
       $("popover-source").hidden = candidate ? candidate.source !== "fallback" && !(locale() === "ru" && candidate.wholeRu) : !resolution.unresolvedMeanings.length && !resolution.candidates.some(c => c.source === "fallback") && !(locale() === "ru" && resolution.wholeRu);
       if (notes.open && !notes.hidden) $("popover-source").hidden = false;
-      paintActiveWord(candidate, referencePronoun || candidate?.construction || candidate?.prepositionLink || candidate?.compound ? model.spans : undefined);
+      // (links chat, advisor 15.11: a window keeps the chain of its verb — modal / auxiliary group — lit; resolver windowChain)
+      paintActiveWord(candidate, referencePronoun || candidate?.construction || candidate?.prepositionLink || candidate?.compound ? model.spans : !candidate && resolution.chain ? resolution.chain.spans : undefined);
       if(showPronounSummary)popupAmbiguous=false;
       // G57 (user 24.10.2026): no bookmark while no variant is chosen (it would save a word without a meaning).
       $("popover-bookmark").hidden = popupAmbiguous;
