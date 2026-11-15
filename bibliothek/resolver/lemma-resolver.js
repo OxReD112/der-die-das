@@ -9441,7 +9441,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const pronoun = tokens.slice(start,hi).some(x => /^(?:ich|du|er|wir|ihr)$/u.test(norm(x[0])));
           const phrase = tokens.slice(lo+1,hi).some((x,n) => /^(?:der|die|das|den|ein|eine|einen)$/u.test(norm(x[0])) && /^\p{Lu}/u.test(tokens[lo+2+n]?.[0] ?? ""));
           return pronoun && phrase; };
-        let linked = [], roles = [], id, label, main, mainIndex = tail, state = false, stateOnly = false, passive = false, coordinatedNames = null;
+        let linked = [], roles = [], id, label, main, mainIndex = tail, state = false, stateOnly = false, passive = false, coordinatedNames = null, doubleModal = null;
         if (modals.has(head.e.word)) {
           // G15e (16.10.2026): a modal takes a bare infinitive; a zu-infinitive at
           // the end belongs to another construction (sollten … bewachen um …
@@ -9453,6 +9453,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           main = (frontedInfinitive ? matches(0).filter(e => e.type === "Verb" && base(e) === norm(tokens[0][0])) : infinitives(tail)).filter(e => reflexiveIn || !/^sich\s/u.test(norm(e.word)));
           id = "modal-group"; label = "Modal";
           linked = [head.i,tail]; roles = [head.e,...main];
+          // (advisor 15.11, L20: a double modal — sollte ihn bekommen können, soll … Konsequenzen fürchten müssen: the infinitive right
+          // before the closing modal infinitive is the verb of the group, the modal infinitive goes along — «mit bekommen können»; as
+          // modal-future of werden: wird kommen können)
+          if (!frontedInfinitive && tail-1 > head.i && /^(?:müssen|sollen|können|dürfen|wollen|mögen)$/u.test(norm(tokens[tail][0])) &&
+              /^\p{Ll}/u.test(tokens[tail-1][0]) && !/^(?:müssen|sollen|können|dürfen|wollen|mögen|werden|haben|sein|zu)$/u.test(norm(tokens[tail-1][0])) &&
+              /^\s+$/u.test(String(context.sentence || "").slice(tokens[tail-1].index + tokens[tail-1][0].length, tokens[tail].index))) {
+            const inner = infinitives(tail-1).filter(e => reflexiveIn || !/^sich\s/u.test(norm(e.word)));
+            const second = matches(tail).filter(e => MODAL_VERB_SET.has(e.word));
+            if (inner.length && second.length && !inner.some(e => MODAL_VERB_SET.has(e.word))) {
+              main = inner; mainIndex = tail-1; linked = [head.i,tail-1,tail]; roles = [head.e,...inner,second[0]]; doubleModal = norm(tokens[tail][0]); }
+          }
           // C18 (2) (18.10.2026), reference F12-B9 / U-H08: modal + perfect infinitive (muss … gekostet haben,
           // musste … gewesen sein, dass er es gesehen haben muss). The participle must take this very auxiliary:
           // sein + the participle of a haben verb is a state (G2: kann geschlossen sein, muss verletzt sein) and
@@ -9615,6 +9626,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           ...(passive ? {passive:true} : {}),
           // (п. 16: each infinitive of a modal group as written — laufen und herbeiholen, not … holen of the split word; an auxiliary group
           // names infinitives — Plusquamperfekt mit empfangen und lesen)
+          ...(doubleModal && plain && !coordinatedNames ? {coordinatedLemma:`${plain.word} ${doubleModal}`,doubleModal} : {}),
           ...(coordinatedNames && plain ? (w => ({coordinatedLemma:`${coordinatedNames.first} ${coordinatedNames.joiner} ${w}`,coordinated:w}))(
             id === "modal-group" && norm(tokens[tail]?.[0] ?? "").endsWith(norm(plain.word)) && /^\p{Ll}/u.test(tokens[tail]?.[0] ?? "") ? norm(tokens[tail][0]) : plain.word) : {}),
           // L13 (reference F12-G3b): wäre … gewesen — the clicked wäre is the auxiliary, though the participle is sein too.
@@ -18801,6 +18813,39 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return result;
     }
+    // (advisor 15.11, L50): mögen (not möchten) with an infinitive in its part — the modal group — shows «(с инфинитивом) может быть,
+    // возможно» first when the part shows the possibility / concession by its form: sein / haben / werden or a Perfekt infinitive (Das
+    // mag sein, Er mag recht haben, mag gewesen sein), a question word without a speaker / hearer subject (Was mag das bedeuten?, Wo
+    // mochte er stecken?), a concession (es mochte anfangen, was es wollte; mochte wollen oder nicht; Mag kommen, wer will; noch so),
+    // es / das / dies / man as the subject (Das mag bedauerlich klingen, Man mag es so ausdrücken). Otherwise as before — «любить»
+    // first: Ich mag tanzen, Er mag Fußball spielen, Was magst du essen?, Hermine mochte nichts davon hören; not with leiden (gut leiden
+    // mögen «любить»), not when und / oder stands between the infinitive and the modal (… nix anfangen kann und es lieber klassisch mag).
+    function moegenPossibility(word, context, result) {
+      const sel = result?.selected, at = context?.tokenOffset, sentence = String(context?.sentence || "");
+      if (!sel || norm(String(sel.lemma || "")) !== "mögen" || !["modal-group","modal-perfect-infinitive"].includes(sel.construction?.id) || !Number.isInteger(at)) return result;
+      const tokens = sharedTokens(sentence, "moegenPossibility"), k0 = clickedTokenIndex(tokens, at, word);
+      const spans = sel.construction.spans || [];
+      if (k0 < 0 || !spans.some(sp => sp.start === tokens[k0].index)) return result;
+      const idx = spans.map(sp => tokens.findIndex(t => t.index === sp.start)).filter(i => i >= 0 && i !== k0);
+      if (!idx.length || idx.some(i => norm(tokens[i][0]) === "leiden")) return result;
+      const lo = Math.min(k0, ...idx), hi = Math.max(k0, ...idx);
+      if (idx.some(i => i < k0) && tokens.slice(lo+1, hi).some(t => /^(?:und|oder)$/u.test(norm(t[0])))) return result;
+      let a = lo; while (a > 0 && !/[,;:.!?»«„“"()–—]/u.test(sentence.slice(tokens[a-1].index + tokens[a-1][0].length, tokens[a].index))) a--;
+      let b = hi; while (b+1 < tokens.length && !/[,;:.!?»«„“"()–—]/u.test(sentence.slice(tokens[b].index + tokens[b][0].length, tokens[b+1].index))) b++;
+      const part = tokens.slice(a, b+1), w = t => norm(t[0]);
+      const stateVerb = tokens.slice(lo, Math.min(tokens.length, hi+2)).some(t => /^(?:sein|haben|werden|gewesen|worden|geworden)$/u.test(w(t))) || sel.construction?.id === "modal-perfect-infinitive";
+      const speaker = part.some((t, n) => /^(?:ich|du|wir|ihr)$/u.test(w(t)) || t[0] === "Sie" && a + n > 0 && !/[.!?»«„“"]\s*$/u.test(sentence.slice(0, t.index)));
+      const question = !speaker && part.some(t => /^(?:was|wo|wer|wem|wen|wie|warum|weshalb|wieso|wat)$/u.test(w(t)));
+      const concession = /(?:\b(?:wie|was|so viel|so oft|als|wer)\s+(?:\p{L}+\s+){0,2}(?:woll\p{L}*|will|lust)\b|\boder nicht\b|\bnoch so\b|\bauch immer\b|\bwas immer\b)/iu.test(sentence);
+      const impersonal = part.some((t, n) => /^(?:es|man|dies)$/u.test(w(t)) || w(t) === "das" && !/^\p{Lu}/u.test(part[n+1]?.[0] ?? "") && /^\p{Ll}|^\p{Lu}/u.test(t[0]) && !(n+1 < part.length && /^\p{Lu}/u.test(part[n+1][0])));
+      if (!stateVerb && !question && !concession && !impersonal) return result;
+      const ru = String(sel.translation?.ru ?? sel.item?.translation_ru ?? "").split(";").map(x => x.trim());
+      const k = ru.findIndex(m => /\(с инфинитивом\)/u.test(m));
+      if (k <= 0) return result;
+      const en = String(sel.translation?.en ?? sel.item?.translation_en ?? "").split(";").map(x => x.trim());
+      const selected = {...sel, senseFirst:k, senseFirstEn:en.length === ru.length ? k : 0, senseEvidence:"modal-infinitive"};
+      return {...result, selected, preferred:result.preferred === sel ? selected : result.preferred, candidates:(result.candidates || []).map(c => c === sel ? selected : c)};
+    }
     async function coordinationUnion(word, context, result, pipeline) {
       const at = context?.tokenOffset, sentence = String(context?.sentence || ""), AND = /^(?:und|oder)$/u;
       if (!result || context?.noCoordUnion || !Number.isInteger(at) || !/^\p{Ll}/u.test(word)) return result;
@@ -18846,7 +18891,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
