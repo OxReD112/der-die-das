@@ -1226,23 +1226,13 @@ header h1 {
 @media (min-width: 700px) and (min-height: 740px) {
   html:not(.home-wide-layout) .dictionary-search input { height: 56px; font-size: 20px; }
   html:not(.home-wide-layout) .dictionary-intro,
-  html:not(.home-wide-layout) .dictionary-hint,
-  html:not(.home-wide-layout) .dictionary-back { font-size: 16px; }
-  html:not(.home-wide-layout) .dictionary-entry-type,
-  html:not(.home-wide-layout) .dictionary-entry-pos,
-  html:not(.home-wide-layout) .dictionary-entry-label,
+  html:not(.home-wide-layout) .dictionary-hint { font-size: 16px; }
   html:not(.home-wide-layout) .dictionary-match-translation,
   html:not(.home-wide-layout) .dictionary-match-plural,
   html:not(.home-wide-layout) .dictionary-match-perfect { font-size: 14px; }
   html:not(.home-wide-layout) .dictionary-match-word { font-size: 20px; }
-  html:not(.home-wide-layout) .dictionary-entry-headword { font-size: 34px; }
-  html:not(.home-wide-layout) .dictionary-entry-plural,
-  html:not(.home-wide-layout) .dictionary-entry-translation,
-  html:not(.home-wide-layout) .dictionary-entry-example { font-size: 20px; }
-  html:not(.home-wide-layout) .dictionary-entry-example-translation,
-  html:not(.home-wide-layout) .dictionary-entry-note,
-  html:not(.home-wide-layout) .dictionary-forms-table { font-size: 16px; }
-  html:not(.home-wide-layout) .dictionary-forms-table thead th { font-size: 14px; }
+  /* the article about a word: phone sizes (15.11, Alena — one step up looked too large on the iPad; was 34 / 20 /
+     16 / 14) */
   html:not(.home-wide-layout) .dictionary-add-wortschatz { height: 64px; font-size: 20px; } /* the tablet Weiter */
 }
 

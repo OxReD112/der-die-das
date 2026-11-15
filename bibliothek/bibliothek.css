@@ -2901,6 +2901,13 @@ body.library-screen .reader .library-add-menu button { border-radius: 12px; }
   .book-title { font-size: 20px; line-height: 24px; }
   .book-author { font-size: 16px; line-height: 20px; }
   .book-subtitle { font-size: 14px; line-height: 18px; }
+  /* text settings (Aa) one step up (15.11, Alena) */
+  .text-settings { width: 400px; }
+  .text-settings-header h2 { font-size: 20px; }
+  .text-setting-row { font-size: 16px; }
+  .text-segments button, .text-segments button.is-serif { font-size: 20px; }
+  .text-size-step.is-smaller { font-size: 20px; }
+  .text-size-step.is-larger { font-size: 34px; }
 }
 
 /* 08.11 (Alena): ⓘ (storage note) moved from the title to the dock line, left of the view toggle; on the shelf ↺
