@@ -546,6 +546,19 @@
   const posMap = { adj:"Adjektiv", adv:"Adverb", conj:"Konjunktion", pron:"Pronomen", det:"Pronomen", noun:"Nomen", name:"Nomen", verb:"Verb", adjective:"Adjektiv", adverb:"Adverb", conjunction:"Konjunktion", pronoun:"Pronomen", preposition:"prep", numeral:"num" };
   const ownOnlyVerbs = new Set(["haben","sein"]);
   const canonicalPos = value => posMap[value] || value || "";
+  // #68 (advisor 15.11): a nominalized adjective counts only as its own noun entry in a dictionary, never derived by rule — our card of
+  // a person (der Kranke: article der, lemma = adjective + e), or the external (Kaikki) masculine headword adjective + er / r (Weiser,
+  // Armer) and its «female equivalent of Armer» entry. Not das Alter, die Feste, die Schale.
+  const adjectiveNominalizationEntry = (c, stems) => {
+    if (canonicalPos(c.pos) !== "Nomen") return false;
+    const l = norm(c.lemma), masc = x => [...stems].some(a => x === a + "er" || /e$/u.test(a) && x === a + "r");
+    if (stems.has(l)) return false;
+    if (c.source === "main") return c.item?.article === "der" && [...stems].some(a => l === a + "e" || /e$/u.test(a) && l === a);
+    if (c.source !== "fallback") return false;
+    if (masc(l)) return true;
+    const female = String(c.meanings?.[0] || "").match(/^female equivalent of (\p{L}+)/u);
+    return !!female && masc(norm(female[1]));
+  };
   // Only identified grammatical classes may supplement an existing own match.
   // Postpositions and external contractions are separate grammatical classes:
   // an own preposition card (nach, über) must not hide them (step 5 block 6).
@@ -1616,6 +1629,11 @@
     // main, on purpose (advisor 10.11): bare sein + form is as often the state of the verb (die erste Prüfung ist geschafft).
     const copulaOnlyCards = new Map();
     entries = entries.filter(e => !(e?.copula_or_attributive_only && e.type === "Adjektiv" && e.word && (copulaOnlyCards.set(norm(e.word),e), true)));
+    // (WN batch 115, advisor 15.11) lauter «чистый, честный» (gehoben): every form of the card — lauter, lautere, lauterem, lauteren,
+    // lauterer, lauteres — is also a form of laut (the comparative / the declension), so the form never tells it apart: the card stays in
+    // the dictionary but takes no part in the reader's choice. «одни, сплошь» stays the line of lauterOnly (on the card laut), as before.
+    const NO_CHOICE_ADJECTIVES = new Set(["lauter"]);
+    entries = entries.filter(e => !(e?.type === "Adjektiv" && NO_CHOICE_ADJECTIVES.has(norm(e.word || ""))));
     const auxiliariesOf = e => e?.auxiliaries || String(e?.auxiliary || "").split(/\s*\/\s*|\s+/u).map(norm).filter(Boolean);
     // doch / damit inside the part (item 2b; damit — TODO item 17: the conjunction by the verb-final sign, damitOpensPart below)
     // (review 05.11: denn without its comma before a subject + finite verb — sie hatte, es hat, der Bus ist, was hätte — is the causal
@@ -2101,6 +2119,9 @@
           if (/i/u.test(er) && !/i/u.test(stem)) out.add(du === er ? er.replace(/t$/u,"") : du.replace(/st$/u,""));
           else out.add(/[dt]$/u.test(stem) || /[mn]$/u.test(stem) && !/(?:mm|nn|[aeiouäöü]h?[mn]|[lr][mn])$/u.test(stem) ? stem + "e" : stem);
         }
+      // #66 (advisor 15.11): warten keeps its old / colloquial short imperative wart beside warte (wart nur ab — abwarten, wart nur ein
+      // Weilchen); the stems in -t / -d otherwise keep their -e (rede, bete). Only this verb: its short form is frequent in the texts.
+      if (key === "warten" && out.has("warte")) out.add("wart");
       const list = [...out].filter(f => /^[\p{Ll}]+$/u.test(f));
       imperativeCache.set(key,list);
       return list;
@@ -12964,8 +12985,34 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // B9: between several nouns (Essen / external Esse, plural Essen) the
         // determiner may agree with one only (ein gutes Essen).
         if (new Set(f.nouns.map(c => norm(c.lemma))).size > 1) {
-          const determined = grammarProducers['noun-after-determiner'](f);
+          // #68 (tests chat 15.11, Er fragte die Weisen um Rat): when the other noun is the nominalization of our own adjective of the
+          // same stem (Weiser / Weise «мудрец» beside weise «мудрый»), the article does not tell our noun card (die Weise «способ») from
+          // it — die / der Weisen, der Weise fit both: the window of the two, not our card.
+          // (any dictionary: our or external adjective, our or external nominalization; the noun to choose is the homograph of the adjective)
+          const adjectiveStemsB9 = new Set(f.candidates.filter(c => /^(?:Adjektiv|adjective|adj)/iu.test(canonicalPos(c.item?.type || c.pos) || "")).map(c => norm(c.lemma)));
+          const nominalizationOfOwnAdjective = c => adjectiveNominalizationEntry(c, adjectiveStemsB9) &&
+            f.nouns.some(n => n !== c && adjectiveStemsB9.has(norm(n.lemma)));
+          // (only where the nominalization takes this ending: -en, or -e after der — not in einer Weise, auf eine Weise)
+          // (der … -e after a noun is the genitive plural of the noun — eine Körperhaltung der Arme —: the nominalization would be der Armen)
+          const nominalEnding = /en$/u.test(norm(f.word)) || f.index > f.start && norm(f.tokens[f.index-1][0]) === "der" &&
+            !(f.index - 1 > f.start && /^\p{Lu}/u.test(f.tokens[f.index-2][0]));
+          const determined = nominalEnding && f.nouns.some(nominalizationOfOwnAdjective) ? null : grammarProducers['noun-after-determiner'](f);
           if (determined?.preferred?.source === "main") return withRule(determined,'noun-after-determiner');
+          // #68 (tests chat 15.11, auf viele Weisen): after a strong plural quantifier (viele, einige, mehrere, wenige, zahlreiche,
+          // etliche, verschiedene, a number) a nominalized adjective ends in -e (viele Weise «многие мудрецы»), so a form in -en is the
+          // plural of our noun card that records it (die Weise — Weisen «способы»), not the external nominalization (Weiser).
+          if (/en$/u.test(norm(f.word)) && f.index > f.start) {
+            const QUANT = /^(?:viele|einige|mehrere|wenige|zahlreiche|etliche|verschiedene|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\d+)$/u;
+            let k = f.index - 1;
+            while (k > f.start && !QUANT.test(norm(f.tokens[k][0])) && f.adjective(k) && /^\p{Ll}/u.test(f.tokens[k][0])) k--;
+            if (QUANT.test(norm(f.tokens[k][0]))) {
+              const own = f.nouns.filter(c => !nominalizationOfOwnAdjective(c) && String(c.item?.plural || "").split(/\s*,\s*/u).some(x => norm(x) === norm(f.word)));
+              // (a nominalized infinitive — das Weisen, the noun entry of the verb weisen — has no plural: not a rival after a quantifier)
+              const infinitiveNoun = c => norm(c.lemma) === norm(f.word) && f.candidates.some(v => canonicalPos(v.pos) === "Verb" && norm(v.lemma) === norm(c.lemma));
+              if (own.length === 1 && f.nouns.every(c => c === own[0] || nominalizationOfOwnAdjective(c) || infinitiveNoun(c)))
+                return f.choose(own,"noun-after-determiner");
+            }
+          }
         }
         return {...f.choose(f.nouns,"internal-capital-noun"),blocked:new Set(f.nouns.map(c => norm(c.lemma))).size > 1 ||
           f.nouns.length > 1 && f.nouns.filter(c => c.source === "main").length !== 1};
@@ -15358,7 +15405,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             singularRival = gender === 'der' || gender === 'die' || gender === '?';
           }
         }
-        if (linked.length === 1 && !rivalNoun && !singularRival) selection.fill(resolution,'article-noun-agreement',linked[0],
+        // #68 (tests chat 15.11, Er fragte die Weisen um Rat; der Weise): an external noun that is the nominalization of our own adjective
+        // of the same stem (weiser «мудрец» beside weise «мудрый») fits the article too — our noun card (die Weise «способ») is not
+        // proven: the window of the two.
+        const ownAdjectiveStems = new Set(resolution.candidates.filter(c => /^(?:Adjektiv|adjective|adj)/iu.test(canonicalPos(c.item?.type || c.pos) || '')).map(c => norm(c.lemma)));
+        const nominalRival = linked.length === 1 && canonicalPos(linked[0].pos) === 'Nomen' &&
+          resolution.candidates.some(c => c !== linked[0] && norm(c.lemma) !== norm(linked[0].lemma) && adjectiveNominalizationEntry(c, ownAdjectiveStems) &&
+            ownAdjectiveStems.has(norm(linked[0].lemma))) &&
+          // (only where the nominalization takes this ending: -en — die / der / den Weisen —, or -e after der — der Weise; after ein-words
+          // the nominalization would be einer Weisen, so in einer Weise, auf eine Weise keep our card)
+          (/en$/u.test(norm(word)) || (() => { const at = context?.sentence && Number.isInteger(context.tokenOffset) ? String(context.sentence).slice(0, context.tokenOffset) : "";
+            return /(?:^|[^\p{L}])der\s+(?:\p{Ll}+\s+){0,2}$/iu.test(at) && !/\p{Lu}\p{L}*\s+der\s+(?:\p{Ll}+\s+){0,2}$/u.test(at.replace(/^\s*\p{L}+/u,'')); })());
+        if (linked.length === 1 && !rivalNoun && !singularRival && !nominalRival) selection.fill(resolution,'article-noun-agreement',linked[0],
           linked[0].pos === 'article' ? 'definite-article-noun-agreement' : 'noun-definite-article-agreement');
       }
       if (selection.canFill('noun-homonym-agreement',resolution)) {
@@ -19202,6 +19260,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const after = sentence.slice(tokens[at].index + tokens[at][0].length);
       const sign = /^\s*[,!]/u.test(after) || at + 1 < tokens.length && !/\S/u.test(after.slice(0, tokens[at+1].index - tokens[at].index - tokens[at][0].length)) && /^(?:mal|doch|nur|einmal)$/u.test(norm(tokens[at+1][0]));
       if (!sign) return result;
+      // (#66) a separable link of a *warten verb (wart nur ab — abwarten, its short imperative now in duImperatives) is the imperative
+      // of that verb
+      const linked = (result.candidates || []).find(c => /warten$/u.test(norm(c.lemma)) && c.construction?.id === "separable-verb");
+      if (linked) {
+        const y = {...linked, formFeatures:{...(linked.formFeatures || {}), tense:"Imperativ"}};
+        return {...result, candidates:[y, ...(result.candidates || []).filter(c => c !== linked)], selected:y, preferred:y, status:"resolved"};
+      }
       const entry = (lemmas.get("warten") || []).find(e => e.type === "Verb");
       if (!entry) return result;
       const x = {...mainCandidate(entry), formFeatures:{tense:"Imperativ"}};

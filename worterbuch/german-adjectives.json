@@ -17641,5 +17641,24 @@
     "usage_note_en": "Often with colours: rot-weiß gestreift — red-and-white striped; quer / längs gestreift — horizontally / vertically striped. Cf. kariert — checked, gepunktet — dotted. Do not confuse with the verb streifen — to brush against (hat gestreift); to roam (ist gestreift).",
     "participle_of": "streifen",
     "meaning_differs": true
+  },
+  {
+    "id": "adjective-1620",
+    "word": "lauter",
+    "translation_ru": "(разг.) одни, сплошные, масса (= nur); (книжн.) чистый, честный, искренний",
+    "translation_en": "(colloquial) nothing but, sheer, loads of; (elevated) pure, sincere, honest",
+    "usage_note_ru": "«одни, сплошные» — не склоняется, перед существительным без артикля: lauter Lügen — сплошная ложь, lauter nette Leute — одни милые люди; vor lauter Freude — на радостях. Книжн. «чистый, честный» — склоняется: lauteres Gold — чистое золото, die lautere Wahrheit — чистая правда, ein lauterer Mensch — честный, порядочный человек, lautere Absichten — честные намерения. Не путать с формами laut — громкий, громче: mit lauter Stimme — громким голосом, Sprich lauter! — Говори громче!, immer lauter — всё громче, lauter als — громче, чем.",
+    "usage_note_en": "«nothing but» — not inflected, before a noun without an article: lauter Lügen — nothing but lies, lauter nette Leute — all nice people; vor lauter Freude — out of sheer joy. Elevated «pure, sincere» — inflected: lauteres Gold — pure gold, die lautere Wahrheit — the plain truth, ein lauterer Mensch — an honest, upright person, lautere Absichten — honest intentions. Not to be confused with the forms of laut — loud, louder: mit lauter Stimme — in a loud voice, Sprich lauter! — Speak up!, immer lauter — louder and louder, lauter als — louder than.",
+    "example_de": "Im Korb lagen lauter faule Äpfel.",
+    "example_ru": "В корзине лежали одни гнилые яблоки.",
+    "example_en": "There was nothing but rotten apples in the basket.",
+    "example_cloze": "Im Korb lagen {{c1::lauter}} faule Äpfel.",
+    "search_forms": [
+      "lautere",
+      "lauterem",
+      "lauteren",
+      "lauterer",
+      "lauteres"
+    ]
   }
 ]
