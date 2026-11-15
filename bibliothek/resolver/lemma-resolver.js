@@ -4726,7 +4726,9 @@
       const compressedAbbreviation = (a,b) => innerPoint(a,b) || /^\.\s+$/u.test(rawGap(a,b)) && a > 0 && innerPoint(a-1,a);
       // (item 2b: a mid-clause doch is the modal particle — midClauseDoch)
       const hard = (a,b) => /[;:.!?…“”„"«»()]/u.test(compressedAbbreviation(a,b) ? "" : gap(a,b)) || boundaries.has(norm(tokens[b][0])) && !midClauseDoch(sentence,tokens,b);
-      const soft = (a,b) => /,/u.test(gap(a,b)) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
+      // (P5 (б), advisor 15.11: a comma between two modifiers of one noun — commaModifierPair — is no boundary: gingen in einem lang
+      // gezogenen, lauten Rülpser unter)
+      const soft = (a,b) => (/,/u.test(gap(a,b)) && !(b === a+1 && commaModifierPair(sentence, tokens, a, true))) || /\s(?:[–—]|--)\s/u.test(gap(a,b));
       // (es gibt, advisor 11.11: the particle right after the accusative object of es gibt — keinen Weg zurück, den Weg zurück nach Hause —
       // an article group not inside a prepositional group; not gab es ungern auf, gibt es Mineralien an den Körper ab: es = «оно»)
       const esGibtObjectBefore = j => {
@@ -5354,10 +5356,32 @@
       const groupBefore = tokens.slice(a, v).some((t, n) => /^\p{Lu}/u.test(t[0]) && !inGroupOfPrep(a + n) && !TIME.test(norm(t[0])) && !OBJ_TIME.test(norm(t[0])) &&
         !(a + n === a && (forms.get(norm(t[0])) || []).length && !(forms.get(norm(t[0])) || []).some(e => e.type === "Nomen")) &&
         !/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(norm(t[0])) && !prepositions.has(norm(t[0])));
-      const subjectSure = pronounSubject || groupBefore || sharedSubject;
+      // (TODO п. 99, 15.11: an imperative first in its sentence has no subject — Hau ein Stück von der Ferse ab: ein Stück is the object)
+      const imperativeFirst = v === a && (v === 0 || /[.!?:»«„“"–—]\s*$/u.test(sentence.slice(0, tokens[v].index))) &&
+        (verbAnalyses.get(norm(tokens[v][0])) || []).some(x => x.kind === "imperative") && !/^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(norm(tokens[v+1]?.[0] ?? ""));
+      const subjectSure = pronounSubject || groupBefore || sharedSubject || imperativeFirst;
+      // (TODO п. 99, recount 15.11: a determiner that is never nominative opens no subject — stieß seinen Gesellen an after a comma;
+      // after the verb first in its part an object pronoun right after the verb leaves no room for the subject before the group —
+      // »…« reichte ihm die Gans hin; sie after the verb with a nominal subject before the verb is the object — Berlusconi hielt sie …
+      // zusammen)
+      const NEVER_NOMINATIVE = /^(?:einen|seinen|meinen|deinen|unseren|euren|diesen|jenen|keinen|jeden|welchen)$/u;
+      // (advisor 15.11: the subject before the verb is sure only when it cannot be the accusative — der / ein (kein, mein …) + a masculine
+      // noun of our cards, adjectives between; a name, die / das + noun may be the object: Die Frau sah sie, Das Kind rief sie, Maria
+      // sah sie — sie is no sure accusative)
+      const nominativeBefore = () => { if (v - a < 2) return false;
+        const det = word(a), noun = tokens[v-1][0];
+        if (!/^(?:der|ein|kein|mein|dein|sein|unser|euer|dieser|jener|jeder)$/u.test(det) || !/^\p{Lu}/u.test(noun)) return false;
+        for (let n = a + 1; n < v - 1; n++) if (!/^\p{Ll}/u.test(tokens[n][0]) || !/(?:e|en|er|es|em)$/u.test(word(n))) return false;
+        return (lemmas.get(norm(noun)) || []).some(e => e.type === "Nomen" && String(e.entry?.article ?? e.article ?? "") === "der"); };
+      const pronounFirst = v === a && /^(?:mir|dir|ihm|ihr|ihnen|uns|euch|mich|dich|ihn|sich)$/u.test(word(v+1) ?? "");
+      const nounAfter = k => { let n = k + 1; while (n < j && /^\p{Ll}/u.test(tokens[n][0]) && /(?:e|en|em|er|es)$/u.test(norm(tokens[n][0]))) n++;
+        return n < j && /^\p{Lu}/u.test(tokens[n][0]) && !TIME.test(norm(tokens[n][0])) && !OBJ_TIME.test(norm(tokens[n][0])); };
       for (let k = v + 1; k < j; k++) {
         const w = word(k), t = tokens[k][0];
         if (/^(?:ihn|mich|dich)$/u.test(w) && !afterPrep(k)) return true;
+        if (NEVER_NOMINATIVE.test(w) && !afterPrep(k) && nounAfter(k)) return true;
+        if (w === "sie" && k === v + 1 && nominativeBefore() && !afterPrep(k)) return true;
+        if (pronounFirst && k > v + 1 && DIRECT_DET.test(w) && !afterPrep(k) && nounAfter(k)) return true;
         if (!subjectSure || afterPrep(k)) continue;
         if (w === "es" || /['’]s$/u.test(t) && k === v) return true;
         if (DIRECT_DET.test(w) && !(w === "sie" )) { let n = k + 1; while (n < j && /^\p{Ll}/u.test(tokens[n][0]) && /(?:e|en|em|er|es)$/u.test(norm(tokens[n][0]))) n++;
@@ -5446,7 +5470,11 @@
         const takes = m => ofCase.some(x => of(x, m)), needs = m => ofCase.some(x => x.required === true && of(x, m));
         if (!ru.some(takes) && !ru.some(needs)) continue;
         // (present: the strict count; absent: the loose one — a clause or speech is an object too: gibt an, wie hoch …)
-        const strictPresent = separatedObjectInPart(c, sentence, tokens, need, true);
+        // (TODO п. 99, advisor 15.11: the accusative is found by the same sure direct-object test as for leaving out a sein-only card —
+        // directAccusativeInPart: not der (nominative), ein wenig, a number, als, the subject after the verb — lief der rosarot an,
+        // lief ein wenig rosa an; the dative keeps the strict count)
+        const strictCount = separatedObjectInPart(c, sentence, tokens, need, true);
+        const strictPresent = need === "Akkusativ" && strictCount !== null ? directAccusativeInPart(c, sentence, tokens) : strictCount;
         if (strictPresent === null) return;
         const present = strictPresent === true ? true : separatedObjectInPart(c, sentence, tokens, need) === false ? false : null;
         if (present === true && !(need === "Akkusativ" && env.REQUIRED_AKK_RAISE === "0")) {
@@ -5473,7 +5501,7 @@
       const first = (list, tag) => { const at = list.findIndex(m => ["transitive","both"].includes(tag(m)));
         return at > 0 && list.slice(0, at).every(m => tag(m) === "intransitive") ? at : -1; };
       let present = null;
-      const objectThere = () => present ??= separatedObjectInPart(c, sentence, tokens, "Akkusativ", true) === true;
+      const objectThere = () => present ??= directAccusativeInPart(c, sentence, tokens);
       // English: the Kaikki tags of the senses (the English line is the senses in their order)
       if (!Number.isInteger(c.senseFirstEn) && Array.isArray(c.meanings) && c.meanings.length > 1 && fallback.lookupFacts && objectThere()) {
         let tags = null;
@@ -5823,7 +5851,7 @@
     // inside one noun phrase: a declined modifier before it and a declined modifier with the same ending after it (an undeclined
     // degree word between may stand: überwiegend tonigen), then the noun before any verb form or other mark (commas of the same list
     // are fine) — eine maßvolle, schrittweise Belastung; einen dunklen, warmen Ton. Not a list of nouns, not a clause after the comma.
-    function commaModifierPair(sentence, tokens, a) {
+    function commaModifierPair(sentence, tokens, a, strict = false) {
       const w = i => norm(tokens[i][0]);
       const gapAfter = i => sentence.slice(tokens[i].index+tokens[i][0].length,tokens[i+1].index);
       if (a < 1 || a+2 >= tokens.length || !/^\s*,\s*$/u.test(gapAfter(a))) return false;
@@ -5834,15 +5862,35 @@
       const shape = i => /^\p{Ll}\p{L}*(?:e|en|er|es|em)$/u.test(tokens[i][0]) && !verbal(i) && !DETERMINER_WORD.test(w(i)) &&
         !prepositions.has(w(i)) && !(forms.get(w(i)) || []).some(e => !["Adjektiv","Adverb"].includes(e.type));
       const degree = i => /^\p{Ll}/u.test(tokens[i][0]) && !ending(i) && !verbal(i) && (forms.get(w(i)) || []).some(e => ["Adjektiv","Adverb"].includes(e.type));
-      if (!(modifier(a) || shape(a))) return false;
+      // (P5 (б), advisor 15.11: a participle with an adjective ending is a modifier too — ein Bowl genanntes, mit Wasser gefülltes Gefäß,
+      // in einem lang gezogenen, lauten Rülpser — when a determiner or a preposition opens its group before it (only lowercase words
+      // between) and the noun follows the pair with no finite form; a group with a preposition may stand before the second modifier —
+      // dem aktuellen, auf zwei Jahre angelegten Projekt. Not: a comma before a new main clause, a zu-infinitive, adjectives after sein.)
+      // (pkg163: the word without its ending is a participle — gezogen-en, angelegt-en, genannt-es; not a finite form: hatte, musste)
+      const participleAttr = i => /^\p{Ll}/u.test(tokens[i][0]) && ending(i) && /(?:t|n)(?:e|en|er|es|em)$/u.test(w(i)) &&
+        !DETERMINER_WORD.test(w(i)) && !prepositions.has(w(i)) &&
+        (verbAnalyses.get(w(i).slice(0, w(i).length - ending(i).length)) || []).some(x => x.kind === "participle");
+      const opened = i => { for (let j = i-1; j >= 0 && j >= i-4; j--) { if (!/^\s+$/u.test(gapAfter(j))) return false;
+        if (DETERMINER_WORD.test(w(j)) || prepositions.has(w(j))) return true; } return false; };
+      // (strict — for the separable scan: real modifiers only, an adjective form or a participle, not the bare shape: Spieler her, darunter)
+      // (… the bare shape is taken there only right after a determiner or a preposition, lowercase words between: seinen roten, feurigen
+      // Augen; einen letzten, angsterfüllten Blick)
+      const openedNear = i => { for (let j = i-1; j >= 0 && j >= i-3; j--) { if (!/^\s+$/u.test(gapAfter(j))) return false;
+        if (DETERMINER_WORD.test(w(j)) || prepositions.has(w(j))) return true; if (!/^\p{Ll}/u.test(tokens[j][0])) return false; } return false; };
+      const like = i => modifier(i) || (!strict || openedNear(a)) && shape(i) || participleAttr(i) && opened(a);
+      if (!like(a) || strict && !opened(a) && !openedNear(a)) return false;
       let b = a+1;
-      if (degree(b) && /^\s+$/u.test(gapAfter(b))) b++;
-      if (!(modifier(b) || shape(b)) || ending(b) !== ending(a)) return false;
+      if (degree(b) && !prepositions.has(w(b)) && /^\s+$/u.test(gapAfter(b))) b++;
+      // (a group with a preposition before the second modifier: auf zwei Jahre, mit Wasser — up to four words, no mark inside)
+      if (prepositions.has(w(b)) && !DETERMINER_WORD.test(w(b))) { let j = b+1;
+        while (j < tokens.length && j <= b+4 && /^\s+$/u.test(gapAfter(j-1)) && !(like(j) && ending(j) === ending(a))) j++;
+        if (j < tokens.length && j <= b+4 && like(j) && ending(j) === ending(a) && /^\s+$/u.test(gapAfter(j-1))) b = j; }
+      if (!like(b) || ending(b) !== ending(a)) return false;
       for (let i = b+1; i < tokens.length && i <= b+4; i++) {
         const g = gapAfter(i-1);
         if (!/^\s+$/u.test(g) && !/^\s*,\s*$/u.test(g)) return false;
         if (/^\p{Lu}/u.test(tokens[i][0]) && !clauseInitial(sentence, tokens[i].index) && !prepositions.has(w(i))) return true;
-        if (!(modifier(i) || shape(i) || degree(i))) return false;
+        if (!(modifier(i) || shape(i) || degree(i) || participleAttr(i))) return false;
       }
       return false;
     }
