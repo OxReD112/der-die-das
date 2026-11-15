@@ -47170,5 +47170,306 @@
         "Der Duft von frischem Brot zog durchs Haus."
       ]
     }
+  },
+  {
+    "id": "expression-254",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "bis auf Weiteres",
+    "translation_ru": "впредь до особого распоряжения, пока что",
+    "translation_en": "until further notice",
+    "example_de": "Die Bibliothek bleibt bis auf Weiteres geschlossen.",
+    "example_ru": "Библиотека закрыта впредь до особого распоряжения.",
+    "example_en": "The library remains closed until further notice.",
+    "notes_ru": [
+      "Допустимо и с маленькой буквы: bis auf weiteres (Duden: bis auf Weiteres oder weiteres). Не путать: bis auf weiteres Material — кроме дополнительного материала (weiteres — прилагательное)."
+    ],
+    "notes_en": [
+      "Lower case is also correct: bis auf weiteres (Duden: bis auf Weiteres oder weiteres). Do not confuse: bis auf weiteres Material — except for additional material (weiteres — adjective)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/weitere",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "Weiteres"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bis",
+              "Bis"
+            ]
+          },
+          {
+            "form": "auf"
+          },
+          {
+            "form": "weiteres",
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Bibliothek bleibt bis auf Weiteres geschlossen.",
+        "Das Gericht blockiert den Verkauf nämlich bis auf weiteres.",
+        "Bis auf Weiteres gilt die alte Regel."
+      ],
+      "negative": [
+        "Wir haben alles bis auf weiteres Material bekommen.",
+        "Er wartete bis auf den nächsten Tag."
+      ]
+    }
+  },
+  {
+    "id": "expression-255",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "des Weiteren",
+    "translation_ru": "кроме того, далее",
+    "translation_en": "furthermore, moreover",
+    "example_de": "Des Weiteren bitten wir Sie, pünktlich zu erscheinen.",
+    "example_ru": "Кроме того, просим вас прийти вовремя.",
+    "example_en": "Furthermore, we ask you to arrive on time.",
+    "notes_ru": [
+      "Пишется и с маленькой буквы: des weiteren (старое написание). Синонимы: außerdem, darüber hinaus, ferner; в Австрии и Швейцарии — im Weiteren. Не путать: die Vergabe des weiteren Standortes — выделение ещё одного места (weiteren — прилагательное)."
+    ],
+    "notes_en": [
+      "Also written in lower case: des weiteren (old spelling). Synonyms: außerdem, darüber hinaus, ferner; in Austria and Switzerland — im Weiteren. Do not confuse: die Vergabe des weiteren Standortes — the allocation of a further site (weiteren — adjective)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/weitere",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "des",
+              "Des"
+            ]
+          },
+          {
+            "form": "Weiteren"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "des",
+              "Des"
+            ]
+          },
+          {
+            "form": "weiteren",
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Des Weiteren bitten wir Sie, pünktlich zu erscheinen.",
+        "Des weiteren war das Zimmer wohl ein ehemaliges Rauchrzimmer, in dem es derartig nach altem Rauch stank.",
+        "Des Weiteren verfügt das Stadion über ein klimatisiertes Business-Center.",
+        "Die Bezeichnung Nagar findet sich des Weiteren in Texten von Mari.",
+        "Zwischen 1935 und 1938 war er des Weiteren Vorsteher-Stellvertreter des Handelsgremiums."
+      ],
+      "negative": [
+        "Man sprach bei der Vergabe des weiteren Standortes über die Kosten.",
+        "Die Planung des weiteren Vorgehens dauerte lange."
+      ]
+    }
+  },
+  {
+    "id": "expression-256",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im weiteren Sinne",
+    "translation_ru": "в широком смысле",
+    "translation_en": "in the broader sense",
+    "example_de": "Im weiteren Sinne gehört auch das Radio zu den Medien.",
+    "example_ru": "В широком смысле к средствам массовой информации относится и радио.",
+    "example_en": "In the broader sense, radio is also one of the media.",
+    "notes_ru": [
+      "Пара: im engeren Sinne — в узком смысле. Также im weitesten Sinne — в самом широком смысле. Здесь weiteren — сравнительная степень weit «широкий», не weitere «ещё, дальнейший»."
+    ],
+    "notes_en": [
+      "Counterpart: im engeren Sinne — in the narrower sense. Also im weitesten Sinne — in the broadest sense. Here weiteren is the comparative of weit «wide», not weitere «further, additional»."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/weit",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "im",
+              "Im"
+            ]
+          },
+          {
+            "form": "weiteren"
+          },
+          {
+            "form": [
+              "Sinne",
+              "Sinn"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im weiteren Sinne gehört auch das Radio zu den Medien.",
+        "Im weiteren Sinne werden damit auch andere Zahlungsmethoden bezeichnet."
+      ],
+      "negative": [
+        "Im weiteren Verlauf des Spiels fiel ein Tor.",
+        "Er hat im Sinne des Gesetzes gehandelt."
+      ]
+    }
+  },
+  {
+    "id": "expression-257",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im engeren Sinne",
+    "translation_ru": "в узком смысле",
+    "translation_en": "in the narrower sense",
+    "example_de": "Ein Wal ist kein Fisch im engeren Sinne.",
+    "example_ru": "Кит — не рыба в узком смысле слова.",
+    "example_en": "A whale is not a fish in the strict sense.",
+    "notes_ru": [
+      "Пара: im weiteren Sinne — в широком смысле. Также im engsten Sinne — в самом узком смысле."
+    ],
+    "notes_en": [
+      "Counterpart: im weiteren Sinne — in the broader sense. Also im engsten Sinne — in the narrowest sense."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/eng",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "im",
+              "Im"
+            ]
+          },
+          {
+            "form": "engeren"
+          },
+          {
+            "form": [
+              "Sinne",
+              "Sinn"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ein Wal ist kein Fisch im engeren Sinne.",
+        "Im engeren Sinne ist das kein Roman."
+      ],
+      "negative": [
+        "Im engeren Kreis der Familie wurde gefeiert."
+      ]
+    }
+  },
+  {
+    "id": "expression-258",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "im Weiteren",
+    "translation_ru": "в дальнейшем, далее (в тексте)",
+    "translation_en": "in what follows, below",
+    "example_de": "Die Methode wird im Weiteren genauer beschrieben.",
+    "example_ru": "Метод подробнее описывается далее.",
+    "example_en": "The method is described in more detail below.",
+    "notes_ru": [
+      "Книжн., в текстах: wie im Weiteren dargestellt — как показано далее. Пишется и с маленькой буквы: im weiteren. В Австрии и Швейцарии также = des Weiteren: кроме того. Не путать: im weiteren Verlauf — в дальнейшем ходе (weiteren — прилагательное, перед существительным)."
+    ],
+    "notes_en": [
+      "Formal, in texts: wie im Weiteren dargestellt — as shown below. Also written in lower case: im weiteren. In Austria and Switzerland also = des Weiteren: furthermore. Do not confuse: im weiteren Verlauf — in the further course (weiteren — adjective, before a noun)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/weitere",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "im",
+              "Im"
+            ]
+          },
+          {
+            "form": [
+              "Weiteren",
+              "weiteren"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Methode wird im Weiteren genauer beschrieben.",
+        "Wie im Weiteren dargestellt wird, ist das Verfahren sicher."
+      ],
+      "negative": [
+        "Im weiteren Verlauf nach Norden passiert der Lech Prem.",
+        "Sie begleitet ihn im weiteren Kampf.",
+        "Im weiteren Instanzenzug sind das Oberlandesgericht und der Bundesgerichtshof übergeordnet.",
+        "Im weiteren Sinne werden damit auch andere Zahlungsmethoden bezeichnet."
+      ]
+    }
   }
 ]

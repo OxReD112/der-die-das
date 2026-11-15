@@ -19024,7 +19024,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -19565,7 +19565,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // WN batch 123 (advisor 15.11, task #69): an inflected weiter- (weitere, weiteren, weiterer, weiteres, weiterem) is our card weitere
     // «другой, ещё; дальнейший» — the forms equal the comparative of weit, but the comparative of distance is rare (none in the books and
     // the corpora): weitere chosen, weit stays among the choices. weit when the part compares (als after the form: einen weiteren Weg als
-    // ihr) or in im weiteren Sinne «в широком смысле».
+    // ihr); im weiteren Sinne is the expression of batch 124.
     async function weitereCard(word, context, result) {
       // (capitalized only at the start of its part — Weitere Informationen finden Sie …; des Weiteren, im Weiteren stay the window)
       if (!/^[wW]eiter(?:e|en|er|es|em)$/u.test(String(word || "")) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
@@ -19584,10 +19584,34 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // not als «в качестве» — ein weiteres Haus als Unterkunft, weitere zwei Jahre als Wirtschaftsredakteur)
       const compares = [at + 1, at + 2].some(k => k <= hi && norm(tokens[k]?.[0] || "") === "als" &&
         /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|den|dem|ein|eine|einen|sonst|je|erwartet|gedacht|vorher|früher|bisher)$/u.test(norm(tokens[k+1]?.[0] || "")));
-      const sense = norm(word) === "weiteren" && at > 0 && norm(tokens[at-1][0]) === "im" && /^Sinne?$/u.test(tokens[at+1]?.[0] || "");
-      const chosen = compares || sense ? weit : weitere;
+      // (im weiteren Sinne — the expression of WN expressions batch 124, not a condition here: advisor 15.11, task #70)
+      const chosen = compares ? weit : weitere;
       return keepDecision(result,{...result,candidates:[chosen,...candidates.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'weitere-card'},
-        {outcome:'selected',rule:'weitere-card',reason:compares ? 'comparison' : sense ? 'im-weiteren-sinne' : 'inflected-weiter'});
+        {outcome:'selected',rule:'weitere-card',reason:compares ? 'comparison' : 'inflected-weiter'});
+    }
+    // PUD-200 Holden (advisor + user 15.11, as «Name / Nomen» of 09.11): a capitalised word in the middle of the sentence right after a
+    // given name (an external record «… given name»), whose readings are only not nouns — an adjective, an adverb, a verb (Gloria Holden,
+    // Marianne Frisch, Peter Lang, Daniel Bell) — is «Name / Adjektiv» (« / Verb»), the word's own meaning kept. Not a function word, not the
+    // start of a sentence / part / quote, not after a given name that is our noun card (Rose, Roman); nouns after a given name stay.
+    async function surnameAfterGivenName(word, context, result) {
+      if (!/^\p{Lu}\p{Ll}/u.test(String(word || "")) || !result?.selected || !context || !Number.isInteger(context.tokenOffset) || !fallback.lookup) return result;
+      const sel = result.selected, pos = canonicalPos(sel.item?.type || sel.pos);
+      const kind = /^Adjektiv/u.test(pos) ? "Adjektiv" : /^Adverb/u.test(pos) ? "Adverb" : /^Verb/u.test(pos) ? "Verb" : null;
+      if (!kind || sel.construction || (result.candidates || []).some(c => canonicalPos(c.item?.type || c.pos) === "Nomen" && !/name/iu.test(String(c.pos || "")))) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'surnameAfterGivenName');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 2) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const prev = tokens[at-1][0];
+      if (!/^[ \t]+$/u.test(gap(at)) || !/^\p{Lu}\p{Ll}+$/u.test(prev) || /[.!?:;»«„“"–—(]\s*$/u.test(gap(at-1))) return result;
+      if ((lemmas.get(norm(prev)) || []).some(e => e.type === "Nomen") || (forms.get(norm(prev)) || []).some(e => e.type === "Nomen")) return result;
+      let groups = [];
+      try { groups = await sourceLookup(prev,'surnameAfterGivenName','reader') || []; } catch (_) { groups = []; }
+      const senses = g => [...(g.senses || []), ...(g.meanings || [])].map(x => typeof x === "string" ? x : String(x?.gloss || x?.en || ""));
+      if (!groups.some(g => g.pos === "name" && senses(g).some(x => /\bgiven name\b/iu.test(x)))) return result;
+      const x = {...sel, posLabel:`Name / ${kind}`, formFeatures:{}};
+      return keepDecision(result,{...result,candidates:[x,...(result.candidates || []).filter(c => c !== sel)],selected:x,preferred:x,evidence:'surname-after-given-name'},
+        {outcome:'selected',rule:'surname-after-given-name',reason:'given-name-before'});
     }
     // #65 (advisor 15.11): Wart (old / colloquial imperative of warten) with «,» / «!» right after it or mal after it, and no ihr before it —
     // «warten · Verb · Imperativ» (Wart, ich komme!; »Wart!«; Wart mal). Not ihr wart (Ihr wart müde), not Wart ihr …? (the verb sein).

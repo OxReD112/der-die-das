@@ -358,6 +358,8 @@
   const verbBase = value => norm(value).replace(/^sich\s+/u, '');
   function partOfSpeech(candidate, confirmed = false) {
     const label = candidate.posLabel || pos(candidate);
+    // (PUD Holden, advisor + user 15.11) a surname after a given name read as an adjective / verb: the resolver's slash «Name / Verb» as is
+    if (/^Name \/ /u.test(String(candidate.posLabel || ''))) return candidate.posLabel;
     if (label === 'Pronomen' || candidate.item?.type === 'Pronomen') return candidate.source === 'main' ? pronounType(candidate.dictionaryId) : 'Pronomen';
     if (label === 'Verb' || pos(candidate) === 'Verb') {
       // A modal verb with no infinitive in its clause is used as a full verb (Ich mag Kaffee).
