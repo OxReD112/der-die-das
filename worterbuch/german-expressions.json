@@ -45435,5 +45435,1740 @@
         "Sie legte sich zu dem Kinde das schlafen sollte."
       ]
     }
+  },
+  {
+    "id": "expression-241",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "der Stein der Weisen",
+    "translation_ru": "философский камень; (высок.) решение всех загадок и проблем",
+    "translation_en": "the philosopher's stone; (elevated) the solution to all problems",
+    "example_de": "Viele Alchemisten haben ihr ganzes Leben lang nach dem Stein der Weisen gesucht.",
+    "example_ru": "Многие алхимики всю жизнь искали философский камень.",
+    "example_en": "Many alchemists spent their whole lives searching for the philosopher's stone.",
+    "notes_ru": [
+      "Weisen — родительный падеж мн. ч. от der Weise «мудрец»: «камень мудрецов» (не die Weise «способ»).",
+      "Harry Potter und der Stein der Weisen — «Гарри Поттер и философский камень».",
+      "Перен. (высок.): den Stein der Weisen gefunden haben — найти решение всех проблем; часто с отрицанием: Das ist auch nicht der Stein der Weisen."
+    ],
+    "notes_en": [
+      "Weisen is the genitive plural of der Weise “wise man”: “stone of the wise” (not die Weise “way”).",
+      "Harry Potter und der Stein der Weisen — “Harry Potter and the Philosopher's Stone”.",
+      "Fig. (elevated): den Stein der Weisen gefunden haben — to have found the solution to everything; often negated: Das ist auch nicht der Stein der Weisen."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Stein",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "der",
+              "den",
+              "dem",
+              "des",
+              "Der",
+              "Den",
+              "Dem",
+              "Des",
+              "die",
+              "Die"
+            ]
+          },
+          {
+            "form": [
+              "Stein",
+              "Steins",
+              "Steines",
+              "Steine",
+              "Steinen"
+            ]
+          },
+          {
+            "form": "der"
+          },
+          {
+            "form": "Weisen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "Stein",
+              "Steins",
+              "Steines",
+              "Steine",
+              "Steinen"
+            ]
+          },
+          {
+            "form": "der"
+          },
+          {
+            "form": "Weisen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Viele Alchemisten haben ihr ganzes Leben lang nach dem Stein der Weisen gesucht.",
+        "Harry Potter und der Stein der Weisen",
+        "Er ist der einzige bekannte Hersteller des Steins der Weisen!",
+        "Im Laufe der Jahrhunderte gab es viele Berichte über den Stein der Weisen.",
+        "»Der Hund muss Flamels Stein der Weisen bewachen!",
+        "Er suchte ebenso vergeblich nach dem Stein der Weisen.",
+        "Das Geheimnis des Steines der Weisen blieb ungelöst."
+      ],
+      "negative": [
+        "Man kann das Problem auf verschiedene Weisen lösen.",
+        "Er fand den Stein der weisen Frau im Garten.",
+        "Er warf einen Stein der Länge nach.",
+        "Der Stein der alten Mauer war locker.",
+        "Die Weisen aus dem Morgenland folgten dem Stern."
+      ]
+    }
+  },
+  {
+    "id": "expression-242",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "jemanden lieb haben",
+    "translation_ru": "любить (кого-либо), быть привязанным (к кому-либо)",
+    "translation_en": "to be fond of, to love (someone)",
+    "example_de": "Die Großmutter hatte ihre Enkel sehr lieb.",
+    "example_ru": "Бабушка очень любила своих внуков.",
+    "example_en": "Grandma was very fond of her grandchildren.",
+    "notes_ru": [
+      "Мягче, чем lieben: о близких, детях, друзьях. Ich hab dich lieb! — Я тебя люблю! (родным, друзьям). Пишется и слитно: liebhaben.",
+      "Не путать: Das ist lieb von dir. — Это мило с твоей стороны."
+    ],
+    "notes_en": [
+      "Softer than lieben: for family, children, friends. Ich hab dich lieb! — I love you! (to family, friends). Also written as one word: liebhaben.",
+      "Do not confuse: Das ist lieb von dir. — That's kind of you."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/lieb",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "habest",
+              "habet"
+            ]
+          },
+          {
+            "form": "lieb",
+            "not_next": [
+              "gemacht",
+              "gemeint",
+              "gesagt",
+              "gelächelt",
+              "gewonnen",
+              "gewinnen",
+              "von",
+              "zu",
+              "angesehen",
+              "angeschaut",
+              "angelächelt",
+              "gefragt",
+              "gebeten",
+              "geantwortet",
+              "gegrüßt",
+              "gelacht",
+              "geredet",
+              "geschrieben",
+              "gesprochen",
+              "geworden",
+              "gewordene",
+              "gewordenen",
+              "gewordenes",
+              "gewordener",
+              "gewordenem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "lieb",
+            "not_next": [
+              "gemacht",
+              "gemeint",
+              "gesagt",
+              "gelächelt",
+              "gewonnen",
+              "gewinnen",
+              "von",
+              "zu",
+              "angesehen",
+              "angeschaut",
+              "angelächelt",
+              "gefragt",
+              "gebeten",
+              "geantwortet",
+              "gegrüßt",
+              "gelacht",
+              "geredet",
+              "geschrieben",
+              "gesprochen",
+              "geworden",
+              "gewordene",
+              "gewordenen",
+              "gewordenes",
+              "gewordener",
+              "gewordenem"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "habest",
+              "habet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "lieb"
+          },
+          {
+            "form": "zu"
+          },
+          {
+            "form": "haben"
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Großmutter hatte ihre Enkel sehr lieb.",
+        "Ich hab dich lieb.",
+        "Der König aber hatte sie so lieb, daß er sie nicht hergeben wollte.",
+        "Es war ein schönes Mädchen, die hatte jedermann lieb.",
+        "Sie weinten, weil sie sich so lieb gehabt hatten.",
+        "Hast du mich noch lieb?",
+        "Es ist schön, jemanden lieb zu haben."
+      ],
+      "negative": [
+        "Das ist lieb von dir.",
+        "Sie hat einen lieben Hund.",
+        "Mir wäre es lieber, wenn du bleibst.",
+        "Das habe ich am liebsten.",
+        "Das hast du aber lieb gemacht.",
+        "Er hat sie lieb gewonnen.",
+        "Sie hat ihn lieb angesehen.",
+        "Er hat ganz lieb gefragt.",
+        "Das ist ein lieb gewordenes Ritual, das wir haben.",
+        "Sie hatte versprochen, lieb zu ihm zu sein."
+      ]
+    }
+  },
+  {
+    "id": "expression-243",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "vor lauter …",
+    "translation_ru": "от сплошного …, от одного …; из-за обилия …",
+    "translation_en": "out of sheer …, for all the …",
+    "example_de": "Die Kinder konnten vor lauter Aufregung einfach nicht einschlafen.",
+    "example_ru": "Дети от волнения никак не могли заснуть.",
+    "example_en": "The children just couldn't fall asleep out of sheer excitement.",
+    "notes_ru": [
+      "lauter здесь не «громче», а «сплошной, один только» (не склоняется): vor lauter Freude — от радости, vor lauter Arbeit — из-за кучи работы.",
+      "Поговорка: den Wald vor [lauter] Bäumen nicht sehen (шутл.) — за деревьями леса не видеть."
+    ],
+    "notes_en": [
+      "lauter here is not “louder” but “nothing but” (indeclinable): vor lauter Freude — out of sheer joy, vor lauter Arbeit — for all the work.",
+      "Saying: den Wald vor [lauter] Bäumen nicht sehen (jocular) — not to see the wood for the trees."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/lauter_sehr_viele",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "vor",
+              "Vor"
+            ]
+          },
+          {
+            "form": "lauter",
+            "not_next": [
+              "als",
+              "werdend",
+              "werdende",
+              "werdenden",
+              "werdendem",
+              "werdender",
+              "werdendes"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Kinder konnten vor lauter Aufregung einfach nicht einschlafen.",
+        "Er weinte vor lauter Freude.",
+        "Womöglich hatte er sich schon zwei Rippen angeknackst vor lauter Anstrengung, nicht loszulachen.",
+        "Er sieht den Wald vor lauter Bäumen nicht."
+      ],
+      "negative": [
+        "Die Musik war lauter als vorher.",
+        "Das sind lauter Lügen.",
+        "Vor der Tür wurde es lauter.",
+        "Er sprach lauter als vor einer Stunde.",
+        "Kurz vor lauter werdendem Lärm flohen wir."
+      ]
+    }
+  },
+  {
+    "id": "expression-244",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Hochzeit halten",
+    "translation_ru": "справлять свадьбу; жениться, выходить замуж",
+    "translation_en": "to celebrate a wedding, to get married",
+    "example_de": "Im Frühling hielt der junge Graf Hochzeit mit der Tochter des Müllers.",
+    "example_ru": "Весной молодой граф справил свадьбу с дочерью мельника.",
+    "example_en": "In spring the young count married the miller's daughter.",
+    "notes_ru": [
+      "mit jemandem Hochzeit halten — жениться на ком-либо, выйти замуж за кого-либо. Пассив: die Hochzeit ward (wurde) gehalten — свадьбу сыграли. Сейчас обычно: Hochzeit feiern, heiraten (Duden: halten 17 «stattfinden lassen, abhalten» — wann wollt ihr Hochzeit halten?, без пометы)."
+    ],
+    "notes_en": [
+      "mit jemandem Hochzeit halten — to marry someone. Passive: die Hochzeit ward (wurde) gehalten — the wedding was held. Today usually: Hochzeit feiern, heiraten."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/halten",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "halte",
+              "hältst",
+              "hält",
+              "halten",
+              "haltet",
+              "halt",
+              "hielt",
+              "hieltest",
+              "hielten",
+              "hieltet",
+              "hielte",
+              "hieltst",
+              "gehalten",
+              "haltest"
+            ]
+          },
+          {
+            "form": "Hochzeit",
+            "not_after_phrase": [
+              "preposition"
+            ],
+            "not_after": [
+              "die",
+              "Die",
+              "eine",
+              "ihre",
+              "seine",
+              "meine",
+              "deine",
+              "unsere",
+              "eure",
+              "diese",
+              "jene",
+              "solche",
+              "keine",
+              "zur",
+              "zu",
+              "vor",
+              "nach",
+              "bei",
+              "seit",
+              "auf",
+              "von",
+              "mit",
+              "einer",
+              "ihrer",
+              "seiner",
+              "deren",
+              "dieser",
+              "jener",
+              "unserer",
+              "eurer",
+              "meiner",
+              "deiner"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "Hochzeit",
+            "not_after_phrase": [
+              "preposition"
+            ],
+            "not_after": [
+              "die",
+              "Die",
+              "eine",
+              "ihre",
+              "seine",
+              "meine",
+              "deine",
+              "unsere",
+              "eure",
+              "diese",
+              "jene",
+              "solche",
+              "keine",
+              "zur",
+              "zu",
+              "vor",
+              "nach",
+              "bei",
+              "seit",
+              "auf",
+              "von",
+              "mit",
+              "einer",
+              "ihrer",
+              "seiner",
+              "deren",
+              "dieser",
+              "jener",
+              "unserer",
+              "eurer",
+              "meiner",
+              "deiner"
+            ]
+          },
+          {
+            "form": [
+              "halte",
+              "hältst",
+              "hält",
+              "halten",
+              "haltet",
+              "halt",
+              "hielt",
+              "hieltest",
+              "hielten",
+              "hieltet",
+              "hielte",
+              "hieltst",
+              "gehalten",
+              "haltest"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "Hochzeit",
+            "not_after_phrase": [
+              "preposition"
+            ]
+          },
+          {
+            "form": [
+              "ward",
+              "wurde",
+              "wurden",
+              "wird",
+              "werden",
+              "worden",
+              "würde",
+              "würden",
+              "werde"
+            ]
+          },
+          {
+            "form": "gehalten"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ward",
+              "wurde",
+              "wurden",
+              "wird",
+              "werden",
+              "worden",
+              "würde",
+              "würden",
+              "werde"
+            ]
+          },
+          {
+            "form": "Hochzeit",
+            "not_after_phrase": [
+              "preposition"
+            ]
+          },
+          {
+            "form": "gehalten"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "Hochzeit",
+            "not_after_phrase": [
+              "preposition"
+            ]
+          },
+          {
+            "form": "gehalten"
+          },
+          {
+            "form": [
+              "ward",
+              "wurde",
+              "wurden",
+              "wird",
+              "werden",
+              "worden",
+              "würde",
+              "würden",
+              "werde"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im Frühling hielt der junge Graf Hochzeit mit der Tochter des Müllers.",
+        "Und als am Morgen der König kam und alles fand, wie er gewünscht hatte, so hielt er Hochzeit mit ihr.",
+        "Er ging zu der Witwe und freite sie, und die Hochzeit ward gehalten.",
+        "Im Mai hielten sie Hochzeit.",
+        "Nachdem er Hochzeit gehalten hatte, zog er in die Stadt.",
+        "Die Königstochter empfing ihn mit Freuden, und ward die Hochzeit gehalten mit großer Glückseligkeit.",
+        "Als die Hochzeit mit dem Königssohn sollte gehalten werden, kamen die falschen Schwestern.",
+        "Da herzten sie ihre liebe Mutter, und hüpften wie ein Schneider, der Hochzeit hält.",
+        "Die Hochzeit ward also mit großer Pracht und kleiner Freude gehalten."
+      ],
+      "negative": [
+        "Die Hochzeit wurde im Mai gefeiert.",
+        "Sie ging zur Hochzeit.",
+        "Vor der Hochzeit hielt er eine lange Rede.",
+        "Er hielt die Hochzeit für einen Fehler.",
+        "Sie hielten die Hochzeit geheim.",
+        "Die Hochzeit hielt alle in Atem.",
+        "Während der Hochzeit hielt er eine Rede."
+      ]
+    }
+  },
+  {
+    "id": "expression-245",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "es ist um jemanden geschehen",
+    "translation_ru": "кому-то конец, (кто-то) пропал; (кто-то) влюбился без памяти",
+    "translation_en": "someone is done for; someone has fallen head over heels in love",
+    "example_de": "Als die Brücke einstürzte, dachte der Wanderer: Nun ist's um mich geschehen.",
+    "example_ru": "Когда мост рухнул, путник подумал: ну всё, мне конец.",
+    "example_en": "When the bridge collapsed, the traveller thought: now I'm done for.",
+    "notes_ru": [
+      "Обычно с ist's / es ist: Nun ist's um uns geschehen! — Теперь нам конец! Duden: 1) кто-то погиб, разорён, без шансов; 2) кто-то безнадёжно влюбился: Als er sie sah, war es um ihn geschehen. Также о вещах: Da war es um seine Ruhe geschehen — тут прощай его покой."
+    ],
+    "notes_en": [
+      "Usually with ist's / es ist: Nun ist's um uns geschehen! — Now we're done for! Duden: 1) someone is lost, ruined, has no chance; 2) someone has fallen hopelessly in love: Als er sie sah, war es um ihn geschehen. Also of things: Da war es um seine Ruhe geschehen — that was the end of his peace."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/geschehen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "ist's",
+              "ist’s",
+              "ists",
+              "war's",
+              "war’s",
+              "wär's",
+              "wär’s",
+              "wäre's",
+              "wärs"
+            ]
+          },
+          {
+            "form": "um"
+          },
+          {
+            "form": "geschehen",
+            "not_after": [
+              "herum",
+              "her",
+              "Uhr",
+              "viel",
+              "vieles",
+              "etwas",
+              "nichts",
+              "einiges",
+              "manches",
+              "was",
+              "alles",
+              "Schlimmes",
+              "Wunder"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "Es"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "ist's",
+              "ist’s",
+              "ists",
+              "war",
+              "war's",
+              "war’s",
+              "wäre",
+              "wär's",
+              "wär’s",
+              "wär",
+              "sei",
+              "sind",
+              "waren",
+              "wären",
+              "seid",
+              "bist",
+              "bin"
+            ]
+          },
+          {
+            "form": "um"
+          },
+          {
+            "form": "geschehen",
+            "not_after": [
+              "herum",
+              "her",
+              "Uhr",
+              "viel",
+              "vieles",
+              "etwas",
+              "nichts",
+              "einiges",
+              "manches",
+              "was",
+              "alles",
+              "Schlimmes",
+              "Wunder"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "ist",
+              "ist's",
+              "ist’s",
+              "ists",
+              "war",
+              "war's",
+              "war’s",
+              "wäre",
+              "wär's",
+              "wär’s",
+              "wär",
+              "sei",
+              "sind",
+              "waren",
+              "wären",
+              "seid",
+              "bist",
+              "bin"
+            ]
+          },
+          {
+            "form": "es"
+          },
+          {
+            "form": "um"
+          },
+          {
+            "form": "geschehen",
+            "not_after": [
+              "herum",
+              "her",
+              "Uhr",
+              "viel",
+              "vieles",
+              "etwas",
+              "nichts",
+              "einiges",
+              "manches",
+              "was",
+              "alles",
+              "Schlimmes",
+              "Wunder"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "um",
+              "Um"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "ist's",
+              "ist’s",
+              "ists",
+              "war",
+              "war's",
+              "war’s",
+              "wäre",
+              "wär's",
+              "wär’s",
+              "wär",
+              "sei",
+              "sind",
+              "waren",
+              "wären",
+              "seid",
+              "bist",
+              "bin"
+            ]
+          },
+          {
+            "form": "es"
+          },
+          {
+            "form": "geschehen",
+            "not_after": [
+              "herum",
+              "her",
+              "Uhr",
+              "viel",
+              "vieles",
+              "etwas",
+              "nichts",
+              "einiges",
+              "manches",
+              "was",
+              "alles",
+              "Schlimmes",
+              "Wunder"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 3
+      },
+      {
+        "parts": [
+          {
+            "form": "es"
+          },
+          {
+            "form": "um"
+          },
+          {
+            "form": "geschehen",
+            "not_after": [
+              "herum",
+              "her",
+              "Uhr",
+              "viel",
+              "vieles",
+              "etwas",
+              "nichts",
+              "einiges",
+              "manches",
+              "was",
+              "alles",
+              "Schlimmes",
+              "Wunder"
+            ]
+          },
+          {
+            "form": [
+              "ist",
+              "ist's",
+              "ist’s",
+              "ists",
+              "war",
+              "war's",
+              "war’s",
+              "wäre",
+              "wär's",
+              "wär’s",
+              "wär",
+              "sei",
+              "sind",
+              "waren",
+              "wären",
+              "seid",
+              "bist",
+              "bin"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Als die Brücke einstürzte, dachte der Wanderer: Nun ist's um mich geschehen.",
+        "Gretel weinte bittere Tränen und sprach zu Hänsel: »Nun ist's um uns geschehen.«",
+        "»jetzt ist's um dich geschehen,« sprach das boshafte Weib.",
+        "Um ihn war es geschehen, als er sie zum ersten Mal sah.",
+        "Sie wusste, dass es um sie geschehen war.",
+        "Um seinen Sohn war es geschehen.",
+        "Es war um den armen Kerl geschehen.",
+        "Da war es um seine Ruhe geschehen."
+      ],
+      "negative": [
+        "Was ist um dich herum geschehen?",
+        "Was ist mit dir geschehen?",
+        "Was ist um sie geschehen?",
+        "Es ist um dich herum viel geschehen."
+      ]
+    }
+  },
+  {
+    "id": "expression-246",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "Rat schaffen",
+    "translation_ru": "(устарев.) найти выход, помочь (делу)",
+    "translation_en": "(dated) to find a way out, to find a remedy",
+    "example_de": "Keine Sorge, für dein Problem werde ich schon Rat schaffen.",
+    "example_ru": "Не беспокойся, для твоей беды я уж найду выход.",
+    "example_en": "Don't worry, I'll find a way out of your problem.",
+    "notes_ru": [
+      "für etwas Rat schaffen — найти средство против чего-либо. Сейчас: Abhilfe schaffen, einen Ausweg finden."
+    ],
+    "notes_en": [
+      "für etwas Rat schaffen — to find a remedy for something. Today: Abhilfe schaffen, einen Ausweg finden."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Rat",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": "Rat",
+            "not_after": [
+              "der",
+              "Der",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "Ein",
+              "einen",
+              "einem",
+              "guten",
+              "gute",
+              "seinen",
+              "ihren",
+              "meinen",
+              "deinen",
+              "keinen",
+              "um",
+              "ohne",
+              "mit",
+              "auf",
+              "nach",
+              "von",
+              "vom",
+              "zu",
+              "zum",
+              "im",
+              "für",
+              "gegen",
+              "aus",
+              "bei",
+              "beim",
+              "fremden",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "meinem",
+              "eurem",
+              "unserem",
+              "unserm",
+              "gutem",
+              "klugem",
+              "weisem"
+            ]
+          },
+          {
+            "form": [
+              "schaffe",
+              "schaffst",
+              "schafft",
+              "schaffen",
+              "schaffte",
+              "schafften",
+              "schafftest",
+              "schafftet",
+              "geschafft",
+              "schaff",
+              "schaffet"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0,
+        "not_separable_verb": [
+          "abschaffen",
+          "anschaffen"
+        ]
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "schaffe",
+              "schaffst",
+              "schafft",
+              "schaffen",
+              "schaffte",
+              "schafften",
+              "schafftest",
+              "schafftet",
+              "geschafft",
+              "schaff",
+              "schaffet"
+            ]
+          },
+          {
+            "form": "Rat",
+            "not_after": [
+              "der",
+              "Der",
+              "den",
+              "dem",
+              "des",
+              "ein",
+              "Ein",
+              "einen",
+              "einem",
+              "guten",
+              "gute",
+              "seinen",
+              "ihren",
+              "meinen",
+              "deinen",
+              "keinen",
+              "um",
+              "ohne",
+              "mit",
+              "auf",
+              "nach",
+              "von",
+              "vom",
+              "zu",
+              "zum",
+              "im",
+              "für",
+              "gegen",
+              "aus",
+              "bei",
+              "beim",
+              "fremden",
+              "deinem",
+              "seinem",
+              "ihrem",
+              "meinem",
+              "eurem",
+              "unserem",
+              "unserm",
+              "gutem",
+              "klugem",
+              "weisem"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1,
+        "not_separable_verb": [
+          "abschaffen",
+          "anschaffen"
+        ]
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Keine Sorge, für dein Problem werde ich schon Rat schaffen.",
+        "sagte Schneeweißchen, »ich will schon Rat schaffen,«",
+        "Der kluge Knecht schaffte Rat."
+      ],
+      "negative": [
+        "Der Rat schaffte die Regel ab.",
+        "Er hat den Rat seines Vaters befolgt.",
+        "Sie schafft es ohne Rat.",
+        "Sie hat es ohne fremden Rat geschafft.",
+        "Dank deinem Rat haben wir es geschafft."
+      ]
+    }
+  },
+  {
+    "id": "expression-247",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "sich nicht zu lassen wissen",
+    "translation_ru": "(устар.) не помнить себя (от радости и т. п.)",
+    "translation_en": "(dated) to be beside oneself (with …)",
+    "example_de": "Als der Sohn heimkehrte, wusste sich die Mutter vor Freude nicht zu lassen.",
+    "example_ru": "Когда сын вернулся домой, мать не помнила себя от радости.",
+    "example_en": "When her son came home, the mother was beside herself with joy.",
+    "notes_ru": [
+      "Обычно с vor + Dat.: vor Freude, vor Angst, vor Zorn. Сейчас: außer sich sein (vor Freude). В Duden оборота нет (wissen 4: «in der Lage sein, etwas zu tun» + zu-Infinitiv — sich zu helfen wissen); встречается у Гримма."
+    ],
+    "notes_en": [
+      "Usually with vor + dative: vor Freude, vor Angst, vor Zorn. Today: außer sich sein (vor Freude). Not in Duden (wissen 4: «in der Lage sein, etwas zu tun» + zu-infinitive — sich zu helfen wissen); found in the Grimm tales."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/wissen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "reflexive": true
+          },
+          {
+            "form": "nicht zu lassen"
+          },
+          {
+            "form": [
+              "weiß",
+              "weißt",
+              "wissen",
+              "wisst",
+              "wißt",
+              "wusste",
+              "wußte",
+              "wusstest",
+              "wußtest",
+              "wussten",
+              "wußten",
+              "wusstet",
+              "wußtet",
+              "wüsste",
+              "wüßte",
+              "wüssten",
+              "wüßten",
+              "gewusst",
+              "gewußt",
+              "wisse",
+              "wisset"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "weiß",
+              "weißt",
+              "wissen",
+              "wisst",
+              "wißt",
+              "wusste",
+              "wußte",
+              "wusstest",
+              "wußtest",
+              "wussten",
+              "wußten",
+              "wusstet",
+              "wußtet",
+              "wüsste",
+              "wüßte",
+              "wüssten",
+              "wüßten",
+              "gewusst",
+              "gewußt",
+              "wisse",
+              "wisset"
+            ]
+          },
+          {
+            "reflexive": true
+          },
+          {
+            "form": "nicht zu lassen"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Als der Sohn heimkehrte, wusste sich die Mutter vor Freude nicht zu lassen.",
+        "Die Königin gebar ein Mädchen, das war so schön, daß der König vor Freude sich nicht zu lassen wußte und ein großes Fest anstellte.",
+        "Da stieß das böse Weib einen Fluch aus und ward ihr so angst, so angst, daß sie sich nicht zu lassen wußte.",
+        "Sie wusste sich nicht zu lassen vor Glück.",
+        "Sie wußte sich vor Freude nicht zu lassen."
+      ],
+      "negative": [
+        "Er weiß nicht, was er lassen soll.",
+        "Ich weiß, dass du es nicht lassen kannst.",
+        "Sie wusste nicht, ob sie ihn gehen lassen sollte.",
+        "Er weiß sich Zeit zu lassen.",
+        "Sie wusste sich nicht gehen zu lassen.",
+        "Er wusste sich nicht helfen zu lassen."
+      ]
+    }
+  },
+  {
+    "id": "expression-248",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "in die Wochen kommen",
+    "translation_ru": "(устар.) родить, разрешиться от бремени",
+    "translation_en": "(dated) to give birth",
+    "example_de": "Im Winter kam die junge Frau in die Wochen und gebar einen Sohn.",
+    "example_ru": "Зимой молодая женщина разрешилась от бремени и родила сына.",
+    "example_en": "In winter the young woman gave birth to a son.",
+    "notes_ru": [
+      "die Wochen — устар. послеродовой период (das Wochenbett): in den Wochen liegen — лежать после родов."
+    ],
+    "notes_en": [
+      "die Wochen — dated: the time after childbirth (das Wochenbett): in den Wochen liegen — to be lying in after childbirth."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Woche",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämen",
+              "gekommen",
+              "komm"
+            ]
+          },
+          {
+            "form": "in die Wochen",
+            "not_next": [
+              "der",
+              "des",
+              "bis",
+              "vor",
+              "nach",
+              "zuvor",
+              "danach",
+              "lang",
+              "später",
+              "voraus"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "in die Wochen",
+            "not_next": [
+              "der",
+              "des",
+              "bis",
+              "vor",
+              "nach",
+              "zuvor",
+              "danach",
+              "lang",
+              "später",
+              "voraus"
+            ]
+          },
+          {
+            "form": [
+              "komme",
+              "kommst",
+              "kommt",
+              "kommen",
+              "kam",
+              "kamst",
+              "kamen",
+              "kamt",
+              "käme",
+              "kämen",
+              "gekommen",
+              "komm"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": "in Wochen",
+            "not_next": [
+              "der",
+              "des",
+              "bis",
+              "vor",
+              "nach",
+              "zuvor",
+              "danach",
+              "lang",
+              "später",
+              "voraus"
+            ]
+          },
+          {
+            "form": [
+              "kam",
+              "kamen",
+              "käme"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 0
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Im Winter kam die junge Frau in die Wochen und gebar einen Sohn.",
+        "Als die Königin in die Wochen kam, war der König gerade im Krieg.",
+        "Endlich, als die Frau in Wochen kam, gebar sie ein Töchterchen."
+      ],
+      "negative": [
+        "Wir kommen in zwei Wochen.",
+        "Sie kam in die Stadt, um die Wochen dort zu verbringen.",
+        "Jetzt kommen wir in die Wochen der Entscheidung.",
+        "Das Paket kommt in Wochen."
+      ]
+    }
+  },
+  {
+    "id": "expression-249",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "das hat gute Wege",
+    "translation_ru": "(устарев.) до этого ещё далеко, это не к спеху; не беда, обойдётся",
+    "translation_en": "(dated) there is no hurry, there is plenty of time; that's no problem",
+    "example_de": "»Bis der Winter kommt, das hat noch gute Wege«, sagte der Bauer.",
+    "example_ru": "«До зимы ещё далеко», — сказал крестьянин.",
+    "example_en": "\"Winter is still a long way off,\" said the farmer.",
+    "notes_ru": [
+      "Duden (Weg 2.2, veraltend): damit hat es / das hat noch gute Wege — «noch Zeit». Значение «не беда, обойдётся» — по контексту Гримма: »Das hat gute Wege,« antwortete der Schneider, »kein Haar haben sie mir gekrümmt.« Сейчас: das hat keine Eile, das hat Zeit."
+    ],
+    "notes_en": [
+      "Duden (Weg 2.2, veraltend): damit hat es / das hat noch gute Wege — «noch Zeit». The sense “that's no problem” comes from the context in the Grimm tales. Today: das hat keine Eile, das hat Zeit."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Weg",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "das",
+              "Das",
+              "es",
+              "Es",
+              "dies",
+              "Dies"
+            ]
+          },
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "hätte",
+              "habe",
+              "haben"
+            ]
+          },
+          {
+            "form": "noch",
+            "optional": true
+          },
+          {
+            "form": "gute"
+          },
+          {
+            "form": "Wege",
+            "not_next": [
+              "für",
+              "durch",
+              "und",
+              "zum",
+              "zur",
+              "zu",
+              "in",
+              "im",
+              "nach",
+              "gefunden",
+              "gebaut",
+              "gewählt",
+              "gezeigt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 4
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "hat",
+              "hatte",
+              "hätte",
+              "habe",
+              "haben"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "das"
+            ]
+          },
+          {
+            "form": "noch",
+            "optional": true
+          },
+          {
+            "form": "gute"
+          },
+          {
+            "form": "Wege",
+            "not_next": [
+              "für",
+              "durch",
+              "und",
+              "zum",
+              "zur",
+              "zu",
+              "in",
+              "im",
+              "nach",
+              "gefunden",
+              "gebaut",
+              "gewählt",
+              "gezeigt"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 4
+      }
+    ],
+    "tests": {
+      "positive": [
+        "»Bis der Winter kommt, das hat noch gute Wege«, sagte der Bauer.",
+        "»Das hat gute Wege,« antwortete der Schneider, »kein Haar haben sie mir gekrümmt.«",
+        "Damit hat es gute Wege.",
+        "Das hat noch gute Wege.",
+        "Damit hatte es noch gute Wege."
+      ],
+      "negative": [
+        "Er hat gute Wege gefunden.",
+        "Die Stadt hat gute Wege und Straßen.",
+        "Es gibt gute Wege durch den Wald.",
+        "Im Park hat es gute Wege für Radfahrer."
+      ]
+    }
+  },
+  {
+    "id": "expression-250",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "über die Maßen",
+    "translation_ru": "(книжн.) сверх меры, чрезвычайно",
+    "translation_en": "(literary) beyond measure",
+    "example_de": "Die Prinzessin war über die Maßen schön.",
+    "example_ru": "Принцесса была необычайно красива.",
+    "example_en": "The princess was beautiful beyond measure.",
+    "notes_ru": [
+      "Также über alle Maßen. Обычно перед прилагательным: über die Maßen glücklich — несказанно счастлив. Старое написание: über die Maaßen. Не путать: über die Massen — о массах."
+    ],
+    "notes_en": [
+      "Also über alle Maßen. Usually before an adjective: über die Maßen glücklich — happy beyond measure. Old spelling: über die Maaßen. Do not confuse: über die Massen — about the masses."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/Masze",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "über",
+              "Über"
+            ]
+          },
+          {
+            "form": [
+              "die",
+              "alle"
+            ]
+          },
+          {
+            "form": [
+              "Maßen",
+              "Maaßen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 2
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Die Prinzessin war über die Maßen schön.",
+        "Er freute sich über die Maßen.",
+        "Das Kind war über die Maaßen klug.",
+        "Der König hatte eine Tochter, die war über alle Maßen schön."
+      ],
+      "negative": [
+        "Er sprach über die Massen.",
+        "Sie schrieb über die Maße des Raumes."
+      ]
+    }
+  },
+  {
+    "id": "expression-251",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "von Neuem",
+    "translation_ru": "заново, снова",
+    "translation_en": "anew, afresh, (all over) again",
+    "example_de": "Nach dem Stromausfall mussten wir die Arbeit von Neuem beginnen.",
+    "example_ru": "После отключения света нам пришлось начать работу заново.",
+    "example_en": "After the power cut we had to start the work all over again.",
+    "notes_ru": [
+      "Пишется и с маленькой буквы: von neuem (Duden: von Neuem oder neuem). Синонимы: aufs Neue, erneut, noch einmal, von vorn."
+    ],
+    "notes_en": [
+      "Also written in lower case: von neuem (Duden: von Neuem oder neuem). Synonyms: aufs Neue, erneut, noch einmal, von vorn."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/neu",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "von",
+              "Von"
+            ]
+          },
+          {
+            "form": [
+              "neuem",
+              "Neuem"
+            ],
+            "not_next_capital": true
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Nach dem Stromausfall mussten wir die Arbeit von Neuem beginnen.",
+        "Das Schneiderlein fing sein Spiel von neuem an.",
+        "Am andern Morgen ging die Jagd von neuem an.",
+        "Und das Leben regte sich von neuem.",
+        "Also ergriff er die Axt von neuem und wollte zuhauen.",
+        "rief's von neuem, und der Schüler nahm den Pfropfen ab."
+      ],
+      "negative": [
+        "Er bekam einen Brief von neuem Typ.",
+        "Das ist ein Wein von neuem Jahrgang."
+      ]
+    }
+  },
+  {
+    "id": "expression-252",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "aufs Neue",
+    "translation_ru": "снова, заново",
+    "translation_en": "anew, (once) again",
+    "example_de": "Jeden Morgen beginnt der Kampf mit dem Wecker aufs Neue.",
+    "example_ru": "Каждое утро борьба с будильником начинается снова.",
+    "example_en": "Every morning the battle with the alarm clock begins anew.",
+    "notes_ru": [
+      "В старой орфографии — aufs neue (так у Гримма). Часто: immer wieder aufs Neue — снова и снова. Синонимы: von Neuem, erneut."
+    ],
+    "notes_en": [
+      "Old spelling: aufs neue (as in the Grimm tales). Often: immer wieder aufs Neue — again and again. Synonyms: von Neuem, erneut."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/neu",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "aufs",
+              "Aufs"
+            ]
+          },
+          {
+            "form": "Neue",
+            "not_next": [
+              "Jahr",
+              "Jahrhundert",
+              "Jahrtausend",
+              "Jahrzehnt",
+              "Semester",
+              "Schuljahr",
+              "Testament",
+              "und",
+              "oder",
+              "sowie",
+              "bzw."
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "aufs",
+              "Aufs"
+            ]
+          },
+          {
+            "form": "neue",
+            "not_next_capital": true,
+            "not_next": [
+              "und",
+              "oder",
+              "sowie",
+              "bzw."
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Jeden Morgen beginnt der Kampf mit dem Wecker aufs Neue.",
+        "Der König sann aufs neue, wie er sich den Helden vom Halse schaffen könnte.",
+        "Kaum hatte er den Fuß hineingesetzt, so rief Daumesdick aufs neue.",
+        "Die Abläufe werden immer wieder aufs Neue koordiniert."
+      ],
+      "negative": [
+        "Wir freuen uns aufs Neue Jahr.",
+        "Sie blickt hoffnungsvoll aufs neue Jahrzehnt.",
+        "Er freut sich aufs neue Auto.",
+        "Wir sind gespannt aufs neue Album."
+      ]
+    }
+  },
+  {
+    "id": "expression-253",
+    "type": "Ausdruck",
+    "group": "fixed_expression",
+    "word": "von frischem",
+    "translation_ru": "(устар.) снова, заново",
+    "translation_en": "(archaic) anew, afresh",
+    "example_de": "Kaum war es still geworden, ging das Geschrei von frischem los.",
+    "example_ru": "Едва стало тихо, как крик поднялся снова.",
+    "example_en": "Hardly had it gone quiet when the shouting started afresh.",
+    "notes_ru": [
+      "Сейчас: von Neuem, aufs Neue. В Duden оборота нет (frisch 2.1 «erneuert»), встречается у Гримма; помета наша. Не путать: von frischem Brot — о свежем хлебе (прилагательное перед существительным)."
+    ],
+    "notes_en": [
+      "Today: von Neuem, aufs Neue. Not in Duden (frisch 2.1 «erneuert»), found in the Grimm tales; the label is ours. Do not confuse: von frischem Brot — of fresh bread (adjective before a noun)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/frisch",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "von",
+              "Von"
+            ]
+          },
+          {
+            "form": "frischem",
+            "not_next_capital": true,
+            "not_next": [
+              "und",
+              "oder",
+              "sowie",
+              "bzw."
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Kaum war es still geworden, ging das Geschrei von frischem los.",
+        "Da ging der Lärm von frischem an, es tobte und heulte."
+      ],
+      "negative": [
+        "Mehr als 100 Firmen sind an der Produktion von frischem und tiefgefrorenem Fisch beteiligt.",
+        "Der Duft von frischem Brot zog durchs Haus."
+      ]
+    }
   }
 ]
