@@ -127805,5 +127805,56 @@
         "sie": "labten sich"
       }
     }
+  },
+  {
+    "id": "verb-2793",
+    "infinitive": "durchsetzen",
+    "translation_ru": "проводить, осуществлять (закон, решение); добиваться (осуществления), навязывать",
+    "translation_en": "to enforce, to push through, to carry through",
+    "auxiliary": "haben",
+    "usage_note_ru": "seinen Willen durchsetzen — настоять на своём; eine Reform gegen Widerstände durchsetzen — провести реформу вопреки сопротивлению; seine Forderungen durchsetzen — добиться выполнения своих требований. Возвратное sich durchsetzen (утвердиться, взять верх) — см. отдельную карточку. Не путать с неотделяемым durchsetzen (Partizip II durchsetzt): mit etwas durchsetzt — пронизанный, перемешанный с чем-либо.",
+    "usage_note_en": "seinen Willen durchsetzen — to get one's way; eine Reform gegen Widerstände durchsetzen — to push a reform through against resistance; seine Forderungen durchsetzen — to get one's demands met. The reflexive sich durchsetzen (to assert oneself, to prevail) has its own card. Not to be confused with the inseparable durchsetzen (past participle durchsetzt): mit etwas durchsetzt — permeated, interspersed with something.",
+    "example_de": "Die Regierung will das neue Gesetz noch in diesem Jahr durchsetzen.",
+    "example_ru": "Правительство хочет провести новый закон ещё в этом году.",
+    "example_en": "The government wants to push the new law through this year.",
+    "perfect_form": "haben durchgesetzt",
+    "forms": null,
+    "separable_prefix": "durch",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "проводить, осуществлять (закон, решение); добиваться (осуществления), навязывать",
+        "note_ru": "что-либо (ein Gesetz, seinen Willen, eine Forderung)",
+        "note_en": "something (ein Gesetz, seinen Willen, eine Forderung)"
+      }
+    ],
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "setze durch",
+        "du": "setzt durch",
+        "er/sie/es": "setzt durch",
+        "wir": "setzen durch",
+        "ihr": "setzt durch",
+        "sie": "setzen durch"
+      },
+      "Präteritum": {
+        "ich": "setzte durch",
+        "du": "setztest durch",
+        "er/sie/es": "setzte durch",
+        "wir": "setzten durch",
+        "ihr": "setztet durch",
+        "sie": "setzten durch"
+      },
+      "Konjunktiv II": {
+        "ich": "setzte durch",
+        "du": "setztest durch",
+        "er/sie/es": "setzte durch",
+        "wir": "setzten durch",
+        "ihr": "setztet durch",
+        "sie": "setzten durch"
+      }
+    },
+    "example_cloze": "Die Regierung will das neue Gesetz noch in diesem Jahr {{c1::durchsetzen}}."
   }
 ]

@@ -18592,6 +18592,41 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!clause.some(w => (verbAnalyses.get(w) || []).some(a => PREDICATIVE_SEIN_WERDEN.includes(a.base) && a.kind === "finite"))) return result;
       return {...result, selected:adjective, preferred:adjective, status:"resolved", evidence:"become-adjective"};
     }
+    // WN 122 (advisor 15.11): sich in the part of the tapped verb, the verb has a reflexive card among the readings, but the link with
+    // sich was not built (… und sich davon die pfälzischen durchgesetzt haben — the noun after «die pfälzischen» left out) → the plain
+    // card is not chosen with confidence: a window, the reflexive reading first (reflexiveFirst).
+    let sichCardBases = null;
+    function sichUnlinkedWindow(word, context, result) {
+      const c = result?.selected;
+      if (!c || !Number.isInteger(context?.tokenOffset)) return result;
+      const reflexive = x => /^sich\s/u.test(norm(x.lemma || "")) || x.construction?.id === "reflexive-verb";
+      // (dative-card-object-qa: Sie bildet sich etwas ein — the external einbilden «sich ~ воображать» is a reflexive card itself)
+      if (reflexive(c) || /^sich\s*~/u.test(String(c.translation?.ru || "")) || !/^verb/iu.test(String(c.pos || ""))) return result;
+      const base = norm(c.lemma || "");
+      // (a dative «sich X» card — sich zuziehen «подхватить» — is the object rule's (dative-card-object-qa: Der Himmel zog sich etwas zu))
+      const own = (result.candidates || []).filter(x => x !== c && reflexive(x) && x.item?.reflexive_case !== "Dativ" &&
+        norm(x.lemma || "").replace(/^sich\s+/u, "") === base);
+      if (!own.length) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, "sichUnlinkedWindow"), at = clickedTokenIndex(tokens, context.tokenOffset, word);
+      if (at < 0) return result;
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      let begin = at, end = at;
+      // (count 15.11, books: the part ends at und / oder too — setzte sich ans Feuer und legte ihn, kehrte sie sich um und verließ den Saal:
+      // sich belongs to the verb before und; lassen in the part takes sich itself — ließ sich zeigen, ließ er sich bewegen)
+      const stop = k => /^(?:und|oder)$/u.test(norm(tokens[k][0]));
+      while (begin > 0 && !stop(begin - 1) && !/[,;:.!?»«„“"()–—]/u.test(gap(begin - 1, begin))) begin--;
+      while (end + 1 < tokens.length && !stop(end + 1) && !/[,;:.!?»«„“"()–—]/u.test(gap(end, end + 1))) end++;
+      const part = tokens.slice(begin, end + 1).map(t => norm(t[0]));
+      if (!part.some((t, i) => begin + i !== at && t === "sich")) return result;
+      if (part.some(t => /^(?:lass|lasse|lässt|läßt|lasst|laßt|lassen|ließ|ließe|ließen|ließest|ließt|gelassen)$/u.test(t))) return result;
+      // (count 15.11, train: another finite verb of the part with its own reflexive card takes sich — Sie zeigte sich … als sehr schlecht
+      // informiert: sich zeigen, the participle stays informieren)
+      if (!sichCardBases) sichCardBases = new Set(entries.filter(e => e.type === "Verb" && /^sich\s/u.test(norm(e.word || "")))
+        .map(e => norm(e.word).replace(/^sich\s+/u, "")));
+      if (part.some((t, i) => begin + i !== at && (verbAnalyses.get(t) || []).some(a => a.kind === "finite" && a.base !== base && sichCardBases.has(a.base)))) return result;
+      return {...result, selected:null, preferred:null, status:"ambiguous", evidence:"sich-unlinked-window",
+        candidates:[...own, ...result.candidates.filter(x => !own.includes(x))]};
+    }
     // 5в (advisor 12.11): a window of two own cards of one verb that both carry the reflexive group (zog sich aus: ausziehen verb-115
     // «раздеваться» with the field `reflexive`, verb-116 without it) — the group takes the card with the field.
     function reflexiveFieldChoice(word, context, result) {
@@ -18891,7 +18926,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
