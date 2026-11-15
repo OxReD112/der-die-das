@@ -252,16 +252,14 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
   }
 
   /* ---------- fit the composition to the screen ----------
-     Designed at iPad 11" size (1180 × 820). Every other screen gets the same composition,
-     scaled as a whole with transform: scale (--wide-scale), so text, tiles, pictures and gaps
-     all grow together. (CSS zoom was tried first: iPad Safari scaled the boxes but not the text.)
-       · width: the block fills about 82% of the screen width,
-       · it never gets taller than 78% of the screen, and never bigger than 1.32×.
-     Taller screens (e.g. 12.9" iPad, 4:3) also get extra air between tiles · Heute ·
-     Fortschritt (--wide-extra), until the block is about 70% of the screen height.
-     11" iPad ≈ 1.04× and no extra air · 12.9" iPad ≈ 1.2× + ~28px per gap. */
-  const pointerFine = window.matchMedia("(hover: hover) and (pointer: fine)");
-  const FIT = { width: 0.82, maxHeight: 0.78, airHeight: 0.70, maxZoom: 1.32, minZoom: 0.85, maxAir: 40 };
+     The block is never scaled up (16.11, Alena: no «magnifier» — the same letters in both orientations). On a computer
+     it keeps its designed size; on the iPad (touch) home.css builds it at the screen's size (82% of the width, at most
+     1120). Only a window too small for it scales it down (to 0.85 at least, transform: scale --wide-scale):
+       · width: about 82% of the screen width, · height: at most 78% of the screen.
+     Taller screens (e.g. 12.9" iPad, 4:3) get extra air between tiles · Heute · Fortschritt (--wide-extra), until the
+     block is about 70% of the screen height. */
+  const coarsePointer = window.matchMedia("(pointer: coarse)");
+  const FIT = { width: 0.82, maxHeight: 0.78, airHeight: 0.70, minZoom: 0.85, maxAir: 40 };
   function fit() {
     if (!columns || isOpen()) return; // never re-fit under an open keyboard
     homeTrack.style.setProperty("--wide-extra", "0px");
@@ -273,15 +271,16 @@ window.DEUTSCH_WIDE_QUERY = "(orientation: landscape) and (min-width: 1024px) an
     if (!width || !height) return;
     const vw = window.innerWidth, vh = window.innerHeight;
     // 15.11 (Alena): on a computer (mouse) the block never grows past its designed size — filling a big browser window
-    // made the text huge; it stands in the middle with air around. iPad (finger) still fills its screen.
-    const maxZoom = pointerFine.matches ? 1 : FIT.maxZoom;
-    const zoom = Math.min(maxZoom, Math.max(FIT.minZoom,
+    // made the text huge. 16.11 (Alena): on the iPad neither — its layout is built at the screen's size in home.css
+    // (pointer: coarse, «variant A»), the letters stay those of the iPad upright. Only a too-small window still shrinks.
+    const zoom = Math.min(1, Math.max(FIT.minZoom,
       Math.min(FIT.width * vw / width, FIT.maxHeight * vh / height)));
     // the air goes 1× under the tiles, ½× under Heute and ½× above the gear → 2 shares
     const air = Math.min(FIT.maxAir, Math.max(0, (FIT.airHeight * vh / zoom - height) / 2));
     homeTrack.style.setProperty("--wide-scale", String(Math.round(zoom * 1000) / 1000));
     // the exercises (components/deutsch-wide-v1.js) give their header + keyboard this width
-    window.DEUTSCH_WIDE_BLOCK = Math.round(width * zoom);
+    // 16.11: on the iPad (touch) the exercises keep the width they had with the magnifier — 82% of the screen
+    window.DEUTSCH_WIDE_BLOCK = coarsePointer.matches ? Math.round(FIT.width * vw) : Math.round(width * zoom);
     homeTrack.style.setProperty("--wide-extra", Math.round(air) + "px");
     setTop();
     placeWideRow();

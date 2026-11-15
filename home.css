@@ -2919,3 +2919,27 @@ html:not(.home-wide-layout) .settings-icon-button svg {
   width: 21px;
   height: 21px;
 }
+
+/* 16.11 (Alena, variant A): the wide Home on the iPad (touch) without the «magnifier». Before, the whole block was
+   scaled up to fill the screen (home.js fit: ×1.2 on the 12.9" iPad) and the letters grew with it. Now the layout is
+   built at the screen's size — the tiles as on the iPad upright (600 wide, rows 196 at 1120), the text column 440,
+   the gap 80, all in proportion to the block (82% of the screen, at most 1120) — and the letters are the iPad upright
+   ones, the same on every iPad in both orientations. Computers (mouse) keep their composition. */
+@media (pointer: coarse) {
+  html.home-wide-layout {
+    --wide-w: min(1120px, 81vw, 120vh); /* 120vh: short screens (iPad mini) need not shrink the block */
+    --dashboard-width: calc(var(--wide-w) * 0.5357);
+    --wide-left: calc(var(--wide-w) * 0.3929);
+    --wide-gap: calc(var(--wide-w) * 0.0714);
+  }
+  html.home-wide-layout .dashboard.mosaic { --tile-row: calc(var(--dashboard-width) * 0.3267); --tile-gap: 12px; }
+  html.home-wide-layout .home-track > header h1 { font-size: 48px; }
+  html.home-wide-layout .greeting { font-size: 20px; }
+  html.home-wide-layout .greeting-sub { font-size: 16px; }
+  html.home-wide-layout .phrase-screen-content .phrase-week-label { font-size: 14px; }
+  html.home-wide-layout .phrase-week-title { font-size: 20px; }
+  html.home-wide-layout .phrase-week-literal,
+  html.home-wide-layout .phrase-week-meaning,
+  html.home-wide-layout .phrase-week-example { font-size: 16px; }
+  html.home-wide-layout .today-number { font-size: 34px; }
+}
