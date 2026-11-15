@@ -20093,6 +20093,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (spelling === word) return result;
       const read = await resolveFollowingReferenceOnce(word, context, spelling);
       const card = read?.selected || read?.preferred;
+      // G75 (5) (advisor 15.11): a word with the old ß that no dictionary has at all takes the ss spelling from any dictionary, its
+      // split included (Kommißbrot — Kommissbrot, Nußhecken — Nuss + Hecken, Roßkäfer — Ross + Käfer); a split only as a common noun
+      // and only when no part keeps the ß (Maßtheorie, Feuerstoß: ß after a long vowel — the modern spelling; Pißbutt: no sign of a noun)
+      const f = card?.formation, oldSplit = !f || f.kind !== "compound" ||
+        !f.maybeName && (f.parts || []).every(p => !/ß/u.test(String(p.lemma || p.text || "")));
+      if (!(result?.candidates || []).length && (read?.candidates || []).length && card && oldSplit) return read;
       return card && card.source === "main" ? read : result;
     }
     // 5б (advisor 12.11): the genitive of a name — a capital word in -s that no dictionary has, right before a capital word (Hänsels Finger,
