@@ -3073,3 +3073,36 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 
 /* 10.11 (Alena): a form of two kinds (mir) — one card; the second kind starts under a thin line, without the word again */
 .pronoun-reference-more { margin-top: 22px; padding-top: 4px; border-top: 1px solid var(--hairline); }
+
+/* 15.11 (Alena): the iPad one step up, as the rest of the app (the shared rule: phones 12 / 14 / 16 / 20 → tablets
+   14 / 16 / 20 / 28). Not here: the book text (its own size setting), the dictionary card (Meine Wörter details and
+   «Словарная справка» — Alena: they are right as they are), the windows (shared .ui-window, the same on every screen).
+   «Nächstes Kapitel» was off the scale (11 / 17): phones 12 / 16, tablets 14 / 20. */
+#next-chapter small { font-size: 12px; }
+#next-chapter b { font-size: 16px; }
+@media (min-width: 700px) and (min-height: 740px) {
+  #empty-library h2 { font-size: 28px; }
+  #empty-library #empty-library-text { font-size: 16px; }
+  body.library-screen .reader .library-add-menu button { font-size: 20px; }
+  .library-add-menu button small, body.library-screen .reader .library-add-menu button small { font-size: 14px; }
+  .library-add-menu { width: 320px; }
+  #contents-book-title { font-size: 20px; }
+  #contents-heading { font-size: 28px; }
+  #contents-dialog .contents-columns { font-size: 14px; }
+  #contents-dialog .contents-entry > span { font-size: 16px; }
+  #contents-dialog .contents-entry > span.contents-word-count { font-size: 14px; }
+  #toolbar-title { font-size: 16px; }
+  #vocabulary-count { font-size: 14px; }
+  #page-status { font-size: 14px; }
+  #next-chapter small { font-size: 14px; }
+  #next-chapter b { font-size: 20px; }
+  #chapter-vocabulary-review { font-size: 16px; }
+  #popover-more { font-size: 16px; }
+  #vocabulary-subtitle { font-size: 20px; }
+  #vocabulary-heading { font-size: 28px; }
+  #vocabulary-dialog .vocabulary-select-all { font-size: 16px; }
+  #vocabulary-status { font-size: 14px; }
+  #vocabulary-dialog .vocabulary-row-open { font-size: 20px; }
+  #vocabulary-dialog .vocabulary-availability { font-size: 14px; }
+  #vocabulary-dialog .vocabulary-row > p:not(.vocabulary-availability) { font-size: 16px; }
+}
