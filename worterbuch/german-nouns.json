@@ -4705,12 +4705,14 @@
     "word": "Satz",
     "article": "der",
     "plural": "Sätze",
-    "translation_ru": "предложение; фраза",
-    "translation_en": "sentence",
+    "translation_ru": "предложение; фраза; сет, партия (в теннисе, волейболе)",
+    "translation_en": "sentence; set (in tennis, volleyball)",
     "example_de": "Bitte schreiben Sie einen ganzen Satz.",
     "example_cloze": "Bitte schreiben Sie einen ganzen {{c1::Satz}}.",
     "example_ru": "Пожалуйста, напишите полное предложение.",
-    "example_en": "Please write a complete sentence."
+    "example_en": "Please write a complete sentence.",
+    "usage_note_ru": "В спорте — сет, партия: im ersten Satz — в первом сете; Sie gewann in drei Sätzen. — Она выиграла в трёх сетах. der Entscheidungssatz — решающий сет.",
+    "usage_note_en": "In sports — a set: im ersten Satz — in the first set; Sie gewann in drei Sätzen. — She won in three sets. der Entscheidungssatz — the deciding set."
   },
   {
     "id": "noun-383",
@@ -69510,5 +69512,28 @@
     "example_en": "My little daughter helps me with the baking.",
     "usage_note_ru": "Субстантивированный инфинитив от backen — печь (без мн. ч.): beim Backen, zum Backen. Не путать с der Backen — щека (регион.).",
     "usage_note_en": "Nominalised infinitive of backen — to bake (no plural): beim Backen, zum Backen. Not to be confused with der Backen — cheek (regional)."
+  },
+  {
+    "id": "noun-5378",
+    "word": "Weise",
+    "article": "der",
+    "plural": "Weisen",
+    "plural_note_ru": "Без артикля во множественном числе — Weise: zwei Weise, viele Weise.",
+    "plural_note_en": "Without an article, the plural is Weise: zwei Weise, viele Weise.",
+    "translation_ru": "мудрец, мудрый человек",
+    "translation_en": "wise man, sage",
+    "declension_forms": "der Weise · ein Weiser · mit dem Weisen · die Weisen · zwei Weise",
+    "derived_from": {
+      "type": "Adjektiv",
+      "word": "weise"
+    },
+    "declension_note_ru": "Это прилагательное, ставшее существительным, поэтому окончание меняется, как у прилагательного. Подсказка: представьте после слова невидимое «Mann» и поставьте окончание, которое было бы у прилагательного: der weise Mann → der Weise, ein weiser Mann → ein Weiser.",
+    "declension_note_en": "This is an adjective used as a noun, so its ending changes like an adjective’s. Tip: imagine an invisible “Mann” after it and use the ending the adjective would have: der weise Mann → der Weise, ein weiser Mann → ein Weiser.",
+    "usage_note_ru": "der Stein der Weisen — философский камень; die drei Weisen aus dem Morgenland — (библ.) три волхва. Женщина: die Weise, eine Weise — мудрая женщина. Не путать с die Weise — способ, образ (auf diese Weise — таким образом).",
+    "usage_note_en": "der Stein der Weisen — the philosopher’s stone; die drei Weisen aus dem Morgenland — the Three Wise Men (the Magi). A woman: die Weise, eine Weise — a wise woman. Not to be confused with die Weise — way, manner (auf diese Weise — in this way).",
+    "example_de": "Der alte König ließ die Weisen des Landes zu sich rufen.",
+    "example_ru": "Старый король велел позвать к себе мудрецов страны.",
+    "example_en": "The old king had the wise men of the land called to him.",
+    "example_cloze": "Der alte König ließ die {{c1::Weisen}} des Landes zu sich rufen."
   }
 ]

@@ -17674,5 +17674,23 @@
     "usage_note_en": "With the dative: jemandem gewogen sein — to be well-disposed towards someone. Past participle of wiegen / wägen — weighed: Das Paket wurde gewogen.",
     "participle_of": "wiegen",
     "meaning_differs": true
+  },
+  {
+    "id": "adjective-1622",
+    "word": "weitere",
+    "translation_ru": "другой, ещё (один, добавочный); дальнейший",
+    "translation_en": "further, additional, other",
+    "usage_note_ru": "Только перед существительным или как существительное: weitere Informationen — дополнительная информация; ein weiteres Problem — ещё одна проблема; die weitere Entwicklung — дальнейшее развитие. Выражения: ohne Weiteres — запросто; bis auf Weiteres — пока, впредь до особого распоряжения; des Weiteren — кроме того. Не путать с weiter — дальше (наречие) и со сравнительной степенью weit: einen weiteren Weg als ihr — более длинный путь, чем у вас; im weiteren Sinne — в широком смысле.",
+    "usage_note_en": "Only before a noun or as a noun: weitere Informationen — further information; ein weiteres Problem — another problem; die weitere Entwicklung — further development. Expressions: ohne Weiteres — readily; bis auf Weiteres — until further notice; des Weiteren — furthermore. Not to be confused with weiter — further, on (adverb) and with the comparative of weit: einen weiteren Weg als ihr — a longer way than you; im weiteren Sinne — in the broader sense.",
+    "example_de": "Haben Sie noch weitere Fragen zum Vertrag?",
+    "example_ru": "У вас есть ещё вопросы по договору?",
+    "example_en": "Do you have any further questions about the contract?",
+    "search_forms": [
+      "weiterer",
+      "weiteres",
+      "weiteren",
+      "weiterem"
+    ],
+    "example_cloze": "Haben Sie noch {{c1::weitere}} Fragen zum Vertrag?"
   }
 ]

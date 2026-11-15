@@ -555,8 +555,10 @@
   const adjectiveNominalizationEntry = (c, stems) => {
     if (canonicalPos(c.pos) !== "Nomen") return false;
     const l = norm(c.lemma), masc = x => [...stems].some(a => x === a + "er" || /e$/u.test(a) && x === a + "r");
+    // (b) our der-card equal to an adjective in -e (der Weise «мудрец» from weise) is the nominalization when its own forms are adjectival (ein Weiser)
+    if (c.source === "main") return c.item?.article === "der" && [...stems].some(a => l === a + "e" ||
+      /e$/u.test(a) && l === a && new RegExp(`(?:^|·)\\s*ein\\s+${a}r\\s*(?:·|$)`, "iu").test(String(c.item?.declension_forms || "")));
     if (stems.has(l)) return false;
-    if (c.source === "main") return c.item?.article === "der" && [...stems].some(a => l === a + "e" || /e$/u.test(a) && l === a);
     if (c.source !== "fallback") return false;
     if (masc(l)) return true;
     const female = String(c.meanings?.[0] || "").match(/^female equivalent of (\p{L}+)/u);
@@ -12664,8 +12666,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // genders → the masculine card with a shared der/die display (genderPair).
     async function adjectivalNounAgreement(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset) || !/^[A-ZÄÖÜ]/u.test(word)) return null;
-      const own = candidates.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && adjectivalNounStem(c.item));
+      // (a) only cards declined like an adjective themselves (own declension_forms): not die Weise «способ» beside der Weise «мудрец»
+      const adjectival = c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && adjectivalNounStem(c.item) && !!c.item?.declension_forms;
+      const own = candidates.filter(adjectival);
       if (!own.length || new Set(own.map(c => norm(c.lemma))).size !== 1) return null;
+      // (c) our ordinary noun of the same spelling (die Weise «способ»): its own forms (Weise, Weisen) are not decided by agreement —
+      // the #68 rules give the window or the noun; only a form it cannot have (ein Weiser) goes on
+      const homograph = candidates.filter(c => c.source === 'main' && canonicalPos(c.pos) === 'Nomen' && !adjectival(c) && c.item?.article === 'die' && norm(c.lemma) === norm(own[0].lemma));
+      const homographForm = homograph.some(c => [c.lemma, ...String(c.item?.plural || '').split(/\s*,\s*/u)].some(x => x && norm(x) === norm(word)));
       const stem = norm(adjectivalNounStem(own[0].item)), surface = norm(word);
       const ending = surface.startsWith(stem) ? surface.slice(stem.length) : null;
       if (!ADJECTIVE_ENDINGS.includes(ending)) return null;
@@ -12681,7 +12689,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const prepAt = features ? det-1 : index-1;
       const preposition = prepAt >= 0 && joinedTokens(sentence,tokens,prepAt,prepAt+1) ? prepositionCardsByForm.get(norm(tokens[prepAt][0])) : null;
       const governed = preposition ? governedCases(preposition) : null;
-      if (!features && (det !== index-1 && det >= 0)) return null;
+      // (WN batch 123, zwei weitere Verdächtige / zwei neue Verdächtige: a number or a strong quantifier before the modifiers is no
+      // determiner — the modifiers and the noun take the strong endings, as with no word before them)
+      const strongQuantifier = det >= 0 && det !== index-1 && /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\d+|viele|einige|mehrere|wenige|zahlreiche|etliche|manche)$/u.test(norm(tokens[det][0]));
+      if (!features && (det !== index-1 && det >= 0) && !strongQuantifier) return null;
       // Intermediate modifiers stay unchecked only without a determiner; with one they must agree too.
       const between = features ? tokens.slice(det+1,index) : [];
       const rows = [];
@@ -12700,6 +12711,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       const readings = new Set(rows.filter(r => ['masculine','feminine','plural'].includes(r)));
       if (!readings.size) return null;
+      // (c) a feminine singular reading only (auf diese Weise): our feminine ordinary noun; any other reading: no decision here
+      if (homographForm) { return readings.size === 1 && readings.has('feminine') && homograph.length === 1 ? {candidate:homograph[0],evidence:'adjectival-noun-agreement'} : null; }
       const byGender = g => own.find(c => c.item?.article === ({masculine:'der',feminine:'die'})[g]);
       const masculine = byGender('masculine'), feminine = byGender('feminine');
       if (readings.size === 1 && !readings.has('plural')) {
@@ -13085,9 +13098,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (only where the nominalization takes this ending: -en, or -e after der — not in einer Weise, auf eine Weise)
           // (der … -e after a noun is the genitive plural of the noun — eine Körperhaltung der Arme —: the nominalization would be der Armen)
           const nominalEnding = /en$/u.test(norm(f.word)) || f.index > f.start && norm(f.tokens[f.index-1][0]) === "der" &&
-            !(f.index - 1 > f.start && /^\p{Lu}/u.test(f.tokens[f.index-2][0]));
+            !(f.index - 1 > f.start && /^\p{Lu}/u.test(f.tokens[f.index-2][0])) &&
+            // (tests chat 15.11: in der Weise — after a preposition der is dative / genitive, the nominalization would be der Weisen)
+            !(f.index - 1 > f.start && prepositions.has(norm(f.tokens[f.index-2][0])));
           const determined = nominalEnding && f.nouns.some(nominalizationOfOwnAdjective) ? null : grammarProducers['noun-after-determiner'](f);
           if (determined?.preferred?.source === "main") return withRule(determined,'noun-after-determiner');
+          // (tests chat 15.11: in der Weise — preposition + der before the form in -e: dative / genitive feminine, never the masculine
+          // nominative of the nominalization (that would be der Weisen); the feminine noun of the form (any dictionary) is the reading)
+          if (!/en$/u.test(norm(f.word)) && f.index - 1 > f.start && norm(f.tokens[f.index-1][0]) === "der" && prepositions.has(norm(f.tokens[f.index-2][0])) &&
+              f.nouns.some(nominalizationOfOwnAdjective)) {
+            // (advisor 15.11: the feminine card from any dictionary — ours by its article, an external one by its noun article)
+            const fem = f.nouns.filter(c => !nominalizationOfOwnAdjective(c) && (c.source === "main" ? c.item?.article : c.nounArticle) === "die" && norm(c.lemma) === norm(f.word));
+            if (fem.length === 1) return f.choose(fem,"noun-after-determiner");
+          }
           // #68 (tests chat 15.11, auf viele Weisen): after a strong plural quantifier (viele, einige, mehrere, wenige, zahlreiche,
           // etliche, verschiedene, a number) a nominalized adjective ends in -e (viele Weise «многие мудрецы»), so a form in -en is the
           // plural of our noun card that records it (die Weise — Weisen «способы»), not the external nominalization (Weiser).
@@ -13095,7 +13118,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             const QUANT = /^(?:viele|einige|mehrere|wenige|zahlreiche|etliche|verschiedene|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\d+)$/u;
             let k = f.index - 1;
             while (k > f.start && !QUANT.test(norm(f.tokens[k][0])) && f.adjective(k) && /^\p{Ll}/u.test(f.tokens[k][0])) k--;
-            if (QUANT.test(norm(f.tokens[k][0]))) {
+            // (d) a determiner before the quantifier makes the ending weak (die drei Weisen, die vielen Weisen «мудрецы»): no decision
+            const detBefore = k > f.start && /^(?:die|der|den|diese[nr]?|jene[nr]?|meine[nr]?|deine[nr]?|seine[nr]?|ihre[nr]?|unsere[nr]?|eure[nr]?|keine[nr]?|alle[nr]?)$/u.test(norm(f.tokens[k-1][0]));
+            if (QUANT.test(norm(f.tokens[k][0])) && !detBefore) {
               const own = f.nouns.filter(c => !nominalizationOfOwnAdjective(c) && String(c.item?.plural || "").split(/\s*,\s*/u).some(x => norm(x) === norm(f.word)));
               // (a nominalized infinitive — das Weisen, the noun entry of the verb weisen — has no plural: not a rival after a quantifier)
               const infinitiveNoun = c => norm(c.lemma) === norm(f.word) && f.candidates.some(v => canonicalPos(v.pos) === "Verb" && norm(v.lemma) === norm(c.lemma));
@@ -15463,7 +15488,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Noun-phrase facts feed one agreement row. Attaching them to the cards is
       // presentation (presentResolution), so the row reads the facts directly.
       const phrases = await nounPhrase(word,context,resolution.candidates);
-      const articlePhrase = phrases.length && new Set(phrases.map(p => `${p.lemma}:${p.baseArticle}`)).size === 1;
+      // (WN batch 120, run130: DER WEISEN — two noun cards of one spelling, die Weise and der Weise; the clicked article agrees with
+      // the noun either way, so it stays the article)
+      const articlePhrase = phrases.length && (new Set(phrases.map(p => `${p.lemma}:${p.baseArticle}`)).size === 1 ||
+        resolution.candidates.some(c => c.pos === 'article') && new Set(phrases.map(p => norm(p.lemma))).size === 1);
       const phrasesFor = c => canonicalPos(c.pos) === 'Nomen' ? phrases.filter(p => p.dictionaryId === c.dictionaryId) :
         c.pos === 'article' && articlePhrase ? phrases : [];
       if (articlePhrase && selection.canFill('article-noun-agreement',resolution)) {
@@ -15505,7 +15533,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (only where the nominalization takes this ending: -en — die / der / den Weisen —, or -e after der — der Weise; after ein-words
           // the nominalization would be einer Weisen, so in einer Weise, auf eine Weise keep our card)
           (/en$/u.test(norm(word)) || (() => { const at = context?.sentence && Number.isInteger(context.tokenOffset) ? String(context.sentence).slice(0, context.tokenOffset) : "";
-            return /(?:^|[^\p{L}])der\s+(?:\p{Ll}+\s+){0,2}$/iu.test(at) && !/\p{Lu}\p{L}*\s+der\s+(?:\p{Ll}+\s+){0,2}$/u.test(at.replace(/^\s*\p{L}+/u,'')); })());
+            return /(?:^|[^\p{L}])der\s+(?:\p{Ll}+\s+){0,2}$/iu.test(at) && !/\p{Lu}\p{L}*\s+der\s+(?:\p{Ll}+\s+){0,2}$/u.test(at.replace(/^\s*\p{L}+/u,'')) &&
+            !(m => m && prepositions.has(norm(m[1])))(/(\p{L}+)\s+der\s+(?:\p{Ll}+\s+){0,2}$/iu.exec(at)); })());
         if (linked.length === 1 && !rivalNoun && !singularRival && !nominalRival) selection.fill(resolution,'article-noun-agreement',linked[0],
           linked[0].pos === 'article' ? 'definite-article-noun-agreement' : 'noun-definite-article-agreement');
       }
@@ -18973,7 +19002,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>stateAlternative(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -19006,7 +19035,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const run=capsRunBounds(word,context);
         if(!run)return r;
         const {sentence,tokens,at,a,b}=run;
-        return markRun(await capsRunInside(r,sentence,tokens,at,a,b));};
+        return markRun(ownSpelling(await capsRunInside(r,sentence,tokens,at,a,b),sentence));};
+      // (run130 / tests chat 15.11: the spans of a probe carry its spelling — der Stein der Weisen; the run keeps its own — DER STEIN DER
+      // WEISEN — so the highlight covers the phrase)
+      const ownSpelling=(r,sentence)=>{
+        const sel=r?.selected,k=sel?.construction;
+        if(!k||!Array.isArray(k.spans)||k.spans.every(p=>sentence.slice(p.start,p.end)===p.text))return r;
+        if(!k.spans.every(p=>sentence.slice(p.start,p.end).toLowerCase()===String(p.text).toLowerCase()))return r;
+        const fixed={...sel,construction:{...k,spans:k.spans.map(p=>({...p,text:sentence.slice(p.start,p.end)}))}};
+        return keepDecision(r,{...r,candidates:(r.candidates||[]).map(c=>c===sel?fixed:c),selected:fixed,preferred:r.preferred===sel?fixed:r.preferred});};
       const capsRunInside=async(r,sentence,tokens,at,a,b)=>{
         const abbreviation=c=>c&&c.source==='fallback'&&/^(?:initialism|acronym|abbreviation)\b/iu.test(String(c.translation?.en||''));
         const title=t=>t.charAt(0)+t.slice(1).toLowerCase(),lower=t=>t.toLowerCase();
@@ -19024,16 +19061,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(r?.selected&&r.selected.source==='main'){
           const form=ordinary(String(word),at);let x=null;try{x=await pipeline(form,{...context,sentence:spell(form),capsProbe:true});}catch(_){x=null;}
           const spans=c=>(c?.construction?.spans||[]).length;
-          return x?.selected&&x.selected.source==='main'&&spans(x.selected)>spans(r.selected)&&['separable-verb','reflexive-verb'].includes(x.selected.construction.id)?
+          // (advisor / tests chat 15.11: or an expression of the run — STEIN in DER STEIN DER WEISEN → der Stein der Weisen)
+          return x?.selected&&x.selected.source==='main'&&(spans(x.selected)>spans(r.selected)&&['separable-verb','reflexive-verb'].includes(x.selected.construction?.id)||x.selected.pos==='Ausdruck'&&r.selected.pos!=='Ausdruck')?
             keepDecision(x,{...x,evidence:x.evidence||'caps-run-ordinary-spelling'}):r;
         }
         // (only a word with no answer now — «not found», a window or an external abbreviation; HERZOG VON ANHALT keeps its name)
         if(r?.selected&&!abbreviation(r.selected))return r;
         const answers=[];
         for(const form of [lower(word),title(word)]){let x=null;try{x=await pipeline(form,{...context,sentence:spell(form),capsProbe:true});}catch(_){x=null;}
-          if(x&&x.selected&&!abbreviation(x.selected))answers.push(x);}
+          if(x&&x.selected&&!abbreviation(x.selected)){if(form===lower(word))Object.defineProperty(x,'lowerProbe',{value:true,enumerable:false,configurable:true});answers.push(x);}}
         const same=(x,y)=>window.BibliothekVocabulary.identity(x.selected)===window.BibliothekVocabulary.identity(y.selected);
         if(answers.length&&answers.every(x=>same(x,answers[0])))return keepDecision(answers[0],{...answers[0],evidence:answers[0].evidence||'caps-run-ordinary-spelling'});
+        // (run130, UND DER STEIN DER WEISEN: the lowercase spelling closes an expression of the run — der Stein der Weisen — while the
+        // title-case one breaks it (Der in mid-sentence): the expression, as for every other word of the run)
+        const lowerAnswer=answers.find(x=>x.lowerProbe);
+        if(lowerAnswer&&lowerAnswer.selected?.pos==='Ausdruck')return keepDecision(lowerAnswer,{...lowerAnswer,evidence:lowerAnswer.evidence||'caps-run-ordinary-spelling'});
         if(!r)return r;
         const candidates=(r.candidates||[]).filter(c=>!abbreviation(c));
         if(abbreviation(r.selected)||candidates.length!==(r.candidates||[]).length)
@@ -19497,6 +19539,33 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         stateOnly:true, spans:[span(Math.min(h.i,at)), span(Math.max(h.i,at))]}}]));
       // (the decision of the chosen reading is kept — only a hidden variant changes)
       return keepDecision(result,{...result, candidates:result.candidates.map(c => changed.get(c) || c)});
+    }
+    // WN batch 123 (advisor 15.11, task #69): an inflected weiter- (weitere, weiteren, weiterer, weiteres, weiterem) is our card weitere
+    // «другой, ещё; дальнейший» — the forms equal the comparative of weit, but the comparative of distance is rare (none in the books and
+    // the corpora): weitere chosen, weit stays among the choices. weit when the part compares (als after the form: einen weiteren Weg als
+    // ihr) or in im weiteren Sinne «в широком смысле».
+    async function weitereCard(word, context, result) {
+      // (capitalized only at the start of its part — Weitere Informationen finden Sie …; des Weiteren, im Weiteren stay the window)
+      if (!/^[wW]eiter(?:e|en|er|es|em)$/u.test(String(word || "")) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const isAdj = c => c.source === "main" && /Adjektiv/u.test(canonicalPos(c.item?.type || c.pos));
+      const weitere = candidates.find(c => isAdj(c) && norm(c.lemma) === "weitere"), weit = candidates.find(c => isAdj(c) && norm(c.lemma) === "weit");
+      if (!weitere || !weit || result.selected && result.selected !== weitere && result.selected !== weit) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'weitereCard');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 0) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      if (/^W/u.test(word) && at > 0 && !/[.!?:;»«„“"–—]\s*$/u.test(gap(at))) return result;
+      let hi = at;
+      while (hi + 1 < tokens.length && !/[,;:.!?»«„“"–—()]/u.test(gap(hi + 1))) hi++;
+      // (a comparison: als within two words after the form and then a pronoun / determiner / sonst / je — einen weiteren Weg als ihr;
+      // not als «в качестве» — ein weiteres Haus als Unterkunft, weitere zwei Jahre als Wirtschaftsredakteur)
+      const compares = [at + 1, at + 2].some(k => k <= hi && norm(tokens[k]?.[0] || "") === "als" &&
+        /^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|den|dem|ein|eine|einen|sonst|je|erwartet|gedacht|vorher|früher|bisher)$/u.test(norm(tokens[k+1]?.[0] || "")));
+      const sense = norm(word) === "weiteren" && at > 0 && norm(tokens[at-1][0]) === "im" && /^Sinne?$/u.test(tokens[at+1]?.[0] || "");
+      const chosen = compares || sense ? weit : weitere;
+      return keepDecision(result,{...result,candidates:[chosen,...candidates.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'weitere-card'},
+        {outcome:'selected',rule:'weitere-card',reason:compares ? 'comparison' : sense ? 'im-weiteren-sinne' : 'inflected-weiter'});
     }
     // #65 (advisor 15.11): Wart (old / colloquial imperative of warten) with «,» / «!» right after it or mal after it, and no ihr before it —
     // «warten · Verb · Imperativ» (Wart, ich komme!; »Wart!«; Wart mal). Not ihr wart (Ihr wart müde), not Wart ihr …? (the verb sein).
