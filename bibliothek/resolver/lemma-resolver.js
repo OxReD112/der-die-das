@@ -2648,6 +2648,13 @@
             }
           }
         }
+        // (advisor 15.11, (5) sich far, (в): the export often lists one person of a syncretic form only — umblickte as «ich», verdrückten as
+        // «wir»; the same spelling is the other person by German morphology: Präteritum / Konjunktiv ich = er/sie/es, every wir = sie. The
+        // reflexive analysis then finds the subject (wie er sich umblickte, die Dursleys verdrückten sich) as for an own verb)
+        for (const row of result.filter(r => r.candidate === candidate && r.kind === 'finite')) {
+          const twin = row.person === 'wir' ? 'sie' : row.person === 'ich' && row.tense !== 'Präsens' ? 'er/sie/es' : null;
+          if (twin && !result.some(r => r.candidate === candidate && r.kind === 'finite' && r.person === twin && r.tense === row.tense)) result.push({...row,person:twin});
+        }
         if (key === base) {
           result.push({...common,kind:'infinitive',tense:'Infinitiv',detached:false});
           if (REGULAR_INFINITIVE_SHAPE.test(base)) for (const person of ['wir','sie']) result.push({...common,kind:'finite',person,tense:'Präsens',detached:false});
@@ -3127,7 +3134,7 @@
     // auxiliary, modal, future werden, zu-infinitive host), tense and linked
     // components. Returns null when the chain is not established.
     async function verbChainFor(facts,subjectFacts,clause,{previous,inherited,helpers},v,a,componentIndices) {
-      const {tokens,words,analyses}=facts,{subjects}=subjectFacts;
+      const {tokens,words,analyses,clauses}=facts,{subjects}=subjectFacts;
       let controller=v,control=a,subjectClause=inherited&&!subjects(clause,a.person).length?inherited:clause,tense=a.tense,zuIndex=null;
       if(a.kind==='participle') {
         const auxList=auxiliariesOf(a.entry);
@@ -3140,6 +3147,17 @@
           controller=top[0].index;control=top[0].analysis;componentIndices.push(v+1,controller);
           tense=control.base==='werden'?(control.tense==='Konjunktiv II'?'Konjunktiv II':'Futur II'):control.tense;
           return {controller,control,subjectClause,tense,zuIndex,nonLexical:[v+1]};
+        }
+        // (advisor 15.11, (5) sich far, (а): a participle in a part after und / oder without a finite verb of its own shares the auxiliary
+        // of the part before, which has its own participle — hat … Bäume ausgerissen und sich gewehrt: sich is gewehrt's, the subject
+        // and the auxiliary are those of the part before)
+        if(!h.length&&previous&&clause.relation==='coordinate'&&['und','oder'].includes(words[clause.start])&&
+          !Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(i=>i!==v&&analyses[i].some(r=>r.kind==='finite'))&&
+          Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k).some(i=>/^\p{Ll}/u.test(tokens[i][0])&&analyses[i].some(r=>r.kind==='participle'))) {
+          const shared=[];for(let i=previous.start;i<=previous.end;i++)for(const r of analyses[i])
+            if(r.kind==='finite'&&PERFECT_AUXILIARIES.includes(r.base)&&(!auxList.length||auxList.includes(r.base))&&subjects(previous,r.person).length===1)shared.push({index:i,analysis:r});
+          const one=shared.filter((x,i,all)=>all.findIndex(y=>y.index===x.index&&y.analysis.base===x.analysis.base&&y.analysis.person===x.analysis.person)===i);
+          if(one.length===1){h.push(one[0]);subjectClause=previous;}
         }
         if(h.length!==1)return null;controller=h[0].index;control=h[0].analysis;
         // L13: hätte / wäre + participle keeps Konjunktiv II (hätte mich geirrt).
@@ -3169,6 +3187,16 @@
           const h=modal[0]||future[0]||replacement[0];controller=h.index;control=h.analysis;componentIndices.push(controller);tense=replacement.length?(control.tense==='Präteritum'?'Plusquamperfekt':'Perfekt'):future.length?control.tense==='Konjunktiv II'?'Konjunktiv II':control.tense==='Konjunktiv I'?'Futur I (Konjunktiv I)':'Futur I':control.tense;
         } else if(marker) {
           let host=helpers.filter(h=>!componentIndices.includes(h.index)),multiHost=false;
+          // (advisor 15.11, (5) sich far, (а): a zu-infinitive after und / oder whose part before is a zu-infinitive too shares its host —
+          // anfing zu gehen und sich hin und her zu bewegen: the host and subject of anfing)
+          const coordinatedZu=previous&&clause.relation==='coordinate'&&['und','oder'].includes(words[clause.start])&&
+            Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k).some(i=>words[i]==='zu'&&analyses[i+1]?.some(r=>r.kind==='infinitive')||zuForms.has(words[i]));
+          if(!host.length&&coordinatedZu){
+            const back=clauses.indexOf(previous);let hc=previous;
+            for(let k=back;k>=0;k--){const c=clauses[k];const fin=[];for(let i=c.start;i<=c.end;i++)for(const row of analyses[i])if(row.kind==='finite')fin.push({index:i,analysis:row});
+              if(fin.length){hc=c;host=fin;break;}}
+            subjectClause=hc;
+          }
           if(!host.length&&previous&&clause.relation==='comma') {
             subjectClause=previous;
             host=[];for(let i=previous.start;i<=previous.end;i++)for(const row of analyses[i])if(row.kind==='finite')host.push({index:i,analysis:row});
@@ -3185,10 +3213,15 @@
           // to the zu-infinitive without a controller: um sich zu erholen, mussten lernen, sich … zu gewöhnen, verbieten ihren
           // Mitarbeitern, sich … zu organisieren. Only sich: mich / dich / uns / euch still need the controller's person. A sich of the
           // host before the group — Er weigerte sich, das zu tun — stands in the host's part, not in this one.)
-          if(host.length!==1){
+          {
             let s=-1;for(let i=clause.start;i<v;i++)if(words[i]==='sich'){s=i;break;}
             const opens=s>=0&&(s===clause.start&&clause.relation==='comma'||s>0&&ZU_INFINITIVE_OPENERS.includes(words[s-1])&&(s-1===clause.start||clause.relation!=='comma'));
-            if(!opens)return null;
+            // (advisor 15.11, (5) sich far, (б): sich opening the zu-group is the infinitive's whatever the host — möchte ich nahelegen,
+            // sich daran zu erinnern: not ich's; the host's subject or object is the doer, sich agrees with the infinitive)
+            // (and a sich before the zu-infinitive whose host is not found — two names before und: Harry starrte Hagrid … an und versuchte
+            // sich vorzustellen — is the infinitive's as well; mich / dich / uns / euch still need the host's person)
+            if(host.length!==1&&!opens&&s<0)return null;
+            if(host.length!==1||opens&&!THIRD_PERSONS.includes(host[0].analysis.person))
             return {controller:v,control:{...a,person:'er/sie/es'},subjectClause:clause,tense:'zu-Infinitiv',zuIndex:words[v-1]==='zu'?v-1:null,uncontrolled:true};
           }
           controller=host[0].index;control=host[0].analysis;tense='zu-Infinitiv';
@@ -3401,6 +3434,11 @@
             // the one right before the group the infinitive's.
             if(zuPair&&pronouns.length===2&&pronouns[0]<pronouns[1]&&pronouns[1]<zuPair.zu)pronouns.splice(zuPair.zu===v?0:1,1);
             if(pronouns.length!==1)continue;
+            // (advisor 15.11, (5) sich far: sich before «verb-like word + und / oder» belongs to that first verb, not to a verb after und —
+            // kreiste, sich immer tiefer herabsenkte und endlich … niederstieß: sich is herabsenkte's even when no card knows it)
+            if(pronouns[0]<v&&words.slice(pronouns[0]+1,v).some((w,k)=>['und','oder'].includes(w)&&(()=>{const j=pronouns[0]+k;
+              return j>pronouns[0]&&/^\p{Ll}/u.test(tokens[j][0])&&(analyses[j].some(r=>r.kind==='finite'||r.kind==='participle'||r.kind==='infinitive')||
+                (forms.get(words[j])||[]).some(e=>e.type==='Verb')||!(forms.get(words[j])||[]).length&&/(?:te|ten|tet|t|en)$/u.test(words[j]));})()))continue;
             if(attempt)attempt.stage='competing-predicate';
             const pronoun=pronouns[0];
             // G15d: sich directly before a present participle with an ending and
