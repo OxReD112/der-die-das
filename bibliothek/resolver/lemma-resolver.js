@@ -461,7 +461,13 @@
     // so sei es are not this case)
     let c = a; for (let k = a; k < i; k++) if (/^(?:und|oder|aber|sondern|denn|doch)$/u.test(low(k))) c = k + 1;
     const wordBefore = tokens.slice(c, i).some((_,n) => !IMPERATIVE_OPENER_WORDS.test(low(c + n)));
+    // (links chat, advisor 14.11: a demonstrative used as a pronoun is a subject too — Diese seien gestern gelandet, Jene sei schon
+    // gegangen, Gestern seien diese gelandet: dieser / diese / dieses / jener / jene / jenes not after a preposition and not before its
+    // noun — Diese Flugzeuge seien … is the noun's case above; diesen / diesem / jenen / jenem are objects)
+    const demonstrativeSubject = k => /^(?:dieser|diese|dieses|jener|jene|jenes)$/u.test(low(k)) && !(k - 1 >= a && PREP.test(low(k-1))) &&
+      (k + 1 === i || k + 1 <= b && /^\p{Ll}/u.test(tokens[k+1][0]) && !(/(?:e|en|em|er|es)$/u.test(low(k+1)) && /^\p{Lu}/u.test(tokens[k+2]?.[0] ?? "")) || k === b);
     return part.some(k => /^(?:er|sie|es|man|jemand|niemand|einer|keiner|jeder|wer)$/u.test(low(k)) ||
+      (k < i || wordBefore) && demonstrativeSubject(k) ||
       k < i && /^\p{Lu}/u.test(tokens[k][0]) && !startsSentence(k) && subjectNoun(k) ||
       // (п. 91 (А), advisor 12.11, claude/KONJ1_AUX_COUNT_2026-11-12_RU.md: the noun subject after the verb when a word stands before it in
       // its part — Wahrscheinlich sei der Mann gestorben, Insgesamt sei die Zahl … gestiegen; not the verb first — Sei die Erste!)
@@ -19323,10 +19329,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // ß marks a long vowel in both spellings — Buße, Große, Straße; and the card found must be the one the sentence reads — Schoß
     // «колени» is not schoss «стрелял», review 29.10)
     const OLD_SS = /(?<!ei|ai|au|äu|eu|ie|Ei|Ai|Au|Äu|Eu|Ie)ß(?![aeiouäöüy])/gu;
-    // the colloquial short particles of a joined word and their full ones: COLLOQUIAL_PARTICLES (her- before hin-). Not drin- / drauf- /
-    // drüber- / drunter- / dran- = da(r)- (advisor 14.11, count r154): 1 better in RU, 1 worse in EN — drübergelegt → darüberlegen,
-    // whose English text is the wrong split «dar- · überlegen — to think» (main shows it on darübergelegt too)
-    const COLLOQUIAL_JOINED = COLLOQUIAL_PARTICLES;
+    // the colloquial short particles of a joined word and their full ones: COLLOQUIAL_PARTICLES (her- before hin-), and drin- / drauf- /
+    // drüber- / drunter- / dran- = darin- / darauf- / darüber- / darunter- / daran- (TODO п. 97, advisor 14.11: on main the English
+    // text of darübergelegt is now the longest particle «darüber- · legen», no longer «dar- · überlegen»)
+    const COLLOQUIAL_JOINED = Object.freeze({...COLLOQUIAL_PARTICLES, drin:["darin"], drauf:["darauf"], drüber:["darüber"],
+      drunter:["darunter"], dran:["daran"]});
     const COLLOQUIAL_PARTICLE = new RegExp(`^(${Object.keys(COLLOQUIAL_JOINED).sort((x,y) => y.length - x.length).join("|")})(\\p{Ll}{3,})$`,"iu");
     async function resolveFollowingReference(word, context) {
       const result = await nameGenitive(word, context, await resolveFollowingReferenceOnce(word, context));
