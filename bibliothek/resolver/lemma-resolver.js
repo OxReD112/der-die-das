@@ -15961,9 +15961,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // (advisor 09.11: pairOnly — only the wenn / falls / sofern pair of #22 (в) answer 2: "konj" or false; for a modal or lassen of a
     // chain whose form is Präteritum and Konjunktiv II at once — Wenn er … reparieren lassen wollte, würde …; Wenn sie das Haus bauen
     // ließen, wären sie froh; the question sign is not taken there — Sollte er es gewusst haben? keeps the double label)
-    function weakPastIndicative(base, start, context, pairOnly = false) {
+    // (п. 2, advisor 15.11: anyBase — a modal of a chain asks the full check too; NO_WEAK_PAST_LABEL keeps only the plain tap bare)
+    function weakPastIndicative(base, start, context, pairOnly = false, anyBase = false) {
       const sentence = String(context?.sentence || "");
-      if (!sentence || !Number.isInteger(start) || !pairOnly && NO_WEAK_PAST_LABEL.has(base)) return false;
+      if (!sentence || !Number.isInteger(start) || !pairOnly && !anyBase && NO_WEAK_PAST_LABEL.has(base)) return false;
       // Verb-first: a conditional (Fragte man ihn, …) or a question — not claimed. A lowercase form right
       // after direct speech (»…?« fragte der Vater; a reader sentence starting «fragte der Vater») is the
       // speech tag, an indicative (to-do 19.10, 2.1, R-kafka-13).
@@ -15971,7 +15972,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (#22 (в), advisor 08.11, answer 3: a question with the weak -te form first — Wohnten Sie dort? — is Präteritum; the other
       // signs of its part still count)
       const question = /^\p{L}*te(?:st|n|t)?(?![\p{L}])/u.test(sentence.slice(start)) && (/[.!?]/u.exec(sentence.slice(start)) || [""])[0] === "?";
-      if (!pairOnly && clauseInitial(sentence, start) && !speechTag && !question) return "doubt";
+      // (п. 2 (а), advisor 15.11: the author's words around direct speech are narrative — a verb opening its part right after the closing
+      // quote (»Ich fische.« Fragte der Laufer) or before a colon and the quote (Sagte der Bauer: »…«) is Präteritum; the Konjunktiv II
+      // of the quote is not carried over — decision 04.11)
+      const tagFirst = /[«»“”"]\s*$/u.test(sentence.slice(0, start)) || /^[\p{L}\p{M}]+(?:\s+[\p{L}\p{M}]+){1,4}\s*:\s*[»«„“"]/u.test(sentence.slice(start));
+      if (!pairOnly && clauseInitial(sentence, start) && !speechTag && !question && !tagFirst) return "doubt";
       // als + verb: als wohnte er hier.
       if (!pairOnly && /(?:^|[^\p{L}])als[^\p{L}]*$/iu.test(sentence.slice(0, start))) return false;
       // Before a noun after a determiner, a number, a verb or a determiner + adverb the
@@ -16039,10 +16044,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const afterComma = lo > 0 && /^\s*,\s*$/u.test(sentence.slice(words[lo - 1].index + words[lo - 1][0].length, words[lo].index));
       if (afterComma && at > lo && subjectFirst && (() => { const p0 = partAt(lo - 1, -1); for (let j = lo - 1; j >= p0; j--) if (REPORTING.test(norm(words[j][0])) && !(/^\p{Lu}/u.test(words[j][0]) && !clauseInitial(sentence, words[j].index))) return true; return false; })()) return "doubt";
       const loOwn = lo, hiOwn = hi;
-      if (reported) { lo = 0; hi = words.length - 1; }
+      // (п. 2 (а): the whole sentence, but not direct speech in quotes — bevor Harry antworten konnte, sagte Madam Malkin: »… wär’s«)
+      if (reported) {
+        lo = 0; hi = words.length - 1;
+        for (let k = at; k > 0; k--) if (/[»«„“”"]/u.test(sentence.slice(words[k - 1].index + words[k - 1][0].length, words[k].index))) { lo = k; break; }
+        for (let k = at; k + 1 < words.length; k++) if (/[»«„“”"]/u.test(sentence.slice(words[k].index + words[k][0].length, words[k + 1].index))) { hi = k; break; }
+      }
       let lo2 = lo, hi2 = hi;
-      if (lo > 0) { const s0 = partAt(lo - 1, -1); if (COND.test(norm(words[s0][0]))) lo2 = s0; }
-      if (hi + 1 < words.length && COND.test(norm(words[hi + 1][0]))) hi2 = partAt(hi + 1, 1);
+      // (п. 2 (а): not across a quote mark — »…, wenn Sie … gesessen hätten«, sagte Professor McGonagall; sagte er, »wenn du … müßtest …«)
+      const quoteGap = (a, b) => /[»«„“”"]/u.test(sentence.slice(words[a].index + words[a][0].length, words[b].index));
+      if (lo > 0) { const s0 = partAt(lo - 1, -1); if (COND.test(norm(words[s0][0])) && !quoteGap(lo - 1, lo)) lo2 = s0; }
+      if (hi + 1 < words.length && COND.test(norm(words[hi + 1][0])) && !quoteGap(hi, hi + 1)) hi2 = partAt(hi + 1, 1);
       // (second review 04.11: a dass part depends on the part before it — Es wäre besser, daß du … teiltest; a part after a colon
       // continues the one before it — Der König hätte …: in dem Schlosse steckten …)
       if (!reported && lo > 0) {
@@ -16635,6 +16647,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (/(?:est|et)$/u.test(norm(word))) return false;
       return ![tokens[at-1], tokens[at+1]].some(t => t && ["ich","du","ihr"].includes(norm(t[0])));
     }
+    // (п. 2 (в), advisor 15.11, full check of the books / Leipzig / train: wollte stays Präteritum / Konjunktiv II in reported speech and
+    // in a condition — sprach, er wollte …; versprochen, sie wollten …; kam ihm in den Sinn, er wollte …; erzählte ihr, er wäre …, und
+    // morgen wollten sie …; wenn es ihr das Kind lassen wollte; ob sie … wollten; so wollte ich hier gerne übernachten; …, behauptete K.)
+    // Direct speech in quotes does not count.
+    function wollteReported(sentence, at) {
+      if (!Number.isInteger(at)) return false;
+      const plain = sentence.replace(/[»„“"][^»«„“”"]*[«“”"]/gu, m => " ".repeat(m.length));
+      const before = plain.slice(0, at), after = plain.slice(at);
+      const SAY = /(?:^|[^\p{L}])(?:sprach|sprachen|sprechen|bat|baten|versprach\p{L}*|versprochen|erzählt\p{L}*|sag\p{L}*|meinst|meint\p{L}*|dacht\p{L}*|schwur|schwor|behauptet\p{L}*|antwortet\p{L}*|Sinn)(?![\p{L}])/u;
+      const PART = /[,;:–—(]/u;
+      const partStart = Math.max(...[",",";",":","–","—","("].map(m => before.lastIndexOf(m))) + 1;
+      const own = before.slice(partStart), ownEnd = (PART.exec(after) || {index: after.length}).index, ownPart = own + after.slice(0, ownEnd);
+      const said = SAY.test(before.slice(0, partStart));
+      // the part opens with its subject after a comma: er / sie / ich … wollte
+      if (said && partStart > 0 && /^\s*(?:\p{Ll}+\s+)?(?:ich|du|er|sie|es|wir|ihr|man)\s+$/u.test(own)) return true;
+      if (said && /(?:^|[^\p{L}])(?:wäre\p{L}*|hätte\p{L}*|würde\p{L}*|möchte\p{L}*|könnte\p{L}*|müßte\p{L}*|müsste\p{L}*)(?![\p{L}])/u.test(before)) return true;
+      if (/^\s*(?:\p{L}+\s+)?(?:wenn|falls|sofern|ob|so)\s/iu.test(own) && !/^\s*so\s+(?:wollte|wollten)/u.test(own + after)) return true;
+      if (/(?:^|[^\p{L}])(?:gern|gerne|demzufolge|zufolge)(?![\p{L}])/u.test(ownPart)) return true;
+      if (/^[^,;:]*,\s*(?:behauptet\p{L}*|sagt\p{L}*|hieß|erklärt\p{L}*|teilte)(?![\p{L}])/u.test(after)) return true;
+      return false;
+    }
     function modalMood(word, c, context) {
       // (advisor 08.11: the modal of a passive chain names its mood / tense the same way — müsse gelesen werden: Konjunktiv I)
       // (TODO 64, advisor 08.11 #22 (а): the same for the modal of a perfect infinitive — musste … gewesen sein — and of a lassen chain —
@@ -16645,7 +16678,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const tenses = new Set((verbAnalyses.get(norm(word)) || []).filter(r => r.kind === "finite" && norm(r.base) === base).map(r => r.tense));
       if (tenses.size === 1 && tenses.has("Konjunktiv II")) return "Konjunktiv II";
       if (tenses.size === 2 && tenses.has("Konjunktiv II") && tenses.has("Präteritum"))
-        return weakPastIndicative(base, context?.tokenOffset, context, true) === "konj" ? "Konjunktiv II" : "Präteritum / Konjunktiv II";
+      {
+        // (п. 2 (в), advisor 15.11: wollte reads the same three answers as a weak verb — narrative past «Präteritum», a sign of
+        // Konjunktiv II «Konjunktiv II», the rest the double label)
+        if (weakPastIndicative(base, context?.tokenOffset, context, true) === "konj") return "Konjunktiv II";
+        // (the modal opening its part — Sollte er es gewusst haben?, Wollte er nur … — keeps the double label)
+        // (advisor 15.11 (в): only wollen — sollte is «should» in about 4 places of 10 and keeps the double label)
+        if (base !== "wollen" || clauseInitial(String(context?.sentence || ""), context?.tokenOffset) || wollteReported(String(context?.sentence || ""), context?.tokenOffset)) return "Präteritum / Konjunktiv II";
+        return weakPastIndicative(base, context?.tokenOffset, context, false, true) === true ? "Präteritum" : "Präteritum / Konjunktiv II";
+      }
       if (tenses.size === 1 && tenses.has("Präteritum")) return "Präteritum";
       // L23 (reference A3, F12-A3c): a Konjunktiv I form (könne, solle) is never another tense of the modal.
       if (tenses.size === 1 && tenses.has("Konjunktiv I")) return "Konjunktiv I";
