@@ -883,7 +883,9 @@
       const evCandidate = ev.candidate.construction?.coordinatedLemma ? {...ev.candidate, construction:{...ev.candidate.construction, coordinatedLemma:null}} : ev.candidate;
       // (links chat 07.11, sein-state draft: the state group of a haben-only verb gives an expression no line — no tense inside an
       // expression, decision 05.11: Als das Urteil gesprochen war → «Feste Wendung»)
-      const line = ev.candidate.construction?.stateOnly ? [] : cardBase(ev.resolution, evCandidate, {...options}).grammar.split(' · ').slice(1);
+      // (second resolver chat 15.11, Grimm rest (6): the «Partizip II» of a lone participle form is the verb's own line, not the expression's)
+      const line = ev.candidate.construction?.stateOnly ? [] : cardBase(ev.resolution, evCandidate, {...options}).grammar.split(' · ').slice(1)
+        .filter(m => !(m === 'Partizip II' && ev.candidate.formFeatures?.participleOnly));
       // (a reflexive pronoun of the heading: sich, uns in wir sehen uns — «Reflexiv» is the expression itself)
       // (05.11: also a reflexive pronoun among the expression's own parts — a variant: sich … aufgehoben fühlen)
       const sich = /(?:^|\s)(?:sich|mich|dich|uns|euch|mir|dir)(?:['’]s)?(?=\s|$)/u.test(norm(candidate.lemma || '')) ||
@@ -931,9 +933,12 @@
     }
     const gerund = pos(candidate) === 'Nomen' && /^gerund of\s+([\p{L}\p{M}]+)/iu.exec(candidate.translation?.en || '');
     if (usage?.role === 'nominalized' || gerund) {
-      const fromVerb = gerund || usage.kind === 'infinitive';
+      // (#64, advisor 15.11: a nominalized participle — die Bedienten, die Reisenden — is «aus Verb bedienen» too)
+      const fromVerb = gerund || usage.kind === 'infinitive' || usage.kind === 'participle';
+      // (a person noun of a verb base — der Reisende: «aus Verb reisen», its own meaning «путешественник» stays)
+      const labelVerb = fromVerb || usage.kind === 'person' && usage.verb === true;
       const base = gerund ? gerund[1].trim() : usage.base;
-      type = 'Nomen'; marks = [`aus ${fromVerb ? 'Verb' : 'Adjektiv'} ${base}`];
+      type = 'Nomen'; marks = [`aus ${labelVerb ? 'Verb' : 'Adjektiv'} ${base}`];
       if (usage?.kind === 'infinitive' || gerund) headingText = `das ${base.charAt(0).toUpperCase()}${base.slice(1)}`;
       // #20 (reference NOM-02g): etwas Neues / nichts Besonderes — the -e form as the heading, without an article (Neue).
       else if (usage?.kind === 'adjective' && usage.marker) headingText = String(candidate.lemma || '').replace(/s$/u, '');
@@ -942,7 +947,7 @@
       const synthetic = value => String(value || '').split(/:\s*/u).slice(1).join(': ').trim();
       // #20 (advisor 05.11): an outside noun of this very nominalization with a meaning in this language (der Fremde
       // «незнакомец», die Alte «старуха», das Gute «добро») is shown as the noun itself, without «aus Adjektiv».
-      const nounMeaning = !fromVerb && compact(usage?.noun?.translation?.[language] || '');
+      const nounMeaning = (!fromVerb || usage?.kind === 'participle') && compact(usage?.noun?.translation?.[language] || '');
       if (nounMeaning) { marks = []; text = {text:nounMeaning, language}; }
       else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {
