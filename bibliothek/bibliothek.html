@@ -17,7 +17,7 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261115-detailclose-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261115-windows-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261109-fonts-1" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
@@ -43,22 +43,6 @@
           <h2 lang="de">Dein Leseraum</h2>
           <p id="empty-library-text">Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
         </div>
-        <!-- 09.11 (Alena): the note behind ⓘ is a window over the library (it used to push the shelf down under the dock);
-             its text follows the language setting (bibliothek.js, libraryTexts) -->
-        <dialog class="paste-dialog storage-dialog" id="storage-notice" aria-labelledby="storage-notice-title">
-          <div class="paste-dialog-heading"><h2 id="storage-notice-title" tabindex="-1" autofocus>Bücher hinzufügen</h2><button class="ui-close" id="storage-notice-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
-          <div class="storage-note" id="storage-note"></div>
-        </dialog>
-        <dialog class="paste-dialog" id="paste-dialog" aria-labelledby="paste-dialog-title">
-          <div class="paste-dialog-heading"><h2 id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
-        <form class="paste-form" id="paste-form">
-          <label for="paste-title">Titel</label>
-          <input id="paste-title" maxlength="120" placeholder="Mein Text" required />
-          <label for="paste-content">Deutscher Text</label>
-          <textarea id="paste-content" rows="8" required placeholder="Deutschen Text hier einfügen …"></textarea>
-          <button class="primary-action" type="submit">Speichern</button>
-        </form>
-        </dialog>
         <input id="book-file" type="file" accept=".txt,.epub,text/plain,application/epub+zip" hidden />
       </section>
 
@@ -174,19 +158,34 @@
         </div>
       </section>
 
-      <div
-        class="book-confirm"
-        id="delete-confirm"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="delete-confirm-title"
-        aria-describedby="delete-confirm-text"
-        hidden
-      >
-        <div class="book-confirm-card">
-          <h2 id="delete-confirm-title">Text löschen?</h2>
-          <p id="delete-confirm-text">Der Text und dein Lesefortschritt werden von diesem Gerät entfernt.</p>
-          <div class="book-confirm-actions">
+      <!-- 09.11 (Alena): the note behind ⓘ is a window over the library; its text follows the language setting
+           (bibliothek.js, libraryTexts). 15.11 (Alena): the four windows of Bibliothek on the shared window (components/deutsch-window-v1.js):
+           ×, a tap beside the card and Esc close them; Tab stays inside; Home hides while one is open -->
+      <div class="ui-window storage-window" id="storage-notice" aria-hidden="true">
+        <div class="ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="storage-notice-title">
+          <div class="ui-window-head"><h2 class="ui-window-title" id="storage-notice-title">Bücher hinzufügen</h2><button class="ui-close" id="storage-notice-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="ui-window-body"><div class="storage-note" id="storage-note"></div></div>
+        </div>
+      </div>
+      <div class="ui-window paste-window" id="paste-dialog" aria-hidden="true">
+        <div class="ui-window-card" role="dialog" aria-modal="true" aria-labelledby="paste-dialog-title">
+          <div class="ui-window-head"><h2 class="ui-window-title" id="paste-dialog-title">Text einfügen</h2><button class="ui-close" id="paste-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="ui-window-body">
+              <form class="paste-form" id="paste-form">
+                <label for="paste-title">Titel</label>
+                <input id="paste-title" maxlength="120" placeholder="Mein Text" required />
+                <label for="paste-content">Deutscher Text</label>
+                <textarea id="paste-content" rows="8" required placeholder="Deutschen Text hier einfügen …"></textarea>
+                <button class="primary-action" type="submit">Speichern</button>
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="ui-window delete-window" id="delete-confirm" aria-hidden="true">
+        <div class="ui-window-card ui-window-small ui-window-ask" role="alertdialog" aria-modal="true" aria-labelledby="delete-confirm-title" aria-describedby="delete-confirm-text">
+          <h2 class="ui-window-title" id="delete-confirm-title">Text löschen?</h2>
+          <p class="ui-window-ask-text" id="delete-confirm-text">Der Text und dein Lesefortschritt werden von diesem Gerät entfernt.</p>
+          <div class="ui-window-ask-actions book-confirm-actions">
             <button class="book-cancel" id="cancel-delete" type="button">Abbrechen</button>
             <button class="book-delete-confirm" id="confirm-delete" type="button">Löschen</button>
           </div>
@@ -391,59 +390,54 @@
         </div>
       </section>
     </dialog>
-    <dialog class="data-sources" id="data-sources" aria-labelledby="data-sources-title">
-      <button
-        class="sources-close ui-close"
-        id="sources-close"
-        type="button"
-        aria-label="Schließen"
-        autofocus
-      >
-        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
-      </button>
-      <h2 id="data-sources-title">Quellen und Lizenzen</h2>
-      <h3>German–English Dictionary</h3>
-      <p>
-        Dictionary data is derived from Wiktionary contributors, extracted via Kaikki.org, and distributed in this
-        application using the German–English SQLite dataset provided by Lector.
-      </p>
-      <p>
-        The dictionary data is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA
-        4.0) License.
-      </p>
-      <p>
-        The source dataset was extracted from Wiktionary via Kaikki.org and packaged as a lookup database by Lector. The
-        original SQLite dataset was converted into partitioned JSON files for application lookup. Dictionary content was
-        preserved.
-      </p>
-      <h3>Quellen</h3>
-      <ul>
-        <li><a href="https://en.wiktionary.org/" target="_blank" rel="noopener">Wiktionary ↗</a></li>
-        <li><a href="https://kaikki.org/dictionary/German/" target="_blank" rel="noopener">Kaikki.org ↗</a></li>
-        <li>
-          <a href="https://lector.dev/free/german-dictionary/" target="_blank" rel="noopener"
-            >Lector German–English Dictionary ↗</a
-          >
-        </li>
-      </ul>
-      <h3>Russische Bedeutungen</h3>
-      <p>
-        Russian Wiktionary contributors; extracted and postprocessed via Wiktextract / Kaikki.org. Selected definition
-        fields were converted into partitioned JSON with display annotations; source texts were preserved.
-      </p>
-      <p>
-        <a href="https://kaikki.org/ruwiktionary/Немецкий/index.html" target="_blank" rel="noopener"
-          >Kaikki.org · Russian Wiktionary ↗</a
-        >
-      </p>
-      <div id="russian-source-articles"></div>
-      <h3>Lizenz</h3>
-      <p>
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"
-          >Creative Commons Attribution-ShareAlike 4.0 International ↗</a
-        >
-      </p>
-    </dialog>
+    <div class="ui-window data-sources" id="data-sources" aria-hidden="true">
+      <div class="ui-window-card" role="dialog" aria-modal="true" aria-labelledby="data-sources-title">
+        <div class="ui-window-head"><h2 class="ui-window-title" id="data-sources-title">Quellen und Lizenzen</h2><button class="ui-close sources-close" id="sources-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+        <div class="ui-window-body">
+          <h3>German–English Dictionary</h3>
+          <p>
+            Dictionary data is derived from Wiktionary contributors, extracted via Kaikki.org, and distributed in this
+            application using the German–English SQLite dataset provided by Lector.
+          </p>
+          <p>
+            The dictionary data is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA
+            4.0) License.
+          </p>
+          <p>
+            The source dataset was extracted from Wiktionary via Kaikki.org and packaged as a lookup database by Lector. The
+            original SQLite dataset was converted into partitioned JSON files for application lookup. Dictionary content was
+            preserved.
+          </p>
+          <h3>Quellen</h3>
+          <ul>
+            <li><a href="https://en.wiktionary.org/" target="_blank" rel="noopener">Wiktionary ↗</a></li>
+            <li><a href="https://kaikki.org/dictionary/German/" target="_blank" rel="noopener">Kaikki.org ↗</a></li>
+            <li>
+              <a href="https://lector.dev/free/german-dictionary/" target="_blank" rel="noopener"
+                >Lector German–English Dictionary ↗</a
+              >
+            </li>
+          </ul>
+          <h3>Russische Bedeutungen</h3>
+          <p>
+            Russian Wiktionary contributors; extracted and postprocessed via Wiktextract / Kaikki.org. Selected definition
+            fields were converted into partitioned JSON with display annotations; source texts were preserved.
+          </p>
+          <p>
+            <a href="https://kaikki.org/ruwiktionary/Немецкий/index.html" target="_blank" rel="noopener"
+              >Kaikki.org · Russian Wiktionary ↗</a
+            >
+          </p>
+          <div id="russian-source-articles"></div>
+          <h3>Lizenz</h3>
+          <p>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"
+              >Creative Commons Attribution-ShareAlike 4.0 International ↗</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="coll-modal ui-window" id="collModal" data-host="reader" aria-hidden="true">
       <div class="coll-card ui-window-card" id="collCard" role="dialog" aria-modal="true" aria-labelledby="collTitle"></div>
     </div>
@@ -474,7 +468,7 @@
     <script src="reader/pronoun-reference.js?v=20261110-pron-1"></script>
     <script src="reader/bookshelf.js?v=20261114-newbook-1"></script>
     <script src="../components/deutsch-voice-v1.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261115-window-chain-1"></script>
-    <div class="version-mark" aria-hidden="true">v64</div>
+    <script src="reader/bibliothek.js?v=20261115-windows-2"></script>
+    <div class="version-mark" aria-hidden="true">v65</div>
   </body>
 </html>

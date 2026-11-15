@@ -79,7 +79,7 @@
   let restoreLastPage = false;
   const pagination = window.BibliothekPagination.create({
     closePopups,
-    isBlocked:() => switchingChapter || !$sheet.hidden || !!document.querySelector('dialog[open]') || !$("delete-confirm").hidden,
+    isBlocked:() => switchingChapter || !$sheet.hidden || !!document.querySelector('dialog[open]') || !!window.DeutschWindow.anyOpen(),
     onBoundary:(direction, checkOnly) => {
       if (!hasChapters(currentBook)) return false;
       const entries = readingEntries(currentBook), index = entries.indexOf(activeEntry(currentBook));
@@ -213,15 +213,11 @@
 
   // 09.11 (Alena): the note behind ⓘ is a window over the library (variant Б) — it used to open inside the library and
   // push the shelf down under the dock. Closed by ×, a tap beside it or Esc. Never opens by itself (08.11).
+  // 15.11 (Alena): ⓘ, «Text einfügen», «… löschen?» and «Quellen und Lizenzen» are the app's shared window
+  // (components/deutsch-window-v1.js): ×, a tap beside the card and Esc close them, Tab stays inside, the focus goes back.
+  const windowOpen = win => window.DeutschWindow.isOpen(win);
   const storageInfo = $("storage-info"), storageNotice = $("storage-notice");
-  storageInfo.addEventListener("click", () => storageNotice.showModal());
-  $("storage-notice-close").addEventListener("click", () => storageNotice.close());
-  storageNotice.addEventListener("click", event => {
-    const bounds = storageNotice.getBoundingClientRect();
-    if (event.target === storageNotice && (event.clientX < bounds.left || event.clientX > bounds.right ||
-        event.clientY < bounds.top || event.clientY > bounds.bottom)) storageNotice.close();
-  });
-  storageNotice.addEventListener("close", () => storageInfo.focus({preventScroll:true}));
+  storageInfo.addEventListener("click", () => window.DeutschWindow.open(storageNotice));
   applyLibraryTexts();
   window.addEventListener("storage", event => {
     if (event.key === window.DeutschTranslation?.KEY || event.key === null) updateReaderLanguage();
@@ -298,8 +294,7 @@
   });
   document.addEventListener('click',event=>{if(!addMenu.contains(event.target)&&!addToggle.contains(event.target))closeAddMenu();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!addMenu.hidden){event.preventDefault();closeAddMenu(true);}});
-  $("paste-close").addEventListener('click',()=>pasteDialog.close());
-  pasteDialog.addEventListener('close',()=>addToggle.focus());
+  pasteDialog.addEventListener('windowclose',()=>addToggle.focus({preventScroll:true}));
   let libraryView=window.matchMedia('(max-width:600px)').matches?'list':'shelf';
   try { const saved=localStorage.getItem('deutschLibraryViewV1');if(saved==='list'||saved==='shelf')libraryView=saved; } catch (_) {}
   let lastOpenedBookId=null;
@@ -320,8 +315,7 @@
       ?`Lesefortschritt und markierte Wörter ${one?'dieses Buches':'dieser Bücher'} werden gelöscht. Dein Wortschatz bleibt.`
       :`${one?'Das Buch wird':'Die Bücher werden'} mit Lesefortschritt und markierten Wörtern von diesem Gerät entfernt. Dein Wortschatz bleibt.`;
     $("confirm-delete").textContent=kind==='reset'?'Zurücksetzen':'Löschen';
-    $("delete-confirm").hidden=false;$library.inert=true;$("library-actions").inert=true;$("library-bulk").inert=true;
-    $("reader").querySelector(".reader-header").inert=true;$("cancel-delete").focus({preventScroll:true});
+    window.DeutschWindow.open($("delete-confirm"));$("cancel-delete").focus({preventScroll:true});
   }
   function requestBookDelete(book,trigger) { requestBookAction('delete',[book],trigger); }
   let editing=false, listBooks=[];
@@ -359,7 +353,7 @@
   const chosenBooks=()=>listBooks.filter(book=>selectedIds.has(book.id));
   $("bulk-reset").addEventListener('click',event=>requestBookAction('reset',chosenBooks(),event.currentTarget));
   $("bulk-delete").addEventListener('click',event=>requestBookAction('delete',chosenBooks(),event.currentTarget));
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editing&&$("delete-confirm").hidden){event.preventDefault();setEditing(false);$("library-edit").focus({preventScroll:true});}});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&editing&&!windowOpen($("delete-confirm"))){event.preventDefault();setEditing(false);$("library-edit").focus({preventScroll:true});}});
   function describeLibraryBook(book) {
     if(book.missingContent)return 'Datei neu laden · '+String(book.format||'txt').toUpperCase();
     if(book.completed)return 'Gelesen';
@@ -484,17 +478,19 @@
       $("empty-library").hidden = false;
     }
   }
+  // «Abbrechen», ×-less window: a tap beside it and Esc are «Abbrechen» too (as Home's «Notiz löschen?»)
   function closeDeleteConfirm(restoreFocus = true) {
     if (deleting) return;
-    $("delete-confirm").hidden = true;
-    $library.inert = false;
-    $("library-actions").inert = false;
-    $("library-bulk").inert = false;
-    $("reader").querySelector(".reader-header").inert = false;
+    const trigger = deleteTrigger;
     pendingDelete = null;
-    if (restoreFocus && deleteTrigger?.isConnected) deleteTrigger.focus({ preventScroll:true });
     deleteTrigger = null;
+    window.DeutschWindow.close($("delete-confirm"));
+    if (restoreFocus && trigger?.isConnected) trigger.focus({ preventScroll:true });
   }
+  $("delete-confirm").addEventListener("windowclose", () => {
+    if (deleting) { window.DeutschWindow.open($("delete-confirm")); return; } // never away while deleting
+    pendingDelete = null;
+  });
   $("cancel-delete").addEventListener("click", () => closeDeleteConfirm());
   $("confirm-delete").addEventListener("click", async () => {
     if (!pendingDelete || deleting) return;
@@ -543,13 +539,6 @@
     } finally {
       $("confirm-delete").disabled = false;
       $("cancel-delete").disabled = false;
-    }
-  });
-  $("delete-confirm").addEventListener("keydown", event => {
-    if (event.key === "Escape") { event.preventDefault(); closeDeleteConfirm(); }
-    if (event.key === "Tab") {
-      event.preventDefault();
-      if (!deleting) (document.activeElement === $("cancel-delete") ? $("confirm-delete") : $("cancel-delete")).focus();
     }
   });
   function splitParagraphs(content) { return String(content || "").replace(/\r\n?/g, "\n").split(/\n\s*\n/).map(p => p.trim()).filter(Boolean); }
@@ -1772,7 +1761,7 @@
     } finally { $file.value = ""; reloadBookId=null; }
   });
   $("paste-toggle").addEventListener("click", () => {
-    closeAddMenu();pasteDialog.showModal();$("paste-title").focus();
+    closeAddMenu();window.DeutschWindow.open(pasteDialog);$("paste-title").focus();
   });
   $("paste-form").addEventListener("submit", async event => {
     event.preventDefault();
@@ -1782,7 +1771,7 @@
       reloadBookId=null;
       const book = await window.BibliothekImport.fromText(title, content);
       await importBook(book);
-      $("paste-form").reset();pasteDialog.close(); await showAddedBook(book); showToast("Gespeichert.");
+      $("paste-form").reset();window.DeutschWindow.close(pasteDialog); await showAddedBook(book); showToast("Gespeichert.");
     } catch (error) { showToast("The text could not be saved. Check available browser storage."); }
   });
   $("back-library").addEventListener("click", async () => {
@@ -1799,7 +1788,7 @@
   // Consume outside clicks before word and navigation handlers run. Safari and
   // accessibility clicks do not reliably report pointerType or a click count.
   document.addEventListener("click", event => {
-    if ($popover.hidden || sourcesDialog.open || event.target.closest("#word-popover, #reader-toast")) return;
+    if ($popover.hidden || windowOpen(sourcesDialog) || event.target.closest("#word-popover, #reader-toast, #data-sources")) return;
     closePopups();
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -1868,12 +1857,7 @@
   window.addEventListener("pagehide", flushReadingPosition);
   document.addEventListener("visibilitychange", () => { if (document.hidden) flushReadingPosition(); });
   const sourcesDialog = $("data-sources");
-  $("popover-source").addEventListener("click", () => sourcesDialog.showModal());
-  $("sources-close").addEventListener("click", () => sourcesDialog.close());
-  sourcesDialog.addEventListener("click", event => {
-    const bounds = sourcesDialog.getBoundingClientRect();
-    if (event.target === sourcesDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) sourcesDialog.close();
-  });
+  $("popover-source").addEventListener("click", () => window.DeutschWindow.open(sourcesDialog));
   $("popover-more").addEventListener("click", () => {
     if (!selectedEntry && !partEntries.length) return;
     detailParts = selectedEntry ? [] : partEntries; detailIndex = 0;
@@ -1901,7 +1885,7 @@
   }
   $("sheet-close").addEventListener("click", closePopups);
   $("sheet-scrim").addEventListener("click", closePopups);
-  document.addEventListener("keydown", event => { if (event.key === "Escape" && !sourcesDialog.open) closePopups(); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape" && !windowOpen(sourcesDialog)) closePopups(); });
   loadDictionary().catch(error => console.warn("Bibliothek dictionary unavailable", error));
   refreshBooks();
 })();

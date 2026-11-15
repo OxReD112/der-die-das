@@ -256,38 +256,7 @@ body.library-screen .data-sources button:active:not(:disabled) {
   outline: 2px solid var(--mint);
   outline-offset: 2px;
 }
-.book-confirm {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: var(--confirm-scrim);
-}
-.book-confirm-card {
-  width: min(100%, 360px);
-  border: 1px solid var(--window-line);
-  border-radius: 24px;
-  padding: 28px 24px 22px;
-  background: var(--window-card);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
-  text-align: center;
-}
-.book-confirm-card h2 {
-  margin: 0;
-  color: var(--text);
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 650;
-  overflow-wrap: anywhere;
-}
-.book-confirm-card p {
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
+/* 15.11: «… löschen? / zurücksetzen?» is the shared window (.ui-window-ask, deutsch-ui-v1.css); its two buttons: */
 .book-confirm-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -817,26 +786,8 @@ body.library-screen .data-sources button:active:not(:disabled) {
 .popover-source[hidden] {
   display: none;
 }
-.data-sources {
-  box-sizing: border-box;
-  width: min(560px, calc(100vw - 32px));
-  max-height: calc(100dvh - 48px);
-  overflow-y: auto;
-  padding: 24px;
-  border: 1px solid var(--window-line);
-  border-radius: 24px;
-  background: var(--window-card);
-  color: var(--text);
-  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.22);
-}
-.data-sources::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
-.data-sources h2 {
-  margin: 0 40px 22px 0;
-  font-size: 20px;
-  line-height: 1.25;
-}
+/* 15.11: «Quellen und Lizenzen» is the shared window (.ui-window, deutsch-ui-v1.css); its text: */
+.data-sources .ui-window-body > h3:first-child { margin-top: 8px; }
 .data-sources h3 {
   margin: 22px 0 10px;
   font-size: 16px;
@@ -853,17 +804,6 @@ body.library-screen .data-sources button:active:not(:disabled) {
 }
 .data-sources li {
   margin: 8px 0;
-}
-.sources-close {
-  float: right;
-  width: 36px;
-  height: 36px;
-  margin: -8px -8px 0 0;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 28px;
-  cursor: pointer;
 }
 .popover-close,
 .sheet-close {
@@ -2751,12 +2691,9 @@ body.library-screen .reader .library-add-toggle { display:grid; place-items:cent
 body.library-screen .reader .library-add-menu button { display:block; width:100%; min-height:48px; padding:12px; text-align:left; border:0; background:transparent; color:var(--text); border-radius:10px; font:500 14px/1.35 var(--font); }
 .library-add-menu button:hover { background:var(--bg); }
 .library-add-menu small { display:block; margin-top:3px; color:var(--muted); font-size:12px; }
-.paste-dialog { width:min(480px,calc(100% - 32px)); max-height:calc(100dvh - 40px); overflow:auto; padding:22px; border:1px solid var(--hairline); border-radius:20px; background:var(--bg); color:var(--text); }
-.paste-dialog::backdrop { background:rgba(0,0,0,.55); }
-.paste-dialog-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.paste-dialog-heading h2 { margin:0; font-size:20px; }
-.paste-dialog-heading button { width:44px; height:44px; padding:0; font-size:26px; color:var(--muted); background:transparent; }
-.paste-dialog .paste-form { margin-top:14px; }
+/* 15.11: «Text einfügen» is the shared window; a little narrower than the 560 card, the form under the title */
+.paste-window .ui-window-card { width: min(480px, 100%); }
+.paste-window .paste-form { margin-top: 6px; }
 
 /* Keep the shared drawer glow behind either library view and anchored to its frame. */
 .library-screen .reader::before { z-index:-1; }
@@ -2801,8 +2738,6 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
    arrows are .ui-chev, «+» is a drawn plus in one line. Each × keeps the centre the letter's 38 / 44 px button had. */
 .sheet-close.ui-close { width: 30px; height: 30px; margin-top: -4px; margin-right: -9px; }
 .text-settings-close.ui-close { width: 30px; height: 30px; margin: 7px -5px 7px 0; }
-.sources-close.ui-close { width: 30px; height: 30px; margin: -5px -5px 0 0; }
-.paste-dialog-heading .ui-close { width: 30px; height: 30px; flex: none; margin: 7px 2px 7px 0; background: var(--hairline); }
 .toolbar-arrow.ui-chev { margin-inline: 4px 2px; }
 .popover-more .ui-chev { color: var(--muted); }
 .library-add-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; }
@@ -2812,12 +2747,6 @@ body.library-screen .reader .library-add-menu button { display:block; width:100%
 
 /* 07.11 (design chat): the windows of Bibliothek like the app's windows (components/deutsch-ui-v1.css .ui-window):
    corners 26, sides 18, the round × 11 px from the top and 14 px from the right edge of its card. */
-.paste-dialog { position: relative; padding: 14px 18px 18px; border-radius: 26px; }
-.paste-dialog-heading { padding-right: 28px; min-height: 24px; }
-.paste-dialog-heading .ui-close { position: absolute; top: 11px; right: 14px; margin: 0; }
-.data-sources { padding: 14px 18px 18px; border-radius: 26px; }
-.data-sources h2 { margin: 0 40px 22px 0; line-height: 1.2; }
-.sources-close.ui-close { position: absolute; top: 11px; right: 14px; float: none; margin: 0; }
 .sheet-card { padding-left: 18px; padding-right: 18px; border-radius: 26px 26px 0 0; }
 /* the sheet's × is sticky (stays in view on a long card); Chrome / Safari count its top from inside the card's padding */
 .sheet-close.ui-close { top: -1px; right: auto; margin-top: -1px; margin-right: -4px; }
@@ -3017,10 +2946,6 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 /* 08.11 (Alena, variant В): the windows of Bibliothek like the app's windows — «… löschen? / zurücksetzen?»,
    «Text einfügen», «Data sources»: the lifted window surface and shadow, corners 26, the page behind darker and
    blurred like under .ui-window. (Their behaviour — tap outside, focus — moves to DeutschWindow with the test chat.) */
-.book-confirm { background: var(--overlay-scrim); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.book-confirm-card { border: 1px solid var(--hairline); border-radius: 26px; background: var(--window-surface); box-shadow: var(--window-shadow); }
-.paste-dialog, .data-sources { border: 1px solid var(--hairline); background: var(--window-surface); box-shadow: var(--window-shadow); }
-.paste-dialog::backdrop, .data-sources::backdrop { background: var(--overlay-scrim); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 
 /* 08.11 (Alena, variant А): Inhalt open — its icon fades (quiet, nothing added to the header) */
 .reading-body:has(#contents-dialog[open]) .contents-toggle { opacity: 0.4; }
@@ -3079,9 +3004,7 @@ body.library-screen .reader .library-add-menu button + button::before { content:
 .dictionary-headword.can-speak { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
 /* 09.11 (Alena): the note behind ⓘ in its own window (variant Б), the same window as «Text einfügen» */
-.storage-dialog { width: min(400px, calc(100% - 32px)); }
-.storage-dialog .storage-note { margin-top: 12px; padding: 0; border-radius: 0; background: none; }
-.storage-dialog h2:focus { outline: none; }
+.storage-window .storage-note { margin-top: 4px; padding: 0; border-radius: 0; background: none; }
 
 /* 09.11 (Alena): the message at the bottom — a card of the app, not a pill: as wide as it needs (it was held to half
    the screen by left: 50%, so a long error broke into three narrow lines and looked round), corners 18, text centred */
