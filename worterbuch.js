@@ -78,11 +78,11 @@
     });
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261112-wn-fix85-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261114-wn-akk112-3"),
+      loadJson("worterbuch/german-verbs.json?v=20261115-wn-eingehen118-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261112-wn-twins98-2"),
-      loadJson("worterbuch/german-adverbs.json?v=20261114-wn-dochmal107-2"),
+      loadJson("worterbuch/german-adverbs.json?v=20261114-wn-selber110-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261114-wn-jedoch106-1"),
-      loadJson("worterbuch/german-pronouns.json?v=20261107-wn-weniger56-1"),
+      loadJson("worterbuch/german-pronouns.json?v=20261114-wn-selber110-1"),
       loadJson("worterbuch/german-adjective-adverbs.json?v=20261112-wn-md94-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
       loadJson("worterbuch/german-expressions.json?v=20261115-wn-expr117-1").catch(() => [])

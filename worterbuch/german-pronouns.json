@@ -1891,15 +1891,14 @@
     "example_ru": "У нас день рождения в один и тот же день.",
     "example_en": "Our birthdays are on the same day.",
     "forms": null,
-    "usage_note_ru": "Обычное употребление — после слитного предлога с артиклем: am selben Tag, beim selben Arzt, zur selben Zeit. Без такого сокращения: an demselben Tag. Не путать с обычным усилительным selber («сам»); такая же форма может редко относиться к selbe.",
-    "usage_note_en": "Common after a fused preposition and article: am selben Tag, beim selben Arzt, zur selben Zeit. Without that contraction: an demselben Tag. Distinguish it from the common intensifier selber (oneself); the same spelling can rarely be a form of selbe.",
+    "usage_note_ru": "Обычное употребление — после слитного предлога с артиклем: am selben Tag, beim selben Arzt, zur selben Zeit. Без такого сокращения: an demselben Tag. Не путать с усилительным selber («сам») — у него своя карточка.",
+    "usage_note_en": "Common after a fused preposition and article: am selben Tag, beim selben Arzt, zur selben Zeit. Without that contraction: an demselben Tag. Distinguish it from the intensifier selber (oneself), which has its own card.",
     "forms_note_ru": "Основные сочетания: am selben · beim selben · zum selben · zur selben · im selben · ins selbe.",
     "forms_note_en": "Key combinations: am selben · beim selben · zum selben · zur selben · im selben · ins selbe.",
     "search_forms": [
       "selbe",
       "selben",
-      "selbes",
-      "selber"
+      "selbes"
     ],
     "source_url": "https://www.duden.de/rechtschreibung/selbe",
     "example_cloze": "Wir haben am {{c1::selben}} Tag Geburtstag."

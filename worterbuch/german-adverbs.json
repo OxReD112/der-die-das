@@ -183,13 +183,13 @@
   {
     "id": "adverb-017",
     "word": "schon",
-    "translation_ru": "уже",
-    "translation_en": "already",
+    "translation_ru": "уже; уж, конечно, ведь (частица: уверенность, уступка); ну же (Komm schon!)",
+    "translation_en": "already; surely, all right (particle); come on (Komm schon!)",
     "example_de": "Der Film hat schon angefangen.",
     "example_ru": "Фильм уже начался.",
     "example_en": "The film has already started.",
-    "usage_note_ru": "schon mal — когда-нибудь: Warst du schon mal in Rom? Как частица успокаивает или уступает: Das schaffst du schon! — Ты справишься! Противоположность — noch nicht.",
-    "usage_note_en": "schon mal — ever: Warst du schon mal in Rom? As a particle it reassures or concedes: Das schaffst du schon! — You'll manage! The opposite is noch nicht.",
+    "usage_note_ru": "schon mal — когда-нибудь: Warst du schon mal in Rom? Частица — уверенность: Das wird schon gehen. — Уж как-нибудь получится. Das schaffst du schon! — Ты справишься! Уступка: Das ist schon richtig, aber … — Это, конечно, верно, но … Нетерпение: Komm schon! — Ну же, давай! Риторический вопрос: Wen interessiert das schon? — Да кого это волнует? Ударное schon обычно уступительное, безударное — уверенность или нетерпение. Противоположность «уже» — noch nicht.",
+    "usage_note_en": "schon mal — ever: Warst du schon mal in Rom? As a particle — confidence: Das wird schon gehen. — It'll work out. Das schaffst du schon! — You'll manage! Concession: Das ist schon richtig, aber … — That's true enough, but … Impatience: Komm schon! — Come on! Rhetorical question: Wen interessiert das schon? — Who cares about that anyway? Stressed schon is usually concessive; unstressed, confidence or impatience. The opposite of “already” is noch nicht.",
     "example_cloze": "Der Film hat {{c1::schon}} angefangen."
   },
   {
@@ -2077,8 +2077,8 @@
     "example_de": "Sie will das selber machen.",
     "example_ru": "Она хочет сделать это сама.",
     "example_en": "She wants to do it herself.",
-    "usage_note_ru": "Разговорный вариант selbst. Не меняется: ich selber, wir selber. В значении «даже» используется только selbst.",
-    "usage_note_en": "Colloquial form of selbst. It never changes: ich selber, wir selber. For “even”, only selbst is used.",
+    "usage_note_ru": "Разговорный вариант selbst. Не меняется: ich selber, wir selber. В значении «даже» используется только selbst. Редко (устар.) selber = selbe «тот же»: an selber Stätte — на том же месте.",
+    "usage_note_en": "Colloquial form of selbst. It never changes: ich selber, wir selber. For “even”, only selbst is used. Rarely (dated) selber = selbe “the same”: an selber Stätte — at the same place.",
     "example_cloze": "Sie will das {{c1::selber}} machen."
   },
   {

@@ -38644,8 +38644,8 @@
       }
     },
     "reflexive": {
-      "translation_ru": "сесть (в постели), приподняться",
-      "translation_en": "to sit up (in bed)",
+      "translation_ru": "сесть (в постели), приподняться; (устар.) сесть верхом (на лошадь)",
+      "translation_en": "to sit up (in bed); (dated) to mount (a horse)",
       "example_de": "Als der Wecker klingelte, setzte er sich verschlafen im Bett auf.",
       "example_ru": "Когда зазвонил будильник, он сонно сел в постели.",
       "example_en": "When the alarm clock rang, he sat up sleepily in bed."
@@ -40844,11 +40844,11 @@
   {
     "id": "verb-844",
     "infinitive": "eingehen",
-    "translation_ru": "поступать (о письме, заявлении, деньгах)",
-    "translation_en": "to arrive, to be received (of mail, an application, money)",
+    "translation_ru": "поступать (о письме, заявлении, деньгах); идти на (риск), заключать (договор, брак), вступать (в связь); засыхать, погибать (о растениях); закрываться (о газете, фирме)",
+    "translation_en": "to arrive, to be received (of mail, an application, money); to take (a risk), to enter into (a marriage, an alliance, a bond); to die, to wither (of plants); to fold, to close down (of a newspaper, a firm)",
     "auxiliary": "sein",
-    "usage_note_ru": "Также: засыхать, погибать (о растениях): Die Blumen sind eingegangen. ein Risiko eingehen — пойти на риск (Perfekt тоже с sein). Соглашаться, откликаться (auf + Akkusativ) — см. вторую карточку.",
-    "usage_note_en": "Also: to die (of plants): Die Blumen sind eingegangen. ein Risiko eingehen — to take a risk (perfect also with sein). To agree to, to respond to (auf + Akkusativ) — see the second card.",
+    "usage_note_ru": "С дополнением: ein Risiko eingehen — пойти на риск, eine Ehe / ein Bündnis / eine Verpflichtung / eine Wette eingehen — вступить в брак, заключить союз, взять на себя обязательство, заключить пари (Perfekt тоже с sein: Er ist ein großes Risiko eingegangen). Die Blumen sind eingegangen — цветы засохли. Das Kleid ist bei der Wäsche eingegangen — платье село при стирке. Соглашаться, откликаться (auf + Akkusativ) — см. вторую карточку.",
+    "usage_note_en": "With an object: ein Risiko eingehen — to take a risk, eine Ehe / ein Bündnis / eine Verpflichtung / eine Wette eingehen — to enter into a marriage, an alliance, to take on an obligation, to make a bet (perfect also with sein: Er ist ein großes Risiko eingegangen). Die Blumen sind eingegangen — the flowers have died. Das Kleid ist bei der Wäsche eingegangen — the dress shrank in the wash. To agree to, to respond to (auf + Akkusativ) — see the second card.",
     "example_de": "Ihre Bewerbung ist gestern bei uns eingegangen.",
     "example_cloze": "Ihre Bewerbung ist gestern bei uns {{c1::eingegangen}}.",
     "example_ru": "Ваше заявление поступило к нам вчера.",
@@ -40882,7 +40882,16 @@
         "ihr": "geht ein",
         "sie": "gehen ein"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "required": true,
+        "meaning_ru": "идти на (риск), заключать (договор, брак), вступать (в связь)",
+        "note_ru": "что-либо (ein Risiko, eine Ehe, ein Bündnis)",
+        "note_en": "something (ein Risiko, eine Ehe, ein Bündnis)"
+      }
+    ]
   },
   {
     "id": "verb-845",

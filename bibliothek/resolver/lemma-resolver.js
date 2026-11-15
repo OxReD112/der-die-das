@@ -5376,7 +5376,9 @@
       const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
       if (v < 0 || j <= v) return false;
       const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
-      let a = v; while (a > 0 && !/[,;:.!?()–—»«„“"]/u.test(gap(a-1, a)) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
+      // (a number with a dot or a colon is no mark: Gegen 6.45 Uhr ging ein Notruf ein)
+      const mark = (x, y) => /[,;:.!?()–—»«„“"]/u.test(gap(x, y).replace(/\d+(?:[.,:]\d+)*\.?/gu, ""));
+      let a = v; while (a > 0 && !mark(a-1, a) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
       const sharedSubject = a + 1 === v && /^(?:und|oder|aber|sondern)$/u.test(norm(tokens[a][0]));
       if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
       const word = k => norm(tokens[k][0]);
@@ -5387,7 +5389,9 @@
       const pronounSubject = tokens.slice(a, j).some((t, n) => /^(?:ich|du|er|sie|wir|man)$/u.test(norm(t[0])) && !afterPrep(a + n));
       // (not inside a prepositional group nor a time noun — Am andern Morgen ging die Jagd von neuem an: die Jagd is the subject)
       const inGroupOfPrep = k => { let n = k - 1; while (n >= a && /^\p{Ll}/u.test(tokens[n][0]) && !prepositions.has(word(n))) n--; return n >= a && prepositions.has(word(n)); };
-      const groupBefore = tokens.slice(a, v).some((t, n) => /^\p{Lu}/u.test(t[0]) && !inGroupOfPrep(a + n) && !TIME.test(norm(t[0])) && !OBJ_TIME.test(norm(t[0])) &&
+      // (a name after a noun continues its group — Bei der Innenarchitektin Whitney geht … ein Auftrag ein: Whitney is in the group of bei)
+      const nameAfterNoun = k => k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && /^\s+$/u.test(gap(k-1, k));
+      const groupBefore = tokens.slice(a, v).some((t, n) => /^\p{Lu}/u.test(t[0]) && !inGroupOfPrep(a + n) && !(nameAfterNoun(a + n) && inGroupOfPrep(a + n - 1)) && !TIME.test(norm(t[0])) && !OBJ_TIME.test(norm(t[0])) &&
         !(a + n === a && (forms.get(norm(t[0])) || []).length && !(forms.get(norm(t[0])) || []).some(e => e.type === "Nomen")) &&
         !/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(norm(t[0])) && !prepositions.has(norm(t[0])));
       // (TODO п. 99, 15.11: an imperative first in its sentence has no subject — Hau ein Stück von der Ferse ab: ein Stück is the object)
@@ -5423,6 +5427,53 @@
       }
       if (subjectSure && /['’]s$/u.test(tokens[v][0])) return true;
       return false;
+    }
+    // (advisor 15.11, two cards of one verb) the part surely has no accusative: one nominal group outside prepositional groups and no
+    // object pronoun — that group is the subject, the verb not first in its part (Am andern Morgen ging die Jagd von neuem an, Im ersten
+    // Stock gingen Lichter an, Das Schneiderlein zog aus). Not an imperative or a verb first in its part (Mach die Tür auf!), not with
+    // es (an impersonal or es-subject: so geht's nicht an), not with a pronominal adverb, a dass / ob / w- clause, speech or a colon after.
+    function noAccusativeInPart(c, sentence, tokens) {
+      const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
+      if (spans.length !== 2) return false;
+      const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
+      if (v < 0 || j <= v) return false;
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      // (a number with a dot or a colon is no mark: Gegen 6.45 Uhr ging ein Notruf ein)
+      const mark = (x, y) => /[,;:.!?()–—»«„“"]/u.test(gap(x, y).replace(/\d+(?:[.,:]\d+)*\.?/gu, ""));
+      let a = v; while (a > 0 && !mark(a-1, a) && !/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a--;
+      if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
+      // (a number before the verb is the first member: 2011 trat TuWe in der … Nelonen an)
+      const lead = (v > 0 ? gap(v-1, v) : sentence.slice(0, tokens[v].index)).split(/[,;:.!?()–—»«„“"]\s/u).pop();
+      if (a === v && !/^\s*\d[\d.]*\s*$/u.test(lead)) return false;
+      const rest = sentence.slice(tokens[j].index + tokens[j][0].length);
+      if (/^\s*(?:[:»«„“"]|,\s*(?:dass|daß|ob|wie|was|wer|wo|warum|weshalb|wann|wohin|woher)\b)/u.test(rest)) return false;
+      const OBJECT_PRONOUN = /^(?:es|sich|mich|dich|ihn|uns|euch|mir|dir|ihm|ihnen|ihr|einander|was|nichts|etwas|alles|jemand\w*|niemand\w*)$/u;
+      const SUBJECT_PRONOUN = /^(?:ich|du|er|sie|wir|man)$/u;
+      let groups = 0, open = false, prep = false;
+      for (let k = a; k < j; k++) {
+        if (k === v) { open = false; prep = false; continue; }
+        const t = norm(tokens[k][0]), raw = tokens[k][0];
+        if (/['’]s$/u.test(raw) || t === "es") return false;
+        // (a pronoun inside a prepositional group is no object: trat gegen ihn an)
+        if (OBJECT_PRONOUN.test(t)) { if (!prep) return false; prep = false; open = false; continue; }
+        if (/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(t)) return false;
+        if ((prepositions.has(t) || /^(?:als|wie)$/u.test(t)) && !OBJECT_DETERMINER.test(t)) { prep = true; open = false; continue; }
+        const pronounUse = OBJECT_DETERMINER.test(t) && (k+1 === v || k+1 === j || /^\p{Ll}/u.test(tokens[k+1]?.[0] ?? "") && !/(?:e|en|em|er|es)$/u.test(norm(tokens[k+1][0])) && !OBJECT_DETERMINER.test(norm(tokens[k+1][0])));
+        if (pronounUse && !prep) return false;
+        const capitalNoun = /^\p{Lu}/u.test(raw) && !(k === a && (forms.get(t) || []).length && !(forms.get(t) || []).some(e => e.type === "Nomen"));
+        if (SUBJECT_PRONOUN.test(t)) { if (!prep) groups++; open = false; prep = false; continue; }
+        if (OBJECT_DETERMINER.test(t)) { if (!open && !prep) groups++; open = true; continue; }
+        if (capitalNoun) {
+          // (a name of several words is one group; a genitive after a noun belongs to it — die Nachfolge des Königs)
+          const joined = k > a && k-1 !== v && /^\p{Lu}/u.test(tokens[k-1][0]) && /^\.?\s+$/u.test(gap(k-1, k)) && !prep;
+          if (!open && !prep && !joined) groups++;
+          open = false; prep = false;
+          if (/^(?:des|der|eines|einer)$/u.test(norm(tokens[k+1]?.[0] ?? "")) && /^\s+$/u.test(gap(k, k+1))) { open = true; k++; }
+          continue;
+        }
+        if (/^\p{Ll}/u.test(raw) && !/(?:e|en|em|er|es)$/u.test(t)) open = false;
+      }
+      return groups === 1;
     }
     // (dativeAside, advisor 14.11 (б): an unambiguous dative group — mir, ihm, dem Vater, einem … — is no candidate for the accusative)
     function separatedObjectInPart(c, sentence, tokens, need, strict = false, dativeAside = false) {
@@ -8668,6 +8719,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const numberAccusative = motionTwins && !nonFinite && free.some(x => x.i > index && (CARDINAL.test(x.w) && plainNoun(x.i+1) || /^\p{Lu}/u.test(x.t) && x.i === index + 1 && figureBefore(x.i) && plainNoun(x.i)));
       const accusative = accusative0 || numberAccusative;
       const dative = free.some(x => ["mir","dir","ihm","ihnen"].includes(x.w));
+      // (advisor 15.11: two cards of one verb, one with a direct accusative and one without — a sure direct object picks the first, a
+      // part surely without an accusative the second: Am andern Morgen ging die Jagd von neuem an «начинаться», nahm den Pfropfen von
+      // der Flasche ab «снимать»; both or neither with the accusative, an imperative — the choice stays)
+      // (WN batch 118: an accusative of some meanings only — eingehen «идти на (риск)» beside «поступать» — leaves the card open to
+      // both; a card whose own preposition is not in the part gives way to one that needs none: Gegen 6.45 Uhr ging ein Notruf ein —
+      // «поступать», not «соглашаться» auf + Akkusativ)
+      { const DIRECT_ACC = p => /^(?:Dativ\s*\+\s*)?Akkusativ\b/u.test(String(p.pattern || "").trim());
+        const anyAcc = c => (c.item.complements || []).some(DIRECT_ACC);
+        const cardAcc = c => (c.item.complements || []).some(x => DIRECT_ACC(x) && !x.meaning_ru);
+        if (cards.length > 1 && !imperativeTap && cards.some(anyAcc) && !cards.every(cardAcc)) {
+          if (cards.some(c => directAccusativeInPart(c, sentence, tokens))) { const c = pick(cards.filter(anyAcc)); if (c) return {candidate:c,evidence:'accusative-object'}; }
+          else if (cards.every(c => noAccusativeInPart(c, sentence, tokens))) {
+            const open = cards.filter(c => !cardAcc(c));
+            const ownPrepIn = c => { const ps = [...preps(c)]; return !ps.length || ps.some(x => words.some(y => y.w === x)); };
+            const c = pick(open.length > 1 ? open.filter(ownPrepIn) : open);
+            if (c) return {candidate:c,evidence:'no-accusative'}; } } }
       // G91 (b) (advisor 01.11.2026): of two cards that both take an accusative, the card with the double accusative
       // («Akkusativ + Akkusativ»: kosten «стоить» — es kostet mich viel Geld) is chosen by the form of its frame, any one of:
       // a personal pronoun of the person (mich, dich, ihn, uns, euch — or mir, dir, ihm), the subject es / das / was, a number
@@ -18600,6 +18667,44 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       return result;
     }
+    // Links chat, advisor 15.11 (TODO п. 16): one link is seen from any of its words. A verb right before or after und / oder (no mark
+    // between) whose own group is narrower than its partner's, when the partner's group holds it, shows the union — no new link is built:
+    // muss man das Kopfballduell angehen und gewinnen (on angehen), Die USA kann und soll besorgt sein (on kann), lasst uns gehn und treten
+    // (on treten). A reflexive pronoun of the partner's group goes along only when the tapped verb is reflexive too (sich laben und
+    // erquicken — yes; sich setzen und spinnen — spinnen without sich). Not: er kam und ich ging (no verb partner), nouns (capitalised).
+    async function coordinationUnion(word, context, result, pipeline) {
+      const at = context?.tokenOffset, sentence = String(context?.sentence || ""), AND = /^(?:und|oder)$/u;
+      if (!result || context?.noCoordUnion || !Number.isInteger(at) || !/^\p{Ll}/u.test(word)) return result;
+      const tokens = sharedTokens(sentence, "coordinationUnion"), k0 = clickedTokenIndex(tokens, at, word);
+      if (k0 < 0 || !result.selected || canonicalPos(result.selected.pos) !== "Verb" && canonicalPos(result.selected.pos) !== "Modalverb") return result;
+      const plain = (a, b) => /^\s+$/u.test(sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
+      const verbAt = k => k >= 0 && k < tokens.length && /^\p{Ll}/u.test(tokens[k][0]) && !AND.test(norm(tokens[k][0])) &&
+        !/^(?:ich|du|er|sie|es|wir|ihr|man|der|die|das|ein|eine|nicht|auch|so|dann)$/u.test(norm(tokens[k][0]));
+      let p = -1;
+      if (k0 + 2 < tokens.length && AND.test(norm(tokens[k0+1][0])) && plain(k0, k0+1) && plain(k0+1, k0+2) && verbAt(k0+2)) p = k0 + 2;
+      else if (k0 - 2 >= 0 && AND.test(norm(tokens[k0-1][0])) && plain(k0-2, k0-1) && plain(k0-1, k0) && verbAt(k0-2)) p = k0 - 2;
+      if (p < 0) return result;
+      let other; try { other = await pipeline(tokens[p][0], {...context, tokenOffset: tokens[p].index, noCoordUnion: true, noMirror: context?.noMirror}); } catch (_) { return result; }
+      if (!other?.selected || !["Verb","Modalverb"].includes(canonicalPos(other.selected.pos))) return result;
+      const theirs = other.selected.construction?.spans || [];
+      if (!theirs.some(span => span.start === at)) return result;
+      const sel = result.selected, ours = sel?.construction?.spans || [{start: at, text: word}];
+      const has = (list, span) => list.some(x => x.start === span.start && x.text === span.text);
+      const REFL = /^(?:sich|mich|dich|uns|euch)$/u;
+      const lemma = norm(String(sel?.lemma || "")).replace(/^sich\s+/u, "");
+      let reflexiveToo = /^sich\s/u.test(String(sel?.lemma || "")) || (lemmas.get("sich " + lemma) || []).length > 0 ||
+        (lemmas.get(lemma) || []).some(e => e.entry?.reflexive || e.reflexive);
+      // (the external mark of a reflexive use — laben «to feast» acc; erquicken, spinnen have none: no sich for them)
+      if (!reflexiveToo && theirs.some(span => REFL.test(norm(span.text)))) try {
+        reflexiveToo = ((await fallback.lookupFacts?.(lemma))?.groups || []).some(g => g.pos === "verb" && g.reflexive && Object.keys(g.reflexive).length); } catch (_) {}
+      const extra = theirs.filter(span => !has(ours, span) && !(REFL.test(norm(span.text)) && !reflexiveToo));
+      if (!extra.length) return result;
+      const spans = [...ours, ...extra].sort((x, y) => x.start - y.start);
+      if (!sel) return result;
+      const construction = sel.construction ? {...sel.construction, spans} : {...other.selected.construction, spans, coordinated: true};
+      const marked = {...sel, construction};
+      return {...result, candidates: (result.candidates || []).map(c => c === sel ? marked : c), selected: marked, preferred: result.preferred === sel ? marked : result.preferred};
+    }
     function resolve(word, context) {
       sourceActivation++;clearPartialSources();
       const sentence=String(context?.sentence || '');
@@ -18612,7 +18717,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
