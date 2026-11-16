@@ -15735,7 +15735,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const {tokens,selected,indices} = clause;
       const base = value => norm(value).replace(/^sich\s+/u,'');
       const prepositionAt = i => contractionPreposition[norm(tokens[i][0])] || norm(tokens[i][0]);
-      const verbBasesAt = i => /^\p{Ll}/u.test(tokens[i][0]) || i === clause.start
+      // (б2: Danke / Bitte opening the part without ich is the word of thanks / of asking, not the verb: Danke für den Brief!, Bitte um
+      // Angabe …, Bitte kommen Sie!; danke / bitte inside the part with its subject stay — Persönlich danke er Hirschler für …)
+      const ichInClause = indices.some(i => norm(tokens[i][0]) === 'ich');
+      // (tests chat 16.11: Bitte / Danke + a pronoun of the third person is the imperative — Bitte ihn um Hilfe!, Danke ihm für alles!;
+      // Danke dir / euch / Ihnen für … is the «thank you»)
+      const imperativeObject = i => tokens[i+1] && (tokens[i][0] === 'Danke' ? /^(?:ihm|ihr|ihnen)$/u : /^(?:ihn|sie|es|ihm|ihr|ihnen)$/u).test(tokens[i+1][0]);
+      const verbBasesAt = i => ['Danke','Bitte'].includes(tokens[i][0]) && i === clause.start && !ichInClause && !imperativeObject(i) ? [] : /^\p{Ll}/u.test(tokens[i][0]) || i === clause.start
         ? [...new Set((verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached).map(a => base(a.base)))] : [];
       // A reflexive pair of the list (sich entscheiden für) needs a reflexive pronoun in the clause.
       const reflexiveInClause = indices.some(i => reflexivePronouns.has(norm(tokens[i][0])));
@@ -15760,8 +15766,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p))) &&
         holds.get(o));
       // The checks of one pair; gives its case or null.
+      // (A2 (б2), advisor 16.11: a case shown right after the preposition — an article, a pronoun, a contraction)
+      // (den / meinen … + a noun by the shared prepositionPhraseCase — advisor 16.11: auf den Zug Akkusativ, in den Autos / den Hotels Dativ)
+      const shownCase = q => contractionCase[norm(tokens[q][0])] || (tokens[q+1] && (objectCase[norm(tokens[q+1][0])] || determinedCase[norm(tokens[q+1][0])])) ||
+        prepositionPhraseCase(tokens,q,clause.end) || null;
       const pairCase = ({v,p,rows}) => {
-        if (indices.filter(i => prepositionAt(i) === prepositionAt(p)).length !== 1) return null;
+        // (б2: the preposition twice in the part — the link goes to the one whose shown case agrees with the pair, when every other one
+        // shows another case: Er wartete auf dem Bahnsteig auf den Zug / auf dich; mit dem Mann mit dem Hut — no link, as before)
+        const same = indices.filter(i => prepositionAt(i) === prepositionAt(p));
+        if (same.length !== 1) {
+          const want = [...new Set(rows.map(r => r[2]))];
+          if (want.length !== 1 || shownCase(p) !== want[0] || same.some(q => q !== p && (!shownCase(q) || shownCase(q) === want[0]))) return null;
+        }
         const object = tokens[p+1];
         if (!object || !indices.includes(p+1)) return null;
         // Strict variant (user decision 15.10.2026: a wrong hint is worse than none).
