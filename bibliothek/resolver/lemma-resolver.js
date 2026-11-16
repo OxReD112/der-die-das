@@ -20867,16 +20867,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // class (DIRECTIONAL + SPLIT_EXTRA, not SPLIT_SKIP) right before an infinitive / participle that closes the part, when a dictionary
     // has the joined verb: ließen ihre Lumpen fort brennen → fortbrennen, wollte zu ihr hinauf steigen, keinen Weg heraus finden. The
     // sentence is read joined (offsets map back like the colloquial expansions); the card is the joined verb. Not: the frame um … herum
-    // (um dich herum sehen), in … hinein / herein; los, weiter, mit, zusammen are not in the class (los werden — registry L32).
+    // (um dich herum sehen), in … hinein / herein; weiter, mit, zusammen are not in the class. los (L32, advisor 16.11) only with a joined verb
+    // of an own card or the dictionary — los werden → loswerden (werden too), los machen, los gelassen; Was ist los?, Los! stay.
     async function oldSeparateJoins(sentence) {
       const out = [], words = [...sentence.matchAll(/[\p{L}\p{M}]+/gu)];
       for (let i = 0; i + 1 < words.length; i++) {
         const P = words[i][0], V = words[i+1][0], p = norm(P);
         if (!/^\p{Ll}/u.test(P) || !/^\p{Ll}/u.test(V) || SPLIT_SKIP.has(p)) continue;
-        // (los stays outside the old separate spelling — registry L32: los machen; advisor 11.11 took los into the joined forms)
+        // (los — L32, advisor 16.11: only when the joined verb has an own card or a dictionary record — los werden → loswerden, los
+        // lassen → loslassen, los machen → losmachen; not by parts. Was ist los?, Los! — no infinitive / participle after it)
         // (daher and hierher written apart are adverbs — advisor 12.11, run 99: nicht hierher gehört stays hierher «сюда» + gehören;
         // the joined forms hierhergebracht, dahergeschritten are read by G47)
-        if (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p) || p === "los" || p === "daher" || p === "hierher" || JOINED_ONLY_PARTICLES.has(p)) continue;
+        const los = p === "los";
+        if (!los && (!DIRECTIONAL.some(([x]) => x === p) && !SPLIT_EXTRA.some(([x]) => x === p) || G47_TRANSPARENT.has(p) || p === "daher" || p === "hierher" || JOINED_ONLY_PARTICLES.has(p))) continue;
         if (!/^[ \t]+$/u.test(sentence.slice(words[i].index + P.length, words[i+1].index))) continue;
         const after = sentence.slice(words[i+1].index + V.length);
         if (!/^\s*(?:[,;:.!?…()"„“”»«–—]|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(after)) continue;
@@ -20884,7 +20887,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // is finite). Not sein / haben / werden / a modal: weg sein, zurück sein, hinaus wollen are two words (as G47, directionalParticle).
         const vRows = verbAnalyses.get(norm(V)) || [];
         if (vRows.length ? !vRows.some(r => ["infinitive","participle"].includes(r.kind)) : !PARTICIPLE_SHAPE.test(norm(V)) && !REGULAR_INFINITIVE_SHAPE.test(norm(V))) continue;
-        if (vRows.some(r => /^(?:sein|haben|werden|können|müssen|dürfen|sollen|wollen|mögen|möchten)$/u.test(norm(r.base || r.entry?.word || "")))) continue;
+        // (los: werden too when the joined verb is an own card — los werden → loswerden; checked below, without the card by parts)
+        if (vRows.some(r => /^(?:sein|haben|werden|können|müssen|dürfen|sollen|wollen|mögen|möchten)$/u.test(norm(r.base || r.entry?.word || ""))) &&
+          !(los && vRows.some(r => norm(r.base || r.entry?.word || "") === "werden"))) continue;
         const before = sentence.slice(0, words[i].index), from = before.search(/[^,;:.!?…()"„“”»«–—]*$/u), part = before.slice(from);
         if (/^(?:herum|umher)$/u.test(p) && /(?<![\p{L}\p{M}])um(?![\p{L}\p{M}])/u.test(part)) continue;
         // rings umher / rings herum: the adverb ringsumher, ringsherum (die rings umher stehen — stehen; review 06.11)
@@ -20896,7 +20901,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         let known = (forms.get(joined) || []).some(e => e.type === "Verb") || (verbAnalyses.get(joined) || []).length > 0, composed = false;
         if (!known) try { known = (await lexicalLookup(joined,'oldSeparateJoins')).some(g => !g.unresolved && canonicalPos(g.pos) === "Verb"); } catch (_) { known = false; }
         // (not hinterher / voraus / voran: «afterwards, ahead» as often as a direction — hat es hinterher bereut; review 06.11)
-        if (!known && !/^(?:hinterher|voraus|voran)$/u.test(p)) known = composed = vRows.some(r => r.entry && ["infinitive","participle"].includes(r.kind));
+        if (!known && !los && !/^(?:hinterher|voraus|voran)$/u.test(p)) known = composed = vRows.some(r => r.entry && ["infinitive","participle"].includes(r.kind));
         if (!known) continue;
         out.push({start:words[i].index,end:words[i+1].index + V.length,text:sentence.slice(words[i].index,words[i+1].index + V.length),
           replacement:P + V,base:P + V,kind:"join",stem:P + V,composed});

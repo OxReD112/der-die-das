@@ -43375,6 +43375,176 @@
         "order": "fixed",
         "scope": "clause",
         "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "die",
+              "das"
+            ],
+            "clause_has": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr"
+            ]
+          },
+          {
+            "form": "los"
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien",
+              "sein",
+              "gewesen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien"
+            ]
+          },
+          {
+            "form": [
+              "die",
+              "das"
+            ],
+            "clause_has": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr"
+            ]
+          },
+          {
+            "form": "los"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": "es",
+            "clause_has": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr"
+            ]
+          },
+          {
+            "form": "los"
+          },
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien",
+              "sein",
+              "gewesen"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien"
+            ]
+          },
+          {
+            "form": "es",
+            "clause_has": [
+              "ich",
+              "du",
+              "er",
+              "sie",
+              "wir",
+              "ihr"
+            ]
+          },
+          {
+            "form": "los"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
       }
     ],
     "tests": {
@@ -43382,13 +43552,20 @@
         "Endlich bin ich den lästigen Husten los.",
         "Er war froh, dass er den alten Nimmersatt los war.",
         "Sie waren heilfroh, den Gestank des Trolls los zu sein.",
-        "Ich bin ihn endlich los."
+        "Ich bin ihn endlich los.",
+        "Endlich war er die Schulden los.",
+        "Ich bin das Problem los.",
+        "Ich bin es los."
       ],
       "negative": [
         "Was ist los?",
         "Da ist viel los.",
         "Hier ist den ganzen Tag was los.",
-        "Was ist mit dir los?"
+        "Was ist mit dir los?",
+        "Da ist die Hölle los.",
+        "Was ist das los?",
+        "Hier ist nichts los.",
+        "Ist es schon los?"
       ]
     }
   },
