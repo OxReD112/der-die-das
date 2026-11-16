@@ -16,10 +16,10 @@
     <meta name="apple-mobile-web-app-title" content="Partikeln" />
     <title>Partikeln</title>
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
-    <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
+    <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=12" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <script src="../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="partikeln.css?v=11" />
+    <link rel="stylesheet" href="partikeln.css?v=12" />
   </head>
   <body>
     <main class="app">
@@ -51,13 +51,6 @@
           <div class="context" id="context"></div>
           <div class="sentence" id="sentence"></div>
           <div class="translation" id="translation"></div>
-          <button class="shuffle" id="shuffle" type="button" aria-label="Anderes Beispiel">
-            <svg viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M2 4.5h2.5c3 0 4 7 7 7H14" />
-              <path d="M2 11.5h2.5c1.4 0 2.3-1.5 3-3.2M9 6c.7-1 1.4-1.5 2.5-1.5H14" />
-              <path d="M12 2.5l2 2-2 2M12 9.5l2 2-2 2" />
-            </svg>
-          </button>
         </div>
 
         <div class="meaning">
@@ -71,6 +64,15 @@
         </div>
 
         <div class="particles" id="particles"></div>
+        <!-- 16.11.2026 (Alena): another sentence — in the bottom row (where the Spickzettel is in the exercises), with its
+             name, instead of a bare icon under the translation: the task gets that room -->
+        <button class="shuffle ui-spick" id="shuffle" type="button">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M2 4.5h2.5c3 0 4 7 7 7H14" />
+            <path d="M2 11.5h2.5c1.4 0 2.3-1.5 3-3.2M9 6c.7-1 1.4-1.5 2.5-1.5H14" />
+            <path d="M12 2.5l2 2-2 2M12 9.5l2 2-2 2" />
+          </svg>Anderer Satz
+        </button>
       </section>
       <!-- ===== ÜBEN ===== -->
       <section id="pStart" class="screen hidden">
@@ -96,6 +98,9 @@
           <div class="counter ui-counter" id="pCounter">1 / 10</div>
           <div class="progress ui-progress"><i id="pBar"></i></div>
         </div>
+        <!-- 16.11.2026: the task + answer; only this part scrolls when the answer with its explanation does not fit even
+             with a smaller question (DeutschBottom.fitScroll) — the top bar and Weiter stay -->
+        <div class="p-body ui-fit-body" id="pBody">
         <div class="prompt">
           <div class="context" id="pContext"></div>
           <div class="sentence p-sentence" id="pSentence"></div>
@@ -111,8 +116,9 @@
           <div class="translation on" id="pTranslation"></div>
           <div class="fb-also" id="pAlso"></div>
           <p class="note fb-note" id="pNote"></p>
-          <button class="continue ui-quiet" id="pContinue" type="button">Weiter</button>
         </div>
+        </div>
+        <button class="continue ui-quiet hidden" id="pContinue" type="button">Weiter</button>
       </section>
 
       <section id="pDone" class="screen hidden">
@@ -126,14 +132,14 @@
           <button class="ui-main" id="homeBack" type="button">Zur Startseite</button>
         </div>
       </section>
-      <div class="version-mark" aria-hidden="true">v1.2</div>
+      <div class="version-mark" aria-hidden="true">v1.3</div>
     </main>
     <script src="../components/deutsch-translation-v1.js?v=2"></script>
     <script src="sentences.js?v=4"></script>
     <script src="../components/deutsch-end-v1.js?v=1"></script>
-    <script src="partikeln.js?v=3"></script>
-    <script src="../components/deutsch-bottom-v1.js?v=2"></script>
-    <script src="partikeln-ueben.js?v=7"></script>
+    <script src="partikeln.js?v=4"></script>
+    <script src="../components/deutsch-bottom-v1.js?v=3"></script>
+    <script src="partikeln-ueben.js?v=8"></script>
     <script src="../components/deutsch-wide-v1.js?v=6"></script>
   </body>
 </html>

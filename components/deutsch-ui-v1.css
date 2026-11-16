@@ -397,3 +397,37 @@ details[open] > summary .ui-chev-fold {
 /* 08.11 (Alena, variant В): every window is a lifted surface — its own colour (a tone lighter than the cards in the
    dark theme), a soft shadow and a thin light line at the top; the page behind is darker (--overlay-scrim). */
 .ui-window-card { background: var(--window-surface, var(--card-bg)); box-shadow: var(--window-shadow, none); }
+
+/* ===== THE ANSWER DOES NOT FIT — the last way out (16.11.2026, Alena) =====
+   DeutschBottom.fitScroll(screen, body) (components/deutsch-bottom-v1.js) puts .ui-fit-scroll on the round's screen
+   only when the answer with its explanation does not fit even after the exercise made it fit (smaller question): the
+   top bar stays, Weiter sits on the bottom line (77 px above the home indicator, as in every exercise) and only the
+   task + answer (.ui-fit-body) scrolls between them, fading out at the edges. --ui-fit-side: how far the scrolling
+   part reaches to the screen's sides (the exercise's side padding), so glows are not cut. !important: the screens
+   set their own padding with an id. */
+.app:has(.ui-fit-scroll) {
+  overflow-y: hidden !important;
+  padding-bottom: 0 !important;
+}
+.app:has(.ui-fit-scroll)::after {
+  display: none !important;
+}
+.ui-fit-scroll {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 77px) !important;
+}
+.ui-fit-scroll > * {
+  flex: none;
+}
+.ui-fit-scroll > .ui-fit-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-inline: calc(-1 * var(--ui-fit-side, 18px));
+  padding: 0 var(--ui-fit-side, 18px) 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+}

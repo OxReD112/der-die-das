@@ -17,6 +17,16 @@
 
    DeutschBottom.active()               → true where buttons are pinned (touch screen, not short)
    DeutschBottom.line()                 → y of the line (px from the top of the window)
+   DeutschBottom.fitScroll(screen, body, opts)  (16.11.2026, Alena — the LAST way out; first the exercise makes the
+                                          answer fit, e.g. a smaller question): when the answer with its explanation
+                                          does not fit and Weiter would go below the line, the top bar stays, Weiter
+                                          sits on the line and only `body` (the task + answer, class .ui-fit-body)
+                                          scrolls between them with a soft fade (components/deutsch-ui-v1.css,
+                                          .ui-fit-scroll). Call it after pin(); call it with nothing to fit (or the
+                                          next task) and it switches off. Switches on when the page would scroll, or
+                                          when opts.button (Weiter) ends more than 12 px below the line. Returns true when switched on.
+                                          Only where active(); opts.scroller as in pin(). Used by Ortspräpositionen,
+                                          Partikeln.
    DeutschBottom.pin(el, holder, opts)  → moves `holder` (default: el) down with margin-top until el's bottom sits
                                           on the line. Only free room is used: never pushes it up, and if the page
                                           (.app, or opts.scroller) would scroll because of it, it gives that back.
@@ -68,5 +78,17 @@
     }
     return down;
   }
-  window.DeutschBottom = { active: active, line: line, pin: pin };
+  function fitScroll(screen, body, opts) {
+    opts = opts || {};
+    screen.classList.remove("ui-fit-scroll");
+    if (body) body.scrollTop = 0;
+    if (!body || !active()) return false;
+    var sc = opts.scroller === undefined ? document.querySelector(".app") : opts.scroller;
+    // Weiter clearly below the line: a few px lower is still clear of the Home button and better than a scroll
+    var low = opts.button && opts.button.getBoundingClientRect().bottom > line() + 12;
+    if (!low && (!sc || sc.scrollHeight <= sc.clientHeight + 1)) return false;
+    screen.classList.add("ui-fit-scroll");
+    return true;
+  }
+  window.DeutschBottom = { active: active, line: line, pin: pin, fitScroll: fitScroll };
 })();

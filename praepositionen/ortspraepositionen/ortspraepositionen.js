@@ -281,14 +281,55 @@ function render() {
   // its place is then fixed for the whole card, so the three answers and Weiter never move it
   els.card.style.marginTop = els.choices.style.marginTop = "";
   if (TABLET.matches) els.card.style.marginTop = getComputedStyle(els.card).marginTop;
+  fitCard();
   placeBottom(); // after the card's place is fixed
+}
+/* 16.11.2026 (Alena): on a phone the finished card with its notes and Weiter should fit without scrolling. Before the
+   first answer, the card is tried in place in its longest finished form (every line answered wrongly with the
+   longest button, every zu / von note, the place's own note); if Weiter would end below the bottom line, the card
+   is a little tighter (#game.tight: smaller gaps between the lines and blocks — the sizes stay). Chosen once per
+   card, so nothing moves while answering. Measured on the phone itself. If even that is not enough, the shared last
+   way out (DeutschBottom.fitScroll) scrolls only the card. */
+function fitCard() {
+  els.game.classList.remove("tight");
+  if (TABLET.matches || !DeutschBottom.active()) return;
+  const entry = session[index],
+    cat = CATEGORIES[entry.cat] || {},
+    keep = { steps: els.steps.innerHTML, label: els.ruleLabel.textContent, forms: els.ruleForms.textContent, note: els.ruleNote.innerHTML };
+  const hints = [];
+  QUESTIONS.forEach((q, i) => {
+    const wrong = buttonsFor(entry, q.key).filter(f => f !== entry[q.key] && !altsFor(entry, q.key).includes(f));
+    wrong.forEach(f => {
+      const h = zuHint(entry, q.key, f);
+      if (h && !hints.includes(h)) hints.push(h);
+    });
+    const longest = wrong.reduce((a, f) => (f.length > a.length ? f : a), "");
+    const slot = els.steps.querySelector("#slot" + i);
+    if (slot && longest) {
+      slot.className = "slot bad";
+      slot.innerHTML = '<span class="wrong">' + escapeHtml(longest) + '</span><span class="right">' + escapeHtml(entry[q.key]) + "</span>";
+    }
+  });
+  els.ruleLabel.textContent = cat.label || "";
+  els.ruleForms.textContent = cat.rule || "";
+  els.ruleNote.innerHTML = (entry.note ? "<div>" + escapeHtml(getTranslation(entry, "note")) + "</div>" : "") + hints.join("");
+  els.choices.classList.add("hidden");
+  els.next.classList.remove("hidden");
+  els.next.style.marginTop = els.ruleNote.style.marginTop = "";
+  if (els.next.getBoundingClientRect().bottom > DeutschBottom.line()) els.game.classList.add("tight");
+  els.steps.innerHTML = keep.steps;
+  els.ruleLabel.textContent = keep.label;
+  els.ruleForms.textContent = keep.forms;
+  els.ruleNote.innerHTML = keep.note;
+  els.next.classList.add("hidden");
+  els.choices.classList.remove("hidden");
 }
 const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
 /* 03.11.2026 (Alena): the answer buttons and Weiter stand at the bottom — their bottom 16px above the Spickzettel,
    where the keyboard ends in the typing exercises; the card keeps its place at the top. Never makes the page
    scroll (only room that is free is used). */
 function placeBottom() {
-  els.game.classList.remove("fit-scroll");
+  DeutschBottom.fitScroll(els.game, null); // off until the card is finished
   els.gameBody.scrollTop = 0;
   els.choices.style.marginTop = els.ruleNote.style.marginTop = els.next.style.marginTop = "";
   // when (touch only, not on short screens — there the Spickzettel follows the content): components/deutsch-bottom-v1.js
@@ -298,11 +339,9 @@ function placeBottom() {
   /* 16.11.2026 (Alena; asked by the native chat): on a small phone (SE) a finished card with a long note does not fit,
      and Weiter went down under the Spickzettel. Then the top bar and Weiter stay — Weiter on the bottom line like
      everywhere — and only the card with its notes scrolls between them (soft fade under Weiter). Only where buttons
-     are pinned (touch, not short screens: there the page simply scrolls) and only when it does not fit. */
-  if (cardDone && DeutschBottom.active() && els.app.scrollHeight > els.app.clientHeight + 1) {
-    els.ruleNote.style.marginTop = els.next.style.marginTop = "";
-    els.game.classList.add("fit-scroll");
-  }
+     are pinned (touch, not short screens: there the page simply scrolls) and only when it does not fit. The shared
+     detail since 16.11: components/deutsch-bottom-v1.js fitScroll + .ui-fit-scroll in components/deutsch-ui-v1.css. */
+  if (cardDone && DeutschBottom.fitScroll(els.game, els.gameBody, { button: els.next })) els.ruleNote.style.marginTop = els.next.style.marginTop = "";
 }
 window.addEventListener("resize", () => requestAnimationFrame(placeBottom));
 

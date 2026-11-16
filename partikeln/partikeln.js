@@ -126,8 +126,18 @@
 
   /* ---------- render ---------- */
   function render(fresh) {
-    var s = sent(), k = st.cur, c = k ? cellOf(s, k) : null, L = lang();
     Array.prototype.forEach.call($("cats").children, function (b, i) { b.setAttribute("aria-selected", i === st.cat); });
+    if (fresh) fitSentence();
+    var note = $("note"), before = note.textContent;
+    fillTexts(st.cur);
+    renderScale(fresh);
+    renderParticles();
+    placeNote();
+    if (note.textContent !== before) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
+  }
+  /* the texts for particle k (null = without): situation, sentence, translation, what it does, the explanation */
+  function fillTexts(k) {
+    var s = sent(), c = k ? cellOf(s, k) : null, L = lang();
 
     /* a particle can bring its own situation (what the other person just said) — e.g. stressed DOCH needs someone
        who said the opposite; without a particle, or when it has none, the sentence's situation */
@@ -142,8 +152,7 @@
     tr.classList.toggle("on", !!ok);
 
     /* 10.11 (Alena): the explanation is easy to miss — when it changes, the slider moves first, then the text
-       comes up from below (fades in) */
-    var note = $("note"), before = note.textContent;
+       comes up from below (fades in: render) */
     var fn = $("fn"), hint = $("hint");
     if (!c) { fn.textContent = "Ohne Partikel"; fn.className = "fn dim"; hint.textContent = ""; $("note").textContent = TXT.start[L] || TXT.start.en; }
     else if (ok) {
@@ -154,10 +163,29 @@
       fn.textContent = c.status === "odd" ? "Klingt seltsam" : "Passt hier nicht"; fn.className = "fn dim";
       hint.textContent = ""; $("note").textContent = pick(c.note);
     }
-    renderScale(fresh);
+  }
+  /* 16.11.2026 (Alena): on a phone the explanation must never run under the particle buttons pinned at the bottom. For
+     a new sentence every particle is tried in place (the longest explanation counts); if one would come closer than
+     8 px to the buttons, the sentence is set smaller, 1 px at a time, down to 80 % (the shared rule). Once per
+     sentence, so nothing jumps while you try particles; measured on the phone itself. Only where the buttons are
+     pinned (short screens: they follow the text). */
+  function fitSentence() {
+    var el = $("sentence"), parts = $("particles"), note = $("note");
+    el.style.fontSize = "";
     renderParticles();
-    placeNote();
-    if (note.textContent !== before) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
+    if (getComputedStyle(parts).position !== "fixed") return;
+    var base = parseFloat(getComputedStyle(el).fontSize), size = base, min = base * 0.8;
+    var labels = document.querySelector(".scale-labels"), keys = [null].concat(shown(sent()));
+    function over() {
+      var worst = -Infinity;
+      keys.forEach(function (k) {
+        fillTexts(k);
+        note.style.marginTop = "";
+        worst = Math.max(worst, labels.getBoundingClientRect().bottom + 14 + note.offsetHeight + 8 - parts.getBoundingClientRect().top);
+      });
+      return worst;
+    }
+    while (over() > 0 && size > min) { size = Math.max(min, size - 1); el.style.fontSize = size + "px"; }
   }
 
   function stops() {
@@ -267,7 +295,7 @@
   }
 
   /* fonts arrive late (deutsch-fonts-v1.js sends a resize): measure the rows again */
-  window.addEventListener("resize", function () { if (!$("explore").classList.contains("hidden")) { renderParticles(); placeNote(); } });
+  window.addEventListener("resize", function () { if (!$("explore").classList.contains("hidden")) { fitSentence(); fillTexts(st.cur); renderParticles(); placeNote(); } });
 
   window.addEventListener("deutschtranslationchange", function () {
     $("aboutText").textContent = pick(TXT.about);

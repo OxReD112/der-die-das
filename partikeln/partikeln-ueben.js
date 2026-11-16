@@ -129,7 +129,8 @@
     if (!q || !el.offsetWidth) return;
     var probe = el.cloneNode(false);
     probe.removeAttribute("id");
-    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;padding:0;width:" + el.clientWidth + "px";
+    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;padding:0;width:" + el.clientWidth + "px" +
+      (el.style.fontSize ? ";font-size:" + el.style.fontSize : ""); /* a fitted (smaller) question, see fitQuestion */
     el.parentNode.appendChild(probe);
     q.options.forEach(function (k) {
       probe.innerHTML = q.t.accept.indexOf(k) >= 0 ? sentenceHtml(q.t.s, k, "ok") : sentenceHtml(q.t.s, [k, q.t.answer], "fixed");
@@ -144,7 +145,10 @@
   }
   window.addEventListener("resize", function () {
     if (!R || $("pGame").classList.contains("hidden")) return;
-    requestAnimationFrame(function () { $("pSentence").style.paddingTop = ""; measureHold(); holdSentence(); });
+    requestAnimationFrame(function () {
+      if ($("pFeedback").classList.contains("hidden")) { fitQuestion(); showQuestion(); placeBottom(); return; } /* question: fit again */
+      $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+    });
   });
   function ask() {
     var q = R.list[R.i], t = q.t;
@@ -155,12 +159,43 @@
     var f = FUNCTIONS[t.fn];
     $("pLabel").innerHTML = "<small>" + (lang() === "ru" ? "Что ты хочешь сказать:" : "What you want to say:") + "</small>" + esc(f ? pick(f.label) : t.fn);
     $("pAnswers").innerHTML = q.options.map(function (k) { return '<button class="ans" type="button" data-k="' + k + '">' + esc(k) + "</button>"; }).join("");
-    $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+    fitQuestion();
+    showQuestion();
     $("pThumb").style.transition = "none"; paintScale(t, t.answer, null); $("pThumb").offsetWidth; $("pThumb").style.transition = "";
-    $("pFeedback").classList.add("hidden");
-    $("pAnswers").classList.remove("hidden");
     document.querySelector(".app").scrollTop = 0;
     placeBottom();
+  }
+  function showQuestion() {
+    var t = R.list[R.i].t;
+    $("pSentence").innerHTML = sentenceHtml(t.s, null);
+    $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+    $("pFeedback").classList.add("hidden");
+    $("pContinue").classList.add("hidden");
+    $("pAnswers").classList.remove("hidden");
+  }
+  /* 16.11.2026 (Alena): on a phone the answer with its explanation and Weiter must fit on the screen — no scrolling.
+     Before the question is shown, every possible answer is tried in place (the longest explanation counts); if Weiter
+     would end below the bottom line, the question is set smaller, 1 px at a time, down to 80 % (the shared rule, as in
+     Pronomen / Verbformen). The size is chosen once per task, so nothing jumps at the answer. Measured on the phone
+     itself, so its own fonts count. Only where the buttons are pinned (touch, not short screens; not tablets). If even
+     80 % is not enough, DeutschBottom.fitScroll is the last way out (placeBottom). */
+  function fitQuestion() {
+    var el = $("pSentence"), q = R.list[R.i];
+    el.style.fontSize = "";
+    document.querySelector(".app").scrollTop = 0;
+    if (TABLET.matches || !window.DeutschBottom.active()) return;
+    var base = parseFloat(getComputedStyle(el).fontSize), size = base, min = base * 0.8;
+    function over() {
+      var worst = -Infinity, c = $("pContinue");
+      measureHold();
+      q.options.forEach(function (k) {
+        fillAnswer(k);
+        c.style.marginTop = "";
+        worst = Math.max(worst, c.getBoundingClientRect().bottom - window.DeutschBottom.line());
+      });
+      return worst;
+    }
+    while (over() > 0 && size > min) { size = Math.max(min, size - 1); el.style.fontSize = size + "px"; }
   }
   /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end on the shared
      bottom line (components/deutsch-bottom-v1.js: where the keyboard ends in the typing exercises). Only free room is
@@ -171,8 +206,11 @@
     var done = !$("pFeedback").classList.contains("hidden");
     var el = done ? $("pContinue") : $("pAnswers");
     el.style.marginTop = "";
+    window.DeutschBottom.fitScroll($("pGame"), null); $("pBody").scrollTop = 0;
     if (TABLET.matches || $("pGame").classList.contains("hidden")) return;
     window.DeutschBottom.pin(el);
+    /* the last way out (16.11): the answer does not fit even with the smaller question — only the task scrolls */
+    if (done && window.DeutschBottom.fitScroll($("pGame"), $("pBody"), { button: el })) el.style.marginTop = "";
   }
   window.addEventListener("resize", function () { requestAnimationFrame(placeBottom); });
   $("pAnswers").addEventListener("click", function (e) {
@@ -180,15 +218,27 @@
     answer(b.dataset.k);
   });
   function answer(k) {
-    var q = R.list[R.i], t = q.t, P = t.s.particles, good = t.accept.indexOf(k) >= 0;
+    var q = R.list[R.i], t = q.t, good = t.accept.indexOf(k) >= 0;
     if (good) R.right++; else R.missed.push(t.answer);
     var shown = good ? k : t.answer;
     Array.prototype.forEach.call($("pAnswers").children, function (b) { b.disabled = true; });
+    fillAnswer(k);
+    $("pBar").style.width = ((R.i + 1) / R.n * 100) + "%"; /* the bar grows at the answer, as in every exercise */
+    /* the scale (already shown with the task): where the right answer sits, and (if wrong but it fits the sentence)
+       where yours landed */
+    paintScale(t, shown, good ? null : k);
+    placeBottom();
+  }
+  /* the answer screen for answer k (also used by fitQuestion to try every answer): the result in the sentence, verdict,
+     translation, «also right», the explanation; the answer buttons go, Weiter comes */
+  function fillAnswer(k) {
+    var q = R.list[R.i], t = q.t, P = t.s.particles, good = t.accept.indexOf(k) >= 0;
+    var shown = good ? k : t.answer;
     $("pAnswers").classList.add("hidden"); /* the answer takes their room (Alena 05.11) */
+    $("pContinue").classList.remove("hidden");
     /* the result is in the sentence (as Ortspräpositionen): right → mint; wrong → yours struck through, then the right one */
     $("pSentence").innerHTML = good ? sentenceHtml(t.s, k, "ok") : sentenceHtml(t.s, [k, t.answer], "fixed");
     holdSentence(); /* same height as in the question: the scale stays put */
-    $("pBar").style.width = ((R.i + 1) / R.n * 100) + "%"; /* the bar grows at the answer, as in every exercise */
     var c = P[shown], L = lang();
     var fb = $("pFeedback"); fb.classList.remove("hidden"); fb.classList.toggle("wrong", !good);
     $("pVerdict").textContent = good ? "Richtig" : "Nicht ganz";
@@ -198,9 +248,6 @@
     if (L === "ru" && c.hint) extra.push(c.hint);
     if (also.length) extra.push((L === "ru" ? "тоже подходит: " : "also right: ") + also.join(", "));
     $("pAlso").textContent = extra.join(" · ");
-    /* the scale (already shown with the task): where the right answer sits, and (if wrong but it fits the sentence)
-       where yours landed */
-    paintScale(t, shown, good ? null : k);
     var mine = P[k];
     /* explanation: why the right one; if wrong, what yours would have meant */
     var note = pick(c.note);
@@ -210,7 +257,6 @@
                  : (mine ? pick(mine.note) + " " : "")) + note;
     }
     $("pNote").textContent = note;
-    placeBottom();
   }
   $("pContinue").addEventListener("click", function () {
     R.i++;
