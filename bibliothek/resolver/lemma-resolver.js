@@ -15718,9 +15718,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const contractionCase = {am:'Dativ',im:'Dativ',beim:'Dativ',vom:'Dativ',zum:'Dativ',zur:'Dativ',ans:'Akkusativ',aufs:'Akkusativ',ins:'Akkusativ',
       fürs:'Akkusativ',ums:'Akkusativ',übers:'Akkusativ',vors:'Akkusativ',durchs:'Akkusativ'};
     const contractionPreposition = {am:'an',ans:'an',im:'in',ins:'in',beim:'bei',vom:'von',zum:'zu',zur:'zu',aufs:'auf',fürs:'für',ums:'um',übers:'über',vors:'vor',durchs:'durch'};
+    // (A2 (б), advisor 16.11 (2): a case shown by the article after the preposition — der / einer / dieser … Dativ (auf der anderen Seite),
+    // die / das / eine / diese … Akkusativ; den, ein, a bare noun stay open, as before)
+    const determinedCase = {der:'Dativ',einer:'Dativ',keiner:'Dativ',meiner:'Dativ',deiner:'Dativ',seiner:'Dativ',ihrer:'Dativ',unserer:'Dativ',
+      eurer:'Dativ',dieser:'Dativ',jener:'Dativ',jeder:'Dativ',die:'Akkusativ',das:'Akkusativ',eine:'Akkusativ',keine:'Akkusativ',meine:'Akkusativ',
+      deine:'Akkusativ',seine:'Akkusativ',ihre:'Akkusativ',unsere:'Akkusativ',eure:'Akkusativ',diese:'Akkusativ',jene:'Akkusativ',jedes:'Akkusativ'};
     async function verbPrepositionLink(word, context, resolution) {
       const card = resolution.selected;
-      if (!card || !fallback.verbPrepositions || !Number.isInteger(context?.tokenOffset)) return;
+      if (!card || !fallback.verbPrepositions || !Number.isInteger(context?.tokenOffset) || context?.noVerbPrepositionLink) return;
       const type = canonicalPos(card.pos), isVerb = type === 'Verb', isPreposition = card.pos === 'preposition' || type === 'prep';
       if (!isVerb && !isPreposition || isVerb && card.construction) return;
       let list;
@@ -15737,8 +15742,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const pairs = (verbBase, preposition) => list.filter(([verb,prep]) => base(verb) === verbBase && prep === preposition &&
         (reflexiveInClause || !/^sich\s/u.test(norm(verb))));
       const links = [];
+      // (A2 (б), 16.11: zu right before an infinitive is the infinitive particle — darüber zu sprechen — not the preposition of sprechen zu)
+      const zuParticle = p => norm(tokens[p][0]) === 'zu' && tokens[p+1] && /^\p{Ll}/u.test(tokens[p+1][0]) &&
+        (verbAnalyses.get(norm(tokens[p+1][0])) || []).some(a => a.kind === 'infinitive');
       for (const v of indices) for (const verbBase of verbBasesAt(v)) for (const p of indices) {
-        if (p === v || !pairs(verbBase,prepositionAt(p)).length || !(prepositions.has(norm(tokens[p][0])) || contractionCase[norm(tokens[p][0])])) continue;
+        if (p === v || zuParticle(p) || !pairs(verbBase,prepositionAt(p)).length || !(prepositions.has(norm(tokens[p][0])) || contractionCase[norm(tokens[p][0])])) continue;
         links.push({v,p,verbBase,rows:pairs(verbBase,prepositionAt(p))});
       }
       const mine = links.filter(l => (isVerb ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)));
@@ -15747,7 +15755,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // other: on the tapped preposition its own pair (sprach mit ihm über das Wetter — on mit «sprechen + mit»), on the verb both pairs
       // when both hold («Verb · mit + Dativ · über + Akkusativ»). Not halten für / von (hielt die Blaufärbung von L. … für …), arbeiten als / an.
       const partnerTopic = (x, y) => /^(?:mit\+über|bei\+für|bei\+über)$/u.test([x,y].sort().join('+'));
-      const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p))));
+      // (A2 (б), 16.11: only a pair that holds blocks — its case agrees and its preposition is not a part of our expression entry: gehört mit
+      // 4,6 Prozent zu den niedrigsten auf dem Kontinent — hören auf + Akk does not hold on «auf dem»; Wer zum Teufel will mit dir sprechen)
+      const otherBlocks = l => links.some(o => o !== l && (o.p === l.p || o.v === l.v && !partnerTopic(prepositionAt(o.p),prepositionAt(l.p))) &&
+        holds.get(o));
       // The checks of one pair; gives its case or null.
       const pairCase = ({v,p,rows}) => {
         if (indices.filter(i => prepositionAt(i) === prepositionAt(p)).length !== 1) return null;
@@ -15773,10 +15784,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return null;
         const cases = [...new Set(rows.map(r => r[2]))];
         if (cases.length !== 1) return null;
-        const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])];
+        const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])] || determinedCase[norm(object[0])];
         if (seen && seen !== cases[0]) return null;
         return cases[0];
       };
+      const inExpression = async p => { try { return !!(await constructionAt(tokens[p][0],{...context,tokenOffset:tokens[p].index})); } catch (_) { return false; } };
+      const holds = new Map();
+      for (const l of links) holds.set(l, !!pairCase(l) && !(await inExpression(l.p)));
       let chosen;
       if (mine.length === 1 && !otherBlocks(mine[0])) chosen = [mine[0]];
       // (on the verb: its two pairs, a partner and a topic, both holding — else nothing, as before)
@@ -15786,6 +15800,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const caseOf = chosen.map(pairCase);
       if (caseOf.some(c => !c)) return;
       const {v,p,verbBase,rows} = chosen[0];
+      // (A2 (б), advisor 16.11 (1): on the preposition, the pair needs the verb word to be read as a verb in its place — not einige
+      // (einigen), meine (meinen), bestimmten (bestimmen) before their nouns)
+      if (isPreposition) {
+        try {
+          const at = await resolveInternal(tokens[v][0],{...context,tokenOffset:tokens[v].index,noVerbPrepositionLink:true});
+          // (a window — bestehen, halten with Halt — has no selected card: a verb among its cards is enough)
+          if (at?.selected ? canonicalPos(at.selected.pos) !== 'Verb' : !(at?.candidates || []).some(c => canonicalPos(c.pos) === 'Verb')) return;
+        } catch (_) { return; }
+      }
       const cases = [caseOf[0]];
       // A confirmed reflexive link names the verb with sich (sich freuen + auf).
       let verbName = rows.length === 1 && !/^sich\s/u.test(norm(rows[0][0])) ? rows[0][0] : verbBase;
