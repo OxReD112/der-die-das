@@ -5,6 +5,9 @@
    Opens when the "Heute" tile on Home is tapped.
    Concept + rules: Documentation/PROGRESS_TRACKER.md · Design: Claude outputs/fortschritt-mockup-v2.html
 
+   16.11.2026: the numbers are counted by components/deutsch-progress-screen-model-v1.js (DeutschProgressScreenModel —
+   no page there, the native app runs it as it is); this file only draws them. Numbers unchanged.
+
    Data (read-only here):
    - deutschProgressV1           current summaries per exercise (written by the exercises)
    - deutschProgressSnapshotsV1  daily snapshots (written by Home, 22-day window)
@@ -15,17 +18,7 @@
 (function(){
   "use strict";
 
-  const PROGRESS_KEY="deutschProgressV1", SNAP_KEY="deutschProgressSnapshotsV1", PROFILE_KEY="deutschProfileV1";
-  const WINDOW_DAYS=21, LIST_MAX=3, MIN_GRAPH_POINTS=4; // graph only once there are 3+ days of history
-  const EX_NAMES={artikel:"Artikel",partizipII:"Partizip II",modalverben:"Modalverben",vielseitigeVerben:"Vielseitige Verben",pronomen:"Pronomen",
-    festerKasus:"Fester Kasus",verbenMitPraepositionen:"Verben mit Präpositionen",ortspraepositionen:"Ortspräpositionen"};
-  const CHAPTERS=[
-    {name:"Artikel",ex:["artikel"]},
-    {name:"Verbformen",ex:["partizipII","modalverben","vielseitigeVerben"]},
-    {name:"Pronomen",ex:["pronomen"]},
-    {name:"Präpositionen",ex:["festerKasus","verbenMitPraepositionen","ortspraepositionen"]}
-  ];
-  const GRAMMAR=CHAPTERS.flatMap(c=>c.ex);
+  const M=window.DeutschProgressScreenModel; // the numbers (components/deutsch-progress-screen-model-v1.js, 16.11)
   const reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- styles ---------- */
@@ -144,68 +137,15 @@
   const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
   const txt=(a,s)=>{const e=el("text",a);e.textContent=s;return e};
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const read=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}};
-  const pct=(s,t)=>t>0?s/t*100:0;
   const round=x=>Math.round(x);
 
-  /* ---------- model ---------- */
-  function buildModel(){
-    const prog=read(PROGRESS_KEY), ex=(prog&&prog.exercises)||{};
-    const snapStore=read(SNAP_KEY), snaps=(snapStore&&snapStore.days)||{};
-    const days=Object.keys(snaps).sort();
-    const today=DeutschDay.key(0), target=DeutschDay.key(WINDOW_DAYS);
-    const older=days.filter(d=>d<=target);
-    const sinceStart=!older.length;
-    const baseDay=sinceStart?null:older[older.length-1];
-    const startDay=sinceStart?(days[0]||today):baseDay;
-
-    // value of one exercise on a given day (last snapshot on or before that day)
-    function snapAt(id,day){
-      for(let i=days.length-1;i>=0;i--){if(days[i]<=day&&snaps[days[i]][id])return snaps[days[i]][id]}
-      return null;
-    }
-    const E={};
-    GRAMMAR.forEach(id=>{
-      const sm=ex[id]&&ex[id].summary;
-      const t=sm&&Number(sm.total)>0?Number(sm.total):0, s=sm?Number(sm.sicher)||0:0;
-      const base=sinceStart?null:snapAt(id,baseDay);
-      const now=pct(s,t), then=base?pct(base.s,base.t):0;
-      // series: one point per day from startDay to today (today = live value)
-      const series=[];
-      if(sinceStart)series.push(0);
-      for(let d=startDay;d<today;d=DeutschDay.add(d,1)){const v=snapAt(id,d);series.push(v?pct(v.s,v.t):0)}
-      series.push(now);
-      E[id]={id,name:EX_NAMES[id],known:t>0,s,t,now,then,series,
-        recent:(sm&&Array.isArray(sm.recent))?sm.recent:[],
-        practice:(sm&&Array.isArray(sm.practice))?sm.practice:[]};
-    });
-    const chapters=CHAPTERS.map(c=>{
-      const list=c.ex.map(id=>E[id]);
-      const avg=f=>list.reduce((a,e)=>a+f(e),0)/list.length;
-      const series=list[0].series.map((_,i)=>avg(e=>e.series[i]??e.now));
-      return {name:c.name,subs:c.ex.length>1?list:null,single:c.ex.length===1?list[0]:null,
-        now:avg(e=>e.now),then:avg(e=>e.then),series,recent:list.flatMap(e=>e.recent),practice:list.flatMap(e=>e.practice)};
-    });
-    // grammar line: Σ sicher ÷ Σ total (weighted), per day
-    function grammarAt(day){let s=0,t=0;GRAMMAR.forEach(id=>{const v=snapAt(id,day);if(v){s+=v.s;t+=v.t}});return pct(s,t)}
-    let ls=0,lt=0;GRAMMAR.forEach(id=>{if(E[id].known){ls+=E[id].s;lt+=E[id].t}});
-    const gNow=pct(ls,lt), gThen=sinceStart?0:grammarAt(baseDay);
-    const gSeries=[];if(sinceStart)gSeries.push(0);
-    for(let d=startDay;d<today;d=DeutschDay.add(d,1))gSeries.push(grammarAt(d));
-    gSeries.push(gNow);
-    const learned=GRAMMAR.reduce((a,id)=>a+E[id].recent.length,0);
-    const ws=ex.wortschatz&&ex.wortschatz.summary;
-    const profile=read(PROFILE_KEY);
-    return {sinceStart,chapters,gNow,gThen,gSeries,learned,
-      words:ws?{total:Number(ws.total)||0,started:Number(ws.started)||0,sitzt:Number(ws.sitzt)||0,learned:Number(ws.learned)||0,
-        collection:typeof ws.collection==="string"?ws.collection.trim().slice(0,40):""}:null,
-      name:profile&&typeof profile.name==="string"?profile.name.trim().slice(0,20):""};
-  }
+  /* ---------- model: components/deutsch-progress-screen-model-v1.js ---------- */
+  function buildModel(){return M.build(M.read(localStorage),DeutschDay.key())}
 
   /* ---------- pieces ---------- */
   function deltaHTML(o,known=true){
     if(!known)return '<span class="pg-d none">noch nicht geübt</span>';
-    const d=round(o.now)-round(o.then);
+    const d=M.delta(o);
     if(d<0)return `<span class="pg-d down">−${-d}%</span>`;
     return `<span class="pg-d${d===0?" none":""}">+${d}%</span>`;
   }
@@ -244,26 +184,25 @@
     return s;
   }
   function change(o){
-    const down=round(o.now)<round(o.then);
+    const down=M.isDown(o);
     return `<div class="pg-change">${round(o.then)}% → <b class="${down?"down":""}">${round(o.now)}%</b></div>`;
   }
   function detail(o,{line=false}={}){
     const d=document.createElement("div");
-    const items=[...o.recent].sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0);
-    const practice=[...o.practice].sort((a,b)=>b.w-a.w||(a.d<b.d?1:a.d>b.d?-1:0));
+    const {learned:items,practice}=M.lists(o);
     if(line)d.insertAdjacentHTML("beforeend",change(o));
-    if(o.series.length>=MIN_GRAPH_POINTS){const g=document.createElement("div");g.className="pg-spark";g.append(spark(o.series));d.append(g)}
+    if(M.hasGraph(o)){const g=document.createElement("div");g.className="pg-spark";g.append(spark(o.series));d.append(g)}
     d.insertAdjacentHTML("beforeend",`<h3 style="margin-top:16px">Neu gelernt</h3>`);
     if(!items.length)d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Noch nichts – das kommt!</div>');
     else{
       const ul=document.createElement("ul");ul.className="pg-items";
-      ul.innerHTML=items.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
+      ul.innerHTML=items.map(l=>`<li>${esc(l)}</li>`).join("");
       d.append(ul);
     }
     d.insertAdjacentHTML("beforeend",'<h3 style="margin-top:16px">Noch üben</h3>');
     if(!practice.length){d.insertAdjacentHTML("beforeend",'<div class="pg-empty">Alles im grünen Bereich!</div>');return d}
     const practiceList=document.createElement("ul");practiceList.className="pg-items";
-    practiceList.innerHTML=practice.slice(0,LIST_MAX).map(r=>`<li>${esc(r.l)}</li>`).join("");
+    practiceList.innerHTML=practice.map(l=>`<li>${esc(l)}</li>`).join("");
     d.append(practiceList);
     return d;
   }
@@ -294,7 +233,9 @@
     hero.append(learned,description);
 
     const details=document.createElement("button");details.type="button";details.className="home-pg-details";
-    details.innerHTML=(wide?"Alle Details":"Alle Details anzeigen")+' <span aria-hidden="true" class="ui-chev"></span>'; // › = the shared .ui-chev (06.11; was →)details.addEventListener("click",open);
+    details.innerHTML=(wide?"Alle Details":"Alle Details anzeigen")+' <span aria-hidden="true" class="ui-chev"></span>'; // › = the shared .ui-chev (06.11; was →)
+    // 16.11: this line had slipped into the comment above on 06.11 — on the wide Home «Alle Details» opened nothing
+    details.addEventListener("click",open);
     box.replaceChildren(heading,hero,details);
   }
 
@@ -337,24 +278,24 @@
     wr.innerHTML=`<div class="pg-top"><span class="pg-n">Wortschatz</span><span class="pg-d">${W&&W.total?wordCounts(W):""}</span></div>${coll}`;
     const tr=document.createElement("div");tr.className="pg-track";tr.innerHTML='<i class="pg-started"></i><i class="pg-sitzt"></i><i class="pg-fill"></i>';wr.append(tr);w.append(wr);
     if(W&&W.total)wr.insertAdjacentHTML("beforeend",'<div class="pg-legend"><span><i style="background:var(--mint)"></i>gelernt</span><span><i style="background:var(--pg-sitzt)"></i>sitzt</span><span><i style="background:var(--pg-started)"></i>angefangen</span></div>');
-    if(W&&W.total){const S=W.started||1,sz=W.sitzt/S*100;
+    if(W&&W.total){const B=M.wordBar(W);
       // segments don't overlap grey: grey = not sitting yet; the layer that reaches the end keeps both corners round
       tr.children[0].classList.toggle("whole",!W.sitzt);tr.children[1].classList.toggle("end",W.sitzt>=W.started);tr.children[2].classList.toggle("end",W.learned>=W.started);
-      const go=()=>{tr.children[0].style.left=sz+"%";tr.children[0].style.width=(W.started?100-sz:0)+"%";
-        setTimeout(()=>tr.children[1].style.width=W.sitzt/S*100+"%",250);setTimeout(()=>tr.children[2].style.width=W.learned/S*100+"%",500)};
+      const go=()=>{tr.children[0].style.left=B.started.left+"%";tr.children[0].style.width=B.started.width+"%";
+        setTimeout(()=>tr.children[1].style.width=B.sitzt+"%",250);setTimeout(()=>tr.children[2].style.width=B.learned+"%",500)};
       reduceMotion?go():requestAnimationFrame(()=>requestAnimationFrame(go))}
     else wr.insertAdjacentHTML("beforeend",'<div class="pg-empty" style="padding:10px 0 0">Öffne Wortschatz einmal – dann erscheint hier dein Fortschritt.</div>');
     // grammar chapters
     const list=v.querySelector(".pg-chapters");
     m.chapters.forEach((c,i)=>{
-      const known=c.subs?c.subs.some(e=>e.known):c.single.known;
+      const known=M.chapterKnown(c);
       const r=document.createElement("button");r.type="button";r.className="pg-row";
       r.innerHTML=`<div class="pg-top"><span class="pg-n">${c.name}</span><span>${deltaHTML(c,known)}<span class="pg-chev ui-chev" aria-hidden="true"></span></span></div>`;
       bar(r,c);r.onclick=()=>go(sc=>chapter(sc,i),"fwd");list.append(r);
     });
   }
   function chapter(v,i){
-    const c=model.chapters[i], down=round(c.now)<round(c.then);
+    const c=model.chapters[i];
     setHead(c.name,()=>go(overview,"back"));
     v.innerHTML=`${change(c)}<div class="pg-card pg-body"></div>`;
     const body=v.querySelector(".pg-body");

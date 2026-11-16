@@ -17,8 +17,8 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261115-ipad-1" />
-    <link rel="stylesheet" href="bookshelf.css?v=20261109-fonts-1" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261116-builtin-3" />
+    <link rel="stylesheet" href="bookshelf.css?v=20261116-builtin-3" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
     <link rel="stylesheet" href="../wortschatz/collection-window.css?v=17" />
@@ -33,16 +33,17 @@
       <section class="library" id="library" aria-label="Your books">
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
         <div class="library-bookshelf" id="library-bookshelf" hidden></div>
+        <!-- 16.11 (Alena): above the list, so our books stand under it; the whole empty book opens the «+» menu -->
+        <div class="empty-library" id="empty-library">
+          <button class="empty-mark" id="empty-mark" type="button" aria-label="Buch hinzufügen"><span class="empty-mark-letters" aria-hidden="true">Aa</span><span class="empty-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <h2 lang="de">Dein Leseraum</h2>
+          <p id="empty-library-text">Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
+        </div>
         <div class="library-edit-bar" id="library-edit-bar" hidden>
           <button class="library-select-all" id="library-select-all" type="button" hidden>Alle auswählen</button>
           <button class="library-edit" id="library-edit" type="button" aria-pressed="false">Bearbeiten</button>
         </div>
         <div class="book-list" id="book-list"></div>
-        <div class="empty-library" id="empty-library">
-          <div class="empty-mark" aria-hidden="true">Aa</div>
-          <h2 lang="de">Dein Leseraum</h2>
-          <p id="empty-library-text">Add a TXT or unencrypted EPUB file, or paste a German text to get started.</p>
-        </div>
         <input id="book-file" type="file" accept=".txt,.epub,text/plain,application/epub+zip" hidden />
       </section>
 
@@ -80,6 +81,7 @@
         <div class="library-add-menu" id="library-add-menu" hidden>
           <button id="add-book" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg><span>Datei hochladen <small>EPUB ohne DRM · TXT</small></span></button>
           <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5h6M9 4.5a1 1 0 0 0-1 1V6h8v-.5a1 1 0 0 0-1-1M8 5.5H6.5A1.5 1.5 0 0 0 5 7v12a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V7a1.5 1.5 0 0 0-1.5-1.5H16M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg><span>Text einfügen <small>Einen deutschen Text einfügen</small></span></button>
+          <button id="builtin-toggle" type="button" aria-haspopup="dialog" aria-controls="builtin-dialog" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v14H6.5A1.5 1.5 0 0 0 5 19.5M5 5.5v14A1.5 1.5 0 0 0 6.5 21H18v-3M9 8h5"/></svg><span>Unsere Bücher <small>Wieder ins Regal stellen</small></span></button>
         </div>
       </div>
 
@@ -179,6 +181,13 @@
                 <button class="primary-action" type="submit">Speichern</button>
               </form>
           </div>
+        </div>
+      </div>
+      <!-- 16.11 (Alena): our books that were «deleted» (hidden) come back from here -->
+      <div class="ui-window builtin-window" id="builtin-dialog" aria-hidden="true">
+        <div class="ui-window-card" role="dialog" aria-modal="true" aria-labelledby="builtin-dialog-title">
+          <div class="ui-window-head"><h2 class="ui-window-title" id="builtin-dialog-title">Unsere Bücher</h2><button class="ui-close" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+          <div class="ui-window-body"><div class="builtin-list" id="builtin-list"></div></div>
         </div>
       </div>
       <div class="ui-window delete-window" id="delete-confirm" aria-hidden="true">
@@ -466,9 +475,9 @@
     <script src="reader/reader-pagination.js?v=20261011-finish-position-1"></script>
     <script src="reader/reader-text-settings.js?v=20261109-fonts-1"></script>
     <script src="reader/pronoun-reference.js?v=20261110-pron-1"></script>
-    <script src="reader/bookshelf.js?v=20261114-newbook-1"></script>
+    <script src="reader/bookshelf.js?v=20261116-builtin-3"></script>
     <script src="../components/deutsch-voice-v1.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261116-wn-stellendat129-1"></script>
-    <div class="version-mark" aria-hidden="true">v67</div>
+    <script src="reader/bibliothek.js?v=20261116-builtin-3"></script>
+    <div class="version-mark" aria-hidden="true">v68</div>
   </body>
 </html>

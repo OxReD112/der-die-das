@@ -126,3 +126,16 @@ body.library-screen .library-bookshelf .book:active:not(:disabled) { transform:n
    iPhone), so the ribbon is drawn inside it. */
 .library-bookshelf .reading-ribbon { border:0; border-radius:0; padding:1px; background:linear-gradient(var(--ribbon),var(--ribbon)) content-box; clip-path:polygon(1px 1px,50% 24%,calc(100% - 1px) 1px,calc(100% - 1px) calc(100% - 1px),1px calc(100% - 1px)); -webkit-backface-visibility:hidden; backface-visibility:hidden; }
 .library-bookshelf .reading-ribbon::after { content:none; }
+
+/* 16.11 (Alena): only our books on the shelf — the empty «Dein Leseraum» book (as in the empty library) stands in the
+   middle; our books are to the left of it. Outline only, «Aa» on the front; its caption is the invitation text. */
+body.library-screen .reader .library-bookshelf .book.is-placeholder { color:color-mix(in srgb,var(--muted) 70%,transparent); }
+.library-bookshelf .book.is-placeholder .front { background:var(--bg); border:1px solid var(--hairline); padding:0; align-items:center; justify-content:center; }
+.library-bookshelf .book.is-placeholder .front::before { left:5px; background:var(--hairline); }
+.library-bookshelf .book.is-placeholder .spine { background:var(--bg); border:1px solid var(--hairline); }
+.library-bookshelf .placeholder-mark { font:400 calc(40px * var(--book-scale) * 1.25)/1 var(--serif); }
+.library-bookshelf.on-placeholder .caption-author,
+.library-bookshelf.on-placeholder .caption-actions { visibility:hidden; }
+.library-bookshelf.on-placeholder .details { max-width:300px; margin-inline:auto; color:var(--muted); font-size:14px; line-height:1.45; }
+.library-bookshelf .book.is-placeholder .front { flex-direction: column; gap: calc(22px * var(--book-scale)); }
+.library-bookshelf .book.is-placeholder .empty-plus { display: grid; width: calc(48px * var(--book-scale)); height: calc(48px * var(--book-scale)); }

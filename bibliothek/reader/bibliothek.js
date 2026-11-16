@@ -123,6 +123,7 @@
     "Meaning selected, but the correction could not be saved.": "Значение выбрано, но сохранить выбор не удалось.",
     "The word form is unavailable. Please reload and try again.": "Форма слова недоступна. Перезагрузите страницу и попробуйте ещё раз.",
     "Vocabulary could not be loaded. Try reopening this word.": "Не удалось загрузить слова. Откройте это слово ещё раз.",
+    "The book could not be loaded. Check your internet connection.": "Не удалось загрузить книгу. Проверьте подключение к интернету.",
     "Could not undo the mark. Please try again.": "Не удалось отменить отметку. Попробуйте ещё раз.",
     "The mark could not be saved. Please try again.": "Не удалось сохранить отметку. Попробуйте ещё раз.",
     "The book could not be saved. Check available browser storage.": "Не удалось сохранить книгу. Проверьте свободное место в браузере.",
@@ -229,6 +230,39 @@
 
   const openDb = () => window.BibliothekVocabulary.openDb();
   let reloadBookId = null;
+  // 16.11 (Alena, D17): our own books stand in the library from the first visit. books/books.json describes them
+  // (title, author, cover, words); the text comes from books/ the first time the book is opened and is then stored
+  // like any book. «Löschen» hides our book (it comes back through «+» → «Unsere Bücher»); «Zurücksetzen» removes the
+  // stored copy too, so the next opening brings our newest text. A book already being read keeps its own text.
+  const BUILTIN_HIDDEN_KEY = "deutschLibraryHiddenBuiltinV1";
+  let builtinCatalog = null;
+  function builtinBooks() {
+    builtinCatalog ??= fetch("books/books.json?v=20261116-builtin-1")
+      .then(response => response.ok ? response.json() : { books: [] })
+      .then(data => Array.isArray(data?.books) ? data.books : [])
+      .catch(() => { builtinCatalog = null; return []; });
+    return builtinCatalog;
+  }
+  function hiddenBuiltins() {
+    try { const value = JSON.parse(localStorage.getItem(BUILTIN_HIDDEN_KEY) || "[]"); return new Set(Array.isArray(value) ? value : []); }
+    catch (_) { return new Set(); }
+  }
+  function setBuiltinHidden(key, hidden) {
+    const keys = hiddenBuiltins();
+    if (hidden) keys.add(key); else keys.delete(key);
+    try { localStorage.setItem(BUILTIN_HIDDEN_KEY, JSON.stringify([...keys])); } catch (_) {}
+  }
+  async function loadBuiltin(entry) {
+    const response = await fetch("books/" + entry.file);
+    if (!response.ok) throw new Error("Built-in book unavailable");
+    const file = new File([await response.blob()], entry.file.replace(/\?.*$/, ""), { type:"application/epub+zip" });
+    const book = await window.BibliothekImport.fromFile(file);
+    book.builtin = entry.builtin;
+    book.createdAt = 0; // stays left on the shelf and last in the list
+    reloadBookId = null;
+    await importBook(book);
+    return book;
+  }
   async function allBooks() {
     const db = await openDb();
     const content = await new Promise((resolve,reject) => {
@@ -237,7 +271,12 @@
     });
     const states=await window.BibliothekReadingData.list(), byId=new Map(content.map(book=>[book.id,book]));
     for(const state of states) byId.set(state.id,{...byId.get(state.id),...state,missingContent:!byId.has(state.id)});
-    return [...byId.values()].sort((a,b)=>(b.createdAt || 0)-(a.createdAt || 0)||String(a.id).localeCompare(String(b.id)));
+    const stored=[...byId.values()], hidden=hiddenBuiltins();
+    for(const entry of await builtinBooks()) {
+      if(hidden.has(entry.builtin)||stored.some(book=>book.builtin===entry.builtin||book.id===entry.id))continue;
+      stored.push({...entry,builtinPending:true,createdAt:0,position:0});
+    }
+    return stored.sort((a,b)=>(b.createdAt || 0)-(a.createdAt || 0)||String(a.id).localeCompare(String(b.id)));
   }
   async function saveBook(book, saveContent = false) {
     book.wordCount ??= (String(book.content || "").match(/[\p{L}\p{M}]+/gu) || []).length;
@@ -299,9 +338,18 @@
   try { const saved=localStorage.getItem('deutschLibraryViewV1');if(saved==='list'||saved==='shelf')libraryView=saved; } catch (_) {}
   let lastOpenedBookId=null;
   try { lastOpenedBookId=localStorage.getItem("deutschLibraryLastOpenedV1"); } catch (_) {}
-  function openLibraryBook(book) {
-    if(book.missingContent){reloadBookId=book.id;$file.click();}
-    else {bookshelf.pause();openBook(book);}
+  let openingBuiltin=false;
+  async function openLibraryBook(book) {
+    const entry=book.builtinPending||book.missingContent
+      ? (await builtinBooks()).find(item=>book.builtinPending?item.builtin===book.builtin:item.id===book.id) : null;
+    if(entry){
+      if(openingBuiltin)return;
+      openingBuiltin=true;
+      try { book=await loadBuiltin(entry); }
+      catch (_) { showToast("The book could not be loaded. Check your internet connection."); return; }
+      finally { openingBuiltin=false; }
+    } else if(book.missingContent){reloadBookId=book.id;$file.click();return;}
+    bookshelf.pause();openBook(book);
   }
   // 08.11 (Alena): one confirm for both actions on one or several books. «Zurücksetzen» clears the reading progress
   // and the marked words of the book (highlights, Meine Wörter, chosen meanings); «Löschen» removes the book with all
@@ -362,9 +410,14 @@
     if(resume)return `Weiterlesen · ${resume.title}`;
     if(started)return 'Weiterlesen';
     const words=Number(book.wordCount||0);
+    if(book.placeholder)return LIBRARY_EMPTY[locale()==='ru'?'ru':'en'];
     return `${words.toLocaleString('de-DE')} ${words===1?'Wort':'Wörter'} · ${String(book.format||'txt').toUpperCase()}`;
   }
-  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onDelete:requestBookDelete,onReset:(book,trigger)=>requestBookAction('reset',[book],trigger),describe:describeLibraryBook,getPreferredId:()=>shelfFocusId||lastOpenedBookId});
+  // 16.11 (Alena): the empty book (shelf and list) opens the same menu as «+»; after this click has finished, so the
+  // «tap outside closes the menu» listener does not close it again at once.
+  function openAddMenu(){setTimeout(()=>{if(addMenu.hidden)addToggle.click();});}
+  $("empty-mark").addEventListener("click",openAddMenu);
+  const bookshelf=window.BibliothekBookshelf.create({root:shelfRoot,onOpen:openLibraryBook,onAdd:openAddMenu,onDelete:requestBookDelete,onReset:(book,trigger)=>requestBookAction('reset',[book],trigger),describe:describeLibraryBook,getPreferredId:()=>shelfFocusId||lastOpenedBookId});
   // 14.11 (Alena): after adding, the shelf turns to the new book and stays on it until a book is opened
   let shelfFocusId=null;
   async function showAddedBook(book) {
@@ -377,6 +430,12 @@
     const addParent=populated?$("library-actions"):$("empty-library");
     if(addToggle.parentElement!==addParent){closeAddMenu();addParent.append(addToggle,addMenu);}
     $library.classList.toggle('is-bookshelf',libraryView==='shelf');
+    // 16.11 (Alena): until the person adds a book of their own, «Dein Leseraum» stays — on the shelf as the empty book
+    // in the middle, in the list as the first row (renderBooks). Then it goes; «+» is in the bottom row as soon as any
+    // book is there. The big empty book (#empty-library) is only for a library with no books at all.
+    const ownBooks=listBooks.some(book=>!book.builtin);
+    $("empty-library").hidden=populated;
+    $library.classList.toggle('has-only-builtin',populated&&!ownBooks);
     if(libraryView==='shelf')$library.scrollTop=0;
     shelfRoot.hidden=!populated||libraryView!=='shelf';$bookList.hidden=libraryView==='shelf';
     viewToggle.hidden=!populated;
@@ -461,17 +520,34 @@
       row.append(check, button);
       $bookList.append(row);
     });
+    // 16.11 (Alena, variant 2): while only our books are there, the list starts with an invitation row the size of a
+    // book row — a small empty book with «+», «Dein Leseraum». The whole row opens the «+» menu.
+    if (books.length && !books.some(book => !book.builtin)) {
+      const row = document.createElement("div");
+      row.className = "book-row library-invite";
+      const button = document.createElement("button");
+      button.className = "book-open library-invite-open";
+      button.type = "button";
+      button.setAttribute("aria-label", "Buch hinzufügen");
+      button.innerHTML = '<span class="book-icon invite-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span class="book-meta"><span class="book-title">Dein Leseraum</span><span class="book-subtitle">Buch oder Text hinzufügen</span></span><span aria-hidden="true"></span>';
+      button.addEventListener("click", openAddMenu);
+      row.append(button);
+      $bookList.prepend(row);
+    }
     listBooks = books;
     for (const id of [...selectedIds]) if (!books.some(book => book.id === id)) selectedIds.delete(id);
     applyLibraryView();
     if(libraryView==='shelf')$library.scrollTop=0;
-    bookshelf.update([...books].reverse());
+    const shelfBooks=[...books].reverse();
+    if(books.length&&!books.some(book=>!book.builtin))shelfBooks.push({id:"library-placeholder",placeholder:true,title:"Dein Leseraum"});
+    bookshelf.update(shelfBooks);
     if(libraryView!=='shelf')bookshelf.pause();
   }
   async function refreshBooks() {
     try {
       const books = await allBooks();
       renderBooks(books);
+      syncBuiltinToggle();
       $("library-status").textContent = "";
     } catch (error) {
       $("library-status").textContent = say("Local book storage is unavailable in this browser.");
@@ -502,7 +578,9 @@
     try {
       const db = await openDb();
       for (const book of books) {
-        if (kind === "reset") {
+        if (book.builtin && kind === "delete") setBuiltinHidden(book.builtin, true);
+        if (book.builtinPending) continue; // nothing stored yet
+        if (kind === "reset" && !book.builtin) {
           // Reading data only: the progress, marked words and chosen meanings go; the book keeps its title and author.
           const clean = { ...book };
           for (const field of window.BibliothekReadingData.fields) delete clean[field];
@@ -1760,6 +1838,36 @@
       showToast(error instanceof window.BibliothekImport.ImportError ? error.message : "The book could not be saved. Check available browser storage.");
     } finally { $file.value = ""; reloadBookId=null; }
   });
+  // 16.11 (Alena): «+» → «Unsere Bücher» — only while one of our books is hidden; a tap puts it back on the shelf as new.
+  async function syncBuiltinToggle() {
+    const hidden=hiddenBuiltins(), catalog=await builtinBooks();
+    $("builtin-toggle").hidden=!catalog.some(entry=>hidden.has(entry.builtin));
+  }
+  $("builtin-toggle").addEventListener("click", async () => {
+    closeAddMenu();
+    const hidden=hiddenBuiltins(), list=$("builtin-list");
+    list.replaceChildren();
+    for (const entry of (await builtinBooks()).filter(item=>hidden.has(item.builtin))) {
+      const row=document.createElement("button");row.type="button";row.className="builtin-row";
+      const cover=document.createElement("img");cover.className="builtin-cover";cover.alt="";cover.src=entry.coverThumbnail||"";
+      const text=document.createElement("span");text.className="builtin-text";
+      const title=document.createElement("b");title.textContent=entry.title;
+      const author=document.createElement("small");author.textContent=entry.author||"";
+      const action=document.createElement("span");action.className="builtin-action";action.textContent="Zurückstellen";
+      text.append(title,author);row.append(cover,text,action);
+      row.addEventListener("click",async()=>{
+        setBuiltinHidden(entry.builtin,false);
+        window.DeutschWindow.close($("builtin-dialog"));
+        await refreshBooks();
+        shelfFocusId=entry.id;bookshelf.focus(entry.id);
+        showToast("Wieder im Regal.");
+      });
+      list.append(row);
+    }
+    window.DeutschWindow.open($("builtin-dialog"));
+    list.querySelector("button")?.focus({preventScroll:true});
+  });
+  $("builtin-dialog").addEventListener("windowclose",()=>addToggle.focus({preventScroll:true}));
   $("paste-toggle").addEventListener("click", () => {
     closeAddMenu();window.DeutschWindow.open(pasteDialog);$("paste-title").focus();
   });

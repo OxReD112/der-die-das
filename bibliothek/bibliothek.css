@@ -3106,3 +3106,34 @@ body.library-screen .reader .library-add-menu button + button::before { content:
   #vocabulary-dialog .vocabulary-availability { font-size: 14px; }
   #vocabulary-dialog .vocabulary-row > p:not(.vocabulary-availability) { font-size: 16px; }
 }
+
+/* 16.11 (Alena): «Unsere Bücher» — our hidden books, a tap puts one back on the shelf. */
+.builtin-window .ui-window-card { width: min(440px, 100%); }
+.builtin-list { display: grid; gap: 4px; }
+body.library-screen .reader .builtin-row { display: flex; align-items: center; gap: 14px; width: 100%; padding: 10px 8px; border: 0; border-radius: 12px; background: transparent; color: var(--text); text-align: left; font: inherit; cursor: pointer; }
+.builtin-row:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.builtin-cover { flex: none; width: 48px; height: 68px; object-fit: cover; border-radius: 2px 4px 4px 2px; }
+.builtin-text { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.builtin-text b { font: 600 16px/1.25 var(--font); }
+.builtin-text small { color: var(--muted); font: 400 14px/1.3 var(--font); }
+.builtin-action { flex: none; color: var(--muted); font: 500 14px/1 var(--font); }
+/* With «Unsere Bücher» the menu of the empty library has three lines: it opens above «+», clear of the bottom row. */
+.empty-library:has(#builtin-toggle:not([hidden])) { position: relative; }
+.empty-library .library-add-menu:has(#builtin-toggle:not([hidden])) { position: absolute; left: 50%; bottom: 100px; margin: 0; transform: translateX(-50%); }
+
+/* 16.11 (Alena): the empty book is a button — a tap anywhere on it opens the «+» menu. While only our books are
+   there, a «+» sits inside it (the «+» under the text of the empty library is then in the bottom row). */
+body.library-screen .reader .empty-mark { grid-auto-flow: row; align-content: center; gap: 18px; padding: 0; background: transparent; color: color-mix(in srgb, var(--muted) 70%, transparent); font: 40px/1 var(--serif); cursor: pointer; }
+.empty-mark:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+.empty-plus { display: none; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--tile-surface); color: var(--text); box-shadow: var(--lift-highlight), var(--lift-shadow); }
+.empty-plus svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; }
+.empty-plus svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.library.has-only-builtin .empty-mark .empty-plus { display: grid; }
+
+/* 16.11 (Alena, variant 2): the list's invitation row — a small empty book with «+» the size of a cover. */
+.book-icon.invite-icon { padding: 0; background: transparent; border: 1px solid var(--hairline); box-shadow: none; color: var(--text); }
+.book-icon.invite-icon::before { left: 4px; width: 1px; border-radius: 0; background: var(--hairline); box-shadow: none; }
+.book-icon.invite-icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; }
+.book-icon.invite-icon svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+.library-invite .book-subtitle { color: var(--muted); }
+html.library-editing .library-invite { display: none; }

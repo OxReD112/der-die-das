@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  window.BibliothekBookshelf={create({root,onOpen,onDelete,onReset=()=>{},describe,getPreferredId=()=>null}) {
+  window.BibliothekBookshelf={create({root,onOpen,onDelete,onReset=()=>{},onAdd=()=>{},describe,getPreferredId=()=>null}) {
     let dispose=()=>{}, selectedId=null, current=[];
     const hash=value=>Array.from(String(value)).reduce((sum,c)=>(Math.imul(sum,31)+c.codePointAt(0))>>>0,0);
     let focusBook=()=>{};
@@ -13,7 +13,11 @@
       const stage=root.querySelector('.shelf-stage');
       const preferred=getPreferredId();
       const preferredIndex=books.findIndex(book=>book.id===preferred);
-      let selected=preferredIndex>=0?preferredIndex:Math.max(0,books.findIndex(book=>book.id===selectedId));
+      // 16.11 (Alena): with only our books the empty «Dein Leseraum» place stands in the middle (the last place,
+      // right of our books) until the person adds a book of their own.
+      const placeholderIndex=books.findIndex(book=>book.placeholder), remembered=books.findIndex(book=>book.id===selectedId);
+      let selected=preferredIndex>=0?preferredIndex:remembered>=0?remembered:Math.max(0,placeholderIndex);
+      const realCount=books.filter(book=>!book.placeholder).length;
       selectedId=books[selected].id;
       const settings={height:root.clientWidth<600?190:250,gap:3,centerGap:root.clientWidth<600?28:56,tilt:0,enlarge:.04,forward:20,duration:520};
       const palette=['#e6e4dc','#3c4140','#d5d4ce','#aab4b6','#565d60'];
@@ -29,7 +33,7 @@
       });
       const mobile=root.clientWidth<600;
       const thicknesses=books.map(b=>Math.round((mobile?28:22)+Math.min(b.wordCount||0,140000)/140000*(mobile?22:28)));
-      const heightFactors=hashes.map(h=>.88+(h%8)*.03);
+      const heightFactors=hashes.map((h,i)=>books[i].placeholder?1:.88+(h%8)*.03);
       const coverRatios=books.map(b=>Number.isFinite(b.coverAspectRatio)&&b.coverAspectRatio>0?b.coverAspectRatio:.68);
       function size(i){
         const standardHeight=settings.height*heightFactors[i],ratio=coverRatios[i];
@@ -43,7 +47,7 @@
       root.append(titleProbe);
       function titleThickness(i){
         const base=Math.round((mobile?28:22)+Math.min(books[i].wordCount||0,140000)/140000*(mobile?22:28));
-        if(!mobile)return base;
+        if(!mobile||books[i].placeholder)return base;
         titleProbe.style.width=Math.max(36,size(i).height-52)+'px';titleProbe.textContent=books[i].title;
         titleProbe.style.font='400 12px/14px Arial';const sans=titleProbe.offsetHeight;
         titleProbe.style.font='400 12px/14px "Literata Deutsch", Georgia';const height=Math.max(sans,titleProbe.offsetHeight);
@@ -57,10 +61,17 @@
           nodes[i].style.setProperty('--half-thickness',thicknesses[i]/2+'px');
         });
       }
-      const leanAngles=hashes.map(h=>h%5===0?-3:h%7===0?2.5:0);
+      const leanAngles=hashes.map((h,i)=>books[i].placeholder?0:h%5===0?-3:h%7===0?2.5:0);
       const closedWidth=i=>thicknesses[i]+size(i).height*Math.abs(Math.sin(leanAngles[i]*Math.PI/180));
       let dragged=false, suppressClickUntil=0;
       const nodes=books.map((b,i)=>{
+        if(b.placeholder){
+          const el=document.createElement('button');el.type='button';el.className='book is-placeholder';el.setAttribute('aria-label',b.title);
+          el.style.setProperty('--thickness',thicknesses[i]+'px');el.style.setProperty('--half-thickness',thicknesses[i]/2+'px');
+          el.innerHTML='<div class="volume"><div class="spine"></div><div class="front"><span class="placeholder-mark" aria-hidden="true">Aa</span><span class="empty-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></div></div>';
+          listen(el,'click',()=>{if(dragged||performance.now()<suppressClickUntil)return;if(i===selected&&motion===null&&settleTimer===null)onAdd();else choose(i);});
+          stage.append(el);return el;
+        }
         const started=!b.completed&&Boolean(b.readingStarted||Number(b.position)>0||Number(b.chapterIndex)>0);
         const el=document.createElement('button');el.type='button';el.className='book';el.setAttribute('aria-label',b.title+(started?', begonnen':''));
         const color=colors[i];
@@ -159,6 +170,7 @@
         node.querySelector('.front').style.visibility=g.weight>.001?'visible':'hidden';
       });
       const book=books[selected];
+      root.classList.toggle('on-placeholder',Boolean(book.placeholder));
       if(root.querySelector('.shelf-title').textContent!==book.title)root.querySelector('.shelf-title').textContent=book.title;
       const captionAuthor=root.querySelector('.caption-author');
       if(captionAuthor.textContent!==(book.author||''))captionAuthor.textContent=book.author||'';
@@ -166,7 +178,7 @@
       const details=describe(book);
       if(root.querySelector('.details').textContent!==details)root.querySelector('.details').textContent=details;
       root.querySelector('.book-delete').setAttribute('aria-label',`„${book.title}“ löschen`);root.querySelector('.book-reset').setAttribute('aria-label',`„${book.title}“ zurücksetzen`);
-      root.querySelector('.count').textContent=(selected+1)+' / '+books.length;root.querySelector('.prev').disabled=selected===0;root.querySelector('.next').disabled=selected===books.length-1;
+      root.querySelector('.count').textContent=book.placeholder?'':(books.slice(0,selected+1).filter(b=>!b.placeholder).length)+' / '+realCount;root.querySelector('.prev').disabled=selected===0;root.querySelector('.next').disabled=selected===books.length-1;
     }
     function choose(index,force=false){
       if(settleTimer!==null){clearTimeout(settleTimer);settleTimer=null;}
@@ -221,7 +233,7 @@
       },160);
     },{passive:false});
 
-      listen(root.querySelector('.shelf-title'),'click',()=>onOpen(books[selected]));
+      listen(root.querySelector('.shelf-title'),'click',()=>books[selected].placeholder?onAdd():onOpen(books[selected]));
       listen(root.querySelector('.book-delete'),'click',e=>onDelete(books[selected],e.currentTarget));listen(root.querySelector('.book-reset'),'click',e=>onReset(books[selected],e.currentTarget));
       function scrub(value) {
         wheelPosition=Math.max(0,Math.min(books.length-1,value));
