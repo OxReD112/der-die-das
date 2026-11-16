@@ -856,3 +856,37 @@ body:has(#game:not(.hidden)) .version-mark {
   }
 }
 
+
+/* ===== A FINISHED CARD THAT DOES NOT FIT (16.11.2026, Alena) =====
+   Small phones (SE) with a long note: the top bar stays at the top, Weiter on the bottom line (77 px above the
+   home indicator, as in every exercise), and only the card with its notes scrolls between them, fading out above
+   Weiter. Set by placeBottom() only when the page would scroll. */
+.app:has(#game.fit-scroll) {
+  overflow-y: hidden;
+}
+.app:has(#game.fit-scroll)::after {
+  display: none;
+}
+#game.fit-scroll {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 77px);
+}
+#game.fit-scroll .top,
+#game.fit-scroll #next {
+  flex: none;
+}
+#game.fit-scroll .game-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0 -18px;
+  padding: 0 18px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+}
+#game.fit-scroll #next {
+  margin-top: 8px;
+}

@@ -190,6 +190,7 @@ const els = {
   ruleNote: document.getElementById("ruleNote"),
   choices: document.getElementById("choices"),
   next: document.getElementById("next"),
+  gameBody: document.getElementById("gameBody"),
   endScore: document.getElementById("endScore"),
   endNote: document.getElementById("endNote"),
   playAgain: document.getElementById("playAgain"),
@@ -287,11 +288,21 @@ const TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
    where the keyboard ends in the typing exercises; the card keeps its place at the top. Never makes the page
    scroll (only room that is free is used). */
 function placeBottom() {
+  els.game.classList.remove("fit-scroll");
+  els.gameBody.scrollTop = 0;
   els.choices.style.marginTop = els.ruleNote.style.marginTop = els.next.style.marginTop = "";
   // when (touch only, not on short screens — there the Spickzettel follows the content): components/deutsch-bottom-v1.js
   const btn = cardDone ? els.next : els.choices,
     holder = cardDone ? (els.ruleNote.textContent.trim() ? els.ruleNote : els.next) : els.choices;
   DeutschBottom.pin(btn, holder); // the shared bottom line (components/deutsch-bottom-v1.js)
+  /* 16.11.2026 (Alena; asked by the native chat): on a small phone (SE) a finished card with a long note does not fit,
+     and Weiter went down under the Spickzettel. Then the top bar and Weiter stay — Weiter on the bottom line like
+     everywhere — and only the card with its notes scrolls between them (soft fade under Weiter). Only where buttons
+     are pinned (touch, not short screens: there the page simply scrolls) and only when it does not fit. */
+  if (cardDone && DeutschBottom.active() && els.app.scrollHeight > els.app.clientHeight + 1) {
+    els.ruleNote.style.marginTop = els.next.style.marginTop = "";
+    els.game.classList.add("fit-scroll");
+  }
 }
 window.addEventListener("resize", () => requestAnimationFrame(placeBottom));
 
@@ -315,7 +326,7 @@ function renderChoices() {
 
 /* ===== ANSWER ===== */
 function answer(form) {
-  if (locked || cardDone) return;
+  if (locked || cardDone || performance.now() < tapsFrom) return;
   const entry = session[index],
     q = QUESTIONS[step],
     right = entry[q.key],
@@ -342,26 +353,41 @@ function answer(form) {
       '<span class="wrong">' + escapeHtml(form) + '</span><span class="right">' + escapeHtml(right) + "</span>";
   }
   pop(slot);
-  els.choices.querySelectorAll("button").forEach(b => (b.disabled = true));
 
-  // Short pause so the result of this line can be seen, then the next line opens.
-  setTimeout(
-    () => {
-      const rows = els.steps.querySelectorAll(".step");
-      rows[step].classList.remove("active");
-      if (step < QUESTIONS.length - 1) {
-        step++;
-        rows[step].classList.remove("pending");
-        rows[step].classList.add("active");
-        renderChoices();
-        placeBottom();
-        locked = false;
-      } else {
-        finishCard();
-      }
-    },
-    correct ? 380 : 700
-  );
+  /* 16.11.2026 (Alena): no frozen pause between the lines — it looked like the app was slow. The highlight moves to
+     the next line at once (its border / opacity fade, 0.2 s). After a right answer the next buttons come at once too;
+     after a wrong one the buttons stay dimmed for 0.4 s, so the correction is seen, then the next buttons fade in.
+     Before: everything stood still 0.38 s (right) / 0.7 s (wrong). A tap in the first 0.25 s after new buttons
+     appear is ignored, so a double tap cannot answer the next line by accident. */
+  const rows = els.steps.querySelectorAll(".step"),
+    last = step === QUESTIONS.length - 1;
+  rows[step].classList.remove("active");
+  if (!last) {
+    rows[step + 1].classList.remove("pending");
+    rows[step + 1].classList.add("active");
+  }
+  const go = () => {
+    if (last) {
+      finishCard();
+      return;
+    }
+    step++;
+    renderChoices();
+    placeBottom();
+    fadeIn(els.choices);
+    tapsFrom = performance.now() + 250;
+    locked = false;
+  };
+  if (correct) go();
+  else {
+    els.choices.querySelectorAll("button").forEach(b => (b.disabled = true));
+    setTimeout(go, 400);
+  }
+}
+let tapsFrom = 0; // taps on the answer buttons count only from this moment (see answer())
+function fadeIn(el) {
+  if (reduceMotion.matches || !el.animate) return;
+  el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: "ease-out" });
 }
 
 function finishCard() {

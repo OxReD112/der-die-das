@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../../components/deutsch-fonts-v1.css?v=1" />
     <script src="../../components/deutsch-fonts-v1.js?v=1"></script>
-    <link rel="stylesheet" href="ortspraepositionen.css?v=36" />
+    <link rel="stylesheet" href="ortspraepositionen.css?v=37" />
   </head>
   <body>
     <main class="app">
@@ -45,6 +45,9 @@
           <div class="glow" aria-hidden="true"></div>
         </header>
 
+        <!-- 16.11.2026: the card and the notes; on a small phone, when the finished card doesn't fit, only this part
+             scrolls — the top bar and Weiter stay (ortspraepositionen.js placeBottom) -->
+        <div class="game-body" id="gameBody">
         <section class="card" id="card">
           <div class="eyebrow" id="eyebrow">&nbsp;</div>
           <div class="place" id="place"></div>
@@ -58,6 +61,7 @@
 
         <section class="choices" id="choices"></section>
         <div class="rule-note" id="ruleNote"></div>
+        </div>
         <button class="hidden ui-quiet" id="next">Weiter</button>
         <div class="in-session-table">
           <button class="table-btn ui-spick" type="button" id="roundTableBtn" data-otable="round" disabled>Spickzettel</button>
@@ -77,7 +81,7 @@
         <h2>Worum geht's?</h2>
         <p class="about-de" id="aboutText"></p>
       </div>
-      <div class="version-mark" aria-hidden="true">v30</div>
+      <div class="version-mark" aria-hidden="true">v31</div>
       <div class="omodal ui-window" id="omodal" aria-hidden="true">
         <div class="osheet ui-window-card" role="dialog" aria-modal="true" aria-label="Wo · Wohin · Woher">
           <div class="ohead ui-window-head">
@@ -97,7 +101,7 @@
     <script src="../../components/deutsch-end-v1.js?v=1"></script>
     <script src="../../components/deutsch-bottom-v1.js?v=2"></script>
     <script src="../../components/deutsch-window-v1.js?v=3"></script>
-    <script src="ortspraepositionen.js?v=12"></script>
+    <script src="ortspraepositionen.js?v=13"></script>
     <script src="../../components/deutsch-wide-v1.js?v=6"></script>
 </body>
 </html>
