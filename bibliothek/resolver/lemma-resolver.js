@@ -41,7 +41,8 @@
     const n = group?.noun, w = String(word || '').normalize('NFC').toLowerCase();
     // (reviewer 27.10: only for a noun-like spelling — a capital and lower-case letters; runden, schüppeln, BESITZEN are no noun taps)
     if (!/^\p{Lu}\p{Ll}/u.test(String(word || ''))) return {};
-    return n ? {...(n.article ? {nounArticle:n.article} : {}),...(n.plural.includes(w) && !n.singular.includes(w) ? {externalPlural:true} : {})} : {};
+    return n ? {...(n.article ? {nounArticle:n.article} : {}),...(n.plural.includes(w) && !n.singular.includes(w) ? {externalPlural:true} : {}),
+      ...(n.plural.includes(w) && n.singular.includes(w) ? {externalPluralAlso:true} : {})} : {};
   };
   // G50 step 3 (advisor 01.11): the class of determiners and pronominal adjectives — words that stand after an article and are
   // declined like an adjective (der andere, die beiden, das viele Geld, die meisten, der eine, die seinigen, das bißchen, die übrigen):
@@ -16480,6 +16481,64 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         return {tense:only};
       }
+      // (09.11 step 2 + To-do 19.10 2.6, as one function since 15.11: also for an external noun, below) the word before the noun group
+      // that goes with a masculine / neuter noun only in the plural — die / keine / meine … / alle (attribute words between), a number above one
+      // or a plural quantifier
+      // (15.11, advisor: the guards — hyphen, article / adverb, year — for every card, one function)
+      const pluralBySign = kind => {
+          // (15.11) not a part of a compound spelled apart — Daumen - Seite, Triple - Osteotomie, Vize - Europameister
+          if (Number.isInteger(context?.tokenOffset) && /^\s*[-‐]/u.test(String(context.sentence || "").slice(context.tokenOffset + String(word).length))) return false;
+          // (advisor 09.11, «Plural» step 2) a masculine / neuter noun after die / keine / meine / deine / seine / ihre / unsere / eure / diese /
+          // jene / alle / welche (attribute words between them allowed): these forms go with a masculine / neuter noun only in the plural
+          // (die Lehrer, keine Fenster, alle alten Wagen); a feminine noun is not touched (keine Frau)
+          if (kind === "determiner" && Number.isInteger(context?.tokenOffset)) {
+            const words = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}]+|[^\p{L}\s]/gu)].map(m => m[0]);
+            let k = words.length - 1, attrs = 0;
+            // (15.11: an article or an adverb in -en / -e is no attribute word — die einen Durchmesser, die inzwischen Klassiker; 16.11 run135:
+            // nor a possessive or a preposition in -er — die über seinen fetten Hintern, die seinem Ranzen verliehen war, die über Weihnachten)
+            while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) && !ARTICLE_WORD.test(norm(words[k])) &&
+              !/^(?:mein|dein|sein|ihr|unser|eu?r)(?:e|en|er|es|em)$|^(?:über|unter|hinter|wider|außer|gegenüber|entweder|oder|aber|sondern)$/u.test(norm(words[k])) &&
+              !/^(?:inzwischen|zusammen|oben|unten|außen|innen|hinten|vorne|morgen|gerne|heute|eben|ebenso|bereits|seitdem|trotzdem|außerdem|später|immer|wieder|daher|ferner|sonst|selten|selber|lange|nie|meistens|manchmal|zuerst|zunächst|einander|allerdings|deswegen|deshalb|stattdessen)$/u.test(norm(words[k])) &&
+              !/^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) { k--; attrs++; }
+            // (tests chat 16.11) the determiner does not decide where the spelling is also a feminine noun (die Leiter «лестница», die Steuer,
+            // die Kiefer «сосна»). (die after a comma is more often a list or an apposition — die Herzöge, die Fürsten; Hotel, die Zimmer —
+            // than a relative pronoun: die Frau, die Lehrer werden wollte keeps «Plural», count 16.11: 7 right against 1)
+            const feminine = (resolution?.candidates || []).some(c => canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === form &&
+              (c.source === "main" ? c.item?.article === "die" : c.nounArticle === "die"));
+            if (k >= 0 && !feminine && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) return true;
+          }
+          // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
+          // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
+          if (kind === "number" && Number.isInteger(context?.tokenOffset)) {
+            const before = String(context.sentence || "").slice(0, context.tokenOffset);
+            const NUMBER_WORD = /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u;
+            let prev = /([\p{L}\d]+)\s+$/u.exec(before)?.[1];
+            // (16.11 run135) viel- / einig- / wenig- in -en before a masculine / neuter noun not in -n, with no article before it, is a singular
+            // accusative / dative (noch einigen Wirbel veranstalten, vielen Dank); a dative plural would end in -n (einigen Wirbeln)
+            if (prev && /^(?:vielen|einigen|wenigen)$/u.test(norm(prev)) && !/n$/u.test(form) &&
+              !/(?:^|[^\p{L}])(?:die|den|der|diese|dieser|diesen|meine|deine|seine|ihre|unsere|eure|meinen|deinen|seinen|ihren|unseren|euren)\s+[\p{L}]+\s+$/iu.test(before)) return false;
+            // (11.11) attribute words between the number and the noun are skipped — 3 verschiedene Zimmer, drei lange Jahre — for a number of
+            // at most three digits or a number word with no singular article before it (not Das 1927 entstandene Gebäude, im Jahr 2018 gegründete)
+            if (!(prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || NUMBER_WORD.test(norm(prev))))) {
+              const m = /(?:^|[^\p{L}\d])([\p{L}]*)\s*([\p{L}\d]+)(?:\s+\p{Ll}{2,}(?:e|en))+\s+$/u.exec(before);
+              if (m && (/^(?:[2-9]|\d{2,3})$/u.test(m[2]) || NUMBER_WORD.test(norm(m[2]))) && !/^(?:der|das|dem|des|die|ein|eine|einem|eines|einer|im|am|vom|zum)$/iu.test(m[1])) prev = m[2];
+            }
+            // (15.11) not a year — von 1953 bis 1954 Staatsminister, wurde 1962 Arbeiter, seit 2002 Bürgermeister — nor the second year of a
+            // span (1974 / 75 Meister); a number 1000–2099 is a count after rund / etwa / mehr als / über / nur / mindestens … or a smaller
+            // number with bis / a dash (nur 2000 Einwohner, mehr als 2000 Menschen, 700 bis 1100 Haushalte, 14-15 Arbeiter)
+            const yearLike = x => /^(?:1\d{3}|20\d\d)$/u.test(x);
+            const span = prev ? /([\p{L}\d]+)\s*(bis|[\/–-])\s*[\p{L}\d]+\s+$/u.exec(before) : null;
+            const counted = prev && (/(?:^|[^\p{L}])(?:rund|etwa|ca|circa|über|unter|nur|mindestens|höchstens|knapp|fast|beinahe|nahezu|annähernd|insgesamt|zusammen|gut|mehr\s+als|weniger\s+als|bis\s+zu)\.?\s+[\d.,]+\s+$/iu.test(before) ||
+              span && /^\d+$/u.test(span[1]) && !yearLike(span[1]));
+            if (prev && /^\d+$/u.test(prev) && !counted && (yearLike(prev) || span && yearLike(span[1]))) return false;
+            if (prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u.test(norm(prev)))) return true;
+          }
+          return false;
+      };
+      // (second resolver chat 15.11, advisor: an external noun whose spelling is a singular and a plural cell — der Inhaber, das Arbeitslager)
+      // «Plural» by the same signs as an own card: die / keine / alle … before a masculine / neuter noun, a number above one, a quantifier
+      if (type === "Nomen" && candidate.source === "fallback" && candidate.externalPluralAlso && !candidate.usage &&
+        (["der","das"].includes(candidate.nounArticle) && pluralBySign("determiner") || pluralBySign("number"))) return {number:"plural"};
       const entry = candidate.source === "main" ? candidate.item : null;
       // (second resolver chat 11.11, advisor: G69 remainder (а)) a noun from an adjective (der / die Erwachsene — a card with declension_forms):
       // the plural by its ending and the word before — -e with no determiner or after a number / quantifier (zwei Bekannte, auf Erwachsene
@@ -16575,30 +16634,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (form === plural && form === word + "s" && (start || capitalOpening || ["der","den","die","keine","alle","meine","deine","seine","ihre","unsere","eure","diese","jene","welche"].includes(det) || prepositions.has(det) && !contractionForms[det])) return {number:"plural"};
           }
         }
-        // (advisor 09.11, «Plural» step 2) a masculine / neuter noun after die / keine / meine / deine / seine / ihre / unsere / eure / diese /
-        // jene / alle / welche (attribute words between them allowed): these forms go with a masculine / neuter noun only in the plural
-        // (die Lehrer, keine Fenster, alle alten Wagen); a feminine noun is not touched (keine Frau)
-        if (plurals.has(form) && ["der","das"].includes(entry.article) && Number.isInteger(context?.tokenOffset)) {
-          const words = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}]+|[^\p{L}\s]/gu)].map(m => m[0]);
-          let k = words.length - 1, attrs = 0;
-          while (k >= 0 && attrs < 3 && /^\p{Ll}{2,}(?:e|en|er|es|em)$/u.test(words[k]) &&
-            !/^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) { k--; attrs++; }
-          if (k >= 0 && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) return {number:"plural"};
-        }
-        // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
-        // after a number above one or a plural quantifier right before it (zwanzig Punkte, viele Punkte).
-        if (plurals.has(form) && Number.isInteger(context?.tokenOffset)) {
-          const before = String(context.sentence || "").slice(0, context.tokenOffset);
-          const NUMBER_WORD = /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u;
-          let prev = /([\p{L}\d]+)\s+$/u.exec(before)?.[1];
-          // (11.11) attribute words between the number and the noun are skipped — 3 verschiedene Zimmer, drei lange Jahre — for a number of
-          // at most three digits or a number word with no singular article before it (not Das 1927 entstandene Gebäude, im Jahr 2018 gegründete)
-          if (!(prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || NUMBER_WORD.test(norm(prev))))) {
-            const m = /(?:^|[^\p{L}\d])([\p{L}]*)\s*([\p{L}\d]+)(?:\s+\p{Ll}{2,}(?:e|en))+\s+$/u.exec(before);
-            if (m && (/^(?:[2-9]|\d{2,3})$/u.test(m[2]) || NUMBER_WORD.test(norm(m[2]))) && !/^(?:der|das|dem|des|die|ein|eine|einem|eines|einer|im|am|vom|zum)$/iu.test(m[1])) prev = m[2];
-          }
-          if (prev && (/^(?:[2-9]|\d{2,})$/u.test(prev) || /^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|viele|vielen|mehrere|mehreren|einige|einigen|wenige|wenigen|beide|beiden)$/u.test(norm(prev)))) return {number:"plural"};
-        }
+        if (plurals.has(form) && ["der","das"].includes(entry.article) && pluralBySign("determiner")) return {number:"plural"};
+        if (plurals.has(form) && pluralBySign("number")) return {number:"plural"};
         return null;
       }
       if (type === "Adjektiv" && entry?.word && !candidate.usage && !candidate.explanation) {
