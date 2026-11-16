@@ -15935,7 +15935,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // die Tageszeit, wünschten ihm viel Glück, wünschte, daß …)
     function wishWuenschte(sentence, start) {
       const words = [...String(sentence || "").matchAll(/[\p{L}\p{M}]+/gu)], at = words.findIndex(m => m.index === start);
-      if (at < 0 || !/^wünscht(?:e|en|est|et)$/u.test(norm(words[at][0])) || !words[at + 1]) return false;
+      // (п. 2, advisor 16.11: ich / wir wollte(n), … — the same wish when the part after the comma has a form that is only
+      // Konjunktiv II: Ich wollte, ich wäre zu Hause; not Ich wollte, dass er kommt; not Ich wollte nach Hause, aber …)
+      const wollte = at >= 0 && /^wollten?$/u.test(norm(words[at][0]));
+      if (at < 0 || !(wollte || /^wünscht(?:e|en|est|et)$/u.test(norm(words[at][0]))) || !words[at + 1]) return false;
       // (books check 08.11: only the speaker's own wish — ich / wir wünschte(n), right before; Harry wünschte, er könnte …, Er wünschte,
       // Ron würde … tell the narrative — Präteritum)
       if (!(at > 0 && /^(?:ich|wir)$/u.test(norm(words[at - 1][0])))) return false;
@@ -15943,12 +15946,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!/^\s*,\s*$/u.test(gap(at, at + 1))) return false;
       const first = words[at + 1][0], f = norm(first);
       if (/^(?:dass|daß|ob|wenn|als|weil|da|damit|wie|was|wo|wer|und|aber|so|der|die|das|den|dem|denen|deren|dessen)$/u.test(f) && !(/^(?:der|die|das|den|dem)$/u.test(f) && words[at + 2] && /^\p{Lu}/u.test(words[at + 2][0]))) return false;
-      const finite = i => words[i] && /^\s+$/u.test(gap(i - 1, i)) && (verbAnalyses.get(norm(words[i][0])) || []).some(r => r.kind === "finite");
+      const finite = i => words[i] && /^\s+$/u.test(gap(i - 1, i)) && (wollte ? (() => { const rows = (verbAnalyses.get(norm(words[i][0])) || []).filter(r => r.kind === "finite");
+        return rows.length > 0 && rows.every(r => r.tense === "Konjunktiv II"); })() : (verbAnalyses.get(norm(words[i][0])) || []).some(r => r.kind === "finite"));
+      // (wollte: the subject may be a pair before its pronoun — Ich wollte, du und ich, wir wären auch dabei gewesen)
+      if (wollte) for (let i = at + 2; i < Math.min(words.length, at + 8); i++) if (subjectPersons[norm(words[i - 1][0])] && finite(i)) return true;
       if (subjectPersons[f] || /^\p{Lu}/u.test(first)) return finite(at + 2);
       if (/^(?:der|die|das|den|dem)$/u.test(f)) return finite(at + 3);
       return false;
     }
-    const NO_WEAK_PAST_LABEL = new Set([...modalLemmas, "möchten", "haben", "sein", "werden"]);
+    // (advisor 16.11: wollte as a full verb — Ich wollte, dass er kommt; wohin er wollte — reads the weak-past check like the modal of п. 2 (в))
+    const NO_WEAK_PAST_LABEL = new Set([...modalLemmas].filter(m => m !== "wollen").concat(["möchten", "haben", "sein", "werden"]));
     // An exclamatory wish (#15, advisor 06.11): in the verb's part wenn, then nur / doch / bloß before the verb, and the part ends
     // with «!» after it (wenn mir's nur gruselte!, Wenn es mir nur gruselte!).
     function wishClause(sentence, start) {
@@ -16246,7 +16253,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (#22 (в) item 4, advisor 08.11: als right before the finite verb is als ob — als hoffte sie, als regneten sie: Konjunktiv II)
           { const sentence = String(context?.sentence || ""), at = sources.get("Präteritum")?.start ?? context?.tokenOffset;
             if (Number.isInteger(at) && !NO_WEAK_PAST_LABEL.has(base) && /(?:^|[^\p{L}])als\s+$/iu.test(sentence.slice(0, at))) return {tense:"Konjunktiv II"};
-            if (Number.isInteger(at) && base === "wünschen" && wishWuenschte(sentence, at)) return {tense:"Konjunktiv II"}; }
+            if (Number.isInteger(at) && ["wünschen","wollen"].includes(base) && wishWuenschte(sentence, at)) return {tense:"Konjunktiv II"}; }
           // (#22 (в) item 5, advisor 08.11, rule 1.5: where a Konjunktiv sign leaves the doubt — a sign in the part, reported speech, the
           // verb opening its part — the double label «Präteritum / Konjunktiv II»; an attributive spelling or a modal stays without a tense)
           const past = weakPastIndicative(base, sources.get("Präteritum")?.start ?? context?.tokenOffset, context);
