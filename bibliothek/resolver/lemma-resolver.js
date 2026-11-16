@@ -15791,8 +15791,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         ? [...new Set((verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached).map(a => base(a.base)))] : [];
       // A reflexive pair of the list (sich entscheiden für) needs a reflexive pronoun in the clause.
       const reflexiveInClause = indices.some(i => reflexivePronouns.has(norm(tokens[i][0])));
-      const pairs = (verbBase, preposition) => list.filter(([verb,prep]) => base(verb) === verbBase && prep === preposition &&
-        (reflexiveInClause || !/^sich\s/u.test(norm(verb))));
+      // (A2 (в), advisor 16.11: an impersonal entry «es handelt sich» goes by its verb — handeln — when es and a reflexive pronoun stand in
+      // the part: Es handelt sich um einen Fehler, … dass es sich um Zauberei handelt; without them handeln um is its own pair, um den Preis handeln)
+      const impersonal = verb => /^es\s+\S+\s+sich$/u.test(norm(verb));
+      const esInClause = indices.some(i => norm(tokens[i][0]) === 'es');
+      // (A2, advisor 16.11: an entry «noun + verb» — Angst haben vor, Lust haben auf, sich Sorgen machen um — goes by its verb when its
+      // noun stands in the same part (and sich for sich Sorgen machen): Er hatte Angst vor dem Hund, Hast du Lust auf Schach; not die Angst
+      // vor einem Namen (no verb), Ich habe Angst. Vor ihm … (another part))
+      const nounEntry = verb => /^(?:sich\s+)?\p{Lu}\p{Ll}+\s+\p{Ll}+$/u.test(verb);
+      const entryNoun = verb => verb.replace(/^sich\s+/u,'').split(/\s+/u)[0];
+      const nounAt = verb => indices.find(i => tokens[i][0] === entryNoun(verb));
+      const entryBase = verb => impersonal(verb)
+        ? ((verbAnalyses.get(norm(verb).split(/\s+/u)[1]) || []).find(a => a.kind === 'finite') || {}).base || norm(verb)
+        : nounEntry(verb) ? norm(verb).split(/\s+/u).pop() : base(verb);
+      const pairs = (verbBase, preposition) => list.filter(([verb,prep]) => entryBase(verb) === verbBase && prep === preposition &&
+        (impersonal(verb) ? esInClause && reflexiveInClause
+          : nounEntry(verb) ? nounAt(verb) !== undefined && (reflexiveInClause || !/^sich\s/u.test(verb))
+          : reflexiveInClause || !/^sich\s/u.test(norm(verb))));
       const links = [];
       // (A2 (б), 16.11: zu right before an infinitive is the infinitive particle — darüber zu sprechen — not the preposition of sprechen zu)
       const zuParticle = p => norm(tokens[p][0]) === 'zu' && tokens[p+1] && /^\p{Ll}/u.test(tokens[p+1][0]) &&
@@ -15873,16 +15888,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       const cases = [caseOf[0]];
       // A confirmed reflexive link names the verb with sich (sich freuen + auf).
-      let verbName = rows.length === 1 && !/^sich\s/u.test(norm(rows[0][0])) ? rows[0][0] : verbBase;
-      if (isPreposition && rows.some(r => /^sich\s/u.test(norm(r[0])))) {
+      // (A2 (в), advisor 16.11: also for a pair written without sich — the verb read as reflexive in its place names the pair with sich:
+      // Er befasst sich mit dem Thema → «sich befassen + mit + Dativ», wandte sich an → «sich wenden + an»; trennte die Äcker von der
+      // Landstraße, an Harry gewandt, geeignet für — no reflexive reading, the name as in the list)
+      const impersonalRow = rows.find(r => impersonal(r[0])), nounRow = rows.find(r => nounEntry(r[0]));
+      let verbName = impersonalRow ? impersonalRow[0] : nounRow ? nounRow[0] : rows.length === 1 && !/^sich\s/u.test(norm(rows[0][0])) ? rows[0][0] : verbBase;
+      if (isPreposition && !impersonalRow && !nounRow) {
         try {
           const linked = await reflexiveCandidates(tokens[v][0],{...context,tokenOffset:tokens[v].index});
           if (linked.some(c => c.construction?.id === 'reflexive-verb' && c.construction.confidence !== 'tentative' && !c.reflexiveUnconfirmed &&
-              base(c.lemma) === verbBase && /^sich\s/u.test(norm(c.lemma)))) verbName = 'sich ' + verbBase;
+              base(c.lemma) === verbBase)) verbName = 'sich ' + verbBase;
         } catch (_) { /* no reflexive evidence */ }
       }
       const span = i => ({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
-      const link = {verb:verbName,preposition:prepositionAt(p),case:cases[0],pattern:`${prepositionAt(p)} + ${cases[0]}`,spans:[v,p].sort((a,b) => a-b).map(span)};
+      const link = {verb:verbName,preposition:prepositionAt(p),case:cases[0],pattern:`${prepositionAt(p)} + ${cases[0]}`,
+        spans:[v,p,...(nounRow ? [nounAt(nounRow[0])] : [])].sort((a,b) => a-b).map(span)};
       // (both pairs on the verb: «mit + Dativ · über + Akkusativ», the verb and both prepositions lit)
       if (chosen.length === 2) Object.assign(link,{pattern:chosen.map((l,n) => `${prepositionAt(l.p)} + ${caseOf[n]}`).join(' · '),
         pairs:chosen.map((l,n) => ({preposition:prepositionAt(l.p),case:caseOf[n]})),spans:[v,...chosen.map(l => l.p)].sort((a,b) => a-b).map(span)});
