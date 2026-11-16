@@ -78,7 +78,7 @@
     });
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261115-wn-satzweitere123-1"),
-      loadJson("worterbuch/german-verbs.json?v=20261115-wn-durchsetzen122-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261116-wn-stellendat129-1"),
       loadJson("worterbuch/german-adjectives.json?v=20261115-wn-satzweitere123-1"),
       loadJson("worterbuch/german-adverbs.json?v=20261114-wn-selber110-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261114-wn-jedoch106-1"),

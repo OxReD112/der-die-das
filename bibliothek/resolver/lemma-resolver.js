@@ -19152,7 +19152,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -19642,6 +19642,52 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // of the verb — treten «пинать», fahren «водить» — only with haben) is the state passive of that card: «(Präteritum ·) состояние mit X»,
     // as the links chat's state group (sein + participle of a haben-only verb) — not a bare «Partizip II». Indicative sein only (not wäre /
     // sei), one sein in the part, no zu before the participle, the variant's card only with haben; the chosen reading is not touched.
+    // (advisor 16.11, known failure sich-stellen-dative-qa) an own reflexive card whose complements tie a meaning to a dative object
+    // (complements[] pattern «Dativ» + meaning_ru — sich stellen «сдаться (полиции)») shows that meaning first when a sure dative group
+    // stands after the reflexive pronoun in the same part: mir / dir / ihm / ihnen; dem / einem / meinem … + noun; der / einer / meiner …
+    // + a noun of an own feminine card (der Polizei — a feminine noun after der is no subject) — not inside a prepositional group, not a
+    // genitive right after a noun. Er stellte sich der Polizei → «сдаться»; Er stellte sich ans Fenster → «встать», as before.
+    async function dativeSenseFirst(word, context, result) {
+      const c = result?.selected;
+      if (!c || c.source !== "main" || canonicalPos(c.pos) !== "Verb" || Number.isInteger(c.senseFirst) || c.construction?.id !== "reflexive-verb") return result;
+      const marks = (c.item?.complements || []).filter(x => x && String(x.pattern || "").trim() === "Dativ" && x.meaning_ru);
+      if (!marks.length) return result;
+      const ru = String(c.item?.translation_ru || "").split(";").map(x => x.trim()).filter(Boolean);
+      // (advisor 16.11: every dative meaning comes first, in the card's order — «сдаться (полиции); принять (вызов), ответить (на вопросы)»;
+      // the meanings are not reordered by frequency, user's decision)
+      const indices = ru.map((m, i) => marks.some(x => String(x.meaning_ru).trim() === m) ? i : -1).filter(i => i >= 0);
+      const index = indices[0];
+      if (!indices.length || indices.every((i, n) => i === n)) return result;
+      const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence,'dativeSenseFirst');
+      const pronoun = c.construction.pronoun, p = tokens.findIndex(t => t.index === pronoun?.start);
+      if (p < 0) return result;
+      const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+      let end = p + 1; while (end < tokens.length && !/[,;:.!?»«„“"()–—]/u.test(gap(end-1, end)) && !/^(?:und|oder|aber|sondern|denn)$/u.test(norm(tokens[end][0]))) end++;
+      const DAT_PRONOUN = /^(?:mir|dir|ihm|ihnen)$/u, DAT_DET = /^(?:dem|einem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|keinem|jedem)$/u;
+      const FEM_DAT_DET = /^(?:der|einer|meiner|deiner|seiner|ihrer|unserer|eurer|dieser|jener|keiner|jeder)$/u;
+      const afterPreposition = k => tokens.slice(Math.max(p + 1, k - 3), k).some(t => prepositions.has(norm(t[0])) || /^(?:am|im|zum|zur|beim|vom|ins|ans|aufs)$/u.test(norm(t[0])));
+      let sure = false;
+      for (let k = p + 1; k < end && !sure; k++) {
+        const t = norm(tokens[k][0]);
+        if (afterPreposition(k)) continue;
+        if (DAT_PRONOUN.test(tokens[k][0])) { sure = true; break; }
+        const genitive = k > 0 && /^\p{Lu}/u.test(tokens[k-1][0]) && k-1 !== p;
+        if (genitive) continue;
+        if (DAT_DET.test(t) || FEM_DAT_DET.test(t)) {
+          let n = k + 1; while (n < end && /^\p{Ll}/u.test(tokens[n][0]) && /(?:e|en)$/u.test(norm(tokens[n][0])) && !DETERMINER_WORD.test(norm(tokens[n][0]))) n++;
+          if (n >= end || !/^\p{Lu}/u.test(tokens[n][0])) continue;
+          if (DAT_DET.test(t)) { sure = true; break; }
+          const own = (forms.get(norm(tokens[n][0])) || []).filter(e => e.type === "Nomen");
+          if (own.length && own.every(e => e.article === "die")) sure = true;
+        }
+      }
+      if (!sure) return result;
+      const en = String(c.item?.translation_en || "").split(";").map(x => x.trim()).filter(Boolean);
+      const selected = {...c, senseFirst:index, sensesFirst:indices, senseFirstEn:en.length === ru.length ? index : 0,
+        ...(en.length === ru.length ? {sensesFirstEn:indices} : {}), senseEvidence:"dative-object"};
+      return {...result, selected, preferred:result.preferred === c ? selected : result.preferred,
+        candidates:(result.candidates || []).map(x => x === c ? selected : x)};
+    }
     async function stateAlternative(word, context, result) {
       if (!result?.candidates?.length || !context || !Number.isInteger(context.tokenOffset)) return result;
       const sel = result.selected;
@@ -19716,6 +19762,28 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const chosen = compares ? weit : weitere;
       return keepDecision(result,{...result,candidates:[chosen,...candidates.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'weitere-card'},
         {outcome:'selected',rule:'weitere-card',reason:compares ? 'comparison' : 'inflected-weiter'});
+    }
+    // (advisor 16.11, known failure weitere-awaited-qa) the bare weiter in the predicate — right after a form of sein / werden / bleiben
+    // (degree words between: viel, noch, etwas, deutlich, sogar, weit, wesentlich) — with als after it is the comparative of weit: Der Weg
+    // ist weiter als gedacht, Das Dorf ist viel weiter als die Stadt. Not als + a capital word without an article (Er ist weiter als Lehrer
+    // tätig — «по-прежнему»), not after another verb (Er arbeitete weiter als Koch), not without als (Er geht weiter).
+    async function weiterComparative(word, context, result) {
+      if (String(word || "") !== "weiter" || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const weit = candidates.find(c => c.source === "main" && norm(c.lemma) === "weit" && /Adjektiv/u.test(canonicalPos(c.item?.type || c.pos)));
+      if (!weit || result.selected === weit || result.selected && !(norm(result.selected.lemma) === "weiter" && /Adverb/u.test(canonicalPos(result.selected.item?.type || result.selected.pos)))) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'weiterComparative');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,word);
+      if (at < 1 || at + 2 >= tokens.length) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      if (/[,;:.!?»«„“"–—()]/u.test(gap(at + 1)) || norm(tokens[at + 1][0]) !== "als") return result;
+      let k = at - 1;
+      while (k >= 0 && /^(?:viel|noch|etwas|deutlich|sogar|weit|wesentlich|bedeutend|erheblich|sehr|schon|jetzt|nun|bereits|inzwischen)$/u.test(norm(tokens[k][0])) && !/[,;:.!?]/u.test(gap(k + 1))) k--;
+      if (k < 0 || /[,;:.!?]/u.test(gap(k + 1)) || !/^(?:bin|bist|ist|sind|seid|war|warst|waren|wart|sei|seien|wäre|wären|wird|wirst|werden|werdet|wurde|wurden|würde|würden|bleibt|bleiben|blieb|blieben|sein|gewesen|geworden|geblieben)$/u.test(norm(tokens[k][0]))) return result;
+      const next = tokens[at + 2][0];
+      if (/^\p{Lu}/u.test(next) && !/^(?:Ich|Du|Er|Sie|Es|Wir|Ihr|Man)$/u.test(next) && !DETERMINER_WORD.test(norm(next))) return result;
+      return keepDecision(result,{...result,candidates:[weit,...candidates.filter(c => c !== weit)],selected:weit,preferred:weit,status:'resolved',evidence:'weiter-comparative'},
+        {outcome:'selected',rule:'weiter-comparative',reason:'predicate-als'});
     }
     // PUD-200 Holden (advisor + user 15.11, as «Name / Nomen» of 09.11): a capitalised word in the middle of the sentence right after a
     // given name (an external record «… given name»), whose readings are only not nouns — an adjective, an adverb, a verb (Gloria Holden,

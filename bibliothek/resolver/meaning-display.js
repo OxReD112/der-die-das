@@ -184,7 +184,11 @@
     // G40 (21.10.2026): a meaning the resolver proved from the sentence (bald darauf → «после этого, потом») comes first.
     // (cheap signs 09.11: the English line may cut its meanings otherwise than the Russian one — danach: senseFirstEn)
     const first = language === 'en' && Number.isInteger(candidate.senseFirstEn) ? candidate.senseFirstEn : candidate.senseFirst;
-    if (Number.isInteger(first)) { const parts = meaningParts(text); if (first < parts.length)
+    // (advisor 16.11, sich stellen + dative: several proved meanings — sensesFirst / sensesFirstEn — come first in the card's order)
+    const several = language === 'en' ? candidate.sensesFirstEn : candidate.sensesFirst;
+    if (Array.isArray(several) && several.length > 1) { const parts = meaningParts(text); if (several.every(i => Number.isInteger(i) && i < parts.length))
+      text = [...several.map(i => parts[i]), ...parts.filter((_, i) => !several.includes(i))].map(p => p.trim()).join('; '); }
+    else if (Number.isInteger(first)) { const parts = meaningParts(text); if (first < parts.length)
       text = [parts[first], ...parts.filter((_, i) => i !== first)].map(p => p.trim()).join('; '); }
     if (language === 'en' && /^gerund of anrufen$/i.test(text.trim())) return 'the act of calling';
     if (language === 'en' && /^gerund of /i.test(text.trim())) return 'verbal noun';

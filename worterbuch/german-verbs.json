@@ -9378,8 +9378,15 @@
       },
       {
         "pattern": "Dativ",
-        "note_ru": "сдаться кому-либо (der Polizei); принять что-либо (einer Herausforderung, den Fragen)",
-        "note_en": "to give oneself up to someone (der Polizei); to face something (einer Herausforderung, den Fragen)"
+        "note_ru": "сдаться кому-либо (der Polizei)",
+        "note_en": "to give oneself up to someone (der Polizei)",
+        "meaning_ru": "сдаться (полиции)"
+      },
+      {
+        "pattern": "Dativ",
+        "note_ru": "принять (вызов), ответить (на вопросы) — einer Herausforderung, den Fragen",
+        "note_en": "to face (a challenge), to answer (questions) — einer Herausforderung, den Fragen",
+        "meaning_ru": "принять (вызов), ответить (на вопросы)"
       },
       {
         "pattern": "gegen + Akkusativ",
