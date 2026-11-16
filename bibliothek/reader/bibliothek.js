@@ -553,6 +553,9 @@
       $("library-status").textContent = say("Local book storage is unavailable in this browser.");
       $("empty-library").hidden = false;
     }
+    // 16.11 (Alena): the first time, the middle of the screen and «+» stay invisible until the books are known (our
+    // books come from books/books.json) — no big empty book or «+» that jumps when the list arrives.
+    $library.classList.remove("is-loading"); addToggle.classList.remove("is-loading");
   }
   // «Abbrechen», ×-less window: a tap beside it and Esc are «Abbrechen» too (as Home's «Notiz löschen?»)
   function closeDeleteConfirm(restoreFocus = true) {

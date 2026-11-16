@@ -3137,3 +3137,6 @@ body.library-screen .reader .empty-mark { grid-auto-flow: row; align-content: ce
 .book-icon.invite-icon svg * { stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
 .library-invite .book-subtitle { color: var(--muted); }
 html.library-editing .library-invite { display: none; }
+
+/* 16.11 (Alena): until the first list of books is ready, the middle and «+» are invisible (no jump on opening). */
+.library.is-loading > *, body.library-screen .reader .library-add-toggle.is-loading { visibility: hidden; }

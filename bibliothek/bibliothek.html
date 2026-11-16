@@ -17,7 +17,7 @@
     <!-- colours (--bg, --text, --muted, --mint, --hairline) live here since home.css v54 (04.11) -->
     <link rel="stylesheet" href="../components/deutsch-base-v1.css?v=7" />
     <link rel="stylesheet" href="../home.css?v=82" />
-    <link rel="stylesheet" href="bibliothek.css?v=20261116-builtin-3" />
+    <link rel="stylesheet" href="bibliothek.css?v=20261116-firstpaint-1" />
     <link rel="stylesheet" href="bookshelf.css?v=20261116-builtin-3" />
     <link rel="stylesheet" href="../components/deutsch-ui-v1.css?v=11" />
     <link rel="stylesheet" href="../components/deutsch-fonts-v1.css?v=1" />
@@ -30,7 +30,7 @@
         <div class="reader-heading"><h1 id="page-title">Bibliothek.</h1></div>
       </header>
 
-      <section class="library" id="library" aria-label="Your books">
+      <section class="library is-loading" id="library" aria-label="Your books">
         <p class="reader-status" id="library-status" role="status" aria-live="polite"></p>
         <div class="library-bookshelf" id="library-bookshelf" hidden></div>
         <!-- 16.11 (Alena): above the list, so our books stand under it; the whole empty book opens the «+» menu -->
@@ -77,7 +77,7 @@
           </svg>
         </button>
         <button class="library-view-toggle" id="library-view-toggle" type="button" aria-label="Switch to list view" hidden>☰</button>
-        <button class="library-add-toggle" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button class="library-add-toggle is-loading" id="library-add-toggle" type="button" aria-label="Add a book" aria-expanded="false" aria-controls="library-add-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
         <div class="library-add-menu" id="library-add-menu" hidden>
           <button id="add-book" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg><span>Datei hochladen <small>EPUB ohne DRM · TXT</small></span></button>
           <button id="paste-toggle" type="button" aria-haspopup="dialog" aria-controls="paste-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5h6M9 4.5a1 1 0 0 0-1 1V6h8v-.5a1 1 0 0 0-1-1M8 5.5H6.5A1.5 1.5 0 0 0 5 7v12a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V7a1.5 1.5 0 0 0-1.5-1.5H16M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg><span>Text einfügen <small>Einen deutschen Text einfügen</small></span></button>
@@ -477,7 +477,7 @@
     <script src="reader/pronoun-reference.js?v=20261110-pron-1"></script>
     <script src="reader/bookshelf.js?v=20261116-builtin-3"></script>
     <script src="../components/deutsch-voice-v1.js?v=1"></script>
-    <script src="reader/bibliothek.js?v=20261116-builtin-3"></script>
-    <div class="version-mark" aria-hidden="true">v68</div>
+    <script src="reader/bibliothek.js?v=20261116-firstpaint-1"></script>
+    <div class="version-mark" aria-hidden="true">v69</div>
   </body>
 </html>
