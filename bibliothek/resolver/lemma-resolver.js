@@ -428,9 +428,10 @@
   const KONJ1_AUXILIARY = new Set(["habe","sei","seien","werde"]);
   // (als sei / als habe … «как будто» — Konjunktiv I, but no reported speech: no hint)
   const konj1AsIf = (tokens, i) => i > 0 && String(tokens[i-1][0]).normalize("NFC").toLowerCase() === "als";
-  function konj1Sign(sentence, tokens, i) {
+  // (anyVerb — A8, advisor 16.11: the caller has checked that the form is the 3rd-person Konjunktiv I of its verb — komme, lerne, stehe)
+  function konj1Sign(sentence, tokens, i, anyVerb = false) {
     const t = tokens?.[i]; sentence = String(sentence || "");
-    if (!t || !KONJ1_AUXILIARY.has(String(t[0]).normalize("NFC").toLowerCase()) || !/^\p{Ll}/u.test(t[0])) return false;
+    if (!t || !anyVerb && !KONJ1_AUXILIARY.has(String(t[0]).normalize("NFC").toLowerCase()) || !/^\p{Ll}/u.test(t[0])) return false;
     // (seien Sie … — the polite imperative, not Konjunktiv I: aber seien Sie versichert)
     if (String(t[0]).normalize("NFC").toLowerCase() === "seien" && tokens[i+1]?.[0] === "Sie") return false;
     // (a dash is a pause, not the end of the part: Ich – hab's euch – gesagt)
@@ -467,6 +468,9 @@
     // noun — Diese Flugzeuge seien … is the noun's case above; diesen / diesem / jenen / jenem are objects)
     const demonstrativeSubject = k => /^(?:dieser|diese|dieses|jener|jene|jenes)$/u.test(low(k)) && !(k - 1 >= a && PREP.test(low(k-1))) &&
       (k + 1 === i || k + 1 <= b && /^\p{Ll}/u.test(tokens[k+1][0]) && !(/(?:e|en|em|er|es)$/u.test(low(k+1)) && /^\p{Lu}/u.test(tokens[k+2]?.[0] ?? "")) || k === b);
+    // (A8, any verb: the verb first in its part — after a comma, a quote or und — is the imperative: hole sie her, und übernachte bei uns,
+    // bürste uns die Schuhe und mache uns die Schnallen fest; only a word before it opens Konjunktiv I: Man nehme, Es lebe, Dudley sehe aus)
+    if (anyVerb && !tokens.slice(c, i).length) return false;
     return part.some(k => /^(?:er|sie|es|man|jemand|niemand|einer|keiner|jeder|wer)$/u.test(low(k)) ||
       (k < i || wordBefore) && demonstrativeSubject(k) ||
       k < i && /^\p{Lu}/u.test(tokens[k][0]) && !startsSentence(k) && subjectNoun(k) ||
@@ -3917,7 +3921,10 @@
     function generalInfinitiveNoun(word, context, candidates) {
       if (!/^[A-ZÄÖÜ][a-zäöüß]/u.test(word) || !context || !Number.isInteger(context.tokenOffset)) return null;
       const base = norm(word);
-      if (candidates.some(c => canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === base)) return null;
+      // A4 (advisor 16.11, Alice): an outside noun of another gender (der Krachen «coombe») does not block where the determiner shows
+      // the neuter singular (das Krachen, ein lautes Krachen) — checked below; our own noun and an outside neuter noun still block
+      const sameNoun = candidates.filter(c => canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === base);
+      if (sameNoun.some(c => c.source === "main" || !["der","die"].includes(c.nounArticle))) return null;
       // An own noun declined like an adjective has this very form (einem Kranken): not an infinitive.
       if (candidates.some(c => c.source === "main" && canonicalPos(c.pos) === "Nomen" && adjectivalNounStem(c.item) &&
         [...["e","en","er","em","es"]].some(ending => norm(adjectivalNounStem(c.item))+ending === base))) return null;
@@ -3929,7 +3936,17 @@
       let d = index-1;
       while (d > 0 && index-d <= 3 && /^[a-zäöüß]/u.test(tokens[d][0]) && joined(d-1,d) &&
         (modifiers.has(norm(tokens[d][0])) || (forms.get(norm(tokens[d][0])) || []).some(e => e.type === "Adjektiv"))) d--;
-      if (!neuterDeterminer(norm(tokens[d][0]))) return null;
+      // A4 (advisor 16.11, Alice: an Durchgehen war nicht zu denken): a bare preposition right before it — vor Lachen, ohne Zögern, nach
+      // Belieben — when no dictionary has a noun reading of this form at all (vor Sorgen, von Bäumen — plurals)
+      const barePreposition = d === index-1 && prepositions.has(norm(tokens[d][0])) && !contractionArticle(norm(tokens[d][0])) &&
+        !candidates.some(c => ["Nomen","name"].includes(canonicalPos(c.pos)));
+      if (!barePreposition && !neuterDeterminer(norm(tokens[d][0]))) return null;
+      if (sameNoun.length) {
+        const dn = contractionArticle(norm(tokens[d][0])) || norm(tokens[d][0]);
+        const strongEs = d < index-1 && /es$/u.test(norm(tokens[index-1][0]));
+        const neuterOnly = dn === "das" || /^(?:dies|jen|jed|all|welch|manch|solch)es$/u.test(dn) || /^(?:ein|kein|mein|dein|sein|ihr|unser|euer|eur)$/u.test(dn) && strongEs;
+        if (!neuterOnly) return null;
+      }
       // C19 (18.10.2026): an own noun with this very form in the singular is no
       // infinitive (dem Jungen, des Jungen — der Junge; in ihrem Herzen — das Herz).
       // Masculine weak nouns take -(e)n in every case but the nominative (n-declension:
@@ -4016,11 +4033,18 @@
       // #20 point 4: -en after a stem in -er / -el written without its e (im Innern — inneren of innere) finds our adjective.
       const elided = !bases.length && /e[rl]n$/u.test(surface) ? surface.slice(0,-1)+"en" : null;
       if (elided) bases = (modifiers.get(elided) || []).filter(r => r.kind === "adjective" && r.entry.type === "Adjektiv").map(r => mainCandidate(r.entry));
+      // (A4, advisor 16.11: two cards of one stem — recht / rechte — are one base: etwas Rechtes; the card without -e first)
+      if (bases.length > 1 && new Set(bases.map(c => norm(c.lemma).replace(/e$/u,""))).size === 1) bases = [...bases].sort((a,b) => /e$/u.test(norm(a.lemma)) - /e$/u.test(norm(b.lemma))).slice(0,1);
       if (!bases.length || new Set(bases.map(c => norm(c.lemma))).size !== 1) return null;
       const base = norm(bases[0].lemma), baseStem = base.endsWith("e") ? base.slice(0,-1) : base;
       if (elided) surface = elided;
+      // A4 (advisor 16.11, Alice): the superlative too — das Höchste, meine Besten, das Beste: the stem of the card's superlative
+      // (am höchsten → höchst, am besten → best) or the regular -st / -est
+      const card = bases.find(c => c.item?.superlative)?.item;
+      const superlativeStems = [card ? norm(card.superlative).replace(/^am\s+/u,"").replace(/en$/u,"") : null, baseStem + "st", baseStem + "est"].filter(Boolean);
       // a base ending in -e drops it before the ending (das Innere, etwas Böses)
-      const ending = ["en","em","er","es","e"].find(e => surface.endsWith(e) && surface.slice(0,-e.length).startsWith(baseStem));
+      const superlative = superlativeStems.find(st => ["en","em","er","es","e"].some(e => surface === st + e));
+      const ending = ["en","em","er","es","e"].find(e => surface.endsWith(e) && (surface.slice(0,-e.length).startsWith(baseStem) || superlative && surface.slice(0,-e.length) === superlative));
       if (!ending) return null;
       const slot = nominalSlot(word,context,'generalAdjectiveNoun',{headModifiers:true});
       if (!slot || slot.separateHead) return null;
@@ -4063,7 +4087,11 @@
         !!ownGender(c) && !genders.has(ownGender(c)) && !genders.has("plural") &&
         // (its plural after a determiner that can be plural stays: die Reiche der Antike)
         !(String(c.item?.plural || "").split(/\s*,\s*/u).map(norm).includes(surface) && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche|solche|manche)$/u.test(determiner));
-      if (others.length && !(opener && others.every(c => outsideHomograph(c) || ownHomograph(c)))) return null;
+      // A4 (advisor 16.11, Alice): after etwas / nichts / viel / wenig … the strong neuter -es is the nominalized adjective, never the
+      // genitive of a bare-stem noun (etwas Rechtes — not des Rechtes of das Recht; nichts Gutes)
+      const markerHomograph = c => NOMINAL_MARKERS.has(determiner) && determiner !== "was" && ending === "es" &&
+        ["Nomen","name"].includes(canonicalPos(c.pos)) && [base,stem0].includes(norm(c.lemma));
+      if (others.length && !(opener && others.every(c => outsideHomograph(c) || ownHomograph(c) || markerHomograph(c)))) return null;
       const {sentence,tokens,index} = slot, next = tokens[index+1];
       // A compound hyphen or any capitalised next word (a head or part of a name:
       // die Neue Zürcher Zeitung) keeps the adjective attributive.
@@ -11995,8 +12023,22 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // not a preposition (empfindlicher gegenüber Ribonukleasen); -en / -e after the comparative stays (immer seltener werdenden)
       const spaced = k => /^\s+$/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index));
       const degree = previous && /^(?:immer|viel|noch|je|desto|umso|um|weit|wesentlich|deutlich|erheblich|etwas|sehr|zu)$/u.test(norm(previous[0]));
-      let k = index + 1;
-      while (!degree && /er$/u.test(norm(word)) && tokens[k] && /^\p{Ll}{2,}er$/u.test(tokens[k][0]) && !prepositions.has(norm(tokens[k][0])) && spaced(k)) k++;
+      // A2 (advisor 16.11, Alice): the attributes may be joined by a comma or und / oder / sowie (mit tiefer, hohler Stimme; O schöner,
+      // goldner Nachmittag; in eiliger und aufgeregter Weise) — the -er before the noun is the strong ending of the positive
+      const joinedAttr = k => spaced(k) || /^\s*,\s*$/u.test(sentence.slice(tokens[k-1].index+tokens[k-1][0].length,tokens[k].index));
+      // (a degree word before it — immer / viel / etwas … — stops only a chain joined by spaces: viel weiter gefasster Begriff; a comma or und
+      // joins two attributes of the noun, never a comparative and its adjective: in etwas eiliger und aufgeregter Weise)
+      // (not a function word in -er: …, aber Hans; …, immer wieder; größer, weiter oben — those end the chain)
+      const attrWord = t => /^\p{Ll}{2,}er$/u.test(t) && !prepositions.has(norm(t)) && !grammaticalWords.has(norm(t)) &&
+        !/^(?:aber|oder|immer|wieder|später|weiter|eher|lieber|bisher|nachher|vorher|daher|woher|nieder|außer|jeder|dieser|jener|einer|keiner|unser|euer|ihrer|seiner|meiner|deiner|welcher|solcher|mancher|aller|beider|anderer|mehrer|weniger|mehr|sicher|wenigstens)$/u.test(norm(t));
+      let k = index + 1, listed = false;
+      for (;;) {
+        if (!/er$/u.test(norm(word)) || !tokens[k]) break;
+        if (["und","oder","sowie"].includes(norm(tokens[k][0])) && spaced(k) && tokens[k+1] && attrWord(tokens[k+1][0]) && spaced(k+1)) { k++; listed = true; continue; }
+        const comma = !spaced(k) && joinedAttr(k);
+        if ((comma || listed ? attrWord(tokens[k][0]) : /^\p{Ll}{2,}er$/u.test(tokens[k][0]) && !prepositions.has(norm(tokens[k][0]))) && joinedAttr(k) && (!degree || comma || listed)) { if (comma) listed = true; k++; continue; }
+        break;
+      }
       if (k > index + 1 && tokens[k] && /^\p{Lu}/u.test(tokens[k][0]) && spaced(k)) return false;
       // 5а.1а (advisor 12.11): a determiner before it opens no noun group when the part ends with a lowercase word right after it
       // (gegen diese entschlossener auf, als … — diese is the object, auf the separated particle)
@@ -15527,6 +15569,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           }
         }
       }
+      // A3 (before participleUsage: the participle name of the adjective, as on the noun-frame path)
+      // A3 (advisor 16.11, Alice): an inflected form right before its noun is the adjective, not the verb (adjectiveFormBeforeNoun)
+      { const found = await adjectiveFormBeforeNoun(word,context,resolution).catch(() => null);
+        if (found) selection.override(resolution,'adjective-form-before-noun',{selected:found.selected,candidates:found.candidates,evidence:'adjective-form-before-noun'}); }
       await participleUsage(word,context,resolution);
       await verbPrepositionLink(word,context,resolution);
       // Noun-phrase facts feed one agreement row. Attaching them to the cards is
@@ -16231,6 +16277,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence, "formFeatures"), at = clickedTokenIndex(tokens, context?.tokenOffset, word);
           if (at >= 0 && konj1Sign(sentence, tokens, at)) return {tense:"Konjunktiv I", ...(konj1AsIf(tokens, at) ? {} : {reportedSpeech:true})};
         }
+        // A8 (advisor 16.11, Alice): any verb — the form stem + e (komme, lerne, stehe, hinauskomme) with its 3rd-person subject in the
+        // part (er, sie, es, man, a noun …; no ich / du / wir) is Konjunktiv I: er komme morgen, wie es stehe, wo man etwas lerne. Not
+        // a modal (its own path), not haben / sein / werden (above), not the 3rd-person Präsens itself.
+        if (!["haben","sein","werden"].includes(base) && !MODAL_STEMS[base] && /^\p{Ll}/u.test(String(word)) && form.length > 3 && /e$/u.test(form) &&
+            !(separableSpans && !forms.some(f => f.form === form))) {
+          const stem = base.replace(/(?<=[lr])n$|e?n$/u, "");
+          const tables = phraseRows(form).filter(r => norm(r.base) === base && r.entry).map(r => formsOf(r.entry));
+          const present3 = tables.map(t => norm(t?.["Präsens"]?.["er/sie/es"] || "")).filter(Boolean);
+          const own = (verbAnalyses.get(form) || []).some(r => r.kind === "finite" && norm(r.base) === base);
+          const ext = (resolution.inflections || []).some(r => canonicalPos(r.pos) === "Verb" && norm(r.lemma).replace(/^sich\s+/u,"") === base && norm(r.form) === form);
+          // (a form that is also our or an outside adjective right before a capital word or a form of sein — lauter vornehme Herren, bessere
+          // Modelle, weil sie bange sind — is not read as Konjunktiv I here)
+          const [prevTok, nextTok, joinedNext] = (() => { const s0 = String(context?.sentence || ""), t0 = sharedTokens(s0, "formFeatures"), a0 = clickedTokenIndex(t0, context?.tokenOffset, word);
+            return a0 >= 0 ? [t0[a0-1]?.[0] ?? null, t0[a0+1]?.[0] ?? null, !!t0[a0+1] && /^\s+$/u.test(s0.slice(t0[a0].index + t0[a0][0].length, t0[a0+1].index))] : [null, null, false]; })();
+          // (and not right before a form of sein in the same part — wozu sie nütze waren; after a comma it is the next clause: …, sei …)
+          const copulaNext = joinedNext && /^(?:ist|sind|war|waren|wäre|wären|bin|bist|seid)$/u.test(norm(nextTok));
+          // (nor after zu — zu buche — or after a preposition before a noun / und — gegen äußere und innere Widersacher)
+          const adjectiveHere = copulaNext || !!prevTok && (norm(prevTok) === "zu" || prepositions.has(norm(prevTok)) && !!nextTok && (/^\p{Lu}/u.test(nextTok) || /^(?:und|oder)$/u.test(norm(nextTok)))) ||
+            (resolution.candidates || []).some(c => /^Adjektiv/u.test(canonicalPos(c.item?.type || c.pos))) && !!nextTok && /^\p{Lu}/u.test(nextTok);
+          if ((own || ext) && !adjectiveHere && (form === stem + "e" || separableSpans && simple && form === simple.replace(/(?<=[lr])n$|e?n$/u, "") + "e") && !present3.includes(form)) {
+            const sentence = String(context?.sentence || ""), tokens = sharedTokens(sentence, "formFeatures"), at = clickedTokenIndex(tokens, context?.tokenOffset, word);
+            if (at >= 0 && konj1Sign(sentence, tokens, at, true)) return {tense:"Konjunktiv I", ...(konj1AsIf(tokens, at) ? {} : {reportedSpeech:true})};
+          }
+        }
         for (const row of resolution.inflections || []) {
           // (#22 (в) item 2, advisor 08.11: a separated verb only the external dictionary knows — faltete … zusammen, wischte … ab —
           // reads the external rows of its simple verb's clicked form: faltete of falten, Präteritum / Konjunktiv II)
@@ -16692,7 +16762,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const is = stems => stems.some(stem => FORM_ENDINGS.some(ending => form === stem + ending));
         // A4: an undeclined comparative that is not a modifier before a noun
         // (Dieses Auto ist schneller., Er läuft schneller als ich) — not ein schneller Zug.
-        if (form === comparative && comparative === positive + "er" && outsideNounGroup(word,context)) return {degree:"Komparativ"};
+        // (A2, advisor 16.11: an adjective in -el / -er drops its e — übel → übler, dunkel → dunkler: the strong positive übler Laune
+        // spells like the comparative, the same check decides)
+        const elided = /[^e](?:el|er)$/u.test(positive) ? positive.slice(0,-2) + positive.slice(-1) : null;
+        if (form === comparative && (comparative === positive + "er" || elided && comparative === elided + "er") && outsideNounGroup(word,context)) return {degree:"Komparativ"};
+        if (elided && form === elided + "er" && comparative === form) return null;
         if (is([positive])) return null;
         if (is([comparative])) return {degree:"Komparativ"};
         if (superlatives.some(stem => FORM_ENDINGS.slice(1).some(ending => form === stem + ending))) return {degree:"Superlativ"};
@@ -17169,6 +17243,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const keys = tokens.map(t => norm(t[0]));
       const same = (a,b) => clause[a] === clause[b];
       const upper = w => /^\p{Lu}/u.test(w);
+      // A11 (advisor 16.11, Alice): Als ob / Als wenn with a capital inside the sentence opens a verse line (… so heimisch dort,
+      // Als ob es Wahrheit wär'.) — the capital is no evidence there; the pair is read as at the start of the sentence.
+      const verseAsIf = j => keys[j] === "als" && ["ob","wenn"].includes(keys[j+1]) && clause[j+1] === clause[j] && /^\p{Ll}/u.test(tokens[j+1]?.[0] ?? "");
       const occurrences = async (part, expression = false) => {
         const out = [];
         // 29.10.2026 (expressions chat; 101 (gerade) dabei sein, etwas zu tun; advisor decision): `zu_infinitive: true` — a part
@@ -17187,7 +17264,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (const {raw, words} of partList(part,"alternatives")) {
           for (let i = 0; i + words.length <= tokens.length; i++) {
             if (!words.every((w,k) => keys[i+k] === w && clause[i+k] === clause[i] &&
-              (upper(raw[k]) === upper(tokens[i+k][0]) || !upper(raw[k]) && opening[i+k]))) continue;
+              (upper(raw[k]) === upper(tokens[i+k][0]) || !upper(raw[k]) && (opening[i+k] || verseAsIf(i+k))))) continue;
             const last = i + words.length - 1;
             // (`clause_start_after`: one of these words may open the clause before the part — Und was hat er für ein Auto?, Mit was für Leuten)
             if (part.clause_start && i > 0 && clause[i-1] === clause[i] && !(part.clause_start_after && partList(part,"clause_start_after").includes(keys[i-1]) &&
@@ -17715,6 +17792,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // is no sign (nichts als warten); the verb is written in lower case.
       if (keys[index] === "als" && index + 1 < tokens.length && clause[index+1] === clause[index] && !upper(tokens[index+1][0])) {
         let rows = verbAnalyses.get(keys[index+1]) || [];
+        // A11 (advisor 16.11, Alice): Konjunktiv I of sein is read as the imperative only (sei) — als sei es ihm bequem
+        if (SEIN_FINITE.konjunktiv1.includes(keys[index+1]) && !rows.some(a => a.kind === "finite")) rows = [...rows.filter(a => a.kind !== "imperative"), {kind:"finite"}];
         // (a verb only in the external dictionary: its past / subjunctive form — als regneten, als fischtet Ihr)
         if (!rows.length && !(forms.get(keys[index+1]) || []).length) {
           try {
@@ -17730,7 +17809,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const next = tokens[index+1], own = forms.get(keys[index+1]) || [];
         if (record && /^\s+$/u.test(String(context?.sentence ?? "").slice(tokens[index].index + tokens[index][0].length, next.index)) &&
             rows.some(a => a.kind === "finite") && !rows.some(a => ["infinitive","participle"].includes(a.kind)) &&
-            !own.some(e => ["Adjektiv","Adverb","Pronomen","article","Nomen","preposition"].includes(e.type)) &&
+            // (A11, advisor 16.11: an own noun card is no other kind here — the word is in lower case: als wolle es — die Wolle)
+            !own.some(e => ["Adjektiv","Adverb","Pronomen","article","preposition"].includes(e.type)) &&
             !(tokens[index+2] && /^\p{Lu}/u.test(tokens[index+2][0]) && (verbAnalyses.get(keys[index+1].replace(/en?$/u,"")) || []).some(a => a.kind === "participle")) &&
             !await (async () => { try { return (await collectMorphology(keys[index+1],{discoverModifiers:true},'constructionAt')).analyses.some(x => ["Adjektiv","Adverb"].includes(canonicalPos(x.pos))); } catch (_) { return false; } })())
           return {entry:record, id:"as-if-als", spans:[span(index), span(index+1)], translation:{ru:"здесь: как будто", en:"here: as if"}};
@@ -19802,10 +19882,56 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return keepDecision(result,{...result,candidates:[chosen,...candidates.filter(c => c !== chosen)],selected:chosen,preferred:chosen,status:'resolved',evidence:'weitere-card'},
         {outcome:'selected',rule:'weitere-card',reason:compares ? 'comparison' : 'inflected-weiter'});
     }
-    // (advisor 16.11, known failure weitere-awaited-qa) the bare weiter in the predicate — right after a form of sein / werden / bleiben
+    // (advisor 16.11, known failure weitere-awaited-qa, now the test weiter-als-qa) the bare weiter in the predicate — right after a form of sein / werden / bleiben
     // (degree words between: viel, noch, etwas, deutlich, sogar, weit, wesentlich) — with als after it is the comparative of weit: Der Weg
     // ist weiter als gedacht, Das Dorf ist viel weiter als die Stadt. Not als + a capital word without an article (Er ist weiter als Lehrer
     // tätig — «по-прежнему»), not after another verb (Er arbeitete weiter als Koch), not without als (Er geht weiter).
+    // A3 (advisor 16.11, Alice): an inflected form right before its noun is the adjective, not the verb — a form in -em never is a
+    // verb form (mit betrübtem Tone, in niedergeschlagenem Tone); a form in -e / -en / -er / -es before a capital word after a determiner,
+    // a preposition or a quantifier (einige welke Blätter), or opening an address that ends at a comma / ! (liebe Schnecke, komm …;
+    // Liebe Anna, …; Wach auf, liebe Alice!). The adjective candidate of the form is taken (any dictionary); without one a form in -em
+    // keeps its verb card, named as the attributive participle. Not: ich liebe Anna (a pronoun before), die Blumen welken schnell.
+    async function adjectiveFormBeforeNoun(word, context, resolution) {
+      const sel = resolution?.selected;
+      if (!sel || sel.construction || sel.usage || canonicalPos(sel.item?.type || sel.pos) !== "Verb" || !context || !Number.isInteger(context.tokenOffset)) return null;
+      const w = String(word || ""), key = norm(w);
+      if (!/(?:e|en|em|er|es)$/u.test(key) || key.length < 4) return null;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'adjectiveFormBeforeNoun');
+      const at = clickedTokenIndex(tokens,context.tokenOffset,w);
+      if (at < 0 || at + 1 >= tokens.length) return null;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const next = tokens[at+1][0];
+      if (!/^\s+$/u.test(gap(at+1)) || !/^\p{Lu}\p{Ll}/u.test(next)) return null;
+      const opening = at === 0 || /[,;:!?»«„“"–—(]\s*$/u.test(gap(at));
+      if (/^\p{Lu}/u.test(w) && !opening) return null;
+      let sign = /em$/u.test(key) ? "em" : null;
+      if (!sign) {
+        const QUANT = /^(?:einige|viele|wenige|mehrere|manche|alle|beide|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|\d+)$/u;
+        const frameWord = t => DETERMINER_WORD.test(t) || QUANT.test(t) || prepositions.has(t) || !!contractionForms[t];
+        let k = at - 1;
+        while (k >= 0 && /^\s+$/u.test(gap(k+1)) && /^\p{Ll}+(?:e|en|em|er|es)$/u.test(tokens[k][0]) && !frameWord(norm(tokens[k][0]))) k--;
+        if (k >= 0 && k < at && /^\s+$/u.test(gap(k+1)) && frameWord(norm(tokens[k][0]))) sign = "frame";
+        // (an address: the part is the form and the noun / name, closed by a comma or !)
+        // (not a verb of saying in the past before its subject — »Das ist Ron«, erklärte Harry, …; Vielleicht, überlegte Harry, …: no -te form)
+        else if (opening && !/te$/u.test(key) && /^\s*[,!]/u.test(sentence.slice(tokens[at+1].index + next.length))) sign = "address";
+      }
+      if (!sign) return null;
+      let candidates = resolution.candidates || [];
+      // (the adjective of the form may be missing from the candidates when no frame was proven — asked from the morphology then)
+      if (!candidates.some(c => /^Adjektiv/u.test(canonicalPos(c.item?.type || c.pos)))) {
+        try { const extra = (await collectMorphology(w,{discoverModifiers:true},'adjectiveFormBeforeNoun')).candidates.filter(c => /^Adjektiv/u.test(canonicalPos(c.item?.type || c.pos)));
+          candidates = [...candidates, ...extra.filter(x => !candidates.some(c => norm(c.lemma) === norm(x.lemma) && c.source === x.source))]; } catch (_) {}
+      }
+      const adjectives = candidates.filter(c => /^Adjektiv/u.test(canonicalPos(c.item?.type || c.pos)) && (() => {
+        const l = norm(String(c.lemma || "")), el = /[^e](?:el|er)$/u.test(l) ? l.slice(0,-2) + l.slice(-1) : null;
+        return [l, el].filter(Boolean).some(st => ["e","en","em","er","es"].some(e => key === st + e));
+      })());
+      if (!adjectives.length) return null;
+      const adj = adjectives.find(c => c.source === "main") || adjectives[0];
+      // (the participle name of the adjective — betrübt, renommiert — is given later by participleCard, as on the noun-frame path)
+      const chosen = adj;
+      return {selected:chosen, candidates:[chosen, ...candidates.filter(c => c !== adj)], sign};
+    }
     async function weiterComparative(word, context, result) {
       if (String(word || "") !== "weiter" || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
       const candidates = result.candidates || [];
