@@ -3813,8 +3813,8 @@
         grammarCache.set(sentence,pending);
         pending.then(()=>{if(lookupFailures!==failures&&grammarCache.get(sentence)===pending)grammarCache.delete(sentence);},()=>{if(grammarCache.get(sentence)===pending)grammarCache.delete(sentence);});
       }
-      const groups=await grammarCache.get(sentence),clicked=clickedTokenIndex(sharedTokens(sentence,'reflexiveCandidates'),context.tokenOffset,word);
-      return groups.filter(c=>clicked===c._pronounIndex||c._lexicalIndices.includes(clicked)).map(({_lexicalIndices,_pronounIndex,...c})=>({...c,translation:{...c.translation},construction:{...c.construction,spans:c.construction.spans.map(s=>({...s}))}}));
+      const rtokens=sharedTokens(sentence,'reflexiveCandidates'),groups=await grammarCache.get(sentence),clicked=clickedTokenIndex(rtokens,context.tokenOffset,word);
+      return groups.filter(c=>(clicked===c._pronounIndex||c._lexicalIndices.includes(clicked))&&!(c._pronounIndex>0&&thankYouAt(sentence,rtokens,c._pronounIndex-1))).map(({_lexicalIndices,_pronounIndex,...c})=>({...c,translation:{...c.translation},construction:{...c.construction,spans:c.construction.spans.map(s=>({...s}))}}));
     }
     // Step 7: substantivation over shared facts. The nominal slot (a word joined
     // to the preceding determiner or marker, and whether a separate noun head
@@ -5478,11 +5478,126 @@
     // seine Zeitung, den Schlafrock — not a time noun) or es / 's, when the subject is sure — a nominative pronoun in the part, a nominal
     // group before the verb, or the shared subject after und / oder / aber. Not a group after a preposition or als / wie, a number or a
     // bare noun (zwei Cousins, TuWe, zornrote Furunkel — may be the subject).
+    const GENITIVE_PLACE_PREPOSITIONS = new Set(["südlich","nördlich","östlich","westlich","oberhalb","unterhalb","innerhalb","außerhalb","jenseits","diesseits","abseits","unweit","inmitten","entlang","längs"]);
     function directAccusativeInPart(c, sentence, tokens) {
       const spans = c.construction?.id === "separable-verb" ? c.construction.spans || [] : [];
       if (spans.length !== 2) return false;
       const v = tokens.findIndex(t => t.index === spans[0].start), j = tokens.findIndex(t => t.index === spans[1].start);
+      return directAccusativeBetween(sentence, tokens, v, j);
+    }
+    // (advisor 16.11, (3) rule B: the object of a reflexive verb — sich then a direct accusative before the end of its part — by the same
+    // count: v the reflexive pronoun, j the end of the part; a group after sich with no sure subject before it is the subject — Südlich
+    // des Ortes erstreckt sich die Talsperre, Mit der … Conference gründete sich … eine Liga — not the object)
+    // (16.11 count: the part ends at a sign or at und / oder / aber / sondern / denn — blickte er sich nach Quirrell um und sah ihn: ihn is the
+    // next clause's; the finite verb right before sich, something before it and no subject pronoun there — the group after sich is the
+    // subject: schlossen sich die Handwerker … zusammen, hält sich die Rennläuferin heraus, konnte sich die Siedlung … ausdehnen; the verb
+    // first in a part after a comma (the subject shared with the part before) — the group after sich is the object: , schnitt sich ein Stück,
+    // , zog sich leichte Verletzungen zu)
+    const SUBORDINATE_OPENERS = /^(?:als|wenn|weil|da|dass|daß|ob|nachdem|bevor|ehe|während|seit|seitdem|sobald|solange|sofern|falls|obwohl|obgleich|damit|bis|indem|wie|wo|wor?(?:an|auf|aus|bei|durch|für|gegen|in|mit|nach|über|um|unter|von|vor|zu)|weshalb|weswegen|warum|wieso|wer|was|der|die|das|dem|den|deren|dessen|welche|welcher|welches)$/u;
+    function reflexiveDirectAccusative(sentence, tokens, pronounStart) {
+      const v = tokens.findIndex(t => t.index === pronounStart);
+      if (v < 0) return false;
+      const gap = (x, y) => sentence.slice(tokens[x].index + tokens[x][0].length, tokens[y].index);
+      const sign = (x, y) => /[,;:.!?()–—»«„“"]/u.test(gap(x, y));
+      const COORD = /^(?:und|oder|aber|sondern|denn)$/u;
+      let j = v + 1;
+      while (j < tokens.length && !sign(j-1, j) && !COORD.test(norm(tokens[j][0]))) j++;
+      // (the finite verb or the subordinator stands right before sich)
+      return directAccusativeBetween(sentence, tokens, v, j, v - 1);
+    }
+    function directAccusativeBetween(sentence, tokens, v, j, f = v) {
       if (v < 0 || j <= v) return false;
+      // (advisor 16.11, (3) — in the common count: the place of the subject. f is the finite verb (a separated verb: v itself; a reflexive
+      // verb: the word right before sich, v the pronoun). The group right after v is the subject when the verb follows a part opening with a
+      // preposition, an adverb or es, opens its sentence or follows a subordinate clause; the object when the verb opens a part after a comma
+      // closing a main clause or an apposition (the subject shared). In a subordinate clause the second group after sich is the object; den /
+      // seinen … + a plural noun in -n is also the dative plural)
+      position: if (f >= 0) {
+        const gap = (x, y) => sentence.slice(tokens[x].index + tokens[x][0].length, tokens[y].index);
+        // (a number with a dot or a dash is no sign: 12.000-15.000 Einwohner)
+        const sign = (x, y) => /[,;:.!?()–—»«„“"]/u.test(gap(x, y).replace(/\d+(?:[.,:\-–]\d+)*\.?/gu, ""));
+        const COORD = /^(?:und|oder|aber|sondern|denn)$/u;
+        let a = Math.min(f, v); while (a > 0 && !sign(a-1, a) && !COORD.test(norm(tokens[a-1][0]))) a--;
+        const w = k => norm(tokens[k]?.[0] ?? "");
+        // (a subordinate clause: sich, then the subject group, then a determiner + noun — dass sich Mrs Figg ein Bein gebrochen hatte: the
+        // second group is the object)
+        // (also after a verb: Als alle saßen, tat sich jeder eine Portion auf — jeder the subject, eine Portion the object)
+        if (f >= a && f === v - 1) {
+          let k = v + 1, seen = false;
+          for (; k < j; k++) {
+            if (!seen && (/^\p{Lu}/u.test(tokens[k][0]) || /^(?:jeder|jede|jedes|man|er|sie|es|wir|ihr|alle|keiner|niemand|jemand)$/u.test(w(k)))) { seen = true; continue; }
+            if (seen && /^(?:den|einen|das|ein|die|eine|seinen|seine|sein|ihren|ihre|ihr|meinen|meine|mein|deinen|deine|dein)$/u.test(w(k))) {
+              let q = k + 1; while (q < j && /^\p{Ll}/u.test(tokens[q][0]) && /(?:e|en|er|es|em)$/u.test(w(q))) q++;
+              if (q < j && /^\p{Lu}/u.test(tokens[q][0]) && (forms.get(w(q)) || []).some(e => e.type === "Nomen") && !prepositions.has(w(k-1))) return true;
+            }
+          }
+        }
+        // (the word at f — the verb, or the word right before sich — is the finite verb: a lowercase word that is no preposition, determiner, pronoun or conjunction — gesellt,
+        // hält; the form may be known to the external dictionary only)
+        // (a subordinator right before sich — da sich ein Vasall … lossagen würde — leaves the verb at the end: no such sign; the verb opening the
+        // sentence is capitalised — Klammern sich die Käferlarven … fest; a capital word right before sich opening the sentence is the verb: a name or
+        // a noun is never followed by sich there)
+        const finiteBefore = f >= a && (/^\p{Ll}/u.test(tokens[f][0]) || f === 0) &&
+          !prepositions.has(w(f)) && !DETERMINER_WORD.test(w(f)) && !SUBORDINATE_OPENERS.test(w(f)) &&
+          !/^(?:ich|du|er|sie|es|wir|ihr|man|und|oder|aber|zu|um|nicht|auch|noch|schon|nur)$/u.test(w(f));
+        // (the group after sich: adverbs first — natürlich auch die Angst —, then a nominative-capable determiner or none, adjectives, a noun)
+        // (a dative pronoun right after the verb leaves the place of the subject to the common count — reichte ihm die Gans hin, run 187)
+        if (/^(?:mir|dir|ihm|ihr|uns|euch|ihnen|Ihnen)$/u.test(w(v+1)) && f === v) break position;
+        let m = v + 1; while (m < j && m < v + 4 && /^\p{Ll}/u.test(tokens[m][0]) && !DETERMINER_WORD.test(w(m)) && !/(?:e|en|er|es|em)$/u.test(w(m)) &&
+          !(verbAnalyses.get(w(m)) || []).length && !prepositions.has(w(m)) && !/^(?:als|wie|zu)$/u.test(w(m))) m++;
+        const nominativeDet = m < j && /^(?:der|die|das|ein|eine|kein|keine|mein|meine|dein|deine|sein|seine|ihr|ihre|unser|unsere|euer|eure|dieser|diese|dieses|jener|jene|jenes|jeder|jede|jedes|alle)$/u.test(w(m));
+        let n = nominativeDet ? m + 1 : m; while (n < j && /^\p{Ll}/u.test(tokens[n][0]) && !DETERMINER_WORD.test(w(n)) && /(?:e|en|er|es|em)$/u.test(w(n))) n++;
+        // (after a determiner any capital word is the noun — Gemeindeareal, Rennläuferin, Käferlarven; without one, a noun of the dictionaries)
+        const group = n < j && /^\p{Lu}/u.test(tokens[n][0]) && (nominativeDet || !DETERMINER_WORD.test(w(m)) && !/^(?:als|wie|zu)$/u.test(w(m)) && (forms.get(w(n)) || []).some(e => e.type === "Nomen"));
+        if (finiteBefore && group) {
+          const pronounSubject = tokens.slice(a, f).some(t => /^(?:ich|du|er|sie|wir|ihr|man)$/u.test(norm(t[0])));
+          // (the part must not open with its own subject: a determiner, a name or a noun first — Mrs Figg hat sich ein Bein gebrochen —; a
+          // preposition, an adverb or es first leaves the subject after sich)
+          const first = tokens[a][0], firstForms = forms.get(w(a)) || [];
+          const subjectFirst = DETERMINER_WORD.test(w(a)) && !/^(?:alle|alles)$/u.test(w(a)) || /^\p{Lu}/u.test(first) && !prepositions.has(w(a)) && w(a) !== "es" &&
+            (!firstForms.length || firstForms.some(e => e.type === "Nomen") && !firstForms.some(e => ["Adverb","Adjektiv","Präposition","Konjunktion"].includes(e.type)));
+          if (f > a && !pronounSubject && !subjectFirst) return false;
+          // (the verb first: in its sentence or after a subordinate clause / a clause opened by a verb — Klammern sich die Käferlarven … fest,
+          // als er … war, hatte sich ein kleiner Mann … verneigt, Sollte sich …, würden sich die Energiekosten … vervielfachen — the group is
+          // the subject; after a comma closing a main clause or an apposition the subject is shared — the group is the object)
+          if (f === a) {
+            // (an imperative opening the sentence keeps its object — Hau die Zehe ab, Hau ein Stück von der Ferse ab: п. 99)
+            if (a === 0 && f === v && (verbAnalyses.get(w(f)) || []).some(x => x.kind === "imperative")) break position;
+            // (after und / oder the subject is shared — Da nahm er das Brot und schnitt sich ein Stück: the group is the object)
+            if (a > 0 && COORD.test(w(a-1)) && w(a-1) !== "denn") return true;
+            if (a === 0 || !/,/u.test(gap(a-1, a))) return false;
+            // (the part before the comma: from the previous comma or sign)
+            let b = a - 1; while (b > 0 && !sign(b-1, b)) b--;
+            const opener = w(b);
+            // (a part opened by a verb — War … prognostiziert, nimmt die Einwohnerzahl … ab — a conditional / question clause first)
+            if (/^\p{Lu}/u.test(tokens[b][0]) && ((verbAnalyses.get(opener) || []).some(x => x.kind === "finite") || (forms.get(opener) || []).some(e => e.type === "Verb"))) return false;
+            // (a subordinate clause before — als, wenn, so wie …: when it opens the sentence or follows words without a verb, it is the first place
+            // of this clause and the group is the subject — So wie die Proteste zunahmen, hat sich die Haltung … verhärtet; Einmal, als er … war,
+            // hatte sich ein kleiner Mann … verneigt; after a whole clause the subject is shared — Er setzte sich, als alle saßen, tat sich Suppe auf)
+            // (a subordinate clause ends with its verb: Bis zum Abend hatte er gewartet is no subordinate clause)
+            const finiteWord = k => /^\p{Ll}/u.test(tokens[k][0]) && (verbAnalyses.get(w(k)) || []).some(x => x.kind === "finite") &&
+              !(verbAnalyses.get(w(k)) || []).some(x => x.kind === "participle");
+            // (an opener that is also a preposition / article — bis, während, seit, da, der … — needs the verb at the end of its part)
+            const sureOpener = /^(?:als|wenn|weil|dass|daß|ob|nachdem|bevor|ehe|sobald|solange|sofern|falls|obwohl|obgleich|indem|weshalb|weswegen|warum|wieso)$/u.test(opener);
+            if ((sureOpener || (SUBORDINATE_OPENERS.test(opener) || opener === "so" && w(b+1) === "wie") && finiteWord(a-1))) {
+              if (b === 0) return false;
+              let c = b - 1; while (c > 0 && !sign(c-1, c)) c--;
+              // (the clause before must be a main clause — Als er sah, dass sie kam, tat sich … die Tür auf: no)
+              const mainBefore = !SUBORDINATE_OPENERS.test(w(c)) && tokens.slice(c, b).some(t => /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(x => x.kind === "finite"));
+              if (!mainBefore) return false;
+            }
+            return true;
+          }
+        }
+        // (den / seinen … + a plural noun in -n right after sich is also the dative plural — sich seinen Feinden entgegenzustellen, sich den
+        // Blicken … zu entziehen: no sure object)
+        // (only after sich — a separated verb keeps the weak noun's accusative: stieß seinen Gesellen an, run 187)
+        if (f !== v && /^(?:den|seinen|meinen|deinen|unseren|euren|ihren|diesen|jenen|keinen)$/u.test(w(v+1))) {
+          let k = v + 2; while (k < j && /^\p{Ll}/u.test(tokens[k][0]) && /(?:e|en|er|es|em)$/u.test(w(k))) k++;
+          if (k < j && /^\p{Lu}/u.test(tokens[k][0]) && /n$/u.test(w(k)) && (lemmas.get(w(k)) || []).every(e => e.type !== "Nomen") &&
+            (forms.get(w(k)) || []).some(e => e.type === "Nomen")) return false;
+        }
+      }
       const gap = (a, b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
       // (a number with a dot or a colon is no mark: Gegen 6.45 Uhr ging ein Notruf ein)
       const mark = (x, y) => /[,;:.!?()–—»«„“"]/u.test(gap(x, y).replace(/\d+(?:[.,:]\d+)*\.?/gu, ""));
@@ -5491,17 +5606,21 @@
       if (/^(?:und|oder|aber|denn|sondern)$/u.test(norm(tokens[a][0]))) a++;
       const word = k => norm(tokens[k][0]);
       // (the word right before the group: mit der Migros, als Letztplatzierte; wie immer seine Zeitung is no comparison)
-      const afterPrep = k => k - 1 > v && (prepositions.has(word(k-1)) || /^(?:als|wie)$/u.test(word(k-1))) && !/[,;:]/u.test(gap(k-1, k));
-      const TIME = /^(?:tag|tage|monat|abend|morgen|mittag|nachmittag|vormittag|sommer|winter|moment|augenblick|mal)$/u;
+      // (advisor 16.11, (3): all between the preposition and the group — nach all den Jahren)
+      const afterPrep = k => k - 1 > v && (prepositions.has(word(k-1)) || /^(?:als|wie)$/u.test(word(k-1)) ||
+        /^(?:all|alle)$/u.test(word(k-1)) && k - 2 > v && prepositions.has(word(k-2))) && !/[,;:]/u.test(gap(k-1, k));
+      const TIME = /^(?:tag|tage|monat|abend|morgen|mittag|nachmittag|vormittag|sommer|winter|moment|augenblick|mal|weile)$/u;
       const DIRECT_DET = /^(?:das|die|den|ein|eine|einen|mein|meine|meinen|dein|deine|deinen|sein|seine|seinen|ihre|ihren|unser|unsere|unseren|euer|eure|euren|dies|diese|dieses|diesen|jene|jenes|jenen|keine|keinen|jede|jedes|jeden|alle)$/u;
       const pronounSubject = tokens.slice(a, j).some((t, n) => /^(?:ich|du|er|sie|wir|man)$/u.test(norm(t[0])) && !afterPrep(a + n));
       // (not inside a prepositional group nor a time noun — Am andern Morgen ging die Jagd von neuem an: die Jagd is the subject)
-      const inGroupOfPrep = k => { let n = k - 1; while (n >= a && /^\p{Ll}/u.test(tokens[n][0]) && !prepositions.has(word(n))) n--; return n >= a && prepositions.has(word(n)); };
+      // (advisor 16.11, (3): a place preposition with the genitive not among our preposition cards — Südlich des Ortes erstreckt sich …)
+      const prep = w => prepositions.has(w) || GENITIVE_PLACE_PREPOSITIONS.has(w);
+      const inGroupOfPrep = k => { let n = k - 1; while (n >= a && /^\p{Ll}/u.test(tokens[n][0]) && !prep(word(n))) n--; return n >= a && prep(word(n)); };
       // (a name after a noun continues its group — Bei der Innenarchitektin Whitney geht … ein Auftrag ein: Whitney is in the group of bei)
       const nameAfterNoun = k => k > a && /^\p{Lu}/u.test(tokens[k-1][0]) && /^\s+$/u.test(gap(k-1, k));
       const groupBefore = tokens.slice(a, v).some((t, n) => /^\p{Lu}/u.test(t[0]) && !inGroupOfPrep(a + n) && !(nameAfterNoun(a + n) && inGroupOfPrep(a + n - 1)) && !TIME.test(norm(t[0])) && !OBJ_TIME.test(norm(t[0])) &&
         !(a + n === a && (forms.get(norm(t[0])) || []).length && !(forms.get(norm(t[0])) || []).some(e => e.type === "Nomen")) &&
-        !/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(norm(t[0])) && !prepositions.has(norm(t[0])));
+        !/^(?:da|dar|wo|wor)(?:an|auf|aus|bei|durch|für|gegen|hinter|in|mit|nach|neben|über|um|unter|von|vor|zu|zwischen)$/u.test(norm(t[0])) && !prep(norm(t[0])));
       // (TODO п. 99, 15.11: an imperative first in its sentence has no subject — Hau ein Stück von der Ferse ab: ein Stück is the object)
       const imperativeFirst = v === a && (v === 0 || /[.!?:»«„“"–—]\s*$/u.test(sentence.slice(0, tokens[v].index))) &&
         (verbAnalyses.get(norm(tokens[v][0])) || []).some(x => x.kind === "imperative") && !/^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(norm(tokens[v+1]?.[0] ?? ""));
@@ -6948,6 +7067,9 @@
             const ext = externalPerfectWords.get(sentence)?.get(norm(tokens[before][0]));
             if (ext && ext.auxiliaries.includes(second)) lexical = [ext];
           }
+          // (advisor 16.11, (4) Г: sein + the participle of a haben-only verb — verwandelt zu sein — is the state, «состояние mit X»)
+          if (!lexical.length && second === "sein") { await warmExternalPerfects(sentence); await warmStateAdjectives(sentence);
+            lexical = stateParticipleRows(sentence,rows,tokens[before][0]); if (lexical.length) kind = "state"; }
         } else if (["können","müssen","dürfen","sollen","wollen","mögen"].includes(second)) {
           lexical = rows.filter(e => norm(e.word) === norm(tokens[before][0]));
           kind = "modal";
@@ -6996,10 +7118,10 @@
         if (kind && lexical.length && new Set(lexical.map(e => norm(e.word).replace(/^sich\s+/u,""))).size === 1) {
           const lemma = String(lexical[0].word).replace(/^sich\s+/u,"");
           const linked = [...(opener !== null ? [opener] : []),...(firstInfinitive !== null ? [firstInfinitive] : []),before,z,v];
-          return {id:'zu-chain',chain:kind,label:kind === "perfect" ? "Perfekt" : kind === "passive" ? "Passiv" : "Modal",lemma,modal:kind === "modal" ? second : null,
+          return {id:'zu-chain',chain:kind,label:kind === "perfect" ? "Perfekt" : kind === "state" ? "Zustand" : kind === "passive" ? "Passiv" : "Modal",lemma,modal:kind === "modal" ? second : null,
             conjunction:conjunction || null,conjunctionWord:conjunction ? norm(conjunction.word) : null,roles:[...lexical,...entries,...(conjunction ? [conjunction] : [])],main:lexical[0],marker:clicked === z,
-            clickedRole:kind === "perfect" && clicked === v ? "auxiliary" : kind === "passive" && clicked === v ? "passive" : null,
-            note:kind === "perfect" ? {ru:'Perfekt · zu + инфинитив',en:'Perfekt · zu + infinitive'} : kind === "passive" ? {ru:'Passiv · zu + инфинитив',en:'Passiv · zu + infinitive'} : {ru:'модальный + zu + инфинитив',en:'modal + zu + infinitive'},
+            clickedRole:(kind === "perfect" || kind === "state") && clicked === v ? "auxiliary" : kind === "passive" && clicked === v ? "passive" : null,
+            note:kind === "perfect" ? {ru:'Perfekt · zu + инфинитив',en:'Perfekt · zu + infinitive'} : kind === "state" ? {ru:'состояние · zu + инфинитив',en:'state · zu + infinitive'} : kind === "passive" ? {ru:'Passiv · zu + инфинитив',en:'Passiv · zu + infinitive'} : {ru:'модальный + zu + инфинитив',en:'modal + zu + infinitive'},
             spans:linked.map(span)};
         }
       }
@@ -8374,11 +8496,39 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!verb.length) continue;
         let auxiliaries = [];
         try { auxiliaries = ((await fallback.perfectAuxiliaries?.(verb[0].word)) || []).map(norm); } catch (_) { auxiliaries = []; }
-        if (auxiliaries.length) found.set(w,{word:verb[0].word,type:"Verb",external:true,auxiliaries});
+        if (auxiliaries.length) found.set(w,{word:verb[0].word,type:"Verb",external:true,auxiliaries,...(await onlyIntransitiveLemma(verb[0].word) ? {intransitiveOnly:true} : {})});
       }
+    }
+    // (advisor 16.11, (4) Г) the forms right before sein / zu sein that the external dictionary has as an adjective (bedeckt, verbreitet):
+    // the state of a modal or zu chain is not taken over them — the window «adjective first» of 05.11
+    const externalAdjectiveForms = new Map();
+    async function warmStateAdjectives(sentence) {
+      if (!sentence || externalAdjectiveForms.has(sentence)) return;
+      const tokens = sharedTokens(sentence,'externalAdjectiveForms'), found = new Set();
+      externalAdjectiveForms.set(sentence,found);
+      if (externalAdjectiveForms.size > 200) externalAdjectiveForms.delete(externalAdjectiveForms.keys().next().value);
+      for (let i = 0; i < tokens.length - 1; i++) {
+        const t = tokens[i][0], next = norm(tokens[i+1][0]);
+        if (!(next === 'sein' || next === 'zu' && norm(tokens[i+2]?.[0] ?? '') === 'sein') || !/^\p{Ll}/u.test(t)) continue;
+        let facts = [];
+        try { facts = await lexicalLookup(t,'externalAdjectiveForms'); } catch (_) { facts = []; }
+        if (facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === "Adjektiv" && norm(g.word) === norm(t))) found.add(norm(t));
+      }
+    }
+    // the participle of a haben-only verb before sein — own card (no adjective card of the form, own or external) or external verb with haben
+    // only: the state passive (advisor 07.11; 16.11 (4) В, Г)
+    function stateParticipleRows(sentence, rows, form) {
+      const w = norm(form);
+      if (adjectivalForm(form) || participleAdjectiveCard(form) || (forms.get(w) || []).some(e => e.type === "Adjektiv") || externalAdjectiveForms.get(sentence)?.has(w)) return [];
+      const own = rows.filter(e => norm(String(e.perfect_form || "").split(/\s+/).pop()) === w && auxiliariesOf(e).includes("haben") && !auxiliariesOf(e).includes("sein"));
+      if (own.length) return new Set(own.map(e => norm(e.word))).size === 1 ? own : [];
+      if (rows.length || (verbAnalyses.get(w) || []).length) return [];
+      const ext = externalPerfectWords.get(sentence)?.get(w);
+      return ext && !ext.intransitiveOnly && ext.auxiliaries.length && !ext.auxiliaries.includes("sein") && ext.auxiliaries.includes("haben") && lemmaOpensParticiple(ext.word,form) ? [ext] : [];
     }
     async function runConstructionProducers(word, context, candidates, producers) {
       await warmExternalPerfects(String(context?.sentence || ''));
+      await warmStateAdjectives(String(context?.sentence || ''));
       await warmExternalParticiples(String(context?.sentence || ''));
       await warmExternalInfinitives(String(context?.sentence || ''));
       for (const producer of producers) {
@@ -9715,8 +9865,15 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             }
             // (twins of one form with the same auxiliary — soll gelobt haben: loben / geloben — one chain for both, advisor 29.10)
             const lexicalTwins = new Set(lexical.map(base)).size > 1 && lexical.every(e => norm(e.word) === base(e));
+            // (advisor 16.11, (4) Г: modal + the participle of a haben-only verb + sein — muss … verwandelt sein, soll … fertiggestellt sein —
+            // is the state, «Modal mit X · состояние», no longer «Modal mit sein»; not with an adjective card of the form, own or external)
+            let modalState = false;
+            if (!lexical.length && auxWord === "sein" && /^\p{Ll}/u.test(tokens[tail-1][0])) {
+              lexical = stateParticipleRows(String(context.sentence || ''),matches(tail-1).filter(e => e.type === "Verb"),tokens[tail-1][0]);
+              modalState = lexical.length > 0;
+            }
             if (auxEntry && lexical.length && (new Set(lexical.map(base)).size === 1 || lexicalTwins)) {
-              main = lexical; id = "modal-perfect-infinitive"; label = "Perfekt"; mainIndex = tail-1;
+              main = lexical; id = "modal-perfect-infinitive"; label = "Perfekt"; mainIndex = tail-1; stateOnly = modalState;
               linked = [head.i,tail-1,tail]; roles = [head.e,...lexical,auxEntry];
             } else if (auxWord === "haben" && matches(tail-1).some(e => clause.participleOf(e,tail-1))) {
               // L17 reviewers (21.10.2026): a participle of two verbs before haben (gehört — hören / gehören) leaves the
@@ -9750,9 +9907,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           } else {
             main = withReflexive(matches(tail),reflexiveRows(tail,"Partizip II")).filter(e => clause.participleOf(e,tail) && auxiliariesOf(e).includes(head.e.word) && wordsBefore(e,tail));
             // (advisor 07.11, item 4: sein + the participle of a verb whose card has only haben — ist repariert, sind … unterstellt — is
-            // the state passive, not Perfekt: the group «состояние» only. Indicative only; not with an own or external adjective card of
+            // the state passive, not Perfekt: the group «состояние» only. (advisor 16.11, (4) Г: Konjunktiv II / I too — verwandelt wäre, seien vernichtet.) Not with an own or external adjective card of
             // the form — the window «adjective first» stays, decision 05.11 — and not with a verb that also has sein: «/ состояние»)
-            if (!main.length && (frontedParticiple === null || frontedState) && head.e.word === "sein" && !context.noStateGroup && !konj1(head.i) && !pastConditional(head.e,head.i) && !adjectivalForm(tokens[tail][0]) &&
+            if (!main.length && (frontedParticiple === null || frontedState) && head.e.word === "sein" && !context.noStateGroup && !adjectivalForm(tokens[tail][0]) &&
                 !participleAdjectiveCard(tokens[tail][0]) && !stateWithObject(head.i,tail) &&
                 // (train s14056: Ist- of a hyphenated compound — Ist-Wert-Anzeigen — is no sein)
                 !/^-/u.test(String(context?.sentence || "").slice(tokens[head.i].index + tokens[head.i][0].length))) {
@@ -9760,7 +9917,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
                 auxiliariesOf(e).includes("haben") && !auxiliariesOf(e).includes("sein"));
               // (one verb only: geboten — bieten / gebieten — stays without a group, Vorsicht ist geboten)
               const bases = new Set((verbAnalyses.get(norm(tokens[tail][0])) || []).filter(a => a.kind === "participle").map(a => norm(a.base)));
-              if (main.length && new Set(main.map(base)).size === 1 && bases.size <= 1) stateOnly = true; else main = [];
+              // (advisor 16.11, (4) Г: in Konjunktiv, und / oder between sei / wäre and the form — dass Gott der Herr sei und alle Völker
+              // bestraft — makes the form the finite verb of the joined clause: no state)
+              const joinedClause = (konj1(head.i) || pastConditional(head.e,head.i)) && head.i < tail && stateJoinedBetween(tokens,head.i,tail);
+              if (main.length && !joinedClause && new Set(main.map(base)).size === 1 && bases.size <= 1) stateOnly = true; else main = [];
             }
             id = "perfect-group"; linked = [head.i,tail]; roles = [head.e,...main];
             // 20.10.2026 (links to-do, reviewers of L18): a form right after zu is a zu-infinitive, not a participle
@@ -9839,7 +9999,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // when only a reflexive card exists (Das hat ihn gefreut: mit freuen).
         const plain = main.find(e => norm(e.word) === base(e));
         const group = {id,label,lemma:sameChain ? [...new Set(main.map(base))].join(" / ") : plain ? plain.word : String(main[0].word).replace(/^sich\s+/u,""),roles,spans:[...linked].sort((a,b)=>a-b).map(clause.span),
-          ...(id === "modal-perfect-infinitive" ? {modal:head.e.word,clickedRole:selected === tail ? "perfectHave" : passive && selected === tail-1 ? "passive" : null,
+          ...(id === "modal-perfect-infinitive" ? {modal:head.e.word,clickedRole:selected === tail ? (stateOnly ? "auxiliary" : "perfectHave") : passive && selected === tail-1 ? "passive" : null,
             // Reference (user decision 20.10): sollen + perfect infinitive «здесь: говорят, будто» (soll … gepredigt haben).
             // Third person only (soll, sollen): du sollst … gelöst haben, bevor … is an obligation (reviewers 21.10).
             // Not with ich / wir / du / ihr nor a deadline (bis morgen, spätestens): Ich soll das Buch bis morgen gelesen haben.
@@ -9873,6 +10033,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // clause, no other possible verb. The participle needs explicit evidence
     // (past participle row or note, or a derived regular weak participle, B3)
     // and the export must list the verb with that auxiliary.
+    // (advisor 16.11, (4) В) the external lemma opens its participle: its first letters (bedecken — bedeckt), ge + its first letter (weihen —
+    // geweiht, sieden — gesotten) or a particle + ge + the rest (abräumen — abgeräumt); a verb in -ieren takes no ge (latinisieren is no
+    // lemma of gelatinisiert)
+    // (und / oder right after sein: its clause is closed — sei und alle Völker bestraft, sei und zudem betont; not a pair of nouns between
+    // them — sind Schulleitung und Verwaltung untergebracht)
+    function stateJoinedBetween(tokens, from, to) {
+      return from+1 < to && ["und","oder"].includes(norm(tokens[from+1][0]));
+    }
+    async function onlyIntransitiveLemma(lemma) {
+      if (!fallback.lookupFacts) return false;
+      let tags = [];
+      try { tags = ((await fallback.lookupFacts(norm(lemma))).groups || []).filter(g => g.pos === "verb" && g.transitivityOf).flatMap(g => Object.values(g.transitivityOf)); } catch (_) { tags = []; }
+      return tags.length > 0 && tags.every(t => t === "intransitive");
+    }
+    function lemmaOpensParticiple(lemma, form) {
+      const l = norm(lemma).replace(/^sich\s+/u,""), f = norm(form);
+      if (/ieren$/u.test(l)) return f.startsWith(l.slice(0,-5));
+      if (f.startsWith(l.slice(0,4)) || f.startsWith("ge" + l[0])) return true;
+      for (let k = 2; k <= Math.min(8, l.length-3); k++) if (f.startsWith(l.slice(0,k) + "ge" + l[k])) return true;
+      return false;
+    }
     async function externalPerfectGroup(word, context) {
       if (!fallback.perfectAuxiliaries) return null;
       const clause = verbalClause(word,context,'externalPerfectGroup',clauseBoundaries.verbGroup);
@@ -9905,7 +10086,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // #29 (books 05.11): a verb of the Russian dictionary alone has no auxiliary rows; haben + its participle closing the clause is its
         // Perfekt (als er die Löwen gesänftigt hatte, hatte sich … angeknackst) — sein is left alone (a state: eingraviert waren).
         if (!auxiliaries.length && head.e.word === "haben" && facts.some(g => !g.kind && g.russianOnly && norm(g.word) === lemma)) auxiliaries = ["haben"];
-        if (!auxiliaries.includes(head.e.word)) continue;
+        // (advisor 16.11, (4) В: sein + the participle of an external verb the export forms with haben only is the state passive — the rule
+        // of 07.11 for own haben-only verbs, the same group «состояние mit X»: bedeckt waren, ausgeblasen ist, mit Herzen geschmückt. Not with an
+        // own adjective card or an external one of the form — the window «adjective first» (05.11) stays, bedeckt waren as before. The lemma must open
+        // the form — gelatinisiert is no form of latinisieren)
+        const stateOnly = head.e.word === "sein" && auxiliaries.length > 0 && !auxiliaries.includes("sein") && auxiliaries.includes("haben") &&
+          !participleAdjectiveCard(form) && !(forms.get(norm(form)) || []).some(e => e.type === "Adjektiv") &&
+          !facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === "Adjektiv" && norm(g.word) === norm(form)) && lemmaOpensParticiple(lemma,form);
+        if (!auxiliaries.includes(head.e.word) && !stateOnly) continue;
+        // (the new state: not with und / oder right after sein — sei und zudem betont —, nor for a verb the Kaikki tags mark only intransitive —
+        // flattern, zerschellen: the auxiliary rows of the export miss their sein, advisor 15.11)
+        if (stateOnly && (head.i < tail && stateJoinedBetween(tokens,head.i,tail) || await onlyIntransitiveLemma(lemma))) continue;
         if (norm(tokens[tail-1]?.[0] ?? "") === "zu") continue;
         if (head.e.word === "sein" && adjectiveSign(String(context.sentence || ""),tokens,tail,start,end)) continue;
         if (pastConditional(head.e,head.i) && conditionalGuard(tokens,tail,start,end,indices,head)) continue;
@@ -9917,11 +10108,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // verb that the export also forms with haben is a state, not Perfekt
         // (völlig verdreckt, stark verwittert, stark abgetreten).
         const degree = ["völlig","stark","sehr","total","ganz","gänzlich","vollkommen","vollständig","ziemlich","äußerst","leicht","extrem"];
-        if (head.e.word === "sein" && auxiliaries.includes("haben") && tail-1 > start && degree.includes(norm(tokens[tail-1][0]))) continue;
+        if (!stateOnly && head.e.word === "sein" && auxiliaries.includes("haben") && tail-1 > start && degree.includes(norm(tokens[tail-1][0]))) continue;
         groups.push({id:"perfect-group",label:konj1(head.e,head.i) ? "Konjunktiv I" : pastConditional(head.e,head.i) ? "Konjunktiv II" : finiteTenses(head.e,head.i).includes("Präteritum") ? "Plusquamperfekt" : "Perfekt",
           lemma,roles:[head.e,{word:lemma,type:"Verb"}],spans:[head.i,tail].sort((a,b)=>a-b).map(clause.span),
           // G2 addition (reference 19.10): haben and sein both listed — Perfekt or state.
-          ...(head.e.word === "sein" && auxiliaries.includes("haben") ? {state:true} : {})});
+          ...(stateOnly ? {stateOnly:true} : head.e.word === "sein" && auxiliaries.includes("haben") ? {state:true} : {})});
       }
       return groups.length === 1 ? groups[0] : null;
     }
@@ -15919,7 +16110,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (tests chat 16.11: Bitte / Danke + a pronoun of the third person is the imperative — Bitte ihn um Hilfe!, Danke ihm für alles!;
       // Danke dir / euch / Ihnen für … is the «thank you»)
       const imperativeObject = i => tokens[i+1] && (tokens[i][0] === 'Danke' ? /^(?:ihm|ihr|ihnen)$/u : /^(?:ihn|sie|es|ihm|ihr|ihnen)$/u).test(tokens[i+1][0]);
-      const verbBasesAt = i => ['Danke','Bitte'].includes(tokens[i][0]) && i === clause.start && !ichInClause && !imperativeObject(i) ? [] : /^\p{Ll}/u.test(tokens[i][0]) || i === clause.start
+      const verbBasesAt = i => ['Danke','Bitte'].includes(tokens[i][0]) && i === clause.start && !ichInClause && !imperativeObject(i) &&
+        !bitteUmAt(String(context.sentence || ""), sharedTokens(String(context.sentence || ""),'verbPrepositionLink'), tokens[i].wi ?? sharedTokens(String(context.sentence || ""),'verbPrepositionLink').findIndex(t => t.index === tokens[i].index)) ? [] : /^\p{Ll}/u.test(tokens[i][0]) || i === clause.start
         ? [...new Set((verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached).map(a => base(a.base)))] : [];
       // A reflexive pair of the list (sich entscheiden für) needs a reflexive pronoun in the clause.
       const reflexiveInClause = indices.some(i => reflexivePronouns.has(norm(tokens[i][0])));
@@ -16009,6 +16201,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const caseOf = chosen.map(pairCase);
       if (caseOf.some(c => !c)) return;
       const {v,p,verbBase,rows} = chosen[0];
+      // (advisor 16.11, Alice P657: a verb of the author's words right after direct speech takes no von / über of the speech — its
+      // content is in the quotes: »…«, sprach ein fetter Lachs vom Rhein; er sprach von seiner Reise keeps its pair)
+      // (the quote must close speech: a comma after it, or the speech's own end sign before it — not a quoted name: über das der
+      // „Spiegel“ berichtet keeps berichten über)
+      if (["von","über"].includes(prepositionAt(p)) && speechTagAt(String(context.sentence || ""), tokens[v].index) &&
+          /(?:^|[,!?.…–—]\s*[«»“”"‚‘’‹›]\s*|[«»“”"‚‘’‹›]\s*,\s*)$/u.test(String(context.sentence || "").slice(0, tokens[v].index))) return;
       // (A2 (б), advisor 16.11 (1): on the preposition, the pair needs the verb word to be read as a verb in its place — not einige
       // (einigen), meine (meinen), bestimmten (bestimmen) before their nouns)
       if (isPreposition) {
@@ -16207,13 +16405,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // chain whose form is Präteritum and Konjunktiv II at once — Wenn er … reparieren lassen wollte, würde …; Wenn sie das Haus bauen
     // ließen, wären sie froh; the question sign is not taken there — Sollte er es gewusst haben? keeps the double label)
     // (п. 2, advisor 15.11: anyBase — a modal of a chain asks the full check too; NO_WEAK_PAST_LABEL keeps only the plain tap bare)
+    // A lower-case form right after direct speech (»…?« fragte der Vater; »…«, sprach ein fetter Lachs) is the speech tag — the author's
+    // words; shared by the weak-past check and the verb + preposition pairs (advisor 16.11: the content of the speech is in the quotes)
+    function speechTagAt(sentence, start) {
+      return /^\p{Ll}/u.test(sentence.slice(start)) && /(?:^|[«»“”"‚‘’‹›]\s*,?\s*)$/u.test(sentence.slice(0, start));
+    }
     function weakPastIndicative(base, start, context, pairOnly = false, anyBase = false) {
       const sentence = String(context?.sentence || "");
       if (!sentence || !Number.isInteger(start) || !pairOnly && !anyBase && NO_WEAK_PAST_LABEL.has(base)) return false;
       // Verb-first: a conditional (Fragte man ihn, …) or a question — not claimed. A lowercase form right
       // after direct speech (»…?« fragte der Vater; a reader sentence starting «fragte der Vater») is the
       // speech tag, an indicative (to-do 19.10, 2.1, R-kafka-13).
-      const speechTag = /^\p{Ll}/u.test(sentence.slice(start)) && /(?:^|[«»“”"‚‘’]\s*,?\s*)$/u.test(sentence.slice(0, start));
+      const speechTag = speechTagAt(sentence, start);
       // (#22 (в), advisor 08.11, answer 3: a question with the weak -te form first — Wohnten Sie dort? — is Präteritum; the other
       // signs of its part still count)
       const question = /^\p{L}*te(?:st|n|t)?(?![\p{L}])/u.test(sentence.slice(start)) && (/[.!?]/u.exec(sentence.slice(start)) || [""])[0] === "?";
@@ -19292,6 +19495,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !c.construction.lexicalSenseConfirmed && canonicalPos(c.pos) === 'Verb' && !c.item?.reflexive && !c.reflexiveMarks?.en);
       for (const c of rows) {
         if (accusativeObjectAfter(context?.sentence, c.construction.pronoun) || nounObjectAfterSubject(context?.sentence, c.construction)) c.reflexiveObjectSign = true;
+        // (advisor 16.11, (3): rule B of 27.10 takes the object only by the common count of п. 99 — directAccusativeBetween)
+        { const sentence = String(context?.sentence || ''), at = c.construction.pronoun?.start;
+          c.reflexiveDirectObject = Number.isInteger(at) && reflexiveDirectAccusative(sentence, sharedTokens(sentence,'reflexiveDirectAccusative'), at); }
+        // (advisor 16.11, (3): rule B of 27.10 takes the object only by the common count of п. 99 — directAccusativeInPart)
+
         const base = norm(c.lemma).replace(/^sich\s+/u, '');
         if (hasSichPhrases(base)) { c.reflexivePhraseVerb = true; continue; }
         let groups = [];
@@ -20406,6 +20614,29 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // Imperativ / Danke! (advisor 30.10): a word that is an own adverb / interjection card and also the ich form of a verb (bitte —
     // bitten, danke — danken) is that card unless a subject pronoun stands right before or after it (ich bitte, bitte ich, wir danken
     // — the verb): Danke!, Danke schön, Nein, danke, Bitte setz dich! — not the imperative of the verb.
+    // (advisor 16.11: Danke with a capital opening its part + dir / euch / Ihnen right after it is «thank you», the interjection; the pronoun
+    // is the dative «тебе / вам», no reflexive of a verb — one check for the card of Danke and the reflexive link of the pronoun)
+    // (advisor 16.11, Alice P082: Bitte + um + a group, and no other verb in the sentence — the verb bitten «прошу» with its um: Bitte um
+    // Verzeihung!, Bitte um Hilfe; not um + a number / Uhr (Bitte um acht kommen), not um … herum, not with another verb — Bitte setz dich)
+    function bitteUmAt(sentence, tokens, at) {
+      const gapBefore = k => sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index);
+      if (norm(tokens[at]?.[0] ?? "") !== "bitte" || norm(tokens[at+1]?.[0] ?? "") !== "um" || !tokens[at+2] || /[^\s]/u.test(gapBefore(at+1))) return false;
+      // (the part of bitte only: »Bitte um Verzeihung!«, sprach die Maus — the author's words and other parts keep their verbs)
+      const boundary = k => /[,;:.!?»«„“"–—()]/u.test(gapBefore(k));
+      let from = at, to = at;
+      while (from > 0 && !boundary(from)) from--;
+      while (to+1 < tokens.length && !boundary(to+1)) to++;
+      const part = Array.from({length:to-from+1}, (_, k) => from+k);
+      if (/^\s*\d/u.test(sentence.slice(tokens[at+1].index + 2)) || /^(?:eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|halb|viertel|mitternacht)$/u.test(norm(tokens[at+2][0])) ||
+          part.some(i => /^(?:uhr|herum)$/u.test(norm(tokens[i][0])))) return false;
+      return !part.map(i => [tokens[i],i]).some(([t, i]) => i !== at && /^\p{Ll}/u.test(t[0]) && (verbAnalyses.get(norm(t[0])) || []).some(a => ["finite","infinitive","participle"].includes(a.kind)) &&
+        !(forms.get(norm(t[0])) || []).some(e => ["article","Pronomen","Präposition","Konjunktion","Adverb"].includes(e.type)));
+    }
+    function thankYouAt(sentence, tokens, at) {
+      const gapBefore = k => sentence.slice(tokens[k-1].index + tokens[k-1][0].length, tokens[k].index);
+      return tokens[at]?.[0] === "Danke" && (at === 0 || /[,;:.!?»«„“"–—(]/u.test(gapBefore(at))) && /^(?:dir|euch|Ihnen)$/u.test(tokens[at+1]?.[0] ?? "") &&
+        !/[^\s]/u.test(gapBefore(at+1));
+    }
     async function particleOverVerb(word, context, result) {
       if (!result || !context || !Number.isInteger(context.tokenOffset)) return result;
       const f = norm(word), candidates = result.candidates || [];
@@ -20424,7 +20655,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let end = at + 1; while (end < tokens.length && !/[.!?;:»«„“"]/u.test(gap(end))) end++;
       // (with an object after it, it is the verb — Bitte den Lehrer um Hilfe! — unless its part ends with an infinitive:
       // Bitte die Tür schließen! is «пожалуйста»)
-      if (at + 1 < tokens.length && !/[^\s]/u.test(gap(at+1)) && (DETERMINER_WORD.test(norm(tokens[at+1][0])) || PERSONAL_OBJECT_PRONOUN.test(norm(tokens[at+1][0]))) &&
+      // (advisor 16.11: Danke with a capital opening its part + dir / euch / Ihnen is «thank you» — Danke dir!, Danke Ihnen für Ihre Hilfe!;
+      // Danke ihm für alles! stays the imperative, Ich danke dir — the verb)
+      const thankYou = thankYouAt(sentence, tokens, at);
+      if (bitteUmAt(sentence, tokens, at)) {
+        // (the ich form «прошу», not the imperative; the verb card even over the noun die Bitte — Bitte um Entschuldigung.)
+        const verb = result.selected && canonicalPos(result.selected.pos) === "Verb" ? result.selected :
+          candidates.find(c => c.source === "main" && canonicalPos(c.pos) === "Verb" && norm(c.lemma) === "bitten");
+        if (!verb) return result;
+        const ff = {...(verb.formFeatures || {})}; if (/Imperativ/u.test(String(ff.tense || ""))) ff.tense = "Präsens";
+        const v = {...verb, formFeatures:ff};
+        const picked = {...result, candidates:[v, ...candidates.filter(c => c !== verb)], selected:v, preferred:v, status:"resolved"};
+        if (!v.prepositionLink) { try { await verbPrepositionLink(word, context, picked); } catch (_) { /* the card stays */ } }
+        return picked;
+      }
+      if (!thankYou && at + 1 < tokens.length && !/[^\s]/u.test(gap(at+1)) && (DETERMINER_WORD.test(norm(tokens[at+1][0])) || PERSONAL_OBJECT_PRONOUN.test(norm(tokens[at+1][0]))) &&
         !(await tokenAnalyses(tokens[end-1][0],undefined,'particleOverVerb')).some(a => a.kind === "infinitive")) return result;
       // (a subject pronoun right after it, or earlier in its part with no other finite verb between: ich bitte, bitte ich, wenn ich
       // die bitte — the verb; Ich sage danke — the interjection)

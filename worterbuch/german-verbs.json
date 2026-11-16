@@ -7081,7 +7081,13 @@
         "note_ru": "держать кого-либо, что-либо; соблюдать что-либо",
         "note_en": "to hold someone or something; to keep something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "держаться (стойко; за что-либо), сохраняться; придерживаться (правил, фактов); не портиться (о продуктах)",
+      "translation_en": "to hold on, to hold up (bravely), to last; to stick to (rules, facts); to keep (of food)",
+      "note_ru": "sich halten an + Akk. — придерживаться (правил, фактов)",
+      "note_en": "sich halten an + accusative — to stick to (rules, facts)"
+    }
   },
   {
     "id": "verb-2565",
@@ -9047,6 +9053,12 @@
         "ihr": "schneidet",
         "sie": "schneiden"
       }
+    },
+    "reflexive": {
+      "translation_ru": "порезаться; отрезать себе (кусок)",
+      "translation_en": "to cut oneself; to cut (a slice) for oneself",
+      "note_ru": "sich (D) etwas schneiden — отрезать себе (кусок)",
+      "note_en": "sich (D) etwas schneiden — to cut (a slice) for oneself"
     }
   },
   {
@@ -12848,6 +12860,10 @@
         "ihr": "duztet",
         "sie": "duzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "быть на «ты» друг с другом",
+      "translation_en": "to be on “du” terms with each other"
     }
   },
   {
@@ -13023,7 +13039,11 @@
         "note_en": "to enter in something"
       }
     ],
-    "separable_prefix": "ein"
+    "separable_prefix": "ein",
+    "reflexive": {
+      "translation_ru": "записываться",
+      "translation_en": "to sign up"
+    }
   },
   {
     "id": "verb-258",
@@ -15182,6 +15202,10 @@
         "ihr": "pflegtet",
         "sie": "pflegten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ухаживать за собой",
+      "translation_en": "to take care of your appearance"
     }
   },
   {
@@ -16008,6 +16032,10 @@
         "ihr": "sieztet",
         "sie": "siezten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "быть на «вы» друг с другом",
+      "translation_en": "to be on “Sie” terms with each other"
     }
   },
   {
@@ -19029,7 +19057,11 @@
         "note_ru": "объявить (о том, что сделает что-либо)",
         "note_en": "to announce (that one will do something)"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "предупредить о своём приходе; (перен.) давать о себе знать, предвещаться",
+      "translation_en": "to let someone know you're coming; (figurative) to make itself felt, to be heralded"
+    }
   },
   {
     "id": "verb-383",
@@ -23501,6 +23533,12 @@
         "ihr": "stelltet ein",
         "sie": "stellten ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "настроиться на что-либо; наступать, появляться (об успехе, последствиях)",
+      "translation_en": "to prepare oneself for something; to set in, to arise",
+      "note_ru": "sich einstellen auf — настроиться на что-либо",
+      "note_en": "sich einstellen auf — to prepare oneself for something"
     }
   },
   {
@@ -23887,6 +23925,10 @@
         "ihr": "enthaltet",
         "Sie": "enthalten Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "воздерживаться",
+      "translation_en": "to abstain"
     }
   },
   {
@@ -24315,6 +24357,10 @@
         "ihr": "erfülltet",
         "sie": "erfüllten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "сбываться",
+      "translation_en": "to come true"
     }
   },
   {
@@ -24395,6 +24441,10 @@
         "ihr": "erhöhtet",
         "sie": "erhöhten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "повышаться, увеличиваться",
+      "translation_en": "to rise, to increase"
     }
   },
   {
@@ -24692,6 +24742,12 @@
         "ihr": "ernährtet",
         "sie": "ernährten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "питаться (von + Dat.); правильно питаться",
+      "translation_en": "to eat, to feed (on), to live (on) (von + dative); to eat healthily",
+      "note_ru": "sich gesund ernähren — правильно питаться",
+      "note_en": "sich gesund ernähren — to eat healthily"
     }
   },
   {
@@ -25362,7 +25418,11 @@
         "note_ru": "устанавливать, назначать что-либо",
         "note_en": "to fix / set something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "связать себя обязательством, определиться",
+      "translation_en": "to commit oneself"
+    }
   },
   {
     "id": "verb-523",
@@ -26453,6 +26513,13 @@
         "ihr": "genehmigtet",
         "sie": "genehmigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "позволить себе (что-нибудь вкусное)",
+      "translation_en": "to treat yourself to something",
+      "note_ru": "sich (D) etwas genehmigen",
+      "note_en": "sich (D) etwas genehmigen",
+      "case": "Dativ"
     }
   },
   {
@@ -27502,6 +27569,10 @@
         "ihr": "integriertet",
         "sie": "integrierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "интегрироваться",
+      "translation_en": "to integrate (oneself)"
     }
   },
   {
@@ -30718,6 +30789,12 @@
         "ihr": "sorgtet",
         "sie": "sorgten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "беспокоиться о ком-либо",
+      "translation_en": "to worry about someone",
+      "note_ru": "sich sorgen um + Akkusativ",
+      "note_en": "sich sorgen um + accusative"
     }
   },
   {
@@ -31745,9 +31822,12 @@
   {
     "id": "verb-656",
     "infinitive": "tauchen",
-    "translation_ru": "нырять; погружаться",
-    "translation_en": "to dive",
-    "auxiliary": "haben",
+    "translation_ru": "нырять; погружаться; окунать, погружать (что-либо)",
+    "translation_en": "to dive; to submerge; to dip (something)",
+    "auxiliary": [
+      "haben",
+      "sein"
+    ],
     "usage_note_ru": "Perfekt с haben или sein; при указании направления — sein: Er ist auf den Grund getaucht.",
     "usage_note_en": "The perfect takes haben or sein; with a direction, sein: Er ist auf den Grund getaucht.",
     "example_de": "Im Urlaub tauchen wir im Roten Meer.",
@@ -31781,7 +31861,14 @@
         "ihr": "tauchtet",
         "sie": "tauchten"
       }
-    }
+    },
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "окунать, погружать что-либо (in + Akk.): den Pinsel in die Farbe tauchen (hat getaucht)",
+        "note_en": "to dip something (in + accusative): den Pinsel in die Farbe tauchen (hat getaucht)"
+      }
+    ]
   },
   {
     "id": "verb-657",
@@ -32369,6 +32456,13 @@
         "ihr": "überlegtet",
         "sie": "überlegten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обдумать, решить",
+      "translation_en": "to think something over",
+      "note_ru": "sich (D) etwas überlegen",
+      "note_en": "sich (D) etwas überlegen",
+      "case": "Dativ"
     }
   },
   {
@@ -33034,7 +33128,13 @@
         "sie": "stellten um"
       }
     },
-    "reading_frequency": 3.78
+    "reading_frequency": 3.78,
+    "reflexive": {
+      "translation_ru": "привыкать к новому",
+      "translation_en": "to adjust to something new",
+      "note_ru": "sich umstellen auf + Akkusativ",
+      "note_en": "sich umstellen auf + accusative"
+    }
   },
   {
     "id": "verb-2724",
@@ -33360,6 +33460,12 @@
         "ihr": "unterscheidet",
         "sie": "unterscheiden"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отличаться от",
+      "translation_en": "to differ from",
+      "note_ru": "sich unterscheiden von + Dativ",
+      "note_en": "sich unterscheiden von + dative"
     }
   },
   {
@@ -34689,6 +34795,10 @@
         "ihr": "verschreibt",
         "sie": "verschreiben"
       }
+    },
+    "reflexive": {
+      "translation_ru": "описаться (ошибиться при письме)",
+      "translation_en": "to make a slip of the pen"
     }
   },
   {
@@ -36030,7 +36140,11 @@
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "взвешиваться",
+      "translation_en": "to weigh oneself"
+    }
   },
   {
     "id": "verb-741",
@@ -38130,6 +38244,13 @@
         "ihr": "merktet an",
         "sie": "merkten an"
       }
+    },
+    "reflexive": {
+      "translation_ru": "не подавать виду",
+      "translation_en": "not to let anything show",
+      "note_ru": "sich (D) nichts anmerken lassen",
+      "note_en": "sich (D) nichts anmerken lassen",
+      "case": "Dativ"
     }
   },
   {
@@ -38598,7 +38719,13 @@
       }
     },
     "usage_note_ru": "(разг.) sich vor jemandem aufbauen — встать (грозно) перед кем-либо.",
-    "usage_note_en": "(colloquial) sich vor jemandem aufbauen — to plant oneself (menacingly) in front of someone."
+    "usage_note_en": "(colloquial) sich vor jemandem aufbauen — to plant oneself (menacingly) in front of someone.",
+    "reflexive": {
+      "translation_ru": "(разг.) встать (грозно) перед кем-либо",
+      "translation_en": "(colloquial) to plant oneself (menacingly) in front of someone",
+      "note_ru": "sich vor jemandem aufbauen",
+      "note_en": "sich vor jemandem aufbauen"
+    }
   },
   {
     "id": "verb-796",
@@ -40346,6 +40473,12 @@
         "ihr": "blicktet",
         "sie": "blickten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "показываться, появляться",
+      "translation_en": "to show one's face",
+      "note_ru": "sich blicken lassen",
+      "note_en": "sich blicken lassen"
     }
   },
   {
@@ -41214,6 +41347,10 @@
         "ihr": "entfaltetet",
         "sie": "entfalteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "раскрываться, развёртываться; развиваться (о способностях)",
+      "translation_en": "to unfold, to open up; to develop"
     }
   },
   {
@@ -41781,7 +41918,11 @@
         "note_en": "to keep someone, something away"
       }
     ],
-    "separable_prefix": "fern"
+    "separable_prefix": "fern",
+    "reflexive": {
+      "translation_ru": "держаться подальше",
+      "translation_en": "to stay away"
+    }
   },
   {
     "id": "verb-864",
@@ -41963,6 +42104,10 @@
         "ihr": "flüchtetet",
         "sie": "flüchteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "спасаться бегством, укрываться (где-либо)",
+      "translation_en": "to flee, to take refuge"
     }
   },
   {
@@ -43263,6 +43408,12 @@
         "ihr": "identifiziertet",
         "sie": "identifizierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отождествлять себя с чем-либо, разделять",
+      "translation_en": "to identify with something",
+      "note_ru": "sich mit etwas identifizieren",
+      "note_en": "sich mit etwas identifizieren"
     }
   },
   {
@@ -43894,6 +44045,13 @@
         "ihr": "machtet klar",
         "sie": "machten klar"
       }
+    },
+    "reflexive": {
+      "translation_ru": "осознать что-либо",
+      "translation_en": "to realize something",
+      "note_ru": "sich (D) etwas klarmachen",
+      "note_en": "sich (D) etwas klarmachen",
+      "case": "Dativ"
     }
   },
   {
@@ -44024,7 +44182,14 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "прищемить палец; зажать под мышкой",
+      "translation_en": "to trap one's finger; to tuck something under one's arm",
+      "note_ru": "sich (D) den Finger klemmen — прищемить палец; sich (D) etwas unter den Arm klemmen — зажать под мышкой",
+      "note_en": "sich (D) den Finger klemmen — to trap one's finger; sich (D) etwas unter den Arm klemmen — to tuck something under one's arm",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-912",
@@ -44380,6 +44545,10 @@
         "ihr": "kreuztet",
         "sie": "kreuzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "пересекаться",
+      "translation_en": "to cross, to intersect"
     }
   },
   {
@@ -44667,6 +44836,10 @@
         "ihr": "lockertet",
         "sie": "lockerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ослабевать, расслабляться",
+      "translation_en": "to loosen, to relax"
     }
   },
   {
@@ -45275,6 +45448,13 @@
         "ihr": "pumptet",
         "sie": "pumpten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "занять",
+      "translation_en": "to borrow",
+      "note_ru": "sich (D) etwas pumpen",
+      "note_en": "sich (D) etwas pumpen",
+      "case": "Dativ"
     }
   },
   {
@@ -45897,7 +46077,13 @@
         "note_ru": "дёргать за что-либо",
         "note_en": "to tug at something, to pull at something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "(разг.) рваться к чему-либо",
+      "translation_en": "(colloquial) to scramble for something",
+      "note_ru": "sich um etwas reißen",
+      "note_en": "sich um etwas reißen"
+    }
   },
   {
     "id": "verb-951",
@@ -46856,6 +47042,13 @@
         "ihr": "schnapptet",
         "sie": "schnappten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "схватить, ухватить (себе)",
+      "translation_en": "to grab something",
+      "note_ru": "sich (D) etwas schnappen",
+      "note_en": "sich (D) etwas schnappen",
+      "case": "Dativ"
     }
   },
   {
@@ -48548,6 +48741,10 @@
         "ihr": "vereintet",
         "sie": "vereinten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "объединяться",
+      "translation_en": "to unite"
     }
   },
   {
@@ -48690,6 +48887,10 @@
         "ihr": "vergiftetet",
         "sie": "vergifteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отравиться",
+      "translation_en": "to get food poisoning, to poison oneself"
     }
   },
   {
@@ -48772,6 +48973,10 @@
         "ihr": "verlangsamtet",
         "sie": "verlangsamten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "замедляться",
+      "translation_en": "to slow down"
     }
   },
   {
@@ -48820,6 +49025,10 @@
         "ihr": "verpflichtetet",
         "sie": "verpflichteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обязаться",
+      "translation_en": "to commit oneself"
     }
   },
   {
@@ -48861,6 +49070,10 @@
         "ihr": "verringertet",
         "sie": "verringerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "уменьшаться",
+      "translation_en": "to decrease"
     }
   },
   {
@@ -48949,6 +49162,10 @@
         "ihr": "verschlechtertet",
         "sie": "verschlechterten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ухудшаться",
+      "translation_en": "to get worse"
     }
   },
   {
@@ -50597,6 +50814,10 @@
         "ihr": "grenztet ab",
         "sie": "grenzten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отмежёвываться, держать дистанцию",
+      "translation_en": "to set boundaries, to distance oneself"
     }
   },
   {
@@ -50778,6 +50999,12 @@
         "ihr": "leitetet ab",
         "sie": "leiteten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "происходить от (о слове)",
+      "translation_en": "to derive from (of a word)",
+      "note_ru": "sich ableiten von / aus + Dativ",
+      "note_en": "sich ableiten von / aus + Dativ"
     }
   },
   {
@@ -50820,6 +51047,10 @@
         "ihr": "löstet ab",
         "sie": "lösten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отделяться, отклеиваться; сменять друг друга",
+      "translation_en": "to come off, to come away; to take turns"
     }
   },
   {
@@ -50942,6 +51173,10 @@
         "ihr": "schwächtet ab",
         "sie": "schwächten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ослабевать",
+      "translation_en": "to weaken, to ease"
     }
   },
   {
@@ -51052,6 +51287,10 @@
         "ihr": "sichertet ab",
         "sie": "sicherten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "подстраховаться",
+      "translation_en": "to cover oneself"
     }
   },
   {
@@ -51107,6 +51346,12 @@
         "ihr": "sprecht ab",
         "Sie": "sprechen Sie ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "договориться (с кем-либо)",
+      "translation_en": "to come to an agreement (with someone)",
+      "note_ru": "sich (mit jemandem) absprechen",
+      "note_en": "sich (mit jemandem) absprechen"
     }
   },
   {
@@ -51286,6 +51531,10 @@
         "ihr": "ähneltet",
         "sie": "ähnelten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "быть похожими друг на друга",
+      "translation_en": "to resemble each other"
     }
   },
   {
@@ -51451,6 +51700,10 @@
         "ihr": "deutetet an",
         "sie": "deuteten an"
       }
+    },
+    "reflexive": {
+      "translation_ru": "намечаться",
+      "translation_en": "to be emerging"
     }
   },
   {
@@ -52088,7 +52341,11 @@
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "(книжн.) выражать свои мысли",
+      "translation_en": "(formal) to express oneself"
+    }
   },
   {
     "id": "verb-1083",
@@ -52129,6 +52386,10 @@
         "ihr": "assimiliertet",
         "sie": "assimilierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ассимилироваться, приспосабливаться (о людях, группах)",
+      "translation_en": "to assimilate (of people, groups)"
     }
   },
   {
@@ -53007,6 +53268,12 @@
         "ihr": "nehmt aus",
         "Sie": "nehmen Sie aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(книжн.) выглядеть хорошо / странно",
+      "translation_en": "(elevated) to look good / odd",
+      "note_ru": "sich gut / seltsam ausnehmen",
+      "note_en": "sich gut / seltsam ausnehmen"
     }
   },
   {
@@ -53235,6 +53502,10 @@
         "ihr": "weitetet aus",
         "sie": "weiteten aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "расширяться, разрастаться",
+      "translation_en": "to spread, to expand"
     }
   },
   {
@@ -53376,6 +53647,12 @@
         "ihr": "zeichnetet aus",
         "sie": "zeichneten aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отличаться чем-либо",
+      "translation_en": "to stand out for something",
+      "note_ru": "sich durch etwas auszeichnen",
+      "note_en": "sich durch etwas auszeichnen"
     }
   },
   {
@@ -54240,7 +54517,11 @@
       }
     },
     "usage_note_ru": "sich bereden — совещаться. (устар., регион.) уговаривать (кого-либо).",
-    "usage_note_en": "sich bereden — to confer. (dated, regional) to talk (someone) into something."
+    "usage_note_en": "sich bereden — to confer. (dated, regional) to talk (someone) into something.",
+    "reflexive": {
+      "translation_ru": "совещаться",
+      "translation_en": "to confer"
+    }
   },
   {
     "id": "verb-1131",
@@ -56083,6 +56364,10 @@
         "ihr": "bringt ein",
         "sie": "bringen ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "активно участвовать",
+      "translation_en": "to get involved"
     }
   },
   {
@@ -56179,6 +56464,13 @@
         "ihr": "fangt ein",
         "Sie": "fangen Sie ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) подхватить (простуду)",
+      "translation_en": "(colloquial) to catch (a cold)",
+      "note_ru": "sich (D) etwas einfangen",
+      "note_en": "sich (D) etwas einfangen",
+      "case": "Dativ"
     }
   },
   {
@@ -56632,6 +56924,10 @@
         "ihr": "ordnetet ein",
         "sie": "ordneten ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "перестраиваться (в ряд); вписываться (в коллектив)",
+      "translation_en": "to get in lane; to fit in (with a group)"
     }
   },
   {
@@ -56756,6 +57052,10 @@
         "ihr": "schränktet ein",
         "sie": "schränkten ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ограничивать себя, экономить",
+      "translation_en": "to cut back, to economize"
     }
   },
   {
@@ -57221,6 +57521,13 @@
         "ihr": "erarbeitetet",
         "sie": "erarbeiteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "добиться чего-либо своим трудом (положения, уважения)",
+      "translation_en": "to achieve something through one's own work (a position, respect)",
+      "note_ru": "sich (D) etwas erarbeiten",
+      "note_en": "sich (D) etwas erarbeiten",
+      "case": "Dativ"
     }
   },
   {
@@ -57356,6 +57663,12 @@
         "ihr": "erfreutet",
         "sie": "erfreuten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "радоваться чему-либо; (книжн.) пользоваться чем-либо (популярностью, здоровьем)",
+      "translation_en": "to enjoy something; (elevated) to enjoy something (popularity, good health)",
+      "note_ru": "sich an etwas (Dat.) erfreuen — радоваться чему-либо; sich einer Sache (Gen.) erfreuen — (книжн.) пользоваться чем-либо (популярностью, здоровьем)",
+      "note_en": "sich an etwas (Dat.) erfreuen — to enjoy something; sich einer Sache (Gen.) erfreuen — (elevated) to enjoy something (popularity, good health)"
     }
   },
   {
@@ -57709,6 +58022,10 @@
         "ihr": "erschießt",
         "sie": "erschießen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "застрелиться",
+      "translation_en": "to shoot oneself"
     }
   },
   {
@@ -58107,6 +58424,13 @@
         "ihr": "erwerbt",
         "Sie": "erwerben Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "приобрести (знания, гражданство, степень); заслужить (уважение, доверие)",
+      "translation_en": "to acquire (knowledge, citizenship, a degree); to earn (respect, trust)",
+      "note_ru": "sich (D) etwas erwerben — приобрести (знания, гражданство, степень)",
+      "note_en": "sich (D) etwas erwerben — to acquire (knowledge, citizenship, a degree)",
+      "case": "Dativ"
     }
   },
   {
@@ -58314,6 +58638,10 @@
         "ihr": "etabliertet",
         "sie": "etablierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "утвердиться, закрепиться",
+      "translation_en": "to establish oneself"
     }
   },
   {
@@ -58668,6 +58996,12 @@
         "ihr": "fokussiertet",
         "sie": "fokussierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "сосредоточиться на чём-либо",
+      "translation_en": "to focus on something",
+      "note_ru": "sich auf etwas fokussieren",
+      "note_en": "sich auf etwas fokussieren"
     }
   },
   {
@@ -59904,6 +60238,12 @@
         "ihr": "leitetet her",
         "sie": "leiteten her"
       }
+    },
+    "reflexive": {
+      "translation_ru": "происходить от чего-либо (о слове, названии)",
+      "translation_en": "to derive from something (of a word, a name)",
+      "note_ru": "sich von / aus etwas herleiten",
+      "note_en": "sich von / aus etwas herleiten"
     }
   },
   {
@@ -60624,6 +60964,10 @@
         "ihr": "isoliertet",
         "sie": "isolierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "замыкаться, отгораживаться от других",
+      "translation_en": "to cut oneself off"
     }
   },
   {
@@ -61084,6 +61428,12 @@
         "ihr": "knietet",
         "sie": "knieten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) с головой уйти во что-либо",
+      "translation_en": "(colloquial) to get stuck into something",
+      "note_ru": "sich in etwas knien",
+      "note_en": "sich in etwas knien"
     }
   },
   {
@@ -63067,6 +63417,10 @@
         "ihr": "polarisiertet",
         "sie": "polarisierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "поляризоваться, всё сильнее расходиться",
+      "translation_en": "to become polarized"
     }
   },
   {
@@ -63334,6 +63688,12 @@
         "ihr": "prügeltet",
         "sie": "prügelten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "драться; драться с кем-либо",
+      "translation_en": "to fight; to fight with someone",
+      "note_ru": "sich mit jemandem prügeln — драться с кем-либо",
+      "note_en": "sich mit jemandem prügeln — to fight with someone"
     }
   },
   {
@@ -63647,6 +64007,10 @@
         "ihr": "rechtfertigtet",
         "sie": "rechtfertigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "оправдываться",
+      "translation_en": "to justify oneself"
     }
   },
   {
@@ -63736,6 +64100,12 @@
         "ihr": "reguliertet",
         "sie": "regulierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "регулироваться само собой",
+      "translation_en": "to regulate itself",
+      "note_ru": "sich (von selbst) regulieren",
+      "note_en": "sich (von selbst) regulieren"
     }
   },
   {
@@ -63857,6 +64227,10 @@
         "ihr": "reproduziertet",
         "sie": "reproduzierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "размножаться (биол.)",
+      "translation_en": "to reproduce, to breed (biology)"
     }
   },
   {
@@ -64944,6 +65318,10 @@
         "ihr": "stabilisiertet",
         "sie": "stabilisierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "стабилизироваться",
+      "translation_en": "to stabilize"
     }
   },
   {
@@ -65141,6 +65519,10 @@
         "ihr": "steigertet",
         "sie": "steigerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "расти, улучшаться",
+      "translation_en": "to increase, to improve"
     }
   },
   {
@@ -66179,6 +66561,10 @@
         "ihr": "überschätztet",
         "sie": "überschätzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "переоценивать свои силы",
+      "translation_en": "to overrate oneself"
     }
   },
   {
@@ -66267,7 +66653,13 @@
         "note_ru": "транслировать куда-либо / откуда-либо",
         "note_en": "to broadcast to / from"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "передаваться (о настроении, болезни)",
+      "translation_en": "to spread to (a mood, an illness)",
+      "note_ru": "sich übertragen (auf + Akk.)",
+      "note_en": "sich übertragen (auf + acc.)"
+    }
   },
   {
     "id": "verb-1401",
@@ -66419,6 +66811,10 @@
         "ihr": "überwindet",
         "sie": "überwinden"
       }
+    },
+    "reflexive": {
+      "translation_ru": "пересилить себя (сделать что-то неприятное)",
+      "translation_en": "to bring oneself (to do something unpleasant)"
     }
   },
   {
@@ -66940,6 +67336,12 @@
         "ihr": "verantwortetet",
         "sie": "verantworteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "держать ответ, оправдываться (особенно перед судом)",
+      "translation_en": "to answer (for), to account for oneself (especially in court)",
+      "note_ru": "sich verantworten (für + Akk., wegen + Gen.)",
+      "note_en": "sich verantworten (für + acc., wegen + gen.)"
     }
   },
   {
@@ -66995,6 +67397,13 @@
         "ihr": "verderbt",
         "Sie": "verderben Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "расстроить желудок; испортить отношения с кем-либо",
+      "translation_en": "to upset one's stomach; to fall out with someone",
+      "note_ru": "sich (D) den Magen verderben — расстроить желудок; es sich (D) mit jemandem verderben — испортить отношения с кем-либо",
+      "note_en": "sich (D) den Magen verderben — to upset one's stomach; es sich (D) mit jemandem verderben — to fall out with someone",
+      "case": "Dativ"
     }
   },
   {
@@ -67122,6 +67531,10 @@
         "ihr": "verdichtetet",
         "sie": "verdichteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "сгущаться (о тумане, тучах); крепнуть (о подозрениях)",
+      "translation_en": "to thicken (fog, clouds); to grow stronger (suspicions)"
     }
   },
   {
@@ -67394,6 +67807,10 @@
         "ihr": "verfeinertet",
         "sie": "verfeinerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "становиться тоньше, изысканнее",
+      "translation_en": "to become more refined"
     }
   },
   {
@@ -67570,6 +67987,10 @@
         "ihr": "verhörtet",
         "sie": "verhörten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ослышаться",
+      "translation_en": "to mishear"
     }
   },
   {
@@ -67652,6 +68073,10 @@
         "ihr": "verknapptet",
         "sie": "verknappten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "становиться дефицитным (о товарах, ресурсах)",
+      "translation_en": "to become scarce (goods, resources)"
     }
   },
   {
@@ -67753,6 +68178,12 @@
         "ihr": "verlegtet",
         "sie": "verlegten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "переключиться на что-либо (как на способ действия)",
+      "translation_en": "to resort to something",
+      "note_ru": "sich auf etwas (Akk.) verlegen",
+      "note_en": "sich auf etwas (acc.) verlegen"
     }
   },
   {
@@ -68092,6 +68523,10 @@
         "ihr": "verschärftet",
         "sie": "verschärften"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обостряться, усиливаться (о конфликте, кризисе)",
+      "translation_en": "to get worse, to escalate (a conflict, a crisis)"
     }
   },
   {
@@ -68146,6 +68581,10 @@
         "ihr": "verseht",
         "Sie": "versehen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ошибиться (при чтении, счёте)",
+      "translation_en": "to make a slip (reading, counting)"
     }
   },
   {
@@ -68187,6 +68626,12 @@
         "ihr": "versenktet",
         "sie": "versenkten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "погрузиться во что-либо (в чтение, мысли)",
+      "translation_en": "to become absorbed in something (reading, thoughts)",
+      "note_ru": "sich in etwas versenken",
+      "note_en": "sich in etwas versenken"
     }
   },
   {
@@ -68228,6 +68673,10 @@
         "ihr": "verstärktet",
         "sie": "verstärkten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "усиливаться (о ветре, шуме, сомнениях)",
+      "translation_en": "to grow stronger (wind, noise, doubts)"
     }
   },
   {
@@ -68397,6 +68846,10 @@
         "ihr": "verweigertet",
         "sie": "verweigerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "не идти навстречу, отказываться участвовать",
+      "translation_en": "to refuse to take part, to refuse to cooperate"
     }
   },
   {
@@ -68444,6 +68897,10 @@
         "ihr": "verwerft",
         "Sie": "verwerfen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "коробиться (о дереве)",
+      "translation_en": "to warp (wood)"
     }
   },
   {
@@ -68485,6 +68942,12 @@
         "ihr": "verwirklichtet",
         "sie": "verwirklichten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "самореализоваться; осуществиться (о мечтах, планах)",
+      "translation_en": "to fulfil oneself; to come true (dreams, plans)",
+      "note_ru": "sich (selbst) verwirklichen — самореализоваться",
+      "note_en": "sich (selbst) verwirklichen — to fulfil oneself"
     }
   },
   {
@@ -68567,6 +69030,12 @@
         "ihr": "verzerrtet",
         "sie": "verzerrten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "искажаться (о лице); растянуть мышцу",
+      "translation_en": "to contort (a face); to pull a muscle",
+      "note_ru": "sich (D) einen Muskel verzerren — растянуть мышцу",
+      "note_en": "sich (D) einen Muskel verzerren — to pull a muscle"
     }
   },
   {
@@ -68615,6 +69084,10 @@
         "ihr": "verzögertet",
         "sie": "verzögerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "задерживаться (о прибытии, сроках)",
+      "translation_en": "to be delayed (an arrival, a deadline)"
     }
   },
   {
@@ -68710,6 +69183,10 @@
         "ihr": "stopftet voll",
         "sie": "stopften voll"
       }
+    },
+    "reflexive": {
+      "translation_ru": "объесться",
+      "translation_en": "to stuff oneself"
     }
   },
   {
@@ -69600,6 +70077,10 @@
         "ihr": "spiegeltet wider",
         "sie": "spiegelten wider"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отражаться (в чём-либо)",
+      "translation_en": "to be reflected (in something)"
     }
   },
   {
@@ -69844,6 +70325,10 @@
         "ihr": "zerstreutet",
         "sie": "zerstreuten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "расходиться (о толпе); развлекаться, отвлекаться",
+      "translation_en": "to disperse; to amuse oneself, to take one's mind off things"
     }
   },
   {
@@ -70394,6 +70879,10 @@
         "ihr": "spitztet zu",
         "sie": "spitzten zu"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обостряться",
+      "translation_en": "to come to a head"
     }
   },
   {
@@ -71502,6 +71991,10 @@
         "ihr": "schafftet ab",
         "sie": "schafften ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(юго-зап., швейц.) надрываться на работе",
+      "translation_en": "(south-western German, Swiss) to work oneself to the bone"
     }
   },
   {
@@ -71769,6 +72262,12 @@
         "ihr": "schlepptet ab",
         "sie": "schleppten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) надрываться, таща что-либо тяжёлое",
+      "translation_en": "(colloquial) to lug something heavy around",
+      "note_ru": "sich mit etwas abschleppen",
+      "note_en": "sich mit etwas abschleppen"
     }
   },
   {
@@ -72411,6 +72910,10 @@
         "ihr": "trocknetet ab",
         "sie": "trockneten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "вытираться",
+      "translation_en": "to dry oneself"
     }
   },
   {
@@ -72586,6 +73089,10 @@
         "ihr": "wickeltet ab",
         "sie": "wickelten ab"
       }
+    },
+    "reflexive": {
+      "translation_ru": "проходить, протекать (о движении, процессе)",
+      "translation_en": "to proceed (traffic, a process)"
     }
   },
   {
@@ -73817,7 +74324,14 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "удариться коленом",
+      "translation_en": "to bang one's knee",
+      "note_ru": "sich (D) das Knie anschlagen",
+      "note_en": "sich (D) das Knie anschlagen",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-1565",
@@ -74075,6 +74589,12 @@
         "ihr": "vertrautet an",
         "sie": "vertrauten an"
       }
+    },
+    "reflexive": {
+      "translation_ru": "открыться, довериться кому-либо",
+      "translation_en": "to confide in someone",
+      "note_ru": "sich jemandem anvertrauen",
+      "note_en": "sich jemandem anvertrauen"
     }
   },
   {
@@ -74247,6 +74767,13 @@
         "ihr": "zündetet an",
         "sie": "zündeten an"
       }
+    },
+    "reflexive": {
+      "translation_ru": "закурить",
+      "translation_en": "to light a cigarette",
+      "note_ru": "sich (D) eine Zigarette anzünden",
+      "note_en": "sich (D) eine Zigarette anzünden",
+      "case": "Dativ"
     }
   },
   {
@@ -74437,6 +74964,12 @@
         "ihr": "arrangiertet",
         "sie": "arrangierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "приспособиться, найти общий язык, договориться",
+      "translation_en": "to come to an arrangement, to make the best of it",
+      "note_ru": "sich arrangieren (mit)",
+      "note_en": "sich arrangieren (mit)"
     }
   },
   {
@@ -74676,6 +75209,10 @@
         "ihr": "decktet auf",
         "sie": "deckten auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "раскрыться (во сне)",
+      "translation_en": "to kick off the covers (in one's sleep)"
     }
   },
   {
@@ -74725,6 +75262,10 @@
         "ihr": "drängtet auf",
         "sie": "drängten auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "навязываться; напрашиваться (о мысли, вопросе)",
+      "translation_en": "to impose oneself; to suggest itself (of a thought, a question)"
     }
   },
   {
@@ -74900,6 +75441,10 @@
         "ihr": "hängtet auf",
         "sie": "hängten auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "повеситься; (комп.) зависнуть",
+      "translation_en": "to hang oneself; (computing) to freeze, to hang"
     }
   },
   {
@@ -74991,6 +75536,10 @@
         "ihr": "klärtet auf",
         "sie": "klärten auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "проясняться (о недоразумении; о небе)",
+      "translation_en": "to be cleared up (a misunderstanding)"
     }
   },
   {
@@ -75506,6 +76055,13 @@
         "ihr": "schlagt auf",
         "Sie": "schlagen Sie auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "разбить колено",
+      "translation_en": "to cut one's knee open (in a fall)",
+      "note_ru": "sich (D) das Knie aufschlagen",
+      "note_en": "sich (D) das Knie aufschlagen",
+      "case": "Dativ"
     }
   },
   {
@@ -76206,6 +76762,10 @@
         "ihr": "arbeitetet aus",
         "sie": "arbeiteten aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(устар.) поразмяться, поработать физически (для разрядки)",
+      "translation_en": "to work off energy by physical work"
     }
   },
   {
@@ -76842,6 +77402,10 @@
         "ihr": "lebtet aus",
         "sie": "lebten aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "жить в своё удовольствие, «оторваться»",
+      "translation_en": "to live it up, to enjoy life to the full"
     }
   },
   {
@@ -77145,7 +77709,14 @@
         "note_ru": "вырывать что-либо (с корнем)",
         "note_en": "to pull out, to tear out something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "(разг.) не надрываться, не слишком стараться",
+      "translation_en": "(colloquial) not to overexert oneself",
+      "note_ru": "sich (D) kein Bein ausreißen",
+      "note_en": "sich (D) kein Bein ausreißen",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-1638",
@@ -77277,6 +77848,10 @@
         "ihr": "rüstetet aus",
         "sie": "rüsteten aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "снаряжаться",
+      "translation_en": "to equip oneself"
     }
   },
   {
@@ -78167,6 +78742,10 @@
         "ihr": "weist aus",
         "sie": "weisen aus"
       }
+    },
+    "reflexive": {
+      "translation_ru": "предъявить документы",
+      "translation_en": "to show one's ID"
     }
   },
   {
@@ -78762,6 +79341,10 @@
         "ihr": "beehrtet",
         "sie": "beehrten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(устар.) иметь честь (в официальных письмах)",
+      "translation_en": "(obsolete) to have the honour (in formal letters)"
     }
   },
   {
@@ -79152,6 +79735,12 @@
         "ihr": "beglückwünschtet",
         "sie": "beglückwünschten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "иметь все основания гордиться чем-либо",
+      "translation_en": "to have every reason to be proud of something",
+      "note_ru": "sich zu etwas beglückwünschen können",
+      "note_en": "sich zu etwas beglückwünschen können"
     }
   },
   {
@@ -79738,6 +80327,12 @@
         "ihr": "bekehrtet",
         "sie": "bekehrten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обратиться (в веру); перейти (на чью-либо точку зрения)",
+      "translation_en": "to convert (to a faith); to come round (to a view)",
+      "note_ru": "sich zu etwas bekehren — обратиться (в веру)",
+      "note_en": "sich zu etwas bekehren — to convert (to a faith)"
     }
   },
   {
@@ -80208,6 +80803,10 @@
         "ihr": "belohntet",
         "sie": "belohnten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "побаловать себя",
+      "translation_en": "to treat oneself"
     }
   },
   {
@@ -80257,6 +80856,12 @@
         "ihr": "belügt",
         "sie": "belügen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обманывать самого себя",
+      "translation_en": "to deceive oneself",
+      "note_ru": "sich selbst belügen",
+      "note_en": "sich selbst belügen"
     }
   },
   {
@@ -80635,7 +81240,11 @@
         "note_ru": "держать что-либо наготове",
         "note_en": "to have something ready"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "быть наготове",
+      "translation_en": "to be on standby"
+    }
   },
   {
     "id": "verb-1715",
@@ -80920,6 +81529,10 @@
         "ihr": "berührtet",
         "sie": "berührten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "соприкасаться",
+      "translation_en": "to touch (each other)"
     }
   },
   {
@@ -80991,6 +81604,10 @@
         "ihr": "besänftigtet",
         "sie": "besänftigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "успокоиться",
+      "translation_en": "to calm down"
     }
   },
   {
@@ -81032,6 +81649,13 @@
         "ihr": "beschafftet",
         "sie": "beschafften"
       }
+    },
+    "reflexive": {
+      "translation_ru": "раздобыть (себе) что-либо",
+      "translation_en": "to get hold of something",
+      "note_ru": "sich (D) etwas beschaffen",
+      "note_en": "sich (D) etwas beschaffen",
+      "case": "Dativ"
     }
   },
   {
@@ -81624,6 +82248,12 @@
         "ihr": "betätigtet",
         "sie": "betätigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "заниматься чем-либо, быть активным; выступать в роли …; заниматься волонтёрской работой",
+      "translation_en": "to be active; to act as …; to do voluntary work",
+      "note_ru": "sich als … betätigen — выступать в роли …; sich ehrenamtlich betätigen — заниматься волонтёрской работой",
+      "note_en": "sich als … betätigen — to act as …; sich ehrenamtlich betätigen — to do voluntary work"
     }
   },
   {
@@ -81881,6 +82511,12 @@
         "ihr": "bewaffnetet",
         "sie": "bewaffneten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "вооружаться; (шутл.) «вооружиться» чем-либо (зонтом, блокнотом)",
+      "translation_en": "to arm oneself; (jocular) to arm oneself with something (an umbrella, a notebook)",
+      "note_ru": "sich mit etwas bewaffnen — (шутл.) «вооружиться» чем-либо (зонтом, блокнотом)",
+      "note_en": "sich mit etwas bewaffnen — (jocular) to arm oneself with something (an umbrella, a notebook)"
     }
   },
   {
@@ -82298,6 +82934,10 @@
         "ihr": "stelltet bloß",
         "sie": "stellten bloß"
       }
+    },
+    "reflexive": {
+      "translation_ru": "выставить себя в неприглядном свете, скомпрометировать себя",
+      "translation_en": "to make a fool of oneself, to compromise oneself"
     }
   },
   {
@@ -82351,6 +82991,13 @@
         "ihr": "borgtet",
         "sie": "borgten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "брать в долг",
+      "translation_en": "to borrow something (from someone)",
+      "note_ru": "sich (D) etwas (von jemandem) borgen",
+      "note_en": "sich (D) etwas (von jemandem) borgen",
+      "case": "Dativ"
     }
   },
   {
@@ -82840,6 +83487,10 @@
         "ihr": "demütigtet",
         "sie": "demütigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "унижаться",
+      "translation_en": "to humble oneself"
     }
   },
   {
@@ -82929,6 +83580,13 @@
         "ihr": "desinfiziertet",
         "sie": "desinfizierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "продезинфицировать руки",
+      "translation_en": "to disinfect one's hands",
+      "note_ru": "sich (D) die Hände desinfizieren",
+      "note_en": "sich (D) die Hände desinfizieren",
+      "case": "Dativ"
     }
   },
   {
@@ -84439,7 +85097,11 @@
         "sie": "ziehen durch"
       }
     },
-    "reading_frequency": 3.34
+    "reading_frequency": 3.34,
+    "reflexive": {
+      "translation_ru": "проходить красной нитью (через всё произведение)",
+      "translation_en": "to run through (a whole work)"
+    }
   },
   {
     "id": "verb-2723",
@@ -85054,6 +85716,13 @@
         "ihr": "redetet ein",
         "sie": "redeten ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "внушать себе, убеждать себя",
+      "translation_en": "to talk oneself into believing something",
+      "note_ru": "sich (D) etwas einreden",
+      "note_en": "sich (D) etwas einreden",
+      "case": "Dativ"
     }
   },
   {
@@ -86081,6 +86750,10 @@
         "ihr": "entblößtet",
         "sie": "entblößten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "раздеваться, обнажаться",
+      "translation_en": "to undress, to expose oneself"
     }
   },
   {
@@ -86441,6 +87114,13 @@
         "ihr": "entgeht",
         "sie": "entgehen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "упустить что-либо (шанс, удовольствие)",
+      "translation_en": "to miss out on something (a chance, a treat)",
+      "note_ru": "sich (D) etwas entgehen lassen",
+      "note_en": "sich (D) etwas entgehen lassen",
+      "case": "Dativ"
     }
   },
   {
@@ -86572,6 +87252,10 @@
         "ihr": "enthülltet",
         "sie": "enthüllten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "раскрыться, обнаружиться",
+      "translation_en": "to be revealed"
     }
   },
   {
@@ -86620,6 +87304,12 @@
         "ihr": "entlarvtet",
         "sie": "entlarvten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "выдать себя",
+      "translation_en": "to give oneself away",
+      "note_ru": "sich selbst entlarven",
+      "note_en": "sich selbst entlarven"
     }
   },
   {
@@ -87190,6 +87880,12 @@
         "ihr": "entzieht",
         "sie": "entziehen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "уклоняться от чего-либо (от ответственности, обязанностей)",
+      "translation_en": "to shirk, to evade something (responsibility, duties)",
+      "note_ru": "sich einer Sache (D) entziehen",
+      "note_en": "sich einer Sache (D) entziehen"
     }
   },
   {
@@ -87639,6 +88335,13 @@
         "ihr": "erfriert",
         "sie": "erfrieren"
       }
+    },
+    "reflexive": {
+      "translation_ru": "отморозить пальцы",
+      "translation_en": "to get frostbite in one's fingers",
+      "note_ru": "sich (D) die Finger erfrieren",
+      "note_en": "sich (D) die Finger erfrieren",
+      "case": "Dativ"
     }
   },
   {
@@ -87680,6 +88383,10 @@
         "ihr": "erfrischtet",
         "sie": "erfrischten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "освежиться",
+      "translation_en": "to refresh oneself"
     }
   },
   {
@@ -87717,7 +88424,13 @@
         "sie": "ergingen"
       }
     },
-    "imperative": "none"
+    "imperative": "none",
+    "reflexive": {
+      "translation_ru": "(книжн.) прогуливаться; пускаться (в рассуждения), изливаться",
+      "translation_en": "(elevated) to stroll; to indulge in (speculation), to hold forth",
+      "note_ru": "sich in etwas ergehen — пускаться (в рассуждения), изливаться",
+      "note_en": "sich in etwas ergehen — to indulge in (speculation), to hold forth"
+    }
   },
   {
     "id": "verb-1866",
@@ -87800,6 +88513,10 @@
         "ihr": "erhängtet",
         "sie": "erhängten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "повеситься",
+      "translation_en": "to hang oneself"
     }
   },
   {
@@ -87993,6 +88710,13 @@
         "ihr": "erkauftet",
         "sie": "erkauften"
       }
+    },
+    "reflexive": {
+      "translation_ru": "дорого заплатить за что-либо",
+      "translation_en": "to pay dearly for something",
+      "note_ru": "sich (D) etwas teuer erkaufen",
+      "note_en": "sich (D) etwas teuer erkaufen",
+      "case": "Dativ"
     }
   },
   {
@@ -88433,6 +89157,10 @@
         "ihr": "erniedrigtet",
         "sie": "erniedrigten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "унижаться",
+      "translation_en": "to lower oneself"
     }
   },
   {
@@ -88609,6 +89337,12 @@
         "ihr": "erregtet",
         "sie": "erregten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "волноваться, возмущаться",
+      "translation_en": "to get worked up",
+      "note_ru": "sich erregen über + Akk.",
+      "note_en": "sich erregen über + accusative"
     }
   },
   {
@@ -89012,6 +89746,10 @@
         "ihr": "ertränktet",
         "sie": "ertränkten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "утопиться",
+      "translation_en": "to drown oneself"
     }
   },
   {
@@ -90488,6 +91226,10 @@
         "ihr": "machtet frei",
         "sie": "machten frei"
       }
+    },
+    "reflexive": {
+      "translation_ru": "освободиться (на время)",
+      "translation_en": "to get away (for a while)"
     }
   },
   {
@@ -90891,7 +91633,11 @@
         "sie": "gebührten"
       }
     },
-    "imperative": "none"
+    "imperative": "none",
+    "reflexive": {
+      "translation_ru": "подобать",
+      "translation_en": "to be proper"
+    }
   },
   {
     "id": "verb-1936",
@@ -91304,6 +92050,13 @@
         "ihr": "gestattetet",
         "sie": "gestatteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(книжн.) позволить себе что-либо",
+      "translation_en": "(elevated) to allow oneself something",
+      "note_ru": "sich (D) etwas gestatten",
+      "note_en": "sich (D) etwas gestatten",
+      "case": "Dativ"
     }
   },
   {
@@ -91628,6 +92381,10 @@
         "ihr": "glättetet",
         "sie": "glätteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "успокаиваться (о море, волнении)",
+      "translation_en": "to calm down (the sea, emotions)"
     }
   },
   {
@@ -92794,7 +93551,11 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "(рег., особ. южнонем., австр.) приводить себя в порядок, наряжаться",
+      "translation_en": "(regional, esp. southern German, Austrian) to get oneself ready, to dress up"
+    }
   },
   {
     "id": "verb-1973",
@@ -92952,7 +93713,11 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "затягиваться (о сроках, начале)",
+      "translation_en": "to be delayed (dates, a start)"
+    }
   },
   {
     "id": "verb-1976",
@@ -93650,7 +94415,11 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "подтягиваться (на турнике)",
+      "translation_en": "to pull oneself up (on a bar)"
+    }
   },
   {
     "id": "verb-1990",
@@ -94047,6 +94816,12 @@
         "ihr": "inspiriertet",
         "sie": "inspirierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "черпать вдохновение в чём-либо",
+      "translation_en": "to draw inspiration from something",
+      "note_ru": "sich von etwas inspirieren lassen",
+      "note_en": "sich von etwas inspirieren lassen"
     }
   },
   {
@@ -94129,6 +94904,10 @@
         "ihr": "inszeniertet",
         "sie": "inszenierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "подавать себя (на публике)",
+      "translation_en": "to present oneself (in public)"
     }
   },
   {
@@ -94266,6 +95045,13 @@
         "ihr": "kapertet",
         "sie": "kaperten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) заполучить что-либо",
+      "translation_en": "(colloquial) to grab something for oneself",
+      "note_ru": "sich (D) etwas kapern",
+      "note_en": "sich (D) etwas kapern",
+      "case": "Dativ"
     }
   },
   {
@@ -94623,6 +95409,10 @@
         "ihr": "kompliziertet",
         "sie": "komplizierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "осложняться",
+      "translation_en": "to become complicated"
     }
   },
   {
@@ -94705,6 +95495,10 @@
         "ihr": "kompromittiertet",
         "sie": "kompromittierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "скомпрометировать себя",
+      "translation_en": "to compromise oneself"
     }
   },
   {
@@ -94977,6 +95771,10 @@
         "ihr": "krachtet",
         "sie": "krachten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) разругаться",
+      "translation_en": "(colloquial) to have a row"
     }
   },
   {
@@ -97033,6 +97831,12 @@
         "ihr": "offenbartet",
         "sie": "offenbarten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "проявиться, обнаружиться; открыться кому-либо",
+      "translation_en": "to reveal itself, to become apparent; to confide in someone",
+      "note_ru": "sich jemandem offenbaren — открыться кому-либо",
+      "note_en": "sich jemandem offenbaren — to confide in someone"
     }
   },
   {
@@ -97081,6 +97885,12 @@
         "ihr": "opfertet",
         "sie": "opferten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "жертвовать собой (ради кого-либо); (разг., шутл.) взять на себя неприятное",
+      "translation_en": "to sacrifice oneself (for someone); (colloquial, jocular) to take one for the team",
+      "note_ru": "sich opfern (für + Akk.) — жертвовать собой (ради кого-либо)",
+      "note_en": "sich opfern (für + accusative) — to sacrifice oneself (for someone)"
     }
   },
   {
@@ -97353,6 +98163,12 @@
         "ihr": "plagtet",
         "sie": "plagten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "мучиться, биться (над чем-либо)",
+      "translation_en": "to struggle, to slave away (at something)",
+      "note_ru": "sich plagen (mit + Dat.)",
+      "note_en": "sich plagen (mit + dative)"
     }
   },
   {
@@ -97394,6 +98210,10 @@
         "ihr": "platziertet",
         "sie": "platzierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(спорт.) занять (призовое) место",
+      "translation_en": "(sport) to finish in a (top) position"
     }
   },
   {
@@ -97673,6 +98493,12 @@
         "ihr": "preist",
         "sie": "preisen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "считать себя счастливым",
+      "translation_en": "to count oneself lucky",
+      "note_ru": "sich glücklich preisen",
+      "note_en": "sich glücklich preisen"
     }
   },
   {
@@ -97899,6 +98725,10 @@
         "ihr": "pudertet",
         "sie": "puderten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "пудриться",
+      "translation_en": "to powder oneself"
     }
   },
   {
@@ -98526,7 +99356,11 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "восстанавливаться",
+      "translation_en": "to recover"
+    }
   },
   {
     "id": "verb-2095",
@@ -98568,6 +99402,12 @@
         "ihr": "reibt",
         "sie": "reiben"
       }
+    },
+    "reflexive": {
+      "translation_ru": "конфликтовать с кем-либо; потирать руки (от радости, злорадства)",
+      "translation_en": "to clash with someone; to rub one's hands (with glee)",
+      "note_ru": "sich an jemandem reiben — конфликтовать с кем-либо; sich die Hände reiben (перен.) — потирать руки (от радости, злорадства)",
+      "note_en": "sich an jemandem reiben — to clash with someone; sich die Hände reiben (figurative) — to rub one's hands (with glee)"
     }
   },
   {
@@ -98609,6 +99449,12 @@
         "ihr": "reimtet",
         "sie": "reimten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "рифмоваться (с чем-либо)",
+      "translation_en": "to rhyme (with something)",
+      "note_ru": "sich reimen (auf + Akk.)",
+      "note_en": "sich reimen (auf + accusative)"
     }
   },
   {
@@ -98710,7 +99556,13 @@
         "note_ru": "кого-либо, что-либо",
         "note_en": "someone, something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "дать себя обмануть",
+      "translation_en": "to fall for something",
+      "note_ru": "sich reinlegen lassen",
+      "note_en": "sich reinlegen lassen"
+    }
   },
   {
     "id": "verb-2099",
@@ -98751,6 +99603,12 @@
         "ihr": "rekrutiertet",
         "sie": "rekrutierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "набираться, комплектоваться (из кого-либо), состоять (из кого-либо)",
+      "translation_en": "to be drawn from, to be made up of (people)",
+      "note_ru": "sich aus etwas rekrutieren",
+      "note_en": "sich aus etwas rekrutieren"
     }
   },
   {
@@ -98852,6 +99710,10 @@
         "ihr": "ritztet",
         "sie": "ritzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "слегка пораниться, оцарапаться (о колючки, иглу)",
+      "translation_en": "to scratch oneself (on thorns, a needle)"
     }
   },
   {
@@ -99203,6 +100065,10 @@
         "ihr": "schärftet",
         "sie": "schärften"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обостряться",
+      "translation_en": "to become sharper"
     }
   },
   {
@@ -99569,6 +100435,12 @@
         "ihr": "schlingt",
         "sie": "schlingen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "обвиваться вокруг чего-либо (о растении)",
+      "translation_en": "to wind itself around something (of a plant)",
+      "note_ru": "sich um etwas schlingen",
+      "note_en": "sich um etwas schlingen"
     }
   },
   {
@@ -99658,6 +100530,12 @@
         "ihr": "schmeicheltet",
         "sie": "schmeichelten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(устар.) льстить себя надеждой, гордиться",
+      "translation_en": "(dated) to flatter oneself that",
+      "note_ru": "sich schmeicheln, etwas zu tun",
+      "note_en": "sich schmeicheln, etwas zu tun"
     }
   },
   {
@@ -99748,7 +100626,13 @@
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "пробраться тайком",
+      "translation_en": "to sneak in somewhere",
+      "note_ru": "sich irgendwohin schmuggeln",
+      "note_en": "sich irgendwohin schmuggeln"
+    }
   },
   {
     "id": "verb-2122",
@@ -99830,6 +100714,10 @@
         "ihr": "schnaubtet",
         "sie": "schnaubten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(рег.) сморкаться",
+      "translation_en": "(regional) to blow one's nose"
     }
   },
   {
@@ -100139,6 +101027,12 @@
         "ihr": "schuftetet",
         "sie": "schufteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) заработаться до изнеможения",
+      "translation_en": "(colloquial) to work oneself into the ground",
+      "note_ru": "sich kaputt schuften",
+      "note_en": "sich kaputt schuften"
     }
   },
   {
@@ -100567,6 +101461,10 @@
         "ihr": "senktet",
         "sie": "senkten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "опускаться, оседать (о грунте, уровне воды)",
+      "translation_en": "to sink, to subside (of ground, a water level)"
     }
   },
   {
@@ -101425,7 +102323,13 @@
         "note_ru": "что-либо / кого-либо",
         "note_en": "something / someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "упираться (во что-либо); (перен.) противиться чему-либо",
+      "translation_en": "to brace oneself against something; (figurative) to resist something",
+      "note_ru": "sich gegen etwas stemmen — упираться (во что-либо)",
+      "note_en": "sich gegen etwas stemmen — to brace oneself against something"
+    }
   },
   {
     "id": "verb-2159",
@@ -102014,6 +102918,10 @@
         "ihr": "tötetet",
         "sie": "töteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "покончить с собой",
+      "translation_en": "to kill oneself"
     }
   },
   {
@@ -102374,6 +103282,12 @@
         "ihr": "überbietet",
         "sie": "überbieten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "соревноваться друг с другом (в чём-либо)",
+      "translation_en": "to try to outdo each other",
+      "note_ru": "sich gegenseitig überbieten",
+      "note_en": "sich gegenseitig überbieten"
     }
   },
   {
@@ -102716,7 +103630,13 @@
         "note_ru": "предоставить кому-либо что-либо",
         "note_en": "to leave something to someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "предаваться чему-либо",
+      "translation_en": "to give oneself up to something",
+      "note_ru": "sich einer Sache überlassen",
+      "note_en": "sich einer Sache überlassen"
+    }
   },
   {
     "id": "verb-2188",
@@ -102999,6 +103919,12 @@
         "ihr": "überrumpeltet",
         "sie": "überrumpelten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "дать себя застать врасплох (уговорить сгоряча)",
+      "translation_en": "to be rushed into something",
+      "note_ru": "sich überrumpeln lassen",
+      "note_en": "sich überrumpeln lassen"
     }
   },
   {
@@ -103347,6 +104273,10 @@
         "ihr": "überstürztet",
         "sie": "überstürzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(о событиях) стремительно сменять друг друга",
+      "translation_en": "(of events) to follow one another in quick succession"
     }
   },
   {
@@ -103401,6 +104331,12 @@
         "ihr": "übertrefft",
         "Sie": "übertreffen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "превзойти самого себя",
+      "translation_en": "to surpass oneself",
+      "note_ru": "sich selbst übertreffen",
+      "note_en": "sich selbst übertreffen"
     }
   },
   {
@@ -103518,7 +104454,14 @@
         "Sie": "übertreten Sie"
       }
     },
-    "reading_frequency": 2.18
+    "reading_frequency": 2.18,
+    "reflexive": {
+      "translation_ru": "(рег.) подвернуть ногу (обычно: sich den Fuß vertreten)",
+      "translation_en": "(regional) to twist one's ankle (usually: sich den Fuß vertreten)",
+      "note_ru": "sich (D) den Fuß übertreten",
+      "note_en": "sich (D) den Fuß übertreten",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-2206",
@@ -103709,6 +104652,10 @@
         "ihr": "bringt um",
         "sie": "bringen um"
       }
+    },
+    "reflexive": {
+      "translation_ru": "покончить с собой",
+      "translation_en": "to kill oneself"
     }
   },
   {
@@ -103763,6 +104710,12 @@
         "ihr": "umgebt",
         "Sie": "umgeben Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "окружать себя кем-либо",
+      "translation_en": "to surround oneself with someone",
+      "note_ru": "sich mit jemandem umgeben",
+      "note_en": "sich mit jemandem umgeben"
     }
   },
   {
@@ -104097,6 +105050,12 @@
         "ihr": "stimmtet um",
         "sie": "stimmten um"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(не) поддаться уговорам",
+      "translation_en": "(not) to be talked round",
+      "note_ru": "sich (nicht) umstimmen lassen",
+      "note_en": "sich (nicht) umstimmen lassen"
     }
   },
   {
@@ -104317,6 +105276,12 @@
         "ihr": "kriegtet unter",
         "sie": "kriegten unter"
       }
+    },
+    "reflexive": {
+      "translation_ru": "не сдаваться, не падать духом",
+      "translation_en": "not to let things get one down",
+      "note_ru": "sich nicht unterkriegen lassen",
+      "note_en": "sich nicht unterkriegen lassen"
     }
   },
   {
@@ -105189,6 +106154,10 @@
         "ihr": "verbergt",
         "Sie": "verbergen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "прятаться, скрываться",
+      "translation_en": "to hide"
     }
   },
   {
@@ -106367,6 +107336,10 @@
         "ihr": "vergrabt",
         "Sie": "vergraben Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "зарываться (в землю); (перен.) уйти с головой (в работу, книги)",
+      "translation_en": "to burrow (into the earth); (figurative) to bury oneself (in work, books)"
     }
   },
   {
@@ -106976,6 +107949,12 @@
         "ihr": "verleitetet",
         "sie": "verleiteten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "позволить себя втянуть во что-либо",
+      "translation_en": "to let oneself be drawn into something",
+      "note_ru": "sich zu etwas verleiten lassen",
+      "note_en": "sich zu etwas verleiten lassen"
     }
   },
   {
@@ -107017,6 +107996,12 @@
         "ihr": "verleugnetet",
         "sie": "verleugneten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "велеть говорить, что тебя нет",
+      "translation_en": "to have someone say one is not in",
+      "note_ru": "sich verleugnen lassen",
+      "note_en": "sich verleugnen lassen"
     }
   },
   {
@@ -107256,6 +108241,12 @@
         "ihr": "vermesst",
         "Sie": "vermessen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ошибиться при измерении; (книжн.) осмелиться",
+      "translation_en": "to measure wrongly; (elevated) to presume to do something",
+      "note_ru": "sich vermessen, etwas zu tun — (книжн.) осмелиться",
+      "note_en": "sich vermessen, etwas zu tun — (elevated) to presume to do something"
     }
   },
   {
@@ -107434,6 +108425,10 @@
         "ihr": "verpfeift",
         "sie": "verpfeifen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) смыться",
+      "translation_en": "(colloquial) to clear off"
     }
   },
   {
@@ -107572,7 +108567,14 @@
         "note_ru": "кому-либо что-либо",
         "note_en": "something to someone"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "отказать себе в чём-либо",
+      "translation_en": "to deny oneself something",
+      "note_ru": "sich (D) etwas versagen",
+      "note_en": "sich (D) etwas versagen",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-2293",
@@ -107620,6 +108622,13 @@
         "ihr": "verschafftet",
         "sie": "verschafften"
       }
+    },
+    "reflexive": {
+      "translation_ru": "добиться, обеспечить себе (уважение, ясность, преимущество)",
+      "translation_en": "to gain, to secure (respect, clarity, an advantage)",
+      "note_ru": "sich (D) etwas verschaffen",
+      "note_en": "sich (D) etwas verschaffen",
+      "case": "Dativ"
     }
   },
   {
@@ -107702,6 +108711,10 @@
         "ihr": "verschenktet",
         "sie": "verschenkten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(книжн.) отдаться (кому-либо)",
+      "translation_en": "(elevated) to give oneself (to someone)"
     }
   },
   {
@@ -107831,6 +108844,10 @@
         "ihr": "verschleiertet",
         "sie": "verschleierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "затягиваться дымкой (о небе); затуманиваться (о взгляде)",
+      "translation_en": "to become hazy (of the sky); to cloud over (of a gaze)"
     }
   },
   {
@@ -107873,6 +108890,12 @@
         "ihr": "verschließt",
         "sie": "verschließen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "оставаться глухим к чему-либо",
+      "translation_en": "to remain deaf to something",
+      "note_ru": "sich einer Sache verschließen",
+      "note_en": "sich einer Sache verschließen"
     }
   },
   {
@@ -107914,6 +108937,10 @@
         "ihr": "verschlimmertet",
         "sie": "verschlimmerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "ухудшаться",
+      "translation_en": "to get worse"
     }
   },
   {
@@ -107956,6 +108983,12 @@
         "ihr": "verschlingt",
         "sie": "verschlingen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "переплетаться",
+      "translation_en": "to intertwine",
+      "note_ru": "sich ineinander verschlingen",
+      "note_en": "sich ineinander verschlingen"
     }
   },
   {
@@ -108243,6 +109276,12 @@
         "ihr": "versetztet",
         "sie": "versetzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "поставить себя на чьё-либо место",
+      "translation_en": "to put oneself in someone's shoes",
+      "note_ru": "sich in jemandes Lage versetzen",
+      "note_en": "sich in jemandes Lage versetzen"
     }
   },
   {
@@ -108897,6 +109936,10 @@
         "ihr": "vertagtet",
         "sie": "vertagten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "прервать заседание, назначив новое (о суде, комиссии)",
+      "translation_en": "to adjourn (of a court, a committee)"
     }
   },
   {
@@ -109206,6 +110249,12 @@
         "ihr": "verwehrtet",
         "sie": "verwehrten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "возражать против чего-либо (в Австрии — sich verwahren)",
+      "translation_en": "to object to something (in Austria — sich verwahren)",
+      "note_ru": "sich gegen etwas verwehren",
+      "note_en": "sich gegen etwas verwehren"
     }
   },
   {
@@ -109342,6 +110391,10 @@
         "ihr": "verwischtet",
         "sie": "verwischten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "стираться, расплываться (о границах, воспоминаниях)",
+      "translation_en": "to become blurred (of boundaries, memories)"
     }
   },
   {
@@ -109465,6 +110518,12 @@
         "ihr": "verzehrtet",
         "sie": "verzehrten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(книжн.) изнывать, тосковать по кому-либо",
+      "translation_en": "(elevated) to pine for someone",
+      "note_ru": "sich nach jemandem verzehren",
+      "note_en": "sich nach jemandem verzehren"
     }
   },
   {
@@ -110166,7 +111225,11 @@
         "note_ru": "кого-либо, что-либо",
         "note_en": "someone, something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "оказаться (где-либо), обнаружиться",
+      "translation_en": "to find oneself (somewhere), to be found"
+    }
   },
   {
     "id": "verb-2349",
@@ -111743,6 +112806,10 @@
         "ihr": "arbeitetet weiter",
         "sie": "arbeiteten weiter"
       }
+    },
+    "reflexive": {
+      "translation_ru": "продвигаться (вперёд) с трудом",
+      "translation_en": "to work one's way forward"
     }
   },
   {
@@ -112853,7 +113920,14 @@
         "note_ru": "что-либо (часть тела): sich (Dat) die Füße wundreiben; sich wundreiben — натереть себе (кожу)",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "натереть себе что-либо",
+      "translation_en": "to rub something sore",
+      "note_ru": "sich (D) etwas wundreiben",
+      "note_en": "sich (D) etwas wundreiben",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-2404",
@@ -113128,6 +114202,12 @@
         "ihr": "zerfleischtet",
         "sie": "zerfleischten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "беспощадно грызться (о партиях, соперниках); (книжн.) терзать себя упрёками",
+      "translation_en": "to tear each other apart (of parties, rivals); (elevated) to torment oneself with self-reproach",
+      "note_ru": "sich gegenseitig zerfleischen — беспощадно грызться (о партиях, соперниках); sich mit Selbstvorwürfen zerfleischen — (книжн.) терзать себя упрёками",
+      "note_en": "sich gegenseitig zerfleischen — to tear each other apart (of parties, rivals); sich mit Selbstvorwürfen zerfleischen — (elevated) to torment oneself with self-reproach"
     }
   },
   {
@@ -113299,6 +114379,12 @@
         "ihr": "zerreißt",
         "sie": "zerreißen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг., шутл.) не мочь разорваться (успеть всё сразу)",
+      "translation_en": "(colloquial, jocular) not to be able to be in two places at once",
+      "note_ru": "sich nicht zerreißen können",
+      "note_en": "sich nicht zerreißen können"
     }
   },
   {
@@ -113346,6 +114432,10 @@
         "ihr": "zerschlagt",
         "Sie": "zerschlagen Sie"
       }
+    },
+    "reflexive": {
+      "translation_ru": "расстроиться, сорваться (о планах)",
+      "translation_en": "to fall through (of plans)"
     }
   },
   {
@@ -113429,6 +114519,13 @@
         "ihr": "zerschneidet",
         "sie": "zerschneiden"
       }
+    },
+    "reflexive": {
+      "translation_ru": "порезать себе (руку и т. п.)",
+      "translation_en": "to cut (one's hand etc.)",
+      "note_ru": "sich (D) etwas zerschneiden",
+      "note_en": "sich (D) etwas zerschneiden",
+      "case": "Dativ"
     }
   },
   {
@@ -113886,6 +114983,13 @@
         "ihr": "legtet zu",
         "sie": "legten zu"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) обзавестись, купить",
+      "translation_en": "(colloquial) to get oneself something",
+      "note_ru": "sich (D) etwas zulegen",
+      "note_en": "sich (D) etwas zulegen",
+      "case": "Dativ"
     }
   },
   {
@@ -113935,6 +115039,13 @@
         "ihr": "mutetet zu",
         "sie": "muteten zu"
       }
+    },
+    "reflexive": {
+      "translation_ru": "брать на себя слишком много",
+      "translation_en": "to take on too much",
+      "note_ru": "sich (D) zu viel zumuten",
+      "note_en": "sich (D) zu viel zumuten",
+      "case": "Dativ"
     }
   },
   {
@@ -114320,7 +115431,14 @@
         "note_ru": "кого-либо, что-либо",
         "note_en": "someone, something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "вернуть себе что-либо (деньги, титул)",
+      "translation_en": "to get something back (money, a title)",
+      "note_ru": "sich (D) etwas zurückholen",
+      "note_en": "sich (D) etwas zurückholen",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-2436",
@@ -114431,7 +115549,11 @@
         "note_ru": "что-либо",
         "note_en": "something"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "сдерживаться, держаться в тени",
+      "translation_en": "to hold back, to keep a low profile"
+    }
   },
   {
     "id": "verb-2438",
@@ -115092,6 +116214,10 @@
         "ihr": "setztet zu",
         "sie": "setzten zu"
       }
+    },
+    "reflexive": {
+      "translation_ru": "засоряться (о фильтре, трубе)",
+      "translation_en": "to clog up (of a filter, a pipe)"
     }
   },
   {
@@ -115611,6 +116737,10 @@
         "ihr": "akzentuiertet",
         "sie": "akzentuierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(книжн.) обостряться, отчётливо проявляться (о проблеме, противоречии)",
+      "translation_en": "(elevated) to become more pronounced (of a problem, a conflict)"
     }
   },
   {
@@ -115939,6 +117069,10 @@
         "ihr": "blast auf",
         "Sie": "blasen Sie auf"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг. неодобр.) важничать, задаваться",
+      "translation_en": "(colloquial, derogatory) to give oneself airs"
     }
   },
   {
@@ -116216,6 +117350,12 @@
         "ihr": "berauschtet",
         "sie": "berauschten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "опьяняться; упиваться чем-либо",
+      "translation_en": "to get intoxicated; to revel in something",
+      "note_ru": "sich an etwas berauschen — упиваться чем-либо",
+      "note_en": "sich an etwas berauschen — to revel in something"
     }
   },
   {
@@ -116475,6 +117615,12 @@
         "ihr": "blendetet",
         "sie": "blendeten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "дать себя ослепить (обмануть внешним блеском)",
+      "translation_en": "to be dazzled, taken in (by appearances)",
+      "note_ru": "sich (von etwas) blenden lassen",
+      "note_en": "sich (von etwas) blenden lassen"
     }
   },
   {
@@ -116660,6 +117806,10 @@
         "ihr": "diszipliniertet",
         "sie": "disziplinierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "дисциплинировать себя, держать себя в руках",
+      "translation_en": "to discipline oneself"
     }
   },
   {
@@ -117485,6 +118635,12 @@
         "ihr": "infiziertet",
         "sie": "infizierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "заразиться",
+      "translation_en": "to become infected",
+      "note_ru": "sich infizieren (mit + Dat., bei + Dat.)",
+      "note_en": "sich infizieren (mit + dative, bei + dative)"
     }
   },
   {
@@ -117575,6 +118731,12 @@
         "ihr": "führtet irre",
         "sie": "führten irre"
       }
+    },
+    "reflexive": {
+      "translation_ru": "не дать себя обмануть",
+      "translation_en": "not to be fooled",
+      "note_ru": "sich nicht irreführen lassen",
+      "note_en": "sich nicht irreführen lassen"
     }
   },
   {
@@ -117835,6 +118997,10 @@
         "ihr": "mildertet",
         "sie": "milderten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "смягчаться, ослабевать (о гневе, боли, погоде)",
+      "translation_en": "to soften, to ease (of anger, pain, the weather)"
     }
   },
   {
@@ -118279,6 +119445,10 @@
         "ihr": "überlagertet",
         "sie": "überlagerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "накладываться друг на друга, частично совпадать",
+      "translation_en": "to overlap, to be superimposed"
     }
   },
   {
@@ -118448,6 +119618,10 @@
         "ihr": "ordnetet unter",
         "sie": "ordneten unter"
       }
+    },
+    "reflexive": {
+      "translation_ru": "подчиняться, подстраиваться (под кого-, что-либо)",
+      "translation_en": "to submit, to fit in (with someone, something)"
     }
   },
   {
@@ -118854,6 +120028,12 @@
         "ihr": "vergeht",
         "sie": "vergehen"
       }
+    },
+    "reflexive": {
+      "translation_ru": "нарушать (закон, нормы); совершить насилие над кем-либо",
+      "translation_en": "to violate (a law, norms); to assault someone",
+      "note_ru": "sich vergehen gegen + Akk. — нарушать (закон, нормы); sich an jemandem vergehen — совершить насилие над кем-либо",
+      "note_en": "sich vergehen gegen + accusative — to violate (a law, norms); sich an jemandem vergehen — to assault someone"
     }
   },
   {
@@ -118895,6 +120075,13 @@
         "ihr": "verkorkstet",
         "sie": "verkorksten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "(разг.) испортить себе желудок",
+      "translation_en": "(colloquial) to upset one's stomach",
+      "note_ru": "sich (D) den Magen verkorksen",
+      "note_en": "sich (D) den Magen verkorksen",
+      "case": "Dativ"
     }
   },
   {
@@ -119270,6 +120457,10 @@
         "ihr": "versteinertet",
         "sie": "versteinerten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "застывать (о лице, взгляде)",
+      "translation_en": "to freeze (of a face, a look)"
     }
   },
   {
@@ -119581,6 +120772,12 @@
         "ihr": "zentriertet",
         "sie": "zentrierten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "сосредоточиваться вокруг чего-либо",
+      "translation_en": "to centre on something",
+      "note_ru": "sich um etwas zentrieren",
+      "note_en": "sich um etwas zentrieren"
     }
   },
   {
@@ -119622,6 +120819,10 @@
         "ihr": "zersetztet",
         "sie": "zersetzten"
       }
+    },
+    "reflexive": {
+      "translation_ru": "разлагаться",
+      "translation_en": "to decompose"
     }
   },
   {
@@ -121055,6 +122256,12 @@
         "ihr": "hängt ein",
         "Sie": "hängen Sie ein"
       }
+    },
+    "reflexive": {
+      "translation_ru": "взять кого-либо под руку",
+      "translation_en": "to link arms with someone",
+      "note_ru": "sich bei jemandem einhängen",
+      "note_en": "sich bei jemandem einhängen"
     }
   },
   {
@@ -125893,7 +127100,14 @@
         "note_ru": "признавать, что …",
         "note_en": "to concede that …"
       }
-    ]
+    ],
+    "reflexive": {
+      "translation_ru": "позволить себе что-либо",
+      "translation_en": "to allow oneself something",
+      "note_ru": "sich (D) etwas zugestehen",
+      "note_en": "sich (D) etwas zugestehen",
+      "case": "Dativ"
+    }
   },
   {
     "id": "verb-2720",
@@ -127918,5 +129132,316 @@
         "note_en": "something (einen Brief, eine Münze, eine Scheibe)"
       }
     ]
+  },
+  {
+    "id": "verb-2795",
+    "infinitive": "zerschellen",
+    "translation_ru": "разбиваться вдребезги (о корабле, самолёте, посуде)",
+    "translation_en": "to be smashed to pieces, to shatter (of a ship, a plane, crockery)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt только с sein: Das Glas ist auf dem Boden zerschellt. — Стакан разбился об пол. Обо что — an + Dativ: an den Klippen zerschellen — разбиться о скалы.",
+    "usage_note_en": "Perfekt only with sein: Das Glas ist auf dem Boden zerschellt. — The glass shattered on the floor. Against what — an + dative: an den Klippen zerschellen — to be dashed against the rocks.",
+    "example_de": "In der stürmischen Nacht ist das kleine Boot an den Felsen zerschellt.",
+    "example_cloze": "In der stürmischen Nacht ist das kleine Boot an den Felsen {{c1::zerschellt}}.",
+    "example_ru": "Штормовой ночью маленькая лодка разбилась о скалы.",
+    "example_en": "On that stormy night the little boat was dashed to pieces on the rocks.",
+    "perfect_form": "sein zerschellt",
+    "imperative": "none",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "zerschelle",
+        "du": "zerschellst",
+        "er/sie/es": "zerschellt",
+        "wir": "zerschellen",
+        "ihr": "zerschellt",
+        "sie": "zerschellen"
+      },
+      "Präteritum": {
+        "ich": "zerschellte",
+        "du": "zerschelltest",
+        "er/sie/es": "zerschellte",
+        "wir": "zerschellten",
+        "ihr": "zerschelltet",
+        "sie": "zerschellten"
+      },
+      "Konjunktiv II": {
+        "ich": "zerschellte",
+        "du": "zerschelltest",
+        "er/sie/es": "zerschellte",
+        "wir": "zerschellten",
+        "ihr": "zerschelltet",
+        "sie": "zerschellten"
+      }
+    }
+  },
+  {
+    "id": "verb-2796",
+    "infinitive": "abklingen",
+    "translation_ru": "стихать (о звуке); ослабевать, проходить (о боли, жаре, волнении)",
+    "translation_en": "to die away (of a sound); to subside, to wear off (of pain, a fever, excitement)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt с sein: Das Fieber ist abgeklungen. — Температура спала. О звуке: Der Donner klang langsam ab. — Гром постепенно стихал.",
+    "usage_note_en": "Perfekt with sein: Das Fieber ist abgeklungen. — The fever has gone down. Of a sound: Der Donner klang langsam ab. — The thunder slowly died away.",
+    "example_de": "Nach einer Stunde war der Kopfschmerz endlich abgeklungen.",
+    "example_cloze": "Nach einer Stunde war der Kopfschmerz endlich {{c1::abgeklungen}}.",
+    "example_ru": "Через час головная боль наконец прошла.",
+    "example_en": "After an hour the headache had finally worn off.",
+    "perfect_form": "sein abgeklungen",
+    "imperative": "none",
+    "forms": null,
+    "separable_prefix": "ab",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "klinge ab",
+        "du": "klingst ab",
+        "er/sie/es": "klingt ab",
+        "wir": "klingen ab",
+        "ihr": "klingt ab",
+        "sie": "klingen ab"
+      },
+      "Präteritum": {
+        "ich": "klang ab",
+        "du": "klangst ab",
+        "er/sie/es": "klang ab",
+        "wir": "klangen ab",
+        "ihr": "klangt ab",
+        "sie": "klangen ab"
+      },
+      "Konjunktiv II": {
+        "ich": "klänge ab",
+        "du": "klängest ab",
+        "er/sie/es": "klänge ab",
+        "wir": "klängen ab",
+        "ihr": "klänget ab",
+        "sie": "klängen ab"
+      }
+    }
+  },
+  {
+    "id": "verb-2797",
+    "infinitive": "freikommen",
+    "translation_ru": "выйти на свободу, освободиться; (о застрявшем) высвободиться, сняться (с мели)",
+    "translation_en": "to be released, to get free; (of something stuck) to come free, to be refloated",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt с sein. gegen Kaution freikommen — выйти под залог. О застрявшем: Bei Flut kam das Boot wieder frei. — С приливом лодка снова снялась с мели.",
+    "usage_note_en": "Perfekt with sein. gegen Kaution freikommen — to be released on bail. Of something stuck: Bei Flut kam das Boot wieder frei. — At high tide the boat floated free again.",
+    "example_de": "Nach drei Jahren im Gefängnis ist er endlich freigekommen.",
+    "example_cloze": "Nach drei Jahren im Gefängnis ist er endlich {{c1::freigekommen}}.",
+    "example_ru": "После трёх лет в тюрьме он наконец вышел на свободу.",
+    "example_en": "After three years in prison he was finally released.",
+    "perfect_form": "sein freigekommen",
+    "imperative": "none",
+    "forms": null,
+    "separable_prefix": "frei",
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "komme frei",
+        "du": "kommst frei",
+        "er/sie/es": "kommt frei",
+        "wir": "kommen frei",
+        "ihr": "kommt frei",
+        "sie": "kommen frei"
+      },
+      "Präteritum": {
+        "ich": "kam frei",
+        "du": "kamst frei",
+        "er/sie/es": "kam frei",
+        "wir": "kamen frei",
+        "ihr": "kamt frei",
+        "sie": "kamen frei"
+      },
+      "Konjunktiv II": {
+        "ich": "käme frei",
+        "du": "kämest frei",
+        "er/sie/es": "käme frei",
+        "wir": "kämen frei",
+        "ihr": "kämet frei",
+        "sie": "kämen frei"
+      }
+    }
+  },
+  {
+    "id": "verb-2798",
+    "infinitive": "verrohen",
+    "translation_ru": "грубеть, ожесточаться (о людях, нравах)",
+    "translation_en": "to become brutalized, to coarsen (of people, manners)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt с sein. die Verrohung — огрубение, ожесточение (нравов). Ср. roh — грубый; сырой.",
+    "usage_note_en": "Perfekt with sein. die Verrohung — brutalization, coarsening (of manners). Cf. roh — rough; raw.",
+    "example_de": "Im langen Krieg sind viele Menschen verroht.",
+    "example_cloze": "Im langen Krieg sind viele Menschen {{c1::verroht}}.",
+    "example_ru": "За долгую войну многие люди ожесточились.",
+    "example_en": "During the long war many people became brutalized.",
+    "perfect_form": "sein verroht",
+    "imperative": "none",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "verrohe",
+        "du": "verrohst",
+        "er/sie/es": "verroht",
+        "wir": "verrohen",
+        "ihr": "verroht",
+        "sie": "verrohen"
+      },
+      "Präteritum": {
+        "ich": "verrohte",
+        "du": "verrohtest",
+        "er/sie/es": "verrohte",
+        "wir": "verrohten",
+        "ihr": "verrohtet",
+        "sie": "verrohten"
+      },
+      "Konjunktiv II": {
+        "ich": "verrohte",
+        "du": "verrohtest",
+        "er/sie/es": "verrohte",
+        "wir": "verrohten",
+        "ihr": "verrohtet",
+        "sie": "verrohten"
+      }
+    }
+  },
+  {
+    "id": "verb-2799",
+    "infinitive": "versiegen",
+    "translation_ru": "иссякать, пересыхать (об источнике); (книжн.) иссякать, истощаться (о силах, средствах, слезах)",
+    "translation_en": "to dry up (of a spring); (elevated) to run dry, to give out (of strength, means, tears)",
+    "auxiliary": "sein",
+    "usage_note_ru": "Perfekt с sein. Перен.: Ihre Kräfte versiegten. — Её силы иссякли. Не путать с versiegeln — опечатывать.",
+    "usage_note_en": "Perfekt with sein. Figurative: Ihre Kräfte versiegten. — Her strength gave out. Do not confuse with versiegeln — to seal.",
+    "example_de": "Im heißen Sommer ist die alte Quelle hinter dem Dorf versiegt.",
+    "example_cloze": "Im heißen Sommer ist die alte Quelle hinter dem Dorf {{c1::versiegt}}.",
+    "example_ru": "Жарким летом старый родник за деревней пересох.",
+    "example_en": "In the hot summer the old spring behind the village dried up.",
+    "perfect_form": "sein versiegt",
+    "imperative": "none",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "versiege",
+        "du": "versiegst",
+        "er/sie/es": "versiegt",
+        "wir": "versiegen",
+        "ihr": "versiegt",
+        "sie": "versiegen"
+      },
+      "Präteritum": {
+        "ich": "versiegte",
+        "du": "versiegtest",
+        "er/sie/es": "versiegte",
+        "wir": "versiegten",
+        "ihr": "versiegtet",
+        "sie": "versiegten"
+      },
+      "Konjunktiv II": {
+        "ich": "versiegte",
+        "du": "versiegtest",
+        "er/sie/es": "versiegte",
+        "wir": "versiegten",
+        "ihr": "versiegtet",
+        "sie": "versiegten"
+      }
+    }
+  },
+  {
+    "id": "verb-2800",
+    "infinitive": "wischen",
+    "translation_ru": "вытирать, протирать (стол, пол); смахивать (пыль, слёзы); проводить (рукой по чему-либо); (с sein) юркнуть, шмыгнуть (куда-либо)",
+    "translation_en": "to wipe, to mop (a table, the floor); to brush away (dust, tears); to pass one's hand (over something); (with sein) to dart, to whisk (somewhere)",
+    "auxiliary": [
+      "haben",
+      "sein"
+    ],
+    "usage_note_ru": "Staub wischen — вытирать пыль; sich (D) den Schweiß von der Stirn wischen — вытереть пот со лба; (über den Bildschirm) wischen — провести пальцем (по экрану). «Юркнуть (куда-либо)» — Perfekt с sein: Die Katze ist ins Zimmer gewischt. — Кошка юркнула в комнату.",
+    "usage_note_en": "Staub wischen — to dust; sich (D) den Schweiß von der Stirn wischen — to wipe the sweat from one's brow; (über den Bildschirm) wischen — to swipe (the screen). “To dart (somewhere)” takes sein in the perfect: Die Katze ist ins Zimmer gewischt. — The cat darted into the room.",
+    "example_de": "Nach dem Essen wischt Paul immer den Tisch.",
+    "example_cloze": "Nach dem Essen {{c1::wischt}} Paul immer den Tisch.",
+    "example_ru": "После еды Пауль всегда протирает стол.",
+    "example_en": "After the meal Paul always wipes the table.",
+    "perfect_form": "haben gewischt",
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "wische",
+        "du": "wischst",
+        "er/sie/es": "wischt",
+        "wir": "wischen",
+        "ihr": "wischt",
+        "sie": "wischen"
+      },
+      "Präteritum": {
+        "ich": "wischte",
+        "du": "wischtest",
+        "er/sie/es": "wischte",
+        "wir": "wischten",
+        "ihr": "wischtet",
+        "sie": "wischten"
+      },
+      "Konjunktiv II": {
+        "ich": "wischte",
+        "du": "wischtest",
+        "er/sie/es": "wischte",
+        "wir": "wischten",
+        "ihr": "wischtet",
+        "sie": "wischten"
+      }
+    }
+  },
+  {
+    "id": "verb-2801",
+    "infinitive": "erhellen",
+    "translation_ru": "освещать; (книжн.) прояснять, объяснять (связи, причины)",
+    "translation_en": "to light up, to illuminate; (elevated) to shed light on (connections, causes)",
+    "auxiliary": "haben",
+    "usage_note_ru": "sich erhellen — светлеть, проясняться: Ihr Gesicht erhellte sich. — Её лицо просветлело. (книжн.) aus etwas erhellen — явствовать, следовать из чего-либо: Daraus erhellt, dass … — Отсюда явствует, что … Ср. hell — светлый.",
+    "usage_note_en": "sich erhellen — to brighten: Ihr Gesicht erhellte sich. — Her face lit up. (elevated) aus etwas erhellen — to be evident from something: Daraus erhellt, dass … — From this it is evident that … Cf. hell — light, bright.",
+    "example_de": "Eine einzige Kerze erhellte den dunklen Keller.",
+    "example_cloze": "Eine einzige Kerze {{c1::erhellte}} den dunklen Keller.",
+    "example_ru": "Единственная свеча освещала тёмный подвал.",
+    "example_en": "A single candle lit up the dark cellar.",
+    "perfect_form": "haben erhellt",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (den Raum, das Gesicht; перен. die Zusammenhänge)",
+        "note_en": "something (den Raum, das Gesicht; figuratively die Zusammenhänge)"
+      }
+    ],
+    "reflexive": {
+      "translation_ru": "светлеть, проясняться (о лице, небе)",
+      "translation_en": "to brighten, to light up (of a face, the sky)",
+      "example_de": "Ihr Gesicht erhellte sich.",
+      "example_ru": "Её лицо просветлело.",
+      "example_en": "Her face lit up."
+    },
+    "forms": null,
+    "lookup_forms": {
+      "Präsens": {
+        "ich": "erhelle",
+        "du": "erhellst",
+        "er/sie/es": "erhellt",
+        "wir": "erhellen",
+        "ihr": "erhellt",
+        "sie": "erhellen"
+      },
+      "Präteritum": {
+        "ich": "erhellte",
+        "du": "erhelltest",
+        "er/sie/es": "erhellte",
+        "wir": "erhellten",
+        "ihr": "erhelltet",
+        "sie": "erhellten"
+      },
+      "Konjunktiv II": {
+        "ich": "erhellte",
+        "du": "erhelltest",
+        "er/sie/es": "erhellte",
+        "wir": "erhellten",
+        "ihr": "erhelltet",
+        "sie": "erhellten"
+      }
+    }
   }
 ]

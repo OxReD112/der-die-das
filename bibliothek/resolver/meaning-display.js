@@ -399,13 +399,15 @@
       // L13 (reference F12-G3): hätte / wäre + participle — the participle «Konjunktiv II», hätte / wäre «Konjunktiv II mit …»
       // with «бы (о прошлом)» instead of the dictionary meaning.
       // A3 (advisor 03.11): er habe … versucht, er sei … gestorben — the participle «Konjunktiv I», habe / sei «Konjunktiv I mit …».
-      case 'perfect-group': if (k.label === 'Konjunktiv I') return isMain && !k.clickedRole ? {marks:['Konjunktiv I'], role:null, spans}
+      // (advisor 16.11, (4) Г: the state group in Konjunktiv II / I — wäre verwandelt, seien vernichtet — «Konjunktiv II · состояние mit …»,
+      // not «бы (о прошлом)»)
+      case 'perfect-group': if (k.stateOnly) return {marks:[`${k.label === 'Plusquamperfekt' ? 'Präteritum · ' : /^Konjunktiv I{1,2}$/u.test(k.label || '') ? `${k.label} · ` : ''}${language === 'ru' ? 'состояние' : 'state'} mit ${name}`], role:k.clickedRole && k.clickedRole !== 'conditionalPast' ? k.clickedRole : isMain ? null : 'auxiliary', spans};
+        if (k.label === 'Konjunktiv I') return isMain && !k.clickedRole ? {marks:['Konjunktiv I'], role:null, spans}
           : {marks:[`Konjunktiv I mit ${name}`], role:k.clickedRole || 'auxiliary', spans};
         if (k.label === 'Konjunktiv II') return isMain && !k.clickedRole ? {marks:['Konjunktiv II'], role:null, spans}
           : {marks:[`Konjunktiv II mit ${name}`], role:'conditionalPast', spans};
         // (advisor 07.11: sein + participle of a haben-only verb — the state passive alone: «состояние mit reparieren», with war
         // «Präteritum · состояние mit …», as «Präteritum · Passiv mit …» of werden)
-        if (k.stateOnly) return {marks:[`${k.label === 'Plusquamperfekt' ? 'Präteritum · ' : ''}${language === 'ru' ? 'состояние' : 'state'} mit ${name}`], role:k.clickedRole || (isMain ? null : 'auxiliary'), spans};
         return {marks:[`${k.label}${k.state ? ` / ${language === 'ru' ? 'состояние' : 'state'}` : ''} mit ${name}`], role:k.clickedRole || (isMain ? null : 'auxiliary'), spans};
       case 'werden-future': if (k.mood === 'Konjunktiv I') return {marks:[isMain ? 'Konjunktiv I' : `Konjunktiv I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
         return {marks:[`Futur I mit ${name}`], role:isMain ? null : 'auxiliary', spans};
@@ -477,7 +479,8 @@
       // L17 (reference F12-B9b): soll … erwähnt worden sein — every word adds «Passiv»; worden is the passive auxiliary;
       // soll (Präsens) + perfect infinitive «здесь: говорят, будто».
       case 'modal-perfect-infinitive': {
-        const tail = k.passive ? ['Perfekt', 'Passiv'] : ['Perfekt'];
+        // (advisor 16.11, (4) Г: modal + participle of a haben-only verb + sein — the state: «Modal mit verwandeln · состояние»)
+        const tail = k.stateOnly ? [language === 'ru' ? 'состояние' : 'state'] : k.passive ? ['Perfekt', 'Passiv'] : ['Perfekt'];
         if (k.clickedRole) return {marks:[`Modal mit ${name}`, ...tail], role:k.clickedRole, spans};
         // (TODO 64: the modal names its tense / mood as in the plain modal group — musste … gewesen sein «Präteritum mit sein · Perfekt»)
         if (MODALS.has(own) && !isMain) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name}`, ...tail], role:k.hearsay && own === 'sollen' ? 'hearsay' : null, spans}; }
@@ -489,6 +492,8 @@
         if (own === 'zu') return {marks:[], role:'infinitiveParticle', spans};
         if (k.conjunctionWord && own === k.conjunctionWord) return {marks:[], role:null, spans};
         if (k.chain === 'perfect') return {marks:[`Perfekt mit ${name}`], role:k.clickedRole || null, spans};
+        // (advisor 16.11, (4) Г: verwandelt zu sein — «состояние mit verwandeln»)
+        if (k.chain === 'state') return {marks:[`${language === 'ru' ? 'состояние' : 'state'} mit ${name}`], role:k.clickedRole || null, spans};
         // (links chat, advisor 09.11, map N2) ignoriert zu werden: «Passiv mit ignorieren»; werden — the passive auxiliary text
         if (k.chain === 'passive') return {marks:[`Passiv mit ${name}`], role:k.clickedRole || null, spans};
         if (MODALS.has(own) && !isMain) return {marks:[`mit ${name}`], role:null, spans};
@@ -569,7 +574,7 @@
       case 'modal-zu': {
         if (own === k.verb && !isMain) return {marks:[`${k.tense ? k.tense + ' · ' : ''}mit ${name}`], role:`zu_${k.verb}`, spans};
         if (own === 'zu') return {marks:[], role:'infinitiveParticle', spans};
-        if (k.inner?.id === 'zu-chain') return {...constructionMarks({...candidate, construction:{...k.inner, spans}}, confirmed), spans};
+        if (k.inner?.id === 'zu-chain') return {...constructionMarks({...candidate, construction:{...k.inner, spans}}, confirmed, language), spans};
         return {marks:[`mit ${k.verb}`], role:null, spans};
       }
       case 'haben-zu': return own === 'zu' ? {marks:[], role:'infinitiveParticle', spans} : {marks:[`${k.tense ? k.tense + ' · ' : ''}${isMain ? 'haben + zu' : `haben + zu mit ${name}`}`], role:isMain ? null : 'haveTo', spans};
@@ -1120,7 +1125,8 @@
     // (advisor 27.10: rule A — a verb with own sich expressions (reflexivePhraseVerb) takes no marks; rule B — a dative sich with a
     // direct object in the part (Er schnitt sich ein Stück, biss sich ein Stück ab) is the free dative «себе» of G70: no marks, X as
     // before; the marks work for an accusative sich without an object and for mir / dir without such an object)
-    const objectDative = !!(k.objectGroup || candidate.reflexiveObjectSign || k.freeDative && k.reflexiveCase !== 'Dativ');
+    // (advisor 16.11, (3): the object by the common count of п. 99 — reflexiveDirectObject — when the resolver gave it; the old signs otherwise)
+    const objectDative = !!((candidate.reflexiveDirectObject !== undefined ? candidate.reflexiveDirectObject : k.objectGroup || candidate.reflexiveObjectSign) || k.freeDative && k.reflexiveCase !== 'Dativ');
     if (!candidate.reflexivePhraseVerb && !objectDative && !(candidate.item || options.lookup?.({word:lemma, type:'Verb'}))?.reflexive) {
       const dative = k.reflexiveCase === 'Dativ';
       const unclear = !dative && k.reflexiveCase !== 'Akkusativ' && ['uns','euch'].includes(norm(k.pronoun?.text || ''));
