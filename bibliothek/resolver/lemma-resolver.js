@@ -17422,12 +17422,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         clause.push(c); opening.push(!i || !innerPoint && /[.!?:„“"«»]/u.test(gap(i)));
       }
       const keys = tokens.map(t => norm(t[0]));
+      // Expressions chat 16.11 (advisor 16.11): in the search of expressions the s of a lone 's / ’s and of a contraction geht's /
+      // gibt's / wie's / mir's is es — by the same function as A12 (colloquialExpansions); not where A12 does not read es
+      // ('s Haus — the dialect article before a capital noun). 's kommt ja nicht drauf an → 210 es kommt auf etw. an. Added to the
+      // token's own key, not instead of it: records written with the s (ehe man sich's versieht: "sich s") still match.
+      const asEs = new Set();
+      if (/['’]s/u.test(sentence)) for (const r of colloquialExpansions(sentence)) {
+        if (!(r.kind === "e" && r.replacement === "es" || r.kind === "es")) continue;
+        const at = r.kind === "es" ? r.end - 1 : r.start, k = tokens.findIndex(t => t.index === at && t[0] === "s");
+        if (k >= 0) asEs.add(k);
+      }
+      const keyIs = (k, w) => keys[k] === w || w === "es" && asEs.has(k);
+      const keyIn = (k, list) => list.includes(keys[k]) || asEs.has(k) && list.includes("es");
       const same = (a,b) => clause[a] === clause[b];
       const upper = w => /^\p{Lu}/u.test(w);
       // A11 (advisor 16.11, Alice): Als ob / Als wenn with a capital inside the sentence opens a verse line (… so heimisch dort,
       // Als ob es Wahrheit wär'.) — the capital is no evidence there; the pair is read as at the start of the sentence.
       const verseAsIf = j => keys[j] === "als" && ["ob","wenn"].includes(keys[j+1]) && clause[j+1] === clause[j] && /^\p{Ll}/u.test(tokens[j+1]?.[0] ?? "");
-      const occurrences = async (part, expression = false) => {
+      const occurrences = async (part, expression = false, m = null) => {
         const out = [];
         // 29.10.2026 (expressions chat; 101 (gerade) dabei sein, etwas zu tun; advisor decision): `zu_infinitive: true` — a part
         // without `form`: one lowercase token that is a zu-infinitive written as one word (aufzumachen, mitzukommen), by the same
@@ -17437,14 +17449,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (part.zu_infinitive) {
           for (let i = 0; i < tokens.length; i++) {
             if (!/^\p{Ll}/u.test(tokens[i][0])) continue;
-            if (part.not_after && i > 0 && partList(part,"not_after").includes(keys[i-1])) continue;
+            if (part.not_after && i > 0 && keyIn(i-1, partList(part,"not_after"))) continue;
             if ((await tokenAnalyses(tokens[i][0],undefined,'constructionAt')).some(a => a.kind === "infinitive" && a.zu)) out.push([i]);
           }
           return out;
         }
         for (const {raw, words} of partList(part,"alternatives")) {
           for (let i = 0; i + words.length <= tokens.length; i++) {
-            if (!words.every((w,k) => keys[i+k] === w && clause[i+k] === clause[i] &&
+            if (!words.every((w,k) => keyIs(i+k, w) && clause[i+k] === clause[i] &&
               (upper(raw[k]) === upper(tokens[i+k][0]) || !upper(raw[k]) && (opening[i+k] || verseAsIf(i+k))))) continue;
             const last = i + words.length - 1;
             // (`clause_start_after`: one of these words may open the clause before the part — Und was hat er für ein Auto?, Mit was für Leuten)
@@ -17454,12 +17466,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // after a comma (…, damit ich nichts zu tun habe «чтобы» — not the expression; Damit hab ich nix zu tun! at the sentence start stays).
             // (5а.3, cards chat + advisor 12.11: not when an expression of adjacent words starts with it — …, bis dahin warten wir; the
             // shared adjacentExpressionAt with its not_next / not_after conditions)
+            // (expressions chat, advisor 16.11: not for a word that is only a conjunction (ehe, bevor — no card of another kind) when another
+            // part of the pattern follows in its own clause — it opens the part of the expression: …, ehe du dich's versiehst → 042; Er tat so,
+            // als ich hereinkam stays without 081, the other part is before the comma)
+            const onlyConjunction = !(forms.get(keys[i]) || []).some(e => !["Konjunktion","Nomen"].includes(e.type));
+            const partInOwnClause = () => m && m.parts.some(p => p !== part && partList(p,"alternatives").some(({words: ws}) =>
+              tokens.some((t,k) => k > i && clause[k] === clause[i] && ws.every((w,h) => keyIs(k+h, w) && clause[k+h] === clause[i]))));
             if (expression && words.length === 1 && i > 0 && clause[i-1] !== clause[i] && !opening[i] && (forms.get(keys[i]) || []).some(e => e.type === "Konjunktion") &&
+                !(onlyConjunction && partInOwnClause()) &&
                 !(tokens[i+1] && clause[i+1] === clause[i] && finiteHere(i+1)) &&
                 !(adjacentExpressionAt(tokens, i, (a,b) => sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index), (a,b) => clause[a] !== clause[b]) &&
                   // (a verb-final part keeps the conjunction: Warte, bis dahin alles fertig ist)
                   !partEndsWithFiniteVerb(sentence, tokens, i, {alone:true}))) continue;
-            if (part.not_after && i > 0 && partList(part,"not_after").includes(keys[i-1])) continue;
+            if (part.not_after && i > 0 && keyIn(i-1, partList(part,"not_after"))) continue;
             // 29.10.2026 (expressions chat; 101 / 106 dabei sein; advisor decision): `not_after_clause_adjective: "<word>"` — the
             // word right before the part opens its clause and has an own adjective card, and the part's first word is followed
             // right away by this word: Wichtig ist dabei, regelmäßig zu trinken — dabei «при этом», not «dabei sein». A word
@@ -17521,7 +17540,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             })()) continue;
             if (part.next === "comparative" && !(tokens[last+1] && clause[last+1] === clause[last] && await comparativeToken(tokens,last+1,same))) continue;
             if (part.next === "degree" && !(tokens[last+1] && clause[last+1] === clause[last] && await degreeToken(tokens[last+1]))) continue;
-            if (part.not_next && tokens[last+1] && partList(part,"not_next").includes(keys[last+1])) continue;
+            if (part.not_next && tokens[last+1] && keyIn(last+1, partList(part,"not_next"))) continue;
             // 28.10.2026 (expressions chat; 108 um sein, 030 zu Haus; advisor decision): `not_next_number: true` — no number in digits
             // right after the part (digits are not tokens: Die Pause ist um 10 — the time, not «закончиться»; Er ging zu Haus 5).
             if (part.not_next_number && /^\s*\d/u.test(sentence.slice(tokens[last].index + tokens[last][0].length))) continue;
@@ -17535,7 +17554,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // An impersonal es in the clause (Wie ist's so traurig, dass …): the word takes its own dass-clause.
             if (part.not_next_impersonal && tokens[last+1] && partList(part,"not_next_impersonal").includes(keys[last+1]) &&
               tokens.some((t,k) => clause[k] === clause[i] && (keys[k] === "es" || /['’]s$/u.test(keys[k]) || keys[k] === "s" && /['’]$/u.test(gap(k))))) continue;
-            if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && partList(part,"clause_has").includes(keys[k]))) continue;
+            if (part.clause_has && !tokens.some((t,k) => clause[k] === clause[i] && keyIn(k, partList(part,"clause_has")))) continue;
             // (31.10.2026: a reflexive part agrees with the subject — CONSTRUCTION_REFLEXIVE_DATIVE above)
             if (part.reflexive) {
               const shared = await sentenceSubjectFacts(sentence,'constructionAt');
@@ -17544,7 +17563,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             out.push(words.map((_,k) => i+k));
           }
         }
-        return out.sort((a,b) => a[0]-b[0]);
+        // (expressions chat, advisor 16.11: of the part's alternatives found at one place the longest is the part — als ob, not als
+        // and then ob outside: Tu so, als ob du … → tun so als ob)
+        return out.filter(o => !out.some(p => p.length > o.length && p[0] === o[0])).sort((a,b) => a[0]-b[0]);
       };
       const separableTwin = (m, flat) => {
         const particle = keys[flat.at(-1)], listed = new Set([].concat(m.not_separable_verb).map(norm));
@@ -17588,7 +17609,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       for (const {entry, m} of constructionAnchors.get(keys[index]) || []) {
         const occ = [];
         // (only in expression records: so … dass, damit-pairs of conjunction records keep their conjunction parts)
-        for (const part of m.parts) occ.push(await occurrences(part, entry.type === "Ausdruck"));
+        for (const part of m.parts) occ.push(await occurrences(part, entry.type === "Ausdruck", m));
         if (!occ[m.anchor].length) continue;
         const inScope = (a,b) => m.scope === "sentence" || clause[a] === clause[b];
         const search = (p, prev, chosen) => {
@@ -17754,7 +17775,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const shown = [...best.tokens];
         for (const part of best.m.parts) if (part.clause_has && best.entry.type === "Ausdruck") {
           const wanted = new Set([].concat(part.clause_has).map(norm));
-          const near = tokens.map((t,k) => k).filter(k => clause[k] === clause[best.tokens[0]] && wanted.has(keys[k]) && !shown.includes(k))
+          const near = tokens.map((t,k) => k).filter(k => clause[k] === clause[best.tokens[0]] && keyIn(k, [...wanted]) && !shown.includes(k))
             .sort((a,b) => Math.abs(a - best.tokens[0]) - Math.abs(b - best.tokens[0]))[0];
           if (near !== undefined) shown.push(near);
         }
