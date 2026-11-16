@@ -18294,6 +18294,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return {...construction, spans:construction.spans.map(span => span.start === at ? {...span, text:to, end:at + to.length}
         : span.start > at ? {...span, start:span.start + delta, end:span.end + delta} : span)};
     }
+    // WN batch 130 (advisor 16.11): the line of a particle that has its own adverb card is that card's meaning, not the table's —
+    // fort «прочь; дальше (продолжая)» (redete … fort, weinte fort, sprach fort: «дальше» as often as «прочь»)
+    const CARD_PARTICLE_LINES = new Set(["fort"]);
+    function particleRow(row) {
+      if (!row || !CARD_PARTICLE_LINES.has(row[0])) return row;
+      const card = (lemmas.get(row[0]) || []).find(e => canonicalPos(e.type) === "Adverb" && e.translation_ru);
+      return card ? [row[0], String(card.translation_ru), String(card.translation_en || row[2])] : row;
+    }
     const DIRECTIONAL_CHAINS = new Set(["kommen-participle","perfect-group","modal-group","lassen-infinitive","werden-passive","werden-future","modal-perfect-infinitive"]);
     function directionalOwnForm(entry, form) {
       const forms = new Set([entry.infinitive, entry.word].filter(Boolean).map(norm));
@@ -18355,7 +18363,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let a = at; while (a > 0 && !BOUND.test(gap(a - 1, a)) && !JOIN.test(norm(tokens[a][0]))) a--;
       const P = norm(tokens[b][0]);
       if (SPLIT_SKIP.has(P) || JOINED_ONLY_PARTICLES.has(P) || P === "daher" || P === "hierher" || !/^\p{Ll}/u.test(tokens[b][0])) return result;
-      const row = DIRECTIONAL.find(([p]) => p === P) || SPLIT_EXTRA.find(([p]) => p === P);
+      const row = particleRow(DIRECTIONAL.find(([p]) => p === P) || SPLIT_EXTRA.find(([p]) => p === P));
       if (!row || b - a < 1) return result;
       // (mit, weiter, zusammen, vorbei: only right before a punctuation mark, the end or und / oder — not mit 10:0, mit "…")
       if (G47_TRANSPARENT.has(P) && !/^\s*(?:[,;:.!?…)–—]|["„“”»«]\s*(?:[,;:.!?…)–—]|$)|$|(?:und|oder)(?![\p{L}\p{M}]))/u.test(sentence.slice(tokens[b].index + tokens[b][0].length))) return result;
@@ -18473,7 +18481,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!needs(c)) continue;
         const whole = plainLemma(c);
         // a particle the table has no meaning for (ab-, aus-, nach-): the index's own split, shown bare (advisor 08.11)
-        let row = DIRECTIONAL.find(([p]) => whole.startsWith(p) && whole.length >= p.length + 3 && joinedOk(p, whole));
+        let row = particleRow(DIRECTIONAL.find(([p]) => whole.startsWith(p) && whole.length >= p.length + 3 && joinedOk(p, whole)));
         if (!row) for (let i = 2; i <= whole.length - 3 && !row; i++)
           if ((separableBases.get(whole.slice(i)) || []).some(r => r.prefix === whole.slice(0,i) && plainLemma({lemma:r.entry.word}) === whole)) row = [whole.slice(0,i), "", ""];
         if (!row) continue;
@@ -18558,7 +18566,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!/^\p{Ll}/u.test(String(word))) return result;
       const w = String(word), sentence = String(context.sentence || "");
       if (w !== norm(w) || sentence.slice(context.tokenOffset, context.tokenOffset + w.length) !== w) return result;
-      const row = (extraRow && w.startsWith(extraRow[0]) ? extraRow : null) || DIRECTIONAL.find(([p]) => w.startsWith(p) && w.length >= p.length + 3 && joinedOk(p, w));
+      const row = particleRow((extraRow && w.startsWith(extraRow[0]) ? extraRow : null) || DIRECTIONAL.find(([p]) => w.startsWith(p) && w.length >= p.length + 3 && joinedOk(p, w)));
       if (!row) return result;
       const [particle, ru, en] = row, after = w.slice(particle.length);
       // hinunterzustoßen is stoßen, not zustoßen «случаться»: the form without zu comes first, and a zu- verb is not taken.
@@ -19660,6 +19668,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       ja:{ru:"здесь: ведь, же", en:"here: after all, you know"},
       denn:{ru:"здесь: ну, же (усиливает вопрос)", en:"here: then, so (adds emphasis to a question)"}
     };
+    const DENN_NARRATION_LINE = {ru:"здесь: итак, вот и", en:"here: so, then"};
     async function modalParticle(word, context, result) {
       const f = norm(word), line = MODAL_PARTICLE_LINES[f];
       if (f === "doch") return dochConjunction(word, context, result);
@@ -19691,6 +19700,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       // (Was denn? — no verb needed in a question)
       if (end === "?" && at > start) return particle();
+      // WN batch 130 (advisor 16.11, Alice): denn in narration — a statement whose part opens with So / Da + its finite verb, denn later in
+      // that part (So fingen sie denn an, So wurden sie denn … hineingeworfen) — «Partikel · здесь: итак, вот и», the line of the card's note
+      // (notes are not in the reader's light dictionary — the line is here, as the question line above). Not a question, not so + subject
+      // first (so sie denn erfolgen würde), not Nun denn, not denn auch without So / Da.
+      if (end !== "?" && at > start + 1 && /^(?:so|da)$/u.test(norm(tokens[start][0])) && (await tokenAnalyses(tokens[start+1][0],undefined,'modalParticle')).some(a => a.kind === "finite") &&
+          !(forms.get(norm(tokens[start+1][0])) || []).some(e => !["Verb"].includes(e.type)))
+        return pick({...own, posLabel:"Partikel", translation:{...DENN_NARRATION_LINE},
+          construction:{id:"modal-particle", label:f, spans:[{text:tokens[at][0], start:tokens[at].index, end:tokens[at].index + tokens[at][0].length}]}});
       // Grimm rest (7) (advisor 14.11): a question without «?» — an exclamation or a thought (Wie solltest du denn dort einen Freund haben!,
       // War so etwas denn normal für Katzen, fragte sich Mr Dursley): the part opens the sentence (or a quote / a part after : – —) with a
       // question word + its finite verb, or with the finite verb itself — the particle too.
@@ -20119,7 +20136,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     const NUMBER_WORD = /^(?:\d+|null|eins|ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn|zwanzig|dreißig|vierzig|fünfzig|hundert|tausend)$/u;
     async function smallFormRules(word, context, result) {
       const w = String(word || "");
-      if (!/^(?:dicht|laut|mal|ein|zu)$/u.test(w) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      if (!/^(?:dicht|laut|mal|ein|zu|Zoll)$/u.test(w) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
       const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'smallFormRules'), at = clickedTokenIndex(tokens,context.tokenOffset,w);
       if (at < 0) return result;
       const joined = (a,b) => !!tokens[a] && !!tokens[b] && /^[ \t]+$/u.test(sentence.slice(tokens[a].index + tokens[a][0].length, tokens[b].index));
@@ -20162,6 +20179,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const prep = (lemmas.get("zu") || []).find(e => e.type === "preposition");
         if (prep) return choose((result.candidates || []).find(c => c.item === prep) || mainCandidate(prep),'zu-preposition');
       }
+      // (5) WN batch 130 (advisor 16.11): a number before Zoll makes it the measure «дюйм» — fünfzehn Zoll hoch, zehn Zoll (also a halben /
+      // ein paar / einige / wenige Zoll); der Zoll «таможня» elsewhere
+      // (a joined number word: Dreizehneinhalb, Zehneinviertel, achteinhalb; digits before a space or a hyphen: 7,92 Zoll, 6,1-Zoll-Displays)
+      const numberWord = x => NUMBER_WORD.test(x) || /^\p{L}*(?:eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zig|ßig|hundert|tausend)(?:einhalb|einviertel|dreiviertel)?$/u.test(x) && /(?:zehn|zig|ßig|hundert|tausend|einhalb|einviertel|dreiviertel)$|^(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|elf|zwölf)$/u.test(x);
+      if (w === "Zoll" && (prev && (numberWord(prev) || /^(?:halben|halbe|paar|einige|wenige|viele|mehrere|anderthalb|eineinhalb)$/u.test(prev)) ||
+          /\d[\d.,]*(?:[ \t]+|-)$/u.test(sentence.slice(0, tokens[at].index))))
+        return choose(own("Nomen","zoll"),'zoll-inch',/^дюйм/u);
       if (w === "mal" && prev && next && NUMBER_WORD.test(prev) && NUMBER_WORD.test(norm(next)))
         return choose(own("Adverb","mal"),'mal-times',/^умножить/u);
       return result;

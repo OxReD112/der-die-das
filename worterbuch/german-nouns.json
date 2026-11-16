@@ -5917,12 +5917,14 @@
     "word": "Spiel",
     "article": "das",
     "plural": "Spiele",
-    "translation_ru": "игра; матч",
-    "translation_en": "game; match",
+    "translation_ru": "игра; матч; колода (карт)",
+    "translation_en": "game; match; pack (deck) of cards",
     "example_de": "Das Spiel beginnt um 18 Uhr.",
     "example_cloze": "Das {{c1::Spiel}} beginnt um 18 Uhr.",
     "example_ru": "Матч начинается в 18 часов.",
-    "example_en": "The match starts at 6 pm."
+    "example_en": "The match starts at 6 pm.",
+    "usage_note_ru": "ein Spiel Karten — колода карт (= das Kartenspiel). Также игра (актёра, на инструменте): das Spiel der Schauspieler.",
+    "usage_note_en": "ein Spiel Karten — a pack (deck) of cards (= das Kartenspiel). Also acting, playing: das Spiel der Schauspieler."
   },
   {
     "id": "noun-481",
@@ -6605,12 +6607,14 @@
     "plural": "Zölle",
     "plural_note_ru": "В значении «таможня» (учреждение) употребляется без множественного числа; Zölle — таможенные пошлины.",
     "plural_note_en": "In the sense of customs (the authority), it is used without a plural; Zölle means customs duties.",
-    "translation_ru": "таможня; пошлина",
-    "translation_en": "customs; customs duty",
+    "translation_ru": "таможня; пошлина; дюйм",
+    "translation_en": "customs; customs duty; inch",
     "example_de": "Am Flughafen müssen wir durch den Zoll.",
     "example_cloze": "Am Flughafen müssen wir durch den {{c1::Zoll}}.",
     "example_ru": "В аэропорту нам нужно пройти таможню.",
-    "example_en": "At the airport we have to go through customs."
+    "example_en": "At the airport we have to go through customs.",
+    "usage_note_ru": "Дюйм (≈ 2,54 см) — мн. ч. без изменения: zehn Zoll hoch — высотой в десять дюймов; ein 27-Zoll-Monitor.",
+    "usage_note_en": "Inch (≈ 2.54 cm) — plural unchanged: zehn Zoll hoch — ten inches high; ein 27-Zoll-Monitor."
   },
   {
     "id": "noun-533",
@@ -69568,5 +69572,33 @@
     },
     "usage_note_ru": "Немецкий язык вообще, с артиклем: ins Deutsche übersetzen — переводить на немецкий; aus dem Deutschen — с немецкого; im Deutschen — в немецком (языке). Без мн. ч. Ср. das Deutsch (Er spricht Deutsch), der / die Deutsche — немец / немка.",
     "usage_note_en": "The German language in general, with an article: ins Deutsche übersetzen — to translate into German; aus dem Deutschen — from German; im Deutschen — in German. No plural. Cf. das Deutsch (Er spricht Deutsch), der / die Deutsche — German man / woman."
+  },
+  {
+    "id": "noun-5381",
+    "word": "Chor",
+    "article": "der",
+    "plural": "Chöre",
+    "translation_ru": "хор; (архит.) алтарная часть (храма)",
+    "translation_en": "choir, chorus; (architecture) chancel, choir (of a church)",
+    "example_de": "Unsere Tochter singt im Chor der Schule.",
+    "example_cloze": "Unsere Tochter singt im {{c1::Chor}} der Schule.",
+    "example_ru": "Наша дочь поёт в школьном хоре.",
+    "example_en": "Our daughter sings in the school choir.",
+    "usage_note_ru": "im Chor — хором: Die Kinder riefen im Chor: „Ja!“ — Дети хором закричали: «Да!» Ein ganzer Chor von Stimmen — целый хор голосов. В храме — алтарная часть (хор): Fenster im Chor.",
+    "usage_note_en": "im Chor — in chorus: Die Kinder riefen im Chor: „Ja!“ — The children shouted in chorus: “Yes!” Ein ganzer Chor von Stimmen — a whole chorus of voices. In a church — the chancel (choir): Fenster im Chor."
+  },
+  {
+    "id": "noun-5382",
+    "word": "Pack",
+    "article": "das",
+    "plural": "—",
+    "translation_ru": "(разг., неодобр.) сброд, сволочь; (устар.) пачка; колода (карт)",
+    "translation_en": "(colloquial, derogatory) rabble, riff-raff; (dated) bundle; pack (deck) of cards",
+    "example_de": "Mit diesem Pack will ich nichts zu tun haben.",
+    "example_cloze": "Mit diesem {{c1::Pack}} will ich nichts zu tun haben.",
+    "example_ru": "С этим сбродом я не хочу иметь ничего общего.",
+    "example_en": "I want nothing to do with that rabble.",
+    "usage_note_ru": "Сброд — грубое, без мн. ч. Старое «пачка, связка» (= der Pack, der Packen): ein Pack Karten, das ganze Pack — колода карт (так в «Алисе»); сейчас — ein Kartenspiel, ein Spiel Karten.",
+    "usage_note_en": "Rabble — rude, no plural. The old “bundle” (= der Pack, der Packen): ein Pack Karten, das ganze Pack — a pack of cards (as in Alice); today — ein Kartenspiel, ein Spiel Karten."
   }
 ]

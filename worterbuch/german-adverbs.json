@@ -3486,13 +3486,13 @@
   {
     "id": "adverb-302",
     "word": "worauf",
-    "translation_ru": "чего (ждать), на что",
-    "translation_en": "what … for, what … on",
+    "translation_ru": "чего (ждать), на что; после чего",
+    "translation_en": "what … for, what … on; whereupon",
     "example_de": "Worauf wartest du noch?",
     "example_ru": "Чего ты ещё ждёшь?",
     "example_en": "What are you still waiting for?",
-    "usage_note_ru": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. О месте — «на чём»: Worauf sitzt du? О людях: Auf wen …? Ответ: darauf.",
-    "usage_note_en": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. About place — “on what”: Worauf sitzt du? About people: Auf wen …? Answer: darauf.",
+    "usage_note_ru": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. О месте — «на чём»: Worauf sitzt du? О людях: Auf wen …? Ответ: darauf. Относительное после запятой — «после чего»: Er nickte, worauf alle gingen. — Он кивнул, после чего все ушли.",
+    "usage_note_en": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. About place — “on what”: Worauf sitzt du? About people: Auf wen …? Answer: darauf. Relative after a comma — “whereupon”: Er nickte, worauf alle gingen. — He nodded, whereupon everyone left.",
     "example_cloze": "{{c1::Worauf}} wartest du noch?"
   },
   {

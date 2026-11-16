@@ -19929,8 +19929,8 @@
   {
     "id": "verb-400",
     "infinitive": "aufnehmen",
-    "translation_ru": "записывать; принимать",
-    "translation_en": "to record; to take in; to admit",
+    "translation_ru": "записывать; принимать; поднимать (с пола)",
+    "translation_en": "to record; to take in; to admit; to pick up",
     "auxiliary": "haben",
     "example_de": "Wir nehmen das Konzert mit dem Handy auf.",
     "example_cloze": "Wir {{c1::nehmen}} das Konzert mit dem Handy {{c1::auf}}.",
@@ -19968,7 +19968,9 @@
         "Sie": "Nehmen Sie auf!"
       }
     },
-    "separable_prefix": "auf"
+    "separable_prefix": "auf",
+    "usage_note_ru": "Поднимать — чаще aufheben: Sie nahm den Schlüssel vom Boden auf. — Она подняла ключ с пола. Принимать: in einen Verein aufnehmen — принять в клуб; Kontakt aufnehmen — установить контакт.",
+    "usage_note_en": "To pick up — more often aufheben: Sie nahm den Schlüssel vom Boden auf. — She picked the key up off the floor. To admit: in einen Verein aufnehmen — to admit to a club; Kontakt aufnehmen — to make contact."
   },
   {
     "id": "verb-401",
@@ -23052,11 +23054,11 @@
   {
     "id": "verb-471",
     "infinitive": "einfallen",
-    "translation_ru": "приходить в голову; вспоминаться",
-    "translation_en": "to occur to; to come to mind",
+    "translation_ru": "приходить в голову; вспоминаться; перебивать, вмешиваться (в разговор)",
+    "translation_en": "to occur to; to come to mind; to interrupt, to cut in",
     "auxiliary": "sein",
-    "usage_note_ru": "Тот, кому приходит в голову, — в Dativ: Mir ist etwas eingefallen.",
-    "usage_note_en": "The person is in the dative: Mir ist etwas eingefallen.",
+    "usage_note_ru": "Тот, кому приходит в голову, — в Dativ: Mir ist etwas eingefallen. Вмешаться в разговор (часто после прямой речи): „Stimmt nicht!“, fiel er ein. — «Неправда!» — перебил он. Также вступать, подхватывать (о пении): Der Chor fiel ein. — Хор подхватил.",
+    "usage_note_en": "The person is in the dative: Mir ist etwas eingefallen. To cut in (often after direct speech): „Stimmt nicht!“, fiel er ein. — “Not true!” he cut in. Also to join in (singing): Der Chor fiel ein. — The choir joined in.",
     "example_de": "Mir fällt sein Name nicht ein.",
     "example_cloze": "Mir {{c1::fällt}} sein Name nicht {{c1::ein}}.",
     "example_ru": "Не могу вспомнить его имя.",
@@ -127863,5 +127865,58 @@
       }
     },
     "example_cloze": "Die Regierung will das neue Gesetz noch in diesem Jahr {{c1::durchsetzen}}."
+  },
+  {
+    "id": "verb-2794",
+    "infinitive": "einwerfen",
+    "translation_ru": "опускать (письмо); вставлять (реплику), замечать; разбивать (окно)",
+    "translation_en": "to post (a letter); to put in (a remark), to interject; to smash (a window)",
+    "auxiliary": "haben",
+    "usage_note_ru": "Реплика — часто после прямой речи: „Das stimmt nicht“, warf sie ein. — «Это неправда», — вставила она. Окно: Jemand hat die Scheibe eingeworfen. — Кто-то разбил стекло (камнем). Спорт: den Ball einwerfen — вбросить мяч (из аута).",
+    "usage_note_en": "A remark — often after direct speech: „Das stimmt nicht“, warf sie ein. — “That's not true,” she put in. A window: Jemand hat die Scheibe eingeworfen. — Someone smashed the pane (with a stone). Sport: den Ball einwerfen — to throw the ball in.",
+    "example_de": "Kannst du den Brief auf dem Weg zur Arbeit einwerfen?",
+    "example_cloze": "Kannst du den Brief auf dem Weg zur Arbeit {{c1::einwerfen}}?",
+    "example_ru": "Можешь бросить письмо в ящик по дороге на работу?",
+    "example_en": "Can you post the letter on your way to work?",
+    "perfect_form": "haben eingeworfen",
+    "forms": {
+      "Präsens": {
+        "ich": "werfe ein",
+        "du": "wirfst ein",
+        "er/sie/es": "wirft ein",
+        "wir": "werfen ein",
+        "ihr": "werft ein",
+        "sie": "werfen ein"
+      },
+      "Präteritum": {
+        "ich": "warf ein",
+        "du": "warfst ein",
+        "er/sie/es": "warf ein",
+        "wir": "warfen ein",
+        "ihr": "warft ein",
+        "sie": "warfen ein"
+      },
+      "Konjunktiv II": {
+        "ich": "würfe ein",
+        "du": "würfest ein",
+        "er/sie/es": "würfe ein",
+        "wir": "würfen ein",
+        "ihr": "würfet ein",
+        "sie": "würfen ein"
+      },
+      "Imperativ": {
+        "du": "Wirf ein!",
+        "ihr": "Werft ein!",
+        "Sie": "Werfen Sie ein!"
+      }
+    },
+    "separable_prefix": "ein",
+    "complements": [
+      {
+        "pattern": "Akkusativ",
+        "note_ru": "что-либо (einen Brief, eine Münze, eine Scheibe)",
+        "note_en": "something (einen Brief, eine Münze, eine Scheibe)"
+      }
+    ]
   }
 ]
