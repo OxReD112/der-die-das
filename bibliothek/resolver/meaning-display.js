@@ -1027,6 +1027,11 @@
       return {heading:headingText, grammar:'Name', text:String(candidate.labelledText?.ru || candidate.translation.ru), textLanguage:'ru', missing:false, derived:false, note:'', more:0,
         spans:k.spans || null, helpEntry:null};
     }
+    // (A12, advisor 16.11: a single letter with a dot — an initial or a short form, «Abkürzung» without a translation)
+    if (candidate.source === 'fallback' && candidate.pos === 'abbreviation') {
+      return {heading:headingText, grammar:'Abkürzung', text:'', textLanguage:language, missing:false, derived:false, note:'', more:0,
+        spans:k.spans || null, helpEntry:null};
+    }
     if (candidate.source === 'fallback' && candidate.pos === 'name' && !usage && !contraction) {
       return {heading:headingText, grammar:'Name', text:'', textLanguage:language, missing:false, derived:false, note:'', more:0,
         spans:k.spans || null, helpEntry:null};
@@ -1051,6 +1056,9 @@
         const chain = marks.findIndex(m => /^mit (?!\+)/u.test(m));
         marks = chain < 0 ? [...marks, 'Präsens'] : marks.map((m, i) => i === chain ? `Präsens ${m}` : m);
       }
+      marks = [...marks, `${contraction.form} = ${contraction.parts[0]}`];
+    } else if (contraction && contraction.kind === 'noun-e') {
+      // (A12, advisor 16.11: a noun without its final -e — die Suppe, «Nomen · Supp' = Suppe»; no tense)
       marks = [...marks, `${contraction.form} = ${contraction.parts[0]}`];
     } else if (contraction) {
       headingText = contractionHeading(contraction);

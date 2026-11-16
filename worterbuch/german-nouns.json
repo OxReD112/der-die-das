@@ -69535,5 +69535,38 @@
     "example_ru": "Старый король велел позвать к себе мудрецов страны.",
     "example_en": "The old king had the wise men of the land called to him.",
     "example_cloze": "Der alte König ließ die {{c1::Weisen}} des Landes zu sich rufen."
+  },
+  {
+    "id": "noun-5379",
+    "word": "Deutsch",
+    "article": "das",
+    "plural": "—",
+    "translation_ru": "немецкий язык",
+    "translation_en": "German (language)",
+    "example_de": "Meine Kollegin spricht sehr gut Deutsch.",
+    "example_cloze": "Meine Kollegin spricht sehr gut {{c1::Deutsch}}.",
+    "example_ru": "Моя коллега очень хорошо говорит по-немецки.",
+    "example_en": "My colleague speaks German very well.",
+    "usage_note_ru": "Обычно без артикля: Deutsch lernen, gut Deutsch sprechen, auf Deutsch — по-немецки; Wie heißt das auf Deutsch? С определением — с артиклем: das Deutsch der Schweiz. Язык вообще (ins / im / aus dem Deutschen) — das Deutsche. Прилагательное — deutsch «немецкий».",
+    "usage_note_en": "Usually without an article: Deutsch lernen, gut Deutsch sprechen, auf Deutsch — in German; Wie heißt das auf Deutsch? With a modifier — with an article: das Deutsch der Schweiz. The language in general (ins / im / aus dem Deutschen) — das Deutsche. Adjective — deutsch “German”."
+  },
+  {
+    "id": "noun-5380",
+    "word": "Deutsche",
+    "article": "das",
+    "plural": "—",
+    "translation_ru": "немецкий язык",
+    "translation_en": "German (language)",
+    "example_de": "Der Roman wurde aus dem Englischen ins Deutsche übersetzt.",
+    "example_cloze": "Der Roman wurde aus dem Englischen ins {{c1::Deutsche}} übersetzt.",
+    "example_ru": "Роман перевели с английского на немецкий.",
+    "example_en": "The novel was translated from English into German.",
+    "declension_forms": "das Deutsche · des Deutschen · im Deutschen · ins Deutsche",
+    "derived_from": {
+      "type": "Adjektiv",
+      "word": "deutsch"
+    },
+    "usage_note_ru": "Немецкий язык вообще, с артиклем: ins Deutsche übersetzen — переводить на немецкий; aus dem Deutschen — с немецкого; im Deutschen — в немецком (языке). Без мн. ч. Ср. das Deutsch (Er spricht Deutsch), der / die Deutsche — немец / немка.",
+    "usage_note_en": "The German language in general, with an article: ins Deutsche übersetzen — to translate into German; aus dem Deutschen — from German; im Deutschen — in German. No plural. Cf. das Deutsch (Er spricht Deutsch), der / die Deutsche — German man / woman."
   }
 ]
