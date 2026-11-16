@@ -16999,6 +16999,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // than a relative pronoun: die Frau, die Lehrer werden wollte keeps «Plural», count 16.11: 7 right against 1)
             const feminine = (resolution?.candidates || []).some(c => canonicalPos(c.pos) === "Nomen" && norm(c.lemma) === form &&
               (c.source === "main" ? c.item?.article === "die" : c.nounArticle === "die"));
+            // (Alice (1), 16.11: an attribute word in -es / -er / -em between them is a strong singular ending — die überflüssiges Wasser:
+            // die is a relative pronoun there)
+            // (a number word in -er is no attribute: Die vier betroffenen Diplomaten)
+            if (words.slice(k+1).some(x => /(?:es|em)$/u.test(x) || /er$/u.test(x) && (forms.get(norm(x)) || []).some(e => e.type === "Adjektiv"))) return false;
+            // (second review 16.11: die / diese / meine … + an attribute word in -e is the feminine singular — die hintere Makel; the plural
+            // would be die hinteren)
+            // (not die after a comma — a relative pronoun: Zauberer, die selbstumrührende Kessel erfunden hatten)
+            if (k >= 0 && words[k-1] !== "," && words.slice(k+1).some(x => /\p{Ll}e$/u.test(x)) && /^(?:die|meine|deine|seine|ihre|unsere|eure|diese|jene|welche)$/iu.test(words[k])) return false;
             if (k >= 0 && !feminine && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) return true;
           }
           // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural
@@ -17029,10 +17037,109 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           }
           return false;
       };
+      // Alice (1) (advisor 16.11): the word before the noun group (attribute words skipped) that shows the plural of a masculine / neuter
+      // noun, besides pluralBySign: (a) alle / keine / solche / manche / diese / jene / sämtliche, wie / so viel; (b) a dative-only
+      // preposition + den / diesen / meinen …; (c) einer / eines / einem / eins … der; (d) attribute adjectives with no determiner — -e
+      // (kleine Mädchen, ein Paar neue Stiefel, in kleine Kuchen), -en right after a dative-only preposition (mit hölzernen Spaten; not in /
+      // an / durch: in großen Buchstaben may be an accusative singular). Not next to a hyphen.
+      const MEASURE_NOUN = /^(?:zoll|fuß|paar|jahr|schritt|stück|mann|prozent|pfund|meter|zentimeter|millimeter|kilometer|grad|dutzend|liter|gramm|kilogramm|kilo|euro|dollar|cent|pfennig|franken|glas|sack|fass|blatt|schuss|zentner|hektar|morgen|kopf|tag|monat|punkt|elle|klafter|lot|faden|knoten)$/u;
+      const DATIVE_ONLY = /^(?:mit|von|aus|bei|nach|seit|zu|samt|nebst|gegenüber|entgegen)$/u;
+      const ANY_DETERMINER = /^(?:der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner|keines|(?:mein|dein|sein|ihr|unser|euer|eur)(?:e|en|em|er|es)?|(?:dies|jen|jed|welch|manch|solch|all)(?:e|en|em|er|es)|derselbe|dieselbe|dasselbe|denselben|demselben|desselben|derselben|dieselben)$/u;
+      const groupBefore = () => {
+        if (!Number.isInteger(context?.tokenOffset)) return null;
+        const sentence = String(context.sentence || ""), text = sentence.slice(0, context.tokenOffset);
+        if (/[-‐]\s*$/u.test(text) || /^\s*[-‐]/u.test(sentence.slice(context.tokenOffset + String(word).length))) return null;
+        const ws = [...text.matchAll(/[\p{L}\d]+|[^\p{L}\d\s]/gu)].map(m => m[0]);
+        let k = ws.length - 1; const attrs = [];
+        while (k >= 0 && attrs.length < 3 && /^\p{Ll}{2,}(?:e|en)$/u.test(ws[k]) && !ANY_DETERMINER.test(norm(ws[k])) && !prepositions.has(norm(ws[k])) &&
+          ((forms.get(norm(ws[k])) || []).some(e => e.type === "Adjektiv") ||
+            // (an adjective only the external dictionary knows — mit hölzernen Spaten: no own entry, no verb reading)
+            !(forms.get(norm(ws[k])) || []).length && !(verbAnalyses.get(norm(ws[k])) || []).length)) { attrs.unshift(norm(ws[k])); k--; }
+        return {ws, k, attrs, det:k >= 0 ? norm(ws[k]) : "", prev:k > 0 ? norm(ws[k-1]) : ""};
+      };
+      // (Alice (1), 16.11: a dative singular determiner before a list of attributes or an elided compound — in einem leisen, schnellen
+      // Tone; zu welchem Längen- und Breitengrade — the old dative singular in -e)
+      const dativeSingularChain = () => {
+        if (!Number.isInteger(context?.tokenOffset)) return false;
+        const ws = [...String(context.sentence || "").slice(0, context.tokenOffset).matchAll(/[\p{L}\d]+|[^\p{L}\d\s]/gu)].map(m => m[0]);
+        for (let j = ws.length - 1, n = 0; j >= 0 && n < 8; j--, n++) {
+          const x = norm(ws[j]);
+          if (/^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|manchem|solchem|im|am|vom|zum|beim)$/u.test(x)) return true;
+          if (x === "," || x === "-" || /^[»«„“"]$/u.test(x) || /^(?:und|oder)$/u.test(x) || /^\p{Ll}{2,}(?:e|en)$/u.test(ws[j]) || /^\p{Lu}/u.test(ws[j]) && ws[j+1] === "-") continue;
+          return false;
+        }
+        return false;
+      };
+      const singularDeterminerBefore = () => { const g = groupBefore(); return !g || /^(?:der|das|dem|des|ein|einen|einem|eines|kein|keinen|keinem|keines|im|am|vom|zum|beim)$/u.test(g.det); };
+      // (cell: the spelling is a plural cell of the card; wie / so viel only then — not so viel Recht, a mass noun)
+      const pluralBeforeGroup = (cell = true) => {
+        const g = groupBefore();
+        if (!g || g.k < 0 || /^[,;:.!?()»«„“"–—]$/u.test(g.ws[g.k])) return false;
+        const {det, prev, attrs} = g;
+        if (/^(?:alle|keine|solche|manche|diese|jene|sämtliche)$/u.test(det)) return true;
+        if (det === "der" && /^(?:einer|eines|einem|eins|keiner|keines|keinem|jeder|jedes|jedem|einige|viele|wenige|mehrere|beide|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(prev)) return true;
+        // (the rest only for a spelling that is a plural cell: von Alfeld aus den Ausgangspunkt — aus there is no preposition)
+        if (!cell) return false;
+        if (/^(?:den|diesen|jenen|meinen|deinen|seinen|ihren|unseren|euren|keinen|allen|beiden|solchen|welchen)$/u.test(det) && DATIVE_ONLY.test(prev)) return true;
+        if (det === "der" && /^(?:einer|eines|einem|eins|keiner|keines|keinem|jeder|jedes|jedem|einige|viele|wenige|mehrere|beide|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn)$/u.test(prev)) return true;
+        // (the word before the attributes: a preposition, a noun / a capital word, a verb or a quantity word — not an adverb after a
+        // determiner: das stark verrauchte Treppenhaus, der international bekannte Virologe; not a hyphen: der 30-jährige Spanier)
+        // (second review 16.11: a capital word only when it is a known noun — not a name: von Max Hasak erbaute Gebäude)
+        const opener = /^\p{L}/u.test(g.ws[g.k]) && (prepositions.has(det) || /^\p{Lu}/u.test(g.ws[g.k]) && ((forms.get(det) || lemmas.get(det) || []).some(e => e.type === "Nomen") || /s$/u.test(det)) ||
+          /^(?:genug|wenig|viel|mehr|weniger|lauter|und|oder|aber|wie|als)$/u.test(det) || (verbAnalyses.get(det) || []).some(a => a.kind === "finite"));
+        // (no determiner shortly before — der 38 Jahre alte Verteidiger, Das 1917 gegründete Unternehmen, einem zu befürchtenden Mangel —
+        // except a quantity noun after ein: ein Paar neue Stiefel, eine Art Geschenke)
+        // (six words back; a decimal comma is no boundary — Der nur 1,74 Meter große Mittelstürmer)
+        const near = g.ws.slice(Math.max(0, g.k - 6), g.k).map(norm);
+        const cut = near.map((x,i,a) => /^[,;:.!?()»«„“"–—]$/u.test(x) && !(x === "," && /^\d/u.test(a[i-1] || "") && /^\d/u.test(a[i+1] || "")) ? i : -1).reduce((m,i) => Math.max(m,i), -1);
+        const detNear = near.slice(cut + 1).some((x,i,a) => /^(?:der|die|das|dem|den|des|ein|eine|einem|einen|einer|eines|kein|keine|keinem|keinen|keiner|keines)$/u.test(x) &&
+          !/^(?:paar|art|menge|reihe|sorte|dutzend)$/u.test(a[i+1] || det));
+        if (attrs.length && opener && !detNear && !ANY_DETERMINER.test(det) && !contractionForms[det]) {
+          if (attrs.every(a => /e$/u.test(a))) return true;
+          if (attrs.every(a => /en$/u.test(a)) && DATIVE_ONLY.test(det)) return true;
+        }
+        return false;
+      };
       // (second resolver chat 15.11, advisor: an external noun whose spelling is a singular and a plural cell — der Inhaber, das Arbeitslager)
       // «Plural» by the same signs as an own card: die / keine / alle … before a masculine / neuter noun, a number above one, a quantifier
       if (type === "Nomen" && candidate.source === "fallback" && candidate.externalPluralAlso && !candidate.usage &&
         (["der","das"].includes(candidate.nounArticle) && pluralBySign("determiner") || pluralBySign("number"))) return {number:"plural"};
+      // Alice (1) (advisor 16.11): an external masculine / neuter noun — the same words before the group (pluralBeforeGroup), for the
+      // spelling that is also a plural cell or the singular spelling itself (die Schlägel); the genitive plural after a noun (der Fürst der
+      // Krebse, die Unverschämtheit der Normannen); a bare plural in -e / -s with no determiner or preposition before it (ein Paar
+      // Handschuhe, es sind Verse, »Seehunde, Schildkröten, Lachse«, lebendige Flamingos)
+      // (not an outside record of a nominalized infinitive — das Gründen, das Steuern: no plural)
+      if (type === "Nomen" && candidate.source === "fallback" && !candidate.usage && ["der","das"].includes(candidate.nounArticle) &&
+          !(candidate.nounArticle === "das" && form === norm(candidate.lemma) && /(?<!ch)en$/u.test(form)) && /^\p{Lu}/u.test(String(word))) {
+        const lemma = norm(candidate.lemma);
+        // (the singular spelling itself only where it is also the plural — a masculine / neuter noun in -el / -er / -en / -chen / -lein:
+        // die Schlägel, eins der Meerschweinchen; not die Konstrukteur, a relative die before a name)
+        const zero = form === lemma && /(?:el|er|en|chen|lein)$/u.test(lemma);
+        if ((candidate.externalPluralAlso || zero) && (pluralBySign("determiner") || pluralBySign("number"))) return {number:"plural"};
+        if ((candidate.externalPluralAlso || zero) && pluralBeforeGroup(!!candidate.externalPluralAlso)) return {number:"plural"};
+        const g = (candidate.externalPluralAlso || form === lemma + "e") && form !== lemma ? groupBefore() : null;
+        // (not inside a name: a capital word right before or after it — Sigrid Marta Auguste T., dem Fluss Hunte, Cryonics Institute)
+        const textAfter = Number.isInteger(context?.tokenOffset) ? String(context.sentence || "").slice(context.tokenOffset + String(word).length) : "";
+        const nameChain = g && (g.k >= 0 && /^\p{Lu}/u.test(g.ws[g.k]) && g.attrs.length === 0 && !/^(?:paar|art|menge|reihe|sorte|dutzend|haufen|anzahl|vielzahl|zahl)$/u.test(g.det) ||
+          /^[\s»«„“"]+\p{Lu}/u.test(textAfter) || /^(?:namens|genannt)$/u.test(g.det));
+        if (g && !nameChain) {
+          const opening = g.k < 0 || /^[,;:.!?()»«„“"–—]$/u.test(g.ws[g.k]);
+          if (g.det === "der" && g.k > 0 && /^\p{Lu}/u.test(g.ws[g.k-1]) && g.k > 1 && !/^[,;:.!?»«„“"–—(]$/u.test(g.ws[g.k-2])) return {number:"plural"};
+          // (an attribute word in -em before it marks the old dative singular: mit großem Fleiße)
+          const free = opening || !ANY_DETERMINER.test(g.det) && !prepositions.has(g.det) && !contractionForms[g.det] && !/^\d/u.test(g.det) && !/em$/u.test(g.det);
+          // (-e only: a bare -s is often the genitive of a name — Wests mögliche Kandidatur, John de Mols)
+          if (free && form === lemma + "e" && !g.ws.slice(g.k + 1).some(x => /em$/u.test(x)) && !dativeSingularChain()) return {number:"plural"};
+        }
+      }
+      // Alice (1) (advisor 16.11): a noun from an adjective / participle in -en after die / meine / keine / alle … (die Kleinen, die Übrigen,
+      // meine Besten, alle Geschworenen), after a dative-only preposition + den / seinen … (zu den Geschworenen, zu seinen Kleinen) or after
+      // einer / einem … der (einer der Geschworenen) — the plural
+      if (type === "Nomen" && ["adjective","participle"].includes(candidate.usage?.kind) && candidate.usage?.role === "nominalized" && /en$/u.test(form)) {
+        const g = groupBefore();
+        if (g && g.k >= 0 && (/^(?:die|meine|deine|seine|ihre|unsere|eure|keine|alle|diese|jene|welche|solche|manche|beide|beiden|viele|einige|wenige|mehrere|sämtliche)$/u.test(g.det) ||
+          /^(?:den|diesen|jenen|meinen|deinen|seinen|ihren|unseren|euren|keinen|allen|beiden|solchen)$/u.test(g.det) && DATIVE_ONLY.test(g.prev) ||
+          g.det === "der" && /^(?:einer|eines|einem|eins|keiner|keines|keinem|jeder|jedes|jedem|einige|viele|wenige|mehrere|beide)$/u.test(g.prev))) return {number:"plural", adjectiveNoun:true};
+      }
       const entry = candidate.source === "main" ? candidate.item : null;
       // (second resolver chat 11.11, advisor: G69 remainder (а)) a noun from an adjective (der / die Erwachsene — a card with declension_forms):
       // the plural by its ending and the word before — -e with no determiner or after a number / quantifier (zwei Bekannte, auf Erwachsene
@@ -17058,6 +17165,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (-e after die / meine / diese … is the feminine singular: Die Erwachsene lachte — only numbers and quantifiers count there)
           const pluralDet = form === word ? PLURAL_DET.test(det) && !/^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|welche|solche|manche|alle|ihr|wir)$/u.test(det) : PLURAL_DET.test(det);
           if (pluralDet) return {number:"plural",adjectiveNoun:true};
+          // (Alice (1), advisor 16.11: einem der Beamten, zu den Beamten — the plural of -en)
+          const prevDet = k > 0 ? norm(words[k-1]) : "";
+          if (form !== word && (det === "der" && /^(?:einer|eines|einem|eins|keiner|keines|keinem|jeder|jedes|jedem|einige|viele|wenige|mehrere|beide)$/u.test(prevDet) ||
+            /^(?:den|diesen|jenen|meinen|deinen|seinen|ihren|unseren|euren|keinen|allen|beiden|solchen)$/u.test(det) && DATIVE_ONLY.test(prevDet))) return {number:"plural",adjectiveNoun:true};
           // (with no determiner: also none of the singular kind among the three words before, up to a punctuation mark — der nunmehr
           // Beschuldigte, gegen den 20-jährigen Beschuldigten)
           // (the window stops at a preposition or und / oder too: Das gilt für Erwachsene)
@@ -17070,15 +17181,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       }
       // (second resolver chat 11.11, G69 remainder — claude/PLURAL_REMAINDER_COUNT_2026-11-11_RU.md) a plural-only noun (die Eltern, die Kosten)
       if (type === "Nomen" && entry?.plural_only && !entry.declension_forms && !candidate.usage && form === norm(entry.word)) return {number:"plural"};
+      // (Alice (1), advisor 16.11: a form that is no singular form of the card is plural anywhere — zu tollen Leuten: the dative of die Leute)
+      if (type === "Nomen" && entry?.plural_only && !entry.declension_forms && !candidate.usage && form === norm(entry.word) + "n" && !/n$/u.test(norm(entry.word))) return {number:"plural"};
       if (type === "Nomen" && entry?.plural && !entry.plural_only && !entry.declension_forms && !candidate.usage) {
-        const word = norm(entry.word), plural = norm(entry.plural);
-        const plurals = new Set([plural, /[ns]$/u.test(plural) ? plural : plural + "n"]);
+        // (Alice (1), advisor 16.11: a card with two plural cells — Bogen, Bögen; Herren, Herrn — has each of them as a plural form)
+        const pluralCells = norm(entry.plural).split(/\s*[,\/]\s*/u).filter(Boolean);
+        const word = norm(entry.word), plural = pluralCells[0] || norm(entry.plural);
+        // (the further cells only for a capital word: a lowercase verb form is no noun reading — zu schützen, einen Anlauf starten)
+        const plurals = new Set((/^\p{Lu}/u.test(String(word)) ? pluralCells : pluralCells.slice(0, 1)).flatMap(p => [p, /[ns]$/u.test(p) ? p : p + "n"]));
         // (advisor 07.11, PLURAL_AND_DAS_FARM: a feminine noun has no endings in the singular — Änderungen, Spritzen are plural)
         // (advisor 09.11, партия 63: in allen Reichen, in den Jahren) a neuter noun has no singular in -n / -en — except where the plural itself is
         // the stem + (e)n (das Herz — dem Herzen / die Herzen). (11.11, G69 remainder) Nor a strong masculine one — its plural is not the
         // stem + (e)n (mit Freunden, in den nächsten Tagen, mit Lautsprechern); weak ones keep it (den Patienten).
         // (п. 8 G69-own, advisor 03.11) a neuter noun in -e has no singular in -n (das Auge — die Augen; only das Herz — dem Herzen)
-        const neuterN = ["das","der"].includes(entry.article) && ![word + "n", word + "en"].includes(plural) || entry.article === "das" && /e$/u.test(word);
+        // (Alice (1), advisor 16.11: Ohren — a neuter noun has no singular in -en whatever its plural; das Herz keeps its own note)
+        const neuterN = ["das","der"].includes(entry.article) && ![word + "n", word + "en"].includes(plural) || entry.article === "das" && (/e$/u.test(word) || word !== "herz");
         const singulars = new Set(entry.article === "die" ? [word] : [word, word + "s", word + "es", word + "e", ...(neuterN ? [] : [word + "n", word + "en"])]);
         // (11.11) a dative / genitive singular determiner right before (attribute words skipped) speaks against a strong masculine -(e)n
         // plural — another noun spelled so: zu dem Flecken Langwedel (der Flecken «местечко», not die Flecke)
@@ -17128,14 +17245,34 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // that dative needs a determiner or a preposition before it (dem Schuhe, im Grunde, mit Fleiße); with neither — after a verb, und /
             // oder, an adverb, attribute words — the form is the plural)
             // (advisor 16.11: an attribute word in -em before the form marks the old dative singular — großem Fleiße)
-            const bare = k >= 0 && !start && !DETERMINER.test(det) && !prepositions.has(det) && !contractionForms[det] && !/^\d/u.test(det) && /^\p{Ll}/u.test(words[k]) &&
+            // (Alice (1), advisor 16.11: everywhere but after a determiner or a preposition — hörte sie Schritte, eine Art Geschenke)
+            const bare = k >= 0 && !start && !DETERMINER.test(det) && !prepositions.has(det) && !contractionForms[det] && !/^\d/u.test(det) &&
               !words.slice(k+1).some(x => /em$/u.test(x) && !/^(?:zudem|trotzdem|außerdem|seitdem|nachdem|indem|ehedem|vordem|zuvordem)$/u.test(norm(x)));
-            if (form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || bare || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
+            // (Alice (1), 16.11: a dative singular determiner before a list of attributes or an elided compound — in einem leisen, schnellen
+            // Tone; zu welchem Längen- und Breitengrade — the old dative singular)
+            const datSgChain = dativeSingularChain();
+            // (not inside a name: a capital word right before it with nothing between — Trainer Daniel Beine, Linz Institute — except a
+            // quantity noun: eine Art Geschenke, ein Paar Schuhe; nor a capital word right after it — Cryonics Institute, Premier League)
+            const after = sentence.slice(context.tokenOffset + String(word).length);
+            const nameChain = !start && !capitalOpening && attrs === 0 && k >= 0 && /^\p{Lu}/u.test(words[k]) && !DETERMINER.test(det) && !/^(?:paar|art|menge|reihe|sorte|dutzend|haufen|anzahl|vielzahl|zahl)$/u.test(det) ||
+              /^\s+\p{Lu}/u.test(after);
+            if (!datSgChain && !nameChain && form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || bare || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
             if (form === plural && form === word + "s" && (start || capitalOpening || ["der","den","die","keine","alle","meine","deine","seine","ihre","unsere","eure","diese","jene","welche"].includes(det) || prepositions.has(det) && !contractionForms[det])) return {number:"plural"};
           }
         }
         if (plurals.has(form) && ["der","das"].includes(entry.article) && pluralBySign("determiner")) return {number:"plural"};
         if (plurals.has(form) && pluralBySign("number")) return {number:"plural"};
+        // Alice (1) (advisor 16.11): more words before the group that show the plural of a masculine / neuter noun — the plural cell or
+        // the spelling of the singular itself (a measure after a number: wenige Fuß; not Mal — drei Mal)
+        if (["der","das"].includes(entry.article) && plurals.has(form) && pluralBeforeGroup()) return {number:"plural"};
+        // (the number right before it: zehn Grad, 80 Prozent — not neun und zehn grossen Anteil)
+        // (second review 16.11: a measure noun only, the number word right before it — not das viele Gold, drei enthalten Gift, zwei Wein,
+        // Zimmer 17 Hotel)
+        const prevWord = Number.isInteger(context?.tokenOffset) ? norm(/([\p{L}\d]+)\s+$/u.exec(String(context.sentence || "").slice(0, context.tokenOffset))?.[1] || "") : "";
+        // (a numbered thing — Zimmer 17 Hotel, Gleis 9 — is no count)
+        const numbered = Number.isInteger(context?.tokenOffset) && /\p{Lu}\p{L}*\s+\d+\s+$/u.test(String(context.sentence || "").slice(0, context.tokenOffset));
+        if (["der","das"].includes(entry.article) && form === word && !numbered && (MEASURE_NOUN.test(word) || /(?:el|er|en)$/u.test(word)) && /^(?:[2-9]|\d{2,}|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|\p{L}*hundert|\p{L}*tausend|einige|mehrere|wenige|viele)$/u.test(prevWord) &&
+          !singularDeterminerBefore() && (groupBefore()?.attrs || [1]).length === 0 && pluralBySign("number")) return {number:"plural"};
         return null;
       }
       if (type === "Adjektiv" && entry?.word && !candidate.usage && !candidate.explanation) {
@@ -18760,7 +18897,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!force && !extraRow && result && (result.candidates || []).length && result.candidates.every(c => c.separableParticiple) &&
           !G47_TRANSPARENT.has((DIRECTIONAL.find(([p]) => norm(String(word)).startsWith(p)) || [])[0])) {
         let other = null;
-        try { other = await directionalParticle(word, context, {...result, candidates:[], selected:null, preferred:null, status:"unresolved", unresolvedMeanings:[]}); } catch (_) { other = null; }
+        try { other = await directionalParticle(word, {...context, ownParticipleCard:true}, {...result, candidates:[], selected:null, preferred:null, status:"unresolved", unresolvedMeanings:[]}); } catch (_) { other = null; }
         return (other?.candidates || []).length ? other : result;
       }
       if (!result || (result.candidates || []).length || result.selected || !Number.isInteger(context?.tokenOffset)) return result;
@@ -18769,6 +18906,27 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Köpfen) is read without the ending, as an attribute: «Partizip II», no verb chain.
       if (!force && !extraRow) {
         const raw = String(word), text = String(context.sentence || ""), before = text.slice(0, context.tokenOffset);
+        // Alice (4) (advisor 16.11): a nominalized infinitive of a verb no dictionary has (im Vorbeifallen, beim Herumschwimmen) — the
+        // lowercase infinitive read by the G47 parts, shown as «das Vorbeifallen · Nomen · aus Verb vorbeifallen»; only after a
+        // neuter determiner or a contraction (im, beim, zum, vom), mid-sentence, as generalInfinitiveNoun.
+        const prevWord = norm((before.match(/([\p{L}]+)\s+$/u) || [])[1] || "");
+        if (/^\p{Lu}\p{Ll}+(?:en|ern|eln)$/u.test(raw) && prevWord && neuterDeterminer(prevWord) && !/[.!?:]\s*$/u.test(before.replace(/[\p{L}]+\s+$/u, "")) &&
+            text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const lower = raw.charAt(0).toLowerCase() + raw.slice(1);
+          if (!DIRECTIONAL.some(([p]) => lower.startsWith(p) && lower.length >= p.length + 3 && joinedOk(p, lower))) return result;
+          let r = null;
+          try { r = await directionalParticle(lower, {...context, sentence:before + lower + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
+          const verb = (r?.candidates || []).find(c => canonicalPos(c.pos) === "Verb" && norm(c.lemma) === lower);
+          if (!verb) return result;
+          const sibling = {...verb}; delete sibling.construction; delete sibling.formFeatures;
+          const translation = {en:`nominalized infinitive of “${lower}”`, ru:`субстантивированный инфинитив от «${lower}»`};
+          const noun = {source:"fallback", lemma:raw, pos:"noun", posLabel:"Nomen", translation,
+            usage:{role:"nominalized", kind:"infinitive", base:lower, form:raw, baseDictionaryId:null, general:true},
+            item:{word:raw, article:"das", type:"Nomen", translation_en:translation.en, translation_ru:translation.ru,
+              usage_note_en:`Nominalized infinitive of ${lower}.`, usage_note_ru:`Субстантивированный инфинитив ${lower}.`}};
+          return {...result, candidates:[noun, sibling], preferred:noun, selected:noun, status:"resolved", unresolvedMeanings:[],
+            evidence:"nominalized-infinitive-directional"};
+        }
         if (/^\p{Lu}\p{Ll}+$/u.test(raw) && /^[\s»«„“"'‚‘’–—-]*$|[.!?:]\s*[»«„“"'‚‘’–—-]*\s*$/u.test(before) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
           const lower = raw.charAt(0).toLowerCase() + raw.slice(1);
           if (DIRECTIONAL.some(([p]) => lower.startsWith(p) && lower.length >= p.length + 3 && joinedOk(p, lower))) {
@@ -18796,6 +18954,26 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const candidates = r.candidates.map(attribute);
           return {...r, candidates, selected:r.selected ? candidates[r.candidates.indexOf(r.selected)] : null,
             preferred:r.preferred ? candidates[r.candidates.indexOf(r.preferred)] : null};
+        }
+        // Alice (4) (advisor 16.11): Partizip I of a verb no dictionary has (hervorstehenden, durcheinanderrufend, vorbeifließenden) —
+        // the infinitive (form without -d and its ending) read by the G47 parts, «Partizip I», no verb chain; with zu (hinauszuwerfende)
+        // the zu-infinitive is read the same way.
+        // (not when a card of the participle was found — herabhängend keeps «Partizip I · От herabhängen»; not weiter-: weiterreichend,
+        // weiterführend are adjectives «далеко идущий», not «передавать»)
+        const present = !context.ownParticipleCard && !raw.startsWith("weiter") && /^(\p{Ll}+n)d(?:e|en|em|er|es)?$/u.exec(raw);
+        if (present && DIRECTIONAL.some(([p]) => raw.startsWith(p) && raw.length >= p.length + 5) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const stem = present[1];
+          let r = null;
+          try { r = await directionalParticle(stem, {...context, sentence:before + stem + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
+          // (no verb by parts: the form is read as it stands below — hinaufwanden is the Präteritum of hinaufwinden, not a Partizip I)
+          if ((r?.candidates || []).length && (r.candidates || []).every(c => canonicalPos(c.pos) === "Verb")) {
+          const attribute = c => { const v = {...c, formFeatures:{tense:"Partizip I"}}; delete v.construction;
+            if (v.directionalSimple) v.directionalSimple = attribute(v.directionalSimple);
+            return v; };
+          const candidates = r.candidates.map(attribute);
+          return {...r, candidates, selected:r.selected ? candidates[r.candidates.indexOf(r.selected)] : null,
+            preferred:r.preferred ? candidates[r.candidates.indexOf(r.preferred)] : null};
+          }
         }
       }
       if (!/^\p{Ll}/u.test(String(word))) return result;
@@ -19689,7 +19867,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -20374,6 +20552,107 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // before a personal pronoun (so laut sie konnte) is the adjective «громко», not the preposition «согласно» (laut Polizei, laut einer
     // Erklärung stay); (3) mal between two numbers is «умножить на» (Vier mal fünf ist zwölf).
     const NUMBER_WORD = /^(?:\d+|null|eins|ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|dreizehn|vierzehn|fünfzehn|sechzehn|siebzehn|achtzehn|neunzehn|zwanzig|dreißig|vierzig|fünfzig|hundert|tausend)$/u;
+    // Alice (3) (advisor 16.11): Partizip II of a verb where no finite verb could carry it.
+    // (а) a part between marks with a von-group and the participle closing the part, no finite verb in the part (vom Winde getragen, von
+    // allen verlassen) — the verb's «Partizip II», even when an adjective card of the same spelling exists (getragen «размеренный»);
+    // (б) a participle with an adjective ending right before its noun (eingestreute Parodien) offered only as a verb window — «Partizip II».
+    // Not: er wurde von ihm begleitet (a finite verb in the part), Er bewegt die Ruder (bewegt first after its subject — no von, no ending).
+    async function participlePhrase(word, context, result) {
+      const w = String(word);
+      if (!/^\p{Ll}+$/u.test(w) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const candidates = result.candidates || [];
+      const verbs = candidates.filter(c => canonicalPos(c.pos) === "Verb" && !c.construction);
+      if (!verbs.length) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'participlePhrase'), at = clickedTokenIndex(tokens,context.tokenOffset,w);
+      if (at < 0) return result;
+      const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      const MARK = /[,;:.!?»«„“"'`–—()]/u;
+      const choose = v => { const x = {...v, formFeatures:{...(v.formFeatures || {}), tense:"Partizip II"}};
+        return {...result, candidates:[x, ...candidates.filter(c => c !== v)], selected:x, preferred:x, status:"resolved", evidence:"participle-phrase"}; };
+      // (б)
+      const ending = /^(\p{Ll}{4,}?)(e|en|er|em|es)$/u.exec(w);
+      // (not where the window already shows the attribute participle — gelegten «Partizip II · От legen»)
+      if (ending && candidates.every(c => canonicalPos(c.pos) === "Verb" && !c.usage) && result.status !== "resolved" && at + 1 < tokens.length &&
+          /^\p{Lu}/u.test(tokens[at+1][0]) && !MARK.test(gap(at+1))) {
+        // (not a Partizip I — zwinkernde, flatternde, quiekende: the stem ends in -nd; not a finite form — Alles gehörte Harry, die
+        // Firma erkannte Fehler an)
+        const finiteForm = (await tokenAnalyses(w, undefined, "participlePhrase")).some(a => a.kind === "finite");
+        const rows = /nd$/u.test(ending[1]) || finiteForm ? [] : (await tokenAnalyses(ending[1], undefined, "participlePhrase")).filter(a => a.kind === "participle" && a.tense !== "Partizip I");
+        const v = verbs.find(c => rows.some(a => norm(a.base || a.lemma || "") === norm(c.lemma))) || (rows.length && verbs.length === 1 ? verbs[0] : null);
+        if (v) return choose(v);
+        return result;
+      }
+      // (а)
+      const p2 = verbs.find(c => c.formFeatures?.tense === "Partizip II");
+      if (!p2 || result.selected === p2 && result.status === "resolved") return result;
+      // (the part between commas / dashes; a bracket or a quote does not end it — Kevin Feucht (29) alias Kevin von Anhalt getrennt)
+      const EDGE = /[,;:.!?–—]/u;
+      let start = at; while (start > 0 && !EDGE.test(gap(start))) start--;
+      // (between commas / dashes on both sides: a part closing its sentence may be the end of a sein / haben group — sind … von der
+      // Krankheit betroffen, with a list comma inside: Berg-, Teich-, Kamm- oder Fadenmolch)
+      const closes = at + 1 < tokens.length && /[,–—]/u.test(gap(at+1)) && !/[-‐]\s*,/u.test(sentence.slice(0, tokens[start].index));
+      if (!closes || start === 0 || !/[,–—]/u.test(gap(start))) return result;
+      if (!tokens.slice(start, at).some(t => /^(?:von|vom)$/u.test(norm(t[0])))) return result;
+      for (let i = start; i < at; i++) {
+        const t = tokens[i][0];
+        if (/^\p{Lu}/u.test(t)) continue;
+        if ((await tokenAnalyses(t, undefined, 'participlePhrase')).some(a => a.kind === "finite") && !(forms.get(norm(t)) || []).some(e => e.type !== "Verb")) return result;
+      }
+      return choose(p2);
+    }
+    // Alice (2) (advisor 16.11, reference 3.19 / Alice rules: modal particles doch, mal, ja, denn, halt — «Partikel»): the own card of one of
+    // these words inside its part (not first after a mark — Doch er kam, »Doch!«, Halt! stay), with no rule line of its own (a posLabel
+    // set by a rule stays — a rule line has its construction: mal «здесь: однажды» keeps «Adverb»; noch mal, mehr denn je) — the line says
+    // «Partikel», the card's meanings stay (denkt doch, fressen doch, Lass mal sehen, ist halt so).
+    const LABEL_PARTICLES = new Set(["doch","mal","ja","denn","halt"]);
+    async function modalParticleLabel(word, context, result) {
+      const w = String(word), f = norm(w), sel = result?.selected;
+      if (!LABEL_PARTICLES.has(f) || !/^\p{Ll}/u.test(w) || !sel || sel.source !== "main" || sel.posLabel === "Partikel" || sel.construction || norm(sel.lemma) !== f ||
+          !["Adverb","Konjunktion"].includes(canonicalPos(sel.item?.type || sel.pos)) || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'modalParticleLabel'), at = clickedTokenIndex(tokens,context.tokenOffset,w);
+      if (at < 1) return result;
+      const gap = sentence.slice(tokens[at-1].index + tokens[at-1][0].length, tokens[at].index);
+      if (/[,;:.!?»«„“"–—()]/u.test(gap)) return result;
+      // (denn after a conjunction-like opener still opens its part: und denn, aber denn — not a particle by place)
+      if (f === "denn" && /^(?:und|oder|aber|sondern)$/u.test(norm(tokens[at-1][0]))) return result;
+      // (mal between numbers is the multiplication «умножить на» — Vier mal fünf, 2 mal 3)
+      if (f === "mal" && /^(?:\d+|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|\p{L}+zehn|\p{L}*zig|hundert|tausend)$/u.test(norm(tokens[at-1][0]))) return result;
+      // (independent review 16.11: the particle place only — right after the finite verb of the part, personal pronouns between allowed:
+      // denkt doch, ist halt so, Lass mal sehen, hat es doch gesagt; mal also after auch / schon / gerade / doch / einfach / ruhig / eben /
+      // halt. Not the stressed adverb «всё-таки»: doch noch, doch nicht, aber … doch, so … doch after a concession, vielleicht doch, jetzt
+      // doch; not mal «однажды» after a past form (es gab mal), nor mal … mal, nor 5-mal)
+      const gapAt = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+      let start = at; while (start > 0 && !/[,;:.!?»«„“"–—()…]|\s-\s/u.test(gapAt(start))) start--;
+      const PRON = /^(?:ich|du|er|sie|es|wir|ihr|man|mich|dich|sich|uns|euch|ihm|ihn|ihnen|mir|dir)$/u;
+      let j = at - 1; while (j > start && PRON.test(norm(tokens[j][0]))) j--;
+      const next = at + 1 < tokens.length ? norm(tokens[at+1][0]) : "";
+      if (/[-‐]$/u.test(sentence.slice(0, tokens[at].index))) return result;
+      const rows = j >= start ? await tokenAnalyses(tokens[j][0], undefined, 'modalParticleLabel') : [];
+      const finite = rows.some(a => a.kind === "finite") && !(forms.get(norm(tokens[j][0])) || []).some(e => !["Verb"].includes(e.type));
+      const softener = f === "mal" && /^(?:auch|gerade|doch|einfach|ruhig|eben|halt)$/u.test(norm(tokens[at-1][0]));
+      // (second review 16.11: mal «когда-нибудь / однажды / опять» — schon mal, mal wieder, mal with a perfect in its part: als hätte er
+      // mal was erwähnt, haben … schon mal jemanden umgebracht, Könnte mal vorgekommen sein)
+      if (f === "mal") {
+        if (norm(tokens[at-1][0]) === "schon" || next === "wieder") return result;
+        let end = at + 1; while (end < tokens.length && !/[,;:.!?»«„“"–—()…]/u.test(gapAt(end))) end++;
+        const part = tokens.slice(start, end).map(t => norm(t[0]));
+        if (part.some(x => /^(?:habe|hab|hast|hat|haben|habt|hatte|hattest|hatten|hätte|hättest|hätten|ist|bin|bist|sind|seid|sei|sein|war|warst|waren|wäre|wären)$/u.test(x))) {
+          for (const t of tokens.slice(at + 1, end)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, 'modalParticleLabel')).some(a => a.kind === "participle" && a.tense !== "Partizip I")) return result;
+        }
+      }
+      if (!finite && !softener) return result;
+      if (f === "doch" && (/^(?:noch|nie|eher|mehr|wieder|lieber|einmal|auch)$/u.test(next) || /^(?:so|aber|doch)$/u.test(norm(tokens[start][0])) ||
+        // (second review 16.11: und … doch — «и всё же»: und ist doch nicht zu sehen, und falle doch nicht herunter; endlich … doch)
+        tokens.slice(start, at).some(t => /^(?:aber|vielleicht|dann|jetzt|trotzdem|dennoch|endlich|schließlich|zuletzt)$/u.test(norm(t[0]))) ||
+        // (und with no subject before the verb: und ist doch, und hernach mußte er doch — not Und du wirst dich doch nicht …)
+        tokens.slice(start, at - 1).some((t,i,a) => norm(t[0]) === "und" && !PRON.test(norm((a[i+1] || tokens[at])[0])) && !/^\p{Lu}/u.test((a[i+1] || tokens[at])[0])) || /\b(?:obgleich|obwohl|wenn auch|auch wenn|zwar)\b/iu.test(sentence) ||
+        // (advisor 16.11: a sentence opening with so + an adjective / adverb — So sehr er sich bemühte, so gelang es doch nicht)
+        /^\s*[»«„“"]?\s*so\s+\p{Ll}+/iu.test(sentence) && /^\p{Lu}/u.test(sentence.trim().replace(/^[»«„“"]\s*/u, "")))) return result;
+      if (f === "mal" && !softener && (rows.some(a => a.tense === "Präteritum") && !rows.some(a => a.tense === "Präsens" || a.kind === "imperative") ||
+        tokens.slice(start).some((t,i) => start + i !== at && norm(t[0]) === "mal"))) return result;
+      const x = {...sel, posLabel:"Partikel"};
+      return {...result, selected:x, preferred:result.preferred === sel ? x : result.preferred, candidates:(result.candidates || []).map(c => c === sel ? x : c)};
+    }
     async function smallFormRules(word, context, result) {
       const w = String(word || "");
       if (!/^(?:dicht|laut|mal|ein|zu|Zoll)$/u.test(w) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
