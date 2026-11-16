@@ -4126,6 +4126,11 @@
       return {source:"fallback",lemma,pos:"noun",posLabel:"Nomen",translation,
         usage:{role:"nominalized",kind:participleVerb ? "participle" : "adjective",base:participleVerb ? norm(participleVerb.lemma) : base,
           baseDictionaryId:adjective.dictionaryId || null,form:word,general:true,...(noun ? {noun} : {}),
+          // #89 (advisor 16.11, Alice P566 der Schwächste): the form is the superlative stem + ending — «Superlativ», «самый …»
+          // (not am Schönsten — the adverbial superlative, advisor 16.11: not touched)
+          // (nor a superlative the card names as its own meaning — nah «следующий (nächst-)»: als Nächstes)
+          ...(!participleVerb && superlative && stem === superlative && superlative !== baseStem && determiner !== "am" &&
+            !norm(String(adjective.item?.translation_ru || "")).includes(superlative) ? {superlative:true} : {}),
           // our own noun of this headword (der Junge) did not fit the form (ein Junges): its outside Russian record is no help either
           ...((lemmas.get(norm(lemma)) || []).some(e => e.type === "Nomen") ? {ownHeadword:true} : {})},
         item:{word:lemma,type:"Nomen",translation_en:translation.en,translation_ru:translation.ru,
@@ -16916,7 +16921,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
               !DETERMINER.test(det) && !prepositions.has(det) && !contractionForms[det];
             const prepWithAttr = prepositions.has(det) && !contractionForms[det] && attrs > 0 && !words.slice(k+1).some(x => /em$/u.test(x));
             // (der / den before the -e form: only the genitive plural rule above decides — der Arme (a poor man) is no plural of Arm)
-            if (form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
+            // (#90, advisor 16.11, Alice: Schuhe, Hunde, Dinge, Schritte, Gespräche — the plural in -e equal only to the old dative singular:
+            // that dative needs a determiner or a preposition before it (dem Schuhe, im Grunde, mit Fleiße); with neither — after a verb, und /
+            // oder, an adverb, attribute words — the form is the plural)
+            // (advisor 16.11: an attribute word in -em before the form marks the old dative singular — großem Fleiße)
+            const bare = k >= 0 && !start && !DETERMINER.test(det) && !prepositions.has(det) && !contractionForms[det] && !/^\d/u.test(det) && /^\p{Ll}/u.test(words[k]) &&
+              !words.slice(k+1).some(x => /em$/u.test(x) && !/^(?:zudem|trotzdem|außerdem|seitdem|nachdem|indem|ehedem|vordem|zuvordem)$/u.test(norm(x)));
+            if (form === plural && form === word + "e" && (start || capitalOpening || prepWithAttr || bare || DETERMINER.test(det) && !datSg.test(det) && !["der","den"].includes(det))) return {number:"plural"};
             if (form === plural && form === word + "s" && (start || capitalOpening || ["der","den","die","keine","alle","meine","deine","seine","ihre","unsere","eure","diese","jene","welche"].includes(det) || prepositions.has(det) && !contractionForms[det])) return {number:"plural"};
           }
         }

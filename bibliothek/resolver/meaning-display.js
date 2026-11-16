@@ -756,6 +756,10 @@
   // (reader/bibliothek.js); null for an adjective use. Which own card is a participle at all is the resolver's (participleCard:
   // participle_of without meaning_differs; X-er with no noun after it — Komparativ).
   const participleName = usage => usage?.kind === 'participle-I' ? 'Partizip I' : usage?.kind === 'participle-II' ? 'Partizip II' : null;
+  // #89: «самый» before each adjective meaning of the card (слабый; слабо → самый слабый); an adverb meaning (-о / -е) is left out
+  const superlativeRu = meaning => { const parts = meaningParts(meaning).map(p => p.trim()).filter(Boolean);
+    const adjectives = parts.filter(p => /(?:ый|ий|ой)(?:\s*\(.*\))?$/u.test(p.split(/,\s*/u)[0]));
+    return (adjectives.length ? adjectives : parts.slice(0,1)).map(p => `самый ${p}`).join('; '); };
   const fromText = (source, meaning, language) => `${language === 'ru' ? 'От' : 'From'} ${source} — ${meaning}`;
   // Dictionary meaning on the chosen language; RU without a Russian value keeps the English one marked.
   function meaningText(candidate, language, inline = false) {
@@ -957,6 +961,9 @@
       // #20 (advisor 05.11): an outside noun of this very nominalization with a meaning in this language (der Fremde
       // «незнакомец», die Alte «старуха», das Gute «добро») is shown as the noun itself, without «aus Adjektiv».
       const nounMeaning = (!fromVerb || usage?.kind === 'participle') && compact(usage?.noun?.translation?.[language] || '');
+      // #89 (advisor 16.11): a nominalized superlative (der Schwächste, die Klügste, meine Besten) — «aus Adjektiv X · Superlativ»; Russian
+      // «самый» + the card's adjective meanings, not declined by gender (der / die / das alike); English the card's meaning as it is
+      if (usage?.superlative && !nounMeaning) marks.push('Superlativ');
       if (nounMeaning) { marks = []; text = {text:nounMeaning, language}; }
       else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {
@@ -980,7 +987,7 @@
         const nounOwn = gerund && language !== 'en' && realMeaning(language) &&
           (!own.text || !/;/u.test(String(candidate.translation?.en || '').replace(/^gerund of[^;]*;?/iu, '').trim()));
         if (nounOwn) text = {text:compact(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, '')), language};
-        else if (meaning) { text = {text:fromText(base, meaning, language), language}; more = own.text ? own.rest : 0; }
+        else if (meaning) { text = {text:fromText(base, usage?.superlative && language === 'ru' ? superlativeRu(meaning) : meaning, language), language}; more = own.text ? own.rest : 0; }
         else if (english) { text = {text:`английский: ${fromText(base, english, 'en')}`, language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
       }
       if (baseEntry && !candidate.item) helpEntry = baseEntry;
