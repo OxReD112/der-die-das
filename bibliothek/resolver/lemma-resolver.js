@@ -20153,7 +20153,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       einmal:{ru:"здесь: однажды, когда-то (= einmal)", en:"here: once, at one time (= einmal)"}};
     async function imperativeParticle(word, context, result, pipeline) {
       const f = norm(word), line = IMPERATIVE_PARTICLE_LINES[f];
-      if (!line || !/^\p{Ll}/u.test(String(word)) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
+      // (advisor 16.11: no scan inside a scan — Hier gibt es mal trockene und mal feuchte Böden: the other mal reads as a finite form of
+      // malen, its own scan read this mal back, and the two taps called each other without end)
+      if (!line || !/^\p{Ll}/u.test(String(word)) || !result || !context || !Number.isInteger(context.tokenOffset) || context.inParticleScan) return result;
       const candidates = result.candidates || [];
       const own = candidates.find(c => c.source === "main" && norm(c.lemma) === f && canonicalPos(c.item?.type || c.pos) === "Adverb");
       if (!own || result.selected && result.selected !== own || result.selected?.construction) return result;
@@ -20176,7 +20178,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (f === "doch" && at === start + 1 && norm(tokens[start][0]) === "und") return asTime(DOCH_AND_YET_LINE);
       let v = start; while (v < at && IMPERATIVE_OPENER_WORDS.test(norm(tokens[v][0]))) v++;
       if (v >= at) return result;
-      const vContext = {...context, tokenOffset:tokens[v].index};
+      const vContext = {...context, tokenOffset:tokens[v].index, inParticleScan:true};
       let r = await pipeline(tokens[v][0], vContext);
       // (a capital verb before Sie / wir — Stellen Sie ihn doch …: the verb reading, as the tap on it gets it)
       if (r?.selected?.formFeatures?.tense !== "Imperativ") { const cv = capitalVerbBeforePronoun(tokens[v][0], vContext); if (cv) r = await pipeline(cv.word, cv.context); }
@@ -20200,8 +20202,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const past = x => ["Präteritum","Perfekt","Plusquamperfekt"].includes(x?.selected?.formFeatures?.tense) ||
             x?.selected?.construction?.id === "perfect-group" && ["Perfekt","Plusquamperfekt"].includes(x.selected.construction.label);
           for (let i = start; i < e; i++) {
-            if (i === at || !(await tokenAnalyses(tokens[i][0],undefined,'imperativeParticle')).some(a => a.kind === "finite")) continue;
-            const x = i === v ? r : await pipeline(tokens[i][0], {...context, tokenOffset:tokens[i].index});
+            if (i === at || norm(tokens[i][0]) === f || !(await tokenAnalyses(tokens[i][0],undefined,'imperativeParticle')).some(a => a.kind === "finite")) continue;
+            const x = i === v ? r : await pipeline(tokens[i][0], {...context, tokenOffset:tokens[i].index, inParticleScan:true});
             if (canonicalPos(x?.selected?.pos) !== "Verb") continue;
             if (!past(x)) return result;
             return asTime(MAL_TIME_LINES.einmal);
