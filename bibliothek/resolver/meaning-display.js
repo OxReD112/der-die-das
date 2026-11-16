@@ -426,6 +426,9 @@
       }
       case 'werden-conditional': return {marks:[isMain ? 'Konjunktiv II' : `Konjunktiv II mit ${name}`], role:isMain ? null : 'conditional', spans};
       // To-do 3.4 (F12-B7): wird's gewesen sein — the clicked sein is the auxiliary «Futur II mit sein», not the participle's lemma.
+      // (Alice A7 (1), advisor 16.11: würde + perfect infinitive — the past Konjunktiv II: würde … gesehen haben)
+      case 'werden-conditional-perfect': return {marks:[isMain ? 'Konjunktiv II' : `Konjunktiv II mit ${name}`],
+        role:isMain ? null : own === 'werden' ? 'conditionalPast' : 'perfectHave', spans};
       case 'werden-future-perfect': if (k.clickedRole) return {marks:[`Futur II mit ${name}`], role:k.clickedRole, spans};
         return {marks:[isMain ? 'Futur II' : `Futur II mit ${name}`],
         role:isMain ? null : own === 'werden' ? 'futurePerfectWill' : 'futurePerfectHave', spans};

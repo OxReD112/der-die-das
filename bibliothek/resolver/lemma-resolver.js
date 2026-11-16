@@ -714,6 +714,7 @@
     {id:'possessive-before-noun',stage:'initial',kind:'preference',group:'contextual'},
     {id:'sein-after-predicate-or-modal',stage:'initial',kind:'preference',group:'contextual'},
     {id:'sein-clause-final-after-modal',stage:'initial',kind:'preference',group:'contextual'},
+    {id:'sein-after-zu-or-before-finite',stage:'initial',kind:'preference',group:'contextual'},
     {id:'ihr-dative-object',stage:'initial',kind:'preference',group:'contextual'},
     {id:'ihr-next-to-plural-verb',stage:'initial',kind:'preference',group:'contextual'},
     {id:'ihr-dative-verb',stage:'initial',kind:'preference',group:'contextual'},
@@ -6936,10 +6937,20 @@
           lexical = rows.filter(e => (norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[before][0]) || joinedPhraseForm(e,tokens[before][0],"participle")) &&
             auxiliariesOf(e).includes(second));
           kind = "perfect";
+          // (Alice A6: a participle only another dictionary knows — angeknüpft zu haben)
+          if (!lexical.length && !rows.length && !(verbAnalyses.get(norm(tokens[before][0])) || []).length) {
+            await warmExternalPerfects(sentence);
+            const ext = externalPerfectWords.get(sentence)?.get(norm(tokens[before][0]));
+            if (ext && ext.auxiliaries.includes(second)) lexical = [ext];
+          }
         } else if (["können","müssen","dürfen","sollen","wollen","mögen"].includes(second)) {
           lexical = rows.filter(e => norm(e.word) === norm(tokens[before][0]));
           kind = "modal";
-        } else if (second === "werden" && participleLikeWord(tokens[before][0]) && !degreeBefore && !passiveNone(tokens[before][0]) &&
+        } else if (second === "werden" && (participleLikeWord(tokens[before][0]) ||
+            // (Alice A7 (2), advisor 16.11: a participle only another dictionary knows, or particle + participle — geköpft zu werden,
+            // hinausgewiesen zu werden; the record of the dictionary, not the shape of the word)
+            /^\p{Ll}/u.test(tokens[before][0]) && !(forms.get(norm(tokens[before][0])) || []).length && (await particleParticiple(tokens[before][0])).length + (await externalParticiple(tokens[before][0])).length > 0) &&
+            !degreeBefore && !passiveNone(tokens[before][0]) &&
             !BECOME_NAMED_ADJECTIVES.includes(norm(tokens[before][0]))) {
           // (links chat, advisor 09.11, map N2: the passive zu-infinitive — ignoriert zu werden, um … aufgenommen zu werden — is
           // «Passiv mit X»; the word right before zu werden is participle-like (participleLikeWord). An own adjective card that is
@@ -6948,6 +6959,7 @@
           const own = [...new Map((verbAnalyses.get(norm(tokens[before][0])) || []).filter(a => a.kind === "participle" && a.entry)
             .map(a => [a.entry.id ?? a.entry.word,a.entry])).values()];
           lexical = own.length ? own : await externalParticiple(tokens[before][0]);
+          if (!lexical.length) lexical = await particleParticiple(tokens[before][0]);
           kind = "passive";
         }
         // Modals Z (links chat, advisor 01.11): an infinitive only the external dictionary knows also heads the modal chain
@@ -7091,6 +7103,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     function werdenGroupPair(tokens, werdenIndex, infinitiveIndex) {
       return werdenIndex !== infinitiveIndex && !zuInfinitiveTokenAt(tokens, werdenIndex);
     }
+    // (Alice A7 (3), advisor 16.11: wie / als right after the last verb of the chain with no verb after it does not break the chain —
+    // werde ich auseinandergeschoben wie das längste Teleskop, bin gehüpft wie ein Ball, werden … geahndet als …: the word before it is the
+    // tail; for the chains of verbs only another dictionary knows, read before the form is looked up)
+    function comparisonTail(tokens, low, end) {
+      for (let p = low+2; p <= end-1; p++)
+        if (COMPARISON_PARTICLES.includes(norm(tokens[p][0])) && /^\p{Ll}/u.test(tokens[p-1][0]) && comparisonWithoutVerb(tokens, p, end)) return p-1;
+      return -1;
+    }
     function nachfeldTail(tokens, low, tail, verbal, anyZu = false) {
       if (verbal(tail)) return -1;
       for (let k = tail-1; k > low; k--) {
@@ -7117,7 +7137,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (links chat, advisor 09.11, map N3: wie with no verb form after it is a comparison, not a new part — as und / oder in
         // coordinatorOpensClause: ich kann nicht so laufen wie du, Er hat so gut gespielt wie nie zuvor, wurde … so demokratisch
         // gewählt wie bei uns. wie + a clause — wie er sagte, wie angekündigt — is no Nachfeld: a verb form in the rest)
-        if (first === "wie" && !zuEnd) return comparisonWithoutVerb(tokens, from, tail);
+        // (Alice A7 (3), advisor 16.11: als too — werden … milder geahndet als Unsittlichkeit von Frauen; the same function)
+        if ((first === "wie" || first === "als") && !zuEnd) return comparisonWithoutVerb(tokens, from, tail);
         if (!body.every(plainWord)) return false;
         if (["um","ohne","statt","anstatt"].includes(first)) return zuEnd;
         // (review 04.11: a bare zu-infinitive only for a verb whose card takes zu + Infinitiv — hatte geplant … zu werden; not
@@ -7217,12 +7238,23 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const clauseWords = indices.map(i => norm(tokens[i][0]));
       const ownReflexive = clauseWords.some(w => reflexivePronouns.has(w) && reflexiveSubjectIn(w, clauseWords) === "own");
       const becomeAt = i => werdenInClause && !(reflexiveInClause && ownReflexive) && !impersonalDative && !context.coordinatedLeft && passiveNone(tokens[i][0]);
-      const participles = i => becomeAt(i) ? [] : untwin(verbs(i).filter(e=>clause.participleOf(e,i)),i);
+      // (Alice A7 (2), advisor 16.11: a particle + an own verb's participle that no dictionary has as one word — hinausgewiesen,
+      // umgewechselt — is that particle verb's participle, as in A6: Er wurde hinausgewiesen, ist umgewechselt worden)
+      const particleRows = new Map();
+      for (const i of indices) if (!verbs(i).length && /^\p{Ll}/u.test(tokens[i][0])) { const rows = await particleParticiple(tokens[i][0]); if (rows.length) particleRows.set(i,rows); }
+      const participles = i => becomeAt(i) ? [] : (own => own.length || verbs(i).length ? own : particleRows.get(i) || [])(untwin(verbs(i).filter(e=>clause.participleOf(e,i)),i));
       // (advisor 07.11, from the L-018 count: an agent is a stronger sign of the passive than a degree word — wird einige Male von Arthur
       // sehr verletzt. von / vom / durch + a determiner or a capital word in the part before the participle; without it the degree word
       // keeps «become» — Er wird noch heute sehr verehrt is the registry)
       const degreeBecome = t => becomeDegreeBefore(tokens,t) && !passiveAgentBefore(tokens,indices,t);
-      const infinitives = i => verbs(i).filter(e=>((phraseFirst(e) ? norm(e.word).split(/\s+/u).at(-1) : norm(e.word)) === norm(tokens[i][0]) || joinedPhraseForm(e,tokens[i][0],"infinitive")) && /^[a-zäöü]/u.test(tokens[i][0]));
+      const ownInfinitives = i => verbs(i).filter(e=>((phraseFirst(e) ? norm(e.word).split(/\s+/u).at(-1) : norm(e.word)) === norm(tokens[i][0]) || joinedPhraseForm(e,tokens[i][0],"infinitive")) && /^[a-zäöü]/u.test(tokens[i][0]));
+      // (Alice A7 (2), advisor 16.11: a particle + an own verb's infinitive that no dictionary has as one word — vorwärtsgehen — is that
+      // particle verb's infinitive: nun wird es besser vorwärtsgehen)
+      const infinitives = i => { const own = ownInfinitives(i); if (own.length || verbs(i).length) return own;
+        const w = norm(tokens[i][0]); if (tokens[i][0] !== w || (forms.get(w) || []).length) return [];
+        const prefix = (/^(?:vorwärts|rückwärts|voran|voraus)/u.exec(w) || PARTICLE_INFINITIVE_PREFIX.exec(w))?.[0], rest = prefix ? w.slice(prefix.length) : '';
+        const rows = rest.length > 2 && !/^zu/u.test(rest) ? (forms.get(rest) || []).filter(e => e.type === "Verb" && norm(e.word) === rest) : [];
+        return rows.length === 1 ? [{word:prefix + rest,type:"Verb"}] : []; };
       // G15 step 4 (16.10.2026): a following «und / oder + verb» starts another
       // predicate (wurde verhaftet und starb) or shares the auxiliary (hat …
       // gerufen und … gesagt); the pair before it is complete either way.
@@ -7331,7 +7363,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (head.e.word === "werden" && !werdenGroupPair(tokens, head.i, tail)) continue;
         // (item Б: the participle before a prepositional phrase / zu-infinitive after it; review 04.11: not a participle that is
         // also an own adjective — wurde gereizt wegen der Hitze, wurde ausgelassen vor Freude)
-        if (head.e.word === "werden" && head.i < tail) { const k = nachfeldTail(tokens, head.i, tail, i => participles(i).length > 0 && !adjectivalForm(tokens[i][0]) && !becomeAdjectives.has(norm(tokens[i][0])), true); if (k > 0) tail = k; }
+        if (head.e.word === "werden" && head.i < tail) { const k = nachfeldTail(tokens, head.i, tail, i => participles(i).length > 0 && !adjectivalForm(tokens[i][0]) && !becomeAdjectives.has(norm(tokens[i][0])), true); if (k > 0) tail = k;
+          // (Alice A7 (3): the infinitive of Futur / würde before wie / als without a verb — wird dir genauso ergehen wie deinen Eltern)
+          else { const c = comparisonTail(tokens, head.i, tail); if (c > 0 && infinitives(c).length) tail = c; } }
         // C14 step 1: as in externalPassiveGroup, a comparison after the last word continues the
         // clause (wird zerstreut als Zierpflanze … genutzt): the word before als / wie is not proven
         // to close the group (before the verb merge zerstreuen was external and took that path).
@@ -7611,15 +7645,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // passive as before (Gefunden wurde nichts). Advisor 01.11 (a): taken as is — modal + adjective-participle +
       // werden «become» gives a false passive in both word orders (Erwachsen werden muss man), registry; the «become» sign is task (c).
       if (end > start+1 && norm(tokens[start+1][0]) === "werden" && modalIndices.includes(start+2)) frames.push({part:start,aux:start+1,fronted:true});
+      // (Alice A7 (4), advisor 16.11: the fronted participle with the modal second and werden closing the part — Aufgehängt soll er werden!,
+      // Gebaut muss die Brücke werden — the same passive infinitive)
+      // (not a word with an own adjective card — Geschlossen soll die Tür werden stays as before, W2 01.11: the card wins)
+      if (end > start+2 && norm(tokens[end][0]) === "werden" && modalIndices.includes(start+1) && /^\p{Lu}/u.test(tokens[start][0]) &&
+          !(forms.get(norm(tokens[start][0])) || []).some(e => e.type === "Adjektiv")) frames.push({part:start,aux:end,fronted:true,split:true});
       // Modals B (б) (links chat, advisor 31.10): a finite modal + participle + werden + a modal infinitive closing the clause (soll …
       // getragen werden können) — the passive infinitive under two modals; the second modal closes the chain, werden is no «become».
       const MODAL_INFINITIVE_WORD = /^(?:müssen|sollen|können|dürfen|wollen|mögen)$/u;
       const chainModal = modalIndices.length === 2 && modalIndices.includes(end) && MODAL_INFINITIVE_WORD.test(norm(tokens[end][0])) &&
         end-2 > start && norm(tokens[end-1][0]) === "werden" && modalIndices[0] < end-2 ? end : null;
-      if (modalIndices.length === 1 || chainModal !== null) for (const {part,aux,fronted} of frames) {
+      if (modalIndices.length === 1 || chainModal !== null) for (const {part,aux,fronted,split} of frames) {
         const m = modalIndices[0];
         if (!fronted && (part <= start && part !== 0 || part === m || !/^\p{Ll}/u.test(tokens[part][0]) || m > part && m !== aux+1)) continue;
-        if (fronted && (m !== aux+1 || chainModal !== null)) continue;
+        if (fronted && (split ? m !== part+1 : m !== aux+1 || chainModal !== null)) continue;
         const head = {i:m,e:modalAt(m)[0]}, werden = verbs(aux).filter(e=>e.word === "werden");
         let main = participles(part);
         if (!main.length && !verbs(part).length && !becomeAt(part)) main = await externalParticiple(tokens[part][0]);
@@ -7697,7 +7736,34 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let facts;
       try { facts = await lexicalLookup(form,'externalParticiple'); } catch (_) { return []; }
       const lemmas = await externalParticipleLemmas(form,facts,'externalParticiple');
-      return lemmas.size === 1 ? [{word:[...lemmas][0],type:"Verb"}] : [];
+      if (lemmas.size === 1) return [{word:[...lemmas][0],type:"Verb"}];
+      return lemmas.size ? [] : particleOwnParticiple(form);
+    }
+    // (Alice A7 (2), advisor 16.11: a particle + the participle of an own verb that no dictionary has as one word — hinausgewiesen,
+    // umgewechselt, hineingeraten — is that particle verb, with the own verb's auxiliaries; geraten is raten's and geraten's participle:
+    // the verb of that very spelling)
+    // (and a particle + the participle of a verb only the external dictionary knows — hinaus + gewiesen (weisen))
+    async function particleParticiple(form) {
+      const own = particleOwnParticiple(form);
+      if (own.length) return own;
+      const w = norm(form);
+      if (form !== w || (forms.get(w) || []).length) return [];
+      const prefix = (/^(?:vorwärts|rückwärts|voran|voraus|wieder|um|über|durch|unter)(?=ge)/u.exec(w) || PARTICLE_INFINITIVE_PREFIX.exec(w))?.[0], rest = prefix ? w.slice(prefix.length) : '';
+      if (rest.length < 5 || !/^ge/u.test(rest)) return [];
+      const verb = await externalParticiple(rest);
+      return verb.length === 1 ? [{word:prefix + norm(verb[0].word).replace(/^sich\s+/u,""),type:"Verb"}] : [];
+    }
+    function particleOwnParticiple(form) {
+      const w = norm(form);
+      if (form !== w || (forms.get(w) || []).length) return [];
+      // (um / über / durch / unter / wieder … only before ge-: umgewechselt is separable; umfahren / übersetzt are no such form)
+      const prefix = (/^(?:vorwärts|rückwärts|voran|voraus|wieder|um|über|durch|unter)(?=ge)/u.exec(w) || PARTICLE_INFINITIVE_PREFIX.exec(w))?.[0], rest = prefix ? w.slice(prefix.length) : '';
+      let own = rest.length > 2 ? [...(forms.get(rest) || []),...(verbAnalyses.get(rest) || []).filter(a => a.kind === 'participle' && a.entry).map(a => a.entry)]
+        .filter(e => e.type === "Verb" && norm(String(e.perfect_form || "").split(/\s+/).pop()) === rest) : [];
+      own = [...new Map(own.map(e => [e.id ?? e.word, e])).values()];
+      if (own.some(e => norm(e.word) === rest)) own = own.filter(e => norm(e.word) === rest);
+      if (!own.length || new Set(own.map(e => norm(e.word))).size !== 1) return [];
+      return [{word:prefix + norm(own[0].word).replace(/^sich\s+/u,""),type:"Verb",auxiliaries:auxiliariesOf(own[0])}];
     }
     // Grammar probes must not evict the reader's lexical/display cache.
     function lassenLexicalLookup(word) { return sourceLookup(word,'lassenLexicalLookup','grammar'); }
@@ -8283,7 +8349,31 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           !facts.some(g => !g.kind && !g.unresolved && ['Adjektiv','Adverb'].includes(canonicalPos(g.pos)) && norm(g.word) === w)) found.add(w);
       }
     }
+    // Alice A6 (advisor 16.11, claude/ALICE_FORM_FIXES_2026-11-16_RU.md): the Partizip II of a verb only another dictionary knows, right
+    // before haben / sein or zu haben / zu sein — the perfect infinitive (muss … nachgeahmt haben, müssen … freigehabt haben, angeknüpft zu
+    // haben), per sentence, read synchronously by the modal chain; the verb and its auxiliaries from the dictionary.
+    const externalPerfectWords = new Map();
+    async function warmExternalPerfects(sentence) {
+      if (!sentence || externalPerfectWords.has(sentence)) return;
+      const tokens = sharedTokens(sentence,'externalPerfectWords'), found = new Map();
+      externalPerfectWords.set(sentence,found);
+      if (externalPerfectWords.size > 200) externalPerfectWords.delete(externalPerfectWords.keys().next().value);
+      const aux = k => ['haben','sein'].includes(tokens[k]?.[0]);
+      for (let i = 0; i < tokens.length - 1; i++) {
+        const t = tokens[i][0], w = norm(t);
+        if (!(aux(i+1) || tokens[i+1][0] === 'zu' && aux(i+2))) continue;
+        if (t !== w || w.length < 5 || !/(?:t|en)$/u.test(w) || (forms.get(w) || []).length) continue;
+        const verb = await externalParticiple(t);
+        // (a particle + an own verb — hinein + geraten: externalParticiple gives the particle verb with the own verb's auxiliaries)
+        if (verb.length && verb[0].auxiliaries) { if (verb[0].auxiliaries.length) found.set(w,{...verb[0],external:true}); continue; }
+        if (!verb.length) continue;
+        let auxiliaries = [];
+        try { auxiliaries = ((await fallback.perfectAuxiliaries?.(verb[0].word)) || []).map(norm); } catch (_) { auxiliaries = []; }
+        if (auxiliaries.length) found.set(w,{word:verb[0].word,type:"Verb",external:true,auxiliaries});
+      }
+    }
     async function runConstructionProducers(word, context, candidates, producers) {
+      await warmExternalPerfects(String(context?.sentence || ''));
       await warmExternalParticiples(String(context?.sentence || ''));
       await warmExternalInfinitives(String(context?.sentence || ''));
       for (const producer of producers) {
@@ -8482,7 +8572,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         !norm(construction.lemma || "").startsWith("sich ") && !all.some(o => o.dictionaryId && o.dictionaryId === e.id);
       // (L15 step 1, advisor 29.10: sich with lassen + an infinitive is not a reflexive card of lassen — the empty «sich lassen» —, the lassen
       // group takes the card: lässt sich … darstellen, ließ sich als Soldat anwerben; «можно» / «велеть (для себя)» are steps 2–3)
-      if ((c.reflexiveUnconfirmed && group.id !== "werden-future-perfect") || c.construction?.id === "reflexive-verb" && !(group.id==='lassen-infinitive'&&(c.construction.attachmentOnly||norm(c.lemma)==='lassen'))) return c;
+      if ((c.reflexiveUnconfirmed && !["werden-future-perfect","werden-conditional-perfect"].includes(group.id)) || c.construction?.id === "reflexive-verb" && !(group.id==='lassen-infinitive'&&(c.construction.attachmentOnly||norm(c.lemma)==='lassen'))) return c;
       if (group.marker && c.lemma === "zu" && canonicalPos(c.pos) === "particle")
         return {...c,construction,translation:{en:"infinitive marker",ru:"частица инфинитива"}};
       // C14 (17.10.2026): with two own cards of one verb the group's role names the card it proved (ist gefahren:
@@ -8490,7 +8580,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const twinRoles = roles.filter(e => e.id && norm(e.word) === norm(c.lemma) && e.type === canonicalPos(c.pos));
       const ownTwins = c.dictionaryId && (lemmas.get(norm(c.lemma)) || []).filter(e => e.type === "Verb").length > 1;
       return roles.some(e => (norm(e.word) === norm(c.lemma) || reflexiveOnlyRole(e)) && e.type === canonicalPos(c.pos) &&
-        (!["werden-future-perfect","lassen-infinitive"].includes(group.id) && !(ownTwins && twinRoles.length) || !c.dictionaryId || e.id === c.dictionaryId))
+        (!["werden-future-perfect","werden-conditional-perfect","lassen-infinitive"].includes(group.id) && !(ownTwins && twinRoles.length) || !c.dictionaryId || e.id === c.dictionaryId))
         ? {...c,construction:norm(construction.lemma || "").startsWith("sich ") && norm(c.lemma) === norm(construction.lemma).replace(/^sich\s+/u,"") ||
             // (a chain of two verbs — hören / gehören — names the card's verb on that card)
             String(construction.lemma || "").includes(" / ") && String(construction.lemma).split(" / ").includes(norm(c.lemma))
@@ -9252,7 +9342,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // proposals and choice blocks of the selection core.
     function constructionSelection(candidates, separated, sense = null, word = null) {
       const same = (a,b) => window.BibliothekVocabulary.identity(a) === window.BibliothekVocabulary.identity(b);
-      const grouped = candidates.filter(c => c.construction && !(c.reflexiveUnconfirmed && c.construction.id === "werden-future-perfect") && !["separable-verb","reflexive-verb"].includes(c.construction.id));
+      const grouped = candidates.filter(c => c.construction && !(c.reflexiveUnconfirmed && ["werden-future-perfect","werden-conditional-perfect"].includes(c.construction.id)) && !["separable-verb","reflexive-verb"].includes(c.construction.id));
       // C14 step 3 (17.10.2026): two own cards of one separable verb (angehen «включаться» / «касаться»)
       // both carry the proven bracket: the bracket stands, the choice is between those cards (not the
       // plain verb gehen, which won before because no single card was proposed).
@@ -9282,7 +9372,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const clause = verbalClause(word,context,'futurePerfectGroup',clauseBoundaries.futurePerfect,clauseGaps.dashed);
       if (!clause) return null;
       const {tokens,selected:clicked,start,end,indices,verbs,possessiveBeforeNoun} = clause;
-      const heads=indices.flatMap(i=>verbs(i).filter(e=>e.word === "werden" && clause.finiteIn(e,i,"Präsens")).map(e=>({i,e})));
+      // (Alice A7 (1), advisor 16.11: würde + a perfect infinitive is the past Konjunktiv II — Sie würde es gesehen haben, würde sie ihn
+      // für einen Fisch angesehen haben — the same chain as Futur II, labelled «Konjunktiv II»)
+      const heads=indices.flatMap(i=>verbs(i).filter(e=>e.word === "werden" && (clause.finiteIn(e,i,"Präsens") || clause.finiteIn(e,i,"Konjunktiv II"))).map(e=>({i,e,konj2:!clause.finiteIn(e,i,"Präsens")})));
       const groups=[];
       for(const head of heads) {
         const helper=head.i===end ? end-1 : end, part=helper-1;
@@ -9301,7 +9393,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if(indices.some(i=>!linked.includes(i) && clause.competing(i) && !clause.nounToken(i) && !possessiveBeforeNoun(i))) continue;
 
         // To-do 3.4 (reference F12-B7): the clicked auxiliary is named, since gewesen sein has one lemma for both words.
-        const clickedRole=clicked===helper ? "futurePerfectHave" : clicked===head.i ? "futurePerfectWill" : null;
+        const clickedRole=head.konj2 ? (clicked===helper ? "perfectHave" : clicked===head.i ? "conditionalPast" : null) : clicked===helper ? "futurePerfectHave" : clicked===head.i ? "futurePerfectWill" : null;
+        if(head.konj2){ groups.push({id:"werden-conditional-perfect",label:"Konjunktiv II",tense:"Konjunktiv II",clickedRole,lemma:[...bases][0],roles:[head.e,...main,aux],
+          note:{ru:"Konjunktiv II прошедшего · würde + инфинитив перфекта",en:"past Konjunktiv II · würde + perfect infinitive"},
+          meaning:clicked===head.i ? {ru:"вспомогательный глагол Konjunktiv II",en:"Konjunktiv II auxiliary"} : null,
+          spans:linked.sort((a,b)=>a-b).map(clause.span)}); continue; }
         groups.push({id:"werden-future-perfect",label:"Futur II",tense:"Futur II",clickedRole,lemma:[...bases][0],roles:[head.e,...main,aux],
           note:{ru:"Futur II · завершённое действие в будущем / предположение о завершённом действии",en:"Futur II · completed future action / inference about a completed event"},
           meaning:clicked===head.i ? {ru:"вспомогательный глагол Futur II",en:"Futur II auxiliary"} : null,
@@ -9607,6 +9703,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             let lexical = withReflexive(matches(tail-1),reflexiveRows(tail-1,"Partizip II"))
               .filter(e => clause.participleOf(e,tail-1) && auxiliariesOf(e).includes(auxWord) && wordsBefore(e,tail-1));
             if (!reflexiveIn && lexical.some(e => norm(e.word) === base(e))) lexical = lexical.filter(e => norm(e.word) === base(e));
+            // (Alice A6: a participle only another dictionary knows — muss … nachgeahmt haben)
+            if (!lexical.length && !matches(tail-1).length && /^\p{Ll}/u.test(tokens[tail-1][0])) {
+              const ext = externalPerfectWords.get(String(context.sentence || ''))?.get(norm(tokens[tail-1][0]));
+              if (ext && ext.auxiliaries.includes(auxWord)) lexical = [ext];
+            }
             // (twins of one form with the same auxiliary — soll gelobt haben: loben / geloben — one chain for both, advisor 29.10)
             const lexicalTwins = new Set(lexical.map(base)).size > 1 && lexical.every(e => norm(e.word) === base(e));
             if (auxEntry && lexical.length && (new Set(lexical.map(base)).size === 1 || lexicalTwins)) {
@@ -9782,7 +9883,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const heads = indices.flatMap(i => matches(i).filter(e => PERFECT_AUXILIARIES.includes(e.word) && (finiteTenses(e,i).length || pastConditional(e,i) || konj1(e,i))).map(e => ({i,e})));
       const groups = [];
       for (const head of heads) {
-        const tail = head.i === end ? end-1 : end;
+        const cmp = head.i < end ? comparisonTail(tokens, head.i, end) : -1, tail = cmp > 0 ? cmp : head.i === end ? end-1 : end;
         // (links chat, advisor 02.11: the participle may open its part after und / oder — studiert und promoviert hatte — as in verbGroup)
         const afterAnd = head.i === end && tail === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0]));
         if (tail < start || tail === start && !afterAnd || tail === head.i || ![head.i,tail].includes(selected)) continue;
@@ -10054,7 +10155,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const heads = indices.flatMap(i => matches(i).filter(e => (modals.has(e.word) || e.word === "werden") && finiteTenses(e,i).length).map(e => ({i,e})));
       const groups = [];
       for (const head of heads) {
-        const tail = head.i === end ? end-1 : end;
+        const cmp = head.i < end ? comparisonTail(tokens, head.i, end) : -1, tail = cmp > 0 ? cmp : head.i === end ? end-1 : end;
         if (tail <= start || tail === head.i || ![head.i,tail].includes(selected)) continue;
         const form = tokens[tail][0];
         // C14 step 1: a reflexive-only own card (sich stoßen) without a reflexive pronoun in the clause
@@ -10067,7 +10168,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const separatedHere = (separatedForms.get(norm(form)) || []).some(pair => !pair.entry.derivedSeparable &&
           indices.some(i => i !== tail && norm(tokens[i][0]) === pair.prefix));
         if (!/^\p{Ll}/u.test(form) || ownTail.length || separatedHere || norm(tokens[tail-1][0]) === "zu") continue;
-        if (COMPARISON_PARTICLES.includes(norm(tokens[tail+1]?.[0] ?? ""))) continue;
+        if (cmp < 0 && COMPARISON_PARTICLES.includes(norm(tokens[tail+1]?.[0] ?? ""))) continue;
         // G15 (18.10.2026): an article / pronoun spelling before a dash is a broken-off phrase
         // (wollte ich einen – hier lang), not the infinitive (einen «unite»).
         if (tail+1 < tokens.length && /[–—]/u.test(sentence.slice(tokens[tail].index+form.length,tokens[tail+1].index)) &&
@@ -10171,7 +10272,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
       }
       for (const head of heads) {
-        const tail = head.i === end ? end-1 : end;
+        const cmp = head.i < end ? comparisonTail(tokens, head.i, end) : -1, tail = cmp > 0 ? cmp : head.i === end ? end-1 : end;
         // (links chat, advisor 02.11: the participle may open its part after und / oder — studiert und promoviert hatte — as in verbGroup)
         const afterAnd = head.i === end && tail === start && start >= 2 && ["und","oder"].includes(norm(tokens[start-1][0]));
         if (tail < start || tail === start && !afterAnd || tail === head.i || ![head.i,tail].includes(selected)) continue;
@@ -10194,7 +10295,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // An own adjective of that spelling is werden = become (wurde … bekannt),
         // and a comparison after it continues the clause (wird zerstreut als … genutzt).
         // L34: not an adjective card that names this verb and means something else (wurde … aufgeweckt — aufwecken).
-        if ((forms.get(norm(form)) || []).some(e => e.type === "Adjektiv") && !participleAdjectiveCard(form) || COMPARISON_PARTICLES.includes(norm(tokens[tail+1]?.[0] ?? ""))) continue;
+        if ((forms.get(norm(form)) || []).some(e => e.type === "Adjektiv") && !participleAdjectiveCard(form) || cmp < 0 && COMPARISON_PARTICLES.includes(norm(tokens[tail+1]?.[0] ?? ""))) continue;
         const tense = finiteTenses(head.e,head.i);
         const alsNoun = indices.some(i => i > Math.min(head.i,tail) && i < tail && alsNounPhrase(tokens,i,tail));
         groups.push({id:"werden-passive",lemma,roles:[head.e,{word:lemma,type:"Verb"}],...(alsNoun ? {alsNoun:true} : {}),
@@ -10330,6 +10431,14 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         ? {ids:seinVerbIds(f),evidence:"sein-after-predicate-or-modal"} : null,
       'sein-clause-final-after-modal': f => norm(f.word) === "sein" && f.modalInClause && f.index === f.end
         ? {ids:seinVerbIds(f),evidence:"sein-clause-final-after-modal"} : null,
+      // Alice A5 (advisor 16.11, claude/ALICE_FORM_FIXES_2026-11-16_RU.md): the possessive sein stands before its noun or adjective;
+      // sein right after zu (zu takes the dative — zu seinem) or right before a lower-case finite modal / haben / werden is the infinitive:
+      // verschieden von dem zu sein was …, wie … wohl sein möchte, gewesen sein möchtest, wie er gewesen sein soll.
+      'sein-after-zu-or-before-finite': f => norm(f.word) === "sein" && (
+        f.previous >= 0 && f.adjacent(f.previous,f.index) && f.tokens[f.previous][0] === "zu" ||
+        f.next >= 0 && f.next <= f.end && f.adjacent(f.index,f.next) && /^\p{Ll}/u.test(f.tokens[f.next][0]) &&
+          (verbAnalyses.get(norm(f.tokens[f.next][0])) || []).some(a => a.kind === "finite" && (f.modalLemmas.includes(a.base) || ["haben","werden"].includes(a.base))))
+        ? {ids:seinVerbIds(f),evidence:"sein-after-zu-or-before-finite"} : null,
       'ihr-dative-object': f => norm(f.word) === "ihr" && (f.dativePreposition || f.dativeFinite || f.dativeFollowing)
         ? {ids:["pronoun-004"],evidence:f.dativePreposition ? "ihr-after-preposition" : "ihr-with-dative-finite-verb"} : null,
       'ihr-next-to-plural-verb': f => norm(f.word) === "ihr" && [f.previous,f.next].some(i => i >= f.start && i <= f.end &&
@@ -11697,7 +11806,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // shared by damitOpensPart and partEndsWithFiniteVerb alone)
     function joinedFiniteToken(token) {
       const f = norm(token[0]);
-      return /^\p{Ll}/u.test(token[0]) && SEPARABLE_PARTICIPLE_PARTICLES.split('|').some(p => f.startsWith(p) && f.length - p.length >= 3 &&
+      // (Alice A10: particle + zu + infinitive is the zu-infinitive of a separable verb — bis gestern zurückzugehen — not a finite form of zugehen)
+      const zuInfinitive = p => /^zu./u.test(f.slice(p.length)) && (verbAnalyses.get(f.slice(p.length+2)) || []).some(r => r.kind === 'infinitive');
+      return /^\p{Ll}/u.test(token[0]) && SEPARABLE_PARTICIPLE_PARTICLES.split('|').some(p => f.startsWith(p) && f.length - p.length >= 3 && !zuInfinitive(p) &&
         [f.slice(p.length),f.slice(p.length).replace(/ß/gu,'ss')].flatMap(x => verbAnalyses.get(x) || []).some(r => r.kind === 'finite' && !r.detached));
     }
     // (second resolver chat, advisor 11.11, bis — claude/BIS_NEXT_WORD_COUNT_2026-11-11_RU.md) `alone`: the finished subordinate part —
@@ -12292,6 +12403,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const verbNext = /^[^·]+·\s*\*\*Verb\*\*/u.test(conjunction.item?.word_order_pattern || "");
       if (start === index) {
         if (kind === "coordinating") return conjunctionAt('coordinator-at-clause-start');
+        // (Alice A10: a subordinator alone in its part opens no clause — »Und seitdem«, sprach der Hutmacher … — the adverb «с тех пор»)
+        if (kind === "subordinating" && end === index && tokens[index+1]) return adverbAt('adverb-alone-in-part');
         // Directly before a finite verb (Da kommen …, Damit ist …, Wie kann …): no subordinate clause.
         if (tokens[index+1] && !boundary.test(gap(index,index+1)) && /^[a-zäöüß]/u.test(tokens[index+1][0]) && await finite(index+1))
           return verbNext ? conjunctionAt('conjunction-before-finite-verb') : adverbAt('adverb-before-finite-verb');
@@ -12370,6 +12483,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (Außer du möchtest …, außer ihr verschwindet, bis er kommt) makes the same-word conjunction card, not the
       // preposition. Agreement is checked: außer ihr gab es … (ihr = Dativ «её») stays a preposition.
       const sameConjunction = candidates.filter(c => c.source === "main" && canonicalPos(c.pos) === "Konjunktion" && norm(c.lemma) === norm(word));
+      // (Alice A10, advisor 16.11: während + die / das / ein / eine — words that are never genitive — is the conjunction: während die
+      // Tränen herabflossen, während das Spiel lief; the preposition takes the genitive — während des Spiels, während der Fahrt)
+      if (norm(word) === "während" && sameConjunction.length === 1 && next && /^(?:die|das|ein|eine)$/u.test(next))
+        return {candidate:sameConjunction[0],rule:'subordinate-clause',evidence:'conjunction-before-non-genitive'};
       if (sameConjunction.length === 1 && next && tokens[index+2] && !boundary.test(gap(index+1,index+2)) &&
           (/^[a-zäöüß]/u.test(tokens[index+1][0]) || tokens[index+1][0] === "Sie")) {
         const persons = {ich:["ich"],du:["du"],er:["er/sie/es"],es:["er/sie/es"],man:["er/sie/es"],sie:["er/sie/es","sie"],wir:["wir"],ihr:["ihr"]}[next];
@@ -12390,6 +12507,16 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Stanoviště verlängert.
       if (norm(word) === "bis" && conjunctions.length === 1 && partEndsWithFiniteVerb(sentence,tokens,index,{alone:true}) && (clauseStart ||
           index > 0 && norm(tokens[index-1][0]) === "als" || damitOpensPart(sentence,tokens,index,{finiteBefore:true})))
+        return {candidate:conjunctions[0],rule:'subordinate-clause',evidence:'subordinate-clause-verb-final'};
+      // (Alice A10, advisor 16.11: während at the start of its part — after a mark, a coordinator or the sentence start — before a finished
+      // subordinate part is the conjunction «в то время как», as bis: , während der Dodo ihr den Fingerhut überreichte, …; und während Tränen
+      // ihre Wangen herabflossen, …; Während sie noch hinsah, …. Während des Tages arbeitet er / Er schlief während der Fahrt stay prepositions.)
+      // (not before a genitive-only word — während eines Schüleraustausches, während welcher Alice …; not a part closed by a zu-infinitive —
+      // ließ sich breitschlagen, während der großen Pause zu Hagrid zu laufen)
+      const genitiveOnly = /^(?:des|eines|dieses|jenes|meines|deines|seines|ihres|unseres|eures|keines|welches|welcher|dessen|deren)$/u;
+      const waehrendEnd = norm(word) === "während" ? partEnd(sentence,tokens,index,{numbers:true}) : -1;
+      if (norm(word) === "während" && conjunctions.length === 1 && clauseStart && !genitiveOnly.test(norm(tokens[index+1]?.[0] ?? "")) &&
+          norm(tokens[waehrendEnd-1]?.[0] ?? "") !== "zu" && partEndsWithFiniteVerb(sentence,tokens,index,{alone:true}))
         return {candidate:conjunctions[0],rule:'subordinate-clause',evidence:'subordinate-clause-verb-final'};
       // (second resolver chat, advisor 11.11, second step) bis before a number or a word of time with no own finite verb at the end of its
       // part (a form that is a participle too does not count: bis heute weiterentwickelt) is the preposition «до»: bis 1999, bis heute,
@@ -18967,7 +19094,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // sich auf den Thron setzen — the window sich setzen / setzen keeps «möchte … setzen» lit. A window with another word (gefunden as
     // an adjective, a noun) or two different chains keeps no chain.
     const VERB_CHAIN_CONSTRUCTIONS = new Set(["modal-group","perfect-group","modal-future","modal-passive","modal-perfect","modal-zu","modal-direction",
-      "werden-future-or-passive","werden-future-passive","werden-future-perfect","werden-passive","werden-passive-perfect","future-perfect",
+      "werden-future-or-passive","werden-future-passive","werden-future-perfect","werden-conditional-perfect","werden-passive","werden-passive-perfect","future-perfect",
       "external-modal","external-passive","external-perfect","lassen","lassen-infinitive","kommen-participle","perception-infinitive","zu-chain","verb-group"]);
     function windowChain(word, context, result) {
       if (!result || result.selected || !(result.candidates || []).length) return result;
