@@ -1,6 +1,7 @@
 /* Pronomen — script. Markup: index.html · styles: pronomen.css
    Needs (loaded before this file): components/deutsch-day-v1.js, deutsch-translation-v1.js,
-   sentences.js (window.PRONOUN_EXERCISES), deutsch-progress-v1.js (optional).
+   sentences.js (window.PRONOUN_EXERCISES), answer-rules.js (PronomenRules — 16.11: the rules, without the page; the
+   native app runs that file as it is), deutsch-progress-v1.js (optional).
    When this file changes, raise its ?v= in index.html and the Home tile's pronomen/?v= */
 
 /* ===== START-SCREEN DESCRIPTION =====
@@ -23,6 +24,7 @@ document.addEventListener("click", e => {
   }
 }, true);
 const data = window.PRONOUN_EXERCISES || [];
+const R = window.PronomenRules; // the rules (answer-rules.js, 16.11)
 
 function isTouchDevice() {
   return navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
@@ -30,13 +32,8 @@ function isTouchDevice() {
 document.documentElement.classList.toggle("is-touch", isTouchDevice());
 
 /* ===== SESSION STATS (last 5 rounds) =====
-   Decide which sentences come up more often, the „Noch üben“ list and the marks in the table.
-   Keys: "personal · <skill>", and for possessives "root · Possessiv · <owner> →" (right stem)
-   plus "detail · <skill> · <gender>" (whole form; only judged when the stem was right). */
-const STATS_STORE = "pronomenStatsV2";
-const SESSION_WINDOW = 5;
-const MIN_ATTEMPTS = 2;
-const ERROR_THRESHOLD = 0.4;
+   Decide which sentences come up more often, the „Noch üben“ list and the marks in the table (rules: answer-rules.js). */
+const { STATS_STORE, SESSION_WINDOW } = R;
 let statsStore = { sessions: [] };
 try {
   statsStore = JSON.parse(localStorage.getItem(STATS_STORE) || '{"sessions":[]}');
@@ -50,45 +47,7 @@ function saveStats() {
     localStorage.setItem(STATS_STORE, JSON.stringify(statsStore));
   } catch (e) {}
 }
-function statKey(x) {
-  if (x.type === "possessive") {
-    const gender = x.gender ? ` · ${x.gender}` : "";
-    return { root: `root · ${x.skill.split(" → ")[0]} →`, detail: `detail · ${x.skill}${gender}`, type: "possessive" };
-  }
-  return { root: `personal · ${x.skill}`, detail: `personal · ${x.skill}`, type: "personal" };
-}
-// Newer rounds weigh more (round 1 of 5 × 1 … round 5 × 5).
-function currentStats() {
-  const map = {};
-  for (let s = 0; s < statsStore.sessions.length; s++) {
-    const session = statsStore.sessions[s];
-    const weight = s + 1;
-    for (const [key, v] of Object.entries(session.answers || {})) {
-      if (!map[key]) map[key] = { correct: 0, wrong: 0, weightedCorrect: 0, weightedWrong: 0, attempts: 0 };
-      map[key].correct += v.correct || 0;
-      map[key].wrong += v.wrong || 0;
-      map[key].weightedCorrect += (v.correct || 0) * weight;
-      map[key].weightedWrong += (v.wrong || 0) * weight;
-      map[key].attempts += (v.correct || 0) + (v.wrong || 0);
-    }
-  }
-  for (const v of Object.values(map)) {
-    const total = v.weightedCorrect + v.weightedWrong;
-    v.errorRate = total ? v.weightedWrong / total : 0;
-    v.weak = v.attempts >= MIN_ATTEMPTS && v.errorRate >= ERROR_THRESHOLD;
-  }
-  return map;
-}
-// Readable name for the „Noch üben“ list — the same wording as the grey line under an answer,
-// e.g. "Personal · Dativ · ich → mir", "Possessiv · wir → unser", "Possessiv · ich → mein · Dativ · Maskulin".
-function weakLabel(key) {
-  if (key.startsWith("root · ")) {
-    const owner = key.slice(7); // "Possessiv · wir →"
-    const x = data.find(x => x.skill.startsWith(owner + " "));
-    return x ? x.skill.split(" · ").slice(0, 2).join(" · ") : owner.replace(/ →$/, "");
-  }
-  return key.replace(/^(personal|detail) · /, "");
-}
+const currentStats = () => R.currentStats(statsStore.sessions);
 
 /* ===== DAILY STATS (Home: today's answers) ===== */
 // 15.11: the score of the day is counted in one place — components/deutsch-daily-v1.js (same rules, same data)
@@ -97,56 +56,11 @@ function recordDailyAnswer() {
 }
 
 /* ===== PROGRESS (Documentation/PROGRESS_TRACKER.md) =====
-   41 categories: 18 personal (person × case), 8 possessive owners (ich → mein …),
-   15 possessive endings (case × gender, e.g. "Dativ · Maskulin → -em").
-   A possessive sentence counts for its owner AND its ending — same logic as the session stats:
-   owner = right stem; ending = only judged when the stem was right.
-   Weight = sentences covered (a possessive sentence gives ½ to its owner, ½ to its ending),
-   so the bar = share of the 103 sentences' grammar I reliably know. */
-const PROGRESS_ID = "pronomen";
+   41 categories (personal, possessive owners, possessive endings) — R.progressItems / R.progressKeys. */
+const PROGRESS_ID = R.PROGRESS_ID;
 const hasProgress = () => typeof window.DeutschProgress === "object";
-// "euer" drops its second e before endings: eure, eurem, euren.
-function ownerStem(x) {
-  return (x.skill.split(" → ")[1]?.split(" · ")[0] || "").toLocaleLowerCase("de-DE");
-}
-function stemMatches(input, stem) {
-  return !!stem && (input.startsWith(stem) || (stem === "euer" && input.startsWith("eur")));
-}
-function possessiveCase(x) {
-  return x.skill.split(" · ").pop();
-}
-function endingOf(x) {
-  const a = x.answer.trim().toLocaleLowerCase("de-DE"),
-    st = ownerStem(x),
-    base = a.startsWith(st) ? st : st === "euer" ? "eur" : st;
-  return a.slice(base.length);
-}
-function progressKeys(x) {
-  if (x.type !== "possessive") return { personal: "personal:" + x.skill };
-  return {
-    owner: "owner:" + x.skill.split(" → ")[0].replace("Possessiv · ", "") + " → " + ownerStem(x),
-    ending: "ending:" + possessiveCase(x) + "|" + (x.gender || "")
-  };
-}
-if (hasProgress()) {
-  const items = new Map(),
-    add = (key, label, w) => {
-      const it = items.get(key);
-      if (it) it.weight += w;
-      else items.set(key, { key, label, weight: w });
-    };
-  data.forEach(x => {
-    const k = progressKeys(x);
-    if (k.personal) {
-      add(k.personal, x.skill.replace("Personal · ", "").replace(/^(\w+) · (.*)$/, "$2 ($1)"), 1);
-      return;
-    }
-    add(k.owner, k.owner.slice(6), 0.5);
-    const e = endingOf(x);
-    add(k.ending, possessiveCase(x) + " · " + (x.gender || "") + " → " + (e ? "-" + e : "ohne Endung"), 0.5);
-  });
-  DeutschProgress.init(PROGRESS_ID, [...items.values()]);
-}
+const possessiveCase = R.possessiveCase;
+if (hasProgress()) DeutschProgress.init(PROGRESS_ID, R.progressItems(data));
 
 /* ===== DECK =====
    Half personal, half possessive; inside each type, sentences with recent mistakes come up more often. */
@@ -156,48 +70,11 @@ let deck = [],
   answer = "",
   correct = 0,
   sessionAnswers = {};
-const norm = s =>
-  s
-    .trim()
-    .toLocaleLowerCase("de-DE")
-    .replace(/[.,!?;:]/g, "");
-
-function weightedPick(items, count) {
-  const current = currentStats();
-  return items
-    .map(x => {
-      const keys = statKey(x);
-      const weakScore = current[keys.detail]?.errorRate || 0;
-      return { x, k: -Math.log(Math.max(Math.random(), 1e-9)) / (1 + weakScore * 4) };
-    })
-    .sort((a, b) => a.k - b.k)
-    .slice(0, Math.min(count, items.length))
-    .map(o => o.x);
-}
-function weightedDeck(count) {
-  const personal = data.filter(x => x.type === "personal");
-  const possessive = data.filter(x => x.type === "possessive");
-  const total = Math.min(count, data.length);
-  let personalCount = Math.floor(total / 2);
-  let possessiveCount = total - personalCount;
-  // If one type cannot supply its half, give the remaining slots to the other type.
-  if (personalCount > personal.length) {
-    possessiveCount += personalCount - personal.length;
-    personalCount = personal.length;
-  }
-  if (possessiveCount > possessive.length) {
-    personalCount += possessiveCount - possessive.length;
-    possessiveCount = possessive.length;
-  }
-  const selected = [...weightedPick(personal, personalCount), ...weightedPick(possessive, possessiveCount)];
-  // Shuffle so the two types are genuinely mixed.
-  return selected.sort(() => Math.random() - 0.5);
-}
 
 /* ===== QUESTION ===== */
 function start(count) {
   n = count;
-  deck = weightedDeck(count);
+  deck = R.weightedDeck(data, count, currentStats());
   i = 0;
   answer = "";
   correct = 0;
@@ -234,25 +111,6 @@ function feedbackOpen() {
 function tableOpen() {
   return DeutschWindow.isOpen($("modal"));
 }
-/* An answer that starts the sentence is stored in lower case (mein); it is shown as written there (Mein). */
-const shownAnswer = x => (x.sentence.startsWith("___") ? x.answer.charAt(0).toLocaleUpperCase("de-DE") + x.answer.slice(1) : x.answer);
-/* Capital letters (03.11.2026, Alena; the keyboard has Shift now): the case is checked. The polite Sie / Ihnen /
-   Ihr… is always capitalised, also at the start of the sentence; any other word at the start may be typed in
-   either case; in mid-sentence the case must be right (sie „they“ ≠ Sie). A right word in the wrong case is a
-   mistake, with a short note under the answer. */
-const POLITE_NOTE = {
-  note: { ru: "Вежливая форма — с большой буквы: {w}", en: "Polite form — capitalised: {w}" },
-  small: { ru: "Здесь с маленькой буквы: {w}", en: "Lower case here: {w}" }
-};
-const isPolite = x => /(^|· )Sie → /.test(x.skill);
-const plain = s => s.trim().replace(/[.,!?;:]/g, "");
-function caseRight(x, typed) {
-  const t = plain(typed);
-  if (t === x.answer) return true;
-  if (x.sentence.startsWith("___") && !isPolite(x)) return norm(t) === norm(x.answer);
-  return false;
-}
-const politeCaseSlip = (x, typed) => norm(typed) === norm(x.answer) && !caseRight(x, typed);
 function coloured(text, cls) {
   const s = document.createElement("span");
   s.className = cls;
@@ -264,42 +122,19 @@ function coloured(text, cls) {
 function submit() {
   if (!answer.trim() || feedbackOpen()) return;
   const x = deck[i],
-    ok = norm(answer) === norm(x.answer) && caseRight(x, answer);
+    a = R.assess(x, answer), // right or not, what to count, what to show (answer-rules.js)
+    ok = a.ok;
   recordDailyAnswer();
   $("bar").style.width = `${((i + 1) / deck.length) * 100}%`; // the bar fills on the answer, like every exercise
-  const keys = statKey(x);
-  const count = (key, right) => {
-    const v = sessionAnswers[key] || { correct: 0, wrong: 0 };
-    if (right) v.correct++;
-    else v.wrong++;
-    sessionAnswers[key] = v;
-  };
-  if (x.type === "possessive") {
-    // Stem and ending are scored separately. If the stem itself is wrong, the ending is not judged,
-    // so one mistake cannot weaken both. euer → eure/eurem/euren counts as the right stem.
-    const stemOK = stemMatches(norm(answer), ownerStem(x));
-    count(keys.root, stemOK);
-    if (stemOK) count(keys.detail, ok);
-  } else {
-    count(keys.detail, ok);
-  }
-  if (hasProgress()) {
-    const pk = progressKeys(x);
-    if (pk.personal) DeutschProgress.record(PROGRESS_ID, pk.personal, ok);
-    else {
-      const stemOK = stemMatches(norm(answer), ownerStem(x));
-      DeutschProgress.record(PROGRESS_ID, pk.owner, stemOK);
-      if (stemOK) DeutschProgress.record(PROGRESS_ID, pk.ending, ok);
-    }
-  }
+  // Possessives: stem and ending are scored separately; the ending only when the stem was right.
+  R.count(sessionAnswers, a.stats);
+  if (hasProgress()) a.progress.forEach(([key, right]) => DeutschProgress.record(PROGRESS_ID, key, right));
   if (ok) correct++;
   $("feedback").className = "feedback " + (ok ? "correct" : "wrong");
   $("given").replaceChildren(coloured(answer, ok ? "good" : "bad"));
-  const slip = politeCaseSlip(x, answer);
-  $("correctText").replaceChildren(...(ok && !slip ? [] : [coloured("→ " + shownAnswer(x), "good")]));
-  $("caseNote").textContent = slip
-    ? getTranslation(POLITE_NOTE, /^[A-ZÄÖÜ]/.test(x.answer) || isPolite(x) ? "note" : "small").replace("{w}", shownAnswer(x))
-    : "";
+  const slip = a.slip;
+  $("correctText").replaceChildren(...(ok && !slip ? [] : [coloured("→ " + a.shown, "good")]));
+  $("caseNote").textContent = a.note ? a.note.text : "";
   $("caseNote").hidden = !slip;
   $("skill").textContent = x.skill + (x.type === "possessive" && x.gender ? " · " + x.gender : "");
   $("answerbox").style.display = "none";
@@ -327,8 +162,7 @@ function next() {
 /* ===== SUMMARY ===== */
 function finish() {
   if (Object.keys(sessionAnswers).length) {
-    statsStore.sessions.push({ date: DeutschDay.key(), answers: sessionAnswers });
-    if (statsStore.sessions.length > SESSION_WINDOW) statsStore.sessions = statsStore.sessions.slice(-SESSION_WINDOW);
+    R.endRound(statsStore, DeutschDay.key(), sessionAnswers); // keeps the last SESSION_WINDOW rounds
     saveStats();
   }
   $("game").classList.add("hidden");
@@ -336,10 +170,7 @@ function finish() {
   $("score").textContent = `${correct} / ${deck.length}`;
   // Always kind - praise for taking part (2026-10-22); the phrase and the list are shared (deutsch-end-v1.js)
   $("doneNote").textContent = DeutschEnd.note(correct, deck.length);
-  const weak = Object.entries(currentStats())
-    .filter(([, v]) => v.weak)
-    .sort((a, b) => b[1].errorRate - a[1].errorRate);
-  DeutschEnd.list($("weak"), weak.map(([k]) => weakLabel(k)));
+  DeutschEnd.list($("weak"), R.weakList(statsStore.sessions, data));
 }
 
 /* ===== BUTTONS ===== */

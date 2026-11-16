@@ -1,6 +1,7 @@
 /* Vielseitige Verben — script. Markup: index.html · styles: vielseitige_verben.css
    Needs (loaded before this file): components/deutsch-translation-v1.js, sentences.js (VV_SENTENCES, VV_JOBS,
-   VV_FORMS, VV_USE_PAIRS, VV_HINTS), forms_table.js (VV_TABLE), components/deutsch-progress-v1.js (optional).
+   VV_FORMS, VV_USE_PAIRS, VV_HINTS), forms_table.js (VV_TABLE), answer-rules.js (VVAnswerRules — 16.11: checking an
+   answer without the page; the native app runs that file as it is), components/deutsch-progress-v1.js (optional).
    Built from modalverben.js (same difficulty, deck, keyboard, keys, table window and back-to-Home code).
    When this file changes, raise its ?v= in index.html, the Verbformen page's vielseitige_verben/?v=
    and the Home tile's verbformen/?v= */
@@ -17,6 +18,7 @@ document.getElementById("aboutText").textContent = getTranslation(START_ABOUT, "
 
 const $ = id => document.getElementById(id);
 const SENTENCES = VV_SENTENCES;
+const R = window.VVAnswerRules; // checking an answer (answer-rules.js, 16.11)
 const pick = value => (window.DeutschTranslation ? DeutschTranslation.pick(value) : value?.en || "");
 
 /* Phones and tablets type on the app's own keyboard (components/deutsch-keyboard): the field is read-only
@@ -238,105 +240,22 @@ function render() {
   syncKeyboardAndFocus();
 }
 
-/* ===== ANSWER ===== */
-// ß may be typed as ss; case and extra spaces don't matter
-const norm = s =>
-  String(s || "")
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .replace(/ß/g, "ss");
-
-// which verb (and which form) a typed word is
-function lookupForm(typed) {
-  const t = norm(typed);
-  for (const verb in VV_FORMS)
-    for (const form in VV_FORMS[verb]) if (norm(form) === t) return { verb, label: VV_FORMS[verb][form] };
-  return null;
-}
-
-// the label that fits the sentence (e.g. „Infinitiv“ out of „Infinitiv · Präsens (wir, sie)“)
-function neededLabel(item) {
-  const hit = lookupForm(item.answer);
-  if (hit && hit.verb === item.verb) {
-    const base = item.form.split(" ")[0];
-    const one = hit.label.split(" · ").find(l => l.startsWith(base));
-    if (one) return one;
-  }
-  return item.form;
-}
+/* ===== ANSWER ===== the rules: answer-rules.js (which spellings count, what to show, the hints) */
+const norm = R.norm;
 
 const rich = text =>
   esc(text)
     .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
     .replace(/\*([^*]+)\*/g, "<i>$1</i>");
 
-/* Yellow box, only after a wrong answer:
-   - another verb, known mix-up → a contrast, one line per verb (VV_HINTS)
-   - another verb, no known mix-up (a fixed phrase…) → nothing, the rule line is enough
-   - the right verb in the wrong form → two rows (yours red, needed green) with the form names + meaning
-     (geworden / worden, gelassen / lassen: the use instead of the same form name)
-     + in the past: where each past form is used (VV_PAST_NOTES) */
-function hintHtml(item, typed) {
-  const hit = lookupForm(typed);
-  const html = hintMain(item, typed, hit);
-  return hit && hit.verb === item.verb ? html + pastNote(item, typed, hit) : html;
-}
-
-// speaking: Perfekt · writing: Präteritum — only for this verb + job + needed form, and a typed past form
-function pastNote(item, typed, hit) {
-  const n = (window.VV_PAST_NOTES || []).find(
-    e => e.verb === item.verb && (!e.only || e.only.includes(item.job)) && e.forms.includes(item.form)
-  );
-  if (!n || (n.skip || []).includes(norm(typed)) || !/Präteritum|Partizip II/.test(hit.label)) return "";
-  return `<div class="hint-past">${n.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("")}</div>`;
-}
-
-function hintMain(item, typed, hit) {
-  if (!hit) {
-    const o = (window.VV_OTHER_WORDS || {})[norm(typed)]; // a known trap outside the five verbs (will …)
-    if (!o || (o.only && !o.only.includes(item.job)) || (o.verb && o.verb !== item.verb)) return "";
-    if (o.forms && !o.forms.includes(item.form)) return "";
-    return o.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
-  }
-  if (hit.verb !== item.verb) {
-    const h = [].concat(VV_HINTS[item.verb + ">" + hit.verb] || []).find(e => !e.only || e.only.includes(item.job));
-    if (!h) return "";
-    return h.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
-  }
-  const t = norm(typed),
-    a = norm(item.answer);
-  for (const key in VV_USE_PAIRS) {
-    const [x, y] = key.split("|");
-    if ((t === x && a === y) || (t === y && a === x)) {
-      const P = VV_USE_PAIRS[key];
-      if (P.forms && !P.forms.includes(item.form)) break; // this pair only in these sentences: else the plain rows
-      if (P.lines) return P.lines.map(l => `<div class="hint-line">${rich(pick(l))}</div>`).join("");
-      const row = (cls, w) => `<span class="w ${cls}">${esc(w)}</span><span class="lbl">${esc(pick(P[w]))}</span>`;
-      return `<div class="hint-rows">${row("yours", t)}${row("needed", a)}</div>`;
-    }
-  }
-  // red = yours, green = needed (no tags: the colours and the crossed-out word above say it).
-  // Another tense → the name + its meaning; the same tense → the name + the person (that is the mistake).
-  // A word that is several forms (bekommen: Partizip II · Infinitiv · Präsens) → only the names, else too long.
-  const parts = hit.label.split(" · ");
-  const need = neededLabel(item),
-    needBase = formBase(need);
-  const sameTense = parts.some(p => formBase(p) === needBase);
-  const yours = sameTense ? hit.label : parts.length > 1 ? parts.map(formBase).join(" · ") : withMeaning(formBase(hit.label));
-  return (
-    `<div class="hint-rows">` +
-    `<span class="w yours">${esc(typed)}</span><span class="lbl">${esc(yours)}</span>` +
-    `<span class="w needed">${esc(item.answer)}</span><span class="lbl">${esc(sameTense ? need : withMeaning(needBase))}</span>` +
-    `</div>`
-  );
-}
-
-// „Präteritum (ich, er)“ → „Präteritum“ · „Präteritum“ → „Präteritum (прошлое)“
-const formBase = label => label.replace(/\s*\(.*\)$/, "");
-function withMeaning(base) {
-  const m = (window.VV_FORM_MEANINGS || {})[base];
-  return m ? `${base} (${pick(m)})` : base;
+/* Yellow box (R.assess(…).hint): lines with marks (**bold**, *italic*), or two rows — yours red, needed green (no
+   tags: the colours and the crossed-out word above say it) — and in the past where each past form is used. */
+const hintLines = lines => lines.map(l => `<div class="hint-line">${rich(l)}</div>`).join("");
+function hintHtml(h) {
+  if (!h) return "";
+  const main = !h.main ? "" : h.main.lines ? hintLines(h.main.lines)
+    : `<div class="hint-rows">${h.main.rows.map(r => `<span class="w ${r.cls}">${esc(r.word)}</span><span class="lbl">${esc(r.label)}</span>`).join("")}</div>`;
+  return main + (h.past ? `<div class="hint-past">${hintLines(h.past)}</div>` : "");
 }
 
 function checkAnswer() {
@@ -349,20 +268,15 @@ function checkAnswer() {
 
   checked = true;
   $("bar").style.width = ((index + 1) / deck.length) * 100 + "%";
-  // the accepted spelling the typed word matched (ß/ss, case): shown instead of the raw input
-  // capital letters (03.11.2026, Alena): a capital here only starts the sentence (Wird …?), a small first letter is
-  // fine there; otherwise the case must be as written
-  const keep = s => String(s || "").trim().replace(/\s+/g, " ").replace(/ß/g, "ss"),
-    caseRight = x => keep(typed) === keep(x) || (/^[A-ZÄÖÜ]/.test(x) && keep(typed).charAt(0).toLocaleUpperCase("de-DE") + keep(typed).slice(1) === keep(x));
-  const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed) && caseRight(x));
-  const ok = Boolean(matched);
+  const a = R.assess(item, typed), // right or not, what to show, the hints (answer-rules.js)
+    ok = a.ok;
   if (ok) correctCount++;
   results.push({ item, ok });
   updateDifficulty(item, ok);
   recordProgress(item, ok);
 
   // an accepted other answer (gekriegt, kriegt …) stays as typed; otherwise the main answer is shown
-  const shown = ok ? matched : item.answer;
+  const shown = a.shown;
   $("result").className = "result show " + (ok ? "good" : "bad");
   if (window.deutschKeyboardReady) $("keyboard").classList.remove("show");
   if (TABLET.matches && tabletCardTop && $("keyboard")?.classList.contains("is-touch")) document.querySelector("#study .card").style.marginTop = tabletCardTop;
@@ -372,16 +286,12 @@ function checkAnswer() {
   $("formLine").innerHTML =
     `<span class="right">${esc(shown)}</span>` + (ok ? "" : `<span class="wrong-answer">${esc(typed)}</span>`);
   // the form name + what it means: „Konjunktiv II (бы)“ (the meaning not in capitals)
-  const kind = formBase(item.form),
-    kindMeaning = (window.VV_FORM_MEANINGS || {})[kind];
   $("formKind").innerHTML =
-    esc(kind) + (kindMeaning ? ` <span class="form-meaning">(${esc(pick(kindMeaning))})</span>` : "");
-  // the explanation = the table's card for this meaning (fallback: the sentence's own rule line)
-  const meaning = item.tip || meaningFor(item); // the sentence's own tip first (its tense), else the table's card
-  if (meaning) $("explanation").innerHTML = recipeHtml(meaning, false, false); // no example, no small extra line: those are for the table
-  else $("explanation").textContent = pick(item.rule);
-  const alsoNote = ok && norm(typed) !== norm(item.answer) ? (window.VV_ALSO_NOTES || {})[norm(typed)] : null; // kriegen / erhalten
-  const hint = ok ? (alsoNote ? `<div class="hint-line">${rich(pick(alsoNote))}</div>` : "") : hintHtml(item, typed);
+    esc(a.kind.name) + (a.kind.meaning ? ` <span class="form-meaning">(${esc(a.kind.meaning)})</span>` : "");
+  // the explanation = the construction card (the sentence's own tip first, else the table's card) or the rule line
+  if (a.explanation.card) $("explanation").innerHTML = recipeHtml(a.explanation.card, false, false); // no example, no small extra line: those are for the table
+  else $("explanation").textContent = a.explanation.text;
+  const hint = hintHtml(a.hint); // after a right answer only the «also fits» note (kriegen / erhalten)
   $("hint").innerHTML = hint;
   $("hint").classList.toggle("hidden", !hint);
   $("answer-area").classList.add("hidden");
@@ -634,9 +544,6 @@ function recipeHtml(m, withExample = true, withAlso = true) {
       }
     </div>`;
 }
-
-/* the table meaning that explains a sentence (same verb, same job) */
-const meaningFor = item => (VV_TABLE[item.verb]?.meanings || []).find(m => m.job === item.job) || null;
 
 function renderFormsMeanings(verb) {
   const meanings = VV_TABLE[verb].meanings;
