@@ -264,3 +264,56 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
   .fb-note { margin-top: 10px; }
   .continue { margin-top: 14px; }
 }
+
+/* ===== BLOCKS IN PLACE (16.11.2026, Alena, evening) =====
+   On a phone the screen is made of blocks that never move from task to task: situation · sentence · translation ·
+   what the particle does · scale · explanation (Entdecken), and situation · sentence · question · scale · answer line ·
+   verdict · translation · «also» · explanation · Weiter (Üben). Each block has a fixed height; the text sits inside it
+   (the situation at the bottom, next to the sentence; the sentence in the middle of its two lines — partikeln.js /
+   partikeln-ueben.js hold them; the rest at the top). A text longer than its block makes only that block taller
+   (the texts are being shortened: claude/PARTIKELN_LONG_TEXTS_2026-11-16_RU.md). Sizes for an iPhone 13 (RU). */
+@media (max-width: 699.98px) {
+  .context { min-height: 2.8em; display: flex; flex-direction: column; justify-content: flex-end; }  /* 2 lines */
+  #explore .translation { min-height: 2.8em; }                                                       /* 2 lines */
+  #explore .fn { min-height: 16px; }
+  #explore .note { min-height: 6em; }                                                                /* 4 lines */
+  #pGame .fb-also, #pGame .fb-also:empty { display: block; min-height: 1.5em; line-height: 1.5; }    /* 1 line */
+  #pGame .fb-note { min-height: 7.5em; }                                                             /* 5 lines */
+}
+
+/* ===== PARTICLE BUTTONS ON PHONES: ALWAYS TWO ROWS (16.11.2026, Alena, evening: «14 на всех телефонах всегда — одно
+   простое правило») =====
+   The words on the buttons are 14 (on the type scale) on every phone, always — not only where 16 would not fit, so
+   the buttons never change size from sentence to sentence. With 14 the ten particles take two rows in every sentence
+   (iPhone 13: before, 45 of 100 sentences needed three rows; large iPhone 2). Short phones: 32 px high, below. */
+@media (max-width: 699.98px) {
+  #explore .particles { padding: 0 8px; }
+  #explore .pt { height: 36px; line-height: 36px; font-size: 14px; padding: 0 10px; min-width: 44px; }
+  /* room under the explanation for the pinned buttons: 76 (bottom row) + two rows of 36 + 10 + 2. Was 240 for
+     three rows of 40, which left a little empty scroll on an iPhone 13 */
+  #explore { padding-bottom: calc(env(safe-area-inset-bottom) + 160px); }
+}
+
+/* ===== ENTDECKEN ON SHORT PHONES (16.11.2026, Alena, evening: «на SE вообще не влазит») =====
+   iPhone SE (and an iPhone in Safari with its bars): everything on one screen, as on an iPhone 13 — the particle
+   buttons pinned above the bottom row, «Anderer Satz» back in the bottom row, no scrolling. Room comes from tighter
+   gaps, a 4-line explanation at line-height 1.4, and lower buttons (32 px; the words 14, as on every phone) so the ten particles take
+   two rows (checked: all 1100 sentence × particle screens, RU and EN). */
+@media (max-width: 699.98px) and (max-height: 700px) and (min-height: 560px) {
+  #explore { padding-bottom: 0; }
+  #explore .particles { position: fixed; margin: 0; padding: 0 8px; bottom: calc(env(safe-area-inset-bottom) + 72px); gap: 6px; }
+  #explore .prow { gap: 5px; }
+  #explore .pt { height: 32px; line-height: 32px; padding: 0 8px; min-width: 42px; }
+  .shuffle { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 16px); transform: translateX(-50%); display: inline-flex; width: auto; margin: 0; }
+  .shuffle:active { transform: translateX(-50%) scale(0.97); }
+  #explore .cats { margin-top: 10px; }
+  #explore .cat { padding-top: 5px; padding-bottom: 5px; }
+  #explore .prompt { margin-top: 10px; }
+  #explore .context { margin-bottom: 4px; }
+  #explore .translation { margin-top: 4px; }
+  #explore .meaning { margin-top: 8px; }
+  #explore .meaning::before { margin-bottom: 8px; }
+  #explore .scale { margin-top: 10px; }
+  #explore .scale-labels { margin-top: 8px; }
+  #explore .note { line-height: 1.4; min-height: 5.6em; margin-top: 8px; }
+}

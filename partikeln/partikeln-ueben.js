@@ -134,20 +134,33 @@
     el.parentNode.appendChild(probe);
     q.options.forEach(function (k) {
       probe.innerHTML = q.t.accept.indexOf(k) >= 0 ? sentenceHtml(q.t.s, k, "ok") : sentenceHtml(q.t.s, [k, q.t.answer], "fixed");
-      R.hold = Math.max(R.hold, probe.offsetHeight);
+      R.hold = Math.max(R.hold, probe.getBoundingClientRect().height);
     });
     probe.remove();
+    /* 16.11.2026 (Alena, evening): on a phone the sentence always has (at least) its two lines, so the blocks below
+       keep their place from task to task */
+    if (window.matchMedia("(max-width: 699.98px)").matches) R.hold = Math.max(R.hold, slotHeight(el));
   }
+  // two lines at the sentence's own size (not the fitted one), so the block is the same for every task
+  function slotHeight(el) {
+    var cs = getComputedStyle(el), lh = parseFloat(cs.lineHeight) / parseFloat(cs.fontSize);
+    var keep = el.style.fontSize; el.style.fontSize = ""; var base = parseFloat(getComputedStyle(el).fontSize); el.style.fontSize = keep;
+    return Math.ceil(2 * lh * base);
+  }
+  /* phones (Alena 16.11, evening): a shorter sentence stands in the MIDDLE of its two-line place, not at its bottom */
   function holdSentence() {
     var el = $("pSentence");
-    el.style.paddingTop = "";
-    if (R && R.hold) el.style.paddingTop = Math.max(0, R.hold - el.offsetHeight) + "px";
+    el.style.paddingTop = el.style.paddingBottom = "";
+    if (!R || !R.hold) return;
+    var free = Math.max(0, R.hold - el.getBoundingClientRect().height); /* exact (no 1 px jumps) */
+    if (!window.matchMedia("(max-width: 699.98px)").matches) { el.style.paddingTop = free + "px"; return; }
+    el.style.paddingTop = free / 2 + "px"; el.style.paddingBottom = free / 2 + "px";
   }
   window.addEventListener("resize", function () {
     if (!R || $("pGame").classList.contains("hidden")) return;
     requestAnimationFrame(function () {
       if ($("pFeedback").classList.contains("hidden")) { fitQuestion(); showQuestion(); placeBottom(); return; } /* question: fit again */
-      $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+      $("pSentence").style.paddingTop = $("pSentence").style.paddingBottom = ""; measureHold(); holdSentence();
     });
   });
   function ask() {
@@ -168,7 +181,7 @@
   function showQuestion() {
     var t = R.list[R.i].t;
     $("pSentence").innerHTML = sentenceHtml(t.s, null);
-    $("pSentence").style.paddingTop = ""; measureHold(); holdSentence();
+    $("pSentence").style.paddingTop = $("pSentence").style.paddingBottom = ""; measureHold(); holdSentence();
     $("pFeedback").classList.add("hidden");
     $("pContinue").classList.add("hidden");
     $("pAnswers").classList.remove("hidden");
@@ -188,6 +201,7 @@
     function over() {
       var worst = -Infinity, c = $("pContinue");
       measureHold();
+      worst = R.hold - slotHeight(el) - 1; /* the sentence within its two lines (evening 16.11) */
       q.options.forEach(function (k) {
         fillAnswer(k);
         c.style.marginTop = "";

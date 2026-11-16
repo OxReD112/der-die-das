@@ -130,6 +130,7 @@
     if (fresh) fitSentence();
     var note = $("note"), before = note.textContent;
     fillTexts(st.cur);
+    holdSentence();
     renderScale(fresh);
     renderParticles();
     placeNote();
@@ -172,20 +173,41 @@
   function fitSentence() {
     var el = $("sentence"), parts = $("particles"), note = $("note");
     el.style.fontSize = "";
+    el.style.paddingTop = el.style.paddingBottom = "";
     renderParticles();
-    if (getComputedStyle(parts).position !== "fixed") return;
+    if (!PHONE.matches) return;
     var base = parseFloat(getComputedStyle(el).fontSize), size = base, min = base * 0.8;
     var labels = document.querySelector(".scale-labels"), keys = [null].concat(shown(sent()));
+    var pinned = getComputedStyle(parts).position === "fixed";
     function over() {
-      var worst = -Infinity;
+      var worst = -Infinity, slot = slotHeight(el);
       keys.forEach(function (k) {
         fillTexts(k);
         note.style.marginTop = "";
-        worst = Math.max(worst, labels.getBoundingClientRect().bottom + 14 + note.offsetHeight + 8 - parts.getBoundingClientRect().top);
+        worst = Math.max(worst, el.offsetHeight - slot - 1); // the sentence stays within its two lines
+        if (pinned) worst = Math.max(worst, labels.getBoundingClientRect().bottom + 14 + note.offsetHeight + 8 - parts.getBoundingClientRect().top);
       });
       return worst;
     }
     while (over() > 0 && size > min) { size = Math.max(min, size - 1); el.style.fontSize = size + "px"; }
+  }
+  /* 16.11.2026 (Alena, evening): on a phone every block keeps its place — situation, sentence, translation, what the
+     particle does, the scale, the explanation. Each has a fixed height (partikeln.css, «BLOCKS IN PLACE»); the
+     sentence's two lines are held here: a one-line sentence sits in the middle of them. */
+  var PHONE = window.matchMedia("(max-width: 699.98px)");
+  // two lines at the sentence's own size (not the fitted one), so the block is the same for every sentence
+  function slotHeight(el) {
+    var cs = getComputedStyle(el), lh = parseFloat(cs.lineHeight) / parseFloat(cs.fontSize);
+    var keep = el.style.fontSize; el.style.fontSize = ""; var base = parseFloat(getComputedStyle(el).fontSize); el.style.fontSize = keep;
+    return Math.ceil(2 * lh * base);
+  }
+  function holdSentence() {
+    var el = $("sentence");
+    el.style.paddingTop = el.style.paddingBottom = "";
+    if (!PHONE.matches) return;
+    var free = Math.max(0, slotHeight(el) - el.getBoundingClientRect().height), top = free / 2; /* exact (no 1 px jumps) */
+    el.style.paddingTop = top + "px";
+    el.style.paddingBottom = free - top + "px";
   }
 
   function stops() {
@@ -246,7 +268,7 @@
     var box = $("particles");
     box.innerHTML = html(list); /* one row first, to measure each word */
     var widths = Array.prototype.map.call(box.querySelectorAll(".pt"), function (b) { return b.getBoundingClientRect().width; });
-    var room = box.clientWidth - 24, cut = splitRows(widths);
+    var bs = getComputedStyle(box), room = box.clientWidth - parseFloat(bs.paddingLeft) - parseFloat(bs.paddingRight), cut = splitRows(widths); /* its own side padding (12 px; 8 on short phones) */
     function w(a, b) { var n = 0; for (var i = a; i < b; i++) n += widths[i] + (i > a ? 6 : 0); return n; } /* words + the 6px gaps between them */
     if (Math.max(w(0, cut), w(cut, widths.length)) <= room) {
       box.innerHTML = html(list.slice(0, cut)) + html(list.slice(cut));
@@ -288,14 +310,14 @@
   function placeNote() {
     var note = $("note"), parts = $("particles"), labels = document.querySelector(".scale-labels");
     note.style.marginTop = "";
-    if (getComputedStyle(parts).position !== "fixed") return;
+    if (getComputedStyle(parts).position !== "fixed" || PHONE.matches) return; /* phones: the explanation's place is fixed (CSS) */
     var top = labels.getBoundingClientRect().bottom, bottom = parts.getBoundingClientRect().top;
     var free = bottom - top - note.offsetHeight;
     note.style.marginTop = Math.max(14, Math.floor(free / 2)) + "px";
   }
 
   /* fonts arrive late (deutsch-fonts-v1.js sends a resize): measure the rows again */
-  window.addEventListener("resize", function () { if (!$("explore").classList.contains("hidden")) { fitSentence(); fillTexts(st.cur); renderParticles(); placeNote(); } });
+  window.addEventListener("resize", function () { if (!$("explore").classList.contains("hidden")) { fitSentence(); fillTexts(st.cur); holdSentence(); renderParticles(); placeNote(); } });
 
   window.addEventListener("deutschtranslationchange", function () {
     $("aboutText").textContent = pick(TXT.about);
