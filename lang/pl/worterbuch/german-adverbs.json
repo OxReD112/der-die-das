@@ -1,0 +1,2631 @@
+{
+ "adverb-001": {
+  "_src": "3c6ba49e",
+  "translation_pl": "wkrótce",
+  "example_pl": "Pociąg wkrótce przyjedzie."
+ },
+ "adverb-002": {
+  "_src": "a683d248",
+  "translation_pl": "na zewnątrz; na dworze",
+  "example_pl": "Dzieci bawią się na dworze."
+ },
+ "adverb-004": {
+  "_src": "bf3f8591",
+  "translation_pl": "chętnie; z przyjemnością",
+  "example_pl": "Chętnie czytam, ale najbardziej lubię kryminały.",
+  "usage_note_pl": "gern + czasownik = „lubić coś robić”: Ich lese gern. — Lubię czytać. Przeczenie: nicht gern. O jedzeniu i rzeczach — mögen: Ich mag Pizza. Także: gerne."
+ },
+ "adverb-005": {
+  "_src": "377d10d1",
+  "translation_pl": "wczoraj",
+  "example_pl": "Wczoraj razem gotowaliśmy."
+ },
+ "adverb-006": {
+  "_src": "1566e20a",
+  "translation_pl": "dzisiaj",
+  "example_pl": "Dzisiaj pracuję z domu.",
+  "usage_note_pl": "Z porą dnia: heute Morgen, heute Abend — dzisiaj rano, dzisiaj wieczorem. Przymiotnik: heutig (die heutige Zeitung)."
+ },
+ "adverb-007": {
+  "_src": "39edfab1",
+  "translation_pl": "tutaj",
+  "example_pl": "Proszę tutaj zaczekać.",
+  "usage_note_pl": "Gdzie? — hier. Dokąd? — hierher (tutaj): Komm hierher! hie (przestarz.) = hier."
+ },
+ "adverb-008": {
+  "_src": "76472b2c",
+  "translation_pl": "zawsze",
+  "example_pl": "Zawsze przychodzi punktualnie.",
+  "usage_note_pl": "immer + stopień wyższy — coraz: immer besser, immer mehr. Przeciwieństwo — nie."
+ },
+ "adverb-009": {
+  "_src": "60d0d630",
+  "translation_pl": "teraz",
+  "example_pl": "Teraz mam czas."
+ },
+ "adverb-010": {
+  "_src": "ce27e1b5",
+  "translation_pl": "po lewej; w lewo",
+  "example_pl": "Apteka jest obok kawiarni, po lewej.",
+  "usage_note_pl": "Gdzie? — links (po lewej). Dokąd? — nach links (w lewo). Przeciwieństwo — rechts. Nie mylić z przymiotnikiem link-: die linke Hand."
+ },
+ "adverb-011": {
+  "_src": "dfaaa6ae",
+  "translation_pl": "jutro",
+  "example_pl": "Jutro odwiedzimy przyjaciół.",
+  "usage_note_pl": "morgen (małą literą) — jutro; der Morgen — ranek; morgens — co rano. Jutro rano — morgen früh."
+ },
+ "adverb-012": {
+  "_src": "69d62e2b",
+  "translation_pl": "później; potem",
+  "example_pl": "Zadzwonię do ciebie później.",
+  "usage_note_pl": "Przeciwieństwo — vorher. Pożegnanie: Bis nachher! — Do zobaczenia później (jeszcze dziś)!"
+ },
+ "adverb-013": {
+  "_src": "0aeda130",
+  "translation_pl": "jeszcze",
+  "example_pl": "Czekasz jeszcze na autobus?",
+  "usage_note_pl": "noch nicht — jeszcze nie; noch nie — jeszcze nigdy; noch ein(e) — jeszcze jeden: Noch ein Bier, bitte. Przeciwieństwo noch — schon, noch nicht — nicht mehr."
+ },
+ "adverb-014": {
+  "_src": "d757202a",
+  "translation_pl": "na górze; u góry",
+  "example_pl": "Moje mieszkanie jest na samej górze.",
+  "usage_note_pl": "Gdzie? — oben (na górze). Dokąd? — nach oben (na górę). Przeciwieństwo — unten."
+ },
+ "adverb-015": {
+  "_src": "69e4698f",
+  "translation_pl": "często",
+  "example_pl": "Często spacerujemy po parku."
+ },
+ "adverb-016": {
+  "_src": "f9013c9e",
+  "translation_pl": "po prawej; w prawo",
+  "example_pl": "Na skrzyżowaniu musi Pan skręcić w prawo.",
+  "usage_note_pl": "Gdzie? — rechts (po prawej). Dokąd? — nach rechts (w prawo). Przeciwieństwo — links. Nie mylić z recht (dość; recht haben — mieć rację)."
+ },
+ "adverb-017": {
+  "_src": "92a1bcce",
+  "translation_pl": "już; na pewno, owszem, przecież (partykuła: pewność, ustępstwo); no dalej (Komm schon!)",
+  "example_pl": "Film już się zaczął.",
+  "usage_note_pl": "schon mal — kiedyś: Warst du schon mal in Rom? Partykuła — pewność: Das wird schon gehen. — Jakoś to będzie. Das schaffst du schon! — Dasz radę! Ustępstwo: Das ist schon richtig, aber … — To oczywiście prawda, ale … Zniecierpliwienie: Komm schon! — No dalej, chodź! Pytanie retoryczne: Wen interessiert das schon? — A kogo to obchodzi? Akcentowane schon zwykle wyraża ustępstwo, nieakcentowane — pewność lub zniecierpliwienie. Przeciwieństwo „już” — noch nicht."
+ },
+ "adverb-019": {
+  "_src": "5c12827b",
+  "translation_pl": "od razu; natychmiast",
+  "example_pl": "Proszę natychmiast przyjść do biura."
+ },
+ "adverb-020": {
+  "_src": "155abbfd",
+  "translation_pl": "na dole",
+  "example_pl": "Wejście jest na dole po prawej.",
+  "usage_note_pl": "Gdzie? — unten (na dole). Dokąd? — nach unten (na dół). Przeciwieństwo — oben."
+ },
+ "adverb-021": {
+  "_src": "5ffa1a24",
+  "translation_pl": "być może; może",
+  "example_pl": "Może jutro porozmawiamy przez telefon."
+ },
+ "adverb-022": {
+  "_src": "6f4f7de2",
+  "translation_pl": "znowu; ponownie",
+  "example_pl": "Znowu jest zdrowy.",
+  "usage_note_pl": "Często część czasownika: wiederholen (powtarzać), wiederkommen (wracać). Nie mylić z książkowym wider (przeciw)."
+ },
+ "adverb-023": {
+  "_src": "a3ec47f1",
+  "translation_pl": "razem",
+  "example_pl": "W weekendy jemy razem śniadanie.",
+  "usage_note_pl": "zusammen sein — chodzić ze sobą, być parą: Sind Anna und Tom noch zusammen?"
+ },
+ "adverb-024": {
+  "_src": "e6d373c5",
+  "translation_pl": "wstecz; z powrotem",
+  "example_pl": "Kiedy wrócisz?",
+  "usage_note_pl": "Często część czasownika rozdzielnego: zurückkommen, zurückgeben, zurückrufen → Ich rufe dich zurück."
+ },
+ "adverb-025": {
+  "_src": "d6cd3fc1",
+  "translation_pl": "najpierw; na początek",
+  "example_pl": "Najpierw przeczytamy tekst, potem odpowiemy na pytania.",
+  "usage_note_pl": "Kolejność czynności: zuerst … dann … danach … zuletzt. W znaczeniu „na początku, w początkowym okresie” — anfangs."
+ },
+ "adverb-026": {
+  "_src": "ae0f675d",
+  "translation_pl": "jednak; co prawda",
+  "example_pl": "Mieszkanie jest ładne, jednak bardzo drogie."
+ },
+ "adverb-027": {
+  "_src": "5e1bea84",
+  "translation_pl": "poza tym; w przeciwnym razie",
+  "example_pl": "Droga jest trochę długa, poza tym trasa jest prosta.",
+  "notes_pl": [
+   "Synonim sonst."
+  ]
+ },
+ "adverb-029": {
+  "_src": "7bb0241b",
+  "translation_pl": "poza tym; w dodatku",
+  "example_pl": "Hotel jest w centrum. Poza tym śniadanie jest wliczone w cenę.",
+  "notes_pl": [
+   "Dodaje jeszcze jeden argument."
+  ]
+ },
+ "adverb-030": {
+  "_src": "6a7369f8",
+  "translation_pl": "natomiast; za to; przeciw temu",
+  "example_pl": "Mia lubi jeździć nad morze. Jej brat natomiast woli zostawać w górach.",
+  "usage_note_pl": "Drugie znaczenie — da + gegen, „przeciw temu”: Ich bin dagegen. — Jestem przeciw. Hast du etwas dagegen? — Nie masz nic przeciwko?"
+ },
+ "adverb-031": {
+  "_src": "7088323b",
+  "translation_pl": "dlatego; stamtąd",
+  "example_pl": "Pociąg jest odwołany. Dlatego pojedziemy autobusem."
+ },
+ "adverb-032": {
+  "_src": "e8e7f68f",
+  "translation_pl": "dzięki temu; w ten sposób",
+  "example_pl": "Ćwiczy codziennie i dzięki temu nabiera pewności.",
+  "usage_note_pl": "Może łączyć czynność i jej rezultat. Nie mylić z „deshalb”: dadurch często podkreśla sposób lub środek, którym osiągnięto rezultat."
+ },
+ "adverb-033": {
+  "_src": "85971073",
+  "translation_pl": "mimo to; jednak",
+  "example_pl": "Mocno pada. Mimo to idziemy na spacer."
+ },
+ "adverb-034": {
+  "_src": "feede81d",
+  "translation_pl": "dlatego; z tego powodu",
+  "example_pl": "Jestem chora. Dlatego zostaję dziś w domu.",
+  "notes_pl": [
+   "Łączy przyczynę i skutek.",
+   "Synonim: deswegen."
+  ]
+ },
+ "adverb-035": {
+  "_src": "87584e58",
+  "translation_pl": "raczej; wcześniej",
+  "example_pl": "Powinniśmy wyjechać wcześniej, żeby dotrzeć na czas.",
+  "usage_note_pl": "Stopień wyższy od bald (bald – eher – am ehesten). „Raczej, chętniej”: Ich trinke eher Tee."
+ },
+ "adverb-036": {
+  "_src": "0ddeb8a4",
+  "translation_pl": "w razie potrzeby; jeśli zajdzie potrzeba",
+  "example_pl": "Proszę w razie potrzeby zabrać parasol."
+ },
+ "adverb-037": {
+  "_src": "777caed5",
+  "translation_pl": "natomiast; podczas gdy",
+  "example_pl": "Na południu jest słonecznie, podczas gdy na północy pada.",
+  "usage_note_pl": "Zestawia dwa fakty. Podobne dagegen jest zwykle bardziej samodzielne; hingegen częściej wprost podkreśla kontrast między częściami wypowiedzi."
+ },
+ "adverb-038": {
+  "_src": "d4c9b422",
+  "translation_pl": "w międzyczasie; obecnie",
+  "example_pl": "W międzyczasie sytuacja wyraźnie się poprawiła."
+ },
+ "adverb-039": {
+  "_src": "0fefa36d",
+  "translation_pl": "w każdym razie; tak czy inaczej",
+  "example_pl": "Nie wiemy jeszcze, czy pojedziemy samochodem, czy pociągiem. Tak czy inaczej musimy wyjechać wcześnie."
+ },
+ "adverb-040": {
+  "_src": "433a8b3c",
+  "translation_pl": "ledwo; prawie nie",
+  "example_pl": "Przez hałas prawie nie mogłam spać.",
+  "usage_note_pl": "Ma sens przeczący — nie dodaje się nicht: Ich habe kaum Zeit. — Prawie nie mam czasu."
+ },
+ "adverb-041": {
+  "_src": "166fa29c",
+  "translation_pl": "być może; prawdopodobnie",
+  "example_pl": "Być może spotkanie zostanie przełożone."
+ },
+ "adverb-042": {
+  "_src": "c8f1a22f",
+  "translation_pl": "w międzyczasie; obecnie",
+  "example_pl": "Dawniej jeździł do pracy autobusem, obecnie jeździ rowerem."
+ },
+ "adverb-044": {
+  "_src": "fefed03d",
+  "translation_pl": "w końcu; przecież",
+  "example_pl": "Powinniśmy już iść. Gospodyni przecież na nas czeka.",
+  "usage_note_pl": "Dwa znaczenia: „w końcu, wreszcie” (Schließlich hat er ja gesagt.) i „przecież, bądź co bądź” — uzasadnienie (jak w przykładzie)."
+ },
+ "adverb-045": {
+  "_src": "95934d64",
+  "translation_pl": "tym samym; zatem",
+  "example_pl": "Wszystkie dokumenty są kompletne. Tym samym wniosek może zostać rozpatrzony.",
+  "notes_pl": [
+   "Bardziej oficjalny synonim deshalb."
+  ]
+ },
+ "adverb-046": {
+  "_src": "a4b03bf2",
+  "translation_pl": "zamiast tego",
+  "example_pl": "Autobus dziś nie kursuje. Zamiast tego weźmiemy taksówkę."
+ },
+ "adverb-051": {
+  "_src": "ed6f0932",
+  "translation_pl": "lepiej",
+  "example_pl": "Dzisiaj czuję się już lepiej.",
+  "usage_note_pl": "Stopień wyższy od gut (gut – besser – am besten). Także jako rada: Du gehst besser zum Arzt. — Lepiej idź do lekarza."
+ },
+ "adverb-052": {
+  "_src": "42eb98ff",
+  "translation_pl": "trochę; troszkę",
+  "example_pl": "Możesz mówić trochę wolniej?",
+  "usage_note_pl": "Prawie zawsze z ein: ein bisschen. Nie odmienia się: mit ein bisschen Glück. Przeczenie: kein bisschen — ani trochę."
+ },
+ "adverb-053": {
+  "_src": "ae01dd5d",
+  "translation_pl": "około; mniej więcej",
+  "example_pl": "Podróż trwa około dwóch godzin.",
+  "usage_note_pl": "Często pisze się w skrócie: ca. Spotyka się też pisownię zirka."
+ },
+ "adverb-054": {
+  "_src": "01a91fac",
+  "translation_pl": "tam; tu, tutaj; wtedy",
+  "example_pl": "Czy Paul tu jest? – Nie, już wyszedł.",
+  "usage_note_pl": "Wskazuje miejsce, które widać lub które wynika z sytuacji: da drüben — o tam. da sein — być na miejscu, być obecnym."
+ },
+ "adverb-055": {
+  "_src": "0b599853",
+  "translation_pl": "obok (tego); niecelnie",
+  "example_pl": "To jest poczta, a obok niej piekarnia.",
+  "usage_note_pl": "daneben = neben + to (rzecz, miejsce). O ludziach mówi się neben ihm / neben ihr."
+ },
+ "adverb-056": {
+  "_src": "6eeb1321",
+  "translation_pl": "potem, następnie; wtedy",
+  "example_pl": "Najpierw zjem, potem odrobię lekcje.",
+  "notes_pl": [
+   "„W takim razie”: Wenn du müde bist, dann schlaf."
+  ]
+ },
+ "adverb-057": {
+  "_src": "45f88820",
+  "translation_pl": "tam",
+  "example_pl": "Widzisz tę kawiarnię? Tam się spotkamy.",
+  "usage_note_pl": "Gdzie? — dort. Dokąd? — dorthin. Skąd? — von dort / dorther."
+ },
+ "adverb-058": {
+  "_src": "3d976ce0",
+  "translation_pl": "jeden raz; kiedyś, pewnego razu; kiedyś (w przyszłości)",
+  "example_pl": "Byłem kiedyś w Wiedniu.",
+  "usage_note_pl": "W mowie potocznej często skraca się do mal: Komm mal her! Zob. też noch einmal — jeszcze raz."
+ },
+ "adverb-059": {
+  "_src": "35d2272f",
+  "translation_pl": "dawniej, kiedyś; wcześniej (o czasie)",
+  "example_pl": "Dawniej mieszkałem w Berlinie.",
+  "usage_note_pl": "Dwa znaczenia: „w przeszłości” (Früher war alles anders.) i stopień wyższy od früh — „wcześniej niż…” (Ich komme heute früher.)."
+ },
+ "adverb-060": {
+  "_src": "02a11060",
+  "translation_pl": "właśnie (teraz); dopiero co",
+  "example_pl": "Nie mogę rozmawiać przez telefon, właśnie gotuję.",
+  "usage_note_pl": "Niemiecki sposób, żeby powiedzieć, że coś „właśnie trwa” (w niemieckim nie ma formy Continuous). gerade eben — dopiero co. nicht gerade — niezbyt: Das ist nicht gerade billig. gerade noch — ledwo (zdążyć): Wir haben den Zug gerade noch erreicht."
+ },
+ "adverb-061": {
+  "_src": "e330ebe3",
+  "translation_pl": "prosto",
+  "example_pl": "Proszę iść tu prosto, a potem w lewo."
+ },
+ "adverb-062": {
+  "_src": "0d8b0a6b",
+  "translation_pl": "zaraz; od razu; wkrótce; tuż obok",
+  "example_pl": "Zaraz wrócę.",
+  "usage_note_pl": "Przed określeniem miejsca: gleich nebenan / gleich neben dem Bahnhof — tuż obok / bezpośrednio obok dworca."
+ },
+ "adverb-063": {
+  "_src": "80559a68",
+  "translation_pl": "z tyłu; w tyle",
+  "example_pl": "W autobusie najbardziej lubię siedzieć z tyłu.",
+  "usage_note_pl": "Przeciwieństwo — vorn. Nie mylić z przyimkiem hinter (hinter dem Haus)."
+ },
+ "adverb-065": {
+  "_src": "5a80a4b7",
+  "translation_pl": "niestety",
+  "example_pl": "Niestety nie mogę dziś przyjść."
+ },
+ "adverb-066": {
+  "_src": "d22ab351",
+  "translation_pl": "chętniej; lepiej (raczej)",
+  "example_pl": "Wolę pić herbatę niż kawę.",
+  "usage_note_pl": "Stopień wyższy od gern (gern – lieber – am liebsten). Tak wyraża się preferencję: lieber … als … Także rada: Bleib lieber zu Hause."
+ },
+ "adverb-067": {
+  "_src": "4956d20b",
+  "translation_pl": "więcej; (nicht mehr) już nie",
+  "example_pl": "Już nie mieszkam w Hamburgu.",
+  "usage_note_pl": "Stopień wyższy od viel i sehr. Nie odmienia się: mehr Zeit, mehr Leute. nicht mehr / kein … mehr — „już nie”."
+ },
+ "adverb-068": {
+  "_src": "6469b5fc",
+  "translation_pl": "nie",
+  "example_pl": "Nie rozumiem tego.",
+  "usage_note_pl": "Neguje cały czasownik — stoi bliżej końca (Ich komme heute nicht.); neguje jedno słowo — stoi przed nim (Nicht ich, sondern er.). Rzeczownik bez rodzajnika lub z ein neguje się za pomocą kein: Ich habe kein Auto."
+ },
+ "adverb-069": {
+  "_src": "ee4a65ce",
+  "translation_pl": "nigdy",
+  "example_pl": "Nigdy jeszcze nie byłem we Włoszech.",
+  "usage_note_pl": "W niemieckim jest tylko jedno przeczenie: Ich trinke nie Kaffee (bez nicht). Mocniejszy wariant — niemals."
+ },
+ "adverb-070": {
+  "_src": "0b11a0d1",
+  "translation_pl": "tylko",
+  "example_pl": "Mam przy sobie tylko dziesięć euro.",
+  "usage_note_pl": "Jako partykuła wzmacnia prośbę lub życzenie: Wenn ich nur mehr Zeit hätte! — Gdybym tylko miał / miała więcej czasu! Nie mylić z erst (zob. hasło erst)."
+ },
+ "adverb-071": {
+  "_src": "389c82d3",
+  "translation_pl": "bardzo",
+  "example_pl": "Jedzenie było bardzo dobre.",
+  "usage_note_pl": "Z czasownikami — „bardzo, mocno”: Ich freue mich sehr. Nie używa się z rzeczownikami: viel Arbeit (nie sehr Arbeit)."
+ },
+ "adverb-072": {
+  "_src": "8cec1958",
+  "translation_pl": "tak; taki; no więc",
+  "example_pl": "Zrób to, proszę, tak jak ja.",
+  "usage_note_pl": "Porównanie: so groß wie ich — taki duży jak ja. Na początku zdania „no więc, no to”: So, jetzt gehen wir."
+ },
+ "adverb-073": {
+  "_src": "b363586c",
+  "translation_pl": "później; potem",
+  "example_pl": "Zadzwonię do ciebie później.",
+  "usage_note_pl": "Stopień wyższy od spät. Pożegnanie: Bis später! — Do zobaczenia później!"
+ },
+ "adverb-074": {
+  "_src": "7f3abe1b",
+  "translation_pl": "dużo",
+  "example_pl": "W weekendy dużo śpię.",
+  "usage_note_pl": "Z rzeczownikiem: viel Zeit (lp), viele Leute (lm — z końcówką). Przed stopniem wyższym — „znacznie, o wiele”: viel besser."
+ },
+ "adverb-075": {
+  "_src": "c6a6fba8",
+  "translation_pl": "kiedy",
+  "example_pl": "Kiedy zaczyna się film?",
+  "usage_note_pl": "Wyraz pytający. W pytaniu zależnym czasownik stoi na końcu: Weißt du, wann der Film anfängt? „Kiedy” jako spójnik w zdaniach oznajmujących (np. w opowiadaniu o przeszłości) to als / wenn, nie wann.",
+  "extra_meanings": [
+   {
+    "pl": "kiedy, jeśli (= wenn)",
+    "example_pl": "Kiedy zostaniesz królową, nie będziesz już musiała chodzić pieszo."
+   }
+  ]
+ },
+ "adverb-076": {
+  "_src": "e130ffa5",
+  "translation_pl": "dlaczego",
+  "example_pl": "Dlaczego uczysz się niemieckiego?",
+  "usage_note_pl": "W pytaniu zależnym czasownik przechodzi na koniec: Ich weiß nicht, warum er so spät kommt. Podobne słowa: wieso, weshalb."
+ },
+ "adverb-077": {
+  "_src": "dad0d0b9",
+  "translation_pl": "dalej",
+  "example_pl": "Proszę czytać dalej.",
+  "usage_note_pl": "Z czasownikami znaczy „kontynuować”: weiterlesen, weiterarbeiten. Und so weiter (usw.) — i tak dalej."
+ },
+ "adverb-079": {
+  "_src": "848b4cf1",
+  "translation_pl": "jak? (pytanie); jak, jakby (porównanie)",
+  "example_pl": "Jak masz na imię?",
+  "additional_examples": [
+   {
+    "example_pl": "Nie wiem, jak to się robi."
+   },
+   {
+    "example_pl": "Jest tak wysoki jak ojciec."
+   }
+  ],
+  "notes_pl": [
+   "Pytania: Wie alt …? Wie viel …? Wie lange …?",
+   "W pytaniu zależnym i w zdaniu podrzędnym z wie czasownik stoi na końcu: Ich weiß nicht, wie das geht. wie du willst — jak chcesz.",
+   "Równość: so … wie, genauso … wie. wie immer — jak zawsze.",
+   "Po stopniu wyższym — als: größer als. größer wie spotyka się w mowie, ale nie jest to forma standardowa."
+  ],
+  "extra_meanings": [
+   {
+    "pl": "kiedy (= als)",
+    "example_pl": "Kiedy zobaczyła, że nie chcą jej nic podarować, wyszła za drzwi."
+   }
+  ]
+ },
+ "adverb-080": {
+  "_src": "9131bf05",
+  "translation_pl": "gdzie",
+  "example_pl": "Gdzie mieszkasz?",
+  "usage_note_pl": "Wo? — gdzie (miejsce), wohin? — dokąd, woher? — skąd. W pytaniu zależnym czasownik przechodzi na koniec: Weißt du, wo er wohnt?"
+ },
+ "adverb-081": {
+  "_src": "646581c9",
+  "translation_pl": "skąd",
+  "example_pl": "Skąd Pan jest?",
+  "usage_note_pl": "W mowie często się rozdziela: Wo kommst du her?"
+ },
+ "adverb-082": {
+  "_src": "05c6f4f9",
+  "translation_pl": "dokąd",
+  "example_pl": "Dokąd jedziesz na urlop?",
+  "usage_note_pl": "W mowie często się rozdziela: Wo fährst du hin? Po wohin przyimek zwykle łączy się z Akkusativem: in den Park."
+ },
+ "adverb-083": {
+  "_src": "af0ec8c2",
+  "translation_pl": "obecnie; teraz",
+  "example_pl": "Teraz pracuję w kawiarni.",
+  "usage_note_pl": "Pisze się łącznie. Nie mylić z zur Zeit + Genitiv (rozdzielnie) — „za czasów”: zur Zeit Goethes."
+ },
+ "adverb-084": {
+  "_src": "0bf91887",
+  "translation_pl": "szczególnie",
+  "example_pl": "Szczególnie podoba mi się starówka.",
+  "usage_note_pl": "nicht besonders — „nieszczególnie, tak sobie”: Der Film war nicht besonders gut."
+ },
+ "adverb-085": {
+  "_src": "df1e820c",
+  "translation_pl": "jednak, mimo wszystko; -że, no, przecież; ależ tak (w odpowiedzi na przeczenie); (w życzeniach) gdyby tylko",
+  "example_pl": "Nie idziesz z nami? – Ależ tak, idę!",
+  "usage_note_pl": "Odpowiedź „tak” na pytanie przeczące — doch, a nie ja. Z trybem rozkazującym — z naciskiem: Komm doch mit! — No chodźże z nami! Sei doch still! — Bądźże cicho! W zdaniu oznajmującym — wyrzut, przypomnienie: Das weißt du doch! — Przecież to wiesz! W życzeniach (często z nur) — „żeby chociaż, byle tylko, gdyby tylko”: Hätte er doch nur eine Uhr! — Gdyby tylko miał zegarek! Wenn wir doch ein Kind hätten! — Ach, gdybyśmy mieli dziecko! Spójnik doch „ale, jednak” — osobne hasło."
+ },
+ "adverb-086": {
+  "_src": "cd096568",
+  "translation_pl": "nareszcie",
+  "example_pl": "Nareszcie weekend!",
+  "usage_note_pl": "Wyraża ulgę lub zniecierpliwienie. Przy wyliczaniu „na końcu” lepiej zuletzt / schließlich. Jako przymiotnik (książk.) — „skończony”: Unsere Ressourcen sind endlich. — Nasze zasoby są skończone."
+ },
+ "adverb-087": {
+  "_src": "fa85fd67",
+  "translation_pl": "wystarczająco; dość, wystarczy",
+  "example_pl": "Masz przy sobie wystarczająco dużo pieniędzy?",
+  "usage_note_pl": "Nie odmienia się. Z rzeczownikiem zwykle stoi przed nim (genug Zeit), z przymiotnikiem — po nim (alt genug)."
+ },
+ "adverb-088": {
+  "_src": "061058bf",
+  "translation_pl": "mam nadzieję; miejmy nadzieję",
+  "example_pl": "Mam nadzieję, że jutro nie będzie padać."
+ },
+ "adverb-089": {
+  "_src": "d2636ca7",
+  "translation_pl": "czasami",
+  "example_pl": "Czasami jeżdżę do pracy rowerem."
+ },
+ "adverb-090": {
+  "_src": "e1d4cac1",
+  "translation_pl": "co najmniej; nie mniej niż",
+  "example_pl": "Śpię co najmniej osiem godzin.",
+  "usage_note_pl": "Dotyczy ilości. W znaczeniu „przynajmniej” jako pocieszenie — wenigstens / zumindest. Przeciwieństwo — höchstens."
+ },
+ "adverb-091": {
+  "_src": "c5007981",
+  "translation_pl": "wszędzie",
+  "example_pl": "Wszędzie szukałem swojego klucza."
+ },
+ "adverb-092": {
+  "_src": "0af5a836",
+  "translation_pl": "inaczej, w inny sposób",
+  "example_pl": "Wyobrażałem sobie to miasto zupełnie inaczej.",
+  "usage_note_pl": "anders als … — inaczej niż …: Er denkt anders als ich. Przymiotnik — ander-: ein anderes Buch."
+ },
+ "adverb-093": {
+  "_src": "54a7eefd",
+  "translation_pl": "wtedy, w tamtych czasach",
+  "example_pl": "Wtedy nie mieliśmy jeszcze telefonu komórkowego.",
+  "usage_note_pl": "Tylko o przeszłości. W znaczeniu „wtedy, w takim razie” — dann."
+ },
+ "adverb-094": {
+  "_src": "645875ea",
+  "translation_pl": "wewnątrz; w pomieszczeniu, w domu",
+  "example_pl": "Pada, dziś zostajemy w domu.",
+  "usage_note_pl": "Przeciwieństwo — draußen. Wyraz potoczny; bardziej neutralne — innen."
+ },
+ "adverb-095": {
+  "_src": "9dc4d946",
+  "translation_pl": "tam, po drugiej stronie",
+  "example_pl": "Przystanek jest tam, po drugiej stronie.",
+  "usage_note_pl": "Najczęściej w połączeniu da drüben — o tam."
+ },
+ "adverb-096": {
+  "_src": "91498c4a",
+  "translation_pl": "najpierw; dopiero (nie wcześniej niż)",
+  "example_pl": "Sklep otwierają dopiero o dziesiątej.",
+  "usage_note_pl": "erst = „później lub mniej, niż się spodziewano”: Er ist erst fünf. — Ma dopiero pięć lat. nur = „i nie więcej”: Ich habe nur fünf Euro. Znaczenie „najpierw”: Erst essen wir, dann gehen wir."
+ },
+ "adverb-097": {
+  "_src": "0c81af0d",
+  "translation_pl": "prawie",
+  "example_pl": "Jestem prawie gotowy."
+ },
+ "adverb-098": {
+  "_src": "875922b5",
+  "translation_pl": "tutaj (do mówiącego); temu; (von … her) od strony; (hinter … her) w ślad za; (vor sich her) przed sobą",
+  "example_pl": "Chodź no tutaj!",
+  "usage_note_pl": "her — ruch w stronę mówiącego, hin — od mówiącego. Często część czasownika: herkommen. O czasie: Das ist lange her. — To było dawno."
+ },
+ "adverb-099": {
+  "_src": "cce1a821",
+  "translation_pl": "na zewnątrz (do mówiącego); z",
+  "example_pl": "Wyjdź no na dwór, świeci słońce!",
+  "usage_note_pl": "Pot. raus. Często część czasownika: herauskommen, herausfinden (dowiedzieć się). heraus — na zewnątrz w stronę mówiącego, hinaus — na zewnątrz od mówiącego."
+ },
+ "adverb-100": {
+  "_src": "c8349dc2",
+  "translation_pl": "do środka (do mówiącego)",
+  "example_pl": "Proszę wejść! Drzwi są otwarte.",
+  "usage_note_pl": "Pot. rein. Herein! — tak odpowiada się na pukanie do drzwi. Często część czasownika: hereinkommen."
+ },
+ "adverb-101": {
+  "_src": "40001b85",
+  "translation_pl": "do środka (pot.)",
+  "example_pl": "Chcesz wejść czy wyjść?",
+  "usage_note_pl": "Potoczna forma od herein i hinein. Często część czasownika: reinkommen. Jako przymiotnik rein znaczy „czysty”."
+ },
+ "adverb-102": {
+  "_src": "62f783a7",
+  "translation_pl": "tam (od mówiącego); (nach / zum … hin) w kierunku; (auf … hin) na (prośbę, polecenie); (bis … hin) aż do",
+  "example_pl": "Dokąd idziesz?",
+  "usage_note_pl": "hin — ruch od mówiącego, her — do mówiącego. Często część czasownika: hingehen, hinfahren. hin sein (pot.) — zepsuć się, przepaść: Mein Handy ist hin. — Mój telefon padł."
+ },
+ "adverb-103": {
+  "_src": "21447e2b",
+  "translation_pl": "zwykle; najczęściej",
+  "example_pl": "Zwykle jem śniadanie w domu."
+ },
+ "adverb-104": {
+  "_src": "3ac049eb",
+  "translation_pl": "w sąsiedztwie; obok",
+  "example_pl": "Ludzie z mieszkania obok są bardzo mili."
+ },
+ "adverb-105": {
+  "_src": "7cce794d",
+  "translation_pl": "nigdzie",
+  "example_pl": "Tu nigdzie nie można zaparkować.",
+  "usage_note_pl": "Tylko jedno przeczenie: nirgends (bez nicht). Synonim — nirgendwo."
+ },
+ "adverb-106": {
+  "_src": "f64e4dd8",
+  "translation_pl": "sam; nawet",
+  "example_pl": "Ten tort upiekłam sama.",
+  "usage_note_pl": "Nie odmienia się: ich selbst, wir selbst. Wariant potoczny — selber. Przed słowem znaczy „nawet”: Selbst mein Bruder war da."
+ },
+ "adverb-107": {
+  "_src": "324d48a9",
+  "translation_pl": "nawet",
+  "example_pl": "Mówi nawet po chińsku."
+ },
+ "adverb-108": {
+  "_src": "e504908e",
+  "translation_pl": "bo inaczej, w przeciwnym razie; zwykle; jeszcze (oprócz tego)",
+  "example_pl": "Pospiesz się, bo spóźnimy się na pociąg.",
+  "notes_pl": [
+   "Sonst noch etwas? — Coś jeszcze?",
+   "Sonst ist er pünktlich. — Zwykle jest punktualny."
+  ]
+ },
+ "adverb-111": {
+  "_src": "7625366d",
+  "translation_pl": "przedwczoraj",
+  "example_pl": "Przedwczoraj byłem u lekarza."
+ },
+ "adverb-112": {
+  "_src": "cc905e26",
+  "translation_pl": "przedtem; wcześniej, z wyprzedzeniem",
+  "example_pl": "Jeśli przyjdziesz, zadzwoń, proszę, wcześniej.",
+  "usage_note_pl": "Przeciwieństwo — nachher. Nie mylić ze spójnikiem bevor: Bevor ich komme, rufe ich an."
+ },
+ "adverb-113": {
+  "_src": "ebbd898b",
+  "translation_pl": "z przodu; od przodu",
+  "example_pl": "W kinie nie lubię siedzieć z samego przodu.",
+  "usage_note_pl": "Także vorne. Przeciwieństwo — hinten. nach vorn — do przodu; von vorn — od początku, od nowa."
+ },
+ "adverb-114": {
+  "_src": "0b687df8",
+  "translation_pl": "do przodu",
+  "example_pl": "Podjedź, proszę, kawałek do przodu.",
+  "usage_note_pl": "Przeciwieństwo — rückwärts."
+ },
+ "adverb-116": {
+  "_src": "841a483b",
+  "translation_pl": "nie ma (zniknął, poszedł sobie); precz",
+  "example_pl": "Nie ma mojego roweru!",
+  "usage_note_pl": "Często część czasownika: weggehen, wegfahren, wegwerfen. Nie mylić z rzeczownikiem der Weg (droga). weg sein — zniknąć; pot. także „odpłynąć” (zasnąć, stracić przytomność)."
+ },
+ "adverb-117": {
+  "_src": "3425e835",
+  "translation_pl": "przynajmniej; chociaż",
+  "example_pl": "Pada, ale przynajmniej jest ciepło.",
+  "usage_note_pl": "Często jako pocieszenie. W odniesieniu do ilości częściej mindestens. Synonim — zumindest."
+ },
+ "adverb-118": {
+  "_src": "a7b35516",
+  "translation_pl": "ostatni raz; na końcu, na koniec",
+  "example_pl": "Kiedy ostatni raz byłeś u dentysty?",
+  "usage_note_pl": "Przy wyliczaniu: zuerst … dann … zuletzt. nicht zuletzt — w niemałym stopniu, w dużej mierze."
+ },
+ "adverb-119": {
+  "_src": "26561abb",
+  "translation_pl": "pojutrze",
+  "example_pl": "Pojutrze wyjeżdżamy na urlop."
+ },
+ "adverb-120": {
+  "_src": "4cc1deff",
+  "translation_pl": "w dół",
+  "example_pl": "Stąd droga prowadzi już tylko w dół.",
+  "usage_note_pl": "Przeciwieństwo — aufwärts. Mit … geht es abwärts — z … jest coraz gorzej."
+ },
+ "adverb-121": {
+  "_src": "700c461a",
+  "translation_pl": "z drugiej strony",
+  "example_pl": "Mieszkanie jest ładne, z drugiej strony jest bardzo drogie.",
+  "notes_pl": [
+   "Para: einerseits … andererseits."
+  ]
+ },
+ "adverb-122": {
+  "_src": "9826c6c6",
+  "translation_pl": "początkowo; na początku",
+  "example_pl": "Początkowo praca była ciężka, teraz jest w porządku.",
+  "usage_note_pl": "Tylko o czasie (= am Anfang). O kolejności czynności — zuerst."
+ },
+ "adverb-123": {
+  "_src": "04836dd8",
+  "translation_pl": "w górę",
+  "example_pl": "Windą jedziemy w górę.",
+  "usage_note_pl": "Przeciwieństwo — abwärts. Es geht aufwärts — sprawy idą ku lepszemu."
+ },
+ "adverb-124": {
+  "_src": "04d51936",
+  "translation_pl": "na zewnątrz",
+  "example_pl": "Na zewnątrz dom jest szary, a w środku kolorowy.",
+  "usage_note_pl": "Przeciwieństwo — innen. nach außen — na zewnątrz."
+ },
+ "adverb-125": {
+  "_src": "e4a2d27b",
+  "translation_pl": "prawie; omal nie",
+  "example_pl": "Omal nie spóźniłem się na autobus.",
+  "usage_note_pl": "Synonim fast. O tym, co omal się nie wydarzyło, często z Konjunktiv II: Ich wäre beinahe gefallen."
+ },
+ "adverb-126": {
+  "_src": "873eaabf",
+  "translation_pl": "już",
+  "example_pl": "Pociąg już odjechał.",
+  "usage_note_pl": "Bardziej oficjalny synonim schon."
+ },
+ "adverb-127": {
+  "_src": "8681acfd",
+  "translation_pl": "do tej pory; na razie",
+  "example_pl": "Do tej pory wszystko szło dobrze."
+ },
+ "adverb-128": {
+  "_src": "58f59d91",
+  "translation_pl": "tylko, jedynie; po prostu",
+  "example_pl": "Nie chcę niczego kupować, po prostu się rozglądam.",
+  "usage_note_pl": "Synonim nur (potoczny). Jako partykuła wzmacnia ostrzeżenie lub życzenie: Komm bloß nicht zu spät! Wenn ich bloß Zeit hätte!"
+ },
+ "adverb-129": {
+  "_src": "1fbcf359",
+  "translation_pl": "przy tym; przy sobie; obok",
+  "example_pl": "Masz przy sobie długopis?",
+  "usage_note_pl": "dabei = da + bei (przy tym). dabei haben — mieć przy sobie; dabei sein — uczestniczyć. Wstawia się zamiast bei + rzecz: Hilfst du mir bei der Arbeit? → Hilfst du mir dabei?"
+ },
+ "adverb-130": {
+  "_src": "6946f69c",
+  "translation_pl": "w tym celu; za (tym); za to",
+  "example_pl": "Jestem za tym, żebyśmy wyjechali wcześnie.",
+  "usage_note_pl": "dafür = da + für. Zastępuje für + rzecz przy czasownikach z przyimkiem: Ich interessiere mich für Musik. → Ich interessiere mich dafür. O ludziach: für ihn / für sie. Także „za to”: Es ist teuer, dafür gut."
+ },
+ "adverb-131": {
+  "_src": "c9a2fe93",
+  "translation_pl": "tam (w to miejsce)",
+  "example_pl": "Znasz nowy park? Możemy jutro tam pójść.",
+  "usage_note_pl": "Dokąd? — dahin / dorthin; gdzie? — da / dort. bis dahin — do tego czasu: Bis dahin bin ich fertig."
+ },
+ "adverb-132": {
+  "_src": "202e9a9d",
+  "translation_pl": "następnie, potem; (zapytać) o to",
+  "example_pl": "Pójdziemy do kina, a potem coś zjemy.",
+  "notes_pl": [
+   "danach = da + nach, zastępuje nach + rzecz: Er fragt nach dem Weg. → Er fragt danach."
+  ]
+ },
+ "adverb-134": {
+  "_src": "cab85f6e",
+  "translation_pl": "dlatego",
+  "example_pl": "Byłem chory, dlatego nie mogłem przyjść.",
+  "notes_pl": [
+   "Synonim deshalb."
+  ]
+ },
+ "adverb-135": {
+  "_src": "4ed95b1f",
+  "translation_pl": "tym razem",
+  "example_pl": "Tym razem ja płacę."
+ },
+ "adverb-136": {
+  "_src": "f0de1d01",
+  "translation_pl": "tam (w to miejsce)",
+  "example_pl": "Dworzec jest niedaleko, odprowadzę cię tam.",
+  "usage_note_pl": "Dokąd? — dorthin; gdzie? — dort."
+ },
+ "adverb-138": {
+  "_src": "b1af92ef",
+  "translation_pl": "dopiero co; właśnie; po prostu (tak już jest)",
+  "example_pl": "Dopiero co przyjechałem.",
+  "usage_note_pl": "Jako partykuła — „no cóż, tak już jest”: Das ist eben so. Jako odpowiedź — „no właśnie”: Eben!"
+ },
+ "adverb-139": {
+  "_src": "6b4a411d",
+  "translation_pl": "też; również",
+  "example_pl": "Miłego weekendu! – Dziękuję, nawzajem!",
+  "usage_note_pl": "Danke, ebenfalls! — uprzejma odpowiedź na życzenie. Synonim — gleichfalls."
+ },
+ "adverb-140": {
+  "_src": "187e1722",
+  "translation_pl": "tak samo; dokładnie tak samo",
+  "example_pl": "Mój brat jest tak samo wysoki jak ja.",
+  "usage_note_pl": "ebenso … wie — tak samo … jak. Synonim — genauso."
+ },
+ "adverb-141": {
+  "_src": "cd177a53",
+  "translation_pl": "właściwie; tak naprawdę; w ogóle",
+  "example_pl": "Właściwie chciałem dziś zostać w domu.",
+  "usage_note_pl": "W pytaniu — partykuła zainteresowania („a w ogóle…, właściwie”): Wie alt bist du eigentlich?"
+ },
+ "adverb-142": {
+  "_src": "7006b4c7",
+  "translation_pl": "z jednej strony",
+  "example_pl": "Z jednej strony chcę podróżować, z drugiej — nie mam pieniędzy.",
+  "notes_pl": [
+   "Para: einerseits … andererseits."
+  ]
+ },
+ "adverb-143": {
+  "_src": "7d2bc735",
+  "translation_pl": "około, mniej więcej; czy przypadkiem nie…?",
+  "example_pl": "Podróż trwa mniej więcej godzinę.",
+  "usage_note_pl": "W pytaniu wyraża zdziwienie lub obawę: Bist du etwa krank? — Czyżbyś był chory? Nie mylić z etwas (coś)."
+ },
+ "adverb-146": {
+  "_src": "a104f5cf",
+  "translation_pl": "zupełnie (gar nicht — wcale nie)",
+  "example_pl": "Wcale o tym nie wiedziałem.",
+  "usage_note_pl": "Wzmacnia przeczenie: gar nicht, gar kein, gar nichts. Jako przymiotnik gar znaczy „ugotowany, gotowy”: Die Kartoffeln sind gar."
+ },
+ "adverb-147": {
+  "_src": "e2a311ed",
+  "translation_pl": "dokładnie tak samo",
+  "example_pl": "Widzę to dokładnie tak samo jak ty.",
+  "usage_note_pl": "genauso … wie — dokładnie tak samo … jak: genauso alt wie ich."
+ },
+ "adverb-148": {
+  "_src": "a63ca339",
+  "translation_pl": "też; nawzajem",
+  "example_pl": "Smacznego! – Dziękuję, nawzajem!",
+  "usage_note_pl": "Prawie zawsze jako odpowiedź na życzenie: Danke, gleichfalls! Synonim — ebenfalls."
+ },
+ "adverb-150": {
+  "_src": "a12be9b9",
+  "translation_pl": "pół dnia; na pół etatu",
+  "example_pl": "Moja mama pracuje na pół etatu.",
+  "usage_note_pl": "Przeciwieństwo — ganztags. Rzeczownik: die Halbtagsstelle — praca na pół etatu."
+ },
+ "adverb-151": {
+  "_src": "eb4a20cd",
+  "translation_pl": "no, po prostu (tak już jest)",
+  "example_pl": "Nie ma już biletów. – No cóż, tak już jest.",
+  "usage_note_pl": "Partykuła potoczna, jak eben: wyraża, że nic się nie da zmienić. Halt! — Stój! (od czasownika halten)."
+ },
+ "adverb-152": {
+  "_src": "cc791d81",
+  "translation_pl": "do domu",
+  "example_pl": "Po pracy jadę prosto do domu.",
+  "usage_note_pl": "Synonim nach Hause (zwłaszcza w południowych Niemczech). Często część czasownika: heimgehen, heimfahren. Rzeczownik: das Heim — dom, dom opieki."
+ },
+ "adverb-153": {
+  "_src": "b06476d9",
+  "translation_pl": "tutaj (w to miejsce)",
+  "example_pl": "Jak się tu dostałeś?",
+  "usage_note_pl": "Dokąd? — hierher; gdzie? — hier. Ruch w stronę mówiącego."
+ },
+ "adverb-154": {
+  "_src": "6c547746",
+  "translation_pl": "potem, później; w ślad za, z tyłu",
+  "example_pl": "Po fakcie człowiek zawsze wie lepiej.",
+  "usage_note_pl": "Synonim nachher (o czasie). O miejscu — „w ślad za”: Er läuft dem Bus hinterher."
+ },
+ "adverb-155": {
+  "_src": "ae2a5d16",
+  "translation_pl": "najwyżej; nie więcej niż",
+  "example_pl": "Zostanę najwyżej godzinę.",
+  "usage_note_pl": "Przeciwieństwo — mindestens."
+ },
+ "adverb-156": {
+  "_src": "ba828bf8",
+  "translation_pl": "wewnątrz",
+  "example_pl": "Drzwi można otworzyć tylko od środka.",
+  "usage_note_pl": "Przeciwieństwo — außen. von innen — od środka, nach innen — do środka."
+ },
+ "adverb-157": {
+  "_src": "d50badbe",
+  "translation_pl": "łącznie, w sumie; ogólnie",
+  "example_pl": "Łącznie to będzie 25 euro."
+ },
+ "adverb-158": {
+  "_src": "ac19f0f0",
+  "translation_pl": "kiedyś",
+  "example_pl": "Kiedyś chciałbym / chciałabym pojechać do Japonii.",
+  "usage_note_pl": "irgend- = „jakiś”: irgendwo (gdzieś), irgendwie (jakoś), irgendwer (ktoś)."
+ },
+ "adverb-159": {
+  "_src": "cc3dcec3",
+  "translation_pl": "w każdej chwili",
+  "example_pl": "Może Pan do mnie dzwonić w każdej chwili."
+ },
+ "adverb-160": {
+  "_src": "762ac6b5",
+  "translation_pl": "kiedykolwiek",
+  "example_pl": "Byłeś kiedykolwiek w Paryżu?",
+  "usage_note_pl": "Częściej w pytaniach. W mowie zwykle schon mal: Warst du schon mal in Paris?"
+ },
+ "adverb-161": {
+  "_src": "4004e4ad",
+  "translation_pl": "za każdym razem; odpowiednio; po (na każdego)",
+  "example_pl": "Oba pokoje kosztują po 80 euro za noc.",
+  "usage_note_pl": "Rozdziela na każdego („po”): Die Kinder bekommen jeweils zwei Euro. — Dzieci dostają po dwa euro."
+ },
+ "adverb-162": {
+  "_src": "a06f36f5",
+  "translation_pl": "niedawno; parę dni temu",
+  "example_pl": "Niedawno spotkałem starego przyjaciela.",
+  "usage_note_pl": "Synonimy: neulich, vor Kurzem. Jako przymiotnik (bei unserem kürzlichen Treffen) występuje rzadko."
+ },
+ "adverb-163": {
+  "_src": "038e5517",
+  "translation_pl": "naprzód!, dalej!; (coś) się stało",
+  "example_pl": "Dalej, pospieszcie się!",
+  "usage_note_pl": "Was ist los? — Co się stało? Często część czasownika: losgehen, losfahren (wyruszać). loswerden — pozbyć się. Nie mylić z lose — luźny, swobodny."
+ },
+ "adverb-164": {
+  "_src": "41186df3",
+  "translation_pl": "dawno; od dawna",
+  "example_pl": "Przecież wiem o tym od dawna!",
+  "usage_note_pl": "längst nicht — wcale nie: Das ist längst nicht alles."
+ },
+ "adverb-165": {
+  "_src": "270991a5",
+  "translation_pl": "no (łagodzi prośbę, polecenie); kiedyś, raz (= einmal); razy (2 mal 3)",
+  "example_pl": "Możesz mi pomóc?",
+  "usage_note_pl": "Jako partykuła łagodzi prośbę lub polecenie: Komm mal her! — Chodź no tu! Kannst du mir mal helfen? — Pomożesz mi? nun mal — tak już (jest): Das ist nun mal so. Skrót od einmal: Warst du schon mal hier? — Byłeś tu kiedyś? W matematyce: drei mal vier — trzy razy cztery. Rzeczownik: das Mal (raz)."
+ },
+ "adverb-166": {
+  "_src": "7d0b12d4",
+  "translation_pl": "ze sobą; razem",
+  "example_pl": "Za mało ze sobą rozmawiamy.",
+  "usage_note_pl": "Tak samo tworzy się: voneinander, nebeneinander, füreinander (przyimek + einander = „siebie nawzajem”)."
+ },
+ "adverb-167": {
+  "_src": "1648c561",
+  "translation_pl": "pośrodku; w środku",
+  "example_pl": "Mieszkamy w samym centrum miasta.",
+  "usage_note_pl": "Zwykle z przyimkiem: mitten in, mitten auf, mitten in der Nacht — w środku nocy."
+ },
+ "adverb-168": {
+  "_src": "878fb7d3",
+  "translation_pl": "jak naj…, możliwie",
+  "example_pl": "Proszę odpowiedzieć jak najszybciej.",
+  "usage_note_pl": "möglichst + przymiotnik = so … wie möglich: möglichst bald = so bald wie möglich."
+ },
+ "adverb-169": {
+  "_src": "73a6c387",
+  "translation_pl": "przy okazji, równolegle; nawiasem mówiąc",
+  "example_pl": "Studiuje i równolegle pracuje w kawiarni.",
+  "usage_note_pl": "nebenbei gesagt — nawiasem mówiąc, przy okazji."
+ },
+ "adverb-170": {
+  "_src": "218e69d2",
+  "translation_pl": "niedawno, parę dni temu",
+  "example_pl": "Parę dni temu widziałem twoją siostrę w supermarkecie.",
+  "usage_note_pl": "Tylko o przeszłości. Synonim — kürzlich."
+ },
+ "adverb-171": {
+  "_src": "24da0d5c",
+  "translation_pl": "nigdzie",
+  "example_pl": "Nigdzie nie mogę znaleźć swoich okularów.",
+  "usage_note_pl": "Tylko jedno przeczenie: nirgendwo (bez nicht). Synonim — nirgends."
+ },
+ "adverb-172": {
+  "_src": "3e11ef69",
+  "translation_pl": "jeszcze raz; znowu",
+  "example_pl": "Chciałbym jeszcze raz podziękować.",
+  "usage_note_pl": "Bardziej oficjalny synonim noch einmal / noch mal."
+ },
+ "adverb-173": {
+  "_src": "389b9cfa",
+  "translation_pl": "zwykle; z reguły",
+  "example_pl": "Zwykle wstaję o siódmej."
+ },
+ "adverb-174": {
+  "_src": "c2178137",
+  "translation_pl": "teraz; no",
+  "example_pl": "Teraz jest już za późno.",
+  "usage_note_pl": "Książkowy synonim jetzt. Na początku zdania — „no”: Nun, was meinst du? Nun ja — no tak, no cóż."
+ },
+ "adverb-175": {
+  "_src": "1027dbfd",
+  "translation_pl": "bo, otóż; przecież; a mianowicie",
+  "example_pl": "Nie mogę przyjść, bo jestem chory.",
+  "notes_pl": [
+   "Wyjaśnia poprzednie zdanie.",
+   "Także „a mianowicie”: zwei Sprachen, nämlich Deutsch und Englisch."
+  ]
+ },
+ "adverb-176": {
+  "_src": "7a32483e",
+  "translation_pl": "częściej; nierzadko, nieraz",
+  "example_pl": "Powinniśmy się częściej widywać.",
+  "usage_note_pl": "Stopień wyższy od oft. Bez porównania znaczy „nierzadko, od czasu do czasu”: Ich gehe öfter ins Kino. Synonim w tym znaczeniu — öfters (pot.)."
+ },
+ "adverb-177": {
+  "_src": "72222726",
+  "translation_pl": "przez (quer durch); w poprzek; na ukos",
+  "example_pl": "Muszę jechać przez całe miasto.",
+  "usage_note_pl": "Zwykle z przyimkiem: quer durch, quer über. Jako przymiotnik prawie nie występuje; „w poprzeczne paski” — quergestreift."
+ },
+ "adverb-178": {
+  "_src": "70c1eaf4",
+  "translation_pl": "na górę (pot.)",
+  "example_pl": "Tu są schody, no to jazda, szybko na górę!",
+  "usage_note_pl": "Potoczna forma od herauf i hinauf. Często jako część czasownika: raufgehen, raufkommen. Przeciwieństwo — runter."
+ },
+ "adverb-179": {
+  "_src": "35becf8e",
+  "translation_pl": "na zewnątrz; precz (pot.)",
+  "example_pl": "Przy tak pięknej pogodzie wychodzimy na dwór.",
+  "usage_note_pl": "Potoczna forma od heraus i hinaus. Często jako część czasownika: rausgehen, rauskommen. Raus! — Wynocha!"
+ },
+ "adverb-180": {
+  "_src": "27f342df",
+  "translation_pl": "dość, całkiem; jak należy, dobrze (z nicht)",
+  "example_pl": "Pokój jest dość duży.",
+  "additional_examples": [
+   {
+    "example_pl": "Nie bardzo wiedział, co powiedzieć."
+   }
+  ],
+  "usage_note_pl": "nicht recht + czasownik — nie bardzo, niezbyt: nicht recht wissen — nie bardzo wiedzieć, jemandem nicht recht trauen — nie bardzo komuś ufać. Nie mylić: recht haben — mieć rację; das Recht — prawo."
+ },
+ "adverb-182": {
+  "_src": "b2c12d45",
+  "translation_pl": "do tyłu; tyłem",
+  "example_pl": "Umiesz parkować tyłem?",
+  "usage_note_pl": "Przeciwieństwo — vorwärts."
+ },
+ "adverb-183": {
+  "_src": "505022d5",
+  "translation_pl": "sam (pot.)",
+  "example_pl": "Chce to zrobić sama.",
+  "usage_note_pl": "Potoczny wariant selbst. Nie odmienia się: ich selber, wir selber. W znaczeniu „nawet” używa się tylko selbst. Rzadko (przestarz.) selber = selbe „ten sam”: an selber Stätte — w tym samym miejscu."
+ },
+ "adverb-184": {
+  "_src": "6259a738",
+  "translation_pl": "i tak; tak czy inaczej",
+  "example_pl": "Nie musisz po mnie przyjeżdżać, i tak idę pieszo."
+ },
+ "adverb-185": {
+  "_src": "1945438f",
+  "translation_pl": "najpóźniej; nie później niż",
+  "example_pl": "Będę w domu najpóźniej o ósmej.",
+  "usage_note_pl": "Przeciwieństwo — frühestens."
+ },
+ "adverb-186": {
+  "_src": "9156abc8",
+  "translation_pl": "i tak; mimo to",
+  "example_pl": "Pada deszcz, mimo to idziemy na spacer.",
+  "notes_pl": [
+   "obwohl — to samo znaczenie, ale czasownik stoi na końcu: Obwohl es regnet, gehen wir spazieren."
+  ]
+ },
+ "adverb-188": {
+  "_src": "236d49bb",
+  "translation_pl": "za darmo; na próżno, na darmo",
+  "example_pl": "Dla dzieci wstęp jest za darmo.",
+  "usage_note_pl": "Drugie znaczenie — „na próżno”: Ich habe umsonst gewartet, er ist nicht gekommen."
+ },
+ "adverb-190": {
+  "_src": "eca827ea",
+  "translation_pl": "w drodze; po drodze",
+  "example_pl": "Zadzwonię do ciebie, jestem właśnie w drodze.",
+  "usage_note_pl": "Często z sein: Wir waren den ganzen Tag unterwegs. — Cały dzień byliśmy w rozjazdach."
+ },
+ "adverb-191": {
+  "_src": "1f7d52d8",
+  "translation_pl": "od siebie; o sobie",
+  "example_pl": "Długo nic o sobie nie słyszeliśmy.",
+  "usage_note_pl": "von + einander. Tak samo: miteinander, nebeneinander."
+ },
+ "adverb-192": {
+  "_src": "be63f357",
+  "translation_pl": "naprzód, z przodu",
+  "example_pl": "Proszę iść przodem, zaraz dołączę.",
+  "usage_note_pl": "im Voraus — z góry: Vielen Dank im Voraus! Często jako część czasownika: vorausgehen, voraussetzen."
+ },
+ "adverb-194": {
+  "_src": "89279740",
+  "translation_pl": "przed chwilą, niedawno (dzisiaj)",
+  "example_pl": "Przed chwilą dzwoniła twoja mama.",
+  "usage_note_pl": "O niedawnej przeszłości, zwykle tego samego dnia. Nie mylić z vorher (przedtem, wcześniej)."
+ },
+ "adverb-195": {
+  "_src": "a08d4d4a",
+  "translation_pl": "dlaczego; z jakiego powodu",
+  "example_pl": "Dlaczego nic mi nie powiedziałeś?",
+  "usage_note_pl": "Synonim warum (nieco bardziej oficjalny). W pytaniu zależnym czasownik stoi na końcu."
+ },
+ "adverb-196": {
+  "_src": "fec28730",
+  "translation_pl": "dlaczego; z jakiej racji",
+  "example_pl": "Dlaczego jesteś już w domu?",
+  "usage_note_pl": "Potoczny synonim warum, często ze zdziwieniem. W pytaniu zależnym czasownik stoi na końcu."
+ },
+ "adverb-197": {
+  "_src": "756fe740",
+  "translation_pl": "pewnie, chyba; dobrze (samopoczucie)",
+  "example_pl": "Chyba jest chory.",
+  "usage_note_pl": "Wyraża przypuszczenie. Znaczenie „dobrze”: Ich fühle mich hier wohl. — Dobrze się tu czuję. Zum Wohl! — Na zdrowie!"
+ },
+ "adverb-198": {
+  "_src": "31067e5a",
+  "translation_pl": "o co, o czym",
+  "example_pl": "O czym jest ten film?",
+  "usage_note_pl": "worum = wo + um: pytanie przy czasownikach z um, o rzeczy: Es geht um … → Worum geht es? O ludziach: Um wen geht es?"
+ },
+ "adverb-199": {
+  "_src": "ba1420b5",
+  "translation_pl": "o czym; nad czym",
+  "example_pl": "O czym rozmawialiście?",
+  "usage_note_pl": "worüber = wo + über: pytanie przy czasownikach z über, o rzeczy: sich freuen über → Worüber freust du dich? O ludziach: Über wen …? Odpowiedź: darüber."
+ },
+ "adverb-201": {
+  "_src": "b702befe",
+  "translation_pl": "przynajmniej; chociaż",
+  "example_pl": "Mógłbyś chociaż zadzwonić, jeśli przyjdziesz później.",
+  "usage_note_pl": "Synonim wenigstens."
+ },
+ "adverb-202": {
+  "_src": "e970ab81",
+  "translation_pl": "najpierw; początkowo; na razie",
+  "example_pl": "Najpierw musimy wypełnić formularz.",
+  "usage_note_pl": "Nieco bardziej oficjalny synonim zuerst."
+ },
+ "adverb-203": {
+  "_src": "e8a1a9ef",
+  "translation_pl": "wprawdzie, co prawda (…, ale)",
+  "example_pl": "Samochód jest wprawdzie stary, ale jeszcze dobrze jeździ.",
+  "usage_note_pl": "Prawie zawsze w parze: zwar …, aber … Także und zwar — a mianowicie: Ich komme, und zwar sofort."
+ },
+ "adverb-204": {
+  "_src": "da89b05f",
+  "translation_pl": "w ogóle; zupełnie",
+  "example_pl": "W ogóle nie mam czasu.",
+  "usage_note_pl": "Wzmacnia przeczenie: überhaupt nicht, überhaupt kein. W pytaniu: Hast du überhaupt Hunger? — Jesteś w ogóle głodny?"
+ },
+ "adverb-205": {
+  "_src": "71a78adf",
+  "translation_pl": "przy okazji; nawiasem mówiąc",
+  "example_pl": "Przy okazji, jutro mam urodziny.",
+  "notes_pl": [
+   "Może stać osobno, oddzielone przecinkiem: Übrigens, …"
+  ]
+ },
+ "adverb-206": {
+  "_src": "7f1d318c",
+  "translation_pl": "wieczorem; wieczorami",
+  "example_pl": "Wieczorami lubię oglądać telewizję.",
+  "usage_note_pl": "-s przy porze dnia oznacza „zwykle, regularnie”: morgens, mittags, nachmittags, abends, nachts. Pisze się małą literą. O jednorazowym zdarzeniu: am Abend."
+ },
+ "adverb-207": {
+  "_src": "78a74858",
+  "translation_pl": "w nocy; nocami",
+  "example_pl": "Nocami jest tu bardzo cicho.",
+  "usage_note_pl": "-s przy porze dnia oznacza „regularnie”: morgens, abends, nachts. Pisze się małą literą. O jednorazowym zdarzeniu: in der Nacht."
+ },
+ "adverb-208": {
+  "_src": "17b12900",
+  "translation_pl": "w dzień; w ciągu dnia",
+  "example_pl": "W dzień pracuję, wieczorem uczę się niemieckiego."
+ },
+ "adverb-209": {
+  "_src": "a4f9b47c",
+  "translation_pl": "w dzisiejszych czasach; dziś",
+  "example_pl": "W dzisiejszych czasach prawie każdy ma smartfona."
+ },
+ "adverb-210": {
+  "_src": "6b8bb013",
+  "translation_pl": "na pewno; oczywiście",
+  "example_pl": "Na pewno już o tym słyszałeś.",
+  "usage_note_pl": "Synonim sicher (w funkcji przysłówka): Er kommt sicher."
+ },
+ "adverb-211": {
+  "_src": "53925741",
+  "translation_pl": "dalej; nadal; ponadto",
+  "example_pl": "Życzę Panu wielu dalszych sukcesów.",
+  "usage_note_pl": "Także „ponadto” przy wyliczaniu (oficjalnie): Weiterhin ist zu beachten, dass …"
+ },
+ "adverb-212": {
+  "_src": "477cc3b0",
+  "translation_pl": "z obu stron; wzajemnie",
+  "example_pl": "Umowa została podpisana przez obie strony.",
+  "usage_note_pl": "Wyraz urzędowy. Także przyimek z Genitivem: beiderseits des Flusses — po obu stronach rzeki. Przymiotnik: beiderseitig — wzajemny."
+ },
+ "adverb-213": {
+  "_src": "d6d2ea31",
+  "translation_pl": "najwcześniej; nie wcześniej niż",
+  "example_pl": "Wrócę nie wcześniej niż o szóstej.",
+  "usage_note_pl": "Przeciwieństwo — spätestens."
+ },
+ "adverb-214": {
+  "_src": "f89bf4bb",
+  "translation_pl": "zatem; więc; to znaczy",
+  "example_pl": "Autobus nie przyjeżdża. Pójdziemy więc pieszo.",
+  "notes_pl": [
+   "Fałszywy przyjaciel: also ≠ ang. also (to auch).",
+   "Z przecinkiem — „no więc”, szyk wyrazów się nie zmienia: Also, wo waren wir?"
+  ],
+  "extra_meanings": [
+   {
+    "pl": "tak, w ten sposób",
+    "example_pl": "I tak się stało."
+   }
+  ]
+ },
+ "adverb-215": {
+  "_src": "8c6ba288",
+  "translation_pl": "na podstawie, opierając się na",
+  "example_pl": "Na podstawie tych danych planujemy eksperyment.",
+  "usage_note_pl": "W użyciu przysłówkowym: ausgehend von + Dativ — na podstawie, opierając się na."
+ },
+ "adverb-216": {
+  "_src": "97b92307",
+  "translation_pl": "płynnie; biegle",
+  "example_pl": "Mówi płynnie po niemiecku."
+ },
+ "adverb-217": {
+  "_src": "3122490e",
+  "translation_pl": "zupełnie; całkiem",
+  "example_pl": "Pomieszczenie jest zupełnie puste.",
+  "usage_note_pl": "W zależności od kontekstu: „zupełnie” (ganz leer) albo „całkiem” (ganz gut)."
+ },
+ "adverb-218": {
+  "_src": "814827e5",
+  "translation_pl": "znacznie; istotnie",
+  "example_pl": "Nowa trasa jest znacznie krótsza."
+ },
+ "adverb-219": {
+  "_src": "4ed42071",
+  "translation_pl": "niespełna; ledwo; nieznacznie",
+  "example_pl": "Jazda trwa niespełna godzinę."
+ },
+ "adverb-220": {
+  "_src": "12b4b10d",
+  "translation_pl": "praktycznie; faktycznie",
+  "example_pl": "Dom jest praktycznie pusty."
+ },
+ "adverb-221": {
+  "_src": "432c4850",
+  "translation_pl": "zwykle",
+  "example_pl": "Zwykle wstaję o siódmej."
+ },
+ "adverb-222": {
+  "_src": "ee5f2766",
+  "translation_pl": "niezwykle; wyjątkowo",
+  "example_pl": "Jest wyjątkowo życzliwy."
+ },
+ "adverb-223": {
+  "_src": "f7388155",
+  "translation_pl": "tym, z tym; tym samym",
+  "example_pl": "Co z tym robisz?",
+  "usage_note_pl": "Zastępuje mit + rzecz: mit dem Messer → damit; o ludziach — mit ihm/ihr, nie damit. Tym samym: Damit ist alles gesagt. — I tym wszystko powiedziane. Spójnik damit „żeby” — osobne hasło (conjunction-013)."
+ },
+ "adverb-224": {
+  "_src": "51806c35",
+  "translation_pl": "ale, ależ (wzmocnienie, zdziwienie)",
+  "example_pl": "Ależ to piękne!",
+  "usage_note_pl": "Nieakcentowana partykuła w wykrzyknieniach i odpowiedziach: Du spielst aber gut! — Ale dobrze grasz! aber gern — z przyjemnością. Spójnik aber „ale” — osobne hasło (conjunction-003)."
+ },
+ "adverb-225": {
+  "_src": "3eb83c5c",
+  "translation_pl": "proszę; nie ma za co (w odpowiedzi na „dziękuję”); słucham? (Wie bitte?)",
+  "example_pl": "Możesz mi, proszę, pomóc?",
+  "usage_note_pl": "Partykuła grzecznościowa: łagodzi prośbę, stoi na początku, w środku lub na końcu: Bitte setzen Sie sich! / Setzen Sie sich bitte! W odpowiedzi na Danke! — Bitte! albo Bitte schön! (nie ma za co). Podając coś — Bitte schön / Bitte sehr (proszę bardzo). Nie mylić z czasownikiem i rzeczownikiem: ich bitte (dich um …) — proszę; die Bitte — prośba."
+ },
+ "adverb-226": {
+  "_src": "0495fa6d",
+  "translation_pl": "oczywiście; naturalnie",
+  "example_pl": "Idziesz z nami? – Oczywiście!",
+  "usage_note_pl": "Także „naturalnie, swobodnie”: Sie lacht ganz natürlich. — Śmieje się zupełnie naturalnie."
+ },
+ "adverb-227": {
+  "_src": "3ffd11c5",
+  "translation_pl": "na pewno; z pewnością",
+  "example_pl": "Na pewno zaraz przyjdzie."
+ },
+ "adverb-228": {
+  "_src": "edae61d6",
+  "translation_pl": "dosłownie, wręcz; oficjalnie",
+  "example_pl": "Z radości dosłownie podskoczył."
+ },
+ "adverb-229": {
+  "_src": "c313c400",
+  "translation_pl": "o imieniu",
+  "example_pl": "W naszej grupie jest student o imieniu Jonas.",
+  "usage_note_pl": "Stoi po rzeczowniku, przed imieniem. Urzędowo: namens + Genitiv „w imieniu”: namens des Vorstands."
+ },
+ "adverb-230": {
+  "_src": "576ff4d5",
+  "translation_pl": "pod tym względem, w tym sensie",
+  "example_pl": "Pociąg był punktualny, pod tym względem mieliśmy szczęście.",
+  "usage_note_pl": "insofern …, als … — pod tym względem, że: Das Treffen war insofern nützlich, als wir uns endlich kennengelernt haben. Czasem ≈ deshalb (dlatego). Spójnik insofern „jeśli; o ile” — osobne hasło."
+ },
+ "adverb-231": {
+  "_src": "fb75a148",
+  "translation_pl": "pod tym względem, w tej mierze",
+  "example_pl": "Naprawa była droga, w tym masz rację.",
+  "usage_note_pl": "To samo co insofern. insoweit …, als … — na tyle, na ile. Spójnik insoweit (als) „na tyle, na ile; jeśli”: Insoweit es die Zeit erlaubt, … — o ile czas pozwoli, …"
+ },
+ "adverb-232": {
+  "_src": "9c407bac",
+  "translation_pl": "tymczasem, w międzyczasie",
+  "example_pl": "Ja gotuję, a ty tymczasem nakrywasz do stołu.",
+  "usage_note_pl": "Spójnik derweil „podczas gdy” (czasownik na końcu): Derweil die Kinder spielten, telefonierte ich. Forma derweilen wychodzi z użycia."
+ },
+ "adverb-233": {
+  "_src": "071a9624",
+  "translation_pl": "kiedykolwiek; po (tyle a tyle na każdego)",
+  "example_pl": "Widziałeś kiedykolwiek coś tak pięknego?",
+  "usage_note_pl": "je zwei — po dwa: Wir bekommen je zwei Bonbons. je nach — w zależności od: je nach Wetter; je nachdem, ob … — zależnie od tego, czy …; Je nachdem! — To zależy! mehr denn je — bardziej niż kiedykolwiek; seit je — od zawsze. je Person — na osobę (jak pro). Para je … desto — osobne hasło."
+ },
+ "adverb-234": {
+  "_src": "22b813ca",
+  "translation_pl": "zbyt, nazbyt",
+  "example_pl": "Film nie był zbyt wciągający.",
+  "usage_note_pl": "Stoi przed przymiotnikiem lub przysłówkiem: allzu oft, allzu viel. Z przeczeniem łagodzi: nicht allzu … — niezbyt …."
+ },
+ "adverb-235": {
+  "_src": "c50bedf3",
+  "translation_pl": "innym razem",
+  "example_pl": "Dziś nie mam czasu, porozmawiajmy o tym innym razem.",
+  "usage_note_pl": "Tylko w wyrażeniu ein andermal. Można też powiedzieć ein anderes Mal."
+ },
+ "adverb-236": {
+  "_src": "d59f7145",
+  "translation_pl": "o sobie; do siebie; (przechodzić) obok siebie",
+  "example_pl": "W wakacje często o sobie myśleliśmy.",
+  "usage_note_pl": "an + einander: tłumaczenie zależy od czasownika z an: denken an → aneinander denken, sich gewöhnen an → sich aneinander gewöhnen (przyzwyczajać się do siebie). Z czasownikiem pisze się łącznie, jeśli akcent pada na aneinander: aneinandergrenzen (graniczyć ze sobą)."
+ },
+ "adverb-237": {
+  "_src": "e25996ec",
+  "translation_pl": "na siebie; jeden na drugim",
+  "example_pl": "Czekamy na siebie przy wejściu.",
+  "usage_note_pl": "auf + einander: tłumaczenie zależy od czasownika z auf: warten auf → aufeinander warten, sich verlassen auf → sich aufeinander verlassen (polegać na sobie nawzajem). O miejscu: Die Kisten stehen aufeinander. — Skrzynie stoją jedna na drugiej."
+ },
+ "adverb-238": {
+  "_src": "fc084ef6",
+  "translation_pl": "w drodze wyjątku",
+  "example_pl": "Dziś w drodze wyjątku możesz położyć się później."
+ },
+ "adverb-239": {
+  "_src": "9bcc7891",
+  "translation_pl": "na bok",
+  "example_pl": "Odłożył telefon na bok i mnie wysłuchał.",
+  "usage_note_pl": "Często z czasownikiem: beiseitelegen (odkładać), beiseiteschieben (odsuwać). Spaß beiseite! — Żarty na bok!"
+ },
+ "adverb-240": {
+  "_src": "5f8ae9da",
+  "translation_pl": "na przykład",
+  "example_pl": "Wiele owoców, na przykład jabłka i gruszki, rośnie także w Niemczech.",
+  "usage_note_pl": "Synonim zum Beispiel (z. B.). Skrót: bspw."
+ },
+ "adverb-241": {
+  "_src": "6608a422",
+  "translation_pl": "jak wiadomo",
+  "example_pl": "Jak wiadomo, praktyka czyni mistrza."
+ },
+ "adverb-242": {
+  "_src": "c628b784",
+  "translation_pl": "świetnie, doskonale; serdecznie (w podziękowaniach i pozdrowieniach)",
+  "example_pl": "Dzieci świetnie się bawiły na obozie.",
+  "usage_note_pl": "Także po sein: Alles ist bestens. — Wszystko jest w najlepszym porządku. W listach: Wir danken Ihnen bestens. — Serdecznie Państwu dziękujemy."
+ },
+ "adverb-243": {
+  "_src": "119d5231",
+  "translation_pl": "do tej pory, na razie",
+  "example_pl": "Do tej pory nikt nie odpowiedział na ogłoszenie.",
+  "usage_note_pl": "Synonim bisher."
+ },
+ "adverb-244": {
+  "_src": "46cb1a7a",
+  "translation_pl": "potem, w rezultacie; w tym celu, pod tym kątem",
+  "example_pl": "Klient się poskarżył, w rezultacie odzyskał pieniądze.",
+  "notes_pl": [
+   "Akcent na hin: daraufhín.",
+   "Nie mylić z darauf + czasownik z hin-: Alles deutet darauf hin. — Wszystko na to wskazuje."
+  ]
+ },
+ "adverb-245": {
+  "_src": "0e1b20de",
+  "translation_pl": "o tym; nad tym, wyżej; więcej, powyżej",
+  "example_pl": "Wczoraj przeczytałam o tym artykuł.",
+  "usage_note_pl": "da + über: zastępuje über + rzecz: über das Problem sprechen → darüber sprechen. O ludziach: über ihn, über sie. O miejscu: An der Wand steht ein Regal, darüber hängt ein Bild. darüber hinaus — ponadto. Pot.: drüber."
+ },
+ "adverb-246": {
+  "_src": "949ad035",
+  "translation_pl": "przedtem, wcześniej; przed nim, z przodu (o miejscu); tego (bać się), przed tym (ostrzegać)",
+  "example_pl": "O ósmej jest kolacja, przedtem jeszcze pójdziemy na spacer.",
+  "usage_note_pl": "da + vor: o miejscu i czasie, a także przy czasownikach z vor zamiast vor + rzecz: Angst haben vor → Ich habe Angst davor. warnen vor → Ich habe dich davor gewarnt. O ludziach: vor ihm, vor ihr."
+ },
+ "adverb-247": {
+  "_src": "67821bd6",
+  "translation_pl": "przez ciebie; dla ciebie",
+  "example_pl": "Przez ciebie musiałem / musiałam godzinę czekać w deszczu!",
+  "usage_note_pl": "Tak samo: meinetwegen, seinetwegen, ihretwegen, unsertwegen, euretwegen. Pot. także wegen dir."
+ },
+ "adverb-248": {
+  "_src": "6954968a",
+  "translation_pl": "wkrótce, w najbliższym czasie",
+  "example_pl": "Nasi sąsiedzi wkrótce przeprowadzają się do Hamburga."
+ },
+ "adverb-249": {
+  "_src": "2bcf8fa1",
+  "translation_pl": "obecnie, teraz",
+  "example_pl": "Kolega jest obecnie na urlopie.",
+  "usage_note_pl": "Synonim zurzeit. Przymiotnik: derzeitig (obecny)."
+ },
+ "adverb-250": {
+  "_src": "8b3bb636",
+  "translation_pl": "pod tym, pod nim, pod spodem",
+  "example_pl": "Podnieś no koc, może klucz leży pod nim.",
+  "usage_note_pl": "Pot. forma od darunter. Es geht drunter und drüber. — Wszystko jest do góry nogami, kompletny bałagan."
+ },
+ "adverb-251": {
+  "_src": "4651a573",
+  "translation_pl": "jak najbardziej, całkiem; koniecznie",
+  "example_pl": "Coś takiego jak najbardziej może się zdarzyć.",
+  "usage_note_pl": "durchaus nicht — wcale nie: Das ist durchaus nicht einfach. — To wcale nie jest proste."
+ },
+ "adverb-252": {
+  "_src": "f894f592",
+  "translation_pl": "jako tako, w pewnym stopniu, względnie",
+  "example_pl": "Po trzech miesiącach mogła się jako tako porozumieć po niemiecku.",
+  "usage_note_pl": "Odpowiedź na „Wie geht's?”: Einigermaßen. — Jako tako, tak sobie. Pot. także „dość, mocno”: einigermaßen erstaunt — mocno zdziwiony."
+ },
+ "adverb-253": {
+  "_src": "dc4fe534",
+  "translation_pl": "kiedyś, niegdyś; kiedyś (w przyszłości)",
+  "example_pl": "W tym budynku mieściła się kiedyś fabryka.",
+  "usage_note_pl": "Książk. Zwykle o przeszłości; o przyszłości — rzadziej, widać to po czasie czasownika. Przymiotnik: einstig (dawny, były)."
+ },
+ "adverb-254": {
+  "_src": "65a85aaa",
+  "translation_pl": "w następujący sposób, tak",
+  "example_pl": "Proszę postępować w następujący sposób: najpierw proszę wypełnić formularz."
+ },
+ "adverb-255": {
+  "_src": "98196674",
+  "translation_pl": "w konsekwencji, dlatego",
+  "example_pl": "Pociąg miał opóźnienie, w konsekwencji spóźniliśmy się na zebranie.",
+  "notes_pl": [
+   "Synonim also, deshalb; brzmi bardziej oficjalnie."
+  ]
+ },
+ "adverb-256": {
+  "_src": "9f483d67",
+  "translation_pl": "dla siebie nawzajem, za siebie nawzajem",
+  "example_pl": "Kupili sobie nawzajem małe prezenty.",
+  "usage_note_pl": "für + einander. füreinander da sein — wspierać się nawzajem, być dla siebie oparciem."
+ },
+ "adverb-257": {
+  "_src": "bb3802ae",
+  "translation_pl": "w pewnym sensie, że tak powiem",
+  "example_pl": "Biblioteka to w pewnym sensie mój drugi dom."
+ },
+ "adverb-258": {
+  "_src": "6aed4126",
+  "translation_pl": "w równym stopniu, jednakowo",
+  "example_pl": "Książka jest w równym stopniu ciekawa dla dzieci i dla dorosłych."
+ },
+ "adverb-259": {
+  "_src": "323e7354",
+  "translation_pl": "na szczęście",
+  "example_pl": "Na szczęście miałem / miałam przy sobie parasol.",
+  "usage_note_pl": "Synonim zum Glück."
+ },
+ "adverb-260": {
+  "_src": "43b0ef50",
+  "translation_pl": "w dół (z góry w tę stronę)",
+  "example_pl": "Z dachu kapała deszczówka.",
+  "usage_note_pl": "Książk. = herunter (pot. runter). Częściej jako część czasownika: herabsteigen (schodzić), herabsetzen (obniżać)."
+ },
+ "adverb-261": {
+  "_src": "c17c02cb",
+  "translation_pl": "bliżej, tu (do mówiącego lub do celu)",
+  "example_pl": "Podejdź bliżej, to lepiej zobaczysz.",
+  "usage_note_pl": "Częściej jako część czasownika: herankommen (podchodzić), heranwachsen (dorastać). bis an … heran — aż do samego …. Pot.: ran."
+ },
+ "adverb-262": {
+  "_src": "b9dd7a97",
+  "translation_pl": "przy tym; w tym przypadku",
+  "example_pl": "Proszę dokładnie przeczytać tekst, można przy tym korzystać ze słownika.",
+  "usage_note_pl": "hier + bei — to samo co dabei, częściej w języku pisanym."
+ },
+ "adverb-263": {
+  "_src": "020a6619",
+  "translation_pl": "do tego; za to (w zamian)",
+  "example_pl": "Na kurs potrzebny będzie laptop, wystarczy do tego starszy model.",
+  "usage_note_pl": "hier + für — to samo co dafür, częściej w języku pisanym."
+ },
+ "adverb-264": {
+  "_src": "d1ca1206",
+  "translation_pl": "niniejszym, tym (w oficjalnych formułach); z tym",
+  "example_pl": "Niniejszym potwierdzamy otrzymanie Państwa zamówienia.",
+  "usage_note_pl": "hier + mit — to samo co damit, częściej w języku pisanym. Typowe w oficjalnych pismach: Hiermit kündige ich meinen Vertrag. — Niniejszym wypowiadam swoją umowę."
+ },
+ "adverb-265": {
+  "_src": "568203a5",
+  "translation_pl": "z tego, z nich; od tego, o tym",
+  "example_pl": "Dostaliśmy trzydzieści zgłoszeń, z czego pięć przechodzi do następnego etapu.",
+  "usage_note_pl": "hier + von — to samo co davon, częściej w języku pisanym."
+ },
+ "adverb-266": {
+  "_src": "d714addc",
+  "translation_pl": "na zewnątrz (od mówiącego); dalej, poza granice",
+  "example_pl": "Dzieci wybiegły do ogrodu.",
+  "usage_note_pl": "Pot. raus. hinaus — na zewnątrz od mówiącego, heraus — w stronę mówiącego. Często jako część czasownika: hinausgehen. darüber hinaus — ponadto; über … hinaus — ponad, poza."
+ },
+ "adverb-267": {
+  "_src": "b9d3e50d",
+  "translation_pl": "przez, ponad (über … hinweg); na przestrzeni; precz (książk.)",
+  "example_pl": "Spojrzał na mnie znad okularów.",
+  "usage_note_pl": "Prawie zawsze z über: über … hinweg. O czasie: über Jahre hinweg — na przestrzeni wielu lat. Część czasownika: hinwegsehen über (nie zwracać uwagi na coś). Nie mylić: der Hinweg — droga tam."
+ },
+ "adverb-268": {
+  "_src": "fa661630",
+  "translation_pl": "do tego, dodatkowo",
+  "example_pl": "Do tego dochodzi to, że hotel leży daleko od plaży.",
+  "usage_note_pl": "Najczęściej jako część czasownika: hinzufügen (dodawać), hinzukommen (dochodzić). Hinzu kommt, dass … — Do tego dochodzi, że …"
+ },
+ "adverb-269": {
+  "_src": "157e71c2",
+  "translation_pl": "przez nią, dla niej; przez nich, dla nich",
+  "example_pl": "Przeprowadził się dla niej do Berlina.",
+  "usage_note_pl": "Wielką literą — przez Pana / Panią, dla Pana / Pani (forma grzecznościowa): Ihretwegen. Tak samo: meinetwegen, deinetwegen, seinetwegen."
+ },
+ "adverb-270": {
+  "_src": "dee03838",
+  "translation_pl": "przynajmniej, mimo wszystko; bądź co bądź, przecież",
+  "example_pl": "Przegraliśmy, ale przynajmniej strzeliliśmy gola.",
+  "usage_note_pl": "Także „bądź co bądź, przecież”: Sie hat immerhin zehn Jahre hier gearbeitet. Jako odpowiedź: Immerhin! — Zawsze coś!"
+ },
+ "adverb-271": {
+  "_src": "1e6aaca6",
+  "translation_pl": "ciągle, cały czas",
+  "example_pl": "Telefon dzwoni dziś bez przerwy.",
+  "usage_note_pl": "Pot.; często z odcieniem irytacji."
+ },
+ "adverb-272": {
+  "_src": "9c6be7f9",
+  "translation_pl": "szczególnie, zwłaszcza",
+  "example_pl": "Zwłaszcza zimą w mieście jest złe powietrze.",
+  "usage_note_pl": "Częściej w języku pisanym niż besonders."
+ },
+ "adverb-273": {
+  "_src": "24b4e15c",
+  "translation_pl": "pod jakim względem, w czym; dlaczego",
+  "example_pl": "W czym to rozwiązanie jest lepsze od starego?",
+  "usage_note_pl": "Słowo pytające; w pytaniu zależnym czasownik stoi na końcu: Ich verstehe nicht, inwiefern das wichtig ist. Podobnie: inwieweit."
+ },
+ "adverb-274": {
+  "_src": "80c7f863",
+  "translation_pl": "w jakim stopniu, na ile",
+  "example_pl": "Wciąż nie jest jasne, na ile nowe przepisy pomogą.",
+  "usage_note_pl": "Słowo pytające; w pytaniu zależnym czasownik stoi na końcu. Podobnie: inwiefern (pod jakim względem)."
+ },
+ "adverb-275": {
+  "_src": "e24301e7",
+  "translation_pl": "gdzieś",
+  "example_pl": "Zostawiłem gdzieś swoje okulary.",
+  "usage_note_pl": "Dokądś — irgendwohin. Pot. także „w pewnym sensie”: Irgendwo verstehe ich ihn. — W pewnym sensie go rozumiem."
+ },
+ "adverb-276": {
+  "_src": "812cabf4",
+  "translation_pl": "gdzieś, dokądś",
+  "example_pl": "Pojedźmy gdzieś na weekend.",
+  "usage_note_pl": "Gdzieś (miejsce) — irgendwo."
+ },
+ "adverb-277": {
+  "_src": "22e8b0cd",
+  "translation_pl": "wcale nie, bynajmniej nie, w żadnym wypadku",
+  "example_pl": "Zadanie wcale nie było takie łatwe, jak myśleliśmy.",
+  "usage_note_pl": "Mocne przeczenie, bez nicht. Może być odpowiedzią: Keineswegs! — W żadnym wypadku!"
+ },
+ "adverb-278": {
+  "_src": "279fd151",
+  "translation_pl": "jedynie, tylko",
+  "example_pl": "Chcielibyśmy jedynie wiedzieć, kiedy przyjeżdża pociąg.",
+  "usage_note_pl": "Częściej w języku pisanym niż nur."
+ },
+ "adverb-279": {
+  "_src": "617d9596",
+  "translation_pl": "ostatecznie; koniec końców",
+  "example_pl": "Ostatecznie wszystko zależy od pogody.",
+  "usage_note_pl": "Nie mylić z letztens — ostatnio."
+ },
+ "adverb-280": {
+  "_src": "4755645e",
+  "translation_pl": "prawie",
+  "example_pl": "Prawie wszystkie miejsca były zajęte.",
+  "usage_note_pl": "Częściej w języku pisanym niż fast."
+ },
+ "adverb-281": {
+  "_src": "56d8b14b",
+  "translation_pl": "ostatnio, od niedawna",
+  "example_pl": "Mój sąsiad od niedawna jeździ do pracy na rowerze.",
+  "usage_note_pl": "Podkreśla, że wcześniej było inaczej."
+ },
+ "adverb-282": {
+  "_src": "566dd52c",
+  "translation_pl": "nigdy",
+  "example_pl": "Nigdy bym nie pomyślał!",
+  "usage_note_pl": "Wzmocnione nie („nigdy”). Jako odpowiedź: Niemals! — Nigdy w życiu!"
+ },
+ "adverb-283": {
+  "_src": "8afd661b",
+  "translation_pl": "koniecznie, siłą rzeczy; nieuchronnie",
+  "example_pl": "Drogie niekoniecznie jest lepsze.",
+  "usage_note_pl": "Najczęściej w połączeniu nicht notwendigerweise — niekoniecznie."
+ },
+ "adverb-284": {
+  "_src": "04a33b23",
+  "translation_pl": "i tak, tak czy inaczej",
+  "example_pl": "Nie musisz po mnie przyjeżdżać, i tak jadę do miasta.",
+  "usage_note_pl": "Synonim sowieso, częściej w języku pisanym."
+ },
+ "adverb-285": {
+  "_src": "99e69f19",
+  "translation_pl": "praktycznie, prawie; jakby, że tak powiem",
+  "example_pl": "Projekt jest praktycznie gotowy, brakuje tylko prezentacji.",
+  "usage_note_pl": "Bardzo częste w języku potocznym."
+ },
+ "adverb-286": {
+  "_src": "0355cf2d",
+  "translation_pl": "przez niego; dla niego; jeśli o niego chodzi (nie ma nic przeciwko)",
+  "example_pl": "Spóźniliśmy się przez niego.",
+  "usage_note_pl": "Tak samo: meinetwegen, deinetwegen, ihretwegen. Pot. także wegen ihm."
+ },
+ "adverb-287": {
+  "_src": "bbbae4ce",
+  "translation_pl": "że tak powiem, jakby",
+  "example_pl": "Pies jest, że tak powiem, członkiem rodziny.",
+  "usage_note_pl": "Pisze się łącznie. Rozdzielnie so zu sagen — „powiedzieć tak” (inne znaczenie)."
+ },
+ "adverb-288": {
+  "_src": "74905b91",
+  "translation_pl": "zawsze, niezmiennie",
+  "example_pl": "Zawsze przychodzi do pracy punktualnie.",
+  "usage_note_pl": "Częściej w języku pisanym niż immer."
+ },
+ "adverb-289": {
+  "_src": "bfe07134",
+  "translation_pl": "zwykle",
+  "example_pl": "Zwykle jemy śniadanie o ósmej.",
+  "usage_note_pl": "Synonim normalerweise, gewöhnlich."
+ },
+ "adverb-290": {
+  "_src": "f80e3148",
+  "translation_pl": "niechętnie, bez przyjemności",
+  "example_pl": "Nie lubię jeździć samochodem we mgle.",
+  "usage_note_pl": "ungern + czasownik = „nie lubić czegoś robić”. Przeciwieństwo: gern."
+ },
+ "adverb-291": {
+  "_src": "b5910749",
+  "translation_pl": "raczej, ściślej; wręcz przeciwnie",
+  "example_pl": "Nie jest leniwy, tylko raczej zmęczony.",
+  "usage_note_pl": "Często po sondern: nicht …, sondern vielmehr …. Nie mylić: viel mehr (rozdzielnie) — znacznie więcej."
+ },
+ "adverb-292": {
+  "_src": "7543c9c1",
+  "translation_pl": "z przodu; naprzód",
+  "example_pl": "Skoczył do wody głową naprzód.",
+  "usage_note_pl": "Częściej jako część czasownika: vorangehen (iść przodem; postępować), vorankommen (posuwać się naprzód): Die Arbeit kommt gut voran."
+ },
+ "adverb-293": {
+  "_src": "2fa87e1d",
+  "translation_pl": "na razie, tymczasowo",
+  "example_pl": "Na razie mieszkamy u moich rodziców."
+ },
+ "adverb-294": {
+  "_src": "b894417e",
+  "translation_pl": "minął, za nami; obok",
+  "example_pl": "Sesja wreszcie za nami.",
+  "usage_note_pl": "Synonim vorbei, nieco bardziej książkowy. O miejscu — „obok”, częściej jako część czasownika: vorübergehen (przechodzić obok)."
+ },
+ "adverb-295": {
+  "_src": "aa3e87a3",
+  "translation_pl": "najlepiej, przeważnie",
+  "example_pl": "Szukamy mieszkania, najlepiej z balkonem."
+ },
+ "adverb-296": {
+  "_src": "d6f377fb",
+  "translation_pl": "dlaczego, z jakiego powodu",
+  "example_pl": "Dlaczego do mnie nie zadzwoniłeś?",
+  "usage_note_pl": "Synonim weshalb, warum. W zdaniu podrzędnym czasownik stoi na końcu: …, weswegen ich zu spät kam. — …, przez co się spóźniłem."
+ },
+ "adverb-297": {
+  "_src": "52cd2bd2",
+  "translation_pl": "z kolei; z drugiej strony; znowu",
+  "example_pl": "Dowiedziałam się tego od Anny, a ona z kolei od swojego brata.",
+  "usage_note_pl": "Także „z drugiej strony”: Das wiederum finde ich gut. — A to mi się akurat podoba. I „znowu, ponownie”."
+ },
+ "adverb-298": {
+  "_src": "11e5f791",
+  "translation_pl": "na co, za co, do czego",
+  "example_pl": "Na co wydałeś tyle pieniędzy?",
+  "usage_note_pl": "wo + für: pytanie o rzecz przy czasownikach z für: sich bedanken für → Wofür bedankst du dich? O ludziach: Für wen …? Odpowiedź: dafür."
+ },
+ "adverb-299": {
+  "_src": "654b3db2",
+  "translation_pl": "czym, za pomocą czego",
+  "example_pl": "Czym wolisz pisać — długopisem czy ołówkiem?",
+  "usage_note_pl": "wo + mit: rechnen mit → Womit rechnest du? O ludziach: Mit wem …? Odpowiedź: damit."
+ },
+ "adverb-300": {
+  "_src": "b959dab0",
+  "translation_pl": "być może, chyba (często o czymś niepożądanym)",
+  "example_pl": "Weź kurtkę, być może wieczorem zrobi się zimno.",
+  "usage_note_pl": "To nie jest słowo pytające. Nie mylić z wo möglich (rozdzielnie) — „gdzie to możliwe, w miarę możliwości”."
+ },
+ "adverb-301": {
+  "_src": "fa7e334e",
+  "translation_pl": "czego (szukać), o co (pytać), czym (pachnieć); zgodnie z którym",
+  "example_pl": "Czego szukasz?",
+  "usage_note_pl": "wo + nach: suchen nach, fragen nach, riechen nach. O ludziach: Nach wem …? Odpowiedź: danach. W wiadomościach: eine Meldung, wonach … — komunikat, zgodnie z którym …"
+ },
+ "adverb-302": {
+  "_src": "098b8afe",
+  "translation_pl": "na co (czekać), na czym; po czym",
+  "example_pl": "Na co jeszcze czekasz?",
+  "usage_note_pl": "wo + auf: warten auf, sich freuen auf, sich verlassen auf. O miejscu — „na czym”: Worauf sitzt du? O ludziach: Auf wen …? Odpowiedź: darauf. W znaczeniu względnym, po przecinku — „po czym”: Er nickte, worauf alle gingen. — Skinął głową, po czym wszyscy wyszli."
+ },
+ "adverb-303": {
+  "_src": "14b5b4cb",
+  "translation_pl": "o czym; od czego; z czego (żyć)",
+  "example_pl": "O czym marzysz?",
+  "usage_note_pl": "wo + von: reden von, träumen von, leben von (Wovon lebt er? — Z czego żyje?). O ludziach: Von wem …? Odpowiedź: davon."
+ },
+ "adverb-304": {
+  "_src": "f7f66f9f",
+  "translation_pl": "czego (bać się); przed czym",
+  "example_pl": "Czego się boisz?",
+  "usage_note_pl": "wo + vor: Angst haben vor, sich fürchten vor, warnen vor. O ludziach: Vor wem …? Odpowiedź: davor."
+ },
+ "adverb-305": {
+  "_src": "d8214872",
+  "translation_pl": "po co, w jakim celu; do czego",
+  "example_pl": "Po co uczysz się chińskiego?",
+  "usage_note_pl": "Pytanie o cel, jak warum / wofür. Także wo + zu przy czasownikach z zu: gratulieren zu → Wozu gratulierst du ihm? Odpowiedź: dazu."
+ },
+ "adverb-306": {
+  "_src": "a7c6dd0f",
+  "translation_pl": "ponadto, w dodatku",
+  "example_pl": "Mieszkanie jest za małe, w dodatku jest w nim bardzo głośno.",
+  "notes_pl": [
+   "Książkowy synonim außerdem."
+  ]
+ },
+ "adverb-307": {
+  "_src": "77fae562",
+  "translation_pl": "do siebie, ze sobą",
+  "example_pl": "Te kolory dobrze do siebie pasują.",
+  "usage_note_pl": "zu + einander. Także: freundlich zueinander sein — być dla siebie życzliwymi."
+ },
+ "adverb-308": {
+  "_src": "4cf89500",
+  "translation_pl": "jednocześnie, zarazem",
+  "example_pl": "Pracuje jako lekarka i jednocześnie studiuje muzykę.",
+  "usage_note_pl": "Synonim gleichzeitig (zugleich — tylko przysłówek). X und Y zugleich — jednocześnie X i Y: Er ist Koch und Kellner zugleich."
+ },
+ "adverb-309": {
+  "_src": "d9e681d0",
+  "translation_pl": "głęboko, do głębi",
+  "example_pl": "Byliśmy głęboko wstrząśnięci tą wiadomością.",
+  "usage_note_pl": "Zwykle przy uczuciach: zutiefst traurig, zutiefst dankbar."
+ },
+ "adverb-310": {
+  "_src": "a9d6865e",
+  "translation_pl": "przedtem, wcześniej",
+  "example_pl": "Już wcześniej dwukrotnie przeczytał tę książkę.",
+  "usage_note_pl": "Książk., zwykle: vorher. kurz zuvor — krótko przedtem; mehr als je zuvor — bardziej niż kiedykolwiek."
+ },
+ "adverb-311": {
+  "_src": "884fc9d8",
+  "translation_pl": "na pewno, w każdym razie; zawsze, za każdym razem",
+  "example_pl": "Taksówką na pewno dojedziemy szybciej niż autobusem.",
+  "usage_note_pl": "Pierwsze znaczenie — pot. Nie mylić z ein für alle Mal — raz na zawsze."
+ },
+ "adverb-312": {
+  "_src": "4489313b",
+  "translation_pl": "wszystkim (w powitaniu); ze wszystkich stron, przez wszystkich",
+  "example_pl": "Dobranoc wszystkim, do jutra!",
+  "usage_note_pl": "Najczęściej przy powitaniu grupy: Hallo allerseits! — Cześć wszystkim!"
+ },
+ "adverb-313": {
+  "_src": "73cca2f6",
+  "translation_pl": "zawsze",
+  "example_pl": "Nasz dozorca jest zawsze gotów pomóc.",
+  "usage_note_pl": "Wyraz wychodzący z użycia. Znany z dewizy allzeit bereit — zawsze gotów. Wariant: allezeit. Zwykle: immer."
+ },
+ "adverb-314": {
+  "_src": "ad96bf78",
+  "translation_pl": "inaczej, w przeciwnym razie",
+  "example_pl": "Musisz zapisać się do piątku, inaczej twoje miejsce przepadnie.",
+  "notes_pl": [
+   "Wariant: anderenfalls. Synonim sonst, ansonsten."
+  ]
+ },
+ "adverb-315": {
+  "_src": "20faac72",
+  "translation_pl": "w innym miejscu, gdzie indziej",
+  "example_pl": "Tutaj wszystko jest zarezerwowane, musimy przenocować gdzie indziej.",
+  "usage_note_pl": "Pot. W inne miejsce — anderswohin. Synonim woanders."
+ },
+ "adverb-316": {
+  "_src": "d0fd9550",
+  "translation_pl": "częściowo, w pewnej mierze",
+  "example_pl": "Problem został dotąd rozwiązany tylko częściowo.",
+  "usage_note_pl": "Często z przeczeniem: nicht einmal ansatzweise — nawet w przybliżeniu nie, zupełnie nie."
+ },
+ "adverb-317": {
+  "_src": "b55e7692",
+  "translation_pl": "nie w domu, poza domem; w innym miejscu, poza swoim miastem (w sporcie — na wyjeździe); na zewnątrz",
+  "example_pl": "W weekendy chętnie jadamy poza domem.",
+  "usage_note_pl": "W sporcie: auswärts spielen — grać na wyjeździe (das Auswärtsspiel). Przymiotnik: auswärtig."
+ },
+ "adverb-318": {
+  "_src": "c82c9547",
+  "translation_pl": "niestety",
+  "example_pl": "Niestety musimy odwołać to wydarzenie.",
+  "usage_note_pl": "Brzmi bardziej oficjalnie niż leider."
+ },
+ "adverb-319": {
+  "_src": "5844cd0f",
+  "translation_pl": "w najlepszym razie",
+  "example_pl": "Tym samochodem pojedziemy w najlepszym razie 120 km/h.",
+  "usage_note_pl": "Przeciwieństwo: schlimmstenfalls. Nie mylić z bestens — doskonale."
+ },
+ "adverb-320": {
+  "_src": "186010ec",
+  "translation_pl": "między nimi, pośrodku; wśród nich; w międzyczasie, tymczasem",
+  "example_pl": "Po lewej stoi kanapa, po prawej szafa, a między nimi mały stolik.",
+  "usage_note_pl": "da + zwischen. Często część czasownika: dazwischenkommen — przeszkodzić: Mir ist etwas dazwischengekommen. — Coś mi wypadło (i plany się pokrzyżowały)."
+ },
+ "adverb-321": {
+  "_src": "d4dea95f",
+  "translation_pl": "w konsekwencji, dlatego",
+  "example_pl": "Droga była zamknięta, dlatego musieliśmy jechać objazdem.",
+  "notes_pl": [
+   "Synonim folglich, deshalb; częściej w języku pisanym.",
+   "W zdaniu względnym rozdzielnie: der Bericht, dem zufolge … — raport, zgodnie z którym …"
+  ]
+ },
+ "adverb-322": {
+  "_src": "dd233d68",
+  "translation_pl": "tak, aż tak, do tego stopnia",
+  "example_pl": "Film był tak nudny, że zasnąłem.",
+  "usage_note_pl": "Często z dass: derart …, dass — tak …, że. Synonim dermaßen. Przed rzeczownikiem — przymiotnik derartig: ein derartiger Fehler."
+ },
+ "adverb-323": {
+  "_src": "20d89277",
+  "translation_pl": "do tego stopnia, tak bardzo",
+  "example_pl": "Tak się zdenerwowałem, że nie mogłem już powiedzieć ani słowa.",
+  "usage_note_pl": "Często z dass. Synonim derart."
+ },
+ "adverb-324": {
+  "_src": "85588eee",
+  "translation_pl": "na nieszczęście, jak na złość; z głupoty",
+  "example_pl": "Jak na złość zostawiłem klucz w biurze.",
+  "usage_note_pl": "Dwa znaczenia: niefortunny zbieg okoliczności (= leider) i własna głupota: Ich habe ihm dummerweise alles erzählt. — Z głupoty wszystko mu powiedziałem."
+ },
+ "adverb-325": {
+  "_src": "4bfd14f9",
+  "translation_pl": "dawniej, wcześniej, kiedyś",
+  "example_pl": "W budynku, który dawniej stał pusty, są teraz mieszkania.",
+  "usage_note_pl": "Przed rzeczownikiem — przymiotnik ehemalig: der ehemalige Chef (nie ehemals Chef)."
+ },
+ "adverb-326": {
+  "_src": "54277aad",
+  "translation_pl": "w górę, wzwyż",
+  "example_pl": "Dym powoli unosił się ku niebu.",
+  "usage_note_pl": "Książk. Prawie zawsze część czasownika: emporsteigen (wznosić się), emporblicken (spoglądać w górę). Zwykle: hinauf, nach oben."
+ },
+ "adverb-327": {
+  "_src": "01467546",
+  "translation_pl": "po raz pierwszy",
+  "example_pl": "W tym roku festiwal po raz pierwszy odbywa się pod gołym niebem.",
+  "usage_note_pl": "Nie mylić z erst mal (pot. = najpierw). Przed rzeczownikiem — erstmalig: die erstmalige Teilnahme."
+ },
+ "adverb-328": {
+  "_src": "add4dfb6",
+  "translation_pl": "błędnie, przez pomyłkę",
+  "example_pl": "Przez pomyłkę wysłałem maila do wszystkich kolegów.",
+  "usage_note_pl": "Synonim irrtümlich, aus Versehen."
+ },
+ "adverb-329": {
+  "_src": "b05c9995",
+  "translation_pl": "w dół rzeki",
+  "example_pl": "Spokojnie płynęliśmy kajakiem w dół rzeki.",
+  "usage_note_pl": "Przeciwieństwo: flussaufwärts."
+ },
+ "adverb-330": {
+  "_src": "4e8574b6",
+  "translation_pl": "w górę rzeki",
+  "example_pl": "Jesienią łososie płyną w górę rzeki.",
+  "usage_note_pl": "Przeciwieństwo: flussabwärts."
+ },
+ "adverb-331": {
+  "_src": "43576acc",
+  "translation_pl": "od tej pory, odtąd",
+  "example_pl": "Po wypadku jeździł odtąd już tylko pociągiem.",
+  "usage_note_pl": "Książk. Zwykle: von nun an, ab jetzt."
+ },
+ "adverb-332": {
+  "_src": "b9733296",
+  "translation_pl": "co prawda, jednak, zresztą",
+  "example_pl": "Mieszkanie jest ładne, tyle że również dość drogie.",
+  "usage_note_pl": "Na południu Niemiec także odpowiedź oznaczająca zgodę: Kommst du mit? — Freilich! — Pewnie!"
+ },
+ "adverb-333": {
+  "_src": "6533baf3",
+  "translation_pl": "uprzejmie, z uprzejmości",
+  "example_pl": "Sąsiadka uprzejmie podlała nasze kwiaty.",
+  "usage_note_pl": "Często w prośbach i podziękowaniach: Könnten Sie mir freundlicherweise helfen? — Czy byłby Pan tak uprzejmy i mi pomógł?"
+ },
+ "adverb-334": {
+  "_src": "343ed299",
+  "translation_pl": "doprawdy, zaiste",
+  "example_pl": "To był doprawdy niezapomniany wieczór.",
+  "usage_note_pl": "Książk., brzmi staroświecko. Zwykle: wirklich, in der Tat."
+ },
+ "adverb-335": {
+  "_src": "d08c2dcb",
+  "translation_pl": "bądź łaskaw, łaskawie (w niegrzecznym żądaniu)",
+  "example_pl": "Bądź łaskaw zamknąć drzwi!",
+  "usage_note_pl": "Pot. Tylko w zirytowanych żądaniach, brzmi niegrzecznie — nie uprzejmie!"
+ },
+ "adverb-336": {
+  "_src": "fe9c1362",
+  "translation_pl": "prosto, wprost; bez ogródek",
+  "example_pl": "Po pracy poszła prosto do domu.",
+  "usage_note_pl": "Nie mylić z geradezu — wręcz, po prostu (wzmocnienie)."
+ },
+ "adverb-337": {
+  "_src": "74eb2981",
+  "translation_pl": "wręcz, po prostu, dosłownie; prosto, wprost",
+  "example_pl": "Widok stąd z góry jest wręcz fantastyczny.",
+  "usage_note_pl": "Wzmacnia następne słowo. „Prosto, wprost” (o kierunku, = gerade zu) — tylko w dawnych tekstach, np. u braci Grimm; dziś w tym znaczeniu mówi się geradewegs."
+ },
+ "adverb-338": {
+  "_src": "8016cd83",
+  "translation_pl": "w większości, głównie",
+  "example_pl": "Goście przyjechali w większości z zagranicy.",
+  "usage_note_pl": "O udziale, ilości. O częstotliwości — meistens."
+ },
+ "adverb-339": {
+  "_src": "5e716606",
+  "translation_pl": "mniej więcej, znośnie",
+  "example_pl": "Po przeprowadzce mieszkanie jest teraz mniej więcej urządzone.",
+  "usage_note_pl": "Synonim einigermaßen. Znaczenie „w połowie drogi” — przestarz."
+ },
+ "adverb-340": {
+  "_src": "8f3bfdb3",
+  "translation_pl": "stosami, masami, mnóstwo",
+  "example_pl": "Po burzy na drodze leżało mnóstwo gałęzi.",
+  "usage_note_pl": "Pot. Stoi bez końcówki przed rzeczownikiem, jak jede Menge."
+ },
+ "adverb-341": {
+  "_src": "0839ccdc",
+  "translation_pl": "na górę (z dołu tu, do mówiącego)",
+  "example_pl": "Z piwnicy aż tu na górę dochodził zapach świeżego chleba.",
+  "usage_note_pl": "her — do mówiącego, hin — od mówiącego: herauf — tu na górę, hinauf — tam na górę. Częściej część czasownika: heraufkommen. Pot.: rauf."
+ },
+ "adverb-342": {
+  "_src": "edd3733d",
+  "translation_pl": "tutaj (do mówiącego)",
+  "example_pl": "Kiedy zawołał, wszystkie dzieci zbiegły się do niego.",
+  "usage_note_pl": "Samo w sobie — prawie tylko w okrzykach. Częściej część czasownika: herbeirufen (przywoływać), herbeiführen (wywoływać, doprowadzać do czegoś)."
+ },
+ "adverb-343": {
+  "_src": "39bda77c",
+  "translation_pl": "na zewnątrz, naprzód (zza czegoś, spod czegoś)",
+  "example_pl": "Zza chmury wyjrzało słońce.",
+  "usage_note_pl": "Samo w sobie — książk. Zwykle część czasownika: hervorkommen (pojawiać się), hervorheben (podkreślać), hervorrufen (wywoływać)."
+ },
+ "adverb-344": {
+  "_src": "a10f4b66",
+  "translation_pl": "tutaj, właśnie tutaj",
+  "example_pl": "Postaw, proszę, skrzynkę tutaj, obok drzwi.",
+  "usage_note_pl": "Gdzie? — hier. Dokąd? — hierhin. Tu, do mnie — hierher. bis hierhin — do tego miejsca."
+ },
+ "adverb-345": {
+  "_src": "5e48c83f",
+  "translation_pl": "o tym; nad tym",
+  "example_pl": "O tym chciałbym porozmawiać na następnym posiedzeniu.",
+  "usage_note_pl": "hier + über — to samo co darüber, częściej w języku pisanym."
+ },
+ "adverb-346": {
+  "_src": "fac7de01",
+  "translation_pl": "do tego; w tym celu; w tej sprawie",
+  "example_pl": "Do ryby podaje się ryż, do tego pasuje wytrawne białe wino.",
+  "usage_note_pl": "hier + zu — to samo co dazu, częściej w języku pisanym. Hierzu gehören … — Należą tu …"
+ },
+ "adverb-347": {
+  "_src": "9a2487c7",
+  "translation_pl": "jeden za drugim, gęsiego; z rzędu",
+  "example_pl": "Dzieci szły jedno za drugim po wąskim moście.",
+  "usage_note_pl": "O czasie: dreimal hintereinander — trzy razy z rzędu, bez przerwy. nacheinander — po kolei, jeden po drugim (przerwy są możliwe)."
+ },
+ "adverb-348": {
+  "_src": "58f242f0",
+  "translation_pl": "tam, na drugą stronę; (pot.) zepsuty, zniszczony",
+  "example_pl": "Przepłynęliśmy na wyspę.",
+  "usage_note_pl": "Pot. rüber. hinüber — tam (od mówiącego), herüber — tu. Pot. hinüber sein — zepsuć się, przestać działać: Die Milch ist hinüber. — Mleko skwaśniało."
+ },
+ "adverb-349": {
+  "_src": "97470cf9",
+  "translation_pl": "najprawdopodobniej, według wszelkiego prawdopodobieństwa",
+  "example_pl": "Pociąg najprawdopodobniej znowu ma opóźnienie.",
+  "usage_note_pl": "Z sein i zdaniem podrzędnym — rozdzielnie: Es ist höchst wahrscheinlich, dass …"
+ },
+ "adverb-350": {
+  "_src": "84126fb5",
+  "translation_pl": "w tajemnicy, w głębi duszy, w duchu",
+  "example_pl": "W głębi duszy miała nadzieję, że on zadzwoni.",
+  "usage_note_pl": "Zwykle o myślach i uczuciach, których się nie okazuje."
+ },
+ "adverb-351": {
+  "_src": "2a9f4cff",
+  "translation_pl": "jak na ironię losu, o dziwo",
+  "example_pl": "Jak na ironię losu instruktora jazdy złapał fotoradar.",
+  "usage_note_pl": "Ocenia sytuację. Por. ironisch — ironicznie (o tym, jak coś powiedziano): etwas ironisch sagen."
+ },
+ "adverb-352": {
+  "_src": "3915fb1f",
+  "translation_pl": "w żadnym wypadku",
+  "example_pl": "Proszę w żadnym wypadku nie przyjmować leku na pusty żołądek.",
+  "usage_note_pl": "Mocne przeczenie, bez nicht. Por. keineswegs — wcale nie, bynajmniej."
+ },
+ "adverb-353": {
+  "_src": "b2f675db",
+  "translation_pl": "o dziwo, nie wiedzieć czemu",
+  "example_pl": "O dziwo, nikt dziś nie zadzwonił.",
+  "usage_note_pl": "Pot. Znaczy „dziwnie”, a nie „śmiesznie”. Neutralnie: seltsamerweise."
+ },
+ "adverb-354": {
+  "_src": "f94d293e",
+  "translation_pl": "ze swojej strony, jeśli chodzi o mnie",
+  "example_pl": "Jeśli chodzi o mnie, wolałbym zostać w domu.",
+  "usage_note_pl": "Odpowiedź: Ganz meinerseits! — Wzajemnie! Tak samo: deinerseits, seinerseits, ihrerseits, unsererseits."
+ },
+ "adverb-355": {
+  "_src": "cc3d79d9",
+  "translation_pl": "czasami, niekiedy",
+  "example_pl": "Niekiedy dojazd do pracy trwa ponad godzinę.",
+  "usage_note_pl": "Synonim manchmal, ab und zu; częściej w języku pisanym."
+ },
+ "adverb-356": {
+  "_src": "ad141fe3",
+  "translation_pl": "jeden po drugim, po kolei",
+  "example_pl": "Goście jeden po drugim wchodzili przez drzwi.",
+  "usage_note_pl": "nach + einander. Z czasownikami z nach: sich nacheinander sehnen — tęsknić za sobą nawzajem. Por. hintereinander — z rzędu, jeden za drugim."
+ },
+ "adverb-357": {
+  "_src": "35cfdc80",
+  "translation_pl": "niemniej jednak, mimo to",
+  "example_pl": "Cały dzień padało, niemniej jednak nastrój był dobry.",
+  "notes_pl": [
+   "Pot., żartobliwe połączenie nichtsdestoweniger i trotzdem. Neutralnie: trotzdem."
+  ]
+ },
+ "adverb-358": {
+  "_src": "be30df06",
+  "translation_pl": "nigdzie, donikąd",
+  "example_pl": "Dziś mam wolne i nigdzie nie muszę iść.",
+  "usage_note_pl": "Dokąd? — nirgendwohin. Gdzie? — nirgendwo, nirgends. Bez nicht."
+ },
+ "adverb-359": {
+  "_src": "499dd875",
+  "translation_pl": "teraz, już; odtąd",
+  "example_pl": "Sklep istnieje już od pięćdziesięciu lat.",
+  "usage_note_pl": "Książk. Zwykle: jetzt, nun."
+ },
+ "adverb-360": {
+  "_src": "359e1d27",
+  "translation_pl": "do tego, w dodatku",
+  "example_pl": "Spóźnił się i w dodatku zapomniał swoich dokumentów.",
+  "usage_note_pl": "Często o czymś nieprzyjemnym ponad to, co już powiedziano; często z noch."
+ },
+ "adverb-361": {
+  "_src": "9e89ab56",
+  "translation_pl": "jak najszybciej, natychmiast",
+  "example_pl": "W czasie burzy należy jak najszybciej wyjść z wody."
+ },
+ "adverb-362": {
+  "_src": "2b0e62ea",
+  "translation_pl": "w najgorszym razie",
+  "example_pl": "W najgorszym razie będziemy musieli przełożyć wyjazd.",
+  "usage_note_pl": "Przeciwieństwo: bestenfalls."
+ },
+ "adverb-363": {
+  "_src": "018e1d0c",
+  "translation_pl": "swego czasu, wtedy",
+  "example_pl": "W tamtych czasach w naszej wsi nie było jeszcze supermarketu.",
+  "usage_note_pl": "O przeszłości. Synonim damals."
+ },
+ "adverb-364": {
+  "_src": "c73cba16",
+  "translation_pl": "od tamtej pory",
+  "example_pl": "Pokłóciliśmy się dwa lata temu i od tamtej pory już ze sobą nie rozmawialiśmy.",
+  "usage_note_pl": "Tylko przysłówek. seitdem bywa też spójnikiem: seitdem ich hier wohne (ale nie seither ich …)."
+ },
+ "adverb-365": {
+  "_src": "7c9e1e6e",
+  "translation_pl": "o dziwo, dziwnym trafem",
+  "example_pl": "O dziwo, w sobotę sklep był zamknięty.",
+  "usage_note_pl": "Potoczny synonim: komischerweise."
+ },
+ "adverb-366": {
+  "_src": "fd413bf0",
+  "translation_pl": "dopiero co; właśnie teraz",
+  "example_pl": "Autobus dopiero co odjechał.",
+  "usage_note_pl": "Częściej w języku pisanym niż gerade, eben. Rozdzielnie so eben — ledwo ledwo: so eben noch geschafft."
+ },
+ "adverb-367": {
+  "_src": "4b932b85",
+  "translation_pl": "tonami",
+  "example_pl": "W supermarketach żywność wyrzuca się tonami.",
+  "usage_note_pl": "Często w przenośni — „bardzo dużo”. Tak samo: kiloweise, stückweise."
+ },
+ "adverb-368": {
+  "_src": "7dcab2f9",
+  "translation_pl": "niestety, co smutne",
+  "example_pl": "Niestety w sytuacji nic się nie zmieniło.",
+  "usage_note_pl": "Ocenia sytuację (= leider). Por. traurig — smutno (jak): traurig schauen."
+ },
+ "adverb-369": {
+  "_src": "eb5e2d5f",
+  "translation_pl": "niezwykle, w najwyższym stopniu",
+  "example_pl": "Nowa koleżanka jest niezwykle miła.",
+  "usage_note_pl": "Książk. Zwykle przed przymiotnikiem. Nie mylić z durchaus — całkiem."
+ },
+ "adverb-370": {
+  "_src": "a2a0e2b2",
+  "translation_pl": "wokół, dookoła",
+  "example_pl": "Wszędzie dookoła panowała cisza.",
+  "usage_note_pl": "Samo w sobie — książk., często rings umher — dookoła. Częściej część czasownika: umhergehen (chodzić tam i z powrotem), umherliegen (walać się wszędzie)."
+ },
+ "adverb-371": {
+  "_src": "af3515d0",
+  "translation_pl": "na nieszczęście, niestety",
+  "example_pl": "Na nieszczęście zaczęło padać akurat podczas grillowania.",
+  "usage_note_pl": "Przeciwieństwo: glücklicherweise."
+ },
+ "adverb-372": {
+  "_src": "e33b9b20",
+  "translation_pl": "tymczasem, w międzyczasie",
+  "example_pl": "Ja ugotuję jedzenie, a ty tymczasem możesz nakryć do stołu.",
+  "usage_note_pl": "Synonim inzwischen, währenddessen."
+ },
+ "adverb-373": {
+  "_src": "d29e6c6d",
+  "translation_pl": "na próżno, na darmo, daremnie",
+  "example_pl": "Na próżno czekaliśmy na telefon.",
+  "usage_note_pl": "Także po sein: Alle Mühe war vergebens. Przed rzeczownikiem — vergeblich: ein vergeblicher Versuch."
+ },
+ "adverb-374": {
+  "_src": "f9d78ba3",
+  "translation_pl": "bardzo, serdecznie (w podziękowaniach, przeprosinach)",
+  "example_pl": "Bardzo ci dziękuję za pomoc.",
+  "usage_note_pl": "Prawie tylko w zwrotach grzecznościowych: Danke vielmals! — Bardzo dziękuję! Entschuldigen Sie vielmals! — Bardzo przepraszam! Znaczenie „wiele razy” — rzadko."
+ },
+ "adverb-375": {
+  "_src": "49197472",
+  "translation_pl": "z wyprzedzeniem, z góry; najpierw, na początek",
+  "example_pl": "Bilety trzeba kupić z wyprzedzeniem przez internet.",
+  "usage_note_pl": "Często w listach: Vielen Dank vorab! — Z góry dziękuję!"
+ },
+ "adverb-376": {
+  "_src": "71ebffec",
+  "translation_pl": "na wszelki wypadek",
+  "example_pl": "Na wszelki wypadek wezmę sweter.",
+  "usage_note_pl": "Znaczy „na wszelki wypadek”, a nie „ostrożnie” (vorsichtig)."
+ },
+ "adverb-377": {
+  "_src": "af60ba02",
+  "translation_pl": "tymczasem, w tym czasie",
+  "example_pl": "Rodzice robili zakupy, a dzieci w tym czasie bawiły się w parku.",
+  "usage_note_pl": "Przysłówek: po nim czasownik stoi na drugim miejscu (Währenddessen spielten …). Spójnik während — czasownik na końcu."
+ },
+ "adverb-378": {
+  "_src": "d649f120",
+  "translation_pl": "naprawdę, doprawdy",
+  "example_pl": "To była doprawdy niełatwa decyzja.",
+  "usage_note_pl": "Wyraz książkowy, wychodzący z użycia; brzmi uroczyście. Zwykle: wirklich."
+ },
+ "adverb-379": {
+  "_src": "e27b67f1",
+  "translation_pl": "o wiele, znacznie; zdecydowanie (naj…)",
+  "example_pl": "Nowy model jest o wiele cichszy od starego.",
+  "usage_note_pl": "Tylko przed stopniem wyższym lub najwyższym: weitaus besser, der weitaus beste."
+ },
+ "adverb-380": {
+  "_src": "4404eacd",
+  "translation_pl": "przy czym (w zdaniu podrzędnym); przy czym (pytanie); chociaż, co prawda",
+  "example_pl": "Opowiadał o swojej podróży, pokazując przy tym wiele zdjęć.",
+  "usage_note_pl": "wo + bei: w zdaniu podrzędnym czasownik na końcu. Pytanie: Wobei hast du dich verletzt? — Jak się skaleczyłeś? Pot. na początku zdania — „chociaż, co prawda”: Wobei: das könnte teuer werden."
+ },
+ "adverb-381": {
+  "_src": "271154bb",
+  "translation_pl": "przez co, w wyniku czego; czym, jak",
+  "example_pl": "Pociąg miał opóźnienie, przez co spóźniliśmy się na przesiadkę.",
+  "usage_note_pl": "wo + durch: w zdaniu podrzędnym czasownik na końcu. Pytanie: Wodurch ist der Schaden entstanden? — Co spowodowało szkodę? O ludziach: durch wen."
+ },
+ "adverb-382": {
+  "_src": "9c807aec",
+  "translation_pl": "w czym; w którym, gdzie",
+  "example_pl": "Na czym polega różnica między tymi dwiema taryfami?",
+  "usage_note_pl": "wo + in. Często z bestehen, liegen: Worin besteht das Problem? W zdaniu względnym: das Haus, worin sie wohnte — dom, w którym mieszkała. O ludziach: in wem."
+ },
+ "adverb-383": {
+  "_src": "d17eff37",
+  "translation_pl": "chwilami, od czasu do czasu; czasowo, przez jakiś czas",
+  "example_pl": "Po południu chwilami słonecznie.",
+  "usage_note_pl": "Przed rzeczownikiem zwykle — zeitweilig: eine zeitweilige Störung."
+ },
+ "adverb-384": {
+  "_src": "4b5d5c85",
+  "translation_pl": "przypadkiem",
+  "example_pl": "Przypadkiem spotkałem w pociągu swojego dawnego nauczyciela.",
+  "usage_note_pl": "Synonim zufällig. Grzeczne pytanie: Weißt du zufälligerweise, wo …? — Nie wiesz przypadkiem, gdzie …?"
+ },
+ "adverb-385": {
+  "_src": "0581c148",
+  "translation_pl": "czasami, niekiedy",
+  "example_pl": "Czasami tęsknię za życiem na wsi.",
+  "usage_note_pl": "Książk. Zwykle: manchmal."
+ },
+ "adverb-386": {
+  "_src": "951c80de",
+  "translation_pl": "niewątpliwie, bez wątpienia",
+  "example_pl": "To niewątpliwie najlepsza restauracja w mieście.",
+  "usage_note_pl": "Synonim zweifellos, brzmi dobitniej."
+ },
+ "adverb-387": {
+  "_src": "2d69bacd",
+  "translation_pl": "najwidoczniej, jak się zdaje",
+  "example_pl": "Najwidoczniej zapomniał o spotkaniu — nie przyszedł.",
+  "usage_note_pl": "Nie mylić ze scheinbar: anscheinend — „wszystko wskazuje, że tak jest”, scheinbar — „tylko się wydaje, a naprawdę tak nie jest”."
+ },
+ "adverb-388": {
+  "_src": "39bdefb2",
+  "translation_pl": "na pewno, z pewnością",
+  "example_pl": "Jeśli teraz nie wyjdziemy, na pewno spóźnimy się na autobus.",
+  "usage_note_pl": "Wyraz potoczny. „Gwarantowany” (garantierte Qualität) — forma czasownika garantieren."
+ },
+ "adverb-389": {
+  "_src": "d4331c88",
+  "translation_pl": "na żywo (w transmisji); na żywo, osobiście",
+  "example_pl": "Dziś wieczorem telewizja pokaże finał na żywo.",
+  "usage_note_pl": "Nie odmienia się. W Dudenie — nieodmienny przymiotnik; przed rzeczownikiem pisze się łącznie lub z łącznikiem: das Livekonzert / Live-Konzert."
+ },
+ "adverb-390": {
+  "_src": "d58a78aa",
+  "translation_pl": "solo, solowo; sam, bez pary",
+  "example_pl": "Po dziesięciu latach w zespole piosenkarka chce teraz występować solo.",
+  "usage_note_pl": "Nie odmienia się. W Dudenie — nieodmienny przymiotnik. W znaczeniu „sam, bez pary” — potocznie, często żartobliwie: Ich bin zurzeit solo. Rzeczownik das Solo — osobne hasło."
+ },
+ "adverb-391": {
+  "_src": "5512bee6",
+  "translation_pl": "oczywiście, niewątpliwie, na pewno",
+  "example_pl": "Twoi rodzice na pewno już się martwią, lepiej do nich zadzwoń.",
+  "usage_note_pl": "Aber gewiss! — Ależ oczywiście!"
+ },
+ "adverb-392": {
+  "_src": "7a154d73",
+  "translation_pl": "rozsądnie, przezornie",
+  "example_pl": "Stary młynarz przezornie zabrał trochę chleba na daleką drogę.",
+  "usage_note_pl": "Wyraz przestarzały."
+ },
+ "adverb-393": {
+  "_src": "429906c8",
+  "translation_pl": "w dół; precz (w okrzykach, hasłach)",
+  "example_pl": "Dzieci godzinami skakały na trampolinie w górę i w dół.",
+  "usage_note_pl": "Zwykle w połączeniach: auf und nieder — w górę i w dół; Nieder mit …! — Precz z …!"
+ },
+ "adverb-394": {
+  "_src": "1ea18702",
+  "translation_pl": "przeważnie, głównie",
+  "example_pl": "W naszej dzielnicy mieszkają przeważnie młode rodziny z dziećmi."
+ },
+ "adverb-395": {
+  "_src": "ced67f1d",
+  "translation_pl": "niewątpliwie, bez wątpienia",
+  "example_pl": "To był niewątpliwie najpiękniejszy urlop w naszym życiu."
+ },
+ "adverb-396": {
+  "_src": "ea54238c",
+  "translation_pl": "w przybliżeniu, prawie",
+  "example_pl": "Naprawa samochodu kosztowała prawie trzysta euro.",
+  "usage_note_pl": "Rzadziej przed rzeczownikiem: eine annähernde Schätzung — przybliżone oszacowanie."
+ },
+ "adverb-397": {
+  "_src": "8bfb506a",
+  "translation_pl": "w ostatecznym rozrachunku, koniec końców",
+  "example_pl": "W ostatecznym rozrachunku sam musisz zdecydować, która praca bardziej ci odpowiada.",
+  "usage_note_pl": "Synonimy: schließlich, schlussendlich. Rzadko przed rzeczownikiem: die letztendliche Entscheidung — ostateczna decyzja."
+ },
+ "adverb-398": {
+  "_src": "ae7823b9",
+  "translation_pl": "wyjątkowo, bardzo, w najwyższym stopniu",
+  "example_pl": "Oferta brzmi wyjątkowo interesująco, ale muszę się jeszcze zastanowić.",
+  "usage_note_pl": "Stoi przed przymiotnikiem lub przysłówkiem: höchst gefährlich. „Najwyższy” — to stopień najwyższy od hoch: der höchste Berg, am höchsten (zob. hasło hoch)."
+ },
+ "adverb-399": {
+  "_src": "454c9a92",
+  "translation_pl": "we własnej osobie, osobiście",
+  "example_pl": "Na moje urodziny złożył mi życzenia sam szef we własnej osobie.",
+  "usage_note_pl": "Podkreśla, że ktoś (często ważny) zrobił coś sam, choć się tego nie spodziewano. Nie mylić: höchst persönlich — ściśle osobisty."
+ },
+ "adverb-400": {
+  "_src": "96621979",
+  "translation_pl": "pod przykrywką, potajemnie",
+  "example_pl": "Jego kolega przez lata pracował jako policjant pod przykrywką.",
+  "usage_note_pl": "Nie odmienia się."
+ },
+ "adverb-401": {
+  "_src": "8712506a",
+  "translation_pl": "do woli, obficie, pod dostatkiem; dość, sporo, zbyt; ponad, z okładem",
+  "example_pl": "Częstuj się śmiało, w garnku jest jeszcze pod dostatkiem zupy dla wszystkich.",
+  "usage_note_pl": "W znaczeniu „dość, zbyt” (przed przymiotnikiem) — potocznie: reichlich teuer — trochę za drogo. Z liczbą: reichlich drei Stunden — dobre trzy godziny, ponad trzy godziny."
+ },
+ "adverb-402": {
+  "_src": "736301eb",
+  "translation_pl": "bez szwanku, bez uszkodzeń, w całości",
+  "example_pl": "Mimo wyboistej drogi wszystkie kieliszki dotarły do nas w całości.",
+  "usage_note_pl": "Także przyimek z Genitivem: unbeschadet der neuen Regeln — mimo nowych zasad."
+ },
+ "adverb-403": {
+  "_src": "48deed35",
+  "translation_pl": "bezkarnie",
+  "example_pl": "U tej nauczycielki nikt nie może bezkarnie bawić się na lekcji telefonem."
+ },
+ "adverb-404": {
+  "_src": "f7ca74ca",
+  "translation_pl": "rzeczywiście, naprawdę",
+  "example_pl": "To było naprawdę najlepsze jedzenie, jakie kiedykolwiek jadłem."
+ },
+ "adverb-405": {
+  "_src": "749b1682",
+  "translation_pl": "z poważaniem, z wyrazami szacunku (na końcu oficjalnego listu)",
+  "example_pl": "Dziś prawie nikt już nie pisze „z poważaniem” na końcu listu handlowego.",
+  "usage_note_pl": "Formuła grzecznościowa na końcu oficjalnego listu; dziś zwykle pisze się Mit freundlichen Grüßen."
+ },
+ "adverb-406": {
+  "_src": "20780d1a",
+  "translation_pl": "ściśle biorąc, właściwie",
+  "example_pl": "Ściśle biorąc, znamy się dopiero od trzech tygodni.",
+  "usage_note_pl": "Duden zaleca pisownię rozdzielną: genau genommen. Podobnie: streng genommen, eigentlich."
+ },
+ "adverb-407": {
+  "_src": "c6db639c",
+  "translation_pl": "przez, na wylot; w ciągu, przez (cały)",
+  "example_pl": "Słońce przebijało się przez gęste chmury.",
+  "usage_note_pl": "W znaczeniu przestrzennym — w konstrukcji durch + Akkusativ + hindurch: durch den Park hindurch — (prosto) przez park. O czasie — po rzeczowniku w Akkusativie: den ganzen Tag hindurch — cały dzień, przez cały dzień. Także przedrostek czasowników: hindurchgehen."
+ },
+ "adverb-408": {
+  "_src": "fdf256b1",
+  "translation_pl": "w stanie, zdolny",
+  "example_pl": "Po długiej nocnej zmianie ledwo byłem w stanie utrzymać otwarte oczy.",
+  "usage_note_pl": "Zwykle z sein (także sich imstande fühlen): imstande sein, etwas zu tun / zu etwas imstande sein — być w stanie (coś zrobić). Ironicznie: er ist imstande und … — on gotów (zrobić coś głupiego). Także: im Stande."
+ },
+ "adverb-409": {
+  "_src": "546ec88a",
+  "translation_pl": "nie móc nie (zrobić czegoś), nie powstrzymać się (od czegoś)",
+  "example_pl": "Na ten widok nie mogła się nie roześmiać na głos.",
+  "usage_note_pl": "Tylko z können / kommen i zwykle z przeczeniem (nicht, kaum): nicht umhinkönnen / nicht umhinkommen, etwas zu tun — nie móc nie zrobić czegoś. Bezokolicznik pisze się łącznie; w zdaniu: ich kann nicht umhin, …"
+ },
+ "adverb-410": {
+  "_src": "33ecf445",
+  "translation_pl": "online, przez internet; w sieci",
+  "example_pl": "Wczoraj wieczorem zamówiłem bilety do kina online.",
+  "usage_note_pl": "Nie odmienia się. online sein — być w sieci; online gehen — połączyć się z internetem. Przed rzeczownikiem — łącznie: der Onlineshop (Online-Shop). Przeciwieństwo: offline."
+ },
+ "adverb-411": {
+  "_src": "8259f944",
+  "translation_pl": "osobno, oddzielnie, z dala od siebie",
+  "example_pl": "Nasze urodziny dzielą tylko dwa dni.",
+  "usage_note_pl": "Część czasowników rozdzielnych: auseinandernehmen — rozbierać (na części), auseinanderfallen — rozpadać się, sich auseinandersetzen — zajmować się (czymś). Potocznie: auseinander sein — rozstać się (o parze)."
+ },
+ "adverb-412": {
+  "_src": "1e39dca5",
+  "translation_pl": "za darmo",
+  "example_pl": "Do każdej kawy dostaje się tu za darmo małe ciasteczko.",
+  "usage_note_pl": "Nie odmienia się. Przed rzeczownikiem — kostenlos (eine kostenlose Probe) lub łącznie: die Gratisprobe."
+ },
+ "adverb-413": {
+  "_src": "90de1343",
+  "translation_pl": "przeze mnie, ze względu na mnie; jak dla mnie, niech będzie (nie mam nic przeciwko); na przykład",
+  "example_pl": "Proszę, nie zmieniajcie przeze mnie swoich planów, sam sobie poradzę.",
+  "usage_note_pl": "W znaczeniu „jak dla mnie, nie mam nic przeciwko” — potocznie: Meinetwegen! — Niech będzie, nie mam nic przeciwko. Tak samo: deinetwegen, seinetwegen, ihretwegen, unseretwegen, euretwegen."
+ },
+ "adverb-414": {
+  "_src": "3c0544b2",
+  "translation_pl": "minus; poniżej zera",
+  "example_pl": "Dziś w nocy ma być do minus dziesięciu stopni.",
+  "usage_note_pl": "W rachunkach (spójnik): zehn minus vier ist sechs — dziesięć minus cztery równa się sześć. W języku handlowym (przyimek) — po odliczeniu: der Preis minus Rabatt. O ocenie: eine Zwei minus — „2” (dobry) z minusem. Rzeczownik: das Minus — minus, deficyt."
+ },
+ "adverb-415": {
+  "_src": "bc34883d",
+  "translation_pl": "plus; powyżej zera",
+  "example_pl": "Nawet w styczniu w dzień mieliśmy zwykle plus trzy stopnie.",
+  "usage_note_pl": "W rachunkach (spójnik): zwei plus zwei ist vier — dwa plus dwa równa się cztery. W języku handlowym (przyimek) — plus, z doliczeniem: der Preis plus Versand. O ocenie: eine Zwei plus — „2” (dobry) z plusem. Rzeczownik: das Plus — plus, zaleta; zysk."
+ },
+ "adverb-416": {
+  "_src": "624d14b8",
+  "translation_pl": "do środka, tam (od mówiącego); (bis in … hinein) aż do (także o czasie)",
+  "example_pl": "Drzwi były otwarte, więc po prostu wszedłem do środka.",
+  "usage_note_pl": "hin — od mówiącego: hinein — do środka, tam; herein — do środka, tu (do mówiącego). Potocznie: rein. Część czasowników: hineingehen, hineinschauen. bis spät in die Nacht hinein — do późnej nocy."
+ },
+ "adverb-417": {
+  "_src": "78dd2f40",
+  "translation_pl": "wokół, dookoła; około, mniej więcej; minęło, upłynęło (o czasie)",
+  "example_pl": "Wieczorem dzieci siedzą wokół ogniska i śpiewają.",
+  "usage_note_pl": "Często z um: um den Tisch herum — wokół stołu. W znaczeniu „około”: um fünf herum — około piątej (potocznie). Część czasowników: herumlaufen — biegać tu i tam, herumliegen — walać się. Die Woche ist herum. — Tydzień minął. Potocznie: rum (rumlaufen)."
+ },
+ "adverb-418": {
+  "_src": "3dcda783",
+  "translation_pl": "na drugą stronę, tam; tu, do nas",
+  "example_pl": "Chodź, szybko przejdziemy na drugą stronę ulicy.",
+  "usage_note_pl": "Wyraz potoczny. = hinüber (tam, od mówiącego) / herüber (tu, do mówiącego). Część czasowników: rüberkommen, rübergehen, rüberreichen."
+ },
+ "adverb-419": {
+  "_src": "c68c97cc",
+  "translation_pl": "na dół",
+  "example_pl": "Po śniadaniu szybko zniosę śmieci na dół.",
+  "usage_note_pl": "Wyraz potoczny. = hinunter (na dół, od mówiącego) / herunter (na dół, do mówiącego). Część czasowników: runterfallen, runterkommen. Köpfe runter! — Schylcie głowy!"
+ },
+ "adverb-420": {
+  "_src": "1353eb14",
+  "translation_pl": "z (jakąś) miną (w dreinschauen, dreinblicken); tam, w to (= darein)",
+  "example_pl": "Czemu masz dziś rano taką ponurą minę?",
+  "usage_note_pl": "Najczęściej jako część czasowników: traurig / verängstigt dreinschauen, dreinblicken — patrzeć smutno / ze strachem; dreinreden — wtrącać się (do rozmowy); sich dreinfinden — pogodzić się. W znaczeniu „tam, w to” (= darein) — potocznie."
+ },
+ "adverb-421": {
+  "_src": "b6242649",
+  "translation_pl": "w tym, w nim (wewnątrz); w tym (względzie)",
+  "example_pl": "Znalazłem starą walizkę, w środku leżały listy mojej babci.",
+  "usage_note_pl": "Zastępuje in + rzecz (gdzie?): im Koffer → darin; o ludziach — in + zaimek. Darin hast du recht. — W tym masz rację. Potocznie: drin. Dokąd? → hinein, darein."
+ },
+ "adverb-422": {
+  "_src": "22153d37",
+  "translation_pl": "z tego, z niego (stamtąd); z tego (o wniosku, materiale, źródle)",
+  "example_pl": "W szafie stoi skrzynka, weź sobie z niej, czego potrzebujesz.",
+  "usage_note_pl": "Zastępuje aus + rzecz; o ludziach — aus + zaimek. Was wird daraus? — Co z tego wyniknie? Daraus wird nichts. — Nic z tego nie będzie. Potocznie: draus."
+ },
+ "adverb-423": {
+  "_src": "e8900395",
+  "translation_pl": "na to, na tym (tutaj); po tym, następnie; wskutek tego",
+  "example_pl": "Niestety nie mogę ci dać na to jasnej odpowiedzi.",
+  "usage_note_pl": "Zastępuje auf + rzecz (jak darauf, ale z hier — „właśnie na to”); o ludziach — auf + zaimek. W opowiadaniach często: Hierauf ging er fort. — Po tym (następnie) odszedł."
+ },
+ "adverb-424": {
+  "_src": "757e7478",
+  "translation_pl": "następnie, potem; później",
+  "example_pl": "Najpierw spokojnie zjemy obiad, a potem pójdziemy na spacer.",
+  "usage_note_pl": "Wyraz regionalny; częsty w baśniach. Zwykle mówi się danach, nachher."
+ },
+ "adverb-425": {
+  "_src": "c8edeb86",
+  "translation_pl": "od razu, natychmiast",
+  "example_pl": "Przeczytała list od siostry i natychmiast odpowiedziała.",
+  "usage_note_pl": "= sofort."
+ },
+ "adverb-426": {
+  "_src": "490cce58",
+  "translation_pl": "za każdym razem",
+  "example_pl": "Moja babcia za każdym razem piecze ciasto, kiedy ją odwiedzamy.",
+  "usage_note_pl": "Pisze się rozdzielnie; dawna pisownia (przed 1996, w starszych książkach): jedesmal. jedes Mal, wenn … — za każdym razem, gdy …"
+ },
+ "adverb-427": {
+  "_src": "5cf4cff4",
+  "translation_pl": "zwykle, najczęściej; w większości",
+  "example_pl": "W weekendy zwykle śpię do dziewiątej.",
+  "usage_note_pl": "= meistens. Nie mylić: die meisten Leute — większość ludzi (stopień najwyższy od viel, osobne hasło)."
+ },
+ "adverb-428": {
+  "_src": "94dd5c21",
+  "translation_pl": "całkowicie, ostatecznie",
+  "example_pl": "Po drugiej burzy nasz ogród był całkowicie zalany."
+ },
+ "adverb-429": {
+  "_src": "c7b79c94",
+  "translation_pl": "akurat, właśnie (z irytacją lub zdziwieniem)",
+  "example_pl": "Dlaczego musi padać akurat w weekend?",
+  "usage_note_pl": "Wyraz potoczny. Także o czymś mało prawdopodobnym: Warum sollte ausgerechnet er gewinnen? — Dlaczego akurat on miałby wygrać? Nie mylić z formą czasownika ausrechnen: Ich habe die Kosten ausgerechnet. — Obliczyłem koszty."
+ },
+ "adverb-430": {
+  "_src": "092b1898",
+  "translation_pl": "prosto, wprost; od razu, bez zbędnych słów",
+  "example_pl": "Ledwie film się skończył, pomaszerowała prosto do łóżka.",
+  "usage_note_pl": "Wyraz potoczny."
+ },
+ "adverb-431": {
+  "_src": "9728e04a",
+  "translation_pl": "i tak, tak czy owak; (seit eh und je, wie eh und je) od niepamiętnych czasów, jak zawsze; (przestarz., spójnik = ehe) zanim",
+  "example_pl": "Weź śmiało parasol, i tak go nie potrzebuję.",
+  "usage_note_pl": "W znaczeniu „i tak” — potocznie (południe Niemiec, Austria) = sowieso. seit eh und je — od niepamiętnych czasów; wie eh und je — jak zawsze. Jako spójnik (przestarz.) eh = ehe „zanim”: eh ich gehe — zanim wyjdę."
+ },
+ "adverb-432": {
+  "_src": "3caaba87",
+  "translation_pl": "niewątpliwie, z pewnością",
+  "example_pl": "Stary ksiądz powiedział: „Bóg z pewnością wam pomoże”.",
+  "usage_note_pl": "Wyraz wychodzący z użycia. Zwykle: gewiss, bestimmt. Dawna pisownia: gewißlich."
+ },
+ "adverb-433": {
+  "_src": "0801f24c",
+  "translation_pl": "tysiąc razy, sto razy (bardzo często); tysiąc razy, o wiele (+ stopień wyższy)",
+  "example_pl": "Już tysiąc razy ci mówiłem, że masz zamykać drzwi.",
+  "usage_note_pl": "W znaczeniu „bardzo często; o wiele” — potocznie: Das ist tausendmal besser. — To jest tysiąc razy lepsze."
+ },
+ "adverb-434": {
+  "_src": "491bc244",
+  "translation_pl": "tam, w to (do środka); z tym (sich darein fügen — pogodzić się z tym)",
+  "example_pl": "Znalazła puste pudło i włożyła do niego stare listy.",
+  "usage_note_pl": "Wyraz podniosły, wychodzący z użycia. Dziś zwykle: hinein, da hinein. Potocznie: drein; w czasownikach dreinschauen, dreinblicken — patrzeć (z jakąś miną): verängstigt dreinschauen — patrzeć ze strachem."
+ },
+ "adverb-435": {
+  "_src": "dee9eab2",
+  "translation_pl": "na to, na niego (na tym, na nim); po tym, potem; w odpowiedzi na to, wskutek tego",
+  "example_pl": "Krzesło jest zepsute, proszę, nie siadaj na nim.",
+  "usage_note_pl": "Zastępuje auf + rzecz; o ludziach — auf + zaimek (auf ihn). Z czasownikami i przymiotnikami z auf: stolz darauf — dumny z tego, sich darauf freuen — z radością na to czekać, warten darauf — czekać na to. Znaczenie „potem”: bald darauf — wkrótce potem, ein Jahr darauf — rok później. Potocznie: drauf."
+ },
+ "adverb-436": {
+  "_src": "e0449468",
+  "translation_pl": "za dużo",
+  "example_pl": "Wczoraj wieczorem zdecydowanie za dużo zjadłem.",
+  "usage_note_pl": "Pisze się rozdzielnie; dawna pisownia (przed 1996, w starszych książkach): zuviel. Z rzeczownikami policzalnymi w lm: zu viele Leute — zbyt wielu ludzi. Rzeczownik: das Zuviel — nadmiar."
+ },
+ "adverb-437": {
+  "_src": "0ca79772",
+  "translation_pl": "o tym, o nim (myśleć, pamiętać), w to (wierzyć); na tym, na nim, za to (trzymać się)",
+  "example_pl": "Pamiętaj, proszę, żeby zamknąć drzwi na klucz.",
+  "usage_note_pl": "Zastępuje an + rzecz; o ludziach — an + zaimek (an ihn). Z czasownikami i przymiotnikami z an: daran denken — pamiętać o tym, daran glauben — wierzyć w to, daran arbeiten — pracować nad tym, interessiert daran — zainteresowany tym. Es liegt daran, dass … — Rzecz w tym, że … Potocznie: dran."
+ },
+ "adverb-438": {
+  "_src": "50726821",
+  "translation_pl": "dlatego, z tego powodu; o to (prosić, troszczyć się); wokół tego",
+  "example_pl": "Byłem chory, dlatego nie mogłem przyjść.",
+  "usage_note_pl": "Zastępuje um + rzecz; o ludziach — um + zaimek (um ihn). Z czasownikami z um: darum bitten — prosić o to, sich darum kümmern — zatroszczyć się o to. Es geht darum, dass … — Chodzi o to, że … Darum! — Bo tak! Potocznie: drum."
+ },
+ "adverb-439": {
+  "_src": "166d6df1",
+  "translation_pl": "pod tym, pod nim (pod to); wśród nich, w tym; (o wielkości) mniej, niżej",
+  "example_pl": "Podniósł dywan i znalazł pod nim stary klucz.",
+  "usage_note_pl": "Zastępuje unter + rzecz; o ludziach — unter + zaimek (unter ihm). Wśród nich: viele Gäste, darunter auch der Bürgermeister — wielu gości, w tym również burmistrz. Was verstehst du darunter? — Co przez to rozumiesz? Z czasownikami z unter: darunter leiden — cierpieć z tego powodu. Potocznie: drunter."
+ },
+ "adverb-440": {
+  "_src": "cc481e64",
+  "translation_pl": "o tym, o nim (mówić, wiedzieć); od tego, od niego, z tego; z nich (część)",
+  "example_pl": "O tym nigdy nie słyszałem.",
+  "usage_note_pl": "Zastępuje von + rzecz; o ludziach — von + zaimek (von ihm). Z czasownikami i przymiotnikami z von: davon sprechen — mówić o tym, davon träumen — marzyć o tym, davon abhängen — zależeć od tego, davon überzeugt — przekonany o tym. Część: Zwei davon sind kaputt. — Dwa z nich są zepsute. Nie mylić: davonlaufen, davonfahren — partykuła „precz”."
+ },
+ "adverb-441": {
+  "_src": "4ae24151",
+  "translation_pl": "na to, do tego (powiedzieć, dodać); w tym celu; poza tym, w dodatku",
+  "example_pl": "Co na to powiesz?",
+  "usage_note_pl": "Zastępuje zu + rzecz; o ludziach — zu + zaimek (zu ihm). W tym celu: Dazu braucht man viel Geduld. — Do tego potrzeba dużo cierpliwości. Ich habe keine Lust dazu. — Nie mam na to ochoty. Ich bin nicht dazu gekommen. — Nie zdążyłem. noch dazu — w dodatku. Nie mylić: dazugehören, dazukommen — partykuła."
+ },
+ "adverb-442": {
+  "_src": "77dc321f",
+  "translation_pl": "o czym, za co, na czym, nad czym (pytanie); po czym (rozpoznać)",
+  "example_pl": "O czym teraz myślisz?",
+  "usage_note_pl": "wo + an: pytanie o rzecz przy czasownikach z an: denken an → Woran denkst du? Woran arbeitest du? — Nad czym pracujesz? Woran liegt das? — Z czego to wynika? Woran erkennt man …? — Po czym poznać …? O ludziach: An wen …? Odpowiedź: daran."
+ },
+ "adverb-443": {
+  "_src": "32f496c4",
+  "translation_pl": "(pot.) o tym (myśleć, pamiętać); na tym, na nim, do tego (= daran); (an etwas ist etwas dran) coś w tym jest; (dran sein) (czyjaś) kolej",
+  "example_pl": "Pamiętaj, jutro znowu szkoła!",
+  "usage_note_pl": "Potoczna forma od daran. Am Knochen ist kaum Fleisch dran. — Na kości prawie nie ma mięsa. An dem Gerücht ist etwas dran. — Coś jest w tej plotce. jemanden drannehmen — wywołać (ucznia). Wyrażenia: dran sein, spät dran sein, gut / schlecht dran sein, drauf und dran sein."
+ },
+ "adverb-444": {
+  "_src": "17a0fbe1",
+  "translation_pl": "(pot.) dlatego; o to (prosić, troszczyć się); wokół tego",
+  "example_pl": "Zapomniałem telefonu, dlatego po niego wróciłem.",
+  "usage_note_pl": "Potoczna forma od darum. sei’s drum — niech tam, niech już będzie; drum herumreden — owijać w bawełnę; mit allem Drum und Dran — ze wszystkim, co się z tym wiąże; das Drumherum — wszystko, co wokół, otoczka."
+ },
+ "adverb-445": {
+  "_src": "c501fb10",
+  "translation_pl": "dziękuję",
+  "example_pl": "Dziękuję za piękne kwiaty!",
+  "usage_note_pl": "Także: danke schön, danke sehr — bardzo dziękuję; Nein, danke. — Nie, dziękuję. Odpowiedź: Bitte! / Bitte schön! — Nie ma za co. Od ich danke (ja dziękuję); dziękować — danken (+ Dat.): Ich danke dir für alles."
+ },
+ "adverb-446": {
+  "_src": "0a5523a4",
+  "translation_pl": "tak; (w środku zdania) przecież, -że; (po przecinku, wzmocnienie) nawet",
+  "example_pl": "Idziesz z nami? – Tak, chętnie.",
+  "usage_note_pl": "Partykuła w środku zdania oznajmującego — „przecież, -że”: Das ist ja toll! — Przecież to świetnie! Du weißt ja, … — Przecież wiesz, … W prośbie i ostrzeżeniu ja nicht — „tylko nie, w żadnym wypadku”: Komm ja nicht zu spät! — Tylko się nie spóźnij!; bez przeczenia — „koniecznie”: Sei ja vorsichtig! — Uważaj, bądź ostrożny! Odpowiedź „tak” na pytanie przeczące — doch. na ja / nun ja — osobne wyrażenie."
+ },
+ "adverb-447": {
+  "_src": "796bcc71",
+  "translation_pl": "nie",
+  "example_pl": "Chcesz jeszcze kawy? – Nie, dziękuję.",
+  "usage_note_pl": "Odpowiedź na pytanie: Nein! — Nie! Odpowiedź „tak” na pytanie przeczące — doch (Kommst du nicht? – Doch!). Zdziwienie: Nein, wie schön! — Och, jak wspaniale! Nie mylić: nicht — nie (przeczenie przy słowie), kein — żaden, ani jeden."
+ },
+ "adverb-448": {
+  "_src": "3fdb72dd",
+  "translation_pl": "precz; dalej (kontynuując)",
+  "example_pl": "Kiedy dotarliśmy, pociąg już odjechał.",
+  "usage_note_pl": "Częściej część czasownika: fortgehen — odchodzić, fortfahren — kontynuować (fährt fort zu reden). und so fort — i tak dalej; in einem fort — bez przerwy. Nie mylić: das Fort — fort."
+ },
+ "adverb-449": {
+  "_src": "2eb946be",
+  "translation_pl": "na górę (tam, od mówiącego)",
+  "example_pl": "Schodami w górę — na strych.",
+  "usage_note_pl": "her — do mówiącego, hin — od mówiącego. hinauf — tam na górę, herauf — tu na górę. Częściej część czasownika: hinaufgehen, hinaufsteigen. Pot.: rauf."
+ },
+ "adverb-450": {
+  "_src": "9f0142ae",
+  "translation_pl": "na dół (tam, od mówiącego)",
+  "example_pl": "Z góry zjechaliśmy na rowerach.",
+  "usage_note_pl": "her — do mówiącego, hin — od mówiącego. hinunter — tam na dół, herunter — tu na dół. Częściej część czasownika: hinuntergehen, hinunterschauen. Pot.: runter."
+ },
+ "adverb-451": {
+  "_src": "a0eea9cc",
+  "translation_pl": "na dół (tu, do mówiącego)",
+  "example_pl": "Natychmiast złaź z dachu!",
+  "usage_note_pl": "her — do mówiącego, hin — od mówiącego. herunter — tu na dół, hinunter — tam na dół. Częściej część czasownika: herunterkommen, herunterfallen. Pot.: runter."
+ },
+ "adverb-452": {
+  "_src": "38bd8556",
+  "translation_pl": "na dół (tam, od mówiącego)",
+  "example_pl": "Wąska ścieżka stromo schodziła w dolinę.",
+  "usage_note_pl": "Książk. = hinunter. Częściej część czasownika: hinabsteigen, hinabsinken."
+ },
+ "adverb-453": {
+  "_src": "4fbf7edd",
+  "translation_pl": "tu, na tę stronę",
+  "example_pl": "Z sąsiedniego ogrodu dochodziła tu muzyka.",
+  "usage_note_pl": "her — do mówiącego, hin — od mówiącego. herüber — tu, przez coś; hinüber — tam, na drugą stronę. Częściej część czasownika: herüberkommen, herüberreichen. Pot.: rüber."
+ },
+ "adverb-454": {
+  "_src": "dfd1b92f",
+  "translation_pl": "naprzeciw; wbrew",
+  "example_pl": "Dzieci wybiegły ojcu naprzeciw.",
+  "usage_note_pl": "Komu, czemu — Dativ, często po słowie: dem Vater entgegen — naprzeciw ojcu; entgegen allen Erwartungen / allen Erwartungen entgegen — wbrew wszelkim oczekiwaniom. Część czasownika: entgegenkommen, entgegennehmen."
+ },
+ "adverb-455": {
+  "_src": "967cd08f",
+  "translation_pl": "też, także; razem (z innymi)",
+  "example_pl": "Przy zakładaniu klubu też byłem obecny.",
+  "usage_note_pl": "Nie mylić z przyimkiem mit + Dativ (mit dem Bus). Przysłówek stoi bez rzeczownika, często przed dabei, dazu, daran: Das gehört mit dazu. — To też do tego należy. Das musst du mit berücksichtigen. — To też musisz uwzględnić. Ze stopniem najwyższym — „jeden z”: Sie ist mit die Beste. — Jest jedną z najlepszych. Kommst du mit? — to czasownik mitkommen."
+ },
+ "adverb-456": {
+  "_src": "6027c98c",
+  "translation_pl": "mniej; w mniejszym stopniu",
+  "example_pl": "Dziś mam mniej czasu niż wczoraj.",
+  "usage_note_pl": "Stopień wyższy od wenig: wenig — weniger — am wenigsten. Nie odmienia się: weniger Geld, weniger Leute. Przed przymiotnikiem — „mniej”: weniger schön. immer weniger — coraz mniej; nicht weniger als — nie mniej niż. Nie mylić z wenige — nieliczni (wenige Leute). W rachunkach — minus: zehn weniger drei — dziesięć minus trzy."
+ },
+ "adverb-457": {
+  "_src": "02500443",
+  "translation_pl": "długo; dawno",
+  "example_pl": "Po wędrówce w niedzielę długo spaliśmy.",
+  "usage_note_pl": "Er schlief lange. — Długo spał. Ich warte schon lange. — Czekam już od dawna. Wie lange dauert das? — Ile to trwa? Przysłówek: lange — länger — am längsten; noch lange nicht — wcale jeszcze nie. Nie mylić z przymiotnikiem lang: die lange Nacht — długa noc."
+ }
+}

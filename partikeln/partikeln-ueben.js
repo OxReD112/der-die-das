@@ -32,8 +32,8 @@
   function lang() { return window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en"; }
   function tx(en, ru) { return window.DeutschTranslation ? window.DeutschTranslation.t.apply(null, arguments) : (lang() === "ru" ? ru : en); }
   /* the Russian hint of a particle (c.hint): shown in Russian; a language pack may give its own
-     (exercises/partikeln__hints.json, keyed by the Russian text, 17.11.2026); English has none */
-  function hintOf(h) { return !h ? "" : window.DeutschTranslation ? window.DeutschTranslation.t("", h) : (lang() === "ru" ? h : ""); }
+     (exercises/partikeln__hints.json, keyed by the Russian text, or by text + particle k when one text stands at several particles, 17.11.2026); English has none */
+  function hintOf(h, k) { var D = window.DeutschTranslation; return !h ? "" : D ? (D.tAt ? D.tAt(k, "", h) : D.t("", h)) : (lang() === "ru" ? h : ""); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function show(id) { ["start", "explore", "pStart", "pGame", "pDone"].forEach(function (x) { $(x).classList.toggle("hidden", x !== id); }); $("startAbout").style.display = id === "start" ? "" : "none"; }
@@ -277,7 +277,7 @@
     $("pTranslation").textContent = pick(c.translation);
     var also = t.accept.filter(function (x) { return x !== shown; });
     var extra = [];
-    if (hintOf(c.hint)) extra.push(hintOf(c.hint));
+    if (hintOf(c.hint, shown)) extra.push(hintOf(c.hint, shown));
     if (also.length) extra.push(tx("also right: ", "тоже подходит: ") + also.join(", "));
     $("pAlso").textContent = extra.join(" · ");
     var mine = P[k];

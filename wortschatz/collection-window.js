@@ -876,8 +876,8 @@
       const r = await fetch(def.file, { cache: "no-store" });
       if (!r.ok) throw new Error("set-missing");
       const set = await r.json();
-      // a language pack (17.11.2026): the set's texts (wortschatz/<set>.json, pairs like the exercises) are read first
-      if (window.DeutschTranslation?.needsPack?.()) await new Promise(done => window.DeutschTranslation.ready(["wortschatz/" + def.id + ".json"], done));
+      // a language pack (17.11.2026): the set's texts (the pack file the manifest gives for wortschatz/sets/<id>.json, pairs like the exercises) are read first
+      if (window.DeutschTranslation?.needsPack?.()) await new Promise(done => window.DeutschTranslation.ready(["wortschatz/" + def.file.replace(/\?.*$/, "")], done));
       return set;
     })().catch(e => { delete setCache[def.id]; throw e; });
     return setCache[def.id];

@@ -1,0 +1,387 @@
+[
+ {
+  "en": "holiday, vacation",
+  "ru": "отпуск",
+  "pl": "urlop"
+ },
+ {
+  "en": "garden",
+  "ru": "сад",
+  "pl": "ogród"
+ },
+ {
+  "en": "Not a room, but the same pattern: im · in den · aus dem.",
+  "ru": "Не помещение, но так же: im · in den · aus dem.",
+  "pl": "To nie pomieszczenie, ale tak samo: im · in den · aus dem."
+ },
+ {
+  "en": "house (building)",
+  "ru": "дом (здание)",
+  "pl": "dom (budynek)"
+ },
+ {
+  "en": "cinema",
+  "ru": "кинотеатр",
+  "pl": "kino"
+ },
+ {
+  "en": "theatre",
+  "ru": "театр",
+  "pl": "teatr"
+ },
+ {
+  "en": "restaurant",
+  "ru": "ресторан",
+  "pl": "restauracja"
+ },
+ {
+  "en": "museum",
+  "ru": "музей",
+  "pl": "muzeum"
+ },
+ {
+  "en": "hotel",
+  "ru": "гостиница",
+  "pl": "hotel"
+ },
+ {
+  "en": "office",
+  "ru": "офис",
+  "pl": "biuro"
+ },
+ {
+  "en": "supermarket (inside)",
+  "ru": "супермаркет (внутри)",
+  "pl": "supermarket (w środku)"
+ },
+ {
+  "en": "hospital",
+  "ru": "больница",
+  "pl": "szpital"
+ },
+ {
+  "en": "city centre",
+  "ru": "центр города",
+  "pl": "centrum miasta"
+ },
+ {
+  "en": "kitchen",
+  "ru": "кухня",
+  "pl": "kuchnia"
+ },
+ {
+  "en": "town (going into town)",
+  "ru": "город (поехать в город, в центр)",
+  "pl": "miasto (pojechać do miasta, do centrum)"
+ },
+ {
+  "en": "Not a room, but the same pattern: in der · in die · aus der.",
+  "ru": "Не помещение, но так же: in der · in die · aus der.",
+  "pl": "To nie pomieszczenie, ale tak samo: in der · in die · aus der."
+ },
+ {
+  "en": "bed (in bed)",
+  "ru": "кровать (в постели)",
+  "pl": "łóżko (w łóżku)"
+ },
+ {
+  "en": "Berlin",
+  "ru": "Берлин",
+  "pl": "Berlin"
+ },
+ {
+  "en": "Paris",
+  "ru": "Париж",
+  "pl": "Paryż"
+ },
+ {
+  "en": "Japan",
+  "ru": "Япония",
+  "pl": "Japonia"
+ },
+ {
+  "en": "Italy",
+  "ru": "Италия",
+  "pl": "Włochy"
+ },
+ {
+  "en": "Austria",
+  "ru": "Австрия",
+  "pl": "Austria"
+ },
+ {
+  "en": "London",
+  "ru": "Лондон",
+  "pl": "Londyn"
+ },
+ {
+  "en": "Switzerland",
+  "ru": "Швейцария",
+  "pl": "Szwajcaria"
+ },
+ {
+  "en": "Turkey",
+  "ru": "Турция",
+  "pl": "Turcja"
+ },
+ {
+  "en": "USA",
+  "ru": "США",
+  "pl": "USA"
+ },
+ {
+  "en": "beach",
+  "ru": "пляж",
+  "pl": "plaża"
+ },
+ {
+  "en": "sea (at the seaside)",
+  "ru": "море (на побережье)",
+  "pl": "morze (nad morzem)"
+ },
+ {
+  "en": "lake (on the shore)",
+  "ru": "озеро (на берегу)",
+  "pl": "jezioro (nad jeziorem)"
+ },
+ {
+  "en": "river (on the bank)",
+  "ru": "река (на берегу)",
+  "pl": "rzeka (nad rzeką)"
+ },
+ {
+  "en": "window",
+  "ru": "окно",
+  "pl": "okno"
+ },
+ {
+  "en": "table (sitting at it)",
+  "ru": "стол (сесть за стол)",
+  "pl": "stół (usiąść przy stole)"
+ },
+ {
+  "en": "the Baltic Sea (at the seaside)",
+  "ru": "Балтийское море (на побережье)",
+  "pl": "Morze Bałtyckie (nad morzem)"
+ },
+ {
+  "en": "sports ground",
+  "ru": "спортивная площадка",
+  "pl": "boisko"
+ },
+ {
+  "en": "playground",
+  "ru": "детская площадка",
+  "pl": "plac zabaw"
+ },
+ {
+  "en": "market, marketplace",
+  "ru": "рынок",
+  "pl": "targ, rynek"
+ },
+ {
+  "en": "balcony",
+  "ru": "балкон",
+  "pl": "balkon"
+ },
+ {
+  "en": "street (on the road, not an address)",
+  "ru": "улица (на дороге, не адрес)",
+  "pl": "ulica (na drodze, nie adres)"
+ },
+ {
+  "en": "island",
+  "ru": "остров",
+  "pl": "wyspa"
+ },
+ {
+  "en": "mountain (at/to the top)",
+  "ru": "гора (на вершине, на вершину)",
+  "pl": "góra (na szczycie, na szczyt)"
+ },
+ {
+  "en": "the countryside",
+  "ru": "сельская местность (за городом, в деревне)",
+  "pl": "wieś (za miastem, na wsi)"
+ },
+ {
+  "en": "roof",
+  "ru": "крыша",
+  "pl": "dach"
+ },
+ {
+  "en": "toilet, bathroom",
+  "ru": "туалет",
+  "pl": "toaleta"
+ },
+ {
+  "en": "Ausnahme · it's a room, but German says auf (or zu), not in",
+  "ru": "Ausnahme · это комната, но говорят auf (или zu), не in",
+  "pl": "Ausnahme · to pomieszczenie, ale mówi się auf (albo zu), nie in"
+ },
+ {
+  "en": "doctor",
+  "ru": "врач",
+  "pl": "lekarz"
+ },
+ {
+  "en": "hairdresser",
+  "ru": "парикмахер",
+  "pl": "fryzjer"
+ },
+ {
+  "en": "(my) grandma",
+  "ru": "бабушка (моя)",
+  "pl": "babcia (moja)"
+ },
+ {
+  "en": "Lisa",
+  "ru": "Лиза",
+  "pl": "Lisa"
+ },
+ {
+  "en": "H&M (shop)",
+  "ru": "H&M (магазин)",
+  "pl": "H&M (sklep)"
+ },
+ {
+  "en": "picnic",
+  "ru": "пикник",
+  "pl": "piknik"
+ },
+ {
+  "en": "training session",
+  "ru": "тренировка",
+  "pl": "trening"
+ },
+ {
+  "en": "work",
+  "ru": "работа",
+  "pl": "praca"
+ },
+ {
+  "en": "supermarket (by the supermarket, not inside)",
+  "ru": "супермаркет (у супермаркета, не внутри)",
+  "pl": "supermarket (przy supermarkecie, nie w środku)"
+ },
+ {
+  "en": "boss",
+  "ru": "начальница",
+  "pl": "szefowa"
+ },
+ {
+  "en": "IKEA (shop)",
+  "ru": "Ikea (магазин)",
+  "pl": "Ikea (sklep)"
+ },
+ {
+  "en": "exam",
+  "ru": "экзамен",
+  "pl": "egzamin"
+ },
+ {
+  "en": "grandparents",
+  "ru": "бабушка и дедушка",
+  "pl": "dziadkowie"
+ },
+ {
+  "en": "party",
+  "ru": "вечеринка",
+  "pl": "impreza"
+ },
+ {
+  "en": "wedding",
+  "ru": "свадьба",
+  "pl": "ślub, wesele"
+ },
+ {
+  "en": "forest, woods",
+  "ru": "лес",
+  "pl": "las"
+ },
+ {
+  "en": "park",
+  "ru": "парк",
+  "pl": "park"
+ },
+ {
+  "en": "swimming pool",
+  "ru": "бассейн",
+  "pl": "basen"
+ },
+ {
+  "en": "mountains (in the mountains)",
+  "ru": "горы (в горах)",
+  "pl": "góry (w górach)"
+ },
+ {
+  "en": "Alps",
+  "ru": "Альпы",
+  "pl": "Alpy"
+ },
+ {
+  "en": "Goethe Street (address)",
+  "ru": "улица Гёте (адрес)",
+  "pl": "ulica Goethego (adres)"
+ },
+ {
+  "en": "home (at, to, from home)",
+  "ru": "дом (дома / домой / из дома)",
+  "pl": "dom (w domu / do domu / z domu)"
+ },
+ {
+  "en": "station (meeting point, train)",
+  "ru": "вокзал (на вокзале: встреча, поезд)",
+  "pl": "dworzec (na dworcu: spotkanie, pociąg)"
+ },
+ {
+  "en": "airport (flight, meeting point)",
+  "ru": "аэропорт (в аэропорту: рейс, встреча)",
+  "pl": "lotnisko (na lotnisku: lot, spotkanie)"
+ },
+ {
+  "en": "bus / tram stop",
+  "ru": "остановка (автобуса, трамвая)",
+  "pl": "przystanek (autobusowy, tramwajowy)"
+ },
+ {
+  "en": "petrol station",
+  "ru": "заправка",
+  "pl": "stacja benzynowa"
+ },
+ {
+  "en": "checkout, till",
+  "ru": "касса",
+  "pl": "kasa"
+ },
+ {
+  "en": "hinein · into it, inside",
+  "ru": "hinein · внутрь",
+  "pl": "hinein · do środka"
+ },
+ {
+  "en": "direkt dran · right to the edge",
+  "ru": "direkt dran · вплотную",
+  "pl": "direkt dran · tuż przy"
+ },
+ {
+  "en": "drauf · onto it",
+  "ru": "drauf · на само место",
+  "pl": "drauf · na wierzch"
+ },
+ {
+  "en": "nur bis dorthin · just up to it, not into or onto it",
+  "ru": "nur bis dorthin · только до места, не внутрь и не на него",
+  "pl": "nur bis dorthin · tylko do tego miejsca, nie do środka ani na wierzch"
+ },
+ {
+  "en": "heraus · out of it, from inside",
+  "ru": "heraus · изнутри",
+  "pl": "heraus · ze środka"
+ },
+ {
+  "en": "nur von dort · from there, not from inside",
+  "ru": "nur von dort · просто оттуда, не изнутри",
+  "pl": "nur von dort · po prostu stamtąd, nie ze środka"
+ }
+]

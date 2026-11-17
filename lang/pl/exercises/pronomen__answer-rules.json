@@ -1,0 +1,12 @@
+[
+ {
+  "en": "Polite form — capitalised: {w}",
+  "ru": "Вежливая форма — с большой буквы: {w}",
+  "pl": "Forma grzecznościowa — wielką literą: {w}"
+ },
+ {
+  "en": "Lower case here: {w}",
+  "ru": "Здесь с маленькой буквы: {w}",
+  "pl": "Tutaj małą literą: {w}"
+ }
+]

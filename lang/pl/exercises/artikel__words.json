@@ -1,0 +1,2147 @@
+[
+ {
+  "en": "-MA ENDING",
+  "ru": "ОКОНЧАНИЕ -MA",
+  "pl": "KOŃCÓWKA -MA"
+ },
+ {
+  "en": "Nouns ending in -ium are neuter.",
+  "ru": "Слова на -ium — среднего рода.",
+  "pl": "Wyrazy na -ium są rodzaju nijakiego."
+ },
+ {
+  "en": "apprentice",
+  "ru": "ученик (на производстве), стажёр",
+  "pl": "uczeń (w zakładzie pracy), praktykant"
+ },
+ {
+  "en": "bottle",
+  "ru": "бутылка",
+  "pl": "butelka"
+ },
+ {
+  "en": "museum",
+  "ru": "музей",
+  "pl": "muzeum"
+ },
+ {
+  "en": "living room",
+  "ru": "гостиная",
+  "pl": "salon, pokój dzienny"
+ },
+ {
+  "en": "-EI ENDING",
+  "ru": "ОКОНЧАНИЕ -EI",
+  "pl": "KOŃCÓWKA -EI"
+ },
+ {
+  "en": "Nouns with the prefix Ge- are neuter.",
+  "ru": "Слова с приставкой Ge- — среднего рода.",
+  "pl": "Wyrazy z przedrostkiem Ge- są rodzaju nijakiego."
+ },
+ {
+  "en": "democracy",
+  "ru": "демократия",
+  "pl": "demokracja"
+ },
+ {
+  "en": "realism",
+  "ru": "реализм",
+  "pl": "realizm"
+ },
+ {
+  "en": "newspaper",
+  "ru": "газета",
+  "pl": "gazeta"
+ },
+ {
+  "en": "-UNG ENDING",
+  "ru": "ОКОНЧАНИЕ -UNG",
+  "pl": "KOŃCÓWKA -UNG"
+ },
+ {
+  "en": "Nouns ending in -ung are feminine.",
+  "ru": "Слова на -ung — женского рода.",
+  "pl": "Wyrazy na -ung są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable. Exception: der Sprung (short word, -ung is not an ending here).",
+  "ru": "очень надёжно. Исключение: der Sprung (короткое слово, -ung не окончание).",
+  "pl": "reguła bardzo pewna. Wyjątek: der Sprung (krótkie słowo, -ung nie jest tu końcówką)."
+ },
+ {
+  "en": "flat, apartment",
+  "ru": "квартира",
+  "pl": "mieszkanie"
+ },
+ {
+  "en": "bill, invoice",
+  "ru": "счёт",
+  "pl": "rachunek"
+ },
+ {
+  "en": "experience, know-how",
+  "ru": "опыт",
+  "pl": "doświadczenie"
+ },
+ {
+  "en": "invitation",
+  "ru": "приглашение",
+  "pl": "zaproszenie"
+ },
+ {
+  "en": "opinion",
+  "ru": "мнение",
+  "pl": "opinia"
+ },
+ {
+  "en": "health",
+  "ru": "здоровье",
+  "pl": "zdrowie"
+ },
+ {
+  "en": "-HEIT ENDING",
+  "ru": "ОКОНЧАНИЕ -HEIT",
+  "pl": "KOŃCÓWKA -HEIT"
+ },
+ {
+  "en": "Nouns ending in -heit are feminine.",
+  "ru": "Слова на -heit — женского рода.",
+  "pl": "Wyrazy na -heit są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable, no exceptions.",
+  "ru": "очень надёжно, исключений нет.",
+  "pl": "reguła bardzo pewna, bez wyjątków."
+ },
+ {
+  "en": "freedom",
+  "ru": "свобода",
+  "pl": "wolność"
+ },
+ {
+  "en": "safety, security",
+  "ru": "безопасность",
+  "pl": "bezpieczeństwo"
+ },
+ {
+  "en": "illness, disease",
+  "ru": "болезнь",
+  "pl": "choroba"
+ },
+ {
+  "en": "possibility, opportunity",
+  "ru": "возможность",
+  "pl": "możliwość"
+ },
+ {
+  "en": "-KEIT ENDING",
+  "ru": "ОКОНЧАНИЕ -KEIT",
+  "pl": "KOŃCÓWKA -KEIT"
+ },
+ {
+  "en": "Nouns ending in -keit are feminine.",
+  "ru": "Слова на -keit — женского рода.",
+  "pl": "Wyrazy na -keit są rodzaju żeńskiego."
+ },
+ {
+  "en": "difficulty",
+  "ru": "трудность",
+  "pl": "trudność"
+ },
+ {
+  "en": "ability, skill",
+  "ru": "способность",
+  "pl": "zdolność, umiejętność"
+ },
+ {
+  "en": "reality",
+  "ru": "реальность",
+  "pl": "rzeczywistość"
+ },
+ {
+  "en": "friendship",
+  "ru": "дружба",
+  "pl": "przyjaźń"
+ },
+ {
+  "en": "-SCHAFT ENDING",
+  "ru": "ОКОНЧАНИЕ -SCHAFT",
+  "pl": "KOŃCÓWKA -SCHAFT"
+ },
+ {
+  "en": "Nouns ending in -schaft are feminine.",
+  "ru": "Слова на -schaft — женского рода.",
+  "pl": "Wyrazy na -schaft są rodzaju żeńskiego."
+ },
+ {
+  "en": "society; company",
+  "ru": "общество",
+  "pl": "społeczeństwo"
+ },
+ {
+  "en": "team",
+  "ru": "команда",
+  "pl": "drużyna"
+ },
+ {
+  "en": "landscape",
+  "ru": "пейзаж, местность",
+  "pl": "krajobraz, okolica"
+ },
+ {
+  "en": "information",
+  "ru": "информация",
+  "pl": "informacja"
+ },
+ {
+  "en": "-TION / -SION ENDING",
+  "ru": "ОКОНЧАНИЕ -TION / -SION",
+  "pl": "KOŃCÓWKA -TION / -SION"
+ },
+ {
+  "en": "Nouns ending in -tion or -sion are feminine.",
+  "ru": "Слова на -tion и -sion — женского рода.",
+  "pl": "Wyrazy na -tion i -sion są rodzaju żeńskiego."
+ },
+ {
+  "en": "situation",
+  "ru": "ситуация",
+  "pl": "sytuacja"
+ },
+ {
+  "en": "reaction",
+  "ru": "реакция",
+  "pl": "reakcja"
+ },
+ {
+  "en": "university",
+  "ru": "университет",
+  "pl": "uniwersytet"
+ },
+ {
+  "en": "-TÄT ENDING",
+  "ru": "ОКОНЧАНИЕ -TÄT",
+  "pl": "KOŃCÓWKA -TÄT"
+ },
+ {
+  "en": "Nouns ending in -tät are feminine.",
+  "ru": "Слова на -tät — женского рода.",
+  "pl": "Wyrazy na -tät są rodzaju żeńskiego."
+ },
+ {
+  "en": "quality",
+  "ru": "качество",
+  "pl": "jakość"
+ },
+ {
+  "en": "activity",
+  "ru": "активность",
+  "pl": "aktywność"
+ },
+ {
+  "en": "music",
+  "ru": "музыка",
+  "pl": "muzyka"
+ },
+ {
+  "en": "-IK ENDING",
+  "ru": "ОКОНЧАНИЕ -IK",
+  "pl": "KOŃCÓWKA -IK"
+ },
+ {
+  "en": "Nouns ending in -ik (sciences, fields, concepts) are feminine.",
+  "ru": "Слова на -ik (науки, области, понятия) — женского рода.",
+  "pl": "Wyrazy na -ik (nauki, dziedziny, pojęcia) są rodzaju żeńskiego."
+ },
+ {
+  "en": "Reliable. Exception: der Atlantik.",
+  "ru": "надёжно. Исключение: der Atlantik.",
+  "pl": "reguła pewna. Wyjątek: der Atlantik."
+ },
+ {
+  "en": "politics, policy",
+  "ru": "политика",
+  "pl": "polityka"
+ },
+ {
+  "en": "technology, engineering",
+  "ru": "техника, технология",
+  "pl": "technika, technologia"
+ },
+ {
+  "en": "bakery",
+  "ru": "пекарня",
+  "pl": "piekarnia"
+ },
+ {
+  "en": "Nouns ending in -ei (shops, workshops, institutions) are feminine.",
+  "ru": "Слова на -ei (мастерские, магазины, учреждения) — женского рода.",
+  "pl": "Wyrazy na -ei (warsztaty, sklepy, instytucje) są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable. Exception: das Ei.",
+  "ru": "очень надёжно. Исключение: das Ei.",
+  "pl": "reguła bardzo pewna. Wyjątek: das Ei."
+ },
+ {
+  "en": "police",
+  "ru": "полиция",
+  "pl": "policja"
+ },
+ {
+  "en": "girl",
+  "ru": "девочка",
+  "pl": "dziewczynka"
+ },
+ {
+  "en": "-CHEN / -LEIN ENDING",
+  "ru": "ОКОНЧАНИЕ -CHEN / -LEIN",
+  "pl": "KOŃCÓWKA -CHEN / -LEIN"
+ },
+ {
+  "en": "Diminutives ending in -chen or -lein are neuter, even for people.",
+  "ru": "Уменьшительные слова на -chen и -lein — среднего рода, даже если речь о человеке.",
+  "pl": "Zdrobnienia na -chen i -lein są rodzaju nijakiego, nawet gdy chodzi o człowieka."
+ },
+ {
+  "en": "Very reliable. But -chen that is not a diminutive does not count: der Kuchen.",
+  "ru": "очень надёжно. Но -chen без уменьшения не считается: der Kuchen.",
+  "pl": "reguła bardzo pewna. Ale -chen, które nie jest zdrobnieniem, nie liczy się: der Kuchen."
+ },
+ {
+  "en": "bread roll",
+  "ru": "булочка",
+  "pl": "bułka"
+ },
+ {
+  "en": "little house, cottage",
+  "ru": "домик",
+  "pl": "domek"
+ },
+ {
+  "en": "document",
+  "ru": "документ",
+  "pl": "dokument"
+ },
+ {
+  "en": "-MENT ENDING",
+  "ru": "ОКОНЧАНИЕ -MENT",
+  "pl": "KOŃCÓWKA -MENT"
+ },
+ {
+  "en": "Borrowed nouns ending in -ment are neuter.",
+  "ru": "Заимствованные слова на -ment — среднего рода.",
+  "pl": "Zapożyczenia na -ment są rodzaju nijakiego."
+ },
+ {
+  "en": "Reliable. Exception: der Moment.",
+  "ru": "надёжно. Исключение: der Moment.",
+  "pl": "reguła pewna. Wyjątek: der Moment."
+ },
+ {
+  "en": "instrument",
+  "ru": "инструмент",
+  "pl": "instrument"
+ },
+ {
+  "en": "experiment",
+  "ru": "эксперимент",
+  "pl": "eksperyment"
+ },
+ {
+  "en": "argument",
+  "ru": "аргумент",
+  "pl": "argument"
+ },
+ {
+  "en": "date",
+  "ru": "дата",
+  "pl": "data"
+ },
+ {
+  "en": "-UM ENDING",
+  "ru": "ОКОНЧАНИЕ -UM",
+  "pl": "KOŃCÓWKA -UM"
+ },
+ {
+  "en": "Borrowed (Latin) nouns ending in -um are neuter.",
+  "ru": "Заимствованные (латинские) слова на -um — среднего рода.",
+  "pl": "Zapożyczenia (łacińskie) na -um są rodzaju nijakiego."
+ },
+ {
+  "en": "Reliable. Short native words do not count: der Baum, der Raum.",
+  "ru": "надёжно. Короткие немецкие слова не считаются: der Baum, der Raum.",
+  "pl": "reguła pewna. Krótkie rodzime słowa niemieckie nie liczą się: der Baum, der Raum."
+ },
+ {
+  "en": "centre",
+  "ru": "центр",
+  "pl": "centrum"
+ },
+ {
+  "en": "university studies",
+  "ru": "учёба в вузе",
+  "pl": "studia"
+ },
+ {
+  "en": "-IUM ENDING",
+  "ru": "ОКОНЧАНИЕ -IUM",
+  "pl": "KOŃCÓWKA -IUM"
+ },
+ {
+  "en": "aquarium",
+  "ru": "аквариум",
+  "pl": "akwarium"
+ },
+ {
+  "en": "topic, subject",
+  "ru": "тема",
+  "pl": "temat"
+ },
+ {
+  "en": "Greek nouns ending in -ma (plural in -men) are neuter.",
+  "ru": "Греческие слова на -ma (множественное число на -men) — среднего рода.",
+  "pl": "Greckie wyrazy na -ma (liczba mnoga na -men) są rodzaju nijakiego."
+ },
+ {
+  "en": "Reliable. Non-Greek words do not count: die Firma, die Oma.",
+  "ru": "надёжно. Не греческие — нет: die Firma, die Oma.",
+  "pl": "reguła pewna. Wyrazy niegreckie nie liczą się: die Firma, die Oma."
+ },
+ {
+  "en": "climate",
+  "ru": "климат",
+  "pl": "klimat"
+ },
+ {
+  "en": "food, meal",
+  "ru": "еда",
+  "pl": "jedzenie"
+ },
+ {
+  "en": "VERB USED AS A NOUN",
+  "ru": "ГЛАГОЛ КАК СУЩЕСТВИТЕЛЬНОЕ",
+  "pl": "CZASOWNIK JAKO RZECZOWNIK"
+ },
+ {
+  "en": "A verb used as a noun (essen → das Essen) is neuter.",
+  "ru": "Глагол, превращённый в существительное (essen → das Essen), — среднего рода.",
+  "pl": "Czasownik zamieniony w rzeczownik (essen → das Essen) jest rodzaju nijakiego."
+ },
+ {
+  "en": "Always, no exceptions.",
+  "ru": "всегда, исключений нет.",
+  "pl": "zawsze, bez wyjątków."
+ },
+ {
+  "en": "reading",
+  "ru": "чтение",
+  "pl": "czytanie"
+ },
+ {
+  "en": "learning, studying",
+  "ru": "учёба, процесс обучения",
+  "pl": "nauka, uczenie się"
+ },
+ {
+  "en": "butterfly",
+  "ru": "бабочка",
+  "pl": "motyl"
+ },
+ {
+  "en": "-LING ENDING",
+  "ru": "ОКОНЧАНИЕ -LING",
+  "pl": "KOŃCÓWKA -LING"
+ },
+ {
+  "en": "Nouns ending in -ling are masculine.",
+  "ru": "Слова на -ling — мужского рода.",
+  "pl": "Wyrazy na -ling są rodzaju męskiego."
+ },
+ {
+  "en": "Very reliable. English -ing is different: das Training.",
+  "ru": "очень надёжно. Английское -ing — другое: das Training.",
+  "pl": "reguła bardzo pewna. Angielskie -ing to co innego: das Training."
+ },
+ {
+  "en": "spring (season)",
+  "ru": "весна",
+  "pl": "wiosna"
+ },
+ {
+  "en": "twin",
+  "ru": "близнец",
+  "pl": "bliźniak"
+ },
+ {
+  "en": "optimism",
+  "ru": "оптимизм",
+  "pl": "optymizm"
+ },
+ {
+  "en": "-ISMUS ENDING",
+  "ru": "ОКОНЧАНИЕ -ISMUS",
+  "pl": "KOŃCÓWKA -ISMUS"
+ },
+ {
+  "en": "Nouns ending in -ismus are masculine.",
+  "ru": "Слова на -ismus — мужского рода.",
+  "pl": "Wyrazy na -ismus są rodzaju męskiego."
+ },
+ {
+  "en": "tourism",
+  "ru": "туризм",
+  "pl": "turystyka"
+ },
+ {
+  "en": "student",
+  "ru": "студент",
+  "pl": "student"
+ },
+ {
+  "en": "MALE PERSON",
+  "ru": "МУЖЧИНА",
+  "pl": "MĘŻCZYZNA"
+ },
+ {
+  "en": "The word names a man, so it is der. Sex beats the ending.",
+  "ru": "Слово обозначает мужчину, поэтому der. Пол важнее окончания.",
+  "pl": "Słowo oznacza mężczyznę, więc der. Płeć jest ważniejsza niż końcówka."
+ },
+ {
+  "en": "Very reliable. -ent and -or for people are der too; things in -ent are often das: das Talent.",
+  "ru": "очень надёжно. Окончания -ent, -or у людей тоже der; у предметов на -ent часто das: das Talent.",
+  "pl": "reguła bardzo pewna. W nazwach osób -ent i -or też dają der; przedmioty na -ent są często das: das Talent."
+ },
+ {
+  "en": "patient",
+  "ru": "пациент",
+  "pl": "pacjent"
+ },
+ {
+  "en": "director",
+  "ru": "директор",
+  "pl": "dyrektor"
+ },
+ {
+  "en": "author",
+  "ru": "автор",
+  "pl": "autor"
+ },
+ {
+  "en": "engine, motor",
+  "ru": "мотор, двигатель",
+  "pl": "silnik"
+ },
+ {
+  "en": "-OR ENDING",
+  "ru": "ОКОНЧАНИЕ -OR",
+  "pl": "KOŃCÓWKA -OR"
+ },
+ {
+  "en": "Nouns ending in -or are masculine.",
+  "ru": "Слова на -or — мужского рода.",
+  "pl": "Wyrazy na -or są rodzaju męskiego."
+ },
+ {
+  "en": "Reliable. Exception: das Labor.",
+  "ru": "надёжно. Исключение: das Labor.",
+  "pl": "reguła pewna. Wyjątek: das Labor."
+ },
+ {
+  "en": "Monday",
+  "ru": "понедельник",
+  "pl": "poniedziałek"
+ },
+ {
+  "en": "DAYS OF THE WEEK",
+  "ru": "ДНИ НЕДЕЛИ",
+  "pl": "DNI TYGODNIA"
+ },
+ {
+  "en": "Days of the week are masculine.",
+  "ru": "Дни недели — мужского рода.",
+  "pl": "Dni tygodnia są rodzaju męskiego."
+ },
+ {
+  "en": "Always.",
+  "ru": "всегда.",
+  "pl": "zawsze."
+ },
+ {
+  "en": "Tuesday",
+  "ru": "вторник",
+  "pl": "wtorek"
+ },
+ {
+  "en": "Friday",
+  "ru": "пятница",
+  "pl": "piątek"
+ },
+ {
+  "en": "January",
+  "ru": "январь",
+  "pl": "styczeń"
+ },
+ {
+  "en": "MONTHS",
+  "ru": "МЕСЯЦЫ",
+  "pl": "MIESIĄCE"
+ },
+ {
+  "en": "Months are masculine.",
+  "ru": "Месяцы — мужского рода.",
+  "pl": "Miesiące są rodzaju męskiego."
+ },
+ {
+  "en": "March",
+  "ru": "март",
+  "pl": "marzec"
+ },
+ {
+  "en": "October",
+  "ru": "октябрь",
+  "pl": "październik"
+ },
+ {
+  "en": "summer",
+  "ru": "лето",
+  "pl": "lato"
+ },
+ {
+  "en": "SEASONS",
+  "ru": "ВРЕМЕНА ГОДА",
+  "pl": "PORY ROKU"
+ },
+ {
+  "en": "The seasons are masculine.",
+  "ru": "Времена года — мужского рода.",
+  "pl": "Pory roku są rodzaju męskiego."
+ },
+ {
+  "en": "winter",
+  "ru": "зима",
+  "pl": "zima"
+ },
+ {
+  "en": "autumn",
+  "ru": "осень",
+  "pl": "jesień"
+ },
+ {
+  "en": "school",
+  "ru": "школа",
+  "pl": "szkoła"
+ },
+ {
+  "en": "-E ENDING",
+  "ru": "ОКОНЧАНИЕ -E",
+  "pl": "KOŃCÓWKA -E"
+ },
+ {
+  "en": "Most nouns ending in -e are feminine.",
+  "ru": "Большинство слов на -e — женского рода.",
+  "pl": "Większość wyrazów na -e jest rodzaju żeńskiego."
+ },
+ {
+  "en": "Works about 9 times in 10. Exception: der Name.",
+  "ru": "работает примерно в 9 случаях из 10. Исключение: der Name.",
+  "pl": "działa mniej więcej w 9 przypadkach na 10. Wyjątek: der Name."
+ },
+ {
+  "en": "street",
+  "ru": "улица",
+  "pl": "ulica"
+ },
+ {
+  "en": "language",
+  "ru": "язык",
+  "pl": "język"
+ },
+ {
+  "en": "kitchen; cuisine",
+  "ru": "кухня",
+  "pl": "kuchnia"
+ },
+ {
+  "en": "question",
+  "ru": "вопрос",
+  "pl": "pytanie"
+ },
+ {
+  "en": "name",
+  "ru": "имя",
+  "pl": "imię"
+ },
+ {
+  "en": "-E EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -E",
+  "pl": "WYJĄTEK OD -E"
+ },
+ {
+  "en": "Nouns in -e are usually die, but this one is der. Learn it as an exception.",
+  "ru": "Слова на -e обычно die, но это слово — der. Такие слова надо запомнить.",
+  "pl": "Wyrazy na -e są zwykle die, ale to słowo jest der. Takie słowa trzeba zapamiętać."
+ },
+ {
+  "en": "There are only a few: der Name, der Käse, der Gedanke, der Buchstabe.",
+  "ru": "исключений немного: der Name, der Käse, der Gedanke, der Buchstabe.",
+  "pl": "wyjątków jest niewiele: der Name, der Käse, der Gedanke, der Buchstabe."
+ },
+ {
+  "en": "cheese",
+  "ru": "сыр",
+  "pl": "ser"
+ },
+ {
+  "en": "end",
+  "ru": "конец",
+  "pl": "koniec"
+ },
+ {
+  "en": "Nouns in -e are usually die, but this one is das. Learn it as an exception.",
+  "ru": "Слова на -e обычно die, но это слово — das. Такие слова надо запомнить.",
+  "pl": "Wyrazy na -e są zwykle die, ale to słowo jest das. Takie słowa trzeba zapamiętać."
+ },
+ {
+  "en": "There are only a few: das Ende, das Auge, das Interesse.",
+  "ru": "исключений немного: das Ende, das Auge, das Interesse.",
+  "pl": "wyjątków jest niewiele: das Ende, das Auge, das Interesse."
+ },
+ {
+  "en": "eye",
+  "ru": "глаз",
+  "pl": "oko"
+ },
+ {
+  "en": "front door",
+  "ru": "входная дверь",
+  "pl": "drzwi wejściowe"
+ },
+ {
+  "en": "COMPOUND → LAST PART",
+  "ru": "СЛОЖНОЕ СЛОВО → ПОСЛЕДНЯЯ ЧАСТЬ",
+  "pl": "WYRAZ ZŁOŻONY → OSTATNI CZŁON"
+ },
+ {
+  "en": "Haus + Tür. The last part decides: die Tür, so die Haustür.",
+  "ru": "Haus + Tür. Решает последняя часть: die Tür, значит die Haustür.",
+  "pl": "Haus + Tür. Decyduje ostatni człon: die Tür, więc die Haustür."
+ },
+ {
+  "en": "bathroom",
+  "ru": "ванная комната",
+  "pl": "łazienka"
+ },
+ {
+  "en": "Bade + Zimmer. The last part decides: das Zimmer, so das Badezimmer.",
+  "ru": "Bade + Zimmer. Решает последняя часть: das Zimmer, значит das Badezimmer.",
+  "pl": "Bade + Zimmer. Decyduje ostatni człon: das Zimmer, więc das Badezimmer."
+ },
+ {
+  "en": "driving licence",
+  "ru": "водительские права",
+  "pl": "prawo jazdy"
+ },
+ {
+  "en": "Führer + Schein. The last part decides: der Schein, so der Führerschein.",
+  "ru": "Führer + Schein. Решает последняя часть: der Schein, значит der Führerschein.",
+  "pl": "Führer + Schein. Decyduje ostatni człon: der Schein, więc der Führerschein."
+ },
+ {
+  "en": "Wohn + Zimmer. The last part decides: das Zimmer, so das Wohnzimmer.",
+  "ru": "Wohn + Zimmer. Решает последняя часть: das Zimmer, значит das Wohnzimmer.",
+  "pl": "Wohn + Zimmer. Decyduje ostatni człon: das Zimmer, więc das Wohnzimmer."
+ },
+ {
+  "en": "train station",
+  "ru": "вокзал",
+  "pl": "dworzec"
+ },
+ {
+  "en": "Bahn + Hof. The last part decides: der Hof, so der Bahnhof (even though die Bahn).",
+  "ru": "Bahn + Hof. Решает последняя часть: der Hof, значит der Bahnhof (хотя die Bahn).",
+  "pl": "Bahn + Hof. Decyduje ostatni człon: der Hof, więc der Bahnhof (choć die Bahn)."
+ },
+ {
+  "en": "hospital",
+  "ru": "больница",
+  "pl": "szpital"
+ },
+ {
+  "en": "Kranken + Haus. The last part decides: das Haus, so das Krankenhaus.",
+  "ru": "Kranken + Haus. Решает последняя часть: das Haus, значит das Krankenhaus.",
+  "pl": "Kranken + Haus. Decyduje ostatni człon: das Haus, więc das Krankenhaus."
+ },
+ {
+  "en": "table",
+  "ru": "стол",
+  "pl": "stół"
+ },
+ {
+  "en": "NO RELIABLE RULE",
+  "ru": "ПРАВИЛА НЕТ",
+  "pl": "NIE MA REGUŁY"
+ },
+ {
+  "en": "Just remember this one: der Tisch.",
+  "ru": "Это слово надо просто запомнить: der Tisch.",
+  "pl": "To słowo trzeba po prostu zapamiętać: der Tisch."
+ },
+ {
+  "en": "chair",
+  "ru": "стул",
+  "pl": "krzesło"
+ },
+ {
+  "en": "Just remember this one: der Stuhl.",
+  "ru": "Это слово надо просто запомнить: der Stuhl.",
+  "pl": "To słowo trzeba po prostu zapamiętać: der Stuhl."
+ },
+ {
+  "en": "key",
+  "ru": "ключ",
+  "pl": "klucz"
+ },
+ {
+  "en": "Just remember this one: der Schlüssel.",
+  "ru": "Это слово надо просто запомнить: der Schlüssel.",
+  "pl": "To słowo trzeba po prostu zapamiętać: der Schlüssel."
+ },
+ {
+  "en": "appointment",
+  "ru": "встреча, назначенный срок",
+  "pl": "spotkanie, termin"
+ },
+ {
+  "en": "Stressed -in is not the female -in ending. Remember: der Termin.",
+  "ru": "-in с ударением — не женское окончание -in. Запомните: der Termin.",
+  "pl": "Akcentowane -in to nie żeńska końcówka -in. Zapamiętaj: der Termin."
+ },
+ {
+  "en": "profession, occupation",
+  "ru": "профессия",
+  "pl": "zawód"
+ },
+ {
+  "en": "VERB STEM, NO ENDING",
+  "ru": "ОТ ГЛАГОЛА БЕЗ ОКОНЧАНИЯ",
+  "pl": "OD CZASOWNIKA, BEZ KOŃCÓWKI"
+ },
+ {
+  "en": "From the verb berufen (\"to call\") with no ending — der Beruf. Likewise rufen → der Ruf.",
+  "ru": "От глагола berufen («призывать») без окончания — der Beruf. Так же rufen → der Ruf.",
+  "pl": "Od czasownika berufen („powoływać”) bez końcówki — der Beruf. Tak samo rufen → der Ruf."
+ },
+ {
+  "en": "Reliable. Exception: das Spiel.",
+  "ru": "надёжно. Исключение: das Spiel.",
+  "pl": "reguła pewna. Wyjątek: das Spiel."
+ },
+ {
+  "en": "coffee",
+  "ru": "кофе",
+  "pl": "kawa"
+ },
+ {
+  "en": "BEVERAGES → MOSTLY DER",
+  "ru": "НАПИТКИ → ЧАЩЕ DER",
+  "pl": "NAPOJE → ZWYKLE DER"
+ },
+ {
+  "en": "Most beverages are masculine.",
+  "ru": "Большинство напитков — мужского рода.",
+  "pl": "Większość napojów jest rodzaju męskiego."
+ },
+ {
+  "en": "Reliable for alcohol and hot drinks. Exceptions: das Bier, das Wasser, die Milch.",
+  "ru": "надёжно для алкоголя и горячих напитков. Исключения: das Bier, das Wasser, die Milch.",
+  "pl": "reguła pewna w przypadku napojów alkoholowych i gorących. Wyjątki: das Bier, das Wasser, die Milch."
+ },
+ {
+  "en": "work, job",
+  "ru": "работа",
+  "pl": "praca"
+ },
+ {
+  "en": "Just remember this one: die Arbeit.",
+  "ru": "Это слово надо просто запомнить: die Arbeit.",
+  "pl": "To słowo trzeba po prostu zapamiętać: die Arbeit."
+ },
+ {
+  "en": "answer",
+  "ru": "ответ",
+  "pl": "odpowiedź"
+ },
+ {
+  "en": "Just remember this one: die Antwort.",
+  "ru": "Это слово надо просто запомнить: die Antwort.",
+  "pl": "To słowo trzeba po prostu zapamiętać: die Antwort."
+ },
+ {
+  "en": "city, town",
+  "ru": "город",
+  "pl": "miasto"
+ },
+ {
+  "en": "Just remember this one: die Stadt.",
+  "ru": "Это слово надо просто запомнить: die Stadt.",
+  "pl": "To słowo trzeba po prostu zapamiętać: die Stadt."
+ },
+ {
+  "en": "time",
+  "ru": "время",
+  "pl": "czas"
+ },
+ {
+  "en": "Just remember this one: die Zeit.",
+  "ru": "Это слово надо просто запомнить: die Zeit.",
+  "pl": "To słowo trzeba po prostu zapamiętać: die Zeit."
+ },
+ {
+  "en": "hand",
+  "ru": "рука, кисть",
+  "pl": "ręka, dłoń"
+ },
+ {
+  "en": "Just remember this one: die Hand.",
+  "ru": "Это слово надо просто запомнить: die Hand.",
+  "pl": "To słowo trzeba po prostu zapamiętać: die Hand."
+ },
+ {
+  "en": "house",
+  "ru": "дом",
+  "pl": "dom"
+ },
+ {
+  "en": "Just remember this one: das Haus.",
+  "ru": "Это слово надо просто запомнить: das Haus.",
+  "pl": "To słowo trzeba po prostu zapamiętać: das Haus."
+ },
+ {
+  "en": "child",
+  "ru": "ребёнок",
+  "pl": "dziecko"
+ },
+ {
+  "en": "YOUNG BEINGS",
+  "ru": "ДЕТИ И ДЕТЁНЫШИ",
+  "pl": "DZIECI I MŁODE ZWIERZĘTA"
+ },
+ {
+  "en": "Children and young animals are neuter, whatever their sex.",
+  "ru": "Дети и детёныши животных — среднего рода, независимо от пола.",
+  "pl": "Dzieci i młode zwierzęta są rodzaju nijakiego, bez względu na płeć."
+ },
+ {
+  "en": "Reliable. It also explains das Mädchen.",
+  "ru": "надёжно. То же объясняет das Mädchen.",
+  "pl": "reguła pewna. Wyjaśnia też das Mädchen."
+ },
+ {
+  "en": "book",
+  "ru": "книга",
+  "pl": "książka"
+ },
+ {
+  "en": "Just remember this one: das Buch.",
+  "ru": "Это слово надо просто запомнить: das Buch.",
+  "pl": "To słowo trzeba po prostu zapamiętać: das Buch."
+ },
+ {
+  "en": "decision",
+  "ru": "решение",
+  "pl": "decyzja"
+ },
+ {
+  "en": "vocational training",
+  "ru": "образование, профессиональное обучение",
+  "pl": "wykształcenie, nauka zawodu"
+ },
+ {
+  "en": "exercise, practice",
+  "ru": "упражнение",
+  "pl": "ćwiczenie"
+ },
+ {
+  "en": "(job) application",
+  "ru": "заявление о приёме на работу, отклик на вакансию",
+  "pl": "podanie o pracę, aplikacja"
+ },
+ {
+  "en": "truth",
+  "ru": "правда",
+  "pl": "prawda"
+ },
+ {
+  "en": "beauty",
+  "ru": "красота",
+  "pl": "piękno"
+ },
+ {
+  "en": "small thing, trifle",
+  "ru": "мелочь",
+  "pl": "drobiazg"
+ },
+ {
+  "en": "cleanliness",
+  "ru": "чистота",
+  "pl": "czystość"
+ },
+ {
+  "en": "speed",
+  "ru": "скорость",
+  "pl": "prędkość"
+ },
+ {
+  "en": "punctuality",
+  "ru": "пунктуальность",
+  "pl": "punktualność"
+ },
+ {
+  "en": "accuracy, precision",
+  "ru": "точность",
+  "pl": "dokładność"
+ },
+ {
+  "en": "friendliness, kindness",
+  "ru": "дружелюбие",
+  "pl": "życzliwość"
+ },
+ {
+  "en": "neighbourhood",
+  "ru": "соседство",
+  "pl": "sąsiedztwo"
+ },
+ {
+  "en": "partnership",
+  "ru": "партнёрство",
+  "pl": "partnerstwo"
+ },
+ {
+  "en": "science",
+  "ru": "наука",
+  "pl": "nauka (dziedzina wiedzy)"
+ },
+ {
+  "en": "nation",
+  "ru": "нация",
+  "pl": "naród"
+ },
+ {
+  "en": "production",
+  "ru": "производство",
+  "pl": "produkcja"
+ },
+ {
+  "en": "organisation",
+  "ru": "организация",
+  "pl": "organizacja"
+ },
+ {
+  "en": "discussion",
+  "ru": "дискуссия",
+  "pl": "dyskusja"
+ },
+ {
+  "en": "station, stop",
+  "ru": "станция",
+  "pl": "stacja"
+ },
+ {
+  "en": "identity",
+  "ru": "идентичность",
+  "pl": "tożsamość"
+ },
+ {
+  "en": "topicality, relevance",
+  "ru": "актуальность",
+  "pl": "aktualność"
+ },
+ {
+  "en": "mathematics",
+  "ru": "математика",
+  "pl": "matematyka"
+ },
+ {
+  "en": "grammar",
+  "ru": "грамматика",
+  "pl": "gramatyka"
+ },
+ {
+  "en": "logic",
+  "ru": "логика",
+  "pl": "logika"
+ },
+ {
+  "en": "criticism; review",
+  "ru": "критика",
+  "pl": "krytyka"
+ },
+ {
+  "en": "republic",
+  "ru": "республика",
+  "pl": "republika"
+ },
+ {
+  "en": "dynamics",
+  "ru": "динамика",
+  "pl": "dynamika"
+ },
+ {
+  "en": "(public) library",
+  "ru": "библиотека",
+  "pl": "biblioteka"
+ },
+ {
+  "en": "butcher's shop",
+  "ru": "мясная лавка",
+  "pl": "sklep mięsny"
+ },
+ {
+  "en": "cake shop, café-patisserie",
+  "ru": "кондитерская",
+  "pl": "cukiernia"
+ },
+ {
+  "en": "fairy tale",
+  "ru": "сказка",
+  "pl": "bajka, baśń"
+ },
+ {
+  "en": "sausage, frankfurter",
+  "ru": "сосиска",
+  "pl": "parówka"
+ },
+ {
+  "en": "chicken (dish)",
+  "ru": "курица (блюдо)",
+  "pl": "kurczak (danie)"
+ },
+ {
+  "en": "kitten",
+  "ru": "котёнок",
+  "pl": "kotek"
+ },
+ {
+  "en": "apartment, studio flat",
+  "ru": "небольшая квартира, студия",
+  "pl": "małe mieszkanie, kawalerka"
+ },
+ {
+  "en": "compliment",
+  "ru": "комплимент",
+  "pl": "komplement"
+ },
+ {
+  "en": "audience",
+  "ru": "публика",
+  "pl": "publiczność"
+ },
+ {
+  "en": "academic secondary school",
+  "ru": "гимназия",
+  "pl": "liceum"
+ },
+ {
+  "en": "ministry",
+  "ru": "министерство",
+  "pl": "ministerstwo"
+ },
+ {
+  "en": "internship",
+  "ru": "практика",
+  "pl": "praktyki, staż"
+ },
+ {
+  "en": "drinking",
+  "ru": "питьё",
+  "pl": "picie"
+ },
+ {
+  "en": "swimming",
+  "ru": "плавание",
+  "pl": "pływanie"
+ },
+ {
+  "en": "writing; letter",
+  "ru": "письмо (официальное); процесс письма",
+  "pl": "pismo (urzędowe); pisanie"
+ },
+ {
+  "en": "refugee",
+  "ru": "беженец",
+  "pl": "uchodźca"
+ },
+ {
+  "en": "darling, favourite",
+  "ru": "любимец",
+  "pl": "ulubieniec"
+ },
+ {
+  "en": "professor",
+  "ru": "профессор",
+  "pl": "profesor"
+ },
+ {
+  "en": "doctor (title)",
+  "ru": "доктор",
+  "pl": "doktor"
+ },
+ {
+  "en": "monitor",
+  "ru": "монитор",
+  "pl": "monitor"
+ },
+ {
+  "en": "bag",
+  "ru": "сумка",
+  "pl": "torba"
+ },
+ {
+  "en": "flower",
+  "ru": "цветок",
+  "pl": "kwiat"
+ },
+ {
+  "en": "bridge",
+  "ru": "мост",
+  "pl": "most"
+ },
+ {
+  "en": "minute",
+  "ru": "минута",
+  "pl": "minuta"
+ },
+ {
+  "en": "number",
+  "ru": "номер",
+  "pl": "numer"
+ },
+ {
+  "en": "Ends in -er but is not made from a verb, so the \"-er → der\" rule does not apply. Remember: die Nummer.",
+  "ru": "Оканчивается на -er, но не от глагола, поэтому правило «-er → der» здесь не работает. Запомните: die Nummer.",
+  "pl": "Kończy się na -er, ale nie pochodzi od czasownika, więc reguła „-er → der” tu nie działa. Zapamiętaj: die Nummer."
+ },
+ {
+  "en": "boy",
+  "ru": "мальчик",
+  "pl": "chłopiec"
+ },
+ {
+  "en": "MALE BEING IN -E",
+  "ru": "СУЩЕСТВО МУЖСКОГО ПОЛА НА -E",
+  "pl": "ISTOTA PŁCI MĘSKIEJ NA -E"
+ },
+ {
+  "en": "Nouns in -e are usually die, but a male person or animal is der. Sex beats the ending.",
+  "ru": "Слова на -e обычно die, но человек или животное мужского пола — der. Пол важнее окончания.",
+  "pl": "Wyrazy na -e są zwykle die, ale człowiek lub zwierzę płci męskiej to der. Płeć jest ważniejsza niż końcówka."
+ },
+ {
+  "en": "Reliable, no exceptions.",
+  "ru": "надёжно, исключений нет.",
+  "pl": "reguła pewna, bez wyjątków."
+ },
+ {
+  "en": "hare",
+  "ru": "заяц",
+  "pl": "zając"
+ },
+ {
+  "en": "existence",
+  "ru": "существование",
+  "pl": "istnienie"
+ },
+ {
+  "en": "-ENZ / -ANZ ENDING",
+  "ru": "ОКОНЧАНИЕ -ENZ / -ANZ",
+  "pl": "KOŃCÓWKA -ENZ / -ANZ"
+ },
+ {
+  "en": "Nouns ending in -enz and -anz are feminine.",
+  "ru": "Слова на -enz и -anz — женского рода.",
+  "pl": "Wyrazy na -enz i -anz są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable. Exception: der Tanz (short word).",
+  "ru": "очень надёжно. Исключение: der Tanz (короткое слово).",
+  "pl": "reguła bardzo pewna. Wyjątek: der Tanz (krótkie słowo)."
+ },
+ {
+  "en": "difference",
+  "ru": "разница",
+  "pl": "różnica"
+ },
+ {
+  "en": "intelligence",
+  "ru": "интеллект",
+  "pl": "inteligencja"
+ },
+ {
+  "en": "conference",
+  "ru": "конференция",
+  "pl": "konferencja"
+ },
+ {
+  "en": "tolerance",
+  "ru": "терпимость",
+  "pl": "tolerancja"
+ },
+ {
+  "en": "distance",
+  "ru": "дистанция",
+  "pl": "dystans"
+ },
+ {
+  "en": "family",
+  "ru": "семья",
+  "pl": "rodzina"
+ },
+ {
+  "en": "-IE ENDING",
+  "ru": "ОКОНЧАНИЕ -IE",
+  "pl": "KOŃCÓWKA -IE"
+ },
+ {
+  "en": "Nouns ending in -ie are feminine.",
+  "ru": "Слова на -ie — женского рода.",
+  "pl": "Wyrazy na -ie są rodzaju żeńskiego."
+ },
+ {
+  "en": "Reliable. Exception: das Knie.",
+  "ru": "надёжно. Исключение: das Knie.",
+  "pl": "reguła pewna. Wyjątek: das Knie."
+ },
+ {
+  "en": "energy",
+  "ru": "энергия",
+  "pl": "energia"
+ },
+ {
+  "en": "technology",
+  "ru": "технология",
+  "pl": "technologia"
+ },
+ {
+  "en": "melody",
+  "ru": "мелодия",
+  "pl": "melodia"
+ },
+ {
+  "en": "biology",
+  "ru": "биология",
+  "pl": "biologia"
+ },
+ {
+  "en": "photography; photo",
+  "ru": "фотография",
+  "pl": "fotografia"
+ },
+ {
+  "en": "theory",
+  "ru": "теория",
+  "pl": "teoria"
+ },
+ {
+  "en": "culture",
+  "ru": "культура",
+  "pl": "kultura"
+ },
+ {
+  "en": "-UR ENDING",
+  "ru": "ОКОНЧАНИЕ -UR",
+  "pl": "KOŃCÓWKA -UR"
+ },
+ {
+  "en": "Nouns ending in -ur are feminine.",
+  "ru": "Слова на -ur — женского рода.",
+  "pl": "Wyrazy na -ur są rodzaju żeńskiego."
+ },
+ {
+  "en": "Reliable. Exception: der Flur.",
+  "ru": "надёжно. Исключение: der Flur.",
+  "pl": "reguła pewna. Wyjątek: der Flur."
+ },
+ {
+  "en": "nature",
+  "ru": "природа",
+  "pl": "przyroda"
+ },
+ {
+  "en": "structure",
+  "ru": "структура",
+  "pl": "struktura"
+ },
+ {
+  "en": "literature",
+  "ru": "литература",
+  "pl": "literatura"
+ },
+ {
+  "en": "architecture",
+  "ru": "архитектура",
+  "pl": "architektura"
+ },
+ {
+  "en": "agency",
+  "ru": "агентство",
+  "pl": "agencja"
+ },
+ {
+  "en": "temperature",
+  "ru": "температура",
+  "pl": "temperatura"
+ },
+ {
+  "en": "garage",
+  "ru": "гараж",
+  "pl": "garaż"
+ },
+ {
+  "en": "-AGE ENDING",
+  "ru": "ОКОНЧАНИЕ -AGE",
+  "pl": "KOŃCÓWKA -AGE"
+ },
+ {
+  "en": "Nouns ending in -age (French, pronounced \"-ahzh\") are feminine.",
+  "ru": "Слова на -age (французские, читается «-аж») — женского рода.",
+  "pl": "Wyrazy na -age (francuskie, czyta się „-aż”) są rodzaju żeńskiego."
+ },
+ {
+  "en": "Reliable. Exception: das Image (English).",
+  "ru": "надёжно. Исключение: das Image (английское).",
+  "pl": "reguła pewna. Wyjątek: das Image (z angielskiego)."
+ },
+ {
+  "en": "floor, storey",
+  "ru": "этаж",
+  "pl": "piętro"
+ },
+ {
+  "en": "report, feature (media)",
+  "ru": "репортаж",
+  "pl": "reportaż"
+ },
+ {
+  "en": "assembly, installation",
+  "ru": "монтаж",
+  "pl": "montaż"
+ },
+ {
+  "en": "massage",
+  "ru": "массаж",
+  "pl": "masaż"
+ },
+ {
+  "en": "cigarette",
+  "ru": "сигарета",
+  "pl": "papieros"
+ },
+ {
+  "en": "-ETTE ENDING",
+  "ru": "ОКОНЧАНИЕ -ETTE",
+  "pl": "KOŃCÓWKA -ETTE"
+ },
+ {
+  "en": "Nouns ending in -ette are feminine.",
+  "ru": "Слова на -ette — женского рода.",
+  "pl": "Wyrazy na -ette są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable. Not the same as -ett: das Bett.",
+  "ru": "очень надёжно. Не путать с -ett: das Bett.",
+  "pl": "reguła bardzo pewna. Nie mylić z -ett: das Bett."
+ },
+ {
+  "en": "napkin",
+  "ru": "салфетка",
+  "pl": "serwetka"
+ },
+ {
+  "en": "toilet",
+  "ru": "туалет",
+  "pl": "toaleta"
+ },
+ {
+  "en": "pill, tablet (medicine)",
+  "ru": "таблетка",
+  "pl": "tabletka"
+ },
+ {
+  "en": "jam",
+  "ru": "джем, варенье",
+  "pl": "dżem, konfitura"
+ },
+ {
+  "en": "-ADE ENDING",
+  "ru": "ОКОНЧАНИЕ -ADE",
+  "pl": "KOŃCÓWKA -ADE"
+ },
+ {
+  "en": "Nouns ending in -ade are feminine.",
+  "ru": "Слова на -ade — женского рода.",
+  "pl": "Wyrazy na -ade są rodzaju żeńskiego."
+ },
+ {
+  "en": "Reliable for things. People in -ade can be der: der Nomade.",
+  "ru": "надёжно для предметов. Люди на -ade могут быть der: der Nomade.",
+  "pl": "reguła pewna w przypadku rzeczy. Nazwy osób na -ade mogą mieć der: der Nomade."
+ },
+ {
+  "en": "chocolate",
+  "ru": "шоколад",
+  "pl": "czekolada"
+ },
+ {
+  "en": "lemonade, soft drink",
+  "ru": "лимонад",
+  "pl": "lemoniada"
+ },
+ {
+  "en": "little book, booklet",
+  "ru": "книжечка",
+  "pl": "książeczka"
+ },
+ {
+  "en": "little bird",
+  "ru": "птичка",
+  "pl": "ptaszek"
+ },
+ {
+  "en": "north",
+  "ru": "север",
+  "pl": "północ"
+ },
+ {
+  "en": "CARDINAL DIRECTIONS",
+  "ru": "СТОРОНЫ СВЕТА",
+  "pl": "STRONY ŚWIATA"
+ },
+ {
+  "en": "The cardinal directions are masculine.",
+  "ru": "Стороны света — мужского рода.",
+  "pl": "Strony świata są rodzaju męskiego."
+ },
+ {
+  "en": "south",
+  "ru": "юг",
+  "pl": "południe"
+ },
+ {
+  "en": "east",
+  "ru": "восток",
+  "pl": "wschód"
+ },
+ {
+  "en": "west",
+  "ru": "запад",
+  "pl": "zachód"
+ },
+ {
+  "en": "wine",
+  "ru": "вино",
+  "pl": "wino"
+ },
+ {
+  "en": "tea",
+  "ru": "чай",
+  "pl": "herbata"
+ },
+ {
+  "en": "juice",
+  "ru": "сок",
+  "pl": "sok"
+ },
+ {
+  "en": "sparkling wine",
+  "ru": "игристое вино",
+  "pl": "wino musujące"
+ },
+ {
+  "en": "beer",
+  "ru": "пиво",
+  "pl": "piwo"
+ },
+ {
+  "en": "BEVERAGE EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ СРЕДИ НАПИТКОВ",
+  "pl": "WYJĄTEK WŚRÓD NAPOJÓW"
+ },
+ {
+  "en": "Beverages are usually der, but not this one. The three main exceptions: das Bier, das Wasser, die Milch.",
+  "ru": "Напитки обычно der, но это слово — нет. Три главных исключения: das Bier, das Wasser, die Milch.",
+  "pl": "Napoje są zwykle der, ale to słowo nie. Trzy główne wyjątki: das Bier, das Wasser, die Milch."
+ },
+ {
+  "en": "Memorise these three.",
+  "ru": "запомните эти три.",
+  "pl": "zapamiętaj te trzy."
+ },
+ {
+  "en": "tree",
+  "ru": "дерево",
+  "pl": "drzewo"
+ },
+ {
+  "en": "-um is no hint here, as in Raum, Traum. Remember: der Baum.",
+  "ru": "-um здесь не подсказка, как в Raum, Traum. Запомните: der Baum.",
+  "pl": "-um nie jest tu wskazówką, podobnie jak w Raum, Traum. Zapamiętaj: der Baum."
+ },
+ {
+  "en": "drama",
+  "ru": "драма",
+  "pl": "dramat"
+ },
+ {
+  "en": "dilemma",
+  "ru": "дилемма",
+  "pl": "dylemat"
+ },
+ {
+  "en": "comma",
+  "ru": "запятая",
+  "pl": "przecinek"
+ },
+ {
+  "en": "water",
+  "ru": "вода",
+  "pl": "woda"
+ },
+ {
+  "en": "milk",
+  "ru": "молоко",
+  "pl": "mleko"
+ },
+ {
+  "en": "moment",
+  "ru": "момент, мгновение",
+  "pl": "moment, chwila"
+ },
+ {
+  "en": "-MENT EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -MENT",
+  "pl": "WYJĄTEK OD -MENT"
+ },
+ {
+  "en": "Nouns in -ment are usually das, but Moment is der.",
+  "ru": "Слова на -ment обычно das, но Moment — der.",
+  "pl": "Wyrazy na -ment są zwykle das, ale Moment jest der."
+ },
+ {
+  "en": "Memorise der Moment (point in time). Das Moment = \"factor\" exists too, but is rare.",
+  "ru": "запомните der Moment (мгновение). Есть и das Moment — «фактор», редкое.",
+  "pl": "zapamiętaj der Moment (chwila). Istnieje też das Moment — „czynnik”, ale to rzadkie słowo."
+ },
+ {
+  "en": "company, firm",
+  "ru": "фирма, компания",
+  "pl": "firma"
+ },
+ {
+  "en": "-MA EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -MA",
+  "pl": "WYJĄTEK OD -MA"
+ },
+ {
+  "en": "Greek nouns in -ma are das, but Firma is not Greek: die Firma.",
+  "ru": "Греческие слова на -ma — das, но Firma не греческое: die Firma.",
+  "pl": "Greckie wyrazy na -ma są das, ale Firma nie jest grecka: die Firma."
+ },
+ {
+  "en": "Memorise die Firma, die Oma, die Mama.",
+  "ru": "запомните die Firma, die Oma, die Mama.",
+  "pl": "zapamiętaj die Firma, die Oma, die Mama."
+ },
+ {
+  "en": "hallway, corridor",
+  "ru": "коридор, прихожая",
+  "pl": "korytarz, przedpokój"
+ },
+ {
+  "en": "-UR EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -UR",
+  "pl": "WYJĄTEK OD -UR"
+ },
+ {
+  "en": "Nouns in -ur are usually die, but Flur is der.",
+  "ru": "Слова на -ur обычно die, но Flur — der.",
+  "pl": "Wyrazy na -ur są zwykle die, ale Flur jest der."
+ },
+ {
+  "en": "Memorise der Flur (hallway). Die Flur = \"open fields\" exists too, but is rare.",
+  "ru": "запомните der Flur (коридор). Есть и die Flur — «угодья», редкое.",
+  "pl": "zapamiętaj der Flur (korytarz). Istnieje też die Flur — „pola, łąki”, ale to rzadkie słowo."
+ },
+ {
+  "en": "permission",
+  "ru": "разрешение",
+  "pl": "pozwolenie"
+ },
+ {
+  "en": "-NIS EXCEPTION",
+  "ru": "ИСКЛЮЧЕНИЕ ИЗ -NIS",
+  "pl": "WYJĄTEK OD -NIS"
+ },
+ {
+  "en": "Nouns in -nis are mostly das, but Erlaubnis is die.",
+  "ru": "Слова на -nis чаще das, но Erlaubnis — die.",
+  "pl": "Wyrazy na -nis są najczęściej das, ale Erlaubnis jest die."
+ },
+ {
+  "en": "Memorise die Erlaubnis, die Kenntnis.",
+  "ru": "запомните die Erlaubnis, die Kenntnis.",
+  "pl": "zapamiętaj die Erlaubnis, die Kenntnis."
+ },
+ {
+  "en": "teacher (female)",
+  "ru": "учительница",
+  "pl": "nauczycielka"
+ },
+ {
+  "en": "-IN ENDING (FEMALE PERSON)",
+  "ru": "ОКОНЧАНИЕ -IN (ЖЕНЩИНА)",
+  "pl": "KOŃCÓWKA -IN (KOBIETA)"
+ },
+ {
+  "en": "Nouns ending in -in that name a woman are feminine.",
+  "ru": "Слова на -in, обозначающие женщину, — женского рода.",
+  "pl": "Wyrazy na -in oznaczające kobietę są rodzaju żeńskiego."
+ },
+ {
+  "en": "Very reliable. Stressed -in is a different ending: der Termin.",
+  "ru": "очень надёжно. Но -in с ударением — другое окончание: der Termin.",
+  "pl": "reguła bardzo pewna. Ale akcentowane -in to inna końcówka: der Termin."
+ },
+ {
+  "en": "friend, girlfriend",
+  "ru": "подруга",
+  "pl": "przyjaciółka"
+ },
+ {
+  "en": "doctor (female)",
+  "ru": "врач (женщина)",
+  "pl": "lekarka"
+ },
+ {
+  "en": "colleague (female)",
+  "ru": "коллега (женщина)",
+  "pl": "koleżanka (z pracy)"
+ },
+ {
+  "en": "boss (female)",
+  "ru": "начальница",
+  "pl": "szefowa"
+ },
+ {
+  "en": "building",
+  "ru": "здание",
+  "pl": "budynek"
+ },
+ {
+  "en": "GE- PREFIX",
+  "ru": "ПРИСТАВКА GE-",
+  "pl": "PRZEDROSTEK GE-"
+ },
+ {
+  "en": "Reliable, but an ending beats the prefix: die Gesundheit (-heit). Exception: die Geschichte.",
+  "ru": "надёжно, но окончание сильнее приставки: die Gesundheit (-heit). Исключение: die Geschichte.",
+  "pl": "reguła pewna, ale końcówka jest silniejsza niż przedrostek: die Gesundheit (-heit). Wyjątek: die Geschichte."
+ },
+ {
+  "en": "vegetables (collective)",
+  "ru": "овощи (собирательное)",
+  "pl": "warzywa (zbiorowo)"
+ },
+ {
+  "en": "drink, beverage",
+  "ru": "напиток",
+  "pl": "napój"
+ },
+ {
+  "en": "conversation",
+  "ru": "разговор",
+  "pl": "rozmowa"
+ },
+ {
+  "en": "present, gift",
+  "ru": "подарок",
+  "pl": "prezent"
+ },
+ {
+  "en": "face",
+  "ru": "лицо",
+  "pl": "twarz"
+ },
+ {
+  "en": "result",
+  "ru": "результат",
+  "pl": "wynik"
+ },
+ {
+  "en": "-NIS ENDING",
+  "ru": "ОКОНЧАНИЕ -NIS",
+  "pl": "KOŃCÓWKA -NIS"
+ },
+ {
+  "en": "Nouns ending in -nis are mostly neuter.",
+  "ru": "Слова на -nis чаще всего среднего рода.",
+  "pl": "Wyrazy na -nis są najczęściej rodzaju nijakiego."
+ },
+ {
+  "en": "About 2 in 3. Common exceptions: die Erlaubnis, die Kenntnis.",
+  "ru": "примерно 2 из 3. Частые исключения: die Erlaubnis, die Kenntnis.",
+  "pl": "działa mniej więcej w 2 przypadkach na 3. Częste wyjątki: die Erlaubnis, die Kenntnis."
+ },
+ {
+  "en": "report card, certificate",
+  "ru": "аттестат, свидетельство",
+  "pl": "świadectwo"
+ },
+ {
+  "en": "experience (an event)",
+  "ru": "переживание, впечатление",
+  "pl": "przeżycie, wrażenie"
+ },
+ {
+  "en": "understanding",
+  "ru": "понимание",
+  "pl": "zrozumienie"
+ },
+ {
+  "en": "teacher",
+  "ru": "учитель",
+  "pl": "nauczyciel"
+ },
+ {
+  "en": "-ER ENDING (FROM A VERB)",
+  "ru": "ОКОНЧАНИЕ -ER (ОТ ГЛАГОЛА)",
+  "pl": "KOŃCÓWKA -ER (OD CZASOWNIKA)"
+ },
+ {
+  "en": "Nouns in -er made from a verb (a person or a device) are masculine.",
+  "ru": "Слова на -er, образованные от глагола (кто делает / чем делают), — мужского рода.",
+  "pl": "Wyrazy na -er utworzone od czasownika (kto coś robi / czym się coś robi) są rodzaju męskiego."
+ },
+ {
+  "en": "Very reliable when the noun comes from a verb. Otherwise no: die Butter, das Zimmer.",
+  "ru": "очень надёжно, если слово от глагола. Иначе — нет: die Butter, das Zimmer.",
+  "pl": "reguła bardzo pewna, jeśli słowo pochodzi od czasownika. Inaczej — nie: die Butter, das Zimmer."
+ },
+ {
+  "en": "driver",
+  "ru": "водитель",
+  "pl": "kierowca"
+ },
+ {
+  "en": "TV (set)",
+  "ru": "телевизор",
+  "pl": "telewizor"
+ },
+ {
+  "en": "printer",
+  "ru": "принтер",
+  "pl": "drukarka"
+ },
+ {
+  "en": "alarm clock",
+  "ru": "будильник",
+  "pl": "budzik"
+ },
+ {
+  "en": "singing",
+  "ru": "пение",
+  "pl": "śpiew"
+ },
+ {
+  "en": "car",
+  "ru": "автомобиль",
+  "pl": "samochód"
+ },
+ {
+  "en": "-O ENDING",
+  "ru": "ОКОНЧАНИЕ -O",
+  "pl": "KOŃCÓWKA -O"
+ },
+ {
+  "en": "Nouns ending in -o are neuter.",
+  "ru": "Слова на -o — среднего рода.",
+  "pl": "Wyrazy na -o są rodzaju nijakiego."
+ },
+ {
+  "en": "Reliable. Exception: der Euro.",
+  "ru": "надёжно. Исключение: der Euro.",
+  "pl": "reguła pewna. Wyjątek: der Euro."
+ },
+ {
+  "en": "cinema",
+  "ru": "кинотеатр",
+  "pl": "kino"
+ },
+ {
+  "en": "office",
+  "ru": "офис",
+  "pl": "biuro"
+ },
+ {
+  "en": "video",
+  "ru": "видео",
+  "pl": "wideo"
+ },
+ {
+  "en": "echo",
+  "ru": "эхо",
+  "pl": "echo"
+ },
+ {
+  "en": "bank account",
+  "ru": "банковский счёт",
+  "pl": "konto bankowe"
+ },
+ {
+  "en": "phone call",
+  "ru": "телефонный звонок",
+  "pl": "telefon (połączenie)"
+ },
+ {
+  "en": "A noun made from a verb stem with no ending (rufen → der Ruf) is masculine.",
+  "ru": "Существительное из основы глагола без окончания (rufen → der Ruf) — мужского рода.",
+  "pl": "Rzeczownik utworzony od tematu czasownika bez końcówki (rufen → der Ruf) jest rodzaju męskiego."
+ },
+ {
+  "en": "visit",
+  "ru": "визит, посещение",
+  "pl": "wizyta, odwiedziny"
+ },
+ {
+  "en": "beginning",
+  "ru": "начало",
+  "pl": "początek"
+ },
+ {
+  "en": "flight",
+  "ru": "полёт, рейс",
+  "pl": "lot"
+ },
+ {
+  "en": "sleep",
+  "ru": "сон (состояние)",
+  "pl": "sen (stan)"
+ },
+ {
+  "en": "king",
+  "ru": "король",
+  "pl": "król"
+ },
+ {
+  "en": "-IG / -ICH ENDING",
+  "ru": "ОКОНЧАНИЕ -IG / -ICH",
+  "pl": "KOŃCÓWKA -IG / -ICH"
+ },
+ {
+  "en": "Nouns ending in -ig or -ich are masculine.",
+  "ru": "Слова на -ig и -ich — мужского рода.",
+  "pl": "Wyrazy na -ig i -ich są rodzaju męskiego."
+ },
+ {
+  "en": "Reliable, almost no exceptions.",
+  "ru": "надёжно, исключений почти нет.",
+  "pl": "reguła pewna, wyjątków prawie nie ma."
+ },
+ {
+  "en": "honey",
+  "ru": "мёд",
+  "pl": "miód"
+ },
+ {
+  "en": "cage",
+  "ru": "клетка (для животных)",
+  "pl": "klatka (dla zwierząt)"
+ },
+ {
+  "en": "vinegar",
+  "ru": "уксус",
+  "pl": "ocet"
+ },
+ {
+  "en": "carpet",
+  "ru": "ковёр",
+  "pl": "dywan"
+ },
+ {
+  "en": "police officer",
+  "ru": "полицейский",
+  "pl": "policjant"
+ },
+ {
+  "en": "-IST ENDING",
+  "ru": "ОКОНЧАНИЕ -IST",
+  "pl": "KOŃCÓWKA -IST"
+ },
+ {
+  "en": "Nouns ending in -ist (people by job or outlook) are masculine.",
+  "ru": "Слова на -ist (люди по роду занятий или взглядам) — мужского рода.",
+  "pl": "Wyrazy na -ist (oznaczające ludzi ze względu na zawód lub poglądy) są rodzaju męskiego."
+ },
+ {
+  "en": "Very reliable. A woman gets -in: die Polizistin.",
+  "ru": "очень надёжно. Женщина — с -in: die Polizistin.",
+  "pl": "reguła bardzo pewna. Kobieta — z -in: die Polizistin."
+ },
+ {
+  "en": "journalist",
+  "ru": "журналист",
+  "pl": "dziennikarz"
+ },
+ {
+  "en": "tourist",
+  "ru": "турист",
+  "pl": "turysta"
+ },
+ {
+  "en": "optimist",
+  "ru": "оптимист",
+  "pl": "optymista"
+ },
+ {
+  "en": "pianist",
+  "ru": "пианист",
+  "pl": "pianista"
+ },
+ {
+  "en": "baby",
+  "ru": "младенец, малыш",
+  "pl": "niemowlę, maluch"
+ },
+ {
+  "en": "calf",
+  "ru": "телёнок",
+  "pl": "cielę"
+ },
+ {
+  "en": "lamb",
+  "ru": "ягнёнок",
+  "pl": "jagnię"
+ },
+ {
+  "en": "chick",
+  "ru": "цыплёнок",
+  "pl": "pisklę"
+ },
+ {
+  "en": "bed",
+  "ru": "кровать",
+  "pl": "łóżko"
+ },
+ {
+  "en": "-ETT ENDING",
+  "ru": "ОКОНЧАНИЕ -ETT",
+  "pl": "KOŃCÓWKA -ETT"
+ },
+ {
+  "en": "Nouns ending in -ett are neuter.",
+  "ru": "Слова на -ett — среднего рода.",
+  "pl": "Wyrazy na -ett są rodzaju nijakiego."
+ },
+ {
+  "en": "Reliable. Not the same as -ette: die Toilette.",
+  "ru": "надёжно. Не путать с -ette: die Toilette.",
+  "pl": "reguła pewna. Nie mylić z -ette: die Toilette."
+ },
+ {
+  "en": "ballet",
+  "ru": "балет",
+  "pl": "balet"
+ },
+ {
+  "en": "label, tag",
+  "ru": "этикетка",
+  "pl": "etykieta (na produkcie)"
+ },
+ {
+  "en": "tray",
+  "ru": "поднос",
+  "pl": "taca"
+ },
+ {
+  "en": "factor",
+  "ru": "фактор",
+  "pl": "czynnik"
+ },
+ {
+  "en": "sensor",
+  "ru": "датчик",
+  "pl": "czujnik"
+ },
+ {
+  "en": "humour",
+  "ru": "юмор",
+  "pl": "humor"
+ },
+ {
+  "en": "egoism",
+  "ru": "эгоизм",
+  "pl": "egoizm"
+ },
+ {
+  "en": "idealism",
+  "ru": "идеализм",
+  "pl": "idealizm"
+ },
+ {
+  "en": "organism",
+  "ru": "организм",
+  "pl": "organizm"
+ },
+ {
+  "en": "trauma",
+  "ru": "травма (психическая)",
+  "pl": "trauma (psychiczna)"
+ },
+ {
+  "en": "panorama",
+  "ru": "панорама",
+  "pl": "panorama"
+ },
+ {
+  "en": "parade",
+  "ru": "парад",
+  "pl": "parada"
+ },
+ {
+  "en": "Olympics, Olympiad",
+  "ru": "олимпиада",
+  "pl": "olimpiada"
+ },
+ {
+  "en": "album",
+  "ru": "альбом",
+  "pl": "album"
+ },
+ {
+  "en": "visa",
+  "ru": "виза",
+  "pl": "wiza"
+ },
+ {
+  "en": "criterion",
+  "ru": "критерий",
+  "pl": "kryterium"
+ },
+ {
+  "en": "(political) party",
+  "ru": "партия (политическая)",
+  "pl": "partia (polityczna)"
+ },
+ {
+  "en": "clarinet",
+  "ru": "кларнет",
+  "pl": "klarnet"
+ },
+ {
+  "en": "young lady, Miss",
+  "ru": "барышня, фройляйн",
+  "pl": "panienka, panna"
+ }
+]

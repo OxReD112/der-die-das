@@ -1,0 +1,527 @@
+[
+ {
+  "en": "Can you see me?",
+  "ru": "Ты меня видишь?",
+  "pl": "Widzisz mnie?"
+ },
+ {
+  "en": "Will you pick me up there?",
+  "ru": "Ты заберёшь меня там?",
+  "pl": "Odbierzesz mnie stamtąd?"
+ },
+ {
+  "en": "Can you help me?",
+  "ru": "Ты можешь мне помочь?",
+  "pl": "Możesz mi pomóc?"
+ },
+ {
+  "en": "Will you bring me another coffee?",
+  "ru": "Принесёшь мне ещё кофе?",
+  "pl": "Przyniesiesz mi jeszcze kawy?"
+ },
+ {
+  "en": "I see you!",
+  "ru": "Я тебя вижу!",
+  "pl": "Widzę cię!"
+ },
+ {
+  "en": "I'll visit you tomorrow.",
+  "ru": "Я навещу тебя завтра.",
+  "pl": "Odwiedzę cię jutro."
+ },
+ {
+  "en": "I'm giving you a present.",
+  "ru": "Я дам тебе подарок.",
+  "pl": "Dam ci prezent."
+ },
+ {
+  "en": "I'll show you the way.",
+  "ru": "Я покажу тебе дорогу.",
+  "pl": "Pokażę ci drogę."
+ },
+ {
+  "en": "I see him every morning.",
+  "ru": "Я вижу его каждое утро.",
+  "pl": "Widzę go każdego ranka."
+ },
+ {
+  "en": "We'll meet him there.",
+  "ru": "Мы встретим его там.",
+  "pl": "Spotkamy go tam."
+ },
+ {
+  "en": "I visit him every Sunday.",
+  "ru": "Я навещаю его каждое воскресенье.",
+  "pl": "Odwiedzam go w każdą niedzielę."
+ },
+ {
+  "en": "I'm helping him today.",
+  "ru": "Я помогаю ему сегодня.",
+  "pl": "Pomagam mu dzisiaj."
+ },
+ {
+  "en": "I'll pay for his coffee.",
+  "ru": "Я оплачу ему кофе.",
+  "pl": "Postawię mu kawę."
+ },
+ {
+  "en": "I'll buy him a book.",
+  "ru": "Я куплю ему книгу.",
+  "pl": "Kupię mu książkę."
+ },
+ {
+  "en": "I'll pick her up in a moment.",
+  "ru": "Я сейчас её заберу.",
+  "pl": "Zaraz ją odbiorę."
+ },
+ {
+  "en": "Do you already know her?",
+  "ru": "Ты уже её знаешь?",
+  "pl": "Znasz ją już?"
+ },
+ {
+  "en": "I'm giving her the book.",
+  "ru": "Я даю ей книгу.",
+  "pl": "Daję jej książkę."
+ },
+ {
+  "en": "I'll bring her a jacket.",
+  "ru": "Я принесу ей куртку.",
+  "pl": "Przyniosę jej kurtkę."
+ },
+ {
+  "en": "I'll explain everything to her.",
+  "ru": "Я ей всё объясню.",
+  "pl": "Wszystko jej wytłumaczę."
+ },
+ {
+  "en": "Can you pass it to me?",
+  "ru": "Передашь мне его?",
+  "pl": "Podasz mi go?"
+ },
+ {
+  "en": "I'll give it back to her tomorrow.",
+  "ru": "Я верну ей его завтра.",
+  "pl": "Oddam jej go jutro."
+ },
+ {
+  "en": "I'll help the child right away.",
+  "ru": "Я сразу ему помогу.",
+  "pl": "Od razu mu pomogę."
+ },
+ {
+  "en": "I'll read to the baby a little longer.",
+  "ru": "Я ещё немного ему почитаю.",
+  "pl": "Jeszcze trochę mu poczytam."
+ },
+ {
+  "en": "Can you pick us up?",
+  "ru": "Ты можешь нас забрать?",
+  "pl": "Możesz nas odebrać?"
+ },
+ {
+  "en": "Do you see us?",
+  "ru": "Ты нас видишь?",
+  "pl": "Widzisz nas?"
+ },
+ {
+  "en": "He's cooking us some soup.",
+  "ru": "Он готовит нам суп.",
+  "pl": "On gotuje nam zupę."
+ },
+ {
+  "en": "Can you show us the way?",
+  "ru": "Ты можешь показать нам дорогу?",
+  "pl": "Możesz nam pokazać drogę?"
+ },
+ {
+  "en": "I can see you from the window.",
+  "ru": "Я вижу вас из окна.",
+  "pl": "Widzę was z okna."
+ },
+ {
+  "en": "I'm expecting you at eight.",
+  "ru": "Я жду вас в восемь.",
+  "pl": "Czekam na was o ósmej."
+ },
+ {
+  "en": "I'll show you the city.",
+  "ru": "Я покажу вам город.",
+  "pl": "Pokażę wam miasto."
+ },
+ {
+  "en": "I'll explain everything to you later.",
+  "ru": "Я объясню вам всё позже.",
+  "pl": "Wytłumaczę wam wszystko później."
+ },
+ {
+  "en": "I'll meet them after work.",
+  "ru": "Я встречу их после работы.",
+  "pl": "Spotkam się z nimi po pracy."
+ },
+ {
+  "en": "I'm calling them in to eat.",
+  "ru": "Я зову их к столу.",
+  "pl": "Wołam je do stołu."
+ },
+ {
+  "en": "I'm helping them at the weekend.",
+  "ru": "Я помогаю им на выходных.",
+  "pl": "Pomagam im w weekend."
+ },
+ {
+  "en": "We'll bring them some water.",
+  "ru": "Мы принесём им воду.",
+  "pl": "Przyniesiemy im wodę."
+ },
+ {
+  "en": "We'll show them the city.",
+  "ru": "Мы покажем им город.",
+  "pl": "Pokażemy im miasto."
+ },
+ {
+  "en": "Then I'll visit you at ten.",
+  "ru": "Тогда я зайду к Вам в десять.",
+  "pl": "W takim razie przyjdę do Pani o dziesiątej."
+ },
+ {
+  "en": "Nice to see you again.",
+  "ru": "Рад(а) снова Вас видеть.",
+  "pl": "Miło znowu Pana widzieć."
+ },
+ {
+  "en": "I'll answer you in a moment.",
+  "ru": "Я сейчас Вам отвечу.",
+  "pl": "Zaraz Pani odpowiem."
+ },
+ {
+  "en": "I'll send you the file.",
+  "ru": "Я отправлю Вам файл.",
+  "pl": "Wyślę Panu plik."
+ },
+ {
+  "en": "I wish you all the best!",
+  "ru": "Желаю Вам всего наилучшего!",
+  "pl": "Życzę Pani wszystkiego najlepszego!"
+ },
+ {
+  "en": "My bike is new.",
+  "ru": "Мой велосипед новый.",
+  "pl": "Mój rower jest nowy."
+ },
+ {
+  "en": "My neighbours are friendly.",
+  "ru": "Мои соседи дружелюбные.",
+  "pl": "Moi sąsiedzi są mili."
+ },
+ {
+  "en": "I'll pick up my suitcase later.",
+  "ru": "Я заберу свой чемодан позже.",
+  "pl": "Odbiorę swoją walizkę później."
+ },
+ {
+  "en": "I'm looking for my bag.",
+  "ru": "Я ищу свою сумку.",
+  "pl": "Szukam swojej torby."
+ },
+ {
+  "en": "I'm talking to my boss.",
+  "ru": "Я разговариваю со своим начальником.",
+  "pl": "Rozmawiam ze swoim szefem."
+ },
+ {
+  "en": "I'm going to Vienna with my friend.",
+  "ru": "Я еду со своей подругой в Вену.",
+  "pl": "Jadę ze swoją przyjaciółką do Wiednia."
+ },
+ {
+  "en": "I'm reading my child a story.",
+  "ru": "Я читаю своему ребёнку историю.",
+  "pl": "Czytam swojemu dziecku historyjkę."
+ },
+ {
+  "en": "This is my brother's car.",
+  "ru": "Это машина моего брата.",
+  "pl": "To samochód mojego brata."
+ },
+ {
+  "en": "This is my children's room.",
+  "ru": "Это комната моих детей.",
+  "pl": "To pokój moich dzieci."
+ },
+ {
+  "en": "Your dog is very calm.",
+  "ru": "Твоя собака очень спокойная.",
+  "pl": "Twój pies jest bardzo spokojny."
+ },
+ {
+  "en": "I like your jacket.",
+  "ru": "Мне нравится твоя куртка.",
+  "pl": "Podoba mi się twoja kurtka."
+ },
+ {
+  "en": "Did you cancel your appointment?",
+  "ru": "Ты отменил(а) свою запись к врачу?",
+  "pl": "Odwołałeś / Odwołałaś swoją wizytę u lekarza?"
+ },
+ {
+  "en": "Where did you buy your phone?",
+  "ru": "Где ты купил(а) свой телефон?",
+  "pl": "Gdzie kupiłeś / kupiłaś swój telefon?"
+ },
+ {
+  "en": "Have you packed your things yet?",
+  "ru": "Ты уже собрал(а) свои вещи?",
+  "pl": "Spakowałeś / Spakowałaś już swoje rzeczy?"
+ },
+ {
+  "en": "What happened to your car?",
+  "ru": "Что случилось с твоей машиной?",
+  "pl": "Co się stało z twoim samochodem?"
+ },
+ {
+  "en": "Do you often play with your children?",
+  "ru": "Ты часто играешь со своими детьми?",
+  "pl": "Często bawisz się ze swoimi dziećmi?"
+ },
+ {
+  "en": "I like the colour of your house.",
+  "ru": "Мне нравится цвет твоего дома.",
+  "pl": "Podoba mi się kolor twojego domu."
+ },
+ {
+  "en": "That's his car.",
+  "ru": "Это его машина.",
+  "pl": "To jego samochód."
+ },
+ {
+  "en": "He's taking his dog with him.",
+  "ru": "Он берёт свою собаку с собой.",
+  "pl": "Zabiera ze sobą swojego psa."
+ },
+ {
+  "en": "He can't find his glasses.",
+  "ru": "Он не может найти свои очки.",
+  "pl": "Nie może znaleźć swoich okularów."
+ },
+ {
+  "en": "He lives with his brother.",
+  "ru": "Он живёт у своего брата.",
+  "pl": "Mieszka u swojego brata."
+ },
+ {
+  "en": "I often talk to his sister.",
+  "ru": "Я часто разговариваю с его сестрой.",
+  "pl": "Często rozmawiam z jego siostrą."
+ },
+ {
+  "en": "He helps his child with homework.",
+  "ru": "Он помогает своему ребёнку с домашним заданием.",
+  "pl": "Pomaga swojemu dziecku w odrabianiu lekcji."
+ },
+ {
+  "en": "This is his sister's flat.",
+  "ru": "Это квартира его сестры.",
+  "pl": "To mieszkanie jego siostry."
+ },
+ {
+  "en": "His boss's office is on the third floor.",
+  "ru": "Кабинет его начальника на третьем этаже.",
+  "pl": "Gabinet jego szefa jest na trzecim piętrze."
+ },
+ {
+  "en": "Her brother works here.",
+  "ru": "Её брат работает здесь.",
+  "pl": "Jej brat pracuje tutaj."
+ },
+ {
+  "en": "Her room is very bright.",
+  "ru": "Её комната очень светлая.",
+  "pl": "Jej pokój jest bardzo jasny."
+ },
+ {
+  "en": "I can't find her key either.",
+  "ru": "Я тоже не могу найти её ключ.",
+  "pl": "Ja też nie mogę znaleźć jej klucza."
+ },
+ {
+  "en": "She can't find her card.",
+  "ru": "Она не может найти свою карту.",
+  "pl": "Nie może znaleźć swojej karty."
+ },
+ {
+  "en": "She's on the phone with her father.",
+  "ru": "Она разговаривает по телефону со своим отцом.",
+  "pl": "Rozmawia przez telefon ze swoim ojcem."
+ },
+ {
+  "en": "She's going to the seaside with her mother.",
+  "ru": "Она едет со своей мамой к морю.",
+  "pl": "Jedzie ze swoją mamą nad morze."
+ },
+ {
+  "en": "She's reading her child a book.",
+  "ru": "Она читает своему ребёнку книгу.",
+  "pl": "Czyta swojemu dziecku książkę."
+ },
+ {
+  "en": "This is her daughter's room.",
+  "ru": "Это комната её дочери.",
+  "pl": "To pokój jej córki."
+ },
+ {
+  "en": "Our flat is small.",
+  "ru": "Наша квартира маленькая.",
+  "pl": "Nasze mieszkanie jest małe."
+ },
+ {
+  "en": "We're meeting our boss tomorrow.",
+  "ru": "Завтра мы встречаемся со своим начальником.",
+  "pl": "Jutro spotykamy się ze swoim szefem."
+ },
+ {
+  "en": "We're selling our car.",
+  "ru": "Мы продаём свою машину.",
+  "pl": "Sprzedajemy swój samochód."
+ },
+ {
+  "en": "We're selling our furniture.",
+  "ru": "Мы продаём свою мебель.",
+  "pl": "Sprzedajemy swoje meble."
+ },
+ {
+  "en": "We're talking to our boss.",
+  "ru": "Мы разговариваем с нашим начальником.",
+  "pl": "Rozmawiamy z naszym szefem."
+ },
+ {
+  "en": "We're staying with our friends.",
+  "ru": "Мы живём у своих друзей.",
+  "pl": "Mieszkamy u swoich przyjaciół."
+ },
+ {
+  "en": "The roof of our house is new.",
+  "ru": "Крыша нашего дома новая.",
+  "pl": "Dach naszego domu jest nowy."
+ },
+ {
+  "en": "Our neighbours' cars are parked in front of the house.",
+  "ru": "Машины наших соседей стоят перед домом.",
+  "pl": "Samochody naszych sąsiadów stoją przed domem."
+ },
+ {
+  "en": "Your son is so big already.",
+  "ru": "Ваш сын уже большой.",
+  "pl": "Wasz syn jest już duży."
+ },
+ {
+  "en": "How big is your flat?",
+  "ru": "Какого размера ваша квартира?",
+  "pl": "Jak duże jest wasze mieszkanie?"
+ },
+ {
+  "en": "Your children are very nice.",
+  "ru": "Ваши дети очень милые.",
+  "pl": "Wasze dzieci są bardzo miłe."
+ },
+ {
+  "en": "Are you taking your cat with you?",
+  "ru": "Вы берёте своего кота с собой?",
+  "pl": "Zabieracie ze sobą swojego kota?"
+ },
+ {
+  "en": "Can you explain your idea again?",
+  "ru": "Вы можете ещё раз объяснить свою идею?",
+  "pl": "Możecie jeszcze raz wyjaśnić swój pomysł?"
+ },
+ {
+  "en": "Are you going with your father?",
+  "ru": "Вы едете со своим отцом?",
+  "pl": "Jedziecie ze swoim ojcem?"
+ },
+ {
+  "en": "Are you talking to your teacher?",
+  "ru": "Вы разговариваете со своей учительницей?",
+  "pl": "Rozmawiacie ze swoją nauczycielką?"
+ },
+ {
+  "en": "Are you going out to eat with your colleagues?",
+  "ru": "Вы идёте есть со своими коллегами?",
+  "pl": "Idziecie coś zjeść ze swoimi kolegami?"
+ },
+ {
+  "en": "This is your daughter's bike.",
+  "ru": "Это велосипед вашей дочери.",
+  "pl": "To rower waszej córki."
+ },
+ {
+  "en": "Their son studies in Munich.",
+  "ru": "Их сын учится в Мюнхене.",
+  "pl": "Ich syn studiuje w Monachium."
+ },
+ {
+  "en": "Their books are lying everywhere.",
+  "ru": "Их книги лежат повсюду.",
+  "pl": "Ich książki leżą wszędzie."
+ },
+ {
+  "en": "They're selling their house.",
+  "ru": "Они продают свой дом.",
+  "pl": "Sprzedają swój dom."
+ },
+ {
+  "en": "The guests are taking their jackets.",
+  "ru": "Гости забирают свои куртки.",
+  "pl": "Goście zabierają swoje kurtki."
+ },
+ {
+  "en": "They often help their neighbour.",
+  "ru": "Они часто помогают своей соседке.",
+  "pl": "Często pomagają swojej sąsiadce."
+ },
+ {
+  "en": "I'm talking to their parents.",
+  "ru": "Я разговариваю с их родителями.",
+  "pl": "Rozmawiam z ich rodzicami."
+ },
+ {
+  "en": "The garden of their house is big.",
+  "ru": "Сад их дома большой.",
+  "pl": "Ogród ich domu jest duży."
+ },
+ {
+  "en": "Your appointment is at ten o'clock.",
+  "ru": "Ваша встреча в десять часов.",
+  "pl": "Pani wizyta jest o dziesiątej."
+ },
+ {
+  "en": "Your bill is at the till.",
+  "ru": "Ваш счёт лежит на кассе.",
+  "pl": "Pani rachunek leży przy kasie."
+ },
+ {
+  "en": "Please show your ID.",
+  "ru": "Пожалуйста, покажите Ваше удостоверение.",
+  "pl": "Proszę pokazać swój dowód osobisty."
+ },
+ {
+  "en": "Do you have your ticket with you?",
+  "ru": "Вы взяли с собой свой билет?",
+  "pl": "Czy ma Pan przy sobie swój bilet?"
+ },
+ {
+  "en": "Please bring your documents.",
+  "ru": "Пожалуйста, возьмите с собой свои документы.",
+  "pl": "Proszę zabrać ze sobą swoje dokumenty."
+ },
+ {
+  "en": "Are you travelling with your children?",
+  "ru": "Вы путешествуете со своими детьми?",
+  "pl": "Czy podróżuje Pan ze swoimi dziećmi?"
+ },
+ {
+  "en": "This is your son's room.",
+  "ru": "Это комната Вашего сына.",
+  "pl": "To pokój Pani syna."
+ }
+]

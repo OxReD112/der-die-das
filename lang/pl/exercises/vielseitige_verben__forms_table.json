@@ -1,0 +1,392 @@
+[
+ {
+  "en": "had a baby",
+  "ru": "появился ребёнок",
+  "pl": "urodziło się dziecko"
+ },
+ {
+  "en": "feel (already)",
+  "ru": "испытывать (чувство)",
+  "pl": "czuć (np. strach)"
+ },
+ {
+  "en": "stop it!",
+  "ru": "прекрати!",
+  "pl": "przestań!"
+ },
+ {
+  "en": "became",
+  "ru": "стал(а)",
+  "pl": "stał(a) się, został(a)"
+ },
+ {
+  "en": "Passiv",
+  "ru": "пассив",
+  "pl": "strona bierna"
+ },
+ {
+  "en": "become, get",
+  "ru": "становиться",
+  "pl": "stawać się"
+ },
+ {
+  "en": "adjective / noun",
+  "ru": "прилагательное / существительное",
+  "pl": "przymiotnik / rzeczownik"
+ },
+ {
+  "en": "becomes, became",
+  "ru": "становится, стал(а)",
+  "pl": "staje się / zostaje, stał(a) się / został(a)"
+ },
+ {
+  "en": "future",
+  "ru": "будущее",
+  "pl": "przyszłość"
+ },
+ {
+  "en": "infinitive",
+  "ru": "Infinitiv",
+  "pl": "Infinitiv"
+ },
+ {
+  "en": "will",
+  "ru": "будет (делать)",
+  "pl": "będzie (robić)"
+ },
+ {
+  "en": "For plans, Präsens is often enough: *Ich rufe dich morgen an.* Use werden for a promise or forecast.",
+  "ru": "Для планов часто достаточно Präsens: *Ich rufe dich morgen an.* werden используют для обещания или прогноза.",
+  "pl": "Przy planach często wystarczy Präsens: *Ich rufe dich morgen an.* werden używa się przy obietnicy albo prognozie."
+ },
+ {
+  "en": "Usage",
+  "ru": "Употребление",
+  "pl": "Użycie"
+ },
+ {
+  "en": "a guess",
+  "ru": "предположение",
+  "pl": "przypuszczenie"
+ },
+ {
+  "en": "probably; it'll be fine",
+  "ru": "наверное; всё будет хорошо",
+  "pl": "pewnie; wszystko będzie dobrze"
+ },
+ {
+  "en": "*wohl* = probably: *Er wird wohl schlafen.* · *schon* = don't worry: *Es wird schon nicht so schlimm sein.*",
+  "ru": "*wohl* = наверное: *Er wird wohl schlafen.* · *schon* = не волнуйся: *Es wird schon nicht so schlimm sein.*",
+  "pl": "*wohl* = pewnie: *Er wird wohl schlafen.* · *schon* = nie martw się: *Es wird schon nicht so schlimm sein.*"
+ },
+ {
+  "en": "Also",
+  "ru": "Ещё",
+  "pl": "Także"
+ },
+ {
+  "en": "it is being done / was done",
+  "ru": "это делают / сделали",
+  "pl": "to się robi / zrobiono"
+ },
+ {
+  "en": "would",
+  "ru": "бы",
+  "pl": "forma z -by"
+ },
+ {
+  "en": "would: polite, or not real",
+  "ru": "бы: вежливо или не на самом деле",
+  "pl": "-by: grzecznie albo nierealnie"
+ },
+ {
+  "en": "*Würdest du mir kurz helfen?*",
+  "ru": "*Würdest du mir kurz helfen?*",
+  "pl": "*Würdest du mir kurz helfen?*"
+ },
+ {
+  "en": "Polite request",
+  "ru": "Вежливая просьба",
+  "pl": "Grzeczna prośba"
+ },
+ {
+  "en": "after a 2nd verb",
+  "ru": "после 2-го глагола",
+  "pl": "po 2. czasowniku"
+ },
+ {
+  "en": "leave something",
+  "ru": "оставить",
+  "pl": "zostawić"
+ },
+ {
+  "en": "object",
+  "ru": "вещь",
+  "pl": "rzecz"
+ },
+ {
+  "en": "place",
+  "ru": "место",
+  "pl": "miejsce"
+ },
+ {
+  "en": "leave (somewhere)",
+  "ru": "оставить (где-то)",
+  "pl": "zostawić (gdzieś)"
+ },
+ {
+  "en": "have someone do it",
+  "ru": "поручить сделать",
+  "pl": "zlecić komuś"
+ },
+ {
+  "en": "someone else does it for you",
+  "ru": "делает кто-то другой",
+  "pl": "robi to ktoś inny"
+ },
+ {
+  "en": "allow someone",
+  "ru": "разрешить",
+  "pl": "pozwolić"
+ },
+ {
+  "en": "person",
+  "ru": "человек",
+  "pl": "osoba"
+ },
+ {
+  "en": "allow someone to do something",
+  "ru": "разрешить кому-то что-то сделать",
+  "pl": "pozwolić komuś coś zrobić"
+ },
+ {
+  "en": "*Lass mich das tragen!* = let me carry it",
+  "ru": "*Lass mich das tragen!* = давай я понесу",
+  "pl": "*Lass mich das tragen!* = daj, ja to poniosę"
+ },
+ {
+  "en": "Offer help",
+  "ru": "Предложить помощь",
+  "pl": "Zaproponować pomoc"
+ },
+ {
+  "en": "let's",
+  "ru": "давай",
+  "pl": "chodź, zróbmy…"
+ },
+ {
+  "en": "let's",
+  "ru": "давай(те)",
+  "pl": "chodź(cie), zróbmy…"
+ },
+ {
+  "en": "One person: *lass uns* · several: *lasst uns* · formal: *Lassen Sie uns*",
+  "ru": "Одному: *lass uns* · нескольким: *lasst uns* · вежливо: *Lassen Sie uns*",
+  "pl": "Do jednej osoby: *lass uns* · do kilku: *lasst uns* · grzecznie: *Lassen Sie uns*"
+ },
+ {
+  "en": "Forms",
+  "ru": "Формы",
+  "pl": "Formy"
+ },
+ {
+  "en": "can be done",
+  "ru": "можно сделать",
+  "pl": "da się zrobić"
+ },
+ {
+  "en": "it can be done",
+  "ru": "это можно сделать",
+  "pl": "to da się zrobić"
+ },
+ {
+  "en": "stop it! (fixed phrase)",
+  "ru": "прекрати! (устойчивое выражение)",
+  "pl": "przestań! (stałe wyrażenie)"
+ },
+ {
+  "en": "can't give it up",
+  "ru": "не мочь бросить",
+  "pl": "nie móc rzucić"
+ },
+ {
+  "en": "activity",
+  "ru": "занятие",
+  "pl": "zajęcie"
+ },
+ {
+  "en": "not stop doing something; can't give it up",
+  "ru": "не прекращать занятие; не мочь бросить",
+  "pl": "nie przestawać czegoś robić; nie móc rzucić"
+ },
+ {
+  "en": "a state",
+  "ru": "состояние",
+  "pl": "stan"
+ },
+ {
+  "en": "the result of an action: how the thing is now (was then)",
+  "ru": "результат действия: какая вещь сейчас (была тогда)",
+  "pl": "wynik czynności: jaka rzecz jest teraz (była wtedy)"
+ },
+ {
+  "en": "Being done right now → werden: *Die Tür wird gerade geschlossen.*",
+  "ru": "Делают прямо сейчас → werden: *Die Tür wird gerade geschlossen.*",
+  "pl": "Robią to właśnie teraz → werden: *Die Tür wird gerade geschlossen.*"
+ },
+ {
+  "en": "Compare",
+  "ru": "Сравните",
+  "pl": "Porównaj"
+ },
+ {
+  "en": "zu + infinitive",
+  "ru": "zu + Infinitiv",
+  "pl": "zu + Infinitiv"
+ },
+ {
+  "en": "it can / could be done",
+  "ru": "это можно / можно было сделать",
+  "pl": "to da się / dało się zrobić"
+ },
+ {
+  "en": "Sometimes = must: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "ru": "Иногда = нужно: *Die Rechnung ist bis Freitag zu bezahlen.*",
+  "pl": "Czasem = trzeba: *Die Rechnung ist bis Freitag zu bezahlen.*"
+ },
+ {
+  "en": "Can also mean",
+  "ru": "Также может значить",
+  "pl": "Może też znaczyć"
+ },
+ {
+  "en": "Perfekt (movement, change)",
+  "ru": "Perfekt (движение, изменение)",
+  "pl": "Perfekt (ruch, zmiana)"
+ },
+ {
+  "en": "past of a verb of movement or change (gehen, fahren, werden)",
+  "ru": "прошлое глагола движения или изменения (gehen, fahren, werden)",
+  "pl": "przeszłość czasownika ruchu lub zmiany (gehen, fahren, werden)"
+ },
+ {
+  "en": "Also *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "ru": "Ещё *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*",
+  "pl": "Także *sein, bleiben, passieren*: *Ich bin zu Hause geblieben. Was ist passiert?*"
+ },
+ {
+  "en": "Other common verbs",
+  "ru": "Другие частые глаголы",
+  "pl": "Inne częste czasowniki"
+ },
+ {
+  "en": "Perfekt",
+  "ru": "Perfekt",
+  "pl": "Perfekt"
+ },
+ {
+  "en": "past (most verbs)",
+  "ru": "прошлое (большинство глаголов)",
+  "pl": "przeszłość (większość czasowników)"
+ },
+ {
+  "en": "have to",
+  "ru": "нужно",
+  "pl": "trzeba"
+ },
+ {
+  "en": "have to / had to",
+  "ru": "нужно / нужно было",
+  "pl": "trzeba / trzeba było"
+ },
+ {
+  "en": "a feeling you already have",
+  "ru": "чувство уже есть",
+  "pl": "uczucie już jest"
+ },
+ {
+  "en": "When the feeling starts → bekommen: *Ich bekomme Angst.*",
+  "ru": "Когда чувство только появляется → bekommen: *Ich bekomme Angst.*",
+  "pl": "Kiedy uczucie dopiero się pojawia → bekommen: *Ich bekomme Angst.*"
+ },
+ {
+  "en": "fixed phrases",
+  "ru": "устойчивые выражения",
+  "pl": "stałe wyrażenia"
+ },
+ {
+  "en": "be right · be in a hurry",
+  "ru": "быть правым · спешить",
+  "pl": "mieć rację · spieszyć się"
+ },
+ {
+  "en": "no ge-",
+  "ru": "без ge-",
+  "pl": "bez ge-"
+ },
+ {
+  "en": "get, receive",
+  "ru": "получать",
+  "pl": "dostawać"
+ },
+ {
+  "en": "get (not „become“!)",
+  "ru": "получать (не «становиться»!)",
+  "pl": "dostawać (nie „stawać się”!)"
+ },
+ {
+  "en": "start to feel",
+  "ru": "начать чувствовать",
+  "pl": "zacząć czuć"
+ },
+ {
+  "en": "a feeling starts",
+  "ru": "чувство появляется",
+  "pl": "uczucie się pojawia"
+ },
+ {
+  "en": "Already there → haben: *Ich habe Angst.*",
+  "ru": "Чувство уже есть → haben: *Ich habe Angst.*",
+  "pl": "Uczucie już jest → haben: *Ich habe Angst.*"
+ },
+ {
+  "en": "get ill",
+  "ru": "заболеть",
+  "pl": "zachorować"
+ },
+ {
+  "en": "illness",
+  "ru": "болезнь",
+  "pl": "choroba"
+ },
+ {
+  "en": "caught (a cold …)",
+  "ru": "заболел(а)",
+  "pl": "zachorował(a)"
+ },
+ {
+  "en": "have a baby",
+  "ru": "родить ребёнка",
+  "pl": "urodzić dziecko"
+ },
+ {
+  "en": "catch (a train)",
+  "ru": "успеть (на поезд)",
+  "pl": "zdążyć (na pociąg)"
+ },
+ {
+  "en": "make it in time",
+  "ru": "успеть",
+  "pl": "zdążyć"
+ },
+ {
+  "en": "you receive it: given, sent",
+  "ru": "ты получаешь: подарили, прислали",
+  "pl": "dostajesz: podarowano, przysłano"
+ },
+ {
+  "en": "given / sent to you",
+  "ru": "тебе подарили / прислали",
+  "pl": "podarowano ci / przysłano ci"
+ }
+]

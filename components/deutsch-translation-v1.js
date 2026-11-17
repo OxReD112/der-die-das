@@ -90,7 +90,28 @@
     if(parent && isStr(parent.noun) && isStr(parent.article)) return parent.article + " " + parent.noun;
     return germanContext(parent, stack.slice(0, -1));
   }
-  return { contextFor: contextFor, germanContext: germanContext, DE_KEYS: DE_KEYS };
+  /* sourcePrint(card) → 8 hex digits (17.11.2026, advisor): the print of the English a pack translated an own-dictionary
+     card from — every English text of the card (keys "en" and «…_en», strings or lists, in the card's order) through
+     FNV-1a. The pack keeps it as "_src" next to the card's texts; when the app's English has changed since, the print
+     differs and the card is shown in English (never a Polish text for an older English). dev/lang/stamp.cjs writes it,
+     dev/lang/pack-coverage.cjs lists the cards whose print no longer matches; the reader checks it the same way. */
+  function sourcePrint(card){
+    var parts = [];
+    (function walk(o, p){
+      if(!o || typeof o !== "object") return;
+      if(Array.isArray(o)){ for(var i = 0; i < o.length; i++) walk(o[i], p + "[" + i + "]"); return; }
+      for(var k in o){
+        if(!Object.prototype.hasOwnProperty.call(o, k)) continue;
+        var v = o[k];
+        if((k === "en" || /_en$/.test(k)) && (isStr(v) || Array.isArray(v))) parts.push(p + "." + k + "=" + JSON.stringify(v));
+        else if(v && typeof v === "object") walk(v, p + "." + k);
+      }
+    })(card, "");
+    var text = parts.join("\n"), h = 0x811c9dc5;
+    for(var j = 0; j < text.length; j++){ h ^= text.charCodeAt(j); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ("0000000" + h.toString(16)).slice(-8);
+  }
+  return { contextFor: contextFor, germanContext: germanContext, DE_KEYS: DE_KEYS, sourcePrint: sourcePrint };
 });
 
 (function(){
@@ -165,6 +186,7 @@
   })();
   var loaded = {};   // "pl/ui.json" → entries
   var pairs = {};    // "pl" → { en␟ru: text } (all loaded list files)
+  var placed = {};   // "pl" → { en␟ru␟place: text } — entries with "particle" (a text that differs by where it stands)
   var pending = {};  // "pl/ui.json" → Promise
 
   function addPairs(code, entries){
@@ -174,6 +196,9 @@
       var e = entries[i];
       if(!e || typeof e[code] !== "string" || !e[code]) continue;
       var k = (e.en || "") + SEP + (e.ru || "");
+      /* 17.11.2026: one Russian hint can stand at several particles («≈ же»: doch, denn) and needs a text of its
+         own at each — such entries carry "particle" and are found by tAt(place, …) only */
+      if(typeof e.particle === "string" && e.particle){ (placed[code] || (placed[code] = {}))[k + SEP + e.particle] = e[code]; continue; }
       if(e.de == null || !(k in map)) map[k] = e[code];
     }
   }
@@ -211,10 +236,25 @@
   }
 
   /* ready(files, fn): for data a page fetches itself (Wörterbuch, Wortschatz meanings). */
+  /* packFilesOf(code, f): the pack files for a name — an app data file ("Artikel/words.js",
+     "wortschatz/sets/b2-c1.json") is looked up by its source in the manifest's exercise_files (→ exercises/<name>.json)
+     and wortschatz_files (→ wortschatz/<name>.json); any other name is a pack file itself. */
+  function packFilesOf(code, f){
+    var m = loaded[code + "/manifest.json"] || {}, out = [];
+    [["exercise_files", "exercises/"], ["wortschatz_files", "wortschatz/"]].forEach(function(g){
+      var files = m[g[0]] || {};
+      for(var name in files){
+        var src = String(files[name] && files[name].source || "").replace(/^deutsch-home\//, "");
+        if(src && src === f) out.push(g[1] + name + ".json");
+      }
+    });
+    return out.length ? out : [f];
+  }
   function ready(files, fn){
     var code = getDisplayLang();
     if(!isPack(code)){ fn(); return; }
-    var list = Array.isArray(files) ? files : (files ? [files] : []);
+    var list = [];
+    (Array.isArray(files) ? files : (files ? [files] : [])).forEach(function(f){ list = list.concat(packFilesOf(code, f)); });
     Promise.all(list.map(function(f){ return loadFile(code, f); })).then(function(){ fn(); }, function(){ fn(); });
   }
 
@@ -287,14 +327,12 @@
     /* data-pack: the page's data files ("Artikel/words.js" — found in the manifest's exercise_files by
        their source) and / or pack files ("exercises/partikeln__hints.json") */
     var list = script && script.getAttribute("data-pack");
-    var files = (loaded[code + "/manifest.json"] || {}).exercise_files || {};
     if(list) list.split(/\s+/).forEach(function(f){
       if(!f) return;
-      if(!/\.js$/.test(f)){ loadSync(code, f); return; }
-      for(var name in files){
-        var src = String(files[name] && files[name].source || "").replace(/^deutsch-home\//, "");
-        if(src === f) loadSync(code, "exercises/" + name + ".json");
-      }
+      var mapped = packFilesOf(code, f);
+      /* an app data file the manifest doesn't know (".js") loads nothing, as before */
+      if(mapped.length === 1 && mapped[0] === f && /\.js$/.test(f)) return;
+      mapped.forEach(function(p){ loadSync(code, p); });
     });
   })();
 
@@ -337,7 +375,8 @@
         if(it.__id !== undefined) delete it.__id;
         var p = pack[id];
         if(typeof p === "string"){ if(it[code] === undefined) it[code] = p; }
-        else if(p) mergeInto(it, p, code);
+        /* a card with "_src" whose English has changed since it was translated stays English (17.11.2026) */
+        else if(p && (typeof p._src !== "string" || !window.DeutschLangDe || p._src === window.DeutschLangDe.sourcePrint(it))) mergeInto(it, p, code);
       }
       return items;
     }, function(){ return items; });
@@ -428,6 +467,18 @@
     return format(text, args, lang);
   }
 
+  /* tAt(place, en, ru, …args): like t, but a pack entry written for this place ("particle": place) comes first,
+     then the entry for the text alone. Built-in languages: exactly as t. */
+  function tAt(place, en, ru){
+    var shown = getDisplayLang();
+    if(isPack(shown) && place){
+      applyPage(shown);
+      var map = placed[shown], v = map && map[(en || "") + SEP + (ru || "") + SEP + place];
+      if(typeof v === "string" && v) return format(v, Array.prototype.slice.call(arguments, 3), shown);
+    }
+    return t.apply(null, Array.prototype.slice.call(arguments, 1));
+  }
+
   /* table(T): T[getLang()] || T.en, as the app always read such tables; a pack language gets the pack text
      of every en/ru pair (a key it has no text for stays English). */
   function table(T){
@@ -462,7 +513,7 @@
   }
 
   window.DeutschTranslation = { KEY: KEY, getLang: getLang, getDisplayLang: getDisplayLang, setLang: setLang,
-    languages: languages, isPack: isPack, pick: pick, t: t, field: field, ready: ready, apply: apply,
+    languages: languages, isPack: isPack, pick: pick, t: t, tAt: tAt, field: field, ready: ready, apply: apply,
     packEntries: packEntries, format: format, table: table,
     needsPack: needsPack, mergeById: mergeById, packState: packState, packSize: packSize, download: download,
     addPack: addTestPack };

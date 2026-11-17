@@ -1,0 +1,1557 @@
+[
+ {
+  "en": "Helps you notice the patterns behind German articles - they often let you guess the article of a new word.",
+  "ru": "Помогает заметить закономерности немецких артиклей - по ним артикль часто можно угадать и у незнакомого слова.",
+  "pl": "Pomaga dostrzec prawidłowości w niemieckich rodzajnikach - dzięki nim rodzajnik często da się odgadnąć nawet przy nowym słowie."
+ },
+ {
+  "en": "Heads up:",
+  "ru": "Обратите внимание:",
+  "pl": "Uwaga:"
+ },
+ {
+  "en": "English",
+  "ru": "Русский",
+  "pl": "Polski"
+ },
+ {
+  "en": "Restore the backup from {0}?",
+  "ru": "Восстановить бэкап от {0}?",
+  "pl": "Przywrócić kopię zapasową z {0}?"
+ },
+ {
+  "en": "Restore the backup?",
+  "ru": "Восстановить бэкап?",
+  "pl": "Przywrócić kopię zapasową?"
+ },
+ {
+  "en": "Couldn't turn on notifications.",
+  "ru": "Не получилось включить уведомления.",
+  "pl": "Nie udało się włączyć powiadomień."
+ },
+ {
+  "en": "You can keep practising today without a daily limit. It will turn on again automatically tomorrow.",
+  "ru": "Сегодня можно заниматься без дневного лимита. Завтра он снова включится сам.",
+  "pl": "Dziś możesz ćwiczyć bez dziennego limitu. Jutro limit sam włączy się ponownie."
+ },
+ {
+  "en": "Some German grammar you can understand. Some you just have to remember - der, die or das, ihr or Ihnen, am or im. This app is made for exactly those parts. Short daily rounds help them stick.",
+  "ru": "Часть немецкой грамматики можно понять. А часть приходится просто запомнить - der, die или das, ihr или Ihnen, am или im. Именно для этого и создано приложение. Короткие ежедневные раунды помогают всё закрепить.",
+  "pl": "Część niemieckiej gramatyki można zrozumieć. A część trzeba po prostu zapamiętać - der, die czy das, ihr czy Ihnen, am czy im. Właśnie do tego powstała ta aplikacja. Krótkie codzienne rundy pomagają to utrwalić."
+ },
+ {
+  "en": "Fortschritt sichern",
+  "ru": "Fortschritt sichern",
+  "pl": "Fortschritt sichern"
+ },
+ {
+  "en": "Safari deletes saved progress after 7 days without a visit. On the Home Screen, it stays safe.",
+  "ru": "Safari удаляет сохранённый прогресс, если 7 дней не заходить на сайт. На экране «Домой» он в безопасности.",
+  "pl": "Safari usuwa zapisane postępy po 7 dniach bez odwiedzin. Na ekranie początkowym są bezpieczne."
+ },
+ {
+  "en": "So geht's",
+  "ru": "So geht's",
+  "pl": "So geht's"
+ },
+ {
+  "en": "Zum Home-Bildschirm",
+  "ru": "Zum Home-Bildschirm",
+  "pl": "Zum Home-Bildschirm"
+ },
+ {
+  "en": "Save your progress first.",
+  "ru": "Сначала сохрани прогресс.",
+  "pl": "Najpierw zapisz postępy."
+ },
+ {
+  "en": "Backup erstellen",
+  "ru": "Backup erstellen",
+  "pl": "Backup erstellen"
+ },
+ {
+  "en": "✓ Backup erstellt",
+  "ru": "✓ Backup erstellt",
+  "pl": "✓ Backup erstellt"
+ },
+ {
+  "en": "Tap <b>Share</b> {0} in Safari, then <b>Add to Home Screen</b>.",
+  "ru": "Нажми <b>Поделиться</b> {0} в Safari, затем <b>На экран «Домой»</b>.",
+  "pl": "Stuknij <b>Udostępnij</b> {0} w Safari, a potem <b>Do ekranu początkowego</b>."
+ },
+ {
+  "en": "Open Deutsch. from the new icon, go to <b>Einstellungen → Wiederherstellen</b> and pick the backup file.",
+  "ru": "Открой Deutsch. с новой иконки, зайди в <b>Einstellungen → Wiederherstellen</b> и выбери файл бэкапа.",
+  "pl": "Otwórz Deutsch. z nowej ikony, przejdź do <b>Einstellungen → Wiederherstellen</b> i wybierz plik kopii zapasowej."
+ },
+ {
+  "en": "The Home Screen app has its own storage, so your progress needs to be moved over once.",
+  "ru": "У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
+  "pl": "Aplikacja na ekranie początkowym ma własną pamięć, więc postępy trzeba raz przenieść."
+ },
+ {
+  "en": "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - add Deutsch. to your Home Screen, or make a backup often.",
+  "ru": "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - добавь Deutsch. на экран «Домой» или почаще делай бэкап.",
+  "pl": "Postępy są zapisane tylko w tej przeglądarce. Safari usuwa je po 7 dniach bez odwiedzin - dodaj Deutsch. do ekranu początkowego albo często rób kopię zapasową."
+ },
+ {
+  "en": "Progress is saved in this browser only. Safari deletes it after 7 days without a visit - make a backup often.",
+  "ru": "Прогресс хранится только в этом браузере. Safari удаляет его, если 7 дней не заходить на сайт - почаще делай бэкап.",
+  "pl": "Postępy są zapisane tylko w tej przeglądarce. Safari usuwa je po 7 dniach bez odwiedzin - często rób kopię zapasową."
+ },
+ {
+  "en": "Dein Fortschritt",
+  "ru": "Dein Fortschritt",
+  "pl": "Dein Fortschritt"
+ },
+ {
+  "en": "Your progress is saved only on this device - in this browser, or in the Home Screen app. It isn't stored online, so clearing website data, deleting the app or switching to a new device would erase it.",
+  "ru": "Прогресс хранится только на этом устройстве - в этом браузере или в приложении на экране «Домой». В интернете он не сохраняется, поэтому если очистить данные сайта, удалить приложение или перейти на новое устройство, он пропадёт.",
+  "pl": "Postępy są zapisane tylko na tym urządzeniu - w tej przeglądarce albo w aplikacji na ekranie początkowym. Nie są przechowywane w internecie, więc wyczyszczenie danych strony, usunięcie aplikacji albo zmiana urządzenia oznacza ich utratę."
+ },
+ {
+  "en": " Safari also deletes it after 7 days without a visit.",
+  "ru": " Кроме того, Safari удаляет его, если 7 дней не заходить на сайт.",
+  "pl": " Safari usuwa je też po 7 dniach bez odwiedzin."
+ },
+ {
+  "en": "Make a backup now and then. It's a small file you can bring back anytime with Wiederherstellen - on this device or a new one.",
+  "ru": "Время от времени делай бэкап. Это небольшой файл, из которого прогресс можно вернуть через Wiederherstellen - на этом же или на новом устройстве.",
+  "pl": "Od czasu do czasu rób kopię zapasową. To mały plik, z którego w każdej chwili przywrócisz postępy przez Wiederherstellen - na tym albo na nowym urządzeniu."
+ },
+ {
+  "en": "What you want to say:",
+  "ru": "Что ты хочешь сказать:",
+  "pl": "Co chcesz powiedzieć:"
+ },
+ {
+  "en": "also right: ",
+  "ru": "тоже подходит: ",
+  "pl": "też pasuje: "
+ },
+ {
+  "en": "{0} means “{1}”. ",
+  "ru": "{0} — это «{1}». ",
+  "pl": "{0} znaczy „{1}”. "
+ },
+ {
+  "en": "Little words like doch, mal and schon barely translate, yet they change the tone of a sentence. Tap a particle and watch what happens.",
+  "ru": "Маленькие слова вроде doch, mal, schon почти не переводятся, но меняют тон фразы. Нажимай на частицы и смотри, что происходит с предложением.",
+  "pl": "Małe słówka takie jak doch, mal czy schon prawie się nie tłumaczą, a zmieniają ton zdania. Stuknij partykułę i zobacz, co dzieje się ze zdaniem."
+ },
+ {
+  "en": "Tap a particle below and watch where the tone moves.",
+  "ru": "Нажми на частицу внизу — и смотри, куда сдвинется тон.",
+  "pl": "Stuknij partykułę na dole i zobacz, w którą stronę przesunie się ton."
+ },
+ {
+  "en": "Stressed DOCH pushes back against someone's “no” or doubt. There's nothing to push back against here.",
+  "ru": "Ударное DOCH возражает на чужое «нет» или сомнение. В этом предложении спорить не с чем.",
+  "pl": "Akcentowane DOCH sprzeciwia się czyjemuś „nie” albo wątpliwości. Tu nie ma się czemu sprzeciwiać."
+ },
+ {
+  "en": "Stressed DENN only occurs in a question after excuses: “Wo warst du DENN?” — “so where were you, then?”",
+  "ru": "Ударное DENN бывает только в вопросе после отговорок: «Wo warst du DENN?» — «ну а где же тогда?»",
+  "pl": "Akcentowane DENN występuje tylko w pytaniu po wymówkach: „Wo warst du DENN?” — „no to gdzie w takim razie?”"
+ },
+ {
+  "en": "This particle doesn't fit here.",
+  "ru": "Здесь эта частица не встаёт.",
+  "pl": "Ta partykuła tu nie pasuje."
+ },
+ {
+  "en": "Helps you remember which case comes after prepositions like mit, für or wegen.",
+  "ru": "Помогает запомнить, какой падеж идёт после предлогов вроде mit, für или wegen.",
+  "pl": "Pomaga zapamiętać, jaki przypadek stoi po przyimkach takich jak mit, für czy wegen."
+ },
+ {
+  "en": "Where? Where to? Where from? Helps you pick the right preposition for a place.",
+  "ru": "Где? Куда? Откуда? Помогает подобрать правильный предлог к месту.",
+  "pl": "Gdzie? Dokąd? Skąd? Pomaga dobrać właściwy przyimek do miejsca."
+ },
+ {
+  "en": "also right · more common: ",
+  "ru": "тоже верно · чаще: ",
+  "pl": "też dobrze · częściej: "
+ },
+ {
+  "en": "Helps you remember which preposition a verb takes - and the case after it.",
+  "ru": "Помогает запомнить, с каким предлогом идёт глагол - и какой после него падеж.",
+  "pl": "Pomaga zapamiętać, z jakim przyimkiem łączy się czasownik - i jaki przypadek stoi po nim."
+ },
+ {
+  "en": "always",
+  "ru": "всегда",
+  "pl": "zawsze"
+ },
+ {
+  "en": "almost always",
+  "ru": "почти всегда",
+  "pl": "prawie zawsze"
+ },
+ {
+  "en": "often",
+  "ru": "часто",
+  "pl": "często"
+ },
+ {
+  "en": "learn by heart",
+  "ru": "запомнить",
+  "pl": "zapamiętać"
+ },
+ {
+  "en": "these prepositions have only one case — nothing to guess",
+  "ru": "у этих предлогов только один падеж — угадывать нечего",
+  "pl": "te przyimki mają tylko jeden przypadek — nie ma czego zgadywać"
+ },
+ {
+  "en": "exception: bestehen auf + Dativ (to insist on)",
+  "ru": "исключение: bestehen auf + Dativ (настаивать на)",
+  "pl": "wyjątek: bestehen auf + Dativ (nalegać na)"
+ },
+ {
+  "en": "an: a thought or feeling towards → Akkusativ; taking part, working → Dativ",
+  "ru": "an: мысль, чувство к кому-то → Akkusativ; участие, работа → Dativ",
+  "pl": "an: myśl, uczucie wobec kogoś → Akkusativ; udział, praca → Dativ"
+ },
+ {
+  "en": "5 + 5 in this exercise — the one preposition where the case really has to be remembered",
+  "ru": "в упражнении 5 + 5 — единственный предлог, где падеж правда надо помнить",
+  "pl": "w ćwiczeniu 5 + 5 — jedyny przyimek, przy którym przypadek naprawdę trzeba pamiętać"
+ },
+ {
+  "en": "a topic; a reaction to what is there",
+  "ru": "тема разговора; реакция на то, что уже есть",
+  "pl": "temat rozmowy; reakcja na to, co już jest"
+ },
+ {
+  "en": "fear, danger",
+  "ru": "страх, опасность",
+  "pl": "strach, niebezpieczeństwo"
+ },
+ {
+  "en": "together with; busy with",
+  "ru": "вместе с кем-то; чем занят",
+  "pl": "razem z kimś; czym się zajmujesz"
+ },
+ {
+  "en": "searching, asking",
+  "ru": "поиск, вопрос",
+  "pl": "szukanie, pytanie"
+ },
+ {
+  "en": "asking for, caring",
+  "ru": "просьба, забота",
+  "pl": "prośba, troska"
+ },
+ {
+  "en": "what lies ahead; attention",
+  "ru": "то, что впереди; внимание",
+  "pl": "to, co przed nami; zwracanie uwagi"
+ },
+ {
+  "en": "but verzichten, bestehen auf",
+  "ru": "но verzichten, bestehen auf",
+  "pl": "ale verzichten, bestehen auf"
+ },
+ {
+  "en": "thinking, remembering, believing; taking part",
+  "ru": "думать, помнить, верить; участвовать в чём-то",
+  "pl": "myśleć, pamiętać, wierzyć; brać w czymś udział"
+ },
+ {
+  "en": "for what",
+  "ru": "за что (как «за»)",
+  "pl": "za co"
+ },
+ {
+  "en": "with / to whom",
+  "ru": "у кого, перед кем",
+  "pl": "u kogo; komu"
+ },
+ {
+  "en": "„from“ or „about“",
+  "ru": "то «от», то «о»",
+  "pl": "raz „od”, raz „o”"
+ },
+ {
+  "en": "to; congratulate on",
+  "ru": "к; поздравлять с",
+  "pl": "do; gratulować czegoś"
+ },
+ {
+  "en": "of, from",
+  "ru": "из",
+  "pl": "z"
+ },
+ {
+  "en": "in, into",
+  "ru": "в",
+  "pl": "w"
+ },
+ {
+  "en": "against",
+  "ru": "против",
+  "pl": "przeciw"
+ },
+ {
+  "en": "Almost always so",
+  "ru": "Почти всегда так",
+  "pl": "Prawie zawsze tak"
+ },
+ {
+  "en": "Often so",
+  "ru": "Часто так",
+  "pl": "Często tak"
+ },
+ {
+  "en": "Just learn them",
+  "ru": "Просто запомнить",
+  "pl": "Po prostu zapamiętać"
+ },
+ {
+  "en": "Some are like English: teilnehmen an — take part in, abhängen von — depend on, protestieren gegen — protest against.",
+  "ru": "Часто помогает русский: antworten auf — отвечать на, glauben an — верить в, abhängen von — зависеть от. Ловушка: warten auf — просто «ждать».",
+  "pl": "Często pomaga polski: antworten auf — odpowiadać na, glauben an — wierzyć w, abhängen von — zależeć od. Pułapka: denken an — „myśleć o”, nie „na”."
+ },
+ {
+  "en": "Polite form — capitalised: {w}",
+  "ru": "Вежливая форма — с большой буквы: {w}",
+  "pl": "Forma grzecznościowa — wielką literą: {w}"
+ },
+ {
+  "en": "Lower case here: {w}",
+  "ru": "Здесь с маленькой буквы: {w}",
+  "pl": "Tu małą literą: {w}"
+ },
+ {
+  "en": "Helps you learn the pronoun forms by heart - mich or mir, sein or seinen - in short everyday sentences.",
+  "ru": "Помогает запомнить формы местоимений - mich или mir, sein или seinen - на примерах из повседневной речи.",
+  "pl": "Pomaga zapamiętać formy zaimków - mich czy mir, sein czy seinen - na przykładach z codziennej mowy."
+ },
+ {
+  "en": "Helps you learn the forms of the modal verbs and pick the right form for what you mean.",
+  "ru": "Помогает запомнить формы модальных глаголов и выбирать нужную по смыслу.",
+  "pl": "Pomaga zapamiętać formy czasowników modalnych i wybierać właściwą zależnie od znaczenia."
+ },
+ {
+  "en": "Richtig",
+  "ru": "Richtig",
+  "pl": "Richtig"
+ },
+ {
+  "en": "Möglich · andere Bedeutung",
+  "ru": "Möglich · andere Bedeutung",
+  "pl": "Möglich · andere Bedeutung"
+ },
+ {
+  "en": "Möglich · anderer Ton",
+  "ru": "Möglich · anderer Ton",
+  "pl": "Möglich · anderer Ton"
+ },
+ {
+  "en": "Nicht ganz",
+  "ru": "Nicht ganz",
+  "pl": "Nicht ganz"
+ },
+ {
+  "en": "The intended meaning is: ",
+  "ru": "Здесь нужно выразить: ",
+  "pl": "Tu trzeba wyrazić: "
+ },
+ {
+  "en": "Your version: ",
+  "ru": "Ваш вариант: ",
+  "pl": "Twoja odpowiedź: "
+ },
+ {
+  "en": "What do you want to say?",
+  "ru": "Что ты хочешь сказать?",
+  "pl": "Co chcesz powiedzieć?"
+ },
+ {
+  "en": "now; directly, without softening",
+  "ru": "сейчас; прямо, без смягчения",
+  "pl": "teraz; wprost, bez łagodzenia"
+ },
+ {
+  "en": "past",
+  "ru": "в прошлом",
+  "pl": "w przeszłości"
+ },
+ {
+  "en": "hypothetical, tentative, probable, advice",
+  "ru": "условно, мягко, вероятно, совет",
+  "pl": "warunkowo, łagodnie, prawdopodobnie, rada"
+ },
+ {
+  "en": "möchte today works as its own verb: a polite 'want'. In the past: wollte, not mochte.",
+  "ru": "möchte сегодня — как отдельный глагол: вежливое «хочу». В прошлом — wollte, не mochte.",
+  "pl": "möchte działa dziś jak osobny czasownik: grzeczne „chcę”. W przeszłości — wollte, nie mochte."
+ },
+ {
+  "en": "Präteritum and Konjunktiv II look the same — the sentence decides.",
+  "ru": "Präteritum и Konjunktiv II совпадают — решает предложение.",
+  "pl": "Präteritum i Konjunktiv II wyglądają tak samo — decyduje zdanie."
+ },
+ {
+  "en": "I'm able to",
+  "ru": "я умею, могу",
+  "pl": "umiem, potrafię"
+ },
+ {
+  "en": "asking politely",
+  "ru": "вежливо попросить",
+  "pl": "grzecznie poprosić"
+ },
+ {
+  "en": "maybe, possibly",
+  "ru": "может быть",
+  "pl": "może, możliwe"
+ },
+ {
+  "en": "I have to",
+  "ru": "надо, нужно",
+  "pl": "muszę, trzeba"
+ },
+ {
+  "en": "I don't have to",
+  "ru": "не обязательно",
+  "pl": "nie muszę"
+ },
+ {
+  "en": "I'm sure",
+  "ru": "наверняка",
+  "pl": "na pewno"
+ },
+ {
+  "en": "I really ought to (but …)",
+  "ru": "по-хорошему надо бы",
+  "pl": "właściwie należałoby (ale …)"
+ },
+ {
+  "en": "should (I expect it)",
+  "ru": "должно бы",
+  "pl": "powinno (tak się spodziewam)"
+ },
+ {
+  "en": "it's allowed",
+  "ru": "можно, разрешено",
+  "pl": "wolno, można"
+ },
+ {
+  "en": "you mustn't",
+  "ru": "нельзя",
+  "pl": "nie wolno"
+ },
+ {
+  "en": "asking very politely",
+  "ru": "очень вежливо спросить",
+  "pl": "bardzo grzecznie zapytać"
+ },
+ {
+  "en": "probably, likely",
+  "ru": "скорее всего",
+  "pl": "prawdopodobnie, chyba"
+ },
+ {
+  "en": "I like it",
+  "ru": "мне нравится",
+  "pl": "lubię"
+ },
+ {
+  "en": "I'd like (polite wish)",
+  "ru": "я бы хотел(а)",
+  "pl": "chciałbym / chciałabym (grzeczne życzenie)"
+ },
+ {
+  "en": "someone wants me to",
+  "ru": "кто-то хочет, чтобы я",
+  "pl": "ktoś chce, żebym"
+ },
+ {
+  "en": "they say",
+  "ru": "говорят",
+  "pl": "podobno, mówi się"
+ },
+ {
+  "en": "giving advice",
+  "ru": "дать совет",
+  "pl": "doradzić"
+ },
+ {
+  "en": "I want to, I plan to",
+  "ru": "хочу, собираюсь",
+  "pl": "chcę, zamierzam"
+ },
+ {
+  "en": "starting politely",
+  "ru": "вежливо начать",
+  "pl": "grzecznie zacząć"
+ },
+ {
+  "en": "Helps you learn the Partizip II of the most common irregular verbs.",
+  "ru": "Помогает запомнить Partizip II самых частых неправильных глаголов.",
+  "pl": "Pomaga zapamiętać Partizip II najczęstszych czasowników nieregularnych."
+ },
+ {
+  "en": "<i>{0}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II",
+  "ru": "<i>{0}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>",
+  "pl": "<i>{0}</i> to przedrostek nierozdzielny: w Partizip II bez <i>ge-</i>"
+ },
+ {
+  "en": "<i>ge-</i> is an inseparable prefix here (<i>{0}</i>): no extra <i>ge-</i>",
+  "ru": "<i>ge-</i> здесь — неотделяемая приставка (<i>{0}</i>): второго <i>ge-</i> нет",
+  "pl": "<i>ge-</i> to tu przedrostek nierozdzielny (<i>{0}</i>): drugiego <i>ge-</i> nie ma"
+ },
+ {
+  "en": "<i>{0}</i> is a separable prefix: <i>ge-</i> goes inside — <i>{1}</i>",
+  "ru": "<i>{0}</i> — отделяемая приставка: <i>ge-</i> внутри — <i>{1}</i>",
+  "pl": "<i>{0}</i> to przedrostek rozdzielny: <i>ge-</i> w środku — <i>{1}</i>"
+ },
+ {
+  "en": "; here the consonant changes too: <i>{0}</i>",
+  "ru": "; здесь меняется и согласная: <i>{0}</i>",
+  "pl": "; tu zmienia się też spółgłoska: <i>{0}</i>"
+ },
+ {
+  "en": "mixed verb: the Partizip II ends in <i>-t</i> like a regular verb, and the vowel always changes{0} — <i>{1} → {2}</i>",
+  "ru": "смешанный глагол: Partizip II кончается на <i>-t</i>, как у правильных, а гласная всегда меняется{0} — <i>{1} → {2}</i>",
+  "pl": "czasownik mieszany: Partizip II kończy się na <i>-t</i> jak w czasownikach regularnych, a samogłoska zawsze się zmienia{0} — <i>{1} → {2}</i>"
+ },
+ {
+  "en": "special verb: learn its forms — <i>{0} → {1} → {2}</i>",
+  "ru": "особый глагол: его формы запоминают — <i>{0} → {1} → {2}</i>",
+  "pl": "czasownik szczególny: jego formy trzeba zapamiętać — <i>{0} → {1} → {2}</i>"
+ },
+ {
+  "en": "strong verb: the Partizip II ends in <i>-en</i>, not <i>-t</i>",
+  "ru": "сильный глагол: Partizip II на <i>-en</i>, не на <i>-t</i>",
+  "pl": "czasownik mocny: Partizip II kończy się na <i>-en</i>, nie na <i>-t</i>"
+ },
+ {
+  "en": "the vowel stays <i>{0}</i>",
+  "ru": "гласная не меняется: <i>{0}</i>",
+  "pl": "samogłoska się nie zmienia: <i>{0}</i>"
+ },
+ {
+  "en": "the vowel changes <i>{0} → {1}</i>",
+  "ru": "гласная меняется: <i>{0} → {1}</i>",
+  "pl": "samogłoska się zmienia: <i>{0} → {1}</i>"
+ },
+ {
+  "en": " (the exception to ie → o)",
+  "ru": " (исключение из ie → o)",
+  "pl": " (wyjątek od ie → o)"
+ },
+ {
+  "en": ", like {0}",
+  "ru": ", как {0}",
+  "pl": ", jak {0}"
+ },
+ {
+  "en": "; consonant: <i>{0}</i>",
+  "ru": "; согласная: <i>{0}</i>",
+  "pl": "; spółgłoska: <i>{0}</i>"
+ },
+ {
+  "en": "after a short vowel: <i>ss</i> — <i>gewusst, geschlossen</i> (ß only after a long vowel or a diphthong)",
+  "ru": "после краткой гласной — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — только после долгой гласной или дифтонга)",
+  "pl": "po krótkiej samogłosce — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — tylko po długiej samogłosce albo dyftongu)"
+ },
+ {
+  "en": "hang something up: <i>hängte, gehängt</i> · be hanging: <i>hing, gehangen</i>",
+  "ru": "вешать: <i>hängte, gehängt</i> · висеть: <i>hing, gehangen</i>",
+  "pl": "wieszać: <i>hängte, gehängt</i> · wisieć: <i>hing, gehangen</i>"
+ },
+ {
+  "en": "<i>{0}</i> as Partizip II only after a second verb: <i>{1}</i>. On its own: <i>{2}</i>",
+  "ru": "<i>{0}</i> вместо Partizip II — только после второго глагола: <i>{1}</i>. Отдельно: <i>{2}</i>",
+  "pl": "<i>{0}</i> zamiast Partizip II — tylko po drugim czasowniku: <i>{1}</i>. Samodzielnie: <i>{2}</i>"
+ },
+ {
+  "en": "(except liegen → gelegen)",
+  "ru": "(кроме liegen → gelegen)",
+  "pl": "(oprócz liegen → gelegen)"
+ },
+ {
+  "en": "only sitzen and bitten",
+  "ru": "только sitzen и bitten",
+  "pl": "tylko sitzen i bitten"
+ },
+ {
+  "en": "don't confuse: geben → gegeben, gehen → gegangen (here ge‑ is not a prefix but part of the stem)",
+  "ru": "не путать: geben → gegeben, gehen → gegangen (здесь ge‑ не приставка, а часть корня)",
+  "pl": "nie mylić: geben → gegeben, gehen → gegangen (tu ge‑ to nie przedrostek, lecz część rdzenia)"
+ },
+ {
+  "en": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — no ge‑",
+  "ru": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — без ge‑",
+  "pl": "be-, emp-, ent-, er-, ge-, miss-, ver-, zer- — bez ge‑"
+ },
+ {
+  "en": "separable prefix — ge- goes inside",
+  "ru": "отделяемая приставка — ge- внутри",
+  "pl": "przedrostek rozdzielny — ge- w środku"
+ },
+ {
+  "en": "ge- + stem + -t",
+  "ru": "ge- + основа + -t",
+  "pl": "ge- + temat + -t"
+ },
+ {
+  "en": "stem ending in -t / -d: ‑e‑ before the -t",
+  "ru": "основа на -t / -d — перед -t вставляется ‑e‑",
+  "pl": "temat na -t / -d — przed -t wstawia się ‑e‑"
+ },
+ {
+  "en": "-ieren — no ge‑",
+  "ru": "-ieren — без ge‑",
+  "pl": "-ieren — bez ge‑"
+ },
+ {
+  "en": "among irregular verbs, all are strong except the mixed and the special ones",
+  "ru": "среди неправильных глаголов все, кроме смешанных и особых, — сильные",
+  "pl": "wśród czasowników nieregularnych wszystkie, oprócz mieszanych i szczególnych, są mocne"
+ },
+ {
+  "en": "ending -en, the vowel often changes",
+  "ru": "окончание -en, гласная часто меняется",
+  "pl": "końcówka -en, samogłoska często się zmienia"
+ },
+ {
+  "en": "in the passive — worden: Das Haus ist gebaut worden.",
+  "ru": "в пассиве — worden: Das Haus ist gebaut worden.",
+  "pl": "w stronie biernej — worden: Das Haus ist gebaut worden."
+ },
+ {
+  "en": "and the other way round: bitten → gebeten",
+  "ru": "и наоборот: bitten → gebeten",
+  "pl": "i odwrotnie: bitten → gebeten"
+ },
+ {
+  "en": "ch never doubles: riechen → gerochen",
+  "ru": "ch не удваивается: riechen → gerochen",
+  "pl": "ch się nie podwaja: riechen → gerochen"
+ },
+ {
+  "en": "the vowel becomes short — the consonant doubles",
+  "ru": "гласная становится краткой — согласная удваивается",
+  "pl": "samogłoska staje się krótka — spółgłoska się podwaja"
+ },
+ {
+  "en": "these are the most common such verbs",
+  "ru": "это самые частые такие глаголы",
+  "pl": "to najczęstsze takie czasowniki"
+ },
+ {
+  "en": "the consonant changes or is added",
+  "ru": "согласная меняется или добавляется",
+  "pl": "spółgłoska się zmienia albo dochodzi"
+ },
+ {
+  "en": "the vowel changes, the ending is -t — like regular verbs",
+  "ru": "гласная меняется, окончание -t — как у правильных",
+  "pl": "samogłoska się zmienia, końcówka -t — jak w czasownikach regularnych"
+ },
+ {
+  "en": "There are almost no other such verbs: these seven, senden and wenden (two forms: gesandt / gesendet, gewandt / gewendet) — and the same verbs with prefixes: erkennen, verbringen, nachdenken.",
+  "ru": "Других таких глаголов почти нет: эти семь, senden и wenden (две формы: gesandt / gesendet, gewandt / gewendet) — и они же с приставками: erkennen, verbringen, nachdenken.",
+  "pl": "Innych takich czasowników prawie nie ma: te siedem, senden i wenden (dwie formy: gesandt / gesendet, gewandt / gewendet) — a także te same czasowniki z przedrostkami: erkennen, verbringen, nachdenken."
+ },
+ {
+  "en": "their own forms — learn them",
+  "ru": "свои формы — запомнить",
+  "pl": "własne formy — zapamiętać"
+ },
+ {
+  "en": "with another verb — the infinitive: Ich habe kommen müssen.",
+  "ru": "с другим глаголом — инфинитив: Ich habe kommen müssen.",
+  "pl": "z innym czasownikiem — bezokolicznik: Ich habe kommen müssen."
+ },
+ {
+  "en": "modal verbs",
+  "ru": "модальные глаголы",
+  "pl": "czasowniki modalne"
+ },
+ {
+  "en": "werden or lassen? wird or ist? Helps you tell apart verbs that do many jobs and pick the right form for what you mean.",
+  "ru": "werden или lassen? wird или ist? Помогает различать глаголы, у которых много значений, и выбирать нужную форму по смыслу.",
+  "pl": "werden czy lassen? wird czy ist? Pomaga odróżniać czasowniki o wielu funkcjach i wybierać właściwą formę zależnie od znaczenia."
+ },
+ {
+  "en": "Search German words for a brief grammar note",
+  "ru": "Немецкие слова: краткая грамматическая справка",
+  "pl": "Niemieckie słowa: krótka informacja gramatyczna"
+ },
+ {
+  "en": "My Words",
+  "ru": "Мои слова",
+  "pl": "Moje słowa"
+ },
+ {
+  "en": "{0} {0|word|words}",
+  "ru": "{0} {0|слово|слова|слов}",
+  "pl": "{0} {0|słowo|słowa|słów}"
+ },
+ {
+  "en": "{0} {0|Word|Words}",
+  "ru": "{0} {0|слово|слова|слов}",
+  "pl": "{0} {0|słowo|słowa|słów}"
+ },
+ {
+  "en": "Word collection: ",
+  "ru": "Коллекция слов: ",
+  "pl": "Kolekcja słów: "
+ },
+ {
+  "en": "Back",
+  "ru": "Назад",
+  "pl": "Wstecz"
+ },
+ {
+  "en": "Close",
+  "ru": "Закрыть",
+  "pl": "Zamknij"
+ },
+ {
+  "en": "Rename",
+  "ru": "Переименовать",
+  "pl": "Zmień nazwę"
+ },
+ {
+  "en": "Word Sets",
+  "ru": "Наборы слов",
+  "pl": "Zestawy słów"
+ },
+ {
+  "en": "New",
+  "ru": "Новое",
+  "pl": "Nowe"
+ },
+ {
+  "en": "Added within the last 24 hours",
+  "ru": "Добавлено за последние 24 часа",
+  "pl": "Dodane w ciągu ostatnich 24 godzin"
+ },
+ {
+  "en": "No words yet.",
+  "ru": "Слов пока нет.",
+  "pl": "Na razie brak słów."
+ },
+ {
+  "en": "Export",
+  "ru": "Экспорт",
+  "pl": "Eksportuj"
+ },
+ {
+  "en": "Delete",
+  "ru": "Удалить",
+  "pl": "Usuń"
+ },
+ {
+  "en": "Verb",
+  "ru": "Глагол",
+  "pl": "Czasownik"
+ },
+ {
+  "en": "Noun",
+  "ru": "Существительное",
+  "pl": "Rzeczownik"
+ },
+ {
+  "en": "Adjective",
+  "ru": "Прилагательное",
+  "pl": "Przymiotnik"
+ },
+ {
+  "en": "Other",
+  "ru": "Другое",
+  "pl": "Inne"
+ },
+ {
+  "en": " · optional",
+  "ru": " · необязательно",
+  "pl": " · opcjonalnie"
+ },
+ {
+  "en": "Edit Word",
+  "ru": "Изменить слово",
+  "pl": "Edytuj słowo"
+ },
+ {
+  "en": "New Word",
+  "ru": "Новое слово",
+  "pl": "Nowe słowo"
+ },
+ {
+  "en": "Sentence",
+  "ru": "Предложение",
+  "pl": "Zdanie"
+ },
+ {
+  "en": "Tap the word you want to practise. For separable verbs, tap both parts.",
+  "ru": "Нажми на слово, которое хочешь тренировать. У глаголов с отделяемой приставкой — на обе части.",
+  "pl": "Stuknij słowo, które chcesz ćwiczyć. W czasownikach z przedrostkiem rozdzielnym — obie części."
+ },
+ {
+  "en": "Meaning",
+  "ru": "Значение",
+  "pl": "Znaczenie"
+ },
+ {
+  "en": "to suggest",
+  "ru": "предлагать",
+  "pl": "proponować"
+ },
+ {
+  "en": "Other Meanings",
+  "ru": "Другие значения",
+  "pl": "Inne znaczenia"
+ },
+ {
+  "en": "to propose; to recommend",
+  "ru": "выдвигать; советовать",
+  "pl": "wysuwać; polecać"
+ },
+ {
+  "en": "Sentence Translation",
+  "ru": "Перевод предложения",
+  "pl": "Tłumaczenie zdania"
+ },
+ {
+  "en": "I suggest Saturday.",
+  "ru": "Предлагаю субботу.",
+  "pl": "Proponuję sobotę."
+ },
+ {
+  "en": "Base Form",
+  "ru": "Начальная форма",
+  "pl": "Forma podstawowa"
+ },
+ {
+  "en": "Grammar",
+  "ru": "Грамматика",
+  "pl": "Gramatyka"
+ },
+ {
+  "en": "Word Class",
+  "ru": "Часть речи",
+  "pl": "Część mowy"
+ },
+ {
+  "en": "Learn Now",
+  "ru": "Учить сейчас",
+  "pl": "Nauka od razu"
+ },
+ {
+  "en": "Learn now",
+  "ru": "Учить сейчас",
+  "pl": "Nauka od razu"
+ },
+ {
+  "en": "On: comes with your next new words (+ 5). Off: added to the end of your list.",
+  "ru": "Вкл.: слово придёт со следующими новыми словами (+ 5). Выкл.: добавится в конец списка.",
+  "pl": "Wł.: słowo pojawi się z następnymi nowymi słowami (+ 5). Wył.: zostanie dodane na koniec listy."
+ },
+ {
+  "en": "gap",
+  "ru": "пропуск",
+  "pl": "luka"
+ },
+ {
+  "en": "Please type a sentence.",
+  "ru": "Напиши предложение.",
+  "pl": "Wpisz zdanie."
+ },
+ {
+  "en": "Please tap the word you want to practise.",
+  "ru": "Нажми на слово, которое хочешь тренировать.",
+  "pl": "Stuknij słowo, które chcesz ćwiczyć."
+ },
+ {
+  "en": "Please type the meaning.",
+  "ru": "Напиши значение.",
+  "pl": "Wpisz znaczenie."
+ },
+ {
+  "en": "This word is already in your collection.",
+  "ru": "Это слово уже есть в коллекции.",
+  "pl": "To słowo jest już w kolekcji."
+ },
+ {
+  "en": "The word couldn't be saved.",
+  "ru": "Не удалось сохранить слово.",
+  "pl": "Nie udało się zapisać słowa."
+ },
+ {
+  "en": "Storage is full - the word wasn't saved.",
+  "ru": "Память заполнена — слово не сохранено.",
+  "pl": "Pamięć jest pełna — słowo nie zostało zapisane."
+ },
+ {
+  "en": "Save",
+  "ru": "Сохранить",
+  "pl": "Zapisz"
+ },
+ {
+  "en": "Delete Word",
+  "ru": "Удалить слово",
+  "pl": "Usuń słowo"
+ },
+ {
+  "en": "Search the Wörterbuch",
+  "ru": "Поиск в Wörterbuch",
+  "pl": "Szukaj w Wörterbuch"
+ },
+ {
+  "en": "Clear search",
+  "ru": "Очистить поиск",
+  "pl": "Wyczyść wyszukiwanie"
+ },
+ {
+  "en": "Fill the form with ",
+  "ru": "Заполнить форму: ",
+  "pl": "Wypełnij formularz: "
+ },
+ {
+  "en": "✓ Added",
+  "ru": "✓ Добавлено",
+  "pl": "✓ Dodano"
+ },
+ {
+  "en": "Added. Tap to undo",
+  "ru": "Добавлено. Нажми, чтобы отменить",
+  "pl": "Dodano. Stuknij, aby cofnąć"
+ },
+ {
+  "en": "In list",
+  "ru": "В списке",
+  "pl": "Na liście"
+ },
+ {
+  "en": "Add ",
+  "ru": "Добавить ",
+  "pl": "Dodaj "
+ },
+ {
+  "en": "＋ adds the word to the end of your list.",
+  "ru": "＋ добавляет слово в конец списка.",
+  "pl": "＋ dodaje słowo na koniec listy."
+ },
+ {
+  "en": "＋ adds the word to your next new words.",
+  "ru": "＋ добавляет слово к следующим новым словам.",
+  "pl": "＋ dodaje słowo do następnych nowych słów."
+ },
+ {
+  "en": "Keep typing…",
+  "ru": "Печатай дальше…",
+  "pl": "Pisz dalej…"
+ },
+ {
+  "en": "Loading the Wörterbuch…",
+  "ru": "Загружаем Wörterbuch…",
+  "pl": "Wczytywanie Wörterbuch…"
+ },
+ {
+  "en": "The Wörterbuch couldn't be loaded. Please try again.",
+  "ru": "Не удалось загрузить Wörterbuch. Попробуй ещё раз.",
+  "pl": "Nie udało się wczytać Wörterbuch. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "Not in the Wörterbuch. Clear the search to type your own word.",
+  "ru": "В Wörterbuch такого нет. Очисти поиск, чтобы ввести своё слово.",
+  "pl": "Tego nie ma w Wörterbuch. Wyczyść wyszukiwanie, aby wpisać własne słowo."
+ },
+ {
+  "en": "Your Own Words",
+  "ru": "Свои слова",
+  "pl": "Własne słowa"
+ },
+ {
+  "en": "You don't have your own word collection yet. This word starts it.",
+  "ru": "У тебя ещё нет своей коллекции слов. Это слово её начнёт.",
+  "pl": "Nie masz jeszcze własnej kolekcji słów. To słowo ją rozpocznie."
+ },
+ {
+  "en": "Continue",
+  "ru": "Продолжить",
+  "pl": "Dalej"
+ },
+ {
+  "en": "Cancel",
+  "ru": "Отмена",
+  "pl": "Anuluj"
+ },
+ {
+  "en": "Word Cannot Be Added",
+  "ru": "Слово нельзя добавить",
+  "pl": "Nie można dodać słowa"
+ },
+ {
+  "en": "The dictionary entry is missing.",
+  "ru": "В словаре нет этой статьи.",
+  "pl": "W słowniku brakuje tego hasła."
+ },
+ {
+  "en": "This word has no learning card.",
+  "ru": "У этого слова нет учебной карточки.",
+  "pl": "To słowo nie ma fiszki."
+ },
+ {
+  "en": "The dictionary example has invalid answer markup and needs correction.",
+  "ru": "В примере из словаря неверно отмечено слово — его нужно исправить.",
+  "pl": "W przykładzie ze słownika słowo jest źle zaznaczone — trzeba to poprawić."
+ },
+ {
+  "en": "Unknown word",
+  "ru": "Неизвестное слово",
+  "pl": "Nieznane słowo"
+ },
+ {
+  "en": "The word could not be prepared. Please try again.",
+  "ru": "Не удалось подготовить слово. Попробуй ещё раз.",
+  "pl": "Nie udało się przygotować słowa. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "added to Wortschatz, collection „{1}“",
+  "ru": "{0|добавлено|добавлены} в Wortschatz, коллекция «{1}»",
+  "pl": "dodano do Wortschatz, kolekcja „{1}”"
+ },
+ {
+  "en": "{0} already in your collection.",
+  "ru": "{0} {0|слово уже было|слова уже были|слов уже были} в коллекции.",
+  "pl": "{0} {0|słowo już było|słowa już były|słów już było} w kolekcji."
+ },
+ {
+  "en": "{0} without learning cards stay in Meine Wörter.",
+  "ru": "{0} {0|слово без карточки осталось|слова без карточек остались|слов без карточек остались} в Meine Wörter.",
+  "pl": "{0} {0|słowo bez fiszki zostało|słowa bez fiszek zostały|słów bez fiszek zostało} w Meine Wörter."
+ },
+ {
+  "en": "Open Wortschatz",
+  "ru": "Открыть Wortschatz",
+  "pl": "Otwórz Wortschatz"
+ },
+ {
+  "en": "Words from Reading",
+  "ru": "Слова из чтения",
+  "pl": "Słowa z lektury"
+ },
+ {
+  "en": "Review words from „{0}“. Tap any word to edit it before adding.",
+  "ru": "Проверь слова из «{0}». Нажми на слово, чтобы изменить его перед добавлением.",
+  "pl": "Sprawdź słowa z „{0}”. Stuknij słowo, aby je zmienić przed dodaniem."
+ },
+ {
+  "en": "{0} {0|word without a learning card remains|words without learning cards remain} saved in Bibliothek.",
+  "ru": "{0} {0|слово без учебной карточки остаётся|слова без учебных карточек остаются|слов без учебных карточек остаются} в Bibliothek.",
+  "pl": "{0} {0|słowo bez fiszki zostaje|słowa bez fiszek zostają|słów bez fiszek zostaje} w Bibliothek."
+ },
+ {
+  "en": "These words start your own word collection.",
+  "ru": "С этих слов начнётся твоя коллекция.",
+  "pl": "Od tych słów zacznie się twoja kolekcja."
+ },
+ {
+  "en": "Collection Name",
+  "ru": "Название коллекции",
+  "pl": "Nazwa kolekcji"
+ },
+ {
+  "en": "Create Collection with ",
+  "ru": "Создать коллекцию: ",
+  "pl": "Utwórz kolekcję: "
+ },
+ {
+  "en": "Include ",
+  "ru": "Включить ",
+  "pl": "Uwzględnij "
+ },
+ {
+  "en": "word",
+  "ru": "слово",
+  "pl": "słowo"
+ },
+ {
+  "en": "Word",
+  "ru": "Слово",
+  "pl": "Słowo"
+ },
+ {
+  "en": "Add New Words",
+  "ru": "Куда добавить новые слова",
+  "pl": "Gdzie dodać nowe słowa"
+ },
+ {
+  "en": "At the End of the List",
+  "ru": "В конец списка",
+  "pl": "Na koniec listy"
+ },
+ {
+  "en": "As the Next New Words",
+  "ru": "Следующими новыми словами",
+  "pl": "Jako następne nowe słowa"
+ },
+ {
+  "en": "Next new words: before the words you haven't started. Your current reviews stay unchanged.",
+  "ru": "Следующими новыми — перед словами, которые ты ещё не начинал. Текущие повторения не меняются.",
+  "pl": "Jako następne nowe — przed słowami, których jeszcze nie zacząłeś. Bieżące powtórki się nie zmieniają."
+ },
+ {
+  "en": "These words are already in your collection.",
+  "ru": "Эти слова уже есть в коллекции.",
+  "pl": "Te słowa są już w kolekcji."
+ },
+ {
+  "en": "No words were added.",
+  "ru": "Слова не добавлены.",
+  "pl": "Nie dodano słów."
+ },
+ {
+  "en": "{0} words added",
+  "ru": "Добавлено: {1}",
+  "pl": "Dodano: {0} {0|słowo|słowa|słów}"
+ },
+ {
+  "en": " as the next new words",
+  "ru": " — следующими новыми",
+  "pl": " — jako następne nowe"
+ },
+ {
+  "en": " {0} already in your collection.",
+  "ru": " Уже были в коллекции: {0}.",
+  "pl": " Już w kolekcji: {0} {0|słowo|słowa|słów}."
+ },
+ {
+  "en": "The words could not be saved. Your review is kept; please try again.",
+  "ru": "Не удалось сохранить слова. Твой выбор сохранён — попробуй ещё раз.",
+  "pl": "Nie udało się zapisać słów. Twój wybór został zachowany — spróbuj jeszcze raz."
+ },
+ {
+  "en": "Discard This Batch",
+  "ru": "Отказаться от этих слов",
+  "pl": "Zrezygnuj z tych słów"
+ },
+ {
+  "en": "Discard these words?",
+  "ru": "Отказаться от этих слов?",
+  "pl": "Zrezygnować z tych słów?"
+ },
+ {
+  "en": "Nothing has been added. The words remain saved in Bibliothek.",
+  "ru": "Ничего не добавлено. Слова остаются в Bibliothek.",
+  "pl": "Nic nie zostało dodane. Słowa zostają w Bibliothek."
+ },
+ {
+  "en": "Keep Reviewing",
+  "ru": "Продолжить проверку",
+  "pl": "Sprawdzaj dalej"
+ },
+ {
+  "en": "Discard Batch",
+  "ru": "Отказаться",
+  "pl": "Zrezygnuj"
+ },
+ {
+  "en": "The draft could not be prepared. It is kept; please try again.",
+  "ru": "Не удалось подготовить черновик. Он сохранён — попробуй ещё раз.",
+  "pl": "Nie udało się przygotować wersji roboczej. Została zachowana — spróbuj jeszcze raz."
+ },
+ {
+  "en": "Ready-made word sets. Open one and tick the words you want to learn.",
+  "ru": "Готовые наборы слов. Открой набор и отметь слова, которые хочешь учить.",
+  "pl": "Gotowe zestawy słów. Otwórz zestaw i zaznacz słowa, których chcesz się uczyć."
+ },
+ {
+  "en": "Couldn't be loaded.",
+  "ru": "Не загрузился.",
+  "pl": "Nie udało się wczytać."
+ },
+ {
+  "en": "Word Set",
+  "ru": "Набор слов",
+  "pl": "Zestaw słów"
+ },
+ {
+  "en": "Loading…",
+  "ru": "Загрузка…",
+  "pl": "Wczytywanie…"
+ },
+ {
+  "en": "The set couldn't be loaded. Please try again.",
+  "ru": "Не удалось загрузить набор. Попробуй ещё раз.",
+  "pl": "Nie udało się wczytać zestawu. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "This will be your own collection - you can add, edit and delete words any time.",
+  "ru": "Это будет твоя коллекция — слова можно добавлять, менять и удалять в любой момент.",
+  "pl": "To będzie twoja kolekcja — słowa możesz dodawać, zmieniać i usuwać w każdej chwili."
+ },
+ {
+  "en": "Select all",
+  "ru": "Выбрать все",
+  "pl": "Zaznacz wszystkie"
+ },
+ {
+  "en": "Select All",
+  "ru": "Выбрать все",
+  "pl": "Zaznacz wszystkie"
+ },
+ {
+  "en": "Learn ",
+  "ru": "Учить ",
+  "pl": "Ucz się: "
+ },
+ {
+  "en": "On: they come with your next new words (+ 5). Off: added to the end of your list.",
+  "ru": "Вкл.: слова придут со следующими новыми словами (+ 5). Выкл.: добавятся в конец списка.",
+  "pl": "Wł.: słowa pojawią się z następnymi nowymi słowami (+ 5). Wył.: zostaną dodane na koniec listy."
+ },
+ {
+  "en": "Selected: ",
+  "ru": "",
+  "pl": "Wybrano: "
+ },
+ {
+  "en": "All words are already in your list.",
+  "ru": "Все слова уже в твоём списке.",
+  "pl": "Wszystkie słowa są już na twojej liście."
+ },
+ {
+  "en": "Tick the words you want to learn",
+  "ru": "Отметь нужные слова",
+  "pl": "Zaznacz potrzebne słowa"
+ },
+ {
+  "en": "Storage is full - the words weren't saved.",
+  "ru": "Память заполнена — слова не сохранены.",
+  "pl": "Pamięć jest pełna — słowa nie zostały zapisane."
+ },
+ {
+  "en": "The words couldn't be saved.",
+  "ru": "Не удалось сохранить слова.",
+  "pl": "Nie udało się zapisać słów."
+ },
+ {
+  "en": "{0} {0|word|words} added from „{1}“.",
+  "ru": "Добавлено из «{1}»: {2}.",
+  "pl": "Dodano z „{1}”: {0} {0|słowo|słowa|słów}."
+ },
+ {
+  "en": "For the long run",
+  "ru": "Чтобы запомнить надолго",
+  "pl": "Żeby zapamiętać na długo"
+ },
+ {
+  "en": "Before an exam · more reviews",
+  "ru": "Перед экзаменом · больше повторений",
+  "pl": "Przed egzaminem · więcej powtórek"
+ },
+ {
+  "en": "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews.",
+  "ru": "Слово с ошибкой всегда возвращается на следующий день. Новый темп действует только на следующие повторения.",
+  "pl": "Słowo, w którym się pomylisz, zawsze wraca następnego dnia. Zmiana tempa dotyczy tylko kolejnych powtórek."
+ },
+ {
+  "en": "Delete this word?",
+  "ru": "Удалить слово?",
+  "pl": "Usunąć to słowo?"
+ },
+ {
+  "en": "„{0}“ and your progress with it will be deleted.",
+  "ru": "«{0}» и прогресс по нему будут удалены.",
+  "pl": "„{0}” i postępy w nauce tego słowa zostaną usunięte."
+ },
+ {
+  "en": " The session goes on with the next word.",
+  "ru": " Тренировка продолжится со следующего слова.",
+  "pl": " Ćwiczysz dalej od następnego słowa."
+ },
+ {
+  "en": "Keep",
+  "ru": "Оставить",
+  "pl": "Zostaw"
+ },
+ {
+  "en": "Format the words as a JSON list and answer with the list only - no other text.\nOne object per word, like this:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"to suggest\",\n    \"sentenceTranslation\": \"I suggest Saturday.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"appointment\",\n    \"sentenceTranslation\": \"The appointment is tomorrow at ten.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nRules:\n- \"sentence\": a short, natural, everyday German sentence. Mark the word to practise with {{c1::…}}, exactly as it appears in the sentence.\n- Mark only ONE word per sentence. Separable verbs: mark both parts, e.g. \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (meaning of the word) and \"sentenceTranslation\" (the whole sentence): in the language I asked for - English if I didn't say.\n- \"base\": the dictionary form. Nouns with der / die / das.\n- \"grammar\": verbs: 3rd person · Präteritum · Perfekt. Nouns: the plural. Otherwise leave it empty.\n- \"pos\": the word class in German (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).",
+  "ru": "Оформи слова как список JSON и ответь только списком — без другого текста.\nОдин объект на слово, вот так:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"предлагать\",\n    \"sentenceTranslation\": \"Предлагаю субботу.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"встреча, назначенное время\",\n    \"sentenceTranslation\": \"Встреча завтра в десять.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nПравила:\n- \"sentence\": короткое естественное немецкое предложение из обычной жизни. Слово для тренировки отметь как {{c1::…}} — ровно в том виде, в каком оно стоит в предложении.\n- Отмечай только ОДНО слово в предложении. Глаголы с отделяемой приставкой: отметь обе части, например \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (значение слова) и \"sentenceTranslation\" (всё предложение): на языке, который я попросил; если я не сказал — на русском.\n- \"base\": словарная форма. Существительные — с der / die / das.\n- \"grammar\": у глаголов — 3-е лицо · Präteritum · Perfekt. У существительных — множественное число. Иначе оставь пустым.\n- \"pos\": часть речи по-немецки (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).",
+  "pl": "Sformatuj słowa jako listę JSON i odpowiedz tylko listą — bez innego tekstu.\nJeden obiekt na słowo, na przykład tak:\n\n[\n  {\n    \"sentence\": \"Ich {{c1::schlage}} Samstag {{c1::vor}}.\",\n    \"translation\": \"proponować\",\n    \"sentenceTranslation\": \"Proponuję sobotę.\",\n    \"base\": \"vorschlagen\",\n    \"grammar\": \"schlägt vor · schlug vor · hat vorgeschlagen\",\n    \"pos\": \"Verb\"\n  },\n  {\n    \"sentence\": \"Der {{c1::Termin}} ist morgen um zehn.\",\n    \"translation\": \"termin, umówione spotkanie\",\n    \"sentenceTranslation\": \"Termin jest jutro o dziesiątej.\",\n    \"base\": \"der Termin\",\n    \"grammar\": \"die Termine\",\n    \"pos\": \"Substantiv\"\n  }\n]\n\nZasady:\n- \"sentence\": krótkie, naturalne niemieckie zdanie z codziennego życia. Słowo do ćwiczenia zaznacz jako {{c1::…}} — dokładnie w takiej formie, w jakiej stoi w zdaniu.\n- Zaznaczaj tylko JEDNO słowo w zdaniu. Czasowniki z przedrostkiem rozdzielnym: zaznacz obie części, np. \"Ich {{c1::rufe}} dich morgen {{c1::an}}.\"\n- \"translation\" (znaczenie słowa) i \"sentenceTranslation\" (całe zdanie): w języku, o który prosiłem; jeśli nie napisałem — po polsku.\n- \"base\": forma słownikowa. Rzeczowniki — z der / die / das.\n- \"grammar\": czasowniki — 3. osoba · Präteritum · Perfekt. Rzeczowniki — liczba mnoga. Dla innych słów zostaw puste.\n- \"pos\": część mowy po niemiecku (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …)."
+ },
+ {
+  "en": "Give your collection a name, then add words: search the Wörterbuch, type them or import a list.",
+  "ru": "Назови коллекцию и добавь слова: найди в Wörterbuch, введи сам или импортируй список.",
+  "pl": "Nazwij kolekcję i dodaj słowa: znajdź je w Wörterbuch, wpisz ręcznie albo zaimportuj listę."
+ },
+ {
+  "en": "Add the First Word",
+  "ru": "Добавить первое слово",
+  "pl": "Dodaj pierwsze słowo"
+ },
+ {
+  "en": "Import List",
+  "ru": "Импорт списка",
+  "pl": "Importuj listę"
+ },
+ {
+  "en": "Ask an AI for example sentences for your words and paste its answer here. To get the right format: ",
+  "ru": "Попроси ИИ составить примеры с твоими словами и вставь его ответ сюда. Чтобы ответ был в нужном формате: ",
+  "pl": "Poproś AI o przykładowe zdania ze swoimi słowami i wklej tutaj odpowiedź. Żeby miała właściwy format: "
+ },
+ {
+  "en": "Format for the AI",
+  "ru": "Формат для ИИ",
+  "pl": "Format dla AI"
+ },
+ {
+  "en": "Paste the list",
+  "ru": "Вставь список",
+  "pl": "Wklej listę"
+ },
+ {
+  "en": "Or: ",
+  "ru": "Или: ",
+  "pl": "Albo: "
+ },
+ {
+  "en": "Choose a File",
+  "ru": "Выбери файл",
+  "pl": "Wybierz plik"
+ },
+ {
+  "en": "New words are added to the end of your list.",
+  "ru": "Новые слова добавятся в конец списка.",
+  "pl": "Nowe słowa zostaną dodane na koniec listy."
+ },
+ {
+  "en": "Please paste the list first.",
+  "ru": "Сначала вставь список.",
+  "pl": "Najpierw wklej listę."
+ },
+ {
+  "en": "This doesn't look like a list. Copy the AI's whole answer - from [ to ].",
+  "ru": "Это не похоже на список. Скопируй весь ответ ИИ — от [ до ].",
+  "pl": "To nie wygląda na listę. Skopiuj całą odpowiedź AI — od [ do ]."
+ },
+ {
+  "en": "Storage is full - nothing was saved.",
+  "ru": "Память заполнена — ничего не сохранено.",
+  "pl": "Pamięć jest pełna — nic nie zostało zapisane."
+ },
+ {
+  "en": "The list couldn't be saved.",
+  "ru": "Не удалось сохранить список.",
+  "pl": "Nie udało się zapisać listy."
+ },
+ {
+  "en": "All these words are already in your collection.",
+  "ru": "Все эти слова уже есть в коллекции.",
+  "pl": "Wszystkie te słowa są już w kolekcji."
+ },
+ {
+  "en": "None of the cards could be used.",
+  "ru": "Ни одну карточку не удалось использовать.",
+  "pl": "Nie udało się użyć żadnej fiszki."
+ },
+ {
+  "en": " For example no. ",
+  "ru": " Например, № ",
+  "pl": " Na przykład nr "
+ },
+ {
+  "en": "The file is too big.",
+  "ru": "Файл слишком большой.",
+  "pl": "Plik jest za duży."
+ },
+ {
+  "en": "The file couldn't be read.",
+  "ru": "Не удалось прочитать файл.",
+  "pl": "Nie udało się odczytać pliku."
+ },
+ {
+  "en": "Create Collection",
+  "ru": "Создать коллекцию",
+  "pl": "Utwórz kolekcję"
+ },
+ {
+  "en": "Add",
+  "ru": "Добавить",
+  "pl": "Dodaj"
+ },
+ {
+  "en": "Collection Created",
+  "ru": "Коллекция создана",
+  "pl": "Kolekcja utworzona"
+ },
+ {
+  "en": "Words Added",
+  "ru": "Слова добавлены",
+  "pl": "Słowa dodane"
+ },
+ {
+  "en": "{0} {0|word|words} in „{1}“.",
+  "ru": "{2} в «{1}».",
+  "pl": "{0} {0|słowo|słowa|słów} w „{1}”."
+ },
+ {
+  "en": "{0} {0|word|words} added.",
+  "ru": "Добавлено: {1}.",
+  "pl": "Dodano: {0} {0|słowo|słowa|słów}."
+ },
+ {
+  "en": " You start with the first 10.",
+  "ru": " Начнёшь с первых 10.",
+  "pl": " Zaczniesz od pierwszych 10."
+ },
+ {
+  "en": "{0} {0|word was|words were} already in your collection.",
+  "ru": "Уже были в коллекции: {1}.",
+  "pl": "Już w kolekcji: {0} {0|słowo|słowa|słów}."
+ },
+ {
+  "en": "{0} {0|card|cards} skipped:",
+  "ru": "Пропущено: {0} {0|карточка|карточки|карточек}",
+  "pl": "Pominięto: {0} {0|fiszkę|fiszki|fiszek}"
+ },
+ {
+  "en": "No. ",
+  "ru": "№ ",
+  "pl": "Nr "
+ },
+ {
+  "en": "… and {0} more.",
+  "ru": "… и ещё {0}.",
+  "pl": "… i jeszcze {0}."
+ },
+ {
+  "en": "Done",
+  "ru": "Готово",
+  "pl": "Gotowe"
+ },
+ {
+  "en": "First tell your AI what you want - which words, which level, which language for the translations. Then add this text:",
+  "ru": "Сначала напиши ИИ, что тебе нужно: какие слова, какой уровень, на каком языке переводы. Потом добавь этот текст:",
+  "pl": "Najpierw napisz AI, czego potrzebujesz: jakie słowa, jaki poziom, w jakim języku tłumaczenia. Potem dodaj ten tekst:"
+ },
+ {
+  "en": "Copy",
+  "ru": "Скопировать",
+  "pl": "Kopiuj"
+ },
+ {
+  "en": "Copied ✓",
+  "ru": "Скопировано ✓",
+  "pl": "Skopiowano ✓"
+ },
+ {
+  "en": "Please select the text above and copy it",
+  "ru": "Выдели текст выше и скопируй его",
+  "pl": "Zaznacz tekst powyżej i skopiuj go"
+ },
+ {
+  "en": "Delete this collection?",
+  "ru": "Удалить коллекцию?",
+  "pl": "Usunąć tę kolekcję?"
+ },
+ {
+  "en": "„{0}“ and your progress will be deleted. You can start again with a word set or your own words. This can't be undone - export the words first if you want to keep them.",
+  "ru": "«{0}» и твой прогресс будут удалены. Начать заново можно с набора слов или со своих слов. Это нельзя отменить — если хочешь сохранить слова, сначала экспортируй их.",
+  "pl": "„{0}” i twoje postępy zostaną usunięte. Możesz zacząć od nowa z zestawem słów albo z własnymi słowami. Tego nie da się cofnąć — jeśli chcesz zachować słowa, najpierw je wyeksportuj."
+ },
+ {
+  "en": "Export First",
+  "ru": "Сначала экспорт",
+  "pl": "Najpierw wyeksportuj"
+ },
+ {
+  "en": "Draft Could Not Be Restored",
+  "ru": "Не удалось восстановить черновик",
+  "pl": "Nie udało się przywrócić wersji roboczej"
+ },
+ {
+  "en": "Your draft is kept. Please try again.",
+  "ru": "Черновик сохранён. Попробуй ещё раз.",
+  "pl": "Wersja robocza została zachowana. Spróbuj jeszcze raz."
+ },
+ {
+  "en": "Not a valid entry",
+  "ru": "Неверная запись",
+  "pl": "Nieprawidłowy wpis"
+ },
+ {
+  "en": "No sentence",
+  "ru": "Нет предложения",
+  "pl": "Brak zdania"
+ },
+ {
+  "en": "No word marked with {{c1::…}} in the sentence",
+  "ru": "В предложении не отмечено слово {{c1::…}}",
+  "pl": "W zdaniu nie zaznaczono słowa {{c1::…}}"
+ },
+ {
+  "en": "No meaning",
+  "ru": "Нет значения",
+  "pl": "Brak znaczenia"
+ },
+ {
+  "en": "Card not found",
+  "ru": "Карточка не найдена",
+  "pl": "Nie znaleziono fiszki"
+ },
+ {
+  "en": "This word is already in your collection",
+  "ru": "Это слово уже есть в коллекции",
+  "pl": "To słowo jest już w kolekcji"
+ },
+ {
+  "en": "Row ",
+  "ru": "Строка ",
+  "pl": "Wiersz "
+ },
+ {
+  "en": "Helps you remember words in real sentences. Each word comes back just before you'd forget it - and less and less often over time.",
+  "ru": "Помогает запоминать слова в живых предложениях. Каждое слово возвращается как раз перед тем, как забудется, - и со временем всё реже.",
+  "pl": "Pomaga zapamiętywać słowa w prawdziwych zdaniach. Każde słowo wraca tuż przed tym, jak je zapomnisz - i z czasem coraz rzadziej."
+ },
+ {
+  "en": "Where do you want to start?",
+  "ru": "С чего начнём?",
+  "pl": "Od czego zaczniemy?"
+ },
+ {
+  "en": "Quick start",
+  "ru": "Быстрый старт",
+  "pl": "Szybki start"
+ },
+ {
+  "en": "Pick the words you want to learn",
+  "ru": "Выбери слова, которые хочешь учить",
+  "pl": "Wybierz słowa, których chcesz się uczyć"
+ },
+ {
+  "en": "＋ Start with my own words",
+  "ru": "＋ Начать со своих слов",
+  "pl": "＋ Zacznij od własnych słów"
+ },
+ {
+  "en": "Search the Wörterbuch, type or import",
+  "ru": "Найди в Wörterbuch, введи сам или импортируй",
+  "pl": "Znajdź w Wörterbuch, wpisz ręcznie albo zaimportuj"
+ },
+ {
+  "en": "Settings",
+  "ru": "Настройки",
+  "pl": "Ustawienia"
+ },
+ {
+  "en": "Your progress is saved only on this device. Deleting the app erases it. If your iPhone backup (iCloud) is on, your progress moves to a new iPhone along with everything else.",
+  "ru": "Прогресс хранится только на этом устройстве. Если удалить приложение, прогресс пропадёт. При переезде на новый iPhone он вернётся вместе с резервной копией телефона (iCloud), если она включена.",
+  "pl": "Postępy są zapisywane tylko na tym urządzeniu. Jeśli usuniesz aplikację, postępy znikną. Przy przejściu na nowego iPhone'a wrócą razem z kopią zapasową telefonu (iCloud), jeśli jest włączona."
+ },
+ {
+  "en": "To bring your progress to another device, like an iPad, make a backup. It's a small file you can open there with Wiederherstellen.",
+  "ru": "Чтобы перенести прогресс на другое устройство, например на iPad, сделай бэкап. Это небольшой файл, его можно открыть там через Wiederherstellen.",
+  "pl": "Aby przenieść postępy na inne urządzenie, na przykład na iPada, zrób kopię zapasową. To mały plik, który można tam otworzyć za pomocą Wiederherstellen."
+ }
+]

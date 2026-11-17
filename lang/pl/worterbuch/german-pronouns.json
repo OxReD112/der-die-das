@@ -1,0 +1,414 @@
+{
+ "pronoun-001": {
+  "_src": "6a280ca5",
+  "translation_pl": "ja",
+  "example_pl": "Mieszkam w Berlinie.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-002": {
+  "_src": "a493e937",
+  "translation_pl": "ty",
+  "example_pl": "Możesz mi pomóc.",
+  "usage_note_pl": "Dich i dir są używane także zwrotnie: Du wäschst dich. Du wäschst dir die Hände.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-003": {
+  "_src": "10d2d0be",
+  "translation_pl": "on",
+  "example_pl": "Mój brat jest tutaj. Czeka na zewnątrz.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-004": {
+  "_src": "304225ca",
+  "translation_pl": "ona",
+  "example_pl": "Anna jest zmęczona. Idzie spać.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-005": {
+  "_src": "7e33fc93",
+  "translation_pl": "ono",
+  "example_pl": "Telefon jest nowy. Działa dobrze.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-006": {
+  "_src": "5c2ceafc",
+  "translation_pl": "my",
+  "example_pl": "Jutro jedziemy do Hamburga.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-007": {
+  "_src": "cbd4e774",
+  "translation_pl": "wy (do kilku osób, z którymi jest się na ty)",
+  "example_pl": "Też przyjdziecie jutro?",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-008": {
+  "_src": "d3cc4991",
+  "translation_pl": "oni, one",
+  "example_pl": "Moi rodzice są w domu. Gotują razem.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-009": {
+  "_src": "0294d143",
+  "translation_pl": "Pan / Pani / Państwo (forma grzecznościowa)",
+  "example_pl": "Czy mogę Panu pomóc?",
+  "usage_note_pl": "Forma grzecznościowa wobec jednej lub kilku osób. Sie, Ihnen i Ihrer pisze się wielką literą; czasownik ma formę liczby mnogiej.",
+  "forms_note_pl": "Genitiv jest używany rzadko; w mowie codziennej zwykle potrzebne są Nominativ, Akkusativ i Dativ."
+ },
+ "pronoun-010": {
+  "_src": "2e1f6a6e",
+  "translation_pl": "bezosobowe „es” (często się nie tłumaczy)",
+  "example_pl": "Dziś pada deszcz.",
+  "usage_note_pl": "Używa się go np. przy pogodzie (es regnet) i w es gibt + Akkusativ („jest, są”). Nie zastępuje konkretnego rzeczownika."
+ },
+ "pronoun-011": {
+  "_src": "c53ab229",
+  "translation_pl": "mój",
+  "example_pl": "To jest moja książka.",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: mein Buch — Das ist meins. Kolumny tabeli odnoszą się do tej rzeczy lub osoby."
+ },
+ "pronoun-012": {
+  "_src": "076cfbaa",
+  "translation_pl": "twój",
+  "example_pl": "Czy to twój rower?",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: dein Buch — Das ist deins. Kolumny tabeli odnoszą się do tej rzeczy lub osoby."
+ },
+ "pronoun-013": {
+  "_src": "31125f3a",
+  "translation_pl": "jego (o nim lub o rzeczy rodzaju nijakiego)",
+  "example_pl": "Paul szuka swojego klucza.",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: sein Buch — Das ist seins. Kolumny tabeli odnoszą się do tej rzeczy lub osoby."
+ },
+ "pronoun-014": {
+  "_src": "4c9f8ecb",
+  "translation_pl": "jej",
+  "example_pl": "Anna zapomniała swojego telefonu.",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: ihr Buch — Das ist ihrs. Kolumny tabeli odnoszą się do tej rzeczy lub osoby."
+ },
+ "pronoun-015": {
+  "_src": "253afc69",
+  "translation_pl": "ich",
+  "example_pl": "Dzieci szukają swojej piłki.",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: ihr Buch — Das ist ihrs. Kolumny tabeli odnoszą się do tej rzeczy lub osoby."
+ },
+ "pronoun-016": {
+  "_src": "5d0413df",
+  "translation_pl": "nasz",
+  "example_pl": "Nasz pociąg odjeżdża o godzinie ósmej.",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: unser Buch — Das ist unseres. Kolumny tabeli odnoszą się do tej rzeczy lub osoby.",
+  "forms_note_pl": "Możliwe są formy skrócone: unsre, unsren, unsrem, unsrer, unsres; także unserm."
+ },
+ "pronoun-017": {
+  "_src": "5cdede80",
+  "translation_pl": "wasz (do kilku osób, z którymi jest się na ty)",
+  "example_pl": "Czy to wasz samochód?",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: euer Buch — Das ist eures. Kolumny tabeli odnoszą się do tej rzeczy lub osoby.",
+  "forms_note_pl": "Zwykle eure, euren, eurem, eurer, eures; możliwe są też formy z euer-, np. euere, euerem; także euern, euerm."
+ },
+ "pronoun-018": {
+  "_src": "e31c1e3c",
+  "translation_pl": "Pana / Pani / Państwa (forma grzecznościowa)",
+  "example_pl": "Czy to Pana walizka?",
+  "usage_note_pl": "Końcówka zależy od rodzaju, liczby i przypadku tego, co do kogoś należy: Ihr Buch — Das ist Ihrs. Kolumny tabeli odnoszą się do tej rzeczy lub osoby. W formie grzecznościowej Ihr i wszystkie jego formy pisze się wielką literą."
+ },
+ "pronoun-019": {
+  "_src": "931af2c5",
+  "translation_pl": "sobie; się, siebie (zaimek zwrotny)",
+  "example_pl": "Anna myje ręce.",
+  "usage_note_pl": "Zaimek odnosi się do podmiotu: Ich wasche mich (Akkusativ), ale Ich wasche mir die Hände (Dativ). Sich pisze się małą literą także przy formie grzecznościowej Sie."
+ },
+ "pronoun-020": {
+  "_src": "6cf1a3d3",
+  "translation_pl": "ludzie; nieokreślona osoba (często oddawana konstrukcją bezosobową)",
+  "example_pl": "Tu nie wolno palić.",
+  "usage_note_pl": "Man występuje jako podmiot z czasownikiem w 3. osobie liczby pojedynczej. W innych przypadkach używa się einen i einem: Das kann einem passieren. Nie mylić z der Mann („mężczyzna”)."
+ },
+ "pronoun-021": {
+  "_src": "05d0dc96",
+  "translation_pl": "ktoś",
+  "example_pl": "Czy ktoś jest w domu?",
+  "forms_note_pl": "W Akkusativie i Dativie możliwe są formy z końcówką i bez niej."
+ },
+ "pronoun-022": {
+  "_src": "c518c949",
+  "translation_pl": "nikt",
+  "example_pl": "Nikogo tu nie znam.",
+  "forms_note_pl": "W Akkusativie i Dativie możliwe są formy z końcówką i bez niej."
+ },
+ "pronoun-023": {
+  "_src": "350f7d32",
+  "translation_pl": "coś; trochę",
+  "example_pl": "Chcesz się czegoś napić?",
+  "usage_note_pl": "Nie odmienia się. Przed przymiotnikiem: etwas Neues („coś nowego”). O niewielkiej ilości: etwas Wasser."
+ },
+ "pronoun-024": {
+  "_src": "6c836c6e",
+  "translation_pl": "nic",
+  "example_pl": "Nic nie słyszałem.",
+  "usage_note_pl": "Nie odmienia się. Przed przymiotnikiem: nichts Neues („nic nowego”)."
+ },
+ "pronoun-025": {
+  "_src": "053c342d",
+  "translation_pl": "wszyscy, wszystkie",
+  "example_pl": "Wszyscy już są.",
+  "usage_note_pl": "W tabeli — liczba mnoga. Alles znaczy „wszystko”: Alles ist gut. Przed rodzajnikiem lub zaimkiem dzierżawczym możliwe jest all: all die Bücher, all meine Freunde.",
+  "form_translations": [
+   {
+    "pl": "wszystko"
+   }
+  ]
+ },
+ "pronoun-026": {
+  "_src": "abdf0899",
+  "translation_pl": "pozostali; inni; inny",
+  "example_pl": "Pozostali przyjdą później.",
+  "usage_note_pl": "Końcówka zależy od rodzajnika: andere — die anderen. Liczba pojedyncza: ein anderer Mann, eine andere Frau, ein anderes Kind. Bez rzeczownika: jemand anderes („ktoś inny”)."
+ },
+ "pronoun-027": {
+  "_src": "39ccc163",
+  "translation_pl": "obaj, oba, oboje; obie",
+  "example_pl": "Weźmiemy oba.",
+  "usage_note_pl": "Zwykle liczba mnoga: beide Kinder, die beiden Kinder. Po die końcówki jak u przymiotnika: die beiden, der beiden, den beiden. Beides („jedno i drugie”) ma liczbę pojedynczą: beides w Nominativie/Akkusativie, beidem w Dativie; Genitivu nie ma."
+ },
+ "pronoun-028": {
+  "_src": "cb334f2a",
+  "translation_pl": "każdy; dowolny",
+  "example_pl": "Każdy dostanie kawałek ciasta.",
+  "usage_note_pl": "Używa się w liczbie pojedynczej: jeder Tag, jede Woche, jedes Kind. W znaczeniu „wszyscy” w liczbie mnogiej zwykle używa się alle.",
+  "forms_note_pl": "W Genitivie przed rzeczownikiem rodzaju męskiego lub nijakiego możliwe jest też jeden: jedes/jeden Jahres."
+ },
+ "pronoun-029": {
+  "_src": "97d990db",
+  "translation_pl": "niektórzy; kilka",
+  "example_pl": "Niektórzy zostaną dziś w domu.",
+  "usage_note_pl": "Tabela pokazuje liczbę mnogą. O ilości w liczbie pojedynczej: einige Zeit („pewien czas”), einiges Geld („sporo pieniędzy”)."
+ },
+ "pronoun-030": {
+  "_src": "2c99a972",
+  "translation_pl": "kilka",
+  "example_pl": "Kilka osób już odpowiedziało.",
+  "usage_note_pl": "Używa się w liczbie mnogiej: mehrere Personen."
+ },
+ "pronoun-031": {
+  "_src": "5fa1008e",
+  "translation_pl": "wszyscy, wszystkie bez wyjątku",
+  "example_pl": "Wszystkie dokumenty leżą na stole.",
+  "usage_note_pl": "Tabela pokazuje typowe użycie w liczbie mnogiej. Sämtliche podkreśla, że chodzi o wszystkich bez wyjątku."
+ },
+ "pronoun-032": {
+  "_src": "46db1f93",
+  "translation_pl": "niektóry; niejeden; ten i ów",
+  "example_pl": "Niektórzy wolą jeździć pociągiem.",
+  "usage_note_pl": "Używa się w liczbie pojedynczej i mnogiej: mancher Mensch, manche Menschen; także manch ein Mensch.",
+  "forms_note_pl": "Genitiv liczby pojedynczej rodzaju męskiego i nijakiego występuje przed rzeczownikiem: manchen (rzadziej manches) Missverständnisses."
+ },
+ "pronoun-033": {
+  "_src": "207da3ac",
+  "translation_pl": "ten",
+  "example_pl": "Ta książka mi się podoba.",
+  "usage_note_pl": "Wskazuje na osobę lub rzecz: dieser Mann, diese Frau, dieses Kind, diese Bücher. Może występować bez rzeczownika: Ich nehme dieses.",
+  "form_translations": [
+   {
+    "pl": "to"
+   }
+  ]
+ },
+ "pronoun-034": {
+  "_src": "37403ab7",
+  "translation_pl": "ten sam",
+  "example_pl": "Jedziemy tym samym autobusem.",
+  "usage_note_pl": "Pisze się łącznie: derselbe, dieselbe, dasselbe. Podkreśla, że chodzi o tę samą osobę lub rzecz; der gleiche może oznaczać inną, ale taką samą."
+ },
+ "pronoun-035": {
+  "_src": "e59fcc42",
+  "translation_pl": "ten sam (w am selben, zur selben itp.)",
+  "example_pl": "Mamy urodziny tego samego dnia.",
+  "usage_note_pl": "Typowe użycie — po ściągniętej formie przyimka z rodzajnikiem: am selben Tag, beim selben Arzt, zur selben Zeit. Bez takiego ściągnięcia: an demselben Tag. Nie mylić ze wzmacniającym selber („sam”) — to osobne hasło.",
+  "forms_note_pl": "Główne połączenia: am selben · beim selben · zum selben · zur selben · im selben · ins selbe."
+ },
+ "pronoun-036": {
+  "_src": "bc5807e4",
+  "translation_pl": "taki; podobny",
+  "example_pl": "Często słyszę takie pytania.",
+  "usage_note_pl": "Tabela — formy bez rodzajnika. Także: solch ein Tag, ein solcher Tag. Po ein końcówki zależą od rodzajnika."
+ },
+ "pronoun-037": {
+  "_src": "0583fd8c",
+  "translation_pl": "ten; ta; to; ci, te",
+  "example_pl": "Który płaszcz masz na myśli? — Ten, o tam.",
+  "usage_note_pl": "Zaimek wskazujący der/die/das zastępuje rzeczownik i zwykle jest akcentowany. To nie jest rodzajnik. Dativ Plural: denen. Bez rzeczownika das — „to; tamto”: Das weiß ich. — To wiem. O kimś lub czymś wspomnianym wcześniej — „on, ona, ono; oni”: Die sind einfach anders erzogen. — Oni są po prostu inaczej wychowani. W baśniach i w języku potocznym zamiast er / sie / es (czasownik — na drugim miejscu, nie na końcu): Es war einmal ein König, der hatte drei Töchter. — Był sobie król, a miał on trzy córki.",
+  "form_translations": [
+   {
+    "pl": "to; tamto; (o wspomnianym wcześniej) on, ona, ono"
+   },
+   {
+    "pl": "ten; (o wspomnianym wcześniej) on"
+   },
+   {
+    "pl": "ta; ci, te; (o wspomnianym wcześniej) ona, oni, one"
+   }
+  ]
+ },
+ "pronoun-038": {
+  "_src": "dc3a320a",
+  "translation_pl": "który; która; które; którzy, które",
+  "example_pl": "To jest mężczyzna, któremu pomogłem.",
+  "usage_note_pl": "Rodzaj i liczba zależą od słowa, do którego odnosi się zaimek; przypadek — od jego funkcji w zdaniu podrzędnym. Zwykłe formy Genitivu: dessen, deren; derer występuje w szczególnych konstrukcjach. Czasownik stoi na końcu zdania podrzędnego."
+ },
+ "pronoun-039": {
+  "_src": "c93b6320",
+  "translation_pl": "jaki; który (z kilku)",
+  "example_pl": "Który chcesz wziąć?",
+  "usage_note_pl": "Pytanie o wybór: Welcher Zug? Welches von diesen Büchern? W Genitivie przed rzeczownikiem rodzaju męskiego lub nijakiego możliwe jest też welchen: welchen Tages."
+ },
+ "pronoun-040": {
+  "_src": "06811ab4",
+  "translation_pl": "który; która; które; którzy, które (względny)",
+  "example_pl": "To ulica, która prowadzi na dworzec.",
+  "usage_note_pl": "Bardziej książkowy wariant der/die/das w zdaniu względnym. W Genitivie dzierżawczym zwykle używa się dessen lub deren zamiast form welcher."
+ },
+ "pronoun-041": {
+  "_src": "0a9a114b",
+  "translation_pl": "kto",
+  "example_pl": "Kto dziś przyjdzie?",
+  "usage_note_pl": "Pytanie o osobę: wer (kto), wen (kogo), wem (komu), wessen (czyj). Wprowadza też zdanie bez osobnego rzeczownika: Wer möchte, kann mitkommen."
+ },
+ "pronoun-042": {
+  "_src": "82fba350",
+  "translation_pl": "co",
+  "example_pl": "Co chcesz zjeść?",
+  "usage_note_pl": "Pytanie o rzecz lub treść. Z przyimkiem zwykle używa się form z wo(r)-: womit, worüber. Wessen — rzadki Genitiv; osobnej zwykłej formy Dativu nie ma."
+ },
+ "pronoun-043": {
+  "_src": "73dc510c",
+  "translation_pl": "co (w zdaniu względnym)",
+  "example_pl": "To wszystko, co wiem.",
+  "usage_note_pl": "Względne was występuje np. po alles, nichts i das albo odnosi się do całego zdania. Czasownik stoi na końcu zdania podrzędnego.",
+  "forms_note_pl": "Wessen — rzadki Genitiv. Z przyimkiem zwykle używa się form z wo(r)-, np. worüber. Osobnej zwykłej formy Dativu nie ma."
+ },
+ "pronoun-044": {
+  "_src": "222a86f9",
+  "translation_pl": "jeden; ktoś; jakiś (bez rzeczownika)",
+  "example_pl": "Potrzebuję długopisu. Masz jakiś?",
+  "usage_note_pl": "Przed rzeczownikiem ein — rodzajnik nieokreślony. Bez rzeczownika: einer, eine, eines/eins. W zwykłej nieokreślonej liczbie mnogiej używa się np. welche. Die einen … die anderen znaczy „jedni … drudzy”."
+ },
+ "pronoun-045": {
+  "_src": "4abc15b3",
+  "translation_pl": "żaden; ani jeden",
+  "example_pl": "Nie mam długopisu.",
+  "usage_note_pl": "Przed rzeczownikiem: kein Buch. Bez rzeczownika: keiner, keine, keines/keins. Nie mylić z nicht, które neguje czasownik lub cechę."
+ },
+ "pronoun-046": {
+  "_src": "39d11f24",
+  "translation_pl": "jakiś, jakikolwiek; dowolny (obojętnie jaki)",
+  "example_pl": "Masz jakąś propozycję?",
+  "usage_note_pl": "Przed rzeczownikiem: irgendein Buch. Bez rzeczownika: irgendeiner, irgendeine, irgendeines/irgendeins. W liczbie mnogiej — irgendwelche."
+ },
+ "pronoun-047": {
+  "_src": "9909a474",
+  "translation_pl": "co za; jaki (o rodzaju lub cechach)",
+  "example_pl": "Jaką książkę czytasz?",
+  "usage_note_pl": "Für nie wymaga tu Akkusativu: Was für ein Mann kommt? (Nominativ). Przypadek zależy od funkcji całego wyrażenia: Mit was für einem Auto fährst du? W liczbie mnogiej: was für Bücher; bez rzeczownika: was für einer/eine/eins."
+ },
+ "pronoun-048": {
+  "_src": "7631d3ba",
+  "translation_pl": "dużo, wiele",
+  "example_pl": "Wiele się nauczyłem.",
+  "usage_note_pl": "Zwykle bez końcówki z rzeczownikiem niepoliczalnym: viel Zeit. Bez rzeczownika: vieles („wiele rzeczy”), np. Ich habe vieles gelernt; in vielem („pod wieloma względami”). Przy rzeczach policzalnych — viele.",
+  "form_translations": [
+   {
+    "pl": "wiele rzeczy"
+   },
+   {
+    "pl": "wiele rzeczy (in vielem — pod wieloma względami)"
+   }
+  ]
+ },
+ "pronoun-049": {
+  "_src": "ff74d810",
+  "translation_pl": "wielu, wiele; dużo (rzeczy policzalnych)",
+  "example_pl": "Wielu ludzi jeździ do pracy rowerem.",
+  "usage_note_pl": "Liczba mnoga przy rzeczach policzalnych: viele Bücher. Po die: die vielen Bücher, den vielen Büchern."
+ },
+ "pronoun-050": {
+  "_src": "72cad8d8",
+  "translation_pl": "mało, niewiele",
+  "example_pl": "Niewiele wiem.",
+  "usage_note_pl": "Zwykle bez końcówki z rzeczownikiem niepoliczalnym: wenig Geld. Bez rzeczownika: weniges („niewiele”), np. Ich weiß nur weniges; mit wenigem („małym”). Przy rzeczach policzalnych — wenige."
+ },
+ "pronoun-051": {
+  "_src": "bce1fb27",
+  "translation_pl": "nieliczni; mało (rzeczy policzalnych)",
+  "example_pl": "Tylko nieliczni poprawnie odpowiedzieli na pytanie.",
+  "usage_note_pl": "Liczba mnoga przy rzeczach policzalnych: wenige Bücher. Po die: die wenigen Bücher, den wenigen Büchern."
+ },
+ "pronoun-052": {
+  "_src": "6d28e5c1",
+  "translation_pl": "tamten; ów (o przeszłości lub czymś już znanym)",
+  "example_pl": "Wskazała nie na bliski brzeg, lecz na tamten za mgłą.",
+  "usage_note_pl": "Wyraz książkowy. W parze z dieser: dieser — bliższy, jener — dalszy. O przeszłości: in jener Nacht — tamtej nocy, seit jener Zeit — od tamtego czasu. W mowie zamiast jener zwykle mówi się der da albo der dort drüben."
+ },
+ "pronoun-053": {
+  "_src": "be519495",
+  "translation_pl": "ten (który …)",
+  "example_pl": "Ten, kto wychodzi ostatni, gasi światło.",
+  "forms_note_pl": "Pisze się łącznie: pierwsza część odmienia się jak rodzajnik der, druga — jak przymiotnik.",
+  "usage_note_pl": "Wzmocnione der, die, das. Po nim zwykle stoi zdanie podrzędne: derjenige, der … — ten, kto …; diejenigen, die … — ci, którzy … Rzadziej — Genitiv: Mein Zimmer ist größer als dasjenige meines Bruders. — Mój pokój jest większy niż pokój brata."
+ },
+ "pronoun-054": {
+  "_src": "730dc093",
+  "translation_pl": "to wszystko",
+  "example_pl": "Mimo tego wszystkiego wycieczka nam się podobała.",
+  "usage_note_pl": "Nie odmienia się; występuje tylko po przyimku: trotz alledem — mimo tego wszystkiego, bei alledem — przy tym wszystkim, von alledem — o tym wszystkim. Inna pisownia — alldem."
+ },
+ "pronoun-055": {
+  "_src": "bc2d83e6",
+  "translation_pl": "coś takiego, coś podobnego; taki, podobny (przed rzeczownikiem)",
+  "example_pl": "Coś takiego jeszcze mi się nie zdarzyło.",
+  "usage_note_pl": "Nie odmienia się. und dergleichen (mehr) — i tym podobne (w skrócie u. dgl. / u. dgl. m.); nichts dergleichen — nic podobnego. Przed rzeczownikiem: dergleichen Fragen — podobne pytania."
+ },
+ "pronoun-056": {
+  "_src": "bacaacd5",
+  "translation_pl": "ktoś, ktokolwiek (obojętnie kto)",
+  "example_pl": "Ktoś zabrał mój parasol.",
+  "forms_note_pl": "Odmienia się jak wer; Genitiv praktycznie nie jest używany.",
+  "usage_note_pl": "Wyraz potoczny, to samo co irgendjemand. nicht irgendwer — nie byle kto."
+ },
+ "pronoun-057": {
+  "_src": "9c706353",
+  "translation_pl": "wszelki, jakikolwiek (bez wyjątku)",
+  "example_pl": "Po kłótni straciła wszelką ochotę, żeby iść na przyjęcie.",
+  "forms_note_pl": "Odmienia się jak dieser; w Genitivie rodzaju męskiego i nijakiego zwykle jeglichen (jeglichen Geschlechts), rzadziej jegliches. Liczba mnoga występuje rzadziej: jegliche Ansprüche.",
+  "usage_note_pl": "Wzmocnione jeder, częściej z rzeczownikami abstrakcyjnymi: jegliche Hilfe — wszelka pomoc, ohne jeglichen Zweifel — ponad wszelką wątpliwość. Bez rzeczownika (ein jeglicher — każdy) — książkowe, wychodzące z użycia."
+ },
+ "pronoun-058": {
+  "_src": "5b512fca",
+  "translation_pl": "cokolwiek, coś (obojętnie co)",
+  "example_pl": "Przynieść ci coś do picia?",
+  "usage_note_pl": "Nie odmienia się. W mowie potocznej — irgendwas: Ist irgendwas? — Coś się stało? Przed przymiotnikiem: irgendetwas Neues — coś nowego."
+ },
+ "pronoun-059": {
+  "_src": "f7b4efb2",
+  "translation_pl": "kilka, niemało; sporo (w lp)",
+  "example_pl": "Przez ładnych kilka lat mieszkaliśmy w Wiedniu.",
+  "usage_note_pl": "W tabeli — liczba mnoga. W liczbie pojedynczej: etliches — to i owo, niemało (Ich habe noch etliches zu erledigen.); etliche Zeit — sporo czasu. Potoczne wzmocnienie: das hat etlichen Ärger gemacht — to przysporzyło niemało kłopotów.",
+  "form_translations": [
+   {
+    "pl": "to i owo, niemało"
+   }
+  ]
+ },
+ "pronoun-060": {
+  "_src": "b1f0afcd",
+  "translation_pl": "wszyscy co do jednego, wszyscy bez wyjątku",
+  "example_pl": "Goście przyszli punktualnie, wszyscy co do jednego.",
+  "usage_note_pl": "Nie odmienia się; potoczne. Odnosi się do podmiotu lub dopełnienia w liczbie mnogiej: Sie waren allesamt müde. — Wszyscy byli zmęczeni."
+ },
+ "pronoun-061": {
+  "_src": "ad43d2d3",
+  "translation_pl": "nasz brat, tacy jak my; (rzadziej) ja",
+  "example_pl": "Dla naszego brata to o wiele za drogie.",
+  "forms_note_pl": "Genitiv nie jest używany. unsereins — to samo znaczenie, nie odmienia się. O kobiecie czasem — unsereine.",
+  "usage_note_pl": "Wyraz potoczny. Czasownik — w 3. osobie liczby pojedynczej: Da kann unsereiner nicht mithalten. — Tu nasz brat nie nadąży."
+ }
+}

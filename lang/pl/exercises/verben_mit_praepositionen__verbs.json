@@ -1,0 +1,722 @@
+[
+ {
+  "en": "I'm studying German grammar at the moment.",
+  "ru": "Сейчас я занимаюсь немецкой грамматикой.",
+  "pl": "Zajmuję się teraz gramatyką niemiecką."
+ },
+ {
+  "en": "to ask (politely) for",
+  "ru": "просить о",
+  "pl": "prosić o"
+ },
+ {
+  "en": "to discuss, to debate (a topic)",
+  "ru": "обсуждать (тему), спорить о чём-то",
+  "pl": "omawiać (temat), dyskutować o czymś"
+ },
+ {
+  "en": "to think of, to remember",
+  "ru": "думать о ком-то / вспоминать",
+  "pl": "myśleć o kimś / wspominać"
+ },
+ {
+  "en": "I often think of my family.",
+  "ru": "Я часто думаю о своей семье.",
+  "pl": "Często myślę o swojej rodzinie."
+ },
+ {
+  "en": "to remember",
+  "ru": "вспоминать, помнить о",
+  "pl": "wspominać, pamiętać o"
+ },
+ {
+  "en": "I remember the holiday.",
+  "ru": "Я вспоминаю отпуск.",
+  "pl": "Wspominam urlop."
+ },
+ {
+  "en": "to believe in",
+  "ru": "верить в",
+  "pl": "wierzyć w"
+ },
+ {
+  "en": "I believe in you.",
+  "ru": "Я верю в тебя.",
+  "pl": "Wierzę w ciebie."
+ },
+ {
+  "en": "to take part, to participate",
+  "ru": "участвовать в",
+  "pl": "uczestniczyć w"
+ },
+ {
+  "en": "I'm taking a German course.",
+  "ru": "Я хожу на курс немецкого.",
+  "pl": "Chodzę na kurs niemieckiego."
+ },
+ {
+  "en": "to work on",
+  "ru": "работать над",
+  "pl": "pracować nad"
+ },
+ {
+  "en": "She is working on a new project.",
+  "ru": "Она работает над новым проектом.",
+  "pl": "Pracuje nad nowym projektem."
+ },
+ {
+  "en": "to answer, to reply",
+  "ru": "отвечать на",
+  "pl": "odpowiadać na"
+ },
+ {
+  "en": "I'm answering the question.",
+  "ru": "Я отвечаю на вопрос.",
+  "pl": "Odpowiadam na pytanie."
+ },
+ {
+  "en": "to look forward to",
+  "ru": "с нетерпением ждать, радоваться тому, что предстоит",
+  "pl": "nie móc się doczekać, cieszyć się na myśl o tym, co ma nastąpić"
+ },
+ {
+  "en": "I'm looking forward to the holiday.",
+  "ru": "Я с нетерпением жду отпуска.",
+  "pl": "Nie mogę się doczekać urlopu."
+ },
+ {
+  "en": "to hope for",
+  "ru": "надеяться на",
+  "pl": "mieć nadzieję na"
+ },
+ {
+  "en": "We're hoping for good weather.",
+  "ru": "Мы надеемся на хорошую погоду.",
+  "pl": "Mamy nadzieję na dobrą pogodę."
+ },
+ {
+  "en": "to react, to respond",
+  "ru": "реагировать на",
+  "pl": "reagować na"
+ },
+ {
+  "en": "He reacts quickly to my question.",
+  "ru": "Он быстро реагирует на мой вопрос.",
+  "pl": "Szybko reaguje na moje pytanie."
+ },
+ {
+  "en": "to wait",
+  "ru": "ждать",
+  "pl": "czekać"
+ },
+ {
+  "en": "I'm waiting for the bus.",
+  "ru": "Я жду автобус.",
+  "pl": "Czekam na autobus."
+ },
+ {
+  "en": "to thank (a person)",
+  "ru": "благодарить кого-то (человека)",
+  "pl": "dziękować komuś (osobie)"
+ },
+ {
+  "en": "I'd like to thank you for the invitation.",
+  "ru": "Я благодарю тебя за приглашение.",
+  "pl": "Dziękuję ci za zaproszenie."
+ },
+ {
+  "en": "to start, to begin (something)",
+  "ru": "начинать с, начинать что-либо",
+  "pl": "zaczynać od, zaczynać coś"
+ },
+ {
+  "en": "We're starting work.",
+  "ru": "Мы начинаем работу.",
+  "pl": "Zaczynamy pracę."
+ },
+ {
+  "en": "to talk, to speak (with someone)",
+  "ru": "разговаривать, говорить с",
+  "pl": "rozmawiać z"
+ },
+ {
+  "en": "I'm talking to my mother.",
+  "ru": "Я разговариваю с мамой.",
+  "pl": "Rozmawiam z mamą."
+ },
+ {
+  "en": "to meet (someone)",
+  "ru": "встречаться с",
+  "pl": "spotykać się z"
+ },
+ {
+  "en": "I'm meeting up with friends.",
+  "ru": "Я встречаюсь с друзьями.",
+  "pl": "Spotykam się z przyjaciółmi."
+ },
+ {
+  "en": "to ask about",
+  "ru": "спрашивать о, спрашивать кого-либо о",
+  "pl": "pytać o, pytać kogoś o"
+ },
+ {
+  "en": "I'm asking about the price.",
+  "ru": "Я спрашиваю о цене.",
+  "pl": "Pytam o cenę."
+ },
+ {
+  "en": "to look for, to search",
+  "ru": "искать",
+  "pl": "szukać"
+ },
+ {
+  "en": "I'm looking for my keys.",
+  "ru": "Я ищу свои ключи.",
+  "pl": "Szukam swoich kluczy."
+ },
+ {
+  "en": "to thank (for sth)",
+  "ru": "благодарить за (человек — Dativ без предлога)",
+  "pl": "dziękować za (osoba — Dativ bez przyimka)"
+ },
+ {
+  "en": "Thank you for your help.",
+  "ru": "Спасибо тебе за помощь.",
+  "pl": "Dziękuję ci za pomoc."
+ },
+ {
+  "en": "to apologise (for what you did)",
+  "ru": "извиняться за",
+  "pl": "przepraszać za"
+ },
+ {
+  "en": "I apologise for my mistake.",
+  "ru": "Я извиняюсь за свою ошибку.",
+  "pl": "Przepraszam za swój błąd."
+ },
+ {
+  "en": "to decide on, to choose",
+  "ru": "выбрать, сделать выбор в пользу",
+  "pl": "wybrać, zdecydować się na"
+ },
+ {
+  "en": "I'm choosing the blue coat.",
+  "ru": "Я выбираю синее пальто.",
+  "pl": "Wybieram niebieski płaszcz."
+ },
+ {
+  "en": "to be interested in",
+  "ru": "интересоваться",
+  "pl": "interesować się"
+ },
+ {
+  "en": "I'm interested in modern art.",
+  "ru": "Я интересуюсь современным искусством.",
+  "pl": "Interesuję się sztuką współczesną."
+ },
+ {
+  "en": "I'm asking you a favour.",
+  "ru": "Я прошу тебя об одолжении.",
+  "pl": "Proszę cię o przysługę."
+ },
+ {
+  "en": "to take care of, to look after",
+  "ru": "заботиться о, позаботиться о",
+  "pl": "troszczyć się o, zająć się"
+ },
+ {
+  "en": "I look after the children.",
+  "ru": "Я забочусь о детях.",
+  "pl": "Opiekuję się dziećmi."
+ },
+ {
+  "en": "it's about",
+  "ru": "речь идёт о",
+  "pl": "chodzi o"
+ },
+ {
+  "en": "It's about an important topic.",
+  "ru": "Речь идёт о важной теме.",
+  "pl": "Chodzi o ważny temat."
+ },
+ {
+  "en": "to be happy about (sth that has happened or you've received)",
+  "ru": "радоваться чему-либо (тому, что уже произошло или что получил)",
+  "pl": "cieszyć się z czegoś (z tego, co już się stało albo co się dostało)"
+ },
+ {
+  "en": "I'm happy about the present.",
+  "ru": "Я радуюсь подарку.",
+  "pl": "Cieszę się z prezentu."
+ },
+ {
+  "en": "to reflect on, to think over",
+  "ru": "размышлять, обдумывать",
+  "pl": "rozmyślać, zastanawiać się"
+ },
+ {
+  "en": "I'm thinking about the question.",
+  "ru": "Я размышляю над вопросом.",
+  "pl": "Zastanawiam się nad pytaniem."
+ },
+ {
+  "en": "to talk about",
+  "ru": "говорить о, разговаривать о",
+  "pl": "mówić o, rozmawiać o"
+ },
+ {
+  "en": "We're talking about the film.",
+  "ru": "Мы говорим о фильме.",
+  "pl": "Rozmawiamy o filmie."
+ },
+ {
+  "en": "He often talks about his childhood.",
+  "ru": "Он часто говорит о своём детстве.",
+  "pl": "Często mówi o swoim dzieciństwie."
+ },
+ {
+  "en": "to find out, to get information",
+  "ru": "узнавать информацию о, информироваться о",
+  "pl": "dowiadywać się o, zasięgać informacji o"
+ },
+ {
+  "en": "I'm finding out about the course.",
+  "ru": "Я собираю информацию о курсе.",
+  "pl": "Zbieram informacje o kursie."
+ },
+ {
+  "en": "to tell (someone) about",
+  "ru": "рассказывать о",
+  "pl": "opowiadać o"
+ },
+ {
+  "en": "She's telling us about her work.",
+  "ru": "Она рассказывает о своей работе.",
+  "pl": "Opowiada o swojej pracy."
+ },
+ {
+  "en": "She told us a lot about her holiday.",
+  "ru": "Она много рассказала о своём отпуске.",
+  "pl": "Dużo opowiedziała o swoim urlopie."
+ },
+ {
+  "en": "to dream about",
+  "ru": "мечтать о; видеть во сне",
+  "pl": "marzyć o; śnić o"
+ },
+ {
+  "en": "I'm dreaming of a trip.",
+  "ru": "Я мечтаю о путешествии.",
+  "pl": "Marzę o podróży."
+ },
+ {
+  "en": "to be part of, to belong to",
+  "ru": "относиться к, принадлежать к",
+  "pl": "należeć do"
+ },
+ {
+  "en": "That's part of my job.",
+  "ru": "Это относится к моей профессии.",
+  "pl": "To część mojego zawodu."
+ },
+ {
+  "en": "to congratulate on",
+  "ru": "поздравлять с",
+  "pl": "gratulować czegoś"
+ },
+ {
+  "en": "I'd like to congratulate you on your new job.",
+  "ru": "Поздравляю тебя с новой работой.",
+  "pl": "Gratuluję ci nowej pracy."
+ },
+ {
+  "en": "to warn about, to warn against",
+  "ru": "предупреждать о, предостерегать от",
+  "pl": "ostrzegać przed"
+ },
+ {
+  "en": "I'm warning you about this man.",
+  "ru": "Я предупреждаю тебя насчёт этого человека.",
+  "pl": "Ostrzegam cię przed tym mężczyzną."
+ },
+ {
+  "en": "to fall for (someone)",
+  "ru": "влюбиться в",
+  "pl": "zakochać się w"
+ },
+ {
+  "en": "She has fallen in love with him.",
+  "ru": "Она влюбилась в него.",
+  "pl": "Zakochała się w nim."
+ },
+ {
+  "en": "to consist of, to be made up of",
+  "ru": "состоять из",
+  "pl": "składać się z"
+ },
+ {
+  "en": "The flat consists of one room and a kitchen.",
+  "ru": "Квартира состоит из комнаты и кухни.",
+  "pl": "Mieszkanie składa się z pokoju i kuchni."
+ },
+ {
+  "en": "to get used to",
+  "ru": "привыкать к",
+  "pl": "przyzwyczajać się do"
+ },
+ {
+  "en": "I'm getting used to the new job.",
+  "ru": "Я привыкаю к новой работе.",
+  "pl": "Przyzwyczajam się do nowej pracy."
+ },
+ {
+  "en": "to write (to someone)",
+  "ru": "писать кому-то (письмо, e-mail)",
+  "pl": "pisać do kogoś (list, e-mail)"
+ },
+ {
+  "en": "I'm writing an email to my boss.",
+  "ru": "Я пишу e-mail своему начальнику.",
+  "pl": "Piszę e-mail do swojego szefa."
+ },
+ {
+  "en": "to look after, to watch",
+  "ru": "присматривать за, следить за",
+  "pl": "pilnować, uważać na"
+ },
+ {
+  "en": "Can you keep an eye on my bag?",
+  "ru": "Можешь присмотреть за моей сумкой?",
+  "pl": "Możesz popilnować mojej torby?"
+ },
+ {
+  "en": "to concentrate, to focus",
+  "ru": "сосредоточиться на",
+  "pl": "skupić się na"
+ },
+ {
+  "en": "I can't concentrate on my work.",
+  "ru": "Я не могу сосредоточиться на работе.",
+  "pl": "Nie mogę się skupić na pracy."
+ },
+ {
+  "en": "to rely on, to count on",
+  "ru": "полагаться на",
+  "pl": "polegać na"
+ },
+ {
+  "en": "You can rely on me.",
+  "ru": "Ты можешь на меня положиться.",
+  "pl": "Możesz na mnie polegać."
+ },
+ {
+  "en": "to apologise (to a person)",
+  "ru": "извиняться перед кем-то",
+  "pl": "przepraszać kogoś"
+ },
+ {
+  "en": "I apologise to you for being late.",
+  "ru": "Я извиняюсь перед тобой за опоздание.",
+  "pl": "Przepraszam cię za spóźnienie."
+ },
+ {
+  "en": "to stop, to give up (doing sth)",
+  "ru": "прекращать, бросать (делать что-то)",
+  "pl": "przestawać, rzucać (robić coś)"
+ },
+ {
+  "en": "I'm giving up smoking.",
+  "ru": "Я бросаю курить.",
+  "pl": "Rzucam palenie."
+ },
+ {
+  "en": "to spend time on, to study",
+  "ru": "заниматься чем-то",
+  "pl": "zajmować się czymś"
+ },
+ {
+  "en": "to depend on",
+  "ru": "зависеть от",
+  "pl": "zależeć od"
+ },
+ {
+  "en": "It depends on the weather.",
+  "ru": "Это зависит от погоды.",
+  "pl": "To zależy od pogody."
+ },
+ {
+  "en": "to think highly / little of",
+  "ru": "быть какого-то мнения о",
+  "pl": "mieć dobre / złe zdanie o"
+ },
+ {
+  "en": "What do you think of my idea?",
+  "ru": "Что ты думаешь о моей идее?",
+  "pl": "Co myślisz o moim pomyśle?"
+ },
+ {
+  "en": "to recover from",
+  "ru": "отдыхать, восстанавливаться после",
+  "pl": "odpoczywać, dochodzić do siebie po"
+ },
+ {
+  "en": "I need to recover from work.",
+  "ru": "Мне нужно отдохнуть от работы.",
+  "pl": "Muszę odpocząć od pracy."
+ },
+ {
+  "en": "to say goodbye (to someone)",
+  "ru": "прощаться с",
+  "pl": "żegnać się z"
+ },
+ {
+  "en": "I'm saying goodbye to my colleagues.",
+  "ru": "Я прощаюсь с коллегами.",
+  "pl": "Żegnam się z kolegami z pracy."
+ },
+ {
+  "en": "to be annoyed (by)",
+  "ru": "злиться на что-то",
+  "pl": "złościć się na coś"
+ },
+ {
+  "en": "I'm annoyed about the traffic jam.",
+  "ru": "Я злюсь из-за пробки.",
+  "pl": "Złoszczę się przez ten korek."
+ },
+ {
+  "en": "to complain (about sth)",
+  "ru": "жаловаться на",
+  "pl": "skarżyć się na"
+ },
+ {
+  "en": "He's complaining about the noise.",
+  "ru": "Он жалуется на шум.",
+  "pl": "Skarży się na hałas."
+ },
+ {
+  "en": "to go well, to match",
+  "ru": "подходить к, сочетаться с",
+  "pl": "pasować do"
+ },
+ {
+  "en": "The shoes go well with your dress.",
+  "ru": "Туфли хорошо подходят к твоему платью.",
+  "pl": "Buty dobrze pasują do twojej sukienki."
+ },
+ {
+  "en": "to take care of, to provide",
+  "ru": "обеспечивать, позаботиться о",
+  "pl": "zapewniać, zadbać o"
+ },
+ {
+  "en": "Who's taking care of the drinks?",
+  "ru": "Кто позаботится о напитках?",
+  "pl": "Kto zadba o napoje?"
+ },
+ {
+  "en": "to consider, to regard as",
+  "ru": "считать кем-то / чем-то",
+  "pl": "uważać kogoś / coś za"
+ },
+ {
+  "en": "I consider him a good teacher.",
+  "ru": "Я считаю его хорошим учителем.",
+  "pl": "Uważam go za dobrego nauczyciela."
+ },
+ {
+  "en": "to be afraid of",
+  "ru": "бояться кого-то / чего-то",
+  "pl": "bać się kogoś / czegoś"
+ },
+ {
+  "en": "I'm afraid of big dogs.",
+  "ru": "Я боюсь больших собак.",
+  "pl": "Boję się dużych psów."
+ },
+ {
+  "en": "to feel like, to fancy",
+  "ru": "хотеть чего-то, иметь желание",
+  "pl": "chcieć czegoś, mieć ochotę"
+ },
+ {
+  "en": "I fancy an ice cream.",
+  "ru": "Мне хочется мороженого.",
+  "pl": "Mam ochotę na lody."
+ },
+ {
+  "en": "to be on the phone to, to call",
+  "ru": "говорить по телефону с",
+  "pl": "rozmawiać przez telefon z"
+ },
+ {
+  "en": "I talk to my mum on the phone every Sunday.",
+  "ru": "Я каждое воскресенье говорю по телефону с мамой.",
+  "pl": "W każdą niedzielę rozmawiam przez telefon z mamą."
+ },
+ {
+  "en": "to help (someone) with sth",
+  "ru": "помогать с чем-то (в каком-то деле)",
+  "pl": "pomagać w czymś"
+ },
+ {
+  "en": "Can you help me with the move?",
+  "ru": "Можешь помочь мне с переездом?",
+  "pl": "Możesz mi pomóc przy przeprowadzce?"
+ },
+ {
+  "en": "to chat to someone, to have a conversation",
+  "ru": "беседовать с кем-то",
+  "pl": "rozmawiać z kimś"
+ },
+ {
+  "en": "I had a long chat with my neighbour.",
+  "ru": "Я долго беседовала с соседкой.",
+  "pl": "Długo rozmawiałam z sąsiadką."
+ },
+ {
+  "en": "to talk, to chat (about a topic)",
+  "ru": "беседовать о чём-то (тема разговора)",
+  "pl": "rozmawiać o czymś (temat rozmowy)"
+ },
+ {
+  "en": "We talked about the concert.",
+  "ru": "Мы поговорили о концерте.",
+  "pl": "Porozmawialiśmy o koncercie."
+ },
+ {
+  "en": "We're discussing the new plan.",
+  "ru": "Мы обсуждаем новый план.",
+  "pl": "Omawiamy nowy plan."
+ },
+ {
+  "en": "to pay attention to, to watch out for",
+  "ru": "обращать внимание на, следить за",
+  "pl": "zwracać uwagę na, dbać o"
+ },
+ {
+  "en": "I look after my health.",
+  "ru": "Я слежу за своим здоровьем.",
+  "pl": "Dbam o swoje zdrowie."
+ },
+ {
+  "en": "to doubt",
+  "ru": "сомневаться в",
+  "pl": "wątpić w"
+ },
+ {
+  "en": "I doubt his honesty.",
+  "ru": "Я сомневаюсь в его честности.",
+  "pl": "Wątpię w jego uczciwość."
+ },
+ {
+  "en": "to take part, to contribute",
+  "ru": "участвовать в, вносить свой вклад",
+  "pl": "uczestniczyć w, wnosić swój wkład"
+ },
+ {
+  "en": "Everyone is taking part in the discussion.",
+  "ru": "Все участвуют в обсуждении.",
+  "pl": "Wszyscy uczestniczą w dyskusji."
+ },
+ {
+  "en": "to recognise (someone) by",
+  "ru": "узнавать (кого-то) по",
+  "pl": "rozpoznawać (kogoś) po"
+ },
+ {
+  "en": "I recognise him by his voice.",
+  "ru": "Я узнаю его по голосу.",
+  "pl": "Rozpoznaję go po głosie."
+ },
+ {
+  "en": "to insist",
+  "ru": "настаивать на",
+  "pl": "nalegać na"
+ },
+ {
+  "en": "He insists on an answer.",
+  "ru": "Он настаивает на ответе.",
+  "pl": "Nalega na odpowiedź."
+ },
+ {
+  "en": "to be scared (of sth)",
+  "ru": "бояться",
+  "pl": "bać się"
+ },
+ {
+  "en": "The child is scared of the dog.",
+  "ru": "Ребёнок боится собаки.",
+  "pl": "Dziecko boi się psa."
+ },
+ {
+  "en": "to hide (from someone or sth)",
+  "ru": "прятаться от",
+  "pl": "chować się przed"
+ },
+ {
+  "en": "The cat is hiding from the thunderstorm.",
+  "ru": "Кошка прячется от грозы.",
+  "pl": "Kot chowa się przed burzą."
+ },
+ {
+  "en": "to get worked up, to get upset",
+  "ru": "возмущаться чем-то, нервничать",
+  "pl": "oburzać się na coś, denerwować się"
+ },
+ {
+  "en": "He's getting worked up about his boss.",
+  "ru": "Он возмущается из-за своего начальника.",
+  "pl": "Denerwuje się na swojego szefa."
+ },
+ {
+  "en": "to arrange to meet (someone)",
+  "ru": "договориться о встрече с",
+  "pl": "umówić się z"
+ },
+ {
+  "en": "I'm arranging to meet my friend.",
+  "ru": "Я договариваюсь о встрече с подругой.",
+  "pl": "Umawiam się z przyjaciółką."
+ },
+ {
+  "en": "to ask about, to enquire",
+  "ru": "осведомляться о, расспрашивать о",
+  "pl": "dopytywać się o, wypytywać o"
+ },
+ {
+  "en": "She's asking the way.",
+  "ru": "Она спрашивает дорогу.",
+  "pl": "Pyta o drogę."
+ },
+ {
+  "en": "to do without, to give up",
+  "ru": "отказываться от",
+  "pl": "rezygnować z"
+ },
+ {
+  "en": "I'll skip dessert.",
+  "ru": "Я отказываюсь от десерта.",
+  "pl": "Rezygnuję z deseru."
+ },
+ {
+  "en": "it's a matter of, it concerns",
+  "ru": "речь идёт о (книжнее, чем es geht um)",
+  "pl": "chodzi o (bardziej książkowe niż es geht um)"
+ },
+ {
+  "en": "It's a mistake.",
+  "ru": "Речь идёт об ошибке.",
+  "pl": "Chodzi o błąd."
+ },
+ {
+  "en": "to protest",
+  "ru": "протестовать против",
+  "pl": "protestować przeciwko"
+ },
+ {
+  "en": "Many people are protesting against the new rules.",
+  "ru": "Многие протестуют против новых правил.",
+  "pl": "Wiele osób protestuje przeciwko nowym zasadom."
+ }
+]

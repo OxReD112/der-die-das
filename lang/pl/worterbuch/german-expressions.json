@@ -1,0 +1,2734 @@
+{
+ "expression-001": {
+  "_src": "41594149",
+  "translation_pl": "pod nosem; pomału, po cichu, sam z siebie",
+  "example_pl": "Dziadek siedzi na ławce i cicho nuci pod nosem.",
+  "notes_pl": [
+   "vor sich hin murmeln, summen, pfeifen — mruczeć, nucić, pogwizdywać pod nosem.",
+   "still vor sich hin arbeiten — pracować po cichu, nie zwracając na nikogo uwagi; vor sich hin starren — patrzeć przed siebie w jeden punkt.",
+   "O rzeczach — „pomału, samo z siebie”: Das alte Auto rostet im Hof vor sich hin.",
+   "Z innymi zaimkami: Ich murmelte vor mich hin. Warum brummst du so vor dich hin?",
+   "Nie mylić: Er stellte die Tasse vor sich hin. — hinstellen „postawił przed sobą”."
+  ]
+ },
+ "expression-002": {
+  "_src": "b6694f1c",
+  "translation_pl": "wyruszać w drogę, udawać się w drogę",
+  "example_pl": "Po śniadaniu wyruszyliśmy nad jezioro.",
+  "notes_pl": [
+   "sich auf den Weg nach / zu … machen — wyruszyć dokądś: Er machte sich auf den Weg nach Hause.",
+   "Mach dich auf den Weg! — Ruszaj! Czas w drogę!",
+   "sich auf den Heimweg / Rückweg machen — wyruszyć do domu / w drogę powrotną.",
+   "Podobnie: aufbrechen (pot. losgehen)."
+  ]
+ },
+ "expression-003": {
+  "_src": "21db41b4",
+  "translation_pl": "nie mieć nic wspólnego (z czymś); nie chcieć mieć do czynienia (z kimś, czymś)",
+  "example_pl": "Mój brat nie ma nic wspólnego z tą kłótnią.",
+  "notes_pl": [
+   "Das hat nichts damit zu tun. — To nie ma tu nic do rzeczy.",
+   "mit jemandem nichts zu tun haben wollen — nie chcieć mieć z kimś do czynienia: Mit diesen Leuten will ich nichts zu tun haben.",
+   "Bez mit — co innego: Ich habe heute nichts zu tun. — Nie mam dziś nic do roboty.",
+   "Twierdząco: mit etwas zu tun haben — mieć coś wspólnego z czymś; mieć do czynienia z kimś."
+  ]
+ },
+ "expression-004": {
+  "_src": "6f32a318",
+  "translation_pl": "ze względu na, biorąc pod uwagę (coś); jeśli chodzi o (coś), w odniesieniu do (czegoś)",
+  "example_pl": "Ze względu na wysokie koszty zdecydowaliśmy się na pociąg.",
+  "notes_pl": [
+   "Rekcja: auf + Akkusativ — im Hinblick auf die Prüfung.",
+   "Rzadziej: in Hinblick auf. Ze zdaniem podrzędnym: im Hinblick darauf, dass … — biorąc pod uwagę to, że …",
+   "Wyrażenie książkowe; w mowie potocznej częściej wegen, was … angeht."
+  ]
+ },
+ "expression-005": {
+  "_src": "19d0e7b2",
+  "translation_pl": "zmierzać (do czegoś), mieć na myśli (coś)",
+  "example_pl": "Nie rozumiem, do czego zmierzasz.",
+  "notes_pl": [
+   "Worauf willst du hinaus? — Do czego zmierzasz?",
+   "Darauf will ich ja hinaus! — Właśnie do tego zmierzam!",
+   "O tekście, filmie: Worauf will das Buch hinaus? — Do czego zmierza ta książka, co chce powiedzieć?",
+   "Bez auf / worauf / darauf — co innego: Der Hund will hinaus. — Pies chce wyjść na dwór (hinauswollen „chcieć wyjść”)."
+  ]
+ },
+ "expression-006": {
+  "_src": "56a5c108",
+  "translation_pl": "zrobić (niezadowoloną) minę, skrzywić się; stroić miny, robić grymasy",
+  "example_pl": "Kiedy usłyszał, że musi pozmywać, mina mu zrzedła.",
+  "notes_pl": [
+   "ein langes / schiefes / saures Gesicht ziehen (machen) — zrobić kwaśną minę (z rozczarowania, niezadowolenia).",
+   "Grimassen ziehen / schneiden, Gesichter schneiden — stroić miny.",
+   "Podobnie: das Gesicht verziehen — skrzywić się, wykrzywić twarz (osobny czasownik verziehen)."
+  ]
+ },
+ "expression-007": {
+  "_src": "bd950787",
+  "translation_pl": "podsumowywać",
+  "example_pl": "Pod koniec roku szkolnego wspólnie robimy podsumowanie.",
+  "notes_pl": [
+   "eine positive / traurige Bilanz ziehen — przedstawić pozytywny / smutny bilans.",
+   "Bilanz über etwas ziehen, die Bilanz einer Sache ziehen — podsumować coś: die Bilanz des Tages ziehen.",
+   "W księgowości: eine Bilanz ziehen / aufstellen — sporządzić bilans.",
+   "Podobnie: das Fazit ziehen — podsumować, wyciągnąć wniosek."
+  ]
+ },
+ "expression-008": {
+  "_src": "2c096b8e",
+  "translation_pl": "mieć coś wspólnego (z czymś), wiązać się (z czymś); mieć do czynienia (z kimś, czymś)",
+  "example_pl": "Jego zły humor na pewno ma związek z pogodą.",
+  "notes_pl": [
+   "Was hat das mit mir zu tun? — A co ja mam do tego?",
+   "es mit jemandem zu tun haben — mieć z kimś do czynienia: Mit wem habe ich es zu tun?",
+   "Przeczenie — osobne hasło: nichts zu tun haben (mit etw.).",
+   "Bez mit — co innego: Ich habe heute viel zu tun. — Mam dziś dużo do zrobienia."
+  ]
+ },
+ "expression-009": {
+  "_src": "3e063326",
+  "translation_pl": "jest, są, istnieje; będzie, zdarzy się (o wydarzeniu)",
+  "example_pl": "Na naszej ulicy jest mała piekarnia.",
+  "notes_pl": [
+   "Z Akkusativem; czasownik zawsze w lp: Es gibt einen Park. Es gibt viele Bücher. Gibt es noch Kaffee?",
+   "O wydarzeniu: Gleich gibt's Ärger! — Zaraz będą kłopoty!",
+   "W odróżnieniu od es ist / sind: es gibt — coś w ogóle istnieje, jest dostępne; es ist / sind — coś się gdzieś znajduje (Es sind drei Kinder im Garten).",
+   "Was gibt's? — Co się stało? O co chodzi? Was gibt es heute zum Essen? — Co mamy dziś do jedzenia?",
+   "Das gibt's doch nicht! — Niemożliwe!"
+  ]
+ },
+ "expression-010": {
+  "_src": "021bca53",
+  "translation_pl": "kilka, parę",
+  "example_pl": "Możesz mi pomóc przez kilka minut?",
+  "notes_pl": [
+   "Nie odmienia się: mit ein paar Freunden — z kilkoma przyjaciółmi.",
+   "ein paar Mal (łącznie: ein paarmal) — kilka razy; die paar Euro — tych kilka euro.",
+   "Nie mylić: ein Paar (wielką literą) — para, dwoje: ein Paar Schuhe — para butów."
+  ]
+ },
+ "expression-011": {
+  "_src": "e6ddad2d",
+  "translation_pl": "nagle, raptem; naraz, jednocześnie",
+  "example_pl": "Siedzieliśmy wygodnie w ogrodzie i nagle zaczęło padać.",
+  "notes_pl": [
+   "„Nagle”: Auf einmal war das Licht weg.",
+   "„Naraz, za jednym razem”: Iss nicht alles auf einmal! — Nie jedz wszystkiego naraz!",
+   "W dawnych tekstach także: mit einmal — nagle."
+  ]
+ },
+ "expression-012": {
+  "_src": "edf066d5",
+  "translation_pl": "tam i z powrotem, w tę i z powrotem; w górę i w dół",
+  "example_pl": "Nerwowo chodził po korytarzu tam i z powrotem.",
+  "notes_pl": [
+   "auf und ab gehen / laufen / schreiten (także: auf- und abgehen) — chodzić tam i z powrotem; to samo: auf und nieder.",
+   "W górę i w dół: Der Ball hüpfte auf und ab.",
+   "Nie mylić: das Auf und Ab (wielką literą) — wzloty i upadki."
+  ]
+ },
+ "expression-013": {
+  "_src": "d88db87c",
+  "translation_pl": "przede wszystkim, zwłaszcza",
+  "example_pl": "Na urlopie chciałbym / chciałabym przede wszystkim spać i czytać.",
+  "notes_pl": [
+   "Często stoi przed tym, na co kładzie się nacisk: Sie mag Obst, vor allem Äpfel.",
+   "Nie mylić: vor allem Volk (dawniej) — przed całym ludem (allem — przy rzeczowniku)."
+  ]
+ },
+ "expression-014": {
+  "_src": "74151ce5",
+  "translation_pl": "w duchu, w głębi duszy; potajemnie, po cichu",
+  "example_pl": "W głębi duszy miała nadzieję, że on jednak zadzwoni.",
+  "notes_pl": [
+   "Także: im Stillen hoffen / denken / lachen — po cichu mieć nadzieję / myśleć w duchu / śmiać się w duchu.",
+   "Podobnie: in aller Stille — po cichu, w wąskim gronie.",
+   "Dawna pisownia (przed 1996): im stillen.",
+   "Nie mylić: das Stillen — karmienie piersią (Beim Stillen des Kindes …); im stillen Zimmer — w cichym pokoju; der Stille Ozean — Ocean Spokojny."
+  ]
+ },
+ "expression-015": {
+  "_src": "ed18703f",
+  "translation_pl": "na świeżym powietrzu, na dworze, pod gołym niebem",
+  "example_pl": "Przy ładnej pogodzie latem często jemy na dworze.",
+  "notes_pl": [
+   "Dokąd: ins Freie — na dwór, na zewnątrz: Die Kinder liefen ins Freie.",
+   "Nie mylić: im freien Fall — w swobodnym spadku (freien — przymiotnik frei, małą literą); freien (przestarz.) — starać się o rękę."
+  ]
+ },
+ "expression-016": {
+  "_src": "bc91a34a",
+  "translation_pl": "czasem, od czasu do czasu",
+  "example_pl": "Od czasu do czasu chodzimy w weekend do teatru.",
+  "notes_pl": [
+   "To samo (częściej na północy): ab und an.",
+   "Podobnie: manchmal, gelegentlich."
+  ]
+ },
+ "expression-017": {
+  "_src": "aaa9670d",
+  "translation_pl": "widzimy się, do zobaczenia",
+  "example_pl": "Muszę już lecieć — widzimy się jutro!",
+  "notes_pl": [
+   "Wir sehen uns gleich / später / bald — do zobaczenia za chwilę / później / wkrótce. Wir sehen uns noch! — Jeszcze się zobaczymy!",
+   "Pot.: Man sieht sich! — Jeszcze się spotkamy!",
+   "Wir sehen uns! — też „do zobaczenia”. Ale: Wir sehen uns im Spiegel. — Widzimy siebie w lustrze; Wir sehen uns die Bilder an. — Oglądamy obrazki (sich ansehen)."
+  ]
+ },
+ "expression-018": {
+  "_src": "b71de531",
+  "translation_pl": "w ciemności, po ciemku; w niewiedzy, nie wiadomo",
+  "example_pl": "Bez latarki ledwo mogliśmy znaleźć drogę w ciemności.",
+  "notes_pl": [
+   "im Dunkeln tappen — błądzić po omacku, nic nie wiedzieć: Die Polizei tappt noch im Dunkeln.",
+   "jemanden im Dunkeln lassen — trzymać kogoś w niewiedzy.",
+   "Nie mylić: dunkeln — ciemnieć (czasownik); im dunklen Wald — w ciemnym lesie."
+  ]
+ },
+ "expression-019": {
+  "_src": "f89cc824",
+  "translation_pl": "robić (z kogoś) głupka, wodzić za nos, mydlić oczy",
+  "example_pl": "Nie wierz ani jednemu jego słowu, chce cię tylko nabrać!",
+  "notes_pl": [
+   "Ihr sollt mich nicht länger zum Narren haben! (Grimm) — Przestańcie robić ze mnie głupka!",
+   "Nie mylić: sich zum Narren machen — zrobić z siebie głupka; einen Narren an jemandem gefressen haben — świata poza kimś nie widzieć; der Narr — głupiec, błazen."
+  ]
+ },
+ "expression-020": {
+  "_src": "9025472a",
+  "translation_pl": "w tę i z powrotem, tam i z powrotem; na wszystkie strony (rozważać, omawiać)",
+  "example_pl": "Pies biegał podekscytowany wzdłuż płotu tam i z powrotem.",
+  "notes_pl": [
+   "hin und her überlegen / reden — rozważać na wszystkie strony, dyskutować bez końca.",
+   "Nie mylić: das Hin und Her (wielką literą) — zamieszanie, miotanie się.",
+   "hin- und hergerissen sein — być rozdartym (między czymś a czymś).",
+   "Podobnie: auf und ab."
+  ]
+ },
+ "expression-021": {
+  "_src": "09b73f6a",
+  "translation_pl": "precz, (i) tyle go widzieli; zwiać, uciec (sich auf und davon machen)",
+  "example_pl": "Kiedy wróciliśmy, po kocie dawno nie było śladu.",
+  "notes_pl": [
+   "auf und davon sein — zniknąć, ulotnić się; sich auf und davon machen — zwiać, uciec."
+  ]
+ },
+ "expression-022": {
+  "_src": "277f45b4",
+  "translation_pl": "w górę i w dół; tam i z powrotem",
+  "example_pl": "Łódeczka kołysała się na falach w górę i w dół.",
+  "notes_pl": [
+   "To samo: auf und ab (częściej)."
+  ]
+ },
+ "expression-023": {
+  "_src": "62fd934b",
+  "translation_pl": "czasem, od czasu do czasu",
+  "example_pl": "Od czasu do czasu odwiedza swoją dawną szkołę.",
+  "notes_pl": [
+   "Podobnie: ab und zu, manchmal, gelegentlich."
+  ]
+ },
+ "expression-024": {
+  "_src": "63e166e4",
+  "translation_pl": "wzdłuż i wszerz; byle jak, bezładnie",
+  "example_pl": "Latem zjeździliśmy Skandynawię wzdłuż i wszerz.",
+  "notes_pl": [
+   "Pisze się małą literą: kreuz und quer."
+  ]
+ },
+ "expression-025": {
+  "_src": "3a553484",
+  "translation_pl": "tam i z powrotem, w obie strony",
+  "example_pl": "Jeden do Hamburga, w obie strony, poproszę.",
+  "notes_pl": [
+   "Fahrkarte hin und zurück — bilet w obie strony (= Rückfahrkarte)."
+  ]
+ },
+ "expression-026": {
+  "_src": "1acaf80c",
+  "translation_pl": "często bywać (u kogoś), być stałym gościem (w czyimś domu)",
+  "example_pl": "Dzieci sąsiadów czują się u nas jak u siebie.",
+  "notes_pl": [
+   "Spotyka się też: ein- und ausgehen.",
+   "Nie mylić: schaltete das Licht ein und aus (= ein- und ausschalten), atmete tief ein und aus (= ein- und ausatmen) — dwa czasowniki.",
+   "weder ein noch aus wissen — nie wiedzieć, co począć."
+  ]
+ },
+ "expression-028": {
+  "_src": "417213d8",
+  "translation_pl": "wciąż, do tej pory",
+  "example_pl": "Wciąż pada.",
+  "notes_pl": [
+   "noch immer — to samo, nieco bardziej książkowo; immer noch nicht — wciąż nie, do tej pory nie.",
+   "Nie mylić: immer + noch + stopień wyższy — coraz więcej / coraz gorzej (Sie will immer noch mehr; Es wurde immer noch schlimmer); ale Das ist immer noch besser als nichts — to i tak lepsze niż nic."
+  ]
+ },
+ "expression-029": {
+  "_src": "850a47c7",
+  "translation_pl": "do domu",
+  "example_pl": "Po pracy jadę prosto do domu.",
+  "notes_pl": [
+   "nach Hause gehen / kommen / fahren / bringen — iść / przychodzić / jechać / odwozić do domu; przestarz. nach Haus.",
+   "Gdzie? — zu Hause (w domu); dokąd? — nach Hause (do domu).",
+   "Dopuszczalna jest też pisownia łączna: nachhause (zwłaszcza w Austrii i Szwajcarii)."
+  ]
+ },
+ "expression-031": {
+  "_src": "a508344b",
+  "translation_pl": "jeden po drugim, po kolei",
+  "example_pl": "Goście żegnali się jeden po drugim.",
+  "notes_pl": [
+   "Formy: eine nach der anderen, eins nach dem anderen; także einer nach dem andern (książk., pot.).",
+   "Z rzeczownikiem: ein Glas nach dem anderen — szklanka za szklanką."
+  ]
+ },
+ "expression-032": {
+  "_src": "ffab996c",
+  "translation_pl": "bać się",
+  "example_pl": "Boję się dużych psów.",
+  "notes_pl": [
+   "vor + Dativ — bać się kogoś, czegoś; um + Akkusativ — bać się o kogoś: Sie hat Angst um ihr Kind.",
+   "keine Angst haben — nie bać się: Keine Angst! — Nie bój się!",
+   "Nie mylić: jemandem Angst machen — straszyć kogoś; Angst bekommen — przestraszyć się."
+  ]
+ },
+ "expression-033": {
+  "_src": "8357fb33",
+  "translation_pl": "zostawić (kogoś) w spokoju",
+  "example_pl": "Zostaw mnie, proszę, w spokoju!",
+  "notes_pl": [
+   "Lass mich damit in Ruhe! — Daj mi z tym spokój!",
+   "Nie mylić: etwas in Ruhe machen — robić coś spokojnie, bez pośpiechu."
+  ]
+ },
+ "expression-034": {
+  "_src": "e9266e78",
+  "translation_pl": "nie spieszyć się",
+  "example_pl": "Spokojnie, nie spiesz się, nie ma pośpiechu.",
+  "notes_pl": [
+   "Zaimek zwrotny w Dativie: Ich lasse mir Zeit. Lassen Sie sich Zeit!",
+   "Nie mylić: jemandem Zeit lassen — dać komuś czas: Lass mir ein wenig mehr Zeit."
+  ]
+ },
+ "expression-035": {
+  "_src": "6ecc4fc1",
+  "translation_pl": "urodzić się",
+  "example_pl": "Mój dziadek urodził się w 1918 roku w Wiedniu.",
+  "notes_pl": [
+   "Wann bist du geboren? — Kiedy się urodziłeś? Ich bin 1990 geboren. — Urodziłem się w 1990 roku. Er ist 1918 geboren worden. — Urodził się w 1918 roku.",
+   "ist geboren — zwykle o żyjących (Ich bin 1990 geboren); wurde geboren — w biografiach, o zmarłych (Goethe wurde 1749 geboren). zu etwas geboren sein — być stworzonym do czegoś.",
+   "Bez sein / werden — przymiotnik: ein geborener Berliner — rodowity berlińczyk; Anna Müller, geborene Schmidt — z domu Schmidt.",
+   "Nie mylić: sie hat ein Kind geboren — urodziła dziecko (gebären)."
+  ]
+ },
+ "expression-030": {
+  "_src": "553d5b1f",
+  "translation_pl": "w domu; w rodzinnych stronach",
+  "example_pl": "W weekendy najchętniej zostaję w domu.",
+  "notes_pl": [
+   "von zu Hause — z domu; sich wie zu Hause fühlen — czuć się jak w domu; przestarz. zu Haus.",
+   "Duden zaleca zu Hause; dopuszczalna jest też pisownia łączna: zuhause. Nie mylić: das Zuhause (wielką literą) — dom, ognisko domowe.",
+   "Gdzie? — zu Hause (w domu); dokąd? — nach Hause (do domu)."
+  ]
+ },
+ "expression-027": {
+  "_src": "1cb4e1ee",
+  "translation_pl": "mieć rację",
+  "example_pl": "Masz rację, powinniśmy byli wyjechać wcześniej.",
+  "notes_pl": [
+   "Pisze się małą lub wielką literą: recht haben / Recht haben (Duden dopuszcza oba warianty, zaleca recht haben).",
+   "jemandem recht / Recht geben — przyznać komuś rację, zgodzić się; recht / Recht behalten — ostatecznie mieć rację.",
+   "Nie mylić: das Recht (auf etwas) — prawo (do czegoś); zu Recht — słusznie, zasłużenie; recht gut — dość dobrze."
+  ]
+ },
+ "expression-036": {
+  "_src": "4af04236",
+  "translation_pl": "wystrzegać się, strzec się (kogoś, czegoś)",
+  "example_pl": "Uważaj na psa!",
+  "notes_pl": [
+   "Przed kim, czym — vor + Dativ: Nimm dich vor ihm in Acht! — Uważaj na niego!",
+   "Pisownia sprzed reformy z 1996 r.: in acht nehmen (tak u Grimmów).",
+   "Por. Acht geben (achtgeben) — zwracać uwagę, uważać."
+  ]
+ },
+ "expression-037": {
+  "_src": "abb73c73",
+  "translation_pl": "znaleźć wyjście, nie stracić głowy; (z nicht) nie wiedzieć, co robić",
+  "example_pl": "Zawsze znajdzie wyjście.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich weiß mir zu helfen. Du weißt dir zu helfen.",
+   "Z nicht: Er wusste sich in seiner Not nicht zu helfen. — W potrzebie nie wiedział, co robić.",
+   "Nie mylić: jemandem nicht zu helfen wissen — nie wiedzieć, jak komuś pomóc."
+  ]
+ },
+ "expression-038": {
+  "_src": "994dc81b",
+  "translation_pl": "starać się",
+  "example_pl": "Bardzo przykłada się do zadań domowych.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich gebe mir Mühe. Gib dir mehr Mühe! — Postaraj się bardziej!",
+   "Geben Sie sich keine Mühe! — Proszę się nie fatygować!",
+   "Por.: sich (Dativ) die Mühe machen, etwas zu tun — zadać sobie trud, żeby coś zrobić."
+  ]
+ },
+ "expression-039": {
+  "_src": "e9b08a18",
+  "translation_pl": "umilać sobie czas",
+  "example_pl": "W pociągu umilaliśmy sobie czas grą w karty.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich vertreibe mir die Zeit mit Lesen. — Umilam sobie czas czytaniem.",
+   "Czym — mit + Dativ.",
+   "jemandem die Zeit vertreiben — zabawiać kogoś, umilać komuś czas."
+  ]
+ },
+ "expression-040": {
+  "_src": "f14be960",
+  "translation_pl": "rozprostować nogi, przejść się",
+  "example_pl": "Po długiej podróży chcieliśmy trochę rozprostować nogi.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich muss mir mal die Beine vertreten.",
+   "Także: sich (Dativ) die Füße vertreten."
+  ]
+ },
+ "expression-041": {
+  "_src": "4c969512",
+  "translation_pl": "najeść się (do syta)",
+  "example_pl": "U babci zawsze mogliśmy się najeść do syta.",
+  "notes_pl": [
+   "Czym — an + Dativ: sich an Kirschen satt essen.",
+   "O zwierzętach, o ludziach — ordynarnie: sich satt fressen (Du hast dich satt gefressen).",
+   "Por.: satt sein — być sytym; etwas satt haben — mieć (czegoś) po dziurki w nosie."
+  ]
+ },
+ "expression-042": {
+  "_src": "8a38eef5",
+  "translation_pl": "ani się obejrzysz (a …)",
+  "example_pl": "Ani się obejrzysz, a wakacje się skończą.",
+  "notes_pl": [
+   "Pisze się też sichs; często także bez -s: ehe man sich versieht. O przeszłości: ehe er sich's versah — ani się obejrzał (a …); ehe ich mich's versah.",
+   "Także z bevor: bevor man sich's versieht."
+  ]
+ },
+ "expression-043": {
+  "_src": "4e782f2a",
+  "translation_pl": "utorować sobie drogę, przebić się",
+  "example_pl": "Utorował sobie drogę przez tłum.",
+  "notes_pl": [
+   "Zaimek w Dativie. Także: sich den Weg bahnen. Przez co — durch + Akk.: sich einen Weg durch das Gestrüpp bahnen.",
+   "Nie mylić: jemandem den Weg bahnen — utorować komuś drogę."
+  ]
+ },
+ "expression-044": {
+  "_src": "ff22f7f7",
+  "translation_pl": "zebrać się na odwagę, zdecydować się",
+  "example_pl": "W końcu zebrała się na odwagę i zagadnęła go.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich fasste mir ein Herz.",
+   "Por.: sich fassen — wziąć się w garść (hasło fassen)."
+  ]
+ },
+ "expression-045": {
+  "_src": "f5abfbb3",
+  "translation_pl": "przemóc się, zebrać się w sobie",
+  "example_pl": "W końcu przemogłem się i do niej zadzwoniłem.",
+  "notes_pl": [
+   "Zaimek w Dativie: Gib dir einen Ruck! — Zbierz się w sobie!",
+   "Między einen a Ruck może stać przymiotnik: sich einen kleinen Ruck geben."
+  ]
+ },
+ "expression-046": {
+  "_src": "0d8e5ea7",
+  "translation_pl": "uderzyć się w czoło",
+  "example_pl": "Nagle uderzył się w czoło: zapomniał klucza.",
+  "notes_pl": [
+   "Zaimek w Dativie: Ich schlug mir an die Stirn. Także gegen / vor die Stirn; sich mit der Hand an die Stirn schlagen.",
+   "Gest nagłego olśnienia lub irytacji („ach tak!”, „jak mogłem zapomnieć!”). Nie mylić: sich (Dativ) an die Stirn tippen — popukać się w czoło („zwariowałeś”)."
+  ]
+ },
+ "expression-047": {
+  "_src": "5e7615fe",
+  "translation_pl": "stoliczku, nakryj się! (czarodziejski stolik, który sam się nakrywa)",
+  "example_pl": "Postawił swój stoliczek na środku izby i rzekł: „Stoliczku, nakryj się”.",
+  "notes_pl": [
+   "Z baśni braci Grimm „Tischchen deck dich, Goldesel und Knüppel aus dem Sack”; das Tischchen deck dich — sam czarodziejski stolik (jako imię).",
+   "decken — nakrywać; sich decken — (o stole) nakrywać się."
+  ]
+ },
+ "expression-048": {
+  "_src": "208f1fd9",
+  "translation_pl": "zabierać się, brać się (do czegoś)",
+  "example_pl": "Po śniadaniu zabraliśmy się do pracy.",
+  "notes_pl": [
+   "sich an die Arbeit machen — zabrać się do pracy.",
+   "sich daranmachen, etwas zu tun — zabrać się do robienia czegoś: Er machte sich daran, den Brief zu schreiben.",
+   "Nie mylić: sich an jemanden heranmachen — podrywać kogoś, przystawiać się do kogoś."
+  ]
+ },
+ "expression-049": {
+  "_src": "eefb9f7d",
+  "translation_pl": "zastanawiać się; martwić się (o kogoś, coś)",
+  "example_pl": "Zastanawiam się nad przyszłością.",
+  "notes_pl": [
+   "Zaimek w Dativie. O czym — über + Akk.: Mach dir keine Gedanken! — Nie martw się! Nie przejmuj się!",
+   "sich (Dativ) Sorgen machen — martwić się (osobne wyrażenie)."
+  ]
+ },
+ "expression-050": {
+  "_src": "ba2b9e49",
+  "translation_pl": "naśmiewać się, drwić (z kogoś, czegoś); (przestarz.) weselić się",
+  "example_pl": "Inne dzieci naśmiewały się z niego.",
+  "notes_pl": [
+   "Z kogo, czego — über + Akk.: Mach dich nicht über mich lustig! — Nie śmiej się ze mnie!",
+   "(przestarz.) weselić się: Sie aßen, tranken und machten sich lustig bis in die Nacht."
+  ]
+ },
+ "expression-051": {
+  "_src": "19db2007",
+  "translation_pl": "mieć nadzieję (na coś), robić sobie nadzieje",
+  "example_pl": "Nie rób sobie płonnych nadziei!",
+  "notes_pl": [
+   "Zaimek w Dativie. Na co — auf + Akk.: Sie macht sich Hoffnungen auf die Stelle.",
+   "Nie mylić: jemandem Hoffnungen machen — robić komuś nadzieję: Er hat mir Hoffnungen gemacht."
+  ]
+ },
+ "expression-052": {
+  "_src": "5ec7764f",
+  "translation_pl": "dać upust (uczuciom), ulżyć sobie; uwolnić się, wyswobodzić się (fizycznie)",
+  "example_pl": "W końcu ulżyła sobie i wygarnęła mu wszystko.",
+  "notes_pl": [
+   "Zaimek w Dativie. Bez sich: seinem Ärger / seiner Wut Luft machen — dać upust swojemu gniewowi.",
+   "Uwolnić się: Endlich machte er sich Luft und sprang heraus. — W końcu się uwolnił i wyskoczył na zewnątrz."
+  ]
+ },
+ "expression-053": {
+  "_src": "0f66d997",
+  "translation_pl": "zrobić z siebie pośmiewisko",
+  "example_pl": "W tym kapeluszu robisz z siebie pośmiewisko.",
+  "notes_pl": [
+   "Nie mylić: jemanden lächerlich machen — wyśmiać kogoś, ośmieszyć kogoś."
+  ]
+ },
+ "expression-054": {
+  "_src": "0348184b",
+  "translation_pl": "dać o sobie znać, zwrócić na siebie uwagę",
+  "example_pl": "Więzień próbował dać o sobie znać stukaniem.",
+  "notes_pl": [
+   "O rzeczach: Die Kälte macht sich bemerkbar. — Zimno daje o sobie znać."
+  ]
+ },
+ "expression-055": {
+  "_src": "fa8a5048",
+  "translation_pl": "pomagać, przydawać się",
+  "example_pl": "Zamiast stać bezczynnie, mógłbyś się do czegoś przydać.",
+  "notes_pl": [
+   "Mach dich nützlich! — Pomóż no! Weź się do roboty!"
+  ]
+ },
+ "expression-056": {
+  "_src": "b511ab13",
+  "translation_pl": "pofatygować się, zadać sobie trud (żeby coś zrobić)",
+  "example_pl": "Nikt nie zadał sobie trudu, żeby przeczytać instrukcję.",
+  "notes_pl": [
+   "Zaimek w Dativie. Mach dir keine Mühe! — Nie fatyguj się! sich viel Mühe machen — bardzo się natrudzić.",
+   "Por.: sich (Dativ) Mühe geben — starać się (osobne wyrażenie)."
+  ]
+ },
+ "expression-057": {
+  "_src": "9831bc33",
+  "translation_pl": "zaoferować się, zgodzić się (coś zrobić)",
+  "example_pl": "Mój brat zaoferował się, że pomoże nam w przeprowadzce.",
+  "notes_pl": [
+   "sich zu etwas bereit erklären — zgodzić się na coś: Er erklärte sich zu einem Gespräch bereit."
+  ]
+ },
+ "expression-058": {
+  "_src": "386e8bc2",
+  "translation_pl": "martwić się, niepokoić się (o kogoś, coś)",
+  "example_pl": "Martwię się o brata.",
+  "notes_pl": [
+   "Zaimek w Dativie. O kogo, o co — um + Akk.: Mach dir keine Sorgen! — Nie martw się!",
+   "Nie mylić: jemandem Sorgen machen — niepokoić, martwić kogoś: Das macht mir Sorgen. — To mnie niepokoi."
+  ]
+ },
+ "expression-059": {
+  "_src": "cd754cc4",
+  "translation_pl": "wiedzieć, być poinformowanym (o czymś); orientować się (w czymś)",
+  "example_pl": "Już wiesz? Imprezy nie będzie.",
+  "notes_pl": [
+   "O czym — über + Akk.: Weißt du darüber Bescheid? W czym — in + Dat.: In der Stadt weiß ich am besten Bescheid. — W mieście orientuję się najlepiej ze wszystkich.",
+   "Nie mylić: Bescheid sagen / geben — powiadomić, dać znać: Sag mir Bescheid! der Bescheid — oficjalna odpowiedź, zawiadomienie."
+  ]
+ },
+ "expression-060": {
+  "_src": "5d6fcdc0",
+  "translation_pl": "chodzi (o kogoś, coś); rzecz (w tym, że …)",
+  "example_pl": "W Waszyngtonie chodzi o władzę.",
+  "notes_pl": [
+   "Worum geht es? — O co chodzi? Darum geht es nicht. — Nie o to chodzi.",
+   "Komu — Dativ: Es geht ihm nur ums Geld. — Liczą się dla niego tylko pieniądze.",
+   "Nie mylić: Es geht um acht los. — Zaczyna się o ósmej; Wie geht es dir? — Jak się masz?"
+  ]
+ },
+ "expression-061": {
+  "_src": "7c205b48",
+  "translation_pl": "w każdym razie, na pewno",
+  "example_pl": "Na pewno przyjdę na twoje przyjęcie.",
+  "notes_pl": [
+   "Także: auf alle Fälle — w każdym razie; jedenfalls — w każdym razie. Przeciwieństwo: auf keinen Fall — w żadnym wypadku (osobne hasło)."
+  ]
+ },
+ "expression-062": {
+  "_src": "1bfe11b5",
+  "translation_pl": "w żadnym wypadku",
+  "example_pl": "O tym w żadnym wypadku nie wolno ci zapomnieć.",
+  "notes_pl": [
+   "Przeciwieństwo: auf jeden Fall — w każdym razie, na pewno (osobne hasło)."
+  ]
+ },
+ "expression-063": {
+  "_src": "9f213c99",
+  "translation_pl": "pieszo",
+  "example_pl": "Idziemy na dworzec pieszo.",
+  "notes_pl": [
+   "zu Fuß gehen — iść pieszo. Nie mylić: am Fuß des Berges — u podnóża góry; zu Füßen — u stóp."
+  ]
+ },
+ "expression-064": {
+  "_src": "678d9a8d",
+  "translation_pl": "nagle, raptem",
+  "example_pl": "Nagle zrobiło się zupełnie cicho.",
+  "notes_pl": [
+   "Dawniej: mit einem Male, mit einemmal. Podobnie: auf einmal, plötzlich.",
+   "Dosłownie „za jednym razem” — takie użycie też występuje: Das schaffst du nicht mit einem Mal."
+  ]
+ },
+ "expression-065": {
+  "_src": "eb927d28",
+  "translation_pl": "natychmiast, od razu; w miejscu",
+  "example_pl": "Chodź tu natychmiast!",
+  "notes_pl": [
+   "W miejscu: Zum Aufwärmen laufen wir auf der Stelle. — Na rozgrzewkę biegamy w miejscu.",
+   "auf der Stelle treten — dreptać w miejscu (osobne hasło)."
+  ]
+ },
+ "expression-066": {
+  "_src": "8f022eef",
+  "translation_pl": "dreptać w miejscu; (przen.) nie posuwać się naprzód",
+  "example_pl": "Negocjacje od miesięcy drepczą w miejscu.",
+  "notes_pl": [
+   "Częściej w znaczeniu przenośnym: nie ruszyć z miejsca, nie posuwać się naprzód."
+  ]
+ },
+ "expression-067": {
+  "_src": "a467d851",
+  "translation_pl": "nie zwracać uwagi (na kogoś, coś), nie liczyć się (z kimś, czymś)",
+  "example_pl": "Nie zwrócił uwagi na ostrzeżenia i poszedł dalej.",
+  "notes_pl": [
+   "Zwykle z przeczeniem: nicht, keiner, niemand: Keiner kehrte sich an den andern. — Nikt nie zwracał uwagi na innych.",
+   "Książk., przestarz.; także sich nicht um etwas kehren; dziś zwykle sich nicht um etwas kümmern. Nie mylić: sich umkehren — odwrócić się."
+  ]
+ },
+ "expression-068": {
+  "_src": "48f83694",
+  "translation_pl": "(czyjaś) kolej; (pot.) komuś się dostanie",
+  "example_pl": "Teraz twoja kolej, rzucaj kostką!",
+  "notes_pl": [
+   "Wer ist dran? — Czyja kolej? Wenn der Lehrer das merkt, bist du dran! — Jeśli nauczyciel to zauważy, dostanie ci się.",
+   "Przez telefon: Wer ist dran? — Kto mówi? Bist du noch dran? — Słuchasz jeszcze (jesteś na linii)?",
+   "Osobne hasła: spät dran sein — spóźniać się; gut / schlecht dran sein — być w dobrej / złej sytuacji; drauf und dran sein — o mało nie (zrobić czegoś).",
+   "Nie mylić: an etwas ist etwas dran — coś w tym jest (ziarno prawdy): An dem Gerücht ist etwas dran.",
+   "an etwas / jemandem dran sein — zajmować się czymś; przystawiać się do kogoś (osobne hasło). Wir sind dran (bez an) — zwykle „nasza kolej”."
+  ]
+ },
+ "expression-069": {
+  "_src": "b62eb33c",
+  "translation_pl": "zajmować się (czymś), pracować (nad czymś); (pot.) przystawiać się (do kogoś)",
+  "example_pl": "Bez obaw, technicy już zajmują się tym problemem.",
+  "notes_pl": [
+   "Pot. Bez an — zwykle co innego: Wir sind dran. — Nasza kolej (dran sein, osobne hasło).",
+   "Nie mylić: an etwas ist etwas dran — coś w tym jest (ziarno prawdy): An dem Gerücht ist etwas dran."
+  ]
+ },
+ "expression-070": {
+  "_src": "6de9c9ef",
+  "translation_pl": "być blisko (czegoś), prawie u celu",
+  "example_pl": "Nie poddawaj się, jesteśmy prawie u celu!",
+  "notes_pl": [
+   "Pot. Także: dicht dran sein. Blisko czego — an + Dativ: Wir sind ganz nah an der Lösung dran. — Jesteśmy bardzo blisko rozwiązania.",
+   "Nie mylić: dran sein — (czyjaś) kolej (osobne hasło)."
+  ]
+ },
+ "expression-071": {
+  "_src": "21778cfc",
+  "translation_pl": "spóźniać się",
+  "example_pl": "Pospiesz się, spóźniamy się!",
+  "notes_pl": [
+   "Często: zu spät dran sein — spóźnić się: Deshalb bist du zu spät dran. — To dlatego się spóźniłeś.",
+   "Stopień wyższy: Ich bin heute etwas später dran. — Dziś trochę się spóźnię.",
+   "Przeciwieństwo: früh dran sein — przyjść (być) przed czasem."
+  ]
+ },
+ "expression-072": {
+  "_src": "3be5df3f",
+  "translation_pl": "być w dobrej / złej sytuacji; (besser dran sein) ktoś ma lepiej",
+  "example_pl": "Bez samochodu na wsi jest ciężko.",
+  "notes_pl": [
+   "besser dran sein — ktoś ma lepiej: In der Stadt bist du mit einem Fahrrad besser dran. — W mieście z rowerem masz lepiej.",
+   "Także: übel, böse, schlimm dran sein — być w fatalnej sytuacji; arm dran sein — być w sytuacji nie do pozazdroszczenia: Der Junge ist wirklich arm dran.",
+   "nicht wissen, wie man mit jemandem dran ist — nie wiedzieć, czego się po kimś spodziewać.",
+   "Nie mylić: gut drauf sein — być w dobrym nastroju."
+  ]
+ },
+ "expression-073": {
+  "_src": "1a6f3935",
+  "translation_pl": "lada chwila, o mało (co) nie (zrobić czegoś)",
+  "example_pl": "O mało nie trzasnęła drzwiami.",
+  "notes_pl": [
+   "Zwykle o czymś niepożądanym. Zamiast sein bywa scheinen: Er schien drauf und dran, aufzugeben. — Wydawało się, że lada chwila się podda."
+  ]
+ },
+ "expression-074": {
+  "_src": "535ca7ee",
+  "translation_pl": "podjąć decyzję",
+  "example_pl": "Musimy jeszcze dziś podjąć decyzję.",
+  "notes_pl": [
+   "Także: die Entscheidung treffen, keine Entscheidung treffen, Entscheidungen treffen; książk. eine Entscheidung fällen. O czym — über + Akk.",
+   "Nie mylić: Die Entscheidung traf ihn hart. — Decyzja mocno go dotknęła (treffen „dotknąć”)."
+  ]
+ },
+ "expression-075": {
+  "_src": "266a677d",
+  "translation_pl": "dokonać wyboru",
+  "example_pl": "Dokonałeś dobrego wyboru.",
+  "notes_pl": [
+   "Także: seine Wahl treffen — dokonać swojego wyboru; eine Auswahl treffen — wybrać, dokonać wyboru.",
+   "Nie mylić: die Wahl — także „wybory”: Nach der Wahl traf er den Präsidenten. — Po wyborach spotkał się z prezydentem."
+  ]
+ },
+ "expression-076": {
+  "_src": "e4ad0415",
+  "translation_pl": "podjąć działania",
+  "example_pl": "Szkoła podjęła działania przeciwko nękaniu.",
+  "notes_pl": [
+   "Przeciwko czemu — gegen + Akk.: Maßnahmen gegen den Lärm treffen. Także: eine Maßnahme treffen; Maßnahmen ergreifen.",
+   "Nie mylić: Die Maßnahmen treffen vor allem Familien. — Działania dotykają przede wszystkim rodziny (treffen „dotknąć”)."
+  ]
+ },
+ "expression-077": {
+  "_src": "0b5f9cc6",
+  "translation_pl": "trudno, niech będzie",
+  "example_pl": "Autobus odjechał — trudno, to pójdziemy pieszo.",
+  "notes_pl": [
+   "Pisze się też seis drum (bez apostrofu) i w pełnej formie: sei es drum (także sei es darum)."
+  ]
+ },
+ "expression-078": {
+  "_src": "0c8c9080",
+  "translation_pl": "owijać w bawełnę",
+  "example_pl": "Nie owijaj w bawełnę, powiedz po prostu, co się stało!",
+  "notes_pl": [
+   "Pisze się też drumherumreden, drum rumreden, drumrum reden. Podobnie: um den heißen Brei herumreden."
+  ]
+ },
+ "expression-079": {
+  "_src": "6b5beb11",
+  "translation_pl": "nawet nie; ani razu (nie)",
+  "example_pl": "Nawet nie podziękował.",
+  "notes_pl": [
+   "Pot.: nicht mal. Także: noch nicht einmal — nawet nie: Er hat noch nicht einmal angerufen. — Nawet nie zadzwonił.",
+   "Nie mylić: mal — partykuła prośby: Kannst du nicht mal leise sein? — Nie możesz być trochę ciszej?"
+  ]
+ },
+ "expression-080": {
+  "_src": "1dea620e",
+  "translation_pl": "nic oprócz; jedynie",
+  "example_pl": "W lodówce nie było niczego oprócz starego kawałka sera.",
+  "notes_pl": [
+   "Także: nichts anderes als — nic innego jak.",
+   "Nie mylić: Er sagte nichts, als er hereinkam. — Nic nie powiedział, kiedy wszedł (als — „kiedy”)."
+  ]
+ },
+ "expression-081": {
+  "_src": "0280cfd6",
+  "translation_pl": "udawać, że …; udawać",
+  "example_pl": "Udawał, że mnie nie widzi.",
+  "notes_pl": [
+   "Także: so tun, als wenn …; so tun, als + czasownik na drugim miejscu: Sie tat so, als hätte sie nichts gehört. — Udawała, że nic nie słyszała.",
+   "Nie mylić: mehr tun, als … — zrobić więcej, niż …"
+  ]
+ },
+ "expression-082": {
+  "_src": "b6e33a49",
+  "translation_pl": "nieprawdaż?; prawda?",
+  "example_pl": "Przecież przyjdziesz jutro, prawda?",
+  "notes_pl": [
+   "Pytanie upewniające, zwykle na końcu zdania, po przecinku. Nie mylić: Das ist nicht wahr. — To nieprawda."
+  ]
+ },
+ "expression-083": {
+  "_src": "80ebbca9",
+  "translation_pl": "ledwo (zdążyć), w ostatniej chwili; z ledwością",
+  "example_pl": "Ledwo zdążyliśmy na pociąg.",
+  "notes_pl": [
+   "Często: gerade noch rechtzeitig — w ostatniej chwili; z können: Er konnte gerade noch ausweichen. — Ledwo zdążył uskoczyć.",
+   "Nie mylić: gerade noch — „przed chwilą”: den er gerade noch geträumt hatte. Das hat mir gerade noch gefehlt! — Tylko tego mi brakowało! (osobne hasło)."
+  ]
+ },
+ "expression-084": {
+  "_src": "22da8252",
+  "translation_pl": "tylko tego (mi) brakowało",
+  "example_pl": "A teraz do tego jeszcze pada — tylko tego mi brakowało!",
+  "notes_pl": [
+   "Ironicznie, o kolejnej przykrości. Komu — Dativ: Das hat ihm gerade noch gefehlt. Nie mylić: Das fehlte noch! — Jeszcze czego!"
+  ]
+ },
+ "expression-085": {
+  "_src": "1dc7e211",
+  "translation_pl": "jeszcze raz, znowu",
+  "example_pl": "Możesz, proszę, powiedzieć to jeszcze raz?",
+  "notes_pl": [
+   "Pot.: noch mal, nochmal. Nie mylić: noch nicht einmal — nawet nie (osobne hasło nicht einmal)."
+  ]
+ },
+ "expression-086": {
+  "_src": "2a451cb4",
+  "translation_pl": "mój Boże!; o rany!",
+  "example_pl": "Mój Boże, ale dziś zimno!",
+  "notes_pl": [
+   "Także: ach du meine Güte!, du liebe Güte!"
+  ]
+ },
+ "expression-087": {
+  "_src": "c11a7933",
+  "translation_pl": "wciąż na nowo, raz po raz, raz za razem",
+  "example_pl": "Wciąż na nowo czyta tę książkę.",
+  "notes_pl": [
+   "Także: wieder und immer wieder — wciąż na nowo."
+  ]
+ },
+ "expression-088": {
+  "_src": "a4731b07",
+  "translation_pl": "urodzić",
+  "example_pl": "Wczoraj urodziła zdrową dziewczynkę.",
+  "notes_pl": [
+   "Urodzić się — zur Welt kommen (osobne hasło)."
+  ]
+ },
+ "expression-089": {
+  "_src": "a339ecd6",
+  "translation_pl": "urodzić się, przyjść na świat",
+  "example_pl": "Jej syn urodził się w maju.",
+  "notes_pl": [
+   "Urodzić — zur Welt bringen (osobne hasło)."
+  ]
+ },
+ "expression-090": {
+  "_src": "b103cc34",
+  "translation_pl": "sam (z siebie), samoistnie; z własnej woli, z własnej inicjatywy",
+  "example_pl": "Drzwi same się zamknęły.",
+  "notes_pl": [
+   "Das versteht sich von selbst. — To się rozumie samo przez się. O ludziach: Er hat sich von selbst gemeldet. — Sam (z własnej woli) się odezwał."
+  ]
+ },
+ "expression-091": {
+  "_src": "5b0123db",
+  "translation_pl": "w gruncie rzeczy, w istocie",
+  "example_pl": "W gruncie rzeczy to miły facet.",
+  "notes_pl": [
+   "Także: im Grunde genommen. Nie mylić: im Grunde des Sees — na dnie jeziora; im Grunde seines Herzens — w głębi duszy."
+  ]
+ },
+ "expression-092": {
+  "_src": "357aa13d",
+  "translation_pl": "nie móc uwierzyć (w coś); nie mieścić się w głowie",
+  "example_pl": "Po prostu nie mogę w to uwierzyć!",
+  "notes_pl": [
+   "Także: Das ist nicht zu fassen! — To się w głowie nie mieści! Nie mylić: etwas nicht zu fassen bekommen — nie zdołać czegoś chwycić."
+  ]
+ },
+ "expression-093": {
+  "_src": "d07c13a2",
+  "translation_pl": "być w dobrym nastroju, w dobrym humorze; być dobrej myśli",
+  "example_pl": "Mimo deszczu wszyscy byli w dobrym nastroju.",
+  "notes_pl": [
+   "Książk.; Genitiv: guter Dinge. Także bez sein: Er zog guter Dinge weiter. — Wesoło ruszył dalej."
+  ]
+ },
+ "expression-094": {
+  "_src": "a47a4271",
+  "translation_pl": "stopniowo, pomału",
+  "example_pl": "Stopniowo na sali robiło się cicho.",
+  "notes_pl": [
+   "Synonim: allmählich."
+  ]
+ },
+ "expression-095": {
+  "_src": "eeab5984",
+  "translation_pl": "no, w sumie; no cóż; no, jak by to powiedzieć",
+  "example_pl": "No, aż tak źle znowu nie było.",
+  "notes_pl": [
+   "Wyraża wątpliwość, ustępstwo, wahanie. nun ja — wariant bardziej książkowy."
+  ]
+ },
+ "expression-096": {
+  "_src": "fad7db10",
+  "translation_pl": "a mianowicie; i to",
+  "example_pl": "Przyjdę jutro, a konkretnie o ósmej.",
+  "notes_pl": [
+   "Doprecyzowuje to, co zostało powiedziane, zwykle po przecinku. Nie mylić: zwar …, aber — wprawdzie …, ale."
+  ]
+ },
+ "expression-097": {
+  "_src": "740e6a6f",
+  "translation_pl": "rzeczywiście, faktycznie",
+  "example_pl": "Zadanie było rzeczywiście trudniejsze, niż myśleliśmy.",
+  "notes_pl": [
+   "Nie mylić: in die Tat umsetzen — urzeczywistnić, wcielić w życie (osobne wyrażenie)."
+  ]
+ },
+ "expression-098": {
+  "_src": "09fe28d4",
+  "translation_pl": "zdyszany, bez tchu; (außer Atem sein, kommen, geraten) dostać zadyszki",
+  "example_pl": "Dotarł na górę zupełnie bez tchu.",
+  "notes_pl": [
+   "Nie mylić: den Atem anhalten — wstrzymać oddech."
+  ]
+ },
+ "expression-099": {
+  "_src": "f82290a2",
+  "translation_pl": "zginąć",
+  "example_pl": "W wypadku zginęły dwie osoby.",
+  "notes_pl": [
+   "Perfekt z sein: Er ist bei einem Brand ums Leben gekommen. Nie mylić: Es geht ums Leben. — Chodzi o życie."
+  ]
+ },
+ "expression-100": {
+  "_src": "9c6c865e",
+  "translation_pl": "zabić, pozbawić życia (kogoś)",
+  "example_pl": "Trucizna o mało go nie zabiła.",
+  "notes_pl": [
+   "Kogo — Akkusativ: jemanden ums Leben bringen. Strona bierna: ums Leben gebracht werden. sich ums Leben bringen — odebrać sobie życie."
+  ]
+ },
+ "expression-101": {
+  "_src": "51a4ac45",
+  "translation_pl": "właśnie (coś) robić, być zajętym (czymś); zamierzać (coś zrobić)",
+  "example_pl": "Właśnie gotowałem obiad, kiedy zadzwonił telefon.",
+  "notes_pl": [
+   "Z bezokolicznikiem z zu po przecinku. Nie mylić: dabei sein — być obecnym, uczestniczyć: Ich war nicht dabei. — Nie było mnie tam."
+  ]
+ },
+ "expression-102": {
+  "_src": "abf39509",
+  "translation_pl": "skończyć się, zakończyć się (zu Ende sein, gehen); do końca (zu Ende lesen, bringen …)",
+  "example_pl": "Film zaraz się skończy.",
+  "notes_pl": [
+   "Pisze się rozdzielnie: zu Ende (nie zuende). zu Ende gehen — dobiegać końca: Der Urlaub geht zu Ende. — Urlop dobiega końca. etwas zu Ende lesen / bringen — doczytać / doprowadzić coś do końca."
+  ]
+ },
+ "expression-103": {
+  "_src": "417d4d74",
+  "translation_pl": "mieć się na baczności; strzec się (kogoś, czegoś — vor + Dativ)",
+  "example_pl": "Strzeż się tego człowieka!",
+  "notes_pl": [
+   "Także z zaimkiem dzierżawczym: auf seiner Hut sein. die Hut (książk.) — ochrona; nie mylić z der Hut — kapelusz: auf dem Hut — na kapeluszu."
+  ]
+ },
+ "expression-104": {
+  "_src": "cad2c818",
+  "translation_pl": "wykończyć, zniszczyć (kogoś); skończyć (z czymś)",
+  "example_pl": "Mróz wykończył róże.",
+  "notes_pl": [
+   "Pot., żart.; komu — Dativ: jemandem den Garaus machen."
+  ]
+ },
+ "expression-105": {
+  "_src": "a28a9fad",
+  "translation_pl": "(przestarz., żart.) precz, w dal",
+  "example_pl": "Rycerz odjechał w dal.",
+  "notes_pl": [
+   "Zwykle z czasownikami ruchu: von dannen gehen, ziehen, eilen."
+  ]
+ },
+ "expression-106": {
+  "_src": "331b610b",
+  "translation_pl": "być obecnym, uczestniczyć (przy czymś, w czymś); być obok, razem (z kimś); (dabei sein, etwas zu tun) właśnie robić (coś), być zajętym (czymś); (o rzeczach) być w zestawie, być dołączonym",
+  "example_pl": "Na weselu byli obecni tylko najbliżsi przyjaciele.",
+  "notes_pl": [
+   "O rzeczach: Ist eine Anleitung dabei? — Czy instrukcja jest dołączona? Z bezokolicznikiem z zu: Ich bin gerade dabei, das Essen zu kochen. — Właśnie gotuję obiad.",
+   "Nie mylić: dabei — „przy tym”: Er war dabei sehr freundlich. — Był przy tym bardzo uprzejmy."
+  ]
+ },
+ "expression-107": {
+  "_src": "bc9012ee",
+  "translation_pl": "(to było) … temu; minęło (ileś czasu)",
+  "example_pl": "Minęły już trzy lata, odkąd się widzieliśmy.",
+  "notes_pl": [
+   "Jak dawno — z określeniem czasu: Wie lange ist das her? — Jak dawno to było? Das ist lange her. — To było dawno.",
+   "Nie mylić: hinter jemandem her sein — polować na kogoś; Wo ist er her? — Skąd on jest?"
+  ]
+ },
+ "expression-108": {
+  "_src": "53dda55b",
+  "translation_pl": "(pot.) skończyć się, minąć, upłynąć (o czasie, terminie)",
+  "example_pl": "Przerwa zaraz się skończy, musimy wracać.",
+  "notes_pl": [
+   "O czasie: Die Zeit ist um. — Czas minął. Die Woche war schnell um. — Tydzień szybko zleciał."
+  ]
+ },
+ "expression-109": {
+  "_src": "e00d5c8c",
+  "translation_pl": "uganiać się (za kimś, czymś), polować (na kogoś); zabiegać (o coś)",
+  "example_pl": "Policja już od dawna ściga tego złodzieja.",
+  "notes_pl": [
+   "Pot.; za kim, za czym — Dativ: hinter jemandem her sein. Nie mylić: hinter jemandem herlaufen — biec za kimś (dosłownie); es ist lange her — to było dawno (osobne hasło)."
+  ]
+ },
+ "expression-110": {
+  "_src": "71c0b615",
+  "translation_pl": "(komuś) jest … na duszy, (ktoś) czuje się …; (nach etwas) mieć ochotę (na coś), być w nastroju (do czegoś)",
+  "example_pl": "Przed egzaminem było mi jakoś dziwnie na duszy.",
+  "notes_pl": [
+   "Komu — Dativ: mir ist …, ihm war … Na co ma się ochotę — nach + Dat.: Mir ist nicht nach Feiern zumute. Pisze się też: zu Mute. Czasownik zumuten („wymagać zbyt wiele”) — inne słowo."
+  ]
+ },
+ "expression-111": {
+  "_src": "35f4e61d",
+  "translation_pl": "od tej pory, odtąd; od tej chwili",
+  "example_pl": "Od tej pory codziennie przychodzi punktualnie.",
+  "notes_pl": [
+   "Podobnie: ab jetzt, von jetzt an, fortan. Rzadziej: von nun ab."
+  ]
+ },
+ "expression-112": {
+  "_src": "aa316cb8",
+  "translation_pl": "co słychać?, jak się masz?; jak się czujesz?",
+  "example_pl": "Cześć, Anno, jak się masz?",
+  "notes_pl": [
+   "Komu — Dativ: Wie geht es Ihnen? Wie geht es deinem Bruder? Pot.: Wie geht’s? Odpowiedź: Danke, gut. / Es geht. — Tak sobie. Wie geht es weiter? — co dalej? (nie o samopoczuciu). Odpowiedź „dobrze / źle” — es geht jemandem gut / schlecht (osobne hasło)."
+  ]
+ },
+ "expression-113": {
+  "_src": "0c9571f7",
+  "translation_pl": "(komuś) jest dobrze / źle; (ktoś) dobrze / źle się czuje; (komuś) dobrze / źle się wiedzie",
+  "example_pl": "Po operacji znów dobrze się czuje.",
+  "notes_pl": [
+   "Komu — Dativ: Mir geht es gut. Ihm geht’s besser. Dawniej: es ging ihm wohl — dobrze mu się żyło. Pytanie — wie geht es (dir)? (osobne hasło). Nie mylić: Es geht gut aus — dobrze się kończy (ausgehen); Es geht um … — chodzi o … (osobne hasło)."
+  ]
+ },
+ "expression-114": {
+  "_src": "e982f1a9",
+  "translation_pl": "wydać wyrok, ogłosić orzeczenie (sądu)",
+  "example_pl": "Jutro sąd wyda wyrok.",
+  "notes_pl": [
+   "Książk., praw. Na kogo — über + Akk.: das Urteil über jemanden sprechen. Strona bierna: Das Urteil wurde gesprochen. Podobnie: ein Urteil fällen."
+  ]
+ },
+ "expression-115": {
+  "_src": "67f5a00d",
+  "translation_pl": "zerwać się, podskoczyć (ze strachu, z zaskoczenia); gwałtownie się podnieść, wystrzelić w górę",
+  "example_pl": "Słysząc huk, zerwała się przestraszona.",
+  "notes_pl": [
+   "Częściej o człowieku: aus dem Schlaf in die Höhe fahren — zerwać się ze snu. Podobnie: hochfahren, aufspringen."
+  ]
+ },
+ "expression-116": {
+  "_src": "15e4bc32",
+  "translation_pl": "przejechać, śmiertelnie potrącić (samochodem, wozem)",
+  "example_pl": "Na szosie samochód śmiertelnie potrącił lisa.",
+  "notes_pl": [
+   "Rozdzielny: fuhr … tot, hat totgefahren. W dawnych tekstach — rozdzielnie: … daß ihn die Räder tot fuhren. Podobnie: überfahren."
+  ]
+ },
+ "expression-117": {
+  "_src": "3153d1ad",
+  "translation_pl": "dać (komuś) nadzieję, wlać nadzieję (w kogoś)",
+  "example_pl": "Lekarka dała mu nadzieję na szybki powrót do zdrowia.",
+  "notes_pl": [
+   "Komu — Dativ; na co — auf + Akk. jemandem falsche Hoffnungen machen — robić komuś złudne nadzieje. Nie mylić: sich (Dativ) Hoffnungen machen — mieć nadzieję (osobne hasło)."
+  ]
+ },
+ "expression-118": {
+  "_src": "8a679013",
+  "translation_pl": "przejść od słów do czynów; wziąć się na poważnie (do czegoś)",
+  "example_pl": "Teraz rząd na poważnie zabiera się do ochrony klimatu.",
+  "notes_pl": [
+   "Z czym — mit + Dativ. Zgodnie z normą — wielką literą: Ernst machen (Ernst — rzeczownik); w tekstach często także ernst machen. Traktować poważnie — ernst nehmen (osobne hasło). Nie mylić: ein ernstes Gesicht machen — zrobić poważną minę."
+  ]
+ },
+ "expression-119": {
+  "_src": "c2a6efc5",
+  "translation_pl": "mówić serio; mieć poważne zamiary (wobec kogoś, czegoś)",
+  "example_pl": "Ma wobec niej poważne zamiary.",
+  "notes_pl": [
+   "Także: Meinst du das ernst? — Mówisz serio? Das war nicht ernst gemeint. — To nie było na serio. Przed rzeczownikiem — ernst gemeint lub łącznie: ein ernst gemeintes / ernstgemeintes Angebot."
+  ]
+ },
+ "expression-120": {
+  "_src": "ebbb035c",
+  "translation_pl": "brać na serio, traktować poważnie (kogoś, coś)",
+  "example_pl": "Musisz poważnie potraktować jego ostrzeżenie.",
+  "notes_pl": [
+   "Pisze się rozdzielnie: ernst nehmen. Łącznie pisze się tylko przymiotnik ernstzunehmend („poważny, z którym trzeba się liczyć”: ein ernstzunehmender Gegner; także ernst zu nehmend). Imiesłów: Ich fühle mich nicht ernst genommen. — Czuję, że nie traktuje się mnie poważnie."
+  ]
+ },
+ "expression-121": {
+  "_src": "eba22fc4",
+  "translation_pl": "obrażać się (na kogoś, o coś), mieć za złe (komuś)",
+  "example_pl": "Proszę, nie miej mi tego za złe!",
+  "notes_pl": [
+   "Komu — Dativ: jemandem etwas übel nehmen. Pisze się też łącznie: übelnehmen, übelgenommen (osobne hasło czasownika).",
+   "Nie mylić: mir ist übel — jest mi niedobrze."
+  ]
+ },
+ "expression-122": {
+  "_src": "80bf2422",
+  "translation_pl": "cofnąć, anulować",
+  "example_pl": "Czy można jeszcze anulować przelew?",
+  "notes_pl": [
+   "Co się anuluje: einen Kauf, eine Bestellung, eine Entscheidung, eine Änderung rückgängig machen. W programach: Rückgängig — „Cofnij”."
+  ]
+ },
+ "expression-123": {
+  "_src": "eadfad32",
+  "translation_pl": "zwrócić (czyjąś) uwagę (na coś); (auf sich aufmerksam machen) zwrócić na siebie uwagę",
+  "example_pl": "Zwróciła moją uwagę na błąd w tekście.",
+  "notes_pl": [
+   "Kogo — Akk., na co — auf + Akk.: jemanden auf etwas aufmerksam machen; na siebie — auf sich aufmerksam machen. Bez auf — przymiotnik: Sie hörte aufmerksam zu. — Uważnie słuchała."
+  ]
+ },
+ "expression-124": {
+  "_src": "d8a55bb1",
+  "translation_pl": "cofnąć to, co się stało, odwrócić bieg wydarzeń",
+  "example_pl": "Przeprosiny nie mogą sprawić, że wypadku nie było.",
+  "notes_pl": [
+   "Zwykle z przeczeniem: Das kann man nicht ungeschehen machen. — Co się stało, to się nie odstanie."
+  ]
+ },
+ "expression-125": {
+  "_src": "247f06be",
+  "translation_pl": "trochę, odrobinę; lekko",
+  "example_pl": "Możesz mówić trochę ciszej?",
+  "notes_pl": [
+   "Nie odmienia się: mit ein wenig Geduld — z odrobiną cierpliwości. ein klein wenig — troszeczkę. Podobnie: ein bisschen.",
+   "Nie mylić: wenig — mało: Er hat wenig Zeit; ein wenig bekanntes Buch — mało znana książka (ein odnosi się do Buch)."
+  ]
+ },
+ "expression-126": {
+  "_src": "ff7223a9",
+  "translation_pl": "nie posiadać się (z radości, z wrażenia); (geraten) wpaść w zachwyt, rozemocjonować się",
+  "example_pl": "Kiedy usłyszała wynik, nie posiadała się z radości.",
+  "notes_pl": [
+   "Pot. Częściej z ganz, völlig: ganz aus dem Häuschen sein. Z czego — vor + Dat.: vor Freude aus dem Häuschen sein. aus dem Häuschen geraten — wpaść w zachwyt, rozemocjonować się; jemanden aus dem Häuschen bringen — wprawić kogoś w zachwyt. Dosłownie „z domku”: Er trat aus dem Häuschen — to nie jest wyrażenie."
+  ]
+ },
+ "expression-127": {
+  "_src": "4e64c0a9",
+  "translation_pl": "przypadkiem spotkać (kogoś), wpaść (na kogoś)",
+  "example_pl": "Wczoraj przypadkiem wpadłem na niego w supermarkecie.",
+  "notes_pl": [
+   "Kogo — Dativ: jemandem über den Weg laufen. Dosłownie: Die Katze lief über den Weg — kot przebiegł przez drogę.",
+   "Nie mylić: jemandem nicht über den Weg trauen — nie ufać komuś za grosz (osobne hasło)."
+  ]
+ },
+ "expression-128": {
+  "_src": "18354b72",
+  "translation_pl": "nie ufać (komuś) za grosz",
+  "example_pl": "Nowemu sąsiadowi nie ufam za grosz.",
+  "notes_pl": [
+   "Komu — Dativ; prawie zawsze z przeczeniem: nicht, kaum (pot. keinen Meter).",
+   "Nie mylić: jemandem über den Weg laufen — przypadkiem spotkać (osobne hasło)."
+  ]
+ },
+ "expression-129": {
+  "_src": "699410fb",
+  "translation_pl": "przyrosnąć do serca, stać się bliskim (komuś)",
+  "example_pl": "Mały pies przyrósł nam wszystkim do serca.",
+  "notes_pl": [
+   "Komu — Dativ. Perfekt z sein: ist mir ans Herz gewachsen. Także an das Herz.",
+   "Nie mylić: jemandem etwas ans Herz legen — gorąco coś komuś polecać."
+  ]
+ },
+ "expression-130": {
+  "_src": "b93ba0ca",
+  "translation_pl": "przerosnąć (kogoś), przytłoczyć, wymknąć się spod kontroli (o sprawach, problemach; o dzieciach — przestać słuchać); (dosł.) przerosnąć (kogoś wzrostem)",
+  "example_pl": "Natłok pracy powoli mnie przerasta.",
+  "notes_pl": [
+   "Komu — Dativ. Perfekt z sein: Die Probleme sind ihr über den Kopf gewachsen.",
+   "Dosłownie: Der Sohn ist dem Vater über den Kopf gewachsen — syn przerósł ojca."
+  ]
+ },
+ "expression-131": {
+  "_src": "d5eec82b",
+  "translation_pl": "zostawić (kogoś) w potrzebie, zawieść; (o pamięci, sprzęcie) odmówić posłuszeństwa, zawieść",
+  "example_pl": "Na swoim najlepszym przyjacielu mogę polegać: nigdy mnie nie zawodzi.",
+  "notes_pl": [
+   "Kogo — Akkusativ. Perfekt: hat … im Stich gelassen.",
+   "O pamięci, sprzęcie: Mein Gedächtnis ließ mich im Stich. — Pamięć mnie zawiodła."
+  ]
+ },
+ "expression-132": {
+  "_src": "ed91cba7",
+  "translation_pl": "pozostawiać wiele do życzenia",
+  "example_pl": "Obsługa w tym hotelu pozostawia bardzo wiele do życzenia.",
+  "notes_pl": [
+   "Często ze wzmocnieniem: viel, sehr, einiges zu wünschen übrig lassen. Przeciwnie: nichts zu wünschen übrig lassen — nie pozostawiać nic do życzenia, być bez zarzutu (nie to hasło)."
+  ]
+ },
+ "expression-133": {
+  "_src": "e0169bf9",
+  "translation_pl": "nie dać nic po sobie poznać, niczym się nie zdradzić",
+  "example_pl": "Bardzo się denerwowała, ale nie dała nic po sobie poznać.",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir nichts anmerken. Czego nie okazać — Akkusativ: Er ließ sich seine Angst nicht anmerken. ohne sich etwas anmerken zu lassen — nie dając nic po sobie poznać. Bez przeczenia: sich etwas anmerken lassen — zdradzić się (to nie jest wyrażenie)."
+  ]
+ },
+ "expression-134": {
+  "_src": "1c77b1d1",
+  "translation_pl": "dać do zrozumienia, zasugerować (coś)",
+  "example_pl": "Szef dał do zrozumienia, że wkrótce będą zmiany.",
+  "notes_pl": [
+   "Co — Akkusativ lub dass …: Er ließ seine Unzufriedenheit durchblicken. Nie mylić: durchblicken (pot.) — orientować się, rozumieć: Ich blicke da nicht durch."
+  ]
+ },
+ "expression-135": {
+  "_src": "bf91e804",
+  "translation_pl": "(pot.) dać sobie spokój (z czymś), nie robić (czegoś)",
+  "example_pl": "Jeśli nie masz ochoty, to po prostu daj sobie z tym spokój.",
+  "notes_pl": [
+   "Częściej z es / das: Lass das bleiben! — Daj sobie z tym spokój! Das lässt du schön bleiben! — Nawet o tym nie myśl! To samo: etwas sein lassen (osobne hasło seinlassen).",
+   "Dosłownie „pozwolić zostać”: Er ließ den Hund im Haus bleiben — to nie jest wyrażenie."
+  ]
+ },
+ "expression-136": {
+  "_src": "1b29055b",
+  "translation_pl": "nie przepuścić (okazji)",
+  "example_pl": "Koncertu z wolnym wstępem przecież nie przepuszczę!",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir … nicht entgehen. Co — Akkusativ: Sie ließ sich die Gelegenheit nicht entgehen. Bez przeczenia — przepuścić: Da hast du dir etwas entgehen lassen! — Dużo straciłeś!"
+  ]
+ },
+ "expression-137": {
+  "_src": "b666cb5d",
+  "translation_pl": "przemyśleć, zastanowić się",
+  "example_pl": "Spokojnie przemyśl moją propozycję do jutra.",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir das durch den Kopf gehen. Bez lassen: etwas geht jemandem durch den Kopf — (myśl) przychodzi komuś do głowy, chodzi komuś po głowie (nie to hasło)."
+  ]
+ },
+ "expression-138": {
+  "_src": "d1aa1159",
+  "translation_pl": "nie odmówić sobie (czegoś); koniecznie (coś zrobić)",
+  "example_pl": "Dziadek koniecznie chciał sam pokroić tort.",
+  "notes_pl": [
+   "Zwykle z es i zu + Infinitiv: Sie ließ es sich nicht nehmen, uns abzuholen. Także: Das lasse ich mir nicht nehmen! — Tego nikt mi nie odbierze! Bez przeczenia i es — sich etwas nehmen lassen — dać sobie coś wziąć: Er ließ sich Blut nehmen (nie to hasło)."
+  ]
+ },
+ "expression-139": {
+  "_src": "84282852",
+  "translation_pl": "wymyślić (coś)",
+  "example_pl": "Na przyjęcie urodzinowe musimy wymyślić coś wyjątkowego.",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir etwas einfallen. Lass dir was einfallen! — Wymyśl coś! Bez lassen: etwas fällt jemandem ein — (coś) przychodzi komuś do głowy."
+  ]
+ },
+ "expression-140": {
+  "_src": "2e828bcd",
+  "translation_pl": "nie trzeba (komuś) dwa razy powtarzać",
+  "example_pl": "Kiedy nauczyciel wcześniej skończył lekcję, uczniom nie trzeba było dwa razy powtarzać.",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir das nicht zweimal sagen. Tak samo: sich nicht zweimal bitten lassen — nie dać się dwa razy prosić (zaimek w Akkusativie: ich lasse mich nicht zweimal bitten)."
+  ]
+ },
+ "expression-141": {
+  "_src": "06d773df",
+  "translation_pl": "jeść (pić) ze smakiem; Lass es dir schmecken! — Smacznego!",
+  "example_pl": "Po długiej wędrówce ze smakiem zjedliśmy grochówkę.",
+  "notes_pl": [
+   "Zaimek w Dativie: ich lasse mir den Kuchen schmecken. Życzenie: Lass es dir schmecken! / Lasst es euch schmecken! / Lassen Sie es sich schmecken! — Smacznego!",
+   "Często z gut: Lass es dir gut schmecken! Przestarzała pisownia łączna — gutschmecken, wohlschmecken (Grimm)."
+  ]
+ },
+ "expression-142": {
+  "_src": "195b30c2",
+  "translation_pl": "nakłamać (komuś), nabrać (kogoś)",
+  "example_pl": "Nie wierz ani jednemu jego słowu — chce cię tylko nabrać.",
+  "notes_pl": [
+   "Komu — Dativ: Er hat mir einen Bären aufgebunden. Także: sich keinen Bären aufbinden lassen — nie dać się nabrać: Ich lasse mir doch keinen Bären aufbinden!"
+  ]
+ },
+ "expression-143": {
+  "_src": "f6f3fa5b",
+  "translation_pl": "zwiesić głowę, zmarkotnieć, upaść na duchu",
+  "example_pl": "Po przegranej partii chłopiec zwiesił głowę.",
+  "notes_pl": [
+   "Dodając otuchy: Lass den Kopf nicht hängen! — Głowa do góry! Tak samo: die Ohren hängen lassen — zwiesić nos na kwintę.",
+   "Nie mylić: jemanden hängen lassen (hängenlassen) — zawieść, zostawić kogoś na lodzie: Lass mich nicht hängen!"
+  ]
+ },
+ "expression-144": {
+  "_src": "9fb8729d",
+  "translation_pl": "jeśli o mnie chodzi, niech będzie; no dobrze (nie mam nic przeciwko)",
+  "example_pl": "Jeśli o mnie chodzi, możesz dziś zostać dłużej.",
+  "notes_pl": [
+   "Pot. Zgoda bez entuzjazmu: Kommst du mit? — Von mir aus. — Idziesz z nami? — No dobrze. Dosłownie „ode mnie”: von mir aus gesehen — patrząc z mojego miejsca."
+  ]
+ },
+ "expression-145": {
+  "_src": "dfc5dc4b",
+  "translation_pl": "pierwotnie, z natury; z pochodzenia; z wykształcenia (o zawodzie)",
+  "example_pl": "Z wykształcenia jest lekarką, ale pracuje jako dziennikarka.",
+  "notes_pl": [
+   "Także von Haus aus. Nie mylić: von zu Hause aus — z domu (skąd): Ich arbeite von zu Hause aus. Dosłownie „z domu” bez zu (Er rief von Hause aus an) — przestarz., reg."
+  ]
+ },
+ "expression-146": {
+  "_src": "5aacf59b",
+  "translation_pl": "na miejscu (zdarzenia), w terenie",
+  "example_pl": "Straż pożarna była na miejscu już po dziesięciu minutach.",
+  "notes_pl": [
+   "Tam, gdzie coś się dzieje: vor Ort sein — być na miejscu; sich vor Ort informieren — zorientować się na miejscu; die Menschen vor Ort — miejscowi mieszkańcy."
+  ]
+ },
+ "expression-147": {
+  "_src": "298a1890",
+  "translation_pl": "nadal, tak jak dawniej",
+  "example_pl": "Mała kawiarnia nadal istnieje.",
+  "notes_pl": [
+   "Wyrażenie przysłówkowe: Er wohnt nach wie vor in Berlin. — Nadal mieszka w Berlinie. Nie mylić: nach wie vor dem Essen — po jedzeniu, tak jak i przed nim (przyimki)."
+  ]
+ },
+ "expression-148": {
+  "_src": "2e565e10",
+  "translation_pl": "od tamtej chwili, odtąd, od tamtej pory",
+  "example_pl": "Od tamtej chwili król nie odezwał się do niego ani słowem.",
+  "notes_pl": [
+   "Przestarz., książk., w baśniach; także von Stunde an. Dziś częściej: von nun an, von da an."
+  ]
+ },
+ "expression-149": {
+  "_src": "1681dd01",
+  "translation_pl": "to znaczy; to oznacza",
+  "example_pl": "Sklep jest otwarty tylko w dni powszednie, to znaczy w niedzielę jest zamknięty.",
+  "notes_pl": [
+   "Wprowadza doprecyzowanie; zwykle z przecinkiem: das heißt, … Skrót — d. h. Nie mylić: Das Kind heißt Anna (ma na imię), Was heißt das? (co to znaczy / jak to się nazywa) — zwykły czasownik heißen."
+  ]
+ },
+ "expression-150": {
+  "_src": "e3151c84",
+  "translation_pl": "być w dobrych rękach; być pod dobrą opieką",
+  "example_pl": "U babci dzieci zawsze były w dobrych rękach.",
+  "notes_pl": [
+   "Także bestens / sehr gut aufgehoben sein; sich bei jemandem gut aufgehoben fühlen — czuć się w pewnych rękach. O rzeczach: Das Geld ist auf der Bank gut aufgehoben — w bezpiecznym miejscu. Nie mylić: aufheben — podnosić; przechowywać; uchylać (Das Gesetz wurde aufgehoben)."
+  ]
+ },
+ "expression-151": {
+  "_src": "d31810ed",
+  "translation_pl": "między innymi; w tym",
+  "example_pl": "Na urlopie poszliśmy między innymi na kurs gotowania.",
+  "notes_pl": [
+   "Skrót — u. a.; oznacza też unter anderen (o osobach) i und andere (Müller u. a. — Müller i inni). Nie mylić: unter anderem Namen — pod innym nazwiskiem."
+  ]
+ },
+ "expression-152": {
+  "_src": "ae8ebb9e",
+  "translation_pl": "poza tym; ponadto",
+  "example_pl": "Mieszkanie jest jasne, poza tym leży w bardzo spokojnej okolicy.",
+  "notes_pl": [
+   "Jako wtrącenie: Darüber hinaus gibt es … — Poza tym jest … Nie mylić: Das geht darüber hinaus — to wykracza poza te ramy (hinausgehen); über etwas hinaus — ponad coś."
+  ]
+ },
+ "expression-153": {
+  "_src": "2cc03680",
+  "translation_pl": "z reguły; zwykle",
+  "example_pl": "Z reguły jeździ do pracy rowerem.",
+  "notes_pl": [
+   "Także in aller Regel — z reguły."
+  ]
+ },
+ "expression-154": {
+  "_src": "185106fb",
+  "translation_pl": "w zależności od",
+  "example_pl": "W zależności od pogody pójdziemy na wędrówkę albo do muzeum.",
+  "notes_pl": [
+   "je nachdem, ob … — w zależności od tego, czy …"
+  ]
+ },
+ "expression-155": {
+  "_src": "277bcaf6",
+  "translation_pl": "być w stanie (coś zrobić); móc",
+  "example_pl": "Po operacji nie był w stanie sam chodzić.",
+  "notes_pl": [
+   "Często z przeczeniem i zu + bezokolicznik: nicht in der Lage sein, etwas zu tun; Ich bin dazu nicht in der Lage. Nie mylić: in der Lage des Hauses — w położeniu domu; in einer schwierigen Lage sein — być w trudnym położeniu."
+  ]
+ },
+ "expression-156": {
+  "_src": "52eb4e7f",
+  "translation_pl": "w odniesieniu do; odnośnie do; jeśli chodzi o",
+  "example_pl": "Jeśli chodzi o koszty, musimy jeszcze raz porozmawiać.",
+  "notes_pl": [
+   "+ Akkusativ: in Bezug auf das Thema. Także: in Bezug darauf."
+  ]
+ },
+ "expression-157": {
+  "_src": "ab333b1a",
+  "translation_pl": "prawie; praktycznie",
+  "example_pl": "Prawie nic nie jadłem.",
+  "notes_pl": [
+   "Znaczy „prawie”: so gut wie nichts / keine Zeit / fertig / neu / erledigt / immer. Nie mylić: so gut wie du — tak samo dobrze jak ty; so gut wie möglich — jak najlepiej (porównanie)."
+  ]
+ },
+ "expression-158": {
+  "_src": "74d0bb0d",
+  "translation_pl": "dojść do siebie; ocknąć się",
+  "example_pl": "Po kilku minutach chłopiec znów doszedł do siebie.",
+  "notes_pl": [
+   "Często wieder zu sich kommen. Nie mylić: jemanden zu sich rufen / nehmen — zawołać / wziąć kogoś do siebie."
+  ]
+ },
+ "expression-159": {
+  "_src": "f8baaa9d",
+  "translation_pl": "nie spuszczać z oka (kogoś, czegoś); mieć na oku",
+  "example_pl": "Możesz przez chwilę popilnować mojej walizki?",
+  "notes_pl": [
+   "Także o celu, planie: das Ziel im Auge behalten — nie tracić celu z oczu."
+  ]
+ },
+ "expression-160": {
+  "_src": "79d37039",
+  "translation_pl": "nie zmrużyć oka",
+  "example_pl": "Przed egzaminem przez całą noc nie zmrużyłem oka.",
+  "notes_pl": [
+   "Pot. także kein Auge zumachen."
+  ]
+ },
+ "expression-161": {
+  "_src": "f476a5bb",
+  "translation_pl": "przyjść do głowy",
+  "example_pl": "Nagle przyszedł mi do głowy dobry pomysł.",
+  "notes_pl": [
+   "Komu — Dativ: Es wäre mir nie in den Sinn gekommen. — Nigdy by mi to nie przyszło do głowy."
+  ]
+ },
+ "expression-162": {
+  "_src": "542cbcd4",
+  "translation_pl": "mieć pod kontrolą; radzić sobie (z czymś)",
+  "example_pl": "Po kilku tygodniach dobrze radziła sobie z nową pracą.",
+  "notes_pl": [
+   "Także in den Griff bekommen / kriegen — opanować, poradzić sobie."
+  ]
+ },
+ "expression-163": {
+  "_src": "40a647ac",
+  "translation_pl": "bez problemu, bez trudu; bez zbędnych słów",
+  "example_pl": "Bez problemu zrobisz to sam.",
+  "notes_pl": [
+   "Pisze się też ohne Weiteres (tak zaleca Duden; obie pisownie są poprawne). Nie mylić: ohne weiteres Kochen — bez dalszego gotowania (weiteres — przymiotnik)."
+  ]
+ },
+ "expression-164": {
+  "_src": "d650962b",
+  "translation_pl": "trzymać język za zębami; milczeć (pot. zamknąć się)",
+  "example_pl": "No zamknij się wreszcie!",
+  "notes_pl": [
+   "Także: über etwas den Mund halten — milczeć o czymś. Nie mylić: sich die Hand vor den Mund halten — zasłonić usta ręką; jdm. den Mund zuhalten — zatkać komuś usta."
+  ]
+ },
+ "expression-165": {
+  "_src": "b2165b9a",
+  "translation_pl": "(gehen) zginąć, przepaść; (richten) doprowadzić do zguby, zrujnować",
+  "example_pl": "Bez wody rośliny szybko giną.",
+  "notes_pl": [
+   "Także zu Grunde. zugrunde gehen — zginąć; jemanden / etwas zugrunde richten — doprowadzić do zguby. zugrunde liegen — leżeć u podstaw (osobne hasło)."
+  ]
+ },
+ "expression-166": {
+  "_src": "9c941945",
+  "translation_pl": "leżeć u podstaw",
+  "example_pl": "U podstaw filmu leży prawdziwe zdarzenie.",
+  "notes_pl": [
+   "Czemu — Dativ: Dem Plan liegt eine Idee zugrunde. Także die zugrunde liegenden Daten — dane wyjściowe. Nie mylić: zugrunde gehen / richten — zginąć / doprowadzić do zguby."
+  ]
+ },
+ "expression-167": {
+  "_src": "07402545",
+  "translation_pl": "(pot.) przepadać (za kimś, czymś), jarać się (kimś, czymś)",
+  "example_pl": "Moja siostra totalnie jara się muzyką lat osiemdziesiątych.",
+  "notes_pl": [
+   "Pot.; auf + Akkusativ: Ich stehe auf Jazz. Sie steht auf ihn. Da steh ich total drauf. Nie mylić: auf dem Stuhl stehen — stać na krześle (Dativ); Auf dem Schild steht … — na tabliczce jest napisane."
+  ]
+ },
+ "expression-168": {
+  "_src": "dd7b39f8",
+  "translation_pl": "bez przerwy, bez końca",
+  "example_pl": "Telefon dzwonił bez przerwy przez cały wieczór.",
+  "notes_pl": [
+   "= ununterbrochen, ständig."
+  ]
+ },
+ "expression-169": {
+  "_src": "4f6c39c7",
+  "translation_pl": "przeszkodzić (komuś), wejść w drogę",
+  "example_pl": "Tylko nie wchodź mi w drogę!",
+  "notes_pl": [
+   "Komu — Dativ: Er ist mir in die Quere gekommen."
+  ]
+ },
+ "expression-170": {
+  "_src": "bdb4b3f9",
+  "translation_pl": "nie ruszyć się z miejsca",
+  "example_pl": "Pies nie ruszył się z miejsca.",
+  "notes_pl": [
+   "Także nicht vom Fleck kommen — nie posuwać się naprzód (o sprawie)."
+  ]
+ },
+ "expression-171": {
+  "_src": "2d9407fa",
+  "translation_pl": "(pot.) co, do diabła; co, u licha",
+  "example_pl": "Co ty tam, do diabła, robisz?",
+  "notes_pl": [
+   "Także wer / wo / warum zum Teufel … Nie mylić: Geh zum Teufel! — Idź do diabła!"
+  ]
+ },
+ "expression-172": {
+  "_src": "c481b2fc",
+  "translation_pl": "w całości, całkowicie; z kopytami",
+  "example_pl": "Wilk pożarłby jagnię w całości.",
+  "notes_pl": [
+   "Także przenośnie: sich einer Sache mit Haut und Haar(en) verschreiben — całkowicie poświęcić się czemuś."
+  ]
+ },
+ "expression-173": {
+  "_src": "4cae4a4b",
+  "translation_pl": "bez względu na to, co; cokolwiek",
+  "example_pl": "Cokolwiek się stanie, zostanę z tobą.",
+  "notes_pl": [
+   "Także wer / wie / wo auch immer — ktokolwiek / jakkolwiek / gdziekolwiek. Nie mylić: was auch immer wieder … — co również raz po raz …"
+  ]
+ },
+ "expression-174": {
+  "_src": "d9380748",
+  "translation_pl": "(szczęśliwie) zakończyć, załatwić; w bezpiecznym miejscu",
+  "example_pl": "Do piątku dopniemy umowę.",
+  "notes_pl": [
+   "etwas unter Dach und Fach bringen — doprowadzić do końca; unter Dach und Fach sein — być załatwionym; (dosł.) pod dachem."
+  ]
+ },
+ "expression-175": {
+  "_src": "5b82d2ff",
+  "translation_pl": "zrealizować, wprowadzić w życie",
+  "example_pl": "Wreszcie zrealizowała swój plan.",
+  "notes_pl": [
+   "Nie mylić: in der Tat — rzeczywiście."
+  ]
+ },
+ "expression-176": {
+  "_src": "97e24ccd",
+  "translation_pl": "nadstawić uszu",
+  "example_pl": "Kiedy padło jego imię, nadstawił uszu."
+ },
+ "expression-177": {
+  "_src": "62b07f33",
+  "translation_pl": "(pot.) akurat!; jeszcze czego!",
+  "example_pl": "„Posprzątałeś, prawda?” — „Akurat!”",
+  "notes_pl": [
+   "Sprzeciw, niedowierzanie: Von wegen unfreiwillig! — Akurat, „nie z własnej woli”! Nie mylić: pot. von wegen der Kälte — z powodu zimna (= wegen)."
+  ]
+ },
+ "expression-178": {
+  "_src": "41047449",
+  "translation_pl": "zapalić się, zająć się ogniem; (przen.) zapalić się (do pomysłu), zakochać się",
+  "example_pl": "Zasłona zajęła się ogniem.",
+  "notes_pl": [
+   "Przen.: Er fing sofort Feuer für die Idee. — Od razu zapalił się do tego pomysłu."
+  ]
+ },
+ "expression-179": {
+  "_src": "705455a2",
+  "translation_pl": "zrobić wielkie oczy (ze zdziwienia)",
+  "example_pl": "Kiedy zobaczył prezent, zrobił wielkie oczy.",
+  "notes_pl": [
+   "Nie mylić: mit großen Augen ansehen — patrzeć szeroko otwartymi oczami."
+  ]
+ },
+ "expression-180": {
+  "_src": "e4ef27d6",
+  "translation_pl": "(pot.) zwiać, wziąć nogi za pas; dać drapaka",
+  "example_pl": "Kiedy pies zaszczekał, złodziej od razu wziął nogi za pas.",
+  "notes_pl": [
+   "Wyrażenie „rzeczownik + czasownik”, jak Platz nehmen: nimmt Reißaus, hat Reißaus genommen."
+  ]
+ },
+ "expression-181": {
+  "_src": "d2b691e3",
+  "translation_pl": "chować (zmarłego); (przen.) pogrzebać (nadzieję, plan)",
+  "example_pl": "Przyszło wielu przyjaciół, kiedy chowano starego nauczyciela.",
+  "notes_pl": [
+   "Książk. Przen.: eine Hoffnung, einen Plan zu Grabe tragen — pogrzebać nadzieję, plan."
+  ]
+ },
+ "expression-182": {
+  "_src": "14a8d8aa",
+  "translation_pl": "(pot.) zmyć (komuś) głowę, zbesztać",
+  "example_pl": "Szef zmył mu głowę przy wszystkich kolegach.",
+  "notes_pl": [
+   "Pot. Minna — dawne imię służącej: tak besztano służbę."
+  ]
+ },
+ "expression-183": {
+  "_src": "531a0343",
+  "translation_pl": "(pot.) łowić ryby w mętnej wodzie",
+  "example_pl": "W czasie takich kryzysów niektórzy handlowcy chętnie łowią ryby w mętnej wodzie.",
+  "notes_pl": [
+   "Czerpać korzyści z niejasnej sytuacji."
+  ]
+ },
+ "expression-184": {
+  "_src": "e2edf1fd",
+  "translation_pl": "przypilnować (czegoś), sprawdzić, czy wszystko jest w porządku",
+  "example_pl": "Możesz podczas urlopu czasem zajrzeć i sprawdzić, czy wszystko jest w porządku?",
+  "notes_pl": [
+   "Także nach dem Rechten schauen."
+  ]
+ },
+ "expression-185": {
+  "_src": "e53ced61",
+  "translation_pl": "być w złym stanie, zaniedbanym",
+  "example_pl": "W szkole jeszcze wiele kuleje.",
+  "notes_pl": [
+   "Także im Argen sein."
+  ]
+ },
+ "expression-186": {
+  "_src": "63921334",
+  "translation_pl": "być na bieżąco (z czymś); informować (kogoś) na bieżąco",
+  "example_pl": "Informuj mnie, proszę, na bieżąco!",
+  "notes_pl": [
+   "auf dem Laufenden sein / bleiben — być na bieżąco; jemanden auf dem Laufenden halten — informować na bieżąco."
+  ]
+ },
+ "expression-187": {
+  "_src": "5d183ad8",
+  "translation_pl": "(pot.) zastraszyć, zbić z tropu",
+  "example_pl": "Nie daj się zastraszyć jego groźbami!",
+  "notes_pl": [
+   "Częściej: sich nicht ins Bockshorn jagen lassen — nie dać się zastraszyć."
+  ]
+ },
+ "expression-188": {
+  "_src": "e38d693e",
+  "translation_pl": "(pot.) wyprowadzić (kogoś) z równowagi, doprowadzić do szału",
+  "example_pl": "Jego ciągłe spóźnienia doprowadzają mnie do szału.",
+  "notes_pl": [
+   "auf der Palme sein — być wściekłym."
+  ]
+ },
+ "expression-189": {
+  "_src": "72f32f5a",
+  "translation_pl": "(pot.) mieć po dziurki w nosie",
+  "example_pl": "Zaczynam mieć dość tego deszczu.",
+  "notes_pl": [
+   "Czego — von + Dat.: Ich habe die Nase voll von dir."
+  ]
+ },
+ "expression-190": {
+  "_src": "7e1e1428",
+  "translation_pl": "(pot.) chwalić się, przechwalać się",
+  "example_pl": "Przed meczem się przechwalał, a potem przegrał."
+ },
+ "expression-191": {
+  "_src": "655471e3",
+  "translation_pl": "(pot.) z biedą, ledwo ledwo",
+  "example_pl": "Ledwo ledwo zdał egzamin."
+ },
+ "expression-192": {
+  "_src": "d192be32",
+  "translation_pl": "pogrążyć (kogoś); kosztować głowę",
+  "example_pl": "Swoimi kłamstwami sam się pogrążył.",
+  "notes_pl": [
+   "Także sich um Kopf und Kragen reden — pogrążyć się własnymi słowami."
+  ]
+ },
+ "expression-193": {
+  "_src": "b154cf4b",
+  "translation_pl": "(pot.) zrobić porządek; postawić sprawę jasno, wyjaśnić wszystko (raz na zawsze)",
+  "example_pl": "Po kłótni chcieliśmy wreszcie wszystko sobie wyjaśnić.",
+  "notes_pl": [
+   "Z kimś / czymś — mit + Dativ: mit der Vergangenheit reinen Tisch machen."
+  ]
+ },
+ "expression-194": {
+  "_src": "2aac9df1",
+  "translation_pl": "oschle, szorstko, małomównie",
+  "example_pl": "Przez telefon była dziś dość oschła.",
+  "notes_pl": [
+   "Nie mylić: den Hund kurz anbinden — uwiązać psa na krótkiej smyczy."
+  ]
+ },
+ "expression-195": {
+  "_src": "fbdd45ac",
+  "translation_pl": "zawładnąć (kimś, czymś), całkowicie zająć",
+  "example_pl": "Dzieci od razu zawłaszczyły nową kanapę."
+ },
+ "expression-196": {
+  "_src": "90cb6d23",
+  "translation_pl": "owijać w bawełnę",
+  "example_pl": "Nie owijaj w bawełnę, po prostu powiedz, co się dzieje!"
+ },
+ "expression-197": {
+  "_src": "85bc3706",
+  "translation_pl": "puścić mimo uszu, zlekceważyć (radę, ostrzeżenie)",
+  "example_pl": "Puścił mimo uszu wszystkie ostrzeżenia."
+ },
+ "expression-198": {
+  "_src": "b6ca8c0a",
+  "translation_pl": "patrzeć przez palce, przymknąć oko (na coś)",
+  "example_pl": "Tym razem jeszcze przymknę na to oko.",
+  "notes_pl": [
+   "Także beide Augen zudrücken."
+  ]
+ },
+ "expression-199": {
+  "_src": "7f5c5b30",
+  "translation_pl": "rzucić (zajęcie, zawód), powiesić na kołku",
+  "example_pl": "W wieku czterdziestu lat rzucił pracę.",
+  "notes_pl": [
+   "Dosł. „powiesić na gwoździu”."
+  ]
+ },
+ "expression-200": {
+  "_src": "e80cc028",
+  "translation_pl": "położyć kres (czemuś), ukrócić",
+  "example_pl": "Musimy położyć kres tym bzdurom.",
+  "notes_pl": [
+   "Nie mylić: den Riegel vorschieben — zasunąć rygiel."
+  ]
+ },
+ "expression-201": {
+  "_src": "35edfcc3",
+  "translation_pl": "stanąć po (czyjejś) stronie",
+  "example_pl": "W kłótni od razu stanęła po stronie brata.",
+  "notes_pl": [
+   "Po czyjej stronie — für + Akk., przeciw komu — gegen."
+  ]
+ },
+ "expression-202": {
+  "_src": "51c89be4",
+  "translation_pl": "działać (komuś) na nerwy",
+  "example_pl": "To ciągłe dzwonienie działa mi na nerwy.",
+  "notes_pl": [
+   "Także auf die Nerven fallen."
+  ]
+ },
+ "expression-203": {
+  "_src": "bd0206dc",
+  "translation_pl": "(książk.) wyrzec się (czegoś), porzucić; wypuścić",
+  "example_pl": "Porzucił wszelką nadzieję.",
+  "notes_pl": [
+   "Nie mylić: jemanden nach Hause fahren lassen — puścić (kogoś) do domu; das Auto fahren lassen — dać poprowadzić samochód."
+  ]
+ },
+ "expression-204": {
+  "_src": "139099df",
+  "translation_pl": "łamać sobie głowę (nad czymś)",
+  "example_pl": "Od kilku dni łamię sobie głowę nad tym zadaniem.",
+  "notes_pl": [
+   "Nad czym — über + Akk. lub darüber, … (Er zerbrach sich den Kopf darüber, wie …). Lm: sie zerbrachen sich die Köpfe."
+  ]
+ },
+ "expression-205": {
+  "_src": "f911f27f",
+  "translation_pl": "zamierzać (coś zrobić); mieć właśnie (coś zrobić)",
+  "example_pl": "Właśnie mieliśmy wychodzić, kiedy zadzwonił telefon.",
+  "notes_pl": [
+   "Raczej w języku pisanym; także im Begriffe sein i im Begriff stehen. Nie mylić: im Begriff der Freiheit — w pojęciu wolności."
+  ]
+ },
+ "expression-206": {
+  "_src": "699c6975",
+  "translation_pl": "być jednomyślnym, zgadzać się (über + Akk / darin)",
+  "example_pl": "Po długiej dyskusji wszyscy byli zgodni, że uroczystość zostanie przełożona.",
+  "notes_pl": [
+   "Wir sind uns einig. — Jesteśmy zgodni. Die Experten sind sich nicht einig, ob … — Eksperci są podzieleni co do tego, czy …",
+   "Co do czego — über + Akk. lub darin: Wir sind uns über den Preis einig. Zaimek zwrotny — w Dativie (uns, euch, sich), zwykle o kilku osobach. Dojść do porozumienia — sich einig werden."
+  ]
+ },
+ "expression-207": {
+  "_src": "b8e52e6b",
+  "translation_pl": "porozumieć się, dojść do porozumienia",
+  "example_pl": "Po dwóch godzinach negocjacji kupujący i sprzedający wreszcie doszli do porozumienia.",
+  "notes_pl": [
+   "Die Parteien wurden sich schnell einig. — Strony szybko doszły do porozumienia. Co do czego — über + Akk.: Wir sind uns über den Preis einig geworden.",
+   "Zaimek zwrotny — w Dativie (uns, euch, sich). Być jednomyślnym — sich einig sein."
+  ]
+ },
+ "expression-208": {
+  "_src": "cd1f565a",
+  "translation_pl": "na podstawie, z powodu, ze względu na",
+  "example_pl": "Z powodu intensywnych opadów śniegu wstrzymano ruch lotniczy.",
+  "notes_pl": [
+   "Pisownia rozdzielna przyimka aufgrund (obie formy są poprawne). Z Genitivem (auf Grund der Lage) lub z von + Dativ (auf Grund von Fehlern).",
+   "Nie mylić: auf Grund laufen — osiąść na mieliźnie; einer Sache auf den Grund gehen — dotrzeć do sedna sprawy."
+  ]
+ },
+ "expression-209": {
+  "_src": "15a2e240",
+  "translation_pl": "do tego czasu; do tego momentu; do tego miejsca",
+  "example_pl": "Wybory są dopiero w marcu. Do tego czasu u władzy pozostaje stary rząd.",
+  "notes_pl": [
+   "O czasie — „do tego czasu, do tego momentu”: Bis dahin ist alles erledigt. O miejscu — „do tego miejsca”: Bis dahin sind es zehn Kilometer."
+  ]
+ },
+ "expression-210": {
+  "_src": "55ee27c9",
+  "translation_pl": "zależeć od czegoś; być ważnym (dla kogoś)",
+  "example_pl": "Przy pieczeniu najważniejsza jest właściwa temperatura.",
+  "notes_pl": [
+   "Das kommt darauf an. — Zależy jak; to zależy. Es kommt mir nicht darauf an. — Nie zależy mi na tym. worauf es ankommt — co jest ważne.",
+   "Nie mylić z ankommen „przybywać”: Wir kommen am Bahnhof an."
+  ]
+ },
+ "expression-211": {
+  "_src": "7cbc8d70",
+  "translation_pl": "utknąć; (przy mówieniu) zaciąć się",
+  "example_pl": "Nasz samochód utknął w śniegu.",
+  "notes_pl": [
+   "Pisze się rozdzielnie i łącznie: stecken bleiben / steckenbleiben. Es blieb mir im Halse stecken. — (Słowo) uwięzło mi w gardle."
+  ]
+ },
+ "expression-212": {
+  "_src": "5cef7012",
+  "translation_pl": "Co to ma znaczyć? Co to ma być? (z niezadowoleniem)",
+  "example_pl": "„Co to ma być?” — zapytała nauczycielka, widząc bałagan.",
+  "notes_pl": [
+   "Wyraża zdziwienie lub niezadowolenie: Was soll das heißen? — Co to ma znaczyć?"
+  ]
+ },
+ "expression-213": {
+  "_src": "99d2242e",
+  "translation_pl": "wyruszyć (w podróż), ruszyć w drogę",
+  "example_pl": "Po śniadaniu wyruszyliśmy w drogę.",
+  "notes_pl": [
+   "Podobnie: sich auf den Weg machen. Nie mylić z etw. auf die Beine stellen — zorganizować."
+  ]
+ },
+ "expression-214": {
+  "_src": "ff234c78",
+  "translation_pl": "zorganizować, uruchomić, rozkręcić (interes)",
+  "example_pl": "W ciągu zaledwie trzech tygodni uczniowie zorganizowali cały koncert.",
+  "notes_pl": [
+   "eine Ausstellung / ein Fest / ein Projekt auf die Beine stellen. Nie mylić z sich auf die Beine machen — wyruszyć.",
+   "jdn. (wieder) auf die Beine stellen — także postawić (kogoś) na nogi, wyleczyć."
+  ]
+ },
+ "expression-215": {
+  "_src": "14f61fc6",
+  "translation_pl": "pozbyć się kogoś / czegoś",
+  "example_pl": "Pod jakimś pretekstem pozbyła się natrętnego akwizytora.",
+  "notes_pl": [
+   "Zaimek zwrotny — w Dativie, kogo / co — Akkusativ. Podobnie: jdn. / etw. los sein, loswerden."
+  ]
+ },
+ "expression-216": {
+  "_src": "97caa32a",
+  "translation_pl": "planować, mieć na myśli, zamierzać; (mit … nichts im Sinn haben) nie interesować się",
+  "example_pl": "Nikt nie wiedział, co zamierza starzec.",
+  "notes_pl": [
+   "Nichts Gutes im Sinn haben — mieć złe zamiary. Nie mylić z im Sinne von / des … — w sensie, zgodnie z.",
+   "Mit jdm. / etw. nichts im Sinn haben — nie interesować się kimś / czymś, nie chcieć mieć z kimś / czymś do czynienia: Mit Politik hat er nichts im Sinn."
+  ]
+ },
+ "expression-217": {
+  "_src": "813b289d",
+  "translation_pl": "pozbyć się kogoś / czegoś (być wolnym od)",
+  "example_pl": "Wreszcie pozbyłem się dokuczliwego kaszlu.",
+  "notes_pl": [
+   "Kogo / co — w Akkusativie: Ich bin ihn los. Bez dopełnienia — los „coś się dzieje”: Was ist los? (to nie to wyrażenie).",
+   "Pot. o pieniądzach, rzeczach — stracić, zgubić: Jetzt bin ich 50 Euro los. — Teraz mam o 50 euro mniej."
+  ]
+ },
+ "expression-218": {
+  "_src": "21159399",
+  "translation_pl": "poradzić sobie (z kimś / czymś); skończyć (coś)",
+  "example_pl": "Najpierw musi sobie poradzić z tym rozczarowaniem.",
+  "notes_pl": [
+   "Bez mit — fertig werden „skończyć”: Ich werde bald fertig.",
+   "Także z damit (bezpośrednio przed fertig): Er wird damit fertig — „poradzi sobie z tym / skończy to”."
+  ]
+ },
+ "expression-219": {
+  "_src": "623d7022",
+  "translation_pl": "być uważnym, uważać (na), wystrzegać się",
+  "example_pl": "Dobrze pilnuj młodszej siostry!",
+  "notes_pl": [
+   "Pisze się rozdzielnie i łącznie: Acht geben / achtgeben. Podobnie: sich in Acht nehmen — wystrzegać się. Nie mylić z liczebnikiem acht."
+  ]
+ },
+ "expression-220": {
+  "_src": "3fcecab0",
+  "translation_pl": "wzruszyć, poruszyć; zmartwić (kogoś)",
+  "example_pl": "Historia małego pieska wzruszyła wszystkich.",
+  "notes_pl": [
+   "Kogo — Dativ. Podobnie: sich (D) etw. zu Herzen nehmen — wziąć sobie do serca."
+  ]
+ },
+ "expression-221": {
+  "_src": "35f4fdfd",
+  "translation_pl": "wziąć sobie (coś) do serca",
+  "example_pl": "Nie bierz sobie tej krytyki tak bardzo do serca!",
+  "notes_pl": [
+   "Zaimek zwrotny — w Dativie: Ich nehme es mir zu Herzen. Podobnie: jdm. zu Herzen gehen — wzruszyć."
+  ]
+ },
+ "expression-222": {
+  "_src": "a2b57e4f",
+  "translation_pl": "(nie) zdobyć się na coś, (nie) potrafić się zmusić",
+  "example_pl": "Nie miała serca oddać starego psa.",
+  "notes_pl": [
+   "Zwykle z przeczeniem: Ich bringe es nicht übers Herz. — Nie mam serca tego zrobić."
+  ]
+ },
+ "expression-223": {
+  "_src": "b2fe7ceb",
+  "translation_pl": "za nic, za żadne pieniądze",
+  "example_pl": "Za nic nie sprzedałbym swojego roweru.",
+  "notes_pl": [
+   "Przeciwieństwo: um jeden Preis — za wszelką cenę."
+  ]
+ },
+ "expression-224": {
+  "_src": "98601ccc",
+  "translation_pl": "na dobre i na złe; mimo wszystko, bez względu na trudności",
+  "example_pl": "Prawdziwi przyjaciele są z tobą na dobre i na złe.",
+  "notes_pl": [
+   "Pisze się małą literą: durch dick und dünn; zwykle mit jdm. durch dick und dünn gehen — być z kimś na dobre i na złe."
+  ]
+ },
+ "expression-225": {
+  "_src": "10336806",
+  "translation_pl": "z całych sił, ile sił",
+  "example_pl": "Dzieci biegły, ile sił w nogach, żeby jeszcze zdążyć na autobus.",
+  "notes_pl": [
+   "Czasownik zmienia czas: was das Zeug hält / hielt; u Grimmów — was das Zeug wollte halten."
+  ]
+ },
+ "expression-226": {
+  "_src": "bb54f343",
+  "translation_pl": "ktoś jest nie w humorze, coś go dotknęło (zdenerwowało)",
+  "example_pl": "Co się z tobą dzieje, jaka mucha cię ugryzła?",
+  "notes_pl": [
+   "Komu — w Dativie. Po polsku podobnie: jaka mucha cię ugryzła."
+  ]
+ },
+ "expression-227": {
+  "_src": "363e296a",
+  "translation_pl": "zmieniać poglądy jak chorągiewka na wietrze, dostosowywać się (do okoliczności)",
+  "example_pl": "Ten polityk zawsze zmienia poglądy jak chorągiewka na wietrze.",
+  "notes_pl": [
+   "Pejoratywnie. Warianty: den Mantel / das Mäntelchen nach dem Wind(e) hängen / drehen / kehren."
+  ]
+ },
+ "expression-228": {
+  "_src": "326b9d32",
+  "translation_pl": "gdzie diabeł mówi dobranoc, na odludziu",
+  "example_pl": "Mój wujek mieszka we wsi, gdzie diabeł mówi dobranoc.",
+  "notes_pl": [
+   "Żartobliwie o odludnym, odległym miejscu."
+  ]
+ },
+ "expression-229": {
+  "_src": "8d25f308",
+  "translation_pl": "przeszywać do szpiku kości, przyprawiać o dreszcze",
+  "example_pl": "Przeraźliwy krzyk przeszył mnie do szpiku kości.",
+  "notes_pl": [
+   "O dźwięku, zimnie, strachu: Die Kälte ging durch Mark und Bein. — Zimno przenikało do szpiku kości."
+  ]
+ },
+ "expression-230": {
+  "_src": "f8390a43",
+  "translation_pl": "chodzić krok w krok (za kimś); natychmiast nastąpić",
+  "example_pl": "Młodszy brat wszędzie chodził za nią krok w krok.",
+  "notes_pl": [
+   "O wydarzeniach — natychmiast nastąpić: Die Strafe folgte auf dem Fuße. U Grimmów: ihr immer auf dem Fuße nach."
+  ]
+ },
+ "expression-231": {
+  "_src": "849e2ad3",
+  "translation_pl": "z kimś będzie krucho, komuś się dostanie",
+  "example_pl": "Jeśli szef się o tym dowie, będzie z tobą krucho.",
+  "notes_pl": [
+   "Komu — w Dativie; często es → 's: geht dir's an den Kragen."
+  ]
+ },
+ "expression-232": {
+  "_src": "71769bdb",
+  "translation_pl": "nie przeszkadzać komuś, pozwolić komuś postępować po swojemu",
+  "example_pl": "Rodzice nie przeszkadzali synowi, kiedy chciał sam upiec ciasto.",
+  "notes_pl": [
+   "Bez lassen gewähren znaczy „udzielić, spełnić”: eine Bitte gewähren."
+  ]
+ },
+ "expression-233": {
+  "_src": "78eb21c4",
+  "translation_pl": "nie przywiązywać wagi; (nie) przepadać za czymś",
+  "example_pl": "Nie przepadam za słodyczami.",
+  "notes_pl": [
+   "Mach dir nichts draus! — Nie przejmuj się! Zaimek zwrotny stoi w Dativie."
+  ]
+ },
+ "expression-234": {
+  "_src": "c0a09577",
+  "translation_pl": "jak to się dzieje, że …? dlaczego …?",
+  "example_pl": "Jak to się stało, że jesteś dziś na nogach tak wcześnie?",
+  "notes_pl": [
+   "Potocznie: Wie kommt's? — Jak to?"
+  ]
+ },
+ "expression-235": {
+  "_src": "202e646e",
+  "translation_pl": "natychmiast, bez namysłu (o szybkiej odpowiedzi, reakcji)",
+  "example_pl": "Zapytana o ulubione jedzenie, mała odpowiedziała bez chwili namysłu: „Naleśniki!”",
+  "notes_pl": [
+   "Pot. Zwykle o odpowiedzi: antworten / sagen / kommen — wie aus der Pistole geschossen. Podobnie: sofort, ohne zu zögern."
+  ]
+ },
+ "expression-236": {
+  "_src": "22b46eef",
+  "translation_pl": "działać, odpowiadać pochopnie, z marszu, bez zastanowienia",
+  "example_pl": "W trudnych negocjacjach nie należy działać pochopnie.",
+  "notes_pl": [
+   "Pot. Często z wyrzutem: Er schießt gern aus der Hüfte. — Lubi działać bez zastanowienia. Dosłownie — strzelać z biodra, bez celowania."
+  ]
+ },
+ "expression-237": {
+  "_src": "b73bc0f1",
+  "translation_pl": "wysadzić (coś) w powietrze",
+  "example_pl": "Na końcu filmu gangsterzy wysadzają w powietrze cały most.",
+  "notes_pl": [
+   "Podobnie: sprengen. Także o sobie: sich in die Luft jagen — wysadzić się w powietrze. Dosłowne „podrzucić, wzlecieć w powietrze” (die Rakete jagte in die Luft) — to nie jest to wyrażenie."
+  ]
+ },
+ "expression-238": {
+  "_src": "3bdd79b0",
+  "translation_pl": "jedno po drugim, jedno goni drugie, nieprzerwanym ciągiem",
+  "example_pl": "W grudniu jedno spotkanie goni drugie i na odpoczynek prawie nie zostaje czasu.",
+  "notes_pl": [
+   "Także: einer jagt den anderen; z rzeczownikiem: ein Highlight jagt das nächste, ein Rekord jagt den nächsten. Duden: ein Gedanke jagt den anderen. Podobnie: die Ereignisse jagen sich."
+  ]
+ },
+ "expression-239": {
+  "_src": "feec444a",
+  "translation_pl": "w żaden sposób, w żadnym stopniu, wcale",
+  "example_pl": "Z wypadkiem nie miał absolutnie nic wspólnego.",
+  "notes_pl": [
+   "Pot., ekspr.: in keinster Weise (forma keinster jest niezgodna z normą, często używana żartobliwie). Podobnie: keineswegs, auf keinen Fall."
+  ]
+ },
+ "expression-240": {
+  "_src": "f6effc33",
+  "translation_pl": "położyć się spać",
+  "example_pl": "Po długiej wędrówce wszyscy wcześnie położyli się spać.",
+  "notes_pl": [
+   "schlafen — bezokolicznik celu przy legen: Ich lege mich schlafen. — Kładę się spać.",
+   "Bez sich: jemanden schlafen legen — położyć spać (dziecko).",
+   "Podobnie: schlafen gehen, ins Bett / zu Bett gehen, sich zu Bett legen; (pot.) sich aufs Ohr legen."
+  ]
+ },
+ "expression-241": {
+  "_src": "d57b9a05",
+  "translation_pl": "kamień filozoficzny; (podn.) rozwiązanie wszystkich zagadek i problemów",
+  "example_pl": "Wielu alchemików przez całe życie szukało kamienia filozoficznego.",
+  "notes_pl": [
+   "Weisen — Genitiv lm od der Weise „mędrzec”: „kamień mędrców” (nie die Weise „sposób”).",
+   "Harry Potter und der Stein der Weisen — „Harry Potter i Kamień Filozoficzny”.",
+   "Przen. (podn.): den Stein der Weisen gefunden haben — znaleźć rozwiązanie wszystkich problemów; często z przeczeniem: Das ist auch nicht der Stein der Weisen."
+  ]
+ },
+ "expression-242": {
+  "_src": "373ba1cb",
+  "translation_pl": "kochać (kogoś), być przywiązanym (do kogoś)",
+  "example_pl": "Babcia bardzo kochała swoje wnuki.",
+  "notes_pl": [
+   "Brzmi łagodniej niż lieben: o bliskich, dzieciach, przyjaciołach. Ich hab dich lieb! — Kocham cię! (do rodziny, przyjaciół). Pisze się też łącznie: liebhaben.",
+   "Nie mylić: Das ist lieb von dir. — To miło z twojej strony."
+  ]
+ },
+ "expression-243": {
+  "_src": "b2f0a97c",
+  "translation_pl": "z samego …, z czystego …; z powodu natłoku …",
+  "example_pl": "Dzieci z podekscytowania po prostu nie mogły zasnąć.",
+  "notes_pl": [
+   "lauter to tu nie „głośniej”, tylko „sam, wyłącznie” (nie odmienia się): vor lauter Freude — z radości, vor lauter Arbeit — przez masę pracy.",
+   "Powiedzenie: den Wald vor [lauter] Bäumen nicht sehen (żart.) — nie widzieć lasu spoza drzew."
+  ]
+ },
+ "expression-244": {
+  "_src": "67feffa2",
+  "translation_pl": "wyprawiać wesele; żenić się, wychodzić za mąż",
+  "example_pl": "Wiosną młody hrabia wziął ślub z córką młynarza.",
+  "notes_pl": [
+   "mit jemandem Hochzeit halten — ożenić się z kimś, wyjść za kogoś za mąż. Strona bierna: die Hochzeit ward (wurde) gehalten — wyprawiono wesele. Dziś zwykle: Hochzeit feiern, heiraten (Duden: halten 17 „stattfinden lassen, abhalten” — wann wollt ihr Hochzeit halten?, bez kwalifikatora)."
+  ]
+ },
+ "expression-245": {
+  "_src": "14eb9239",
+  "translation_pl": "już po kimś, (ktoś) przepadł; (ktoś) zakochał się bez pamięci",
+  "example_pl": "Kiedy most się zawalił, wędrowiec pomyślał: teraz już po mnie.",
+  "notes_pl": [
+   "Zwykle z ist's / es ist: Nun ist's um uns geschehen! — Teraz już po nas! Duden: 1) ktoś jest stracony, zrujnowany, bez szans; 2) ktoś beznadziejnie się zakochał: Als er sie sah, war es um ihn geschehen. Także o rzeczach: Da war es um seine Ruhe geschehen — i na tym skończył się jego spokój."
+  ]
+ },
+ "expression-246": {
+  "_src": "227c8c7d",
+  "translation_pl": "(przestarz.) znaleźć wyjście, zaradzić (czemuś)",
+  "example_pl": "Nie martw się, na twój problem już ja znajdę radę.",
+  "notes_pl": [
+   "für etwas Rat schaffen — znaleźć sposób na coś. Dziś: Abhilfe schaffen, einen Ausweg finden."
+  ]
+ },
+ "expression-247": {
+  "_src": "21353995",
+  "translation_pl": "(przestarz.) nie posiadać się (z radości itp.)",
+  "example_pl": "Kiedy syn wrócił do domu, matka nie posiadała się z radości.",
+  "notes_pl": [
+   "Zwykle z vor + Dat.: vor Freude, vor Angst, vor Zorn. Dziś: außer sich sein (vor Freude). W Dudenie tego wyrażenia nie ma (wissen 4: „in der Lage sein, etwas zu tun” + zu-Infinitiv — sich zu helfen wissen); występuje u Grimmów."
+  ]
+ },
+ "expression-248": {
+  "_src": "2657e403",
+  "translation_pl": "(przestarz.) urodzić, powić",
+  "example_pl": "Zimą młoda kobieta zległa i powiła syna.",
+  "notes_pl": [
+   "die Wochen — przestarz.: połóg (das Wochenbett): in den Wochen liegen — leżeć w połogu."
+  ]
+ },
+ "expression-249": {
+  "_src": "042ca97e",
+  "translation_pl": "(przestarz.) jeszcze do tego daleko, nie ma pośpiechu; nic nie szkodzi, jakoś to będzie",
+  "example_pl": "„Do zimy jeszcze daleko” — powiedział rolnik.",
+  "notes_pl": [
+   "Duden (Weg 2.2, veraltend): damit hat es / das hat noch gute Wege — „noch Zeit”. Znaczenie „nic nie szkodzi, jakoś to będzie” — z kontekstu u Grimmów: »Das hat gute Wege,« antwortete der Schneider, »kein Haar haben sie mir gekrümmt.« Dziś: das hat keine Eile, das hat Zeit."
+  ]
+ },
+ "expression-250": {
+  "_src": "26757438",
+  "translation_pl": "(książk.) ponad miarę, nadzwyczaj",
+  "example_pl": "Królewna była nadzwyczaj piękna.",
+  "notes_pl": [
+   "Także über alle Maßen. Zwykle przed przymiotnikiem: über die Maßen glücklich — niewymownie szczęśliwy. Dawna pisownia: über die Maaßen. Nie mylić: über die Massen — o masach."
+  ]
+ },
+ "expression-251": {
+  "_src": "0e22bd79",
+  "translation_pl": "od nowa, znowu",
+  "example_pl": "Po awarii prądu musieliśmy zacząć pracę od nowa.",
+  "notes_pl": [
+   "Pisze się też małą literą: von neuem (Duden: von Neuem oder neuem). Synonimy: aufs Neue, erneut, noch einmal, von vorn."
+  ]
+ },
+ "expression-252": {
+  "_src": "62b0bca8",
+  "translation_pl": "znowu, od nowa",
+  "example_pl": "Każdego ranka walka z budzikiem zaczyna się od nowa.",
+  "notes_pl": [
+   "W dawnej pisowni — aufs neue (tak u Grimmów). Często: immer wieder aufs Neue — raz za razem. Synonimy: von Neuem, erneut."
+  ]
+ },
+ "expression-253": {
+  "_src": "11361239",
+  "translation_pl": "(przestarz.) znowu, od nowa",
+  "example_pl": "Ledwie zrobiło się cicho, a wrzask zaczął się od nowa.",
+  "notes_pl": [
+   "Dziś: von Neuem, aufs Neue. W Dudenie tego wyrażenia nie ma (frisch 2.1 „erneuert”), występuje u Grimmów; kwalifikator jest nasz. Nie mylić: von frischem Brot — o świeżym chlebie (przymiotnik przed rzeczownikiem)."
+  ]
+ },
+ "expression-254": {
+  "_src": "6d5e8c48",
+  "translation_pl": "do odwołania, na razie",
+  "example_pl": "Biblioteka pozostaje zamknięta do odwołania.",
+  "notes_pl": [
+   "Poprawna jest też pisownia małą literą: bis auf weiteres (Duden: bis auf Weiteres oder weiteres). Nie mylić: bis auf weiteres Material — oprócz dodatkowego materiału (weiteres — przymiotnik)."
+  ]
+ },
+ "expression-255": {
+  "_src": "5e466e6a",
+  "translation_pl": "ponadto, dalej",
+  "example_pl": "Ponadto prosimy Państwa o punktualne przybycie.",
+  "notes_pl": [
+   "Pisze się też małą literą: des weiteren (dawna pisownia). Synonimy: außerdem, darüber hinaus, ferner; w Austrii i Szwajcarii — im Weiteren. Nie mylić: die Vergabe des weiteren Standortes — przydział kolejnej lokalizacji (weiteren — przymiotnik)."
+  ]
+ },
+ "expression-256": {
+  "_src": "81ad1b5b",
+  "translation_pl": "w szerokim znaczeniu",
+  "example_pl": "W szerokim znaczeniu do mediów należy także radio.",
+  "notes_pl": [
+   "Para: im engeren Sinne — w wąskim znaczeniu. Także im weitesten Sinne — w najszerszym znaczeniu. Tu weiteren — stopień wyższy od weit „szeroki”, a nie weitere „kolejny, dalszy”."
+  ]
+ },
+ "expression-257": {
+  "_src": "fc8fa3b2",
+  "translation_pl": "w wąskim znaczeniu",
+  "example_pl": "Wieloryb nie jest rybą w wąskim znaczeniu.",
+  "notes_pl": [
+   "Para: im weiteren Sinne — w szerokim znaczeniu. Także im engsten Sinne — w najwęższym znaczeniu."
+  ]
+ },
+ "expression-258": {
+  "_src": "43efeeaa",
+  "translation_pl": "w dalszej części, dalej (w tekście)",
+  "example_pl": "Metoda jest dokładniej opisana w dalszej części.",
+  "notes_pl": [
+   "Książk., w tekstach: wie im Weiteren dargestellt — jak pokazano dalej. Pisze się też małą literą: im weiteren. W Austrii i Szwajcarii także = des Weiteren: ponadto. Nie mylić: im weiteren Verlauf — w dalszym przebiegu (weiteren — przymiotnik, przed rzeczownikiem)."
+  ]
+ },
+ "expression-259": {
+  "_src": "56f74097",
+  "translation_pl": "(pot.) do zobaczenia, na razie",
+  "example_pl": "Spotykamy się o ósmej pod kinem. Do zobaczenia!",
+  "notes_pl": [
+   "Pożegnanie, gdy następne spotkanie jest już umówione lub milcząco zakładane. Bis dann also! Nie mylić: Bis dann ist alles erledigt. — Do tego czasu wszystko będzie gotowe (bis dann „do tego czasu”, w znaczeniu dosłownym)."
+  ]
+ },
+ "expression-260": {
+  "_src": "5856380e",
+  "translation_pl": "(pot.) do zobaczenia wkrótce, do zobaczenia niedługo",
+  "example_pl": "Dziękuję za piękny wieczór! Do zobaczenia wkrótce!",
+  "notes_pl": [
+   "Duden: bis bald!; auf bald! — potoczna formuła pożegnania. Termin nie jest określony: „kiedyś niedługo”."
+  ]
+ },
+ "expression-261": {
+  "_src": "73934814",
+  "translation_pl": "(pot.) do zobaczenia, do później",
+  "example_pl": "Idę na chwilę na zakupy. Do później!",
+  "notes_pl": [
+   "Zwykle — spotkanie tego samego dnia. Duden: bis nachher, bis später — potoczne formuły pożegnania. Bis später dann — to samo. Nie mylić: Das verschieben wir bis später. — Odłóżmy to na później (w znaczeniu dosłownym)."
+  ]
+ },
+ "expression-262": {
+  "_src": "e76792fd",
+  "translation_pl": "(pot.) do jutra",
+  "example_pl": "Na dziś kończymy. Do jutra!",
+  "notes_pl": [
+   "Także: Bis morgen früh! — do jutra rana; Bis morgen Abend! — do jutrzejszego wieczoru. Nie mylić: Die Ausstellung läuft bis morgen. — Wystawa trwa do jutra; Bis morgen soll alles fertig sein. — Do jutra wszystko ma być gotowe (w znaczeniu dosłownym).",
+   "W odpowiedzi na pytanie „do kiedy?” — zwykłe „do”: Bis wann bleibst du? — Bis morgen. (Tu hasło też się otworzy: po jednej części nie da się ich odróżnić.)"
+  ]
+ },
+ "expression-263": {
+  "_src": "b027c7c7",
+  "translation_pl": "z daleka",
+  "example_pl": "Wieżę kościoła widać już z daleka.",
+  "notes_pl": [
+   "Pisze się też małą literą: von weitem. Także aus der Ferne. Nie mylić: ein Mann von weitem Blick — człowiek o szerokich horyzontach (weitem — przymiotnik). Por. bei Weitem — znacznie, o wiele."
+  ]
+ },
+ "expression-264": {
+  "_src": "5e36d02a",
+  "translation_pl": "z największą przyjemnością, z całego serca",
+  "example_pl": "„Przyjdziesz jutro do nas?” — „Z największą przyjemnością!”",
+  "notes_pl": [
+   "Także von Herzen gerne. Wzmocnione gern: Das tue ich von Herzen gern. — Robię to z całego serca. Bez gern: von Herzen danken — serdecznie dziękować. jemanden von Herzen gern haben — bardzo kogoś lubić."
+  ]
+ },
+ "expression-265": {
+  "_src": "d1508091",
+  "translation_pl": "(przestarz., podn.) przybierać pozę, puszyć się",
+  "example_pl": "Młody skryba lubił przybierać pozę uczonego.",
+  "notes_pl": [
+   "Często z przymiotnikiem: sich ein vornehmes / gelehrtes Ansehen geben — przybierać wyniosłą / uczoną minę; sich das Ansehen geben, als ob … — udawać, że …; Ich gebe mir ein Ansehen (Dativ). Tutaj das Ansehen = wygląd, powierzchowność (przestarz.). Nie mylić: Ansehen genießen — cieszyć się szacunkiem; das Ansehen — autorytet, prestiż."
+  ]
+ },
+ "expression-266": {
+  "_src": "3d84ca38",
+  "translation_pl": "niezbyt, nie do końca, niespecjalnie",
+  "example_pl": "Pogoda nie była do końca idealna na wycieczkę.",
+  "notes_pl": [
+   "Złagodzone przeczenie, często z ironią: Er ist nicht gerade der Jüngste. — Nie jest już pierwszej młodości. Nie mylić: Er sitzt nicht gerade, sondern schief. — Nie siedzi prosto, tylko krzywo (gerade — prosto)."
+  ]
+ },
+ "expression-267": {
+  "_src": "ad93a86d",
+  "translation_pl": "tyle, ile; równoznaczny z (czymś), to samo co; (znaczyć) mniej więcej tyle co",
+  "example_pl": "Nazwa znaczy mniej więcej „mała rzeka”.",
+  "notes_pl": [
+   "Także soviel wie (dawna pisownia). Przykłady: Iss so viel, wie du willst. — Jedz, ile chcesz; so viel wie möglich — jak najwięcej; Das ist so viel wie eine Absage. — To jest równoznaczne z odmową."
+  ]
+ },
+ "expression-268": {
+  "_src": "e710ace9",
+  "translation_pl": "lubić, darzyć sympatią (kogoś, coś)",
+  "example_pl": "Bardzo lubię swoją młodszą siostrzyczkę.",
+  "notes_pl": [
+   "Brzmi łagodniej niż lieben: Ich hab dich gern. — Bardzo cię lubię / Kocham cię (po przyjacielsku). Grubiańsko: Du kannst mich gern haben! — Odczep się! / Spadaj! Nie mylić: Ich hätte gern einen Kaffee. — Chciałbym kawę; Ich habe das gern gemacht. — Zrobiłem to z przyjemnością (gern — przysłówek)."
+  ]
+ },
+ "expression-269": {
+  "_src": "f3a3a13a",
+  "translation_pl": "nie znosić, nie cierpieć (kogoś, czegoś)",
+  "example_pl": "Nie znoszę głośnej muzyki rano.",
+  "notes_pl": [
+   "W formie twierdzącej: jemanden gut leiden können / mögen — lubić kogoś. Także z mögen: Ich mag ihn nicht leiden."
+  ]
+ },
+ "expression-270": {
+  "_src": "7a0cb413",
+  "translation_pl": "zobaczyć, nawinąć się (komuś)",
+  "example_pl": "Nowego sąsiada jeszcze nigdy nie widziałem.",
+  "notes_pl": [
+   "Także pot. zu Gesicht kriegen. Por. jemandem zu Gesicht stehen — być komuś do twarzy."
+  ]
+ },
+ "expression-271": {
+  "_src": "2c2ea328",
+  "translation_pl": "ojej!; niestety!",
+  "example_pl": "Ojej, zapomniałem klucza!",
+  "notes_pl": [
+   "Także oh weh, ach weh, o je. Por. weh tun — boleć: Mir tut der Kopf weh."
+  ]
+ },
+ "expression-272": {
+  "_src": "9be36986",
+  "translation_pl": "tak nie można, tak być nie może, to niedopuszczalne",
+  "example_pl": "Nie może być tak, że codziennie się spóźniasz.",
+  "notes_pl": [
+   "Książk.; często ze zdaniem podrzędnym: Es geht nicht an, dass … / zu … Nie mylić z angehen „dotyczyć”: Das geht dich nichts an. — Nic ci do tego."
+  ]
+ },
+ "expression-273": {
+  "_src": "e1dd220e",
+  "translation_pl": "tak można, da się / tak nie można, nie da się",
+  "example_pl": "Jutro o ósmej? Tak, może być.",
+  "notes_pl": [
+   "Pytanie: Geht das? — Można tak? / Da się? Por. Wie geht es dir? — Jak się masz?; Das geht dich nichts an. — Nic ci do tego."
+  ]
+ },
+ "expression-274": {
+  "_src": "b39608fe",
+  "translation_pl": "jak się da, w miarę możliwości",
+  "example_pl": "Pomożemy ci, jak tylko możemy.",
+  "notes_pl": [
+   "Także so gut es ging (o przeszłości), so gut wie möglich."
+  ]
+ },
+ "expression-275": {
+  "_src": "8d3e515f",
+  "translation_pl": "(nie) zwracać uwagi (na kogoś, coś)",
+  "example_pl": "Kot nie zwracał uwagi na gości.",
+  "notes_pl": [
+   "Częściej z przeczeniem: keine Notiz nehmen von — nie zauważać, ignorować. Nie mylić: sich eine Notiz machen — zrobić notatkę."
+  ]
+ },
+ "expression-276": {
+  "_src": "2928b0c0",
+  "translation_pl": "oglądać, przyglądać się",
+  "example_pl": "Kupujący dokładnie obejrzał samochód.",
+  "notes_pl": [
+   "Książk. Por. dem Augenschein nach — najwyraźniej, na pierwszy rzut oka."
+  ]
+ },
+ "expression-277": {
+  "_src": "d62a19da",
+  "translation_pl": "(nic nie) znaczyć",
+  "example_pl": "Nie martw się, to nic nie znaczy.",
+  "notes_pl": [
+   "Pytanie: Was hat das zu bedeuten? — Co to ma znaczyć?"
+  ]
+ },
+ "expression-278": {
+  "_src": "235f152e",
+  "translation_pl": "nie mieć (większego) znaczenia; (o człowieku) nie mieć prawa głosu",
+  "example_pl": "Mała rysa nie ma żadnego znaczenia.",
+  "notes_pl": [
+   "W formie twierdzącej — etwas, viel zu sagen haben: mieć znaczenie; rządzić, decydować: Hier habe ich das Sagen. Nie mylić z dosłownym „nie mieć nic do powiedzenia”: Dazu habe ich nichts zu sagen."
+  ]
+ },
+ "expression-279": {
+  "_src": "32f7494b",
+  "translation_pl": "jak tam (z …)?, co z (…)?",
+  "example_pl": "Jak tam z twoim egzaminem?",
+  "notes_pl": [
+   "Także wie steht es (um …)? — jak się mają sprawy (z …)? Pot.: wie steht's, kommst du mit? — no to co, idziesz?"
+  ]
+ },
+ "expression-280": {
+  "_src": "edb4c205",
+  "translation_pl": "prędzej czy później",
+  "example_pl": "Prędzej czy później dowie się prawdy.",
+  "notes_pl": [
+   "Synonim: früher oder später."
+  ]
+ },
+ "expression-281": {
+  "_src": "0c6a883c",
+  "translation_pl": "cokolwiek się stanie",
+  "example_pl": "Cokolwiek się stanie, zostanę z tobą.",
+  "notes_pl": [
+   "Także was auch immer passiert, komme, was (da) wolle."
+  ]
+ },
+ "expression-282": {
+  "_src": "2d82b9fd",
+  "translation_pl": "wygadać się, wyrzucić coś z siebie",
+  "example_pl": "Po kłótni musiała wszystko z siebie wyrzucić.",
+  "notes_pl": [
+   "Zaimek zwrotny — w Dativie: ich rede mir, du redest dir … etwas von der Seele. Zamiast etwas — alles, das, seinen Kummer lub zdanie podrzędne (was …). Por. sich etwas von der Seele schreiben — wylać z siebie żale w liście."
+  ]
+ },
+ "expression-283": {
+  "_src": "b02fd2f1",
+  "translation_pl": "wylać z siebie żale (w liście, na papierze)",
+  "example_pl": "W pamiętniku wylała na papier całą swoją złość.",
+  "notes_pl": [
+   "Zaimek zwrotny — w Dativie. Por. sich etwas von der Seele reden — wygadać się."
+  ]
+ },
+ "expression-284": {
+  "_src": "2571c63b",
+  "translation_pl": "i tak dalej",
+  "example_pl": "W walizce były koszule, spodnie, skarpetki i tak dalej.",
+  "notes_pl": [
+   "Skrót — usw. Por. und so fort (usf.) — to samo, bardziej książkowo."
+  ]
+ },
+ "expression-285": {
+  "_src": "10bf2deb",
+  "translation_pl": "i tak dalej",
+  "example_pl": "Liczył dni: poniedziałek, wtorek, środa i tak dalej.",
+  "notes_pl": [
+   "Skrót — usf. Częściej mówi się und so weiter (usw.)."
+  ]
+ },
+ "expression-286": {
+  "_src": "40e43825",
+  "translation_pl": "czas, (najwyższy) czas",
+  "example_pl": "Najwyższy czas, żebyśmy ruszali.",
+  "notes_pl": [
+   "Także es wird Zeit — pora: Es wird Zeit, nach Hause zu gehen. Nie mylić: Es ist Zeit genug — jest dość czasu."
+  ]
+ },
+ "expression-287": {
+  "_src": "6f9729a0",
+  "translation_pl": "być gotowym; nadejść (o chwili)",
+  "example_pl": "Jesteś gotowy? Musimy iść.",
+  "notes_pl": [
+   "Es ist so weit — nadeszła ta chwila, pora. Pisze się też soweit. Nie mylić: so weit entfernt — tak daleko."
+  ]
+ },
+ "expression-288": {
+  "_src": "32b63f38",
+  "translation_pl": "za nic (na świecie)",
+  "example_pl": "Za nic na świecie nie chciałbym / chciałabym jeszcze raz tam pojechać.",
+  "notes_pl": [
+   "Także um nichts in der Welt — za nic na świecie. W pytaniu: Was um alles in der Welt …? — co, na litość boską …? Nie mylić: Es geht um alles — wszystko jest na szali."
+  ]
+ },
+ "expression-289": {
+  "_src": "d0df67c8",
+  "translation_pl": "nie mieć nic wspólnego (z kimś, czymś); (hier) nie mieć czego szukać (tutaj)",
+  "example_pl": "Z tą sprawą nie mam nic wspólnego.",
+  "notes_pl": [
+   "Du hast hier nichts zu schaffen — nie masz tu czego szukać. Nie mylić: jemandem zu schaffen machen — dawać się komuś we znaki: Die Hitze macht mir zu schaffen."
+  ]
+ },
+ "expression-290": {
+  "_src": "8da83367",
+  "translation_pl": "być w dobrych stosunkach (z kimś)",
+  "example_pl": "Jest w dobrych stosunkach ze swoim szefem.",
+  "notes_pl": [
+   "Także sich mit jemandem gut stellen — ułożyć sobie z kimś dobre stosunki. Nie mylić: Es steht gut mit ihm / um ihn — dobrze mu się wiedzie."
+  ]
+ },
+ "expression-291": {
+  "_src": "18e71e34",
+  "translation_pl": "stan rzeczy",
+  "example_pl": "Przy obecnym stanie rzeczy wyjazd zostaje odwołany.",
+  "notes_pl": [
+   "Także der neueste Stand der Dinge."
+  ]
+ },
+ "expression-292": {
+  "_src": "943c3c12",
+  "translation_pl": "pomyśleć / powiedzieć sobie w duchu",
+  "example_pl": "„To nie może być prawda” — pomyślał w duchu.",
+  "notes_pl": [
+   "Nie mylić: etwas bei sich haben — mieć coś przy sobie: Er hatte kein Geld bei sich."
+  ]
+ },
+ "expression-293": {
+  "_src": "181ffe33",
+  "translation_pl": "w duchu, półgłosem (do siebie)",
+  "example_pl": "„Gdzie ja mam okulary?” — mruczała babcia pod nosem.",
+  "notes_pl": [
+   "Tylko z czasownikami mówienia i myślenia (sagen, sprechen, murmeln, denken). W innych użyciach für sich — „dla siebie”, „osobno”: für sich (allein) wohnen, für sich selbst sorgen; an und für sich — właściwie. Dziś częściej vor sich hin murmeln — mruczeć pod nosem."
+  ]
+ },
+ "expression-294": {
+  "_src": "b88af5ba",
+  "translation_pl": "nie posiadać się (z czegoś)",
+  "example_pl": "Kiedy usłyszał wiadomość, nie posiadał się z radości.",
+  "notes_pl": [
+   "Także außer sich geraten — stracić panowanie nad sobą. Zaimek zwrotny — w Dativie: Ich war außer mir."
+  ]
+ },
+ "expression-295": {
+  "_src": "4153960f",
+  "translation_pl": "od czasu do czasu",
+  "example_pl": "Od czasu do czasu dzwoni do rodziców."
+ },
+ "expression-296": {
+  "_src": "92ac4986",
+  "translation_pl": "dzień po dniu; z każdym dniem",
+  "example_pl": "Pogoda z każdym dniem jest coraz lepsza."
+ },
+ "expression-297": {
+  "_src": "371012e0",
+  "translation_pl": "od niepamiętnych czasów, od zawsze",
+  "example_pl": "Tak było od zawsze.",
+  "notes_pl": [
+   "Częściej seit jeher."
+  ]
+ },
+ "expression-298": {
+  "_src": "a3ff8638",
+  "translation_pl": "w końcu, ostatecznie",
+  "example_pl": "Koniec końców miał jednak rację.",
+  "notes_pl": [
+   "am Ende noch — gotów jeszcze: Er wirft mich am Ende noch hinaus. Nie mylić z miejscem: am Ende des Tisches — na końcu stołu; am Ende sein — być u kresu sił."
+  ]
+ },
+ "expression-299": {
+  "_src": "81947039",
+  "translation_pl": "zadać pytanie",
+  "example_pl": "Czy mogę zadać Panu pytanie?",
+  "notes_pl": [
+   "Nie mylić: etwas in Frage stellen — podawać w wątpliwość; es stellt sich die Frage — nasuwa się pytanie."
+  ]
+ },
+ "expression-300": {
+  "_src": "2a233003",
+  "translation_pl": "nabrać odwagi, zebrać się na odwagę",
+  "example_pl": "Wreszcie zebrała się na odwagę i odezwała się do niego."
+ },
+ "expression-301": {
+  "_src": "df27aaa5",
+  "translation_pl": "wpaść na myśl; (einen klaren Gedanken fassen) jasno myśleć",
+  "example_pl": "Ze zmęczenia nie mógł już jasno myśleć.",
+  "notes_pl": [
+   "Także einen Entschluss fassen — podjąć decyzję."
+  ]
+ },
+ "expression-302": {
+  "_src": "95987b61",
+  "translation_pl": "przyjąć, odebrać",
+  "example_pl": "Odebrała paczkę w drzwiach."
+ },
+ "expression-303": {
+  "_src": "96b01192",
+  "translation_pl": "położyć kres (czemuś)",
+  "example_pl": "Rząd chce położyć kres sporowi.",
+  "notes_pl": [
+   "Także ein Ende setzen / bereiten. Por. zu Ende sein — skończyć się."
+  ]
+ },
+ "expression-304": {
+  "_src": "861f9b19",
+  "translation_pl": "odpowiedzieć, powiedzieć w odpowiedzi",
+  "example_pl": "Na moje pytanie odpowiedział tylko uśmiechem."
+ },
+ "expression-305": {
+  "_src": "986a195a",
+  "translation_pl": "zrobić bałagan, zaburzyć",
+  "example_pl": "Dzieci zrobiły bałagan w całym pokoju.",
+  "notes_pl": [
+   "Także in Unordnung geraten — popaść w nieład."
+  ]
+ },
+ "expression-306": {
+  "_src": "bf459396",
+  "translation_pl": "zrobić (coś), żeby zadowolić (kogoś)",
+  "example_pl": "Zrobiła to tylko po to, żeby zadowolić matkę.",
+  "notes_pl": [
+   "Także jemandem zu Gefallen — żeby zadowolić kogoś. Nie mylić: jemandem einen Gefallen tun — wyświadczyć przysługę."
+  ]
+ },
+ "expression-307": {
+  "_src": "50d5b3a8",
+  "translation_pl": "zrzucić winę (na kogoś)",
+  "example_pl": "Zawsze zrzuca winę na brata."
+ },
+ "expression-308": {
+  "_src": "c7135b93",
+  "translation_pl": "być następnym; (czyjaś) kolej",
+  "example_pl": "Zaczekaj, zaraz twoja kolej.",
+  "notes_pl": [
+   "Pot. dran sein. Por. an die Reihe kommen — przyjść kolej (na kogoś)."
+  ]
+ },
+ "expression-309": {
+  "_src": "91586894",
+  "translation_pl": "być wartym zachodu",
+  "example_pl": "Długa droga była warta zachodu.",
+  "notes_pl": [
+   "Częściej die Mühe wert sein."
+  ]
+ },
+ "expression-310": {
+  "_src": "2aea3357",
+  "translation_pl": "robić dobrą minę do złej gry",
+  "example_pl": "Była rozczarowana, ale robiła dobrą minę do złej gry."
+ },
+ "expression-311": {
+  "_src": "c37ae64e",
+  "translation_pl": "mieć miejsce, tak być",
+  "example_pl": "Jeśli tak nie jest, zadzwonię do ciebie.",
+  "notes_pl": [
+   "Nie mylić: der Fall — upadek; sprawa (praw.), przypadek: Der Fall ist abgeschlossen."
+  ]
+ },
+ "expression-312": {
+  "_src": "38e3097f",
+  "translation_pl": "wpisać do protokołu; (geben) oświadczyć (do protokołu)",
+  "example_pl": "Policja wpisała jego zeznania do protokołu."
+ },
+ "expression-313": {
+  "_src": "9be53da0",
+  "translation_pl": "ręka w rękę",
+  "example_pl": "Oboje szli ręka w rękę przez park."
+ },
+ "expression-314": {
+  "_src": "02085a9f",
+  "translation_pl": "pod rękę",
+  "example_pl": "Starzy przyjaciele spacerowali pod rękę wzdłuż brzegu."
+ },
+ "expression-315": {
+  "_src": "408ec150",
+  "translation_pl": "na całym świecie, wszędzie; (w pytaniach) … u licha, … na litość boską",
+  "example_pl": "Co ty tam, u licha, zrobiłeś?",
+  "notes_pl": [
+   "Nie mylić: in alle Welt — po całym świecie."
+  ]
+ },
+ "expression-316": {
+  "_src": "598ca1ac",
+  "translation_pl": "ani trochę, wcale",
+  "example_pl": "To mnie ani trochę nie interesuje.",
+  "notes_pl": [
+   "Także nicht im Mindesten."
+  ]
+ },
+ "expression-317": {
+  "_src": "a489525c",
+  "translation_pl": "(nie mieć) najmniejszego pojęcia",
+  "example_pl": "Nie mam najmniejszego pojęcia, gdzie mieszka.",
+  "notes_pl": [
+   "Także keine (blasse) Ahnung, nicht die geringste Ahnung."
+  ]
+ },
+ "expression-318": {
+  "_src": "208afbd2",
+  "translation_pl": "(nic) poza, jedynie",
+  "example_pl": "To nic innego jak nieporozumienie.",
+  "notes_pl": [
+   "Także weiter nichts als."
+  ]
+ },
+ "expression-319": {
+  "_src": "da9f7077",
+  "translation_pl": "z wielkim trudem, ledwo",
+  "example_pl": "Ledwo zdążyliśmy na pociąg."
+ },
+ "expression-320": {
+  "_src": "0ec0be30",
+  "translation_pl": "tak samo (dobrze); równie dobrze",
+  "example_pl": "Równie dobrze moglibyśmy zostać w domu."
+ },
+ "expression-321": {
+  "_src": "79bcff5e",
+  "translation_pl": "jak już powiedziano, jak mówiłem",
+  "example_pl": "Jak już mówiłem, jutro przyjdę trochę później."
+ },
+ "expression-322": {
+  "_src": "6f192903",
+  "translation_pl": "ogólnie; (w sumie) łącznie; w całości",
+  "example_pl": "Ogólnie biorąc, był to piękny urlop.",
+  "notes_pl": [
+   "Por. im Großen und Ganzen — ogólnie rzecz biorąc."
+  ]
+ },
+ "expression-323": {
+  "_src": "db23f52f",
+  "translation_pl": "jeśli chodzi o (kogoś, coś)",
+  "example_pl": "Jeśli chodzi o jedzenie, wszystko było doskonałe.",
+  "notes_pl": [
+   "Także was … anbetrifft, was … angeht."
+  ]
+ },
+ "expression-324": {
+  "_src": "246bf202",
+  "translation_pl": "niechcący, przez pomyłkę",
+  "example_pl": "Niechcący wziąłem twoją filiżankę."
+ },
+ "expression-325": {
+  "_src": "7cc267eb",
+  "translation_pl": "na przykład",
+  "example_pl": "Wiele zwierząt, na przykład niedźwiedzie, zapada w sen zimowy.",
+  "notes_pl": [
+   "Skrót — z. B."
+  ]
+ },
+ "expression-326": {
+  "_src": "e5b26372",
+  "translation_pl": "żegnaj(cie)!",
+  "example_pl": "Żegnaj, chyba nigdy więcej się nie zobaczymy.",
+  "notes_pl": [
+   "Forma grzecznościowa: Leben Sie wohl! Książk., przy długim lub ostatecznym rozstaniu."
+  ]
+ },
+ "expression-327": {
+  "_src": "c82e028b",
+  "translation_pl": "dobrze już, wystarczy!; nic nie szkodzi, wszystko w porządku",
+  "example_pl": "„Przepraszam!” — „W porządku, nic się nie stało”."
+ },
+ "expression-328": {
+  "_src": "4429e443",
+  "translation_pl": "e tam!, też coś!",
+  "example_pl": "„Boisz się?” — „E tam! Ja na pewno nie”."
+ },
+ "expression-329": {
+  "_src": "da53b1ab",
+  "translation_pl": "która godzina?",
+  "example_pl": "Przepraszam, która jest godzina?",
+  "notes_pl": [
+   "Także Wie spät ist es?"
+  ]
+ },
+ "expression-330": {
+  "_src": "066d2675",
+  "translation_pl": "bądź tak dobry / dobra (i …)!",
+  "example_pl": "Bądź tak dobry i zamknij okno.",
+  "notes_pl": [
+   "Forma grzecznościowa: Seien Sie so gut … Nie mylić: Sei gut zu ihr! — Bądź dla niej dobry!"
+  ]
+ },
+ "expression-331": {
+  "_src": "c3581288",
+  "translation_pl": "mieć dość (czegoś), mieć (czegoś) powyżej uszu",
+  "example_pl": "Mam dość ciągłego czekania na ciebie.",
+  "notes_pl": [
+   "Co — w Akkusativie: Ich habe die ewigen Ausreden satt. Z sein — zwykle z es: Ich bin es satt. Bez dopełnienia — satt sein „być sytym”: Ich bin satt (to nie to wyrażenie).",
+   "Pisze się też łącznie: satthaben. Por. sich satt essen — najeść się do syta; etw. satt bekommen / kriegen — przesycić się (czymś). Pot. Sonne / Geld satt — pod dostatkiem, w obfitości (to nie to wyrażenie)."
+  ]
+ },
+ "expression-332": {
+  "_src": "7b032838",
+  "translation_pl": "jak ulał (leżeć); w sam raz (pasować)",
+  "example_pl": "Nowy garnitur leży jak ulał.",
+  "notes_pl": [
+   "Zwykle o ubraniach, butach: Die Schuhe passen wie angegossen. — Buty pasują jak ulał. Także z sein: Das Kleid war wie angegossen. — Sukienka była jak ulał.",
+   "Bez wie — imiesłów czasownika angießen „podlać”: Er hat die Blumen angegossen. — Podlał kwiaty."
+  ]
+ }
+}

@@ -32,8 +32,8 @@
   function pick(v) { return window.DeutschTranslation ? window.DeutschTranslation.pick(v) : (v && (v.ru || v.en)) || ""; }
   function lang() { return window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en"; }
   /* the Russian hint of a particle (c.hint): shown in Russian; a language pack may give its own
-     (exercises/partikeln__hints.json, keyed by the Russian text, 17.11.2026); English has none */
-  function hintOf(h) { return !h ? "" : window.DeutschTranslation ? window.DeutschTranslation.t("", h) : (lang() === "ru" ? h : ""); }
+     (exercises/partikeln__hints.json, keyed by the Russian text, or by text + particle k when one text stands at several particles, 17.11.2026); English has none */
+  function hintOf(h, k) { var D = window.DeutschTranslation; return !h ? "" : D ? (D.tAt ? D.tAt(k, "", h) : D.t("", h)) : (lang() === "ru" ? h : ""); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   /* ---------- data helpers ---------- */
@@ -161,7 +161,7 @@
     if (!c) { fn.textContent = "Ohne Partikel"; fn.className = "fn dim"; hint.textContent = ""; $("note").textContent = window.DeutschTranslation ? window.DeutschTranslation.table(TXT.start) : TXT.start[L] || TXT.start.en; }
     else if (ok) {
       var f = FUNCTIONS[c.fn]; fn.textContent = f ? pick(f.label) : c.fn; fn.className = "fn";
-      hint.textContent = hintOf(c.hint);
+      hint.textContent = hintOf(c.hint, k);
       $("note").textContent = pick(c.note);
     } else {
       fn.textContent = c.status === "odd" ? "Klingt seltsam" : "Passt hier nicht"; fn.className = "fn dim";
