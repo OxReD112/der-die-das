@@ -78,7 +78,7 @@
   const provenSense = c => Number.isInteger(c?.senseFirst) || Number.isInteger(c?.senseFirstEn) ||
     Array.isArray(c?.sensesFirst) && c.sensesFirst.length > 0 || Array.isArray(c?.sensesFirstEn) && c.sensesFirstEn.length > 0;
   const packText = (c, language) => !!c && !provenSense(c) && !!(String(c.translation?.[language] || '').trim() ||
-    c.reflexiveMarks?.[language] || String(c.item?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
+    c.reflexiveMarks?.[language] || String(c.packItem?.[language]?.reflexive?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
   // the language a card is built in: a pack language only when this candidate has a text in it
   const cardLanguage = (candidate, value) => { const language = textLanguage(value);
     return isPack(language) && !packText(candidate, language) ? 'en' : language; };
@@ -239,6 +239,9 @@
   function brief(candidate, language, inline = false) {
     // inline: a text shown without label segments (der/die pair) keeps the source gloss with its inline label
     if (isPack(language) && provenSense(candidate)) return '';
+    // (lassen + infinitive: the card's senses are reordered by their Russian / English wording — a pack text cannot be; the English
+    // card, as for a proven sense — review B Ч2б 17.11)
+    if (isPack(language) && candidate.construction?.id === 'lassen-infinitive' && norm(candidate.lemma) === 'lassen' && pos(candidate) === 'Verb') return '';
     if (!inline && isExternal(candidate) && candidate.meaningLabels?.[language] && !Number.isInteger(candidate.senseFirst) && !(language === 'en' && Number.isInteger(candidate.senseFirstEn)) &&
         candidate.construction?.id !== 'lassen-infinitive' && !/^gerund of /i.test(String(candidate.translation?.[language] || '').trim()))
       return labelledParts(candidate, language).slice(0, shownCount(Infinity)).map(row => row.text).join('; ');
@@ -280,8 +283,10 @@
     gehoben:{id:'literary', ru:'книжн.', ruFull:'книжное', en:'formal', enFull:'formal'}};
   function extraMeanings(candidate, language) {
     if (!ALL || !ownCard(candidate) || !Array.isArray(candidate.item.extra_meanings)) return [];
-    return candidate.item.extra_meanings.map(m => {
-      const text = String(m?.[language] || '').trim(), label = EXTRA_REGISTER[m?.register], ui = language === 'ru' ? 'ru' : 'en';
+    // (a pack language: the old meanings' texts of the pack — candidate.packItem, pack-translations.js; the register stays the card's)
+    const packed = isPack(language) ? candidate.packItem?.[language]?.extra_meanings : null;
+    return candidate.item.extra_meanings.map((m, i) => {
+      const text = String((isPack(language) ? packed?.[i]?.[language] : m?.[language]) || '').trim(), label = EXTRA_REGISTER[m?.register], ui = language === 'ru' ? 'ru' : 'en';
       return text ? {labels:label ? [{short:label[ui], full:label[`${ui}Full`], id:label.id}] : [], text} : null;
     }).filter(Boolean);
   }
@@ -1082,7 +1087,10 @@
     const pair = candidate.genderPair;
     if (pair) {
       headingText = `${pair.articles} ${candidate.lemma}`;
-      const parts = [meaningText(candidate, language, true), meaningText({...candidate, translation:pair.translation, item:null}, language, true)].filter(Boolean);
+      let parts = [meaningText(candidate, language, true), meaningText({...candidate, translation:pair.translation, item:null}, language, true)].filter(Boolean);
+      // (a pack language: both genders in one language — the pair's other card has no pack text here, so both in English; review A Ч2б)
+      if (isPack(language) && new Set(parts.map(p => p.language)).size > 1)
+        parts = [meaningText(candidate, 'en', true), meaningText({...candidate, translation:pair.translation, item:null}, 'en', true)].filter(Boolean);
       if (parts.length) { text = {text:[...new Set(parts.map(p => p.text))].join(' / '), language:parts[0].language}; more = parts.reduce((sum, p) => sum + (p.more || 0), 0); }
     }
     // A2 (reference 4.9 / 5.5): an established verb + preposition pair.
@@ -1132,7 +1140,8 @@
         spans:k.spans || null, helpEntry:null};
     }
     const derived = !!text;
-    if (!text && k.role) text = {text:say(ROLE_TEXT[k.role], language), language};
+    // (a phrase in English for a pack language is marked English — review A Ч2б)
+    if (!text && k.role) text = {text:say(ROLE_TEXT[k.role], language), language:isPack(language) && !ROLE_TEXT[k.role]?.[language] ? 'en' : language};
     if (!text && !contraction?.expression) { text = meaningText(candidate, language); more = text?.more || 0; }
     // (advisor 17.11: the gerundive — «здесь: (который) надо / можно — …» before the meaning; the card's text is not declined)
     if (features?.zuGerundive && text?.text) text = {...text, text:`${language === 'ru' ? 'здесь: (который) надо / можно' : 'here: to be done / can be done'} — ${text.text}`};
@@ -1248,12 +1257,15 @@
     if (k.freeDative && !dativeField) return {...result, heading:lemma, grammar:result.grammar.split(' · ').map(m => m.replace(` mit sich ${lemma}`, ` mit ${lemma}`)).join(' · ')};
     const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !k.objectGroup ? ownItem?.reflexive : null;
     // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
-    // (a pack language without the field's text in it: the English one, as an English card)
-    const fieldLanguage = isPack(language) && !String(field?.[`translation_${language}`] || '').trim() ? 'en' : language;
-    const fieldFit = fit(String(field?.[`translation_${fieldLanguage}`] || ''));
+    // (a pack language: the field's text of the pack when the field is this card's own — candidate.packItem, Ч2б; otherwise the English
+    // one, as an English card)
+    const packField = isPack(language) && field && ownItem === candidate.item ? candidate.packItem?.[language]?.reflexive : null;
+    const fieldLanguage = isPack(language) && !String(packField?.[`translation_${language}`] || '').trim() ? 'en' : language;
+    const fieldSource = fieldLanguage === language && isPack(language) ? packField : field;
+    const fieldFit = fit(String(fieldSource?.[`translation_${fieldLanguage}`] || ''));
     if (fieldFit.text) {
       const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
-      const note = String(field[`note_${fieldLanguage}`] || '').trim();
+      const note = String(fieldSource[`note_${fieldLanguage}`] || '').trim();
       return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:fieldLanguage, missing:false, derived:true, note, more:fieldFit.rest};
     }
     // (advisor + user 06.11, SICH_X_NO_TRANSLATION: no meaning of «sich X» in the interface language — the plain verb's own line,

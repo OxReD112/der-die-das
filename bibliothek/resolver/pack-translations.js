@@ -150,8 +150,83 @@
     }
     return null;
   }
+  // Our own cards in a pack language (Ч2б, 17.11.2026): lang/<code>/worterbuch/german-*.json — {id: {translation_<code>, example_<code>,
+  // extra_meanings: [{<code>, …}], reflexive: {translation_<code>, note_<code>, …}, form_translations: [{<code>}], collective: {<code>}, …}}
+  // (the files listed in lang/<code>/manifest.json `files`, under its `version`), read once per language. The card's own object is
+  // not changed: its pack texts go to candidate.packItem (meaning-display.js reads them), its main text to translation[code] — only
+  // when the candidate's text is the card's own (translation.en = translation_en of the card); a text the resolver chose for this
+  // place (a sense, a form) stays English. A pack without them (not downloaded, an older pack): the card stays English.
+  const owns = new Map(), ownFailedAt = new Map(), ownStarted = new Map(), ownMissing = new Map();
+  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective"];
+  // one card file: {id: fields} with only the fields the popup reads, into map; false when it could not be read
+  function readOwnFile(code, file, version, map) {
+    return dataFetch(new URL(`../../lang/${code}/${file}${version ? `?v=${encodeURIComponent(version)}` : ""}`, script))
+      .then(r => { if (!r.ok) throw new Error("Pack card texts unavailable"); return r.json(); })
+      .then(part => { if (!part || typeof part !== "object" || Array.isArray(part)) return false;
+        for (const [id, fields] of Object.entries(part))
+          if (fields && typeof fields === "object") map.set(id, Object.fromEntries(KEEP(code).filter(k => k in fields).map(k => [k, fields[k]])));
+        return true; })
+      .catch(() => false);
+  }
+  function ownTexts(code) {
+    if (!owns.has(code) && Date.now() - (ownFailedAt.get(code) || -Infinity) < RETRY_MS) return Promise.resolve(null);
+    if (!owns.has(code)) {
+      ownStarted.set(code, Date.now());
+      const request = dataFetch(new URL(`../../lang/${code}/manifest.json${packVersion(code) ? `?v=${encodeURIComponent(packVersion(code))}` : ""}`, script))
+        .then(r => { if (!r.ok) throw new Error("Pack manifest unavailable"); return r.json(); })
+        .then(m => {
+          const v = typeof m?.version === "string" ? m.version : "";
+          const files = Object.keys(m?.files || {}).filter(f => /^worterbuch\/german-[\w-]+\.json$/u.test(f));
+          const map = new Map();
+          if (!files.length) return map;
+          // (each file on its own: one that fails leaves the others and is asked again a minute later — reviews A, C Ч2б)
+          return Promise.all(files.map(f => readOwnFile(code, f, v, map))).then(ok => {
+            if (!map.size) throw new Error("Pack card texts unavailable");
+            const missing = files.filter((_, i) => !ok[i]);
+            if (missing.length) ownMissing.set(code, {files:missing, version:v, at:Date.now(), map, busy:false});
+            return map; });
+        })
+        .catch(() => { if (owns.get(code) === request) { owns.delete(code); ownFailedAt.set(code, Date.now()); } return null; });
+      owns.set(code, request);
+    }
+    const missing = ownMissing.get(code);
+    if (missing && !missing.busy && Date.now() - missing.at >= RETRY_MS) {
+      missing.busy = true;
+      Promise.all(missing.files.map(f => readOwnFile(code, f, missing.version, missing.map))).then(ok => {
+        missing.files = missing.files.filter((_, i) => !ok[i]); missing.at = Date.now(); missing.busy = false;
+        if (!missing.files.length) ownMissing.delete(code); });
+    }
+    return owns.get(code);
+  }
+  const same = (a, b) => !!String(a || "").trim() && String(a || "").trim() === String(b || "").trim();
+  // The first tap waits for the card texts at most OWN_WAIT_MS (≈ 0.8 MB gzip at the first load): later the card is English for
+  // this tap, the texts keep loading for the next ones (review A Ч2б).
+  const OWN_WAIT_MS = 1500;
+  async function enrichOwn(resolution, code) {
+    const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
+    if (!mine.length) return;
+    // (one deadline for every tap of the first load, counted from its start — review C Ч2б)
+    const load = ownTexts(code), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
+    const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
+    if (!texts) return;
+    for (const c of mine) {
+      const fields = texts.get(c.item.id);
+      if (!fields || typeof fields !== "object") continue;
+      c.packItem = {...(c.packItem || {}), [code]:fields};
+      const main = String(fields[`translation_${code}`] || "").trim();
+      if (main && !c.translation?.[code] && same(c.translation?.en, c.item.translation_en)) c.translation = {...c.translation, [code]:main};
+      // a form of the card (alles on the alle card, zu zweit — collective): its own pack text, found by the form's English text
+      const ft = c.formTranslation;
+      if (ft && !ft[code]) {
+        const at = (c.item.form_translations || []).findIndex(r => r && r.form === ft.form && same(r.en, ft.en));
+        const text = at >= 0 ? fields.form_translations?.[at]?.[code] : c.item.collective && same(c.item.collective.en, ft.en) ? fields.collective?.[code] : "";
+        if (String(text || "").trim()) c.formTranslation = {...ft, [code]:String(text).trim()};
+      }
+    }
+  }
   async function enrich(resolution, code) {
     if (!valid(code) || !resolution || !Array.isArray(resolution.candidates)) return resolution;
+    const own = enrichOwn(resolution, code).catch(() => { /* the own cards stay English */ });
     const pending = new Map();
     // (not a candidate with an explanation — a contraction im = in + dem, a superlative: its text is the resolver's, from the word it
     // explains; the dictionary's own record of «im» is a form note, «in dem». As the Russian dictionary: lemma-resolver.js enriches
@@ -187,6 +262,7 @@
         candidate.packTranslationError = "unavailable";
       }
     }));
+    await own;
     return resolution;
   }
   window.BibliothekPackTranslations = Object.freeze({lookup, enrich});
