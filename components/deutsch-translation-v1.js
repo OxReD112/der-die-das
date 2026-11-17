@@ -42,7 +42,58 @@
    (the pack's manifest says which pack file belongs to it), or pack files themselves ("exercises/….json");
    with a pack language they are read before the page's own scripts (ui.json and manifest.json always).
      packEntries(file)    the loaded entries of a pack file (array or object), or null */
+/* German next to a {ru, en} pair in exercise / Wortschatz data (17.11.2026, chats of languages): ONE rule for the
+   language chats' extraction (dev/lang/extract.cjs requires this file) and for the app, which needs it when a pack
+   gives one en + ru pair different texts for different German ("de" in the pack entry).
+     contextFor(node, path, stack) → string ('' possible)
+       node  — the pair object {ru, en, …}; path — from the root, e.g. "window.PARTIKELN_SENTENCES[99].particles.doch.translation"
+       stack — the objects from the root down to the pair's parent (the last one is the parent)
+   Rules: 1. the pair's own de; 2. key «xxxTranslation» → the parent's xxx; 3. a sentence with «___» above (Partikeln,
+   Modalverben, Vielseitige Verben): in particles.<p>.… → with the particle as the key is written (DOCH — stressed);
+   parent with accept → with accept[0] and «  [+ the rest]»; in base.… → without the gap; answer / correctAnswer →
+   with it; 4. parent with noun and article → «article noun»; 5. else the first non-empty DE_KEYS field of the parent,
+   then further up. */
+(function(root, make){
+  var api = make();
+  if(typeof module === "object" && module.exports) module.exports = api;
+  else root.DeutschLangDe = api;
+})(typeof window !== "undefined" ? window : this, function(){
+  var DE_KEYS = ["de", "german", "sentence", "title", "example", "ex", "satz", "text", "phrase", "example_de", "noun", "word", "infinitive", "verb", "prep", "preposition", "place", "form"];
+  function isStr(v){ return typeof v === "string"; }
+  function germanContext(parent, stack){
+    var list = [parent].concat(stack.slice().reverse());
+    for(var i = 0; i < list.length; i++){
+      var obj = list[i];
+      if(!obj || typeof obj !== "object" || Array.isArray(obj)) continue;
+      for(var j = 0; j < DE_KEYS.length; j++){ var v = obj[DE_KEYS[j]]; if(isStr(v) && v.trim()) return v; }
+    }
+    return "";
+  }
+  function contextFor(node, p, stack){
+    if(isStr(node.de)) return node.de;
+    var parent = stack[stack.length - 1];
+    var key = (p.match(/\.([^.\[\]]+)$/) || [])[1] || "";
+    var m = key.match(/^(.*)Translation$/);
+    if(m && parent && isStr(parent[m[1] || "sentence"])) return parent[m[1] || "sentence"];
+    var sent = null;
+    for(var i = 0; i < stack.length; i++){ var o = stack[i]; if(o && !Array.isArray(o) && isStr(o.sentence) && o.sentence.indexOf("___") !== -1){ sent = o; break; } }
+    if(sent){
+      var pm = p.match(/\.particles\.([^.]+)\./);
+      if(pm) return sent.sentence.replace("___", function(){ return pm[1]; });
+      if(parent && Array.isArray(parent.accept) && parent.accept.length)
+        return sent.sentence.replace("___", function(){ return parent.accept[0]; }) + (parent.accept.length > 1 ? "  [+ " + parent.accept.slice(1).join(", ") + "]" : "");
+      if(/\.base\./.test(p)) return sent.sentence.replace(/\s*___\s*/, " ");
+      if(isStr(sent.answer)) return sent.sentence.replace("___", function(){ return sent.answer; });
+      if(isStr(sent.correctAnswer)) return sent.sentence.replace("___", function(){ return sent.correctAnswer; });
+    }
+    if(parent && isStr(parent.noun) && isStr(parent.article)) return parent.article + " " + parent.noun;
+    return germanContext(parent, stack.slice(0, -1));
+  }
+  return { contextFor: contextFor, germanContext: germanContext, DE_KEYS: DE_KEYS };
+});
+
 (function(){
+  if(typeof window === "undefined") return; // in Node (dev/lang) only the German-context rule above is used
   var KEY = "deutschTranslationLangV1";
   var BUILTIN = ["en", "ru"];
   /* Pack languages: code → name and pack version (the version goes into every pack address as ?v=). */
@@ -159,46 +210,31 @@
     return typeof v === "string" ? v : "";
   }
 
-  /* German next to a pair, by the pack manifest's rule for that file: "de_fields": ["de", "sentence"] —
-     the first of these string fields found on the pair's own object or the nearest object above it. */
-  function deRule(fields){
-    return function(o, parents){
-      var chain = [o].concat(parents);
-      for(var i = 0; i < chain.length; i++) for(var j = 0; j < fields.length; j++){
-        var v = chain[i] && chain[i][fields[j]];
-        if(typeof v === "string") return v;
-      }
-      return null;
-    };
-  }
-
-  /* apply(data, file): writes the pack text into every {ru, en} object under data, as data.<code>.
-     A pair that the pack file gives a German context ("de") for gets the text for its own German. */
-  function apply(data, file){
+  /* apply(data, file, rootPath): writes the pack text into every {ru, en} object under data, as data.<code>.
+     A pair that the pack gives several texts for ("de" in its entries) gets the one for its own German, found by
+     DeutschLangDe.contextFor with the same path and stack as the extraction (rootPath "window.WORDS", "VERBS" …). */
+  function apply(data, file, rootPath){
     var code = getDisplayLang();
     if(!isPack(code) || !data || typeof data !== "object") return data;
     var entries = loaded[code + "/" + file];
-    var manifest = loaded[code + "/manifest.json"];
-    var spec = manifest && manifest.exercise_files && manifest.exercise_files[file.replace(/^exercises\/|\.json$/g, "")];
-    var deOf = spec && Array.isArray(spec.de_fields) ? deRule(spec.de_fields) : null;
-    var byDe = {};
+    var byDe = {}, twin = {};
     if(Array.isArray(entries)) for(var i = 0; i < entries.length; i++){
       var e = entries[i];
-      if(e && e.de != null && typeof e[code] === "string") byDe[(e.en || "") + SEP + (e.ru || "") + SEP + e.de] = e[code];
+      if(e && e.de != null && typeof e[code] === "string"){ var k = (e.en || "") + SEP + (e.ru || ""); twin[k] = true; byDe[k + SEP + e.de] = e[code]; }
     }
-    var seen = new WeakSet();
-    (function walk(o, parents){
-      if(!o || typeof o !== "object" || seen.has(o)) return;
-      seen.add(o);
+    var de = window.DeutschLangDe;
+    (function walk(o, path, stack){
+      if(!o || typeof o !== "object") return;
       if(!Array.isArray(o) && (typeof o.en === "string" || typeof o.ru === "string") && o[code] === undefined){
-        var de = deOf ? deOf(o, parents) : null;
-        var hit = de != null ? byDe[(o.en || "") + SEP + (o.ru || "") + SEP + de] : undefined;
+        var key = (o.en || "") + SEP + (o.ru || "");
+        var hit = twin[key] && de ? byDe[key + SEP + de.contextFor(o, path, stack)] : undefined;
         var text = hit !== undefined ? hit : packText(code, o.en, o.ru);
         if(text) o[code] = text;
       }
-      var up = [o].concat(parents);
-      for(var k in o) if(o[k] && typeof o[k] === "object") walk(o[k], up);
-    })(data, []);
+      var up = stack.concat([o]);
+      if(Array.isArray(o)){ for(var n = 0; n < o.length; n++) if(o[n] && typeof o[n] === "object") walk(o[n], path + "[" + n + "]", up); }
+      else for(var p in o) if(o[p] && typeof o[p] === "object") walk(o[p], path + "." + p, up);
+    })(data, rootPath || "", []);
     return data;
   }
 
@@ -214,10 +250,13 @@
       if(applied[file] || !(code + "/" + file in loaded)) continue;
       var globals = files[name].globals || [], done = true;
       for(var g = 0; g < globals.length; g++){
+        /* "NAME" = window.NAME; {name, const: true} = a top-level const of the data file */
+        var gl = globals[g], isConst = gl && typeof gl === "object" && gl.const, gname = gl && typeof gl === "object" ? gl.name : gl;
+        if(!/^[A-Za-z_$][\w$]*$/.test(String(gname))) continue;
         var value;
-        try{ value = Function("return typeof " + globals[g] + ' !== "undefined" ? ' + globals[g] + " : undefined")(); }catch(e){ value = undefined; }
+        try{ value = isConst ? Function("return typeof " + gname + ' !== "undefined" ? ' + gname + " : undefined")() : window[gname]; }catch(e){ value = undefined; }
         if(value === undefined){ done = false; continue; }
-        apply(value, file);
+        apply(value, file, isConst ? gname : "window." + gname);
       }
       if(done) applied[file] = true;
     }
