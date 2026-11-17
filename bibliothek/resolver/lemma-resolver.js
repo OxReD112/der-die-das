@@ -8230,7 +8230,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           headRows=headRows.filter(a=>a.kind==='imperative');
         const head=moechteHead?headRows.find(a=>a.base==='mögen'):headRows[0],linked=[l,part,...(outer!==null?[outer]:[]),...(part===l-2&&words(l-1)==='zu'?[l-1]:[])];
         // Conditional/reported perfect replacement needs its own tense label.
-        if(outer!==null&&head.base==='haben'&&!headRows.some(a=>['Präsens','Präteritum'].includes(a.tense)))continue;
+        // (L44 (5), links to-do, advisor 17.11: hätte … X lassen — the Konjunktiv II of the perfect with the Ersatzinfinitiv — has its own label
+        // «Konjunktiv II»: hätte das Auto reparieren lassen, den Spieß hätte fallen lassen, hätte sich nicht träumen lassen)
+        const conditionalReplacement=outer!==null&&head.base==='haben'&&!headRows.some(a=>['Präsens','Präteritum'].includes(a.tense))&&headRows.some(a=>a.tense==='Konjunktiv II');
+        if(outer!==null&&head.base==='haben'&&!headRows.some(a=>['Präsens','Präteritum'].includes(a.tense))&&!conditionalReplacement)continue;
         // (L19, 30.10: a bare infinitive + und right before the infinitive at the end — das Haus putzen und streichen lassen — is a second
         // infinitive of the same lassen)
         let secondBefore=null;
@@ -8325,13 +8328,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           // (advisor 14.11, 5в (8): a clause-final finite lassen of a verb-final part — auf dem es sich gut schlagen läßt, weil er Karten spielen
           // lässt — and after und a subordinate part of its own: a subordinator (und weil …) or a subject and a finite form closing the part
           // (und sie Bier trinkt, und Ihr Eure alten Nägel gerade klopfen könnt); a part without its subject (und färben) stays as before)
-          if(!independent && next<tokens.length && words(end+1)==='und' && outer===null && l===end && connected(end+1,next)) {
+          // (L44 (5), advisor 17.11: also under haben / hätte — daß er fast den Spieß hätte fallen lassen und ihm der Angstschweiß … ausbrach:
+          // the subject may follow a dative — ihm der Angstschweiß —, the part closes with a finite form that is no infinitive)
+          if(!independent && next<tokens.length && words(end+1)==='und' && (outer===null||outer<l) && l===end && connected(end+1,next)) {
             if(['weil','dass','daß','wenn','ob','obwohl','während','falls','damit','sobald','bevor','nachdem','wo','wie'].includes(words(next)))independent=true;
             else {
               let t=next;while(t+1<tokens.length&&connected(t,t+1)&&!['und','oder','aber','denn','sondern'].includes(words(t+1)))t++;
-              if(t>next&&/^\p{Ll}/u.test(tokens[t][0])&&(subjectPersons[words(next)]||DETERMINER_WORD.test(words(next))&&/^\p{Lu}/u.test(tokens[next+1]?.[0]||'')||/^\p{Lu}/u.test(tokens[next][0]))) {
+              const subjectAt=j=>subjectPersons[words(j)]||DETERMINER_WORD.test(words(j))&&/^\p{Lu}/u.test(tokens[j+1]?.[0]||'')||/^\p{Lu}/u.test(tokens[j][0]);
+              const dativeFirst=outer!==null&&/^(?:ihm|ihr|ihnen|mir|dir)$/u.test(words(next))&&t>next+1&&subjectAt(next+1);
+              if(t>next&&/^\p{Ll}/u.test(tokens[t][0])&&(subjectAt(next)||dativeFirst)) {
                 const lastRows=await tokenAnalyses(lassenForm(tokens[t][0]),lassenLexicalLookup,'lassenGroup');
-                independent=lastRows.some(a=>a.kind==='finite'&&!a.detached);
+                independent=lastRows.some(a=>a.kind==='finite'&&!a.detached)&&(outer===null||!lastRows.some(a=>a.kind==='infinitive'));
               }
             }
           }
@@ -8399,7 +8406,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (L15 step 1: laß / lass with ich after it is the colloquial ich form, not the imperative — das laß ich mir gefallen)
         // (review 30.10: ich before it too — Ich lass uns eine Pizza kommen, Ich lass dich gehen)
         const colloquialIch=head.kind==='imperative'&&(words(l+1)==='ich'||words(l-1)==='ich');
-        tense=outer===null?(head.kind==='infinitive'?undefined:colloquialIch?'Präsens':letUs!==null?'Imperativ':head.tense):head.base==='haben'?headRows.some(a=>a.tense==='Präteritum')?'Plusquamperfekt':'Perfekt':head.base==='werden'?headRows.some(a=>a.tense==='Konjunktiv II')?'Konjunktiv II':'Futur I':head.tense;
+        tense=outer===null?(head.kind==='infinitive'?undefined:colloquialIch?'Präsens':letUs!==null?'Imperativ':head.tense):head.base==='haben'?conditionalReplacement?'Konjunktiv II':headRows.some(a=>a.tense==='Präteritum')?'Plusquamperfekt':'Perfekt':head.base==='werden'?headRows.some(a=>a.tense==='Konjunktiv II')?'Konjunktiv II':'Futur I':head.tense;
         // (advisor 09.11: the wenn / falls / sofern pair of #22 (в) answer 2 also for lassen itself — ließen is Präteritum and Konjunktiv II:
         // Wenn sie das Haus bauen ließen, wären sie froh → «Konjunktiv II»)
         if(outer===null&&tense==='Präteritum'&&headRows.some(a=>a.tense==='Konjunktiv II')&&
@@ -8502,7 +8509,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (the two-word card wins unless the group proved «сам (упал)» — Hans ließ sich das Glas fallen: fallenlassen «уронить»)
         if(twoWordWins&&sense!=='self'&&!(sense==='letUs'&&letUsShape))continue;
         if(sense&&sense!=='letUs')linked.push(reflexiveIndex);
-        groups.push({id:'lassen-infinitive',...(H!=='lassen'?{head:H}:{}),...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · '+H:tense==='Futur I'||tense==='Konjunktiv II'?tense+' · '+H:H+' + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
+        groups.push({id:'lassen-infinitive',...(H!=='lassen'?{head:H}:{}),...(conditionalReplacement?{conditionalPerfect:true}:{}),...(sense?{sense}:{}),...(outer!==null&&modalLemmas.has(head.base)?{outerModal:true}:{}),...(coordinated?{coordinated:coordinated.rows[0].base}:{}),label:replacement?tense+' · '+H:tense==='Futur I'||tense==='Konjunktiv II'?tense+' · '+H:H+' + Infinitiv',tense,lemma:coordinated?(secondBefore?`${coordinated.rows[0].base} und ${inner[0].base}`:`${inner[0].base} und ${coordinated.rows[0].base}`):inner[0].base,roles:[...lassen,...lexical,...helpers,...(sense==='letUs'?(forms.get(LASSEN_LET_US_PRONOUN)||[]).filter(e=>e.type==='Pronomen'&&e.word===LASSEN_LET_US_CARD):[])],
           note:{ru:(replacement?tense+' · haben + Infinitiv + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + инфинитив')+(H==='lassen'?' · значение определяется контекстом':'')+(moechteHead?' · möchte: форма Konjunktiv II от mögen; отдельная карточка möchten':''),en:(replacement?tense+' · haben + infinitive + '+H:outer!==null?tense+' · ':'')+(replacement?'':H+' + infinitive')+(H==='lassen'?' · meaning depends on context':'')+(moechteHead?' · möchte: Konjunktiv II form of mögen; separate möchten card':'')},
           spans:[...new Set(linked)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}))});
       }
@@ -9393,6 +9400,12 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const withoutNeededAccusative = () => { const needing = cards.filter(needsAccusative);
         if (!needing.length || !needing.every(c => separatedObjectInPart(c, sentence, tokens, "Akkusativ", false, true) === false)) return null;
         return pick(cards.filter(c => !needsAccusative(c))); };
+      // (L63 (1), links to-do, advisor 17.11: no card with a plain Dativ — the one card with «Dativ + Akkusativ» takes the dative: hätten
+      // es ihm abgenommen, wollte ihm das Tier abnehmen, Darf ich Ihnen die Jacken abnehmen — abnehmen «снимать, отнимать», not «худеть»)
+      const dativeAccusativeCard = () => { if (cards.some(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) return null;
+        const da = cards.filter(c => patterns(c).some(p => /^Dativ\s*\+\s*Akkusativ$/u.test(p.trim())));
+        return da.length === 1 && cards.some(c => !patterns(c).some(p => /Dativ/u.test(p))) ? da[0] : null; };
+      if (dative) { const c = dativeAccusativeCard(); if (c) return {candidate:c,evidence:'dative-object'}; }
       if (dative && !accusative) { const c = pick(cards.filter(c => patterns(c).some(p => /^Dativ$/u.test(p.trim())))) || withoutNeededAccusative(); if (c) return {candidate:c,evidence:'dative-object'}; }
       // (WN batch 33, unterlaufen «вкрасться» Dativ / «обходить» Akkusativ: a dative noun phrase outside a prepositional phrase —
       // dem / einem / meinem … + noun, jedem / niemandem / jemandem, der + a feminine noun right after the finite verb — picks
@@ -14432,8 +14445,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // uns gehört — the choice).
       const ihrSubject = f.clauseIndices.some(i => i !== index && f.matches(i).some(e => e.type === "Verb" && f.finite(e,i,"ihr")));
       const possessiveIhr = i => possessiveIhrAt(tokens,i,index,f.end);
+      // (L63 (2), links to-do, advisor 17.11: a dative group too — dem / einem / meinem … + noun outside a prepositional phrase: der dem
+      // Kulturausschuss … angehört hat → angehören; not a postposition — dem Bericht zufolge)
+      const DATIVE_DET = /^(?:dem|einem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|keinem|jedem)$/u;
+      const POSTPOSITION = /^(?:nach|zufolge|gegenüber|gemäß|entsprechend|zuliebe|entgegen|trotz|zum)$/u;
+      // (der + a feminine-only noun is the dative or the genitive; the genitive only right after a noun — der der Partei angehört hatte)
+      const feminineOnly = n => { const es = (forms.get(norm(tokens[n][0])) || []).filter(e => e.type === "Nomen");
+        return es.length > 0 && es.every(e => /^die\b/u.test(String(e.article || "")) && !e.plural_only); };
+      const dativeGroup = i => { const w = norm(tokens[i][0]), femDer = w === "der" && !(i > 0 && /^\p{Lu}/u.test(tokens[i-1][0]) && i-1 >= start);
+        if (!DATIVE_DET.test(w) && !femDer || i > start && prepositions.has(norm(tokens[i-1][0]))) return false;
+        let n = i+1; while (n < index && n-i <= 3 && f.adjective(n)) n++;
+        return n < index && /^\p{Lu}/u.test(tokens[n][0]) && !POSTPOSITION.test(norm(tokens[n+1]?.[0] ?? "")) && (!femDer || DATIVE_DET.test(w) || feminineOnly(n)); };
+      // (tests chat 17.11: the dative group only without another noun group that may be the accusative — Er hat dem Mann das Lied angehört
+      // stays anhören; the pronoun datives as before)
+      const otherGroup = f.clauseIndices.some(i => i < index && !(i > start && prepositions.has(norm(tokens[i-1][0]))) &&
+        (/^(?:es|ihn)$/u.test(norm(tokens[i][0])) || /^(?:den|das|die|ein|eine|einen)$/u.test(norm(tokens[i][0])) && (() => {
+          let n = i+1; while (n < index && n-i <= 3 && f.adjective(n)) n++; return n < index && /^\p{Lu}/u.test(tokens[n][0]); })()));
       const dative = f.clauseIndices.some(i => ["mir","dir","ihm","ihnen",...(ihrSubject ? [] : ["ihr"])].includes(norm(tokens[i][0])) && !possessiveIhr(i) &&
-        !(i > start && prepositions.has(norm(tokens[i-1][0]))));
+        !(i > start && prepositions.has(norm(tokens[i-1][0]))) || i < index && !otherGroup && dativeGroup(i));
       // (L53 feature 2, user 25.10.2026: Er hat es / die Musik gehört — hören): with an unambiguous nominative pronoun in the
       // clause (ich, du, er, wir) es / das / die / das … / ein … / eine … + a noun outside a prepositional phrase is no subject —
       // the object. Not with a dative in the clause, not a time noun (die ganze Nacht).

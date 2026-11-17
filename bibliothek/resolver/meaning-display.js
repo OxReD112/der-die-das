@@ -523,7 +523,8 @@
       case 'lassen-infinitive': {
         // Konjunktiv II of möchte belongs to the modal, not to the lassen group; only würde makes it the group's mood.
         const wuerde = (k.spans || []).some(span => /^würd/iu.test(span.text));
-        const tense = k.tense && k.tense !== 'Präsens' && (k.tense !== 'Konjunktiv II' || wuerde) ? k.tense : null;
+        // (L44 (5), advisor 17.11: hätte … X lassen — the Konjunktiv II of the perfect, hätte is «бы (о прошлом)»)
+        const tense = k.tense && k.tense !== 'Präsens' && (k.tense !== 'Konjunktiv II' || wuerde || k.conditionalPerfect) ? k.tense : null;
         // (step 4, reference F12-B5a: a simple tense only on the finite form — lassen under a modal is an infinitive: sollte … reparieren
         // lassen «mit reparieren»; ließe itself is Konjunktiv II, the würde rule is for the modal möchte only)
         const ownTense = k.outerModal ? null : k.tense && k.tense !== 'Präsens' ? k.tense : null;
@@ -539,7 +540,7 @@
         if (infinitiveHere) return {marks:[compound ? `${compound} mit ${headVerb}` : `mit ${headVerb}`], role:null, spans};
         if (MODALS.has(own)) { const mood = candidate.formFeatures?.modalMood; return {marks:[`${mood ? mood + ' ' : ''}mit ${name} ${headVerb}`], role:null, spans}; }
         return {marks:[`${tense || 'Präsens'} mit ${name} ${headVerb}`],
-          role:tense === 'Perfekt' ? 'perfectHave' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
+          role:tense === 'Perfekt' ? 'perfectHave' : k.conditionalPerfect ? 'conditionalPast' : tense === 'Konjunktiv II' ? 'conditional' : 'auxiliary', spans};
       }
       // zu inside haben/sein + zu is the same Infinitivpartikel as in 4.8 (agreed 11 Oct 2026).
       // (#15, advisor 06.11: the tense first, as with the passive — «Präteritum · sein + zu mit sehen»; Präsens without a mark)
