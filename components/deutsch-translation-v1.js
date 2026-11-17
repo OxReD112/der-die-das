@@ -30,6 +30,7 @@
      languages()          [{code, name, pack}] in menu order
      packState(code)      "builtin" · "ready" (downloaded in full, this version) · "none"; packSize(code) "4 MB"
      download(code)       Promise<boolean>: fetches the whole pack (manifest + its files, not the reader dictionary)
+     addPack(code, info)  checks only: a test pack language (lang/<code>/) without changing PACKS (see below)
      pick(value)          see the data format above
      t(en, ru, …args)     a text written in code; "{0}", "{1}" … are filled with args, "{0|word|words}" is the
                           plural for args[0] (forms: one|other in English, one|few|many in Russian and Polish)
@@ -100,6 +101,22 @@
   var PACKS = {
     pl: { name: "Polski", version: "0", size: "4 MB", published: false }
   };
+  /* Test packs (17.11.2026, for checks only: "a new language needs no code"): a test registers a pack language
+     without touching PACKS — localStorage "deutschLangTestPacksV1" = {"zz": {"name": "Testsprache", "version": "1"}}
+     (read here, before the page's scripts) or DeutschTranslation.addPack("zz", {…}) later. Its files: lang/zz/.
+     A test pack is offered as if published. Not for real languages — those are a line in PACKS. */
+  (function(){
+    try{
+      var tp = JSON.parse(localStorage.getItem("deutschLangTestPacksV1") || "null");
+      if(tp && typeof tp === "object") for(var c in tp) addTestPack(c, tp[c]);
+    }catch(e){}
+  })();
+  function addTestPack(code, info){
+    if(!/^[a-z]{2,3}$/.test(code) || code === "xx" || code === "en" || code === "ru" || PACKS[code]) return false;
+    PACKS[code] = { name: String(info && info.name || code), version: String(info && info.version || "0"),
+      size: String(info && info.size || ""), published: true, test: true };
+    return true;
+  }
   /* A pack that is not published yet (its files are not on the site) is not offered in the menu and cannot be
      chosen — except on a device with localStorage "deutschLangPreviewV1" = "1" (for checking a pack before release). */
   function previewOn(){ try{ return localStorage.getItem("deutschLangPreviewV1") === "1"; }catch(e){ return false; } }
@@ -447,6 +464,7 @@
   window.DeutschTranslation = { KEY: KEY, getLang: getLang, getDisplayLang: getDisplayLang, setLang: setLang,
     languages: languages, isPack: isPack, pick: pick, t: t, field: field, ready: ready, apply: apply,
     packEntries: packEntries, format: format, table: table,
-    needsPack: needsPack, mergeById: mergeById, packState: packState, packSize: packSize, download: download };
+    needsPack: needsPack, mergeById: mergeById, packState: packState, packSize: packSize, download: download,
+    addPack: addTestPack };
   window.getTranslation = getTranslation;
 })();
