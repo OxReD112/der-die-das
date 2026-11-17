@@ -19,7 +19,9 @@
    .ui-counter  „3 / 10“
    .ui-chev     the one arrow of the app (06.11): › forward / more, ‹ back (.ui-chev-back), a fold that turns down
                 (.ui-chev-fold); with words it is as big as their letters, alone (.ui-chev-lone) 14 px high
-                (06.11: also instead of the fold triangles ▸ / ▾) */
+                (06.11: also instead of the fold triangles ▸ / ▾)
+   .ui-choice   one choice out of a list (17.11): a row-button with a round radio dot, a name and a grey note —
+                Wortschatz «Lerntempo», «Deine Sprache» */
 
 .ui-quiet,
 .ui-main {
@@ -430,4 +432,70 @@ details[open] > summary .ui-chev-fold {
   -webkit-overflow-scrolling: touch;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
   mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+}
+
+/* ---- .ui-choice (17.11.2026, Alena): one choice out of a list — the «Lerntempo» rows of Wortschatz (since 26.10)
+   made shared, for «Deine Sprache» and whatever comes next. Markup:
+     <div role="radiogroup" aria-label="…">
+       <button class="ui-choice [on]" role="radio" aria-checked="true|false" type="button">
+         <span class="ui-choice-dot" aria-hidden="true"></span>
+         <span class="ui-choice-text"><span class="ui-choice-name">Standard</span><span class="ui-choice-note">…</span></span>
+       </button> …
+     </div>
+   A row 14 px above and below, a hairline between the rows (not after the last); the dot 24, chosen: filled with
+   the main button's colour and a small dot in its text colour. Name 16 / 600, note 14 grey (as many notes as needed,
+   each on its own line; .ui-choice-num on a note of numbers). Was in wortschatz/collection-window.css as .coll-pace (the note 13, set to 14 in the window). */
+.ui-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ui-choice:last-child {
+  border-bottom: 0;
+}
+.ui-choice-dot {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--text) 32%, transparent);
+  display: grid;
+  place-content: center;
+}
+.ui-choice.on .ui-choice-dot {
+  border-color: var(--main-bg);
+  background: var(--main-bg);
+}
+.ui-choice.on .ui-choice-dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--main-text);
+}
+.ui-choice-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ui-choice-name {
+  font: 600 16px/1.25 var(--font);
+  color: var(--text);
+}
+.ui-choice-note {
+  font-size: 14px;
+  color: var(--muted);
+}
+.ui-choice-num {
+  font-variant-numeric: tabular-nums; /* a note of numbers (1 · 8 · 20 · 45 · 90 Tage): the digits line up */
 }

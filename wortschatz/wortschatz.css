@@ -1397,7 +1397,6 @@ body:has(#done.show) .ws-settings-btn {
 #collModal .coll-hint,
 #collModal .coll-hit-added,
 #collModal .coll-hit-in,
-#collModal .coll-pace-note,
 #collModal .coll-bottom {
   font-size: 14px;
 }

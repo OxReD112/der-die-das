@@ -670,59 +670,7 @@ textarea.coll-paste {
 .coll-label-first {
   margin-top: 4px;
 }
-.coll-pace {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 14px 0;
-  border: 0;
-  border-bottom: 1px solid var(--hairline);
-  background: none;
-  color: inherit;
-  text-align: left;
-  font: inherit;
-  cursor: pointer;
-}
-.coll-pace:last-child {
-  border-bottom: 0;
-}
-.coll-pace-dot {
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 1.5px solid color-mix(in srgb, var(--text) 32%, transparent);
-  display: grid;
-  place-content: center;
-}
-.coll-pace.on .coll-pace-dot {
-  border-color: var(--main-bg);
-  background: var(--main-bg);
-}
-.coll-pace.on .coll-pace-dot::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--main-text);
-}
-.coll-pace-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.coll-pace-name {
-  font: 600 16px/1.25 var(--font);
-  color: var(--text);
-}
-.coll-pace-note {
-  font-size: 13px;
-  color: var(--muted);
-}
-.coll-pace-days {
-  font-variant-numeric: tabular-nums;
-}
+/* the pace rows: since 17.11.2026 the shared .ui-choice (components/deutsch-ui-v1.css) */
 
 /* 08.11 (Alena): one selection mark everywhere — the monochrome round mark of «Bearbeiten» in the Bibliothek list:
    a 22 px circle (line 1.2, --muted); chosen: filled with the text colour and a tick in the background colour;

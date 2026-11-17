@@ -1039,23 +1039,24 @@
       ["standard", "Standard", ru ? "Чтобы запомнить надолго" : "For the long run"],
       ["intensiv", "Intensiv", ru ? "Перед экзаменом · больше повторений" : "Before an exam · more reviews"]
     ];
+    // the rows: the shared one-of-a-list choice (.ui-choice, components/deutsch-ui-v1.css, 17.11.2026)
     function draw() {
       const current = C.getPace();
       box.textContent = "";
       options.forEach(([id, label, note]) => {
         const on = id === current;
-        const b = button("coll-pace" + (on ? " on" : ""), "", () => {
+        const b = button("ui-choice" + (on ? " on" : ""), "", () => {
           C.setPace(id);
           if (typeof window.WortschatzSetPace === "function") window.WortschatzSetPace(id);
           draw();
         });
         b.setAttribute("role", "radio");
         b.setAttribute("aria-checked", on ? "true" : "false");
-        b.appendChild(el("span", "coll-pace-dot", null, { "aria-hidden": "true" }));
-        const t = el("span", "coll-pace-text");
-        t.appendChild(el("span", "coll-pace-name", label));
-        t.appendChild(el("span", "coll-pace-note", note));
-        t.appendChild(el("span", "coll-pace-note coll-pace-days", C.PACES[id].join(" · ") + " Tage"));
+        b.appendChild(el("span", "ui-choice-dot", null, { "aria-hidden": "true" }));
+        const t = el("span", "ui-choice-text");
+        t.appendChild(el("span", "ui-choice-name", label));
+        t.appendChild(el("span", "ui-choice-note", note));
+        t.appendChild(el("span", "ui-choice-note ui-choice-num", C.PACES[id].join(" · ") + " Tage"));
         b.appendChild(t);
         box.appendChild(b);
       });
