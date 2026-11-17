@@ -40,7 +40,9 @@
           const count = m?.partition?.count ?? m?.partition_count;
           if (m?.format_version !== 1 || count !== 1024 || (m.partition && m.partition.hash !== "fnv1a-32") || typeof m.version !== "string" || !m.version)
             throw new Error("Invalid pack dictionary manifest");
-          return {version:m.version, source:typeof m.attribution === "string" ? m.attribution : ""};
+          // labels.display: the label table of the language ({code: {kind, rude, label}}, Ч3) — meaning-display.js reads it
+          const table = m.labels?.display && typeof m.labels.display === "object" && !Array.isArray(m.labels.display) && Object.keys(m.labels.display).length ? m.labels.display : null;
+          return {version:m.version, source:typeof m.attribution === "string" ? m.attribution : "", labels:table};
         })
         .catch(error => { if (manifests.get(code) === request) { manifests.delete(code); failedAt.set(code, Date.now()); } throw error; });
       manifests.set(code, request);
@@ -92,14 +94,21 @@
   }
   const withoutHidden = (gloss, word, pos, hidden) => !hidden.size ? gloss :
     gloss.split(";").filter(part => !hidden.has(`${word}\u0000${pos}\u0000${part.trim()}`)).join(";").trim();
-  async function lookup(lemma, partOfSpeech, code) {
+  // gender (optional): m / f / n of the card (der / die / das) — records of another gender of the same word are left out when the
+  // dictionary marks genders (die Heide «wrzosowisko», not der Heide «poganin»; Ч3); a weak hint (the article linked in the sentence:
+  // «Ist das Tau …» links a demonstrative das — review A 17.11) only puts the records of that gender first. Without it — all records.
+  async function lookup(lemma, partOfSpeech, code, gender = null, weak = false) {
     if (!valid(code)) return null;
     const word = String(lemma || "").normalize("NFC").trim(), pos = posOf(partOfSpeech);
     if (!word || !pos) return null;
     // As the Russian dictionary: only nouns may use an initial capital alias; the part of speech must match.
     const spellings = [...new Set(pos === "noun" ? [word.charAt(0).toUpperCase() + word.slice(1), word] : [word, word.toLowerCase()])];
     for (const spelling of spellings) {
-      const matched = (await records(code, spelling)).filter(row => row.word === spelling && row.pos === pos);
+      let matched = (await records(code, spelling)).filter(row => row.word === spelling && row.pos === pos);
+      const fits = row => Array.isArray(row.gender) && row.gender.includes(gender);
+      if (gender && matched.some(fits))
+        matched = weak ? [...matched.filter(fits), ...matched.filter(row => !fits(row))]
+          : matched.filter(row => !Array.isArray(row.gender) || !row.gender.length || fits(row));
       const hidden = matched.length ? await hiddenParts(code) : new Map();
       // `labels` [gloss index, cut, codes]: the codes of a gloss; `shown` [text per gloss]: the gloss as the card shows it (the
       // stored gloss keeps the source text); `reflexive` [gloss index, acc / dat / opt, …]; `name_like` — a name sense.
@@ -131,8 +140,8 @@
           }).filter(Boolean)}))
           .filter(s => s.glosses.length)})).filter(row => row.senses.length);
       if (entries.length) {
-        const {source} = await manifest(code);
-        return {language:code, source, entries,
+        const {source, labels:labelTable} = await manifest(code);
+        return {language:code, source, entries, ...(labelTable ? {labelTable} : {}),
           meanings:[...new Set(entries.flatMap(row => row.senses.flatMap(s => s.glosses)))],
           ...(Object.keys(reflexive).length ? {reflexive} : {}),
           ...(names.size ? {names:[...names]} : {}),
@@ -148,8 +157,20 @@
     // explains; the dictionary's own record of «im» is a form note, «in dem». As the Russian dictionary: lemma-resolver.js enriches
     // the candidates without an explanation only.)
     await Promise.all(resolution.candidates.filter(c => c.source === "fallback" && !c.explanation && !c.translation?.[code]).map(async candidate => {
-      const key = JSON.stringify([candidate.lemma, posOf(candidate.pos)]);
-      if (!pending.has(key)) pending.set(key, lookup(candidate.lemma, candidate.pos, code));
+      // (the gender of the card: its article — the resolver's G16 nounArticle — or its noun phrase when it names one gender (sure);
+      // otherwise the article linked to it in the sentence when that article has one gender only — eine; der / die / das / ein … are
+      // not used — they also stand for other cases, genders, the plural or a demonstrative)
+      const genders = [...new Set((candidate.nounPhrase || []).map(p => p?.gender).filter(Boolean))];
+      const sure = {der:"m", die:"f", das:"n"}[candidate.nounArticle] ||
+        (genders.length === 1 ? {masculine:"m", feminine:"f", neuter:"n"}[genders[0]] : null) || null;
+      // (the link must be this word's own: an alternative of another lemma — Alt under «das Alter» — takes no hint; review B 17.11)
+      const link = candidate.nounArticleLink, own = link && String(link.noun || "").toLowerCase() === String(candidate.lemma || "").toLowerCase();
+      // (eine before its noun is always feminine — a sure sign; a linked das may be a demonstrative — «Ist das Tau oder Regen?» would
+      // lose «rosa» — so it is not used; reviewer C 17.11)
+      const linked = sure || !own ? null : {eine:"f"}[String(link.article || "").toLowerCase()] || null;
+      const gender = sure || linked, weak = false;
+      const key = JSON.stringify([candidate.lemma, posOf(candidate.pos), gender, weak]);
+      if (!pending.has(key)) pending.set(key, lookup(candidate.lemma, candidate.pos, code, gender, weak));
       try {
         const result = await pending.get(key);
         if (!result) return;
@@ -160,6 +181,7 @@
           candidate.meaningLabels = {...(candidate.meaningLabels || {}), [code]:result.labels};
           candidate.labelledText = {...(candidate.labelledText || {}), [code]:result.shown.join("; ")};
         }
+        if (result.labelTable) candidate.labelTables = {...(candidate.labelTables || {}), [code]:result.labelTable};
       } catch (_) {
         // A pack that is not downloaded (no network, an error): the card stays as in English.
         candidate.packTranslationError = "unavailable";

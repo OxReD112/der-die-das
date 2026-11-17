@@ -157,7 +157,9 @@
       : [...new Set(String(text).replace(/\([^()]*\)/g, '').split(';').map(labelKey).filter(Boolean))];
     const codes = partCodes(candidate.meaningLabels?.[language], language === 'en' && Array.isArray(candidate.meanings) ? candidate.meanings : null);
     const rows = parts.map(part => ({text:part, codes:codes.get(labelKey(part)) || []}));
-    const rude = row => row.codes.some(code => RUDE_LABELS.has(LABEL_BY_CODE.get(code)?.id));
+    // (a pack language: its manifest's label table may name more rude codes — `rude` of labels.display, Ч3)
+    const table = isPack(language) ? candidate.labelTables?.[language] : null;
+    const rude = row => row.codes.some(code => RUDE_LABELS.has(LABEL_BY_CODE.get(code)?.id) || !!table && RUDE_LABELS.has(packEntry(table, code)?.rude));
     const first = rows.findIndex(row => !rude(row));
     if (first > 0) rows.unshift(...rows.splice(first, 1));
     // (links chat TODO п. 98, advisor 14.11) an object in the part of a separated external verb (objectInPart, the resolver): the first
@@ -169,7 +171,39 @@
     }
     return rows;
   }
-  function shownLabels(codes, display, first, domains = {}) {
+  // Labels of a pack language (Ч3, 17.11.2026): its dictionary manifest's table labels.display {code: {kind: style | region |
+  // domain, rude: vulgar | derogatory | slang | null, label}} — read by codes only, the same for every pack language. A code the
+  // table lacks is looked for under another code of the same label (obscene → vulgar, Austrian → Austria). Style and region
+  // first, in the order of the label set; a domain as in Russian (later meanings; on the first only the special domains).
+  // Without a table (an older manifest) the labels stay English.
+  // (review A 17.11: the fallback takes the codes of the label set's row in its order — Rhineland → regional «reg.», never another
+  // region; own keys only)
+  const ROW_CODES = new Map(LABEL_SET.map(([id, , , , , codes]) => [id, [id, ...codes]]));
+  function packEntry(table, code) {
+    if (!table || typeof table !== 'object') return null;
+    if (Object.hasOwn(table, code)) return table[code];
+    const id = LABEL_BY_CODE.get(code)?.id;
+    for (const key of ROW_CODES.get(id) || []) if (Object.hasOwn(table, key)) return table[key];
+    return null;
+  }
+  function packLabels(codes, first, table) {
+    const order = code => LABEL_BY_CODE.get(code)?.order ?? LABEL_SET.length;
+    // (a code of the label set the table lacks keeps its English label — a rude one must never vanish; review A 17.11)
+    const entries = codes.map(code => { const entry = packEntry(table, code), known = LABEL_BY_CODE.get(code);
+      return {code, entry:entry && String(entry.label || '').trim() ? entry : known ? {kind:'style', rude:RUDE_LABELS.has(known.id) ? known.id : null, label:known.en, full:known.enFull} : null}; })
+      .filter(x => x.entry);
+    const styled = entries.filter(x => x.entry.kind !== 'domain').sort((a, b) => order(a.code) - order(b.code));
+    const domains = entries.filter(x => x.entry.kind === 'domain' && (!first || FIRST_MEANING_DOMAINS.has(x.code)));
+    const items = [];
+    for (const {code, entry} of [...styled, ...domains]) {
+      const short = String(entry.label).trim();
+      if (items.some(i => i.short === short)) continue;
+      items.push({short, full:String(entry.full || short), id:RUDE_LABELS.has(entry.rude) ? entry.rude : LABEL_BY_CODE.get(code)?.id || `${entry.kind}:${code}`});
+    }
+    return items.slice(0, 2);
+  }
+  function shownLabels(codes, display, first, domains = {}, table = null) {
+    if (isPack(display) && table) return packLabels(codes, first, table);
     const style = [...new Map(codes.map(code => LABEL_BY_CODE.get(code)).filter(Boolean).map(l => [l.id,l])).values()].sort((a,b) => a.order - b.order);
     const items = style.map(l => display === 'ru' ? {short:l.ru, full:l.ruFull, id:l.id} : {short:l.en, full:l.enFull, id:l.id});
     if (display === 'ru') for (const code of codes) {
@@ -182,16 +216,19 @@
   function labelSegments(candidate, language, display = language) {
     if (!isExternal(candidate) || !candidate.meaningLabels) return null;
     const rows = labelledParts(candidate, language).slice(0, shownCount(Infinity));
-    const segments = rows.map((row, i) => ({labels:shownLabels(row.codes, display, i === 0, language === 'ru' ? candidate.labelDomains : {}), text:row.text}));
+    // (the pack's labels on the pack's own text only — an English text keeps English labels; review A 17.11)
+    const table = isPack(display) && language === display ? candidate.labelTables?.[display] : null;
+    const segments = rows.map((row, i) => ({labels:shownLabels(row.codes, display, i === 0, language === 'ru' ? candidate.labelDomains : {}, table), text:row.text}));
     // One label shared by every shown meaning stands once at the start.
-    const ids = s => s.labels.map(l => l.id).join('|');
+    // (id and label: two labels of one id — Polish pot. / posp. — are not one shared label; review A 17.11)
+    const ids = s => s.labels.map(l => `${l.id}\u0000${l.short}`).join('|');
     const shared = segments.length > 1 && segments[0].labels.length && segments.every(s => s.text && ids(s) === ids(segments[0]));
     if (shared) { const label = segments[0].labels; segments.forEach(s => { s.labels = []; }); segments.unshift({labels:label, text:''}); }
     // English marks the word rude and the Russian text does not (Bulle, huren): one label for the whole card (user 22.10).
     // (advisor 17.11: for the Russian and the pack languages, never for English itself)
     if (language !== 'en' && !segments.some(s => s.labels.some(l => RUDE_LABELS.has(l.id)))) {
       const en = labelledParts(candidate, 'en')[0];
-      const rude = en ? shownLabels(en.codes, display, true).filter(l => RUDE_LABELS.has(l.id)) : [];
+      const rude = en ? shownLabels(en.codes, display, true, {}, table).filter(l => RUDE_LABELS.has(l.id)) : [];
       if (rude.length) {
         if (segments[0] && !segments[0].text) segments[0].labels = [...rude, ...segments[0].labels].slice(0, 2);
         else segments.unshift({labels:rude, text:''});
