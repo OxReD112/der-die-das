@@ -61,6 +61,27 @@
     return {text:shown.join('; '), rest:parts.length - shown.length};
   }
   const ownCard = candidate => candidate?.source === 'main' && !!candidate.item;
+  // compact() of a text in a pack language keeps its brackets: they belong to the meaning there (review B 17.11 — Polish
+  // «chwytać (się)», «trzymać (się)» lose «się» and their sense without them); the English and Russian texts as before.
+  const compactIn = (text, language) => isPack(language) ? meaningParts(text).slice(0, shownCount(Infinity)).join('; ') : compact(text);
+  // Languages of the card text (17.11.2026, chat «languages in the reader», stage Ч2): ru and en as before; a pack language
+  // (lang/<code>/, resolver/pack-translations.js) — its code. No branch for a particular language: a pack language reads its
+  // texts under its code (translation[code], meaningLabels[code], item.translation_<code> …); where the card has none, the
+  // card is the English one (advisor 17.11: «нет текста на языке показа — как EN»; a pack not downloaded — the English card).
+  // Phrases of the popup stay English for a pack language until stage Ч4 (lang/<code>/reader.json); labels — until Ч3.
+  const textLanguage = value => value === 'ru' ? 'ru' : typeof value === 'string' && /^[a-z]{2,3}$/u.test(value) && value !== 'en' ? value : 'en';
+  const isPack = language => language !== 'ru' && language !== 'en';
+  // a phrase of a {ru, en} table: a pack language takes its own line if the table has one, otherwise the English one
+  const say = (table, language) => isPack(language) ? table?.[language] || table?.en : table?.[language];
+  // A meaning the resolver proved from the sentence picks a place in the Russian / English text (senseFirst …): a pack text has no
+  // such place, so the card stays English (the choice is the same in every language, advisor 17.11).
+  const provenSense = c => Number.isInteger(c?.senseFirst) || Number.isInteger(c?.senseFirstEn) ||
+    Array.isArray(c?.sensesFirst) && c.sensesFirst.length > 0 || Array.isArray(c?.sensesFirstEn) && c.sensesFirstEn.length > 0;
+  const packText = (c, language) => !!c && !provenSense(c) && !!(String(c.translation?.[language] || '').trim() ||
+    c.reflexiveMarks?.[language] || String(c.item?.[`translation_${language}`] || '').trim() || String(c.formTranslation?.[language] || '').trim());
+  // the language a card is built in: a pack language only when this candidate has a text in it
+  const cardLanguage = (candidate, value) => { const language = textLanguage(value);
+    return isPack(language) && !packText(candidate, language) ? 'en' : language; };
   function heading(candidate) {
     if (candidate.explanation?.kind === 'contraction') return `${candidate.lemma} = ${candidate.explanation.expansion}`;
     const gerund = pos(candidate) === 'Nomen' && /^gerund of /i.test(candidate.translation?.en || '');
@@ -131,9 +152,11 @@
   function labelledParts(candidate, language) {
     // The Russian card text without the labels (russian-translations.js `labelledText`); the stored translation keeps them.
     const text = candidate.labelledText?.[language] || candidate.translation?.[language] || '';
-    const parts = [...new Set(String(text).replace(/\([^()]*\)/g, '').split(';').map(labelKey).filter(Boolean))];
+    // (a pack language keeps the brackets of its text — compactIn(); the codes are found by the text without them)
+    const parts = isPack(language) ? [...new Set(meaningParts(text))]
+      : [...new Set(String(text).replace(/\([^()]*\)/g, '').split(';').map(labelKey).filter(Boolean))];
     const codes = partCodes(candidate.meaningLabels?.[language], language === 'en' && Array.isArray(candidate.meanings) ? candidate.meanings : null);
-    const rows = parts.map(part => ({text:part, codes:codes.get(part) || []}));
+    const rows = parts.map(part => ({text:part, codes:codes.get(labelKey(part)) || []}));
     const rude = row => row.codes.some(code => RUDE_LABELS.has(LABEL_BY_CODE.get(code)?.id));
     const first = rows.findIndex(row => !rude(row));
     if (first > 0) rows.unshift(...rows.splice(first, 1));
@@ -165,7 +188,8 @@
     const shared = segments.length > 1 && segments[0].labels.length && segments.every(s => s.text && ids(s) === ids(segments[0]));
     if (shared) { const label = segments[0].labels; segments.forEach(s => { s.labels = []; }); segments.unshift({labels:label, text:''}); }
     // English marks the word rude and the Russian text does not (Bulle, huren): one label for the whole card (user 22.10).
-    if (language === 'ru' && !segments.some(s => s.labels.some(l => RUDE_LABELS.has(l.id)))) {
+    // (advisor 17.11: for the Russian and the pack languages, never for English itself)
+    if (language !== 'en' && !segments.some(s => s.labels.some(l => RUDE_LABELS.has(l.id)))) {
       const en = labelledParts(candidate, 'en')[0];
       const rude = en ? shownLabels(en.codes, display, true).filter(l => RUDE_LABELS.has(l.id)) : [];
       if (rude.length) {
@@ -177,6 +201,7 @@
   }
   function brief(candidate, language, inline = false) {
     // inline: a text shown without label segments (der/die pair) keeps the source gloss with its inline label
+    if (isPack(language) && provenSense(candidate)) return '';
     if (!inline && isExternal(candidate) && candidate.meaningLabels?.[language] && !Number.isInteger(candidate.senseFirst) && !(language === 'en' && Number.isInteger(candidate.senseFirstEn)) &&
         candidate.construction?.id !== 'lassen-infinitive' && !/^gerund of /i.test(String(candidate.translation?.[language] || '').trim()))
       return labelledParts(candidate, language).slice(0, shownCount(Infinity)).map(row => row.text).join('; ');
@@ -207,7 +232,7 @@
       }
       return text.trim();
     }
-    return ownCard(candidate) ? fit(text).text : compact(text);
+    return ownCard(candidate) ? fit(text).text : compactIn(text, language);
   }
   // WN batch 91 (cards chat + advisor 12.11): old meanings of an own card (`extra_meanings` {ru, en, register}) are never in the
   // short text; card(…, {all:true}) adds them at the end, so «ещё N значений» counts them and opens them (G57, the same cut as
@@ -219,8 +244,8 @@
   function extraMeanings(candidate, language) {
     if (!ALL || !ownCard(candidate) || !Array.isArray(candidate.item.extra_meanings)) return [];
     return candidate.item.extra_meanings.map(m => {
-      const text = String(m?.[language] || '').trim(), label = EXTRA_REGISTER[m?.register];
-      return text ? {labels:label ? [{short:label[language], full:label[`${language}Full`], id:label.id}] : [], text} : null;
+      const text = String(m?.[language] || '').trim(), label = EXTRA_REGISTER[m?.register], ui = language === 'ru' ? 'ru' : 'en';
+      return text ? {labels:label ? [{short:label[ui], full:label[`${ui}Full`], id:label.id}] : [], text} : null;
     }).filter(Boolean);
   }
   // The own text with the old meanings after it: {text, segments} (segments null without them).
@@ -254,12 +279,13 @@
     });
   }
   function alternatives(resolution, selected, language) {
+    language = textLanguage(language);
     const same = c => !!selected && key(c) === key(selected) && isName(c) === isName(selected);
     return meaningGroups(resolution.candidates).sort((a,b) => Number(same(a.candidate)) - Number(same(b.candidate))).flatMap(group => {
       const base = group.candidate;
       const isSelected = same(base);
       if (isSelected) {
-        const translated = compact(extraText(group.rows, selected, language));
+        const translated = compactIn(extraText(group.rows, selected, language), language);
         const displayLanguage = translated ? language : 'en';
         const text = translated || compact(extraText(group.rows, selected, displayLanguage));
         return text ? [{candidate:group.rows.find(c => c !== selected && c.translation?.[displayLanguage]), text, language:displayLanguage}] : [];
@@ -687,9 +713,9 @@
   function particleVerbLines(f, language) {
     const line = v => {
       let parts = meaningParts(brief(v, language)), shown = language, prefix = '';
-      if (!parts.length && language === 'ru') { parts = meaningParts(brief(v, 'en')); shown = 'en'; prefix = 'английский: '; }
+      if (!parts.length && language !== 'en') { parts = meaningParts(brief(v, 'en')); shown = 'en'; prefix = language === 'ru' ? 'английский: ' : ''; }
       const own = ownCard(v), rest = own ? Math.max(0, meaningParts(v.translation?.[shown] || '').length - 2) : 0;
-      return {text:`${v.lemma} — ${prefix}${parts.slice(0, shownCount(Infinity)).join('; ')}`, more:rest, entryId:own ? v.dictionaryId || null : null};
+      return {text:`${v.lemma} — ${prefix}${parts.slice(0, shownCount(Infinity)).join('; ')}`, more:rest, entryId:own ? v.dictionaryId || null : null, shown};
     };
     // (advisor 08.11: a particle without a meaning of its own in the table — ab-, aus-, nach- — is shown bare: «ab- · fressen — to eat»)
     const particleMeaning = f.particle[language] || f.particle.en;
@@ -698,7 +724,7 @@
   // The card: heading «hinabrutschen = hinab + rutschen», the grammar of the verb form (Präteritum, Perfekt mit … and its
   // highlight), one line per part.
   function particleVerbCard(resolution, candidate, options) {
-    const f = candidate.formation, language = options.language === 'ru' ? 'ru' : 'en', lookup = options.lookup || (() => null);
+    const f = candidate.formation, language = textLanguage(options.language), lookup = options.lookup || (() => null);
     // The verb is the card's verb (lemma herabrutschen): its construction names it (Konjunktiv II mit hinabrutschen, not the
     // auxiliary's label of another verb).
     const verb = {...f.verb, lemma:f.lemma, ...(candidate.construction ? {construction:candidate.construction} : {}),
@@ -715,8 +741,10 @@
     const split = candidate.construction?.id === 'directional-split';
     // (advisor 03.11: the grammar line as for the other separable verbs — «Trennbares Verb · Präteritum»)
     if (split && typeof rest.grammar === 'string') rest.grammar = rest.grammar.replace(/^Verb\b/u, 'Trennbares Verb');
+    // (a pack language: the lines are English unless a verb line has the pack's text — review C 17.11, the popup's lang attribute)
+    const linesLanguage = isPack(language) && !particleVerbLines(f, language).some(l => l.shown === language) ? 'en' : language;
     return {...rest, heading:split ? `${f.particle.form}- + ${f.verb.lemma}` : `${f.lemma} = ${f.particle.form} + ${f.verb.lemma}`, text:lines.map(l => l.text).join(' · '), lines,
-      textLanguage:language, missing:false, derived:true, note:'', more:0, helpEntry:null};
+      textLanguage:linesLanguage, missing:false, derived:true, note:'', more:0, helpEntry:null};
   }
   // One line of text (Wortschatz, alternatives, tools): the lines joined with « · ».
   const formationText = (f, language) => formationLines(f, language).map(l => l.text).join(' · ');
@@ -724,7 +752,7 @@
     const f = candidate.formation, cap = s => s.charAt(0).toUpperCase() + s.slice(1);
     if (f.kind === 'name') {
       const text = nameLiteral(f, language);
-      return {heading:f.lemma, grammar:'Name', text, lines:[{text, more:0, helpEntry:null}], textLanguage:language, missing:false, derived:true,
+      return {heading:f.lemma, grammar:'Name', text, lines:[{text, more:0, helpEntry:null}], textLanguage:isPack(language) ? 'en' : language, missing:false, derived:true,
         note:'', more:0, spans:null, helpEntry:null};
     }
     let heading = `${f.gender ? f.gender + ' ' : ''}${f.lemma}`, marks = [];
@@ -749,7 +777,8 @@
     if (language === 'ru' && candidate.wholeRu?.meanings?.length) { const m = fit(candidate.wholeRu.meanings.join('; ')); lines = [{text:m.text, more:m.rest, helpEntry:null}]; }
     // (advisor 09.11) a split with a place-name / surname head and no sign before it: «Name / Nomen · Kompositum» — both readings shown
     const grammar = (f.maybeName ? 'Name / ' : '') + [f.pos, ...marks].join(' · ');
-    return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true,
+    // (a pack language: the parts' meanings are English — formationMeaning(); review C 17.11, the popup's lang attribute)
+    return {heading, grammar, text:lines.map(l => l.text).join(' · '), lines, textLanguage:isPack(language) ? 'en' : language, missing:false, derived:true,
       note:'', more:0, spans:null, helpEntry:null};
   }
   // (advisor + user 10.11) a word no reading found, with a whole Russian record: «Fangnetz · Nomen — рыболовная сеть …» (Russian only;
@@ -771,6 +800,8 @@
   const fromText = (source, meaning, language) => `${language === 'ru' ? 'От' : 'From'} ${source} — ${meaning}`;
   // Dictionary meaning on the chosen language; RU without a Russian value keeps the English one marked.
   function meaningText(candidate, language, inline = false) {
+    // (a pack language without a text of its own: the English meaning, as an English card shows it)
+    if (isPack(language) && !brief(candidate, language, inline)) return meaningText(candidate, 'en', inline);
     if (inline) { const own = brief(candidate, language, true), en = !own && language === 'ru' ? brief(candidate, 'en', true) : '';
       return own ? {text:own, language, more:hiddenMeanings(candidate, language)} : en ? {text:`английский: ${en}`, language:'en', more:hiddenMeanings(candidate, 'en')} : null; }
     const own = brief(candidate, language);
@@ -784,7 +815,7 @@
   // An own dictionary entry (the base of «От lernen — …» lines): D13 fit, like own cards.
   function entryFit(entry, language) {
     if (!entry) return {text:'', rest:0};
-    return fit(language === 'ru' ? entry.translation_ru : entry.translation_en);
+    return fit(language === 'ru' ? entry.translation_ru : language === 'en' ? entry.translation_en : entry[`translation_${language}`] || '');
   }
   /**
    * card(resolution, candidate, {word, language, lookup}) -> {heading, grammar, text, textLanguage, missing, more, spans, helpEntry}
@@ -798,7 +829,7 @@
   // E7 (reference C8, 24.10.2026): a hyphen stub read as the whole word (Gold- und Silbermünzen) keeps the card of the whole word
   // and adds a line under the meaning; a stub without a whole word that is a function word (Aus- oder Umschalten) is «part of a word».
   function cardCore(resolution, candidate, options = {}) {
-    const language = options.language === 'ru' ? 'ru' : 'en';
+    const language = textLanguage(options.language);
     if (candidate?.wordFragment) return {heading:candidate.lemma, grammar:'', text:candidate.translation[language], textLanguage:language,
       missing:false, derived:true, note:'', more:0, spans:candidate.compound?.spans || null, helpEntry:null};
     let model = wordCard(resolution, candidate, options);
@@ -873,11 +904,13 @@
     return {...model, more:hiddenCount(model.text, full.text)};
   }
   function wordCard(resolution, candidate, options = {}) {
-    const language = options.language === 'ru' ? 'ru' : 'en', word = options.word || resolution?.form || '';
+    const language = textLanguage(options.language), word = options.word || resolution?.form || '';
     const lookup = options.lookup || (() => null);
-    if (!candidate) return {heading:word, grammar:'', text:NO_TRANSLATION[language], textLanguage:language, missing:true, spans:null, helpEntry:null};
+    if (!candidate) return {heading:word, grammar:'', text:say(NO_TRANSLATION, language), textLanguage:language, missing:true, spans:null, helpEntry:null};
     // G47: an external full verb without a meaning in this language (herabfallen in English) shows its parts.
-    if (candidate.directionalSimple && (!brief(candidate.directionalFull || candidate, language) || candidate.directionalPhrase?.[language])) candidate = candidate.directionalSimple;
+    // (the full verb or its parts — a choice: for a pack language decided as in English, review A 17.11)
+    const decide = isPack(language) ? 'en' : language;
+    if (candidate.directionalSimple && (!brief(candidate.directionalFull || candidate, decide) || candidate.directionalPhrase?.[decide])) candidate = candidate.directionalSimple;
     if (candidate.formation?.kind === 'particle-verb') return particleVerbCard(resolution, candidate, options);
     if (candidate.formation) return formationCard(candidate, language, lookup);
     const confirmed = !!options.confirmed;
@@ -968,11 +1001,12 @@
       const synthetic = value => String(value || '').split(/:\s*/u).slice(1).join(': ').trim();
       // #20 (advisor 05.11): an outside noun of this very nominalization with a meaning in this language (der Fremde
       // «незнакомец», die Alte «старуха», das Gute «добро») is shown as the noun itself, without «aus Adjektiv».
-      const nounMeaning = (!fromVerb || usage?.kind === 'participle') && compact(usage?.noun?.translation?.[language] || '');
+      // (a pack language without the noun's meaning in it: the English one, as an English card — der Gute «something good»)
+      const nounMeaning = (!fromVerb || usage?.kind === 'participle') && compact(usage?.noun?.translation?.[language] || (isPack(language) ? usage?.noun?.translation?.en : '') || '');
       // #89 (advisor 16.11): a nominalized superlative (der Schwächste, die Klügste, meine Besten) — «aus Adjektiv X · Superlativ»; Russian
       // «самый» + the card's adjective meanings, not declined by gender (der / die / das alike); English the card's meaning as it is
       if (usage?.superlative && !nounMeaning) marks.push('Superlativ');
-      if (nounMeaning) { marks = []; text = {text:nounMeaning, language}; }
+      if (nounMeaning) { marks = []; text = {text:nounMeaning, language:isPack(language) && !usage?.noun?.translation?.[language] ? 'en' : language}; }
       else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {
         const own = entryFit(baseEntry, language), ownEn = entryFit(baseEntry, 'en');
@@ -988,15 +1022,16 @@
         // The sibling's meaning as the card shows it (labels cut, two senses at most), never a bare form note.
         const siblingText = lang => { if (!sibling || realMeaning(lang)) return '';
           const t = brief(sibling, lang); return t && !label(t) ? t : ''; };
-        const meaning = own.text || compact(synthetic(candidate.translation?.[language])) || siblingText(language);
-        const english = !meaning && language === 'ru' ? ownEn.text || compact(synthetic(candidate.translation?.en)) || ownNoun || siblingText('en') : '';
+        // (a pack text is a dictionary gloss, not «… от «x»: meaning» — nothing to cut at its colon: «lm od: Narr», review B 17.11)
+        const meaning = own.text || (isPack(language) ? '' : compact(synthetic(candidate.translation?.[language]))) || siblingText(language);
+        const english = !meaning && language !== 'en' ? ownEn.text || compact(synthetic(candidate.translation?.en)) || ownNoun || siblingText('en') : '';
         // The noun's own meaning in this language comes first (das Grinsen «ухмылка») — unless an own card of the verb is there
         // and the noun's record has several readings (das Übersetzen «переправа; перевод» — the verb card decides): review 23.10.
         const nounOwn = gerund && language !== 'en' && realMeaning(language) &&
           (!own.text || !/;/u.test(String(candidate.translation?.en || '').replace(/^gerund of[^;]*;?/iu, '').trim()));
-        if (nounOwn) text = {text:compact(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, '')), language};
+        if (nounOwn) text = {text:compactIn(String(candidate.translation[language]).replace(/^gerund of[^;]*;?/iu, ''), language), language};
         else if (meaning) { text = {text:fromText(base, usage?.superlative && language === 'ru' ? superlativeRu(meaning) : meaning, language), language}; more = own.text ? own.rest : 0; }
-        else if (english) { text = {text:`английский: ${fromText(base, english, 'en')}`, language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
+        else if (english) { text = {text:`${language === 'ru' ? 'английский: ' : ''}${fromText(base, english, 'en')}`, language:'en'}; more = ownEn.text ? ownEn.rest : 0; }
       }
       if (baseEntry && !candidate.item) helpEntry = baseEntry;
     }
@@ -1038,9 +1073,9 @@
     const formTranslation = candidate.formTranslation;
     if (formTranslation && !text) {
       headingText = formTranslation.form;
-      const own = compact(formTranslation[language]), english = language === 'ru' && !own ? compact(formTranslation.en) : '';
+      const own = compactIn(formTranslation[language], language), english = language !== 'en' && !own ? compact(formTranslation.en) : '';
       if (own) text = {text:own, language};
-      else if (english) text = {text:`английский: ${english}`, language:'en'};
+      else if (english) text = {text:`${language === 'ru' ? 'английский: ' : ''}${english}`, language:'en'};
     }
     // Reference 13 (user decision 19.10): a name is «Name» without a translation — the dictionary
     // records of names are English notes that leak into Russian.
@@ -1060,7 +1095,7 @@
         spans:k.spans || null, helpEntry:null};
     }
     const derived = !!text;
-    if (!text && k.role) text = {text:ROLE_TEXT[k.role][language], language};
+    if (!text && k.role) text = {text:say(ROLE_TEXT[k.role], language), language};
     if (!text && !contraction?.expression) { text = meaningText(candidate, language); more = text?.more || 0; }
     // (advisor 17.11: the gerundive — «здесь: (который) надо / можно — …» before the meaning; the card's text is not declined)
     if (features?.zuGerundive && text?.text) text = {...text, text:`${language === 'ru' ? 'здесь: (который) надо / можно' : 'here: to be done / can be done'} — ${text.text}`};
@@ -1068,7 +1103,7 @@
     // «auxiliary verb» first, the own meaning second (the order of senses, not a link: no mark, no highlight).
     const auxHint = candidate.formFeatures?.auxiliaryHint;
     if (auxHint && !k.role && text && !contraction) {
-      const first = AUX_HINT_TEXT[auxHint][language];
+      const first = say(AUX_HINT_TEXT[auxHint], language);
       text = {text:`${first}; ${text.text}`, language:text.language};
     }
     // B7: colloquial spellings — «war’s = war + es», «hab (= habe)»; es gibt / es geht
@@ -1105,10 +1140,10 @@
     // A reflexive verb with an interpretation keeps its note under the meaning.
     const kn = candidate.construction;
     const note = kn && (confirmed || kn.confidence !== 'tentative') && kn.id === 'reflexive-verb' && kn.interpretation
-      ? kn.note?.[language] || '' : '';
+      ? say(kn.note, language) || '' : '';
     // Labels (reference 2.A): segments of the plain text, only when the text is the meaning itself.
     const segments = text?.segments && (!derived || text.prefix) && !contraction ? {segments:text.segments, segmentPrefix:text.prefix || ''} : {};
-    return {heading:headingText, grammar, text:text ? text.text : NO_TRANSLATION[language], textLanguage:text ? text.language : language,
+    return {heading:headingText, grammar, text:text ? text.text : say(NO_TRANSLATION, language), textLanguage:text ? text.language : language,
       missing:!text, derived, note, more:text ? more : 0, spans:exprSpans || (separableLink ? linkSpans : k.spans) || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
   }
   // G70 (user 24.10.2026): the heading, the grammar line and the translation come from one card. A reflexive use of a verb whose
@@ -1121,8 +1156,10 @@
   //      (as G47): the meaning of sich X is not guessed from X. With an own card «sich X» the resolver chooses it (p. 1).
   // (G57's card() wraps this one, so «ещё N значений» counts the reflexive card that is shown)
   function cardBase(resolution, candidate, options = {}) {
+    // (a pack language: the card is built in it only when this candidate has a text in it — otherwise the English card)
+    if (isPack(textLanguage(options.language))) options = {...options, language:cardLanguage(candidate, options.language)};
     const result = cardCore(resolution, candidate, options);
-    const k = candidate?.construction, language = options.language === 'ru' ? 'ru' : 'en';
+    const k = candidate?.construction, language = textLanguage(options.language);
     if (!k || k.id !== 'reflexive-verb' || k.lexicalSenseConfirmed || k.interpretation || k.attachmentOnly || candidate.formation ||
       k.confidence === 'tentative' && !options.confirmed || pos(candidate) !== 'Verb') return result;
     const lemma = String(candidate.lemma || '').replace(/^sich\s+/u, '');
@@ -1147,19 +1184,21 @@
         // (with the dative sign only dat: an accusative or optional sense is excluded by the object — Er wusch sich die Hände is not
         // «мыться»; without the sign a dative-only verb shows its dat senses)
         const pick = rows.some(([, m]) => kinds.includes(m)) ? rows.filter(([, m]) => kinds.includes(m)) : dative ? [] : rows;
-        const clean = value => compact(value).replace(/^~\s*sich\s+/u, '').replace(/^[\p{Ll}ßäöü]+,\s*sich\s+/u, '')
+        const clean = value => compactIn(value, lang).replace(/^~\s*sich\s+/u, '').replace(/^[\p{Ll}ßäöü]+,\s*sich\s+/u, '')
           .replace(/^sich\s+(?:~\s*)?(?=[^\s])/u, '').replace(/^~\s*/u, '').trim();
         return [...new Set(pick.flatMap(([text]) => clean(text).split(';').map(t => t.trim())))]
           .filter(t => t && !/~/u.test(t) && (lang !== 'ru' || /[а-яё]/iu.test(t)));
       };
       // (compact() per sense keeps two parts of a long sense; all marked senses are listed — fit() and «ещё N значений» like the field)
       // (one language's marks only for its own interface — a mark only in the other dictionary leaves this one as before, advisor 27.10)
-      const own = markedSenses(language);
-      if (own.length) {
-        const shown = fit(own.join('; '));
+      // (a pack language: whether the marked senses are the card is decided by the English marks, as the English card — review A
+      // 17.11; the text is the pack's marked senses when it has them, otherwise the English ones)
+      const own = markedSenses(language), decided = isPack(language) ? markedSenses('en') : own;
+      if (decided.length) {
+        const shownLanguage = own.length ? language : 'en', shown = fit((own.length ? own : decided).join('; '));
         const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
         return {...rest, heading:`sich ${lemma}`, grammar:rest.grammar.split(' · ').map(m => m.replace(` mit ${lemma}`, ` mit sich ${lemma}`)).join(' · '),
-          text:shown.text, textLanguage:language, missing:false, derived:true, note:rest.note || '', more:shown.rest};
+          text:shown.text, textLanguage:shownLanguage, missing:false, derived:true, note:rest.note || '', more:shown.rest};
       }
     }
     // G70 step 2 (WN reflexive batch, 24.10): the field `reflexive` of an own card — the meaning of X with an accusative sich
@@ -1172,18 +1211,20 @@
     if (k.freeDative && !dativeField) return {...result, heading:lemma, grammar:result.grammar.split(' · ').map(m => m.replace(` mit sich ${lemma}`, ` mit ${lemma}`)).join(' · ')};
     const field = dativeField ? (k.reflexiveCase !== 'Akkusativ' ? ownItem.reflexive : null) : k.reflexiveCase !== 'Dativ' && !k.objectGroup ? ownItem?.reflexive : null;
     // (shown as an own card's meaning — brackets kept, fit() with «ещё N значений» —; derived, so a choice row shows it too)
-    const fieldFit = fit(String(field?.[`translation_${language}`] || ''));
+    // (a pack language without the field's text in it: the English one, as an English card)
+    const fieldLanguage = isPack(language) && !String(field?.[`translation_${language}`] || '').trim() ? 'en' : language;
+    const fieldFit = fit(String(field?.[`translation_${fieldLanguage}`] || ''));
     if (fieldFit.text) {
       const {segments: _s, segmentPrefix: _p, lines: _l, ...rest} = result;
-      const note = String(field[`note_${language}`] || '').trim();
-      return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:language, missing:false, derived:true, note, more:fieldFit.rest};
+      const note = String(field[`note_${fieldLanguage}`] || '').trim();
+      return {...rest, heading:`sich ${lemma}`, text:fieldFit.text, textLanguage:fieldLanguage, missing:false, derived:true, note, more:fieldFit.rest};
     }
     // (advisor + user 06.11, SICH_X_NO_TRANSLATION: no meaning of «sich X» in the interface language — the plain verb's own line,
     // signed with its name, as a part line: «regen — шевелить, двигать»; «not found» only when the verb has none either)
     const meaning = meaningText(candidate, language);
     // (user 06.11: the mark «(без sich)» after the verb's name is required — without it the line reads as the meaning of «sich X»)
     const lines = meaning ? [{...namedLine(`${lemma} ${language === 'ru' ? '(без sich)' : '(without sich)'}`, meaning.text.replace(/^английский: /u, ''), meaning.more || 0), helpEntry:candidate.item || null}]
-      : [{text:NO_TRANSLATION[language], more:0, helpEntry:null}];
+      : [{text:say(NO_TRANSLATION, language), more:0, helpEntry:null}];
     const {segments: _s, segmentPrefix: _p, ...rest} = result;
     return {...rest, heading:`sich ${lemma}`, text:lines.map(l => l.text).join(' · '), lines, textLanguage:language, missing:false, derived:true, more:0};
   }

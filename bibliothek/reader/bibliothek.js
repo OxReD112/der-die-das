@@ -107,6 +107,13 @@
   });
   const norm = value => String(value || "").normalize("NFC").trim().toLowerCase();
   const locale = () => window.DeutschTranslation?.getLang?.() || "en";
+  // The language of the popup's card text (17.11.2026, chat «languages in the reader», Ч2): a pack language (lang/<code>/) when one is
+  // chosen — its texts come from resolver/pack-translations.js, and a card without them is the English one (meaning-display.js);
+  // otherwise the interface language (en / ru) as before. The other texts of the reader stay locale() (stage Ч6).
+  const popupLanguage = () => {
+    const shown = window.DeutschTranslation?.getDisplayLang?.();
+    return shown && shown !== "en" && shown !== "ru" && window.DeutschTranslation?.isPack?.(shown) ? shown : locale();
+  };
   // 09.11 (Alena): the rule of the app — names, buttons and short messages in German; explanations in the language of
   // the setting. The library's explanations (the ⓘ note, the empty library) and its error messages follow it here;
   // the messages of the import files stay in English there and are translated by this table.
@@ -1161,6 +1168,9 @@
     try { resolution = await lemmaResolver.resolve(word, context); }
     catch (error) { resolution = {candidates:[], selected:null, status:"unresolved", unresolvedMeanings:[], error}; }
     if (request !== lookupRequest) return;
+    // (Ч2) the texts of a pack language for the external candidates — display only, after the choice; en / ru: nothing
+    await window.BibliothekPackTranslations?.enrich(resolution, popupLanguage());
+    if (request !== lookupRequest) return;
     const linkedReflexive = resolution.candidates.find(c=>c.construction?.id === "reflexive-verb");
     let saved = null;
     try { saved = context ? await window.BibliothekMeaningSelections.get(context) : null; } catch (_) {}
@@ -1251,7 +1261,7 @@
           // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
           note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};
       } else if (candidate) {
-        model = display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed});
+        model = display.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:userConfirmed});
       } else if (!resolution.candidates.length && display.wholeCard?.(resolution, word, locale())) {
         // (advisor + user 10.11) a whole Russian record of a word nothing else knows (Russian interface only)
         model = display.wholeCard(resolution, word, locale());
@@ -1269,7 +1279,7 @@
       grammarLine.textContent = model.grammar; grammarLine.hidden = !model.grammar;
       content.textContent = "";
       const full = (expandedMain || expandedLines.size || expandedParts.size) && candidate && !referencePronoun
-        ? display.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:userConfirmed, all:true}) : null;
+        ? display.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:userConfirmed, all:true}) : null;
       const shown = expandedMain && full && !model.lines ? full : model;
       const moreButton = (n, onClick) => {
         const more = document.createElement("button"); more.type = "button"; more.className = "popover-more-meanings";
@@ -1330,7 +1340,7 @@
         });
         content.append(note);
       }
-      content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : locale();
+      content.lang = model.textLanguage === "en" && !(ru && /^английский: /u.test(model.text)) ? "en" : popupLanguage();
       updateTranslationFade();
       $("popover-alternatives").querySelector("summary").textContent = ru ? "Другие значения" : "Other meanings";
       if (referencePronoun && linkedReflexive) {
@@ -1376,7 +1386,7 @@
     };
     const renderChoices = () => {
       choices.replaceChildren();
-      const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, locale()).filter(row=>!showPronounSummary || !reference.isPronoun(row.candidate));
+      const displayed = window.BibliothekMeaningDisplay.alternatives(resolution, selectedResolution, popupLanguage()).filter(row=>!showPronounSummary || !reference.isPronoun(row.candidate));
       if(showPronounSummary)alternatives.open=false;
       alternatives.hidden = !displayed.length;
       alternatives.classList.toggle("is-choosing", popupAmbiguous && !showPronounSummary);
@@ -1409,7 +1419,7 @@
       if(candidate.dictionaryId)button.dataset.dictionaryId=candidate.dictionaryId;
       // Each alternative is a small card: heading / grammar line / dictionary meaning.
       // A variant is shown as it would read once chosen (reference, section 2).
-      const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:locale(), lookup:findEntry, confirmed:true});
+      const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:true});
       const marked = altModel.derived ? altModel.text : locale() === "ru" && language === "en" ? `английский: ${text}` : text;
       // G57 (user 24.10.2026): more meanings are only named here («ещё N значений», not a button): choosing the row opens its card,
       // and the number is the one that card shows (a card of parts: all its lines).
@@ -1428,9 +1438,9 @@
       choices.append(button);
       });
     };
-    let renderedLanguage = locale(), languageRevision = 0;
+    let renderedLanguage = popupLanguage(), languageRevision = 0;
     refreshPopupLanguage = async () => {
-      const language = locale();
+      const language = popupLanguage();
       if (request !== lookupRequest || language === renderedLanguage) return;
       renderedLanguage = language;
       expandedMain = false; expandedLines.clear(); expandedParts.clear();
@@ -1440,7 +1450,8 @@
       renderSelection();
       if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();
       await window.BibliothekRussianTranslations?.enrich(resolution,language);
-      if (request !== lookupRequest || revision !== languageRevision || locale() !== language) return;
+      await window.BibliothekPackTranslations?.enrich(resolution,language);
+      if (request !== lookupRequest || revision !== languageRevision || popupLanguage() !== language) return;
       renderSelection();
       if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();
     };
