@@ -849,8 +849,8 @@
      sentenceTranslation:{ru,en}}}]} — an entry may carry its own example for this set, and a word that is not in
      the Wörterbuch (e.g. „es sei denn“) is a custom entry; the Wörterbuch is not changed. Cards keep dictionaryId (duplicates are checked per meaning). */
   const SETS = [
-    { id: "a2-b1", name: "A2 → B1", file: "sets/a2-b1.json?v=2" },
-    { id: "b1-b2", name: "B1 → B2", file: "sets/b1-b2.json?v=2" },
+    { id: "a2-b1", name: "A2 → B1", file: "sets/a2-b1.json?v=3" },
+    { id: "b1-b2", name: "B1 → B2", file: "sets/b1-b2.json?v=3" },
     { id: "b2-c1", name: "B2 → C1", file: "sets/b2-c1.json?v=2" }
   ];
   // Choose screen (wortschatz.js showChoose): one collection-line per set + „Start with my own words“.

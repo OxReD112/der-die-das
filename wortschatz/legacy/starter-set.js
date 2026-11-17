@@ -2731,13 +2731,13 @@ window.WORDS = [
     "blank": "Ich schicke die _____ per Post.",
     "revealed": "Ich schicke die Kündigung per Post.",
     "sentenceTranslation": {
-      "ru": "Я отправляю расторжение договора по почте.",
+      "ru": "Я отправляю уведомление о расторжении договора по почте.",
       "en": "I'm sending the cancellation by post."
     },
     "grammar": "die Kündigung · die Kündigungen",
     "translation": {
-      "ru": "увольнение; расторжение (договора)",
-      "en": "resignation; cancellation (of a contract)"
+      "ru": "расторжение (договора); увольнение",
+      "en": "cancellation (of a contract); dismissal, resignation"
     },
     "pos": "Substantiv",
     "base": "die Kündigung",
@@ -3150,8 +3150,8 @@ window.WORDS = [
     },
     "grammar": "erreichen · erreichte · hat erreicht",
     "translation": {
-      "ru": "достигать; успевать (на поезд); дозваниваться",
-      "en": "to reach; to catch (a train); to get through to (by phone)"
+      "ru": "успевать (на поезд); достигать; дозваниваться",
+      "en": "to catch (a train); to reach; to get through to (by phone)"
     },
     "pos": "Verb",
     "base": "erreichen",
@@ -3204,8 +3204,8 @@ window.WORDS = [
     },
     "grammar": "der Haushalt · die Haushalte",
     "translation": {
-      "ru": "домашнее хозяйство; бюджет",
-      "en": "household, housework; budget"
+      "ru": "домашние дела, домашнее хозяйство; бюджет",
+      "en": "housework, household; budget"
     },
     "pos": "Substantiv",
     "base": "der Haushalt",
