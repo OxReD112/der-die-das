@@ -317,3 +317,32 @@ body:has(#pGame:not(.hidden)) .version-mark { display: none; }
   #explore .scale-labels { margin-top: 8px; }
   #explore .note { line-height: 1.4; min-height: 5.6em; margin-top: 8px; }
 }
+
+/* ===== TABLETS: BLOCKS IN PLACE, MORE AIR (17.11.2026, Alena) =====
+   As on phones, every block has a fixed height, so nothing moves from task to task: situation 2 lines (its text at
+   the bottom, next to the sentence), sentence 2 lines (held in partikeln.js / partikeln-ueben.js, a one-line sentence
+   in the middle), Entdecken explanation 3 lines, Üben «≈ … / also right» 1 line, Üben explanation 4 lines (measured on
+   iPad, both orientations, RU: never more). The room this leaves is then spread above the task (placeNote /
+   placeTask), and the particles and Weiter stand on the bottom line of every exercise. */
+@media (min-width: 700px) and (min-height: 740px) {
+  .context { min-height: 2.8em; display: flex; flex-direction: column; justify-content: flex-end; }
+  #explore .note { min-height: 4.5em; }
+  #pGame .fb-also, #pGame .fb-also:empty { display: block; min-height: 1.5em; line-height: 1.5; }
+  #pGame .fb-note { min-height: 6em; }
+}
+/* 17.11.2026 (Alena: «блоки как будто склеены»): on a touch tablet a little more air between the blocks (about half
+   as much again); the room left is then spread as before. Not on a computer. */
+@media (min-width: 700px) and (min-height: 740px) and (pointer: coarse) {
+  .context { margin-bottom: 16px; }
+  #explore .translation { margin-top: 16px; }
+  #explore .meaning { margin-top: 28px; }
+  #explore .meaning::before { margin-bottom: 24px; }
+  .hint { margin-top: 6px; }
+  .scale { margin-top: 20px; }
+  .task-label { margin-top: 40px; }
+  #pTone { margin-top: 22px; }
+  #pGame .feedback { margin-top: 44px; padding-top: 30px; }
+  .feedback .translation { margin-top: 14px; }
+  #pGame .fb-also { margin-top: 10px; }
+  #pGame .fb-note { margin-top: 22px; }
+}

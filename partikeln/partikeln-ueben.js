@@ -139,7 +139,7 @@
     probe.remove();
     /* 16.11.2026 (Alena, evening): on a phone the sentence always has (at least) its two lines, so the blocks below
        keep their place from task to task */
-    if (window.matchMedia("(max-width: 699.98px)").matches) R.hold = Math.max(R.hold, slotHeight(el));
+    if (window.matchMedia("(max-width: 699.98px)").matches || TABLET.matches) R.hold = Math.max(R.hold, slotHeight(el)); /* tablets too (17.11) */
   }
   // two lines at the sentence's own size (not the fitted one), so the block is the same for every task
   function slotHeight(el) {
@@ -153,7 +153,7 @@
     el.style.paddingTop = el.style.paddingBottom = "";
     if (!R || !R.hold) return;
     var free = Math.max(0, R.hold - el.getBoundingClientRect().height); /* exact (no 1 px jumps) */
-    if (!window.matchMedia("(max-width: 699.98px)").matches) { el.style.paddingTop = free + "px"; return; }
+    if (!window.matchMedia("(max-width: 699.98px)").matches && !TABLET.matches) { el.style.paddingTop = free + "px"; return; }
     el.style.paddingTop = free / 2 + "px"; el.style.paddingBottom = free / 2 + "px";
   }
   window.addEventListener("resize", function () {
@@ -196,7 +196,9 @@
     var el = $("pSentence"), q = R.list[R.i];
     el.style.fontSize = "";
     document.querySelector(".app").scrollTop = 0;
-    if (TABLET.matches || !window.DeutschBottom.active()) return;
+    R.top = 0;
+    if (!window.DeutschBottom.active()) return;
+    if (TABLET.matches) { placeTask(); return; }
     var base = parseFloat(getComputedStyle(el).fontSize), size = base, min = base * 0.8;
     function over() {
       var worst = -Infinity, c = $("pContinue");
@@ -211,18 +213,30 @@
     }
     while (over() > 0 && size > min) { size = Math.max(min, size - 1); el.style.fontSize = size + "px"; }
   }
+  /* Tablets (17.11.2026, Alena: «задание не к самому верху, чуть пониже»): the task stands a little lower — 40 % of
+     the room left between the top bar and Weiter (with the answer and its explanation in place) goes above it. Every
+     block has a fixed height (partikeln.css, «TABLETS»), so this is the same for every task: nothing moves. */
+  function placeTask() {
+    var body = $("pBody"), q = R.list[R.i], end = 0;
+    body.style.paddingTop = "";
+    measureHold();
+    q.options.forEach(function (k) { fillAnswer(k); end = Math.max(end, $("pFeedback").getBoundingClientRect().bottom); });
+    var room = window.DeutschBottom.line() - $("pContinue").offsetHeight - 24 - end;
+    R.top = Math.max(0, Math.round(room * 0.4));
+  }
   /* Phones (Alena 05.11, as Ortspräpositionen): the answer buttons — and after the answer Weiter — end on the shared
      bottom line (components/deutsch-bottom-v1.js: where the keyboard ends in the typing exercises). Only free room is
-     used: never makes the page scroll. Touch screens only, not short ones (the shared rule in that file). Tablets: as
-     before (their round comes later). */
+     used: never makes the page scroll. Touch screens only, not short ones (the shared rule in that file). Tablets the
+     same since 17.11.2026. */
   var TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
   function placeBottom() {
     var done = !$("pFeedback").classList.contains("hidden");
     var el = done ? $("pContinue") : $("pAnswers");
     el.style.marginTop = "";
     window.DeutschBottom.fitScroll($("pGame"), null); $("pBody").scrollTop = 0;
-    if (TABLET.matches || $("pGame").classList.contains("hidden")) return;
-    window.DeutschBottom.pin(el);
+    $("pBody").style.paddingTop = R && R.top ? R.top + "px" : "";
+    if ($("pGame").classList.contains("hidden")) return;
+    window.DeutschBottom.pin(el); /* tablets too since 17.11 (Alena: the particles at the bottom, on the line of every exercise) */
     /* the last way out (16.11): the answer does not fit even with the smaller question — only the task scrolls */
     if (done && window.DeutschBottom.fitScroll($("pGame"), $("pBody"), { button: el })) el.style.marginTop = "";
   }

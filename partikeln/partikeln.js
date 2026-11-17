@@ -195,6 +195,8 @@
      particle does, the scale, the explanation. Each has a fixed height (partikeln.css, «BLOCKS IN PLACE»); the
      sentence's two lines are held here: a one-line sentence sits in the middle of them. */
   var PHONE = window.matchMedia("(max-width: 699.98px)");
+  /* 17.11.2026 (Alena): tablets keep their blocks in place too (partikeln.css, «TABLETS»): the sentence's two lines */
+  var TABLET = window.matchMedia("(min-width: 700px) and (min-height: 740px)");
   // two lines at the sentence's own size (not the fitted one), so the block is the same for every sentence
   function slotHeight(el) {
     var cs = getComputedStyle(el), lh = parseFloat(cs.lineHeight) / parseFloat(cs.fontSize);
@@ -204,7 +206,7 @@
   function holdSentence() {
     var el = $("sentence");
     el.style.paddingTop = el.style.paddingBottom = "";
-    if (!PHONE.matches) return;
+    if (!PHONE.matches && !TABLET.matches) return;
     var free = Math.max(0, slotHeight(el) - el.getBoundingClientRect().height), top = free / 2; /* exact (no 1 px jumps) */
     el.style.paddingTop = top + "px";
     el.style.paddingBottom = free - top + "px";
@@ -307,13 +309,19 @@
 
   /* The explanation sits in the middle of the empty space between the scale and the particles (Alena 05.11).
      Only when the particles are pinned to the bottom; on short screens it simply follows the scale. */
+  /* Tablets (17.11.2026, Alena: «всё прижато кверху, хотя много места»): the free room is shared in three — above
+     the task (under the tabs), between the scale and the explanation, and between the explanation and the particles.
+     Every block has a fixed height there (CSS), so the room is the same for every sentence: nothing moves. */
   function placeNote() {
-    var note = $("note"), parts = $("particles"), labels = document.querySelector(".scale-labels");
-    note.style.marginTop = "";
+    var note = $("note"), parts = $("particles"), labels = document.querySelector(".scale-labels"), prompt = document.querySelector("#explore .prompt");
+    note.style.marginTop = ""; prompt.style.marginTop = "";
     if (getComputedStyle(parts).position !== "fixed" || PHONE.matches) return; /* phones: the explanation's place is fixed (CSS) */
     var top = labels.getBoundingClientRect().bottom, bottom = parts.getBoundingClientRect().top;
     var free = bottom - top - note.offsetHeight;
-    note.style.marginTop = Math.max(14, Math.floor(free / 2)) + "px";
+    if (!TABLET.matches) { note.style.marginTop = Math.max(14, Math.floor(free / 2)) + "px"; return; }
+    var share = Math.max(14, Math.floor(free / 3));
+    prompt.style.marginTop = parseFloat(getComputedStyle(prompt).marginTop) + share - 14 + "px";
+    note.style.marginTop = share + "px";
   }
 
   /* fonts arrive late (deutsch-fonts-v1.js sends a resize): measure the rows again */
