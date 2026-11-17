@@ -443,7 +443,7 @@ details[open] > summary .ui-chev-fold {
        </button> …
      </div>
    A row 14 px above and below, a hairline between the rows (not after the last); the dot 24, chosen: filled with
-   the main button's colour and a small dot in its text colour. Name 16 / 600, note 14 grey (as many notes as needed,
+   the main button's colour (--end-main-bg of deutsch-base-v1.css, else the page's --main-bg) and a small dot in its text colour. Name 16 / 600, note 14 grey (as many notes as needed,
    each on its own line; .ui-choice-num on a note of numbers). Was in wortschatz/collection-window.css as .coll-pace (the note 13, set to 14 in the window). */
 .ui-choice {
   display: flex;
@@ -473,15 +473,15 @@ details[open] > summary .ui-chev-fold {
   place-content: center;
 }
 .ui-choice.on .ui-choice-dot {
-  border-color: var(--main-bg);
-  background: var(--main-bg);
+  border-color: var(--end-main-bg, var(--main-bg)); /* the main button's colour (deutsch-base-v1.css); Wortschatz: its own, same value */
+  background: var(--end-main-bg, var(--main-bg));
 }
 .ui-choice.on .ui-choice-dot::after {
   content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--main-text);
+  background: var(--end-main-text, var(--main-text));
 }
 .ui-choice-text {
   display: flex;
