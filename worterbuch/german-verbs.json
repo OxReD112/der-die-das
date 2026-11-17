@@ -11145,11 +11145,11 @@
   {
     "id": "verb-220",
     "infinitive": "ansehen",
-    "translation_ru": "смотреть (на); рассматривать",
-    "translation_en": "to look at; to watch",
+    "translation_ru": "смотреть (на); рассматривать; считать (кем-либо, чем-либо), принимать за",
+    "translation_en": "to look at; to watch; to regard (as), to take for",
     "auxiliary": "haben",
-    "usage_note_ru": "Посмотреть что-либо (фильм, квартиру) — sich (Dativ) etwas ansehen (отдельная карточка): Ich sehe mir die Wohnung morgen an.",
-    "usage_note_en": "To have a look at something (a film, a flat): sich (dative) etwas ansehen (separate card): Ich sehe mir die Wohnung morgen an.",
+    "usage_note_ru": "Посмотреть что-либо (фильм, квартиру) — sich (Dativ) etwas ansehen (отдельная карточка): Ich sehe mir die Wohnung morgen an. Считать кем-либо — als: Er sieht ihn als Freund an. — Он считает его другом. Es wird als Gefahr angesehen. — Это считается опасностью. С прилагательным: Ich sehe es als notwendig an. — Я считаю это необходимым. Принимать за — für: Sie sah ihn für einen Fisch an. — Она приняла его за рыбу.",
+    "usage_note_en": "To have a look at something (a film, a flat): sich (dative) etwas ansehen (separate card): Ich sehe mir die Wohnung morgen an. To regard as — als: Er sieht ihn als Freund an. — He regards him as a friend. Es wird als Gefahr angesehen. — It is regarded as a danger. With an adjective: Ich sehe es als notwendig an. — I consider it necessary. To take for — für: Sie sah ihn für einen Fisch an. — She took him for a fish.",
     "example_de": "Sieh mich bitte an, wenn ich mit dir rede.",
     "example_cloze": "{{c1::Sieh}} mich bitte {{c1::an}}, wenn ich mit dir rede.",
     "example_ru": "Посмотри на меня, пожалуйста, когда я с тобой разговариваю.",
@@ -11191,6 +11191,16 @@
         "pattern": "Akkusativ",
         "note_ru": "смотреть на кого-либо или что-либо (без предлога)",
         "note_en": "to look at someone or something (no preposition)"
+      },
+      {
+        "pattern": "als + Akkusativ",
+        "note_ru": "считать кем-либо или чем-либо",
+        "note_en": "to regard as someone or something"
+      },
+      {
+        "pattern": "für + Akkusativ",
+        "note_ru": "считать кем-либо или чем-либо; принимать за кого-либо или что-либо",
+        "note_en": "to consider (to be) …, to take for …"
       }
     ],
     "separable_prefix": "an",

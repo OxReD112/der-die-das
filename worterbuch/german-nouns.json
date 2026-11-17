@@ -69600,5 +69600,28 @@
     "example_en": "I want nothing to do with that rabble.",
     "usage_note_ru": "Сброд — грубое, без мн. ч. Старое «пачка, связка» (= der Pack, der Packen): ein Pack Karten, das ganze Pack — колода карт (так в «Алисе»); сейчас — ein Kartenspiel, ein Spiel Karten.",
     "usage_note_en": "Rabble — rude, no plural. The old “bundle” (= der Pack, der Packen): ein Pack Karten, das ganze Pack — a pack of cards (as in Alice); today — ein Kartenspiel, ein Spiel Karten."
+  },
+  {
+    "id": "noun-5383",
+    "word": "Geschworene",
+    "article": "der",
+    "plural": "Geschworenen",
+    "plural_note_ru": "Мн. ч. — присяжные: с артиклем die Geschworenen; без артикля zwölf Geschworene.",
+    "plural_note_en": "Plural — the jurors, the jury: with an article die Geschworenen; without one zwölf Geschworene.",
+    "translation_ru": "присяжный (заседатель), присяжная",
+    "translation_en": "juror, member of the jury",
+    "declension_forms": "der Geschworene · ein Geschworener · die Geschworene · eine Geschworene · mit dem / der Geschworenen · die Geschworenen · zwölf Geschworene",
+    "derived_from": {
+      "type": "Partizip II",
+      "word": "schwören"
+    },
+    "declension_note_ru": "Склоняется как прилагательное перед невидимым Mann / Frau: ein Geschworener, mit dem Geschworenen; о женщине — eine Geschworene, mit der Geschworenen.",
+    "declension_note_en": "Declines like an adjective before an invisible Mann / Frau: ein Geschworener, mit dem Geschworenen; for a woman — eine Geschworene, mit der Geschworenen.",
+    "usage_note_ru": "Суд присяжных — das Geschworenengericht. Устар. форма — Geschworne. В Германии непрофессиональные судьи сегодня обычно называются Schöffen; Geschworene — прежде всего в Австрии и в англо-американском суде.",
+    "usage_note_en": "Jury court — das Geschworenengericht. Older form — Geschworne. In Germany lay judges are today usually called Schöffen; Geschworene are mainly found in Austria and in Anglo-American courts.",
+    "example_de": "Nach langer Beratung sprachen die Geschworenen den Angeklagten frei.",
+    "example_cloze": "Nach langer Beratung sprachen die {{c1::Geschworenen}} den Angeklagten frei.",
+    "example_ru": "После долгого совещания присяжные оправдали подсудимого.",
+    "example_en": "After long deliberation the jury acquitted the defendant."
   }
 ]

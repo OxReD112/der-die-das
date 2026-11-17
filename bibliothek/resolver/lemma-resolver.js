@@ -3545,7 +3545,7 @@
             if(selfMarker!==null)indices.push(selfMarker);
             if(mutualMarker!==null)indices.push(mutualMarker);
             const tentative=unresolvedLassen||zuChoice;
-            const spans=[...new Set(indices)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));
+            let spans=[...new Set(indices)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));
             const caseName=['mir','dir'].includes(words[pronoun])?'Dativ':['mich','dich'].includes(words[pronoun])?'Akkusativ':'Akkusativ/Dativ';
             // G70 (user 24.10.2026, p. 3): a free dative «себе» — mir / dir, or a direct object of its own in the clause (an accusative-
             // capable determiner + a noun, not after a preposition, not the subject: Er kaufte sich ein Buch, sah sich den Film an). The
@@ -3686,6 +3686,12 @@
             // (an empty es in front is no subject: Es regt sich kein Lüftchen, Es zeigte sich ein Problem — the group is the subject)
             // (26.10: a zu-infinitive has no subject of its own — the group after sich is its object: sich darüber keine Gedanken zu machen)
             const objectAfterSubject=objectGroup&&(subject.index!==null&&subject.index<pronoun&&words[subject.index]!=='es'||elidedSubject||zuIndex!==null);
+            // (batch 142 ansehen, advisor 17.11: als / für + Akkusativ «считать, принимать за» takes the reflexive as its accusative object —
+            // Er sieht sich als Opfer an; with a dative sich — mir / dir, a pronoun object or an object group of its own — the pair is not
+            // claimed: Ich habe mir den Film für dich angesehen, Er sah sich das Spiel für zehn Euro an stay sich ansehen «посмотреть»)
+            if(complement&&/^(?:als|für)\s*\+\s*Akkusativ$/u.test(String(complement.pattern||'').trim())&&!reflexiveEntries.has(a.entry)&&(freeDative||objectAfterSubject||objectGroupStrict||pronounObject)){
+              const at=indices.lastIndexOf(indices.find(i=>i>pronoun&&words[i]===norm(String(complement.pattern).split(/\s+/u)[0])));if(at>=0)indices.splice(at,1);complement=null;
+              spans=[...new Set(indices)].sort((a,b)=>a-b).map(i=>({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length}));}
             // (user 25.10, G70 p. 3: sich + an accusative object is a dative sich — sich die Hand verletzen, sich die Haare kämmen, sich die
             // Kette um den Hals legen, sich die Musik anhören: an own dative card, or the plain card X; never an accusative card; sich selbst
             // / selber — the plain card X too: versteht sich selbst nicht «понимать»)
@@ -7062,6 +7068,9 @@
         // A6: the first word of the chain before zu (sterben zu können, geträumt zu haben).
         let chainHead = false;
         if (!found && norm(tokens[clicked+1]?.[0] ?? '') === 'zu') { found = await core(clicked+1); chainHead = !!found; }
+        // (L42 (2), links to-do, advisor 17.11: the participle of the passive perfect zu-infinitive — geliebt worden zu sein)
+        if (!found && norm(tokens[clicked+1]?.[0] ?? '') === 'worden' && norm(tokens[clicked+2]?.[0] ?? '') === 'zu' && /^\p{Ll}/u.test(tokens[clicked][0])) {
+          found = await core(clicked+2); chainHead = !!found; }
         // Modals U (3) (links chat, advisor 01.11): the first of two infinitives joined by und / oder before zu + modal
         // (lösen oder vermeiden zu können) reaches the chain of the second.
         if (!found && ['und','oder'].includes(norm(tokens[clicked+1]?.[0] ?? '')) && norm(tokens[clicked+3]?.[0] ?? '') === 'zu' &&
@@ -7084,6 +7093,29 @@
         let lexical = [], kind = null;
         const degreeBefore = STATE_DEGREE_WORDS.includes(norm(tokens[before-1]?.[0] ?? "")) &&
           !(norm(tokens[before-1][0]) === "so" && soWieComparison(tokens,before));
+        // (L42 (2), links to-do, advisor 17.11: the perfect infinitive of the passive — geliebt worden zu sein, umgeworfen worden zu
+        // sein — is «Perfekt · Passiv mit X», as ist geliebt worden and soll geliebt worden sein; the word before worden is the
+        // participle: an own one, one only another dictionary knows, or particle + participle; one verb only, as for zu werden)
+        const passivePart = before-1;
+        if (second === "sein" && norm(tokens[before][0]) === "worden" && passivePart >= 0 && (opener === null || passivePart > opener) &&
+            joinedTokens(sentence,tokens,passivePart,before) && /^\p{Ll}/u.test(tokens[passivePart][0])) {
+          const word = tokens[passivePart][0];
+          const own = [...new Map((verbAnalyses.get(norm(word)) || []).filter(a => a.kind === "participle" && a.entry)
+            .map(a => [a.entry.id ?? a.entry.word,a.entry])).values()];
+          lexical = own.length ? own : (forms.get(norm(word)) || []).length ? [] : await externalParticiple(word);
+          if (!lexical.length && !(forms.get(norm(word)) || []).length) lexical = await particleParticiple(word);
+          const plain = lexical.filter(e => !/^sich\s/u.test(norm(e.word)));
+          if (plain.length && !tokens.some(t => ["sich","mich","dich","uns","euch"].includes(norm(t[0])))) lexical = plain;
+          if (lexical.length && new Set(lexical.map(e => norm(e.word).replace(/^sich\s+/u,""))).size === 1) {
+            const lemma = String(lexical[0].word).replace(/^sich\s+/u,"");
+            const linked = [...(opener !== null ? [opener] : []),passivePart,before,z,v];
+            return {id:'zu-chain',chain:'passive-perfect',label:'Perfekt',lemma,modal:null,conjunction:conjunction || null,conjunctionWord:conjunction ? norm(conjunction.word) : null,
+              roles:[...lexical,...rows.filter(e => e.word === "werden").slice(0,1),...entries,...(conjunction ? [conjunction] : [])],main:lexical[0],marker:clicked === z,
+              clickedRole:clicked === before ? "passive" : clicked === v ? "auxiliary" : null,
+              note:{ru:'Perfekt · Passiv · zu + инфинитив',en:'Perfekt · Passiv · zu + infinitive'},spans:linked.map(span)};
+          }
+          lexical = [];
+        }
         if (PERFECT_AUXILIARIES.includes(second) && !(second === "sein" && degreeBefore)) {
           lexical = rows.filter(e => (norm(String(e.perfect_form || "").split(/\s+/).pop()) === norm(tokens[before][0]) || joinedPhraseForm(e,tokens[before][0],"participle")) &&
             auxiliariesOf(e).includes(second));
@@ -7863,6 +7895,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // (links chat 04.11: an own card that is only «sich X» names the passive «X» when no sich stands in the part —
             // müssen angemeldet werden: Passiv mit anmelden, as the plain werden-passive does)
             lemma:indices.some(i => norm(tokens[i][0]) === "sich") ? main[0].word : String(main[0].word).replace(/^sich\s+/u,""),roles:[head.e,...main,...werden,...(chainModal !== null ? modalAt(chainModal).slice(0,1) : []),...(partnerModal ? [partnerModal.e] : [])],spans:linked.map(clause.span)};
+      }
+      // (L60, links to-do, advisor 17.11: two participles joined by und / oder share the passive perfect infinitive under a modal — soll …
+      // eingekerkert und gegeißelt worden sein, dass er eingesperrt und geschlagen worden sein soll — as ist eingesperrt und geschlagen
+      // worden; the single participle is the L17 group of verbGroupIn. A tap on the first participle names its own verb; the modal,
+      // worden and sein name both. Not after a comma list, not with an own adjective card of a participle.)
+      if (modalIndices.length === 1) {
+        const m = modalIndices[0], text = String(clause.sentence || "");
+        const seinAt = m === end ? end-1 : end, wordenAt = seinAt-1, p2 = seinAt-2, joiner = seinAt-3, p1 = seinAt-4;
+        const vb = e => norm(e.word).replace(/^sich\s+/u,""), gap = (a,b) => text.slice(tokens[a].index + tokens[a][0].length, tokens[b].index);
+        if ((p1 > m || m === end) && p1 >= start && norm(tokens[seinAt]?.[0] ?? "") === "sein" && norm(tokens[wordenAt][0]) === "worden" && ["und","oder"].includes(norm(tokens[joiner][0])) &&
+            [p1,p2].every(i => /^\p{Ll}/u.test(tokens[i][0]) && !adjectivalForm(tokens[i][0])) && !/[,;:.!?()–—"„“»«]/u.test(gap(p1,p2)) &&
+            !(p1 > start && /,/u.test(gap(p1-1,p1)))) {
+          const own = i => { let rows = participles(i); if (rows.some(e => norm(e.word) === vb(e))) rows = rows.filter(e => norm(e.word) === vb(e)); return rows; };
+          const first = own(p1), second = own(p2), werden = verbs(wordenAt).filter(e => e.word === "werden"), sein = verbs(seinAt).filter(e => e.word === "sein");
+          const one = rows => rows.length && new Set(rows.map(vb)).size === 1;
+          const linked = [m,p1,p2,wordenAt,seinAt];
+          if (one(first) && one(second) && werden.length && sein.length && linked.includes(selected) &&
+              !indices.some(i => !linked.includes(i) && i !== joiner && clause.competing(i) && !possessiveBeforeNoun(i) && !clause.nounToken(i))) {
+            const head = modalAt(m)[0], main = selected === p1 ? first : second;
+            const hearsay = head.word === "sollen" && ["soll","sollen"].includes(norm(tokens[m][0])) && !indices.some(i => ["ich","wir","du","ihr","bis","spätestens"].includes(norm(tokens[i][0])));
+            return {id:"modal-perfect-infinitive",label:"Perfekt",lemma:vb(main[0]),modal:head.word,passive:true,
+              clickedRole:selected === seinAt ? "perfectHave" : selected === wordenAt ? "passive" : null,...(hearsay ? {hearsay:true} : {}),
+              ...(selected !== p1 ? {coordinatedLemma:`${vb(first[0])} ${norm(tokens[joiner][0])} ${vb(second[0])}`,coordinated:vb(second[0])} : {}),
+              roles:[head,...main,werden[0],sein[0]],spans:[...linked].sort((a,b)=>a-b).map(clause.span)};
+          }
+        }
       }
       return result.length === 1 ? result[0] : null;
     }
@@ -10043,7 +10101,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // A second possible verb outside the group makes attachment uncertain. L29 (21.10.2026): a possessive before
         // a noun is no verb (sind meine Felder besser geworden — not meinen), as in the werden / zu / Futur groups.
         // (item Б: the words after a Nachfeld tail — the prepositional phrase / zu-infinitive — do not compete)
-        if (indices.some(i => !linked.includes(i) && !(nachfeldFrom > 0 && i >= nachfeldFrom) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i))) continue;
+        // (L43, links to-do, advisor 17.11: the zu-infinitive right before a closing haben is the object of haben — will nichts zu essen
+        // haben, wollte … nichts zu tun haben, will … zu schaffen haben: it does not compete with the modal's infinitive haben)
+        const zuBeforeHaben = i => id === "modal-group" && i === tail-1 && i-1 > head.i && norm(tokens[i-1][0]) === "zu" && norm(tokens[tail][0]) === "haben";
+        if (indices.some(i => !linked.includes(i) && !(nachfeldFrom > 0 && i >= nachfeldFrom) && !zuBeforeHaben(i) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i))) continue;
         // The group names the plain verb; a confirmed reflexive reading adds sich
         // in the card (reflexive-verb construction), not here.
         // Without a confirmed reflexive link the group names the bare verb, also
@@ -16165,12 +16226,24 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     async function verbPrepositionLink(word, context, resolution) {
       const card = resolution.selected;
       if (!card || !fallback.verbPrepositions || !Number.isInteger(context?.tokenOffset) || context?.noVerbPrepositionLink) return;
-      const type = canonicalPos(card.pos), isVerb = type === 'Verb', isPreposition = card.pos === 'preposition' || type === 'prep';
-      if (!isVerb && !isPreposition || isVerb && card.construction) return;
+      // (batch 142, advisor 17.11: als of «ansehen als + Akkusativ» — the card of als is the conjunction «в качестве»; it takes the pair
+      // as a preposition does)
+      const alsCard = norm(String(card.lemma || card.word || '')) === 'als' && /^(?:Konjunktion|conjunction|conj)$/iu.test(String(card.pos || ''));
+      const type = canonicalPos(card.pos), isVerb = type === 'Verb', isPreposition = card.pos === 'preposition' || type === 'prep' || alsCard;
+      // (batch 142: the particle verb of a pair — sah ihn für einen Dieb an — keeps its separable link and takes the pair, below only
+      // for a particle verb of the list)
+      if (!isVerb && !isPreposition || isVerb && card.construction && card.construction.id !== 'separable-verb') return;
       let list;
       try { list = await fallback.verbPrepositions(); } catch (_) { return; }
-      const clause = verbalClause(word,context,'verbPrepositionLink',clauseBoundaries.verbGroup);
+      let clause = verbalClause(word,context,'verbPrepositionLink',clauseBoundaries.verbGroup);
       if (!clause) return;
+      // (batch 142, advisor 17.11: on a verb of an als row — sieht ihn als Freund an — als is no boundary of the part; the pair checks
+      // below still decide)
+      if (isVerb && list.some(([verb,prep,c]) => prep === 'als' && c === 'Akkusativ' && norm(verb).replace(/^sich\s+/u,'') === norm(card.lemma).replace(/^sich\s+/u,'')) &&
+          clause.tokens.slice(clause.start,clause.end+1).every(t => norm(t[0]) !== 'als')) {
+        const wide = verbalClause(word,context,'verbPrepositionLink',new Set([...clauseBoundaries.verbGroup].filter(w => w !== 'als')));
+        if (wide) clause = wide;
+      }
       const {tokens,selected,indices} = clause;
       const base = value => norm(value).replace(/^sich\s+/u,'');
       const prepositionAt = i => contractionPreposition[norm(tokens[i][0])] || norm(tokens[i][0]);
@@ -16182,7 +16255,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const imperativeObject = i => tokens[i+1] && (tokens[i][0] === 'Danke' ? /^(?:ihm|ihr|ihnen)$/u : /^(?:ihn|sie|es|ihm|ihr|ihnen)$/u).test(tokens[i+1][0]);
       const verbBasesAt = i => ['Danke','Bitte'].includes(tokens[i][0]) && i === clause.start && !ichInClause && !imperativeObject(i) &&
         !bitteUmAt(String(context.sentence || ""), sharedTokens(String(context.sentence || ""),'verbPrepositionLink'), tokens[i].wi ?? sharedTokens(String(context.sentence || ""),'verbPrepositionLink').findIndex(t => t.index === tokens[i].index)) ? [] : /^\p{Ll}/u.test(tokens[i][0]) || i === clause.start
-        ? [...new Set((verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached).map(a => base(a.base)))] : [];
+        ? [...new Set((verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => ['finite','infinitive','participle'].includes(a.kind) && !a.detached).flatMap(a => [base(a.base),
+          // (batch 142, advisor 17.11: a finite form with its particle closing the part names the particle verb — sah ihn für … an,
+          // sieht ihn als Freund an → ansehen; only a verb of the list)
+          ...(a.kind === 'finite' && detachedParticleAt(i) && list.some(([verb]) => base(verb) === detachedParticleAt(i) + base(a.base)) ? [detachedParticleAt(i) + base(a.base)] : [])])),
+          // (a form only the particle verb has — wies … hin, lud … ein: its own detached reading)
+          ...(verbAnalyses.get(norm(tokens[i][0])) || []).filter(a => a.kind === 'finite' && a.detached && detachedParticleAt(i) && base(a.base).startsWith(detachedParticleAt(i)) &&
+            list.some(([verb]) => base(verb) === base(a.base))).map(a => base(a.base))] : [];
+      // (advisor 17.11: every particle verb of the list — fing mit der Arbeit an, pass auf das Kind auf, sah ihn für einen Fisch an)
+      // «считать / принимать за» — the frame of a card whose als / für complement says so (halten für, ansehen als / für, betrachten als)
+      const regardFrame = (verb,prep) => (lemmas.get(verb) || []).some(e => e.type === 'Verb' && (e.complements || []).some(x =>
+        norm(String(x.pattern || '').split(/\s+/u)[0]) === prep && /^(?:считать|принимать за)|; принимать за/u.test(String(x.note_ru || ''))));
+      function detachedParticleAt(i) { const w = norm(tokens[clause.end][0]);
+        return clause.end > i && /^\p{Ll}/u.test(tokens[clause.end][0]) && ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder'].includes(w) ? w : null; }
       // A reflexive pair of the list (sich entscheiden für) needs a reflexive pronoun in the clause.
       const reflexiveInClause = indices.some(i => reflexivePronouns.has(norm(tokens[i][0])));
       // (A2 (в), advisor 16.11: an impersonal entry «es handelt sich» goes by its verb — handeln — when es and a reflexive pronoun stand in
@@ -16206,11 +16291,20 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (A2 (б), 16.11: zu right before an infinitive is the infinitive particle — darüber zu sprechen — not the preposition of sprechen zu)
       const zuParticle = p => norm(tokens[p][0]) === 'zu' && tokens[p+1] && /^\p{Ll}/u.test(tokens[p+1][0]) &&
         (verbAnalyses.get(norm(tokens[p+1][0])) || []).some(a => a.kind === 'infinitive');
-      for (const v of indices) for (const verbBase of verbBasesAt(v)) for (const p of indices) {
-        if (p === v || zuParticle(p) || !pairs(verbBase,prepositionAt(p)).length || !(prepositions.has(norm(tokens[p][0])) || contractionCase[norm(tokens[p][0])])) continue;
+      for (const v of indices) for (const verbBase of new Set(verbBasesAt(v))) for (const p of indices) {
+        // (als only for the «regard as» rows — ansehen als + Akkusativ; arbeiten als stays as it was)
+        const alsPair = norm(tokens[p][0]) === 'als' && pairs(verbBase,'als').some(r => r[2] === 'Akkusativ');
+        if (p === v || zuParticle(p) || !pairs(verbBase,prepositionAt(p)).length || !(prepositions.has(norm(tokens[p][0])) || contractionCase[norm(tokens[p][0])] || alsPair)) continue;
+        // (the detached particle closing the part is the verb's, no preposition — passt auf das Kind auf)
+        if (p === clause.end && detachedParticleAt(v) === norm(tokens[p][0]) && verbBasesAt(v).some(b => b.startsWith(norm(tokens[p][0])) && list.some(([verb]) => base(verb) === b))) continue;
         links.push({v,p,verbBase,rows:pairs(verbBase,prepositionAt(p))});
       }
-      const mine = links.filter(l => (isVerb ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)));
+      // (the particle verb with its particle closing the part wins over the bare verb of the same form — dachte über … nach: nachdenken,
+      // not denken über; wies auf … hin: hinweisen)
+      for (let k = links.length-1; k >= 0; k--) { const l = links[k], particle = detachedParticleAt(l.v);
+        if (particle && !l.verbBase.startsWith(particle) && links.some(o => o.v === l.v && o.verbBase === particle + l.verbBase)) links.splice(k,1); }
+      const mine = links.filter(l => (isVerb ? l.v : l.p) === selected && (!isVerb || l.verbBase === base(card.lemma)) &&
+        (!isVerb || card.construction?.id !== 'separable-verb' || detachedParticleAt(l.v) && l.verbBase.startsWith(detachedParticleAt(l.v))));
       // One pair in the clause; the same preposition or verb in another pair blocks. (Second resolver chat 11.11, advisor 08.11 / 11.11 —
       // claude/TWO_PREP_COUNT_2026-11-11_RU.md) A partner and a topic of one verb (mit + über, bei + für / über) no longer block each
       // other: on the tapped preposition its own pair (sprach mit ihm über das Wetter — on mit «sprechen + mit»), on the verb both pairs
@@ -16225,10 +16319,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // (den / meinen … + a noun by the shared prepositionPhraseCase — advisor 16.11: auf den Zug Akkusativ, in den Autos / den Hotels Dativ)
       const shownCase = q => contractionCase[norm(tokens[q][0])] || (tokens[q+1] && (objectCase[norm(tokens[q+1][0])] || determinedCase[norm(tokens[q+1][0])])) ||
         prepositionPhraseCase(tokens,q,clause.end) || null;
-      const pairCase = ({v,p,rows}) => {
+      const pairCase = ({v,p,rows,verbBase}) => {
         // (б2: the preposition twice in the part — the link goes to the one whose shown case agrees with the pair, when every other one
         // shows another case: Er wartete auf dem Bahnsteig auf den Zug / auf dich; mit dem Mann mit dem Hut — no link, as before)
-        const same = indices.filter(i => prepositionAt(i) === prepositionAt(p));
+        const same = indices.filter(i => prepositionAt(i) === prepositionAt(p) && !(i === clause.end && i !== p && detachedParticleAt(v) === norm(tokens[i][0]) && verbBase.startsWith(norm(tokens[i][0]))));
         if (same.length !== 1) {
           const want = [...new Set(rows.map(r => r[2]))];
           if (want.length !== 1 || shownCase(p) !== want[0] || same.some(q => q !== p && (!shownCase(q) || shownCase(q) === want[0]))) return null;
@@ -16244,15 +16338,35 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const objectWord = norm(object[0]);
         const nominalObject = /^\p{Lu}/u.test(object[0]) || objectCase[objectWord] || determinerFeatures(object[0]) || contractionCase[norm(tokens[p][0])] ||
           (forms.get(objectWord) || []).some(e => ['Pronomen','article','num'].includes(e.type)) || ['nichts','etwas','alles','was','wen','wem','dessen','deren','ihn','sie','es','uns','euch'].includes(objectWord);
-        if (!nominalObject) return null;
+        // (batch 142: adjectives before the noun — sah sie für lebendige Kohlen an, als degradierte Mythen angesehen)
+        // (only in the «считать» frame: a manner phrase — sprach mit zornigem Blick — and von after a noun stay without a pair)
+        const adjectiveNoun = regardFrame(verbBase,prepositionAt(p)) && /^\p{Ll}+(?:e|en|er|es|em)$/u.test(object[0]) && [p+2,p+3].some(k => k <= clause.end && /^\p{Lu}/u.test(tokens[k][0]) &&
+          tokens.slice(p+1,k).every(t => /^\p{Ll}+(?:e|en|er|es|em)$/u.test(t[0])));
+        if (!nominalObject && !adjectiveNoun) return null;
         // (c) A preposition right after a standalone der / die / das belongs to it (der mit dem Hütchen).
         // A relative der after a comma is the subject of its own clause (…, der an nichts Böses dachte).
         if (p > 0 && DER_PRONOUNS.includes(norm(tokens[p-1][0])) && p-1 !== v &&
             !(p > 1 && /,\s*[»«"„“‚‘]?\s*$/u.test(clause.sentence.slice(tokens[p-2].index+tokens[p-2][0].length,tokens[p-1].index)))) return null;
         // (d) A detached particle closing the clause makes it another verb (hält … von … zurück).
         const last = tokens[clause.end];
-        if (clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) &&
+        // (batch 142: not the particle of the pair's own verb — sah ihn für einen Dieb an → ansehen)
+        if (clause.end > v && clause.end !== p && clause.end !== p+1 && /^\p{Ll}/u.test(last[0]) && !(verbBase.startsWith(norm(last[0])) && detachedParticleAt(v) === norm(last[0])) &&
             ['ab','an','auf','aus','bei','ein','fest','fort','her','hin','los','mit','nach','vor','weg','zu','zurück','vorbei','heraus','herein','hinaus','hinein','weiter','zusammen','dar','um','durch','über','unter','wieder','hoch','fern','frei','kennen','statt','teil'].includes(norm(last[0]))) return null;
+        // (batch 142, advisor 17.11: für + a stretch of time is no «принимать за» — sah ihn für einen Augenblick an, für fünf Minuten)
+        if (prepositionAt(p) === 'für' && tokens.slice(p+1,Math.min(p+4,clause.end+1)).some(t =>
+          /^(?:augenblick|moment|weile|zeit|minute|minuten|sekunde|sekunden|stunde|stunden|tag|tage|woche|wochen|monat|monate|jahr|jahre|immer|kurzem|lange|ewig)$/u.test(norm(t[0])))) return null;
+        // (batch 142: «считать / принимать за» stands after its object — sah ihn für einen Dieb an; an object after the phrase makes für
+        // «для» — sah für sie den Film an)
+        // (als before a subject pronoun opens a clause — Erst als wir sie ansahen —: the conjunction)
+        if (prepositionAt(p) === 'als' && (/^(?:ich|du|er|wir|ihr|sie|man)$/u.test(norm(tokens[p+1]?.[0] ?? '')) || p === clause.start ||
+          p-1 === clause.start && /^(?:erst|gerade|kaum|schon|noch|eben|sobald|so|und|aber|doch)$/u.test(norm(tokens[p-1][0])))) return null;
+        // (and not in front of a finite verb before its own verb — Also für ’nen Vater hat der sich gut gehalten: für is «для»)
+        if (regardFrame(verbBase,prepositionAt(p)) && p < v && tokens.slice(p+1,v).some(t => /^\p{Ll}/u.test(t[0]) &&
+          (verbAnalyses.get(norm(t[0])) || []).some(a => a.kind === 'finite' && ['haben','sein','werden',...MODAL_VERB_SET].includes(a.base)))) return null;
+        if (['als','für'].includes(prepositionAt(p)) && regardFrame(verbBase,prepositionAt(p))) {
+          let k = p+1; if (!/^(?:mich|dich|ihn|sie|es|uns|euch|ihm|ihr|ihnen|sich|mir|dir)$/u.test(norm(tokens[k]?.[0] ?? ""))) while (k <= clause.end && !/^\p{Lu}/u.test(tokens[k][0]) && k < p+4) k++;
+          if (tokens.slice(k+1,clause.end+1).some(t => /^(?:den|die|das|einen|eine|ein|ihn|es|mich|dich|uns|euch|diesen|diese|dieses)$/u.test(norm(t[0])))) return null;
+        }
         const cases = [...new Set(rows.map(r => r[2]))];
         if (cases.length !== 1) return null;
         const seen = contractionCase[norm(tokens[p][0])] || objectCase[norm(object[0])] || determinedCase[norm(object[0])];
@@ -16292,6 +16406,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Er befasst sich mit dem Thema → «sich befassen + mit + Dativ», wandte sich an → «sich wenden + an»; trennte die Äcker von der
       // Landstraße, an Harry gewandt, geeignet für — no reflexive reading, the name as in the list)
       const impersonalRow = rows.find(r => impersonal(r[0])), nounRow = rows.find(r => nounEntry(r[0]));
+      // (batch 142, advisor 17.11: ansehen als / für with a dative sich — the own card sich ansehen «посмотреть» — takes no pair:
+      // Ich habe mir den Film für dich angesehen; the accusative sich does — Er sieht sich als Opfer an)
+      // (generally: a pair written without sich gives way to the confirmed own card «sich X» whose complements lack the preposition)
+      if (regardFrame(verbBase,prepositionAt(p)) && reflexiveInClause && rows.every(r => !/^sich\s/u.test(norm(r[0])))) {
+        try {
+          const linked = await reflexiveCandidates(tokens[v][0],{...context,tokenOffset:tokens[v].index});
+          if (linked.some(c => c.construction?.id === 'reflexive-verb' && c.construction.confidence !== 'tentative' && /^sich\s/u.test(norm(String(c.lemma || ''))) &&
+            !((c.item?.complements) || (lemmas.get(norm(String(c.lemma))) || []).flatMap(e => e.complements || [])).some(x => norm(String(x.pattern || '').split(/\s+/u)[0]) === prepositionAt(p)))) return;
+        } catch (_) { /* no reflexive evidence */ }
+        if (regardFrame(verbBase,prepositionAt(p)) && indices.some(i => ['mir','dir'].includes(norm(tokens[i][0])))) return;
+      }
       let verbName = impersonalRow ? impersonalRow[0] : nounRow ? nounRow[0] : rows.length === 1 && !/^sich\s/u.test(norm(rows[0][0])) ? rows[0][0] : verbBase;
       if (isPreposition && !impersonalRow && !nounRow) {
         try {

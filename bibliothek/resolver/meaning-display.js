@@ -496,6 +496,8 @@
         if (k.chain === 'state') return {marks:[`${language === 'ru' ? 'состояние' : 'state'} mit ${name}`], role:k.clickedRole || null, spans};
         // (links chat, advisor 09.11, map N2) ignoriert zu werden: «Passiv mit ignorieren»; werden — the passive auxiliary text
         if (k.chain === 'passive') return {marks:[`Passiv mit ${name}`], role:k.clickedRole || null, spans};
+        // (L42 (2), advisor 17.11) geliebt worden zu sein: «Perfekt · Passiv mit lieben»; worden — the passive text, sein — the auxiliary
+        if (k.chain === 'passive-perfect') return {marks:[`Perfekt · Passiv mit ${name}`], role:k.clickedRole || null, spans};
         if (MODALS.has(own) && !isMain) return {marks:[`mit ${name}`], role:null, spans};
         return {marks:[`Modal mit ${name}`], role:null, spans};
       }
@@ -1013,9 +1015,12 @@
     // A2 (reference 4.9 / 5.5): an established verb + preposition pair.
     const link = candidate.prepositionLink;
     let linkSpans = null;
-    if (link && !k.spans) {
+    // (batch 142, advisor 17.11: a particle verb keeps its separable highlight and adds the pair — sah ihn für einen Dieb an:
+    // «Trennbares Verb · für + Akkusativ», sah / an / für lit)
+    const separableLink = link && candidate.construction?.id === 'separable-verb' && k.spans;
+    if (link && (!k.spans || separableLink)) {
       marks.push(pos(candidate) === 'Verb' ? link.pattern : `${link.verb} + ${link.pattern}`);
-      linkSpans = link.spans;
+      linkSpans = separableLink ? [...k.spans, ...link.spans.filter(s => !k.spans.some(t => t.start === s.start))].sort((a,b) => a.start - b.start) : link.spans;
     }
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
@@ -1103,7 +1108,7 @@
     // Labels (reference 2.A): segments of the plain text, only when the text is the meaning itself.
     const segments = text?.segments && (!derived || text.prefix) && !contraction ? {segments:text.segments, segmentPrefix:text.prefix || ''} : {};
     return {heading:headingText, grammar, text:text ? text.text : NO_TRANSLATION[language], textLanguage:text ? text.language : language,
-      missing:!text, derived, note, more:text ? more : 0, spans:exprSpans || k.spans || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
+      missing:!text, derived, note, more:text ? more : 0, spans:exprSpans || (separableLink ? linkSpans : k.spans) || linkSpans || candidate.compound?.spans || null, helpEntry, ...segments};
   }
   // G70 (user 24.10.2026): the heading, the grammar line and the translation come from one card. A reflexive use of a verb whose
   // card has no reflexive meaning (lexicalSenseConfirmed false):
