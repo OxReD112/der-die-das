@@ -1019,6 +1019,8 @@
     }
     const features = candidate.formFeatures;
     if (features?.tense) marks.push(features.tense);
+    // (advisor 17.11: particle + zu + Partizip I — auszuwählenden, einzuhaltende — the gerundive: «mit zu — надо / можно»)
+    if (features?.zuGerundive) marks.push('mit zu');
     // (second resolver chat 11.11) a noun from an adjective in the plural (die Erwachsenen, zwei Jugendliche): the der / die card says
     // «Plural» too — the gender does not matter in the plural
     if (features?.number === 'plural' && (!pair || features.adjectiveNoun)) marks.push('Plural');
@@ -1054,6 +1056,8 @@
     const derived = !!text;
     if (!text && k.role) text = {text:ROLE_TEXT[k.role][language], language};
     if (!text && !contraction?.expression) { text = meaningText(candidate, language); more = text?.more || 0; }
+    // (advisor 17.11: the gerundive — «здесь: (который) надо / можно — …» before the meaning; the card's text is not declined)
+    if (features?.zuGerundive && text?.text) text = {...text, text:`${language === 'ru' ? 'здесь: (который) надо / можно' : 'here: to be done / can be done'} — ${text.text}`};
     // Links chat, step A (advisor 03.11): werden / haben / sein without a link, a participle in the part (resolver auxiliaryHint) —
     // «auxiliary verb» first, the own meaning second (the order of senses, not a link: no mark, no highlight).
     const auxHint = candidate.formFeatures?.auxiliaryHint;

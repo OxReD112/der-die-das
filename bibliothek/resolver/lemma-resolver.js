@@ -4588,7 +4588,8 @@
             /e$/u.test(base) && surface === base + "n");
           number = head.number === "plural" || head.entry?.plural_only ? "plural" : null;
           // (der before a weak plural is its genitive plural — einer der wichtigsten Produktionsfaktoren; der Soldat is the nominative)
-          if (number && !head.entry?.plural_only && (ctx.singularDet || weak && ctx.det && !ctx.pluralDet && ctx.detForm !== "der")) number = null;
+          // (advisor 17.11: a contraction — im / am / vom / zum / beim = dem — is a singular determiner too: im Tagespropheten)
+          if (number && !head.entry?.plural_only && (ctx.singularDet || ctx.contraction || weak && ctx.det && !ctx.pluralDet && ctx.detForm !== "der")) number = null;
           // (09.11) a head known only as a form of another spelling (ausrüstungsgegenstände of Ausrüstungsgegenstand) after a plural
           // determiner is that plural (die oben erwähnten Filmausrüstungsgegenstände)
           if (!number && head.form && ctx.pluralDet && surface !== norm(head.lemma) && !(ctx.singularDet) &&
@@ -17196,7 +17197,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         for (let j = ws.length - 1, n = 0; j >= 0 && n < 8; j--, n++) {
           const x = norm(ws[j]);
           if (/^(?:dem|einem|keinem|meinem|deinem|seinem|ihrem|unserem|eurem|diesem|jenem|welchem|jedem|manchem|solchem|im|am|vom|zum|beim)$/u.test(x)) return true;
-          if (x === "," || x === "-" || /^[»«„“"]$/u.test(x) || /^(?:und|oder)$/u.test(x) || /^\p{Ll}{2,}(?:e|en)$/u.test(ws[j]) || /^\p{Lu}/u.test(ws[j]) && ws[j+1] === "-") continue;
+          // (advisor 17.11: an attribute in -ern / -eln with the e dropped — Am andern Tage, im dunkeln Walde)
+          if (x === "," || x === "-" || /^[»«„“"]$/u.test(x) || /^(?:und|oder)$/u.test(x) || /^\p{Ll}{2,}(?:e|en|ern|eln)$/u.test(ws[j]) || /^\p{Lu}/u.test(ws[j]) && ws[j+1] === "-") continue;
           return false;
         }
         return false;
@@ -18800,6 +18802,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // WN batch 130 (advisor 16.11): the line of a particle that has its own adverb card is that card's meaning, not the table's —
     // fort «прочь; дальше (продолжая)» (redete … fort, weinte fort, sprach fort: «дальше» as often as «прочь»)
     const CARD_PARTICLE_LINES = new Set(["fort"]);
+    const EXTRA_PARTICLE_ROWS = [["durcheinander","вперемешку; наперебой","in confusion; all at once"],["fest","крепко, прочно","firmly, tight"],
+      ["aus","из, наружу; до конца","out; to the end"],["auf","вверх; на","up; on"],["ein","в, внутрь","in, into"],["an","к, на","on, to"]];
     function particleRow(row) {
       if (!row || !CARD_PARTICLE_LINES.has(row[0])) return row;
       const card = (lemmas.get(row[0]) || []).find(e => canonicalPos(e.type) === "Adverb" && e.translation_ru);
@@ -19091,6 +19095,48 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // the zu-infinitive is read the same way.
         // (not when a card of the participle was found — herabhängend keeps «Partizip I · От herabhängen»; not weiter-: weiterreichend,
         // weiterführend are adjectives «далеко идущий», not «передавать»)
+        // Advisor 17.11 (1): particle + zu + Partizip I of a verb a dictionary knows (auszuwählenden, einzuhaltende, aufzustellenden,
+        // anzutreffenden): that verb, «Partizip I» with the zu mark («надо / можно» — the gerundive).
+        const gerund = !context.ownParticipleCard && /^(\p{Ll}+?)zu(\p{Ll}{3,}n)d(?:e|en|em|er|es)?$/u.exec(raw);
+        if (gerund && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const full = gerund[1] + gerund[2];
+          const known = entries.filter(e => e.type === "Verb" && norm(e.infinitive || e.word) === full);
+          let pick = known.length === 1 ? mainCandidate(known[0]) : null;
+          if (!pick && !known.length) {
+            let r = null; try { r = await resolveWithDiagnostics(full, {sentence:full, tokenOffset:0}); } catch (_) { r = null; }
+            const vs = (r?.candidates || []).filter(c => canonicalPos(c.pos) === "Verb" && norm(c.lemma) === full);
+            if (vs.length === 1) pick = vs[0];
+          }
+          if (pick) {
+            const x = {...pick, formFeatures:{tense:"Partizip I", zuGerundive:true}, evidence:"zu-gerundive"}; delete x.construction;
+            return {...result, candidates:[x], selected:x, preferred:x, status:"resolved", unresolvedMeanings:[], evidence:"zu-gerundive"};
+          }
+        }
+        // Advisor 16.11 / 17.11 (1): aus- / an- / ein- / auf- / fest- / durcheinander- — not G47 particles (they make verbs of their own
+        // meaning), read by parts only in the zu-infinitive (auszubläuen, festzuschnallen, auszuerzählen) and the Partizip I
+        // (ausschwingende, durcheinanderrufend, ausliegenden) of a known verb, the rest exactly that verb.
+        const extra = !context.ownParticipleCard && EXTRA_PARTICLE_ROWS.find(([p]) => raw.startsWith(p) && raw.length >= p.length + 5);
+        if (extra && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
+          const zuInf = raw.startsWith(extra[0] + "zu") && /(?:en|ern|eln)$/u.test(raw);
+          const pres = !zuInf && /^(\p{Ll}+n)d(?:e|en|em|er|es)?$/u.exec(raw);
+          if (zuInf) {
+            let r = null;
+            try { r = await directionalParticle(raw, context, result, null, particleRow(extra)); } catch (_) { r = null; }
+            if ((r?.candidates || []).length && r.candidates.every(c => canonicalPos(c.pos) === "Verb")) return r;
+          } else if (pres) {
+            const stem = pres[1];
+            let r = null;
+            try { r = await directionalParticle(stem, {...context, sentence:before + stem + text.slice(context.tokenOffset + raw.length)}, result, null, particleRow(extra)); } catch (_) { r = null; }
+            if ((r?.candidates || []).length && r.candidates.every(c => canonicalPos(c.pos) === "Verb")) {
+              const attribute = c => { const v = {...c, formFeatures:{tense:"Partizip I"}}; delete v.construction;
+                if (v.directionalSimple) v.directionalSimple = attribute(v.directionalSimple);
+                return v; };
+              const candidates = r.candidates.map(attribute);
+              return {...r, candidates, selected:r.selected ? candidates[r.candidates.indexOf(r.selected)] : null,
+                preferred:r.preferred ? candidates[r.candidates.indexOf(r.preferred)] : null};
+            }
+          }
+        }
         const present = !context.ownParticipleCard && !raw.startsWith("weiter") && /^(\p{Ll}+n)d(?:e|en|em|er|es)?$/u.exec(raw);
         if (present && DIRECTIONAL.some(([p]) => raw.startsWith(p) && raw.length >= p.length + 5) && text.slice(context.tokenOffset, context.tokenOffset + raw.length) === raw) {
           const stem = present[1];
@@ -19098,7 +19144,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           try { r = await directionalParticle(stem, {...context, sentence:before + stem + text.slice(context.tokenOffset + raw.length)}, result); } catch (_) { r = null; }
           // (no verb by parts: the form is read as it stands below — hinaufwanden is the Präteritum of hinaufwinden, not a Partizip I)
           if ((r?.candidates || []).length && (r.candidates || []).every(c => canonicalPos(c.pos) === "Verb")) {
-          const attribute = c => { const v = {...c, formFeatures:{tense:"Partizip I"}}; delete v.construction;
+          // (advisor 17.11: with zu — hinauszuwerfende — the gerundive mark «надо / можно»)
+          const zuMark = DIRECTIONAL.some(([p]) => raw.startsWith(p + "zu")) ? {zuGerundive:true} : {};
+          const attribute = c => { const v = {...c, formFeatures:{tense:"Partizip I", ...zuMark}}; delete v.construction;
             if (v.directionalSimple) v.directionalSimple = attribute(v.directionalSimple);
             return v; };
           const candidates = r.candidates.map(attribute);
@@ -20023,7 +20071,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const active=activeContexts.get(sentence) || {context:shared,references:0,views:new Map()};
       active.references++;activeContexts.set(sentence,active);
       const release=()=>{if(--active.references===0)activeContexts.delete(sentence);if(!activeContexts.size)clearPartialSources();};
-      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>englishByParts(result));
+      const pipeline=(w,c)=>resolveWithDiagnostics(w,c).then(result=>applyConstruction(w,c,result)).then(result=>temporalSense(w,c,result)).then(result=>soResumptive(w,c,result)).then(result=>particleOverVerb(w,c,result)).then(result=>modalParticle(w,c,result)).then(result=>imperativeParticle(w,c,result,pipeline)).then(result=>wohlEben(w,c,result)).then(result=>zuToo(w,c,result)).then(result=>woWhen(w,c,result)).then(result=>werRelative(w,c,result)).then(result=>lauterOnly(w,c,result)).then(result=>wartImperative(w,c,result)).then(result=>weitereCard(w,c,result)).then(result=>weiterComparative(w,c,result)).then(result=>deutschAdjective(w,c,result)).then(result=>konj1PastPair(w,c,result)).then(result=>letterAbbreviation(w,c,result)).then(result=>smallFormRules(w,c,result)).then(result=>imperativeBeforeVerb(w,c,result)).then(result=>imperativeNoneChoice(w,c,result)).then(result=>doubleAccusativeChoice(w,c,result)).then(result=>directionalParticle(w,c,result)).then(result=>colloquialParticleParts(w,c,result)).then(result=>separatedDirectional(w,c,result)).then(result=>becomeAdjective(w,c,result)).then(result=>seinOnlyBecome(w,c,result)).then(result=>participleManner(w,c,result)).then(result=>participleModifier(w,c,result)).then(result=>secondPersonAdjective(w,c,result)).then(result=>sichUnlinkedWindow(w,c,result)).then(result=>reflexiveFieldChoice(w,c,result)).then(result=>reflexiveFirst(w,c,result)).then(result=>reflexiveSenseMarks(c,result)).then(result=>seinCardNoState(w,c,result,pipeline)).then(result=>stateAuxiliaryFollows(w,c,result,pipeline)).then(result=>expressionVerb(c,result,pipeline)).then(result=>c?.noMirror?result:mirrorAuxiliary(w,c,result,pipeline)).then(result=>seienDialect(w,c,result)).then(result=>twoParticlesStep(w,c,result,pipeline)).then(result=>comparativeCard(w,c,result)).then(result=>windowByForm(w,c,result)).then(result=>pluralOverBareRecord(w,c,result)).then(result=>mitByNextWord(w,c,result)).then(result=>adjectiveAdverbTwin(w,c,result)).then(result=>langeAdverb(w,c,result)).then(result=>twinGenderByForm(w,c,result)).then(result=>oldDativeE(w,c,result)).then(result=>cheapSignCards(w,c,result)).then(result=>nameAfterTitle(w,c,result)).then(result=>eheConjunction(w,c,result)).then(result=>directionRequiredStep(w,c,result)).then(result=>moegenPossibility(w,c,result)).then(result=>wiederParticle(w,c,result,pipeline)).then(result=>coordinationUnion(w,c,result,pipeline)).then(result=>surnameAfterGivenName(w,c,result)).then(result=>dativeSenseFirst(w,c,result)).then(result=>stateAlternative(w,c,result)).then(result=>windowChain(w,c,result)).then(result=>modalParticleLabel(w,c,result)).then(result=>participlePhrase(w,c,result)).then(result=>twinParticiple(w,c,result)).then(result=>englishByParts(result));
       // E7: the first variant of a hyphen stub whose whole word is known; else «part of a word» for a function word, else as before.
       const known=r=>r&&r.status!=='unresolved'&&r.selected;
       // (advisor 03.11, reference C8h: E-Mail- und Telefonkontakt → E-Mail-Kontakt) a whole word with a hyphen that no dictionary lists is
@@ -20715,6 +20763,50 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // allen verlassen) — the verb's «Partizip II», even when an adjective card of the same spelling exists (getragen «размеренный»);
     // (б) a participle with an adjective ending right before its noun (eingestreute Parodien) offered only as a verb window — «Partizip II».
     // Not: er wurde von ihm begleitet (a finite verb in the part), Er bewegt die Ruder (bewegt first after its subject — no von, no ending).
+    // Advisor 16.11 (2): a window of two own verbs with one infinitive — the separable and the inseparable one (übertreten, überziehen,
+    // übertreiben, durchbrechen, übertragen) — and the tapped form is the participle of only one of them by its paradigm (perfect_form:
+    // hat übertreten / ist übergetreten): that verb, «Partizip II». Not by the letters ge (umgehen, übergehen, umgeht). A form equal to
+    // the infinitive only inside a participle frame — haben / sein / werden in the part, not after a modal or zu (konnte … übertreten,
+    // einen andern unterlegen könnte); an adjective ending (übertragenen) is a frame. An adjective card of the form stays first (as
+    // before): the window stays as it was.
+    const TWIN_ENDINGS = ["","e","en","em","er","es"];
+    async function twinParticiple(word, context, result) {
+      const w = String(word || ""), f = norm(w);
+      if (!result || result.selected || !context || !Number.isInteger(context.tokenOffset)) return result;
+      const cands = result.candidates || [];
+      const verbs = cands.filter(c => c.source === "main" && canonicalPos(c.item?.type || c.pos) === "Verb" && c.item?.perfect_form);
+      if (verbs.length !== 2 || norm(verbs[0].lemma) !== norm(verbs[1].lemma) || !/^(?:über|unter|durch|um|wider|wieder)/u.test(norm(verbs[0].lemma))) return result;
+      if (cands.some(c => c !== verbs[0] && c !== verbs[1] && canonicalPos(c.item?.type || c.pos) === "Verb")) return result;
+      const part = c => norm(c.item.perfect_form).split(/\s+/u).at(-1);
+      const match = c => { const p = part(c); const e = f.startsWith(p) ? f.slice(p.length) : null; return e !== null && TWIN_ENDINGS.includes(e) ? e : null; };
+      const hits = verbs.filter(c => match(c) !== null);
+      if (hits.length !== 1) return result;
+      const hit = hits[0], ending = match(hit), infinitive = norm(hit.lemma);
+      if (f === infinitive || ending === "") {
+        // (a form equal to the infinitive, or the bare participle: a participle frame in the part)
+        const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence,'twinParticiple'), at = clickedTokenIndex(tokens,context.tokenOffset,w);
+        if (at < 0) return result;
+        const gap = i => sentence.slice(tokens[i-1].index + tokens[i-1][0].length, tokens[i].index);
+        let s = at; while (s > 0 && !/[,;:.!?»«„“"–—()]/u.test(gap(s))) s--;
+        let e = at + 1; while (e < tokens.length && !/[,;:.!?»«„“"–—()]/u.test(gap(e))) e++;
+        const words = tokens.slice(s, e).map(x => norm(x[0]));
+        if (at > 0 && norm(tokens[at-1][0]) === "zu") return result;
+        const MODAL = /^(?:kann|kannst|können|könnt|konnte|konntest|konnten|konntet|könnte|könntest|könnten|könntet|muss|musst|müssen|müsst|musste|mussten|müsste|müssten|soll|sollst|sollen|sollt|sollte|sollten|will|willst|wollen|wollt|wollte|wollten|darf|darfst|dürfen|dürft|durfte|durften|dürfte|dürften|mag|magst|mögen|mögt|mochte|mochten|möchte|möchten|wird|wirst|werden|werdet|würde|würdest|würden|würdet)$/u;
+        // (not sein — the infinitive or the possessive: Weil sein Team übersetzt — a finite form in a subordinate part, both verbs)
+        const AUX = /^(?:hat|hast|habe|haben|habt|hatte|hattest|hatten|hattet|hätte|hättest|hätten|hättet|ist|bist|bin|sind|seid|sei|war|warst|waren|wart|wäre|wären|wurde|wurden|wurdest|worden|ward|geworden)$/u;
+        if (f === infinitive && words.some(x => MODAL.test(x)) && !words.some(x => /^(?:wurde|wurden|wurdest|worden|ward)$/u.test(x))) return result;
+        if (!words.some(x => AUX.test(x) || /^(?:wird|werden|würde|würden)$/u.test(x) && words.some(y => y === "worden"))) {
+          // (werden alone: a passive — wird … übertragen; with a modal before it is the infinitive — handled above)
+          if (!words.some(x => /^(?:wird|wirst|werden|werdet|würde|würden)$/u.test(x))) return result;
+        }
+      }
+      // (a form that is also a finite form — die Werke ins Deutsche übersetzten: Präteritum of the same verb — the verb without «Partizip II»)
+      const finite = ending !== "" && (await tokenAnalyses(w, undefined, "twinParticiple")).some(a => a.kind === "finite");
+      const x = finite ? {...hit, evidence:"twin-participle"} : {...hit, formFeatures:{...(hit.formFeatures || {}), tense:"Partizip II"}, evidence:"twin-participle"};
+      const others = cands.filter(c => c !== verbs[0] && c !== verbs[1]);
+      if (others.some(c => canonicalPos(c.item?.type || c.pos) === "Adjektiv")) return result;
+      return {...result, candidates:[x, ...others], selected:x, preferred:x, status:"resolved", rule:"twin-participle"};
+    }
     async function participlePhrase(word, context, result) {
       const w = String(word);
       if (!/^\p{Ll}+$/u.test(w) || !result || !context || !Number.isInteger(context.tokenOffset)) return result;
