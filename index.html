@@ -127,7 +127,7 @@
   </title>
   <!-- shared with the exercises (04.11): colours (--bg, --text, --muted, --mint, --hairline) and the Inter / Literata fonts -->
   <link href="components/deutsch-base-v1.css?v=7" rel="stylesheet"/>
-  <link href="components/deutsch-ui-v1.css?v=11" rel="stylesheet"/>
+  <link href="components/deutsch-ui-v1.css?v=14" rel="stylesheet"/>
   <link href="components/deutsch-fonts-v1.css?v=1" rel="stylesheet"/>
   <script src="components/deutsch-fonts-v1.js?v=1"></script>
   <script>
@@ -136,8 +136,8 @@
    // the page has drawn (an empty page = a grey flash). Home stays covered until "load", which waits for it.
    // Cache number: when home.css changes, raise the ?v= in BOTH lines below.
    document.write(document.documentElement.classList.contains("is-launching")
-     ? '<link href="home.css?v=85" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
-     : '<link href="home.css?v=85" rel="stylesheet"/>');
+     ? '<link href="home.css?v=86" rel="stylesheet" media="print" onload="this.media=\'all\'"/>'
+     : '<link href="home.css?v=86" rel="stylesheet"/>');
   </script>
   <link href="icon.webp" rel="icon" type="image/webp"/>
   <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -384,7 +384,7 @@
      <div class="backup-hint" id="backupHint" hidden></div>
      <div class="settings-gap" aria-hidden="true"></div>
      <div class="settings-row"><label for="nameInput">Name</label><span class="settings-name-wrap"><input class="settings-name" id="nameInput" type="text" maxlength="20" placeholder="optional" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="done"/></span></div>
-     <div class="settings-row"><span>Deine Sprache</span><button class="settings-lang" id="translationLangToggle" type="button" data-lang="en" aria-label="Deine Sprache: Englisch. Tippen zum Wechseln."><span class="settings-lang-opt" data-opt="en">EN</span><span class="settings-lang-opt" data-opt="ru">RU</span></button></div>
+     <div class="settings-row"><span>Deine Sprache</span><button class="settings-lang" id="translationLangToggle" type="button" aria-haspopup="dialog" aria-label="Deine Sprache: English. Tippen zum Wechseln."><span id="translationLangName">English</span> <span aria-hidden="true" class="ui-chev"></span></button></div>
      <div class="settings-row"><span>Helles Design</span><button aria-checked="true" class="settings-toggle" id="themeToggle" role="switch" type="button"></button></div>
      <div class="settings-row"><span>Tageslimit</span><button aria-checked="true" class="settings-toggle" id="dailyLimitToggle" role="switch" type="button"></button></div>
      <div id="notificationSettings" hidden>
@@ -441,6 +441,13 @@
     <p class="about-text" id="aboutText"></p>
    </div>
   </div>
+  <!-- Deine Sprache (17.11.2026, chat of languages + design): the shared window, one choice out of the list (.ui-choice) -->
+  <div aria-hidden="true" class="about-window ui-window" id="langWindow">
+   <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="langTitle">
+    <div class="about-head ui-window-head"><h2 class="ui-window-title" id="langTitle">Deine Sprache</h2><button class="about-close ui-close" id="langClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+    <div class="lang-choices" id="langChoices" role="radiogroup" aria-labelledby="langTitle"></div>
+   </div>
+  </div>
   <div aria-hidden="true" class="about-window ui-window" id="versionsWindow">
    <div class="about-card ui-window-card ui-window-small" role="dialog" aria-modal="true" aria-labelledby="versionsTitle">
     <div class="about-head ui-window-head"><h2 class="ui-window-title" id="versionsTitle">Versionen</h2><button class="about-close ui-close" id="versionsClose" type="button" aria-label="Schließen"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
@@ -479,7 +486,7 @@
   </div>
   <script src="components/deutsch-day-v1.js?v=1"></script>
   <script src="components/deutsch-daily-v1.js?v=1"></script>
-  <script src="components/deutsch-translation-v1.js?v=2"></script>
+  <script src="components/deutsch-translation-v1.js?v=3" data-pack="phrases.js"></script>
   <script src="components/deutsch-wortschatz-due-v1.js?v=2"></script>
   <script src="phrases.js?v=3">
   </script>
@@ -488,10 +495,10 @@
  <script src="bibliothek/reader/reading-data.js?v=1"></script>
  <script src="components/deutsch-window-v1.js?v=3"></script>
  <script src="components/deutsch-panel-v1.js?v=2"></script>
- <script src="home.js?v=20261116-ipad-1"></script>
+ <script src="home.js?v=20261117-lang-1"></script>
  <script src="features/notizbuch/home-notebook.js?v=10"></script>
  <script src="components/deutsch-progress-screen-model-v1.js?v=1"></script>
  <script src="progress-screen.js?v=31"></script>
- <script src="worterbuch.js?v=20261117-links-old17-1"></script>
+ <script src="worterbuch.js?v=20261117-lang-1"></script>
 </body>
 </html>

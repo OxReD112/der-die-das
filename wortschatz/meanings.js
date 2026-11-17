@@ -20,7 +20,9 @@
     return (loading ||= fetch(FILE, { cache: "no-store" })
       .then(r => (r.ok ? r.json() : {}))
       .catch(() => ({}))
-      .then(m => (map = m && typeof m === "object" ? m : {})));
+      .then(m => (map = m && typeof m === "object" ? m : {}))
+      // a language pack (17.11.2026): its meaning texts (wortschatz/example-senses.json = {id: "…"}) are added as map[id].<code>
+      .then(m => (window.DeutschTranslation?.needsPack?.() ? window.DeutschTranslation.mergeById(m, "wortschatz/example-senses.json") : m)));
   }
   // split at `sep` outside ( ) and [ ]
   function parts(s, sep) {
@@ -43,8 +45,9 @@
   const plain = v => (typeof v === "string" ? v : v && typeof v === "object" ? v.ru || v.en || "" : "");
   function pick(list, dictionaryId, exampleTr) {
     const f = map && dictionaryId ? map[dictionaryId] : null;
+    const own = f && window.DeutschTranslation?.needsPack?.() ? f[window.DeutschTranslation.getDisplayLang()] : null;
     if (f)
-      for (const t of [f.ru, f.en]) {
+      for (const t of own ? [own, f.ru, f.en] : [f.ru, f.en]) {
         if (!t) continue;
         const lt = low(t).trim();
         let i = list.findIndex(p => low(p) === lt);

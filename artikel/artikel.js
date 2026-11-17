@@ -169,7 +169,7 @@ function choose(article) {
   $("answerWord").textContent = w.word;
   $("answerTranslation").textContent = getTranslation(w, "translation");
   // Rule card follows the RU/EN setting (words.js: ruleName / explanation / reliability are {ru, en}).
-  const ui = CARD_UI[DeutschTranslation.getLang()] || CARD_UI.en;
+  const ui = DeutschTranslation.table ? DeutschTranslation.table(CARD_UI) : CARD_UI[DeutschTranslation.getLang()] || CARD_UI.en;
   const ruleName = getTranslation(w, "ruleName") || w.ruleLabel;
   $("ruleLabel").textContent = ruleName;
   $("ruleTitle").textContent = getTranslation(w, "explanation");

@@ -33,6 +33,12 @@
     return selectedText || ru || en || "";
   }
 
+  // 17.11.2026 (languages): obj[name_ru / name_en] as before; a language pack's obj[name_pl] first (merged in at load).
+  function translatedField(obj, name) {
+    const D = window.DeutschTranslation;
+    return (D && D.field ? D.field(obj, name) : translated(obj[name + "_ru"], obj[name + "_en"])) || "";
+  }
+
   // Wörterbuch quality A5 (user 27.10.2026): search compares one spelling — typographic apostrophes (’ ‘ ʼ ´ `, iPhone keyboard)
   // count as ', ß as ss (sei’s drum → sei's drum, Massnahmen → Maßnahmen).
   function normalized(value) {
@@ -72,10 +78,15 @@
     if (entries) return Promise.resolve(entries);
     if (loadPromise) return loadPromise;
     results.replaceChildren(node("p", "dictionary-hint", "Wörter werden geladen …"));
-    const loadJson = path => fetch(path).then(response => {
+    let loadJson = path => fetch(path).then(response => {
       if (!response.ok) throw new Error(path + " HTTP " + response.status);
       return response.json();
     });
+    // a language pack (17.11.2026): its texts are merged into the cards by id; EN / RU load exactly as before
+    if (window.DeutschTranslation?.needsPack?.()) {
+      const plain = loadJson;
+      loadJson = path => plain(path).then(list => window.DeutschTranslation.mergeById(list, path.replace(/\?.*$/, "")));
+    }
     loadPromise = Promise.all([
       loadJson("worterbuch/german-nouns.json?v=20261116-wn-geschworene139-1"),
       loadJson("worterbuch/german-verbs.json?v=20261117-wn-ansehen142-1"),
@@ -155,7 +166,7 @@
       const button = node("button", "dictionary-match dictionary-entry-expression");
       button.type = "button";
       button.append(node("span", "dictionary-match-word", expression.word));
-      button.append(node("span", "dictionary-match-translation", translated(expression.translation_ru, expression.translation_en)));
+      button.append(node("span", "dictionary-match-translation", translatedField(expression, "translation")));
       button.addEventListener("click", event => {
         event.preventDefault();
         selected = expression;
@@ -194,9 +205,9 @@
           : "Plural: " + item.plural.split(/\s*,\s*/).map(form => "die " + form).join(", ");
       entry.append(node("p", "dictionary-entry-plural dictionary-entry-detail", text));
     }
-    const pluralNote = translated(item.plural_note_ru, item.plural_note_en);
+    const pluralNote = translatedField(item, "plural_note");
     if (pluralNote) entry.append(node("p", "dictionary-entry-note", pluralNote));
-    const usageNote = translated(item.usage_note_ru, item.usage_note_en);
+    const usageNote = translatedField(item, "usage_note");
     // Cards with a word-order rule (conjunctions, linking adverbs): translation → „Wortstellung“ (rule, pattern) → „Beispiel“ → „Hinweise“.
     const hasWordOrder = Boolean(item.word_order_rule || item.word_order_pattern);
     const noteAfterTranslation = ["adverb", "conjunction", "pronoun"].includes(item.type);
@@ -205,11 +216,11 @@
     const noteUnderTranslation = ["verb", "noun", "adjective"].includes(item.type);
     if (usageNote && !noteAfterTranslation && !noteUnderTranslation) entry.append(node("p", "dictionary-entry-note", usageNote));
 
-    entry.append(node("p", "dictionary-entry-translation", translated(item.translation_ru, item.translation_en)));
+    entry.append(node("p", "dictionary-entry-translation", translatedField(item, "translation")));
     // G70 step 2 (WN reflexive batch, user 24.10.2026): the field `reflexive` — the meaning of the verb with an accusative sich — is a line
     // under the main translation: «sich X — …». Its example and note follow the main example in their own section (A3, below).
     const reflexive = item.type === "verb" && item.reflexive && item.reflexive.worterbuch_hidden !== true
-      ? translated(item.reflexive.translation_ru, item.reflexive.translation_en) : "";
+      ? translatedField(item.reflexive, "translation") : "";
     if (reflexive) {
       const line = node("p", "dictionary-entry-translation dictionary-entry-reflexive");
       line.append(node("strong", "", "sich " + item.word), document.createTextNode(" — " + reflexive));
@@ -234,10 +245,10 @@
       const orderExample = node("section", "dictionary-entry-section");
       orderExample.append(node("h4", "dictionary-entry-label", item.example_usage ? "Beispiel · " + item.example_usage : "Beispiel"));
       orderExample.append(node("p", "dictionary-entry-example", item.example_de || ""));
-      const orderExampleTranslation = translated(item.example_ru, item.example_en);
+      const orderExampleTranslation = translatedField(item, "example");
       if (orderExampleTranslation) orderExample.append(node("p", "dictionary-entry-example-translation", orderExampleTranslation));
       entry.append(orderExample);
-      const lines = language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
+      const lines = window.DeutschTranslation?.field ? window.DeutschTranslation.field(item, "notes") : language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
       if (Array.isArray(lines) && lines.length) {
         const notes = node("section", "dictionary-entry-section dictionary-entry-hints");
         notes.append(node("h4", "dictionary-entry-label", "Hinweise"));
@@ -281,12 +292,12 @@
         section.append(scroll);
         entry.append(section);
       });
-      const formsNote = translated(item.forms_note_ru, item.forms_note_en);
+      const formsNote = translatedField(item, "forms_note");
       if (formsNote) entry.append(node("p", "dictionary-entry-note", formsNote));
       if (usageNote) entry.append(node("p", "dictionary-entry-note", usageNote));
     }
 
-    const declensionNote = translated(item.declension_note_ru, item.declension_note_en);
+    const declensionNote = translatedField(item, "declension_note");
     if (item.type === "noun" && (item.declension_forms || declensionNote)) {
       const section = node("section", "dictionary-entry-section dictionary-noun-declension");
       section.append(node("h4", "dictionary-entry-label", "Deklination"));
@@ -302,7 +313,7 @@
         const line = node("p", "dictionary-entry-detail");
         line.append(node("strong", "", complement.pattern || ""));
         section.append(line);
-        const note = translated(complement.note_ru, complement.note_en);
+        const note = translatedField(complement, "note");
         if (note) section.append(node("p", "dictionary-entry-example-translation dictionary-verb-complement-note", note));
       });
       entry.append(section);
@@ -311,19 +322,19 @@
     const example = node("section", "dictionary-entry-section");
     example.append(node("h4", "dictionary-entry-label", item.example_usage ? "Beispiel · " + item.example_usage : "Beispiel"));
     example.append(node("p", "dictionary-entry-example", item.example_de || ""));
-    const exampleTranslation = translated(item.example_ru, item.example_en);
+    const exampleTranslation = translatedField(item, "example");
     if (exampleTranslation) example.append(node("p", "dictionary-entry-example-translation", exampleTranslation));
     if (item.type === "verb") entry.append(example);
     // Wörterbuch quality A3 (user 26.10.2026): the example and note of the «sich X» line — a section of its own after the main example,
     // labelled «Beispiel · sich X» (or «sich X» when there is only a note), so it no longer reads as the main example.
     if (reflexive) {
-      const reflexiveNote = translated(item.reflexive.note_ru, item.reflexive.note_en);
+      const reflexiveNote = translatedField(item.reflexive, "note");
       if (item.reflexive.example_de || reflexiveNote) {
         const section = node("section", "dictionary-entry-section dictionary-entry-reflexive-section");
         section.append(node("h4", "dictionary-entry-label", (item.reflexive.example_de ? "Beispiel · " : "") + "sich " + item.word));
         if (item.reflexive.example_de) {
           section.append(node("p", "dictionary-entry-example dictionary-entry-reflexive-example", item.reflexive.example_de));
-          const reflexiveExample = translated(item.reflexive.example_ru, item.reflexive.example_en);
+          const reflexiveExample = translatedField(item.reflexive, "example");
           if (reflexiveExample) section.append(node("p", "dictionary-entry-example-translation", reflexiveExample));
         }
         if (reflexiveNote) section.append(node("p", "dictionary-entry-note", reflexiveNote));
@@ -377,7 +388,7 @@
         formsLine.append(node("span", "dictionary-entry-imperative-form", form));
       });
       imperativeSection.append(formsLine);
-      const imperativeNote = translated(item.imperative_note_ru, item.imperative_note_en);
+      const imperativeNote = translatedField(item, "imperative_note");
       if (imperativeNote) imperativeSection.append(node("p", "dictionary-entry-note", imperativeNote));
       entry.append(imperativeSection);
     }
@@ -386,7 +397,7 @@
     // E1: an expression card — translation, example, then its notes («Hinweise», one line each); the type line «Ausdruck»
     // (TYPE_LABEL); no Wortschatz button (wortschatz_excluded, user 22.10).
     if (item.type === "expression") {
-      const lines = language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
+      const lines = window.DeutschTranslation?.field ? window.DeutschTranslation.field(item, "notes") : language() === "ru" ? (item.notes_ru || item.notes_en) : (item.notes_en || item.notes_ru);
       if (Array.isArray(lines) && lines.length) {
         const notes = node("section", "dictionary-entry-section dictionary-entry-hints");
         notes.append(node("h4", "dictionary-entry-label", "Hinweise"));
@@ -398,7 +409,7 @@
       const section = node("section", "dictionary-entry-section");
       section.append(node("h4", "dictionary-entry-label", "Beispiel · " + (extra.example_usage || "")));
       section.append(node("p", "dictionary-entry-example", extra.example_de));
-      section.append(node("p", "dictionary-entry-example-translation", translated(extra.example_ru, extra.example_en)));
+      section.append(node("p", "dictionary-entry-example-translation", translatedField(extra, "example")));
       entry.append(section);
     }
     if (item.type !== "verb") appendExpressions(entry, item);
@@ -422,10 +433,10 @@
       button.type = "button";
       if (item.reflexiveHit) {
         button.append(node("span", "dictionary-match-word", reflexiveName(item)));
-        button.append(node("span", "dictionary-match-translation", translated(item.reflexive.translation_ru, item.reflexive.translation_en)));
+        button.append(node("span", "dictionary-match-translation", translatedField(item.reflexive, "translation")));
       } else {
         button.append(node("span", "dictionary-match-word", (item.article ? item.article + " " : "") + item.word));
-        button.append(node("span", "dictionary-match-translation", translated(item.translation_ru, item.translation_en)));
+        button.append(node("span", "dictionary-match-translation", translatedField(item, "translation")));
       }
       button.addEventListener("click", event => {
         event.preventDefault();
@@ -444,8 +455,8 @@
     if (clear) clear.hidden = !query;
     if (intro) {
       intro.hidden = Boolean(query.trim());
-      intro.textContent = language() === "ru"
-        ? "Немецкие слова: краткая грамматическая справка"
+      intro.textContent = window.DeutschTranslation
+        ? window.DeutschTranslation.t("Search German words for a brief grammar note", "Немецкие слова: краткая грамматическая справка")
         : "Search German words for a brief grammar note";
     }
     if (selected) {

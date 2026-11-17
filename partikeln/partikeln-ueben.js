@@ -30,6 +30,10 @@
   function $(id) { return document.getElementById(id); }
   function pick(v) { return window.DeutschTranslation ? window.DeutschTranslation.pick(v) : (v && (v.ru || v.en)) || ""; }
   function lang() { return window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en"; }
+  function tx(en, ru) { return window.DeutschTranslation ? window.DeutschTranslation.t.apply(null, arguments) : (lang() === "ru" ? ru : en); }
+  /* the Russian hint of a particle (c.hint): shown in Russian; a language pack may give its own
+     (exercises/partikeln__hints.json, keyed by the Russian text, 17.11.2026); English has none */
+  function hintOf(h) { return !h ? "" : window.DeutschTranslation ? window.DeutschTranslation.t("", h) : (lang() === "ru" ? h : ""); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function show(id) { ["start", "explore", "pStart", "pGame", "pDone"].forEach(function (x) { $(x).classList.toggle("hidden", x !== id); }); $("startAbout").style.display = id === "start" ? "" : "none"; }
@@ -170,7 +174,7 @@
     $("pContext").textContent = t.s.particles[t.answer].context || t.s.context; /* the task's own situation if it has one */
     $("pSentence").innerHTML = sentenceHtml(t.s, null);
     var f = FUNCTIONS[t.fn];
-    $("pLabel").innerHTML = "<small>" + (lang() === "ru" ? "Что ты хочешь сказать:" : "What you want to say:") + "</small>" + esc(f ? pick(f.label) : t.fn);
+    $("pLabel").innerHTML = "<small>" + tx("What you want to say:", "Что ты хочешь сказать:") + "</small>" + esc(f ? pick(f.label) : t.fn);
     $("pAnswers").innerHTML = q.options.map(function (k) { return '<button class="ans" type="button" data-k="' + k + '">' + esc(k) + "</button>"; }).join("");
     fitQuestion();
     showQuestion();
@@ -273,15 +277,15 @@
     $("pTranslation").textContent = pick(c.translation);
     var also = t.accept.filter(function (x) { return x !== shown; });
     var extra = [];
-    if (L === "ru" && c.hint) extra.push(c.hint);
-    if (also.length) extra.push((L === "ru" ? "тоже подходит: " : "also right: ") + also.join(", "));
+    if (hintOf(c.hint)) extra.push(hintOf(c.hint));
+    if (also.length) extra.push(tx("also right: ", "тоже подходит: ") + also.join(", "));
     $("pAlso").textContent = extra.join(" · ");
     var mine = P[k];
     /* explanation: why the right one; if wrong, what yours would have meant */
     var note = pick(c.note);
     if (!good) {
       var mf = mine && mine.status === "ok" ? FUNCTIONS[mine.fn] : null;
-      note = (mf ? (L === "ru" ? k + " — это «" + pick(mf.label) + "». " : k + " means “" + pick(mf.label) + "”. ")
+      note = (mf ? tx("{0} means “{1}”. ", "{0} — это «{1}». ", k, pick(mf.label))
                  : (mine ? pick(mine.note) + " " : "")) + note;
     }
     $("pNote").textContent = note;

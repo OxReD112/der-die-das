@@ -57,10 +57,12 @@
       grammar = [item.comparative, item.superlative].filter(Boolean).join(" · ");
     const pos = item.parts_of_speech?.join(" / ") || ({ noun: "Substantiv", verb: "Verb", adjective: "Adjektiv" })[item.type] || "Andere";
     const translatedValue = (ru, en) => lang === "ru" ? ru || en || "" : en || ru || "";
+    // a language pack (17.11.2026): item.<field>_<lang> (merged in at load), else as English
+    const packed = (name) => lang !== "ru" && lang !== "en" && item[name + "_" + lang] ? item[name + "_" + lang] : translatedValue(item[name + "_ru"], item[name + "_en"]);
     return {
       sentence: item.example_cloze,
-      translation: translatedValue(item.translation_ru, item.translation_en),
-      sentenceTranslation: translatedValue(item.example_ru, item.example_en),
+      translation: packed("translation"),
+      sentenceTranslation: packed("example"),
       base,
       grammar,
       pos

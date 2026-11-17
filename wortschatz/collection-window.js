@@ -26,15 +26,21 @@
   const list = () => (own() ? C.cards() : []);
   // L(en, ru): the text in the user's language. ruN(n, „слово“, „слова“, „слов“): the Russian plural for n.
   const RU = () => window.DeutschTranslation?.getLang?.() === "ru";
-  const L = (en, ru) => (RU() ? ru : en);
+  // the language new cards are written in: en / ru, or a language pack ("pl") — 17.11.2026
+  const packLang = () => { const D = window.DeutschTranslation, s = D?.getDisplayLang?.(); return s && D.isPack?.(s) ? s : null; };
+  const cardLang = () => packLang() || (RU() ? "ru" : "en");
+  // 17.11.2026 (languages): L goes through DeutschTranslation.t — the same text for EN / RU, a language pack's
+  // text for a pack language; "{0}" … are filled with the extra arguments, "{0|слово|слова|слов}" is the plural.
+  const L = (en, ru, ...a) =>
+    window.DeutschTranslation?.t ? window.DeutschTranslation.t(en, ru, ...a) : (RU() ? ru : en).replace(/\{(\d+)\}/g, (m, i) => (+i < a.length ? String(a[+i]) : m));
   const ruN = (n, one, few, many) => {
     const a = Math.abs(n) % 100, b = a % 10;
     return a > 10 && a < 20 ? many : b === 1 ? one : b > 1 && b < 5 ? few : many;
   };
   const MY_WORDS = () => L("My Words", "Мои слова"); // the default name, in the user's language (rename any time)
   const name = () => (own() ? C.get().name || MY_WORDS() : "");
-  const wordsLabel = n => L(n === 1 ? "1 word" : n + " words", n + " " + ruN(n, "слово", "слова", "слов"));
-  const wordsTitle = n => L(n === 1 ? "1 Word" : n + " Words", n + " " + ruN(n, "слово", "слова", "слов"));
+  const wordsLabel = n => L("{0} {0|word|words}", "{0} {0|слово|слова|слов}", n);
+  const wordsTitle = n => L("{0} {0|Word|Words}", "{0} {0|слово|слова|слов}", n);
   const tr = (c, f) =>
     typeof window.getTranslation === "function" ? window.getTranslation(c, f) : typeof c[f] === "string" ? c[f] : "";
 
@@ -178,7 +184,7 @@
   // Several chips = one split answer (separable verbs: „schlage“ + „vor“).
   const CLOZE = /\{\{c\d+::(.*?)(?:::[^}]*)?\}\}/g;
   const POS = ["Verb", "Substantiv", "Adjektiv", "Andere"]; // stored values (same as the built-in cards)
-  const POS_LABEL = p => (RU() ? { Verb: "Глагол", Substantiv: "Существительное", Adjektiv: "Прилагательное", Andere: "Другое" } : { Verb: "Verb", Substantiv: "Noun", Adjektiv: "Adjective", Andere: "Other" })[p]; // shown
+  const POS_LABEL = p => ({ Verb: () => L("Verb", "Глагол"), Substantiv: () => L("Noun", "Существительное"), Adjektiv: () => L("Adjective", "Прилагательное"), Andere: () => L("Other", "Другое") })[p]?.(); // shown // shown
   function splitToken(t) {
     const m = t.match(/^([^\p{L}\p{N}]*)(.*?)([^\p{L}\p{N}]*)$/u);
     return { lead: m[1], core: m[2], trail: m[3] };
@@ -503,7 +509,7 @@
     return hits.slice(0, 40).map(h => h.e.item);
   }
   function dictionarySearch(opts, form, placement) {
-    const lang = window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en";
+    const lang = cardLang();
     const wrap = el("div", "coll-search");
     const input = el("input", "coll-field coll-search-field", null, {
       type: "search", id: "cfSearch", placeholder: L("Search the Wörterbuch", "Поиск в Wörterbuch"), "aria-label": L("Search the Wörterbuch", "Поиск в Wörterbuch"),
@@ -718,7 +724,7 @@
     const mark = box.appendChild(el("span", "coll-done-check", null, { "aria-hidden": "true" }));
     mark.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
     box.appendChild(el("h3", "coll-done-title", result.added === 1 ? "1 Wort" : result.added + " Wörter", { lang: "de", role: "status" }));
-    box.appendChild(el("p", "coll-text", L(`added to Wortschatz, collection „${name()}“`, `${result.added === 1 ? "добавлено" : "добавлены"} в Wortschatz, коллекция «${name()}»`)));
+    box.appendChild(el("p", "coll-text", L("added to Wortschatz, collection „{1}“", "{0|добавлено|добавлены} в Wortschatz, коллекция «{1}»", result.added === 1 ? 1 : 2, name())));
     if (words.length && words.length <= 5) {
       const ul = box.appendChild(el("ul", "coll-done-list"));
       for (const w of words) {
@@ -728,8 +734,8 @@
       }
     }
     const notes = [];
-    if (result.duplicates) notes.push(L(`${result.duplicates} already in your collection.`, `${result.duplicates} ${ruN(result.duplicates, "слово уже было", "слова уже были", "слов уже были")} в коллекции.`));
-    if (unavailable) notes.push(L(`${unavailable} without learning cards stay in Meine Wörter.`, `${unavailable} ${ruN(unavailable, "слово без карточки осталось", "слова без карточек остались", "слов без карточек остались")} в Meine Wörter.`));
+    if (result.duplicates) notes.push(L("{0} already in your collection.", "{0} {0|слово уже было|слова уже были|слов уже были} в коллекции.", result.duplicates));
+    if (unavailable) notes.push(L("{0} without learning cards stay in Meine Wörter.", "{0} {0|слово без карточки осталось|слова без карточек остались|слов без карточек остались} в Meine Wörter.", unavailable));
     if (notes.length) box.appendChild(el("p", "coll-hint", notes.join(" ")));
     box.appendChild(button("coll-main", "Weiterlesen", close));
     if (embed.openWortschatz) box.appendChild(button("coll-link", L("Open Wortschatz", "Открыть Wortschatz"), () => { close(); embed.openWortschatz(); }));
@@ -746,8 +752,8 @@
       card.textContent = "";
       card.appendChild(head(L("Words from Reading", "Слова из чтения")));
       const sc=el("div","coll-scroll");card.appendChild(sc);
-      sc.appendChild(el("p","coll-text",L(`Review words from „${String(request.title || "Bibliothek")}“. Tap any word to edit it before adding.`,`Проверь слова из «${String(request.title || "Bibliothek")}». Нажми на слово, чтобы изменить его перед добавлением.`)));
-      if (request.unavailable) sc.appendChild(el("p","coll-hint",L(`${request.unavailable} ${request.unavailable===1?"word without a learning card remains":"words without learning cards remain"} saved in Bibliothek.`,`${request.unavailable} ${ruN(request.unavailable,"слово без учебной карточки остаётся","слова без учебных карточек остаются","слов без учебных карточек остаются")} в Bibliothek.`)));
+      sc.appendChild(el("p","coll-text",L("Review words from „{0}“. Tap any word to edit it before adding.","Проверь слова из «{0}». Нажми на слово, чтобы изменить его перед добавлением.",String(request.title || "Bibliothek"))));
+      if (request.unavailable) sc.appendChild(el("p","coll-hint",L("{0} {0|word without a learning card remains|words without learning cards remain} saved in Bibliothek.","{0} {0|слово без учебной карточки остаётся|слова без учебных карточек остаются|слов без учебных карточек остаются} в Bibliothek.",request.unavailable)));
       // 08.11 (Alena): no line per word with its record number and reason — the line above says how many stay in Bibliothek.
       if (!own()) {
         sc.appendChild(el("p","coll-text",L("These words start your own word collection.","С этих слов начнётся твоя коллекция.")));
@@ -806,7 +812,7 @@
           refreshButtons();
           if(embed){const words=selection.map(({row})=>row.card||{});viewReadingDone(result,words,request.unavailable||0,embed);return;}
           viewMain();
-          const notice=el("p","coll-text",L(`${result.added} words added${request.placement==="next"?" as the next new words":""}.${result.duplicates?` ${result.duplicates} already in your collection.`:""}`,`Добавлено: ${wordsLabel(result.added)}${request.placement==="next"?" — следующими новыми":""}.${result.duplicates?` Уже были в коллекции: ${result.duplicates}.`:""}`));
+          const notice=el("p","coll-text",L("{0} words added","Добавлено: {1}",result.added,wordsLabel(result.added))+(request.placement==="next"?L(" as the next new words"," — следующими новыми"):"")+"."+(result.duplicates?L(" {0} already in your collection."," Уже были в коллекции: {0}.",result.duplicates):""));
           card.insertBefore(notice,card.children[1]);notice.setAttribute("role","status");
           const listRows=card.querySelectorAll('.coll-list .coll-word');
           const added=new Set(result.ids || C.cards().map(word=>word.id));
@@ -869,12 +875,15 @@
     setCache[def.id] ||= (async () => {
       const r = await fetch(def.file, { cache: "no-store" });
       if (!r.ok) throw new Error("set-missing");
-      return r.json();
+      const set = await r.json();
+      // a language pack (17.11.2026): the set's texts (wortschatz/<set>.json, pairs like the exercises) are read first
+      if (window.DeutschTranslation?.needsPack?.()) await new Promise(done => window.DeutschTranslation.ready(["wortschatz/" + def.id + ".json"], done));
+      return set;
     })().catch(e => { delete setCache[def.id]; throw e; });
     return setCache[def.id];
   }
-  const uiLang = () => (window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en");
-  const pickLang = v => (v && typeof v === "object" ? v[uiLang()] || v.en || v.ru || "" : v || "");
+  const uiLang = () => cardLang();
+  const pickLang = v => (v && typeof v === "object" ? v[uiLang()] || (packLang() ? window.DeutschTranslation.pick(v) : "") || v.en || v.ru || "" : v || "");
   function viewSets(back, collectionName) {
     card.textContent = "";
     card.appendChild(head(L("Word Sets", "Наборы слов"), back));
@@ -1016,7 +1025,7 @@
       dirty = true;
       refreshButtons();
       viewMain();
-      const notice = el("p", "coll-text", L(r.added + (r.added === 1 ? " word" : " words") + " added from „" + set.name + "“.", "Добавлено из «" + set.name + "»: " + wordsLabel(r.added) + "."));
+      const notice = el("p", "coll-text", L("{0} {0|word|words} added from „{1}“.", "Добавлено из «{1}»: {2}.", r.added, set.name, wordsLabel(r.added)));
       notice.setAttribute("role", "status");
       card.insertBefore(notice, card.children[1]);
     };
@@ -1028,7 +1037,6 @@
   // Settings (2026-10-26): like the rest of the exercise — names in simple German, the explanations in the
   // user's language (RU / EN, the app's language switch), as the whole window since 02.11.2026.
   function viewSettings() {
-    const ru = RU();
     card.textContent = "";
     card.appendChild(head("Lerntempo")); // the only setting so far: it is the title (a section label comes with a second one)
     const sc = el("div", "coll-scroll");
@@ -1036,8 +1044,8 @@
     const box = el("div", "coll-paces", null, { role: "radiogroup", "aria-label": "Lerntempo" });
     sc.appendChild(box);
     const options = [
-      ["standard", "Standard", ru ? "Чтобы запомнить надолго" : "For the long run"],
-      ["intensiv", "Intensiv", ru ? "Перед экзаменом · больше повторений" : "Before an exam · more reviews"]
+      ["standard", "Standard", L("For the long run", "Чтобы запомнить надолго")],
+      ["intensiv", "Intensiv", L("Before an exam · more reviews", "Перед экзаменом · больше повторений")]
     ];
     // the rows: the shared one-of-a-list choice (.ui-choice, components/deutsch-ui-v1.css, 17.11.2026)
     function draw() {
@@ -1066,9 +1074,8 @@
       el(
         "p",
         "coll-hint",
-        ru
-          ? "Слово с ошибкой всегда возвращается на следующий день. Новый темп действует только на следующие повторения."
-          : "A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews."
+        L("A word you get wrong always comes back tomorrow. Changing the pace only affects the next reviews.",
+          "Слово с ошибкой всегда возвращается на следующий день. Новый темп действует только на следующие повторения.")
       )
     );
   }
@@ -1081,8 +1088,8 @@
       el(
         "p",
         "coll-text",
-        L("„" + (w.base || w.target) + "“ and your progress with it will be deleted." + (session ? " The session goes on with the next word." : ""),
-          "«" + (w.base || w.target) + "» и прогресс по нему будут удалены." + (session ? " Тренировка продолжится со следующего слова." : ""))
+        L("„{0}“ and your progress with it will be deleted.", "«{0}» и прогресс по нему будут удалены.", w.base || w.target) +
+          (session ? L(" The session goes on with the next word.", " Тренировка продолжится со следующего слова.") : "")
       )
     );
     const b = el("div", "coll-buttons");
@@ -1168,7 +1175,7 @@ Rules:
 - "base": словарная форма. Существительные — с der / die / das.
 - "grammar": у глаголов — 3-е лицо · Präteritum · Perfekt. У существительных — множественное число. Иначе оставь пустым.
 - "pos": часть речи по-немецки (Verb, Substantiv, Adjektiv, Adverb, Präposition, Konjunktion …).`;
-  const FORMAT_BLOCK = () => (RU() ? FORMAT_BLOCK_RU : FORMAT_BLOCK_EN);
+  const FORMAT_BLOCK = () => L(FORMAT_BLOCK_EN, FORMAT_BLOCK_RU);
 
   function copyText(text, done) {
     const fallback = () => {
@@ -1318,12 +1325,10 @@ Rules:
       el(
         "p",
         "coll-text",
-        RU()
-          ? (opts.create ? wordsLabel(r.added) + " в «" + (C.get() ? C.get().name : opts.name) + "»." : "Добавлено: " + wordsLabel(r.added) + ".") +
-            (opts.create && r.added > 10 ? " Начнёшь с первых 10." : "")
-          : (r.added === 1 ? "1 word" : r.added + " words") +
-            (opts.create ? " in „" + (C.get() ? C.get().name : opts.name) + "“." : " added.") +
-            (opts.create && r.added > 10 ? " You start with the first 10." : "")
+        (opts.create
+          ? L("{0} {0|word|words} in „{1}“.", "{2} в «{1}».", r.added, C.get() ? C.get().name : opts.name, wordsLabel(r.added))
+          : L("{0} {0|word|words} added.", "Добавлено: {1}.", r.added, wordsLabel(r.added))) +
+          (opts.create && r.added > 10 ? L(" You start with the first 10.", " Начнёшь с первых 10.") : "")
       )
     );
     if (r.duplicates)
@@ -1331,12 +1336,12 @@ Rules:
         el(
           "p",
           "coll-hint",
-          L((r.duplicates === 1 ? "1 word was" : r.duplicates + " words were") + " already in your collection.", "Уже были в коллекции: " + wordsLabel(r.duplicates) + ".")
+          L("{0} {0|word was|words were} already in your collection.", "Уже были в коллекции: {1}.", r.duplicates, wordsLabel(r.duplicates))
         )
       );
     if (r.skipped.length) {
       sc.appendChild(
-        el("p", "coll-label", L((r.skipped.length === 1 ? "1 card" : r.skipped.length + " cards") + " skipped:", "Пропущено: " + r.skipped.length + " " + ruN(r.skipped.length, "карточка", "карточки", "карточек")))
+        el("p", "coll-label", L("{0} {0|card|cards} skipped:", "Пропущено: {0} {0|карточка|карточки|карточек}", r.skipped.length))
       );
       r.skipped
         .slice(0, 30)
@@ -1345,7 +1350,7 @@ Rules:
             el("p", "coll-hint", L("No. ", "№ ") + x.n + " · " + x.reason + (x.preview ? " · „" + x.preview + "“" : ""))
           )
         );
-      if (r.skipped.length > 30) sc.appendChild(el("p", "coll-hint", L("… and " + (r.skipped.length - 30) + " more.", "… и ещё " + (r.skipped.length - 30) + ".")));
+      if (r.skipped.length > 30) sc.appendChild(el("p", "coll-hint", L("… and {0} more.", "… и ещё {0}.", r.skipped.length - 30)));
     }
     const b = el("div", "coll-form-buttons");
     b.appendChild(button("coll-main", L("Done", "Готово"), close));
@@ -1439,10 +1444,8 @@ Rules:
       el(
         "p",
         "coll-text",
-        L("„" +
-          name() +
-          "“ and your progress will be deleted. You can start again with a word set or your own words. This can't be undone - export the words first if you want to keep them.",
-          "«" + name() + "» и твой прогресс будут удалены. Начать заново можно с набора слов или со своих слов. Это нельзя отменить — если хочешь сохранить слова, сначала экспортируй их.")
+        L("„{0}“ and your progress will be deleted. You can start again with a word set or your own words. This can't be undone - export the words first if you want to keep them.",
+          "«{0}» и твой прогресс будут удалены. Начать заново можно с набора слов или со своих слов. Это нельзя отменить — если хочешь сохранить слова, сначала экспортируй их.", name())
       )
     );
     const b = el("div", "coll-buttons");

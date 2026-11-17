@@ -31,6 +31,9 @@
   function $(id) { return document.getElementById(id); }
   function pick(v) { return window.DeutschTranslation ? window.DeutschTranslation.pick(v) : (v && (v.ru || v.en)) || ""; }
   function lang() { return window.DeutschTranslation ? window.DeutschTranslation.getLang() : "en"; }
+  /* the Russian hint of a particle (c.hint): shown in Russian; a language pack may give its own
+     (exercises/partikeln__hints.json, keyed by the Russian text, 17.11.2026); English has none */
+  function hintOf(h) { return !h ? "" : window.DeutschTranslation ? window.DeutschTranslation.t("", h) : (lang() === "ru" ? h : ""); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   /* ---------- data helpers ---------- */
@@ -155,10 +158,10 @@
     /* 10.11 (Alena): the explanation is easy to miss — when it changes, the slider moves first, then the text
        comes up from below (fades in: render) */
     var fn = $("fn"), hint = $("hint");
-    if (!c) { fn.textContent = "Ohne Partikel"; fn.className = "fn dim"; hint.textContent = ""; $("note").textContent = TXT.start[L] || TXT.start.en; }
+    if (!c) { fn.textContent = "Ohne Partikel"; fn.className = "fn dim"; hint.textContent = ""; $("note").textContent = window.DeutschTranslation ? window.DeutschTranslation.table(TXT.start) : TXT.start[L] || TXT.start.en; }
     else if (ok) {
       var f = FUNCTIONS[c.fn]; fn.textContent = f ? pick(f.label) : c.fn; fn.className = "fn";
-      hint.textContent = L === "ru" && c.hint ? c.hint : "";
+      hint.textContent = hintOf(c.hint);
       $("note").textContent = pick(c.note);
     } else {
       fn.textContent = c.status === "odd" ? "Klingt seltsam" : "Passt hier nicht"; fn.className = "fn dim";

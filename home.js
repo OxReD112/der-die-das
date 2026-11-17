@@ -600,7 +600,7 @@ document.querySelectorAll("[data-app]").forEach(button => {
 window.openWortschatzForDictionary = item => {
   const tile = document.querySelector('[data-app^="wortschatz/"]');
   if (!tile || !item || item.wortschatz_excluded === true) return;
-  const request = { version:2, id: Date.now().toString(36) + Math.random().toString(36).slice(2), dictionaryId:item.id, lang:window.DeutschTranslation?.getLang?.() === "ru" ? "ru" : "en" };
+  const request = { version:2, id: Date.now().toString(36) + Math.random().toString(36).slice(2), dictionaryId:item.id, lang:(() => { const D = window.DeutschTranslation, s = D?.getDisplayLang?.(); return s && D.isPack?.(s) ? s : D?.getLang?.() === "ru" ? "ru" : "en"; })() }; // the card's language: en / ru / a language pack (17.11.2026)
   try {
     sessionStorage.setItem("deutschWortschatzPendingDictionaryWordV2", JSON.stringify(request));
   } catch (e) {}
@@ -1447,10 +1447,10 @@ async function restoreDeutschBackup(file) {
     const backupName =
       profile && profile[2] && typeof profile[2].name === "string" ? profile[2].name.trim().slice(0, 20) : "";
     /* a question to understand, so in Your Language (04.11, short words German, explanations in your language) */
-    const ru = window.DeutschTranslation?.getLang?.() === "ru";
-    const question = ru
-      ? (dateLabel ? `Восстановить бэкап от ${dateLabel}?` : "Восстановить бэкап?")
-      : (dateLabel ? `Restore the backup from ${dateLabel}?` : "Restore the backup?");
+    const tx = (en, ru, ...a) => (window.DeutschTranslation?.t ? window.DeutschTranslation.t(en, ru, ...a) : (en.replace("{0}", a[0])));
+    const question = dateLabel
+      ? tx("Restore the backup from {0}?", "Восстановить бэкап от {0}?", dateLabel)
+      : tx("Restore the backup?", "Восстановить бэкап?");
     if (!window.confirm(question + (backupName ? `\nName: ${backupName}` : ""))) {
       if (note) note.textContent = "· abgebrochen";
       return;
@@ -1515,15 +1515,7 @@ async function restoreDeutschBackup(file) {
       } catch (e) {}
     }
 
-    const langToggle = document.getElementById("translationLangToggle");
-    if (langToggle && window.DeutschTranslation) {
-      const lang = window.DeutschTranslation.getLang();
-      langToggle.setAttribute("data-lang", lang);
-      langToggle.setAttribute(
-        "aria-label",
-        "Deine Sprache: " + (lang === "en" ? "Englisch" : "Russisch") + ". Tippen zum Wechseln."
-      );
-    }
+    window.deutschRenderLangRow?.();
 
     /* Move this device's push subscription to the restored notification ID. */
     const restoredNotificationUser = localStorage.getItem("deutschNotificationUserIdV1");
@@ -1703,7 +1695,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       localStorage.setItem(ENABLED_KEY, next ? "1" : "0");
     } catch (error) {
       console.error("Deutsch notifications:", error);
-      if (note) note.textContent = window.DeutschTranslation?.getLang?.() === "ru" ? "Не получилось включить уведомления." : "Couldn't turn on notifications.";
+      if (note) note.textContent = (window.DeutschTranslation?.t ? window.DeutschTranslation.t("Couldn't turn on notifications.", "Не получилось включить уведомления.") : "Couldn't turn on notifications.");
     } finally {
       toggle.disabled = false;
       render();
@@ -1780,14 +1772,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     resetDailyLimitForNewDay();
     theme.setAttribute("aria-checked", window.DeutschTheme.isLight() ? "true" : "false");
     limit.setAttribute("aria-checked", limitOn() ? "true" : "false");
-    if (langToggle && window.DeutschTranslation) {
-      const lang = window.DeutschTranslation.getLang();
-      langToggle.setAttribute("data-lang", lang);
-      langToggle.setAttribute(
-        "aria-label",
-        "Deine Sprache: " + (lang === "en" ? "Englisch" : "Russisch") + ". Tippen zum Wechseln."
-      );
-    }
+    renderLangRow();
     if (nameInput && document.activeElement !== nameInput) nameInput.value = getUserName();
   }
 
@@ -1962,11 +1947,98 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     render();
   });
 
-  langToggle?.addEventListener("click", () => {
-    if (!window.DeutschTranslation) return;
-    window.DeutschTranslation.setLang(window.DeutschTranslation.getLang() === "en" ? "ru" : "en");
+  /* ===== Deine Sprache (17.11.2026, chat of languages; look: claude/LANG_SWITCH_DESIGN_ANSWER_2026-11-17_RU.md) =====
+     The row shows the chosen language (grey, with the shared arrow); a tap opens the shared window with one choice
+     out of the list (.ui-choice). English / Русский are built in; a language pack (Polski …) is downloaded the first
+     time: its row says „wird geladen…“, then the language switches and the window closes by itself; on an error the
+     window stays open („Nicht geladen · nochmal versuchen“) and the language does not change. */
+  const langWindow = document.getElementById("langWindow");
+  const langChoices = document.getElementById("langChoices");
+  let langBusy = null,
+    langError = null;
+  function renderLangRow() {
+    const D = window.DeutschTranslation;
+    if (!langToggle || !D) return;
+    const code = D.getDisplayLang();
+    const l = (D.languages ? D.languages() : []).find(x => x.code === code);
+    const name = l ? l.name : code;
+    const label = document.getElementById("translationLangName");
+    if (label) label.textContent = name;
+    langToggle.setAttribute("aria-label", "Deine Sprache: " + name + ". Tippen zum Wechseln.");
+  }
+  window.deutschRenderLangRow = renderLangRow;
+  function langNote(l) {
+    const D = window.DeutschTranslation;
+    if (!l.pack) return "";
+    if (langBusy === l.code) return "wird geladen…";
+    if (langError === l.code) return "Nicht geladen · nochmal versuchen";
+    return D.packState(l.code) === "ready" ? "Paket geladen · " + D.packSize(l.code) : D.packSize(l.code);
+  }
+  function drawLangChoices() {
+    const D = window.DeutschTranslation;
+    if (!D || !langChoices) return;
+    const current = D.getDisplayLang();
+    langChoices.textContent = "";
+    D.languages().forEach(l => {
+      const on = l.code === current;
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "ui-choice" + (on ? " on" : "");
+      b.setAttribute("role", "radio");
+      b.setAttribute("aria-checked", on ? "true" : "false");
+      const dot = document.createElement("span");
+      dot.className = "ui-choice-dot";
+      dot.setAttribute("aria-hidden", "true");
+      const text = document.createElement("span");
+      text.className = "ui-choice-text";
+      const nameEl = document.createElement("span");
+      nameEl.className = "ui-choice-name";
+      nameEl.lang = l.code;
+      nameEl.textContent = l.name;
+      text.appendChild(nameEl);
+      const note = langNote(l);
+      if (note) {
+        const n = document.createElement("span");
+        n.className = "ui-choice-note";
+        n.textContent = note;
+        text.appendChild(n);
+      }
+      b.append(dot, text);
+      b.addEventListener("click", () => chooseLang(l));
+      langChoices.appendChild(b);
+    });
+  }
+  function applyLang(code) {
+    window.DeutschTranslation.setLang(code);
     render();
     document.dispatchEvent(new CustomEvent("deutsch:translationlang"));
+  }
+  function chooseLang(l) {
+    const D = window.DeutschTranslation;
+    if (!D || langBusy) return;
+    if (l.code === D.getDisplayLang()) return window.DeutschWindow.close(langWindow);
+    if (!l.pack) {
+      applyLang(l.code);
+      return window.DeutschWindow.close(langWindow);
+    }
+    langError = null;
+    langBusy = l.code;
+    if (D.packState(l.code) !== "ready") drawLangChoices(); // a pack not on this device yet: „wird geladen…“
+    D.download(l.code).then(ok => {
+      langBusy = null;
+      if (!ok) {
+        langError = l.code;
+        return drawLangChoices();
+      }
+      applyLang(l.code);
+      window.DeutschWindow.close(langWindow);
+    });
+  }
+  langToggle?.addEventListener("click", () => {
+    if (!window.DeutschTranslation || !langWindow) return;
+    langError = null;
+    drawLangChoices();
+    window.DeutschWindow.open(langWindow);
   });
 
   const LIMIT_TEXT = {
@@ -1976,7 +2048,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
   limit?.addEventListener("click", () => {
     if (limitOn()) {
       const limitText = document.getElementById("dailyLimitConfirmText");
-      if (limitText) limitText.textContent = LIMIT_TEXT[window.DeutschTranslation?.getLang?.()] || LIMIT_TEXT.en;
+      if (limitText) limitText.textContent = (window.DeutschTranslation?.table ? window.DeutschTranslation.table(LIMIT_TEXT) : LIMIT_TEXT.en);
       window.DeutschWindow.open(confirm);
     } else {
       localStorage.setItem(LIMIT_KEY, "1");
@@ -2038,7 +2110,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     }
   }
   function open() {
-    text.textContent = ABOUT_TEXT[lang()] || ABOUT_TEXT.en;
+    text.textContent = window.DeutschTranslation?.table ? window.DeutschTranslation.table(ABOUT_TEXT) : ABOUT_TEXT[lang()] || ABOUT_TEXT.en;
     window.DeutschWindow.open(win); // the shared window (components/deutsch-window-v1.js, 06.11)
   }
   function close() {
@@ -2192,7 +2264,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       s1: "Save your progress first.",
       btn: "Backup erstellen",
       done: "✓ Backup erstellt",
-      s2: "Tap <b>Share</b> " + SHARE + " in Safari, then <b>Add to Home Screen</b>.",
+      s2: "Tap <b>Share</b> {0} in Safari, then <b>Add to Home Screen</b>.", // {0} = the Share icon (SHARE)
       s3: "Open Deutsch. from the new icon, go to <b>Einstellungen → Wiederherstellen</b> and pick the backup file.",
       foot: "The Home Screen app has its own storage, so your progress needs to be moved over once.",
       hintIOS:
@@ -2214,7 +2286,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       s1: "Сначала сохрани прогресс.",
       btn: "Backup erstellen",
       done: "✓ Backup erstellt",
-      s2: "Нажми <b>Поделиться</b> " + SHARE + " в Safari, затем <b>На экран «Домой»</b>.",
+      s2: "Нажми <b>Поделиться</b> {0} в Safari, затем <b>На экран «Домой»</b>.",
       s3: "Открой Deutsch. с новой иконки, зайди в <b>Einstellungen → Wiederherstellen</b> и выбери файл бэкапа.",
       foot: "У приложения на экране «Домой» своё хранилище, поэтому прогресс нужно один раз перенести.",
       hintIOS:
@@ -2240,7 +2312,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     }
   }
   function t() {
-    return T[lang()] || T.en;
+    return window.DeutschTranslation?.table ? window.DeutschTranslation.table(T) : T[lang()] || T.en;
   }
   function isIOS() {
     const ua = navigator.userAgent || "";
@@ -2374,7 +2446,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
       ">" +
       (today ? x.done : x.btn) +
       "</button></span></li><li><span>" +
-      x.s2 +
+      x.s2.replace("{0}", () => SHARE) +
       "</span></li><li><span>" +
       x.s3 +
       "</span></li>";
@@ -2433,7 +2505,7 @@ document.getElementById("backupFile")?.addEventListener("change", event => {
     renderBackupNote();
   }
   $("settingsOpen")?.addEventListener("click", refreshReadingProgress);
-  $("translationLangToggle")?.addEventListener("click", () => setTimeout(renderAll, 0));
+  document.addEventListener("deutsch:translationlang", () => setTimeout(renderAll, 0)); // the language changed (Settings → Deine Sprache)
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) refreshReadingProgress();
   });

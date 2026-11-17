@@ -1570,50 +1570,27 @@ header h1 {
 .settings-toggle:disabled {
   opacity: 0.5;
 }
+/* Deine Sprache (17.11.2026): the chosen language, grey like a value (as „optional“ at Name) in the row's own font,
+   with the shared arrow; a tap opens the language window (#langWindow, .ui-choice rows). */
 .settings-lang {
   appearance: none;
   -webkit-appearance: none;
-  position: relative;
   flex: 0 0 auto;
   display: flex;
-  width: 104px;
-  height: 31px;
-  padding: 2px;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  padding: 0;
   border: 0;
-  border-radius: 99px;
-  background: var(--toggle-track);
+  background: transparent;
+  color: var(--muted);
+  font: inherit; /* the row's own size and weight (Settings rows), only the colour is grey */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.settings-lang::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 50px;
-  height: 27px;
-  border-radius: 99px;
-  background: var(--mint);
-  transition: transform 0.22s ease;
-}
-.settings-lang[data-lang="ru"]::before {
-  transform: translateX(50px);
-}
-.settings-lang-opt {
-  position: relative;
-  flex: 1 1 0;
+.lang-choices {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  font:
-    700 12px/1 var(--font);
-  letter-spacing: normal;
-  transition: color 0.22s ease;
-}
-.settings-lang[data-lang="en"] .settings-lang-opt[data-opt="en"],
-.settings-lang[data-lang="ru"] .settings-lang-opt[data-opt="ru"] {
-  color: var(--bg);
+  flex-direction: column;
 }
 .settings-morph {
   position: fixed;

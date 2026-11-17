@@ -138,7 +138,7 @@
   // Is this word (a card, or {dictionaryId, base, sentence}) already in the own collection?
   const has = c => dupIndex(cards()).has(c);
   // Returns {card} or {reason}. Reasons are short texts for the import summary, in the user's language (02.11.2026, RU / EN).
-  const L = (en, ru) => (window.DeutschTranslation?.getLang?.() === "ru" ? ru : en);
+  const L = (en, ru) => (window.DeutschTranslation?.t ? window.DeutschTranslation.t(en, ru) : window.DeutschTranslation?.getLang?.() === "ru" ? ru : en);
   function normalize(raw) {
     if (!raw || typeof raw !== "object") return { reason: L("Not a valid entry", "Неверная запись") };
     const sentence = str(raw.sentence);

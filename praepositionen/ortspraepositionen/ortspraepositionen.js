@@ -62,9 +62,9 @@ function escapeHtml(s) {
 /* An accepted other form (an die Tankstelle for zur Tankstelle): said under its own line, not as a loose note
    below (Alena 03.11.2026) — „тоже верно · чаще: zur Tankstelle“. */
 const altUsual = (entry, q) => {
-  const ru = window.DeutschTranslation?.getLang?.() === "ru";
+  const D = window.DeutschTranslation;
   return (
-    '<span class="alt-usual">' + (ru ? "тоже верно · чаще: " : "also right · more common: ") +
+    '<span class="alt-usual">' + (D ? D.t("also right · more common: ", "тоже верно · чаще: ") : "also right · more common: ") +
     "<b>" + escapeHtml(entry[q] + " " + nounFor(entry, q)) + "</b></span>"
   );
 };

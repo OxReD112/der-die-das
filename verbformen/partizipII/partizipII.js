@@ -212,56 +212,31 @@ function perfektLine(v) {
    1. a known trap (gehängt, gewußt, lassen / sehen after a 2nd verb) · 2. the prefix rule (ver-: no ge- ·
    an-: ge- inside) · 3. the kind of verb (mixed, special, strong: -en not -t) · 4. the vowel change with
    other verbs of the same change. */
+// 17.11.2026 (languages): the hints are texts with places {0}, {1} … (filled here), so a language pack can
+// translate them like any other text; EN / RU come out exactly as before.
+const tx = (en, ru, ...a) =>
+  window.DeutschTranslation ? DeutschTranslation.t(en, ru, ...a) : en.replace(/\{(\d+)\}/g, (m, i) => (+i < a.length ? String(a[+i]) : m));
 const HINTS = {
-  insep: {
-    en: p => `<i>${p}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II`,
-    ru: p => `<i>${p}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>`
-  },
-  insepGe: {
-    en: v => `<i>ge-</i> is an inseparable prefix here (<i>${v.infinitive.replace(/^ge/, "ge·")}</i>): no extra <i>ge-</i>`,
-    ru: v => `<i>ge-</i> здесь — неотделяемая приставка (<i>${v.infinitive.replace(/^ge/, "ge·")}</i>): второго <i>ge-</i> нет`
-  },
-  sep: {
-    en: (p, split) => `<i>${p}</i> is a separable prefix: <i>ge-</i> goes inside — <i>${split}</i>`,
-    ru: (p, split) => `<i>${p}</i> — отделяемая приставка: <i>ge-</i> внутри — <i>${split}</i>`
-  },
-  mixed: {
-    en: v => `mixed verb: the Partizip II ends in <i>-t</i> like a regular verb, and the vowel always changes${v.consonant ? `; here the consonant changes too: <i>${v.consonant}</i>` : ""} — <i>${v.infinitive} → ${v.participle}</i>`,
-    ru: v => `смешанный глагол: Partizip II кончается на <i>-t</i>, как у правильных, а гласная всегда меняется${v.consonant ? `; здесь меняется и согласная: <i>${v.consonant}</i>` : ""} — <i>${v.infinitive} → ${v.participle}</i>`
-  },
-  special: {
-    en: v => `special verb: learn its forms — <i>${v.infinitive} → ${v.preterite} → ${v.participle}</i>`,
-    ru: v => `особый глагол: его формы запоминают — <i>${v.infinitive} → ${v.preterite} → ${v.participle}</i>`
-  },
-  strong: {
-    en: () => "strong verb: the Partizip II ends in <i>-en</i>, not <i>-t</i>",
-    ru: () => "сильный глагол: Partizip II на <i>-en</i>, не на <i>-t</i>"
-  },
-  vowel: {
-    en: (from, to, list, cons, exc) =>
-      (from === to ? `the vowel stays <i>${from}</i>` : `the vowel changes <i>${from} → ${to}</i>`) +
-      (exc ? " (the exception to ie → o)" : "") + (list ? `, like ${list}` : "") +
-      (cons ? `; consonant: <i>${cons}</i>` : ""),
-    ru: (from, to, list, cons, exc) =>
-      (from === to ? `гласная не меняется: <i>${from}</i>` : `гласная меняется: <i>${from} → ${to}</i>`) +
-      (exc ? " (исключение из ie → o)" : "") + (list ? `, как ${list}` : "") +
-      (cons ? `; согласная: <i>${cons}</i>` : "")
-  },
-  ss: {
-    en: () => "after a short vowel: <i>ss</i> — <i>gewusst, geschlossen</i> (ß only after a long vowel or a diphthong)",
-    ru: () => "после краткой гласной — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — только после долгой гласной или дифтонга)"
-  },
-  haengen: {
-    en: () => "hang something up: <i>hängte, gehängt</i> · be hanging: <i>hing, gehangen</i>",
-    ru: () => "вешать: <i>hängte, gehängt</i> · висеть: <i>hing, gehangen</i>"
-  },
-  ersatz: {
-    en: v => `<i>${v.infinitive}</i> as Partizip II only after a second verb: <i>${v.infinitive === "sehen" ? "hat ihn kommen sehen" : "hat das Auto reparieren lassen"}</i>. On its own: <i>${v.participle}</i>`,
-    ru: v => `<i>${v.infinitive}</i> вместо Partizip II — только после второго глагола: <i>${v.infinitive === "sehen" ? "hat ihn kommen sehen" : "hat das Auto reparieren lassen"}</i>. Отдельно: <i>${v.participle}</i>`
-  }
+  insep: p => tx("<i>{0}</i> is an inseparable prefix: no <i>ge-</i> in the Partizip II", "<i>{0}</i> — неотделяемая приставка: Partizip II без <i>ge-</i>", p),
+  insepGe: v => tx("<i>ge-</i> is an inseparable prefix here (<i>{0}</i>): no extra <i>ge-</i>", "<i>ge-</i> здесь — неотделяемая приставка (<i>{0}</i>): второго <i>ge-</i> нет", v.infinitive.replace(/^ge/, "ge·")),
+  sep: (p, split) => tx("<i>{0}</i> is a separable prefix: <i>ge-</i> goes inside — <i>{1}</i>", "<i>{0}</i> — отделяемая приставка: <i>ge-</i> внутри — <i>{1}</i>", p, split),
+  mixed: v =>
+    tx("mixed verb: the Partizip II ends in <i>-t</i> like a regular verb, and the vowel always changes{0} — <i>{1} → {2}</i>",
+      "смешанный глагол: Partizip II кончается на <i>-t</i>, как у правильных, а гласная всегда меняется{0} — <i>{1} → {2}</i>",
+      v.consonant ? tx("; here the consonant changes too: <i>{0}</i>", "; здесь меняется и согласная: <i>{0}</i>", v.consonant) : "", v.infinitive, v.participle),
+  special: v => tx("special verb: learn its forms — <i>{0} → {1} → {2}</i>", "особый глагол: его формы запоминают — <i>{0} → {1} → {2}</i>", v.infinitive, v.preterite, v.participle),
+  strong: () => tx("strong verb: the Partizip II ends in <i>-en</i>, not <i>-t</i>", "сильный глагол: Partizip II на <i>-en</i>, не на <i>-t</i>"),
+  vowel: (from, to, list, cons, exc) =>
+    (from === to ? tx("the vowel stays <i>{0}</i>", "гласная не меняется: <i>{0}</i>", from) : tx("the vowel changes <i>{0} → {1}</i>", "гласная меняется: <i>{0} → {1}</i>", from, to)) +
+    (exc ? tx(" (the exception to ie → o)", " (исключение из ie → o)") : "") + (list ? tx(", like {0}", ", как {0}", list) : "") +
+    (cons ? tx("; consonant: <i>{0}</i>", "; согласная: <i>{0}</i>", cons) : ""),
+  ss: () => tx("after a short vowel: <i>ss</i> — <i>gewusst, geschlossen</i> (ß only after a long vowel or a diphthong)", "после краткой гласной — <i>ss</i>: <i>gewusst, geschlossen</i> (ß — только после долгой гласной или дифтонга)"),
+  haengen: () => tx("hang something up: <i>hängte, gehängt</i> · be hanging: <i>hing, gehangen</i>", "вешать: <i>hängte, gehängt</i> · висеть: <i>hing, gehangen</i>"),
+  ersatz: v => tx("<i>{0}</i> as Partizip II only after a second verb: <i>{1}</i>. On its own: <i>{2}</i>", "<i>{0}</i> вместо Partizip II — только после второго глагола: <i>{1}</i>. Отдельно: <i>{2}</i>",
+    v.infinitive, v.infinitive === "sehen" ? "hat ihn kommen sehen" : "hat das Auto reparieren lassen", v.participle)
 };
 const lang = () => (window.DeutschTranslation ? DeutschTranslation.getLang() : "en");
-const hint = (name, ...args) => (HINTS[name][lang()] || HINTS[name].en)(...args);
+const hint = (name, ...args) => HINTS[name](...args);
 
 function vowelChange(v) {
   const parts = String(v.pattern || "").split(/\s*-\s*/);
@@ -596,7 +571,7 @@ function patternTableHtml(lit = null, v = null) {
   const slot = vowelSlot(v);
   const litRules = verbRules(v);
   const own = verbTab(v);
-  const t = o => o[lang()] || o.en;
+  const t = o => (window.DeutschTranslation?.needsPack?.() ? DeutschTranslation.pick({ en: o.en, ru: o.ru }) : o[lang()] || o.en);
   const section = name => '<h3 class="pattern-section">' + name + "</h3>";
   const rule = (r, on) =>
     '<div class="pattern-rule' + (on ? " lit" : "") + '"><div class="pattern-rule-text">' + t(r) +
