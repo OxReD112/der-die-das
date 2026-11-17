@@ -1051,6 +1051,8 @@
       // #89 (advisor 16.11): a nominalized superlative (der Schwächste, die Klügste, meine Besten) — «aus Adjektiv X · Superlativ»; Russian
       // «самый» + the card's adjective meanings, not declined by gender (der / die / das alike); English the card's meaning as it is
       if (usage?.superlative && !nounMeaning) marks.push('Superlativ');
+      // (advisor 17.11, «Астронавт»: etwas Besseres — «Nomen · aus Adjektiv gut · Komparativ», the meaning of the positive)
+      if (usage?.comparative && !nounMeaning) marks.push('Komparativ');
       if (nounMeaning) { marks = []; text = {text:nounMeaning, language:isPack(language) && !usage?.noun?.translation?.[language] ? 'en' : language}; }
       else if (language === 'en' && ownNoun) text = {text:ownNoun, language};
       else {

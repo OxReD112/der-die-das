@@ -6702,9 +6702,9 @@
     },
     "complements": [
       {
-        "pattern": "auf / in … (куда?) / von / aus + Dativ (откуда?)",
-        "note_ru": "упасть на, в (что-либо; куда? — вин. п.); упасть с, из (чего-либо): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen.",
-        "note_en": "to fall onto, into (something; where to? — accusative); to fall off, out of (something): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen."
+        "pattern": "auf / in + Akkusativ / von / aus + Dativ",
+        "note_ru": "упасть на, в (что-либо; куда? — вин. п.); упасть с, из (чего-либо; откуда? — дат. п.): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen.",
+        "note_en": "to fall onto, into (something; where to? — accusative); to fall off, out of (something; where from? — dative): Das Buch fiel auf den Boden. Die Blätter fallen von den Bäumen."
       },
       {
         "pattern": "Dativ + leicht / schwer",
@@ -38538,11 +38538,11 @@
   {
     "id": "verb-792",
     "infinitive": "ansetzen",
-    "translation_ru": "назначать (срок, встречу); прикладывать (инструмент)",
-    "translation_en": "to schedule, to set (a date); to put in position (a tool)",
+    "translation_ru": "назначать (срок, встречу); прикладывать (инструмент); начинать (говорить)",
+    "translation_en": "to schedule, to set (a date); to put in position (a tool); to begin (to speak)",
     "auxiliary": "haben",
-    "usage_note_ru": "Также: Fett ansetzen — набирать вес; Rost ansetzen — ржаветь.",
-    "usage_note_en": "Also: Fett ansetzen — to put on weight; Rost ansetzen — to rust.",
+    "usage_note_ru": "Также: Fett ansetzen — набирать вес; Rost ansetzen — ржаветь. Начать — zu + Dativ: Er setzte zum Sprechen an. — Он начал было говорить. Noch einmal ansetzen — начать заново. zum Sprung ansetzen — приготовиться к прыжку.",
+    "usage_note_en": "Also: Fett ansetzen — to put on weight; Rost ansetzen — to rust. To begin — zu + dative: Er setzte zum Sprechen an. — He was about to speak. Noch einmal ansetzen — to start again. zum Sprung ansetzen — to get ready to jump.",
     "example_de": "Die Besprechung wurde für Donnerstag um zehn angesetzt.",
     "example_cloze": "Die Besprechung wurde für Donnerstag um zehn {{c1::angesetzt}}.",
     "example_ru": "Совещание назначили на четверг на десять часов.",
@@ -64247,7 +64247,7 @@
     "id": "verb-1346",
     "infinitive": "respektieren",
     "translation_ru": "уважать; соблюдать (правила)",
-    "translation_en": "to respect",
+    "translation_en": "to respect; to observe (rules)",
     "auxiliary": "haben",
     "example_de": "Meine Schüler respektieren mich, obwohl ich kaum älter bin als sie.",
     "example_cloze": "Meine Schüler {{c1::respektieren}} mich, obwohl ich kaum älter bin als sie.",
@@ -65922,8 +65922,8 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "напевать (без слов)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -67135,7 +67135,7 @@
     "id": "verb-1412",
     "infinitive": "variieren",
     "translation_ru": "различаться, колебаться; варьировать, видоизменять",
-    "translation_en": "to vary",
+    "translation_en": "to vary; to modify (something)",
     "auxiliary": "haben",
     "usage_note_ru": "Видоизменять: Wer jeden Tag läuft, sollte die Strecke ab und zu variieren.",
     "usage_note_en": "To vary something: Wer jeden Tag läuft, sollte die Strecke ab und zu variieren.",
@@ -70576,15 +70576,15 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "запускать (фейерверк, ракету, двигатель)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "поджигать, взрывать (заряд)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -85360,7 +85360,7 @@
     "usage_note_en": "Forms as for fliegen: flog ein, hat eingeflogen. With sein — to fly into (an area, airspace). To test-fly (a new aircraft).",
     "example_de": "Für die Hochzeit ihrer Tochter ließen die Eltern einen Koch aus Paris einfliegen.",
     "example_cloze": "Für die Hochzeit ihrer Tochter ließen die Eltern einen Koch aus Paris {{c1::einfliegen}}.",
-    "example_ru": "К свадьбе дочери родители специально доставили самолётом повара из Парижа.",
+    "example_ru": "К свадьбе дочери родители велели доставить самолётом повара из Парижа.",
     "example_en": "For their daughter's wedding, the parents had a chef flown in from Paris.",
     "perfect_form": "haben eingeflogen",
     "forms": {
@@ -85891,15 +85891,15 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "выбирать (путь, курс, направление), пойти (по дороге)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "вбивать (гвоздь)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "separable_prefix": "ein"
@@ -86221,7 +86221,7 @@
     "translation_ru": "брать с собой, класть в карман; вставлять (вилку в розетку); сносить, проглатывать (обиду, удар)",
     "translation_en": "to put in one's pocket, to take along; to plug in; to take, to swallow (criticism, a blow)",
     "auxiliary": "haben",
-    "usage_note_ru": "Слабый глагол: steckte ein, hat eingesteckt. den Stecker einstecken — вставить вилку в розетку. viel Kritik einstecken müssen — проглотить много критики. (разг., неодобр.) положить себе в карман (чужие деньги).",
+    "usage_note_ru": "Слабый глагол: steckte ein, hat eingesteckt. den Stecker einstecken — вставить вилку в розетку. viel Kritik einstecken müssen — быть вынужденным проглотить много критики. (разг., неодобр.) положить себе в карман (чужие деньги).",
     "usage_note_en": "Weak verb: steckte ein, hat eingesteckt. den Stecker einstecken — to plug in. viel Kritik einstecken müssen — to have to take a lot of criticism. (colloquial, derogatory) to pocket (someone else's money).",
     "example_de": "Hast du den Wohnungsschlüssel eingesteckt?",
     "example_cloze": "Hast du den Wohnungsschlüssel {{c1::eingesteckt}}?",
@@ -86699,15 +86699,15 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "освобождать (от обязанности, обещания)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "принимать роды",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "кого-либо",
+        "note_en": "someone"
       }
     ],
     "lookup_forms": {
@@ -87877,7 +87877,7 @@
     "complements": [
       {
         "pattern": "Dativ + Akkusativ",
-        "note_ru": "лишить кого-либо (дат. п.) чего-либо (вин. п.)",
+        "note_ru": "лишить кого-либо чего-либо (D + A)",
         "note_en": "to take something away from someone"
       }
     ],
@@ -90014,7 +90014,7 @@
     "translation_ru": "казнить; (книжн.) осуществлять, выполнять (план, программу)",
     "translation_en": "to execute (put to death); (formal) to carry out",
     "auxiliary": "haben",
-    "usage_note_ru": "Синонимы: hinrichten (чаще). (австр.) описывать имущество (за долги). die Exekution — казнь; исполнение.",
+    "usage_note_ru": "Синоним: hinrichten (чаще). (австр.) описывать имущество (за долги). die Exekution — казнь; исполнение.",
     "usage_note_en": "Synonym: hinrichten (more common). (Austrian) to seize goods (for debt). die Exekution — execution.",
     "example_de": "Der Spion wurde nach einem kurzen Prozess im Morgengrauen exekutiert.",
     "example_cloze": "Der Spion wurde nach einem kurzen Prozess im Morgengrauen {{c1::exekutiert}}.",
@@ -91084,7 +91084,7 @@
     "id": "verb-1924",
     "infinitive": "freigeben",
     "translation_ru": "разрешать (к использованию), открывать (дорогу, доступ); освобождать, отпускать",
-    "translation_en": "to release, to open (to traffic), to clear (for use)",
+    "translation_en": "to release, to open (to traffic), to clear (for use); to set free, to let go",
     "auxiliary": "haben",
     "usage_note_ru": "Формы как у geben: gibt frei, gab frei, hat freigegeben. einen Film ab 12 Jahren freigeben — разрешить фильм к показу с 12 лет. jemandem freigeben — дать кому-либо выходной.",
     "usage_note_en": "Forms as for geben: gibt frei, gab frei, hat freigegeben. einen Film ab 12 Jahren freigeben — to rate a film as suitable from age 12. jemandem freigeben — to give someone time off.",
@@ -92020,8 +92020,8 @@
     "translation_ru": "разрешать, позволять (вежливо, официально)",
     "translation_en": "to permit, to allow (formal, polite)",
     "auxiliary": "haben",
-    "usage_note_ru": "Вежливые формулы: Gestatten Sie? — Позвольте? Gestatten, Müller — позвольте представиться: Мюллер. (книжн.) sich (dat.) etwas gestatten — позволить себе что-либо. Также: позволять, давать возможность (о деньгах, обстоятельствах). Кому — в дательном падеже.",
-    "usage_note_en": "Polite formulas: Gestatten Sie? — May I? Gestatten, Müller — allow me to introduce myself: Müller. (elevated) sich (dat.) etwas gestatten — to allow oneself something. Also: to allow, to make possible (of money, circumstances). The person is in the dative.",
+    "usage_note_ru": "Вежливые формулы: Gestatten Sie? — Позвольте? Gestatten, Müller — позвольте представиться: Мюллер. (книжн.) sich (D) etwas gestatten — позволить себе что-либо. Также: позволять, давать возможность (о деньгах, обстоятельствах). Кому — в дательном падеже.",
+    "usage_note_en": "Polite formulas: Gestatten Sie? — May I? Gestatten, Müller — allow me to introduce myself: Müller. (elevated) sich (D) etwas gestatten — to allow oneself something. Also: to allow, to make possible (of money, circumstances). The person is in the dative.",
     "example_de": "Das Fotografieren ist in der Ausstellung nur ohne Blitz gestattet.",
     "example_cloze": "Das Fotografieren ist in der Ausstellung nur ohne Blitz {{c1::gestattet}}.",
     "example_ru": "Фотографировать на выставке разрешается только без вспышки.",
@@ -92827,7 +92827,7 @@
     "usage_note_en": "The person is in the dative: jemandem grollen. Über den Bergen grollte der Donner — thunder rumbled over the mountains. der Groll — resentment, grudge.",
     "example_de": "Meine Schwester grollt mir immer noch, weil ich ihren Geburtstag vergessen habe.",
     "example_cloze": "Meine Schwester {{c1::grollt}} mir immer noch, weil ich ihren Geburtstag vergessen habe.",
-    "example_ru": "Сестра до сих пор на меня обижена, потому что я забыл про её день рождения.",
+    "example_ru": "Моя сестра до сих пор держит на меня обиду, потому что я забыл про её день рождения.",
     "example_en": "My sister still bears a grudge against me because I forgot her birthday.",
     "perfect_form": "haben gegrollt",
     "forms": null,
@@ -92935,7 +92935,7 @@
     "usage_note_en": "Inseparable, but the Partizip takes ge-: handhabt, handhabte, hat gehandhabt. eine Regel streng / großzügig handhaben — to apply a rule strictly / loosely. die Handhabung — handling, use.",
     "example_de": "Nach zwei Schulungen konnten die Pflegekräfte das neue Beatmungsgerät sicher handhaben.",
     "example_cloze": "Nach zwei Schulungen konnten die Pflegekräfte das neue Beatmungsgerät sicher {{c1::handhaben}}.",
-    "example_ru": "После двух инструктажей медсёстры уже уверенно обращались с новым аппаратом ИВЛ.",
+    "example_ru": "После двух инструктажей медсёстры могли уверенно обращаться с новым аппаратом ИВЛ.",
     "example_en": "After two training sessions, the nurses could handle the new ventilator confidently.",
     "perfect_form": "haben gehandhabt",
     "forms": null,
@@ -93686,7 +93686,7 @@
     "usage_note_en": "sich hinauszögern — to be delayed (dates, a start). Cf. zögern — to hesitate.",
     "example_de": "Die Firma versucht, die Entscheidung über die Entlassungen bis nach Weihnachten hinauszuzögern.",
     "example_cloze": "Die Firma versucht, die Entscheidung über die Entlassungen bis nach Weihnachten {{c1::hinauszuzögern}}.",
-    "example_ru": "Фирма пытается оттянуть решение об увольнениях до окончания Рождества.",
+    "example_ru": "Фирма пытается оттянуть решение об увольнениях до того, как пройдёт Рождество.",
     "example_en": "The company is trying to put off the decision on the redundancies until after Christmas.",
     "perfect_form": "haben hinausgezögert",
     "forms": null,
@@ -96065,7 +96065,7 @@
     "usage_note_en": "Usually of traffic, production, systems. Cf. lahm — lame; sluggish.",
     "example_de": "Ein Hackerangriff hat das Computersystem der Stadtverwaltung tagelang lahmgelegt.",
     "example_cloze": "Ein Hackerangriff hat das Computersystem der Stadtverwaltung tagelang {{c1::lahmgelegt}}.",
-    "example_ru": "Хакерская атака на несколько дней парализовала компьютерную систему городской администрации.",
+    "example_ru": "Хакерская атака парализовала компьютерную систему городской администрации на несколько дней подряд.",
     "example_en": "A hacker attack paralysed the city administration's computer system for days.",
     "perfect_form": "haben lahmgelegt",
     "forms": null,
@@ -96245,8 +96245,8 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "звонить (в колокол, в дверь)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -96576,7 +96576,7 @@
     "usage_note_en": "Weak Präteritum (mahlte), strong Partizip II: hat gemahlen. gemahlener Kaffee — ground coffee. Proverb: Wer zuerst kommt, mahlt zuerst — first come, first served. die Mühle — mill.",
     "example_de": "Für den Espresso mahle ich die Bohnen jeden Morgen frisch.",
     "example_cloze": "Für den Espresso {{c1::mahle}} ich die Bohnen jeden Morgen frisch.",
-    "example_ru": "Для эспрессо я каждое утро мелю зёрна непосредственно перед приготовлением.",
+    "example_ru": "Для эспрессо я каждое утро мелю зёрна прямо перед варкой.",
     "example_en": "I grind the beans fresh every morning for my espresso.",
     "perfect_form": "haben gemahlen",
     "forms": null,
@@ -97115,11 +97115,6 @@
     "perfect_form": "haben nachgeforscht",
     "forms": null,
     "complements": [
-      {
-        "pattern": "Dativ (книжн.)",
-        "note_ru": "исследовать что-либо",
-        "note_en": "to inquire into something (elevated)"
-      },
       {
         "pattern": "Dativ",
         "required": true,
@@ -98102,9 +98097,9 @@
         "note_en": "to argue for"
       },
       {
-        "pattern": "auf + Akkusativ (юр.)",
-        "note_ru": "требовать (наказания, оправдания)",
-        "note_en": "to plead for (a sentence, an acquittal)"
+        "pattern": "auf + Akkusativ",
+        "note_ru": "(юр.) требовать (наказания, оправдания)",
+        "note_en": "(law) to plead for (a sentence, an acquittal)"
       }
     ],
     "lookup_forms": {
@@ -98932,7 +98927,7 @@
     "usage_note_en": "Transitive: jemanden / etwas rächen — to avenge someone / something. Das wird sich rächen — that will come back to haunt you (have bad consequences). Partizip: gerächt (jocular, dated gerochen). die Rache — revenge.",
     "example_de": "Weil er sie vor allen Kollegen bloßgestellt hatte, rächte sie sich mit einer bissigen Rundmail.",
     "example_cloze": "Weil er sie vor allen Kollegen bloßgestellt hatte, {{c1::rächte}} sie sich mit einer bissigen Rundmail.",
-    "example_ru": "Поскольку он выставил её на посмешище перед всеми коллегами, она отомстила ему едким письмом всем сотрудникам.",
+    "example_ru": "Поскольку он выставил её на посмешище перед всеми коллегами, она отомстила, разослав всем сотрудникам едкое письмо.",
     "example_en": "Because he had humiliated her in front of all their colleagues, she took her revenge with a scathing group email.",
     "perfect_form": "haben sich gerächt",
     "forms": null,
@@ -100087,8 +100082,8 @@
     "translation_ru": "(книжн., рег.) бранить, ругать, отчитывать",
     "translation_en": "(elevated, regional) to scold, to chide",
     "auxiliary": "haben",
-    "usage_note_ru": "Сильный глагол: schilt, schalt, hat gescholten; Konjunktiv II schälte (также schölte). (книжн.) jemanden etwas schelten — называть кого-либо кем-либо (неодобрительно). В повседневной речи — schimpfen.",
-    "usage_note_en": "Strong verb: schilt, schalt, hat gescholten; Konjunktiv II schälte (also schölte). (elevated) jemanden etwas schelten — to call someone something (disapprovingly). In everyday speech: schimpfen.",
+    "usage_note_ru": "Сильный глагол: schilt, schalt, hat gescholten; Konjunktiv II schölte (также schälte). (книжн.) jemanden etwas schelten — называть кого-либо кем-либо (неодобрительно). В повседневной речи — schimpfen.",
+    "usage_note_en": "Strong verb: schilt, schalt, hat gescholten; Konjunktiv II schölte (also schälte). (elevated) jemanden etwas schelten — to call someone something (disapprovingly). In everyday speech: schimpfen.",
     "example_de": "Der alte Lehrer schalt nie laut, doch sein strenger Blick genügte völlig.",
     "example_cloze": "Der alte Lehrer {{c1::schalt}} nie laut, doch sein strenger Blick genügte völlig.",
     "example_ru": "Старый учитель никогда не ругался громко, но его строгого взгляда было вполне достаточно.",
@@ -100112,12 +100107,12 @@
         "sie": "schalten"
       },
       "Konjunktiv II": {
-        "ich": "schälte",
-        "du": "schältest",
-        "er/sie/es": "schälte",
-        "wir": "schälten",
-        "ihr": "schältet",
-        "sie": "schälten"
+        "ich": "schölte",
+        "du": "schöltest",
+        "er/sie/es": "schölte",
+        "wir": "schölten",
+        "ihr": "schöltet",
+        "sie": "schölten"
       }
     },
     "lookup_forms": {
@@ -100125,6 +100120,14 @@
         "du": "schilt",
         "ihr": "scheltet",
         "Sie": "schelten Sie"
+      },
+      "Konjunktiv II": {
+        "ich": "schälte",
+        "du": "schältest",
+        "er/sie/es": "schälte",
+        "wir": "schälten",
+        "ihr": "schältet",
+        "sie": "schälten"
       }
     }
   },
@@ -100269,7 +100272,7 @@
     "usage_note_en": "To show through: durch etwas schimmern. der Schimmer — gleam; keinen (blassen) Schimmer haben (colloquial) — not to have the faintest idea.",
     "example_de": "Im Mondlicht schimmerte der See silbern zwischen den dunklen Tannen.",
     "example_cloze": "Im Mondlicht {{c1::schimmerte}} der See silbern zwischen den dunklen Tannen.",
-    "example_ru": "В лунном свете озеро серебристо мерцало между тёмными елями.",
+    "example_ru": "В лунном свете озеро серебристо мерцало между тёмными пихтами.",
     "example_en": "In the moonlight, the lake shimmered silver between the dark fir trees.",
     "perfect_form": "haben geschimmert",
     "forms": null,
@@ -100345,7 +100348,7 @@
       "translation_ru": "прокрасться, улизнуть",
       "translation_en": "to sneak, to slip (away)",
       "example_de": "Als alle schliefen, schlich sich der Junge an den Kühlschrank.",
-      "example_ru": "Когда все уснули, мальчик прокрался к холодильнику.",
+      "example_ru": "Когда все спали, мальчик прокрался к холодильнику.",
       "example_en": "When everyone was asleep, the boy sneaked to the fridge.",
       "note_ru": "Perfekt с haben: hat sich geschlichen.",
       "note_en": "The perfect takes haben: hat sich geschlichen."
@@ -101814,9 +101817,9 @@
         "note_en": "to speculate about"
       },
       {
-        "pattern": "auf + Akkusativ (разг.)",
-        "note_ru": "рассчитывать на что-либо",
-        "note_en": "to count on (colloquial)"
+        "pattern": "auf + Akkusativ",
+        "note_ru": "(разг.) рассчитывать на что-либо",
+        "note_en": "(colloquial) to count on"
       }
     ],
     "lookup_forms": {
@@ -106705,8 +106708,8 @@
   {
     "id": "verb-2252",
     "infinitive": "verdrehen",
-    "translation_ru": "искажать, перевирать (факты, слова) (разг., неодобр.); закатывать (глаза); подворачивать (сустав)",
-    "translation_en": "to twist, to distort (facts, words) (colloquial, derogatory); to roll (one's eyes); to twist (a joint)",
+    "translation_ru": "(разг., неодобр.) искажать, перевирать (факты, слова); закатывать (глаза); подворачивать (сустав)",
+    "translation_en": "(colloquial, derogatory) to twist, to distort (facts, words); to roll (one's eyes); to twist (a joint)",
     "auxiliary": "haben",
     "usage_note_ru": "Также закатывать глаза (от раздражения); подвернуть (ногу, руку); выкручивать (руку, ствол ружья). jemandem den Kopf verdrehen — вскружить кому-либо голову. verdreht (разг.) — чудной, сумасбродный.",
     "usage_note_en": "Also to roll one's eyes (in irritation); to twist (an ankle, a wrist); to wrench (an arm, a gun barrel). jemandem den Kopf verdrehen — to turn someone's head. verdreht (colloquial) — crazy, mixed up.",
@@ -106984,7 +106987,7 @@
     "usage_note_en": "Also to call down a curse (on someone). verflucht (colloquial) — damned; Verflucht noch mal! — damn it! No ge-: verfluchte, hat verflucht.",
     "example_de": "Auf halbem Weg zum Gipfel verfluchte ich die Idee, ohne Regenjacke loszugehen.",
     "example_cloze": "Auf halbem Weg zum Gipfel {{c1::verfluchte}} ich die Idee, ohne Regenjacke loszugehen.",
-    "example_ru": "На полпути к вершине я проклинал свою идею отправиться без дождевика.",
+    "example_ru": "На полпути к вершине я проклинал идею отправиться без дождевика.",
     "example_en": "Halfway to the summit, I cursed the idea of setting off without a rain jacket.",
     "perfect_form": "haben verflucht",
     "forms": null,
@@ -108565,13 +108568,7 @@
     },
     "complements": [
       {
-        "pattern": "Akkusativ",
-        "meaning_ru": "отказывать, выходить из строя",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
-      },
-      {
-        "pattern": "Akkusativ",
+        "pattern": "Dativ + Akkusativ",
         "required": true,
         "meaning_ru": "(книжн.) отказывать (в чём-либо)",
         "note_ru": "кому-либо что-либо",
@@ -111816,7 +111813,7 @@
     "usage_note_en": "The person is in the dative. Also to put forward: dem Chef ein Anliegen vortragen. Separable, strong: trägt vor, trug vor, hat vorgetragen. der Vortrag — talk, lecture; performance.",
     "example_de": "Die Abiturientin hat ihre Rede frei und ohne einen einzigen Zettel vorgetragen.",
     "example_cloze": "Die Abiturientin hat ihre Rede frei und ohne einen einzigen Zettel {{c1::vorgetragen}}.",
-    "example_ru": "Выпускница произнесла свою речь свободно, не заглядывая ни в одну бумажку.",
+    "example_ru": "Выпускница произнесла свою речь свободно, без единой бумажки.",
     "example_en": "The school-leaver delivered her speech without notes, not even a single slip of paper.",
     "perfect_form": "haben vorgetragen",
     "forms": {
@@ -111963,7 +111960,7 @@
     "usage_note_en": "To when — auf + accusative. Also to move forward (in space). Separable, no ge-: verlegte vor, hat vorverlegt. Opposite — verschieben (to postpone).",
     "example_de": "Wegen des angekündigten Gewitters hat der Verein den Anpfiff auf 14 Uhr vorverlegt.",
     "example_cloze": "Wegen des angekündigten Gewitters hat der Verein den Anpfiff auf 14 Uhr {{c1::vorverlegt}}.",
-    "example_ru": "Из-за ожидаемой грозы клуб перенёс начало матча на более раннее время — на 14 часов.",
+    "example_ru": "Из-за обещанной грозы клуб перенёс начало матча пораньше, на 14 часов.",
     "example_en": "Because of the forecast thunderstorm, the club brought the kick-off forward to 2 p.m.",
     "perfect_form": "haben vorverlegt",
     "forms": null,
@@ -113888,11 +113885,11 @@
     "translation_ru": "натирать (до ран, до крови)",
     "translation_en": "to rub sore, to chafe",
     "auxiliary": "haben",
-    "usage_note_ru": "Обычно: sich (Dat.) etwas wundreiben — натереть себе что-либо. Пишется также раздельно: wund reiben (Duden допускает оба написания; отдельной статьи нет). Отделяемый, сильный (как reiben): rieb wund, hat wundgerieben. Ср. sich wundlaufen — стереть ноги.",
+    "usage_note_ru": "Обычно: sich (D) etwas wundreiben — натереть себе что-либо. Пишется также раздельно: wund reiben (Duden допускает оба написания; отдельной статьи нет). Отделяемый, сильный (как reiben): rieb wund, hat wundgerieben. Ср. sich wundlaufen — стереть ноги.",
     "usage_note_en": "Usually: sich (dative) etwas wundreiben — to rub something sore. Also written as two words: wund reiben (Duden allows both; there is no separate entry). Separable, strong (like reiben): rieb wund, hat wundgerieben. Cf. sich wundlaufen — to get sore feet from walking.",
     "example_de": "Die neuen Wanderschuhe haben mir schon am ersten Tag beide Fersen wundgerieben.",
     "example_cloze": "Die neuen Wanderschuhe haben mir schon am ersten Tag beide Fersen {{c1::wundgerieben}}.",
-    "example_ru": "Новые туристические ботинки уже в первый день натёрли мне обе пятки до крови.",
+    "example_ru": "Новые туристические ботинки уже в первый день натёрли мне обе пятки.",
     "example_en": "My new hiking boots rubbed both my heels sore on the very first day.",
     "perfect_form": "haben wundgerieben",
     "forms": {
@@ -113927,7 +113924,7 @@
     "complements": [
       {
         "pattern": "Akkusativ",
-        "note_ru": "что-либо (часть тела): sich (Dat) die Füße wundreiben; sich wundreiben — натереть себе (кожу)",
+        "note_ru": "что-либо (часть тела): sich (D) die Füße wundreiben; sich wundreiben — натереть себе (кожу)",
         "note_en": "something"
       }
     ],
@@ -114670,8 +114667,8 @@
       {
         "pattern": "Akkusativ",
         "meaning_ru": "(сердито) прошипеть",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -115105,7 +115102,7 @@
     "id": "verb-2429",
     "infinitive": "zurückblicken",
     "translation_ru": "оглядываться (назад); (перен.) оглядываться на прошлое",
-    "translation_en": "to look back",
+    "translation_en": "to look back; (figurative) to look back on (the past)",
     "auxiliary": "haben",
     "usage_note_ru": "На что — auf + Akk.: auf zwanzig Jahre Ehe zurückblicken (können) — иметь за плечами двадцать лет брака. Отделяемый: blickte zurück, hat zurückgeblickt. der Rückblick — ретроспектива.",
     "usage_note_en": "On what — auf + accusative: auf zwanzig Jahre Ehe zurückblicken (können) — to look back on twenty years of marriage. Separable: blickte zurück, hat zurückgeblickt. der Rückblick — retrospective.",
@@ -115397,7 +115394,7 @@
     "id": "verb-2435",
     "infinitive": "zurückholen",
     "translation_ru": "возвращать, забирать обратно; вызывать (кого-либо) обратно",
-    "translation_en": "to fetch back, to bring back, to get back",
+    "translation_en": "to fetch back, to bring back, to get back; to call back (someone)",
     "auxiliary": "haben",
     "usage_note_ru": "sich (Dat.) etwas zurückholen — вернуть себе что-либо (деньги, титул). Отделяемый: holte zurück, hat zurückgeholt.",
     "usage_note_en": "sich (dative) etwas zurückholen — to get something back (money, a title). Separable: holte zurück, hat zurückgeholt.",
@@ -115454,7 +115451,7 @@
     "id": "verb-2436",
     "infinitive": "zurücklassen",
     "translation_ru": "оставлять (позади, на месте); оставлять после себя (следы, семью)",
-    "translation_en": "to leave behind",
+    "translation_en": "to leave behind; to leave (traces, a family)",
     "auxiliary": "haben",
     "usage_note_ru": "Отделяемый, сильный: lässt zurück, ließ zurück, hat zurückgelassen. Также оставлять (сообщение, след, шрам).",
     "usage_note_en": "Separable, strong: lässt zurück, ließ zurück, hat zurückgelassen. Also to leave (a message, a trace, a scar).",
@@ -117021,15 +117018,15 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "травить (кислотой), вытравливать (узор)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "прижигать",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ]
   },
@@ -117657,15 +117654,15 @@
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "датировать (определять время создания)",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       },
       {
         "pattern": "Akkusativ",
         "required": true,
         "meaning_ru": "ставить дату",
-        "note_ru": "что-либо / кого-либо",
-        "note_en": "something / someone"
+        "note_ru": "что-либо",
+        "note_en": "something"
       }
     ],
     "lookup_forms": {
@@ -118050,7 +118047,7 @@
       "example_de": "Alle entsetzten sich über die Nachricht.",
       "example_ru": "Все ужаснулись этому известию.",
       "example_en": "Everyone was horrified at the news.",
-      "note_ru": "чему — über + Akk., vor + Dativ.",
+      "note_ru": "чему / от чего — über + Akk., vor + Dat.",
       "note_en": "at what — über + accusative, vor + dative."
     }
   },
@@ -119292,8 +119289,8 @@
     "translation_ru": "переутомляться, перерабатывать (работать слишком много)",
     "translation_en": "to overwork, to work too hard",
     "auxiliary": "haben",
-    "usage_note_ru": "überarbeiten (без sich) — перерабатывать, дорабатывать (текст, план) (отдельная карточка). überarbeitet sein — быть переутомлённым. Неотделяемый: überarbeitete sich, hat sich überarbeitet.",
-    "usage_note_en": "überarbeiten (without sich) — to revise, to rework (a text, a plan) (separate card). überarbeitet sein — to be overworked. Inseparable: überarbeitete sich, hat sich überarbeitet.",
+    "usage_note_ru": "überarbeiten (без sich) — отдельная карточка: перерабатывать, дорабатывать (текст, план). überarbeitet sein — быть переутомлённым. Неотделяемый: überarbeitete sich, hat sich überarbeitet.",
+    "usage_note_en": "überarbeiten (without sich) — separate card: to revise, to rework (a text, a plan). überarbeitet sein — to be overworked. Inseparable: überarbeitete sich, hat sich überarbeitet.",
     "example_de": "Vor der Messe hat sich das ganze Team überarbeitet und war danach erschöpft.",
     "example_cloze": "Vor der Messe hat sich das ganze Team {{c1::überarbeitet}} und war danach erschöpft.",
     "example_ru": "Перед выставкой вся команда переутомилась от работы и потом была без сил.",
@@ -119464,8 +119461,8 @@
   {
     "id": "verb-2521",
     "infinitive": "überordnen",
-    "translation_ru": "ставить выше (что-либо чего-либо), отдавать предпочтение; ставить над (кем-либо) (о подчинении)",
-    "translation_en": "to put before, to give priority to (something over something else); to place above (someone) (in a hierarchy)",
+    "translation_ru": "ставить выше (что-либо чего-либо), отдавать предпочтение; (о подчинении) ставить над (кем-либо)",
+    "translation_en": "to put before, to give priority to (something over something else); (in a hierarchy) to place above (someone)",
     "auxiliary": "haben",
     "usage_note_ru": "Отделяемый: ordnet über, ordnete über, hat übergeordnet. Чаще во 2-м причастии: übergeordnet — вышестоящий (о начальстве, инстанции); более общий (о понятии). Противоположное — unterordnen.",
     "usage_note_en": "Separable: ordnet über, ordnete über, hat übergeordnet. Mostly in the past participle: übergeordnet — superior, higher (of an authority); more general (of a concept). Opposite: unterordnen.",
@@ -119554,8 +119551,8 @@
   {
     "id": "verb-2523",
     "infinitive": "überwachsen",
-    "translation_ru": "зарастать, покрывать (собой) (о растениях)",
-    "translation_en": "to overgrow, to grow over (of plants)",
+    "translation_ru": "(о растениях) зарастать, покрывать (собой)",
+    "translation_en": "(of plants) to overgrow, to grow over",
     "auxiliary": "haben",
     "usage_note_ru": "Употребляется в 3-м лице (подлежащее — растения): überwächst, überwuchs, hat überwachsen; Konjunktiv II überwüchse. Неотделяемый, сильный (как wachsen). Чаще во 2-м причастии: mit Moos überwachsen — поросший мхом (прилагательное — отдельная карточка). (редко) перерастать (по размеру).",
     "usage_note_en": "Used in the 3rd person (the subject is a plant): überwächst, überwuchs, hat überwachsen; Konjunktiv II überwüchse. Inseparable, strong (like wachsen). Mostly in the past participle: mit Moos überwachsen — overgrown with moss (the adjective has its own card). (rare) to outgrow.",
@@ -121636,7 +121633,7 @@
       "translation_ru": "лечь, прилечь",
       "translation_en": "to lie down (for a while)",
       "example_de": "Nach dem Essen lege ich mich eine Stunde hin.",
-      "example_ru": "После обеда я на час прилягу.",
+      "example_ru": "После обеда я ложусь на час.",
       "example_en": "After lunch I lie down for an hour."
     },
     "lookup_forms": {
@@ -121965,7 +121962,7 @@
     "auxiliary": "haben",
     "example_de": "Die Firma will ihre IT-Abteilung ausgliedern.",
     "example_cloze": "Die Firma will ihre IT-Abteilung {{c1::ausgliedern}}.",
-    "example_ru": "Фирма хочет выделить свой ИТ-отдел в отдельную компанию.",
+    "example_ru": "Фирма хочет вывести ИТ-отдел из своей структуры.",
     "example_en": "The company wants to spin off its IT department.",
     "perfect_form": "haben ausgegliedert",
     "forms": null,
@@ -122637,7 +122634,7 @@
     "translation_ru": "запрещать (кому-либо что-либо)",
     "translation_en": "to forbid, to prohibit (someone something)",
     "auxiliary": "haben",
-    "usage_note_ru": "Официально; обычнее verbieten. Слабый, без ge-: untersagte, hat untersagt. untersagt (прил.) — запрещено (отдельная карточка).",
+    "usage_note_ru": "Официально; обычнее verbieten. Слабый, без ge-: untersagte, hat untersagt. untersagt (прил.) — запрещённый (отдельная карточка).",
     "usage_note_en": "Formal; verbieten is more usual. Weak, no ge-: untersagte, hat untersagt. untersagt (adjective) — prohibited (separate card).",
     "example_de": "Jede Kritik am Projekt wurde untersagt.",
     "example_cloze": "Jede Kritik am Projekt wurde {{c1::untersagt}}.",
@@ -124875,7 +124872,7 @@
     "usage_note_en": "Written as two words: zieht zurate, hat zurate gezogen; also zu Rate ziehen.",
     "example_de": "Im Zweifel solltest du einen Arzt zurate ziehen.",
     "example_cloze": "Im Zweifel solltest du einen Arzt {{c1::zurate}} {{c1::ziehen}}.",
-    "example_ru": "Если сомневаешься, стоит посоветоваться с врачом.",
+    "example_ru": "Если сомневаешься, тебе следует посоветоваться с врачом.",
     "example_en": "If in doubt, you should consult a doctor.",
     "perfect_form": "haben zurate gezogen",
     "forms": {
@@ -126785,8 +126782,8 @@
     "translation_ru": "(es geht jemandem gut) кому-либо хорошо, всё в порядке; (etwas geht gut) удаваться, хорошо кончаться; (о делах, торговле) хорошо идти, ладиться",
     "translation_en": "(es geht jemandem gut) someone is well, all is fine; (etwas geht gut) to work out, to turn out well; (of business, trade) to go well, to do well",
     "auxiliary": "sein",
-    "usage_note_ru": "Отделяемый: geht gut, ging gut, ist gutgegangen (также раздельно: gut gehen). Кому — Dativ: Es geht Harry gut. О деле: Das erstemal ging’s gut. — В первый раз всё обошлось. О делах: Die Geschäfte gehen gut. — Дела идут хорошо. Вопрос — wie geht es (dir)? (отдельная запись).",
-    "usage_note_en": "Separable: geht gut, ging gut, ist gutgegangen (also two words: gut gehen). To whom — dative: Es geht Harry gut. Of things: Das erstemal ging’s gut. — The first time it went well. Of business: Die Geschäfte gehen gut. — Business is going well. The question — wie geht es (dir)? (separate entry).",
+    "usage_note_ru": "Отделяемый: geht gut, ging gut, ist gutgegangen (также раздельно: gut gehen). Кому — Dativ: Es geht Harry gut. О деле: Das erste Mal ging’s gut. — В первый раз всё обошлось. О делах: Die Geschäfte gehen gut. — Дела идут хорошо. Вопрос — wie geht es (dir)? (отдельная запись).",
+    "usage_note_en": "Separable: geht gut, ging gut, ist gutgegangen (also two words: gut gehen). To whom — dative: Es geht Harry gut. Of things: Das erste Mal ging’s gut. — The first time it went well. Of business: Die Geschäfte gehen gut. — Business is going well. The question — wie geht es (dir)? (separate entry).",
     "example_de": "Hoffentlich geht alles gut.",
     "example_cloze": "Hoffentlich {{c1::geht}} alles {{c1::gut}}.",
     "example_ru": "Надеюсь, всё пройдёт хорошо.",
@@ -128849,8 +128846,8 @@
       "haben",
       "sein"
     ],
-    "usage_note_ru": "С дополнением — hat angefahren: Er fuhr ihn wütend an — Он накричал на него. Sie wurde von einem Auto angefahren — Её сбила машина. Der Bus fährt die Haltestelle an — Автобус подъезжает к остановке; das Schiff fährt den Hafen an — судно заходит в порт. Без дополнения — ist angefahren: Der Zug fuhr mit einem Ruck an — Поезд резко тронулся. Также: eine Stadt anfahren — ехать (направляться) в город. angefahren kommen — подъехать. eine Anlage, einen Reaktor anfahren — запустить установку, реактор.",
-    "usage_note_en": "With an object — hat angefahren: Er fuhr ihn wütend an — He snapped at him. Sie wurde von einem Auto angefahren — She was hit by a car. Der Bus fährt die Haltestelle an — The bus calls at the stop; das Schiff fährt den Hafen an — the ship calls at the port. Without an object — ist angefahren: Der Zug fuhr mit einem Ruck an — The train started with a jolt. Also: eine Stadt anfahren — to head for a town. angefahren kommen — to drive up. eine Anlage, einen Reaktor anfahren — to start up a plant, a reactor.",
+    "usage_note_ru": "С дополнением — hat angefahren: Er fuhr ihn wütend an — Он сердито накричал на него. Sie wurde von einem Auto angefahren — Её сбила машина. Der Bus fährt die Haltestelle an — Автобус подъезжает к остановке; das Schiff fährt den Hafen an — судно заходит в порт. Без дополнения — ist angefahren: Der Zug fuhr mit einem Ruck an — Поезд резко тронулся. Также: eine Stadt anfahren — ехать (направляться) в город. angefahren kommen — подъехать. eine Anlage, einen Reaktor anfahren — запустить установку, реактор.",
+    "usage_note_en": "With an object — hat angefahren: Er fuhr ihn wütend an — He snapped at him angrily. Sie wurde von einem Auto angefahren — She was hit by a car. Der Bus fährt die Haltestelle an — The bus calls at the stop; das Schiff fährt den Hafen an — the ship calls at the port. Without an object — ist angefahren: Der Zug fuhr mit einem Ruck an — The train started with a jolt. Also: eine Stadt anfahren — to head for a town. angefahren kommen — to drive up. eine Anlage, einen Reaktor anfahren — to start up a plant, a reactor.",
     "example_de": "»Lass mich in Ruhe!«, fuhr sie ihren Bruder an.",
     "example_cloze": "»Lass mich in Ruhe!«, {{c1::fuhr}} sie ihren Bruder {{c1::an}}.",
     "example_ru": "«Оставь меня в покое!» — накричала она на брата.",
@@ -129043,7 +129040,7 @@
     "id": "verb-2793",
     "infinitive": "durchsetzen",
     "translation_ru": "проводить, осуществлять (закон, решение); добиваться (осуществления), навязывать",
-    "translation_en": "to enforce, to push through, to carry through",
+    "translation_en": "to enforce, to push through, to carry through; to get accepted, to impose",
     "auxiliary": "haben",
     "usage_note_ru": "seinen Willen durchsetzen — настоять на своём; eine Reform gegen Widerstände durchsetzen — провести реформу вопреки сопротивлению; seine Forderungen durchsetzen — добиться выполнения своих требований. Возвратное sich durchsetzen (утвердиться, взять верх) — см. отдельную карточку. Не путать с неотделяемым durchsetzen (Partizip II durchsetzt): mit etwas durchsetzt — пронизанный, перемешанный с чем-либо.",
     "usage_note_en": "seinen Willen durchsetzen — to get one's way; eine Reform gegen Widerstände durchsetzen — to push a reform through against resistance; seine Forderungen durchsetzen — to get one's demands met. The reflexive sich durchsetzen (to assert oneself, to prevail) has its own card. Not to be confused with the inseparable durchsetzen (past participle durchsetzt): mit etwas durchsetzt — permeated, interspersed with something.",

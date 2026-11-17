@@ -483,8 +483,8 @@
     "id": "preposition-014",
     "type": "preposition",
     "word": "um",
-    "translation_ru": "в (о точном времени); вокруг; о (es geht um …)",
-    "translation_en": "at (clock time); around; about (es geht um …)",
+    "translation_ru": "в (о точном времени); вокруг; о (es geht um …); на (о разнице: um 5 Grad)",
+    "translation_en": "at (clock time); around; about (es geht um …); by (a difference: um 5 Grad)",
     "example_de": "Der Film beginnt um acht Uhr.",
     "example_ru": "Фильм начинается в восемь часов.",
     "example_en": "The film starts at eight o'clock.",
@@ -508,8 +508,8 @@
     "forms": null,
     "forms_note_ru": "Разговорная слитная форма: ums = um das.",
     "forms_note_en": "Colloquial contracted form: ums = um das.",
-    "usage_note_ru": "Вокруг: um den Tisch (herum). Приблизительно: um Weihnachten — около Рождества. О чём: Es geht um Geld — речь идёт о деньгах. um … zu + инфинитив («чтобы») — это союз, отдельная карточка. Если um стоит в конце предложения при глаголе (Wir ziehen um), это часть глагола umziehen, а не предлог.",
-    "usage_note_en": "Around: um den Tisch (herum). Approximately: um Weihnachten — around Christmas. About: Es geht um Geld — it is about money. um … zu + infinitive (in order to) is a conjunction with a separate card. When um stands at the end of the clause with a verb (Wir ziehen um), it is part of the verb umziehen, not a preposition.",
+    "usage_note_ru": "Вокруг: um den Tisch (herum). Приблизительно: um Weihnachten — около Рождества. О чём: Es geht um Geld — речь идёт о деньгах. um … zu + инфинитив («чтобы») — это союз, отдельная карточка. Если um стоит в конце предложения при глаголе (Wir ziehen um), это часть глагола umziehen, а не предлог. Разница — на: Die Temperatur stieg um 5 Grad. — Температура поднялась на 5 градусов; um einen Millimeter zu kurz — на миллиметр короче.",
+    "usage_note_en": "Around: um den Tisch (herum). Approximately: um Weihnachten — around Christmas. About: Es geht um Geld — it is about money. um … zu + infinitive (in order to) is a conjunction with a separate card. When um stands at the end of the clause with a verb (Wir ziehen um), it is part of the verb umziehen, not a preposition. A difference — by: Die Temperatur stieg um 5 Grad. — The temperature rose by 5 degrees; um einen Millimeter zu kurz — a millimetre too short.",
     "search_forms": [
       "um"
     ],

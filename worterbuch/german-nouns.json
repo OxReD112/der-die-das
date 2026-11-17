@@ -69623,5 +69623,35 @@
     "example_cloze": "Nach langer Beratung sprachen die {{c1::Geschworenen}} den Angeklagten frei.",
     "example_ru": "После долгого совещания присяжные оправдали подсудимого.",
     "example_en": "After long deliberation the jury acquitted the defendant."
+  },
+  {
+    "id": "noun-5384",
+    "word": "Antrieb",
+    "article": "der",
+    "plural": "Antriebe",
+    "translation_ru": "привод, двигатель (машины, корабля); побуждение, стимул",
+    "translation_en": "drive, propulsion, engine (of a machine, a ship); impulse, incentive",
+    "usage_note_ru": "aus eigenem Antrieb — по собственному почину. Техн.: der Elektroantrieb — электропривод, der Raketenantrieb — ракетный двигатель.",
+    "usage_note_en": "aus eigenem Antrieb — of one's own accord. Technical: der Elektroantrieb — electric drive, der Raketenantrieb — rocket propulsion.",
+    "example_de": "Das Raumschiff hat einen neuen Antrieb bekommen.",
+    "example_cloze": "Das Raumschiff hat einen neuen {{c1::Antrieb}} bekommen.",
+    "example_ru": "Космический корабль получил новый двигатель.",
+    "example_en": "The spaceship has been given a new engine.",
+    "source_url": "https://www.duden.de/rechtschreibung/Antrieb"
+  },
+  {
+    "id": "noun-5385",
+    "word": "Speicher",
+    "article": "der",
+    "plural": "Speicher",
+    "translation_ru": "склад, амбар; хранилище; чердак; память (компьютера), накопитель",
+    "translation_en": "storehouse, granary; reservoir, store; attic; memory (of a computer), storage",
+    "usage_note_ru": "Комп.: der Arbeitsspeicher — оперативная память; etwas im Speicher ablegen — сохранить в памяти. Ср. speichern — сохранять.",
+    "usage_note_en": "Computing: der Arbeitsspeicher — main memory, RAM; etwas im Speicher ablegen — to store something in memory. Cf. speichern — to save.",
+    "example_de": "Der Speicher meines Handys ist schon wieder voll.",
+    "example_cloze": "Der {{c1::Speicher}} meines Handys ist schon wieder voll.",
+    "example_ru": "Память моего телефона опять заполнена.",
+    "example_en": "My phone's memory is full again.",
+    "source_url": "https://www.duden.de/rechtschreibung/Speicher"
   }
 ]

@@ -613,5 +613,232 @@
     "wortschatz_excluded": true,
     "usage_note_ru": "Сокращение от Sankt: St. Gallen, St. Pauli. В счетах и списках также St. = das Stück (штука), чаще Stk.",
     "usage_note_en": "Abbreviation of Sankt: St. Gallen, St. Pauli. In invoices and lists also St. = das Stück (piece), more often Stk."
+  },
+  {
+    "id": "function-37",
+    "type": "Abkürzung",
+    "word": "kg",
+    "translation_ru": "килограмм (das Kilogramm)",
+    "translation_en": "kilogram (Kilogramm)",
+    "example_de": "Der Koffer wiegt 23 kg.",
+    "example_ru": "Чемодан весит 23 кг.",
+    "example_en": "The suitcase weighs 23 kg.",
+    "usage_note_ru": "Сокращение от das Kilogramm.",
+    "usage_note_en": "Abbreviation of das Kilogramm.",
+    "search_forms": [
+      "kg"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-38",
+    "type": "Abkürzung",
+    "word": "km",
+    "translation_ru": "километр (der Kilometer)",
+    "translation_en": "kilometre (Kilometer)",
+    "example_de": "Bis zum nächsten Dorf sind es noch 5 km.",
+    "example_ru": "До ближайшей деревни ещё 5 км.",
+    "example_en": "It's still 5 km to the next village.",
+    "usage_note_ru": "Сокращение от der Kilometer. km/h — километров в час, km/s — километров в секунду.",
+    "usage_note_en": "Abbreviation of der Kilometer. km/h — kilometres per hour, km/s — kilometres per second.",
+    "search_forms": [
+      "km"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-39",
+    "type": "Interjektion",
+    "word": "äh",
+    "translation_ru": "э-э (заминка в речи)",
+    "translation_en": "er, uh (hesitation)",
+    "example_de": "Das ist, äh, nicht so einfach.",
+    "example_ru": "Это, э-э, не так просто.",
+    "example_en": "That's, er, not so easy.",
+    "usage_note_ru": "Также: ähm. Изредка — возглас отвращения «фу» (чаще: igitt, bäh).",
+    "usage_note_en": "Also: ähm. Rarely — an exclamation of disgust “ugh” (more often: igitt, bäh).",
+    "search_forms": [
+      "äh"
+    ],
+    "wortschatz_excluded": true,
+    "source_url": "https://www.duden.de/rechtschreibung/aeh"
+  },
+  {
+    "id": "function-40",
+    "type": "Interjektion",
+    "word": "hm",
+    "translation_ru": "хм (раздумье, сомнение); гм; угу (согласие)",
+    "translation_en": "hm, hmm (thinking, doubt); mm-hmm (agreement)",
+    "example_de": "Hm, das muss ich mir noch überlegen.",
+    "example_ru": "Хм, мне надо это ещё обдумать.",
+    "example_en": "Hmm, I'll have to think about that.",
+    "usage_note_ru": "Также пишется hmm. Ср. ähm — э-э.",
+    "usage_note_en": "Also written hmm. Cf. ähm — er.",
+    "search_forms": [
+      "hm",
+      "hmm"
+    ],
+    "wortschatz_excluded": true,
+    "source_url": "https://www.duden.de/rechtschreibung/hm"
+  },
+  {
+    "id": "function-41",
+    "type": "Abkürzung",
+    "word": "g",
+    "translation_ru": "грамм (das Gramm); g (ускорение свободного падения)",
+    "translation_en": "gram (Gramm); g (acceleration due to gravity)",
+    "example_de": "Für den Kuchen braucht man 250 g Zucker.",
+    "example_ru": "Для пирога нужно 250 г сахара.",
+    "example_en": "For the cake you need 250 g of sugar.",
+    "usage_note_ru": "Сокращение от das Gramm. В физике g — обозначение ускорения свободного падения: eine Beschleunigung von 3 g — перегрузка 3 g.",
+    "usage_note_en": "Abbreviation of das Gramm. In physics g is the symbol of the acceleration due to gravity: eine Beschleunigung von 3 g — an acceleration of 3 g.",
+    "search_forms": [
+      "g"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-42",
+    "type": "Abkürzung",
+    "word": "s",
+    "translation_ru": "секунда (die Sekunde)",
+    "translation_en": "second (Sekunde)",
+    "example_de": "Der Läufer brauchte für die 100 m nur 10,2 s.",
+    "example_ru": "Бегуну понадобилось на стометровку всего 10,2 с.",
+    "example_en": "The runner needed only 10.2 s for the 100 m.",
+    "usage_note_ru": "Сокращение от die Sekunde (в обычном тексте чаще Sek.). km/s — километров в секунду. Не путать: s. — siehe (см.), S. — Seite (с.).",
+    "usage_note_en": "Abbreviation of die Sekunde (in ordinary texts more often Sek.). km/s — kilometres per second. Not to be confused with s. — siehe (see), S. — Seite (p.).",
+    "search_forms": [
+      "s"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-43",
+    "type": "Abkürzung",
+    "word": "m",
+    "translation_ru": "метр (der Meter)",
+    "translation_en": "metre (Meter)",
+    "example_de": "Der Turm ist 120 m hoch.",
+    "example_ru": "Высота башни — 120 м.",
+    "example_en": "The tower is 120 m tall.",
+    "usage_note_ru": "Сокращение от der (das) Meter. m² — квадратный метр, m³ — кубический метр, m/s — метров в секунду. Не путать: min — минута.",
+    "usage_note_en": "Abbreviation of der (das) Meter. m² — square metre, m³ — cubic metre, m/s — metres per second. Not to be confused with min — minute.",
+    "search_forms": [
+      "m"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-44",
+    "type": "Abkürzung",
+    "word": "h",
+    "translation_ru": "час (die Stunde)",
+    "translation_en": "hour (Stunde)",
+    "example_de": "Die Akkulaufzeit beträgt etwa 10 h.",
+    "example_ru": "Время работы аккумулятора — около 10 ч.",
+    "example_en": "The battery life is about 10 h.",
+    "usage_note_ru": "Обозначение часа (от лат. hora). km/h — километров в час. В обычном тексте чаще Std.",
+    "usage_note_en": "Symbol for the hour (from Latin hora). km/h — kilometres per hour. In ordinary texts more often Std.",
+    "search_forms": [
+      "h"
+    ],
+    "wortschatz_excluded": true
+  },
+  {
+    "id": "function-45",
+    "type": "Abkürzung",
+    "word": "Mio.",
+    "translation_ru": "миллион (die Million)",
+    "translation_en": "million (Million)",
+    "example_de": "Die Firma machte im letzten Jahr 3 Mio. Euro Gewinn.",
+    "example_ru": "В прошлом году фирма получила 3 млн евро прибыли.",
+    "example_en": "Last year the company made a profit of 3 million euros.",
+    "search_forms": [
+      "Mio"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Million. Ср. Mrd. — миллиард, Tsd. — тысяча.",
+    "usage_note_en": "Abbreviation of die Million. Cf. Mrd. — billion, Tsd. — thousand."
+  },
+  {
+    "id": "function-46",
+    "type": "Abkürzung",
+    "word": "Tsd.",
+    "translation_ru": "тысяча (das Tausend)",
+    "translation_en": "thousand (Tausend)",
+    "example_de": "Der gebrauchte Wagen kostet 25 Tsd. Euro.",
+    "example_ru": "Подержанная машина стоит 25 тыс. евро.",
+    "example_en": "The used car costs 25 thousand euros.",
+    "search_forms": [
+      "Tsd"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от das Tausend; чаще в таблицах и объявлениях, в обычном тексте — 25.000 Euro. Ср. Mio. — миллион.",
+    "usage_note_en": "Abbreviation of das Tausend; mostly in tables and ads, in running text — 25.000 Euro. Cf. Mio. — million."
+  },
+  {
+    "id": "function-47",
+    "type": "Abkürzung",
+    "word": "Std.",
+    "translation_ru": "час (die Stunde)",
+    "translation_en": "hour (Stunde)",
+    "example_de": "Die Fahrt nach Berlin dauert etwa 3 Std.",
+    "example_ru": "Поездка в Берлин длится около 3 ч.",
+    "example_en": "The journey to Berlin takes about 3 hours.",
+    "search_forms": [
+      "Std"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Stunde; в технике и науке — h (km/h).",
+    "usage_note_en": "Abbreviation of die Stunde; in technology and science — h (km/h)."
+  },
+  {
+    "id": "function-48",
+    "type": "Abkürzung",
+    "word": "Min.",
+    "translation_ru": "минута (die Minute)",
+    "translation_en": "minute (Minute)",
+    "example_de": "Der Bus fährt alle 10 Min.",
+    "example_ru": "Автобус ходит каждые 10 мин.",
+    "example_en": "The bus runs every 10 minutes.",
+    "search_forms": [
+      "Min"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Minute; в технике и науке — min (без точки).",
+    "usage_note_en": "Abbreviation of die Minute; in technology and science — min (no full stop)."
+  },
+  {
+    "id": "function-49",
+    "type": "Abkürzung",
+    "word": "Sek.",
+    "translation_ru": "секунда (die Sekunde)",
+    "translation_en": "second (Sekunde)",
+    "example_de": "Sie lief die 100 Meter in 11,2 Sek.",
+    "example_ru": "Она пробежала стометровку за 11,2 сек.",
+    "example_en": "She ran the 100 metres in 11.2 seconds.",
+    "search_forms": [
+      "Sek"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от die Sekunde; в технике и науке — s (без точки).",
+    "usage_note_en": "Abbreviation of die Sekunde; in technology and science — s (no full stop)."
+  },
+  {
+    "id": "function-50",
+    "type": "Abkürzung",
+    "word": "mm",
+    "translation_ru": "миллиметр (der Millimeter)",
+    "translation_en": "millimetre (Millimeter)",
+    "example_de": "Die Schraube ist 6 mm dick.",
+    "example_ru": "Винт толщиной 6 мм.",
+    "example_en": "The screw is 6 mm thick.",
+    "search_forms": [
+      "mm"
+    ],
+    "wortschatz_excluded": true,
+    "usage_note_ru": "Сокращение от der Millimeter. Ср. cm — сантиметр.",
+    "usage_note_en": "Abbreviation of der Millimeter. Cf. cm — centimetre."
   }
 ]
