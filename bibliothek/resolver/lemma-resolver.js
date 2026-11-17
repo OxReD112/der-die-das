@@ -10202,7 +10202,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // of 07.11 for own haben-only verbs, the same group «состояние mit X»: bedeckt waren, ausgeblasen ist, mit Herzen geschmückt. Not with an
         // own adjective card or an external one of the form — the window «adjective first» (05.11) stays, bedeckt waren as before. The lemma must open
         // the form — gelatinisiert is no form of latinisieren)
-        const stateOnly = head.e.word === "sein" && auxiliaries.length > 0 && !auxiliaries.includes("sein") && auxiliaries.includes("haben") &&
+        // (expressions chat 17.11, advisor 17.11 (3): not when sein is read again without the state group — stateAuxiliaryFollows: the
+        // participle shows no state, e.g. it is taken by an expression — der war wie angegossen; as for own haben-only verbs)
+        const stateOnly = !context?.noStateGroup && head.e.word === "sein" && auxiliaries.length > 0 && !auxiliaries.includes("sein") && auxiliaries.includes("haben") &&
           !participleAdjectiveCard(form) && !(forms.get(norm(form)) || []).some(e => e.type === "Adjektiv") &&
           !facts.some(g => !g.kind && !g.unresolved && canonicalPos(g.pos) === "Adjektiv" && norm(g.word) === norm(form)) && lemmaOpensParticiple(lemma,form);
         if (!auxiliaries.includes(head.e.word) && !stateOnly) continue;
@@ -18722,14 +18724,21 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         const inSpans = t => spans.some(x => x.start === clauseTokens[t.i].index);
         const spanOf = t => ({text:clauseTokens[t.i][0], start:clauseTokens[t.i].index, end:clauseTokens[t.i].index + clauseTokens[t.i][0].length});
         const firstAt = Math.min(...spans.map(x => x.start)), lastAt = Math.max(...spans.map(x => x.start));
+        // (advisor 17.11 (1): a capital verb counts too when it opens the part — Sei es der Mühe wert …, Mach gute Miene …; a capital
+        // word inside the part is a noun)
+        const opensPart = t => t === clause[0] && (t.i === 0 || /[.!?:;,»«"„“”–—(]\s*$/u.test(sentence.slice(clauseTokens[t.i-1].index + clauseTokens[t.i-1][0].length, clauseTokens[t.i].index)));
+        // (not before es / er / ich / du / ihr: Sei es der Mühe wert oder nicht is Konjunktiv I, and the verb card reads it as an
+        // imperative — the expression would carry the wrong «Imperativ»)
+        const verbShape = t => /^\p{Ll}/u.test(clauseTokens[t.i][0]) ||
+          opensPart(t) && !(t.rows.some(a => a.kind === "imperative") && ["es","er","sie","ich","du","ihr","wir","man"].includes(norm(clauseTokens[t.i+1]?.[0] || "")));
         if (fixed && lastVerb && !hits.length && !variantVerb()) {
-          const near = clause.filter(t => !inSpans(t) && /^\p{Ll}/u.test(clauseTokens[t.i][0]) && !/^\p{Lu}/u.test(clauseTokens[t.i+1]?.[0] || "") &&
+          const near = clause.filter(t => !inSpans(t) && verbShape(t) && !/^\p{Lu}/u.test(clauseTokens[t.i+1]?.[0] || "") &&
             t.rows.some(a => ["finite","infinitive","participle","imperative"].includes(a.kind) && ofHead(lastVerb, a)))
             .sort((a,b) => Math.min(Math.abs(clauseTokens[a.i].index - firstAt), Math.abs(clauseTokens[a.i].index - lastAt)) -
               Math.min(Math.abs(clauseTokens[b.i].index - firstAt), Math.abs(clauseTokens[b.i].index - lastAt)))[0];
           // (reviewer 17.11: not when the part holds a finite form or a participle of another full verb — then that is the expression's
           // verb or the part is another clause: es der Mühe wert schien / erschienen / gefunden worden, … ist und es … wert schien)
-          const otherVerb = clause.some(t => !inSpans(t) && /^\p{Ll}/u.test(clauseTokens[t.i][0]) && t.rows.length &&
+          const otherVerb = clause.some(t => !inSpans(t) && verbShape(t) && t.rows.length &&
             t.rows.every(a => ["finite","participle"].includes(a.kind) && !ofHead(lastVerb, a) && !chainVerb(a.base)));
           if (near && !otherVerb) { outsideHead = near; extraSpans.push(spanOf(near)); }
         }
@@ -18837,6 +18846,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       return {...result, selected, preferred:result.preferred === result.selected ? selected : result.preferred,
         candidates:(result.candidates || []).map(c => c === result.selected ? selected : c)};
     }
+    let outsideHeadingVerbs = null;
     async function applyConstruction(word, context, resolution) {
       // (the card of an expression's verb, read without expressions: expressionVerb)
       if (context?.noExpression) return resolution;
@@ -18874,6 +18884,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             }
             found = {...found, spans};
           } else found = null;
+        }
+      }
+      // 17.11.2026 (expressions chat; advisor 17.11 (2)): the heading verb / nicht that an expression takes outside its parts
+      // (expressionGrammar: ob es der Mühe wert sei, hat nicht so viel zu sagen) shows the expression when tapped too — the
+      // expression found from another word of the same part of the sentence, kept only when it takes the tapped word.
+      // (reviewer 17.11: only for a verb that is the heading verb of some expression — a cheap pre-filter, the probe costs one search per
+      // word — and at most 8 words to each side)
+      outsideHeadingVerbs ||= new Set(entries.filter(e => e.type === "Ausdruck").flatMap(e => String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm)));
+      if (!found && !contracted && Number.isInteger(context?.tokenOffset) && !context.outsideProbe &&
+          (norm(word) === "nicht" ? outsideHeadingVerbs.has("nicht") : (verbAnalyses.get(norm(word)) || []).some(a => outsideHeadingVerbs.has(norm(a.base || a.entry?.word || ""))))) {
+        const sentence = String(context.sentence || ""), tokens = sharedTokens(sentence, 'expressionGrammar');
+        const at = tokens.findIndex(t => t.index === context.tokenOffset);
+        if (at >= 0) {
+          let from = at, to = at;
+          const gap = (i, j) => sentence.slice(tokens[i].index + tokens[i][0].length, tokens[j].index);
+          while (from > 0 && at - from < 8 && !/[.!?;:,»«"„“”–—()]/u.test(gap(from-1, from))) from--;
+          while (to < tokens.length - 1 && to - at < 8 && !/[.!?;:,»«"„“”–—()]/u.test(gap(to, to+1))) to++;
+          for (let i = from; i <= to && !found; i++) {
+            if (i === at) continue;
+            let other = null;
+            try { other = await constructionAt(tokens[i][0], {...context, tokenOffset:tokens[i].index, outsideProbe:true}); } catch (_) { other = null; }
+            if (other?.entry?.type !== "Ausdruck") continue;
+            const g = expressionGrammar(other.entry, other.spans, sentence);
+            // (the probe's own choice is not the tapped word's: an expression taken by its outside word is no choice)
+            if ((g.expressionExtraSpans || []).some(x => x.start === context.tokenOffset)) { const {choice, ...rest} = other; found = rest; }
+          }
         }
       }
       // A contraction split by the tokenizer (wird ' s) and found directly by a card block of its own: one span for the word.
