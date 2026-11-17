@@ -72,7 +72,7 @@ window.VV_TABLE = {
         tag: { en: "a guess", ru: "предположение" },
         job: "guess",
         lit: { cols: [0] },
-        blocks: [["werden", "verb"], ["wohl", "part"], [T.inf, "part"]],
+        blocks: [["werden", "verb"], ["wohl / schon", "part"], [T.inf, "part"]],
         means: { en: "probably; it'll be fine", ru: "наверное; всё будет хорошо" },
         ex: "Das *wird* schon _klappen_.",
         also: {
@@ -358,7 +358,7 @@ window.VV_TABLE = {
         ex: "Wir *bekommen* _den Zug_ noch."
       },
       {
-        tag: { en: "given to you", ru: "тебе подарили / прислали" },
+        tag: { en: "given / sent to you", ru: "тебе подарили / прислали" },
         job: "getDone",
         lit: { cols: [0, 1], p2: [0] },
         blocks: [["bekommen", "verb"], [T.thing, "plain"], ["Partizip II", "part"]],

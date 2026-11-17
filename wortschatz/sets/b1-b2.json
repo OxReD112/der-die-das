@@ -18,6 +18,10 @@
    "sentenceTranslation": {
     "ru": "Пожалуйста, сохраняйте спокойствие и покиньте здание по лестнице.",
     "en": "Please stay calm and leave the building by the stairs."
+   },
+   "translation": {
+    "ru": "сохранять (спокойствие и т. п.); уберегать (от чего-либо); (книжн.) хранить",
+    "en": "to keep, to preserve; to protect, to save (from); (elevated) to store"
    }
   },
   {
@@ -134,6 +138,10 @@
    "sentenceTranslation": {
     "ru": "До определённой степени я понимаю твою критику.",
     "en": "To a certain extent I can understand your criticism."
+   },
+   "translation": {
+    "ru": "некоторый, известный (о степени); некий, определённый; несомненный, верный",
+    "en": "certain, some (degree); certain, particular; certain, sure"
    }
   },
   {
@@ -484,6 +492,10 @@
    "sentenceTranslation": {
     "ru": "При запросах всегда указывайте номер дела.",
     "en": "Please always quote the case number in any enquiries."
+   },
+   "translation": {
+    "ru": "дело (в учреждении); процесс, событие",
+    "en": "case, file (official); process, event"
    }
   },
   {
@@ -627,6 +639,10 @@
    "sentenceTranslation": {
     "ru": "Уход за больной матерью — большая нагрузка для всей семьи.",
     "en": "Caring for their sick mother is a heavy burden for the whole family."
+   },
+   "translation": {
+    "ru": "нагрузка; тягота; уличающее обвинение; финансовое обременение",
+    "en": "strain or burden; load; incrimination; financial encumbrance"
    }
   },
   {
@@ -645,11 +661,11 @@
    "id": "adjective-642",
    "sentence": "Ich kenne ihn nur {{c1::flüchtig}}, wir haben uns zweimal bei Freunden gesehen.",
    "sentenceTranslation": {
-    "ru": "Я знаю его лишь мельком, мы виделись пару раз у друзей.",
+    "ru": "Я с ним лишь шапочно знаком, мы дважды виделись у друзей.",
     "en": "I only know him in passing; we've met twice at friends'."
    },
    "translation": {
-    "ru": "мельком, поверхностно; мимолётный",
+    "ru": "поверхностно, шапочно (знать кого-либо); мимолётный",
     "en": "in passing, superficially; fleeting"
    }
   },
@@ -779,6 +795,10 @@
    "sentenceTranslation": {
     "ru": "Блогеры с большим охватом зарабатывают на рекламе много денег.",
     "en": "Influencers with a large reach earn a lot of money from advertising."
+   },
+   "translation": {
+    "ru": "охват (аудитории); досягаемость; запас хода; радиус действия",
+    "en": "coverage, audience reach; reach; range"
    }
   },
   {

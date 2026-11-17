@@ -57,7 +57,7 @@ window.PRAEPOSITIONEN = [
   },
   {
     preposition: "um",
-    translation: { ru: "вокруг, в (о времени)", en: "around; at (time)" },
+    translation: { ru: "вокруг; в (о времени)", en: "around; at (time)" },
     cases: [{ case: "Akkusativ", status: "standard" }],
     example: "Wir sitzen um den Tisch herum.",
     exampleTranslation: { ru: "Мы сидим вокруг стола.", en: "We are sitting around the table." }
@@ -347,7 +347,7 @@ window.PRAEPOSITIONEN = [
   },
   {
     preposition: "innerhalb",
-    translation: { ru: "внутри, в течение", en: "inside; within (time)" },
+    translation: { ru: "внутри; в течение", en: "inside; within (time)" },
     cases: [{ case: "Genitiv", status: "standard" }],
     example: "Innerhalb eines Monats war alles fertig.",
     exampleTranslation: { ru: "В течение месяца всё было готово.", en: "Within a month, everything was ready." },

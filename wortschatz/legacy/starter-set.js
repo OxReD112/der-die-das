@@ -864,7 +864,7 @@ window.WORDS = [
     },
     "grammar": "die Stelle · die Stellen",
     "translation": {
-      "ru": "место, должность",
+      "ru": "работа, должность; место",
       "en": "job, position; place"
     },
     "pos": "Substantiv",
@@ -1548,7 +1548,7 @@ window.WORDS = [
     },
     "grammar": "lösen · löste · hat gelöst",
     "translation": {
-      "ru": "решать; освобождать",
+      "ru": "решать; развязывать, ослаблять",
       "en": "to solve; to loosen"
     },
     "pos": "Verb",
@@ -1867,7 +1867,7 @@ window.WORDS = [
     "blank": "Sein Verhalten war so _____, dass alle lachen mussten.",
     "revealed": "Sein Verhalten war so lächerlich, dass alle lachen mussten.",
     "sentenceTranslation": {
-      "ru": "Его поведение было настолько нелепым, что все были вынуждены смеяться.",
+      "ru": "Его поведение было настолько нелепым, что все невольно рассмеялись.",
       "en": "His behaviour was so ridiculous that everyone had to laugh."
     },
     "grammar": "",
@@ -2574,7 +2574,7 @@ window.WORDS = [
     },
     "grammar": "der Betrieb · die Betriebe",
     "translation": {
-      "ru": "предприятие, работа",
+      "ru": "предприятие; работа",
       "en": "company, business; operation"
     },
     "pos": "Substantiv",
@@ -2736,7 +2736,7 @@ window.WORDS = [
     },
     "grammar": "die Kündigung · die Kündigungen",
     "translation": {
-      "ru": "увольнение, расторжение",
+      "ru": "увольнение; расторжение (договора)",
       "en": "resignation; cancellation (of a contract)"
     },
     "pos": "Substantiv",
@@ -3150,8 +3150,8 @@ window.WORDS = [
     },
     "grammar": "erreichen · erreichte · hat erreicht",
     "translation": {
-      "ru": "достигать; дозваниваться",
-      "en": "to reach; to catch (a train)"
+      "ru": "достигать; успевать (на поезд); дозваниваться",
+      "en": "to reach; to catch (a train); to get through to (by phone)"
     },
     "pos": "Verb",
     "base": "erreichen",
@@ -3204,7 +3204,7 @@ window.WORDS = [
     },
     "grammar": "der Haushalt · die Haushalte",
     "translation": {
-      "ru": "домашнее хозяйство, бюджет",
+      "ru": "домашнее хозяйство; бюджет",
       "en": "household, housework; budget"
     },
     "pos": "Substantiv",
@@ -3312,7 +3312,7 @@ window.WORDS = [
     },
     "grammar": "prüfen · prüfte · hat geprüft",
     "translation": {
-      "ru": "проверять, экзаменовать",
+      "ru": "проверять; экзаменовать",
       "en": "to check; to examine"
     },
     "pos": "Verb",
@@ -3459,7 +3459,7 @@ window.WORDS = [
       "en": "die Sicherheit · mostly no plural (Sicherheiten = guarantees, collateral)"
     },
     "translation": {
-      "ru": "безопасность, уверенность",
+      "ru": "безопасность; уверенность",
       "en": "safety, security; certainty"
     },
     "pos": "Substantiv",

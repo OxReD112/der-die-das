@@ -76,6 +76,10 @@
    "sentenceTranslation": {
     "ru": "Осмотр возможен только по предварительной записи.",
     "en": "Viewings are only possible by prior appointment."
+   },
+   "translation": {
+    "ru": "предварительный; предыдущий, прежний",
+    "en": "prior; previous, former"
    }
   },
   {
@@ -102,6 +106,10 @@
    "sentenceTranslation": {
     "ru": "Роман долгое время незаслуженно оставался без внимания.",
     "en": "The novel was long unjustly overlooked."
+   },
+   "translation": {
+    "ru": "незаслуженно, напрасно (zu Unrecht)",
+    "en": "wrongly, unjustly (zu Unrecht)"
    }
   },
   {
@@ -124,6 +132,10 @@
    "sentenceTranslation": {
     "ru": "Предложение звучит разумно, хотя вопрос финансирования пока совершенно открыт.",
     "en": "The proposal sounds reasonable, although the funding is still completely unresolved."
+   },
+   "translation": {
+    "ru": "хотя, правда; при этом (в придаточном); при чём (вопрос)",
+    "en": "although, mind you; while, in doing so; at what, how"
    }
   },
   {
@@ -158,6 +170,10 @@
    "sentenceTranslation": {
     "ru": "Студенты и пенсионеры платят за вход 8 и 6 евро соответственно.",
     "en": "Students and pensioners pay 8 and 6 euros admission respectively."
+   },
+   "translation": {
+    "ru": "соответственно; или, вернее, точнее",
+    "en": "respectively; or, or rather, more precisely"
    }
   },
   {
@@ -166,6 +182,10 @@
    "sentenceTranslation": {
     "ru": "В подтверждение своего тезиса автор приводит несколько исследований.",
     "en": "The author cites several studies as evidence for her thesis."
+   },
+   "translation": {
+    "ru": "приводить (доводы, примеры); возглавлять",
+    "en": "to cite, to give (reasons, examples); to lead"
    }
   },
   {
@@ -211,8 +231,8 @@
     "en": "The plans only leaked to the public yesterday."
    },
    "translation": {
-    "ru": "проникать; an die Öffentlichkeit dringen — стать известным",
-    "en": "to penetrate; to leak out (to the public)"
+    "ru": "an die Öffentlichkeit dringen — стать известным; проникать",
+    "en": "to leak out (to the public); to penetrate"
    }
   },
   {
@@ -248,6 +268,10 @@
    "sentenceTranslation": {
     "ru": "Проект нового закона о климате будет обсуждаться в бундестаге на следующей неделе.",
     "en": "The draft of the new climate law will be debated in the Bundestag next week."
+   },
+   "translation": {
+    "ru": "черновик, проект (текста, закона); проект, эскиз, набросок",
+    "en": "draft (of a text, law); design, sketch"
    }
   },
   {
@@ -452,6 +476,10 @@
    "sentenceTranslation": {
     "ru": "Момент был крайне неудачным.",
     "en": "The timing was extremely unfortunate."
+   },
+   "translation": {
+    "ru": "крайне, предельно (перед прилагательными); мыслимый, возможный",
+    "en": "extremely, utterly (before adjectives); conceivable, possible"
    }
   },
   {
@@ -489,8 +517,8 @@
     "en": "Before I decide, I first need to get an overview."
    },
    "translation": {
-    "ru": "обеспечивать (себе); sich einen Überblick verschaffen — составить представление",
-    "en": "to provide, to obtain; to get (an overview)"
+    "ru": "sich einen Überblick verschaffen — составить представление; обеспечивать (себе)",
+    "en": "to get (an overview); to provide, to obtain"
    }
   },
   {
@@ -761,6 +789,10 @@
    "sentenceTranslation": {
     "ru": "По защите данных возникает много вопросов. По этому поводу ведомство опубликовало памятку.",
     "en": "There are many questions about data protection. The authority has published an information sheet on this."
+   },
+   "translation": {
+    "ru": "по этому поводу; к этому; для этого",
+    "en": "on this matter, regarding this; to this, with this; for this"
    }
   },
   {
@@ -790,6 +822,10 @@
    "sentenceTranslation": {
     "ru": "Лекарство в ЕС ещё не одобрено.",
     "en": "The drug has not yet been approved in the EU."
+   },
+   "translation": {
+    "ru": "допускать к применению, одобрять (лекарство); допускать (к экзамену), регистрировать (автомобиль); допускать, позволять; (разг.) оставлять закрытым, не открывать",
+    "en": "to approve, to license (a drug); to admit, to register; to allow, to permit; (coll.) to keep closed, to leave shut"
    }
   },
   {
@@ -945,6 +981,10 @@
    "sentenceTranslation": {
     "ru": "В ходе проекта возникали всё новые проблемы.",
     "en": "New problems kept cropping up during the project."
+   },
+   "translation": {
+    "ru": "возникать (о вопросах, проблемах); (неожиданно) появляться, находиться; всплывать (на поверхность)",
+    "en": "to arise; to turn up, to appear; to surface"
    }
   },
   {
@@ -1007,7 +1047,7 @@
     "pos": "Substantiv",
     "sentence": "Nach sorgfältiger {{c1::Abwägung}} aller Argumente haben wir uns dagegen entschieden.",
     "sentenceTranslation": {
-     "ru": "После тщательного взвешивания всех аргументов мы решили против.",
+     "ru": "После тщательного взвешивания всех аргументов мы решили этого не делать.",
      "en": "After careful consideration of all the arguments, we decided against it."
     },
     "translation": {
@@ -1031,6 +1071,10 @@
    "sentenceTranslation": {
     "ru": "Решение я полностью оставляю за тобой.",
     "en": "I'll leave the decision entirely up to you."
+   },
+   "translation": {
+    "ru": "предоставлять (решение, выбор кому-либо); предоставлять, оставлять (в пользование), уступать",
+    "en": "to leave (a decision, a choice) to; to let (someone) have, to leave (to)"
    }
   },
   {

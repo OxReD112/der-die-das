@@ -50,6 +50,10 @@
    "sentenceTranslation": {
     "ru": "Фильм был скорее скучным.",
     "en": "The film was rather boring."
+   },
+   "translation": {
+    "ru": "скорее; более рано",
+    "en": "rather; sooner"
    }
   },
   {
@@ -371,6 +375,10 @@
    "sentenceTranslation": {
     "ru": "Мы должны беречь Землю для наших детей.",
     "en": "We have to protect the Earth for our children."
+   },
+   "translation": {
+    "ru": "Земля (планета); земля, почва",
+    "en": "Earth; earth, soil"
    }
   },
   {
@@ -503,6 +511,10 @@
    "sentenceTranslation": {
     "ru": "У неё наконец постоянная работа.",
     "en": "She finally has a permanent job."
+   },
+   "translation": {
+    "ru": "постоянный (о работе); твёрдый; прочный; крепко; твёрдо",
+    "en": "permanent (of a job); firm; solid; firmly; tightly"
    }
   },
   {
@@ -596,6 +608,10 @@
    "sentenceTranslation": {
     "ru": "Не волнуйся, я улажу это с арендодателем.",
     "en": "Don't worry, I'll sort it out with the landlord."
+   },
+   "translation": {
+    "ru": "улаживать; регулировать",
+    "en": "to sort out; to regulate; to direct"
    }
   },
   {
@@ -672,6 +688,10 @@
    "sentenceTranslation": {
     "ru": "Твой новый коллега — приятный парень.",
     "en": "Your new colleague is a nice guy."
+   },
+   "translation": {
+    "ru": "парень (разг.); тип, вид",
+    "en": "guy (informal); type"
    }
   },
   {

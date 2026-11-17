@@ -77,7 +77,7 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Infinitiv", job: "passive",
     situation: { en: "You're going away and leave the neighbour your key. Say the cat has to be fed every day.", ru: "Ты уезжаешь и оставляешь соседке ключ. Скажи, что кошку нужно кормить каждый день." },
     sentence: "Die Katze muss jeden Tag gefüttert ___.", answer: "werden", marks: ["muss", "gefüttert"],
-    rule: { en: "modal verb + Partizip II + werden = Passiv with a modal verb: it has to be done", ru: "модальный глагол + Partizip II + werden = пассив с модальным глаголом: это нужно сделать" },
+    rule: { en: "modal verb + Partizip II + werden = Passiv with a modal verb: it has to be done", ru: "модальный глагол + Partizip II + werden = Passiv с модальным глаголом: это нужно сделать" },
     tip: { blocks: [["muss", "plain"], ["Partizip II", "part"], ["werden", "verb"]], means: { en: "it has to be done", ru: "это нужно сделать" } }
   },
   {
@@ -200,7 +200,7 @@ window.VV_SENTENCES = [
     situation: { en: "Yesterday's train trip: you left your umbrella behind on the train.", ru: "Вчерашняя поездка: ты забыла зонт в поезде и оставила его там." }, register: "Erzählung",
     sentence: "Gestern ___ ich meinen Schirm im Zug zurück.", answer: "ließ", marks: ["Gestern", "zurück"],
     rule: { en: "lassen im Präteritum + thing + zurück = left it behind", ru: "lassen im Präteritum + вещь + zurück = оставила (забыла)" },
-    tip: { blocks: [["lassen", "verb"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "adjective", ru: "прилагательное" }, "part"]], means: { en: "left (open)", ru: "оставила (открытым)" } }
+    tip: { blocks: [["lassen", "verb"], [{ en: "object", ru: "кого / что" }, "plain"], [{ en: "place", ru: "место" }, "plain"], ["zurück", "part"]], means: { en: "left behind (forgot)", ru: "оставила (забыла)" } }
   },
 
   {
@@ -347,7 +347,7 @@ window.VV_SENTENCES = [
     verb: "bekommen", form: "Partizip II", job: "getDone",
     situation: { en: "Write your memoirs: explain why you still hate socks.", ru: "Пишешь мемуары: объясни, почему до сих пор терпеть не можешь носки." },
     sentence: "Als Kind habe ich jedes Jahr Socken geschenkt ___.", answer: "bekommen", also: ["gekriegt"], marks: ["habe", "geschenkt"],
-    rule: { en: "time in the past + bekommen im Präteritum + thing + Partizip II = given / sent to you", ru: "время в прошлом + bekommen im Präteritum + вещь + Partizip II = тебе дарили" }
+    rule: { en: "time in the past + haben im Präsens + thing + Partizip II + Partizip II von bekommen = I was given (as presents)", ru: "время в прошлом + haben im Präsens + вещь + Partizip II + Partizip II von bekommen = мне дарили" }
   },
   {
     verb: "bekommen", form: "Partizip II", job: "catch",
@@ -383,7 +383,7 @@ window.VV_SENTENCES = [
     verb: "bekommen", form: "Partizip II", job: "receive",
     situation: { en: "Explain where your sister's dog came from: she got it for her birthday last year.", ru: "Объясни, откуда у сестры собака: ей подарили её на день рождения в прошлом году." },
     sentence: "Letztes Jahr hat sie zum Geburtstag einen Hund ___.", answer: "bekommen", also: ["gekriegt", "erhalten"], marks: ["Letztes Jahr"],
-    rule: { en: "the past in a story + bekommen im Präteritum + thing = got, received", ru: "прошлое в рассказе + bekommen im Präteritum + вещь = получила" }
+    rule: { en: "time in the past + haben im Präsens + something / someone + Partizip II von bekommen = got, received", ru: "время в прошлом + haben im Präsens + что / кого + Partizip II von bekommen = получила" }
   },
   {
     verb: "bekommen", form: "Partizip II", job: "getDone",
@@ -397,7 +397,8 @@ window.VV_SENTENCES = [
     verb: "werden", form: "Präsens", person: "er/sie/es", job: "guess",
     situation: { en: "A friend is scared of the dentist. Reassure him: it probably won't be that bad.", ru: "Друг боится идти к зубному. Успокой его: наверняка всё не так страшно." },
     sentence: "Es ___ schon nicht so schlimm sein.", answer: "wird", marks: ["schon", "sein"],
-    rule: { en: "werden im Präsens + wohl + infinitive = probably (a guess)", ru: "werden im Präsens + wohl + Infinitiv = наверное (догадка)" }
+    rule: { en: "werden im Präsens + schon + infinitive = reassurance: surely it's not that bad", ru: "werden im Präsens + schon + Infinitiv = успокаиваю: наверняка всё не так страшно" },
+    tip: { blocks: [["werden", "verb"], ["schon", "part"], [{ en: "infinitive", ru: "Infinitiv" }, "part"]], means: { en: "surely not that bad (reassuring)", ru: "наверняка не так страшно (успокаиваю)" } }
   },
   {
     verb: "lassen", form: "Präsens", person: "sie/Sie", job: "allow",
@@ -450,7 +451,7 @@ window.VV_JOBS = {
   mustDo: { de: "zu tun haben", en: "have to", ru: "нужно" },
   phrase: { de: "feste Ausdrücke", en: "fixed phrases", ru: "устойчивые выражения" },
   receive: { de: "erhalten", en: "get, receive", ru: "получать" },
-  getDone: { de: "geschenkt bekommen", en: "given to you", ru: "тебе подарили / прислали" },
+  getDone: { de: "geschenkt bekommen", en: "given / sent to you", ru: "тебе подарили / прислали" },
   catch: { de: "Angst bekommen", en: "start to feel", ru: "начать чувствовать" }
 };
 
@@ -606,7 +607,7 @@ window.VV_USE_PAIRS = {
     "lassen>werden": {
       only: ["haveDone"],
       lines: [
-        { en: "werden + infinitive = future: you will do it (yourself)", ru: "werden + Infinitiv = будущее: ты сделаешь это (сама)" },
+        { en: "werden + infinitive = future: you will do it (yourself)", ru: "werden + Infinitiv = будущее: ты сделаешь это сам(а)" },
         { en: "lassen + infinitive = someone else does it", ru: "lassen + Infinitiv = сделает кто-то другой" }
       ]
     },

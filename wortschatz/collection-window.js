@@ -849,9 +849,9 @@
      sentenceTranslation:{ru,en}}}]} — an entry may carry its own example for this set, and a word that is not in
      the Wörterbuch (e.g. „es sei denn“) is a custom entry; the Wörterbuch is not changed. Cards keep dictionaryId (duplicates are checked per meaning). */
   const SETS = [
-    { id: "a2-b1", name: "A2 → B1", file: "sets/a2-b1.json?v=1" },
-    { id: "b1-b2", name: "B1 → B2", file: "sets/b1-b2.json?v=1" },
-    { id: "b2-c1", name: "B2 → C1", file: "sets/b2-c1.json?v=1" }
+    { id: "a2-b1", name: "A2 → B1", file: "sets/a2-b1.json?v=2" },
+    { id: "b1-b2", name: "B1 → B2", file: "sets/b1-b2.json?v=2" },
+    { id: "b2-c1", name: "B2 → C1", file: "sets/b2-c1.json?v=2" }
   ];
   // Choose screen (wortschatz.js showChoose): one collection-line per set + „Start with my own words“.
   function fillChoose(box, ownBtn) {
@@ -931,7 +931,15 @@
       const fields = Object.assign(window.WortschatzDictionaryCard.create(item, lang), { dictionaryId: item.id });
       if (entry.sentence) fields.sentence = entry.sentence;
       if (entry.sentenceTranslation) fields.sentenceTranslation = pickLang(entry.sentenceTranslation);
-      if (entry.translation) fields.translation = pickLang(entry.translation);
+      if (entry.translation) {
+        // The set's own translation puts the meaning of ITS sentence first: take that one, the rest is „auch:“.
+        // (example-senses.json describes the Wörterbuch example, not the set sentence — 17.11.2026: Schicht showed „слой“.)
+        fields.translation = pickLang(entry.translation);
+        if (window.WortschatzMeanings && typeof fields.translation === "string") {
+          const list = WortschatzMeanings.parts(fields.translation, ";");
+          if (list.length) Object.assign(fields, { translation: list[0], otherMeanings: list.slice(1).join("; ") });
+        }
+      }
       const split = window.WortschatzMeanings ? WortschatzMeanings.splitFields(fields) : fields; // list shows the trained meaning only
       if (!C.normalize(split).card) continue;
       words.push(split);
