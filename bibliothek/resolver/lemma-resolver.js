@@ -18586,6 +18586,33 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           for (let i = from; i < to; i++) clause.push({i, rows:verbAnalyses.get(norm(tokens[i][0])) || []});
         }
       }
+      // 17.11.2026 (expressions chat; advisor 17.11, «Алиса»): the verb of the heading and nicht of the heading that stand in the same
+      // part of the sentence but are no parts of the record (der Mühe wert sein — ob es der Mühe wert sei; gute Miene zum bösen Spiel
+      // machen — dass wir gute Miene … machen müssen; nicht viel zu sagen haben — hat nicht so viel zu sagen) belong to the expression:
+      // highlighted with it, and the verb is the expression's verb (its tense, its chain). The verb only when no heading verb is among
+      // the parts, its form nearest the parts; nicht only between the first and the last part.
+      const extraSpans = [];
+      let outsideHead = null;
+      if (clause.length && spans?.length) {
+        const inSpans = t => spans.some(x => x.start === clauseTokens[t.i].index);
+        const spanOf = t => ({text:clauseTokens[t.i][0], start:clauseTokens[t.i].index, end:clauseTokens[t.i].index + clauseTokens[t.i][0].length});
+        const firstAt = Math.min(...spans.map(x => x.start)), lastAt = Math.max(...spans.map(x => x.start));
+        if (fixed && lastVerb && !hits.length && !variantVerb()) {
+          const near = clause.filter(t => !inSpans(t) && /^\p{Ll}/u.test(clauseTokens[t.i][0]) && !/^\p{Lu}/u.test(clauseTokens[t.i+1]?.[0] || "") &&
+            t.rows.some(a => ["finite","infinitive","participle","imperative"].includes(a.kind) && ofHead(lastVerb, a)))
+            .sort((a,b) => Math.min(Math.abs(clauseTokens[a.i].index - firstAt), Math.abs(clauseTokens[a.i].index - lastAt)) -
+              Math.min(Math.abs(clauseTokens[b.i].index - firstAt), Math.abs(clauseTokens[b.i].index - lastAt)))[0];
+          // (reviewer 17.11: not when the part holds a finite form or a participle of another full verb — then that is the expression's
+          // verb or the part is another clause: es der Mühe wert schien / erschienen / gefunden worden, … ist und es … wert schien)
+          const otherVerb = clause.some(t => !inSpans(t) && /^\p{Ll}/u.test(clauseTokens[t.i][0]) && t.rows.length &&
+            t.rows.every(a => ["finite","participle"].includes(a.kind) && !ofHead(lastVerb, a) && !chainVerb(a.base)));
+          if (near && !otherVerb) { outsideHead = near; extraSpans.push(spanOf(near)); }
+        }
+        if (headingWordSet.has("nicht")) for (const t of clause)
+          if (norm(clauseTokens[t.i][0]) === "nicht" && !inSpans(t) && clauseTokens[t.i].index > firstAt && clauseTokens[t.i].index < lastAt &&
+            // (not nicht nur / einmal / mal — it negates something else: Er hat ja nicht nur viel zu sagen)
+            !["nur","einmal","mal","bloß","allein","erst"].includes(norm(clauseTokens[t.i+1]?.[0] || ""))) extraSpans.push(spanOf(t));
+      }
       let tense = null;
       // 11.11.2026 (expressions chat; advisor 11.11, EXPRESSIONS_TODO 35): the werden of Futur I by the same sign as in the verb
       // chains (werdenGroupPair) — not a zu-infinitive (mit den Aufgaben fertig zu werden, sich einig zu werden — no tense), and the
@@ -18613,11 +18640,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           !clause.some(t => t.rows.some(a => a.kind === "finite" && modalLemmas.has(a.base)))) {
           tense = "Futur I";   // er wird sich auf den Weg machen
         } else {
-          tense = oneTense(new Set(partRows.flatMap(r => r.filter(a => a.kind === "finite" && ofVerb(a)).map(a => a.tense))));
+          tense = oneTense(new Set([...partRows, ...(outsideHead ? [outsideHead.rows] : [])].flatMap(r => r.filter(a => a.kind === "finite" && ofVerb(a)).map(a => a.tense))));
         }
       }
       // No verb in the heading (vor sich hin, im Hinblick auf): no tense.
-      return {posLabel: fixed ? "Feste Wendung" : "Ausdruck", expressionTense: tense && tense !== "Präsens" ? tense : null, expressionHead};
+      const head = expressionHead || (outsideHead ? {text:clauseTokens[outsideHead.i][0], start:clauseTokens[outsideHead.i].index, verb:lastVerb} : null);
+      return {posLabel: fixed ? "Feste Wendung" : "Ausdruck", expressionTense: tense && tense !== "Präsens" ? tense : null, expressionHead:head,
+        ...(extraSpans.length ? {expressionExtraSpans:extraSpans} : {})};
     }
     // 29.10.2026 (expressions chat; advisor p. 5, user «да»; reference X5.14): a word of a verb chain outside an expression
     // (the modal, the auxiliary, lassen) whose main verb is the verb of an expression names the expression, not the bare verb:
@@ -18747,6 +18776,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         construction:{id:found.id, label:found.entry.word, spans:found.spans}};
       if (found.entry.type === "Ausdruck") Object.assign(candidate, contracted ? expressionGrammar(found.entry, contracted.grammarSpans, contracted.sentence)
         : expressionGrammar(found.entry, found.spans, String(context?.sentence || "")));
+      // (the heading's verb / nicht outside the parts — expressionGrammar 17.11: highlighted with the expression)
+      if (candidate.expressionExtraSpans && !contracted) {
+        candidate.construction = {...candidate.construction, spans:[...candidate.construction.spans, ...candidate.expressionExtraSpans].sort((a,b) => a.start - b.start)};
+        delete candidate.expressionExtraSpans;
+      }
       const rest = (resolution.candidates || []).filter(c => c.dictionaryId !== found.entry.id);
       // G65: a construction the form does not make sure (split_choice / adjacent_choice) is offered in a choice, the word's own reading first.
       if (found.choice === "preposition-first" && rest.length)

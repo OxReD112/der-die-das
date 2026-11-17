@@ -54207,5 +54207,339 @@
         "Sei so gut wie dein Bruder."
       ]
     }
+  },
+  {
+    "id": "expression-331",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "etw. satt haben / sein",
+    "translation_ru": "надоело (что-либо), сыт по горло (чем-либо)",
+    "translation_en": "to be fed up with something, to be sick of something",
+    "example_de": "Ich habe es satt, ständig auf dich zu warten.",
+    "example_ru": "Мне надоело постоянно тебя ждать.",
+    "example_en": "I'm fed up with always waiting for you.",
+    "notes_ru": [
+      "Что — винительный: Ich habe die ewigen Ausreden satt. С sein — обычно с es: Ich bin es satt. Без дополнения — satt sein «быть сытым»: Ich bin satt (не выражение).",
+      "Также слитно: satthaben. Ср. sich satt essen — наесться досыта; etw. satt bekommen / kriegen — пресытиться. Разг. Sonne / Geld satt — вдоволь, в изобилии (не выражение)."
+    ],
+    "notes_en": [
+      "What — accusative: Ich habe die ewigen Ausreden satt. With sein — usually with es: Ich bin es satt. Without an object — satt sein “to be full”: Ich bin satt (not this expression).",
+      "Also written as one word: satthaben. Cf. sich satt essen — to eat one's fill; etw. satt bekommen / kriegen — to get sick of something. Colloquial Sonne / Geld satt — plenty of (not this expression)."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.dwds.de/wb/satt",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "zu haben"
+            ]
+          },
+          {
+            "form": "satt",
+            "not_after": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wäre",
+              "wären",
+              "sei",
+              "werde",
+              "wird",
+              "werden",
+              "wurde",
+              "wurden",
+              "bald"
+            ],
+            "not_next": [
+              "zu",
+              "gegessen",
+              "gefressen",
+              "gesehen",
+              "getrunken",
+              "gemacht",
+              "gekriegt",
+              "bekommen",
+              "gefüttert",
+              "geworden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      },
+      {
+        "parts": [
+          {
+            "form": "satt",
+            "not_after": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wäre",
+              "wären",
+              "sei",
+              "werde",
+              "wird",
+              "werden",
+              "wurde",
+              "wurden",
+              "bald"
+            ]
+          },
+          {
+            "form": [
+              "habe",
+              "hab",
+              "hast",
+              "hat",
+              "haben",
+              "habt",
+              "hatte",
+              "hattest",
+              "hatten",
+              "hattet",
+              "hätte",
+              "hättest",
+              "hätten",
+              "hättet",
+              "gehabt",
+              "zu haben"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 0
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien"
+            ]
+          },
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s",
+              "ihn",
+              "den",
+              "diesen",
+              "jenen",
+              "dies",
+              "alles"
+            ]
+          },
+          {
+            "form": "satt"
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 2
+      },
+      {
+        "parts": [
+          {
+            "form": [
+              "es",
+              "'s",
+              "’s",
+              "ihn",
+              "den",
+              "diesen",
+              "jenen",
+              "dies",
+              "alles"
+            ]
+          },
+          {
+            "form": "satt"
+          },
+          {
+            "form": [
+              "sein",
+              "gewesen",
+              "zu sein",
+              "bin",
+              "bist",
+              "ist",
+              "sind",
+              "seid",
+              "war",
+              "warst",
+              "waren",
+              "wart",
+              "wäre",
+              "wärst",
+              "wären",
+              "wärt",
+              "sei",
+              "seien"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "clause",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Ich habe es satt, ständig auf dich zu warten.",
+        "Ich habe es satt.",
+        "Ich bin es satt.",
+        "Ich habe die ewigen Ausreden satt.",
+        "Er hatte das Warten satt.",
+        "Hast du es nicht satt?",
+        "Sie war es satt, immer die Schuldige zu sein.",
+        "Wir haben es gründlich satt, dass niemand hilft.",
+        "Ich bin es leid und habe es satt.",
+        "Ich habe es so richtig satt.",
+        "Ich hab's satt!",
+        "Langsam habe ich diese Streitereien satt.",
+        "Er ging, weil er es satt hatte.",
+        "Es ist schön, es endlich satt zu haben.",
+        "Das habe ich satt.",
+        "Ich habe dich satt.",
+        "Den hatte ich satt.",
+        "Ich bin's satt.",
+        "Ihr seid es doch satt."
+      ],
+      "negative": [
+        "Ich bin satt.",
+        "Ich bin satt, danke.",
+        "Sind die Kinder satt?",
+        "Wir haben uns satt gegessen.",
+        "Bei Oma konnten wir uns immer satt essen.",
+        "Ich habe Hunger, aber bald bin ich satt.",
+        "Das Essen hat mich satt gemacht.",
+        "Ich habe genug gegessen und bin satt.",
+        "Wir haben uns satt gesehen.",
+        "Als ich satt war hatte ich das Gefühl, platzen zu müssen.",
+        "Ich hab mich satt gegessen.",
+        "Ich hab mich satt gesehen.",
+        "Die Menschen haben nicht satt zu essen.",
+        "Hatten die Leute satt zu essen?",
+        "Die Kinder haben gegessen und sind satt."
+      ]
+    }
+  },
+  {
+    "id": "expression-332",
+    "type": "Ausdruck",
+    "group": "verbal_expression",
+    "word": "wie angegossen (sitzen / passen)",
+    "translation_ru": "как влитой (сидеть); точно впору (подходить)",
+    "translation_en": "to fit like a glove",
+    "example_de": "Der neue Anzug sitzt wie angegossen.",
+    "example_ru": "Новый костюм сидит как влитой.",
+    "example_en": "The new suit fits like a glove.",
+    "notes_ru": [
+      "Обычно об одежде, обуви: Die Schuhe passen wie angegossen. — Туфли сидят как влитые. Также с sein: Das Kleid war wie angegossen. — Платье было как влитое.",
+      "Без wie — причастие глагола angießen «полить»: Er hat die Blumen angegossen. — Он полил цветы."
+    ],
+    "notes_en": [
+      "Usually of clothes, shoes: Die Schuhe passen wie angegossen. — The shoes fit like a glove. Also with sein: Das Kleid war wie angegossen. — The dress fitted perfectly.",
+      "Without wie — the participle of angießen “to water”: Er hat die Blumen angegossen. — He watered the flowers."
+    ],
+    "related_ids": [],
+    "source_url": "https://www.duden.de/rechtschreibung/angiessen",
+    "wortschatz_excluded": true,
+    "match": [
+      {
+        "parts": [
+          {
+            "form": [
+              "wie",
+              "Wie"
+            ]
+          },
+          {
+            "form": "angegossen",
+            "not_next": [
+              "wird",
+              "werden",
+              "wurde",
+              "wurden",
+              "würde",
+              "würden",
+              "worden"
+            ]
+          }
+        ],
+        "order": "fixed",
+        "scope": "adjacent",
+        "anchor": 1
+      }
+    ],
+    "tests": {
+      "positive": [
+        "Der neue Anzug sitzt wie angegossen.",
+        "Die Schuhe passen wie angegossen.",
+        "Das Kleid war wie angegossen.",
+        "Der Mantel saß ihm wie angegossen.",
+        "Die Jacke hat wie angegossen gepasst.",
+        "der war wie angegossen",
+        "Wie angegossen sitzt die Hose!",
+        "Er saß wie angegossen im Sattel.",
+        "Die Rolle passt ihm wie angegossen."
+      ],
+      "negative": [
+        "Er hat die Blumen angegossen.",
+        "Die Pflanzen wurden frisch angegossen.",
+        "Hast du die Tomaten schon angegossen?",
+        "Wie oft hast du die Blumen angegossen?",
+        "Nach dem Umtopfen wird die Pflanze kräftig angegossen.",
+        "Weißt du, wie angegossen wird?",
+        "Ich zeige dir, wie angegossen werden muss.",
+        "Sie fragte, wie angegossen worden war.",
+        "Wie angegossen wird, hängt von der Pflanze ab."
+      ]
+    }
   }
 ]
