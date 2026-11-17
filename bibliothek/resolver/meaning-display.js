@@ -575,7 +575,8 @@
         const marks = ['Reflexiv'];
         if (['Perfekt','Plusquamperfekt'].includes(k.tense)) marks.push(`${k.tense} mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
         // A1 (reference 5.2): a modal controls the reflexive infinitive (muss mich beeilen).
-        else if (k.modal) marks.push(`Modal mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
+        // (Astronaut (4): the infinitive of the part before und shares the modal — Modal mit melken und sich waschen)
+        else if (k.modal) marks.push(`Modal mit ${(k.sharedInfinitives || []).map(x => x + ' und ').join('')}${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
         // G15 (19.10.2026): Futur I / Konjunktiv II with werden keep the tense, as Perfekt does (wird sich … abschwächen).
         else if (/^(?:Futur I|Konjunktiv II)/u.test(k.tense || '')) marks.push(`${k.tense} mit ${/^sich\s/u.test(name) ? name : 'sich ' + name}`);
         // (links chat п. 10, advisor 12.11: haben / sein + zu over the reflexive zu-infinitive — hat sich … zu beteiligen «Reflexiv · haben + zu»)
@@ -629,6 +630,8 @@
       case 'comparative-als': return {marks:['Komparativ + als'], role:null, spans};
       // 5б (2): so + Adjektiv + als (so weiß als Schnee) — als shows «здесь: как».
       case 'so-als': return {marks:['so + Adjektiv + als'], role:null, spans};
+      // Astronaut (3): Nomen + um + dasselbe Nomen (Tag um Tag) — um shows «здесь: за».
+      case 'noun-um-noun': return {marks:['Nomen + um + Nomen'], role:null, spans};
       // G51 step 3: Komparativ + denn (härter denn je) — denn shows «здесь: чем».
       case 'comparative-denn': return {marks:['Komparativ + denn'], role:null, spans};
       // Grimm item 3 (11.11): als + a person form (als wäre) — als shows «здесь: как будто».

@@ -3081,6 +3081,7 @@
     //   reflexive one is the subject of the infinitive (Lass mich dir helfen — dir is no reflexive of mich: no).
     // - lass / lasst / lassen + uns right after it is the first person plural (Lass uns gehen, lasst uns … — wir).
     // facts / subjectFacts: sentenceSubjectFacts(); p: the token index of the pronoun. Returns true / false.
+    const SUBORDINATORS_FOR_PRIOR = /^(?:als|wenn|weil|da|dass|daß|ob|bevor|nachdem|während|obwohl|sobald|seit|seitdem|bis|falls|damit|indem|wie|wo)$/u;
     const ACCUSATIVE_PERSON_PRONOUNS = {mich:['ich'],dich:['du'],ihn:['er/sie/es'],es:['er/sie/es'],sie:['er/sie/es','sie'],uns:['wir'],euch:['ihr']};
     function reflexiveAgreesWithSubject(facts,subjectFacts,p) {
       const {tokens,words,analyses,clauses}=facts,{subjects,subjectFor}=subjectFacts;
@@ -3121,6 +3122,16 @@
       if(prior&&clause.relation==='coordinate'&&words[clause.start]==='und'&&!words.some((w,k)=>personal(k))&&
         (analyses[clause.start+1]||[]).some(a=>a.kind==='finite'&&a.person===own))
         if(ownSubjects(prior).length||words.some((w,k)=>w===own&&k>=prior.start&&k<=prior.end&&SUBJECT_PRONOUNS.has(w)&&!subjectFacts.beforePrep(k)))return true;
+      // (Astronaut (4), advisor 17.11: the same after a comma — Ich erreiche die Luke, halte mich … fest; Dann holte ich tief Luft,
+      // sammelte mich …: the part opens with the finite verb of the pronoun's person right after the comma, no personal pronoun in it,
+      // and the part before has the pronoun's own subject; a subordinate part before it does not count — Als ich kam, …)
+      const commaBefore=clause.start>0&&/,\s*$/u.test(String(facts.sentence||'').slice(tokens[clause.start-1].index+tokens[clause.start-1][0].length,tokens[clause.start].index));
+      if(prior&&commaBefore&&prior.relation!=='subordinate'&&!words.some((w,k)=>personal(k))&&
+        (analyses[clause.start]||[]).some(a=>a.kind==='finite'&&a.person===own)&&
+        !SUBORDINATORS_FOR_PRIOR.test(words[prior.start])&&!/^(?:was|wer|wie|wo)$/u.test(words[prior.start])&&
+        !Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(k=>/^(?:einer|eine|jemand|niemand|keiner|keine|jeder|jede|man|alle|beide|wer)$/u.test(words[k])&&
+          !subjectFacts.beforePrep(k)&&!/^\p{Lu}/u.test(tokens[k+1]?.[0]??''))&&
+        words.some((w,k)=>w===own&&k>=prior.start&&k<=prior.end&&SUBJECT_PRONOUNS.has(w)&&!subjectFacts.beforePrep(k)))return true;
       // the imperative: no subject, the form decides (Mach dir …, Lasst euch …, und stell dir vor); not in a question
       // (Macht euch das keine Sorgen? — das is the subject; a noun of the clause cannot tell it: Mach dir keine Sorgen!)
       const end=tokens[clause.end],after=String(facts.sentence||'').slice(end.index+end[0].length).match(/^[^\p{L}\p{N}]*/u)[0];
@@ -3187,6 +3198,26 @@
           const nominal=(forms.get(words[v])||[]).some(e=>e.type==='Nomen')||
             (await lexicalLookup(tokens[v][0],'analyseReflexiveSentence')).some(g=>!g.kind&&!g.unresolved&&canonicalPos(g.pos)==='Nomen');
           if(nominal)return null;
+        }
+        // (Astronaut (4), advisor 17.11: a bare infinitive after und / oder with no finite verb in its part shares the modal / werden
+        // of the part before, when that part has its own bare infinitive — soll … haben und sich … drehen, will essen und sich hinlegen)
+        // (not lassen — its own sich … lassen group: die will ich … machen und mir's bezahlen lassen keeps lassen's card)
+        if(!marker&&!modal.length&&!future.length&&a.base!=='lassen'&&previous&&clause.relation==='coordinate'&&['und','oder'].includes(words[clause.start])&&
+          !Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(i=>/^\p{Ll}/u.test(tokens[i][0])&&analyses[i].some(r=>r.kind==='finite'&&!r.zu)&&!analyses[i].some(r=>r.kind==='infinitive'))) {
+          const range=Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k);
+          const shared=[];for(const i of range)for(const r of analyses[i])if(r.kind==='finite'&&(modalLemmas.has(r.base)||r.base==='werden'&&['Präsens','Konjunktiv I','Konjunktiv II'].includes(r.tense))&&subjects(previous,r.person).length>0)shared.push({index:i,analysis:r});
+          const ownInf=range.some(i=>i!==shared[0]?.index&&/^\p{Ll}/u.test(tokens[i][0])&&words[i-1]!=='zu'&&analyses[i].some(r=>r.kind==='infinitive'&&!r.zu));
+          const one=shared.filter((h,n,all)=>all.findIndex(x=>x.index===h.index)===n);
+          if(one.length===1&&ownInf){const h=shared.find(x=>x.index===one[0].index);controller=h.index;control=h.analysis;componentIndices.push(controller);subjectClause=previous;
+            // (the first infinitive stays in the group — Modal mit melken und sich waschen keeps melken lit, window-chain-qa)
+            const sharedInfinitives=[];
+            for(const i of range)if(i!==controller&&/^\p{Ll}/u.test(tokens[i][0])&&words[i-1]!=='zu'&&analyses[i].some(r=>r.kind==='infinitive'&&!r.zu)&&!componentIndices.includes(i)){componentIndices.push(i);
+              sharedInfinitives.push((analyses[i].find(r=>r.kind==='infinitive'&&!r.zu)||{}).base||words[i]);}
+            tense=modalLemmas.has(control.base)?control.tense:control.tense==='Konjunktiv II'?'Konjunktiv II':'Futur I';
+            // (the first infinitive is no lexical part of this verb — a tap on totschlagen keeps its own card; it is named only alone:
+            // beraten lassen oder sich einlesen keeps «Modal mit sich einlesen»)
+            return {controller,control,subjectClause,tense,zuIndex,sharedModal:true,sharedInfinitives:sharedInfinitives.length===1?sharedInfinitives:[],
+              nonLexical:componentIndices.filter(i=>range.includes(i)&&i!==controller)};}
         }
         const replacement=a.compound?.length?helpers.filter(h=>h.analysis.base==='haben'):[];
         if(modal.length+future.length===1||replacement.length===1) {
@@ -3401,12 +3432,31 @@
             }
             if(attempt){attempt.stage='subject';attempt.person=control.person;attempt.subjectCandidates=subjects(subjectClause,control.person);}
             let subject=subjectFor(subjectClause,control,controller,true);
+            // (the shared modal of an und-part: sich of the third person needs only the person — Das Rad soll einen Durchmesser haben und sich
+            // … drehen, where the part before has two noun candidates)
+            if(!subject&&chain.sharedModal&&THIRD_PERSONS.includes(control.person)&&clauseHasSich(clause)&&subjects(subjectClause,control.person).length)
+              subject={index:null,person:control.person,implicit:true};
+            // (Astronaut (4), advisor 17.11: a part after a comma with no subject of its own takes the subject of the part before — Ich
+            // erreiche die Luke, halte mich … fest; the agreement decides, reflexiveAgreesWithSubject, for mich / mir / dich / dir / uns / euch
+            // of the finite verb's person)
+            // (the part before holds the subject pronoun of that person itself, and is no subordinate part — Was der Hund bewacht, geht euch
+            // nichts an; no indefinite subject in the part — leite mich doch einer)
+            const priorOwn=previous&&previous.relation!=='subordinate'&&!SUBORDINATORS_FOR_PRIOR.test(words[previous.start])&&!/^(?:was|wer|wie|wo)$/u.test(words[previous.start])&&
+              Array.from({length:previous.end-previous.start+1},(_,k)=>previous.start+k).some(k=>words[k]===control.person&&!beforePrep(k));
+            const indefiniteSubject=Array.from({length:clause.end-clause.start+1},(_,k)=>clause.start+k).some(k=>/^(?:einer|eine|jemand|niemand|keiner|keine|jeder|jede|man|alle|beide|wer)$/u.test(words[k])&&!beforePrep(k)&&
+              !(k>clause.start&&prepositions.has(words[k-1]))&&!/^\p{Lu}/u.test(tokens[k+1]?.[0]??''));
+            if(!subject&&priorOwn&&!indefiniteSubject&&subjectClause===clause&&a.kind==='finite'&&controller===v&&v===clause.start&&clause.relation==='comma'&&!THIRD_PERSONS.includes(control.person)) {
+              for(let p=v+1;p<=clause.end;p++)if(pronounPersons[words[p]]===control.person&&words[p]!==control.person&&!beforePrep(p)&&reflexiveAgreesWithSubject(facts,subjectFacts,p)){subject={index:null,person:control.person,implicit:true};break;}
+            }
             // G15 (19.10.2026): sich is third person only, so it proves the person of a third-person finite verb of
             // its own clause even when the subject is not recognised (Südlich des Dorfes befindet sich ein
             // Militärgelände; Seither hat sich die Einwohnerzahl verdoppelt). Only one sich in the clause; mich / dich /
             // uns / euch still need the subject (they can be objects of another verb).
             if(!subject&&subjectClause===clause&&THIRD_PERSONS.includes(control.person)) {
-              const sichAt=[];for(let p=clause.start;p<=clause.end;p++)if(words[p]==='sich'&&!beforePrep(p))sichAt.push(p);
+              // (Astronaut (4), advisor 17.11: bis / seit / während opening a part with the finite verb at its end are the conjunction, not
+              // the preposition of sich — bis sich der Aufruhr legte, bis sich die obere Hälfte löste)
+              const conjunctionBefore=p=>p-1===clause.start&&['bis','seit','während'].includes(words[p-1])&&v===clause.end&&v>p+1&&!!(a.entry||(reflexiveLemmas.get(a.base)||[]).length);
+              const sichAt=[];for(let p=clause.start;p<=clause.end;p++)if(words[p]==='sich'&&(!beforePrep(p)||conjunctionBefore(p)))sichAt.push(p);
               // A plural reading of a form that equals the infinitive at the clause end is the infinitive
               // (… sich … zu entziehen, … sich … konzentrieren), not «sie» + finite verb.
               const infinitiveLike=control.person==='sie'&&controller===v&&words[v]===a.base&&(v===clause.end||words[v-1]==='zu'||helpers.some(h=>h.index>v&&(GROUP_HELPER_VERBS.includes(h.analysis.base)||modalLemmas.has(h.analysis.base))));
@@ -3431,7 +3481,8 @@
             }
             if(attempt)attempt.stage='pronoun';
             const pronouns=[];
-            for(let p=clause.start;p<=clause.end;p++)if(reflexivePronouns.has(words[p])&&!beforePrep(p)&&!attributeSich(p)) {
+            const openingConjunction=p=>p-1===clause.start&&['bis','seit','während'].includes(words[p-1])&&v===clause.end&&v>p+1&&!!(a.entry||(reflexiveLemmas.get(a.base)||[]).length);
+            for(let p=clause.start;p<=clause.end;p++)if(reflexivePronouns.has(words[p])&&(!beforePrep(p)||openingConjunction(p))&&!attributeSich(p)) {
               const per=pronounPersons[words[p]];
               if(per===subject.person||per==='third'&&THIRD_PERSONS.includes(subject.person))pronouns.push(p);
             }
@@ -3774,7 +3825,7 @@
             // finden «находить», not sich finden; the imperative reading of Finde does not hold with ich after it)
             if(reflexiveSubjectIn(words[pronoun],words.slice(clause.start,clause.end+1))==='other')continue;
             relations.push({...candidate,reflexiveUnconfirmed:false,construction:{id:'reflexive-verb',lemma:candidate.lemma,label:unresolvedLassen?'Mögliche Reflexivgruppe':'Reflexiv',...(tentative?{confidence:'tentative'}:{}),...(unresolvedLassen?{attachmentOnly:true}:{}),...(reflexiveAmbiguity?{interpretation:'reciprocal'}:{}),
-              note:reflexiveAmbiguity?{ru:'здесь: друг друга',en:'here: each other'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans:zuHeadGroup?[...spans,tokenSpan(controller)].sort((x,y)=>x.start-y.start):spans,tense,...(controller!==v&&modalLemmas.has(control.base)&&tense!=='zu-Infinitiv'?{modal:control.base}:{}),
+              note:reflexiveAmbiguity?{ru:'здесь: друг друга',en:'here: each other'}:unresolvedLassen?{ru:'Возможная возвратная группа с lassen; требуется выбор',en:'Possible reflexive lassen group; selection required'}:{ru:'Возвратная конструкция',en:'Reflexive construction'},spans:zuHeadGroup?[...spans,tokenSpan(controller)].sort((x,y)=>x.start-y.start):spans,tense,...(controller!==v&&modalLemmas.has(control.base)&&tense!=='zu-Infinitiv'?{modal:control.base}:{}),...(chain.sharedInfinitives?.length?{sharedInfinitives:chain.sharedInfinitives}:{}),
               ...(zuHeadGroup?{zuGroup:{id:zuHeadGroup.id,...(zuHeadGroup.tense?{tense:zuHeadGroup.tense}:{})}}:{}),reflexiveCase:caseName,...(dativeReading?{freeDative:true}:{}),...(objectGroup&&!dativeReading?{objectGroup:true}:{}),
               verb:tokenSpan(v),pronoun:tokenSpan(pronoun),
               ...(a.detached?{prefix:tokenSpan(componentIndices.find(i=>i!==v&&words[i]===a.prefix))}:{}),
@@ -5379,7 +5430,7 @@
             const pairedVerb = own.some(e => String(e.auxiliary || "").trim() === "haben") && own.some(e => String(e.auxiliary || "").trim() === "sein");
             return pairedVerb && (verbAnalyses.get(norm(tokens[prev][0])) || []).some(a => a.kind === "finite") && /^\p{Ll}/u.test(tokens[prev][0]) ? "possible" : null;
           })();
-          const pairs = (closes || trailing) && !nominalParticle(i,j) && !graded && !repeated && !expressionWord(j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) && !alleAfterPronoun(tokens,j) ? possible.filter(pair => pair.prefix === norm(tokens[j][0]) &&
+          const pairs = (closes || trailing) && !nominalParticle(i,j) && !graded && !repeated && !expressionWord(j) && !/^[A-ZÄÖÜ]/u.test(tokens[j][0]) && !alleAfterPronoun(tokens,j) && !weiterAfterIndefinite(tokens,j) ? possible.filter(pair => pair.prefix === norm(tokens[j][0]) &&
             // (second advisor 11.11: es gibt «имеется» is a closed construction — subject es + geben + accusative; a particle does not
             // join geben there: Es gibt keinen Weg zurück, gibt es … nur noch den Weg zurück nach Hause. es right before or after the form
             // and no other subject before it in the part — a personal pronoun or an article + noun: Er gibt es ihm zurück, Das Kind gibt
@@ -13288,6 +13339,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // To-do 19.10 (3.10, reference CONTR-01 / F12-G10): a contraction (ins, im, beim, zur …) is a preposition + article;
       // its article (das, dem, der) pairs with the noun like a plain article, in a case the preposition governs.
       const determinerAt = form => articleForm(form) || !!contractionArticle(form);
+      // (hidden sample 17.11: an article + a form of ander- with no noun after it — dem andern, den anderen, der andere: the article and
+      // the pronoun make the pair; the ending agrees — after a der-form -e / -en / -n, after an ein-form -er / -es / -e / -en / -n)
+      const anderPair = (a, o) => {
+        if (!tokens[a] || !tokens[o] || o !== a+1 || !/^\s+$/u.test(gap(a,o)) || contractionArticle(tokens[a][0]) && !articleForm(tokens[a][0])) return null;
+        const m = /^ander(e|en|n|er|es)$/u.exec(tokens[o][0]);
+        const kinds = (articleCardsByForm.get(norm(tokens[a][0])) || []).map(c => c.grammar?.article_kind);
+        if (!m || !kinds.length || commaBefore(a) && kinds.includes('definite')) return null;
+        if (!(kinds.includes('definite') ? ['e','en','n'] : ['er','es','e','en','n']).includes(m[1])) return null;
+        // (no noun of the group further on: die anderen indianischen Völker, der andern häßlichen und faulen Tochter keep their noun —
+        // up to four lowercase words before a finite verb, a preposition, a determiner or a punctuation mark)
+        for (let k = o+1; k < tokens.length && k <= o+4 && /^\s+$/u.test(gap(k-1,k)); k++) {
+          const key = norm(tokens[k][0]);
+          if (/^\p{Lu}/u.test(tokens[k][0])) return null;
+          if ((verbAnalyses.get(key) || []).some(a => a.kind === 'finite') || prepositionCardsByForm.has(key) || contractionArticle(tokens[k][0]) || determinerFeatures(tokens[k][0])) break;
+        }
+        // (an extended attribute before the noun: mit den anderen im Landesparlament vertretenen Parteien — a declined lowercase word right
+        // before a capitalised one, up to the next finite verb or punctuation mark)
+        for (let k = o+1; k+1 < tokens.length && k <= o+6 && /^\s+$/u.test(gap(k-1,k)); k++) {
+          if (!/^\s+$/u.test(gap(k,k+1)) || (verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === 'finite')) break;
+          if (/^\p{Ll}/u.test(tokens[k][0]) && /(?:e|en|em|er|es)$/u.test(tokens[k][0]) && (modifiers.get(norm(tokens[k][0])) || []).length && /^\p{Lu}/u.test(tokens[k+1][0])) return null;
+        }
+        const sp = i => ({text:tokens[i][0],start:tokens[i].index,end:tokens[i].index+tokens[i][0].length});
+        return {article:tokens[a][0],noun:tokens[o][0],clicked:a === clicked ? 'article' : 'noun',spans:[sp(a),sp(o)]};
+      };
+      const commaBefore = i => i > 0 && /[,;(]/u.test(gap(i-1,i));
+      { const pair = anderPair(clicked, clicked+1) || anderPair(clicked-1, clicked); if (pair) return pair; }
       let det = clicked;
       if (!determinerAt(word)) {
         if (!/^[A-ZÄÖÜ]/u.test(word)) return null;
@@ -13305,15 +13382,32 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // der-forms double as relative pronouns after a comma (…, die Ämter haben; …, mit der er sprach). Lost links
       // 20.10.2026 (after the prepositions transfer 35bde7f): des is never a relative pronoun (…, aufgrund des
       // Rätselcharakters), and a colon opens a new clause, not a relative one (…: Außer dem Hochwasserschutz).
-      const commaBefore = i => i > 0 && /[,;(]/u.test(gap(i-1,i));
       const previous = contracted ? prepositionCardsByForm.get(contracted[0]) || null :
         det > 0 && joinedTokens(sentence,tokens,det-1,det) ? prepositionCardsByForm.get(norm(tokens[det-1][0])) : null;
       if (contracted && !previous) return null;
-      if (!afterComma && cards.some(card => card.grammar?.article_kind === 'definite') && norm(tokens[det][0]) !== 'des' &&
-          (commaBefore(det) || previous && commaBefore(det-1))) return null;
+      const relativeSlot = !afterComma && cards.some(card => card.grammar?.article_kind === 'definite') && norm(tokens[det][0]) !== 'des' &&
+          (commaBefore(det) || previous && commaBefore(det-1));
+      // (hidden sample 17.11: die + noun as an item of an enumeration — Äpfel, Birnen, die Bananen: the part before the comma is a
+      // short noun group with no verb (at most three words, the last capitalised), and the group of die closes its part (a comma,
+      // und / oder or the sentence end follow) — no relative pronoun there: …, die Ämter haben keeps the guard)
+      const enumerationBefore = () => {
+        const comma = previous ? det-1 : det;
+        let k = comma-1;
+        if (k < 0 || !/^\p{Lu}/u.test(tokens[k][0]) || (verbAnalyses.get(norm(tokens[k][0])) || []).length) return false;
+        const from = k;
+        while (k > 0 && !/[,;:.!?()]/u.test(gap(k-1,k))) k--;
+        if (k === 0 || from-k > 2 || !/,/u.test(gap(k-1,k))) return false;
+        for (let i = k; i <= from; i++) if (/^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === 'finite')) return false;
+        return true;
+      };
+      if (relativeSlot && !enumerationBefore()) return null;
       let group;
       try { group = await nounGroupAfter(sentence,tokens,det,{determiner:false,consumer:'articleNounLink'}); } catch (_) { return null; }
       if (!group?.readings) return null;
+      if (relativeSlot) {
+        const end = wordEnd(group.head), rest = tokens[end+1] ? gap(end,end+1) : sentence.slice(tokens[end].index+tokens[end][0].length);
+        if (!(/[,;.!?]/u.test(rest) || !tokens[end+1] || ['und','oder','sowie'].includes(norm(tokens[end+1][0])) && /^\s+$/u.test(rest))) return null;
+      }
       // Reference C6 (user 20.10): after a contraction the noun must be known to a dictionary as a whole word; a compound
       // only split into parts (ins Hochsicherheitsverlies) has a guessed gender and stays unlinked.
       if (contracted && !group.readings.some(r => !r.unknown)) return null;
@@ -15075,6 +15169,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
     // the pronoun «все» — not a separable particle: was macht ihr denn alle hier?, ich mache sie alle zu reichen Leuten (not allemachen).
     // One function for the tap on alle (cheapSignCards) and the separable scan.
     const ALLE_PARTICLES = /^(?:denn|doch|ja|mal|wohl|eben|halt|nur|schon|auch|eigentlich|nun|jetzt)$/u;
+    // (Astronaut (2), advisor 17.11: weiter right after nichts / etwas is the adverb «больше, дальше» — sagte aber nichts weiter, das sei
+    // nichts weiter —, not the particle of weitersagen; not after niemand(em): Sag es niemandem weiter is weitersagen)
+    function weiterAfterIndefinite(tokens, at) {
+      if (norm(tokens[at]?.[0] ?? "") !== "weiter" || at < 1 || !/^(?:nichts|etwas|was)$/u.test(norm(tokens[at-1][0]))) return false;
+      const text = String(tokens[at].input ?? "");
+      return /^\s+$/u.test(text.slice(tokens[at-1].index + tokens[at-1][0].length, tokens[at].index));
+    }
     function alleAfterPronoun(tokens, at) {
       if (norm(tokens[at]?.[0] ?? "") !== "alle") return false;
       const text = String(tokens[at].input ?? "");
@@ -18582,6 +18683,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         }
         return true;
       };
+      // Astronaut (3) (advisor 17.11): the same noun on both sides of um is «одно за другим» — Studie um Studie, Tag um Tag, Schritt um
+      // Schritt: um shows «здесь: за». Only the same capitalised word, spaces only between the three words.
+      if (keys[index] === "um" && index > 0 && index + 1 < tokens.length && tokens[index-1][0] === tokens[index+1][0] && upper(tokens[index-1][0]) &&
+          /^\s+$/u.test(gap(index)) && /^\s+$/u.test(gap(index+1))) {
+        const record = (lemmas.get("um") || []).find(e => e.type === "preposition");
+        if (record) return {entry:record, id:"noun-um-noun", spans:[span(index-1), span(index), span(index+1)], translation:{ru:"здесь: за (Tag um Tag — день за днём)", en:"here: after, for (Tag um Tag — day after day)"}};
+      }
       // Grimm list item 3 (advisor 11.11, claude/GRIMM_ERRORS_OLD_VS_REAL_2026-11-11_RU.md): immer right before a comparative is «всё
       // (больше)» — immer tiefer, immer mehr, immer größere; viel right before a comparative or zu + an adjective is «намного» — viel
       // weitläufiger, viel zu schwach (not viel zu tun: an infinitive after zu). A comparative also with its ending (größere, größerer).
@@ -19139,6 +19247,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let imperative = false;
       if (v < 0) for (let k = a; k < Math.min(b, a + 2); k++) if (imperativeAt(k)) { v = k; imperative = true; break; }
       if (v < 0 || at !== v && at !== b) return result;
+      // (Astronaut (2), advisor 17.11: weiter right after nichts / etwas — erzählte nichts weiter — is the adverb, no particle)
+      if (norm(tokens[b][0]) === "weiter" && b > 0 && /^(?:nichts|etwas|was)$/u.test(norm(tokens[b-1][0])) && /^\s+$/u.test(gap(b - 1, b))) return result;
       // (review 04.11: a declined participle / adjective before a noun is no finite verb — traditionell überlieferte Verfahren,
       // einer weichen, feuchten Wiese … heraus)
       if (v + 1 < tokens.length && /^\p{Lu}/u.test(tokens[v + 1][0])) {
