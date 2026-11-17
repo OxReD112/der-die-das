@@ -205,6 +205,8 @@
   // is always "own". One function for the werden group (5а.1: Die Stadt wurde mir vertraut — no own subject, mir is no reflexive) and the
   // reflexive group of a verb (an "other" subject rejects it; the imperative and a zu-infinitive part have none of their own).
   // The person of each reflexive pronoun — one table for reflexiveSubjectIn and reflexiveAgreesWithSubject (advisor 12.11).
+  // (Astronaut (6)) a separable particle closing a part — the end of a part after an inserted clause (separableScope)
+  const SEPARABLE_PARTICLE_WORDS = /^(?:ab|an|auf|aus|bei|ein|fest|fort|her|hin|los|mit|nach|vor|weg|zu|zurück|zusammen|hinaus|heraus|herein|hinein|herunter|hinunter|herauf|hinauf|herüber|hinüber|vorbei|weiter|wieder|nieder|empor|davon|dar|entgegen|um|durch|über|unter|heim|voran|voraus|bereit|kennen|statt|teil|frei|offen|fertig|klar|hoch|nahe)$/u;
   const REFLEXIVE_PERSONS = {mich:"ich",mir:"ich",dich:"du",dir:"du",sich:"third",uns:"wir",euch:"ihr"};
   function reflexiveSubjectIn(pronoun, words) {
     const own = REFLEXIVE_PERSONS[pronoun];
@@ -5074,6 +5076,10 @@ function apostropheText(text) {
         // S1: sein before a noun or an adjective is the possessive (breitete sein Tuch aus);
         // only in the first pass — across a comma it may be another clause's verb.
         if (!secondary && !crossedComma && possessiveSein(i)) return false;
+        // (Astronaut (6), advisor 17.11: so is meinen / deinen / ihren … right before a noun or an adjective — taste meinen Kopf ab: not meinen
+        // «полагать»; as possessiveSein)
+        if (!crossedComma && head !== undefined && /^(?:mein|dein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[i][0])) && /^\p{Ll}/u.test(tokens[i][0]) &&
+          tokens[i+1] && /^\s+$/u.test(gap(i,i+1)) && (/^\p{Lu}/u.test(tokens[i+1][0]) || (forms.get(norm(tokens[i+1][0])) || []).some(e => e.type === "Adjektiv"))) return false;
         // L28 (links to-do, 20.10.2026): a declined form between a determiner and a capitalised noun is attributive
         // (wischte den verschütteten Trank … weg, die geöffnete Tür), not a second predicate.
         if (!crossedComma && i > 0 && tokens[i+1] && LOWERCASE_DECLINED_WORD.test(tokens[i][0]) &&
@@ -5343,6 +5349,11 @@ function apostropheText(text) {
         // form; sah sie lange an — not anlangen; Ich mal ein Bild, Die Nacht naht — no other finite form, still a verb)
         { let end = i; while (end+1 < tokens.length && !hard(end,end+1) && !soft(end,end+1)) end++;
           if (secondFiniteHomograph(i, start, end)) continue; }
+        // (Astronaut (6), advisor 17.11: a possessive before a noun or an adjective owns no particle — raffe meine … und meine innere Stärke
+        // zusammen: not zusammen- + meinen; meinen Sie keeps the verb)
+        if (/^(?:mein|dein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[i][0])) && /^\p{Ll}/u.test(tokens[i][0]) && tokens[i+1] && /^\s+$/u.test(gap(i,i+1)) &&
+          !/^(?:Sie|Ihnen|Ihr|Ihre)$/u.test(tokens[i+1][0]) && (/^\p{Lu}/u.test(tokens[i+1][0]) || (forms.get(norm(tokens[i+1][0])) || []).some(e => e.type === "Adjektiv") ||
+            LOWERCASE_DECLINED_WORD.test(tokens[i+1][0]) && /^\p{Lu}/u.test(tokens[i+2]?.[0] ?? "") && /^\s+$/u.test(gap(i+1,i+2)))) continue;
         // Internal capitals belong to a nominal phrase even when the noun is
         // only in fallback (Sparten ... aus). A quoted noun after an article
         // remains nominal although the quote starts a new local segment.
@@ -5415,6 +5426,10 @@ function apostropheText(text) {
                 (attributeFrameDeterminer(tokens, k, j, sentence) >= 0 || LOWERCASE_DECLINED_WORD.test(tokens[k][0]) && /^\p{Lu}/u.test(tokens[k-1][0]) && !DETERMINER_WORD.test(norm(tokens[k][0])))) return false;
               return true; })();
           const trailing = trailingOther || extraposed || nachfeldParticle;
+          // (Astronaut (6), advisor 17.11: a direction particle of the G47 class before a direction group — steige die Leiter hinunter ins
+          // Labor, lief hinauf auf den Berg — keeps the particle verb a dictionary knows (hinuntersteigen, hinauflaufen))
+          const directionNachfeld = (j, pair) => trailingOther && !crossed && g47Particle(pair.prefix) && /^\s+$/u.test(gap(j,j+1)) &&
+            /^(?:in|ins|im|auf|aufs|an|ans|zu|zum|zur|nach|über|unter|durch)$/u.test(norm(tokens[j+1]?.[0] ?? ""));
           // "kein Weg (daran) vorbei" belongs to führen, not vorbeifahren.
           // S2: a graded adjective-like particle is the adverb (warf ihn so hoch, schnürte so fest,
           // dachte nicht weiter — but steht nicht fest stays feststehen); X und X is an idiom (nach und nach), not a particle.
@@ -5484,7 +5499,7 @@ function apostropheText(text) {
             // and no other subject before it in the part — a personal pronoun or an article + noun: Er gibt es ihm zurück, Das Kind gibt
             // es nicht her keep zurückgeben / hergeben)
             !(norm(pair.entry?.word ?? "").replace(/^sich\s+/u,"") === pair.prefix + "geben" && esGibtSubject(i) && esGibtObjectBefore(j)) &&
-            !(pair.entry.derivedSeparable && (crossed || trailing)) && !(extraposed && !zuComplement(pair)) && !(pair.sharedForm && (crossed || AND_OR_NEXT_ADVERB(j) || sharedFrameEnd(i,j))) && !(vorSichHin && !literalPlacing(pair)) &&
+            !(pair.entry.derivedSeparable && (crossed || trailing && !directionNachfeld(j, pair))) && !(extraposed && !zuComplement(pair)) && !(pair.sharedForm && (crossed || AND_OR_NEXT_ADVERB(j) || sharedFrameEnd(i,j))) && !(vorSichHin && !literalPlacing(pair)) &&
             !(objectInside === "proven" && intransitiveSein(pair)) &&
             // (review 27.10: a derived imperative that is also an own noun right before the particle — Blick zurück., Fall ab. — is a
             // heading, unless an exclamation mark, a comma or a closing quote follows: Spiel mit!, Pass auf, Junge., »Pass auf«, sagte er)
@@ -6069,7 +6084,7 @@ function apostropheText(text) {
       // umziehen" vor, "Baulöwe, der sozial handelte") keeps its guard.
       const SENTENCE_INSIDE = /[;:!?]|\.\s+\p{Lu}/u;
       const PARENTHESES = /\([^()]*\)/gu, QUOTATIONS = /"[^"\n]{1,80}"|„[^„“”\n]{1,80}[“”]|»[^»«\n]{1,80}«|«[^«»\n]{1,80}»/gu,
-        INSERTIONS = /,\s*(?:wie|während|obwohl)\b[^,;:.!?]*,/gu, CONTINUES = /^[^\p{L}.!?;:,]*\p{L}/u;
+        INSERTIONS = /,\s*(?:wie|während|obwohl|der|die|das|dem|den|deren|dessen|denen|welche[rmns]?|als|wenn|weil|dass|daß|ob|nachdem|bevor|sobald|falls|obgleich|wo)\b[^,;:.!?]*,/gu, CONTINUES = /^[^\p{L}.!?;:,]*\p{L}/u;
       // (speed chat 05.11) The words of every bracket and quotation are looked up together before the checks below, which still
       // read them one by one in their own order and stop where they stopped — the same answer; only the network waits overlap
       // (a dialogue of Grimm with three quotations waited for ~26 words in a row).
@@ -6092,10 +6107,25 @@ function apostropheText(text) {
       }
       // A closed subordinate insertion owns its predicates and particles.
       // Unmarked comma clauses and unfinished insertions retain the old guards.
+      // (Astronaut (6), advisor 17.11: also a relative clause and a clause of als / wenn / weil / dass … — Er gab das Buch, das er
+      // gekauft hatte, zurück; Sie gehen als der erste Mensch, der … Kontakt hatte, in die Geschichte ein: closed by its finite verb)
       for (const match of observedMatches(original.matchAll(INSERTIONS),'separableScope')) {
         const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
         const tail=inner.at(-1);
         const finite=tail&&(await tokenAnalyses(tail[0], undefined, 'separableScope')).some(a=>a.kind==='finite');
+        // (the new openers: the part goes on after the insertion with no finite verb of its own — else it is another predicate:
+        // war voll Freude, als sie … erblickte, hob es auf; fingen an zu laufen, wenn es ihnen einfiel, hörten auf)
+        if (!/^,\s*(?:wie|während|obwohl)\b/u.test(match[0])) {
+          const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
+          const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,'separableScope');
+          if (!restTokens.length || !/^\p{Ll}/u.test(tail?.[0] ?? '')) continue;
+          // (the part after it closes on a particle — not a clause of its own after the particle: wenden ein, dass …, die … hinauswiesen)
+          if (!SEPARABLE_PARTICLE_WORDS.test(norm(restTokens.at(-1)[0]))) continue;
+          let own=false;
+          for (const t of restTokens.slice(0,-1)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>a.kind==='finite') &&
+            !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
+          if (own) continue;
+        }
         if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
       }
       // (advisor 07.11) the short insertion «, wie (bereits …) participle,» owns no particle of the part — the same wieParticipleWords
@@ -6595,6 +6625,17 @@ function apostropheText(text) {
         if (consumer === 'verbPrepositionLink') return false;
         if (w === "sondern" && p === k-1 && commaJoin.has(k-1) && norm(tokens[k+1]?.[0] ?? "") === "auch") return true;
         if (!joinWords.has(w) || k < 1 || k+1 >= tokens.length || !(p !== k-1 || connected(k-1,k)) || !connected(k,k+1)) return false;
+        // (Astronaut (6), advisor 17.11: als after a comparative + a pronoun / short noun group, then the participle / infinitive closing the
+        // part — haben … klügere Leute als mich engagiert, hat mehr Geld als ich verdient: the comparison is no new part)
+        if (w === "als" && p === k-1 && [k-1,k-2,k-3].some(c => { const x = norm(tokens[c]?.[0] ?? ""); return c >= 0 && /^\p{Ll}/u.test(tokens[c][0]) &&
+            (/^(?:mehr|weniger|eher|lieber|besser)$/u.test(x) || /(?:er|ere|eren|erer|eres|erem)$/u.test(x) && x.length >= 5 && !NOT_COMPARATIVE_ER.test(x) && !DETERMINER_WORD.test(x) && !prepositions.has(x) &&
+              !COMPARATIVE_LOOKALIKE.test(x)); })) {
+          let e = k+1; while (e+1 < tokens.length && connected(e,e+1) && e-k <= 4) e++;
+          const last = norm(tokens[e][0]), rows = verbAnalyses.get(last) || [];
+          const between = tokens.slice(k+1, e);
+          if (e > k+1 && e-k <= 4 && /^\p{Ll}/u.test(tokens[e][0]) && rows.some(r => ["participle","infinitive"].includes(r.kind)) &&
+              between.every(t => !(verbAnalyses.get(norm(t[0])) || []).some(r => r.kind === "finite" && /^\p{Ll}/u.test(t[0]) && !/^(?:ich|du|er|sie|es|wir|ihr|mich|dich|ihn|uns|euch|ihm|ihnen)$/u.test(norm(t[0]))) && !joinWords.has(norm(t[0])))) return true;
+        }
         // (advisor 07.11, #36: the second half of a pair — zwischen 1978 und 1985, sowohl … als auch … — opens no new part)
         // (run 07.11: not when a finite-only verb follows in the second half — … -- auf den Dünen zwischen Strand und Lagune wuchsen …:
         // that is a part of its own)
@@ -10216,7 +10257,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (L43, links to-do, advisor 17.11: the zu-infinitive right before a closing haben is the object of haben — will nichts zu essen
         // haben, wollte … nichts zu tun haben, will … zu schaffen haben: it does not compete with the modal's infinitive haben)
         const zuBeforeHaben = i => id === "modal-group" && i === tail-1 && i-1 > head.i && norm(tokens[i-1][0]) === "zu" && norm(tokens[tail][0]) === "haben";
-        if (indices.some(i => !linked.includes(i) && !(nachfeldFrom > 0 && i >= nachfeldFrom) && !zuBeforeHaben(i) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i))) continue;
+        // (Astronaut (6), advisor 17.11: a zu-infinitive right before the closing participle is its object — hat zu helfen versucht,
+        // haben … zu beweisen versucht: it does not compete with the participle)
+        const zuBeforeParticiple = i => id === "perfect-group" && i === tail-1 && i-1 > head.i && norm(tokens[i-1][0]) === "zu" && /^\p{Ll}/u.test(tokens[i][0]);
+        if (indices.some(i => !linked.includes(i) && !(nachfeldFrom > 0 && i >= nachfeldFrom) && !zuBeforeHaben(i) && !zuBeforeParticiple(i) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i))) continue;
         // The group names the plain verb; a confirmed reflexive reading adds sich
         // in the card (reflexive-verb construction), not here.
         // Without a confirmed reflexive link the group names the bare verb, also
@@ -10299,7 +10343,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (tail < start || tail === start && !afterAnd || tail === head.i || ![head.i,tail].includes(selected)) continue;
         const form = tokens[tail][0];
         if (!/^\p{Ll}/u.test(form) || matches(tail).length || lexicalSeparated(norm(form))) continue;
-        if (indices.some(i => i !== head.i && i !== tail && clause.competing(i) && !clause.nounToken(i))) continue;
+        // (Astronaut (6), advisor 17.11: the participle with its own auxiliary after und / oder — fertig ist und alle Steine sortiert hat:
+        // a verb before und does not compete; the participle is the Perfekt of its own hat, no state with ist across und)
+        const join = (() => { for (let k = Math.min(head.i,tail)-1; k > start; k--) if (["und","oder"].includes(norm(tokens[k][0]))) return k; return -1; })();
+        if (indices.some(i => i !== head.i && i !== tail && !(join > 0 && i < join && head.i > join && tail > join && head.i > tail) && clause.competing(i) && !clause.nounToken(i) && !clause.possessiveBeforeNoun(i))) continue;
         let facts;
         try { facts = await lexicalLookup(form,'externalPerfectGroup'); } catch (_) { return null; }
         const lemmas = await externalParticipleLemmas(form,facts,'externalParticipleLemmas');
@@ -17173,7 +17220,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const sentence = String(context?.sentence || ""), at = sources.get("Imperativ")?.start ?? context?.tokenOffset;
           if (!Number.isInteger(at)) return null;
           const before = sentence.slice(0, at), word = (/^[\p{L}\p{M}]+/u.exec(sentence.slice(at)) || [""])[0];
-          const strong = clauseInitial(sentence, at) || /[,;:]\s*[»«„“"]\s*$/u.test(before);
+          // (Astronaut (5), advisor 17.11: an ellipsis after the start of the speech or an interjection opens the part too — »Äh … öffne den
+          // Zugang«; not after a subject: Ich … weiß nicht; not when the slot below is sure: »Ja … schaut …« stays «Imperativ»)
+          const strong = clauseInitial(sentence, at) || /[,;:]\s*[»«„“"]\s*$/u.test(before) ||
+            /(?:^|[»„“"]\s*|(?:^|[^\p{L}\p{M}])(?:äh|ähm|hm|tja)\s*)(?:…|\.\.\.)\s*$/iu.test(before);
           // (after und / oder: no subject pronoun earlier in its part — ich fahr in die Stadt und hol … ab is the ich form)
           // (after und / oder the subject may stand further back: Ich bin …, mache keinen Mucks und tu so — back to . ! ? : ; or a quote)
           const cut = marks => before.slice(Math.max(...marks.map(m => before.lastIndexOf(m))) + 1);
@@ -17251,6 +17301,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const hard = [";",":",".","!","?","»","«","„","“","\"","–","—","(",")"];
           const cutAt = marks => Math.max(...marks.map(m => before.lastIndexOf(m))) + 1;
           const wordsOf = text => [...text.matchAll(/[\p{L}\p{M}\d]+|['’]s(?![\p{L}\p{M}])/gu)].map(m => m[0]);
+          // (Astronaut (5), advisor 17.11: an ellipsis after the start of the speech, an interjection or a vocative opens the part — »Äh …
+          // öffne den Zugang«, Komm schon, Gehirn … nun mach schon; not after a subject: »Er … geht nach Hause«)
+          { const e = Math.max(before.lastIndexOf("…"), before.lastIndexOf("...")), pre = e >= 0 ? before.slice(0, e) : "";
+            if (e >= 0 && e + 1 > cutAt([",",...hard]) && /(?:^|[»„“"]|(?:^|[^\p{L}\p{M}])(?:äh|ähm|hm|tja)|,\s*\p{Lu}\p{Ll}+)\s*$/iu.test(pre))
+              before = " ".repeat(e + 1) + before.slice(e + 1).replace(/^\.\./u, "  "); }
           const wordsBefore = wordsOf(before.slice(cutAt([",",...hard])));
           if (wordsBefore.some(w => /^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(w) || ["Ich","Du","Er","Es","Wir","Ihr","Man"].includes(w))) return null;
           const stop = after.search(/[,;:.!?»«„“"–—()]|\s(?:und|oder)\s/u);
@@ -19338,6 +19393,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const JOIN = /^(?:und|oder|aber|sondern|denn|doch|als|wenn|weil|dass|daß|ob|bis|während|nachdem|bevor|damit|wie|wo)$/u;
       let b = at; while (b + 1 < tokens.length && !BOUND.test(gap(b, b + 1)) && !JOIN.test(norm(tokens[b + 1][0]))) b++;
       let a = at; while (a > 0 && !BOUND.test(gap(a - 1, a)) && !JOIN.test(norm(tokens[a][0]))) a--;
+      // (Astronaut (6), advisor 17.11: the direction particle may stand before a direction group that closes the part — ging hinunter in den
+      // Keller, hinaus in den Garten: in / auf / an + Akkusativ, ins / aufs / ans, zu / zum / zur, nach; only that group after it)
+      { for (let k = b - 2; k >= a && k >= b - 6; k--) {
+          const q = norm(tokens[k][0]), pr = norm(tokens[k+1][0]);
+          if (!DIRECTIONAL.some(([p]) => p === q) || !/^\s+$/u.test(gap(k, k+1))) continue;
+          // (a noun of looking / going right before it takes the particle — mied den Blick hinüber zu Malfoy, den Weg zurück zum Schloss)
+          if (/^(?:blick|blicke|weg|wege|rückweg|aussicht|sicht)$/u.test(norm(tokens[k-1]?.[0] ?? ""))) continue;
+          const acc = /^(?:in|auf|an)$/u.test(pr) && /^(?:den|die|das|einen|eine|ein|meinen|meine|mein|seinen|seine|sein|ihren|ihre|ihr|unseren|unsere|unser|diesen|diese|dieses)$/u.test(norm(tokens[k+2]?.[0] ?? ""));
+          if (!(acc || /^(?:ins|aufs|ans|zu|zum|zur|nach)$/u.test(pr))) continue;
+          const rest = tokens.slice(k+2, b+1);
+          if (!/^\p{Lu}/u.test(tokens[b][0]) || rest.some(t => /^\p{Ll}/u.test(t[0]) && !LOWERCASE_DECLINED_WORD.test(t[0]) && !DETERMINER_WORD.test(norm(t[0])))) continue;
+          if (at === b || at > k && at <= b) break;
+          b = k; break; } }
       const P = norm(tokens[b][0]);
       if (SPLIT_SKIP.has(P) || JOINED_ONLY_PARTICLES.has(P) || P === "daher" || P === "hierher" || !/^\p{Ll}/u.test(tokens[b][0])) return result;
       const row = particleRow(DIRECTIONAL.find(([p]) => p === P) || SPLIT_EXTRA.find(([p]) => p === P));
@@ -19362,8 +19430,11 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         analysesOf.set(k, rows);
       }
       // (an external finite reading is only a fallback: lange, sieben, runde, schon are also external verb forms)
-      const finite = k => (verbAnalyses.get(norm(tokens[k][0])) || []).some(x => x.kind === "finite");
-      const finiteAny = k => (analysesOf.get(k) || []).some(x => x.kind === "finite");
+      // (Astronaut (6), advisor 17.11: a possessive before a noun / declined word is no finite verb — und meine innere Stärke zusammen)
+      const possessiveAt = k => /^(?:mein|dein|ihr|unser|euer|eur)(?:e|en|em|er|es)?$/u.test(norm(tokens[k][0])) && tokens[k+1] && /^\s+$/u.test(gap(k,k+1)) &&
+        !/^(?:Sie|Ihnen|Ihr|Ihre)$/u.test(tokens[k+1][0]) && (/^\p{Lu}/u.test(tokens[k+1][0]) || LOWERCASE_DECLINED_WORD.test(tokens[k+1][0]));
+      const finite = k => !possessiveAt(k) && (verbAnalyses.get(norm(tokens[k][0])) || []).some(x => x.kind === "finite");
+      const finiteAny = k => !possessiveAt(k) && (analysesOf.get(k) || []).some(x => x.kind === "finite");
       let v = -1;
       // only a lowercase verb: a capitalized word is a noun or an adjective (die Weile, das Seufzen, Vergnügt summend …)
       for (let k = a; k < b; k++) if (finite(k) && /^\p{Ll}/u.test(tokens[k][0])) { v = k; break; }
@@ -19378,7 +19449,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (!rows.length) try { rows = (await tokenAnalyses(tokens[k][0].toLowerCase(), undefined, "separatedDirectional")).filter(x => x.kind === "imperative"); } catch (_) {}
         imperativeRows.set(k, rows);
       }
-      const imperativeAt = k => (imperativeRows.get(k) || []).length > 0 &&
+      const imperativeAt = k => !possessiveAt(k) && (imperativeRows.get(k) || []).length > 0 &&
         (k === a || k === a + 1 && IMPERATIVE_OPENERS.test(norm(tokens[a][0]))) &&
         (/^\p{Ll}/u.test(tokens[k][0]) || k === a && (k === 0 || /[.!?:;»«„“"–—]/u.test(gap(k - 1, k)))) &&
         !/^(?:ich|du|er|sie|es|wir|ihr|man)$/u.test(norm(tokens[k + 1]?.[0] ?? ""));

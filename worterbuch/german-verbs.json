@@ -129450,5 +129450,153 @@
         "sie": "erhellten"
       }
     }
+  },
+  {
+    "id": "verb-2802",
+    "infinitive": "zusammenzucken",
+    "translation_ru": "вздрогнуть, вздрагивать (от испуга, боли)",
+    "translation_en": "to flinch, to wince, to start",
+    "auxiliary": "sein",
+    "usage_note_ru": "Отделяемый, слабый: zuckt zusammen, zuckte zusammen, ist zusammengezuckt. vor Schreck zusammenzucken — вздрогнуть от испуга; bei jedem Geräusch zusammenzucken — вздрагивать от каждого звука. Ср. zucken — дёргаться.",
+    "usage_note_en": "Separable, weak: zuckt zusammen, zuckte zusammen, ist zusammengezuckt. vor Schreck zusammenzucken — to start with fright; bei jedem Geräusch zusammenzucken — to flinch at every sound. Cf. zucken — to twitch.",
+    "example_de": "Als die Tür plötzlich zuschlug, zuckte sie zusammen.",
+    "example_cloze": "Als die Tür plötzlich zuschlug, {{c1::zuckte}} sie {{c1::zusammen}}.",
+    "example_ru": "Когда дверь вдруг захлопнулась, она вздрогнула.",
+    "example_en": "When the door suddenly slammed shut, she flinched.",
+    "perfect_form": "sein zusammengezuckt",
+    "forms": {
+      "Präsens": {
+        "ich": "zucke zusammen",
+        "du": "zuckst zusammen",
+        "er/sie/es": "zuckt zusammen",
+        "wir": "zucken zusammen",
+        "ihr": "zuckt zusammen",
+        "sie": "zucken zusammen"
+      },
+      "Präteritum": {
+        "ich": "zuckte zusammen",
+        "du": "zucktest zusammen",
+        "er/sie/es": "zuckte zusammen",
+        "wir": "zuckten zusammen",
+        "ihr": "zucktet zusammen",
+        "sie": "zuckten zusammen"
+      },
+      "Konjunktiv II": {
+        "ich": "zuckte zusammen",
+        "du": "zucktest zusammen",
+        "er/sie/es": "zuckte zusammen",
+        "wir": "zuckten zusammen",
+        "ihr": "zucktet zusammen",
+        "sie": "zuckten zusammen"
+      }
+    },
+    "separable_prefix": "zusammen",
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "zuck zusammen",
+        "ihr": "zuckt zusammen",
+        "Sie": "zucken Sie zusammen"
+      }
+    },
+    "source_url": "https://www.duden.de/rechtschreibung/zusammenzucken"
+  },
+  {
+    "id": "verb-2803",
+    "infinitive": "lockerlassen",
+    "translation_ru": "ослаблять (хватку, усилия); (разг.) уступать, отступаться",
+    "translation_en": "to slacken, to ease off; (colloquial) to give in, to let up",
+    "auxiliary": "haben",
+    "usage_note_ru": "Обычно с отрицанием: nicht lockerlassen — не отступаться, не сдаваться, стоять на своём. Формы как у lassen: lässt locker, ließ locker, hat lockergelassen. О верёвке, поводьях — раздельно: das Seil locker lassen — не натягивать верёвку.",
+    "usage_note_en": "Usually negated: nicht lockerlassen — not to give up, to keep at it. Forms as for lassen: lässt locker, ließ locker, hat lockergelassen. Of a rope, reins — written apart: das Seil locker lassen — to keep the rope slack.",
+    "example_de": "Sie ließ nicht locker, bis er ihr die Wahrheit erzählt hatte.",
+    "example_cloze": "Sie {{c1::ließ}} nicht {{c1::locker}}, bis er ihr die Wahrheit erzählt hatte.",
+    "example_ru": "Она не отступалась, пока он не рассказал ей правду.",
+    "example_en": "She didn't let up until he had told her the truth.",
+    "perfect_form": "haben lockergelassen",
+    "forms": {
+      "Präsens": {
+        "ich": "lasse locker",
+        "du": "lässt locker",
+        "er/sie/es": "lässt locker",
+        "wir": "lassen locker",
+        "ihr": "lasst locker",
+        "sie": "lassen locker"
+      },
+      "Präteritum": {
+        "ich": "ließ locker",
+        "du": "ließest locker",
+        "er/sie/es": "ließ locker",
+        "wir": "ließen locker",
+        "ihr": "ließt locker",
+        "sie": "ließen locker"
+      },
+      "Konjunktiv II": {
+        "ich": "ließe locker",
+        "du": "ließest locker",
+        "er/sie/es": "ließe locker",
+        "wir": "ließen locker",
+        "ihr": "ließet locker",
+        "sie": "ließen locker"
+      }
+    },
+    "separable_prefix": "locker",
+    "lookup_forms": {
+      "Imperativ": {
+        "du": "lass locker",
+        "ihr": "lasst locker",
+        "Sie": "lassen Sie locker"
+      }
+    },
+    "source_url": "https://www.duden.de/rechtschreibung/lockerlassen"
+  },
+  {
+    "id": "verb-2804",
+    "infinitive": "sitzenlassen",
+    "translation_ru": "оставить (сидеть); (разг.) бросить (кого-либо), оставить в беде",
+    "translation_en": "to leave (sitting); (colloquial) to walk out on, to leave in the lurch",
+    "auxiliary": "haben",
+    "usage_note_ru": "Чаще раздельно: sitzen lassen (слитно — только в переносном значении). Perfekt: hat sitzen lassen (реже sitzen gelassen). jemanden im Café sitzen lassen — не прийти на встречу, заставить напрасно ждать. etwas nicht auf sich sitzen lassen — не оставить (обвинение, обиду) без ответа. (разг., школ.) einen Schüler sitzen lassen — оставить ученика на второй год.",
+    "usage_note_en": "More often two words: sitzen lassen (one word only in the figurative sense). Perfect: hat sitzen lassen (less often sitzen gelassen). jemanden im Café sitzen lassen — to stand someone up. etwas nicht auf sich sitzen lassen — not to take (an accusation, an insult) lying down. (colloquial, school) einen Schüler sitzen lassen — to make a pupil repeat a year.",
+    "example_de": "Kurz vor der Hochzeit hat ihr Verlobter sie sitzen lassen.",
+    "example_cloze": "Kurz vor der Hochzeit hat ihr Verlobter sie {{c1::sitzen}} {{c1::lassen}}.",
+    "example_ru": "Незадолго до свадьбы жених её бросил.",
+    "example_en": "Shortly before the wedding her fiancé jilted her.",
+    "perfect_form": "haben sitzen lassen",
+    "forms": {
+      "Präsens": {
+        "ich": "lasse sitzen",
+        "du": "lässt sitzen",
+        "er/sie/es": "lässt sitzen",
+        "wir": "lassen sitzen",
+        "ihr": "lasst sitzen",
+        "sie": "lassen sitzen"
+      },
+      "Präteritum": {
+        "ich": "ließ sitzen",
+        "du": "ließest sitzen",
+        "er/sie/es": "ließ sitzen",
+        "wir": "ließen sitzen",
+        "ihr": "ließt sitzen",
+        "sie": "ließen sitzen"
+      },
+      "Konjunktiv II": {
+        "ich": "ließe sitzen",
+        "du": "ließest sitzen",
+        "er/sie/es": "ließe sitzen",
+        "wir": "ließen sitzen",
+        "ihr": "ließet sitzen",
+        "sie": "ließen sitzen"
+      },
+      "Imperativ": {
+        "du": "Lass sitzen!",
+        "ihr": "Lasst sitzen!",
+        "Sie": "Lassen Sie sitzen!"
+      }
+    },
+    "separable_prefix": "sitzen",
+    "search_forms": [
+      "sitzen lassen"
+    ],
+    "source_url": "https://www.duden.de/rechtschreibung/sitzen_lassen"
   }
 ]
