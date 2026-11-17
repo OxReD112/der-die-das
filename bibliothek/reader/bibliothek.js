@@ -1250,17 +1250,29 @@
         // Grimm rest (3) (advisor 14.11): a pronoun contracted with es (mir’s, dir’s, sich’s) — the meanings of the pronoun form itself
         // (mir «мне / себе», as on mir alone; before, the summary of the whole pronoun «я / себя / себе») and « + это». Not ihr’s (вы / ей — as before).
         const esStem = candidate?.contraction?.kind === "es" && /^(?:mir|dir|mich|dich|sich|uns|euch)$/iu.test(candidate.contraction.parts?.[0] || "") && candidate.contraction.parts[0] || "";
-        const ESTAIL = {ru:" + это", en:" + it"};
+        // (Ч4) the summary in the popup's language: a pack language reads its texts (pack card texts, reader.json) — a value with its
+        // language, so the line is marked with the language it is in; ru / en as before
+        const shownLanguage = popupLanguage(), pick = value => value?.[shownLanguage] ? [value[shownLanguage], shownLanguage] : [value?.[locale()] || "", locale()];
         // the address card's own translation without its note: «вы (к нескольким людям на «ты»)» → «вы» (the form ihr is «вы / ей» across cards)
         // Grimm rest (4) (advisor 14.11): a pronoun line the resolver set for this place («здесь: (тот,) кто» — the free relative wer)
         // is that card alone with its line and label.
-        const pronounLine = resolverChosePronoun && resolution.selected === candidate && candidate?.construction?.id === "modal-particle" && candidate.translation?.[locale()] ? candidate : null;
-        const values = pronounLine ? pronounLine.translation[locale()] : ihrAddress ? String(candidate.item?.[`translation_${locale()}`] || "").replace(/\s*\(.*$/u, "") : roleChosen ? candidate.formTranslation?.[locale()] || reference.brief([candidate],word,locale()).replace(/^[^·]*·\s*/u, "") :
-          reference.brief(possessiveRow ? shown : pronounCandidates,esStem || word,locale()).replace(/^[^·]*·\s*/u, "") + (esStem ? ESTAIL[locale()] : "");
+        const pronounLine = resolverChosePronoun && resolution.selected === candidate && candidate?.construction?.id === "modal-particle" && pick(candidate.translation)[0] ? candidate : null;
+        const packOwn = shownLanguage !== locale() && candidate?.packItem?.[shownLanguage]?.[`translation_${shownLanguage}`];
+        const ownText = packOwn ? [packOwn, shownLanguage] : [candidate?.item?.[`translation_${locale()}`], locale()];
+        // (the summary of meanings — reference.summary: in a pack language all its texts or the English line, « + это» included)
+        const roleText = roleChosen && pick(candidate.formTranslation);
+        const summary = () => { const line = reference.summary(roleChosen ? [candidate] : possessiveRow ? shown : pronounCandidates, roleChosen ? word : esStem || word, shownLanguage, !roleChosen && !!esStem); return [line.text, line.language]; };
+        const [values, valuesLanguage] = pronounLine ? pick(pronounLine.translation) : ihrAddress ? [String(ownText[0] || "").replace(/\s*\(.*$/u, ""), ownText[1]] :
+          roleText?.[0] ? roleText : summary();
+        // (the line and its note in one language — review C Ч4: the note follows the line; «no translation» — the language it came in)
+        const noText = values ? "" : display.text(display.NO_TRANSLATION, shownLanguage);
+        const lineLanguage = values ? valuesLanguage : noText && noText !== display.NO_TRANSLATION[locale()] ? shownLanguage : locale();
+        // (advisor 17.11) an English line in a pack language — with the pack's mark «English: », as a card
+        const shownText = values && valuesLanguage === "en" && shownLanguage !== locale() ? `${display.englishMark?.(shownLanguage) || ""}${values}` : values;
         model = {heading:candidate?.contraction ? display.contractionHeading(candidate.contraction) : word, grammar:[pronounLine?.posLabel || (pronounLink ? "Pronomen" : types.length === 1 ? types[0] : "Pronomen"), use].filter(Boolean).join(" · "),
-          text:values || display.NO_TRANSLATION[locale()], textLanguage:locale(), spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
+          text:shownText || noText, textLanguage:lineLanguage, spans:pronounLink ? [pronounLink.verb, pronounLink.pronoun, ...(pronounLink.prefix ? [pronounLink.prefix] : [])] : null, helpEntry:selectedEntry,
           // A5: «здесь: друг друга» / «себя или друг друга» under the meaning.
-          note:pronounLink?.interpretation ? pronounLink.note?.[locale()] || "" : ""};
+          note:pronounLink?.interpretation ? display.text(pronounLink.note, lineLanguage) || "" : ""};
       } else if (candidate) {
         model = display.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:userConfirmed});
       } else if (!resolution.candidates.length && display.wholeCard?.(resolution, word, locale())) {
@@ -1421,7 +1433,9 @@
       // Each alternative is a small card: heading / grammar line / dictionary meaning.
       // A variant is shown as it would read once chosen (reference, section 2).
       const altModel = window.BibliothekMeaningDisplay.card(resolution, candidate, {word, language:popupLanguage(), lookup:findEntry, confirmed:true});
-      const marked = altModel.derived ? altModel.text : locale() === "ru" && language === "en" ? `английский: ${text}` : text;
+      // (Ч4, advisor 17.11) an English row: «английский: » (ru), the pack's mark «English: » (a pack language) — as the card
+      const englishRow = language === "en" ? locale() === "ru" ? "английский: " : popupLanguage() !== locale() ? display.englishMark?.(popupLanguage()) || "" : "" : "";
+      const marked = altModel.derived ? altModel.text : `${englishRow}${text}`;
       // G57 (user 24.10.2026): more meanings are only named here («ещё N значений», not a button): choosing the row opens its card,
       // and the number is the one that card shows (a card of parts: all its lines).
       const hidden = altModel.lines ? altModel.lines.reduce((sum, l) => sum + (l.more || 0), 0) : altModel.more || 0;
@@ -1431,7 +1445,7 @@
         // Separators stay in the text (screen readers, copy) but not on screen.
         if (button.childNodes.length) { const sep = document.createElement("span"); sep.className = "visually-hidden"; sep.textContent = " · "; button.append(sep); }
         const part = document.createElement("span"); part.className = cls;
-        if (cls === "lemma-choice-text" && segments && !altModel.derived) appendLabelSegments(part, segments, locale() === "ru" && language === "en" ? "английский: " : "", false);
+        if (cls === "lemma-choice-text" && segments && !altModel.derived) appendLabelSegments(part, segments, englishRow, false);
         else part.textContent = value;
         button.append(part);
       }

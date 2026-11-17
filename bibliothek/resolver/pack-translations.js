@@ -224,8 +224,36 @@
       }
     }
   }
+  // Phrases of the popup in a pack language (Ч4): lang/<code>/reader.json — {"phrases": [{en, ru, <code>}], "pronouns": [{en, ru, <code>}]}
+  // (a pair of the English and Russian texts — templates with {0} … — is the key; dev/lang/scan-reader.cjs lists them). Read once per
+  // language, with the pack version; phrase(code, en, ru, section) answers from memory ("" — none: the English text is shown).
+  const SEP = "\u241f", phraseTables = new Map(), phraseLoads = new Map(), phraseFailedAt = new Map(), phraseStarted = new Map();
+  function readerPhrases(code) {
+    if (phraseTables.has(code)) return Promise.resolve(phraseTables.get(code));
+    if (phraseLoads.has(code)) return phraseLoads.get(code);
+    if (Date.now() - (phraseFailedAt.get(code) || -Infinity) < RETRY_MS) return Promise.resolve(null);
+    const v = packVersion(code);
+    phraseStarted.set(code, Date.now());
+    const request = dataFetch(new URL(`../../lang/${code}/reader.json${v ? `?v=${encodeURIComponent(v)}` : ""}`, script))
+      .then(r => { if (!r.ok) throw new Error("Pack phrases unavailable"); return r.json(); })
+      .then(data => {
+        const sections = Array.isArray(data) ? {phrases:data} : data && typeof data === "object" ? data : {};
+        const table = new Map();
+        for (const [section, rows] of Object.entries(sections)) if (Array.isArray(rows)) for (const row of rows)
+          if (row && typeof row[code] === "string" && row[code] && typeof row.en === "string" && typeof row.ru === "string" && (row.en || row.ru))
+            table.set(`${section}${SEP}${row.en || ""}${SEP}${row.ru || ""}`, row[code]);
+        phraseTables.set(code, table); phraseLoads.delete(code); return table; })
+      .catch(() => { phraseLoads.delete(code); phraseFailedAt.set(code, Date.now()); return null; });
+    phraseLoads.set(code, request);
+    return request;
+  }
+  function phrase(code, en, ru, section = "phrases") {
+    if (!valid(code) || !en && !ru) return "";
+    return phraseTables.get(code)?.get(`${section}${SEP}${en || ""}${SEP}${ru || ""}`) || "";
+  }
   async function enrich(resolution, code) {
     if (!valid(code) || !resolution || !Array.isArray(resolution.candidates)) return resolution;
+    const phrases = readerPhrases(code);
     const own = enrichOwn(resolution, code).catch(() => { /* the own cards stay English */ });
     const pending = new Map();
     // (not a candidate with an explanation — a contraction im = in + dem, a superlative: its text is the resolver's, from the word it
@@ -263,7 +291,21 @@
       }
     }));
     await own;
+    // (the phrases under the same deadline as the card texts, counted from the start of their load: later — English phrases for this
+    // tap, the next taps have them; review B Ч4)
+    const phrasesLeft = (phraseStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
+    await (typeof setTimeout === "function" ? Promise.race([phrases, new Promise(resolve => setTimeout(resolve, Math.max(0, phrasesLeft)))]) : phrases);
+    // (Ч4) a text the resolver wrote as a pair {ru, en} for this place («здесь: …», a form of the card): its line in reader.json
+    for (const candidate of resolution.candidates) for (const field of ["translation", "formTranslation"]) {
+      const value = candidate[field];
+      if (!value || typeof value !== "object" || value[code] || typeof value.en !== "string" || typeof value.ru !== "string") continue;
+      const own = phrase(code, value.en, value.ru);
+      if (own) candidate[field] = {...value, [code]:own};
+    }
     return resolution;
   }
-  window.BibliothekPackTranslations = Object.freeze({lookup, enrich});
+  // (Ч4, advisor 17.11) the phrases of this language are loaded (reader.json read): a missing line is then shown as its English text
+  // with the mark «English: »; without reader.json (the pack not downloaded) — the English popup exactly
+  const hasPhrases = code => valid(code) && phraseTables.has(code);
+  window.BibliothekPackTranslations = Object.freeze({lookup, enrich, phrase, hasPhrases});
 })();

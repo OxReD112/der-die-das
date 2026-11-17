@@ -18,26 +18,50 @@
     ihr:['вы / ей','you / her'],euch:['вас / вам','you'],euer:['вас','you'],
     ihnen:['им / Вам','them / you'],ihrer:['её / их / Вас','her / them / you']
   };
+  // (Ч4, 17.11.2026) a text of these tables in the popup's language: ru / en as before; a pack language — its line in the "pronouns"
+  // section of lang/<code>/reader.json for this pair (resolver/pack-translations.js), otherwise the English one
+  // (a pack text missing — the English one is used — is noted in `missed`: summary() then shows the whole summary in English, one
+  // language per popup line, as a card)
+  let missed=false;
+  const P=(lang,pair)=>{ if(lang==='ru')return pair[0];
+    if(lang!=='en'&&typeof lang==='string'&&/^[a-z]{2,3}$/.test(lang)){ let own=''; try{own=window.BibliothekPackTranslations?.phrase?.(lang,pair[1],pair[0],'pronouns')||'';}catch(_){} if(own)return own; missed=true; }
+    return pair[1]; };
+  const packLang=lang=>lang!=='ru'&&lang!=='en'&&typeof lang==='string'&&/^[a-z]{2,3}$/.test(lang);
   function isPronoun(candidate) {return candidate?.item?.type === 'Pronomen' || candidate?.item?.type === 'pronoun';}
-  function meanings(item,form,lang) {
+  function meanings(item,form,lang,candidate) {
     const key=form.toLowerCase(),ru=lang==='ru',id=Number(item.id?.split('-')[1]);
-    if(id>=1&&id<=9)return (PERSONAL_GLOSSES[key] || [item.translation_ru,item.translation_en])[ru?0:1];
-    if(id===10)return ru?'безличное «это»':'impersonal it';
+    // (a pack language: the card's own text of the pack — candidate.packItem, Ч2б — where the card's text is used)
+    const own=packLang(lang)&&String(candidate?.packItem?.[lang]?.[`translation_${lang}`]||'').trim();
+    if(id>=1&&id<=9){ if(PERSONAL_GLOSSES[key])return P(lang,PERSONAL_GLOSSES[key]); if(!own&&packLang(lang))missed=true; return own||[item.translation_ru,item.translation_en][ru?0:1]; }
+    if(id===10)return P(lang,['безличное «это»','impersonal it']);
     if(id>=11&&id<=18){
       const values={11:['мой','my'],12:['твой','your'],13:['его / свой','his / its / own'],14:['её','her'],15:['их','their'],16:['наш','our'],17:['ваш','your'],18:['Ваш','your']};
-      return values[id][ru?0:1];
+      return P(lang,values[id]);
     }
     if(id===19){
       const reflex={mich:['себя','myself'],mir:['себе','myself'],dich:['себя','yourself'],dir:['себе','yourself'],uns:['себя / себе','ourselves'],euch:['себя / себе','yourselves'],sich:['себя / себе','oneself']};
-      return (reflex[key] || reflex.sich)[ru?0:1];
+      return P(lang,reflex[key] || reflex.sich);
     }
     const inflected={jemanden:['кого-то','someone'],jemandem:['кому-то','someone'],niemanden:['никого','nobody'],niemandem:['никому','nobody'],wen:['кого','whom'],wem:['кому','whom'],wessen:['чей / чья / чьё / чьи','whose']};
-    if(inflected[key])return inflected[key][ru?0:1];
+    if(inflected[key])return P(lang,inflected[key]);
+    if(own)return own;
+    if(packLang(lang))missed=true;
     return ru?item.translation_ru || item.translation_en:item.translation_en || item.translation_ru;
   }
   function brief(candidates,form,lang) {
-    const values=candidates.flatMap(candidate=>String(meanings(candidate.item,form,lang) || '').split(/\s*(?:;|\/)\s*/)).filter(Boolean);
-    return `${lang==='ru'?'Местоимение':'Pronoun'} · ${[...new Set(values)].join(' / ')}`;
+    const values=candidates.flatMap(candidate=>String(meanings(candidate.item,form,lang,candidate) || '').split(/\s*(?:;|\/)\s*/)).filter(Boolean);
+    return `${P(lang,['Местоимение','Pronoun'])} · ${[...new Set(values)].join(' / ')}`;
+  }
+  // (Ч4, 17.11.2026) the line of the popup's pronoun summary: the meanings of the candidates for the form (and « + это» after a
+  // contracted es: mir’s) — {text, language}. ru / en: exactly brief() without «Местоимение · » (+ the tail), as before. A pack
+  // language: its texts when every one of them is there (reader.json "pronouns", the pack's card texts), otherwise the English line.
+  function summary(candidates,form,lang,esTail) {
+    const line=language=>{ missed=false;
+      const values=candidates.flatMap(candidate=>String(meanings(candidate.item,form,language,candidate) || '').split(/\s*(?:;|\/)\s*/)).filter(Boolean);
+      const text=[...new Set(values)].join(' / ').replace(/^\s*/u,'')+(esTail?P(language,[' + это',' + it']):'');
+      return {text,complete:!missed}; };
+    if(packLang(lang)){ const own=line(lang); missed=false; if(own.complete)return {text:own.text,language:lang}; lang='en'; }
+    const shown=line(lang); missed=false; return {text:shown.text,language:lang};
   }
   function group(item) {
     if(item.id==='pronoun-010')return 'impersonal';
@@ -88,5 +112,5 @@
       else example('Der Mann, dem ich geholfen habe',ru?'Мужчина, которому я помог.':'The man I helped.');
     }
   }
-  window.BibliothekPronounReference=Object.freeze({excluded,group,render,isPronoun,brief,meanings});
+  window.BibliothekPronounReference=Object.freeze({excluded,group,render,isPronoun,brief,summary,meanings});
 })();
