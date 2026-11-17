@@ -19267,7 +19267,9 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             if (vs.length === 1) pick = vs[0];
           }
           if (pick) {
-            const x = {...pick, formFeatures:{tense:"Partizip I", zuGerundive:true}, evidence:"zu-gerundive"}; delete x.construction;
+            // (advisor 17.11: zu between the particle and the verb is the split itself — «Trennbares Verb», the flag an established split
+            // sets, as for traf … an; anzutreffenden, abzudichtenden, nachzurüstenden)
+            const x = {...pick, formFeatures:{tense:"Partizip I", zuGerundive:true, separable:true}, evidence:"zu-gerundive"}; delete x.construction;
             return {...result, candidates:[x], selected:x, preferred:x, status:"resolved", unresolvedMeanings:[], evidence:"zu-gerundive"};
           }
         }
@@ -19281,7 +19283,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           if (zuInf) {
             let r = null;
             try { r = await directionalParticle(raw, context, result, null, particleRow(extra)); } catch (_) { r = null; }
-            if ((r?.candidates || []).length && r.candidates.every(c => canonicalPos(c.pos) === "Verb")) return r;
+            if ((r?.candidates || []).length && r.candidates.every(c => canonicalPos(c.pos) === "Verb")) {
+              // (advisor 17.11: zu between the particle and the verb is the split — «Trennbares Verb», the flag of an established split)
+              const split = c => ({...c, formFeatures:{...(c.formFeatures || {}), separable:true}});
+              const candidates = r.candidates.map(split);
+              return {...r, candidates, selected:r.selected ? candidates[r.candidates.indexOf(r.selected)] : null,
+                preferred:r.preferred ? candidates[r.candidates.indexOf(r.preferred)] : null};
+            }
           } else if (pres) {
             const stem = pres[1];
             let r = null;
