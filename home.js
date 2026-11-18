@@ -1323,7 +1323,7 @@ const BACKUP_MODULES = {
     storageKey: "deutschTranslationLangV1",
     storageVersion: "deutschTranslationLangV1",
     setting: true,
-    current: () => (window.DeutschTranslation ? window.DeutschTranslation.getLang() : null)
+    current: () => (window.DeutschTranslation ? window.DeutschTranslation.getDisplayLang() : null)   // the language shown (a pack too: "pl"), not getLang() — that one is "en" for a pack (native chat 18.11)
   },
   /* Anonymous notification user ID (Documentation/NOTIFICATION_SYSTEM_MASTER.md, §15).
      Keeps the same notification identity after a Home Screen reinstall and
