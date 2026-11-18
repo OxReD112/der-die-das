@@ -483,10 +483,9 @@
         if (!window.WortschatzDictionaryCard.check(item).available) continue;
         const word = item.word || item.infinitive || "";
         const de = [word, ...(Array.isArray(item.search_forms) ? item.search_forms : [])].map(fold).filter(Boolean);
-        const meanings = [item.translation_ru, item.translation_en]
-          .flatMap(t => String(t || "").split(/[,;/]|\s[—–-]\s/))
-          .map(t => fold(t.replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ")).replace(/^to /, ""))
-          .filter(Boolean);
+        // 18.11.2026 (Alena): the meanings in English, Russian and the chosen pack language — one rule with the Wörterbuch
+        // search (DeutschTranslation.searchMeanings), so with Polish chosen «pies» finds Hund here too.
+        const meanings = (window.DeutschTranslation?.searchMeanings?.(item) || []).map(fold).filter(Boolean);
         out.push({ item, word: fold(word), de, meanings, len: word.length });
       }
       return out;

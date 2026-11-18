@@ -55,7 +55,8 @@
   // search_forms and the headword without its brackets: grammar marks dropped (sich (Dativ) Sorgen machen → sich Sorgen machen)
   // and optional letters kept (einer nach dem ander(e)n → einer nach dem anderen, … andern).
   function searchKeys(item) {
-    if (item.searchKeys) return item.searchKeys;
+    const lang = window.DeutschTranslation?.getDisplayLang?.() || "";
+    if (item.searchKeys && item.searchKeys.lang === lang) return item.searchKeys;
     const word = normalized(item.word);
     const forms = new Set((item.search_forms || []).map(normalized));
     const raw = String(item.word);
@@ -64,8 +65,15 @@
       forms.add(normalized(raw.replace(/[()]/g, "")));
     }
     forms.delete(word);
-    item.searchKeys = { word, forms: [...forms], sich: normalized(reflexiveName(item)) };
+    // 18.11.2026 (Alena): also its meanings in English, Russian and the chosen pack language (one rule with the
+    // Wortschatz «+ Wort» search) — «dog», «собака», «pies» find Hund.
+    const meanings = (window.DeutschTranslation?.searchMeanings?.(item) || []).map(meaningKey);
+    item.searchKeys = { word, forms: [...forms], sich: normalized(reflexiveName(item)), meanings, lang };
     return item.searchKeys;
+  }
+
+  function meaningKey(value) {
+    return normalized(value).replace(/ё/g, "е");
   }
 
   function isExactMatch(item, query) {
@@ -145,6 +153,12 @@
           const formRank = rankOf(form, false);
           if (formRank >= 0 && (rank < 0 || formRank + 0.5 < rank)) rank = formRank + 0.5;
         }
+        // 18.11.2026: the meanings, in the same order as the Wortschatz «+ Wort» search — a whole meaning right after the
+        // German word and its beginning (pies → Hund before aufspießen), the beginning of a meaning or of a word in it
+        // last (from 3 letters).
+        const q = meaningKey(query);
+        if (keys.meanings.includes(q)) { if (rank < 0 || rank > 1.75) rank = 1.75; }
+        else if (rank < 0 && q.length >= 3 && keys.meanings.some(m => m.startsWith(q) || m.includes(" " + q))) rank = 4;
         const sichName = keys.sich;
         const sichRank = sichName ? rankOf(sichName, sichName === needle) : -1;
         // A1: the «sich X» line wins when it matches better than the bare verb (sich dreh… → «sich drehen — вращаться»).

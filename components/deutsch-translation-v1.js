@@ -529,6 +529,25 @@
     return getLang() === "ru" ? (item[name + "_ru"] || item[name + "_en"]) : (item[name + "_en"] || item[name + "_ru"]);
   }
 
+  /* searchMeanings(item) (18.11.2026, Alena): ONE rule for searching a card by its meaning — Wörterbuch and the Wortschatz
+     «+ Wort» search. The meanings in English, Russian and the chosen pack language (translation_<code>, merged into the card
+     by mergeById), each split at , ; / and « — », brackets dropped, «to » dropped at the start; lower case, ё → е.
+     The caller compares them with what was typed (folded the same way: lower case, ё → е). */
+  function foldMeaning(s){ return String(s || "").normalize("NFC").toLocaleLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim(); }
+  function searchMeanings(item){
+    if(!item) return [];
+    var codes = ["en", "ru"], shown = getDisplayLang(), out = [];
+    if(isPack(shown) && shown !== "xx") codes.push(shown);
+    for(var i = 0; i < codes.length; i++){
+      var parts = String(item["translation_" + codes[i]] || "").split(/[,;\/]|\s[—–-]\s/);
+      for(var j = 0; j < parts.length; j++){
+        var m = foldMeaning(parts[j].replace(/\([^)]*\)/g, " ")).replace(/^to /, "");
+        if(m && out.indexOf(m) === -1) out.push(m);
+      }
+    }
+    return out;
+  }
+
   /* getTranslation(item, field): e.g. getTranslation(exercise, "translation") */
   function getTranslation(item, field){
     return item ? pick(item[field]) : "";
@@ -538,6 +557,6 @@
     languages: languages, isPack: isPack, pick: pick, t: t, tAt: tAt, field: field, ready: ready, apply: apply,
     packEntries: packEntries, format: format, table: table,
     needsPack: needsPack, mergeById: mergeById, packState: packState, packSize: packSize, download: download,
-    addPack: addTestPack };
+    addPack: addTestPack, searchMeanings: searchMeanings, foldMeaning: foldMeaning };
   window.getTranslation = getTranslation;
 })();
