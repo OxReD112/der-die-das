@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "1850947ee326",
+ "version": "39f4708890cc",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -294,7 +294,7 @@
   },
   "worterbuch/german-verbs.json": {
    "items": 2799,
-   "texts": 10019,
+   "texts": 10022,
    "done": 2799
   },
   "ui.json": {
@@ -302,8 +302,8 @@
    "done": 360
   },
   "reader.json": {
-   "items": 230,
-   "done": 230
+   "items": 274,
+   "done": 274
   }
  },
  "dictionary": {

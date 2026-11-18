@@ -859,6 +859,226 @@
    "en": "here: nothing but, pure",
    "ru": "здесь: одни, сплошь, только",
    "pl": "tu: sami / same, wyłącznie, tylko"
+  },
+  {
+   "en": "up (away)",
+   "ru": "наверх (туда)",
+   "pl": "na górę (od mówiącego)"
+  },
+  {
+   "en": "up (towards)",
+   "ru": "наверх (сюда)",
+   "pl": "na górę (do mówiącego)"
+  },
+  {
+   "en": "down (away)",
+   "ru": "вниз (туда)",
+   "pl": "na dół (od mówiącego)"
+  },
+  {
+   "en": "down (towards)",
+   "ru": "вниз (сюда)",
+   "pl": "na dół (do mówiącego)"
+  },
+  {
+   "en": "in (away)",
+   "ru": "внутрь (туда)",
+   "pl": "do środka (od mówiącego)"
+  },
+  {
+   "en": "in (towards)",
+   "ru": "внутрь (сюда)",
+   "pl": "do środka (do mówiącego)"
+  },
+  {
+   "en": "out (away)",
+   "ru": "наружу (туда)",
+   "pl": "na zewnątrz (od mówiącego)"
+  },
+  {
+   "en": "out (towards)",
+   "ru": "наружу (сюда)",
+   "pl": "na zewnątrz (do mówiącego)"
+  },
+  {
+   "en": "over, across",
+   "ru": "на ту сторону",
+   "pl": "na drugą stronę"
+  },
+  {
+   "en": "over, across",
+   "ru": "на эту сторону",
+   "pl": "na tę stronę"
+  },
+  {
+   "en": "around",
+   "ru": "вокруг; туда-сюда",
+   "pl": "wokół; tu i tam"
+  },
+  {
+   "en": "back",
+   "ru": "назад, обратно",
+   "pl": "wstecz, z powrotem"
+  },
+  {
+   "en": "away",
+   "ru": "прочь",
+   "pl": "precz"
+  },
+  {
+   "en": "ahead, forward",
+   "ru": "вперёд",
+   "pl": "naprzód"
+  },
+  {
+   "en": "up(wards)",
+   "ru": "вверх",
+   "pl": "w górę"
+  },
+  {
+   "en": "apart",
+   "ru": "в разные стороны",
+   "pl": "w różne strony"
+  },
+  {
+   "en": "away, along; there",
+   "ru": "прочь, мимо; туда",
+   "pl": "precz, obok; tam"
+  },
+  {
+   "en": "down",
+   "ru": "вниз",
+   "pl": "w dół"
+  },
+  {
+   "en": "off, away",
+   "ru": "прочь; с места",
+   "pl": "precz; z miejsca (o ruszaniu)"
+  },
+  {
+   "en": "along, this way",
+   "ru": "сюда (о движении); мимо",
+   "pl": "tutaj (o ruchu); obok"
+  },
+  {
+   "en": "here, this way",
+   "ru": "сюда",
+   "pl": "tutaj"
+  },
+  {
+   "en": "home",
+   "ru": "домой",
+   "pl": "do domu"
+  },
+  {
+   "en": "back; again",
+   "ru": "обратно; снова",
+   "pl": "z powrotem; znowu"
+  },
+  {
+   "en": "through",
+   "ru": "сквозь, через",
+   "pl": "przez, na wskroś"
+  },
+  {
+   "en": "along, with (others)",
+   "ru": "вместе (с кем-либо)",
+   "pl": "razem (z kimś)"
+  },
+  {
+   "en": "further, on",
+   "ru": "дальше; продолжать",
+   "pl": "dalej; kontynuować"
+  },
+  {
+   "en": "together",
+   "ru": "вместе; в одно (целое)",
+   "pl": "razem; w jedno (w całość)"
+  },
+  {
+   "en": "past, by",
+   "ru": "мимо",
+   "pl": "obok"
+  },
+  {
+   "en": "along",
+   "ru": "вдоль",
+   "pl": "wzdłuż"
+  },
+  {
+   "en": "here, over (towards the speaker)",
+   "ru": "сюда (к говорящему)",
+   "pl": "tutaj (do mówiącego)"
+  },
+  {
+   "en": "up to, closer",
+   "ru": "ближе, вплотную (к)",
+   "pl": "bliżej, tuż (przy)"
+  },
+  {
+   "en": "out, forth",
+   "ru": "наружу (из-за, из-под), вперёд",
+   "pl": "na zewnątrz (zza, spod), naprzód"
+  },
+  {
+   "en": "away; over",
+   "ru": "прочь; поверх, через",
+   "pl": "precz; ponad, przez"
+  },
+  {
+   "en": "to (something); in addition",
+   "ru": "к (чему-то); вдобавок",
+   "pl": "do (czegoś); dodatkowo"
+  },
+  {
+   "en": "after, behind; afterwards",
+   "ru": "следом, вслед; потом",
+   "pl": "w ślad za, śladem; potem"
+  },
+  {
+   "en": "here, towards the speaker; (hinter … her) after, behind; (vor … her) ahead",
+   "ru": "сюда; (hinter … her) следом; (vor … her) впереди",
+   "pl": "tutaj; (hinter … her) w ślad za; (vor … her) z przodu"
+  },
+  {
+   "en": "there, away from the speaker",
+   "ru": "туда",
+   "pl": "tam"
+  },
+  {
+   "en": "in confusion; all at once",
+   "ru": "вперемешку; наперебой",
+   "pl": "bezładnie; jeden przez drugiego"
+  },
+  {
+   "en": "firmly, tight",
+   "ru": "крепко, прочно",
+   "pl": "mocno, trwale"
+  },
+  {
+   "en": "out; to the end",
+   "ru": "из, наружу; до конца",
+   "pl": "z, na zewnątrz; do końca"
+  },
+  {
+   "en": "up; on",
+   "ru": "вверх; на",
+   "pl": "w górę; na"
+  },
+  {
+   "en": "in, into",
+   "ru": "в, внутрь",
+   "pl": "w, do środka"
+  },
+  {
+   "en": "on, to",
+   "ru": "к, на",
+   "pl": "do, na"
+  },
+  {
+   "en": "towards",
+   "ru": "навстречу",
+   "pl": "naprzeciw"
   }
  ],
  "pronouns": [
