@@ -91,7 +91,7 @@
     return germanContext(parent, stack.slice(0, -1));
   }
   /* sourcePrint(card) → 8 hex digits (17.11.2026, advisor): the print of the English a pack translated an own-dictionary
-     card from — every English text of the card (keys "en" and «…_en», strings or lists, in the card's order) through
+     card from — every English text of the card (keys "en" and «…_en», strings or lists; keys of every object sorted) through
      FNV-1a. The pack keeps it as "_src" next to the card's texts; when the app's English has changed since, the print
      differs and the card is shown in English (never a Polish text for an older English). dev/lang/stamp.cjs writes it,
      dev/lang/pack-coverage.cjs lists the cards whose print no longer matches; the reader checks it the same way. */
@@ -100,9 +100,11 @@
     (function walk(o, p){
       if(!o || typeof o !== "object") return;
       if(Array.isArray(o)){ for(var i = 0; i < o.length; i++) walk(o[i], p + "[" + i + "]"); return; }
-      for(var k in o){
-        if(!Object.prototype.hasOwnProperty.call(o, k)) continue;
-        var v = o[k];
+      /* keys in sorted order (18.11.2026, advisor, Ч6б): the print doesn't depend on the order of a card's fields — the
+         reader keeps a card in two parts and puts them together in another order */
+      var keys = Object.keys(o).sort();
+      for(var ki = 0; ki < keys.length; ki++){
+        var k = keys[ki], v = o[k];
         if((k === "en" || /_en$/.test(k)) && (isStr(v) || Array.isArray(v))) parts.push(p + "." + k + "=" + JSON.stringify(v));
         else if(v && typeof v === "object") walk(v, p + "." + k);
       }

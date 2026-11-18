@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "078bd519b4d8",
+ "version": "1474bde2288e",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -305,5 +305,9 @@
    "items": 216,
    "done": 216
   }
+ },
+ "dictionary": {
+  "source_link": "Wikisłownik",
+  "license": "CC BY-SA 4.0"
  }
 }
