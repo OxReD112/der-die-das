@@ -19459,6 +19459,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         candidates:(result.candidates || []).map(c => c === result.selected ? selected : c)};
     }
     let outsideHeadingVerbs = null;
+    // (speed chat 18.11) the expression records whose heading has this word — the records a probe may find (built once per word)
+    const outsideTakersCache = new Map();
+    const outsideTakers = base => {
+      if (!outsideTakersCache.has(base)) outsideTakersCache.set(base, entries.filter(e => e.type === "Ausdruck" &&
+        String(e.word || "").replace(/[()?!.,]/gu, " ").split(/\s+/u).map(norm).includes(base)));
+      return outsideTakersCache.get(base);
+    };
     async function applyConstruction(word, context, resolution) {
       // (the card of an expression's verb, read without expressions: expressionVerb)
       if (context?.noExpression) return resolution;
@@ -19513,8 +19520,13 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
           const gap = (i, j) => sentence.slice(tokens[i].index + tokens[i][0].length, tokens[j].index);
           while (from > 0 && at - from < 8 && !/[.!?;:,»«"„“”–—()]/u.test(gap(from-1, from))) from--;
           while (to < tokens.length - 1 && to - at < 8 && !/[.!?;:,»«"„“”–—()]/u.test(gap(to, to+1))) to++;
+          // (speed chat 18.11; advisor 18.11: by the search's own index — constructionAnchors, the same keys as constructionAt): only from
+          // words that anchor an expression taking this verb / nicht outside — the same result, one full search per such word instead of
+          // per word of the window (46 → 4 searches on the 28 taps of perf-check)
+          const takers = new Set((norm(word) === "nicht" ? ["nicht"] : (verbAnalyses.get(norm(word)) || []).map(a => norm(a.base || a.entry?.word || ""))).flatMap(b => outsideTakers(b)));
           for (let i = from; i <= to && !found; i++) {
             if (i === at) continue;
+            if (!(constructionAnchors.get(norm(tokens[i][0])) || []).some(({entry}) => takers.has(entry))) continue;
             let other = null;
             try { other = await constructionAt(tokens[i][0], {...context, tokenOffset:tokens[i].index, outsideProbe:true}); } catch (_) { other = null; }
             if (other?.entry?.type !== "Ausdruck") continue;
