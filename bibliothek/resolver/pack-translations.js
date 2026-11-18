@@ -157,7 +157,7 @@
   // when the candidate's text is the card's own (translation.en = translation_en of the card); a text the resolver chose for this
   // place (a sense, a form) stays English. A pack without them (not downloaded, an older pack): the card stays English.
   const owns = new Map(), ownFailedAt = new Map(), ownStarted = new Map(), ownMissing = new Map();
-  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective"];
+  const KEEP = code => [`translation_${code}`, "extra_meanings", "reflexive", "form_translations", "collective", "_src_reader"];
   // one card file: {id: fields} with only the fields the popup reads, into map; false when it could not be read
   function readOwnFile(code, file, version, map) {
     return dataFetch(new URL(`../../lang/${code}/${file}${version ? `?v=${encodeURIComponent(version)}` : ""}`, script))
@@ -202,6 +202,8 @@
   // The first tap waits for the card texts at most OWN_WAIT_MS (≈ 0.8 MB gzip at the first load): later the card is English for
   // this tap, the texts keep loading for the next ones (review A Ч2б).
   const OWN_WAIT_MS = 1500;
+  // the print of the reader's own card (its English as shown) against a pack card's "_src_reader"; a failing print — not outdated
+  const outdated = (print, item) => { try { const f = window.DeutschLangDe?.sourcePrint; return typeof f === "function" && f(item) !== print; } catch (_) { return false; } };
   async function enrichOwn(resolution, code) {
     const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
     if (!mine.length) return;
@@ -212,6 +214,10 @@
     for (const c of mine) {
       const fields = texts.get(c.item.id);
       if (!fields || typeof fields !== "object") continue;
+      // (Ч2в, advisor 18.11) a pack card translated from another English than the reader's card shows now: "_src_reader" of the
+      // pack (dev/lang/stamp.cjs: DeutschLangDe.sourcePrint of the light card, build-reader-dictionaries.cjs readerPrint) ≠ the
+      // print of the reader's card — an outdated text, the card stays English. No "_src_reader" or no sourcePrint: as before.
+      if (typeof fields._src_reader === "string" && outdated(fields._src_reader, c.item)) continue;
       c.packItem = {...(c.packItem || {}), [code]:fields};
       const main = String(fields[`translation_${code}`] || "").trim();
       if (main && !c.translation?.[code] && same(c.translation?.en, c.item.translation_en)) c.translation = {...c.translation, [code]:main};
