@@ -316,7 +316,7 @@ window.VV_TABLE = {
         job: "receive",
         lit: { cols: [0, 1], p2: [0] },
         blocks: [["bekommen", "verb"], [T.thing, "part"]],
-        means: { en: "get (not „become“!)", ru: "получать (не «становиться»!)" },
+        means: { en: "get, receive", ru: "получать" },
         ex: "Ich *bekomme* _einen Kaffee_, bitte.",
         perfekt: { pattern: "haben + bekommen (no ge-)", ex: "Ich habe einen Brief *bekommen*." }
       },
