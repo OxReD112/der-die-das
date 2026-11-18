@@ -3140,3 +3140,15 @@ html.library-editing .library-invite { display: none; }
 
 /* 16.11 (Alena): until the first list of books is ready, the middle and «+» are invisible (no jump on opening). */
 .library.is-loading > *, body.library-screen .reader .library-add-toggle.is-loading { visibility: hidden; }
+
+/* 18.11.2026 (Alena: «в режиме списка затемнение всегда залезает на первую книгу»):
+   - the faint mint light at the top of the library is drawn over the header and the «Bearbeiten» line too (it was
+     under them: their plain background cut two darker bands out of it) — in the list; the shelf is unchanged;
+   - the fade under «Bearbeiten» is 14 px (was 24) and the list starts 6 px lower, so at rest it never touches the
+     first book; when the list scrolls, rows still fade out under the line. */
+.library-screen .reader:has(#library:not(.is-bookshelf))::before { /* list only: the shelf stays as it was */
+  z-index: 4;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--mint) 4%, transparent) 64px, transparent); /* soft top edge: over the header it no longer starts with a line */
+}
+.library-edit-bar::after { height: 14px; }
+.library-edit-bar + .book-list { padding-top: 6px; }

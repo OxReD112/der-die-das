@@ -8,7 +8,7 @@
    when it is there, else English.
 
      VVAnswerRules.assess(item, typed) → {
-       ok,           the typed word is the answer or one of item.also (ß = ss; a capital only where the sentence starts)
+       ok,           the typed word is the answer or one of item.also (ß = ss; capital letters do not count, 18.11)
        shown,        the word to show in the gap: the accepted spelling that was typed, else the main answer
        typed,        the typed word, trimmed (shown crossed out after a mistake)
        kind:  { name, meaning }  the form's name and what it means: «Konjunktiv II» + «бы» (meaning may be null)
@@ -125,11 +125,9 @@
   function assess(item, value) {
     const typed = String(value || "").trim();
     // the accepted spelling the typed word matched (ß/ss, case): shown instead of the raw input
-    // capital letters (03.11.2026, Alena): a capital here only starts the sentence (Wird …?), a small first letter is
-    // fine there; otherwise the case must be as written
-    const keep = s => String(s || "").trim().replace(/\s+/g, " ").replace(/ß/g, "ss"),
-      caseRight = x => keep(typed) === keep(x) || (/^[A-ZÄÖÜ]/.test(x) && keep(typed).charAt(0).toLocaleUpperCase("de-DE") + keep(typed).slice(1) === keep(x));
-    const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed) && caseRight(x));
+    // capital letters (18.11.2026, Alena): do not count — «Bekomme» is as right as «bekomme» anywhere in the sentence
+    // (03.11–18.11 a capital was accepted only where the sentence starts). ß = ss and spaces as before.
+    const matched = [item.answer, ...(item.also || [])].find(x => norm(x) === norm(typed));
     const ok = Boolean(matched);
     // an accepted other answer (gekriegt, kriegt …) stays as typed; otherwise the main answer is shown
     const shown = ok ? matched : item.answer;

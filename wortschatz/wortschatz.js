@@ -640,25 +640,31 @@ function checkCopy(typed) {
   save();
   updateEditButton();
 }
-/* Capital letters (03.11.2026, Alena; the keyboard has Shift now): the case is checked. A word at the start of the
-   sentence may be typed in either case — except a noun, which is always capitalised. A right word in the wrong case
-   gets one more try with a hint („Fast. Nomen schreibt man groß.“), the second time it is a mistake. */
+/* Capital letters (18.11.2026, Alena: «нужно только, чтобы существительные были с большой буквы, всё остальное
+   принимается в любом случае»): only a noun must start with a capital letter. Every word of the answer that is
+   written with a capital is a noun — except the first word when the gap starts the sentence (there the capital only
+   starts the sentence, unless the card itself is a noun). Such a noun typed in lower case gets one more try with the
+   hint «Fast. Nomen schreibt man groß.», the second time it is a mistake. Anything else may be typed in any case
+   (Gestern / gestern, LAUFEN …). 03.11–18.11 the case of every word was checked. */
 const keepCase = s => s.trim().replace(/\s*,\s*/g, " ").replace(/\s+/g, " ");
 const isNoun = c => c.pos === "Substantiv" || /^(der|die|das)\s/i.test(c.base || "");
 function blankAtStart(c) {
   const before = String(c.blank || "").split("_____")[0].trim();
   return !before || /[.!?:„“"»«]$/.test(before);
 }
-const lowerFirst = s => s.charAt(0).toLocaleLowerCase("de-DE") + s.slice(1);
+const startsUpper = w => /^[A-ZÄÖÜ]/.test(w);
+const ARTICLE = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines|kein|keine|keinen|keinem|keiner)$/i;
 function caseRight(c, typedKeep, target) {
-  const t = keepCase(target);
-  if (typedKeep === t) return true;
-  return blankAtStart(c) && !isNoun(c) && lowerFirst(typedKeep) === lowerFirst(t);
+  const want = keepCase(target).split(" "), got = typedKeep.split(" ");
+  return want.every((w, i) => {
+    if (!startsUpper(w)) return true; // a small word may be typed in any case
+    if (i === 0 && blankAtStart(c) && (!isNoun(c) || ARTICLE.test(w))) return true; // a capital that only starts the sentence (Der Hund …)
+    return startsUpper(got[i] || ""); // a noun: its first letter must be a capital
+  });
 }
 let caseHinted = false;
-function caseHint(c, target) {
-  if (/^[A-ZÄÖÜ]/.test(target)) return isNoun(c) ? "Fast. Nomen schreibt man groß." : "Fast. Hier schreibt man groß.";
-  return "Fast. Hier schreibt man klein.";
+function caseHint() {
+  return "Fast. Nomen schreibt man groß."; // only a noun in lower case is ever held back (18.11)
 }
 function check() {
   let typed = normalize($("answerInput").value);
