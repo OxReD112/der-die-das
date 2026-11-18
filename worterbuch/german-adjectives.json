@@ -12611,8 +12611,8 @@
   {
     "id": "adjective-1180",
     "word": "irre",
-    "translation_ru": "потрясающий, обалденный, невероятный; страшный, дикий (о силе: irre Hitze); безумно, жутко (усиливает); сумасшедший, помешанный",
-    "translation_en": "amazing, incredible, wild; tremendous, terrible (of intensity); incredibly, insanely (intensifying); mad, insane",
+    "translation_ru": "потрясающий, обалденный, невероятный; страшный, дикий (о силе: irre Hitze); безумно, жутко (усиливает); (разг.) чокнутый, ненормальный",
+    "translation_en": "amazing, incredible, wild; tremendous, terrible (of intensity); incredibly, insanely (intensifying); (colloquial) crazy, nuts",
     "example_de": "Gestern waren wir auf einem irren Konzert, die Stimmung war unglaublich.",
     "example_ru": "Вчера мы были на обалденном концерте, атмосфера была невероятная.",
     "example_en": "Yesterday we went to an amazing gig, the atmosphere was unbelievable.",
@@ -12620,8 +12620,8 @@
     "search_forms": [
       "irr"
     ],
-    "usage_note_ru": "Фамильярное. В значении «сумасшедший» — устаревающее и сегодня оскорбительное, о людях не употребляется.",
-    "usage_note_en": "Very informal. In the sense “mad, insane” dated and now offensive; not used about people."
+    "usage_note_ru": "Разговорное. О человеке (Der ist doch irre!) — «чокнутый», грубовато (Duden: salopp veraltend). Как обозначение психической болезни устарело и оскорбительно (Duden: heute diskriminierend).",
+    "usage_note_en": "Colloquial. Of a person (Der ist doch irre!) it means “crazy, nuts” and is rude (Duden: salopp veraltend); as a term for mental illness it is dated and offensive (Duden: heute diskriminierend)."
   },
   {
     "id": "adjective-1181",

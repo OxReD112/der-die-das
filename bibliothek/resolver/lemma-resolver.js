@@ -11376,6 +11376,10 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         if (["sowie","aber","sondern","wie","dass","daß","ob","weil","wenn"].includes(w)) return -1;
         if (/^\p{Lu}/u.test(t)) { if (grammaticalWords.has(w) && !pending) return -1; pending = true; state.clean = false; continue; }
         if (PRONOUN_PERSONS[w] && !prepositions.has(norm(tokens[k-1]?.[0] || ""))) return -1;
+        // (advisor 18.11) a personal pronoun right after its preposition is a group of the frame — die von ihm gebaute Kirche, der für mich
+        // gekaufte Wagen
+        if ((PRONOUN_PERSONS[w] || /^(?:mich|dich|sich|mir|dir|ihm|ihn|ihr|uns|euch|ihnen|einander)$/u.test(w)) &&
+            k > 0 && prepositions.has(norm(tokens[k-1][0]))) { state.clean = false; continue; }
         // (inside a group with a preposition: its own attributes, not a verb form — not … veröffentlichten Alben produzierte Orzabal)
         if (pending) { if ((verbAnalyses.get(w) || []).length && !adjectivalForm(t) && !ownModifierForm(t)) return -1; continue; }
         if (teAdverb(t)) continue;
@@ -17782,6 +17786,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
             // would be die hinteren)
             // (not die after a comma — a relative pronoun: Zauberer, die selbstumrührende Kessel erfunden hatten)
             if (k >= 0 && words[k-1] !== "," && words.slice(k+1).some(x => /\p{Ll}e$/u.test(x)) && /^(?:die|meine|deine|seine|ihre|unsere|eure|diese|jene|welche)$/iu.test(words[k])) return false;
+            // (advisor 18.11, plural-sign-awaited-qa) die + a noun of one spelling for both numbers + right after it a form of sein / werden /
+            // bleiben + a singular finite verb of its part: a predicate noun in the singular — die Frau, die Lehrer werden wollte; die Eber
+            // war vollständig zerstört worden. Not: Kinder, die Lehrer werden wollen; eine Firma, die Bohrmaschinen herstellte; Die Lehrer
+            // werden morgen kommen
+            // (die opens its part — after a comma, at the start, after und / oder / aber / dass …; not inside a preposition group: gegen die
+            // Sozialdemokraten ist, über die königlichen Gestüte war)
+            if (k >= 0 && /^die$/iu.test(words[k]) && (k === 0 || /^[,;:(»«„“"–—]$/u.test(words[k-1]) || /^(?:und|oder|aber|sondern|denn|dass|daß|weil|wenn|als|ob|da|doch)$/iu.test(words[k-1]))) {
+              const after = String(context.sentence || "").slice(context.tokenOffset + String(word).length);
+              const part = after.split(/[,.;:!?»«„“"–—()]/u)[0];
+              if (/^\s+(?:sein|werden|bleiben|ist|war|wird|wurde|bleibt|blieb|sei|wäre|würde|gewesen|geworden|geblieben)(?![\p{L}\p{M}])/u.test(part) &&
+                  /(?:^|\s)(?:ist|war|wird|wurde|bleibt|blieb|sei|wäre|würde|will|wollte|wollte|soll|sollte|kann|konnte|könnte|muss|musste|müsste|darf|durfte|dürfte|möchte|mag|hat|hatte|hätte)(?![\p{L}\p{M}])/u.test(part)) return false;
+            }
             if (k >= 0 && !feminine && /^(?:die|keine|meine|deine|seine|ihre|unsere|eure|diese|jene|alle|welche)$/iu.test(words[k])) return true;
           }
           // To-do 19.10 (2.6, R-potter-16): a plural equal to an old singular form (Punkte / dem Punkte) is plural

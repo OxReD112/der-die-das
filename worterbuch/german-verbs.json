@@ -83305,8 +83305,8 @@
     "complements": [
       {
         "pattern": "mit + Dativ",
-        "note_ru": "отделаться чем-либо",
-        "note_en": "to get off with something (only minor harm)"
+        "note_ru": "отделаться чем-либо: mit dem Schrecken davonkommen — отделаться лёгким испугом; mit dem Leben davonkommen — остаться в живых",
+        "note_en": "to escape with something: mit dem Schrecken davonkommen — to escape with nothing worse than a fright; mit dem Leben davonkommen — to escape with one's life"
       }
     ],
     "separable_prefix": "davon",
@@ -97119,8 +97119,8 @@
         "pattern": "Dativ",
         "required": true,
         "meaning_ru": "(книжн.) исследовать (что-либо)",
-        "note_ru": "чему-либо (дат. п.): einem Geheimnis nachforschen",
-        "note_en": "to inquire into something (elevated)"
+        "note_ru": "чему-либо (дат. п.): einem Geheimnis nachforschen — докапываться до тайны",
+        "note_en": "+ dative (elevated): einem Geheimnis nachforschen — to look into a mystery"
       }
     ],
     "separable_prefix": "nach",

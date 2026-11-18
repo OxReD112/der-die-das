@@ -88,15 +88,15 @@
       loadJson = path => plain(path).then(list => window.DeutschTranslation.mergeById(list, path.replace(/\?.*$/, "")));
     }
     loadPromise = Promise.all([
-      loadJson("worterbuch/german-nouns.json?v=20261117-wn-astronaut143-2"),
-      loadJson("worterbuch/german-verbs.json?v=20261118-wn-laden153-2"),
-      loadJson("worterbuch/german-adjectives.json?v=20261115-wn-satzweitere123-1"),
-      loadJson("worterbuch/german-adverbs.json?v=20261116-wn-alice130-1"),
+      loadJson("worterbuch/german-nouns.json?v=20261118-wn-wbsrc156-1"),
+      loadJson("worterbuch/german-verbs.json?v=20261118-wn-wbsrc156-1"),
+      loadJson("worterbuch/german-adjectives.json?v=20261118-wn-wbsrc156-1"),
+      loadJson("worterbuch/german-adverbs.json?v=20261118-wn-wbsrc156-1"),
       loadJson("worterbuch/german-conjunctions.json?v=20261116-wn-alice130-1"),
       loadJson("worterbuch/german-pronouns.json?v=20261114-wn-selber110-1"),
       loadJson("worterbuch/german-adjective-adverbs.json?v=20261112-wn-md94-1"),
       // E1 (22.10.2026, user): expression cards (vor sich hin) are shown here too; a missing file is no expressions.
-      loadJson("worterbuch/german-expressions.json?v=20261118-expr-todo42-5").catch(() => [])
+      loadJson("worterbuch/german-expressions.json?v=20261118-wn-expr157-1").catch(() => [])
     ]).then(([nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs, expressions]) => {
       if (![nouns, verbs, adjectives, adverbs, conjunctions, pronouns, adjectiveAdverbs].every(Array.isArray)) throw new Error("Invalid dictionary database");
       entries = [
