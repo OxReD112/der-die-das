@@ -14293,6 +14293,19 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (run 05.11) a dative pronoun is the verb's object (Ist es uns jetzt erlaubt; es sei dir erlaubt): as before
         if (part.words.some(w => /^(?:mir|dir|uns|euch|ihm|ihnen)$/u.test(w))) return undefined;
         if (part.words.some((w,k) => w === "vom" || w === "von" && agentAfterVon.test(part.words[k+1] || "")) || /(?:^|[^\d])(?:1\d{3}|20\d{2})(?:[^\d]|$)/u.test(f.sentence)) return undefined;
+        // (advisor 18.11) a direction group — a two-way preposition with the accusative (auf ein Schiff, in den Wagen, ins Haus) — is a
+        // sign of the verb, as the agent with von: Als alles auf ein Schiff geladen war; not the place with the dative (im Hof, auf dem
+        // Tisch, auf den Tischen). The case by the shared prepositionPhraseCase. Not when the adjective's card governs that preposition
+        // with the accusative (L46: Er ist auf den Film gespannt, Sie ist in ihn verliebt, Ich bin auf alles gefasst) — the adjective.
+        const governed = new Set(adjectives.flatMap(c => (c.item?.complements || []).map(x => String(x.pattern || "").match(/^(\p{L}+) \+ Akkusativ$/u)?.[1]).filter(Boolean)));
+        let direction = false;
+        for (let k = part.from; k <= part.to && !direction; k++) {
+          if (k === f.index) continue;
+          const p = norm(f.tokens[k][0]), base = p.replace(/^(ins|ans|aufs|übers|unters)$/u,m => ({ins:"in",ans:"an",aufs:"auf",übers:"über",unters:"unter"})[m]);
+          if (governed.has(base)) { direction = false; break; }
+          if (prepositionPhraseCase(f.tokens,k,part.to) === "Akkusativ") direction = true;
+        }
+        if (direction && !part.words.some(w => governed.has(w))) return undefined;
         return {candidates:[...adjectives,...f.candidates.filter(c => !adjectives.includes(c))],preferred:null,evidence:"participle-sein-adjective-window"};
       },
       // L34 (links to-do; reference G2 add. 21.10 (3), F12-G2g; user 21.10 / 23.10): sein + a participle whose adjective card
@@ -15005,7 +15018,7 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       let a = index, b = index;
       while (a > 0 && !punct.test(gap(a-1,a)) && !AUX_HINT_CUT.has(w(a-1))) a--;
       while (b < tokens.length-1 && !punct.test(gap(b,b+1)) && !AUX_HINT_CUT.has(w(b+1))) b++;
-      return {words:Array.from({length:b-a+1},(_,d) => w(a+d)).filter((_,d) => a+d !== index)};
+      return {words:Array.from({length:b-a+1},(_,d) => w(a+d)).filter((_,d) => a+d !== index),from:a,to:b};
     }
     function grammarRank(word, context, candidates, inflections = []) {
       const f = grammarClause(word,context,candidates,inflections);
