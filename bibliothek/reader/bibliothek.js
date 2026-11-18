@@ -1220,7 +1220,7 @@
     catch (error) { resolution = {candidates:[], selected:null, status:"unresolved", unresolvedMeanings:[], error}; }
     if (request !== lookupRequest) return;
     // (Ч2) the texts of a pack language for the external candidates — display only, after the choice; en / ru: nothing
-    await window.BibliothekPackTranslations?.enrich(resolution, popupLanguage());
+    await window.BibliothekPackTranslations?.enrich(resolution, popupLanguage(), findEntry);
     if (request !== lookupRequest) return;
     const linkedReflexive = resolution.candidates.find(c=>c.construction?.id === "reflexive-verb");
     let saved = null;
@@ -1537,7 +1537,7 @@
       renderSelection();
       if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();
       await window.BibliothekRussianTranslations?.enrich(resolution,language);
-      await window.BibliothekPackTranslations?.enrich(resolution,language);
+      await window.BibliothekPackTranslations?.enrich(resolution,language,findEntry);
       if (request !== lookupRequest || revision !== languageRevision || popupLanguage() !== language) return;
       renderSelection();
       if (!$sheet.hidden && (selectedEntry || detailParts.length)) renderDictionaryDetails();

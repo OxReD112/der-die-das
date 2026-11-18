@@ -4,7 +4,7 @@
  * format: lang/<code>/dictionary/manifest.json (version, partition) + parts/NNNN.json (as the Russian dictionary,
  * open data/dictionary-de-ru-json/, read by russian-translations.js, which stays as it is).
  *
- * BibliothekPackTranslations.enrich(resolution, code) — external candidates without a text in this language get
+ * BibliothekPackTranslations.enrich(resolution, code, entryOf) — external candidates without a text in this language get
  *   translation[code], meaningLabels[code], labelledText[code], reflexiveMarks[code] (the same fields the Russian dictionary
  *   fills under "ru"); built-in languages (en, ru) and a missing or broken pack: nothing changes (the card stays English).
  * BibliothekPackTranslations.lookup(lemma, pos, code) -> the record or null.
@@ -205,13 +205,27 @@
   const OWN_WAIT_MS = 1500;
   // the print of the reader's own card (its English as shown) against a pack card's "_src_reader"; a failing print — not outdated
   const outdated = (print, item) => { try { const f = window.DeutschLangDe?.sourcePrint; return typeof f === "function" && f(item) !== print; } catch (_) { return false; } };
-  async function enrichOwn(resolution, code) {
+  // (18.11.2026, advisor: a general rule) a contraction (im = in + dem, zum, am …): the resolver gives it the text of its preposition's
+  // own card (explanation.componentId) — its pack text is that card's, when the text shown is that card's English (entryOf: the
+  // reader's card by id, bibliothek.js findEntry)
+  const componentOf = (c, entryOf) => {
+    if (c.item || c.explanation?.kind !== "contraction" || c.explanation.componentId == null || typeof entryOf !== "function") return null;
+    try { const item = entryOf({id:c.explanation.componentId}); return item && typeof item.id === "string" ? item : null; } catch (_) { return null; }
+  };
+  async function enrichOwn(resolution, code, entryOf) {
     const mine = resolution.candidates.filter(c => c.item && typeof c.item.id === "string");
-    if (!mine.length) return;
+    const contractions = resolution.candidates.map(c => [c, componentOf(c, entryOf)]).filter(([, item]) => item);
+    if (!mine.length && !contractions.length) return;
     // (one deadline for every tap of the first load, counted from its start — review C Ч2б)
     const load = ownTexts(code), left = (ownStarted.get(code) || 0) + OWN_WAIT_MS - Date.now();
     const texts = await (typeof setTimeout === "function" ? Promise.race([load, new Promise(resolve => setTimeout(() => resolve(null), Math.max(0, left)))]) : load);
     if (!texts) return;
+    for (const [c, item] of contractions) {
+      const fields = texts.get(item.id);
+      if (!fields || typeof fields !== "object" || typeof fields._src_reader === "string" && outdated(fields._src_reader, item)) continue;
+      const main = String(fields[`translation_${code}`] || "").trim();
+      if (main && !c.translation?.[code] && same(c.translation?.en, item.translation_en)) c.translation = {...c.translation, [code]:main};
+    }
     for (const c of mine) {
       const fields = texts.get(c.item.id);
       if (!fields || typeof fields !== "object") continue;
@@ -258,10 +272,11 @@
     if (!valid(code) || !en && !ru) return "";
     return phraseTables.get(code)?.get(`${section}${SEP}${en || ""}${SEP}${ru || ""}`) || "";
   }
-  async function enrich(resolution, code) {
+  // entryOf (optional; not «lookup» — that is the external dictionary's function above): the reader's own card by id ({id} → card) — for the contractions above
+  async function enrich(resolution, code, entryOf = null) {
     if (!valid(code) || !resolution || !Array.isArray(resolution.candidates)) return resolution;
     const phrases = readerPhrases(code);
-    const own = enrichOwn(resolution, code).catch(() => { /* the own cards stay English */ });
+    const own = enrichOwn(resolution, code, entryOf).catch(() => { /* the own cards stay English */ });
     const pending = new Map();
     // (not a candidate with an explanation — a contraction im = in + dem, a superlative: its text is the resolver's, from the word it
     // explains; the dictionary's own record of «im» is a form note, «in dem». As the Russian dictionary: lemma-resolver.js enriches
