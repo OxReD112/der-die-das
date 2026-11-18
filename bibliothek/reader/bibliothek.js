@@ -58,7 +58,29 @@
     let h = 2166136261; for (const b of new TextEncoder().encode(String(card.id))) h = Math.imul(h ^ b, 16777619) >>> 0;
     return `${where.base}${String(h & (where.parts - 1)).padStart(2, "0")}.json?v=${where.version}`;
   };
-  const cardDetailsReady = cards => cards.every(card => { const url = cardDetailsUrl(card); return !url || cardDetailParts.get(url)?.done; });
+  // (Ч6б, 18.11.2026) the dictionary reference in a pack language: the card's pack texts, a part of lang/<code>/worterbuch/reader/
+  // (resolver/pack-translations.js sheet) read with its details when a reference is opened (the book's, and a word's card on the
+  // second screen of Meine Wörter) — not for the learning cards (cardDetailsReady withPack false)
+  const sheetLanguage = () => { const code = popupLanguage(); return code !== "en" && code !== "ru" && typeof window.BibliothekPackTranslations?.sheet === "function" ? code : null; };
+  const cardFile = card => card && card.id != null ? cardDetailsSource.get(String(card.id))?.file || null : null;
+  const packSheetRead = card => { const code = sheetLanguage(), file = cardFile(card);
+    return !code || !file || window.BibliothekPackTranslations.sheetFields(code, file, card.id) !== undefined; };
+  const cardDetailsReady = (cards, withPack = false) => cards.every(card => { const url = cardDetailsUrl(card); return (!url || cardDetailParts.get(url)?.done) && (!withPack || packSheetRead(card)); });
+  function ensurePackSheet(cards) {
+    const code = sheetLanguage();
+    if (!code) return Promise.resolve();
+    return Promise.all(cards.map(card => { const file = cardFile(card); return file ? window.BibliothekPackTranslations.sheet(code, file, card.id).catch(() => null) : null; }));
+  }
+  // the card's pack texts for the reference — only when the card shown (with its details) is the English they were translated
+  // from: its print (DeutschLangDe.sourcePrint, over sorted keys) = the pack's "_src" (advisor 18.11: otherwise the whole reference
+  // is English); null — the English reference (no pack language, the part not read or failed, an outdated text)
+  function packSheet(card) {
+    const code = sheetLanguage(), file = cardFile(card);
+    if (!code || !file || !cardDetailsReady([card])) return null;
+    const fields = window.BibliothekPackTranslations.sheetFields(code, file, card.id);
+    if (!fields || typeof fields._src !== "string") return null;
+    try { return window.DeutschLangDe?.sourcePrint?.(withDetails(card)) === fields._src ? fields : null; } catch (_) { return null; }
+  }
   function ensureCardDetails(cards) {
     const dataFetch = (input, options) => (window.BibliothekDataCache ? window.BibliothekDataCache.fetch(input, options) : fetch(input, options));
     return Promise.all([...new Set(cards.map(cardDetailsUrl).filter(Boolean))].map(url => {
@@ -218,7 +240,15 @@
       return Object.create(resolver, {entry:{value:id => withDetails(resolver.entry(id))}});
     },
     // 08.11 (Alena): a tap on a word of Meine Wörter — the same card as «Словарная справка», on the list's second screen
-    renderCard:(item, root, form) => renderDictionaryCard(item, {root, form}),
+    renderCard:(item, root, form) => {
+      renderDictionaryCard(item, {root, form});
+      // (Ч6б) a pack language: the card's pack texts are read when it is opened, then it is drawn again (if still shown)
+      if (!sheetLanguage() || cardDetailsReady([item], true)) return;
+      // (review A: drawn again only while this card is still the one shown — another word may have been opened meanwhile)
+      const head = root.firstElementChild;
+      Promise.all([ensureCardDetails([item]), ensurePackSheet([item])])
+        .then(() => { if (head && root.firstElementChild === head && root.isConnected) renderDictionaryCard(item, {root, form}); });
+    },
     goTo:async occurrence => {
       if (!currentBook) return;
       if (hasChapters(currentBook)) {
@@ -1021,7 +1051,7 @@
     const get = path => dataFetch(`../worterbuch/reader/${path}?v=${versionOf(path)}`).then(r => { if (!r.ok) throw new Error("dictionary load failed"); return r.json(); })
       .then(data => { if (Array.isArray(data)) return data;
         if (data?.format_version !== 1 || !Array.isArray(data.entries) || !(data.details_parts >= 1)) throw new Error("dictionary load failed");
-        const where = {base:`../worterbuch/reader/${path.replace(/\.json$/u, "")}-details/`, parts:data.details_parts, version:versionOf(path)};
+        const where = {base:`../worterbuch/reader/${path.replace(/\.json$/u, "")}-details/`, parts:data.details_parts, version:versionOf(path), file:path};
         for (const card of data.entries) cardDetailsSource.set(String(card.id), where);
         return data.entries; });
     // Function-word cards (articles, prepositions, numerals, single words) keep
@@ -1437,6 +1467,27 @@
           const paragraph = document.createElement("p"); paragraph.append(link); russianArticles.append(paragraph);
         }
       }
+      // (Ч6б, 18.11.2026, advisor: by the source of the record) the articles of a pack language's external dictionary whose texts this
+      // popup shows (candidate.packTranslation, pack-translations.js lookup) — «<word> · <name> ↗», the name from the pack manifest
+      // ("dictionary": {"source_link"}); our own cards have no link. No name in the manifest — no links.
+      const packArticles = $("pack-source-articles");
+      if (packArticles) {
+        packArticles.replaceChildren();
+        const code = popupLanguage(), name = code !== "en" && code !== "ru" ? String(window.DeutschTranslation?.packEntries?.("manifest.json")?.dictionary?.source_link || "").trim() : "";
+        if (name) {
+          const urls = new Set();
+          for (const candidate of [selectedResolution,...displayed.map(row => row.candidate)])
+            if (candidate?.translation?.[code]) for (const entry of candidate.packTranslation?.entries || []) {
+              if (typeof entry.sourceUrl !== "string" || !/^https:\/\//u.test(entry.sourceUrl) || urls.has(entry.sourceUrl)) continue;
+              urls.add(entry.sourceUrl);
+              const link = document.createElement("a");
+              link.href = entry.sourceUrl; link.target = "_blank"; link.rel = "noopener"; link.lang = code;
+              link.textContent = `${entry.word} · ${name} ↗`;
+              const paragraph = document.createElement("p"); paragraph.append(link); packArticles.append(paragraph);
+            }
+        }
+        packArticles.hidden = !packArticles.childElementCount;
+      }
       const mainUsesExternal = selectedResolution?.source === "fallback" ||
         !selectedResolution && !resolution.candidates.length && !!resolution.unresolvedMeanings.length ||
         notes.open && !notes.hidden;
@@ -1520,15 +1571,25 @@
 
   }
   let cardDetailsRequest = 0;
-  function renderDictionaryDetails(loaded = false) {
+  function renderDictionaryDetails(loaded = false, keepRequest = false) {
     // (08.11.2026: the details of the shown cards first — all parts of a pager at once, so ‹ › stay immediate — from the data
     // cache, or a part from the network the first time)
     const shown = detailParts.length ? detailParts : activePronouns.length ? activePronouns.map(c => c.item) : selectedEntry ? [selectedEntry] : [];
-    const request = ++cardDetailsRequest;
+    // (review C Ч6б: the 0.4 s draw below keeps the request — the load still draws the card when it comes)
+    const request = keepRequest ? cardDetailsRequest : ++cardDetailsRequest;
     // (Mac browser tests 08.11: the card is drawn at once from the light card — forms, the add button, the pronoun reference
     // are there; the examples and notes join it when their part is read, the first time only)
-    if (!loaded && !cardDetailsReady(shown))
-      ensureCardDetails(shown).then(() => { if (request === cardDetailsRequest && !$sheet.hidden) renderDictionaryDetails(true); });
+    if (!loaded && !cardDetailsReady(shown, true)) {
+      Promise.all([ensureCardDetails(shown), ensurePackSheet(shown)]).then(() => { if (request === cardDetailsRequest && !$sheet.hidden) renderDictionaryDetails(true); });
+      // (Ч6б) a pack language whose texts of these cards are not read yet: the reference being opened waits for them (from the data
+      // cache, usually at once) instead of showing the English card for a moment; at most 0.4 s, then the English card until they
+      // come. A reference already open (a language change, a repaint) keeps what it shows until then (review C: focus, its name).
+      if (sheetLanguage() && $sheet.hidden && !shown.every(packSheetRead)) {
+        $("dictionary-card").replaceChildren();
+        setTimeout(() => { if (request === cardDetailsRequest && !$sheet.hidden && !$("dictionary-card").childElementCount) renderDictionaryDetails(true, true); }, 400);
+        return;
+      }
+    }
     if (detailParts.length) { renderPartDetails(); return; }
     if(!activePronouns.length){if(selectedEntry)renderDictionaryCard(selectedEntry);return;}
     const root=$("dictionary-card"),sections=[],seen=new Set();
@@ -1590,13 +1651,22 @@
     const selectedWord = list ? list.form || "" : selectedWordNow(), selectedResolution = list ? null : selectedResolutionNow();
     root.replaceChildren();
     delete root.dataset.pronounReference;
+    // (Ч6б, 18.11.2026, advisor) a pack language: the card's texts from its pack card when it is of the English shown (packSheet),
+    // a text the pack has not → the English one with the mark «angielski: »; no pack texts (outdated, not read) → the English
+    // reference as a whole. RU / EN: as before (code null). The reference's language is its lang (tests chat, Ч6а).
+    const pack = packSheet(item), code = pack ? sheetLanguage() : null;
+    if (sheetLanguage()) root.lang = code || "en"; else root.removeAttribute("lang");
+    const mark = code ? window.BibliothekMeaningDisplay?.englishMark?.(code) || "" : "";
+    // [text, its language or null]: RU / EN the text as before; a pack language its own text, else the English one marked
+    const say = (english, own) => !code ? [english, null] : String(own || "").trim() ? [String(own), code] : english ? [mark + english, "en"] : ["", null];
     // The pronoun reference is only for Pronomen cards; other excluded
     // function-word cards (articles, prepositions, numerals) render normally.
     if(item.type==="Pronomen"&&window.BibliothekPronounReference.excluded(item)){
-      window.BibliothekPronounReference.render(root,item,locale(),selectedWord);
+      window.BibliothekPronounReference.render(root,item,code || locale(),selectedWord,pack);
       return;
     }
-    const addInfo = (tag, cls, text) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; root.append(el); };
+    const addInfo = (tag, cls, text, language = null) => { if (!text) return; const el = document.createElement(tag); el.className = cls; el.textContent = text; if (language) el.lang = language; root.append(el); };
+    const addSaid = (tag, cls, [text, language]) => addInfo(tag, cls, text, language && language !== code ? language : null);
     const formKey = value => String(value || "").normalize("NFC").trim().toLowerCase();
     const clickedForm = formKey(selectedWord);
     const reflexiveGroup = selectedResolution?.construction?.id === "reflexive-verb" ? selectedResolution.construction : null;
@@ -1632,14 +1702,18 @@
     }
     addInfo("p","dictionary-pos",item.parts_of_speech?.join(" / ") || ({article:"Artikel",preposition:"Präposition",numeral:"Zahlwort",particle:"Partikel"})[item.type] || item.type);
     if (selectedResolution?.dictionaryId === item.id) addInfo("p","dictionary-detail",usageNote(selectedResolution));
-    addInfo("p","dictionary-translation",selectedResolution?.dictionaryId === item.id ?
-      (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item));
+    const forThis = selectedResolution?.dictionaryId === item.id;
+    addSaid("p","dictionary-translation",say(forThis ?
+      (locale() === "ru" ? selectedResolution.translation.ru || selectedResolution.translation.en : selectedResolution.translation.en || "") : translation(item),
+      code && (forThis ? selectedResolution.translation?.[code] ||
+        (String(selectedResolution.translation?.en || "").trim() === String(item.translation_en || "").trim() ? pack[`translation_${code}`] : "") : pack[`translation_${code}`])));
     // G70 step 2: the `reflexive` field of a verb card — «sich X — …» under the translation, as in the Wörterbuch.
-    if (item.reflexive) addInfo("p","dictionary-translation",`sich ${item.infinitive || item.word} — ${locale() === "ru" ? item.reflexive.translation_ru || item.reflexive.translation_en : item.reflexive.translation_en || item.reflexive.translation_ru}`);
+    if (item.reflexive) { const [text, language] = say(locale() === "ru" ? item.reflexive.translation_ru || item.reflexive.translation_en : item.reflexive.translation_en || item.reflexive.translation_ru, code && pack.reflexive?.[`translation_${code}`]);
+      addInfo("p","dictionary-translation",`sich ${item.infinitive || item.word} — ${text}`, language && language !== code ? language : null); }
     if (item.plural) addInfo("p","dictionary-detail",`Plural: ${item.plural}`);
-    addInfo("p","dictionary-detail",locale() === "ru" ? item.plural_note_ru : item.plural_note_en);
+    addSaid("p","dictionary-detail",say(locale() === "ru" ? item.plural_note_ru : item.plural_note_en, code && pack[`plural_note_${code}`]));
     if (item.declension_forms) addInfo("p","dictionary-detail",`Deklination: ${item.declension_forms}`);
-    addInfo("p","dictionary-detail",locale() === "ru" ? item.declension_note_ru : item.declension_note_en);
+    addSaid("p","dictionary-detail",say(locale() === "ru" ? item.declension_note_ru : item.declension_note_en, code && pack[`declension_note_${code}`]));
     if (item.perfect_form) {
       const perfect = document.createElement("p"); perfect.className = "dictionary-detail dictionary-perfect";
       if (item.type === "Verb") markForm(perfect, `Perfekt: ${item.perfect_form}`);
@@ -1648,7 +1722,8 @@
     }
     if (item.comparative || item.superlative) addInfo("p","dictionary-detail",`Steigerung: ${[item.comparative,item.superlative].filter(Boolean).join(" · ")}`);
     // A list of notes (conjunction cards) is one line per note.
-    [].concat((locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en) || []).forEach(note => addInfo("p","dictionary-detail",note));
+    const ownNotes = code ? [].concat((item.usage_note_en ? pack[`usage_note_${code}`] : pack[`notes_${code}`]) || []) : [];
+    [].concat((locale() === "ru" ? item.usage_note_ru || item.notes_ru : item.usage_note_en || item.notes_en) || []).forEach((note, i) => addSaid("p","dictionary-detail",say(note, ownNotes[i])));
     if (item.word_order_rule) addInfo("p","dictionary-detail",`Wortstellung: ${item.word_order_rule}`);
     // One line per pattern line („\n“); „**Verb**“ is shown in bold, as in the Wörterbuch.
     String(item.word_order_pattern || "").split("\n").filter(Boolean).forEach((line,index) => {
@@ -1656,9 +1731,22 @@
       (index ? line : `Muster: ${line}`).split(/\*\*(.+?)\*\*/).forEach((part,i) => { if (part) el.append(i % 2 ? Object.assign(document.createElement("strong"),{textContent:part}) : document.createTextNode(part)); });
       root.append(el);
     });
-    if (Array.isArray(item.complements) && item.complements.length) {
+    if (Array.isArray(item.complements) && item.complements.length && !code) {
       const parts = item.complements.map(value => `${value.pattern}${(locale() === "ru" ? value.note_ru : value.note_en) ? ` — ${locale() === "ru" ? value.note_ru : value.note_en}` : ""}`);
       addInfo("p","dictionary-detail",`Ergänzungen: ${parts.join(" · ")}`);
+    } else if (Array.isArray(item.complements) && item.complements.length) {
+      // (Ч6б) a pack language: each note in its language (its own lang when it is the English one)
+      const line = document.createElement("p"); line.className = "dictionary-detail"; line.append("Ergänzungen: ");
+      item.complements.forEach((value, i) => {
+        if (i) line.append(" · ");
+        line.append(value.pattern);
+        const [text, language] = say(value.note_en, pack.complements?.[i]?.[`note_${code}`]);
+        if (!text) return;
+        line.append(" — ");
+        if (language && language !== code) line.append(Object.assign(document.createElement("span"), {textContent:text, lang:language}));
+        else line.append(text);
+      });
+      root.append(line);
     }
     if (item.type === "Pronomen" || item.type === "article" && Array.isArray(item.forms)) {
       (item.forms || []).forEach(group => {
@@ -1696,7 +1784,7 @@
         });
         table.append(thead, tbody); scroll.append(table); section.append(scroll); root.append(section);
       });
-      addInfo("p","dictionary-detail",locale() === "ru" ? item.forms_note_ru : item.forms_note_en);
+      addSaid("p","dictionary-detail",say(locale() === "ru" ? item.forms_note_ru : item.forms_note_en, code && pack[`forms_note_${code}`]));
     } else if (item.type === "Verb" && (item.forms || item.lookup_forms)) {
       const verbForms = {...(item.lookup_forms || {}), ...(item.forms || {})};
       const columns = Object.entries(verbForms).filter(([tense, forms]) =>
@@ -1728,12 +1816,16 @@
         const line = document.createElement("p"); line.className = "dictionary-detail"; markForm(line, `Imperativ: ${imperative}`); root.append(line);
       }
     }
-    for (const example of [item,...(item.additional_examples || [])]) {
-      if (!example.example_de) continue;
+    [item,...(item.additional_examples || [])].forEach((example, i) => {
+      if (!example.example_de) return;
       if (example.example_usage) addInfo("p","dictionary-label","Beispiel · " + example.example_usage);
       const block = document.createElement("p"); block.className = "dictionary-example"; block.textContent = example.example_de;
-      const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || ""; block.append(tr); root.append(block);
-    }
+      const [text, language] = say(locale() === "ru" ? example.example_ru || example.example_en || "" : example.example_en || example.example_ru || "",
+        code && (i ? pack.additional_examples?.[i - 1] : pack)?.[`example_${code}`]);
+      const tr = document.createElement("span"); tr.className = "dictionary-example-translation"; tr.textContent = text;
+      if (code) { block.lang = "de"; tr.lang = language || code; }
+      block.append(tr); root.append(block);
+    });
     // Expressions are not added to Wortschatz (user 22.10): no button, as on the Wörterbuch page.
     if (item.type === "Ausdruck" || list) return;
     const button = document.createElement("button"); button.className = "dictionary-add"; button.type = "button"; button.textContent = "＋ Zum Wortschatz"; // German, as in Wörterbuch (user 27.10.2026)

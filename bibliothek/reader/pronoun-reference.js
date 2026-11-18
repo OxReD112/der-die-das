@@ -70,46 +70,57 @@
     if(item.id==='pronoun-038')return 'relative';
     return 'personal';
   }
-  function render(root,item,lang,clickedWord) {
-    const ru=lang==='ru',kind=group(item);
+  // (Ч6б, 18.11.2026) lang: the reference's language — ru / en as before; a pack language: each text its line of the "pronouns"
+  // section of lang/<code>/reader.json, none → the English text with the mark «angielski: » (advisor 18.11), with its own lang;
+  // pack: the card's pack texts when they are of the English shown (bibliothek.js packSheet) — its usage note, else as a text without one
+  function render(root,item,lang,clickedWord,pack=null) {
+    const ru=lang==='ru',kind=group(item),inPack=packLang(lang);
+    const mark=()=>{ try{return window.BibliothekMeaningDisplay?.englishMark?.(lang)||'';}catch(_){return '';} };
+    // a text of the reference: [text, its language or null]
+    const say=pair=>{ if(!inPack)return [ru?pair[0]:pair[1],null];
+      let own='';try{own=window.BibliothekPackTranslations?.phrase?.(lang,pair[1],pair[0],'pronouns')||'';}catch(_){}
+      return own?[own,lang]:[mark()+pair[1],'en']; };
+    const own=(english,value)=>!inPack?[english,null]:String(value||'').trim()?[value,lang]:english?[mark()+english,'en']:['',null];
     root.dataset.pronounReference=kind;
-    const text=(tag,cls,value)=>{const node=document.createElement(tag);node.className=cls;node.textContent=value;return node;};
-    const titles={personal:ru?'Личные и притяжательные местоимения':'Personal and possessive pronouns',reflexive:ru?'Возвратные местоимения':'Reflexive pronouns',demonstrative:ru?'Указательное местоимение der/die/das':'Demonstrative pronoun der/die/das',relative:ru?'Относительное местоимение der/die/das':'Relative pronoun der/die/das',impersonal:ru?'Безличное es':'Impersonal es'};
+    const text=(tag,cls,value)=>{const node=document.createElement(tag);node.className=cls;
+      if(Array.isArray(value)){node.textContent=value[0];if(value[1])node.lang=value[1];}else node.textContent=value;return node;};
+    const titles={personal:['Личные и притяжательные местоимения','Personal and possessive pronouns'],reflexive:['Возвратные местоимения','Reflexive pronouns'],demonstrative:['Указательное местоимение der/die/das','Demonstrative pronoun der/die/das'],relative:['Относительное местоимение der/die/das','Relative pronoun der/die/das'],impersonal:['Безличное es','Impersonal es']};
     const heading=text('h2','dictionary-headword',clickedWord || item.word);heading.id='sheet-word';root.append(heading);
     // 10.11 (Alena): the part of speech in German, as in the popover and on every other card
     const id=Number(item.id?.split('-')[1]),possessive=id>=11&&id<=18;
     const pos={personal:possessive?'Possessivpronomen':'Personalpronomen',reflexive:'Reflexivpronomen',demonstrative:'Demonstrativpronomen',relative:'Relativpronomen',impersonal:'Pronomen'}[kind];
-    root.append(text('p','dictionary-pos',pos),text('h3','pronoun-reference-title',titles[kind]));
+    const title=say(titles[kind]);
+    root.append(text('p','dictionary-pos',pos),text('h3','pronoun-reference-title',title));
     function table(title,columns,rows) {
       const section=text('section','dictionary-pronoun-forms','');
       if(title)section.append(text('h3','',title));
-      const scroll=text('div','pronoun-reference-scroll','');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label',title || titles[kind]);
+      const scroll=text('div','pronoun-reference-scroll','');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label',(Array.isArray(title)?title[0]:title) || say(titles[kind])[0]);
       const table=text('table','dictionary-table',''),thead=document.createElement('thead'),header=document.createElement('tr');
       for(const column of columns){const cell=text('th','',column);cell.scope='col';header.append(cell);}thead.append(header);
       const tbody=document.createElement('tbody');
       for(const values of rows){const row=document.createElement('tr');values.forEach((value,index)=>{const cell=text(index ? 'td' : 'th','',value);if(!index)cell.scope='row';row.append(cell);});tbody.append(row);}
       table.append(thead,tbody);scroll.append(table);section.append(scroll);root.append(section);
     }
-    function example(de,translation) { const node=text('p','dictionary-example',de);node.lang='de';const tr=text('span','dictionary-example-translation',translation);tr.lang=lang;node.append(tr);root.append(node); }
+    function example(de,translation) { const node=text('p','dictionary-example',de);node.lang='de';const tr=text('span','dictionary-example-translation',translation[0]);tr.lang=translation[1]||lang;node.append(tr);root.append(node); }
     if(kind==='personal') {
       table('', ['Nom.','Akk.','Dat.','Possessiv'],PERSONAL_ROWS);
       // 10.11 (Alena): the endings only for mein / dein / sein … — for ich, ihm, sie the table was beside the point
       if(possessive){
-      root.append(text('p','dictionary-detail',ru?'Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren':'Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren'));
-      table(ru?'Притяжательные окончания':'Possessive endings',['Kasus','Mask.','Neutr.','Fem.','Plural'],ENDINGS);
+      root.append(text('p','dictionary-detail',say(['Притяжательное местоимение = основа + окончание: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren','Possessive pronoun = stem + ending: sein Auto · seinen Bruder · seiner Schwester · euer → eure, euren'])));
+      table(say(['Притяжательные окончания','Possessive endings']),['Kasus','Mask.','Neutr.','Fem.','Plural'],ENDINGS);
       }
     } else if(kind==='reflexive') {
       table('', ['Personal','Akkusativ','Dativ'],REFLEXIVE);
-      example('Ich wasche mich',ru?'Я моюсь.':'I wash myself.');
-      example('Ich wasche mir die Hände',ru?'Я мою себе руки.':'I wash my hands.');
+      example('Ich wasche mich',say(['Я моюсь.','I wash myself.']));
+      example('Ich wasche mir die Hände',say(['Я мою себе руки.','I wash my hands.']));
     } else if(kind==='impersonal') {
-      root.append(text('p','dictionary-detail',ru?'Безличное es служит формальным подлежащим, например в предложениях о погоде. Оно не обозначает конкретный предмет.':'Impersonal es acts as a grammatical subject, for example in expressions about the weather. It does not refer to a particular thing.'));
-      example('Es regnet',ru?'Идёт дождь.':'It is raining.');example('Es ist kalt',ru?'Холодно.':'It is cold.');
+      root.append(text('p','dictionary-detail',say(['Безличное es служит формальным подлежащим, например в предложениях о погоде. Оно не обозначает конкретный предмет.','Impersonal es acts as a grammatical subject, for example in expressions about the weather. It does not refer to a particular thing.'])));
+      example('Es regnet',say(['Идёт дождь.','It is raining.']));example('Es ist kalt',say(['Холодно.','It is cold.']));
     } else {
-      root.append(text('p','dictionary-detail',ru?item.usage_note_ru:item.usage_note_en));
+      root.append(text('p','dictionary-detail',ru?item.usage_note_ru:own(item.usage_note_en,pack?.[`usage_note_${lang}`])));
       for(const forms of item.forms || [])table('', ['Kasus',...forms.columns],Object.entries(forms.rows).map(([name,values])=>[name,...values]));
-      if(kind==='demonstrative')example('Welchen Mantel? — Den dort',ru?'Какое пальто? — То, вон там.':'Which coat? — That one over there.');
-      else example('Der Mann, dem ich geholfen habe',ru?'Мужчина, которому я помог.':'The man I helped.');
+      if(kind==='demonstrative')example('Welchen Mantel? — Den dort',say(['Какое пальто? — То, вон там.','Which coat? — That one over there.']));
+      else example('Der Mann, dem ich geholfen habe',say(['Мужчина, которому я помог.','The man I helped.']));
     }
   }
   window.BibliothekPronounReference=Object.freeze({excluded,group,render,isPronoun,brief,summary,meanings});

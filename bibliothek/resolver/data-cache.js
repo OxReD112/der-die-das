@@ -49,6 +49,9 @@
     /^lang\/[a-z]{2,3}\/(?:manifest|reader)\.json$/,
     /^lang\/[a-z]{2,3}\/worterbuch\/german-[\w-]+\.json$/,
     /^lang\/[a-z]{2,3}\/dictionary\/(?:parts\/\d{4}|manifest)\.json$/,
+    // (18.11.2026, Ч6б) the pack texts of the dictionary reference: its index and parts (dev/lang/pack-reader-parts.cjs) — a pack
+    // file as the others: one copy per address, the version just asked for
+    /^lang\/[a-z]{2,3}\/worterbuch\/reader\/(?:index|german-[\w-]+-details\/\d{2})\.json$/,
   ];
   const replacedOnUpdate = /^worterbuch\//;
   // A pack file that is not a part: one copy per file too, but its version is a hash (lang/<code>/manifest.json «version»,

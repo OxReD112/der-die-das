@@ -8,6 +8,7 @@
  *   translation[code], meaningLabels[code], labelledText[code], reflexiveMarks[code] (the same fields the Russian dictionary
  *   fills under "ru"); built-in languages (en, ru) and a missing or broken pack: nothing changes (the card stays English).
  * BibliothekPackTranslations.lookup(lemma, pos, code) -> the record or null.
+ * BibliothekPackTranslations.sheet(code, file, id) / sheetFields(…) -> a card's pack texts for the dictionary reference (Ч6б).
  * Files are read by path (BibliothekDataCache or fetch), nothing else from the browser: the native app serves the same paths.
  */
 (() => {
@@ -313,5 +314,65 @@
   // (Ч4, advisor 17.11) the phrases of this language are loaded (reader.json read): a missing line is then shown as its English text
   // with the mark «English: »; without reader.json (the pack not downloaded) — the English popup exactly
   const hasPhrases = code => valid(code) && phraseTables.has(code);
-  window.BibliothekPackTranslations = Object.freeze({lookup, enrich, phrase, hasPhrases});
+  // The pack texts of the dictionary reference (Ч6б, 18.11.2026, advisor): lang/<code>/worterbuch/reader/ (dev/lang/pack-reader-parts.cjs)
+  // — index.json {parts: {"german-<name>.json": N}} once per language, then part NN = fnv1a(id) & (N − 1) of the card's file when the
+  // reference of a card of it is opened (not kept for all cards at once: the advisor), with the pack version, through the data cache.
+  // sheet(code, file, id) → the card's pack fields ({…, "_src"}) or null (no pack, no part, not this card); sheetFields — the same
+  // from what is loaded already, without waiting (undefined: not read yet). A part that failed is asked again a minute later.
+  const sheetIndexes = new Map(), sheetIndexFailedAt = new Map(), sheetParts = new Map(), sheetPartFailedAt = new Map(), SHEET_PART_LIMIT = 16;
+  const sheetBase = code => new URL(`../../lang/${code}/worterbuch/reader/`, script);
+  // (review B: one index per pack version — a reference opened before the pack manifest is read asks without ?v, not cached, and
+  // the next one with the version)
+  function sheetIndex(code) {
+    const v = packVersion(code), at = `${code}\u0000${v}`;
+    if (!sheetIndexes.has(at) && Date.now() - (sheetIndexFailedAt.get(at) || -Infinity) < RETRY_MS) return Promise.resolve(null);
+    if (!sheetIndexes.has(at)) {
+      const request = dataFetch(new URL(`index.json${v ? `?v=${encodeURIComponent(v)}` : ""}`, sheetBase(code)))
+        .then(r => { if (!r.ok) throw new Error("Pack reference unavailable"); return r.json(); })
+        .then(data => { if (data?.format_version !== 1 || !data.parts || typeof data.parts !== "object") throw new Error("Invalid pack reference index");
+          return {version:v, parts:data.parts}; })
+        .catch(() => { if (sheetIndexes.get(at) === request) { sheetIndexes.delete(at); sheetIndexFailedAt.set(at, Date.now()); } return null; });
+      sheetIndexes.set(at, request);
+    }
+    return sheetIndexes.get(at);
+  }
+  const fnvId = id => { let h = 2166136261; for (const b of new TextEncoder().encode(String(id))) h = Math.imul(h ^ b, 16777619) >>> 0; return h; };
+  async function sheetPartKey(code, file, id) {
+    const index = await sheetIndex(code), n = index?.parts?.[file];
+    // (review A / B) the index read, but no parts for this file: nothing to read — the reference is English (not asked again)
+    if (index && !(file in index.parts)) return {none:true};
+    if (!Number.isInteger(n) || n < 1 || (n & (n - 1))) return null;
+    const name = String(file).replace(/\.json$/u, "");
+    return {key:`${code}/${index.version}/${name}/${fnvId(id) & (n - 1)}`, url:new URL(`${name}-details/${String(fnvId(id) & (n - 1)).padStart(2, "0")}.json${index.version ? `?v=${encodeURIComponent(index.version)}` : ""}`, sheetBase(code))};
+  }
+  const sheetKeys = new Map();   // `${code}\u0000${file}\u0000${id}` → part key, once known
+  async function sheet(code, file, id) {
+    if (!valid(code) || !file || id == null) return null;
+    const where = await sheetPartKey(code, file, id);
+    if (!where) return null;
+    if (where.none) { sheetKeys.set(`${code}\u0000${file}\u0000${id}`, null); return null; }
+    sheetKeys.set(`${code}\u0000${file}\u0000${id}`, where.key);
+    if (!sheetParts.has(where.key)) {
+      if (Date.now() - (sheetPartFailedAt.get(where.key) || -Infinity) < RETRY_MS) return null;
+      const part = {done:false};
+      part.promise = dataFetch(where.url).then(r => { if (!r.ok) throw new Error("Pack reference part unavailable"); return r.json(); })
+        .then(rows => { if (!rows || typeof rows !== "object" || Array.isArray(rows)) throw new Error("Invalid pack reference part"); part.rows = rows; part.done = true; })
+        .catch(() => { if (sheetParts.get(where.key) === part) { sheetParts.delete(where.key); sheetPartFailedAt.set(where.key, Date.now()); } });
+      sheetParts.set(where.key, part);
+      // (kept bounded, as the dictionary parts above: an evicted part is read again — from the data cache — when needed)
+      for (const key of sheetParts.keys()) { if (sheetParts.size <= SHEET_PART_LIMIT) break; if (key !== where.key) sheetParts.delete(key); }
+    } else { const again = sheetParts.get(where.key); sheetParts.delete(where.key); sheetParts.set(where.key, again); }
+    const part = sheetParts.get(where.key);
+    await part.promise;
+    const fields = part.rows?.[String(id)];
+    return fields && typeof fields === "object" ? fields : null;
+  }
+  function sheetFields(code, file, id) {
+    const key = sheetKeys.get(`${code}\u0000${file}\u0000${id}`), part = key ? sheetParts.get(key) : null;
+    if (key === null) return null;
+    if (!part?.done) return undefined;
+    const fields = part.rows[String(id)];
+    return fields && typeof fields === "object" ? fields : null;
+  }
+  window.BibliothekPackTranslations = Object.freeze({lookup, enrich, phrase, hasPhrases, sheet, sheetFields});
 })();

@@ -193,6 +193,7 @@
         occurrence = record.occurrences[0],
         item = record.dictionaryId != null ? currentResolver?.entry?.(record.dictionaryId) : null;
       card.replaceChildren();
+      card.removeAttribute("lang");   // (Ч6б: the card's language is set by renderCard, for a pack language)
       if (item && renderCard) renderCard(item, card, occurrence.form);
       else {
         // a word the dictionary has no card for: what the list knows of it

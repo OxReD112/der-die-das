@@ -2,7 +2,7 @@
  "lang": "pl",
  "name": "Polski",
  "format_version": 1,
- "version": "59aca125cb18",
+ "version": "a38ccb4c22c3",
  "source_commit": "cb3b6449b2b1c4ba35cd3c7f4e438d956b21943e",
  "exercise_files": {
   "partikeln__sentences": {
@@ -302,7 +302,7 @@
    "done": 360
   },
   "reader.json": {
-   "items": 216,
+   "items": 230,
    "done": 216
   }
  },
