@@ -1095,3 +1095,12 @@ body:has(#study:not(.hidden)) .version-mark {
   }
 }
 
+
+/* 18.11.2026 (Alena: «заголовок распадается»): the two lines of «Vielseitige Verben.» closer together — line-height
+   1.08 instead of the font's normal 1.393 (2nd line ≈ 17 px higher on a phone, 26 on iPad). The block keeps its old
+   height (padding: half the difference above, the rest below), so the first line and everything under the title
+   stay exactly where they were. The title is two lines on every screen. */
+.title {
+  line-height: 1.08;
+  padding: 0.1565em 0 0.4694em;
+}
