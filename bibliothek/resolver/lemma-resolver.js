@@ -2924,12 +2924,44 @@ function apostropheText(text) {
         const joined={start:prior.start,end:next.end,relation:prior.relation,insertions:[...(prior.insertions||[]),{start:aside.start,end:aside.end},...(next.insertions||[])]};
         clauses.splice(pi,3,aside,joined);
       }
+      // (second resolver chat / tests chat 18.11) a noun enumeration before the particle does not cut the part either — setzen sich aus
+      // einem Männchen, mehreren Weibchen sowie den Jungtieren zusammen: the same spans as separableScope (nounEnumerationSpans)
+      for(const [a,b,p] of nounEnumerationSpans(sentence,tokens,analyses)){
+        const pi=clauses.findIndex(c=>c.start<=a-1&&c.end>=a-1),ni=clauses.findIndex(c=>c.start<=p&&c.end>=p);
+        if(pi<0||ni<=pi)continue;
+        const joined={start:clauses[pi].start,end:clauses[ni].end,relation:clauses[pi].relation,insertions:clauses.slice(pi,ni+1).flatMap(c=>c.insertions||[])};
+        clauses.splice(pi,ni-pi+1,joined);
+      }
       for(const c of clauses)c.relative=c.relation==='comma'&&['der','die','das','den','dem','dessen','deren'].includes(words[c.start])&&
         (!(forms.get(words[c.start+1])||[]).some(e=>e.type==='Nomen')||['dessen','deren'].includes(words[c.start]));
       return clauses;
     }
     // (links/sep-nachfeld 10.11, advisor: an own adverb particle — wieder / zusammen / … — joins only before a prepositional Nachfeld that
     // its card governs — setzte sich die Bevölkerung zusammen aus …: sich zusammensetzen + aus; not gingen zusammen durch das Tor)
+    // (second resolver chat / tests chat 18.11) a noun enumeration before a closing particle, as token indices [first, last, particle]:
+    // a capital word before the comma, members of up to two lowercase words + a capital word, closed by und / oder / sowie + a member;
+    // no verb among the members; the rest of the part has no finite verb and closes on a particle (laden zum Wandern, Joggen und
+    // Mountainbiken ein). The sync twin of the ENUMERATION check in separableScope, for parts cut at commas.
+    function nounEnumerationSpans(sentence,tokens,analyses) {
+      const out=[];
+      const MEMBER=String.raw`(?:[\p{Ll}][\p{L}-]*\s+){0,2}\p{Lu}[\p{L}-]*`;
+      const re=new RegExp(String.raw`,\s*${MEMBER}(?:\s*,\s*${MEMBER})*\s+(?:und|oder|sowie)\s+${MEMBER}`,'gu');
+      const at=off=>tokens.findIndex(t=>t.index===off);
+      const verbal=(i,kinds)=>/^\p{Ll}/u.test(tokens[i][0])&&!['und','oder','sowie'].includes(norm(tokens[i][0]))&&!DETERMINER_WORD.test(norm(tokens[i][0]))&&
+        (analyses[i]||[]).some(a=>kinds.includes(a.kind));
+      for(const m of sentence.matchAll(re)){
+        const first=tokens.findIndex(t=>t.index>m.index),last=tokens.findIndex(t=>t.index+t[0].length===m.index+m[0].length);
+        if(first<1||last<first||!/^\p{Lu}/u.test(tokens[first-1][0]))continue;
+        let bad=false;for(let i=first;i<=last;i++)if(verbal(i,['finite','infinitive','imperative','participle'])){bad=true;break;}
+        if(bad)continue;
+        let p=last;
+        while(p+1<tokens.length&&!/[,;:.!?»«"“”()–—]/u.test(sentence.slice(tokens[p].index+tokens[p][0].length,tokens[p+1].index)))p++;
+        if(p===last||!SEPARABLE_PARTICLE_WORDS.test(norm(tokens[p][0])))continue;
+        for(let i=last+1;i<p;i++)if(verbal(i,['finite'])){bad=true;break;}
+        if(!bad)out.push([first,last,p]);
+      }
+      return out;
+    }
     function governedNachfeldParticle(words,k,prefix,entry) {
       return words[k]===prefix&&prepositions.has(words[k+1])&&
         [entry,...(reflexiveLemmas.get(norm(entry?.word??'').replace(/^sich\s+/u,''))||[])].some(e=>(e?.complements||[]).some(c=>norm(String(c.pattern||'').split(/\s+/u)[0])===words[k+1]));
@@ -6128,6 +6160,28 @@ function apostropheText(text) {
         }
         if (finite && inner.length>=3) ranges.push([match.index,match.index+match[0].length]);
       }
+      // (second resolver chat / tests chat 18.11) an enumeration of nouns is no part border — laden zum Wandern, Joggen und Mountainbiken
+      // ein; kaufte Brot, Milch und Käse ein: a capital word before the comma, members of up to two lowercase words (determiners,
+      // adjectives — no finite verb) and a capital word, closed by und / oder / sowie + such a member; the rest of the part has no finite
+      // verb of its own and closes on a particle. «Sie laden, wir packen ein» stays two parts (lowercase verb before the comma).
+      const MEMBER = String.raw`(?:[\p{Ll}][\p{L}-]*\s+){0,2}\p{Lu}[\p{L}-]*`;
+      const ENUMERATION = new RegExp(String.raw`,\s*${MEMBER}(?:\s*,\s*${MEMBER})*\s+(?:und|oder|sowie)\s+${MEMBER}`,'gu');
+      for (const match of observedMatches(original.matchAll(ENUMERATION),'separableScope')) {
+        const before=rangeTokens(original,0,match.index,'separableScope').at(-1);
+        if (!before || !/^\p{Lu}/u.test(before[0])) continue;
+        const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
+        let verb=false;
+        for (const t of inner) if (/^\p{Ll}/u.test(t[0]) && !['und','oder','sowie'].includes(norm(t[0])) && !DETERMINER_WORD.test(norm(t[0])) &&
+          (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>['finite','infinitive','imperative','participle'].includes(a.kind))) { verb=true; break; }
+        if (verb) continue;
+        const after=original.slice(match.index+match[0].length), rest=after.slice(0,after.search(/[,;:.!?»«"“”()–—]|$/u));
+        const restTokens=rangeTokens(original,match.index+match[0].length,match.index+match[0].length+rest.length,'separableScope');
+        if (!restTokens.length || !SEPARABLE_PARTICLE_WORDS.test(norm(restTokens.at(-1)[0]))) continue;
+        let own=false;
+        for (const t of restTokens.slice(0,-1)) if (/^\p{Ll}/u.test(t[0]) && (await tokenAnalyses(t[0], undefined, 'separableScope')).some(a=>a.kind==='finite') &&
+          !DETERMINER_WORD.test(norm(t[0]))) { own=true; break; }
+        if (!own) ranges.push([match.index,match.index+match[0].length]);
+      }
       // (advisor 07.11) the short insertion «, wie (bereits …) participle,» owns no particle of the part — the same wieParticipleWords
       for (const match of observedMatches(original.matchAll(/,\s*wie(?:\s+\p{L}+){1,3}\s*,/gu),'separableScope')) {
         const inner=rangeTokens(original,match.index,match.index+match[0].length,'separableScope');
@@ -6972,7 +7026,12 @@ function apostropheText(text) {
         const SEIN_ZU_GOVERNING_ADJECTIVES = new Set(["bereit","fähig","willig","entschlossen","froh","stolz","bemüht","bestrebt","gewillt",
           "imstande","verpflichtet","berechtigt","befugt","gezwungen","genötigt","gewohnt","geneigt","würdig"]);
         const beforeZu = esInPart ? -1 : (marker !== null ? marker : tail) - 1;
-        if (lexical.word === "sein" && other.some(i=>!mannerWords.has(norm(tokens[i][0])) &&
+        // (hidden sample 17.11, замер 2: und deutlich war es anzusehen, wie … — an adjective of how clearly a thing is perceived before a
+        // verb of perceiving is the manner of the sein + zu group, not an adjective governing the infinitive — es war deutlich zu sehen,
+        // klar zu erkennen, kaum zu hören; Es war traurig anzusehen keeps the adjective)
+        const PERCEPTION_MANNER = new Set(["deutlich","klar","eindeutig","unschwer","genau","sichtbar","offensichtlich","unverkennbar","deutlicher","besser","schwerer","leichter"]);
+        const perceiving = ["sehen","ansehen","erkennen","hören","merken","spüren","anmerken","entnehmen","beobachten","feststellen","bemerken","finden","erahnen","ahnen"].includes(norm(main[0].word));
+        if (lexical.word === "sein" && other.some(i=>!mannerWords.has(norm(tokens[i][0])) && !(perceiving && PERCEPTION_MANNER.has(norm(tokens[i][0]))) &&
           ((beforeZu < 0 || i === beforeZu) && matches(i).some(e=>e.type === "Adjektiv" && norm(e.word) === norm(tokens[i][0])) || SEIN_ZU_GOVERNING_ADJECTIVES.has(norm(tokens[i][0]))))) continue;
         if (other.some(i=>clause.competing(i,true) && !possessiveBeforeNoun(i) && !clause.nounToken(i))) continue;
         // A comparison inside (das Gleiche wie Truppen … zu führen) is not sein / haben + zu.
@@ -12520,12 +12579,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         return !(forms.get(k) || []).length && /(?:te|ten|tet|test|t|en|st|'t)$/u.test(k); };
       const end = partEnd(sentence,tokens,index);
       for (let i = index+1; i <= end; i++) if (verbish(i)) return null;
+      // (hidden sample 17.11, count: a part cut by a dash or a hyphen may go on to its verb — …, den Herr Holtz per E - Mail genannt
+      // hatte; …, die Menschen wie ihn – mit Trisomie 21 – nicht haben will: the article stays, as before, but gives no pair)
+      const dashCut = end+1 < tokens.length && !/[,;:.!?()„“”"«»…]/u.test(gap(end,end+1));
       // (the part after a following comma must not end in a verb: then the comma was inside the relative clause)
-      if (end+1 < tokens.length && /^\s*,\s*$/u.test(gap(end,end+1))) {
+      // (hidden sample 17.11, замер 2: not when a w-word or a subordinator opens that part — a clause of its own: …, der Magen aber, worin
+      // er lag, …; the relative clause going on after a comma or a dash keeps the guard: …, den Herr Holtz per E - Mail genannt hatte)
+      const ownClause = end+1 < tokens.length && /^(?:wo|wor\p{Ll}+|wie|was|wer|wen|wem|wessen|welche[rsmn]?|weil|als|wenn|dass|daß|ob|nachdem|bevor|obwohl|indem|sobald|falls)$/u.test(tokens[end+1][0]);
+      if (end+1 < tokens.length && /^\s*,\s*$/u.test(gap(end,end+1)) && !ownClause) {
         const e2 = partEnd(sentence,tokens,end+1);
         if (verbish(e2)) return null;
       }
-      return {candidate:article,evidence:'g50-article-verbless-part'};
+      return {candidate:article,evidence:dashCut ? 'g50-article-verbless-part-open' : 'g50-article-verbless-part'};
     }
     function notArticleByNextWord(word, context, candidates) {
       if (!Number.isInteger(context?.tokenOffset)) return null;
@@ -13521,10 +13586,18 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       const enumerationBefore = () => {
         const comma = previous ? det-1 : det;
         let k = comma-1;
-        if (k < 0 || !/^\p{Lu}/u.test(tokens[k][0]) || (verbAnalyses.get(norm(tokens[k][0])) || []).length) return false;
+        // (a capital word that is also a verb form is still the noun when it has a noun card of ours: Bau — bau)
+        if (k < 0 || !/^\p{Lu}/u.test(tokens[k][0]) || (verbAnalyses.get(norm(tokens[k][0])) || []).length &&
+          !(forms.get(norm(tokens[k][0])) || []).some(e => e.type === 'Nomen')) return false;
         const from = k;
-        while (k > 0 && !/[,;:.!?()]/u.test(gap(k-1,k))) k--;
-        if (k === 0 || from-k > 2 || !/,/u.test(gap(k-1,k))) return false;
+        while (k > 0 && !/[,;:.!?()]/u.test(gap(k-1,k))) {
+          // (hidden sample 17.11, замер 2: the first member after a preposition — durch den Bau, die Pflege, …: the list starts at the
+          // determiner the preposition governs)
+          if (k < from && determinerFeatures(tokens[k][0]) && prepositionCardsByForm.has(norm(tokens[k-1][0])) && from-k <= 2) { k = -k; break; }
+          k--;
+        }
+        if (k < 0) k = -k;
+        else if (k === 0 || from-k > 2 || !/,/u.test(gap(k-1,k))) return false;
         for (let i = k; i <= from; i++) if (/^\p{Ll}/u.test(tokens[i][0]) && (verbAnalyses.get(norm(tokens[i][0])) || []).some(a => a.kind === 'finite')) return false;
         return true;
       };
@@ -13534,7 +13607,17 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       if (!group?.readings) return null;
       if (relativeSlot) {
         const end = wordEnd(group.head), rest = tokens[end+1] ? gap(end,end+1) : sentence.slice(tokens[end].index+tokens[end][0].length);
-        if (!(/[,;.!?]/u.test(rest) || !tokens[end+1] || ['und','oder','sowie'].includes(norm(tokens[end+1][0])) && /^\s+$/u.test(rest))) return null;
+        // (hidden sample 17.11, замер 2: a genitive attribute may follow the noun — die Gestaltung des Gartens, …: des / der + up to two
+        // declined words + a capital word, then the same closing marks)
+        let close = end, closeRest = rest;
+        if (tokens[end+1] && /^\s+$/u.test(rest) && ['des','der','eines','einer'].includes(norm(tokens[end+1][0]))) {
+          for (let k = end+2; k < tokens.length && k <= end+4 && /^\s+$/u.test(gap(k-1,k)); k++) {
+            if (/^\p{Lu}/u.test(tokens[k][0])) { close = k; closeRest = tokens[k+1] ? gap(k,k+1) : sentence.slice(tokens[k].index+tokens[k][0].length); break; }
+            if (!/(?:e|en|er|es|em)$/u.test(norm(tokens[k][0])) || (verbAnalyses.get(norm(tokens[k][0])) || []).some(a => a.kind === 'finite')) break;
+          }
+        }
+        const closes = (e, r) => /[,;.!?]/u.test(r) || !tokens[e+1] || ['und','oder','sowie'].includes(norm(tokens[e+1][0])) && /^\s+$/u.test(r);
+        if (!closes(end, rest) && !(close > end && closes(close, closeRest))) return null;
       }
       // Reference C6 (user 20.10): after a contraction the noun must be known to a dictionary as a whole word; a compound
       // only split into parts (ins Hochsicherheitsverlies) has a guessed gender and stays unlinked.
@@ -13591,6 +13674,30 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
       // Same bounded window as the other display pairs: at most two words between;
       // the parts of a hyphenated head (Nord-Süd-Verbindungen) do not count.
       if (between > 2) return null;
+      // (hidden sample 17.11, замер 2: mit einem Georg schon ganz fremden Namen — a name with no noun card of ours right after the
+      // article, then lowercase words and a declined adjective agreeing with the article before a capital word: an extended attribute,
+      // the article belongs to the noun far on. No reliable sign of that noun (advisor 17.11) — the article stays alone, not with the name)
+      // (narrowed after the count: an indefinite article only — der / die + a name is common German, die Putzkolonne sehr gute Arbeit,
+      // der NSDAP immer wieder heftige Kämpfe have an object of their own —, and a name of the external dictionary, not an unknown compound)
+      let nameAfterIndefinite = false;
+      if (first === last && /^\p{Lu}/u.test(tokens[last][0]) && ['ein','eine','einen','einem','einer','eines'].includes(norm(tokens[det][0])) &&
+          !(lemmas.get(norm(tokens[last][0])) || []).some(e => e.type === 'Nomen') && !(forms.get(norm(tokens[last][0])) || []).some(e => e.type === 'Nomen') && fallback.lookup) {
+        try { nameAfterIndefinite = (await fallback.lookup(tokens[last][0]) || []).some(g => g.pos === 'name') && !(await fallback.lookup(tokens[last][0]) || []).some(g => g.pos === 'noun'); } catch (_) {}
+      }
+      if (nameAfterIndefinite) {
+        const endings = {einem:['en'],einen:['en'],eines:['en'],einer:['en'],eine:['e'],ein:['er','es']}[norm(tokens[det][0])] || [];
+        for (let k = last+1; k+1 < tokens.length && k <= last+5 && /^\s+$/u.test(gap(k-1,k)); k++) {
+          const t = tokens[k][0], key = norm(t);
+          if (!/^\p{Ll}/u.test(t) || (verbAnalyses.get(key) || []).some(a => a.kind === 'finite') || prepositionCardsByForm.has(key) ||
+            contractionArticle(t) || determinerFeatures(t) || ['und','oder','aber','sondern','denn'].includes(key)) break;
+          // (at least one word between the name and the adjective — schon ganz fremden; dem Georg warmen Tee keeps the name: two objects)
+          if (k > last+1 && endings.some(e => key.endsWith(e)) && (modifiers.get(key) || []).length && /^\s+$/u.test(gap(k,k+1)) && /^\p{Lu}/u.test(tokens[k+1][0])) return null;
+          // (only adverbs stand between — schon, ganz, sehr; a declined word or any other word ends the search: die Kollisionserkennung
+          // vorgeschriebene …, der Angstschweiß am ganzen Leibe)
+          const kinds = new Set((forms.get(key) || []).map(e => e.type));
+          if (!(kinds.has('Adverb') || kinds.has('Partikel')) || kinds.has('Adjektiv') && /(?:e|en|er|es|em)$/u.test(key)) break;
+        }
+      }
       // A slash or dash compound written with spaces leaves the head open (des gesamten CDU / SPD - Senats).
       // (G89, 29.10: a spaced dash — Er streichelte die Tür – die einfach wegschmolz — is a pause, not a compound; as in articleBeforeNounByForm)
       const after = sentence.slice(tokens[last].index+tokens[last][0].length);
@@ -16253,7 +16360,8 @@ const ELLIPTIC_DETERMINER = /^(?:kein|keine|keinen|keinem|keiner|keines|eine|ein
         // (G50 step 3: not an article, the role not decided — the window keeps the demonstrative and the relative)
         else if (role?.window) { candidates = candidates.filter(c => !(c.source === 'main' && c.pos === 'article' && c.item?.grammar?.article_kind === 'definite')); resolution.candidates = candidates; }
         // (G50 step 2: an article after a comma decided by the verb place pairs with its noun too)
-        if (role?.evidence === 'g50-article-by-verb-place') Object.defineProperty(resolution,'g50ArticleAfterComma',{value:true,enumerable:false});
+        // (hidden sample 17.11, замер 2: so does the article of a part with no verb — …, der Magen aber, worin …)
+        if (['g50-article-by-verb-place','g50-article-verbless-part'].includes(role?.evidence)) Object.defineProperty(resolution,'g50ArticleAfterComma',{value:true,enumerable:false});
       }
       if (selection.canFill('preposition-government',resolution)) {
         const preposition = await prepositionChoice(word,context,candidates,separated);
