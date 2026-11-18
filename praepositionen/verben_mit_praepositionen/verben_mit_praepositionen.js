@@ -656,7 +656,7 @@ const ICON = {
   thought: '<path d="M7.5 16.5a4.5 4.5 0 0 1-.6-8.9A5 5 0 0 1 16.4 6a4 4 0 0 1 1.1 7.9 3.5 3.5 0 0 1-3 2.6z"/><circle cx="8" cy="19.6" r="1.1"/><circle cx="5.2" cy="21.6" r=".6"/>', // a cloud — the old circle read as a mirrored magnifier (Alena 03.11)
   check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
   person: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.8 3.7-5.5 7-5.5s6 1.7 7 5.5"/>',
-  from: '<path d="M20 12H7"/><path d="m11 7-5 5 5 5"/><path d="M3 5v14"/>',
+  from: '<path d="M4 5v14"/><path d="M8 12h12"/><path d="m16 7 5 5-5 5"/>', // the arrow leaves the bar — «from» (Alena 18.11; it pointed at the bar, read as «to»)
   to: '<path d="M3 12h12"/><path d="m11 8 4 4-4 4"/><circle cx="19" cy="12" r="2"/>',
   out: '<path d="M10 5H5v14h5"/><path d="M9 12h11"/><path d="m16 8 4 4-4 4"/>',
   into: '<path d="M14 5h5v14h-5"/><path d="M3 12h11"/><path d="m10 8 4 4-4 4"/>',
